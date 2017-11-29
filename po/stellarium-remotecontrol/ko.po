@@ -1,21 +1,22 @@
-# Korean translation for stellarium
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
-# This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-28 11:59+0700\n"
-"PO-Revision-Date: 2017-08-28 14:24+0000\n"
-"Last-Translator: Sang-Eun Lee <Unknown>\n"
-"Language-Team: Korean <ko@li.org>\n"
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-29 05:54+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -304,8 +305,8 @@ msgstr "정점 시율"
 
 #: index.html:288 tablet7in.html:452
 msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
 msgstr "지구의 축이 천구의 극점 주위로  돌며 그리는 원. 지구 위에만 표시함."
 
 #: index.html:297 tablet7in.html:461
@@ -425,8 +426,7 @@ msgid "No response from server"
 msgstr "서버로부터 응답이 없습니다."
 
 #: index.html:615
-msgid ""
-"No response from server since %1 seconds. Is Stellarium still running?"
+msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr "%1 초 이후로 서버에서 응답이 없습니다. Stellarium이 여전히 실행중입니까?"
 
 #: tablet7in.html:32
@@ -604,9 +604,3 @@ msgstr "화면 정리"
 #: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "서버로부터 %1 간 응답이 없습니다. 아직도 프로그램이 작동중인가요?"
-
-#~ msgid "Selection"
-#~ msgstr "선택"
-
-#~ msgid "Sidereal day"
-#~ msgstr "항성일"

@@ -1,21 +1,22 @@
-# Bengali translation for stellarium
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
-# This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-28 11:59+0700\n"
-"PO-Revision-Date: 2017-10-06 07:27+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
-"Language-Team: Bengali <bn@li.org>\n"
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-29 05:54+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
+"Language: bn\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -304,8 +305,8 @@ msgstr "হার :"
 
 #: index.html:288 tablet7in.html:452
 msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
 msgstr ""
 "মেরুর বৃত্তাকার সঞ্চারপথ যা পৃথিবীর অক্ষের দোলন জনিত প্রভাবের ফলে উৎপন্ন হয় "
 "(লাট্টুর মত ঘুর্ণনের কারণে) ।"
@@ -427,8 +428,7 @@ msgid "No response from server"
 msgstr "সার্ভার থেকে কোনো প্রতিক্রিয়া পাওয়া যাচ্ছে না"
 
 #: index.html:615
-msgid ""
-"No response from server since %1 seconds. Is Stellarium still running?"
+msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
 "%1 সেকেন্ড হল সার্ভারের সাথে যোগাযোগ নেই । স্টেলারিয়াম কি চালু করা আছে ?"
 
@@ -608,9 +608,3 @@ msgstr "পরিষ্কার করুন"
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "%1 সেকেন্ড ধরে সার্ভারের সাথে যোগাযোগ নেই । স্টেলারিয়াম কি চালু করা আছে ?"
-
-#~ msgid "Sidereal day"
-#~ msgstr "দিন (আহ্নিক গতি অনুসারে)"
-
-#~ msgid "Selection"
-#~ msgstr "অনুসন্ধান"

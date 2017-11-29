@@ -1,21 +1,22 @@
-# Czech translation for stellarium
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
-# This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-28 11:59+0700\n"
-"PO-Revision-Date: 2017-09-15 20:12+0000\n"
-"Last-Translator: Pavel Borecki <Unknown>\n"
-"Language-Team: Czech <cs@li.org>\n"
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-29 05:54+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -305,8 +306,8 @@ msgstr "ZHR:"
 
 #: index.html:288 tablet7in.html:452
 msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
 msgstr ""
 "Momentální kruhy osy země a jejího pohybu okolo eliptických pólů. Zobrazeno "
 "pouze na Zemi."
@@ -428,8 +429,7 @@ msgid "No response from server"
 msgstr "Server neodpovídá"
 
 #: index.html:615
-msgid ""
-"No response from server since %1 seconds. Is Stellarium still running?"
+msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
 "Už od %s sekund nebyla obdržena žádná odpověď od serveru. Je Stellarium "
 "pořád spuštěné?"
@@ -611,9 +611,3 @@ msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "Už %s sekund nebyla obdržena žádná odpověď od serveru. Je Stellarium pořád "
 "spuštěné?"
-
-#~ msgid "Sidereal day"
-#~ msgstr "Hvězdný den"
-
-#~ msgid "Selection"
-#~ msgstr "Výběr"

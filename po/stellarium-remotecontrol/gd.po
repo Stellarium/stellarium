@@ -1,22 +1,22 @@
-# Gaelic; Scottish translation for stellarium
-# Copyright (c) 2016 Rosetta Contributors and Canonical Ltd 2016
-# This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
-# GunChleoc <fios@foramnagaidhlig.net>, 2016, 2017.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-28 11:59+0700\n"
-"PO-Revision-Date: 2017-11-02 12:02+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Fòram na Gàidhlig\n"
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Gaelic, Scottish (https://www.transifex.com/stellarium/teams/80998/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-03 05:17+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
 "Language: gd\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : (n > 2 && n < 20) ? 2 : 3;\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -253,8 +253,7 @@ msgstr "Raon seallaidh"
 
 #: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
-msgstr ""
-"Cuir a-steach facal-luirg. Cleachd TABA gus na toraidhean a sheòladh."
+msgstr "Cuir a-steach facal-luirg. Cleachd TABA gus na toraidhean a sheòladh."
 
 #: index.html:142 tablet7in.html:230
 msgid "Select and focus"
@@ -306,8 +305,8 @@ msgstr "ZHR:"
 
 #: index.html:288 tablet7in.html:452
 msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
 msgstr ""
 "Cearcallan sa bhad aig aiseal na Talmhainn a’ gluasad timcheall nam "
 "pòlaichean èiclipteach. ’Ga shealltainn air an Talamh a-mhàin."
@@ -429,11 +428,10 @@ msgid "No response from server"
 msgstr "Cha do dh’fhreagair am frithealaiche"
 
 #: index.html:615
-msgid ""
-"No response from server since %1 seconds. Is Stellarium still running?"
+msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
-"Cha do dh’fhreagair am frithealaiche fad %1 diog(an). A bheil Stellarium ’ga "
-"ruith fhathast?"
+"Cha do dh’fhreagair am frithealaiche fad %1 diog(an). A bheil Stellarium ’ga"
+" ruith fhathast?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
@@ -610,11 +608,5 @@ msgstr "Sgioblaich an sgrìn"
 #: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
-"Cha do dh’fhreagair am frithealaiche fad %1 diog(an). A bheil Stellarium ’ga "
-"ruith fhathast?"
-
-#~ msgid "Selection"
-#~ msgstr "Taghadh"
-
-#~ msgid "Sidereal day"
-#~ msgstr "Latha reultach"
+"Cha do dh’fhreagair am frithealaiche fad %1 diog(an). A bheil Stellarium ’ga"
+" ruith fhathast?"

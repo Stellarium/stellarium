@@ -1,27 +1,22 @@
-# translation of stellarium-skycultures-uk.po to Ukrainian
-# Ukrainian translations for stellarium package.
-# Copyright (C) 2004, 2009 Free Software Foundation, Inc.
-# This file is distributed under the same license as the stellarium package.
-#
-#  <dubyk@library.lviv.ua>, 2005.
-# Yuri Chornoivan <yurchor@gmail.com>, 2009, 2010, 2011, 2016.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium-skycultures-uk\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-18 14:03+0700\n"
-"PO-Revision-Date: 2017-11-18 07:40+0000\n"
-"Last-Translator: Yuri Chornoivan <yurchor@gmail.com>\n"
-"Language-Team: Ukrainian <translation@linux.org.ua>\n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-19 05:52+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
-"X-Poedit-Country: UKRAINE\n"
 "Language: uk\n"
-"X-Poedit-Language: Ukrainian\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #: skycultures/translations.fab:10
 msgctxt "star"
@@ -474,7 +469,8 @@ msgctxt "special celestial body"
 msgid "Earth Observer"
 msgstr "Оглядач Землі"
 
-#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with
+#. Ctrl+G.
 #: skycultures/translations.fab:183
 msgctxt "special celestial body"
 msgid "SpaceShip"
@@ -1621,2835 +1617,2939 @@ msgctxt "Genitive name of constellation"
 msgid "Vulpeculae"
 msgstr "Лисички"
 
-#: nebulae/default/names.dat:26
+#: nebulae/default/names.dat:28
 msgid "Bow-Tie Nebula"
 msgstr "Туманність «Краватка-метелик»"
 
-#: nebulae/default/names.dat:27
+#: nebulae/default/names.dat:29
 msgid "Scarab Nebula"
 msgstr "Туманність «Скарабей»"
 
-#: nebulae/default/names.dat:28 nebulae/default/names.dat:29
 #: nebulae/default/names.dat:30 nebulae/default/names.dat:31
+#: nebulae/default/names.dat:32 nebulae/default/names.dat:33
 msgid "Robert's Quartet"
 msgstr "Квартет Роберта"
 
-#: nebulae/default/names.dat:32
+#: nebulae/default/names.dat:34
 msgid "47 Tuc"
 msgstr "47 Тукана"
 
-#: nebulae/default/names.dat:33
+#: nebulae/default/names.dat:35
 msgid "Giant Squid Galaxy"
 msgstr "Галактика «Гігантський спрут»"
 
-#: nebulae/default/names.dat:34
+#: nebulae/default/names.dat:36
 msgid "Polarissima Cluster"
 msgstr "Полярне скупчення"
 
-#: nebulae/default/names.dat:35
+#: nebulae/default/names.dat:37
 msgid "Great Star Cloud in Andromeda Galaxy"
 msgstr "Велика зоряна хмара у Туманності Андромеди"
 
-#: nebulae/default/names.dat:36
+#: nebulae/default/names.dat:38
 msgid "Andromeda Galaxy"
 msgstr "Туманність Андромеди"
 
-#: nebulae/default/names.dat:37
+#: nebulae/default/names.dat:39
 msgid "Andromeda Nebula"
 msgstr "Туманність Андромеди"
 
-#: nebulae/default/names.dat:38
+#: nebulae/default/names.dat:40
+msgid "Great Nebula in Andromeda"
+msgstr ""
+
+#: nebulae/default/names.dat:41
 msgid "Sailboat Cluster"
 msgstr "Скупчення «Вітрильник»"
 
-#: nebulae/default/names.dat:39
+#: nebulae/default/names.dat:42
 msgid "Skull Nebula"
 msgstr "Туманність «Череп»"
 
-#: nebulae/default/names.dat:40
+#: nebulae/default/names.dat:43
 msgid "Soap Bubble Nebula"
 msgstr "Туманність «Мильна Бульбашка»"
 
-#: nebulae/default/names.dat:41
+#: nebulae/default/names.dat:44
 msgid "Voodoo Mask Nebula"
 msgstr "Туманність «Маска Вуду»"
 
-#: nebulae/default/names.dat:42 nebulae/default/names.dat:643
+#: nebulae/default/names.dat:45 nebulae/default/names.dat:678
 msgid "Burbidge Chain"
 msgstr "Ланцюжок Бербіджа"
 
-#: nebulae/default/names.dat:43
+#: nebulae/default/names.dat:46
 msgid "Sculptor Galaxy"
 msgstr "Галактика у Скульпторі"
 
-#: nebulae/default/names.dat:44
+#: nebulae/default/names.dat:47
 msgid "Silver Coin Galaxy"
 msgstr "Галактика «Срібна Монета»"
 
-#: nebulae/default/names.dat:45
+#: nebulae/default/names.dat:48
 msgid "Silver Dollar Galaxy"
 msgstr "Галактика «Срібний Долар»"
 
-#: nebulae/default/names.dat:46
+#: nebulae/default/names.dat:49
 msgid "Pisces Cloud"
 msgstr "Хмара у Рибах"
 
-#: nebulae/default/names.dat:47
+#: nebulae/default/names.dat:50
 msgid "Markarian 348"
 msgstr "Маркарян 348"
 
-#: nebulae/default/names.dat:48
+#: nebulae/default/names.dat:51
 msgid "Small Magellanic Cloud"
 msgstr "Мала Магелланова Хмара"
 
-#: nebulae/default/names.dat:49
+#: nebulae/default/names.dat:52
 msgid "Nubecula Minor"
 msgstr "Мала Магелланова Хмара"
 
-#: nebulae/default/names.dat:50
+#: nebulae/default/names.dat:53
 msgid "Mirach's Ghost"
 msgstr "Привид Мірака"
 
-#: nebulae/default/names.dat:51
+#: nebulae/default/names.dat:54
 msgid "Dragonfly Cluster"
 msgstr "Скупчення «Бабка»"
 
-#: nebulae/default/names.dat:52
+#: nebulae/default/names.dat:55
 msgid "Owl Cluster"
 msgstr "Туманність «Сова»"
 
-#: nebulae/default/names.dat:53
+#: nebulae/default/names.dat:56
 msgid "E.T. Cluster"
 msgstr "Скупчення «Прибулець»"
 
-#: nebulae/default/names.dat:54
+#: nebulae/default/names.dat:57
 msgid "Whirligig Galaxy"
 msgstr "Галактика «Дзиґа»"
 
-#: nebulae/default/names.dat:55
+#: nebulae/default/names.dat:58
 msgid "Triangulum Galaxy"
 msgstr "Галактика Трикутника"
 
-#: nebulae/default/names.dat:56
+#: nebulae/default/names.dat:59
 msgid "Triangulum Pinwheel"
 msgstr "Цівочне Колесо у Трикутнику"
 
-#: nebulae/default/names.dat:57
-msgid "Little Spindle Galaxy"
-msgstr "Галактика «Мале Веретено»"
-
-#: nebulae/default/names.dat:58
-msgid "Phantom Galaxy"
-msgstr "Галактика «Привид»"
-
-#: nebulae/default/names.dat:59
-msgid "Little Dumbbell Nebula"
-msgstr "Туманність «Мала Гантель»"
-
-#: nebulae/default/names.dat:60
-msgid "Cork Nebula"
-msgstr "Туманність «Корок»"
-
-#: nebulae/default/names.dat:61
-msgid "Barbell Nebula"
-msgstr "Туманність «Гантель»"
-
-#: nebulae/default/names.dat:62
-msgid "Fuzzy Butterfly Cluster"
-msgstr "Скупчення «Розмитий Метелик»"
-
-#: nebulae/default/names.dat:63
-msgid "Lawnmower Cluster"
-msgstr "Скупчення «Газонокосарка»"
-
-#: nebulae/default/names.dat:64
-msgid "Fiddlehead Galaxy"
-msgstr "Галактика «Носова Фігура»"
-
-#: nebulae/default/names.dat:65 nebulae/default/names.dat:67
-msgid "Double Cluster"
-msgstr "Подвійне скупчення"
-
-#: nebulae/default/names.dat:66
-msgid "h Persei"
-msgstr "h Персея"
-
-#: nebulae/default/names.dat:68
-msgid "χ Persei"
-msgstr "χ Персея"
-
-#: nebulae/default/names.dat:69
-msgid "Perseus Lenticular Galaxy"
-msgstr "Галактика «Кришталик Персея»"
-
-#: nebulae/default/names.dat:70
-msgid "Spiral Cluster"
-msgstr "Спіральне скупчення"
-
-#: nebulae/default/names.dat:71
-msgid "Fornax Dwarf Cluster 3"
-msgstr "Карликове скупчення у Печі 3"
-
-#: nebulae/default/names.dat:72
-msgid "Fornax H3"
-msgstr "Піч H3"
-
-#: nebulae/default/names.dat:73
-msgid "Fornax C3"
-msgstr "Піч C3"
-
-#: nebulae/default/names.dat:74
-msgid "Fornax 3"
-msgstr "Піч 3"
-
-#: nebulae/default/names.dat:75
-msgid "Cetus A"
-msgstr "Кит А"
-
-#: nebulae/default/names.dat:76
-msgid "Eye of God Galaxy"
-msgstr "Галактика «Око Бога»"
-
-#: nebulae/default/names.dat:77
-msgid "Patrick Starfish Cluster"
-msgstr "Скупчення «Морська Зірка Патрика»"
-
-#: nebulae/default/names.dat:78
-msgid "Perseus A"
-msgstr "Персей A"
-
-#: nebulae/default/names.dat:79
-msgid "Fornax A"
-msgstr "Піч А"
-
-#: nebulae/default/names.dat:80
-msgid "Fornax B"
-msgstr "Піч B"
-
-#: nebulae/default/names.dat:81
-msgid "Embryo Nebula"
-msgstr "Туманність «Зародок»"
-
-#: nebulae/default/names.dat:82
-msgid "Little Scorpion Cluster"
-msgstr "Скупчення «Малий Скорпіон»"
-
-#: nebulae/default/names.dat:83
-msgid "Stingray Cluster"
-msgstr "Скупчення «Скат»"
-
-#: nebulae/default/names.dat:84
-msgid "Robin's Egg Nebula"
-msgstr "Туманність «Яйце Робіна»"
-
-#: nebulae/default/names.dat:85
-msgid "Comet Planetary Nebula"
-msgstr "Планетарна туманність «Комета»"
-
-#: nebulae/default/names.dat:86
-msgid "Maia Nebula"
-msgstr "Туманність «Майя»"
-
-#: nebulae/default/names.dat:87
-msgid "Merope Nebula"
-msgstr "Туманність Меропи"
-
-#: nebulae/default/names.dat:88
-msgid "Tempel's Nebula"
-msgstr "Туманність Темпеля"
-
-#: nebulae/default/names.dat:89
-msgid "Fossil Footprint Nebula"
-msgstr "Туманність «Відбиток Скам’янілості»"
-
-#: nebulae/default/names.dat:90
-msgid "California Nebula"
-msgstr "Туманність «Каліфорнія»"
-
-#: nebulae/default/names.dat:91
-msgid "Camel's Eye Nebula"
-msgstr "Туманність «Око Верблюда»"
-
-#: nebulae/default/names.dat:92
-msgid "Oyster Nebula"
-msgstr "Туманність «Устриця»"
-
-#: nebulae/default/names.dat:93
-msgid "Jolly Roger Cluster"
-msgstr "Скупчення «Веселий Роджер»"
-
-#: nebulae/default/names.dat:94
-msgid "Golden Harp Cluster"
-msgstr "Скупчення «Золота Арфа»"
-
-#: nebulae/default/names.dat:95
-msgid "Crystal Ball Nebula"
-msgstr "Туманність «Кришталева куля»"
-
-#: nebulae/default/names.dat:96
-msgid "Pansy Nebula"
-msgstr "Туманність «Братки»"
-
-#: nebulae/default/names.dat:97
-msgid "Cleopatra's Eye Nebula"
-msgstr "Туманність «Око Клеопатри»"
-
-#: nebulae/default/names.dat:98
-msgid "Eskimo's Wife Nebula"
-msgstr "Туманність «Ескімоска»"
-
-#: nebulae/default/names.dat:99
-msgid "Struve's Lost Nebula"
-msgstr "Втрачена туманність Струве"
-
-#: nebulae/default/names.dat:100
-msgid "Struve's Nebula"
-msgstr "Туманність Струве"
-
-#: nebulae/default/names.dat:101
-msgid "Hind's Variable Nebula"
-msgstr "Змінна туманність Гінда"
-
-#: nebulae/default/names.dat:102
-msgid "Hind's Nebula"
-msgstr "Туманність Гінда"
-
-#: nebulae/default/names.dat:103 nebulae/default/names.dat:104
-msgid "Carafe Group"
-msgstr "Група «Карафка»"
-
-#: nebulae/default/names.dat:105
-msgid "Pirate Moon Cluster"
-msgstr "Скупчення «Піратський Місяць»"
-
-#: nebulae/default/names.dat:106
-msgid "Poor Man's Double Cluster"
-msgstr "Подвійне скупчення бідняка"
-
-#: nebulae/default/names.dat:107 nebulae/default/names.dat:108
-#: nebulae/default/names.dat:389
-msgid "Starfish Cluster"
-msgstr "Скупчення «Морська зірка»"
-
-#: nebulae/default/names.dat:109
-msgid "Fly Nebula"
-msgstr "Туманність «Муха»"
-
-#: nebulae/default/names.dat:110
-msgid "Crab Nebula"
-msgstr "Крабова туманність"
-
-#: nebulae/default/names.dat:111
-msgid "Taurus A"
-msgstr "Телець A"
-
-#: nebulae/default/names.dat:112
-msgid "Pinwheel Cluster"
-msgstr "Скупчення «Цівкове колесо»"
-
-#: nebulae/default/names.dat:113
-msgid "Mermaid's Purse Nebula"
-msgstr "Туманність «Сумочка Русалки»"
-
-#: nebulae/default/names.dat:114
-msgid "Great Orion Nebula"
-msgstr "Велика туманність Оріона"
-
-#: nebulae/default/names.dat:115
-msgid "Orion Nebula"
-msgstr "Туманність Оріона"
-
-#: nebulae/default/names.dat:116
-msgid "Orion A"
-msgstr "Оріон A"
-
-#: nebulae/default/names.dat:117
-msgid "Running Man Nebula"
-msgstr "Туманність «Бігун»"
-
-#: nebulae/default/names.dat:118
-msgid "The Lost Jewel of Orion"
-msgstr "«Загублена Коштовність» Оріона"
-
-#: nebulae/default/names.dat:119
-msgid "Lower Sword"
-msgstr "Нижній Меч"
-
-#: nebulae/default/names.dat:120
-msgid "Coal Car Cluster"
-msgstr "Скупчення «Вагонетка»"
-
-#: nebulae/default/names.dat:121
-msgid "Upper Sword"
-msgstr "Верхній Меч"
-
-#: nebulae/default/names.dat:122
-msgid "de Mairan's Nebula"
-msgstr "Туманність де Майрана"
-
-#: nebulae/default/names.dat:123
-msgid "Mairan's Nebula"
-msgstr "Туманність Майрана"
-
-#: nebulae/default/names.dat:124
-msgid "ε Ori Nebula"
-msgstr "Туманність ε Оріона"
-
-#: nebulae/default/names.dat:125
-msgid "13th Pearl Nebula"
-msgstr "Туманність «Тринадцята Перлина»"
-
-#: nebulae/default/names.dat:126
-msgid "Black Eye Nebula"
-msgstr "Туманність «Чорне Око»"
-
-#: nebulae/default/names.dat:127
-msgid "Kissing Crescents Nebula"
-msgstr "Туманність «Півмісяці, Що Цілуються»"
-
-#: nebulae/default/names.dat:128
-msgid "Orion's Collarbone Nebula"
-msgstr "Туманність «Ключиця Оріона»"
-
-#: nebulae/default/names.dat:129
-msgid "Flame Nebula"
-msgstr "Туманність «Вогонь»"
-
-#: nebulae/default/names.dat:130
-msgid "Tank Tracks Nebula"
-msgstr "Туманність «Сліди танка»"
-
-#: nebulae/default/names.dat:131
-msgid "Maple Leaf Nebula"
-msgstr "Туманність «Кленовий Листок»"
-
-#: nebulae/default/names.dat:132
-msgid "30 Dor B"
-msgstr "30 Dor B"
-
-#: nebulae/default/names.dat:133
-msgid "Casper the Friendly Ghost Nebula"
-msgstr "Туманність «Каспер — Дружній Привид»"
-
-#: nebulae/default/names.dat:134
-msgid "Tarantula Nebula"
-msgstr "Туманність «Тарантул»"
-
-#: nebulae/default/names.dat:135
-msgid "Looped Nebula"
-msgstr "Зациклена туманність"
-
-#: nebulae/default/names.dat:136
-msgid "True Lovers' Knot"
-msgstr "Вузол справжнього кохання"
-
-#: nebulae/default/names.dat:137
-msgid "30 Dor Cluster"
-msgstr "Скупчення 30 Dor"
-
-#: nebulae/default/names.dat:138
-msgid "Ghost Head Nebula"
-msgstr "Туманність «Голова привида»"
-
-#: nebulae/default/names.dat:139
-msgid "January Salt-and-Pepper Cluster"
-msgstr "Січневе скупчення «Сіль і перець»"
-
-#: nebulae/default/names.dat:140
-msgid "Dusty Hand Galaxy"
-msgstr "Галактика «Брудна Долоня»"
-
-#: nebulae/default/names.dat:141
-msgid "The 37 Cluster"
-msgstr "Скупчення 37"
-
-#: nebulae/default/names.dat:142
-msgid "The 'LE' Cluster"
-msgstr "Скупчення «LE»"
-
-#: nebulae/default/names.dat:143
-msgid "Shopping Cart Cluster"
-msgstr "Скупчення «Візок»"
-
-#: nebulae/default/names.dat:144
-msgid "Mon R2 IRS3"
-msgstr "Mon R2 IRS3"
-
-#: nebulae/default/names.dat:145
-msgid "Monkey Head Nebula"
-msgstr "Туманність «Мавп’яча голова»"
-
-#: nebulae/default/names.dat:146 nebulae/default/names.dat:149
-#: nebulae/default/names.dat:151 nebulae/default/names.dat:152
-#: nebulae/default/names.dat:617
-msgid "Rosette Nebula"
-msgstr "Туманність «Розетка»"
-
-#: nebulae/default/names.dat:147
-msgid "Rosette A"
-msgstr "Розетка A"
-
-#: nebulae/default/names.dat:148
-msgid "NGC 2244 Satellite Cluster"
-msgstr "Скупчення-супутник NGC 2244"
-
-#: nebulae/default/names.dat:153
-msgid "Rosette B"
-msgstr "Розетка B"
-
-#: nebulae/default/names.dat:154
-msgid "Hubble's Variable Nebula"
-msgstr "Змінна туманність Хаббла"
-
-#: nebulae/default/names.dat:155
-msgid "Hubble's Nebula"
-msgstr "Туманність Хаббла"
-
-#: nebulae/default/names.dat:156
-msgid "Cone Nebula"
-msgstr "Туманність «Шишка»"
-
-#: nebulae/default/names.dat:157
-msgid "Christmas Tree Cluster"
-msgstr "Скупчення «Різдвяна ялинка»"
-
-#: nebulae/default/names.dat:158
-msgid "Head Hunter Cluster"
-msgstr "Скупчення «Мисливець за головами»"
-
-#: nebulae/default/names.dat:159
-msgid "Starfighter Cluster"
-msgstr "Скупчення «Зоряний Винищувач»"
-
-#: nebulae/default/names.dat:160
-msgid "Broken Heart Cluster"
-msgstr "Скупчення «Розбите Серце»"
-
-#: nebulae/default/names.dat:161
-msgid "Little Beehive Cluster"
-msgstr "Скупчення «Малий Рій»"
-
-#: nebulae/default/names.dat:162
-msgid "Hagrid's Dragon Cluster"
-msgstr "Скупчення «Дракон Геґріда»"
-
-#: nebulae/default/names.dat:163
-msgid "Great Bird Cluster"
-msgstr "Скупчення «Великий Птах»"
-
-#: nebulae/default/names.dat:164
-msgid "Heart-Shaped Cluster"
-msgstr "Серцеподібне скупчення"
-
-#: nebulae/default/names.dat:165 nebulae/default/names.dat:364
-#: nebulae/default/names.dat:524
-msgid "Butterfly Nebula"
-msgstr "Туманність «Метелик»"
-
-#: nebulae/default/names.dat:166
-msgid "Hourglass Planetary Nebula"
-msgstr "Планетарна туманність «Клепсидра»"
-
-#: nebulae/default/names.dat:167
-msgid "Thor's Helmet"
-msgstr "Шолом Тора"
-
-#: nebulae/default/names.dat:168
-msgid "Duck Nebula"
-msgstr "Туманність «Качка»"
-
-#: nebulae/default/names.dat:169
-msgid "Caroline's Cluster"
-msgstr "Скупчення Кароліни"
-
-#: nebulae/default/names.dat:170
-msgid "τ CMa Cluster"
-msgstr "Скупчення τ CMa"
-
-#: nebulae/default/names.dat:171
-msgid "Mexican Jumping Star"
-msgstr "Мексиканська зірка-стрибунець"
-
-#: nebulae/default/names.dat:172
-msgid "Pirate's Jewels Cluster"
-msgstr "Скупчення «Піратський Скарб»"
-
-#: nebulae/default/names.dat:173
-msgid "Gemini Nebula"
-msgstr "Туманність «Близнюки»"
-
-#: nebulae/default/names.dat:174
-msgid "Ant Nebula"
-msgstr "Туманність «Мураха»"
-
-#: nebulae/default/names.dat:175
-msgid "Double Bubble Nebula"
-msgstr "Туманність «Подвійна Булька»"
-
-#: nebulae/default/names.dat:176
-msgid "Peanut Nebula"
-msgstr "Туманність «Горішок»"
-
-#: nebulae/default/names.dat:177
-msgid "Eskimo Nebula"
-msgstr "Туманність «Ескімос»"
-
-#: nebulae/default/names.dat:178
-msgid "Clown Face Nebula"
-msgstr "Туманність «Голова клоуна»"
-
-#: nebulae/default/names.dat:179
-msgid "Firsse 213"
-msgstr "Фірсе 213"
-
-#: nebulae/default/names.dat:180
-msgid "Intergalactic Wanderer/Tramp"
-msgstr "Міжгалактичний мандрівник"
-
-#: nebulae/default/names.dat:181
-msgid "Twinkling Comet Cluster"
-msgstr "Скупчення «Комета, що блимає»"
-
-#: nebulae/default/names.dat:182
-msgid "Albino Butterfly Nebula"
-msgstr "Туманність «Метелик-Альбінос»"
-
-#: nebulae/default/names.dat:183
-msgid "Burning Ember Nebula"
-msgstr "Туманність «Бурштин, що горить»"
-
-#: nebulae/default/names.dat:184
-msgid "Bat Nebula"
-msgstr "Туманність «Летюча Миша»"
-
-#: nebulae/default/names.dat:185 nebulae/default/names.dat:373
-msgid "Butterfly Cluster"
-msgstr "Скупчення «Метелик»"
-
-#: nebulae/default/names.dat:186
-msgid "Stinging Scorpion Cluster"
-msgstr "Скупчення «Скорпіон, що жалить»"
-
-#: nebulae/default/names.dat:187
-msgid "Skull and Crossbones Nebula"
-msgstr "Туманність «Череп і кістки»"
-
-#: nebulae/default/names.dat:188
-msgid "Chained Brooch Nebula"
-msgstr "Туманність «З’єднана Брошка»"
-
-#: nebulae/default/names.dat:189
-msgid "Electric Guitar Cluster"
-msgstr "Скупчення «Електрогітара»"
-
-#: nebulae/default/names.dat:190
-msgid "Termite Hole Cluster"
-msgstr "Скупчення «Нора Термітів»"
-
-#: nebulae/default/names.dat:191
-msgid "Sprinter Cluster"
-msgstr "Скупчення «Спринтер»"
-
-#: nebulae/default/names.dat:192
-msgid "Diamond Cluster"
-msgstr "Діамантове скупчення"
-
-#: nebulae/default/names.dat:193
-msgid "Bear's Paw Galaxy"
-msgstr "Галактика «Ведмежа лапа»"
-
-#: nebulae/default/names.dat:194 nebulae/default/names.dat:596
-msgid "Bear Claw Nebula"
-msgstr "Туманність «Пазур ведмедя»"
-
-#: nebulae/default/names.dat:195
-msgid "The Dish Cluster"
-msgstr "Скупчення «Блюдо»"
-
-#: nebulae/default/names.dat:196
-msgid "Heart and Dagger Cluster"
-msgstr "Скупчення «Серце і Кинджал»"
-
-#: nebulae/default/names.dat:197
-msgid "Polarissima Australis"
-msgstr "Південна Полярна"
-
-#: nebulae/default/names.dat:198
-msgid "Beehive Cluster"
-msgstr "Скупчення «Вулик»"
-
-#: nebulae/default/names.dat:199
-msgid "Praesepe"
-msgstr "Ясла"
-
-#: nebulae/default/names.dat:200
-msgid "Manger"
-msgstr "Ясла"
-
-#: nebulae/default/names.dat:201
-msgid "King Cobra Cluster"
-msgstr "Скупчення «Королівська Кобра»"
-
-#: nebulae/default/names.dat:202
-msgid "UFO Galaxy"
-msgstr "Галактика «НЛО»"
-
-#: nebulae/default/names.dat:203
-msgid "Helix Galaxy"
-msgstr "Спіральна галактика"
-
-#: nebulae/default/names.dat:204
-msgid "Pancake Galaxy"
-msgstr "Галактика «Млинець»"
-
-#: nebulae/default/names.dat:205 nebulae/default/names.dat:220
-#: nebulae/default/names.dat:339
-msgid "Spindle Galaxy"
-msgstr "Галактика «Вісь»"
-
-#: nebulae/default/names.dat:206
-msgid "Pencil Nebula"
-msgstr "Туманність «Олівець»"
-
-#: nebulae/default/names.dat:207
-msgid "Herschel's Ray Nebula"
-msgstr "Туманність «Промінь Гершеля»"
-
-#: nebulae/default/names.dat:208
-msgid "NGC 2769 Group"
-msgstr "Група NGC 2769"
-
-#: nebulae/default/names.dat:209
-msgid "Supernova Factory"
-msgstr "Галактика «Фабрика наднових»"
-
-#: nebulae/default/names.dat:210
-msgid "Tiger's Eye Galaxy"
-msgstr "Галактика «Око Тигра»"
-
-#: nebulae/default/names.dat:211
-msgid "The Penguin Galaxy"
-msgstr "Галактика «Пінгвін»"
-
-#: nebulae/default/names.dat:212
-msgid "The Egg Galaxy"
-msgstr "Галактика «Яйце»"
-
-#: nebulae/default/names.dat:213
-msgid "Bode's Galaxy"
-msgstr "Галактика Боде"
-
-#: nebulae/default/names.dat:214
-msgid "Bode's Nebula"
-msgstr "Туманність Боде"
-
-#: nebulae/default/names.dat:215
-msgid "Cigar Galaxy"
-msgstr "Галактика «Сигара»"
-
-#: nebulae/default/names.dat:216
-msgid "Ursa Major A"
-msgstr "Велика Ведмедиця A"
-
-#: nebulae/default/names.dat:217 nebulae/default/names.dat:683
-msgid "The Garland Galaxy"
-msgstr "Галактика «Гірлянда»"
-
-#: nebulae/default/names.dat:218
-msgid "The Phantom Frisbee Galaxy"
-msgstr "Галактика «Примарне Фрісбі»"
-
-#: nebulae/default/names.dat:219
-msgid "Little Pinwheel Galaxy"
-msgstr "Галактика «Маленький Вітрячок»"
-
-#: nebulae/default/names.dat:221
-msgid "Eight-Burst Planetary Nebula"
-msgstr "Туманність вісьмох спалахів"
-
-#: nebulae/default/names.dat:222 nebulae/default/names.dat:390
-msgid "Southern Ring Nebula"
-msgstr "Туманність «Південне кільце»"
-
-#: nebulae/default/names.dat:223
-msgid "Polarissima Borealis"
-msgstr "Північна Полярна"
-
-#: nebulae/default/names.dat:224
-msgid "Ghost of Jupiter Nebula"
-msgstr "Туманність «Привид Юпітера»"
-
-#: nebulae/default/names.dat:225
-msgid "Eye Nebula"
-msgstr "Туманність «Око»"
-
-#: nebulae/default/names.dat:226
-msgid "Gem Cluster"
-msgstr "Скупчення Близнюків"
-
-#: nebulae/default/names.dat:227 nebulae/default/names.dat:232
-msgid "Keyhole Nebula"
-msgstr "Туманність «Отвір для ключа»"
-
-#: nebulae/default/names.dat:228
-msgid "The Gabriela Mistral Nebula"
-msgstr "Туманність «Габріела Містраль»"
-
-#: nebulae/default/names.dat:229
-msgid "Sliced Onion Galaxy"
-msgstr "Галактика «Розрізана Цибулина»"
-
-#: nebulae/default/names.dat:230
-msgid "η Car Nebula"
-msgstr "Туманність η Кіля"
-
-#: nebulae/default/names.dat:231
-msgid "Homunculus Nebula"
-msgstr "Туманність «Гомункул»"
-
-#: nebulae/default/names.dat:233
-msgid "Knitting Needle Galaxy"
-msgstr "Галактика «Спиця»"
-
-#: nebulae/default/names.dat:234
-msgid "Wishing Well Cluster"
-msgstr "Скупчення «Колодязь Бажань»"
-
-#: nebulae/default/names.dat:235
-msgid "Firefly Party Cluster"
-msgstr "Скупчення «Рій метеликів»"
-
-#: nebulae/default/names.dat:236
-msgid "Pincushion Cluster"
-msgstr "Скупчення «Подушечка для голок»"
-
-#: nebulae/default/names.dat:237
-msgid "Surfboard Galaxy"
-msgstr "Галактика «Дошка для серфінгу»"
-
-#: nebulae/default/names.dat:238
-msgid "Ambartsumian's Knot"
-msgstr "Вузол Амбарцумяна"
-
-#: nebulae/default/names.dat:239
-msgid "The Guitar"
-msgstr "Гітара"
-
-#: nebulae/default/names.dat:240
-msgid "Statue of Liberty Nebula"
-msgstr "Туманність «Статуя Свободи»"
-
-#: nebulae/default/names.dat:241
-msgid "Owl Nebula"
-msgstr "Туманність «Сова»"
-
-#: nebulae/default/names.dat:242
-msgid "Frame Galaxy"
-msgstr "Галактика «Рамка»"
-
-#: nebulae/default/names.dat:243 nebulae/default/names.dat:244
-#: nebulae/default/names.dat:246
-msgid "Leo Triplet"
-msgstr "Триплет у Леві"
-
-#: nebulae/default/names.dat:245
-msgid "Hamburger Galaxy"
-msgstr "Галактика «Гамбургер»"
-
-#: nebulae/default/names.dat:247
-msgid "King Hamlet's Ghost"
-msgstr "Привид Короля Гамлета"
-
-#: nebulae/default/names.dat:248 nebulae/default/names.dat:249
-#: nebulae/default/names.dat:250 nebulae/default/names.dat:251
-#: nebulae/default/names.dat:252 nebulae/default/names.dat:253
-#: nebulae/default/names.dat:254
-msgid "Copeland's Septet"
-msgstr "Септет Коупленда"
-
-#: nebulae/default/names.dat:255
-msgid "Pearl Cluster"
-msgstr "Скупчення «Перлина»"
-
-#: nebulae/default/names.dat:256
-msgid "Blue planetary"
-msgstr "Блакитна планетарна туманність"
-
-#: nebulae/default/names.dat:257
-msgid "Miniature Spiral"
-msgstr "«Мініатюрна спіраль»"
-
-#: nebulae/default/names.dat:258
-msgid "Vacuum Cleaner Galaxy"
-msgstr "Галактика «Пилосос»"
-
-#: nebulae/default/names.dat:259 nebulae/default/names.dat:260
-msgid "Antennae"
-msgstr "Галактики «Антенна»"
-
-#: nebulae/default/names.dat:261 nebulae/default/names.dat:262
-#: nebulae/default/names.dat:263
-msgid "Box"
-msgstr "«Коробка»"
-
-#: nebulae/default/names.dat:264
-msgid "Medusa Galaxy"
-msgstr "Галактика «Медуза»"
-
-#: nebulae/default/names.dat:265
-msgid "Medusa merger"
-msgstr "Злиття Медуз"
-
-#: nebulae/default/names.dat:266
-msgid "Medusa Galaxy Merger"
-msgstr "Об’єднання галактик «Медуза»"
-
-#: nebulae/default/names.dat:267
-msgid "Silver Streak Galaxy"
-msgstr "Галактика «Срібна Смуга»"
-
-#: nebulae/default/names.dat:268
-msgid "Virgo Cluster Pinwheel"
-msgstr "Скупчення «Цівочне Колесо» у Діві"
-
-#: nebulae/default/names.dat:269
-msgid "Coma Pinwheel Galaxy"
-msgstr "Галактика «Цівочне Колесо» у Волоссі Вероніки"
-
-#: nebulae/default/names.dat:270
-msgid "St. Catherine’s Wheel"
-msgstr "Колесо св. Катерини"
-
-#: nebulae/default/names.dat:271
-msgid "Faust V023"
-msgstr "Фауст V023"
-
-#: nebulae/default/names.dat:272
-msgid "Swelling Spiral Galaxy"
-msgstr "Галактика «Опукла Спіраль»"
-
-#: nebulae/default/names.dat:273
-msgid "Blowdryer Galaxy"
-msgstr "Галактика «Фен»"
-
-#: nebulae/default/names.dat:274
-msgid "Mirror Galaxy"
-msgstr "Галактика «Дзеркало»"
-
-#: nebulae/default/names.dat:275
-msgid "Galaxy Cluster"
-msgstr "Скупчення галактик"
-
-#: nebulae/default/names.dat:276
-msgid "Lawn Sprinkler Nebula"
-msgstr "Туманність «Розбризкувач для газону»"
-
-#: nebulae/default/names.dat:277
-msgid "Markarian's Chain"
-msgstr "Ланцюжок Маркаряна"
-
-#: nebulae/default/names.dat:278
-msgid "Faust V051"
-msgstr "Фауст V051"
-
-#: nebulae/default/names.dat:279 nebulae/default/names.dat:281
-msgid "The Eyes"
-msgstr "«Очі»"
-
-#: nebulae/default/names.dat:280 nebulae/default/names.dat:282
-msgid "Copeland's Eyes"
-msgstr "Очі Коупленда"
-
-#: nebulae/default/names.dat:283
-msgid "Virgo Galaxy"
-msgstr "Галактика у Діві"
-
-#: nebulae/default/names.dat:284
-msgid "Virgo A"
-msgstr "Діва A"
-
-#: nebulae/default/names.dat:285
-msgid "Smoking gun"
-msgstr "Дим з Рушниці"
-
-#: nebulae/default/names.dat:286 nebulae/default/names.dat:320
-msgid "Cocoon Galaxy"
-msgstr "Галактика «Кокон»"
-
-#: nebulae/default/names.dat:287
-msgid "Shapley-Ames 2"
-msgstr "Шеплі-Амес 2"
-
-#: nebulae/default/names.dat:288
-msgid "Lost Galaxy"
-msgstr "Втрачена галактика"
-
-#: nebulae/default/names.dat:289
-msgid "Hairy Eyebrow Galaxy"
-msgstr "Галактика «Волохата Брова»"
-
-#: nebulae/default/names.dat:290
-msgid "The Lost Galaxy of Copeland"
-msgstr "Загублена Галактика Коупленда"
-
-#: nebulae/default/names.dat:291
-msgid "Koi Fish Galaxy"
-msgstr "Галактика «Парчевий Короп»"
-
-#: nebulae/default/names.dat:292
-msgid "Needle Galaxy"
-msgstr "Галактика «Голка»"
-
-#: nebulae/default/names.dat:293
-msgid "Flying Saucer Galaxy"
-msgstr "Галактика «Летюче Блюдце»"
-
-#: nebulae/default/names.dat:294 nebulae/default/names.dat:296
-msgid "Siamese Twins"
-msgstr "«Сіамські близнюки»"
-
-#: nebulae/default/names.dat:295 nebulae/default/names.dat:297
-msgid "Fish and Chips Galaxies"
-msgstr "Галактики «Риба і чіпси»"
-
-#: nebulae/default/names.dat:298
-msgid "Sombrero Galaxy"
-msgstr "Галактика «Сомбреро»"
-
-#: nebulae/default/names.dat:299
-msgid "Faberge Egg Galaxy"
-msgstr "Галактика «Яйце Фаберже»"
-
-#: nebulae/default/names.dat:300
-msgid "Coalsack Cluster"
-msgstr "Скупчення «Вугільний мішок»"
-
-#: nebulae/default/names.dat:301
-msgid "Whale Galaxy"
-msgstr "Галактика «Кит»"
-
-#: nebulae/default/names.dat:302
-msgid "Herring Galaxy"
-msgstr "Галактика «Оселедець»"
-
-#: nebulae/default/names.dat:303
-msgid "Umbrella Galaxy"
-msgstr "Галактика «Парасолька»"
-
-#: nebulae/default/names.dat:304
-msgid "Crowbar Galaxy"
-msgstr "Галактика «Лом»"
-
-#: nebulae/default/names.dat:305
-msgid "Hockey Stick Galaxy"
-msgstr "Галактика «Ключка»"
-
-#: nebulae/default/names.dat:306
-msgid "Fishhook Galaxy"
-msgstr "Галактика «Гачок»"
-
-#: nebulae/default/names.dat:307
-msgid "Superwind-Galaxy"
-msgstr "Галактика «Супервітряна»"
-
-#: nebulae/default/names.dat:308
-msgid "Mice Galaxies"
-msgstr "Галактики «Мишки»"
-
-#: nebulae/default/names.dat:309
-msgid "Vinyl LP Galaxy"
-msgstr "Галактика «Вінілова Пластинка»"
-
-#: nebulae/default/names.dat:310
-msgid "Croc's Eye Galaxy"
-msgstr "Галактика «Око Крокодила»"
-
-#: nebulae/default/names.dat:311
-msgid "Jewel Box"
-msgstr "«Скринька з коштовностями»"
-
-#: nebulae/default/names.dat:312
-msgid "Herschel's Jewel Box"
-msgstr "«Скринька» Гершеля"
-
-#: nebulae/default/names.dat:313
-msgid "κ Cru Cluster"
-msgstr "Скупчення κ Південного Хреста"
-
-#: nebulae/default/names.dat:314
-msgid "Kidney Bean Galaxy"
-msgstr "Галактика «Нирка»"
-
-#: nebulae/default/names.dat:315
-msgid "Black Eye Galaxy"
-msgstr "Галактика «Чорне око»"
-
-#: nebulae/default/names.dat:316
-msgid "Evil Eye Galaxy"
-msgstr "Галактика «Зле око»"
-
-#: nebulae/default/names.dat:317
-msgid "Sleeping Beauty Galaxy"
-msgstr "Галактика «Спляча красуня»"
-
-#: nebulae/default/names.dat:318
-msgid "Coma B"
-msgstr "Кома B"
-
-#: nebulae/default/names.dat:319
-msgid "Z Coma Coma"
-msgstr "Z Волосся Вероніки"
-
-#: nebulae/default/names.dat:321
-msgid "Sunflower Galaxy"
-msgstr "Галактика «Соняшник»"
-
-#: nebulae/default/names.dat:322
-msgid "Iota's Ghost"
-msgstr "Привид Йоти"
-
-#: nebulae/default/names.dat:323
-msgid "Centaurus A"
-msgstr "Центавр А"
-
-#: nebulae/default/names.dat:324
-msgid "ω Cen Cluster"
-msgstr "Скупчення ω Центавра"
-
-#: nebulae/default/names.dat:325
-msgid "Spiral planetary nebula"
-msgstr "Спіральна планетарна туманність"
-
-#: nebulae/default/names.dat:326
-msgid "Whirlpool Galaxy"
-msgstr "Галактика «Вихор»"
-
-#: nebulae/default/names.dat:327
-msgid "Question Mark Galaxy"
-msgstr "Галактика «Знак питання»"
-
-#: nebulae/default/names.dat:328
-msgid "Rosse's Galaxy"
-msgstr "Галактика Россе"
-
-#: nebulae/default/names.dat:329 nebulae/default/names.dat:330
-msgid "Keenan's System"
-msgstr "Система Кінена"
-
-#: nebulae/default/names.dat:331
-msgid "Southern Pinwheel Galaxy"
-msgstr "Галактика «Південне Цівочне Колесо»"
-
-#: nebulae/default/names.dat:332 nebulae/default/names.dat:537
-msgid "Seashell Galaxy"
-msgstr "Галактика «Морська черепашка»"
-
-#: nebulae/default/names.dat:333 nebulae/default/names.dat:334
-msgid "The Heron Galaxy"
-msgstr "Галактика «Чапля»"
-
-#: nebulae/default/names.dat:335
+#: nebulae/default/names.dat:60 nebulae/default/names.dat:357
 msgid "Pinwheel Galaxy"
 msgstr "Галактика «Цівочне Колесо»"
 
+#: nebulae/default/names.dat:61
+msgid "Little Spindle Galaxy"
+msgstr "Галактика «Мале Веретено»"
+
+#: nebulae/default/names.dat:62
+msgid "Phantom Galaxy"
+msgstr "Галактика «Привид»"
+
+#: nebulae/default/names.dat:63
+msgid "Little Dumbbell Nebula"
+msgstr "Туманність «Мала Гантель»"
+
+#: nebulae/default/names.dat:64
+msgid "Cork Nebula"
+msgstr "Туманність «Корок»"
+
+#: nebulae/default/names.dat:65
+msgid "Barbell Nebula"
+msgstr "Туманність «Гантель»"
+
+#: nebulae/default/names.dat:66 nebulae/default/names.dat:179
+#: nebulae/default/names.dat:388 nebulae/default/names.dat:555
+msgid "Butterfly Nebula"
+msgstr "Туманність «Метелик»"
+
+#: nebulae/default/names.dat:67
+msgid "Fuzzy Butterfly Cluster"
+msgstr "Скупчення «Розмитий Метелик»"
+
+#: nebulae/default/names.dat:68
+msgid "Lawnmower Cluster"
+msgstr "Скупчення «Газонокосарка»"
+
+#: nebulae/default/names.dat:69
+msgid "Fiddlehead Galaxy"
+msgstr "Галактика «Носова Фігура»"
+
+#: nebulae/default/names.dat:70 nebulae/default/names.dat:72
+msgid "Double Cluster"
+msgstr "Подвійне скупчення"
+
+#: nebulae/default/names.dat:71
+msgid "h Persei"
+msgstr "h Персея"
+
+#: nebulae/default/names.dat:73
+msgid "χ Persei"
+msgstr "χ Персея"
+
+#: nebulae/default/names.dat:74
+msgid "Perseus Lenticular Galaxy"
+msgstr "Галактика «Кришталик Персея»"
+
+#: nebulae/default/names.dat:75
+msgid "Spiral Cluster"
+msgstr "Спіральне скупчення"
+
+#: nebulae/default/names.dat:76
+msgid "Fornax Dwarf Cluster 3"
+msgstr "Карликове скупчення у Печі 3"
+
+#: nebulae/default/names.dat:77
+msgid "Fornax H3"
+msgstr "Піч H3"
+
+#: nebulae/default/names.dat:78
+msgid "Fornax C3"
+msgstr "Піч C3"
+
+#: nebulae/default/names.dat:79
+msgid "Fornax 3"
+msgstr "Піч 3"
+
+#: nebulae/default/names.dat:80
+msgid "Cetus A"
+msgstr "Кит А"
+
+#: nebulae/default/names.dat:81
+msgid "Eye of God Galaxy"
+msgstr "Галактика «Око Бога»"
+
+#: nebulae/default/names.dat:82
+msgid "Patrick Starfish Cluster"
+msgstr "Скупчення «Морська Зірка Патрика»"
+
+#: nebulae/default/names.dat:83
+msgid "Perseus A"
+msgstr "Персей A"
+
+#: nebulae/default/names.dat:84
+msgid "Fornax A"
+msgstr "Піч А"
+
+#: nebulae/default/names.dat:85
+msgid "Fornax B"
+msgstr "Піч B"
+
+#: nebulae/default/names.dat:86
+msgid "Embryo Nebula"
+msgstr "Туманність «Зародок»"
+
+#: nebulae/default/names.dat:87
+msgid "Little Scorpion Cluster"
+msgstr "Скупчення «Малий Скорпіон»"
+
+#: nebulae/default/names.dat:88
+msgid "Stingray Cluster"
+msgstr "Скупчення «Скат»"
+
+#: nebulae/default/names.dat:89
+msgid "Robin's Egg Nebula"
+msgstr "Туманність «Яйце Робіна»"
+
+#: nebulae/default/names.dat:90
+msgid "Comet Planetary Nebula"
+msgstr "Планетарна туманність «Комета»"
+
+#: nebulae/default/names.dat:91
+msgid "Great Barred Spiral Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:92
+msgid "Eridanus A Group"
+msgstr ""
+
+#: nebulae/default/names.dat:93
+msgid "Maia Nebula"
+msgstr "Туманність «Майя»"
+
+#: nebulae/default/names.dat:94
+msgid "Merope Nebula"
+msgstr "Туманність Меропи"
+
+#: nebulae/default/names.dat:95
+msgid "Tempel's Nebula"
+msgstr "Туманність Темпеля"
+
+#: nebulae/default/names.dat:96
+msgid "Fossil Footprint Nebula"
+msgstr "Туманність «Відбиток Скам’янілості»"
+
+#: nebulae/default/names.dat:97
+msgid "California Nebula"
+msgstr "Туманність «Каліфорнія»"
+
+#: nebulae/default/names.dat:98
+msgid "Camel's Eye Nebula"
+msgstr "Туманність «Око Верблюда»"
+
+#: nebulae/default/names.dat:99
+msgid "Oyster Nebula"
+msgstr "Туманність «Устриця»"
+
+#: nebulae/default/names.dat:100
+msgid "Jolly Roger Cluster"
+msgstr "Скупчення «Веселий Роджер»"
+
+#: nebulae/default/names.dat:101
+msgid "Golden Harp Cluster"
+msgstr "Скупчення «Золота Арфа»"
+
+#: nebulae/default/names.dat:102
+msgid "Crystal Ball Nebula"
+msgstr "Туманність «Кришталева куля»"
+
+#: nebulae/default/names.dat:103
+msgid "Pansy Nebula"
+msgstr "Туманність «Братки»"
+
+#: nebulae/default/names.dat:104
+msgid "Cleopatra's Eye Nebula"
+msgstr "Туманність «Око Клеопатри»"
+
+#: nebulae/default/names.dat:105
+msgid "Eskimo's Wife Nebula"
+msgstr "Туманність «Ескімоска»"
+
+#: nebulae/default/names.dat:106
+msgid "Struve's Lost Nebula"
+msgstr "Втрачена туманність Струве"
+
+#: nebulae/default/names.dat:107
+msgid "Struve's Nebula"
+msgstr "Туманність Струве"
+
+#: nebulae/default/names.dat:108
+msgid "Hind's Variable Nebula"
+msgstr "Змінна туманність Гінда"
+
+#: nebulae/default/names.dat:109
+msgid "Hind's Nebula"
+msgstr "Туманність Гінда"
+
+#: nebulae/default/names.dat:110
+msgid "Northern Trifid Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:111 nebulae/default/names.dat:112
+msgid "Carafe Group"
+msgstr "Група «Карафка»"
+
+#: nebulae/default/names.dat:113
+msgid "Pirate Moon Cluster"
+msgstr "Скупчення «Піратський Місяць»"
+
+#: nebulae/default/names.dat:114
+msgid "Poor Man's Double Cluster"
+msgstr "Подвійне скупчення бідняка"
+
+#: nebulae/default/names.dat:116 nebulae/default/names.dat:117
+#: nebulae/default/names.dat:413
+msgid "Starfish Cluster"
+msgstr "Скупчення «Морська зірка»"
+
+#: nebulae/default/names.dat:118
+msgid "Fly Nebula"
+msgstr "Туманність «Муха»"
+
+#: nebulae/default/names.dat:119
+msgid "Crab Nebula"
+msgstr "Крабова туманність"
+
+#: nebulae/default/names.dat:120
+msgid "Taurus A"
+msgstr "Телець A"
+
+#: nebulae/default/names.dat:121
+msgid "Pinwheel Cluster"
+msgstr "Скупчення «Цівкове колесо»"
+
+#: nebulae/default/names.dat:122
+msgid "Mermaid's Purse Nebula"
+msgstr "Туманність «Сумочка Русалки»"
+
+#: nebulae/default/names.dat:123
+msgid "Great Orion Nebula"
+msgstr "Велика туманність Оріона"
+
+#: nebulae/default/names.dat:124
+msgid "Orion Nebula"
+msgstr "Туманність Оріона"
+
+#: nebulae/default/names.dat:125
+msgid "Orion A"
+msgstr "Оріон A"
+
+#: nebulae/default/names.dat:126
+msgid "Running Man Nebula"
+msgstr "Туманність «Бігун»"
+
+#: nebulae/default/names.dat:127
+msgid "The Lost Jewel of Orion"
+msgstr "«Загублена Коштовність» Оріона"
+
+#: nebulae/default/names.dat:128
+msgid "Lower Sword"
+msgstr "Нижній Меч"
+
+#: nebulae/default/names.dat:129
+msgid "Coal Car Cluster"
+msgstr "Скупчення «Вагонетка»"
+
+#: nebulae/default/names.dat:130
+msgid "Upper Sword"
+msgstr "Верхній Меч"
+
+#: nebulae/default/names.dat:131
+msgid "de Mairan's Nebula"
+msgstr "Туманність де Майрана"
+
+#: nebulae/default/names.dat:132
+msgid "Mairan's Nebula"
+msgstr "Туманність Майрана"
+
+#: nebulae/default/names.dat:133
+msgid "ε Ori Nebula"
+msgstr "Туманність ε Оріона"
+
+#: nebulae/default/names.dat:134
+msgid "13th Pearl Nebula"
+msgstr "Туманність «Тринадцята Перлина»"
+
+#: nebulae/default/names.dat:135
+msgid "Black Eye Nebula"
+msgstr "Туманність «Чорне Око»"
+
+#: nebulae/default/names.dat:136
+msgid "Kissing Crescents Nebula"
+msgstr "Туманність «Півмісяці, Що Цілуються»"
+
+#: nebulae/default/names.dat:137
+msgid "Orion's Collarbone Nebula"
+msgstr "Туманність «Ключиця Оріона»"
+
+#: nebulae/default/names.dat:138
+msgid "Flame Nebula"
+msgstr "Туманність «Вогонь»"
+
+#: nebulae/default/names.dat:139
+msgid "Tank Tracks Nebula"
+msgstr "Туманність «Сліди танка»"
+
+#: nebulae/default/names.dat:140
+msgid "Maple Leaf Nebula"
+msgstr "Туманність «Кленовий Листок»"
+
+#: nebulae/default/names.dat:141
+msgid "30 Dor B"
+msgstr "30 Dor B"
+
+#: nebulae/default/names.dat:142
+msgid "Casper the Friendly Ghost Nebula"
+msgstr "Туманність «Каспер — Дружній Привид»"
+
+#: nebulae/default/names.dat:143
+msgid "Tarantula Nebula"
+msgstr "Туманність «Тарантул»"
+
+#: nebulae/default/names.dat:144
+msgid "Looped Nebula"
+msgstr "Зациклена туманність"
+
+#: nebulae/default/names.dat:145
+msgid "True Lovers' Knot"
+msgstr "Вузол справжнього кохання"
+
+#: nebulae/default/names.dat:146
+msgid "30 Dor Cluster"
+msgstr "Скупчення 30 Dor"
+
+#: nebulae/default/names.dat:147
+msgid "Ghost Head Nebula"
+msgstr "Туманність «Голова привида»"
+
+#: nebulae/default/names.dat:148
+msgid "January Salt-and-Pepper Cluster"
+msgstr "Січневе скупчення «Сіль і перець»"
+
+#: nebulae/default/names.dat:149
+msgid "Dusty Hand Galaxy"
+msgstr "Галактика «Брудна Долоня»"
+
+#: nebulae/default/names.dat:150
+msgid "Shoe-Buckle Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:151
+msgid "The 37 Cluster"
+msgstr "Скупчення 37"
+
+#: nebulae/default/names.dat:152
+msgid "The 'LE' Cluster"
+msgstr "Скупчення «LE»"
+
+#: nebulae/default/names.dat:153
+msgid "Shopping Cart Cluster"
+msgstr "Скупчення «Візок»"
+
+#: nebulae/default/names.dat:154
+msgid "Mon R2 IRS3"
+msgstr "Mon R2 IRS3"
+
+#: nebulae/default/names.dat:155
+msgid "Monkey Head Nebula"
+msgstr "Туманність «Мавп’яча голова»"
+
+#: nebulae/default/names.dat:156
+msgid "Double Wedge Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:157 nebulae/default/names.dat:160
+#: nebulae/default/names.dat:162 nebulae/default/names.dat:164
+#: nebulae/default/names.dat:649
+msgid "Rosette Nebula"
+msgstr "Туманність «Розетка»"
+
+#: nebulae/default/names.dat:158
+msgid "Rosette A"
+msgstr "Розетка A"
+
+#: nebulae/default/names.dat:159
+msgid "NGC 2244 Satellite Cluster"
+msgstr "Скупчення-супутник NGC 2244"
+
+#: nebulae/default/names.dat:163
+msgid "Harp Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:165
+msgid "Rosette B"
+msgstr "Розетка B"
+
+#: nebulae/default/names.dat:166
+msgid "Hubble's Variable Nebula"
+msgstr "Змінна туманність Хаббла"
+
+#: nebulae/default/names.dat:167
+msgid "Hubble's Nebula"
+msgstr "Туманність Хаббла"
+
+#: nebulae/default/names.dat:168 nebulae/default/names.dat:665
+msgid "Cone Nebula"
+msgstr "Туманність «Шишка»"
+
+#: nebulae/default/names.dat:169
+msgid "Christmas Tree Cluster"
+msgstr "Скупчення «Різдвяна ялинка»"
+
+#: nebulae/default/names.dat:170
+msgid "Head Hunter Cluster"
+msgstr "Скупчення «Мисливець за головами»"
+
+#: nebulae/default/names.dat:171
+msgid "Starfighter Cluster"
+msgstr "Скупчення «Зоряний Винищувач»"
+
+#: nebulae/default/names.dat:172
+msgid "Broken Heart Cluster"
+msgstr "Скупчення «Розбите Серце»"
+
+#: nebulae/default/names.dat:173
+msgid "Little Beehive Cluster"
+msgstr "Скупчення «Малий Рій»"
+
+#: nebulae/default/names.dat:174
+msgid "Hagrid's Dragon Cluster"
+msgstr "Скупчення «Дракон Геґріда»"
+
+#: nebulae/default/names.dat:175
+msgid "Great Bird Cluster"
+msgstr "Скупчення «Великий Птах»"
+
+#: nebulae/default/names.dat:176
+msgid "Copeland's Golden Worm"
+msgstr ""
+
+#: nebulae/default/names.dat:177
+msgid "Heart-Shaped Cluster"
+msgstr "Серцеподібне скупчення"
+
+#: nebulae/default/names.dat:178
+msgid "Coil Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:180
+msgid "Hourglass Planetary Nebula"
+msgstr "Планетарна туманність «Клепсидра»"
+
+#: nebulae/default/names.dat:181
+msgid "Thor's Helmet"
+msgstr "Шолом Тора"
+
+#: nebulae/default/names.dat:182
+msgid "Duck Nebula"
+msgstr "Туманність «Качка»"
+
+#: nebulae/default/names.dat:183
+msgid "Caroline's Cluster"
+msgstr "Скупчення Кароліни"
+
+#: nebulae/default/names.dat:184
+msgid "τ CMa Cluster"
+msgstr "Скупчення τ CMa"
+
+#: nebulae/default/names.dat:185
+msgid "Mexican Jumping Star"
+msgstr "Мексиканська зірка-стрибунець"
+
+#: nebulae/default/names.dat:186
+msgid "Pirate's Jewels Cluster"
+msgstr "Скупчення «Піратський Скарб»"
+
+#: nebulae/default/names.dat:187
+msgid "Charlie Brown's Christmas Tree"
+msgstr ""
+
+#: nebulae/default/names.dat:188
+msgid "Gemini Nebula"
+msgstr "Туманність «Близнюки»"
+
+#: nebulae/default/names.dat:189
+msgid "Ant Nebula"
+msgstr "Туманність «Мураха»"
+
+#: nebulae/default/names.dat:190
+msgid "Double Bubble Nebula"
+msgstr "Туманність «Подвійна Булька»"
+
+#: nebulae/default/names.dat:191
+msgid "Peanut Nebula"
+msgstr "Туманність «Горішок»"
+
+#: nebulae/default/names.dat:192
+msgid "Eskimo Nebula"
+msgstr "Туманність «Ескімос»"
+
+#: nebulae/default/names.dat:193
+msgid "Clown Face Nebula"
+msgstr "Туманність «Голова клоуна»"
+
+#: nebulae/default/names.dat:194
+msgid "Firsse 213"
+msgstr "Фірсе 213"
+
+#: nebulae/default/names.dat:195
+msgid "Intergalactic Wanderer/Tramp"
+msgstr "Міжгалактичний мандрівник"
+
+#: nebulae/default/names.dat:196
+msgid "Twinkling Comet Cluster"
+msgstr "Скупчення «Комета, що блимає»"
+
+#: nebulae/default/names.dat:197
+msgid "Albino Butterfly Nebula"
+msgstr "Туманність «Метелик-Альбінос»"
+
+#: nebulae/default/names.dat:198
+msgid "Burning Ember Nebula"
+msgstr "Туманність «Бурштин, що горить»"
+
+#: nebulae/default/names.dat:199
+msgid "Bat Nebula"
+msgstr "Туманність «Летюча Миша»"
+
+#: nebulae/default/names.dat:200
+msgid "Meathook Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:201 nebulae/default/names.dat:397
+msgid "Butterfly Cluster"
+msgstr "Скупчення «Метелик»"
+
+#: nebulae/default/names.dat:202
+msgid "Stinging Scorpion Cluster"
+msgstr "Скупчення «Скорпіон, що жалить»"
+
+#: nebulae/default/names.dat:203
+msgid "Skull and Crossbones Nebula"
+msgstr "Туманність «Череп і кістки»"
+
+#: nebulae/default/names.dat:204
+msgid "Chained Brooch Nebula"
+msgstr "Туманність «З’єднана Брошка»"
+
+#: nebulae/default/names.dat:205
+msgid "Electric Guitar Cluster"
+msgstr "Скупчення «Електрогітара»"
+
+#: nebulae/default/names.dat:206
+msgid "Termite Hole Cluster"
+msgstr "Скупчення «Нора Термітів»"
+
+#: nebulae/default/names.dat:207
+msgid "Sprinter Cluster"
+msgstr "Скупчення «Спринтер»"
+
+#: nebulae/default/names.dat:208
+msgid "Diamond Cluster"
+msgstr "Діамантове скупчення"
+
+#: nebulae/default/names.dat:209
+msgid "Bear's Paw Galaxy"
+msgstr "Галактика «Ведмежа лапа»"
+
+#: nebulae/default/names.dat:210 nebulae/default/names.dat:627
+msgid "Bear Claw Nebula"
+msgstr "Туманність «Пазур ведмедя»"
+
+#: nebulae/default/names.dat:211
+msgid "The Dish Cluster"
+msgstr "Скупчення «Блюдо»"
+
+#: nebulae/default/names.dat:212
+msgid "Heart and Dagger Cluster"
+msgstr "Скупчення «Серце і Кинджал»"
+
+#: nebulae/default/names.dat:213
+msgid "Polarissima Australis"
+msgstr "Південна Полярна"
+
+#: nebulae/default/names.dat:214
+msgid "Beehive Cluster"
+msgstr "Скупчення «Вулик»"
+
+#: nebulae/default/names.dat:215
+msgid "Praesepe"
+msgstr "Ясла"
+
+#: nebulae/default/names.dat:216
+msgid "Manger"
+msgstr "Ясла"
+
+#: nebulae/default/names.dat:217
+msgid "Golden-Eye Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:218
+msgid "Pac-Man Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:219
+msgid "King Cobra Cluster"
+msgstr "Скупчення «Королівська Кобра»"
+
+#: nebulae/default/names.dat:220
+msgid "UFO Galaxy"
+msgstr "Галактика «НЛО»"
+
+#: nebulae/default/names.dat:221
+msgid "Helix Galaxy"
+msgstr "Спіральна галактика"
+
+#: nebulae/default/names.dat:222
+msgid "Pancake Galaxy"
+msgstr "Галактика «Млинець»"
+
+#: nebulae/default/names.dat:223 nebulae/default/names.dat:238
+#: nebulae/default/names.dat:361
+msgid "Spindle Galaxy"
+msgstr "Галактика «Вісь»"
+
+#: nebulae/default/names.dat:224
+msgid "Pencil Nebula"
+msgstr "Туманність «Олівець»"
+
+#: nebulae/default/names.dat:225
+msgid "Herschel's Ray Nebula"
+msgstr "Туманність «Промінь Гершеля»"
+
+#: nebulae/default/names.dat:226
+msgid "NGC 2769 Group"
+msgstr "Група NGC 2769"
+
+#: nebulae/default/names.dat:227
+msgid "Supernova Factory"
+msgstr "Галактика «Фабрика наднових»"
+
+#: nebulae/default/names.dat:228
+msgid "Tiger's Eye Galaxy"
+msgstr "Галактика «Око Тигра»"
+
+#: nebulae/default/names.dat:229
+msgid "The Penguin Galaxy"
+msgstr "Галактика «Пінгвін»"
+
+#: nebulae/default/names.dat:230
+msgid "The Egg Galaxy"
+msgstr "Галактика «Яйце»"
+
+#: nebulae/default/names.dat:231
+msgid "Bode's Galaxy"
+msgstr "Галактика Боде"
+
+#: nebulae/default/names.dat:232
+msgid "Bode's Nebula"
+msgstr "Туманність Боде"
+
+#: nebulae/default/names.dat:233
+msgid "Cigar Galaxy"
+msgstr "Галактика «Сигара»"
+
+#: nebulae/default/names.dat:234
+msgid "Ursa Major A"
+msgstr "Велика Ведмедиця A"
+
+#: nebulae/default/names.dat:235 nebulae/default/names.dat:718
+msgid "The Garland Galaxy"
+msgstr "Галактика «Гірлянда»"
+
+#: nebulae/default/names.dat:236
+msgid "The Phantom Frisbee Galaxy"
+msgstr "Галактика «Примарне Фрісбі»"
+
+#: nebulae/default/names.dat:237
+msgid "Little Pinwheel Galaxy"
+msgstr "Галактика «Маленький Вітрячок»"
+
+#: nebulae/default/names.dat:239
+msgid "Eight-Burst Planetary Nebula"
+msgstr "Туманність вісьмох спалахів"
+
+#: nebulae/default/names.dat:240 nebulae/default/names.dat:414
+msgid "Southern Ring Nebula"
+msgstr "Туманність «Південне кільце»"
+
+#: nebulae/default/names.dat:241
+msgid "Polarissima Borealis"
+msgstr "Північна Полярна"
+
+#: nebulae/default/names.dat:242
+msgid "Ghost of Jupiter Nebula"
+msgstr "Туманність «Привид Юпітера»"
+
+#: nebulae/default/names.dat:243
+msgid "Eye Nebula"
+msgstr "Туманність «Око»"
+
+#: nebulae/default/names.dat:244
+msgid "Gem Cluster"
+msgstr "Скупчення Близнюків"
+
+#: nebulae/default/names.dat:245 nebulae/default/names.dat:250
+msgid "Keyhole Nebula"
+msgstr "Туманність «Отвір для ключа»"
+
+#: nebulae/default/names.dat:246
+msgid "The Gabriela Mistral Nebula"
+msgstr "Туманність «Габріела Містраль»"
+
+#: nebulae/default/names.dat:247
+msgid "Sliced Onion Galaxy"
+msgstr "Галактика «Розрізана Цибулина»"
+
+#: nebulae/default/names.dat:248
+msgid "η Car Nebula"
+msgstr "Туманність η Кіля"
+
+#: nebulae/default/names.dat:249
+msgid "Homunculus Nebula"
+msgstr "Туманність «Гомункул»"
+
+#: nebulae/default/names.dat:251
+msgid "Knitting Needle Galaxy"
+msgstr "Галактика «Спиця»"
+
+#: nebulae/default/names.dat:252
+msgid "Wishing Well Cluster"
+msgstr "Скупчення «Колодязь Бажань»"
+
+#: nebulae/default/names.dat:253
+msgid "Firefly Party Cluster"
+msgstr "Скупчення «Рій метеликів»"
+
+#: nebulae/default/names.dat:254
+msgid "Pincushion Cluster"
+msgstr "Скупчення «Подушечка для голок»"
+
+#: nebulae/default/names.dat:255
+msgid "Surfboard Galaxy"
+msgstr "Галактика «Дошка для серфінгу»"
+
+#: nebulae/default/names.dat:256
+msgid "Ambartsumian's Knot"
+msgstr "Вузол Амбарцумяна"
+
+#: nebulae/default/names.dat:257
+msgid "The Guitar"
+msgstr "Гітара"
+
+#: nebulae/default/names.dat:258
+msgid "Statue of Liberty Nebula"
+msgstr "Туманність «Статуя Свободи»"
+
+#: nebulae/default/names.dat:259
+msgid "Owl Nebula"
+msgstr "Туманність «Сова»"
+
+#: nebulae/default/names.dat:260
+msgid "Frame Galaxy"
+msgstr "Галактика «Рамка»"
+
+#: nebulae/default/names.dat:261 nebulae/default/names.dat:262
+#: nebulae/default/names.dat:264
+msgid "Leo Triplet"
+msgstr "Триплет у Леві"
+
+#: nebulae/default/names.dat:263
+msgid "Hamburger Galaxy"
+msgstr "Галактика «Гамбургер»"
+
+#: nebulae/default/names.dat:265
+msgid "King Hamlet's Ghost"
+msgstr "Привид Короля Гамлета"
+
+#: nebulae/default/names.dat:266 nebulae/default/names.dat:267
+#: nebulae/default/names.dat:268 nebulae/default/names.dat:269
+#: nebulae/default/names.dat:270 nebulae/default/names.dat:271
+#: nebulae/default/names.dat:272
+msgid "Copeland's Septet"
+msgstr "Септет Коупленда"
+
+#: nebulae/default/names.dat:273
+msgid "Pearl Cluster"
+msgstr "Скупчення «Перлина»"
+
+#: nebulae/default/names.dat:274
+msgid "Blue planetary"
+msgstr "Блакитна планетарна туманність"
+
+#: nebulae/default/names.dat:275
+msgid "Miniature Spiral"
+msgstr "«Мініатюрна спіраль»"
+
+#: nebulae/default/names.dat:276
+msgid "Vacuum Cleaner Galaxy"
+msgstr "Галактика «Пилосос»"
+
+#: nebulae/default/names.dat:277 nebulae/default/names.dat:278
+msgid "Antennae"
+msgstr "Галактики «Антенна»"
+
+#: nebulae/default/names.dat:279 nebulae/default/names.dat:280
+#: nebulae/default/names.dat:281 nebulae/default/names.dat:282
+msgid "The Box"
+msgstr ""
+
+#: nebulae/default/names.dat:283
+msgid "Medusa Galaxy"
+msgstr "Галактика «Медуза»"
+
+#: nebulae/default/names.dat:284
+msgid "Medusa merger"
+msgstr "Злиття Медуз"
+
+#: nebulae/default/names.dat:285
+msgid "Medusa Galaxy Merger"
+msgstr "Об’єднання галактик «Медуза»"
+
+#: nebulae/default/names.dat:286
+msgid "Silver Streak Galaxy"
+msgstr "Галактика «Срібна Смуга»"
+
+#: nebulae/default/names.dat:287
+msgid "Virgo Cluster Pinwheel"
+msgstr "Скупчення «Цівочне Колесо» у Діві"
+
+#: nebulae/default/names.dat:288
+msgid "Coma Pinwheel Galaxy"
+msgstr "Галактика «Цівочне Колесо» у Волоссі Вероніки"
+
+#: nebulae/default/names.dat:289
+msgid "St. Catherine’s Wheel"
+msgstr "Колесо св. Катерини"
+
+#: nebulae/default/names.dat:290
+msgid "Faust V023"
+msgstr "Фауст V023"
+
+#: nebulae/default/names.dat:291
+msgid "Swelling Spiral Galaxy"
+msgstr "Галактика «Опукла Спіраль»"
+
+#: nebulae/default/names.dat:292
+msgid "Blowdryer Galaxy"
+msgstr "Галактика «Фен»"
+
+#: nebulae/default/names.dat:293
+msgid "Mirror Galaxy"
+msgstr "Галактика «Дзеркало»"
+
+#: nebulae/default/names.dat:294
+msgid "Galaxy Cluster"
+msgstr "Скупчення галактик"
+
+#: nebulae/default/names.dat:295
+msgid "Lawn Sprinkler Nebula"
+msgstr "Туманність «Розбризкувач для газону»"
+
+#: nebulae/default/names.dat:296
+msgid "Markarian's Chain"
+msgstr "Ланцюжок Маркаряна"
+
+#: nebulae/default/names.dat:297
+msgid "Great Galactic Face"
+msgstr ""
+
+#: nebulae/default/names.dat:298
+msgid "Faust V051"
+msgstr "Фауст V051"
+
+#: nebulae/default/names.dat:299 nebulae/default/names.dat:301
+msgid "The Eyes"
+msgstr "«Очі»"
+
+#: nebulae/default/names.dat:300 nebulae/default/names.dat:302
+msgid "Copeland's Eyes"
+msgstr "Очі Коупленда"
+
+#: nebulae/default/names.dat:303
+msgid "Virgo Galaxy"
+msgstr "Галактика у Діві"
+
+#: nebulae/default/names.dat:304
+msgid "Virgo A"
+msgstr "Діва A"
+
+#: nebulae/default/names.dat:305
+msgid "Smoking gun"
+msgstr "Дим з Рушниці"
+
+#: nebulae/default/names.dat:306 nebulae/default/names.dat:341
+msgid "Cocoon Galaxy"
+msgstr "Галактика «Кокон»"
+
+#: nebulae/default/names.dat:307
+msgid "Shapley-Ames 2"
+msgstr "Шеплі-Амес 2"
+
+#: nebulae/default/names.dat:308
+msgid "Lost Galaxy"
+msgstr "Втрачена галактика"
+
+#: nebulae/default/names.dat:309
+msgid "Hairy Eyebrow Galaxy"
+msgstr "Галактика «Волохата Брова»"
+
+#: nebulae/default/names.dat:310
+msgid "The Lost Galaxy of Copeland"
+msgstr "Загублена Галактика Коупленда"
+
+#: nebulae/default/names.dat:311
+msgid "Koi Fish Galaxy"
+msgstr "Галактика «Парчевий Короп»"
+
+#: nebulae/default/names.dat:312
+msgid "Needle Galaxy"
+msgstr "Галактика «Голка»"
+
+#: nebulae/default/names.dat:313
+msgid "Berenice's Hair Clip"
+msgstr ""
+
+#: nebulae/default/names.dat:314
+msgid "Flying Saucer Galaxy"
+msgstr "Галактика «Летюче Блюдце»"
+
+#: nebulae/default/names.dat:315 nebulae/default/names.dat:317
+msgid "Siamese Twins"
+msgstr "«Сіамські близнюки»"
+
+#: nebulae/default/names.dat:316 nebulae/default/names.dat:318
+msgid "Fish and Chips Galaxies"
+msgstr "Галактики «Риба і чіпси»"
+
+#: nebulae/default/names.dat:319
+msgid "Sombrero Galaxy"
+msgstr "Галактика «Сомбреро»"
+
+#: nebulae/default/names.dat:320
+msgid "Faberge Egg Galaxy"
+msgstr "Галактика «Яйце Фаберже»"
+
+#: nebulae/default/names.dat:321
+msgid "Coalsack Cluster"
+msgstr "Скупчення «Вугільний мішок»"
+
+#: nebulae/default/names.dat:322
+msgid "Whale Galaxy"
+msgstr "Галактика «Кит»"
+
+#: nebulae/default/names.dat:323
+msgid "Herring Galaxy"
+msgstr "Галактика «Оселедець»"
+
+#: nebulae/default/names.dat:324
+msgid "Umbrella Galaxy"
+msgstr "Галактика «Парасолька»"
+
+#: nebulae/default/names.dat:325
+msgid "Crowbar Galaxy"
+msgstr "Галактика «Лом»"
+
+#: nebulae/default/names.dat:326
+msgid "Hockey Stick Galaxy"
+msgstr "Галактика «Ключка»"
+
+#: nebulae/default/names.dat:327
+msgid "Fishhook Galaxy"
+msgstr "Галактика «Гачок»"
+
+#: nebulae/default/names.dat:328
+msgid "Superwind-Galaxy"
+msgstr "Галактика «Супервітряна»"
+
+#: nebulae/default/names.dat:329
+msgid "Mice Galaxies"
+msgstr "Галактики «Мишки»"
+
+#: nebulae/default/names.dat:330
+msgid "Vinyl LP Galaxy"
+msgstr "Галактика «Вінілова Пластинка»"
+
+#: nebulae/default/names.dat:331
+msgid "Croc's Eye Galaxy"
+msgstr "Галактика «Око Крокодила»"
+
+#: nebulae/default/names.dat:332
+msgid "Jewel Box"
+msgstr "«Скринька з коштовностями»"
+
+#: nebulae/default/names.dat:333
+msgid "Herschel's Jewel Box"
+msgstr "«Скринька» Гершеля"
+
+#: nebulae/default/names.dat:334
+msgid "κ Cru Cluster"
+msgstr "Скупчення κ Південного Хреста"
+
+#: nebulae/default/names.dat:335
+msgid "Kidney Bean Galaxy"
+msgstr "Галактика «Нирка»"
+
 #: nebulae/default/names.dat:336
+msgid "Black Eye Galaxy"
+msgstr "Галактика «Чорне око»"
+
+#: nebulae/default/names.dat:337
+msgid "Evil Eye Galaxy"
+msgstr "Галактика «Зле око»"
+
+#: nebulae/default/names.dat:338
+msgid "Sleeping Beauty Galaxy"
+msgstr "Галактика «Спляча красуня»"
+
+#: nebulae/default/names.dat:339
+msgid "Coma B"
+msgstr "Кома B"
+
+#: nebulae/default/names.dat:340
+msgid "Z Coma Coma"
+msgstr "Z Волосся Вероніки"
+
+#: nebulae/default/names.dat:342
+msgid "Sunflower Galaxy"
+msgstr "Галактика «Соняшник»"
+
+#: nebulae/default/names.dat:343
+msgid "Iota's Ghost"
+msgstr "Привид Йоти"
+
+#: nebulae/default/names.dat:344
+msgid "Centaurus A"
+msgstr "Центавр А"
+
+#: nebulae/default/names.dat:345
+msgid "ω Cen Cluster"
+msgstr "Скупчення ω Центавра"
+
+#: nebulae/default/names.dat:346
+msgid "Spiral Planetary Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:347
+msgid "Whirlpool Galaxy"
+msgstr "Галактика «Вихор»"
+
+#: nebulae/default/names.dat:348
+msgid "Question Mark Galaxy"
+msgstr "Галактика «Знак питання»"
+
+#: nebulae/default/names.dat:349
+msgid "Rosse's Galaxy"
+msgstr "Галактика Россе"
+
+#: nebulae/default/names.dat:350
+msgid "Spiral Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:351 nebulae/default/names.dat:352
+msgid "Keenan's System"
+msgstr "Система Кінена"
+
+#: nebulae/default/names.dat:353
+msgid "Southern Pinwheel Galaxy"
+msgstr "Галактика «Південне Цівочне Колесо»"
+
+#: nebulae/default/names.dat:354 nebulae/default/names.dat:567
+msgid "Seashell Galaxy"
+msgstr "Галактика «Морська черепашка»"
+
+#: nebulae/default/names.dat:355 nebulae/default/names.dat:356
+msgid "The Heron Galaxy"
+msgstr "Галактика «Чапля»"
+
+#: nebulae/default/names.dat:358
 msgid "Dragon Nebula"
 msgstr "Туманність «Дракон»"
 
-#: nebulae/default/names.dat:337
+#: nebulae/default/names.dat:359
 msgid "Blade and Pearl Galaxy"
 msgstr "Галактика «Клинок і Перлина»"
 
-#: nebulae/default/names.dat:338
+#: nebulae/default/names.dat:360
 msgid "The Mini Sombrero Galaxy"
 msgstr "Галактика «Мінісомбреро»"
 
-#: nebulae/default/names.dat:340
+#: nebulae/default/names.dat:362
 msgid "Fool's Gold Galaxy"
 msgstr "Галактика «Фальшиве Золото»"
 
-#: nebulae/default/names.dat:341
+#: nebulae/default/names.dat:363
 msgid "Fath 703"
 msgstr "Фатх 703"
 
-#: nebulae/default/names.dat:342
+#: nebulae/default/names.dat:364
 msgid "Ghost Globular Cluster"
 msgstr "Кулясте скупчення «Привид»"
 
-#: nebulae/default/names.dat:343
+#: nebulae/default/names.dat:365
 msgid "Rose Cluster"
 msgstr "Скупчення «Троянда»"
 
-#: nebulae/default/names.dat:345
+#: nebulae/default/names.dat:367 nebulae/default/names.dat:370
 msgid "Splinter Galaxy"
 msgstr "Галактика «Уламок»"
 
-#: nebulae/default/names.dat:346
+#: nebulae/default/names.dat:368
 msgid "Cat Scratch Galaxy"
 msgstr "Галактика «Котячі Пазурі»"
 
-#: nebulae/default/names.dat:347
+#: nebulae/default/names.dat:369
 msgid "Knife Edge Galaxy"
 msgstr "Галактика «Лезо Ножа»"
 
-#: nebulae/default/names.dat:348
+#: nebulae/default/names.dat:371
 msgid "Seyfert's Sextet"
 msgstr "Секстет Сейферта"
 
-#: nebulae/default/names.dat:349
+#: nebulae/default/names.dat:372
 msgid "Serpens Sextet"
 msgstr "Шістка у Змії"
 
-#: nebulae/default/names.dat:350
+#: nebulae/default/names.dat:373
 msgid "S Nor Cluster"
 msgstr "Скупчення S Nor"
 
-#: nebulae/default/names.dat:351
+#: nebulae/default/names.dat:374
 msgid "Crab Globular Cluster"
 msgstr "Кулясте скупчення «Краб»"
 
-#: nebulae/default/names.dat:352
+#: nebulae/default/names.dat:375
 msgid "Spider Globular Cluster"
 msgstr "Кулясте скупчення «Павук»"
 
-#: nebulae/default/names.dat:353
+#: nebulae/default/names.dat:376
 msgid "The Crucifix Cluster"
 msgstr "Скупчення «Розіп’яття»"
 
-#: nebulae/default/names.dat:354
+#: nebulae/default/names.dat:377
 msgid "Rim Nebula"
 msgstr "Туманність «Кільце»"
 
-#: nebulae/default/names.dat:355
+#: nebulae/default/names.dat:378
 msgid "μ Normae Cluster"
 msgstr "Скупчення μ Косинця"
 
-#: nebulae/default/names.dat:356
-msgid "Great Cluster in Hercules"
-msgstr "Велике зоряне скупчення у Геркулесі"
+#: nebulae/default/names.dat:379
+msgid "Great Star Cluster in Hercules"
+msgstr ""
 
-#: nebulae/default/names.dat:357
+#: nebulae/default/names.dat:380
 msgid "Hercules Globular Cluster"
 msgstr "Кулясте скупчення у Геркулесі"
 
-#: nebulae/default/names.dat:358
-msgid "Turtle planetary nebula"
-msgstr "Планетарна туманність «Черепаха»"
-
-#: nebulae/default/names.dat:359
-msgid "Northern Jewel Box Cluster"
-msgstr "Скупчення «Південний ромб»"
-
-#: nebulae/default/names.dat:360
-msgid "Table of Scorpius Cluster"
-msgstr "Скупчення «Дошка Скорпіона»"
-
-#: nebulae/default/names.dat:361
-msgid "Flickering Globular Cluster"
-msgstr "Кулясте скупчення, що блимає"
-
-#: nebulae/default/names.dat:362
-msgid "Moth Wing Cluster"
-msgstr "Скупчення «Крило Метелика»"
-
-#: nebulae/default/names.dat:363
-msgid "Bug Nebula"
-msgstr "Туманність «Жук»"
-
-#: nebulae/default/names.dat:365
-msgid "Box Nebula"
-msgstr "Туманність «Ящик»"
-
-#: nebulae/default/names.dat:366
-msgid "Cat's Paw Nebula"
-msgstr "Туманність «Котяча лапа»"
-
-#: nebulae/default/names.dat:367
-msgid "Cheerio Nebula"
-msgstr "Туманність «Чиріо»"
-
-#: nebulae/default/names.dat:368 nebulae/default/names.dat:400
-msgid "Lobster Nebula"
-msgstr "Туманність «Омар»"
-
-#: nebulae/default/names.dat:369
-msgid "War and Peace Nebula"
-msgstr "Туманність «Війна і Мир»"
-
-#: nebulae/default/names.dat:370
-msgid "Little Ghost Nebula"
-msgstr "Туманність «Маленький привид»"
-
-#: nebulae/default/names.dat:371
-msgid "Tonantzintla 1"
-msgstr "Тонанцинтла 1"
-
-#: nebulae/default/names.dat:372
-msgid "Phantom Cluster"
-msgstr "Скупчення «Примара»"
-
-#: nebulae/default/names.dat:374
-msgid "Splendors of the Heavens"
-msgstr "Велич Небес"
-
-#: nebulae/default/names.dat:375
-msgid "Silver Nugget Cluster"
-msgstr "Скупчення «Срібний самородок»"
-
-#: nebulae/default/names.dat:376 nebulae/default/names.dat:422
-msgid "Little Gem Nebula"
-msgstr "Туманність «Маленький коштовний камінь»"
-
-#: nebulae/default/names.dat:377
-msgid "Tom Thumb Cluster"
-msgstr "Скупчення «Хлопчик-мізинчик»"
-
-#: nebulae/default/names.dat:378
-msgid "Ptolemy's Cluster"
-msgstr "Скупчення Птолемея"
-
-#: nebulae/default/names.dat:379
-msgid "Lost in Space Galaxy"
-msgstr "Галактика «Загублена у просторі»"
-
-#: nebulae/default/names.dat:380
-msgid "Trifid Nebula"
-msgstr "Туманність «Трифід»"
-
 #: nebulae/default/names.dat:381
-msgid "Dead Man's Chest Cluster"
-msgstr "Скупчення «Скриня Мерця»"
+msgid "Turtle Nebula"
+msgstr ""
 
 #: nebulae/default/names.dat:382
-msgid "Herschel 36"
-msgstr "Гершель 36"
-
-#: nebulae/default/names.dat:383
-msgid "Hourglass Cluster"
-msgstr "Скупчення «Клепсидра»"
-
-#: nebulae/default/names.dat:384
-msgid "Webb's Cross"
-msgstr "Хрест Вебба"
-
-#: nebulae/default/names.dat:385
-msgid "Red spider Nebula"
-msgstr "Туманність «Червоний павук»"
-
-#: nebulae/default/names.dat:386
-msgid "Cat's Eye Nebula"
-msgstr "Туманність «Котяче око»"
-
-#: nebulae/default/names.dat:387 nebulae/default/names.dat:471
-msgid "Sunflower Nebula"
-msgstr "Туманність «Соняшник»"
-
-#: nebulae/default/names.dat:388
-msgid "Snail Nebula"
-msgstr "Туманність «Равлик»"
-
-#: nebulae/default/names.dat:391
-msgid "Blue Racquetball Nebula"
-msgstr "Туманність «Блакитний м’ячик»"
-
-#: nebulae/default/names.dat:392
-msgid "Emerald Eye Planetary Nebula"
-msgstr "Планетарна туманність «Смарагдове Око»"
-
-#: nebulae/default/names.dat:393
-msgid "Eagle Nebula"
-msgstr "Туманність «Орел»"
-
-#: nebulae/default/names.dat:394
-msgid "Star Queen"
-msgstr "Туманність «Зоряна Королева»"
-
-#: nebulae/default/names.dat:395
-msgid "Black Swan Cluster"
-msgstr "Скупчення «Чорний Лебідь»"
-
-#: nebulae/default/names.dat:396
-msgid "Omega Nebula"
-msgstr "Туманність «Омега»"
-
-#: nebulae/default/names.dat:397
-msgid "Swan Nebula"
-msgstr "Туманність «Лебідь»"
-
-#: nebulae/default/names.dat:398
-msgid "Horseshoe Nebula"
-msgstr "Туманність «Підкова»"
-
-#: nebulae/default/names.dat:399
-msgid "Checkmark Nebula"
-msgstr "Туманність «Позначка»"
-
-#: nebulae/default/names.dat:401 nebulae/default/names.dat:402
-msgid "Edward's Galaxy"
-msgstr "Галактика Едварда"
-
-#: nebulae/default/names.dat:403
-msgid "Great Sagittarius Cluster"
-msgstr "Велике скупчення у Стрільці"
-
-#: nebulae/default/names.dat:404
-msgid "Santa's Sleigh Cluster"
-msgstr "Скупчення «Сани Санти»"
-
-#: nebulae/default/names.dat:405
-msgid "Wild Duck Cluster"
-msgstr "Скупчення «Дика Качка»"
-
-#: nebulae/default/names.dat:406
-msgid "July Salt-and-Pepper Cluster"
-msgstr "Липневе скупчення «Сіль і перець»"
-
-#: nebulae/default/names.dat:407
-msgid "Scutum Salt-and-Pepper Cluster"
-msgstr "Скупчення «Сіль і перець» у Щиті"
-
-#: nebulae/default/names.dat:408
-msgid "Ring Nebula"
-msgstr "Туманність «Перстень»"
-
-#: nebulae/default/names.dat:409
-msgid "Chandelier Cluster"
-msgstr "Скупчення «Люстра»"
-
-#: nebulae/default/names.dat:410
-msgid "R CrA Nebula"
-msgstr "Туманність R CrA"
-
-#: nebulae/default/names.dat:411
-msgid "Phantom Streak Nebula"
-msgstr "Туманність «Примарна смужка»"
-
-#: nebulae/default/names.dat:412
-msgid "Bird's Head"
-msgstr "Голова Птаха"
-
-#: nebulae/default/names.dat:413
-msgid "Dandelion Puffball Nebula"
-msgstr "Туманність «Кульбаба»"
-
-#: nebulae/default/names.dat:414
-msgid "Pavo Globular Cluster"
-msgstr "Кулясте скупчення у Павичі"
-
-#: nebulae/default/names.dat:415
-msgid "The Starfish"
-msgstr "Морська зірка"
-
-#: nebulae/default/names.dat:416
-msgid "The Windmill"
-msgstr "Вітряк"
-
-#: nebulae/default/names.dat:417
-msgid "Pentagon"
-msgstr "П’ятикутник"
-
-#: nebulae/default/names.dat:418
-msgid "Snowball Nebula"
-msgstr "Туманність «Сніжка»"
-
-#: nebulae/default/names.dat:419
-msgid "Specter Cluster"
-msgstr "Скупчення «Примара»"
-
-#: nebulae/default/names.dat:420
-msgid "Hole in a Cluster"
-msgstr "Дірка у скупченні"
-
-#: nebulae/default/names.dat:421
-msgid "Smoke Ring Cluster"
-msgstr "Скупчення «Димне Кільце»"
-
-#: nebulae/default/names.dat:423
-msgid "The Foxhead Cluster"
-msgstr "Скупчення «Лисяча голова»"
-
-#: nebulae/default/names.dat:424
-msgid "Barnard's Galaxy"
-msgstr "Галактика Барнарда"
-
-#: nebulae/default/names.dat:425
-msgid "Blinking planetary"
-msgstr "Блимаюча планетарна туманність"
-
-#: nebulae/default/names.dat:426
-msgid "Poodle Cluster"
-msgstr "Скупчення «Пудель»"
-
-#: nebulae/default/names.dat:427
-msgid "Angelfish Cluster"
-msgstr "Скупчення «Морський Ангел»"
-
-#: nebulae/default/names.dat:428
-msgid "Arrowhead Cluster"
-msgstr "Скупчення «Наконечник Стріли»"
-
-#: nebulae/default/names.dat:429
-msgid "Dumbbell Nebula"
-msgstr "Туманність «Гантель»"
-
-#: nebulae/default/names.dat:430
-msgid "Diabolo Nebula"
-msgstr "Туманність «Діаболо»"
-
-#: nebulae/default/names.dat:431
-msgid "Apple Core Nebula"
-msgstr "Туманність «Недогризок»"
-
-#: nebulae/default/names.dat:432
-msgid "Kite Cluster"
-msgstr "Скупчення «Повітряний Змій»"
-
-#: nebulae/default/names.dat:433
-msgid "Condor Galaxy"
-msgstr "Галактика «Кондор»"
-
-#: nebulae/default/names.dat:434
-msgid "20 Vulpeculae Cluster"
-msgstr "Скупчення 20 Лисички"
-
-#: nebulae/default/names.dat:435
-msgid "Crescent Nebula"
-msgstr "Туманність «Півмісяць»"
-
-#: nebulae/default/names.dat:436
-msgid "Ear Nebula"
-msgstr "Туманність «Вухо»"
-
-#: nebulae/default/names.dat:437
-msgid "Little Ring Nebula"
-msgstr "Туманність «Мале кільце»"
-
-#: nebulae/default/names.dat:438
-msgid "Blue Flash Nebula"
-msgstr "Туманність «Блакитний спалах»"
-
-#: nebulae/default/names.dat:439
-msgid "Giant Behemoth Galaxy"
-msgstr "Галактика «Гігантський Бегемот»"
-
-#: nebulae/default/names.dat:440
-msgid "The Inchworm Cluster"
-msgstr "Скупчення «Гусінь П’ядуна»"
-
-#: nebulae/default/names.dat:441
-msgid "The Rocking Horse Cluster"
-msgstr "Скупчення «Коник-гойдалка»"
-
-#: nebulae/default/names.dat:442
-msgid "Cooling Tower"
-msgstr "Градирня"
-
-#: nebulae/default/names.dat:443
-msgid "Ghost Bush Cluster"
-msgstr "Скупчення «Примарний Кущ»"
-
-#: nebulae/default/names.dat:444
-msgid "Flying Geese Cluster"
-msgstr "Скупчення «Летючі Гуси»"
-
-#: nebulae/default/names.dat:445
-msgid "Mothra Cluster"
-msgstr "Скупчення «Мотра»"
-
-#: nebulae/default/names.dat:446
-msgid "Fireworks Galaxy"
-msgstr "Галактика «Феєрверк»"
-
-#: nebulae/default/names.dat:447
-msgid "Filamentary Nebula"
-msgstr "Ниткоподібна туманність"
-
-#: nebulae/default/names.dat:448
-msgid "West Veil Nebula"
-msgstr "Туманність «Західна Вуаль»"
-
-#: nebulae/default/names.dat:449
-msgid "Cirrus Nebula"
-msgstr "Туманність «Чубчик»"
-
-#: nebulae/default/names.dat:450
-msgid "Witch's Broom Nebula"
-msgstr "Туманність «Відьмина мітла»"
-
-#: nebulae/default/names.dat:451
-msgid "Witch's Broom Galaxy"
-msgstr "Галактика «Відьмина мітла»"
-
-#: nebulae/default/names.dat:452
-msgid "East Veil Nebula"
-msgstr "Туманність «Східна Вуаль»"
-
-#: nebulae/default/names.dat:453
-msgid "Network Nebula"
-msgstr "Туманність «Сітка»"
-
-#: nebulae/default/names.dat:454
-msgid "North America Nebula"
-msgstr "Туманність «Північна Америка»"
-
-#: nebulae/default/names.dat:455
-msgid "Fetus Nebula"
-msgstr "Туманність «Ембріон»"
-
-#: nebulae/default/names.dat:456
-msgid "Coat Button Nebula"
-msgstr "Туманність «Ґудзик на плащі»"
-
-#: nebulae/default/names.dat:457
-msgid "Saturn Nebula"
-msgstr "Туманність «Сатурн»"
-
-#: nebulae/default/names.dat:458
-msgid "Iris Nebula"
-msgstr "Туманність «Ірис»"
-
-#: nebulae/default/names.dat:459
-msgid "Cheeseburger Nebula"
-msgstr "Туманність «Чизбурґер»"
-
-#: nebulae/default/names.dat:460
-msgid "Pink Pillow Nebula"
-msgstr "Туманність «Рожева Пігулка»"
-
-#: nebulae/default/names.dat:461
-msgid "Magic Carpet Nebula"
-msgstr "Туманність «Чарівний Килим»"
-
-#: nebulae/default/names.dat:462
-msgid "Green Rectangle Nebula"
-msgstr "Туманність «Зелений Прямокутник»"
-
-#: nebulae/default/names.dat:463
-msgid "Pegasus Cluster"
-msgstr "Скупчення у Пегасі"
-
-#: nebulae/default/names.dat:464
-msgid "Jellyfish Cluster"
-msgstr "Скупчення «Медуза»"
-
-#: nebulae/default/names.dat:465
-msgid "Small Cluster Nebula"
-msgstr "Туманність «Мале скупчення»"
-
-#: nebulae/default/names.dat:466
-msgid "NGC 7129 IR Cluster"
-msgstr "ІЧ-скупчення NGC 7129"
-
-#: nebulae/default/names.dat:467
-msgid "Star Lizard Cluster"
-msgstr "Скупчення «Зоряна Ящірка»"
-
-#: nebulae/default/names.dat:468
-msgid "Drunken Lizard Cluster"
-msgstr "Скупчення «П’яна Ящірка»"
-
-#: nebulae/default/names.dat:469
-msgid "Atoms for Peace Galaxy"
-msgstr "Галактика «Мирний атом»"
-
-#: nebulae/default/names.dat:470
-msgid "Helix Nebula"
-msgstr "Спіральна туманність"
-
-#: nebulae/default/names.dat:472 nebulae/default/names.dat:473
-#: nebulae/default/names.dat:474 nebulae/default/names.dat:475
-msgid "Stephan's Quintet"
-msgstr "«Квінтет Стефана»"
-
-#: nebulae/default/names.dat:476
-msgid "Deer Lick Group"
-msgstr "Група Оленя"
-
-#: nebulae/default/names.dat:477
-msgid "The Wizard Nebula"
-msgstr "Туманність «Чарівник»"
-
-#: nebulae/default/names.dat:478
-msgid "Grand Design Galaxy"
-msgstr "Галактика «Великий задум»"
-
-#: nebulae/default/names.dat:479
-msgid "Superman Galaxy"
-msgstr "Галактика «Супермен»"
-
-#: nebulae/default/names.dat:480
-msgid "The Dormouse Cluster"
-msgstr "Скупчення «Вовчок»"
-
-#: nebulae/default/names.dat:481
-msgid "The Arrowhead Cluster"
-msgstr "Скупчення «Вістря Стріли»"
-
-#: nebulae/default/names.dat:482 nebulae/default/names.dat:483
-#: nebulae/default/names.dat:484 nebulae/default/names.dat:485
-msgid "Grus Quartet"
-msgstr "Квартет у Журавлі"
-
-#: nebulae/default/names.dat:486 nebulae/default/names.dat:491
-msgid "Bubble Nebula"
-msgstr "Туманність «Бульбашка»"
-
-#: nebulae/default/names.dat:487
-msgid "Cassiopeia Salt-and-Pepper Cluster"
-msgstr "Скупчення «Сіль і перець» у Кассіопеї"
-
-#: nebulae/default/names.dat:488
-msgid "October Salt-and-Pepper Cluster"
-msgstr "Жовтневе скупчення «Сіль і перець»"
-
-#: nebulae/default/names.dat:489
-msgid "Blue Snowball"
-msgstr "Блакитний Сніжок"
-
-#: nebulae/default/names.dat:490
-msgid "Copeland's Blue Snowball"
-msgstr "Блакитний сніжок Коупленда"
-
-#: nebulae/default/names.dat:492
-msgid "Fried-egg Galaxy"
-msgstr "Галактика «Яєшня»"
-
-#: nebulae/default/names.dat:493
-msgid "Caroline's Rose Cluster"
-msgstr "Скупчення «Роза Кароліни»"
-
-#: nebulae/default/names.dat:494
-msgid "Ghost Cluster"
-msgstr "Скупчення «Привид»"
-
-#: nebulae/default/names.dat:495
-msgid "Star Mist Cluster"
-msgstr "Скупчення «Зоряний Туман»"
-
-#: nebulae/default/names.dat:496
-msgid "The Widow's Web Cluster"
-msgstr "Скупчення «Сітка Вдови»"
-
-#: nebulae/default/names.dat:497
-msgid "The Little Sombrero Galaxy"
-msgstr "Галактика «Мале Сомбреро»"
-
-#: nebulae/default/names.dat:498
-msgid "Electric Arc Galaxy"
-msgstr "Галактика «Електрична Арка»"
-
-#: nebulae/default/names.dat:499
-msgid "Starburst Galaxy"
-msgstr "Галактика «Зоряний вибух»"
-
-#: nebulae/default/names.dat:500 nebulae/default/names.dat:501
-msgid "γ Cas Nebula"
-msgstr "Туманність γ Кассіопеї"
-
-#: nebulae/default/names.dat:502
-msgid "Maffei Group"
-msgstr "Група Маффеї"
-
-#: nebulae/default/names.dat:503
-msgid "ο Per Cloud"
-msgstr "Хмара ο Персея"
-
-#: nebulae/default/names.dat:504
-msgid "Gingrich 1"
-msgstr "Ґінґріх 1"
-
-#: nebulae/default/names.dat:505
-msgid "Barnard's Merope Nebula"
-msgstr "Туманність Меропи Барнарда"
-
-#: nebulae/default/names.dat:506
-msgid "Flaming Star Nebula"
-msgstr "Туманність «Палаюча Зірка»"
-
-#: nebulae/default/names.dat:507
-msgid "The Tadpoles"
-msgstr "Пуголовки"
-
-#: nebulae/default/names.dat:508
-msgid "Spider Nebula"
-msgstr "Туманність «Павук»"
-
-#: nebulae/default/names.dat:509
-msgid "Spirograph Nebula"
-msgstr "Туманність «Спірограф»"
-
-#: nebulae/default/names.dat:510
-msgid "Raspberry Nebula"
-msgstr "Туманність «Малина»"
-
-#: nebulae/default/names.dat:511
-msgid "Jellyfish Nebula"
-msgstr "Туманність «Медуза»"
-
-#: nebulae/default/names.dat:512
-msgid "Gemini A"
-msgstr "Близнюки A"
-
-#: nebulae/default/names.dat:513
-msgid "Papillon"
-msgstr "Галактика Папільйона"
-
-#: nebulae/default/names.dat:514
-msgid "γ Cyg Nebula"
-msgstr "Туманність γ Лебедя"
-
-#: nebulae/default/names.dat:515
-msgid "ZW II 108 Group"
-msgstr "Група ZW II 108"
-
-#: nebulae/default/names.dat:516
-msgid "Elephant's Trunk Nebula"
-msgstr "Туманність «Хобот слона»"
-
-#: nebulae/default/names.dat:517
-msgid "Fish Head Nebula"
-msgstr "Туманність «Голова Риби»"
-
-#: nebulae/default/names.dat:518
-msgid "Heart Nebula"
-msgstr "Туманність «Серце»"
-
-#: nebulae/default/names.dat:519
-msgid "The Running Dog Nebula"
-msgstr "Туманність «Собака, що біжить»"
-
-#: nebulae/default/names.dat:520
-msgid "Valentine Nebula"
-msgstr "Туманність «Валентин»"
-
-#: nebulae/default/names.dat:521
-msgid "AFGL 333 Cloud"
-msgstr "Хмара AFGL 333"
-
-#: nebulae/default/names.dat:522
-msgid "Soul Nebula"
-msgstr "Туманність «Дух»"
-
-#: nebulae/default/names.dat:523
-msgid "Witch Head Nebula"
-msgstr "Туманність «Голова Відьми»"
-
-#: nebulae/default/names.dat:525
-msgid "Toby Jug Nebula"
-msgstr "Туманність «Пивний Кухоль»"
-
-#: nebulae/default/names.dat:526
-msgid "ο Vel Cluster"
-msgstr "Скупчення ο Вітрил"
-
-#: nebulae/default/names.dat:527
-msgid "Browning Galaxy"
-msgstr "Галактика Браунінґа"
-
-#: nebulae/default/names.dat:528
-msgid "Coddington's Nebula"
-msgstr "Туманність Коддінґтона"
-
-#: nebulae/default/names.dat:529
-msgid "Southern Pleiades"
-msgstr "Південні Плеяди"
-
-#: nebulae/default/names.dat:530
-msgid "θ Car Cluster"
-msgstr "Скупчення θ Кіля"
-
-#: nebulae/default/names.dat:531
-msgid "Running Chicken Nebula"
-msgstr "Туманність «Курча, що біжить»"
-
-#: nebulae/default/names.dat:532
-msgid "λ Cen Nebula"
-msgstr "Туманність λ Центравра"
-
-#: nebulae/default/names.dat:533
-msgid "Thackeray's Globules"
-msgstr "Кульки Теккерея"
-
-#: nebulae/default/names.dat:534
-msgid "Lemon slice Nebula"
-msgstr "Туманність «Скибка лимону»"
-
-#: nebulae/default/names.dat:535
-msgid "Theoretician's Nebula"
-msgstr "Туманність Теоретика"
-
-#: nebulae/default/names.dat:536
-msgid "Baby Eskimo Nebula"
-msgstr "Туманність «Малий Ескімос»"
-
-#: nebulae/default/names.dat:538
-msgid "Retina Nebula"
-msgstr "Туманність «Сітківка»"
-
-#: nebulae/default/names.dat:539
-msgid "Blue Horsehead Nebula"
-msgstr "Туманність «Синя Кінська Голова»"
-
-#: nebulae/default/names.dat:540
-msgid "White Eyed Pea Nebula"
-msgstr "Горошина з білою плямою"
-
-#: nebulae/default/names.dat:541
-msgid "ρ Oph Nebula"
-msgstr "Туманність ρ Орфея"
-
-#: nebulae/default/names.dat:542 nebulae/default/names.dat:623
-msgid "Antares Nebula"
-msgstr "Туманність Антареса"
-
-#: nebulae/default/names.dat:543
-msgid "Prawn Nebula"
-msgstr "Туманність «Креветка»"
-
-#: nebulae/default/names.dat:544
 msgid "False Comet Nebula"
 msgstr "Туманність «Фальшива комета»"
 
-#: nebulae/default/names.dat:545
-msgid "Summer Beehive Cluster"
-msgstr "Скупчення «Літній рій бджіл»"
+#: nebulae/default/names.dat:383
+msgid "Northern Jewel Box Cluster"
+msgstr "Скупчення «Південний ромб»"
 
-#: nebulae/default/names.dat:546
-msgid "Poseidon's Trident Cluster"
-msgstr "Скупчення «Тризубець Посейдона»"
+#: nebulae/default/names.dat:384
+msgid "Table of Scorpius Cluster"
+msgstr "Скупчення «Дошка Скорпіона»"
 
-#: nebulae/default/names.dat:547
-msgid "Graff's Cluster"
-msgstr "Скупчення Ґраффа"
+#: nebulae/default/names.dat:385
+msgid "Flickering Globular Cluster"
+msgstr "Кулясте скупчення, що блимає"
 
-#: nebulae/default/names.dat:548
-msgid "Shapley-Ames 5"
-msgstr "Шеплі-Амес 5"
+#: nebulae/default/names.dat:386
+msgid "Moth Wing Cluster"
+msgstr "Скупчення «Крило Метелика»"
 
-#: nebulae/default/names.dat:549
-msgid "Pelican Nebula"
-msgstr "Туманність «Пелікан»"
+#: nebulae/default/names.dat:387
+msgid "Bug Nebula"
+msgstr "Туманність «Жук»"
 
-#: nebulae/default/names.dat:550 nebulae/default/names.dat:552
-msgid "Cocoon Nebula"
-msgstr "Туманність «Кокон»"
+#: nebulae/default/names.dat:389
+msgid "Box Nebula"
+msgstr "Туманність «Ящик»"
 
-#: nebulae/default/names.dat:551
-msgid "Southern Integral Sign"
-msgstr "Південний знак інтеграла"
+#: nebulae/default/names.dat:390
+msgid "Cat's Paw Nebula"
+msgstr "Туманність «Котяча лапа»"
 
-#: nebulae/default/names.dat:553
-msgid "Lagoon Nebula"
-msgstr "Туманність «Лагуна»"
+#: nebulae/default/names.dat:391
+msgid "Cheerio Nebula"
+msgstr "Туманність «Чиріо»"
 
-#: nebulae/default/names.dat:554
-msgid "Small Sagittarius Star Cloud"
-msgstr "Мала зоряна хмара Стрільця"
+#: nebulae/default/names.dat:392 nebulae/default/names.dat:425
+msgid "Lobster Nebula"
+msgstr "Туманність «Омар»"
 
-#: nebulae/default/names.dat:555
-msgid "Delle Caustiche"
-msgstr "«Каустична Долина»"
+#: nebulae/default/names.dat:393
+msgid "War and Peace Nebula"
+msgstr "Туманність «Війна і Мир»"
 
-#: nebulae/default/names.dat:556
-msgid "Winnecke 4"
-msgstr "Віннеке 4"
+#: nebulae/default/names.dat:394
+msgid "Little Ghost Nebula"
+msgstr "Туманність «Маленький привид»"
 
-#: nebulae/default/names.dat:557 skycultures/western_rey/star_names.fab:26
-msgid "Pleiades"
-msgstr "Плеяди"
+#: nebulae/default/names.dat:395
+msgid "Tonantzintla 1"
+msgstr "Тонанцинтла 1"
 
-#: nebulae/default/names.dat:558
-msgid "Seven Sisters"
-msgstr "Сім сестер"
+#: nebulae/default/names.dat:396
+msgid "Phantom Cluster"
+msgstr "Скупчення «Примара»"
 
-#: nebulae/default/names.dat:559
-msgid "Subaru"
-msgstr "Субару"
+#: nebulae/default/names.dat:398
+msgid "Splendors of the Heavens"
+msgstr "Велич Небес"
 
-#: nebulae/default/names.dat:560
-msgid "α Per Cluster"
-msgstr "Скупчення α Персея"
+#: nebulae/default/names.dat:399
+msgid "Silver Nugget Cluster"
+msgstr "Скупчення «Срібний самородок»"
 
-#: nebulae/default/names.dat:561
-msgid "α Per Moving Group"
-msgstr "Рухома група α Персея"
+#: nebulae/default/names.dat:400 nebulae/default/names.dat:448
+msgid "Little Gem Nebula"
+msgstr "Туманність «Маленький коштовний камінь»"
 
-#: nebulae/default/names.dat:562
-msgid "Coma Berenices Cluster"
-msgstr "Скупчення у Волоссі Вероніки"
+#: nebulae/default/names.dat:401
+msgid "Tom Thumb Cluster"
+msgstr "Скупчення «Хлопчик-мізинчик»"
 
-#: nebulae/default/names.dat:563
-msgid "Taurus Poniatovii Cluster"
-msgstr "Скупчення «Телець Понятовського»"
+#: nebulae/default/names.dat:402
+msgid "Ptolemy's Cluster"
+msgstr "Скупчення Птолемея"
 
-#: nebulae/default/names.dat:564
-msgid "Taurus Dark Cloud Nebula"
-msgstr "Туманність «Темна хмара Тільця»"
+#: nebulae/default/names.dat:403
+msgid "Lost in Space Galaxy"
+msgstr "Галактика «Загублена у просторі»"
 
-#: nebulae/default/names.dat:565
-msgid "Horsehead Nebula"
-msgstr "Туманність «Кінська Голова»"
+#: nebulae/default/names.dat:404
+msgid "Trifid Nebula"
+msgstr "Туманність «Трифід»"
 
-#: nebulae/default/names.dat:566 nebulae/default/names.dat:567
-#: nebulae/default/names.dat:568 nebulae/default/names.dat:569
-msgid "Pipe (stem)"
-msgstr "Люлька (чубук)"
+#: nebulae/default/names.dat:405
+msgid "Dead Man's Chest Cluster"
+msgstr "Скупчення «Скриня Мерця»"
 
-#: nebulae/default/names.dat:570 nebulae/default/names.dat:574
-msgid "Ink Spot Nebula"
-msgstr "Туманність «Чорнильна пляма»"
+#: nebulae/default/names.dat:406
+msgid "Herschel 36"
+msgstr "Гершель 36"
 
-#: nebulae/default/names.dat:571
-msgid "Snake Nebula"
-msgstr "Туманність «Змія»"
+#: nebulae/default/names.dat:407
+msgid "Hourglass Cluster"
+msgstr "Скупчення «Клепсидра»"
 
-#: nebulae/default/names.dat:572
-msgid "The S Nebula"
-msgstr "Туманність «S»"
+#: nebulae/default/names.dat:408
+msgid "Webb's Cross"
+msgstr "Хрест Вебба"
 
-#: nebulae/default/names.dat:573
-msgid "Pipe (bowl)"
-msgstr "Люлька (чаша)"
+#: nebulae/default/names.dat:409
+msgid "Red spider Nebula"
+msgstr "Туманність «Червоний павук»"
 
-#: nebulae/default/names.dat:575
-msgid "Parrot's Head Nebula"
-msgstr "Туманність «Голова папуги»"
+#: nebulae/default/names.dat:410
+msgid "Cat's Eye Nebula"
+msgstr "Туманність «Котяче око»"
 
-#: nebulae/default/names.dat:576 nebulae/default/names.dat:577
-msgid "E Nebula"
-msgstr "Туманність «E»"
+#: nebulae/default/names.dat:411 nebulae/default/names.dat:501
+msgid "Sunflower Nebula"
+msgstr "Туманність «Соняшник»"
 
-#: nebulae/default/names.dat:578
-msgid "Fish on the platter nebula"
-msgstr "Туманність «Риба на таці»"
+#: nebulae/default/names.dat:412
+msgid "Snail Nebula"
+msgstr "Туманність «Равлик»"
 
-#: nebulae/default/names.dat:579
-msgid "Hyades"
-msgstr "Гіади"
+#: nebulae/default/names.dat:415
+msgid "Blue Racquetball Nebula"
+msgstr "Туманність «Блакитний м’ячик»"
 
-#: nebulae/default/names.dat:580
-msgid "Coalsack Nebula"
-msgstr "Туманність «Вугільний Мішок»"
+#: nebulae/default/names.dat:416
+msgid "Emerald Nebula"
+msgstr ""
 
-#: nebulae/default/names.dat:581
-msgid "Orion Cluster"
-msgstr "Скупчення у Оріоні"
+#: nebulae/default/names.dat:417
+msgid "Turquoise Orb Nebula"
+msgstr ""
 
-#: nebulae/default/names.dat:582
-msgid "Orion Belt Cluster"
-msgstr "Скупчення поясу Оріона"
+#: nebulae/default/names.dat:418
+msgid "Eagle Nebula"
+msgstr "Туманність «Орел»"
 
-#: nebulae/default/names.dat:583
-msgid "π Pup Cluster"
-msgstr "Скупчення π Корми"
+#: nebulae/default/names.dat:419
+msgid "Star Queen"
+msgstr "Туманність «Зоряна Королева»"
 
-#: nebulae/default/names.dat:584
-msgid "Tuft in the Tail of the Dog Cluster"
-msgstr "Скупчення «Китиця на хвості собаки»"
+#: nebulae/default/names.dat:420
+msgid "Black Swan Cluster"
+msgstr "Скупчення «Чорний Лебідь»"
 
-#: nebulae/default/names.dat:585
-msgid "Markarian 18 Cluster"
-msgstr "Скупчення Маркарян 18"
+#: nebulae/default/names.dat:421
+msgid "Omega Nebula"
+msgstr "Туманність «Омега»"
 
-#: nebulae/default/names.dat:586
-msgid "η Car Cluster"
-msgstr "Скупчення η Киля"
+#: nebulae/default/names.dat:422
+msgid "Swan Nebula"
+msgstr "Туманність «Лебідь»"
 
-#: nebulae/default/names.dat:587
-msgid "Ursa Major Cluster"
-msgstr "Скупчення у Великій Ведмедиці"
+#: nebulae/default/names.dat:423
+msgid "Horseshoe Nebula"
+msgstr "Туманність «Підкова»"
 
-#: nebulae/default/names.dat:588
-msgid "Antares Cluster"
-msgstr "Скупчення Антарес"
+#: nebulae/default/names.dat:424
+msgid "Checkmark Nebula"
+msgstr "Туманність «Позначка»"
 
-#: nebulae/default/names.dat:589
-msgid "Coathanger"
-msgstr "Вішалка"
+#: nebulae/default/names.dat:426 nebulae/default/names.dat:427
+msgid "Edward's Galaxy"
+msgstr "Галактика Едварда"
 
-#: nebulae/default/names.dat:590
-msgid "Al Sufi's Cluster"
-msgstr "Скупчення Аль-Суфі"
+#: nebulae/default/names.dat:428
+msgid "Tadpole Cluster"
+msgstr ""
 
-#: nebulae/default/names.dat:591
-msgid "Brocchi's Cluster"
-msgstr "Скупчення Броккі"
+#: nebulae/default/names.dat:429
+msgid "Great Sagittarius Cluster"
+msgstr "Велике скупчення у Стрільці"
 
-#: nebulae/default/names.dat:592
-msgid "Burnham's Nebula"
-msgstr "Туманність Бернгема"
+#: nebulae/default/names.dat:430
+msgid "Santa's Sleigh Cluster"
+msgstr "Скупчення «Сани Санти»"
 
-#: nebulae/default/names.dat:593
-msgid "T Tauri Nebula"
-msgstr "Туманність T Тільця"
+#: nebulae/default/names.dat:431
+msgid "Wild Duck Cluster"
+msgstr "Скупчення «Дика Качка»"
 
-#: nebulae/default/names.dat:594
-msgid "Orion Loop Nebula"
-msgstr "Туманність «Петля Оріона»"
+#: nebulae/default/names.dat:432
+msgid "July Salt-and-Pepper Cluster"
+msgstr "Липневе скупчення «Сіль і перець»"
 
-#: nebulae/default/names.dat:595
-msgid "Green Ring Nebula"
-msgstr "Туманність «Зелене кільце»"
+#: nebulae/default/names.dat:433
+msgid "Scutum Salt-and-Pepper Cluster"
+msgstr "Скупчення «Сіль і перець» у Щиті"
 
-#: nebulae/default/names.dat:597
-msgid "Little Cocoon Nebula"
-msgstr "Туманність «Малий кокон»"
+#: nebulae/default/names.dat:434
+msgid "Ring Nebula"
+msgstr "Туманність «Перстень»"
 
-#: nebulae/default/names.dat:598
-msgid "Cygnus Star Cloud"
-msgstr "Зіркова Хмара у Лебеді"
+#: nebulae/default/names.dat:435
+msgid "Chandelier Cluster"
+msgstr "Скупчення «Люстра»"
 
-#: nebulae/default/names.dat:599
-msgid "Tulip Nebula"
-msgstr "Туманність «Тюльпан»"
+#: nebulae/default/names.dat:436
+msgid "R CrA Nebula"
+msgstr "Туманність R CrA"
 
-#: nebulae/default/names.dat:600
-msgid "Cygnus Loop"
-msgstr "Петля у Лебеді"
+#: nebulae/default/names.dat:437
+msgid "Phantom Streak Nebula"
+msgstr "Туманність «Примарна смужка»"
 
-#: nebulae/default/names.dat:601
+#: nebulae/default/names.dat:438
+msgid "Bird's Head"
+msgstr "Голова Птаха"
+
+#: nebulae/default/names.dat:439
+msgid "Dandelion Puffball Nebula"
+msgstr "Туманність «Кульбаба»"
+
+#: nebulae/default/names.dat:440
+msgid "Pavo Globular Cluster"
+msgstr "Кулясте скупчення у Павичі"
+
+#: nebulae/default/names.dat:441
+msgid "The Starfish"
+msgstr "Морська зірка"
+
+#: nebulae/default/names.dat:442
+msgid "The Windmill"
+msgstr "Вітряк"
+
+#: nebulae/default/names.dat:443
+msgid "Pentagon"
+msgstr "П’ятикутник"
+
+#: nebulae/default/names.dat:444
+msgid "Snowball Nebula"
+msgstr "Туманність «Сніжка»"
+
+#: nebulae/default/names.dat:445
+msgid "Specter Cluster"
+msgstr "Скупчення «Примара»"
+
+#: nebulae/default/names.dat:446
+msgid "Hole in a Cluster"
+msgstr "Дірка у скупченні"
+
+#: nebulae/default/names.dat:447
+msgid "Nefertifi's headpiece"
+msgstr ""
+
+#: nebulae/default/names.dat:449
+msgid "The Foxhead Cluster"
+msgstr "Скупчення «Лисяча голова»"
+
+#: nebulae/default/names.dat:450
+msgid "Barnard's Galaxy"
+msgstr "Галактика Барнарда"
+
+#: nebulae/default/names.dat:451
+msgid "Blinking planetary"
+msgstr "Блимаюча планетарна туманність"
+
+#: nebulae/default/names.dat:452
+msgid "Poodle Cluster"
+msgstr "Скупчення «Пудель»"
+
+#: nebulae/default/names.dat:453
+msgid "Angelfish Cluster"
+msgstr "Скупчення «Морський Ангел»"
+
+#: nebulae/default/names.dat:454
+msgid "Arrowhead Cluster"
+msgstr "Скупчення «Наконечник Стріли»"
+
+#: nebulae/default/names.dat:455
+msgid "Dumbbell Nebula"
+msgstr "Туманність «Гантель»"
+
+#: nebulae/default/names.dat:456
+msgid "Diabolo Nebula"
+msgstr "Туманність «Діаболо»"
+
+#: nebulae/default/names.dat:457
+msgid "Apple Core Nebula"
+msgstr "Туманність «Недогризок»"
+
+#: nebulae/default/names.dat:458
+msgid "Kite Cluster"
+msgstr "Скупчення «Повітряний Змій»"
+
+#: nebulae/default/names.dat:459
+msgid "Condor Galaxy"
+msgstr "Галактика «Кондор»"
+
+#: nebulae/default/names.dat:460
+msgid "20 Vulpeculae Cluster"
+msgstr "Скупчення 20 Лисички"
+
+#: nebulae/default/names.dat:461
+msgid "Crescent Nebula"
+msgstr "Туманність «Півмісяць»"
+
+#: nebulae/default/names.dat:462
+msgid "Ear Nebula"
+msgstr "Туманність «Вухо»"
+
+#: nebulae/default/names.dat:463
+msgid "Little Ring Nebula"
+msgstr "Туманність «Мале кільце»"
+
+#: nebulae/default/names.dat:464
+msgid "Blue Flash Nebula"
+msgstr "Туманність «Блакитний спалах»"
+
+#: nebulae/default/names.dat:465
+msgid "Giant Behemoth Galaxy"
+msgstr "Галактика «Гігантський Бегемот»"
+
+#: nebulae/default/names.dat:466
+msgid "The Inchworm Cluster"
+msgstr "Скупчення «Гусінь П’ядуна»"
+
+#: nebulae/default/names.dat:467
+msgid "The Rocking Horse Cluster"
+msgstr "Скупчення «Коник-гойдалка»"
+
+#: nebulae/default/names.dat:468
+msgid "Cooling Tower"
+msgstr "Градирня"
+
+#: nebulae/default/names.dat:469
+msgid "Little Sisters"
+msgstr ""
+
+#: nebulae/default/names.dat:470
+msgid "Ghost Bush Cluster"
+msgstr "Скупчення «Примарний Кущ»"
+
+#: nebulae/default/names.dat:471
+msgid "Flying Geese Cluster"
+msgstr "Скупчення «Летючі Гуси»"
+
+#: nebulae/default/names.dat:472
+msgid "Mothra Cluster"
+msgstr "Скупчення «Мотра»"
+
+#: nebulae/default/names.dat:473
+msgid "Fireworks Galaxy"
+msgstr "Галактика «Феєрверк»"
+
+#: nebulae/default/names.dat:474
+msgid "Filamentary Nebula"
+msgstr "Ниткоподібна туманність"
+
+#: nebulae/default/names.dat:475
+msgid "West Veil Nebula"
+msgstr "Туманність «Західна Вуаль»"
+
+#: nebulae/default/names.dat:476
+msgid "Cirrus Nebula"
+msgstr "Туманність «Чубчик»"
+
+#: nebulae/default/names.dat:477
+msgid "Witch's Broom Nebula"
+msgstr "Туманність «Відьмина мітла»"
+
+#: nebulae/default/names.dat:478
+msgid "Fleming's Triangular Wisp"
+msgstr ""
+
+#: nebulae/default/names.dat:479
+msgid "Witch's Broom Galaxy"
+msgstr "Галактика «Відьмина мітла»"
+
+#: nebulae/default/names.dat:480
+msgid "East Veil Nebula"
+msgstr "Туманність «Східна Вуаль»"
+
+#: nebulae/default/names.dat:481
+msgid "Network Nebula"
+msgstr "Туманність «Сітка»"
+
+#: nebulae/default/names.dat:482 nebulae/default/names.dat:632
 msgid "Veil Nebula"
 msgstr "Туманність «Вуаль»"
 
+#: nebulae/default/names.dat:483
+msgid "Bird's Nest"
+msgstr ""
+
+#: nebulae/default/names.dat:484
+msgid "North America Nebula"
+msgstr "Туманність «Північна Америка»"
+
+#: nebulae/default/names.dat:485
+msgid "Fetus Nebula"
+msgstr "Туманність «Ембріон»"
+
+#: nebulae/default/names.dat:486
+msgid "Coat Button Nebula"
+msgstr "Туманність «Ґудзик на плащі»"
+
+#: nebulae/default/names.dat:487
+msgid "Saturn Nebula"
+msgstr "Туманність «Сатурн»"
+
+#: nebulae/default/names.dat:488
+msgid "Iris Nebula"
+msgstr "Туманність «Ірис»"
+
+#: nebulae/default/names.dat:489
+msgid "Cheeseburger Nebula"
+msgstr "Туманність «Чизбурґер»"
+
+#: nebulae/default/names.dat:490
+msgid "Pink Pillow Nebula"
+msgstr "Туманність «Рожева Пігулка»"
+
+#: nebulae/default/names.dat:491
+msgid "Magic Carpet Nebula"
+msgstr "Туманність «Чарівний Килим»"
+
+#: nebulae/default/names.dat:492
+msgid "Green Rectangle Nebula"
+msgstr "Туманність «Зелений Прямокутник»"
+
+#: nebulae/default/names.dat:493
+msgid "Pegasus Cluster"
+msgstr "Скупчення у Пегасі"
+
+#: nebulae/default/names.dat:494
+msgid "Jellyfish Cluster"
+msgstr "Скупчення «Медуза»"
+
+#: nebulae/default/names.dat:495
+msgid "Small Cluster Nebula"
+msgstr "Туманність «Мале скупчення»"
+
+#: nebulae/default/names.dat:496
+msgid "NGC 7129 IR Cluster"
+msgstr "ІЧ-скупчення NGC 7129"
+
+#: nebulae/default/names.dat:497
+msgid "Star Lizard Cluster"
+msgstr "Скупчення «Зоряна Ящірка»"
+
+#: nebulae/default/names.dat:498
+msgid "Drunken Lizard Cluster"
+msgstr "Скупчення «П’яна Ящірка»"
+
+#: nebulae/default/names.dat:499
+msgid "Atoms for Peace Galaxy"
+msgstr "Галактика «Мирний атом»"
+
+#: nebulae/default/names.dat:500
+msgid "Helix Nebula"
+msgstr "Спіральна туманність"
+
+#: nebulae/default/names.dat:502 nebulae/default/names.dat:503
+#: nebulae/default/names.dat:504 nebulae/default/names.dat:505
+msgid "Stephan's Quintet"
+msgstr "«Квінтет Стефана»"
+
+#: nebulae/default/names.dat:506
+msgid "Deer Lick Group"
+msgstr "Група Оленя"
+
+#: nebulae/default/names.dat:507
+msgid "The Wizard Nebula"
+msgstr "Туманність «Чарівник»"
+
+#: nebulae/default/names.dat:508
+msgid "Grand Design Galaxy"
+msgstr "Галактика «Великий задум»"
+
+#: nebulae/default/names.dat:509
+msgid "Superman Galaxy"
+msgstr "Галактика «Супермен»"
+
+#: nebulae/default/names.dat:510
+msgid "The Dormouse Cluster"
+msgstr "Скупчення «Вовчок»"
+
+#: nebulae/default/names.dat:511
+msgid "The Arrowhead Cluster"
+msgstr "Скупчення «Вістря Стріли»"
+
+#: nebulae/default/names.dat:512 nebulae/default/names.dat:513
+#: nebulae/default/names.dat:514 nebulae/default/names.dat:515
+msgid "Grus Quartet"
+msgstr "Квартет у Журавлі"
+
+#: nebulae/default/names.dat:516 nebulae/default/names.dat:521
+msgid "Bubble Nebula"
+msgstr "Туманність «Бульбашка»"
+
+#: nebulae/default/names.dat:517
+msgid "Cassiopeia Salt-and-Pepper Cluster"
+msgstr "Скупчення «Сіль і перець» у Кассіопеї"
+
+#: nebulae/default/names.dat:518
+msgid "October Salt-and-Pepper Cluster"
+msgstr "Жовтневе скупчення «Сіль і перець»"
+
+#: nebulae/default/names.dat:519
+msgid "Blue Snowball"
+msgstr "Блакитний Сніжок"
+
+#: nebulae/default/names.dat:520
+msgid "Copeland's Blue Snowball"
+msgstr "Блакитний сніжок Коупленда"
+
+#: nebulae/default/names.dat:522
+msgid "Fried-egg Galaxy"
+msgstr "Галактика «Яєшня»"
+
+#: nebulae/default/names.dat:523
+msgid "Caroline's Rose Cluster"
+msgstr "Скупчення «Роза Кароліни»"
+
+#: nebulae/default/names.dat:524
+msgid "Ghost Cluster"
+msgstr "Скупчення «Привид»"
+
+#: nebulae/default/names.dat:525
+msgid "Star Mist Cluster"
+msgstr "Скупчення «Зоряний Туман»"
+
+#: nebulae/default/names.dat:526
+msgid "The Widow's Web Cluster"
+msgstr "Скупчення «Сітка Вдови»"
+
+#: nebulae/default/names.dat:527
+msgid "The Little Sombrero Galaxy"
+msgstr "Галактика «Мале Сомбреро»"
+
+#: nebulae/default/names.dat:528
+msgid "Electric Arc Galaxy"
+msgstr "Галактика «Електрична Арка»"
+
+#: nebulae/default/names.dat:529
+msgid "Starburst Galaxy"
+msgstr "Галактика «Зоряний вибух»"
+
+#: nebulae/default/names.dat:530 nebulae/default/names.dat:531
+msgid "γ Cas Nebula"
+msgstr "Туманність γ Кассіопеї"
+
+#: nebulae/default/names.dat:532
+msgid "Maffei 1 Group"
+msgstr ""
+
+#: nebulae/default/names.dat:533
+msgid "ο Per Cloud"
+msgstr "Хмара ο Персея"
+
+#: nebulae/default/names.dat:534
+msgid "Gingrich 1"
+msgstr "Ґінґріх 1"
+
+#: nebulae/default/names.dat:535
+msgid "Barnard's Merope Nebula"
+msgstr "Туманність Меропи Барнарда"
+
+#: nebulae/default/names.dat:536
+msgid "Flaming Star Nebula"
+msgstr "Туманність «Палаюча Зірка»"
+
+#: nebulae/default/names.dat:537
+msgid "The Tadpoles"
+msgstr "Пуголовки"
+
+#: nebulae/default/names.dat:538
+msgid "Spider Nebula"
+msgstr "Туманність «Павук»"
+
+#: nebulae/default/names.dat:539
+msgid "Spirograph Nebula"
+msgstr "Туманність «Спірограф»"
+
+#: nebulae/default/names.dat:540
+msgid "Raspberry Nebula"
+msgstr "Туманність «Малина»"
+
+#: nebulae/default/names.dat:541
+msgid "Jellyfish Nebula"
+msgstr "Туманність «Медуза»"
+
+#: nebulae/default/names.dat:542
+msgid "Gemini A"
+msgstr "Близнюки A"
+
+#: nebulae/default/names.dat:543
+msgid "Papillon"
+msgstr "Галактика Папільйона"
+
+#: nebulae/default/names.dat:544
+msgid "γ Cyg Nebula"
+msgstr "Туманність γ Лебедя"
+
+#: nebulae/default/names.dat:545
+msgid "ZW II 108 Group"
+msgstr "Група ZW II 108"
+
+#: nebulae/default/names.dat:546
+msgid "Elephant's Trunk Nebula"
+msgstr "Туманність «Хобот слона»"
+
+#: nebulae/default/names.dat:547
+msgid "Fish Head Nebula"
+msgstr "Туманність «Голова Риби»"
+
+#: nebulae/default/names.dat:548
+msgid "Heart Nebula"
+msgstr "Туманність «Серце»"
+
+#: nebulae/default/names.dat:549
+msgid "The Running Dog Nebula"
+msgstr "Туманність «Собака, що біжить»"
+
+#: nebulae/default/names.dat:550
+msgid "Valentine Nebula"
+msgstr "Туманність «Валентин»"
+
+#: nebulae/default/names.dat:551
+msgid "AFGL 333 Cloud"
+msgstr "Хмара AFGL 333"
+
+#: nebulae/default/names.dat:552
+msgid "Soul Nebula"
+msgstr "Туманність «Дух»"
+
+#: nebulae/default/names.dat:553
+msgid "Witch Head Nebula"
+msgstr "Туманність «Голова Відьми»"
+
+#: nebulae/default/names.dat:554
+msgid "Toby Jug Nebula"
+msgstr "Туманність «Пивний Кухоль»"
+
+#: nebulae/default/names.dat:556
+msgid "ο Vel Cluster"
+msgstr "Скупчення ο Вітрил"
+
+#: nebulae/default/names.dat:557
+msgid "Browning Galaxy"
+msgstr "Галактика Браунінґа"
+
+#: nebulae/default/names.dat:558
+msgid "Coddington's Nebula"
+msgstr "Туманність Коддінґтона"
+
+#: nebulae/default/names.dat:559
+msgid "Southern Pleiades"
+msgstr "Південні Плеяди"
+
+#: nebulae/default/names.dat:560
+msgid "θ Car Cluster"
+msgstr "Скупчення θ Кіля"
+
+#: nebulae/default/names.dat:561
+msgid "Running Chicken Nebula"
+msgstr "Туманність «Курча, що біжить»"
+
+#: nebulae/default/names.dat:562
+msgid "λ Cen Nebula"
+msgstr "Туманність λ Центравра"
+
+#: nebulae/default/names.dat:563
+msgid "Thackeray's Globules"
+msgstr "Кульки Теккерея"
+
+#: nebulae/default/names.dat:564
+msgid "Lemon slice Nebula"
+msgstr "Туманність «Скибка лимону»"
+
+#: nebulae/default/names.dat:565
+msgid "Theoretician's Nebula"
+msgstr "Туманність Теоретика"
+
+#: nebulae/default/names.dat:566
+msgid "Baby Eskimo Nebula"
+msgstr "Туманність «Малий Ескімос»"
+
+#: nebulae/default/names.dat:568
+msgid "Retina Nebula"
+msgstr "Туманність «Сітківка»"
+
+#: nebulae/default/names.dat:569
+msgid "Blue Horsehead Nebula"
+msgstr "Туманність «Синя Кінська Голова»"
+
+#: nebulae/default/names.dat:570
+msgid "White-eyed Pea Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:571
+msgid "ρ Oph Nebula"
+msgstr "Туманність ρ Орфея"
+
+#: nebulae/default/names.dat:572 nebulae/default/names.dat:656
+msgid "Antares Nebula"
+msgstr "Туманність Антареса"
+
+#: nebulae/default/names.dat:573
+msgid "Prawn Nebula"
+msgstr "Туманність «Креветка»"
+
+#: nebulae/default/names.dat:574
+msgid "Summer Beehive Cluster"
+msgstr "Скупчення «Літній рій бджіл»"
+
+#: nebulae/default/names.dat:575
+msgid "Poseidon's Trident Cluster"
+msgstr "Скупчення «Тризубець Посейдона»"
+
+#: nebulae/default/names.dat:576
+msgid "Graff's Cluster"
+msgstr "Скупчення Ґраффа"
+
+#: nebulae/default/names.dat:577
+msgid "Shapley-Ames 5"
+msgstr "Шеплі-Амес 5"
+
+#: nebulae/default/names.dat:578
+msgid "P Cyg Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:579
+msgid "Pelican Nebula"
+msgstr "Туманність «Пелікан»"
+
+#: nebulae/default/names.dat:580 nebulae/default/names.dat:582
+msgid "Cocoon Nebula"
+msgstr "Туманність «Кокон»"
+
+#: nebulae/default/names.dat:581
+msgid "Southern Integral Sign"
+msgstr "Південний знак інтеграла"
+
+#: nebulae/default/names.dat:583
+msgid "Lagoon Nebula"
+msgstr "Туманність «Лагуна»"
+
+#: nebulae/default/names.dat:584
+msgid "Small Sagittarius Star Cloud"
+msgstr "Мала зоряна хмара Стрільця"
+
+#: nebulae/default/names.dat:585
+msgid "Delle Caustiche"
+msgstr "«Каустична Долина»"
+
+#: nebulae/default/names.dat:586
+msgid "Winnecke 4"
+msgstr "Віннеке 4"
+
+#: nebulae/default/names.dat:587 skycultures/western_rey/star_names.fab:26
+msgid "Pleiades"
+msgstr "Плеяди"
+
+#: nebulae/default/names.dat:588
+msgid "Seven Sisters"
+msgstr "Сім сестер"
+
+#: nebulae/default/names.dat:589
+msgid "Subaru"
+msgstr "Субару"
+
+#: nebulae/default/names.dat:590
+msgid "α Per Cluster"
+msgstr "Скупчення α Персея"
+
+#: nebulae/default/names.dat:591
+msgid "α Per Moving Group"
+msgstr "Рухома група α Персея"
+
+#: nebulae/default/names.dat:592
+msgid "Coma Berenices Cluster"
+msgstr "Скупчення у Волоссі Вероніки"
+
+#: nebulae/default/names.dat:593
+msgid "Coma Star Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:594
+msgid "Taurus Poniatovii Cluster"
+msgstr "Скупчення «Телець Понятовського»"
+
+#: nebulae/default/names.dat:595
+msgid "Taurus Dark Cloud Nebula"
+msgstr "Туманність «Темна хмара Тільця»"
+
+#: nebulae/default/names.dat:596
+msgid "Horsehead Nebula"
+msgstr "Туманність «Кінська Голова»"
+
+#: nebulae/default/names.dat:597 nebulae/default/names.dat:598
+#: nebulae/default/names.dat:599 nebulae/default/names.dat:600
+msgid "Pipe (stem)"
+msgstr "Люлька (чубук)"
+
+#: nebulae/default/names.dat:601 nebulae/default/names.dat:605
+msgid "Ink Spot Nebula"
+msgstr "Туманність «Чорнильна пляма»"
+
 #: nebulae/default/names.dat:602
+msgid "Snake Nebula"
+msgstr "Туманність «Змія»"
+
+#: nebulae/default/names.dat:603
+msgid "The S Nebula"
+msgstr "Туманність «S»"
+
+#: nebulae/default/names.dat:604
+msgid "Pipe (bowl)"
+msgstr "Люлька (чаша)"
+
+#: nebulae/default/names.dat:606
+msgid "Parrot's Head Nebula"
+msgstr "Туманність «Голова папуги»"
+
+#: nebulae/default/names.dat:607 nebulae/default/names.dat:608
+msgid "E Nebula"
+msgstr "Туманність «E»"
+
+#: nebulae/default/names.dat:609
+msgid "Fish on the platter nebula"
+msgstr "Туманність «Риба на таці»"
+
+#: nebulae/default/names.dat:610
+msgid "Hyades"
+msgstr "Гіади"
+
+#: nebulae/default/names.dat:611
+msgid "Coalsack Nebula"
+msgstr "Туманність «Вугільний Мішок»"
+
+#: nebulae/default/names.dat:612
+msgid "Orion Cluster"
+msgstr "Скупчення у Оріоні"
+
+#: nebulae/default/names.dat:613
+msgid "Orion Belt Cluster"
+msgstr "Скупчення поясу Оріона"
+
+#: nebulae/default/names.dat:614
+msgid "π Pup Cluster"
+msgstr "Скупчення π Корми"
+
+#: nebulae/default/names.dat:615
+msgid "Tuft in the Tail of the Dog Cluster"
+msgstr "Скупчення «Китиця на хвості собаки»"
+
+#: nebulae/default/names.dat:616
+msgid "Markarian 18 Cluster"
+msgstr "Скупчення Маркарян 18"
+
+#: nebulae/default/names.dat:617
+msgid "η Car Cluster"
+msgstr "Скупчення η Киля"
+
+#: nebulae/default/names.dat:618
+msgid "Ursa Major Cluster"
+msgstr "Скупчення у Великій Ведмедиці"
+
+#: nebulae/default/names.dat:619
+msgid "Antares Cluster"
+msgstr "Скупчення Антарес"
+
+#: nebulae/default/names.dat:620
+msgid "Coathanger"
+msgstr "Вішалка"
+
+#: nebulae/default/names.dat:621
+msgid "Al Sufi's Cluster"
+msgstr "Скупчення Аль-Суфі"
+
+#: nebulae/default/names.dat:622
+msgid "Brocchi's Cluster"
+msgstr "Скупчення Броккі"
+
+#: nebulae/default/names.dat:623
+msgid "Burnham's Nebula"
+msgstr "Туманність Бернгема"
+
+#: nebulae/default/names.dat:624
+msgid "T Tauri Nebula"
+msgstr "Туманність T Тільця"
+
+#: nebulae/default/names.dat:625
+msgid "Orion Loop Nebula"
+msgstr "Туманність «Петля Оріона»"
+
+#: nebulae/default/names.dat:626
+msgid "Green Ring Nebula"
+msgstr "Туманність «Зелене кільце»"
+
+#: nebulae/default/names.dat:628
+msgid "Little Cocoon Nebula"
+msgstr "Туманність «Малий кокон»"
+
+#: nebulae/default/names.dat:629
+msgid "Cygnus Star Cloud"
+msgstr "Зіркова Хмара у Лебеді"
+
+#: nebulae/default/names.dat:630
+msgid "Tulip Nebula"
+msgstr "Туманність «Тюльпан»"
+
+#: nebulae/default/names.dat:631
+msgid "Cygnus Loop"
+msgstr "Петля у Лебеді"
+
+#: nebulae/default/names.dat:633
 msgid "Sadr Region"
 msgstr "Область Садр"
 
-#: nebulae/default/names.dat:603
+#: nebulae/default/names.dat:634
 msgid "Flying Bat Nebula"
 msgstr "Туманність «Летюча миша»"
 
-#: nebulae/default/names.dat:604 nebulae/default/names.dat:625
+#: nebulae/default/names.dat:635 nebulae/default/names.dat:658
 msgid "Cave Nebula"
 msgstr "Туманність «Печера»"
 
-#: nebulae/default/names.dat:605
+#: nebulae/default/names.dat:636
+msgid "Californietto Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:637
 msgid "Dreyer's Object"
 msgstr "Об’єкт Дреєра"
 
-#: nebulae/default/names.dat:606
+#: nebulae/default/names.dat:638
 msgid "Pacman Nebula"
 msgstr "Туманність «Пакмен»"
 
-#: nebulae/default/names.dat:607
+#: nebulae/default/names.dat:639
 msgid "Dolphin Nebula"
 msgstr "Туманність «Дельфін»"
 
-#: nebulae/default/names.dat:608
+#: nebulae/default/names.dat:640
 msgid "Second Closest Planetary"
 msgstr "Друга найближча планетарна"
 
-#: nebulae/default/names.dat:609
+#: nebulae/default/names.dat:641
 msgid "Northern Trifid"
 msgstr "Північний Трифід"
 
-#: nebulae/default/names.dat:610
+#: nebulae/default/names.dat:642
 msgid "Spaghetti Nebula"
 msgstr "Туманність «Спагетті»"
 
-#: nebulae/default/names.dat:611
+#: nebulae/default/names.dat:643
 msgid "Simeis 147"
 msgstr "Сімеїз 147"
 
-#: nebulae/default/names.dat:612
+#: nebulae/default/names.dat:644
 msgid "Lower's Nebula"
 msgstr "Туманність Лоуера"
 
-#: nebulae/default/names.dat:613
+#: nebulae/default/names.dat:645
 msgid "Angelfish Nebula"
 msgstr "Туманність «Риба-янгол»"
 
-#: nebulae/default/names.dat:614
+#: nebulae/default/names.dat:646
 msgid "Orion's Head Nebula"
 msgstr "Туманність «Голова» у Оріоні"
 
-#: nebulae/default/names.dat:615
+#: nebulae/default/names.dat:647
 msgid "North Orion Bubble"
 msgstr "Булька Північного Оріона"
 
-#: nebulae/default/names.dat:616
+#: nebulae/default/names.dat:648
 msgid "Medusa Nebula"
 msgstr "Туманність «Медуза»"
 
-#: nebulae/default/names.dat:618
+#: nebulae/default/names.dat:650
 msgid "Barnard's Loop"
 msgstr "Петля Барнарда"
 
-#: nebulae/default/names.dat:619
+#: nebulae/default/names.dat:651
 msgid "Seagull Nebula"
 msgstr "Туманність «Чайка»"
 
-#: nebulae/default/names.dat:620
+#: nebulae/default/names.dat:652
+msgid "Seagull's wings"
+msgstr ""
+
+#: nebulae/default/names.dat:653
 msgid "Snowman Nebula"
 msgstr "Туманність «Сніговик»"
 
-#: nebulae/default/names.dat:621
+#: nebulae/default/names.dat:654
 msgid "Etched Hourglass Nebula"
 msgstr "Туманність «Пісковий Годинник»"
 
-#: nebulae/default/names.dat:622
+#: nebulae/default/names.dat:655
 msgid "Engraved Hourglass Nebula"
 msgstr "Туманність «Гравірований Пісковий Годинник»"
 
-#: nebulae/default/names.dat:624
+#: nebulae/default/names.dat:657
 msgid "Ghost Nebula"
 msgstr "Туманність «Привид»"
 
-#: nebulae/default/names.dat:626
+#: nebulae/default/names.dat:659
 msgid "Vulture Head Nebula"
 msgstr "Туманність «Голова Грифа»"
 
-#: nebulae/default/names.dat:627
+#: nebulae/default/names.dat:660
 msgid "Baby Eagle Nebula"
 msgstr "Туманність «Орлятко»"
 
-#: nebulae/default/names.dat:628
+#: nebulae/default/names.dat:661
 msgid "Orion B"
 msgstr "Оріон B"
 
-#: nebulae/default/names.dat:629
+#: nebulae/default/names.dat:662
+msgid "Coalman Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:663
 msgid "Northern Coalsack Nebula"
 msgstr "Туманність «Північний Вугільний Мішок»"
 
-#: nebulae/default/names.dat:630
+#: nebulae/default/names.dat:664
 msgid "Gulf of Mexico Nebula"
 msgstr "Туманність «Мексиканська затока»"
 
-#: nebulae/default/names.dat:631 nebulae/default/names.dat:633
+#: nebulae/default/names.dat:666 nebulae/default/names.dat:668
 msgid "Taffy Galaxies"
 msgstr "Галактики Таффі"
 
-#: nebulae/default/names.dat:632 nebulae/default/names.dat:634
+#: nebulae/default/names.dat:667 nebulae/default/names.dat:669
 msgid "Taffy System"
 msgstr "Система Таффі"
 
-#: nebulae/default/names.dat:635
+#: nebulae/default/names.dat:670
 msgid "Wolf-Lundmark-Melotte Object (WLM)"
 msgstr "Об’єкт Вульфа-Лундмарка-Мелота (WLM)"
 
-#: nebulae/default/names.dat:636
+#: nebulae/default/names.dat:671
 msgid "Sculptor Dwarf Irregular Galaxy"
 msgstr "Карликова неправильна галактика у Скульпторі"
 
-#: nebulae/default/names.dat:637
+#: nebulae/default/names.dat:672
 msgid "Andromeda III Dwarf Galaxy"
 msgstr "Карликова галактика Андромеда III"
 
-#: nebulae/default/names.dat:638
+#: nebulae/default/names.dat:673
 msgid "Cartwheel Galaxy"
 msgstr "Галактика «Колесо»"
 
-#: nebulae/default/names.dat:639
+#: nebulae/default/names.dat:674
 msgid "Cartwheel Ring Galaxy"
 msgstr "Галактика «Обід колеса»"
 
-#: nebulae/default/names.dat:640
+#: nebulae/default/names.dat:675
 msgid "Zwicky's Ellipse"
 msgstr "Еліпс Цвікі"
 
-#: nebulae/default/names.dat:641
+#: nebulae/default/names.dat:676
 msgid "Exclamation Mark Galaxy"
 msgstr "Галактика «Знак оклику»"
 
-#: nebulae/default/names.dat:642
+#: nebulae/default/names.dat:677
 msgid "Andromeda I Dwarf Galaxy"
 msgstr "Карликова галактика Андромеда I"
 
-#: nebulae/default/names.dat:644
+#: nebulae/default/names.dat:679
 msgid "Baade's Galaxy A"
 msgstr "Галактика Бааде A"
 
-#: nebulae/default/names.dat:645
+#: nebulae/default/names.dat:680
 msgid "Baade's Galaxy B"
 msgstr "Галактика Бааде B"
 
-#: nebulae/default/names.dat:646
+#: nebulae/default/names.dat:681
 msgid "Sculptor Dwarf Galaxy"
 msgstr "Карликова галактика у Скульпторі"
 
-#: nebulae/default/names.dat:647
+#: nebulae/default/names.dat:682
 msgid "Pisces Dwarf Galaxy"
 msgstr "Карликова галактика у Рибах"
 
-#: nebulae/default/names.dat:648
+#: nebulae/default/names.dat:683
 msgid "Pisces I"
 msgstr "Риби I"
 
-#: nebulae/default/names.dat:649
+#: nebulae/default/names.dat:684
 msgid "Shapley-Ames 1"
 msgstr "Шеплі-Амес 1"
 
-#: nebulae/default/names.dat:650
+#: nebulae/default/names.dat:685
 msgid "Andromeda II"
 msgstr "Андромеда II"
 
-#: nebulae/default/names.dat:651
+#: nebulae/default/names.dat:686
 msgid "Andromeda II Dwarf Galaxy"
 msgstr "Карликова галактика Андромеда II"
 
-#: nebulae/default/names.dat:652
+#: nebulae/default/names.dat:687
 msgid "White Rose Galaxy"
 msgstr "Галактика «Біла Троянда»"
 
-#: nebulae/default/names.dat:653
+#: nebulae/default/names.dat:688
 msgid "Phoenix Dwarf Galaxy"
 msgstr "Карликова галактика у Феніксі"
 
-#: nebulae/default/names.dat:654
+#: nebulae/default/names.dat:689
 msgid "Schuster-West Cluster"
 msgstr "Скупчення Шустера-Веста"
 
-#: nebulae/default/names.dat:655
+#: nebulae/default/names.dat:690
 msgid "Maffei 1"
 msgstr "Маффеї 1"
 
-#: nebulae/default/names.dat:656
+#: nebulae/default/names.dat:691
 msgid "Holmberg VI"
 msgstr "Гольмберґ VI"
 
-#: nebulae/default/names.dat:657
+#: nebulae/default/names.dat:692
 msgid "Fornax Dwarf Galaxy"
 msgstr "Карликова галактика у Печі"
 
-#: nebulae/default/names.dat:658
+#: nebulae/default/names.dat:693
 msgid "Maffei 2"
 msgstr "Маффеї 2"
 
-#: nebulae/default/names.dat:659
+#: nebulae/default/names.dat:694
 msgid "E1 Cluster"
 msgstr "Скупчення E1"
 
-#: nebulae/default/names.dat:660
+#: nebulae/default/names.dat:695
 msgid "Schuster's Spiral Galaxy"
 msgstr "Спіральна галактика Шустера"
 
-#: nebulae/default/names.dat:661
+#: nebulae/default/names.dat:696
 msgid "Horologium Dwarf Galaxy"
 msgstr "Карликова галактика у Годиннику"
 
-#: nebulae/default/names.dat:662
+#: nebulae/default/names.dat:697
 msgid "Carafe Nebula"
 msgstr "Туманність «Карафка»"
 
-#: nebulae/default/names.dat:663
+#: nebulae/default/names.dat:698
 msgid "Large Magellanic Cloud"
 msgstr "Велика Магелланова Хмара"
 
-#: nebulae/default/names.dat:664
+#: nebulae/default/names.dat:699
 msgid "Nubecula Major"
 msgstr "Велика Магелланова Хмара"
 
-#: nebulae/default/names.dat:665
+#: nebulae/default/names.dat:700
 msgid "Orion Dwarf Galaxy"
 msgstr "Карликова галактика у Оріоні"
 
-#: nebulae/default/names.dat:666
+#: nebulae/default/names.dat:701
 msgid "Carina Dwarf Galaxy"
 msgstr "Карликова галактика у Килі"
 
-#: nebulae/default/names.dat:667
+#: nebulae/default/names.dat:702
 msgid "Southern Ellipse"
 msgstr "Південний Еліпс"
 
-#: nebulae/default/names.dat:668
+#: nebulae/default/names.dat:703
 msgid "Lindsay-Shapley Ring"
 msgstr "Кільце Ліндсея-Шеплі"
 
-#: nebulae/default/names.dat:669
+#: nebulae/default/names.dat:704
 msgid "Graham A"
 msgstr "Грем A"
 
-#: nebulae/default/names.dat:670
+#: nebulae/default/names.dat:705
 msgid "Argo Dwarf Irregular Galaxy"
 msgstr "Неправильна карликова галактика у Арго"
 
-#: nebulae/default/names.dat:671
+#: nebulae/default/names.dat:706
 msgid "Integral Sign Galaxy"
 msgstr "Галактика «Інтеграл»"
 
-#: nebulae/default/names.dat:672
+#: nebulae/default/names.dat:707
 msgid "Phoenix Galaxy"
 msgstr "Галактика «Фенікс»"
 
-#: nebulae/default/names.dat:673
+#: nebulae/default/names.dat:708
 msgid "Holmberg II"
 msgstr "Гольмберґ II"
 
-#: nebulae/default/names.dat:674
+#: nebulae/default/names.dat:709
 msgid "M81 Dwarf A"
 msgstr "Карликова M81 A"
 
-#: nebulae/default/names.dat:675
+#: nebulae/default/names.dat:710
 msgid "Holmberg III"
 msgstr "Гольмберґ III"
 
-#: nebulae/default/names.dat:676
+#: nebulae/default/names.dat:711
 msgid "Grasshopper A"
 msgstr "Коник A"
 
-#: nebulae/default/names.dat:677 nebulae/default/names.dat:776
+#: nebulae/default/names.dat:712 nebulae/default/names.dat:811
 msgid "Hydra A"
 msgstr "Гідра A"
 
-#: nebulae/default/names.dat:678
+#: nebulae/default/names.dat:713
 msgid "Holmberg I"
 msgstr "Гольмберґ I"
 
-#: nebulae/default/names.dat:679
+#: nebulae/default/names.dat:714
 msgid "Holmberg IX"
 msgstr "Гольмберґ IX"
 
-#: nebulae/default/names.dat:680
+#: nebulae/default/names.dat:715
 msgid "Arp Loop"
 msgstr "Петля Арпа"
 
-#: nebulae/default/names.dat:681
+#: nebulae/default/names.dat:716
 msgid "Sextans B"
 msgstr "Секстант B"
 
-#: nebulae/default/names.dat:682
+#: nebulae/default/names.dat:717
 msgid "Revolver Galaxy"
 msgstr "Галактика «Револьвер»"
 
-#: nebulae/default/names.dat:684
+#: nebulae/default/names.dat:719
 msgid "Antlia Dwarf Galaxy"
 msgstr "Карликова галактика у Насосі"
 
-#: nebulae/default/names.dat:685
+#: nebulae/default/names.dat:720
 msgid "M81 Dwarf B"
 msgstr "Карликова M81 B"
 
-#: nebulae/default/names.dat:686
+#: nebulae/default/names.dat:721
 msgid "Vela Ring Galaxy"
 msgstr "Кільцева галактика Вели"
 
-#: nebulae/default/names.dat:687
+#: nebulae/default/names.dat:722
 msgid "Sextans A"
 msgstr "Секстант A"
 
-#: nebulae/default/names.dat:688
+#: nebulae/default/names.dat:723
 msgid "Haro II"
 msgstr "Гаро II"
 
-#: nebulae/default/names.dat:689
+#: nebulae/default/names.dat:724
 msgid "Spider Galaxy"
 msgstr "Галактика «Павук»"
 
-#: nebulae/default/names.dat:690
+#: nebulae/default/names.dat:725
 msgid "Ant Galaxy"
 msgstr "Галактика «Мураха»"
 
-#: nebulae/default/names.dat:691
+#: nebulae/default/names.dat:726
 msgid "Mayall's Object"
 msgstr "Об’єкт Маяла"
 
-#: nebulae/default/names.dat:692
+#: nebulae/default/names.dat:727
 msgid "Leo II Dwarf Galaxy"
 msgstr "Карликова галактика Лев II"
 
-#: nebulae/default/names.dat:693
+#: nebulae/default/names.dat:728
 msgid "Leo B"
 msgstr "Лев B"
 
-#: nebulae/default/names.dat:694
+#: nebulae/default/names.dat:729
 msgid "Harrington-Wilson #2"
 msgstr "Гаррінґтон-Вілсон 2"
 
-#: nebulae/default/names.dat:695
+#: nebulae/default/names.dat:730
 msgid "Arp's Galaxy"
 msgstr "Галактика Арпа"
 
-#: nebulae/default/names.dat:696
+#: nebulae/default/names.dat:731
 msgid "A Flying Bird"
 msgstr "Летючий птах A"
 
-#: nebulae/default/names.dat:697 nebulae/default/names.dat:698
-#: nebulae/default/names.dat:699
+#: nebulae/default/names.dat:732 nebulae/default/names.dat:733
+#: nebulae/default/names.dat:734
 msgid "Wild's Triplet"
 msgstr "Трійка Вайлда"
 
-#: nebulae/default/names.dat:700
+#: nebulae/default/names.dat:735
 msgid "Syphon"
 msgstr "Сифон"
 
-#: nebulae/default/names.dat:701
+#: nebulae/default/names.dat:736
 msgid "Reinmuth 80"
 msgstr "Райнмут 80"
 
-#: nebulae/default/names.dat:702
+#: nebulae/default/names.dat:737
 msgid "Holmberg VII"
 msgstr "Гольмберґ VII"
 
-#: nebulae/default/names.dat:703
+#: nebulae/default/names.dat:738
 msgid "Malin 1"
 msgstr "Мелін 1"
 
-#: nebulae/default/names.dat:704
+#: nebulae/default/names.dat:739
 msgid "Shapley-Ames 3"
 msgstr "Шеплі-Амес 3"
 
-#: nebulae/default/names.dat:705
+#: nebulae/default/names.dat:740
 msgid "Shapley-Ames 4"
 msgstr "Шеплі-Амес 4"
 
-#: nebulae/default/names.dat:706
+#: nebulae/default/names.dat:741
 msgid "Imprint of a Foot Galaxy"
 msgstr "Галактика «Відбиток Ноги»"
 
-#: nebulae/default/names.dat:707
+#: nebulae/default/names.dat:742
 msgid "Hardcastle's Galaxy"
 msgstr "Галактика Гардкасла"
 
-#: nebulae/default/names.dat:708
+#: nebulae/default/names.dat:743
 msgid "Holmberg VIII"
 msgstr "Гольмберґ VIII"
 
-#: nebulae/default/names.dat:709
+#: nebulae/default/names.dat:744
 msgid "Fourcade-Figueroa Object"
 msgstr "Об’єкт Фуркада-Фіґероа"
 
-#: nebulae/default/names.dat:710
+#: nebulae/default/names.dat:745
 msgid "Fourcade-Figueroa Galaxy"
 msgstr "Галактика Фуркада-Фіґероа"
 
-#: nebulae/default/names.dat:711
+#: nebulae/default/names.dat:746
 msgid "Holmberg V"
 msgstr "Гольмберґ V"
 
-#: nebulae/default/names.dat:712
+#: nebulae/default/names.dat:747
 msgid "Holmberg IV"
 msgstr "Гольмберґ IV"
 
-#: nebulae/default/names.dat:713
+#: nebulae/default/names.dat:748
 msgid "Circinus Galaxy"
 msgstr "Галактика у Циркулі"
 
-#: nebulae/default/names.dat:714
+#: nebulae/default/names.dat:749
 msgid "Segner's Wheel"
 msgstr "Сегнерове колесо"
 
-#: nebulae/default/names.dat:715
+#: nebulae/default/names.dat:750
 msgid "Ursa Minor Dwarf Galaxy"
 msgstr "Карликова галактика у Малій Ведмедиці"
 
-#: nebulae/default/names.dat:716
+#: nebulae/default/names.dat:751
 msgid "Hooked Galaxy"
 msgstr "Крючкувата галактика"
 
-#: nebulae/default/names.dat:717 nebulae/default/names.dat:718
-#: nebulae/default/names.dat:719
+#: nebulae/default/names.dat:752 nebulae/default/names.dat:753
+#: nebulae/default/names.dat:754
 msgid "Zwicky's Triplet"
 msgstr "Триплет Цвіккі"
 
-#: nebulae/default/names.dat:720
+#: nebulae/default/names.dat:755
 msgid "Hercules A"
 msgstr "Геркулес A"
 
-#: nebulae/default/names.dat:721
+#: nebulae/default/names.dat:756
 msgid "Draco Dwarf Galaxy"
 msgstr "Карликова галактика у Драконі"
 
-#: nebulae/default/names.dat:722
+#: nebulae/default/names.dat:757
 msgid "Sagittarius Dwarf Galaxy"
 msgstr "Карликова галактика у Стрільці"
 
-#: nebulae/default/names.dat:723
+#: nebulae/default/names.dat:758
 msgid "Kowal's Object"
 msgstr "Об’єкт Коваля"
 
-#: nebulae/default/names.dat:724
+#: nebulae/default/names.dat:759
 msgid "Aquarius Dwarf Galaxy"
 msgstr "Карликова галактика у Водолії"
 
-#: nebulae/default/names.dat:725
+#: nebulae/default/names.dat:760
 msgid "Cygnus A"
 msgstr "Лебідь A"
 
-#: nebulae/default/names.dat:726
+#: nebulae/default/names.dat:761
 msgid "McLeish's Object"
 msgstr "Об’єкт Макліша"
 
-#: nebulae/default/names.dat:727
+#: nebulae/default/names.dat:762
 msgid "Shapley-Ames 6"
 msgstr "Шеплі-Амес 6"
 
-#: nebulae/default/names.dat:728
+#: nebulae/default/names.dat:763
 msgid "Huchra's Lens"
 msgstr "Лінза Хукри"
 
-#: nebulae/default/names.dat:729
+#: nebulae/default/names.dat:764
 msgid "Tucana Dwarf Galaxy"
 msgstr "Карликова галактика у Тукані"
 
-#: nebulae/default/names.dat:730 nebulae/default/names.dat:744
+#: nebulae/default/names.dat:765 nebulae/default/names.dat:779
 msgid "Pegasus Dwarf Galaxy"
 msgstr "Карликова галактика у Пегасі"
 
-#: nebulae/default/names.dat:731
+#: nebulae/default/names.dat:766
 msgid "Barbon's Galaxy"
 msgstr "Галактика Барбона"
 
-#: nebulae/default/names.dat:732
+#: nebulae/default/names.dat:767
 msgid "Minkowski's Object"
 msgstr "Об’єкт Міньковського"
 
-#: nebulae/default/names.dat:733
+#: nebulae/default/names.dat:768
 msgid "Superantennae Galaxy"
 msgstr "Галактика «Суперантена»"
 
-#: nebulae/default/names.dat:734
+#: nebulae/default/names.dat:769
 msgid "Malin II"
 msgstr "Мейлін II"
 
-#: nebulae/default/names.dat:735
+#: nebulae/default/names.dat:770
 msgid "Sextans Dwarf Spheroidal Galaxy"
 msgstr "Сфероїдальна карликова галактика у Секстанті"
 
-#: nebulae/default/names.dat:736
+#: nebulae/default/names.dat:771
 msgid "Cassiopeia 1"
 msgstr "Кассіопея 1"
 
-#: nebulae/default/names.dat:737
+#: nebulae/default/names.dat:772
 msgid "Cassiopeia 2"
 msgstr "Кассіопея 2"
 
-#: nebulae/default/names.dat:738
+#: nebulae/default/names.dat:773
 msgid "Speca Galaxy"
 msgstr "Галактика Спека"
 
-#: nebulae/default/names.dat:739
+#: nebulae/default/names.dat:774
 msgid "Sextans Ring"
 msgstr "Кільце Секстанта"
 
-#: nebulae/default/names.dat:740
+#: nebulae/default/names.dat:775
 msgid "Ring Galaxy in Sextans"
 msgstr "Кільцева галактика у Секстанті"
 
-#: nebulae/default/names.dat:741
+#: nebulae/default/names.dat:776
 msgid "Camelopardalis A"
 msgstr "Жираф A"
 
-#: nebulae/default/names.dat:742
+#: nebulae/default/names.dat:777
 msgid "Cassiopeia Dwarf Spheroidal Galaxy"
 msgstr "Карликова сферична галактика у Кассіопеї"
 
-#: nebulae/default/names.dat:743
+#: nebulae/default/names.dat:778
 msgid "Andromeda VII"
 msgstr "Андромеда VII"
 
-#: nebulae/default/names.dat:745
+#: nebulae/default/names.dat:780
 msgid "Pegasus II"
 msgstr "Пегас II"
 
-#: nebulae/default/names.dat:746
+#: nebulae/default/names.dat:781
 msgid "Andromeda VI"
 msgstr "Андромеда VI"
 
-#: nebulae/default/names.dat:747
+#: nebulae/default/names.dat:782
 msgid "Boomerang Nebula"
 msgstr "Туманність «Бумеранг»"
 
-#: nebulae/default/names.dat:748
+#: nebulae/default/names.dat:783
 msgid "Cepheus I"
 msgstr "Цефей I"
 
-#: nebulae/default/names.dat:749
+#: nebulae/default/names.dat:784
 msgid "Cetus Dwarf Galaxy"
 msgstr "Карликова галактика у Киті"
 
-#: nebulae/default/names.dat:750
+#: nebulae/default/names.dat:785
 msgid "BW Tauri"
 msgstr "BW Тільця"
 
-#: nebulae/default/names.dat:751
+#: nebulae/default/names.dat:786
 msgid "The Grasshopper Galaxy"
 msgstr "Галактика «Коник»"
 
-#: nebulae/default/names.dat:752
+#: nebulae/default/names.dat:787
 msgid "Leo A"
 msgstr "Лев A"
 
-#: nebulae/default/names.dat:753
+#: nebulae/default/names.dat:788
 msgid "Leo III"
 msgstr "Лев III"
 
-#: nebulae/default/names.dat:754
+#: nebulae/default/names.dat:789
 msgid "Leo Dwarf Irregular Galaxy"
 msgstr "Неправильна карликова галактика у Леві"
 
-#: nebulae/default/names.dat:755
+#: nebulae/default/names.dat:790
 msgid "Sextans C"
 msgstr "Секстант C"
 
-#: nebulae/default/names.dat:756
+#: nebulae/default/names.dat:791
 msgid "Regulus Dwarf Galaxy"
 msgstr "Карликова галактика поблизу Регула"
 
-#: nebulae/default/names.dat:757
+#: nebulae/default/names.dat:792
 msgid "Leo I"
 msgstr "Лев I"
 
-#: nebulae/default/names.dat:758
+#: nebulae/default/names.dat:793
 msgid "Harrington-Wilson #1"
 msgstr "Гаррінґтон-Вілсон 1"
 
-#: nebulae/default/names.dat:759
+#: nebulae/default/names.dat:794
 msgid "Markarian 421"
 msgstr "Маркарян 421"
 
-#: nebulae/default/names.dat:760
+#: nebulae/default/names.dat:795
 msgid "Zwicky #2"
 msgstr "Цвіккі 2"
 
-#: nebulae/default/names.dat:761
+#: nebulae/default/names.dat:796
 msgid "Markarian 231"
 msgstr "Маркарян 231"
 
-#: nebulae/default/names.dat:762
+#: nebulae/default/names.dat:797
 msgid "Exclamation Point Galaxy"
 msgstr "Галактика «Знак оклику»"
 
-#: nebulae/default/names.dat:763
+#: nebulae/default/names.dat:798
 msgid "Serpens Dwarf Galaxy"
 msgstr "Карликова галактика у Змії"
 
-#: nebulae/default/names.dat:764
+#: nebulae/default/names.dat:799
 msgid "Tadpole Galaxy"
 msgstr "Галактика «Пугловок»"
 
-#: nebulae/default/names.dat:765
+#: nebulae/default/names.dat:800
 msgid "Egg Nebula"
 msgstr "Туманність «Яйце»"
 
-#: nebulae/default/names.dat:766
+#: nebulae/default/names.dat:801
 msgid "Cygnus Egg"
 msgstr "Яйце Лебедя"
 
-#: nebulae/default/names.dat:767
+#: nebulae/default/names.dat:802
 msgid "Pegasus Dwarf Irregular Galaxy"
 msgstr "Неправильна карликова галактика у Пегасі"
 
-#: nebulae/default/names.dat:768
+#: nebulae/default/names.dat:803
 msgid "Lemon Galaxy"
 msgstr "Галактика «Лимон»"
 
-#: nebulae/default/names.dat:769
+#: nebulae/default/names.dat:804
 msgid "Minkowski's Butterfly"
 msgstr "«Метелик» Мінковського"
 
-#: nebulae/default/names.dat:770
+#: nebulae/default/names.dat:805
 msgid "Twin Jet Nebula"
 msgstr "Туманність «Подвійний струмінь»"
 
-#: nebulae/default/names.dat:771
+#: nebulae/default/names.dat:806
 msgid "M2-9"
 msgstr "M2-9"
 
-#: nebulae/default/names.dat:772
+#: nebulae/default/names.dat:807
 msgid "Westbrook Nebula"
 msgstr "Туманність Вестбрука"
 
-#: nebulae/default/names.dat:773
+#: nebulae/default/names.dat:808
 msgid "Water Lily Nebula"
 msgstr "Туманність «Латаття»"
 
-#: nebulae/default/names.dat:774
+#: nebulae/default/names.dat:809
 msgid "Perseus Cluster"
 msgstr "Скупчення у Персеї"
 
-#: nebulae/default/names.dat:775
+#: nebulae/default/names.dat:810
 msgid "Train Wreck Cluster"
 msgstr "Скупчення «Зіткнення поїздів»"
 
-#: nebulae/default/names.dat:777
+#: nebulae/default/names.dat:812
 msgid "Hydra Cluster"
 msgstr "Скупчення у Гідрі"
 
-#: nebulae/default/names.dat:778
+#: nebulae/default/names.dat:813
 msgid "Leo Cluster"
 msgstr "Скупчення у Леві"
 
-#: nebulae/default/names.dat:779
+#: nebulae/default/names.dat:814
 msgid "Coma Cluster"
 msgstr "Скупчення у Волоссі Вероніки"
 
-#: nebulae/default/names.dat:780
+#: nebulae/default/names.dat:815
 msgid "Corona Borealis Cluster"
 msgstr "Скупчення у Північній Короні"
 
-#: nebulae/default/names.dat:781
+#: nebulae/default/names.dat:816
 msgid "Hercules Cluster"
 msgstr "Скупчення у Геркулесі"
 
-#: nebulae/default/names.dat:782
+#: nebulae/default/names.dat:817
 msgid "Pandora’s Cluster"
 msgstr "Скупчення Пандори"
 
-#: nebulae/default/names.dat:783
+#: nebulae/default/names.dat:818
 msgid "Centaurus Cluster"
 msgstr "Скупчення у Центаврі"
 
-#: nebulae/default/names.dat:784
+#: nebulae/default/names.dat:819
 msgid "Shapley 8 Cluster"
 msgstr "Скупчення Шеплі 8"
 
-#: nebulae/default/names.dat:785
+#: nebulae/default/names.dat:820
 msgid "Norma Cluster"
 msgstr "Скупчення у Косинці"
 
-#: nebulae/default/names.dat:786
+#: nebulae/default/names.dat:821
 msgid "Fornax Cluster"
 msgstr "Скупчення у Печі"
 
-#: nebulae/default/names.dat:787
+#: nebulae/default/names.dat:822
 msgid "Antlia Cluster"
 msgstr "Скупчення у Насосі"
 
-#: nebulae/default/names.dat:788
+#: nebulae/default/names.dat:823
 msgid "Calabash Nebula"
 msgstr "Туманність «Кальян»"
 
-#: nebulae/default/names.dat:789
+#: nebulae/default/names.dat:824
 msgid "Rotten Egg Nebula"
 msgstr "Туманність «Смажене яйце»"
 
-#: nebulae/default/names.dat:790
+#: nebulae/default/names.dat:825
 msgid "Frosty Leo Nebula"
 msgstr "Туманність «Морозний Лев»"
 
-#: nebulae/default/names.dat:791
+#: nebulae/default/names.dat:826
 msgid "Gomez's Hamburger"
 msgstr "Гамбурґер Гомеса"
 
-#: nebulae/default/names.dat:792
+#: nebulae/default/names.dat:827
 msgid "Cotton Candy Nebula"
 msgstr "Туманність «Цукрова вата»"
 
-#: nebulae/default/names.dat:793
+#: nebulae/default/names.dat:828
 msgid "Footprint Nebula"
 msgstr "Туманність «Відбиток ноги»"
 
-#: nebulae/default/names.dat:794
+#: nebulae/default/names.dat:829
 msgid "Minkowski's Footprint"
 msgstr "«Відбиток ноги» Мінковського"
 
-#: nebulae/default/names.dat:795
+#: nebulae/default/names.dat:830
 msgid "M1-92"
 msgstr "M1-92"
 
-#: nebulae/default/names.dat:796
+#: nebulae/default/names.dat:831
 msgid "Sagittarius A East"
 msgstr "Східний Стрілець A"
 
-#: nebulae/default/names.dat:797
+#: nebulae/default/names.dat:832
 msgid "Sagittarius A West"
 msgstr "Західний Стрілець A"
 
-#: nebulae/default/names.dat:798
+#: nebulae/default/names.dat:833
 msgid "Minispiral in Gal Center"
 msgstr "Мініспіраль у центрі Галактики"
 
-#: nebulae/default/names.dat:799
+#: nebulae/default/names.dat:834
 msgid "Dark Doodad Nebula"
 msgstr "Туманність «Темна річ»"
 
@@ -6416,7 +6516,8 @@ msgstr "Ванджел"
 msgid "Purra"
 msgstr "Пурра"
 
-#: skycultures/boorong/star_names.fab:27 skycultures/western/star_names.fab:152
+#: skycultures/boorong/star_names.fab:27
+#: skycultures/western/star_names.fab:152
 msgid "Unurgunite"
 msgstr "Унургуніт"
 
@@ -6430,12 +6531,14 @@ msgstr "Ґноуї"
 msgid "Mityan"
 msgstr "Мітян"
 
-#. TRANSLATORS: Native name of Venus in Boorong culture (English: Elder sister)
+#. TRANSLATORS: Native name of Venus in Boorong culture (English: Elder
+#. sister)
 #: skycultures/boorong/planet_names.fab:6
 msgid "Chargee Gnowee"
 msgstr "Чарджі Гноуї"
 
-#. TRANSLATORS: Native name of Jupiter in Boorong culture (English: Sulphur-crested white cockatoo)
+#. TRANSLATORS: Native name of Jupiter in Boorong culture (English: Sulphur-
+#. crested white cockatoo)
 #: skycultures/boorong/planet_names.fab:8
 msgid "Ginabongbearp"
 msgstr "Ґінабонґберп"
@@ -7197,23 +7300,27 @@ msgstr "Вівця"
 msgid "Stars of Water"
 msgstr "Зірки води"
 
-#: skycultures/egyptian/star_names.fab:1 skycultures/romanian/star_names.fab:80
+#: skycultures/egyptian/star_names.fab:1
+#: skycultures/romanian/star_names.fab:80
 #: skycultures/western/star_names.fab:154
 #: skycultures/western_rey/star_names.fab:32
 msgid "Procyon"
 msgstr "Проціон"
 
-#: skycultures/egyptian/star_names.fab:2 skycultures/western/star_names.fab:137
+#: skycultures/egyptian/star_names.fab:2
+#: skycultures/western/star_names.fab:137
 #: skycultures/western_rey/star_names.fab:36
 msgid "Sirius"
 msgstr "Сиріус"
 
-#. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of Sun)
+#. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of
+#. Sun)
 #: skycultures/egyptian/planet_names.fab:2
 msgid "Amon-Ra (Sun)"
 msgstr "Амон-Ра (Сонце)"
 
-#. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The Traveler)
+#. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The
+#. Traveler)
 #: skycultures/egyptian/planet_names.fab:4
 msgid "Traveler (Moon)"
 msgstr "Мандрівник (Місяць)"
@@ -7223,7 +7330,8 @@ msgstr "Мандрівник (Місяць)"
 msgid "Sebeg (Mercury)"
 msgstr "Себек (Меркурій)"
 
-#. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that Crosses / The God of the Morning)
+#. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that
+#. Crosses / The God of the Morning)
 #: skycultures/egyptian/planet_names.fab:8
 msgid "Star that Crosses (Venus)"
 msgstr "Богиня Світанку (Венера)"
@@ -7233,12 +7341,14 @@ msgstr "Богиня Світанку (Венера)"
 msgid "Red Horus (Mars)"
 msgstr "Червоний Гор (Марс)"
 
-#. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who Binds the Two Lands)
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who
+#. Binds the Two Lands)
 #: skycultures/egyptian/planet_names.fab:12
 msgid "Horus Who Binds the Two Lands (Jupiter)"
 msgstr "Гор, що пов’язує дві землі (Юпітер)"
 
-#. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the Bull of Heaven)
+#. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the
+#. Bull of Heaven)
 #: skycultures/egyptian/planet_names.fab:14
 msgid "Horus, the Bull of Heaven (Saturn)"
 msgstr "Гор, Небесний Бик (Сатурн)"
@@ -9893,24 +10003,29 @@ msgstr "Кабани"
 msgid "Alpheratz"
 msgstr "Альферац"
 
-#: skycultures/romanian/star_names.fab:2 skycultures/western/star_names.fab:184
+#: skycultures/romanian/star_names.fab:2
+#: skycultures/western/star_names.fab:184
 msgid "Caph"
 msgstr "Каф"
 
-#: skycultures/romanian/star_names.fab:3 skycultures/western/star_names.fab:594
+#: skycultures/romanian/star_names.fab:3
+#: skycultures/western/star_names.fab:594
 #: skycultures/western/star_names.fab:614
 msgid "Algenib"
 msgstr "Альгеніб"
 
-#: skycultures/romanian/star_names.fab:4 skycultures/western/star_names.fab:630
+#: skycultures/romanian/star_names.fab:4
+#: skycultures/western/star_names.fab:630
 msgid "Ankaa"
 msgstr "Анкаа"
 
-#: skycultures/romanian/star_names.fab:5 skycultures/western/star_names.fab:183
+#: skycultures/romanian/star_names.fab:5
+#: skycultures/western/star_names.fab:183
 msgid "Shedir"
 msgstr "Шедір"
 
-#: skycultures/romanian/star_names.fab:6 skycultures/western/star_names.fab:228
+#: skycultures/romanian/star_names.fab:6
+#: skycultures/western/star_names.fab:228
 msgid "Diphda"
 msgstr "Діфда"
 
@@ -9947,11 +10062,13 @@ msgstr "Батен Кайтос"
 msgid "Mothallah"
 msgstr "Мотхаллах"
 
-#: skycultures/romanian/star_names.fab:14 skycultures/western/star_names.fab:54
+#: skycultures/romanian/star_names.fab:14
+#: skycultures/western/star_names.fab:54
 msgid "Mesarthim"
 msgstr "Месартхім"
 
-#: skycultures/romanian/star_names.fab:15 skycultures/western/star_names.fab:53
+#: skycultures/romanian/star_names.fab:15
+#: skycultures/western/star_names.fab:53
 msgid "Sheratan"
 msgstr "Шератан"
 
@@ -9964,7 +10081,8 @@ msgstr "Альреша"
 msgid "Almaak"
 msgstr "Альмаак"
 
-#: skycultures/romanian/star_names.fab:18 skycultures/western/star_names.fab:52
+#: skycultures/romanian/star_names.fab:18
+#: skycultures/western/star_names.fab:52
 msgid "Hamal"
 msgstr "Гамаль"
 
@@ -10000,7 +10118,8 @@ msgstr "Менкар"
 msgid "Algol"
 msgstr "Алгол"
 
-#: skycultures/romanian/star_names.fab:25 skycultures/western/star_names.fab:55
+#: skycultures/romanian/star_names.fab:25
+#: skycultures/western/star_names.fab:55
 msgid "Botein"
 msgstr "Ботейн"
 
@@ -10109,7 +10228,8 @@ msgstr "Зірка Каптейна"
 msgid "Rigel"
 msgstr "Рігель"
 
-#: skycultures/romanian/star_names.fab:47 skycultures/western/star_names.fab:68
+#: skycultures/romanian/star_names.fab:47
+#: skycultures/western/star_names.fab:68
 #: skycultures/western_rey/star_names.fab:31
 msgid "Capella"
 msgstr "Капелла"
@@ -10154,7 +10274,8 @@ msgstr "Вазн"
 msgid "Betelgeuse"
 msgstr "Бетельгейзе"
 
-#: skycultures/romanian/star_names.fab:60 skycultures/western/star_names.fab:70
+#: skycultures/romanian/star_names.fab:60
+#: skycultures/western/star_names.fab:70
 msgid "Menkalinan"
 msgstr "Менкалінан"
 
@@ -12170,7 +12291,8 @@ msgstr "Долонес IX"
 msgid "Haris"
 msgstr "Гаріс"
 
-#: skycultures/western/star_names.fab:99 skycultures/western/star_names.fab:114
+#: skycultures/western/star_names.fab:99
+#: skycultures/western/star_names.fab:114
 msgid "Ceginus"
 msgstr "Цегінус"
 
@@ -12774,6 +12896,10 @@ msgstr "Тил"
 #: skycultures/western/star_names.fab:350
 msgid "Alsafi"
 msgstr "Альсафі"
+
+#: skycultures/western/star_names.fab:351
+msgid "Dziban"
+msgstr "Дзібан"
 
 #: skycultures/western/star_names.fab:352
 msgid "Dziban I"
@@ -14384,1167 +14510,3 @@ msgstr "α Центавра"
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
 msgstr "β Центавра"
-
-#~ msgid "Schrine of Sky"
-#~ msgstr "Вівтар небес"
-
-#~ msgid "Office for Chariot"
-#~ msgstr "Наглядач за колісницею"
-
-#~ msgid "Hand"
-#~ msgstr "Рука"
-
-#~ msgid "Snake"
-#~ msgstr "Змія"
-
-#~ msgid "Fireplace"
-#~ msgstr "Вогнище"
-
-#~ msgid "Race Track"
-#~ msgstr "Сліди племені"
-
-#~ msgid "Animal"
-#~ msgstr "Тварина"
-
-#~ msgid "Seven Little Girls"
-#~ msgstr "Сім малих дівчат"
-
-#~ msgid "Dried Willow"
-#~ msgstr "Суха верба"
-
-#~ msgid "Salamander"
-#~ msgstr "Саламандра"
-
-#~ msgid "Turtle"
-#~ msgstr "Черепаха"
-
-#~ msgid "Thunderbird"
-#~ msgstr "Громоптах"
-
-#~ msgid "Bear's Lodge"
-#~ msgstr "Барліг ведмедя"
-
-#~ msgid "Bailer"
-#~ msgstr "Ківш"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "Колиска для кішки"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "Риболовецький гачок Мауї"
-
-#~ msgid "Frigate Bird"
-#~ msgstr "Птаха Фрегат"
-
-#~ msgid "Dolphin"
-#~ msgstr "Дельфін"
-
-#~ msgid "Cerficate of Sky"
-#~ msgstr "День Небес"
-
-#~ msgid "Ofice for Construction"
-#~ msgstr "Наглядач за землею"
-
-#~ msgid "Barnard's galaxy"
-#~ msgstr "Галактика Барнарда"
-
-#~ msgid "Bear Paw galaxy"
-#~ msgstr "Галактика «Ведмежа лапа»"
-
-#~ msgid "Beehive cluster"
-#~ msgstr "Скупчення «Вулик»"
-
-#~ msgid "Black-eye galaxy"
-#~ msgstr "Галактика «Чорне око»"
-
-#~ msgid "Bode's nebulae"
-#~ msgstr "Галактика Боде"
-
-#~ msgid "Box nebula"
-#~ msgstr "Туманність «Ящик»"
-
-#~ msgid "Bubble nebula"
-#~ msgstr "Туманність «Бульбашка»"
-
-#~ msgid "Bug nebula"
-#~ msgstr "Туманність «Жук»"
-
-#~ msgid "Butterfly cluster"
-#~ msgstr "Скупчення «Метелик»"
-
-#~ msgid "Butterfly nebula"
-#~ msgstr "Туманність «Метелик»"
-
-#~ msgid "California nebula"
-#~ msgstr "Туманність «Каліфорнія»"
-
-#~ msgid "Christmas Tree cluster"
-#~ msgstr "Скупчення «Різдвяна ялинка»"
-
-#~ msgid "Cocoon nebula"
-#~ msgstr "Туманність «Кокон»"
-
-#~ msgid "Cone nebula"
-#~ msgstr "Туманність «Шишка»"
-
-#~ msgid "Crab nebula"
-#~ msgstr "Крабова туманність"
-
-#~ msgid "Crescent nebula"
-#~ msgstr "Туманність «Півмісяць»"
-
-#~ msgid "Double cluster"
-#~ msgstr "Подвійне скупчення"
-
-#~ msgid "Dumbbell nebula"
-#~ msgstr "Туманність «Гантель»"
-
-#~ msgid "Eagle nebula"
-#~ msgstr "Туманність «Орел»"
-
-#~ msgid "Eight-burst planetary"
-#~ msgstr "Планетарна туманність «Вісімка»"
-
-#~ msgid "Eskimo nebula"
-#~ msgstr "Туманність «Ескімос»"
-
-#~ msgid "Filamentary nebula"
-#~ msgstr "Ниткоподібна туманність"
-
-#~ msgid "Flaming Star nebula"
-#~ msgstr "Туманність «Палаюча Зірка»"
-
-#~ msgid "Ghost of Jupiter"
-#~ msgstr "«Привид Юпітера»"
-
-#~ msgid "Great Nebula in Andromeda"
-#~ msgstr "Велика туманність у Андромеді"
-
-#~ msgid "Great Nebula in Orion"
-#~ msgstr "Велика туманність у Оріоні"
-
-#~ msgid "Helix galaxy"
-#~ msgstr "Спіральна галактика"
-
-#~ msgid "Helix nebula"
-#~ msgstr "Спіральна туманність"
-
-#~ msgid "Hind's variable nebula"
-#~ msgstr "Змінна туманність Гінда"
-
-#~ msgid "Horsehead nebula"
-#~ msgstr "Туманність «Кінська Голова»"
-
-#~ msgid "Hourglass nebula"
-#~ msgstr "Туманність «Клепсидра»"
-
-#~ msgid "Hubble's variable neb"
-#~ msgstr "Змінна туманність Хаббла"
-
-#~ msgid "Lace-work nebula"
-#~ msgstr "Туманність «Мереживо»"
-
-#~ msgid "Lagoon nebula"
-#~ msgstr "Туманність «Лагуна»"
-
-#~ msgid "Little Dumbbell"
-#~ msgstr "Туманність «Мала Гантель»"
-
-#~ msgid "Little Gem"
-#~ msgstr "«Маленька коштовність»"
-
-#~ msgid "Maia nebula"
-#~ msgstr "Туманність «Майя»"
-
-#~ msgid "Merope nebula"
-#~ msgstr "Туманність Меропи"
-
-#~ msgid "The Mice"
-#~ msgstr "«Мишки»"
-
-#~ msgid "Network nebula"
-#~ msgstr "Туманність «Сітка»"
-
-#~ msgid "North America nebula"
-#~ msgstr "Туманність «Північна Америка»"
-
-#~ msgid "Omega nebula"
-#~ msgstr "Туманність «Омега»"
-
-#~ msgid "Owl nebula"
-#~ msgstr "Туманність «Сова»"
-
-#~ msgid "Pelican nebula"
-#~ msgstr "Туманність «Пелікан»"
-
-#~ msgid "Pin-wheel nebula"
-#~ msgstr "Туманність «Лопаті вітряка»"
-
-#~ msgid "Ring nebula in Lyra"
-#~ msgstr "Туманність «Перстень» у Лірі"
-
-#~ msgid "Rosette nebula"
-#~ msgstr "Туманність «Розетка»"
-
-#~ msgid "Saturn nebula"
-#~ msgstr "Туманність «Сатурн»"
-
-#~ msgid "Sculptor galaxy"
-#~ msgstr "Галактика у Скульпторі"
-
-#~ msgid "Sombrero galaxy"
-#~ msgstr "Галактика «Сомбреро»"
-
-#~ msgid "Spindle galaxy"
-#~ msgstr "Галактика «Вісь»"
-
-#~ msgid "Star Queen nebula"
-#~ msgstr "Туманність «Зоряна Королева»"
-
-#~ msgid "Struve's Lost nebula"
-#~ msgstr "Втрачена туманність Струве"
-
-#~ msgid "Sunflower galaxy"
-#~ msgstr "Галактика «Соняшник»"
-
-#~ msgid "Tarantula nebula"
-#~ msgstr "Туманність «Тарантул»"
-
-#~ msgid "Toby Jug nebula"
-#~ msgstr "Туманність Тобі Джага"
-
-#~ msgid "Triangulum galaxy"
-#~ msgstr "Галактика «Тринога»"
-
-#~ msgid "Trifid nebula"
-#~ msgstr "Туманність «Трифід»"
-
-#~ msgid "Veil nebula"
-#~ msgstr "Туманність «Вуаль»"
-
-#~ msgid "Whirlpool galaxy"
-#~ msgstr "Галактика «Вихор»"
-
-#~ msgid "Wild Duck cluster"
-#~ msgstr "Скупчення «Дика Качка»"
-
-#~ msgid "Witch Head nebula"
-#~ msgstr "Туманність «Голова Відьми»"
-
-#~ msgid "Tupua-nuku"
-#~ msgstr "Тупуа-нуку"
-
-#~ msgid "Tupua-rangi"
-#~ msgstr "Тупуа-рангі"
-
-#~ msgid "Wai-puna-a-rangi"
-#~ msgstr "Ваї-пуна-а-рангі"
-
-#~ msgid "A'a"
-#~ msgstr "Аа"
-
-#~ msgid "Hokupa'a"
-#~ msgstr "Гокупа’а"
-
-#~ msgid "Hokule'a"
-#~ msgstr "Гокуле’а"
-
-#~ msgid "Hoku'ula"
-#~ msgstr "Гоку’ула"
-
-#~ msgid "Mole Honua"
-#~ msgstr "Моле-Хонуа"
-
-#~ msgid "κ Cru cluster"
-#~ msgstr "Скупчення κ Південного Хреста"
-
-#~ msgid "η Car nebula"
-#~ msgstr "Туманність η Кіля"
-
-#~ msgid "γ Cas nebula"
-#~ msgstr "Туманність γ Кассіопеї"
-
-#~ msgid "ρ Oph nebula"
-#~ msgstr "Туманність ρ Орфея"
-
-#~ msgid "λ Cen nebula"
-#~ msgstr "Туманність λ Центравра"
-
-#~ msgid "The announcer of the southern Shinning one"
-#~ msgstr "Передвісниця Південної Яскравої"
-
-#~ msgid "The southern Shinning one"
-#~ msgstr "Південна Яскрава"
-
-#~ msgid "The announcer of the northern Shinning one"
-#~ msgstr "Передвісниця Північної Яскравої"
-
-#~ msgid "The northern Shinning one"
-#~ msgstr "Північна Яскрава"
-
-#~ msgid "Little Ghost nebula"
-#~ msgstr "Туманність «Маленький привид»"
-
-#~ msgid "Little Gem nebula"
-#~ msgstr "Туманність «Маленький коштовний камінь»"
-
-#~ msgid "Bear's Paw galaxy"
-#~ msgstr "Галактика «Ведмежа лапа»"
-
-#~ msgid "Hubble's variable nebula"
-#~ msgstr "Змінна туманність Хаббла"
-
-#~ msgid "ω Cen cluster"
-#~ msgstr "Скупчення ω Центавра"
-
-#~ msgid "Cat's Paw nebula"
-#~ msgstr "Туманність «Котяча лапа»"
-
-#~ msgid "War and Peace nebula"
-#~ msgstr "Туманність «Війна і Мир»"
-
-#~ msgid "τ Canis Majoris cluster"
-#~ msgstr "Скупчення τ Великого Пса"
-
-#~ msgid "Pencil nebula"
-#~ msgstr "Туманність «Олівець»"
-
-#~ msgid "Galaxy cluster"
-#~ msgstr "Скупчення «Галактика»"
-
-#~ msgid "Atoms for Peace galaxy"
-#~ msgstr "Туманність «Мирний атом»"
-
-#~ msgid "Caroline's cluster"
-#~ msgstr "Скупчення Кароліни"
-
-#~ msgid "Satellite cluster"
-#~ msgstr "Скупчення «Супутник»"
-
-#~ msgid "Flame nebula"
-#~ msgstr "Туманність «Полум’я»"
-
-#~ msgid "Rim nebula"
-#~ msgstr "Туманність «Кільце»"
-
-#~ msgid "de Mairan's nebula"
-#~ msgstr "Туманність де Майрана"
-
-#~ msgid "Southern Pinwheel galaxy"
-#~ msgstr "Галактика «Південний Вітрячок»"
-
-#~ msgid "Pinwheel galaxy"
-#~ msgstr "Галактика «Вітрячок»"
-
-#~ msgid "Grand Design galaxy"
-#~ msgstr "Галактика «Великий задум»"
-
-#~ msgid "Monkey Head nebula"
-#~ msgstr "Туманність «Мавп’яча голова»"
-
-#~ msgid "Lemon slice nebula"
-#~ msgstr "Туманність «Скибка лимону»"
-
-#~ msgid "Red spider nebula"
-#~ msgstr "Туманність «Червоний павук»"
-
-#~ msgid "Retina nebula"
-#~ msgstr "Туманність «Сітківка»"
-
-#~ msgid "Spirograph nebula"
-#~ msgstr "Туманність «Спірограф»"
-
-#~ msgid "20 Vulpeculae cluster"
-#~ msgstr "Скупчення 20 Лисички"
-
-#~ msgid "Cleopatra's Eye"
-#~ msgstr "Око Клеопатри"
-
-#~ msgid "Crowbar galaxy"
-#~ msgstr "Галактика «Лом»"
-
-#~ msgid "Dragonfly cluster"
-#~ msgstr "Скупчення «Бабка»"
-
-#~ msgid "Sagittarius Star Cloud"
-#~ msgstr "Зоряна хмара Стрільця"
-
-#~ msgid "Dragon nebula"
-#~ msgstr "Туманність «Дракон»"
-
-#~ msgid "Kidney Bean galaxy"
-#~ msgstr "Галактика «Квасолина»"
-
-#~ msgid "Heart-Shaped cluster"
-#~ msgstr "Серцеподібне скупчення"
-
-#~ msgid "Herring galaxy"
-#~ msgstr "Галактика «Оселедець»"
-
-#~ msgid "Heart nebula"
-#~ msgstr "Туманність «Серце»"
-
-#~ msgid "Hole in a cluster"
-#~ msgstr "Дірка у скупченні"
-
-#~ msgid "Sailboat cluster"
-#~ msgstr "Скупчення «Вітрильник»"
-
-#~ msgid "Soul nebula"
-#~ msgstr "Туманність «Душа»"
-
-#~ msgid "Starfish cluster"
-#~ msgstr "Скупчення «Морська зірка»"
-
-#~ msgid "Toloa"
-#~ msgstr "Толоа"
-
-#~ msgid "Toloatonga"
-#~ msgstr "Толоатонга"
-
-#~ msgid "Houmatoloa"
-#~ msgstr "Хоуматолоа"
-
-#~ msgid "Ae e'Uvea"
-#~ msgstr "Ае-е’увеа"
-
-#~ msgid "Fungasia"
-#~ msgstr "Фунгазіа"
-
-#~ msgid "Tuinga ika"
-#~ msgstr "Туїнга-іка"
-
-#~ msgid "Tu'ulalupe"
-#~ msgstr "Ту’улалупе"
-
-#~ msgid "Toloalahi"
-#~ msgstr "Толоалахі"
-
-#~ msgid "Lua tangata"
-#~ msgstr "Луа-тангата"
-
-#~ msgid "Fatanalua"
-#~ msgstr "Фатаналуа"
-
-#~ msgid "Kapakau'o'tafahi"
-#~ msgstr "Капакау’о’тафахі"
-
-#~ msgid "Elephant's Trunk nebula"
-#~ msgstr "Туманність «Хобот слона»"
-
-#~ msgid "Whale galaxy"
-#~ msgstr "Галактика «Кит»"
-
-#~ msgid "Fireworks galaxy"
-#~ msgstr "Галактика «Феєрверк»"
-
-#~ msgid "Iris nebula"
-#~ msgstr "Туманність «Ірис»"
-
-#~ msgid "Bow-Tie nebula"
-#~ msgstr "Туманність «Краватка-метелик»"
-
-#~ msgid "Needle galaxy"
-#~ msgstr "Галактика «Голка»"
-
-#~ msgid "Pearl cluster"
-#~ msgstr "Скупчення «Перлина»"
-
-#~ msgid "S Normae cluster"
-#~ msgstr "Скупчення S Косинця"
-
-#~ msgid "Plaskett's star"
-#~ msgstr "Зірка Пласкетта"
-
-#~ msgid "Graff's cluster"
-#~ msgstr "Скупчення Ґраффа"
-
-#~ msgid "Fleming's Triangular nebula"
-#~ msgstr "Трикутна галактика Флемінґа"
-
-#~ msgid "Vacuum Cleaner galaxy"
-#~ msgstr "Галактика «Пилосос»"
-
-#~ msgid "Surfboard galaxy"
-#~ msgstr "Галактика «Дошка для серфінгу»"
-
-#~ msgid "Coddington's nebula"
-#~ msgstr "Туманність Коддінґтона"
-
-#~ msgid "Blowdryer galaxy"
-#~ msgstr "Галактика «Фен»"
-
-#~ msgid "ε Ori nebula"
-#~ msgstr "Туманність ε Оріона"
-
-#~ msgid "Lost galaxy"
-#~ msgstr "Втрачена галактика"
-
-#~ msgid "Spiral cluster"
-#~ msgstr "Спіральне скупчення"
-
-#~ msgid "White Eyed Pea"
-#~ msgstr "Горошина з білим вічком"
-
-#~ msgid "Cocoon galaxy"
-#~ msgstr "Галактика «Кокон»"
-
-#~ msgid "Jellyfish nebula"
-#~ msgstr "Туманність «Медуза»"
-
-#~ msgid "Marfark"
-#~ msgstr "Марфарк"
-
-#~ msgid "Hoedus II"
-#~ msgstr "Гедус II"
-
-#~ msgid "Cleeia"
-#~ msgstr "Клея"
-
-#~ msgid "Hydrobius"
-#~ msgstr "Гідробіус"
-
-#~ msgid "Tarf"
-#~ msgstr "Тарф"
-
-#~ msgid "Hatsya"
-#~ msgstr "Хатсія"
-
-#~ msgid "Al Kurud"
-#~ msgstr "Аль Куруд"
-
-#~ msgid "Tseen Ke"
-#~ msgstr "Цзен Ке"
-
-#~ msgid "Alphekka Meridiana"
-#~ msgstr "Альфекка Мерідіана"
-
-#~ msgid "Lukida"
-#~ msgstr "Лукіда"
-
-#~ msgid "Rukh"
-#~ msgstr "Рух"
-
-#~ msgid "Castra"
-#~ msgstr "Кастра"
-
-#~ msgid "Okul"
-#~ msgstr "Окул"
-
-#~ msgid "Jih"
-#~ msgstr "Джіх"
-
-#~ msgid "Pennae Caudalis"
-#~ msgstr "Пені Каудаліс"
-
-#~ msgid "Prawn nebula"
-#~ msgstr "Туманність «Креветка»"
-
-#~ msgid "Ruprecht 147"
-#~ msgstr "Рупрехт 147"
-
-#~ msgid "The Foxhead cluster"
-#~ msgstr "Скупчення «Лисяча голова»"
-
-#~ msgid "Summer Beehive cluster"
-#~ msgstr "Скупчення «Літній рій бджіл»"
-
-#~ msgid "Dziban"
-#~ msgstr "Дзібан"
-
-#~ msgid "Marsik"
-#~ msgstr "Марсік"
-
-#~ msgid "Labr"
-#~ msgstr "Лабр"
-
-#~ msgid "Al'dzhabkhakh"
-#~ msgstr "Аль-джабхах"
-
-#~ msgid "Printseps"
-#~ msgstr "Прінцепс"
-
-#~ msgid "Sinistra"
-#~ msgstr "Сіністра"
-
-#~ msgid "Deneb Okab"
-#~ msgstr "Денеб Окаб"
-
-#~ msgid "Manubrij"
-#~ msgstr "Манубрідж"
-
-#~ msgid "Han"
-#~ msgstr "Хань"
-
-#~ msgid "Ruby Star"
-#~ msgstr "Рубінова зірка"
-
-#~ msgid "Mercury"
-#~ msgstr "Меркурій"
-
-#~ msgid "Vesta"
-#~ msgstr "Веста"
-
-#~ msgid "Phobos"
-#~ msgstr "Фобос"
-
-#~ msgid "Ceres"
-#~ msgstr "Церера"
-
-#~ msgid "Pallas"
-#~ msgstr "Паллада"
-
-#~ msgid "Juno"
-#~ msgstr "Юнона"
-
-#~ msgid "Venus"
-#~ msgstr "Венера"
-
-#~ msgid "Earth"
-#~ msgstr "Земля"
-
-#~ msgid "Mars"
-#~ msgstr "Марс"
-
-#~ msgid "Deimos"
-#~ msgstr "Деймос"
-
-#~ msgid "Jupiter"
-#~ msgstr "Юпітер"
-
-#~ msgid "Sinope"
-#~ msgstr "Сінопе"
-
-#~ msgid "Pasiphae"
-#~ msgstr "Пасіфе"
-
-#~ msgid "Elara"
-#~ msgstr "Елара"
-
-#~ msgid "Himalia"
-#~ msgstr "Гімалія"
-
-#~ msgid "Amalthea"
-#~ msgstr "Амальтея"
-
-#~ msgid "Callisto"
-#~ msgstr "Каллісто"
-
-#~ msgid "Ganymede"
-#~ msgstr "Ганімед"
-
-#~ msgid "Europa"
-#~ msgstr "Європа"
-
-#~ msgid "Io"
-#~ msgstr "Іо"
-
-#~ msgid "Saturn"
-#~ msgstr "Сатурн"
-
-#~ msgid "Metis"
-#~ msgstr "Метида"
-
-#~ msgid "Leda"
-#~ msgstr "Леда"
-
-#~ msgid "Thebe"
-#~ msgstr "Фіва"
-
-#~ msgid "Carme"
-#~ msgstr "Карме"
-
-#~ msgid "Adrastea"
-#~ msgstr "Адрастея"
-
-#~ msgid "Enceladus"
-#~ msgstr "Енцелад"
-
-#~ msgid "Ananke"
-#~ msgstr "Ананке"
-
-#~ msgid "Lysithea"
-#~ msgstr "Лісіфея"
-
-#~ msgid "Mimas"
-#~ msgstr "Мімас"
-
-#~ msgid "Tethys"
-#~ msgstr "Тефія"
-
-#~ msgid "Miranda"
-#~ msgstr "Міранда"
-
-#~ msgid "Rhea"
-#~ msgstr "Рея"
-
-#~ msgid "Dione"
-#~ msgstr "Діона"
-
-#~ msgid "Hyperion"
-#~ msgstr "Гіперіон"
-
-#~ msgid "Titan"
-#~ msgstr "Титан"
-
-#~ msgid "Phoebe"
-#~ msgstr "Феба"
-
-#~ msgid "Iapetus"
-#~ msgstr "Япет"
-
-#~ msgid "Uranus"
-#~ msgstr "Уран"
-
-#~ msgid "Neptune"
-#~ msgstr "Нептун"
-
-#~ msgid "Umbriel"
-#~ msgstr "Умбріель"
-
-#~ msgid "Titania"
-#~ msgstr "Титанія"
-
-#~ msgid "Oberon"
-#~ msgstr "Оберон"
-
-#~ msgid "Pluto"
-#~ msgstr "Плутон"
-
-#~ msgid "Charon"
-#~ msgstr "Харон"
-
-#~ msgid "Nix"
-#~ msgstr "Нікта"
-
-#~ msgid "Triton"
-#~ msgstr "Тритон"
-
-#~ msgid "Hydra (moon)"
-#~ msgstr "Гідра (місяць)"
-
-#~ msgid "Eris"
-#~ msgstr "Ерида"
-
-#~ msgid "Ariel"
-#~ msgstr "Аріель"
-
-#~ msgid "Nereid"
-#~ msgstr "Нереїда"
-
-#~ msgid "Proteus"
-#~ msgstr "Протей"
-
-#~ msgid "Galatea"
-#~ msgstr "Галатея"
-
-#~ msgid "Despina"
-#~ msgstr "Деспіна"
-
-#~ msgid "Thalassa"
-#~ msgstr "Таласа"
-
-#~ msgid "Naiad"
-#~ msgstr "Наяда"
-
-#~ msgid "Psamathe"
-#~ msgstr "Псамафа"
-
-#~ msgid "Halimede"
-#~ msgstr "Галімеда"
-
-#~ msgid "Larissa"
-#~ msgstr "Ларіса"
-
-#~ msgid "Sao"
-#~ msgstr "Сао"
-
-#~ msgid "Laomedeia"
-#~ msgstr "Лаомедія"
-
-#~ msgid "Iris"
-#~ msgstr "Ірида"
-
-#~ msgid "Sedna"
-#~ msgstr "Седна"
-
-#~ msgid "Quaoar"
-#~ msgstr "Квавар"
-
-#~ msgid "Neso"
-#~ msgstr "Несо"
-
-#~ msgid "Solar System Observer"
-#~ msgstr "Оглядач Сонячної системи"
-
-#~ msgid "Astraea"
-#~ msgstr "Астрея"
-
-#~ msgid "Hebe"
-#~ msgstr "Геба"
-
-#~ msgid "Orcus"
-#~ msgstr "Орк"
-
-#~ msgid "Chiron"
-#~ msgstr "Хірон"
-
-#~ msgid "Varuna"
-#~ msgstr "Варуна"
-
-#~ msgid "Hektor"
-#~ msgstr "Гектор"
-
-#~ msgid "Daphne"
-#~ msgstr "Дафна"
-
-#~ msgid "Hygiea"
-#~ msgstr "Гігіея"
-
-#~ msgid "Apophis"
-#~ msgstr "Апофіс"
-
-#~ msgid "Amor"
-#~ msgstr "Амур"
-
-#~ msgid "Eros"
-#~ msgstr "Ерос"
-
-#~ msgid "Flora"
-#~ msgstr "Флора"
-
-#~ msgid "Gaspra"
-#~ msgstr "Ґаспра"
-
-#~ msgid "Phaethon"
-#~ msgstr "Фаетон"
-
-#~ msgid "Makemake"
-#~ msgstr "Макемаке"
-
-#~ msgid "Prometheus (moon)"
-#~ msgstr "Прометей (супутник)"
-
-#~ msgid "Epimetheus"
-#~ msgstr "Епіметей"
-
-#~ msgid "Epimetheus (moon)"
-#~ msgstr "Епіметей (супутник)"
-
-#~ msgid "Sisyphus"
-#~ msgstr "Сізіф"
-
-#~ msgid "Daedalus"
-#~ msgstr "Дедал"
-
-#~ msgid "Icarus"
-#~ msgstr "Ікар"
-
-#~ msgid "Prometheus"
-#~ msgstr "Прометей"
-
-#~ msgid "Elder sister"
-#~ msgstr "Старша сестра"
-
-#~ msgid "Quoll"
-#~ msgstr "Кволл"
-
-#~ msgid "Day"
-#~ msgstr "Дей"
-
-#~ msgid "Great Comet of 1680 (C/1680 V1)"
-#~ msgstr "Велика комета 1680 року (C/1680 V1)"
-
-#~ msgid "Bianca (moon)"
-#~ msgstr "Б’янка (супутник)"
-
-#~ msgid "Ida"
-#~ msgstr "Іда"
-
-#~ msgid "Bianca"
-#~ msgstr "Б’янка"
-
-#~ msgid "La'a"
-#~ msgstr "Ла’а"
-
-#~ msgid "Mahina"
-#~ msgstr "Махіна"
-
-#~ msgid "Tapukitea"
-#~ msgstr "Тапукітеа"
-
-#~ msgid "Matamemea"
-#~ msgstr "Матамемеа"
-
-#~ msgid "Sulphur-crested white cockatoo"
-#~ msgstr "Білий какаду із жовтим гребінцем"
-
-#~ msgid "Metis (moon)"
-#~ msgstr "Метіда (супутник)"
-
-#~ msgid "Night Star"
-#~ msgstr "Нічна зірка"
-
-#~ msgid "Salacia"
-#~ msgstr "Салація"
-
-#~ msgid "Huya"
-#~ msgstr "Гуйя"
-
-#~ msgid "Varda"
-#~ msgstr "Варда"
-
-#~ msgid "SpaceShip"
-#~ msgstr "Космічний корабель"
-
-#~ msgid "Parrot's Head"
-#~ msgstr "Голова папуги"
-
-#~ msgid "Running Chicken nebula"
-#~ msgstr "Туманність «Курча, що біжить»"
-
-#~ msgid "Horus, the Bull of Heaven"
-#~ msgstr "Гор, Бик небес"
-
-#~ msgid "Horus Who Binds the Two Lands"
-#~ msgstr "Гор, що об’єднує Дві Землі"
-
-#~ msgid "Khonsu, the Traveler"
-#~ msgstr "Хонсу, Мандрівник"
-
-#~ msgid "Red Horus"
-#~ msgstr "Червоний Гор"
-
-#~ msgid "God of Sun"
-#~ msgstr "Бог сонця"
-
-#~ msgid "Star that Crosses / The God of the Morning"
-#~ msgstr "Зірка, що перетинає/Бог світанку"
-
-#~ msgid "Unknown"
-#~ msgstr "Невідома"
-
-#~ msgid "Wichapi Owanjila"
-#~ msgstr "Вічапі Ованіджіла"
-
-#~ msgid "Oglechkutepi"
-#~ msgstr "Оглечкутепі"
-
-#~ msgid "Hamburger Galaxy (Leo Triplet)"
-#~ msgstr "Галактика «Гамбургер» (Трійка у Леві)"
-
-#~ msgid "Sprinter cluster"
-#~ msgstr "Скупчення «Спринтер»"
-
-#~ msgid "Gemini nebula"
-#~ msgstr "Туманність «Близнюки»"
-
-#~ msgid "Ptolemy cluster"
-#~ msgstr "Скупчення Птолемея"
-
-#~ msgid "Northern Jewel Box"
-#~ msgstr "Північна Скринька для дорогоцінностей"
-
-#~ msgid "Little Scorpion cluster"
-#~ msgstr "Скупчення «Малий Скорпіон»"
-
-#~ msgid "Fly nebula"
-#~ msgstr "Туманність «Муха»"
-
-#~ msgid "R CrA nebula"
-#~ msgstr "Туманність R CrA"
-
-#~ msgid "Omicron Velorum Cluster"
-#~ msgstr "Скупчення Омікрон Паруса"
-
-#~ msgid "Abell 35"
-#~ msgstr "Ейбел 35"
-
-#~ msgid "Abell 71"
-#~ msgstr "Ейбел 71"
-
-#~ msgid "η Car cluster"
-#~ msgstr "Скупчення η Киля"
-
-#~ msgid "Coathanger (Brocchi's Cluster)"
-#~ msgstr "Вішалка (скупчення Броккі)"
-
-#~ msgid "Taurus Poniatovii cluster"
-#~ msgstr "Скупчення «Тілець Понятовського»"
-
-#~ msgid "Markarian 18 cluster"
-#~ msgstr "Скупчення Маркарян 18"
-
-#~ msgid "Armus"
-#~ msgstr "Армус"
-
-#~ msgid "The Phantom Streak Nebula"
-#~ msgstr "Туманність «Примарна смужка»"
-
-#~ msgid "Water lily nebula"
-#~ msgstr "Туманність «Латаття»"
-
-#~ msgid "Minkowski's Butterfly (M2-9)"
-#~ msgstr "Метелик Міньковського (M2-9)"
-
-#~ msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
-#~ msgstr "Туманність «Відбиток» (Відбиток Міньковського; M1-92)"
-
-#~ msgid "Blue Flash nebula"
-#~ msgstr "Туманність «Блакитний спалах»"
-
-#~ msgid "Seashell galaxy"
-#~ msgstr "Галактика «Морська черепашка»"
-
-#~ msgid "Cassiopeia Dwarf Galaxy"
-#~ msgstr "Карликова галактика у Кассіопеї"
-
-#~ msgid "Sextans Dwarf Galaxy"
-#~ msgstr "Карликова галактика у Секстанті"
-
-#~ msgid "Wolf-Lundmark-Melotte (WLM)"
-#~ msgstr "Вольф-Лундмарк-Мелотт (WLM)"
-
-#~ msgid "Imprint of a Foot"
-#~ msgstr "Відбиток ступні"
-
-#~ msgid "Cruithne"
-#~ msgstr "Круїтні"
-
-#~ msgid "Duende"
-#~ msgstr "Дуенде"
-
-#~ msgid "Eureka"
-#~ msgstr "Еврика"
-
-#~ msgid "Earth Observer"
-#~ msgstr "Оглядач Землі"
-
-#~ msgid "Hind's variable Nebula"
-#~ msgstr "Змінна туманність Гінда"
-
-#~ msgid "Satellite Cluster"
-#~ msgstr "Скупчення «Супутник»"
-
-#~ msgid "Hubble's variable Nebula"
-#~ msgstr "Змінна туманність Хаббла"
-
-#~ msgid "τ Canis Majoris Cluster"
-#~ msgstr "Скупчення τ Великого Пса"
-
-#~ msgid "S Normae Cluster"
-#~ msgstr "Скупчення S Косинця"
-
-#~ msgid "θ Carinae Cluster"
-#~ msgstr "Скупчення θ Кіля"
-
-#~ msgid "Lord Rosse's Galaxy"
-#~ msgstr "Галактика лорда Росса"
-
-#~ msgid "Golf of Mexico Nebula"
-#~ msgstr "Туманність «Мексиканська затока»"
-
-#~ msgid "Serpens Dwarf Cluster"
-#~ msgstr "Карликове скупчення у Змії"
-
-#~ msgid "Ophelia"
-#~ msgstr "Офелія"
-
-#~ msgid "Janus"
-#~ msgstr "Янус"
-
-#~ msgid "Pan"
-#~ msgstr "Пан"
-
-#~ msgid "Pandora"
-#~ msgstr "Пандора"
-
-#~ msgid "Calypso"
-#~ msgstr "Каліпсо"
-
-#~ msgid "Telesto"
-#~ msgstr "Телесто"
-
-#~ msgid "Helene"
-#~ msgstr "Гелена"
-
-#~ msgid "Cressida"
-#~ msgstr "Крессида"
-
-#~ msgid "Desdemona"
-#~ msgstr "Дездемона"
-
-#~ msgid "Cordelia"
-#~ msgstr "Корделія"
-
-#~ msgid "Styx"
-#~ msgstr "Стікс"
-
-#~ msgid "Juliet"
-#~ msgstr "Джульєтта"
-
-#~ msgid "Kerberos"
-#~ msgstr "Кербер"
-
-#~ msgid "Psyche"
-#~ msgstr "Психея"
-
-#~ msgid "Eunomia"
-#~ msgstr "Евномія"
-
-#~ msgid "Amphitrite"
-#~ msgstr "Амфіріта"
-
-#~ msgid "Fortuna"
-#~ msgstr "Фортуна"
-
-#~ msgid "Eugenia"
-#~ msgstr "Євгенія"
-
-#~ msgid "Euphrosyne"
-#~ msgstr "Евфросіна"
-
-#~ msgid "Cybele"
-#~ msgstr "Кібела"
-
-#~ msgid "Doris"
-#~ msgstr "Доріс"
-
-#~ msgid "Parthenope"
-#~ msgstr "Партенопа"
-
-#~ msgid "Egeria"
-#~ msgstr "Егерія"
-
-#~ msgid "Thisbe"
-#~ msgstr "Тісба"
-
-#~ msgid "Sylvia"
-#~ msgstr "Сільвія"
-
-#~ msgid "Aurora"
-#~ msgstr "Аврора"
-
-#~ msgid "Camilla"
-#~ msgstr "Каміла"
-
-#~ msgid "Bamberga"
-#~ msgstr "Бамберга"
-
-#~ msgid "Ursula"
-#~ msgstr "Урсула"
-
-#~ msgid "Diotima"
-#~ msgstr "Діотіма"
-
-#~ msgid "Patientia"
-#~ msgstr "Пацієнція"
-
-#~ msgid "Davida"
-#~ msgstr "Давіда"
-
-#~ msgid "Herculina"
-#~ msgstr "Геркуліна"
-
-#~ msgid "Interamnia"
-#~ msgstr "Інтерамнія"

@@ -1,21 +1,22 @@
-# Chinese (Traditional) translation for stellarium
-# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
-# This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-28 11:59+0700\n"
-"PO-Revision-Date: 2017-06-20 09:09+0000\n"
-"Last-Translator: Freeman Li <freeman.tam@gmail.com>\n"
-"Language-Team: Chinese (Traditional) <zh_TW@li.org>\n"
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-29 05:54+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
+"Language: zh_TW\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -304,8 +305,8 @@ msgstr "ZHR:"
 
 #: index.html:288 tablet7in.html:452
 msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
 msgstr "地軸圍繞黃極轉旋轉的瞬時圓，僅顯示於地球。"
 
 #: index.html:297 tablet7in.html:461
@@ -425,8 +426,7 @@ msgid "No response from server"
 msgstr "伺服器沒有回應"
 
 #: index.html:615
-msgid ""
-"No response from server since %1 seconds. Is Stellarium still running?"
+msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr "從 %1 秒前開始伺服器就沒有回應，Stellarium 是否仍在運行？"
 
 #: tablet7in.html:32
@@ -604,9 +604,3 @@ msgstr "清空螢幕"
 #: tablet7in.html:797
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "伺服器沒有回應已超過 %1 秒，Stellarium 是否仍在運行？"
-
-#~ msgid "Sidereal day"
-#~ msgstr "恆星日"
-
-#~ msgid "Selection"
-#~ msgstr "選取"

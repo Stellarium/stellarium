@@ -1,21 +1,22 @@
-# Persian translation for stellarium
-# Copyright (c) 2017 Rosetta Contributors and Canonical Ltd 2017
-# This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2017.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the stellarium-remotecontrol package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2017-10-28 11:59+0700\n"
-"PO-Revision-Date: 2017-04-02 16:25+0000\n"
-"Last-Translator: Farhad Bagheri Fard <canada.fery@gmail.com>\n"
-"Language-Team: Persian <fa@li.org>\n"
+"Project-Id-Version: stellarium-remotecontrol\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Persian (https://www.transifex.com/stellarium/teams/80998/fa/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-10-29 05:54+0000\n"
-"X-Generator: Launchpad (build 18493)\n"
+"Language: fa\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
@@ -304,8 +305,8 @@ msgstr "آهنگ بارش شهاب ساعتی"
 
 #: index.html:288 tablet7in.html:452
 msgid ""
-"Instantaneous circles of earth´s axis on its motion around ecliptical poles. "
-"Displayed on Earth only."
+"Instantaneous circles of earth´s axis on its motion around ecliptical poles."
+" Displayed on Earth only."
 msgstr ""
 "دوایر لحظه ای حاصل از حرکت زمین حول محوری که در راستای قطبین دایره البروج "
 "است.فقط برروی زمین قابل نمایش است."
@@ -427,8 +428,7 @@ msgid "No response from server"
 msgstr "عدم پاسخ ازطرف سرور"
 
 #: index.html:615
-msgid ""
-"No response from server since %1 seconds. Is Stellarium still running?"
+msgid "No response from server since %1 seconds. Is Stellarium still running?"
 msgstr ""
 "عدم پاسخ از طرف سرورپس از چند ثانیه. آیا استلاریوم همچنان درحال اجرااست؟"
 
@@ -608,9 +608,3 @@ msgstr "پاک کردن صفحه نمایش"
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "عدم پاسخ از طرف سروربمدت چندثانیه. آیا استلاریوم همچنان درحال اجرااست؟"
-
-#~ msgid "Sidereal day"
-#~ msgstr "روز نجومى"
-
-#~ msgid "Selection"
-#~ msgstr "انتخاب"

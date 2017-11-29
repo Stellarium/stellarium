@@ -1,21 +1,22 @@
-# Bengali translation for stellarium
-# Copyright (c) 2007 Rosetta Contributors and Canonical Ltd 2007
-# This file is distributed under the same license as the stellarium package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2007.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: stellarium\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-18 14:03+0700\n"
-"PO-Revision-Date: 2017-11-19 09:08+0000\n"
-"Last-Translator: Tanmoy Saha <Unknown>\n"
-"Language-Team: Bengali <bn@li.org>\n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-20 05:14+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"Language: bn\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: skycultures/translations.fab:10
 msgctxt "star"
@@ -468,7 +469,8 @@ msgctxt "special celestial body"
 msgid "Earth Observer"
 msgstr "পৃথিবী পর্যবেক্ষন স্থল"
 
-#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with
+#. Ctrl+G.
 #: skycultures/translations.fab:183
 msgctxt "special celestial body"
 msgid "SpaceShip"
@@ -1615,2835 +1617,2939 @@ msgctxt "Genitive name of constellation"
 msgid "Vulpeculae"
 msgstr "শিয়াল মন্ডলের"
 
-#: nebulae/default/names.dat:26
+#: nebulae/default/names.dat:28
 msgid "Bow-Tie Nebula"
 msgstr "বো-টাই রূপী নীহারিকা"
 
-#: nebulae/default/names.dat:27
+#: nebulae/default/names.dat:29
 msgid "Scarab Nebula"
 msgstr "স্ক্যারাব পোকা নীহারিকা"
 
-#: nebulae/default/names.dat:28 nebulae/default/names.dat:29
 #: nebulae/default/names.dat:30 nebulae/default/names.dat:31
+#: nebulae/default/names.dat:32 nebulae/default/names.dat:33
 msgid "Robert's Quartet"
 msgstr "রবার্টের চতুষ্টয়"
 
-#: nebulae/default/names.dat:32
+#: nebulae/default/names.dat:34
 msgid "47 Tuc"
 msgstr "৪৭ টাউকান"
 
-#: nebulae/default/names.dat:33
+#: nebulae/default/names.dat:35
 msgid "Giant Squid Galaxy"
 msgstr "বিশাল স্কুইড নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:34
+#: nebulae/default/names.dat:36
 msgid "Polarissima Cluster"
 msgstr "পোলারিসিমা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:35
+#: nebulae/default/names.dat:37
 msgid "Great Star Cloud in Andromeda Galaxy"
 msgstr "অ্যান্ড্রোমিডা নক্ষত্রলোকের বিখ্যাত নক্ষত্র সমাবেশ"
 
-#: nebulae/default/names.dat:36
+#: nebulae/default/names.dat:38
 msgid "Andromeda Galaxy"
 msgstr "অ্যান্ড্রোমিডা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:37
+#: nebulae/default/names.dat:39
 msgid "Andromeda Nebula"
 msgstr "অ্যান্ড্রোমিডা নীহারিকা"
 
-#: nebulae/default/names.dat:38
+#: nebulae/default/names.dat:40
+msgid "Great Nebula in Andromeda"
+msgstr ""
+
+#: nebulae/default/names.dat:41
 msgid "Sailboat Cluster"
 msgstr "পালতোলা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:39
+#: nebulae/default/names.dat:42
 msgid "Skull Nebula"
 msgstr "খুলি নীহারিকা"
 
-#: nebulae/default/names.dat:40
+#: nebulae/default/names.dat:43
 msgid "Soap Bubble Nebula"
 msgstr "সাবান ফেনা নীহারিকা"
 
-#: nebulae/default/names.dat:41
+#: nebulae/default/names.dat:44
 msgid "Voodoo Mask Nebula"
 msgstr "ভুডু মুখোশ নীহারিকা"
 
-#: nebulae/default/names.dat:42 nebulae/default/names.dat:643
+#: nebulae/default/names.dat:45 nebulae/default/names.dat:678
 msgid "Burbidge Chain"
 msgstr "বারবিজের চেন"
 
-#: nebulae/default/names.dat:43
+#: nebulae/default/names.dat:46
 msgid "Sculptor Galaxy"
 msgstr "ভাস্কর ছায়াপথ"
 
-#: nebulae/default/names.dat:44
+#: nebulae/default/names.dat:47
 msgid "Silver Coin Galaxy"
 msgstr "রৌপমুদ্রা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:45
+#: nebulae/default/names.dat:48
 msgid "Silver Dollar Galaxy"
 msgstr "রুপোর ডলার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:46
+#: nebulae/default/names.dat:49
 msgid "Pisces Cloud"
 msgstr "মীন মেঘ"
 
-#: nebulae/default/names.dat:47
+#: nebulae/default/names.dat:50
 msgid "Markarian 348"
 msgstr "মার্কারিয়ান ৩৪৮"
 
-#: nebulae/default/names.dat:48
+#: nebulae/default/names.dat:51
 msgid "Small Magellanic Cloud"
 msgstr "ছোট ম্যাজেলানিয় মেঘপুঞ্জ"
 
-#: nebulae/default/names.dat:49
+#: nebulae/default/names.dat:52
 msgid "Nubecula Minor"
 msgstr "গৌন নুবেকুলা"
 
-#: nebulae/default/names.dat:50
+#: nebulae/default/names.dat:53
 msgid "Mirach's Ghost"
 msgstr "মিরাচের ভুত"
 
-#: nebulae/default/names.dat:51
+#: nebulae/default/names.dat:54
 msgid "Dragonfly Cluster"
 msgstr "ফড়িং তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:52
+#: nebulae/default/names.dat:55
 msgid "Owl Cluster"
 msgstr "পেঁচা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:53
+#: nebulae/default/names.dat:56
 msgid "E.T. Cluster"
 msgstr "ই.টি. তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:54
+#: nebulae/default/names.dat:57
 msgid "Whirligig Galaxy"
 msgstr "নাগরদোলা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:55
+#: nebulae/default/names.dat:58
 msgid "Triangulum Galaxy"
 msgstr "ত্রিকোণ ছায়াপথ"
 
-#: nebulae/default/names.dat:56
+#: nebulae/default/names.dat:59
 msgid "Triangulum Pinwheel"
 msgstr "ত্রিভূজ মন্ডলের চরকা"
 
-#: nebulae/default/names.dat:57
-msgid "Little Spindle Galaxy"
-msgstr "ক্ষুদ্র চরকা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:58
-msgid "Phantom Galaxy"
-msgstr "ছায়ামূর্তি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:59
-msgid "Little Dumbbell Nebula"
-msgstr "ছোট্ট ডাম্বেল নীহারিকা"
-
-#: nebulae/default/names.dat:60
-msgid "Cork Nebula"
-msgstr "ছিপি নীহারিকা"
-
-#: nebulae/default/names.dat:61
-msgid "Barbell Nebula"
-msgstr "বারবেল নীহারিকা"
-
-#: nebulae/default/names.dat:62
-msgid "Fuzzy Butterfly Cluster"
-msgstr "রোমশ প্রজাপতি নীহারিকা"
-
-#: nebulae/default/names.dat:63
-msgid "Lawnmower Cluster"
-msgstr "ঘাস কাটার যন্ত্র তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:64
-msgid "Fiddlehead Galaxy"
-msgstr "ফিডেলহেড ফার্ন নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:65 nebulae/default/names.dat:67
-msgid "Double Cluster"
-msgstr "দ্বৈত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:66
-msgid "h Persei"
-msgstr "h পারসেই"
-
-#: nebulae/default/names.dat:68
-msgid "χ Persei"
-msgstr "χ পারসেই"
-
-#: nebulae/default/names.dat:69
-msgid "Perseus Lenticular Galaxy"
-msgstr "পারসিউসের লেন্সাকার নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:70
-msgid "Spiral Cluster"
-msgstr "সর্পিল তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:71
-msgid "Fornax Dwarf Cluster 3"
-msgstr "অগ্নিকুণ্ড বামন তারকাগুচ্ছ ৩"
-
-#: nebulae/default/names.dat:72
-msgid "Fornax H3"
-msgstr "অগ্নিকুণ্ড এইচ৩"
-
-#: nebulae/default/names.dat:73
-msgid "Fornax C3"
-msgstr "অগ্নিকুণ্ড সি৩"
-
-#: nebulae/default/names.dat:74
-msgid "Fornax 3"
-msgstr "অগ্নিকুণ্ড ৩"
-
-#: nebulae/default/names.dat:75
-msgid "Cetus A"
-msgstr "তিমি 'এ'"
-
-#: nebulae/default/names.dat:76
-msgid "Eye of God Galaxy"
-msgstr "ত্রিনয়ন নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:77
-msgid "Patrick Starfish Cluster"
-msgstr "প্যাট্রিক তারামাছ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:78
-msgid "Perseus A"
-msgstr "পার্সিয়ুস 'এ'"
-
-#: nebulae/default/names.dat:79
-msgid "Fornax A"
-msgstr "অগ্নিকুণ্ড 'এ'"
-
-#: nebulae/default/names.dat:80
-msgid "Fornax B"
-msgstr "অগ্নিকুণ্ড 'বি'"
-
-#: nebulae/default/names.dat:81
-msgid "Embryo Nebula"
-msgstr "ভ্রুন নীহারিকা"
-
-#: nebulae/default/names.dat:82
-msgid "Little Scorpion Cluster"
-msgstr "ছোটো বৃশ্চিক তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:83
-msgid "Stingray Cluster"
-msgstr "শঙ্করমাছ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:84
-msgid "Robin's Egg Nebula"
-msgstr "রবিনের ডিম নীহারিকা"
-
-#: nebulae/default/names.dat:85
-msgid "Comet Planetary Nebula"
-msgstr "ধুমকেতু গ্রহরূপী নীহারিকা"
-
-#: nebulae/default/names.dat:86
-msgid "Maia Nebula"
-msgstr "মায়া নীহারিকা"
-
-#: nebulae/default/names.dat:87
-msgid "Merope Nebula"
-msgstr "মেরোপ নীহারিকা"
-
-#: nebulae/default/names.dat:88
-msgid "Tempel's Nebula"
-msgstr "টেম্পেলের নীহারিকা"
-
-#: nebulae/default/names.dat:89
-msgid "Fossil Footprint Nebula"
-msgstr "জীবাশ্ম নীহারিকা"
-
-#: nebulae/default/names.dat:90
-msgid "California Nebula"
-msgstr "ক্যালিফোর্নিয়া নীহারিকা"
-
-#: nebulae/default/names.dat:91
-msgid "Camel's Eye Nebula"
-msgstr "উটের চোখ নীহারিকা"
-
-#: nebulae/default/names.dat:92
-msgid "Oyster Nebula"
-msgstr "ঝিনুক নীহারিকা"
-
-#: nebulae/default/names.dat:93
-msgid "Jolly Roger Cluster"
-msgstr "জলি রজার তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:94
-msgid "Golden Harp Cluster"
-msgstr "সোনালী বীনা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:95
-msgid "Crystal Ball Nebula"
-msgstr "মায়া গোলক নীহারিকা"
-
-#: nebulae/default/names.dat:96
-msgid "Pansy Nebula"
-msgstr "বেগুনী নীহারিকা"
-
-#: nebulae/default/names.dat:97
-msgid "Cleopatra's Eye Nebula"
-msgstr "ক্লিওপেট্রার চোখ নীহারিকা"
-
-#: nebulae/default/names.dat:98
-msgid "Eskimo's Wife Nebula"
-msgstr "এস্কিমো স্ত্রী নীহারিকা"
-
-#: nebulae/default/names.dat:99
-msgid "Struve's Lost Nebula"
-msgstr "স্ট্রুভের হারানো নীহারিকা"
-
-#: nebulae/default/names.dat:100
-msgid "Struve's Nebula"
-msgstr "স্ট্রুভের নীহারিকা"
-
-#: nebulae/default/names.dat:101
-msgid "Hind's Variable Nebula"
-msgstr "হাইন্ডের বিষম নীহারিকা"
-
-#: nebulae/default/names.dat:102
-msgid "Hind's Nebula"
-msgstr "হাইন্ডের নীহারিকা"
-
-#: nebulae/default/names.dat:103 nebulae/default/names.dat:104
-msgid "Carafe Group"
-msgstr "ক্যারাফ পুঞ্জ"
-
-#: nebulae/default/names.dat:105
-msgid "Pirate Moon Cluster"
-msgstr "জলদস্যুর চাঁদ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:106
-msgid "Poor Man's Double Cluster"
-msgstr "গরীবের দ্বৈত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:107 nebulae/default/names.dat:108
-#: nebulae/default/names.dat:389
-msgid "Starfish Cluster"
-msgstr "তারামাছ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:109
-msgid "Fly Nebula"
-msgstr "মাছি নীহারিকা"
-
-#: nebulae/default/names.dat:110
-msgid "Crab Nebula"
-msgstr "কাঁকড়া নীহারিকা"
-
-#: nebulae/default/names.dat:111
-msgid "Taurus A"
-msgstr "বৃষ মন্ডল A"
-
-#: nebulae/default/names.dat:112
-msgid "Pinwheel Cluster"
-msgstr "চরকা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:113
-msgid "Mermaid's Purse Nebula"
-msgstr "ডিমের থলি নীহারিকা"
-
-#: nebulae/default/names.dat:114
-msgid "Great Orion Nebula"
-msgstr "বিশাল কালপুরুষ নীহারিকা"
-
-#: nebulae/default/names.dat:115
-msgid "Orion Nebula"
-msgstr "কালপুরুষ নীহারিকা"
-
-#: nebulae/default/names.dat:116
-msgid "Orion A"
-msgstr "কালপুরুষ A"
-
-#: nebulae/default/names.dat:117
-msgid "Running Man Nebula"
-msgstr "দৌড়বাজ নীহারিকা"
-
-#: nebulae/default/names.dat:118
-msgid "The Lost Jewel of Orion"
-msgstr "কালপুরুষের হারানো রত্ন"
-
-#: nebulae/default/names.dat:119
-msgid "Lower Sword"
-msgstr "তলোয়ারের নিম্নভাগ"
-
-#: nebulae/default/names.dat:120
-msgid "Coal Car Cluster"
-msgstr "কয়লার গাড়ি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:121
-msgid "Upper Sword"
-msgstr "তলোয়ারের উপরিভাগ"
-
-#: nebulae/default/names.dat:122
-msgid "de Mairan's Nebula"
-msgstr "ডি মারিয়ানের নীহারিকা"
-
-#: nebulae/default/names.dat:123
-msgid "Mairan's Nebula"
-msgstr "মাইরানের নীহারিকা"
-
-#: nebulae/default/names.dat:124
-msgid "ε Ori Nebula"
-msgstr "ε কালপুরুষ নীহারিকা"
-
-#: nebulae/default/names.dat:125
-msgid "13th Pearl Nebula"
-msgstr "১৩ মুক্তা নীহারিকা"
-
-#: nebulae/default/names.dat:126
-msgid "Black Eye Nebula"
-msgstr "কৃষ্ণ চোখ নীহারিকা"
-
-#: nebulae/default/names.dat:127
-msgid "Kissing Crescents Nebula"
-msgstr "চুম্বন চন্দ্রকলা নীহারিকা"
-
-#: nebulae/default/names.dat:128
-msgid "Orion's Collarbone Nebula"
-msgstr "কালপুরুষ কণ্ঠাস্থি নীহারিকা"
-
-#: nebulae/default/names.dat:129
-msgid "Flame Nebula"
-msgstr "শিখা নীহারিকা"
-
-#: nebulae/default/names.dat:130
-msgid "Tank Tracks Nebula"
-msgstr "ট্যাঙ্কের চাকার দাগ নীহারিকা"
-
-#: nebulae/default/names.dat:131
-msgid "Maple Leaf Nebula"
-msgstr "মেপেল পাতা নীহারিকা"
-
-#: nebulae/default/names.dat:132
-msgid "30 Dor B"
-msgstr "৩০ ডোরাডো বি"
-
-#: nebulae/default/names.dat:133
-msgid "Casper the Friendly Ghost Nebula"
-msgstr "ক্যাসপার ভুত নীহারিকা"
-
-#: nebulae/default/names.dat:134
-msgid "Tarantula Nebula"
-msgstr "ট্যারেনটুলা নীহারিকা"
-
-#: nebulae/default/names.dat:135
-msgid "Looped Nebula"
-msgstr "ফাঁস নীহারিকা"
-
-#: nebulae/default/names.dat:136
-msgid "True Lovers' Knot"
-msgstr "প্রকৃত প্রেমের বাঁধন"
-
-#: nebulae/default/names.dat:137
-msgid "30 Dor Cluster"
-msgstr "৩০ ডোরাডো তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:138
-msgid "Ghost Head Nebula"
-msgstr "প্রেত শির নীহারিকা"
-
-#: nebulae/default/names.dat:139
-msgid "January Salt-and-Pepper Cluster"
-msgstr "জানুয়ারীর ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:140
-msgid "Dusty Hand Galaxy"
-msgstr "ময়লা হাত নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:141
-msgid "The 37 Cluster"
-msgstr "৩৭ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:142
-msgid "The 'LE' Cluster"
-msgstr "লে এর তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:143
-msgid "Shopping Cart Cluster"
-msgstr "বাজারের ঠেলা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:144
-msgid "Mon R2 IRS3"
-msgstr "একশৃঙ্গী R2 IRS3"
-
-#: nebulae/default/names.dat:145
-msgid "Monkey Head Nebula"
-msgstr "কপি শির নীহারিকা"
-
-#: nebulae/default/names.dat:146 nebulae/default/names.dat:149
-#: nebulae/default/names.dat:151 nebulae/default/names.dat:152
-#: nebulae/default/names.dat:617
-msgid "Rosette Nebula"
-msgstr "গোলাপাকৃতি নীহারিকা"
-
-#: nebulae/default/names.dat:147
-msgid "Rosette A"
-msgstr "গোলাপ নীহারিকা 'এ'"
-
-#: nebulae/default/names.dat:148
-msgid "NGC 2244 Satellite Cluster"
-msgstr "নুতন তালিকা ২২৪৪ ভ্রাম্যমান তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:153
-msgid "Rosette B"
-msgstr "গোলাপ নীহারিকা 'বি'"
-
-#: nebulae/default/names.dat:154
-msgid "Hubble's Variable Nebula"
-msgstr "হাবলের বিষম নীহারিকা"
-
-#: nebulae/default/names.dat:155
-msgid "Hubble's Nebula"
-msgstr "হাবলের নীহারিকা"
-
-#: nebulae/default/names.dat:156
-msgid "Cone Nebula"
-msgstr "শঙ্কু নীহারিকা"
-
-#: nebulae/default/names.dat:157
-msgid "Christmas Tree Cluster"
-msgstr "ক্রিসমাসের গাছ"
-
-#: nebulae/default/names.dat:158
-msgid "Head Hunter Cluster"
-msgstr "শিরোচ্ছেদকারী তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:159
-msgid "Starfighter Cluster"
-msgstr "যুদ্ধবিমান তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:160
-msgid "Broken Heart Cluster"
-msgstr "ভগ্নহৃদয় তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:161
-msgid "Little Beehive Cluster"
-msgstr "ছোটো মৌচাক তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:162
-msgid "Hagrid's Dragon Cluster"
-msgstr "হ্যাগ্রিডের ড্রাগন তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:163
-msgid "Great Bird Cluster"
-msgstr "বিশাল পাখি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:164
-msgid "Heart-Shaped Cluster"
-msgstr "হৃদয় নীহারিকা"
-
-#: nebulae/default/names.dat:165 nebulae/default/names.dat:364
-#: nebulae/default/names.dat:524
-msgid "Butterfly Nebula"
-msgstr "প্রজাপতি নীহারিকা"
-
-#: nebulae/default/names.dat:166
-msgid "Hourglass Planetary Nebula"
-msgstr "বালিঘড়ি নীহারিকা"
-
-#: nebulae/default/names.dat:167
-msgid "Thor's Helmet"
-msgstr "থর এর শিরস্ত্রাণ"
-
-#: nebulae/default/names.dat:168
-msgid "Duck Nebula"
-msgstr "পাতিহাঁস নীহারিকা"
-
-#: nebulae/default/names.dat:169
-msgid "Caroline's Cluster"
-msgstr "ক্যারোলাইনের তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:170
-msgid "τ CMa Cluster"
-msgstr "টাউ কুকুর ছানা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:171
-msgid "Mexican Jumping Star"
-msgstr "লাফিয়ে বেড়ানো মেক্সিকান তারা"
-
-#: nebulae/default/names.dat:172
-msgid "Pirate's Jewels Cluster"
-msgstr "জলদস্যুর রত্ন তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:173
-msgid "Gemini Nebula"
-msgstr "মিথুন নীহারিকা"
-
-#: nebulae/default/names.dat:174
-msgid "Ant Nebula"
-msgstr "পিঁপড়ে নীহারিকা"
-
-#: nebulae/default/names.dat:175
-msgid "Double Bubble Nebula"
-msgstr "জোড়া বুদবুদ নীহারিকা"
-
-#: nebulae/default/names.dat:176
-msgid "Peanut Nebula"
-msgstr "খোলাবাদাম নীহারিকা"
-
-#: nebulae/default/names.dat:177
-msgid "Eskimo Nebula"
-msgstr "এস্কিমো নীহারিকা"
-
-#: nebulae/default/names.dat:178
-msgid "Clown Face Nebula"
-msgstr "জোকারের মুখাকৃতি নীহারিকা"
-
-#: nebulae/default/names.dat:179
-msgid "Firsse 213"
-msgstr "ফিরসে ২১৩"
-
-#: nebulae/default/names.dat:180
-msgid "Intergalactic Wanderer/Tramp"
-msgstr "মহাকাশের পথিক/ভবঘুরে"
-
-#: nebulae/default/names.dat:181
-msgid "Twinkling Comet Cluster"
-msgstr "মিটমিটে ধূমকেতু তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:182
-msgid "Albino Butterfly Nebula"
-msgstr "সাদা প্রজাপতি নীহারিকা"
-
-#: nebulae/default/names.dat:183
-msgid "Burning Ember Nebula"
-msgstr "জলন্ত গালা নীহারিকা"
-
-#: nebulae/default/names.dat:184
-msgid "Bat Nebula"
-msgstr "বাদুড় নীহারিকা"
-
-#: nebulae/default/names.dat:185 nebulae/default/names.dat:373
-msgid "Butterfly Cluster"
-msgstr "প্রজাপতি স্তবক"
-
-#: nebulae/default/names.dat:186
-msgid "Stinging Scorpion Cluster"
-msgstr "হূল ফোটানো বিছে তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:187
-msgid "Skull and Crossbones Nebula"
-msgstr "স্কাল ও ক্রসবোন নীহারিকা"
-
-#: nebulae/default/names.dat:188
-msgid "Chained Brooch Nebula"
-msgstr "শিকলযুক্ত গহনা নীহারিকা"
-
-#: nebulae/default/names.dat:189
-msgid "Electric Guitar Cluster"
-msgstr "ইলেক্ট্রিক গিটার তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:190
-msgid "Termite Hole Cluster"
-msgstr "উঁই এর ঢিপি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:191
-msgid "Sprinter Cluster"
-msgstr "দৌড়বাজ নীহারিকা"
-
-#: nebulae/default/names.dat:192
-msgid "Diamond Cluster"
-msgstr "বরফি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:193
-msgid "Bear's Paw Galaxy"
-msgstr "ভালুকের থাবা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:194 nebulae/default/names.dat:596
-msgid "Bear Claw Nebula"
-msgstr "ভল্লুক নখর নীহারিকা"
-
-#: nebulae/default/names.dat:195
-msgid "The Dish Cluster"
-msgstr "থালা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:196
-msgid "Heart and Dagger Cluster"
-msgstr "হৃদয় ও ছুরি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:197
-msgid "Polarissima Australis"
-msgstr "দক্ষিন ধ্রুবীয় নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:198
-msgid "Beehive Cluster"
-msgstr "মৌচাক তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:199
-msgid "Praesepe"
-msgstr "পুষ্যা"
-
-#: nebulae/default/names.dat:200
-msgid "Manger"
-msgstr "গামলা"
-
-#: nebulae/default/names.dat:201
-msgid "King Cobra Cluster"
-msgstr "শঙ্খচূড় তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:202
-msgid "UFO Galaxy"
-msgstr "উড়নচাকি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:203
-msgid "Helix Galaxy"
-msgstr "সর্পিল ছায়াপথ"
-
-#: nebulae/default/names.dat:204
-msgid "Pancake Galaxy"
-msgstr "চ্যাপ্টা পিঠে নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:205 nebulae/default/names.dat:220
-#: nebulae/default/names.dat:339
-msgid "Spindle Galaxy"
-msgstr "ঘূর্ণ্যমান দণ্ড ছায়াপথ"
-
-#: nebulae/default/names.dat:206
-msgid "Pencil Nebula"
-msgstr "পেনসিল নীহারিকা"
-
-#: nebulae/default/names.dat:207
-msgid "Herschel's Ray Nebula"
-msgstr "হার্শেলের সূত্রাকার নীহারিকা"
-
-#: nebulae/default/names.dat:208
-msgid "NGC 2769 Group"
-msgstr "নুতন তালিকা ২৭৬৯ দল"
-
-#: nebulae/default/names.dat:209
-msgid "Supernova Factory"
-msgstr "অতিনোভা কারখানা"
-
-#: nebulae/default/names.dat:210
-msgid "Tiger's Eye Galaxy"
-msgstr "বাঘের চোখ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:211
-msgid "The Penguin Galaxy"
-msgstr "পেংগুইন নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:212
-msgid "The Egg Galaxy"
-msgstr "ডিম নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:213
-msgid "Bode's Galaxy"
-msgstr "বোড-এর ছায়াপথ"
-
-#: nebulae/default/names.dat:214
-msgid "Bode's Nebula"
-msgstr "বোডের নীহারিকা"
-
-#: nebulae/default/names.dat:215
-msgid "Cigar Galaxy"
-msgstr "চুরুট রূপী নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:216
-msgid "Ursa Major A"
-msgstr "উরসা মেজর (সপ্তর্ষি) A"
-
-#: nebulae/default/names.dat:217 nebulae/default/names.dat:683
-msgid "The Garland Galaxy"
-msgstr "মালা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:218
-msgid "The Phantom Frisbee Galaxy"
-msgstr "ছায়ামূর্তির চাকতি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:219
-msgid "Little Pinwheel Galaxy"
-msgstr "ছোটো চরকা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:221
-msgid "Eight-Burst Planetary Nebula"
-msgstr "চারের মত নীহারিকা"
-
-#: nebulae/default/names.dat:222 nebulae/default/names.dat:390
-msgid "Southern Ring Nebula"
-msgstr "দক্ষিনের আংটি নীহারিকা"
-
-#: nebulae/default/names.dat:223
-msgid "Polarissima Borealis"
-msgstr "উত্তর ধ্রুবীয় নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:224
-msgid "Ghost of Jupiter Nebula"
-msgstr "বৃহস্পতির প্রেতাত্মা নীহারিকা"
-
-#: nebulae/default/names.dat:225
-msgid "Eye Nebula"
-msgstr "চক্ষু নীহারিকা"
-
-#: nebulae/default/names.dat:226
-msgid "Gem Cluster"
-msgstr "রত্ন তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:227 nebulae/default/names.dat:232
-msgid "Keyhole Nebula"
-msgstr "চাবির ফুঁটো নীহারিকা"
-
-#: nebulae/default/names.dat:228
-msgid "The Gabriela Mistral Nebula"
-msgstr "গ্যাব্রিয়েলা মিস্ট্রাল নীহারিকা"
-
-#: nebulae/default/names.dat:229
-msgid "Sliced Onion Galaxy"
-msgstr "পেঁয়াজের টুকরো নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:230
-msgid "η Car Nebula"
-msgstr "ইটা ক্যারিনা নীহারিকা"
-
-#: nebulae/default/names.dat:231
-msgid "Homunculus Nebula"
-msgstr "লিলিপুট নীহারিকা"
-
-#: nebulae/default/names.dat:233
-msgid "Knitting Needle Galaxy"
-msgstr "সূঁচ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:234
-msgid "Wishing Well Cluster"
-msgstr "কল্পতরু কুপ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:235
-msgid "Firefly Party Cluster"
-msgstr "জোনাকি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:236
-msgid "Pincushion Cluster"
-msgstr "পিন কুশন তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:237
-msgid "Surfboard Galaxy"
-msgstr "সার্ফবোর্ড নীহারিকা"
-
-#: nebulae/default/names.dat:238
-msgid "Ambartsumian's Knot"
-msgstr "অ্যমব্রাটসুমিয়ান গিঁট"
-
-#: nebulae/default/names.dat:239
-msgid "The Guitar"
-msgstr "গিটার"
-
-#: nebulae/default/names.dat:240
-msgid "Statue of Liberty Nebula"
-msgstr "স্ট্যচু অফ লিবার্টি নীহারিকা"
-
-#: nebulae/default/names.dat:241
-msgid "Owl Nebula"
-msgstr "পেঁচা নীহারিকা"
-
-#: nebulae/default/names.dat:242
-msgid "Frame Galaxy"
-msgstr "কাঠামো নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:243 nebulae/default/names.dat:244
-#: nebulae/default/names.dat:246
-msgid "Leo Triplet"
-msgstr "সিংহ মন্ডলের ত্রয়ী নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:245
-msgid "Hamburger Galaxy"
-msgstr "হ্যামবার্গার নীহারিকা"
-
-#: nebulae/default/names.dat:247
-msgid "King Hamlet's Ghost"
-msgstr "রাজা হ্যমলেটের ভুত"
-
-#: nebulae/default/names.dat:248 nebulae/default/names.dat:249
-#: nebulae/default/names.dat:250 nebulae/default/names.dat:251
-#: nebulae/default/names.dat:252 nebulae/default/names.dat:253
-#: nebulae/default/names.dat:254
-msgid "Copeland's Septet"
-msgstr "কোপল্যান্ডের সপ্তক"
-
-#: nebulae/default/names.dat:255
-msgid "Pearl Cluster"
-msgstr "মুক্ত নীহারিকা"
-
-#: nebulae/default/names.dat:256
-msgid "Blue planetary"
-msgstr "নীল গ্রহরূপী নীহারিকা"
-
-#: nebulae/default/names.dat:257
-msgid "Miniature Spiral"
-msgstr "ক্ষুদ্রকায় পেঁচানো নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:258
-msgid "Vacuum Cleaner Galaxy"
-msgstr "ভ্যাকিউম ক্লিনার নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:259 nebulae/default/names.dat:260
-msgid "Antennae"
-msgstr "পতঙ্গের শুঁড়"
-
-#: nebulae/default/names.dat:261 nebulae/default/names.dat:262
-#: nebulae/default/names.dat:263
-msgid "Box"
-msgstr "বাক্স"
-
-#: nebulae/default/names.dat:264
-msgid "Medusa Galaxy"
-msgstr "সর্পচুলা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:265
-msgid "Medusa merger"
-msgstr "মেডুসা সমবায়"
-
-#: nebulae/default/names.dat:266
-msgid "Medusa Galaxy Merger"
-msgstr "সর্পচুলা নক্ষত্রলোক সমবায়"
-
-#: nebulae/default/names.dat:267
-msgid "Silver Streak Galaxy"
-msgstr "রূপোলী পথ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:268
-msgid "Virgo Cluster Pinwheel"
-msgstr "ভিরগো চরকা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:269
-msgid "Coma Pinwheel Galaxy"
-msgstr "কোমা চরকা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:270
-msgid "St. Catherine’s Wheel"
-msgstr "সন্ত ক্যাথরিনের চরকা"
-
-#: nebulae/default/names.dat:271
-msgid "Faust V023"
-msgstr "ফাউস্ট V০২৩"
-
-#: nebulae/default/names.dat:272
-msgid "Swelling Spiral Galaxy"
-msgstr "স্ফীত পেঁচালো নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:273
-msgid "Blowdryer Galaxy"
-msgstr "ব্লোড্রায়ার নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:274
-msgid "Mirror Galaxy"
-msgstr "আয়না নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:275
-msgid "Galaxy Cluster"
-msgstr "নক্ষত্রলোক গুচ্ছ"
-
-#: nebulae/default/names.dat:276
-msgid "Lawn Sprinkler Nebula"
-msgstr "উঠোনে জল ছড়ানো নল নীহারিকা"
-
-#: nebulae/default/names.dat:277
-msgid "Markarian's Chain"
-msgstr "মার্কারিয়ানের শিকল"
-
-#: nebulae/default/names.dat:278
-msgid "Faust V051"
-msgstr "ফাউস্ট V০৫১"
-
-#: nebulae/default/names.dat:279 nebulae/default/names.dat:281
-msgid "The Eyes"
-msgstr "চক্ষুদ্বয়"
-
-#: nebulae/default/names.dat:280 nebulae/default/names.dat:282
-msgid "Copeland's Eyes"
-msgstr "কোপল্যান্ডের চৌখ"
-
-#: nebulae/default/names.dat:283
-msgid "Virgo Galaxy"
-msgstr "ভিরগো নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:284
-msgid "Virgo A"
-msgstr "ভার্গো (কন্যা) A"
-
-#: nebulae/default/names.dat:285
-msgid "Smoking gun"
-msgstr "তদন্ত সূত্র"
-
-#: nebulae/default/names.dat:286 nebulae/default/names.dat:320
-msgid "Cocoon Galaxy"
-msgstr "গুটি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:287
-msgid "Shapley-Ames 2"
-msgstr "শ্যাপলে-এমিস ২"
-
-#: nebulae/default/names.dat:288
-msgid "Lost Galaxy"
-msgstr "নিখোঁজ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:289
-msgid "Hairy Eyebrow Galaxy"
-msgstr "মোটা ভ্রু নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:290
-msgid "The Lost Galaxy of Copeland"
-msgstr "কোপল্যান্ডের নিখোঁজ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:291
-msgid "Koi Fish Galaxy"
-msgstr "কই মাছ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:292
-msgid "Needle Galaxy"
-msgstr "সূঁচ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:293
-msgid "Flying Saucer Galaxy"
-msgstr "উড়ন্ত চাকি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:294 nebulae/default/names.dat:296
-msgid "Siamese Twins"
-msgstr "একত্রে জোড়া লাগা যমজ শিশু"
-
-#: nebulae/default/names.dat:295 nebulae/default/names.dat:297
-msgid "Fish and Chips Galaxies"
-msgstr "মাছ ও চিপস নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:298
-msgid "Sombrero Galaxy"
-msgstr "গোলটুপি ছায়াপথ"
-
-#: nebulae/default/names.dat:299
-msgid "Faberge Egg Galaxy"
-msgstr "সোনার ডিম নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:300
-msgid "Coalsack Cluster"
-msgstr "কয়লার বস্তা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:301
-msgid "Whale Galaxy"
-msgstr "তিমি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:302
-msgid "Herring Galaxy"
-msgstr "হেরিং মাছ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:303
-msgid "Umbrella Galaxy"
-msgstr "ছাতা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:304
-msgid "Crowbar Galaxy"
-msgstr "শাবল নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:305
-msgid "Hockey Stick Galaxy"
-msgstr "হকির লাঠি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:306
-msgid "Fishhook Galaxy"
-msgstr "মাছ ধরার কাঁটা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:307
-msgid "Superwind-Galaxy"
-msgstr "ঝোড়ো নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:308
-msgid "Mice Galaxies"
-msgstr "ইঁদুর নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:309
-msgid "Vinyl LP Galaxy"
-msgstr "ভিনাইল এলপি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:310
-msgid "Croc's Eye Galaxy"
-msgstr "কুমীরের চোখ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:311
-msgid "Jewel Box"
-msgstr "রত্ন বাক্স"
-
-#: nebulae/default/names.dat:312
-msgid "Herschel's Jewel Box"
-msgstr "হার্শেলের গয়নার বাক্স"
-
-#: nebulae/default/names.dat:313
-msgid "κ Cru Cluster"
-msgstr "κ ক্রুশ মন্ডলের তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:314
-msgid "Kidney Bean Galaxy"
-msgstr "বৃক্ক শিম ছায়াপথ"
-
-#: nebulae/default/names.dat:315
-msgid "Black Eye Galaxy"
-msgstr "কালশিটে চোখ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:316
-msgid "Evil Eye Galaxy"
-msgstr "শয়তানের চোখ নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:317
-msgid "Sleeping Beauty Galaxy"
-msgstr "ঘুমন্ত পরী নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:318
-msgid "Coma B"
-msgstr "কেশমন্ডল 'বি'"
-
-#: nebulae/default/names.dat:319
-msgid "Z Coma Coma"
-msgstr "Z কোমা কোমা"
-
-#: nebulae/default/names.dat:321
-msgid "Sunflower Galaxy"
-msgstr "সূর্যমুখী ছায়াপথ"
-
-#: nebulae/default/names.dat:322
-msgid "Iota's Ghost"
-msgstr "আয়োটার ভুত"
-
-#: nebulae/default/names.dat:323
-msgid "Centaurus A"
-msgstr "অশ্বমানব 'এ'"
-
-#: nebulae/default/names.dat:324
-msgid "ω Cen Cluster"
-msgstr "ω সেন্টুরাস তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:325
-msgid "Spiral planetary nebula"
-msgstr "প্যাঁচালো গ্রহরূপী নীহারিকা"
-
-#: nebulae/default/names.dat:326
-msgid "Whirlpool Galaxy"
-msgstr "ঘূর্ণিস্রোত ছায়াপথ"
-
-#: nebulae/default/names.dat:327
-msgid "Question Mark Galaxy"
-msgstr "প্রশ্নচিহ্নাকার নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:328
-msgid "Rosse's Galaxy"
-msgstr "রসের নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:329 nebulae/default/names.dat:330
-msgid "Keenan's System"
-msgstr "কীনানের জগৎ"
-
-#: nebulae/default/names.dat:331
-msgid "Southern Pinwheel Galaxy"
-msgstr "দক্ষিন চরকা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:332 nebulae/default/names.dat:537
-msgid "Seashell Galaxy"
-msgstr "ঝিনুক নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:333 nebulae/default/names.dat:334
-msgid "The Heron Galaxy"
-msgstr "সারস নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:335
+#: nebulae/default/names.dat:60 nebulae/default/names.dat:357
 msgid "Pinwheel Galaxy"
 msgstr "পিনচক্র ছায়াপথ"
 
+#: nebulae/default/names.dat:61
+msgid "Little Spindle Galaxy"
+msgstr "ক্ষুদ্র চরকা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:62
+msgid "Phantom Galaxy"
+msgstr "ছায়ামূর্তি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:63
+msgid "Little Dumbbell Nebula"
+msgstr "ছোট্ট ডাম্বেল নীহারিকা"
+
+#: nebulae/default/names.dat:64
+msgid "Cork Nebula"
+msgstr "ছিপি নীহারিকা"
+
+#: nebulae/default/names.dat:65
+msgid "Barbell Nebula"
+msgstr "বারবেল নীহারিকা"
+
+#: nebulae/default/names.dat:66 nebulae/default/names.dat:179
+#: nebulae/default/names.dat:388 nebulae/default/names.dat:555
+msgid "Butterfly Nebula"
+msgstr "প্রজাপতি নীহারিকা"
+
+#: nebulae/default/names.dat:67
+msgid "Fuzzy Butterfly Cluster"
+msgstr "রোমশ প্রজাপতি নীহারিকা"
+
+#: nebulae/default/names.dat:68
+msgid "Lawnmower Cluster"
+msgstr "ঘাস কাটার যন্ত্র তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:69
+msgid "Fiddlehead Galaxy"
+msgstr "ফিডেলহেড ফার্ন নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:70 nebulae/default/names.dat:72
+msgid "Double Cluster"
+msgstr "দ্বৈত তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:71
+msgid "h Persei"
+msgstr "h পারসেই"
+
+#: nebulae/default/names.dat:73
+msgid "χ Persei"
+msgstr "χ পারসেই"
+
+#: nebulae/default/names.dat:74
+msgid "Perseus Lenticular Galaxy"
+msgstr "পারসিউসের লেন্সাকার নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:75
+msgid "Spiral Cluster"
+msgstr "সর্পিল তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:76
+msgid "Fornax Dwarf Cluster 3"
+msgstr "অগ্নিকুণ্ড বামন তারকাগুচ্ছ ৩"
+
+#: nebulae/default/names.dat:77
+msgid "Fornax H3"
+msgstr "অগ্নিকুণ্ড এইচ৩"
+
+#: nebulae/default/names.dat:78
+msgid "Fornax C3"
+msgstr "অগ্নিকুণ্ড সি৩"
+
+#: nebulae/default/names.dat:79
+msgid "Fornax 3"
+msgstr "অগ্নিকুণ্ড ৩"
+
+#: nebulae/default/names.dat:80
+msgid "Cetus A"
+msgstr "তিমি 'এ'"
+
+#: nebulae/default/names.dat:81
+msgid "Eye of God Galaxy"
+msgstr "ত্রিনয়ন নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:82
+msgid "Patrick Starfish Cluster"
+msgstr "প্যাট্রিক তারামাছ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:83
+msgid "Perseus A"
+msgstr "পার্সিয়ুস 'এ'"
+
+#: nebulae/default/names.dat:84
+msgid "Fornax A"
+msgstr "অগ্নিকুণ্ড 'এ'"
+
+#: nebulae/default/names.dat:85
+msgid "Fornax B"
+msgstr "অগ্নিকুণ্ড 'বি'"
+
+#: nebulae/default/names.dat:86
+msgid "Embryo Nebula"
+msgstr "ভ্রুন নীহারিকা"
+
+#: nebulae/default/names.dat:87
+msgid "Little Scorpion Cluster"
+msgstr "ছোটো বৃশ্চিক তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:88
+msgid "Stingray Cluster"
+msgstr "শঙ্করমাছ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:89
+msgid "Robin's Egg Nebula"
+msgstr "রবিনের ডিম নীহারিকা"
+
+#: nebulae/default/names.dat:90
+msgid "Comet Planetary Nebula"
+msgstr "ধুমকেতু গ্রহরূপী নীহারিকা"
+
+#: nebulae/default/names.dat:91
+msgid "Great Barred Spiral Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:92
+msgid "Eridanus A Group"
+msgstr ""
+
+#: nebulae/default/names.dat:93
+msgid "Maia Nebula"
+msgstr "মায়া নীহারিকা"
+
+#: nebulae/default/names.dat:94
+msgid "Merope Nebula"
+msgstr "মেরোপ নীহারিকা"
+
+#: nebulae/default/names.dat:95
+msgid "Tempel's Nebula"
+msgstr "টেম্পেলের নীহারিকা"
+
+#: nebulae/default/names.dat:96
+msgid "Fossil Footprint Nebula"
+msgstr "জীবাশ্ম নীহারিকা"
+
+#: nebulae/default/names.dat:97
+msgid "California Nebula"
+msgstr "ক্যালিফোর্নিয়া নীহারিকা"
+
+#: nebulae/default/names.dat:98
+msgid "Camel's Eye Nebula"
+msgstr "উটের চোখ নীহারিকা"
+
+#: nebulae/default/names.dat:99
+msgid "Oyster Nebula"
+msgstr "ঝিনুক নীহারিকা"
+
+#: nebulae/default/names.dat:100
+msgid "Jolly Roger Cluster"
+msgstr "জলি রজার তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:101
+msgid "Golden Harp Cluster"
+msgstr "সোনালী বীনা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:102
+msgid "Crystal Ball Nebula"
+msgstr "মায়া গোলক নীহারিকা"
+
+#: nebulae/default/names.dat:103
+msgid "Pansy Nebula"
+msgstr "বেগুনী নীহারিকা"
+
+#: nebulae/default/names.dat:104
+msgid "Cleopatra's Eye Nebula"
+msgstr "ক্লিওপেট্রার চোখ নীহারিকা"
+
+#: nebulae/default/names.dat:105
+msgid "Eskimo's Wife Nebula"
+msgstr "এস্কিমো স্ত্রী নীহারিকা"
+
+#: nebulae/default/names.dat:106
+msgid "Struve's Lost Nebula"
+msgstr "স্ট্রুভের হারানো নীহারিকা"
+
+#: nebulae/default/names.dat:107
+msgid "Struve's Nebula"
+msgstr "স্ট্রুভের নীহারিকা"
+
+#: nebulae/default/names.dat:108
+msgid "Hind's Variable Nebula"
+msgstr "হাইন্ডের বিষম নীহারিকা"
+
+#: nebulae/default/names.dat:109
+msgid "Hind's Nebula"
+msgstr "হাইন্ডের নীহারিকা"
+
+#: nebulae/default/names.dat:110
+msgid "Northern Trifid Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:111 nebulae/default/names.dat:112
+msgid "Carafe Group"
+msgstr "ক্যারাফ পুঞ্জ"
+
+#: nebulae/default/names.dat:113
+msgid "Pirate Moon Cluster"
+msgstr "জলদস্যুর চাঁদ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:114
+msgid "Poor Man's Double Cluster"
+msgstr "গরীবের দ্বৈত তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:116 nebulae/default/names.dat:117
+#: nebulae/default/names.dat:413
+msgid "Starfish Cluster"
+msgstr "তারামাছ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:118
+msgid "Fly Nebula"
+msgstr "মাছি নীহারিকা"
+
+#: nebulae/default/names.dat:119
+msgid "Crab Nebula"
+msgstr "কাঁকড়া নীহারিকা"
+
+#: nebulae/default/names.dat:120
+msgid "Taurus A"
+msgstr "বৃষ মন্ডল A"
+
+#: nebulae/default/names.dat:121
+msgid "Pinwheel Cluster"
+msgstr "চরকা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:122
+msgid "Mermaid's Purse Nebula"
+msgstr "ডিমের থলি নীহারিকা"
+
+#: nebulae/default/names.dat:123
+msgid "Great Orion Nebula"
+msgstr "বিশাল কালপুরুষ নীহারিকা"
+
+#: nebulae/default/names.dat:124
+msgid "Orion Nebula"
+msgstr "কালপুরুষ নীহারিকা"
+
+#: nebulae/default/names.dat:125
+msgid "Orion A"
+msgstr "কালপুরুষ A"
+
+#: nebulae/default/names.dat:126
+msgid "Running Man Nebula"
+msgstr "দৌড়বাজ নীহারিকা"
+
+#: nebulae/default/names.dat:127
+msgid "The Lost Jewel of Orion"
+msgstr "কালপুরুষের হারানো রত্ন"
+
+#: nebulae/default/names.dat:128
+msgid "Lower Sword"
+msgstr "তলোয়ারের নিম্নভাগ"
+
+#: nebulae/default/names.dat:129
+msgid "Coal Car Cluster"
+msgstr "কয়লার গাড়ি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:130
+msgid "Upper Sword"
+msgstr "তলোয়ারের উপরিভাগ"
+
+#: nebulae/default/names.dat:131
+msgid "de Mairan's Nebula"
+msgstr "ডি মারিয়ানের নীহারিকা"
+
+#: nebulae/default/names.dat:132
+msgid "Mairan's Nebula"
+msgstr "মাইরানের নীহারিকা"
+
+#: nebulae/default/names.dat:133
+msgid "ε Ori Nebula"
+msgstr "ε কালপুরুষ নীহারিকা"
+
+#: nebulae/default/names.dat:134
+msgid "13th Pearl Nebula"
+msgstr "১৩ মুক্তা নীহারিকা"
+
+#: nebulae/default/names.dat:135
+msgid "Black Eye Nebula"
+msgstr "কৃষ্ণ চোখ নীহারিকা"
+
+#: nebulae/default/names.dat:136
+msgid "Kissing Crescents Nebula"
+msgstr "চুম্বন চন্দ্রকলা নীহারিকা"
+
+#: nebulae/default/names.dat:137
+msgid "Orion's Collarbone Nebula"
+msgstr "কালপুরুষ কণ্ঠাস্থি নীহারিকা"
+
+#: nebulae/default/names.dat:138
+msgid "Flame Nebula"
+msgstr "শিখা নীহারিকা"
+
+#: nebulae/default/names.dat:139
+msgid "Tank Tracks Nebula"
+msgstr "ট্যাঙ্কের চাকার দাগ নীহারিকা"
+
+#: nebulae/default/names.dat:140
+msgid "Maple Leaf Nebula"
+msgstr "মেপেল পাতা নীহারিকা"
+
+#: nebulae/default/names.dat:141
+msgid "30 Dor B"
+msgstr "৩০ ডোরাডো বি"
+
+#: nebulae/default/names.dat:142
+msgid "Casper the Friendly Ghost Nebula"
+msgstr "ক্যাসপার ভুত নীহারিকা"
+
+#: nebulae/default/names.dat:143
+msgid "Tarantula Nebula"
+msgstr "ট্যারেনটুলা নীহারিকা"
+
+#: nebulae/default/names.dat:144
+msgid "Looped Nebula"
+msgstr "ফাঁস নীহারিকা"
+
+#: nebulae/default/names.dat:145
+msgid "True Lovers' Knot"
+msgstr "প্রকৃত প্রেমের বাঁধন"
+
+#: nebulae/default/names.dat:146
+msgid "30 Dor Cluster"
+msgstr "৩০ ডোরাডো তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:147
+msgid "Ghost Head Nebula"
+msgstr "প্রেত শির নীহারিকা"
+
+#: nebulae/default/names.dat:148
+msgid "January Salt-and-Pepper Cluster"
+msgstr "জানুয়ারীর ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:149
+msgid "Dusty Hand Galaxy"
+msgstr "ময়লা হাত নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:150
+msgid "Shoe-Buckle Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:151
+msgid "The 37 Cluster"
+msgstr "৩৭ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:152
+msgid "The 'LE' Cluster"
+msgstr "লে এর তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:153
+msgid "Shopping Cart Cluster"
+msgstr "বাজারের ঠেলা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:154
+msgid "Mon R2 IRS3"
+msgstr "একশৃঙ্গী R2 IRS3"
+
+#: nebulae/default/names.dat:155
+msgid "Monkey Head Nebula"
+msgstr "কপি শির নীহারিকা"
+
+#: nebulae/default/names.dat:156
+msgid "Double Wedge Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:157 nebulae/default/names.dat:160
+#: nebulae/default/names.dat:162 nebulae/default/names.dat:164
+#: nebulae/default/names.dat:649
+msgid "Rosette Nebula"
+msgstr "গোলাপাকৃতি নীহারিকা"
+
+#: nebulae/default/names.dat:158
+msgid "Rosette A"
+msgstr "গোলাপ নীহারিকা 'এ'"
+
+#: nebulae/default/names.dat:159
+msgid "NGC 2244 Satellite Cluster"
+msgstr "নুতন তালিকা ২২৪৪ ভ্রাম্যমান তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:163
+msgid "Harp Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:165
+msgid "Rosette B"
+msgstr "গোলাপ নীহারিকা 'বি'"
+
+#: nebulae/default/names.dat:166
+msgid "Hubble's Variable Nebula"
+msgstr "হাবলের বিষম নীহারিকা"
+
+#: nebulae/default/names.dat:167
+msgid "Hubble's Nebula"
+msgstr "হাবলের নীহারিকা"
+
+#: nebulae/default/names.dat:168 nebulae/default/names.dat:665
+msgid "Cone Nebula"
+msgstr "শঙ্কু নীহারিকা"
+
+#: nebulae/default/names.dat:169
+msgid "Christmas Tree Cluster"
+msgstr "ক্রিসমাসের গাছ"
+
+#: nebulae/default/names.dat:170
+msgid "Head Hunter Cluster"
+msgstr "শিরোচ্ছেদকারী তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:171
+msgid "Starfighter Cluster"
+msgstr "যুদ্ধবিমান তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:172
+msgid "Broken Heart Cluster"
+msgstr "ভগ্নহৃদয় তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:173
+msgid "Little Beehive Cluster"
+msgstr "ছোটো মৌচাক তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:174
+msgid "Hagrid's Dragon Cluster"
+msgstr "হ্যাগ্রিডের ড্রাগন তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:175
+msgid "Great Bird Cluster"
+msgstr "বিশাল পাখি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:176
+msgid "Copeland's Golden Worm"
+msgstr ""
+
+#: nebulae/default/names.dat:177
+msgid "Heart-Shaped Cluster"
+msgstr "হৃদয় নীহারিকা"
+
+#: nebulae/default/names.dat:178
+msgid "Coil Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:180
+msgid "Hourglass Planetary Nebula"
+msgstr "বালিঘড়ি নীহারিকা"
+
+#: nebulae/default/names.dat:181
+msgid "Thor's Helmet"
+msgstr "থর এর শিরস্ত্রাণ"
+
+#: nebulae/default/names.dat:182
+msgid "Duck Nebula"
+msgstr "পাতিহাঁস নীহারিকা"
+
+#: nebulae/default/names.dat:183
+msgid "Caroline's Cluster"
+msgstr "ক্যারোলাইনের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:184
+msgid "τ CMa Cluster"
+msgstr "টাউ কুকুর ছানা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:185
+msgid "Mexican Jumping Star"
+msgstr "লাফিয়ে বেড়ানো মেক্সিকান তারা"
+
+#: nebulae/default/names.dat:186
+msgid "Pirate's Jewels Cluster"
+msgstr "জলদস্যুর রত্ন তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:187
+msgid "Charlie Brown's Christmas Tree"
+msgstr ""
+
+#: nebulae/default/names.dat:188
+msgid "Gemini Nebula"
+msgstr "মিথুন নীহারিকা"
+
+#: nebulae/default/names.dat:189
+msgid "Ant Nebula"
+msgstr "পিঁপড়ে নীহারিকা"
+
+#: nebulae/default/names.dat:190
+msgid "Double Bubble Nebula"
+msgstr "জোড়া বুদবুদ নীহারিকা"
+
+#: nebulae/default/names.dat:191
+msgid "Peanut Nebula"
+msgstr "খোলাবাদাম নীহারিকা"
+
+#: nebulae/default/names.dat:192
+msgid "Eskimo Nebula"
+msgstr "এস্কিমো নীহারিকা"
+
+#: nebulae/default/names.dat:193
+msgid "Clown Face Nebula"
+msgstr "জোকারের মুখাকৃতি নীহারিকা"
+
+#: nebulae/default/names.dat:194
+msgid "Firsse 213"
+msgstr "ফিরসে ২১৩"
+
+#: nebulae/default/names.dat:195
+msgid "Intergalactic Wanderer/Tramp"
+msgstr "মহাকাশের পথিক/ভবঘুরে"
+
+#: nebulae/default/names.dat:196
+msgid "Twinkling Comet Cluster"
+msgstr "মিটমিটে ধূমকেতু তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:197
+msgid "Albino Butterfly Nebula"
+msgstr "সাদা প্রজাপতি নীহারিকা"
+
+#: nebulae/default/names.dat:198
+msgid "Burning Ember Nebula"
+msgstr "জলন্ত গালা নীহারিকা"
+
+#: nebulae/default/names.dat:199
+msgid "Bat Nebula"
+msgstr "বাদুড় নীহারিকা"
+
+#: nebulae/default/names.dat:200
+msgid "Meathook Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:201 nebulae/default/names.dat:397
+msgid "Butterfly Cluster"
+msgstr "প্রজাপতি স্তবক"
+
+#: nebulae/default/names.dat:202
+msgid "Stinging Scorpion Cluster"
+msgstr "হূল ফোটানো বিছে তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:203
+msgid "Skull and Crossbones Nebula"
+msgstr "স্কাল ও ক্রসবোন নীহারিকা"
+
+#: nebulae/default/names.dat:204
+msgid "Chained Brooch Nebula"
+msgstr "শিকলযুক্ত গহনা নীহারিকা"
+
+#: nebulae/default/names.dat:205
+msgid "Electric Guitar Cluster"
+msgstr "ইলেক্ট্রিক গিটার তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:206
+msgid "Termite Hole Cluster"
+msgstr "উঁই এর ঢিপি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:207
+msgid "Sprinter Cluster"
+msgstr "দৌড়বাজ নীহারিকা"
+
+#: nebulae/default/names.dat:208
+msgid "Diamond Cluster"
+msgstr "বরফি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:209
+msgid "Bear's Paw Galaxy"
+msgstr "ভালুকের থাবা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:210 nebulae/default/names.dat:627
+msgid "Bear Claw Nebula"
+msgstr "ভল্লুক নখর নীহারিকা"
+
+#: nebulae/default/names.dat:211
+msgid "The Dish Cluster"
+msgstr "থালা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:212
+msgid "Heart and Dagger Cluster"
+msgstr "হৃদয় ও ছুরি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:213
+msgid "Polarissima Australis"
+msgstr "দক্ষিন ধ্রুবীয় নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:214
+msgid "Beehive Cluster"
+msgstr "মৌচাক তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:215
+msgid "Praesepe"
+msgstr "পুষ্যা"
+
+#: nebulae/default/names.dat:216
+msgid "Manger"
+msgstr "গামলা"
+
+#: nebulae/default/names.dat:217
+msgid "Golden-Eye Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:218
+msgid "Pac-Man Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:219
+msgid "King Cobra Cluster"
+msgstr "শঙ্খচূড় তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:220
+msgid "UFO Galaxy"
+msgstr "উড়নচাকি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:221
+msgid "Helix Galaxy"
+msgstr "সর্পিল ছায়াপথ"
+
+#: nebulae/default/names.dat:222
+msgid "Pancake Galaxy"
+msgstr "চ্যাপ্টা পিঠে নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:223 nebulae/default/names.dat:238
+#: nebulae/default/names.dat:361
+msgid "Spindle Galaxy"
+msgstr "ঘূর্ণ্যমান দণ্ড ছায়াপথ"
+
+#: nebulae/default/names.dat:224
+msgid "Pencil Nebula"
+msgstr "পেনসিল নীহারিকা"
+
+#: nebulae/default/names.dat:225
+msgid "Herschel's Ray Nebula"
+msgstr "হার্শেলের সূত্রাকার নীহারিকা"
+
+#: nebulae/default/names.dat:226
+msgid "NGC 2769 Group"
+msgstr "নুতন তালিকা ২৭৬৯ দল"
+
+#: nebulae/default/names.dat:227
+msgid "Supernova Factory"
+msgstr "অতিনোভা কারখানা"
+
+#: nebulae/default/names.dat:228
+msgid "Tiger's Eye Galaxy"
+msgstr "বাঘের চোখ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:229
+msgid "The Penguin Galaxy"
+msgstr "পেংগুইন নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:230
+msgid "The Egg Galaxy"
+msgstr "ডিম নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:231
+msgid "Bode's Galaxy"
+msgstr "বোড-এর ছায়াপথ"
+
+#: nebulae/default/names.dat:232
+msgid "Bode's Nebula"
+msgstr "বোডের নীহারিকা"
+
+#: nebulae/default/names.dat:233
+msgid "Cigar Galaxy"
+msgstr "চুরুট রূপী নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:234
+msgid "Ursa Major A"
+msgstr "উরসা মেজর (সপ্তর্ষি) A"
+
+#: nebulae/default/names.dat:235 nebulae/default/names.dat:718
+msgid "The Garland Galaxy"
+msgstr "মালা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:236
+msgid "The Phantom Frisbee Galaxy"
+msgstr "ছায়ামূর্তির চাকতি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:237
+msgid "Little Pinwheel Galaxy"
+msgstr "ছোটো চরকা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:239
+msgid "Eight-Burst Planetary Nebula"
+msgstr "চারের মত নীহারিকা"
+
+#: nebulae/default/names.dat:240 nebulae/default/names.dat:414
+msgid "Southern Ring Nebula"
+msgstr "দক্ষিনের আংটি নীহারিকা"
+
+#: nebulae/default/names.dat:241
+msgid "Polarissima Borealis"
+msgstr "উত্তর ধ্রুবীয় নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:242
+msgid "Ghost of Jupiter Nebula"
+msgstr "বৃহস্পতির প্রেতাত্মা নীহারিকা"
+
+#: nebulae/default/names.dat:243
+msgid "Eye Nebula"
+msgstr "চক্ষু নীহারিকা"
+
+#: nebulae/default/names.dat:244
+msgid "Gem Cluster"
+msgstr "রত্ন তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:245 nebulae/default/names.dat:250
+msgid "Keyhole Nebula"
+msgstr "চাবির ফুঁটো নীহারিকা"
+
+#: nebulae/default/names.dat:246
+msgid "The Gabriela Mistral Nebula"
+msgstr "গ্যাব্রিয়েলা মিস্ট্রাল নীহারিকা"
+
+#: nebulae/default/names.dat:247
+msgid "Sliced Onion Galaxy"
+msgstr "পেঁয়াজের টুকরো নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:248
+msgid "η Car Nebula"
+msgstr "ইটা ক্যারিনা নীহারিকা"
+
+#: nebulae/default/names.dat:249
+msgid "Homunculus Nebula"
+msgstr "লিলিপুট নীহারিকা"
+
+#: nebulae/default/names.dat:251
+msgid "Knitting Needle Galaxy"
+msgstr "সূঁচ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:252
+msgid "Wishing Well Cluster"
+msgstr "কল্পতরু কুপ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:253
+msgid "Firefly Party Cluster"
+msgstr "জোনাকি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:254
+msgid "Pincushion Cluster"
+msgstr "পিন কুশন তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:255
+msgid "Surfboard Galaxy"
+msgstr "সার্ফবোর্ড নীহারিকা"
+
+#: nebulae/default/names.dat:256
+msgid "Ambartsumian's Knot"
+msgstr "অ্যমব্রাটসুমিয়ান গিঁট"
+
+#: nebulae/default/names.dat:257
+msgid "The Guitar"
+msgstr "গিটার"
+
+#: nebulae/default/names.dat:258
+msgid "Statue of Liberty Nebula"
+msgstr "স্ট্যচু অফ লিবার্টি নীহারিকা"
+
+#: nebulae/default/names.dat:259
+msgid "Owl Nebula"
+msgstr "পেঁচা নীহারিকা"
+
+#: nebulae/default/names.dat:260
+msgid "Frame Galaxy"
+msgstr "কাঠামো নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:261 nebulae/default/names.dat:262
+#: nebulae/default/names.dat:264
+msgid "Leo Triplet"
+msgstr "সিংহ মন্ডলের ত্রয়ী নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:263
+msgid "Hamburger Galaxy"
+msgstr "হ্যামবার্গার নীহারিকা"
+
+#: nebulae/default/names.dat:265
+msgid "King Hamlet's Ghost"
+msgstr "রাজা হ্যমলেটের ভুত"
+
+#: nebulae/default/names.dat:266 nebulae/default/names.dat:267
+#: nebulae/default/names.dat:268 nebulae/default/names.dat:269
+#: nebulae/default/names.dat:270 nebulae/default/names.dat:271
+#: nebulae/default/names.dat:272
+msgid "Copeland's Septet"
+msgstr "কোপল্যান্ডের সপ্তক"
+
+#: nebulae/default/names.dat:273
+msgid "Pearl Cluster"
+msgstr "মুক্ত নীহারিকা"
+
+#: nebulae/default/names.dat:274
+msgid "Blue planetary"
+msgstr "নীল গ্রহরূপী নীহারিকা"
+
+#: nebulae/default/names.dat:275
+msgid "Miniature Spiral"
+msgstr "ক্ষুদ্রকায় পেঁচানো নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:276
+msgid "Vacuum Cleaner Galaxy"
+msgstr "ভ্যাকিউম ক্লিনার নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:277 nebulae/default/names.dat:278
+msgid "Antennae"
+msgstr "পতঙ্গের শুঁড়"
+
+#: nebulae/default/names.dat:279 nebulae/default/names.dat:280
+#: nebulae/default/names.dat:281 nebulae/default/names.dat:282
+msgid "The Box"
+msgstr ""
+
+#: nebulae/default/names.dat:283
+msgid "Medusa Galaxy"
+msgstr "সর্পচুলা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:284
+msgid "Medusa merger"
+msgstr "মেডুসা সমবায়"
+
+#: nebulae/default/names.dat:285
+msgid "Medusa Galaxy Merger"
+msgstr "সর্পচুলা নক্ষত্রলোক সমবায়"
+
+#: nebulae/default/names.dat:286
+msgid "Silver Streak Galaxy"
+msgstr "রূপোলী পথ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:287
+msgid "Virgo Cluster Pinwheel"
+msgstr "ভিরগো চরকা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:288
+msgid "Coma Pinwheel Galaxy"
+msgstr "কোমা চরকা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:289
+msgid "St. Catherine’s Wheel"
+msgstr "সন্ত ক্যাথরিনের চরকা"
+
+#: nebulae/default/names.dat:290
+msgid "Faust V023"
+msgstr "ফাউস্ট V০২৩"
+
+#: nebulae/default/names.dat:291
+msgid "Swelling Spiral Galaxy"
+msgstr "স্ফীত পেঁচালো নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:292
+msgid "Blowdryer Galaxy"
+msgstr "ব্লোড্রায়ার নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:293
+msgid "Mirror Galaxy"
+msgstr "আয়না নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:294
+msgid "Galaxy Cluster"
+msgstr "নক্ষত্রলোক গুচ্ছ"
+
+#: nebulae/default/names.dat:295
+msgid "Lawn Sprinkler Nebula"
+msgstr "উঠোনে জল ছড়ানো নল নীহারিকা"
+
+#: nebulae/default/names.dat:296
+msgid "Markarian's Chain"
+msgstr "মার্কারিয়ানের শিকল"
+
+#: nebulae/default/names.dat:297
+msgid "Great Galactic Face"
+msgstr ""
+
+#: nebulae/default/names.dat:298
+msgid "Faust V051"
+msgstr "ফাউস্ট V০৫১"
+
+#: nebulae/default/names.dat:299 nebulae/default/names.dat:301
+msgid "The Eyes"
+msgstr "চক্ষুদ্বয়"
+
+#: nebulae/default/names.dat:300 nebulae/default/names.dat:302
+msgid "Copeland's Eyes"
+msgstr "কোপল্যান্ডের চৌখ"
+
+#: nebulae/default/names.dat:303
+msgid "Virgo Galaxy"
+msgstr "ভিরগো নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:304
+msgid "Virgo A"
+msgstr "ভার্গো (কন্যা) A"
+
+#: nebulae/default/names.dat:305
+msgid "Smoking gun"
+msgstr "তদন্ত সূত্র"
+
+#: nebulae/default/names.dat:306 nebulae/default/names.dat:341
+msgid "Cocoon Galaxy"
+msgstr "গুটি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:307
+msgid "Shapley-Ames 2"
+msgstr "শ্যাপলে-এমিস ২"
+
+#: nebulae/default/names.dat:308
+msgid "Lost Galaxy"
+msgstr "নিখোঁজ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:309
+msgid "Hairy Eyebrow Galaxy"
+msgstr "মোটা ভ্রু নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:310
+msgid "The Lost Galaxy of Copeland"
+msgstr "কোপল্যান্ডের নিখোঁজ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:311
+msgid "Koi Fish Galaxy"
+msgstr "কই মাছ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:312
+msgid "Needle Galaxy"
+msgstr "সূঁচ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:313
+msgid "Berenice's Hair Clip"
+msgstr ""
+
+#: nebulae/default/names.dat:314
+msgid "Flying Saucer Galaxy"
+msgstr "উড়ন্ত চাকি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:315 nebulae/default/names.dat:317
+msgid "Siamese Twins"
+msgstr "একত্রে জোড়া লাগা যমজ শিশু"
+
+#: nebulae/default/names.dat:316 nebulae/default/names.dat:318
+msgid "Fish and Chips Galaxies"
+msgstr "মাছ ও চিপস নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:319
+msgid "Sombrero Galaxy"
+msgstr "গোলটুপি ছায়াপথ"
+
+#: nebulae/default/names.dat:320
+msgid "Faberge Egg Galaxy"
+msgstr "সোনার ডিম নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:321
+msgid "Coalsack Cluster"
+msgstr "কয়লার বস্তা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:322
+msgid "Whale Galaxy"
+msgstr "তিমি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:323
+msgid "Herring Galaxy"
+msgstr "হেরিং মাছ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:324
+msgid "Umbrella Galaxy"
+msgstr "ছাতা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:325
+msgid "Crowbar Galaxy"
+msgstr "শাবল নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:326
+msgid "Hockey Stick Galaxy"
+msgstr "হকির লাঠি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:327
+msgid "Fishhook Galaxy"
+msgstr "মাছ ধরার কাঁটা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:328
+msgid "Superwind-Galaxy"
+msgstr "ঝোড়ো নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:329
+msgid "Mice Galaxies"
+msgstr "ইঁদুর নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:330
+msgid "Vinyl LP Galaxy"
+msgstr "ভিনাইল এলপি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:331
+msgid "Croc's Eye Galaxy"
+msgstr "কুমীরের চোখ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:332
+msgid "Jewel Box"
+msgstr "রত্ন বাক্স"
+
+#: nebulae/default/names.dat:333
+msgid "Herschel's Jewel Box"
+msgstr "হার্শেলের গয়নার বাক্স"
+
+#: nebulae/default/names.dat:334
+msgid "κ Cru Cluster"
+msgstr "κ ক্রুশ মন্ডলের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:335
+msgid "Kidney Bean Galaxy"
+msgstr "বৃক্ক শিম ছায়াপথ"
+
 #: nebulae/default/names.dat:336
+msgid "Black Eye Galaxy"
+msgstr "কালশিটে চোখ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:337
+msgid "Evil Eye Galaxy"
+msgstr "শয়তানের চোখ নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:338
+msgid "Sleeping Beauty Galaxy"
+msgstr "ঘুমন্ত পরী নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:339
+msgid "Coma B"
+msgstr "কেশমন্ডল 'বি'"
+
+#: nebulae/default/names.dat:340
+msgid "Z Coma Coma"
+msgstr "Z কোমা কোমা"
+
+#: nebulae/default/names.dat:342
+msgid "Sunflower Galaxy"
+msgstr "সূর্যমুখী ছায়াপথ"
+
+#: nebulae/default/names.dat:343
+msgid "Iota's Ghost"
+msgstr "আয়োটার ভুত"
+
+#: nebulae/default/names.dat:344
+msgid "Centaurus A"
+msgstr "অশ্বমানব 'এ'"
+
+#: nebulae/default/names.dat:345
+msgid "ω Cen Cluster"
+msgstr "ω সেন্টুরাস তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:346
+msgid "Spiral Planetary Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:347
+msgid "Whirlpool Galaxy"
+msgstr "ঘূর্ণিস্রোত ছায়াপথ"
+
+#: nebulae/default/names.dat:348
+msgid "Question Mark Galaxy"
+msgstr "প্রশ্নচিহ্নাকার নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:349
+msgid "Rosse's Galaxy"
+msgstr "রসের নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:350
+msgid "Spiral Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:351 nebulae/default/names.dat:352
+msgid "Keenan's System"
+msgstr "কীনানের জগৎ"
+
+#: nebulae/default/names.dat:353
+msgid "Southern Pinwheel Galaxy"
+msgstr "দক্ষিন চরকা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:354 nebulae/default/names.dat:567
+msgid "Seashell Galaxy"
+msgstr "ঝিনুক নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:355 nebulae/default/names.dat:356
+msgid "The Heron Galaxy"
+msgstr "সারস নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:358
 msgid "Dragon Nebula"
 msgstr "ড্রাগন নীহারিকা"
 
-#: nebulae/default/names.dat:337
+#: nebulae/default/names.dat:359
 msgid "Blade and Pearl Galaxy"
 msgstr "মুক্তার ফলক নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:338
+#: nebulae/default/names.dat:360
 msgid "The Mini Sombrero Galaxy"
 msgstr "ক্ষুদ্র গোলটুপি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:340
+#: nebulae/default/names.dat:362
 msgid "Fool's Gold Galaxy"
 msgstr "নকল সোনা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:341
+#: nebulae/default/names.dat:363
 msgid "Fath 703"
 msgstr "ফাথ ৭০৩"
 
-#: nebulae/default/names.dat:342
+#: nebulae/default/names.dat:364
 msgid "Ghost Globular Cluster"
 msgstr "ভুত গোলকাকার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:343
+#: nebulae/default/names.dat:365
 msgid "Rose Cluster"
 msgstr "গোলাপ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:345
+#: nebulae/default/names.dat:367 nebulae/default/names.dat:370
 msgid "Splinter Galaxy"
 msgstr "ধারালো টুকরো নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:346
+#: nebulae/default/names.dat:368
 msgid "Cat Scratch Galaxy"
 msgstr "বিড়ালের আঁচড় নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:347
+#: nebulae/default/names.dat:369
 msgid "Knife Edge Galaxy"
 msgstr "ছুরির ফলা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:348
+#: nebulae/default/names.dat:371
 msgid "Seyfert's Sextet"
 msgstr "সেইফার্টের ষষ্ঠক"
 
-#: nebulae/default/names.dat:349
+#: nebulae/default/names.dat:372
 msgid "Serpens Sextet"
 msgstr "সর্প মণ্ডলীয় ষষ্টক"
 
-#: nebulae/default/names.dat:350
+#: nebulae/default/names.dat:373
 msgid "S Nor Cluster"
 msgstr "এস নর্মা গুচ্ছ"
 
-#: nebulae/default/names.dat:351
+#: nebulae/default/names.dat:374
 msgid "Crab Globular Cluster"
 msgstr "কর্কট গোলকাকার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:352
+#: nebulae/default/names.dat:375
 msgid "Spider Globular Cluster"
 msgstr "মাকড়শা গোলকাকার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:353
+#: nebulae/default/names.dat:376
 msgid "The Crucifix Cluster"
 msgstr "ক্রুশবিদ্ধ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:354
+#: nebulae/default/names.dat:377
 msgid "Rim Nebula"
 msgstr "বেড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:355
+#: nebulae/default/names.dat:378
 msgid "μ Normae Cluster"
 msgstr "মিউ নরমে তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:356
-msgid "Great Cluster in Hercules"
-msgstr "হারকিউলিস মন্ডলের বিখ্যাত তারকাগুচ্ছ"
+#: nebulae/default/names.dat:379
+msgid "Great Star Cluster in Hercules"
+msgstr ""
 
-#: nebulae/default/names.dat:357
+#: nebulae/default/names.dat:380
 msgid "Hercules Globular Cluster"
 msgstr "হারকিউলিস গোলকাকার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:358
-msgid "Turtle planetary nebula"
-msgstr "কচ্ছপরূপী গ্রহরূপী নীহারিকা"
-
-#: nebulae/default/names.dat:359
-msgid "Northern Jewel Box Cluster"
-msgstr "উত্তরের গয়নার বাক্স তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:360
-msgid "Table of Scorpius Cluster"
-msgstr "বৃশ্চিক মন্ডলের গোল টেবিল তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:361
-msgid "Flickering Globular Cluster"
-msgstr "মিটমিটে গোলকাকার তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:362
-msgid "Moth Wing Cluster"
-msgstr "মথের ডানা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:363
-msgid "Bug Nebula"
-msgstr "পতঙ্গ নীহারিকা"
-
-#: nebulae/default/names.dat:365
-msgid "Box Nebula"
-msgstr "বাক্স নীহারিকা"
-
-#: nebulae/default/names.dat:366
-msgid "Cat's Paw Nebula"
-msgstr "বিড়ালের থাবা নীহারিকা"
-
-#: nebulae/default/names.dat:367
-msgid "Cheerio Nebula"
-msgstr "চীরিও নীহারিকা"
-
-#: nebulae/default/names.dat:368 nebulae/default/names.dat:400
-msgid "Lobster Nebula"
-msgstr "গলদা নীহারিকা"
-
-#: nebulae/default/names.dat:369
-msgid "War and Peace Nebula"
-msgstr "যুদ্ধ ও শান্তি নীহারিকা"
-
-#: nebulae/default/names.dat:370
-msgid "Little Ghost Nebula"
-msgstr "ছোটো ভুত নীহারিকা"
-
-#: nebulae/default/names.dat:371
-msgid "Tonantzintla 1"
-msgstr "টোনানশিনলা ১"
-
-#: nebulae/default/names.dat:372
-msgid "Phantom Cluster"
-msgstr "ছায়ামূর্তি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:374
-msgid "Splendors of the Heavens"
-msgstr "স্বর্গীয় ঐশ্বর্য"
-
-#: nebulae/default/names.dat:375
-msgid "Silver Nugget Cluster"
-msgstr "রূপোর তাল তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:376 nebulae/default/names.dat:422
-msgid "Little Gem Nebula"
-msgstr "ক্ষুদ্র রত্ন নীহারিকা"
-
-#: nebulae/default/names.dat:377
-msgid "Tom Thumb Cluster"
-msgstr "টম থামের তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:378
-msgid "Ptolemy's Cluster"
-msgstr "টলেমী'র স্তবক"
-
-#: nebulae/default/names.dat:379
-msgid "Lost in Space Galaxy"
-msgstr "একাকী তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:380
-msgid "Trifid Nebula"
-msgstr "তিন-পাপড়ি নীহারিকা"
-
 #: nebulae/default/names.dat:381
-msgid "Dead Man's Chest Cluster"
-msgstr "মৃতের হৃদয় সম্পদ তারকাগুচ্ছ"
+msgid "Turtle Nebula"
+msgstr ""
 
 #: nebulae/default/names.dat:382
-msgid "Herschel 36"
-msgstr "হার্শেল ৩৬"
-
-#: nebulae/default/names.dat:383
-msgid "Hourglass Cluster"
-msgstr "বালিঘড়ি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:384
-msgid "Webb's Cross"
-msgstr "ওয়েবের ক্রস"
-
-#: nebulae/default/names.dat:385
-msgid "Red spider Nebula"
-msgstr "লাল মাকড়শা নীহারিকা"
-
-#: nebulae/default/names.dat:386
-msgid "Cat's Eye Nebula"
-msgstr "বিড়ালের চোখ নীহারিকা"
-
-#: nebulae/default/names.dat:387 nebulae/default/names.dat:471
-msgid "Sunflower Nebula"
-msgstr "সূর্যমুখী নীহারিকা"
-
-#: nebulae/default/names.dat:388
-msgid "Snail Nebula"
-msgstr "শামুক নীহারিকা"
-
-#: nebulae/default/names.dat:391
-msgid "Blue Racquetball Nebula"
-msgstr "নীল র‍্যাকেট বল নীহারিকা"
-
-#: nebulae/default/names.dat:392
-msgid "Emerald Eye Planetary Nebula"
-msgstr "পান্নাভ নয়ন গ্রহরূপী নীহারিকা"
-
-#: nebulae/default/names.dat:393
-msgid "Eagle Nebula"
-msgstr "ঈগল নীহারিকা"
-
-#: nebulae/default/names.dat:394
-msgid "Star Queen"
-msgstr "নক্ষত্র রানী"
-
-#: nebulae/default/names.dat:395
-msgid "Black Swan Cluster"
-msgstr "পানকৌড়ি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:396
-msgid "Omega Nebula"
-msgstr "ওমেগা নীহারিকা"
-
-#: nebulae/default/names.dat:397
-msgid "Swan Nebula"
-msgstr "মরাল নীহারিকা"
-
-#: nebulae/default/names.dat:398
-msgid "Horseshoe Nebula"
-msgstr "নাল নীহারিকা"
-
-#: nebulae/default/names.dat:399
-msgid "Checkmark Nebula"
-msgstr "টিকচিহ্ন কনীহারিকা"
-
-#: nebulae/default/names.dat:401 nebulae/default/names.dat:402
-msgid "Edward's Galaxy"
-msgstr "এরওয়ার্ডের নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:403
-msgid "Great Sagittarius Cluster"
-msgstr "ধনুরাশির বিখ্যাত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:404
-msgid "Santa's Sleigh Cluster"
-msgstr "স্যান্টার গাড়ি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:405
-msgid "Wild Duck Cluster"
-msgstr "বুনো হাঁস স্তবক"
-
-#: nebulae/default/names.dat:406
-msgid "July Salt-and-Pepper Cluster"
-msgstr "জুলাইয়ের ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:407
-msgid "Scutum Salt-and-Pepper Cluster"
-msgstr "ঢাল মন্ডলীয় ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:408
-msgid "Ring Nebula"
-msgstr "চক্র নীহারিকা"
-
-#: nebulae/default/names.dat:409
-msgid "Chandelier Cluster"
-msgstr "ঝাড়বাতি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:410
-msgid "R CrA Nebula"
-msgstr "'আর' দক্ষিন মুকুট নীহারিকা"
-
-#: nebulae/default/names.dat:411
-msgid "Phantom Streak Nebula"
-msgstr "ভৌতিক নীহারিকা"
-
-#: nebulae/default/names.dat:412
-msgid "Bird's Head"
-msgstr "পাখির মাথা"
-
-#: nebulae/default/names.dat:413
-msgid "Dandelion Puffball Nebula"
-msgstr "ড্যান্ডোলাইন নীহারিকা"
-
-#: nebulae/default/names.dat:414
-msgid "Pavo Globular Cluster"
-msgstr "ময়ূর মন্ডলের গোলকাকার তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:415
-msgid "The Starfish"
-msgstr "তারামাছ"
-
-#: nebulae/default/names.dat:416
-msgid "The Windmill"
-msgstr "বায়ুকল"
-
-#: nebulae/default/names.dat:417
-msgid "Pentagon"
-msgstr "পঞ্চভূজ"
-
-#: nebulae/default/names.dat:418
-msgid "Snowball Nebula"
-msgstr "বরফের গোলা নীহারিকা"
-
-#: nebulae/default/names.dat:419
-msgid "Specter Cluster"
-msgstr "ছায়ামূর্তি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:420
-msgid "Hole in a Cluster"
-msgstr "ছিদ্রাল তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:421
-msgid "Smoke Ring Cluster"
-msgstr "ধোঁয়ার বলয় তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:423
-msgid "The Foxhead Cluster"
-msgstr "শিয়ালের মাথা নীহারিকা"
-
-#: nebulae/default/names.dat:424
-msgid "Barnard's Galaxy"
-msgstr "বার্নার্ডের ছায়াপথ"
-
-#: nebulae/default/names.dat:425
-msgid "Blinking planetary"
-msgstr "মিটমিটে গ্রহরূপী নীহারিকা"
-
-#: nebulae/default/names.dat:426
-msgid "Poodle Cluster"
-msgstr "পুডল কুকুর তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:427
-msgid "Angelfish Cluster"
-msgstr "চাঁদামাছ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:428
-msgid "Arrowhead Cluster"
-msgstr "তীর তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:429
-msgid "Dumbbell Nebula"
-msgstr "ডাম্বেল নীহারিকা"
-
-#: nebulae/default/names.dat:430
-msgid "Diabolo Nebula"
-msgstr "ডায়াবোলো নীহারিকা"
-
-#: nebulae/default/names.dat:431
-msgid "Apple Core Nebula"
-msgstr "খাওয়া আপেল নীহারিকা"
-
-#: nebulae/default/names.dat:432
-msgid "Kite Cluster"
-msgstr "ঘুড়ি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:433
-msgid "Condor Galaxy"
-msgstr "হাড়গিলা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:434
-msgid "20 Vulpeculae Cluster"
-msgstr "২০ শিয়াল মন্ডলীয় তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:435
-msgid "Crescent Nebula"
-msgstr "অর্ধচন্দ্রাকার নীহারিকা"
-
-#: nebulae/default/names.dat:436
-msgid "Ear Nebula"
-msgstr "কান নীহারিকা"
-
-#: nebulae/default/names.dat:437
-msgid "Little Ring Nebula"
-msgstr "ছোটো আংটি নীহারিকা"
-
-#: nebulae/default/names.dat:438
-msgid "Blue Flash Nebula"
-msgstr "নীল ঝলক নীহারিকা"
-
-#: nebulae/default/names.dat:439
-msgid "Giant Behemoth Galaxy"
-msgstr "জলহস্তী নীহারিকা"
-
-#: nebulae/default/names.dat:440
-msgid "The Inchworm Cluster"
-msgstr "লার্ভা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:441
-msgid "The Rocking Horse Cluster"
-msgstr "দোলনা ঘোড়া তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:442
-msgid "Cooling Tower"
-msgstr "বাষ্প ঘনীভবন চিমনি"
-
-#: nebulae/default/names.dat:443
-msgid "Ghost Bush Cluster"
-msgstr "পিশাচের ঝোপ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:444
-msgid "Flying Geese Cluster"
-msgstr "উড়ন্ত হাঁসের দল তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:445
-msgid "Mothra Cluster"
-msgstr "মথ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:446
-msgid "Fireworks Galaxy"
-msgstr "আতশবাজি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:447
-msgid "Filamentary Nebula"
-msgstr "সূত্রাকার নীহারিকা"
-
-#: nebulae/default/names.dat:448
-msgid "West Veil Nebula"
-msgstr "পশ্চিম পাল নীহারিকা"
-
-#: nebulae/default/names.dat:449
-msgid "Cirrus Nebula"
-msgstr "মেঘ নীহারিকা"
-
-#: nebulae/default/names.dat:450
-msgid "Witch's Broom Nebula"
-msgstr "জাদু ঝাঁটা নীহারিকা"
-
-#: nebulae/default/names.dat:451
-msgid "Witch's Broom Galaxy"
-msgstr "মায়াঝাড়ু নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:452
-msgid "East Veil Nebula"
-msgstr "পূর্ব পাল নীহারিকা"
-
-#: nebulae/default/names.dat:453
-msgid "Network Nebula"
-msgstr "নেটওয়ার্ক নীহারিকা"
-
-#: nebulae/default/names.dat:454
-msgid "North America Nebula"
-msgstr "উত্তর আমেরিকা নীহারিকা"
-
-#: nebulae/default/names.dat:455
-msgid "Fetus Nebula"
-msgstr "ভ্রূণ নীহারিকা"
-
-#: nebulae/default/names.dat:456
-msgid "Coat Button Nebula"
-msgstr "বোতাম নীহারিকা"
-
-#: nebulae/default/names.dat:457
-msgid "Saturn Nebula"
-msgstr "শনিগ্রহ নীহারিকা"
-
-#: nebulae/default/names.dat:458
-msgid "Iris Nebula"
-msgstr "আইরিশ নীহারিকা"
-
-#: nebulae/default/names.dat:459
-msgid "Cheeseburger Nebula"
-msgstr "চীজবার্গার নীহারিকা"
-
-#: nebulae/default/names.dat:460
-msgid "Pink Pillow Nebula"
-msgstr "গোলাপী বালিশ নীহারিকা"
-
-#: nebulae/default/names.dat:461
-msgid "Magic Carpet Nebula"
-msgstr "জাদু চাটাই নীহারিকা"
-
-#: nebulae/default/names.dat:462
-msgid "Green Rectangle Nebula"
-msgstr "সবুজ চৌকো নীহারিকা"
-
-#: nebulae/default/names.dat:463
-msgid "Pegasus Cluster"
-msgstr "পক্ষীরাজ মন্ডলের তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:464
-msgid "Jellyfish Cluster"
-msgstr "জেলিফিস তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:465
-msgid "Small Cluster Nebula"
-msgstr "ছোটো গুচ্ছ নীহারিকা"
-
-#: nebulae/default/names.dat:466
-msgid "NGC 7129 IR Cluster"
-msgstr "নুতন তালিকা 7129 IR গুচ্ছ"
-
-#: nebulae/default/names.dat:467
-msgid "Star Lizard Cluster"
-msgstr "টিকটিকি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:468
-msgid "Drunken Lizard Cluster"
-msgstr "মাতাল টিকটিকি তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:469
-msgid "Atoms for Peace Galaxy"
-msgstr "শান্তির জন্য পরমাণু নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:470
-msgid "Helix Nebula"
-msgstr "সর্পিল নীহারিকা"
-
-#: nebulae/default/names.dat:472 nebulae/default/names.dat:473
-#: nebulae/default/names.dat:474 nebulae/default/names.dat:475
-msgid "Stephan's Quintet"
-msgstr "স্টিফেনের পঞ্চক"
-
-#: nebulae/default/names.dat:476
-msgid "Deer Lick Group"
-msgstr "ডিয়ার লিক সমূহ"
-
-#: nebulae/default/names.dat:477
-msgid "The Wizard Nebula"
-msgstr "জাদুকরের নীহারিকা"
-
-#: nebulae/default/names.dat:478
-msgid "Grand Design Galaxy"
-msgstr "নিখুঁত গঠন নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:479
-msgid "Superman Galaxy"
-msgstr "অতিমানব নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:480
-msgid "The Dormouse Cluster"
-msgstr "ইঁদুর তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:481
-msgid "The Arrowhead Cluster"
-msgstr "তীর তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:482 nebulae/default/names.dat:483
-#: nebulae/default/names.dat:484 nebulae/default/names.dat:485
-msgid "Grus Quartet"
-msgstr "সারস মন্ডলের চতুষ্টয়"
-
-#: nebulae/default/names.dat:486 nebulae/default/names.dat:491
-msgid "Bubble Nebula"
-msgstr "বুদবুদ নীহারিকা"
-
-#: nebulae/default/names.dat:487
-msgid "Cassiopeia Salt-and-Pepper Cluster"
-msgstr "ক্যাসিওপিয়া ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:488
-msgid "October Salt-and-Pepper Cluster"
-msgstr "অক্টোবরের ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:489
-msgid "Blue Snowball"
-msgstr "নীল বরফগোলক"
-
-#: nebulae/default/names.dat:490
-msgid "Copeland's Blue Snowball"
-msgstr "কোপেল্যান্ডের নীল বরফগোলক"
-
-#: nebulae/default/names.dat:492
-msgid "Fried-egg Galaxy"
-msgstr "ডিম ভাজা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:493
-msgid "Caroline's Rose Cluster"
-msgstr "ক্যারোলিনের গোলাপ তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:494
-msgid "Ghost Cluster"
-msgstr "ভুত তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:495
-msgid "Star Mist Cluster"
-msgstr "তারার কুয়াশা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:496
-msgid "The Widow's Web Cluster"
-msgstr "মাকড়শার জাল তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:497
-msgid "The Little Sombrero Galaxy"
-msgstr "ছোটো গোলটুপি নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:498
-msgid "Electric Arc Galaxy"
-msgstr "তড়িৎশিখা নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:499
-msgid "Starburst Galaxy"
-msgstr "স্টারব্রাস্ট নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:500 nebulae/default/names.dat:501
-msgid "γ Cas Nebula"
-msgstr "গামা ক্যাসিওপিয়া নীহারিকা"
-
-#: nebulae/default/names.dat:502
-msgid "Maffei Group"
-msgstr "ম্যাফেই সমষ্টি"
-
-#: nebulae/default/names.dat:503
-msgid "ο Per Cloud"
-msgstr "ওমিক্রন পারসিয়ুস মেঘ"
-
-#: nebulae/default/names.dat:504
-msgid "Gingrich 1"
-msgstr "গিনগ্রিচ ১"
-
-#: nebulae/default/names.dat:505
-msgid "Barnard's Merope Nebula"
-msgstr "বার্নাডের মেরোপি নীহারিকা"
-
-#: nebulae/default/names.dat:506
-msgid "Flaming Star Nebula"
-msgstr "জ্বলন্ত নক্ষত্র নীহারিকা"
-
-#: nebulae/default/names.dat:507
-msgid "The Tadpoles"
-msgstr "ব্যাঙাচি"
-
-#: nebulae/default/names.dat:508
-msgid "Spider Nebula"
-msgstr "মাকড়শা নীহারিকা"
-
-#: nebulae/default/names.dat:509
-msgid "Spirograph Nebula"
-msgstr "স্পিরোগ্রাফ নীহারিকা"
-
-#: nebulae/default/names.dat:510
-msgid "Raspberry Nebula"
-msgstr "র‍্যাসবেরী নীহারিকা"
-
-#: nebulae/default/names.dat:511
-msgid "Jellyfish Nebula"
-msgstr "জেলিফিস নীহারিকা"
-
-#: nebulae/default/names.dat:512
-msgid "Gemini A"
-msgstr "মিথুন এ"
-
-#: nebulae/default/names.dat:513
-msgid "Papillon"
-msgstr "প্রজাপতির মত কান যুক্ত কুকুর"
-
-#: nebulae/default/names.dat:514
-msgid "γ Cyg Nebula"
-msgstr "গামা হাঁস নীহারিকা"
-
-#: nebulae/default/names.dat:515
-msgid "ZW II 108 Group"
-msgstr "ZW II ১০৮ সমূহ"
-
-#: nebulae/default/names.dat:516
-msgid "Elephant's Trunk Nebula"
-msgstr "হাতির শুঁড় নীহারিকা"
-
-#: nebulae/default/names.dat:517
-msgid "Fish Head Nebula"
-msgstr "মাছের মুড়ো নীহারিকা"
-
-#: nebulae/default/names.dat:518
-msgid "Heart Nebula"
-msgstr "হৃদয় নীহারিকা"
-
-#: nebulae/default/names.dat:519
-msgid "The Running Dog Nebula"
-msgstr "শিকারি কুকুর নীহারিকা"
-
-#: nebulae/default/names.dat:520
-msgid "Valentine Nebula"
-msgstr "প্রেমিকা নীহারিকা"
-
-#: nebulae/default/names.dat:521
-msgid "AFGL 333 Cloud"
-msgstr "AFGL ৩৩৩ মেঘ"
-
-#: nebulae/default/names.dat:522
-msgid "Soul Nebula"
-msgstr "আত্মা নীহারিকা"
-
-#: nebulae/default/names.dat:523
-msgid "Witch Head Nebula"
-msgstr "ডাইনির মাথা নীহারিকা"
-
-#: nebulae/default/names.dat:525
-msgid "Toby Jug Nebula"
-msgstr "টোবি জগ নীহারিকা"
-
-#: nebulae/default/names.dat:526
-msgid "ο Vel Cluster"
-msgstr "ο পাল মন্ডলের তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:527
-msgid "Browning Galaxy"
-msgstr "ব্রাউনিং নক্ষত্রলোক"
-
-#: nebulae/default/names.dat:528
-msgid "Coddington's Nebula"
-msgstr "কডিংটনের নীহারিকা"
-
-#: nebulae/default/names.dat:529
-msgid "Southern Pleiades"
-msgstr "দক্ষিণ কৃত্তিকা"
-
-#: nebulae/default/names.dat:530
-msgid "θ Car Cluster"
-msgstr "থিটা ক্যারিনা তারকাগুচ্ছ"
-
-#: nebulae/default/names.dat:531
-msgid "Running Chicken Nebula"
-msgstr "চলন্ত মুরগীর ছানা নীহারিকা"
-
-#: nebulae/default/names.dat:532
-msgid "λ Cen Nebula"
-msgstr "ল্যামডা সেন্টুরাই নীহারিকা"
-
-#: nebulae/default/names.dat:533
-msgid "Thackeray's Globules"
-msgstr "থ্যাকারের গুটি"
-
-#: nebulae/default/names.dat:534
-msgid "Lemon slice Nebula"
-msgstr "পাতিলেবুর টুকরো নীহারিকা"
-
-#: nebulae/default/names.dat:535
-msgid "Theoretician's Nebula"
-msgstr "থিওরিটিশিয়ান নীহারিকা"
-
-#: nebulae/default/names.dat:536
-msgid "Baby Eskimo Nebula"
-msgstr "এস্কিমো শিশু নীহারিকা"
-
-#: nebulae/default/names.dat:538
-msgid "Retina Nebula"
-msgstr "রেটিনা নীহারিকা"
-
-#: nebulae/default/names.dat:539
-msgid "Blue Horsehead Nebula"
-msgstr "নীল অশ্বমস্তক নীহারিকা"
-
-#: nebulae/default/names.dat:540
-msgid "White Eyed Pea Nebula"
-msgstr "বিউলির ডাল নীহারিকা"
-
-#: nebulae/default/names.dat:541
-msgid "ρ Oph Nebula"
-msgstr "রো অফিউকি নীহারিকা"
-
-#: nebulae/default/names.dat:542 nebulae/default/names.dat:623
-msgid "Antares Nebula"
-msgstr "জ্যেষ্ঠা নীহারিকা"
-
-#: nebulae/default/names.dat:543
-msgid "Prawn Nebula"
-msgstr "চিংড়ি নীহারিকা"
-
-#: nebulae/default/names.dat:544
 msgid "False Comet Nebula"
 msgstr "নকল ধূমকেতু নীহারিকা"
 
-#: nebulae/default/names.dat:545
-msgid "Summer Beehive Cluster"
-msgstr "গ্রীষ্মের মৌচাক তারকাগুচ্ছ"
+#: nebulae/default/names.dat:383
+msgid "Northern Jewel Box Cluster"
+msgstr "উত্তরের গয়নার বাক্স তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:546
-msgid "Poseidon's Trident Cluster"
-msgstr "পসাইডনের ত্রিশুল গুচ্ছ"
+#: nebulae/default/names.dat:384
+msgid "Table of Scorpius Cluster"
+msgstr "বৃশ্চিক মন্ডলের গোল টেবিল তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:547
-msgid "Graff's Cluster"
-msgstr "গ্রাফের তারকাগুচ্ছ"
+#: nebulae/default/names.dat:385
+msgid "Flickering Globular Cluster"
+msgstr "মিটমিটে গোলকাকার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:548
-msgid "Shapley-Ames 5"
-msgstr "শ্যাপলে-এমিস ৫"
+#: nebulae/default/names.dat:386
+msgid "Moth Wing Cluster"
+msgstr "মথের ডানা তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:549
-msgid "Pelican Nebula"
-msgstr "কপোত নীহারিকা"
+#: nebulae/default/names.dat:387
+msgid "Bug Nebula"
+msgstr "পতঙ্গ নীহারিকা"
 
-#: nebulae/default/names.dat:550 nebulae/default/names.dat:552
-msgid "Cocoon Nebula"
-msgstr "রেশম-গুটি নীহারিকা"
+#: nebulae/default/names.dat:389
+msgid "Box Nebula"
+msgstr "বাক্স নীহারিকা"
 
-#: nebulae/default/names.dat:551
-msgid "Southern Integral Sign"
-msgstr "দক্ষিনের সমাকলন আকার"
+#: nebulae/default/names.dat:390
+msgid "Cat's Paw Nebula"
+msgstr "বিড়ালের থাবা নীহারিকা"
 
-#: nebulae/default/names.dat:553
-msgid "Lagoon Nebula"
-msgstr "উপহ্রদ (লেগুন) নীহারিকা"
+#: nebulae/default/names.dat:391
+msgid "Cheerio Nebula"
+msgstr "চীরিও নীহারিকা"
 
-#: nebulae/default/names.dat:554
-msgid "Small Sagittarius Star Cloud"
-msgstr "ধনুম্ডলের ছোটো নক্ষত্র মেঘ"
+#: nebulae/default/names.dat:392 nebulae/default/names.dat:425
+msgid "Lobster Nebula"
+msgstr "গলদা নীহারিকা"
 
-#: nebulae/default/names.dat:555
-msgid "Delle Caustiche"
-msgstr "ডেলে কউস্টিচ"
+#: nebulae/default/names.dat:393
+msgid "War and Peace Nebula"
+msgstr "যুদ্ধ ও শান্তি নীহারিকা"
 
-#: nebulae/default/names.dat:556
-msgid "Winnecke 4"
-msgstr "উইনেকা ৪"
+#: nebulae/default/names.dat:394
+msgid "Little Ghost Nebula"
+msgstr "ছোটো ভুত নীহারিকা"
 
-#: nebulae/default/names.dat:557 skycultures/western_rey/star_names.fab:26
-msgid "Pleiades"
-msgstr "কৃত্তিকা"
+#: nebulae/default/names.dat:395
+msgid "Tonantzintla 1"
+msgstr "টোনানশিনলা ১"
 
-#: nebulae/default/names.dat:558
-msgid "Seven Sisters"
-msgstr "সাত বোন"
+#: nebulae/default/names.dat:396
+msgid "Phantom Cluster"
+msgstr "ছায়ামূর্তি তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:559
-msgid "Subaru"
-msgstr "সুবারু"
+#: nebulae/default/names.dat:398
+msgid "Splendors of the Heavens"
+msgstr "স্বর্গীয় ঐশ্বর্য"
 
-#: nebulae/default/names.dat:560
-msgid "α Per Cluster"
-msgstr "আলফা পারসিউস তারকাগুচ্ছ"
+#: nebulae/default/names.dat:399
+msgid "Silver Nugget Cluster"
+msgstr "রূপোর তাল তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:561
-msgid "α Per Moving Group"
-msgstr "α পারসিয়ুস চলমান দল"
+#: nebulae/default/names.dat:400 nebulae/default/names.dat:448
+msgid "Little Gem Nebula"
+msgstr "ক্ষুদ্র রত্ন নীহারিকা"
 
-#: nebulae/default/names.dat:562
-msgid "Coma Berenices Cluster"
-msgstr "বেরিনিসের কেশমন্ডল তারকাগুচ্ছ"
+#: nebulae/default/names.dat:401
+msgid "Tom Thumb Cluster"
+msgstr "টম থামের তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:563
-msgid "Taurus Poniatovii Cluster"
-msgstr "টরাস পনিয়াটোভি তারকাগুচ্ছ"
+#: nebulae/default/names.dat:402
+msgid "Ptolemy's Cluster"
+msgstr "টলেমী'র স্তবক"
 
-#: nebulae/default/names.dat:564
-msgid "Taurus Dark Cloud Nebula"
-msgstr "বৃষ মন্ডলের কৃষ্ণ নীহারিকা"
+#: nebulae/default/names.dat:403
+msgid "Lost in Space Galaxy"
+msgstr "একাকী তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:565
-msgid "Horsehead Nebula"
-msgstr "অশ্বমুণ্ড নীহারিকা"
+#: nebulae/default/names.dat:404
+msgid "Trifid Nebula"
+msgstr "তিন-পাপড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:566 nebulae/default/names.dat:567
-#: nebulae/default/names.dat:568 nebulae/default/names.dat:569
-msgid "Pipe (stem)"
-msgstr "ধূমপানের পাইপ (দন্ড)"
+#: nebulae/default/names.dat:405
+msgid "Dead Man's Chest Cluster"
+msgstr "মৃতের হৃদয় সম্পদ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:570 nebulae/default/names.dat:574
-msgid "Ink Spot Nebula"
-msgstr "কালির ছোপ নীহারিকা"
+#: nebulae/default/names.dat:406
+msgid "Herschel 36"
+msgstr "হার্শেল ৩৬"
 
-#: nebulae/default/names.dat:571
-msgid "Snake Nebula"
-msgstr "সর্প নীহারিকা"
+#: nebulae/default/names.dat:407
+msgid "Hourglass Cluster"
+msgstr "বালিঘড়ি তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:572
-msgid "The S Nebula"
-msgstr "ইংরাজী এস নীহারিকা"
+#: nebulae/default/names.dat:408
+msgid "Webb's Cross"
+msgstr "ওয়েবের ক্রস"
 
-#: nebulae/default/names.dat:573
-msgid "Pipe (bowl)"
-msgstr "ধূমপানের পাইপ (পাত্র)"
+#: nebulae/default/names.dat:409
+msgid "Red spider Nebula"
+msgstr "লাল মাকড়শা নীহারিকা"
 
-#: nebulae/default/names.dat:575
-msgid "Parrot's Head Nebula"
-msgstr "তোতা পাখির মাথা নীহারিকা"
+#: nebulae/default/names.dat:410
+msgid "Cat's Eye Nebula"
+msgstr "বিড়ালের চোখ নীহারিকা"
 
-#: nebulae/default/names.dat:576 nebulae/default/names.dat:577
-msgid "E Nebula"
-msgstr "E আকৃতি নীহারিকা"
+#: nebulae/default/names.dat:411 nebulae/default/names.dat:501
+msgid "Sunflower Nebula"
+msgstr "সূর্যমুখী নীহারিকা"
 
-#: nebulae/default/names.dat:578
-msgid "Fish on the platter nebula"
-msgstr "থালায় রাখা মাছ নীহারিকা"
+#: nebulae/default/names.dat:412
+msgid "Snail Nebula"
+msgstr "শামুক নীহারিকা"
 
-#: nebulae/default/names.dat:579
-msgid "Hyades"
-msgstr "রোহিনী তারকাগুচ্ছ"
+#: nebulae/default/names.dat:415
+msgid "Blue Racquetball Nebula"
+msgstr "নীল র‍্যাকেট বল নীহারিকা"
 
-#: nebulae/default/names.dat:580
-msgid "Coalsack Nebula"
-msgstr "কয়লার বস্তা নীহারিকা"
+#: nebulae/default/names.dat:416
+msgid "Emerald Nebula"
+msgstr ""
 
-#: nebulae/default/names.dat:581
-msgid "Orion Cluster"
-msgstr "কালপুরুষ মন্ডলের তারকাগুচ্ছ"
+#: nebulae/default/names.dat:417
+msgid "Turquoise Orb Nebula"
+msgstr ""
 
-#: nebulae/default/names.dat:582
-msgid "Orion Belt Cluster"
-msgstr "কালপুরুষ বেল্টের তারকাগুচ্ছ"
+#: nebulae/default/names.dat:418
+msgid "Eagle Nebula"
+msgstr "ঈগল নীহারিকা"
 
-#: nebulae/default/names.dat:583
-msgid "π Pup Cluster"
-msgstr "π পাপিস তারকাগুচ্ছ"
+#: nebulae/default/names.dat:419
+msgid "Star Queen"
+msgstr "নক্ষত্র রানী"
 
-#: nebulae/default/names.dat:584
-msgid "Tuft in the Tail of the Dog Cluster"
-msgstr "কুকুর মন্ডলের লেজের তারকাগুচ্ছ"
+#: nebulae/default/names.dat:420
+msgid "Black Swan Cluster"
+msgstr "পানকৌড়ি তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:585
-msgid "Markarian 18 Cluster"
-msgstr "মার্কারিয়ান ১৮ তারকাগুচ্ছ"
+#: nebulae/default/names.dat:421
+msgid "Omega Nebula"
+msgstr "ওমেগা নীহারিকা"
 
-#: nebulae/default/names.dat:586
-msgid "η Car Cluster"
-msgstr "ইটা ক্যারিনা তারকাগুচ্ছ"
+#: nebulae/default/names.dat:422
+msgid "Swan Nebula"
+msgstr "মরাল নীহারিকা"
 
-#: nebulae/default/names.dat:587
-msgid "Ursa Major Cluster"
-msgstr "ভল্লুক মন্ডলের তারকাগুচ্ছ"
+#: nebulae/default/names.dat:423
+msgid "Horseshoe Nebula"
+msgstr "নাল নীহারিকা"
 
-#: nebulae/default/names.dat:588
-msgid "Antares Cluster"
-msgstr "জ্যেষ্ঠা তারকাগুচ্ছ"
+#: nebulae/default/names.dat:424
+msgid "Checkmark Nebula"
+msgstr "টিকচিহ্ন কনীহারিকা"
 
-#: nebulae/default/names.dat:589
-msgid "Coathanger"
-msgstr "জামা ঝোলানোর হ্যাঙ্গার"
+#: nebulae/default/names.dat:426 nebulae/default/names.dat:427
+msgid "Edward's Galaxy"
+msgstr "এরওয়ার্ডের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:590
-msgid "Al Sufi's Cluster"
-msgstr "আল সুফির তারকাগুচ্ছ"
+#: nebulae/default/names.dat:428
+msgid "Tadpole Cluster"
+msgstr ""
 
-#: nebulae/default/names.dat:591
-msgid "Brocchi's Cluster"
-msgstr "ব্রোচির তারকাগুচ্ছ"
+#: nebulae/default/names.dat:429
+msgid "Great Sagittarius Cluster"
+msgstr "ধনুরাশির বিখ্যাত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:592
-msgid "Burnham's Nebula"
-msgstr "বার্নহামের নীহারিকা"
+#: nebulae/default/names.dat:430
+msgid "Santa's Sleigh Cluster"
+msgstr "স্যান্টার গাড়ি তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:593
-msgid "T Tauri Nebula"
-msgstr "টি বৃষ মন্ডলীয় নীহারিকা"
+#: nebulae/default/names.dat:431
+msgid "Wild Duck Cluster"
+msgstr "বুনো হাঁস স্তবক"
 
-#: nebulae/default/names.dat:594
-msgid "Orion Loop Nebula"
-msgstr "কালপুরুষের ফাঁস নীহারিকা"
+#: nebulae/default/names.dat:432
+msgid "July Salt-and-Pepper Cluster"
+msgstr "জুলাইয়ের ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:595
-msgid "Green Ring Nebula"
-msgstr "সবুজ আংটি নীহারিকা"
+#: nebulae/default/names.dat:433
+msgid "Scutum Salt-and-Pepper Cluster"
+msgstr "ঢাল মন্ডলীয় ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:597
-msgid "Little Cocoon Nebula"
-msgstr "ক্ষুদ্র গুটিপোকা নীহারিকা"
+#: nebulae/default/names.dat:434
+msgid "Ring Nebula"
+msgstr "চক্র নীহারিকা"
 
-#: nebulae/default/names.dat:598
-msgid "Cygnus Star Cloud"
-msgstr "হংস মন্ডলের নক্ষত্রমেঘ"
+#: nebulae/default/names.dat:435
+msgid "Chandelier Cluster"
+msgstr "ঝাড়বাতি তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:599
-msgid "Tulip Nebula"
-msgstr "টিউলিপ নীহারিকা"
+#: nebulae/default/names.dat:436
+msgid "R CrA Nebula"
+msgstr "'আর' দক্ষিন মুকুট নীহারিকা"
 
-#: nebulae/default/names.dat:600
-msgid "Cygnus Loop"
-msgstr "হংস মন্ডলের ফাঁস"
+#: nebulae/default/names.dat:437
+msgid "Phantom Streak Nebula"
+msgstr "ভৌতিক নীহারিকা"
 
-#: nebulae/default/names.dat:601
+#: nebulae/default/names.dat:438
+msgid "Bird's Head"
+msgstr "পাখির মাথা"
+
+#: nebulae/default/names.dat:439
+msgid "Dandelion Puffball Nebula"
+msgstr "ড্যান্ডোলাইন নীহারিকা"
+
+#: nebulae/default/names.dat:440
+msgid "Pavo Globular Cluster"
+msgstr "ময়ূর মন্ডলের গোলকাকার তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:441
+msgid "The Starfish"
+msgstr "তারামাছ"
+
+#: nebulae/default/names.dat:442
+msgid "The Windmill"
+msgstr "বায়ুকল"
+
+#: nebulae/default/names.dat:443
+msgid "Pentagon"
+msgstr "পঞ্চভূজ"
+
+#: nebulae/default/names.dat:444
+msgid "Snowball Nebula"
+msgstr "বরফের গোলা নীহারিকা"
+
+#: nebulae/default/names.dat:445
+msgid "Specter Cluster"
+msgstr "ছায়ামূর্তি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:446
+msgid "Hole in a Cluster"
+msgstr "ছিদ্রাল তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:447
+msgid "Nefertifi's headpiece"
+msgstr ""
+
+#: nebulae/default/names.dat:449
+msgid "The Foxhead Cluster"
+msgstr "শিয়ালের মাথা নীহারিকা"
+
+#: nebulae/default/names.dat:450
+msgid "Barnard's Galaxy"
+msgstr "বার্নার্ডের ছায়াপথ"
+
+#: nebulae/default/names.dat:451
+msgid "Blinking planetary"
+msgstr "মিটমিটে গ্রহরূপী নীহারিকা"
+
+#: nebulae/default/names.dat:452
+msgid "Poodle Cluster"
+msgstr "পুডল কুকুর তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:453
+msgid "Angelfish Cluster"
+msgstr "চাঁদামাছ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:454
+msgid "Arrowhead Cluster"
+msgstr "তীর তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:455
+msgid "Dumbbell Nebula"
+msgstr "ডাম্বেল নীহারিকা"
+
+#: nebulae/default/names.dat:456
+msgid "Diabolo Nebula"
+msgstr "ডায়াবোলো নীহারিকা"
+
+#: nebulae/default/names.dat:457
+msgid "Apple Core Nebula"
+msgstr "খাওয়া আপেল নীহারিকা"
+
+#: nebulae/default/names.dat:458
+msgid "Kite Cluster"
+msgstr "ঘুড়ি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:459
+msgid "Condor Galaxy"
+msgstr "হাড়গিলা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:460
+msgid "20 Vulpeculae Cluster"
+msgstr "২০ শিয়াল মন্ডলীয় তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:461
+msgid "Crescent Nebula"
+msgstr "অর্ধচন্দ্রাকার নীহারিকা"
+
+#: nebulae/default/names.dat:462
+msgid "Ear Nebula"
+msgstr "কান নীহারিকা"
+
+#: nebulae/default/names.dat:463
+msgid "Little Ring Nebula"
+msgstr "ছোটো আংটি নীহারিকা"
+
+#: nebulae/default/names.dat:464
+msgid "Blue Flash Nebula"
+msgstr "নীল ঝলক নীহারিকা"
+
+#: nebulae/default/names.dat:465
+msgid "Giant Behemoth Galaxy"
+msgstr "জলহস্তী নীহারিকা"
+
+#: nebulae/default/names.dat:466
+msgid "The Inchworm Cluster"
+msgstr "লার্ভা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:467
+msgid "The Rocking Horse Cluster"
+msgstr "দোলনা ঘোড়া তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:468
+msgid "Cooling Tower"
+msgstr "বাষ্প ঘনীভবন চিমনি"
+
+#: nebulae/default/names.dat:469
+msgid "Little Sisters"
+msgstr ""
+
+#: nebulae/default/names.dat:470
+msgid "Ghost Bush Cluster"
+msgstr "পিশাচের ঝোপ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:471
+msgid "Flying Geese Cluster"
+msgstr "উড়ন্ত হাঁসের দল তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:472
+msgid "Mothra Cluster"
+msgstr "মথ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:473
+msgid "Fireworks Galaxy"
+msgstr "আতশবাজি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:474
+msgid "Filamentary Nebula"
+msgstr "সূত্রাকার নীহারিকা"
+
+#: nebulae/default/names.dat:475
+msgid "West Veil Nebula"
+msgstr "পশ্চিম পাল নীহারিকা"
+
+#: nebulae/default/names.dat:476
+msgid "Cirrus Nebula"
+msgstr "মেঘ নীহারিকা"
+
+#: nebulae/default/names.dat:477
+msgid "Witch's Broom Nebula"
+msgstr "জাদু ঝাঁটা নীহারিকা"
+
+#: nebulae/default/names.dat:478
+msgid "Fleming's Triangular Wisp"
+msgstr ""
+
+#: nebulae/default/names.dat:479
+msgid "Witch's Broom Galaxy"
+msgstr "মায়াঝাড়ু নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:480
+msgid "East Veil Nebula"
+msgstr "পূর্ব পাল নীহারিকা"
+
+#: nebulae/default/names.dat:481
+msgid "Network Nebula"
+msgstr "নেটওয়ার্ক নীহারিকা"
+
+#: nebulae/default/names.dat:482 nebulae/default/names.dat:632
 msgid "Veil Nebula"
 msgstr "পর্দা নীহারিকা"
 
+#: nebulae/default/names.dat:483
+msgid "Bird's Nest"
+msgstr ""
+
+#: nebulae/default/names.dat:484
+msgid "North America Nebula"
+msgstr "উত্তর আমেরিকা নীহারিকা"
+
+#: nebulae/default/names.dat:485
+msgid "Fetus Nebula"
+msgstr "ভ্রূণ নীহারিকা"
+
+#: nebulae/default/names.dat:486
+msgid "Coat Button Nebula"
+msgstr "বোতাম নীহারিকা"
+
+#: nebulae/default/names.dat:487
+msgid "Saturn Nebula"
+msgstr "শনিগ্রহ নীহারিকা"
+
+#: nebulae/default/names.dat:488
+msgid "Iris Nebula"
+msgstr "আইরিশ নীহারিকা"
+
+#: nebulae/default/names.dat:489
+msgid "Cheeseburger Nebula"
+msgstr "চীজবার্গার নীহারিকা"
+
+#: nebulae/default/names.dat:490
+msgid "Pink Pillow Nebula"
+msgstr "গোলাপী বালিশ নীহারিকা"
+
+#: nebulae/default/names.dat:491
+msgid "Magic Carpet Nebula"
+msgstr "জাদু চাটাই নীহারিকা"
+
+#: nebulae/default/names.dat:492
+msgid "Green Rectangle Nebula"
+msgstr "সবুজ চৌকো নীহারিকা"
+
+#: nebulae/default/names.dat:493
+msgid "Pegasus Cluster"
+msgstr "পক্ষীরাজ মন্ডলের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:494
+msgid "Jellyfish Cluster"
+msgstr "জেলিফিস তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:495
+msgid "Small Cluster Nebula"
+msgstr "ছোটো গুচ্ছ নীহারিকা"
+
+#: nebulae/default/names.dat:496
+msgid "NGC 7129 IR Cluster"
+msgstr "নুতন তালিকা 7129 IR গুচ্ছ"
+
+#: nebulae/default/names.dat:497
+msgid "Star Lizard Cluster"
+msgstr "টিকটিকি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:498
+msgid "Drunken Lizard Cluster"
+msgstr "মাতাল টিকটিকি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:499
+msgid "Atoms for Peace Galaxy"
+msgstr "শান্তির জন্য পরমাণু নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:500
+msgid "Helix Nebula"
+msgstr "সর্পিল নীহারিকা"
+
+#: nebulae/default/names.dat:502 nebulae/default/names.dat:503
+#: nebulae/default/names.dat:504 nebulae/default/names.dat:505
+msgid "Stephan's Quintet"
+msgstr "স্টিফেনের পঞ্চক"
+
+#: nebulae/default/names.dat:506
+msgid "Deer Lick Group"
+msgstr "ডিয়ার লিক সমূহ"
+
+#: nebulae/default/names.dat:507
+msgid "The Wizard Nebula"
+msgstr "জাদুকরের নীহারিকা"
+
+#: nebulae/default/names.dat:508
+msgid "Grand Design Galaxy"
+msgstr "নিখুঁত গঠন নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:509
+msgid "Superman Galaxy"
+msgstr "অতিমানব নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:510
+msgid "The Dormouse Cluster"
+msgstr "ইঁদুর তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:511
+msgid "The Arrowhead Cluster"
+msgstr "তীর তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:512 nebulae/default/names.dat:513
+#: nebulae/default/names.dat:514 nebulae/default/names.dat:515
+msgid "Grus Quartet"
+msgstr "সারস মন্ডলের চতুষ্টয়"
+
+#: nebulae/default/names.dat:516 nebulae/default/names.dat:521
+msgid "Bubble Nebula"
+msgstr "বুদবুদ নীহারিকা"
+
+#: nebulae/default/names.dat:517
+msgid "Cassiopeia Salt-and-Pepper Cluster"
+msgstr "ক্যাসিওপিয়া ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:518
+msgid "October Salt-and-Pepper Cluster"
+msgstr "অক্টোবরের ফুটফুট দাগ যুক্ত তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:519
+msgid "Blue Snowball"
+msgstr "নীল বরফগোলক"
+
+#: nebulae/default/names.dat:520
+msgid "Copeland's Blue Snowball"
+msgstr "কোপেল্যান্ডের নীল বরফগোলক"
+
+#: nebulae/default/names.dat:522
+msgid "Fried-egg Galaxy"
+msgstr "ডিম ভাজা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:523
+msgid "Caroline's Rose Cluster"
+msgstr "ক্যারোলিনের গোলাপ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:524
+msgid "Ghost Cluster"
+msgstr "ভুত তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:525
+msgid "Star Mist Cluster"
+msgstr "তারার কুয়াশা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:526
+msgid "The Widow's Web Cluster"
+msgstr "মাকড়শার জাল তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:527
+msgid "The Little Sombrero Galaxy"
+msgstr "ছোটো গোলটুপি নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:528
+msgid "Electric Arc Galaxy"
+msgstr "তড়িৎশিখা নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:529
+msgid "Starburst Galaxy"
+msgstr "স্টারব্রাস্ট নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:530 nebulae/default/names.dat:531
+msgid "γ Cas Nebula"
+msgstr "গামা ক্যাসিওপিয়া নীহারিকা"
+
+#: nebulae/default/names.dat:532
+msgid "Maffei 1 Group"
+msgstr ""
+
+#: nebulae/default/names.dat:533
+msgid "ο Per Cloud"
+msgstr "ওমিক্রন পারসিয়ুস মেঘ"
+
+#: nebulae/default/names.dat:534
+msgid "Gingrich 1"
+msgstr "গিনগ্রিচ ১"
+
+#: nebulae/default/names.dat:535
+msgid "Barnard's Merope Nebula"
+msgstr "বার্নাডের মেরোপি নীহারিকা"
+
+#: nebulae/default/names.dat:536
+msgid "Flaming Star Nebula"
+msgstr "জ্বলন্ত নক্ষত্র নীহারিকা"
+
+#: nebulae/default/names.dat:537
+msgid "The Tadpoles"
+msgstr "ব্যাঙাচি"
+
+#: nebulae/default/names.dat:538
+msgid "Spider Nebula"
+msgstr "মাকড়শা নীহারিকা"
+
+#: nebulae/default/names.dat:539
+msgid "Spirograph Nebula"
+msgstr "স্পিরোগ্রাফ নীহারিকা"
+
+#: nebulae/default/names.dat:540
+msgid "Raspberry Nebula"
+msgstr "র‍্যাসবেরী নীহারিকা"
+
+#: nebulae/default/names.dat:541
+msgid "Jellyfish Nebula"
+msgstr "জেলিফিস নীহারিকা"
+
+#: nebulae/default/names.dat:542
+msgid "Gemini A"
+msgstr "মিথুন এ"
+
+#: nebulae/default/names.dat:543
+msgid "Papillon"
+msgstr "প্রজাপতির মত কান যুক্ত কুকুর"
+
+#: nebulae/default/names.dat:544
+msgid "γ Cyg Nebula"
+msgstr "গামা হাঁস নীহারিকা"
+
+#: nebulae/default/names.dat:545
+msgid "ZW II 108 Group"
+msgstr "ZW II ১০৮ সমূহ"
+
+#: nebulae/default/names.dat:546
+msgid "Elephant's Trunk Nebula"
+msgstr "হাতির শুঁড় নীহারিকা"
+
+#: nebulae/default/names.dat:547
+msgid "Fish Head Nebula"
+msgstr "মাছের মুড়ো নীহারিকা"
+
+#: nebulae/default/names.dat:548
+msgid "Heart Nebula"
+msgstr "হৃদয় নীহারিকা"
+
+#: nebulae/default/names.dat:549
+msgid "The Running Dog Nebula"
+msgstr "শিকারি কুকুর নীহারিকা"
+
+#: nebulae/default/names.dat:550
+msgid "Valentine Nebula"
+msgstr "প্রেমিকা নীহারিকা"
+
+#: nebulae/default/names.dat:551
+msgid "AFGL 333 Cloud"
+msgstr "AFGL ৩৩৩ মেঘ"
+
+#: nebulae/default/names.dat:552
+msgid "Soul Nebula"
+msgstr "আত্মা নীহারিকা"
+
+#: nebulae/default/names.dat:553
+msgid "Witch Head Nebula"
+msgstr "ডাইনির মাথা নীহারিকা"
+
+#: nebulae/default/names.dat:554
+msgid "Toby Jug Nebula"
+msgstr "টোবি জগ নীহারিকা"
+
+#: nebulae/default/names.dat:556
+msgid "ο Vel Cluster"
+msgstr "ο পাল মন্ডলের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:557
+msgid "Browning Galaxy"
+msgstr "ব্রাউনিং নক্ষত্রলোক"
+
+#: nebulae/default/names.dat:558
+msgid "Coddington's Nebula"
+msgstr "কডিংটনের নীহারিকা"
+
+#: nebulae/default/names.dat:559
+msgid "Southern Pleiades"
+msgstr "দক্ষিণ কৃত্তিকা"
+
+#: nebulae/default/names.dat:560
+msgid "θ Car Cluster"
+msgstr "থিটা ক্যারিনা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:561
+msgid "Running Chicken Nebula"
+msgstr "চলন্ত মুরগীর ছানা নীহারিকা"
+
+#: nebulae/default/names.dat:562
+msgid "λ Cen Nebula"
+msgstr "ল্যামডা সেন্টুরাই নীহারিকা"
+
+#: nebulae/default/names.dat:563
+msgid "Thackeray's Globules"
+msgstr "থ্যাকারের গুটি"
+
+#: nebulae/default/names.dat:564
+msgid "Lemon slice Nebula"
+msgstr "পাতিলেবুর টুকরো নীহারিকা"
+
+#: nebulae/default/names.dat:565
+msgid "Theoretician's Nebula"
+msgstr "থিওরিটিশিয়ান নীহারিকা"
+
+#: nebulae/default/names.dat:566
+msgid "Baby Eskimo Nebula"
+msgstr "এস্কিমো শিশু নীহারিকা"
+
+#: nebulae/default/names.dat:568
+msgid "Retina Nebula"
+msgstr "রেটিনা নীহারিকা"
+
+#: nebulae/default/names.dat:569
+msgid "Blue Horsehead Nebula"
+msgstr "নীল অশ্বমস্তক নীহারিকা"
+
+#: nebulae/default/names.dat:570
+msgid "White-eyed Pea Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:571
+msgid "ρ Oph Nebula"
+msgstr "রো অফিউকি নীহারিকা"
+
+#: nebulae/default/names.dat:572 nebulae/default/names.dat:656
+msgid "Antares Nebula"
+msgstr "জ্যেষ্ঠা নীহারিকা"
+
+#: nebulae/default/names.dat:573
+msgid "Prawn Nebula"
+msgstr "চিংড়ি নীহারিকা"
+
+#: nebulae/default/names.dat:574
+msgid "Summer Beehive Cluster"
+msgstr "গ্রীষ্মের মৌচাক তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:575
+msgid "Poseidon's Trident Cluster"
+msgstr "পসাইডনের ত্রিশুল গুচ্ছ"
+
+#: nebulae/default/names.dat:576
+msgid "Graff's Cluster"
+msgstr "গ্রাফের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:577
+msgid "Shapley-Ames 5"
+msgstr "শ্যাপলে-এমিস ৫"
+
+#: nebulae/default/names.dat:578
+msgid "P Cyg Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:579
+msgid "Pelican Nebula"
+msgstr "কপোত নীহারিকা"
+
+#: nebulae/default/names.dat:580 nebulae/default/names.dat:582
+msgid "Cocoon Nebula"
+msgstr "রেশম-গুটি নীহারিকা"
+
+#: nebulae/default/names.dat:581
+msgid "Southern Integral Sign"
+msgstr "দক্ষিনের সমাকলন আকার"
+
+#: nebulae/default/names.dat:583
+msgid "Lagoon Nebula"
+msgstr "উপহ্রদ (লেগুন) নীহারিকা"
+
+#: nebulae/default/names.dat:584
+msgid "Small Sagittarius Star Cloud"
+msgstr "ধনুম্ডলের ছোটো নক্ষত্র মেঘ"
+
+#: nebulae/default/names.dat:585
+msgid "Delle Caustiche"
+msgstr "ডেলে কউস্টিচ"
+
+#: nebulae/default/names.dat:586
+msgid "Winnecke 4"
+msgstr "উইনেকা ৪"
+
+#: nebulae/default/names.dat:587 skycultures/western_rey/star_names.fab:26
+msgid "Pleiades"
+msgstr "কৃত্তিকা"
+
+#: nebulae/default/names.dat:588
+msgid "Seven Sisters"
+msgstr "সাত বোন"
+
+#: nebulae/default/names.dat:589
+msgid "Subaru"
+msgstr "সুবারু"
+
+#: nebulae/default/names.dat:590
+msgid "α Per Cluster"
+msgstr "আলফা পারসিউস তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:591
+msgid "α Per Moving Group"
+msgstr "α পারসিয়ুস চলমান দল"
+
+#: nebulae/default/names.dat:592
+msgid "Coma Berenices Cluster"
+msgstr "বেরিনিসের কেশমন্ডল তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:593
+msgid "Coma Star Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:594
+msgid "Taurus Poniatovii Cluster"
+msgstr "টরাস পনিয়াটোভি তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:595
+msgid "Taurus Dark Cloud Nebula"
+msgstr "বৃষ মন্ডলের কৃষ্ণ নীহারিকা"
+
+#: nebulae/default/names.dat:596
+msgid "Horsehead Nebula"
+msgstr "অশ্বমুণ্ড নীহারিকা"
+
+#: nebulae/default/names.dat:597 nebulae/default/names.dat:598
+#: nebulae/default/names.dat:599 nebulae/default/names.dat:600
+msgid "Pipe (stem)"
+msgstr "ধূমপানের পাইপ (দন্ড)"
+
+#: nebulae/default/names.dat:601 nebulae/default/names.dat:605
+msgid "Ink Spot Nebula"
+msgstr "কালির ছোপ নীহারিকা"
+
 #: nebulae/default/names.dat:602
+msgid "Snake Nebula"
+msgstr "সর্প নীহারিকা"
+
+#: nebulae/default/names.dat:603
+msgid "The S Nebula"
+msgstr "ইংরাজী এস নীহারিকা"
+
+#: nebulae/default/names.dat:604
+msgid "Pipe (bowl)"
+msgstr "ধূমপানের পাইপ (পাত্র)"
+
+#: nebulae/default/names.dat:606
+msgid "Parrot's Head Nebula"
+msgstr "তোতা পাখির মাথা নীহারিকা"
+
+#: nebulae/default/names.dat:607 nebulae/default/names.dat:608
+msgid "E Nebula"
+msgstr "E আকৃতি নীহারিকা"
+
+#: nebulae/default/names.dat:609
+msgid "Fish on the platter nebula"
+msgstr "থালায় রাখা মাছ নীহারিকা"
+
+#: nebulae/default/names.dat:610
+msgid "Hyades"
+msgstr "রোহিনী তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:611
+msgid "Coalsack Nebula"
+msgstr "কয়লার বস্তা নীহারিকা"
+
+#: nebulae/default/names.dat:612
+msgid "Orion Cluster"
+msgstr "কালপুরুষ মন্ডলের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:613
+msgid "Orion Belt Cluster"
+msgstr "কালপুরুষ বেল্টের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:614
+msgid "π Pup Cluster"
+msgstr "π পাপিস তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:615
+msgid "Tuft in the Tail of the Dog Cluster"
+msgstr "কুকুর মন্ডলের লেজের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:616
+msgid "Markarian 18 Cluster"
+msgstr "মার্কারিয়ান ১৮ তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:617
+msgid "η Car Cluster"
+msgstr "ইটা ক্যারিনা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:618
+msgid "Ursa Major Cluster"
+msgstr "ভল্লুক মন্ডলের তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:619
+msgid "Antares Cluster"
+msgstr "জ্যেষ্ঠা তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:620
+msgid "Coathanger"
+msgstr "জামা ঝোলানোর হ্যাঙ্গার"
+
+#: nebulae/default/names.dat:621
+msgid "Al Sufi's Cluster"
+msgstr "আল সুফির তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:622
+msgid "Brocchi's Cluster"
+msgstr "ব্রোচির তারকাগুচ্ছ"
+
+#: nebulae/default/names.dat:623
+msgid "Burnham's Nebula"
+msgstr "বার্নহামের নীহারিকা"
+
+#: nebulae/default/names.dat:624
+msgid "T Tauri Nebula"
+msgstr "টি বৃষ মন্ডলীয় নীহারিকা"
+
+#: nebulae/default/names.dat:625
+msgid "Orion Loop Nebula"
+msgstr "কালপুরুষের ফাঁস নীহারিকা"
+
+#: nebulae/default/names.dat:626
+msgid "Green Ring Nebula"
+msgstr "সবুজ আংটি নীহারিকা"
+
+#: nebulae/default/names.dat:628
+msgid "Little Cocoon Nebula"
+msgstr "ক্ষুদ্র গুটিপোকা নীহারিকা"
+
+#: nebulae/default/names.dat:629
+msgid "Cygnus Star Cloud"
+msgstr "হংস মন্ডলের নক্ষত্রমেঘ"
+
+#: nebulae/default/names.dat:630
+msgid "Tulip Nebula"
+msgstr "টিউলিপ নীহারিকা"
+
+#: nebulae/default/names.dat:631
+msgid "Cygnus Loop"
+msgstr "হংস মন্ডলের ফাঁস"
+
+#: nebulae/default/names.dat:633
 msgid "Sadr Region"
 msgstr "সাদর তারা সংলগ্ন অঞ্চল"
 
-#: nebulae/default/names.dat:603
+#: nebulae/default/names.dat:634
 msgid "Flying Bat Nebula"
 msgstr "উড়ন্ত বাদুড় নীহারিকা"
 
-#: nebulae/default/names.dat:604 nebulae/default/names.dat:625
+#: nebulae/default/names.dat:635 nebulae/default/names.dat:658
 msgid "Cave Nebula"
 msgstr "গুহা নীহারিকা"
 
-#: nebulae/default/names.dat:605
+#: nebulae/default/names.dat:636
+msgid "Californietto Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:637
 msgid "Dreyer's Object"
 msgstr "ড্রেয়ারের জ্যোতিষ্ক"
 
-#: nebulae/default/names.dat:606
+#: nebulae/default/names.dat:638
 msgid "Pacman Nebula"
 msgstr "প্যাকম্যান নীহারিকা"
 
-#: nebulae/default/names.dat:607
+#: nebulae/default/names.dat:639
 msgid "Dolphin Nebula"
 msgstr "শুশুক নীহারিকা"
 
-#: nebulae/default/names.dat:608
+#: nebulae/default/names.dat:640
 msgid "Second Closest Planetary"
 msgstr "দ্বিতীয় নিকটতম গ্রহরূপী নীহারিকা"
 
-#: nebulae/default/names.dat:609
+#: nebulae/default/names.dat:641
 msgid "Northern Trifid"
 msgstr "উত্তরের ত্রিবিভক্ত নীহারিকা"
 
-#: nebulae/default/names.dat:610
+#: nebulae/default/names.dat:642
 msgid "Spaghetti Nebula"
 msgstr "স্প্যাগেটি নীহারিকা"
 
-#: nebulae/default/names.dat:611
+#: nebulae/default/names.dat:643
 msgid "Simeis 147"
 msgstr "সায়মিজ ১৪৭"
 
-#: nebulae/default/names.dat:612
+#: nebulae/default/names.dat:644
 msgid "Lower's Nebula"
 msgstr "লোয়ারের নীহারিকা"
 
-#: nebulae/default/names.dat:613
+#: nebulae/default/names.dat:645
 msgid "Angelfish Nebula"
 msgstr "অ্যাঞ্জেলফিস মাছ নীহারিকা"
 
-#: nebulae/default/names.dat:614
+#: nebulae/default/names.dat:646
 msgid "Orion's Head Nebula"
 msgstr "কালপুরুষ মন্ডলীয় মাথা নীহারিকা"
 
-#: nebulae/default/names.dat:615
+#: nebulae/default/names.dat:647
 msgid "North Orion Bubble"
 msgstr "কালপুরুষের উত্তর দিকের বুদবুদ"
 
-#: nebulae/default/names.dat:616
+#: nebulae/default/names.dat:648
 msgid "Medusa Nebula"
 msgstr "মেডুসা (সর্পচুলা দানবী) নীহারিকা"
 
-#: nebulae/default/names.dat:618
+#: nebulae/default/names.dat:650
 msgid "Barnard's Loop"
 msgstr "বার্নাডের ফাঁস"
 
-#: nebulae/default/names.dat:619
+#: nebulae/default/names.dat:651
 msgid "Seagull Nebula"
 msgstr "সীগাল পাখি নীহারিকা"
 
-#: nebulae/default/names.dat:620
+#: nebulae/default/names.dat:652
+msgid "Seagull's wings"
+msgstr ""
+
+#: nebulae/default/names.dat:653
 msgid "Snowman Nebula"
 msgstr "তুষার মানব নীহারিকা"
 
-#: nebulae/default/names.dat:621
+#: nebulae/default/names.dat:654
 msgid "Etched Hourglass Nebula"
 msgstr "ক্ষোদিত বালিঘড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:622
+#: nebulae/default/names.dat:655
 msgid "Engraved Hourglass Nebula"
 msgstr "উৎকীর্ণ বালিঘড়ি নীহারিকা"
 
-#: nebulae/default/names.dat:624
+#: nebulae/default/names.dat:657
 msgid "Ghost Nebula"
 msgstr "ভুতুড়ে নীহারিকা"
 
-#: nebulae/default/names.dat:626
+#: nebulae/default/names.dat:659
 msgid "Vulture Head Nebula"
 msgstr "শকুনের মাথা নীহারিকা"
 
-#: nebulae/default/names.dat:627
+#: nebulae/default/names.dat:660
 msgid "Baby Eagle Nebula"
 msgstr "ইগল শিশু নীহারিকা"
 
-#: nebulae/default/names.dat:628
+#: nebulae/default/names.dat:661
 msgid "Orion B"
 msgstr "কালপুরুষ B"
 
-#: nebulae/default/names.dat:629
+#: nebulae/default/names.dat:662
+msgid "Coalman Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:663
 msgid "Northern Coalsack Nebula"
 msgstr "উত্তরের কয়লার বস্তা নীহারিকা"
 
-#: nebulae/default/names.dat:630
+#: nebulae/default/names.dat:664
 msgid "Gulf of Mexico Nebula"
 msgstr "মেক্সিকো উপসাগর নীহারিকা"
 
-#: nebulae/default/names.dat:631 nebulae/default/names.dat:633
+#: nebulae/default/names.dat:666 nebulae/default/names.dat:668
 msgid "Taffy Galaxies"
 msgstr "টফি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:632 nebulae/default/names.dat:634
+#: nebulae/default/names.dat:667 nebulae/default/names.dat:669
 msgid "Taffy System"
 msgstr "টফি সিস্টেম"
 
-#: nebulae/default/names.dat:635
+#: nebulae/default/names.dat:670
 msgid "Wolf-Lundmark-Melotte Object (WLM)"
 msgstr "উলফ-লন্ডমার্ক-মেলোটি বস্তু (WLM)"
 
-#: nebulae/default/names.dat:636
+#: nebulae/default/names.dat:671
 msgid "Sculptor Dwarf Irregular Galaxy"
 msgstr "ভাষ্কর অনিয়তকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:637
+#: nebulae/default/names.dat:672
 msgid "Andromeda III Dwarf Galaxy"
 msgstr "অ্যান্ড্রোমিডা III বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:638
+#: nebulae/default/names.dat:673
 msgid "Cartwheel Galaxy"
 msgstr "গাড়ির চাকা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:639
+#: nebulae/default/names.dat:674
 msgid "Cartwheel Ring Galaxy"
 msgstr "বেড় দেওয়া চাকা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:640
+#: nebulae/default/names.dat:675
 msgid "Zwicky's Ellipse"
 msgstr "জুইকির উপবৃত্ত"
 
-#: nebulae/default/names.dat:641
+#: nebulae/default/names.dat:676
 msgid "Exclamation Mark Galaxy"
 msgstr "বিস্ময় চিহ্ণ নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:642
+#: nebulae/default/names.dat:677
 msgid "Andromeda I Dwarf Galaxy"
 msgstr "অ্যান্ড্রোমিডা I বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:644
+#: nebulae/default/names.dat:679
 msgid "Baade's Galaxy A"
 msgstr "বাডের নক্ষত্রলোক এ"
 
-#: nebulae/default/names.dat:645
+#: nebulae/default/names.dat:680
 msgid "Baade's Galaxy B"
 msgstr "বাডের নক্ষত্রলোক বি"
 
-#: nebulae/default/names.dat:646
+#: nebulae/default/names.dat:681
 msgid "Sculptor Dwarf Galaxy"
 msgstr "ভাষ্কর মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:647
+#: nebulae/default/names.dat:682
 msgid "Pisces Dwarf Galaxy"
 msgstr "মীন মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:648
+#: nebulae/default/names.dat:683
 msgid "Pisces I"
 msgstr "মীন I"
 
-#: nebulae/default/names.dat:649
+#: nebulae/default/names.dat:684
 msgid "Shapley-Ames 1"
 msgstr "শ্যাপলে-এমিস ১"
 
-#: nebulae/default/names.dat:650
+#: nebulae/default/names.dat:685
 msgid "Andromeda II"
 msgstr "অ্যান্ড্রোমিডা II"
 
-#: nebulae/default/names.dat:651
+#: nebulae/default/names.dat:686
 msgid "Andromeda II Dwarf Galaxy"
 msgstr "অ্যান্ড্রোমিডা II বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:652
+#: nebulae/default/names.dat:687
 msgid "White Rose Galaxy"
 msgstr "সাদা গোলাপ নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:653
+#: nebulae/default/names.dat:688
 msgid "Phoenix Dwarf Galaxy"
 msgstr "ফিনিক্স মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:654
+#: nebulae/default/names.dat:689
 msgid "Schuster-West Cluster"
 msgstr "শুস্টার-ওয়েষ্ট তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:655
+#: nebulae/default/names.dat:690
 msgid "Maffei 1"
 msgstr "ম্যাফেই ১"
 
-#: nebulae/default/names.dat:656
+#: nebulae/default/names.dat:691
 msgid "Holmberg VI"
 msgstr "হোমবার্গ VI"
 
-#: nebulae/default/names.dat:657
+#: nebulae/default/names.dat:692
 msgid "Fornax Dwarf Galaxy"
 msgstr "অগ্নিকুণ্ড মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:658
+#: nebulae/default/names.dat:693
 msgid "Maffei 2"
 msgstr "ম্যাফেই ২"
 
-#: nebulae/default/names.dat:659
+#: nebulae/default/names.dat:694
 msgid "E1 Cluster"
 msgstr "'ই১' তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:660
+#: nebulae/default/names.dat:695
 msgid "Schuster's Spiral Galaxy"
 msgstr "স্কুস্টারের পেঁচালো নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:661
+#: nebulae/default/names.dat:696
 msgid "Horologium Dwarf Galaxy"
 msgstr "দোলক ঘড়ি বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:662
+#: nebulae/default/names.dat:697
 msgid "Carafe Nebula"
 msgstr "ক্যারাফে নীহারিকা"
 
-#: nebulae/default/names.dat:663
+#: nebulae/default/names.dat:698
 msgid "Large Magellanic Cloud"
 msgstr "বৃহৎ ম্যাজেলেনীয় মেঘ"
 
-#: nebulae/default/names.dat:664
+#: nebulae/default/names.dat:699
 msgid "Nubecula Major"
 msgstr "মুখ্য নুবেকুলা"
 
-#: nebulae/default/names.dat:665
+#: nebulae/default/names.dat:700
 msgid "Orion Dwarf Galaxy"
 msgstr "কালপুরুষ বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:666
+#: nebulae/default/names.dat:701
 msgid "Carina Dwarf Galaxy"
 msgstr "ক্যারিনা বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:667
+#: nebulae/default/names.dat:702
 msgid "Southern Ellipse"
 msgstr "দক্ষিনের উপবৃত্ত"
 
-#: nebulae/default/names.dat:668
+#: nebulae/default/names.dat:703
 msgid "Lindsay-Shapley Ring"
 msgstr "নিন্ডসে-শ্যাপলে চক্র"
 
-#: nebulae/default/names.dat:669
+#: nebulae/default/names.dat:704
 msgid "Graham A"
 msgstr "গ্রাহাম এ"
 
-#: nebulae/default/names.dat:670
+#: nebulae/default/names.dat:705
 msgid "Argo Dwarf Irregular Galaxy"
 msgstr "আর্গো অনিয়তকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:671
+#: nebulae/default/names.dat:706
 msgid "Integral Sign Galaxy"
 msgstr "সমাকল নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:672
+#: nebulae/default/names.dat:707
 msgid "Phoenix Galaxy"
 msgstr "ফিনিক্স নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:673
+#: nebulae/default/names.dat:708
 msgid "Holmberg II"
 msgstr "হোমবার্গ II"
 
-#: nebulae/default/names.dat:674
+#: nebulae/default/names.dat:709
 msgid "M81 Dwarf A"
 msgstr "মেসিয়ার ৮১ বামন 'এ'"
 
-#: nebulae/default/names.dat:675
+#: nebulae/default/names.dat:710
 msgid "Holmberg III"
 msgstr "হোমবার্গ III"
 
-#: nebulae/default/names.dat:676
+#: nebulae/default/names.dat:711
 msgid "Grasshopper A"
 msgstr "ঘাসফড়িং 'এ'"
 
-#: nebulae/default/names.dat:677 nebulae/default/names.dat:776
+#: nebulae/default/names.dat:712 nebulae/default/names.dat:811
 msgid "Hydra A"
 msgstr "হাইড্রা এ"
 
-#: nebulae/default/names.dat:678
+#: nebulae/default/names.dat:713
 msgid "Holmberg I"
 msgstr "হোমবার্গ I"
 
-#: nebulae/default/names.dat:679
+#: nebulae/default/names.dat:714
 msgid "Holmberg IX"
 msgstr "হোমবার্গ IX"
 
-#: nebulae/default/names.dat:680
+#: nebulae/default/names.dat:715
 msgid "Arp Loop"
 msgstr "আর্প ফাঁস"
 
-#: nebulae/default/names.dat:681
+#: nebulae/default/names.dat:716
 msgid "Sextans B"
 msgstr "সেক্সট্যান্ট 'বি'"
 
-#: nebulae/default/names.dat:682
+#: nebulae/default/names.dat:717
 msgid "Revolver Galaxy"
 msgstr "রিভলবার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:684
+#: nebulae/default/names.dat:719
 msgid "Antlia Dwarf Galaxy"
 msgstr "পাম্প মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:685
+#: nebulae/default/names.dat:720
 msgid "M81 Dwarf B"
 msgstr "মেসিয়ার ৮১ বামন 'বি'"
 
-#: nebulae/default/names.dat:686
+#: nebulae/default/names.dat:721
 msgid "Vela Ring Galaxy"
 msgstr "পাল মন্ডলের বলয় নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:687
+#: nebulae/default/names.dat:722
 msgid "Sextans A"
 msgstr "সেক্সট্যান্ট 'এ'"
 
-#: nebulae/default/names.dat:688
+#: nebulae/default/names.dat:723
 msgid "Haro II"
 msgstr "হারো II"
 
-#: nebulae/default/names.dat:689
+#: nebulae/default/names.dat:724
 msgid "Spider Galaxy"
 msgstr "মাকড়শা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:690
+#: nebulae/default/names.dat:725
 msgid "Ant Galaxy"
 msgstr "পিঁপড়ে নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:691
+#: nebulae/default/names.dat:726
 msgid "Mayall's Object"
 msgstr "মায়ালের বস্তু"
 
-#: nebulae/default/names.dat:692
+#: nebulae/default/names.dat:727
 msgid "Leo II Dwarf Galaxy"
 msgstr "সিংহ মন্ডলের ২য় বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:693
+#: nebulae/default/names.dat:728
 msgid "Leo B"
 msgstr "লিও (সিংহ) B"
 
-#: nebulae/default/names.dat:694
+#: nebulae/default/names.dat:729
 msgid "Harrington-Wilson #2"
 msgstr "হ্যারিংটন-উইলসন #২"
 
-#: nebulae/default/names.dat:695
+#: nebulae/default/names.dat:730
 msgid "Arp's Galaxy"
 msgstr "আর্পের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:696
+#: nebulae/default/names.dat:731
 msgid "A Flying Bird"
 msgstr "উড়ন্ত পাখি"
 
-#: nebulae/default/names.dat:697 nebulae/default/names.dat:698
-#: nebulae/default/names.dat:699
+#: nebulae/default/names.dat:732 nebulae/default/names.dat:733
+#: nebulae/default/names.dat:734
 msgid "Wild's Triplet"
 msgstr "ঔয়াইল্ডের ত্রয়ী নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:700
+#: nebulae/default/names.dat:735
 msgid "Syphon"
 msgstr "সাইফন"
 
-#: nebulae/default/names.dat:701
+#: nebulae/default/names.dat:736
 msgid "Reinmuth 80"
 msgstr "রেইনমুথ ৮০"
 
-#: nebulae/default/names.dat:702
+#: nebulae/default/names.dat:737
 msgid "Holmberg VII"
 msgstr "হোমবার্গ VII"
 
-#: nebulae/default/names.dat:703
+#: nebulae/default/names.dat:738
 msgid "Malin 1"
 msgstr "মলিন I"
 
-#: nebulae/default/names.dat:704
+#: nebulae/default/names.dat:739
 msgid "Shapley-Ames 3"
 msgstr "শ্যাপলে-এমিস ৩"
 
-#: nebulae/default/names.dat:705
+#: nebulae/default/names.dat:740
 msgid "Shapley-Ames 4"
 msgstr "শ্যাপলে-এমিস ৪"
 
-#: nebulae/default/names.dat:706
+#: nebulae/default/names.dat:741
 msgid "Imprint of a Foot Galaxy"
 msgstr "পদচিত্ন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:707
+#: nebulae/default/names.dat:742
 msgid "Hardcastle's Galaxy"
 msgstr "হার্ডক্যাসেলের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:708
+#: nebulae/default/names.dat:743
 msgid "Holmberg VIII"
 msgstr "হোমবার্গ VIII"
 
-#: nebulae/default/names.dat:709
+#: nebulae/default/names.dat:744
 msgid "Fourcade-Figueroa Object"
 msgstr "ফোরকাড-ফিগুয়েরা বস্তু"
 
-#: nebulae/default/names.dat:710
+#: nebulae/default/names.dat:745
 msgid "Fourcade-Figueroa Galaxy"
 msgstr "ফোরকাড-ফিগুয়েরা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:711
+#: nebulae/default/names.dat:746
 msgid "Holmberg V"
 msgstr "হোমবার্গ V"
 
-#: nebulae/default/names.dat:712
+#: nebulae/default/names.dat:747
 msgid "Holmberg IV"
 msgstr "হোমবার্গ IV"
 
-#: nebulae/default/names.dat:713
+#: nebulae/default/names.dat:748
 msgid "Circinus Galaxy"
 msgstr "কাঁটা কম্পাস মন্ডলের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:714
+#: nebulae/default/names.dat:749
 msgid "Segner's Wheel"
 msgstr "সেগনের এর চাকা"
 
-#: nebulae/default/names.dat:715
+#: nebulae/default/names.dat:750
 msgid "Ursa Minor Dwarf Galaxy"
 msgstr "ভল্লুক ছানা মন্ডলের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:716
+#: nebulae/default/names.dat:751
 msgid "Hooked Galaxy"
 msgstr "হুক নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:717 nebulae/default/names.dat:718
-#: nebulae/default/names.dat:719
+#: nebulae/default/names.dat:752 nebulae/default/names.dat:753
+#: nebulae/default/names.dat:754
 msgid "Zwicky's Triplet"
 msgstr "জুইকির ত্রয়"
 
-#: nebulae/default/names.dat:720
+#: nebulae/default/names.dat:755
 msgid "Hercules A"
 msgstr "হারকিউলিস এ"
 
-#: nebulae/default/names.dat:721
+#: nebulae/default/names.dat:756
 msgid "Draco Dwarf Galaxy"
 msgstr "ড্রাগন মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:722
+#: nebulae/default/names.dat:757
 msgid "Sagittarius Dwarf Galaxy"
 msgstr "ধনু মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:723
+#: nebulae/default/names.dat:758
 msgid "Kowal's Object"
 msgstr "কোয়ালের বস্তু"
 
-#: nebulae/default/names.dat:724
+#: nebulae/default/names.dat:759
 msgid "Aquarius Dwarf Galaxy"
 msgstr "কুম্ভ বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:725
+#: nebulae/default/names.dat:760
 msgid "Cygnus A"
 msgstr "হংস মন্ডল 'এ'"
 
-#: nebulae/default/names.dat:726
+#: nebulae/default/names.dat:761
 msgid "McLeish's Object"
 msgstr "ম্যাকলিশের জ্যোতিষ্ক"
 
-#: nebulae/default/names.dat:727
+#: nebulae/default/names.dat:762
 msgid "Shapley-Ames 6"
 msgstr "শ্যাপলে-এমিস ৬"
 
-#: nebulae/default/names.dat:728
+#: nebulae/default/names.dat:763
 msgid "Huchra's Lens"
 msgstr "হুচরা এর লেন্স"
 
-#: nebulae/default/names.dat:729
+#: nebulae/default/names.dat:764
 msgid "Tucana Dwarf Galaxy"
 msgstr "টুকান পাখি মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:730 nebulae/default/names.dat:744
+#: nebulae/default/names.dat:765 nebulae/default/names.dat:779
 msgid "Pegasus Dwarf Galaxy"
 msgstr "পক্ষীরাজ মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:731
+#: nebulae/default/names.dat:766
 msgid "Barbon's Galaxy"
 msgstr "বারবনের নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:732
+#: nebulae/default/names.dat:767
 msgid "Minkowski's Object"
 msgstr "মিনিকোয়াস্কির বস্তু"
 
-#: nebulae/default/names.dat:733
+#: nebulae/default/names.dat:768
 msgid "Superantennae Galaxy"
 msgstr "সুপার অ্যান্টেনা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:734
+#: nebulae/default/names.dat:769
 msgid "Malin II"
 msgstr "মলিন II"
 
-#: nebulae/default/names.dat:735
+#: nebulae/default/names.dat:770
 msgid "Sextans Dwarf Spheroidal Galaxy"
 msgstr "সেক্সট্যান্ট গোলকাকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:736
+#: nebulae/default/names.dat:771
 msgid "Cassiopeia 1"
 msgstr "ক্যাসিওপিয়া ১"
 
-#: nebulae/default/names.dat:737
+#: nebulae/default/names.dat:772
 msgid "Cassiopeia 2"
 msgstr "ক্যাসিওপিয়া ২"
 
-#: nebulae/default/names.dat:738
+#: nebulae/default/names.dat:773
 msgid "Speca Galaxy"
 msgstr "স্পেকা নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:739
+#: nebulae/default/names.dat:774
 msgid "Sextans Ring"
 msgstr "সেক্সট্যান্ট চক্র"
 
-#: nebulae/default/names.dat:740
+#: nebulae/default/names.dat:775
 msgid "Ring Galaxy in Sextans"
 msgstr "সেক্সট্যান্ট চক্র নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:741
+#: nebulae/default/names.dat:776
 msgid "Camelopardalis A"
 msgstr "ক্যামেলোপার্ডালিস (জিরাফ) A"
 
-#: nebulae/default/names.dat:742
+#: nebulae/default/names.dat:777
 msgid "Cassiopeia Dwarf Spheroidal Galaxy"
 msgstr "ক্যাসিওপিয়া গোলোকাকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:743
+#: nebulae/default/names.dat:778
 msgid "Andromeda VII"
 msgstr "অ্যান্ড্রোমিডা VII"
 
-#: nebulae/default/names.dat:745
+#: nebulae/default/names.dat:780
 msgid "Pegasus II"
 msgstr "পেগেসাস (পক্ষীরাজ) II"
 
-#: nebulae/default/names.dat:746
+#: nebulae/default/names.dat:781
 msgid "Andromeda VI"
 msgstr "অ্যান্ড্রোমিডা VI"
 
-#: nebulae/default/names.dat:747
+#: nebulae/default/names.dat:782
 msgid "Boomerang Nebula"
 msgstr "বুমেরাং নীহারিকা"
 
-#: nebulae/default/names.dat:748
+#: nebulae/default/names.dat:783
 msgid "Cepheus I"
 msgstr "সেফিয়ুস I"
 
-#: nebulae/default/names.dat:749
+#: nebulae/default/names.dat:784
 msgid "Cetus Dwarf Galaxy"
 msgstr "তিমি মন্ডলের বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:750
+#: nebulae/default/names.dat:785
 msgid "BW Tauri"
 msgstr "বি ডব্লু বৃষ মন্ডল"
 
-#: nebulae/default/names.dat:751
+#: nebulae/default/names.dat:786
 msgid "The Grasshopper Galaxy"
 msgstr "ফড়িং নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:752
+#: nebulae/default/names.dat:787
 msgid "Leo A"
 msgstr "লিও (সিংহ) A"
 
-#: nebulae/default/names.dat:753
+#: nebulae/default/names.dat:788
 msgid "Leo III"
 msgstr "লিও (সিংহ) III"
 
-#: nebulae/default/names.dat:754
+#: nebulae/default/names.dat:789
 msgid "Leo Dwarf Irregular Galaxy"
 msgstr "সিংহ মন্ডলের অনিয়তাকার বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:755
+#: nebulae/default/names.dat:790
 msgid "Sextans C"
 msgstr "সেক্সট্যান্ট সি"
 
-#: nebulae/default/names.dat:756
+#: nebulae/default/names.dat:791
 msgid "Regulus Dwarf Galaxy"
 msgstr "রেগুলাস বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:757
+#: nebulae/default/names.dat:792
 msgid "Leo I"
 msgstr "লিও (সিংহ) I"
 
-#: nebulae/default/names.dat:758
+#: nebulae/default/names.dat:793
 msgid "Harrington-Wilson #1"
 msgstr "হ্যারিংটন-উইলসন #১"
 
-#: nebulae/default/names.dat:759
+#: nebulae/default/names.dat:794
 msgid "Markarian 421"
 msgstr "মার্কারিয়ান ৪২১"
 
-#: nebulae/default/names.dat:760
+#: nebulae/default/names.dat:795
 msgid "Zwicky #2"
 msgstr "জুইকি ২য়"
 
-#: nebulae/default/names.dat:761
+#: nebulae/default/names.dat:796
 msgid "Markarian 231"
 msgstr "মার্কারিয়ান ২৩১"
 
-#: nebulae/default/names.dat:762
+#: nebulae/default/names.dat:797
 msgid "Exclamation Point Galaxy"
 msgstr "বিস্ময়চিহ্নাকার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:763
+#: nebulae/default/names.dat:798
 msgid "Serpens Dwarf Galaxy"
 msgstr "সর্প বামন নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:764
+#: nebulae/default/names.dat:799
 msgid "Tadpole Galaxy"
 msgstr "ব্যাঙাচি নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:765
+#: nebulae/default/names.dat:800
 msgid "Egg Nebula"
 msgstr "ডিম্বাকৃতি নীহারিকা"
 
-#: nebulae/default/names.dat:766
+#: nebulae/default/names.dat:801
 msgid "Cygnus Egg"
 msgstr "হাঁসের ডিম"
 
-#: nebulae/default/names.dat:767
+#: nebulae/default/names.dat:802
 msgid "Pegasus Dwarf Irregular Galaxy"
 msgstr "পক্ষীরাজ মন্ডলের অনিয়তকার নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:768
+#: nebulae/default/names.dat:803
 msgid "Lemon Galaxy"
 msgstr "লেবু নক্ষত্রলোক"
 
-#: nebulae/default/names.dat:769
+#: nebulae/default/names.dat:804
 msgid "Minkowski's Butterfly"
 msgstr "মিনিকোয়াস্কির প্রজাপতি"
 
-#: nebulae/default/names.dat:770
+#: nebulae/default/names.dat:805
 msgid "Twin Jet Nebula"
 msgstr "দ্বিমুখী ফোয়ারা নীহারিকা"
 
-#: nebulae/default/names.dat:771
+#: nebulae/default/names.dat:806
 msgid "M2-9"
 msgstr "M2-9"
 
-#: nebulae/default/names.dat:772
+#: nebulae/default/names.dat:807
 msgid "Westbrook Nebula"
 msgstr "ওয়েস্টব্রুকের নীহারিকা"
 
-#: nebulae/default/names.dat:773
+#: nebulae/default/names.dat:808
 msgid "Water Lily Nebula"
 msgstr "শালুক নীহারিকা"
 
-#: nebulae/default/names.dat:774
+#: nebulae/default/names.dat:809
 msgid "Perseus Cluster"
 msgstr "পারসিউস তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:775
+#: nebulae/default/names.dat:810
 msgid "Train Wreck Cluster"
 msgstr "ট্রেনের ধ্বংসাবশেষ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:777
+#: nebulae/default/names.dat:812
 msgid "Hydra Cluster"
 msgstr "জলসর্প তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:778
+#: nebulae/default/names.dat:813
 msgid "Leo Cluster"
 msgstr "সিংহ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:779
+#: nebulae/default/names.dat:814
 msgid "Coma Cluster"
 msgstr "কেশ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:780
+#: nebulae/default/names.dat:815
 msgid "Corona Borealis Cluster"
 msgstr "উত্তর পুষ্পমুকুট নীহারিকা"
 
-#: nebulae/default/names.dat:781
+#: nebulae/default/names.dat:816
 msgid "Hercules Cluster"
 msgstr "হার্কিউলিস তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:782
+#: nebulae/default/names.dat:817
 msgid "Pandora’s Cluster"
 msgstr "প্যানডোরার তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:783
+#: nebulae/default/names.dat:818
 msgid "Centaurus Cluster"
 msgstr "অশ্বমানব তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:784
+#: nebulae/default/names.dat:819
 msgid "Shapley 8 Cluster"
 msgstr "শ্যাপলে ৮ তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:785
+#: nebulae/default/names.dat:820
 msgid "Norma Cluster"
 msgstr "মাপদন্ড তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:786
+#: nebulae/default/names.dat:821
 msgid "Fornax Cluster"
 msgstr "অগ্নিকুন্ড তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:787
+#: nebulae/default/names.dat:822
 msgid "Antlia Cluster"
 msgstr "পাম্প তারকাগুচ্ছ"
 
-#: nebulae/default/names.dat:788
+#: nebulae/default/names.dat:823
 msgid "Calabash Nebula"
 msgstr "লাউ আকারের নীহারিকা"
 
-#: nebulae/default/names.dat:789
+#: nebulae/default/names.dat:824
 msgid "Rotten Egg Nebula"
 msgstr "পচা ডিম নীহারিকা"
 
-#: nebulae/default/names.dat:790
+#: nebulae/default/names.dat:825
 msgid "Frosty Leo Nebula"
 msgstr "তুহিন সিংহ নীহারিকা"
 
-#: nebulae/default/names.dat:791
+#: nebulae/default/names.dat:826
 msgid "Gomez's Hamburger"
 msgstr "গোমেজের হ্যামবার্গার"
 
-#: nebulae/default/names.dat:792
+#: nebulae/default/names.dat:827
 msgid "Cotton Candy Nebula"
 msgstr "হাওয়াই মিঠাই নীহারিকা"
 
-#: nebulae/default/names.dat:793
+#: nebulae/default/names.dat:828
 msgid "Footprint Nebula"
 msgstr "পদচিহ্ন নীহারিকা"
 
-#: nebulae/default/names.dat:794
+#: nebulae/default/names.dat:829
 msgid "Minkowski's Footprint"
 msgstr "মিনিকোয়াস্কির পদচিহ্ন"
 
-#: nebulae/default/names.dat:795
+#: nebulae/default/names.dat:830
 msgid "M1-92"
 msgstr "M1-92"
 
-#: nebulae/default/names.dat:796
+#: nebulae/default/names.dat:831
 msgid "Sagittarius A East"
 msgstr "ধনু মন্ডল 'এ' পূর্ব"
 
-#: nebulae/default/names.dat:797
+#: nebulae/default/names.dat:832
 msgid "Sagittarius A West"
 msgstr "ধনু মন্ডল 'এ' পশ্চিম"
 
-#: nebulae/default/names.dat:798
+#: nebulae/default/names.dat:833
 msgid "Minispiral in Gal Center"
 msgstr "ছায়াপথের কেন্দ্রের সর্পিল বাহু"
 
-#: nebulae/default/names.dat:799
+#: nebulae/default/names.dat:834
 msgid "Dark Doodad Nebula"
 msgstr "ডুড্যাড কৃষ্ণ নীহারিকা"
 
@@ -6410,7 +6516,8 @@ msgstr "ওয়্যানজেল"
 msgid "Purra"
 msgstr "পুর‍্যা"
 
-#: skycultures/boorong/star_names.fab:27 skycultures/western/star_names.fab:152
+#: skycultures/boorong/star_names.fab:27
+#: skycultures/western/star_names.fab:152
 msgid "Unurgunite"
 msgstr "আনুর্গুনাইট"
 
@@ -6424,12 +6531,14 @@ msgstr "গ্নোয়ী"
 msgid "Mityan"
 msgstr "মিটিয়ান"
 
-#. TRANSLATORS: Native name of Venus in Boorong culture (English: Elder sister)
+#. TRANSLATORS: Native name of Venus in Boorong culture (English: Elder
+#. sister)
 #: skycultures/boorong/planet_names.fab:6
 msgid "Chargee Gnowee"
 msgstr "চারজী গ্নোয়ী"
 
-#. TRANSLATORS: Native name of Jupiter in Boorong culture (English: Sulphur-crested white cockatoo)
+#. TRANSLATORS: Native name of Jupiter in Boorong culture (English: Sulphur-
+#. crested white cockatoo)
 #: skycultures/boorong/planet_names.fab:8
 msgid "Ginabongbearp"
 msgstr "জিনাবনবীর্প"
@@ -7191,23 +7300,27 @@ msgstr "ভেড়া"
 msgid "Stars of Water"
 msgstr "জলের তারা সমূহ"
 
-#: skycultures/egyptian/star_names.fab:1 skycultures/romanian/star_names.fab:80
+#: skycultures/egyptian/star_names.fab:1
+#: skycultures/romanian/star_names.fab:80
 #: skycultures/western/star_names.fab:154
 #: skycultures/western_rey/star_names.fab:32
 msgid "Procyon"
 msgstr "প্রশ্বন"
 
-#: skycultures/egyptian/star_names.fab:2 skycultures/western/star_names.fab:137
+#: skycultures/egyptian/star_names.fab:2
+#: skycultures/western/star_names.fab:137
 #: skycultures/western_rey/star_names.fab:36
 msgid "Sirius"
 msgstr "সিরিয়াস (লুব্ধক)"
 
-#. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of Sun)
+#. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of
+#. Sun)
 #: skycultures/egyptian/planet_names.fab:2
 msgid "Amon-Ra (Sun)"
 msgstr "আমুন রা (সূর্য)"
 
-#. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The Traveler)
+#. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The
+#. Traveler)
 #: skycultures/egyptian/planet_names.fab:4
 msgid "Traveler (Moon)"
 msgstr "ভবঘুরে (চাঁদ)"
@@ -7217,7 +7330,8 @@ msgstr "ভবঘুরে (চাঁদ)"
 msgid "Sebeg (Mercury)"
 msgstr "সেবেগ (বুধ)"
 
-#. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that Crosses / The God of the Morning)
+#. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that
+#. Crosses / The God of the Morning)
 #: skycultures/egyptian/planet_names.fab:8
 msgid "Star that Crosses (Venus)"
 msgstr "তারা যা পারাপার করে (শুক্র)"
@@ -7227,12 +7341,14 @@ msgstr "তারা যা পারাপার করে (শুক্র)"
 msgid "Red Horus (Mars)"
 msgstr "রক্তিম হোরাস (মঙ্গল)"
 
-#. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who Binds the Two Lands)
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who
+#. Binds the Two Lands)
 #: skycultures/egyptian/planet_names.fab:12
 msgid "Horus Who Binds the Two Lands (Jupiter)"
 msgstr "রক্ষাকারী ভগবান হোরাস (বৃহস্পতি)"
 
-#. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the Bull of Heaven)
+#. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the
+#. Bull of Heaven)
 #: skycultures/egyptian/planet_names.fab:14
 msgid "Horus, the Bull of Heaven (Saturn)"
 msgstr "হোরাস, স্বর্গের ষাঁড় (শনি)"
@@ -9887,24 +10003,29 @@ msgstr "বুনো শুকর"
 msgid "Alpheratz"
 msgstr "আলফার্জ"
 
-#: skycultures/romanian/star_names.fab:2 skycultures/western/star_names.fab:184
+#: skycultures/romanian/star_names.fab:2
+#: skycultures/western/star_names.fab:184
 msgid "Caph"
 msgstr "ক্যাফ (জমদগ্নি)"
 
-#: skycultures/romanian/star_names.fab:3 skycultures/western/star_names.fab:594
+#: skycultures/romanian/star_names.fab:3
+#: skycultures/western/star_names.fab:594
 #: skycultures/western/star_names.fab:614
 msgid "Algenib"
 msgstr "আলজেনিব"
 
-#: skycultures/romanian/star_names.fab:4 skycultures/western/star_names.fab:630
+#: skycultures/romanian/star_names.fab:4
+#: skycultures/western/star_names.fab:630
 msgid "Ankaa"
 msgstr "আনকা"
 
-#: skycultures/romanian/star_names.fab:5 skycultures/western/star_names.fab:183
+#: skycultures/romanian/star_names.fab:5
+#: skycultures/western/star_names.fab:183
 msgid "Shedir"
 msgstr "আশেদির (গৌতম)"
 
-#: skycultures/romanian/star_names.fab:6 skycultures/western/star_names.fab:228
+#: skycultures/romanian/star_names.fab:6
+#: skycultures/western/star_names.fab:228
 msgid "Diphda"
 msgstr "দিফদা"
 
@@ -9941,11 +10062,13 @@ msgstr "বতন আখিতোস"
 msgid "Mothallah"
 msgstr "মুথাল্লাহ্"
 
-#: skycultures/romanian/star_names.fab:14 skycultures/western/star_names.fab:54
+#: skycultures/romanian/star_names.fab:14
+#: skycultures/western/star_names.fab:54
 msgid "Mesarthim"
 msgstr "মেসারথিম"
 
-#: skycultures/romanian/star_names.fab:15 skycultures/western/star_names.fab:53
+#: skycultures/romanian/star_names.fab:15
+#: skycultures/western/star_names.fab:53
 msgid "Sheratan"
 msgstr "শেরতান"
 
@@ -9958,7 +10081,8 @@ msgstr "অ্যালরাশ্যা"
 msgid "Almaak"
 msgstr "অ্যালমাক"
 
-#: skycultures/romanian/star_names.fab:18 skycultures/western/star_names.fab:52
+#: skycultures/romanian/star_names.fab:18
+#: skycultures/western/star_names.fab:52
 msgid "Hamal"
 msgstr "হামাল"
 
@@ -9994,7 +10118,8 @@ msgstr "মেনখার"
 msgid "Algol"
 msgstr "অ্যালগল"
 
-#: skycultures/romanian/star_names.fab:25 skycultures/western/star_names.fab:55
+#: skycultures/romanian/star_names.fab:25
+#: skycultures/western/star_names.fab:55
 msgid "Botein"
 msgstr "বোতেইন"
 
@@ -10103,7 +10228,8 @@ msgstr "কাপতেইনের তারা"
 msgid "Rigel"
 msgstr "রাইজেল (বাণরাজা)"
 
-#: skycultures/romanian/star_names.fab:47 skycultures/western/star_names.fab:68
+#: skycultures/romanian/star_names.fab:47
+#: skycultures/western/star_names.fab:68
 #: skycultures/western_rey/star_names.fab:31
 msgid "Capella"
 msgstr "ক্যাপেলা (ব্রহ্মহৃদয়)"
@@ -10148,7 +10274,8 @@ msgstr "ওজন"
 msgid "Betelgeuse"
 msgstr "বিটলজিউস (আদ্রা)"
 
-#: skycultures/romanian/star_names.fab:60 skycultures/western/star_names.fab:70
+#: skycultures/romanian/star_names.fab:60
+#: skycultures/western/star_names.fab:70
 msgid "Menkalinan"
 msgstr "মেনকালিনান"
 
@@ -12164,7 +12291,8 @@ msgstr "ডোলোন্স IX"
 msgid "Haris"
 msgstr "হ্যারিস"
 
-#: skycultures/western/star_names.fab:99 skycultures/western/star_names.fab:114
+#: skycultures/western/star_names.fab:99
+#: skycultures/western/star_names.fab:114
 msgid "Ceginus"
 msgstr "সেজাইনাস"
 
@@ -12768,6 +12896,10 @@ msgstr "টিল"
 #: skycultures/western/star_names.fab:350
 msgid "Alsafi"
 msgstr "আলঅ্যাসাফি"
+
+#: skycultures/western/star_names.fab:351
+msgid "Dziban"
+msgstr "জিবান"
 
 #: skycultures/western/star_names.fab:352
 msgid "Dziban I"
@@ -14378,1155 +14510,3 @@ msgstr "আলফা সেন্টুরি"
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
 msgstr "বিটা সেন্টুরি"
-
-#~ msgid "Box nebula"
-#~ msgstr "বাক্স নীহারিকা"
-
-#~ msgid "Cocoon nebula"
-#~ msgstr "গুটিপোকা নীহারিকা"
-
-#~ msgid "Cone nebula"
-#~ msgstr "শঙ্কু নীহারিকা"
-
-#~ msgid "Crab nebula"
-#~ msgstr "কর্কট নীহারিকা"
-
-#~ msgid "Butterfly nebula"
-#~ msgstr "প্রজাপতি নীহারিকা"
-
-#~ msgid "California nebula"
-#~ msgstr "ক্যালিফোর্নিয়া নীহারিকা"
-
-#~ msgid "Bubble nebula"
-#~ msgstr "বুদবুদ নীহারিকা"
-
-#~ msgid "Ghost of Jupiter"
-#~ msgstr "বৃহস্পতির প্রেতাত্মা"
-
-#~ msgid "Eagle nebula"
-#~ msgstr "ঈগল নীহারিকা"
-
-#~ msgid "Dumbbell nebula"
-#~ msgstr "ডাম্বেল নীহারিকা"
-
-#~ msgid "Eskimo nebula"
-#~ msgstr "এস্কিমো নীহারিকা"
-
-#~ msgid "Hourglass nebula"
-#~ msgstr "বালিঘড়ি নীহারিকা"
-
-#~ msgid "Horsehead nebula"
-#~ msgstr "অশ্বমস্তক নীহারিকা"
-
-#~ msgid "Helix nebula"
-#~ msgstr "প্যাঁচালো নীহারিকা"
-
-#~ msgid "Hind's variable nebula"
-#~ msgstr "হিন্দের পরিবর্তনশীল নীহারিকা"
-
-#~ msgid "Hubble's variable neb"
-#~ msgstr "হাবলের পরিবর্তনশীল নীহারিকা"
-
-#~ msgid "The Mice"
-#~ msgstr "ইঁদুর"
-
-#~ msgid "Little Gem"
-#~ msgstr "ছোট রত্ব"
-
-#~ msgid "Filamentary nebula"
-#~ msgstr "সূত্রবত্‍ নীহারিকা"
-
-#~ msgid "Barnard's galaxy"
-#~ msgstr "বারনাডের নক্ষত্রলোক"
-
-#~ msgid "Great Nebula in Andromeda"
-#~ msgstr "আন্ড্রমিডা নক্ষত্রলোকের নীহারিকা"
-
-#~ msgid "Bear Paw galaxy"
-#~ msgstr "ভল্লুক থাবা নক্ষত্রলোক"
-
-#~ msgid "Beehive cluster"
-#~ msgstr "মৌচাক তারকাগুচ্ছ"
-
-#~ msgid "Black-eye galaxy"
-#~ msgstr "কৃষ্ণ-চক্ষু নক্ষত্রলোক"
-
-#~ msgid "Bode's nebulae"
-#~ msgstr "বোদের নীহারিকা"
-
-#~ msgid "Bug nebula"
-#~ msgstr "ছারপোকা নীহারিকা"
-
-#~ msgid "Butterfly cluster"
-#~ msgstr "প্রজাপতি তারকাগুচ্ছ"
-
-#~ msgid "Christmas Tree cluster"
-#~ msgstr "খ্রীষ্টমাস বৃক্ষ তারকাগুচ্ছ"
-
-#~ msgid "Double cluster"
-#~ msgstr "যুগ্ম তারকাগুচ্ছ"
-
-#~ msgid "Eight-burst planetary"
-#~ msgstr "অাটের মত বিস্ফোরিত গ্রহরূপী নীহারিকা"
-
-#~ msgid "Flaming Star nebula"
-#~ msgstr "জাজ্বল্যমান নক্ষত্র নীহারিকা"
-
-#~ msgid "Great Nebula in Orion"
-#~ msgstr "কালপুরুষ নক্ষত্রমন্ডলের বিখ্যাত নীহারিকা"
-
-#~ msgid "Lace-work nebula"
-#~ msgstr "ফাঁস নীহারিকা"
-
-#~ msgid "Lagoon nebula"
-#~ msgstr "উপহ্রদ নীহারিকা"
-
-#~ msgid "Little Dumbbell"
-#~ msgstr "ছোট্ট ডাম্বেল"
-
-#~ msgid "Maia nebula"
-#~ msgstr "মাইয়া নীহারিকা"
-
-#~ msgid "Merope nebula"
-#~ msgstr "মেরোপি নীহারিকা"
-
-#~ msgid "Network nebula"
-#~ msgstr "নেটওয়ার্ক নীহারিকা"
-
-#~ msgid "North America nebula"
-#~ msgstr "উত্তর আমেরিকা নীহারিকা"
-
-#~ msgid "Omega nebula"
-#~ msgstr "ওমেগা নীহারিকা"
-
-#~ msgid "Owl nebula"
-#~ msgstr "পেঁচা নীহারিকা"
-
-#~ msgid "Pelican nebula"
-#~ msgstr "পেলিক্যান্ নীহারিকা"
-
-#~ msgid "Pin-wheel nebula"
-#~ msgstr "চরকা নীহারিকা"
-
-#~ msgid "Ring nebula in Lyra"
-#~ msgstr "বীনা তারকামন্ডলের আংটি নীহারিকা"
-
-#~ msgid "Saturn nebula"
-#~ msgstr "শনি গ্রহরূপ নীহারিকা"
-
-#~ msgid "Sculptor galaxy"
-#~ msgstr "ভাস্কর নক্ষত্রলোক"
-
-#~ msgid "Spindle galaxy"
-#~ msgstr "মাকু নক্ষত্রলোক"
-
-#~ msgid "Star Queen nebula"
-#~ msgstr "নক্ষত্ররানী নীহারিকা"
-
-#~ msgid "Struve's Lost nebula"
-#~ msgstr "স্ট্রুভের নিখোঁজ নীহারিকা"
-
-#~ msgid "Sunflower galaxy"
-#~ msgstr "সূর্যমুখী নক্ষত্রলোক"
-
-#~ msgid "Tarantula nebula"
-#~ msgstr "ট্যারেন্টুলা মাকড়সা নীহারিকা"
-
-#~ msgid "Toby Jug nebula"
-#~ msgstr "ত্রিকোন পেয়ালা নীহারিকা"
-
-#~ msgid "Veil nebula"
-#~ msgstr "পর্দা নীহারিকা"
-
-#~ msgid "Whirlpool galaxy"
-#~ msgstr "ঘূর্ণিস্রোত নক্ষত্রলোক"
-
-#~ msgid "κ Cru cluster"
-#~ msgstr "কাপ্পা ক্রাক্সিস"
-
-#~ msgid "The announcer of the southern Shinning one"
-#~ msgstr "দক্ষিণ দ্যুতির অন্যতম ঘোষক"
-
-#~ msgid "The southern Shinning one"
-#~ msgstr "দক্ষিণ দ্যুতি"
-
-#~ msgid "The announcer of the northern Shinning one"
-#~ msgstr "উত্তর দ্যুতির অন্যতম ঘোষক"
-
-#~ msgid "The northern Shinning one"
-#~ msgstr "উত্তর দ্যুতি"
-
-#~ msgid "Hubble's variable nebula"
-#~ msgstr "হাবল এর পরিবর্তনশীল নীহারিকা"
-
-#~ msgid "Rim nebula"
-#~ msgstr "মহাসাগরীয় নীহারিকা"
-
-#~ msgid "Cat's Paw nebula"
-#~ msgstr "বিড়ালের থাবা নীহারিকা"
-
-#~ msgid "Witch Head nebula"
-#~ msgstr "ডাইনির মস্তক নীহারিকা"
-
-#~ msgid "Flame nebula"
-#~ msgstr "শিখা নীহারিকা"
-
-#~ msgid "de Mairan's nebula"
-#~ msgstr "দে মিরান এর নীহারিকা"
-
-#~ msgid "Little Ghost nebula"
-#~ msgstr "ক্ষুদ্র প্রেত নীহারিকা"
-
-#~ msgid "Little Gem nebula"
-#~ msgstr "ক্ষুদ্র রত্ন নীহারিকা"
-
-#~ msgid "War and Peace nebula"
-#~ msgstr "যুদ্ধ ও শান্তি নীহারিকা"
-
-#~ msgid "Pencil nebula"
-#~ msgstr "পেন্সিল নীহারিকা"
-
-#~ msgid "Red spider nebula"
-#~ msgstr "লাল মাকড়শা নীহারিকা"
-
-#~ msgid "Retina nebula"
-#~ msgstr "অক্ষিপট নীহারিকা"
-
-#~ msgid "Dragon nebula"
-#~ msgstr "ড্রাগন নীহারিকা"
-
-#~ msgid "Heart nebula"
-#~ msgstr "হৃদয় নীহারিকা"
-
-#~ msgid "Mercury"
-#~ msgstr "বুধ"
-
-#~ msgid "Phobos"
-#~ msgstr "ফোবোস"
-
-#~ msgid "Ceres"
-#~ msgstr "সেরেস"
-
-#~ msgid "Pallas"
-#~ msgstr "প্যালাস"
-
-#~ msgid "Venus"
-#~ msgstr "শুক্র"
-
-#~ msgid "Earth"
-#~ msgstr "পৃথিবী"
-
-#~ msgid "Mars"
-#~ msgstr "মঙ্গল"
-
-#~ msgid "Deimos"
-#~ msgstr "ডিমোস"
-
-#~ msgid "Vesta"
-#~ msgstr "ভেস্তা"
-
-#~ msgid "Jupiter"
-#~ msgstr "বৃহস্পতি"
-
-#~ msgid "Juno"
-#~ msgstr "জুনো"
-
-#~ msgid "Amalthea"
-#~ msgstr "অ্যামালথিয়া"
-
-#~ msgid "Himalia"
-#~ msgstr "হিমালিয়া"
-
-#~ msgid "Callisto"
-#~ msgstr "ক্যালিস্টো"
-
-#~ msgid "Ganymede"
-#~ msgstr "গ্যানিমিড"
-
-#~ msgid "Europa"
-#~ msgstr "ইউরোপা"
-
-#~ msgid "Io"
-#~ msgstr "আয়ও"
-
-#~ msgid "Saturn"
-#~ msgstr "শনি"
-
-#~ msgid "Adrastea"
-#~ msgstr "আদ্রেস্তিয়া"
-
-#~ msgid "Leda"
-#~ msgstr "লিডা"
-
-#~ msgid "Mimas"
-#~ msgstr "মিমাস"
-
-#~ msgid "Lysithea"
-#~ msgstr "লাইসিথিয়া"
-
-#~ msgid "Sinope"
-#~ msgstr "সিনোপি"
-
-#~ msgid "Pasiphae"
-#~ msgstr "প্যাসিফেই"
-
-#~ msgid "Ananke"
-#~ msgstr "আনাঙ্কি"
-
-#~ msgid "Enceladus"
-#~ msgstr "এন্সেলাডাস"
-
-#~ msgid "Tethys"
-#~ msgstr "টেথিস"
-
-#~ msgid "Rhea"
-#~ msgstr "রেয়া"
-
-#~ msgid "Dione"
-#~ msgstr "দীয়নে"
-
-#~ msgid "Titan"
-#~ msgstr "টাইটান"
-
-#~ msgid "Uranus"
-#~ msgstr "ইউরেনাস"
-
-#~ msgid "Neptune"
-#~ msgstr "নেপচুন"
-
-#~ msgid "Umbriel"
-#~ msgstr "আম্ব্রিয়েল"
-
-#~ msgid "Titania"
-#~ msgstr "টাইটেনিয়া"
-
-#~ msgid "Oberon"
-#~ msgstr "ওবেরণ"
-
-#~ msgid "Pluto"
-#~ msgstr "প্লুটো"
-
-#~ msgid "Nix"
-#~ msgstr "নিক্স"
-
-#~ msgid "Triton"
-#~ msgstr "ট্রাইটন"
-
-#~ msgid "Eris"
-#~ msgstr "অ্যারিস"
-
-#~ msgid "Ariel"
-#~ msgstr "এরিয়েল"
-
-#~ msgid "Miranda"
-#~ msgstr "মিরান্ডা"
-
-#~ msgid "Nereid"
-#~ msgstr "নেরীড"
-
-#~ msgid "Galatea"
-#~ msgstr "গ্যালাটিয়া"
-
-#~ msgid "Despina"
-#~ msgstr "ডেসপিনা"
-
-#~ msgid "Thalassa"
-#~ msgstr "থ্যালাসা"
-
-#~ msgid "Psamathe"
-#~ msgstr "স্যামথী"
-
-#~ msgid "Proteus"
-#~ msgstr "প্রোটিয়াস"
-
-#~ msgid "Larissa"
-#~ msgstr "লারিসা"
-
-#~ msgid "Sao"
-#~ msgstr "সাও"
-
-#~ msgid "Hydra (moon)"
-#~ msgstr "হাইড্রা (উপগ্রহ)"
-
-#~ msgid "Laomedeia"
-#~ msgstr "লেওম্যাডিয়া"
-
-#~ msgid "Neso"
-#~ msgstr "নীসো"
-
-#~ msgid "Sedna"
-#~ msgstr "সেডনা"
-
-#~ msgid "Quaoar"
-#~ msgstr "কুয়াওয়া"
-
-#~ msgid "Solar System Observer"
-#~ msgstr "সৌরজগত পর্যবেক্ষক"
-
-#~ msgid "Varuna"
-#~ msgstr "বরুন"
-
-#~ msgid "Hygiea"
-#~ msgstr "হাইজিয়া"
-
-#~ msgid "Metis"
-#~ msgstr "মেতিস"
-
-#~ msgid "Iris"
-#~ msgstr "আইরিস"
-
-#~ msgid "Flora"
-#~ msgstr "ফ্লোরা"
-
-#~ msgid "Hebe"
-#~ msgstr "হীবি"
-
-#~ msgid "Orcus"
-#~ msgstr "অরকাস"
-
-#~ msgid "Eros"
-#~ msgstr "এরস"
-
-#~ msgid "Hektor"
-#~ msgstr "হেক্টর"
-
-#~ msgid "Apophis"
-#~ msgstr "অ্যাপোফিস"
-
-#~ msgid "Amor"
-#~ msgstr "আমোর"
-
-#~ msgid "Great Comet of 1680 (C/1680 V1)"
-#~ msgstr "১৬৮০ সালের মহা ধূমকেতু (C/1680 V1)"
-
-#~ msgid "SpaceShip"
-#~ msgstr "মহাকাশ যান"
-
-#~ msgid "Metis (moon)"
-#~ msgstr "মেতিস (উপগ্রহ)"
-
-#~ msgid "Prometheus (moon)"
-#~ msgstr "প্রমিথিউস (উপগ্রহ)"
-
-#~ msgid "Epimetheus (moon)"
-#~ msgstr "এপিমেথিউস (উপগ্রহ)"
-
-#~ msgid "Elara"
-#~ msgstr "এলারা"
-
-#~ msgid "Thebe"
-#~ msgstr "থিবে"
-
-#~ msgid "Carme"
-#~ msgstr "কার্মে"
-
-#~ msgid "Hyperion"
-#~ msgstr "হ্যফেরিওন"
-
-#~ msgid "Phoebe"
-#~ msgstr "ফিবি"
-
-#~ msgid "Iapetus"
-#~ msgstr "আইপেটাস"
-
-#~ msgid "Charon"
-#~ msgstr "শ্যারন"
-
-#~ msgid "Halimede"
-#~ msgstr "হালিমিডা"
-
-#~ msgid "Naiad"
-#~ msgstr "নেয়াড"
-
-#~ msgid "Phaethon"
-#~ msgstr "ফায়েথন"
-
-#~ msgid "Bianca (moon)"
-#~ msgstr "বিয়াঙ্কা (উপগ্রহ)"
-
-#~ msgid "Varda"
-#~ msgstr "ভার্দা"
-
-#~ msgid "Huya"
-#~ msgstr "হুইয়া"
-
-#~ msgid "Salacia"
-#~ msgstr "স্যালাসিয়া"
-
-#~ msgid "Epimetheus"
-#~ msgstr "এপিমিথিউস"
-
-#~ msgid "Sisyphus"
-#~ msgstr "সিসিফাস"
-
-#~ msgid "Daedalus"
-#~ msgstr "ডীড্যালাস"
-
-#~ msgid "Icarus"
-#~ msgstr "ইকারস"
-
-#~ msgid "Prometheus"
-#~ msgstr "প্রমিথিউস"
-
-#~ msgid "Gaspra"
-#~ msgstr "গাসপ্রা"
-
-#~ msgid "Ida"
-#~ msgstr "ইডা"
-
-#~ msgid "Bianca"
-#~ msgstr "বিয়াঙ্কা"
-
-#~ msgid "Makemake"
-#~ msgstr "মাকেমাকে"
-
-#~ msgid "Astraea"
-#~ msgstr "অ্যাস্ট্রেয়া"
-
-#~ msgid "Chiron"
-#~ msgstr "কাইরন"
-
-#~ msgid "Daphne"
-#~ msgstr "দাফনে"
-
-#~ msgid "Sailboat cluster"
-#~ msgstr "পালতোলা তারকাগুচ্ছ"
-
-#~ msgid "Dragonfly cluster"
-#~ msgstr "ফড়িং তারকাগুচ্ছ"
-
-#~ msgid "Spiral cluster"
-#~ msgstr "প্যাঁচালো তারকাগুচ্ছ"
-
-#~ msgid "Little Scorpion cluster"
-#~ msgstr "ক্ষুদ্র বৃশ্চিক তারকাগুচ্ছ"
-
-#~ msgid "Cleopatra's Eye"
-#~ msgstr "ক্লিওপেট্রার চোখ"
-
-#~ msgid "Fly nebula"
-#~ msgstr "মাছি নিহারীকা"
-
-#~ msgid "Starfish cluster"
-#~ msgstr "তারামাছ তারকাগুচ্ছ"
-
-#~ msgid "Rosette nebula"
-#~ msgstr "গোলাপ নিহারীকা"
-
-#~ msgid "Monkey Head nebula"
-#~ msgstr "কপি শির নীহারিকা"
-
-#~ msgid "Sprinter cluster"
-#~ msgstr "দৌড়বাজ তারকাগুছ্ছ"
-
-#~ msgid "Gemini nebula"
-#~ msgstr "মিথুন তারকাগুচ্ছ"
-
-#~ msgid "Caroline's cluster"
-#~ msgstr "ক্যরোলিনের তারকাগুচ্ছ"
-
-#~ msgid "Heart-Shaped cluster"
-#~ msgstr "হৃদয় নিহারীকা"
-
-#~ msgid "Bear's Paw galaxy"
-#~ msgstr "ভল্লুক থাবা নক্ষত্রলোক"
-
-#~ msgid "Surfboard galaxy"
-#~ msgstr "সার্ফবোর্ড নক্ষত্রলোক"
-
-#~ msgid "Hamburger Galaxy (Leo Triplet)"
-#~ msgstr "হ্যামবার্গার নক্ষত্রলোক (সিংহ ত্রয়ী)"
-
-#~ msgid "η Car nebula"
-#~ msgstr "ইটা ক্যারিনা নীহারিকা"
-
-#~ msgid "Vacuum Cleaner galaxy"
-#~ msgstr "ভ্যাকিউম ক্লিনার নক্ষত্রলোক"
-
-#~ msgid "Blowdryer galaxy"
-#~ msgstr "ব্লো ড্রায়ার নক্ষত্রলোক"
-
-#~ msgid "Galaxy cluster"
-#~ msgstr "নক্ষত্রলোক পুঞ্জ"
-
-#~ msgid "Pearl cluster"
-#~ msgstr "মুক্তা তারকাগুচ্ছ"
-
-#~ msgid "Cocoon galaxy"
-#~ msgstr "পিউপা নক্ষত্রলোক"
-
-#~ msgid "Whale galaxy"
-#~ msgstr "তিমি নক্ষত্রলোক"
-
-#~ msgid "Lost galaxy"
-#~ msgstr "নিরুদ্দিষ্ট নক্ষত্রলোক"
-
-#~ msgid "Crowbar galaxy"
-#~ msgstr "শাবল নক্ষত্রলোক"
-
-#~ msgid "Needle galaxy"
-#~ msgstr "সূচাকার নক্ষত্রলোক"
-
-#~ msgid "Kidney Bean galaxy"
-#~ msgstr "শিম দানা নক্ষত্রলোক"
-
-#~ msgid "Seashell galaxy"
-#~ msgstr "ঝিনুক নক্ষত্রলোক"
-
-#~ msgid "Southern Pinwheel galaxy"
-#~ msgstr "দক্ষিন চরকা নক্ষত্রলোক"
-
-#~ msgid "Pinwheel galaxy"
-#~ msgstr "চরকা নক্ষত্রলোক"
-
-#~ msgid "Northern Jewel Box"
-#~ msgstr "উত্তরের রত্ন বাক্স"
-
-#~ msgid "Ptolemy cluster"
-#~ msgstr "টলেমীর তারকাগুচ্ছ"
-
-#~ msgid "Wild Duck cluster"
-#~ msgstr "বুনো হাঁস তারকাগুচ্ছ"
-
-#~ msgid "Trifid nebula"
-#~ msgstr "ত্রিবিভক্ত নীহারিকা"
-
-#~ msgid "Sagittarius Star Cloud"
-#~ msgstr "ধনু মন্ডলের নক্ষত্র মেঘ"
-
-#~ msgid "Blue Flash nebula"
-#~ msgstr "নীল ঝলক নিহারীকা"
-
-#~ msgid "Crescent nebula"
-#~ msgstr "অর্ধচন্দ্রাকার নীহারিকা"
-
-#~ msgid "The Foxhead cluster"
-#~ msgstr "শিয়াল শির নিহারীকা"
-
-#~ msgid "Ruprecht 147"
-#~ msgstr "রুপ্রেক্ট ১৪৭"
-
-#~ msgid "Fireworks galaxy"
-#~ msgstr "আতশবাজি নক্ষত্রলোক"
-
-#~ msgid "Iris nebula"
-#~ msgstr "আইরিশ নিহারীকা"
-
-#~ msgid "γ Cas nebula"
-#~ msgstr "গামা ক্যাসিওপিয়া নীহারিকা"
-
-#~ msgid "Soul nebula"
-#~ msgstr "আত্মা নিহারীকা"
-
-#~ msgid "Elephant's Trunk nebula"
-#~ msgstr "হাতির দাঁত নিহারীকা"
-
-#~ msgid "Jellyfish nebula"
-#~ msgstr "জেলিফিস নিহারীকা"
-
-#~ msgid "Lemon slice nebula"
-#~ msgstr "লেবু ফালি নীহারিকা"
-
-#~ msgid "Running Chicken nebula"
-#~ msgstr "দুরন্ত মুরগী নিহারীকা"
-
-#~ msgid "Coddington's nebula"
-#~ msgstr "কোডিংটনের নিহারীকা"
-
-#~ msgid "Prawn nebula"
-#~ msgstr "চিংড়ি নিহারীকা"
-
-#~ msgid "Graff's cluster"
-#~ msgstr "গ্রাফের তারকাগুচ্ছ"
-
-#~ msgid "Summer Beehive cluster"
-#~ msgstr "গ্রীষ্মের মৌচাক তারকাগুচ্ছ"
-
-#~ msgid "Parrot's Head"
-#~ msgstr "তোতা পাখির মাথা"
-
-#~ msgid "Water lily nebula"
-#~ msgstr "শালুক ফুল নিকারীকা"
-
-#~ msgid "Cassiopeia Dwarf Galaxy"
-#~ msgstr "ক্যাসিওপিয়া মন্ডলের বামন নক্ষত্রলোক"
-
-#~ msgid "Elder sister"
-#~ msgstr "বড় বোন"
-
-#~ msgid "Sulphur-crested white cockatoo"
-#~ msgstr "হলুদ ঝুঁটি সাদা কাকাতুয়া"
-
-#~ msgid "Quoll"
-#~ msgstr "কুয়োল নামক প্রানী"
-
-#~ msgid "Day"
-#~ msgstr "দিন"
-
-#~ msgid "Horus, the Bull of Heaven"
-#~ msgstr "স্বর্গের প্রতাপশালী ভগবান হোরাস"
-
-#~ msgid "Horus Who Binds the Two Lands"
-#~ msgstr "রক্ষাকারী ভগবান হোরাস"
-
-#~ msgid "Red Horus"
-#~ msgstr "লাল হোরাস"
-
-#~ msgid "η Car cluster"
-#~ msgstr "ইটা ক্যারিনা তারকাগুচ্ছ"
-
-#~ msgid "Coathanger (Brocchi's Cluster)"
-#~ msgstr "জামা ঝোলানোর কাঠি (ব্রোচির তারকাগুচ্ছ)"
-
-#~ msgid "Abell 35"
-#~ msgstr "অ্যাবেল ২৫"
-
-#~ msgid "Bow-Tie nebula"
-#~ msgstr "বো-টাই রূপী নিহারীকা"
-
-#~ msgid "God of Sun"
-#~ msgstr "সূর্যের দেবতা"
-
-#~ msgid "Unknown"
-#~ msgstr "অজ্ঞাত"
-
-#~ msgid "Minkowski's Butterfly (M2-9)"
-#~ msgstr "মিনিকোয়াস্কির প্রজাপতি (M2-9)"
-
-#~ msgid "Hand"
-#~ msgstr "হাত"
-
-#~ msgid "Animal"
-#~ msgstr "জন্তু"
-
-#~ msgid "Turtle"
-#~ msgstr "কচ্ছপ"
-
-#~ msgid "Snake"
-#~ msgstr "সাপ"
-
-#~ msgid "Fireplace"
-#~ msgstr "চুল্লি"
-
-#~ msgid "Tupua-rangi"
-#~ msgstr "টুপাউ-র‍্যাংগি"
-
-#~ msgid "Wai-puna-a-rangi"
-#~ msgstr "ওয়াই-পুনা-য়া-র‍্যাংগি"
-
-#~ msgid "Tupua-nuku"
-#~ msgstr "টুপাউ-নুকু"
-
-#~ msgid "Frigate Bird"
-#~ msgstr "ফ্রিগেট পাখি"
-
-#~ msgid "Dolphin"
-#~ msgstr "ডলফিন"
-
-#~ msgid "Hokupa'a"
-#~ msgstr "হোকুপায়া"
-
-#~ msgid "A'a"
-#~ msgstr "আয়া"
-
-#~ msgid "Hokule'a"
-#~ msgstr "হোকুলেয়া"
-
-#~ msgid "Hoku'ula"
-#~ msgstr "হোকুয়ুলা"
-
-#~ msgid "Mole Honua"
-#~ msgstr "মোলে হোনুয়া"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "মাউইয়ের মাছ ধরার কাঁটা"
-
-#~ msgid "R CrA nebula"
-#~ msgstr "'আর' দক্ষিন মুকুট নিহারীকা"
-
-#~ msgid "20 Vulpeculae cluster"
-#~ msgstr "'২০' শিয়াল মন্ডলের তারকাগুচ্ছ"
-
-#~ msgid "S Normae cluster"
-#~ msgstr "'এস' মাপদন্ড তারকাগুচ্ছ"
-
-#~ msgid "Markarian 18 cluster"
-#~ msgstr "১৮ তম মার্কারিয়ান গুচ্ছ"
-
-#~ msgid "Taurus Poniatovii cluster"
-#~ msgstr "বৃষ মন্ডলের পনিয়াতোস্কির তারকাগুচ্ছ"
-
-#~ msgid "Abell 71"
-#~ msgstr "অ্যাবেল ৭১"
-
-#~ msgid "Sextans Dwarf Galaxy"
-#~ msgstr "সেক্সট্যান্ট মন্ডলের বামন নক্ষত্রলোক"
-
-#~ msgid "Helix galaxy"
-#~ msgstr "প্যাঁচালো নক্ষত্রলোক"
-
-#~ msgid "Sombrero galaxy"
-#~ msgstr "সমভ্রেরো টুপি নক্ষত্রলোক"
-
-#~ msgid "Grand Design galaxy"
-#~ msgstr "নিখুঁত গঠন নক্ষত্রলোক"
-
-#~ msgid "Atoms for Peace galaxy"
-#~ msgstr "শান্তির পরমাণু রূপী নক্ষত্রলোক"
-
-#~ msgid "Triangulum galaxy"
-#~ msgstr "ত্রিভূজ নক্ষত্রলোক"
-
-#~ msgid "Houmatoloa"
-#~ msgstr "হোউমাতোলোয়া"
-
-#~ msgid "τ Canis Majoris cluster"
-#~ msgstr "টাউ কুকুর মন্ডল তারকাগুচ্ছ"
-
-#~ msgid "ε Ori nebula"
-#~ msgstr "এপসাইলন কালপুরুষ নিহারীকা"
-
-#~ msgid "Hole in a cluster"
-#~ msgstr "ছিদ্রাল তারকাগুচ্ছ"
-
-#~ msgid "Spirograph nebula"
-#~ msgstr "স্পিরোগ্রাফ নিহারীকা"
-
-#~ msgid "λ Cen nebula"
-#~ msgstr "ল্যামডা অশ্বমানব নীহারিকা"
-
-#~ msgid "ω Cen cluster"
-#~ msgstr "ওমেগা অশ্বমানব তারকাগুচ্ছ"
-
-#~ msgid "ρ Oph nebula"
-#~ msgstr "রো সাপুড়ে নীহারিকা"
-
-#~ msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
-#~ msgstr "পদচিহ্ন নিহারীকা (মিনিকোয়াস্কি পদচিহ্ন; M1-92)"
-
-#~ msgid "Satellite cluster"
-#~ msgstr "সাথী তারকাগুচ্ছ"
-
-#~ msgid "Khonsu, the Traveler"
-#~ msgstr "খোনসু, পরিব্রাজক"
-
-#~ msgid "Seven Little Girls"
-#~ msgstr "সাতজন বালিকা"
-
-#~ msgid "Thunderbird"
-#~ msgstr "থান্ডারবার্ড পাখি"
-
-#~ msgid "Salamander"
-#~ msgstr "স্যালামাণ্ডার"
-
-#~ msgid "Race Track"
-#~ msgstr "দৌড় প্রতিযোগিতার পথ"
-
-#~ msgid "Dried Willow"
-#~ msgstr "শুকনো উইলো কাঠ"
-
-#~ msgid "Wichapi Owanjila"
-#~ msgstr "উইছাপি ওয়ানজিলা"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "ক্যাটস ক্রেডল (সুতো জড়িয়ে আকৃতি তৈরী)"
-
-#~ msgid "Oglechkutepi"
-#~ msgstr "ওগ্লেছকুতেপি"
-
-#~ msgid "Toloa"
-#~ msgstr "তোলোয়া"
-
-#~ msgid "Lua tangata"
-#~ msgstr "লুয়া তাংয়াতা"
-
-#~ msgid "Toloatonga"
-#~ msgstr "তেলোয়াতোংয়া"
-
-#~ msgid "Tu'ulalupe"
-#~ msgstr "তুউল্লালুপে"
-
-#~ msgid "Fungasia"
-#~ msgstr "ফুংয়াসিয়া"
-
-#~ msgid "Toloalahi"
-#~ msgstr "তোলোয়ালাহি"
-
-#~ msgid "La'a"
-#~ msgstr "লাআঃ"
-
-#~ msgid "Ae e'Uvea"
-#~ msgstr "আয়ে উভ্ভেয়া"
-
-#~ msgid "Kapakau'o'tafahi"
-#~ msgstr "কাপাকাউওতাফাহি"
-
-#~ msgid "Fatanalua"
-#~ msgstr "ফাতানালুয়া"
-
-#~ msgid "Tuinga ika"
-#~ msgstr "তুইংয়া ইকা"
-
-#~ msgid "Mahina"
-#~ msgstr "মাহিনা"
-
-#~ msgid "Tapukitea"
-#~ msgstr "তাপুকিতেয়া"
-
-#~ msgid "Matamemea"
-#~ msgstr "মাতামেমেয়া"
-
-#~ msgid "Tarf"
-#~ msgstr "তার্ফ"
-
-#~ msgid "Night Star"
-#~ msgstr "নিশি তারা"
-
-#~ msgid "Marfark"
-#~ msgstr "ম্যারফাক"
-
-#~ msgid "Hoedus II"
-#~ msgstr "হয়েডুস ২"
-
-#~ msgid "Cleeia"
-#~ msgstr "ক্লেয়া"
-
-#~ msgid "Plaskett's star"
-#~ msgstr "প্লাস্কেটের তারা"
-
-#~ msgid "Ruby Star"
-#~ msgstr "চুনি তারা"
-
-#~ msgid "Hatsya"
-#~ msgstr "হাতসিয়া"
-
-#~ msgid "Al Kurud"
-#~ msgstr "আল কারাদ"
-
-#~ msgid "Hydrobius"
-#~ msgstr "হাইড্রোবিয়াস"
-
-#~ msgid "Tseen Ke"
-#~ msgstr "শিন কে"
-
-#~ msgid "Labr"
-#~ msgstr "লাব্র"
-
-#~ msgid "Al'dzhabkhakh"
-#~ msgstr "অ্যালজ্যাবহ্"
-
-#~ msgid "Printseps"
-#~ msgstr "প্রিন্টসেপ্স"
-
-#~ msgid "Han"
-#~ msgstr "হান"
-
-#~ msgid "Marsik"
-#~ msgstr "মার্সিক"
-
-#~ msgid "Sinistra"
-#~ msgstr "সিনিস্ত্রা"
-
-#~ msgid "Dziban"
-#~ msgstr "জিবান"
-
-#~ msgid "Alphekka Meridiana"
-#~ msgstr "আলফেকা মেরিডিয়ানা"
-
-#~ msgid "Lukida"
-#~ msgstr "লুকিডা"
-
-#~ msgid "Deneb Okab"
-#~ msgstr "ঢীনেব ওখাব"
-
-#~ msgid "Manubrij"
-#~ msgstr "মানুব্রি"
-
-#~ msgid "Okul"
-#~ msgstr "ওকুল"
-
-#~ msgid "Rukh"
-#~ msgstr "রুখ"
-
-#~ msgid "Castra"
-#~ msgstr "ক্যাস্ট্রা"
-
-#~ msgid "Jih"
-#~ msgstr "জিহ্"
-
-#~ msgid "Pennae Caudalis"
-#~ msgstr "পেনাই কাউদালিস"
-
-#~ msgid "Armus"
-#~ msgstr "আর্মাস"
-
-#~ msgid "Bear's Lodge"
-#~ msgstr "ভল্লুকের গুহা"
-
-#~ msgid "Star that Crosses / The God of the Morning"
-#~ msgstr "তারা, যেটি অতিক্রম করে/ঊষার ভগবান"
-
-#~ msgid "Bailer"
-#~ msgstr "হাতা"
-
-#~ msgid "Fleming's Triangular nebula"
-#~ msgstr "ফ্লেমিংয়ের ত্রিকোণ নীহারিকা"
-
-#~ msgid "Herring galaxy"
-#~ msgstr "হেরিং নক্ষত্রলোক"
-
-#~ msgid "Wolf-Lundmark-Melotte (WLM)"
-#~ msgstr "উল্ফ-লান্ডমার্ক-মেলোটি (WLM)"
-
-#~ msgid "Eureka"
-#~ msgstr "ইউরেকা"
-
-#~ msgid "Duende"
-#~ msgstr "ডুয়েনডে"
-
-#~ msgid "Earth Observer"
-#~ msgstr "পৃথিবী পর্যবেক্ষক"
-
-#~ msgid "Imprint of a Foot"
-#~ msgstr "পদচিহ্ন"
-
-#~ msgid "Hind's variable Nebula"
-#~ msgstr "হিন্দের পরিবর্তনশীল তারা"
-
-#~ msgid "The Phantom Streak Nebula"
-#~ msgstr "অশরীরী নীহারিকা"
-
-#~ msgid "White Eyed Pea"
-#~ msgstr "প্রেত চক্ষু নীহারিকা"
-
-#~ msgid "Omicron Velorum Cluster"
-#~ msgstr "ওমিক্রন পাল মন্ডল তারকাগুচ্ছ"
-
-#~ msgid "Satellite Cluster"
-#~ msgstr "ভ্রাম্যমান নীহারিকা"
-
-#~ msgid "Hubble's variable Nebula"
-#~ msgstr "হাবলের পরিবর্তনশীল নীহারিকা"
-
-#~ msgid "τ Canis Majoris Cluster"
-#~ msgstr "τ বৃহৎ কুকুরমন্ডলীয় তারকাগুচ্ছ"
-
-#~ msgid "S Normae Cluster"
-#~ msgstr "S নর্মে তারকাগুচ্ছ"
-
-#~ msgid "θ Carinae Cluster"
-#~ msgstr "থিটা ক্যারিনা তারকাগুচ্ছ"
-
-#~ msgid "Lord Rosse's Galaxy"
-#~ msgstr "লর্ড রসীর নক্ষত্রলোক"
-
-#~ msgid "Golf of Mexico Nebula"
-#~ msgstr "মেক্সিকো উপসাগর নীহারিকা"
-
-#~ msgid "Serpens Dwarf Cluster"
-#~ msgstr "সর্প মন্ডলের বামন তারকাগুচ্ছ"
-
-#~ msgid "Cruithne"
-#~ msgstr "ক্রুইনিয়া"
-
-#~ msgid "Ophelia"
-#~ msgstr "ওফেলিয়া"
-
-#~ msgid "Janus"
-#~ msgstr "জানুস"
-
-#~ msgid "Pan"
-#~ msgstr "প্যান"
-
-#~ msgid "Calypso"
-#~ msgstr "ক্যালিপ্সো"
-
-#~ msgid "Telesto"
-#~ msgstr "টেলেস্টো"
-
-#~ msgid "Helene"
-#~ msgstr "হেলেন"
-
-#~ msgid "Pandora"
-#~ msgstr "প্যানডোরা"
-
-#~ msgid "Cressida"
-#~ msgstr "ক্রেসিডা"
-
-#~ msgid "Desdemona"
-#~ msgstr "ডেসডিমোনা"
-
-#~ msgid "Cordelia"
-#~ msgstr "করডেলিয়া"
-
-#~ msgid "Styx"
-#~ msgstr "স্টাইক্স"
-
-#~ msgid "Kerberos"
-#~ msgstr "কারবেরস"
-
-#~ msgid "Juliet"
-#~ msgstr "জুলিয়েট"
-
-#~ msgid "Fortuna"
-#~ msgstr "ফরচুনা"
-
-#~ msgid "Doris"
-#~ msgstr "ডরিস"
-
-#~ msgid "Thisbe"
-#~ msgstr "থিসবে"
-
-#~ msgid "Sylvia"
-#~ msgstr "সিলভিয়া"
-
-#~ msgid "Aurora"
-#~ msgstr "অরোরা"
-
-#~ msgid "Camilla"
-#~ msgstr "ক্যামেলিয়া"
-
-#~ msgid "Bamberga"
-#~ msgstr "ব্যামবেরগা"
-
-#~ msgid "Ursula"
-#~ msgstr "আরসলা"
-
-#~ msgid "Diotima"
-#~ msgstr "ডায়োটিমা"
-
-#~ msgid "Davida"
-#~ msgstr "দাভিডা"
-
-#~ msgid "Herculina"
-#~ msgstr "হারকিউলিনা"
-
-#~ msgid "Patientia"
-#~ msgstr "পেশেনশিয়া"
-
-#~ msgid "Psyche"
-#~ msgstr "সাইকে"
-
-#~ msgid "Eunomia"
-#~ msgstr "ইয়োনোমিয়া"
-
-#~ msgid "Eugenia"
-#~ msgstr "ইউজিনিয়া"
-
-#~ msgid "Euphrosyne"
-#~ msgstr "ইউফ্রোসাইনি"
-
-#~ msgid "Cybele"
-#~ msgstr "সাইবিলি"
-
-#~ msgid "Amphitrite"
-#~ msgstr "অ্যাম্ফিট্রাইটি"
-
-#~ msgid "Interamnia"
-#~ msgstr "ইন্ট্রাম্নিয়া"
-
-#~ msgid "Parthenope"
-#~ msgstr "পার্থেনোপি"
-
-#~ msgid "Egeria"
-#~ msgstr "এগেরিয়া"

@@ -1,22 +1,22 @@
-# Hungarian translation for Stellarium.
-# Copyright (C) 2005 Free Software Foundation, Inc.
-# This file is distributed under the same license as the Stellarium package.
-# András Mohari <mayday@vizslamail.hu>, 2005-2007.
-# István Dudás <devereaux@freemail.hu>, 2006.
-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Stellarium's team
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Stellarium 0.9.0\n"
+"Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-18 14:03+0700\n"
-"PO-Revision-Date: 2017-11-18 17:53+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>\n"
-"Language-Team: Hungarian\n"
+"POT-Creation-Date: 2017-11-29 14:41+0700\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Language-Team: Hungarian (https://www.transifex.com/stellarium/teams/80998/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2017-11-19 05:43+0000\n"
-"X-Generator: Launchpad (build 18505)\n"
+"Language: hu\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: skycultures/translations.fab:10
 msgctxt "star"
@@ -469,7 +469,8 @@ msgctxt "special celestial body"
 msgid "Earth Observer"
 msgstr "Földi megfigyelő"
 
-#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with Ctrl+G.
+#. TRANSLATORS: "Planet name" displayed when "flying" to another planet with
+#. Ctrl+G.
 #: skycultures/translations.fab:183
 msgctxt "special celestial body"
 msgid "SpaceShip"
@@ -1616,2835 +1617,2939 @@ msgctxt "Genitive name of constellation"
 msgid "Vulpeculae"
 msgstr "Vulpeculae"
 
-#: nebulae/default/names.dat:26
+#: nebulae/default/names.dat:28
 msgid "Bow-Tie Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:27
+#: nebulae/default/names.dat:29
 msgid "Scarab Nebula"
 msgstr "Szkarabeusz köd"
 
-#: nebulae/default/names.dat:28 nebulae/default/names.dat:29
 #: nebulae/default/names.dat:30 nebulae/default/names.dat:31
+#: nebulae/default/names.dat:32 nebulae/default/names.dat:33
 msgid "Robert's Quartet"
 msgstr "Robert négyese"
 
-#: nebulae/default/names.dat:32
+#: nebulae/default/names.dat:34
 msgid "47 Tuc"
 msgstr "47 Tuc"
 
-#: nebulae/default/names.dat:33
+#: nebulae/default/names.dat:35
 msgid "Giant Squid Galaxy"
 msgstr "Nagy tintahal galaxis"
 
-#: nebulae/default/names.dat:34
+#: nebulae/default/names.dat:36
 msgid "Polarissima Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:35
+#: nebulae/default/names.dat:37
 msgid "Great Star Cloud in Andromeda Galaxy"
 msgstr "Nagy csillagköd az Androméda galaxisban"
 
-#: nebulae/default/names.dat:36
+#: nebulae/default/names.dat:38
 msgid "Andromeda Galaxy"
 msgstr "Androméda galaxis"
 
-#: nebulae/default/names.dat:37
+#: nebulae/default/names.dat:39
 msgid "Andromeda Nebula"
 msgstr "Androméda köd"
 
-#: nebulae/default/names.dat:38
+#: nebulae/default/names.dat:40
+msgid "Great Nebula in Andromeda"
+msgstr ""
+
+#: nebulae/default/names.dat:41
 msgid "Sailboat Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:39
+#: nebulae/default/names.dat:42
 msgid "Skull Nebula"
 msgstr "Koponya-köd"
 
-#: nebulae/default/names.dat:40
+#: nebulae/default/names.dat:43
 msgid "Soap Bubble Nebula"
 msgstr "Szappanbuborék köd"
 
-#: nebulae/default/names.dat:41
+#: nebulae/default/names.dat:44
 msgid "Voodoo Mask Nebula"
 msgstr "Voodoo maszk köd"
 
-#: nebulae/default/names.dat:42 nebulae/default/names.dat:643
+#: nebulae/default/names.dat:45 nebulae/default/names.dat:678
 msgid "Burbidge Chain"
 msgstr ""
 
-#: nebulae/default/names.dat:43
+#: nebulae/default/names.dat:46
 msgid "Sculptor Galaxy"
 msgstr "Szobrász-galaxis"
 
-#: nebulae/default/names.dat:44
+#: nebulae/default/names.dat:47
 msgid "Silver Coin Galaxy"
 msgstr "Ezüstpénz galaxis"
 
-#: nebulae/default/names.dat:45
+#: nebulae/default/names.dat:48
 msgid "Silver Dollar Galaxy"
 msgstr "Ezüst dollár galaxis"
 
-#: nebulae/default/names.dat:46
+#: nebulae/default/names.dat:49
 msgid "Pisces Cloud"
 msgstr ""
 
-#: nebulae/default/names.dat:47
+#: nebulae/default/names.dat:50
 msgid "Markarian 348"
 msgstr "Markarian 348"
 
-#: nebulae/default/names.dat:48
+#: nebulae/default/names.dat:51
 msgid "Small Magellanic Cloud"
 msgstr "Kis Magellán-felhő"
 
-#: nebulae/default/names.dat:49
+#: nebulae/default/names.dat:52
 msgid "Nubecula Minor"
 msgstr ""
 
-#: nebulae/default/names.dat:50
+#: nebulae/default/names.dat:53
 msgid "Mirach's Ghost"
 msgstr "Mirach szelleme"
 
-#: nebulae/default/names.dat:51
+#: nebulae/default/names.dat:54
 msgid "Dragonfly Cluster"
 msgstr "Szitakötő csoport"
 
-#: nebulae/default/names.dat:52
+#: nebulae/default/names.dat:55
 msgid "Owl Cluster"
 msgstr "Bagoly csoport"
 
-#: nebulae/default/names.dat:53
+#: nebulae/default/names.dat:56
 msgid "E.T. Cluster"
 msgstr "E.T. csoport"
 
-#: nebulae/default/names.dat:54
+#: nebulae/default/names.dat:57
 msgid "Whirligig Galaxy"
 msgstr ""
 
-#: nebulae/default/names.dat:55
+#: nebulae/default/names.dat:58
 msgid "Triangulum Galaxy"
 msgstr "Triangulum-galaxis"
 
-#: nebulae/default/names.dat:56
+#: nebulae/default/names.dat:59
 msgid "Triangulum Pinwheel"
 msgstr ""
 
-#: nebulae/default/names.dat:57
-msgid "Little Spindle Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:58
-msgid "Phantom Galaxy"
-msgstr "Fantom galaxis"
-
-#: nebulae/default/names.dat:59
-msgid "Little Dumbbell Nebula"
-msgstr "Kis súlyzó köd"
-
-#: nebulae/default/names.dat:60
-msgid "Cork Nebula"
-msgstr "Parafa köd"
-
-#: nebulae/default/names.dat:61
-msgid "Barbell Nebula"
-msgstr "Barbell köd"
-
-#: nebulae/default/names.dat:62
-msgid "Fuzzy Butterfly Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:63
-msgid "Lawnmower Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:64
-msgid "Fiddlehead Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:65 nebulae/default/names.dat:67
-msgid "Double Cluster"
-msgstr "Dupla csoport"
-
-#: nebulae/default/names.dat:66
-msgid "h Persei"
-msgstr "h Persei"
-
-#: nebulae/default/names.dat:68
-msgid "χ Persei"
-msgstr "χ Persei"
-
-#: nebulae/default/names.dat:69
-msgid "Perseus Lenticular Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:70
-msgid "Spiral Cluster"
-msgstr "Spirál csoport"
-
-#: nebulae/default/names.dat:71
-msgid "Fornax Dwarf Cluster 3"
-msgstr ""
-
-#: nebulae/default/names.dat:72
-msgid "Fornax H3"
-msgstr "Fornax H3"
-
-#: nebulae/default/names.dat:73
-msgid "Fornax C3"
-msgstr "Fornax C3"
-
-#: nebulae/default/names.dat:74
-msgid "Fornax 3"
-msgstr "Fornax 3"
-
-#: nebulae/default/names.dat:75
-msgid "Cetus A"
-msgstr "Cetus A"
-
-#: nebulae/default/names.dat:76
-msgid "Eye of God Galaxy"
-msgstr "Isten szeme galaxis"
-
-#: nebulae/default/names.dat:77
-msgid "Patrick Starfish Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:78
-msgid "Perseus A"
-msgstr "Perseus A"
-
-#: nebulae/default/names.dat:79
-msgid "Fornax A"
-msgstr "Fornax A"
-
-#: nebulae/default/names.dat:80
-msgid "Fornax B"
-msgstr "Fornax B"
-
-#: nebulae/default/names.dat:81
-msgid "Embryo Nebula"
-msgstr "Embrió köd"
-
-#: nebulae/default/names.dat:82
-msgid "Little Scorpion Cluster"
-msgstr "Kis skorpió csoport"
-
-#: nebulae/default/names.dat:83
-msgid "Stingray Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:84
-msgid "Robin's Egg Nebula"
-msgstr "Robin tojása köd"
-
-#: nebulae/default/names.dat:85
-msgid "Comet Planetary Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:86
-msgid "Maia Nebula"
-msgstr "Maia-köd"
-
-#: nebulae/default/names.dat:87
-msgid "Merope Nebula"
-msgstr "Merope-köd"
-
-#: nebulae/default/names.dat:88
-msgid "Tempel's Nebula"
-msgstr "Tempel köd"
-
-#: nebulae/default/names.dat:89
-msgid "Fossil Footprint Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:90
-msgid "California Nebula"
-msgstr "Kalifornia-köd"
-
-#: nebulae/default/names.dat:91
-msgid "Camel's Eye Nebula"
-msgstr "Teveszem köd"
-
-#: nebulae/default/names.dat:92
-msgid "Oyster Nebula"
-msgstr "Osztriga köd"
-
-#: nebulae/default/names.dat:93
-msgid "Jolly Roger Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:94
-msgid "Golden Harp Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:95
-msgid "Crystal Ball Nebula"
-msgstr "Kristálygömb köd"
-
-#: nebulae/default/names.dat:96
-msgid "Pansy Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:97
-msgid "Cleopatra's Eye Nebula"
-msgstr "Kleopátra szeme köd"
-
-#: nebulae/default/names.dat:98
-msgid "Eskimo's Wife Nebula"
-msgstr "Eszkimófeleség köd"
-
-#: nebulae/default/names.dat:99
-msgid "Struve's Lost Nebula"
-msgstr "Struve-féle elveszett köd"
-
-#: nebulae/default/names.dat:100
-msgid "Struve's Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:101
-msgid "Hind's Variable Nebula"
-msgstr "Hind-féle változó köd"
-
-#: nebulae/default/names.dat:102
-msgid "Hind's Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:103 nebulae/default/names.dat:104
-msgid "Carafe Group"
-msgstr "Carafe Group"
-
-#: nebulae/default/names.dat:105
-msgid "Pirate Moon Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:106
-msgid "Poor Man's Double Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:107 nebulae/default/names.dat:108
-#: nebulae/default/names.dat:389
-msgid "Starfish Cluster"
-msgstr "Tengeri csillag csoport"
-
-#: nebulae/default/names.dat:109
-msgid "Fly Nebula"
-msgstr "Légy köd"
-
-#: nebulae/default/names.dat:110
-msgid "Crab Nebula"
-msgstr "Rák-köd"
-
-#: nebulae/default/names.dat:111
-msgid "Taurus A"
-msgstr "Taurus A"
-
-#: nebulae/default/names.dat:112
-msgid "Pinwheel Cluster"
-msgstr "Szélkerék csoport"
-
-#: nebulae/default/names.dat:113
-msgid "Mermaid's Purse Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:114
-msgid "Great Orion Nebula"
-msgstr "Nagy Orion köd"
-
-#: nebulae/default/names.dat:115
-msgid "Orion Nebula"
-msgstr "Orion-köd"
-
-#: nebulae/default/names.dat:116
-msgid "Orion A"
-msgstr "Orion A"
-
-#: nebulae/default/names.dat:117
-msgid "Running Man Nebula"
-msgstr "Futó Ember ködfolt"
-
-#: nebulae/default/names.dat:118
-msgid "The Lost Jewel of Orion"
-msgstr ""
-
-#: nebulae/default/names.dat:119
-msgid "Lower Sword"
-msgstr ""
-
-#: nebulae/default/names.dat:120
-msgid "Coal Car Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:121
-msgid "Upper Sword"
-msgstr ""
-
-#: nebulae/default/names.dat:122
-msgid "de Mairan's Nebula"
-msgstr "de Mairan köd"
-
-#: nebulae/default/names.dat:123
-msgid "Mairan's Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:124
-msgid "ε Ori Nebula"
-msgstr "ε Ori köd"
-
-#: nebulae/default/names.dat:125
-msgid "13th Pearl Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:126
-msgid "Black Eye Nebula"
-msgstr "Fekete szem köd"
-
-#: nebulae/default/names.dat:127
-msgid "Kissing Crescents Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:128
-msgid "Orion's Collarbone Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:129
-msgid "Flame Nebula"
-msgstr "Láng köd"
-
-#: nebulae/default/names.dat:130
-msgid "Tank Tracks Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:131
-msgid "Maple Leaf Nebula"
-msgstr "Juharlevél köd"
-
-#: nebulae/default/names.dat:132
-msgid "30 Dor B"
-msgstr "30 Dor B"
-
-#: nebulae/default/names.dat:133
-msgid "Casper the Friendly Ghost Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:134
-msgid "Tarantula Nebula"
-msgstr "tarantellapók köd"
-
-#: nebulae/default/names.dat:135
-msgid "Looped Nebula"
-msgstr "Hurkolt köd"
-
-#: nebulae/default/names.dat:136
-msgid "True Lovers' Knot"
-msgstr ""
-
-#: nebulae/default/names.dat:137
-msgid "30 Dor Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:138
-msgid "Ghost Head Nebula"
-msgstr "Szellemfej Ködfolt"
-
-#: nebulae/default/names.dat:139
-msgid "January Salt-and-Pepper Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:140
-msgid "Dusty Hand Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:141
-msgid "The 37 Cluster"
-msgstr "A 37 Klaszter"
-
-#: nebulae/default/names.dat:142
-msgid "The 'LE' Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:143
-msgid "Shopping Cart Cluster"
-msgstr "Bevásárlókocsi csoport"
-
-#: nebulae/default/names.dat:144
-msgid "Mon R2 IRS3"
-msgstr "Mon R2 IRS3"
-
-#: nebulae/default/names.dat:145
-msgid "Monkey Head Nebula"
-msgstr "Majomfej köd"
-
-#: nebulae/default/names.dat:146 nebulae/default/names.dat:149
-#: nebulae/default/names.dat:151 nebulae/default/names.dat:152
-#: nebulae/default/names.dat:617
-msgid "Rosette Nebula"
-msgstr "Rozetta-köd"
-
-#: nebulae/default/names.dat:147
-msgid "Rosette A"
-msgstr "Rosette A"
-
-#: nebulae/default/names.dat:148
-msgid "NGC 2244 Satellite Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:153
-msgid "Rosette B"
-msgstr "Rosette B"
-
-#: nebulae/default/names.dat:154
-msgid "Hubble's Variable Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:155
-msgid "Hubble's Nebula"
-msgstr "Hubble köd"
-
-#: nebulae/default/names.dat:156
-msgid "Cone Nebula"
-msgstr "Kúp köd"
-
-#: nebulae/default/names.dat:157
-msgid "Christmas Tree Cluster"
-msgstr "Karácsonyfa csoport"
-
-#: nebulae/default/names.dat:158
-msgid "Head Hunter Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:159
-msgid "Starfighter Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:160
-msgid "Broken Heart Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:161
-msgid "Little Beehive Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:162
-msgid "Hagrid's Dragon Cluster"
-msgstr "Hagrid sárkánya csoport"
-
-#: nebulae/default/names.dat:163
-msgid "Great Bird Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:164
-msgid "Heart-Shaped Cluster"
-msgstr "Szív alakú csoport"
-
-#: nebulae/default/names.dat:165 nebulae/default/names.dat:364
-#: nebulae/default/names.dat:524
-msgid "Butterfly Nebula"
-msgstr "Pillangó-köd"
-
-#: nebulae/default/names.dat:166
-msgid "Hourglass Planetary Nebula"
-msgstr "Homokóra planetáris köd"
-
-#: nebulae/default/names.dat:167
-msgid "Thor's Helmet"
-msgstr "Thor sisakja"
-
-#: nebulae/default/names.dat:168
-msgid "Duck Nebula"
-msgstr "Kacsa köd"
-
-#: nebulae/default/names.dat:169
-msgid "Caroline's Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:170
-msgid "τ CMa Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:171
-msgid "Mexican Jumping Star"
-msgstr ""
-
-#: nebulae/default/names.dat:172
-msgid "Pirate's Jewels Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:173
-msgid "Gemini Nebula"
-msgstr "Gemini köd"
-
-#: nebulae/default/names.dat:174
-msgid "Ant Nebula"
-msgstr "Hangya köd"
-
-#: nebulae/default/names.dat:175
-msgid "Double Bubble Nebula"
-msgstr "Dupla buborék köd"
-
-#: nebulae/default/names.dat:176
-msgid "Peanut Nebula"
-msgstr "Földimogyoró köd"
-
-#: nebulae/default/names.dat:177
-msgid "Eskimo Nebula"
-msgstr "Eszkimó-köd"
-
-#: nebulae/default/names.dat:178
-msgid "Clown Face Nebula"
-msgstr "Bohócarc köd"
-
-#: nebulae/default/names.dat:179
-msgid "Firsse 213"
-msgstr "Firsse 213"
-
-#: nebulae/default/names.dat:180
-msgid "Intergalactic Wanderer/Tramp"
-msgstr "Intergalaktikus vándor/csavargó"
-
-#: nebulae/default/names.dat:181
-msgid "Twinkling Comet Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:182
-msgid "Albino Butterfly Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:183
-msgid "Burning Ember Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:184
-msgid "Bat Nebula"
-msgstr "Denevér köd"
-
-#: nebulae/default/names.dat:185 nebulae/default/names.dat:373
-msgid "Butterfly Cluster"
-msgstr "Pillangó-klaszter"
-
-#: nebulae/default/names.dat:186
-msgid "Stinging Scorpion Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:187
-msgid "Skull and Crossbones Nebula"
-msgstr "Halálfej köd"
-
-#: nebulae/default/names.dat:188
-msgid "Chained Brooch Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:189
-msgid "Electric Guitar Cluster"
-msgstr "Elektromos gitár csoport"
-
-#: nebulae/default/names.dat:190
-msgid "Termite Hole Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:191
-msgid "Sprinter Cluster"
-msgstr "Futó csoport"
-
-#: nebulae/default/names.dat:192
-msgid "Diamond Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:193
-msgid "Bear's Paw Galaxy"
-msgstr "Medvemancs galaxis"
-
-#: nebulae/default/names.dat:194 nebulae/default/names.dat:596
-msgid "Bear Claw Nebula"
-msgstr "Medvekarom nebula"
-
-#: nebulae/default/names.dat:195
-msgid "The Dish Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:196
-msgid "Heart and Dagger Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:197
-msgid "Polarissima Australis"
-msgstr "Polarissima Australis"
-
-#: nebulae/default/names.dat:198
-msgid "Beehive Cluster"
-msgstr "Méhkas csoport"
-
-#: nebulae/default/names.dat:199
-msgid "Praesepe"
-msgstr "Praesepe"
-
-#: nebulae/default/names.dat:200
-msgid "Manger"
-msgstr "Jászol"
-
-#: nebulae/default/names.dat:201
-msgid "King Cobra Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:202
-msgid "UFO Galaxy"
-msgstr "UFO galaxis"
-
-#: nebulae/default/names.dat:203
-msgid "Helix Galaxy"
-msgstr "Hélix-galaxis"
-
-#: nebulae/default/names.dat:204
-msgid "Pancake Galaxy"
-msgstr "Palacsinta galaxis"
-
-#: nebulae/default/names.dat:205 nebulae/default/names.dat:220
-#: nebulae/default/names.dat:339
-msgid "Spindle Galaxy"
-msgstr "Guriga-galaxis"
-
-#: nebulae/default/names.dat:206
-msgid "Pencil Nebula"
-msgstr "Ceruza köd"
-
-#: nebulae/default/names.dat:207
-msgid "Herschel's Ray Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:208
-msgid "NGC 2769 Group"
-msgstr "NGC 2769 csoport"
-
-#: nebulae/default/names.dat:209
-msgid "Supernova Factory"
-msgstr "Szupernova gyár"
-
-#: nebulae/default/names.dat:210
-msgid "Tiger's Eye Galaxy"
-msgstr "Tigrisszem galaxis"
-
-#: nebulae/default/names.dat:211
-msgid "The Penguin Galaxy"
-msgstr "Pingvin galaxis"
-
-#: nebulae/default/names.dat:212
-msgid "The Egg Galaxy"
-msgstr "Tojás galaxis"
-
-#: nebulae/default/names.dat:213
-msgid "Bode's Galaxy"
-msgstr "Bode-galaxis"
-
-#: nebulae/default/names.dat:214
-msgid "Bode's Nebula"
-msgstr "Bode köd"
-
-#: nebulae/default/names.dat:215
-msgid "Cigar Galaxy"
-msgstr "Szivar galaxis"
-
-#: nebulae/default/names.dat:216
-msgid "Ursa Major A"
-msgstr "Nagymedve A"
-
-#: nebulae/default/names.dat:217 nebulae/default/names.dat:683
-msgid "The Garland Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:218
-msgid "The Phantom Frisbee Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:219
-msgid "Little Pinwheel Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:221
-msgid "Eight-Burst Planetary Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:222 nebulae/default/names.dat:390
-msgid "Southern Ring Nebula"
-msgstr "Déli gyűrű köd"
-
-#: nebulae/default/names.dat:223
-msgid "Polarissima Borealis"
-msgstr "Polarissima Borealis"
-
-#: nebulae/default/names.dat:224
-msgid "Ghost of Jupiter Nebula"
-msgstr "Jupiter szelleme köd"
-
-#: nebulae/default/names.dat:225
-msgid "Eye Nebula"
-msgstr "Szem köd"
-
-#: nebulae/default/names.dat:226
-msgid "Gem Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:227 nebulae/default/names.dat:232
-msgid "Keyhole Nebula"
-msgstr "Kulcslyuk köd"
-
-#: nebulae/default/names.dat:228
-msgid "The Gabriela Mistral Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:229
-msgid "Sliced Onion Galaxy"
-msgstr "Szeletelt hagyma galaxis"
-
-#: nebulae/default/names.dat:230
-msgid "η Car Nebula"
-msgstr "η Car köd"
-
-#: nebulae/default/names.dat:231
-msgid "Homunculus Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:233
-msgid "Knitting Needle Galaxy"
-msgstr "Kötőtű galaxis"
-
-#: nebulae/default/names.dat:234
-msgid "Wishing Well Cluster"
-msgstr "Kívánságkút csoport"
-
-#: nebulae/default/names.dat:235
-msgid "Firefly Party Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:236
-msgid "Pincushion Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:237
-msgid "Surfboard Galaxy"
-msgstr "Szörfdeszka galaxis"
-
-#: nebulae/default/names.dat:238
-msgid "Ambartsumian's Knot"
-msgstr "Ambarcumjan csomója"
-
-#: nebulae/default/names.dat:239
-msgid "The Guitar"
-msgstr "A gitár"
-
-#: nebulae/default/names.dat:240
-msgid "Statue of Liberty Nebula"
-msgstr "Szabadságszobor köd"
-
-#: nebulae/default/names.dat:241
-msgid "Owl Nebula"
-msgstr "Bagoly-köd"
-
-#: nebulae/default/names.dat:242
-msgid "Frame Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:243 nebulae/default/names.dat:244
-#: nebulae/default/names.dat:246
-msgid "Leo Triplet"
-msgstr "Három oroszlán"
-
-#: nebulae/default/names.dat:245
-msgid "Hamburger Galaxy"
-msgstr "Hamburger galaxis"
-
-#: nebulae/default/names.dat:247
-msgid "King Hamlet's Ghost"
-msgstr "Hamlet király szelleme"
-
-#: nebulae/default/names.dat:248 nebulae/default/names.dat:249
-#: nebulae/default/names.dat:250 nebulae/default/names.dat:251
-#: nebulae/default/names.dat:252 nebulae/default/names.dat:253
-#: nebulae/default/names.dat:254
-msgid "Copeland's Septet"
-msgstr "Copeland hetese"
-
-#: nebulae/default/names.dat:255
-msgid "Pearl Cluster"
-msgstr "Gyöngy csoport"
-
-#: nebulae/default/names.dat:256
-msgid "Blue planetary"
-msgstr "Kék bolygó"
-
-#: nebulae/default/names.dat:257
-msgid "Miniature Spiral"
-msgstr "Miniatűr spirál"
-
-#: nebulae/default/names.dat:258
-msgid "Vacuum Cleaner Galaxy"
-msgstr "Porszívó galaxis"
-
-#: nebulae/default/names.dat:259 nebulae/default/names.dat:260
-msgid "Antennae"
-msgstr "Csápok/Antenna"
-
-#: nebulae/default/names.dat:261 nebulae/default/names.dat:262
-#: nebulae/default/names.dat:263
-msgid "Box"
-msgstr "Doboz"
-
-#: nebulae/default/names.dat:264
-msgid "Medusa Galaxy"
-msgstr "Medúza galaxis"
-
-#: nebulae/default/names.dat:265
-msgid "Medusa merger"
-msgstr ""
-
-#: nebulae/default/names.dat:266
-msgid "Medusa Galaxy Merger"
-msgstr ""
-
-#: nebulae/default/names.dat:267
-msgid "Silver Streak Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:268
-msgid "Virgo Cluster Pinwheel"
-msgstr ""
-
-#: nebulae/default/names.dat:269
-msgid "Coma Pinwheel Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:270
-msgid "St. Catherine’s Wheel"
-msgstr "St. Catherine orsója"
-
-#: nebulae/default/names.dat:271
-msgid "Faust V023"
-msgstr "Faust V023"
-
-#: nebulae/default/names.dat:272
-msgid "Swelling Spiral Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:273
-msgid "Blowdryer Galaxy"
-msgstr "Hajszárító galaxis"
-
-#: nebulae/default/names.dat:274
-msgid "Mirror Galaxy"
-msgstr "Tükör galaxis"
-
-#: nebulae/default/names.dat:275
-msgid "Galaxy Cluster"
-msgstr "Galaxis csoport"
-
-#: nebulae/default/names.dat:276
-msgid "Lawn Sprinkler Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:277
-msgid "Markarian's Chain"
-msgstr ""
-
-#: nebulae/default/names.dat:278
-msgid "Faust V051"
-msgstr "Faust V051"
-
-#: nebulae/default/names.dat:279 nebulae/default/names.dat:281
-msgid "The Eyes"
-msgstr "A szemek"
-
-#: nebulae/default/names.dat:280 nebulae/default/names.dat:282
-msgid "Copeland's Eyes"
-msgstr ""
-
-#: nebulae/default/names.dat:283
-msgid "Virgo Galaxy"
-msgstr "Virgo galaxis"
-
-#: nebulae/default/names.dat:284
-msgid "Virgo A"
-msgstr "Virgo A"
-
-#: nebulae/default/names.dat:285
-msgid "Smoking gun"
-msgstr "Füstölgő fegyver"
-
-#: nebulae/default/names.dat:286 nebulae/default/names.dat:320
-msgid "Cocoon Galaxy"
-msgstr "Báb galaxis"
-
-#: nebulae/default/names.dat:287
-msgid "Shapley-Ames 2"
-msgstr "Shapley-Ames 2"
-
-#: nebulae/default/names.dat:288
-msgid "Lost Galaxy"
-msgstr "Elveszett galaxis"
-
-#: nebulae/default/names.dat:289
-msgid "Hairy Eyebrow Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:290
-msgid "The Lost Galaxy of Copeland"
-msgstr ""
-
-#: nebulae/default/names.dat:291
-msgid "Koi Fish Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:292
-msgid "Needle Galaxy"
-msgstr "Tű galaxis"
-
-#: nebulae/default/names.dat:293
-msgid "Flying Saucer Galaxy"
-msgstr "Repülő csészealj galaxis"
-
-#: nebulae/default/names.dat:294 nebulae/default/names.dat:296
-msgid "Siamese Twins"
-msgstr "Sziámi ikrek"
-
-#: nebulae/default/names.dat:295 nebulae/default/names.dat:297
-msgid "Fish and Chips Galaxies"
-msgstr ""
-
-#: nebulae/default/names.dat:298
-msgid "Sombrero Galaxy"
-msgstr "Sombrero-galaxis"
-
-#: nebulae/default/names.dat:299
-msgid "Faberge Egg Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:300
-msgid "Coalsack Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:301
-msgid "Whale Galaxy"
-msgstr "Bálna galaxis"
-
-#: nebulae/default/names.dat:302
-msgid "Herring Galaxy"
-msgstr "Hering galaxis"
-
-#: nebulae/default/names.dat:303
-msgid "Umbrella Galaxy"
-msgstr "Esernyő galaxis"
-
-#: nebulae/default/names.dat:304
-msgid "Crowbar Galaxy"
-msgstr "Feszítővas galaxis"
-
-#: nebulae/default/names.dat:305
-msgid "Hockey Stick Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:306
-msgid "Fishhook Galaxy"
-msgstr "Horog galaxis"
-
-#: nebulae/default/names.dat:307
-msgid "Superwind-Galaxy"
-msgstr "Szuperszél galaxis"
-
-#: nebulae/default/names.dat:308
-msgid "Mice Galaxies"
-msgstr "Egerek galaxis"
-
-#: nebulae/default/names.dat:309
-msgid "Vinyl LP Galaxy"
-msgstr "Bakelitlemez galaxis"
-
-#: nebulae/default/names.dat:310
-msgid "Croc's Eye Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:311
-msgid "Jewel Box"
-msgstr "Ékszerdoboz-köd"
-
-#: nebulae/default/names.dat:312
-msgid "Herschel's Jewel Box"
-msgstr "Herschel ékszerdoboza"
-
-#: nebulae/default/names.dat:313
-msgid "κ Cru Cluster"
-msgstr "κ Cru csoport"
-
-#: nebulae/default/names.dat:314
-msgid "Kidney Bean Galaxy"
-msgstr "Babszem-galaxis"
-
-#: nebulae/default/names.dat:315
-msgid "Black Eye Galaxy"
-msgstr "Ördögszem-galaxis"
-
-#: nebulae/default/names.dat:316
-msgid "Evil Eye Galaxy"
-msgstr "Ördögszem galaxis"
-
-#: nebulae/default/names.dat:317
-msgid "Sleeping Beauty Galaxy"
-msgstr "Alvó szépség galaxis"
-
-#: nebulae/default/names.dat:318
-msgid "Coma B"
-msgstr "Coma B"
-
-#: nebulae/default/names.dat:319
-msgid "Z Coma Coma"
-msgstr ""
-
-#: nebulae/default/names.dat:321
-msgid "Sunflower Galaxy"
-msgstr "Napraforgó-köd"
-
-#: nebulae/default/names.dat:322
-msgid "Iota's Ghost"
-msgstr ""
-
-#: nebulae/default/names.dat:323
-msgid "Centaurus A"
-msgstr "Kentaur-A"
-
-#: nebulae/default/names.dat:324
-msgid "ω Cen Cluster"
-msgstr "ω Cen csoport"
-
-#: nebulae/default/names.dat:325
-msgid "Spiral planetary nebula"
-msgstr "Spirális planetáris köd"
-
-#: nebulae/default/names.dat:326
-msgid "Whirlpool Galaxy"
-msgstr "Örvény-galaxis"
-
-#: nebulae/default/names.dat:327
-msgid "Question Mark Galaxy"
-msgstr "Kérdőjel galaxis"
-
-#: nebulae/default/names.dat:328
-msgid "Rosse's Galaxy"
-msgstr "Rosse galaxis"
-
-#: nebulae/default/names.dat:329 nebulae/default/names.dat:330
-msgid "Keenan's System"
-msgstr "Keenan-rendszer"
-
-#: nebulae/default/names.dat:331
-msgid "Southern Pinwheel Galaxy"
-msgstr "Déli szélkerék galaxis"
-
-#: nebulae/default/names.dat:332 nebulae/default/names.dat:537
-msgid "Seashell Galaxy"
-msgstr "Tengeri kagyló galaxis"
-
-#: nebulae/default/names.dat:333 nebulae/default/names.dat:334
-msgid "The Heron Galaxy"
-msgstr "Kócsag galaxis"
-
-#: nebulae/default/names.dat:335
+#: nebulae/default/names.dat:60 nebulae/default/names.dat:357
 msgid "Pinwheel Galaxy"
 msgstr "Tűkerék-galaxis"
 
+#: nebulae/default/names.dat:61
+msgid "Little Spindle Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:62
+msgid "Phantom Galaxy"
+msgstr "Fantom galaxis"
+
+#: nebulae/default/names.dat:63
+msgid "Little Dumbbell Nebula"
+msgstr "Kis súlyzó köd"
+
+#: nebulae/default/names.dat:64
+msgid "Cork Nebula"
+msgstr "Parafa köd"
+
+#: nebulae/default/names.dat:65
+msgid "Barbell Nebula"
+msgstr "Barbell köd"
+
+#: nebulae/default/names.dat:66 nebulae/default/names.dat:179
+#: nebulae/default/names.dat:388 nebulae/default/names.dat:555
+msgid "Butterfly Nebula"
+msgstr "Pillangó-köd"
+
+#: nebulae/default/names.dat:67
+msgid "Fuzzy Butterfly Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:68
+msgid "Lawnmower Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:69
+msgid "Fiddlehead Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:70 nebulae/default/names.dat:72
+msgid "Double Cluster"
+msgstr "Dupla csoport"
+
+#: nebulae/default/names.dat:71
+msgid "h Persei"
+msgstr "h Persei"
+
+#: nebulae/default/names.dat:73
+msgid "χ Persei"
+msgstr "χ Persei"
+
+#: nebulae/default/names.dat:74
+msgid "Perseus Lenticular Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:75
+msgid "Spiral Cluster"
+msgstr "Spirál csoport"
+
+#: nebulae/default/names.dat:76
+msgid "Fornax Dwarf Cluster 3"
+msgstr ""
+
+#: nebulae/default/names.dat:77
+msgid "Fornax H3"
+msgstr "Fornax H3"
+
+#: nebulae/default/names.dat:78
+msgid "Fornax C3"
+msgstr "Fornax C3"
+
+#: nebulae/default/names.dat:79
+msgid "Fornax 3"
+msgstr "Fornax 3"
+
+#: nebulae/default/names.dat:80
+msgid "Cetus A"
+msgstr "Cetus A"
+
+#: nebulae/default/names.dat:81
+msgid "Eye of God Galaxy"
+msgstr "Isten szeme galaxis"
+
+#: nebulae/default/names.dat:82
+msgid "Patrick Starfish Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:83
+msgid "Perseus A"
+msgstr "Perseus A"
+
+#: nebulae/default/names.dat:84
+msgid "Fornax A"
+msgstr "Fornax A"
+
+#: nebulae/default/names.dat:85
+msgid "Fornax B"
+msgstr "Fornax B"
+
+#: nebulae/default/names.dat:86
+msgid "Embryo Nebula"
+msgstr "Embrió köd"
+
+#: nebulae/default/names.dat:87
+msgid "Little Scorpion Cluster"
+msgstr "Kis skorpió csoport"
+
+#: nebulae/default/names.dat:88
+msgid "Stingray Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:89
+msgid "Robin's Egg Nebula"
+msgstr "Robin tojása köd"
+
+#: nebulae/default/names.dat:90
+msgid "Comet Planetary Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:91
+msgid "Great Barred Spiral Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:92
+msgid "Eridanus A Group"
+msgstr ""
+
+#: nebulae/default/names.dat:93
+msgid "Maia Nebula"
+msgstr "Maia-köd"
+
+#: nebulae/default/names.dat:94
+msgid "Merope Nebula"
+msgstr "Merope-köd"
+
+#: nebulae/default/names.dat:95
+msgid "Tempel's Nebula"
+msgstr "Tempel köd"
+
+#: nebulae/default/names.dat:96
+msgid "Fossil Footprint Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:97
+msgid "California Nebula"
+msgstr "Kalifornia-köd"
+
+#: nebulae/default/names.dat:98
+msgid "Camel's Eye Nebula"
+msgstr "Teveszem köd"
+
+#: nebulae/default/names.dat:99
+msgid "Oyster Nebula"
+msgstr "Osztriga köd"
+
+#: nebulae/default/names.dat:100
+msgid "Jolly Roger Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:101
+msgid "Golden Harp Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:102
+msgid "Crystal Ball Nebula"
+msgstr "Kristálygömb köd"
+
+#: nebulae/default/names.dat:103
+msgid "Pansy Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:104
+msgid "Cleopatra's Eye Nebula"
+msgstr "Kleopátra szeme köd"
+
+#: nebulae/default/names.dat:105
+msgid "Eskimo's Wife Nebula"
+msgstr "Eszkimófeleség köd"
+
+#: nebulae/default/names.dat:106
+msgid "Struve's Lost Nebula"
+msgstr "Struve-féle elveszett köd"
+
+#: nebulae/default/names.dat:107
+msgid "Struve's Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:108
+msgid "Hind's Variable Nebula"
+msgstr "Hind-féle változó köd"
+
+#: nebulae/default/names.dat:109
+msgid "Hind's Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:110
+msgid "Northern Trifid Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:111 nebulae/default/names.dat:112
+msgid "Carafe Group"
+msgstr "Carafe Group"
+
+#: nebulae/default/names.dat:113
+msgid "Pirate Moon Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:114
+msgid "Poor Man's Double Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:116 nebulae/default/names.dat:117
+#: nebulae/default/names.dat:413
+msgid "Starfish Cluster"
+msgstr "Tengeri csillag csoport"
+
+#: nebulae/default/names.dat:118
+msgid "Fly Nebula"
+msgstr "Légy köd"
+
+#: nebulae/default/names.dat:119
+msgid "Crab Nebula"
+msgstr "Rák-köd"
+
+#: nebulae/default/names.dat:120
+msgid "Taurus A"
+msgstr "Taurus A"
+
+#: nebulae/default/names.dat:121
+msgid "Pinwheel Cluster"
+msgstr "Szélkerék csoport"
+
+#: nebulae/default/names.dat:122
+msgid "Mermaid's Purse Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:123
+msgid "Great Orion Nebula"
+msgstr "Nagy Orion köd"
+
+#: nebulae/default/names.dat:124
+msgid "Orion Nebula"
+msgstr "Orion-köd"
+
+#: nebulae/default/names.dat:125
+msgid "Orion A"
+msgstr "Orion A"
+
+#: nebulae/default/names.dat:126
+msgid "Running Man Nebula"
+msgstr "Futó Ember ködfolt"
+
+#: nebulae/default/names.dat:127
+msgid "The Lost Jewel of Orion"
+msgstr ""
+
+#: nebulae/default/names.dat:128
+msgid "Lower Sword"
+msgstr ""
+
+#: nebulae/default/names.dat:129
+msgid "Coal Car Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:130
+msgid "Upper Sword"
+msgstr ""
+
+#: nebulae/default/names.dat:131
+msgid "de Mairan's Nebula"
+msgstr "de Mairan köd"
+
+#: nebulae/default/names.dat:132
+msgid "Mairan's Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:133
+msgid "ε Ori Nebula"
+msgstr "ε Ori köd"
+
+#: nebulae/default/names.dat:134
+msgid "13th Pearl Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:135
+msgid "Black Eye Nebula"
+msgstr "Fekete szem köd"
+
+#: nebulae/default/names.dat:136
+msgid "Kissing Crescents Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:137
+msgid "Orion's Collarbone Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:138
+msgid "Flame Nebula"
+msgstr "Láng köd"
+
+#: nebulae/default/names.dat:139
+msgid "Tank Tracks Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:140
+msgid "Maple Leaf Nebula"
+msgstr "Juharlevél köd"
+
+#: nebulae/default/names.dat:141
+msgid "30 Dor B"
+msgstr "30 Dor B"
+
+#: nebulae/default/names.dat:142
+msgid "Casper the Friendly Ghost Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:143
+msgid "Tarantula Nebula"
+msgstr "tarantellapók köd"
+
+#: nebulae/default/names.dat:144
+msgid "Looped Nebula"
+msgstr "Hurkolt köd"
+
+#: nebulae/default/names.dat:145
+msgid "True Lovers' Knot"
+msgstr ""
+
+#: nebulae/default/names.dat:146
+msgid "30 Dor Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:147
+msgid "Ghost Head Nebula"
+msgstr "Szellemfej Ködfolt"
+
+#: nebulae/default/names.dat:148
+msgid "January Salt-and-Pepper Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:149
+msgid "Dusty Hand Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:150
+msgid "Shoe-Buckle Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:151
+msgid "The 37 Cluster"
+msgstr "A 37 Klaszter"
+
+#: nebulae/default/names.dat:152
+msgid "The 'LE' Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:153
+msgid "Shopping Cart Cluster"
+msgstr "Bevásárlókocsi csoport"
+
+#: nebulae/default/names.dat:154
+msgid "Mon R2 IRS3"
+msgstr "Mon R2 IRS3"
+
+#: nebulae/default/names.dat:155
+msgid "Monkey Head Nebula"
+msgstr "Majomfej köd"
+
+#: nebulae/default/names.dat:156
+msgid "Double Wedge Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:157 nebulae/default/names.dat:160
+#: nebulae/default/names.dat:162 nebulae/default/names.dat:164
+#: nebulae/default/names.dat:649
+msgid "Rosette Nebula"
+msgstr "Rozetta-köd"
+
+#: nebulae/default/names.dat:158
+msgid "Rosette A"
+msgstr "Rosette A"
+
+#: nebulae/default/names.dat:159
+msgid "NGC 2244 Satellite Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:163
+msgid "Harp Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:165
+msgid "Rosette B"
+msgstr "Rosette B"
+
+#: nebulae/default/names.dat:166
+msgid "Hubble's Variable Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:167
+msgid "Hubble's Nebula"
+msgstr "Hubble köd"
+
+#: nebulae/default/names.dat:168 nebulae/default/names.dat:665
+msgid "Cone Nebula"
+msgstr "Kúp köd"
+
+#: nebulae/default/names.dat:169
+msgid "Christmas Tree Cluster"
+msgstr "Karácsonyfa csoport"
+
+#: nebulae/default/names.dat:170
+msgid "Head Hunter Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:171
+msgid "Starfighter Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:172
+msgid "Broken Heart Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:173
+msgid "Little Beehive Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:174
+msgid "Hagrid's Dragon Cluster"
+msgstr "Hagrid sárkánya csoport"
+
+#: nebulae/default/names.dat:175
+msgid "Great Bird Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:176
+msgid "Copeland's Golden Worm"
+msgstr ""
+
+#: nebulae/default/names.dat:177
+msgid "Heart-Shaped Cluster"
+msgstr "Szív alakú csoport"
+
+#: nebulae/default/names.dat:178
+msgid "Coil Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:180
+msgid "Hourglass Planetary Nebula"
+msgstr "Homokóra planetáris köd"
+
+#: nebulae/default/names.dat:181
+msgid "Thor's Helmet"
+msgstr "Thor sisakja"
+
+#: nebulae/default/names.dat:182
+msgid "Duck Nebula"
+msgstr "Kacsa köd"
+
+#: nebulae/default/names.dat:183
+msgid "Caroline's Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:184
+msgid "τ CMa Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:185
+msgid "Mexican Jumping Star"
+msgstr ""
+
+#: nebulae/default/names.dat:186
+msgid "Pirate's Jewels Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:187
+msgid "Charlie Brown's Christmas Tree"
+msgstr ""
+
+#: nebulae/default/names.dat:188
+msgid "Gemini Nebula"
+msgstr "Gemini köd"
+
+#: nebulae/default/names.dat:189
+msgid "Ant Nebula"
+msgstr "Hangya köd"
+
+#: nebulae/default/names.dat:190
+msgid "Double Bubble Nebula"
+msgstr "Dupla buborék köd"
+
+#: nebulae/default/names.dat:191
+msgid "Peanut Nebula"
+msgstr "Földimogyoró köd"
+
+#: nebulae/default/names.dat:192
+msgid "Eskimo Nebula"
+msgstr "Eszkimó-köd"
+
+#: nebulae/default/names.dat:193
+msgid "Clown Face Nebula"
+msgstr "Bohócarc köd"
+
+#: nebulae/default/names.dat:194
+msgid "Firsse 213"
+msgstr "Firsse 213"
+
+#: nebulae/default/names.dat:195
+msgid "Intergalactic Wanderer/Tramp"
+msgstr "Intergalaktikus vándor/csavargó"
+
+#: nebulae/default/names.dat:196
+msgid "Twinkling Comet Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:197
+msgid "Albino Butterfly Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:198
+msgid "Burning Ember Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:199
+msgid "Bat Nebula"
+msgstr "Denevér köd"
+
+#: nebulae/default/names.dat:200
+msgid "Meathook Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:201 nebulae/default/names.dat:397
+msgid "Butterfly Cluster"
+msgstr "Pillangó-klaszter"
+
+#: nebulae/default/names.dat:202
+msgid "Stinging Scorpion Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:203
+msgid "Skull and Crossbones Nebula"
+msgstr "Halálfej köd"
+
+#: nebulae/default/names.dat:204
+msgid "Chained Brooch Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:205
+msgid "Electric Guitar Cluster"
+msgstr "Elektromos gitár csoport"
+
+#: nebulae/default/names.dat:206
+msgid "Termite Hole Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:207
+msgid "Sprinter Cluster"
+msgstr "Futó csoport"
+
+#: nebulae/default/names.dat:208
+msgid "Diamond Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:209
+msgid "Bear's Paw Galaxy"
+msgstr "Medvemancs galaxis"
+
+#: nebulae/default/names.dat:210 nebulae/default/names.dat:627
+msgid "Bear Claw Nebula"
+msgstr "Medvekarom nebula"
+
+#: nebulae/default/names.dat:211
+msgid "The Dish Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:212
+msgid "Heart and Dagger Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:213
+msgid "Polarissima Australis"
+msgstr "Polarissima Australis"
+
+#: nebulae/default/names.dat:214
+msgid "Beehive Cluster"
+msgstr "Méhkas csoport"
+
+#: nebulae/default/names.dat:215
+msgid "Praesepe"
+msgstr "Praesepe"
+
+#: nebulae/default/names.dat:216
+msgid "Manger"
+msgstr "Jászol"
+
+#: nebulae/default/names.dat:217
+msgid "Golden-Eye Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:218
+msgid "Pac-Man Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:219
+msgid "King Cobra Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:220
+msgid "UFO Galaxy"
+msgstr "UFO galaxis"
+
+#: nebulae/default/names.dat:221
+msgid "Helix Galaxy"
+msgstr "Hélix-galaxis"
+
+#: nebulae/default/names.dat:222
+msgid "Pancake Galaxy"
+msgstr "Palacsinta galaxis"
+
+#: nebulae/default/names.dat:223 nebulae/default/names.dat:238
+#: nebulae/default/names.dat:361
+msgid "Spindle Galaxy"
+msgstr "Guriga-galaxis"
+
+#: nebulae/default/names.dat:224
+msgid "Pencil Nebula"
+msgstr "Ceruza köd"
+
+#: nebulae/default/names.dat:225
+msgid "Herschel's Ray Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:226
+msgid "NGC 2769 Group"
+msgstr "NGC 2769 csoport"
+
+#: nebulae/default/names.dat:227
+msgid "Supernova Factory"
+msgstr "Szupernova gyár"
+
+#: nebulae/default/names.dat:228
+msgid "Tiger's Eye Galaxy"
+msgstr "Tigrisszem galaxis"
+
+#: nebulae/default/names.dat:229
+msgid "The Penguin Galaxy"
+msgstr "Pingvin galaxis"
+
+#: nebulae/default/names.dat:230
+msgid "The Egg Galaxy"
+msgstr "Tojás galaxis"
+
+#: nebulae/default/names.dat:231
+msgid "Bode's Galaxy"
+msgstr "Bode-galaxis"
+
+#: nebulae/default/names.dat:232
+msgid "Bode's Nebula"
+msgstr "Bode köd"
+
+#: nebulae/default/names.dat:233
+msgid "Cigar Galaxy"
+msgstr "Szivar galaxis"
+
+#: nebulae/default/names.dat:234
+msgid "Ursa Major A"
+msgstr "Nagymedve A"
+
+#: nebulae/default/names.dat:235 nebulae/default/names.dat:718
+msgid "The Garland Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:236
+msgid "The Phantom Frisbee Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:237
+msgid "Little Pinwheel Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:239
+msgid "Eight-Burst Planetary Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:240 nebulae/default/names.dat:414
+msgid "Southern Ring Nebula"
+msgstr "Déli gyűrű köd"
+
+#: nebulae/default/names.dat:241
+msgid "Polarissima Borealis"
+msgstr "Polarissima Borealis"
+
+#: nebulae/default/names.dat:242
+msgid "Ghost of Jupiter Nebula"
+msgstr "Jupiter szelleme köd"
+
+#: nebulae/default/names.dat:243
+msgid "Eye Nebula"
+msgstr "Szem köd"
+
+#: nebulae/default/names.dat:244
+msgid "Gem Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:245 nebulae/default/names.dat:250
+msgid "Keyhole Nebula"
+msgstr "Kulcslyuk köd"
+
+#: nebulae/default/names.dat:246
+msgid "The Gabriela Mistral Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:247
+msgid "Sliced Onion Galaxy"
+msgstr "Szeletelt hagyma galaxis"
+
+#: nebulae/default/names.dat:248
+msgid "η Car Nebula"
+msgstr "η Car köd"
+
+#: nebulae/default/names.dat:249
+msgid "Homunculus Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:251
+msgid "Knitting Needle Galaxy"
+msgstr "Kötőtű galaxis"
+
+#: nebulae/default/names.dat:252
+msgid "Wishing Well Cluster"
+msgstr "Kívánságkút csoport"
+
+#: nebulae/default/names.dat:253
+msgid "Firefly Party Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:254
+msgid "Pincushion Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:255
+msgid "Surfboard Galaxy"
+msgstr "Szörfdeszka galaxis"
+
+#: nebulae/default/names.dat:256
+msgid "Ambartsumian's Knot"
+msgstr "Ambarcumjan csomója"
+
+#: nebulae/default/names.dat:257
+msgid "The Guitar"
+msgstr "A gitár"
+
+#: nebulae/default/names.dat:258
+msgid "Statue of Liberty Nebula"
+msgstr "Szabadságszobor köd"
+
+#: nebulae/default/names.dat:259
+msgid "Owl Nebula"
+msgstr "Bagoly-köd"
+
+#: nebulae/default/names.dat:260
+msgid "Frame Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:261 nebulae/default/names.dat:262
+#: nebulae/default/names.dat:264
+msgid "Leo Triplet"
+msgstr "Három oroszlán"
+
+#: nebulae/default/names.dat:263
+msgid "Hamburger Galaxy"
+msgstr "Hamburger galaxis"
+
+#: nebulae/default/names.dat:265
+msgid "King Hamlet's Ghost"
+msgstr "Hamlet király szelleme"
+
+#: nebulae/default/names.dat:266 nebulae/default/names.dat:267
+#: nebulae/default/names.dat:268 nebulae/default/names.dat:269
+#: nebulae/default/names.dat:270 nebulae/default/names.dat:271
+#: nebulae/default/names.dat:272
+msgid "Copeland's Septet"
+msgstr "Copeland hetese"
+
+#: nebulae/default/names.dat:273
+msgid "Pearl Cluster"
+msgstr "Gyöngy csoport"
+
+#: nebulae/default/names.dat:274
+msgid "Blue planetary"
+msgstr "Kék bolygó"
+
+#: nebulae/default/names.dat:275
+msgid "Miniature Spiral"
+msgstr "Miniatűr spirál"
+
+#: nebulae/default/names.dat:276
+msgid "Vacuum Cleaner Galaxy"
+msgstr "Porszívó galaxis"
+
+#: nebulae/default/names.dat:277 nebulae/default/names.dat:278
+msgid "Antennae"
+msgstr "Csápok/Antenna"
+
+#: nebulae/default/names.dat:279 nebulae/default/names.dat:280
+#: nebulae/default/names.dat:281 nebulae/default/names.dat:282
+msgid "The Box"
+msgstr ""
+
+#: nebulae/default/names.dat:283
+msgid "Medusa Galaxy"
+msgstr "Medúza galaxis"
+
+#: nebulae/default/names.dat:284
+msgid "Medusa merger"
+msgstr ""
+
+#: nebulae/default/names.dat:285
+msgid "Medusa Galaxy Merger"
+msgstr ""
+
+#: nebulae/default/names.dat:286
+msgid "Silver Streak Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:287
+msgid "Virgo Cluster Pinwheel"
+msgstr ""
+
+#: nebulae/default/names.dat:288
+msgid "Coma Pinwheel Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:289
+msgid "St. Catherine’s Wheel"
+msgstr "St. Catherine orsója"
+
+#: nebulae/default/names.dat:290
+msgid "Faust V023"
+msgstr "Faust V023"
+
+#: nebulae/default/names.dat:291
+msgid "Swelling Spiral Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:292
+msgid "Blowdryer Galaxy"
+msgstr "Hajszárító galaxis"
+
+#: nebulae/default/names.dat:293
+msgid "Mirror Galaxy"
+msgstr "Tükör galaxis"
+
+#: nebulae/default/names.dat:294
+msgid "Galaxy Cluster"
+msgstr "Galaxis csoport"
+
+#: nebulae/default/names.dat:295
+msgid "Lawn Sprinkler Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:296
+msgid "Markarian's Chain"
+msgstr ""
+
+#: nebulae/default/names.dat:297
+msgid "Great Galactic Face"
+msgstr ""
+
+#: nebulae/default/names.dat:298
+msgid "Faust V051"
+msgstr "Faust V051"
+
+#: nebulae/default/names.dat:299 nebulae/default/names.dat:301
+msgid "The Eyes"
+msgstr "A szemek"
+
+#: nebulae/default/names.dat:300 nebulae/default/names.dat:302
+msgid "Copeland's Eyes"
+msgstr ""
+
+#: nebulae/default/names.dat:303
+msgid "Virgo Galaxy"
+msgstr "Virgo galaxis"
+
+#: nebulae/default/names.dat:304
+msgid "Virgo A"
+msgstr "Virgo A"
+
+#: nebulae/default/names.dat:305
+msgid "Smoking gun"
+msgstr "Füstölgő fegyver"
+
+#: nebulae/default/names.dat:306 nebulae/default/names.dat:341
+msgid "Cocoon Galaxy"
+msgstr "Báb galaxis"
+
+#: nebulae/default/names.dat:307
+msgid "Shapley-Ames 2"
+msgstr "Shapley-Ames 2"
+
+#: nebulae/default/names.dat:308
+msgid "Lost Galaxy"
+msgstr "Elveszett galaxis"
+
+#: nebulae/default/names.dat:309
+msgid "Hairy Eyebrow Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:310
+msgid "The Lost Galaxy of Copeland"
+msgstr ""
+
+#: nebulae/default/names.dat:311
+msgid "Koi Fish Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:312
+msgid "Needle Galaxy"
+msgstr "Tű galaxis"
+
+#: nebulae/default/names.dat:313
+msgid "Berenice's Hair Clip"
+msgstr ""
+
+#: nebulae/default/names.dat:314
+msgid "Flying Saucer Galaxy"
+msgstr "Repülő csészealj galaxis"
+
+#: nebulae/default/names.dat:315 nebulae/default/names.dat:317
+msgid "Siamese Twins"
+msgstr "Sziámi ikrek"
+
+#: nebulae/default/names.dat:316 nebulae/default/names.dat:318
+msgid "Fish and Chips Galaxies"
+msgstr ""
+
+#: nebulae/default/names.dat:319
+msgid "Sombrero Galaxy"
+msgstr "Sombrero-galaxis"
+
+#: nebulae/default/names.dat:320
+msgid "Faberge Egg Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:321
+msgid "Coalsack Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:322
+msgid "Whale Galaxy"
+msgstr "Bálna galaxis"
+
+#: nebulae/default/names.dat:323
+msgid "Herring Galaxy"
+msgstr "Hering galaxis"
+
+#: nebulae/default/names.dat:324
+msgid "Umbrella Galaxy"
+msgstr "Esernyő galaxis"
+
+#: nebulae/default/names.dat:325
+msgid "Crowbar Galaxy"
+msgstr "Feszítővas galaxis"
+
+#: nebulae/default/names.dat:326
+msgid "Hockey Stick Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:327
+msgid "Fishhook Galaxy"
+msgstr "Horog galaxis"
+
+#: nebulae/default/names.dat:328
+msgid "Superwind-Galaxy"
+msgstr "Szuperszél galaxis"
+
+#: nebulae/default/names.dat:329
+msgid "Mice Galaxies"
+msgstr "Egerek galaxis"
+
+#: nebulae/default/names.dat:330
+msgid "Vinyl LP Galaxy"
+msgstr "Bakelitlemez galaxis"
+
+#: nebulae/default/names.dat:331
+msgid "Croc's Eye Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:332
+msgid "Jewel Box"
+msgstr "Ékszerdoboz-köd"
+
+#: nebulae/default/names.dat:333
+msgid "Herschel's Jewel Box"
+msgstr "Herschel ékszerdoboza"
+
+#: nebulae/default/names.dat:334
+msgid "κ Cru Cluster"
+msgstr "κ Cru csoport"
+
+#: nebulae/default/names.dat:335
+msgid "Kidney Bean Galaxy"
+msgstr "Babszem-galaxis"
+
 #: nebulae/default/names.dat:336
-msgid "Dragon Nebula"
-msgstr "Sárkány köd"
+msgid "Black Eye Galaxy"
+msgstr "Ördögszem-galaxis"
 
 #: nebulae/default/names.dat:337
-msgid "Blade and Pearl Galaxy"
-msgstr ""
+msgid "Evil Eye Galaxy"
+msgstr "Ördögszem galaxis"
 
 #: nebulae/default/names.dat:338
-msgid "The Mini Sombrero Galaxy"
-msgstr ""
+msgid "Sleeping Beauty Galaxy"
+msgstr "Alvó szépség galaxis"
+
+#: nebulae/default/names.dat:339
+msgid "Coma B"
+msgstr "Coma B"
 
 #: nebulae/default/names.dat:340
-msgid "Fool's Gold Galaxy"
-msgstr "Bolondok aranya galaxis"
-
-#: nebulae/default/names.dat:341
-msgid "Fath 703"
-msgstr "Fath 703"
+msgid "Z Coma Coma"
+msgstr ""
 
 #: nebulae/default/names.dat:342
-msgid "Ghost Globular Cluster"
-msgstr ""
+msgid "Sunflower Galaxy"
+msgstr "Napraforgó-köd"
 
 #: nebulae/default/names.dat:343
-msgid "Rose Cluster"
+msgid "Iota's Ghost"
 msgstr ""
 
+#: nebulae/default/names.dat:344
+msgid "Centaurus A"
+msgstr "Kentaur-A"
+
 #: nebulae/default/names.dat:345
-msgid "Splinter Galaxy"
-msgstr "Szilánk galaxis"
+msgid "ω Cen Cluster"
+msgstr "ω Cen csoport"
 
 #: nebulae/default/names.dat:346
-msgid "Cat Scratch Galaxy"
+msgid "Spiral Planetary Nebula"
 msgstr ""
 
 #: nebulae/default/names.dat:347
-msgid "Knife Edge Galaxy"
-msgstr "Kés éle galaxis"
+msgid "Whirlpool Galaxy"
+msgstr "Örvény-galaxis"
 
 #: nebulae/default/names.dat:348
-msgid "Seyfert's Sextet"
-msgstr "Seyfert hatos"
+msgid "Question Mark Galaxy"
+msgstr "Kérdőjel galaxis"
 
 #: nebulae/default/names.dat:349
-msgid "Serpens Sextet"
-msgstr ""
+msgid "Rosse's Galaxy"
+msgstr "Rosse galaxis"
 
 #: nebulae/default/names.dat:350
-msgid "S Nor Cluster"
+msgid "Spiral Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:351
-msgid "Crab Globular Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:352
-msgid "Spider Globular Cluster"
-msgstr ""
+#: nebulae/default/names.dat:351 nebulae/default/names.dat:352
+msgid "Keenan's System"
+msgstr "Keenan-rendszer"
 
 #: nebulae/default/names.dat:353
-msgid "The Crucifix Cluster"
-msgstr ""
+msgid "Southern Pinwheel Galaxy"
+msgstr "Déli szélkerék galaxis"
 
-#: nebulae/default/names.dat:354
-msgid "Rim Nebula"
-msgstr "Perem köd"
+#: nebulae/default/names.dat:354 nebulae/default/names.dat:567
+msgid "Seashell Galaxy"
+msgstr "Tengeri kagyló galaxis"
 
-#: nebulae/default/names.dat:355
-msgid "μ Normae Cluster"
-msgstr "μ Normae csoport"
-
-#: nebulae/default/names.dat:356
-msgid "Great Cluster in Hercules"
-msgstr "Nagy csoport a Herkulesben"
-
-#: nebulae/default/names.dat:357
-msgid "Hercules Globular Cluster"
-msgstr ""
+#: nebulae/default/names.dat:355 nebulae/default/names.dat:356
+msgid "The Heron Galaxy"
+msgstr "Kócsag galaxis"
 
 #: nebulae/default/names.dat:358
-msgid "Turtle planetary nebula"
-msgstr "Teknős planetáris köd"
+msgid "Dragon Nebula"
+msgstr "Sárkány köd"
 
 #: nebulae/default/names.dat:359
-msgid "Northern Jewel Box Cluster"
-msgstr "Északi ékszerdoboz csoport"
-
-#: nebulae/default/names.dat:360
-msgid "Table of Scorpius Cluster"
+msgid "Blade and Pearl Galaxy"
 msgstr ""
 
-#: nebulae/default/names.dat:361
-msgid "Flickering Globular Cluster"
+#: nebulae/default/names.dat:360
+msgid "The Mini Sombrero Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:362
-msgid "Moth Wing Cluster"
-msgstr ""
+msgid "Fool's Gold Galaxy"
+msgstr "Bolondok aranya galaxis"
 
 #: nebulae/default/names.dat:363
-msgid "Bug Nebula"
-msgstr "Bogár-köd"
+msgid "Fath 703"
+msgstr "Fath 703"
+
+#: nebulae/default/names.dat:364
+msgid "Ghost Globular Cluster"
+msgstr ""
 
 #: nebulae/default/names.dat:365
-msgid "Box Nebula"
-msgstr "Doboz-köd"
-
-#: nebulae/default/names.dat:366
-msgid "Cat's Paw Nebula"
-msgstr "Macskamancs köd"
-
-#: nebulae/default/names.dat:367
-msgid "Cheerio Nebula"
+msgid "Rose Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:368 nebulae/default/names.dat:400
-msgid "Lobster Nebula"
-msgstr "Homár köd"
+#: nebulae/default/names.dat:367 nebulae/default/names.dat:370
+msgid "Splinter Galaxy"
+msgstr "Szilánk galaxis"
+
+#: nebulae/default/names.dat:368
+msgid "Cat Scratch Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:369
-msgid "War and Peace Nebula"
-msgstr "Háború és béke köd"
-
-#: nebulae/default/names.dat:370
-msgid "Little Ghost Nebula"
-msgstr "Kis szellem köd"
+msgid "Knife Edge Galaxy"
+msgstr "Kés éle galaxis"
 
 #: nebulae/default/names.dat:371
-msgid "Tonantzintla 1"
-msgstr ""
+msgid "Seyfert's Sextet"
+msgstr "Seyfert hatos"
 
 #: nebulae/default/names.dat:372
-msgid "Phantom Cluster"
+msgid "Serpens Sextet"
+msgstr ""
+
+#: nebulae/default/names.dat:373
+msgid "S Nor Cluster"
 msgstr ""
 
 #: nebulae/default/names.dat:374
-msgid "Splendors of the Heavens"
+msgid "Crab Globular Cluster"
 msgstr ""
 
 #: nebulae/default/names.dat:375
-msgid "Silver Nugget Cluster"
+msgid "Spider Globular Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:376 nebulae/default/names.dat:422
-msgid "Little Gem Nebula"
-msgstr "Kis drágakő köd"
+#: nebulae/default/names.dat:376
+msgid "The Crucifix Cluster"
+msgstr ""
 
 #: nebulae/default/names.dat:377
-msgid "Tom Thumb Cluster"
-msgstr ""
+msgid "Rim Nebula"
+msgstr "Perem köd"
 
 #: nebulae/default/names.dat:378
-msgid "Ptolemy's Cluster"
-msgstr "Ptolemaiosz-klaszter"
+msgid "μ Normae Cluster"
+msgstr "μ Normae csoport"
 
 #: nebulae/default/names.dat:379
-msgid "Lost in Space Galaxy"
+msgid "Great Star Cluster in Hercules"
 msgstr ""
 
 #: nebulae/default/names.dat:380
-msgid "Trifid Nebula"
-msgstr "Trifid-köd"
+msgid "Hercules Globular Cluster"
+msgstr ""
 
 #: nebulae/default/names.dat:381
-msgid "Dead Man's Chest Cluster"
+msgid "Turtle Nebula"
 msgstr ""
 
 #: nebulae/default/names.dat:382
-msgid "Herschel 36"
-msgstr "Herschel 36"
-
-#: nebulae/default/names.dat:383
-msgid "Hourglass Cluster"
-msgstr "Homokóra csoport"
-
-#: nebulae/default/names.dat:384
-msgid "Webb's Cross"
-msgstr ""
-
-#: nebulae/default/names.dat:385
-msgid "Red spider Nebula"
-msgstr "Vörös pók köd"
-
-#: nebulae/default/names.dat:386
-msgid "Cat's Eye Nebula"
-msgstr "Macskaszem-köd"
-
-#: nebulae/default/names.dat:387 nebulae/default/names.dat:471
-msgid "Sunflower Nebula"
-msgstr "Napraforgó köd"
-
-#: nebulae/default/names.dat:388
-msgid "Snail Nebula"
-msgstr "Csiga köd"
-
-#: nebulae/default/names.dat:391
-msgid "Blue Racquetball Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:392
-msgid "Emerald Eye Planetary Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:393
-msgid "Eagle Nebula"
-msgstr "Sas-köd"
-
-#: nebulae/default/names.dat:394
-msgid "Star Queen"
-msgstr "Csillagkirálynő"
-
-#: nebulae/default/names.dat:395
-msgid "Black Swan Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:396
-msgid "Omega Nebula"
-msgstr "Omega köd"
-
-#: nebulae/default/names.dat:397
-msgid "Swan Nebula"
-msgstr "Hattyú köd"
-
-#: nebulae/default/names.dat:398
-msgid "Horseshoe Nebula"
-msgstr "Lópatkó köd"
-
-#: nebulae/default/names.dat:399
-msgid "Checkmark Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:401 nebulae/default/names.dat:402
-msgid "Edward's Galaxy"
-msgstr "Edward galaxis"
-
-#: nebulae/default/names.dat:403
-msgid "Great Sagittarius Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:404
-msgid "Santa's Sleigh Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:405
-msgid "Wild Duck Cluster"
-msgstr "Vadkacsa-klaszter"
-
-#: nebulae/default/names.dat:406
-msgid "July Salt-and-Pepper Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:407
-msgid "Scutum Salt-and-Pepper Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:408
-msgid "Ring Nebula"
-msgstr "Gyűrű-köd"
-
-#: nebulae/default/names.dat:409
-msgid "Chandelier Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:410
-msgid "R CrA Nebula"
-msgstr "R CrA köd"
-
-#: nebulae/default/names.dat:411
-msgid "Phantom Streak Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:412
-msgid "Bird's Head"
-msgstr "Madárfej"
-
-#: nebulae/default/names.dat:413
-msgid "Dandelion Puffball Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:414
-msgid "Pavo Globular Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:415
-msgid "The Starfish"
-msgstr ""
-
-#: nebulae/default/names.dat:416
-msgid "The Windmill"
-msgstr "Szélmalom"
-
-#: nebulae/default/names.dat:417
-msgid "Pentagon"
-msgstr "Ötszög"
-
-#: nebulae/default/names.dat:418
-msgid "Snowball Nebula"
-msgstr "Hógolyó köd"
-
-#: nebulae/default/names.dat:419
-msgid "Specter Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:420
-msgid "Hole in a Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:421
-msgid "Smoke Ring Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:423
-msgid "The Foxhead Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:424
-msgid "Barnard's Galaxy"
-msgstr "Barnard-galaxis"
-
-#: nebulae/default/names.dat:425
-msgid "Blinking planetary"
-msgstr "Pislogó bolygó"
-
-#: nebulae/default/names.dat:426
-msgid "Poodle Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:427
-msgid "Angelfish Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:428
-msgid "Arrowhead Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:429
-msgid "Dumbbell Nebula"
-msgstr "Súlyzó-köd"
-
-#: nebulae/default/names.dat:430
-msgid "Diabolo Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:431
-msgid "Apple Core Nebula"
-msgstr "Almamag köd"
-
-#: nebulae/default/names.dat:432
-msgid "Kite Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:433
-msgid "Condor Galaxy"
-msgstr "Kondorkeselyű galaxis"
-
-#: nebulae/default/names.dat:434
-msgid "20 Vulpeculae Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:435
-msgid "Crescent Nebula"
-msgstr "Félhold-köd"
-
-#: nebulae/default/names.dat:436
-msgid "Ear Nebula"
-msgstr "Fül köd"
-
-#: nebulae/default/names.dat:437
-msgid "Little Ring Nebula"
-msgstr "Kis gyűrű köd"
-
-#: nebulae/default/names.dat:438
-msgid "Blue Flash Nebula"
-msgstr "Kék villanás-köd"
-
-#: nebulae/default/names.dat:439
-msgid "Giant Behemoth Galaxy"
-msgstr "Nagy behemót galaxis"
-
-#: nebulae/default/names.dat:440
-msgid "The Inchworm Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:441
-msgid "The Rocking Horse Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:442
-msgid "Cooling Tower"
-msgstr "Hűtőtorony"
-
-#: nebulae/default/names.dat:443
-msgid "Ghost Bush Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:444
-msgid "Flying Geese Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:445
-msgid "Mothra Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:446
-msgid "Fireworks Galaxy"
-msgstr "Tüzijáték galaxis"
-
-#: nebulae/default/names.dat:447
-msgid "Filamentary Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:448
-msgid "West Veil Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:449
-msgid "Cirrus Nebula"
-msgstr "Cirrus köd"
-
-#: nebulae/default/names.dat:450
-msgid "Witch's Broom Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:451
-msgid "Witch's Broom Galaxy"
-msgstr "Boszorkányseprű galaxis"
-
-#: nebulae/default/names.dat:452
-msgid "East Veil Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:453
-msgid "Network Nebula"
-msgstr "Háló köd"
-
-#: nebulae/default/names.dat:454
-msgid "North America Nebula"
-msgstr "Észak-Amerika köd"
-
-#: nebulae/default/names.dat:455
-msgid "Fetus Nebula"
-msgstr "Magzat köd"
-
-#: nebulae/default/names.dat:456
-msgid "Coat Button Nebula"
-msgstr "Kabátgomb köd"
-
-#: nebulae/default/names.dat:457
-msgid "Saturn Nebula"
-msgstr "Szaturnusz-köd"
-
-#: nebulae/default/names.dat:458
-msgid "Iris Nebula"
-msgstr "Írisz köd"
-
-#: nebulae/default/names.dat:459
-msgid "Cheeseburger Nebula"
-msgstr "Sajtburger köd"
-
-#: nebulae/default/names.dat:460
-msgid "Pink Pillow Nebula"
-msgstr "Rózsaszín párna köd"
-
-#: nebulae/default/names.dat:461
-msgid "Magic Carpet Nebula"
-msgstr "Varázsszőnyeg köd"
-
-#: nebulae/default/names.dat:462
-msgid "Green Rectangle Nebula"
-msgstr "Zöld téglalap köd"
-
-#: nebulae/default/names.dat:463
-msgid "Pegasus Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:464
-msgid "Jellyfish Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:465
-msgid "Small Cluster Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:466
-msgid "NGC 7129 IR Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:467
-msgid "Star Lizard Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:468
-msgid "Drunken Lizard Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:469
-msgid "Atoms for Peace Galaxy"
-msgstr "Békeatom-galaxis"
-
-#: nebulae/default/names.dat:470
-msgid "Helix Nebula"
-msgstr "Hélix-köd"
-
-#: nebulae/default/names.dat:472 nebulae/default/names.dat:473
-#: nebulae/default/names.dat:474 nebulae/default/names.dat:475
-msgid "Stephan's Quintet"
-msgstr "Stephan-kvintett"
-
-#: nebulae/default/names.dat:476
-msgid "Deer Lick Group"
-msgstr "Szarvas nyelve csoport"
-
-#: nebulae/default/names.dat:477
-msgid "The Wizard Nebula"
-msgstr "Varázsló ködfolt"
-
-#: nebulae/default/names.dat:478
-msgid "Grand Design Galaxy"
-msgstr "Nagy terv galaxis"
-
-#: nebulae/default/names.dat:479
-msgid "Superman Galaxy"
-msgstr "Superman galaxis"
-
-#: nebulae/default/names.dat:480
-msgid "The Dormouse Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:481
-msgid "The Arrowhead Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:482 nebulae/default/names.dat:483
-#: nebulae/default/names.dat:484 nebulae/default/names.dat:485
-msgid "Grus Quartet"
-msgstr "Grus kvartett"
-
-#: nebulae/default/names.dat:486 nebulae/default/names.dat:491
-msgid "Bubble Nebula"
-msgstr "Buborék-köd"
-
-#: nebulae/default/names.dat:487
-msgid "Cassiopeia Salt-and-Pepper Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:488
-msgid "October Salt-and-Pepper Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:489
-msgid "Blue Snowball"
-msgstr "Kék hógolyó"
-
-#: nebulae/default/names.dat:490
-msgid "Copeland's Blue Snowball"
-msgstr "Copeland kék hógolyója"
-
-#: nebulae/default/names.dat:492
-msgid "Fried-egg Galaxy"
-msgstr "Tükörtojás galaxis"
-
-#: nebulae/default/names.dat:493
-msgid "Caroline's Rose Cluster"
-msgstr "Karolina rózsája csoport"
-
-#: nebulae/default/names.dat:494
-msgid "Ghost Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:495
-msgid "Star Mist Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:496
-msgid "The Widow's Web Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:497
-msgid "The Little Sombrero Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:498
-msgid "Electric Arc Galaxy"
-msgstr "Elektromos ív galaxis"
-
-#: nebulae/default/names.dat:499
-msgid "Starburst Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:500 nebulae/default/names.dat:501
-msgid "γ Cas Nebula"
-msgstr "γ Cas köd"
-
-#: nebulae/default/names.dat:502
-msgid "Maffei Group"
-msgstr "Maffei csoport"
-
-#: nebulae/default/names.dat:503
-msgid "ο Per Cloud"
-msgstr ""
-
-#: nebulae/default/names.dat:504
-msgid "Gingrich 1"
-msgstr "Gingrich 1"
-
-#: nebulae/default/names.dat:505
-msgid "Barnard's Merope Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:506
-msgid "Flaming Star Nebula"
-msgstr "Tűzcsillag-köd"
-
-#: nebulae/default/names.dat:507
-msgid "The Tadpoles"
-msgstr ""
-
-#: nebulae/default/names.dat:508
-msgid "Spider Nebula"
-msgstr "Pók nebula"
-
-#: nebulae/default/names.dat:509
-msgid "Spirograph Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:510
-msgid "Raspberry Nebula"
-msgstr "Málna köd"
-
-#: nebulae/default/names.dat:511
-msgid "Jellyfish Nebula"
-msgstr "Medúza köd"
-
-#: nebulae/default/names.dat:512
-msgid "Gemini A"
-msgstr "Gemini A"
-
-#: nebulae/default/names.dat:513
-msgid "Papillon"
-msgstr "Pillangó"
-
-#: nebulae/default/names.dat:514
-msgid "γ Cyg Nebula"
-msgstr "γ Cyg köd"
-
-#: nebulae/default/names.dat:515
-msgid "ZW II 108 Group"
-msgstr "ZW II 108 csoport"
-
-#: nebulae/default/names.dat:516
-msgid "Elephant's Trunk Nebula"
-msgstr "Eelefánt törzse köd"
-
-#: nebulae/default/names.dat:517
-msgid "Fish Head Nebula"
-msgstr "Halfej köd"
-
-#: nebulae/default/names.dat:518
-msgid "Heart Nebula"
-msgstr "Szív köd"
-
-#: nebulae/default/names.dat:519
-msgid "The Running Dog Nebula"
-msgstr "Szaladó kutya köd"
-
-#: nebulae/default/names.dat:520
-msgid "Valentine Nebula"
-msgstr "Valentin köd"
-
-#: nebulae/default/names.dat:521
-msgid "AFGL 333 Cloud"
-msgstr "AFGL 333 felhő"
-
-#: nebulae/default/names.dat:522
-msgid "Soul Nebula"
-msgstr "Lélek köd"
-
-#: nebulae/default/names.dat:523
-msgid "Witch Head Nebula"
-msgstr "Banyafej-köd"
-
-#: nebulae/default/names.dat:525
-msgid "Toby Jug Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:526
-msgid "ο Vel Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:527
-msgid "Browning Galaxy"
-msgstr ""
-
-#: nebulae/default/names.dat:528
-msgid "Coddington's Nebula"
-msgstr "Coddington köd"
-
-#: nebulae/default/names.dat:529
-msgid "Southern Pleiades"
-msgstr "Déli Pleiádok"
-
-#: nebulae/default/names.dat:530
-msgid "θ Car Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:531
-msgid "Running Chicken Nebula"
-msgstr "Futó csirke-köd"
-
-#: nebulae/default/names.dat:532
-msgid "λ Cen Nebula"
-msgstr "λ Cen köd"
-
-#: nebulae/default/names.dat:533
-msgid "Thackeray's Globules"
-msgstr ""
-
-#: nebulae/default/names.dat:534
-msgid "Lemon slice Nebula"
-msgstr "Citromszelet köd"
-
-#: nebulae/default/names.dat:535
-msgid "Theoretician's Nebula"
-msgstr "Elméleti szakember köd"
-
-#: nebulae/default/names.dat:536
-msgid "Baby Eskimo Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:538
-msgid "Retina Nebula"
-msgstr "Retina köd"
-
-#: nebulae/default/names.dat:539
-msgid "Blue Horsehead Nebula"
-msgstr "Kék lófej köd"
-
-#: nebulae/default/names.dat:540
-msgid "White Eyed Pea Nebula"
-msgstr ""
-
-#: nebulae/default/names.dat:541
-msgid "ρ Oph Nebula"
-msgstr "ρ Oph köd"
-
-#: nebulae/default/names.dat:542 nebulae/default/names.dat:623
-msgid "Antares Nebula"
-msgstr "Antares köd"
-
-#: nebulae/default/names.dat:543
-msgid "Prawn Nebula"
-msgstr "Garnélarák köd"
-
-#: nebulae/default/names.dat:544
 msgid "False Comet Nebula"
 msgstr "Hamis üstökös köd"
 
-#: nebulae/default/names.dat:545
-msgid "Summer Beehive Cluster"
+#: nebulae/default/names.dat:383
+msgid "Northern Jewel Box Cluster"
+msgstr "Északi ékszerdoboz csoport"
+
+#: nebulae/default/names.dat:384
+msgid "Table of Scorpius Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:546
-msgid "Poseidon's Trident Cluster"
+#: nebulae/default/names.dat:385
+msgid "Flickering Globular Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:547
-msgid "Graff's Cluster"
+#: nebulae/default/names.dat:386
+msgid "Moth Wing Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:548
-msgid "Shapley-Ames 5"
-msgstr "Shapley-Ames 5"
+#: nebulae/default/names.dat:387
+msgid "Bug Nebula"
+msgstr "Bogár-köd"
 
-#: nebulae/default/names.dat:549
-msgid "Pelican Nebula"
-msgstr "Pelikán-köd"
+#: nebulae/default/names.dat:389
+msgid "Box Nebula"
+msgstr "Doboz-köd"
 
-#: nebulae/default/names.dat:550 nebulae/default/names.dat:552
-msgid "Cocoon Nebula"
-msgstr "Selyemgubó-köd"
+#: nebulae/default/names.dat:390
+msgid "Cat's Paw Nebula"
+msgstr "Macskamancs köd"
 
-#: nebulae/default/names.dat:551
-msgid "Southern Integral Sign"
-msgstr "Déli integráljel"
-
-#: nebulae/default/names.dat:553
-msgid "Lagoon Nebula"
-msgstr "Lagúna-köd"
-
-#: nebulae/default/names.dat:554
-msgid "Small Sagittarius Star Cloud"
+#: nebulae/default/names.dat:391
+msgid "Cheerio Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:555
-msgid "Delle Caustiche"
-msgstr "Delle Caustiche"
+#: nebulae/default/names.dat:392 nebulae/default/names.dat:425
+msgid "Lobster Nebula"
+msgstr "Homár köd"
 
-#: nebulae/default/names.dat:556
-msgid "Winnecke 4"
-msgstr "Winnecke 4"
+#: nebulae/default/names.dat:393
+msgid "War and Peace Nebula"
+msgstr "Háború és béke köd"
 
-#: nebulae/default/names.dat:557 skycultures/western_rey/star_names.fab:26
-msgid "Pleiades"
-msgstr "Plejádok"
+#: nebulae/default/names.dat:394
+msgid "Little Ghost Nebula"
+msgstr "Kis szellem köd"
 
-#: nebulae/default/names.dat:558
-msgid "Seven Sisters"
-msgstr "Hét nővér"
-
-#: nebulae/default/names.dat:559
-msgid "Subaru"
+#: nebulae/default/names.dat:395
+msgid "Tonantzintla 1"
 msgstr ""
 
-#: nebulae/default/names.dat:560
-msgid "α Per Cluster"
-msgstr "alfa Per  csillaghalmaz"
-
-#: nebulae/default/names.dat:561
-msgid "α Per Moving Group"
+#: nebulae/default/names.dat:396
+msgid "Phantom Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:562
-msgid "Coma Berenices Cluster"
-msgstr "Bereniké haja csoport"
-
-#: nebulae/default/names.dat:563
-msgid "Taurus Poniatovii Cluster"
+#: nebulae/default/names.dat:398
+msgid "Splendors of the Heavens"
 msgstr ""
 
-#: nebulae/default/names.dat:564
-msgid "Taurus Dark Cloud Nebula"
+#: nebulae/default/names.dat:399
+msgid "Silver Nugget Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:565
-msgid "Horsehead Nebula"
-msgstr "Lófej-köd"
+#: nebulae/default/names.dat:400 nebulae/default/names.dat:448
+msgid "Little Gem Nebula"
+msgstr "Kis drágakő köd"
 
-#: nebulae/default/names.dat:566 nebulae/default/names.dat:567
-#: nebulae/default/names.dat:568 nebulae/default/names.dat:569
-msgid "Pipe (stem)"
-msgstr "Cső (tő)"
-
-#: nebulae/default/names.dat:570 nebulae/default/names.dat:574
-msgid "Ink Spot Nebula"
-msgstr "Tintapaca ködfolt"
-
-#: nebulae/default/names.dat:571
-msgid "Snake Nebula"
-msgstr "Kígyó köd"
-
-#: nebulae/default/names.dat:572
-msgid "The S Nebula"
+#: nebulae/default/names.dat:401
+msgid "Tom Thumb Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:573
-msgid "Pipe (bowl)"
-msgstr "Cső (tál)"
+#: nebulae/default/names.dat:402
+msgid "Ptolemy's Cluster"
+msgstr "Ptolemaiosz-klaszter"
 
-#: nebulae/default/names.dat:575
-msgid "Parrot's Head Nebula"
-msgstr "Papagájfej köd"
-
-#: nebulae/default/names.dat:576 nebulae/default/names.dat:577
-msgid "E Nebula"
-msgstr "E Nebula"
-
-#: nebulae/default/names.dat:578
-msgid "Fish on the platter nebula"
+#: nebulae/default/names.dat:403
+msgid "Lost in Space Galaxy"
 msgstr ""
 
-#: nebulae/default/names.dat:579
-msgid "Hyades"
-msgstr "Hiádok"
+#: nebulae/default/names.dat:404
+msgid "Trifid Nebula"
+msgstr "Trifid-köd"
 
-#: nebulae/default/names.dat:580
-msgid "Coalsack Nebula"
-msgstr "Szeneszsák-köd"
-
-#: nebulae/default/names.dat:581
-msgid "Orion Cluster"
-msgstr "Orion csoport"
-
-#: nebulae/default/names.dat:582
-msgid "Orion Belt Cluster"
-msgstr "Orion öve csoport"
-
-#: nebulae/default/names.dat:583
-msgid "π Pup Cluster"
+#: nebulae/default/names.dat:405
+msgid "Dead Man's Chest Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:584
-msgid "Tuft in the Tail of the Dog Cluster"
+#: nebulae/default/names.dat:406
+msgid "Herschel 36"
+msgstr "Herschel 36"
+
+#: nebulae/default/names.dat:407
+msgid "Hourglass Cluster"
+msgstr "Homokóra csoport"
+
+#: nebulae/default/names.dat:408
+msgid "Webb's Cross"
 msgstr ""
 
-#: nebulae/default/names.dat:585
-msgid "Markarian 18 Cluster"
+#: nebulae/default/names.dat:409
+msgid "Red spider Nebula"
+msgstr "Vörös pók köd"
+
+#: nebulae/default/names.dat:410
+msgid "Cat's Eye Nebula"
+msgstr "Macskaszem-köd"
+
+#: nebulae/default/names.dat:411 nebulae/default/names.dat:501
+msgid "Sunflower Nebula"
+msgstr "Napraforgó köd"
+
+#: nebulae/default/names.dat:412
+msgid "Snail Nebula"
+msgstr "Csiga köd"
+
+#: nebulae/default/names.dat:415
+msgid "Blue Racquetball Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:586
-msgid "η Car Cluster"
+#: nebulae/default/names.dat:416
+msgid "Emerald Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:587
-msgid "Ursa Major Cluster"
-msgstr "Nagymedve csoport"
-
-#: nebulae/default/names.dat:588
-msgid "Antares Cluster"
-msgstr "Antares csoport"
-
-#: nebulae/default/names.dat:589
-msgid "Coathanger"
-msgstr "Kabátfogas"
-
-#: nebulae/default/names.dat:590
-msgid "Al Sufi's Cluster"
+#: nebulae/default/names.dat:417
+msgid "Turquoise Orb Nebula"
 msgstr ""
 
-#: nebulae/default/names.dat:591
-msgid "Brocchi's Cluster"
+#: nebulae/default/names.dat:418
+msgid "Eagle Nebula"
+msgstr "Sas-köd"
+
+#: nebulae/default/names.dat:419
+msgid "Star Queen"
+msgstr "Csillagkirálynő"
+
+#: nebulae/default/names.dat:420
+msgid "Black Swan Cluster"
 msgstr ""
 
-#: nebulae/default/names.dat:592
-msgid "Burnham's Nebula"
-msgstr "Burnham-köd"
+#: nebulae/default/names.dat:421
+msgid "Omega Nebula"
+msgstr "Omega köd"
 
-#: nebulae/default/names.dat:593
-msgid "T Tauri Nebula"
-msgstr "T Tauri köd"
+#: nebulae/default/names.dat:422
+msgid "Swan Nebula"
+msgstr "Hattyú köd"
 
-#: nebulae/default/names.dat:594
-msgid "Orion Loop Nebula"
-msgstr "Orion hurok köd"
+#: nebulae/default/names.dat:423
+msgid "Horseshoe Nebula"
+msgstr "Lópatkó köd"
 
-#: nebulae/default/names.dat:595
-msgid "Green Ring Nebula"
-msgstr "Zöld gyűrű nebula"
+#: nebulae/default/names.dat:424
+msgid "Checkmark Nebula"
+msgstr ""
 
-#: nebulae/default/names.dat:597
-msgid "Little Cocoon Nebula"
-msgstr "Kis báb köd"
+#: nebulae/default/names.dat:426 nebulae/default/names.dat:427
+msgid "Edward's Galaxy"
+msgstr "Edward galaxis"
 
-#: nebulae/default/names.dat:598
-msgid "Cygnus Star Cloud"
-msgstr "Hattyú csillagköd"
+#: nebulae/default/names.dat:428
+msgid "Tadpole Cluster"
+msgstr ""
 
-#: nebulae/default/names.dat:599
-msgid "Tulip Nebula"
-msgstr "Tulipán köd"
+#: nebulae/default/names.dat:429
+msgid "Great Sagittarius Cluster"
+msgstr ""
 
-#: nebulae/default/names.dat:600
-msgid "Cygnus Loop"
-msgstr "Cygnus hurok"
+#: nebulae/default/names.dat:430
+msgid "Santa's Sleigh Cluster"
+msgstr ""
 
-#: nebulae/default/names.dat:601
+#: nebulae/default/names.dat:431
+msgid "Wild Duck Cluster"
+msgstr "Vadkacsa-klaszter"
+
+#: nebulae/default/names.dat:432
+msgid "July Salt-and-Pepper Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:433
+msgid "Scutum Salt-and-Pepper Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:434
+msgid "Ring Nebula"
+msgstr "Gyűrű-köd"
+
+#: nebulae/default/names.dat:435
+msgid "Chandelier Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:436
+msgid "R CrA Nebula"
+msgstr "R CrA köd"
+
+#: nebulae/default/names.dat:437
+msgid "Phantom Streak Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:438
+msgid "Bird's Head"
+msgstr "Madárfej"
+
+#: nebulae/default/names.dat:439
+msgid "Dandelion Puffball Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:440
+msgid "Pavo Globular Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:441
+msgid "The Starfish"
+msgstr ""
+
+#: nebulae/default/names.dat:442
+msgid "The Windmill"
+msgstr "Szélmalom"
+
+#: nebulae/default/names.dat:443
+msgid "Pentagon"
+msgstr "Ötszög"
+
+#: nebulae/default/names.dat:444
+msgid "Snowball Nebula"
+msgstr "Hógolyó köd"
+
+#: nebulae/default/names.dat:445
+msgid "Specter Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:446
+msgid "Hole in a Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:447
+msgid "Nefertifi's headpiece"
+msgstr ""
+
+#: nebulae/default/names.dat:449
+msgid "The Foxhead Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:450
+msgid "Barnard's Galaxy"
+msgstr "Barnard-galaxis"
+
+#: nebulae/default/names.dat:451
+msgid "Blinking planetary"
+msgstr "Pislogó bolygó"
+
+#: nebulae/default/names.dat:452
+msgid "Poodle Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:453
+msgid "Angelfish Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:454
+msgid "Arrowhead Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:455
+msgid "Dumbbell Nebula"
+msgstr "Súlyzó-köd"
+
+#: nebulae/default/names.dat:456
+msgid "Diabolo Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:457
+msgid "Apple Core Nebula"
+msgstr "Almamag köd"
+
+#: nebulae/default/names.dat:458
+msgid "Kite Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:459
+msgid "Condor Galaxy"
+msgstr "Kondorkeselyű galaxis"
+
+#: nebulae/default/names.dat:460
+msgid "20 Vulpeculae Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:461
+msgid "Crescent Nebula"
+msgstr "Félhold-köd"
+
+#: nebulae/default/names.dat:462
+msgid "Ear Nebula"
+msgstr "Fül köd"
+
+#: nebulae/default/names.dat:463
+msgid "Little Ring Nebula"
+msgstr "Kis gyűrű köd"
+
+#: nebulae/default/names.dat:464
+msgid "Blue Flash Nebula"
+msgstr "Kék villanás-köd"
+
+#: nebulae/default/names.dat:465
+msgid "Giant Behemoth Galaxy"
+msgstr "Nagy behemót galaxis"
+
+#: nebulae/default/names.dat:466
+msgid "The Inchworm Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:467
+msgid "The Rocking Horse Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:468
+msgid "Cooling Tower"
+msgstr "Hűtőtorony"
+
+#: nebulae/default/names.dat:469
+msgid "Little Sisters"
+msgstr ""
+
+#: nebulae/default/names.dat:470
+msgid "Ghost Bush Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:471
+msgid "Flying Geese Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:472
+msgid "Mothra Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:473
+msgid "Fireworks Galaxy"
+msgstr "Tüzijáték galaxis"
+
+#: nebulae/default/names.dat:474
+msgid "Filamentary Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:475
+msgid "West Veil Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:476
+msgid "Cirrus Nebula"
+msgstr "Cirrus köd"
+
+#: nebulae/default/names.dat:477
+msgid "Witch's Broom Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:478
+msgid "Fleming's Triangular Wisp"
+msgstr ""
+
+#: nebulae/default/names.dat:479
+msgid "Witch's Broom Galaxy"
+msgstr "Boszorkányseprű galaxis"
+
+#: nebulae/default/names.dat:480
+msgid "East Veil Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:481
+msgid "Network Nebula"
+msgstr "Háló köd"
+
+#: nebulae/default/names.dat:482 nebulae/default/names.dat:632
 msgid "Veil Nebula"
 msgstr "Fátyol-köd"
 
-#: nebulae/default/names.dat:602
-msgid "Sadr Region"
-msgstr "Sadr Régió"
-
-#: nebulae/default/names.dat:603
-msgid "Flying Bat Nebula"
-msgstr "Repülő denevér köd"
-
-#: nebulae/default/names.dat:604 nebulae/default/names.dat:625
-msgid "Cave Nebula"
-msgstr "Barlang nebula"
-
-#: nebulae/default/names.dat:605
-msgid "Dreyer's Object"
-msgstr "Dreyer objektuma"
-
-#: nebulae/default/names.dat:606
-msgid "Pacman Nebula"
-msgstr "Pacman nebula"
-
-#: nebulae/default/names.dat:607
-msgid "Dolphin Nebula"
-msgstr "Delfin köd"
-
-#: nebulae/default/names.dat:608
-msgid "Second Closest Planetary"
+#: nebulae/default/names.dat:483
+msgid "Bird's Nest"
 msgstr ""
 
+#: nebulae/default/names.dat:484
+msgid "North America Nebula"
+msgstr "Észak-Amerika köd"
+
+#: nebulae/default/names.dat:485
+msgid "Fetus Nebula"
+msgstr "Magzat köd"
+
+#: nebulae/default/names.dat:486
+msgid "Coat Button Nebula"
+msgstr "Kabátgomb köd"
+
+#: nebulae/default/names.dat:487
+msgid "Saturn Nebula"
+msgstr "Szaturnusz-köd"
+
+#: nebulae/default/names.dat:488
+msgid "Iris Nebula"
+msgstr "Írisz köd"
+
+#: nebulae/default/names.dat:489
+msgid "Cheeseburger Nebula"
+msgstr "Sajtburger köd"
+
+#: nebulae/default/names.dat:490
+msgid "Pink Pillow Nebula"
+msgstr "Rózsaszín párna köd"
+
+#: nebulae/default/names.dat:491
+msgid "Magic Carpet Nebula"
+msgstr "Varázsszőnyeg köd"
+
+#: nebulae/default/names.dat:492
+msgid "Green Rectangle Nebula"
+msgstr "Zöld téglalap köd"
+
+#: nebulae/default/names.dat:493
+msgid "Pegasus Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:494
+msgid "Jellyfish Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:495
+msgid "Small Cluster Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:496
+msgid "NGC 7129 IR Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:497
+msgid "Star Lizard Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:498
+msgid "Drunken Lizard Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:499
+msgid "Atoms for Peace Galaxy"
+msgstr "Békeatom-galaxis"
+
+#: nebulae/default/names.dat:500
+msgid "Helix Nebula"
+msgstr "Hélix-köd"
+
+#: nebulae/default/names.dat:502 nebulae/default/names.dat:503
+#: nebulae/default/names.dat:504 nebulae/default/names.dat:505
+msgid "Stephan's Quintet"
+msgstr "Stephan-kvintett"
+
+#: nebulae/default/names.dat:506
+msgid "Deer Lick Group"
+msgstr "Szarvas nyelve csoport"
+
+#: nebulae/default/names.dat:507
+msgid "The Wizard Nebula"
+msgstr "Varázsló ködfolt"
+
+#: nebulae/default/names.dat:508
+msgid "Grand Design Galaxy"
+msgstr "Nagy terv galaxis"
+
+#: nebulae/default/names.dat:509
+msgid "Superman Galaxy"
+msgstr "Superman galaxis"
+
+#: nebulae/default/names.dat:510
+msgid "The Dormouse Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:511
+msgid "The Arrowhead Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:512 nebulae/default/names.dat:513
+#: nebulae/default/names.dat:514 nebulae/default/names.dat:515
+msgid "Grus Quartet"
+msgstr "Grus kvartett"
+
+#: nebulae/default/names.dat:516 nebulae/default/names.dat:521
+msgid "Bubble Nebula"
+msgstr "Buborék-köd"
+
+#: nebulae/default/names.dat:517
+msgid "Cassiopeia Salt-and-Pepper Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:518
+msgid "October Salt-and-Pepper Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:519
+msgid "Blue Snowball"
+msgstr "Kék hógolyó"
+
+#: nebulae/default/names.dat:520
+msgid "Copeland's Blue Snowball"
+msgstr "Copeland kék hógolyója"
+
+#: nebulae/default/names.dat:522
+msgid "Fried-egg Galaxy"
+msgstr "Tükörtojás galaxis"
+
+#: nebulae/default/names.dat:523
+msgid "Caroline's Rose Cluster"
+msgstr "Karolina rózsája csoport"
+
+#: nebulae/default/names.dat:524
+msgid "Ghost Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:525
+msgid "Star Mist Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:526
+msgid "The Widow's Web Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:527
+msgid "The Little Sombrero Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:528
+msgid "Electric Arc Galaxy"
+msgstr "Elektromos ív galaxis"
+
+#: nebulae/default/names.dat:529
+msgid "Starburst Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:530 nebulae/default/names.dat:531
+msgid "γ Cas Nebula"
+msgstr "γ Cas köd"
+
+#: nebulae/default/names.dat:532
+msgid "Maffei 1 Group"
+msgstr ""
+
+#: nebulae/default/names.dat:533
+msgid "ο Per Cloud"
+msgstr ""
+
+#: nebulae/default/names.dat:534
+msgid "Gingrich 1"
+msgstr "Gingrich 1"
+
+#: nebulae/default/names.dat:535
+msgid "Barnard's Merope Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:536
+msgid "Flaming Star Nebula"
+msgstr "Tűzcsillag-köd"
+
+#: nebulae/default/names.dat:537
+msgid "The Tadpoles"
+msgstr ""
+
+#: nebulae/default/names.dat:538
+msgid "Spider Nebula"
+msgstr "Pók nebula"
+
+#: nebulae/default/names.dat:539
+msgid "Spirograph Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:540
+msgid "Raspberry Nebula"
+msgstr "Málna köd"
+
+#: nebulae/default/names.dat:541
+msgid "Jellyfish Nebula"
+msgstr "Medúza köd"
+
+#: nebulae/default/names.dat:542
+msgid "Gemini A"
+msgstr "Gemini A"
+
+#: nebulae/default/names.dat:543
+msgid "Papillon"
+msgstr "Pillangó"
+
+#: nebulae/default/names.dat:544
+msgid "γ Cyg Nebula"
+msgstr "γ Cyg köd"
+
+#: nebulae/default/names.dat:545
+msgid "ZW II 108 Group"
+msgstr "ZW II 108 csoport"
+
+#: nebulae/default/names.dat:546
+msgid "Elephant's Trunk Nebula"
+msgstr "Eelefánt törzse köd"
+
+#: nebulae/default/names.dat:547
+msgid "Fish Head Nebula"
+msgstr "Halfej köd"
+
+#: nebulae/default/names.dat:548
+msgid "Heart Nebula"
+msgstr "Szív köd"
+
+#: nebulae/default/names.dat:549
+msgid "The Running Dog Nebula"
+msgstr "Szaladó kutya köd"
+
+#: nebulae/default/names.dat:550
+msgid "Valentine Nebula"
+msgstr "Valentin köd"
+
+#: nebulae/default/names.dat:551
+msgid "AFGL 333 Cloud"
+msgstr "AFGL 333 felhő"
+
+#: nebulae/default/names.dat:552
+msgid "Soul Nebula"
+msgstr "Lélek köd"
+
+#: nebulae/default/names.dat:553
+msgid "Witch Head Nebula"
+msgstr "Banyafej-köd"
+
+#: nebulae/default/names.dat:554
+msgid "Toby Jug Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:556
+msgid "ο Vel Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:557
+msgid "Browning Galaxy"
+msgstr ""
+
+#: nebulae/default/names.dat:558
+msgid "Coddington's Nebula"
+msgstr "Coddington köd"
+
+#: nebulae/default/names.dat:559
+msgid "Southern Pleiades"
+msgstr "Déli Pleiádok"
+
+#: nebulae/default/names.dat:560
+msgid "θ Car Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:561
+msgid "Running Chicken Nebula"
+msgstr "Futó csirke-köd"
+
+#: nebulae/default/names.dat:562
+msgid "λ Cen Nebula"
+msgstr "λ Cen köd"
+
+#: nebulae/default/names.dat:563
+msgid "Thackeray's Globules"
+msgstr ""
+
+#: nebulae/default/names.dat:564
+msgid "Lemon slice Nebula"
+msgstr "Citromszelet köd"
+
+#: nebulae/default/names.dat:565
+msgid "Theoretician's Nebula"
+msgstr "Elméleti szakember köd"
+
+#: nebulae/default/names.dat:566
+msgid "Baby Eskimo Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:568
+msgid "Retina Nebula"
+msgstr "Retina köd"
+
+#: nebulae/default/names.dat:569
+msgid "Blue Horsehead Nebula"
+msgstr "Kék lófej köd"
+
+#: nebulae/default/names.dat:570
+msgid "White-eyed Pea Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:571
+msgid "ρ Oph Nebula"
+msgstr "ρ Oph köd"
+
+#: nebulae/default/names.dat:572 nebulae/default/names.dat:656
+msgid "Antares Nebula"
+msgstr "Antares köd"
+
+#: nebulae/default/names.dat:573
+msgid "Prawn Nebula"
+msgstr "Garnélarák köd"
+
+#: nebulae/default/names.dat:574
+msgid "Summer Beehive Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:575
+msgid "Poseidon's Trident Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:576
+msgid "Graff's Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:577
+msgid "Shapley-Ames 5"
+msgstr "Shapley-Ames 5"
+
+#: nebulae/default/names.dat:578
+msgid "P Cyg Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:579
+msgid "Pelican Nebula"
+msgstr "Pelikán-köd"
+
+#: nebulae/default/names.dat:580 nebulae/default/names.dat:582
+msgid "Cocoon Nebula"
+msgstr "Selyemgubó-köd"
+
+#: nebulae/default/names.dat:581
+msgid "Southern Integral Sign"
+msgstr "Déli integráljel"
+
+#: nebulae/default/names.dat:583
+msgid "Lagoon Nebula"
+msgstr "Lagúna-köd"
+
+#: nebulae/default/names.dat:584
+msgid "Small Sagittarius Star Cloud"
+msgstr ""
+
+#: nebulae/default/names.dat:585
+msgid "Delle Caustiche"
+msgstr "Delle Caustiche"
+
+#: nebulae/default/names.dat:586
+msgid "Winnecke 4"
+msgstr "Winnecke 4"
+
+#: nebulae/default/names.dat:587 skycultures/western_rey/star_names.fab:26
+msgid "Pleiades"
+msgstr "Plejádok"
+
+#: nebulae/default/names.dat:588
+msgid "Seven Sisters"
+msgstr "Hét nővér"
+
+#: nebulae/default/names.dat:589
+msgid "Subaru"
+msgstr ""
+
+#: nebulae/default/names.dat:590
+msgid "α Per Cluster"
+msgstr "alfa Per  csillaghalmaz"
+
+#: nebulae/default/names.dat:591
+msgid "α Per Moving Group"
+msgstr ""
+
+#: nebulae/default/names.dat:592
+msgid "Coma Berenices Cluster"
+msgstr "Bereniké haja csoport"
+
+#: nebulae/default/names.dat:593
+msgid "Coma Star Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:594
+msgid "Taurus Poniatovii Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:595
+msgid "Taurus Dark Cloud Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:596
+msgid "Horsehead Nebula"
+msgstr "Lófej-köd"
+
+#: nebulae/default/names.dat:597 nebulae/default/names.dat:598
+#: nebulae/default/names.dat:599 nebulae/default/names.dat:600
+msgid "Pipe (stem)"
+msgstr "Cső (tő)"
+
+#: nebulae/default/names.dat:601 nebulae/default/names.dat:605
+msgid "Ink Spot Nebula"
+msgstr "Tintapaca ködfolt"
+
+#: nebulae/default/names.dat:602
+msgid "Snake Nebula"
+msgstr "Kígyó köd"
+
+#: nebulae/default/names.dat:603
+msgid "The S Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:604
+msgid "Pipe (bowl)"
+msgstr "Cső (tál)"
+
+#: nebulae/default/names.dat:606
+msgid "Parrot's Head Nebula"
+msgstr "Papagájfej köd"
+
+#: nebulae/default/names.dat:607 nebulae/default/names.dat:608
+msgid "E Nebula"
+msgstr "E Nebula"
+
 #: nebulae/default/names.dat:609
-msgid "Northern Trifid"
-msgstr "Északi Trifid ködfolt"
+msgid "Fish on the platter nebula"
+msgstr ""
 
 #: nebulae/default/names.dat:610
-msgid "Spaghetti Nebula"
-msgstr "Spagetti nebula"
+msgid "Hyades"
+msgstr "Hiádok"
 
 #: nebulae/default/names.dat:611
-msgid "Simeis 147"
-msgstr "Simeis 147"
+msgid "Coalsack Nebula"
+msgstr "Szeneszsák-köd"
 
 #: nebulae/default/names.dat:612
-msgid "Lower's Nebula"
-msgstr "Lower-köd"
+msgid "Orion Cluster"
+msgstr "Orion csoport"
 
 #: nebulae/default/names.dat:613
-msgid "Angelfish Nebula"
-msgstr "Vitorláshal Ködfolt"
+msgid "Orion Belt Cluster"
+msgstr "Orion öve csoport"
 
 #: nebulae/default/names.dat:614
-msgid "Orion's Head Nebula"
-msgstr "Orion feje köd"
+msgid "π Pup Cluster"
+msgstr ""
 
 #: nebulae/default/names.dat:615
-msgid "North Orion Bubble"
+msgid "Tuft in the Tail of the Dog Cluster"
 msgstr ""
 
 #: nebulae/default/names.dat:616
-msgid "Medusa Nebula"
-msgstr "Medúza nebula"
+msgid "Markarian 18 Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:617
+msgid "η Car Cluster"
+msgstr ""
 
 #: nebulae/default/names.dat:618
-msgid "Barnard's Loop"
-msgstr "Bernard hurokja"
+msgid "Ursa Major Cluster"
+msgstr "Nagymedve csoport"
 
 #: nebulae/default/names.dat:619
-msgid "Seagull Nebula"
-msgstr "Sirály nebula"
+msgid "Antares Cluster"
+msgstr "Antares csoport"
 
 #: nebulae/default/names.dat:620
-msgid "Snowman Nebula"
-msgstr "Hóember-köd"
+msgid "Coathanger"
+msgstr "Kabátfogas"
 
 #: nebulae/default/names.dat:621
-msgid "Etched Hourglass Nebula"
+msgid "Al Sufi's Cluster"
 msgstr ""
 
 #: nebulae/default/names.dat:622
-msgid "Engraved Hourglass Nebula"
+msgid "Brocchi's Cluster"
 msgstr ""
+
+#: nebulae/default/names.dat:623
+msgid "Burnham's Nebula"
+msgstr "Burnham-köd"
 
 #: nebulae/default/names.dat:624
-msgid "Ghost Nebula"
-msgstr "Szellem Ködfolt"
+msgid "T Tauri Nebula"
+msgstr "T Tauri köd"
+
+#: nebulae/default/names.dat:625
+msgid "Orion Loop Nebula"
+msgstr "Orion hurok köd"
 
 #: nebulae/default/names.dat:626
-msgid "Vulture Head Nebula"
-msgstr "Keselyűfej köd"
-
-#: nebulae/default/names.dat:627
-msgid "Baby Eagle Nebula"
-msgstr ""
+msgid "Green Ring Nebula"
+msgstr "Zöld gyűrű nebula"
 
 #: nebulae/default/names.dat:628
-msgid "Orion B"
-msgstr "Orion B"
+msgid "Little Cocoon Nebula"
+msgstr "Kis báb köd"
 
 #: nebulae/default/names.dat:629
-msgid "Northern Coalsack Nebula"
-msgstr "Északi szeneszsák köd"
+msgid "Cygnus Star Cloud"
+msgstr "Hattyú csillagköd"
 
 #: nebulae/default/names.dat:630
-msgid "Gulf of Mexico Nebula"
-msgstr "Mexikói-öböl köd"
+msgid "Tulip Nebula"
+msgstr "Tulipán köd"
 
-#: nebulae/default/names.dat:631 nebulae/default/names.dat:633
-msgid "Taffy Galaxies"
-msgstr "Karamella galaxisok"
+#: nebulae/default/names.dat:631
+msgid "Cygnus Loop"
+msgstr "Cygnus hurok"
 
-#: nebulae/default/names.dat:632 nebulae/default/names.dat:634
-msgid "Taffy System"
-msgstr "Karamella rendszer"
+#: nebulae/default/names.dat:633
+msgid "Sadr Region"
+msgstr "Sadr Régió"
 
-#: nebulae/default/names.dat:635
-msgid "Wolf-Lundmark-Melotte Object (WLM)"
-msgstr "Wolf-Lundmark-Melotte objektum (WLM)"
+#: nebulae/default/names.dat:634
+msgid "Flying Bat Nebula"
+msgstr "Repülő denevér köd"
+
+#: nebulae/default/names.dat:635 nebulae/default/names.dat:658
+msgid "Cave Nebula"
+msgstr "Barlang nebula"
 
 #: nebulae/default/names.dat:636
-msgid "Sculptor Dwarf Irregular Galaxy"
-msgstr "Szobrász szabálytalan törpegalaxis"
+msgid "Californietto Nebula"
+msgstr ""
 
 #: nebulae/default/names.dat:637
-msgid "Andromeda III Dwarf Galaxy"
-msgstr "Andromeda III törpegalaxis"
+msgid "Dreyer's Object"
+msgstr "Dreyer objektuma"
 
 #: nebulae/default/names.dat:638
-msgid "Cartwheel Galaxy"
-msgstr ""
+msgid "Pacman Nebula"
+msgstr "Pacman nebula"
 
 #: nebulae/default/names.dat:639
-msgid "Cartwheel Ring Galaxy"
-msgstr ""
+msgid "Dolphin Nebula"
+msgstr "Delfin köd"
 
 #: nebulae/default/names.dat:640
-msgid "Zwicky's Ellipse"
+msgid "Second Closest Planetary"
 msgstr ""
 
 #: nebulae/default/names.dat:641
-msgid "Exclamation Mark Galaxy"
-msgstr "Felkiáltójel galaxis"
+msgid "Northern Trifid"
+msgstr "Északi Trifid ködfolt"
 
 #: nebulae/default/names.dat:642
-msgid "Andromeda I Dwarf Galaxy"
-msgstr "Andromeda I törpegalaxis"
+msgid "Spaghetti Nebula"
+msgstr "Spagetti nebula"
+
+#: nebulae/default/names.dat:643
+msgid "Simeis 147"
+msgstr "Simeis 147"
 
 #: nebulae/default/names.dat:644
-msgid "Baade's Galaxy A"
-msgstr "Baade A galaxis"
+msgid "Lower's Nebula"
+msgstr "Lower-köd"
 
 #: nebulae/default/names.dat:645
-msgid "Baade's Galaxy B"
-msgstr "Baade B galaxis"
+msgid "Angelfish Nebula"
+msgstr "Vitorláshal Ködfolt"
 
 #: nebulae/default/names.dat:646
-msgid "Sculptor Dwarf Galaxy"
-msgstr "Szobrász törpegalaxis"
+msgid "Orion's Head Nebula"
+msgstr "Orion feje köd"
 
 #: nebulae/default/names.dat:647
-msgid "Pisces Dwarf Galaxy"
-msgstr "Halak törpegalaxis"
+msgid "North Orion Bubble"
+msgstr ""
 
 #: nebulae/default/names.dat:648
-msgid "Pisces I"
-msgstr "Pisces I"
-
-#: nebulae/default/names.dat:649
-msgid "Shapley-Ames 1"
-msgstr "Shapley-Ames 1"
+msgid "Medusa Nebula"
+msgstr "Medúza nebula"
 
 #: nebulae/default/names.dat:650
-msgid "Andromeda II"
-msgstr "Andromeda II"
+msgid "Barnard's Loop"
+msgstr "Bernard hurokja"
 
 #: nebulae/default/names.dat:651
-msgid "Andromeda II Dwarf Galaxy"
-msgstr "Andromeda II törpegalaxis"
+msgid "Seagull Nebula"
+msgstr "Sirály nebula"
 
 #: nebulae/default/names.dat:652
-msgid "White Rose Galaxy"
-msgstr "Fehér rózsa galaxis"
+msgid "Seagull's wings"
+msgstr ""
 
 #: nebulae/default/names.dat:653
-msgid "Phoenix Dwarf Galaxy"
-msgstr "Főnix törpegalaxis"
+msgid "Snowman Nebula"
+msgstr "Hóember-köd"
 
 #: nebulae/default/names.dat:654
-msgid "Schuster-West Cluster"
+msgid "Etched Hourglass Nebula"
 msgstr ""
 
 #: nebulae/default/names.dat:655
-msgid "Maffei 1"
-msgstr "Maffei 1"
-
-#: nebulae/default/names.dat:656
-msgid "Holmberg VI"
-msgstr "Holmberg VI"
-
-#: nebulae/default/names.dat:657
-msgid "Fornax Dwarf Galaxy"
-msgstr "Fornax törpegalaxis"
-
-#: nebulae/default/names.dat:658
-msgid "Maffei 2"
-msgstr "Maffei 2"
-
-#: nebulae/default/names.dat:659
-msgid "E1 Cluster"
+msgid "Engraved Hourglass Nebula"
 msgstr ""
 
+#: nebulae/default/names.dat:657
+msgid "Ghost Nebula"
+msgstr "Szellem Ködfolt"
+
+#: nebulae/default/names.dat:659
+msgid "Vulture Head Nebula"
+msgstr "Keselyűfej köd"
+
 #: nebulae/default/names.dat:660
-msgid "Schuster's Spiral Galaxy"
+msgid "Baby Eagle Nebula"
 msgstr ""
 
 #: nebulae/default/names.dat:661
-msgid "Horologium Dwarf Galaxy"
-msgstr ""
+msgid "Orion B"
+msgstr "Orion B"
 
 #: nebulae/default/names.dat:662
-msgid "Carafe Nebula"
+msgid "Coalman Nebula"
 msgstr ""
 
 #: nebulae/default/names.dat:663
-msgid "Large Magellanic Cloud"
-msgstr "Nagy Magellán Felhő"
+msgid "Northern Coalsack Nebula"
+msgstr "Északi szeneszsák köd"
 
 #: nebulae/default/names.dat:664
-msgid "Nubecula Major"
-msgstr ""
+msgid "Gulf of Mexico Nebula"
+msgstr "Mexikói-öböl köd"
 
-#: nebulae/default/names.dat:665
-msgid "Orion Dwarf Galaxy"
-msgstr "Orion törpegalaxis"
+#: nebulae/default/names.dat:666 nebulae/default/names.dat:668
+msgid "Taffy Galaxies"
+msgstr "Karamella galaxisok"
 
-#: nebulae/default/names.dat:666
-msgid "Carina Dwarf Galaxy"
-msgstr "Carina törpegalaxis"
-
-#: nebulae/default/names.dat:667
-msgid "Southern Ellipse"
-msgstr "Déli ellipszis"
-
-#: nebulae/default/names.dat:668
-msgid "Lindsay-Shapley Ring"
-msgstr "Lindsay-Shapley gyűrű"
-
-#: nebulae/default/names.dat:669
-msgid "Graham A"
-msgstr "Graham A"
+#: nebulae/default/names.dat:667 nebulae/default/names.dat:669
+msgid "Taffy System"
+msgstr "Karamella rendszer"
 
 #: nebulae/default/names.dat:670
-msgid "Argo Dwarf Irregular Galaxy"
-msgstr ""
+msgid "Wolf-Lundmark-Melotte Object (WLM)"
+msgstr "Wolf-Lundmark-Melotte objektum (WLM)"
 
 #: nebulae/default/names.dat:671
-msgid "Integral Sign Galaxy"
-msgstr "Integráljel galaxis"
+msgid "Sculptor Dwarf Irregular Galaxy"
+msgstr "Szobrász szabálytalan törpegalaxis"
 
 #: nebulae/default/names.dat:672
-msgid "Phoenix Galaxy"
-msgstr ""
+msgid "Andromeda III Dwarf Galaxy"
+msgstr "Andromeda III törpegalaxis"
 
 #: nebulae/default/names.dat:673
-msgid "Holmberg II"
-msgstr "Holmberg II"
+msgid "Cartwheel Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:674
-msgid "M81 Dwarf A"
+msgid "Cartwheel Ring Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:675
-msgid "Holmberg III"
-msgstr "Holmberg III"
+msgid "Zwicky's Ellipse"
+msgstr ""
 
 #: nebulae/default/names.dat:676
-msgid "Grasshopper A"
-msgstr ""
+msgid "Exclamation Mark Galaxy"
+msgstr "Felkiáltójel galaxis"
 
-#: nebulae/default/names.dat:677 nebulae/default/names.dat:776
-msgid "Hydra A"
-msgstr "Hydra A"
-
-#: nebulae/default/names.dat:678
-msgid "Holmberg I"
-msgstr "Holmberg I"
+#: nebulae/default/names.dat:677
+msgid "Andromeda I Dwarf Galaxy"
+msgstr "Andromeda I törpegalaxis"
 
 #: nebulae/default/names.dat:679
-msgid "Holmberg IX"
-msgstr "Holmberg IX"
+msgid "Baade's Galaxy A"
+msgstr "Baade A galaxis"
 
 #: nebulae/default/names.dat:680
-msgid "Arp Loop"
-msgstr ""
+msgid "Baade's Galaxy B"
+msgstr "Baade B galaxis"
 
 #: nebulae/default/names.dat:681
-msgid "Sextans B"
-msgstr "Sextans B"
+msgid "Sculptor Dwarf Galaxy"
+msgstr "Szobrász törpegalaxis"
 
 #: nebulae/default/names.dat:682
-msgid "Revolver Galaxy"
-msgstr "Revolver galaxis"
+msgid "Pisces Dwarf Galaxy"
+msgstr "Halak törpegalaxis"
+
+#: nebulae/default/names.dat:683
+msgid "Pisces I"
+msgstr "Pisces I"
 
 #: nebulae/default/names.dat:684
-msgid "Antlia Dwarf Galaxy"
-msgstr "Antlia törpegalaxis"
+msgid "Shapley-Ames 1"
+msgstr "Shapley-Ames 1"
 
 #: nebulae/default/names.dat:685
-msgid "M81 Dwarf B"
-msgstr ""
+msgid "Andromeda II"
+msgstr "Andromeda II"
 
 #: nebulae/default/names.dat:686
-msgid "Vela Ring Galaxy"
-msgstr ""
+msgid "Andromeda II Dwarf Galaxy"
+msgstr "Andromeda II törpegalaxis"
 
 #: nebulae/default/names.dat:687
-msgid "Sextans A"
-msgstr "Sextans A"
+msgid "White Rose Galaxy"
+msgstr "Fehér rózsa galaxis"
 
 #: nebulae/default/names.dat:688
-msgid "Haro II"
-msgstr "Haro II"
+msgid "Phoenix Dwarf Galaxy"
+msgstr "Főnix törpegalaxis"
 
 #: nebulae/default/names.dat:689
-msgid "Spider Galaxy"
-msgstr "Pók galaxis"
-
-#: nebulae/default/names.dat:690
-msgid "Ant Galaxy"
-msgstr "Hangya galaxis"
-
-#: nebulae/default/names.dat:691
-msgid "Mayall's Object"
+msgid "Schuster-West Cluster"
 msgstr ""
 
+#: nebulae/default/names.dat:690
+msgid "Maffei 1"
+msgstr "Maffei 1"
+
+#: nebulae/default/names.dat:691
+msgid "Holmberg VI"
+msgstr "Holmberg VI"
+
 #: nebulae/default/names.dat:692
-msgid "Leo II Dwarf Galaxy"
-msgstr "Leo II törpegalaxis"
+msgid "Fornax Dwarf Galaxy"
+msgstr "Fornax törpegalaxis"
 
 #: nebulae/default/names.dat:693
-msgid "Leo B"
-msgstr "Leo B"
+msgid "Maffei 2"
+msgstr "Maffei 2"
 
 #: nebulae/default/names.dat:694
-msgid "Harrington-Wilson #2"
-msgstr "Harrington-Wilson #2"
+msgid "E1 Cluster"
+msgstr ""
 
 #: nebulae/default/names.dat:695
-msgid "Arp's Galaxy"
+msgid "Schuster's Spiral Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:696
-msgid "A Flying Bird"
-msgstr "Repülő madár"
+msgid "Horologium Dwarf Galaxy"
+msgstr ""
 
-#: nebulae/default/names.dat:697 nebulae/default/names.dat:698
+#: nebulae/default/names.dat:697
+msgid "Carafe Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:698
+msgid "Large Magellanic Cloud"
+msgstr "Nagy Magellán Felhő"
+
 #: nebulae/default/names.dat:699
-msgid "Wild's Triplet"
+msgid "Nubecula Major"
 msgstr ""
 
 #: nebulae/default/names.dat:700
-msgid "Syphon"
-msgstr "Szívócső"
+msgid "Orion Dwarf Galaxy"
+msgstr "Orion törpegalaxis"
 
 #: nebulae/default/names.dat:701
-msgid "Reinmuth 80"
-msgstr "Reinmuth 80"
+msgid "Carina Dwarf Galaxy"
+msgstr "Carina törpegalaxis"
 
 #: nebulae/default/names.dat:702
-msgid "Holmberg VII"
-msgstr "Holmberg VII"
+msgid "Southern Ellipse"
+msgstr "Déli ellipszis"
 
 #: nebulae/default/names.dat:703
-msgid "Malin 1"
-msgstr "Malin 1"
+msgid "Lindsay-Shapley Ring"
+msgstr "Lindsay-Shapley gyűrű"
 
 #: nebulae/default/names.dat:704
-msgid "Shapley-Ames 3"
-msgstr "Shapley-Ames 3"
+msgid "Graham A"
+msgstr "Graham A"
 
 #: nebulae/default/names.dat:705
-msgid "Shapley-Ames 4"
-msgstr "Shapley-Ames 4"
+msgid "Argo Dwarf Irregular Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:706
-msgid "Imprint of a Foot Galaxy"
-msgstr "Lábnyom galaxis"
+msgid "Integral Sign Galaxy"
+msgstr "Integráljel galaxis"
 
 #: nebulae/default/names.dat:707
-msgid "Hardcastle's Galaxy"
+msgid "Phoenix Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:708
-msgid "Holmberg VIII"
-msgstr "Holmberg VIII"
+msgid "Holmberg II"
+msgstr "Holmberg II"
 
 #: nebulae/default/names.dat:709
-msgid "Fourcade-Figueroa Object"
-msgstr "Fourcade-Figueroa objektum"
+msgid "M81 Dwarf A"
+msgstr ""
 
 #: nebulae/default/names.dat:710
-msgid "Fourcade-Figueroa Galaxy"
-msgstr "Fourcade-Figueroa galaxis"
+msgid "Holmberg III"
+msgstr "Holmberg III"
 
 #: nebulae/default/names.dat:711
-msgid "Holmberg V"
-msgstr "Holmberg V"
+msgid "Grasshopper A"
+msgstr ""
 
-#: nebulae/default/names.dat:712
-msgid "Holmberg IV"
-msgstr "Holmberg IV"
+#: nebulae/default/names.dat:712 nebulae/default/names.dat:811
+msgid "Hydra A"
+msgstr "Hydra A"
 
 #: nebulae/default/names.dat:713
-msgid "Circinus Galaxy"
-msgstr "Circinus galaxis"
+msgid "Holmberg I"
+msgstr "Holmberg I"
 
 #: nebulae/default/names.dat:714
-msgid "Segner's Wheel"
-msgstr "Segner kerék"
+msgid "Holmberg IX"
+msgstr "Holmberg IX"
 
 #: nebulae/default/names.dat:715
-msgid "Ursa Minor Dwarf Galaxy"
-msgstr "Kismedve törpegalaxis"
+msgid "Arp Loop"
+msgstr ""
 
 #: nebulae/default/names.dat:716
-msgid "Hooked Galaxy"
-msgstr ""
+msgid "Sextans B"
+msgstr "Sextans B"
 
-#: nebulae/default/names.dat:717 nebulae/default/names.dat:718
+#: nebulae/default/names.dat:717
+msgid "Revolver Galaxy"
+msgstr "Revolver galaxis"
+
 #: nebulae/default/names.dat:719
-msgid "Zwicky's Triplet"
-msgstr "Zwicky-triplett"
+msgid "Antlia Dwarf Galaxy"
+msgstr "Antlia törpegalaxis"
 
 #: nebulae/default/names.dat:720
-msgid "Hercules A"
-msgstr "Hercules A"
+msgid "M81 Dwarf B"
+msgstr ""
 
 #: nebulae/default/names.dat:721
-msgid "Draco Dwarf Galaxy"
-msgstr "Sárkány törpegalaxis"
+msgid "Vela Ring Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:722
-msgid "Sagittarius Dwarf Galaxy"
-msgstr "Nyilas törpegalaxis"
+msgid "Sextans A"
+msgstr "Sextans A"
 
 #: nebulae/default/names.dat:723
-msgid "Kowal's Object"
-msgstr "Kowal objektum"
+msgid "Haro II"
+msgstr "Haro II"
 
 #: nebulae/default/names.dat:724
-msgid "Aquarius Dwarf Galaxy"
-msgstr "Vízöntő törpegalaxis"
+msgid "Spider Galaxy"
+msgstr "Pók galaxis"
 
 #: nebulae/default/names.dat:725
-msgid "Cygnus A"
-msgstr "Cygnus A"
+msgid "Ant Galaxy"
+msgstr "Hangya galaxis"
 
 #: nebulae/default/names.dat:726
-msgid "McLeish's Object"
-msgstr "McLeish objektuma"
+msgid "Mayall's Object"
+msgstr ""
 
 #: nebulae/default/names.dat:727
-msgid "Shapley-Ames 6"
-msgstr "Shapley-Ames 6"
+msgid "Leo II Dwarf Galaxy"
+msgstr "Leo II törpegalaxis"
 
 #: nebulae/default/names.dat:728
-msgid "Huchra's Lens"
-msgstr ""
+msgid "Leo B"
+msgstr "Leo B"
 
 #: nebulae/default/names.dat:729
-msgid "Tucana Dwarf Galaxy"
-msgstr "Tukán törpegalaxis"
+msgid "Harrington-Wilson #2"
+msgstr "Harrington-Wilson #2"
 
-#: nebulae/default/names.dat:730 nebulae/default/names.dat:744
-msgid "Pegasus Dwarf Galaxy"
-msgstr "Pegazus törpegalaxis"
+#: nebulae/default/names.dat:730
+msgid "Arp's Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:731
-msgid "Barbon's Galaxy"
-msgstr "Barbon galaxisa"
+msgid "A Flying Bird"
+msgstr "Repülő madár"
 
-#: nebulae/default/names.dat:732
-msgid "Minkowski's Object"
-msgstr "Minkowski objektum"
-
-#: nebulae/default/names.dat:733
-msgid "Superantennae Galaxy"
-msgstr ""
-
+#: nebulae/default/names.dat:732 nebulae/default/names.dat:733
 #: nebulae/default/names.dat:734
-msgid "Malin II"
-msgstr "Malin II"
+msgid "Wild's Triplet"
+msgstr ""
 
 #: nebulae/default/names.dat:735
-msgid "Sextans Dwarf Spheroidal Galaxy"
-msgstr ""
+msgid "Syphon"
+msgstr "Szívócső"
 
 #: nebulae/default/names.dat:736
-msgid "Cassiopeia 1"
-msgstr "Cassiopeia 1"
+msgid "Reinmuth 80"
+msgstr "Reinmuth 80"
 
 #: nebulae/default/names.dat:737
-msgid "Cassiopeia 2"
-msgstr "Cassiopeia 2"
+msgid "Holmberg VII"
+msgstr "Holmberg VII"
 
 #: nebulae/default/names.dat:738
-msgid "Speca Galaxy"
-msgstr ""
+msgid "Malin 1"
+msgstr "Malin 1"
 
 #: nebulae/default/names.dat:739
-msgid "Sextans Ring"
-msgstr ""
+msgid "Shapley-Ames 3"
+msgstr "Shapley-Ames 3"
 
 #: nebulae/default/names.dat:740
-msgid "Ring Galaxy in Sextans"
-msgstr ""
+msgid "Shapley-Ames 4"
+msgstr "Shapley-Ames 4"
 
 #: nebulae/default/names.dat:741
-msgid "Camelopardalis A"
-msgstr "Camelopardalis A"
+msgid "Imprint of a Foot Galaxy"
+msgstr "Lábnyom galaxis"
 
 #: nebulae/default/names.dat:742
-msgid "Cassiopeia Dwarf Spheroidal Galaxy"
+msgid "Hardcastle's Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:743
-msgid "Andromeda VII"
-msgstr "Andromeda VII"
+msgid "Holmberg VIII"
+msgstr "Holmberg VIII"
+
+#: nebulae/default/names.dat:744
+msgid "Fourcade-Figueroa Object"
+msgstr "Fourcade-Figueroa objektum"
 
 #: nebulae/default/names.dat:745
-msgid "Pegasus II"
-msgstr "Pegasus II"
+msgid "Fourcade-Figueroa Galaxy"
+msgstr "Fourcade-Figueroa galaxis"
 
 #: nebulae/default/names.dat:746
-msgid "Andromeda VI"
-msgstr "Andromeda VI"
+msgid "Holmberg V"
+msgstr "Holmberg V"
 
 #: nebulae/default/names.dat:747
-msgid "Boomerang Nebula"
-msgstr "Bumeráng-köd"
+msgid "Holmberg IV"
+msgstr "Holmberg IV"
 
 #: nebulae/default/names.dat:748
-msgid "Cepheus I"
-msgstr "Cepheus I"
+msgid "Circinus Galaxy"
+msgstr "Circinus galaxis"
 
 #: nebulae/default/names.dat:749
-msgid "Cetus Dwarf Galaxy"
-msgstr "Cet törpegalaxis"
+msgid "Segner's Wheel"
+msgstr "Segner kerék"
 
 #: nebulae/default/names.dat:750
-msgid "BW Tauri"
-msgstr "BW Tauri"
+msgid "Ursa Minor Dwarf Galaxy"
+msgstr "Kismedve törpegalaxis"
 
 #: nebulae/default/names.dat:751
-msgid "The Grasshopper Galaxy"
-msgstr "Szöcske galaxis"
-
-#: nebulae/default/names.dat:752
-msgid "Leo A"
-msgstr "Leo A"
-
-#: nebulae/default/names.dat:753
-msgid "Leo III"
-msgstr "Leo III"
-
-#: nebulae/default/names.dat:754
-msgid "Leo Dwarf Irregular Galaxy"
+msgid "Hooked Galaxy"
 msgstr ""
 
+#: nebulae/default/names.dat:752 nebulae/default/names.dat:753
+#: nebulae/default/names.dat:754
+msgid "Zwicky's Triplet"
+msgstr "Zwicky-triplett"
+
 #: nebulae/default/names.dat:755
-msgid "Sextans C"
-msgstr "Sextans C"
+msgid "Hercules A"
+msgstr "Hercules A"
 
 #: nebulae/default/names.dat:756
-msgid "Regulus Dwarf Galaxy"
-msgstr "Regulus törpegalaxis"
+msgid "Draco Dwarf Galaxy"
+msgstr "Sárkány törpegalaxis"
 
 #: nebulae/default/names.dat:757
-msgid "Leo I"
-msgstr "Leo I"
+msgid "Sagittarius Dwarf Galaxy"
+msgstr "Nyilas törpegalaxis"
 
 #: nebulae/default/names.dat:758
-msgid "Harrington-Wilson #1"
-msgstr "Harrington-Wilson #1"
+msgid "Kowal's Object"
+msgstr "Kowal objektum"
 
 #: nebulae/default/names.dat:759
-msgid "Markarian 421"
-msgstr "Markarian 421"
+msgid "Aquarius Dwarf Galaxy"
+msgstr "Vízöntő törpegalaxis"
 
 #: nebulae/default/names.dat:760
-msgid "Zwicky #2"
-msgstr "Zwicky #2"
+msgid "Cygnus A"
+msgstr "Cygnus A"
 
 #: nebulae/default/names.dat:761
-msgid "Markarian 231"
-msgstr "Markarian 231"
+msgid "McLeish's Object"
+msgstr "McLeish objektuma"
 
 #: nebulae/default/names.dat:762
-msgid "Exclamation Point Galaxy"
-msgstr "Felkiáltójel galaxis"
+msgid "Shapley-Ames 6"
+msgstr "Shapley-Ames 6"
 
 #: nebulae/default/names.dat:763
-msgid "Serpens Dwarf Galaxy"
+msgid "Huchra's Lens"
 msgstr ""
 
 #: nebulae/default/names.dat:764
-msgid "Tadpole Galaxy"
-msgstr "Ebihal galaxis"
+msgid "Tucana Dwarf Galaxy"
+msgstr "Tukán törpegalaxis"
 
-#: nebulae/default/names.dat:765
-msgid "Egg Nebula"
-msgstr "Tojás-köd"
+#: nebulae/default/names.dat:765 nebulae/default/names.dat:779
+msgid "Pegasus Dwarf Galaxy"
+msgstr "Pegazus törpegalaxis"
 
 #: nebulae/default/names.dat:766
-msgid "Cygnus Egg"
-msgstr ""
+msgid "Barbon's Galaxy"
+msgstr "Barbon galaxisa"
 
 #: nebulae/default/names.dat:767
-msgid "Pegasus Dwarf Irregular Galaxy"
-msgstr "Pegazus szabálytalan törpegalaxis"
+msgid "Minkowski's Object"
+msgstr "Minkowski objektum"
 
 #: nebulae/default/names.dat:768
-msgid "Lemon Galaxy"
-msgstr "Citrom galaxis"
+msgid "Superantennae Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:769
-msgid "Minkowski's Butterfly"
-msgstr "Minkowski pillangója"
+msgid "Malin II"
+msgstr "Malin II"
 
 #: nebulae/default/names.dat:770
-msgid "Twin Jet Nebula"
+msgid "Sextans Dwarf Spheroidal Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:771
-msgid "M2-9"
-msgstr "M2-9"
+msgid "Cassiopeia 1"
+msgstr "Cassiopeia 1"
 
 #: nebulae/default/names.dat:772
-msgid "Westbrook Nebula"
-msgstr "Westbrook köd"
+msgid "Cassiopeia 2"
+msgstr "Cassiopeia 2"
 
 #: nebulae/default/names.dat:773
-msgid "Water Lily Nebula"
-msgstr "Vízililiom köd"
+msgid "Speca Galaxy"
+msgstr ""
 
 #: nebulae/default/names.dat:774
-msgid "Perseus Cluster"
+msgid "Sextans Ring"
 msgstr ""
 
 #: nebulae/default/names.dat:775
-msgid "Train Wreck Cluster"
+msgid "Ring Galaxy in Sextans"
 msgstr ""
 
+#: nebulae/default/names.dat:776
+msgid "Camelopardalis A"
+msgstr "Camelopardalis A"
+
 #: nebulae/default/names.dat:777
-msgid "Hydra Cluster"
+msgid "Cassiopeia Dwarf Spheroidal Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:778
-msgid "Leo Cluster"
-msgstr ""
-
-#: nebulae/default/names.dat:779
-msgid "Coma Cluster"
-msgstr ""
+msgid "Andromeda VII"
+msgstr "Andromeda VII"
 
 #: nebulae/default/names.dat:780
-msgid "Corona Borealis Cluster"
-msgstr ""
+msgid "Pegasus II"
+msgstr "Pegasus II"
 
 #: nebulae/default/names.dat:781
-msgid "Hercules Cluster"
-msgstr ""
+msgid "Andromeda VI"
+msgstr "Andromeda VI"
 
 #: nebulae/default/names.dat:782
-msgid "Pandora’s Cluster"
-msgstr ""
+msgid "Boomerang Nebula"
+msgstr "Bumeráng-köd"
 
 #: nebulae/default/names.dat:783
-msgid "Centaurus Cluster"
-msgstr ""
+msgid "Cepheus I"
+msgstr "Cepheus I"
 
 #: nebulae/default/names.dat:784
-msgid "Shapley 8 Cluster"
-msgstr ""
+msgid "Cetus Dwarf Galaxy"
+msgstr "Cet törpegalaxis"
 
 #: nebulae/default/names.dat:785
-msgid "Norma Cluster"
-msgstr ""
+msgid "BW Tauri"
+msgstr "BW Tauri"
 
 #: nebulae/default/names.dat:786
-msgid "Fornax Cluster"
-msgstr ""
+msgid "The Grasshopper Galaxy"
+msgstr "Szöcske galaxis"
 
 #: nebulae/default/names.dat:787
-msgid "Antlia Cluster"
-msgstr ""
+msgid "Leo A"
+msgstr "Leo A"
 
 #: nebulae/default/names.dat:788
-msgid "Calabash Nebula"
-msgstr "Calabas köd"
+msgid "Leo III"
+msgstr "Leo III"
 
 #: nebulae/default/names.dat:789
-msgid "Rotten Egg Nebula"
-msgstr "Romlott tojás köd"
-
-#: nebulae/default/names.dat:790
-msgid "Frosty Leo Nebula"
+msgid "Leo Dwarf Irregular Galaxy"
 msgstr ""
 
+#: nebulae/default/names.dat:790
+msgid "Sextans C"
+msgstr "Sextans C"
+
 #: nebulae/default/names.dat:791
-msgid "Gomez's Hamburger"
-msgstr "Gomez hamburgere"
+msgid "Regulus Dwarf Galaxy"
+msgstr "Regulus törpegalaxis"
 
 #: nebulae/default/names.dat:792
-msgid "Cotton Candy Nebula"
-msgstr "Vattacukor köd"
+msgid "Leo I"
+msgstr "Leo I"
 
 #: nebulae/default/names.dat:793
-msgid "Footprint Nebula"
-msgstr "Lábnyom köd"
+msgid "Harrington-Wilson #1"
+msgstr "Harrington-Wilson #1"
 
 #: nebulae/default/names.dat:794
-msgid "Minkowski's Footprint"
-msgstr "Minkowski lábnyoma"
+msgid "Markarian 421"
+msgstr "Markarian 421"
 
 #: nebulae/default/names.dat:795
-msgid "M1-92"
-msgstr "M1-92"
+msgid "Zwicky #2"
+msgstr "Zwicky #2"
 
 #: nebulae/default/names.dat:796
-msgid "Sagittarius A East"
-msgstr "Sagittarius A keleti"
+msgid "Markarian 231"
+msgstr "Markarian 231"
 
 #: nebulae/default/names.dat:797
-msgid "Sagittarius A West"
-msgstr "Sagittarius A nyugati"
+msgid "Exclamation Point Galaxy"
+msgstr "Felkiáltójel galaxis"
 
 #: nebulae/default/names.dat:798
-msgid "Minispiral in Gal Center"
+msgid "Serpens Dwarf Galaxy"
 msgstr ""
 
 #: nebulae/default/names.dat:799
+msgid "Tadpole Galaxy"
+msgstr "Ebihal galaxis"
+
+#: nebulae/default/names.dat:800
+msgid "Egg Nebula"
+msgstr "Tojás-köd"
+
+#: nebulae/default/names.dat:801
+msgid "Cygnus Egg"
+msgstr ""
+
+#: nebulae/default/names.dat:802
+msgid "Pegasus Dwarf Irregular Galaxy"
+msgstr "Pegazus szabálytalan törpegalaxis"
+
+#: nebulae/default/names.dat:803
+msgid "Lemon Galaxy"
+msgstr "Citrom galaxis"
+
+#: nebulae/default/names.dat:804
+msgid "Minkowski's Butterfly"
+msgstr "Minkowski pillangója"
+
+#: nebulae/default/names.dat:805
+msgid "Twin Jet Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:806
+msgid "M2-9"
+msgstr "M2-9"
+
+#: nebulae/default/names.dat:807
+msgid "Westbrook Nebula"
+msgstr "Westbrook köd"
+
+#: nebulae/default/names.dat:808
+msgid "Water Lily Nebula"
+msgstr "Vízililiom köd"
+
+#: nebulae/default/names.dat:809
+msgid "Perseus Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:810
+msgid "Train Wreck Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:812
+msgid "Hydra Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:813
+msgid "Leo Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:814
+msgid "Coma Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:815
+msgid "Corona Borealis Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:816
+msgid "Hercules Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:817
+msgid "Pandora’s Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:818
+msgid "Centaurus Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:819
+msgid "Shapley 8 Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:820
+msgid "Norma Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:821
+msgid "Fornax Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:822
+msgid "Antlia Cluster"
+msgstr ""
+
+#: nebulae/default/names.dat:823
+msgid "Calabash Nebula"
+msgstr "Calabas köd"
+
+#: nebulae/default/names.dat:824
+msgid "Rotten Egg Nebula"
+msgstr "Romlott tojás köd"
+
+#: nebulae/default/names.dat:825
+msgid "Frosty Leo Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:826
+msgid "Gomez's Hamburger"
+msgstr "Gomez hamburgere"
+
+#: nebulae/default/names.dat:827
+msgid "Cotton Candy Nebula"
+msgstr "Vattacukor köd"
+
+#: nebulae/default/names.dat:828
+msgid "Footprint Nebula"
+msgstr "Lábnyom köd"
+
+#: nebulae/default/names.dat:829
+msgid "Minkowski's Footprint"
+msgstr "Minkowski lábnyoma"
+
+#: nebulae/default/names.dat:830
+msgid "M1-92"
+msgstr "M1-92"
+
+#: nebulae/default/names.dat:831
+msgid "Sagittarius A East"
+msgstr "Sagittarius A keleti"
+
+#: nebulae/default/names.dat:832
+msgid "Sagittarius A West"
+msgstr "Sagittarius A nyugati"
+
+#: nebulae/default/names.dat:833
+msgid "Minispiral in Gal Center"
+msgstr ""
+
+#: nebulae/default/names.dat:834
 msgid "Dark Doodad Nebula"
 msgstr ""
 
@@ -6411,7 +6516,8 @@ msgstr "Wanjel"
 msgid "Purra"
 msgstr "Purra"
 
-#: skycultures/boorong/star_names.fab:27 skycultures/western/star_names.fab:152
+#: skycultures/boorong/star_names.fab:27
+#: skycultures/western/star_names.fab:152
 msgid "Unurgunite"
 msgstr "Unurgunite"
 
@@ -6425,12 +6531,14 @@ msgstr "Gnaui"
 msgid "Mityan"
 msgstr "Mityan"
 
-#. TRANSLATORS: Native name of Venus in Boorong culture (English: Elder sister)
+#. TRANSLATORS: Native name of Venus in Boorong culture (English: Elder
+#. sister)
 #: skycultures/boorong/planet_names.fab:6
 msgid "Chargee Gnowee"
 msgstr "Csardzsi Gnaui"
 
-#. TRANSLATORS: Native name of Jupiter in Boorong culture (English: Sulphur-crested white cockatoo)
+#. TRANSLATORS: Native name of Jupiter in Boorong culture (English: Sulphur-
+#. crested white cockatoo)
 #: skycultures/boorong/planet_names.fab:8
 msgid "Ginabongbearp"
 msgstr "Ginabongbearp"
@@ -7192,23 +7300,27 @@ msgstr "Birka"
 msgid "Stars of Water"
 msgstr "Vizek Csillagai"
 
-#: skycultures/egyptian/star_names.fab:1 skycultures/romanian/star_names.fab:80
+#: skycultures/egyptian/star_names.fab:1
+#: skycultures/romanian/star_names.fab:80
 #: skycultures/western/star_names.fab:154
 #: skycultures/western_rey/star_names.fab:32
 msgid "Procyon"
 msgstr "Procyon"
 
-#: skycultures/egyptian/star_names.fab:2 skycultures/western/star_names.fab:137
+#: skycultures/egyptian/star_names.fab:2
+#: skycultures/western/star_names.fab:137
 #: skycultures/western_rey/star_names.fab:36
 msgid "Sirius"
 msgstr "Szíriusz"
 
-#. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of Sun)
+#. TRANSLATORS: Native name of the Sun in Egyptian culture (English: God of
+#. Sun)
 #: skycultures/egyptian/planet_names.fab:2
 msgid "Amon-Ra (Sun)"
 msgstr "Amon-Ré (Nap)"
 
-#. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The Traveler)
+#. TRANSLATORS: Native name of the Moon in Egyptian culture (English: The
+#. Traveler)
 #: skycultures/egyptian/planet_names.fab:4
 msgid "Traveler (Moon)"
 msgstr "Utazó (Hold)"
@@ -7218,7 +7330,8 @@ msgstr "Utazó (Hold)"
 msgid "Sebeg (Mercury)"
 msgstr "Szebeg (Merkúr)"
 
-#. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that Crosses / The God of the Morning)
+#. TRANSLATORS: Native name of Venus in Egyptian culture (English: Star that
+#. Crosses / The God of the Morning)
 #: skycultures/egyptian/planet_names.fab:8
 msgid "Star that Crosses (Venus)"
 msgstr "Keresztező csillag (Vénusz)"
@@ -7228,12 +7341,14 @@ msgstr "Keresztező csillag (Vénusz)"
 msgid "Red Horus (Mars)"
 msgstr "Vörös Hórusz (Mars)"
 
-#. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who Binds the Two Lands)
+#. TRANSLATORS: Native name of Jupiter in Egyptian culture (English: Horus Who
+#. Binds the Two Lands)
 #: skycultures/egyptian/planet_names.fab:12
 msgid "Horus Who Binds the Two Lands (Jupiter)"
 msgstr "Hórusz, aki összeköti a két földet (Jupiter)"
 
-#. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the Bull of Heaven)
+#. TRANSLATORS: Native name of Saturn in Egyptian culture (English: Horus, the
+#. Bull of Heaven)
 #: skycultures/egyptian/planet_names.fab:14
 msgid "Horus, the Bull of Heaven (Saturn)"
 msgstr "Hórusz, az egek bikája (Szaturnusz)"
@@ -9891,24 +10006,29 @@ msgstr "A Vadkanok"
 msgid "Alpheratz"
 msgstr "Alpheratz"
 
-#: skycultures/romanian/star_names.fab:2 skycultures/western/star_names.fab:184
+#: skycultures/romanian/star_names.fab:2
+#: skycultures/western/star_names.fab:184
 msgid "Caph"
 msgstr "Caph"
 
-#: skycultures/romanian/star_names.fab:3 skycultures/western/star_names.fab:594
+#: skycultures/romanian/star_names.fab:3
+#: skycultures/western/star_names.fab:594
 #: skycultures/western/star_names.fab:614
 msgid "Algenib"
 msgstr "Algenib"
 
-#: skycultures/romanian/star_names.fab:4 skycultures/western/star_names.fab:630
+#: skycultures/romanian/star_names.fab:4
+#: skycultures/western/star_names.fab:630
 msgid "Ankaa"
 msgstr "Ankaa"
 
-#: skycultures/romanian/star_names.fab:5 skycultures/western/star_names.fab:183
+#: skycultures/romanian/star_names.fab:5
+#: skycultures/western/star_names.fab:183
 msgid "Shedir"
 msgstr "Shedir"
 
-#: skycultures/romanian/star_names.fab:6 skycultures/western/star_names.fab:228
+#: skycultures/romanian/star_names.fab:6
+#: skycultures/western/star_names.fab:228
 msgid "Diphda"
 msgstr "Diphda"
 
@@ -9945,11 +10065,13 @@ msgstr "Baten Kaitos"
 msgid "Mothallah"
 msgstr "Mothallah"
 
-#: skycultures/romanian/star_names.fab:14 skycultures/western/star_names.fab:54
+#: skycultures/romanian/star_names.fab:14
+#: skycultures/western/star_names.fab:54
 msgid "Mesarthim"
 msgstr "Mesarthim"
 
-#: skycultures/romanian/star_names.fab:15 skycultures/western/star_names.fab:53
+#: skycultures/romanian/star_names.fab:15
+#: skycultures/western/star_names.fab:53
 msgid "Sheratan"
 msgstr "Sheratan"
 
@@ -9962,7 +10084,8 @@ msgstr "Alrescha"
 msgid "Almaak"
 msgstr "Almaak"
 
-#: skycultures/romanian/star_names.fab:18 skycultures/western/star_names.fab:52
+#: skycultures/romanian/star_names.fab:18
+#: skycultures/western/star_names.fab:52
 msgid "Hamal"
 msgstr "Hamal"
 
@@ -9998,7 +10121,8 @@ msgstr "Menkar"
 msgid "Algol"
 msgstr "Algol"
 
-#: skycultures/romanian/star_names.fab:25 skycultures/western/star_names.fab:55
+#: skycultures/romanian/star_names.fab:25
+#: skycultures/western/star_names.fab:55
 msgid "Botein"
 msgstr "Botein"
 
@@ -10107,7 +10231,8 @@ msgstr "Kapteyn-csillag"
 msgid "Rigel"
 msgstr "Rigel"
 
-#: skycultures/romanian/star_names.fab:47 skycultures/western/star_names.fab:68
+#: skycultures/romanian/star_names.fab:47
+#: skycultures/western/star_names.fab:68
 #: skycultures/western_rey/star_names.fab:31
 msgid "Capella"
 msgstr "Capella"
@@ -10152,7 +10277,8 @@ msgstr "Wazn"
 msgid "Betelgeuse"
 msgstr "Betelgeuse"
 
-#: skycultures/romanian/star_names.fab:60 skycultures/western/star_names.fab:70
+#: skycultures/romanian/star_names.fab:60
+#: skycultures/western/star_names.fab:70
 msgid "Menkalinan"
 msgstr "Menkalinan"
 
@@ -12168,7 +12294,8 @@ msgstr "Dolones IX"
 msgid "Haris"
 msgstr "Haris"
 
-#: skycultures/western/star_names.fab:99 skycultures/western/star_names.fab:114
+#: skycultures/western/star_names.fab:99
+#: skycultures/western/star_names.fab:114
 msgid "Ceginus"
 msgstr "Ceginus"
 
@@ -12772,6 +12899,10 @@ msgstr "Tyl"
 #: skycultures/western/star_names.fab:350
 msgid "Alsafi"
 msgstr "Alsafi"
+
+#: skycultures/western/star_names.fab:351
+msgid "Dziban"
+msgstr "Dziban"
 
 #: skycultures/western/star_names.fab:352
 msgid "Dziban I"
@@ -14382,1125 +14513,3 @@ msgstr "Alpha Centauri"
 #: skycultures/western_rey/star_names.fab:57
 msgid "Beta Centauri"
 msgstr "Beta Centauri"
-
-#~ msgid "Frigate Bird"
-#~ msgstr "Fregattmadár"
-
-#~ msgid "Dolphin"
-#~ msgstr "Delfin"
-
-#~ msgid "Bailer"
-#~ msgstr "Merőkanál"
-
-#~ msgid "Maui's Fishhook"
-#~ msgstr "Maui Horga"
-
-#~ msgid "Bear's Lodge"
-#~ msgstr "Medvelak"
-
-#~ msgid "Thunderbird"
-#~ msgstr "Viharmadár"
-
-#~ msgid "Turtle"
-#~ msgstr "Teknős"
-
-#~ msgid "Salamander"
-#~ msgstr "Szalamandra"
-
-#~ msgid "Dried Willow"
-#~ msgstr "Elszáradt Fűzfa"
-
-#~ msgid "Seven Little Girls"
-#~ msgstr "Hét Kislány"
-
-#~ msgid "Animal"
-#~ msgstr "Állat"
-
-#~ msgid "Race Track"
-#~ msgstr "Versenypálya"
-
-#~ msgid "Snake"
-#~ msgstr "Kígyó"
-
-#~ msgid "Fireplace"
-#~ msgstr "Tűzhely"
-
-#~ msgid "Hand"
-#~ msgstr "Kéz"
-
-#~ msgid "Schrine of Sky"
-#~ msgstr "Égi szentély"
-
-#~ msgid "Office for Chariot"
-#~ msgstr "Kocsis"
-
-#~ msgid "Ofice for Construction"
-#~ msgstr "Főmérnök"
-
-#~ msgid "Cerficate of Sky"
-#~ msgstr "Égi elismervény"
-
-#~ msgid "Crab nebula"
-#~ msgstr "Rák-köd"
-
-#~ msgid "Eskimo nebula"
-#~ msgstr "Eszkimó-köd"
-
-#~ msgid "Horsehead nebula"
-#~ msgstr "Lófej-köd"
-
-#~ msgid "North America nebula"
-#~ msgstr "Észak-Amerika köd"
-
-#~ msgid "Sombrero galaxy"
-#~ msgstr "Sombrero-galaxis"
-
-#~ msgid "Sculptor galaxy"
-#~ msgstr "Véső-galaxis"
-
-#~ msgid "Spindle galaxy"
-#~ msgstr "Orsó-galaxis"
-
-#~ msgid "Whirlpool galaxy"
-#~ msgstr "Örvény-galaxis"
-
-#~ msgid "Barnard's galaxy"
-#~ msgstr "Barnard-galaxis"
-
-#~ msgid "Beehive cluster"
-#~ msgstr "Méhkas-csoport"
-
-#~ msgid "Butterfly nebula"
-#~ msgstr "Lepke-köd"
-
-#~ msgid "California nebula"
-#~ msgstr "Kalifornia-köd"
-
-#~ msgid "Christmas Tree cluster"
-#~ msgstr "Karácsonyfa-csoport"
-
-#~ msgid "Eagle nebula"
-#~ msgstr "Sas-köd"
-
-#~ msgid "Hourglass nebula"
-#~ msgstr "Homokóra-köd"
-
-#~ msgid "Lagoon nebula"
-#~ msgstr "Lagúna-köd"
-
-#~ msgid "Owl nebula"
-#~ msgstr "Bagoly-köd"
-
-#~ msgid "Pelican nebula"
-#~ msgstr "Pelikán-köd"
-
-#~ msgid "Ring nebula in Lyra"
-#~ msgstr "Lyra-gyűrűsköd"
-
-#~ msgid "Sunflower galaxy"
-#~ msgstr "Napraforgó-galaxis"
-
-#~ msgid "Veil nebula"
-#~ msgstr "Fátyol-köd"
-
-#~ msgid "Wild Duck cluster"
-#~ msgstr "Vadkacsa-csoport"
-
-#~ msgid "Trifid nebula"
-#~ msgstr "Trifid-köd"
-
-#~ msgid "Bear Paw galaxy"
-#~ msgstr "Medvemancs-galaxis"
-
-#~ msgid "Bode's nebulae"
-#~ msgstr "Bode-köd"
-
-#~ msgid "Butterfly cluster"
-#~ msgstr "Pillangó-csoport"
-
-#~ msgid "Box nebula"
-#~ msgstr "Doboz-köd"
-
-#~ msgid "Bubble nebula"
-#~ msgstr "Buborék-köd"
-
-#~ msgid "Dumbbell nebula"
-#~ msgstr "Dumbbell-köd"
-
-#~ msgid "Merope nebula"
-#~ msgstr "Merope-köd"
-
-#~ msgid "Omega nebula"
-#~ msgstr "Omega-köd"
-
-#~ msgid "Saturn nebula"
-#~ msgstr "Szaturnusz-köd"
-
-#~ msgid "Rosette nebula"
-#~ msgstr "Rosette-köd"
-
-#~ msgid "Tarantula nebula"
-#~ msgstr "Tarantula-köd"
-
-#~ msgid "Witch Head nebula"
-#~ msgstr "Boszorkányfej-köd"
-
-#~ msgid "κ Cru cluster"
-#~ msgstr "κ Cru-csoport"
-
-#~ msgid "λ Cen nebula"
-#~ msgstr "λ Cen-köd"
-
-#~ msgid "η Car nebula"
-#~ msgstr "η Car-köd"
-
-#~ msgid "γ Cas nebula"
-#~ msgstr "γ Cas-köd"
-
-#~ msgid "ρ Oph nebula"
-#~ msgstr "ρ Oph-köd"
-
-#~ msgid "Tupua-rangi"
-#~ msgstr "Tupua-rangi"
-
-#~ msgid "Wai-puna-a-rangi"
-#~ msgstr "Wai-puna-a-rangi"
-
-#~ msgid "Tupua-nuku"
-#~ msgstr "Tupua-nuku"
-
-#~ msgid "A'a"
-#~ msgstr "A'a"
-
-#~ msgid "Hokupa'a"
-#~ msgstr "Hokupa'a"
-
-#~ msgid "Hokule'a"
-#~ msgstr "Hokule'a"
-
-#~ msgid "Hoku'ula"
-#~ msgstr "Hoku'ula"
-
-#~ msgid "Mole Honua"
-#~ msgstr "Mole Honua"
-
-#~ msgid "Ghost of Jupiter"
-#~ msgstr "A Jupiter szelleme"
-
-#~ msgid "The Mice"
-#~ msgstr "Egerek"
-
-#~ msgid "Little Gem"
-#~ msgstr "Kis ékszer"
-
-#~ msgid "Galaxy cluster"
-#~ msgstr "Galaxishalmaz"
-
-#~ msgid "Cocoon nebula"
-#~ msgstr "Báb köd"
-
-#~ msgid "Cone nebula"
-#~ msgstr "Tölcsér köd"
-
-#~ msgid "Black-eye galaxy"
-#~ msgstr "Feketeszem galaxis"
-
-#~ msgid "Bear's Paw galaxy"
-#~ msgstr "Medvemancs galaxis"
-
-#~ msgid "Bug nebula"
-#~ msgstr "Bogár köd"
-
-#~ msgid "Crescent nebula"
-#~ msgstr "Holdsarló köd"
-
-#~ msgid "Flaming Star nebula"
-#~ msgstr "Lángoló csillag köd"
-
-#~ msgid "Pin-wheel nebula"
-#~ msgstr "Szélkerék köd"
-
-#~ msgid "Little Dumbbell"
-#~ msgstr "Kis súlyzó"
-
-#~ msgid "Maia nebula"
-#~ msgstr "Maia köd"
-
-#~ msgid "Star Queen nebula"
-#~ msgstr "Csillagkirálynő köd"
-
-#~ msgid "Little Gem nebula"
-#~ msgstr "Kis drágakő köd"
-
-#~ msgid "Little Ghost nebula"
-#~ msgstr "Kis szellem köd"
-
-#~ msgid "Cat's Paw nebula"
-#~ msgstr "Macskamancs köd"
-
-#~ msgid "War and Peace nebula"
-#~ msgstr "Háború és béke köd"
-
-#~ msgid "Rim nebula"
-#~ msgstr "Perem köd"
-
-#~ msgid "de Mairan's nebula"
-#~ msgstr "de Mairan köd"
-
-#~ msgid "Pencil nebula"
-#~ msgstr "Ceruza köd"
-
-#~ msgid "Southern Pinwheel galaxy"
-#~ msgstr "Déli szélkerék galaxis"
-
-#~ msgid "Pinwheel galaxy"
-#~ msgstr "Szélkerék galaxis"
-
-#~ msgid "Red spider nebula"
-#~ msgstr "Vörös pók köd"
-
-#~ msgid "Monkey Head nebula"
-#~ msgstr "Majomfej köd"
-
-#~ msgid "Lemon slice nebula"
-#~ msgstr "Citromszelet köd"
-
-#~ msgid "Dragon nebula"
-#~ msgstr "Sárkány köd"
-
-#~ msgid "Crowbar galaxy"
-#~ msgstr "Számszeríj galaxis"
-
-#~ msgid "Cleopatra's Eye"
-#~ msgstr "Kleopátra szeme"
-
-#~ msgid "Sagittarius Star Cloud"
-#~ msgstr "Nyilas csillagköd"
-
-#~ msgid "Heart nebula"
-#~ msgstr "Szív köd"
-
-#~ msgid "Kidney Bean galaxy"
-#~ msgstr "Veteménybab galaxis"
-
-#~ msgid "Soul nebula"
-#~ msgstr "Lélek köd"
-
-#~ msgid "Herring galaxy"
-#~ msgstr "Hering galaxis"
-
-#~ msgid "Double cluster"
-#~ msgstr "Kettős csoport"
-
-#~ msgid "Helix nebula"
-#~ msgstr "Spirálköd"
-
-#~ msgid "Great Nebula in Orion"
-#~ msgstr "Nagy köd az Orionban"
-
-#~ msgid "Helix galaxy"
-#~ msgstr "Spirálgalaxis"
-
-#~ msgid "Struve's Lost nebula"
-#~ msgstr "Struve elveszett köd"
-
-#~ msgid "Triangulum galaxy"
-#~ msgstr "Triangulum galaxis"
-
-#~ msgid "Flame nebula"
-#~ msgstr "Lobogó köd"
-
-#~ msgid "Network nebula"
-#~ msgstr "Halászháló köd"
-
-#~ msgid "Hind's variable nebula"
-#~ msgstr "Hind változó köd"
-
-#~ msgid "Hubble's variable nebula"
-#~ msgstr "Hubble változó köd"
-
-#~ msgid "Lace-work nebula"
-#~ msgstr "Csipke köd"
-
-#~ msgid "Retina nebula"
-#~ msgstr "Recehártya köd"
-
-#~ msgid "Spirograph nebula"
-#~ msgstr "Légzésmérő köd"
-
-#~ msgid "τ Canis Majoris cluster"
-#~ msgstr "τ Canis Majoris csoport"
-
-#~ msgid "Caroline's cluster"
-#~ msgstr "Caroline csoport"
-
-#~ msgid "Satellite cluster"
-#~ msgstr "Kísérő csoport"
-
-#~ msgid "Dragonfly cluster"
-#~ msgstr "Szitakötő csoport"
-
-#~ msgid "Atoms for Peace galaxy"
-#~ msgstr "A béke atomjai galaxis"
-
-#~ msgid "Grand Design galaxy"
-#~ msgstr "Nagy terv galaxis"
-
-#~ msgid "Elephant's Trunk nebula"
-#~ msgstr "Elefántormány köd"
-
-#~ msgid "Sailboat cluster"
-#~ msgstr "Vitorláshajó csoport"
-
-#~ msgid "Heart-Shaped cluster"
-#~ msgstr "Szív alakú csoport"
-
-#~ msgid "Starfish cluster"
-#~ msgstr "Tengeri csillag csoport"
-
-#~ msgid "Whale galaxy"
-#~ msgstr "Bálna galaxis"
-
-#~ msgid "Fireworks galaxy"
-#~ msgstr "Tűzijáték galaxis"
-
-#~ msgid "Iris nebula"
-#~ msgstr "Irisz köd"
-
-#~ msgid "Bow-Tie nebula"
-#~ msgstr "Csokornyakkendő köd"
-
-#~ msgid "Needle galaxy"
-#~ msgstr "Tű galaxis"
-
-#~ msgid "Pearl cluster"
-#~ msgstr "Gyöngy csoport"
-
-#~ msgid "Toloatonga"
-#~ msgstr "Toloatonga - Dél Keresztje"
-
-#~ msgid "Toloa"
-#~ msgstr "Toloa"
-
-#~ msgid "Lua tangata"
-#~ msgstr "Lua tangata - Castor és/vagy Pollux"
-
-#~ msgid "Ae e'Uvea"
-#~ msgstr "Ae e'Uvea - Északi Korona csillagkép(?)"
-
-#~ msgid "Kapakau'o'tafahi"
-#~ msgstr "Kapakau'o'tafahi - Cassiopeia csillagkép(?)"
-
-#~ msgid "Houmatoloa"
-#~ msgstr "Houmatoloa"
-
-#~ msgid "Fatanalua"
-#~ msgstr "Fatanalua - Bereniké haja csillagkép(?)"
-
-#~ msgid "Fungasia"
-#~ msgstr "Fungasia - Toliman és/vagy Agena"
-
-#~ msgid "Tuinga ika"
-#~ msgstr "Tuinga ika - Az Orion része, övpáncél és kard"
-
-#~ msgid "Tu'ulalupe"
-#~ msgstr "Tu'ulalupe - Méhkas nyílthalmaz"
-
-#~ msgid "Toloalahi"
-#~ msgstr "Toloalahi - Hamis kereszt"
-
-#~ msgid "Plaskett's star"
-#~ msgstr "Plaskett csillaga"
-
-#~ msgid "Vacuum Cleaner galaxy"
-#~ msgstr "Porszívó galaxis"
-
-#~ msgid "Marfark"
-#~ msgstr "Marfark"
-
-#~ msgid "Cleeia"
-#~ msgstr "Cleeia"
-
-#~ msgid "Hatsya"
-#~ msgstr "Hatsya"
-
-#~ msgid "Hoedus II"
-#~ msgstr "Hoedus II"
-
-#~ msgid "Al Kurud"
-#~ msgstr "Al Kurud"
-
-#~ msgid "Hydrobius"
-#~ msgstr "Hydrobius"
-
-#~ msgid "Tseen Ke"
-#~ msgstr "Tseen Ke"
-
-#~ msgid "Tarf"
-#~ msgstr "Tarf"
-
-#~ msgid "Labr"
-#~ msgstr "Labr"
-
-#~ msgid "Al'dzhabkhakh"
-#~ msgstr "Al'dzhabkhakh"
-
-#~ msgid "Printseps"
-#~ msgstr "Printseps"
-
-#~ msgid "Marsik"
-#~ msgstr "Marsik"
-
-#~ msgid "Sinistra"
-#~ msgstr "Sinistra"
-
-#~ msgid "Dziban"
-#~ msgstr "Dziban"
-
-#~ msgid "Manubrij"
-#~ msgstr "Manubrij"
-
-#~ msgid "Alphekka Meridiana"
-#~ msgstr "Alphekka Meridiana"
-
-#~ msgid "Lukida"
-#~ msgstr "Lukida"
-
-#~ msgid "Deneb Okab"
-#~ msgstr "Deneb Okab"
-
-#~ msgid "Rukh"
-#~ msgstr "Rukh"
-
-#~ msgid "Castra"
-#~ msgstr "Castra"
-
-#~ msgid "Okul"
-#~ msgstr "Okul"
-
-#~ msgid "Mercury"
-#~ msgstr "Merkúr"
-
-#~ msgid "Vesta"
-#~ msgstr "Vesta"
-
-#~ msgid "Phobos"
-#~ msgstr "Phobosz"
-
-#~ msgid "Ceres"
-#~ msgstr "Ceres"
-
-#~ msgid "Pallas"
-#~ msgstr "Pallas"
-
-#~ msgid "Juno"
-#~ msgstr "Juno"
-
-#~ msgid "Venus"
-#~ msgstr "Vénusz"
-
-#~ msgid "Earth"
-#~ msgstr "Föld"
-
-#~ msgid "Mars"
-#~ msgstr "Mars"
-
-#~ msgid "Deimos"
-#~ msgstr "Deimosz"
-
-#~ msgid "Jupiter"
-#~ msgstr "Jupiter"
-
-#~ msgid "Sinope"
-#~ msgstr "Sinope"
-
-#~ msgid "Pasiphae"
-#~ msgstr "Pasiphae"
-
-#~ msgid "Elara"
-#~ msgstr "Elara"
-
-#~ msgid "Himalia"
-#~ msgstr "Himalia"
-
-#~ msgid "Amalthea"
-#~ msgstr "Amalthea"
-
-#~ msgid "Callisto"
-#~ msgstr "Callisto"
-
-#~ msgid "Ganymede"
-#~ msgstr "Ganümédesz"
-
-#~ msgid "Europa"
-#~ msgstr "Europa"
-
-#~ msgid "Io"
-#~ msgstr "Io"
-
-#~ msgid "Saturn"
-#~ msgstr "Szaturnusz"
-
-#~ msgid "Mimas"
-#~ msgstr "Mimasz"
-
-#~ msgid "Adrastea"
-#~ msgstr "Adraszteia"
-
-#~ msgid "Leda"
-#~ msgstr "Léda"
-
-#~ msgid "Thebe"
-#~ msgstr "Thébé"
-
-#~ msgid "Carme"
-#~ msgstr "Carme"
-
-#~ msgid "Enceladus"
-#~ msgstr "Enceladus"
-
-#~ msgid "Ananke"
-#~ msgstr "Ananké"
-
-#~ msgid "Lysithea"
-#~ msgstr "Lysithea"
-
-#~ msgid "Tethys"
-#~ msgstr "Tethys"
-
-#~ msgid "Ariel"
-#~ msgstr "Ariel"
-
-#~ msgid "Miranda"
-#~ msgstr "Miranda"
-
-#~ msgid "Rhea"
-#~ msgstr "Rhea"
-
-#~ msgid "Dione"
-#~ msgstr "Dione"
-
-#~ msgid "Hyperion"
-#~ msgstr "Hyperion"
-
-#~ msgid "Titan"
-#~ msgstr "Titan"
-
-#~ msgid "Phoebe"
-#~ msgstr "Phoebe"
-
-#~ msgid "Iapetus"
-#~ msgstr "Iapetus"
-
-#~ msgid "Uranus"
-#~ msgstr "Uránusz"
-
-#~ msgid "Neptune"
-#~ msgstr "Neptunusz"
-
-#~ msgid "Umbriel"
-#~ msgstr "Umbriel"
-
-#~ msgid "Titania"
-#~ msgstr "Titánia"
-
-#~ msgid "Oberon"
-#~ msgstr "Oberon"
-
-#~ msgid "Pluto"
-#~ msgstr "Pluto"
-
-#~ msgid "Charon"
-#~ msgstr "Charon"
-
-#~ msgid "Nix"
-#~ msgstr "Nix"
-
-#~ msgid "Triton"
-#~ msgstr "Triton"
-
-#~ msgid "Nereid"
-#~ msgstr "Nereida"
-
-#~ msgid "Naiad"
-#~ msgstr "Najád"
-
-#~ msgid "Eris"
-#~ msgstr "Eris"
-
-#~ msgid "Galatea"
-#~ msgstr "Galatea"
-
-#~ msgid "Despina"
-#~ msgstr "Despina"
-
-#~ msgid "Thalassa"
-#~ msgstr "Thalassza"
-
-#~ msgid "Psamathe"
-#~ msgstr "Psamathe"
-
-#~ msgid "Halimede"
-#~ msgstr "Halimede"
-
-#~ msgid "Proteus"
-#~ msgstr "Próteusz"
-
-#~ msgid "Larissa"
-#~ msgstr "Larissza"
-
-#~ msgid "Laomedeia"
-#~ msgstr "Laomedeia"
-
-#~ msgid "Sao"
-#~ msgstr "Szaó"
-
-#~ msgid "Neso"
-#~ msgstr "Nészó"
-
-#~ msgid "Sedna"
-#~ msgstr "Szedna"
-
-#~ msgid "Quaoar"
-#~ msgstr "Quaoar"
-
-#~ msgid "Metis"
-#~ msgstr "Métisz"
-
-#~ msgid "Makemake"
-#~ msgstr "Makemake"
-
-#~ msgid "Varuna"
-#~ msgstr "Varuna"
-
-#~ msgid "Daphne"
-#~ msgstr "Daphne kisbolygó"
-
-#~ msgid "Amor"
-#~ msgstr "Amor"
-
-#~ msgid "Flora"
-#~ msgstr "Flora"
-
-#~ msgid "Astraea"
-#~ msgstr "Astraea"
-
-#~ msgid "Phaethon"
-#~ msgstr "Phaethon"
-
-#~ msgid "Eros"
-#~ msgstr "Eros"
-
-#~ msgid "Chiron"
-#~ msgstr "Chiron"
-
-#~ msgid "Hektor"
-#~ msgstr "Hektor"
-
-#~ msgid "Apophis"
-#~ msgstr "Apophis"
-
-#~ msgid "Sisyphus"
-#~ msgstr "Sisyphus"
-
-#~ msgid "Daedalus"
-#~ msgstr "Daedalus"
-
-#~ msgid "Icarus"
-#~ msgstr "Icarus"
-
-#~ msgid "Hydra (moon)"
-#~ msgstr "Hydra (hold)"
-
-#~ msgid "Iris"
-#~ msgstr "Iris"
-
-#~ msgid "Hygiea"
-#~ msgstr "Hygiea"
-
-#~ msgid "Solar System Observer"
-#~ msgstr "Naprendszerbeli megfigyelő"
-
-#~ msgid "Hebe"
-#~ msgstr "Hebe"
-
-#~ msgid "Orcus"
-#~ msgstr "Orcus"
-
-#~ msgid "Great Comet of 1680 (C/1680 V1)"
-#~ msgstr "C/1680 V1 üstökös"
-
-#~ msgid "Ruprecht 147"
-#~ msgstr "Ruprecht 147"
-
-#~ msgid "Metis (moon)"
-#~ msgstr "Métisz"
-
-#~ msgid "Bianca (moon)"
-#~ msgstr "Bianca"
-
-#~ msgid "Prometheus (moon)"
-#~ msgstr "Prométheusz"
-
-#~ msgid "Epimetheus (moon)"
-#~ msgstr "Epimetheusz"
-
-#~ msgid "SpaceShip"
-#~ msgstr "Űrhajó"
-
-#~ msgid "Varda"
-#~ msgstr "(174567) Varda kubevánó"
-
-#~ msgid "Huya"
-#~ msgstr "(38628) Huya plutínó"
-
-#~ msgid "Salacia"
-#~ msgstr "(120347) Salacia kubevánó"
-
-#~ msgid "Epimetheus"
-#~ msgstr "(1810) Epimetheus aszteroida"
-
-#~ msgid "Gaspra"
-#~ msgstr "(951) Gaspra aszteroida"
-
-#~ msgid "Prometheus"
-#~ msgstr "(1809) Prometheus aszteroida"
-
-#~ msgid "Ida"
-#~ msgstr "(243) Ida aszteroida"
-
-#~ msgid "Bianca"
-#~ msgstr "(218) Bianca aszteroida"
-
-#~ msgid "Quoll"
-#~ msgstr "Quoll"
-
-#~ msgid "Matamemea"
-#~ msgstr "Matamemea"
-
-#~ msgid "Night Star"
-#~ msgstr "Éjszakai csillag"
-
-#~ msgid "Filamentary nebula"
-#~ msgstr "Rostos ködfolt"
-
-#~ msgid "Spiral cluster"
-#~ msgstr "Spirális csoport"
-
-#~ msgid "Prawn nebula"
-#~ msgstr "Garnélarák ködfolt"
-
-#~ msgid "Cocoon galaxy"
-#~ msgstr "Selyemgubó galaxis"
-
-#~ msgid "Summer Beehive cluster"
-#~ msgstr "Nyári méhkas csoport"
-
-#~ msgid "The Foxhead cluster"
-#~ msgstr "A Rókafej csoport"
-
-#~ msgid "Jellyfish nebula"
-#~ msgstr "Medúza ködfolt"
-
-#~ msgid "Coddington's nebula"
-#~ msgstr "Coddington nebula"
-
-#~ msgid "Blowdryer galaxy"
-#~ msgstr "Hajszárító galaxis"
-
-#~ msgid "Parrot's Head"
-#~ msgstr "Papagájfej"
-
-#~ msgid "Ruby Star"
-#~ msgstr "Rubin csillag"
-
-#~ msgid "Day"
-#~ msgstr "Day"
-
-#~ msgid "Elder sister"
-#~ msgstr "Chargee Gnowee"
-
-#~ msgid "Running Chicken nebula"
-#~ msgstr "Futó Csirke ködfolt"
-
-#~ msgid "Toby Jug nebula"
-#~ msgstr "Toby Jug ködfolt"
-
-#~ msgid "ω Cen cluster"
-#~ msgstr "ω Cen klaszter"
-
-#~ msgid "S Normae cluster"
-#~ msgstr "S Norma klaszter"
-
-#~ msgid "Hole in a cluster"
-#~ msgstr "Lyuk a klaszterben"
-
-#~ msgid "Graff's cluster"
-#~ msgstr "Graff klaszterja"
-
-#~ msgid "Fleming's Triangular nebula"
-#~ msgstr "Fleming háromszögű ködfoltja"
-
-#~ msgid "Surfboard galaxy"
-#~ msgstr "Szörfdeszka galaxis"
-
-#~ msgid "ε Ori nebula"
-#~ msgstr "ε Ori ködfolt"
-
-#~ msgid "Lost galaxy"
-#~ msgstr "Elveszett galaxis"
-
-#~ msgid "White Eyed Pea"
-#~ msgstr "Fehér szemű borsó"
-
-#~ msgid "Jih"
-#~ msgstr "Jih"
-
-#~ msgid "Pennae Caudalis"
-#~ msgstr "Pennae Caudalis"
-
-#~ msgid "Han"
-#~ msgstr "Han"
-
-#~ msgid "Sulphur-crested white cockatoo"
-#~ msgstr "Sárgabóbitás kakadu"
-
-#~ msgid "Unknown"
-#~ msgstr "Ismeretlen (=Merkúr)"
-
-#~ msgid "God of Sun"
-#~ msgstr "Amon Ré (=Nap)"
-
-#~ msgid "Khonsu, the Traveler"
-#~ msgstr "Honszu, az utazó (=Hold)"
-
-#~ msgid "Red Horus"
-#~ msgstr "Vörös Hórusz (=Mars)"
-
-#~ msgid "Star that Crosses / The God of the Morning"
-#~ msgstr "A reggel istene (=Vénusz)"
-
-#~ msgid "Horus Who Binds the Two Lands"
-#~ msgstr "Hórusz, aki összeköt két világot (=Jupiter)"
-
-#~ msgid "Horus, the Bull of Heaven"
-#~ msgstr "Hórusz, az égbolt bikája (=Szaturnusz)"
-
-#~ msgid "Oglechkutepi"
-#~ msgstr "Oglechkutepi"
-
-#~ msgid "Cat's Cradle"
-#~ msgstr "Macskabölcső (az Orion Hawaii neve)"
-
-#~ msgid "La'a"
-#~ msgstr "La'a (Nap)"
-
-#~ msgid "Mahina"
-#~ msgstr "Mahina (Hold)"
-
-#~ msgid "Tapukitea"
-#~ msgstr "Tapukitea (Vénusz)"
-
-#~ msgid "Wichapi Owanjila"
-#~ msgstr "Wichapi Owanjila"
-
-#~ msgid "Hamburger Galaxy (Leo Triplet)"
-#~ msgstr "Hamburger Galaxis (Három oroszlán)"
-
-#~ msgid "The northern Shinning one"
-#~ msgstr "Az északi fénylő"
-
-#~ msgid "The southern Shinning one"
-#~ msgstr "A déli fénylő"
-
-#~ msgid "Gemini nebula"
-#~ msgstr "Ikrek-köd"
-
-#~ msgid "Fly nebula"
-#~ msgstr "Légy-köd"
-
-#~ msgid "Northern Jewel Box"
-#~ msgstr "Északi ékszerdoboz"
-
-#~ msgid "Abell 35"
-#~ msgstr "Abell 35"
-
-#~ msgid "Abell 71"
-#~ msgstr "Abell 71"
-
-#~ msgid "Water lily nebula"
-#~ msgstr "Vízililiom-köd"
-
-#~ msgid "Armus"
-#~ msgstr "Armus"
-
-#~ msgid "Omicron Velorum Cluster"
-#~ msgstr "Omicron Velorum csoport"
-
-#~ msgid "Footprint Nebula (Minkowski's Footprint; M1-92)"
-#~ msgstr "Lábnyom köd (Minkowsi, M1-92)"
-
-#~ msgid "Minkowski's Butterfly (M2-9)"
-#~ msgstr "Minkowski lepkéje (M2-9)"
-
-#~ msgid "Sprinter cluster"
-#~ msgstr "Futó csoport"
-
-#~ msgid "Ptolemy cluster"
-#~ msgstr "Ptolemaiosz csoport"
-
-#~ msgid "Little Scorpion cluster"
-#~ msgstr "Kis skorpió csoport"
-
-#~ msgid "η Car cluster"
-#~ msgstr "η Car csillaghalmaz"
-
-#~ msgid "Markarian 18 cluster"
-#~ msgstr "Markarian 18 csillaghalmaz"
-
-#~ msgid "20 Vulpeculae cluster"
-#~ msgstr "20 Vulpeculae csillaghalmaz"
-
-#~ msgid "Seashell galaxy"
-#~ msgstr "Kagyló galaxis"
-
-#~ msgid "Cassiopeia Dwarf Galaxy"
-#~ msgstr "Cassiopeia törpegalaxis"
-
-#~ msgid "Sextans Dwarf Galaxy"
-#~ msgstr "Szextáns törpegalaxis"
-
-#~ msgid "Eureka"
-#~ msgstr "Eureka"
-
-#~ msgid "Wolf-Lundmark-Melotte (WLM)"
-#~ msgstr "Wolf-Lundmark-Melotte (WLM)"
-
-#~ msgid "Blue Flash nebula"
-#~ msgstr "Kék villanás köd"
-
-#~ msgid "Imprint of a Foot"
-#~ msgstr "Lábnyom"
-
-#~ msgid "Cruithne"
-#~ msgstr "3753 Cruithne"
-
-#~ msgid "Duende"
-#~ msgstr "367943 Duende"
-
-#~ msgid "Earth Observer"
-#~ msgstr "Földi megfigyelő"
-
-#~ msgid "S Normae Cluster"
-#~ msgstr "S Normae csoport"
-
-#~ msgid "Lord Rosse's Galaxy"
-#~ msgstr "Lord Rosse galaxis"
-
-#~ msgid "Golf of Mexico Nebula"
-#~ msgstr "Mexikói öböl köd"
-
-#~ msgid "Hubble's variable Nebula"
-#~ msgstr "Hubble változó köd"
-
-#~ msgid "Ophelia"
-#~ msgstr "Ophelia"
-
-#~ msgid "Janus"
-#~ msgstr "Janus"
-
-#~ msgid "Pan"
-#~ msgstr "Pan"
-
-#~ msgid "Pandora"
-#~ msgstr "Pandora"
-
-#~ msgid "Telesto"
-#~ msgstr "Telesto"
-
-#~ msgid "Helene"
-#~ msgstr "Helene"
-
-#~ msgid "Cressida"
-#~ msgstr "Cressida"
-
-#~ msgid "Desdemona"
-#~ msgstr "Desdemona"
-
-#~ msgid "Calypso"
-#~ msgstr "Calypso"
-
-#~ msgid "Cordelia"
-#~ msgstr "Cordelia"
-
-#~ msgid "Psyche"
-#~ msgstr "Psyche"
-
-#~ msgid "Eunomia"
-#~ msgstr "Eunomia"
-
-#~ msgid "Amphitrite"
-#~ msgstr "Amphitrite"
-
-#~ msgid "Fortuna"
-#~ msgstr "Fortuna"
-
-#~ msgid "Euphrosyne"
-#~ msgstr "Euphrosyne"
-
-#~ msgid "Parthenope"
-#~ msgstr "Parthenope"
-
-#~ msgid "Egeria"
-#~ msgstr "Egeria"
-
-#~ msgid "Styx"
-#~ msgstr "Styx"
-
-#~ msgid "Kerberos"
-#~ msgstr "Kerberos"
-
-#~ msgid "Juliet"
-#~ msgstr "Juliet"
-
-#~ msgid "Thisbe"
-#~ msgstr "Thisbe"
-
-#~ msgid "Eugenia"
-#~ msgstr "Eugenia"
-
-#~ msgid "Cybele"
-#~ msgstr "Cybele"
-
-#~ msgid "Doris"
-#~ msgstr "Doris"
-
-#~ msgid "Ursula"
-#~ msgstr "Ursula"
-
-#~ msgid "Aurora"
-#~ msgstr "Aurora"
-
-#~ msgid "Camilla"
-#~ msgstr "Camilla"
-
-#~ msgid "Bamberga"
-#~ msgstr "Bamberga"
-
-#~ msgid "Diotima"
-#~ msgstr "Diotima"
-
-#~ msgid "Sylvia"
-#~ msgstr "Sylvia"
-
-#~ msgid "Davida"
-#~ msgstr "Davida"
-
-#~ msgid "Herculina"
-#~ msgstr "Herculina"
-
-#~ msgid "Interamnia"
-#~ msgstr "Interamnia"
-
-#~ msgid "Patientia"
-#~ msgstr "Patientia"
