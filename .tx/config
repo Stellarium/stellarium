@@ -1,0 +1,39 @@
+[main]
+host = https://www.transifex.com
+
+[stellarium.stellarium]
+file_filter = po/stellarium/<lang>.po
+source_file = po/stellarium/stellarium.pot
+source_lang = en
+type = PO
+
+[stellarium.stellarium-desktop]
+file_filter = po/stellarium-desktop/<lang>.po
+source_file = po/stellarium-desktop/stellarium-desktop.pot
+source_lang = en
+type = PO
+
+[stellarium.stellarium-metainfo]
+file_filter = po/stellarium-metainfo/<lang>.po
+source_file = po/stellarium-metainfo/stellarium-metainfo.pot
+source_lang = en
+type = PO
+
+[stellarium.stellarium-skycultures]
+file_filter = po/stellarium-skycultures/<lang>.po
+source_file = po/stellarium-skycultures/stellarium-skycultures.pot
+source_lang = en
+type = PO
+
+[stellarium.stellarium-planetary-features]
+file_filter = po/stellarium-planetary-features/<lang>.po
+source_file = po/stellarium-planetary-features/stellarium-planetary-features.pot
+source_lang = en
+type = PO
+
+[stellarium.stellarium-remotecontrol]
+file_filter = po/stellarium-remotecontrol/<lang>.po
+source_file = po/stellarium-remotecontrol/stellarium-remotecontrol.pot
+source_lang = en
+type = PO
+
