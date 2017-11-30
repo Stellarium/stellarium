@@ -392,7 +392,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	if (guiPanel)
 	{
 		// Remove all events on the sky within Ocular GUI Panel.
-		if (event->x()*ppx>guiPanel->pos().x() && event->y()*ppx>(prj->getViewportHeight()-guiPanel->size().height()))
+		if (event->x()>guiPanel->pos().x() && event->y()>(prj->getViewportHeight()-guiPanel->size().height()))
 		{
 			event->setAccepted(true);
 			return;
@@ -406,8 +406,8 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	{
 		float wh = prj->getViewportWidth()/2.; // get half of width of the screen
 		float hh = prj->getViewportHeight()/2.; // get half of height of the screen
-		float mx = event->x()*ppx-wh; // point 0 in center of the screen, axis X directed to right
-		float my = event->y()*ppx-hh; // point 0 in center of the screen, axis Y directed to bottom
+		float mx = event->x()-wh; // point 0 in center of the screen, axis X directed to right
+		float my = event->y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 
 		double inner = 0.5 * params.viewportFovDiameter * ppx;
 		// See if we need to scale the mask
