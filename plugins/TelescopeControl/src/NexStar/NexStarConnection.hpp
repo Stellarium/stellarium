@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #ifndef _NEXSTAR_CONNECTION_HPP_
 #define _NEXSTAR_CONNECTION_HPP_
 
-#include "SerialPort.hpp"
+#include "common/SerialPort.hpp"
 
 #include <list>
 using namespace std;

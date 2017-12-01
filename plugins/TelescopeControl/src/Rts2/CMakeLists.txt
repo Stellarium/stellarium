@@ -1,8 +1,6 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-include_directories($<TARGET_PROPERTY:TelescopeControl_common,INCLUDE_DIRECTORIES>)
-
 add_library(TelescopeControl_Rts2
     TelescopeClientJsonRts2.hpp
     TelescopeClientJsonRts2.cpp

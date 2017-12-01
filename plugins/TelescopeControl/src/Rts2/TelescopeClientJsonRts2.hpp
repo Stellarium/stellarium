@@ -26,7 +26,7 @@
 #include "QNetworkReply"
 #include "QUrl"
 
-#include "TelescopeClient.hpp"
+#include "common/TelescopeClient.hpp"
 #include "TelescopeControl.hpp"
 
 #include "StelCore.hpp"

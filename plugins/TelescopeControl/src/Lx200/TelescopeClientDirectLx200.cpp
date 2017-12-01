@@ -28,7 +28,7 @@
 
 #include "Lx200Connection.hpp"
 #include "Lx200Command.hpp"
-#include "LogFile.hpp"
+#include "common/LogFile.hpp"
 #include "StelCore.hpp"
 
 #include <QRegExp>

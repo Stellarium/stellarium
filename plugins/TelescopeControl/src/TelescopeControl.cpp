@@ -27,10 +27,10 @@
 
 #include "StelUtils.hpp"
 #include "TelescopeControl.hpp"
-#include "TelescopeClient.hpp"
-#include "TelescopeDialog.hpp"
-#include "SlewDialog.hpp"
-#include "LogFile.hpp"
+#include "common/TelescopeClient.hpp"
+#include "gui/TelescopeDialog.hpp"
+#include "gui/SlewDialog.hpp"
+#include "common/LogFile.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"

@@ -28,7 +28,7 @@
 
 #include "NexStarConnection.hpp"
 #include "NexStarCommand.hpp"
-#include "LogFile.hpp"
+#include "common/LogFile.hpp"
 #include "StelCore.hpp"
 
 #include <QRegExp>

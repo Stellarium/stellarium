@@ -28,7 +28,7 @@
 #include <QStandardItemModel>
 
 #include "StelDialog.hpp"
-#include "TelescopeControlGlobals.hpp"
+#include "common/TelescopeControlGlobals.hpp"
 #include "TelescopeConfigurationDialog.hpp"
 
 using namespace TelescopeControlGlobals;

@@ -5,8 +5,6 @@ find_package(INDI REQUIRED client)
 find_package(Threads REQUIRED)
 find_package(ZLIB REQUIRED)
 
-include_directories($<TARGET_PROPERTY:TelescopeControl_common,INCLUDE_DIRECTORIES>)
-
 add_library(TelescopeControl_INDI
     INDIConnection.hpp
     INDIConnection.cpp

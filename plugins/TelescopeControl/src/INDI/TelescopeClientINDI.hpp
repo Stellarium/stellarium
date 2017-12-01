@@ -19,7 +19,7 @@
 #ifndef TELESCOPECLIENTINDI_HPP
 #define TELESCOPECLIENTINDI_HPP
 
-#include "TelescopeClient.hpp"
+#include "common/TelescopeClient.hpp"
 
 #include "INDIConnection.hpp"
 

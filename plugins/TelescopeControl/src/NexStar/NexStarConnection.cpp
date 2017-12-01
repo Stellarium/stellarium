@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "NexStarConnection.hpp"
 #include "NexStarCommand.hpp"
 #include "TelescopeClientDirectNexStar.hpp"
-#include "LogFile.hpp"
+#include "common/LogFile.hpp"
 
 #include <iostream>
 using namespace std;

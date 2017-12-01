@@ -1,14 +1,9 @@
-INCLUDE_DIRECTORIES(
-     .
-     gui
-     clients
-     servers
-     ${CMAKE_BINARY_DIR}
-     ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src
-     ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/gui
-     ${CMAKE_BINARY_DIR}/plugins/TelescopeControl/src/servers
-     ${INDI_INCLUDE_DIR}
-)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+
+set(TelescopeControl_SRCS
+    TelescopeControl.hpp
+    TelescopeControl.cpp
+    )
 
 LINK_DIRECTORIES(/src)
 

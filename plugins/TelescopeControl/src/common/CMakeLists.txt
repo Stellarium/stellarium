@@ -5,8 +5,6 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(TelescopeControl_common
     TelescopeControlGlobals.hpp
-    TelescopeControl.hpp
-    TelescopeControl.cpp
     LogFile.hpp
     LogFile.cpp
     Socket.hpp
