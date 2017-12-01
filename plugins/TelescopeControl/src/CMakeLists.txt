@@ -18,8 +18,6 @@ SET(TelescopeControl_SRCS
      clients/InterpolatedPosition.cpp
      clients/TelescopeClient.hpp
      clients/TelescopeClient.cpp
-     clients/TelescopeClientDirectLx200.hpp
-     clients/TelescopeClientDirectLx200.cpp
      clients/TelescopeClientDirectNexStar.hpp
      clients/TelescopeClientDirectNexStar.cpp
      clients/TelescopeClientJsonRts2.hpp
@@ -44,10 +42,6 @@ SET(TelescopeControl_SRCS
      servers/Connection.cpp
      servers/SerialPort.hpp
      servers/SerialPort.cpp
-     servers/Lx200Connection.hpp
-     servers/Lx200Connection.cpp
-     servers/Lx200Command.hpp
-     servers/Lx200Command.cpp
      servers/NexStarConnection.hpp
      servers/NexStarConnection.cpp
      servers/NexStarCommand.hpp
@@ -75,6 +69,7 @@ QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 #ENDIF()
 #
 
+add_subdirectory(Lx200)
 add_subdirectory(INDI)
 
 ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})
@@ -83,6 +78,7 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     Qt5::Core
     Qt5::Widgets
     Qt5::SerialPort
+    TelescopeControl_Lx200
     TelescopeControl_INDI
     )
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")

@@ -25,7 +25,7 @@
 
 #include "TelescopeClient.hpp"
 #include "TelescopeClientJsonRts2.hpp"
-#include "TelescopeClientDirectLx200.hpp"
+#include "Lx200/TelescopeClientDirectLx200.hpp"
 #include "TelescopeClientDirectNexStar.hpp"
 #include "INDI/TelescopeClientINDI.hpp"
 #include "StelUtils.hpp"
