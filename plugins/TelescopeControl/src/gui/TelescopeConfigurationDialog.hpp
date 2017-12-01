@@ -26,7 +26,7 @@
 #include <QIntValidator>
 #include <QStringList>
 #include "StelDialog.hpp"
-#include "common/TelescopeControlGlobals.hpp"
+#include "TelescopeControlGlobals.hpp"
 
 using namespace TelescopeControlGlobals;
 

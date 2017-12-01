@@ -35,7 +35,7 @@
 
 #include "StelApp.hpp"
 #include "StelObject.hpp"
-#include "InterpolatedPosition.hpp"
+#include "common/InterpolatedPosition.hpp"
 
 class StelCore;
 

@@ -34,7 +34,7 @@
 #include "StelObject.hpp"
 
 #include "common/Server.hpp" //from the telescope server source tree
-#include "common/TelescopeClient.hpp" //from the plug-in's source tree
+#include "TelescopeClient.hpp" //from the plug-in's source tree
 #include "common/InterpolatedPosition.hpp"
 
 class NexStarConnection;

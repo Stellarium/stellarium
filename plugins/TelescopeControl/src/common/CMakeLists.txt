@@ -4,7 +4,6 @@ set(CMAKE_AUTOMOC ON)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_library(TelescopeControl_common
-    TelescopeControlGlobals.hpp
     LogFile.hpp
     LogFile.cpp
     Socket.hpp
@@ -17,8 +16,6 @@ add_library(TelescopeControl_common
     SerialPort.cpp
     InterpolatedPosition.hpp
     InterpolatedPosition.cpp
-    TelescopeClient.hpp
-    TelescopeClient.cpp
     )
 
 target_link_libraries(TelescopeControl_common

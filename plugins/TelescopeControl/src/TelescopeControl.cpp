@@ -27,7 +27,7 @@
 
 #include "StelUtils.hpp"
 #include "TelescopeControl.hpp"
-#include "common/TelescopeClient.hpp"
+#include "TelescopeClient.hpp"
 #include "gui/TelescopeDialog.hpp"
 #include "gui/SlewDialog.hpp"
 #include "common/LogFile.hpp"

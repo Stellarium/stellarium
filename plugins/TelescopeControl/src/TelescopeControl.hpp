@@ -34,7 +34,7 @@
 #include "StelObjectModule.hpp"
 #include "StelProjectorType.hpp"
 #include "StelTextureTypes.hpp"
-#include "common/TelescopeControlGlobals.hpp"
+#include "TelescopeControlGlobals.hpp"
 #include "VecMath.hpp"
 
 #include <QFile>
