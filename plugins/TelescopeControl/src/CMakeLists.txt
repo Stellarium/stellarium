@@ -4,21 +4,6 @@ set(CMAKE_AUTORCC ON)
 
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
-LINK_DIRECTORIES(/src)
-
-#QT5_WRAP_UI(TelescopeControl_UIS_H ${TelescopeControl_UIS})
-
-# Compile the resource files
-#SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
-#QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
-
-#IF(WIN32 AND NOT MSVC)
-# TODO: Test if winsock is still necessary if the Telescope Control plug-in is disabled.
-# Because including it here seems to duplicate STELLARIUM_STATIC_PLUGINS_LIBRARIES
-#   SET(extLinkerOption ${extLinkerOption} libwinmm.a -lws2_32)
-#ENDIF()
-#
-
 add_subdirectory(common)
 add_subdirectory(gui)
 add_subdirectory(Lx200)
