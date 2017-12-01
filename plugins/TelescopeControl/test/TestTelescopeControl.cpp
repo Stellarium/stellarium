@@ -1,6 +1,6 @@
 #include "TestTelescopeControl.hpp"
 
-TestTelescopeControl::TestTelescopeControl()
+void TestTelescopeControl::instantiate()
 {
 
 }

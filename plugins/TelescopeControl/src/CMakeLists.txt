@@ -70,6 +70,7 @@ QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
 #
 
 add_subdirectory(Lx200)
+add_subdirectory(NexStar)
 add_subdirectory(INDI)
 
 ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeControl_RES_CXX} ${TelescopeControl_UIS_H})

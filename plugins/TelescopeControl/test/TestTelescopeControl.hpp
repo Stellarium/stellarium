@@ -2,13 +2,17 @@
 #define TESTTELESCOPECONTROL_HPP
 
 #include <QtTest/QtTest>
+#include "TelescopeControl.hpp"
 
 class TestTelescopeControl : public QObject
 {
     Q_OBJECT
 
-public:
-    TestTelescopeControl();
+private slots:
+    void instantiate();
+
+private:
+    //TelescopeControl telescopeControl;
 };
 
 #endif // TESTTELESCOPECONTROL_HPP
