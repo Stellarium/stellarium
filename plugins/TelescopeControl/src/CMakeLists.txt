@@ -81,7 +81,6 @@ ADD_LIBRARY(TelescopeControl-static STATIC ${TelescopeControl_SRCS} ${TelescopeC
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
 TARGET_LINK_LIBRARIES(TelescopeControl-static
     Qt5::Core
-    Qt5::Network
     Qt5::Widgets
     Qt5::SerialPort
     TelescopeControl_INDI

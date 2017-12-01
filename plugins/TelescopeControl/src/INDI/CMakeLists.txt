@@ -1,6 +1,9 @@
-FIND_PACKAGE(INDI REQUIRED client)
-FIND_PACKAGE(Threads REQUIRED)
-FIND_PACKAGE(ZLIB REQUIRED)
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+
+find_package(INDI REQUIRED client)
+find_package(Threads REQUIRED)
+find_package(ZLIB REQUIRED)
 
 add_library(TelescopeControl_INDI
     INDIConnection.hpp
@@ -10,6 +13,9 @@ add_library(TelescopeControl_INDI
     )
 
 target_link_libraries(TelescopeControl_INDI
+    Qt5::Core
+    Qt5::Network
+    Qt5::Gui
     ${CMAKE_THREAD_LIBS_INIT}
     ${ZLIB_LIBRARIES}
     ${INDI_LIBRARIES}
