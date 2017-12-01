@@ -2,7 +2,7 @@
 #define TESTTELESCOPECONTROL_HPP
 
 #include <QtTest/QtTest>
-#include "TelescopeControl.hpp"
+#include "common/TelescopeControl.hpp"
 
 class TestTelescopeControl : public QObject
 {

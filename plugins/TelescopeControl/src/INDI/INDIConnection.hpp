@@ -19,7 +19,7 @@
 #ifndef INDICONNECTION_HPP
 #define INDICONNECTION_HPP
 
-#include "baseclient.h"
+#include "libindi/baseclient.h"
 
 #include <mutex>
 

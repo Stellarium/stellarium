@@ -1,6 +1,8 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
+include_directories($<TARGET_PROPERTY:TelescopeControl_common,INCLUDE_DIRECTORIES>)
+
 add_library(TelescopeControl_Lx200
     Lx200Command.hpp
     Lx200Command.cpp
@@ -14,4 +16,5 @@ target_link_libraries(TelescopeControl_Lx200
     Qt5::Core
     Qt5::Network
     Qt5::Gui
+    TelescopeControl_common
     )

@@ -1,10 +1,11 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-
 find_package(INDI REQUIRED client)
 find_package(Threads REQUIRED)
 find_package(ZLIB REQUIRED)
+
+include_directories($<TARGET_PROPERTY:TelescopeControl_common,INCLUDE_DIRECTORIES>)
 
 add_library(TelescopeControl_INDI
     INDIConnection.hpp
@@ -20,4 +21,5 @@ target_link_libraries(TelescopeControl_INDI
     ${INDI_LIBRARIES}
     ${CMAKE_THREAD_LIBS_INIT}
     ${ZLIB_LIBRARIES}
+    TelescopeControl_common
     )
