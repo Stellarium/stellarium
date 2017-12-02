@@ -463,7 +463,7 @@ IF(GENERATE_STELMAINLIB)
 ELSE()
      ADD_LIBRARY(stelMain ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
-     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
      TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
 
      IF(APPLE)
