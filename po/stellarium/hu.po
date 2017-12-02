@@ -10,6 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-29 14:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: misibacsi <juharfalvi@gmail.com>, 2017\n"
 "Language-Team: Hungarian (https://www.transifex.com/stellarium/teams/80998/hu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -40,7 +41,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:298
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
-msgstr ""
+msgstr "Típus"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
@@ -61,7 +62,7 @@ msgstr ""
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
 #: src/StelMainView.cpp:786
 msgid "Display Options"
-msgstr ""
+msgstr "Kijelző opciók"
 
 #: src/core/modules/AsterismMgr.cpp:99
 msgid "Asterism lines"
@@ -77,12 +78,12 @@ msgstr ""
 
 #: src/core/modules/Constellation.cpp:292
 msgid "constellation"
-msgstr ""
+msgstr "csillagkép"
 
 #: src/core/modules/ConstellationMgr.cpp:144
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:291
 msgid "Constellation lines"
-msgstr ""
+msgstr "csillagkép vonalak"
 
 #: src/core/modules/ConstellationMgr.cpp:145
 msgid "Constellation art"
@@ -91,16 +92,16 @@ msgstr ""
 #: src/core/modules/ConstellationMgr.cpp:146
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:296
 msgid "Constellation labels"
-msgstr ""
+msgstr "csillagkép feliratok"
 
 #: src/core/modules/ConstellationMgr.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Constellation boundaries"
-msgstr ""
+msgstr "csillagkép határok"
 
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1482
 msgid "Select single constellation"
-msgstr ""
+msgstr "Egy csillagkép kiválasztása"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
@@ -110,7 +111,7 @@ msgstr ""
 #: src/ui_dsoColorsDialog.h:652
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Stars"
-msgstr ""
+msgstr "Csillagok"
 
 #: src/core/modules/StarMgr.cpp:453
 msgid "Stars labels"
@@ -118,7 +119,7 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:641 src/ui_viewDialog.h:2719
 msgid "Meridian"
-msgstr ""
+msgstr "Meridián"
 
 #: src/core/modules/GridLinesMgr.cpp:645
 msgid "Ecliptic of J2000.0"
@@ -134,23 +135,23 @@ msgstr ""
 
 #: src/core/modules/GridLinesMgr.cpp:657
 msgid "Equator"
-msgstr ""
+msgstr "Egyenlítő"
 
 #: src/core/modules/GridLinesMgr.cpp:662
 msgid "Precession Circle"
-msgstr ""
+msgstr "Precessziós ciklus"
 
 #: src/core/modules/GridLinesMgr.cpp:666 src/ui_viewDialog.h:2708
 msgid "Horizon"
-msgstr ""
+msgstr "Horizont"
 
 #: src/core/modules/GridLinesMgr.cpp:670
 msgid "Galactic Equator"
-msgstr ""
+msgstr "Galaktikus egyenlítő"
 
 #: src/core/modules/GridLinesMgr.cpp:674
 msgid "Supergalactic Equator"
-msgstr ""
+msgstr "Szupergalaktikus egyenlítő"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
 #: src/core/modules/GridLinesMgr.cpp:679 src/ui_viewDialog.h:2723

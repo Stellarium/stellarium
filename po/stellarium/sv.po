@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-11-29 14:41+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: Karl B <birgerssonkarl@outlook.com>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/stellarium/teams/80998/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1260,7 +1260,7 @@ msgstr "Mpc"
 #: src/core/modules/Nebula.cpp:339
 msgctxt "distance"
 msgid "M ly"
-msgstr ""
+msgstr "Mly"
 
 #: src/core/modules/Nebula.cpp:367 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
@@ -1737,7 +1737,7 @@ msgstr "AU"
 #: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:3676
 msgctxt "distance"
 msgid "M km"
-msgstr ""
+msgstr "Mkm"
 
 #: src/core/modules/Planet.cpp:473 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:216
@@ -1756,11 +1756,11 @@ msgstr "km/s"
 
 #: src/core/modules/Planet.cpp:503 src/core/modules/MinorPlanet.cpp:315
 msgid "Orbital Velocity"
-msgstr ""
+msgstr "Banhastighet"
 
 #: src/core/modules/Planet.cpp:506 src/core/modules/MinorPlanet.cpp:318
 msgid "Heliocentric Velocity"
-msgstr ""
+msgstr "Heliocentrisk hastighet"
 
 #: src/core/modules/Planet.cpp:529
 msgid "with rings"
@@ -1893,7 +1893,7 @@ msgstr "periodisk"
 
 #: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1382
 msgid "Velocity"
-msgstr ""
+msgstr "Hastighet"
 
 #: src/core/modules/Comet.cpp:285
 msgid "Coma diameter (estimate)"
@@ -9043,7 +9043,7 @@ msgstr "Rätta etiketter mot horisonten"
 
 #: src/ui_configurationDialog.h:1455
 msgid "Gravity labels"
-msgstr "Gravitetsetiketter"
+msgstr "Gravitationsetiketter"
 
 #: src/ui_configurationDialog.h:1457
 msgid "Use decimal degrees for coordinates"
@@ -9472,7 +9472,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:924
 msgid "Planetary Calculator"
-msgstr ""
+msgstr "Planetarisk räknare"
 
 #: src/ui_astroCalcDialog.h:932
 msgid "Save positions"
@@ -9619,35 +9619,35 @@ msgstr "Visa objekt som är synliga:"
 
 #: src/ui_astroCalcDialog.h:989
 msgid "Angular distance:"
-msgstr ""
+msgstr "Vinkelavstånd:"
 
 #: src/ui_astroCalcDialog.h:990
 msgid "Linear distance:"
-msgstr ""
+msgstr "Linjärt avstånd"
 
 #: src/ui_astroCalcDialog.h:991
 msgid "Second celestial body:"
-msgstr ""
+msgstr "Andra himlakroppen:"
 
 #: src/ui_astroCalcDialog.h:992
 msgid "First celestial body:"
-msgstr ""
+msgstr "Första himlakroppen:"
 
 #: src/ui_astroCalcDialog.h:993
 msgid "Orbital resonance:"
-msgstr ""
+msgstr "Banresonans:"
 
 #: src/ui_astroCalcDialog.h:994
 msgid "Orbital velocity of first celestial body:"
-msgstr ""
+msgstr "Första himlakroppens banhastighet:"
 
 #: src/ui_astroCalcDialog.h:995
 msgid "Orbital velocity of second celestial body:"
-msgstr ""
+msgstr "Andra himlakroppens banhastighet:"
 
 #: src/ui_astroCalcDialog.h:996
 msgid "Compute"
-msgstr ""
+msgstr "Beräkna"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -10781,11 +10781,11 @@ msgstr "Sparrows upplösningsgräns"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:944
 msgid "Visual resolution"
-msgstr ""
+msgstr "Visuell upplösning"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
 msgid "Visual resolution is based on eye properties and magnification"
-msgstr ""
+msgstr "Den visuella upplösningen baseras på ögats egenskaper och förstoring"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:408
@@ -11001,7 +11001,7 @@ msgstr "Anpassa bildens storlek"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1158
 msgid "In ocular mode, allow some visibility outside ocular circle."
-msgstr ""
+msgstr "Tillåt synlighet utanför okularcirel i okularläge."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1160
 msgid "Use semi-transparent mask"
@@ -12249,7 +12249,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:290
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 msgid "Using this plug-in"
-msgstr ""
+msgstr "Använd detta insticksprogram"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:291
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:328
@@ -14782,7 +14782,7 @@ msgstr "Neptunuslik"
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:949
 msgid "Primary Transit"
-msgstr ""
+msgstr "Primär passage"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:951
@@ -14792,7 +14792,7 @@ msgstr ""
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:953
 msgid "Radial Velocity"
-msgstr ""
+msgstr "Radialhastighet"
 
 #. TRANSLATORS: Detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:955
@@ -14834,7 +14834,7 @@ msgstr "Radie"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgid "Effective temperature"
-msgstr ""
+msgstr "Effektiv temperatur"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:342
 msgctxt "temperature"
@@ -14872,7 +14872,7 @@ msgstr "Upptäckt år"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:356
 msgid "Detection method"
-msgstr ""
+msgstr "Upptäcktsmetod"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:357
 msgid "Planetary class"
@@ -14890,7 +14890,7 @@ msgstr "Jordlikhetsindex"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:362
 msgid "Conservative sample"
-msgstr ""
+msgstr "Konservativt urval"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:465
 msgid "yes"
@@ -14902,7 +14902,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:504
 msgid "Equilibrium temperature on Earth"
-msgstr ""
+msgstr "Jämviktstemperatur på jorden"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
 msgid "Exoplanets Plug-in"
@@ -15479,7 +15479,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
 msgid "Effective temperature of host star, K"
-msgstr ""
+msgstr "Effektiv temperatur för värdstjärna, K"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
 msgid "Year of Discovery"
