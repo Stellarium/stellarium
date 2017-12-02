@@ -490,11 +490,6 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ################################## Build unit tests #########################################
 #############################################################################################
 
-#SET(STELLARIUM_TESTS)
-#MACRO(ADD_TEST NAME)
-#     SET(STELLARIUM_TESTS ${STELLARIUM_TESTS} ${NAME})
-#ENDMACRO()
-
 SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test stelMain)
 
 # Custom target used to build all tests at once
@@ -644,12 +639,3 @@ ADD_TEST(testPrecession testPrecession )
 #ADD_DEPENDENCIES(buildTests testEphemeris)
 #ADD_TEST(testEphemeris)
 
-#ADD_CUSTOM_TARGET(tests COMMENT "Run the Stellarium unit tests")
-#FOREACH(NAME ${STELLARIUM_TESTS})
-#     IF(MSVC)
-#          ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./${CMAKE_BUILD_TYPE}/${NAME}.exe WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src)
-#     ELSE()
-#          ADD_CUSTOM_COMMAND(TARGET tests POST_BUILD COMMAND ./${NAME} WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/src)
-#     ENDIF()
-#ENDFOREACH()
-#ADD_DEPENDENCIES(tests buildTests)
