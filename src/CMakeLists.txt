@@ -461,8 +461,10 @@ IF(GENERATE_STELMAINLIB)
      #stelMain should be after the plug-ins, otherwise the build crashes
      TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
 ELSE()
-     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS})
+     ADD_LIBRARY(stelMain ${stellarium_lib_SRCS})
+     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
+     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
 
      IF(APPLE)
           SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
