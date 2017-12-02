@@ -93,6 +93,7 @@ Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 bool Nebula::flagUseOutlines = false;
+bool Nebula::flagShowAdditionalNames = true;
 bool Nebula::flagUseSizeLimits = false;
 double Nebula::minSizeLimit = 1.0f;
 double Nebula::maxSizeLimit = 600.0f;
@@ -158,7 +159,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		oss << getNameI18n();
 		QString aliases = getI18nAliases();
-		if (!aliases.isEmpty())
+		if (!aliases.isEmpty() && flagShowAdditionalNames)
 			oss << " (" << aliases << ")";
 	}
 

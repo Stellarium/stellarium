@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>755</width>
-    <height>400</height>
+    <width>764</width>
+    <height>686</height>
    </rect>
   </property>
   <property name="font">
@@ -1955,7 +1955,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="7" column="0">
+               <item row="8" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_7">
                  <item>
                   <widget class="QCheckBox" name="nebulaLimitMagnitudeCheckBox">
@@ -2042,7 +2042,7 @@
                  </item>
                 </layout>
                </item>
-               <item row="9" column="0">
+               <item row="10" column="0">
                 <widget class="QPushButton" name="pushButtonConfigureDSOColors">
                  <property name="text">
                   <string>Configure colors of markers</string>
@@ -2056,7 +2056,7 @@
                  </property>
                 </widget>
                </item>
-               <item row="8" column="0">
+               <item row="9" column="0">
                 <layout class="QHBoxLayout" name="horizontalLayout_14">
                  <item>
                   <widget class="QCheckBox" name="nebulaLimitSizeCheckBox">
@@ -2116,6 +2116,13 @@
                   </widget>
                  </item>
                 </layout>
+               </item>
+               <item row="7" column="0">
+                <widget class="QCheckBox" name="checkBoxAdditionalNames">
+                 <property name="text">
+                  <string>Use an additional names of DSO</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </widget>

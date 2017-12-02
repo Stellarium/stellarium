@@ -78,6 +78,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setFlagOutlines
 		   NOTIFY flagOutlinesDisplayedChanged
 		   )
+	Q_PROPERTY(bool flagAdditionalNamesDisplayed
+		   READ getFlagAdditionalNames
+		   WRITE setFlagAdditionalNames
+		   NOTIFY flagAdditionalNamesDisplayedChanged
+		   )
 	Q_PROPERTY(bool flagSurfaceBrightnessUsage
 		   READ getFlagSurfaceBrightnessUsage
 		   WRITE setFlagSurfaceBrightnessUsage
@@ -766,6 +771,11 @@ public slots:
 	//! Get flag for usage outlines for big DSO instead their hints.
 	bool getFlagOutlines(void) const;
 
+	//! Set flag for show an additional names for DSO
+	void setFlagAdditionalNames(const bool flag);
+	//! Get flag for show an additional names for DSO
+	bool getFlagAdditionalNames(void) const;
+
 	//! Set flag for usage designations of DSO for their labels instead common names.
 	void setDesignationUsage(const bool flag);
 	//! Get flag for usage designations of DSO for their labels instead common names.
@@ -852,6 +862,7 @@ signals:
 	void typeFiltersChanged(Nebula::TypeGroup flags);
 	void hintsProportionalChanged(bool b);
 	void flagOutlinesDisplayedChanged(bool b);
+	void flagAdditionalNamesDisplayedChanged(bool b);
 	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
