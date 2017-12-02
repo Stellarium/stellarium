@@ -59,6 +59,7 @@ before_script:
 script:
   - "cmake ../."
   - "make -j 2"
+  - "ctest"
   - "sudo make install -j 2"
 
 sudo: required
