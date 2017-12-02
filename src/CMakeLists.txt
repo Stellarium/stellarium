@@ -461,8 +461,10 @@ IF(GENERATE_STELMAINLIB)
      #stelMain should be after the plug-ins, otherwise the build crashes
      TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
 ELSE()
-     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_lib_SRCS} ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
-     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS})
+     ADD_LIBRARY(stelMain ${stellarium_lib_SRCS})
+     TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
+     ADD_EXECUTABLE(stellarium WIN32 ${stellarium_RES_CXX} ${stellarium_exe_SRCS})
+     TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
 
      IF(APPLE)
           SET_TARGET_PROPERTIES(stellarium PROPERTIES LINK_FLAGS " -framework Cocoa -framework OpenGL")
@@ -493,7 +495,7 @@ MACRO(ADD_TEST NAME)
      SET(STELLARIUM_TESTS ${STELLARIUM_TESTS} ${NAME})
 ENDMACRO()
 
-SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test)
+SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test stelMain)
 
 # Custom target used to build all tests at once
 ADD_CUSTOM_TARGET(buildTests)
@@ -512,8 +514,6 @@ ADD_TEST(testDates)
 SET(tests_testStelFileMgr_SRCS
      tests/testStelFileMgr.hpp
      tests/testStelFileMgr.cpp
-     core/StelFileMgr.hpp
-     core/StelFileMgr.cpp
 )
 ADD_EXECUTABLE(testStelFileMgr EXCLUDE_FROM_ALL ${tests_testStelFileMgr_SRCS})
 TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
@@ -523,22 +523,6 @@ ADD_TEST(testStelFileMgr)
 SET(tests_testStelSphereGeometry_SRCS
      tests/testStelSphereGeometry.hpp
      tests/testStelSphereGeometry.cpp
-     core/StelSphereGeometry.hpp
-     core/StelSphereGeometry.cpp
-     core/StelVertexArray.hpp
-     core/StelVertexArray.cpp
-     core/OctahedronPolygon.hpp
-     core/OctahedronPolygon.cpp
-     core/StelJsonParser.hpp
-     core/StelJsonParser.cpp
-     core/StelUtils.hpp
-     core/StelUtils.cpp
-     core/StelProjector.hpp
-     core/StelProjector.cpp
-     core/StelFileMgr.hpp
-     core/StelFileMgr.cpp
-     core/StelTranslator.hpp
-     core/StelTranslator.cpp
 )
 ADD_EXECUTABLE(testStelSphereGeometry EXCLUDE_FROM_ALL ${tests_testStelSphereGeometry_SRCS})
 TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
@@ -572,8 +556,6 @@ ADD_TEST(testStelSphereGeometry)
 SET(tests_testStelJsonParser_SRCS
      tests/testStelJsonParser.hpp
      tests/testStelJsonParser.cpp
-     core/StelJsonParser.hpp
-     core/StelJsonParser.cpp
 )
 ADD_EXECUTABLE(testStelJsonParser EXCLUDE_FROM_ALL ${tests_testStelJsonParser_SRCS})
 TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
@@ -583,7 +565,6 @@ ADD_TEST(testStelJsonParser)
 SET(tests_testStelVertexArray_SRCS
      tests/testStelVertexArray.hpp
      tests/testStelVertexArray.cpp
-     core/StelVertexArray.hpp
 )
 ADD_EXECUTABLE(testStelVertexArray EXCLUDE_FROM_ALL ${tests_testStelVertexArray_SRCS})
 TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
@@ -593,8 +574,6 @@ ADD_TEST(testStelVertexArray)
 SET(tests_testDeltaT_SRCS
      tests/testDeltaT.hpp
      tests/testDeltaT.cpp
-     core/StelUtils.hpp
-     core/StelUtils.cpp
 )
 ADD_EXECUTABLE(testDeltaT EXCLUDE_FROM_ALL ${tests_testDeltaT_SRCS})
 TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
@@ -604,8 +583,6 @@ ADD_TEST(testDeltaT)
 SET(tests_testConversions_SRCS
      tests/testConversions.hpp
      tests/testConversions.cpp
-     core/StelUtils.hpp
-     core/StelUtils.cpp
 )
 ADD_EXECUTABLE(testConversions EXCLUDE_FROM_ALL ${tests_testConversions_SRCS})
 TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
@@ -615,8 +592,6 @@ ADD_TEST(testConversions)
 SET(tests_testExtinction_SRCS
      tests/testExtinction.hpp
      tests/testExtinction.cpp
-     core/RefractionExtinction.hpp
-     core/RefractionExtinction.cpp
 )
 ADD_EXECUTABLE(testExtinction EXCLUDE_FROM_ALL ${tests_testExtinction_SRCS})
 TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
@@ -626,10 +601,6 @@ ADD_TEST(testExtinction)
 SET(tests_testRefraction_SRCS
      tests/testRefraction.hpp
      tests/testRefraction.cpp
-     core/RefractionExtinction.hpp
-     core/RefractionExtinction.cpp
-     core/StelUtils.hpp
-     core/StelUtils.cpp
 )
 ADD_EXECUTABLE(testRefraction EXCLUDE_FROM_ALL ${tests_testRefraction_SRCS})
 TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
@@ -639,10 +610,6 @@ ADD_TEST(testRefraction)
 SET(tests_testPrecession_SRCS
      tests/testPrecession.hpp
      tests/testPrecession.cpp
-     core/planetsephems/precession.h
-     core/planetsephems/precession.c
-     core/StelUtils.hpp
-     core/StelUtils.cpp
 )
 ADD_EXECUTABLE(testPrecession EXCLUDE_FROM_ALL ${tests_testPrecession_SRCS})
 TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
@@ -652,23 +619,6 @@ ADD_TEST(testPrecession)
 SET(tests_testEphemeris_SRCS
      tests/testEphemeris.hpp
      tests/testEphemeris.cpp
-     core/StelFileMgr.hpp
-     core/StelFileMgr.cpp
-     core/VecMath.hpp
-     core/planetsephems/EphemWrapper.hpp
-     core/planetsephems/vsop87.h
-     core/planetsephems/vsop87.c
-     core/planetsephems/calc_interpolated_elements.h
-     core/planetsephems/calc_interpolated_elements.c
-     core/planetsephems/elliptic_to_rectangular.h
-     core/planetsephems/elliptic_to_rectangular.c
-     core/planetsephems/de430.hpp
-     core/planetsephems/de430.cpp
-     core/planetsephems/de431.hpp
-     core/planetsephems/de431.cpp
-     core/planetsephems/jpl_int.h
-     core/planetsephems/jpleph.h
-     core/planetsephems/jpleph.cpp
 )
 ADD_EXECUTABLE(testEphemeris EXCLUDE_FROM_ALL ${tests_testEphemeris_SRCS})
 TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})

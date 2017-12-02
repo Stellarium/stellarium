@@ -24,8 +24,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TELESCOPE_CLIENT_DIRECT_NEXSTAR_
-#define _TELESCOPE_CLIENT_DIRECT_NEXSTAR_
+#ifndef _TELESCOPE_CLIENT_DIRECT_LX200_
+#define _TELESCOPE_CLIENT_DIRECT_LX200_
 
 #include <QObject>
 #include <QString>
@@ -33,20 +33,19 @@
 #include "StelApp.hpp"
 #include "StelObject.hpp"
 
-#include "Server.hpp" //from the telescope server source tree
+#include "common/Server.hpp" //from the telescope server source tree
 #include "TelescopeClient.hpp" //from the plug-in's source tree
-#include "InterpolatedPosition.hpp"
 
-class NexStarConnection;
+class Lx200Connection;
 
-//! Telescope client that connects directly to a Celestron NexStar through a serial port.
-//! This class has been created by merging the code of TelescopeTCP and ServerNexStar.
-class TelescopeClientDirectNexStar : public TelescopeClient, public Server
+//! Telescope client that connects directly to a Meade LX200 through a serial port.
+//! This class has been created by merging the code of TelescopeTCP and ServerLx200.
+class TelescopeClientDirectLx200 : public TelescopeClient, public Server
 {
 	Q_OBJECT
 public:
-	TelescopeClientDirectNexStar(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
-	~TelescopeClientDirectNexStar(void)
+	TelescopeClientDirectLx200(const QString &name, const QString &parameters, Equinox eq = EquinoxJ2000);
+	~TelescopeClientDirectLx200(void)
 	{
 		//hangup();
 	}
@@ -59,6 +58,7 @@ public:
 	// Methods inherited from Server
 	virtual void step(long long int timeout_micros);
 	void communicationResetReceived(void);
+	void longFormatUsedReceived(bool long_format);
 	void raReceived(unsigned int ra_int);
 	void decReceived(unsigned int dec_int);
 	
@@ -90,8 +90,10 @@ private:
 	Equinox equinox;
 	
 	//======================================================================
-	// Members taken from ServerNexStar
-	NexStarConnection *nexstar;
+	// Members inherited from ServerLx200
+	Lx200Connection *lx200;
+	bool long_format_used;
+	bool answers_received;
 	
 	unsigned int last_ra;
 	bool queue_get_position;

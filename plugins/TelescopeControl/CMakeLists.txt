@@ -22,6 +22,7 @@ ADD_DEFINITIONS(-DTELESCOPE_CONTROL_PLUGIN_LICENSE="GNU GPLv2+")
 ADD_DEFINITIONS(-DDEBUG3 -DDEBUG4 -DDEBUG5)
 
 ADD_SUBDIRECTORY( src )
+add_subdirectory(test) #waiting for stellarium core to be a lib to link
 
 INSTALL(FILES DESTINATION "modules/TelescopeControl")
 

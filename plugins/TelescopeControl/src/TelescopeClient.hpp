@@ -35,7 +35,7 @@
 
 #include "StelApp.hpp"
 #include "StelObject.hpp"
-#include "InterpolatedPosition.hpp"
+#include "common/InterpolatedPosition.hpp"
 
 class StelCore;
 
@@ -147,6 +147,7 @@ public:
 	}
 	Vec3d getJ2000EquatorialPos(const StelCore*) const
 	{
+        qWarning() << XYZ[0] << ", " << XYZ[1] << ", " << XYZ[2];
 		return XYZ;
 	}
 	

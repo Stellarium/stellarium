@@ -28,9 +28,9 @@
 #include "StelUtils.hpp"
 #include "TelescopeControl.hpp"
 #include "TelescopeClient.hpp"
-#include "TelescopeDialog.hpp"
-#include "SlewDialog.hpp"
-#include "LogFile.hpp"
+#include "gui/TelescopeDialog.hpp"
+#include "gui/SlewDialog.hpp"
+#include "common/LogFile.hpp"
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -105,6 +105,7 @@ TelescopeControl::TelescopeControl()
 	connectionTypeNames.insert(ConnectionLocal, "local");
 	connectionTypeNames.insert(ConnectionRemote, "remote");
 	connectionTypeNames.insert(ConnectionRTS2, "RTS2");
+	connectionTypeNames.insert(ConnectionINDI, "INDI");
 }
 
 TelescopeControl::~TelescopeControl()
@@ -802,6 +803,12 @@ void TelescopeControl::loadTelescopes()
 			}
 		}
 
+		if (connectionType == ConnectionINDI)
+		{
+			portTCP = telescope.value("tcp_port").toInt();
+			hostName = telescope.value("host_name").toString();
+		}
+
 		if (connectionType == ConnectionRTS2)
 		{
 			//Validation: Host name
@@ -945,6 +952,11 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	telescope.insert("name", name);
 	telescope.insert("connection", connectionTypeNames.value(connectionType));
 	telescope.insert("equinox", equinox);//TODO: Validation!
+
+	if (connectionType == ConnectionINDI)
+	{
+		telescope.insert("host_name", host);
+	}
 
 	if (connectionType == ConnectionRemote)
 	{
@@ -1288,6 +1300,10 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 		case ConnectionRTS2:
 			if (!rts2Url.isEmpty())
 				initString = QString("%1:RTS2:%2:%3:http://%4:%5@%6").arg(name, equinox, QString::number(rts2Refresh), rts2Username, rts2Password, rts2Url);
+			break;
+
+		case ConnectionINDI:
+			initString = QString("%1:%2:%3:%4:%5").arg(name, "INDI", "J2000", host, QString::number(portTCP));
 			break;
 
 		case ConnectionRemote:
