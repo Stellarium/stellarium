@@ -609,12 +609,11 @@ SET(tests_testPrecession_SRCS
 ADD_EXECUTABLE(testPrecession ${tests_testPrecession_SRCS})
 TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
 ADD_DEPENDENCIES(buildTests testPrecession)
-ADD_TEST(testPrecession testPrecession )
+ADD_TEST(testPrecession testPrecession)
 
-# FIXME: unit test for ephemeris cannot be run after latest changes in the code
-#SET(tests_testEphemeris_SRCS
-#     tests/testEphemeris.hpp
-#     tests/testEphemeris.cpp
+SET(tests_testEphemeris_SRCS
+     tests/testEphemeris.hpp
+     tests/testEphemeris.cpp
 #     core/StelFileMgr.hpp
 #     core/StelFileMgr.cpp
 #     core/VecMath.hpp
@@ -632,10 +631,9 @@ ADD_TEST(testPrecession testPrecession )
 #     core/planetsephems/jpl_int.h
 #     core/planetsephems/jpleph.h
 #  core/planetsephems/jpleph.cpp
-#)
-#ADD_EXECUTABLE(testEphemeris EXCLUDE_FROM_ALL ${tests_testEphemeris_SRCS})
-#TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
-#ARGET_COMPILE_DEFINITIONS(testEphemeris PRIVATE UNIT_TEST)
-#ADD_DEPENDENCIES(buildTests testEphemeris)
-#ADD_TEST(testEphemeris)
+)
+ADD_EXECUTABLE(testEphemeris ${tests_testEphemeris_SRCS})
+TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
+ADD_DEPENDENCIES(buildTests testEphemeris)
+ADD_TEST(testEphemeris testEphemeris)
 

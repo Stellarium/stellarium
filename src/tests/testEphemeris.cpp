@@ -32,7 +32,7 @@
 
 QTEST_GUILESS_MAIN(TestEphemeris)
 
-#define CENTRAL_BODY_ID	11  //ID of sun in JPL enumeration
+#define CENTRAL_BODY_ID 11  //ID of sun in JPL enumeration
 
 //
 // IMPORTANT NOTE:
@@ -1006,7 +1006,7 @@ void TestEphemeris::testMercuryHeliocentricEphemerisVsop87()
 	const int planet_id = 0; // Mercury
 	const double acceptableError = 1E-04;
 	double jd, x, y, z;
-	double xyz[3];
+	double xyz[6];
 
 	while(mercury.count() >= 3)
 	{
@@ -1039,7 +1039,7 @@ void TestEphemeris::testVenusHeliocentricEphemerisVsop87()
 	const int planet_id = 1; // Venus
 	const double acceptableError = 1E-05;
 	double jd, x, y, z;
-	double xyz[3];
+	double xyz[6];
 
 	while(venus.count() >= 3)
 	{
@@ -1072,7 +1072,7 @@ void TestEphemeris::testMarsHeliocentricEphemerisVsop87()
 	const int planet_id = 3; // Mars
 	const double acceptableError = 1E-04;
 	double jd, x, y, z;
-	double xyz[3];
+	double xyz[6];
 
 	while(mars.count() >= 3)
 	{
@@ -1106,7 +1106,7 @@ void TestEphemeris::testJupiterHeliocentricEphemerisVsop87()
 	const int planet_id = 4; // Jupiter
 	const double acceptableError = 1E-04;
 	double jd, x, y, z;
-	double xyz[3];
+	double xyz[6];
 
 	while(jupiter.count() >= 3)
 	{
@@ -1139,7 +1139,7 @@ void TestEphemeris::testSaturnHeliocentricEphemerisVsop87()
 	const int planet_id = 5; // Saturn
 	const double acceptableError = 1E-04;
 	double jd, x, y, z;
-	double xyz[3];
+	double xyz[6];
 
 	while(saturn.count() >= 3)
 	{
@@ -1172,7 +1172,7 @@ void TestEphemeris::testUranusHeliocentricEphemerisVsop87()
 	const int planet_id = 6; // Uranus
 	const double acceptableError = 1E-03;
 	double jd, x, y, z;
-	double xyz[3];
+	double xyz[6];
 
 	while(uranus.count() >= 3)
 	{
@@ -1205,7 +1205,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisVsop87()
 	const int planet_id = 7; // Neptune
 	const double acceptableError = 1E-03;
 	double jd, x, y, z;
-	double xyz[3];
+	double xyz[6];
 
 	while(neptune.count() >= 3)
 	{
@@ -1232,7 +1232,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisVsop87()
 			 .toUtf8());
 	}
 }
-
+/*
 void TestEphemeris::testMercuryHeliocentricEphemerisDe430()
 {
 	if (de430FilePath.isEmpty())
@@ -1242,7 +1242,7 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe430()
 		const int planet_id = 0; // Mercury
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(mercury.count() >= 3)
 		{
@@ -1280,7 +1280,7 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe430()
 		const int planet_id = 1; // Venus
 		const double acceptableError = 1E-05;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(venus.count() >= 3)
 		{
@@ -1318,7 +1318,7 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe430()
 		const int planet_id = 3; // Mars
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(mars.count() >= 3)
 		{
@@ -1356,7 +1356,7 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe430()
 		const int planet_id = 4; // Jupiter
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(jupiter.count() >= 3)
 		{
@@ -1394,7 +1394,7 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe430()
 		const int planet_id = 5; // Saturn
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(saturn.count() >= 3)
 		{
@@ -1432,7 +1432,7 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe430()
 		const int planet_id = 6; // Uranus
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(uranus.count() >= 3)
 		{
@@ -1470,7 +1470,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe430()
 		const int planet_id = 7; // Neptune
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(neptune.count() >= 3)
 		{
@@ -1508,7 +1508,7 @@ void TestEphemeris::testMercuryHeliocentricEphemerisDe431()
 		const int planet_id = 0; // Mercury
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(mercury.count() >= 3)
 		{
@@ -1546,7 +1546,7 @@ void TestEphemeris::testVenusHeliocentricEphemerisDe431()
 		const int planet_id = 1; // Venus
 		const double acceptableError = 1E-05;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(venus.count() >= 3)
 		{
@@ -1584,7 +1584,7 @@ void TestEphemeris::testMarsHeliocentricEphemerisDe431()
 		const int planet_id = 3; // Mars
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(mars.count() >= 3)
 		{
@@ -1622,7 +1622,7 @@ void TestEphemeris::testJupiterHeliocentricEphemerisDe431()
 		const int planet_id = 4; // Jupiter
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(jupiter.count() >= 3)
 		{
@@ -1660,7 +1660,7 @@ void TestEphemeris::testSaturnHeliocentricEphemerisDe431()
 		const int planet_id = 5; // Saturn
 		const double acceptableError = 1E-04;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(saturn.count() >= 3)
 		{
@@ -1698,7 +1698,7 @@ void TestEphemeris::testUranusHeliocentricEphemerisDe431()
 		const int planet_id = 6; // Uranus
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(uranus.count() >= 3)
 		{
@@ -1736,7 +1736,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 		const int planet_id = 7; // Neptune
 		const double acceptableError = 1E-03;
 		double jd, x, y, z;
-		double xyz[3];
+		double xyz[6];
 
 		while(neptune.count() >= 3)
 		{
@@ -1764,3 +1764,4 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 		}
 	}
 }
+*/
