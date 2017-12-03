@@ -1341,12 +1341,17 @@ bool getDateTimeFromISO8601String(const QString& iso8601Date, int* y, int* m, in
 // Calculate and getting sidereal period in days from semi-major axis
 double calculateSiderealPeriod(const double SemiMajorAxis)
 {
-	// Calculate semi-major axis in meters
+/*	// Calculate semi-major axis in meters
 	double a = AU*1000*SemiMajorAxis;
 	// Calculate orbital period in seconds
 	// Here 1.32712440018e20 is heliocentric gravitational constant
 	double period = 2*M_PI*std::sqrt(a*a*a/1.32712440018e20);
 	return period/86400; // return period in days
+	*/
+	// Much simpler from: Heafner, Fundamental Eph. Comp. p.71.
+	//double meanMotion=0.01720209895/sqrt(SemiMajorAxis*SemiMajorAxis*SemiMajorAxis); // radians/day
+	//return 2.*M_PI/meanMotion;
+	return (2.*M_PI/0.01720209895)*sqrt(SemiMajorAxis*SemiMajorAxis*SemiMajorAxis);
 }
 
 
