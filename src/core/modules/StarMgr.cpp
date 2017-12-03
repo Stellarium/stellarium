@@ -69,6 +69,7 @@ static const int StarCatalogFormatVersion = 9;
 
 // Initialise statics
 bool StarMgr::flagSciNames = true;
+bool StarMgr::flagAdditionalStarNames = true;
 QHash<int,QString> StarMgr::commonNamesMap;
 QHash<int,QString> StarMgr::commonNamesMapI18n;
 QHash<int,QString> StarMgr::additionalNamesMap;
@@ -136,7 +137,7 @@ void StarMgr::initTriangle(int lev,int index, const Vec3f &c0, const Vec3f &c1, 
 
 
 StarMgr::StarMgr(void)
-	: flagStarName(false)
+	: flagStarName(false)	
 	, labelsAmount(0.)
 	, gravityLabel(false)
 	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
@@ -432,6 +433,7 @@ void StarMgr::init()
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
+	setFlagAdditionalNames(conf->value("astro/flag_star_additional_names",true).toBool());
 	setLabelsAmount(conf->value("stars/labels_amount",3.f).toFloat());
 
 	// Load colors from config file
@@ -1360,11 +1362,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 
-	// Search by additional sci name
-	QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
-	if (it3!=sciAdditionalNamesIndexI18n.end())
+	if (getFlagAdditionalNames())
 	{
-		return searchHP(it3.value());
+		// Search by additional sci name
+		QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
+		if (it3!=sciAdditionalNamesIndexI18n.end())
+		{
+			return searchHP(it3.value());
+		}
 	}
 
 	// Search by GCVS name
@@ -1430,11 +1435,14 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 		return searchHP(it.value());
 	}
 
-	// Search by English additional common names
-	QMap<QString,int>::const_iterator ita(additionalNamesIndex.find(objw));
-	if (ita!=additionalNamesIndex.end())
+	if (getFlagAdditionalNames())
 	{
-		return searchHP(ita.value());
+		// Search by English additional common names
+		QMap<QString,int>::const_iterator ita(additionalNamesIndex.find(objw));
+		if (ita!=additionalNamesIndex.end())
+		{
+			return searchHP(ita.value());
+		}
 	}
 
 	// Search by sci name

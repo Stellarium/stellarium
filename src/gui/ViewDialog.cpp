@@ -168,6 +168,7 @@ void ViewDialog::createDialogContent()
 	connectDoubleProperty(ui->starLimitMagnitudeDoubleSpinBox, "StelSkyDrawer.customStarMagLimit");
 	connectCheckBox(ui->starLabelCheckBox, "actionShow_Stars_Labels");
 	connectDoubleProperty(ui->starsLabelsHorizontalSlider,"StarMgr.labelsAmount",0.0,10.0);
+	connectBoolProperty(ui->checkBoxAdditionalNamesStars, "StarMgr.flagAdditionalNamesDisplayed");
 
 	// Sky section
 	connectBoolProperty(ui->milkyWayCheckBox, "MilkyWay.flagMilkyWayDisplayed");
@@ -278,7 +279,7 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxOutlines, "NebulaMgr.flagOutlinesDisplayed");
 	connectBoolProperty(ui->checkBoxSurfaceBrightnessUsage, "NebulaMgr.flagSurfaceBrightnessUsage");
 	connectBoolProperty(ui->nebulaLimitMagnitudeCheckBox,"StelSkyDrawer.flagNebulaMagnitudeLimit");
-	connectBoolProperty(ui->checkBoxAdditionalNames, "NebulaMgr.flagAdditionalNamesDisplayed");
+	connectBoolProperty(ui->checkBoxAdditionalNamesDSO, "NebulaMgr.flagAdditionalNamesDisplayed");
 	connectDoubleProperty(ui->nebulaLimitMagnitudeDoubleSpinBox,"StelSkyDrawer.customNebulaMagLimit");
 	connectBoolProperty(ui->nebulaLimitSizeCheckBox, "NebulaMgr.flagUseSizeLimits");
 	connectDoubleProperty(ui->nebulaLimitSizeMinDoubleSpinBox, "NebulaMgr.minSizeLimit");

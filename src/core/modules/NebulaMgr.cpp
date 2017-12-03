@@ -191,9 +191,9 @@ void NebulaMgr::init()
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
-	setFlagOutlines(conf->value("gui/flag_dso_outlines_usage", false).toBool());
+	setFlagOutlines(conf->value("astro/flag_dso_outlines_usage", false).toBool());
 	setFlagAdditionalNames(conf->value("astro/flag_dso_additional_names",true).toBool());
-	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
+	setDesignationUsage(conf->value("astro/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
 	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", false).toBool());

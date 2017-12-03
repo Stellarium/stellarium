@@ -948,6 +948,13 @@
                </item>
               </layout>
              </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxAdditionalNamesStars">
+               <property name="text">
+                <string>Use an additional names for stars</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
@@ -2118,7 +2125,7 @@
                 </layout>
                </item>
                <item row="7" column="0">
-                <widget class="QCheckBox" name="checkBoxAdditionalNames">
+                <widget class="QCheckBox" name="checkBoxAdditionalNamesDSO">
                  <property name="text">
                   <string>Use an additional names of DSO</string>
                  </property>
