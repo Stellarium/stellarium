@@ -38,6 +38,8 @@ private slots:
 	void testSaturnHeliocentricEphemerisVsop87();
 	void testUranusHeliocentricEphemerisVsop87();
 	void testNeptuneHeliocentricEphemerisVsop87();
+
+	//FIXME: The unit tests for DE43x ephemeris are broken at the moment
 /*
 	// JPL DE430
 	void testMercuryHeliocentricEphemerisDe430();
