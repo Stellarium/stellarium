@@ -216,6 +216,14 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 	}
 	else if(operation=="view")
 	{
+		// JNow query can include a ref=(on|off|auto/anyOther) parameter
+		StelCore::RefractionMode refMode=StelCore::RefractionAuto;
+		QString refName = QString::fromUtf8(parameters.value("ref"));
+		if (refName=="on")
+			refMode=StelCore::RefractionOn;
+		else if (refName=="off")
+			refMode=StelCore::RefractionOff;
+
 		// Retrieve Vector of view direction
 
 		// Optional: limit answer to just one number.
@@ -246,7 +254,7 @@ void MainService::get(const QByteArray& operation, const APIParameters &paramete
 			mainObj.insert("j2000", viewJ2000.toString());
 		if (giveJNow)
 		{
-			Vec3d viewJNow=core->j2000ToEquinoxEqu(viewJ2000, StelCore::RefractionAuto);
+			Vec3d viewJNow=core->j2000ToEquinoxEqu(viewJ2000, refMode);
 			mainObj.insert("jNow", viewJNow.toString());
 		}
 		if (giveAltAz)
@@ -391,6 +399,14 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 	}
 	else if(operation == "view")
 	{
+		// JNow setting can include a ref=(on|off|auto/anyOther) parameter
+		StelCore::RefractionMode refMode=StelCore::RefractionAuto;
+		QString refName = QString::fromUtf8(parameters.value("ref"));
+		if (refName=="on")
+			refMode=StelCore::RefractionOn;
+		else if (refName=="off")
+			refMode=StelCore::RefractionOff;
+
 		QByteArray j2000 = parameters.value("j2000");
 		if(!j2000.isEmpty())
 		{
@@ -425,7 +441,7 @@ void MainService::post(const QByteArray& operation, const APIParameters &paramet
 				posNow[1] = arr.at(1).toDouble();
 				posNow[2] = arr.at(2).toDouble();
 
-				mvmgr->setViewDirectionJ2000(core->equinoxEquToJ2000(posNow, StelCore::RefractionAuto));
+				mvmgr->setViewDirectionJ2000(core->equinoxEquToJ2000(posNow, refMode));
 				response.setData("ok");
 			}
 			else

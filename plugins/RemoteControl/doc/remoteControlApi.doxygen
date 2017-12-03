@@ -168,7 +168,7 @@ Returns the list of all known plugins, as a JSON object of format:
 \endcode
 
 \paragraph rcMainServiceViewGet view
-Parameters: <tt>[coord (j2000|jNow|altAz)]</tt>\n
+Parameters: <tt>[coord (j2000|jNow|altAz) ] [ ref (on|off|auto) ]</tt>\n
 Returns the current view direction, as a JSON object of format:
 \code{.js}
 {
@@ -193,7 +193,8 @@ For the vector in <tt>altAz</tt> system, the actually returned values are based 
 <tr><td>z=</td><td>sin(alt)         </td><tr>
 </table>
 
-
+If the optional parameter <tt>ref</tt> is given, it governs refraction setting and it applies to the <tt>jNow</tt> output only. 
+"On" applies refraction, "off" does not apply, and "auto" (or any other value) applies it when atmosphere setting is active.
 
 \subsubsection rcMainServicePOST POST operations
 Implemented by MainService::postImpl
@@ -222,12 +223,12 @@ This operation works in conjunction with the update() method - until the movemen
 (i.e. \p x and \p y are zero), or no \c move command has been received for a specified time (about a second), the movement is performed in the given directions.
 
 \paragraph rcMainServiceView view
-Parameters: <tt>j2000 (Vec3d) | jNow (Vec3d) | altAz (Vec3d) | (az (Number) alt (Number))</tt>\n
+Parameters: <tt>j2000 (Vec3d) | jNow (Vec3d) [ ref (on|off|auto) ] | altAz (Vec3d) | (az (Number) alt (Number))</tt>\n
 Sets the view direction. 
 When the \p j2000 parameter is given (interpreted as JSON Number Array of size 3),
 it sets the view in J2000 coordinates (see StelMovementMgr::setViewDirectionJ2000).
 When the \p jNow parameter is given (interpreted as JSON Number Array of size 3),
-it sets the view in coordinates of current date.
+it sets the view in coordinates of current date. An optional parameter <tt>ref</tt> governs refraction mode, default <tt>auto</tt>. 
 When the \p altAz parameter is given, the 3-element vector is interpreted as if in the
 rectangular surface direction frame centered on the current location.
 For example, <tt>[1,0,0]</tt> would point the view directly south, and <tt>[0,1,0]</tt> directly east.
