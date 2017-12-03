@@ -1347,11 +1347,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 		return searchHP(it.value());
 	}
 
-	// Search by I18n additional common names
-	QMap<QString,int>::const_iterator ita(additionalNamesIndexI18n.find(objw));
-	if (ita!=additionalNamesIndexI18n.end())
+	if (getFlagAdditionalNames())
 	{
-		return searchHP(ita.value());
+		// Search by I18n additional common names
+		QMap<QString,int>::const_iterator ita(additionalNamesIndexI18n.find(objw));
+		if (ita!=additionalNamesIndexI18n.end())
+		{
+			return searchHP(ita.value());
+		}
 	}
 
 	// Search by sci name
@@ -1362,15 +1365,13 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 
-	if (getFlagAdditionalNames())
+	// Search by additional sci name
+	QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
+	if (it3!=sciAdditionalNamesIndexI18n.end())
 	{
-		// Search by additional sci name
-		QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
-		if (it3!=sciAdditionalNamesIndexI18n.end())
-		{
-			return searchHP(it3.value());
-		}
+		return searchHP(it3.value());
 	}
+
 
 	// Search by GCVS name
 	QMap<QString,int>::const_iterator it4 = varStarsIndexI18n.find(objw);
@@ -1479,7 +1480,9 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	QString objw = objPrefix.toUpper();
 
 	QMap<QString, int> cNamesIdx = inEnglish ? commonNamesIndex : commonNamesIndexI18n;
-	QMap<QString, int> aNamesIdx = inEnglish ? additionalNamesIndex : additionalNamesIndexI18n;
+	QMap<QString, int> aNamesIdx;
+	if (getFlagAdditionalNames())
+		aNamesIdx = inEnglish ? additionalNamesIndex : additionalNamesIndexI18n;
 
 	// Search for common names
 	if (useStartOfWords)
