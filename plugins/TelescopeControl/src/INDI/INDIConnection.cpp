@@ -5,7 +5,8 @@
 #include <chrono>
 #include <thread>
 
-#include "libindi/basedevice.h"
+#include "indibase/baseclient.h"
+#include "indibase/basedevice.h"
 
 INDIConnection::INDIConnection()
 {
