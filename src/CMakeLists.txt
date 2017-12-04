@@ -524,29 +524,14 @@ TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
 ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
 ADD_TEST(testStelSphereGeometry testStelSphereGeometry)
 
-#SET(tests_testStelSphericalIndex_SRCS
-#     tests/testStelSphericalIndex.hpp
-#     tests/testStelSphericalIndex.cpp
-#     core/StelSphericalIndex.hpp
-#     core/StelSphericalIndex.cpp
-#     core/StelSphereGeometry.hpp
-#     core/StelSphereGeometry.cpp
-#     core/StelVertexArray.hpp
-#     core/StelVertexArray.cpp
-#     core/OctahedronPolygon.hpp
-#     core/OctahedronPolygon.cpp
-#     core/StelJsonParser.hpp
-#     core/StelJsonParser.cpp
-#     core/StelUtils.cpp
-#     core/StelUtils.hpp
-#     core/StelProjector.cpp
-#     core/StelProjector.hpp
-#     core/StelTranslator.cpp
-#     core/StelTranslator.hpp
-#     ${glues_lib_SRCS})
-#ADD_EXECUTABLE(testStelSphericalIndex EXCLUDE_FROM_ALL ${tests_testStelSphericalIndex_SRCS})
-#TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
-#ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+SET(tests_testStelSphericalIndex_SRCS
+     tests/testStelSphericalIndex.hpp
+     tests/testStelSphericalIndex.cpp
+)
+ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS})
+TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
+ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+ADD_TEST(testStelSphericalIndex testStelSphericalIndex)
 
 SET(tests_testStelJsonParser_SRCS
      tests/testStelJsonParser.hpp
