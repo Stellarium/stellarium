@@ -112,5 +112,6 @@ add_library(indiclient
     indi/libindi/libs/indibase/indistandardproperty.cpp
     indi/libindi/libs/indicom.c
     )
+target_link_libraries(indiclient zlib_stel)
 
 
