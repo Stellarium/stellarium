@@ -1,0 +1,18 @@
+#!/bin/bash
+
+DRV_LIST="indi-gphoto indi-nexstarevo indi-gpsd"
+SRC_DIR=`pwd`"/.."
+
+for drv in $DRV_LIST ; do
+(
+    mkdir deb_${drv}
+    cd deb_${drv}
+    cp -r ${SRC_DIR}/3rdparty/$drv .
+    cp -r ${SRC_DIR}/debian/$drv debian
+    cp -r ${SRC_DIR}/cmake_modules $drv/
+    fakeroot debian/rules binary
+)
+done
+
+ls -l
+

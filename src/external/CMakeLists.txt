@@ -86,3 +86,10 @@ set(qcustomplot_SRCS
     )
 add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
 target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
+
+include(ExternalProject)
+ExternalProject_Add(cfitsio SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cfitsio)
+
+
+#add_subdirectory(cfitsio)
+#add_subdirectory(indi/libindi)

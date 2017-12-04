@@ -1,0 +1,9 @@
+FireFly MV INDI Install
+=======================
+This package uses CMake to build:
+
+1) mkdir ffmv_build
+2) cd ffmv_build
+3) cmake ..
+4) make
+5) As root, make install

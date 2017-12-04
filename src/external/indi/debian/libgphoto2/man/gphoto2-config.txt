@@ -1,0 +1,19 @@
+NAME
+ gphoto2-config \- get information about libgphoto2
+SYNOPSIS
+ gphoto2-config [--prefix=DIR] [--libs] [--cflags] [--help] [--version]
+OPTIONS
+ The options explained:
+
+  \[hy]\[hy]prefix=DIR     change libgphoto2 prefix [default /usr]
+  \[hy]\[hy]libs           print library linking information
+  \[hy]\[hy]cflags         print pre\(hyprocessor and compiler flags
+  \[hy]\[hy]help           display this help and exit
+  \[hy]\[hy]version        output version information
+SEE ALSO
+  gphoto2-port-config(1), pkg-config(1)
+AUTHOR
+ The gphoto2-config is part of gphoto2 project
+ 
+ This manual page was written by Herbert Parentes Fortes Neto 
+  <hpfn@ig.com.br> for the Debian project (but may be used by others)

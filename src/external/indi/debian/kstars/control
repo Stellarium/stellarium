@@ -1,0 +1,74 @@
+Source: kstars-bleeding
+Section: kde
+Priority: optional
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: cmake,
+               debhelper (>= 9.0.0),
+               pkg-config,
+               pkg-kde-tools (>= 0.15.15ubuntu1~),
+               extra-cmake-modules (>= 1.3.0~),
+               qtbase5-dev,
+               qtdeclarative5-dev,
+               qtmultimedia5-dev,
+               qtpositioning5-dev,
+               libqt5svg5-dev,
+               libqt5sql5-sqlite,
+               kdoctools-dev,
+               libkf5config-dev,
+               libkf5guiaddons-dev,
+               libkf5i18n-dev,
+               libkf5newstuff-dev,
+               libkf5notifications-dev,
+               libkf5xmlgui-dev,
+               libkf5plotting-dev,
+               libkf5crash-dev,
+               libkf5notifyconfig-dev,
+               libeigen3-dev,
+               zlib1g-dev,
+               libcfitsio3-dev|libcfitsio-dev,
+               libnova-dev,
+               libindi-dev (>= 1.4.0),
+               indi-bin (>= 1.4.0),
+               wcslib-dev,
+               libraw-dev,
+               libgsl-dev,
+               phonon4qt5-backend-vlc
+Standards-Version: 3.9.3
+Homepage: http://edu.kde.org/
+
+Package: kstars-bleeding
+Architecture: any
+Section: science
+conflicts: kstars
+replaces: kstars
+Depends: ${shlibs:Depends}, ${misc:Depends}, kstars-bleeding-data (>= ${source:Version}), kstars-bleeding-dbg (= ${binary:Version}), kded5, kinit, libindi1, indi-bin, breeze-icon-theme, oxygen-icon-theme, qml-module-qtquick-controls
+Description: desktop planetarium for KDE
+ KStars is a desktop planetarium for KDE, depicting an accurate graphical
+ simulation of the night sky, from any location on Earth, at any date and time.
+ The display includes 130,000 stars, 13,000 deep-sky objects, all 8 planets,
+ the Sun and Moon, and thousands of comets and asteroids.  It includes tools
+ for astronomical calculations and can control telescopes and cameras.
+ .
+ This package is part of the KDE education module.
+
+Package: kstars-bleeding-data
+Architecture: all
+Section: science
+conflicts: kstars-data
+replaces: kstars-data
+Depends: ${misc:Depends}
+Description: data files for KStars desktop planetarium
+ This package contains architecture-independent data files for KStars,
+ the graphical desktop planetarium for KDE, including star catalogues and
+ astronomical images.
+ .
+ This package is part of the KDE education module.
+
+Package: kstars-bleeding-dbg
+Architecture: any
+Section: debug
+Priority: extra
+Depends: kstars-bleeding (= ${binary:Version}), ${misc:Depends}
+Description: debug information for the desktop planetarium for KDE
+ This package contains debugging files used to investigate problems with the
+ desktop planetarium for KDE.

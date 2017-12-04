@@ -1,0 +1,364 @@
+<!doctype html>
+<head>
+<meta name="generator" content="Bluefish 2.2.2" >
+<meta name="author" content="Nacho Mas" >
+<meta name="date" content="2013-02-03T13:16:30+0100" >
+<meta name="copyright" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="expires" content="1">
+<title>MeteoStation</title>
+<link rel=stylesheet href=css/style.css type=text/css charset=utf-8>
+<script type=text/javascript src=CHART/meteoconfig.js></script> 
+</head>
+<script src="js/jquery.min.js"></script>
+<body onload=init()>
+<script>
+
+</script> 
+<div  id="mainlabel" style="text-align: center"><b>INDIDUINO METEOSTATION</b></div>
+<div style="text-align: center">
+<a href="graphs.html">Graphs</a>
+<a href="external.html">Advance</a>
+</div>
+
+<table border=0 align="center">
+<tr>
+<td style="vertical-align:middle"  >
+<b>Clouds</b><canvas id=cloudFlag ></canvas>
+</td>
+<td style="vertical-align:middle"  >
+<b>Dewing</b><canvas id=dewFlag ></canvas>
+</td>
+<td style="vertical-align:middle" >
+<b>Frezzing</b><canvas id=frezzingFlag ></canvas>
+</td>
+<tr>
+</table>
+
+<table border=0 align="center">
+<tr>
+<td>
+<canvas id=T></canvas>
+</td>
+<td>
+<canvas id=P></canvas>
+</td>
+<td>
+<canvas id=HR ></canvas>
+</td>
+</tr>
+<tr>
+<td align="center">
+<canvas id=iradiance></canvas>
+</td>
+<td align="center">
+<table>
+<tr>
+<td colspan="2" align="center"><b>Sky Temp</b>
+</td>
+<tr>
+<td align="right"><b>Actual</b>
+<canvas id=skyT ></canvas>
+</td>
+</tr>
+<tr>
+<td align="right"><b>Corrected</b>
+<canvas id=skyTcorrected></canvas>
+</td>
+</tr>
+</table>
+
+</td>
+<td style="vertical-align:middle" align="center">
+<b>Dew Point</b>
+<canvas id=dew ></canvas>
+</td>
+</tr>
+<tr>
+<td style="vertical-align:middle" align="center" colspan="3">
+<canvas id=Clouds ></canvas>
+</td>
+</tr>
+
+<tr>
+<td style="vertical-align:middle" align="center" colspan="3">
+<canvas id=info ></canvas>
+</td>
+</tr>
+</table>
+</body>
+<script>
+
+	function init()
+	{	
+		
+    var radial1;
+    var radial2;
+    var radial3;
+    var radial4;
+    var displaySingle1;
+    var timeOut=1; 
+    
+    
+		// Define some sections
+        var sectionsT = Array(steelseries.Section(-20, 15, 'rgba(0, 0, 220, 0.3)'),
+                             steelseries.Section(15, 25, 'rgba(0, 220, 0, 0.3)'),
+                             steelseries.Section(25, 50, 'rgba(220, 0, 0, 0.3)'));
+
+		// Define one area
+        var areasT = Array(steelseries.Section(-20, 0, 'rgba(0, 0, 250, 0.3)'));
+
+
+		// Initialzing gauge
+
+	    T = new steelseries.Radial('T', {
+                            gaugeType: steelseries.GaugeType.TYPE4,
+                            section: sectionsT,
+                            area: areasT, 
+                            size:300,     
+                            minValue:-20,
+                            maxValue:50,  
+									 threshold:30,
+									 trendVisible:true,
+									 minMeasuredValueVisible:true,
+									 maxMeasuredValueVisible:true,
+									 ledBlinking:true,                  
+									 titleString: "Temperature",
+                            unitString: "ºC",
+                            lcdVisible: true,    
+                            frameDesign:steelseries.FrameDesign.ANTHRACITE                   
+                            });
+
+
+		 		 
+       var P0=(1013.25/Math.exp(altitude/8000)) | 0;
+       var Pdelta=25; 
+                         
+        var sectionsP = Array(steelseries.Section(P0-Pdelta, P0, 'rgba(0, 0, 220, 0.3)'),
+                               steelseries.Section(P0, P0+Pdelta , 'rgba(220, 0, 0, 0.3)'));
+
+		// Define one area
+        var areasP = Array(steelseries.Section(P0-Pdelta, P0-Pdelta/2, 'rgba(0, 0, 220, 0.3)'),
+        							 steelseries.Section(P0+Pdelta/2, P0+Pdelta, 'rgba(250, 0, 0, 0.3)'));
+
+                           
+		 P= new steelseries.Radial('P', {
+                            gaugeType: steelseries.GaugeType.TYPE4,
+                            section: sectionsP,
+                            area: areasP, 
+                            size:300,  
+                            niceScale:false,   
+                            minValue:P0-Pdelta,
+                            maxValue:P0+Pdelta,  
+									 trendVisible:true, 
+									 minMeasuredValueVisible:true,
+									 maxMeasuredValueVisible:true, 
+									 ledVisible:false,
+									 thresholdVisible:false,             
+									 titleString: "Pressure",
+                            unitString: "mBar",
+                            lcdVisible: true,    
+                            frameDesign:steelseries.FrameDesign.ANTHRACITE                    
+                            });
+                            
+                         
+        var sectionsHR = Array(steelseries.Section(0, 20, 'rgba(0, 0, 220, 0.3)'),
+                               steelseries.Section(80, 100 , 'rgba(220, 0, 0, 0.3)'));
+
+		// Define one area
+        var areasHR = Array();
+
+                           
+		 HR = new steelseries.Radial('HR', {
+                            gaugeType: steelseries.GaugeType.TYPE4,
+                            section: sectionsHR,
+                            area: areasHR, 
+                            size:300,  
+                            niceScale:false,   
+                            minValue:0,
+                            maxValue:100,  
+									 trendVisible:true,
+									 minMeasuredValueVisible:true,
+									 maxMeasuredValueVisible:true,									  
+									 ledVisible:false,
+									 thresholdVisible:false,             
+									 titleString: "Humidity",
+                            unitString: "%",
+                            lcdVisible: true,    
+                            frameDesign:steelseries.FrameDesign.ANTHRACITE                    
+                            });                             
+
+  	   skyT = new steelseries.DisplaySingle('skyT', {
+                            width: 100,
+									 height: 30,
+                            unitStringVisible: true,
+                            unitString: 'ºC',
+                            valuesNumeric: true,
+                            digitalFont: true,
+                            lcdColor:steelseries.LcdColor.STANDARD
+                            });
+                            
+		skyTcorrected = new steelseries.DisplaySingle('skyTcorrected', {
+                            width: 100,
+                            height: 30,
+                            unitStringVisible: true,
+                            unitString: 'ºC',
+                            valuesNumeric: true,
+                            digitalFont: true,
+                            lcdColor:steelseries.LcdColor.STANDARD
+                            });
+                            
+  	   dew = new steelseries.DisplaySingle('dew', {
+                            width: 148,
+                            unitStringVisible: true,
+                            unitString: 'ºC',
+                            valuesNumeric: true,
+                            digitalFont: true,
+                            lcdColor:steelseries.LcdColor.STANDARD
+                            });
+                                                                                 
+       Clouds = new steelseries.LinearBargraph('Clouds', {
+                            width: 1000,
+                            height: 100,
+									 threshold:30,
+                            titleString: 'Clouds',
+                            unitString: '%',
+                            lcdVisible: true,
+                            frameDesign:steelseries.FrameDesign.ANTHRACITE 
+                            });
+                            
+       iradiance = new steelseries.LinearBargraph('iradiance', {
+                            width: 300,
+                            height: 120,
+                            minValue:0,
+                            maxValue:1024,
+                            ledVisible:false,
+                            titleString: 'Iradiance',
+                            unitString: '%',
+                            lcdVisible: true,
+                            frameDesign:steelseries.FrameDesign.ANTHRACITE 
+                            });
+                            
+       info = new steelseries.DisplaySingle('info', {
+                            width: 800,
+                            height: 30,
+                            unitStringVisible: false,
+                            valuesNumeric: false,
+                            autoScroll:true,
+                            lcdColor:steelseries.LcdColor.STANDARD
+                            });
+                            
+       cloudLed = new steelseries.Led('cloudFlag', {
+       							size:50,
+									ledColor:steelseries.LedColor.ORANGE_LED
+                            });
+
+       frezzingLed = new steelseries.Led('frezzingFlag', {
+       							size:50,
+									ledColor:steelseries.LedColor.CYAN_LED
+                            });
+                            
+       dewLed = new steelseries.Led('dewFlag', {
+       							size:50,
+									ledColor:steelseries.LedColor.BLUE_LED
+                            });
+                           
+                            
+        info.setValue('              WELCOME TO INDUINO METEOSTATION. LOADING DATA ....');
+        info.setScrolling(true);
+ 		   
+       
+		 $.get("CHART/RTdata.json", function(data) {
+			 T.setValue(data.T);
+			 P.setValue(data.P);
+			 HR.setValue(data.HR);
+		    T.resetMinMeasuredValue();
+		    P.resetMinMeasuredValue();
+		    HR.resetMinMeasuredValue();			 
+		 })
+		      
+		 $.get("CHART/MINvalues.json", function(data) {
+		    T.setMinMeasuredValue(data.T);
+		    P.setMinMeasuredValue(data.P);
+		    HR.setMinMeasuredValue(data.HR);			 
+		 })          
+	
+		 $.get("CHART/MAXvalues.json", function(data) {
+		    T.setMaxMeasuredValue(data.T);
+		    P.setMaxMeasuredValue(data.P);
+		    HR.setMaxMeasuredValue(data.HR);			 
+		 })  	 
+
+
+		 
+		  setInterval( function(){ updatedata();}, 10000);
+		  
+		  function updateTrendIndicator(){
+	     $.get("CHART/AVERAGEvalues.json", function(data) {
+	        T.setTrend(steelseries.TrendState.STEADY);
+			  P.setTrend(steelseries.TrendState.STEADY);
+			  HR.setTrend(steelseries.TrendState.STEADY);
+			  if (T.getValue() > data.T+0.1) { T.setTrend(steelseries.TrendState.UP);}
+			  if (T.getValue() < data.T-0.1)   { T.setTrend(steelseries.TrendState.DOWN);}
+		  			    		
+			  if (P.getValue() > data.P+0.1)  { P.setTrend(steelseries.TrendState.UP);}
+			  if (P.getValue()< data.P-0.1)   { P.setTrend(steelseries.TrendState.DOWN);}
+			  			   
+			  if (HR.getValue() > data.HR+0.5)  { HR.setTrend(steelseries.TrendState.UP);}
+			  if (HR.getValue()< data.HR-0.5)   { HR.setTrend(steelseries.TrendState.DOWN);}
+			    				   				  	 
+		  })	  
+		  }
+         updatedata();
+        function updatedata(){
+        						$.get("CHART/RTdata.json", function(data) {
+					         T.setValueAnimated(data.T);
+					         P.setValueAnimated(data.P);
+								HR.setValueAnimated(data.HR);
+								updateTrendIndicator()
+					         skyT.setValue(data.IR);
+								<!-- skyTcorrected.setValue(data.IR-skyCorr(data.Tir)); -->
+								skyTcorrected.setValue(data.skyT);
+					         dew.setValue(data.Dew);
+								iradiance.setValueAnimated(data.Light);
+								<!-- Clouds.setValueAnimated(cloudIndex(data.Tir,data.IR)); -->
+								Clouds.setValueAnimated(data.clouds);
+								cloudLed.setLedOnOff(false);
+								dewLed.setLedOnOff(false);
+								frezzingLed.setLedOnOff(false);
+								var warningText='';
+                        if (data.cloudFlag==1) {
+								   warningText=warningText+"  ****** CLOUDY ******  ";
+								   cloudLed.setLedOnOff(true);
+								}
+								if (data.dewFlag==1) {
+								   warningText=warningText+"  ******  DEWING  ******  ";
+								   dewLed.setLedOnOff(true);
+								}
+								if (data.frezzingFlag==1) {
+								   warningText=warningText+"  ****** FREZZING ******  ";
+								   frezzingLed.setLedOnOff(true);
+								}
+								warningText=warningText+data.TIME;
+          					info.setValue(warningText);
+          					var now= new Date();
+          					now.setMinutes ( now.getMinutes() - timeOut );
+          					var d= new Date(data.TIME);
+          					if (d<now) {
+          					    info.setValue("WARNING. No updated since: "+data.TIME);
+          					}
+          					
+					   		}, "json");
+
+        		         					   			 	
+		  }
+		        
+}   
+</script>
+<script type=text/javascript src=js/tween-min.js></script>
+<script type=text/javascript src=js/steelseries-min.js></script>

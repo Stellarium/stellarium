@@ -1,0 +1,35 @@
+INSTALL indi-gige-ccd
+=====================
+
+* indi-gige-ccd
+    You must have CMake >= 2.4.7 in order to build this package.
+
+    To build only the indi-gige package, do the following:
+
+$ cd 3rdparty
+
+$ mkdir build
+
+$ cd build
+
+$ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWITH_APOGEE:BOOL=OFF -DWITH_ASICAM:BOOL=OFF -DWITH_DSI:BOOL=OFF 
+        -DWITH_FISH^CMP:BOOL=OFF -DWITH_FLI:BOOL=OFF -DWITH_GPHOTO:BOOL=OFF -DWITH_QSI:BOOL=OFF
+        -DWITH_SBIG:BOOL=OFF -DWITH_GPSD:BOOL=OFF ../ 
+
+$ make 
+
+$ sudo make install
+
+    By this point, you'll have the indi-gige-ccd driver installed.
+
+INSTALL aravis
+==============
+
+Clone from github, https://github.com/AravisProject/aravis
+Follow the project aravis instructions, you need the library only.
+If you don't want or need the viewer, you can skip it (and the gstreamer dependencies):
+
+$ ./configure --disable-viewer
+
+...
+

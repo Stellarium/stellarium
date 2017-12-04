@@ -1,0 +1,136 @@
+Instructions on building and using CFITSIO on Windows platforms 
+for C programmers using Microsoft Visual Studio or Borland C++.
+
+These instructions for building the CFITSIO library under Windows use the
+CMake build system that is available from http://www.cmake.org.
+
+===============================================================================
+
+1.  Build the CFITSIO dll library  
+
+This step will create the cfitsio.dll, and cfitsio.lib files.  If you have 
+downloaded the CFITSIO DLL .zip file that already contains the pre-built 
+versions of these files, then SKIP THIS STEP.
+
+  a. If CMAKE is not already installed on your machine, download it from 
+     http://www.cmake.org.  It is recommended that you choose the 
+     "Add CMake to the system PATH for current user" option during the 
+     installation setup process for convenience when running CMake later on.
+
+  b. Unzip the CFITSIO .zip file (e.g. cfit3360.zip) that was obtained from 
+     the CFITSIO Web site (http://heasarc.gsfc.nasa.gov/fitsio/). This will 
+     create a new \cfitsio subdirectory that contains the source code and
+     documentation files.  It should also contain a CMakeLists.txt file that
+     will be used during the CMake build process.
+         
+  c. Open the Visual Studio Command Prompt window, likely using a
+     desktop icon with this same name, (or the equivalent Borland command window)
+     and CD (change directory) into the parent directory that is one level
+     above the directory containing the CFITSIO source files that was created
+     in the previous step.
+
+  d. Create a new "cfitsio.build" subdirectory, and CD into it with the
+     following commands:
+
+     mkdir cfitsio.build
+     cd cfitsio.build
+
+     When using Visual Studio, all the files that are generated during the 
+     CMake process will be created in or under this subdirectory.   
+    
+  e. Decide which CMake Generator you will want to use in the following step.
+     This depends on which C/C++ compiler you are using and will likely have
+     a name such as: 
+
+     "Visual Studio 10"
+     "Visual Studio 10 Win64" (for 64-bit builds)
+     "Visual Studio 11"
+     "Visual Studio 11 Win64" (for 64-bit builds)
+     "Visual Studio 12"
+     "Visual Studio 12 Win64" (for 64-bit builds)
+     "Borland Makefiles"
+     "NMake Makefiles"
+
+      You can see a list of all the available CMake Generators by executing
+      the command
+
+         cmake.exe /?
+
+      Note that these names are case-sensitive and must be entered in the
+      following step exactly as displayed.
+
+  f.  Execute the following commands to build the CFITSIO library:
+ 
+      cmake.exe -G "<cmake generator>" ..\cfitsio
+      cmake.exe --build . --config Release
+     
+      Where the string <cmake generator> is the string that was selected
+      in step e.  Note that the "..\cfitsio" argument in the first command
+      gives the path to the directory that contains the CFITSIO source files
+      and the CMakeLists.txt file.  The "." argument in the second command
+      (following --build) tells CMake to build the files in the current 
+      directory (i.e., the cfitsio.build directory).
+      
+      If this process completes successfully, you should find the CFITSIO
+      library files that were created in the "cfitsio.build\Release"
+      subdirectory. To verify that CFITSIO is working correctly, execute the
+      testprog.exe file (in that Release directory).  This should generate
+      a long stream of diagnostic messages ending with the line "Status = 0:
+      OK - no error".
+
+   g. Other CMake options.
+
+      CMake has many other build options that may be useful in some
+      situations. Refer to the CMake documentation for more
+      information.  
+
+      For example, one can build a 'debug' version of the CFITSIO library
+      by executing the command "cmake.exe --build ." instead of the 2nd
+      command listed above in section f.
+
+      One can also make a thread safe version of CFITSIO using the
+      pthread library with the following procedure:
+
+      a. Download the precompiled files from the pthread-win32 project 
+      (http://sourceware.org/pthreads-win32/). Put the files for your
+      specific  platform (.h, .lib, .dll) into a folder 'pthread',
+      parallel to the  cfitsio source folder.
+
+      b. For the compilation of cfitsio follow the cmake steps, but use
+      this  change as a replacement for the commands in step f:
+      
+      cmake.exe -G "<cmake generator>" ..\cfitsio -DUSE_PTHREADS=1 
+       -DCMAKE_INCLUDE_PATH=..\pthread -DCMAKE_LIBRARY_PATH=..\pthread
+
+      cmake.exe --build . --config Release 
+      
+      You may need to adapt the paths for the source directory and 
+      the pthread library.
+
+============================================================================
+
+2.  Using CFITSIO when compiling and linking application programs 
+
+First, depending on your particular programming environment, it may be
+necessary to copy the cfitsio.lib and cfitsio.dll files into another
+directory where your compiler expects to find them.  Or equivalently, you
+may need to specify the directory path to the location of the CFITSIO
+library files when creating a project that uses them.  You may also need to
+copy the fitsio.h and longnam.h include files from the \cfitsio source file
+directory to a standard 'include' directory on your system.
+
+When using the Visual Studio command line window, application programs can
+be compiled and linked with CFITSIO using the following command:
+
+		cl /MD your_program.c cfitsio.lib
+
+The /MD command line switch must be specified to force the compiler/linker
+to use the appropriate runtime library.   If this switch is omitted, then
+the fits_report_error function in CFITSIO will likely crash.  
+
+When building programs in the Visual Studio graphical environment, one can
+force the equivalent of the /MD switch by selecting 'Settings...' under the
+'Project' menu, then click on the C/C++ tab and select the 'Code Generator'
+category.  Then under 'User Run-time Library' select 'Multithreaded DLL'.
+
+===============================================================================

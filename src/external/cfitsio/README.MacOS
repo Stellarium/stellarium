@@ -1,0 +1,75 @@
+By default, the CFITSIO library will be a "Universal Binary" (i.e.
+32- and 64-bit compatible) under Mac OS X when built in the standard
+way, i.e.
+
+- tar xzf cfitsio3370.tar.gz (or whatever version this is)
+- cd cfitsio/
+
+- ./configure
+- make
+- make install
+
+---------------------------------------------------------------------
+To install CFITSIO using MacPorts:
+---------------------------------------------------------------------
+
+If you have MacPorts installed, you may install CFITSIO simply with
+the command
+
+  $ sudo port install cfitsio +universal
+
+For more information, please visit:
+
+http://macports.org
+https://trac.macports.org/browser/trunk/dports/science/cfitsio/Portfile
+
+---------------------------------------------------------------------
+To install CFITSIO using Homebrew:
+---------------------------------------------------------------------
+
+If you have Homebrew installed, you may install CFITSIO simply with
+the command
+
+  $ brew install cfitsio
+
+For more information, please visit:
+
+http://brew.sh
+http://brewformulas.org/Cfitsio
+
+---------------------------------------------------------------------
+To build CFITSIO using the XCode GUI:
+---------------------------------------------------------------------
+
+- tar xzf cfitsio3370.tar.gz (or whatever version this is)
+- cd cfitsio/
+
+- Start Xcode and open cfitsio.xcodeproj/project.pbxproj,
+  or just "open" the file from a terminal command line,
+
+   $ open cfitsio.xcodeproj/project.pbxproj
+
+  and this will start up XCode for you.
+
+- Press the Build (or "Play") button in the upper left
+  corner of the GUI.
+
+---------------------------------------------------------------------
+---------------------------------------------------------------------
+
+Below, are the old (and now obsolete) instructions for building CFITSIO
+on classic Mac OS-9 or earlier versions:
+
+1. Un binhex and unstuff cfitsio_mac.sit.hqx
+2. put CFitsioPPC.mcp in the cfitsio directory.
+2. Load CFitsioPPC.mcp into CodeWarrior Pro 5 and make.
+   This builds the cfitsio library for PPC.  There are also targets for both 
+   the test program and the speed test program.
+
+To use the MacOS port you can add Cfitsio PPC.lib to your Codewarrior Pro 5
+project.  Note that this only has been tested for the PPC. It probably
+won't work on 68k macs.  Also note that the fortran bindings aren't
+included.  I haven't worked with the codewarrior f2c plugin so I don't know
+how these would work.  If one is interested, please write and I can look
+into this.
+

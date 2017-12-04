@@ -1,0 +1,31 @@
+Source: libqsi
+Section: libs
+Priority: extra
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: debhelper (>= 6), cdbs, cmake, zlib1g-dev, libusb-dev, libtiff5-dev, libftdi-dev
+Standards-Version: 3.9.2
+
+Package: libqsi7
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libftdi1
+conflicts: libqsi6
+replaces: libqsi6
+Description: Quantum Scientific Imaging (QSI) library.
+ .
+ This package contains the library.
+
+Package: libqsi-dev
+Architecture: any
+Depends: libqsi7 (= ${binary:Version}), ${misc:Depends}
+Description: Quantum Scientific Imaging (QSI) development headers.
+ .
+ This package contains the development files.
+
+Package: libqsi-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: libqsi7 (= ${binary:Version}), ${misc:Depends}
+Description: Quantum Scientific Imaging (QSI) debug symbols.
+ .
+ This package contains debug symbols.

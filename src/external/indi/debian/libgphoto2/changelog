@@ -1,0 +1,1596 @@
+libgphoto2 (2.5.15) unstable; urgency=low
+
+  * New upstream version 2.5.15
+  
+ -- Jasem Mutlaq <mutlaqja@ikarustech.com>  Sat, 07 Oct 2017 00:20:00 +0300
+ 
+libgphoto2 (2.5.14-1) unstable; urgency=medium
+
+  * New upstream version 2.5.14
+  * debian/control:
+      - Bump STD-Version: from 3.9.8 to 4.0.0
+  * debian/copyright:
+      - Update.
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Sun, 16 Jul 2017 15:06:10 -0300
+
+libgphoto2 (2.5.13-3) unstable; urgency=medium
+
+  * Upload to unstable. 
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Sun, 18 Jun 2017 14:22:27 -0300
+
+libgphoto2 (2.5.13-2) experimental; urgency=medium
+
+  * debian/control:
+      - debhelper 10 on Build-Depends. 
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Sun, 30 Apr 2017 10:38:14 -0300
+
+libgphoto2 (2.5.13-1) experimental; urgency=medium
+
+  * New upstream version 2.5.13
+  * debian/compat:
+      - 10.
+  * debian/copyright:
+      - updated.
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Sun, 23 Apr 2017 10:24:38 -0300
+
+libgphoto2 (2.5.12-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/copyright:
+      - Update.
+  * debian/libgphoto2-6.lintian-overrides:
+      - Add a typo lintian 'I'. It is a camera model
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Wed, 11 Jan 2017 10:27:58 -0200
+
+libgphoto2 (2.5.11-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/copyright:
+      - Update.
+  * debian/paches:
+      - Remove libjpeg_turbo_1.5.0_fix.patch. Applied by the upstream.
+      - Add fix-typo_stv0674.c.patch.
+  * debian/rules:
+      - Add DEB_LDFLAGS_MAINT_APPEND: -fPIE -pie
+      - dh_auto_configure:
+          - Add CFLAGS + -fPIE
+          - Add CXXFLAGS + -fPIE
+  * debian/watch:
+      - Fix opts on github alternative.
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Wed, 23 Nov 2016 10:34:52 -0200
+
+libgphoto2 (2.5.10-3) unstable; urgency=medium
+
+  * debian/control:
+      - bump Standards-Version from 3.9.7 to 3.9.8
+      - using 'hpfn@debian.org' email address for the first time.
+        Uploaders field.
+  * debian/patches:
+      - libjpeg_turbo_1.5.0_fix.patch added. FTBFS. (Closes: # 827629)
+
+ -- Herbert Parentes Fortes Neto <hpfn@debian.org>  Sun, 19 Jun 2016 18:57:08 -0300
+
+libgphoto2 (2.5.10-2) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Thu, 31 Mar 2016 03:16:35 -0300
+
+libgphoto2 (2.5.10-1) experimental; urgency=low
+
+  * New upstream release.
+  * New path for obsolete gphoto2-* scripts, so:
+      - debian/libgphoto2-dev.install edited.
+      - debian/rules edited. To create the path.
+      - NEWS.Debian created to inform about it.
+  * debian/control:
+      - Bump Standards-Verison to 3.9.7.
+      - Vcs* fields using https.
+      - Homepage field updated. github.com.
+  * debian/copyright updated.
+  * debian/*.symbols updated to version.
+  * debian/libgphoto2-dev.docs created. For NEWS.Debian.
+  * debian/watch:
+      - version 4
+      - gpg signature for github commented. .asc file not provided at it.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Sat, 26 Mar 2016 10:46:27 -0300
+
+libgphoto2 (2.5.9-3) unstable; urgency=low
+
+  * debian/control:
+      - packages suggest gphoto2 2.5.7 or above.
+        relationship with the ABI.
+  * debian/rules:
+      - SHLIBS var removed.
+      - '-V' option from dh_makeshlibs removed.
+  * debian/watch:
+      - '?' added at the end of the github line.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Tue, 08 Dec 2015 14:28:21 -0200
+
+libgphoto2 (2.5.9-2) unstable; urgency=low
+
+  * Upload to unstable.
+  * debian/copyright:
+      - po/ entry added in the previous revision.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Wed, 25 Nov 2015 14:14:13 -0200
+
+libgphoto2 (2.5.9-1) experimental; urgency=low
+
+  * New upstream release.
+  * debian/copyright updated:
+      - The email about license for some files in camlibs/soundvision/
+        removed. Files with headers now.
+  * debian/patches:
+      - no_sprintf_chdk_ptp-h.patch: applied by the uptream.
+      - no_sprintf_chdk-c.patch: applied by the upstream.
+      - spell-error-epson-desc-c.patch: applied by the upstream.
+      - spell-error-sierra-c.patch: applied by the upstream.
+  * debian/*.symbols files updated.
+  * debian/watch updated:
+      - using github too.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Tue, 24 Nov 2015 16:27:43 -0200
+
+libgphoto2 (2.5.8-3) unstable; urgency=low
+
+  * debian/libgphoto2-6.post{rm,inst} removed:
+      - they only remove generated fdi files that are not used anymore.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Sat, 17 Oct 2015 15:31:04 -0300
+
+libgphoto2 (2.5.8-2) unstable; urgency=medium
+
+  * debian/control:
+      - set debhelper version >= 9.20151005. To be sure not use
+        ldconfig on post(rm|inst) scripts.
+        Thanks Mattia Rizzolo
+  * debian/rules:
+      - var SHLIBS updated to 2.5.7
+      - override for dh_strip to stop "unstripped-static-library"
+        Thanks Alex Vong.
+  * debian/libgphoto2-6.postrm:
+      - remove the '|| true'.
+        Thanks Jakub Wilk and Alex Vong
+  * debian/upstream/signing-key.asc:
+      - right key now.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Wed, 30 Sep 2015 16:18:24 -0300
+
+libgphoto2 (2.5.8-1) unstable; urgency=medium
+
+  * New upstream release.
+  * debian/copyright updated.
+  * debian/control:
+      - Replaced libgd2-xpm-dev (transitional pkg) for libgd-dev.
+      - Vcs-Browser updated.
+  * debian/libgphoto2-6.install:
+      - NEWS file (upstream) is been used as changelog file now. So
+        entry commented.
+  * debian/libgphoto2-6.NEWS removed. Info about changes in 2006.
+  * debian/rules:
+      - Using NEWS file as ChangeLog file.
+      - udev rule building is now 201. Thanks Martin Pitt and
+        Marcus Meissner. (Closes: #738522)
+  * debian/patches:
+      - spell-error-sierra-c.patch added.
+      - spell-error-epson-desc-c.patch added.
+      - no_sprintf_chdk-c.patch added. Doesn't build without it.
+        Thanks Marcus Meissner (upstream).
+      - no_sprintf_chdk_ptp-h.patch added. Doesn't build without it.
+        Thanks Marcus Meissner (upstream).
+      - canon-crc-c.patch applied by the upstream.
+      - canon-crc-h.patch applied by the upstream.
+      - canon-serial.patch applied by the upstream.
+      - libusb-kfreebsd.patch applied by the upstream.
+      - olympus-wrap-spelling-error.patch applied by the upstream.
+      - libgphoto2_port.pc.in.patch applied by the upstream.
+  * debian/watch:
+      - using signature.
+      - scan gz|bz2|xz files.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Wed, 08 Jul 2015 16:35:52 -0300
+
+libgphoto2 (2.5.7-5) unstable; urgency=medium
+
+  * The obsolete scripts gphoto2-config and gphoto2-port-config are back.
+    Using the patches from 689083 bug. Thanks Francois Gouget.
+    Manpages for them are in the package too.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Thu, 30 Apr 2015 15:40:23 -0300
+
+libgphoto2 (2.5.7-4) unstable; urgency=medium
+
+  * Upload to unstable.
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Tue, 28 Apr 2015 12:22:47 -0300
+
+libgphoto2 (2.5.7-3) experimental; urgency=medium
+
+  * Fix FTBFS - Kfreebsd (added the patch libusb-kfreebsd.patch).
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Tue, 07 Apr 2015 14:58:03 -0300
+
+libgphoto2 (2.5.7-2) experimental; urgency=medium
+
+  * fix wrong trasitional package libgphoto2-port10. (Closes: #780240)
+    Thanks Guillem Jover and Andreas Beckmann.
+  * Removed the libgphoto2_port.so.10 symlink.
+  * debian/control: libgphoto2-port10 removed.
+                    For libgphoto2-port12:
+                        Breaks: libgphoto2-port10 (>= 2.5.7)
+                        Replaces: libgphoto2-port10 (>= 2.5.7)
+  * Removed transitional libgphoto2-2-dev package.
+ 
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Thu, 12 Mar 2015 16:11:12 -0300
+
+libgphoto2 (2.5.7-1) experimental; urgency=medium
+
+  * New upstream release
+  * Acknowledge NMU. Thanks Andreas Barth. (Closes: #759274)
+  * debian/copyright updated to stop some Lintian alerts and to add some
+    entries
+  * debian/control:
+            Set myself as an Uploader. (Closes: #711831)
+            Added Multi-Arch field. Refer to libgphoto2-dev.install bellow.
+            Removed David Paleino from Uploaders. He sent the RFA.
+            Bump Standards-Version to 3.9.6.
+            Added rdfind and symlinks to Build-Depends
+            libgphoto2-port12:
+                             Breaks: libgphoto2-port10.
+                             Replaces: libgphoto2-port10.
+                             Suggests: gphoto2 (>= 2.5.6). gtkam removed.
+            libgphoto2-6:
+                             Suggests: gphoto2 (>= 2.5.6)
+                             Breaks removed.
+                             ${udev-hotplug} removed from Recommends.
+            libgphoto2-l10n: 
+                             Breaks removed.
+                             Replaces removed.
+            libgphoto2-port10 transitional package created.
+  * debian/libgphoto2-dev.lintian-overrides removed due Lintian alert.
+  * debian/libgphoto2-6.lintian-overrides removed due Lintian alert.
+  * debian/rules updated:
+            DEB_BUILD_MAINT_OPTIONS = hardening=+all
+            SHLIBS=2.5.6
+            Use libgphoto2-port12 instead of libgphoto2-port10 on:
+                                             override_dh_install
+                                             override_dh_makeshlibs
+                                             override_dh_shlibdeps
+            Using rdfind and symlinks to deal with duplicate files. Instead 
+                    of using debian/libgphoto2-dev-doc.lintian-overrides.
+            Putting libgphoto2_port.so.10 symlink on the right place.
+  * debian/source.lintian-overrides removed.
+  * debian/paches:
+            00-fix_generic_PTP_permissions.patch. Applied by the upstream.
+            10_disable_cache. Applied by the upstream. But kept the patch file.
+            11_hurd_no_path_max_bsdsource. Applied by the upstream.
+            80_avchd_support.patch. Applied by the upstream.
+            kFreeBSD-ENODATA.patch. Reviewed.
+            libgphoto2_port.pc.in.patch. Created to fix Lintian alert.
+            olympus-wrap-spelling-error.patch. Created to fix spelling error.
+            canon-*. Created to fix shlib-calls-exit lintian alert.
+  * debian/libgphoto2-port10.install renamed to 
+                     debian/libgphoto2-port12.install and
+                     its content has been updated.
+  * debian/libgphoto2-port12.install: removed the AUTHORS file. 
+                     debian/copyright take care of it.
+  * debian/libgphoto2-port10.symbols renamed to
+                     debian/libgphoto2-port12.symbols and
+                     its content has been updated.
+  * debian/libgphoto2-6.install: removed the AUTHORS file. debian/copyright
+                                 take care of it.
+  * debian/libgphoto2-6.maintscript removed. Refer to old version (<=2.4.11-4)
+  * debian/libgphoto2-dev.install. gphoto2-config and gphoto2-port-config not
+                                   uploaded. (Closes: #689083)
+  * Manpage for gphoto2-config script created. But not uploaded.
+  * Manpage for gphoto2-port-config scritp created. But not uploaded.
+  * Created debian/libgphoto2-dev.lintian-overrides to stop lintian alert
+    about broken symlink. It will work when installed.
+ 
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Tue, 20 Jan 2015 10:15:56 -0200
+
+libgphoto2 (2.5.4-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fix FTBFS on ppc64el by using autoreconf. Closes: #759274
+
+ -- Andreas Barth <aba@ayous.org>  Mon, 25 Aug 2014 19:48:24 +0000
+
+libgphoto2 (2.5.4-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 13 Apr 2014 12:04:35 +0200
+
+libgphoto2 (2.5.3.1-1) unstable; urgency=medium
+
+  * Team upload
+  * New upstream release
+  * Install hwdb file and bump recommended udev version to 201
+
+ -- Laurent Bigonville <bigon@debian.org>  Sun, 09 Feb 2014 23:39:51 +0100
+
+libgphoto2 (2.5.2-2) unstable; urgency=medium
+
+  * Team upload
+  * Upload to unstable
+
+ -- Laurent Bigonville <bigon@debian.org>  Mon, 20 Jan 2014 20:05:20 +0100
+
+libgphoto2 (2.5.2-1) experimental; urgency=low
+
+  * Team upload
+  * New upstream release (Closes: #708855)
+    - Adjust build-dependencies
+    - Bump the soname of both libgphoto2 and libgphoto2_port
+  * Drop debian/patches/01-increase_max_entries.patch: Fixed upstream
+  * Drop debian/libgphoto2-dev.lintian-overrides: not needed anymore
+  * debian/control: Bump Standards-Version to 3.9.5 (no further changes)
+  * debian/rules: Pass -X.la to dh_install
+  * debian/copyright: Fix copyright file (Closes: #592559)
+  * debian/control: Remove C/P/R libgphoto2port on libgphoto2-port10 package
+  * debian/libgphoto2-6.install: Do not install print-camera-list, this is not
+    needed for normal operation and breaks co-instability
+  * debian/control: Create a libgphoto2-2-dev transitional package to ease the
+    transition
+  * debian/control: Drop libgphoto2-dev dependency against libc-dev to please
+    lintian
+
+ -- Laurent Bigonville <bigon@debian.org>  Sat, 04 Jan 2014 11:48:38 +0100
+
+libgphoto2 (2.4.14-2.4) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Remove libusb-1.0-0-dev from libgphot2-2-dev Depends. It is no longer
+    needed to be there since 2.4.12. (Closes: #717914, #729545)
+
+ -- Modestas Vainius <modax@debian.org>  Wed, 20 Nov 2013 00:46:39 +0200
+
+libgphoto2 (2.4.14-2.3) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * libgphoto2-2-dev: Really build-depend on libusb-1.0-0-dev.
+
+ -- Markus Koschany <apo@gambaru.de>  Thu, 25 Jul 2013 23:26:31 +0200
+
+libgphoto2 (2.4.14-2.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Add kFreeBSD-ENODATA.patch and fix FTBFS on kfreeBSD architectures.
+  * Bump Standards-Version to 3.9.4, no changes.
+  * Use canonical Vcs-URI.
+  * Build-depend on debhelper >= 9.
+  * Build with autotools-dev to fix outdated config.guess and config.sub files.
+
+ -- Markus Koschany <apo@gambaru.de>  Thu, 25 Jul 2013 08:15:42 +0200
+
+libgphoto2 (2.4.14-2.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Switch to libusb-1.0. (Closes: #714441)
+
+ -- Markus Koschany <apo@gambaru.de>  Mon, 22 Jul 2013 17:41:15 +0200
+
+libgphoto2 (2.4.14-2) unstable; urgency=low
+
+  * Fix installation paths for libgphoto2-2-dev, so that they also
+    work on Hurd, thanks to Pino Toscano (Closes: #670049)
+
+ -- David Paleino <dapal@debian.org>  Sun, 22 Apr 2012 19:07:07 +0200
+
+libgphoto2 (2.4.14-1) unstable; urgency=low
+
+  * New upstream release
+  * Patches refreshed:
+    - dropped 00-format_security.patch, 01-support_udev_175.patch
+      and 02-fix_source_typos.patch -- merged upstream
+
+ -- David Paleino <dapal@debian.org>  Wed, 18 Apr 2012 17:45:07 +0200
+
+libgphoto2 (2.4.13-2) unstable; urgency=low
+
+  * Drop dependency on adduser, thanks to Miguel Colon for noticing
+    (Closes: #661525)
+
+ -- David Paleino <dapal@debian.org>  Mon, 27 Feb 2012 22:07:32 +0100
+
+libgphoto2 (2.4.13-1) unstable; urgency=low
+
+  * New upstream version
+  * Standards-Version bump to 3.9.3, no changes needed
+
+ -- David Paleino <dapal@debian.org>  Sun, 26 Feb 2012 18:14:57 +0100
+
+libgphoto2 (2.4.12-1) unstable; urgency=low
+
+  * New upstream version
+  * Fix maintainer scripts with the help of dh_installdeb's .maintscript
+    support. *MANY* thanks to Colin Watson for the patch (and for
+    letting me know about .maintscript). (Closes: #659768)
+  * Build-Depend on libgd2-xpm-dev instead of libgd2-noxpm-dev
+  * Added proper lintian overrides
+  * Add dependency to libjs-jquery to avoid embedding it in libgphoto2-dev-doc
+  * Fixed some harmless typos in the source code
+
+ -- David Paleino <dapal@debian.org>  Wed, 22 Feb 2012 19:45:20 +0100
+
+libgphoto2 (2.4.11-4) unstable; urgency=low
+
+  * Acknowledge NMU.
+  * Avoid -Wformat-security warnings, thanks to Kees Cook.
+  * Multi-Archified package, thanks to Kees Cook and Steve Langasek
+    (Closes: #653198)
+  * Support (and recommend) udev >= 175 (Closes: #649137)
+
+ -- David Paleino <dapal@debian.org>  Fri, 30 Dec 2011 01:30:11 +0100
+
+libgphoto2 (2.4.11-3.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Switch build depend from libjpeg62-dev to libjpeg-dev. (Closes: #635484)
+
+ -- Ana Beatriz Guerrero Lopez <ana@debian.org>  Sat, 10 Sep 2011 16:54:07 +0200
+
+libgphoto2 (2.4.11-3) unstable; urgency=low
+
+  * Add support for GD, by Build-Depending on libgd2-noxpm-dev
+    (Closes: #609120)
+
+ -- David Paleino <dapal@debian.org>  Sat, 30 Apr 2011 16:38:30 +0200
+
+libgphoto2 (2.4.11-2) unstable; urgency=low
+
+  * Fix usage of dpkg-maintscript-helper
+
+ -- David Paleino <dapal@debian.org>  Mon, 18 Apr 2011 19:47:38 +0200
+
+libgphoto2 (2.4.11-1) unstable; urgency=low
+
+  [ David Paleino ]
+  * New upstream release
+    - Fix unset permissions with the generic PTP rule
+      (Closes: #616648, #620941)
+  * Fix README.Debian regarding the new udev rules location
+    (Closes: #620937)
+  * debian/libgphoto2-2.{preinst,postinst,postrm}: properly
+    remove old configuration files using dpkg-maintscript-helper
+    (Closes: #622569)
+  * Patch 80_avchd_support.patch removed, merged upstream
+  * Standards-Version bump to 3.9.2, no changes needed
+
+  [ Andreas Metzler ]
+  * Stop shipping libtool la files in development package.
+    http://wiki.debian.org/ReleaseGoals/LAFileRemoval
+    (Closes: #621619)
+
+ -- David Paleino <dapal@debian.org>  Mon, 18 Apr 2011 19:11:01 +0200
+
+libgphoto2 (2.4.10.1-5) unstable; urgency=low
+
+  * Add missing package relationships for the package split
+  * Install development documentation into more appropriate place
+  * Merge libgphoto2-doc back into libgphoto2-2
+  * Add a new libgphoto2-l10n package, recommended by libgphoto2-2,
+    to move the localized messages in a Arch:all package
+  * Rename libgphoto2-dev back to libgphoto2-2-dev: I'm not really
+    in the mood of breaking everything right now :) -- jokes aside,
+    it makes more sense to do this when the first SONAME bump happens.
+    Thanks Andreas Metzler for discussing this on pkg-phototools' list.
+    Also, this didn't touch anyone, since -4 was REJECTED, and has
+    never been public.
+  * Drop useless Provides/Replaces/Conflicts/Breaks from libgphoto2-2-dev:
+    those packages were present in 2004, so no need to still keep those
+    relationships there.
+
+ -- David Paleino <dapal@debian.org>  Mon, 28 Feb 2011 17:06:59 +0100
+
+libgphoto2 (2.4.10.1-4) unstable; urgency=low
+
+  * Upload to unstable
+  * Removing KiBi from Uploaders, as requested. Thanks for all your
+    previous work!
+  * HALectomy: remove libhal-dev from Build-Depends, and remove
+    HAL FDI generation in debian/rules. (Closes: #580291)
+  * Split documentation in other two binary packages: libgphoto2-dev-doc
+    and libgphoto2-doc
+  * Rename libgphoto2-2-dev to libgphoto2-dev: this will ease SONAME
+    transitions through binNMUs.
+
+ -- David Paleino <dapal@debian.org>  Sat, 26 Feb 2011 18:08:38 +0100
+
+libgphoto2 (2.4.10.1-3) experimental; urgency=low
+
+  * Merge from Ubuntu:
+    - debian/patches/80_avchd_support.patch: Report .MTS and .M2TS
+      files on mass-storage devices as they are AVCHD video streams.
+      Patch from upstream svn trunk.
+    - debian/libgphoto2-2.install: Drop API docs, they are already
+      shipped in the -dev package. Thanks to Martin Pitt
+      (Closes: #606944)
+
+ -- David Paleino <dapal@debian.org>  Mon, 13 Dec 2010 11:09:51 +0100
+
+libgphoto2 (2.4.10.1-2) experimental; urgency=low
+
+  * Fix regressions from 2.4.6-3:
+    - set CAMLIBS when generating udev rules
+    - generate HAL FDI again
+
+ -- David Paleino <dapal@debian.org>  Fri, 12 Nov 2010 09:52:05 +0100
+
+libgphoto2 (2.4.10.1-1) experimental; urgency=low
+
+  [ Cyril Brulebois ]
+  * New upstream release.
+  * Drop 80_kfreebsd patch, merged upstream.
+  * Fix lintian warnings:
+     - debian/libgphoto2-2.postrm: s{/bin/true}{true}.
+     - debian/libgphoto2-2.README.Debian: fix typo.
+  * Move to dh:
+     - Bump debian/compat to 7.
+     - Bump debhelper version in B-D to >= 7.0.50 to use overrides.
+     - Use a minimal-like debian/rules and overrides to perform the
+       various needed tweaks, using the quilt sequence to have patches
+       applied/unapplied when appropriate.
+     - Switch from dh_movefiles to dh_install.
+     - Move moving docs from /u/s/d/libgphoto2{,_port} to the proper
+       locations to .install files.
+     - Remove all special-cases in the clean rules, the upstream one does
+       its job properly.
+     - Get rid of the attempt at detecting files that are installed
+       nowhere, using the --list-failing dh_install option instead.
+     - Following the move to dh, adapt Martin's udev patch using an
+       override_dh_installudev rule, but only on Linux architectures for
+       now, needed tweaks for other platforms should follow in next
+       revisions.
+
+  [ Gürkan Sengün ]
+  * Add myself to uploaders.
+  * Bump standards version to 3.9.1.
+  * Switch to source format 3.0, drop quilt from control and rules.
+  * Drop patches:
+    - 10_disable_cache (does not apply anymore)
+    - 45_increase_canon_timeout (upstream has increased it from 150 to 500)
+
+  [ David Paleino ]
+  * debian/rules:
+    - fix typo (s,deibian,debian,)
+    - simplify override_dh_auto_configure
+    - simplify override_dh_gencontrol
+  * Added symbols files
+  * Drop 01_udev_rules_136, already in upstream sources
+  * Remove type-handling dependency in debian/control, use architecture
+    wildcards, as defined in Policy. Thanks to Sebastian Andrzej Siewior
+    (Closes: #587873)
+  * Drop duplicate Section fields in binary stanzas
+  * Added ${misc:Depends} where needed
+  * Use Breaks instead of versioned Conflicts
+  * Added doc-base registration for API docs in libgphoto2-2-dev
+
+ -- David Paleino <dapal@debian.org>  Thu, 11 Nov 2010 19:19:03 +0100
+
+libgphoto2 (2.4.6-3) unstable; urgency=low
+
+  * Merge one more patch by Martin Pitt (thanks!): move HAL FDI
+    creation from debian/libgphoto2-2.postinst to debian/rules.
+    This avoids problems with half-configured libraries during
+    upgrade/installation (LP: #352271, Closes: #531979)
+  * Remove old conffiles. We can't use dpkg-maintscript-helper,
+    because they were created at install-time and thus not marked
+    as conffiles. (Closes: #461397, #511129)
+  * Move from /etc/udev/rules.d/ to /lib/udev/rules.d should now
+    be complete (Closes: #586668)
+
+ -- David Paleino <dapal@debian.org>  Wed, 10 Nov 2010 10:26:49 +0100
+
+libgphoto2 (2.4.6-2) unstable; urgency=low
+
+  * Merge Ubuntu patches, by Martin Pitt (thanks!):
+    - Update Build-Depends: Move from libltdl3-dev to libltdl-dev
+      (Closes: #531974).
+    - Create modern udev rules at build-time instead of at install-time
+      thanks to a patch sent (and now merged) upstream. Drop a lot of
+      code from libgphoto2-2.postinst accordingly, while adding the
+      generation code to debian/rules. Also bump the versioned dependency
+      on udev from 0.113-1 to 0.136 (Closes: #531978).
+  * Added myself to Uploaders
+
+ -- David Paleino <dapal@debian.org>  Mon, 08 Nov 2010 11:19:51 +0100
+
+libgphoto2 (2.4.6-1) unstable; urgency=low
+
+  * New upstream release.
+  * Fix FTBFS on GNU/kFreeBSD, thanks to Aurélien Jarno (Closes: #528380):
+     - Only install udev-related files on Linux architectures.
+     - Add a patch to fix a missing include (“struct in_addr” comes from
+       <netinet/in.h> and needs to be explicitly included when on a
+       non-Linux architecture): 80_kfreebsd
+  * No longer call “udev reload”, rules files are said to be reloaded
+    automatically (Closes: #523957):
+     - debian/libgphoto2-2.post{inst,rm}
+
+ -- Cyril Brulebois <kibi@debian.org>  Mon, 18 May 2009 10:03:08 +0200
+
+libgphoto2 (2.4.5-1) unstable; urgency=low
+
+  * New upstream release:
+     - Fix typo on the “Nikon:CoolPix 4500” line (Closes: #342170).
+     - Fix support for Canon EOS 5D Mark II (Closes: #520745). Thanks to
+       Wolfram Quester for the report.
+     - Fix support for Nikon CoolPix S60 (Closes: #520752). Thanks to
+       Mathias Brodala for the report.
+  * Disable patch:
+     - 11_hurd_no_path_max_bsdsource: Disable for now, no longer applies.
+  * Drop patch:
+     - 60_udev_rules_are_autogenerated_notice: Merged upstream.
+  * debian/rules:
+     - Do not bump shlibs (no new symbols).
+  * debian/control:
+     - Bump Standards-Version from 3.8.0 to 3.8.1 (no changes needed).
+
+ -- Cyril Brulebois <kibi@debian.org>  Wed, 08 Apr 2009 23:31:43 +0200
+
+libgphoto2 (2.4.4-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/copyright:
+     - Update accordingly.
+  * debian/rules:
+     - Do not bump shlibs accordingly (no new symbols).
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 20 Mar 2009 03:50:41 +0100
+
+libgphoto2 (2.4.3-1) experimental; urgency=low
+
+  * New upstream release.
+  * debian/copyright:
+     - Update accordingly.
+  * debian/rules:
+     - Bump SHLIBS accordingly (new symbols), from 2.4.0 to 2.4.3.
+  * Switch from dpatch to quilt (run away!):
+     - debian/control: Update Build-Depends.
+     - debian/patches: Strip “.dpatch” suffix, rename 00list to series.
+     - debian/rules: Update “include”, update dependency on patch stamp.
+  * Drop previously-backported patches:
+     - debian/patches/20_backport_initial_startup_speedup
+     - debian/patches/30_backport_dropping_panasonic_ids
+  * Disable the following patch. It was used to increase the
+    CANON_FAST_TIMEOUT parameter which appeared to be too low. Since
+    upstream increased it, let's no longer diverge from them. For the
+    records, the original bugreport was #453114, but please open a new
+    bugreport if the bug is back:
+     - debian/patches/45_increase_canon_timeout
+
+ -- Cyril Brulebois <kibi@debian.org>  Sun, 30 Nov 2008 09:09:59 +0100
+
+libgphoto2 (2.4.1-3) unstable; urgency=low
+
+  * Backport patch from upstream to disable some buggy Panasonic IDs
+    (04da:2372) to ensure those cameras can be used as mass-storage
+    devices (Closes: #479135, #482848):
+     - Add 30_backport_dropping_panasonic_ids.dpatch
+
+ -- Cyril Brulebois <kibi@debian.org>  Sat, 16 Aug 2008 13:20:13 +0200
+
+libgphoto2 (2.4.1-2) unstable; urgency=low
+
+  * Since 2.4.2 was released a bit before the freeze, not rushing its
+    upload for lenny. After having asked usptream, the r11066 revision
+    deserves to be backported, so as to improve the initial startup
+    time. Thanks to Marcus Meissner for having provided the tip, along
+    with the patch:
+     - Add 20_backport_initial_startup_speedup.dpatch
+  * Version the Recommends on udev (which is conditionally specified
+    through the ${udev-hotplug} variable in debian/rules), since
+    libgphoto2 now uses the alternative syntax (that is: key!="a|b"),
+    which apparently was introduced in udev 0.109. Adding “(>= 0.113-1)”
+    since that's the first version in Debian which included this
+    feature. Many thanks to Jan Echternach for having spotted the problem
+    as well as its solution (Closes: #491065).
+
+ -- Cyril Brulebois <kibi@debian.org>  Fri, 25 Jul 2008 23:49:37 +0200
+
+libgphoto2 (2.4.1-1) unstable; urgency=low
+
+  * New upstream release (Closes: #480127):
+     - Not bumping shlibs, no new symbol.
+     - To achieve this, use two dh_makeshlibs calls (one for
+       libgphoto2-port0 and one for libgphoto2-$(major), and provide with
+       the last upstream version sharing the same ABI. Using 2.4.0 here
+       although some former versions might have been specified. That
+       shouldn't make any difference from a testing migration point of
+       view.
+  * debian/copyright:
+     - Use an almost decent copyright format, as discussed on
+       <http://wiki.debian.org/Proposals/CopyrightFormat>.
+     - Properly specify copyright holders and licenses, grouping them by
+       components when possible.
+  * debian/patches:
+     - Drop 30_additional_camera_support.dpatch, merged upstream.
+     - Update 45_increase_canon_timeout.dpatch, upstream bumped the
+       timeout from 75 to 150 (Debian had 750), but 750 looks doing a
+       better job according to user comments on the tracker. Keeping that
+       value.
+     - Drop 65_udev_usb_subsystem.dpatch, merged upstream (using another
+       approach).
+     - Drop 75_deprecated_hal_key.dpatch, merged upstream.
+     - Drop disabled patches (from the list and from that directory) since
+       one can get them back from the VCS.
+  * debian/libgphoto2-2.dirs:
+     - Drop “/usr/share/hal/fdi/information/10freedesktop” from
+       there. There's no use shipping an empty directory (especially since
+       the maintainer scripts are taking care of removing files previously
+       created in that directory).
+  * debian/libgphoto2-2-dev.files:
+     - Drop “*.la” files from /usr/lib only (not from the subdirectories).
+     - Remove them in debian/rules before trying to remove debian/tmp.
+     - Drop the recursive symlink (“/usr/include/gphoto2/gphoto2 -> .”).
+     - Remove it in debian/rules before running dh_movefiles.
+  * debian/rules:
+     - Remove “patch” and “unpatch” targets since dpatch.make is included
+       already.
+     - Move the single dependency on “unpatch-stamp” to “unpatch” since
+       there's no stamp for “unpatch”.
+     - Move the dependency on “patch” to “patch-stamp”, so as to avoid
+       unneeded ./configure re-runs.
+  * debian/control:
+     - Clean the Depends of the -dev package:
+        - Use libc-dev instead of libc6-dev (there are at least libc0.1,
+          libc0.3, libc6, libc6.1 and their -dev packages).
+        - Remove libltdl3-dev, no longer needed since “*.la” files are no
+          longer shipped under /usr/lib.
+     - Remove a trailing space in all long descriptions.
+     - Bump Standards-Version from 3.7.3 to 3.8.0 (no change needed).
+     - Add back graphviz to generate all documentation items.
+     - Update my mail address.
+
+ -- Cyril Brulebois <kibi@debian.org>  Sun, 13 Jul 2008 19:34:36 +0200
+
+libgphoto2 (2.4.0-9) unstable; urgency=high
+
+  * Adopt the package within pkg-phototools:
+     - Set the Maintainer to the group.
+     - Add Frederic Peters and myself as Uploaders.
+     - Add Vcs-Browser and Vcs-Git fields accordingly.
+  * debian/control:
+     - Add a Depends: on libltdl3-dev to libgphoto2-2-dev since libltdl.la
+       is referenced in a bunch of “.la” files (Closes: #467527). Setting
+       urgency to “high” accordingly, since the bug is also in testing.
+     - Add a Homepage field.
+     - Make lintian happy, delete the “-1” bits from the versioned B-D on
+       libhal-dev.
+     - Bump Standards-Version from 3.7.2 to 3.7.3 (no changes needed).
+  * debian/copyright:
+     - Point to LGPL-2 rather than just LGPL, which now points to
+       LGPL-3 (the copyright says LGPL-2+, but let's be precise).
+  * debian/patches:
+     - Add 75_deprecated_hal_key.dpatch: Replace the deprecated HAL
+       property “info.bus” with “info.subsystem” in the HAL FDI generation
+       tool, thanks to Martin Pitt (Closes: #472656).
+
+ -- Cyril Brulebois <cyril.brulebois@enst-bretagne.fr>  Sun, 30 Mar 2008 17:30:21 +0200
+
+libgphoto2 (2.4.0-8) unstable; urgency=low
+
+  * debian/patches/45_increase_canon_timeout.dpatch Increase timeout wait for
+    an URB to come back on an interrupt endpoint  (closes: #453114)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 27 Nov 2007 15:15:11 +0100
+
+libgphoto2 (2.4.0-7) unstable; urgency=low
+
+  * debian/patches/30_additional_camera_support.dpatch: added Canon G9
+    (patch by Harald Dunkel, closes: #446237)
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 11 Oct 2007 13:05:00 +0200
+
+libgphoto2 (2.4.0-6) unstable; urgency=low
+
+  * debian/patches/65_udev_usb_subsystem.dpatch: changed udev rules to go
+    through device listing for both subsystem usb and usb_device.
+    (closes: #445660)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 09 Oct 2007 17:12:27 +0200
+
+libgphoto2 (2.4.0-5) unstable; urgency=low
+
+  * debian/control: 
+    * improved libgphoto2-2 and libgphoto2-dev long descriptions to note
+      about PTP support (but not MTP since this is not what libgphoto2
+      is for) (closes: #347875)  (this got lost somewhere)
+    * removed gtkam suggestion
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 29 Sep 2007 22:47:08 +0200
+
+libgphoto2 (2.4.0-4) unstable; urgency=low
+
+  * debian/patches/60_udev_rules_are_autogenerated_notice.dpatch: adds a note
+    to udev rules file to explain that file is generated automatically and
+    that local changes will thus be lost on upgrades.  (closes: #341470)
+  * debian/patches/30_additional_camera_support.dpatch: added support for Fuji
+    FinePix A800 (closes: #421179) and Nikon Coolpix P5000 (closes: #427173)
+  * debian/patches/70_increase_max_entries.dpatch: increased max entries from
+    1024 to 8192 (closes: #425515, #427476)
+  * debian/control: updated ${Source-Version} to ${binary:Version}
+
+ -- Frederic Peters <fpeters@debian.org>  Fri, 28 Sep 2007 23:11:10 +0200
+
+libgphoto2 (2.4.0-3) unstable; urgency=low
+
+  * debian/libgphoto2-2.postinst: creates device nodes with 0664 mode so
+    productId, vendorId and such kind of details can be read (closes: #440763)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 12 Sep 2007 13:00:53 +0200
+
+libgphoto2 (2.4.0-2) unstable; urgency=low
+
+  * debian/patches/11_hurd_no_path_max_bsdsource.dpatch: new patch contributed
+    by Samuel Thibault, to fix compilation issues on the Hurd,(closes: #434568)
+    * description: Hurd has no such hard limit like PATH_MAX, and define
+      _BSD_SOURCE because code uses IXANY and O_NDELAY.
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 15 Aug 2007 00:13:26 +0200
+
+libgphoto2 (2.4.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * debian/patches/:
+    * 15_use_bash_in_ptp_camera_check.dpatch: disabled, applied upstream
+    * 20_fix-zero-vendor-ids.dpatch: disabled, upstream says it is wrong
+    * 40_disable_canon_fast_directory_retrieval_r10028.dpatch: disabled,
+      applied upstream
+    * 50_getenv_home_overflow.dpatch: disabled, applied upstream
+  * debian/control, debian/rules: removed suggests and recommends on hotplug
+    (closes: #436504)
+  * debian/libgphoto2-2.README.Debian: removed parts about hotplug and updated
+    parts about udev.
+  * debian/hotplug: removed as no longer useful
+  * debian/control{,.in}: removed control.in generation via sed, using
+    not+linux-gnu from typehandling instead
+  * debian/rules: installs new check-mtp-device into libgphoto2-port0
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 09 Aug 2007 16:02:30 +0200
+
+libgphoto2 (2.3.1-8) unstable; urgency=low
+
+  * 50_getenv_home_overflow.dpatch: fixed upstream typo, sprintf -> snprintf,
+    (upstream r10453) (closes: #434552, #434386)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 24 Jul 2007 22:22:14 +0200
+
+libgphoto2 (2.3.1-7) unstable; urgency=low
+
+  * 50_getenv_home_overflow.dpatch: load_settings/save_settings: updated as
+    applied by upstream.
+  * debian/rules: don't ignore potential make clean errors
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 21 Jul 2007 12:42:16 +0200
+
+libgphoto2 (2.3.1-6) unstable; urgency=low
+
+  * 50_getenv_home_overflow.dpatch: load_settings/save_settings: don't copy
+    more characters from $HOME than possible in buffer.
+
+ -- Frederic Peters <fpeters@debian.org>  Fri, 20 Jul 2007 13:21:55 +0200
+
+libgphoto2 (2.3.1-5) unstable; urgency=low
+
+  * debian/patches/40_disable_canon_fast_directory_retrieval_r10028: disable
+    fast directory retrieval on Canon models since this is broken on some.
+    (closes: #422386).
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 07 May 2007 10:15:25 +0200
+
+libgphoto2 (2.3.1-4) unstable; urgency=low
+
+  * debian/patches/20_fix-zero-vendor-ids.dpatch: replaces old and broken
+    20_disable_generic_mtp_udev_rule, patch from upstream and Martin Pitt,
+    thanks.
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 02 May 2007 19:38:17 +0200
+
+libgphoto2 (2.3.1-3) unstable; urgency=low
+
+  * Upload to unstable.
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 11 Apr 2007 10:09:10 +0200
+
+libgphoto2 (2.3.1-2) experimental; urgency=low
+
+  * debian/libgphoto2-2.{postinst,postrm}: check for /etc/init.d/udev script.
+  * debian/patches/15_use_bash_in_ptp_camera_check.dpatch: use bash since the
+    script has bashisms.
+  * debian/patches/20_disable_generic_mtp_rules.dpatch: do not generate udev
+    or fdi entries for devices with 0x0000 as idVendor (this affects generic
+    MTP devices) (closes: #408253)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 24 Jan 2007 19:18:31 +0100
+
+libgphoto2 (2.3.1-1) experimental; urgency=low
+
+  * New upstream version.
+    * removed debian/patches/20_udev_rules: shipped upstream
+  * debian/libgphoto2-2.files: print-usb-usermap is no longer shipped; no
+    more need to exclude it for kernels other than Linux
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 16 Jan 2007 11:25:42 +0100
+
+libgphoto2 (2.3.0-2) experimental; urgency=low
+
+  * debian/control.in: added libusb-dev as libgphoto2-dev dependency.
+    (closes: #407108)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 16 Jan 2007 10:22:58 +0100
+
+libgphoto2 (2.3.0-1) experimental; urgency=low
+
+  * New upstream version.
+    * Uploaded to experimental.
+    * (closes: #402875)
+  * Synced with Ubuntu packaging.
+    * debian/rules: Install check_ptp_camera to libgphoto2-2's lib/udev/
+    * debian/rules: Remove the 'make all-local' call, it does not work any more
+      and is not necessary any more either.
+    * debian/*.files{,.in}: Turn versions in paths into globs to match newer
+      versions.
+    * debian/libgphoto2-2.postinst: Call print-camera-list with mode and group
+      arguments (this replaces the former source code patch.)
+  * Moved to dpatch:
+    * 10_disable_cache: do not cache all downloaded files to plug a giant
+      memory hole
+    * 20_udev_rules: upstream SVN change 9562 to add and use an udev helper
+      script to detect whether a USB device has a PtP compatible interface.
+    * 30_additional_camera_support: USB IDs for new and supported camera models
+      (Sony DSC-W5, patch by Otavio Salvador, closes: #402687)
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 13 Jan 2007 15:20:25 +0100
+
+libgphoto2 (2.2.1-12) unstable; urgency=low
+
+  * debian/udev_generic_ptp_support.rules: create note earlier on for PTP
+    cameras, so they get correct membership and permissions.
+  * debian/control.in: added build-depends on libdbus-1-dev
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 27 Nov 2006 21:50:23 +0100
+
+libgphoto2 (2.2.1-11) unstable; urgency=low
+
+  * libgphoto2_port/disk/disk.c: removed call dbus_connection_close() (already
+    done in upstream svn) (closes: #398022)
+  * camlibs/ptp2/library.c: added USB id for Canon PowerShot G7
+    (closes: #399421)
+  * debian/libgphoto2-2.README.Debian: added explanation about udev user
+    rules; as long as generic capability is not handled by shipped udev rules.
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 19 Nov 2006 17:06:56 +0000
+
+libgphoto2 (2.2.1-10) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added USB id for Canon EOS 400D (already present
+    in upstream svn) (closes: #396581)
+  * camlibs/ptp2/library.c: added USB id for Canon Digital IXUS 850 IS.
+
+ -- Frederic Peters <fpeters@debian.org>  Sat,  4 Nov 2006 12:08:56 +0100
+
+libgphoto2 (2.2.1-9) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added new USB id for Canon PowerShot A710 IS
+    (closes: #395380) (patch sent by Martin Pitt/Ubuntu, thanks).
+  * packaging/generic/print-camera-list.c, debian/hotplug: changed camera
+    group from 'camera' to 'plugdev'.
+  * debian/libgphoto2-2.README.Debian, debian/libgphoto2-2.NEWS: documented
+    this change.
+  * debian/libgphoto2-2.postinst: reload udev rules on install.
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 26 Oct 2006 20:43:33 +0200
+
+libgphoto2 (2.2.1-8) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added new USB id for Nikon Coolpix 4600.
+    (closes: #394762) (thanks to Roberto Costa)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 23 Oct 2006 12:49:00 +0200
+
+libgphoto2 (2.2.1-7) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added Fuji F30, patch by Scott Zuk.
+    (closes: #392512)
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 12 Oct 2006 08:58:47 +0200
+
+libgphoto2 (2.2.1-6) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added Canon Ixus 65, take from Ubuntu patch.
+  * debian/libgphoto2-2.postinst: merged FDI file code from Ubuntu postinst:
+    + Do not install a separate 10-camera-libgphoto2-device.fdi
+      10-camera-libgphoto2.fdi already has everything required.
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  9 Oct 2006 22:20:57 +0200
+
+libgphoto2 (2.2.1-5) unstable; urgency=low
+
+  * debian/libgphoto2-2.postinst: fixed .fdi file extension.  (closes: #389601)
+  * debian/libgphoto2-2.postrm: remove generated files on purge and remove.
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 30 Sep 2006 22:21:04 +0200
+
+libgphoto2 (2.2.1-4) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added Kodak CD3 USB id.  (closes: #387998)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 18 Sep 2006 10:41:00 +0200
+
+libgphoto2 (2.2.1-3) unstable; urgency=low
+
+  * libgphoto2_port/disk/disk.c: dbus_connection_disconnect has been
+    deprecated, using dbus_connection_close instead.  Report and patch
+    by Sebastian Dröge, thanks.  (closes: #385379)
+
+ -- Frederic Peters <fpeters@debian.org>  Thu,  7 Sep 2006 19:38:04 +0200
+
+libgphoto2 (2.2.1-2) unstable; urgency=low
+
+  * libgphoto2/gphoto2-filesys.c: Do not cache all downloaded files to plug
+    a giant memory hole (from Ubuntu patch). (closes: #372166)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  3 Jul 2006 14:09:28 +0200
+
+libgphoto2 (2.2.1-1) unstable; urgency=low
+
+  * New upstream version.
+    - merged GNU/kFreeBSD patch.
+  * added Dutch translation. (closes: #374852)
+  * packaging/linux-hotplug/: removed print-udev-rules which is no longer
+    used. 
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 22 Jun 2006 09:39:24 +0200
+
+libgphoto2 (2.2.0-5) unstable; urgency=low
+
+  * libgphoto2_port/serial/unix.c: GNU/kFreeBSD fix. (closes: #374468)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 19 Jun 2006 23:05:11 +0200
+
+libgphoto2 (2.2.0-4) unstable; urgency=low
+
+  * debian/control.in: do not build-depends on libhal-dev on kFreeBSD
+    (closes: #369577)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 19 Jun 2006 08:41:37 +0200
+
+libgphoto2 (2.2.0-3) unstable; urgency=low
+
+  * debian/libgphoto2-2.dirs: installs HAL FDI directory since hal is not a
+    dependency. (closes: #374285)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 18 Jun 2006 13:26:17 +0200
+
+libgphoto2 (2.2.0-2) unstable; urgency=low
+
+  * packaging/generic/Makefile.am: added INCLUDES variable so it builds even
+    without libgphoto2-2-dev already installed. (closes: #374259)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 18 Jun 2006 10:42:15 +0200
+
+libgphoto2 (2.2.0-1) unstable; urgency=low
+
+  * New upstream release, uploaded to unstable
+  * camlibs/ptp2/library.c: removed duplicate filename patch
+  * debian/changelog: merged parallel history from 2.1.6-7 -> 2.1.6-13
+  * debian/libgphoto2-2.postinst: now use print-camera-list
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 18 Jun 2006 01:08:15 +0200
+
+libgphoto2 (2.1.99-13) experimental; urgency=low
+
+  * print-udev-rules.c: reworked udev rules so they can work in more cases.
+  * removed Canon PowerShot A610 from cameras with Canon protocol; it only
+    has PTP.
+  * sync with 2.1.6-13
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 30 May 2006 16:22:33 +0200
+
+libgphoto2 (2.1.99-12) experimental; urgency=low
+
+  * print-udev-rules.c: fixed according to explanations in #368893, reinstate
+    BUS!="usb" line and specify SUBSYSTEM on generic PTP line.
+  * added Canon PowerShot A530 and A540.
+  * print-udev-rules.c: once again shooting in the dark (changed to matching
+    on SUBSYSTEM instead of BUS)
+  * synced with 2.1.6-12
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 29 May 2006 13:46:18 +0200
+
+libgphoto2 (2.1.99-11) experimental; urgency=low
+
+  * print-udev-rules.c: fixed according to tip by Marcus Meissner, so it will
+    match newer PTP cameras. (sync with 2.1.6-10)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 16 May 2006 09:09:30 +0200
+
+libgphoto2 (2.1.99-10) experimental; urgency=low
+
+  * camlibs/ptp2/library.c: added Kodak EasyShare Z740
+  * debian/rules: use DEB_HOST_ARCH_OS, not DEB_HOST_GNU_SYSTEM
+  * debian/control.in: *really* added build-depends on doxygen, graphviz.
+    (closes: #356942)
+  * debian/compat: bumped to 5
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 15 May 2006 13:00:55 +0200
+
+libgphoto2 (2.1.99-9) experimental; urgency=low
+
+  * packaging/linux-hotplug/print-udev-rules.c: removed BUS!=usb line since
+    BUS was not reported by udev.
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  3 Apr 2006 11:28:36 +0200
+
+libgphoto2 (2.1.99-8) experimental; urgency=low
+
+  * packaging/linux-hotplug/print-udev-rules.c: splitted match line
+    (closes: #359796)
+  * packaging/linux-hotplug/print-udev-rules.c: always change device access
+    rights to 0660
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 29 Mar 2006 09:57:01 +0200
+
+libgphoto2 (2.1.99-7) experimental; urgency=low
+
+  * debian/control: libgphoto2-port0 doesn't depend on libgphoto2; only keep
+    it the other way, breaking circular depends. (closes: #357796)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 19 Mar 2006 17:08:36 +0100
+
+libgphoto2 (2.1.99-6) experimental; urgency=low
+
+  * debian/control: added build-depends on doxygen, graphviz.
+    (closes: #356942)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 14 Mar 2006 23:11:45 +0100
+
+libgphoto2 (2.1.99-5) experimental; urgency=low
+
+  * camlibs/ptp2/library.c: synced with patch from Ubuntu.
+
+ -- Frederic Peters <fpeters@debian.org>  Sat, 11 Mar 2006 10:47:51 +0100
+
+libgphoto2 (2.1.99-4) experimental; urgency=low
+
+  * debian/libgphoto2-2.prerm: clean udev/hotplug files from /etc/ on purge.
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  6 Mar 2006 20:52:35 +0100
+
+libgphoto2 (2.1.99-3) experimental; urgency=low
+
+  * debian/control: build-depends on libhal-dev so libgphoto2_port is built
+    with HAL support. (closes: #355212)
+
+ -- Frederic Peters <fpeters@debian.org>  Sat,  4 Mar 2006 12:45:33 +0100
+
+libgphoto2 (2.1.99-2) experimental; urgency=low
+
+  * debian/postinst: generate .fdi file.
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 15 Feb 2006 12:46:03 +0100
+
+libgphoto2 (2.1.99-1) experimental; urgency=low
+
+  * New upstream release.
+    * Upload to experimental. (closes: #347873)
+    * Canon IXUS 750 is recognised. (closes: #346323)
+    * Don't cache everything, patch from 2.1.6-5.3 is thus removed.
+  * Forward ported:
+   * Derived print-udev-rules from print-usb-usermap to generate the udev
+     rules file.
+   * camlibs/ptp2/library.c: ported (kludgy) patch to work with HP
+     PhotoSmart 850 (as requested by user).
+  * debian/control:
+    * improved libgphoto2-2 and libgphoto2-dev long descriptions to note
+      about PTP support (but not MTP since this is not what libgphoto2
+      is for) (closes: #347875)
+    * added note about Disk support to libgphoto2-port long description.
+  * camlibs/ptp2/library.c: added support for Kodak EasyShare C360
+    (closes: #345016)
+  * packaging/linux-hotplug/print-udev-rules.c: changed to use new udev rule
+    (closes: #342279, #341151)
+  * debian/hotplug: this totally removes hotplug calls for newer udev
+    versions; hotplug script still installed for old hotplug installs.
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 15 Jan 2006 22:56:48 +0100
+
+libgphoto2 (2.1.6-13) unstable; urgency=low
+
+  * print-udev-rules.c: reworked rules file so it should work whatever udev
+    discrepancy happens. (closes: #369476)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 30 May 2006 14:24:43 +0200
+
+libgphoto2 (2.1.6-12) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added Canon PowerShot A540, thanks to David
+    Goodenough (closes: #369143)
+  * camlibs/ptp2/library.c: added Canon PowerShot A610.
+  * print-udev-rules.c: once again shooting in the dark (changed to matching
+    on SUBSYSTEM instead of BUS)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 29 May 2006 13:42:35 +0200
+
+libgphoto2 (2.1.6-11) unstable; urgency=low
+
+  * print-udev-rules.c: fixed according to explanations in #368893, reinstate
+    BUS!="usb" line and specify SUBSYSTEM on generic PTP line.
+  * camlibs/ptp2/library.c: added Canon PowerShot A530, thanks to Ales
+    Kozumplik (closes: #368893)
+
+ -- Frederic Peters <fpeters@debian.org>  Fri, 26 May 2006 10:51:03 +0200
+
+libgphoto2 (2.1.6-10) unstable; urgency=low
+
+  * print-udev-rules.c: fixed according to tip by Marcus Meissner, so it will
+    match newer PTP cameras.
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 16 May 2006 09:06:33 +0200
+
+libgphoto2 (2.1.6-9) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added Kodak EasyShare Z740 (closes: #367350)
+  * debian/rules: use DEB_HOST_ARCH_OS, not DEB_HOST_GNU_SYSTEM
+  * debian/control: removed circular dependency, libgphoto2-port0 no longer
+    depends upon libgphoto2-2 (closes: #357796)
+  * debian/compat: bumped to 5
+
+ -- Frederic Peters <fpeters@debian.org>  Mon, 15 May 2006 12:51:43 +0200
+
+libgphoto2 (2.1.6-8) unstable; urgency=low
+
+  * packaging/linux-hotplug/print-udev-rules.c: removed BUS!=usb line since
+    BUS was not reported by udev. (closes: #360526)
+
+ -- Frederic Peters <fpeters@debian.org>  Mon,  3 Apr 2006 11:26:47 +0200
+
+libgphoto2 (2.1.6-7) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: added a bunch of Kodak camera (closes: #359298)
+  * camlibs/ptp2/library.c: added Nikon DSC D70s (closes: #321629)
+  * packaging/linux-hotplug/print-udev-rules.c: splitted match line
+    (closes: #359796)
+  * packaging/linux-hotplug/print-udev-rules.c: use dev facilities to change
+    ownership and permissions. (closes: #359799)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 29 Mar 2006 10:39:11 +0200
+
+libgphoto2 (2.1.6-6) unstable; urgency=low
+
+  * Acknowledge NMUs, thanks to all.
+  * debian/hotplug: changed hotplug script to support new udev and kernel
+    versions (thanks to Aleksey Kliger) (closes: #341083, #342279, #342282)
+  * debian/libgphoto2-2.postinst: don't generate udev rules if udev directory
+    doesn't exist (closes: #334578)
+
+ -- Frederic Peters <fpeters@debian.org>  Thu,  8 Dec 2005 12:02:29 +0100
+
+libgphoto2 (2.1.6-5.3) unstable; urgency=low
+
+  * Non-Maintainer Upload.
+  * Disable cache - this reduces memory usage from 3Mb + ammount 
+    of all files downloaded (which could be several Gb) down to
+    3Mb + size of file that we currently download (Closes: #338880, #334581).
+
+ -- Aigars Mahinovs <aigarius@debian.org>  Sun, 27 Nov 2005 08:20:22 +0200
+
+libgphoto2 (2.1.6-5.2) unstable; urgency=low
+
+  * Non-Maintainer Upload.
+  * Add /etc/udev/rules.d to libgphoto2-2.dirs (closes: #333678).
+
+ -- Julien BLACHE <jblache@debian.org>  Mon, 17 Oct 2005 18:50:22 +0200
+
+libgphoto2 (2.1.6-5.1) unstable; urgency=low
+
+   * Non-Maintainer Upload.
+   * Derived print-udev-rules from print-usb-usermap to generate the udev
+     rules file.
+   * debian/libgphoto2-2.postinst: call print-udev-rules, create the symlink
+     in /etc/udev/rules.d if needed (closes: #332936).
+   * debian/hotplug: use chown user:group instead of chown user.group.
+   * debian/control: libgphoto2-2 Recommends: udev | hotplug, do not conflict
+     with udev
+
+ -- Julien BLACHE <jblache@debian.org>  Mon, 10 Oct 2005 21:07:25 +0200
+
+libgphoto2 (2.1.6-5) unstable; urgency=low
+
+  * debian/control: conflicts with udev >= 0.070-3 since it would need a
+    linux 2.6.14 to get both working together.  Crappy.  (see: #332936)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun,  9 Oct 2005 19:55:34 +0200
+
+libgphoto2 (2.1.6-4) unstable; urgency=low
+
+  * camlibs/ptp2/library.c: ported (kludgy) patch to work with HP
+    PhotoSmart 850 (as requested by user).
+    Patch from https://bugzilla.ubuntu.com/show_bug.cgi?id=12132
+  * debian/copyright: updated FSF address
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 27 Sep 2005 20:18:31 +0200
+
+libgphoto2 (2.1.6-3) unstable; urgency=low
+
+  * debian/libgphoto2-2.postinst: print-usb-usermap location changed, use the
+    new location. (closes: #321031)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed,  3 Aug 2005 08:48:39 +0200
+
+libgphoto2 (2.1.6-2) unstable; urgency=low
+
+  * Rebuilt against new libexif12
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 27 Jul 2005 17:32:26 +0200
+
+libgphoto2 (2.1.6-1) unstable; urgency=low
+
+  * New upstream release. (closes: #316719)
+    * Removed Debian patches, applied upstream.
+
+ -- Frederic Peters <fpeters@debian.org>  Wed,  6 Jul 2005 10:46:20 +0200
+
+libgphoto2 (2.1.5-6) unstable; urgency=low
+
+  * Fixes issues with PTP, big files and libusb 0.10
+    http://sourceforge.net/tracker/index.php?func=detail&aid=1162373&group_id=8874&atid=108874
+    (closes: #301945)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 15 May 2005 16:00:45 +0200
+
+libgphoto2 (2.1.5-5) unstable; urgency=low
+
+  * Patched to fix FTBFS on kfreebsd-gnu; original patch by Robert Millan.
+    (closes: #297894)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue,  8 Mar 2005 20:49:17 +0100
+
+libgphoto2 (2.1.5-4) unstable; urgency=low
+
+  * Patched sierra driver to work with new libusb package; many thanks to
+    Aurelien Jarno. (closes: #296708)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 27 Feb 2005 20:05:00 +0100
+
+libgphoto2 (2.1.5-3) unstable; urgency=low
+
+  * debian/libgphoto2-2.postinst: overwrite USB usermap on package
+    installation. (closes: #291836)
+  * debian/libgphoto2-2.README.Debian: point user to /etc/hotplug/usb.usermap
+    for local customizations.
+  * debian/control: removed 'The' in front of description synopsis 
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 27 Jan 2005 20:26:21 +0100
+
+libgphoto2 (2.1.5-2) unstable; urgency=low
+
+  * debian/libgphoto2-2.README.Debian: fixed print-usb-usermap command line.
+    (closes: #286829)
+
+ -- Frederic Peters <fpeters@debian.org>  Wed, 22 Dec 2004 16:51:56 +0100
+
+libgphoto2 (2.1.5-1) unstable; urgency=low
+
+  * New upstream release.
+    * Removed Debian patches, applied upstream.
+  * debian/control: added pkg-config to libgphoto2-dev dependencies
+  * debian/libgphoto2-2.README.Debian: added a note about libgphoto2.usermap
+    file not being overwritten on upgrade.
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 21 Dec 2004 16:00:24 +0100
+
+libgphoto2 (2.1.4-10) unstable; urgency=low
+
+  * libgphoto2_port/configure.in: removed syntax error that caused ABOUT-NLS
+    to be executed (and a non-fatal error when running configure) and reran
+    autoconf.  (closes: #284351)
+  * debian/rules: fixed typo (2>&1, not 2>1)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun,  5 Dec 2004 21:23:36 +0100
+
+libgphoto2 (2.1.4-9) unstable; urgency=low
+
+  * debian/canon-ixus-500-ptp.patch: support for Canon Ixus 500 (PTP mode)
+
+ -- Frederic Peters <fpeters@debian.org>  Tue, 19 Oct 2004 11:09:47 +0200
+
+libgphoto2 (2.1.4-8) unstable; urgency=low
+
+  * debian/control: Depends on adduser (for addgroup) (closes: #273432)
+
+ -- Frederic Peters <fpeters@debian.org>  Sun, 26 Sep 2004 08:58:10 +0200
+
+libgphoto2 (2.1.4-7) unstable; urgency=low
+
+  * Adopted package; thanks Christophe for all that maintainership.
+  * Merged Ubuntu patches (group changed from 'plugdev' to 'camera'):
+    * Added hotplug script debian/hotplug and install it; this gives access
+      permissions to 'camera' group members, and does nothing if the group
+      does not exist. (closes: #175073, #272658)
+    * Added libgphoto2-2 postinst which creates USB usermap.
+    * Added libgphoto2-2 postrm which deletes USB usermap on purge.
+    * Updated libgphoto2-2.README.Debian to describe the changes.
+      * Martin Pitt <mpitt@debian.org> did those
+  * debian/control: slighlty reworded some descriptions.
+  * debian/canon-powershot-a75.patch: support for Canon Powershot A75
+    (closes: #260279)
+  * debian/libgphoto2-2.postinst: creates 'camera' group.
+  * debian/rules: keeps linux-hotplug scripts in /usr/share/doc/ but no longer
+    chmod +x them.
+
+ -- Frederic Peters <fpeters@debian.org>  Thu, 23 Sep 2004 11:07:08 +0200
+
+libgphoto2 (2.1.4-6) unstable; urgency=low
+
+  * Rebuilt against libexif10. 
+
+ -- christophe barbe <christophe@debian.org>  Fri, 28 May 2004 16:43:59 -0400
+
+libgphoto2 (2.1.4-5) unstable; urgency=low
+
+  * Make example scripts executable.
+  * Update README.Debian (Closes: #241327).
+
+ -- christophe barbe <christophe@debian.org>  Wed, 31 Mar 2004 20:35:16 -0500
+
+libgphoto2 (2.1.4-4) unstable; urgency=low
+
+  * Added missing libjpeg build dependency (Closes: #234668). 
+
+ -- christophe barbe <christophe@debian.org>  Fri, 27 Feb 2004 13:28:46 -0500
+
+libgphoto2 (2.1.4-3) unstable; urgency=low
+
+  * Dropped xmlto dependency.
+
+ -- christophe barbe <christophe@debian.org>  Mon, 16 Feb 2004 13:42:04 -0500
+
+libgphoto2 (2.1.4-2) unstable; urgency=low
+
+  * Build against newest libusb 0.1.8.
+  * Changed rules to ease debug builds.
+  * Fixed download of large AVI with Canon cams (Closes: #232453)
+    (+ support for Canon MV650i).
+
+ -- christophe barbe <christophe@debian.org>  Sun, 15 Feb 2004 18:50:48 -0500
+
+libgphoto2 (2.1.4-1) unstable; urgency=low
+
+  * New Upstream Release. 
+
+ -- christophe barbe <christophe@debian.org>  Sun, 18 Jan 2004 18:55:12 -0500
+
+libgphoto2 (2.1.3-2) unstable; urgency=low
+
+  * Added missing canon A300 and S50 cameras.
+  * Fixed broken hotplug example script (Closes: #218271).
+  * Updated sq905 driver from CVS HEAD.
+
+ -- christophe barbe <christophe@debian.org>  Sun,  2 Nov 2003 18:08:21 -0500
+
+libgphoto2 (2.1.3-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- christophe barbe <christophe@debian.org>  Sun, 26 Oct 2003 17:40:53 -0500
+
+libgphoto2 (2.1.2-5) unstable; urgency=low
+
+  * Fix progress code in the ptp2 driver (Closes: #214164).
+
+ -- christophe barbe <christophe@debian.org>  Tue, 14 Oct 2003 19:32:40 -0400
+
+libgphoto2 (2.1.2-4) unstable; urgency=low
+
+  * Raise priority from extra to optional (Closes: #215459).
+  * Spelling fixes, thanks to Helge Kreutzmann (Closes: #214166).
+  * I will not run update-usb.usermap (intented to be used by the 
+    front-end application) during the post-installation of the library
+    (Closes: #214165).
+
+ -- christophe barbe <christophe@debian.org>  Mon, 13 Oct 2003 17:57:19 -0400
+
+libgphoto2 (2.1.2-3) unstable; urgency=low
+
+  * Fix Canon S45 usb IDs (Closes: #207092).
+
+ -- christophe barbe <christophe@debian.org>  Mon, 13 Oct 2003 17:57:17 -0400
+
+libgphoto2 (2.1.2-2) unstable; urgency=low
+
+  * Workaround m68k bug (free_mem.patch). 
+
+ -- christophe barbe <christophe@debian.org>  Tue, 12 Aug 2003 20:33:46 -0400
+
+libgphoto2 (2.1.2-1) unstable; urgency=low
+
+  * New upstream release. 
+
+ -- christophe barbe <christophe@debian.org>  Mon, 11 Aug 2003 18:03:02 -0400
+
+libgphoto2 (2.1.1-10) unstable; urgency=low
+
+  * Rebuild against libexif9 (Closes: #204184).
+    libgphoto2 2.1.2 is coming RSN.
+
+ -- christophe barbe <christophe@debian.org>  Tue,  5 Aug 2003 07:14:12 -0400
+
+libgphoto2 (2.1.1-9) unstable; urgency=low
+
+  * Compiled without libltld3 to make digikam stable (Closes: 185989).
+  * Updated to Debian Policy Standards-Version 3.5.9 (no change).
+
+ -- christophe barbe <christophe@debian.org>  Tue,  5 Aug 2003 07:14:09 -0400
+
+libgphoto2 (2.1.1-8) unstable; urgency=low
+
+  * Install libgphoto2-port0 AUTHORS in the correct directory 
+    (Closes: #180774). 
+
+ -- christophe barbe <christophe@debian.org>  Wed, 12 Feb 2003 13:40:11 -0500
+
+libgphoto2 (2.1.1-7) unstable; urgency=low
+
+  * Fix Kodak LS443 USB id (Closes: #180202). 
+
+ -- christophe barbe <christophe@debian.org>  Mon, 10 Feb 2003 18:24:24 -0500
+
+libgphoto2 (2.1.1-6) unstable; urgency=low
+
+  * No more need of gtk-doc-tools. 
+
+ -- christophe barbe <christophe@debian.org>  Wed, 22 Jan 2003 20:38:18 -0500
+
+libgphoto2 (2.1.1-5) unstable; urgency=low
+
+  * Make sure libgphoto2 and gphoto2 use the same libexif. 
+
+ -- christophe barbe <christophe@debian.org>  Wed, 22 Jan 2003 15:24:04 -0500
+
+libgphoto2 (2.1.1-4) unstable; urgency=low
+
+  * Rebuild against new libexif. 
+
+ -- christophe barbe <christophe@debian.org>  Mon, 20 Jan 2003 17:15:21 -0500
+
+libgphoto2 (2.1.1-3) unstable; urgency=low
+
+  * Add missing dependency libexif-dev (Closes: #174229).
+  * Fix path in README file (Closes: #172569). 
+
+ -- christophe barbe <christophe@debian.org>  Tue, 24 Dec 2002 22:46:46 -0500
+
+libgphoto2 (2.1.1-2) unstable; urgency=low
+
+  * Added a versioned dependency on libltdl3 (>= 1.4.3) so that impatient
+    testing users get a working package (Closes: #171934).
+    NOTE: This is a libltdl3 bug, see bug #171843.
+
+ -- christophe barbe <christophe@debian.org>  Thu,  5 Dec 2002 23:15:15 -0500
+
+libgphoto2 (2.1.1-1) unstable; urgency=low
+
+  * New Upstream release.
+
+ -- christophe barbe <christophe@debian.org>  Sun,  1 Dec 2002 18:38:22 -0500
+
+libgphoto2 (2.1.0.99-1) unstable; urgency=low
+
+  * First upload (Closes: #170809). 
+
+ -- christophe barbe <christophe@debian.org>  Tue, 26 Nov 2002 17:03:45 -0500
+

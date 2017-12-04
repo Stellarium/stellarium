@@ -1,0 +1,216 @@
+Sample scripts for INDI Dome Scripting Gateway
+
+This is python scripts used to test INDI Dome Scripting Gateway. The default folder for them is /usr/share/indi/scripts (or /usr/local/share/indi/scripts on OSX). You can use any other folder, any other script names and any other script language, just make sure, that all of them have "executable" bit set.
+
+All scripts except for status.py are called only when related driver property is set. status.py is called periodically and is supposed to create file with name submitted as parameter containing single line with 3 number: 0/1 for unparked/parked, 0/1 for closed/open shutter and azimuth as float.
+
+---------- connect.py --------------
+
+#!/usr/bin/python
+#
+# Connect script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+coordinates = open('/tmp/indi-status', 'w')
+coordinates.truncate()
+coordinates.write('1 0 0')
+coordinates.close()
+
+sys.exit(0)
+
+---------- disconnect.py --------------
+
+#!/usr/bin/python
+#
+# Connect script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+sys.exit(0)
+
+---------- park.py --------------
+
+#!/usr/bin/python
+#
+# Park script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+coordinates = open('/tmp/indi-status', 'w')
+coordinates.truncate()
+coordinates.write('1 0 0')
+coordinates.close()
+
+sys.exit(0)
+
+---------- unpark.py --------------
+
+#!/usr/bin/python
+#
+# Park script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+coordinates = open('/tmp/indi-status', 'w')
+coordinates.truncate()
+coordinates.write('0 0 0')
+coordinates.close()
+
+sys.exit(0)
+
+
+---------- goto.py --------------
+
+#!/usr/bin/python
+#
+# Goto azimuth script for INDI Dome Scripting Gateway
+#
+# Arguments: Az
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+script, az = sys.argv
+
+coordinates = open('/tmp/indi-status', 'r')
+str = coordinates.readline()
+coordinates.close()
+str = str[0:3] + az
+coordinates = open('/tmp/indi-status', 'w')
+coordinates.truncate()
+coordinates.write(str)
+coordinates.close()
+
+sys.exit(0)
+
+---------- open.py --------------
+
+#!/usr/bin/python
+#
+# Open shutter script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+coordinates = open('/tmp/indi-status', 'r')
+str = coordinates.readline()
+coordinates.close()
+str = str[0] + ' 1 ' + str[4:]
+coordinates = open('/tmp/indi-status', 'w')
+coordinates.truncate()
+coordinates.write(str)
+coordinates.close()
+
+sys.exit(0)
+
+---------- close.py --------------
+
+#!/usr/bin/python
+#
+# Close shutter script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+coordinates = open('/tmp/indi-status', 'r')
+str = coordinates.readline()
+coordinates.close()
+str = str[0] + ' 0 ' + str[4:]
+coordinates = open('/tmp/indi-status', 'w')
+coordinates.truncate()
+coordinates.write(str)
+coordinates.close()
+
+sys.exit(0)
+
+
+---------- move_cw.py --------------
+
+#!/usr/bin/python
+#
+# Move clockwise script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+sys.exit(0)
+
+---------- move_ccw.py --------------
+
+#!/usr/bin/python
+#
+# Move counter clockwise script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+sys.exit(0)
+
+---------- abort.py --------------
+
+#!/usr/bin/python
+#
+# Abort script for INDI Dome Scripting Gateway
+#
+# Arguments: none
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+sys.exit(0)
+
+---------- status.py --------------
+
+#!/usr/bin/python
+#
+# Status script for INDI Dome Scripting Gateway
+#
+# Arguments: file name to save current state and coordinates (parked ra dec)
+# Exit code: 0 for success, 1 for failure
+#
+
+import sys
+
+script, path = sys.argv
+
+coordinates = open('/tmp/indi-status', 'r')
+status = open(path, 'w')
+status.truncate()
+status.write(coordinates.readline())
+status.close()
+
+sys.exit(0)
+
+
+

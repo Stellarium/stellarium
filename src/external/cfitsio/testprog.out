@@ -1,0 +1,797 @@
+CFITSIO TESTPROG
+
+Try opening then closing a nonexistent file:
+  ffopen fptr, status  = 0 104 (expect an error)
+  ffclos status = 115
+
+ffinit create new file status = 0
+Name of file = testprog.fit, I/O mode = 1
+
+test writing of long string keywords:
+ 123456789012345678901234567890123456789012345678901234567890123456789012345
+'12345678901234567890123456789012345678901234567890123456789012345678'
+ 1234567890123456789012345678901234567890123456789012345678901234'6789012345
+'1234567890123456789012345678901234567890123456789012345678901234''67'
+ 1234567890123456789012345678901234567890123456789012345678901234''789012345
+'1234567890123456789012345678901234567890123456789012345678901234'''''
+ 1234567890123456789012345678901234567890123456789012345678901234567'9012345
+'1234567890123456789012345678901234567890123456789012345678901234567'
+ffflus status = 0
+HDU number = 1
+
+Values read back from primary array (99 = null pixel)
+The 1st, and every 4th pixel should be undefined:
+ 99  2  3 99  5  6  7 99  9 10 11 99 13 14 15 99 17 18 19 99  1 (ffgpvb)
+ 99  2  3 99  5  6  7 99  9 10 11 99 13 14 15 99 17 18 19 99  1 (ffgpvi)
+ 99  2  3 99  5  6  7 99  9 10 11 99 13 14 15 99 17 18 19 99  1 (ffgpvj)
+ 99  2  3 99  5  6  7 99  9 10 11 99 13 14 15 99 17 18 19 99  1 (ffgpve)
+ 99  2  3 99  5  6  7 99  9 10 11 99 13 14 15 99 17 18 19 99  1 (ffgpvd)
+  *  2  3  *  5  6  7  *  9 10 11  * 13 14 15  * 17 18 19  *  1 (ffgpfb)
+  *  2  3  *  5  6  7  *  9 10 11  * 13 14 15  * 17 18 19  *  1 (ffgpfi)
+  *  2  3  *  5  6  7  *  9 10 11  * 13 14 15  * 17 18 19  *  1 (ffgpfj)
+  *  2  3  *  5  6  7  *  9 10 11  * 13 14 15  * 17 18 19  *  1 (ffgpfe)
+  *  2  3  *  5  6  7  *  9 10 11  * 13 14 15  * 17 18 19  *  1 (ffgpfd)
+
+Closed then reopened the FITS file 10 times.
+HDU number = 1
+Name of file = testprog.fit, I/O mode = 1
+
+Read back keywords:
+simple = 1, bitpix = 32, naxis = 2, naxes = (10, 2)
+  pcount = 0, gcount = 1, extend = 1
+KEY_PREC= 'This keyword was written by fxprec' / comment goes here
+KEY_PREC : 'This keyword was written by fxprec' : comment goes here :
+KEY_PREC= 'This keyword was written by fxprec' / comment goes here
+KY_PKNS1 : 'first string' : fxpkns comment :
+KEY_PKYS value_string fxpkys comment 0
+KEY_PKYL 1 fxpkyl comment 0
+KEY_PKYJ 11 fxpkyj comment 0
+KEY_PKYJ 11.000000 fxpkyj comment 0
+KEY_PKYJ 11.000000 fxpkyj comment 0
+KEY_PKY S value_string fxpkys comment 0
+KEY_PKY L 1 fxpkyl comment 0
+KEY_PKY BYTE 11 fxpkyj comment 0
+KEY_PKY SHORT 11 fxpkyj comment 0
+KEY_PKY INT 11 fxpkyj comment 0
+KEY_PKY J 11 fxpkyj comment 0
+KEY_PKY E 13.131310 fxpkye comment 0
+KEY_PKY D 15.151515 fxpkyd comment 0
+KEY_PKYF 12.121210 fxpkyf comment 0
+KEY_PKYE 13.131310 fxpkye comment 0
+KEY_PKYG 14.14141414141414 fxpkyg comment 0
+KEY_PKYD 15.15151515151520 fxpkyd comment 0
+KEY_PKYC 13.131310 14.141410 fxpkyc comment 0
+KEY_PKFC 13.131313 14.141414 fxpkfc comment 0
+KEY_PKYM 15.151515 16.161616 fxpkym comment 0
+KEY_PKFM 15.151515 16.161616 fxpkfm comment 0
+KEY_PKYT 12345678 0.12345678901235 fxpkyt comment 0
+KEY_PKY J 11 [km/s/Mpc] fxpkyj comment 0
+KEY_PKY units = km/s/Mpc
+KEY_PKY J 11 fxpkyj comment 0
+KEY_PKY units = 
+KEY_PKY J 11 [feet/second/second] fxpkyj comment 0
+KEY_PKY units = feet/second/second
+KEY_PKLS long string value = 
+This is a very long string value that is continued over more than one keyword.
+header contains 65 keywords; located at keyword 27 
+ffgkns:  first string, second string, 
+ffgknl:  1, 0, 1
+ffgknj:  11, 12, 13
+ffgkne:  13.131310, 14.141410, 15.151520
+ffgknd:  15.151515, 16.161616, 17.171717
+
+Before deleting the HISTORY and DATE keywords...
+COMMENT 
+HISTORY 
+DATE    
+KY_PKNS1
+
+After deleting the keywords...
+COMMENT   This keyword was written by fxpcom.
+KY_PKNS1= 'first string'       / fxpkns comment
+
+After inserting the keywords...
+COMMENT   This keyword was written by fxpcom.
+KY_IREC = 'This keyword inserted by fxirec'
+KY_IKYS = 'insert_value_string' / ikys comment
+KY_IKYJ =                   49 / ikyj comment
+KY_IKYL =                    T / ikyl comment
+KY_IKYE =           1.2346E+01 / ikye comment
+KY_IKYD = 1.23456789012346E+01 / ikyd comment
+KY_IKYF =              12.3456 / ikyf comment
+KY_IKYG =     12.3456789012346 / ikyg comment
+KY_PKNS1= 'first string'       / fxpkns comment
+
+After modifying the keywords...
+COMMENT   This keyword was modified by fxmrec
+KY_MREC = 'This keyword was modified by fxmcrd'
+NEWIKYS = 'modified_string'    / ikys comment
+KY_IKYJ =                   50 / This is a modified comment
+KY_IKYL =                    F / ikyl comment
+KY_IKYE =          -1.2346E+01 / ikye comment
+KY_IKYD = -1.23456789012346E+01 / modified comment
+KY_IKYF =             -12.3456 / ikyf comment
+KY_IKYG =    -12.3456789012346 / ikyg comment
+KY_PKNS1= 'first string'       / fxpkns comment
+
+After updating the keywords...
+COMMENT   This keyword was modified by fxmrec
+KY_UCRD = 'This keyword was updated by fxucrd'
+NEWIKYS = 'updated_string'     / ikys comment
+KY_IKYJ =                   51 / This is a modified comment
+KY_IKYL =                    T / ikyl comment
+KY_IKYE =          -1.3346E+01 / ikye comment
+KY_IKYD = -1.33456789012346E+01 / modified comment
+KY_IKYF =             -13.3456 / ikyf comment
+KY_IKYG =    -13.3456789012346 / ikyg comment
+KY_PKNS1= 'first string'       / fxpkns comment
+
+Keywords found using wildcard search (should be 13)...
+KEY_PKYS= 'value_string'       / fxpkys comment
+KEY_PKYL=                    T / fxpkyl comment
+KEY_PKYJ=                   11 / [feet/second/second] fxpkyj comment
+KEY_PKYF=             12.12121 / fxpkyf comment
+KEY_PKYE=         1.313131E+01 / fxpkye comment
+KEY_PKYG=    14.14141414141414 / fxpkyg comment
+KEY_PKYD= 1.51515151515152E+01 / fxpkyd comment
+KEY_PKYC= (1.313131E+01, 1.414141E+01) / fxpkyc comment
+KEY_PKYM= (1.51515151515152E+01, 1.61616161616162E+01) / fxpkym comment
+KEY_PKFC= (13.131313, 14.141414) / fxpkfc comment
+KEY_PKFM= (15.15151515151515, 16.16161616161616) / fxpkfm comment
+KEY_PKYT= 12345678.1234567890123456 / fxpkyt comment
+NEWIKYS = 'updated_string'     / ikys comment
+
+Copied keyword: ffgkne:  14.141410, 15.151520, 13.131310
+Updated header using template file (ffpktp)
+
+ffibin status = 0
+HDU number = 2
+header contains 33 keywords; located at keyword 1 
+header contains 33 keywords with room for 74 more
+TDIM3 = (1,2,8), 3, 1, 2, 8
+ffpcl_ status = 0
+
+Find the column numbers; a returned status value of 237 is
+expected and indicates that more than one column name matches
+the input column name template.  Status = 219 indicates that
+there was no matching column name.
+Column Xvalue is number 3; status = 0.
+Column Avalue is number 1; status = 237.
+Column Lvalue is number 2; status = 237.
+Column Xvalue is number 3; status = 237.
+Column Bvalue is number 4; status = 237.
+Column Ivalue is number 5; status = 237.
+Column Jvalue is number 6; status = 237.
+Column Evalue is number 7; status = 237.
+Column Dvalue is number 8; status = 237.
+Column Cvalue is number 9; status = 237.
+Column Mvalue is number 10; status = 237.
+Column  is number 0; status = 219.
+
+Information about each column:
+ 15A  16 15 15 Avalue, , A, 15, 1.000000, 0.000000, 1234554321, .
+  1L  14  1  1 Lvalue, m**2, L, 1, 1.000000, 0.000000, 1234554321, .
+ 16X   1 16  1 Xvalue, cm, X, 16, 1.000000, 0.000000, 1234554321, .
+  1B  11  1  1 Bvalue, erg/s, B, 1, 1.000000, 0.000000, 99, .
+  1I  21  1  2 Ivalue, km/s, I, 1, 1.000000, 0.000000, 99, .
+  1J  41  1  4 Jvalue, , J, 1, 1.000000, 0.000000, 99, .
+  1E  42  1  4 Evalue, , E, 1, 1.000000, 0.000000, 1234554321, .
+  1D  82  1  8 Dvalue, , D, 1, 1.000000, 0.000000, 1234554321, .
+  1C  83  1  8 Cvalue, , C, 1, 1.000000, 0.000000, 1234554321, .
+  1M 163  1 16 Mvalue, , M, 1, 1.000000, 0.000000, 1234554321, .
+
+ffitab status = 0
+HDU number = 2
+ffpcl_ status = 0
+
+ASCII table: rowlen, nrows, tfields, extname: 76 11 5 Test-ASCII
+    Name   1      A15          
+  Ivalue  17      I10     m**2 
+  Fvalue  28    F14.6       cm 
+  Evalue  43    E12.5    erg/s 
+  Dvalue  56   D21.14     km/s 
+
+Data values read from ASCII table:
+   first string  1  1  1  1.0  1.0
+  second string  2  2  2  2.0  2.0
+                 3  3  3  3.0  3.0
+      UNDEFINED  4  4  4  4.0  4.0
+                 5  5  5  5.0  5.0
+                 6  6  6  6.0  6.0
+                 7  7  7  7.0  7.0
+                 8  8  8  8.0  8.0
+                 9  9  9  9.0  9.0
+                10 10 10 10.0 10.0
+                99 99 99 99.0 99.0
+
+      1       1.000000  1.00000E+00  1.00000000000000E+00second string        
+
+Column name is number 1; status = 0.
+Column Ivalue is number 2; status = 237.
+Column Fvalue is number 3; status = 237.
+Column Evalue is number 4; status = 237.
+Column Dvalue is number 5; status = 237.
+Column  is number 0; status = 219.
+ A15  16  1 15 Name, 1, , A15, 1.000000, 0.000000, null1, .
+ I10  41  1 10 Ivalue, 17, m**2, I10, 1.000000, 0.000000, null2, .
+F14.6  82  1 14 Fvalue, 28, cm, F14.6, 1.000000, 0.000000, null3, .
+E12.5  42  1 12 Evalue, 43, erg/s, E12.5, 1.000000, 0.000000, null4, .
+D21.14  82  1 21 Dvalue, 56, km/s, D21.14, 1.000000, 0.000000, null5, .
+
+
+Data values after inserting 3 rows after row 2:
+   first string  1  1  1  1.0  1.0
+  second string  2  2  2  2.0  2.0
+                 0  0  0  0.0  0.0
+                 0  0  0  0.0  0.0
+                 0  0  0  0.0  0.0
+                 3  3  3  3.0  3.0
+      UNDEFINED  4  4  4  4.0  4.0
+                 5  5  5  5.0  5.0
+                 6  6  6  6.0  6.0
+                 7  7  7  7.0  7.0
+                 8  8  8  8.0  8.0
+                 9  9  9  9.0  9.0
+                10 10 10 10.0 10.0
+                99 99 99 99.0 99.0
+
+Data values after deleting 2 rows at row 10:
+   first string  1  1  1  1.0  1.0
+  second string  2  2  2  2.0  2.0
+                 0  0  0  0.0  0.0
+                 0  0  0  0.0  0.0
+                 0  0  0  0.0  0.0
+                 3  3  3  3.0  3.0
+      UNDEFINED  4  4  4  4.0  4.0
+                 5  5  5  5.0  5.0
+                 6  6  6  6.0  6.0
+                 9  9  9  9.0  9.0
+                10 10 10 10.0 10.0
+                99 99 99 99.0 99.0
+
+Data values after deleting column 3:
+   first string  1  1  1.0  1.0
+  second string  2  2  2.0  2.0
+                 0  0  0.0  0.0
+                 0  0  0.0  0.0
+                 0  0  0.0  0.0
+                 3  3  3.0  3.0
+      UNDEFINED  4  4  4.0  4.0
+                 5  5  5.0  5.0
+                 6  6  6.0  6.0
+                 9  9  9.0  9.0
+                10 10 10.0 10.0
+                99 99 99.0 99.0
+
+Data values after inserting column 5:
+   first string  1  1  1.0  1.0 0
+  second string  2  2  2.0  2.0 0
+                 0  0  0.0  0.0 0
+                 0  0  0.0  0.0 0
+                 0  0  0.0  0.0 0
+                 3  3  3.0  3.0 0
+      UNDEFINED  4  4  4.0  4.0 0
+                 5  5  5.0  5.0 0
+                 6  6  6.0  6.0 0
+                 9  9  9.0  9.0 0
+                10 10 10.0 10.0 0
+                99 99 99.0 99.0 0
+Create temporary file: ffinit status = 0
+
+Create null primary array: ffiimg status = 0
+
+Create ASCII table with 0 columns: ffitab status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+
+Create Binary table with 0 columns: ffibin status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+Delete the tmp file: ffdelt status = 0
+HDU number = 3
+header contains 38 keywords with room for 69 more
+
+Binary table: nrows, tfields, extname, pcount: 21 10 Test-BINTABLE 0
+  Avalue      15A          
+  Lvalue       1L     m**2 
+  Xvalue      16X       cm 
+  Bvalue       1B    erg/s 
+  Ivalue       1I     km/s 
+  Jvalue       1J          
+  Evalue       1E          
+  Dvalue       1D          
+  Cvalue       1C          
+  Mvalue       1M          
+
+Data values read from binary table:
+  Bit column (X) data values: 
+
+01001100 01110000 11110000 01111100 00000000 
+
+null string column value = -- (should be --)
+
+Read columns with ffgcv_:
+   first string 0  76  1   1   1   1.0   1.0 (  1.0, -2.0) (  1.0, -2.0) 
+  second string 1 112  2   2   2   2.0   2.0 (  3.0, -4.0) (  3.0, -4.0) 
+                0 240  3   3   3   3.0   3.0 (  5.0, -6.0) (  5.0, -6.0) 
+    NOT DEFINED 0 124  0  -4  -4  -4.0  -4.0 (  7.0, -8.0) (  7.0, -8.0) 
+    NOT DEFINED 1   0  5   5   5   5.0   5.0 (  9.0,-10.0) (  9.0,-10.0) 
+    NOT DEFINED 1   0  0  -6  -6  -6.0  -6.0 ( 11.0,-12.0) ( 11.0,-12.0) 
+    NOT DEFINED 0   0  7   7   7   7.0   7.0 ( 13.0,-14.0) ( 13.0,-14.0) 
+    NOT DEFINED 0   0  0  -8  -8  -8.0  -8.0 ( 15.0,-16.0) ( 15.0,-16.0) 
+    NOT DEFINED 0   0  9   9   9   9.0   9.0 ( 17.0,-18.0) ( 17.0,-18.0) 
+    NOT DEFINED 1   0  0 -10 -10 -10.0 -10.0 ( 19.0,-20.0) ( 19.0,-20.0) 
+    NOT DEFINED 0   0 98  98  98  98.0  98.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 1   0 12  12  12  12.0  12.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 0   0 98  98  98  98.0  98.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 0   0  0 -14 -14 -14.0 -14.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 0   0 98  98  98  98.0  98.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 0   0  0 -16 -16 -16.0 -16.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 1   0 98  98  98  98.0  98.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 1   0  0 -18 -18 -18.0 -18.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 1   0 98  98  98  98.0  98.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 1   0  0 -20 -20 -20.0 -20.0 (  0.0,  0.0) (  0.0,  0.0) 
+    NOT DEFINED 0   0 98  98  98  98.0  98.0 (  0.0,  0.0) (  0.0,  0.0) 
+
+Read columns with ffgcf_:
+   first string 0  76  1   1   1   1.0   1.0 (  1.0, -2.0) (  1.0, -2.0)
+  second string 1 112  2   2   2   2.0   2.0 (  3.0, -4.0) (  3.0, -4.0)
+                0 240  3   3   3   3.0   3.0 (  5.0, -6.0) (  5.0, -6.0)
+                0 124  0  -4  -4  -4.0  -4.0 (  7.0, -8.0) (  7.0, -8.0)
+                1   0  5   5   5   5.0   5.0 (  9.0,-10.0) (  9.0,-10.0)
+                1   0  0  -6  -6  -6.0  -6.0 ( 11.0,-12.0) ( 11.0,-12.0)
+                0   0  7   7   7   7.0   7.0 ( 13.0,-14.0) ( 13.0,-14.0)
+                0   0  0  -8  -8  -8.0  -8.0 ( 15.0,-16.0) ( 15.0,-16.0)
+                0   0  9   9   9   9.0   9.0 ( 17.0,-18.0) ( 17.0,-18.0)
+                1   0  0 -10 -10 -10.0 -10.0 ( 19.0,-20.0) ( 19.0,-20.0)
+                0   0 99  99 
+                1   0 12  12 
+                0   0 99  99 
+                0   0  0 -14 
+                0   0 99  99 
+                0   0  0 -16 
+                1   0 99  99 
+                1   0  0 -18 
+                1   0 99  99 
+                1   0  0 -20 
+                0   0 99  99 
+
+Data values after inserting 3 rows after row 2:
+   first string  1   1   1   1.0   1.0
+  second string  2   2   2   2.0   2.0
+    NOT DEFINED  0   0   0   0.0   0.0
+    NOT DEFINED  0   0   0   0.0   0.0
+    NOT DEFINED  0   0   0   0.0   0.0
+                 3   3   3   3.0   3.0
+    NOT DEFINED  0  -4  -4  -4.0  -4.0
+    NOT DEFINED  5   5   5   5.0   5.0
+    NOT DEFINED  0  -6  -6  -6.0  -6.0
+    NOT DEFINED  7   7   7   7.0   7.0
+    NOT DEFINED  0  -8  -8  -8.0  -8.0
+    NOT DEFINED  9   9   9   9.0   9.0
+    NOT DEFINED  0 -10 -10 -10.0 -10.0
+    NOT DEFINED 98  98  98  98.0  98.0
+
+Data values after deleting 2 rows at row 10:
+   first string  1   1   1   1.0   1.0
+  second string  2   2   2   2.0   2.0
+    NOT DEFINED  0   0   0   0.0   0.0
+    NOT DEFINED  0   0   0   0.0   0.0
+    NOT DEFINED  0   0   0   0.0   0.0
+                 3   3   3   3.0   3.0
+    NOT DEFINED  0  -4  -4  -4.0  -4.0
+    NOT DEFINED  5   5   5   5.0   5.0
+    NOT DEFINED  0  -6  -6  -6.0  -6.0
+    NOT DEFINED  9   9   9   9.0   9.0
+    NOT DEFINED  0 -10 -10 -10.0 -10.0
+    NOT DEFINED 98  98  98  98.0  98.0
+
+Data values after deleting column 6:
+   first string  1   1   1.0   1.0
+  second string  2   2   2.0   2.0
+    NOT DEFINED  0   0   0.0   0.0
+    NOT DEFINED  0   0   0.0   0.0
+    NOT DEFINED  0   0   0.0   0.0
+                 3   3   3.0   3.0
+    NOT DEFINED  0  -4  -4.0  -4.0
+    NOT DEFINED  5   5   5.0   5.0
+    NOT DEFINED  0  -6  -6.0  -6.0
+    NOT DEFINED  9   9   9.0   9.0
+    NOT DEFINED  0 -10 -10.0 -10.0
+    NOT DEFINED 98  98  98.0  98.0
+
+Data values after inserting column 8:
+   first string  1   1   1.0   1.0 0
+  second string  2   2   2.0   2.0 0
+    NOT DEFINED  0   0   0.0   0.0 0
+    NOT DEFINED  0   0   0.0   0.0 0
+    NOT DEFINED  0   0   0.0   0.0 0
+                 3   3   3.0   3.0 0
+    NOT DEFINED  0  -4  -4.0  -4.0 0
+    NOT DEFINED  5   5   5.0   5.0 0
+    NOT DEFINED  0  -6  -6.0  -6.0 0
+    NOT DEFINED  9   9   9.0   9.0 0
+    NOT DEFINED  0 -10 -10.0 -10.0 0
+    NOT DEFINED 98  98  98.0  98.0 0
+
+Values after setting 1st 10 elements in column 8 = null:
+   first string  1   1   1.0   1.0 98
+  second string  2   2   2.0   2.0 98
+    NOT DEFINED  0   0   0.0   0.0 98
+    NOT DEFINED  0   0   0.0   0.0 98
+    NOT DEFINED  0   0   0.0   0.0 98
+                 3   3   3.0   3.0 98
+    NOT DEFINED  0  -4  -4.0  -4.0 98
+    NOT DEFINED  5   5   5.0   5.0 98
+    NOT DEFINED  0  -6  -6.0  -6.0 98
+    NOT DEFINED  9   9   9.0   9.0 98
+    NOT DEFINED  0 -10 -10.0 -10.0 0
+    NOT DEFINED 98  98  98.0  98.0 0
+Create temporary file: ffinit status = 0
+
+Create null primary array: ffiimg status = 0
+
+Create binary table with 0 columns: ffibin status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+copy column, ffcpcl status = 0
+Delete the tmp file: ffdelt status = 0
+ffibin status = 0
+HDU number = 2
+      0   1000  10000  33000  66000   -999
+      0   1000  10000  32768  65535   -999
+      0   1000  10000  32800  65500   -999
+
+      0      1     10     33     66   -999
+ -32768 -31768 -22768      0  32767   -999
+     -1      9     99    327    654   -999
+
+Create image extension: ffiimg status = 0
+HDU number = 3
+
+Wrote whole 2D array: ffp2di status = 0
+
+Read whole 2D array: ffg2di status = 0
+   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14   0   0   0   0
+  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24   0   0   0   0
+  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34   0   0   0   0
+  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44   0   0   0   0
+  40  41  42  43  44  45  46  47  48  49  50  51  52  53  54   0   0   0   0
+  50  51  52  53  54  55  56  57  58  59  60  61  62  63  64   0   0   0   0
+  60  61  62  63  64  65  66  67  68  69  70  71  72  73  74   0   0   0   0
+  70  71  72  73  74  75  76  77  78  79  80  81  82  83  84   0   0   0   0
+  80  81  82  83  84  85  86  87  88  89  90  91  92  93  94   0   0   0   0
+  90  91  92  93  94  95  96  97  98  99 100 101 102 103 104   0   0   0   0
+ 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114   0   0   0   0
+ 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124   0   0   0   0
+ 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134   0   0   0   0
+ 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144   0   0   0   0
+ 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154   0   0   0   0
+ 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164   0   0   0   0
+ 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174   0   0   0   0
+ 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184   0   0   0   0
+ 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194   0   0   0   0
+ 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204   0   0   0   0
+ 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214   0   0   0   0
+ 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224   0   0   0   0
+ 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234   0   0   0   0
+ 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244   0   0   0   0
+ 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+
+Wrote subset 2D array: ffpssi status = 0
+
+Read whole 2D array: ffg2di status = 0
+   0   1   2   3   4   5   6   7   8   9  10  11  12  13  14   0   0   0   0
+  10  11  12  13  14  15  16  17  18  19  20  21  22  23  24   0   0   0   0
+  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34   0   0   0   0
+  30  31  32  33  34  35  36  37  38  39  40  41  42  43  44   0   0   0   0
+  40  41  42  43   0  -1  -2  -3  -4  -5  -6  -7  -8  -9  54   0   0   0   0
+  50  51  52  53 -10 -11 -12 -13 -14 -15 -16 -17 -18 -19  64   0   0   0   0
+  60  61  62  63 -20 -21 -22 -23 -24 -25 -26 -27 -28 -29  74   0   0   0   0
+  70  71  72  73 -30 -31 -32 -33 -34 -35 -36 -37 -38 -39  84   0   0   0   0
+  80  81  82  83 -40 -41 -42 -43 -44 -45 -46 -47 -48 -49  94   0   0   0   0
+  90  91  92  93 -50 -51 -52 -53 -54 -55 -56 -57 -58 -59 104   0   0   0   0
+ 100 101 102 103 -60 -61 -62 -63 -64 -65 -66 -67 -68 -69 114   0   0   0   0
+ 110 111 112 113 -70 -71 -72 -73 -74 -75 -76 -77 -78 -79 124   0   0   0   0
+ 120 121 122 123 -80 -81 -82 -83 -84 -85 -86 -87 -88 -89 134   0   0   0   0
+ 130 131 132 133 -90 -91 -92 -93 -94 -95 -96 -97 -98 -99 144   0   0   0   0
+ 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154   0   0   0   0
+ 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164   0   0   0   0
+ 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174   0   0   0   0
+ 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184   0   0   0   0
+ 180 181 182 183 184 185 186 187 188 189 190 191 192 193 194   0   0   0   0
+ 190 191 192 193 194 195 196 197 198 199 200 201 202 203 204   0   0   0   0
+ 200 201 202 203 204 205 206 207 208 209 210 211 212 213 214   0   0   0   0
+ 210 211 212 213 214 215 216 217 218 219 220 221 222 223 224   0   0   0   0
+ 220 221 222 223 224 225 226 227 228 229 230 231 232 233 234   0   0   0   0
+ 230 231 232 233 234 235 236 237 238 239 240 241 242 243 244   0   0   0   0
+ 240 241 242 243 244 245 246 247 248 249 250 251 252 253 254   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
+
+Read subset of 2D array: ffgsvi status = 0
+  41  43  -1  -3  -5  71  73 -31 -33 -35
+
+Create image extension: ffiimg status = 0
+HDU number = 4
+Create temporary file: ffinit status = 0
+Copy image extension to primary array of tmp file.
+ffcopy status = 0
+SIMPLE  =                    T / file does conform to FITS standard
+BITPIX  =                   16 / number of bits per data pixel
+NAXIS   =                    2 / number of data axes
+NAXIS1  =                   15 / length of data axis 1
+NAXIS2  =                   25 / length of data axis 2
+EXTEND  =                    T / FITS dataset may contain extensions
+Delete the tmp file: ffdelt status = 0
+Delete the image extension; hdutype, status = 1 0
+HDU number = 4
+ffcrhd status = 0
+Variable length arrays: ffphbn status = 0
+ffpcl_ status = 0
+PCOUNT = 4446
+HDU number = 6
+A   0
+L  0 0
+X  0 0
+B  1 0
+I  1 0
+J  1 0
+E  1 0
+D  1 0
+Column 8 repeat and offset = 1 14
+A ab 0
+L  0  1 0
+X  0  1 0
+B 99  2 0
+I 99  2 0
+J 99  2 0
+E 99  2 0
+D 99  2 0
+Column 8 repeat and offset = 2 49
+A abc 0
+L  0  0  0 0
+X  0  1  0 0
+B  1 99  3 0
+I  1 99  3 0
+J  1 99  3 0
+E  1 99  3 0
+D  1 99  3 0
+Column 8 repeat and offset = 3 105
+A abcd 0
+L  0  1  0  0 0
+X  0  1  0  0 0
+B  1  2 99  4 0
+I  1  2 99  4 0
+J  1  2 99  4 0
+E  1  2 99  4 0
+D  1  2 99  4 0
+Column 8 repeat and offset = 4 182
+A abcde 0
+L  0  1  0  0  1 0
+X  0  1  0  0  1 0
+B  1  2  3 99  5 0
+I  1  2  3 99  5 0
+J  1  2  3 99  5 0
+E  1  2  3 99  5 0
+D  1  2  3 99  5 0
+Column 8 repeat and offset = 5 280
+A abcdef 0
+L  0  1  0  0  0  1 0
+X  0  1  0  0  1  1 0
+B  1  2  3  4 99  6 0
+I  1  2  3  4 99  6 0
+J  1  2  3  4 99  6 0
+E  1  2  3  4 99  6 0
+D  1  2  3  4 99  6 0
+Column 8 repeat and offset = 6 399
+A abcdefg 0
+L  0  1  0  0  1  0  0 0
+X  0  1  0  0  1  1  0 0
+B  1  2  3  4  5 99  7 0
+I  1  2  3  4  5 99  7 0
+J  1  2  3  4  5 99  7 0
+E  1  2  3  4  5 99  7 0
+D  1  2  3  4  5 99  7 0
+Column 8 repeat and offset = 7 539
+A abcdefgh 0
+L  0  1  0  0  1  1  0  0 0
+X  0  1  0  0  1  1  0  0 0
+B  1  2  3  4  5  6 99  8 0
+I  1  2  3  4  5  6 99  8 0
+J  1  2  3  4  5  6 99  8 0
+E  1  2  3  4  5  6 99  8 0
+D  1  2  3  4  5  6 99  8 0
+Column 8 repeat and offset = 8 700
+A abcdefghi 0
+L  0  1  0  0  1  1  0  0  0 0
+X  0  1  0  0  1  1  0  0  0 0
+B  1  2  3  4  5  6  7 99  9 0
+I  1  2  3  4  5  6  7 99  9 0
+J  1  2  3  4  5  6  7 99  9 0
+E  1  2  3  4  5  6  7 99  9 0
+D  1  2  3  4  5  6  7 99  9 0
+Column 8 repeat and offset = 9 883
+A abcdefghij 0
+L  0  1  0  0  1  1  0  0  0  1 0
+X  0  1  0  0  1  1  0  0  0  1 0
+B  1  2  3  4  5  6  7  8 99 10 0
+I  1  2  3  4  5  6  7  8 99 10 0
+J  1  2  3  4  5  6  7  8 99 10 0
+E  1  2  3  4  5  6  7  8 99 10 0
+D  1  2  3  4  5  6  7  8 99 10 0
+Column 8 repeat and offset = 10 1087
+A abcdefghijk 0
+L  0  1  0  0  1  1  0  0  0  0  1 0
+X  0  1  0  0  1  1  0  0  0  1  1 0
+B  1  2  3  4  5  6  7  8  9 99 11 0
+I  1  2  3  4  5  6  7  8  9 99 11 0
+J  1  2  3  4  5  6  7  8  9 99 11 0
+E  1  2  3  4  5  6  7  8  9 99 11 0
+D  1  2  3  4  5  6  7  8  9 99 11 0
+Column 8 repeat and offset = 11 1312
+A abcdefghijkl 0
+L  0  1  0  0  1  1  0  0  0  1  0  1 0
+X  0  1  0  0  1  1  0  0  0  1  1  1 0
+B  1  2  3  4  5  6  7  8  9 10 99 12 0
+I  1  2  3  4  5  6  7  8  9 10 99 12 0
+J  1  2  3  4  5  6  7  8  9 10 99 12 0
+E  1  2  3  4  5  6  7  8  9 10 99 12 0
+D  1  2  3  4  5  6  7  8  9 10 99 12 0
+Column 8 repeat and offset = 12 1558
+A abcdefghijklm 0
+L  0  1  0  0  1  1  0  0  0  1  1  0  0 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0 0
+B  1  2  3  4  5  6  7  8  9 10 11 99 13 0
+I  1  2  3  4  5  6  7  8  9 10 11 99 13 0
+J  1  2  3  4  5  6  7  8  9 10 11 99 13 0
+E  1  2  3  4  5  6  7  8  9 10 11 99 13 0
+D  1  2  3  4  5  6  7  8  9 10 11 99 13 0
+Column 8 repeat and offset = 13 1825
+A abcdefghijklmn 0
+L  0  1  0  0  1  1  0  0  0  1  1  1  0  0 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0  0 0
+B  1  2  3  4  5  6  7  8  9 10 11 12 99 14 0
+I  1  2  3  4  5  6  7  8  9 10 11 12 99 14 0
+J  1  2  3  4  5  6  7  8  9 10 11 12 99 14 0
+E  1  2  3  4  5  6  7  8  9 10 11 12 99 14 0
+D  1  2  3  4  5  6  7  8  9 10 11 12 99 14 0
+Column 8 repeat and offset = 14 2113
+A abcdefghijklmno 0
+L  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0 0
+B  1  2  3  4  5  6  7  8  9 10 11 12 13 99 15 0
+I  1  2  3  4  5  6  7  8  9 10 11 12 13 99 15 0
+J  1  2  3  4  5  6  7  8  9 10 11 12 13 99 15 0
+E  1  2  3  4  5  6  7  8  9 10 11 12 13 99 15 0
+D  1  2  3  4  5  6  7  8  9 10 11 12 13 99 15 0
+Column 8 repeat and offset = 15 2422
+A abcdefghijklmnop 0
+L  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0 0
+B  1  2  3  4  5  6  7  8  9 10 11 12 13 14 99 16 0
+I  1  2  3  4  5  6  7  8  9 10 11 12 13 14 99 16 0
+J  1  2  3  4  5  6  7  8  9 10 11 12 13 14 99 16 0
+E  1  2  3  4  5  6  7  8  9 10 11 12 13 14 99 16 0
+D  1  2  3  4  5  6  7  8  9 10 11 12 13 14 99 16 0
+Column 8 repeat and offset = 16 2752
+A abcdefghijklmnopq 0
+L  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  1 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  1 0
+B  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 99 17 0
+I  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 99 17 0
+J  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 99 17 0
+E  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 99 17 0
+D  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 99 17 0
+Column 8 repeat and offset = 17 3104
+A abcdefghijklmnopqr 0
+L  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  0  1 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  1  1 0
+B  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 99 18 0
+I  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 99 18 0
+J  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 99 18 0
+E  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 99 18 0
+D  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 99 18 0
+Column 8 repeat and offset = 18 3477
+A abcdefghijklmnopqrs 0
+L  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  1  0  1 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  1  1  1 0
+B  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 99 19 0
+I  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 99 19 0
+J  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 99 19 0
+E  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 99 19 0
+D  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 99 19 0
+Column 8 repeat and offset = 19 3871
+A abcdefghijklmnopqrst 0
+L  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  1  1  0  1 0
+X  0  1  0  0  1  1  0  0  0  1  1  1  0  0  0  0  1  1  1  1 0
+B  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 99 20 0
+I  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 99 20 0
+J  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 99 20 0
+E  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 99 20 0
+D  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 99 20 0
+Column 8 repeat and offset = 20 4286
+
+ffcrim status = 0
+ffppr status = 0
+
+Image values written with ffppr and read with ffgpv:
+  0  2  4  6  8 10 12 14 16 18 20 22 24 26  0 (byte)
+  0  2  4  6  8 10 12 14 16 18 20 22 24 26  0 (short)
+  0  2  4  6  8 10 12 14 16 18 20 22 24 26  0 (int)
+  0  2  4  6  8 10 12 14 16 18 20 22 24 26  0 (long)
+  0  2  4  6  8 10 12 14 16 18 20 22 24 26  0 (float)
+  0  2  4  6  8 10 12 14 16 18 20 22 24 26  0 (double)
+
+Wrote WCS keywords status = 0
+Read WCS keywords with ffgics status = 0
+  CRVAL1, CRVAL2 =  45.830000000000,  63.570000000000
+  CRPIX1, CRPIX2 = 256.000000000000, 257.000000000000
+  CDELT1, CDELT2 =  -0.002777770000,   0.002777770000
+  Rotation =      0.000, CTYPE = -TAN
+Calculated sky coordinate with ffwldp status = 0
+  Pixels (  0.5000,  0.5000) --> (  47.385204,   62.848968) Sky
+Calculated pixel coordinate with ffxypx status = 0
+  Sky (  47.385204,   62.848968) --> (  0.5000,  0.5000) Pixels
+
+ffcrtb status = 0
+ffpcl status = 0
+
+Column values written with ffpcl and read with ffgcl:
+  0  3  6  9 12 15 18 21 24 27  0 (byte)
+  0  3  6  9 12 15 18 21 24 27  0 (short)
+  0  3  6  9 12 15 18 21 24 27  0 (int)
+  0  3  6  9 12 15 18 21 24 27  0 (long)
+  0  3  6  9 12 15 18 21 24 27  0 (float)
+  0  3  6  9 12 15 18 21 24 27  0 (double)
+
+Repeatedly move to the 1st 4 HDUs of the file:
+12343123431234312343123431234312343123431234312343
+Move to extensions by name and version number: (ffmnhd)
+ Test-BINTABLE, 1 = hdu 5, 0
+ Test-BINTABLE, 3 = hdu 2, 0
+ Test-BINTABLE, 4 = hdu 6, 0
+ Test-ASCII, 2 = hdu 4, 0
+ new_table, 5 = hdu 8, 0
+ Test-BINTABLE, 0 = hdu 2, 0
+ Test-BINTABLE, 17 = hdu 2, 301 (expect a 301 error status here)
+Total number of HDUs in the file = 8
+
+Encode checksum: 1234567890 -> dCW2fBU0dBU0dBU0
+Decode checksum: dCW2fBU0dBU0dBU0 -> 1234567890
+DATASUM = '475248536'         
+ffgcks data checksum, status = 475248536, 0
+ffvcks datastatus, hdustatus, status = 1 1 0
+ffupck status = 0
+DATASUM = '475248536'         
+ffvcks datastatus, hdustatus, status = 1 1 0
+ffclos status = 0
+
+Normally, there should be 8 error messages on the stack
+all regarding 'numerical overflows':
+ Numerical overflow during type conversion while writing FITS data.
+ Numerical overflow during type conversion while writing FITS data.
+ Numerical overflow during type conversion while writing FITS data.
+ Numerical overflow during type conversion while writing FITS data.
+ Numerical overflow during type conversion while writing FITS data.
+ Numerical overflow during type conversion while writing FITS data.
+ Numerical overflow during type conversion while writing FITS data.
+ Numerical overflow during type conversion while writing FITS data.
+
+Status = 0: OK - no error

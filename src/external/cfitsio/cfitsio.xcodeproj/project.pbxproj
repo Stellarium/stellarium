@@ -1,0 +1,120 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		462A28570A4EF04900AB8766 /* CFITSIO */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 462A285C0A4EF05400AB8766 /* Build configuration list for PBXAggregateTarget "CFITSIO" */;
+			buildPhases = (
+				462A28580A4EF05100AB8766 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = CFITSIO;
+			productName = "Build Universal";
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXGroup section */
+		22831BBD1146D2B6004A1DD3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		462A28340A4EEE3200AB8766 = {
+			isa = PBXGroup;
+			children = (
+				22831BBD1146D2B6004A1DD3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXProject section */
+		462A28360A4EEE3200AB8766 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+			};
+			buildConfigurationList = 462A28370A4EEE3200AB8766 /* Build configuration list for PBXProject "cfitsio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 462A28340A4EEE3200AB8766;
+			productRefGroup = 22831BBD1146D2B6004A1DD3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				462A28570A4EF04900AB8766 /* CFITSIO */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		462A28580A4EF05100AB8766 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here\nmake distclean\n./configure\nmake shared\nmake testprog\nmake fpack\nmake funpack\nmake fitscopy\nexit 0";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		462A28390A4EEE3200AB8766 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+			};
+			name = Release;
+		};
+		462A285E0A4EF05400AB8766 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				PRODUCT_NAME = CFITSIO;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		462A28370A4EEE3200AB8766 /* Build configuration list for PBXProject "cfitsio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				462A28390A4EEE3200AB8766 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		462A285C0A4EF05400AB8766 /* Build configuration list for PBXAggregateTarget "CFITSIO" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				462A285E0A4EF05400AB8766 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 462A28360A4EEE3200AB8766 /* Project object */;
+}

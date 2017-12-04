@@ -1,0 +1,83 @@
+===============================================================================
+===============================================================================
+= NOTE:  This is the old version of the README.win32 file that was distributed
+= with CFITSIO up until version 3.35 in 2013.  These instruction may still work
+= with more recent versions of CFITSIO, however, users are strongly urged to 
+= use the CMake procedures that are now documented in the new README.win32 file.
+===============================================================================
+===============================================================================
+
+     Instructions on using CFITSIO on Windows platforms for C programmers
+
+These instructions use a simple DOS-style command window. It is also possible
+to build and use CFITSIO within a GUI programming environment such as Visual
+Studio, but this is not supported here.
+
+===============================================================================
+1.  Build the CFITSIO dll library  
+
+This step will create the cfitsio.def, cfitsio.dll, and cfitsio.lib files.
+(If you downloaded the CFITSIO .zip file that contains the pre-built binary
+.dll file, then SKIP THIS STEP).
+
+  A. With Microsoft Visual C++:
+
+      1. Open a DOS command window and execute the vcvars32.bat file that 
+         is distributed with older versions of Visual C++, or simply open 
+         the Visual C++ command window (e.g., when using Visual Studio 2010).
+
+      2. Unpack the CFITSIO source files (cfitxxxx.zip) into a new empty directory
+
+      3. In the DOS command window, cd to that directory and enter the 
+         following commands:
+
+		nmake winDumpExts.mak
+		nmake makefile.vcc
+			(ignore the compiler warning messages)
+
+  B: With  Borland C++:
+
+     First, follow the instructions provided by Borland to set up
+     the proper environment variables and configure files for the compiler.
+   
+     Unpack the cfitsio.zip source file distribution into a suitable directory.
+   
+     In a DOS command window, cd to that directory and then execute the 
+     makepc.bat batch file on the command line to build the CFITSIO library, 
+     and the testprog and cookbook sample programs.
+
+===============================================================================
+2.  Test the CFITSIO library with Visual C++
+
+     Compile and link the testprog.c test program.  When using Visual Studio,
+     the command is:
+
+		cl /MD testprog.c cfitsio.lib
+
+
+     This will create the testprog.exe executable program.  Running this
+     program should print out a long series of diagnostic messages
+     that should end with "Status = 0; OK - no error"
+
+===============================================================================
+3.  Compile and link an application program that calls CFITSIO routines
+    with Visual C++
+
+	Include the fitsio.h and longnam.h header files in the C source code.
+
+	Link the program with the cfitsio.lib file:
+
+		cl /MD your_program.c cfitsio.lib
+
+
+	NOTE: The /MD command line switch must be specified on the cl
+	command line to force the compiler/linker to use the
+	appropriete runtime library.   If this switch is omitted, then
+	the fits_report_error function in CFITSIO will likely crash.  
+
+	When building programs in the Visual Studio environment, one
+	can force the equivalent of the /MD switch by selecting
+	'Settings...' under the 'Project' menu, then click on the C/C++
+	tab and select the 'Code Generator' category.  Then under 'User
+	Run-time Library' select 'Multithreaded DLL'.
+

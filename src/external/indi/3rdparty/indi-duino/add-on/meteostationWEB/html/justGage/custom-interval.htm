@@ -1,0 +1,91 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Custom interval</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <style>
+      body {
+        text-align: center;
+      }
+      
+      #g1, #g2, #g3 {
+        width:300px; height:260px;
+        display: inline-block;
+        margin: 1em;
+      }
+      
+      p {
+        display: block;
+        width: 450px;
+        margin: 2em auto;
+        text-align: left;
+      }
+    </style>
+    
+    <script src="resources/js/raphael.2.1.0.min.js"></script>
+    <script src="resources/js/justgage.1.0.1.min.js"></script>
+    <script>
+      var g1, g2, g3,g4;
+      
+      window.onload = function(){
+        var g1 = new JustGage({
+          id: "g1", 
+          value: getRandomInt(-10, 40), 
+          min: -10,
+          max: 40,
+          title: "Temperature",
+          label: "ºC"
+        });
+        
+        var g2 = new JustGage({
+          id: "g2", 
+          value: 32, 
+          min: 0,
+          max: 100,
+          title: "Relative Humidity",
+          label: "%"
+        });
+        
+        var g3 = new JustGage({
+          id: "g3", 
+          value: 120, 
+          min: 950,
+          max: 1050,
+          title: "Pressure",
+          label: "mBars"
+        });
+        
+      var g4 = new JustGage({
+          id: "g3", 
+          value: 120, 
+          min: 0,
+          max: 100,
+          title: "Clouds",
+          label: "%"
+        });
+        
+        setInterval(function() {
+          g1.refresh(getRandomInt(-10, 40));
+          g2.refresh(getRandomInt(0, 100));          
+          g3.refresh(getRandomInt(950, 1050));
+          g4.refresh(getRandomInt(0, 100));
+        }, 2500);
+      };
+    </script>
+
+	</head>
+  <body>    
+    <div id="g1"></div>
+    <div id="g2"></div>
+    <div id="g3"></div>
+    <div id="g4"></div>
+    <p>
+      You need to measure, say, between 350 and 980? No problem, just tell it to justGage. Displayed value and color are calculated as a percentage in defined range, with optional min and max labels shown.
+    </p>
+    <p>
+      Also, if displayed value is out of range, relax and kick your feet up - justGage will take care of it for you.
+    </p>
+  </body>
+</html>
