@@ -64,6 +64,8 @@ public slots:
 signals:
 	void surveyDisplayedChanged(const bool displayed) const;
 	void surveysChanged() const;
+	//! Emitted when a new survey has been loaded.
+	void gotNewSurvey(HipsSurveyP survey) const;
 
 private:
 	QList<HipsSurveyP> surveys;

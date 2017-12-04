@@ -269,20 +269,6 @@ Planet::Planet(const QString& englishName,
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
-
-	// XXX: For testing hips surveys.
-	if (englishName == "Mars")
-	{
-		survey = new HipsSurvey("https://d3kq9k9p1609jy.cloudfront.net/surveys/mars");
-	}
-	if (englishName == "Jupiter")
-	{
-		survey = new HipsSurvey("https://d3kq9k9p1609jy.cloudfront.net/surveys/jupiter");
-	}
-	if (englishName == "Saturn")
-	{
-		survey = new HipsSurvey("https://d3kq9k9p1609jy.cloudfront.net/surveys/saturn");
-	}
 }
 
 // called in SolarSystem::init() before first planet is created. Loads pTypeMap.

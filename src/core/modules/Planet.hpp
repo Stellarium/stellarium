@@ -55,6 +55,8 @@ class QOpenGLTexture;
 class QOpenGLFramebufferObject;
 #endif
 
+typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
+
 // Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
 {
@@ -529,7 +531,7 @@ protected:
 
 	QString objModelPath;
 
-	class HipsSurvey* survey;
+	HipsSurveyP survey = NULL;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point

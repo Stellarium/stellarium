@@ -59,9 +59,10 @@ void HipsMgr::init()
 	}
 	conf->endArray();
 
-	// Use alasky if there are not values:
+	// Use alasky & data.stellarium.org if there are not values:
 	if (sources.isEmpty())
-		sources << "http://alaskybis.unistra.fr/hipslist";
+		sources << "http://alaskybis.unistra.fr/hipslist"
+		        << "https://data.stellarium.org/surveys/hipslist";
 
 
 	for (QUrl source: sources)
@@ -71,7 +72,10 @@ void HipsMgr::init()
 		QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, &QNetworkReply::finished, [=] {
 			QByteArray data = networkReply->readAll();
-			surveys += HipsSurvey::parseHipslist(data);
+			QList<HipsSurveyP> newSurveys = HipsSurvey::parseHipslist(data);
+			for (HipsSurveyP survey: newSurveys)
+				emit gotNewSurvey(survey);
+			surveys += newSurveys;
 			emit surveysChanged();
 		});
 	}

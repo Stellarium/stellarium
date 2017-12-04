@@ -447,6 +447,11 @@ void StelApp::init(QSettings* conf)
 
 	localeMgr->init();
 
+	// Hips surveys
+	HipsMgr* hips = new HipsMgr();
+	hips->init();
+	getModuleMgr().registerModule(hips);
+
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();
 	ssystem->init();
@@ -488,11 +493,6 @@ void StelApp::init(QSettings* conf)
 	ToastMgr* toasts = new ToastMgr();
 	toasts->init();
 	getModuleMgr().registerModule(toasts);
-
-	// Hips surveys
-	HipsMgr* hips = new HipsMgr();
-	hips->init();
-	getModuleMgr().registerModule(hips);
 
 	// Init audio manager
 	audioMgr = new StelAudioMgr();
