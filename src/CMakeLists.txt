@@ -614,23 +614,8 @@ ADD_TEST(testPrecession testPrecession)
 SET(tests_testEphemeris_SRCS
      tests/testEphemeris.hpp
      tests/testEphemeris.cpp
-#     core/StelFileMgr.hpp
-#     core/StelFileMgr.cpp
-#     core/VecMath.hpp
-#     core/planetsephems/EphemWrapper.hpp
-#     core/planetsephems/vsop87.h
-#     core/planetsephems/vsop87.c
-#     core/planetsephems/calc_interpolated_elements.h
-#     core/planetsephems/calc_interpolated_elements.c
-#     core/planetsephems/elliptic_to_rectangular.h
-#     core/planetsephems/elliptic_to_rectangular.c
-#     core/planetsephems/de430.hpp
-#     core/planetsephems/de430.cpp
-#     core/planetsephems/de431.hpp
-#     core/planetsephems/de431.cpp
-#     core/planetsephems/jpl_int.h
-#     core/planetsephems/jpleph.h
-#  core/planetsephems/jpleph.cpp
+     CLIProcessor.hpp
+     CLIProcessor.cpp
 )
 ADD_EXECUTABLE(testEphemeris ${tests_testEphemeris_SRCS})
 TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
