@@ -1232,7 +1232,7 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisVsop87()
 			 .toUtf8());
 	}
 }
-/*
+
 void TestEphemeris::testMercuryHeliocentricEphemerisDe430()
 {
 	if (de430FilePath.isEmpty())
@@ -1764,4 +1764,4 @@ void TestEphemeris::testNeptuneHeliocentricEphemerisDe431()
 		}
 	}
 }
-*/
+
