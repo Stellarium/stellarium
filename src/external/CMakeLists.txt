@@ -89,7 +89,5 @@ target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
 
 set(INDI_BUILD_DRIVERS OFF)
 set(INDI_BUILD_SERVER OFF)
-set(CFITSIO_INCLUDE_DIR "/home/asini/workspace/cfitsio")
-set(CFITSIO_LIBRARIES "/home/asini/workspace/cfitsio/build")
 add_subdirectory(indi/libindi)
 
