@@ -87,14 +87,9 @@ set(qcustomplot_SRCS
 add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
 target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
 
-include(ExternalProject)
-ExternalProject_Add(cfitsio
-    SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cfitsio
-    CMAKE_ARGS "-DBUILD_SHARED_LIBS=OFF"
-    BUILD_COMMAND  ${CMAKE_COMMAND} --build . --target cfitsio
-    INSTALL_COMMAND ""
-    )
+set(INDI_BUILD_DRIVERS OFF)
+set(INDI_BUILD_SERVER OFF)
+set(CFITSIO_INCLUDE_DIR "/home/asini/workspace/cfitsio")
+set(CFITSIO_LIBRARIES "/home/asini/workspace/cfitsio/build")
+add_subdirectory(indi/libindi)
 
-
-#add_subdirectory(cfitsio)
-#add_subdirectory(indi/libindi)

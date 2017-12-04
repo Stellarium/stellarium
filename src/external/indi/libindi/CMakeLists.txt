@@ -1251,14 +1251,6 @@ if (UNIX)
             DESTINATION ${INCLUDE_INSTALL_DIR}/libindi COMPONENT Devel)
     ENDIF()
 ENDIF ()
-
-###################################################################################################
-#######################################  config.h  ################################################
-###################################################################################################
-# Generate config.h from template
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/indiversion.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/indiversion.h )
-
 ###################################################################################################
 #########################################  Tests  #################################################
 ###################################################################################################
@@ -1278,6 +1270,13 @@ ENDIF (GTEST_FOUND)
 
 endif (WIN32 OR ANDROID)
 endif(INDI_BUILD_DRIVERS)
+
+###################################################################################################
+#######################################  config.h  ################################################
+###################################################################################################
+# Generate config.h from template
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/indiversion.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/indiversion.h )
 
 if (MSVC)
   add_definitions(-D_CRT_SECURE_NO_WARNINGS)
