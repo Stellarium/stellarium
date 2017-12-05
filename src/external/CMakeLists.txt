@@ -113,5 +113,8 @@ add_library(indiclient
     indi/libindi/libs/indicom.c
     )
 target_link_libraries(indiclient zlib_stel)
+target_include_directories(indiclient INTERFACE indi/libindi)
+target_include_directories(indiclient INTERFACE indi/libindi/libs)
+
 
 
