@@ -1,6 +1,7 @@
 #include "testINDIConnection.hpp"
 
 #include <limits>
+#include <cmath>
 
 #include "INDIConnection.hpp"
 

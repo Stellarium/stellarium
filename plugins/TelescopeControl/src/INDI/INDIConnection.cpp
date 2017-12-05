@@ -5,6 +5,7 @@
 #include <chrono>
 #include <thread>
 #include <limits>
+#include <cmath>
 
 #include "indibase/baseclient.h"
 #include "indibase/basedevice.h"
