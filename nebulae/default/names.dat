@@ -293,18 +293,17 @@ NGC  3034            _("Ursa Major A") # SIMBAD
 NGC  3034            _("Bode's Nebula") # WSO, WSG
 NGC  3077            _("The Garland Galaxy") # B500
 NGC  3079            _("The Phantom Frisbee Galaxy") # B500, SD
-NGC  3180            _("Little Pinwheel Galaxy") # B500
-NGC  3184            _("Little Pinwheel Galaxy") # HT
-NGC  3189            _("NGC 3190 Group") # BCH, SIMBAD
 NGC  3115            _("Spindle Galaxy") # NED, SIMBAD, DWH, WSG
 NGC  3115            _("Spindle Nebula") # BCH
 NGC  3132            _("Eight-Burst Planetary Nebula") # WK, SIMBAD, BCH, SG
 NGC  3132            _("Southern Ring Nebula") # WK, SG
 NGC  3172            _("Polarissima Borealis") # WK, SIMBAD, WSO, WSG
 NGC  3172            _("Polarissima") # DWH
+NGC  3180            _("Little Pinwheel Galaxy") # B500, HT
 NGC  3185            _("Leo Quartet") # WSG
 NGC  3187            _("Leo Quartet") # WSG
-NGC  3190            _("Leo Quartet") # WSG
+NGC  3189            _("NGC 3190 Group") # BCH, SIMBAD
+NGC  3189            _("Leo Quartet") # WSG
 NGC  3193            _("Leo Quartet") # WSG
 NGC  3228            _("Queen's Cache Cluster") # HT
 NGC  3242            _("Ghost of Jupiter Nebula") # WK, SIMBAD, DSW, BCH, DWH, WSO
@@ -357,7 +356,7 @@ NGC  4039            _("Ring-Tail Galaxy") # DWH, WSG
 NGC  4103            _("The Longtail") # SG
 NGC  4147            _("Kick the Can Cluster") # SD
 NGC  4169            _("The Box") # DSW, WSO, WSG
-NGC  4173            _("The Box") # DSW, WSO, WSG
+NGC  4170            _("The Box") # DSW, WSO, WSG
 NGC  4174            _("The Box") # DSW, WSO, WSG
 NGC  4175            _("The Box") # DSW, WSO, WSG
 NGC  4194            _("Medusa Galaxy")
@@ -473,12 +472,9 @@ NGC  5892            _("Fath 703") # NED
 NGC  5897            _("Ghost Globular Cluster") # B500, HT
 NGC  5904            _("Rose Cluster") # B500
 # NGC 5907 and NGC 5906 is same galaxy. Only NGC 5906 is in our catalog.
-NGC  5906            _("Splinter Galaxy") # WSG
-NGC  5906            _("Cat Scratch Galaxy") # B500
-NGC  5906            _("Knife Edge Galaxy") # B500
-NGC  5907            _("Splinter Galaxy") # DSW, SD
-NGC  5907            _("Knife-Edge Galaxy") # SD
-NGC  5907            _("Cat Scratch Galaxy") # SD
+NGC  5906            _("Splinter Galaxy") # WSG, DSW, SD
+NGC  5906            _("Cat Scratch Galaxy") # B500, SD
+NGC  5906            _("Knife Edge Galaxy") # B500, SD
 NGC  6027            _("Seyfert's Sextet") # NED, WSG
 NGC  6027            _("Serpens Sextet")
 NGC  6087            _("S Nor Cluster") # SIMBAD, SG
@@ -1036,7 +1032,7 @@ ACO  S636            _("Antlia Cluster") # NED, WP
      24              _("Footprint Nebula")
      24              _("Minkowski's Footprint") # DSW
      24              _("M1-92") # DSW
-     26              _("Sagittarius A East")
-     27              _("Sagittarius A West")
+     25              _("Sagittarius A East")
+     26              _("Sagittarius A West")
      27              _("Minispiral in Gal Center") # SIMBAD
-     45              _("Dark Doodad Nebula") # WK
+     44              _("Dark Doodad Nebula") # WK
