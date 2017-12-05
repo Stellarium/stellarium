@@ -34,7 +34,6 @@
 #include "VecMath.hpp"
 #include "StelPainter.hpp"
 
-#include <vector>
 #include <QString>
 #include <QDebug>
 #include <QTimer>

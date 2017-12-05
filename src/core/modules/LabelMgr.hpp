@@ -18,17 +18,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SKYLABELMGR_HPP_
-#define _SKYLABELMGR_HPP_
+#ifndef _LABELMGR_HPP_
+#define _LABELMGR_HPP_
 
-
-#include "StelFader.hpp"
 #include "StelModule.hpp"
-#include "StelObject.hpp"
-#include "StelObjectType.hpp"
-#include "VecMath.hpp"
 
-#include <QVector>
+#include <QMap>
 #include <QString>
 
 class StelCore;
@@ -152,4 +147,4 @@ private:
 	int appendLabel(class StelLabel* l, int autoDeleteTimeoutMs);
 };
 
-#endif // _SKYLABELMGR_HPP_
+#endif // _LABELMGR_HPP_
