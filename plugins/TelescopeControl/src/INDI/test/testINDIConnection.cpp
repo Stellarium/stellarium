@@ -4,6 +4,13 @@
 
 #include "INDIConnection.hpp"
 
+void testINDIConnection::deafultCoordinates()
+{
+    INDIConnection::Coordinates position;
+    QVERIFY(std::abs(position.RA - 0.0) < std::numeric_limits<double>::epsilon());
+    QVERIFY(std::abs(position.DEC - 0.0) < std::numeric_limits<double>::epsilon());
+}
+
 void testINDIConnection::defaultPosition()
 {
     INDIConnection instance;
