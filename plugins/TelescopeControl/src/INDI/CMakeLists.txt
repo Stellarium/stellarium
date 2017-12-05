@@ -19,4 +19,7 @@ target_link_libraries(TelescopeControl_INDI
     ${CMAKE_THREAD_LIBS_INIT}
     )
 
+target_include_directories(TelescopeControl_INDI PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 target_include_directories(TelescopeControl_INDI PUBLIC $<TARGET_PROPERTY:indiclient,INCLUDE_DIRECTORIES>)
+
+add_subdirectory(test)
