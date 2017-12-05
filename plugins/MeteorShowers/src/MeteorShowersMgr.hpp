@@ -273,7 +273,6 @@ public slots:
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout();
 
 private slots:
 	void checkForUpdates();
@@ -302,7 +301,6 @@ private:
 	Vec3f m_colorARC;        //! color of active radiant based on confirmed data
 	Vec3f m_colorIR;         //! color of inactive radiant
 
-	QTimer* m_messageTimer;
 	QList<int> m_messageIDs;
 
 	StelTextureSP m_bolideTexture;  //! Meteor bolide texture

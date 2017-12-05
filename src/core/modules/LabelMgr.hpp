@@ -40,9 +40,6 @@ class StelPainter;
 //! other uses are also fine), all label types and so on are specified 
 //! by QString descriptions.
 //! The labels are painted very late, i.e. also sky object labels will be written over the landscape.
-//! TODO: when QT4.5 is out, change implementation to use QGraphicsTextItem.
-//! (QT4.5 should allow for opacity changes for fades, but it is not currently
-//! implemented.
 class LabelMgr : public StelModule
 {
 	Q_OBJECT
@@ -81,6 +78,9 @@ public slots:
 	//! - "NE", "NW", "SE", "SW" work too.
 	//! @return a unique ID which can be used to refer to the label.
 	//! returns -1 if the label could not be created (e.g. object not found)
+	//! @param autoDelete the label will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
+	//! autoDeleteTimeoutMs ms
 	int labelObject(const QString& text, 
 	                const QString& objectName,
 	                bool visible=true,
@@ -88,7 +88,9 @@ public slots:
 	                const QString& fontColor="#999999",
 	                const QString& side="E",
 	                double labelDistance=-1.0,
-	                const QString& style="TextOnly");
+					const QString& style="TextOnly",
+					bool autoDelete = false,
+					int autoDeleteTimeoutMs = 0);
 
 	//! Create a label in azimuthal coordinate system. Can be used e.g. to show landscape features
 	//! @param text the text to display
@@ -97,12 +99,17 @@ public slots:
 	//! @param visible if true, the label starts displayed, else it starts hidden
 	//! @param fontSize size of the font to use
 	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param autoDelete the label will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
+	//! autoDeleteTimeoutMs ms
 	int labelHorizon(const QString& text,
 			float az,
 			float alt,
 			bool visible=true,
 			float fontSize=14,
-			const QString& fontColor="#999999");
+			const QString& fontColor="#999999",
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
 
 	//! Create a label at fixed screen coordinates
 	//! @param text the text to display
@@ -111,12 +118,17 @@ public slots:
 	//! @param visible if true, the label starts displayed, else it starts hidden
 	//! @param fontSize size of the font to use
 	//! @param fontColor HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param autoDelete the label will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
+	//! autoDeleteTimeoutMs ms
 	int labelScreen(const QString& text,
 	                int x,
 	                int y,
 	                bool visible=true,
 	                float fontSize=14,
-	                const QString& fontColor="#999999");
+					const QString& fontColor="#999999",
+					bool autoDelete = false,
+					int autoDeleteTimeoutMs = 0);
 
 	//! find out if a label identified by id is presently shown
 	bool getLabelShow(int id); 
@@ -126,13 +138,18 @@ public slots:
 	void setLabelText(int id, const QString& newText);
 	//! Delete a label by the ID which was returned from addLabel...
 	//! @return true if the id existed and was deleted, else false
-	bool deleteLabel(int id);
+	void deleteLabel(int id);
 	//! Delete all labels.
 	//! @return the number of labels deleted
 	int deleteAllLabels(void);
 
+private slots:
+	void messageTimeout();
+
 private:
-	QVector<class StelLabel*> allLabels;
+	QMap<int, class StelLabel*> allLabels;
+	int counter;
+	int appendLabel(class StelLabel* l, int autoDeleteTimeoutMs);
 };
 
 #endif // _SKYLABELMGR_HPP_

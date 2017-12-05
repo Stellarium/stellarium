@@ -92,7 +92,6 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, oldViewportOffset(0.0f, 0.0f)
 	, targetViewportOffset(0.0f, 0.0f)
 	, flagIndicationMountMode(false)
-	, messageTimer(Q_NULLPTR)
 {
 	setObjectName("StelMovementMgr");
 }
@@ -104,12 +103,6 @@ StelMovementMgr::~StelMovementMgr()
 		delete viewportOffsetTimeline;
 		viewportOffsetTimeline=Q_NULLPTR;
 	}
-	if (messageTimer)
-	{
-		delete messageTimer;
-		messageTimer=Q_NULLPTR;
-	}
-
 }
 
 void StelMovementMgr::init()
@@ -212,13 +205,6 @@ void StelMovementMgr::init()
 	viewportOffsetTimeline->setFrameRange(0, 100);
 	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
-
-	// A timer for hiding alert messages
-	messageTimer = new QTimer(this);
-	messageTimer->setSingleShot(true);   // recurring check for update
-	messageTimer->setInterval(1000);
-	messageTimer->stop();
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(hideMessages()));
 }
 
 void StelMovementMgr::setEquatorialMount(bool b)
@@ -1584,8 +1570,7 @@ void StelMovementMgr::displayMessage(const QString& message, const QString hexCo
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
 	int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0] - 0.5 * (painter.getFontMetrics().width(message));
 	int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1] - 0.5 * (painter.getFontMetrics().height());
-	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, xPosition, yPosition, true, StelApp::getInstance().getBaseFontSize() + 3, hexColor);
-	messageTimer->start();
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, xPosition, yPosition, true, StelApp::getInstance().getBaseFontSize() + 3, hexColor, false, 1000);
 }
 
 void StelMovementMgr::hideMessages()

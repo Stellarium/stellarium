@@ -37,6 +37,7 @@
 #include <vector>
 #include <QString>
 #include <QDebug>
+#include <QTimer>
 
 // Base class from which other label types inherit
 class StelLabel
@@ -51,21 +52,23 @@ public:
 	//! update fade for on/off action
 	virtual void update(double deltaTime);
 	//! Set the duration used for the fade in / fade out of the label.
-	virtual void setFadeDuration(float duration);
+	void setFadeDuration(float duration);
 	//! Set the font color used for the font
-	virtual void setFontColor(const Vec3f& color);
+	void setFontColor(const Vec3f& color);
 	//! Show or hide the label.  It will fade in/out.
-	virtual void setFlagShow(bool b);
+	void setFlagShow(bool b);
 	//! Get value of flag used to turn on and off the label
-	virtual bool getFlagShow(void);
+	bool getFlagShow(void);
 	//! Get value of flag used to turn on and off the label
-	virtual void setText(const QString& newText);
+	void setText(const QString& newText);
 
-protected:
 	QString labelText;
 	QFont labelFont;
 	Vec3f labelColor;
 	LinearFader labelFader;
+	bool autoDelete;
+	int id;
+	QTimer* timer;
 };
 
 //! @class SkyLabel
@@ -166,7 +169,9 @@ private:
 StelLabel::StelLabel(const QString& text, const QFont& font, const Vec3f& color)
 	: labelText(text),
 	  labelFont(font),
-	  labelColor(color)
+	  labelColor(color),
+	  autoDelete(false),
+	  timer(NULL)
 {
 }
 
@@ -379,7 +384,7 @@ bool ScreenLabel::draw(StelCore*, StelPainter& sPainter)
 ///////////////////////
 // LabelMgr class //
 ///////////////////////
-LabelMgr::LabelMgr()
+LabelMgr::LabelMgr() : counter(0)
 {
 	setObjectName("LabelMgr");
 }
@@ -395,11 +400,42 @@ void LabelMgr::init()
 void LabelMgr::draw(StelCore* core)
 {
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	foreach(StelLabel* l, allLabels) 
-		if (l!=Q_NULLPTR)
-			l->draw(core, sPainter);
+	foreach(StelLabel* l, allLabels)
+	{
+		l->draw(core, sPainter);
+		if (l->autoDelete)
+			deleteLabel(l->id);
+	}
 }
-	
+
+void LabelMgr::messageTimeout()
+{
+	QObject* obj = QObject::sender();
+	foreach(StelLabel* l, allLabels)
+	{
+		if (l->timer == obj)
+			deleteLabel(l->id);
+	}
+}
+
+int LabelMgr::appendLabel(StelLabel* l, int autoDeleteTimeoutMs)
+{
+	if (autoDeleteTimeoutMs > 0)
+	{
+		QTimer* timer = new QTimer(this);
+		timer->setSingleShot(true);
+		timer->setInterval(autoDeleteTimeoutMs);
+		timer->stop();
+		connect(timer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
+		l->timer = timer;
+	}
+
+	counter++;
+	l->id = counter;
+	allLabels[counter] = l;
+	return counter;
+}
+
 int LabelMgr::labelObject(const QString& text,
                           const QString& objectName,
                           bool visible,
@@ -407,7 +443,9 @@ int LabelMgr::labelObject(const QString& text,
                           const QString& fontColor,
                           const QString& side,
                           double labelDistance,
-                          const QString& style)
+						  const QString& style,
+						  bool autoDelete,
+						  int autoDeleteTimeoutMs)
 {
 	QFont font;
 	font.setPixelSize(fontSize);
@@ -425,8 +463,9 @@ int LabelMgr::labelObject(const QString& text,
 	if (visible)
 		l->setFlagShow(true);
 
-	allLabels.append(l);
-	return allLabels.size()-1;
+	l->autoDelete = autoDelete;
+
+	return appendLabel(l, autoDeleteTimeoutMs);
 }
 
 int LabelMgr::labelHorizon(const QString& text,
@@ -434,7 +473,9 @@ int LabelMgr::labelHorizon(const QString& text,
 		float alt,
 		bool visible,
 		float fontSize,
-		const QString& fontColor)
+		const QString& fontColor,
+		bool autoDelete,
+		int autoDeleteTimeoutMs)
 {
 	QFont font;
 	font.setPixelSize(fontSize);
@@ -445,8 +486,9 @@ int LabelMgr::labelHorizon(const QString& text,
 	if (visible)
 		l->setFlagShow(true);
 
-	allLabels.append(l);
-	return allLabels.size()-1;
+	l->autoDelete = autoDelete;
+
+	return appendLabel(l, autoDeleteTimeoutMs);
 }
 
 int LabelMgr::labelScreen(const QString& text,
@@ -454,7 +496,9 @@ int LabelMgr::labelScreen(const QString& text,
                           int y,
                           bool visible,
                           float fontSize,
-                          const QString& fontColor)
+						  const QString& fontColor,
+						  bool autoDelete,
+						  int autoDeleteTimeoutMs)
 {
 	QFont font;
 	font.setPixelSize(fontSize);
@@ -465,50 +509,41 @@ int LabelMgr::labelScreen(const QString& text,
 	if (visible)
 		l->setFlagShow(true);
 
-	allLabels.append(l);
-	return allLabels.size()-1;
+	l->autoDelete = autoDelete;
+
+	return appendLabel(l, autoDeleteTimeoutMs);
 }
 
 bool LabelMgr::getLabelShow(int id)
 {
-	if (allLabels.at(id)!=Q_NULLPTR)
-		return allLabels.at(id)->getFlagShow();
-	else
-		return false;
+	return allLabels[id]->getFlagShow();
 }
 	
 void LabelMgr::setLabelShow(int id, bool show)
 {
-	if (allLabels.at(id)!=Q_NULLPTR)
-		allLabels.at(id)->setFlagShow(show);
+	allLabels[id]->setFlagShow(show);
 }
 
 void LabelMgr::setLabelText(int id, const QString& newText)
 {
-	if (allLabels.at(id)!=Q_NULLPTR)
-		allLabels.at(id)->setText(newText);
+	allLabels[id]->setText(newText);
 }
 	
-bool LabelMgr::deleteLabel(int id)
+void LabelMgr::deleteLabel(int id)
 {
-    if (id<0)
-        return false;
+	if (id<0)
+		return;
 
-    if (allLabels.at(id)!=Q_NULLPTR)
-	{
-		delete allLabels.at(id);
-		allLabels[id] = Q_NULLPTR;
-		return true;
-	}
-	else
-		return false;
+	if (allLabels[id]->timer != NULL)
+		allLabels[id]->timer->deleteLater();
+	delete allLabels[id];
+	allLabels.remove(id);
 }
 	
 void LabelMgr::update(double deltaTime)
 {
 	foreach(StelLabel* l, allLabels) 
-		if (l!=Q_NULLPTR)
-			l->update(deltaTime);
+		l->update(deltaTime);
 }
 	
 double LabelMgr::getCallOrder(StelModuleActionName actionName) const
@@ -521,14 +556,10 @@ double LabelMgr::getCallOrder(StelModuleActionName actionName) const
 int LabelMgr::deleteAllLabels(void)
 {
 	int count=0;
-	foreach(StelLabel* l, allLabels) 
+	foreach(StelLabel* l, allLabels)
 	{
-		if (l!=Q_NULLPTR)
-		{
-			delete l;
-			l=Q_NULLPTR;
-			count++;
-		}
+		delete l;
+		count++;
 	}
 	allLabels.clear();
 	return count;
