@@ -25,11 +25,13 @@ SOFTWARE.
 extern
 void CalcInterpolatedElements(const double t,double elem[],
                               const int dim,
-                              void (*calc_func)(const double t,double elem[]),
+                              void (*calc_func)(const double t,double elem[],
+                                                void *user),
                               const double delta_t,
                               double *t0,double e0[],
                               double *t1,double e1[],
-                              double *t2,double e2[]);
+                              double *t2,double e2[],
+                              void *user);
 
 /*
 Simple interpolation routine with external cache.
@@ -38,8 +40,9 @@ The cache consists of 3 sets of values:
   e1[0..dim-1] are the cached values at time *t1,
   e2[0..dim-1] are the cached values at time *t2
 delta_t is the time step: *t2-*t1 = *t1-*t0 = delta_t,
-(*calc_func)(t,elem) calculates the values elem[0..dim-1] at time t,
-t is the input parameter, elem[0..dim-1] are the output values.
+(*calc_func)(t,elem,user) calculates the values elem[0..dim-1] at time t,
+t is the input parameter, elem[0..dim-1] are the output values, user is the
+user supplied data.
 
 The user must supply *t0,*t1,*t2,e0,e1,e2.
 The initial values must be *t0 = *t1 = *t2 = -1e100,
@@ -50,4 +53,6 @@ the user must never change them.
 The user must always supply the same delta_t
 for one set of (*t0,*t1,*t2,e0,e1,e2),
 and of course the same dim and calc_func.
+
+The user argument is passed to the calc_func callback.
 */

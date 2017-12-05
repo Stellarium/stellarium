@@ -3155,7 +3155,7 @@ static double tass17_elem_2[TASS17_DIM];
 static double tass17_jd0 = -1e100;
 static double tass17_elem[TASS17_DIM];
 
-void CalcAllTass17Elem(const double t,double elem[TASS17_DIM])
+void CalcAllTass17Elem(const double t,double elem[TASS17_DIM], void *user)
 {
 	int body;
 	double lon[8];
@@ -3183,7 +3183,8 @@ void GetTass17OsculatingCoor(const double jd0,const double jd, const int body,do
 					 &CalcAllTass17Elem,DELTA_T,
 					 &t_0,tass17_elem_0,
 					 &t_1,tass17_elem_1,
-					 &t_2,tass17_elem_2);
+					 &t_2,tass17_elem_2,
+					 0);
 		/*
 		printf("GetTass17Coor(%d): %f %f  %f %f  %f %f\n",
 			body,
