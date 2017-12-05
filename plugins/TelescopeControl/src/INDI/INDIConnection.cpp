@@ -4,6 +4,7 @@
 #include <QString>
 #include <chrono>
 #include <thread>
+#include <limits>
 
 #include "indibase/baseclient.h"
 #include "indibase/basedevice.h"
@@ -132,4 +133,16 @@ void INDIConnection::serverConnected()
 
 void INDIConnection::serverDisconnected(int exit_code)
 {
+}
+
+bool INDIConnection::Coordinates::operator==(const INDIConnection::Coordinates &other) const
+{
+    if (std::abs(RA - other.RA) > std::numeric_limits<double>::epsilon()) return false;
+    if (std::abs(DEC - other.DEC) > std::numeric_limits<double>::epsilon()) return false;
+    return true;
+}
+
+bool INDIConnection::Coordinates::operator!=(const INDIConnection::Coordinates &other) const
+{
+    return !(*this == other);
 }

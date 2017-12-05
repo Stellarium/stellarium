@@ -9,10 +9,7 @@ class testTelescopeControl_INDI : public QObject
 {
     Q_OBJECT
 
-public:
-    testTelescopeControl_INDI();
-
-private:
+private slots:
 
 };
 

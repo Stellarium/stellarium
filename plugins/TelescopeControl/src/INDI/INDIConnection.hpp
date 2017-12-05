@@ -26,11 +26,13 @@
 class INDIConnection final : public INDI::BaseClient
 {
 public:
-    typedef struct
+    struct Coordinates
     {
         double RA = 0.0;
         double DEC = 0.0;
-    } Coordinates;
+        bool operator==(const Coordinates &other) const;
+        bool operator!=(const Coordinates &other) const;
+    };
 
     INDIConnection();
     INDIConnection(const INDIConnection& that) = delete;
