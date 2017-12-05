@@ -28,7 +28,6 @@
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
-#include "StelGui.hpp"
 
 #include <QFont>
 
@@ -1003,7 +1002,6 @@ private:
 	bool ephemerisHorizontalCoordinates;
 
 	class TrailGroup* allTrails;
-	StelGui* gui;
 	QSettings* conf;
 	LinearFader trailFader;
 	Vec3f trailColor;

@@ -1163,38 +1163,6 @@ void StelCore::moveObserverToSelected()
 					loc = results.value(results.firstKey()); // ...and use it!
 
 				moveObserverTo(loc);
-
-				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-				Q_ASSERT(landscapeMgr);
-
-				bool landscapeSetsLocation=landscapeMgr->getFlagLandscapeSetsLocation();
-				landscapeMgr->setFlagLandscapeSetsLocation(false);
-				if (landscapeMgr->getFlagLandscapeAutoSelection())
-				{
-					// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-					if (landscapeMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
-						landscapeMgr->setCurrentLandscapeName(loc.planetName);
-					else
-						landscapeMgr->setCurrentLandscapeID("zero");
-				}
-				landscapeMgr->setFlagLandscapeSetsLocation(landscapeSetsLocation);
-
-				if (pl->getEnglishName().contains("Observer", Qt::CaseInsensitive))
-				{
-					landscapeMgr->setFlagAtmosphere(false);
-					landscapeMgr->setFlagFog(false);
-					landscapeMgr->setFlagLandscape(false);
-				}
-				else
-				{
-					if (landscapeMgr->getFlagAtmosphereAutoEnable())
-					{
-						QSettings* conf = StelApp::getInstance().getSettings();
-						landscapeMgr->setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
-						landscapeMgr->setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
-					}
-					landscapeMgr->setFlagLandscape(true);
-				}
 			}
 		}
 		else
@@ -1213,29 +1181,6 @@ void StelCore::moveObserverToSelected()
 
 				moveObserverTo(loc);
 				objmgr->unSelect(); // no use to keep it: Marker will flicker around the screen.
-
-				LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
-				Q_ASSERT(landscapeMgr);
-
-				bool landscapeSetsLocation=landscapeMgr->getFlagLandscapeSetsLocation();
-				landscapeMgr->setFlagLandscapeSetsLocation(false);
-				if (landscapeMgr->getFlagLandscapeAutoSelection())
-				{
-					// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
-					if (landscapeMgr->getAllLandscapeNames().indexOf(loc.planetName)>0)
-						landscapeMgr->setCurrentLandscapeName(loc.planetName);
-					else
-						landscapeMgr->setCurrentLandscapeID("zero");
-
-					if (landscapeMgr->getFlagAtmosphereAutoEnable())
-					{
-						QSettings* conf = StelApp::getInstance().getSettings();
-						landscapeMgr->setFlagAtmosphere(ni->getPlanet()->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
-						landscapeMgr->setFlagFog(ni->getPlanet()->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
-					}
-				}
-				landscapeMgr->setFlagLandscapeSetsLocation(landscapeSetsLocation);
-				landscapeMgr->setFlagLandscape(true);
 			}
 		}
 	}

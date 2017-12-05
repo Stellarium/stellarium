@@ -93,6 +93,7 @@ Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 bool Nebula::flagUseOutlines = false;
+bool Nebula::flagShowAdditionalNames = true;
 bool Nebula::flagUseSizeLimits = false;
 double Nebula::minSizeLimit = 1.0f;
 double Nebula::maxSizeLimit = 600.0f;
@@ -158,7 +159,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		oss << getNameI18n();
 		QString aliases = getI18nAliases();
-		if (!aliases.isEmpty())
+		if (!aliases.isEmpty() && flagShowAdditionalNames)
 			oss << " (" << aliases << ")";
 	}
 
@@ -407,17 +408,49 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 
 QString Nebula::getEnglishAliases() const
 {
-	QString aliases = "";
-	if (englishAliases.size()!=0)
-		aliases = englishAliases.join(" - ");
+	QString aliases = "";	
+	int asize = englishAliases.size();
+	if (asize!=0)
+	{
+		if (asize>3) // Special case for many AKA
+		{
+			for(int i=0; i<asize; i++)
+			{
+				aliases.append(englishAliases.at(i));
+				if (i<asize-1)
+					aliases.append(" - ");
+
+				if (i==1) // 2 AKA-items on first line!
+					aliases.append("<br />");
+			}
+		}
+		else
+			aliases = nameI18Aliases.join(" - ");
+	}
 	return aliases;
 }
 
 QString Nebula::getI18nAliases() const
 {
 	QString aliases = "";
-	if (nameI18Aliases.size()!=0)
-		aliases = nameI18Aliases.join(" - ");
+	int asize = nameI18Aliases.size();
+	if (asize!=0)
+	{
+		if (asize>3) // Special case for many AKA
+		{
+			for(int i=0; i<asize; i++)
+			{
+				aliases.append(nameI18Aliases.at(i));
+				if (i<asize-1)
+					aliases.append(" - ");
+
+				if (i==1) // 2 AKA-items on first line!
+					aliases.append("<br />");
+			}
+		}
+		else
+			aliases = nameI18Aliases.join(" - ");
+	}
 	return aliases;
 }
 

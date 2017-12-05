@@ -368,8 +368,6 @@ private:
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;	
 	QTimer* updateTimer;
-	QTimer* messageTimer;
-	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;	
@@ -393,7 +391,6 @@ private slots:
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
 
 	void reloadCatalog(void);
 };

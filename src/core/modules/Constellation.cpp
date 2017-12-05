@@ -50,6 +50,7 @@ Constellation::Constellation()
 	, beginSeason(0)
 	, endSeason(0)
 	, constellation(Q_NULLPTR)
+	, artOpacity(1.f)
 {
 }
 
@@ -164,7 +165,7 @@ void Constellation::drawArtOptim(StelPainter& sPainter, const SphericalRegion& r
 {
 	if (checkVisibility())
 	{
-		const float intensity = artFader.getInterstate() * artIntensityFovScale;
+		const float intensity = artFader.getInterstate() * artOpacity * artIntensityFovScale;
 		if (artTexture && intensity > 0.0f && region.intersects(boundingCap))
 		{
 			sPainter.setColor(intensity,intensity,intensity);

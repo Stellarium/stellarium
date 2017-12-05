@@ -412,10 +412,12 @@ void LandscapeMgr::init()
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value("color/cardinal_color", defaultColor).toString()));
 
 	StelApp *app = &StelApp::getInstance();
+	currentPlanetName = app->getCore()->getCurrentLocation().planetName;
 	//Bortle scale is managed by SkyDrawer
 	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
 	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
-	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocationBasedPollution(StelLocation)));
+	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
+	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
@@ -660,14 +662,14 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 		if (usage)
 		{
 			StelLocation loc = core->getCurrentLocation();
-			updateLocationBasedPollution(loc);
+			onLocationChanged(loc);
 		}
 
 		emit flagUseLightPollutionFromDatabaseChanged(usage);
 	}
 }
 
-void LandscapeMgr::updateLocationBasedPollution(StelLocation loc)
+void LandscapeMgr::onLocationChanged(StelLocation loc)
 {
 	if(flagLightPollutionFromDatabase)
 	{
@@ -680,6 +682,44 @@ void LandscapeMgr::updateLocationBasedPollution(StelLocation loc)
 			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
 
 		core->getSkyDrawer()->setBortleScaleIndex(bIdx);
+	}
+}
+
+void LandscapeMgr::onTargetLocationChanged(StelLocation loc)
+{
+	if (loc.planetName != currentPlanetName)
+	{
+		currentPlanetName = loc.planetName;
+		if (flagLandscapeAutoSelection)
+		{
+			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+			bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+			setFlagLandscapeSetsLocation(false);
+			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
+				setCurrentLandscapeName(loc.planetName);
+			else
+				setCurrentLandscapeID("zero");
+			setFlagLandscapeSetsLocation(landscapeSetsLocation);
+		}
+
+		if (loc.planetName.contains("Observer", Qt::CaseInsensitive))
+		{
+			setFlagAtmosphere(false);
+			setFlagFog(false);
+			setFlagLandscape(false);
+		}
+		else
+		{
+			SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
+			if (pl && flagAtmosphereAutoEnabling)
+			{
+				QSettings* conf = StelApp::getInstance().getSettings();
+				setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+				setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+			}
+			setFlagLandscape(true);
+		}
 	}
 }
 

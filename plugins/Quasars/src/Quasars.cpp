@@ -86,7 +86,6 @@ Quasars::Quasars()
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
-	, messageTimer(Q_NULLPTR)
 	, updatesEnabled(false)
 	, updateFrequencyDays(0)
 	, enableAtStartup(false)
@@ -182,13 +181,6 @@ void Quasars::init()
 		qWarning() << "[Quasars] init error:" << e.what();
 		return;
 	}
-
-	// A timer for hiding alert messages
-	messageTimer = new QTimer(this);
-	messageTimer->setSingleShot(true);   // recurring check for update
-	messageTimer->setInterval(9000);      // 6 seconds should be enough time
-	messageTimer->stop();
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(catalogJsonPath).exists())
@@ -674,16 +666,7 @@ void Quasars::updateDownloadComplete(QNetworkReply* reply)
 
 void Quasars::displayMessage(const QString& message, const QString hexColor)
 {
-	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
-	messageTimer->start();
-}
-
-void Quasars::messageTimeout(void)
-{
-	foreach(int i, messageIDs)
-	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(i);
-	}
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
 void Quasars::upgradeConfigIni(void)

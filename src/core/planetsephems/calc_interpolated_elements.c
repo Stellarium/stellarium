@@ -28,11 +28,13 @@ For documentation see the header file.
 
 void CalcInterpolatedElements(const double t,double elem[],
                               const int dim,
-                              void (*calc_func)(const double t,double elem[]),
+                              void (*calc_func)(const double t,double elem[],
+                                                void *user),
                               const double delta_t,
                               double *t0,double e0[],
                               double *t1,double e1[],
-                              double *t2,double e2[]) {
+                              double *t2,double e2[],
+                              void *user) {
 /*
 printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
 */
@@ -41,7 +43,7 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
     *t0 = -1e100;
     *t2 = -1e100;
     *t1 = t;
-    (*calc_func)(*t1,e1);
+    (*calc_func)(*t1,e1,user);
     for (i=0;i<dim;i++) elem[i] = e1[i];
     return;
   }
@@ -49,22 +51,22 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
     if (*t1 - delta_t <= t) { /* interpolate */
       if (*t0 < -1e99) {
         *t0 = *t1 - delta_t;
-        (*calc_func)(*t0,e0);
+        (*calc_func)(*t0,e0,user);
       }
     } else if (*t1 - 2.0*delta_t <= t) { /* interpolate */
       if (*t0 < -1e99) {
         *t0 = *t1 - delta_t;
-        (*calc_func)(*t0,e0);
+        (*calc_func)(*t0,e0,user);
       }
       *t2 = *t1;*t1 = *t0;
       for (i=0;i<dim;i++) {e2[i] = e1[i];e1[i] = e0[i];}
       *t0 = *t1 - delta_t;
-      (*calc_func)(*t0,e0);
+      (*calc_func)(*t0,e0,user);
     } else {
       *t0 = -1e100;
       *t2 = -1e100;
       *t1 = t;
-      (*calc_func)(*t1,e1);
+      (*calc_func)(*t1,e1,user);
       for (i=0;i<dim;i++) elem[i] = e1[i];
       return;
     }
@@ -78,22 +80,22 @@ printf("CalcInterpolatedElements: %12.9f %12.9f %12.9f %12.9f\n",t,*t0,*t1,*t2);
     if (*t1 + delta_t >= t) { /* interpolate */
       if (*t2 < -1e99) {
         *t2 = *t1 + delta_t;
-        (*calc_func)(*t2,e2);
+        (*calc_func)(*t2,e2,user);
       }
     } else if (*t1 + 2.0*delta_t >= t) { /* interpolate */
       if (*t2 < -1e99) {
         *t2 = *t1 + delta_t;
-        (*calc_func)(*t2,e2);
+        (*calc_func)(*t2,e2,user);
       }
       *t0 = *t1;*t1 = *t2;
       for (i=0;i<dim;i++) {e0[i] = e1[i];e1[i] = e2[i];}
       *t2 = *t1 + delta_t;
-      (*calc_func)(*t2,e2);
+      (*calc_func)(*t2,e2,user);
     } else {
       *t0 = -1e100;
       *t2 = -1e100;
       *t1 = t;
-      (*calc_func)(*t1,e1);
+      (*calc_func)(*t1,e1,user);
       for (i=0;i<dim;i++) elem[i] = e1[i];
       return;
     }

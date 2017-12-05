@@ -92,7 +92,7 @@ const double phi[5] = {5.702313,
                        1.746237,
                        4.206896};
 
-void CalcGust86Elem(double t,double elem[5*6]) {
+void CalcGust86Elem(double t,double elem[5*6],void *user) {
   double an[5],ae[5],ai[5];
   int i;
   for (i=0;i<5;i++) {
@@ -456,7 +456,8 @@ void GetGust86OsculatingCoor(const double jd0,const double jd,
                              &CalcGust86Elem,DELTA_T,
                              &t_0,gust86_elem_0,
                              &t_1,gust86_elem_1,
-                             &t_2,gust86_elem_2);
+                             &t_2,gust86_elem_2,
+                             0);
 /*
     printf("GetGust86Coor(%d): %f %f  %f %f  %f %f\n",
            body,
