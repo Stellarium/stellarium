@@ -22,6 +22,7 @@ INDIConnection::Coordinates INDIConnection::position() const
 void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 {
     std::lock_guard<std::mutex> lock(mMutex);
+    if (!mTelescope) return;
     if (!mTelescope->isConnected())
     {
         IDLog("Error: Telescope not connected");

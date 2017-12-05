@@ -9,6 +9,8 @@ class testINDIConnection : public QObject
 
 private slots:
     void defaultPosition();
+    void initialConnectionStatus();
+    void setPositionNotConnected();
 };
 
 #endif // TESTINDICONNECTION_HPP
