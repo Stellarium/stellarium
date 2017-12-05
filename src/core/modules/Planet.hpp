@@ -531,7 +531,7 @@ protected:
 
 	QString objModelPath;
 
-	HipsSurveyP survey = NULL;
+	HipsSurveyP survey;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
