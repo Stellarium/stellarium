@@ -144,7 +144,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			if (!commonNameI18.isEmpty())
 				oss << commonNameI18;
 
-			if (!additionalNameI18.isEmpty())
+			if (!additionalNameI18.isEmpty() && StarMgr::getFlagAdditionalNames())
 				oss << " (" << additionalNameI18 << ")";
 
 			if (!commonNameI18.isEmpty() && !designationsList.isEmpty() && flags&CatalogNumber)

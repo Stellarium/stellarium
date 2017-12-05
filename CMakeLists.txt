@@ -1,6 +1,8 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
+enable_testing()
+
 IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0))
      CMAKE_POLICY(SET CMP0050 OLD)
      # silently ignore errors in add_dependency():
@@ -730,7 +732,7 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_GENERATOR "TGZ")
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
-     SET(CPACK_SOURCE_IGNORE_FILES "/CVS/" "/.svn/" "/.git/" "/.bzr/" "builds/" "installers/" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
+     SET(CPACK_SOURCE_IGNORE_FILES "/.tx/" "/CVS/" "/.svn/" "/.git/" "/.bzr/" "builds/" "installers/" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
      SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
      SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
      SET(CPACK_RPM_PACKAGE_URL "http://stellarium.org/")

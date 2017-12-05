@@ -421,7 +421,7 @@ static double marssat_elem_2[2*6];
 static double marssat_jd0 = -1e100;
 static double marssat_elem[2*6];
 
-static void CalcAllMarsSatElem(double t,double elem[12]) {
+static void CalcAllMarsSatElem(double t,double elem[12], void *user) {
   CalcMarsSatElem(t,0,elem+(0*6));
   CalcMarsSatElem(t,1,elem+(1*6));
 }
@@ -445,7 +445,8 @@ void GetMarsSatOsculatingCoor(const double jd0,const double jd,
                              &CalcAllMarsSatElem,DELTA_T,
                              &t_0,marssat_elem_0,
                              &t_1,marssat_elem_1,
-                             &t_2,marssat_elem_2);
+                             &t_2,marssat_elem_2,
+                             NULL);
     GenerateMarsSatToVSOP87(t0,mars_sat_to_vsop87);
   }
   EllipticToRectangularA(mars_sat_bodies[body].mu,marssat_elem+(body*6),jd-jd0,x);

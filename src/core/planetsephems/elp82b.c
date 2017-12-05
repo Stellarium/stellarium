@@ -162675,7 +162675,7 @@ static const double a0_div_ath_times_au =
   384747.9806448954 / (384747.9806743165 * 149597870.691);
 
 static
-void GetElp82bSphericalCoor(const double t,double r[3]) {
+void GetElp82bSphericalCoor(const double t,double r[3], void *user) {
   int i,k;
   double lambda[17];
   double cos_sin_lambda[303*4];
@@ -162735,7 +162735,7 @@ void GetElp82bCoor(const double jd,double xyz[3]) {
   const double t = (jd - 2451545.0) / 36525.0;
   double r[3];
   CalcInterpolatedElements(t,r,3,&GetElp82bSphericalCoor,DELTA_T,
-                           &t_0,r_0,&t_1,r_1,&t_2,r_2);
+                           &t_0,r_0,&t_1,r_1,&t_2,r_2,0);
   {
     const double rh = r[2] * cos(r[1]);
     const double x3 = r[2] * sin(r[1]);

@@ -28,7 +28,7 @@ using namespace std;
 #define EPSILON 1e-10
 //#define EPSILON 1e-4
 // line from vsop87.c, but also used by Heafner, 5.3.12. This is mu, we ignore the comet's mass i.r.t. the Sun's.
-#define GAUSS_GRAV_CONST (0.01720209895*0.01720209895)
+#define GAUSS_GRAV_CONST_SQ (0.01720209895*0.01720209895)
 
 #if defined(_MSC_VER)
 // cuberoot is missing in VC++ !?
@@ -198,7 +198,7 @@ void Init3D(const double i, const double Omega, const double w, const double rCo
 		const double sinNu=rSinNu/r;
 		const double cosNu=rCosNu/r;
 		const double p=q*(1.0+e);
-		const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST/p);
+		const double sqrtMuP=std::sqrt(GAUSS_GRAV_CONST_SQ/p);
 		rdotx=sqrtMuP*((e+cosNu)*Qx - sinNu*Px); // Heafner, 5.3.19 r'
 		rdoty=sqrtMuP*((e+cosNu)*Qy - sinNu*Py);
 		rdotz=sqrtMuP*((e+cosNu)*Qz - sinNu*Pz);

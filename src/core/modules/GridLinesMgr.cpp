@@ -168,10 +168,6 @@ void SkyGrid::setFontSize(double newFontSize)
 	font.setPixelSize(newFontSize);
 }
 
-// Conversion into mas = milli arcsecond
-static const double RADIAN_MAS = 180./M_PI*1000.*60.*60.;
-static const double DEGREE_MAS = 1000.*60.*60.;
-
 // Step sizes in arcsec
 static const double STEP_SIZES_DMS[] = {0.05, 0.2, 1., 5., 10., 60., 300., 600., 1200., 3600., 3600.*5., 3600.*10.};
 static const double STEP_SIZES_HMS[] = {0.05, 0.2, 1.5, 7.5, 15., 15.*5., 15.*10., 15.*60., 15.*60.*5., 15.*60*10., 15.*60*60};
