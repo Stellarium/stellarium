@@ -505,8 +505,9 @@ private slots:
 	//! This should not be called from script code, use StelMainScriptAPI::setBortleScaleIndex if you want to change the light pollution.
 	void setAtmosphereBortleLightPollution(const int bIndex);
 
-	//! Reacts to StelCore::locationChanged, and changes the light pollution if the flagLightPollutionFromDatabase is true
-	void updateLocationBasedPollution(StelLocation loc);
+	//! Reacts to StelCore::locationChanged.
+	void onLocationChanged(StelLocation loc);
+	void onTargetLocationChanged(StelLocation loc);
 
 	//! Translate labels to new language settings.
 	void updateI18n();	
@@ -568,6 +569,9 @@ private:
 	//! at system start (e.g. in the startup.ssc script) and then retrieved while script is running.
 	//! The key is just the LandscapeID.
 	QCache<QString,Landscape> landscapeCache;
+
+	//! Core current planet name, used to react to planet change.
+	QString currentPlanetName;
 };
 
 #endif // _LANDSCAPEMGR_HPP_

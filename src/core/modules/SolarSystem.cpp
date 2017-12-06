@@ -89,7 +89,6 @@ SolarSystem::SolarSystem()
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
 	setObjectName("SolarSystem");
-	gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 }
 
 void SolarSystem::setFontSize(float newFontSize)

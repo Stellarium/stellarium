@@ -59,6 +59,7 @@ before_script:
 script:
   - "cmake ../."
   - "make -j 2"
+  - "ctest"
   - "sudo make install -j 2"
 
 sudo: required
@@ -80,6 +81,6 @@ notifications:
     channels:
       - "irc.freenode.net#stellarium"
     template:
-      - "Stellarium/trunk #%{build_number} (%{author}): %{message}"
+      - "Stellarium/master #%{build_number} (%{author}): %{message}"
       - "Change view : %{compare_url}"
       - "Build details : %{build_url}"

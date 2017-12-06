@@ -52,7 +52,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.2";
+static const QString StellariumDSOCatalogVersion = "3.3";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -134,6 +134,8 @@ void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsag
 bool NebulaMgr::getDesignationUsage(void) const {return Nebula::designationUsage; }
 void NebulaMgr::setFlagOutlines(const bool flag) {if(Nebula::flagUseOutlines!=flag){ Nebula::flagUseOutlines=flag; emit flagOutlinesDisplayedChanged(flag);}}
 bool NebulaMgr::getFlagOutlines(void) const {return Nebula::flagUseOutlines;}
+void NebulaMgr::setFlagAdditionalNames(const bool flag) {if(Nebula::flagShowAdditionalNames!=flag){ Nebula::flagShowAdditionalNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
+bool NebulaMgr::getFlagAdditionalNames(void) const {return Nebula::flagShowAdditionalNames;}
 
 NebulaMgr::NebulaMgr(void)
 	: nebGrid(200)
@@ -189,8 +191,9 @@ void NebulaMgr::init()
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
-	setFlagOutlines(conf->value("gui/flag_dso_outlines_usage", false).toBool());
-	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
+	setFlagOutlines(conf->value("astro/flag_dso_outlines_usage", false).toBool());
+	setFlagAdditionalNames(conf->value("astro/flag_dso_additional_names",true).toBool());
+	setDesignationUsage(conf->value("astro/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
 	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", false).toBool());
@@ -1941,13 +1944,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 			return qSharedPointerCast<StelObject>(n);
 	}
 
-	// Search by aliases of common names
-	foreach (const NebulaP& n, dsoArray)
+	if (getFlagAdditionalNames())
 	{
-		foreach(QString objwcapa, n->englishAliases)
+		// Search by aliases of common names
+		foreach (const NebulaP& n, dsoArray)
 		{
-			if (objwcapa.toUpper()==objw)
-				return qSharedPointerCast<StelObject>(n);
+			foreach(QString objwcapa, n->englishAliases)
+			{
+				if (objwcapa.toUpper()==objw)
+					return qSharedPointerCast<StelObject>(n);
+			}
 		}
 	}
 
@@ -2595,14 +2601,17 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
-	// Search by aliases of common names
-	foreach (const NebulaP& n, dsoArray)
+	if (getFlagAdditionalNames())
 	{
-		QStringList nameList = inEnglish ? n->englishAliases : n->nameI18Aliases;
-		foreach(QString name, nameList)
+		// Search by aliases of common names
+		foreach (const NebulaP& n, dsoArray)
 		{
-			if (matchObjectName(name, objPrefix, useStartOfWords))
-				result.append(name);
+			QStringList nameList = inEnglish ? n->englishAliases : n->nameI18Aliases;
+			foreach(QString name, nameList)
+			{
+				if (matchObjectName(name, objPrefix, useStartOfWords))
+					result.append(name);
+			}
 		}
 	}
 

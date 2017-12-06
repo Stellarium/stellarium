@@ -283,8 +283,6 @@ void StelVideoMgr::playVideoPopout(const QString& id, float fromX, float fromY, 
 
 			// (4) configure fader
 			videoObjects[id]->fader.setDuration(1000.0f*popupDuration);
-			videoObjects[id]->fader.setMinValue(0.0f);
-			videoObjects[id]->fader.setMaxValue(1.0f);
 
 			// (5) TRIGGER!
 			videoObjects[id]->simplePlay=false;

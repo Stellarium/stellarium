@@ -334,6 +334,7 @@ private:
 	static bool flagUseArcsecSurfaceBrightness;
 	static bool flagUseShortNotationSurfaceBrightness;
 	static bool flagUseOutlines;
+	static bool flagShowAdditionalNames;
 
 	static bool flagUseSizeLimits;
 	static double minSizeLimit;

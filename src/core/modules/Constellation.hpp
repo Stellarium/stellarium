@@ -177,6 +177,8 @@ private:
 
 	//! Define whether art, lines, names and boundary must be drawn
 	LinearFader artFader, lineFader, nameFader, boundaryFader;
+	//! Constellation art opacity
+	float artOpacity;
 	std::vector<std::vector<Vec3f> *> isolatedBoundarySegments;
 	std::vector<std::vector<Vec3f> *> sharedBoundarySegments;
 

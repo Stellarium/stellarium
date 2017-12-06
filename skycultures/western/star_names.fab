@@ -73,6 +73,7 @@
  23453|_("Saclateni") 12
  23453|_("Haedus I") 2,5,11
  23453|_("Haedus")
+ 23453|_("Sadatoni") 18
  23416|_("Almaaz") 2,3,5,11,12
  23416|_("Al Ma'az")
  23416|_("Alanz")
@@ -91,6 +92,7 @@
  32844|_("Dolones VII") 11
  33133|_("Dolones VIII") 11
  33377|_("Dolones IX") 11
+ 26712|_("Andrews' star") 18
 # Bootes (Boo)
  69673|_("Arcturus") 1,2,6,11,12
  73555|_("Nekkar") 1,2,6,11,12
@@ -99,6 +101,7 @@
  71075|_("Ceginus")
  72105|_("Izar") 1,2,6,11,12
  72105|_("Pulcherrima")
+ 72105|_("Mirak") 18
  67927|_("Muphrid") 1,2,11,12
  75411|_("Alkalurops") 1,2,6,11,12,13
  75411|_("Inkalunis")
@@ -121,6 +124,7 @@
  42806|_("Asellus Borealis") 1,5,11,12
  42911|_("Asellus Australis") 1,5,11,12
  40167|_("Tegmine") 1,2,11,12
+ 40167|_("Tegmeni") 18
  40526|_("Al Tarf") 2,3,5,10,11
  40526|_("Altarf")
  43587|_("Copernicus") 4,6,12
@@ -138,6 +142,8 @@
  32349|_("Canicula")
  32349|_("Aschere")
  30324|_("Mirzam") 1,2,6,11,12
+ 30324|_("Murzim") 18
+ 30324|_("Murzam") 18
  34045|_("Muliphein") 1,2,5,6,11,12,13
  34045|_("Mirza")
  34045|_("Isis")
@@ -255,8 +261,10 @@
   4371|_("Alnitham III") 11
   4587|_("Alnitham IV") 11
 # Columba (Col)
- 26634|_("Phact") 1,2,6,11,12
+ 26634|_("Phact") 1,2,6,11,12,18
+ 26634|_("Phaet") 18
  27628|_("Wazn") 1,2,6,11,12
+ 27628|_("Wezn") 18
  29034|_("Kurud I") 11
  29807|_("Kurud II") 11
 # Coma Berenices (Com)
@@ -268,14 +276,14 @@
  94114|_("Meridiana") 12
  94114|_("Alfecca Meridiana") 2,5,10,11
 # Corona Borealis (CrB)
- 76267|_("Alphecca") 1,2,5,6,10,11,12,13
- 76267|_("Gemma")
+ 76267|_("Alphecca") 1,2,5,6,10,11,12,13,18
+ 76267|_("Gemma") 18
  76267|_("Alphekka")
  76267|_("Gnosia")
  76267|_("Ashtaroth")
- 75695|_("Nusakan") 1,2,11,12
+ 75695|_("Nusakan") 1,2,11,12,18
  77442|_("Variabilis Coronae") 11
- 78322|_("Blaze Star") 11
+ 78322|_("Blaze Star") 11,18
 # Corvus (Crv)
  59199|_("Alchiba") 1,2,11,12
  59199|_("Al Chiba") 1,2
@@ -296,7 +304,7 @@
  61084|_("Gacrux") 1,6,11,12
 # Cygnus (Cyg)
 102098|_("Deneb") 1,2,6,11,12,13
-102098|_("Arided")
+102098|_("Arided") 18
 102098|_("Aridif")
 102098|_("Arrioph")
  95947|_("Albireo") 1,2,6,11,12
@@ -313,13 +321,14 @@
  96295|_("Campbell's Star") 3
  96295|_("Campbell’s Hydrogen Star")
 100044|_("Revenant of the Swan") 11
+100044|_("Permanent nova") 18
  97165|_("Fawaris II") 11
 104732|_("Fawaris III") 11
  94779|_("Fawaris I") 11
 # Delphinus (Del)
-101958|_("Sualocin") 1,2,11,12
+101958|_("Sualocin") 1,2,11,12,18
 101958|_("Svalocin")
-101769|_("Rotanev") 1,2,11,12,13
+101769|_("Rotanev") 1,2,11,12,13,18
 101769|_("Venator")
 103527|_("Musica") 4,6,12
 101421|_("Aldulfin") 12
@@ -327,17 +336,18 @@
 102532|_("Al Salib") 11
 102281|_("Al Ukud") 11
 # Draco (Dra)
- 68756|_("Thuban") 1,2,5,6,11,12
+ 68756|_("Thuban") 1,2,5,6,11,12,18
  68756|_("Adib")
  68756|_("Al Tinnin")
- 85670|_("Rastaban") 1,2,6,11,12
+ 85670|_("Rastaban") 1,2,6,11,12,18
  85670|_("Alwaid")
- 87833|_("Eltanin") 1,2,3,5,6,11,12
+ 87833|_("Eltanin") 1,2,3,5,6,11,12,18
  87833|_("Etamin")
  87833|_("Taurt")
  94376|_("Altais") 1,2,6,11,12
  94376|_("Al Tais")
  75458|_("Edasich") 1,2,6,11,12
+ 75458|_("Ed Asich") 18
  56211|_("Giausar") 1,2,11,12
  56211|_("Giansar")
  56211|_("Nodus Secundus")
@@ -374,13 +384,13 @@
 # Equuleus (Equ)
 104987|_("Kitalpha") 1,2,6,11,12
 # Eridanus (Eri)
-  7588|_("Achernar") 1,2,6,11,12
- 23875|_("Cursa") 1,2,6,11,12,13
+  7588|_("Achernar") 1,2,6,11,12,18
+ 23875|_("Cursa") 1,2,6,11,12,13,18
  23875|_("Dhalim")
- 18543|_("Zaurak") 1,2,6,11,12
+ 18543|_("Zaurak") 1,2,6,11,12,18
  15197|_("Zibal") 1,11,12
  13701|_("Azha") 1,2,11,12
- 13847|_("Acamar") 1,2,6,11,12
+ 13847|_("Acamar") 1,2,6,11,12,18
  13847|_("Dalim")
  19587|_("Beid") 1,2,11,12
  19849|_("Keid") 1,2,11,12
@@ -478,13 +488,17 @@
  57632|_("Denebola") 1,2,6,11,12,13
  57632|_("Deneb Aleet")
  50583|_("Algieba") 1,2,6,11,12
+ 50583|_("Al Geiba") 18
  54872|_("Zosma") 1,2,6,11,12,13
  54872|_("Duhr")
  54872|_("Zubra")
+ 54872|_("Zozma") 18
  50335|_("Adhafera") 1,2,6,11,12
- 54879|_("Chertan") 1,2,6,11,12
+ 50335|_("Aldhafera") 18
+ 54879|_("Chertan") 1,2,6,11,12,18
  54879|_("Al Haratan")
- 54879|_("Coxa")
+ 54879|_("Coxa") 18
+ 54879|_("Chort") 18
  46750|_("Alterf") 1,2,11,12
  48455|_("Rasalas") 1,2,11,12,13
  48455|_("Alshemali")
@@ -492,6 +506,7 @@
  47508|_("Subra") 1,11,12
  47908|_("Algenubi") 2,11,13
  47908|_("Ras Elased Australis")
+ 47908|_("Ras Elased") 18
  46146|_("Al Minlear al Asad") 5,11
  46146|_("Minkarasad")
  54951|_("Zubrah") 11
@@ -499,17 +514,20 @@
 # Leo Minor (LMi)
  53229|_("Praecipua") 5,10,12
 # Lepus (Lep)
- 25985|_("Arneb") 1,2,6,11,12
- 25606|_("Nihal") 1,2,6,11,12
- 23203|_("Hind's Crimson Star") 2,5,11
+ 25985|_("Arneb") 1,2,6,11,12,18
+ 25985|_("Arsh") 18
+ 25606|_("Nihal") 1,2,6,11,12,18
+ 23203|_("Hind's Crimson Star") 2,5,11,18
  27072|_("Kursi al Jabbar") 11
  27654|_("Arsh al Jauzah") 11
 # Libra (Lib)
  72603|_("Zubenelgenubi I") 1,2,6,11
  72603|_("Zubenelgenubi")
+ 72603|_("Zuben El Genubi") 18
  72622|_("Zubenelgenubi II") 1,2,6,11,12
  72622|_("Zubenelgenubi")
  74785|_("Zubeneschamali") 1,2,6,11,12
+ 74785|_("Zuben Eschamali") 18
  73714|_("Brachium") 3,11,12,13
  73714|_("Zuben Acrabi")
  73714|_("Cornu")
@@ -524,9 +542,10 @@
  41075|_("Shaukah")
  33485|_("Dolones X") 11
 # Lyra (Lyr)
- 91262|_("Vega") 1,2,6,11,12,13
+ 91262|_("Vega") 1,2,6,11,12,13,18 
  91262|_("Fidis")
- 92420|_("Sheliak") 1,2,6,11,12
+ 91262|_("Wega") 18
+ 92420|_("Sheliak") 1,2,6,11,12,18
  93194|_("Sulafat") 1,2,6,11,12
  93194|_("Jugum")
  94481|_("Aladfar") 2,5,11,12
@@ -538,7 +557,7 @@
  91971|_("Nasr Alwaki I") 11
  91973|_("Nasr Alwaki II") 11
 # Monoceros (Mon)
- 31646|_("Plaskett's Star") 3,5
+ 31646|_("Plaskett's Star") 3,5,18
  30089|_("Red Rectangle") 3
 # Octanus (Oct)
 104382|_("Polaris Australis") 5,12
@@ -556,15 +575,16 @@
  84970|_("Garafsa") 11
  84893|_("Aggia") 11
 # Orion (Ori)
- 27989|_("Betelgeuse") 1,2,6,11,12,13
+ 27989|_("Betelgeuse") 1,2,6,11,12,13,18
  27989|_("Al Mankib")
- 24436|_("Rigel") 1,2,6,11,12,13
+ 27989|_("Betelgeux") 18
+ 24436|_("Rigel") 1,2,6,11,12,13,18
  24436|_("Algebar")
- 25336|_("Bellatrix") 1,2,6,11,12
- 25930|_("Mintaka") 1,2,6,11,12
- 26311|_("Alnilam") 1,2,6,11,12
- 26727|_("Alnitak") 1,2,6,11,12
- 27366|_("Saiph") 1,2,6,11,12
+ 25336|_("Bellatrix") 1,2,6,11,12,18
+ 25930|_("Mintaka") 1,2,6,11,12,18
+ 26311|_("Alnilam") 1,2,6,11,12,18
+ 26727|_("Alnitak") 1,2,6,11,12,18
+ 27366|_("Saiph") 1,2,6,11,12,18
  26207|_("Meissa") 1,2,6,11,12
  26207|_("Heka")
  26241|_("Hatysa") 1,3,11,12
@@ -587,16 +607,17 @@
 # Pavo (Pav)
 100751|_("Peacock") 1,6,11,12
 # Pegasus (Peg)
-113963|_("Markab") 1,2,6,11,12
+113963|_("Markab") 1,2,6,11,12,18
 113963|_("Yed Alpheras")
-113881|_("Scheat") 1,2,6,11,12,13
+113963|_("Marchab") 18
+113881|_("Scheat") 1,2,6,11,12,13,18
 113881|_("Seat Alpheras")
-  1067|_("Algenib") 1,2,6,11,12
-107315|_("Enif") 1,2,6,11,12,13
+  1067|_("Algenib") 1,2,6,11,12,18
+107315|_("Enif") 1,2,6,11,12,13,18
 107315|_("Os Pegasi")
 107315|_("Fom")
-112029|_("Homam") 1,2,3,5,6,10,11,12
-112158|_("Matar") 1,2,6,11,12
+112029|_("Homam") 1,2,3,5,6,10,11,12,18
+112158|_("Matar") 1,2,6,11,12,18
 109427|_("Biham") 1,2,6,11,12
 112748|_("Sadalbari") 1,2,6,11,12
 112748|_("Sa'd al Bari'")
@@ -610,9 +631,11 @@
 112051|_("Sadalmatar") 11
 115623|_("Alkarab") 12
 # Perseus (Per)
- 15863|_("Mirfak") 1,2,6,11,12
- 15863|_("Algenib")
- 14576|_("Algol") 1,2,6,11,12,13
+ 15863|_("Mirfak") 1,2,6,11,12,18 
+ 15863|_("Algenib") 18
+ 15863|_("Marfak") 18
+ 15863|_("Alchemb") 18
+ 14576|_("Algol") 1,2,6,11,12,13,18
  14576|_("Gorgonea Prima")
  14576|_("Gorgona")
  18614|_("Menkib") 1,2,11,12
@@ -651,7 +674,7 @@
   5737|_("Kuton II") 11
   5743|_("Kuton III") 11
 # Piscis Austrinus (PsA)
-113368|_("Fomalhaut") 1,2,6,11,12,13
+113368|_("Fomalhaut") 1,2,6,11,12,13,18
 113368|_("Thalim")
 113368|_("Os Piscis Meridiani")
 113368|_("Os Piscis Notii")
@@ -674,13 +697,15 @@
  88635|_("Nushaba")
  88635|_("Al Nasl")
  88635|_("Nash")
+ 88635|_("El Nasl") 18
  89931|_("Kaus Media") 1,2,5,6,11,12
- 89931|_("Kaus Meridionalis")
- 90185|_("Kaus Australis") 1,2,5,6,11,12
- 93506|_("Ascella") 1,2,11,12
- 90496|_("Kaus Borealis") 1,2,5,6,11,12
+ 89931|_("Kaus Meridionalis") 18
+ 89931|_("Media") 18
+ 90185|_("Kaus Australis") 1,2,5,6,11,12,18
+ 93506|_("Ascella") 1,2,11,12,18
+ 90496|_("Kaus Borealis") 1,2,5,6,11,12,18
  90496|_("Al Thalimain") 2
- 92855|_("Nunki") 1,2,6,11,12,13
+ 92855|_("Nunki") 1,2,6,11,12,13,18
  92855|_("Sadira")
  89341|_("Polis") 2,5,11,12
  89341|_("Al Thalimain")
@@ -693,6 +718,7 @@
  98353|_("Terebellum III") 10,11
  98688|_("Terebellum IV") 10,11
  89642|_("Hamalwarid") 11
+ 89642|_("Arkab") 18
  92761|_("Ainalrami") 12
  92761|_("Ain al Rami I") 11
  92845|_("Ain al Rami II") 11
@@ -702,23 +728,25 @@
  95503|_("Namalsadirah IV") 11
  94643|_("Al Kiladah") 11
 # Scorpius (Sco)
- 80763|_("Antares") 1,2,6,11,12,13
+ 80763|_("Antares") 1,2,6,11,12,13,18
  80763|_("Cor Scorpii")
  80763|_("Vespertilio")
  80763|_("Kalb al Akrab")
  78820|_("Acrab") 1,2,5,6,10,11,12
- 78820|_("Graffias")
- 78401|_("Dschubba") 1,2,6,11,12,13
+ 78820|_("Graffias") 18
+ 78820|_("Akrab") 18
+ 78401|_("Dschubba") 1,2,6,11,12,13,18
  78401|_("Iclarkrau")
- 86228|_("Sargas") 1,6,11,12
+ 86228|_("Sargas") 1,6,11,12,18
  86228|_("Girtab")
- 85927|_("Shaula") 1,2,6,11,12
+ 85927|_("Shaula") 1,2,6,11,12,18
  80112|_("Alniyat") 1,2,5,10,11,12
  80112|_("Alniyat I")
- 80112|_("Al Niyat")
+ 80112|_("Al Niyat") 18
  81266|_("Alniyat II") 2,5,10,11
  81266|_("Al Niyat")
- 85696|_("Lesath") 1,2,6,11,12
+ 85696|_("Lesath") 1,2,6,11,12,18
+ 85696|_("Lesuth") 18
  79374|_("Jabbah") 2,11,12
  78727|_("Grafias") 10,11
  78727|_("Grassias")
@@ -737,9 +765,10 @@
  78990|_("Jabhat Acrabi II") 11
  87261|_("Fuyue") 12
 # Serpens (Ser)
- 77070|_("Unukalhai") 1,2,6,11,12,13
- 77070|_("Cor Serpentis")
- 92946|_("Alya") 1,2,6,11,12
+ 77070|_("Unukalhai") 1,2,6,11,12,13,18
+ 77070|_("Cor Serpentis") 18
+ 77070|_("Unuk Al Hay") 18
+ 92946|_("Alya") 1,2,6,11,12,18
  77233|_("Nasak Shamiya I") 11
  78072|_("Nasak Shamiya II") 11
  76276|_("Nasak Yamani I") 11
@@ -779,31 +808,34 @@
  26451|_("Tianguan") 12
 # Triangulum (Tri)
   8796|_("Mothallah") 1,6,11,12
-  8796|_("Caput Trianguli")
+  8796|_("Caput Trianguli") 18
  10064|_("Mizan") 11
 # Triangulum Australe (TrA)
- 82273|_("Atria") 1,6,11,12
+ 82273|_("Atria") 1,6,11,12,18
 # Ursa Major (UMa)
- 54061|_("Dubhe") 1,2,6,11,12,13
- 54061|_("Dubb")
+ 54061|_("Dubhe") 1,2,6,11,12,13,18
+ 54061|_("Dubb") 18 
  54061|_("Ak")
- 53910|_("Merak") 1,2,6,11,12
- 58001|_("Phecda") 1,2,6,11,12
- 58001|_("Phad")
- 59774|_("Megrez") 1,2,6,11,12
+ 54061|_("Dubh") 18
+ 53910|_("Merak") 1,2,6,11,12,18
+ 53910|_("Mirak") 18
+ 58001|_("Phecda") 1,2,6,11,12,18
+ 58001|_("Phad") 18
+ 59774|_("Megrez") 1,2,6,11,12,18
  59774|_("Kaffa")
- 62956|_("Alioth") 1,2,6,11,12
- 65378|_("Mizar") 1,2,6,11,12
- 67301|_("Alkaid") 1,2,6,11,12
- 67301|_("Benetnasch")
- 44127|_("Talitha") 1,2,6,11,12
- 50372|_("Tania Borealis") 1,2,6,11,12
- 50801|_("Tania Australis") 1,2,6,11,12
+ 62956|_("Alioth") 1,2,6,11,12,18
+ 65378|_("Mizar") 1,2,6,11,12,18
+ 67301|_("Alkaid") 1,2,6,11,12,18
+ 67301|_("Benetnasch") 18
+ 44127|_("Talitha") 1,2,6,11,12,18
+ 44127|_("Talita") 18
+ 50372|_("Tania Borealis") 1,2,6,11,12,18
+ 50801|_("Tania Australis") 1,2,6,11,12,18
  55219|_("Alula Borealis") 1,2,6,11,12
- 55203|_("Alula Australis") 1,2,6,11,12
- 41704|_("Muscida") 1,2,6,11,12
- 65477|_("Alcor") 1,2,6,11,12
- 57939|_("Groombridge 1830") 2,11
+ 55203|_("Alula Australis") 1,2,6,11,12,18
+ 41704|_("Muscida") 1,2,6,11,12,18
+ 65477|_("Alcor") 1,2,6,11,12,18
+ 57939|_("Groombridge 1830") 2,11,18
  57939|_("Flying Star")
  57939|_("Runaway Star")
  46471|_("Intercrus") 4,6,12
@@ -819,6 +851,7 @@
  46853|_("Alhaud V") 11
  44471|_("Alkaphrah") 12
  44471|_("Kafzatania") 11
+ 44471|_("Al Kaprah") 18
  42438|_("Althiba II") 11
  42527|_("Althiba III") 11
  44390|_("Althiba IV") 11
@@ -827,15 +860,16 @@
  45075|_("Alhaud II") 11
  48319|_("Alhaud VI") 11
  48402|_("Alhaud VII") 11
+ 54035|_("Lalande 21185") 18
 # Ursa Minor (UMi)
- 11767|_("Polaris") 1,2,6,11,12,13
+ 11767|_("Polaris") 1,2,6,11,12,13,18
  11767|_("Alrucaba")
- 11767|_("Cinosura")
+ 11767|_("Cinosura") 18
  11767|_("Tramontana")
  11767|_("Yilduz")
  11767|_("Mismar")
- 72607|_("Kochab") 1,2,6,11,12
- 75097|_("Pherkad") 1,2,6,11,12
+ 72607|_("Kochab") 1,2,6,11,12,18
+ 75097|_("Pherkad") 1,2,6,11,12,18
  75097|_("Pherkad Major")
  74793|_("Pherkad Minor") 2,10,11
  85822|_("Yildun") 1,2,6,11,12,13
@@ -846,18 +880,20 @@
 # Vela (Vel)
  39953|_("Regor") 1,11,13
  39953|_("Suhail al Muhlif")
+ 39953|_("Suhail") 18
  45941|_("Markeb") 1,11,12
- 44816|_("Suhail") 1,6,11,12,13
+ 45941|_("Markab") 18
+ 44816|_("Suhail") 1,6,11,12,13,18
  44816|_("Al Suhail al Wazn")
  42913|_("Alsephina") 12
 # Virgo (Vir)
- 65474|_("Spica") 1,2,6,11,12
+ 65474|_("Spica") 1,2,6,11,12,18
  65474|_("Azimech")
  57757|_("Zavijava") 1,2,6,11,12,13
  57757|_("Minelauva")
- 61941|_("Porrima") 1,2,6,11,12
+ 61941|_("Porrima") 1,2,6,11,12,18
  61941|_("Antevorta")
- 63608|_("Vindemiatrix") 1,2,6,11,12
+ 63608|_("Vindemiatrix") 1,2,6,11,12,18
  63608|_("Almuredin")
  60129|_("Zaniah") 1,2,11,12
  69701|_("Syrma") 1,2,11,12

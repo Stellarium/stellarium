@@ -137263,7 +137263,7 @@ void AccumulateVsop87Terms(const unsigned char *instructions,
 }
 
 static
-void CalcVsop87Elem(const double t,double elem[8*6]) {
+void CalcVsop87Elem(const double t,double elem[8*6], void *user) {
   unsigned int i;
   double lambda[12];
   double cos_sin_lambda[203*4];
@@ -137347,7 +137347,8 @@ void GetVsop87OsculatingCoor(const double jd0,const double jd,const int body,dou
 							 &CalcVsop87Elem,DELTA_T,
 							 &t_0,vsop87_elem_0,
 							 &t_1,vsop87_elem_1,
-							 &t_2,vsop87_elem_2);
+							 &t_2,vsop87_elem_2,
+							 0);
   }
   EllipticToRectangularA(vsop87_mu[body],vsop87_elem+(body*6),jd-jd0,xyz);
 }

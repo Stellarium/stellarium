@@ -70,7 +70,10 @@ for(my $i=0; $i<scalar(@dbfiles); $i++)
 	my @ntype = split(",",$arr->[7]);
 	my $type = lc $ntype[0]; # context
 	my $featureName = $arr->[0];
+	my $origin = $arr->[8];
+	$origin =~ s/\r\n/ /gi;
 	# if ($featureName !~ m/\'/ && $featureName !~ m/\./) { $featureName = $arr->[1]; }
+	print FAB "# TRANSLATORS: ".$origin."\n";
 	print FAB $pName."\t".$id."\t_(\"".$featureName."\",\"".$type."\")\t".$arr->[5]."\t".$latitude."\t".$longitude."\t".$arr->[2]."\n";
     }
 }

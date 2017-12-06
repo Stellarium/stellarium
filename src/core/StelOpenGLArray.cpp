@@ -77,7 +77,7 @@ void StelOpenGLArray::initGL()
 
 	if(!s_intElementBuffersSupported)
 	{
-		qCDebug(stelOpenGLArray)<<"Your hardware does not support integer indices. Large models may not load.";
+		qCWarning(stelOpenGLArray)<<"Your hardware does not support integer indices. Large models may not load.";
 	}
 }
 
