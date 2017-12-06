@@ -476,7 +476,6 @@ private:
 
 	//! @name Screen message infrastructure
 	//@{
-	QTimer* messageTimer;
 	QList<int> messageIDs;
 	//@}
 

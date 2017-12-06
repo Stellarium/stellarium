@@ -49,7 +49,6 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableMarker(true)
 	, m_showEnableButton(true)
 	, m_showSearchButton(true)
-	, m_messageTimer(Q_NULLPTR)
 	, m_isUpdating(false)
 	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
@@ -77,13 +76,6 @@ void MeteorShowersMgr::init()
 
 	createActions();
 	loadConfig();
-
-	// timer to hide the alert messages
-	m_messageTimer = new QTimer(this);
-	m_messageTimer->setSingleShot(true);
-	m_messageTimer->setInterval(9000);
-	m_messageTimer->stop();
-	connect(m_messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
 
 	// MeteorShowers directory
 	QString userDir = StelFileMgr::getUserDir() + "/modules/MeteorShowers";
@@ -534,16 +526,7 @@ QDateTime MeteorShowersMgr::getNextUpdate()
 
 void MeteorShowersMgr::displayMessage(const QString& message, const QString hexColor)
 {
-	m_messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20 * m_messageIDs.count()), true, 16, hexColor);
-	m_messageTimer->start();
-}
-
-void MeteorShowersMgr::messageTimeout()
-{
-	foreach(int i, m_messageIDs)
-	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(i);
-	}
+	m_messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20 * m_messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
 void MeteorShowersMgr::locationChanged(StelLocation location)
