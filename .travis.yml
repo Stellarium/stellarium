@@ -57,10 +57,10 @@ before_script:
   - "cd build"
 
 script:
-  - "cmake ../."
-  - "make -j 2"
-  - "ctest"
-  - "sudo make install -j 2"
+  - cmake ../.
+  - make -j 2
+  - ctest --output-on-failure
+  - sudo make install -j 2
 
 sudo: required
 after_success:
