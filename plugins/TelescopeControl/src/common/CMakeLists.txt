@@ -20,5 +20,4 @@ target_link_libraries(TelescopeControl_common
     Qt5::Core
     Qt5::Network
     Qt5::Gui
-    Qt5::Widgets
     )
