@@ -13,7 +13,6 @@ add_library(TelescopeControl_INDI
 target_link_libraries(TelescopeControl_INDI
     Qt5::Core
     Qt5::Network
-    Qt5::Gui
     indiclient
     TelescopeControl_common
     ${CMAKE_THREAD_LIBS_INIT}
