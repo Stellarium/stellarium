@@ -71,4 +71,3 @@ keep up with the latest discussions about Stellarium development.  You
 can subscribe here:
 
 https://lists.sourceforge.net/lists/listinfo/stellarium-pubdevel
-
