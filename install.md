@@ -4,12 +4,12 @@
 
 Most users will prefer using precompiled binary packages:
 
-* ### Windows users
+### * Windows users
 run setup.exe and follow the instructions.
-* ### MACOSX USERS :
+### * MACOSX USERS :
 run stellarium.dmg
 
-* ### LINUX USERS :
+### * LINUX USERS :
 Look for the binary package matching your distribution.
 
 
