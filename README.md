@@ -9,14 +9,14 @@ Stellarium comes with ABSOLUTELY NO WARRANTY.  See the COPYING file for details.
 
 # Stellarium Astronomy Software
 
-[About](#about)
-[Installation](#installation)
-[Requirements](#requirements)
-[Quick Start](#quick-start)
-[Configuration](#configuration)
-[Thanks](#thanks)
-[Note](#note)
-[Full Reference and Credit](#full-reference-and-credit)
+* [About](#about)
+* [Installation](#installation)
+* [Requirements](#requirements)
+* [Quick Start](#quick-start)
+* [Configuration](#configuration)
+* [Thanks](#thanks)
+* [Note](#note)
+* [Full Reference and Credit](#full-reference-and-credit)
 
 ## About
 
@@ -27,7 +27,7 @@ small telescope.
 
 ## Installation 
 
-Please see the INSTALL file.
+Please see the [INSTALL](install.md) file.
 
 ## Requirements
 
