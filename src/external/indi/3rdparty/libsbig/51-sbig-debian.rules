@@ -1,0 +1,41 @@
+#============================================================
+# Name   : 51-sbig-debian.rules 
+# Version: 1.0
+# Author : Jan Soldan astrosoft at email dot cz
+# Date   : Nov 19, 2012
+#============================================================
+# File locations:
+# 1) Copy libsbigudrv.so to /usr/local/lib
+# 2) Copy all *.hex and *.bin files to: /lib/firmware 
+#============================================================
+# Run:
+# sudo udevadm info --name=/dev/bus/usb/bus_num/dev_num --attribute-walk
+# to find the proper udev keywords and possibly update the rest 
+# of this file if you cannot detect your camera.
+# Example:
+# SUBSYSTEM=="usb"
+# ATTR{idVendor}=="0d97"
+# ATTR{idProduct}=="0003"
+#============================================================
+# 1. Pre-renumeration device IDs:
+#============================================================
+# SBIG ST-7/8/9/10/2K cameras
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0d97", ATTR{idProduct}=="0001", \
+RUN+="/sbin/fxload -I /lib/firmware/sbigucam.hex -D $env{DEVNAME}"
+
+# SBIG ST-L cameras
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0d97", ATTR{idProduct}=="0002", \
+RUN+="/sbin/fxload -I /lib/firmware/sbiglcam.hex -D $env{DEVNAME}"
+
+# SBIG ST-402/1603/3200 cameras
+ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="0d97", ATTR{idProduct}=="0003", \
+RUN+="/sbin/fxload -I /lib/firmware/sbigfcam.hex -D $env{DEVNAME} -t fx2"
+#============================================================
+# 2. Post-renumeration device IDs:
+#============================================================
+# ST-7/8/9/10/2K/402/1603/3200, STL cameras
+SUBSYSTEM=="usb", ATTR{idVendor}=="0d97", ATTR{idProduct}=="0101", MODE="0666", GROUP="plugdev"
+
+# ST-i, STF, STT & STX cameras
+SUBSYSTEM=="usb", ATTR{idVendor}=="0d97", ATTR{idProduct}=="0102", MODE="0666", GROUP="plugdev"
+#============================================================

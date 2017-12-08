@@ -1,0 +1,23 @@
+Source: indi-qsi
+Section: science
+Priority: extra
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: debhelper (>= 6), cdbs, cmake, libindi-dev, zlib1g-dev, libusb-1.0-0-dev, libqsi-dev,  libcfitsio3-dev|libcfitsio-dev
+Standards-Version: 3.9.2
+
+Package: indi-qsi
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libindi1, libqsi7
+Description: INDI QSI CCD Driver.
+ .
+ This driver is compatible with any INDI client such as KStars or Xephem.
+
+Package: indi-qsi-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: indi-qsi (= ${binary:Version}), ${misc:Depends}
+Description: INDI QSI CCD Driver.
+ .
+ This driver is compatible with any INDI client such as KStars or Xephem.
+ This package contains the debug symbols for the this driver, useful to investigate problems in INDI.

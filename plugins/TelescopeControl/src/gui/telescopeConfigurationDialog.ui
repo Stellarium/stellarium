@@ -235,6 +235,13 @@
        </widget>
       </item>
       <item>
+       <widget class="QRadioButton" name="radioButtonTelescopeINDI">
+        <property name="text">
+         <string>INDI</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <widget class="QRadioButton" name="radioButtonTelescopeVirtual">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
@@ -267,7 +274,7 @@
         <x>0</x>
         <y>0</y>
         <width>528</width>
-        <height>580</height>
+        <height>704</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayoutScrollArea">

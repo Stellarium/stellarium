@@ -1,0 +1,25 @@
+indi-gpsd (0.4) bionic; urgency=medium
+
+  * Upstream update
+
+ -- Jasem Mutlaq <mutlaqja@ikarustech.com>  Tue, 14 Nov 2017 13:00:00 +0300
+
+indi-gpsd (0.3) stable; urgency=medium
+
+  * Improve fix detection. Use 2D fixes with zero altitude.
+  * Guard against garbage position on no-fix conditions.
+
+ -- Paweł T. Jochym <jochym@wolf.ifj.edu.pl>  Tue, 30 Aug 2016 09:13:37 +0200
+
+indi-gpsd (0.2) stable; urgency=medium
+
+  * Merge of astroberry gps driver
+
+ -- Paweł T. Jochym <jochym@wolf.ifj.edu.pl>  Mon, 29 Aug 2016 20:56:11 +0200
+
+indi-gpsd (0.1) stable; urgency=low
+
+  * Initial release
+
+ -- Pawel T. Jochym <jochym@wolf.ifj.edu.pl>  Thu, 3 Dec 2015 08:00:00 +0100
+ 

@@ -1,0 +1,13 @@
+COMPILE INSTRUCTIONS:
+
+> cmake .
+> make
+> sudo make install
+
+
+TEST INSTRUCTIONS:
+
+(INDI 0.9.7 must be installed)
+
+indiserver ./indi_aagcloudwatcher
+

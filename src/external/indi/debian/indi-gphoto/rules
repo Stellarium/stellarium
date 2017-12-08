@@ -1,0 +1,8 @@
+#!/usr/bin/make -f
+
+include /usr/share/cdbs/1/class/cmake.mk
+include /usr/share/cdbs/1/rules/debhelper.mk
+
+DEB_SRCDIR=indi-gphoto
+DEB_DH_SHLIBDEPS_ARGS=-u--ignore-missing-info
+

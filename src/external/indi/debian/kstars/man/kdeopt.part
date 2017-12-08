@@ -1,0 +1,110 @@
+.\" This portion of the manual page is from kdeopt.man, from the
+.\" kdegames Debian package.
+.SH GENERIC OPTIONS
+.TP
+.B \-\-help
+Show help about options.
+.TP
+.B \-\-help-qt
+Show Qt specific options.
+.TP
+.B \-\-help-kde
+Show KDE specific options.
+.TP
+.B \-\-help-all
+Show all options.
+.TP
+.B \-\-author
+Show author information.
+.TP
+.B \-v, \-\-version
+Show version information.
+.TP
+.B \-\-license
+Show license information.
+.TP
+.B \-\-
+End of options.
+.SH QT OPTIONS
+.TP
+.B \-\-display \fI<displayname>\fB
+Use the X-server display `displayname'.
+.TP
+.B \-\-session \fI<sessionId>\fB
+Restore the application for the given `sessionId'.
+.TP
+.B \-\-cmap
+Causes the application to install a private color map on an 8\-bit
+display.
+.TP
+.B \-\-ncols \fI<count>\fB
+Limits the number of colors allocated in the color cube on an 8\-bit
+display, if the application is using the QApplication::ManyColor color
+specification.
+.TP
+.B \-\-nograb
+Tells Qt to never grab the mouse or the keyboard.
+.TP
+.B \-\-dograb
+Running under a debugger can cause an implicit \-nograb, use \-dograb
+to override.
+.TP
+.B \-\-sync
+Switches to synchronous mode for debugging.
+.TP
+.B \-\-fn, \-\-font \fI<fontname>\fB
+Defines the application font.
+.TP
+.B \-\-bg, \-\-background \fI<color>\fB
+Sets the default background color and an application palette (light
+and dark shades are calculated).
+.TP
+.B \-\-fg, \-\-foreground \fI<color>\fB
+Sets the default foreground color.
+.TP
+.B \-\-btn, \-\-button \fI<color>\fB
+Sets the default button color.
+.TP
+.B \-\-name \fI<name>\fB
+Sets the application name.
+.TP
+.B \-\-title \fI<title>\fB
+Sets the application title (caption).
+.TP
+.B \-\-visual TrueColor
+Forces the application to use a TrueColor visual on an 8-bit display.
+.TP
+.B \-\-inputstyle \fI<inputstyle>\fB
+Sets XIM (X Input Method) input style. Possible values are
+\fIonthespot\fP, \fIoverthespot\fP, \fIoffthespot\fP and \fIroot\fP.
+.TP
+.B \-\-im \fI<XIM server>\fB
+Set XIM server.
+.TP
+.B \-\-noxim
+Disable XIM.
+.TP
+.B \-\-reverse
+Mirrors the whole layout of widgets.
+.SH KDE OPTIONS
+.TP
+.B \-\-caption \fI<caption>\fB
+Use `caption' as name in the titlebar.
+.TP
+.B \-\-icon \fI<icon>\fB
+Use `icon' as the application icon.
+.TP
+.B \-\-config \fI<filename>\fB
+Use alternative configuration file.
+.TP
+.B \-\-nocrashhandler
+Disable crash handler, to get core dumps.
+.TP
+.B \-\-waitforwm
+Waits for a WM_NET compatible windowmanager.
+.TP
+.B \-\-style \fI<style>\fB
+Sets the application GUI style.
+.TP
+.B \-\-geometry \fI<geometry>\fB
+Sets the client geometry of the main widget.

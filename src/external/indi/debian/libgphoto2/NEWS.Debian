@@ -1,0 +1,7 @@
+libgphoto2 (2.5.10-1) experimental; urgency=low
+
+  New path for obsolete gphoto2-* scripts:
+  /usr/lib/$(DEB_HOST_MULTIARCH)/libgphoto2-dev/bin
+
+ -- Herbert Parentes Fortes Neto <hpfn@ig.com.br>  Sat, 26 Mar 2016 10:46:27 -0300
+

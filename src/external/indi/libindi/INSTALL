@@ -1,0 +1,22 @@
+INDI Library Setup 1.0.0
+========================
+
+You must have CMake >= 2.8 in order to build this package.
+
+1) $ tar -xzf libindi.tar.gz
+2) $ mkdir libindi_build
+3) $ cd libindi_build
+4) $ cmake -DCMAKE_INSTALL_PREFIX=/usr . ../libindi
+5) $ su -c 'make install' or sudo make install
+   
+Refer to README for instructions on running indiserver and device drivers.
+
+Refer to README.drivers for driver-specific information.
+
+Dependencies
+============
+
++ libusb-1.0-0-dev
++ libnova-dev
++ cfitsio-dev
++ libgsl0-dev 

@@ -1,0 +1,20 @@
+Alta Pattern Set			15	14	13	12	11	10	9	8	7	6	5	4	3	2	1	0	
+SKIP																			
+CCD:	E2V 		#NAME?																
+System:	16 Bit		- step 0 must be final resting  state																
+Pattern	M16HS1																		
+Date:	3/2/2004	Time (nS)	FIFO WR	SAM 2	SAM 1	CLAMP 16	CLAMP 12	CON 16	CON 12	INT 2	INT 1	RESET 2	RESET 1	S3	S2	S1	R	Stop	Row
+	Mask		0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	
+	REFERENCE	0	0	0	0	0	0	0	0	0	0	1	1	0	1	1	0	0	1
+		20	0	0	0	0	0	0	0	0	0	1	1	0	1	0	1	0	2
+		40	0	0	0	1	0	0	0	0	0	1	1	0	1	0	0	0	3
+		60	0	0	0	0	0	0	0	0	0	1	1	1	1	0	0	0	4
+		80	0	0	0	0	0	0	0	0	0	1	1	1	0	0	0	0	5
+		100	0	0	0	0	0	0	0	0	1	1	1	1	0	0	0	0	6
+	 	120	0	0	0	0	0	0	0	0	1	1	0	1	0	0	0	0	7
+	END	140	0	0	0	0	0	0	0	0	1	1	0	1	0	1	0	0	8
+	BIN 1	160	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	9
+	END	180	0	0	0	0	0	0	0	0	0	1	0	0	0	1	0	0	10
+	SIGNAL	200	0	0	0	0	0	0	0	1	0	1	0	0	0	1	0	0	11
+		220	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	1	12
+	END	240	0	0	0	0	0	0	0	1	0	0	0	0	0	1	0	0	13

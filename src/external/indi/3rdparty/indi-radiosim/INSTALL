@@ -1,0 +1,14 @@
+RadioSim INSTALL
+============
+
+You must have CMake >= 2.4.7 in order to build this package.
+
+1) $ tar -xzf indi_radiosim.tar.gz
+2) $ mkdir indi_radiosim_build
+3) $ cd indi_radiosim_build
+4) $ cmake -DCMAKE_INSTALL_PREFIX=/usr . ../indi_radiosim
+5) $ su -c 'make install' or sudo make install
+   
+Refer to README for instructions on using the driver.
+
+That's it!

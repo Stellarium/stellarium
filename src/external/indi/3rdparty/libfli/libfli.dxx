@@ -1,0 +1,56 @@
+/* -*- mode: c; -*- */
+
+/** @name FLI Software Development Library
+
+    @version 1.40
+
+    @author \URL[Finger Lakes Instrumentation]{http://www.fli-cam.com} \\
+    Copyright (c) 2000-2002 Finger Lakes Instrumentation (FLI), LLC. \\
+    All rights reserved.
+
+    @memo Windows and Linux support for FLI CCD cameras, filter
+    wheels, and focusers.
+
+*/
+
+//@{
+
+  /** @name Introduction
+
+      This library provides a core set of functions for programming
+      FLI CCD cameras, filter wheels, and focusers under Windows and
+      Linux.  The type definitions, function prototypes, and
+      definitions/enumerations of constant values used by library
+      functions are spcified in \texttt{libfli.h}.  All library
+      functions return zero on sucessful completion, and non-zero if
+      an error occurred.  The exact nature of an error can be found by
+      treating the negative of a function's return value as a system
+      error code, for example:
+
+      \begin{verbatim}
+      if ((err = FLIOpen(&dev, name, domain)))
+      {
+        fprintf(stderr, "Error FLIOpen: %s\n", strerror((int)-err));
+        exit(1);
+      }
+      \end{verbatim}
+
+  */
+
+  /** @name Library Defined Types */
+
+  //@{
+
+    //@Include: libfli.h
+
+  //@}
+
+  /** @name Library Functions */
+
+  //@{
+
+    //@Include: libfli.c
+
+  //@}
+
+//@}

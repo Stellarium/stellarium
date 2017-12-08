@@ -259,7 +259,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
 	aboutPage += "<tr><td rowspan=2><strong>" + q_("Contributors") + ":</strong></td><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
-	aboutPage += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+    aboutPage += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+    aboutPage += "<tr><td></td><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt;</td></tr>";
 	aboutPage += "</table>";
 
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
@@ -267,7 +268,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<li>" + q_("the telescope server core code (licensed under the LGPL)") + "</li>";
 	aboutPage += "<li>" + q_("the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL)");
 	aboutPage += "<br/>" + q_("Author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.") + "</li>";
-	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li></ul>";
+    aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
+    aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
 
 	aboutPage += "<h3>" + q_("Links") + "</h3>";
 	aboutPage += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
@@ -512,6 +514,10 @@ QString TelescopeDialog::getTypeLabel(ConnectionType type)
 		case ConnectionRTS2:
 			// TRANSLATORS: Telescope connection type
 			typeLabel = N_("RTS2");
+			break;
+		case ConnectionINDI:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("INDI");
 			break;
 		default:
 			;

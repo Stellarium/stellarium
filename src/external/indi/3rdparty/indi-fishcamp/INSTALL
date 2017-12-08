@@ -1,0 +1,16 @@
+FISHCAMP Starfish CMOS autoguder INSTALL
+========================================
+
+You must have CMake >= 2.4.7 in order to build this package.
+
+Refer to README for instructions on installing the distribution.tar.gz (linux driver from Fishcamp Engg).  Once it is confirmed to work do the following:
+
+1) $ tar -xzf indi_fishcamp.tar.gz
+2) $ mkdir indi_fishcamp_build
+3) $ cd indi_fishcamp_build
+4) $ cmake -DCMAKE_INSTALL_PREFIX=/usr . ../indi_fishcamp
+5) $ su -c 'make install' or sudo make install
+   
+Refer to README for instructions on using the driver.
+
+That's it!

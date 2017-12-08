@@ -1,0 +1,42 @@
+.TH KSTARS 1
+.SH NAME
+kstars \- KDE Desktop Planetarium
+.SH SYNOPSIS
+.B kstars
+.I [Qt-options] [KDE-options] [options]
+.SH DESCRIPTION
+.B KStars
+is a desktop planetarium for KDE, depicting an accurate graphical
+simulation of the night sky, from any location on Earth, at any date and time.
+The display includes 130,000 stars, 13,000 deep-sky objects, all 8 planets,
+the Sun and Moon, and thousands of comets and asteroids.  It includes tools
+for astronomical calculations and can control telescopes and cameras.
+
+.SH OPTIONS
+.TP
+.B \-\-dump
+Dump sky image to file.
+.TP
+.B \-\-script
+Script to execute.
+.TP
+.B \-\-width
+Width of sky image [640].
+.TP
+.B \-\-height
+Height of sky image [480].
+.TP
+.B \-\-filename
+Filename for sky image [kstars.png].
+.TP
+.B \-\-date
+Date and time.
+.TP
+.B \-\-paused
+Start with clock paused.
+.so kdeopt.part
+.SH SEE ALSO
+More detailed user documentation is available from
+.BR help:/kstars
+(either enter this URL into \fBkonqueror\fP, or run `khelpcenter
+help:/kstars').

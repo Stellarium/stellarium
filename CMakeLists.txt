@@ -123,6 +123,7 @@ IF(STELLARIUM_USE_CPP11)
      IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
         # Let CMake handle setting C++11 (since 3.1)
         SET(CMAKE_CXX_STANDARD 11)
+        SET(CMAKE_C_STANDARD 11)
      ELSE()
         # Add std=c++11 to gcc flags
         SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")

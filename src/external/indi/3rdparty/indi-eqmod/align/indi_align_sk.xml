@@ -1,0 +1,71 @@
+<INDIDriver>
+<defTextVector device="EQMod Mount" name="ALIGNDATAFILE" label="Data File" group="Align" state="Idle" perm="rw">
+<defText name="ALIGNDATAFILENAME" label="Name">~/.indi/AlignData.xml</defText> 
+</defTextVector>
+<defNumberVector device="EQMod Mount" name="ALIGNTELESCOPECOORDS" label="Telescope Coords" group="Align" state="Idle" perm="ro">
+<defNumber name="ALIGNTELESCOPE_RA" label="Telescope RA (hh:mm:ss)" format="%010.6m" min="0.0" max="24.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="ALIGNTELESCOPE_DE" label="Telescope DE (dd:mm:ss)" format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+</defNumberVector>
+<defBLOBVector device="EQMod Mount" name="ALIGNDATA" label="Align Data" group="Align" state="Idle" perm="rw">
+<defBLOB name="POINTLIST" label="Points List"/>
+<defBLOB name="TRIANGULATION" label="Triangulation"/>
+</defBLOBVector>
+<defSwitchVector device="EQMod Mount" name="ALIGNMODE" label="Alignment Mode" group="Align" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="NOALIGN" label="No Alignment">
+Off
+</defSwitch>
+<defSwitch name="ALIGNNEAREST" label="Nearest Point">
+Off
+</defSwitch>
+<defSwitch name="ALIGNNSTAR" label="N-Star">
+On
+</defSwitch>
+</defSwitchVector>
+<defNumberVector device="EQMod Mount" name="ALIGNCOUNT" label="Number of" group="Align" state="Idle" perm="ro">
+<defNumber name="ALIGNCOUNT_POINTS" label="Points" format="%.0f" min="0.0" max="10000.0" step="1.0">
+0.0
+</defNumber>
+<defNumber name="ALIGNCOUNT_TRIANGLES" label="Triangles" format="%.0f" min="0.0" max="1000000.0" step="1.0">
+0.0
+</defNumber>
+</defNumberVector>
+<defSwitchVector device="EQMod Mount" name="ALIGNLIST" label="Manage List" group="Align" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="ALIGNLISTADD" label="Add point">
+Off
+</defSwitch>
+<defSwitch name="ALIGNLISTCLEAR" label="Clear List">
+Off
+</defSwitch>
+<defSwitch name="ALIGNWRITEFILE" label="Write File">
+Off
+</defSwitch>
+<defSwitch name="ALIGNLOADFILE" label="Load File">
+Off
+</defSwitch>
+</defSwitchVector>
+<defNumberVector device="EQMod Mount" name="ALIGNPOINT" label="Alignment Point" group="Align" state="Idle" perm="rw">
+<defNumber name="ALIGNPOINT_JD" label="Sync Date" format="%08.8f" min="0.0" max="9999999999" step="0.0">
+0.0
+</defNumber>
+<defNumber name="ALIGNPOINT_SYNCTIME" label="Sync LST" format="%010.6m" min="0.0" max="24.0" step="0.000000000001">
+0.0
+</defNumber>
+<defNumber name="ALIGNPOINT_CELESTIAL_RA" label="Celestial RA (hh:mm:ss)" format="%010.6m" min="0.0" max="24.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="ALIGNPOINT_CELESTIAL_DE" label="Celestial DE (dd:mm:ss)" format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="ALIGNPOINT_TELESCOPE_RA" label="Telescope RA (hh:mm:ss)" format="%010.6m" min="0.0" max="24.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="ALIGNPOINT_TELESCOPE_DE" label="Telescope DE (dd:mm:ss)" format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+</defNumberVector>
+
+</INDIDriver>
