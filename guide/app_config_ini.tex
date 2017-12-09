@@ -35,33 +35,34 @@ This section includes settings for the commonly displayed objects.
 \begin{longtabu} to \textwidth {l|l|l|X}
 \toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-apparent\_magnitude\_algorithm & string & ExpSup2013 & Set algorithm for computation of apparent magnitude of the planets. 
+apparent\_magnitude\_algorithm     & string & ExpSup2013 & Set algorithm for computation of apparent magnitude of the planets. 
                                                    Possible values: \emph{ExpSup2013}, \emph{ExpSup1992}, \emph{AstrAlm1984}, \emph{Mueller1893} and \emph{Generic}.\\\midrule
-nebula\_magnitude\_limit         & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\\midrule
-star\_magnitude\_limit           & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\\midrule
-planet\_magnitude\_limit  		 & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\\midrule
-planets\_orbits\_color\_style    & string & one\_color & Set the style of orbits color. Possible values: \emph{one\_color}, \emph{groups} and \emph{max}.\\\midrule
-flag\_nebula\_magnitude\_limit   & bool   & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\\midrule
-flag\_star\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing stars\\\midrule
-flag\_planet\_magnitude\_limit   & bool   & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
-extinction\_mode\_below\_horizon & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\\midrule
-flag\_stars               & bool & true  & Set to \emph{false} to hide the stars on start-up\\\midrule
-flag\_star\_name          & bool & true  & Set to \emph{false} to hide the star labels on start-up\\\midrule
-flag\_planets             & bool & true  & Set to \emph{false} to hide the planet labels on start-up\\\midrule
-flag\_planets\_hints      & bool & true  & Set to \emph{false} to hide the planet hints on startup (names and circular highlights)\\\midrule
-flag\_planets\_orbits     & bool & false & Set to \emph{true} to show the planet orbits on startup\\\midrule
-flag\_permanent\_orbits   & bool & false & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\\\midrule
-flag\_planets\_pointers   & bool & false & Set to \emph{true} to show the planet pointer markers on startup\\\midrule
-flag\_planets\_nomenclature & bool & false & Set to \emph{true} to show the planetary nomenclature markers and labels\\\midrule
-flag\_hide\_local\_nomenclature & bool & true & Set to \emph{true} to hide the planetary nomenclature items on the observer's celestial body\\\midrule
-flag\_light\_travel\_time & bool & true  & Should be \emph{true} to improve accuracy in the movement of the planets by compensating 
+nebula\_magnitude\_limit           & float  & 8.5  & Value of limiting magnitude for the deep-sky objects.\\\midrule
+star\_magnitude\_limit             & float  & 6.5  & Value of limiting magnitude for the stars. Sometimes you don't want to display more stars when zooming in. \\\midrule
+planet\_magnitude\_limit  		   & float  & 6.5  & Value of limiting magnitude for the planets. Sometimes you don't want to display more planets when zooming in. \\\midrule
+planets\_orbits\_color\_style      & string & one\_color & Set the style of orbits color. Possible values: \emph{one\_color}, \emph{groups} and \emph{max}.\\\midrule
+flag\_nebula\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing deep-sky objects.\\\midrule
+flag\_star\_magnitude\_limit       & bool   & false & Set to \emph{true} to activate limit for showing stars\\\midrule
+flag\_planet\_magnitude\_limit     & bool   & false & Set to \emph{true} to activate limit for showing planets.\\\midrule
+extinction\_mode\_below\_horizon   & string & zero & Set extinction mode for atmosphere below horizon. Possible values: \emph{zero}, \emph{mirror} and \emph{major\_planets}.\\\midrule
+flag\_stars                        & bool   & true  & Set to \emph{false} to hide the stars on start-up\\\midrule
+flag\_star\_name                   & bool   & true  & Set to \emph{false} to hide the star labels on start-up\\\midrule
+flag\_star\_additional\_names      & bool   & true  & Set \emph{true} to use additional names (also known as) for stars.\\\midrule
+flag\_planets                      & bool   & true  & Set to \emph{false} to hide the planet labels on start-up\\\midrule
+flag\_planets\_hints               & bool   & true  & Set to \emph{false} to hide the planet hints on startup (names and circular highlights)\\\midrule
+flag\_planets\_orbits              & bool   & false & Set to \emph{true} to show the planet orbits on startup\\\midrule
+flag\_permanent\_orbits            & bool   & false & Set to \emph{true} to show the orbit of planet, when planet is out of the viewport also.\\\midrule
+flag\_planets\_pointers            & bool   & false & Set to \emph{true} to show the planet pointer markers on startup\\\midrule
+flag\_planets\_nomenclature        & bool   & false & Set to \emph{true} to show the planetary nomenclature markers and labels\\\midrule
+flag\_hide\_local\_nomenclature    & bool   & true & Set to \emph{true} to hide the planetary nomenclature items on the observer's celestial body\\\midrule
+flag\_light\_travel\_time          & bool   & true  & Should be \emph{true} to improve accuracy in the movement of the planets by compensating 
                                            for the time it takes for light to travel. This has a slight impact on performance, 
                                            but is essential e.g.\ for Jupiter's moons.\\\midrule
-flag\_object\_trails      & bool & false & Turns on and off drawing of object trails (which show the movement of the planets over time).\\\midrule
-flag\_isolated\_trails    & bool & true  & Turns on and off drawing of isolated trails.\\\midrule
-flag\_isolated\_orbits    & bool & true  & Turns on and off drawing of isolated orbits.\\\midrule
-flag\_nebula              & bool & true  & Set to \emph{false} to hide the nebulae on start-up. \\\midrule
-flag\_nebula\_name        & bool & false & Set to \emph{true} to show the nebula labels on start-up. \\\midrule
+flag\_object\_trails               & bool   & false & Turns on and off drawing of object trails (which show the movement of the planets over time).\\\midrule
+flag\_isolated\_trails             & bool   & true  & Turns on and off drawing of isolated trails.\\\midrule
+flag\_isolated\_orbits             & bool   & true  & Turns on and off drawing of isolated orbits.\\\midrule
+flag\_nebula                       & bool   & true  & Set to \emph{false} to hide the nebulae on start-up. \\\midrule
+flag\_nebula\_name                 & bool   & false & Set to \emph{true} to show the nebula labels on start-up. \\\midrule
 flag\_nebula\_display\_no\_texture & bool   & false & Set to \emph{true} to suppress displaying of nebula textures. \\\midrule
 nebula\_hints\_amount              & float  & 3.0   & Sets the amount of hints [0\ldots10]. \\\midrule
 nebula\_labels\_amount             & float  & 3.0   & Sets the amount of labels [0\ldots10].\\\midrule
@@ -80,6 +81,9 @@ size\_limit\_max                   & int    & 600   & Maximum angular size of vi
 flag\_use\_type\_filter            & bool   & false & Enables/disables usage of the type filters for deep-sky objects. \\\midrule
 flag\_nutation  				   & bool   & true  & Enables/disables usage nutation.\\\midrule
 flag\_topocentric\_coordinates	   & bool   & true  & Enables/disables usage topocentric coordinates.\\\midrule
+flag\_dso\_designation\_usage      & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\\midrule
+flag\_dso\_outlines\_usage         & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\\midrule
+flag\_dso\_additional\_names       & bool   & true  & Set \emph{true} to use additional names (also known as) for deep-sky objects.\\\midrule
 flag\_grs\_custom                  & bool   & false & Turns on and off to using custom settings for calculation of position of Great Red Spot on Jupiter.\\\midrule
 grs\_longitude                     & int    & 216   & Longitude of Great Red Spot on Jupiter in degrees.\\\midrule
 grs\_drift                         & float  & 15.0  & Annual drift of Great Red Spot on Jupiter in degrees.\\\midrule
@@ -404,8 +408,6 @@ flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azi
 flag\_show\_gui                 & bool   & false & If \emph{true}, display GUI.\\\midrule
 flag\_surface\_brightness\_arcsec  & bool  & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\\midrule
 flag\_surface\_brightness\_short  & bool   & false & Toggle usage the short notation for the surface brightness of deep-sky objects.\\\midrule
-flag\_dso\_designation\_usage   & bool   & false & If \emph{true}, use designations of deep-sky objects on the sky instead of their common names.\\\midrule
-flag\_dso\_outlines\_usage      & bool   & false & If \emph{true}, use outlines for big deep-sky objects on the sky instead of their hints.\\\midrule
 flag\_enable\_kinetic\_scrolling & bool  & true  & If \emph{true}, use kinetic scrolling in the GUI\footnote{This option is available on Windows tablets only.}.\\\midrule
 flag\_show\_buttons\_background & bool   & true  & If \emph{true}, use background under bottons on bottom panel.\\\midrule
 pointer\_animation\_speed 		& float  & 1.0 	 & Animation speed of pointers.\\\midrule
