@@ -10,7 +10,7 @@ addons:
     notification_email: mcardinot@gmail.com
     build_command_prepend: cmake ../.
     build_command: make -j 2
-    branch_pattern: master
+    branch_pattern: coverity_scan
 
 language: cpp
 
@@ -27,34 +27,34 @@ before_install:
   - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
   - g++ --version
 
-  - "wget -q -O libarchive-3.1.2.tar.gz http://sourceforge.net/projects/cardinot/files/util/libarchive-3.1.2.tar.gz/download"
-  - "tar -xzvf libarchive-3.1.2.tar.gz"
+  - wget -q -O libarchive-3.1.2.tar.gz http://sourceforge.net/projects/cardinot/files/util/libarchive-3.1.2.tar.gz/download
+  - tar -xzvf libarchive-3.1.2.tar.gz
 
-  - "wget -q -O cmake-3.1.3.tar.gz http://sourceforge.net/projects/cardinot/files/util/cmake-3.1.3.tar.gz/download"
-  - "tar -xzvf cmake-3.1.3.tar.gz"
+  - wget -q -O cmake-3.1.3.tar.gz http://sourceforge.net/projects/cardinot/files/util/cmake-3.1.3.tar.gz/download
+  - tar -xzvf cmake-3.1.3.tar.gz
 
-  - "mkdir qt5"
-  - "wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download"
-  - "unzip -qq qt5.zip -d qt5"
-  - "export PATH=`pwd`/qt5/bin:$PATH"
-  - "export QT_PLUGIN_PATH=`pwd`/qt5/plugins"
+  - mkdir qt5
+  - wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download
+  - unzip -qq qt5.zip -d qt5
+  - export PATH=`pwd`/qt5/bin:$PATH
+  - export QT_PLUGIN_PATH=`pwd`/qt5/plugins
 
 install:
-  - "cd libarchive-3.1.2"
-  - "./configure --prefix=/usr --disable-static"
-  - "make -j 2"
-  - "sudo make install -j 2"
-  - "cd .."
+  - cd libarchive-3.1.2
+  - ./configure --prefix=/usr --disable-static
+  - make -j 2
+  - sudo make install -j 2
+  - cd .."
 
-  - "cd cmake-3.1.3"
-  - "./bootstrap"
-  - "make -j 2"
-  - "sudo make install -j 2"
-  - "cd .."
+  - cd cmake-3.1.3
+  - ./bootstrap
+  - make -j 2
+  - sudo make install -j 2
+  - cd .."
 
 before_script:
-  - "mkdir build"
-  - "cd build"
+  - mkdir build
+  - cd build
 
 script:
   - cmake ../.
