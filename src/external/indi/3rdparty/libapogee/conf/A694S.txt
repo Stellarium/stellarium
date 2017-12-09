@@ -1,0 +1,20 @@
+Ascent Pattern Set			15	14	13	12	11	10	9	8	7	6	5	4	3	2	1	0	
+																			
+CCD:	Ascent 694		#NAME?																
+System:	Ascent 		- step 0 must be final resting  state																
+Pattern	A694S																		
+Date:	4/2/2010	Time (nS)	Latching	ADD/FIFO	RIGHT	FIFO		SAM 2L	SAM 1L	SAM 2R	SAM 1R	ADCLK	SW	S3	S2	S1	R	Stop	Row
+	Mask		0	0	0	0	0	0	0	0	0	0	0	0	1	1	0	0	
+	BIN 1	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	1
+		10	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	2
+		20	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	3
+		30	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	4
+		40	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	0	4
+		50	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	5
+		60	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	0	6
+		70	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	7
+		80	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	8
+		90	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	7
+		100	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	8
+		110	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	1	9
+	END	120	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0	0	10

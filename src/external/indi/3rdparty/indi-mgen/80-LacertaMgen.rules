@@ -1,0 +1,11 @@
+
+# VCP driver, use kernel driver 'fdti_sio' to obtain a tty
+# ACTION=="add",    SUBSYSTEM=="tty", ATTRS{serial}=="MGS05443", SYMLINK+="tty.mgen",  RUN+="/sbin/rc-service indiserver start_mgen"
+#
+# Remove action - not needed if device is unbound from ftdi_sio
+# ACTION=="remove", SUBSYSTEM=="tty", ATTRS{serial}=="MGS05443",                       RUN+="/sbin/rc-service indiserver stop_mgen"
+
+# FTDI library, use user-space functions from 'libftdi1' to access the USB device FT232 on the Lacerta MGen
+ACTION=="add",    SUBSYSTEM=="usb", ATTRS{serial}=="MGS05443", SYMLINK+="usb.mgen"
+ACTION=="add",    SUBSYSTEM=="tty", ATTRS{serial}=="MGS05443", WAIT_FOR="/sys/bus/usb/drivers/ftdi_sio/unbind", RUN+="/bin/sh -c 'basename $(readlink -f /sys/$DEVPATH/../../..)> /tmp/udevvars'", RUN+="/bin/sh -c 'basename $(readlink -f /sys/$DEVPATH/../../..) > /sys/bus/usb/drivers/ftdi_sio/unbind'"
+

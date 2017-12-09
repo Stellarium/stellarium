@@ -1,0 +1,138 @@
+<INDIDriver>
+
+<defNumberVector device="Arduino MeteoStation" name="Meteo" label="Meteo" group="METEO" state="Idle" perm="ro" timeout="60">
+    <defNumber name="T" label="Celsius" format="%4.2f" min="-100" max="100" step="1">
+    <indiduino pin="24" type="input" mul="0.05" add="-273"/>
+0
+    </defNumber>
+    <defNumber name="HR" label="HR" format="%4.2f" min="0" max="10240" step="1">
+    <indiduino pin="18" type="input" mul="0.01" add="0"/>
+0
+    </defNumber>
+
+    <defNumber name="P" label="mBars" format="%4.2f" min="0" max="10240" step="1">
+    <indiduino pin="16" type="input" mul="0.1" add="0"/>
+0
+    </defNumber>
+    <defNumber name="DEW" label="DEW.POINT" format="%4.2f" min="-100" max="100" step="1">
+    <indiduino pin="20" type="input" mul="0.05" add="-273"/>
+0
+    </defNumber>
+
+    <defNumber name="clouds" label="clouds" format="%4.0f" min="0" max="100" step="1">
+    <indiduino pin="22" type="input" mul="1" add="0"/>
+0
+    </defNumber>
+    <defNumber name="SkyT" label="SkyT" format="%4.2f" min="-40" max="40" step="1">
+    <indiduino pin="23" type="input" mul="0.05" add="-273"/>
+0
+    </defNumber>
+
+    <defNumber name="Irradiance" label="Irradiance" format="%5.0f" min="0" max="10240" step="1">
+    <indiduino pin="21" type="input" mul="1" add="0"/>
+0
+    </defNumber>
+
+</defNumberVector>
+<defLightVector device="Arduino INPUTS" name="STATUS" label="STATUS" group="METEO" state="Idle" perm="ro" rule="AnyOfMany" timeout="60">
+
+    <defLight name="clouds" label="Cloudy">
+	<indiduino pin="3"/>
+	Off
+    </defLight>
+    <defLight name="dew" label="Dewing">
+	<indiduino pin="4"/>
+	Off
+    </defLight>
+    <defLight name="frezzing" label="frezzing">
+	<indiduino pin="5"/>
+	Off
+    </defLight>
+    <defLight name="daylight" label="Daylight">
+	<indiduino pin="6"/>
+	Off
+    </defLight>
+</defLightVector>
+
+<defSwitchVector device="Arduino MeteoStation" name="CONNECTION" label="Connection" group="Connection" state="Idle" perm="rw" rule="OneOfMany" timeout="60">
+    <defSwitch name="CONNECT" label="Connect">
+Off
+    </defSwitch>
+    <defSwitch name="DISCONNECT" label="Disconnect">
+On
+    </defSwitch>
+</defSwitchVector>
+
+<defTextVector device="Arduino MeteoStation" name="DEVICE_PORT" label="SERIAL" group="Connection" state="Idle" perm="rw" timeout="60">
+    <defText name="PORT" label="Port">
+/dev/ttyACM0
+    </defText>
+</defTextVector>
+
+<defSwitchVector device="Arduino MeteoStation" name="BACK_LIGHT" label="BACK_LIGHT" group="Connection" state="Idle" perm="rw" rule="OneOfMany" timeout="1">
+    <defSwitch name="ON" label="OPEN">
+Off
+    <indiduino pin="13"/>
+    </defSwitch>
+    <defSwitch name="OFF" label="CLOSE">
+On
+    </defSwitch>
+</defSwitchVector>
+
+
+<defNumberVector device="Arduino MeteoStation" name="IR" label="IR Sensor" group="Raw Sensors" state="Idle" perm="ro" timeout="60">
+    <defNumber name="IR" label="IR" format="%4.2f" min="-100" max="100" step="1">
+    <indiduino pin="14" type="input" mul="0.05" add="-273"/>
+0
+    </defNumber>
+    <defNumber name="T" label="Celsius" format="%4.2f" min="-100" max="-100" step="1">
+    <indiduino pin="15" type="input" mul="0.05" add="-273"/>
+0
+    </defNumber>
+</defNumberVector>
+<defNumberVector device="Arduino MeteoStation" name="Presure" label="Presure Sensor" group="Raw Sensors" state="Idle" perm="ro" timeout="60">
+
+    <defNumber name="P" label="mBars" format="%4.2f" min="0" max="10240" step="1">
+    <indiduino pin="16" type="input" mul="0.1" add="0"/>
+0
+    </defNumber>
+    <defNumber name="T" label="Celsius" format="%4.2f" min="-100" max="100" step="1">
+    <indiduino pin="17" type="input" mul="0.05" add="-273"/>
+0
+    </defNumber>
+</defNumberVector>
+<defNumberVector device="Arduino MeteoStation" name="HR" label="HR Sensor" group="Raw Sensors" state="Idle" perm="ro" timeout="60">
+    <defNumber name="HR" label="HR" format="%4.2f" min="0" max="10240" step="1">
+    <indiduino pin="18" type="input" mul="0.01" add="0"/>
+0
+    </defNumber>
+    <defNumber name="T" label="Celsius" format="%4.2f" min="-100" max="100" step="1">
+    <indiduino pin="19" type="input" mul="0.05" add="-273"/>
+0
+    </defNumber>
+</defNumberVector>
+<defNumberVector device="Arduino MeteoStation" name="LIGHT" label="Irradiance" group="Raw Sensors" state="Idle" perm="ro" timeout="60">
+    <defNumber name="LIGHT" label="LIGHT" format="%5.0f" min="0" max="10240" step="1">
+    <indiduino pin="21" type="input" mul="1" add="0"/>
+0
+    </defNumber>
+</defNumberVector>
+
+
+<defLightVector device="Arduino INPUTS" name="FAIL" label="Sensor FAIL" group="METEO" state="Idle" perm="ro" rule="AnyOfMany" timeout="60">
+    <defLight name="IR" label="IR Fail">
+	<indiduino pin="7"/>
+	Off
+    </defLight>
+    <defLight name="HR" label="HR Fail">
+	<indiduino pin="8"/>
+	Off
+    </defLight>
+    <defLight name="P" label="P Fail">
+	<indiduino pin="9"/>
+	Off
+    </defLight>
+</defLightVector>
+
+
+</INDIDriver>

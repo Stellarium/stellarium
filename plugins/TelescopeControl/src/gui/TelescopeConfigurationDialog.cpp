@@ -137,6 +137,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeConnection, SIGNAL(toggled(bool)), this, SLOT(toggleTypeConnection(bool)));
 	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
 	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
+	connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
 	
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -278,16 +279,16 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionRemote)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true);//Calls toggleTypeConnection(true)
-		ui->lineEditHostName->setText(host);
+		ui->lineEditHostName->setText(host);		
 	}
 	else if (connectionType == ConnectionLocal)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true);
-		ui->lineEditHostName->setText("localhost");
+		ui->lineEditHostName->setText("localhost");		
 	}
 	else if (connectionType == ConnectionVirtual)
 	{
-		ui->radioButtonTelescopeVirtual->setChecked(true);
+		ui->radioButtonTelescopeVirtual->setChecked(true);	
 	}
 	else if (connectionType == ConnectionRTS2)
 	{
@@ -296,6 +297,11 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->lineEditRTS2Username->setText(rts2Username);
 		ui->lineEditRTS2Password->setText(rts2Password);
 		ui->doubleSpinBoxRTS2Refresh->setValue(SECONDS_FROM_MICROSECONDS(rts2Refresh));
+	}
+	else if (connectionType == ConnectionINDI)
+	{
+		ui->radioButtonTelescopeINDI->setChecked(true);
+		ui->lineEditHostName->setText("localhost");
 	}
 
 	//Equinox
@@ -386,7 +392,19 @@ void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
 	else
 	{
 		ui->groupBoxRTS2Settings->hide();
-	}
+    }
+}
+
+void TelescopeConfigurationDialog::toggleTypeINDI(bool enabled)
+{
+	ui->groupBoxConnectionSettings->setVisible(enabled);
+	ui->radioButtonJ2000->setChecked(true);
+	ui->radioButtonJ2000->setHidden(enabled);
+	ui->radioButtonJNow->setHidden(enabled);
+	ui->labelEquinox->setHidden(enabled);
+	ui->doubleSpinBoxTelescopeDelay->setHidden(enabled);
+	ui->labelConnectionDelay->setHidden(enabled);
+	ui->spinBoxTCPPort->setValue(7624);
 }
 
 void TelescopeConfigurationDialog::buttonSavePressed()
@@ -458,6 +476,11 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	{
 		type = ConnectionRTS2;
 		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), ui->lineEditRTS2Url->text(), ui->lineEditRTS2Username->text(), ui->lineEditRTS2Password->text(), MICROSECONDS_FROM_SECONDS(ui->doubleSpinBoxRTS2Refresh->value()));
+	}
+	else if (ui->radioButtonTelescopeINDI->isChecked())
+	{
+		type = ConnectionINDI;
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles);
 	}
 	
 	emit changesSaved(name, type);

@@ -1,0 +1,211 @@
+Source: astrometry-data
+Section: science
+Priority: optional
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: debhelper (>= 8.1.3~)
+Standards-Version: 3.9.4
+Homepage: http://www.astrometry.net/
+
+Package: astrometry-data-4200-1
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4200 index files containing skymarks of sizes 
+ 2 arcminutes to 2.8 arcminutes. This package contains indexs 
+ 4200-00 to 4200-12.
+ 
+Package: astrometry-data-4200-2
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4200 index files containing skymarks of sizes 
+ 2 arcminutes to 2.8 arcminutes. This package contains indexs 
+ 4200-13 to 4200-25.
+
+Package: astrometry-data-4200-3
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4200 index files containing skymarks of sizes 
+ 2 arcminutes to 2.8 arcminutes. This package contains indexs 
+ 4200-26 to 4200-38.
+ 
+Package: astrometry-data-4200-4
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4200 index files containing skymarks of sizes 
+ 2 arcminutes to 2.8 arcminutes. This package contains indexs 
+ 4200-39 to 4200-47.
+ 
+Package: astrometry-data-4201-1
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4201 index files containing skymarks of sizes 2.8
+ arcminutes to 4 arcminutes. This package contains index
+ 4201-00 to 4201-12
+ 
+Package: astrometry-data-4201-2
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4201 index files containing skymarks of sizes 2.8
+ arcminutes to 4 arcminutes. This package contains index
+ 4201-13 to 4201-25
+ 
+Package: astrometry-data-4201-3
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4201 index files containing skymarks of sizes 2.8
+ arcminutes to 4 arcminutes. This package contains index
+ 4201-26 to 4201-38
+ 
+Package: astrometry-data-4201-4
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4201 index files containing skymarks of sizes 2.8
+ arcminutes to 4 arcminutes. This package contains index
+ 4201-39 to 4201-47
+ 
+Package: astrometry-data-4202
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4202 index files containing skymarks of sizes 4
+ arcminutes to 5.6 arcminutes.
+
+Package: astrometry-data-4203
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4203 index files containing skymarks of sizes 5.6
+ arcminutes to 8 arcminutes.
+ 
+Package: astrometry-data-4204
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4204 index files containing skymarks of sizes 8
+ arcminutes to 11 arcminutes.
+ 
+Package: astrometry-data-4205
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4205 index files containing skymarks of sizes 11
+ arcminutes to 16 arcminutes.
+ 
+Package: astrometry-data-4206
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4206 index files containing skymarks of sizes 16
+ arcminutes to 22 arcminutes.
+ 
+Package: astrometry-data-4207
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4207 index files containing skymarks of sizes 22
+ arcminutes to 30 arcminutes.
+ 
+Package: astrometry-data-4208-4219
+Section: science
+Architecture: all
+Depends: ${misc:Depends}
+Multi-Arch: foreign
+Description: Astrometry.net index files
+ The astrometry engine will take any image and return the astrometry
+ world coordinate system (WCS), a standards-based description of the
+ transformation between image coordinates and sky coordinates.
+ .
+ This package contains 4208-4219 index files containing skymarks of sizes 30
+ arcminutes to 2000 arcminutes.
+ 

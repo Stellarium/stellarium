@@ -1,0 +1,30 @@
+Source: libapogee3
+Section: libs
+Priority: extra
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: debhelper (>= 5), cdbs, cmake, libcurl4-gnutls-dev, libboost-regex-dev, libusb-1.0-0-dev
+Standards-Version: 3.9.1
+
+Package: libapogee3
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Apogee Library
+ .
+ This package includes library to control Apogee CCDs and Filter Wheels.
+
+Package: libapogee3-dev
+Architecture: any
+Depends: libapogee3, ${shlibs:Depends}, ${misc:Depends}
+Description: Apogee Library development headers
+ .
+ This package includes development headers for Apogee CCDs and Filter Wheels.
+
+Package: libapogee-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: libapogee3 (= ${binary:Version}), ${misc:Depends}
+Description: Apogee Library debug symbols
+ .
+ This package contains debug symbols.
+

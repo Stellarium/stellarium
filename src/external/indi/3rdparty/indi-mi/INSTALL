@@ -1,0 +1,8 @@
+MI CCD INSTALL
+==============
+
+You must have CMake >= 2.8.0 in order to build this package.
+
+1) $ cmake -DCMAKE_INSTALL_PREFIX=/usr .
+2) $ make
+3) $ su -c 'make install' or sudo make install

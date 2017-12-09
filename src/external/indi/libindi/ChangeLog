@@ -1,0 +1,393 @@
+From 1.4.0 to 1.5.0
+
+      + New Detector Interface for photon and radio detectors.
+      + New Software-Defined-Radio driver (RTLSDR).
+      + New Connections plugin system to facilitate driver development.
+      + New standarized tracking properties system for all mounts.
+      + New Digital Settings Circiles (DSC) driver.
+      + New Lacerta MGen driver.
+      + New NightCrawler Focusing Rotator driver.
+      + New Optec Gemini Focusing Rotater driver.
+      + New iNovaPLX CCD driver.
+      + QHY SDK update to 1.10.0. Support for QHY PoleMaster.
+      + QSI SDK update to 7.6.0
+      + Support for INDI client under Windows.
+      + Support for Pier Side in many mount drivers.
+      + Support for SkySafari.
+      + Fix FLIUSB for 4.6 and 4.9 kernels.
+      + Fixed wrong time format in generated SER files.
+      + ZWO ASI drivers for MacOS.
+      + Various GPSD fixes.
+      + Proper handing of ISO8601 timestamps in the generated filenames.
+      + Improved Gemini mount driver with more functionality and bug fixes.
+      + Many V4L2 fixes and improvements. Support for V4L2 integer menus.
+      + Ability to define multiple primary/guide scope configurations.
+      + ZEQ25 Improvements and fixes.
+      + NStep driver improvements and fixes.
+      + Added Ccache support.
+      + Support for Gotonova driver.
+      + Added Unity Build support.
+      + Improved Astrophysics driver.
+      + Added USB connectivity to SQM device driver.
+      + More robust handling of reading pier side from mount.
+      + Warn client that no devices are detected in case of Multiple-Devices-Per-Driver drivers.
+      + Added PEC control to INDI::Telescope. Each driver must handle the low level protocol to actually enable or disable PEC.
+      + Added security (hardening) flags.
+      + SoftPEC implementation for Virtuoso mounts in skywatcherAPIMount.
+      + Added TELESCOP, OBSERVER, and OBJECT keywords to the FITS header.
+
+From 1.3.1 to 1.4.0
+
+      + Support for HitecAstro DC Focuser.
+      + Support for SQL-LE Sky Quality Meter unit.
+      + Support for USB Focus V3.
+      + Support for Quantum Filter Wheel.
+      + Support for 10micron mounts.
+      + ZWO ASI filter wheel support. Driver updated to latest SDK. Fix infinite loop exposure.
+      + QHY driver updated to latest SDK.
+      + Added preliminary support to TCP server connection for all mounts.
+      + Updated and improved Nexstar Evo driver.
+      + Fixed reset of filter wheel names to default values under some circumstances.
+      + Fixed feedback loop issue in chained INDI server.
+      + Handle correctly broken frames in FLI driver; convert time left from ms to seconds as it should be.
+      + V4L2 CCD driver updated to properly work with DMK cameras.
+      + Several bugfixes for Moravian CCD driver.
+      + CCD Simulator allows for up to 4096x4096 resolution.
+      + Raw color video streaming now uses RGB24 instead of RGBA to conserve bandwidth.
+      + New Dome and Mount safety interlocks mechanism.
+      + Fix the Virtuoso mount detection in SkyWatcherMountAPI driver.
+      + Support relative driver paths to INDI server.
+      + Fix property cache collision conflict in case of multiple devices per driver.
+      + Moonlite driver can now sync to any value instead of reset to zero.
+      + Store OBJECTRA and OBJECTDEC as sexigesimal strings.
+      + New Axis Lock feature to limit joystick to specific motion axis.
+      + INDI server now reaps zombie processes as they appear.
+      + EQMod support for AUX encoder values. ST4 Guide Rates settings. PPEC Switches.
+      + Fix for TELESCOPE_PIER_SIDE implementation in EQMod driver.
+      + Several fixes for Pulsar2 driver.
+      + Fix SER file generation for color frames. Added timestamps for each recorded frame. Support subframed video streams.
+      + Debug and Logging options can be saved in the config file.
+      + New CCD_TRANSFER_FORMAT property.
+      + libindi can now be compiled under MacOS and Cygwin. Non-Linux specific 3rd party drivers are also supported under MacOS and Cygwin.
+      + When a request for snooped is sent, it is echoed to drivers so that they send the snopped value immediately if it exists.
+      + libindi shared library is dropped. libindi now offsers indidriver (shared), indiclient (static), and indiclientqt5 (static) libraries.
+      + Legacy drivers removed: SkyCommander, Intelliscope, MagellanI, TruTech, SBIG STV
+
+From 1.3.0 to 1.3.1
+
+      + Support for Optec IFW Filter Wheel.
+      + Added new method in base client getBLOBMode to retrieve previously set BLOB mode for a device/property pair.
+      + QHY driver use software binning by default for all cameras.
+      + Minor bug fixes and improvements across all drivers.
+
+From 1.2.0 to 1.3.0
+
+      + Support for Shelyak eShel spectrograph.
+      + Support for NStep focuser.
+      + Support for ASI Filter Wheel.
+      + Support for OneStep Telescope Controller.
+      + Support for Moravian CCD driver.
+      + Support for  GigE machine vision cameras.
+      + Experimental SSAG CCD driver.      
+      + Adding support for fast BLOB with ENCLEN. With Fast blob mode enabled, blob performance is now significantly faster.
+      + FITS Min/Max calculations are disabled by default to save processing time unless explicitly enabled by the user at compile time.      
+      + Qt5 based client class is added to enable multiplatform client development.
+      + New significantly faster base64 encoding/decoding routines.      
+      + Selectable alignment modes for INDI EQMod that includes built-in EQMod alignment and INDI Alignment Subsystem.
+      + CCD sequence queue number is no longer limited to 999.
+      + More Starlight Xpress CCDs cameras supported.
+      + Updated Starlight Xpress Adaptive Optics driver.
+      + Updated Temma Takahashi mount driver.
+      + Updated Apogee CCD driver.
+      + Updated QHY CCD driver with numerous fixes.
+      + Updated FLI CCD driver.
+      + Updated Pulasr2 driver.
+      + Updated ASI CCD with support for arm64 architecture, 1600 model and a lot more.
+      + Significant improvements to GPhoto driver including better support for Nikon DSLRs.
+      + Improved GPSd driver.
+      + New CCD_FILE_PATH property to indicate remote file path.
+      + New TELESCOPE_PIER_SIDE property.
+      + Dome & Telescope Scripting Gateway added.
+      + Added support for servos in Indiduino
+      + Fix BuiltinMathPlugin crash for Southern Hemisphere
+      + Add scope park aware feature to the rolloff roof simulator            
+      + INDI Logs are now stored under ~/.indi/logs and arranged by date and time per driver.
+      
+From 1.1.0 to 1.2.0
+      
+      + Support for Davis Vantage Pro/Pro2/Vue Weather Station.
+      + Support for XAGYL Filter Wheel.
+      + Support for Optec Flip Flat.
+      + Support for Pulasr2 mount.
+      + Support for JMI Smart Focus.
+      + Support for GPS driver based on gpsd.
+      + 3rdParty: QHY Updates and Fixes. Color camera support.
+      + 3rdParty: GPhoto focus and live streaming fixes.
+      + 3rdParty: Starlight Xpress support for multiple identical devices and driver improvements.
+      + 3rdParty: ASI updated to latest SDK. Temperature readout for all cameras. ROI & Cooler fixes.
+      + FocusLynx: Support 2 focusers.
+      + Celestron: Support pulse guiding. Support hibernation and wakup on supported firmware.
+      + SynScan: Complete rewrite to support latest features in the firmware.
+      + GPhoto: Mirror lock support before capture.
+      + RoboFocus: Update to comply to INDI::Focus standards.
+      + SBIG: Support for connecting to Ethernet based CCDs.
+      + ZEQ25: Updates and fixes.
+      + MaxDomeII: Driver updated and tested under latest INDI::Dome standards.
+      + QSI: Added anti-blooming option.
+      + INDI WatchDog driver: Can be configured to perform observatory shutdown.
+      + EQMod: Initial support for INDI Alignment Subsystem. Do not stop motor in low speed (guiding issue).
+      + Temma: Complete rewrite based on INDI::Telescope and using INDI Alignment Subsystem.
+      + AutoDome park feature in Dome devices.
+      + Fix Crash on ODroid.
+      + Added Meta-Weather driver to aggregate weather data from multiple sources.
+      + Support for remotely controller dust caps and light box devices.
+      + Handle 16bit images in Rapid Guide mode.
+      + BaseClient non-blocking connect support.
+      + Unified Streaming/Recording support for multiple drivers (ASI/QHY/V4L2).
+
+From 1.0.0 to 1.1.0
+
+      + INDI::Weather for support of weather devices.
+      + INDI::GPS for support of GPS devices.
+      + WunderGround weather driver.
+      + Meade DSI I & II support.
+      + FocusLynx focuser support.
+      + PerfectStar focuser support.
+      + World Coordinate System (WCS) support in generated FITS.
+      + Updated Losmany driver.
+      + New Celestron driver.
+      + New IEQPro driver.
+      + Support for custom parking in dome drivers.
+      + Support Open Loop dome controllers.
+      + Various QHY CCD & Filter Wheel fixes and QHY OSX support.
+      + SBIG External Guide CCD fixes.
+      + Custom parking support for Celestron/Astrophysics/AstroElectronics/IEQPro
+      + Updated ASI ZWO drivers.
+      + Updated Apogee library. Improved NET support in INDI Apogee driver.
+      + Standarizing mount slew and track rates.
+      + Video4Linux 2 fixes and improvements: (16bpp pixel formats(Y16 and BYR2), pwc flashled, colorSpace/linearization, stacking), Simutaneous record/stream/exp. Stream rate divisor. Rec. file patterns.
+      + EQMod fixes: Keep tracking after joystick motion is stopped. Park initialization always set encoders.
+      + Improved support for drivers on ARM architecture.
+      + Improved logging capability.
+      + Deprecated: LX200Legacy and indimain library.
+
+From 0.9.9 to 1.0.0
+
+      + 3rdparty: Support for QHY CCDs and CFWs (BETA).
+      + 3rdparty: Support for Meade DSI (BETA).
+      + 3rdparty: Support for FFMV cameras.
+      + Support for STAR2000.
+      + Support for Baader dome.
+      + Support for Baader SteelDrive focuser.
+      + Support for dome slaving (BETA).
+      + Subframing and debayer support in GPhoto driver.
+      + Improved CFW handling and external tracking CCD for SBIG CCDs.
+      + Add debayer support for color cameras with user-configurable options. Debayer is performed at the client level.
+      + Fixed deinterlacing and subframing support in Starlight Xpress drivers.
+      + Fixed issues with joystick support in some drivers. Added joystick support to focuser and filter wheels.
+      + Improvements in generation of FITS header.
+      + Improvement in performance of some drivers under SBCs like Raspberry PI.
+      + Added fan and readout speed controls to QSI CCD.
+      + Fixed locale issue in INDI driver.
+      + Fixed regression in LX200Basic driver.
+      + Fixed issue with INDI Server resetting environment variable for skeleton and config files.
+      + Various fixes for loading/saving of user configuration.
+      
+From 0.9.8 to 0.9.9
+
+      + Thread-safe INDI Library.
+      + Support for Rigelsys NFocus Focuser driver.
+      + 3rdparty: Additional VID/PID for QHY.
+      + 3rdparty: added USB Bandiwdth control for ZWO Optical cameras.
+      + 3rdparty: Updated and improved INDI Apogee driver and Apogee Library major update.
+      + 3rdparty: Live preview support for GPhoto driver. Tested on Canon.
+      + 3rdparty: Various bugfixes and improvements in INDI SBIG driver including working guide chip support.
+      + 3rdparty: Fixed time drift error in EQMod. Added Horizon limits. Added Backlash comp.
+      + Updated and improved Image Agent.
+      + Improved Astrophysics driver support.           
+      + Fixed location bug in Celestron GPS driver.
+      + Additional information in FITS header such as filter name.
+      + Joystick support for focuser and filter wheel devices.
+      + Added option to enable local & remote save for FITS images in all CCD drivers.
+      + Older V4L driver is deprecated (indi_v4l_legacy) and is replaced by indi_v4l2_ccd
+      + V4L2: added recording (SER files) for use with Registax
+      + V4L2: added RGGB & UYVY pixel format support to V4L2 drivers.
+      + V4L2: fixed LX long exposure times.
+      + Updated and improved tutorials.
+      + Fixed few OSX compatibility issues.
+      + Various bug fixes and improvements.      
+      
+From 0.9.7 to 0.9.8
+
+      + Support for Telescope Alignment Subsystem Infrastructure. This includes an implementation of Markley's singular value decomposition (SVD) based algorithm for the computation of sky/telescope
+coordinate conversion transforms, in addition to multiple plugin support.
+      + Suppprt for SkyWatcherAPI Mount with Alignment Subsystem.
+      + Support for ZWO Optics ASI Cameras (3rd party)
+      + Support for AAG Cloud Watcher station (3rd Party).
+      + Support for MoonLite focusers.
+      + Support for Fishcamp CCDs (3rd Party).
+      + Support for Imager Agent.      
+      + Improved EQMod driver including custom parking position.
+      + New and updated Astrophysics mount driver.
+      + New and updated QHY CCD Driver (3rd Party).      
+      + New and improved GPhoto driver to support DSLRs.
+      + New and updated Video4Linux CCD Driver including support for long exposures (LX) and Imaging Source cameras.
+      + New and improved Apogee CCD driver.
+      + Improved support for SBIG CCDs including ST-I.
+      + Updated and improved TCFS Focuser drivers.      
+      + Drivers migrated to libusb 1.0 framework.
+      + Rapid Guide Support for CCD Drivers.
+      + Improved compatibility with Mac OSX including INDI Server and GUI.
+      + Various bug fixes and improvements.
+
+From 0.9.6 to 0.9.7
+
+      + Support for EQMod mount driver (3rd party).
+      + Support for ATIK CCDs and Filter Wheels (3rd party).
+      + Support for Shoestring Astronomy FCUSB (3rd party).
+      + Support for joysticks and game pads under Linux.
+      + LX200, Celeston, and EQMod drivers support joystick input.
+      + Improved LX200 & Celestron telescope drivers.
+      + Improved simulator drivers.
+      + INDI server support for multiple devices per driver.
+      + New universal logging and debugging framework for INDI developers.
+      + Fixed an issue in TCFS driver where a connect may fail if focuser is put into sleep mode.
+      + Fixed an issue where the client thread in INDI::BaseClient is not being terminated gracefully in blocking mode.
+      + Fixed an issue involving non-English clients that utilize INDI client library to communicate with INDI server.
+      + Fixed an issue where some properties in some drivers are sent before getting defined by INDI. 
+
+From 0.9.5 to 0.9.6
+
+      + Support for Starlight Xpress Adaptive Optics unit. 
+      + Improved support for Startlight Xpress CCDs and Filter wheels. 
+      + Support for Arduino boards, with customizable drivers for common observatory auxiliary devices. 
+      + Support for GPUSB Guide Port Interface. 
+      + Improved support for QSI CCDs and Filter wheels. 
+      + Support for filters with absolute positioning. 
+      + Support for cameras with guiding chip. 
+      + Fixed INDI server FIFO CPU utilization bug.
+      + Fixed various bugs with v4l drivers due to code regression. 
+      + Improved support for Mac OS X. 
+      + Improved simulators. 
+      + _REQUEST properties are now deprecated. 
+      + Updated tutorials and API.
+
+From 0.9 to 0.95
+
+      # Focuser simulator driver.
+      # CCD, Telescope, Focuser, and Filter simulators improvements including periodic error effects, FWHM, and more.
+      # Major improvements to INDI Base Library and INDI Client Library.
+      # Fixed minor bugs in LX200 Generic, LX200 FS2, Magellan, and Celestron drivers.
+      # Minor bugfixes and improvements.
+      
+From 0.8 to 0.9
+
+      # iEQ45 GoTo German Equatorial Mount Driver.
+      # INDI::Base drivers are now used for most classes of astrnomical instruments.
+      # New improved QSI CCD & Filter driver.
+      # New improved Starlight Xpress CCD & Filter driver.
+      # New improved RoboFocus driver.
+      # libboost is no longer required to build libindi.
+      # Numerous bug fixes and minor improvements.
+
+From 0.7.2 to 0.8
+
+      # TCF-S Focuser driver.
+      # Synscan Telescope driver.
+
+From 0.7.0 to 0.7.1
+
+      # Fixed change filter bug in true technology filter wheel. (JM)
+      # setINDI updated and improved. (ED)
+      # Improved INDI::Mediator functionality. (JM)
+      # Fixed buffer reading in INDI::BaseClient. (JM)
+      # Add new tutorial for INDI::BaseClient. (JM).
+
+From 0.6.2 to 0.7.0
+
+      # Dynamic renaming of drivers upon run time.
+      # Standard helper API to create and utilize INDI clients.
+      # Ability to load driver properties from an external XML file.
+      # Ability to write/read XML configuration files for driver values to be loaded at run time.
+      # Facilitating debugging and simulation of drivers.
+      # New C++ framework to facilitate the development of new INDI drivers.
+      # Several bug fixes for current drivers and framework. 
+
+From 0.6.1 to 0.6.2
+
+	# Build related updates.
+
+From 0.6 to 0.6.1
+
+	# Updating drivers.xml to comply to new XML structure for group and devices metadata descriptions.
+
+From 0.5 to 0.6
+
+        # Devices:
+                + Astrophysics mount is now working.
+                + Apogee driver is now working.
+        # Features:
+                + New libindi structure to streamline development.
+                + Drivers using Standard Property _REQUEST WO to make requests. This facilitates scripting and automation of drivers.
+                + Updated inter-driver communication with INDI SNOOP.
+
+From 0.4 to 0.5
+
+	# Devices:
+		+ True Technology Filter Wheel
+		+ SBIG STV
+
+	# Features:
+	     + Added INDI Observer pattern to enable flexible inter-driver communication.
+             + getINDI now supports BLOBs.
+	     + LX200 Drivers use client timestamp to update the telescope internal clock. The old behavior was to use to system's time.
+	     + Added a new INDI Standard Property: UTC_OFFSET.
+	     + Dropping threaded INDI server in favor of the slightly better non-threaded version due to performance considerations.
+
+	# Bugs
+	     + SBIG CCD driver was updated to fix problems with CFITSIO.
+	     + Updated TTY API to include error reporting, in addition to fixing a few bugs.
+	     + Fixed INDI Mac OSX Crash.
+
+	# Known Issues
+	     + Astrophysics Mount driver (apmount) is not working. It is currently under new development and is intented to be released in the next version as it matures.
+             + Meade LPI exposure is locked to 1 second. The Video4Linux support for timed exposures is limited. A fix should be available in the next release.
+             + The SBIG driver does not allow autoguiding. When one selects the guider CCD, any exposure on the imaging CCD is cancelled and vice-versa.
+
+From v0.3 to v0.4:
+
+	# Devices:
+
+		+ SBIG CCD
+		+ SBIG CFW
+		+ RoboFocus
+		+ FLI Precision Focuser
+		+ Orion Atlas / Sky Scan
+		
+	# Other:
+		+ Added more API documentation and revised existing documentation for accuracy and consistency.
+		+ Fixed UTC correction bug in LX200 driver.
+		+ Fixed pallete selection in V4L 2 drivers.
+		+ Fixed bug in eventloop that can cause IE timers to crash.
+		+ Added variable focus speed for Meade Autostar and GPS.
+		+ Added CFITSIO, a mature and robust FITS library.
+		+ New RS232 API for common access routines.
+
+From v0.2 to v0.3:
+
+	# Devices:
+		+ Apogee CCD (Experimental)
+		+ SkyCommander
+		+ Temma Takahashi
+		+ FLI Filter Wheel
+		+ Meade Lunar Planetary Imager (Experimental)
+		+ Astrophysics AP
+
+	# Other:
+		+ Support for Video 4 Linux 2
+		+ Multi-threaded INDI server
+		+ Binary transfer via BLOB
+		+ INDI scripting tools
+		+ Various bug fixing
+
+INDI Library v1.1 conforms to INDI wire protocol v1.7

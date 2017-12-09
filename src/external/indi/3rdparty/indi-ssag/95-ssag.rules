@@ -1,0 +1,6 @@
+#Unintialized ssag
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1856", ATTRS{idProduct}=="0011", MODE="0666"
+#ssag after firmware load
+SUBSYSTEMS=="usb", ATTRS{idVendor}=="1856", ATTRS{idProduct}=="0012", MODE="0666"
+
+

@@ -1,0 +1,12 @@
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_AUTOMOC ON)
+
+find_package(Qt5Test)
+
+add_executable(testTelescopeControl_INDI testTelescopeControl_INDI.cpp testTelescopeControl_INDI.hpp)
+target_link_libraries(testTelescopeControl_INDI Qt5::Test TelescopeControl_INDI)
+add_test(testTelescopeControl_INDI testTelescopeControl_INDI)
+
+add_executable(testINDIConnection testINDIConnection.cpp testINDIConnection.hpp)
+target_link_libraries(testINDIConnection Qt5::Test TelescopeControl_INDI)
+add_test(testINDIConnection testINDIConnection)

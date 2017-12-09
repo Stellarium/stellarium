@@ -1,0 +1,34 @@
+SkyWatcher Protocol Driver INSTALL
+==============
+
+You must have CMake >= 2.4.7 in order to build this package.
+
+1) $ tar -xzf indi-eqmod.tar.gz
+2) $ mkdir indi-eqmod_build
+3) $ cd indi-eqmod_build
+4) $ cmake -DCMAKE_INSTALL_PREFIX=/usr . ../indi-eqmod
+5) $ su -c 'make install' or sudo make install
+   
+Refer to README for instructions on using the driver.
+
+CMake Compilation Options:
+	
+	a) Logging: Debug messages may be logged into a file 
+with a different verbosity than the one used for client messages.
+Log files names are /tmp/indi_eqmod_telescope_%TIMESTAMP%.log.
+$ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWITH_LOGGER:OPTION=TRUE . ../indi-eqmod
+
+	b) Simulator: included by default, can be suppressed if desired.
+$ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWITH_SIMULATOR:OPTION=FALSE . ../indi-eqmod
+
+  	c) NOFMANY switches: it seems that some (of mine) versions
+of Kstars do not support the display of NOFMANY switches, normal
+switches are used by default. 
+$ cmake -DCMAKE_INSTALL_PREFIX=/usr -DWITH_NOFMANY:OPTION=TRUE . ../indi-eqmod
+
+  	d) **SUPPRESSED** Stop motor when motion mode changes: always stop motor before changing
+motion mode/speed. By default, the driver only emits commands for changing speed
+when the motion mode is the same.
+$ cmake -DCMAKE_INSTALL_PREFIX=/usr -DSTOP_WHEN_MOTION_CHANGED:OPTION=TRUE . ../indi-eqmod
+
+That's it!

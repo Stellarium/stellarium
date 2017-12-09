@@ -1,0 +1,83 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>Show color by sector</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    
+    <style>
+      body {
+        text-align: center;
+      }
+      
+      #g1, #g2, #g3 {
+        width:200px; height:160px;
+        display: inline-block;
+        margin: 1em;
+      }
+          
+      p {
+        display: block;
+        width: 450px;
+        margin: 2em auto;
+        text-align: left;
+      }
+    </style>
+    
+    <script src="resources/js/raphael.2.1.0.min.js"></script>
+    <script src="resources/js/justgage.1.0.1.min.js"></script>
+    <script>
+      var g1, g2, g3;
+      
+      window.onload = function(){
+        var g1 = new JustGage({
+          id: "g1", 
+          value: getRandomInt(0, 32), 
+          min: 0,
+          max: 100,
+          title: "Green",
+          label: "",
+          levelColorsGradient: false
+        });
+        
+        var g2 = new JustGage({
+          id: "g2", 
+          value: getRandomInt(34, 65),
+          min: 0,
+          max: 100,
+          title: "Yellow",
+          label: "",
+          levelColorsGradient: false
+        });
+        
+        var g3 = new JustGage({
+          id: "g3", 
+          value: getRandomInt(66, 100), 
+          min: 0,
+          max: 100,
+          title: "Red",
+          label: "",
+          levelColorsGradient: false
+        });
+      
+        setInterval(function() {
+          g1.refresh(getRandomInt(0, 32));
+          g2.refresh(getRandomInt(34, 65));          
+          g3.refresh(getRandomInt(66, 100));
+        }, 2500);
+      };
+    </script>
+
+	</head>
+  <body>    
+    <div id="g1"></div>
+    <div id="g2"></div>
+    <div id="g3"></div>
+    <p>
+      Too many gauges on your page, feels like Woodstock with all them colors around? Then choose sector-based color representation of the displayed value. It means color will stay green for all values below 33%, yellow from 34% up until 66%. Take it over 67% and your gauge will glow red. These three are the default colors. 
+    </p>
+    <p>
+      You can also define your own set of any number of colors, and thus get same number of color-coded sectors. Sweet. 
+    </p>
+  </body>
+</html>

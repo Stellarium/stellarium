@@ -1,0 +1,23 @@
+modname := fliusb
+DKMS := dkms
+modver := 1.3
+
+# directory in which generated files are stored
+DKMS_DEST := /usr/src/$(modname)-$(modver)
+
+all: install
+
+src_install:
+	mkdir -p '$(DKMS_DEST)'
+	cp Makefile fliusb* dkms/dkms.conf '$(DKMS_DEST)'
+
+build: src_install
+	$(DKMS) build -m fliusb -v $(modver)
+
+install: build
+	$(DKMS) install -m fliusb -v $(modver)
+
+uninstall:
+	$(DKMS) remove -m fliusb -v $(modver) --all
+
+.PHONY: all src_install build install uninstall

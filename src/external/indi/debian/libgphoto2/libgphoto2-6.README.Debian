@@ -1,0 +1,27 @@
+Using libgphoto2 as a normal user
+---------------------------------
+
+This version of libgphoto2-installs udev files in /lib/udev/rules.d/ to
+allow camera access to all members of group 'plugdev'.
+
+This means the only configuration is to add authorized users to the 'plugdev'
+group.  Note that group changes will only apply when you relog.
+
+udev may fail to set group ownership for cameras that are not explicitly known
+by gphoto2, if you know your camera is a generic PTP model not handled by udev,
+you can create a file in /etc/udev/rules.d/, say z25_my_camera.rules, with such
+a content:
+
+ACTION=="add", SYSFS{idVendor}=="XXXX", SYSFS{idProduct}=="YYYY", \
+  MODE="0660", GROUP="plugdev"
+
+You can get XXXX and YYYY value with lsusb, for example:
+
+  Bus 001 Device 010: ID 04a9:3125 Canon, Inc.
+                         ^^^^ ^^^^
+			 XXXX YYYY
+
+You can also send the USB ID as a Debian bug report or to gphoto2 development
+mailing list at gphoto-devel@lists.sourceforge.net
+
+Note: before 2.2.1-9, the group was not 'plugdev' but 'camera'.

@@ -1,0 +1,25 @@
+Source: gsc
+Section: science
+Priority: extra
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: debhelper (>= 6), cdbs, cmake
+Standards-Version: 3.9.1
+
+Package: gsc
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, gsc-data (>= ${source:Version})
+Description: Global Star Catalog.
+ .
+ The GSC-ACT is a recalibration of the Hubble Guide Star Catalog (GSC), version 1.1, using the ACT (Astrographic Catalog/Tycho) from the US Naval Observatory.
+ .
+ The ACT offers better positions and more stars than the reference catalogs originally used to reduce the Guide Star Catalog, so the astrometric fit can include more terms... and this is a very good thing, because the plates include distortions that the simple third-order GSC 1.1 fit cannot accommodate. In GSC-ACT, terms up to order 5 are included. 
+
+Package: gsc-data
+Architecture: all
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Global Star Catalog.
+ .
+ The GSC-ACT is a recalibration of the Hubble Guide Star Catalog (GSC), version 1.1, using the ACT (Astrographic Catalog/Tycho) from the US Naval Observatory.
+ .
+ This package install the data files. 
+

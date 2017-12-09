@@ -1,0 +1,287 @@
+<INDIDriver>
+<defNumberVector device="EQMod Mount" name="HORIZONTAL_COORD" label="Hor. Coordinates" group="Main Control" state="Idle" perm="ro">
+<defNumber name="ALT" label="Altitude" format="%10.6m" min="-90.00" max="90.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="AZ" label="Azimuth" format="%10.6m" min="0.0" max="360.0" step="0.0">
+0.0
+</defNumber>
+</defNumberVector>
+<defNumberVector device="EQMod Mount" name="GUIDE_RATE" label="Guiding Rate" group="Motion Control" state="Idle" perm="rw">
+<defNumber name="GUIDE_RATE_WE" label="W/E Rate" format="%1.1f" min="0.0" max="1.0" step="0.1">
+0.5
+</defNumber>
+<defNumber name="GUIDE_RATE_NS" label="N/S Rate" format="%1.1f" min="0.0" max="1.0" step="0.1">
+0.5
+</defNumber>
+</defNumberVector>
+<defTextVector device="EQMod Mount" name="MOUNTINFORMATION" label="Mount Information" group="Firmware" state="Idle" perm="ro" message="Mount Info message">
+<defText name="MOUNT_TYPE" label="Mount Type"></defText> 
+<defText name="MOTOR_CONTROLLER" label="Firmware Version"></defText> 
+</defTextVector>
+<defNumberVector device="EQMod Mount" name="STEPPERS" label="Stepper/Gear" group="Firmware" state="Idle" perm="ro">
+<defNumber name="RASteps360" label="RA Steps (Total)" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="DESteps360" label="DE Steps (Total)" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="RAStepsWorm" label="RA IT Freq." format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="DEStepsWorm" label="DE IT Freq." format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="RAHighspeedRatio" label="RA Highspeed ratio" format="%.0f" min="1.0" max="256.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="DEHighspeedRatio" label="DE Highspeed ratio" format="%.0f" min="1.0" max="256.0" step="1.0">
+1.0
+</defNumber>
+</defNumberVector>
+<defNumberVector device="EQMod Mount" name="CURRENTSTEPPERS" label="Stepper Position" group="Motor Status" state="Idle" perm="ro">
+<defNumber name="RAStepsCurrent" label="RA Steps" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="DEStepsCurrent" label="DE Steps" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+</defNumberVector>
+<defLightVector device="EQMod Mount" name="RASTATUS" label="RA Motor Status" group="Motor Status" state="Idle" perm="ro">
+    <defLight name="RAInitialized" label="Initialized">
+Alert
+    </defLight>
+    <defLight name="RARunning" label="Running">
+Idle
+    </defLight>
+    <defLight name="RAGoto" label="Slew/Goto">
+Idle
+    </defLight>
+    <defLight name="RAForward" label="Backward/Forward">
+Idle
+    </defLight>
+    <defLight name="RAHighspeed" label="Lowspeed/Highspeed">
+Idle
+    </defLight>
+</defLightVector>
+<defLightVector device="EQMod Mount" name="DESTATUS" label="DE Motor Status" group="Motor Status" state="Idle" perm="ro">
+    <defLight name="DEInitialized" label="Initialized">
+Alert
+    </defLight>
+    <defLight name="DERunning" label="Running">
+Idle
+    </defLight>
+    <defLight name="DEGoto" label="Slew/Goto">
+Idle
+    </defLight>
+    <defLight name="DEForward" label="Backward/Forward">
+Idle
+    </defLight>
+    <defLight name="DEHighspeed" label="Lowspeed/Highspeed">
+Idle
+    </defLight>
+</defLightVector>
+<defNumberVector device="EQMod Mount" name="JULIAN" label="JD" group="Site Management" state="Idle" perm="ro">
+<defNumber name="JULIANDATE" label="Julian Date" format="%8.8f" min="0.0" max="9999999999.0" step="0.00000000001">
+0.0
+</defNumber>
+</defNumberVector>
+<defNumberVector device="EQMod Mount" name="TIME_LST" label="LST" group="Site Management" state="Idle" perm="ro">
+<defNumber name="LST" label="Local Sidereal Time" format="%010.6m" min="0.0" max="24.0" step="0.000000000001">
+12.0
+</defNumber>
+</defNumberVector>
+<defNumberVector device="EQMod Mount" name="SLEWSPEEDS" label="Custom Speeds" group="Motion Control" state="Idle" perm="rw">
+<defNumber name="RASLEW" label="RA Slew" format="%3.2fx" min="0.05" max="800.0" step="0.05">
+64.0
+</defNumber>
+<defNumber name="DESLEW" label="DE Slew" format="%3.2fx" min="0.05" max="800.0" step="0.05">
+64.0
+</defNumber>
+</defNumberVector>
+<defNumberVector device="EQMod Mount" name="PERIODS" label="Worm Periods" group="Motor Status" state="Idle" perm="ro">
+<defNumber name="RAPERIOD" label="RA Period" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+256.0
+</defNumber>
+<defNumber name="DEPERIOD" label="DE Period" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+256.0
+</defNumber>
+</defNumberVector>
+<defSwitchVector device="EQMod Mount" name="HEMISPHERE" label="Hemisphere" group="Site Management" state="Idle" perm="ro" rule="OneOfMany">
+<defSwitch name="NORTH" label="North">
+On
+</defSwitch>
+<defSwitch name="SOUTH" label="South">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="TELESCOPE_TRACK_DEFAULT" label="Track Default" group="Motion Control" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="TRACK_SIDEREAL" label="Sidereal">
+On
+</defSwitch>
+<defSwitch name="TRACK_LUNAR" label="Lunar">
+Off
+</defSwitch>
+<defSwitch name="TRACK_SOLAR" label="Solar">
+Off
+</defSwitch>
+<defSwitch name="TRACK_CUSTOM" label="Custom">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="REVERSEDEC" label="Reverse DEC" group="Main Control" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="ENABLE" label="Enable">
+Off
+</defSwitch>
+<defSwitch name="DISABLE" label="Disable">
+On
+</defSwitch>
+</defSwitchVector>
+<defNumberVector device="EQMod Mount" name="STANDARDSYNC" label="Delta" group="Sync" state="Idle" perm="ro">
+<defNumber name="STANDARDSYNC_RA" label="Delta RA (hh:mm:ss)" format="%010.6m" min="0.0" max="24.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="STANDARDSYNC_DE" label="Delta DE (dd:mm:ss)" format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+</defNumberVector>
+<defNumberVector device="EQMod Mount" name="STANDARDSYNCPOINT" label="Sync Data" group="Sync" state="Idle" perm="rw">
+<defNumber name="STANDARDSYNCPOINT_JD" label="Sync Date" format="%08.8f" min="0.0" max="9999999999" step="0.0">
+0.0
+</defNumber>
+<defNumber name="STANDARDSYNCPOINT_SYNCTIME" label="Sync LST" format="%010.6m" min="0.0" max="24.0" step="0.000000000001">
+0.0
+</defNumber>
+<defNumber name="STANDARDSYNCPOINT_CELESTIAL_RA" label="Celestial RA (hh:mm:ss)" format="%010.6m" min="0.0" max="24.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="STANDARDSYNCPOINT_CELESTIAL_DE" label="Celestial DE (dd:mm:ss)" format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="STANDARDSYNCPOINT_TELESCOPE_RA" label="Telescope RA (hh:mm:ss)" format="%010.6m" min="0.0" max="24.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="STANDARDSYNCPOINT_TELESCOPE_DE" label="Telescope DE (dd:mm:ss)" format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+
+</defNumberVector>
+<defNumberVector device="EQMod Mount" name="SYNCPOLARALIGN" label="Polar Align" group="Sync" state="Idle" perm="ro">
+<defNumber name="SYNCPOLARALIGN_ALT" label="Est. Mount Alt." format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="SYNCPOLARALIGN_AZ" label="Est. Mount AZ."  format="%10.6m" min="0.0" max="360.0" step="0.0">
+0.0
+</defNumber>
+</defNumberVector>
+<defSwitchVector device="EQMod Mount" name="SYNCMANAGE" label="Manage Sync" group="Sync" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="SYNCCLEARDELTA" label="Clear Sync Delta">
+Off
+</defSwitch>
+</defSwitchVector>
+<defNumberVector device="EQMod Mount" name="BACKLASH" label="Backlash" group="Options" state="Idle" perm="rw">
+<defNumber name="BACKLASHRA" label="RA Backlash (microsteps)" format="%.0f" min="10.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="BACKLASHDE" label="DE Backlash (microsteps)" format="%.0f" min="10.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+</defNumberVector>
+<defSwitchVector device="EQMod Mount" name="USEBACKLASH" label="Use Backlash" group="Options" state="Idle" perm="rw" rule="AnyOfMany">
+<defSwitch name="USEBACKLASHRA" label="RA">
+Off
+</defSwitch>
+<defSwitch name="USEBACKLASHDE" label="DE">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="ALIGNSYNCMODE" label="Sync. Mode" group="Sync" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="ALIGNSTANDARDSYNC" label="Standard Sync">
+Off
+</defSwitch>
+<defSwitch name="ALIGNAPPENDSYNC" label="Add point on Sync">
+On
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="AUTOHOME" label="Autohome" group="Site Management" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="PERFORM" label="Perform">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="AUXENCODER" label="Aux. Encoders" group="Options" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="AUXENCODER_OFF" label="Off">
+On
+</defSwitch>
+<defSwitch name="AUXENCODER_ON" label="On">
+Off
+</defSwitch>
+</defSwitchVector>
+<defNumberVector device="EQMod Mount" name="AUXENCODERVALUES" label="Aux. Encoders" group="Motor Status" state="Idle" perm="ro">
+<defNumber name="AUXENCRASteps" label="RA Steps" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+<defNumber name="AUXENCDESteps" label="DE Steps" format="%.0f" min="0.0" max="16777215.0" step="1.0">
+1.0
+</defNumber>
+</defNumberVector>
+<defSwitchVector device="EQMod Mount" name="ST4_GUIDE_RATE_NS" label="ST4 Rate N/S" group="Motion Control" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="ST4_RATE_NS_0" label="1.00x">
+Off
+</defSwitch>
+<defSwitch name="ST4_RATE_NS_1" label="0.75x">
+Off
+</defSwitch>
+<defSwitch name="ST4_RATE_NS_2" label="0.50x">
+On
+</defSwitch>
+<defSwitch name="ST4_RATE_NS_3" label="0.25x">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="ST4_GUIDE_RATE_WE" label="ST4 Rate W/E" group="Motion Control" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="ST4_RATE_WE_0" label="1.00x">
+Off
+</defSwitch>
+<defSwitch name="ST4_RATE_WE_1" label="0.75x">
+Off
+</defSwitch>
+<defSwitch name="ST4_RATE_WE_2" label="0.50x">
+On
+</defSwitch>
+<defSwitch name="ST4_RATE_WE_3" label="0.25x">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="RA_PPEC_TRAINING" label="RA PPEC Training" group="Permanent PEC" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="RA_PPEC_TRAINING_OFF" label="Off">
+On
+</defSwitch>
+<defSwitch name="RA_PPEC_TRAINING_ON" label="On">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="RA_PPEC" label="Turn RA PPEC" group="Permanent PEC" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="RA_PPEC_OFF" label="Off">
+On
+</defSwitch>
+<defSwitch name="RA_PPEC_ON" label="On">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="DE_PPEC_TRAINING" label="DE PPEC Training" group="Permanent PEC" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="DE_PPEC_TRAINING_OFF" label="Off">
+On
+</defSwitch>
+<defSwitch name="DE_PPEC_TRAINING_ON" label="On">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="DE_PPEC" label="Turn DE PPEC" group="Permanent PEC" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="DE_PPEC_OFF" label="Off">
+On
+</defSwitch>
+<defSwitch name="DE_PPEC_ON" label="On">
+Off
+</defSwitch>
+</defSwitchVector>
+</INDIDriver>

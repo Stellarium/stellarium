@@ -1,12 +1,13 @@
 //
 // Author: Alexander Wolf
-// Version: 1.0
+// Version: 1.1
 // License: Public Domain
 // Name: Tycho's Supernova
 // Description: Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae plugin has to be enabled.
 //
 
 var color = "#9999FF";
+var JD = core.getJDay();
 
 core.goHome();
 core.wait(1);
@@ -138,5 +139,6 @@ core.wait(.1);
 core.clear("natural");
 core.wait(.1);
 core.goHome();
+core.setJDay(JD);
 core.wait(1);
 core.setGuiVisible(true);

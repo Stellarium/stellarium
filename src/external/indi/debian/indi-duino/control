@@ -1,0 +1,23 @@
+Source: indi-duino
+Section: science
+Priority: extra
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: debhelper (>= 6), cdbs, cmake, libindi-dev, zlib1g-dev, libusb-dev
+Standards-Version: 3.9.1
+
+Package: indi-duino
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libindi1
+Description: INDI Arduino driver.
+ .
+ This driver enables utilizing Arduino boards as general propouse I/O. This driver is compatible with any INDI client such as KStars or Xephem.
+
+Package: indi-duino-dbg
+Priority: extra
+Section: debug
+Architecture: any
+Depends: indi-duino (= ${binary:Version}), ${misc:Depends}
+Description: INDI Arduino Driver.
+ .
+ This driver enables utilizing Arduino boards as general propouse I/O.
+ This package contains the debug symbols for the this driver, useful to investigate problems in INDI.
