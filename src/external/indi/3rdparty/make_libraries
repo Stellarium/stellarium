@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# This is a script building libraries for travis-ci
+# It is *not* for general audience
+
+LIBS="libapogee libfishcamp libfli libfli libqhy libqsi libsbig"
+
+for lib in $LIBS ; do
+(
+    echo "Building $lib ..."
+    mkdir build_$lib
+    cd build_$lib
+    cmake -DCMAKE_INSTALL_PREFIX=/usr . ../../../3rdparty/$lib
+    make
+    sudo make install
+)
+done

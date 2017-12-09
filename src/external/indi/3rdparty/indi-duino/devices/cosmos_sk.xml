@@ -1,0 +1,58 @@
+<INDIDriver>
+
+<defSwitchVector device="Arduino Cosmos" name="CONNECTION" label="Connection" group="Main Control" state="Idle" perm="rw" rule="OneOfMany" timeout="60">
+    <defSwitch name="CONNECT" label="Connect">
+Off
+    </defSwitch>
+    <defSwitch name="DISCONNECT" label="Disconnect">
+On
+    </defSwitch>
+</defSwitchVector>
+
+<defTextVector device="Arduino Cosmos" name="DEVICE_PORT" label="SERIAL" group="Main Control" state="Idle" perm="rw" timeout="0">
+    <defText name="PORT" label="Port">
+/dev/ttyUSB0
+    </defText>
+</defTextVector>
+
+<defSwitchVector device="Arduino Cosmos" name="BACK_LIGHT" label="BACK_LIGHT" group="Main Control" state="Idle" perm="rw" rule="OneOfMany" timeout="1">
+    <defSwitch name="ON" label="OPEN">
+Off
+    <indiduino pin="13"/>
+    </defSwitch>
+    <defSwitch name="OFF" label="CLOSE">
+On
+    </defSwitch>
+</defSwitchVector>
+
+
+<defNumberVector device="Arduino Cosmos" name="LIGTH" label="LIGHT" group="Main Control" state="Idle" perm="rw" timeout="0">
+    <defNumber name="LCD" label="LCD" format="%4.0f" min="0" max="255" step="1">
+    <indiduino pin="9" type="output"/>
+0
+    </defNumber>
+</defNumberVector>
+<defNumberVector device="Arduino Cosmos" name="POT" label="POT" group="Main Control" state="Idle" perm="ro" timeout="0">
+    <defNumber name="POT1" label="POT1" format="%4.0f" min="0" max="10240" step="1">
+    <indiduino pin="18" type="input" mul="1" add="0"/>
+0
+    </defNumber>
+    <defNumber name="POT2" label="POT2" format="%4.0f" min="0" max="1024" step="1">
+    <indiduino pin="14" type="input" mul="1" add="0"/>
+0
+    </defNumber>
+</defNumberVector>
+<defTextVector device="Arduino Cosmos" name="STRING" label="STRING" group="Main Control" state="Idle" perm="ro" timeout="0">
+    <defText name="ARDUINO" label="SAY">
+       <indiduino/>
+NOTHING
+    </defText>
+</defTextVector>
+<defNumberVector device="Arduino Cosmos" name="TEMP" label="" group="Main Control" state="Idle" perm="ro" timeout="0">
+    <defNumber name="TEMP" label="TEMP" format="%4.2f" min="-50" max="100" >
+    <indiduino pin="17" type="input" mul="0.4882" add="-273.15"/>
+22.9
+    </defNumber>
+</defNumberVector>
+
+</INDIDriver>

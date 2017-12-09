@@ -1,0 +1,70 @@
+<INDIDriver>
+<defTextVector device="EQMod Mount" name="HORIZONLIMITSDATAFILE" label="Horizon File" group="Horizon" state="Idle" perm="rw">
+<defText name="HORIZONLIMITSFILENAME" label="Name">~/.indi/HorizonData.txt</defText> 
+</defTextVector>
+<defBLOBVector device="EQMod Mount" name="HORIZONLIMITSDATAFITS" label="Display" group="Horizon" state="Idle" perm="ro">
+<defBLOB name="HORIZONPOINTS" label="Horizon"/>
+</defBLOBVector>
+
+<defNumberVector device="EQMod Mount" name="HORIZONLIMITSPOINT" label="Horizon Point" group="Horizon" state="Idle" perm="rw">
+<defNumber name="HORIZONLIMITS_POINT_AZ" label="Azimuth (dd:mm:ss)" format="%010.6m" min="0.0" max="360.0" step="0.0">
+0.0
+</defNumber>
+<defNumber name="HORIZONLIMITS_POINT_ALT" label="Altitude(dd:mm:ss)" format="%010.6m" min="-90.0" max="90.0" step="0.0">
+0.0
+</defNumber>
+</defNumberVector>
+<defSwitchVector device="EQMod Mount" name="HORIZONLIMITSTRAVERSE" label="Traversal" group="Horizon" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="HORIZONLIMITSLISTFIRST" label="First">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSLISTPREV" label="Prev.">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSLISTNEXT" label="Next">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSLISTLAST" label="Last">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="HORIZONLIMITSMANAGE" label="Manage" group="Horizon" state="Idle" perm="rw" rule="OneOfMany">
+
+<defSwitch name="HORIZONLIMITSLISTADDCURRENT" label="Add Current Scope Az/Alt">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSLISTDELETE" label="Delete Point">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSLISTCLEAR" label="Clear List">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="HORIZONLIMITSFILEOPERATION" label="Operation" group="Horizon" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="HORIZONLIMITSWRITEFILE" label="Write File">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSLOADFILE" label="Load File">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="HORIZONLIMITSONLIMIT" label="On Limit" group="Horizon" state="Idle" perm="rw" rule="AnyOfMany">
+<defSwitch name="HORIZONLIMITSONLIMITTRACK" label="Abort Tracking">
+On
+</defSwitch>
+<defSwitch name="HORIZONLIMITSONLIMITSLEW" label="Abort Slewing">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSONLIMITGOTO" label="Abort Goto">
+Off
+</defSwitch>
+</defSwitchVector>
+<defSwitchVector device="EQMod Mount" name="HORIZONLIMITSLIMITGOTO" label="Limit Goto" group="Horizon" state="Idle" perm="rw" rule="OneOfMany">
+<defSwitch name="HORIZONLIMITSLIMITGOTODISABLE" label="Disable">
+Off
+</defSwitch>
+<defSwitch name="HORIZONLIMITSLIMITGOTOENABLE" label="Enable">
+On
+</defSwitch>
+</defSwitchVector>
+</INDIDriver>

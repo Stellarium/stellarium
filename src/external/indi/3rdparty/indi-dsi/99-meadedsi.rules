@@ -1,0 +1,8 @@
+# 1. Pre-renumeration IDs
+# Meade DSI
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="156c", ATTR{idProduct}=="0100", RUN+="/sbin/fxload -t fx2 -D $tempnode -I /lib/firmware/meade-deepskyimager.hex"
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="156c", ATTR{idProduct}=="01ed", RUN+="/sbin/fxload -t fx2 -D $tempnode -I /lib/firmware/meade-deepskyimager.hex"
+
+# 2. Post-renumeration IDs
+# Meade DSI
+SUBSYSTEM=="usb", ACTION=="add", ATTR{idVendor}=="156c", ATTR{idProduct}=="0101", MODE="0666", SYMLINK+="deepskyimager.%n"

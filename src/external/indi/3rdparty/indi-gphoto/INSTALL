@@ -1,0 +1,17 @@
+In order to build the INDI gphoto drivers, you must have:
+cmake installed
+libgphoto installed
+INDI installed along with the header files.
+cfitsio installed
+libpthread installed
+dcraw installed
+
+Run:
+cmake .
+make
+sudo make install
+
+The standalone app can be buit via:
+gcc -DGPHOTO_TEST -Wall -o gphoto_driver gphoto_driver.c -lgphoto2 -lpthread
+
+This only requires libagphoto2 and not INDI

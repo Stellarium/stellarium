@@ -951,7 +951,7 @@
              <item row="5" column="0">
               <widget class="QCheckBox" name="checkBoxAdditionalNamesStars">
                <property name="text">
-                <string>Use an additional names of stars</string>
+                <string>Use additional names of stars</string>
                </property>
               </widget>
              </item>
@@ -2127,7 +2127,7 @@
                <item row="7" column="0">
                 <widget class="QCheckBox" name="checkBoxAdditionalNamesDSO">
                  <property name="text">
-                  <string>Use an additional names of DSO</string>
+                  <string>Use additional names of DSO</string>
                  </property>
                 </widget>
                </item>
@@ -3901,12 +3901,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

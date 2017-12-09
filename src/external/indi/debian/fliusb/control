@@ -1,0 +1,23 @@
+Source: fliusb
+Section: kernel
+Priority: extra
+Maintainer: Jasem Mutlaq <mutlaqja@ikarustech.com>
+Build-Depends: debhelper (>= 9), dkms
+Standards-Version: 3.9.4
+Homepage: http://www.indilib.org
+
+Package: fliusb-dkms
+Architecture: linux-any
+Depends: ${misc:Depends}, dkms
+Description: Finger Lakes Instruments USB Kernel Module
+ .
+ This package uses DKMS to automatically build the fliusb kernel module.
+
+Package: fliusb-source
+Architecture: linux-any
+Depends: ${misc:Depends}
+Recommends: module-assistant
+Description: Finger Lakes Instruments USB Kernel Module
+ .
+ This package contains source code only, and is intended to be used with
+ module-assistant to build the fliusb kernel module.

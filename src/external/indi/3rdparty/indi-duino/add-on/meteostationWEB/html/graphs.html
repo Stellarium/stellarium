@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<title></title>
+<meta name="generator" content="Bluefish 2.2.2" >
+<meta name="author" content="Nacho Mas" >
+<meta name="date" content="2013-01-28T08:46:38+0100" >
+<meta name="copyright" content="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="content-type" content="application/xhtml+xml; charset=UTF-8">
+<meta http-equiv="content-style-type" content="text/css">
+<meta http-equiv="expires" content="1">
+<link rel=stylesheet href=css/style.css type=text/css charset=utf-8>
+<script src="js/jquery.min.js"></script>
+<script type="text/javascript" >
+           function update() {
+					         $.get("CHART/RTdata.json", function(data){
+					   		  $("#time").text(data.TIME);
+					   		}, "json")
+					   		$("#temp").attr("src", "CHART/temp"+$("#range").val()+".png");
+					   		$("#hr").attr("src", "CHART/hr"+$("#range").val()+".png");
+					   		$("#clouds").attr("src", "CHART/clouds"+$("#range").val()+".png");
+					   		$("#light").attr("src", "CHART/light"+$("#range").val()+".png");
+					   		$("#pressure").attr("src", "CHART/pressure"+$("#range").val()+".png");
+								$("#skyT").attr("src", "CHART/skyT"+$("#range").val()+".png");
+					   }
+					        		  
+           setInterval(function() {update();}, 10000);
+           
+</script>
+</head>
+<body onload=update() >
+<div style="text-align: center"><b> INDIDUINO METEOSTATION</b></div>
+<b><div style="text-align: center" id="time">TIME</div></b>
+<div style="text-align: center">
+<a href="index.html">Main</a>
+<a href="external.html">Advance</a>
+</div>
+<b>Range</b>
+                <select id="range" onchange=update()>
+                    <option value=3>3 Hours</option>
+                    <option value=24>24 Hours</option>                    
+                    <option value=168>1 Week</option>
+						  <option value=1176>1 Month</option>
+                </select>
+<p>
+<img id="clouds"/>
+<img id="temp"  />
+<img id="pressure" />
+<img id="hr" />
+<img id="light" />
+<img id="skyT" />
+</body>
+</html>

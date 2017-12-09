@@ -1,0 +1,12 @@
+FLI INSTALL
+============
+
+You must have CMake >= 2.4.7 in order to build this package.
+
+1) $ tar -xzf indi-fli.tar.gz
+2) $ mkdir indi_fli_build
+3) $ cd indi_fli_build
+4) $ cmake -DCMAKE_INSTALL_PREFIX=/usr . ../indi-fli
+5) $ make
+6) $ su -c 'make install' or sudo make install
+

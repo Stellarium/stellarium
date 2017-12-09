@@ -1,0 +1,11 @@
+body {background-color:rgb(20,20,20);}
+a:link {color:DarkRed;}      /* unvisited link */
+a:visited {color:DarkRed;}  /* visited link */
+a:hover {color:DarkRed;}  /* mouse over link */
+a:active {color:DarkRed;}  /* selected link */
+b {color:DarkRed;} 
+b,a {font-family:"Monospace";font-size:large;}
+table, th, td
+{
+border: 5px solid transparent;
+}
