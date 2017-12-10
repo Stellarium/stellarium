@@ -490,120 +490,123 @@ INSTALL(TARGETS stellarium DESTINATION bin)
 ################################## Build unit tests #########################################
 #############################################################################################
 
-SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test stelMain)
+IF(ENABLE_TESTING)
 
-# Custom target used to build all tests at once
-ADD_CUSTOM_TARGET(buildTests)
+    SET(TESTS_LIBRARIES ${ZLIB_LIBRARIES} Qt5::Core Qt5::Gui Qt5::Test stelMain)
 
-SET(tests_testDates_SRCS
-     tests/testDates.hpp
-     tests/testDates.cpp
-     core/StelUtils.hpp
-     core/StelUtils.cpp
-)
-ADD_EXECUTABLE(testDates ${tests_testDates_SRCS})
-TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testDates)
-ADD_TEST(testDates testDates)
+    # Custom target used to build all tests at once
+    ADD_CUSTOM_TARGET(buildTests)
 
-SET(tests_testStelFileMgr_SRCS
-     tests/testStelFileMgr.hpp
-     tests/testStelFileMgr.cpp
-)
-ADD_EXECUTABLE(testStelFileMgr ${tests_testStelFileMgr_SRCS})
-TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testStelFileMgr)
-ADD_TEST(testStelFileMgr testStelFileMgr)
+    SET(tests_testDates_SRCS
+        tests/testDates.hpp
+        tests/testDates.cpp
+        core/StelUtils.hpp
+        core/StelUtils.cpp
+    )
+    ADD_EXECUTABLE(testDates ${tests_testDates_SRCS})
+    TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testDates)
+    ADD_TEST(testDates testDates)
 
-SET(tests_testStelSphereGeometry_SRCS
-     tests/testStelSphereGeometry.hpp
-     tests/testStelSphereGeometry.cpp
-)
-ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS})
-TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
-ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
-ADD_TEST(testStelSphereGeometry testStelSphereGeometry)
+    SET(tests_testStelFileMgr_SRCS
+        tests/testStelFileMgr.hpp
+        tests/testStelFileMgr.cpp
+    )
+    ADD_EXECUTABLE(testStelFileMgr ${tests_testStelFileMgr_SRCS})
+    TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelFileMgr)
+    ADD_TEST(testStelFileMgr testStelFileMgr)
 
-SET(tests_testStelSphericalIndex_SRCS
-     tests/testStelSphericalIndex.hpp
-     tests/testStelSphericalIndex.cpp
-)
-ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS})
-TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
-ADD_TEST(testStelSphericalIndex testStelSphericalIndex)
+    SET(tests_testStelSphereGeometry_SRCS
+        tests/testStelSphereGeometry.hpp
+        tests/testStelSphereGeometry.cpp
+    )
+    ADD_EXECUTABLE(testStelSphereGeometry ${tests_testStelSphereGeometry_SRCS})
+    TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
+    ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
+    ADD_TEST(testStelSphereGeometry testStelSphereGeometry)
 
-SET(tests_testStelJsonParser_SRCS
-     tests/testStelJsonParser.hpp
-     tests/testStelJsonParser.cpp
-)
-ADD_EXECUTABLE(testStelJsonParser ${tests_testStelJsonParser_SRCS})
-TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testStelJsonParser)
-ADD_TEST(testStelJsonParser testStelJsonParser)
+    SET(tests_testStelSphericalIndex_SRCS
+        tests/testStelSphericalIndex.hpp
+        tests/testStelSphericalIndex.cpp
+    )
+    ADD_EXECUTABLE(testStelSphericalIndex ${tests_testStelSphericalIndex_SRCS})
+    TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
+    ADD_TEST(testStelSphericalIndex testStelSphericalIndex)
 
-SET(tests_testStelVertexArray_SRCS
-     tests/testStelVertexArray.hpp
-     tests/testStelVertexArray.cpp
-)
-ADD_EXECUTABLE(testStelVertexArray ${tests_testStelVertexArray_SRCS})
-TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testStelVertexArray)
-ADD_TEST(testStelVertexArray testStelVertexArray)
+    SET(tests_testStelJsonParser_SRCS
+        tests/testStelJsonParser.hpp
+        tests/testStelJsonParser.cpp
+    )
+    ADD_EXECUTABLE(testStelJsonParser ${tests_testStelJsonParser_SRCS})
+    TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelJsonParser)
+    ADD_TEST(testStelJsonParser testStelJsonParser)
 
-SET(tests_testDeltaT_SRCS
-     tests/testDeltaT.hpp
-     tests/testDeltaT.cpp
-)
-ADD_EXECUTABLE(testDeltaT ${tests_testDeltaT_SRCS})
-TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testDeltaT)
-ADD_TEST(testDeltaT testDeltaT)
+    SET(tests_testStelVertexArray_SRCS
+        tests/testStelVertexArray.hpp
+        tests/testStelVertexArray.cpp
+    )
+    ADD_EXECUTABLE(testStelVertexArray ${tests_testStelVertexArray_SRCS})
+    TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelVertexArray)
+    ADD_TEST(testStelVertexArray testStelVertexArray)
 
-SET(tests_testConversions_SRCS
-     tests/testConversions.hpp
-     tests/testConversions.cpp
-)
-ADD_EXECUTABLE(testConversions ${tests_testConversions_SRCS})
-TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testConversions)
-ADD_TEST(testConversions testConversions)
+    SET(tests_testDeltaT_SRCS
+        tests/testDeltaT.hpp
+        tests/testDeltaT.cpp
+    )
+    ADD_EXECUTABLE(testDeltaT ${tests_testDeltaT_SRCS})
+    TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testDeltaT)
+    ADD_TEST(testDeltaT testDeltaT)
 
-SET(tests_testExtinction_SRCS
-     tests/testExtinction.hpp
-     tests/testExtinction.cpp
-)
-ADD_EXECUTABLE(testExtinction ${tests_testExtinction_SRCS})
-TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testExtinction)
-ADD_TEST(testExtinction testExtinction)
+    SET(tests_testConversions_SRCS
+        tests/testConversions.hpp
+        tests/testConversions.cpp
+    )
+    ADD_EXECUTABLE(testConversions ${tests_testConversions_SRCS})
+    TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testConversions)
+    ADD_TEST(testConversions testConversions)
 
-SET(tests_testRefraction_SRCS
-     tests/testRefraction.hpp
-     tests/testRefraction.cpp
-)
-ADD_EXECUTABLE(testRefraction ${tests_testRefraction_SRCS})
-TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testRefraction)
-ADD_TEST(testRefraction testRefraction)
+    SET(tests_testExtinction_SRCS
+        tests/testExtinction.hpp
+        tests/testExtinction.cpp
+    )
+    ADD_EXECUTABLE(testExtinction ${tests_testExtinction_SRCS})
+    TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testExtinction)
+    ADD_TEST(testExtinction testExtinction)
 
-SET(tests_testPrecession_SRCS
-     tests/testPrecession.hpp
-     tests/testPrecession.cpp
-)
-ADD_EXECUTABLE(testPrecession ${tests_testPrecession_SRCS})
-TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testPrecession)
-ADD_TEST(testPrecession testPrecession)
+    SET(tests_testRefraction_SRCS
+        tests/testRefraction.hpp
+        tests/testRefraction.cpp
+    )
+    ADD_EXECUTABLE(testRefraction ${tests_testRefraction_SRCS})
+    TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testRefraction)
+    ADD_TEST(testRefraction testRefraction)
 
-SET(tests_testEphemeris_SRCS
-     tests/testEphemeris.hpp
-     tests/testEphemeris.cpp
-     CLIProcessor.hpp
-     CLIProcessor.cpp
-)
-ADD_EXECUTABLE(testEphemeris ${tests_testEphemeris_SRCS})
-TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
-ADD_DEPENDENCIES(buildTests testEphemeris)
-ADD_TEST(testEphemeris testEphemeris)
+    SET(tests_testPrecession_SRCS
+        tests/testPrecession.hpp
+        tests/testPrecession.cpp
+    )
+    ADD_EXECUTABLE(testPrecession ${tests_testPrecession_SRCS})
+    TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testPrecession)
+    ADD_TEST(testPrecession testPrecession)
 
+    SET(tests_testEphemeris_SRCS
+        tests/testEphemeris.hpp
+        tests/testEphemeris.cpp
+        CLIProcessor.hpp
+        CLIProcessor.cpp
+    )
+    ADD_EXECUTABLE(testEphemeris ${tests_testEphemeris_SRCS})
+    TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testEphemeris)
+    ADD_TEST(testEphemeris testEphemeris)
+
+ENDIF (ENABLE_TESTING)

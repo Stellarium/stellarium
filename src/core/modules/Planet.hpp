@@ -500,8 +500,8 @@ protected:
 	QString nameI18;                 // International translated name
 	QString nativeName;              // Can be used in a skyculture
 	QString texMapName;              // Texture file path
-	QString normalMapName;              // Texture file path
-	//int flagLighting;                // Set whether light computation has to be proceed. NO LONGER USED (always on!)
+	QString normalMapName;           // Texture file path
+	//int flagLighting;              // Set whether light computation has to be proceed. NO LONGER USED (always on!)
 	RotationElements re;             // Rotation param
 	double radius;                   // Planet radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)

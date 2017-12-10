@@ -47,10 +47,10 @@ public:
 	enum CatalogGroupFlags
 	{
 		CatNGC		= 0x00000001, //!< New General Catalogue (NGC)
-		CatIC		= 0x00000002, //!< Index Catalogue (IC)
-		CatM		= 0x00000004, //!< Messier Catalog (M)
-		CatC		= 0x00000008, //!< Caldwell Catalogue (C)
-		CatB		= 0x00000010, //!< Barnard Catalogue (B)
+		CatIC		        = 0x00000002, //!< Index Catalogue (IC)
+		CatM		        = 0x00000004, //!< Messier Catalog (M)
+		CatC	        	= 0x00000008, //!< Caldwell Catalogue (C)
+		CatB		        = 0x00000010, //!< Barnard Catalogue (B)
 		CatSh2		= 0x00000020, //!< Sharpless Catalogue (Sh 2)
 		CatLBN		= 0x00000040, //!< Lynds' Catalogue of Bright Nebulae (LBN)
 		CatLDN		= 0x00000080, //!< Lynds' Catalogue of Dark Nebulae (LDN)

@@ -928,21 +928,21 @@ void Exoplanets::translations()
 	// TRANSLATORS: Planet size
 	N_("Neptunian");
 
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Exoplanet detection method
 	N_("Primary Transit");
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Exoplanet detection method
 	N_("Microlensing");
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Exoplanet detection method
 	N_("Radial Velocity");
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Exoplanet detection method
 	N_("Imaging");
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Exoplanet detection method
 	N_("Pulsar");
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Exoplanet detection method
 	N_("Other");
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Exoplanet detection method
 	N_("Astrometry");
-	// TRANSLATORS: Detection method
+	// TRANSLATORS: Detection method. TTV=Transit Timing Variation
 	N_("TTV");
 
 	/* For copy/paste:
