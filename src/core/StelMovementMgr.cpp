@@ -1578,5 +1578,6 @@ void StelMovementMgr::hideMessages()
 	foreach(const int& id, messageIDs)
 	{
 		GETSTELMODULE(LabelMgr)->deleteLabel(id);
+		messageIDs.removeOne(id);
 	}
 }
