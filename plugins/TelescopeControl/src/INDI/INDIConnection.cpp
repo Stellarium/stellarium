@@ -10,7 +10,7 @@
 #include "indibase/baseclient.h"
 #include "indibase/basedevice.h"
 
-INDIConnection::INDIConnection()
+INDIConnection::INDIConnection(QObject *parent) : QObject(parent)
 {
 }
 
@@ -67,6 +67,8 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
     mDevices.append(dp->getDeviceName());
     /// @todo filter telescopes
     mTelescope = dp;
+
+    emit devicesChanged();
 }
 
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
@@ -78,6 +80,8 @@ void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 
     if (mTelescope == dp)
         mTelescope = nullptr;
+
+    emit devicesChanged();
 }
 
 void INDIConnection::newProperty(INDI::Property *property)
