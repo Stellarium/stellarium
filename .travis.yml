@@ -8,7 +8,7 @@ addons:
       name: "Stellarium/stellarium"
       description: "A realistic, real-time 3D simulation of the night sky."
     notification_email: mcardinot@gmail.com
-    build_command_prepend: cmake ../.
+    build_command_prepend: cmake -DENABLE_TESTING=1 ..
     build_command: make -j 2
     branch_pattern: coverity_scan
 
@@ -63,7 +63,7 @@ before_script:
   - cd build
 
 script:
-  - cmake ../.
+  - cmake -DENABLE_TESTING=1 ..
   - make -j 2
   - ctest --output-on-failure
   - sudo make install -j 2

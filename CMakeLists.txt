@@ -1,8 +1,6 @@
 
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 
-#enable_testing()
-
 IF(NOT ("${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 3.0))
      CMAKE_POLICY(SET CMP0050 OLD)
      # silently ignore errors in add_dependency():
@@ -286,6 +284,12 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
+SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+IF(ENABLE_TESTING)
+    ENABLE_TESTING()
+    FIND_PACKAGE(Qt5Test REQUIRED)
+ENDIF(ENABLE_TESTING)
+
 ########### User Guide ###############
 IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
      MESSAGE(STATUS "Found Stellarium User Guide")
@@ -471,8 +475,6 @@ IF(USE_QTOPENGL)
      # but the QtMultimediaWidgets module requires it internally, so we still have to package it.
      FIND_PACKAGE(Qt5OpenGL REQUIRED)
 ENDIF()
-
-FIND_PACKAGE(Qt5Test)
 
 ### Zlib package
 FIND_PACKAGE(ZLIB QUIET) #quiet warnings about not found, we have our own version anyway
