@@ -22,6 +22,7 @@
 #include "indibase/baseclient.h"
 
 #include <mutex>
+#include <QStringList>
 
 class INDIConnection final : public INDI::BaseClient
 {
@@ -40,6 +41,7 @@ public:
     Coordinates position() const;
     void setPosition(Coordinates coords);
     bool isConnected() const;
+    const QStringList devices() const;
 
     void newDevice(INDI::BaseDevice *dp) override;
     void removeDevice(INDI::BaseDevice *dp) override;
@@ -58,6 +60,7 @@ private:
     mutable std::mutex mMutex;
     INDI::BaseDevice* mTelescope = nullptr;
     Coordinates mCoordinates;
+    QStringList mDevices;
 };
 
 #endif // INDICONNECTION_HPP

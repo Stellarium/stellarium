@@ -54,10 +54,17 @@ bool INDIConnection::isConnected() const
     return mTelescope->isConnected();
 }
 
+const QStringList INDIConnection::devices() const
+{
+    std::lock_guard<std::mutex> lock(mMutex);
+    return mDevices;
+}
+
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
     std::lock_guard<std::mutex> lock(mMutex);
     IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
+    mDevices.append(dp->getDeviceName());
     /// @todo filter telescopes
     mTelescope = dp;
 }
@@ -65,6 +72,10 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 {
     std::lock_guard<std::mutex> lock(mMutex);
+    int index = mDevices.indexOf(dp->getDeviceName());
+    if (index != -1)
+        mDevices.removeAt(index);
+
     if (mTelescope == dp)
         mTelescope = nullptr;
 }
