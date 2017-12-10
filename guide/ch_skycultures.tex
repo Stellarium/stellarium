@@ -280,30 +280,40 @@ description of source and optional URL, e.g.:
 \section{Asterisms and help rays}
 \label{sec:skycultures:asterisms}
 
-\noindent\newFeature{v0.16.1}Sometimes there is a need to extract some part of constellation in the own figure or merge parts from different constellations in one big figure --- e.g. ``Big Dipper'' for Ursa Major or ``Summer Triangle'' for constellations Cygnus, Lyra and Aquila. Those features names as ``asterisms'' as rule. Other simple figures might be used as navigation helpers --- the help rays. As example to help in orientation in sky the additional lines between constellations Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and the help rays are listed in
-\file{asterism\_names.eng.fab}. It consists of 2 simple columns:
+\noindent\newFeature{v0.16.1}Sometimes there is a need to extract some part of a 
+constellation into a figure in its own right, or to merge parts from different 
+constellations into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major or the 
+``Summer Triangle'' consisting of 3 stars from the constellations Cygnus, Lyra and Aquila. 
+Those features are called ``asterisms''. 
+
+Other simple figures might be used as navigation helpers --- the help rays. 
+As example to help in orientation in sky the additional lines between constellations 
+Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help rays are listed in
+\file{asterism\_names.eng.fab}. This file consists of 2 simple columns:
 Abbreviation (or just a serial number) and English
 name of asterism. The writing \texttt{\_("name")} allows automatic
 translation of the English strings to other languages. These strings
-will be used as asterisms labels.
+will be used as asterisms labels. In addition, after a hash mark (\texttt{\#}) marking a comment sign, 
+some reference information should be noted. Collecting sources and giving such references 
+is always a good idea. Some later versions of Stellarium may use this information.
 
 The stick figures of asterisms are similar to constellation figures and coded in \file{asterism\_lines.fab}. Lines
 look like:
 
 \begin{configfile}
-Abbr X pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
+Abbr type pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
 \end{configfile}
 or
 \begin{configfile}
-Abbr X pairs pair1_RA1 pair1_DE1 pair1_RA2 pair1_DE2 pair2_RA1 ...
+Abbr 2 pairs pair1_RA1 pair1_DE1 pair1_RA2 pair1_DE2 pair2_RA1 ...
 \end{configfile}
 In this file,
 \begin{description}
 \item[Abbr] is the abbreviation defined in \file{asterism\_names.eng.fab}
-\item[type] is the type of line. Please use 1 or 2 for define an asterisms and 0 for the help rays  (0 and 1 uses HIP numbers, and 2 uses coordinates).
+\item[type] is the type of line. Use 1 or 2 to define an asterisms and 0 for the help rays (0 and 1 uses HIP numbers, and 2 uses coordinates).
 \item[pairs] is the number of line pairs which follow.
 \item[pairN\_starA] Hipparcos numbers for the stars which form the
-  asterism stick figure (similar to constellations) or equatorial coordinates for epoch J2000.0 of the stars (decimal hours for right ascension and decimal degrees for declination). The help rays are actually a special form of asterisms in Stellarium. 
+  asterism/help ray stick figure (similar to constellations), or equatorial coordinates for epoch J2000.0 of the stars (decimal hours for right ascension and decimal degrees for declination). The help rays are actually a special form of asterisms in Stellarium. 
 \end{description}
 
 \section{Publish Your Work}
