@@ -397,14 +397,16 @@ void TelescopeConfigurationDialog::toggleTypeRTS2(bool isChecked)
 
 void TelescopeConfigurationDialog::toggleTypeINDI(bool enabled)
 {
-	ui->groupBoxConnectionSettings->setVisible(enabled);
-	ui->radioButtonJ2000->setChecked(true);
-	ui->radioButtonJ2000->setHidden(enabled);
-	ui->radioButtonJNow->setHidden(enabled);
-	ui->labelEquinox->setHidden(enabled);
-	ui->doubleSpinBoxTelescopeDelay->setHidden(enabled);
-	ui->labelConnectionDelay->setHidden(enabled);
-	ui->spinBoxTCPPort->setValue(7624);
+//	ui->groupBoxConnectionSettings->setVisible(enabled);
+//	ui->radioButtonJ2000->setChecked(true);
+//	ui->radioButtonJ2000->setHidden(enabled);
+//	ui->radioButtonJNow->setHidden(enabled);
+//	ui->labelEquinox->setHidden(enabled);
+//	ui->doubleSpinBoxTelescopeDelay->setHidden(enabled);
+//	ui->labelConnectionDelay->setHidden(enabled);
+//	ui->spinBoxTCPPort->setValue(7624);
+
+    ui->INDIProperties->setVisible(enabled);
 }
 
 void TelescopeConfigurationDialog::buttonSavePressed()

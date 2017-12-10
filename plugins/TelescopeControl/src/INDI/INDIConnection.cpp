@@ -152,6 +152,7 @@ void INDIConnection::serverConnected()
 
 void INDIConnection::serverDisconnected(int exit_code)
 {
+    mDevices.clear();
 }
 
 bool INDIConnection::Coordinates::operator==(const INDIConnection::Coordinates &other) const
