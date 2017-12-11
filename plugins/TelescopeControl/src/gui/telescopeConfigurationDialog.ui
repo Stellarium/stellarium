@@ -468,7 +468,7 @@
         </widget>
        </item>
        <item>
-        <widget class="TelescopeClientINDIUI" name="INDIProperties" native="true"/>
+        <widget class="TelescopeClientINDIWidget" name="INDIProperties" native="true"/>
        </item>
        <item>
         <widget class="QGroupBox" name="groupBoxDeviceSettings">
@@ -941,9 +941,9 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>TelescopeClientINDIUI</class>
+   <class>TelescopeClientINDIWidget</class>
    <extends>QWidget</extends>
-   <header>TelescopeClientINDIUI.hpp</header>
+   <header>TelescopeClientINDIWidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
