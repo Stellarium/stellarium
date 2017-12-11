@@ -42,7 +42,7 @@ QTEST_GUILESS_MAIN(TestEphemeris)
 
 void TestEphemeris::initTestCase()
 {
-	StelFileMgr::init();
+	//StelFileMgr::init();
 	de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
 	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);
 
