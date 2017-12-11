@@ -36,6 +36,7 @@ public:
 
 private:
     INDIConnection mConnection;
+    QString mDevice;
 };
 
 #endif // TELESCOPECLIENTINDI_HPP

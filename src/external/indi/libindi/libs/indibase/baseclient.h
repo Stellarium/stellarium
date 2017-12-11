@@ -86,6 +86,8 @@ class INDI::BaseClient : public INDI::BaseMediator
     */
     bool disconnectServer();
 
+    bool isServerConnected() const;
+
     /** \brief Connect to INDI driver
         \param deviceName Name of the device to connect to.
     */

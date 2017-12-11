@@ -22,7 +22,7 @@ void testINDIConnection::defaultPosition()
 void testINDIConnection::initialConnectionStatus()
 {
     INDIConnection instance;
-    QVERIFY(instance.isConnected() == false);
+    QVERIFY(instance.isDeviceConnected() == false);
 }
 
 void testINDIConnection::setPositionNotConnected()

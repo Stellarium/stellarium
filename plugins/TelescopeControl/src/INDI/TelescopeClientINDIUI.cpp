@@ -8,7 +8,6 @@ TelescopeClientINDIUI::TelescopeClientINDIUI(QWidget *parent) :
     ui->setupUi(this);
     QObject::connect(ui->connectButton, &QPushButton::clicked, this, &TelescopeClientINDIUI::onConnectionButtonClicked);
     QObject::connect(&mConnection, &INDIConnection::devicesChanged, this, &TelescopeClientINDIUI::onDevicesChanged);
-    QObject::connect(&mConnection, &INDIConnection::connected, this, &TelescopeClientINDIUI::onServerConnected);
     QObject::connect(&mConnection, &INDIConnection::disconnected, this, &TelescopeClientINDIUI::onServerDisconnected);
 }
 
@@ -34,14 +33,9 @@ QString TelescopeClientINDIUI::selectedDevice() const
 
 void TelescopeClientINDIUI::onConnectionButtonClicked()
 {
-    if (mConnection.isConnected())
-    {
-        ui->connectButton->setText("Disconnecting ...");
+    if (mConnection.isServerConnected())
         mConnection.disconnectServer();
-        return;
-    }
 
-    ui->connectButton->setText("Connecting ...");
     QString host = ui->lineEditHostName->text();
     QString port = ui->spinBoxTCPPort->text();
     mConnection.setServer(host.toStdString().c_str(), port.toInt());
@@ -55,16 +49,8 @@ void TelescopeClientINDIUI::onDevicesChanged()
     ui->devicesComboBox->addItems(devices);
 }
 
-void TelescopeClientINDIUI::onServerConnected()
-{
-    ui->serverSettings->setEnabled(false);
-    ui->connectButton->setText("Disconnect");
-}
-
 void TelescopeClientINDIUI::onServerDisconnected(int code)
 {
     ui->devicesComboBox->clear();
-    ui->serverSettings->setEnabled(true);
-    ui->connectButton->setText("Connect");
 }
 

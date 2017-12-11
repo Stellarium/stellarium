@@ -10,16 +10,18 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 {
     qDebug() << "TelescopeClientINDI::TelescopeClientINDI";
 
-    QRegExp paramRx("^([^:]*):(\\d+)$");
+    QRegExp paramRx("^([^:]*):(\\d+):([^:]*)$");
     QString host;
     int port = 0;
     if (paramRx.exactMatch(params))
     {
         host = paramRx.capturedTexts().at(1).trimmed();
         port = paramRx.capturedTexts().at(2).toInt();
+        mDevice = paramRx.capturedTexts().at(3).trimmed();
     }
 
     mConnection.setServer(host.toStdString().c_str(), port);
+    mConnection.watchDevice(mDevice.toStdString().c_str());
     mConnection.connectServer();
 }
 
@@ -65,11 +67,11 @@ void TelescopeClientINDI::telescopeGoto(const Vec3d &positionJ2000, StelObjectP 
 
 bool TelescopeClientINDI::isConnected() const
 {
-    return mConnection.isConnected();
+    return mConnection.isDeviceConnected();
 }
 
 bool TelescopeClientINDI::hasKnownPosition() const
 {
-    return mConnection.isConnected();
+    return mConnection.isDeviceConnected();
 }
 

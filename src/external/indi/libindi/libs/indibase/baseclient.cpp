@@ -282,6 +282,11 @@ bool INDI::BaseClient::disconnectServer()
     return true;
 }
 
+bool INDI::BaseClient::isServerConnected() const
+{
+    return sConnected;
+}
+
 void INDI::BaseClient::connectDevice(const char *deviceName)
 {
     setDriverConnection(true, deviceName);

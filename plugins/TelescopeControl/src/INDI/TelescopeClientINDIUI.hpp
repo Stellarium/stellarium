@@ -24,7 +24,6 @@ public:
 private slots:
     void onConnectionButtonClicked();
     void onDevicesChanged();
-    void onServerConnected();
     void onServerDisconnected(int code);
 
 private:

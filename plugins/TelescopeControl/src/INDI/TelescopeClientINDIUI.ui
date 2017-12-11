@@ -97,7 +97,13 @@
       <item>
        <widget class="QPushButton" name="connectButton">
         <property name="text">
-         <string>Connect</string>
+         <string>Refresh devices</string>
+        </property>
+        <property name="checkable">
+         <bool>true</bool>
+        </property>
+        <property name="checked">
+         <bool>false</bool>
         </property>
        </widget>
       </item>

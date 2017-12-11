@@ -43,7 +43,7 @@ public:
 
     Coordinates position() const;
     void setPosition(Coordinates coords);
-    bool isConnected() const;
+    bool isDeviceConnected() const;
     const QStringList devices() const;
 
     void newDevice(INDI::BaseDevice *dp) override;

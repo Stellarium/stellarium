@@ -45,7 +45,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
     sendNewNumber(property);
 }
 
-bool INDIConnection::isConnected() const
+bool INDIConnection::isDeviceConnected() const
 {
     std::lock_guard<std::mutex> lock(mMutex);
     if (!mTelescope)
