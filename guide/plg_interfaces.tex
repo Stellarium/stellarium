@@ -379,9 +379,7 @@ admin\_shutdown\_cmd              &string& executable command to shutdown your s
 \section{Remote Control Plugin}
 \label{sec:plugin:RemoteControl}
 
-The Remote Control plugin was developed in 2015 during the 
-\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} 
-initiative. It enables the user to control Stellarium through an external web 
+The Remote Control plugin enables the user to control Stellarium through an external web 
 interface using a standard web browser like Firefox or Chrome, instead of using 
 the main GUI. This works on the same computer Stellarium runs as well as over 
 the network. Even more, multiple ``remote controls'' can access the same 
@@ -410,21 +408,20 @@ and scripts using HTTP calls like with the tools \file{wget} and \file{curl}.
 \end{figure}
 
 After enabling the plugin, you can set it up through the configuration dialog. 
-When ``Enable automatically on startup'' is checked (it is by default), the web 
-server is automatically started whenever Stellarium starts. You can also 
-manually start/stop the server using the ``Server enabled'' checkbox and the 
+You can configure it to start the web server automatically whenever Stellarium starts 
+or manually start/stop the server using the ``Server enabled'' checkbox or the 
 button \includegraphics[scale=0.5]{remote} in the toolbar.
 
-The plugin starts a HTTP server on the specified port. The default port is 
-8090, so you can try to reach the remote control after enabling it by starting 
-a browser on the same computer and entering \url{http://localhost:8090} in the 
+The plugin starts an HTTP server on the specified port. The default port is 
+8090, so you should reach the remote control after enabling it by starting 
+a web browser on the same computer and entering \url{http://localhost:8090} in the 
 address bar. When trying to access the remote control from another computer, 
 you need the IP address or the hostname of the server on which Stellarium runs. 
 The plugin shows the locally detected address, but depending on your network or 
 if you need external access you might need to use a different one 
 --- contact your network administrator if you need help with that.
 
-The access to the remote control may optionally be restricted with a simple 
+\noindent The access to the remote control may optionally be restricted with a simple 
 password.
 
 \textbf{Warning:} \emph{currently no network encryption is used, meaning that 
@@ -440,11 +437,10 @@ forwarding or a DMZ is configured.}
 
 
 If you are familiar with the main Stellarium interface, you should easily find 
-your way around the web interface. Tabs at the top allow access to 
-different settings and controls. The remote control automatically uses the 
-same language as set in the main program.
+your way around the web interface. The remote control automatically uses the 
+same language as set in the main program. Tabs at the top allow access to 
+different settings and controls. 
 
-The contents of the various tabs:
 \begin{description}
 \item[Main] Contains the time controls and most of the buttons of the 
 main bottom toolbar. An additional control allows moving the view like when 
@@ -480,16 +476,19 @@ It is also possible to send commands via command line, e.g.,
 wget -q --post-data 'id=show.ssc' http://stella:8090/api/scripts/run >/dev/null 2>&1
 curl --data 'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
 curl -d     'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
-curl -d 'id=LandscapeMgr.fogDisplayed&value=false' http://localhost:8090/api/stelproperty/set 
+curl -d 'id=LandscapeMgr.fogDisplayed&value=false' \ 
+      http://localhost:8090/api/stelproperty/set 
 \end{commands}
 This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
 
-% TODO: Please list all available commands with examples here!
+% TODO: List all available commands with examples here?
 
 You can retrieve a complete pretty-printed list of properties:
 \begin{commands}[\scriptsize]
-curl -G -d 'id=propId=-1&actionId=-2' http://localhost:8090/api/main/status | python -m json.tool 
+curl -G -d 'id=propId=-1&actionId=-2' http://localhost:8090/api/main/status | \
+     python -m json.tool 
 \end{commands} 
+Depending on your operating system or command shell, you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.
 
 
   
@@ -500,6 +499,10 @@ If you are a developer and would like to add functionality to the Remote
 Control API, customize the web interface or access the API through another 
 program, further information can be found in the 
 \href{http://stellarium.org/doc-plugins/head/}{plugin's developer documentation}.
+
+This plugin was created by Florian Schaukowitsch in the 2015 campaign of the 
+\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} programme. 
+
 
 \newpage
 \section{Remote Sync Plugin}
@@ -616,9 +619,8 @@ but the general structure of property names like
 
 \subsection*{Author and Acknowledgements}
 
-This plugin was created by Florian Schaukowitsch in the 2015-16 campaigns of the 
-\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} 
-programme. 
+This plugin was created mostly by Florian Schaukowitsch in the 2015-16 campaigns of the 
+\href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} programme. 
 
 % \newpage
 % \section{D-Bus Interface}

@@ -441,10 +441,10 @@ int LabelMgr::labelObject(const QString& text,
                           float fontSize,
                           const QString& fontColor,
                           const QString& side,
-                          double labelDistance,
-						  const QString& style,
-						  bool autoDelete,
-						  int autoDeleteTimeoutMs)
+			  double labelDistance,
+			  const QString& style,
+			  bool autoDelete,
+			  int autoDeleteTimeoutMs)
 {
 	QFont font;
 	font.setPixelSize(fontSize);
@@ -494,10 +494,10 @@ int LabelMgr::labelScreen(const QString& text,
                           int x,
                           int y,
                           bool visible,
-                          float fontSize,
-						  const QString& fontColor,
-						  bool autoDelete,
-						  int autoDeleteTimeoutMs)
+			  float fontSize,
+			  const QString& fontColor,
+			  bool autoDelete,
+			  int autoDeleteTimeoutMs)
 {
 	QFont font;
 	font.setPixelSize(fontSize);
@@ -530,11 +530,12 @@ void LabelMgr::setLabelText(int id, const QString& newText)
 	
 void LabelMgr::deleteLabel(int id)
 {
-	if (id<0)
+	if (id<0 || allLabels[id]==NULL)
 		return;
 
 	if (allLabels[id]->timer != NULL)
 		allLabels[id]->timer->deleteLater();
+
 	delete allLabels[id];
 	allLabels.remove(id);
 }

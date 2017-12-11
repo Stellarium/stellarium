@@ -2,8 +2,8 @@
 %% State: 2015-12 wiki->Guide. Was called Precision, but this is wrong.
 %% 2016-04 GZ Typofixes, made proper chapter from this. 
 %% TODO: (GZ) I am not sure about the 1-arcsecond accuracy of VSOP! More should be written with due diligence.
-%% 2016-07-28 Extended chapter with more than just VSOP notes.
-
+%% 2016-07-28 GZ Extended chapter with more than just VSOP notes.
+%% 2017-12-10 GZ Extended with more warnings for "ignorant historians".
 %\chapterimage{chapter-t1-bg} % Chapter heading image
 
 
@@ -16,8 +16,9 @@ you leave your house, i.e., for present times. To save computation
 time, some concessions were made in astronomical accuracy by using
 simplified models which seemed acceptable at that time. However, many
 users started to overstress Stellarium's capabilities to simulate the
-historical sky of many centuries in the past, and found
-inconsistencies.  Unfortunately, celestial motions are indeed more
+historical sky of many centuries in the past, and found --- or even worse: 
+did not find, but simply published --- the resulting inconsistencies and errors.  
+Unfortunately, celestial motions are indeed more
 complicated than a simple clockwork, and the process of retrofitting
 detailed and accurate models which started around v0.11.0 is not
 completed yet. Therefore, when using Stellarium for scientific work
@@ -31,9 +32,10 @@ Stellarium's accuracy!
 \section{Date Range}
 \label{sec:Accuracy:DateRange}
 
-The calendar dates are limited to a very wide interval of years -100.000\ldots100.000. 
-This is mostly useful to visualize the effect of stellar proper motions. 
-If you observe the planets, this is way beyond what current models are able to show! 
+The calendar dates are limited to a very wide interval of years, -100.000\ldots100.000. 
+This is mostly useful to visualize the effect of stellar proper motions or the wobbling 
+motion of Earth's axis known as precession. 
+If you observe the other planets, this is way beyond what current models are able to show! 
 Observe for example the Moon: you will find that it seems to run 
 on a polar orbit around +78.000 and even retrograde on a highly elongated orbit a few millennia after that. 
 This is obvious nonsense, caused by extrapolating mathematical models in inappropriate ways. 
@@ -50,6 +52,9 @@ will move over time, and thus how constellations become deformed.
 
 Note that due to the way the stars are stored in catalogs, zooming in on fast stars like Arcturus 
 may even cease to display such stars when their original area in the sky is no longer in view.
+
+Also, binary stars seem to break apart because Stellarium does not store them as systems 
+revolving about their combined center of gravity.
 
 
 \section{Planetary Positions}
@@ -92,6 +97,8 @@ Galilean satellites                         & L2     & Valid from 500 A.D. -- 35
 \bottomrule
 \end{longtabu}
 
+\noindent Note that Stellarium models light-time correction (if enabled), but does not yet model aberration of light. 
+Therefore seasons' beginnings are off by a few minutes.
 
 \section{Minor Bodies}
 \label{sec:Accuracy:MinorBodies}
@@ -105,8 +112,8 @@ non-gravitational (outgassing) disturbances slowly change these
 orbital elements. Therefore an \emph{epoch} is given for such
 elements, and computation of positions for times far from this epoch
 will lead to positional errors. Therefore, when searching for
-asteroids or comets, always update your orbital elements, and use
-elements with an epoch as close to your time of observation as
+asteroids or comets, always update your orbital elements (See section~\ref{sec:plugins:SolarSystemEditor}), 
+and use elements with an epoch as close to your time of observation as
 possible! Stellarium does not simulate gravitational perturbances and
 orbital changes of minor bodies passing major planets.
 
@@ -115,7 +122,7 @@ orbital changes of minor bodies passing major planets.
 
 Since v0.14.0, Stellarium computes the orientation of earth's axis
 according to the IAU2006 Precession in a long-time variant developed
-by Vondr\'ak et al.~\cite{2011AA:Vondrak} and IAU2000B Nutation~\cite{Nutation:IAU2000B}. 
+by Vondr\'ak et al.~\cite{2011AA:Vondrak}, and IAU2000B Nutation~\cite{Nutation:IAU2000B}. 
 This also now allows proper depiction of the changes in ecliptic obliquity
 and display of ``instantaneous precession circles'' around the
 ecliptic poles. These circles are indeed varying according to
@@ -127,7 +134,7 @@ unclear for how long this model is applicable.
 \label{sec:Accuracy:PlanetAxes}
 
 Orientation for the other planets is still simplified. Future versions
-should implement modern IAU guidelines.
+should implement modern IAU-approved models.
 
 \section{Eclipses}
 \label{sec:Accuracy:Eclipses}
@@ -135,35 +142,40 @@ should implement modern IAU guidelines.
 The moon's motion is very complicated, and eclipse computations can be tricky. 
 One aspect which every student of history, prehistory and archaeology should 
 know but as it seems not every does, is at least a basic understanding of the 
-irregular slow-down of earth's rotation known as $\Delta T$. 
+irregular slow-down of earth's rotation known as $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}). 
 
 Eclipse records on cuneiform tablets go back to the 8th century BC, some Chinese 
 records go back a bit further. Experts on Earth rotation have provided models 
 for $\Delta T$ based on such observations. These are usually given as parabolic fit, 
-with some recommended time span. Extrapolating erratic curves too far into the past is dangerous, 
-pointless and inevitably leads to errors or invalid results. Models differ by many hours 
-when applied too far in the past. This is not a problem of Stellarium, 
-but of current knowledge. You may find a solar eclipse in the 6th millennium BC, 
+with some recommended time span. Extrapolating parabolic fits to erratic curves too far into the past is dangerous, 
+pointless and inevitably leads to errors or invalid results. Models differ by many hours (exceeding a whole day!)
+when applied too far in the past. This means, there was certainly an eclipse, and latitude will be OK, 
+but you cannot say which longitude the eclipse was covering. The probability to have seen a total 
+eclipse at a certain interesting location will be very small and should by itself not be used as positive argument 
+for any reasonable statement. This is not a problem of Stellarium, 
+but of current knowledge. To repeat, you may find a solar eclipse in the 6th millennium BC, 
 but you cannot even be sure which side of Earth could observe it!
 
-WANTED: A model for $\Delta T$ that works in the Mesolithic! 
+\textbf{WANTED:} A model for $\Delta T$ that works in the Mesolithic! 
 
 \section{The Calendar}
 \label{sec:Accuracy:Calendar}
 
 Stellarium follows the widely accepted convention that dates before the Gregorian calendar 
 reform are given in the Julian calendar, introduced by \name{Julius Caesar}\index{Julius Caesar} in 46~BC. 
+This calendar introduces a leap day every fourth year, which is a bit too much. 
 If you want to show summer solstice in the year -2500, you will notice it is not on June 21st. 
 This is not an error of Stellarium -- the Gregorian reform had a reason! In prehistoric times, 
-it may be more useful to work with solar ecliptic longitudes. Summer solstice is at $\lambda=90$.
+it may be more useful to work with solar ecliptic longitudes. For example, summer solstice is at $\lambda=90$.
 
-\name{Julius Caesar}\index{Julius Caesar} was assassinated in March 44~BC=-43 (see below). His simple 4-year leap rule was 
-then misapplied by the high priests of Rome. \name{Augustus}\index{Augustus} fixed the calendar, and only 8~AD was the 
+\name{Julius Caesar}\index{Julius Caesar} was assassinated in March 44~BC=-43 (see below). 
+His simple 4-year leap rule was then misapplied by the high priests of Rome by adding a leap day every third year. 
+\name{Augustus}\index{Augustus} fixed the calendar, and only 8~AD was the 
 first correctly applied leap year as we know them. Be careful if you are working in Augustean times: 
 Stellarium does not model these issues!
 
 Some authors (esp.\ for Mesoamerican dates) give dates in the proleptic Gregorian calendar 
-(apply the Gregorian leap year rules before 1582). This is a convention, they may do that, 
+(which means, they apply the Gregorian leap year rules before 1582). This is a convention, they may of course do that, 
 but you must do the conversion to the Julian calendar to visualize the sky with Stellarium. 
 Hopefully they also give Julian Day numbers (JD), you can use them with Stellarium. 
 JD numbers are independent from calendar systems. 

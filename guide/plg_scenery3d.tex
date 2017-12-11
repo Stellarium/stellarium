@@ -2,6 +2,7 @@
 %% History:
 %% 2016-04-12 adapted from Scenery3D plugin documentation. Just reformatted.
 %% Doc should be edited in here from now on. 
+%% 2017-12-09 update about performance after playing with big models. Added section about temporally changing material.
 %% !!!!!!!!!! Please ask GZ before editing this file. !!!!!!!!!!!!!!!
 
 % \documentclass[a4paper]{article}
@@ -13,16 +14,10 @@
 %\newcommand{\filename}[1]{\texttt{#1}}
 %\newcommand{\cmd}[1]{\texttt{#1}}
 
-%\chapter{Scenery3d -- Walkable 3D Models in Stellarium}  % TOO LONG
 \chapter{Scenery3d -- 3D Landscapes}% in Stellarium} 
 \label{ch:scenery3d}
 \chapterauthor*{Georg Zotti and Florian Schaukowitsch}
-%\footnote{\url{Georg.Zotti@univie.ac.at},
-%}\  \
 
-%\date{April 10, 2015; last updated 20160412}
-%\begin{document}
-%\maketitle
 
 \section{Introduction}
 \label{sec:scenery3d:Introduction}
@@ -138,16 +133,20 @@ reopen Stellarium.
 \subsection{Performance notes}
 \label{sec:scenery3d:Performance}
 
+This plugin clearly runs better with proper 3D graphics cards. 
 On reasonably good hardware 
 %2012: (tested on a notebook PC with NVidia M9800 GTS), 
 % models up to 100.000 triangles are fluent, up to 250.000 are still ``interactive''.  
 % we have 2015, and a much faster implementation!
-(tested on a notebook PC with NVidia M580 GTS), models with about
-850.000 triangles are working nicely with shadows and bumpmaps.  On very small
+%%(tested on a notebook PC with NVidia M580 GTS), models with about 850.000 triangles 
+%% Latest benchmark...
+(tested on a notebook PC with NVidia M960), models with over 10.000.000 triangles 
+%%
+are working nicely with shadows and bumpmaps, although your mileage may vary.  On very small
 hardware like single-board computers with native OpenGL ES2, models
 may be limited to 64k vertices (points).  If display is too slow,
 switch to perspective projection: all other projections require almost
-sixfold effort!  You should also prefer the ``lazy'' cubemap mode, 
+sixfold effort!  Or try the ``lazy'' cubemap mode and lazy updates of tiles, 
 where the scene is only rendered in specific timesteps or
 when movement happens.  
 
@@ -220,8 +219,8 @@ Honing.  Here, export with settings \texttt{0xxx00}. This will not create a
 and MTL files. Unfortunately, currently some material assignments seem to be
 bad.
 
-Yet another exporter, \file{su2objmtl}, does also not provide good texture
-coordinates and cannot be recommended at this time.
+%Yet another exporter, \file{su2objmtl}, does also not provide good texture
+%coordinates and cannot be recommended at this time.
 
 \subsection{Notes on OBJ file format limitations}
 \label{sec:scenery3d:OBJlimitations}
@@ -608,6 +607,31 @@ object names to light them up gray, then Rightclick-Select) and press
 
 Verify the new model loads correctly, e.g.\ in \program{Meshlab}\footnote{\url{http://www.meshlab.org}}!
 
+\subsection{Beyond 3D: Temporally evolving Models}
+\label{sec:scenery3d:Beyond3D}
+
+Stellarium \newFeature{0.16.1} working as ``time machine'' can display the sky for any calendar date in its range of valid dates. 
+Also landscapes and human-built structures evolve. Temples are being rebuilt, changed, re-dedicated or repurposed, 
+new windows are cut, old windows closed. 
+To show landscape and buildings in the right shape for the time in question, we can make material transparent, 
+so that parts of the model are not displayed.  To allow for archaeological uncertainties in dating 
+construction and destruction, we can gradually fade in and fade out the model parts in question \cite{Zotti:SEAC2017}.
+
+To enable this magic, you must combine all your models into one (see section~\ref{sec:scenery3d:concatenating}), 
+export as one OBJ/MTL as usual, and manually edit the MTL file. It is wise to give the material 
+for the parts in question a reasonable name that you can later identify in the MTL file.
+Then you simply add one or both of the new keywords \texttt{vis\_fadeIn} or \texttt{vis\_fadeOut} 
+to the material description,  with 2 arguments which are the Julian days of begin and end of a phase transition. 
+For sharp transitions, just use the same JD dates.
+
+\begin{configfile}
+# Some structure has been put up around -3100/-3000
+vis_fadeIn  588783.5 625308.5
+# Fade away between 500AD/700AD
+vis_fadeOut 1903682.5 1976732.5
+\end{configfile}
+ 
+
 \subsection{Working with non-georeferenced OBJ files}
 \label{sec:scenery3d:NonGeoreferenced}
 
@@ -663,7 +687,7 @@ constant-height ground. Run Stellarum once and adjust the
 \subsection{Rotating OBJs with recognized survey points}
 \label{sec:scenery3d:RotatingOBJ}
 
-If you have survey points measured in a survey grid plus a photomodel
+If you have survey points measured in a survey grid plus an image-based model
 with those points visible, you can use Meshlab to find the model
 vertex coordinates in the photo model, and some other program like
 \program{CoordTrans} in the \program{JavaGraticule3D} suite to find either the matrix
@@ -808,7 +832,7 @@ Florian Schaukowitsch adapted the code to work with Qt~5 and the
 Stellarium~0.13 codebase, replaced the renderer with a more efficient, fully
 shader-based system, implemented various performance, quality and usability
 enhancements, and did some code cleanup. Both Andrei and Florian were again
-supervised by Michael Wimmer~\cite{Zotti:CHNT2015,Zotti:SEAC2015}. % TODO: add more (SEAC2016, SEAC2017) when they are published.
+supervised by Michael Wimmer~\cite{Zotti:CHNT2015,Zotti:SEAC2015,Zotti:SEAC2017}. % TODO: add more (SEAC2016, SEAC2017) when they are published.
 
 This work has been originally created during the ASTROSIM project supported 2008-2012 by
 the Austrian Science Fund (FWF) under grant number P~21208-G19.

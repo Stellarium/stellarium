@@ -80,7 +80,7 @@
 \draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]%
      {\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}%
                                               {\centering Stellarium \StelVersion\space User Guide\\[18pt] % Book title
-                                              {\Large Georg Zotti, Alexander Wolf, Matthew Gates, Barry Gerdes}\\[15pt]% Author names
+                                              {\Large Georg Zotti, Alexander Wolf (editors)}\\[15pt]% Author names
                                               {\Large 2017}% Year
                                              }}; % 
 \end{tikzpicture}};
@@ -192,7 +192,7 @@ implying a violation of copyright law.}}\\
 \chapterimage{chapter-t3-bg} % Chapter heading image
 
 \include{ch_advanced_use}
-%% GZ I propose to  replace the old chapter with course notes I have developed in late 2015. To get the old version, activate next line instead.
+%% GZ: I replaced the old chapter with course notes I have developed in late 2015. To get the old version, activate next line instead.
 %\include{ch_landscapes}
 \include{ch_landscapes_gz}
 \include{ch_dso} %% Maybe DSO is more a reference chapter? --> Appendix in this case? Or split?
@@ -204,12 +204,15 @@ implying a violation of copyright law.}}\\
 \part{Extending Stellarium}
 \chapterimage{chapter-t3-bg} % Chapter heading image
 \include{ch_plugins}
-\include{plg_interfaces} % TUI, RemoteControl, (2017: D-BUS?)
+\include{plg_interfaces} % TUI, RemoteControl, RemoteSync, (2018: D-BUS?)
 \include{plg_catalogs}
 \include{plg_archaeolines}
 \include{plg_scenery3d} % move to historical.
-\include{plg_atTheTelescope} % TODO: TelescopeControl, Oculars, various hardware projects with Raspberry, Arduino, ...
+\include{plg_atTheTelescope} % TelescopeControl, Oculars, various hardware projects with Raspberry, Arduino, ...
 \include{ch_scripting}
+
+%% TODO: Optional: Maybe extract Chapter "Stellarium at the Telescope" plus more technical info into a proper Part. 
+%%       Also maybe create a Part "Historical and Cultural astronomy"?
 
 %----------------------------------------------------------------------------------------
 %	PART IV
@@ -218,30 +221,28 @@ implying a violation of copyright law.}}\\
 \part{Practical Astronomy}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Astronomical Concepts)
+%	CHAPTER 16 (Astronomical Concepts)
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t4-bg} % Chapter heading image
 \include{ch_astronomical_concepts}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Astronomical Phenomena)
+%	CHAPTER 17 (Astronomical Phenomena)
 %----------------------------------------------------------------------------------------
 
 \include{ch_astronomical_phenomena}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (A Short Sky Guide)
+%	CHAPTER 18 (A Short Sky Guide)
 %----------------------------------------------------------------------------------------
 
 \include{ch_sky_guide}
 
 %----------------------------------------------------------------------------------------
-%	CHAPTER X (Exercises)
+%	CHAPTER 19 (Exercises)
 %----------------------------------------------------------------------------------------
 \chapterimage{chapter-t4-bg} % Chapter heading image
 \include{ch_exercises}
-
-%% TODO: Chapter "Stellarium at the Telescope"
 
 %----------------------------------------------------------------------------------------
 %	PART V

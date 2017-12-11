@@ -1,7 +1,13 @@
 # Makefile for the Stellarium User Guide
+# On Windows with git shell or cygwin, use rm, not del. 
+# Note that make resets SHELL to sh.exe. Cygwin/MinGW/Git shell's version includes full path name with forward-slash.
 
 ifeq ($(OS),Windows_NT)
-	RM=del /Q
+	ifeq ($(findstring /sh.exe, $(SHELL)),/sh.exe)
+		RM=rm -fr
+	else
+		RM=del /Q
+	endif
 else
 	RM=rm -fr 
 endif
@@ -18,7 +24,6 @@ help:
 	@echo "              =========================="
 	@echo "targets: clean, distclean, pdf=manual"
 	@echo "pdf = guide = manual = guide.pdf   Stellarium User Guide"
-
 
 clean:
 	${RM} *~ core *.aux *.log *.lof *.toc *.out *.blg *.bcf *.bbl *.idx *.ilg *.ind *.ptc *.run.xml 
