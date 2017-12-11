@@ -7,8 +7,9 @@ TelescopeClientINDIWidget::TelescopeClientINDIWidget(QWidget *parent) :
 {
     ui->setupUi(this);
     QObject::connect(ui->connectButton, &QPushButton::clicked, this, &TelescopeClientINDIWidget::onConnectionButtonClicked);
-    QObject::connect(&mConnection, &INDIConnection::devicesChanged, this, &TelescopeClientINDIWidget::onDevicesChanged);
-    QObject::connect(&mConnection, &INDIConnection::disconnected, this, &TelescopeClientINDIWidget::onServerDisconnected);
+    QObject::connect(&mConnection, &INDIConnection::newDeviceReceived, this, &TelescopeClientINDIWidget::onDevicesChanged);
+    QObject::connect(&mConnection, &INDIConnection::removeDeviceReceived, this, &TelescopeClientINDIWidget::onDevicesChanged);
+    QObject::connect(&mConnection, &INDIConnection::serverDisconnectedReceived, this, &TelescopeClientINDIWidget::onServerDisconnected);
 }
 
 TelescopeClientINDIWidget::~TelescopeClientINDIWidget()

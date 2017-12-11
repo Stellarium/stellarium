@@ -63,25 +63,32 @@ const QStringList INDIConnection::devices() const
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
     std::lock_guard<std::mutex> lock(mMutex);
+    if (!dp)
+        return;
+
+    QString name(dp->getDeviceName());
     IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
-    mDevices.append(dp->getDeviceName());
-    /// @todo filter telescopes
+    mDevices.append(name);
     mTelescope = dp;
 
-    emit devicesChanged();
+    emit newDeviceReceived(name);
 }
 
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 {
     std::lock_guard<std::mutex> lock(mMutex);
-    int index = mDevices.indexOf(dp->getDeviceName());
+    if (!dp)
+        return;
+
+    QString name(dp->getDeviceName());
+    int index = mDevices.indexOf(name);
     if (index != -1)
         mDevices.removeAt(index);
 
     if (mTelescope == dp)
         mTelescope = nullptr;
 
-    emit devicesChanged();
+    emit removeDeviceReceived(name);
 }
 
 void INDIConnection::newProperty(INDI::Property *property)
@@ -148,13 +155,13 @@ void INDIConnection::newMessage(INDI::BaseDevice *dp, int messageID)
 
 void INDIConnection::serverConnected()
 {
-    emit connected();
+    emit serverConnectedReceived();
 }
 
 void INDIConnection::serverDisconnected(int exit_code)
 {
     mDevices.clear();
-    emit disconnected(exit_code);
+    emit serverDisconnectedReceived(exit_code);
 }
 
 bool INDIConnection::Coordinates::operator==(const INDIConnection::Coordinates &other) const

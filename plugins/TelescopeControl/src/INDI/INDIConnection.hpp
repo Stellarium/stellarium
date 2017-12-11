@@ -60,9 +60,10 @@ public:
     void serverDisconnected(int exit_code) override;
 
 signals:
-    void devicesChanged();
-    void connected();
-    void disconnected(int exit_code);
+    void newDeviceReceived(QString name);
+    void removeDeviceReceived(QString name);
+    void serverConnectedReceived();
+    void serverDisconnectedReceived(int exit_code);
 
 private:
     mutable std::mutex mMutex;
