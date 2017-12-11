@@ -402,18 +402,36 @@ void LabelMgr::draw(StelCore* core)
 	foreach(StelLabel* l, allLabels)
 	{
 		l->draw(core, sPainter);
-		if (l->autoDelete)
-			deleteLabel(l->id);
 	}
 }
 
-void LabelMgr::messageTimeout()
+void LabelMgr::messageTimeout2()
 {
 	QObject* obj = QObject::sender();
 	foreach(StelLabel* l, allLabels)
 	{
 		if (l->timer == obj)
+		{
 			deleteLabel(l->id);
+			return;
+		}
+	}
+}
+
+void LabelMgr::messageTimeout1()
+{
+	QObject* obj = QObject::sender();
+	foreach(StelLabel* l, allLabels)
+	{
+		if (l->timer == obj)
+		{
+			disconnect(l->timer, SIGNAL(timeout()), this, SLOT(messageTimeout1()));
+			connect(l->timer, SIGNAL(timeout()), this, SLOT(messageTimeout2()));
+			l->setFlagShow(false);
+			l->timer->setInterval(l->labelFader.getDuration()*1000);
+			l->timer->start();
+			return;
+		}
 	}
 }
 
@@ -422,11 +440,11 @@ int LabelMgr::appendLabel(StelLabel* l, int autoDeleteTimeoutMs)
 	if (autoDeleteTimeoutMs > 0)
 	{
 		QTimer* timer = new QTimer(this);
+		l->timer = timer;
 		timer->setSingleShot(true);
 		timer->setInterval(autoDeleteTimeoutMs);
-		timer->stop();
-		connect(timer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
-		l->timer = timer;
+		connect(timer, SIGNAL(timeout()), this, SLOT(messageTimeout1()));
+		timer->start();
 	}
 
 	counter++;
@@ -530,7 +548,7 @@ void LabelMgr::setLabelText(int id, const QString& newText)
 	
 void LabelMgr::deleteLabel(int id)
 {
-	if (id<0 || allLabels[id]==NULL)
+	if (id<0 || !allLabels.contains(id))
 		return;
 
 	if (allLabels[id]->timer != NULL)
