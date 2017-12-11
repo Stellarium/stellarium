@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>616</width>
-    <height>355</height>
+    <width>609</width>
+    <height>176</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -133,7 +133,14 @@
        </widget>
       </item>
       <item>
-       <widget class="QComboBox" name="devicesComboBox"/>
+       <widget class="QComboBox" name="devicesComboBox">
+        <property name="editable">
+         <bool>true</bool>
+        </property>
+        <property name="insertPolicy">
+         <enum>QComboBox::NoInsert</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
