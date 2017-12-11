@@ -148,11 +148,13 @@ void INDIConnection::newMessage(INDI::BaseDevice *dp, int messageID)
 
 void INDIConnection::serverConnected()
 {
+    emit connected();
 }
 
 void INDIConnection::serverDisconnected(int exit_code)
 {
     mDevices.clear();
+    emit disconnected(exit_code);
 }
 
 bool INDIConnection::Coordinates::operator==(const INDIConnection::Coordinates &other) const

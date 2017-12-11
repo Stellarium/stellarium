@@ -61,6 +61,8 @@ public:
 
 signals:
     void devicesChanged();
+    void connected();
+    void disconnected(int exit_code);
 
 private:
     mutable std::mutex mMutex;

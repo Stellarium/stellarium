@@ -276,6 +276,9 @@ bool INDI::BaseClient::disconnectServer()
     listen_thread=nullptr;
     //pthread_join(listen_thread, nullptr);
 
+    int exit_code = 0;
+    serverDisconnected(exit_code);
+
     return true;
 }
 

@@ -18,8 +18,10 @@ public:
     ~TelescopeClientINDIUI();
 
 private slots:
-    void onGetDevicesPushButtonClicked();
+    void onConnectionButtonClicked();
     void onDevicesChanged();
+    void onServerConnected();
+    void onServerDisconnected(int code);
 
 private:
     Ui::TelescopeClientINDIUI *ui;
