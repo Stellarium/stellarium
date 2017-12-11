@@ -255,7 +255,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	
 	ui->lineEditTelescopeName->setText(name);
 	
-	if(!deviceModelName.isEmpty())
+    if(connectionType == ConnectionLocal && !deviceModelName.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setChecked(true);
 		
@@ -302,7 +302,9 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionINDI)
 	{
 		ui->radioButtonTelescopeINDI->setChecked(true);
-		ui->lineEditHostName->setText("localhost");
+        ui->INDIProperties->setHost(host);
+        ui->INDIProperties->setPort(portTCP);
+        ui->INDIProperties->setSelectedDevice(deviceModelName);
 	}
 
 	//Equinox

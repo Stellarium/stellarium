@@ -22,14 +22,29 @@ QString TelescopeClientINDIWidget::host() const
     return ui->lineEditHostName->text();
 }
 
+void TelescopeClientINDIWidget::setHost(const QString &host)
+{
+    ui->lineEditHostName->setText(host);
+}
+
 int TelescopeClientINDIWidget::port() const
 {
     return ui->spinBoxTCPPort->value();
 }
 
+void TelescopeClientINDIWidget::setPort(int port)
+{
+    ui->spinBoxTCPPort->setValue(port);
+}
+
 QString TelescopeClientINDIWidget::selectedDevice() const
 {
     return ui->devicesComboBox->currentText();
+}
+
+void TelescopeClientINDIWidget::setSelectedDevice(const QString &device)
+{
+    ui->devicesComboBox->setCurrentText(device);
 }
 
 void TelescopeClientINDIWidget::onConnectionButtonClicked()

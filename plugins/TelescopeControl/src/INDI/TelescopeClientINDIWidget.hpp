@@ -37,8 +37,11 @@ public:
     ~TelescopeClientINDIWidget();
 
     QString host() const;
+    void setHost(const QString& host);
     int port() const;
+    void setPort(int port);
     QString selectedDevice() const;
+    void setSelectedDevice(const QString& device);
 
 private slots:
     void onConnectionButtonClicked();
