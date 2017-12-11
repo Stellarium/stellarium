@@ -67,7 +67,9 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
         return;
 
     QString name(dp->getDeviceName());
+
     qDebug() << "INDIConnection::newDevice| %s Device... " << name;
+
     mDevices.append(name);
     mTelescope = dp;
 
