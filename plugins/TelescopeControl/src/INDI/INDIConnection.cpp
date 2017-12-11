@@ -28,7 +28,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 
     if (!mTelescope->isConnected())
     {
-        IDLog("Error: Telescope not connected");
+        qDebug() << "Error: Telescope not connected";
         return;
     }
 
@@ -36,7 +36,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
     property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
     if (!property)
     {
-        IDLog("Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...\n");
+        qDebug() << "Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...";
         return;
     }
 
@@ -67,7 +67,7 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
         return;
 
     QString name(dp->getDeviceName());
-    IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
+    qDebug() << "INDIConnection::newDevice| %s Device... " << name;
     mDevices.append(name);
     mTelescope = dp;
 
@@ -97,9 +97,9 @@ void INDIConnection::newProperty(INDI::Property *property)
     if (mTelescope != property->getBaseDevice())
         return;
 
-    IDLog("INDIConnection::newProperty| %s\n", property->getName());
-
     QString name(property->getName());
+
+    qDebug() << "INDIConnection::newProperty| " << name;
 
     if (name == "EQUATORIAL_EOD_COORD")
     {
@@ -111,7 +111,7 @@ void INDIConnection::newProperty(INDI::Property *property)
     {
         connectDevice(mTelescope->getDeviceName());
         if (mTelescope->isConnected())
-            IDLog("connected\n");
+            qDebug() << "connected\n";
     }
 }
 
