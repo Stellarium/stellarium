@@ -19,12 +19,16 @@
 #ifndef INDICONNECTION_HPP
 #define INDICONNECTION_HPP
 
+#include <QObject>
 #include "indibase/baseclient.h"
 
 #include <mutex>
+#include <QStringList>
 
-class INDIConnection final : public INDI::BaseClient
+class INDIConnection final : public QObject, public INDI::BaseClient
 {
+    Q_OBJECT
+
 public:
     struct Coordinates
     {
@@ -34,12 +38,13 @@ public:
         bool operator!=(const Coordinates &other) const;
     };
 
-    INDIConnection();
+    INDIConnection(QObject* parent = nullptr);
     INDIConnection(const INDIConnection& that) = delete;
 
     Coordinates position() const;
     void setPosition(Coordinates coords);
-    bool isConnected() const;
+    bool isDeviceConnected() const;
+    const QStringList devices() const;
 
     void newDevice(INDI::BaseDevice *dp) override;
     void removeDevice(INDI::BaseDevice *dp) override;
@@ -54,10 +59,17 @@ public:
     void serverConnected() override;
     void serverDisconnected(int exit_code) override;
 
+signals:
+    void newDeviceReceived(QString name);
+    void removeDeviceReceived(QString name);
+    void serverConnectedReceived();
+    void serverDisconnectedReceived(int exit_code);
+
 private:
     mutable std::mutex mMutex;
     INDI::BaseDevice* mTelescope = nullptr;
     Coordinates mCoordinates;
+    QStringList mDevices;
 };
 
 #endif // INDICONNECTION_HPP

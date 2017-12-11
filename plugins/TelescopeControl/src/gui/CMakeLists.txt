@@ -22,4 +22,5 @@ target_link_libraries(TelescopeControl_gui
     Qt5::Network
     Qt5::Gui
     TelescopeControl_common
+    TelescopeControl_INDI
     )

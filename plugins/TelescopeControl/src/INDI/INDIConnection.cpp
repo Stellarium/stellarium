@@ -10,7 +10,7 @@
 #include "indibase/baseclient.h"
 #include "indibase/basedevice.h"
 
-INDIConnection::INDIConnection()
+INDIConnection::INDIConnection(QObject *parent) : QObject(parent)
 {
 }
 
@@ -45,7 +45,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
     sendNewNumber(property);
 }
 
-bool INDIConnection::isConnected() const
+bool INDIConnection::isDeviceConnected() const
 {
     std::lock_guard<std::mutex> lock(mMutex);
     if (!mTelescope)
@@ -54,19 +54,41 @@ bool INDIConnection::isConnected() const
     return mTelescope->isConnected();
 }
 
+const QStringList INDIConnection::devices() const
+{
+    std::lock_guard<std::mutex> lock(mMutex);
+    return mDevices;
+}
+
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
     std::lock_guard<std::mutex> lock(mMutex);
+    if (!dp)
+        return;
+
+    QString name(dp->getDeviceName());
     IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
-    /// @todo filter telescopes
+    mDevices.append(name);
     mTelescope = dp;
+
+    emit newDeviceReceived(name);
 }
 
 void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 {
     std::lock_guard<std::mutex> lock(mMutex);
+    if (!dp)
+        return;
+
+    QString name(dp->getDeviceName());
+    int index = mDevices.indexOf(name);
+    if (index != -1)
+        mDevices.removeAt(index);
+
     if (mTelescope == dp)
         mTelescope = nullptr;
+
+    emit removeDeviceReceived(name);
 }
 
 void INDIConnection::newProperty(INDI::Property *property)
@@ -133,10 +155,13 @@ void INDIConnection::newMessage(INDI::BaseDevice *dp, int messageID)
 
 void INDIConnection::serverConnected()
 {
+    emit serverConnectedReceived();
 }
 
 void INDIConnection::serverDisconnected(int exit_code)
 {
+    mDevices.clear();
+    emit serverDisconnectedReceived(exit_code);
 }
 
 bool INDIConnection::Coordinates::operator==(const INDIConnection::Coordinates &other) const

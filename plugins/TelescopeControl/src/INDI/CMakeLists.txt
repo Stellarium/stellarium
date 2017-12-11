@@ -1,5 +1,6 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
 
 find_package(Threads REQUIRED)
 
@@ -8,6 +9,9 @@ add_library(TelescopeControl_INDI
     INDIConnection.cpp
     TelescopeClientINDI.hpp
     TelescopeClientINDI.cpp
+    TelescopeClientINDIWidget.hpp
+    TelescopeClientINDIWidget.cpp
+    TelescopeClientINDIWidget.ui
     )
 
 target_link_libraries(TelescopeControl_INDI

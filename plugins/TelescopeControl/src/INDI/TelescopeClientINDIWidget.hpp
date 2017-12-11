@@ -16,27 +16,41 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TELESCOPECLIENTINDI_HPP
-#define TELESCOPECLIENTINDI_HPP
 
-#include "TelescopeClient.hpp"
+#ifndef TELESCOPECLIENTINDIWIDGET_HPP
+#define TELESCOPECLIENTINDIWIDGET_HPP
+
+#include <QWidget>
 
 #include "INDIConnection.hpp"
 
-class TelescopeClientINDI : public TelescopeClient
-{
-public:
-    TelescopeClientINDI(const QString &name, const QString& params);
-    ~TelescopeClientINDI();
+namespace Ui {
+class TelescopeClientINDIWidget;
+}
 
-    Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
-    void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
-    bool isConnected() const override;
-    bool hasKnownPosition() const override;
+class TelescopeClientINDIWidget : public QWidget
+{
+    Q_OBJECT
+
+public:
+    explicit TelescopeClientINDIWidget(QWidget *parent = 0);
+    ~TelescopeClientINDIWidget();
+
+    QString host() const;
+    void setHost(const QString& host);
+    int port() const;
+    void setPort(int port);
+    QString selectedDevice() const;
+    void setSelectedDevice(const QString& device);
+
+private slots:
+    void onConnectionButtonClicked();
+    void onDevicesChanged();
+    void onServerDisconnected(int code);
 
 private:
+    Ui::TelescopeClientINDIWidget *ui;
     INDIConnection mConnection;
-    QString mDevice;
 };
 
-#endif // TELESCOPECLIENTINDI_HPP
+#endif // TELESCOPECLIENTINDIUI_HPP

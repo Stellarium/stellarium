@@ -4,6 +4,7 @@
 #include <cmath>
 
 #include "INDIConnection.hpp"
+#include "indibase/basedevice.h"
 
 void testINDIConnection::deafultCoordinates()
 {
@@ -21,7 +22,7 @@ void testINDIConnection::defaultPosition()
 void testINDIConnection::initialConnectionStatus()
 {
     INDIConnection instance;
-    QVERIFY(instance.isConnected() == false);
+    QVERIFY(instance.isDeviceConnected() == false);
 }
 
 void testINDIConnection::setPositionNotConnected()
@@ -33,6 +34,20 @@ void testINDIConnection::setPositionNotConnected()
     INDIConnection instance;
     instance.setPosition(position);
     QVERIFY(instance.position() == INDIConnection::Coordinates());
+}
+
+void testINDIConnection::listDevices()
+{
+    INDIConnection instance;
+    QVERIFY(instance.devices().empty());
+
+    INDI::BaseDevice device;
+    device.setDeviceName("dummy");
+
+    instance.newDevice(&device);
+    QVERIFY(instance.devices().size() == 1);
+    instance.removeDevice(&device);
+    QVERIFY(instance.devices().empty());
 }
 
 QTEST_MAIN(testINDIConnection)
