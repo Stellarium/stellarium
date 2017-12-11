@@ -17,6 +17,21 @@ TelescopeClientINDIUI::~TelescopeClientINDIUI()
     delete ui;
 }
 
+QString TelescopeClientINDIUI::host() const
+{
+    return ui->lineEditHostName->text();
+}
+
+int TelescopeClientINDIUI::port() const
+{
+    return ui->spinBoxTCPPort->value();
+}
+
+QString TelescopeClientINDIUI::selectedDevice() const
+{
+    return ui->devicesComboBox->currentText();
+}
+
 void TelescopeClientINDIUI::onConnectionButtonClicked()
 {
     if (mConnection.isConnected())

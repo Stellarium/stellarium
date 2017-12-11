@@ -17,6 +17,10 @@ public:
     explicit TelescopeClientINDIUI(QWidget *parent = 0);
     ~TelescopeClientINDIUI();
 
+    QString host() const;
+    int port() const;
+    QString selectedDevice() const;
+
 private slots:
     void onConnectionButtonClicked();
     void onDevicesChanged();

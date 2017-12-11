@@ -956,6 +956,7 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	if (connectionType == ConnectionINDI)
 	{
 		telescope.insert("host_name", host);
+        telescope.insert("device_model", deviceModelName);
 	}
 
 	if (connectionType == ConnectionRemote)
@@ -1303,7 +1304,7 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 			break;
 
 		case ConnectionINDI:
-			initString = QString("%1:%2:%3:%4:%5").arg(name, "INDI", "J2000", host, QString::number(portTCP));
+            initString = QString("%1:%2:%3:%4:%5").arg(name, "INDI", "J2000", host, QString::number(portTCP), deviceModelName);
 			break;
 
 		case ConnectionRemote:
