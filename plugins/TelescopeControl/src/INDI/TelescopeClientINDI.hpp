@@ -26,17 +26,17 @@
 class TelescopeClientINDI : public TelescopeClient
 {
 public:
-    TelescopeClientINDI(const QString &name, const QString& params);
-    ~TelescopeClientINDI();
+	TelescopeClientINDI(const QString &name, const QString& params);
+	~TelescopeClientINDI();
 
-    Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
-    void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
-    bool isConnected() const override;
-    bool hasKnownPosition() const override;
+	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
+	bool isConnected() const override;
+	bool hasKnownPosition() const override;
 
 private:
-    INDIConnection mConnection;
-    QString mDevice;
+	INDIConnection mConnection;
+	QString mDevice;
 };
 
 #endif // TELESCOPECLIENTINDI_HPP

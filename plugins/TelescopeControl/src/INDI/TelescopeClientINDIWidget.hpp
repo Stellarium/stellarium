@@ -30,27 +30,27 @@ class TelescopeClientINDIWidget;
 
 class TelescopeClientINDIWidget : public QWidget
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    explicit TelescopeClientINDIWidget(QWidget *parent = 0);
-    ~TelescopeClientINDIWidget();
+	explicit TelescopeClientINDIWidget(QWidget *parent = 0);
+	~TelescopeClientINDIWidget();
 
-    QString host() const;
-    void setHost(const QString& host);
-    int port() const;
-    void setPort(int port);
-    QString selectedDevice() const;
-    void setSelectedDevice(const QString& device);
+	QString host() const;
+	void setHost(const QString& host);
+	int port() const;
+	void setPort(int port);
+	QString selectedDevice() const;
+	void setSelectedDevice(const QString& device);
 
 private slots:
-    void onConnectionButtonClicked();
-    void onDevicesChanged();
-    void onServerDisconnected(int code);
+	void onConnectionButtonClicked();
+	void onDevicesChanged();
+	void onServerDisconnected(int code);
 
 private:
-    Ui::TelescopeClientINDIWidget *ui;
-    INDIConnection mConnection;
+	Ui::TelescopeClientINDIWidget *ui;
+	INDIConnection mConnection;
 };
 
 #endif // TELESCOPECLIENTINDIUI_HPP

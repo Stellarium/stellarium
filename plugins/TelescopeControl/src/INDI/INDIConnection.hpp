@@ -27,49 +27,49 @@
 
 class INDIConnection final : public QObject, public INDI::BaseClient
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    struct Coordinates
-    {
-        double RA = 0.0;
-        double DEC = 0.0;
-        bool operator==(const Coordinates &other) const;
-        bool operator!=(const Coordinates &other) const;
-    };
+	struct Coordinates
+	{
+		double RA = 0.0;
+		double DEC = 0.0;
+		bool operator==(const Coordinates &other) const;
+		bool operator!=(const Coordinates &other) const;
+	};
 
-    INDIConnection(QObject* parent = nullptr);
-    INDIConnection(const INDIConnection& that) = delete;
+	INDIConnection(QObject* parent = nullptr);
+	INDIConnection(const INDIConnection& that) = delete;
 
-    Coordinates position() const;
-    void setPosition(Coordinates coords);
-    bool isDeviceConnected() const;
-    const QStringList devices() const;
+	Coordinates position() const;
+	void setPosition(Coordinates coords);
+	bool isDeviceConnected() const;
+	const QStringList devices() const;
 
-    void newDevice(INDI::BaseDevice *dp) override;
-    void removeDevice(INDI::BaseDevice *dp) override;
-    void newProperty(INDI::Property *property) override;
-    void removeProperty(INDI::Property *property) override;
-    void newBLOB(IBLOB *bp) override;
-    void newSwitch(ISwitchVectorProperty *svp) override;
-    void newNumber(INumberVectorProperty *nvp) override;
-    void newText(ITextVectorProperty *tvp) override;
-    void newLight(ILightVectorProperty *lvp) override;
-    void newMessage(INDI::BaseDevice *dp, int messageID) override;
-    void serverConnected() override;
-    void serverDisconnected(int exit_code) override;
+	void newDevice(INDI::BaseDevice *dp) override;
+	void removeDevice(INDI::BaseDevice *dp) override;
+	void newProperty(INDI::Property *property) override;
+	void removeProperty(INDI::Property *property) override;
+	void newBLOB(IBLOB *bp) override;
+	void newSwitch(ISwitchVectorProperty *svp) override;
+	void newNumber(INumberVectorProperty *nvp) override;
+	void newText(ITextVectorProperty *tvp) override;
+	void newLight(ILightVectorProperty *lvp) override;
+	void newMessage(INDI::BaseDevice *dp, int messageID) override;
+	void serverConnected() override;
+	void serverDisconnected(int exit_code) override;
 
 signals:
-    void newDeviceReceived(QString name);
-    void removeDeviceReceived(QString name);
-    void serverConnectedReceived();
-    void serverDisconnectedReceived(int exit_code);
+	void newDeviceReceived(QString name);
+	void removeDeviceReceived(QString name);
+	void serverConnectedReceived();
+	void serverDisconnectedReceived(int exit_code);
 
 private:
-    mutable std::mutex mMutex;
-    INDI::BaseDevice* mTelescope = nullptr;
-    Coordinates mCoordinates;
-    QStringList mDevices;
+	mutable std::mutex mMutex;
+	INDI::BaseDevice* mTelescope = nullptr;
+	Coordinates mCoordinates;
+	QStringList mDevices;
 };
 
 #endif // INDICONNECTION_HPP
