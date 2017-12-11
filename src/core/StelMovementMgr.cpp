@@ -92,6 +92,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, oldViewportOffset(0.0f, 0.0f)
 	, targetViewportOffset(0.0f, 0.0f)
 	, flagIndicationMountMode(false)
+	, lastMessageID(0)
 {
 	setObjectName("StelMovementMgr");
 }
@@ -209,16 +210,22 @@ void StelMovementMgr::init()
 
 void StelMovementMgr::setEquatorialMount(bool b)
 {
-	QString mode = qc_("Equatorial mount", "mount mode");
-	if (!b)
-		mode = qc_("Alt-azimuth mount", "mount mode");
-
 	setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);
 
 	if (getFlagIndicationMountMode())
 	{
-		hideMessages();
-		displayMessage(mode);
+		QString mode = qc_("Equatorial mount", "mount mode");
+		if (!b)
+			mode = qc_("Alt-azimuth mount", "mount mode");
+
+		if (lastMessageID)
+			GETSTELMODULE(LabelMgr)->deleteLabel(lastMessageID);
+
+		StelProjector::StelProjectorParams projectorParams = StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
+		StelPainter painter(StelApp::getInstance().getCore()->getProjection2d());
+		int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0] - 0.5 * (painter.getFontMetrics().width(mode));
+		int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1] - 0.5 * (painter.getFontMetrics().height());
+		lastMessageID = GETSTELMODULE(LabelMgr)->labelScreen(mode, xPosition, yPosition, true, StelApp::getInstance().getBaseFontSize() + 3, "#99FF99", true, 2000);
 	}
 }
 
@@ -1558,26 +1565,3 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	core->setViewportOffset(offsetX, offsetY);
 }
 
-void StelMovementMgr::displayMessage(const QString& message, const QString hexColor)
-{
-	StelCore* core = StelApp::getInstance().getCore();
-	QFont font;
-
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	StelPainter painter(prj);
-	painter.setFont(font);
-
-	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-	int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0] - 0.5 * (painter.getFontMetrics().width(message));
-	int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1] - 0.5 * (painter.getFontMetrics().height());
-	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, xPosition, yPosition, true, StelApp::getInstance().getBaseFontSize() + 3, hexColor, false, 1000);
-}
-
-void StelMovementMgr::hideMessages()
-{
-	foreach(const int& id, messageIDs)
-	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(id);
-		messageIDs.removeOne(id);
-	}
-}

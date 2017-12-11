@@ -139,7 +139,8 @@ public slots:
 	int deleteAllLabels(void);
 
 private slots:
-	void messageTimeout();
+	void messageTimeout1();
+	void messageTimeout2();
 
 private:
 	QMap<int, class StelLabel*> allLabels;

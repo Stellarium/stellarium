@@ -327,11 +327,6 @@ private slots:
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
 
-	//! Display a message on the screen for a few seconds.
-	void displayMessage(const QString& message, const QString hexColor="#99FF99");
-	//! Hide all messages.
-	void hideMessages();
-
 public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;
@@ -476,7 +471,7 @@ private:
 
 	//! @name Screen message infrastructure
 	//@{
-	QList<int> messageIDs;
+	int lastMessageID;
 	//@}
 
 };
