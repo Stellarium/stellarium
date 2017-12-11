@@ -19,7 +19,6 @@
 
 #include "HipsMgr.hpp"
 #include "StelHips.hpp"
-#include "StelFader.hpp"
 #include "StelPainter.hpp"
 #include "StelCore.hpp"
 #include "StelApp.hpp"
@@ -30,24 +29,19 @@
 #include <QNetworkReply>
 #include <QSettings>
 
-HipsMgr::HipsMgr() : survey(Q_NULLPTR)
+HipsMgr::HipsMgr()
 {
 	setObjectName("HipsMgr");
-	fader = new LinearFader();
 }
 
 HipsMgr::~HipsMgr()
 {
-	delete fader;
-	fader = Q_NULLPTR;
 }
 
 void HipsMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
-
-	addAction("actionShow_Hips_Survey", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "surveyDisplayed", "Ctrl+Alt+F");
 
 	// Start to load survey lists
 	QStringList sources;
@@ -64,7 +58,6 @@ void HipsMgr::init()
 		sources << "http://alaskybis.unistra.fr/hipslist"
 		        << "https://data.stellarium.org/surveys/hipslist";
 
-
 	for (QUrl source: sources)
 	{
 		if (source.scheme().isEmpty()) source.setScheme("file");
@@ -79,28 +72,31 @@ void HipsMgr::init()
 			emit surveysChanged();
 		});
 	}
-
-	setSurveyUrl("http://alaskybis.unistra.fr/DSS/DSSColor");
 	conf->endGroup();
 }
 
 void HipsMgr::deinit()
 {
-	survey = HipsSurveyP(NULL);
 }
 
 void HipsMgr::draw(StelCore* core)
 {
-	if (!getFlagSurveyShow())
-		return;
-
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
-	survey->draw(&sPainter);
+	for (auto survey: surveys)
+	{
+		if (survey->isVisible() && survey->planet.isEmpty())
+		{
+			survey->draw(&sPainter);
+		}
+	}
 }
 
 void HipsMgr::update(double deltaTime)
 {
-	fader->update((int)(deltaTime*1000));
+	for (auto survey: surveys)
+	{
+		survey->fader.update((int)(deltaTime * 1000));
+	}
 }
 
 double HipsMgr::getCallOrder(StelModuleActionName actionName) const
@@ -110,40 +106,11 @@ double HipsMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void HipsMgr::setFlagSurveyShow(const bool displayed)
+HipsSurveyP HipsMgr::getSurveyByUrl(const QString &url)
 {
-	if (*fader != displayed)
+	for (auto survey: surveys)
 	{
-		*fader = displayed;
-		GETSTELMODULE(StelSkyLayerMgr)->setFlagShow(!displayed);
-		emit surveyDisplayedChanged(displayed);
+		if (survey->getUrl() == url) return survey;
 	}
-}
-
-bool HipsMgr::getFlagSurveyShow() const
-{
-	return *fader;
-}
-
-QString HipsMgr::getSurveyUrl() const
-{
-	return survey ? survey->getUrl() : QString();
-}
-
-void HipsMgr::setSurveyUrl(const QString& url)
-{
-	if (survey && url == survey->getUrl()) return;
-	survey.clear();
-	for (auto hips: surveys)
-	{
-		if (hips->getUrl() == url)
-		{
-			survey = hips;
-			break;
-		}
-	}
-	/*
-	survey = HipsSurveyP(new HipsSurvey(url));
-	survey->setParent(this);
-	*/
+	return HipsSurveyP(NULL);
 }

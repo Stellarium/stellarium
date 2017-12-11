@@ -2139,21 +2139,25 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			sPainter->setColor(overbright, pow(0.75f, extinctedMag)*overbright, pow(0.42f, 0.9f*extinctedMag)*overbright);
 		}
 
-		if (survey)
-		{
-			drawSurvey(core, sPainter);
-			drawSphere(sPainter, screenSz, true);
-		}
 		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
-		else if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
+		if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
 		{
 			if(!drawObjModel(sPainter, screenSz))
 			{
 				drawSphere(sPainter, screenSz, drawOnlyRing);
 			}
 		}
-		else
+		else if (!survey || survey->getInterstate() < 1.0f)
+		{
 			drawSphere(sPainter, screenSz, drawOnlyRing);
+		}
+
+		if (survey && survey->getInterstate() > 0.0f)
+		{
+			drawSurvey(core, sPainter);
+			drawSphere(sPainter, screenSz, true);
+		}
+
 
 		core->setClippingPlanes(n,f);  // Restore old clipping planes
 

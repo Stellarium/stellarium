@@ -31,6 +31,7 @@
 
 #include "StelTexture.hpp"
 #include "VecMath.hpp"
+#include "StelFader.hpp"
 
 class StelPainter;
 class HipsTile;
@@ -44,11 +45,16 @@ Q_DECLARE_METATYPE(HipsSurveyP)
 
 class HipsSurvey : public QObject
 {
+	friend class HipsMgr;
 	Q_OBJECT
 
 	Q_PROPERTY(QString url MEMBER url CONSTANT)
 	Q_PROPERTY(QJsonObject properties MEMBER properties NOTIFY propertiesChanged)
 	Q_PROPERTY(bool isLoading READ isLoading NOTIFY statusChanged)
+	Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
+	// !Set the the name of the planet the survey is attached to or empty if
+	//  this is a skysurvey.
+	Q_PROPERTY(QString planet MEMBER planet);
 
 public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices)> DrawCallback;
@@ -57,6 +63,11 @@ public:
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
 	HipsSurvey(const QString& url, double releaseDate=0.0);
 	virtual ~HipsSurvey();
+
+	bool isVisible() const;
+	void setVisible(bool value);
+	float getInterstate() const {return fader.getInterstate();}
+
 	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = NULL);
 	const QString& getUrl() const {return url;}
 	bool isLoading(void) const;
@@ -67,9 +78,12 @@ public:
 signals:
 	void propertiesChanged(void);
 	void statusChanged(void);
+	void visibleChanged(bool);
 
 private:
+	LinearFader fader;
 	QString url;
+	QString planet;
 	double releaseDate; // As UTC Julian day.
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the

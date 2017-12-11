@@ -27,17 +27,6 @@
 class HipsMgr : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool surveyDisplayed
-			READ getFlagSurveyShow
-			WRITE setFlagSurveyShow
-			NOTIFY surveyDisplayedChanged)
-
-	// XXX to remove: we should support any number of visible surveys
-	Q_PROPERTY(QString surveyUrl
-			READ getSurveyUrl
-			WRITE setSurveyUrl
-			NOTIFY surveyUrlChanged)
-
 	Q_PROPERTY(QList<HipsSurveyP> surveys
 			MEMBER surveys
 			NOTIFY surveysChanged)
@@ -51,15 +40,9 @@ public:
 	virtual void draw(StelCore* core) Q_DECL_OVERRIDE;
 	virtual double getCallOrder(StelModuleActionName actionName) const Q_DECL_OVERRIDE;
 
-	QString getSurveyUrl() const;
-	void setSurveyUrl(const QString& url);
-
-signals:
-	void surveyUrlChanged(const QString& url);
-
-public slots:
-	void setFlagSurveyShow(bool displayed);
-	bool getFlagSurveyShow(void) const;
+	//! Return the hips survey that has a given url.
+	Q_INVOKABLE
+	HipsSurveyP getSurveyByUrl(const QString &url);
 
 signals:
 	void surveyDisplayedChanged(const bool displayed) const;
@@ -69,8 +52,6 @@ signals:
 
 private:
 	QList<HipsSurveyP> surveys;
-	HipsSurveyP survey;
-	class LinearFader* fader = NULL;
 };
 
 #endif // _HIPSMGR_HPP_

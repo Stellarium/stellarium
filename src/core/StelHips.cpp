@@ -103,6 +103,18 @@ HipsSurvey::~HipsSurvey()
 
 }
 
+bool HipsSurvey::isVisible() const
+{
+	return (bool)fader;
+}
+
+void HipsSurvey::setVisible(bool value)
+{
+	if (value == isVisible()) return;
+	fader = value;
+	emit visibleChanged(value);
+}
+
 int HipsSurvey::getPropertyInt(const QString& key, int fallback)
 {
 	if (!properties.contains(key)) return fallback;
@@ -156,6 +168,8 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	bool outside = (angle == 2.0 * M_PI);
 	if (properties.isEmpty()) return;
 	if (!getAllsky()) return;
+	if (fader.getInterstate() == 0.0) return;
+	sPainter->setColor(1, 1, 1, fader.getInterstate());
 
 	// Set the projection.
 	StelCore* core = StelApp::getInstance().getCore();
@@ -279,6 +293,8 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	QVector<Vec2f> texArray;
 	QVector<uint16_t> indicesArray;
 	int nb;
+	Vec4f color = sPainter->getColor();
+	float alpha;
 
 	healpix_pix2vec(1 << order, pix, pos.v);
 
@@ -342,10 +358,11 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 	}
 
 	// Actually draw the tile, as a single quad.
-	if (tile->texFader.state() == QTimeLine::Running)
+	alpha = color[3] * tile->texFader.currentValue();
+	if (alpha < 1.0f)
 	{
 		sPainter->setBlending(true);
-		sPainter->setColor(1, 1, 1, tile->texFader.currentValue());
+		sPainter->setColor(color[0], color[1], color[2], alpha);
 	}
 	else
 	{
@@ -367,10 +384,13 @@ skip_render:
 	if (order < drawOrder)
 	{
 		for (int i = 0; i < 4; i++)
+		{
 			drawTile(order + 1, pix * 4 + i, drawOrder, splitOrder, outside,
 					 viewportShape, sPainter, callback);
-		return;
+		}
 	}
+	// Restore the painter color.
+	sPainter->setColor(color[0], color[1], color[2], color[3]);
 }
 
 int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,

@@ -480,9 +480,6 @@ void ViewDialog::updateHips()
 	int currentRow = l->currentRow();
 	QString currentSurvey;
 
-	if (hipsmgr->property("surveyDisplayed") == true)
-		currentSurvey = hipsmgr->property("surveyUrl").toString();
-
 	l->blockSignals(true);
 	l->clear();
 	QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
@@ -494,7 +491,7 @@ void ViewDialog::updateHips()
 		QString title = properties["obs_title"].toString();
 		QListWidgetItem* item = new QListWidgetItem(title, l);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
-		item->setCheckState(url == currentSurvey ? Qt::Checked : Qt::Unchecked);
+		item->setCheckState(hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
 		item->setData(Qt::UserRole, url);
 		disconnect(hips.data(), 0, this, 0);
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
@@ -530,20 +527,18 @@ void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
 	l->blockSignals(true);
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QString url = item->data(Qt::UserRole).toString();
+	HipsSurveyP hips;
+	QMetaObject::invokeMethod(hipsmgr, "getSurveyByUrl", Qt::DirectConnection,
+			Q_RETURN_ARG(HipsSurveyP, hips), Q_ARG(QString, url));
+	Q_ASSERT(hips);
 	if (item->checkState() == Qt::Checked)
 	{
 		l->setCurrentItem(item);
-		hipsmgr->setProperty("surveyDisplayed", true);
-		hipsmgr->setProperty("surveyUrl", url);
+		hips->setProperty("visible", true);
 	}
 	else
 	{
-		hipsmgr->setProperty("surveyDisplayed", false);
-	}
-	// Uncheck all the other items.
-	for (int i = 0; i < l->count(); i++) {
-		QListWidgetItem *item2 = l->item(i);
-		if (item2 != item) item2->setCheckState(Qt::Unchecked);
+		hips->setProperty("visible", false);
 	}
 	l->blockSignals(false);
 }

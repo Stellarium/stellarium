@@ -2536,4 +2536,6 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 	if (!pl || pl->survey) return;
 	// qDebug() << QString("Assign survey %1 to planet %2").arg(survey->getUrl(), planetName);
 	pl->survey = survey;
+	survey->setProperty("planet", pl->getEnglishName());
+	survey->setProperty("visible", true);
 }
