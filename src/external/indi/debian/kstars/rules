@@ -1,8 +1,0 @@
-#!/usr/bin/make -f
-
-include /usr/share/pkg-kde-tools/qt-kde-team/2/debian-qt-kde.mk
-
-override_dh_strip:
-	dh_strip --dbg-package=kstars-bleeding-dbg
-	
-.PHONY: override_dh_auto_test

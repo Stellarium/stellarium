@@ -1,7 +1,0 @@
-#!/usr/bin/make -f
-
-include /usr/share/cdbs/1/rules/debhelper.mk
-include /usr/share/cdbs/1/class/cmake.mk
-
-DEB_SRCDIR=libapogee
-DEB_DH_SHLIBDEPS_ARGS=-u--ignore-missing-info
