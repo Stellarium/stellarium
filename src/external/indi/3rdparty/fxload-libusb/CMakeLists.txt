@@ -1,6 +1,0 @@
-find_package(PkgConfig)
-pkg_check_modules(LIBUSB_1 REQUIRED libusb-1.0)
-include_directories(${LIBUSB_1_INCLUDE_DIRS})
-add_executable(fxload-libusb ezusb.c fxload.c)
-target_link_libraries(fxload-libusb ${LIBUSB_1_LDFLAGS})
-install(TARGETS fxload-libusb RUNTIME DESTINATION bin )

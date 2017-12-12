@@ -26,19 +26,19 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 	if (!mTelescope)
 		return;
 
-	if (!mTelescope->isConnected())
-	{
-		IDLog("Error: Telescope not connected");
-		return;
-	}
+    if (!mTelescope->isConnected())
+    {
+        qDebug() << "Error: Telescope not connected";
+        return;
+    }
 
-	INumberVectorProperty *property = nullptr;
-	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
-	if (!property)
-	{
-		IDLog("Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...\n");
-		return;
-	}
+    INumberVectorProperty *property = nullptr;
+    property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
+    if (!property)
+    {
+        qDebug() << "Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...";
+        return;
+    }
 
 	property->np[0].value = coords.RA;
 	property->np[1].value = coords.DEC;
@@ -66,10 +66,12 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
 	if (!dp)
 		return;
 
-	QString name(dp->getDeviceName());
-	IDLog("INDIConnection::newDevice| %s Device...\n", dp->getDeviceName());
-	mDevices.append(name);
-	mTelescope = dp;
+    QString name(dp->getDeviceName());
+
+    qDebug() << "INDIConnection::newDevice| %s Device... " << name;
+
+    mDevices.append(name);
+    mTelescope = dp;
 
 	emit newDeviceReceived(name);
 }
@@ -97,22 +99,22 @@ void INDIConnection::newProperty(INDI::Property *property)
 	if (mTelescope != property->getBaseDevice())
 		return;
 
-	IDLog("INDIConnection::newProperty| %s\n", property->getName());
+    QString name(property->getName());
 
-	QString name(property->getName());
+    qDebug() << "INDIConnection::newProperty| " << name;
 
-	if (name == "EQUATORIAL_EOD_COORD")
-	{
-		mCoordinates.RA = property->getNumber()->np[0].value;
-		mCoordinates.DEC = property->getNumber()->np[1].value;
-	}
+    if (name == "EQUATORIAL_EOD_COORD")
+    {
+        mCoordinates.RA = property->getNumber()->np[0].value;
+        mCoordinates.DEC = property->getNumber()->np[1].value;
+    }
 
-	if (!mTelescope->isConnected())
-	{
-		connectDevice(mTelescope->getDeviceName());
-		if (mTelescope->isConnected())
-			IDLog("connected\n");
-	}
+    if (!mTelescope->isConnected())
+    {
+        connectDevice(mTelescope->getDeviceName());
+        if (mTelescope->isConnected())
+            qDebug() << "connected\n";
+    }
 }
 
 void INDIConnection::removeProperty(INDI::Property *property)

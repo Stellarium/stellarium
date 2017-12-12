@@ -1,5 +1,0 @@
-version=4
-opts="pgpsigurlmangle=s/$/.asc/" \
-http://sf.net/gphoto/libgphoto2-([\d\.]*)\.tar\.(?:gz|bz2|xz)
-opts=uversionmangle=s/_/./g \
-https://github.com/gphoto/libgphoto2/releases .*/archive/libgphoto2-(\d\S+)-release\.(?:tar|zip)\.?(?:gz|bz2|xz)?
