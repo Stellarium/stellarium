@@ -1,0 +1,28 @@
+version: '{branch}-{build}'
+pull_requests:
+  do_not_increment_build_number: true
+configuration: Release
+platform: x64
+clone_folder: c:\stellarium
+environment:
+  QTDIR: C:\Qt\5.9.2\msvc2015_64
+  PATH: '%PATH%;%QTDIR%\bin;C:\MinGW\bin'
+before_build:
+- cmd: >-
+    cd c:\stellarium
+    mkdir build && cd build
+    cmake -D ENABLE_TESTING=1 -G "Visual Studio 14 2015 Win64" ..
+    dir
+build:
+  project: c:\stellarium\build\INSTALL.vcxproj
+  parallel: true
+  verbosity: minimal
+test_script:
+- cmd: ctest --output-on-failure
+notifications:
+- provider: Email
+  to:
+  - mcardinot@gmail.com
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true
