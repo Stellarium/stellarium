@@ -10,8 +10,11 @@ environment:
 before_build:
 - cmd: >-
     cd c:\stellarium
+
     mkdir build && cd build
+
     cmake -D ENABLE_TESTING=1 -G "Visual Studio 14 2015 Win64" ..
+
     dir
 build:
   project: c:\stellarium\build\INSTALL.vcxproj
