@@ -44,7 +44,7 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 	ui = new Ui_dateTimeDialogForm;
 	updateTimer=new QTimer(this); // parenting will auto-delete timer on destruction!
 	connect (updateTimer, SIGNAL(timeout()), this, SLOT(onTimerTimeout()));
-	updateTimer->start(2500);
+	updateTimer->start(250);
 }
 
 DateTimeDialog::~DateTimeDialog()
