@@ -588,8 +588,6 @@ void StelGui::update()
 		savedProgressBarSize=skyGui->progressBarMgr->boundingRect().size();
 		forceRefreshGui();
 	}
-
-	dateTimeDialog->setDateTime(core->getJD());
 }
 
 #ifndef DISABLE_SCRIPTING

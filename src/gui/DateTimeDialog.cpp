@@ -42,6 +42,9 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 	jd(0)
 {
 	ui = new Ui_dateTimeDialogForm;
+	updateTimer=new QTimer(this); // parenting will auto-delete timer on destruction!
+	connect (updateTimer, SIGNAL(timeout()), this, SLOT(onTimerTimeout()));
+	updateTimer->start(2500);
 }
 
 DateTimeDialog::~DateTimeDialog()
@@ -247,3 +250,8 @@ void DateTimeDialog::setDateTime(double newJd)
 	}
 }
 
+// handle timer-triggered update
+void DateTimeDialog::onTimerTimeout(void)
+{
+	this->setDateTime(StelApp::getInstance().getCore()->getJD());
+}

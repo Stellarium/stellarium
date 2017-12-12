@@ -22,6 +22,7 @@
 #define _DATETIMEDIALOG_HPP_
 
 #include <QObject>
+#include <QTimer>
 #include "StelDialog.hpp"
 
 class Ui_dateTimeDialogForm;
@@ -68,9 +69,12 @@ private slots:
 	void jdChanged(double njd);
 	//! MJD slider or dial changed
 	void mjdChanged(double nmjd);
+	//! handle timer-triggered update
+	void onTimerTimeout(void);
 
 private:
 	Ui_dateTimeDialogForm* ui;
+	QTimer *updateTimer;
 	int year;
 	int month;
 	int day;
