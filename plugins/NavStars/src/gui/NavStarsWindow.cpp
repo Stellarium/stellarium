@@ -70,6 +70,8 @@ void NavStarsWindow::createDialogContent()
 	}
 	ui->nsSetComboBox->setCurrentIndex(idx);
 	connect(ui->nsSetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setNavigationalStarsSet(int)));
+	ui->displayAtStartupCheckBox->setChecked(ns->getEnableAtStartup());
+	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(saveSettings()));
 	connect(ui->pushButtonReset, SIGNAL(clicked()), this, SLOT(resetSettings()));
@@ -124,6 +126,12 @@ void NavStarsWindow::saveSettings()
 void NavStarsWindow::resetSettings()
 {
 	ns->restoreDefaultConfiguration();
+}
+
+void NavStarsWindow::setDisplayAtStartupEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	ns->setEnableAtStartup(b);
 }
 
 void NavStarsWindow::populateNavigationalStarsSets()

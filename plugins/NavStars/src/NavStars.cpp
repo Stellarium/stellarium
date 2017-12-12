@@ -62,6 +62,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 
 NavStars::NavStars()
 	: currentNSSet(AngloAmerican)
+	, enableAtStartup(false)
 	, toolbarButton(Q_NULLPTR)
 {
 	setObjectName("NavStars");
@@ -101,15 +102,14 @@ void NavStars::init()
 	// populate list of navigational stars
 	populateNavigationalStarsSet();
 
+	setNavStarsMarks(getEnableAtStartup());
+
 	// Marker texture - using the same texture as the planet hints.
 	QString path = StelFileMgr::findFile("textures/planet-indicator.png");
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(path);
 
 	// key bindings and other actions
-	addAction("actionShow_NavStars",
-	          N_("Navigational Stars"),
-	          N_("Mark the navigational stars"),
-	          "navStarsVisible", "");
+	addAction("actionShow_NavStars", N_("Navigational Stars"), N_("Mark the navigational stars"), "navStarsVisible", "");
 
 	// Toolbar button
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -249,6 +249,7 @@ void NavStars::loadConfiguration(void)
 
 	setCurrentNavigationalStarsSetKey(conf->value("current_ns_set", "AngloAmerican").toString());
 	markerColor = StelUtils::strToVec3f(conf->value("marker_color", "0.8,0.0,0.0").toString());
+	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 
 	conf->endGroup();
 }
@@ -259,6 +260,7 @@ void NavStars::saveConfiguration(void)
 
 	conf->setValue("current_ns_set", getCurrentNavigationalStarsSetKey());
 	conf->setValue("marker_color", StelUtils::vec3fToStr(markerColor));
+	conf->setValue("enable_at_startup", enableAtStartup);
 
 	conf->endGroup();
 }
