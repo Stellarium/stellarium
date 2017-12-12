@@ -398,11 +398,14 @@ void NomenclatureMgr::draw(StelCore* core)
 		const double r = p->getRadius() * p->getSphereScale();
 		double angularSize = atan2(r, equPos.length());
 		double screenSize = angularSize * painter.getProjector()->getPixelPerRadAtCenter();
-		if (screenSize < 50) continue;
+		if (screenSize < 50)
+			continue;
 		Vec3d n = equPos; n.normalize();
 		SphericalCap boundingCap(n, cos(angularSize));
-		if (!viewportRegion.intersects(boundingCap)) continue;
-		if (p->getVMagnitude(core) >= 20.) continue;
+		if (!viewportRegion.intersects(boundingCap))
+			continue;
+		if (p->getVMagnitude(core) >= 20.)
+			continue;
 
 		// Render all the items of this planet.
 		for (auto i = nomenclatureItems.find(p); i != nomenclatureItems.end() && i.key() == p; ++i)

@@ -731,7 +731,8 @@ QString NomenclatureItem::getNomenclatureTypeDescription() const
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	if (getFlagLabels() && (getAngularSize(core)>=0.0125)) // TODO: Need a progressive calculations of priority levels
+	 // The item may be selectable when it over 25px size only
+	if (getFlagLabels() && (getAngularSize(core)*M_PI/180.*core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()>=25.))
 		return StelObject::getSelectPriority(core)-25.f;
 	else
 		return StelObject::getSelectPriority(core)-2.f;
