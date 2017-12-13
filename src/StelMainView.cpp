@@ -366,7 +366,6 @@ protected:
 		app.draw();
 		painter->endNativePainting();
 
-		mainView->handleMouseCursorTimeout(now);
 		mainView->drawEnded();
 	}
 
@@ -396,10 +395,6 @@ protected:
 
 	void mouseMoveEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE
 	{
-		// GZ TODO: Where to place the mouse cursor wake-up?
-		//qDebug() << "StelRootItem::mouseMoveEvent()";
-		if (QGuiApplication::overrideCursor()!=0)
-			QGuiApplication::restoreOverrideCursor();
 		QMouseEvent ev = convertMouseEvent(event);
 		QPointF pos = ev.pos();
 		event->setAccepted(StelApp::getInstance().handleMove(pos.x(), pos.y(), ev.buttons()));
@@ -556,12 +551,13 @@ StelMainView::StelMainView(QSettings* settings)
 	  flagOverwriteScreenshots(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
-	  cursorTimeout(-1.f), flagCursorTimeout(false), maxfps(10000.f)
+	  flagCursorTimeout(false), maxfps(10000.f)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
 	setAttribute(Qt::WA_TouchPadAcceptSingleTouchEvents);
 	setAutoFillBackground(false);
+	setMouseTracking(true);
 
 	configuration = settings;
 	StelApp::initStatic();
@@ -570,7 +566,11 @@ StelMainView::StelMainView(QSettings* settings)
 	minFpsTimer->setTimerType(Qt::PreciseTimer);
 	minFpsTimer->setInterval(1000/minfps);
 	connect(minFpsTimer,SIGNAL(timeout()),this,SLOT(minFPSUpdate()));
-	
+
+	cursorTimeoutTimer = new QTimer(this);
+	cursorTimeoutTimer->setSingleShot(true);
+	connect(cursorTimeoutTimer, SIGNAL(timeout()), this, SLOT(hideCursor()));
+
 	// Can't create 2 StelMainView instances
 	Q_ASSERT(!singleton);
 	singleton = this;
@@ -659,16 +659,14 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 	QGraphicsView::resizeEvent(event);
 }
 
-// GZ: This should do something to make the cursor visible again when the mouse is moved.
-// However, any implementation of this method seems to gobble all mouse moves.
-//void StelMainView::mouseMoveEvent(QMouseEvent *event)
-//{
-////	//Q_UNUSED(event)
-//////	thereWasAnEvent();
-//	event->ignore();
-////	if (QGuiApplication::overrideCursor()!=0)
-////		QGuiApplication::restoreOverrideCursor();
-//}
+void StelMainView::mouseMoveEvent(QMouseEvent *event)
+{
+	// Show the cursor and reset the timeout if it is active.
+	if (QGuiApplication::overrideCursor())
+		QGuiApplication::restoreOverrideCursor();
+	if (flagCursorTimeout) cursorTimeoutTimer->start();
+	QGraphicsView::mouseMoveEvent(event);
+}
 
 
 void StelMainView::focusSky() {
@@ -1294,26 +1292,20 @@ void StelMainView::drawEnded()
 	}
 }
 
-void StelMainView::handleMouseCursorTimeout(const double now)
+void StelMainView::setFlagCursorTimeout(bool b)
 {
-	// GZ restore mouse cursor stuff from pre-0.15.2.
-	// Manage cursor timeout
-	if (cursorTimeout>0.f && (now-lastEventTimeSec>cursorTimeout) && flagCursorTimeout)
-	{
-		if (QGuiApplication::overrideCursor()==0)
-		{
-			QGuiApplication::setOverrideCursor(Qt::BlankCursor);
-			setMouseTracking(true);
-		}
-	}
+	if (b == flagCursorTimeout) return;
+	flagCursorTimeout = b;
+	if (b)
+		cursorTimeoutTimer->start();
 	else
-	{
-		if (QGuiApplication::overrideCursor()!=0)
-		{
-			QGuiApplication::restoreOverrideCursor();
-			setMouseTracking(false);
-		}
-	}
+		cursorTimeoutTimer->stop();
+	emit flagCursorTimeoutChanged(b);
+}
+
+void StelMainView::hideCursor()
+{
+	QGuiApplication::setOverrideCursor(Qt::BlankCursor);
 }
 
 void StelMainView::minFPSUpdate()
@@ -1344,7 +1336,6 @@ void StelMainView::contextDestroyed()
 
 void StelMainView::thereWasAnEvent()
 {
-	//qDebug()<<"event";
 	lastEventTimeSec = StelApp::getTotalRunTime();
 }
 
