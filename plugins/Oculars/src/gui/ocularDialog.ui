@@ -196,7 +196,37 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxControlPanel">
+               <property name="text">
+                <string>On-screen control panel</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QDoubleSpinBox" name="arrowButtonScaleDoubleSpinBox">
+               <property name="minimum">
+                <double>1.000000000000000</double>
+               </property>
+               <property name="maximum">
+                <double>2.500000000000000</double>
+               </property>
+               <property name="singleStep">
+                <double>0.050000000000000</double>
+               </property>
+               <property name="value">
+                <double>1.500000000000000</double>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QLabel" name="arrowButtonScaleLabel">
+               <property name="text">
+                <string>Arrow button scale (requires restart)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
               <widget class="QCheckBox" name="checkBoxInitialDirection">
                <property name="toolTip">
                 <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
@@ -206,27 +236,20 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxControlPanel">
-               <property name="text">
-                <string>On-screen control panel</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
-               <property name="text">
-                <string>Show resolution criteria</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
+             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxInitialFOV">
                <property name="toolTip">
                 <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
                </property>
                <property name="text">
                 <string>Restore FOV to initial values</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
+               <property name="text">
+                <string>Show resolution criteria</string>
                </property>
               </widget>
              </item>

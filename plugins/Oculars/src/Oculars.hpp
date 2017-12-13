@@ -98,8 +98,9 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagScaleImageCircle   READ getFlagScaleImageCircle    WRITE setFlagScaleImageCircle    NOTIFY flagScaleImageCircleChanged)// flag scale image circle scaleImageCirclCheckBox
 	Q_PROPERTY(bool flagSemiTransparency   READ getFlagUseSemiTransparency WRITE setFlagUseSemiTransparency NOTIFY flagUseSemiTransparencyChanged) 
 	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
-	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged )
+	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
 
+	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -213,6 +214,9 @@ public slots:
 	void setFlagShowResolutionCriterions(const bool b);
 	bool getFlagShowResolutionCriterions(void) const;
 
+	void setArrowButtonScale(const double val);
+	double getArrowButtonScale() const;
+
 	void setFlagHideGridsLines(const bool b);
 	bool getFlagHideGridsLines(void) const;
 	
@@ -235,6 +239,7 @@ signals:
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagUseSemiTransparencyChanged(bool value);
 	void flagShowResolutionCriterionsChanged(bool value);
+	void arrowButtonScaleChanged(double value);
 	void flagInitDirectionUsageChanged(bool value);
 	void flagInitFOVUsageChanged(bool value);
 	void flagRequireSelectionChanged(bool value);
@@ -311,7 +316,8 @@ private:
 	int selectedOcularIndex;        //!< index of the current ocular, in the range of -1:oculars.count().  -1 means no ocular is selected.
 	int selectedTelescopeIndex;     //!< index of the current telescope, in the range of -1:telescopes.count(). -1 means none is selected.
 	int selectedLensIndex;          //!< index of the current lens, in the range of -1:lense.count(). -1 means no lens is selected
-	double selectedCCDRotationAngle;//!< GZ 2017-11 NOT SURE YET HOW TO PROPERLY DEAL WITH IT.
+	double selectedCCDRotationAngle;//!< allows rotating via property/remotecontrol API
+	double arrowButtonScale;        //!< allows scaling of the GUI "previous/next" Ocular/CCD/Telescope etc. buttons
 
 	QFont font;			//!< The font used for drawing labels.
 	bool flagShowCCD;		//!< flag used to track if we are in CCD mode.

@@ -103,6 +103,7 @@ Oculars::Oculars():
 	selectedTelescopeIndex(-1),
 	selectedLensIndex(-1),
 	selectedCCDRotationAngle(0.0),
+	arrowButtonScale(1.5),
 	flagShowCCD(false),
 	flagShowOculars(false),
 	flagShowCrosshairs(false),
@@ -705,6 +706,7 @@ void Oculars::init()
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
 		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
+		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
@@ -2523,6 +2525,19 @@ void Oculars::setFlagShowResolutionCriterions(const bool b)
 bool Oculars::getFlagShowResolutionCriterions() const
 {
 	return flagShowResolutionCriterions;
+}
+
+void Oculars::setArrowButtonScale(const double val)
+{
+	arrowButtonScale = val;
+	settings->setValue("arrow_scale", val);
+	settings->sync();
+	emit arrowButtonScaleChanged(val);
+}
+
+double Oculars::getArrowButtonScale() const
+{
+	return arrowButtonScale;
 }
 
 void Oculars::setFlagHideGridsLines(const bool b)
