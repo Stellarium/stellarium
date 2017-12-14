@@ -68,6 +68,9 @@ private slots:
 	void askExoplanetsMarkerColor();
 	void askHabitableExoplanetsMarkerColor();
 
+	void populateTemperatureScales();
+	void setTemperatureScale(int tScaleID);
+
 private:
         Ui_exoplanetsDialog* ui;
 	Exoplanets* ep;

@@ -46,6 +46,7 @@ bool Exoplanet::habitableMode = false;
 bool Exoplanet::showDesignations = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
+int Exoplanet::temperatureScaleID = 1;
 
 Exoplanet::Exoplanet(const QVariantMap& map)
 	: initialized(false)
@@ -356,7 +357,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString detectionMethodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Detection method"));
 			QString pClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Planetary class"));
 			//TRANSLATORS: Full phrase is "Equilibrium Temperature"
-			QString equilibriumTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2C)</td>").arg(q_("Equilibrium temp.")).arg(QChar(0x00B0));
+			QString equilibriumTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Equilibrium temp.")).arg(getTemperatureScaleUnit());
 			//TRANSLATORS: ESI = Earth Similarity Index
 			QString ESILabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("ESI"));
 			QString conservativeLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Conservative sample"));
@@ -452,7 +453,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				}				
 				if (p.EqTemp > 0)
 				{
-					equilibriumTempLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.EqTemp - 273.15, 'f', 2)).append("</td>");
+					equilibriumTempLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(getTemperature(p.EqTemp), 'f', 2)).append("</td>");
 				}
 				else
 				{
@@ -501,12 +502,50 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			}
 			oss << "</table>";
 			if (hasHabitableExoplanets)
-				oss << QString("%1: -18.15%2C").arg(q_("Equilibrium temperature on Earth")).arg(QChar(0x00B0)) << "<br />";
+				oss << QString("%1: %2%3").arg(q_("Equilibrium temperature on Earth")).arg(QString::number(getTemperature(255), 'f', 2)).arg(getTemperatureScaleUnit()) << "<br />";
 		}
 	}
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QString Exoplanet::getTemperatureScaleUnit() const
+{
+	QString um = "";
+	switch (temperatureScaleID) {
+		case 0:
+			um = "K";
+			break;
+		case 2:
+			um = QString("%1F").arg(QChar(0x00B0));
+			break;
+		case 1:
+		default:
+			um = QString("%1C").arg(QChar(0x00B0));
+			break;
+	}
+
+	return um;
+}
+
+float Exoplanet::getTemperature(float temperature) const
+{
+	float rt = 0.f;
+	switch (temperatureScaleID) {
+		case 0: // Kelvins
+			rt = temperature;
+			break;
+		case 2: //
+			rt = (temperature - 273.15f)*1.8f + 32.f;
+			break;
+		case 1: // Celsius
+		default:
+			rt = temperature - 273.15f;
+			break;
+	}
+
+	return rt;
 }
 
 QVariantMap Exoplanet::getInfoMap(const StelCore *core) const

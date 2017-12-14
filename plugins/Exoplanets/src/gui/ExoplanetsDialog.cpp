@@ -70,6 +70,7 @@ void ExoplanetsDialog::retranslate()
 		setInfoHtml();
 		setWebsitesHtml();
 		populateDiagramsList();
+		populateTemperatureScales();
 	}
 }
 
@@ -129,6 +130,16 @@ void ExoplanetsDialog::createDialogContent()
 	connect(ui->saveSettingsButton, SIGNAL(clicked()), this, SLOT(saveSettings()));
 	connect(ui->plotDiagram, SIGNAL(clicked()), this, SLOT(drawDiagram()));
 
+	populateTemperatureScales();
+	int idx = ui->temperatureScaleComboBox->findData(ep->getCurrentTemperatureScaleKey(), Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx==-1)
+	{
+		// Use Celsius as default
+		idx = ui->temperatureScaleComboBox->findData(QVariant("Celsius"), Qt::UserRole, Qt::MatchCaseSensitive);
+	}
+	ui->temperatureScaleComboBox->setCurrentIndex(idx);
+	connect(ui->temperatureScaleComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setTemperatureScale(int)));
+
 	// About & Info tabs
 	setAboutHtml();
 	setInfoHtml();
@@ -141,7 +152,7 @@ void ExoplanetsDialog::createDialogContent()
 		ui->websitesTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	}
 
-	populateDiagramsList();
+	populateDiagramsList();	
 	updateGuiFromSettings();
 }
 
@@ -581,4 +592,35 @@ void ExoplanetsDialog::colorButton(QToolButton* toolButton, Vec3f vColor)
 	// Use style sheet for create a nice buttons :)
 	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
 	toolButton->setFixedSize(QSize(18, 18));
+}
+
+void ExoplanetsDialog::populateTemperatureScales()
+{
+	Q_ASSERT(ui->temperatureScaleComboBox);
+
+	QComboBox* tscale = ui->temperatureScaleComboBox;
+
+	//Save the current selection to be restored later
+	tscale->blockSignals(true);
+	int index = tscale->currentIndex();
+	QVariant selectedTScaleId = tscale->itemData(index);
+	tscale->clear();
+
+	// TRANSLATORS: Name of temperature scale
+	tscale->addItem(qc_("Kelvin", "temperature scale"), "Kelvin");
+	// TRANSLATORS: Name of temperature scale
+	tscale->addItem(qc_("Celsius", "temperature scale"), "Celsius");
+	// TRANSLATORS: Name of temperature scale
+	tscale->addItem(qc_("Fahrenheit", "temperature scale"), "Fahrenheit");
+
+	//Restore the selection
+	index = tscale->findData(selectedTScaleId, Qt::UserRole, Qt::MatchCaseSensitive);
+	tscale->setCurrentIndex(index);
+	tscale->blockSignals(false);
+}
+
+void ExoplanetsDialog::setTemperatureScale(int tScaleID)
+{
+	QString currentTScaleID = ui->temperatureScaleComboBox->itemData(tScaleID).toString();
+	ep->setCurrentTemperatureScaleKey(currentTScaleID);
 }

@@ -195,9 +195,13 @@ private:
 	static bool distributionMode;
 	static bool timelineMode;
 	static bool habitableMode;
-	static bool showDesignations;
+	static bool showDesignations;	
+	static int temperatureScaleID;
 
 	void draw(StelCore* core, StelPainter *painter);
+
+	QString getTemperatureScaleUnit() const;
+	float getTemperature(float temperature) const;
 
 	int EPCount;
 	int PHEPCount;

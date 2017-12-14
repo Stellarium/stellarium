@@ -93,16 +93,16 @@ public:
 	//! @enum NebulaType Nebula types
 	enum NebulaType
 	{
-		NebGx			= 0,	//!< Galaxy
-		NebAGx			= 1,	//!< Active galaxy
-		NebRGx			= 2,	//!< Radio galaxy
-		NebIGx			= 3,	//!< Interacting galaxy
-		NebQSO			= 4,	//!< Quasar
-		NebCl			= 5,	//!< Star cluster
-		NebOc			= 6,	//!< Open star cluster
-		NebGc			= 7,	//!< Globular star cluster, usually in the Milky Way Galaxy
-		NebSA			= 8,	//!< Stellar association
-		NebSC			= 9,	//!< Star cloud
+		NebGx			= 0,		//!< Galaxy
+		NebAGx			= 1,  	//!< Active galaxy
+		NebRGx			= 2,		//!< Radio galaxy
+		NebIGx			= 3,		//!< Interacting galaxy
+		NebQSO			= 4,		//!< Quasar
+		NebCl			= 5,		//!< Star cluster
+		NebOc			= 6,		//!< Open star cluster
+		NebGc			= 7,		//!< Globular star cluster, usually in the Milky Way Galaxy
+		NebSA			= 8,		//!< Stellar association
+		NebSC			= 9,		//!< Star cloud
 		NebN			= 10,	//!< A nebula
 		NebPn			= 11,	//!< Planetary nebula
 		NebDn			= 12,	//!< Dark Nebula
@@ -116,7 +116,7 @@ public:
 		NebEMO			= 20,	//!< Emission object
 		NebBLL			= 21,	//!< BL Lac object
 		NebBLA			= 22,	//!< Blazar
-		NebMolCld		= 23, 	//!< Molecular Cloud
+		NebMolCld		        = 23, 	//!< Molecular Cloud
 		NebYSO			= 24, 	//!< Young Stellar Object
 		NebPossQSO		= 25, 	//!< Possible Quasar
 		NebPossPN		= 26, 	//!< Possible Planetary Nebula
@@ -127,7 +127,7 @@ public:
 		NebSNC			= 31, 	//!< Supernova Candidate
 		NebSNRC			= 32, 	//!< Supernova Remnant Candidate
 		NebGxCl			= 33,	//!< Cluster of Galaxies
-		NebUnknown		= 34	//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
+		NebUnknown		= 34		//!< Unknown type, catalog errors, "Unidentified Southern Objects" etc.
 	};
 
 	Nebula();

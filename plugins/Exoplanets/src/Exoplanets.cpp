@@ -688,6 +688,7 @@ void Exoplanets::loadConfiguration(void)
 	setFlagShowExoplanetsDesignations(conf->value("flag_show_designations", true).toBool());
 	setMarkerColor(StelUtils::strToVec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()), false);
 	setMarkerColor(StelUtils::strToVec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()), true);
+	setCurrentTemperatureScaleKey(conf->value("temperature_scale", "Celsius").toString());
 
 	conf->endGroup();
 }
@@ -707,6 +708,7 @@ void Exoplanets::saveConfiguration(void)
 	conf->setValue("flag_show_designations", getFlagShowExoplanetsDesignations());
 	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
 	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(false)));
+	conf->setValue("temperature_scale", getCurrentTemperatureScaleKey());
 
 	conf->endGroup();
 }
@@ -903,6 +905,23 @@ void Exoplanets::setFlagShowExoplanets(bool b)
 		flagShowExoplanets=b;
 		emit flagExoplanetsVisibilityChanged(b);
 	}
+}
+
+void Exoplanets::setCurrentTemperatureScaleKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("TemperatureScale"));
+	TemperatureScale ts = (TemperatureScale)en.keyToValue(key.toLatin1().data());
+	if (ts<0)
+	{
+		qWarning() << "Unknown temperature scale:" << key << "setting \"Celsius\" instead";
+		ts = Celsius;
+	}
+	setCurrentTemperatureScale(ts);
+}
+
+QString Exoplanets::getCurrentTemperatureScaleKey() const
+{
+	return metaObject()->enumerator(metaObject()->indexOfEnumerator("TemperatureScale")).key(Exoplanet::temperatureScaleID);
 }
 
 void Exoplanets::translations()
