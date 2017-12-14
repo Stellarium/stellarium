@@ -24,4 +24,6 @@ target_link_libraries(TelescopeControl_INDI
 
 target_include_directories(TelescopeControl_INDI INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
 
-#add_subdirectory(test)
+IF(ENABLE_TESTING)
+    add_subdirectory(test)
+ENDIF(ENABLE_TESTING)
