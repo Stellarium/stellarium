@@ -1119,7 +1119,7 @@ void Oculars::displayPopupMenu()
 				{
 						action = submenu->addAction(label, ocularsSignalMapper, SLOT(map()));
 						availableOcularCount++;
-						ocularsSignalMapper->setMapping(action, QString("%1").arg(index));
+						ocularsSignalMapper->setMapping(action, index);
 				}
 
 				if (action && index == selectedOcularIndex)
@@ -1199,32 +1199,32 @@ void Oculars::displayPopupMenu()
 					action->setCheckable(true);
 					action->setChecked(true);
 				}
-				ccdsSignalMapper->setMapping(action, QString("%1").arg(index));
+				ccdsSignalMapper->setMapping(action, index);
 			}
 			popup->addMenu(submenu);
 			
 			submenu = new QMenu(q_("&Rotate CCD"), popup);
 			QAction* rotateAction = Q_NULLPTR;
 			rotateAction = submenu->addAction(QString("&1: -90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("-90"));
+			ccdRotationSignalMapper->setMapping(rotateAction, -90);
 			rotateAction = submenu->addAction(QString("&2: -45") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("-45"));
+			ccdRotationSignalMapper->setMapping(rotateAction, -45);
 			rotateAction = submenu->addAction(QString("&3: -15") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("-15"));
+			ccdRotationSignalMapper->setMapping(rotateAction, -15);
 			rotateAction = submenu->addAction(QString("&4: -5") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("-5"));
+			ccdRotationSignalMapper->setMapping(rotateAction, -5);
 			rotateAction = submenu->addAction(QString("&5: -1") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("-1"));
+			ccdRotationSignalMapper->setMapping(rotateAction, -1);
 			rotateAction = submenu->addAction(QString("&6: +1") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("1"));
+			ccdRotationSignalMapper->setMapping(rotateAction, 1);
 			rotateAction = submenu->addAction(QString("&7: +5") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("5"));
+			ccdRotationSignalMapper->setMapping(rotateAction, 5);
 			rotateAction = submenu->addAction(QString("&8: +15") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("15"));
+			ccdRotationSignalMapper->setMapping(rotateAction, 15);
 			rotateAction = submenu->addAction(QString("&9: +45") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("45"));
+			ccdRotationSignalMapper->setMapping(rotateAction, 45);
 			rotateAction = submenu->addAction(QString("&0: +90") + QChar(0x00B0), ccdRotationSignalMapper, SLOT(map()));
-			ccdRotationSignalMapper->setMapping(rotateAction, QString("90"));
+			ccdRotationSignalMapper->setMapping(rotateAction, 90);
 			submenu->addAction(q_("&Reset rotation"), this, SLOT(ccdRotationReset()));
 			popup->addMenu(submenu);			
 			popup->addSeparator();
@@ -1302,11 +1302,6 @@ void Oculars::disableLens()
 	emit(selectedLensChanged(selectedLensIndex));
 }
 
-void Oculars::rotateCCD(QString amount)
-{
-	rotateCCD(amount.toInt());
-}
-
 void Oculars::rotateCCD(int amount)
 {
 	CCD *ccd = ccds[selectedCCDIndex];
@@ -1325,11 +1320,6 @@ void Oculars::rotateCCD(int amount)
 	emit(selectedCCDChanged(selectedCCDIndex));
 }
 
-void Oculars::selectCCDAtIndex(QString indexString)
-{
-	selectCCDAtIndex(indexString.toInt());
-}
-
 void Oculars::selectCCDAtIndex(int index)
 {
 	if (index > -2 && index < ccds.count())
@@ -1337,11 +1327,6 @@ void Oculars::selectCCDAtIndex(int index)
 		selectedCCDIndex = index;
 		emit(selectedCCDChanged(index));
 	}
-}
-
-void Oculars::selectOcularAtIndex(QString indexString)
-{
-	selectOcularAtIndex(indexString.toInt());
 }
 
 void Oculars::selectOcularAtIndex(int index)
@@ -1356,11 +1341,6 @@ void Oculars::selectOcularAtIndex(int index)
 	}
 }
 
-void Oculars::selectTelescopeAtIndex(QString indexString)
-{
-	selectTelescopeAtIndex(indexString.toInt());
-}
-
 void Oculars::selectTelescopeAtIndex(int index)
 {
 	if (index > -2 && index < telescopes.count())
@@ -1368,11 +1348,6 @@ void Oculars::selectTelescopeAtIndex(int index)
 		selectedTelescopeIndex = index;
 		emit(selectedTelescopeChanged(index));
 	}
-}
-
-void Oculars::selectLensAtIndex(QString indexString)
-{
-	selectLensAtIndex(indexString.toInt());
 }
 
 void Oculars::selectLensAtIndex(int index)
@@ -1564,13 +1539,13 @@ void Oculars::initializeActivationActions()
 	//connect(ocularDialog, SIGNAL(requireSelectionChanged(bool)), this, SLOT(setRequireSelection(bool)));
 	//connect(ocularDialog, SIGNAL(scaleImageCircleChanged(bool)), this, SLOT(setScaleImageCircle(bool)));
 
-	connect(ccdRotationSignalMapper, SIGNAL(mapped(QString)), this, SLOT(rotateCCD(QString)));
-	connect(ccdsSignalMapper,        SIGNAL(mapped(QString)), this, SLOT(selectCCDAtIndex(QString)));
-	connect(ccdsSignalMapper,        SIGNAL(mapped(QString)), this, SLOT(setScreenFOVForCCD()));
-	connect(ocularsSignalMapper,     SIGNAL(mapped(QString)), this, SLOT(selectOcularAtIndex(QString)));
-	connect(telescopesSignalMapper,  SIGNAL(mapped(QString)), this, SLOT(selectTelescopeAtIndex(QString)));
-	connect(telescopesSignalMapper,  SIGNAL(mapped(QString)), this, SLOT(setScreenFOVForCCD()));
-	connect(lensesSignalMapper,      SIGNAL(mapped(QString)), this, SLOT(selectLensAtIndex(QString)));
+	connect(ccdRotationSignalMapper, SIGNAL(mapped(int)), this, SLOT(rotateCCD(int)));
+	connect(ccdsSignalMapper,        SIGNAL(mapped(int)), this, SLOT(selectCCDAtIndex(int)));
+	connect(ccdsSignalMapper,        SIGNAL(mapped(int)), this, SLOT(setScreenFOVForCCD()));
+	connect(ocularsSignalMapper,     SIGNAL(mapped(int)), this, SLOT(selectOcularAtIndex(int)));
+	connect(telescopesSignalMapper,  SIGNAL(mapped(int)), this, SLOT(selectTelescopeAtIndex(int)));
+	connect(telescopesSignalMapper,  SIGNAL(mapped(int)), this, SLOT(setScreenFOVForCCD()));
+	connect(lensesSignalMapper,      SIGNAL(mapped(int)), this, SLOT(selectLensAtIndex(int)));
 }
 
 bool Oculars::isBinocularDefined()
@@ -2381,7 +2356,7 @@ QMenu* Oculars::addLensSubmenu(QMenu* parent)
 			action->setCheckable(true);
 			action->setChecked(true);
 		}
-		lensesSignalMapper->setMapping(action, QString("%1").arg(index));
+		lensesSignalMapper->setMapping(action, index);
 	}
 	return submenu;
 }
@@ -2411,7 +2386,7 @@ QMenu* Oculars::addTelescopeSubmenu(QMenu *parent)
 			action->setCheckable(true);
 			action->setChecked(true);
 		}
-		telescopesSignalMapper->setMapping(action, QString("%1").arg(index));
+		telescopesSignalMapper->setMapping(action, index);
 	}
 
 	return submenu;

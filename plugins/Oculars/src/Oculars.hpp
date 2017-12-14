@@ -150,27 +150,19 @@ public slots:
 	void incrementLensIndex();
 	void disableLens();
 
-
-	// GZ For now (2017-11), have duplicated setters. But why do we need the string-based methods?
-	void rotateCCD(QString amount); //!< amount must be a number. Overload of:
 	void rotateCCD(int amount);     //!< amount must be a number. This adds to the current rotation.
-	double getSelectedCCDRotationAngle(void) const; // {return 0;}
-	void setSelectedCCDRotationAngle(double angle); // {selectedCCDRotationAngle=angle; emit selectedCCDRotationAngleChanged(angle);}
+	double getSelectedCCDRotationAngle(void) const; //!< get rotation angle from currently selected CCD
+	void setSelectedCCDRotationAngle(double angle); //!< set rotation angle for currently selected CCD
 	
-
-	void selectCCDAtIndex(QString indexString); //!< indexString must be an integer, in the range of -1:ccds.count()
 	void selectCCDAtIndex(int index);           //!< index in the range of -1:ccds.count(), else call is ignored
 	int getSelectedCCDIndex() const {return selectedCCDIndex; }
 
-	void selectOcularAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:oculars.count()
 	void selectOcularAtIndex(int index);            //!< index in the range of -1:oculars.count(), else call is ignored
 	int getSelectedOcularIndex() const {return selectedOcularIndex; }
 
-	void selectTelescopeAtIndex(QString indexString);  //!< indexString must be an integer, in the range of -1:telescopes.count()
 	void selectTelescopeAtIndex(int index);            //!< index in the range of -1:telescopes.count(), else call is ignored
 	int getSelectedTelescopeIndex() const {return selectedTelescopeIndex; }
 
-	void selectLensAtIndex(QString indexString); //!< indexString must be an integer, in the range -1:lense.count()
 	void selectLensAtIndex(int index);           //!< index in the range -1:lenses.count(), else call is ignored
 	int getSelectedLensIndex() const {return selectedLensIndex; }
 
