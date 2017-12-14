@@ -476,7 +476,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (distanceAu < 0.1)
 		{
 			distAU = QString::number(distanceAu, 'f', 6);
-			distKM = QString::number(distanceKm, 'f', 3);		}
+			distKM = QString::number(distanceKm, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - kilometers
+			km = qc_("km", "distance");
+		}
 		else
 		{
 			distAU = QString::number(distanceAu, 'f', 3);
