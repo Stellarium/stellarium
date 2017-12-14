@@ -44,6 +44,8 @@ before_install:
   - unzip -qq qt5.zip -d qt5
   - export PATH=`pwd`/qt5/bin:$PATH
   - export QT_PLUGIN_PATH=`pwd`/qt5/plugins
+  
+  - sudo apt-get -qq install xvfb
 
 install:
   - cd libarchive-3.1.2
@@ -59,8 +61,8 @@ install:
   - cd ..
 
 before_script:
-  - "export DISPLAY=:99.0"
-  - "sh -e /etc/init.d/xvfb start"
+  - export DISPLAY=:1
+  - Xvfb :1 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
   - sleep 3 # give xvfb some time to start
   - mkdir build
   - cd build
