@@ -747,7 +747,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	if (flagConverter)
 	{
 		if (!srcCatalogPath.isEmpty())
-			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack"), flagDecimalCoordinates);
+			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack", StelFileMgr::New), flagDecimalCoordinates);
 		else
 			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
 

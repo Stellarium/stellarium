@@ -382,12 +382,13 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 {
 	qWarning() << "Generating a locations list...";
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
-	QFile binfile(StelFileMgr::findFile(binFilePath));
+	QFile binfile(StelFileMgr::findFile(binFilePath, StelFileMgr::New));
 	if(binfile.open(QIODevice::WriteOnly))
 	{
 		QDataStream out(&binfile);
 		out.setVersion(QDataStream::Qt_5_2);
 		out << cities;
+		binfile.flush();
 		binfile.close();
 	}
 }
