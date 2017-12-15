@@ -26,6 +26,7 @@ before_install:
   - export QT_PLUGIN_PATH=`pwd`/qt5/plugins
 
   - sudo apt-get -qq install xvfb
+  - sudo apt-get -qq install ninja-build
 
 install:
 
@@ -37,10 +38,10 @@ before_script:
   - cd build
 
 script:
-  - cmake -DENABLE_TESTING=1 ..
-  - make -j 2
+  - cmake -DENABLE_TESTING=1 .. -G "Ninja"
+  - ninja
   - ctest --output-on-failure
-  - sudo make install -j 2
+  - sudo ninja install
 
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
