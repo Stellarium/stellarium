@@ -16,30 +16,9 @@ language: cpp
 
 compiler:
   - gcc
+  - clang
 
 before_install:
-  - sudo add-apt-repository -y ppa:jonathonf/python-2.7
-  - sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
-  - sudo apt-get -qq update
-
-  - sudo apt-get -qq install python2.7
-  - python --version
-
-  - sudo apt-get -qq install gcc-4.8
-  - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 50
-  - gcc --version
-
-  - sudo apt-get -qq install g++-4.8
-  - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.8 50
-  - g++ --version
-
-  - wget -q -O libarchive-3.1.2.tar.gz http://sourceforge.net/projects/cardinot/files/util/libarchive-3.1.2.tar.gz/download
-  - tar -xzvf libarchive-3.1.2.tar.gz
-
-#  - wget -q -O cmake-3.1.3.tar.gz http://sourceforge.net/projects/cardinot/files/util/cmake-3.1.3.tar.gz/download
-#  - tar -xzvf cmake-3.1.3.tar.gz
-  - sudo apt-get -qq install cmake
-
   - mkdir qt5
   - wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download
   - unzip -qq qt5.zip -d qt5
@@ -47,33 +26,22 @@ before_install:
   - export QT_PLUGIN_PATH=`pwd`/qt5/plugins
 
   - sudo apt-get -qq install xvfb
+  - sudo apt-get -qq install ninja-build
 
 install:
-  - cd libarchive-3.1.2
-  - ./configure --prefix=/usr --disable-static
-  - make -j 2
-  - sudo make install -j 2
-  - cd ..
-
-  - cd cmake-3.1.3
-  - ./bootstrap
-  - make -j 2
-  - sudo make install -j 2
-  - cd ..
 
 before_script:
   - export DISPLAY=:1
   - sh -e /etc/init.d/xvfb start
-#  - Xvfb :1 -ac -screen 0 1024x768x24+32 >/dev/null 2>&1 &
   - sleep 3 # give xvfb some time to start
   - mkdir build
   - cd build
 
 script:
-  - cmake -DENABLE_TESTING=1 ..
-  - make -j 2
+  - cmake -DENABLE_TESTING=1 .. -G "Ninja"
+  - ninja
   - ctest --output-on-failure
-  - sudo make install -j 2
+  - sudo ninja install
 
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
