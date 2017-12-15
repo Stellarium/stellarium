@@ -37,7 +37,8 @@ before_script:
 
 script:
   - cmake -DENABLE_TESTING=1 .. -G "Ninja"
-  - ninja all install
+  - ninja all 
+  - sudo ninja install
   - ctest --output-on-failure
 
 after_success:
