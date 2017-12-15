@@ -37,9 +37,8 @@ before_script:
 
 script:
   - cmake -DENABLE_TESTING=1 .. -G "Ninja"
-  - ninja
+  - ninja all install
   - ctest --output-on-failure
-  - sudo ninja install
 
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" ]; then
