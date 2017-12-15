@@ -36,8 +36,9 @@ before_install:
   - wget -q -O libarchive-3.1.2.tar.gz http://sourceforge.net/projects/cardinot/files/util/libarchive-3.1.2.tar.gz/download
   - tar -xzvf libarchive-3.1.2.tar.gz
 
-  - wget -q -O cmake-3.1.3.tar.gz http://sourceforge.net/projects/cardinot/files/util/cmake-3.1.3.tar.gz/download
-  - tar -xzvf cmake-3.1.3.tar.gz
+#  - wget -q -O cmake-3.1.3.tar.gz http://sourceforge.net/projects/cardinot/files/util/cmake-3.1.3.tar.gz/download
+#  - tar -xzvf cmake-3.1.3.tar.gz
+  - sudo apt-get -qq install cmake
 
   - mkdir qt5
   - wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download
