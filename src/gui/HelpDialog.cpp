@@ -290,7 +290,8 @@ void HelpDialog::updateAboutText(void)
 		     << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony" << "Tony Furr"
 		     << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski" << "Colin Gaudion"
 		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
-		     << "henrysky" << "Nick Kanel" << "Petr Kubánek";
+		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
+		     << "Alessandro Siniscalchi";
 	contributors.sort();
 
 	// populate About tab
