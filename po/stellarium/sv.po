@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 20:33+0700\n"
+"POT-Creation-Date: 2017-12-15 01:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Karl B <birgerssonkarl@outlook.com>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -29,7 +29,7 @@ msgstr "egen markör"
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:293
-#: src/core/modules/NomenclatureItem.cpp:773 src/core/modules/Nebula.cpp:225
+#: src/core/modules/NomenclatureItem.cpp:774 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Nebula.cpp:227 src/core/modules/Planet.cpp:415
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:195
@@ -38,7 +38,7 @@ msgstr "egen markör"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:159
-#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:298
+#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:299
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "Typ"
@@ -60,7 +60,7 @@ msgstr "asterism"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:786
+#: src/StelMainView.cpp:784
 msgid "Display Options"
 msgstr "Visningsalternativ"
 
@@ -391,14 +391,14 @@ msgstr "Ljusföroreningsdata från position-databasen."
 
 #: src/core/modules/LandscapeMgr.cpp:833 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+#: plugins/Oculars/src/gui/OcularDialog.cpp:430
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:222
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:92
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/FOV/src/gui/FOVWindow.cpp:84
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
@@ -447,7 +447,7 @@ msgstr "efter Bortle-skalan"
 #: src/core/modules/NomenclatureItem.cpp:69
 msgctxt "landform"
 msgid "albedo feature"
-msgstr "albedokännetecken"
+msgstr "albedoyta"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:73
@@ -596,7 +596,7 @@ msgstr "sjö"
 #: src/core/modules/NomenclatureItem.cpp:165
 msgctxt "landform"
 msgid "large ringed feature"
-msgstr "stora ringkännetecken"
+msgstr "stora ringytor"
 
 #. TRANSLATORS: Small dark spots on Europa
 #: src/core/modules/NomenclatureItem.cpp:169
@@ -715,7 +715,7 @@ msgstr "stup"
 #: src/core/modules/NomenclatureItem.cpp:241
 msgctxt "landform"
 msgid "satellite feature"
-msgstr "satellitkännetecken"
+msgstr "satellityta"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:245
@@ -804,12 +804,12 @@ msgstr "Geografisk yta som igenkänns av mängden reflekterat ljus"
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:475
 msgid "Arc-shaped feature."
-msgstr "bågformat kännetecken"
+msgstr "Bågformad yta."
 
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:479
 msgid "Radial-patterned feature."
-msgstr "Kännetecken av radiellmönster."
+msgstr "Yta av radiellmönster."
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
@@ -840,7 +840,7 @@ msgstr "Små kullar eller knölar"
 #. TRANSLATORS: Description for landform 'corona'
 #: src/core/modules/NomenclatureItem.cpp:503
 msgid "Ovoid-shaped feature."
-msgstr "Äggformigt kännetecken"
+msgstr "Äggformig yta."
 
 #. TRANSLATORS: Description for landform 'crater'
 #: src/core/modules/NomenclatureItem.cpp:507
@@ -932,7 +932,7 @@ msgstr "'Sjö' eller liten slätt."
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:575
 msgid "Cryptic ringed feature."
-msgstr "Kallt ringkännetecken."
+msgstr "Kall yta."
 
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:579
@@ -1011,7 +1011,7 @@ msgstr "Platå eller hög slätt."
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:643
 msgid "Cryo-volcanic feature."
-msgstr "Kall-vulkaniskt kännetecken"
+msgstr "Kall-vulkanisk yta."
 
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:647
@@ -1045,7 +1045,7 @@ msgstr "Stup."
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:667
 msgid "A feature that shares the name of an associated feature."
-msgstr "Ett kännetecken som delar namn med samhörande kännetecken."
+msgstr "En yta som delar namn med samhörande ytor"
 
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:671
@@ -1057,8 +1057,7 @@ msgstr "Rundat eller oregelbundet stup."
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
-msgstr ""
-"Buktkännetecken med delar av positiva och negativa reliefer längs sidorna."
+msgstr "Buktyta med delar av positiva och negativa reliefer längs sidorna."
 
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:679
@@ -1114,21 +1113,22 @@ msgstr "Stråk eller rand av färg."
 msgid "Undocumented landform type."
 msgstr "Odokumenterad typ av landform."
 
-#: src/core/modules/NomenclatureItem.cpp:775
+#: src/core/modules/NomenclatureItem.cpp:776
 msgid "geologic term"
 msgstr "geologisk term"
 
-#: src/core/modules/NomenclatureItem.cpp:785
+#: src/core/modules/NomenclatureItem.cpp:786
 msgid "Linear size"
 msgstr "Linjär storlek"
 
-#: src/core/modules/NomenclatureItem.cpp:788
+#: src/core/modules/NomenclatureItem.cpp:789
 msgid "Diameter"
 msgstr "Diameter"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:789 src/core/modules/Planet.cpp:456
-#: src/core/modules/MinorPlanet.cpp:273 src/core/modules/Comet.cpp:194
+#: src/core/modules/NomenclatureItem.cpp:790 src/core/modules/Planet.cpp:456
+#: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:273
+#: src/core/modules/MinorPlanet.cpp:296 src/core/modules/Comet.cpp:194
 #: src/gui/StelGuiItems.cpp:748 src/gui/AstroCalcDialog.cpp:3674
 #: plugins/Satellites/src/Satellite.cpp:304
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -1137,15 +1137,15 @@ msgctxt "distance"
 msgid "km"
 msgstr "km"
 
-#: src/core/modules/NomenclatureItem.cpp:794
+#: src/core/modules/NomenclatureItem.cpp:795
 msgid "Planetographic long./lat."
 msgstr "Planetografisk long./lat."
 
-#: src/core/modules/NomenclatureItem.cpp:795
+#: src/core/modules/NomenclatureItem.cpp:796
 msgid "Celestial body"
 msgstr "Himlakropp"
 
-#: src/core/modules/NomenclatureItem.cpp:798
+#: src/core/modules/NomenclatureItem.cpp:799
 msgid "Landform description"
 msgstr "Beskrivning av landform"
 
@@ -1159,7 +1159,7 @@ msgstr "Etiketter för nomenklatur"
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:1993
 #: src/gui/AstroCalcDialog.cpp:2028 plugins/Supernovae/src/Supernova.cpp:140
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
-#: plugins/Exoplanets/src/Exoplanet.cpp:309
+#: plugins/Exoplanets/src/Exoplanet.cpp:310
 msgid "Magnitude"
 msgstr "Magnitud"
 
@@ -1172,7 +1172,7 @@ msgstr "Genomskinlighet"
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:288
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:307
+#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:308
 msgid "extincted to"
 msgstr "efter extinktion"
 
@@ -1230,17 +1230,17 @@ msgstr "Orienteringsvinkel"
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:322
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgctxt "distance"
 msgid "ly"
 msgstr "lå"
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:354
-#: src/core/modules/Planet.cpp:488 src/core/modules/MinorPlanet.cpp:302
+#: src/core/modules/Planet.cpp:491 src/core/modules/MinorPlanet.cpp:305
 #: src/core/modules/Comet.cpp:232 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:2004 src/gui/AstroCalcDialog.cpp:2039
 #: src/ui_configurationDialog.h:1383 plugins/Supernovae/src/Supernova.cpp:155
-#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:324
 msgid "Distance"
 msgstr "Avstånd"
 
@@ -1726,14 +1726,14 @@ msgstr "Medelmagnitud vid opposition"
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:773
 #: src/gui/AstroCalcDialog.cpp:1040 src/gui/AstroCalcDialog.cpp:1076
 #: src/gui/AstroCalcDialog.cpp:1972 src/gui/AstroCalcDialog.cpp:3726
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "AU"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
-#: src/core/modules/Planet.cpp:470 src/core/modules/Planet.cpp:485
-#: src/core/modules/MinorPlanet.cpp:285 src/core/modules/MinorPlanet.cpp:300
+#: src/core/modules/Planet.cpp:470 src/core/modules/Planet.cpp:488
+#: src/core/modules/MinorPlanet.cpp:285 src/core/modules/MinorPlanet.cpp:303
 #: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:3676
 msgctxt "distance"
 msgid "M km"
@@ -1745,7 +1745,7 @@ msgid "Distance from Sun"
 msgstr "Avstånd från solen"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/Planet.cpp:494 src/core/modules/MinorPlanet.cpp:308
+#: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:311
 #: src/core/modules/Comet.cpp:237 src/gui/AstroCalcDialog.cpp:3744
 #: plugins/Satellites/src/Satellite.cpp:306
 #: plugins/Satellites/src/Satellite.cpp:331
@@ -1754,115 +1754,115 @@ msgctxt "speed"
 msgid "km/s"
 msgstr "km/s"
 
-#: src/core/modules/Planet.cpp:503 src/core/modules/MinorPlanet.cpp:315
+#: src/core/modules/Planet.cpp:506 src/core/modules/MinorPlanet.cpp:318
 msgid "Orbital Velocity"
 msgstr "Banhastighet"
 
-#: src/core/modules/Planet.cpp:506 src/core/modules/MinorPlanet.cpp:318
+#: src/core/modules/Planet.cpp:509 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric Velocity"
 msgstr "Heliocentrisk hastighet"
 
-#: src/core/modules/Planet.cpp:529
+#: src/core/modules/Planet.cpp:532
 msgid "with rings"
 msgstr "med ringar"
 
-#: src/core/modules/Planet.cpp:546 src/core/modules/MinorPlanet.cpp:340
+#: src/core/modules/Planet.cpp:549 src/core/modules/MinorPlanet.cpp:343
 msgid "scaled up to"
 msgstr "skalad till"
 
-#: src/core/modules/Planet.cpp:556 src/core/modules/MinorPlanet.cpp:350
+#: src/core/modules/Planet.cpp:559 src/core/modules/MinorPlanet.cpp:353
 msgid "Apparent diameter"
 msgstr "Skenbar diameter"
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:371
+#: src/core/modules/Planet.cpp:572 src/core/modules/MinorPlanet.cpp:374
 #: src/core/modules/StarWrapper.cpp:258
 msgctxt "duration"
 msgid "days"
 msgstr "dygn"
 
-#: src/core/modules/Planet.cpp:571 src/core/modules/MinorPlanet.cpp:373
+#: src/core/modules/Planet.cpp:574 src/core/modules/MinorPlanet.cpp:376
 #: src/core/modules/Comet.cpp:254
 msgid "Sidereal period"
 msgstr "Siderisk period"
 
-#: src/core/modules/Planet.cpp:575
+#: src/core/modules/Planet.cpp:578
 msgid "Sidereal day"
 msgstr "Stjärndygn"
 
-#: src/core/modules/Planet.cpp:576
+#: src/core/modules/Planet.cpp:579
 msgid "Mean solar day"
 msgstr "Medelsoldygn"
 
-#: src/core/modules/Planet.cpp:580
+#: src/core/modules/Planet.cpp:583
 msgid "The period of rotation is chaotic"
 msgstr "Rotationsperioden är kaotisk"
 
-#: src/core/modules/Planet.cpp:599
+#: src/core/modules/Planet.cpp:602
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "Tilltagande skära"
 
-#: src/core/modules/Planet.cpp:601
+#: src/core/modules/Planet.cpp:604
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Första kvarteret"
 
-#: src/core/modules/Planet.cpp:603
+#: src/core/modules/Planet.cpp:606
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "Tilltagande halvmåne"
 
-#: src/core/modules/Planet.cpp:605
+#: src/core/modules/Planet.cpp:608
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Fullmåne"
 
-#: src/core/modules/Planet.cpp:607
+#: src/core/modules/Planet.cpp:610
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "Avtagande halvmåne"
 
-#: src/core/modules/Planet.cpp:609
+#: src/core/modules/Planet.cpp:612
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "Tredje kvarteret"
 
-#: src/core/modules/Planet.cpp:611
+#: src/core/modules/Planet.cpp:614
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "Avtagande skära"
 
-#: src/core/modules/Planet.cpp:613
+#: src/core/modules/Planet.cpp:616
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Nymåne"
 
-#: src/core/modules/Planet.cpp:628 src/core/modules/MinorPlanet.cpp:391
+#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:394
 #: src/core/modules/Comet.cpp:277 src/gui/AstroCalcDialog.cpp:2019
 #: src/gui/AstroCalcDialog.cpp:2054
 msgid "Phase angle"
 msgstr "Fasvinkel"
 
-#: src/core/modules/Planet.cpp:629 src/core/modules/MinorPlanet.cpp:392
+#: src/core/modules/Planet.cpp:632 src/core/modules/MinorPlanet.cpp:395
 #: src/core/modules/Comet.cpp:278 src/gui/AstroCalcDialog.cpp:2009
 #: src/gui/AstroCalcDialog.cpp:2044
 msgid "Elongation"
 msgstr "Elongation"
 
-#: src/core/modules/Planet.cpp:630
+#: src/core/modules/Planet.cpp:633
 msgid "Illuminated"
 msgstr "Belyst"
 
-#: src/core/modules/Planet.cpp:631
+#: src/core/modules/Planet.cpp:634
 msgid "Albedo"
 msgstr "Albedo"
 
-#: src/core/modules/Planet.cpp:633 src/gui/AstroCalcDialog.cpp:1999
+#: src/core/modules/Planet.cpp:636 src/gui/AstroCalcDialog.cpp:1999
 #: src/gui/AstroCalcDialog.cpp:2034
 msgid "Phase"
 msgstr "Fas"
 
-#: src/core/modules/Planet.cpp:642
+#: src/core/modules/Planet.cpp:645
 msgid "Eclipse Factor"
 msgstr "Förmörkelsefaktor"
 
@@ -1872,12 +1872,12 @@ msgid "Provisional designation: %1"
 msgstr "Provisorisk beteckning: %1"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:360
+#: src/core/modules/MinorPlanet.cpp:363
 msgid "Tholen spectral type"
 msgstr "Tholen-spektraltyp"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:366
+#: src/core/modules/MinorPlanet.cpp:369
 msgid "SMASSII spectral type"
 msgstr "SMASSII-spektraltyp"
 
@@ -1969,12 +1969,12 @@ msgid "Magnitude range"
 msgstr "Magnitudomfång"
 
 #: src/core/modules/StarWrapper.cpp:252
-#: plugins/Exoplanets/src/Exoplanet.cpp:317
+#: plugins/Exoplanets/src/Exoplanet.cpp:318
 msgid "Spectral Type"
 msgstr "Spektraltyp"
 
 #: src/core/modules/StarWrapper.cpp:258
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Period"
 msgstr "Period"
 
@@ -2048,7 +2048,7 @@ msgstr "Kan inte skapa Spout sender. För detaljer, se logg."
 msgid "Date and Time"
 msgstr "Datum och tid"
 
-#: src/core/StelCore.cpp:254 src/core/StelMovementMgr.cpp:187
+#: src/core/StelCore.cpp:254 src/core/StelMovementMgr.cpp:188
 msgid "Movement and Selection"
 msgstr "Förflyttning och val"
 
@@ -2857,65 +2857,65 @@ msgstr "IAU-stjärnbild"
 msgid "Deep-sky objects background images"
 msgstr "Bakgrundsbilder för djuprymdsobjekt"
 
-#: src/core/StelMovementMgr.cpp:188 src/gui/StelGui.cpp:210
-#: src/StelMainView.cpp:784 src/StelMainView.cpp:785
+#: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:210
+#: src/StelMainView.cpp:782 src/StelMainView.cpp:783
 msgid "Miscellaneous"
 msgstr "Diverse"
 
-#: src/core/StelMovementMgr.cpp:188
+#: src/core/StelMovementMgr.cpp:189
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "Byt mellan ekvatoriell och azimutal montering"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:190
 msgid "Center on selected object"
 msgstr "Centrera på markerat objekt"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:191
 msgid "Zoom in on selected object"
 msgstr "Zooma in på markerat objekt"
 
-#: src/core/StelMovementMgr.cpp:191
+#: src/core/StelMovementMgr.cpp:192
 msgid "Zoom out"
 msgstr "Zooma ut"
 
-#: src/core/StelMovementMgr.cpp:193
+#: src/core/StelMovementMgr.cpp:194
 msgid "Track object"
 msgstr "Spåra objekt"
 
-#: src/core/StelMovementMgr.cpp:195
+#: src/core/StelMovementMgr.cpp:196
 msgid "Look towards East"
 msgstr "Titta österut"
 
-#: src/core/StelMovementMgr.cpp:196
+#: src/core/StelMovementMgr.cpp:197
 msgid "Look towards West"
 msgstr "Titta västerut"
 
-#: src/core/StelMovementMgr.cpp:197
+#: src/core/StelMovementMgr.cpp:198
 msgid "Look towards North"
 msgstr "Titta norrut"
 
-#: src/core/StelMovementMgr.cpp:198
+#: src/core/StelMovementMgr.cpp:199
 msgid "Look towards South"
 msgstr "Titta söderut"
 
-#: src/core/StelMovementMgr.cpp:199
+#: src/core/StelMovementMgr.cpp:200
 msgid "Look towards Zenith"
 msgstr "Titta mot zenit"
 
-#: src/core/StelMovementMgr.cpp:201
+#: src/core/StelMovementMgr.cpp:202
 msgid "Look towards North Celestial pole"
 msgstr "Titta mot nordlig himmelsk pol"
 
-#: src/core/StelMovementMgr.cpp:202
+#: src/core/StelMovementMgr.cpp:203
 msgid "Look towards South Celestial pole"
 msgstr "Titta mot sydlig himmelsk pol"
 
-#: src/core/StelMovementMgr.cpp:212
+#: src/core/StelMovementMgr.cpp:217
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "Ekvatoriell montering"
 
-#: src/core/StelMovementMgr.cpp:214
+#: src/core/StelMovementMgr.cpp:219
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "Alt-azimut-montering"
@@ -2980,18 +2980,18 @@ msgstr "Kontakt"
 
 #: src/gui/ConfigurationDialog.cpp:1009 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+#: plugins/Oculars/src/gui/OcularDialog.cpp:428
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:220
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:88
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/FOV/src/gui/FOVWindow.cpp:82
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:84
@@ -3003,18 +3003,18 @@ msgstr "Version"
 
 #: src/gui/ConfigurationDialog.cpp:1010 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:221
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/FOV/src/gui/FOVWindow.cpp:83
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
@@ -3505,7 +3505,7 @@ msgstr "OSX-utvecklare: %1"
 
 #: src/gui/HelpDialog.cpp:339
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:430
+#: plugins/Oculars/src/gui/OcularDialog.cpp:431
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:223
@@ -4015,51 +4015,51 @@ msgstr "Spara skript"
 msgid "Select Script Include Directory"
 msgstr ""
 
-#: src/gui/SearchDialog.cpp:211
+#: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "Ekvatoriellt (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:212
+#: src/gui/SearchDialog.cpp:211
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "Ekvatoriellt"
 
-#: src/gui/SearchDialog.cpp:213
+#: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "Horisontellt"
 
-#: src/gui/SearchDialog.cpp:214
+#: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "Galaktiskt"
 
-#: src/gui/SearchDialog.cpp:215
+#: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr "Supergalaktisk"
 
-#: src/gui/SearchDialog.cpp:216
+#: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "Ekliptiskt"
 
-#: src/gui/SearchDialog.cpp:217
+#: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "Ekliptiskt (J2000.0)"
 
-#: src/gui/SearchDialog.cpp:245
+#: src/gui/SearchDialog.cpp:244
 msgid "Right ascension"
 msgstr "Rektascension"
 
-#: src/gui/SearchDialog.cpp:248
+#: src/gui/SearchDialog.cpp:247
 msgid "Declination"
 msgstr "Deklination"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:256 src/gui/AstroCalcDialog.cpp:292
+#: src/gui/SearchDialog.cpp:255 src/gui/AstroCalcDialog.cpp:292
 #: src/gui/AstroCalcDialog.cpp:1024
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
 msgid "Azimuth"
@@ -4067,7 +4067,7 @@ msgstr "Azimut"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:294
+#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:294
 #: src/gui/AstroCalcDialog.cpp:1026 src/gui/AstroCalcDialog.cpp:1731
 #: src/gui/AstroCalcDialog.cpp:2138 src/gui/AstroCalcDialog.cpp:2140
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -4075,13 +4075,13 @@ msgstr "Azimut"
 msgid "Altitude"
 msgstr "Höjd"
 
-#: src/gui/SearchDialog.cpp:270
+#: src/gui/SearchDialog.cpp:269
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
 msgid "Longitude"
 msgstr "Longitud"
 
-#: src/gui/SearchDialog.cpp:273
+#: src/gui/SearchDialog.cpp:272
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:540
 msgid "Latitude"
@@ -4145,7 +4145,7 @@ msgstr "Månens sekulära acceleration"
 #: src/gui/AstroCalcDialog.cpp:288 src/ui_configurationDialog.h:1349
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
+#: plugins/Exoplanets/src/Exoplanet.cpp:348
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:191
 msgid "Name"
 msgstr "Namn"
@@ -4968,19 +4968,19 @@ msgstr "Skript"
 msgid "Shortcut"
 msgstr "Kortkommando"
 
-#: src/StelMainView.cpp:784
+#: src/StelMainView.cpp:782
 msgid "Save screenshot"
 msgstr "Spara skärmbild"
 
-#: src/StelMainView.cpp:785
+#: src/StelMainView.cpp:783
 msgid "Reload shaders (for development)"
 msgstr "Ladda shaders igen (för utveckling)"
 
-#: src/StelMainView.cpp:786
+#: src/StelMainView.cpp:784
 msgid "Full-screen mode"
 msgstr "Helskärmsläge"
 
-#: src/StelMainView.cpp:942
+#: src/StelMainView.cpp:940
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4988,13 +4988,13 @@ msgstr ""
 "Bristfällig version av OpenGL. Var god uppdatera drivrutiner, grafikhårdvara"
 " och använd -angle-mode (eller -mesa-mode)."
 
-#: src/StelMainView.cpp:945
+#: src/StelMainView.cpp:943
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Otillräcklig OpenGL-version. Uppdatera drivrutiner eller grafikhårdvara."
 
-#: src/StelMainView.cpp:987
+#: src/StelMainView.cpp:985
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5002,7 +5002,7 @@ msgstr ""
 "Problem har uppstått med ditt DirectX-/OpenGL ES-undersystem. Se loggen för detaljer.\n"
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1038
+#: src/StelMainView.cpp:1036
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5010,7 +5010,7 @@ msgstr ""
 "Problem har uppstått med ditt DirectX-/Mesa-undersystem. Se loggen för detaljer.\n"
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1094
+#: src/StelMainView.cpp:1092
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5018,7 +5018,7 @@ msgstr ""
 "Problem har uppstått med ditt OpenGL-undersystem. Se loggen för detaljer.\n"
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1135
+#: src/StelMainView.cpp:1133
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5026,7 +5026,7 @@ msgstr ""
 "Problem har uppstått med ditt OpenGL ES-undersystem. Se loggen för detaljer.\n"
 "Vill du ignorera och tysta ner denna notis i framtiden och försöka att fortsätta i försämrat läge ändå?"
 
-#: src/StelMainView.cpp:1247
+#: src/StelMainView.cpp:1245
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5124,534 +5124,534 @@ msgstr "Asterismer"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:94
 msgid "Geological features"
-msgstr "Geologiska kännetecken:"
+msgstr "Geologiska ytor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "Geological features: albedo features"
-msgstr "Geologiska kännetecken:  albedokännetecken"
+msgstr "Geologiska ytor:  albedoytor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Geological features: arcūs"
-msgstr "Geologiska kännetecken: båge"
+msgstr "Geologiska ytor: båge"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "Geological features: astra"
-msgstr "Geologiska kännetecken: stjärnmönster"
+msgstr "Geologiska ytor: stjärnmönster"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105
 msgid "Geological features: catenae"
-msgstr "Geologiska kännetecken: kraterkedjor"
+msgstr "Geologiska ytor: kraterkedjor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
 msgid "Geological features: cavi"
-msgstr "Geologiska kännetecken: ihåligheter"
+msgstr "Geologiska ytor: ihåligheter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Geological features: chaoses"
-msgstr "Geologiska kännetecken: kaos"
+msgstr "Geologiska ytor: kaos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Geological features: chasmata"
-msgstr "Geologiska kännetecken: sänkor"
+msgstr "Geologiska ytor: sänkor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Geological features: colles"
-msgstr "Geologiska kännetecken: kullar"
+msgstr "Geologiska ytor: kullar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Geological features: coronae"
-msgstr "Geologiska kännetecken: kronor"
+msgstr "Geologiska ytor: kronor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Geological features: craters"
-msgstr "Geologiska kännetecken: kratrar"
+msgstr "Geologiska ytor: kratrar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Geological features: dorsa"
-msgstr "Geologiska kännetecken: ryggar"
+msgstr "Geologiska ytor: ryggar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Geological features: eruptive centers"
-msgstr "Geologiska kännetecken: vulkancentra"
+msgstr "Geologiska ytor: vulkancentra"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Geological features: faculae"
-msgstr "Geologiska kännetecken: ljusfläckar"
+msgstr "Geologiska ytor: ljusfläckar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "Geological features: farra"
-msgstr "Geologiska kännetecken: skivformer"
+msgstr "Geologiska ytor: skivformer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "Geological features: flexūs"
-msgstr "Geologiska kännetecken: låga ryggar"
+msgstr "Geologiska ytor: låga ryggar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
 msgid "Geological features: fluctūs"
-msgstr "Geologiska kännetecken: vågor"
+msgstr "Geologiska ytor: vågor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
 msgid "Geological features: flumina"
-msgstr "Geologiska kännetecken: kanaler"
+msgstr "Geologiska ytor: kanaler"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Geological features: freta"
-msgstr "Geologiska kännetecken: floder"
+msgstr "Geologiska ytor: floder"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Geological features: fossae"
-msgstr "Geologiska kännetecken: sänkor"
+msgstr "Geologiska ytor: sänkor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Geological features: insulae"
-msgstr "Geologiska kännetecken: öar"
+msgstr "Geologiska ytor: öar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
 msgid "Geological features: labēs"
-msgstr "Geologiska kännetecken: skred"
+msgstr "Geologiska ytor: skred"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:141
 msgid "Geological features: labyrinthi"
-msgstr "Geologiska kännetecken: labyrinter"
+msgstr "Geologiska ytor: labyrinter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:143
 msgid "Geological features: lacunae"
-msgstr "Geologiska kännetecken: bäddar"
+msgstr "Geologiska ytor: bäddar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:145
 msgid "Geological features: lacūs"
-msgstr "Geologiska kännetecken: sjöar"
+msgstr "Geologiska ytor: sjöar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:147
 msgid "Geological features: large ringed features"
-msgstr "Geologiska kännetecken: stora ringkännetecken"
+msgstr "Geologiska ytor: stora ringytor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:149
 msgid "Geological features: lineae"
-msgstr "Geologiska kännetecken: linjer"
+msgstr "Geologiska ytor: linjer"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:151
 msgid "Geological features: lingulae"
-msgstr "Geologiska kännetecken: landtungor"
+msgstr "Geologiska ytor: landtungor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:153
 msgid "Geological features: maculae"
-msgstr "Geologiska kännetecken: mörka fläckar"
+msgstr "Geologiska ytor: mörka fläckar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:155
 msgid "Geological features: maria"
-msgstr "Geologiska kännetecken: hav"
+msgstr "Geologiska ytor: hav"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Geological features: mensae"
-msgstr "Geologiska kännetecken: tafflar"
+msgstr "Geologiska ytor: tafflar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Geological features: montes"
-msgstr "Geologiska kännetecken: berg"
+msgstr "Geologiska ytor: berg"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
 msgid "Geological features: oceani"
-msgstr "Geologiska kännetecken: oceaner"
+msgstr "Geologiska ytor: oceaner"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Geological features: paludes"
-msgstr "Geologiska kännetecken: slätter"
+msgstr "Geologiska ytor: slätter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:165
 msgid "Geological features: paterae"
-msgstr "Geologiska kännetecken: oregelbundna kratrar"
+msgstr "Geologiska ytor: oregelbundna kratrar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:167
 msgid "Geological features: planitiae"
-msgstr "Geologiska kännetecken: lågslätter"
+msgstr "Geologiska ytor: lågslätter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:169
 msgid "Geological features: plana"
-msgstr "Geologiska kännetecken: högslätter"
+msgstr "Geologiska ytor: högslätter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:171
 msgid "Geological features: plumes"
-msgstr "Geologiska kännetecken: kalla vulkaner"
+msgstr "Geologiska ytor: kalla vulkaner"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:173
 msgid "Geological features: promontoria"
-msgstr "Geologiska kännetecken: spetsar"
+msgstr "Geologiska ytor: spetsar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:175
 msgid "Geological features: regiones"
-msgstr "Geologiska kännetecken: regioner"
+msgstr "Geologiska ytor: regioner"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:177
 msgid "Geological features: rimae"
-msgstr "Geologiska kännetecken: sprickor"
+msgstr "Geologiska ytor: sprickor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:179
 msgid "Geological features: rupēs"
-msgstr "Geologiska kännetecken: stup"
+msgstr "Geologiska ytor: stup"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:181
 msgid "Geological features: scopuli"
-msgstr "Geologiska kännetecken: branter"
+msgstr "Geologiska ytor: branter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:183
 msgid "Geological features: serpentes"
-msgstr "slingerfloder"
+msgstr "Geologiska ytor: slingerfloder"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:185
 msgid "Geological features: sulci"
-msgstr "Geologiska kännetecken: fåror"
+msgstr "Geologiska ytor: fåror"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:187
 msgid "Geological features: sinūs"
-msgstr "Geologiska kännetecken: bukter"
+msgstr "Geologiska ytor: bukter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:189
 msgid "Geological features: terrae"
-msgstr "Geologiska kännetecken: jordar"
+msgstr "Geologiska ytor: jordar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:191
 msgid "Geological features: tholi"
-msgstr "Geologiska kännetecken: domkullar"
+msgstr "Geologiska ytor: domkullar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:193
 msgid "Geological features: undae"
-msgstr "Geologiska kännetecken: dynor"
+msgstr "Geologiska ytor: dynor"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Geological features: valles"
-msgstr "Geologiska kännetecken: dalar"
+msgstr "Geologiska ytor: dalar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Geological features: vastitates"
-msgstr "Geologiska kännetecken: utbredda slätter"
+msgstr "Geologiska ytor: utbredda slätter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:199
 msgid "Geological features: virgae"
-msgstr "Geologiska kännetecken: stråk"
+msgstr "Geologiska ytor: stråk"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:201
 msgid "Geological features: landing sites"
-msgstr "Geologiska kännetecken: landningsplats"
+msgstr "Geologiska ytor: landningsplats"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:203
 msgid "Geological features: lenticulae"
-msgstr "Geologiska kännetecken: linser"
+msgstr "Geologiska ytor: linser"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:205
 msgid "Geological features: reticula"
-msgstr "Geologiska kännetecken: nät"
+msgstr "Geologiska ytor: nät"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:207
 msgid "Geological features: tesserae"
-msgstr "Geologiska kännetecken: tegel"
+msgstr "Geologiska ytor: tegel"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:212
 msgid "Named geological features of Epimetheus"
-msgstr "Namngivet geologiskt kännetecken på Epimetheus"
+msgstr "Namngiven geologisk yta på Epimetheus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:214
 msgid "Named geological features of Vesta"
-msgstr "Namngivet geologiskt kännetecken på Vesta"
+msgstr "Namngiven geologisk yta på Vesta"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:216
 msgid "Named geological features of Mathilde"
-msgstr "Namngivet geologiskt kännetecken på Mathilde"
+msgstr "Namngiven geologisk yta på Mathilde"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:218
 msgid "Named geological features of Venus"
-msgstr "Namngivet geologiskt kännetecken på Venus"
+msgstr "Namngiven geologisk yta på Venus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:220
 msgid "Named geological features of Mercury"
-msgstr "Namngivet geologiskt kännetecken på Merkurius"
+msgstr "Namngiven geologisk yta på Merkurius"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:222
 msgid "Named geological features of Iapetus"
-msgstr "Namngivet geologiskt kännetecken på Japetus"
+msgstr "Namngiven geologisk yta på Japetus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:224
 msgid "Named geological features of Ganymede"
-msgstr "Namngivet geologiskt kännetecken på Ganymedes"
+msgstr "Namngiven geologisk yta på Ganymedes"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:226
 msgid "Named geological features of Ceres"
-msgstr "Namngivet geologiskt kännetecken på Ceres"
+msgstr "Namngiven geologisk yta på Ceres"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:228
 msgid "Named geological features of Ida"
-msgstr "Namngivet geologiskt kännetecken på Ida"
+msgstr "Namngiven geologisk yta på Ida"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:230
 msgid "Named geological features of Triton"
-msgstr "Namngivet geologiskt kännetecken på Triton"
+msgstr "Namngiven geologisk yta på Triton"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:232
 msgid "Named geological features of Oberon"
-msgstr "Namngivet geologiskt kännetecken på Oberon"
+msgstr "Namngiven geologisk yta på Oberon"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:234
 msgid "Named geological features of Itokawa"
-msgstr "Namngivet geologiskt kännetecken på Itokawa"
+msgstr "Namngiven geologisk yta på Itokawa"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:236
 msgid "Named geological features of Thebe"
-msgstr "Namngivet geologiskt kännetecken på Thebe"
+msgstr "Namngiven geologisk yta på Thebe"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:238
 msgid "Named geological features of Gaspra"
-msgstr "Namngivet geologiskt kännetecken på Gaspra"
+msgstr "Namngiven geologisk yta på Gaspra"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:240
 msgid "Named geological features of Rhea"
-msgstr "Namngivet geologiskt kännetecken på Rhea"
+msgstr "Namngiven geologisk yta på Rhea"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:242
 msgid "Named geological features of Enceladus"
-msgstr "Namngivet geologiskt kännetecken på Enceladus"
+msgstr "Namngiven geologisk yta på Enceladus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:244
 msgid "Named geological features of the Moon"
-msgstr "Namngivet geologiskt kännetecken på månen"
+msgstr "Namngiven geologisk yta på månen"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:246
 msgid "Named geological features of Dione"
-msgstr "Namngivet geologiskt kännetecken på Dione"
+msgstr "Namngiven geologisk yta på Dione"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:248
 msgid "Named geological features of Steins"
-msgstr "Namngivet geologiskt kännetecken på Steins"
+msgstr "Namngiven geologisk yta på Steins"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:250
 msgid "Named geological features of Phoebe"
-msgstr "Namngivet geologiskt kännetecken på Phoebe"
+msgstr "Namngiven geologisk yta på Phoebe"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:252
 msgid "Named geological features of Puck"
-msgstr "Namngivet geologiskt kännetecken på Puck"
+msgstr "Namngiven geologisk yta på Puck"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:254
 msgid "Named geological features of Europa"
-msgstr "Namngivet geologiskt kännetecken på Europa"
+msgstr "Namngiven geologisk yta på Europa"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:256
 msgid "Named geological features of Lutetia"
-msgstr "Namngivet geologiskt kännetecken på Lutetia"
+msgstr "Namngiven geologisk yta på Lutetia"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:258
 msgid "Named geological features of Tethys"
-msgstr "Namngivet geologiskt kännetecken på Tethys"
+msgstr "Namngiven geologisk yta på Tethys"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:260
 msgid "Named geological features of Eros"
-msgstr "Namngivet geologiskt kännetecken på Eros"
+msgstr "Namngiven geologisk yta på Eros"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:262
 msgid "Named geological features of Callisto"
-msgstr "Namngivet geologiskt kännetecken på Callisto"
+msgstr "Namngiven geologisk yta på Callisto"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:264
 msgid "Named geological features of Phobos"
-msgstr "Namngivet geologiskt kännetecken på Phobos"
+msgstr "Namngiven geologisk yta på Phobos"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:266
 msgid "Named geological features of Proteus"
-msgstr "Namngivet geologiskt kännetecken på Proteus"
+msgstr "Namngiven geologisk yta på Proteus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:268
 msgid "Named geological features of Hyperion"
-msgstr "Namngivet geologiskt kännetecken på Hyperion"
+msgstr "Namngiven geologisk yta på Hyperion"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:270
 msgid "Named geological features of Titania"
-msgstr "Namngivet geologiskt kännetecken på Titania"
+msgstr "Namngiven geologisk yta på Titania"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:272
 msgid "Named geological features of Deimos"
-msgstr "Namngivet geologiskt kännetecken på Deimos"
+msgstr "Namngiven geologisk yta på Deimos"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:274
 msgid "Named geological features of Io"
-msgstr "Namngivet geologiskt kännetecken på Io"
+msgstr "Namngiven geologisk yta på Io"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:276
 msgid "Named geological features of Ariel"
-msgstr "Namngivet geologiskt kännetecken på Ariel"
+msgstr "Namngiven geologisk yta på Ariel"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:278
 msgid "Named geological features of Dactyl"
-msgstr "Namngivet geologiskt kännetecken på Dactyl"
+msgstr "Namngiven geologisk yta på Dactyl"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:280
 msgid "Named geological features of Titan"
-msgstr "Namngivet geologiskt kännetecken på Titan"
+msgstr "Namngiven geologisk yta på Titan"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:282
 msgid "Named geological features of Amalthea"
-msgstr "Namngivet geologiskt kännetecken på Amalthea"
+msgstr "Namngiven geologisk yta på Amalthea"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:284
 msgid "Named geological features of Umbriel"
-msgstr "Namngivet geologiskt kännetecken på Umbriel"
+msgstr "Namngiven geologisk yta på Umbriel"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:286
 msgid "Named geological features of Janus"
-msgstr "Namngivet geologiskt kännetecken på Janus"
+msgstr "Namngiven geologisk yta på Janus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:288
 msgid "Named geological features of Mars"
-msgstr "Namngivet geologiskt kännetecken på Mars"
+msgstr "Namngiven geologisk yta på Mars"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:290
 msgid "Named geological features of Miranda"
-msgstr "Namngivet geologiskt kännetecken på Miranda"
+msgstr "Namngiven geologisk yta på Miranda"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:292
 msgid "Named geological features of Mimas"
-msgstr "Namngivet geologiskt kännetecken på Mimas"
+msgstr "Namngiven geologisk yta på Mimas"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:294
 msgid "Named geological features of Pluto"
-msgstr "Namngivet geologiskt kännetecken på Pluto"
+msgstr "Namngiven geologisk yta på Pluto"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:299
@@ -5884,8 +5884,8 @@ msgid "Zero Horizon"
 msgstr "Matematisk horisont"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:334
-#: plugins/Exoplanets/src/Exoplanet.cpp:338
+#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: plugins/Exoplanets/src/Exoplanet.cpp:339
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "Sol"
@@ -6313,10 +6313,10 @@ msgstr "&Kopiera"
 msgid "&Paste"
 msgstr "&Klistra in"
 
-#: src/translations.h:637 plugins/Oculars/src/ui_ocularDialog.h:1170
-#: plugins/Oculars/src/ui_ocularDialog.h:1179
-#: plugins/Oculars/src/ui_ocularDialog.h:1185
-#: plugins/Oculars/src/ui_ocularDialog.h:1203
+#: src/translations.h:637 plugins/Oculars/src/ui_ocularDialog.h:1187
+#: plugins/Oculars/src/ui_ocularDialog.h:1196
+#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -6341,7 +6341,7 @@ msgid "&Choose"
 msgstr "&Välj"
 
 #: src/translations.h:643 src/ui_configurationDialog.h:1534
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:619
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Avbryt"
 
@@ -7738,7 +7738,7 @@ msgid "Modified Julian Day"
 msgstr "Justerat julianskt datum"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:430
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:430
 msgid "Help"
 msgstr "Hjälp"
 
@@ -7975,7 +7975,7 @@ msgstr ""
 "koordinaterna."
 
 #: src/ui_searchDialogGui.h:700
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:589
 msgid "Coordinate system:"
 msgstr "Koordinatsystem:"
 
@@ -8029,7 +8029,7 @@ msgstr "Lås position när koordinater används"
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2882
 #: src/ui_viewDialog.h:2904 src/ui_viewDialog.h:2948
 #: src/ui_configurationDialog.h:1535 src/ui_configurationDialog.h:1546
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:429
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "Alternativ"
 
@@ -8146,8 +8146,8 @@ msgid "Relative scale:"
 msgstr "Relativ skala:"
 
 #: src/ui_viewDialog.h:2518
-msgid "Use an additional names of stars"
-msgstr ""
+msgid "Use additional names of stars"
+msgstr "Använd tilläggsnamn för stjärnor"
 
 #: src/ui_viewDialog.h:2519
 msgid "Solar System objects"
@@ -8250,7 +8250,7 @@ msgstr "Visa planetmarkörer"
 
 #: src/ui_viewDialog.h:2562
 msgid "Show hints and labels for planetary features"
-msgstr "Visa symboler och etiketter för planetariska kännetecken"
+msgstr "Visa symboler och etiketter för planetariska ytor"
 
 #: src/ui_viewDialog.h:2564
 msgid "Show planetary nomenclature"
@@ -8351,8 +8351,8 @@ msgstr "Filtrera efter typ"
 msgid "Hydrogen regions"
 msgstr "Väteregioner"
 
-#. TRANSLATORS: Detection method
-#: src/ui_viewDialog.h:2644 plugins/Exoplanets/src/Exoplanets.cpp:942
+#. TRANSLATORS: Exoplanet detection method
+#: src/ui_viewDialog.h:2644 plugins/Exoplanets/src/Exoplanets.cpp:961
 msgid "Other"
 msgstr "Annat"
 
@@ -8422,8 +8422,8 @@ msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "Största vinkelstorlek i bågminuter för synliga DSO"
 
 #: src/ui_viewDialog.h:2673
-msgid "Use an additional names of DSO"
-msgstr ""
+msgid "Use additional names of DSO"
+msgstr "Använd tilläggsnamn för DSO"
 
 #: src/ui_viewDialog.h:2674
 msgid "Celestial Sphere"
@@ -8974,7 +8974,7 @@ msgstr ""
 "gång du startar Stellarium"
 
 #: src/ui_configurationDialog.h:1310
-#: plugins/NavStars/src/ui_navStarsWindow.h:211
+#: plugins/NavStars/src/ui_navStarsWindow.h:220
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
@@ -8986,7 +8986,7 @@ msgid "Restore the default settings that came with Stellarium"
 msgstr "Återställ inställningarna till ursprungliga värden."
 
 #: src/ui_configurationDialog.h:1314
-#: plugins/NavStars/src/ui_navStarsWindow.h:212
+#: plugins/NavStars/src/ui_navStarsWindow.h:219
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
@@ -9027,7 +9027,7 @@ msgstr "Alla tillgängliga"
 msgid "Display no information"
 msgstr "Visa ingen information"
 
-#: src/ui_configurationDialog.h:1330 plugins/Oculars/src/Oculars.cpp:2363
+#: src/ui_configurationDialog.h:1330 plugins/Oculars/src/Oculars.cpp:2340
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "Ingen"
@@ -9535,7 +9535,7 @@ msgid "Switch to the new landscape after installation"
 msgstr "Byt till nytt landskap efter installation"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:274
 msgid "Remove"
 msgstr "Ta bort"
@@ -9674,7 +9674,8 @@ msgstr "Pekarposition"
 msgid "Include dir:"
 msgstr "Inkludera katalog:"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:329
 msgid "..."
 msgstr "…"
 
@@ -10386,18 +10387,18 @@ msgstr ""
 "Hawaii."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:493
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #: plugins/FOV/src/gui/FOVWindow.cpp:89
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
@@ -10407,18 +10408,18 @@ msgid "Links"
 msgstr "Länkar"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
-#: plugins/Oculars/src/gui/OcularDialog.cpp:493
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:494
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:99
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:131
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 #: plugins/FOV/src/gui/FOVWindow.cpp:90
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -10434,18 +10435,18 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
-#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+#: plugins/Oculars/src/gui/OcularDialog.cpp:497
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:497
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:233
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:100
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 #: plugins/FOV/src/gui/FOVWindow.cpp:93
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
@@ -10458,18 +10459,18 @@ msgstr "Om du har några frågor, kan du %1få svar här%2"
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:499
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:235
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:104
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 #: plugins/FOV/src/gui/FOVWindow.cpp:95
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
@@ -10482,18 +10483,18 @@ msgstr "Felrapportering kan göras %1här%2."
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:500
+#: plugins/Oculars/src/gui/OcularDialog.cpp:501
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:501
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:104
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
 #: plugins/Novae/src/gui/NovaeDialog.cpp:141
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 #: plugins/FOV/src/gui/FOVWindow.cpp:97
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:99
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
@@ -10572,7 +10573,7 @@ msgstr "Använd dms-format för vinklar"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:250
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:536
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:556
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:575
@@ -10580,18 +10581,18 @@ msgid "Restore default settings"
 msgstr "Återställ standardinställningar"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1211
+#: plugins/Oculars/src/ui_ocularDialog.h:1228
 #: plugins/Satellites/src/ui_satellitesDialog.h:833
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:431
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/NavStars/src/ui_navStarsWindow.h:214
+#: plugins/NavStars/src/ui_navStarsWindow.h:222
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:261
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:579
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:373
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
@@ -10615,9 +10616,9 @@ msgstr "Visa kompassmärkningar utmed horisonten"
 msgid "Compass marks"
 msgstr "Kompassmärken"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1525
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
-#: plugins/Oculars/src/ui_ocularDialog.h:1137
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1502
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
+#: plugins/Oculars/src/ui_ocularDialog.h:1153
 msgid "Oculars"
 msgstr "Okular"
 
@@ -10631,464 +10632,464 @@ msgstr ""
 "synsfältet är simulerat). Den kan också visa en sensorram och ett Telrad-"
 "sikte."
 
-#: plugins/Oculars/src/Oculars.cpp:1003
+#: plugins/Oculars/src/Oculars.cpp:1005
 msgid "Please select an object before switching to ocular view."
 msgstr "Välj ett objekt innan du byter till okularvisning."
 
-#: plugins/Oculars/src/Oculars.cpp:1099
+#: plugins/Oculars/src/Oculars.cpp:1101
 msgid "&Previous ocular"
 msgstr "&Föregående okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1100
+#: plugins/Oculars/src/Oculars.cpp:1102
 msgid "&Next ocular"
 msgstr "&Nästa okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1101
+#: plugins/Oculars/src/Oculars.cpp:1103
 msgid "Select &ocular"
 msgstr "Välj &okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1144
+#: plugins/Oculars/src/Oculars.cpp:1146
 msgid "Toggle &crosshair"
 msgstr "Slå på/av &hårkors"
 
-#: plugins/Oculars/src/Oculars.cpp:1154
+#: plugins/Oculars/src/Oculars.cpp:1156
 msgid "Configure &Oculars"
 msgstr "Ställ in &okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1163
+#: plugins/Oculars/src/Oculars.cpp:1165
 msgid "Toggle &CCD"
 msgstr "Slå på/av &CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1171
+#: plugins/Oculars/src/Oculars.cpp:1173
 msgid "Toggle &Telrad"
 msgstr "Slå på/av &Telrad"
 
-#: plugins/Oculars/src/Oculars.cpp:1180
+#: plugins/Oculars/src/Oculars.cpp:1182
 msgid "&Previous CCD"
 msgstr "&Föregående CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1181
+#: plugins/Oculars/src/Oculars.cpp:1183
 msgid "&Next CCD"
 msgstr "&Nästa CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1182
+#: plugins/Oculars/src/Oculars.cpp:1184
 msgid "&Select CCD"
 msgstr "&Välj CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1204
+#: plugins/Oculars/src/Oculars.cpp:1206
 msgid "&Rotate CCD"
 msgstr "&Rotera CCD"
 
-#: plugins/Oculars/src/Oculars.cpp:1226
+#: plugins/Oculars/src/Oculars.cpp:1228
 msgid "&Reset rotation"
 msgstr "&Återställ rotation"
 
-#: plugins/Oculars/src/Oculars.cpp:1526
-#: plugins/Oculars/src/ui_ocularDialog.h:1150
+#: plugins/Oculars/src/Oculars.cpp:1503
+#: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Ocular view"
 msgstr "Okular-vy"
 
-#: plugins/Oculars/src/Oculars.cpp:1541
+#: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Oculars popup menu"
 msgstr "Oculars meny"
 
-#: plugins/Oculars/src/Oculars.cpp:1542
+#: plugins/Oculars/src/Oculars.cpp:1519
 msgid "Show crosshairs"
 msgstr "Visa hårkors"
 
-#: plugins/Oculars/src/Oculars.cpp:1543
+#: plugins/Oculars/src/Oculars.cpp:1520
 msgid "Image sensor frame"
 msgstr "Bildsensorram"
 
-#: plugins/Oculars/src/Oculars.cpp:1544
+#: plugins/Oculars/src/Oculars.cpp:1521
 msgid "Telrad sight"
 msgstr "Telrad-sikte"
 
-#: plugins/Oculars/src/Oculars.cpp:1545
+#: plugins/Oculars/src/Oculars.cpp:1522
 msgid "Oculars plugin configuration"
 msgstr "Konfigurera insticksprogrammet för okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1547
+#: plugins/Oculars/src/Oculars.cpp:1524
 msgid "Select next telescope"
 msgstr "Välj nästa teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1549
+#: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Select previous telescope"
 msgstr "Välj tidigare teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:1551
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Select next eyepiece"
 msgstr "Välj nästa okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1553
+#: plugins/Oculars/src/Oculars.cpp:1530
 msgid "Select previous eyepiece"
 msgstr "Välj tidigare okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1715
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "RA/dek (J2000.0) för kor"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1746
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:804
+#: plugins/Oculars/src/Oculars.cpp:1723
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "\"/px"
 msgstr "\"/px"
 
-#: plugins/Oculars/src/Oculars.cpp:1935
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:496
+#: plugins/Oculars/src/Oculars.cpp:1912
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:498
 msgid "Ocular"
 msgstr "Okular"
 
-#: plugins/Oculars/src/Oculars.cpp:1937
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:498
+#: plugins/Oculars/src/Oculars.cpp:1914
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 msgid "Binocular"
 msgstr "Kikare"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1957
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
+#: plugins/Oculars/src/Oculars.cpp:1934
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "Okularets fokallängd: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1964
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
+#: plugins/Oculars/src/Oculars.cpp:1941
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "Skenbart synfält okular: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1975
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
+#: plugins/Oculars/src/Oculars.cpp:1952
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
 #, qt-format
 msgid "Lens #%1"
 msgstr "Lins #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1979
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
+#: plugins/Oculars/src/Oculars.cpp:1956
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "Lins #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1984
+#: plugins/Oculars/src/Oculars.cpp:1961
 msgid "Lens: none"
 msgstr "Lins: ingen"
 
-#: plugins/Oculars/src/Oculars.cpp:1999 plugins/Oculars/src/Oculars.cpp:2059
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
+#: plugins/Oculars/src/Oculars.cpp:1976 plugins/Oculars/src/Oculars.cpp:2036
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:757
 #, qt-format
 msgid "Telescope #%1"
 msgstr "Teleskop #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2008
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:849
+#: plugins/Oculars/src/Oculars.cpp:1985
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Magnification: %1"
 msgstr "Förstoring: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2015
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
+#: plugins/Oculars/src/Oculars.cpp:1992
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "Utgångspupill: %1 mm"
 
-#: plugins/Oculars/src/Oculars.cpp:2022
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:868
+#: plugins/Oculars/src/Oculars.cpp:1999
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:870
 #, qt-format
 msgid "FOV: %1"
 msgstr "FOV: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2043
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:688
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
+#: plugins/Oculars/src/Oculars.cpp:2020
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "Mått: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2047
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
+#: plugins/Oculars/src/Oculars.cpp:2024
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:650
 #, qt-format
 msgid "Sensor #%1"
 msgstr "Sensor #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2051
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:652
+#: plugins/Oculars/src/Oculars.cpp:2028
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:654
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "Sensor #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2064
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:759
+#: plugins/Oculars/src/Oculars.cpp:2041
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:761
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "Teleskop #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2359
+#: plugins/Oculars/src/Oculars.cpp:2336
 msgid "&Lens"
 msgstr "&Lins"
 
-#: plugins/Oculars/src/Oculars.cpp:2360
+#: plugins/Oculars/src/Oculars.cpp:2337
 msgid "&Previous lens"
 msgstr "&Föregående lins"
 
-#: plugins/Oculars/src/Oculars.cpp:2361
+#: plugins/Oculars/src/Oculars.cpp:2338
 msgid "&Next lens"
 msgstr "&Nästa lins"
 
-#: plugins/Oculars/src/Oculars.cpp:2391
+#: plugins/Oculars/src/Oculars.cpp:2368
 msgid "&Telescope"
 msgstr "&Teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:2392
+#: plugins/Oculars/src/Oculars.cpp:2369
 msgid "&Previous telescope"
 msgstr "&Föregående teleskop"
 
-#: plugins/Oculars/src/Oculars.cpp:2393
+#: plugins/Oculars/src/Oculars.cpp:2370
 msgid "&Next telescope"
 msgstr "&Nästa teleskop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Previous ocular"
 msgstr "Föregående okular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Next ocular"
 msgstr "Nästa okular"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:224
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:226
 msgid "Previous lens"
 msgstr "Föregående lins"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:230
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:232
 msgid "Next lens"
 msgstr "Nästa lins"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:236
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:238
 msgid "Previous CCD frame"
 msgstr "Föregående CCD-ruta"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:242
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:244
 msgid "Next CCD frame"
 msgstr "Nästa CCD-ruta"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:248
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:250
 msgid "Previous telescope"
 msgstr "Föregående teleskop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:254
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:256
 msgid "Next telescope"
 msgstr "Nästa teleskop"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:318
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:320
 msgid "Reset the sensor frame rotation"
 msgstr "Återställ sensorramens rotation"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:279
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:281
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "Rotera sensorramen 15 grader moturs"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:292
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:294
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "Rotera sensorramen 5 grader moturs"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:305
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:307
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "Rotera sensorramen 1 grad moturs"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:357
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:359
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "Rotera sensorramen 15 grader medurs"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:344
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:346
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "Rotera sensorramen 5 grader medurs"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:331
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:333
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "Rotera sensorramen 1 grad medurs"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:545
 msgid "Effective focal length of the ocular"
 msgstr "Effektiv fokallängd för okularet."
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:553
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:555
 msgid "Apparent field of view of the ocular"
 msgstr "Skenbart synfält för okularet"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "Multiplicitet: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:591
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Lens: None"
 msgstr "Lins: Ingen"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:594
 msgid "Multiplicity: N/A"
 msgstr "Multiplicitet: i.u."
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:596
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 msgid "Focal length of eyepiece"
 msgstr "Okularets fokallängd"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:692
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Dimensions field of view"
 msgstr "Synfältsdimensioner"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:696
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:805
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:807
 msgid "X scale"
 msgstr "X-skala"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
 msgid "Horizontal scale"
 msgstr "Vågrät skala"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:807
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
 msgid "Y scale"
 msgstr "Y-skala"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
 msgid "Vertical scale"
 msgstr "Lodrät skala"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:708
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #, qt-format
 msgid "Rotation: %1"
 msgstr "Rotation: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "Magnification provided by these binoculars"
 msgstr "Förstoring hos denna kikare"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 msgid "Actual field of view provided by these binoculars"
 msgstr "Verkligt synfält hos denna kikare"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Exit pupil provided by these binoculars"
 msgstr "Utgångspupill som ges av denna kikare"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:840
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr ""
 "Grad av förstoring som denna kombination av okular, lins och teleskop ger"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:841
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr "Verkligt synfält hos denna okular/lins/teleskop-kombination"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr "Utgångspupill som ges av denna kombination av okular/lins/teleskop."
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:897
 msgid "Rayleigh criterion"
 msgstr "Rayleighkriterium"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:897
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 msgid "The Rayleigh resolution criterion"
 msgstr "Rayleighupplösningskriterium"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:902
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:904
 msgid "Dawes' limit"
 msgstr "Dawes gräns"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:904
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:906
 msgid "Dawes' resolution criterion"
 msgstr "Dawes upplösningskriterium"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:909
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:911
 msgid "Abbe's limit"
 msgstr "Abbes gräns"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:911
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:913
 msgid "Abbe’s diffraction resolution limit"
 msgstr "Abbes diffraktionsupplösningsgräns"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:916
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:918
 msgid "Sparrow's limit"
 msgstr "Sparrows gräns"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:918
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:920
 msgid "Sparrow's resolution limit"
 msgstr "Sparrows upplösningsgräns"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:944
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
 msgid "Visual resolution"
 msgstr "Visuell upplösning"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:948
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr "Den visuella upplösningen baseras på ögats egenskaper och förstoring"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:408
+#: plugins/Oculars/src/gui/OcularDialog.cpp:409
 msgid "tFOV:"
 msgstr "Verkligt synfält"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:410
+#: plugins/Oculars/src/gui/OcularDialog.cpp:411
 msgid "Magnification factor:"
 msgstr "Förstoringsfaktor"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:411
-#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/gui/OcularDialog.cpp:412
+#: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Diameter:"
 msgstr "Diameter:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:415
-#: plugins/Oculars/src/ui_ocularDialog.h:1172
+#: plugins/Oculars/src/gui/OcularDialog.cpp:416
+#: plugins/Oculars/src/ui_ocularDialog.h:1189
 msgid "aFOV:"
 msgstr "aFOV:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:416
-#: plugins/Oculars/src/ui_ocularDialog.h:1173
-#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1222
 msgid "Focal length:"
 msgstr "Fokallängd:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
-#: plugins/Oculars/src/ui_ocularDialog.h:1174
+#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/ui_ocularDialog.h:1191
 msgid "Field stop:"
 msgstr "Fältstopp:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Oculars Plug-in"
 msgstr "Okular plug-in"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:431
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Barlow lens feature"
-msgstr "Barlowlinskännetecken"
+msgstr "Barlowlinsytor"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:438
+#: plugins/Oculars/src/gui/OcularDialog.cpp:439
 msgid "Overview"
 msgstr "Översikt"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:440
+#: plugins/Oculars/src/gui/OcularDialog.cpp:441
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -11100,11 +11101,11 @@ msgstr ""
 "bort okular och teleskop såväl som CCD-sensorer. Första gången appen körs "
 "kommer ett antal exempel skapas."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:441
+#: plugins/Oculars/src/gui/OcularDialog.cpp:442
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Du kan välja att skala bilden du ser till att passa skärmen."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:442
+#: plugins/Oculars/src/gui/OcularDialog.cpp:443
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -11112,7 +11113,7 @@ msgstr ""
 "Detta är avsett att visa en bättre jämförelse av hur en kombination av "
 "okular och teleskop kommer se ut jämfört med en annan."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:443
+#: plugins/Oculars/src/gui/OcularDialog.cpp:444
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -11120,7 +11121,7 @@ msgstr ""
 "Samma okular i två olika teleskop (med olika fokallängder) kommer ge två "
 "olika utgångspupiller, vilket ändrar vyn något."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:444
+#: plugins/Oculars/src/gui/OcularDialog.cpp:445
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -11128,7 +11129,7 @@ msgstr ""
 "Kompromissen till detta blir att en stor del av skärmen inte används (när "
 "bilden blir skalad)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:446
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
@@ -11136,7 +11137,7 @@ msgstr ""
 "Jag rekommenderar därför att du behåller det avslaget, om du inte känner att"
 " du har nytta av det."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:446
+#: plugins/Oculars/src/gui/OcularDialog.cpp:447
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the"
@@ -11146,7 +11147,7 @@ msgstr ""
 "vara i linje med norr. Jag har inte lyckats göra det. Så för närvarande är "
 "den i linje med toppen av skärmen."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:447
+#: plugins/Oculars/src/gui/OcularDialog.cpp:448
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -11159,44 +11160,44 @@ msgstr ""
 "4,0%1, vilket hjälper dig att se vad du förväntas se med blotta ögat genom "
 "en Telrad-hittare (eller liknande)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:448
+#: plugins/Oculars/src/gui/OcularDialog.cpp:449
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Om du stötar på några problem, kontakta mig. Ha det så kul!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:451
+#: plugins/Oculars/src/gui/OcularDialog.cpp:452
 msgid "Hot Keys"
 msgstr "Snabbtangenter"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:452
+#: plugins/Oculars/src/gui/OcularDialog.cpp:453
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr "Knappen för plug-in:et kan redigeras i Kortkommandon (F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:466
-#: plugins/Oculars/src/gui/OcularDialog.cpp:471
+#: plugins/Oculars/src/gui/OcularDialog.cpp:467
+#: plugins/Oculars/src/gui/OcularDialog.cpp:472
 msgid "[no key defined]"
 msgstr "[ingen tangent definierad]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:475
+#: plugins/Oculars/src/gui/OcularDialog.cpp:476
 msgid "Switches on/off the ocular overlay."
 msgstr "Slå på/av okular-visning."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:479
+#: plugins/Oculars/src/gui/OcularDialog.cpp:480
 msgid "Opens the pop-up navigation menu."
 msgstr "Öppnar pop-up meny med inställningar."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:483
+#: plugins/Oculars/src/gui/OcularDialog.cpp:484
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr "Rotera hårkorset i okularet medurs."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:487
+#: plugins/Oculars/src/gui/OcularDialog.cpp:488
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr "Rotera hårkorset i okularet moturs."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:503
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:140
 #, qt-format
 msgid ""
@@ -11206,11 +11207,19 @@ msgstr ""
 "Om du vill läsa den fullständiga informationen om detta insticksprogram, "
 "dess historia och katalogformat, klicka %1här%2."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1139
+#: plugins/Oculars/src/ui_ocularDialog.h:1155
 msgid "Interface"
 msgstr "Gränsnitt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1141
+#: plugins/Oculars/src/ui_ocularDialog.h:1156
+msgid "On-screen control panel"
+msgstr "Kontrollpanel på skärm"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1157
+msgid "Arrow button scale (requires restart)"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1159
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -11218,66 +11227,62 @@ msgstr ""
 "Markera detta om du vill att riktningsvärdet ska vara samma som när "
 "Stellarium startar."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1143
+#: plugins/Oculars/src/ui_ocularDialog.h:1161
 msgid "Restore direction to initial values"
 msgstr "Återställ riktning till standardvärde"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1144
-msgid "On-screen control panel"
-msgstr "Kontrollpanel på skärm"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Show resolution criteria"
-msgstr "Visa upplösningskriterier"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1147
+#: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
 msgstr ""
 "Markera om du vill ha synfältsvärdet detsamma som när Stellarium startas."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1149
+#: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Restore FOV to initial values"
 msgstr "Återställ synfält till initialvärde"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1151
+#: plugins/Oculars/src/ui_ocularDialog.h:1166
+msgid "Show resolution criteria"
+msgstr "Visa upplösningskriterier"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1168
 msgid "Enable only if an object is selected"
 msgstr "Aktivera endast om ett objekt är valt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1153
+#: plugins/Oculars/src/ui_ocularDialog.h:1170
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "Tillämpa stjärnors gränsmagnitud för olika teleskopöppningar"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1155
+#: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Limit stellar magnitude"
 msgstr "Begränsa  stellär magnitud"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1156
+#: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Scale image circle"
 msgstr "Anpassa bildens storlek"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1158
+#: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr "Tillåt synlighet utanför okularcirel i okularläge."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1160
+#: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Use semi-transparent mask"
 msgstr "Använd halvgenomskinlig mask"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1161
+#: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "Hide grids and lines when enabled"
 msgstr "Göm rutnät och linjer under aktivering"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1162
+#: plugins/Oculars/src/ui_ocularDialog.h:1179
 msgid "Sensor view"
 msgstr "Sensorsvy"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1163
+#: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "Använd grader och minuter för synfält för CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1165
+#: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -11285,52 +11290,52 @@ msgstr ""
 "Aktivera automatisk växling mellan monteringstyper från "
 "teleskopinställnignarna för vågrät orientering av CCD-ram."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1167
+#: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Enable automatic switch of mount type"
 msgstr "Aktivera automatisk växlning mellan monteringstyper"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1168
+#: plugins/Oculars/src/ui_ocularDialog.h:1185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "Allmänt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1169
-#: plugins/Oculars/src/ui_ocularDialog.h:1178
-#: plugins/Oculars/src/ui_ocularDialog.h:1184
-#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1186
+#: plugins/Oculars/src/ui_ocularDialog.h:1195
+#: plugins/Oculars/src/ui_ocularDialog.h:1201
+#: plugins/Oculars/src/ui_ocularDialog.h:1219
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr "Lägg till"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1171
-#: plugins/Oculars/src/ui_ocularDialog.h:1180
-#: plugins/Oculars/src/ui_ocularDialog.h:1186
-#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:1221
 #: plugins/Satellites/src/ui_satellitesDialog.h:795
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "Namn:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1175
+#: plugins/Oculars/src/ui_ocularDialog.h:1192
 msgid "Binoculars"
 msgstr "Kikare"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1176
+#: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid "Has permanent cross-hairs"
 msgstr "Har permanent hårskors"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1177
+#: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Eyepieces"
 msgstr "Okularer"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1181
+#: plugins/Oculars/src/ui_ocularDialog.h:1198
 msgid "Multiplier:"
 msgstr "Multiplikationsfaktor:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1182
+#: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -11338,85 +11343,85 @@ msgstr ""
 "Värde >1 ökar fokallängden (Barlowlins). Värden <1 minskar fokallängden "
 "(Shapleylins)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1183
+#: plugins/Oculars/src/ui_ocularDialog.h:1200
 msgid "Lenses"
 msgstr "Linser"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1187
+#: plugins/Oculars/src/ui_ocularDialog.h:1204
 msgid "Resolution x (pixels):"
 msgstr "Upplösning x (pixlar):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1205
 msgid "Resolution y (pixels):"
 msgstr "Upplösning y (pixlar):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1189
+#: plugins/Oculars/src/ui_ocularDialog.h:1206
 msgid "Chip height (mm):"
 msgstr "Höjd på chip (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid "Chip width (mm):"
 msgstr "Bredd på chip (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1191
+#: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Pixel width (micron):"
 msgstr "Pixelbredd (micron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "Pixel height (micron):"
 msgstr "Pixelhöjd (micron):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1193
+#: plugins/Oculars/src/ui_ocularDialog.h:1210
 msgid "Prism/CCD distance (mm):"
 msgstr "Prisma-/CCD-avstånd (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1194
+#: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Prism/CCD height (mm):"
 msgstr "Prisma-/CCD-höjd(mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1195
+#: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Prism/CCD width (mm):"
 msgstr "Prisma-/CCD-bredd (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1196
+#: plugins/Oculars/src/ui_ocularDialog.h:1213
 msgid "Position angle (degrees):"
 msgstr "Positionsvinkel (grader):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid "Off-Axis guider"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1198
+#: plugins/Oculars/src/ui_ocularDialog.h:1215
 msgid "Rotation Angle (degrees):"
 msgstr "Rotationsvinkel (grader):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1216
 msgid "Binning x:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1217
 msgid "Binning y:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1201
+#: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Sensors"
 msgstr "Sensorer"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1207
+#: plugins/Oculars/src/ui_ocularDialog.h:1224
 msgid "Horizontal flip"
 msgstr "Spegelvänd horisontellt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1208
+#: plugins/Oculars/src/ui_ocularDialog.h:1225
 msgid "Vertical flip"
 msgstr "Spegelvänd vertikalt"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1209
+#: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Equatorial Mount"
 msgstr "Ekvatoriell montering"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1210
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/Oculars/src/ui_ocularDialog.h:1227
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"
 msgstr "Teleskop"
 
@@ -11869,7 +11874,7 @@ msgstr "Se %1detta dokument%2 för detaljer."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
 msgid "Internet updates disabled"
 msgstr "Internet-uppdatering deaktiverad"
 
@@ -11883,8 +11888,8 @@ msgstr "Internet-uppdatering deaktiverad"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
 msgid "Updating now..."
 msgstr "Uppdaterar..."
 
@@ -11893,7 +11898,7 @@ msgstr "Uppdaterar..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:321
 msgid "Next update: < 1 minute"
 msgstr "Nästa uppdatering: < 1 minut"
 
@@ -11902,7 +11907,7 @@ msgstr "Nästa uppdatering: < 1 minut"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:314
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
@@ -11914,7 +11919,7 @@ msgstr[1] "Nästa uppdatering: %1 minut(er)"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:176
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:330
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
@@ -11926,7 +11931,7 @@ msgstr[1] "Nästa uppdatering: %1 timmar"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:226
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:255
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:385
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
 msgid "Update error"
 msgstr "Fel vid uppdatering"
 
@@ -11954,8 +11959,8 @@ msgstr "[ny källa]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:371
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:511
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "Uppdatera nu"
@@ -11965,7 +11970,7 @@ msgstr "Uppdatera nu"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:199
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:196
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:384
 msgid "Update from files"
 msgstr "Uppdatera från filer"
 
@@ -12069,7 +12074,7 @@ msgstr "Uppdatera satellitdata från internetkällor"
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:508
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
 msgid "Last update:"
 msgstr "Senaste uppdatering:"
 
@@ -12086,7 +12091,7 @@ msgstr ""
 "uppdatering"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:752
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:509
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "Uppdateringsfrekvens (timmar):"
@@ -12137,7 +12142,7 @@ msgstr "Realistiskt läge för artificiella satelliter"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:251
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:537
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:557
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
 msgstr "Spara inställningar som standard"
@@ -12147,7 +12152,7 @@ msgstr "Spara inställningar som standard"
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:538
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Settings"
 msgstr "Inställningar"
@@ -12311,7 +12316,7 @@ msgid "Move a telescope to a given set of coordinates"
 msgstr "Rikta ett teleskop mot givna koordinater"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1673
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1680
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
@@ -12320,30 +12325,30 @@ msgstr ""
 "AutoStar-kontroll."
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1675
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1682
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1677
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1684
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
 msgstr ""
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1679
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1686
 msgid "Losmandy's G-11 telescope mount."
 msgstr ""
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1681
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1688
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1683
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1690
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 "Varje teleskop eller teleskopmontering som är kompatibel med Celestron "
@@ -12351,14 +12356,14 @@ msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1685
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1692
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1687
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1694
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -12375,6 +12380,34 @@ msgstr "Teleskopposition: "
 msgid "Distance to target position: "
 msgstr "Avstånd till målets position: "
 
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:129
+msgid "INDI Settings"
+msgstr ""
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:130
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:604
+msgid "TCP port:"
+msgstr "TCP port:"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:132
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:602
+msgid ""
+"Host name or IPv4 address of the machine that hosts the telescope server"
+msgstr "Värdnamn eller IPv4-adress för datorn som är värd för teleskopservern"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:134
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:600
+msgid "Host:"
+msgstr "Värd:"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:135
+msgid "Refresh devices"
+msgstr ""
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:136
+msgid "Devices:"
+msgstr ""
+
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
@@ -12387,11 +12420,11 @@ msgid ""
 "status request. The default value of 0.5 second works fine with most setups."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:222
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:223
 msgid "Add New Telescope"
 msgstr "Lägg till nytt teleskop"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:232
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:233
 msgid "Configure Telescope"
 msgstr "Ställ in teleskop"
 
@@ -12530,19 +12563,19 @@ msgstr "Anslutningstyp"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:569
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:583
 msgid "Telescope properties"
 msgstr "Teleskopegenskaper"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:582
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:596
 msgid "Device settings"
 msgstr "Enhetsinställningar"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:585
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:599
 msgid "Connection settings"
 msgstr "Anslutningsinställningar"
 
@@ -12788,7 +12821,7 @@ msgid ""
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:555
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:569
 msgid "Telescope controlled by:"
 msgstr "Teleskop kontrollerat av:"
 
@@ -13242,7 +13275,7 @@ msgid "remote, INDI"
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:942
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:407
 msgid "Start"
 msgstr "Starta"
 
@@ -13292,75 +13325,75 @@ msgstr "Deklination (J2000)"
 msgid "Select one"
 msgstr "Välj ett"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "Rikta teleskop mot"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "Det finns inga aktiva anordningar"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "Rikta teleskop mot koordinater"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Rektascension (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "De&clination (J2000):"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Nuvarande objekt"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Mitten av skärmen"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "Timme-minut-sekundformat"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "&TMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "Grad-minut-sekundformat"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "&GMS"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "Decimalgrader"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "D&ecimal"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "&Rikta"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "Konfigurera &teleskop"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:553
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:567
 msgid "Telescope Configuration"
 msgstr "Teleskopkonfiguration"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:557
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:571
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
@@ -13368,11 +13401,11 @@ msgstr ""
 "Ett teleskop är anslutet till denna dator via en serieport och kontrolleras "
 "direkt av Stellarium."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:559
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:573
 msgid "Stellarium, directly through a serial port"
 msgstr "Stellarium, direkt genom en serieport"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:561
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:575
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
@@ -13380,35 +13413,35 @@ msgstr ""
 "Ett teleskop kontrollers av ett externt program, antingen på denna dator "
 "eller en annan dator."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:577
 msgid "External software or a remote computer"
 msgstr "Extern mjukvara eller annan dator"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:565
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:579
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
 msgid "RTS2 telescope"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:568
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:582
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr "Inget, bara simulera ett (hårkors i rörelse)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:571
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:585
 msgid "Connection delay:"
 msgstr "Anslutningsförsening:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:576
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:590
 msgid "J2000 (default)"
 msgstr "J2000 (standard)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:577
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:591
 msgid "Equinox of the date (JNow)"
 msgstr "Dagjämningspunkt för datum (JNu)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:579
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:593
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
@@ -13416,152 +13449,139 @@ msgstr ""
 "Försök automatiskt att starta teleskopet eller skapa anslutning när "
 "Stellarium startar"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:581
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 msgid "Start/connect at startup"
 msgstr "Anslut vid uppstart"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:583
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
 msgid "Serial port:"
 msgstr "Seriell port:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:584
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:598
 msgid "Device model:"
 msgstr "Enhetsmodell:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
-msgid "Host:"
-msgstr "Värd:"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:588
-msgid ""
-"Host name or IPv4 address of the machine that hosts the telescope server"
-msgstr "Värdnamn eller IPv4-adress för datorn som är värd för teleskopservern"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:590
-msgid "TCP port:"
-msgstr "TCP port:"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:591
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:605
 msgid "RTS2 telescope settings"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:592
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:606
 msgid "URL:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:593
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "Username:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:594
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Password:"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:596
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "RTS2 username"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:599
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
 msgid "RTS2 password"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:602
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:616
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
 msgstr ""
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:604
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:618
 msgid "Refresh every:"
 msgstr "Uppdatera var:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:608
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:622
 msgid "User interface settings"
 msgstr "Inställningar för användargränssnitt"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:610
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr "Visa cirklar med fix vinkelstorlek kring teleskopets hårskors"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:612
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:626
 msgid "Use field of view indicators"
 msgstr "Använd syntältsindikatorer"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:613
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:627
 msgid "Circle size(s):"
 msgstr "Cirkelstorlek:"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:615
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:629
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr "Upp till tio decimalers värde i grader, åtskilda av komman"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:618
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:632
 msgid "OK"
 msgstr "OK"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes Controlled"
 msgstr "Kontrollerade teleskop"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:409
 msgid "Configure the selected telescope"
 msgstr "Konfigurera det valda teleskopet"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:411
 msgid "Configure"
 msgstr "Konfigurera"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:413
 msgid "Add a new telescope"
 msgstr "Lägg till nytt teleksop"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Remove the selected telescope"
 msgstr "Ta bort valt teleskop"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:421
 msgid "GUI"
 msgstr "Grafiskt användargränssnitt"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:422
 msgid "Show telescope labels"
 msgstr "Visa teleskopetiketter"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:423
 msgid "Show telescope reticles"
 msgstr "Visa teleskophårkors"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:424
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:424
 msgid "Show field of view indicators"
 msgstr "Visa synfältsindikatorer"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:425
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:425
 msgid "Files"
 msgstr "Filer"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:426
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:426
 msgid "Log telescope driver messages to files"
 msgstr "Spara drivrutinsmeddelanden för teleskopet till filer"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:427
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:427
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr "Använd körbara teleskopservrar (åsidosätt inbyggda drivrutiner)"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:428
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:428
 msgid "Executables directory:"
 msgstr "Körbar mapp:"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:242
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:242
 msgid "Points"
 msgstr "Punkter"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:249
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:249
 msgid "Add point"
 msgstr "Lägg till punkt"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:250
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:250
 msgid "Remove selected"
 msgstr "Ta bort valda"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:251
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:251
 msgid "Clear list"
 msgstr "Rensa lista"
 
@@ -14164,7 +14184,7 @@ msgstr "Uppdatera katalog från internet"
 #: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:507
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:526
 msgid "Update from Internet sources"
 msgstr "Uppdatera från internet"
 
@@ -14179,26 +14199,26 @@ msgstr "Uppdateringsfrekvens (dagar):"
 #: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:510
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:529
 msgid "[next update info]"
 msgstr "[information om nästa uppdatering]"
 
-#: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:110
+#: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:112
 msgid "Navigational Stars"
 msgstr "Navigationsstjärnor"
 
 #: plugins/NavStars/src/NavStars.cpp:55
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "Detta insticksprogram markerar navigationsstjärnor från en utvald samling."
 
-#: plugins/NavStars/src/NavStars.cpp:111
+#: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
 msgstr "Markera navigationsstjärnorna"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:293
+#: plugins/NavStars/src/NavStars.cpp:295
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -14208,7 +14228,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:299
+#: plugins/NavStars/src/NavStars.cpp:301
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
@@ -14216,20 +14236,20 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:305
+#: plugins/NavStars/src/NavStars.cpp:307
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:87
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
 msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #, qt-format
@@ -14241,41 +14261,49 @@ msgstr ""
 "dess historia och katalogformat, klicka %1här%2."
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:142
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:150
 msgid "Anglo-American"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:144
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:152
 msgid "French"
 msgstr ""
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:146
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
 msgid "Russian"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:202
-#: plugins/NavStars/src/ui_navStarsWindow.h:213
+#: plugins/NavStars/src/ui_navStarsWindow.h:209
+#: plugins/NavStars/src/ui_navStarsWindow.h:221
 msgid "Navigational stars"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:204
+#: plugins/NavStars/src/ui_navStarsWindow.h:211
 msgid "Set of navigational stars"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:206
+#: plugins/NavStars/src/ui_navStarsWindow.h:213
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "Placering av koordinatsträngen för muspekaren"
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:208
+#: plugins/NavStars/src/ui_navStarsWindow.h:215
 msgid "Current set:"
 msgstr ""
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:209
+#: plugins/NavStars/src/ui_navStarsWindow.h:216
 msgid "Note:"
 msgstr ""
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:218
+#: plugins/Quasars/src/ui_quasarsDialog.h:271
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:277
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
+msgid "Enable display at startup"
+msgstr "Aktivera visning vid programstart"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
@@ -14416,13 +14444,6 @@ msgstr "Visa alla kvasarer utan etiketter"
 msgid "Enable display of distribution for quasars"
 msgstr "Slå på visning av kvasarfördelning"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:271
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:277
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:526
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
-msgid "Enable display at startup"
-msgstr "Aktivera visning vid programstart"
-
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Show quasars button on toolbar"
 msgstr "Visa kvasarknapp på verktygsfältet"
@@ -14517,7 +14538,7 @@ msgctxt "period"
 msgid "days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Eccentricity"
 msgstr "Excentricitet"
 
@@ -14558,7 +14579,7 @@ msgid "mJy"
 msgstr ""
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 msgid "Notes"
 msgstr "Kommentarer"
@@ -15002,180 +15023,180 @@ msgid "Exoplanets configuration window"
 msgstr "Konfigurationsfönster för exoplaneter"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:912
+#: plugins/Exoplanets/src/Exoplanets.cpp:931
 msgid "Hot"
 msgstr "Het"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:914
+#: plugins/Exoplanets/src/Exoplanets.cpp:933
 msgid "Warm"
 msgstr "Varm"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:916
+#: plugins/Exoplanets/src/Exoplanets.cpp:935
 msgid "Cold"
 msgstr "Kall"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:919
+#: plugins/Exoplanets/src/Exoplanets.cpp:938
 msgid "Miniterran"
 msgstr "Minijord"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:921
+#: plugins/Exoplanets/src/Exoplanets.cpp:940
 msgid "Subterran"
 msgstr "Underjord"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:923
+#: plugins/Exoplanets/src/Exoplanets.cpp:942
 msgid "Terran"
 msgstr "Jordlik"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:925
+#: plugins/Exoplanets/src/Exoplanets.cpp:944
 msgid "Superterran"
 msgstr "Superjord"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:927
+#: plugins/Exoplanets/src/Exoplanets.cpp:946
 msgid "Jovian"
 msgstr "Jupiterlik"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:929
+#: plugins/Exoplanets/src/Exoplanets.cpp:948
 msgid "Neptunian"
 msgstr "Neptunuslik"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:932
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:951
 msgid "Primary Transit"
 msgstr "Primär passage"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:934
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:953
 msgid "Microlensing"
 msgstr ""
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:936
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:955
 msgid "Radial Velocity"
 msgstr "Radialhastighet"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:938
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:957
 msgid "Imaging"
 msgstr ""
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:940
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:959
 msgid "Pulsar"
 msgstr ""
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:944
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:963
 msgid "Astrometry"
 msgstr ""
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:946
+#. TRANSLATORS: Detection method. TTV=Transit Timing Variation
+#: plugins/Exoplanets/src/Exoplanets.cpp:965
 msgid "TTV"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:298
+#: plugins/Exoplanets/src/Exoplanet.cpp:299
 msgid "planetary system"
 msgstr "planetsystem"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:330
+#: plugins/Exoplanets/src/Exoplanet.cpp:331
 msgid "Metallicity"
 msgstr "Metallicitet"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:334
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:335
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
 msgid "Mass"
 msgstr "Massa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:338
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:339
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Radius"
 msgstr "Radie"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:342
+#: plugins/Exoplanets/src/Exoplanet.cpp:343
 msgid "Effective temperature"
 msgstr "Effektiv temperatur"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:342
+#: plugins/Exoplanets/src/Exoplanet.cpp:343
 msgctxt "temperature"
 msgid "K"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:346
+#: plugins/Exoplanets/src/Exoplanet.cpp:347
 msgid "Exoplanet"
 msgstr "Exoplanet"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "days"
 msgstr "dygn"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
 #: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
 msgid "Semi-Major Axis"
 msgstr "Halv storaxel"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Inclination"
 msgstr "Inklination"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:354
+#: plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Angle Distance"
 msgstr "Vinkelavstånd"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Exoplanets/src/Exoplanet.cpp:356
 msgid "Discovered year"
 msgstr "Upptäckt år"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:356
+#: plugins/Exoplanets/src/Exoplanet.cpp:357
 msgid "Detection method"
 msgstr "Upptäcktsmetod"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:357
+#: plugins/Exoplanets/src/Exoplanet.cpp:358
 msgid "Planetary class"
 msgstr "Palnetklass"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:359
+#: plugins/Exoplanets/src/Exoplanet.cpp:360
 msgid "Equilibrium temp."
 msgstr "Jämviktstemperatur"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:361
+#: plugins/Exoplanets/src/Exoplanet.cpp:362
 msgid "ESI"
 msgstr "Jordlikhetsindex"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:362
+#: plugins/Exoplanets/src/Exoplanet.cpp:363
 msgid "Conservative sample"
 msgstr "Konservativt urval"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:465
+#: plugins/Exoplanets/src/Exoplanet.cpp:466
 msgid "yes"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:467
+#: plugins/Exoplanets/src/Exoplanet.cpp:468
 msgid "no"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:504
+#: plugins/Exoplanets/src/Exoplanet.cpp:505
 msgid "Equilibrium temperature on Earth"
 msgstr "Jämviktstemperatur på jorden"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "Exoplanets Plug-in"
 msgstr "Exoplanetstillägg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -15184,7 +15205,7 @@ msgstr ""
 "Detta insticksprogram visar stjärnor med exoplaneter och deras positioner. "
 "Informationen är hämtad från \"%1The Extrasolar Planets Encyclopaedia%2\""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -15195,7 +15216,7 @@ msgstr ""
 "\"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -15207,7 +15228,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
 #, qt-format
 msgid ""
@@ -15217,11 +15238,11 @@ msgstr ""
 "Om du vill läsa den fullständiga informationen om detta insticksprogram, "
 "dess historia och katalogformat, klicka %1här%2."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Potential habitable exoplanets"
 msgstr "Möjliga beboeliga exoplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
@@ -15229,11 +15250,11 @@ msgstr ""
 "Detta insticksprogram visar möjliga beboeliga planeter (orangemarkerade) och"
 " information om dessa planeter."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Planetary Class"
 msgstr "Planetklass"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
@@ -15243,11 +15264,11 @@ msgstr ""
 "beboelig zon (het, varm, kall) och storlek (minijord, underjord, jordlik, "
 "superjord, Jupiterlik, Neptunuslik) (jorden = G-varm jordlik)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "Equilibrium Temperature"
 msgstr "Jämviktstemperatur"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -15259,11 +15280,11 @@ msgstr ""
 "moderstjärnan (givet 0,3 albedo). Till exempel är jordens jämviktstemperatur"
 " -18,15 °C (255 K)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "Earth Similarity Index (ESI)"
 msgstr "Jordlikhetsindex"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -15272,11 +15293,11 @@ msgstr ""
 "Likhet med jorden på en skala 0-1, där 1 är mest jordlik. Jordlikhetsindex "
 "beror på planetens radie, densitet, flykthastighet och yttemperatur."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Proper names"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
@@ -15284,76 +15305,76 @@ msgstr ""
 "I december 2015 godkände officiellt IAU (Internationella astronomiska "
 "unionen) namn för flera exoplaneter efter en allmän omröstning."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Musica is Latin for <em>music</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 "Fafner var en fornnordisk mytologisk dvärg som förvandlades till en drake."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -15362,7 +15383,7 @@ msgid ""
 " the phases of Venus, among other discoveries."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -15370,42 +15391,42 @@ msgid ""
 "planetary motion."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
 " the god Izanagi."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
@@ -15413,112 +15434,112 @@ msgstr ""
 "Ran är den fornnordiska havsgudinnan, som skapar vågorna och fångar in "
 "sjömän med sitt nät."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid "Smertrios was a Gallic deity of war."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "Draug är en odöd varelse i fornnordisk mytologi."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -15526,7 +15547,7 @@ msgid ""
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -15534,21 +15555,21 @@ msgid ""
 "treatise on the uses of the astrolabe."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
 " the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -15556,32 +15577,32 @@ msgid ""
 "popular symbol of liberty."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -15589,18 +15610,18 @@ msgid ""
 "discovered in 2004."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -15608,286 +15629,308 @@ msgid ""
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid "Additional info"
 msgstr "Ytterligare information"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid "Circumstellar habitable zone"
 msgstr "Stjärnsystemets beboeliga zon"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid "Planetary equilibrium temperature"
 msgstr "Planetens jämviktstemperatur"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "Planetary habitability"
 msgstr "Planetbeboelighet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid "Earth Similarity Index"
 msgstr "Jordlikhetsindex"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "NameExoWorlds website"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "Generella professionella hemsidor relevanta för exoplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplaneter: en interaktiv version av XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "Jakt på exomånar med Kepler"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exoplaneter i binära och multipla system (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 msgid "Naming exoplanets (IAU)"
 msgstr "Namngivning av exoplaneter (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "Några astronomer och grupper som är aktiva i studier av exoplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid "update: 16 April 2012"
 msgstr "uppdatering: 16 April 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid "The Exoplanet Data Explorer"
 msgstr "Exoplanetdatautforskaren"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 msgid "The Anglo-Australian Planet Search"
 msgstr "Angloaustraliska planetsökaren"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Genèves sökprogram för exoplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "Optiska nyheter för långbaslinjeinterferometri (OLBIN)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA:s utforskarprogram för exoplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
 msgid "Pulsar planets"
 msgstr "Pulsarplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 msgid "The NASA Exoplanet Archive"
 msgstr "NASA:s exoplanetarkiv"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "IAU:s 53:e kommission: exoplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "The Habitable Zone Gallery"
 msgstr "Galleriet för beboeliga zoner"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "Planetsök - sökandet efter en annan jord"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Open Exoplanet Catalogue"
 msgstr "Öppen exoplanetkatalog"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Katalogen över beboeliga exoplaneter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
 msgid "Exoplanets is updated"
 msgstr "Exoplaneter uppdaterade"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
 msgid "Orbital Eccentricity"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
 msgid "Orbit Semi-Major Axis, AU"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
 msgid "Planetary Mass, Mjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
 msgid "Planetary Radius, Rjup"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
 msgid "Orbital Period, days"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
 msgid "Angular Distance, arcsec"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
 msgid "Effective temperature of host star, K"
 msgstr "Effektiv temperatur för värdstjärna, K"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
 msgid "Year of Discovery"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
 msgid "Metallicity of host star"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:523
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:534
 msgid "V magnitude of host star, mag"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:535
 msgid "RA (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:536
 msgid "Dec (J2000) of star, deg"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
 msgid "Distance to star, pc"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
 msgid "Mass of host star, Msol"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid "Radius of host star, Rsol"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:503
+#. TRANSLATORS: Name of temperature scale
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:610
+msgctxt "temperature scale"
+msgid "Kelvin"
+msgstr ""
+
+#. TRANSLATORS: Name of temperature scale
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:612
+msgctxt "temperature scale"
+msgid "Celsius"
+msgstr ""
+
+#. TRANSLATORS: Name of temperature scale
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:614
+msgctxt "temperature scale"
+msgid "Fahrenheit"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
 msgid "Exoplanets Configuration"
 msgstr "Konfiguration för exoplaneter"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:504
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:523
 msgid "Exoplanets Plug-in Configuration"
 msgstr "Konfiguration för exoplanettillägget"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:506
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
 msgid "Update exoplanets data from Internet"
 msgstr "Uppdatera exoplanetdata från nätet"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:512
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:531
 msgid "Settings for exoplanets"
 msgstr "Exoplanetinställningar"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:514
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:533
 msgid "Plot all systems with exoplanets without labels"
 msgstr "Visa alla system med exoplaneter utan etiketter"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:516
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:535
 msgid "Enable display of distribution for exoplanets"
 msgstr "Slå på visning av exoplanetsfördelning"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:518
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:537
 msgid "Display exoplanets since their discovery"
 msgstr "Visa exoplaneter sedan deras upptäckt"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:520
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Enable timeline discovery of exoplanets"
 msgstr "Slå på tidslinje för upptäckt av exoplaneter"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
 msgstr ""
 "Visning av planetsystem som har exoplaneter med möjliga beboeliga zoner"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:524
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
 msgid "Enable display of the potential habitable exoplanets only"
 msgstr "Slå endast på visning av möjliga beboeliga exoplaneter"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:544
 msgid "Enable display of designations for exoplanets"
 msgstr "Slå på visning av beteckningar för exoplanter"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
 msgid "Show exoplanets button on toolbar"
 msgstr "Visa exoplaneter på verktygsfältet"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
 msgid "Exoplanets marker color"
 msgstr "Färg på markörer till exoplaneter"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:534
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:551
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:553
 msgid "Marker color for potential habitable exoplanets"
 msgstr "Färg på markör till möjliga beboeliga exoplaneter"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
+msgid "Temperature scale:"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 msgid "Diagrams: scatter plot"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:540
-msgid "Plot"
-msgstr ""
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
-msgid "Y axis"
-msgstr ""
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:550
-msgid "Logarithmic scale"
-msgstr ""
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:552
-msgid "log scale"
-msgstr ""
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:554
-msgid "min"
-msgstr ""
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
-msgid "max"
-msgstr ""
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
 msgid "X axis"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:556
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:570
+msgid "Logarithmic scale"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:564
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:572
+msgid "log scale"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:566
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
+msgid "min"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:567
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:574
+msgid "max"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:568
+msgid "Y axis"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:575
+msgid "Plot"
+msgstr ""
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:576
 msgctxt "tab in plugin windows"
 msgid "Diagram"
 msgstr ""
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:557
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:577
 msgctxt "tab in plugin windows"
 msgid "Info"
 msgstr "Info"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:578
 msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "Webbplatser"

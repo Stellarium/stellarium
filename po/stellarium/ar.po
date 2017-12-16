@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-08 20:33+0700\n"
+"POT-Creation-Date: 2017-12-15 01:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: Khalid AlAjaji <kajaji@gmail.com>, 2017\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,7 +29,7 @@ msgstr "علامة مخصصة"
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:293
-#: src/core/modules/NomenclatureItem.cpp:773 src/core/modules/Nebula.cpp:225
+#: src/core/modules/NomenclatureItem.cpp:774 src/core/modules/Nebula.cpp:225
 #: src/core/modules/Nebula.cpp:227 src/core/modules/Planet.cpp:415
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:195
@@ -38,7 +38,7 @@ msgstr "علامة مخصصة"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:159
-#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:298
+#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:299
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "‎النوع‎"
@@ -60,7 +60,7 @@ msgstr "تشكيل نجمي"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:786
+#: src/StelMainView.cpp:784
 msgid "Display Options"
 msgstr "اختيارات العرض"
 
@@ -391,14 +391,14 @@ msgstr "استخدم بيانات التلوث الضوئي من قاعدة مع
 
 #: src/core/modules/LandscapeMgr.cpp:833 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:429
+#: plugins/Oculars/src/gui/OcularDialog.cpp:430
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:222
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:92
 #: plugins/Novae/src/gui/NovaeDialog.cpp:117
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:130
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:154
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/FOV/src/gui/FOVWindow.cpp:84
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
@@ -447,62 +447,62 @@ msgstr "حسب مقياس بورتل"
 #: src/core/modules/NomenclatureItem.cpp:69
 msgctxt "landform"
 msgid "albedo feature"
-msgstr ""
+msgstr "‎تضاريس بياض‎"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:73
 msgctxt "landform"
 msgid "arcus"
-msgstr ""
+msgstr "‎قوس‎"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:77
 msgctxt "landform"
 msgid "astrum"
-msgstr ""
+msgstr "‎شعاع‎"
 
 #. TRANSLATORS: Chain of craters
 #: src/core/modules/NomenclatureItem.cpp:81
 msgctxt "landform"
 msgid "catena"
-msgstr ""
+msgstr "‎سلسلة فوهات‎"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
 #: src/core/modules/NomenclatureItem.cpp:85
 msgctxt "landform"
 msgid "cavus"
-msgstr ""
+msgstr "‎فج‎"
 
 #. TRANSLATORS: Distinctive area of broken terrain
 #: src/core/modules/NomenclatureItem.cpp:89
 msgctxt "landform"
 msgid "chaos"
-msgstr ""
+msgstr "‎أخلاط‎"
 
 #. TRANSLATORS: A deep, elongated, steep-sided depression
 #: src/core/modules/NomenclatureItem.cpp:93
 msgctxt "landform"
 msgid "chasma"
-msgstr ""
+msgstr "‎أخدود‎"
 
 #. TRANSLATORS: Small hills or knobs
 #: src/core/modules/NomenclatureItem.cpp:97
 msgctxt "landform"
 msgid "collis"
-msgstr ""
+msgstr "‎تل صغير‎"
 
 #. TRANSLATORS: Ovoid-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:101
 msgctxt "landform"
 msgid "corona"
-msgstr ""
+msgstr "‎تضاريس بيضاوية‎"
 
 #. TRANSLATORS: A circular depression
 #: src/core/modules/NomenclatureItem.cpp:105
 msgctxt "landform"
 msgid "crater"
-msgstr ""
+msgstr "‎‎فوهة‎‎"
 
 #. TRANSLATORS: Ridge
 #: src/core/modules/NomenclatureItem.cpp:109
@@ -570,58 +570,58 @@ msgstr "جزر"
 #: src/core/modules/NomenclatureItem.cpp:149
 msgctxt "landform"
 msgid "labes"
-msgstr ""
+msgstr "‎انزلاق‎"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
 #: src/core/modules/NomenclatureItem.cpp:153
 msgctxt "landform"
 msgid "labyrinthus"
-msgstr ""
+msgstr "‎متاهة‎"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
 #: src/core/modules/NomenclatureItem.cpp:157
 msgctxt "landform"
 msgid "lacuna"
-msgstr ""
+msgstr "‎منخفض غير منتظم الشكل‎"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
 #: src/core/modules/NomenclatureItem.cpp:161
 msgctxt "landform"
 msgid "lacus"
-msgstr ""
+msgstr "‎بحيرة‎"
 
 #. TRANSLATORS: Cryptic ringed feature
 #: src/core/modules/NomenclatureItem.cpp:165
 msgctxt "landform"
 msgid "large ringed feature"
-msgstr ""
+msgstr "‎تضاريس واسعة حلقية‎"
 
 #. TRANSLATORS: Small dark spots on Europa
 #: src/core/modules/NomenclatureItem.cpp:169
 msgctxt "landform"
 msgid "lenticula"
-msgstr ""
+msgstr "‎بقع داكنة‎"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
 #: src/core/modules/NomenclatureItem.cpp:173
 msgctxt "landform"
 msgid "linea"
-msgstr ""
+msgstr "‎معالم مستطيلة‎"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
 #: src/core/modules/NomenclatureItem.cpp:177
 msgctxt "landform"
 msgid "lingula"
-msgstr ""
+msgstr "‎امتداد هضبي لساني‎"
 
 #. TRANSLATORS: Dark spot, may be irregular
 #: src/core/modules/NomenclatureItem.cpp:181
 msgctxt "landform"
 msgid "macula"
-msgstr ""
+msgstr "‎بقع داكنة غير منتظمة‎"
 
 #. TRANSLATORS: “Sea”; on the Moon, low albedo, relatively smooth plain,
 #. generally of large extent; on Mars, dark albedo areas of no known
@@ -630,268 +630,268 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:185
 msgctxt "landform"
 msgid "mare"
-msgstr ""
+msgstr "‎بحر‎"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
 #: src/core/modules/NomenclatureItem.cpp:189
 msgctxt "landform"
 msgid "mensa"
-msgstr ""
+msgstr "‎ظهرة‎"
 
 #. TRANSLATORS: Mountain
 #: src/core/modules/NomenclatureItem.cpp:193
 msgctxt "landform"
 msgid "mons"
-msgstr ""
+msgstr "‎جبل‎"
 
 #. TRANSLATORS: A very large dark area on the Moon
 #: src/core/modules/NomenclatureItem.cpp:197
 msgctxt "landform"
 msgid "oceanus"
-msgstr ""
+msgstr "‎محيط‎"
 
 #. TRANSLATORS: "Swamp"; small plain
 #: src/core/modules/NomenclatureItem.cpp:201
 msgctxt "landform"
 msgid "palus"
-msgstr ""
+msgstr "‎مستنقع‎"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
 #: src/core/modules/NomenclatureItem.cpp:205
 msgctxt "landform"
 msgid "patera"
-msgstr ""
+msgstr "‎فوهة غير منتظمة‎"
 
 #. TRANSLATORS: Low plain
 #: src/core/modules/NomenclatureItem.cpp:209
 msgctxt "landform"
 msgid "planitia"
-msgstr ""
+msgstr "‎سهل منخفض‎"
 
 #. TRANSLATORS: Plateau or high plain
 #: src/core/modules/NomenclatureItem.cpp:213
 msgctxt "landform"
 msgid "planum"
-msgstr ""
+msgstr "‎سهل مرتفع‎"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
 #: src/core/modules/NomenclatureItem.cpp:217
 msgctxt "landform"
 msgid "plume"
-msgstr ""
+msgstr "‎بركان‎"
 
 #. TRANSLATORS: "Cape"; headland promontoria
 #: src/core/modules/NomenclatureItem.cpp:221
 msgctxt "landform"
 msgid "promontorium"
-msgstr ""
+msgstr "‎رأس‎"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
 #: src/core/modules/NomenclatureItem.cpp:225
 msgctxt "landform"
 msgid "regio"
-msgstr ""
+msgstr "‎بقعة‎"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
 #: src/core/modules/NomenclatureItem.cpp:229
 msgctxt "landform"
 msgid "reticulum"
-msgstr ""
+msgstr "‎شبكة‎"
 
 #. TRANSLATORS: Fissure
 #: src/core/modules/NomenclatureItem.cpp:233
 msgctxt "landform"
 msgid "rima"
-msgstr ""
+msgstr "‎شق‎"
 
 #. TRANSLATORS: Scarp
 #: src/core/modules/NomenclatureItem.cpp:237
 msgctxt "landform"
 msgid "rupes"
-msgstr ""
+msgstr "‎وعر‎"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
 #: src/core/modules/NomenclatureItem.cpp:241
 msgctxt "landform"
 msgid "satellite feature"
-msgstr ""
+msgstr "‎تضاريس تابعة‎"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:245
 msgctxt "landform"
 msgid "scopulus"
-msgstr ""
+msgstr "‎فص‎"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
 #: src/core/modules/NomenclatureItem.cpp:249
 msgctxt "landform"
 msgid "serpens"
-msgstr ""
+msgstr "‎تضاريس أفعوانية‎"
 
 #. TRANSLATORS: Subparallel furrows and ridges
 #: src/core/modules/NomenclatureItem.cpp:253
 msgctxt "landform"
 msgid "sulcus"
-msgstr ""
+msgstr "‎أخاديد متوازية‎"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
 #: src/core/modules/NomenclatureItem.cpp:257
 msgctxt "landform"
 msgid "sinus"
-msgstr ""
+msgstr "‎خليج‎"
 
 #. TRANSLATORS: Extensive land mass
 #: src/core/modules/NomenclatureItem.cpp:261
 msgctxt "landform"
 msgid "terra"
-msgstr ""
+msgstr "‎أرض منبسطة فسيحة‎"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
 #: src/core/modules/NomenclatureItem.cpp:265
 msgctxt "landform"
 msgid "tessera"
-msgstr ""
+msgstr "‎تضاريس شبيهة بالأرض المبلطة‎"
 
 #. TRANSLATORS: Small domical mountain or hill
 #: src/core/modules/NomenclatureItem.cpp:269
 msgctxt "landform"
 msgid "tholus"
-msgstr ""
+msgstr "‎تل‎"
 
 #. TRANSLATORS: Dunes
 #: src/core/modules/NomenclatureItem.cpp:273
 msgctxt "landform"
 msgid "unda"
-msgstr ""
+msgstr "‎كثبان‎"
 
 #. TRANSLATORS: Valley
 #: src/core/modules/NomenclatureItem.cpp:277
 msgctxt "landform"
 msgid "vallis"
-msgstr ""
+msgstr "‎وادي‎"
 
 #. TRANSLATORS: Extensive plain
 #: src/core/modules/NomenclatureItem.cpp:281
 msgctxt "landform"
 msgid "vastitas"
-msgstr ""
+msgstr "‎سهل ممتد‎"
 
 #. TRANSLATORS: A streak or stripe of color
 #: src/core/modules/NomenclatureItem.cpp:285
 msgctxt "landform"
 msgid "virga"
-msgstr ""
+msgstr "‎خط ملون‎"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
 #: src/core/modules/NomenclatureItem.cpp:289
 msgctxt "landform"
 msgid "landing site name"
-msgstr ""
+msgstr "‎إسم موقع الهبوط‎"
 
 #: src/core/modules/NomenclatureItem.cpp:293
 msgctxt "landform"
 msgid "undocumented landform type"
-msgstr ""
+msgstr "‎تضاريس غير موثقة النوع‎"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
 #: src/core/modules/NomenclatureItem.cpp:471
 msgid "Geographic area distinguished by amount of reflected light."
-msgstr ""
+msgstr "‎بقعة جغرافية تتميز بكمية انعكاس الضوء عنها.‎"
 
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:475
 msgid "Arc-shaped feature."
-msgstr ""
+msgstr "‎تضاريس لها شكل قوسي‎"
 
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:479
 msgid "Radial-patterned feature."
-msgstr ""
+msgstr "‎تضاريس لها نمط شعاعي.‎"
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
 msgid "Chain of craters."
-msgstr ""
+msgstr "‎سلسلة من الفوهات.‎"
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:487
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
-msgstr ""
+msgstr "‎فجوج، منخفضات جوانبها شديدة الانحدار، مصطفة أو مجتمعة.‎"
 
 #. TRANSLATORS: Description for landform 'chaos'
 #: src/core/modules/NomenclatureItem.cpp:491
 msgid "Distinctive area of broken terrain."
-msgstr ""
+msgstr "‎بقعة مميزة من التضاريس المتكسرة‎"
 
 #. TRANSLATORS: Description for landform 'chasma'
 #: src/core/modules/NomenclatureItem.cpp:495
 msgid "A deep, elongated, steep-sided depression."
-msgstr ""
+msgstr "‎منخفض سحيق طويل جوانبه شديدة الانحدار‎"
 
 #. TRANSLATORS: Description for landform 'collis'
 #: src/core/modules/NomenclatureItem.cpp:499
 msgid "Small hills or knobs."
-msgstr ""
+msgstr "‎تل صغير أو هضبة مستديرة‎"
 
 #. TRANSLATORS: Description for landform 'corona'
 #: src/core/modules/NomenclatureItem.cpp:503
 msgid "Ovoid-shaped feature."
-msgstr ""
+msgstr "‎تضاريس لها شكل بيضاوي‎"
 
 #. TRANSLATORS: Description for landform 'crater'
 #: src/core/modules/NomenclatureItem.cpp:507
 msgid "A circular depression."
-msgstr ""
+msgstr "‎‎منخفض دائري‎.‎"
 
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:511
 msgid "Ridge."
-msgstr ""
+msgstr "‎قمة جبل.‎"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:515
 msgid "Active volcanic center."
-msgstr ""
+msgstr "‎مركز بركان نشط‎"
 
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
 msgid "Bright spot."
-msgstr ""
+msgstr "‎بقعة لامعة.‎"
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:523
 msgid "Pancake-like structure, or a row of such structures."
-msgstr ""
+msgstr "‎بنية لها شكل الأقراص المستديرة، أو صف من هذه الأشكال.‎"
 
 #. TRANSLATORS: Description for landform 'flexus'
 #: src/core/modules/NomenclatureItem.cpp:527
 msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr ""
+msgstr "‎حواف جبلية قليلة الارتفاع ومنعطفة شبيهة بنمط الأصداف‎"
 
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:531
 msgid "Flow terrain."
-msgstr ""
+msgstr "‎مجرى سوائل‎"
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:535
 msgid "Channel, that might carry liquid."
-msgstr ""
+msgstr "‎قتاة ربما جرت فيها السوائل.‎"
 
 #. TRANSLATORS: Description for landform 'fretum'
 #: src/core/modules/NomenclatureItem.cpp:539
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
-msgstr ""
+msgstr "‎مضيق أو معبر ضيق للسوائل يصل بين مساحتين كبيرتين من السوائل.‎"
 
 #. TRANSLATORS: Description for landform 'fossa'
 #: src/core/modules/NomenclatureItem.cpp:543
 msgid "Long, narrow depression."
-msgstr ""
+msgstr "‎منخفض ضيق وطويل‎"
 
 #. TRANSLATORS: Description for landform 'insula'
 #: src/core/modules/NomenclatureItem.cpp:547
@@ -899,118 +899,119 @@ msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
 msgstr ""
+"‎جزيرة، بقعة معزولة محاطة كلياً أو شبه كلي بمساحة من السوائل بحر أو بحيرة.‎"
 
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "‎انزلاق أرضي‎"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
 msgid "Complex of intersecting valleys or ridges."
-msgstr ""
+msgstr "‎شبكة معقدة من الوديان أو قمم الجبال.‎"
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:559
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
+msgstr "‎منخفض غير منتظم الشكل، له مظهر بطن بحيرة جافة.‎"
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:565
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
-msgstr ""
+msgstr "‎\"بحيرة\" أو سهل داكن له حدود حادة مميزة.‎"
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:570
 msgid "'Lake' or small plain."
-msgstr ""
+msgstr "‎\"بحيرة\" أو سهل صغير.‎"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:575
 msgid "Cryptic ringed feature."
-msgstr ""
+msgstr "‎تضاريس حلقية غامضة.‎"
 
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:579
 msgid "Small dark spot."
-msgstr ""
+msgstr "‎بقعة صغيرة داكنة.‎"
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:583
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr ""
+msgstr "‎معلم مسطيل لامع أو داكن، مستقيم أو منحني.‎"
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:587
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
-msgstr ""
+msgstr "‎إمتداد من مرتفع له حدود على شكل الفص أو اللسان.‎"
 
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:591
 msgid "Dark spot, may be irregular"
-msgstr ""
+msgstr "‎بقعة داكنة، وربما غير منتظمة.‎"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:599
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
-msgstr ""
+msgstr "‎\"بحر\"، يعكس الضوء بشكل ضعيف، سهل منبسط نسبياً وممتد عموماً.‎"
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
 #: src/core/modules/NomenclatureItem.cpp:604
 msgid "'Sea'; dark albedo areas of no known geological significance."
-msgstr ""
+msgstr "‎\"بحر\"، مساحة داكنة الانعكاس ليس لها أهمية جيولوجية معروفة.‎"
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
 #: src/core/modules/NomenclatureItem.cpp:609
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
-msgstr ""
+msgstr "‎\"بحر\"، مساحات واسعة ممتدة من مواد داكنة يعتقد أنها هيدروكاربون سائل.‎"
 
 #. TRANSLATORS: Description for landform 'mensa'
 #: src/core/modules/NomenclatureItem.cpp:615
 msgid "A flat-topped prominence with cliff-like edges."
-msgstr ""
+msgstr "‎مرتفع قمته منبسطة وحوافه جروف.‎"
 
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:619
 msgid "Mountain."
-msgstr ""
+msgstr "‎جبل.‎"
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:623
 msgid "A very large dark area."
-msgstr ""
+msgstr "‎بقعة كبيرة جداً وداكنة.‎"
 
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:627
 msgid "'Swamp'; small plain."
-msgstr ""
+msgstr "‎\"مستنقع\"؛ سهل صغير.‎"
 
 #. TRANSLATORS: Description for landform 'patera'
 #: src/core/modules/NomenclatureItem.cpp:631
 msgid "An irregular crater, or a complex one with scalloped edges."
-msgstr ""
+msgstr "‎فوهة غير منتظمة، أو معقدة لها حواف متعرجة.‎"
 
 #. TRANSLATORS: Description for landform 'planitia'
 #: src/core/modules/NomenclatureItem.cpp:635
 msgid "Low plain."
-msgstr ""
+msgstr "‎سهل منخفض.‎"
 
 #. TRANSLATORS: Description for landform 'planum'
 #: src/core/modules/NomenclatureItem.cpp:639
 msgid "Plateau or high plain."
-msgstr ""
+msgstr "‎ظهرة أو سهل مرتفع.‎"
 
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:643
 msgid "Cryo-volcanic feature."
-msgstr ""
+msgstr "‎تضاريس شبيهة بالبركان.‎"
 
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:647
 msgid "'Cape'; headland promontoria."
-msgstr ""
+msgstr "‎رأس؛ بروز أرضي.‎"
 
 #. TRANSLATORS: Description for landform 'regio'
 #: src/core/modules/NomenclatureItem.cpp:651
@@ -1018,108 +1019,111 @@ msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr ""
+"‎مساحة واسعة تتميز بلونها المختلف عن المساحات المجاورة، أو مساحة جغرافية "
+"واسعة.‎"
 
 #. TRANSLATORS: Description for landform 'reticulum'
 #: src/core/modules/NomenclatureItem.cpp:655
 msgid "Reticular (netlike) pattern."
-msgstr ""
+msgstr "‎تضاريس لها نمط شبكي.‎"
 
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:659
 msgid "Fissure."
-msgstr ""
+msgstr "‎شق.‎"
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:663
 msgid "Scarp."
-msgstr ""
+msgstr "‎تضاريس وعرة.‎"
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:667
 msgid "A feature that shares the name of an associated feature."
-msgstr ""
+msgstr "‎تضاريس تحمل إسم تضاريس تتعلق بها.‎"
 
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:671
 msgid "Lobate or irregular scarp."
-msgstr ""
+msgstr "‎تضاريس فصوصية أو غير منتظمة الشكل.‎"
 
 #. TRANSLATORS: Description for landform 'serpens'
 #: src/core/modules/NomenclatureItem.cpp:675
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
-msgstr ""
+msgstr "‎تضاريس منحنية بأجزاء منخفضة ومرتفعة على طول امتدادها.‎"
 
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:679
 msgid "Subparallel furrows and ridges."
-msgstr ""
+msgstr "‎أخاديد أو حواف متوازية.‎"
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:685
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
-msgstr ""
+msgstr "‎\"خليج\"؛ خلجان في بحار من الهيدروكاربون السائل.‎"
 
 #. TRANSLATORS: Description for landform 'sinus'
 #: src/core/modules/NomenclatureItem.cpp:690
 msgid "'Bay'; small plain."
-msgstr ""
+msgstr "‎\"خليج\"؛ سهل صغير.‎"
 
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:695
 msgid "Extensive land mass."
-msgstr ""
+msgstr "‎أرض ممتدة واسعة.‎"
 
 #. TRANSLATORS: Description for landform 'tessera'
 #: src/core/modules/NomenclatureItem.cpp:699
 msgid "Tile-like, polygonal terrain."
-msgstr ""
+msgstr "‎تضاريس لها شكل البلاط المتعدد الأضلاع المتراص.‎"
 
 #. TRANSLATORS: Description for landform 'tholus'
 #: src/core/modules/NomenclatureItem.cpp:703
 msgid "Small domical mountain or hill."
-msgstr ""
+msgstr "‎جبل مقبب صغير أو تل.‎"
 
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
 msgid "Dunes."
-msgstr ""
+msgstr "‎كثبان.‎"
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
 msgid "Valley."
-msgstr ""
+msgstr "‎وادي.‎"
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:715
 msgid "Extensive plain."
-msgstr ""
+msgstr "‎سهل ممتد.‎"
 
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:719
 msgid "A streak or stripe of color."
-msgstr ""
+msgstr "‎خط له لون مميز.‎"
 
 #: src/core/modules/NomenclatureItem.cpp:726
 msgid "Undocumented landform type."
-msgstr ""
+msgstr "‎تضاريس غير موثقة النوع.‎"
 
-#: src/core/modules/NomenclatureItem.cpp:775
+#: src/core/modules/NomenclatureItem.cpp:776
 msgid "geologic term"
-msgstr ""
+msgstr "‎المصطلح الجيولوجي‎"
 
-#: src/core/modules/NomenclatureItem.cpp:785
+#: src/core/modules/NomenclatureItem.cpp:786
 msgid "Linear size"
-msgstr ""
+msgstr "‎القياس الطولي‎"
 
-#: src/core/modules/NomenclatureItem.cpp:788
+#: src/core/modules/NomenclatureItem.cpp:789
 msgid "Diameter"
-msgstr ""
+msgstr "‎القطر‎"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:789 src/core/modules/Planet.cpp:456
-#: src/core/modules/MinorPlanet.cpp:273 src/core/modules/Comet.cpp:194
+#: src/core/modules/NomenclatureItem.cpp:790 src/core/modules/Planet.cpp:456
+#: src/core/modules/Planet.cpp:481 src/core/modules/MinorPlanet.cpp:273
+#: src/core/modules/MinorPlanet.cpp:296 src/core/modules/Comet.cpp:194
 #: src/gui/StelGuiItems.cpp:748 src/gui/AstroCalcDialog.cpp:3674
 #: plugins/Satellites/src/Satellite.cpp:304
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -1128,21 +1132,21 @@ msgctxt "distance"
 msgid "km"
 msgstr "‎كم‎"
 
-#: src/core/modules/NomenclatureItem.cpp:794
-msgid "Planetographic long./lat."
-msgstr ""
-
 #: src/core/modules/NomenclatureItem.cpp:795
-msgid "Celestial body"
-msgstr ""
+msgid "Planetographic long./lat."
+msgstr "‎العرض/الطول الجغرافي الكوكبي‎"
 
-#: src/core/modules/NomenclatureItem.cpp:798
+#: src/core/modules/NomenclatureItem.cpp:796
+msgid "Celestial body"
+msgstr "‎الجسم السماوي‎"
+
+#: src/core/modules/NomenclatureItem.cpp:799
 msgid "Landform description"
-msgstr ""
+msgstr "‎الوصف التضاريسي‎"
 
 #: src/core/modules/NomenclatureMgr.cpp:75
 msgid "Nomenclature labels"
-msgstr ""
+msgstr "أسماء التضاريس"
 
 #: src/core/modules/Nebula.cpp:233 src/core/modules/Nebula.cpp:243
 #: src/core/modules/Planet.cpp:424 src/core/modules/MinorPlanet.cpp:244
@@ -1150,7 +1154,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:1993
 #: src/gui/AstroCalcDialog.cpp:2028 plugins/Supernovae/src/Supernova.cpp:140
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
-#: plugins/Exoplanets/src/Exoplanet.cpp:309
+#: plugins/Exoplanets/src/Exoplanet.cpp:310
 msgid "Magnitude"
 msgstr "‎القدر‎"
 
@@ -1163,7 +1167,7 @@ msgstr "‎العتامة‎"
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:288
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:307
+#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:308
 msgid "extincted to"
 msgstr "‎منطفيء إلى‎"
 
@@ -1221,17 +1225,17 @@ msgstr "‎زاوية الاتجاه‎"
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:322
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgctxt "distance"
 msgid "ly"
 msgstr "‎سنة ضوئية‎"
 
 #: src/core/modules/Nebula.cpp:319 src/core/modules/Nebula.cpp:354
-#: src/core/modules/Planet.cpp:488 src/core/modules/MinorPlanet.cpp:302
+#: src/core/modules/Planet.cpp:491 src/core/modules/MinorPlanet.cpp:305
 #: src/core/modules/Comet.cpp:232 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:2004 src/gui/AstroCalcDialog.cpp:2039
 #: src/ui_configurationDialog.h:1383 plugins/Supernovae/src/Supernova.cpp:155
-#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:324
 msgid "Distance"
 msgstr "‎المسافة‎"
 
@@ -1251,7 +1255,7 @@ msgstr "‎ميجا بارسك‎"
 #: src/core/modules/Nebula.cpp:340
 msgctxt "distance"
 msgid "M ly"
-msgstr ""
+msgstr "‎مليون سنة ضوئية‎"
 
 #: src/core/modules/Nebula.cpp:368 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
@@ -1714,18 +1718,18 @@ msgstr "‎متوسط القدر عند التقابل‎"
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:773
 #: src/gui/AstroCalcDialog.cpp:1040 src/gui/AstroCalcDialog.cpp:1076
 #: src/gui/AstroCalcDialog.cpp:1972 src/gui/AstroCalcDialog.cpp:3726
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "‎وحدة فلكية‎"
 
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
-#: src/core/modules/Planet.cpp:470 src/core/modules/Planet.cpp:485
-#: src/core/modules/MinorPlanet.cpp:285 src/core/modules/MinorPlanet.cpp:300
+#: src/core/modules/Planet.cpp:470 src/core/modules/Planet.cpp:488
+#: src/core/modules/MinorPlanet.cpp:285 src/core/modules/MinorPlanet.cpp:303
 #: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:3676
 msgctxt "distance"
 msgid "M km"
-msgstr ""
+msgstr "‎مليون كم‎"
 
 #: src/core/modules/Planet.cpp:473 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:216
@@ -1733,7 +1737,7 @@ msgid "Distance from Sun"
 msgstr "‎المسافة من الشمس‎"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
-#: src/core/modules/Planet.cpp:494 src/core/modules/MinorPlanet.cpp:308
+#: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:311
 #: src/core/modules/Comet.cpp:237 src/gui/AstroCalcDialog.cpp:3744
 #: plugins/Satellites/src/Satellite.cpp:306
 #: plugins/Satellites/src/Satellite.cpp:331
@@ -1742,115 +1746,115 @@ msgctxt "speed"
 msgid "km/s"
 msgstr "‎كم في الثانية‎"
 
-#: src/core/modules/Planet.cpp:503 src/core/modules/MinorPlanet.cpp:315
-msgid "Orbital Velocity"
-msgstr ""
-
 #: src/core/modules/Planet.cpp:506 src/core/modules/MinorPlanet.cpp:318
-msgid "Heliocentric Velocity"
-msgstr ""
+msgid "Orbital Velocity"
+msgstr "‎السرعة المدارية‎"
 
-#: src/core/modules/Planet.cpp:529
+#: src/core/modules/Planet.cpp:509 src/core/modules/MinorPlanet.cpp:321
+msgid "Heliocentric Velocity"
+msgstr "‎السرعة بالنسبة للشمس‎"
+
+#: src/core/modules/Planet.cpp:532
 msgid "with rings"
 msgstr "‎مع الحلقات‎"
 
-#: src/core/modules/Planet.cpp:546 src/core/modules/MinorPlanet.cpp:340
+#: src/core/modules/Planet.cpp:549 src/core/modules/MinorPlanet.cpp:343
 msgid "scaled up to"
 msgstr "‎مكبّر إلى‎"
 
-#: src/core/modules/Planet.cpp:556 src/core/modules/MinorPlanet.cpp:350
+#: src/core/modules/Planet.cpp:559 src/core/modules/MinorPlanet.cpp:353
 msgid "Apparent diameter"
 msgstr "‎القطر الظاهري‎"
 
-#: src/core/modules/Planet.cpp:569 src/core/modules/MinorPlanet.cpp:371
+#: src/core/modules/Planet.cpp:572 src/core/modules/MinorPlanet.cpp:374
 #: src/core/modules/StarWrapper.cpp:258
 msgctxt "duration"
 msgid "days"
 msgstr "‎يوماً‎"
 
-#: src/core/modules/Planet.cpp:571 src/core/modules/MinorPlanet.cpp:373
+#: src/core/modules/Planet.cpp:574 src/core/modules/MinorPlanet.cpp:376
 #: src/core/modules/Comet.cpp:254
 msgid "Sidereal period"
 msgstr "‎الدورة النجمية‎"
 
-#: src/core/modules/Planet.cpp:575
+#: src/core/modules/Planet.cpp:578
 msgid "Sidereal day"
 msgstr "‎اليوم النجمي‎"
 
-#: src/core/modules/Planet.cpp:576
+#: src/core/modules/Planet.cpp:579
 msgid "Mean solar day"
 msgstr "‎اليوم الشمسي المتوسط‎"
 
-#: src/core/modules/Planet.cpp:580
+#: src/core/modules/Planet.cpp:583
 msgid "The period of rotation is chaotic"
 msgstr "فترة الدوران مضطربة"
 
-#: src/core/modules/Planet.cpp:599
+#: src/core/modules/Planet.cpp:602
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "‎هلال متزايد‎"
 
-#: src/core/modules/Planet.cpp:601
+#: src/core/modules/Planet.cpp:604
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "‎ربع أول‎"
 
-#: src/core/modules/Planet.cpp:603
+#: src/core/modules/Planet.cpp:606
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "‎أحدب متزايد‎"
 
-#: src/core/modules/Planet.cpp:605
+#: src/core/modules/Planet.cpp:608
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "‎بدر تام‎"
 
-#: src/core/modules/Planet.cpp:607
+#: src/core/modules/Planet.cpp:610
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "‎أحدب متناقص‎"
 
-#: src/core/modules/Planet.cpp:609
+#: src/core/modules/Planet.cpp:612
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "‎ربع  ثالث‎"
 
-#: src/core/modules/Planet.cpp:611
+#: src/core/modules/Planet.cpp:614
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "‎هلال متناقص‎"
 
-#: src/core/modules/Planet.cpp:613
+#: src/core/modules/Planet.cpp:616
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "‎محاق‎"
 
-#: src/core/modules/Planet.cpp:628 src/core/modules/MinorPlanet.cpp:391
+#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:394
 #: src/core/modules/Comet.cpp:277 src/gui/AstroCalcDialog.cpp:2019
 #: src/gui/AstroCalcDialog.cpp:2054
 msgid "Phase angle"
 msgstr "‎زاوية الطور‎"
 
-#: src/core/modules/Planet.cpp:629 src/core/modules/MinorPlanet.cpp:392
+#: src/core/modules/Planet.cpp:632 src/core/modules/MinorPlanet.cpp:395
 #: src/core/modules/Comet.cpp:278 src/gui/AstroCalcDialog.cpp:2009
 #: src/gui/AstroCalcDialog.cpp:2044
 msgid "Elongation"
 msgstr "‎الاستطالة‎"
 
-#: src/core/modules/Planet.cpp:630
+#: src/core/modules/Planet.cpp:633
 msgid "Illuminated"
 msgstr "‎مضاء بنسبة‎"
 
-#: src/core/modules/Planet.cpp:631
+#: src/core/modules/Planet.cpp:634
 msgid "Albedo"
 msgstr "‎البياض‎"
 
-#: src/core/modules/Planet.cpp:633 src/gui/AstroCalcDialog.cpp:1999
+#: src/core/modules/Planet.cpp:636 src/gui/AstroCalcDialog.cpp:1999
 #: src/gui/AstroCalcDialog.cpp:2034
 msgid "Phase"
 msgstr "الطور"
 
-#: src/core/modules/Planet.cpp:642
+#: src/core/modules/Planet.cpp:645
 msgid "Eclipse Factor"
 msgstr "‎نسبة الكسوف‎"
 
@@ -1860,12 +1864,12 @@ msgid "Provisional designation: %1"
 msgstr "‎التسمية الاصطلاحية المؤقتة: ‎%1"
 
 #. TRANSLATORS: Tholen spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:360
+#: src/core/modules/MinorPlanet.cpp:363
 msgid "Tholen spectral type"
 msgstr "‎Tholen النوع الطيفي حسب‎"
 
 #. TRANSLATORS: SMASSII spectral taxonomic classification of asteroids
-#: src/core/modules/MinorPlanet.cpp:366
+#: src/core/modules/MinorPlanet.cpp:369
 msgid "SMASSII spectral type"
 msgstr "‎SMASSII النوع الطيفي حسب‎"
 
@@ -1881,7 +1885,7 @@ msgstr "‎دوري‎"
 
 #: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1382
 msgid "Velocity"
-msgstr ""
+msgstr "‎السرعة‎"
 
 #: src/core/modules/Comet.cpp:285
 msgid "Coma diameter (estimate)"
@@ -1957,12 +1961,12 @@ msgid "Magnitude range"
 msgstr "‎مدى التغيّر في قدر السطوع‎"
 
 #: src/core/modules/StarWrapper.cpp:252
-#: plugins/Exoplanets/src/Exoplanet.cpp:317
+#: plugins/Exoplanets/src/Exoplanet.cpp:318
 msgid "Spectral Type"
 msgstr "‎النوع الطيفي‎"
 
 #: src/core/modules/StarWrapper.cpp:258
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Period"
 msgstr "‎الفترة‎"
 
@@ -2037,7 +2041,7 @@ msgstr ""
 msgid "Date and Time"
 msgstr "التاريخ والوقت"
 
-#: src/core/StelCore.cpp:254 src/core/StelMovementMgr.cpp:187
+#: src/core/StelCore.cpp:254 src/core/StelMovementMgr.cpp:188
 msgid "Movement and Selection"
 msgstr "التنقل والاختيار"
 
@@ -2830,65 +2834,65 @@ msgstr "‎اختصار إسم المجموعة النجمية حسب الإتح
 msgid "Deep-sky objects background images"
 msgstr "الصور الخلفية لأجرام الفضاء السحيق"
 
-#: src/core/StelMovementMgr.cpp:188 src/gui/StelGui.cpp:210
-#: src/StelMainView.cpp:784 src/StelMainView.cpp:785
+#: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:210
+#: src/StelMainView.cpp:782 src/StelMainView.cpp:783
 msgid "Miscellaneous"
 msgstr "منوعات"
 
-#: src/core/StelMovementMgr.cpp:188
+#: src/core/StelMovementMgr.cpp:189
 msgid "Switch between equatorial and azimuthal mount"
 msgstr "حوِّل بين نظام حامل التلسكوب السمتي والإستوائي"
 
-#: src/core/StelMovementMgr.cpp:189
+#: src/core/StelMovementMgr.cpp:190
 msgid "Center on selected object"
 msgstr "اجعل الجرم المختار في المركز‎"
 
-#: src/core/StelMovementMgr.cpp:190
+#: src/core/StelMovementMgr.cpp:191
 msgid "Zoom in on selected object"
 msgstr "قرِّب الجرم المختار"
 
-#: src/core/StelMovementMgr.cpp:191
+#: src/core/StelMovementMgr.cpp:192
 msgid "Zoom out"
 msgstr "بعِّد الجرم المختار"
 
-#: src/core/StelMovementMgr.cpp:193
+#: src/core/StelMovementMgr.cpp:194
 msgid "Track object"
 msgstr "تعقب الجرم"
 
-#: src/core/StelMovementMgr.cpp:195
+#: src/core/StelMovementMgr.cpp:196
 msgid "Look towards East"
 msgstr "انظر باتجاه الشرق"
 
-#: src/core/StelMovementMgr.cpp:196
+#: src/core/StelMovementMgr.cpp:197
 msgid "Look towards West"
 msgstr "انظر باتجاه الغرب"
 
-#: src/core/StelMovementMgr.cpp:197
+#: src/core/StelMovementMgr.cpp:198
 msgid "Look towards North"
 msgstr "انظر باتجاه الشمال"
 
-#: src/core/StelMovementMgr.cpp:198
+#: src/core/StelMovementMgr.cpp:199
 msgid "Look towards South"
 msgstr "انظر باتجاه الجنوب"
 
-#: src/core/StelMovementMgr.cpp:199
+#: src/core/StelMovementMgr.cpp:200
 msgid "Look towards Zenith"
 msgstr "انظر إلى كبد السماء"
 
-#: src/core/StelMovementMgr.cpp:201
+#: src/core/StelMovementMgr.cpp:202
 msgid "Look towards North Celestial pole"
 msgstr "انظر باتجاه القطب السماوي الشمالي"
 
-#: src/core/StelMovementMgr.cpp:202
+#: src/core/StelMovementMgr.cpp:203
 msgid "Look towards South Celestial pole"
 msgstr "انظر باتجاه القطب السماوي الجنوبي"
 
-#: src/core/StelMovementMgr.cpp:212
+#: src/core/StelMovementMgr.cpp:217
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "حامل استوائي"
 
-#: src/core/StelMovementMgr.cpp:214
+#: src/core/StelMovementMgr.cpp:219
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "حامل سمتي"
@@ -2953,18 +2957,18 @@ msgstr "<P DIR=RTL>للمراسلة"
 
 #: src/gui/ConfigurationDialog.cpp:1009 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
-#: plugins/Oculars/src/gui/OcularDialog.cpp:427
+#: plugins/Oculars/src/gui/OcularDialog.cpp:428
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:256
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:220
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:120
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:88
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:90
 #: plugins/Novae/src/gui/NovaeDialog.cpp:115
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:119
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:128
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:152
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/FOV/src/gui/FOVWindow.cpp:82
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:84
@@ -2976,18 +2980,18 @@ msgstr "<P DIR=RTL>الإصدار<P DIR=RTL>"
 
 #: src/gui/ConfigurationDialog.cpp:1010 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:428
+#: plugins/Oculars/src/gui/OcularDialog.cpp:429
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:221
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:91
 #: plugins/Novae/src/gui/NovaeDialog.cpp:116
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:120
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:129
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:153
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/FOV/src/gui/FOVWindow.cpp:83
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:85
@@ -3478,7 +3482,7 @@ msgstr "مطور نظام %1 :OSX"
 
 #: src/gui/HelpDialog.cpp:339
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:430
+#: plugins/Oculars/src/gui/OcularDialog.cpp:431
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:223
@@ -3988,51 +3992,51 @@ msgstr "احفظ البرنامج النصي"
 msgid "Select Script Include Directory"
 msgstr "اختر مسار تضمين مجلد البرامج النصية"
 
-#: src/gui/SearchDialog.cpp:211
+#: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
 msgstr "(J2000.0) استوائي"
 
-#: src/gui/SearchDialog.cpp:212
+#: src/gui/SearchDialog.cpp:211
 msgctxt "coordinate system"
 msgid "Equatorial"
 msgstr "استوائي"
 
-#: src/gui/SearchDialog.cpp:213
+#: src/gui/SearchDialog.cpp:212
 msgctxt "coordinate system"
 msgid "Horizontal"
 msgstr "أفقي"
 
-#: src/gui/SearchDialog.cpp:214
+#: src/gui/SearchDialog.cpp:213
 msgctxt "coordinate system"
 msgid "Galactic"
 msgstr "مجرّي"
 
-#: src/gui/SearchDialog.cpp:215
+#: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Supergalactic"
 msgstr "إحداثيات المجموعة المجرية"
 
-#: src/gui/SearchDialog.cpp:216
+#: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Ecliptic"
 msgstr "كسوفي"
 
-#: src/gui/SearchDialog.cpp:217
+#: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
 msgstr "(J2000.0) كسوفي"
 
-#: src/gui/SearchDialog.cpp:245
+#: src/gui/SearchDialog.cpp:244
 msgid "Right ascension"
 msgstr "المطلع المستقيم"
 
-#: src/gui/SearchDialog.cpp:248
+#: src/gui/SearchDialog.cpp:247
 msgid "Declination"
 msgstr "الميل"
 
 #. TRANSLATORS: azimuth
-#: src/gui/SearchDialog.cpp:256 src/gui/AstroCalcDialog.cpp:292
+#: src/gui/SearchDialog.cpp:255 src/gui/AstroCalcDialog.cpp:292
 #: src/gui/AstroCalcDialog.cpp:1024
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
 msgid "Azimuth"
@@ -4040,7 +4044,7 @@ msgstr "‎السمت‎"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
-#: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:294
+#: src/gui/SearchDialog.cpp:258 src/gui/AstroCalcDialog.cpp:294
 #: src/gui/AstroCalcDialog.cpp:1026 src/gui/AstroCalcDialog.cpp:1731
 #: src/gui/AstroCalcDialog.cpp:2138 src/gui/AstroCalcDialog.cpp:2140
 #: plugins/Satellites/src/Satellite.cpp:308
@@ -4048,13 +4052,13 @@ msgstr "‎السمت‎"
 msgid "Altitude"
 msgstr "‎الارتفاع‎"
 
-#: src/gui/SearchDialog.cpp:270
+#: src/gui/SearchDialog.cpp:269
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:531
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:539
 msgid "Longitude"
 msgstr "خط الطول"
 
-#: src/gui/SearchDialog.cpp:273
+#: src/gui/SearchDialog.cpp:272
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:532
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:540
 msgid "Latitude"
@@ -4118,7 +4122,7 @@ msgstr "Secular acceleration of the Moon"
 #: src/gui/AstroCalcDialog.cpp:288 src/ui_configurationDialog.h:1349
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
+#: plugins/Exoplanets/src/Exoplanet.cpp:348
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:191
 msgid "Name"
 msgstr "الاسم"
@@ -4519,15 +4523,15 @@ msgstr "أجرام النظام الشمسي"
 
 #: src/gui/AstroCalcDialog.cpp:451
 msgid "Solar system objects: comets"
-msgstr ""
+msgstr "أجرام النظام الشمسي: المذنبات"
 
 #: src/gui/AstroCalcDialog.cpp:452
 msgid "Solar system objects: minor bodies"
-msgstr ""
+msgstr "أجرام النظام الشمسي: الأجسام الصغيرة"
 
 #: src/gui/AstroCalcDialog.cpp:453
 msgid "Solar system objects: planets"
-msgstr ""
+msgstr "أجرام النظام الشمسي: الكواكب"
 
 #: src/gui/AstroCalcDialog.cpp:503
 #, qt-format
@@ -4634,7 +4638,7 @@ msgstr "ستون يوماً شمسياً"
 
 #: src/gui/AstroCalcDialog.cpp:1461
 msgid "100 solar days"
-msgstr ""
+msgstr "100 يوم شمسي"
 
 #: src/gui/AstroCalcDialog.cpp:1462
 msgid "1 sidereal day"
@@ -4662,7 +4666,7 @@ msgstr "ستون يوماً نجمياً"
 
 #: src/gui/AstroCalcDialog.cpp:1468
 msgid "100 sidereal days"
-msgstr ""
+msgstr "100 يوم نجمي"
 
 #: src/gui/AstroCalcDialog.cpp:1469
 msgid "1 Julian day"
@@ -4690,7 +4694,7 @@ msgstr "ستون يوماً يوليانياً"
 
 #: src/gui/AstroCalcDialog.cpp:1475
 msgid "100 Julian days"
-msgstr ""
+msgstr "100 يوم يولياني"
 
 #: src/gui/AstroCalcDialog.cpp:1546
 msgid "Solar system"
@@ -4906,7 +4910,7 @@ msgstr "... احفظ قائمة الأجرام بصيغة"
 
 #: src/gui/AstroCalcDialog.cpp:3738
 msgid "spin-orbit resonance"
-msgstr ""
+msgstr "‎الرنين المداري-الدوراني‎"
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -4941,19 +4945,19 @@ msgstr "البرامج النصية‏"
 msgid "Shortcut"
 msgstr "الاختصار"
 
-#: src/StelMainView.cpp:784
+#: src/StelMainView.cpp:782
 msgid "Save screenshot"
 msgstr "احفظ لقطة الشاشة"
 
-#: src/StelMainView.cpp:785
+#: src/StelMainView.cpp:783
 msgid "Reload shaders (for development)"
 msgstr "أعد تحميل برنامج الضوء والظل (للمطورين)"
 
-#: src/StelMainView.cpp:786
+#: src/StelMainView.cpp:784
 msgid "Full-screen mode"
 msgstr "نَسَق الشاشة الكاملة"
 
-#: src/StelMainView.cpp:942
+#: src/StelMainView.cpp:940
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4962,7 +4966,7 @@ msgstr ""
 "(drivers, graphics hardware) أو استخدم هذه الخيارات  --angle-mode أو --mesa-"
 "mode فضلا"
 
-#: src/StelMainView.cpp:945
+#: src/StelMainView.cpp:943
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
@@ -4970,7 +4974,7 @@ msgstr ""
 "شاشة حديث. Insufficient OpenGL version. Please update drivers, or graphics "
 "hardware."
 
-#: src/StelMainView.cpp:987
+#: src/StelMainView.cpp:985
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -4978,7 +4982,7 @@ msgstr ""
 "التفاصيل في السجل. . DirectX/OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1038
+#: src/StelMainView.cpp:1036
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -4986,7 +4990,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL/Mesa لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1094
+#: src/StelMainView.cpp:1092
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -4994,7 +4998,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1135
+#: src/StelMainView.cpp:1133
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5002,7 +5006,7 @@ msgstr ""
 "التفاصيل في السجل. . OpenGL ES لديك مشاكل في النظام الفرعي\n"
 "تجاهل هذه الرسالة في المستقبل وحاول الاستمرار بالنسق المخفض على أي حال؟"
 
-#: src/StelMainView.cpp:1247
+#: src/StelMainView.cpp:1245
 #, qt-format
 msgid "Stellarium %1"
 msgstr "ستيللاريوم %1"
@@ -5100,534 +5104,534 @@ msgstr "تشكيلات النجوم"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:94
 msgid "Geological features"
-msgstr ""
+msgstr "التضاريس الجيولوجية"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "Geological features: albedo features"
-msgstr ""
+msgstr "التضاريس الجيولوجية: البياض"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Geological features: arcūs"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الأقواس"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "Geological features: astra"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الشعاعات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105
 msgid "Geological features: catenae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: سلاسل الفوهات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
 msgid "Geological features: cavi"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الفجوج"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Geological features: chaoses"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الأخلاط"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Geological features: chasmata"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الأخاديد"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Geological features: colles"
-msgstr ""
+msgstr "التضاريس الجيولوجية: التلال الصغيرة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Geological features: coronae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: التضاريس البيضاوية"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Geological features: craters"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الفوهات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Geological features: dorsa"
-msgstr ""
+msgstr "التضاريس الجيولوجية: النتوءات الجبلية"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Geological features: eruptive centers"
-msgstr ""
+msgstr "التضاريس الجيولوجية: مراكز ثوران البراكين"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Geological features: faculae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: البقع اللامعة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "Geological features: farra"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الدارات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "Geological features: flexūs"
-msgstr ""
+msgstr "التضاريس الجيولوجية: التضاريس الصدفية"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
 msgid "Geological features: fluctūs"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المسايل"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
 msgid "Geological features: flumina"
-msgstr ""
+msgstr "التضاريس الجيولوجية: القنوات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Geological features: freta"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المضائق"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Geological features: fossae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الخنادق"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Geological features: insulae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الجزر"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
 msgid "Geological features: labēs"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الانزلاقات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:141
 msgid "Geological features: labyrinthi"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المتاهات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:143
 msgid "Geological features: lacunae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المنخفضات غير منتظمة الشكل"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:145
 msgid "Geological features: lacūs"
-msgstr ""
+msgstr "التضاريس الجيولوجية: البحيرات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:147
 msgid "Geological features: large ringed features"
-msgstr ""
+msgstr "التضاريس الجيولوجية: التضاريس الحلقية الواسعة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:149
 msgid "Geological features: lineae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المعالم المستطيلة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:151
 msgid "Geological features: lingulae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الامتدادات الهضبية اللسانية"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:153
 msgid "Geological features: maculae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: البقع الداكنة غير المنتظمة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:155
 msgid "Geological features: maria"
-msgstr ""
+msgstr "التضاريس الجيولوجية: البحار"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Geological features: mensae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الظهار ، الهضبات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Geological features: montes"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الجبال"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
 msgid "Geological features: oceani"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المحيطات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Geological features: paludes"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المستنقعات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:165
 msgid "Geological features: paterae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الفوهات غير المنتظمة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:167
 msgid "Geological features: planitiae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: السهول المنخفضة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:169
 msgid "Geological features: plana"
-msgstr ""
+msgstr "التضاريس الجيولوجية: السهول المرتفعة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:171
 msgid "Geological features: plumes"
-msgstr ""
+msgstr "التضاريس الجيولوجية: البراكين"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:173
 msgid "Geological features: promontoria"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الرؤوس"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:175
 msgid "Geological features: regiones"
-msgstr ""
+msgstr "التضاريس الجيولوجية: البقع"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:177
 msgid "Geological features: rimae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الشقوق"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:179
 msgid "Geological features: rupēs"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الأوعار"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:181
 msgid "Geological features: scopuli"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الفصوص"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:183
 msgid "Geological features: serpentes"
-msgstr ""
+msgstr "التضاريس الجيولوجية: التضاريس الأفعوانية"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:185
 msgid "Geological features: sulci"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الأخاديد المتوازية"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:187
 msgid "Geological features: sinūs"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الخلجان"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:189
 msgid "Geological features: terrae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الأراضي الفسيحة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:191
 msgid "Geological features: tholi"
-msgstr ""
+msgstr "التضاريس الجيولوجية: التلال"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:193
 msgid "Geological features: undae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الكثبان"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Geological features: valles"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الوديان"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Geological features: vastitates"
-msgstr ""
+msgstr "التضاريس الجيولوجية: السهول الممتدة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:199
 msgid "Geological features: virgae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الخطوط الملونة"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:201
 msgid "Geological features: landing sites"
-msgstr ""
+msgstr "التضاريس الجيولوجية: مواقع هبوط المركبات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:203
 msgid "Geological features: lenticulae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: "
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:205
 msgid "Geological features: reticula"
-msgstr ""
+msgstr "التضاريس الجيولوجية: الشبكات"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:207
 msgid "Geological features: tesserae"
-msgstr ""
+msgstr "التضاريس الجيولوجية: المبلطات"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:212
 msgid "Named geological features of Epimetheus"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في أيبيميثيوس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:214
 msgid "Named geological features of Vesta"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في  فيستا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:216
 msgid "Named geological features of Mathilde"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في  ماتيلدي"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:218
 msgid "Named geological features of Venus"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في الزهرة"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:220
 msgid "Named geological features of Mercury"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في عطارد"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:222
 msgid "Named geological features of Iapetus"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في لابيتوس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:224
 msgid "Named geological features of Ganymede"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في جانيميدي"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:226
 msgid "Named geological features of Ceres"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في سيريس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:228
 msgid "Named geological features of Ida"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في إيدا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:230
 msgid "Named geological features of Triton"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في ترايتون"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:232
 msgid "Named geological features of Oberon"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في أوبيرون"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:234
 msgid "Named geological features of Itokawa"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في إيتوكاوا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:236
 msgid "Named geological features of Thebe"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في ثيبي"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:238
 msgid "Named geological features of Gaspra"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في جاسبرا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:240
 msgid "Named geological features of Rhea"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في ريي"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:242
 msgid "Named geological features of Enceladus"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في إنسيلادوس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:244
 msgid "Named geological features of the Moon"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في القمر"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:246
 msgid "Named geological features of Dione"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في ديون"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:248
 msgid "Named geological features of Steins"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في ستين"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:250
 msgid "Named geological features of Phoebe"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في فيبي"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:252
 msgid "Named geological features of Puck"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في بك"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:254
 msgid "Named geological features of Europa"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في يوروبا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:256
 msgid "Named geological features of Lutetia"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في لوتيتيا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:258
 msgid "Named geological features of Tethys"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في تيثيس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:260
 msgid "Named geological features of Eros"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في إيروس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:262
 msgid "Named geological features of Callisto"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في كاليستو"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:264
 msgid "Named geological features of Phobos"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في فوبوس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:266
 msgid "Named geological features of Proteus"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في بروتيوس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:268
 msgid "Named geological features of Hyperion"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في هايبيريون"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:270
 msgid "Named geological features of Titania"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في تيتانيا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:272
 msgid "Named geological features of Deimos"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في دييموس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:274
 msgid "Named geological features of Io"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في  آيو"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:276
 msgid "Named geological features of Ariel"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في أرييل"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:278
 msgid "Named geological features of Dactyl"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في داكتيل"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:280
 msgid "Named geological features of Titan"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في تايتان"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:282
 msgid "Named geological features of Amalthea"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في أمالتيا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:284
 msgid "Named geological features of Umbriel"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في أمبريل"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:286
 msgid "Named geological features of Janus"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في جانوس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:288
 msgid "Named geological features of Mars"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في المريخ"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:290
 msgid "Named geological features of Miranda"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في ميراندا"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:292
 msgid "Named geological features of Mimas"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في ميماس"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:294
 msgid "Named geological features of Pluto"
-msgstr ""
+msgstr "أسماء التضاريس الجيولوجية في بلوتو"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:299
@@ -5860,8 +5864,8 @@ msgid "Zero Horizon"
 msgstr "الأفق الصفري"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:334
-#: plugins/Exoplanets/src/Exoplanet.cpp:338
+#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:335
+#: plugins/Exoplanets/src/Exoplanet.cpp:339
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "الشمس"
@@ -6115,7 +6119,7 @@ msgstr ""
 
 #: src/translations.h:609
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
-msgstr ""
+msgstr "كسوف الشمس بواسطة فوبوس كما يرى من جبل أولمبس في 2 يناير 20121م"
 
 #: src/translations.h:610
 msgid ""
@@ -6143,7 +6147,7 @@ msgstr ""
 #: src/translations.h:612
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
-msgstr ""
+msgstr "حافظ شاشة لحوالي 300 حدث في النظام الشمسي"
 
 #: src/translations.h:613
 msgid "A tour of the western constellations."
@@ -6196,6 +6200,8 @@ msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
+"الاستطالات العظمى والتقابلات لكوكب الأرض والكواكب الأخرى المرئية من سيريس في"
+" الفترة 2000 - 2200 م"
 
 #: src/translations.h:621
 msgid "A tour of Messier Objects"
@@ -6274,10 +6280,10 @@ msgstr "&نسخ"
 msgid "&Paste"
 msgstr "&لصق"
 
-#: src/translations.h:637 plugins/Oculars/src/ui_ocularDialog.h:1170
-#: plugins/Oculars/src/ui_ocularDialog.h:1179
-#: plugins/Oculars/src/ui_ocularDialog.h:1185
-#: plugins/Oculars/src/ui_ocularDialog.h:1203
+#: src/translations.h:637 plugins/Oculars/src/ui_ocularDialog.h:1187
+#: plugins/Oculars/src/ui_ocularDialog.h:1196
+#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Delete"
 msgstr "احذف"
 
@@ -6302,7 +6308,7 @@ msgid "&Choose"
 msgstr "&اختر"
 
 #: src/translations.h:643 src/ui_configurationDialog.h:1534
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:619
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "إلغاء"
 
@@ -7699,7 +7705,7 @@ msgid "Modified Julian Day"
 msgstr "اليوم اليولياني المعدل"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:430
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:430
 msgid "Help"
 msgstr "مساعدة"
 
@@ -7935,7 +7941,7 @@ msgid ""
 msgstr "ملاحظة: هذه الأداة لاتطبق تصحيح الانكسار على الإحداثيات"
 
 #: src/ui_searchDialogGui.h:700
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:575
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:589
 msgid "Coordinate system:"
 msgstr "نظام الإحداثيات"
 
@@ -7987,7 +7993,7 @@ msgstr "ثبّت الموقع عند استخدام الإحداثيات"
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2882
 #: src/ui_viewDialog.h:2904 src/ui_viewDialog.h:2948
 #: src/ui_configurationDialog.h:1535 src/ui_configurationDialog.h:1546
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:429
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "الخيارات"
 
@@ -8105,8 +8111,8 @@ msgid "Relative scale:"
 msgstr "المقياس النسبي"
 
 #: src/ui_viewDialog.h:2518
-msgid "Use an additional names of stars"
-msgstr ""
+msgid "Use additional names of stars"
+msgstr "أظهر الأسماء الإضافية للنجوم"
 
 #: src/ui_viewDialog.h:2519
 msgid "Solar System objects"
@@ -8118,7 +8124,7 @@ msgstr "تضخيم حجم الأجرام الصغيرة"
 
 #: src/ui_viewDialog.h:2522
 msgid "Hide nomenclature on the celestial body of observer"
-msgstr ""
+msgstr "أخفِ أسماء التضاريس للجسم السماوي للراصد"
 
 #: src/ui_viewDialog.h:2524
 msgid ""
@@ -8200,7 +8206,7 @@ msgstr "أظهر مدار الكوكب المختار"
 
 #: src/ui_viewDialog.h:2559
 msgid "Show planet orbits only"
-msgstr ""
+msgstr "أظهر مدارات الكواكب فقط"
 
 #: src/ui_viewDialog.h:2560
 msgid "Show planet markers"
@@ -8208,15 +8214,15 @@ msgstr "أظهر علامات الكواكب"
 
 #: src/ui_viewDialog.h:2562
 msgid "Show hints and labels for planetary features"
-msgstr ""
+msgstr "أظهر علامات وأسماء التضاريس على أجرام النظام الشمسي"
 
 #: src/ui_viewDialog.h:2564
 msgid "Show planetary nomenclature"
-msgstr ""
+msgstr "أظهر أسماء التضاريس على أجرام النظام الشمسي"
 
 #: src/ui_viewDialog.h:2566
 msgid "Color of nomenclature labels"
-msgstr ""
+msgstr "لون أسماء التضاريس"
 
 #: src/ui_viewDialog.h:2569
 msgid "Display objects from catalogs"
@@ -8307,8 +8313,8 @@ msgstr ". اعرض حسب النوع ."
 msgid "Hydrogen regions"
 msgstr "حقول الهيدروجين ."
 
-#. TRANSLATORS: Detection method
-#: src/ui_viewDialog.h:2644 plugins/Exoplanets/src/Exoplanets.cpp:942
+#. TRANSLATORS: Exoplanet detection method
+#: src/ui_viewDialog.h:2644 plugins/Exoplanets/src/Exoplanets.cpp:961
 msgid "Other"
 msgstr "أخرى"
 
@@ -8366,19 +8372,19 @@ msgstr "أظهر الرسم الخطي للأجرام السحيقة الكبي�
 
 #: src/ui_viewDialog.h:2666
 msgid "Limit angular size (arcmin):"
-msgstr ""
+msgstr "حدود الحجم الزاوي بالدقائق القوسية"
 
 #: src/ui_viewDialog.h:2668
 msgid "Minimal angular size in arcminutes for visible DSO"
-msgstr ""
+msgstr "الحد الأدنى للقياس الزاوي لأجسام الفضاء السحيق الظاهرة"
 
 #: src/ui_viewDialog.h:2671
 msgid "Maximum angular size in arcminutes for visible DSO"
-msgstr ""
+msgstr "الحد الأعلى للقياس الزاوي لأجسام الفضاء السحيق الظاهرة"
 
 #: src/ui_viewDialog.h:2673
-msgid "Use an additional names of DSO"
-msgstr ""
+msgid "Use additional names of DSO"
+msgstr "أظهر الأسماء الإضافية لأجسام الفضاء السحيق"
 
 #: src/ui_viewDialog.h:2674
 msgid "Celestial Sphere"
@@ -8922,7 +8928,7 @@ msgstr ""
 "ستيللاريوم المرة القادمة"
 
 #: src/ui_configurationDialog.h:1310
-#: plugins/NavStars/src/ui_navStarsWindow.h:211
+#: plugins/NavStars/src/ui_navStarsWindow.h:220
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
@@ -8934,7 +8940,7 @@ msgid "Restore the default settings that came with Stellarium"
 msgstr "استرجع الإعدادات الافتراضية الأصلية كما كانت عند تركيب البرنامج"
 
 #: src/ui_configurationDialog.h:1314
-#: plugins/NavStars/src/ui_navStarsWindow.h:212
+#: plugins/NavStars/src/ui_navStarsWindow.h:219
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
@@ -8974,7 +8980,7 @@ msgstr "أظهر جميع المعلومات"
 msgid "Display no information"
 msgstr "لاتظهر أي معلومات"
 
-#: src/ui_configurationDialog.h:1330 plugins/Oculars/src/Oculars.cpp:2363
+#: src/ui_configurationDialog.h:1330 plugins/Oculars/src/Oculars.cpp:2340
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "لاتظهر أي معلومات"
@@ -9479,7 +9485,7 @@ msgid "Switch to the new landscape after installation"
 msgstr "تحوَّل إلى المنظر الجديد بعد التركيب"
 
 #: src/ui_addRemoveLandscapesDialog.h:274
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:419
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:419
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:274
 msgid "Remove"
 msgstr "إزالة"
@@ -9618,7 +9624,8 @@ msgstr "موضع المؤشر"
 msgid "Include dir:"
 msgstr "ضمِّن المسار"
 
-#: src/ui_scriptConsole.h:380 plugins/TelescopeControl/src/ui_slewDialog.h:329
+#: src/ui_scriptConsole.h:380
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:329
 msgid "..."
 msgstr "..."
 
@@ -9670,11 +9677,11 @@ msgstr "الأجرام التي تشاهد هذه الليلة"
 #: src/ui_astroCalcDialog.h:922
 msgctxt "Planetary Calculator"
 msgid "PC"
-msgstr ""
+msgstr "حاسبة الكواكب"
 
 #: src/ui_astroCalcDialog.h:924
 msgid "Planetary Calculator"
-msgstr ""
+msgstr "حاسبة الكواكب"
 
 #: src/ui_astroCalcDialog.h:932
 msgid "Save positions"
@@ -9821,35 +9828,35 @@ msgstr "أظهر الأجرام التي ترى"
 
 #: src/ui_astroCalcDialog.h:989
 msgid "Angular distance:"
-msgstr ""
+msgstr "<p dir=ltr>المسافة الزاوية:"
 
 #: src/ui_astroCalcDialog.h:990
 msgid "Linear distance:"
-msgstr ""
+msgstr "<p dir=ltr>المسافة الطولية:"
 
 #: src/ui_astroCalcDialog.h:991
 msgid "Second celestial body:"
-msgstr ""
+msgstr "الجسم السماوي الأول:"
 
 #: src/ui_astroCalcDialog.h:992
 msgid "First celestial body:"
-msgstr ""
+msgstr "الجسم السماوي الثاني:"
 
 #: src/ui_astroCalcDialog.h:993
 msgid "Orbital resonance:"
-msgstr ""
+msgstr "<p dir=ltr>الرنين المداري:"
 
 #: src/ui_astroCalcDialog.h:994
 msgid "Orbital velocity of first celestial body:"
-msgstr ""
+msgstr "<p dir=ltr>السرعة المدارية للجسم السماوي الأول:"
 
 #: src/ui_astroCalcDialog.h:995
 msgid "Orbital velocity of second celestial body:"
-msgstr ""
+msgstr "<p dir=ltr>السرعة المدارية للجسم السماوي الثاني:"
 
 #: src/ui_astroCalcDialog.h:996
 msgid "Compute"
-msgstr ""
+msgstr "احسب"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -10328,18 +10335,18 @@ msgstr ""
 "لوكنا في المرصد اكبير في هاواي."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:102
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:493
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:274
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 #: plugins/Novae/src/gui/NovaeDialog.cpp:133
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:127
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:160
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #: plugins/FOV/src/gui/FOVWindow.cpp:89
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:313
@@ -10349,18 +10356,18 @@ msgid "Links"
 msgstr "<P DIR=RTL>روابط"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
-#: plugins/Oculars/src/gui/OcularDialog.cpp:493
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:494
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:99
 #: plugins/Novae/src/gui/NovaeDialog.cpp:134
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:131
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:161
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 #: plugins/FOV/src/gui/FOVWindow.cpp:90
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:134
@@ -10376,18 +10383,18 @@ msgstr ""
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
-#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+#: plugins/Oculars/src/gui/OcularDialog.cpp:497
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:497
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:233
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:100
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 #: plugins/FOV/src/gui/FOVWindow.cpp:93
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
@@ -10400,18 +10407,18 @@ msgstr "<P DIR=RTL>إذا كان لديك سؤال يمكنك %1الحصول ع�
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:499
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:235
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:104
 #: plugins/Novae/src/gui/NovaeDialog.cpp:139
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:177
 #: plugins/FOV/src/gui/FOVWindow.cpp:95
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:319
@@ -10424,18 +10431,18 @@ msgstr "<P DIR=RTL> تستطيع التبليغ عن أخطاء البرنامج
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:500
+#: plugins/Oculars/src/gui/OcularDialog.cpp:501
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:501
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:282
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:104
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
 #: plugins/Novae/src/gui/NovaeDialog.cpp:141
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
 #: plugins/FOV/src/gui/FOVWindow.cpp:97
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:99
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
@@ -10514,7 +10521,7 @@ msgstr "dms استخدم نسق الدرجات والدقائق والثواني
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:280
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:250
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:536
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:556
 #: plugins/Observability/src/ui_ObservabilityDialog.h:357
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:575
@@ -10522,18 +10529,18 @@ msgid "Restore default settings"
 msgstr "استرجع الإعدادات الأصلية"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1211
+#: plugins/Oculars/src/ui_ocularDialog.h:1228
 #: plugins/Satellites/src/ui_satellitesDialog.h:833
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:431
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
-#: plugins/NavStars/src/ui_navStarsWindow.h:214
+#: plugins/NavStars/src/ui_navStarsWindow.h:222
 #: plugins/Novae/src/ui_novaeDialog.h:244
 #: plugins/Quasars/src/ui_quasarsDialog.h:276
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:283
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:261
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:579
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
 #: plugins/FOV/src/ui_fovWindow.h:373
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
@@ -10557,9 +10564,9 @@ msgstr "<p dir=rtl>يعرض درجات البوصلة بموازاة الأفق"
 msgid "Compass marks"
 msgstr "درجات البوصلة"
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1525
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:189
-#: plugins/Oculars/src/ui_ocularDialog.h:1137
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1502
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
+#: plugins/Oculars/src/ui_ocularDialog.h:1153
 msgid "Oculars"
 msgstr "العدسة العينية"
 
@@ -10573,466 +10580,466 @@ msgstr ""
 " (المحاكاة هي للتكبير وحقل الرؤية فقط.) ويمكن أيضاً محاكاة إطار مستشعر "
 "الكاميرا ومنظر التوجيه من خلال أداة Telrad."
 
-#: plugins/Oculars/src/Oculars.cpp:1003
+#: plugins/Oculars/src/Oculars.cpp:1005
 msgid "Please select an object before switching to ocular view."
 msgstr "الرجاء اختيار جرم قبل التحول إلى المنظر عبر العدسة العينية."
 
-#: plugins/Oculars/src/Oculars.cpp:1099
+#: plugins/Oculars/src/Oculars.cpp:1101
 msgid "&Previous ocular"
 msgstr "&العدسة السابقة"
 
-#: plugins/Oculars/src/Oculars.cpp:1100
+#: plugins/Oculars/src/Oculars.cpp:1102
 msgid "&Next ocular"
 msgstr "&العدسة التالية"
 
-#: plugins/Oculars/src/Oculars.cpp:1101
+#: plugins/Oculars/src/Oculars.cpp:1103
 msgid "Select &ocular"
 msgstr "اختر &العدسة"
 
-#: plugins/Oculars/src/Oculars.cpp:1144
+#: plugins/Oculars/src/Oculars.cpp:1146
 msgid "Toggle &crosshair"
 msgstr "أظهار الشعرتين"
 
-#: plugins/Oculars/src/Oculars.cpp:1154
+#: plugins/Oculars/src/Oculars.cpp:1156
 msgid "Configure &Oculars"
 msgstr "إعدادات العدسات العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:1163
+#: plugins/Oculars/src/Oculars.cpp:1165
 msgid "Toggle &CCD"
 msgstr "إظهار إطار مستشعر الكاميرا"
 
-#: plugins/Oculars/src/Oculars.cpp:1171
+#: plugins/Oculars/src/Oculars.cpp:1173
 msgid "Toggle &Telrad"
 msgstr "إظهار دوائر التلراد"
 
-#: plugins/Oculars/src/Oculars.cpp:1180
+#: plugins/Oculars/src/Oculars.cpp:1182
 msgid "&Previous CCD"
 msgstr "&المستشعر السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:1181
+#: plugins/Oculars/src/Oculars.cpp:1183
 msgid "&Next CCD"
 msgstr "&المستشعر التالي"
 
-#: plugins/Oculars/src/Oculars.cpp:1182
+#: plugins/Oculars/src/Oculars.cpp:1184
 msgid "&Select CCD"
 msgstr "&اختر المستشعر"
 
-#: plugins/Oculars/src/Oculars.cpp:1204
+#: plugins/Oculars/src/Oculars.cpp:1206
 msgid "&Rotate CCD"
 msgstr "تدوير المستشعر"
 
-#: plugins/Oculars/src/Oculars.cpp:1226
+#: plugins/Oculars/src/Oculars.cpp:1228
 msgid "&Reset rotation"
 msgstr "&إعادة التدوير للوضع الأصلي"
 
-#: plugins/Oculars/src/Oculars.cpp:1526
-#: plugins/Oculars/src/ui_ocularDialog.h:1150
+#: plugins/Oculars/src/Oculars.cpp:1503
+#: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Ocular view"
 msgstr "منظر العدسة العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:1541
+#: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Oculars popup menu"
 msgstr "القائمة المنبثقة للعدسات"
 
-#: plugins/Oculars/src/Oculars.cpp:1542
+#: plugins/Oculars/src/Oculars.cpp:1519
 msgid "Show crosshairs"
 msgstr "أظهر الشعرتين المتقاطعتين"
 
-#: plugins/Oculars/src/Oculars.cpp:1543
+#: plugins/Oculars/src/Oculars.cpp:1520
 msgid "Image sensor frame"
 msgstr "إطار مستشعر الصورة"
 
-#: plugins/Oculars/src/Oculars.cpp:1544
+#: plugins/Oculars/src/Oculars.cpp:1521
 msgid "Telrad sight"
 msgstr "دوائر أداة تلراد للتوجيه"
 
-#: plugins/Oculars/src/Oculars.cpp:1545
+#: plugins/Oculars/src/Oculars.cpp:1522
 msgid "Oculars plugin configuration"
 msgstr "إعدادات ميزة العدسات العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:1547
+#: plugins/Oculars/src/Oculars.cpp:1524
 msgid "Select next telescope"
 msgstr "اختر التلسكوب التالي"
 
-#: plugins/Oculars/src/Oculars.cpp:1549
+#: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Select previous telescope"
 msgstr "اختر التلسكوب السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:1551
+#: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Select next eyepiece"
 msgstr "اختر العدسة العينية التالية"
 
-#: plugins/Oculars/src/Oculars.cpp:1553
+#: plugins/Oculars/src/Oculars.cpp:1530
 msgid "Select previous eyepiece"
 msgstr "اختر العدسة العينية السابقة"
 
-#: plugins/Oculars/src/Oculars.cpp:1738
+#: plugins/Oculars/src/Oculars.cpp:1715
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr "‎‎‎الميل / المطلع المستقيم للمركز في تقاطع الشعرتين ‎‎ (J2000.0) ‎‎"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1746
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:695
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:804
+#: plugins/Oculars/src/Oculars.cpp:1723
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "\"/px"
 msgstr "\"/بكسل"
 
-#: plugins/Oculars/src/Oculars.cpp:1935
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:496
+#: plugins/Oculars/src/Oculars.cpp:1912
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:498
 msgid "Ocular"
 msgstr "العدسة العينية"
 
-#: plugins/Oculars/src/Oculars.cpp:1937
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:498
+#: plugins/Oculars/src/Oculars.cpp:1914
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 msgid "Binocular"
 msgstr "المنظار الثنائي"
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1957
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:541
+#: plugins/Oculars/src/Oculars.cpp:1934
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr "طول العدسة البؤري: %1 مم"
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1964
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:550
+#: plugins/Oculars/src/Oculars.cpp:1941
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr "حقل الرؤية الظاهري للعدسة: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:1975
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:580
+#: plugins/Oculars/src/Oculars.cpp:1952
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
 #, qt-format
 msgid "Lens #%1"
 msgstr "العدسة #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:1979
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:584
+#: plugins/Oculars/src/Oculars.cpp:1956
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr "العدسة #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:1984
+#: plugins/Oculars/src/Oculars.cpp:1961
 msgid "Lens: none"
 msgstr "العدسة: لايوجد"
 
-#: plugins/Oculars/src/Oculars.cpp:1999 plugins/Oculars/src/Oculars.cpp:2059
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:755
+#: plugins/Oculars/src/Oculars.cpp:1976 plugins/Oculars/src/Oculars.cpp:2036
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:757
 #, qt-format
 msgid "Telescope #%1"
 msgstr "التلسكوب #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2008
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:849
+#: plugins/Oculars/src/Oculars.cpp:1985
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Magnification: %1"
 msgstr "التكبير:‎%1‎"
 
-#: plugins/Oculars/src/Oculars.cpp:2015
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:860
+#: plugins/Oculars/src/Oculars.cpp:1992
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr "المسافة لبؤبؤ العين: %1 مم"
 
-#: plugins/Oculars/src/Oculars.cpp:2022
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:868
+#: plugins/Oculars/src/Oculars.cpp:1999
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:870
 #, qt-format
 msgid "FOV: %1"
 msgstr "حقل الرؤية: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2043
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:688
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:799
+#: plugins/Oculars/src/Oculars.cpp:2020
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 #, qt-format
 msgid "Dimensions: %1"
 msgstr "الأبعاد: %1"
 
-#: plugins/Oculars/src/Oculars.cpp:2047
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:648
+#: plugins/Oculars/src/Oculars.cpp:2024
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:650
 #, qt-format
 msgid "Sensor #%1"
 msgstr "المستشعر #%1"
 
-#: plugins/Oculars/src/Oculars.cpp:2051
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:652
+#: plugins/Oculars/src/Oculars.cpp:2028
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:654
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr "المستشعر #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2064
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:759
+#: plugins/Oculars/src/Oculars.cpp:2041
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:761
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr "التلسكوب #%1: %2"
 
-#: plugins/Oculars/src/Oculars.cpp:2359
+#: plugins/Oculars/src/Oculars.cpp:2336
 msgid "&Lens"
 msgstr "&العدسة"
 
-#: plugins/Oculars/src/Oculars.cpp:2360
+#: plugins/Oculars/src/Oculars.cpp:2337
 msgid "&Previous lens"
 msgstr "&العدسة السابقة"
 
-#: plugins/Oculars/src/Oculars.cpp:2361
+#: plugins/Oculars/src/Oculars.cpp:2338
 msgid "&Next lens"
 msgstr "&العدسة التالية"
 
-#: plugins/Oculars/src/Oculars.cpp:2391
+#: plugins/Oculars/src/Oculars.cpp:2368
 msgid "&Telescope"
 msgstr "&التلسكوب"
 
-#: plugins/Oculars/src/Oculars.cpp:2392
+#: plugins/Oculars/src/Oculars.cpp:2369
 msgid "&Previous telescope"
 msgstr "&التلسكوب السابق"
 
-#: plugins/Oculars/src/Oculars.cpp:2393
+#: plugins/Oculars/src/Oculars.cpp:2370
 msgid "&Next telescope"
 msgstr "&التلسكوب التالي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:190
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:212
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Previous ocular"
 msgstr "العدسة السابقة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:218
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Next ocular"
 msgstr "العدسة التالية"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:224
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:226
 msgid "Previous lens"
 msgstr "العدسة السابقة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:230
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:232
 msgid "Next lens"
 msgstr "العدسة التالية"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:236
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:238
 msgid "Previous CCD frame"
 msgstr "إطار سي سي دي السابق"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:242
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:244
 msgid "Next CCD frame"
 msgstr "إطار سي سي دي التالي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:248
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:250
 msgid "Previous telescope"
 msgstr "التلسكوب السابق"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:254
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:256
 msgid "Next telescope"
 msgstr "التلسكوب التالي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:318
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:320
 msgid "Reset the sensor frame rotation"
 msgstr "إعادة زاوية دوران إطار المستشعر للوضع الأصلي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:200
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:279
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:281
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
 msgstr "دوِّر إطار المستشعر 15 درجة عكس اتجاه عقارب الساعة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:292
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:294
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
 msgstr "دوِّر إطار المستشعر 5 درجات عكس اتجاه عقارب الساعة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:305
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:307
 msgid "Rotate the sensor frame 1 degree counterclockwise"
 msgstr "دوِّر إطار المستشعر درجة واحدة عكس اتجاه عقارب الساعة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:357
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:359
 msgid "Rotate the sensor frame 15 degrees clockwise"
 msgstr "دوِّر إطار المستشعر 15 درجة باتجاه عقارب الساعة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:344
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:346
 msgid "Rotate the sensor frame 5 degrees clockwise"
 msgstr "دوِّر إطار المستشعر خمس درجات باتجاه عقارب الساعة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:331
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:333
 msgid "Rotate the sensor frame 1 degree clockwise"
 msgstr "دوِّر إطار المستشعر درجة واحدة باتجاه عقارب الساعة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:545
 msgid "Effective focal length of the ocular"
 msgstr "الطول البؤري الفعلي للعدسة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:553
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:555
 msgid "Apparent field of view of the ocular"
 msgstr "حقل الرؤية الظاهري للعدسة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
 #, qt-format
 msgid "Multiplicity: %1"
 msgstr "التكبير: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:591
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Lens: None"
 msgstr "العدسة: لايوجد"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:592
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:594
 msgid "Multiplicity: N/A"
 msgstr "التكبير: لاينطبق"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:596
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 msgid "Focal length of eyepiece"
 msgstr "البعد البؤري للعدسة العينية"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:692
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Dimensions field of view"
 msgstr "أبعاد حقل الرؤية"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:696
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:805
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:807
 msgid "X scale"
 msgstr "المقياس السيني"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
 msgid "Horizontal scale"
 msgstr "المقياس الأفقي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:701
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:807
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
 msgid "Y scale"
 msgstr "المقياس الصادي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:702
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
 msgid "Vertical scale"
 msgstr "المقياس الرأسي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:708
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #, qt-format
 msgid "Rotation: %1"
 msgstr "التدوير: %1"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:830
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "Magnification provided by these binoculars"
 msgstr "التكبير المتاح بواسطة المنظار الثنائي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:831
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 msgid "Actual field of view provided by these binoculars"
 msgstr "حقل الرؤية الفعلي المتاح بواسطة هذا المنظار الثنائي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Exit pupil provided by these binoculars"
 msgstr "مسافة بؤبؤ العين التي يوفرها هذا المنظار الثنائي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:840
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 msgid "Magnification provided by this ocular/lens/telescope combination"
 msgstr "التكبير الذي تعطيه هذه العدسة مع العدسة العينية وهذا التلسكوب"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:841
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
 msgstr ""
 "حقل الرؤية الحقيقي الذي تعطيه هذه العدسة مع العدسة العينية وهذا التلسكوب"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
 msgstr ""
 "مسافة بؤبؤ العين التي تتوفر عند استخدام هذا المزيج من العدسة العينية "
 "والتلسكوب"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:895
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:897
 msgid "Rayleigh criterion"
 msgstr "معيار رالي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:897
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:899
 msgid "The Rayleigh resolution criterion"
 msgstr "معيار رالي للدقة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:902
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:904
 msgid "Dawes' limit"
 msgstr "حد داوي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:904
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:906
 msgid "Dawes' resolution criterion"
 msgstr "معيار داوي للدقة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:909
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:911
 msgid "Abbe's limit"
 msgstr "حد آبي"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:911
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:913
 msgid "Abbe’s diffraction resolution limit"
 msgstr "حد آبي للدقة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:916
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:918
 msgid "Sparrow's limit"
 msgstr "حد سبارو"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:918
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:920
 msgid "Sparrow's resolution limit"
 msgstr "حد سبارو للدقة"
 
-#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:944
-msgid "Visual resolution"
-msgstr ""
-
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
+msgid "Visual resolution"
+msgstr "الدقة المرئية"
+
+#: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:948
 msgid "Visual resolution is based on eye properties and magnification"
-msgstr ""
+msgstr "الدقة المرئية مبنية على خصائص العين والتكبير"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:408
+#: plugins/Oculars/src/gui/OcularDialog.cpp:409
 msgid "tFOV:"
 msgstr "حقل الرؤية الحقيقي"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:410
+#: plugins/Oculars/src/gui/OcularDialog.cpp:411
 msgid "Magnification factor:"
 msgstr "معامل التكبير"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:411
-#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/gui/OcularDialog.cpp:412
+#: plugins/Oculars/src/ui_ocularDialog.h:1223
 msgid "Diameter:"
 msgstr "القطر"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:415
-#: plugins/Oculars/src/ui_ocularDialog.h:1172
+#: plugins/Oculars/src/gui/OcularDialog.cpp:416
+#: plugins/Oculars/src/ui_ocularDialog.h:1189
 msgid "aFOV:"
 msgstr "حقل الرؤية الظاهري ."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:416
-#: plugins/Oculars/src/ui_ocularDialog.h:1173
-#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1222
 msgid "Focal length:"
 msgstr "الطول البؤري ."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
-#: plugins/Oculars/src/ui_ocularDialog.h:1174
+#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/ui_ocularDialog.h:1191
 msgid "Field stop:"
 msgstr "النسبة البؤرية"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:426
+#: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Oculars Plug-in"
 msgstr "<P DIR=RTL>إضافة العدسة العينية"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:431
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Barlow lens feature"
 msgstr "ميزة عدسة بارلو"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:438
+#: plugins/Oculars/src/gui/OcularDialog.cpp:439
 msgid "Overview"
 msgstr "<P DIR=RTL>تعريف"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:440
+#: plugins/Oculars/src/gui/OcularDialog.cpp:441
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -11045,17 +11052,17 @@ msgstr ""
 " الرقمية. عند أول استخدام، سيضيف لك التطبيق نماذج من العدسات العينية "
 "والمستشعرات ليسهل لك البداية."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:441
+#: plugins/Oculars/src/gui/OcularDialog.cpp:442
 msgid "You can choose to scale the image you see on the screen."
 msgstr "<P DIR=RTL>تستطيع أن تتحكم بحجم المشهد على الشاشة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:442
+#: plugins/Oculars/src/gui/OcularDialog.cpp:443
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
 msgstr "سوف يعطي ذلك مقارنة لما تراه عند استخدام عدسات مختلفة مع التلسكوبات."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:443
+#: plugins/Oculars/src/gui/OcularDialog.cpp:444
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -11063,19 +11070,19 @@ msgstr ""
 "نفس العدسة العينية مع تلسكوبين لهما طول بؤري مختلف سينتج عنها مسافة مختلفة "
 "للبؤبؤ مما يجعل المشهد مختلفا نوعا ما."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:444
+#: plugins/Oculars/src/gui/OcularDialog.cpp:445
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr "عند استخدام ذلك سوف تضيع مساحة معتبرة من الشاشة بدون فائدة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:446
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
 msgstr "لذلك لا أنصح بتفعيل هذا الخيار إلا إذا كان له فائدة معينة لك."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:446
+#: plugins/Oculars/src/gui/OcularDialog.cpp:447
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the"
@@ -11085,7 +11092,7 @@ msgstr ""
 "أردت أن يكون الاتجاه إلى الشمال، ولم أستطع ذلك. حالياً الاتجاه هو لأعلى "
 "الشاشة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:447
+#: plugins/Oculars/src/gui/OcularDialog.cpp:448
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -11099,46 +11106,46 @@ msgstr ""
 "2.0%1 و 4.0%1 تساعدك في توقع مايمكن رؤيته بالعين المجردة من خلال  كاشف "
 "التلراد أو مايشابهه من الأدوات."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:448
+#: plugins/Oculars/src/gui/OcularDialog.cpp:449
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 "<P DIR=RTL>إذا وجدت مشاكل في هذا التطبيق، تفضل بإخباري. أرجو لك المتعة."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:451
+#: plugins/Oculars/src/gui/OcularDialog.cpp:452
 msgid "Hot Keys"
 msgstr "<P DIR=RTL>مفاتيح الاختصار"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:452
+#: plugins/Oculars/src/gui/OcularDialog.cpp:453
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
 "F7 مفاتيح الاختصار لهذه الإضافة يمكن تعديلها بواسطة محرر مفاتيح الاختصار"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:466
-#: plugins/Oculars/src/gui/OcularDialog.cpp:471
+#: plugins/Oculars/src/gui/OcularDialog.cpp:467
+#: plugins/Oculars/src/gui/OcularDialog.cpp:472
 msgid "[no key defined]"
 msgstr "[لم يعرّف أي مفتاح]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:475
+#: plugins/Oculars/src/gui/OcularDialog.cpp:476
 msgid "Switches on/off the ocular overlay."
 msgstr "إظهار وإخفاء المشهد الدائري من خلال العدسة العينية"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:479
+#: plugins/Oculars/src/gui/OcularDialog.cpp:480
 msgid "Opens the pop-up navigation menu."
 msgstr "فتح قائمة التنقّل المنبثقة"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:483
+#: plugins/Oculars/src/gui/OcularDialog.cpp:484
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr "أدر الخطوط الشعرية في العدسة العينية باتجاه عقارب الساعة"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:487
+#: plugins/Oculars/src/gui/OcularDialog.cpp:488
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr "أدر الخطوط الشعرية في العدسة العينية بعكس اتجاه عقارب الساعة"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:503
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:140
 #, qt-format
 msgid ""
@@ -11148,11 +11155,19 @@ msgstr ""
 "إذا أردت الاطلاع على معلومات كاملة عن هذه الإضافة وتاريخها، تستطيع %1الحصول "
 "على المعلومات هنا%2."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1139
+#: plugins/Oculars/src/ui_ocularDialog.h:1155
 msgid "Interface"
 msgstr "واجهة الاستخدام"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1141
+#: plugins/Oculars/src/ui_ocularDialog.h:1156
+msgid "On-screen control panel"
+msgstr "لوحة تحكم ظاهرة على الشاشة"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1157
+msgid "Arrow button scale (requires restart)"
+msgstr "حجم زر السهم (يتطلب إعادة التشغيل)"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1159
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
@@ -11160,19 +11175,11 @@ msgstr ""
 "علّم على هذا الخيار إذا أردت أن يكون الاتجاه كما هو عند بدء برنامج "
 "ستيللاريوم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1143
+#: plugins/Oculars/src/ui_ocularDialog.h:1161
 msgid "Restore direction to initial values"
 msgstr "استرجع قيم الاتجاه الإبتدائية"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1144
-msgid "On-screen control panel"
-msgstr "لوحة تحكم ظاهرة على الشاشة"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1145
-msgid "Show resolution criteria"
-msgstr "أظهر معيار الدقة"
-
-#: plugins/Oculars/src/ui_ocularDialog.h:1147
+#: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
@@ -11180,47 +11187,51 @@ msgstr ""
 "علّم على هذا الاختيار إذا كنت ترغب أن تكون قيمة حقل الرؤية مماثلة لحقل "
 "الرؤية عند بدء برنامج ستيللاريوم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1149
+#: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Restore FOV to initial values"
 msgstr "استرجع قيمة حقل الرؤية الأصلية"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1151
+#: plugins/Oculars/src/ui_ocularDialog.h:1166
+msgid "Show resolution criteria"
+msgstr "أظهر معيار الدقة"
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1168
 msgid "Enable only if an object is selected"
 msgstr "فعِّل فقط عند اختيار جرم سماوي"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1153
+#: plugins/Oculars/src/ui_ocularDialog.h:1170
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr "تطبيق الحد من عرض النجوم حسب قدر اللمعان وفتحة عدسة التلسكوب."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1155
+#: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Limit stellar magnitude"
 msgstr "تحديد عرض النجوم حسب قدر اللمعان"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1156
+#: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Scale image circle"
 msgstr "عدّل حجم دائرة المشهد"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1158
+#: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "In ocular mode, allow some visibility outside ocular circle."
-msgstr ""
+msgstr "في نسق العدسة العينية، دع مجالاً للرؤية خارج دائرة العدسة."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1160
+#: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Use semi-transparent mask"
 msgstr "استخدم قناع شبه شفاف"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1161
+#: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "Hide grids and lines when enabled"
 msgstr "أخف الخطوط وشبكات الإحداثيات عند التفعيل"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1162
+#: plugins/Oculars/src/ui_ocularDialog.h:1179
 msgid "Sensor view"
 msgstr "منظر المستشعر"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1163
+#: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr "استخدم الدرجات والدقائق لحقل الرؤية الخاص بالمستشعر"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1165
+#: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
@@ -11228,52 +11239,52 @@ msgstr ""
 "فعّل التغيير التلقائي لنوع الحامل من إعدادات التلسكوبات لتوجيه إطار السي سي "
 "دي أفقياً"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1167
+#: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Enable automatic switch of mount type"
 msgstr "فعّل التغيير التلقائي لنوع الحامل"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1168
+#: plugins/Oculars/src/ui_ocularDialog.h:1185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr "عام"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1169
-#: plugins/Oculars/src/ui_ocularDialog.h:1178
-#: plugins/Oculars/src/ui_ocularDialog.h:1184
-#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1186
+#: plugins/Oculars/src/ui_ocularDialog.h:1195
+#: plugins/Oculars/src/ui_ocularDialog.h:1201
+#: plugins/Oculars/src/ui_ocularDialog.h:1219
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:415
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr "أضف"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1171
-#: plugins/Oculars/src/ui_ocularDialog.h:1180
-#: plugins/Oculars/src/ui_ocularDialog.h:1186
-#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1203
+#: plugins/Oculars/src/ui_ocularDialog.h:1221
 #: plugins/Satellites/src/ui_satellitesDialog.h:795
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:570
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:246
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr "الاسم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1175
+#: plugins/Oculars/src/ui_ocularDialog.h:1192
 msgid "Binoculars"
 msgstr "المنظار الثنائي"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1176
+#: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid "Has permanent cross-hairs"
 msgstr "لديه شعرتان متقاطعتان دائمتان"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1177
+#: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Eyepieces"
 msgstr "العدسات العينية"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1181
+#: plugins/Oculars/src/ui_ocularDialog.h:1198
 msgid "Multiplier:"
 msgstr "مضاعف التكبير ."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1182
+#: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
@@ -11281,85 +11292,85 @@ msgstr ""
 "قيمة التكبير أكبر من 1 تزيد الطول البؤري (عدسات بارلو)، وقيمة التكبير أقل من"
 " 1 تنقص من الطول البؤري (عدسات شابلي)."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1183
+#: plugins/Oculars/src/ui_ocularDialog.h:1200
 msgid "Lenses"
 msgstr "العدسات"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1187
+#: plugins/Oculars/src/ui_ocularDialog.h:1204
 msgid "Resolution x (pixels):"
 msgstr "الدقة س (بكسل)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1205
 msgid "Resolution y (pixels):"
 msgstr "الدقة ص (بكسل)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1189
+#: plugins/Oculars/src/ui_ocularDialog.h:1206
 msgid "Chip height (mm):"
 msgstr "طول الشريحة (مم)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid "Chip width (mm):"
 msgstr "عرض الشريحة (مم)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1191
+#: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Pixel width (micron):"
 msgstr "عرض البكسل (ميكرون)  ."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "Pixel height (micron):"
 msgstr "طول البكسل (ميكرون)  ."
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1193
+#: plugins/Oculars/src/ui_ocularDialog.h:1210
 msgid "Prism/CCD distance (mm):"
 msgstr "مسافة الموشور/السي سي دي بالملم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1194
+#: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Prism/CCD height (mm):"
 msgstr "ارتفاع الموشور/السي سي دي بالملم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1195
+#: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Prism/CCD width (mm):"
 msgstr "عرض الموشور/السي سي دي بالملم"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1196
+#: plugins/Oculars/src/ui_ocularDialog.h:1213
 msgid "Position angle (degrees):"
 msgstr "زاوية الموقع بالدرجات"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid "Off-Axis guider"
 msgstr "موجه التلسكوب الخارج عن المحور"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1198
+#: plugins/Oculars/src/ui_ocularDialog.h:1215
 msgid "Rotation Angle (degrees):"
 msgstr "زاوية التدوير بالدرجات"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1216
 msgid "Binning x:"
 msgstr "عدد البكسلات الموحدة أفقيا"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1217
 msgid "Binning y:"
 msgstr "عدد البكسلات الموحدة رأسياً"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1201
+#: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Sensors"
 msgstr "المستشعرات"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1207
+#: plugins/Oculars/src/ui_ocularDialog.h:1224
 msgid "Horizontal flip"
 msgstr "قلب المشهد أفقياً"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1208
+#: plugins/Oculars/src/ui_ocularDialog.h:1225
 msgid "Vertical flip"
 msgstr "قلب المشهد رأسياً"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1209
+#: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Equatorial Mount"
 msgstr "حامل استوائي"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1210
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:404
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:420
+#: plugins/Oculars/src/ui_ocularDialog.h:1227
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"
 msgstr "التلسكوبات"
 
@@ -11812,7 +11823,7 @@ msgstr "<P DIR=RTL>انظر %1هذه الوثيقة%2 للتفاصيل."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
 msgid "Internet updates disabled"
 msgstr "التحديث عبر الإنترنت غير مفعَّل"
 
@@ -11826,8 +11837,8 @@ msgstr "التحديث عبر الإنترنت غير مفعَّل"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
 msgid "Updating now..."
 msgstr "التحديث يتم حالياً..."
 
@@ -11836,7 +11847,7 @@ msgstr "التحديث يتم حالياً..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:321
 msgid "Next update: < 1 minute"
 msgstr "التحديث التالي: أقل من دقيقة"
 
@@ -11845,39 +11856,39 @@ msgstr "التحديث التالي: أقل من دقيقة"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:314
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "التحديث القادم: %1 دقيقة"
+msgstr[1] "التحديث القادم: %1 دقيقة"
+msgstr[2] "التحديث القادم: %1 دقيقتان"
+msgstr[3] "التحديث القادم: %1 دقائق"
+msgstr[4] "التحديث القادم: %1 دقيقة"
+msgstr[5] "التحديث القادم: %1 دقيقة"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:183
 #: plugins/Novae/src/gui/NovaeDialog.cpp:176
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:330
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "التحديث القادم: %1 ساعة"
+msgstr[1] "التحديث القادم: %1 ساعة واحدة"
+msgstr[2] "التحديث القادم: %1 ساعتان"
+msgstr[3] "التحديث القادم: %1 ساعات"
+msgstr[4] "التحديث القادم: %1 ساعة"
+msgstr[5] "التحديث القادم: %1 ساعة"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:218
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:226
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:255
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:385
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
 msgid "Update error"
 msgstr "حصل خطأ في التحديث"
 
@@ -11905,8 +11916,8 @@ msgstr "[مصدر جديد]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:371
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:511
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr ". حدِّث البيانات الآن ."
@@ -11916,7 +11927,7 @@ msgstr ". حدِّث البيانات الآن ."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:199
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:196
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:373
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:384
 msgid "Update from files"
 msgstr "حدِّث من الملفات"
 
@@ -12018,7 +12029,7 @@ msgstr "حدث بيانات الأقمار الصناعية من مصادر شب
 #: plugins/Novae/src/ui_novaeDialog.h:237
 #: plugins/Quasars/src/ui_quasarsDialog.h:262
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:508
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
 msgid "Last update:"
 msgstr "آخر تحديث"
 
@@ -12035,7 +12046,7 @@ msgstr ""
 "التحديث"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:752
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:509
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
 msgstr "حدِّث البيانات كل (ساعة)    ."
@@ -12086,7 +12097,7 @@ msgstr "النسق الواقعي للأقمار الصناعية"
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:281
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:251
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:537
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:557
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
 msgstr "احفظ الإعدادات الحالية كإفتراضية"
@@ -12096,7 +12107,7 @@ msgstr "احفظ الإعدادات الحالية كإفتراضية"
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:275
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:282
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:538
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Settings"
 msgstr "الضبط"
@@ -12260,43 +12271,43 @@ msgid "Move a telescope to a given set of coordinates"
 msgstr "حرِّك التلسكوب إلى إحداثيات معيَّنة"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1673
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1680
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
 msgstr "أي تلسكوب أو حامل تلسكوب متوافق مع وحدة تحكم ميد أوتوستار"
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1675
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1682
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr "أي تلسكوب أو حامل تلسكوب متوافق مع ميد إل إكس 200"
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1677
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1684
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
 msgstr "ميد إي تي إكس 70 مع وحدة تحكم أوتوستار #494 وتوصيلة #506"
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1679
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1686
 msgid "Losmandy's G-11 telescope mount."
 msgstr "حامل تلسكوب لوزماندي جي-11"
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1681
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1688
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr "نسق محاكاة ميد إل إكس 200 من أرجو نافيس وايلد كارد إينوفاشن"
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1683
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1690
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr "أي تلسكوب أو حامل متوافق مع سيلسترون نكستار"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1685
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1692
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
@@ -12304,7 +12315,7 @@ msgstr ""
 "أي حامل سكاي واتشر يستخدم الإصدار الثالث أو مابعده للمتحكم اليدوي سينسكان"
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1687
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1694
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -12322,6 +12333,34 @@ msgstr "موقع التلسكوب "
 msgid "Distance to target position: "
 msgstr "المسافة إلى الموقع المستهدف "
 
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:129
+msgid "INDI Settings"
+msgstr "إعدادات INDI"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:130
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:604
+msgid "TCP port:"
+msgstr "منفذ TCP"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:132
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:602
+msgid ""
+"Host name or IPv4 address of the machine that hosts the telescope server"
+msgstr "اسم الحاسب المضيف أو عنوان IPv4 للحاسب الذي يستضيف خادم التلسكوبات"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:134
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:600
+msgid "Host:"
+msgstr "الحاسب المضيف"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:135
+msgid "Refresh devices"
+msgstr "حدّث قائمة الأجهزة"
+
+#: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:136
+msgid "Devices:"
+msgstr "الأجهزة:"
+
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
@@ -12338,11 +12377,11 @@ msgstr ""
 "معدل الإنعاش لتلسكوب آر تي إس 2. مقدار التأخر قبل إرسال طلب معرفة حالة "
 "التلسكوب القادم. القيمة الافتراضية 0.5 ثانية تعمل جيداً مع أغلب الأوضاع"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:222
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:223
 msgid "Add New Telescope"
 msgstr "أضف تلسكوباً جديداً"
 
-#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:232
+#: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:233
 msgid "Configure Telescope"
 msgstr "هيئ التلسكوب"
 
@@ -12432,7 +12471,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:272
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
-msgstr ""
+msgstr "INDI by <b>Alessandro Siniscalchi</b>."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -12495,19 +12534,19 @@ msgstr "نوع التوصيلة"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:569
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:583
 msgid "Telescope properties"
 msgstr "خصائص التلسكوب"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:363
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:582
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:596
 msgid "Device settings"
 msgstr "ضبط الجهاز"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:585
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:599
 msgid "Connection settings"
 msgstr "ضبط الاتصال"
 
@@ -12803,7 +12842,7 @@ msgstr ""
 "الأعلى%2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:349
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:555
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:569
 msgid "Telescope controlled by:"
 msgstr ":التحكم بالتلسكوب بواسطة"
 
@@ -13342,15 +13381,15 @@ msgstr "افتراضي"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:516
 msgid "remote, RTS2"
-msgstr ""
+msgstr "بعيد، RTS2"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:520
 msgid "remote, INDI"
-msgstr ""
+msgstr "بعيد، INDI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:942
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:407
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:407
 msgid "Start"
 msgstr "شغِّل"
 
@@ -13400,75 +13439,75 @@ msgstr "(J2000) الميل"
 msgid "Select one"
 msgstr "اختر نقطة"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:321
 msgid "Slew telescope to"
 msgstr "وجِّه التلسكوب إلى"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:323
 msgid "There are no active devices."
 msgstr "لايوجد أجهزة نشطة"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:324
 msgid "Slew telescope to coordinates"
 msgstr "وجِّه التلسكوب إلى الإحداثيات"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:325
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:247
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "(J2000) المطلع المستقيم"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:326
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:248
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "(J2000) الميل"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:327
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:244
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "الجرم الحالي"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:328
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:245
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "مركز الشاشة"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "Hours-minutes-seconds format"
 msgstr "تنسيق ساعة-دقيقة-ثانية"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
 msgid "&HMS"
 msgstr "س د ث"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "Degrees-minutes-seconds format"
 msgstr "تنسيق درجة-دقيقة-ثانية"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
 msgid "&DMS"
 msgstr "د د ث"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "Decimal degrees"
 msgstr "درجات عشرية"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:341
 msgid "D&ecimal"
 msgstr "عشري"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:342
 msgid "&Slew"
 msgstr "وجِّه"
 
-#: plugins/TelescopeControl/src/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:343
 msgid "Configure &telescopes..."
 msgstr "هيئ  التلسكوبات"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:553
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:567
 msgid "Telescope Configuration"
 msgstr "تهيئة التلسكوب"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:557
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:571
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
@@ -13476,199 +13515,186 @@ msgstr ""
 "تلسكوب موصَّل بهذا الحاسب عن طريق منفذ تسلسلي ويتحكم به مباشرة بواسطة "
 "ستيللاريوم"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:559
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:573
 msgid "Stellarium, directly through a serial port"
 msgstr "ستيللاريوم، مباشرة خلال منفذ تسلسلي"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:561
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:575
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
 "تلسكوب يتحكم به بواسطة برنامج خارجي، في جهاز الحاسب هذا أو جهاز آخر عن بعد."
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:563
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:577
 msgid "External software or a remote computer"
 msgstr "برنامج خارجي أو حاسب عن بعد"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:565
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:579
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
 msgstr "RTS2(.org) JSON API تلسكوب يمكن التحكم به عن طريق"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:567
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
 msgid "RTS2 telescope"
 msgstr "RTS2 تلسكوب"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:568
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:582
 msgid "Nothing, just simulate one (a moving reticle)"
 msgstr "(لاشيء، محاكاة فقط للتلسكوب (عدسة متحركة"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:571
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:585
 msgid "Connection delay:"
 msgstr "مقدار التأخير في الاتصال"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:576
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:590
 msgid "J2000 (default)"
 msgstr "2000 (الافتراضي)"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:577
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:591
 msgid "Equinox of the date (JNow)"
 msgstr "الاعتدال الحالي"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:579
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:593
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr "حاول بدء تشغيل التلسكوب أو الاتصال به عند بدء برنامج ستيللاريوم"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:581
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 msgid "Start/connect at startup"
 msgstr "التشغيل/الاتصال عند البدء"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:583
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
 msgid "Serial port:"
 msgstr "المنفذ التسلسلي"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:584
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:598
 msgid "Device model:"
 msgstr "طراز الجهاز"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:586
-msgid "Host:"
-msgstr "الحاسب المضيف"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:588
-msgid ""
-"Host name or IPv4 address of the machine that hosts the telescope server"
-msgstr "اسم الحاسب المضيف أو عنوان IPv4 للحاسب الذي يستضيف خادم التلسكوبات"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:590
-msgid "TCP port:"
-msgstr "منفذ TCP"
-
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:591
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:605
 msgid "RTS2 telescope settings"
 msgstr "RTS2 أعدادات تلسكوب"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:592
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:606
 msgid "URL:"
 msgstr "رابط الإنترنت"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:593
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "Username:"
 msgstr "اسم المستخدم"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:594
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Password:"
 msgstr "الكلمة السرية"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:596
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "RTS2 username"
 msgstr "RTS2 اسم مستخدم"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:599
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
 msgid "RTS2 password"
 msgstr "RTS2 كلمة الدخول"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:602
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:616
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
 msgstr "RTS2  رابط الإنترنت للحاسب الذي يستضيف خادم"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:604
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:618
 msgid "Refresh every:"
 msgstr "أنعش كل"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:608
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:622
 msgid "User interface settings"
 msgstr "ضبط واجهة الاستخدام"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:610
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr "إظهار دوائر ذات بعد زاوي ثابت حول علامة العدسة"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:612
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:626
 msgid "Use field of view indicators"
 msgstr "استخدم دوائر توضيح حقل الرؤية"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:613
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:627
 msgid "Circle size(s):"
 msgstr "حجم الدوائر"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:615
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:629
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
 msgstr ""
 "حدد حجم الدوائر بالزاوية القوسية، من قيمة واحدة إلى عشر قيم كحد أقصى، مع "
 "الفصل بين كل قيمة والتي تليها بفاصلة"
 
-#: plugins/TelescopeControl/src/ui_telescopeConfigurationDialog.h:618
+#: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:632
 msgid "OK"
 msgstr "موافق"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:406
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes Controlled"
 msgstr "التلسكوبات المتحكم بها"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:409
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:409
 msgid "Configure the selected telescope"
 msgstr "هيئ التلسكوب المختار"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:411
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:411
 msgid "Configure"
 msgstr "هيئ"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:413
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:413
 msgid "Add a new telescope"
 msgstr "أضف تلسكوباً جديداً"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:417
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Remove the selected telescope"
 msgstr "احذف التلسكوب المختار"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:421
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:421
 msgid "GUI"
 msgstr "واجهة الاستخدام"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:422
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:422
 msgid "Show telescope labels"
 msgstr "أظهر أسماء التلسكوبات"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:423
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:423
 msgid "Show telescope reticles"
 msgstr "أظهر علامات العدسات"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:424
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:424
 msgid "Show field of view indicators"
 msgstr "أظهر دوائر حقل الرؤية"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:425
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:425
 msgid "Files"
 msgstr "الملفات"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:426
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:426
 msgid "Log telescope driver messages to files"
 msgstr "سجِّل رسائل سواق التلسكوب على الملفات"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:427
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:427
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr "استخدم برامج خوادم التلسكوبات التنفيذية بدلاً من سواقات ستيللاريوم"
 
-#: plugins/TelescopeControl/src/ui_telescopeDialog.h:428
+#: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:428
 msgid "Executables directory:"
 msgstr "مسار البرامج التنفيذية"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:242
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:242
 msgid "Points"
 msgstr "النقاط"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:249
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:249
 msgid "Add point"
 msgstr "أضف نقطة"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:250
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:250
 msgid "Remove selected"
 msgstr "إحذف النقطة المختارة"
 
-#: plugins/TelescopeControl/src/ui_storedPointsDialog.h:251
+#: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:251
 msgid "Clear list"
 msgstr "امسح القائمة"
 
@@ -14247,12 +14273,12 @@ msgstr "في روسيا"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
 msgid_plural "Next update: %1 day(s)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
-msgstr[5] ""
+msgstr[0] "التحديث القادم: %1 يوم"
+msgstr[1] "التحديث القادم: %1 يوم واحد"
+msgstr[2] "التحديث القادم: %1 يومان"
+msgstr[3] "التحديث القادم: %1 أيام"
+msgstr[4] "التحديث القادم: %1 يوماً"
+msgstr[5] "التحديث القادم: %1 يوم"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:225
 msgid "Historical supernovae is updated"
@@ -14277,7 +14303,7 @@ msgstr ". حدّث الدليل من الإنترنت ."
 #: plugins/Novae/src/ui_novaeDialog.h:236
 #: plugins/Quasars/src/ui_quasarsDialog.h:261
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:507
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:526
 msgid "Update from Internet sources"
 msgstr "حدِّث من مصادر الإنترنت"
 
@@ -14292,27 +14318,27 @@ msgstr "حدّث كل (بالأيام)"
 #: plugins/Novae/src/ui_novaeDialog.h:239
 #: plugins/Quasars/src/ui_quasarsDialog.h:264
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:510
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:529
 msgid "[next update info]"
 msgstr "[معلومات التحديث القادم]"
 
-#: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:110
+#: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:112
 msgid "Navigational Stars"
 msgstr "نجوم الملاحة"
 
 #: plugins/NavStars/src/NavStars.cpp:55
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "<p dir=rtl>هذه الإضافة تضع علامة على نجوم الملاحة حسب المجموعة المختارة من "
 "مجموعات نجوم الملاحة العالمية."
 
-#: plugins/NavStars/src/NavStars.cpp:111
+#: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
 msgstr "حدد نجوم الملاحة"
 
 #. TRANSLATORS: The emphasis tags mark a title.
-#: plugins/NavStars/src/NavStars.cpp:293
+#: plugins/NavStars/src/NavStars.cpp:295
 msgid ""
 "The 57 \"selected stars\" that are listed in <em>The Nautical Almanac</em> "
 "jointly published by Her Majesty's Nautical Almanac Office and the US Naval "
@@ -14327,7 +14353,7 @@ msgstr ""
 "<em>Identifier</em>.</p>"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:299
+#: plugins/NavStars/src/NavStars.cpp:301
 #, qt-format
 msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
@@ -14338,7 +14364,7 @@ msgstr ""
 "Longitudes.</p>"
 
 #. TRANSLATORS: The emphasis tags mark a book title.
-#: plugins/NavStars/src/NavStars.cpp:305
+#: plugins/NavStars/src/NavStars.cpp:307
 #, qt-format
 msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
@@ -14347,13 +14373,13 @@ msgstr ""
 "<p dir=rtl>مجموعة من 160 نجماً في قائمة التقويم البحري الروسي. العنوان "
 "الأصلي للتقويم هو: <p dir=rtl><em>%1</em></p>"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:87
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:89
 msgid "Navigational Stars Plug-in"
 msgstr "<p dir=rtl>إضافة نجوم الملاحة"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:106
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:108
 #: plugins/Novae/src/gui/NovaeDialog.cpp:143
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:143
 #, qt-format
@@ -14365,41 +14391,49 @@ msgstr ""
 " فيها يمكنك %1 الحصول على المعلومات هنا %2."
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:142
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:150
 msgid "Anglo-American"
 msgstr "الأنجلوأمريكية"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:144
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:152
 msgid "French"
 msgstr "الفرنسية"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:146
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
 msgid "Russian"
 msgstr "الروسية"
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:202
-#: plugins/NavStars/src/ui_navStarsWindow.h:213
+#: plugins/NavStars/src/ui_navStarsWindow.h:209
+#: plugins/NavStars/src/ui_navStarsWindow.h:221
 msgid "Navigational stars"
 msgstr "نجوم الملاحة"
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:204
+#: plugins/NavStars/src/ui_navStarsWindow.h:211
 msgid "Set of navigational stars"
 msgstr "مجموعة نجوم الملاحة"
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:206
+#: plugins/NavStars/src/ui_navStarsWindow.h:213
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Place of the string with coordinates of the mouse pointer"
 msgstr "موضع عرض إحداثيات المؤشر"
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:208
+#: plugins/NavStars/src/ui_navStarsWindow.h:215
 msgid "Current set:"
 msgstr "المجموعة الحالية"
 
-#: plugins/NavStars/src/ui_navStarsWindow.h:209
+#: plugins/NavStars/src/ui_navStarsWindow.h:216
 msgid "Note:"
 msgstr "ملاحظة"
+
+#: plugins/NavStars/src/ui_navStarsWindow.h:218
+#: plugins/Quasars/src/ui_quasarsDialog.h:271
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:277
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
+#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
+msgid "Enable display at startup"
+msgstr "فعِّل العرض وقت بدء البرنامج"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
@@ -14540,13 +14574,6 @@ msgstr "ارسم كل الكوازارات بدون أسماء"
 msgid "Enable display of distribution for quasars"
 msgstr "فعِّل عرض توزيع الكوازارات"
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:271
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:277
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:526
-#: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
-msgid "Enable display at startup"
-msgstr "فعِّل العرض وقت بدء البرنامج"
-
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Show quasars button on toolbar"
 msgstr "أظهر زر الكوازارات على شريط المهام"
@@ -14641,7 +14668,7 @@ msgctxt "period"
 msgid "days"
 msgstr "‎أيام‎"
 
-#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Eccentricity"
 msgstr "الشذوذ المداري"
 
@@ -14682,7 +14709,7 @@ msgid "mJy"
 msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 msgid "Notes"
 msgstr "<p dir=rtl>ملاحظات"
@@ -15141,180 +15168,180 @@ msgid "Exoplanets configuration window"
 msgstr "نافذة إعدادات الكواكب الخارجية"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:912
+#: plugins/Exoplanets/src/Exoplanets.cpp:931
 msgid "Hot"
 msgstr "حار"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:914
+#: plugins/Exoplanets/src/Exoplanets.cpp:933
 msgid "Warm"
 msgstr "دافيء"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:916
+#: plugins/Exoplanets/src/Exoplanets.cpp:935
 msgid "Cold"
 msgstr "بارد"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:919
+#: plugins/Exoplanets/src/Exoplanets.cpp:938
 msgid "Miniterran"
 msgstr "أرضي صغير"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:921
+#: plugins/Exoplanets/src/Exoplanets.cpp:940
 msgid "Subterran"
 msgstr "أقل من الأرضي"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:923
+#: plugins/Exoplanets/src/Exoplanets.cpp:942
 msgid "Terran"
 msgstr "أرضي"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:925
+#: plugins/Exoplanets/src/Exoplanets.cpp:944
 msgid "Superterran"
 msgstr "أرضي ضخم"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:927
+#: plugins/Exoplanets/src/Exoplanets.cpp:946
 msgid "Jovian"
 msgstr "بحجم المشتري"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:929
+#: plugins/Exoplanets/src/Exoplanets.cpp:948
 msgid "Neptunian"
 msgstr "بحجم نبتون"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:932
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:951
 msgid "Primary Transit"
-msgstr ""
+msgstr "‎عبور رئيسي‎"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:934
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:953
 msgid "Microlensing"
-msgstr ""
+msgstr "‎العَدْس الدقيق‎"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:936
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:955
 msgid "Radial Velocity"
-msgstr ""
+msgstr "‎السرعة الشعاعية‎"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:938
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:957
 msgid "Imaging"
-msgstr ""
+msgstr "‎التصوير‎"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:940
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:959
 msgid "Pulsar"
-msgstr ""
+msgstr "‎نجم نابض‎"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:944
+#. TRANSLATORS: Exoplanet detection method
+#: plugins/Exoplanets/src/Exoplanets.cpp:963
 msgid "Astrometry"
-msgstr ""
+msgstr "‎قياسات فلكية‎"
 
-#. TRANSLATORS: Detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:946
+#. TRANSLATORS: Detection method. TTV=Transit Timing Variation
+#: plugins/Exoplanets/src/Exoplanets.cpp:965
 msgid "TTV"
-msgstr ""
+msgstr "‎تغيّر مواقيت العبور‎"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:298
+#: plugins/Exoplanets/src/Exoplanet.cpp:299
 msgid "planetary system"
 msgstr "نظام كوكبي"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:330
+#: plugins/Exoplanets/src/Exoplanet.cpp:331
 msgid "Metallicity"
 msgstr "مقدار المعدنية"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:334
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:335
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
 msgid "Mass"
 msgstr "الكتلة"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:338
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:339
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Radius"
 msgstr "نصف القطر"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:342
+#: plugins/Exoplanets/src/Exoplanet.cpp:343
 msgid "Effective temperature"
 msgstr "‎الحرارة الفعلية‎"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:342
+#: plugins/Exoplanets/src/Exoplanet.cpp:343
 msgctxt "temperature"
 msgid "K"
 msgstr "‎كلفن‎"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:346
+#: plugins/Exoplanets/src/Exoplanet.cpp:347
 msgid "Exoplanet"
 msgstr "كوكب خارجي"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "days"
 msgstr "أيّام"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
 #: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Jup"
 msgstr "المشتري"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
 msgid "Semi-Major Axis"
 msgstr "نصف المحور الأكبر"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Inclination"
 msgstr "الميل"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:354
+#: plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Angle Distance"
 msgstr "البعد الزاوي"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Exoplanets/src/Exoplanet.cpp:356
 msgid "Discovered year"
 msgstr "سنة الاكتشاف"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:356
-msgid "Detection method"
-msgstr ""
-
 #: plugins/Exoplanets/src/Exoplanet.cpp:357
+msgid "Detection method"
+msgstr "‎طريقة الاكتشاف‎"
+
+#: plugins/Exoplanets/src/Exoplanet.cpp:358
 msgid "Planetary class"
 msgstr "الفئة الكوكبية"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:359
+#: plugins/Exoplanets/src/Exoplanet.cpp:360
 msgid "Equilibrium temp."
 msgstr "درجة حرارة التوازن"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:361
+#: plugins/Exoplanets/src/Exoplanet.cpp:362
 msgid "ESI"
 msgstr "<p dir=rtl>مؤشر المشابهة للأرض"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:362
+#: plugins/Exoplanets/src/Exoplanet.cpp:363
 msgid "Conservative sample"
-msgstr ""
+msgstr "‎عيّنة محافظة‎"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:465
+#: plugins/Exoplanets/src/Exoplanet.cpp:466
 msgid "yes"
-msgstr ""
+msgstr "‎نعم‎"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:467
+#: plugins/Exoplanets/src/Exoplanet.cpp:468
 msgid "no"
-msgstr ""
+msgstr "‎لا‎"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:504
+#: plugins/Exoplanets/src/Exoplanet.cpp:505
 msgid "Equilibrium temperature on Earth"
-msgstr ""
+msgstr "‎درجة حرارة التوازن في الأرض‎"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:151
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "Exoplanets Plug-in"
 msgstr "<P DIR=RTL>تطبيق الكواكب الخارجية الإضافي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:156
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -15323,7 +15350,7 @@ msgstr ""
 "<P DIR=RTL>هذا التطبيق يرسم مواقع النجوم التي اكتشف لها كواكب. بيانات "
 "الكواكب الخارجية مشتقة من \"%1موسوعة الكواكب خارج المجموعة الشمسية%2\""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:157
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -15334,7 +15361,7 @@ msgstr ""
 "%1The Habitable Exoplanets Catalog%3 by %2Planetary Habitability "
 "Laboratory%3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:159
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -15346,7 +15373,7 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
 #, qt-format
 msgid ""
@@ -15356,11 +15383,11 @@ msgstr ""
 "إذا أردت الاطلاع على معلومات كاملة عن هذه الإضافة وتاريخها،وتنسيق الدليل، "
 "تستطيع %1الحصول على المعلومات هنا%2."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:187
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
 msgid "Potential habitable exoplanets"
 msgstr "<p dir=rtl>الكواكب الخارجية المحتمل قابليتها للحياة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
@@ -15368,11 +15395,11 @@ msgstr ""
 "<P DIR=RTL>هذه الإضافة تعرض الكواكب الخارجية القابلة للحياة (العلامة "
 "البرتقالية) وبعض المعلومات عنها"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Planetary Class"
 msgstr "<p dir=rtl>الفئة الكوكبية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
@@ -15382,11 +15409,11 @@ msgstr ""
 "للحياة (حار، دافيء، بارد)، وحسب الحجم (أرضي صغير ، أقل من الأرضي ، أرضي ، "
 "أرضي ضخم ، بحجم المشتري ، بحجم نبتون). الأرض =  G ، دافيء ، أرضي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid "Equilibrium Temperature"
 msgstr "<P DIR=RTL>درجة التوازن الحراري"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:190
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -15398,11 +15425,11 @@ msgstr ""
 " على سبيل المثال درجة التوازن الحراري للأرض هي -18.15 درجة مئوية أو 255 "
 "كلفن."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid "Earth Similarity Index (ESI)"
 msgstr "<p dir=rtl>(ESI) مؤشر المشابهة للأرض"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:191
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -15411,11 +15438,11 @@ msgstr ""
 "<p dir=rtl>مدى الشبه لكوكب الأرض بمقياس من 0 إلى 1، حيث 1 يشير إلى كوكب شديد"
 " الشبه بالأرض. يعتمد على نصف القطر والكثافة وسرعة الإفلات وحرارة السطح"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:192
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Proper names"
 msgstr "<p dir=rtl>الأسماء المعطاة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:193
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
@@ -15423,7 +15450,7 @@ msgstr ""
 "<p dir=rtl>في ديسمبر 2015 قبل الإتحاد العالمي الفلكي رسميا أسماء لعدة كواكب "
 "خارجية مكتشفة بعد التصويت الشعبي عليها."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
@@ -15431,7 +15458,7 @@ msgstr ""
 "<p dir=rtl>من اللاتينية <em>Veritas</em>,الحقيقة وفي الاستعمال \"حيث تكون "
 "الحقيقة\"."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:195
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
@@ -15439,11 +15466,11 @@ msgstr ""
 "<p dir=rtl>من اللاتينية From the latin <em>Spes</em>, الأمل ، حيث يكون "
 "الأمل."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:196
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Musica is Latin for <em>music</em>."
 msgstr "<p dir=rtl>من اللاتينية Musica is Latin for <em>موسيقى</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
@@ -15452,34 +15479,34 @@ msgstr ""
 "<p dir=rtl>آريون كان أحد عباقرة الموسيقى والشعر في اليونان القديمة، تقول "
 "الأسطورة أن الدلافين أنقذته في البحر بعد أن شدها بعزفه على القيثارة."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr "فافنير قزم تحول إلى تنين في الأساطير النرويجية."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
 "أوربيتار كلمة مبتدعة لتقدير عمليات إطلاق ناسا للمركبات الفضائية والمدارية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr "تشالاوان ملك تماسيح أسطوري في التراث التايلندي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "تافاو ثونج هي أحدى الأختين لتشالاوان في القصة الفلكلورية التايلندية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "تافاو كاي هي أحدى الأختين لتشالاوان في القصة الفلكلورية التايلندية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
@@ -15487,7 +15514,7 @@ msgstr ""
 "من لغة السلتك وتعني النسبة إلى هيلفيتيا القبيلة التي كانت تسكن سويسرا في "
 "القدم"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
@@ -15495,7 +15522,7 @@ msgstr ""
 "<p dir=rtl>الاسم المعطى هو Dimidium من اللاتينية بمعنى نصف لأن كتلة هذا "
 "الكوكب نصف كتلة المشتري"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
@@ -15504,7 +15531,7 @@ msgstr ""
 "<p dir=rtl>نيكولاس كوبرنكوس 1473-1543 فلكي بولندي اقترح نموذج النظام المبني "
 "على مركزية الشمس في كتابه   <em>De revolutionibus orbium coelestium</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -15516,7 +15543,7 @@ msgstr ""
 " أب الرصد الفلكي وأب الفيزياء الحديثة . باستخدام التلسكوب اكتشف أكبر أقمار "
 "المشتري ودوّن أول تقرير عن رصد أطوار الزهرة من بين اكتشافات أخرى."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -15527,7 +15554,7 @@ msgstr ""
 "الكثير من بيانات الرصد الدقيقة للكواكب والنجوم. كانت هذه البيانات بالغة "
 "الأهمية لكبلر لوضع قوانين حركة الكواكب."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
@@ -15536,7 +15563,7 @@ msgstr ""
 "<p dir=rtl>هانز ليبرهي 1570-1619 كان صانع عدسات ألماني يعزى غليه اختراع "
 "التلسكوب الكاسر في 1608"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
@@ -15545,7 +15572,7 @@ msgstr ""
 "<p dir=rtl>ياكارياس يانسين 1580-1630 كان صانع عدسات هولنديا يعزى إليه اختراع"
 " الميكروسكوب وأيضا التلسكوب ولكن بشكل مثير للخلاف."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
@@ -15555,7 +15582,7 @@ msgstr ""
 "بالأنثروبولوجيا الوصفية ويعزى إليه رسم أول خريطة للقمر من خلال الرصد عبر "
 "التلسكوب."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
@@ -15564,7 +15591,7 @@ msgstr ""
 "<p dir=rtl>أماتيرو اسم عام للمعابد اليابانية حين اتخذوا أماتيراسوا إلها "
 "وثنيا للشمس والذي ولد من العين اليسرى للإله الوثني الآخر إيزاناجي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
@@ -15574,7 +15601,7 @@ msgstr ""
 "الأفلاطونية الجديدة في الإسكندرية في أوائل القرن الخامس حتى مقتلها من قبل "
 "بعض الغوغاء النصارى في 415 م."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
@@ -15582,7 +15609,7 @@ msgstr ""
 "<p dir=rtl>ران هي الإلهة الوثنية النرويجية للبحر التي يعتقدون أنها تثير "
 "الأمواج وتمسك الصيادين بشباكها."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
@@ -15591,46 +15618,46 @@ msgstr ""
 "<p dir=rtl> إيجير هو زوج ران وهو الإله الوثني الذي يمثل المحيط ولهما تسع "
 "بنات ويمثلان جوتن الذي يحكم العالم الخارجي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr "موقع تراث عالمي والاسم السامي القديم للمدينة العربية السورية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr "داجون كان إلها وثيا يمثل بنصف رجل ونصف تنين"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "توناتيوه الإله الوثني الذي يعبر عن الشمس للأزتك"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "الإله الوثني الذي يعبر عن القمر للأزتك"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr "الإله الوثني للبلاغة والأدب والقوة عند السلتك في إيرلندا وسكوتلاندا"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid "Smertrios was a Gallic deity of war."
 msgstr "الإله الوثني للحرب عند الغال"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr "إنتركرس معناها بين الساقين لموقع هذه النجمة في مجموعة الدب الأكبر"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr "أركاس هو ابن كاليستو في الأساطير الإغريقية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15638,7 +15665,7 @@ msgstr ""
 "<p dir=rtl>ميجيل دي سرفانتيس سافيدرا 1547-1616 كان كاتبا أسبانيا ومؤلف El "
 "Ingenioso Hidalgo Don Quixote de la Mancha"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15646,7 +15673,7 @@ msgstr ""
 "<p dir=rtl>الشخصية الرئيسية في رواية سرفانتيس El Ingenioso Hidalgo Don "
 "Quixote de la Mancha"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15654,7 +15681,7 @@ msgstr ""
 "<p dir=rtl>شخصية خيالية ومثار حب دون كيشوت في رواية سرفانتيس El Ingenioso "
 "Hidalgo Don Quixote de la Mancha"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15662,7 +15689,7 @@ msgstr ""
 "<p dir=rtl>حصان خيالي في رواية سرفانتيس El Ingenioso Hidalgo Don Quixote de "
 "la Mancha"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15670,7 +15697,7 @@ msgstr ""
 "<p dir=rtl>شخصية خيالية مرافق لدون كيشوت في رواية سرفانتيس El Ingenioso "
 "Hidalgo Don Quixote de la Mancha"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -15679,17 +15706,17 @@ msgstr ""
 "<p dir=rtl>ثيستياس هو اسم العائلة لليدا واختها الثايا بنات ثيستيوس. ليدا "
 "كانت ملكة إغريقية وأم للتوأمين بولكس وكاستور ولهيلين وكليتيمنيستر."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr "<p dir=rtl>ليخ مخلوق أسطوري يتحكم بالمخلوقات الأخرى بالسحر"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "<p dir=rtl>دراوجر اسم لمخلوق اسطوري في التراث النرويجي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
@@ -15697,7 +15724,7 @@ msgstr ""
 "<p dir=rtl>بولترجست اسم لمخلوق أسطوري قوي يسبب اضطرابات من الألمانية الشبح "
 "المزعج."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
@@ -15705,7 +15732,7 @@ msgstr ""
 "<p dir=rtl>فوبيتور في الساطير الإعريقية يسبب الكوابيس وهو ابن نكس الإله "
 "الوثني لليل"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -15716,7 +15743,7 @@ msgstr ""
 "تراثي عالمي. وتاريخيا كانت حلقة وصل بين الحضارات العربية والأسبانية وبين "
 "قارتي أفريقيا وأوروبا بعد القرن الثامن."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -15727,7 +15754,7 @@ msgstr ""
 "الصفار الذي كان معلما للرياضيات والهندسة والفلك في القرن الحادي عشر في قرطبة"
 " في الأندلس وكتب رسالة مهمة في استخدام الاسطرلاب."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
@@ -15736,7 +15763,7 @@ msgstr ""
 "<p dir=rtl>سمي على أبي القاسم أصبغ بن محمد بن السمح المهري أو ابن السمح، "
 "فلكي ورياضي معتبر من القرن الحادي عشر في مدرسة الجريطي في قرطبة في الأندلس."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -15745,7 +15772,7 @@ msgstr ""
 "<p dir=rtl>المجريطي سمي على أبي القاسم القرطبي المجريطي، عالم مشهور في "
 "الرياضيات والفلك في القرن العاشر وأوائل القرن الحادي عشر في الأندلس."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -15756,7 +15783,7 @@ msgstr ""
 "والاجتماعية ومذكرا بأنه يوجد حتى الآن من هم محرومن من هذه الحريات. المجموعة "
 "النجمية العقاب تصور نسرا وهو رمز شعبي للحرية."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
@@ -15765,7 +15792,7 @@ msgstr ""
 "<p dir=rtl>فورتيتودو من اللاتينية ومهناها القوة العقلية والعاطفية في مواجهة "
 "الأعداء كما أنها متضنة بانسر الذي تمثله كوكبة العقاب."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
@@ -15773,7 +15800,7 @@ msgstr ""
 "<p dir=rtl>هذه الأسماء عدلت بناءا على الاقتراحات الأصلية حتى تتوافق مع "
 "معايير الإتحاد الفلكي العالمي."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
@@ -15781,13 +15808,13 @@ msgstr ""
 "<p dir=rtl>الإسم المقترح الأصلي Veritas أطلق على كويكب سابقا وهو كويكب مهم "
 "في دراسة النظام الشمسي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr "<p dir=rtl>الإسم المقترح الأصلي Amaterasu أطلق على كويكب سابقا."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -15798,11 +15825,11 @@ msgstr ""
 "النقحرة النرويجية. نفس الإسم بالتهجئة <em>Aegir</em> أطلق على أحد أقمار زحل "
 "الذي اكتشف عام 2004 م."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr "<p dir=rtl>الإسم  Ogmios أطلق على كويكب سابقا."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
@@ -15811,7 +15838,7 @@ msgstr ""
 "<p dir=rtl>الإسم المقترح الأصلي Leda أطلق على كويكب سابقا. والإسم  Althaea "
 "أطلق على كويكب سابقا."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -15822,292 +15849,314 @@ msgstr ""
 "<em>Lipperhey</em> في 15-1-2016. التهجئة الخاطئة التي تحوي حرف (with an "
 "<em>s</em>) نتجت من خطأ مطبعي يعود إلى 1831 م ولذلك يجب أن يصحح."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid "Additional info"
 msgstr "<P DIR=RTL>معلومات إضافية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid "Circumstellar habitable zone"
 msgstr "منطقة دائرية حول النجم القابلة للحياة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid "Planetary equilibrium temperature"
 msgstr "درجة التوازن الحراري للكوكب"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid "Planetary habitability"
 msgstr "قابلية الكوكب للحياة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid "Earth Similarity Index"
 msgstr "مؤشر المشابهة للأرض"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
 "موقع الإنترنت الذي يحوي النتائج النهائية للتصويت على تسميات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid "NameExoWorlds website"
 msgstr "موقع تسميات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "مواقع الإنترنت المتخصصة ذات العلاقة بالكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "<p dir=rtl>Exoplanets: نسخة تفاعلية من XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
 "<p dir=rtl>HEK  اختصار The Hunt for Exomoons with Kepler - اقتناص الأقمار "
 "الخارجية بواسطة كبلر"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
 "<p dir=rtl>الكواكب الخارجية في النظم الشمسية الثنائية والمتعددة (ريتشارد "
 "شوارتز)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
 msgid "Naming exoplanets (IAU)"
 msgstr "<p dir=rtl>تسمية الكواكب الخارجية (الاتحاد الفلكي العالمي)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "<p dir=rtl>بعض الفلكيين والمجموعات النشطة في دراسات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
 msgid "update: 16 April 2012"
 msgstr "التحديث: 16 إبريل 2012 م"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
 msgid "The Exoplanet Data Explorer"
 msgstr "<p dir=rtl>مستكشف بيانات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
 msgid "The Anglo-Australian Planet Search"
 msgstr "<p dir=rtl>عملية البحث الإنجليزية-الاسترالية عن الكواكب"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "<p dir=rtl>برامج جنيف للبحث عن الكواكب خارج النظام الشمسي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "<p dir=rtl>OLBIN  اختصار Optical Long-Baseline Interferometry News"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "<p dir=rtl>برنامج ناسا لاستكشاف الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
 msgid "Pulsar planets"
 msgstr "<p dir=rtl>كواكب النجوم النابضة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 msgid "The NASA Exoplanet Archive"
 msgstr "<p dir=rtl>أرشيف ناسا للكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "<p dir=rtl>لجنة إتحاد الفلك الدولي 53: الكواكب خارج النظام الشمسي"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "ExoMol"
 msgstr ""
 "<p dir=rtl>ExoMol - قاعدة بيانات للجزيئات الصالحة للتصنيف الطيفي ومحاكاة "
 "الغلاف الجوي للكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "The Habitable Zone Gallery"
 msgstr "<p dir=rtl>معرض المنطقة القابلة للعيش"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "<p dir=rtl>PlanetQuest  - البحث عن كوكب مشابه للأرض"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Open Exoplanet Catalogue"
 msgstr "<p dir=rtl>الدليل المفتوح للكواكب الخارجية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "The Habitable Exoplanets Catalog"
 msgstr "<p dir=rtl>دليل الكواكب الخارجية القابلة للحياة"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
 msgid "Exoplanets is updated"
 msgstr "الكواكب الخارجية تم تحديثها"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:514
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
 msgid "Orbital Eccentricity"
 msgstr "الشذوذ المداري"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:515
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
 msgid "Orbit Semi-Major Axis, AU"
 msgstr "نصف المحور الأكبر - وحدة فلكية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:516
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
 msgid "Planetary Mass, Mjup"
 msgstr "Mjup كتلة الكوكب قياسا على المشتري"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:517
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
 msgid "Planetary Radius, Rjup"
 msgstr "Mjup نصف قطر الكوكب قياسا على المشتري"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:518
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
 msgid "Orbital Period, days"
 msgstr "الفترة المدارية بالأيام"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:519
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
 msgid "Angular Distance, arcsec"
 msgstr "المسافة الزاوية بالثواني القوسية"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:520
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
 msgid "Effective temperature of host star, K"
 msgstr "الحرارة الفعلية للنجم المضيف بالكلفن"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:521
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
 msgid "Year of Discovery"
 msgstr "سنة الاكتشاف"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:522
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
 msgid "Metallicity of host star"
 msgstr "مقدار المعدنية للنجم المضيف"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:523
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:534
 msgid "V magnitude of host star, mag"
 msgstr "القدر البصري للنجم المضيف"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:524
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:535
 msgid "RA (J2000) of star, deg"
 msgstr "المطلع المستقيم - حقبة 2000 - للنجم"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:536
 msgid "Dec (J2000) of star, deg"
 msgstr "الميل - حقبة 2000 - للنجم"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
 msgid "Distance to star, pc"
 msgstr "المسافة إلى النجم بارسك"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
 msgid "Mass of host star, Msol"
 msgstr "Msol كتلة النجم المضيف بالنسبة للشمس"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid "Radius of host star, Rsol"
 msgstr "Rsol نصف قطر النجم المضيف بالنسبة للشمس"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:503
+#. TRANSLATORS: Name of temperature scale
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:610
+msgctxt "temperature scale"
+msgid "Kelvin"
+msgstr "كلفن"
+
+#. TRANSLATORS: Name of temperature scale
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:612
+msgctxt "temperature scale"
+msgid "Celsius"
+msgstr "درجة مئوية"
+
+#. TRANSLATORS: Name of temperature scale
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:614
+msgctxt "temperature scale"
+msgid "Fahrenheit"
+msgstr "فهرنهايت"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
 msgid "Exoplanets Configuration"
 msgstr "إعدادات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:504
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:523
 msgid "Exoplanets Plug-in Configuration"
 msgstr "إعدادات تطبيق الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:506
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
 msgid "Update exoplanets data from Internet"
 msgstr ". حدّث بيانات الكواكب الخارجية من الإنترنت      ."
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:512
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:531
 msgid "Settings for exoplanets"
 msgstr ". إعدادات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:514
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:533
 msgid "Plot all systems with exoplanets without labels"
 msgstr "ارسم جميع النظم الشمسية من دون الأسماء"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:516
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:535
 msgid "Enable display of distribution for exoplanets"
 msgstr "فعِّل عرض توزيع الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:518
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:537
 msgid "Display exoplanets since their discovery"
 msgstr "اعرض الكواكب الخارجية من وقت اكتشافها"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:520
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Enable timeline discovery of exoplanets"
 msgstr "فعِّل التسلسل التاريخي لاكتشاف الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
 msgstr "عرض النظم الكوكبية التي تحتوي على كواكب خارجية يحتمل قابليتها للحياة"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:524
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
 msgid "Enable display of the potential habitable exoplanets only"
 msgstr "فعِّل فقط عرض النظم التي تحتوي على كواكب خارجية يحتمل قابليتها للحياة"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:544
 msgid "Enable display of designations for exoplanets"
 msgstr "فعّل عرض تسميات الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
 msgid "Show exoplanets button on toolbar"
 msgstr "أظهر زر الكواكب الخارجية على شريط المهام"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
 msgid "Exoplanets marker color"
-msgstr ""
+msgstr "لون علامة الكواكب الخارجية"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:534
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:551
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:553
 msgid "Marker color for potential habitable exoplanets"
-msgstr ""
+msgstr "لون علامة الكواكب الخارجية ذات القابلية المحتملة للعيش"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
+msgid "Temperature scale:"
+msgstr "ميزان درجة الحرارة:"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 msgid "Diagrams: scatter plot"
 msgstr "الرسم البياني: رسم مشتت"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:540
-msgid "Plot"
-msgstr "ارسم"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
-msgid "Y axis"
-msgstr "المحور الصادي"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:550
-msgid "Logarithmic scale"
-msgstr "الميزان اللوغاريتمي"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:552
-msgid "log scale"
-msgstr "الميزان اللوغاريتمي"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:554
-msgid "min"
-msgstr "الحد الأدنى"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
-msgid "max"
-msgstr "الحد الأعلى"
-
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
 msgid "X axis"
 msgstr "المحور السيني"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:556
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:570
+msgid "Logarithmic scale"
+msgstr "الميزان اللوغاريتمي"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:564
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:572
+msgid "log scale"
+msgstr "الميزان اللوغاريتمي"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:566
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
+msgid "min"
+msgstr "الحد الأدنى"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:567
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:574
+msgid "max"
+msgstr "الحد الأعلى"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:568
+msgid "Y axis"
+msgstr "المحور الصادي"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:575
+msgid "Plot"
+msgstr "ارسم"
+
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:576
 msgctxt "tab in plugin windows"
 msgid "Diagram"
 msgstr "الرسم البياني"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:557
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:577
 msgctxt "tab in plugin windows"
 msgid "Info"
 msgstr "معلومات"
 
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:578
 msgctxt "tab in plugin windows"
 msgid "Websites"
 msgstr "مواقع الشبكة العنكبوتية"

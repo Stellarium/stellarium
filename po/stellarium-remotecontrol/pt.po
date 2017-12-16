@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-02 23:16+0700\n"
+"POT-Creation-Date: 2017-12-14 22:34+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/stellarium/teams/80998/pt/)\n"
@@ -104,8 +104,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Não foi possível recuperar a lista de paisagens"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:505
-#: index.html:562 tablet7in.html:683 tablet7in.html:743
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:515
+#: index.html:572 tablet7in.html:692 tablet7in.html:752
 msgid "-none-"
 msgstr "-nenhum-"
 
@@ -332,107 +332,107 @@ msgstr "Impasses Menores"
 msgid "Current Planet:"
 msgstr "Planeta Atual:"
 
-#: index.html:419 tablet7in.html:578
+#: index.html:429 tablet7in.html:587
 msgid "Bright Nebulae"
 msgstr "Nebulosas Brilhantes"
 
-#: index.html:420 tablet7in.html:579
+#: index.html:430 tablet7in.html:588
 msgid "Dark Nebulae"
 msgstr "Nebulosas Escuras"
 
-#: index.html:421 tablet7in.html:580
+#: index.html:431 tablet7in.html:589
 msgid "Planetary Nebulae"
 msgstr "Nebulosas Planetárias"
 
-#: index.html:430 tablet7in.html:589
+#: index.html:440 tablet7in.html:598
 msgid "Labels and markers"
 msgstr "Legendas e marcadores"
 
-#: index.html:459 tablet7in.html:618
+#: index.html:469 tablet7in.html:627
 msgid "Show illumination"
 msgstr "Mostrar iluminação"
 
-#: index.html:464 tablet7in.html:624
+#: index.html:474 tablet7in.html:633
 msgid "Current landscape"
 msgstr "Paisagem atual"
 
-#: index.html:476 tablet7in.html:637
+#: index.html:486 tablet7in.html:646
 msgid "Show lines with thickness"
 msgstr ""
 
-#: index.html:481 tablet7in.html:642
+#: index.html:491 tablet7in.html:651
 msgid "Show asterisms with thickness"
 msgstr "Mostrar asterismos e espessura"
 
-#: index.html:492 tablet7in.html:658
+#: index.html:502 tablet7in.html:667
 msgid "Current sky culture"
 msgstr "Cultura estrelar atual"
 
-#: index.html:505 tablet7in.html:683
+#: index.html:515 tablet7in.html:692
 msgid "Active script:"
 msgstr "Script ativo:"
 
-#: index.html:506 tablet7in.html:684
+#: index.html:516 tablet7in.html:693
 msgid "Run selected script"
 msgstr "Executar script selecionado"
 
-#: index.html:506 tablet7in.html:684
+#: index.html:516 tablet7in.html:693
 msgid "Stop current script"
 msgstr "Parar script atual"
 
-#: index.html:511 tablet7in.html:41 tablet7in.html:668
+#: index.html:521 tablet7in.html:41 tablet7in.html:677
 msgid "Actions"
 msgstr "Ações"
 
-#: index.html:515 tablet7in.html:672
+#: index.html:525 tablet7in.html:681
 msgid "Run/toggle action"
 msgstr "Executar/Alternar acção"
 
-#: index.html:526 tablet7in.html:707
+#: index.html:536 tablet7in.html:716
 msgid "Planet map"
 msgstr "Mapa do planeta"
 
-#: index.html:527 tablet7in.html:708
+#: index.html:537 tablet7in.html:717
 msgid "Planet map pointer"
 msgstr "Cursor do mapa do planeta"
 
-#: index.html:531 tablet7in.html:712
+#: index.html:541 tablet7in.html:721
 msgid "Type to search location"
 msgstr "Digite para procurar uma localização"
 
-#: index.html:560 tablet7in.html:741
+#: index.html:570 tablet7in.html:750
 msgid "Interaction"
 msgstr "Interação"
 
-#: index.html:561 tablet7in.html:742
+#: index.html:571 tablet7in.html:751
 msgid "Current scene:"
 msgstr "Cena atual:"
 
-#: index.html:564 tablet7in.html:745
+#: index.html:574 tablet7in.html:754
 msgid "View controls"
 msgstr "Ver controlos"
 
-#: index.html:570 tablet7in.html:751
+#: index.html:580 tablet7in.html:760
 msgid "Movement controls"
 msgstr "Controlos de movimento"
 
-#: index.html:586 tablet7in.html:767
+#: index.html:596 tablet7in.html:776
 msgid "Scene selection"
 msgstr "Seleção de cena"
 
-#: index.html:590 tablet7in.html:771
+#: index.html:600 tablet7in.html:780
 msgid "Load selected scene"
 msgstr "Abrir cena selecionada"
 
-#: index.html:614 tablet7in.html:796
+#: index.html:624 tablet7in.html:805
 msgid "No response from server"
 msgstr "Nenhuma resposta do servidor"
 
-#: index.html:615
-msgid "No response from server since %1 seconds. Is Stellarium still running?"
+#: index.html:625 tablet7in.html:806
+msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
-"Nenhuma resposta do servidor desde à %1 segundos. O Stellarium ainda está em"
-" execução?"
+"Nenhuma resposta do servidor durante %1 segundos. O Stellarium está em "
+"execução?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
@@ -586,28 +586,22 @@ msgstr "Aquarius (Aquário)"
 msgid "Pisces"
 msgstr "Pisces (Peixes)"
 
-#: tablet7in.html:654
+#: tablet7in.html:663
 msgid "Constellation selection isolated"
 msgstr "Seleção de constelações isoladas"
 
-#: tablet7in.html:692
+#: tablet7in.html:701
 msgid "Favorites"
 msgstr "Favoritos"
 
-#: tablet7in.html:694
+#: tablet7in.html:703
 msgid "Show 1"
 msgstr "Mostrar 1"
 
-#: tablet7in.html:695
+#: tablet7in.html:704
 msgid "Remove Labels and Images"
 msgstr "Remover Etiquetas e Imagens"
 
-#: tablet7in.html:695
+#: tablet7in.html:704
 msgid "Cleanup Screen"
 msgstr "Limpar Ecrã"
-
-#: tablet7in.html:797
-msgid "No response from server for %1 seconds. Is Stellarium still running?"
-msgstr ""
-"Nenhuma resposta do servidor durante %1 segundos. O Stellarium está em "
-"execução?"
