@@ -100,7 +100,7 @@ void SolarSystemManagerWindow::updateTexts()
 	//Solar System tab
 	// TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 	QString linkText(q_("website"));
-	QString linkCode = QString("<a href=\"http://www.minorplanetcenter.net/\">%1</a>").arg(linkText);
+	QString linkCode = QString("<a href=\"https://www.minorplanetcenter.net/\">%1</a>").arg(linkText);
 	       
 	// TRANSLATORS: IAU = International Astronomical Union
 	QString mpcText(q_("You can import comet and asteroid data formatted in the export formats of the IAU's Minor Planet Center (%1). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES)."));

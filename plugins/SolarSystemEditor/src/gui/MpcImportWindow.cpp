@@ -970,6 +970,7 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].clear();
 
 	QString bookmarksFilePath(StelFileMgr::getUserDir() + "/modules/SolarSystemEditor/bookmarks.json");
+	bool outdated = false;
 	if (StelFileMgr::isReadable(bookmarksFilePath))
 	{
 		QFile bookmarksFile(bookmarksFilePath);
@@ -985,13 +986,19 @@ void MpcImportWindow::loadBookmarks()
 
 			bookmarksFile.close();
 
+			if (StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_PLUGIN_VERSION)<0)
+				outdated = true; // Oops... the list is outdated!
+
 			//If nothing was read, continue
-			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty() && StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_PLUGIN_VERSION)==0)
+			if (!bookmarks.value(MpcComets).isEmpty() && !bookmarks[MpcMinorPlanets].isEmpty() && !outdated)
 				return;
 		}
 	}
 
-	qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
+	if (outdated)
+		qDebug() << "Bookmarks file is outdated! The list will be upgraded by hard-coded bookmarks.";
+	else
+		qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
 
 	//Initialize with hard-coded values
 	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2017", "https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2017/Soft00Bright.txt");
