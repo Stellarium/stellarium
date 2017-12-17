@@ -147,6 +147,7 @@ displayed about a selected object.
 \item Ticking or unticking the relevant boxes will control this.
 \item The information displays in various colours depending on the type and
 level of the stored data
+\item An additional settings for the information display
 \end{itemize}
 
 \subsection{The Navigation Tab}
@@ -220,12 +221,20 @@ features:
   will display all constellations.
 \item[Show nebula background button] You can disable display of DSO
   photographs with this button.
+\item[Show bookmarks button] You can disable display of Bookmarks dialog with this button.
+\item[Show ICRS grid button] You can toggle display of equatorial J2000 coordinate grid with this button.
+\item[Show ecliptic grid button] You can toggle display of ecliptic coordinate grid with this button.
 \item[Auto-enabling for the atmosphere] When changing planet during
   location change, atmosphere will be switched as required.
 \item[Include nutation] Compute the slight wobble of earth's
   axis. This feature is active only about 500 years around J2000.0.
 \item[Azimuth from South] Some users may be used to counting azimuth
   from south.
+\item[Use buttons background] Some users may be want to disable usage of background under buttons on bottom bar.
+\item[Auto zoom out returns to initial field of view] When enabled,
+  this option changes the behaviour of the zoom out key
+  (\textbackslash{}) so that it resets the initial direction of view in
+  addition to the field of view.
 \item[Disc viewport] This option masks the main view
   producing the effect of a telescope eyepiece. It is also useful when
   projecting Stellarium's output with a fish-eye lens planetarium
@@ -237,15 +246,15 @@ features:
   the main tool bar which allow the main view to be mirrored in the
   vertical and horizontal directions. This is useful when observing
   through telecopes which may cause the image to be mirrored.
-\item[Use decimal degrees]
+\item[Show DSS button] You can toggle display of Digitized Sky Survey with this button.
+\item[Show galactic grid button] You can toggle display of galactic coordinate grid with this button.
+\item[Show constellation boundaries button] You can toggle display of boundary of the constellations with this button.
+\item[Use decimal degrees] You can toggle usage decimal format for coordinates by this checkbox.
 \item[Topocentric coordinates] If you require planetocentric
   coordinates, you may switch this off. Usually it should be enabled.
 \item[Auto select landscapes] When changing the planet in the location
   panel, a fitting landscape panorama will be shown when available.
-\item[Auto zoom out returns to initial field of view] When enabled,
-  this option changes the behaviour of the zoom out key
-  (\textbackslash{}) so that it resets the initial direction of view in
-  addition to the field of view.
+\item[Indication for mount mode] You can toggle usage indication for type of used mount by this checkbox.
 \end{description}
 
 \noindent In addition, you can set the directory where screenshots will be stored, and you can download more star catalogs on this tab.
@@ -503,7 +512,7 @@ The controls at the bottom right of the window operate as follows:
 \noindent Using the button \menu{Add/remove landscapes\ldots}, you can also
 install new landscapes from ZIP files which you can download e.g.\
 from the Stellarium
-website\footnote{\url{http://stellarium.org/wiki/index.php/Landscapes}}
+website\footnote{\url{http://stellarium.sourceforge.net/wiki/index.php/Landscapes}}
 or create yourself (see ch.~\ref{ch:landscapes} Landscapes), or remove
 these custom landscapes.
 
@@ -536,8 +545,9 @@ Western and Inuit), and the rest do not. Configurable options include
 \item[Show lines with thickness\ldots] Activate display of stick
   figures, like \guibutton{0.6}{bt_constellation} or \keys{C}, and you
   can configure constellation line thickness here.
-  \item[Show asterism lines\ldots] Activate display of asterism stick figures   
+\item[Show asterism lines\ldots] Activate display of asterism stick figures   
   (like the shortcut \keys{Alt+A}) and you can configure asterism line thickness here.\newFeature{v0.16.0}
+\item[Show ray helpers\ldots] Activate display of special navigational lines who make connection different stars (like the shortcut \keys{Alt+R}) and you can configure thickness of those lines here.\newFeature{v0.17.0}
 \item[Show boundaries] Activate display of constellation boundaries,
   like \keys{B}. Currently, boundaries have been defined only for
   ``Western'' skycultures.
@@ -634,7 +644,7 @@ The Astronomical Calculations window shows six tabs with different functionality
 \newFeature{v0.16.0} This tab shows J2000.0 or horizontal positions, magnitudes and additional parameters 
 (e.g.\ surface brightness for deep-sky objects or angular separation for double stars) for various 
 lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
-Double-clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}).
+Double-clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}). You may save the list of position into CSV file also.
 
 
 \begin{figure}[htbp]
@@ -760,6 +770,17 @@ setting a minimum magnitude using the \emph{Show objects brighter than magnitude
 You may center an object from the right list in the sky map just by selecting it.
 
 Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
+
+\subsection{The ``Planetary Calculator'' (PC) Tab}
+\label{sec:gui:AstroCalc:PC}
+
+The ``Planetary Calculator'' (PC) tool\newFeature{v0.17.0} has been added by users requests and it computes the relations between two Solar system bodies for the current date and location --- linear and angular distances, orbital resonances and orbital velocities.
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_tab}
+\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (Pc)}
+\label{fig:gui:AstroCalc:PC}
+\end{figure}
 
 
 \newpage 

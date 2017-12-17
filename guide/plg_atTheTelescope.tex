@@ -207,6 +207,8 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view} 
    \item[Restore FOV to initial values] and
    \item[Restore direction to initial values] options allow restoration field of view and direction of view, resp., 
          to the initial values at program start at the end of the plugin usage (e.g., when disabling the view through CCD frame).
+   \item[Show resolution criteria] allow compute and show Rayleigh criterion, Dawes', Abbe's and Sparrow's limits for combination of telescope, lens and eyepiece. Plus this option will and show visual resolution for selected ``setup''. This data may be very helpful for double star observers.
+   \item[Arrow button scale] allows to change the size of arrow-buttons.
  \end{description}
 \item[Ocular view] is a group of options that allows to change the plugin's behaviour in visual observation mode.
  \begin{description}
@@ -500,6 +502,10 @@ The plug-in's main window can be opened:
     running on the same computer
   \item[remote, unknown] means an INDIRECT connection over a network
     to a remote machine.
+  \item[remote, RTS2] means an INDIRECT connection over a network
+        to a RTS2 server.
+  \item[remote, INDI] means an INDIRECT connection over a network
+        to an INDI server.
   \end{description}
 \end{itemize}
 
@@ -519,6 +525,7 @@ Telescope controlled by:
 \item[Stellarium, directly through a serial port] is the DIRECT case
 \item[External software or a remote computer] is an INDIRECT case
 \item[RTS2 Telescope] is another INDIRECT case\newFeature{v0.16.0}
+\item[INDI] is another INDIRECT case\newFeature{v0.17.0}
 \item[Nothing, just simulate one (a moving reticle)] is a \emph{virtual telescope} (no connection)
 \end{description}
 
@@ -600,6 +607,10 @@ rts2-user} for details on how to manipulate RTS2 users.
 \item[Username] username used for login to RTS2 HTTPD.
 \item[Password] password for login to RTS2 HTTPD.
 \end{description}
+
+\paragraph{INDI settings} (see also \ref{sec:plugins:TelescopeControl:INDI})
+You will need access to INDI server through TCP/IP connection.\newFeature{v0.16.0}
+Please see INDI documentation for details. You will need to select correct INDI device to manage of them.
 
 \paragraph{User Interface Settings: Field of view indicators}
 
@@ -716,6 +727,13 @@ Please be aware that some RTS2 usernames might have only read-only access. If th
 case for your username, the telescope marker will be painted red (or
 \texttt{color\_telescope\_readonly} from Stellarium's settings file).
 
+\subsubsection{INDI telescopes}
+\newFeature{v0.17.0}Setting up a robotic telescope and dome control system with INDI 
+is beyond the scope of this handbook, but see section~\ref{sec:plugins:TelescopeControl:INDI} 
+for a few notes to be able to connect and command the telescope with Stellarium.
+Please refer to the INDI web pages\footnote{\url{http://indilib.org}} for further details.
+
+
 \subsubsection{Virtual telescope}
 If you want to test this plug-in without an actual device connected to
 the computer, choose ``Nothing, just simulate one (a moving reticle)'' in
@@ -767,6 +785,39 @@ In case you cannot properly connect to the RTS2 telescope or cannot send slew co
 RTS2 is the only type of telescope supported by Stellarium which can autonomously track satellites. 
 Tracking accuracy fully depends on Stellarium's TLE satellite elements being up-to-date 
 (see section~\ref{sec:plugins:Satellites}) and the accuracy of your RTS2 installation.
+
+\section{INDI}
+\label{sec:plugins:TelescopeControl:INDI}
+\indexterm{INDI}, \newFeature{v0.17.0}the Instrument Neutral Distributed Interface, is a distributed control system (DCS) protocol to enable control, data acquisition and exchange among hardware devices and software front ends, emphasizing astronomical instrumentation\footnote{\url{https://en.wikipedia.org/wiki/Instrument_Neutral_Distributed_Interface}}.
+ 
+INDI client (v1.6.0) has been incorporated into Telescope Control plugin by Alessandro Siniscalchi to allow the Stellarium communicate with INDI hardware drivers via INDI server. INDI server is the hub that sits between drivers and clients. It reroutes traffic for control and data across distributed networks. Each device or client in the network is a node and may communicate with other nodes whenever desired. The server supports broadcasting, chaining, and marshaling of data.
+
+Stellarium may works with INDI mounts only and you will need to select correct INDI device to manage of them on the stage of configuration of telescope. For this purpose the plug-in has tool to getting list of connected devices to the INDI server (when server is working!). Please define hostname and port\footnote{Internet Assigned Numbers Authority (IANA) has assigned INDI to Transmission Control Protocol (TCP) and User Datagram Protocol (UDP), or TCP/UDP port 7624.} in ``INDI Settings'' block, press ``Refresh devices'' button and select required device in the list ``Devices''. 
+
+List of supported type of telescopes by INDI\footnote{\url{http://indilib.org/devices/telescopes/all.html}}:
+\begin{itemize}
+\item Meade Autostar
+\item Meade LX200 (Classic/GPS/16)
+\item Celestron NexStar
+\item Celestron NexStar Evolution
+\item Orion Synscan Telescope
+\item EQ-6 MCU Update
+\item HEQ-5 MCU Update
+\item LittleFoot Vpower
+\item LittleFoot Elegance Photo
+\item Astro-Electronic FS-2
+\item EQMod
+\item Pulsar2
+\item SkySensor2000PC
+\item Takahashi Temma
+\item 10 Micron
+\item Losmandy Gemini
+\item Astrophysics
+\item Skywatcher Virtuoso (Alt/Az)
+\item IOptron IEQPro/CEM60
+\item IOptron ZEQ25/SmartEQ
+\item IOptron GotoNova Upgrade Kit 8400
+\end{itemize}
 
 \newpage
 \section{StellariumScope}

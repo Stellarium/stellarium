@@ -97,7 +97,7 @@ generalized values for it.
 \label{sec:plugins:HistoricalSupernovae}
 
 \begin{figure}[ht]
-\includegraphics[width=\textwidth]{sn1604wiki.jpg}
+\includegraphics[width=\textwidth]{sn1604wiki}
 \caption{Supernova 1604 (also known as \textbf{Kepler's Supernova}, \textbf{Kepler's Nova} or \textbf{Kepler's Star})}
 \label{fig:SN1604}
 \end{figure}
@@ -128,31 +128,42 @@ SN 1604A\footnote{\url{https://en.wikipedia.org/wiki/SN_1604}} & 8 October & -2.
 SN 1680A\footnote{\url{https://en.wikipedia.org/wiki/Cassiopeia_A}} & 15 August & 6.0 & IIb & Cassiopeia A\\\midrule
 SN 1885A\footnote{\url{https://en.wikipedia.org/wiki/S_Andromedae}} & 17 August & 5.8 & IPec & S Andromedae\\\midrule
 SN 1895B & 5 July & 8.0 & I & \\\midrule
+SN 1919A & 14 March & 11.0 & I & \\\midrule
 SN 1920A & 17 December & 11.7 & II & \\\midrule
 SN 1921C & 11 December & 11.0 & I & \\\midrule
 SN 1937C & 21 August & 8.5 & Ia & \\\midrule
+SN 1937D & 15 September & 11.87 & Ia & \\\midrule
 SN 1960F & 21 April & 11.6 & Ia & \\\midrule
 SN 1960R & 19 December & 12.0 & I & \\\midrule
 SN 1961H & 8 May & 11.8 & Ia & \\\midrule
 SN 1962M & 26 November & 11.5 & II & \\\midrule
+SN 1965I & 19 Juni & 11.8 & Ia & \\\midrule
 SN 1966J & 2 December & 11.3 & I & \\\midrule
 SN 1968L & 12 July & 11.9 & IIP & \\\midrule
 SN 1970G & 30 July & 11.4 & IIL & \\\midrule
 SN 1971I & 29 May & 11.9 & Ia & \\\midrule
 SN 1972E\footnote{\url{https://en.wikipedia.org/wiki/SN1972e}} & 8 May & 8.4 & Ia & \\\midrule
+SN 1974G & 27 April & 11.8 & Ia & \\\midrule
 SN 1979C & 15 April & 11.6 & IIL & \\\midrule
 SN 1980K & 31 October & 11.6 & IIL & \\\midrule
 SN 1981B & 9 March & 12.0 & Ia & \\\midrule
 SN 1983N & 17 July & 11.4 & Ib & \\\midrule
+SN 1986G & 12 May & 11.44 & Ia Pec & \\\midrule
 SN 1987A\footnote{\url{https://en.wikipedia.org/wiki/SN_1987A}} & 24 February & 2.9 & IIPec & \\\midrule
 SN 1989B & 6 February & 11.9 & Ia & \\\midrule
 SN 1991T & 26 April & 11.6 & IaPec & \\\midrule
 SN 1993J\footnote{\url{https://en.wikipedia.org/wiki/SN_1993J}} & 30 March & 10.8 & IIb & \\\midrule
+SN 1994ae & 12 January & 12.0 & Ia & \\\midrule
 SN 1994D & 31 March & 11.8 & Ia & \\\midrule
 SN 1998bu & 21 May & 11.9 & Ia & \\\midrule
 SN 2004dj & 31 July & 11.3 & IIP & \\\midrule
+SN 2004et & 2 October & 11.57 & II & \\\midrule
 SN 2011fe\footnote{\url{https://en.wikipedia.org/wiki/SN_2011fe}} & 13 September & 10.06 & Ia & \\\midrule
-SN 2013aa & 13 February	& 11.9 & Ia & \\\bottomrule
+SN 2012cg & 6 Juni & 11.954 & Ia & \\\midrule
+SN 2012fr & 16 November & 11.95 & Ia & \\\midrule
+SN 2013aa & 13 February	& 11.9 & Ia & \\\midrule
+SN 2014j  & 30 January	& 10.5 & Ia & \\\midrule
+SN 2017cbv  & 22 March  & 11.5 & Ia & \\\bottomrule
 \end{longtabu}
 
 \subsection{Light curves}
@@ -238,8 +249,8 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 \label{sec:plugins:Exoplanets}
 
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{exoplanets.jpg}
-\caption{Planetary system HD 13808}
+\includegraphics[width=\textwidth]{exoplanets}
+\caption{Planetary system $\tau$ Ceti}
 \label{fig:Exoplanets}
 \end{figure}
 
@@ -354,7 +365,8 @@ habitable\_enabled  & bool & Enable habitable mode of display \\\midrule
 enable\_at\_startup  & bool & Enable displaying exoplanets at startup of the plugin \\\midrule
 exoplanet\_marker\_color & R,G,B & Color for marker of star with planetary system \\\midrule
 habitable\_exoplanet\_marker\_color  & R,G,B & Color for marker of star with planetary system with potential habitable exoplanets
- \\\bottomrule
+\\\midrule
+temperature\_scale & string & Temperature scale for equilibrium temperature of exoplanets. Possible values: \emph{Kelvin}, \emph{Celsius}, \emph{Fahrenheit}. Default value: \emph{Celsius}. \\\bottomrule
 \end{longtabu}
 
 \newpage
@@ -831,6 +843,7 @@ settings for the Navigational Stars plugin -- just make it carefully!
 \begin{longtabu} to \textwidth {l|l|X}\toprule
 \emph{ID}			& \emph{Type} 	& \emph{Description}\\\midrule
 navstars\_color 	& R,G,B 		& Color of markers of navigational stars  \\
+enable\_at\_startup & bool 		    & Set to \emph{true} to display navigational stars at startup of planetarium  \\
 current\_ns\_set	& string		& Current set of navigational stars. Possible values: \emph{AngloAmerican}, \emph{French} and \emph{Russian}. \\
 \bottomrule
 \end{longtabu}

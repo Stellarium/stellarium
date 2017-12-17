@@ -201,7 +201,7 @@ fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \
 
 
 \begin{figure}[th]\centering
-\includegraphics[trim=0 140 0 0,clip,width=.85\textwidth]{PointerCoordinates-plugin.jpg}
+\includegraphics[width=.75\textwidth]{PointerCoordinates-plugin.jpg}
 \caption{Interface of Pointer Coordinates plugin}
 \label{fig:PointerCoordinates}
 \end{figure}
@@ -224,7 +224,8 @@ font\_size           & int & Font size for the displayed coordinates of the mous
 current\_displaying\_place  & string & Specifies the place of displaying coordinates of the mouse pointer. \textit{Possible values}: \keymap{TopRight}, \keymap{TopCenter}, \keymap{RightBottomCorner}, \keymap{Custom}. \textit{Default value}: \keymap{TopRight}. \\\midrule
 current\_coordinate\_system & string & Specifies the coordinate system. \textit{Possible values}: \keymap{RaDecJ2000}, \keymap{RaDec}, \keymap{HourAngle}, \keymap{Ecliptic}, \keymap{AltAzi}, \keymap{Galactic}. \textit{Default value}: \keymap{RaDecJ2000}. \\\midrule
 custom\_coordinates  & int,int & Specifies the screen coordinates of the custom place for displaying coordinates of the mouse pointer \\\midrule
-flag\_show\_constellation &bool& Add the 3-letter IAU abbreviation for the constellation the mouse pointer sits in \cite{1987PASP...99..695R}.\\\bottomrule
+flag\_show\_constellation &bool& Add the 3-letter IAU abbreviation for the constellation the mouse pointer sits in \cite{1987PASP...99..695R}.\\\midrule
+flag\_show\_crossed\_lines &bool& Show crossed line under mouse cursor.\\\bottomrule
 \end{longtabu}
 
 
@@ -643,7 +644,7 @@ directory if it also exists there, which means, users can add minor
 planets or comets as they become observable by editing this file.
 
 
-This plugin provides a window to the Minor Planet Center (MPC) where the
+This plugin provides a window to the Minor Planet Center (MPC\footnote{\url{https://www.minorplanetcenter.net}}) where the
 latest Solar System information can be found. When this plugin is
 loaded (see section~\ref{sec:Plugins:EnablingPlugins}) and you call the configuration dialog, the first tab
 allows to import, export or reset your \file{ssystem\_minor.ini}, 
@@ -653,15 +654,38 @@ data for over 1000 historical comets. Currently it is not possible to select onl
 so try loading this only on a reasonably fast computer, and think about deleting comets again (or resetting the file) when 
 you don't require them.
 
-The second tab lists all currently loaded minor bodies.  It is recommended
+The second tab lists all currently loaded minor bodies (see figure~\ref{fig:SolarSystemEditor:SolarSystem}).  It is recommended
 to remove old entries of yesteryear's comets if you don't need them any
 longer. Just select one or more objects and press \button{Remove}.
 If you have a very weak computer, you may want to reduce the number of
 minor bodies to just a handful to improve performance.
 
 On this tab, you also find the option to connect to the MPC and download current orbital elements, 
-or load a text file in the format provided by MPC. 
+or load a text file in the format provided by MPC (see figures \ref{fig:SolarSystemEditor:ImportData:InitialView} and \ref{fig:SolarSystemEditor:ImportData:FinalView}). 
 
+\begin{figure}[th]\centering
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile}
+\caption{Interface of Solar System Editor plugin: Configuration file tab}
+\label{fig:SolarSystemEditor:ConfigurationFile}
+\end{figure}
+
+\begin{figure}[th]\centering
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys}
+\caption{Interface of Solar System Editor plugin: Solar System tab}
+\label{fig:SolarSystemEditor:SolarSystem}
+\end{figure}
+
+\begin{figure}[th]\centering
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import}
+\caption{Interface of Solar System Editor plugin: Import data dialog}
+\label{fig:SolarSystemEditor:ImportData:InitialView}
+\end{figure}
+
+\begin{figure}[th]\centering
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import2}
+\caption{Interface of Solar System Editor plugin: Import data dialog --- view after downloading and parsing the MPC data.}
+\label{fig:SolarSystemEditor:ImportData:FinalView}
+\end{figure}
 
 
 %%% Local Variables: 
