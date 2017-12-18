@@ -40,11 +40,11 @@ Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; Flags: ignoreversion; DestD
 @REDIST_FILES@
 Source: "@CMAKE_SOURCE_DIR@\data\stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
 Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
-; Source: "@CMAKE_SOURCE_DIR@\README"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.rtf"
-; Source: "@CMAKE_SOURCE_DIR@\INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.rtf"
-Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.rtf"
-; Source: "@CMAKE_SOURCE_DIR@\AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.rtf"
-Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.rtf"
+; Source: "@CMAKE_SOURCE_DIR@\README.md"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.txt"
+; Source: "@CMAKE_SOURCE_DIR@\INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.txt"
+Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.txt"
+; Source: "@CMAKE_SOURCE_DIR@\AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.txt"
+Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
 Source: "@QtCore_location@"; DestDir: "{app}";
 Source: "@QtGui_location@"; DestDir: "{app}";
 @ISS_QT_OPENGL@
@@ -110,7 +110,7 @@ Name: "{group}\{cm:UninstallProgram,Stellarium}"; Filename: "{uninstallexe}"
 Name: "{group}\config.ini"; Filename: "{userappdata}\Stellarium\config.ini"
 Name: "{group}\{cm:LastRunLog}"; Filename: "{userappdata}\Stellarium\log.txt"
 Name: "{group}\{cm:OutputDataFile}"; Filename: "{userappdata}\Stellarium\output.txt"
-Name: "{group}\{cm:ChangeLog}"; Filename: "{app}\ChangeLog.rtf"
+Name: "{group}\{cm:ChangeLog}"; Filename: "{app}\ChangeLog.txt"
 @ISS_GUIDE@
 Name: "{commondesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\common
 Name: "{userdesktop}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"; Tasks: desktopicon\user
