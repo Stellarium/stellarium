@@ -618,8 +618,29 @@ innerbottommargin=5pt]{cBox}
 \par\vspace*{270\p@}}
 \makeatother
 
+\usepackage{fancyvrb}% provides \VerbatimFootnotes
+\usepackage{marvosym}% For the Zodiac symbols, \Aries etc.
+\usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
+%\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
+
+%% This can be used to verify general page layout with the command \layout given later.
+%% \usepackage{layout}
+
+
+\usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
+%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
+%\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
+% Prefer using menukeys.
+\newcommand{\key}[1]{\keys{#1}}
+\newcommand{\keyPageUp}{\keys{Page\,\arrowkeyup\,}}
+\newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
+\renewcommand{\topfraction}{0.9}
+
+\definecolor{light-gray}{gray}{0.90}
 %----------------------------------------------------------------------------------------
-%	HYPERLINKS IN THE DOCUMENTS
+%	HYPERLINKS IN THE DOCUMENTS. These packages should be last, else some PDF bookmarks fail!
 %----------------------------------------------------------------------------------------
 
 \usepackage{hyperref}
@@ -630,13 +651,17 @@ innerbottommargin=5pt]{cBox}
             pdfduplex=DuplexFlipLongEdge,
             pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
             %pdfcreator={PDFLaTeX},
-            pdfproducer={Stellarium team}, 
-            pdfkeywords={Stellarium Manual}, 
+            %pdfproducer={Stellarium team},%(should be application name!)
+            pdfkeywords={Stellarium Manual},
             pdftitle={Stellarium User Guide},pdfdisplaydoctitle=true,
-            pdfauthor={M. Gates, A. Wolf, G. Zotti, B. Gerdes}% 
+            pdfauthor={Georg Zotti and Alexander Wolf (editors)}%
             }
-%% GZ TODO Maybe in some other style, but links should be visible. 
+%% GZ TODO Maybe in some other style, but links should be visible.
 %\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+% Repeat some settings with pdfcatalog:
+%\pdfcatalog{pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
+%            pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,}
+
 \usepackage{bookmark}
 \bookmarksetup{
 open,
@@ -651,13 +676,3 @@ addtohook={%
 }
 }
 
-\usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
-%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
-%\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
-% Prefer using menukeys. 
-\newcommand{\key}[1]{\keys{#1}}
-\newcommand{\keyPageUp}{\keys{Page\,\arrowkeyup\,}}
-\newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
-\renewcommand{\topfraction}{0.9}
-
-\definecolor{light-gray}{gray}{0.90}

@@ -1,67 +1,267 @@
-# Makefile for the Stellarium User Guide
-# On Windows with git shell or cygwin, use rm, not del. 
-# Note that make resets SHELL to sh.exe. Cygwin/MinGW/Git shell's version includes full path name with forward-slash.
+# Makefile for the Stellarium User Guide (SUG)
+# Required tools:
+# WINDOWS 
+# ========
+# It is possible to run make from the Windows command shell or from Linux-like environments: CygWin, Ubuntu shell or at least the Git shell. 
+# If cygwin or Ubuntu are your favorite environments and you have already installed TeXlive there, 
+# you won't need MiKTeX, but can use the existing installations. Else install these tools:
+# * make and touch from GnuWin32
+# * MiKTeX from http://miktex.org. Configure it to auto-download packages as required.
+# * pdftk.exe from https://www.pdflabs.com/tools/pdftk-server/ or the pdftk.exe in the program folder of the "private" GUI version.
+# * GhostScript from https://www.ghostscript.com. Make sure to have the distribution's bin directory in PATH.
+# GIT shell: Install these tools and just make sure they are found in PATH!
+# CygWin: To build SUG with native tools, install the relevant packages from the Cygwin repository; alternatively, the Windows tools will be called
+# Ubuntu: apt-get install make texlive-full gs pdftk. On Windows' Ubuntu shell, the native Windows tools can be used if available in PATH.
+#
+# LINUX
+# =======
+# Debian, Ubuntu: apt-get install make texlive-full gs pdftk. 
+# Others: make sure to install the abovementioned packages for your distribution.
+#
+# MAC OS X
+# ==========
+# * TODO: please add instructions here.
 
-ifeq ($(OS),Windows_NT)
-	ifeq ($(findstring /sh.exe, $(SHELL)),/sh.exe)
+
+
+# We try to detect Windows or other system to configure the tool names properly. 
+# Problem: Ubuntu shell on Windows does not know environment variable OS. 
+# https://stackoverflow.com/questions/38086185/how-to-check-if-a-program-is-run-in-bash-on-ubuntu-on-windows-and-not-just-plain
+#
+# On Windows with git shell, Ubuntu bash or cygwin, use rm and mv, not del and move. 
+# Note that make resets SHELL to sh.exe. 
+# Cygwin/Ubuntu/MinGW/Git shell's version includes full path name with forward-slash, signalling bash use.
+# So far we can also assume that we are on pure (poor) Windows commandline if SHELL=sh.exe
+
+PDFLATEX=pdflatex
+BIBER=biber
+MAKEINDEX=makeindex
+
+ifeq ($(OS),Windows_NT) # variable OS not set under Win10/Ubuntu!
+	ifeq ($(findstring /sh, $(SHELL)),/sh)
 		RM=rm -fr
-	else
+		MV=mv
+		ifeq ($(findstring gs,$(shell which gs 2>/dev/null)),gs)
+			GS=gs
+		else
+			ifeq ($(findstring gswin64c,$(shell which gswin64c 2>/dev/null)),gswin64c)
+				GS=gswin64c.exe
+			else
+				GS=gswin32c.exe
+			endif
+		endif
+		PDFTK=pdftk
+	else # cmd shell. TODO: hide error message of "where".
 		RM=del /Q
+		MV=rename
+		ifeq ($(findstring gswin64c,$(shell where gswin64c)),gswin64c)
+				GS=gswin64c.exe
+			else
+				GS=gswin32c.exe
+			endif
+		PDFTK=pdftk.exe
 	endif
-else
+else 
+	# OS not Windows on most Non-Windows environments, but may still be Ubuntu bash on Windows! 
+	# In essence, if tool not found, fall back to that tools' names from the Windows environment.
+	# It is assumed that at least the Windows tools are configured to lie in PATH.
+	ifneq ($(findstring pdflatex, $(shell which pdflatex)),pdflatex)
+		PDFLATEX=pdflatex.exe
+	endif
+	ifneq ($(findstring biber, $(shell which biber)),biber)
+		BIBER=biber.exe
+	endif
+	ifneq ($(findstring makeindex, $(shell which makeindex)),makeindex)
+		MAKEINDEX=makeindex.exe
+	endif
+	ifneq ($(findstring pdftk, $(shell which pdftk)),pdftk)
+		PDFTK=pdftk.exe
+	else	
+		PDFTK=pdftk
+	endif
+	ifneq ($(findstring gs,$(shell which gs)),gs)
+		GS=gswin64c.exe
+	else
+		GS=gs
+	endif
 	RM=rm -fr 
+	MV=mv
 endif
 
+
 .DEFAULT:
-.PHONY: help clean distclean guide pdf manual 
+.PHONY: help diag clean distclean guide pdf manual SUG html
 
 .SUFFIXES:
-.SUFFIXES: .tex .aux .log .lot .lof .toc .bbl .ind .dvi .pdf .eps .jpg .png 
+.SUFFIXES: .tex .aux .log .lot .lof .toc .bbl .ind .dvi .pdf .eps .jpg .png .html .ps
 
+
+	
 help:
-	@echo ""
-	@echo "              Stellarium Manual Options"
-	@echo "              =========================="
-	@echo "targets: clean, distclean, pdf=manual"
-	@echo "pdf = guide = manual = guide.pdf   Stellarium User Guide"
+	@echo               Stellarium Manual Options
+	@echo               ==========================
+	@echo PDFLaTeX creates the prettiest PDF, but it is quite large.
+	@echo targets: 
+	@echo clean: remove intermediate files.
+	@echo distclean: also remove the PDF targets SUG.pdf, guide.pdf
+	@echo pdf = guide = manual = guide.pdf :  Stellarium User Guide \(hi-res\)
+	@echo SUG = SUG.pdf : as final target applies compression via GhostScript \(slow!\)
+	@echo html: create online version. \(EXPERIMENTAL, WIP\)
+	@echo diag: print some diagnostics about tool names.
 
 clean:
 	${RM} *~ core *.aux *.log *.lof *.toc *.out *.blg *.bcf *.bbl *.idx *.ilg *.ind *.ptc *.run.xml 
 	
 distclean: clean
-	${RM} guide.pdf
+	${RM} guide.pdf SUG.pdf
 
 manual: guide.pdf
 
 guide: guide.pdf
 
-pdf: guide.pdf
+pdf: guide.pdf 
+
+html: guide.html
+
+# Installation notes for some tools:
+# Use any recent LaTeX distribution like TeXlive (Linux) or MiKTeX 2.9 or later. 
+
+# The size reduction will need GhostScript and some add-on tools.
+# 2 options were explored on Windows 10's Ubuntu 14.04 LTS: 
+# * install https://github.com/pts/pdfsizeopt 
+#   sudo apt-get install default-jre 
+#   download Multivalent.jar from https://sourceforge.net/projects/multivalent/?source=typ_redirect and put it into PATH
+#   The official project seems defunct. Found old version at  http://www.accountingenhancements.com/multivalent.sourceforge.net/files/Multivalent20060102.jar 
+#   run target SUG.pdf
+# * optpdf. This removes the opening view settings from the PDF which have to be restored with pdfmark hacks.
+#   We also need pdftk for this.
+# --> make SUG.pdf
 
 # ================ GENERAL RULES ==================================
+
+# TODO: A rule that securely detects when guide.pdf is complete and no more action is required. Probably we need to make out own logfile grep for "Rerun Latex" and a stop file target.
+# Issue: bbl depends on bcf which is created on every run. Likewise, ind depends in idx. We should detect when pdflatex does not emit a warning about changed page numbers.
+# Currently, we assume page numbers have settled by the 3rd run, and artificially change the file ages with touch to convince make to stop.
 
 #%.tex : ;
 #Makefile: ;
 # we must call makeindex again just before final run to update page numbers. Not too intuitive, but seems necessary...
-guide.pdf : guide.bbl guide.ind 
-	pdflatex guide.tex
-	makeindex guide.idx -s StyleInd.ist
-	pdflatex guide.tex
+guide.pdf : guide.ind guide.bbl 
+	${PDFLATEX} guide.tex
+	${MAKEINDEX} guide.idx -s StyleInd.ist
+	${PDFLATEX} guide.tex
+	${PDFLATEX} guide.tex
+	touch -c guide.ind
+	touch -c guide.bbl
+	touch -c $@
 
-guide.ind: guide.idx guide.toc
-	makeindex guide.idx -s StyleInd.ist
+#guide.ind: guide.idx guide.toc
+guide.ind: guide.idx guide.aux
+	${MAKEINDEX} guide.idx -s StyleInd.ist
 	
 guide.bbl: guide.bcf guide.bib
-	biber guide
+	${BIBER} guide
 	
-guide.idx: $(wildcard *.tex)
-	pdflatex guide.tex
+guide.idx: guide.log
 
 guide.toc: guide.log	
 	
-#guide.bcf: $(wildcard *.tex) 
-#	pdflatex guide.tex
-# this does not have to do anything else: BCF is created in the same process like LOG.
 guide.bcf: guide.log
 	
+guide.aux: guide.log
+
 guide.log: $(wildcard *.tex) 
-	pdflatex guide.tex
+	${PDFLATEX} guide.tex
+
+SUG SUG.pdf: guide_opt.pdf
+	${MV} $< SUG.pdf
+	
+%_meta.txt : %.pdf
+	${PDFTK} $< dump_data_utf8 > $@
+	
+	
+# Reduced file size by 65%. But we need to restore some meta info.
+%_opt.pdf : %.pdf %_meta.txt %_pdfmark.ps
+	${GS} -sDEVICE=pdfwrite -dCompatibilityLevel=1.6 -dNOPAUSE -dQUIET -dBATCH  -sOutputFile=$*_gswrite.pdf  $*.pdf $*_pdfmark.ps 
+	${PDFTK} $*_gswrite.pdf update_info_utf8 $*_meta.txt output $@
+	${RM} $*_gswrite.pdf $*_meta.txt 
+
+
+
+	
+	
+	
+
+## pdfsizeopt unfortunately hardly makes the SUG smaller :-(	
+## But it is recommended to run Multivalent after that!
+## NOPE! It destroys images.
+#SUG.pdf : guide.pdf	
+#	pdfsizeopt $< $@
+#	java -classpath Multivalent20060102.jar tool.pdf.Compress -jpeg $@
+#	mv SUG-o.pdf SUG.pdf
+	
+#guide.html: guide.bbl guide.ind
+guide.html: 
+	${HTLATEX} guide "htFixes,html,1,next,index=3,fn-in,frames,mouseover,info"
+#	${MAKEINDEX} -o guide.ind guide.4dx
+#	${HTLATEX} guide "htFixes,html,1,next,index=3,fn-in,frames,mouseover,info"
+	
+guide.sxw:
+	oolatex guide 
+
+# Hint on restoring initial view settings
+# from https://stackoverflow.com/questions/25544002/command-line-tool-to-mark-pdf-to-open-in-single-page-view	
+#guide_pdfmark.ps: Makefile
+#		echo "[ /PageMode /UseOutlines  % Display bookmarks upon opening the doc\n\
+#             %/PageMode /UseThumbs    % Display thumbnails upon opening the doc\n\
+#              %/PageMode /FullScreen   % Open the document in fullscreen mode\n\
+#              %/PageMode /None         % Display neither bookmarks nor thumbnails upon opening\n\
+#              /Page 1                 % Open document with page 1\n\
+#              %/View [ /XYZ null null null ]\n\
+#                          % Go to specified page and retain same ... \n\
+#                          % ... horizontal/vertical offset+zoom as current page\n\
+#              /View [ /Fit ]           % Fit page to window\n\
+#              %/View /FitB             % Fit visible part of page to window\n\
+#              %/View [/FitH 220]       % Fit page width to window; 220 is distance ...\n\
+#                                       % ... of page origin from top of window\n\
+#                                         /DOCVIEW    pdfmark\n\
+#              \n\
+#              [ {Catalog} <<\n\
+#               /ViewerPreferences<</DisplayDocTitle true>>\n\
+#               %/PageLayout /SinglePage\n\
+#               %/PageLayout /OneColumn\n\
+#               /PageLayout /TwoPageRight\n\
+#               %/PageLayout /TwoColumnLeft\n\
+#               >>                        /PUT        pdfmark"\
+#			 > $@
+			 
+			 
+# Very hackish diagnostics. There are many ways to get a decent Linux-ish system even under Windows. 
+# CygWin, MinGW and Git bash understand calling programs with .exe from the Windows environment. 
+# Ubuntu needs .exe extension to be given explicitly. This makes the Makefile a bit ugly.
+diag:
+ifeq ($(SHELL),sh.exe)
+	@echo Looks like plain WINDOWS command shell. 
+else
+ ifeq ($(findstring Git, $(SHELL)),Git)
+	@echo INFO: We are in MinGW/git shell, right?
+ else
+  ifeq ($(findstring Microsoft, $(shell cat /proc/version)), Microsoft)
+	@echo INFO: This seems to be Ubuntu on Windows
+  else
+   ifeq ($(findstring CYGWIN, $(shell uname)),CYGWIN)
+	@echo INFO: We are on Cygwin, right?
+   else
+    @echo I assume $(shell uname) is a valid environment. Please enhance this line.
+   endif
+  endif 
+ endif 
+endif
+	@echo SHELL=${SHELL}
+	@echo PDFLATEX=${PDFLATEX}
+	@echo MAKEINDEX=${MAKEINDEX}
+	@echo BIBER=${BIBER}
+	@echo PDFTK=${PDFTK}
+	@echo GS=${GS}
+	@echo RM=${RM}
+	@echo MV=${MV}

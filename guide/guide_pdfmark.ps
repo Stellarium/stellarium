@@ -1,0 +1,19 @@
+[ /PageMode /UseOutlines  % Display bookmarks upon opening the doc
+              %/PageMode /UseThumbs    % Display thumbnails upon opening the doc
+              %/PageMode /FullScreen   % Open the document in fullscreen mode
+              %/PageMode /None         % Display neither bookmarks nor thumbnails upon opening
+              /Page 1                 % Open document with page 1
+              %/View [ /XYZ null null null ]
+			  % Go to specified page and retain same ... 
+			  % ... horizontal/vertical offset+zoom as current page
+              /View [ /Fit ]           % Fit page to window
+              %/View /FitB             % Fit visible part of page to window
+              %/View [/FitH 220]       % Fit page width to window; 220 is distance ...
+			  % ... of page origin from top of window
+			  /DOCVIEW    pdfmark             
+              [ {Catalog} << /ViewerPreferences<</DisplayDocTitle true>>
+			  %/PageLayout /SinglePage
+			  %/PageLayout /OneColumn
+			  /PageLayout /TwoPageRight
+			  %/PageLayout /TwoColumnLeft
+			  >>                        /PUT        pdfmark

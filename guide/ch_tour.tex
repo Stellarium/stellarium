@@ -195,18 +195,18 @@ initial FOV and direction of view.
 Stellarium can do a whole lot more than just draw the stars. Figure~\ref{fig:002}
 shows some of Stellarium's visual effects including constellation
 line and boundary drawing, constellation art, planet hints, and
-atmospheric halo around the bright Moon. The controls in the main tool-bar
+atmospheric halo around the bright Moon. The controls in the main tool bar
 provide a mechanism for turning on and off the visual effects.
 
 When the mouse if moved to the bottom left of the screen, a second
-tool-bar becomes visible. All the buttons in this side tool-bar open
+tool bar becomes visible. All the buttons in this side tool bar open
 and close dialog boxes which contain controls for further
 configuration of the program. The dialogs will be described in the
 next chapter.
 
 
 Table~\ref{tab:tour:buttons} describes the operations of buttons
-on the main tool-bar and the side tool-bar, and gives their default
+on the main tool bar and the side tool bar, and gives their default
 keyboard shortcuts.
 
 %% TODO: Check default keys!
@@ -216,29 +216,26 @@ keyboard shortcuts.
 Constellations           & \guibutton[0.75]{2.5}{bt_constellation}     & \key{C} & Draw constellations as ``stick figures'' \\
 Constellation Names      & \guibutton[0.75]{2.5}{bt_constellation_name}& \key{V} & Draw name of the constellations \\
 Constellation Art        & \guibutton[0.75]{2.5}{bt_constellation_art} & \key{R} & Superimpose artistic representations of the constellations \\
-Constellation Boundaries & \guibutton[0.75]{2.5}{bt_constellation_boundaries}& \key{B} & Draw boundary of the constellations \\
+Constellation Boundaries & \guibutton[0.75]{2.5}{bt_constellation_boundaries}& \key{B} & Draw boundaries of the constellations \footnotemark[1]\\
 Equatorial Grid          & \guibutton[0.75]{2.5}{bt_eq_grid}           & \key{E} & Draw grid lines for the equatorial coordinate system (RA/Dec) \\
 Azimuth Grid             & \guibutton[0.75]{2.5}{bt_az_grid}           & \key{Z} & Draw grid lines for the horizontal coordinate system (Alt/Azi) \\
-Galactic Grid            & \guibutton[0.75]{2.5}{bt_gal_grid}           &  & Draw grid lines for the galactic coordinate system (Long/Lat) \\
-Equatorial J2000 Grid          & \guibutton[0.75]{2.5}{bt_eq_j2000_grid}           &  & Draw grid lines for the equatorial coordinate system on standard epoch J2000.0 (RA/Dec) \\
-Ecliptic Grid            & \guibutton[0.75]{2.5}{bt_ecl_grid}           &  & Draw grid lines for the ecliptic coordinate system (Long/Lat) \\
+Galactic Grid            & \guibutton[0.75]{2.5}{bt_gal_grid}          &         & Draw grid lines for the galactic coordinate system (Long/Lat) \footnotemark[1]\\
+Equatorial J2000 Grid    & \guibutton[0.75]{2.5}{bt_eq_j2000_grid}     &         & Draw grid lines for the equatorial coordinate system at standard epoch J2000.0 (RA/Dec) \footnotemark[1]\\
+Ecliptic Grid            & \guibutton[0.75]{2.5}{bt_ecl_grid}          &         & Draw grid lines for the ecliptic coordinate system of date (Long/Lat) \footnotemark[1]\\
 Toggle Ground            & \guibutton[0.75]{2.5}{bt_ground}            & \key{G} & Toggle drawing of the ground. Turn this off to see objects that are below the horizon. \\
 Toggle Cardinal Points   & \guibutton[0.75]{2.5}{bt_cardinal}          & \key{Q} & Toggle marking of the North, South, East and West points on the horizon. \\
 Toggle Atmosphere        & \guibutton[0.75]{2.5}{bt_atmosphere}        & \key{A} & Toggle atmospheric effects. Most notably makes the stars visible in the daytime.  \\
 Deep-Sky Objects         & \guibutton[0.75]{2.5}{bt_nebulae}           & \key{D} & Toggle marking the positions of Deep-Sky Objects. \\
 Planet Hints             & \guibutton[0.75]{2.5}{bt_planets}           & \key{P} & Toggle indicators to show the position of planets. \\
-Nebula images            & \guibutton[0.75]{2.5}{bt_DSS}        
-& \key{I} & Toggle ``nebula images''. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
-Digitized Sky Survey     & \guibutton[0.75]{2.5}{bt_ToastSurvey}        
-& \key{\ctrl+Alt+D} & Toggle ``Digitized Sky Survey''. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
+Nebula images            & \guibutton[0.75]{2.5}{bt_DSS}               & \key{I} & Toggle ``nebula images''. \footnotemark[1]\\
+Digitized Sky Survey     & \guibutton[0.75]{2.5}{bt_ToastSurvey}       & \key{\ctrl+Alt+D} & Toggle ``Digitized Sky Survey''.\footnotemark[1]\\
 Coordinate System        & \guibutton[0.75]{2.5}{bt_coord_type}        & \key{\ctrl+M} & Toggle between horizontal (Alt/Azi) \& equatorial (RA/Dec) coordinate systems. \\
 Goto                     & \guibutton[0.75]{2.5}{bt_goto}              & \key{\Space} & Center the view on the selected object \\
 Night Mode               & \guibutton[0.75]{2.5}{bt_night_mode}        & \key{\ctrl+N} & Toggle ``night mode'', which applies a red-only filter to the view to be easier on the dark-adapted eye. \\
-Full Screen Mode         & \guibutton[0.75]{2.5}{bt_fullscreen} & \key{F11} & Toggle full screen mode. \\
-Bookmarks                & \guibutton[0.75]{2.5}{bt_bookmarks}        
-& \key{Alt+B} & Toggle bookmarks window. This button must be enabled first, see section~\ref{sec:gui:configuration:tools}\\
-Flip view (horizontal)   & \guibutton[0.75]{2.5}{bt_fliph}      & \key{\ctrl+Shift+H} & Flip the image in the horizontal plane. This button must be enabled first, see section~\ref{sec:gui:configuration:tools} \\
-Flip view (vertical)     & \guibutton[0.75]{2.5}{bt_flipv}      & \key{\ctrl+Shift+V} & Flip the image in the vertical plane. This button must be enabled first, see section~\ref{sec:gui:configuration:tools} \\
+Full Screen Mode         & \guibutton[0.75]{2.5}{bt_fullscreen}        & \key{F11} & Toggle full screen mode. \\
+Bookmarks                & \guibutton[0.75]{2.5}{bt_bookmarks}         & \key{Alt+B} & Toggle bookmarks window. \footnotemark[1]\\
+Flip view (horizontal)   & \guibutton[0.75]{2.5}{bt_fliph}      & \key{\ctrl+Shift+H} & Flip the image in the horizontal plane. \footnotemark[1] \\
+Flip view (vertical)     & \guibutton[0.75]{2.5}{bt_flipv}      & \key{\ctrl+Shift+V} & Flip the image in the vertical plane. \footnotemark[1]\\
 Quit Stellarium          & \guibutton[0.75]{2.5}{bt_quit}       & \key{\ctrl+Q} & Close Stellarium.\\
 Help Window              & \guibutton[0.5]{2.5}{btd_help}       & \key{F1} & Show the help window, with key bindings and other useful information \\
 Configuration Window     & \guibutton[0.5]{2.5}{btd_config}     & \key{F2} & Show the configuration window \\ 
@@ -248,10 +245,9 @@ Time Window              & \guibutton[0.5]{2.5}{btd_time}       & \key{F5} & Sho
 Location Window          & \guibutton[0.5]{2.5}{btd_location}   & \key{F6} & Show the observer location window (map) \\
 AstroCalc Window         & \guibutton[0.5]{2.5}{btd_astrocalc}  & \key{F10} & Show the astronomical calculations window \\
 \bottomrule
-\caption{Stellarium's standard menu buttons}
+\caption{Stellarium's standard menu buttons. Those marked \protect\footnotemark[1] must be enabled first, see section~\ref{sec:gui:configuration:tools}.}
 \label{tab:tour:buttons}
 \end{longtabu}
-
 
 \section{Taking Screenshots}
 \label{sec:tour:screenshots}

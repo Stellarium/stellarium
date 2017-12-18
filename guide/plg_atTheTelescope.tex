@@ -207,8 +207,9 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view} 
    \item[Restore FOV to initial values] and
    \item[Restore direction to initial values] options allow restoration field of view and direction of view, resp., 
          to the initial values at program start at the end of the plugin usage (e.g., when disabling the view through CCD frame).
-   \item[Show resolution criteria] allow compute and show Rayleigh criterion, Dawes', Abbe's and Sparrow's limits for combination of telescope, lens and eyepiece. Plus this option will and show visual resolution for selected ``setup''. This data may be very helpful for double star observers.
-   \item[Arrow button scale] allows to change the size of arrow-buttons.
+   \item[Show resolution criteria] compute and show Rayleigh criterion, Dawes', Abbe's and Sparrow's limits for combination of telescope, lens and eyepiece.
+         In addition, this option will show visual resolution for selected ``setup''. This option may be very helpful for double star observers.
+   \item[Arrow button scale] allows to change the size of the arrow buttons in the ocular GUI panel. 
  \end{description}
 \item[Ocular view] is a group of options that allows to change the plugin's behaviour in visual observation mode.
  \begin{description}
@@ -401,7 +402,7 @@ Multiple telescopes may be controlled simultaneously.
 % The control interface uses the Meade or the Celestron protocol and
 % most telescopes use either one or the other so many different brands
 % of telescopes can be controlled. There is a third party Telescope
-% control system going under the name of ASCOM. They provide an
+% control system going under the name of ASCOM\index{ASCOM}. They provide an
 % interface to stellarium and then translate the control into many other
 % forms (see section~\ref{sec:plugins:StellariumScope}).
 % 
@@ -493,19 +494,14 @@ The plug-in's main window can be opened:
 \item The \emph{Status} column indicates if this connection is
   currently active or not. Unfortunately, there are some cases in
   which 'Connected' is displayed when no working connection exists.
-\item The \emph{Type} field indicates what kind of connection is this:
+\item The \emph{Type} field indicates what kind of connection this is:
   \begin{description}
-  \item[virtual] means a virtual telescope
-  \item[local, Stellarium] means a
-    DIRECT connection to the telescope (see above)
-  \item[local, external] means an INDIRECT connection to a program
-    running on the same computer
-  \item[remote, unknown] means an INDIRECT connection over a network
-    to a remote machine.
-  \item[remote, RTS2] means an INDIRECT connection over a network
-        to a RTS2 server.
-  \item[remote, INDI] means an INDIRECT connection over a network
-        to an INDI server.
+  \item[virtual] means a virtual telescope (test mode).
+  \item[local, Stellarium] means a DIRECT connection to the telescope (see above).
+  \item[local, external] means an INDIRECT connection to a program running on the same computer.
+  \item[remote, unknown] means an INDIRECT connection over a network to a remote machine.
+  \item[remote, RTS2] means an INDIRECT connection over a network to an RTS2 server.
+  \item[remote, INDI] means an INDIRECT connection over a network to an INDI server.
   \end{description}
 \end{itemize}
 
@@ -595,7 +591,7 @@ Both fields here refer to INDIRECT connections, which implies communication over
 \end{description}
 
 \paragraph{RTS2 settings} (see also \ref{sec:plugins:TelescopeControl:RTS2})
-You will need access to RTS2 HTTPD server through HTTP/JSON calls.\newFeature{v0.16.0}
+You will need access to an RTS2 HTTPD server through HTTP/JSON calls.\newFeature{v0.16.0}
 Please see RTS2 documentation (man rts2-httpd) for details. You will as well need username
 and password for HTTPD. Please be aware that in order to move the telescope,
 your user must have the telescope in the list of allowed devices in the database. Please see \texttt{man
@@ -609,8 +605,8 @@ rts2-user} for details on how to manipulate RTS2 users.
 \end{description}
 
 \paragraph{INDI settings} (see also \ref{sec:plugins:TelescopeControl:INDI})
-You will need access to INDI server through TCP/IP connection.\newFeature{v0.16.0}
-Please see INDI documentation for details. You will need to select correct INDI device to manage of them.
+You will need access to an INDI server through a TCP/IP connection.\newFeature{v0.17.0}
+Please see INDI documentation for details. You will need to select the correct INDI device to manage it.
 
 \paragraph{User Interface Settings: Field of view indicators}
 
@@ -780,7 +776,8 @@ psql stars
 update users set allowed_devices = '*';
 \end{commands}
 
-In case you cannot properly connect to the RTS2 telescope or cannot send slew commands, check Stellarium's logfile \file{log.txt} for some diagnostic messages.
+In case you cannot properly connect to the RTS2 telescope or cannot send slew commands, 
+check Stellarium's logfile \file{log.txt} for some diagnostic messages.
 
 RTS2 is the only type of telescope supported by Stellarium which can autonomously track satellites. 
 Tracking accuracy fully depends on Stellarium's TLE satellite elements being up-to-date 
@@ -788,13 +785,25 @@ Tracking accuracy fully depends on Stellarium's TLE satellite elements being up-
 
 \section{INDI}
 \label{sec:plugins:TelescopeControl:INDI}
-\indexterm{INDI}, \newFeature{v0.17.0}the Instrument Neutral Distributed Interface, is a distributed control system (DCS) protocol to enable control, data acquisition and exchange among hardware devices and software front ends, emphasizing astronomical instrumentation\footnote{\url{https://en.wikipedia.org/wiki/Instrument_Neutral_Distributed_Interface}}.
+\indexterm{INDI}, \newFeature{v0.17.0}the Instrument Neutral Distributed Interface, 
+is a distributed control system (DCS) protocol to enable control, data acquisition 
+and exchange among hardware devices and software front ends, emphasizing astronomical 
+instrumentation\footnote{\url{https://en.wikipedia.org/wiki/Instrument_Neutral_Distributed_Interface}}.
  
-INDI client (v1.6.0) has been incorporated into Telescope Control plugin by Alessandro Siniscalchi to allow the Stellarium communicate with INDI hardware drivers via INDI server. INDI server is the hub that sits between drivers and clients. It reroutes traffic for control and data across distributed networks. Each device or client in the network is a node and may communicate with other nodes whenever desired. The server supports broadcasting, chaining, and marshaling of data.
+INDI client (v1.6.0) has been incorporated into Stellarium's Telescope Control plugin 
+by Alessandro Siniscalchi to allow Stellarium to communicate with INDI hardware drivers via INDI server. 
+INDI server is a hub that sits between drivers and clients. It reroutes traffic for control and data across distributed networks. 
+Each device or client in the network is a node and may communicate with other nodes whenever desired. 
+The server supports broadcasting, chaining, and marshalling of data.
 
-Stellarium may works with INDI mounts only and you will need to select correct INDI device to manage of them on the stage of configuration of telescope. For this purpose the plug-in has tool to getting list of connected devices to the INDI server (when server is working!). Please define hostname and port\footnote{Internet Assigned Numbers Authority (IANA) has assigned INDI to Transmission Control Protocol (TCP) and User Datagram Protocol (UDP), or TCP/UDP port 7624.} in ``INDI Settings'' block, press ``Refresh devices'' button and select required device in the list ``Devices''. 
+Stellarium only supports INDI mounts (no other INDI devices), and you will need to select the correct INDI device 
+to manage it at the stage of configuration of telescope. 
+For this purpose the plug-in has a tool to getting the list of connected devices from the INDI server (when the server is working!). 
+Please define hostname and port\footnote{The Internet Assigned Numbers Authority (IANA) has assigned to INDI 
+the Transmission Control Protocol and User Datagram Protocol (TCP/UDP) port 7624.} 
+in the ``INDI Settings'' block, press \button{Refresh devices} and select the required device in the list ``Devices''. 
 
-List of supported type of telescopes by INDI\footnote{\url{http://indilib.org/devices/telescopes/all.html}}:
+List of telescope types supported by INDI\footnote{\url{http://indilib.org/devices/telescopes/all.html}}:
 \begin{itemize}
 \item Meade Autostar
 \item Meade LX200 (Classic/GPS/16)
@@ -819,7 +828,7 @@ List of supported type of telescopes by INDI\footnote{\url{http://indilib.org/de
 \item IOptron GotoNova Upgrade Kit 8400
 \end{itemize}
 
-\newpage
+%\newpage
 \section{StellariumScope}
 \label{sec:plugins:StellariumScope}
 \program{StellariumScope} is a free add-on that enables you to control your telescope with Stellarium. 
@@ -835,7 +844,7 @@ List of supported type of telescopes by INDI\footnote{\url{http://indilib.org/de
 
 \paragraph{Features}
 \begin{itemize}
-\item Provides an interface between Stellarium and ASCOM telescope drivers.
+\item Provides an interface between Stellarium and ASCOM\index{ASCOM} telescope drivers.
 \item Provides the ability to both ``Sync'' and ``Slew'' the
   telescope. It's also possible to issue a stop/cancel command from
   Stellarium.
@@ -880,14 +889,14 @@ A few examples:
 
 One anonymous user sent a troubleshooting solution when connecting Stellarium to the Celestron \program{NexRemote} software:
 \begin{quote}
-  This involves connecting Stellarium to the \program{NexRemote} software controlling a Celestron NexStar telescope.
+%  This involves connecting Stellarium to the \program{NexRemote} software controlling a Celestron NexStar telescope.
 
   One tricky Window XP issue I fixed was that my older laptop would
   transiently lose connection with Stellarium although the status
-  would still be ``Connected'' and all looked normal.
+  would still be ``Connected'' and all looked normal. [\ldots]
 
-  3 (or whatever) slews would work. Next -- nothing. Although all
-  seemed well.
+%  3 (or whatever) slews would work. Next -- nothing. Although all
+%  seemed well.
 
   I boosted the \emph{NexRemote.exe} process in Windows XP to \emph{High} under
   \emph{Set Priority} under the \program{Windows Task Manager} via
@@ -976,6 +985,14 @@ parallax effects are taken into account.
 \item[Full Moon] When the Moon is selected, the program can compute
   the exact closest dates of the Moon's opposition to the Sun.
 \end{description}
+
+\subsection*{Note on Terminology}
+
+The (sparse) literature on terminology about computing these Heliacal, Acronychal or Cosmic events 
+seems to disagree on which end of the night is to be computed. While all agree about 
+Heliacal rises taking place in the morning, Acronychal and Cosmic are sometimes applied 
+in reverse order from those described here. In case you use these data, make sure you 
+keep this definition as well. 
 
 \subsection*{Author}
 \label{sec:plugins:Observability:author}
