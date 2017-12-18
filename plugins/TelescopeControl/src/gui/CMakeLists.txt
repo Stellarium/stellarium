@@ -15,6 +15,9 @@ add_library(TelescopeControl_gui
     TelescopeConfigurationDialog.cpp
     StoredPointsDialog.hpp
     StoredPointsDialog.cpp
+    TelescopeMoveWidget.hpp
+    TelescopeMoveWidget.cpp
+    TelescopeMoveWidget.ui
     )
 
 target_link_libraries(TelescopeControl_gui
