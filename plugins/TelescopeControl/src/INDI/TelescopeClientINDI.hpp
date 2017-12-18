@@ -30,6 +30,10 @@ public:
 	~TelescopeClientINDI();
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+	void moveNorth(bool active) override;
+	void moveEast(bool active) override;
+	void moveSouth(bool active) override;
+	void moveWest(bool active) override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;

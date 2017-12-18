@@ -1,18 +1,18 @@
 /*
  * Stellarium Telescope Control Plug-in
- * 
+ *
  * Copyright (C) 2010 Bogdan Marinov (this file)
- * 
+ *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
  * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
@@ -41,7 +41,7 @@ SlewDialog::SlewDialog()
 	ui = new Ui_slewDialog();
 	
 	//TODO: Fix this - it's in the same plugin
-	telescopeManager = GETSTELMODULE(TelescopeControl);	
+	telescopeManager = GETSTELMODULE(TelescopeControl);
 }
 
 SlewDialog::~SlewDialog()
@@ -80,6 +80,11 @@ void SlewDialog::createDialogContent()
 
 	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
 	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
+
+	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveNorth, this, &SlewDialog::onMoveNorth);
+	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveEast, this, &SlewDialog::onMoveEast);
+	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveSouth, this, &SlewDialog::onMoveSouth);
+	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveWest, this, &SlewDialog::onMoveWest);
 
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
@@ -198,11 +203,17 @@ void SlewDialog::removeTelescope(int slot)
 	updateTelescopeControls();
 }
 
+int SlewDialog::currentTelescopeSlot()
+{
+	int slot = connectedSlotsByName.value(ui->comboBoxTelescope->currentText());
+	return slot;
+}
+
 void SlewDialog::slew()
 {
 	double radiansRA  = ui->spinBoxRA->valueRadians();
 	double radiansDec = ui->spinBoxDec->valueRadians();
-	int slot = connectedSlotsByName.value(ui->comboBoxTelescope->currentText());
+	int slot = currentTelescopeSlot();
 
 	Vec3d targetPosition;
 	StelUtils::spheToRect(radiansRA, radiansDec, targetPosition);
@@ -304,22 +315,22 @@ void SlewDialog::getStoredPointInfo()
 
 void SlewDialog::onMoveNorth(bool active)
 {
-
+	telescopeManager->telescopeMoveNorth(currentTelescopeSlot(), active);
 }
 
 void SlewDialog::onMoveEast(bool active)
 {
-
+	telescopeManager->telescopeMoveEast(currentTelescopeSlot(), active);
 }
 
 void SlewDialog::onMoveWest(bool active)
 {
-
+	telescopeManager->telescopeMoveWest(currentTelescopeSlot(), active);
 }
 
 void SlewDialog::onMoveSouth(bool active)
 {
-
+	telescopeManager->telescopeMoveSouth(currentTelescopeSlot(), active);
 }
 
 void SlewDialog::onSetSpeed(int speed)
@@ -340,7 +351,7 @@ void SlewDialog::savePointsToFile()
 	if(!pointsJsonFile.open(QFile::WriteOnly|QFile::Text))
 	{
 		qWarning() << "SlewDialog: Points can not be saved. A file can not be open for writing:"
-			   << QDir::toNativeSeparators(pointsJsonPath);
+				   << QDir::toNativeSeparators(pointsJsonPath);
 		return;
 	}
 
@@ -379,7 +390,7 @@ void SlewDialog::loadPointsFromFile()
 	if(!QFileInfo(pointsJsonPath).exists())
 	{
 		qWarning() << "SlewDialog::loadPointsFromFile(): No pointss loaded. File is missing:"
-			   << QDir::toNativeSeparators(pointsJsonPath);
+				   << QDir::toNativeSeparators(pointsJsonPath);
 		storedPointsDescriptions = result;
 		return;
 	}
@@ -391,7 +402,7 @@ void SlewDialog::loadPointsFromFile()
 	if(!pointsJsonFile.open(QFile::ReadOnly))
 	{
 		qWarning() << "SlewDialog: No points loaded. Can't open for reading"
-			   << QDir::toNativeSeparators(pointsJsonPath);
+				   << QDir::toNativeSeparators(pointsJsonPath);
 		storedPointsDescriptions = result;
 		return;
 	}
@@ -415,7 +426,7 @@ void SlewDialog::loadPointsFromFile()
 		if(pointsJsonFile.rename(newName))
 		{
 			qWarning() << "SlewDialog: The existing version of points.json is obsolete. Backing it up as "
-				   << QDir::toNativeSeparators(newName);
+					   << QDir::toNativeSeparators(newName);
 			qWarning() << "SlewDialog: A blank points.json file will have to be created.";
 			storedPointsDescriptions = result;
 			return;

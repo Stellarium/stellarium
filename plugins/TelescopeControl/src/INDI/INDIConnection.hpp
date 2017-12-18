@@ -45,6 +45,10 @@ public:
 	void setPosition(Coordinates coords);
 	bool isDeviceConnected() const;
 	const QStringList devices() const;
+	void moveNorth(bool active);
+	void moveEast(bool active);
+	void moveSouth(bool active);
+	void moveWest(bool active);
 
 	void newDevice(INDI::BaseDevice *dp) override;
 	void removeDevice(INDI::BaseDevice *dp) override;

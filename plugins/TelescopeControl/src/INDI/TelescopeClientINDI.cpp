@@ -75,3 +75,22 @@ bool TelescopeClientINDI::hasKnownPosition() const
 	return mConnection.isDeviceConnected();
 }
 
+void TelescopeClientINDI::moveNorth(bool active)
+{
+	mConnection.moveNorth(active);
+}
+
+void TelescopeClientINDI::moveEast(bool active)
+{
+	mConnection.moveEast(active);
+}
+
+void TelescopeClientINDI::moveSouth(bool active)
+{
+	mConnection.moveSouth(active);
+}
+
+void TelescopeClientINDI::moveWest(bool active)
+{
+	mConnection.moveWest(active);
+}

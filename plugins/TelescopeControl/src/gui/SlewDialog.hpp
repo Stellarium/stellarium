@@ -109,6 +109,7 @@ private:
 
 	void savePointsToFile();
 	void loadPointsFromFile();
+	int currentTelescopeSlot();
 };
 
 #endif // _SLEWDIALOG_

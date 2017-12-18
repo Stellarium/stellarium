@@ -60,6 +60,26 @@ const QStringList INDIConnection::devices() const
 	return mDevices;
 }
 
+void INDIConnection::moveNorth(bool active)
+{
+
+}
+
+void INDIConnection::moveEast(bool active)
+{
+
+}
+
+void INDIConnection::moveSouth(bool active)
+{
+
+}
+
+void INDIConnection::moveWest(bool active)
+{
+	qDebug() << "INDIConnection::moveWest(" << active << ")";
+}
+
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
 	std::lock_guard<std::mutex> lock(mMutex);
@@ -131,8 +151,6 @@ void INDIConnection::newSwitch(ISwitchVectorProperty *svp)
 
 void INDIConnection::newNumber(INumberVectorProperty *nvp)
 {
-	// @TODO filter for mTelescope
-
 	std::lock_guard<std::mutex> lock(mMutex);
 
 	QString name(nvp->name);
