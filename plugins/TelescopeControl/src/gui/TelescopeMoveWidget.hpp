@@ -16,18 +16,26 @@ public:
 	~TelescopeMoveWidget();
 
 signals:
-	void moveNorthStart();
-	void moveNorthStop();
-	void moveEastStart();
-	void moveEastStop();
-	void moveWestStart();
-	void moveWestStop();
-	void moveSouthStart();
-	void moveSouthStop();
+	void moveNorth(bool active);
+	void moveEast(bool active);
+	void moveWest(bool active);
+	void moveSouth(bool active);
 	void setSpeed(int speed);
+
+private slots:
+	void onNorthButtonPressed();
+	void onNorthButtonReleased();
+	void onEastButtonPressed();
+	void onEastButtonReleased();
+	void onSouthButtonPressed();
+	void onSouthButtonReleased();
+	void onWestButtonPressed();
+	void onWestButtonReleased();
 
 private:
 	Ui::TelescopeMoveWidget *ui;
 };
+
+
 
 #endif // TELESCOPEMOVEWIDGET_HPP

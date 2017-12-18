@@ -7,17 +7,58 @@ TelescopeMoveWidget::TelescopeMoveWidget(QWidget *parent) :
 {
 	ui->setupUi(this);
 
-	QObject::connect(ui->northButton, &QPushButton::pressed, this, &TelescopeMoveWidget::moveNorthStart);
-	QObject::connect(ui->eastButton, &QPushButton::pressed, this, &TelescopeMoveWidget::moveEastStart);
-	QObject::connect(ui->southButton, &QPushButton::pressed, this, &TelescopeMoveWidget::moveSouthStart);
-	QObject::connect(ui->westButton, &QPushButton::pressed, this, &TelescopeMoveWidget::moveWestStart);
-	QObject::connect(ui->northButton, &QPushButton::released, this, &TelescopeMoveWidget::moveNorthStop);
-	QObject::connect(ui->eastButton, &QPushButton::released, this, &TelescopeMoveWidget::moveEastStop);
-	QObject::connect(ui->southButton, &QPushButton::released, this, &TelescopeMoveWidget::moveSouthStop);
-	QObject::connect(ui->westButton, &QPushButton::released, this, &TelescopeMoveWidget::moveWestStop);
+	QObject::connect(ui->northButton, &QPushButton::pressed, this, &TelescopeMoveWidget::onNorthButtonPressed);
+	QObject::connect(ui->northButton, &QPushButton::released, this, &TelescopeMoveWidget::onNorthButtonReleased);
+	QObject::connect(ui->eastButton, &QPushButton::pressed, this, &TelescopeMoveWidget::onEastButtonPressed);
+	QObject::connect(ui->eastButton, &QPushButton::released, this, &TelescopeMoveWidget::onEastButtonReleased);
+	QObject::connect(ui->southButton, &QPushButton::pressed, this, &TelescopeMoveWidget::onSouthButtonPressed);
+	QObject::connect(ui->southButton, &QPushButton::released, this, &TelescopeMoveWidget::onSouthButtonReleased);
+	QObject::connect(ui->westButton, &QPushButton::pressed, this, &TelescopeMoveWidget::onWestButtonPressed);
+	QObject::connect(ui->westButton, &QPushButton::released, this, &TelescopeMoveWidget::onWestButtonReleased);
 }
 
 TelescopeMoveWidget::~TelescopeMoveWidget()
 {
 	delete ui;
 }
+
+void TelescopeMoveWidget::onNorthButtonPressed()
+{
+	emit moveNorth(true);
+}
+
+void TelescopeMoveWidget::onNorthButtonReleased()
+{
+	emit moveNorth(false);
+}
+
+void TelescopeMoveWidget::onEastButtonPressed()
+{
+	emit moveEast(true);
+}
+
+void TelescopeMoveWidget::onEastButtonReleased()
+{
+	emit moveEast(false);
+}
+
+void TelescopeMoveWidget::onSouthButtonPressed()
+{
+	emit moveSouth(true);
+}
+
+void TelescopeMoveWidget::onSouthButtonReleased()
+{
+	emit moveSouth(false);
+}
+
+void TelescopeMoveWidget::onWestButtonPressed()
+{
+	emit moveWest(true);
+}
+
+void TelescopeMoveWidget::onWestButtonReleased()
+{
+	emit moveWest(false);
+}
+
