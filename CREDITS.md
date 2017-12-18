@@ -1,135 +1,27 @@
+## LICENSE
+```
+   Copyright (C) 2004-2017 Fabien Chereau et al.
 
-				  ## ### ### #   #   ### ###  #  # # # #
-				  #   #  ##  #   #   ### ##   #  # # ###
-				 ##   #  ### ### ### # # # #  #  ### # #
+   This program is free software; you can redistribute it and/or
+   modify it under the terms of the GNU General Public License
+   as published by the Free Software Foundation; either version 2
+   of the License, or (at your option) any later version.
 
-			   By Fabien Chereau & al. - www.stellarium.org
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-Stellarium comes with ABSOLUTELY NO WARRANTY.  See the COPYING file for details.
+   You should have received a copy of the GNU General Public License
+   along with this program; if not, write to the Free Software
+   Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
---------------------------------------------------------------------------------
+   See the COPYING file for more information regarding the GNU General
+   Public License.
+```
 
-1. INTRODUCTION                  6. THANKS
-2. INSTALLATION INSTRUCTIONS     7. NOTE
-3. REQUIREMENT                   8. FULL REFERENCES & CREDITS
-4. QUICK START                   9. LICENSE
-5. CONFIGURATION                 10. APPENDIX
-
---------------------------------------------------------------------------------
-1. INTRODUCTION
---------------------------------------------------------------------------------
-Stellarium is a free GPL software which renders realistic skies in real time
-with OpenGL. It is available for Linux/Unix, Windows and MacOSX. With
-Stellarium, you really see what you can see with your eyes, binoculars or a
-small telescope.
-
---------------------------------------------------------------------------------
-2. INSTALLATION INSTRUCTIONS
---------------------------------------------------------------------------------
-Please see the INSTALL file.
-
---------------------------------------------------------------------------------
-3. REQUIREMENTS
---------------------------------------------------------------------------------
-Windows or linux/POSIX or CYGWIN or MACOSX environment
-A 3d OpenGL 2.1+ acceleration card with GLSL1.30 and a good CPU.
-On Windows, ANGLE can be used if graphics card supports DirectX9+ with PS_3_0.
-If all else fails, MESA can be used to emulate the graphics card, 
-of course with a massive slowdown.
-
---------------------------------------------------------------------------------
-4. QUICK START
---------------------------------------------------------------------------------
-Navigation :
-Use the direction keys or drag with the mouse to move the point of view.
-Use page up and page down keys or mouse wheel to zoom in and out.
-Use left mouse button to select an object, right button to select no object and
-middle mouse button or SPACE to center on the selected object.
-Zooming on nebulas or planets is very interesting....
-Use J, K and L to increment/decrement time speed.
-Press the F1 key for more help.
-
-More help can be found on www.stellarium.org, and in the user guide.
-
---------------------------------------------------------------------------------
-5. CONFIGURATION
---------------------------------------------------------------------------------
-From version 0.6.0 the most useful configuration options can be set from within
-the program.
-You can however change it by hand in the file config.ini in the user data
-directory.  See http://www.stellarium.org/doc/head/fileStructure.html
-for more details on the location of the user data directory for your OS.
-
---------------------------------------------------------------------------------
-6. THANKS
---------------------------------------------------------------------------------
-
-	++ Special thanks to ++
-
-	Johan Meuris for his stunning drawings of the constellations.
-	  (Johan is now an official member of the project)
-
-	Johannes Gajdosik for his work on planets computation and projection.
-	  (Johannes is now an official member of the project)
-
-	Matthew Gates for his huge work on the User Guide.
-	  (Matthew is now an official member of the project)
-
-	Nigel Kerr for his MacOSX port.
-
-	Fumio Yamamoto for his MacOSX packages, patches, support and
-	  documentation.
-
-	Tony Furr for his work on the Graphical User Interface.
-
-	Rob Spearman (Digitalis Education Solutions, Inc.) for his help and
-	financial support.
-	
-	Valery Lainey for his L1 and MarsSat ephemeris and his prompt an kind
-	  help with any question concerning planetary/satellite ephemeris.
-
-	Norbert Zacharias from USNO for kindly sending a cut of the NOMAD
-	  catalogue on 4 DVD, answering NOMAD related questions, and finally
-	  copying the entire NOMAD catalogue onto a disk.
-
-	The Trolltech Qt team for its incredible library.
-
-	++ Thanks to ++
-
-	Axel Mellinger who gave me the authorisation to use his impressive
-	  milky way panorama.
-	The celestia project team from which I borrowed many code parts (GPL
-	  license).
-	The libnova team for their planet calculation algorithms (LGPL license).
-	All the sourceforge team for hosting my project.
-	Cedric Delfosse for his precious help on debian port.
-	The GEPI team from the Observatoire Astronomique de Paris for
-	  the great Hipparcos catalog.
-	Brad Schaefer for his sky rendering algorithm.
-	Jean-Francois Tremblay for his porting on MacOSX.
-	Vincent Caron for his parser bugfix and Linux compatibility bugfixes.
-	Nick Porcino for his planet function.
-	Tangui Morlier for his help on Linux System.
-	Bill Gray (projectpluto.com) and Mark Huss (mark (at) mhuss.com) for all
-	  the astro libraries.
-	Antje Buchholz for her translation help and logistic support :)
-	James Hastings-Trew who gave us the authorisation to use his beautiful 
-	  and realistic planet textures.
-
-	And... All the people who sent us mails and bug reports!
-
-
---------------------------------------------------------------------------------
-7. NOTE
---------------------------------------------------------------------------------
-	This program is free, but if you have nothing to do with your
-	money, just go there and do something useful with it :
-	https://www.greenpeace.com/forms/gpicontr.html
-
-
---------------------------------------------------------------------------------
-8. FULL REFERENCES & CREDITS
---------------------------------------------------------------------------------
+## Full Reference & Credits
+```
 1. Technical Articles
 	1.1 The tone reproductor class
 		The class mainly performs a fast implementation of the algorithm
@@ -517,33 +409,11 @@ for more details on the location of the user data directory for your OS.
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Images of NGC40, NGC4631, NGC4627, NGC4656, NGC4657 from Steven
 	     Bellavia
+```
 
---------------------------------------------------------------------------------
-9. LICENSE
---------------------------------------------------------------------------------
-   Copyright (C) 2004-2016 Fabien Chereau et al.
-
-   This program is free software; you can redistribute it and/or
-   modify it under the terms of the GNU General Public License
-   as published by the Free Software Foundation; either version 2
-   of the License, or (at your option) any later version.
-
-   This program is distributed in the hope that it will be useful,
-   but WITHOUT ANY WARRANTY; without even the implied warranty of
-   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-   GNU General Public License for more details.
-
-   You should have received a copy of the GNU General Public License
-   along with this program; if not, write to the Free Software
-   Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
-
-   See the COPYING file for more information regarding the GNU General
-   Public License.
-
---------------------------------------------------------------------------------
-10 APPENDIX :
---------------------------------------------------------------------------------
-10.1 Full credits for image 4.2 :
+## Appendix
+```
+1 Full credits for image 4.2
 	Author: Reto Stockli, NASA Earth Observatory,
 		rstockli (at) climate.gsfc.nasa.gov
 	Address of correspondence:
@@ -569,61 +439,61 @@ for more details on the location of the user data directory for your OS.
 		freely available for re-publication or re-use, except where
 		copyright is indicated."
 
-10.2 License for the JPL planets images
+2 License for the JPL planets images
 (http://www.jpl.nasa.gov/images/policy/index.cfm)
-	---
-	Unless otherwise noted, images and video on JPL public web sites (public
-	sites ending with a jpl.nasa.gov address) may be used for any purpose
-	without prior permission, subject to the special cases noted below.
-	Publishers who wish to have authorization may print this page and retain
-	it for their records; JPL does not issue image permissions on an image
-	by image basis.  By electing to download the material from this web site
-	the user agrees:
-	1. that Caltech makes no representations or warranties with respect to
-	   ownership of copyrights in the images, and does not represent others
-	   who may claim to be authors or owners of copyright of any of the
-	   images, and makes no warranties as to the quality of the images.
-	   Caltech shall not be responsible for any loss or expenses resulting
-	   from the use of the images, and you release and hold Caltech harmless
-	   from all liability arising from such use.
-	2. to use a credit line in connection with images. Unless otherwise
-	   noted in the caption information for an image, the credit line should
-	   be "Courtesy NASA/JPL-Caltech."
-	3. that the endorsement of any product or service by Caltech, JPL or
-	   NASA must not be claimed or implied.
-	Special Cases:
-	* Prior written approval must be obtained to use the NASA insignia logo
-	  (the blue "meatball" insignia), the NASA logotype (the red "worm"
-	  logo) and the NASA seal. These images may not be used by persons who
-	  are not NASA employees or on products (including Web pages) that are
-	  not NASA sponsored. In addition, no image may be used to explicitly
-	  or implicitly suggest endorsement by NASA, JPL or Caltech of
-	  commercial goods or services. Requests to use NASA logos may be
-	  directed to Bert Ulrich, Public Services Division, NASA Headquarters,
-	  Code POS, Washington, DC 20546, telephone (202) 358-1713, fax (202)
-	  358-4331, email bert.ulrich@hq.nasa.gov.
-	* Prior written approval must be obtained to use the JPL logo (stylized
-	  JPL letters in red or other colors). Requests to use the JPL logo may
-	  be directed to the Television/Imaging Team Leader, Media Relations
-	  Office, Mail Stop 186-120, Jet Propulsion Laboratory, Pasadena CA
-	  91109, telephone (818) 354-5011, fax (818) 354-4537.
-	* If an image includes an identifiable person, using the image for
-	  commercial purposes may infringe that person's right of privacy or
-	  publicity, and permission should be obtained from the person. NASA
-	  and JPL generally do not permit likenesses of current employees to
-	  appear on commercial products. For more information, consult the NASA
-	  and JPL points of contact listed above.
-	* JPL/Caltech contractors and vendors who wish to use JPL images in
-	  advertising or public relation materials should direct requests to the
-	  Television/Imaging Team Leader, Media Relations Office, Mail Stop
-	  186-120, Jet Propulsion Laboratory, Pasadena CA 91109, telephone
-	  (818) 354-5011, fax (818) 354-4537.
-	* Some image and video materials on JPL public web sites are owned by
-	  organizations other than JPL or NASA. These owners have agreed to
-	  make their images and video available for journalistic, educational
-	  and personal uses, but restrictions are placed on commercial uses.
-	  To obtain permission for commercial use, contact the copyright owner
-	  listed in each image caption.  Ownership of images and video by
-	  parties other than JPL and NASA is noted in the caption material
-	  with each image.
-	---
+
+    Unless otherwise noted, images and video on JPL public web sites (public
+    sites ending with a jpl.nasa.gov address) may be used for any purpose
+    without prior permission, subject to the special cases noted below.
+    Publishers who wish to have authorization may print this page and retain
+    it for their records; JPL does not issue image permissions on an image
+    by image basis.  By electing to download the material from this web site
+    the user agrees:
+    1. that Caltech makes no representations or warranties with respect to
+       ownership of copyrights in the images, and does not represent others
+       who may claim to be authors or owners of copyright of any of the
+       images, and makes no warranties as to the quality of the images.
+       Caltech shall not be responsible for any loss or expenses resulting
+       from the use of the images, and you release and hold Caltech harmless
+       from all liability arising from such use.
+    2. to use a credit line in connection with images. Unless otherwise
+       noted in the caption information for an image, the credit line should
+       be "Courtesy NASA/JPL-Caltech."
+    3. that the endorsement of any product or service by Caltech, JPL or
+       NASA must not be claimed or implied.
+    Special Cases:
+    * Prior written approval must be obtained to use the NASA insignia logo
+      (the blue "meatball" insignia), the NASA logotype (the red "worm"
+      logo) and the NASA seal. These images may not be used by persons who
+      are not NASA employees or on products (including Web pages) that are
+      not NASA sponsored. In addition, no image may be used to explicitly
+      or implicitly suggest endorsement by NASA, JPL or Caltech of
+      commercial goods or services. Requests to use NASA logos may be
+      directed to Bert Ulrich, Public Services Division, NASA Headquarters,
+      Code POS, Washington, DC 20546, telephone (202) 358-1713, fax (202)
+      358-4331, email bert.ulrich@hq.nasa.gov.
+    * Prior written approval must be obtained to use the JPL logo (stylized
+      JPL letters in red or other colors). Requests to use the JPL logo may
+      be directed to the Television/Imaging Team Leader, Media Relations
+      Office, Mail Stop 186-120, Jet Propulsion Laboratory, Pasadena CA
+      91109, telephone (818) 354-5011, fax (818) 354-4537.
+    * If an image includes an identifiable person, using the image for
+      commercial purposes may infringe that person's right of privacy or
+      publicity, and permission should be obtained from the person. NASA
+      and JPL generally do not permit likenesses of current employees to
+      appear on commercial products. For more information, consult the NASA
+      and JPL points of contact listed above.
+    * JPL/Caltech contractors and vendors who wish to use JPL images in
+      advertising or public relation materials should direct requests to the
+      Television/Imaging Team Leader, Media Relations Office, Mail Stop
+      186-120, Jet Propulsion Laboratory, Pasadena CA 91109, telephone
+      (818) 354-5011, fax (818) 354-4537.
+    * Some image and video materials on JPL public web sites are owned by
+      organizations other than JPL or NASA. These owners have agreed to
+      make their images and video available for journalistic, educational
+      and personal uses, but restrictions are placed on commercial uses.
+      To obtain permission for commercial use, contact the copyright owner
+      listed in each image caption.  Ownership of images and video by
+      parties other than JPL and NASA is noted in the caption material
+      with each image.
+```
