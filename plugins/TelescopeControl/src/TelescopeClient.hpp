@@ -80,6 +80,10 @@ public:
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
+	virtual void moveNorth(bool active) {}
+	virtual void moveEast(bool active) {}
+	virtual void moveSouth(bool active) {}
+	virtual void moveWest(bool active) {}
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
 	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}

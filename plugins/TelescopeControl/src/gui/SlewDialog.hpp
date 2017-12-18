@@ -90,6 +90,12 @@ private slots:
 	//! Sets the input fields to selected point info
 	void getStoredPointInfo();
 
+	void onMoveNorth(bool active);
+	void onMoveEast(bool active);
+	void onMoveWest(bool active);
+	void onMoveSouth(bool active);
+	void onSetSpeed(int speed);
+
 private:
 	TelescopeControl * telescopeManager;
 	StoredPointsDialog * storedPointsDialog;

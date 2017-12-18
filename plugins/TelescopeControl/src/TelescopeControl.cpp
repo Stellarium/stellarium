@@ -441,6 +441,30 @@ void TelescopeControl::telescopeGoto(int slotNumber, const Vec3d &j2000Pos, Stel
 		telescopeClients.value(slotNumber)->telescopeGoto(j2000Pos, selectObject);
 }
 
+void TelescopeControl::telescopeMoveNorth(int telescope, bool active)
+{
+	if(telescopeClients.contains(telescope))
+		telescopeClients.value(telescope)->moveNorth(active);
+}
+
+void TelescopeControl::telescopeMoveEast(int telescope, bool active)
+{
+	if(telescopeClients.contains(telescope))
+		telescopeClients.value(telescope)->moveEast(active);
+}
+
+void TelescopeControl::telescopeMoveSouth(int telescope, bool active)
+{
+	if(telescopeClients.contains(telescope))
+		telescopeClients.value(telescope)->moveSouth(active);
+}
+
+void TelescopeControl::telescopeMoveWest(int telescope, bool active)
+{
+	if(telescopeClients.contains(telescope))
+		telescopeClients.value(telescope)->moveWest(active);
+}
+
 void TelescopeControl::communicate(void)
 {
 	if (!telescopeClients.empty())

@@ -302,6 +302,31 @@ void SlewDialog::getStoredPointInfo()
 	ui->spinBoxDec->setRadians(sp.radiansDec);
 }
 
+void SlewDialog::onMoveNorth(bool active)
+{
+
+}
+
+void SlewDialog::onMoveEast(bool active)
+{
+
+}
+
+void SlewDialog::onMoveWest(bool active)
+{
+
+}
+
+void SlewDialog::onMoveSouth(bool active)
+{
+
+}
+
+void SlewDialog::onSetSpeed(int speed)
+{
+
+}
+
 void SlewDialog::savePointsToFile()
 {
 	//Open/create the JSON file
