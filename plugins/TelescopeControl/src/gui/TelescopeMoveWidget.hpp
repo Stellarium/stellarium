@@ -16,10 +16,14 @@ public:
 	~TelescopeMoveWidget();
 
 signals:
-	void moveNorth();
-	void moveEast();
-	void moveWest();
-	void moveSouth();
+	void moveNorthStart();
+	void moveNorthStop();
+	void moveEastStart();
+	void moveEastStop();
+	void moveWestStart();
+	void moveWestStop();
+	void moveSouthStart();
+	void moveSouthStop();
 	void setSpeed(int speed);
 
 private:
