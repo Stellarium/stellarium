@@ -62,22 +62,94 @@ const QStringList INDIConnection::devices() const
 
 void INDIConnection::moveNorth(bool active)
 {
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
 
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_NS");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_NS switch...";
+		return;
+	}
+
+	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_NORTH");
+
+	if (active)
+		motionNorth->s = ISS_ON;
+	else
+		motionNorth->s = ISS_OFF;
+
+	sendNewSwitch(switchVector);
 }
 
 void INDIConnection::moveEast(bool active)
 {
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
 
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_WE");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_WE switch...";
+		return;
+	}
+
+	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_EAST");
+
+	if (active)
+		motionNorth->s = ISS_ON;
+	else
+		motionNorth->s = ISS_OFF;
+
+	sendNewSwitch(switchVector);
 }
 
 void INDIConnection::moveSouth(bool active)
 {
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
 
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_NS");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_NS switch...";
+		return;
+	}
+
+	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_SOUTH");
+
+	if (active)
+		motionNorth->s = ISS_ON;
+	else
+		motionNorth->s = ISS_OFF;
+
+	sendNewSwitch(switchVector);
 }
 
 void INDIConnection::moveWest(bool active)
 {
-	qDebug() << "INDIConnection::moveWest(" << active << ")";
+	std::lock_guard<std::mutex> lock(mMutex);
+	if (!mTelescope || !mTelescope->isConnected())
+		return;
+
+	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_WE");
+	if (!switchVector)
+	{
+		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_WE switch...";
+		return;
+	}
+
+	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_WEST");
+
+	if (active)
+		motionNorth->s = ISS_ON;
+	else
+		motionNorth->s = ISS_OFF;
+
+	sendNewSwitch(switchVector);
 }
 
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
