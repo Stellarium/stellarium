@@ -15,6 +15,7 @@ TelescopeMoveWidget::TelescopeMoveWidget(QWidget *parent) :
 	QObject::connect(ui->southButton, &QPushButton::released, this, &TelescopeMoveWidget::onSouthButtonReleased);
 	QObject::connect(ui->westButton, &QPushButton::pressed, this, &TelescopeMoveWidget::onWestButtonPressed);
 	QObject::connect(ui->westButton, &QPushButton::released, this, &TelescopeMoveWidget::onWestButtonReleased);
+	QObject::connect(ui->speedSlider, &QSlider::valueChanged, this, &TelescopeMoveWidget::setSpeed);
 }
 
 TelescopeMoveWidget::~TelescopeMoveWidget()

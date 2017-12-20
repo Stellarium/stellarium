@@ -84,6 +84,7 @@ public:
 	virtual void moveEast(bool active) {}
 	virtual void moveSouth(bool active) {}
 	virtual void moveWest(bool active) {}
+	virtual void setSpeed(int speed) {}
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
 	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}

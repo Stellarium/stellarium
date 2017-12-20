@@ -34,6 +34,7 @@ public:
 	void moveEast(bool active) override;
 	void moveSouth(bool active) override;
 	void moveWest(bool active) override;
+	void setSpeed(int speed) override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;

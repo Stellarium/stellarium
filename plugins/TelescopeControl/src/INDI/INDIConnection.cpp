@@ -152,6 +152,18 @@ void INDIConnection::moveWest(bool active)
 	sendNewSwitch(switchVector);
 }
 
+void INDIConnection::setSpeed(int speed)
+{
+	ISwitchVectorProperty *slewRateSP = mTelescope->getSwitch("TELESCOPE_SLEW_RATE");
+
+	if (!slewRateSP || speed < 0 || speed > slewRateSP->nsp)
+		return;
+
+	IUResetSwitch(slewRateSP);
+	slewRateSP->sp[speed].s = ISS_ON;
+	sendNewSwitch(slewRateSP);
+}
+
 void INDIConnection::newDevice(INDI::BaseDevice *dp)
 {
 	std::lock_guard<std::mutex> lock(mMutex);

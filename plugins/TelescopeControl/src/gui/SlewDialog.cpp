@@ -85,6 +85,7 @@ void SlewDialog::createDialogContent()
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveEast, this, &SlewDialog::onMoveEast);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveSouth, this, &SlewDialog::onMoveSouth);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveWest, this, &SlewDialog::onMoveWest);
+	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::setSpeed, this, &SlewDialog::onSetSpeed);
 
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
@@ -335,7 +336,7 @@ void SlewDialog::onMoveSouth(bool active)
 
 void SlewDialog::onSetSpeed(int speed)
 {
-
+	telescopeManager->telescopeSetSpeed(currentTelescopeSlot(), speed);
 }
 
 void SlewDialog::savePointsToFile()

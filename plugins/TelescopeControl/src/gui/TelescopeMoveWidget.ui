@@ -84,12 +84,15 @@
     </layout>
    </item>
    <item>
-    <widget class="QSlider" name="verticalSlider">
+    <widget class="QSlider" name="speedSlider">
      <property name="minimum">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="maximum">
-      <number>100</number>
+      <number>3</number>
+     </property>
+     <property name="pageStep">
+      <number>1</number>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>

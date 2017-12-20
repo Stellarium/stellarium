@@ -94,3 +94,8 @@ void TelescopeClientINDI::moveWest(bool active)
 {
 	mConnection.moveWest(active);
 }
+
+void TelescopeClientINDI::setSpeed(int speed)
+{
+	mConnection.setSpeed(speed);
+}

@@ -125,6 +125,7 @@ public:
 	void telescopeMoveEast(int telescope, bool active);
 	void telescopeMoveSouth(int telescope, bool active);
 	void telescopeMoveWest(int telescope, bool active);
+	void telescopeSetSpeed(int telescope, int speed);
 	
 	//! Remove all currently registered telescopes
 	void deleteAllTelescopes();

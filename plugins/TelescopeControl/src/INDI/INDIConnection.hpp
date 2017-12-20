@@ -49,7 +49,9 @@ public:
 	void moveEast(bool active);
 	void moveSouth(bool active);
 	void moveWest(bool active);
+	void setSpeed(int speed);
 
+public: // from INDI::BaseClient
 	void newDevice(INDI::BaseDevice *dp) override;
 	void removeDevice(INDI::BaseDevice *dp) override;
 	void newProperty(INDI::Property *property) override;

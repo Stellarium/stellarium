@@ -465,6 +465,12 @@ void TelescopeControl::telescopeMoveWest(int telescope, bool active)
 		telescopeClients.value(telescope)->moveWest(active);
 }
 
+void TelescopeControl::telescopeSetSpeed(int telescope, int speed)
+{
+	if(telescopeClients.contains(telescope))
+		telescopeClients.value(telescope)->setSpeed(speed);
+}
+
 void TelescopeControl::communicate(void)
 {
 	if (!telescopeClients.empty())
