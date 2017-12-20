@@ -18,18 +18,18 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
+#include <QDebug>
+
 #include "Dialog.hpp"
 #include "AngleSpinBox.hpp"
 #include "StelApp.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelStyle.hpp"
-
 #include "VecMath.hpp"
 #include "TelescopeControl.hpp"
 #include "SlewDialog.hpp"
 #include "ui_slewDialog.h"
-
-#include <QDebug>
+#include "TelescopeClient.hpp"
 
 using namespace TelescopeControlGlobals;
 
