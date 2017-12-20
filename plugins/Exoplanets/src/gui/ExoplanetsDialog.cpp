@@ -196,10 +196,22 @@ void ExoplanetsDialog::setInfoHtml(void)
 
 	QString html = "<html><head></head><body>";
 	html += "<h2>" + q_("Potential habitable exoplanets") + "</h2>";
-	html += QString("<p>%1</p>").arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets."));
-	html += QString("<p><b>%1</b> &mdash; %2</p>").arg(q_("Planetary Class")).arg(q_("Planet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian) (Earth = G-Warm Terran)."));
-	html += QString("<p><b><a href='http://lasp.colorado.edu/~bagenal/3720/CLASS6/6EquilibriumTemp.html'>%1</a></b> &mdash; %2</p>").arg(q_("Equilibrium Temperature")).arg(q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."));
-	html += QString("<p><b><a href='http://phl.upr.edu/projects/earth-similarity-index-esi'>%1</a></b> &mdash; %2</p>").arg(q_("Earth Similarity Index (ESI)")).arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
+	html += QString("<p>%1 %2</p>")
+			.arg(q_("This plugin can display potential habitable exoplanets (orange marker) and some information about those planets."))
+			.arg(q_("Extra info for the optimistic samples of potentially habitable planets mark by italic text."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Planetary Class"))
+			.arg(q_("Planet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian) (Earth = G-Warm Terran)."));
+	html += QString("<p><b><a href='http://lasp.colorado.edu/~bagenal/3720/CLASS6/6EquilibriumTemp.html'>%1</a></b> &mdash; %2 %3</p>")
+			.arg(q_("Equilibrium Temperature"))
+			.arg(q_("The planetary equilibrium temperature is a theoretical temperature in (°C) that the planet would be at when considered simply as if it were a black body being heated only by its parent star (assuming a 0.3 bond albedo). As example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."))
+			.arg(q_("Actual surface temperatures are expected to be larger than the equilibrium temperature depending on the atmosphere of the planets, which are currently unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."));
+	html += QString("<p><b>%1</b> &mdash; %2</p>")
+			.arg(q_("Flux"))
+			.arg(q_("Average stellar flux of the planet in Earth fluxes (Earth = 1.0 S<sub>E</sub>)."));
+	html += QString("<p><b><a href='http://phl.upr.edu/projects/earth-similarity-index-esi'>%1</a></b> &mdash; %2</p>")
+			.arg(q_("Earth Similarity Index (ESI)"))
+			.arg(q_("Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-like. ESI depends on the planet's radius, density, escape velocity, and surface temperature."));
 	html += "<h2>" + q_("Proper names") + "</h2>";
 	html += "<p>" + q_("In December 2015, the International Astronomical Union (IAU) has officially approved names for several exoplanets after a public vote.") + "</p><ul>";
 	html += QString("<li><strong>%1</strong><sup>*</sup> (%2) &mdash; %3<sup>1</sup></li>").arg(trans.qtranslate("Veritate"), "14 And", q_("From the latin <em>Veritas</em>, truth. The ablative form means <em>where there is truth</em>."));

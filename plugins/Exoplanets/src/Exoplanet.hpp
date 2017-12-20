@@ -45,6 +45,7 @@ typedef struct
 	int discovered;			//! Exoplanet discovered year
 	QString pclass;			//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
 	int EqTemp;			//! Exoplanet equilibrium temperature in kelvins (K) assuming a 0.3 bond albedo (Earth = 255 K).
+	int flux;			//! Average stellar flux of the planet in Earth fluxes (Earth = 1.0 SE).
 	int ESI;			//! Exoplanet Earth Similarity Index
 	QString detectionMethod;	//! Method of detection of exoplanet
 	bool conservative;		//! Conservative sample
