@@ -56,6 +56,7 @@ signals:
 	void removeDeviceReceived(QString name);
 	void serverConnectedReceived();
 	void serverDisconnectedReceived(int exit_code);
+	void speedChanged(int speed);
 
 private:
 	mutable std::mutex mMutex;

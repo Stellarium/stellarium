@@ -231,6 +231,12 @@ void INDIConnection::newBLOB(IBLOB *bp)
 
 void INDIConnection::newSwitch(ISwitchVectorProperty *svp)
 {
+	QString name(svp->name);
+	if (name == "TELESCOPE_SLEW_RATE")
+	{
+		int speed = IUFindOnSwitchIndex(svp);
+		emit speedChanged(speed);
+	}
 }
 
 void INDIConnection::newNumber(INumberVectorProperty *nvp)

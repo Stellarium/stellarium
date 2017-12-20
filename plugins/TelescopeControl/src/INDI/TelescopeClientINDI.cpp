@@ -10,6 +10,8 @@ TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &par
 {
 	qDebug() << "TelescopeClientINDI::TelescopeClientINDI";
 
+	QObject::connect(&mConnection, &INDIConnection::speedChanged, this, &TelescopeClient::speedChanged);
+
 	QRegExp paramRx("^([^:]*):(\\d+):([^:]*)$");
 	QString host;
 	int port = 0;

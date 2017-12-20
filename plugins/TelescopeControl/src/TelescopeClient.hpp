@@ -93,6 +93,9 @@ public:
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
 
+signals:
+	void speedChanged(int speed);
+
 protected:
 	TelescopeClient(const QString &name);
 	QString nameI18n;
