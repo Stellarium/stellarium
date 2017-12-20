@@ -204,22 +204,26 @@ void SlewDialog::removeTelescope(int slot)
 	updateTelescopeControls();
 }
 
-int SlewDialog::currentTelescopeSlot()
+QSharedPointer<TelescopeClient> SlewDialog::currentTelescope() const
 {
 	int slot = connectedSlotsByName.value(ui->comboBoxTelescope->currentText());
-	return slot;
+	return telescopeManager->telescopeClient(slot);
 }
 
 void SlewDialog::slew()
 {
 	double radiansRA  = ui->spinBoxRA->valueRadians();
 	double radiansDec = ui->spinBoxDec->valueRadians();
-	int slot = currentTelescopeSlot();
 
 	Vec3d targetPosition;
 	StelUtils::spheToRect(radiansRA, radiansDec, targetPosition);
 
-	telescopeManager->telescopeGoto(slot, targetPosition);
+	auto telescope = currentTelescope();
+	if (!telescope)
+		return;
+
+	StelObjectP selectObject = nullptr;
+	telescope->telescopeGoto(targetPosition, selectObject);
 }
 
 void SlewDialog::getCurrentObjectInfo()
@@ -316,27 +320,37 @@ void SlewDialog::getStoredPointInfo()
 
 void SlewDialog::onMoveNorth(bool active)
 {
-	telescopeManager->telescopeMoveNorth(currentTelescopeSlot(), active);
+	auto telescope = currentTelescope();
+	if (telescope)
+		telescope->moveNorth(active);
 }
 
 void SlewDialog::onMoveEast(bool active)
 {
-	telescopeManager->telescopeMoveEast(currentTelescopeSlot(), active);
+	auto telescope = currentTelescope();
+	if (telescope)
+		telescope->moveEast(active);
 }
 
 void SlewDialog::onMoveWest(bool active)
 {
-	telescopeManager->telescopeMoveWest(currentTelescopeSlot(), active);
+	auto telescope = currentTelescope();
+	if (telescope)
+		telescope->moveWest(active);
 }
 
 void SlewDialog::onMoveSouth(bool active)
 {
-	telescopeManager->telescopeMoveSouth(currentTelescopeSlot(), active);
+	auto telescope = currentTelescope();
+	if (telescope)
+		telescope->moveSouth(active);
 }
 
 void SlewDialog::onSetSpeed(int speed)
 {
-	telescopeManager->telescopeSetSpeed(currentTelescopeSlot(), speed);
+	auto telescope = currentTelescope();
+	if (telescope)
+		telescope->setSpeed(speed);
 }
 
 void SlewDialog::savePointsToFile()

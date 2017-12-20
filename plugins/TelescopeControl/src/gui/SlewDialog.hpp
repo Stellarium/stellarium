@@ -31,6 +31,7 @@
 #include "StelStyle.hpp"
 #include "StelDialog.hpp"
 #include "StelFileMgr.hpp"
+#include "TelescopeClient.hpp"
 
 class Ui_slewDialog;
 class TelescopeControl;
@@ -102,6 +103,7 @@ private:
 	QHash<QString, int> connectedSlotsByName;
 	QVariantMap storedPointsDescriptions;
 
+	QSharedPointer<TelescopeClient> currentTelescope() const;
 	void updateTelescopeList();
 	void updateTelescopeControls();
 
@@ -109,7 +111,6 @@ private:
 
 	void savePointsToFile();
 	void loadPointsFromFile();
-	int currentTelescopeSlot();
 };
 
 #endif // _SLEWDIALOG_
