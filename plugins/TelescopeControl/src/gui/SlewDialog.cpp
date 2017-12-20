@@ -87,7 +87,7 @@ void SlewDialog::createDialogContent()
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveSouth, this, &SlewDialog::onMoveSouth);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveWest, this, &SlewDialog::onMoveWest);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::onSpeedChanged, this, &SlewDialog::onSetSpeed);
-	QObject::connect(ui->comboBoxTelescope, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SlewDialog::onCurrentTelescopeChanged);
+	QObject::connect(ui->comboBoxTelescope, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SlewDialog::onCurrentTelescopeChanged);
 
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
