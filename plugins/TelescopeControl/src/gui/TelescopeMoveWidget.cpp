@@ -15,12 +15,17 @@ TelescopeMoveWidget::TelescopeMoveWidget(QWidget *parent) :
 	QObject::connect(ui->southButton, &QPushButton::released, this, &TelescopeMoveWidget::onSouthButtonReleased);
 	QObject::connect(ui->westButton, &QPushButton::pressed, this, &TelescopeMoveWidget::onWestButtonPressed);
 	QObject::connect(ui->westButton, &QPushButton::released, this, &TelescopeMoveWidget::onWestButtonReleased);
-	QObject::connect(ui->speedSlider, &QSlider::valueChanged, this, &TelescopeMoveWidget::setSpeed);
+	QObject::connect(ui->speedSlider, &QSlider::valueChanged, this, &TelescopeMoveWidget::onSpeedChanged);
 }
 
 TelescopeMoveWidget::~TelescopeMoveWidget()
 {
 	delete ui;
+}
+
+void TelescopeMoveWidget::setSpeed(int speed)
+{
+	ui->speedSlider->setValue(speed);
 }
 
 void TelescopeMoveWidget::onNorthButtonPressed()

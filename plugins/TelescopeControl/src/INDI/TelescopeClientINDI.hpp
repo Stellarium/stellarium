@@ -25,6 +25,8 @@
 
 class TelescopeClientINDI : public TelescopeClient
 {
+	Q_OBJECT
+
 public:
 	TelescopeClientINDI(const QString &name, const QString& params);
 	~TelescopeClientINDI();

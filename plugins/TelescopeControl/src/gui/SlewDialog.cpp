@@ -30,6 +30,7 @@
 #include "SlewDialog.hpp"
 #include "ui_slewDialog.h"
 #include "TelescopeClient.hpp"
+#include "INDI/TelescopeClientINDI.hpp"
 
 using namespace TelescopeControlGlobals;
 
@@ -85,7 +86,8 @@ void SlewDialog::createDialogContent()
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveEast, this, &SlewDialog::onMoveEast);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveSouth, this, &SlewDialog::onMoveSouth);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveWest, this, &SlewDialog::onMoveWest);
-	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::setSpeed, this, &SlewDialog::onSetSpeed);
+	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::onSpeedChanged, this, &SlewDialog::onSetSpeed);
+	QObject::connect(ui->comboBoxTelescope, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &SlewDialog::onCurrentTelescopeChanged);
 
 	//Coordinates are in HMS by default:
 	ui->radioButtonHMS->setChecked(true);
@@ -351,6 +353,16 @@ void SlewDialog::onSetSpeed(int speed)
 	auto telescope = currentTelescope();
 	if (telescope)
 		telescope->setSpeed(speed);
+}
+
+void SlewDialog::onCurrentTelescopeChanged()
+{
+	auto telescope = currentTelescope();
+	auto telescopeINDI = qobject_cast<QSharedPointer<TelescopeClientINDI>>(telescope);
+	if (telescopeINDI)
+		ui->telescopeMoveWidget->setEnabled(true);
+	else
+		ui->telescopeMoveWidget->setEnabled(false);
 }
 
 void SlewDialog::savePointsToFile()

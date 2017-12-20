@@ -97,6 +97,7 @@ private slots:
 	void onMoveWest(bool active);
 	void onMoveSouth(bool active);
 	void onSetSpeed(int speed);
+	void onCurrentTelescopeChanged();
 
 private:
 	QSharedPointer<TelescopeClient> currentTelescope() const;
