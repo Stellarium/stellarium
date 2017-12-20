@@ -51,6 +51,18 @@ public:
 	void moveWest(bool active);
 	void setSpeed(int speed);
 
+signals:
+	void newDeviceReceived(QString name);
+	void removeDeviceReceived(QString name);
+	void serverConnectedReceived();
+	void serverDisconnectedReceived(int exit_code);
+
+private:
+	mutable std::mutex mMutex;
+	INDI::BaseDevice* mTelescope = nullptr;
+	Coordinates mCoordinates;
+	QStringList mDevices;
+
 public: // from INDI::BaseClient
 	void newDevice(INDI::BaseDevice *dp) override;
 	void removeDevice(INDI::BaseDevice *dp) override;
@@ -64,18 +76,6 @@ public: // from INDI::BaseClient
 	void newMessage(INDI::BaseDevice *dp, int messageID) override;
 	void serverConnected() override;
 	void serverDisconnected(int exit_code) override;
-
-signals:
-	void newDeviceReceived(QString name);
-	void removeDeviceReceived(QString name);
-	void serverConnectedReceived();
-	void serverDisconnectedReceived(int exit_code);
-
-private:
-	mutable std::mutex mMutex;
-	INDI::BaseDevice* mTelescope = nullptr;
-	Coordinates mCoordinates;
-	QStringList mDevices;
 };
 
 #endif // INDICONNECTION_HPP
