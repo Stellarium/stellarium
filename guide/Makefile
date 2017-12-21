@@ -252,7 +252,7 @@ else
    ifeq ($(findstring CYGWIN, $(shell uname)),CYGWIN)
 	@echo INFO: We are on Cygwin, right?
    else
-    @echo I assume $(shell uname) is a valid environment. Please enhance this line.
+	@echo I assume $(shell uname) is a valid environment. Please enhance this line.
    endif
   endif 
  endif 
