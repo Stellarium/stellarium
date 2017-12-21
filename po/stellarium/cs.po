@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-15 01:44+0700\n"
+"POT-Creation-Date: 2017-12-20 17:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -38,7 +38,7 @@ msgstr "vlastní značka"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:159
-#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:299
+#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "Typ"
@@ -101,7 +101,7 @@ msgstr "Hranice souhvězdí"
 
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1482
 msgid "Select single constellation"
-msgstr "Vybrat jedno souhvězdí"
+msgstr "Vybrat dané souhvězdí"
 
 #: src/core/modules/ConstellationMgr.cpp:149
 msgid "Remove selection of constellations"
@@ -195,7 +195,7 @@ msgstr "Z"
 #: src/core/modules/GridLinesMgr.cpp:908
 msgctxt "nadir"
 msgid "Z'"
-msgstr "Z'"
+msgstr "N"
 
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:915 src/core/modules/GridLinesMgr.cpp:924
@@ -272,7 +272,7 @@ msgstr "Obzor"
 #: src/core/modules/GridLinesMgr.cpp:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Equatorial J2000 grid"
-msgstr "Rovníková síť J2000"
+msgstr "Rovníková síť J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Ecliptic J2000 grid"
@@ -453,19 +453,19 @@ msgstr "albedový útvar"
 #: src/core/modules/NomenclatureItem.cpp:73
 msgctxt "landform"
 msgid "arcus"
-msgstr "arcus"
+msgstr "oblouk"
 
 #. TRANSLATORS: Radial-patterned features on Venus
 #: src/core/modules/NomenclatureItem.cpp:77
 msgctxt "landform"
 msgid "astrum"
-msgstr "astrum"
+msgstr "hvězdicovitý útvar"
 
 #. TRANSLATORS: Chain of craters
 #: src/core/modules/NomenclatureItem.cpp:81
 msgctxt "landform"
 msgid "catena"
-msgstr "catena"
+msgstr "řetěz kráterů"
 
 #. TRANSLATORS: Hollows, irregular steep-sided depressions usually in arrays
 #. or clusters
@@ -502,7 +502,7 @@ msgstr "corona"
 #: src/core/modules/NomenclatureItem.cpp:105
 msgctxt "landform"
 msgid "crater"
-msgstr "crater"
+msgstr "kráter"
 
 #. TRANSLATORS: Ridge
 #: src/core/modules/NomenclatureItem.cpp:109
@@ -642,13 +642,13 @@ msgstr "mensa"
 #: src/core/modules/NomenclatureItem.cpp:193
 msgctxt "landform"
 msgid "mons"
-msgstr "mons"
+msgstr "hora"
 
 #. TRANSLATORS: A very large dark area on the Moon
 #: src/core/modules/NomenclatureItem.cpp:197
 msgctxt "landform"
 msgid "oceanus"
-msgstr "oceanus"
+msgstr "oceán"
 
 #. TRANSLATORS: "Swamp"; small plain
 #: src/core/modules/NomenclatureItem.cpp:201
@@ -975,7 +975,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:619
 msgid "Mountain."
-msgstr ""
+msgstr "Hora."
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:623
@@ -1151,7 +1151,7 @@ msgstr "Nomenklaturní popisky"
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:1993
 #: src/gui/AstroCalcDialog.cpp:2028 plugins/Supernovae/src/Supernova.cpp:140
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
-#: plugins/Exoplanets/src/Exoplanet.cpp:310
+#: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Magnitude"
 msgstr "Zdánlivá magnituda"
 
@@ -1164,7 +1164,7 @@ msgstr "Opacita"
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:288
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:308
+#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:310
 msgid "extincted to"
 msgstr "zeslabeno na"
 
@@ -1222,7 +1222,7 @@ msgstr "Orientační úhel"
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:325
 msgctxt "distance"
 msgid "ly"
 msgstr "ly"
@@ -1232,7 +1232,7 @@ msgstr "ly"
 #: src/core/modules/Comet.cpp:232 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:2004 src/gui/AstroCalcDialog.cpp:2039
 #: src/ui_configurationDialog.h:1383 plugins/Supernovae/src/Supernova.cpp:155
-#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:324
+#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:326
 msgid "Distance"
 msgstr "Vzdálenost"
 
@@ -1512,22 +1512,22 @@ msgstr "neuvedená jasnost"
 #: src/core/modules/Nebula.cpp:1438
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr ""
+msgstr "zbytek vykazuje slupkovitou radiovou strukturu"
 
 #: src/core/modules/Nebula.cpp:1441
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr ""
+msgstr "zbytek vykazuje radiovou strukturu s vyplněným centrem (plerionem)"
 
 #: src/core/modules/Nebula.cpp:1444
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr ""
+msgstr "zbytek vykazuje složenou (nebo kombinovanou) radiovou strukturu"
 
 #: src/core/modules/Nebula.cpp:1447
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
-msgstr ""
+msgstr "zbytek vykazuje slupkovitou radiovou strukturu s určitou nejistotou"
 
 #: src/core/modules/Nebula.cpp:1450
 msgctxt "supernova remnant structure classification"
@@ -1535,6 +1535,8 @@ msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
 msgstr ""
+"zbytek vykazuje radiovou strukturu s vyplněným centrem (plerionem) s určitou"
+" nejistotou"
 
 #: src/core/modules/Nebula.cpp:1453
 msgctxt "supernova remnant structure classification"
@@ -1542,6 +1544,8 @@ msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
 msgstr ""
+"zbytek vykazuje složenou (nebo kombinovanou) radiovou strukturu s určitou "
+"nejistotou"
 
 #: src/core/modules/Nebula.cpp:1466
 msgid "galaxy"
@@ -1715,7 +1719,7 @@ msgstr "Střední zdánlivá magnituda v opozici"
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:773
 #: src/gui/AstroCalcDialog.cpp:1040 src/gui/AstroCalcDialog.cpp:1076
 #: src/gui/AstroCalcDialog.cpp:1972 src/gui/AstroCalcDialog.cpp:3726
-#: plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "AU"
@@ -1757,7 +1761,7 @@ msgstr "s prstenci"
 
 #: src/core/modules/Planet.cpp:549 src/core/modules/MinorPlanet.cpp:343
 msgid "scaled up to"
-msgstr ""
+msgstr "zvětšeno na"
 
 #: src/core/modules/Planet.cpp:559 src/core/modules/MinorPlanet.cpp:353
 msgid "Apparent diameter"
@@ -1853,7 +1857,7 @@ msgstr "Fáze"
 
 #: src/core/modules/Planet.cpp:645
 msgid "Eclipse Factor"
-msgstr ""
+msgstr "Velikost zatmění"
 
 #: src/core/modules/MinorPlanet.cpp:228
 #, qt-format
@@ -1958,12 +1962,12 @@ msgid "Magnitude range"
 msgstr "Rozsah magnitud"
 
 #: src/core/modules/StarWrapper.cpp:252
-#: plugins/Exoplanets/src/Exoplanet.cpp:318
+#: plugins/Exoplanets/src/Exoplanet.cpp:320
 msgid "Spectral Type"
 msgstr "Spektrální typ"
 
 #: src/core/modules/StarWrapper.cpp:258
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Period"
 msgstr "Doba oběhu"
 
@@ -1977,7 +1981,7 @@ msgstr "Příští světelné minimum"
 
 #: src/core/modules/StarWrapper.cpp:275
 msgid "Rising time"
-msgstr ""
+msgstr "Čas východu"
 
 #: src/core/modules/StarWrapper.cpp:277
 msgid "Duration of eclipse"
@@ -1994,7 +1998,7 @@ msgstr "Úhlová vzdálenost"
 
 #: src/core/modules/StarWrapper.cpp:300
 msgid "Proper motions by axes"
-msgstr ""
+msgstr "Vlastní pohyb"
 
 #: src/core/modules/StarWrapper.cpp:300 src/core/modules/StarWrapper.cpp:302
 msgctxt "milliarc second per year"
@@ -2019,7 +2023,7 @@ msgstr "Zvířetníkové světlo"
 
 #: src/core/modules/ToastMgr.cpp:60
 msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgstr "Digitalizovaná přehlídka oblohy (zkušebně)"
 
 #: src/core/StelApp.cpp:558
 msgid "Night mode"
@@ -2028,6 +2032,7 @@ msgstr "Noční režim"
 #: src/core/StelApp.cpp:591
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
+"Nelze vytvořit odesílač pro Spout. Podrobnosti naleznete v log souboru."
 
 #: src/core/StelCore.cpp:253 src/gui/StelGui.cpp:208
 #: src/gui/AstroCalcDialog.cpp:1019 src/gui/AstroCalcDialog.cpp:2158
@@ -2914,13 +2919,13 @@ msgid "Found"
 msgstr "Nalezeno"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:287
+#: src/core/StelLocaleMgr.cpp:288
 msgctxt "solar time"
 msgid "LMST"
 msgstr "MSSČ"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:293
+#: src/core/StelLocaleMgr.cpp:294
 msgctxt "solar time"
 msgid "LTST"
 msgstr "MPSČ"
@@ -3250,15 +3255,15 @@ msgstr "Podrobnější čtení"
 
 #: src/gui/HelpDialog.cpp:151
 msgid "Pan view around the sky"
-msgstr "Pohyb zorného pole po obloze"
+msgstr "Změna směru pohledu na obloze"
 
 #: src/gui/HelpDialog.cpp:152
 msgid "Arrow keys & left mouse drag"
-msgstr "Kurzorové klávesy & tažení levým tlačítkem myši"
+msgstr "Šipky + tažení levým tlačítkem myši"
 
 #: src/gui/HelpDialog.cpp:154
 msgid "Zoom in/out"
-msgstr "Přiblížit/Oddálit"
+msgstr "Přiblížit / oddálit"
 
 #: src/gui/HelpDialog.cpp:156
 msgid "Page Up/Down"
@@ -3270,43 +3275,43 @@ msgstr "CTRL+šipka nahoru/dolů"
 
 #: src/gui/HelpDialog.cpp:161
 msgid "Time dragging"
-msgstr ""
+msgstr "Přetahování času"
 
 #: src/gui/HelpDialog.cpp:162
 msgid "Ctrl & left mouse drag"
-msgstr ""
+msgstr "Ctrl + tažení levým tlačítkem myši"
 
 #: src/gui/HelpDialog.cpp:163
 msgid "Time scrolling: minutes"
-msgstr ""
+msgstr "Posouvání času: minuty"
 
 #: src/gui/HelpDialog.cpp:164
 msgid "Ctrl & mouse wheel"
-msgstr ""
+msgstr "Ctrl + kolečko myši"
 
 #: src/gui/HelpDialog.cpp:165
 msgid "Time scrolling: hours"
-msgstr ""
+msgstr "Posouvání času: hodiny"
 
 #: src/gui/HelpDialog.cpp:166
 msgid "Ctrl+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Shift + kolečko myši"
 
 #: src/gui/HelpDialog.cpp:167
 msgid "Time scrolling: days"
-msgstr ""
+msgstr "Posouvání času: dny"
 
 #: src/gui/HelpDialog.cpp:168
 msgid "Ctrl+Alt & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt + kolečko myši"
 
 #: src/gui/HelpDialog.cpp:169
 msgid "Time scrolling: years"
-msgstr ""
+msgstr "Posouvání času: roky"
 
 #: src/gui/HelpDialog.cpp:170
 msgid "Ctrl+Alt+Shift & mouse wheel"
-msgstr ""
+msgstr "Ctrl+Alt+Shift + kolečko myši"
 
 #: src/gui/HelpDialog.cpp:173
 msgid "Select object"
@@ -3420,46 +3425,46 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Fóra} - diskutuj o Stellariu s dalšími uživateli."
 
-#: src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317
 msgid "Developers"
 msgstr "Vývojáři"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Koordinátor projektu a šéf vývoje: %1"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Grafik: %1"
 
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323 src/gui/HelpDialog.cpp:329
-#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
-#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
-#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:335 src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:337
 #, qt-format
 msgid "Developer: %1"
 msgstr "Vývojář: %1"
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Průběžná integrace: %1"
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "Tester: %1"
 msgstr "Tester: %1"
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327
 msgid "Former Developers"
 msgstr "Dřívější vývojáři"
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:328
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -3467,17 +3472,17 @@ msgstr ""
 "Někteří lidé přispěli velkým kusem, ale již nejsou aktivní. Jejich práce pro"
 " projekt znamená velký přínos:"
 
-#: src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Autor dokumentů/vývojář: %1"
 
-#: src/gui/HelpDialog.cpp:337 src/gui/HelpDialog.cpp:338
+#: src/gui/HelpDialog.cpp:338 src/gui/HelpDialog.cpp:339
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX vývojář: %1"
 
-#: src/gui/HelpDialog.cpp:339
+#: src/gui/HelpDialog.cpp:340
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
@@ -3490,12 +3495,14 @@ msgstr "OSX vývojář: %1"
 msgid "Contributors"
 msgstr "Přispěvatelé"
 
-#: src/gui/HelpDialog.cpp:340
+#: src/gui/HelpDialog.cpp:341
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
+"Několik lidí přispělo tomuto projektu a jejich práce přispěla ke zlepšení "
+"Stellaria (v abecedním pořadí): %1."
 
 #: src/gui/StelGui.cpp:209
 msgid "Windows"
@@ -4101,7 +4108,7 @@ msgstr "Sekulární zrychlení Měsíce"
 #: src/gui/AstroCalcDialog.cpp:288 src/ui_configurationDialog.h:1349
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:191
 msgid "Name"
 msgstr "Název"
@@ -5069,534 +5076,534 @@ msgstr "Skupinky hvězd"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:94
 msgid "Geological features"
-msgstr ""
+msgstr "Geologické útvary"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "Geological features: albedo features"
-msgstr ""
+msgstr "Geologické útvary: albedový útvar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Geological features: arcūs"
-msgstr ""
+msgstr "Geologické útvary: arcūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
 msgid "Geological features: astra"
-msgstr ""
+msgstr "Geologické útvary: astra"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:105
 msgid "Geological features: catenae"
-msgstr ""
+msgstr "Geologické útvary: catenae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:107
 msgid "Geological features: cavi"
-msgstr ""
+msgstr "Geologické útvary: cavi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:109
 msgid "Geological features: chaoses"
-msgstr ""
+msgstr "Geologické útvary: chaoses"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:111
 msgid "Geological features: chasmata"
-msgstr ""
+msgstr "Geologické útvary: chasmata"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
 msgid "Geological features: colles"
-msgstr ""
+msgstr "Geologické útvary: colles"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
 msgid "Geological features: coronae"
-msgstr ""
+msgstr "Geologické útvary: coronae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
 msgid "Geological features: craters"
-msgstr ""
+msgstr "Geologické útvary: craters"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119
 msgid "Geological features: dorsa"
-msgstr ""
+msgstr "Geologické útvary: dorsa"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
 msgid "Geological features: eruptive centers"
-msgstr ""
+msgstr "Geologické útvary: eruptivní centra"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
 msgid "Geological features: faculae"
-msgstr ""
+msgstr "Geologické útvary: faculae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
 msgid "Geological features: farra"
-msgstr ""
+msgstr "Geologické útvary: farra"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
 msgid "Geological features: flexūs"
-msgstr ""
+msgstr "Geologické útvary: flexūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
 msgid "Geological features: fluctūs"
-msgstr ""
+msgstr "Geologické útvary: fluctūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
 msgid "Geological features: flumina"
-msgstr ""
+msgstr "Geologické útvary: flumina"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
 msgid "Geological features: freta"
-msgstr ""
+msgstr "Geologické útvary: freta"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
 msgid "Geological features: fossae"
-msgstr ""
+msgstr "Geologické útvary: fossae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
 msgid "Geological features: insulae"
-msgstr ""
+msgstr "Geologické útvary: insulae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
 msgid "Geological features: labēs"
-msgstr ""
+msgstr "Geologické útvary: labēs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:141
 msgid "Geological features: labyrinthi"
-msgstr ""
+msgstr "Geologické útvary: labyrinthi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:143
 msgid "Geological features: lacunae"
-msgstr ""
+msgstr "Geologické útvary: lacunae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:145
 msgid "Geological features: lacūs"
-msgstr ""
+msgstr "Geologické útvary: lacūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:147
 msgid "Geological features: large ringed features"
-msgstr ""
+msgstr "Geologické útvary: velké prstencovité útvary"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:149
 msgid "Geological features: lineae"
-msgstr ""
+msgstr "Geologické útvary: lineae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:151
 msgid "Geological features: lingulae"
-msgstr ""
+msgstr "Geologické útvary: lingulae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:153
 msgid "Geological features: maculae"
-msgstr ""
+msgstr "Geologické útvary: maculae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:155
 msgid "Geological features: maria"
-msgstr ""
+msgstr "Geologické útvary: maria"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
 msgid "Geological features: mensae"
-msgstr ""
+msgstr "Geologické útvary: mensae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:159
 msgid "Geological features: montes"
-msgstr ""
+msgstr "Geologické útvary: montes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
 msgid "Geological features: oceani"
-msgstr ""
+msgstr "Geologické útvary: oceani"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:163
 msgid "Geological features: paludes"
-msgstr ""
+msgstr "Geologické útvary: paludes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:165
 msgid "Geological features: paterae"
-msgstr ""
+msgstr "Geologické útvary: paterae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:167
 msgid "Geological features: planitiae"
-msgstr ""
+msgstr "Geologické útvary: planitiae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:169
 msgid "Geological features: plana"
-msgstr ""
+msgstr "Geologické útvary: plana"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:171
 msgid "Geological features: plumes"
-msgstr ""
+msgstr "Geologické útvary: plumes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:173
 msgid "Geological features: promontoria"
-msgstr ""
+msgstr "Geologické útvary: promontoria"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:175
 msgid "Geological features: regiones"
-msgstr ""
+msgstr "Geologické útvary: regiones"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:177
 msgid "Geological features: rimae"
-msgstr ""
+msgstr "Geologické útvary: rimae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:179
 msgid "Geological features: rupēs"
-msgstr ""
+msgstr "Geologické útvary: rupēs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:181
 msgid "Geological features: scopuli"
-msgstr ""
+msgstr "Geologické útvary: scopuli"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:183
 msgid "Geological features: serpentes"
-msgstr ""
+msgstr "Geologické útvary: serpentes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:185
 msgid "Geological features: sulci"
-msgstr ""
+msgstr "Geologické útvary: sulci"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:187
 msgid "Geological features: sinūs"
-msgstr ""
+msgstr "Geologické útvary: sinūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:189
 msgid "Geological features: terrae"
-msgstr ""
+msgstr "Geologické útvary: terrae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:191
 msgid "Geological features: tholi"
-msgstr ""
+msgstr "Geologické útvary: tholi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:193
 msgid "Geological features: undae"
-msgstr ""
+msgstr "Geologické útvary: undae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
 msgid "Geological features: valles"
-msgstr ""
+msgstr "Geologické útvary: valles"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
 msgid "Geological features: vastitates"
-msgstr ""
+msgstr "Geologické útvary: vastitates"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:199
 msgid "Geological features: virgae"
-msgstr ""
+msgstr "Geologické útvary: virgae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:201
 msgid "Geological features: landing sites"
-msgstr ""
+msgstr "Geologické útvary: místa přistání"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:203
 msgid "Geological features: lenticulae"
-msgstr ""
+msgstr "Geologické útvary: lenticulae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:205
 msgid "Geological features: reticula"
-msgstr ""
+msgstr "Geologické útvary: reticula"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:207
 msgid "Geological features: tesserae"
-msgstr ""
+msgstr "Geologické útvary: tesserae"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:212
 msgid "Named geological features of Epimetheus"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Epimetheu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:214
 msgid "Named geological features of Vesta"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Vestě"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:216
 msgid "Named geological features of Mathilde"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Mathildě"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:218
 msgid "Named geological features of Venus"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Venuši"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:220
 msgid "Named geological features of Mercury"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Merkuru"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:222
 msgid "Named geological features of Iapetus"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Iapetu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:224
 msgid "Named geological features of Ganymede"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Ganymedu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:226
 msgid "Named geological features of Ceres"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Cereře"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:228
 msgid "Named geological features of Ida"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Idě"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:230
 msgid "Named geological features of Triton"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Tritonu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:232
 msgid "Named geological features of Oberon"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Oberonu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:234
 msgid "Named geological features of Itokawa"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Itokawě"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:236
 msgid "Named geological features of Thebe"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Thebe"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:238
 msgid "Named geological features of Gaspra"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Gaspře"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:240
 msgid "Named geological features of Rhea"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Rhei"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:242
 msgid "Named geological features of Enceladus"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Enceladu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:244
 msgid "Named geological features of the Moon"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Měsíci"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:246
 msgid "Named geological features of Dione"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Dione"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:248
 msgid "Named geological features of Steins"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na planetce Šteins"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:250
 msgid "Named geological features of Phoebe"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Phoebe"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:252
 msgid "Named geological features of Puck"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Pucku"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:254
 msgid "Named geological features of Europa"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Europě"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:256
 msgid "Named geological features of Lutetia"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Lutetii"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:258
 msgid "Named geological features of Tethys"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Tethys"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:260
 msgid "Named geological features of Eros"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Erosu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:262
 msgid "Named geological features of Callisto"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Callisto"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:264
 msgid "Named geological features of Phobos"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Phobosu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:266
 msgid "Named geological features of Proteus"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Proteu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:268
 msgid "Named geological features of Hyperion"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Hyperionu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:270
 msgid "Named geological features of Titania"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Titanii"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:272
 msgid "Named geological features of Deimos"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Deimosu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:274
 msgid "Named geological features of Io"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Io"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:276
 msgid "Named geological features of Ariel"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Arielu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:278
 msgid "Named geological features of Dactyl"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Dactylu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:280
 msgid "Named geological features of Titan"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Titanu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:282
 msgid "Named geological features of Amalthea"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Amalthei"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:284
 msgid "Named geological features of Umbriel"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Umbrielu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:286
 msgid "Named geological features of Janus"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Janu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:288
 msgid "Named geological features of Mars"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Marsu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:290
 msgid "Named geological features of Miranda"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Mirandě"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:292
 msgid "Named geological features of Mimas"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Mimasu"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
 #: src/translations.h:294
 msgid "Named geological features of Pluto"
-msgstr ""
+msgstr "Pojmenovaný geologický útvar na Plutu"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:299
@@ -5621,7 +5628,7 @@ msgstr "Arabská"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:425
 msgid "Arabic Moon Stations"
-msgstr ""
+msgstr "Arabské lunární domy"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:427
@@ -5636,7 +5643,7 @@ msgstr "Běloruská"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:431
 msgid "Boorong"
-msgstr ""
+msgstr "Booronžská"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:433
@@ -5651,7 +5658,7 @@ msgstr "Egyptská"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:437
 msgid "Hawaiian Starlines"
-msgstr ""
+msgstr "Havajská"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:439
@@ -5666,12 +5673,12 @@ msgstr "Indickovédská"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:443
 msgid "Japanese Moon Stations"
-msgstr ""
+msgstr "Japonské lunární domy"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:445
 msgid "Kamilaroi/Euahlayi"
-msgstr ""
+msgstr "Kamilarojská/Euahlajská"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:447
@@ -5711,7 +5718,7 @@ msgstr "Severská"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:461
 msgid "Ojibwe"
-msgstr ""
+msgstr "Odžibvejská"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:463
@@ -5776,7 +5783,7 @@ msgstr "Měsíc"
 #. TRANSLATORS: Landscape name: Hurricane Ridge
 #: src/translations.h:491
 msgid "Hurricane"
-msgstr "Hurikán"
+msgstr "Hurikánový hřeben"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:493
@@ -5826,11 +5833,11 @@ msgstr "Grossmugl"
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:511
 msgid "Zero Horizon"
-msgstr "Nulový obzor"
+msgstr "Ideální obzor"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:335
-#: plugins/Exoplanets/src/Exoplanet.cpp:339
+#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:337
+#: plugins/Exoplanets/src/Exoplanet.cpp:341
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "Slunce"
@@ -5848,7 +5855,7 @@ msgstr "Testovací scéna"
 #. TRANSLATORS: Name of script
 #: src/translations.h:525
 msgid "Landscape Tour"
-msgstr "Prohlídka povrchu"
+msgstr "Prohlídka krajin"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:527
@@ -5959,7 +5966,7 @@ msgstr "Úkazy na Zemi z Marsu"
 #: src/translations.h:569
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
-msgstr ""
+msgstr "Největší elongace a opozice planet a Země z Marsu"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:571
@@ -5974,22 +5981,22 @@ msgstr "Tychonova supernova"
 #. TRANSLATORS: Name of script
 #: src/translations.h:575
 msgid "Earth and other Planets from Ceres"
-msgstr ""
+msgstr "Země a další planety z Cerery"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:577
 msgid "Messier Objects Tour"
-msgstr ""
+msgstr "Prohlídka Messierových objektů"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:579
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Nejlepší objekty pro binokuláry"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:581
 msgid "20 Fun Naked-Eye Double Stars"
-msgstr ""
+msgstr "20 zábavných dvojhvězd viditelných očima"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:583
@@ -5999,7 +6006,7 @@ msgstr "Seznam největších známých hvězd"
 #. TRANSLATORS: Name of script
 #: src/translations.h:585
 msgid "Herschel 400 Tour"
-msgstr ""
+msgstr "Prohlídka objektů z Herschel 400"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:587
@@ -6009,7 +6016,7 @@ msgstr "Binosky: objekty vzdáleného vesmíru pro binokuláry"
 #. TRANSLATORS: Name of script
 #: src/translations.h:589
 msgid "The Jack Bennett Catalog"
-msgstr ""
+msgstr "Katalog Jacka Bennetta"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:591
@@ -6166,7 +6173,7 @@ msgstr ""
 
 #: src/translations.h:621
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "Prohlídka objektů z Messierova katalogu."
 
 #: src/translations.h:622
 msgid ""
@@ -6188,7 +6195,7 @@ msgstr "Tento skript vás provede okolo největších známých hvězd."
 
 #: src/translations.h:625
 msgid "A tour around objects from the Herschel 400 Catalogue"
-msgstr ""
+msgstr "Prohlídka objektů z katalogu Herschel 400"
 
 #: src/translations.h:626
 msgid ""
@@ -6335,7 +6342,7 @@ msgstr "&Sytost:"
 
 #: src/translations.h:661
 msgid "&Val:"
-msgstr ""
+msgstr "&Hodnota:"
 
 #: src/translations.h:662
 msgid "&Red:"
@@ -6356,35 +6363,35 @@ msgstr "Vybrat barvu"
 #: src/translations.h:666
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
-msgstr ""
+msgstr "Kurzor na %1, %2 Stiskněte ESC pro zrušení"
 
 #: src/translations.h:667
 msgid "Back"
-msgstr ""
+msgstr "Zpět"
 
 #: src/translations.h:668
 msgid "Forward"
-msgstr ""
+msgstr "Vpřed"
 
 #: src/translations.h:669
 msgid "Parent Directory"
-msgstr ""
+msgstr "O úroveň výš"
 
 #: src/translations.h:670
 msgid "Create New Folder"
-msgstr ""
+msgstr "Vytvořit novou složku"
 
 #: src/translations.h:671
 msgid "List View"
-msgstr ""
+msgstr "Zobrazení seznamu"
 
 #: src/translations.h:672
 msgid "Detail View"
-msgstr ""
+msgstr "Detailní zobrazení"
 
 #: src/translations.h:673
 msgid "Recent Places"
-msgstr ""
+msgstr "Nedávná místa"
 
 #: src/translations.h:674
 #, qt-format
@@ -6392,14 +6399,16 @@ msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
+"%1 již existuje.\n"
+"Chcete jej nahradit?"
 
 #: src/translations.h:675
 msgid "&Yes"
-msgstr ""
+msgstr "&Ano"
 
 #: src/translations.h:676
 msgid "&No"
-msgstr ""
+msgstr "&Ne"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Andorra
 #: src/translations_countries.h:32
@@ -6454,7 +6463,7 @@ msgstr "Argentina"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/American_Samoa
 #: src/translations_countries.h:52
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Americká Samoa"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Austria
 #: src/translations_countries.h:54
@@ -6474,7 +6483,7 @@ msgstr "Aruba"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Åland_Islands
 #: src/translations_countries.h:60
 msgid "Åland Islands"
-msgstr ""
+msgstr "Ålandy"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Azerbaijan
 #: src/translations_countries.h:62
@@ -6484,7 +6493,7 @@ msgstr "Azerbajdžán"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina
 #: src/translations_countries.h:64
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosna a Hercegovina"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Barbados
 #: src/translations_countries.h:66
@@ -6529,7 +6538,7 @@ msgstr "Benin"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Barthélemy
 #: src/translations_countries.h:82
 msgid "St Barthelemy"
-msgstr ""
+msgstr "Svatý Bartoloměj"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bermuda
 #: src/translations_countries.h:84
@@ -6539,7 +6548,7 @@ msgstr "Bermudy"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brunei
 #: src/translations_countries.h:86
 msgid "Brunei"
-msgstr ""
+msgstr "Brunej"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bolivia
 #: src/translations_countries.h:88
@@ -6549,7 +6558,7 @@ msgstr "Bolívie"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Karibské Nizozemsko"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
@@ -6594,22 +6603,22 @@ msgstr "Kanada"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
 #: src/translations_countries.h:108
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Kokosové (Keelingovy) ostrovy"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(DRC)
 #: src/translations_countries.h:110
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Demokratická republika Kongo"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_African_Republic
 #: src/translations_countries.h:112
 msgid "Central African Rep."
-msgstr ""
+msgstr "Středoafrická republika"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Republika Kongo"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
@@ -6619,7 +6628,7 @@ msgstr "Švýcarsko"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ivory_Coast
 #: src/translations_countries.h:118
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "Pobřeží slonoviny"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cook_Islands
 #: src/translations_countries.h:120
@@ -7105,7 +7114,7 @@ msgstr "Černá Hora"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Martin
 #: src/translations_countries.h:312
 msgid "St Martin (French)"
-msgstr "Svatý Martin"
+msgstr "Svatý Martin (francouzská část)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Madagascar
 #: src/translations_countries.h:314
@@ -7455,7 +7464,7 @@ msgstr "El Salvador"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sint_Maarten
 #: src/translations_countries.h:452
 msgid "St Maarten (Dutch)"
-msgstr "Svatý Martin"
+msgstr "Svatý Martin (nizozemská část)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
@@ -7480,7 +7489,7 @@ msgstr "Čad"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "Francouzská jižní a antarktická území"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
@@ -7560,7 +7569,7 @@ msgstr "Uganda"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
 msgid "US minor outlying islands"
-msgstr ""
+msgstr "Menší odlehlé ostrovy USA"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
@@ -7585,7 +7594,7 @@ msgstr "Vatikán"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
 msgid "St Vincent"
-msgstr ""
+msgstr "Svatý Vincenc"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -7595,17 +7604,17 @@ msgstr "Venezuela"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Panenské ostrovy (UK)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
 msgid "Virgin Islands (US)"
-msgstr "Panenské ostrovy (US)"
+msgstr "Panenské ostrovy (USA)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
 msgid "Vietnam"
-msgstr ""
+msgstr "Vietnam"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 #: src/translations_countries.h:514
@@ -7620,7 +7629,7 @@ msgstr "Wallis a Futuna"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
 msgid "Samoa (western)"
-msgstr ""
+msgstr "Samoa (západní)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520
@@ -7687,7 +7696,7 @@ msgstr ""
 
 #: src/ui_locationDialogGui.h:485
 msgid "Reset Location List"
-msgstr ""
+msgstr "Resetovat seznam míst"
 
 #: src/ui_locationDialogGui.h:486
 msgid "Current location information"
@@ -7721,7 +7730,7 @@ msgstr "Použít současnou polohu jako výchozí"
 
 #: src/ui_locationDialogGui.h:493
 msgid "Get location from Network"
-msgstr "Zjistit polohu ze sítě"
+msgstr "Zjistit polohu z Internetu"
 
 #: src/ui_locationDialogGui.h:494
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:153
@@ -7774,7 +7783,7 @@ msgstr "Země:"
 
 #: src/ui_locationDialogGui.h:518
 msgid "Enable daylight saving time"
-msgstr ""
+msgstr "Přepnout na letní čas"
 
 #: src/ui_searchDialogGui.h:612
 msgid "Find Object"
@@ -7887,7 +7896,7 @@ msgstr "Řecká písmena pro Bayerovo označení"
 #: src/ui_searchDialogGui.h:698
 msgid ""
 "Note: this tool doesn't apply the refraction correction for coordinates."
-msgstr ""
+msgstr "Poznámka: tento nástroj nepoužívá korekci souřadnic na refrakci"
 
 #: src/ui_searchDialogGui.h:700
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:589
@@ -8053,12 +8062,12 @@ msgstr "Označení a značky"
 #: src/ui_viewDialog.h:2516
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:269
 msgid "Absolute scale:"
-msgstr "Absolutní stupnice"
+msgstr "Absolutní stupnice:"
 
 #: src/ui_viewDialog.h:2517
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Relative scale:"
-msgstr "Relativní stupnice"
+msgstr "Relativní stupnice:"
 
 #: src/ui_viewDialog.h:2518
 msgid "Use additional names of stars"
@@ -8070,11 +8079,11 @@ msgstr "Objekty sluneční soustavy"
 
 #: src/ui_viewDialog.h:2520
 msgid "Scale minor bodies:"
-msgstr "Škálovat malá tělesa:"
+msgstr "Zvětšení malých těles:"
 
 #: src/ui_viewDialog.h:2522
 msgid "Hide nomenclature on the celestial body of observer"
-msgstr ""
+msgstr "Skrýt nomenklaturu na tělese pozorovatele"
 
 #: src/ui_viewDialog.h:2524
 msgid ""
@@ -8094,11 +8103,11 @@ msgstr "Zvětšení Měsíce:"
 
 #: src/ui_viewDialog.h:2529
 msgid "Scale factor"
-msgstr "Faktor škálování"
+msgstr "Faktor zvětšení"
 
 #: src/ui_viewDialog.h:2534
 msgid "Use more accurate 3D models (where available)"
-msgstr ""
+msgstr "Použít přesnější 3D modely (pokud jsou dostupné)"
 
 #: src/ui_viewDialog.h:2535
 msgid "Planets magnitude algorithm:"
@@ -8118,35 +8127,37 @@ msgstr "Barvy..."
 
 #: src/ui_viewDialog.h:2542
 msgid "Limit the magnitude of solar system objects"
-msgstr ""
+msgstr "Omezit magnitudu objektů sluneční soustavy"
 
 #: src/ui_viewDialog.h:2545
 msgid "Use custom settings of GRS:"
-msgstr ""
+msgstr "Použít vlastní nastavení pro Rudou skvrnu:"
 
 #: src/ui_viewDialog.h:2546
 msgid "GRS details..."
-msgstr ""
+msgstr "Rudá skvrna..."
 
 #: src/ui_viewDialog.h:2548
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr ""
+"Zrušte tuto volbu pokud chcete vidět stopy všech objektů sluneční soustavy."
 
 #: src/ui_viewDialog.h:2550
 msgid "Show trail only for selected planet"
-msgstr ""
+msgstr "Zobrazit stopu pouze pro vybranou planetu"
 
 #: src/ui_viewDialog.h:2554
 msgid "Simulate self-shadowing"
-msgstr ""
+msgstr "Simulovat vlastní stíny"
 
 #: src/ui_viewDialog.h:2556
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr ""
+"Zrušte tuto volbu pokud chcete vidět dráhu vybrané planety a jejích měsíců.."
 
 #: src/ui_viewDialog.h:2558
 msgid "Show orbit for selected planet"
@@ -8251,7 +8262,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2633
 msgid "Filter by type"
-msgstr ""
+msgstr "Filtrovat podle typu"
 
 #: src/ui_viewDialog.h:2641 src/ui_dsoColorsDialog.h:556
 msgid "Hydrogen regions"
@@ -8285,6 +8296,8 @@ msgstr ""
 #: src/ui_viewDialog.h:2655
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr ""
+"Mezní magnituda (pro pozorovatele prostýma očima/binokulárem) pro objekty "
+"vzdáleného vesmíru."
 
 #: src/ui_viewDialog.h:2659
 msgid ""
@@ -8372,7 +8385,7 @@ msgstr "Barva rovníku (J2000.0)"
 
 #: src/ui_viewDialog.h:2697
 msgid "Show ecliptic line of current date."
-msgstr "Zobrazit ekliptiku k datu."
+msgstr "Zobrazit ekliptiku k současnému datu."
 
 #: src/ui_viewDialog.h:2699
 msgid "Ecliptic (of date)"
@@ -8491,7 +8504,7 @@ msgstr "Barva supergalaktických pólů"
 
 #: src/ui_viewDialog.h:2780
 msgid "Show ecliptic poles of current date."
-msgstr "Zobrazit póly ekliptiky k datu."
+msgstr "Zobrazit póly ekliptiky k současnému datu."
 
 #: src/ui_viewDialog.h:2782
 msgid "Ecliptic poles (of date)"
@@ -8557,7 +8570,7 @@ msgstr "Výška a azimut (počítaný od severu přes východ)."
 
 #: src/ui_viewDialog.h:2818
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
-msgstr "Ekliptikální souřadnice k datu. Zobrazované pouze na Zemi."
+msgstr "Ekliptikální souřadnice k současnému datu. Zobrazované pouze na Zemi."
 
 #: src/ui_viewDialog.h:2820
 msgid "Ecliptic grid (of date)"
@@ -8633,7 +8646,7 @@ msgstr "Barva bodů rovnodennosti (k datu)"
 
 #: src/ui_viewDialog.h:2866
 msgid "Equatorial coordinates of current date and planet."
-msgstr "Rovníkové souřadnice současné planety k datu."
+msgstr "Rovníkové souřadnice dané planety k současnému datu."
 
 #: src/ui_viewDialog.h:2868
 msgid "Equatorial grid (of date)"
@@ -8669,7 +8682,7 @@ msgstr "Svislý posun pohledu"
 
 #: src/ui_viewDialog.h:2883
 msgid "Show fog"
-msgstr "Zobraz mlhu"
+msgstr "Zobraz opar"
 
 #: src/ui_viewDialog.h:2884
 msgid "Use associated planet and position"
@@ -8738,7 +8751,7 @@ msgstr "Barva spojnic souhvězdí"
 
 #: src/ui_viewDialog.h:2914
 msgid "Use native names for planets from current culture"
-msgstr ""
+msgstr "Použít nativní jména pro planety z aktuálně vybrané mytologie"
 
 #: src/ui_viewDialog.h:2916
 msgid "Use native names for planets"
@@ -8856,6 +8869,7 @@ msgstr ""
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
+"VSOP87/ELP2000-82B je použito, pokud nejsou nainstalované nebo aktvované."
 
 #: src/ui_configurationDialog.h:1305
 msgid "Default options"
@@ -8863,7 +8877,7 @@ msgstr "Předvolená nastavení"
 
 #: src/ui_configurationDialog.h:1306
 msgid "Save View"
-msgstr ""
+msgstr "Uložit pohled"
 
 #: src/ui_configurationDialog.h:1308
 msgid ""
@@ -8899,10 +8913,13 @@ msgid ""
 " for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr ""
+"Uloží buď aktuální ZP a směr pohledu nebo všechna aktuální nastavení pro "
+"použití při dalším spuštění. Obnovení výchozích nastavení vyžaduje restart "
+"Stellaria."
 
 #: src/ui_configurationDialog.h:1317
 msgid "The vertical field (height) of your view when Stellarium starts"
-msgstr ""
+msgstr "Svislé zorné pole (výška) při spuštění Stallaria."
 
 #: src/ui_configurationDialog.h:1320
 msgid "The direction you're looking when Stellarium starts"
@@ -9130,7 +9147,7 @@ msgstr "Jiné:"
 
 #: src/ui_configurationDialog.h:1425
 msgid "Use current local date and time"
-msgstr "Použít současný místní čas a datum"
+msgstr "Použít aktuální místní čas a datum"
 
 #: src/ui_configurationDialog.h:1427
 msgid "use current"
@@ -9497,31 +9514,31 @@ msgstr ""
 
 #: src/ui_greatRedSpotDialog.h:171
 msgid "Great Red Spot Details"
-msgstr ""
+msgstr "Velká rudá skvrna - podrobnosti"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Custom settings for position of GRS"
-msgstr ""
+msgstr "Uživatelské nastavení polohy Velké rudé skvrny"
 
 #: src/ui_greatRedSpotDialog.h:174
 msgid "yyyy.MM.dd hh:mm"
-msgstr ""
+msgstr "rrrr.MM.dd hh:mm"
 
 #: src/ui_greatRedSpotDialog.h:175
 msgid "Annual drift (degrees):"
-msgstr ""
+msgstr "Roční drift (stupně):"
 
 #: src/ui_greatRedSpotDialog.h:176
 msgid "Longitude of GRS (degrees):"
-msgstr ""
+msgstr "Délka Rudé skvrny (stupně):"
 
 #: src/ui_greatRedSpotDialog.h:183
 msgid "Date and Time (UTC):"
-msgstr ""
+msgstr "Datum a čas (UTC):"
 
 #: src/ui_greatRedSpotDialog.h:187
 msgid "Get the recent GRS measurement"
-msgstr ""
+msgstr "Získat poslední měření Rudé skvrny"
 
 #: src/ui_scriptConsole.h:345
 msgid "Script console"
@@ -9610,7 +9627,7 @@ msgstr "Grafy"
 
 #: src/ui_astroCalcDialog.h:914 src/ui_astroCalcDialog.h:983
 msgid "Graphs on the current year"
-msgstr "Grafy pro aktuální rok"
+msgstr "Grafy pro současný rok"
 
 #: src/ui_astroCalcDialog.h:917
 msgctxt "What's Up Tonight"
@@ -9687,7 +9704,7 @@ msgstr "Spočítat efemeridu"
 
 #: src/ui_astroCalcDialog.h:951
 msgid "Show markers of positions of the current celestial body on the sky"
-msgstr ""
+msgstr "Zobrazit značky polohy aktuálního nebeského tělesa na obloze"
 
 #: src/ui_astroCalcDialog.h:953
 msgid "Show markers"
@@ -9695,31 +9712,31 @@ msgstr "Zobrazit značky"
 
 #: src/ui_astroCalcDialog.h:955
 msgid "Show dates of positions of current celestial body near markers"
-msgstr ""
+msgstr "Zobrazit datumy u poloh aktuálního nebeského tělesa poblíž značek"
 
 #: src/ui_astroCalcDialog.h:957
 msgid "Show dates"
-msgstr ""
+msgstr "Zobratit datumy"
 
 #: src/ui_astroCalcDialog.h:959
 msgid "Show magnitudes of current celestial body"
-msgstr ""
+msgstr "Zobrazit magnitudy u aktuálního nebeského tělesa"
 
 #: src/ui_astroCalcDialog.h:961
 msgid "Show magnitudes"
-msgstr ""
+msgstr "Zobrazit magnitudy"
 
 #: src/ui_astroCalcDialog.h:963
 msgid "Maximum allowed separation:"
-msgstr ""
+msgstr "Maximální možná vzdálenost:"
 
 #: src/ui_astroCalcDialog.h:965
 msgid "Value in decimal degrees"
-msgstr ""
+msgstr "Hodnota v desetinných stupních"
 
 #: src/ui_astroCalcDialog.h:968
 msgid "Calculate oppositions"
-msgstr ""
+msgstr "Spočítat opozice"
 
 #: src/ui_astroCalcDialog.h:969
 msgid "Between objects:"
@@ -9727,35 +9744,35 @@ msgstr "Mezi objekty:"
 
 #: src/ui_astroCalcDialog.h:970
 msgid "and"
-msgstr ""
+msgstr "a"
 
 #: src/ui_astroCalcDialog.h:971
 msgid "Cleanup of phenomena"
-msgstr ""
+msgstr "Vyčistit úkazy"
 
 #: src/ui_astroCalcDialog.h:972
 msgid "Save phenomena"
-msgstr ""
+msgstr "Uložit úkazy"
 
 #: src/ui_astroCalcDialog.h:976
 msgid "Calculate phenomena"
-msgstr ""
+msgstr "Spočítat úkazy"
 
 #: src/ui_astroCalcDialog.h:978
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
-msgstr ""
+msgstr "Vyberte prosím objekt pro nakreslení grafu \"Výška vs. čas\"."
 
 #: src/ui_astroCalcDialog.h:979
 msgid "Second graph (yellow):"
-msgstr ""
+msgstr "Druhý graf (žlutý):"
 
 #: src/ui_astroCalcDialog.h:980
 msgid "First graph (red):"
-msgstr ""
+msgstr "První graf (červený):"
 
 #: src/ui_astroCalcDialog.h:982
 msgid "Draw graphs"
-msgstr ""
+msgstr "Kreslit grafy"
 
 #: src/ui_astroCalcDialog.h:985
 msgid "Select a category:"
@@ -9767,39 +9784,39 @@ msgstr "Odpovídající objekty:"
 
 #: src/ui_astroCalcDialog.h:987
 msgid "Save list of objects"
-msgstr ""
+msgstr "Uložit seznam objektů"
 
 #: src/ui_astroCalcDialog.h:988
 msgid "Show objects which are up:"
-msgstr ""
+msgstr "Zobrazit objekty nad obzorem:"
 
 #: src/ui_astroCalcDialog.h:989
 msgid "Angular distance:"
-msgstr ""
+msgstr "Úhlová vzdálenost:"
 
 #: src/ui_astroCalcDialog.h:990
 msgid "Linear distance:"
-msgstr ""
+msgstr "Lineární vzdálenost:"
 
 #: src/ui_astroCalcDialog.h:991
 msgid "Second celestial body:"
-msgstr ""
+msgstr "Druhé nebeské těleso:"
 
 #: src/ui_astroCalcDialog.h:992
 msgid "First celestial body:"
-msgstr ""
+msgstr "První nebeské těleso:"
 
 #: src/ui_astroCalcDialog.h:993
 msgid "Orbital resonance:"
-msgstr ""
+msgstr "Orbitální rezonance:"
 
 #: src/ui_astroCalcDialog.h:994
 msgid "Orbital velocity of first celestial body:"
-msgstr ""
+msgstr "Orbitální rychlost prvního nebeského tělesa:"
 
 #: src/ui_astroCalcDialog.h:995
 msgid "Orbital velocity of second celestial body:"
-msgstr ""
+msgstr "Orbitální rychlost druhého nebeského tělesa:"
 
 #: src/ui_astroCalcDialog.h:996
 msgid "Compute"
@@ -9827,15 +9844,15 @@ msgstr "Odst&ranit záložku"
 
 #: src/ui_bookmarksDialog.h:202
 msgid "Clear bookmarks"
-msgstr ""
+msgstr "Vyčistit záložky"
 
 #: src/ui_bookmarksDialog.h:203
 msgid "&Go to..."
-msgstr ""
+msgstr "&Jdi na..."
 
 #: src/ui_bookmarksDialog.h:205
 msgid "Export bookmarks"
-msgstr ""
+msgstr "Exportovat záložky"
 
 #: src/ui_dsoColorsDialog.h:536 src/ui_orbitColorsDialog.h:378
 msgid "Color settings"
@@ -9996,7 +10013,7 @@ msgstr "Barva značek pro objekty vzdáleného vesmíru"
 
 #: src/ui_dsoColorsDialog.h:661
 msgid "Protoplanetary nebulae"
-msgstr ""
+msgstr "Protoplanetární mlhoviny"
 
 #: src/ui_dsoColorsDialog.h:663
 msgid "Color of markers of active galaxies"
@@ -10056,55 +10073,55 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:384
 msgid "Colors of orbits of Solar system bodies"
-msgstr ""
+msgstr "Barva drah těles Sluneční soustavy"
 
 #: src/ui_orbitColorsDialog.h:386
 msgid "Color of comet orbits"
-msgstr ""
+msgstr "Barva drah komet"
 
 #: src/ui_orbitColorsDialog.h:388
 msgid "Orbit of Uranus"
-msgstr ""
+msgstr "Dráha Uranu"
 
 #: src/ui_orbitColorsDialog.h:389
 msgid "Orbit of Mars"
-msgstr ""
+msgstr "Dráha Marsu"
 
 #: src/ui_orbitColorsDialog.h:391
 msgid "Color of Neptune orbit"
-msgstr ""
+msgstr "Barva dráhy Neptunu"
 
 #: src/ui_orbitColorsDialog.h:394
 msgid "Color of planet moon orbits"
-msgstr ""
+msgstr "Barva drah měsíců planet"
 
 #: src/ui_orbitColorsDialog.h:397
 msgid "Color of generic orbit"
-msgstr ""
+msgstr "Barva obecné dráhy"
 
 #: src/ui_orbitColorsDialog.h:399
 msgid "Orbit of Mercury"
-msgstr ""
+msgstr "Dráha Merkuru"
 
 #: src/ui_orbitColorsDialog.h:401
 msgid "Color of major planet orbits"
-msgstr ""
+msgstr "Barva drah velkých planet"
 
 #: src/ui_orbitColorsDialog.h:403
 msgid "Orbits of major planets"
-msgstr ""
+msgstr "Dráhy velkých planet"
 
 #: src/ui_orbitColorsDialog.h:405
 msgid "Color of Saturn orbit"
-msgstr ""
+msgstr "Barva dráhy Saturnu"
 
 #: src/ui_orbitColorsDialog.h:407
 msgid "Orbit of Jupiter"
-msgstr ""
+msgstr "Dráha Jupiteru"
 
 #: src/ui_orbitColorsDialog.h:411
 msgid "Orbit of Neptune"
-msgstr ""
+msgstr "Dráha Neptunu"
 
 #: src/ui_orbitColorsDialog.h:412
 msgid "Orbits of moons of planets"
@@ -10112,103 +10129,103 @@ msgstr "Dráhy měsíců planet"
 
 #: src/ui_orbitColorsDialog.h:414
 msgid "Color of cubewano orbits"
-msgstr ""
+msgstr "Barva drah cubewan"
 
 #: src/ui_orbitColorsDialog.h:417
 msgid "Color of Venus orbit"
-msgstr ""
+msgstr "Barva dráhy Venuše"
 
 #: src/ui_orbitColorsDialog.h:420
 msgid "Color of minor planet orbits"
-msgstr ""
+msgstr "Barva drah planetek"
 
 #: src/ui_orbitColorsDialog.h:425
 msgid "Orbit of Saturn"
-msgstr ""
+msgstr "Dráha Saturnu"
 
 #: src/ui_orbitColorsDialog.h:427
 msgid "Color of Uranus orbit"
-msgstr ""
+msgstr "Barva dráhy Uranu"
 
 #: src/ui_orbitColorsDialog.h:430
 msgid "Color of Earth orbit"
-msgstr ""
+msgstr "Barva dráhy Země"
 
 #: src/ui_orbitColorsDialog.h:432
 msgid "Orbit of Earth"
-msgstr ""
+msgstr "Dráha Země"
 
 #: src/ui_orbitColorsDialog.h:434
 msgid "Color of dwarf planet orbits"
-msgstr ""
+msgstr "Barva drah trpasličích planet"
 
 #: src/ui_orbitColorsDialog.h:436
 msgid "Orbits of comets"
-msgstr ""
+msgstr "Dráhy komet"
 
 #: src/ui_orbitColorsDialog.h:437
 msgid "Orbits of dwarf planets"
-msgstr ""
+msgstr "Dráhy trpasličích planet"
 
 #: src/ui_orbitColorsDialog.h:439
 msgid "Color of Mercury orbit"
-msgstr ""
+msgstr "Barva dráhy Merkuru"
 
 #: src/ui_orbitColorsDialog.h:441
 msgid "Orbits of plutinos"
-msgstr ""
+msgstr "Dráhy plutin"
 
 #: src/ui_orbitColorsDialog.h:445
 msgid "Generic orbit"
-msgstr ""
+msgstr "Obecná dráha"
 
 #: src/ui_orbitColorsDialog.h:446
 msgid "Orbits of cubewanos"
-msgstr ""
+msgstr "Dráhy cubewan"
 
 #: src/ui_orbitColorsDialog.h:448
 msgid "Color of Mars orbit"
-msgstr ""
+msgstr "Barva dráhy Marsu"
 
 #: src/ui_orbitColorsDialog.h:451
 msgid "Color of Jupiter orbit"
-msgstr ""
+msgstr "Barva dráhy Jupiteru"
 
 #: src/ui_orbitColorsDialog.h:453
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Dráha Venuše"
 
 #: src/ui_orbitColorsDialog.h:455
 msgid "Color of plutino orbits"
-msgstr ""
+msgstr "Barva drah plutin"
 
 #: src/ui_orbitColorsDialog.h:460
 msgid "Orbits of minor planets"
-msgstr ""
+msgstr "Dráhy planetek"
 
 #: src/ui_orbitColorsDialog.h:462
 msgid "Color of Oort cloud object orbits"
-msgstr ""
+msgstr "Barvy drah objektů Oortova oblaku"
 
 #: src/ui_orbitColorsDialog.h:464
 msgid "Orbits of Oort cloud objects"
-msgstr ""
+msgstr "Dráhy objektů Oortova oblaku"
 
 #: src/ui_orbitColorsDialog.h:465
 msgid "Orbits of scattered disk objects"
-msgstr ""
+msgstr "Dráhy objektů rozptýleného disku"
 
 #: src/ui_orbitColorsDialog.h:467
 msgid "Color of scattered disk object orbits"
-msgstr ""
+msgstr "Barva drah objektů rozptýleného disku"
 
 #: src/ui_orbitColorsDialog.h:469
 msgid "Orbits of sednoids"
-msgstr ""
+msgstr "Dráhy sednoidů"
 
 #: src/ui_orbitColorsDialog.h:471
 msgid "Color of sednoid orbits"
-msgstr ""
+msgstr "Barva drah sednoidů"
 
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:56
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:138
@@ -10627,7 +10644,7 @@ msgstr ""
 #: plugins/Oculars/src/Oculars.cpp:1914
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 msgid "Binocular"
-msgstr ""
+msgstr "Binokulár"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1934
@@ -10864,15 +10881,15 @@ msgstr "Otočení: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "Magnification provided by these binoculars"
-msgstr "Zvětšení dané tímto dalekohledem"
+msgstr "Zvětšení dané těmito binokuláry"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 msgid "Actual field of view provided by these binoculars"
-msgstr "Skutečné zorné pole dané tímto dalekohledem"
+msgstr "Skutečné zorné pole dané těmito binokuláry"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Exit pupil provided by these binoculars"
-msgstr "Výstupní pupila daná tímto dalekohledem"
+msgstr "Výstupní pupila daná těmito binokuláry"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 msgid "Magnification provided by this ocular/lens/telescope combination"
@@ -10984,7 +11001,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:442
 msgid "You can choose to scale the image you see on the screen."
-msgstr ""
+msgstr "Můžete zvolit měřítko obrázku, který vidíte na obrazovce."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:443
 msgid ""
@@ -11016,9 +11033,9 @@ msgid ""
 "aligned to North.  I've been unable to do so.  So currently it aligns to the"
 " top of the screen."
 msgstr ""
-"V zobrazení můžete zapnout zaměřovací kříž. Ideálně by měl být zaměřen na "
-"sever. Tak to ale nelze. Takže v současnosti je zaměřen na horní část "
-"obrazovky."
+"V pohledu můžete přepínat zobrazení zaměřovacího kříže. Ideálně by měl být "
+"zaměřen na sever. Teď to ale není možné udělat. Proto je nyní zaměřen na "
+"horní část obrazovky."
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:448
 #, qt-format
@@ -11144,7 +11161,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 msgid "Sensor view"
-msgstr ""
+msgstr "Zorné pole senzoru"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid "Use degrees and minutes for FOV of CCD"
@@ -11187,7 +11204,7 @@ msgstr "Název:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
 msgid "Binoculars"
-msgstr "Dalekohled"
+msgstr "Binokuláry"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid "Has permanent cross-hairs"
@@ -11437,7 +11454,7 @@ msgstr ""
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2079
 msgid "ISS (ZARYA)"
-msgstr ""
+msgstr "ISS (ZARYA)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:2081
@@ -11737,7 +11754,7 @@ msgstr "Viz %1 tento dokument %2 pro podrobnosti."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
 msgid "Internet updates disabled"
 msgstr "Aktualizace přes internet zakázány"
 
@@ -11751,8 +11768,8 @@ msgstr "Aktualizace přes internet zakázány"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:405
 msgid "Updating now..."
 msgstr "Probíhá aktualizace..."
 
@@ -11761,7 +11778,7 @@ msgstr "Probíhá aktualizace..."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:321
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
 msgid "Next update: < 1 minute"
 msgstr "Další aktualizace: < 1 minuta"
 
@@ -11770,7 +11787,7 @@ msgstr "Další aktualizace: < 1 minuta"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:337
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
@@ -11783,7 +11800,7 @@ msgstr[2] "Další aktualizace: %1 minut"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:176
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:330
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:342
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
@@ -11796,7 +11813,7 @@ msgstr[2] "Další aktualizace: %1 hodin"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:226
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:255
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid "Update error"
 msgstr "Chyba aktualizace"
 
@@ -11824,7 +11841,7 @@ msgstr "[nový zdroj]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:394
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
@@ -11835,7 +11852,7 @@ msgstr "Aktualizovat nyni"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:199
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:196
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:384
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
 msgid "Update from files"
 msgstr "Aktualizovat ze souborů"
 
@@ -13204,7 +13221,7 @@ msgstr "De&klinace (J2000):"
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:327
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "&Current object"
-msgstr "&Současný objekt"
+msgstr "&Aktuální objekt"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:328
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:245
@@ -13650,7 +13667,7 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:135
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:276
 msgid "Import orbital elements in MPC format..."
-msgstr "Importovat prvky soustavy ve formátu MPC..."
+msgstr "Importovat dráhové elementy ve formátu MPC..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
@@ -13686,11 +13703,11 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:211
 msgid "Select bookmark..."
-msgstr ""
+msgstr "Vybrat záložku..."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "Select a text file"
-msgstr ""
+msgstr "Vybrat textový soubor"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
@@ -13766,7 +13783,7 @@ msgstr "Soubor obsahující seznam objektů"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Get orbital elements"
-msgstr "Získat prvky oblohy"
+msgstr "Získat dráhové elementy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
@@ -13802,7 +13819,7 @@ msgstr "Aktualizovat existující objekty"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Update only the orbital elements"
-msgstr "Aktualizovat pouze prvky oblohy"
+msgstr "Aktualizovat pouze dráhové elementy"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Add objects"
@@ -14383,7 +14400,7 @@ msgctxt "period"
 msgid "days"
 msgstr "dní"
 
-#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Eccentricity"
 msgstr "Výstřednost"
 
@@ -14424,7 +14441,7 @@ msgid "mJy"
 msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 msgid "Notes"
 msgstr ""
@@ -14544,27 +14561,31 @@ msgstr ""
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:260
 msgid "Remote Control"
-msgstr ""
+msgstr "Vzdálené ovládání"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:61
 msgid ""
 "Provides remote control functionality using a webserver interface. See "
 "manual for detailed description."
 msgstr ""
+"Zajišťuje funkce pro vzdálené ovládání pomocí webového rozhraní. Podrobný "
+"popis naleznete v příručce."
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
 msgid "Remote control"
-msgstr ""
+msgstr "Vzdálené ovládání"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "Zásuvný modul Vzdálené ovládání"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr ""
+"Zásuvný modul Vzdálené ovládání poskytuje webové rozhraní umožňující změny "
+"stavu a spouštění skriptů pomocí připojeného webového prohlížeče."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:117
 msgid "It is also possible to send commands via command line, e.g.."
@@ -14600,11 +14621,11 @@ msgstr ""
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:246
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:459
 msgid "Remote Control Configuration"
-msgstr ""
+msgstr "Nastavení vzdáleného ovládání"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:247
 msgid "Remote Control Plug-in Configuration"
-msgstr ""
+msgstr "Nastavení zásuvného modulu Vzdálené ovládání"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
@@ -14807,7 +14828,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
-msgstr ""
+msgstr "Směr pohledu"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
@@ -14943,95 +14964,89 @@ msgstr "Astrometrie"
 msgid "TTV"
 msgstr ""
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:299
+#: plugins/Exoplanets/src/Exoplanet.cpp:301
 msgid "planetary system"
 msgstr "planetární systém"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:331
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
 msgid "Metallicity"
 msgstr "Metalicita"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:335
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:337
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
 msgid "Mass"
 msgstr "Hmotnost"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:339
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:341
+#: plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Radius"
 msgstr "Poloměr"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:343
+#: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgid "Effective temperature"
 msgstr "Efektivní teplota"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:343
+#: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgctxt "temperature"
 msgid "K"
 msgstr "K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Exoplanet"
 msgstr "Exoplaneta"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "days"
 msgstr "dní"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Semi-Major Axis"
 msgstr "Hlavní poloosa"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:354
+#: plugins/Exoplanets/src/Exoplanet.cpp:356
 msgid "Inclination"
 msgstr "Sklon"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Exoplanets/src/Exoplanet.cpp:357
 msgid "Angle Distance"
 msgstr "Úhlová vzdálenost"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:356
+#: plugins/Exoplanets/src/Exoplanet.cpp:358
 msgid "Discovered year"
 msgstr "Rok objevení"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:357
+#: plugins/Exoplanets/src/Exoplanet.cpp:359
 msgid "Detection method"
-msgstr ""
+msgstr "Metoda detekce"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:358
+#: plugins/Exoplanets/src/Exoplanet.cpp:360
 msgid "Planetary class"
-msgstr ""
+msgstr "Třída planety"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:360
+#: plugins/Exoplanets/src/Exoplanet.cpp:362
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Rovnovážná teplota"
+
+#. TRANSLATORS: Average stellar flux of the planet
+#: plugins/Exoplanets/src/Exoplanet.cpp:364
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+msgid "Flux"
+msgstr "Světelný tok"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:362
+#: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "ESI"
-msgstr ""
+msgstr "ESI index"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:363
-msgid "Conservative sample"
-msgstr ""
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:466
-msgid "yes"
-msgstr "ano"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:468
-msgid "no"
-msgstr "ne"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:505
+#: plugins/Exoplanets/src/Exoplanet.cpp:523
 msgid "Equilibrium temperature on Earth"
-msgstr ""
+msgstr "Rovnovážná teplota na Zemi"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:162
 msgid "Exoplanets Plug-in"
@@ -15076,28 +15091,34 @@ msgstr ""
 msgid "Potential habitable exoplanets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+msgid ""
+"Extra info for the optimistic samples of potentially habitable planets mark "
+"by italic text."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Planetary Class"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
 " jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "Equilibrium Temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -15105,96 +15126,109 @@ msgid ""
 "example the planetary equilibrium temperature of Earth is -18.15°C (255 K)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+msgid ""
+"Actual surface temperatures are expected to be larger than the equilibrium "
+"temperature depending on the atmosphere of the planets, which are currently "
+"unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+msgid ""
+"Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
+"S<sub>E</sub>)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid "Earth Similarity Index (ESI)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid "Proper names"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid "Musica is Latin for <em>music</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -15203,7 +15237,7 @@ msgid ""
 " the phases of Venus, among other discoveries."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -15211,153 +15245,153 @@ msgid ""
 "planetary motion."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
 " the god Izanagi."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Smertrios was a Gallic deity of war."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -15365,7 +15399,7 @@ msgid ""
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -15373,21 +15407,21 @@ msgid ""
 "treatise on the uses of the astrolabe."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
 " the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -15395,32 +15429,32 @@ msgid ""
 "popular symbol of liberty."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -15428,18 +15462,18 @@ msgid ""
 "discovered in 2004."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -15447,195 +15481,195 @@ msgid ""
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid "Additional info"
 msgstr "Další informace"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Circumstellar habitable zone"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Planetary equilibrium temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Planetary habitability"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Earth Similarity Index"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "NameExoWorlds website"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "Stránky profesionálů týkající se extrasolárních planet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanety: interaktivní verze XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "LEMK (Lov exoplanetárních měsíců s Keplerem)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exoplanety v binárních a vícečetných systémech (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "Naming exoplanets (IAU)"
 msgstr "Pojmenování exoplanet (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "Astronomové a skupiny zabývající se studiem extrasolárních planet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "update: 16 April 2012"
 msgstr "aktualizace: 16. dubna 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "The Exoplanet Data Explorer"
 msgstr "Průzkumník exoplanetárních dat"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "The Anglo-Australian Planet Search"
 msgstr "Anglo-australské hledání planet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "Výzkumný program exoplanet od NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "Pulsar planets"
 msgstr "Planety pulsarů"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "The NASA Exoplanet Archive"
 msgstr "Archiv exoplanet od NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "Komise IAU č. 53: Extrasolární planety"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "Galerie obyvatelné zóny"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - Hledání po další Zemi"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "Open Exoplanet Catalogue"
 msgstr "Oteveřený katalog exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Katalog obyvatelných exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:416
 msgid "Exoplanets is updated"
 msgstr "Exoplanety byly aktualizovány"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
 msgid "Orbital Eccentricity"
-msgstr ""
+msgstr "Excentricita dráhy"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
 msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgstr "Velká poloosa dráhy, AU"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid "Planetary Mass, Mjup"
-msgstr ""
+msgstr "Hmotnost planety, M_Jupiter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:540
 msgid "Planetary Radius, Rjup"
-msgstr ""
+msgstr "Poloměr planety, R_Jupiter"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:541
 msgid "Orbital Period, days"
-msgstr ""
+msgstr "Oběžná doba, dny"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:542
 msgid "Angular Distance, arcsec"
 msgstr "Úhlová vzálenost, vteřiny"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:543
 msgid "Effective temperature of host star, K"
-msgstr ""
+msgstr "Efektivní teplota hvězdy, K"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:544
 msgid "Year of Discovery"
-msgstr ""
+msgstr "Rok objevu"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:545
 msgid "Metallicity of host star"
-msgstr ""
+msgstr "Metalicita hvězdy"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:534
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:546
 msgid "V magnitude of host star, mag"
-msgstr ""
+msgstr "V magnituda hvězdy, mag"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:535
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:547
 msgid "RA (J2000) of star, deg"
-msgstr ""
+msgstr "Rekt. (J2000) hvězdy, stupně"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:536
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid "Dec (J2000) of star, deg"
 msgstr "Dekl. (J2000) hvězdy, stupně"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
 msgid "Distance to star, pc"
-msgstr ""
+msgstr "Vzdálenost hvězdy, pc"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:550
 msgid "Mass of host star, Msol"
-msgstr ""
+msgstr "Hmotnost hvězdy, M_Slunce"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:551
 msgid "Radius of host star, Rsol"
-msgstr ""
+msgstr "Poloměr hvězdy, R_Slunce"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:610
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:622
 msgctxt "temperature scale"
 msgid "Kelvin"
-msgstr ""
+msgstr "Kelvin"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:612
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:624
 msgctxt "temperature scale"
 msgid "Celsius"
-msgstr ""
+msgstr "Celsius"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:614
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:626
 msgctxt "temperature scale"
 msgid "Fahrenheit"
-msgstr ""
+msgstr "Fahrenheit"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
 msgid "Exoplanets Configuration"
@@ -15699,7 +15733,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
 msgid "Temperature scale:"
-msgstr ""
+msgstr "Teplotní škála:"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 msgid "Diagrams: scatter plot"
@@ -15707,40 +15741,40 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
 msgid "X axis"
-msgstr ""
+msgstr "Osa X"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:570
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Logaritmická škála"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:564
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:572
 msgid "log scale"
-msgstr ""
+msgstr "log. škála"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:566
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
 msgid "min"
-msgstr ""
+msgstr "min"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:567
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:574
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:568
 msgid "Y axis"
-msgstr ""
+msgstr "Osa Y"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:575
 msgid "Plot"
-msgstr ""
+msgstr "Graf"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:576
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "Diagram"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:577
 msgctxt "tab in plugin windows"
@@ -15754,7 +15788,7 @@ msgstr "Webové stránky"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
-msgstr ""
+msgstr "Analýza pozorovatelnosti"
 
 #: plugins/Observability/src/Observability.cpp:68
 msgid ""
@@ -15795,7 +15829,7 @@ msgstr "Kvě"
 #: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jun"
-msgstr "Čer"
+msgstr "Črv"
 
 #: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
@@ -16083,13 +16117,13 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular"
 " object."
 msgstr ""
-"Děje se při maximálním úhlovém rozdílu mezi Sluncem a vesmírným tělesem. Ve "
-"většině případů lze říci že toto je stejné jako sdělení, že délky rovníku "
-"Slunce a objektu se liší o 180 stupňů, takže Slunce je naproti objektu. Když"
-" je objekt v maximálním úhlovém rozdílu od Slunce (nezáleží, zda je to "
-"planeta nebo hvězda), kulminuje zhruba o půlnoci a na nejtemnější možé "
-"oblasti oblohy v tomto sklonu. Proto je toto 'nejlepší' noc, kdy konkrétní "
-"objekt pozorovat."
+"Děje se tak při maximálním úhlovém rozdílu mezi Sluncem a nebeským tělesem. "
+"Ve většině případů lze místo toho říci, že rovníková délka Slunce a objektu "
+"se liší o 180 stupňů, takže Slunce je naproti objektu, neboli v opozici. "
+"Když je objekt v maximálním možné úhlové vzdálenosti od Slunce (nezáleží, "
+"zda je to planeta nebo hvězda), kulminuje zhruba o půlnoci a v nejtemnější "
+"části oblohy na této deklinaci. Proto je to 'nejlepší' noc pro pozorování "
+"tohoto objektu."
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid "Nights with source above horizon:"
@@ -16303,7 +16337,7 @@ msgstr "Velikost fontu:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:88
 msgid "The current catalog of Meteor Showers is invalid!"
-msgstr ""
+msgstr "Aktuální katalog meteorických rojů je neplatný!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:551
@@ -16389,7 +16423,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "Mateřské těleso"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
@@ -17232,7 +17266,7 @@ msgstr "Zobrazovat tlačítko zásuvného modulu na panelu"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Show IAU constellation code"
-msgstr ""
+msgstr "Zobrazit zkratku IAU souhhvězdí"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Show crossed lines under mouse cursor"
@@ -17788,11 +17822,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "Zobrazit čáru pro současné Slunce"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "Zobrazit čáru pro současný Měsíc"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Vertical for Geographic Location 1"
@@ -17901,15 +17935,15 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:262
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "Deklinace aktuálně vybraného objektu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Současná deklinace Slunce"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:264
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Současná deklinace Měsíce"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:265
 msgid "Current declination of a naked-eye planet"
@@ -18028,7 +18062,7 @@ msgstr "Vlastní deklinace 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
-msgstr ""
+msgstr "Současné Slunce"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
@@ -18098,7 +18132,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
 msgid "Current Moon"
-msgstr ""
+msgstr "Současný Měsíc"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
 msgid "Declination of Zenith passage"

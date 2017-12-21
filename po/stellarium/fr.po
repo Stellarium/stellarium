@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-15 01:44+0700\n"
+"POT-Creation-Date: 2017-12-20 17:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: Nicolas <nicolas@martignoni.net>, 2017\n"
 "Language-Team: French (https://www.transifex.com/stellarium/teams/80998/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -38,7 +38,7 @@ msgstr "marqueur personnalisé"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:159
-#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:299
+#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "Type"
@@ -508,120 +508,120 @@ msgstr "cratère"
 #: src/core/modules/NomenclatureItem.cpp:109
 msgctxt "landform"
 msgid "dorsum"
-msgstr ""
+msgstr "dorsum"
 
 #. TRANSLATORS: Active volcanic centers on Io
 #: src/core/modules/NomenclatureItem.cpp:113
 msgctxt "landform"
 msgid "eruptive center"
-msgstr ""
+msgstr "Centre éruptif"
 
 #. TRANSLATORS: Bright spot
 #: src/core/modules/NomenclatureItem.cpp:117
 msgctxt "landform"
 msgid "facula"
-msgstr ""
+msgstr "facula"
 
 #. TRANSLATORS: Pancake-like structure, or a row of such structures
 #: src/core/modules/NomenclatureItem.cpp:121
 msgctxt "landform"
 msgid "farrum"
-msgstr ""
+msgstr "farrum"
 
 #. TRANSLATORS: A very low curvilinear ridge with a scalloped pattern
 #: src/core/modules/NomenclatureItem.cpp:125
 msgctxt "landform"
 msgid "flexus"
-msgstr ""
+msgstr "flexus"
 
 #. TRANSLATORS: Flow terrain
 #: src/core/modules/NomenclatureItem.cpp:129
 msgctxt "landform"
 msgid "fluctus"
-msgstr ""
+msgstr "fluctus"
 
 #. TRANSLATORS: Channel on Titan that might carry liquid
 #: src/core/modules/NomenclatureItem.cpp:133
 msgctxt "landform"
 msgid "flumen"
-msgstr ""
+msgstr "flumen"
 
 #. TRANSLATORS: Strait, a narrow passage of liquid connecting two larger areas
 #. of liquid
 #: src/core/modules/NomenclatureItem.cpp:137
 msgctxt "landform"
 msgid "fretum"
-msgstr ""
+msgstr "fretum"
 
 #. TRANSLATORS: Long, narrow depression
 #: src/core/modules/NomenclatureItem.cpp:141
 msgctxt "landform"
 msgid "fossa"
-msgstr ""
+msgstr "fossa"
 
 #. TRANSLATORS: Island (islands), an isolated land area (or group of such
 #. areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)
 #: src/core/modules/NomenclatureItem.cpp:145
 msgctxt "landform"
 msgid "insula"
-msgstr ""
+msgstr "insula"
 
 #. TRANSLATORS: Landslide
 #: src/core/modules/NomenclatureItem.cpp:149
 msgctxt "landform"
 msgid "labes"
-msgstr ""
+msgstr "labes"
 
 #. TRANSLATORS: Complex of intersecting valleys or ridges
 #: src/core/modules/NomenclatureItem.cpp:153
 msgctxt "landform"
 msgid "labyrinthus"
-msgstr ""
+msgstr "labyrinthus"
 
 #. TRANSLATORS: Irregularly shaped depression on Titan having the appearance
 #. of a dry lake bed
 #: src/core/modules/NomenclatureItem.cpp:157
 msgctxt "landform"
 msgid "lacuna"
-msgstr ""
+msgstr "lacuna"
 
 #. TRANSLATORS: "Lake" or small plain; on Titan, a "lake" or small, dark plain
 #. with discrete, sharp boundaries
 #: src/core/modules/NomenclatureItem.cpp:161
 msgctxt "landform"
 msgid "lacus"
-msgstr ""
+msgstr "lacus"
 
 #. TRANSLATORS: Cryptic ringed feature
 #: src/core/modules/NomenclatureItem.cpp:165
 msgctxt "landform"
 msgid "large ringed feature"
-msgstr ""
+msgstr "grande formation annulaire"
 
 #. TRANSLATORS: Small dark spots on Europa
 #: src/core/modules/NomenclatureItem.cpp:169
 msgctxt "landform"
 msgid "lenticula"
-msgstr ""
+msgstr "lenticula"
 
 #. TRANSLATORS: A dark or bright elongate marking, may be curved or straight
 #: src/core/modules/NomenclatureItem.cpp:173
 msgctxt "landform"
 msgid "linea"
-msgstr ""
+msgstr "linea"
 
 #. TRANSLATORS: Extension of plateau having rounded lobate or tongue-like
 #. boundaries
 #: src/core/modules/NomenclatureItem.cpp:177
 msgctxt "landform"
 msgid "lingula"
-msgstr ""
+msgstr "lingula"
 
 #. TRANSLATORS: Dark spot, may be irregular
 #: src/core/modules/NomenclatureItem.cpp:181
 msgctxt "landform"
 msgid "macula"
-msgstr ""
+msgstr "macula"
 
 #. TRANSLATORS: “Sea”; on the Moon, low albedo, relatively smooth plain,
 #. generally of large extent; on Mars, dark albedo areas of no known
@@ -630,268 +630,271 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:185
 msgctxt "landform"
 msgid "mare"
-msgstr ""
+msgstr "mare"
 
 #. TRANSLATORS: A flat-topped prominence with cliff-like edges
 #: src/core/modules/NomenclatureItem.cpp:189
 msgctxt "landform"
 msgid "mensa"
-msgstr ""
+msgstr "mensa"
 
 #. TRANSLATORS: Mountain
 #: src/core/modules/NomenclatureItem.cpp:193
 msgctxt "landform"
 msgid "mons"
-msgstr ""
+msgstr "mons"
 
 #. TRANSLATORS: A very large dark area on the Moon
 #: src/core/modules/NomenclatureItem.cpp:197
 msgctxt "landform"
 msgid "oceanus"
-msgstr ""
+msgstr "oceanus"
 
 #. TRANSLATORS: "Swamp"; small plain
 #: src/core/modules/NomenclatureItem.cpp:201
 msgctxt "landform"
 msgid "palus"
-msgstr ""
+msgstr "palus"
 
 #. TRANSLATORS: An irregular crater, or a complex one with scalloped edges
 #: src/core/modules/NomenclatureItem.cpp:205
 msgctxt "landform"
 msgid "patera"
-msgstr ""
+msgstr "patera"
 
 #. TRANSLATORS: Low plain
 #: src/core/modules/NomenclatureItem.cpp:209
 msgctxt "landform"
 msgid "planitia"
-msgstr ""
+msgstr "planitia"
 
 #. TRANSLATORS: Plateau or high plain
 #: src/core/modules/NomenclatureItem.cpp:213
 msgctxt "landform"
 msgid "planum"
-msgstr ""
+msgstr "planum"
 
 #. TRANSLATORS: Cryo-volcanic features on Triton
 #: src/core/modules/NomenclatureItem.cpp:217
 msgctxt "landform"
 msgid "plume"
-msgstr ""
+msgstr "panache de fumée"
 
 #. TRANSLATORS: "Cape"; headland promontoria
 #: src/core/modules/NomenclatureItem.cpp:221
 msgctxt "landform"
 msgid "promontorium"
-msgstr ""
+msgstr "promontorium"
 
 #. TRANSLATORS: A large area marked by reflectivity or color distinctions from
 #. adjacent areas, or a broad geographic region
 #: src/core/modules/NomenclatureItem.cpp:225
 msgctxt "landform"
 msgid "regio"
-msgstr ""
+msgstr "regio"
 
 #. TRANSLATORS: Reticular (netlike) pattern on Venus
 #: src/core/modules/NomenclatureItem.cpp:229
 msgctxt "landform"
 msgid "reticulum"
-msgstr ""
+msgstr "reticulum"
 
 #. TRANSLATORS: Fissure
 #: src/core/modules/NomenclatureItem.cpp:233
 msgctxt "landform"
 msgid "rima"
-msgstr ""
+msgstr "rima"
 
 #. TRANSLATORS: Scarp
 #: src/core/modules/NomenclatureItem.cpp:237
 msgctxt "landform"
 msgid "rupes"
-msgstr ""
+msgstr "rupes"
 
 #. TRANSLATORS: A feature that shares the name of an associated feature.
 #: src/core/modules/NomenclatureItem.cpp:241
 msgctxt "landform"
 msgid "satellite feature"
-msgstr ""
+msgstr "formation satellite"
 
 #. TRANSLATORS: Lobate or irregular scarp
 #: src/core/modules/NomenclatureItem.cpp:245
 msgctxt "landform"
 msgid "scopulus"
-msgstr ""
+msgstr "scopulus"
 
 #. TRANSLATORS: Sinuous feature with segments of positive and negative relief
 #. along its length
 #: src/core/modules/NomenclatureItem.cpp:249
 msgctxt "landform"
 msgid "serpens"
-msgstr ""
+msgstr "serpens"
 
 #. TRANSLATORS: Subparallel furrows and ridges
 #: src/core/modules/NomenclatureItem.cpp:253
 msgctxt "landform"
 msgid "sulcus"
-msgstr ""
+msgstr "sulcus"
 
 #. TRANSLATORS: "Bay"; small plain; on Titan, bays within seas or lakes of
 #. liquid hydrocarbons
 #: src/core/modules/NomenclatureItem.cpp:257
 msgctxt "landform"
 msgid "sinus"
-msgstr ""
+msgstr "sinus"
 
 #. TRANSLATORS: Extensive land mass
 #: src/core/modules/NomenclatureItem.cpp:261
 msgctxt "landform"
 msgid "terra"
-msgstr ""
+msgstr "terra"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
 #: src/core/modules/NomenclatureItem.cpp:265
 msgctxt "landform"
 msgid "tessera"
-msgstr ""
+msgstr "tessera"
 
 #. TRANSLATORS: Small domical mountain or hill
 #: src/core/modules/NomenclatureItem.cpp:269
 msgctxt "landform"
 msgid "tholus"
-msgstr ""
+msgstr "tholus"
 
 #. TRANSLATORS: Dunes
 #: src/core/modules/NomenclatureItem.cpp:273
 msgctxt "landform"
 msgid "unda"
-msgstr ""
+msgstr "unda"
 
 #. TRANSLATORS: Valley
 #: src/core/modules/NomenclatureItem.cpp:277
 msgctxt "landform"
 msgid "vallis"
-msgstr ""
+msgstr "vallis"
 
 #. TRANSLATORS: Extensive plain
 #: src/core/modules/NomenclatureItem.cpp:281
 msgctxt "landform"
 msgid "vastitas"
-msgstr ""
+msgstr "vastitas"
 
 #. TRANSLATORS: A streak or stripe of color
 #: src/core/modules/NomenclatureItem.cpp:285
 msgctxt "landform"
 msgid "virga"
-msgstr ""
+msgstr "virga"
 
 #. TRANSLATORS: Lunar features at or near Apollo landing sites
 #: src/core/modules/NomenclatureItem.cpp:289
 msgctxt "landform"
 msgid "landing site name"
-msgstr ""
+msgstr "Site d'atterrissage"
 
 #: src/core/modules/NomenclatureItem.cpp:293
 msgctxt "landform"
 msgid "undocumented landform type"
-msgstr ""
+msgstr "Type de terrain non documenté"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
 #: src/core/modules/NomenclatureItem.cpp:471
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr ""
+"Zones géographiques caractérisées par la quantité de lumière réfléchie."
 
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:475
 msgid "Arc-shaped feature."
-msgstr ""
+msgstr "Formation en arc"
 
 #. TRANSLATORS: Description for landform 'astrum'
 #: src/core/modules/NomenclatureItem.cpp:479
 msgid "Radial-patterned feature."
-msgstr ""
+msgstr "Formation radiale."
 
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
 msgid "Chain of craters."
-msgstr ""
+msgstr "Chaîne de cratères."
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:487
 msgid ""
 "Hollows, irregular steep-sided depressions usually in arrays or clusters."
 msgstr ""
+"Creux, dépressions irrégulières à fortes pentes, le plus souvent en groupes."
 
 #. TRANSLATORS: Description for landform 'chaos'
 #: src/core/modules/NomenclatureItem.cpp:491
 msgid "Distinctive area of broken terrain."
-msgstr ""
+msgstr "Zone de terrain fracturé."
 
 #. TRANSLATORS: Description for landform 'chasma'
 #: src/core/modules/NomenclatureItem.cpp:495
 msgid "A deep, elongated, steep-sided depression."
-msgstr ""
+msgstr "Dépression profonde, allongée, à forte pente et bords escarpés."
 
 #. TRANSLATORS: Description for landform 'collis'
 #: src/core/modules/NomenclatureItem.cpp:499
 msgid "Small hills or knobs."
-msgstr ""
+msgstr "Petites collines ou mamelons."
 
 #. TRANSLATORS: Description for landform 'corona'
 #: src/core/modules/NomenclatureItem.cpp:503
 msgid "Ovoid-shaped feature."
-msgstr ""
+msgstr "Formation de forme ovoïde."
 
 #. TRANSLATORS: Description for landform 'crater'
 #: src/core/modules/NomenclatureItem.cpp:507
 msgid "A circular depression."
-msgstr ""
+msgstr "Dépression circulaire."
 
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:511
 msgid "Ridge."
-msgstr ""
+msgstr "Arête."
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:515
 msgid "Active volcanic center."
-msgstr ""
+msgstr "Centre volcanique actif."
 
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
 msgid "Bright spot."
-msgstr ""
+msgstr "Tache lumineuse."
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:523
 msgid "Pancake-like structure, or a row of such structures."
-msgstr ""
+msgstr "Structure en forme de crêpe, ou alignement de telles structures."
 
 #. TRANSLATORS: Description for landform 'flexus'
 #: src/core/modules/NomenclatureItem.cpp:527
 msgid "A very low curvilinear ridge with a scalloped pattern."
-msgstr ""
+msgstr "Crête courbe très basse, festonnée."
 
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:531
 msgid "Flow terrain."
-msgstr ""
+msgstr "Terrain d’écoulement."
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:535
 msgid "Channel, that might carry liquid."
-msgstr ""
+msgstr "Canal pouvant résulter de l'écoulement d'un liquide."
 
 #. TRANSLATORS: Description for landform 'fretum'
 #: src/core/modules/NomenclatureItem.cpp:539
 msgid ""
 "Strait, a narrow passage of liquid connecting two larger areas of liquid."
 msgstr ""
+"Détroit, passage de liquide reliant deux zones plus vastes de liquide."
 
 #. TRANSLATORS: Description for landform 'fossa'
 #: src/core/modules/NomenclatureItem.cpp:543
 msgid "Long, narrow depression."
-msgstr ""
+msgstr "Dépression longue et étroite."
 
 #. TRANSLATORS: Description for landform 'insula'
 #: src/core/modules/NomenclatureItem.cpp:547
@@ -899,118 +902,125 @@ msgid ""
 "Island, an isolated land area surrounded by, or nearly surrounded by, a "
 "liquid area (sea or lake)."
 msgstr ""
+"Terre isolée entourée ou presque totalement entourée par une étendue liquide"
+" (mer ou lac)."
 
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "Glissement de terrain."
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
 msgid "Complex of intersecting valleys or ridges."
-msgstr ""
+msgstr "Complexe de plusieurs vallées qui se coupent."
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:559
 msgid ""
 "Irregularly shaped depression, having the appearance of a dry lake bed."
-msgstr ""
+msgstr "Dépression de forme irrégulière, ayant l'apparence d'un lac asséché."
 
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:565
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
-msgstr ""
+msgstr "« Lac », petite plaine sombre aux bords distincts et anguleux."
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:570
 msgid "'Lake' or small plain."
-msgstr ""
+msgstr "« Lac », petite plaine."
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:575
 msgid "Cryptic ringed feature."
-msgstr ""
+msgstr "Formation en anneau de nature indéterminée."
 
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:579
 msgid "Small dark spot."
-msgstr ""
+msgstr "Petite tache sombre."
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:583
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr ""
+msgstr "Rayures allongées, claires ou sombres, droites ou courbes."
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:587
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
 msgstr ""
+"Extension d'un plateau possédant des limites lobées ou en forme de langues."
 
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:591
 msgid "Dark spot, may be irregular"
-msgstr ""
+msgstr "Tache sombre, éventuellement irrégulière"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:599
 msgid "'Sea'; low albedo, relatively smooth plain, generally of large extent."
 msgstr ""
+"« Mer », plaine relativement lisse, de faible albédo, généralement de grande"
+" étendue."
 
 #. TRANSLATORS: Description for landform 'mare' on Mars
 #: src/core/modules/NomenclatureItem.cpp:604
 msgid "'Sea'; dark albedo areas of no known geological significance."
-msgstr ""
+msgstr "« Mer », zone d'albédo faible, sans signification géologique connue."
 
 #. TRANSLATORS: Description for landform 'mare' on Titan
 #: src/core/modules/NomenclatureItem.cpp:609
 msgid ""
 "'Sea'; large expanses of dark materials thought to be liquid hydrocarbons"
 msgstr ""
+"« Mer », vaste étendue de matériaux sombres constitués d'hydrocarbures "
+"liquides."
 
 #. TRANSLATORS: Description for landform 'mensa'
 #: src/core/modules/NomenclatureItem.cpp:615
 msgid "A flat-topped prominence with cliff-like edges."
-msgstr ""
+msgstr "Montagne à sommet plat, et bordée de falaises."
 
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:619
 msgid "Mountain."
-msgstr ""
+msgstr "Montagne."
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:623
 msgid "A very large dark area."
-msgstr ""
+msgstr "Très grande zone sombre."
 
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:627
 msgid "'Swamp'; small plain."
-msgstr ""
+msgstr "« Marais », petite plaine."
 
 #. TRANSLATORS: Description for landform 'patera'
 #: src/core/modules/NomenclatureItem.cpp:631
 msgid "An irregular crater, or a complex one with scalloped edges."
-msgstr ""
+msgstr "Cratère irrégulier, ou cratère complexe à bords festonnés."
 
 #. TRANSLATORS: Description for landform 'planitia'
 #: src/core/modules/NomenclatureItem.cpp:635
 msgid "Low plain."
-msgstr ""
+msgstr "Plaine basse."
 
 #. TRANSLATORS: Description for landform 'planum'
 #: src/core/modules/NomenclatureItem.cpp:639
 msgid "Plateau or high plain."
-msgstr ""
+msgstr "Plateau ou plaine élevée."
 
 #. TRANSLATORS: Description for landform 'plume'
 #: src/core/modules/NomenclatureItem.cpp:643
 msgid "Cryo-volcanic feature."
-msgstr ""
+msgstr "Formation cryo-volcanique."
 
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:647
 msgid "'Cape'; headland promontoria."
-msgstr ""
+msgstr "« Cap », promontoire."
 
 #. TRANSLATORS: Description for landform 'regio'
 #: src/core/modules/NomenclatureItem.cpp:651
@@ -1018,104 +1028,106 @@ msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr ""
+"Vaste région qui se distingue des zones adjacentes par sa luminosité ou sa "
+"couleur, ou région géographique étendue."
 
 #. TRANSLATORS: Description for landform 'reticulum'
 #: src/core/modules/NomenclatureItem.cpp:655
 msgid "Reticular (netlike) pattern."
-msgstr ""
+msgstr "Structure réticulée (comme un filet)."
 
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:659
 msgid "Fissure."
-msgstr ""
+msgstr "Fissure."
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:663
 msgid "Scarp."
-msgstr ""
+msgstr "Escarpement."
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:667
 msgid "A feature that shares the name of an associated feature."
-msgstr ""
+msgstr "Formation partageant le nom d'une formation associée."
 
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:671
 msgid "Lobate or irregular scarp."
-msgstr ""
+msgstr "Escarpement lobé ou irrégulier."
 
 #. TRANSLATORS: Description for landform 'serpens'
 #: src/core/modules/NomenclatureItem.cpp:675
 msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
-msgstr ""
+msgstr "Formation sinueuse avec des segments de reliefs positifs et négatifs."
 
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:679
 msgid "Subparallel furrows and ridges."
-msgstr ""
+msgstr "Sillons ou rides plus ou moins parallèles."
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:685
 msgid "'Bay'; bays within seas or lakes of liquid hydrocarbons."
-msgstr ""
+msgstr "« Baie », baie dans une mer ou un lac d'hydrocarbure liquide."
 
 #. TRANSLATORS: Description for landform 'sinus'
 #: src/core/modules/NomenclatureItem.cpp:690
 msgid "'Bay'; small plain."
-msgstr ""
+msgstr "« Baie », petite plaine."
 
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:695
 msgid "Extensive land mass."
-msgstr ""
+msgstr "Zone étendue de terres."
 
 #. TRANSLATORS: Description for landform 'tessera'
 #: src/core/modules/NomenclatureItem.cpp:699
 msgid "Tile-like, polygonal terrain."
-msgstr ""
+msgstr "Terrain polygonal, comme carrelé."
 
 #. TRANSLATORS: Description for landform 'tholus'
 #: src/core/modules/NomenclatureItem.cpp:703
 msgid "Small domical mountain or hill."
-msgstr ""
+msgstr "Petite montagne, colline."
 
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
 msgid "Dunes."
-msgstr ""
+msgstr "Dunes."
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
 msgid "Valley."
-msgstr ""
+msgstr "Vallée."
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:715
 msgid "Extensive plain."
-msgstr ""
+msgstr "Vaste plaine."
 
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:719
 msgid "A streak or stripe of color."
-msgstr ""
+msgstr "Strie ou bande de couleur."
 
 #: src/core/modules/NomenclatureItem.cpp:726
 msgid "Undocumented landform type."
-msgstr ""
+msgstr "Type de terrain non documenté."
 
 #: src/core/modules/NomenclatureItem.cpp:776
 msgid "geologic term"
-msgstr ""
+msgstr "terme géologique"
 
 #: src/core/modules/NomenclatureItem.cpp:786
 msgid "Linear size"
-msgstr ""
+msgstr "Taille linéaire"
 
 #: src/core/modules/NomenclatureItem.cpp:789
 msgid "Diameter"
-msgstr ""
+msgstr "Diamètre"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:790 src/core/modules/Planet.cpp:456
@@ -1131,19 +1143,19 @@ msgstr "km"
 
 #: src/core/modules/NomenclatureItem.cpp:795
 msgid "Planetographic long./lat."
-msgstr ""
+msgstr "Long./lat. planétographique"
 
 #: src/core/modules/NomenclatureItem.cpp:796
 msgid "Celestial body"
-msgstr ""
+msgstr "Corps céleste"
 
 #: src/core/modules/NomenclatureItem.cpp:799
 msgid "Landform description"
-msgstr ""
+msgstr "Description de terrain"
 
 #: src/core/modules/NomenclatureMgr.cpp:75
 msgid "Nomenclature labels"
-msgstr ""
+msgstr "Étiquettes des nomenclatures"
 
 #: src/core/modules/Nebula.cpp:233 src/core/modules/Nebula.cpp:243
 #: src/core/modules/Planet.cpp:424 src/core/modules/MinorPlanet.cpp:244
@@ -1151,7 +1163,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:1993
 #: src/gui/AstroCalcDialog.cpp:2028 plugins/Supernovae/src/Supernova.cpp:140
 #: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
-#: plugins/Exoplanets/src/Exoplanet.cpp:310
+#: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Magnitude"
 msgstr "Magnitude"
 
@@ -1164,7 +1176,7 @@ msgstr "Opacité"
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:288
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:308
+#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:310
 msgid "extincted to"
 msgstr "atténué à"
 
@@ -1222,7 +1234,7 @@ msgstr "Angle d'orientation"
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:323
+#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:325
 msgctxt "distance"
 msgid "ly"
 msgstr "al"
@@ -1232,7 +1244,7 @@ msgstr "al"
 #: src/core/modules/Comet.cpp:232 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:2004 src/gui/AstroCalcDialog.cpp:2039
 #: src/ui_configurationDialog.h:1383 plugins/Supernovae/src/Supernova.cpp:155
-#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:324
+#: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:326
 msgid "Distance"
 msgstr "Distance"
 
@@ -1252,7 +1264,7 @@ msgstr "Mpc"
 #: src/core/modules/Nebula.cpp:340
 msgctxt "distance"
 msgid "M ly"
-msgstr ""
+msgstr "M al"
 
 #: src/core/modules/Nebula.cpp:368 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
@@ -1715,7 +1727,7 @@ msgstr "Magnitude à l'opposition moyenne"
 #: src/gui/AstroCalcDialog.cpp:712 src/gui/AstroCalcDialog.cpp:773
 #: src/gui/AstroCalcDialog.cpp:1040 src/gui/AstroCalcDialog.cpp:1076
 #: src/gui/AstroCalcDialog.cpp:1972 src/gui/AstroCalcDialog.cpp:3726
-#: plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "UA"
@@ -1726,7 +1738,7 @@ msgstr "UA"
 #: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:3676
 msgctxt "distance"
 msgid "M km"
-msgstr ""
+msgstr "M km"
 
 #: src/core/modules/Planet.cpp:473 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:216
@@ -1745,11 +1757,11 @@ msgstr "km/s"
 
 #: src/core/modules/Planet.cpp:506 src/core/modules/MinorPlanet.cpp:318
 msgid "Orbital Velocity"
-msgstr ""
+msgstr "Vitesse orbitale"
 
 #: src/core/modules/Planet.cpp:509 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric Velocity"
-msgstr ""
+msgstr "Vitesse héliocentrique"
 
 #: src/core/modules/Planet.cpp:532
 msgid "with rings"
@@ -1844,7 +1856,7 @@ msgstr "Illuminé"
 
 #: src/core/modules/Planet.cpp:634
 msgid "Albedo"
-msgstr "Albedo"
+msgstr "Albédo"
 
 #: src/core/modules/Planet.cpp:636 src/gui/AstroCalcDialog.cpp:1999
 #: src/gui/AstroCalcDialog.cpp:2034
@@ -1882,7 +1894,7 @@ msgstr "périodique"
 
 #: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1382
 msgid "Velocity"
-msgstr ""
+msgstr "Vitesse"
 
 #: src/core/modules/Comet.cpp:285
 msgid "Coma diameter (estimate)"
@@ -1958,12 +1970,12 @@ msgid "Magnitude range"
 msgstr "Plage de magnitudes"
 
 #: src/core/modules/StarWrapper.cpp:252
-#: plugins/Exoplanets/src/Exoplanet.cpp:318
+#: plugins/Exoplanets/src/Exoplanet.cpp:320
 msgid "Spectral Type"
 msgstr "Type spectral"
 
 #: src/core/modules/StarWrapper.cpp:258
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "Period"
 msgstr "Période"
 
@@ -2940,13 +2952,13 @@ msgid "Found"
 msgstr "Trouvé"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:287
+#: src/core/StelLocaleMgr.cpp:288
 msgctxt "solar time"
 msgid "LMST"
 msgstr "TSLM"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:293
+#: src/core/StelLocaleMgr.cpp:294
 msgctxt "solar time"
 msgid "LTST"
 msgstr "TSLV"
@@ -3448,46 +3460,46 @@ msgstr ""
 msgid "{Forums} - discuss Stellarium with other users."
 msgstr "{Forums} – Discutez de Stellarium avec d'autres utilisateurs."
 
-#: src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317
 msgid "Developers"
 msgstr "Développeurs"
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Coordinateur du projet & développeur principal : %1"
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Designer graphique/autres : %1"
 
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
-#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
-#: src/gui/HelpDialog.cpp:323 src/gui/HelpDialog.cpp:329
-#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
-#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
-#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:335 src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:337
 #, qt-format
 msgid "Developer: %1"
 msgstr "Développeur : %1"
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Intégration continue : %1"
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "Tester: %1"
 msgstr "Testeur : %1"
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327
 msgid "Former Developers"
 msgstr "Anciens développeurs"
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:328
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -3495,17 +3507,17 @@ msgstr ""
 "Plusieurs personnes ont apporté des contributions importantes, mais ne sont "
 "plus actifs. Leur travail a fait une grande différence pour le projet :"
 
-#: src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Document d'auteur/développeur : %1"
 
-#: src/gui/HelpDialog.cpp:337 src/gui/HelpDialog.cpp:338
+#: src/gui/HelpDialog.cpp:338 src/gui/HelpDialog.cpp:339
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Développeur OS X : %1"
 
-#: src/gui/HelpDialog.cpp:339
+#: src/gui/HelpDialog.cpp:340
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
@@ -3518,7 +3530,7 @@ msgstr "Développeur OS X : %1"
 msgid "Contributors"
 msgstr "Contributeurs"
 
-#: src/gui/HelpDialog.cpp:340
+#: src/gui/HelpDialog.cpp:341
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -4148,7 +4160,7 @@ msgstr "Accélération séculaire de la Lune"
 #: src/gui/AstroCalcDialog.cpp:288 src/ui_configurationDialog.h:1349
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:459
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
-#: plugins/Exoplanets/src/Exoplanet.cpp:348
+#: plugins/Exoplanets/src/Exoplanet.cpp:350
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:191
 msgid "Name"
 msgstr "Nom"
@@ -4549,15 +4561,15 @@ msgstr "Objets du Système solaire"
 
 #: src/gui/AstroCalcDialog.cpp:451
 msgid "Solar system objects: comets"
-msgstr ""
+msgstr "Objets du système solaire : comètes"
 
 #: src/gui/AstroCalcDialog.cpp:452
 msgid "Solar system objects: minor bodies"
-msgstr ""
+msgstr "Objets du système solaire : petits objets"
 
 #: src/gui/AstroCalcDialog.cpp:453
 msgid "Solar system objects: planets"
-msgstr ""
+msgstr "Objets du système solaire : planètes"
 
 #: src/gui/AstroCalcDialog.cpp:503
 #, qt-format
@@ -4664,7 +4676,7 @@ msgstr "60 jours solaires"
 
 #: src/gui/AstroCalcDialog.cpp:1461
 msgid "100 solar days"
-msgstr ""
+msgstr "100 jours solaires"
 
 #: src/gui/AstroCalcDialog.cpp:1462
 msgid "1 sidereal day"
@@ -4692,7 +4704,7 @@ msgstr "60 jours sidéraux"
 
 #: src/gui/AstroCalcDialog.cpp:1468
 msgid "100 sidereal days"
-msgstr ""
+msgstr "100 jours sidéraux"
 
 #: src/gui/AstroCalcDialog.cpp:1469
 msgid "1 Julian day"
@@ -4720,7 +4732,7 @@ msgstr "60 jours juliens"
 
 #: src/gui/AstroCalcDialog.cpp:1475
 msgid "100 Julian days"
-msgstr ""
+msgstr "100 jours juliens"
 
 #: src/gui/AstroCalcDialog.cpp:1546
 msgid "Solar system"
@@ -4936,7 +4948,7 @@ msgstr "Enregistrer la liste des objets sous..."
 
 #: src/gui/AstroCalcDialog.cpp:3738
 msgid "spin-orbit resonance"
-msgstr ""
+msgstr "couplage spin-orbite"
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5128,17 +5140,17 @@ msgstr "Astérismes"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:94
 msgid "Geological features"
-msgstr ""
+msgstr "Formations géologiques"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:99
 msgid "Geological features: albedo features"
-msgstr ""
+msgstr "Formations géologiques : formations d'albedo"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:101
 msgid "Geological features: arcūs"
-msgstr ""
+msgstr "Formations géologiques : arcūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:103
@@ -5409,7 +5421,7 @@ msgstr ""
 #. the search tool)
 #: src/translations.h:212
 msgid "Named geological features of Epimetheus"
-msgstr ""
+msgstr "Formations géologiques d'Épiméthée"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -5888,8 +5900,8 @@ msgid "Zero Horizon"
 msgstr "Horizon zéro"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:335
-#: plugins/Exoplanets/src/Exoplanet.cpp:339
+#: src/translations.h:513 plugins/Exoplanets/src/Exoplanet.cpp:337
+#: plugins/Exoplanets/src/Exoplanet.cpp:341
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "Soleil"
@@ -6149,7 +6161,7 @@ msgstr ""
 
 #: src/translations.h:609
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
-msgstr ""
+msgstr "Éclipse de Soleil par Phobos, vue de Olympus Mons le 2 janvier 2021."
 
 #: src/translations.h:610
 msgid ""
@@ -8159,7 +8171,7 @@ msgstr "Échelle relative :"
 
 #: src/ui_viewDialog.h:2518
 msgid "Use additional names of stars"
-msgstr ""
+msgstr "Utiliser les noms supplémentaires des étoiles"
 
 #: src/ui_viewDialog.h:2519
 msgid "Solar System objects"
@@ -8171,7 +8183,7 @@ msgstr "Mettre à l'échelle les objets mineurs :"
 
 #: src/ui_viewDialog.h:2522
 msgid "Hide nomenclature on the celestial body of observer"
-msgstr ""
+msgstr "Cacher la nomenclature du corps céleste de l'observateur"
 
 #: src/ui_viewDialog.h:2524
 msgid ""
@@ -8429,19 +8441,19 @@ msgstr "Utiliser des contours pour les objets du ciel profond"
 
 #: src/ui_viewDialog.h:2666
 msgid "Limit angular size (arcmin):"
-msgstr ""
+msgstr "Limiter la taille angulaire (arcmin) :"
 
 #: src/ui_viewDialog.h:2668
 msgid "Minimal angular size in arcminutes for visible DSO"
-msgstr ""
+msgstr "Dimension angulaire minimale des DSO visibles, en minutes d'arc"
 
 #: src/ui_viewDialog.h:2671
 msgid "Maximum angular size in arcminutes for visible DSO"
-msgstr ""
+msgstr "Dimension angulaire maximale des DSO visibles, en minutes d'arc"
 
 #: src/ui_viewDialog.h:2673
 msgid "Use additional names of DSO"
-msgstr ""
+msgstr "Utiliser les noms supplémentaires des DSO"
 
 #: src/ui_viewDialog.h:2674
 msgid "Celestial Sphere"
@@ -9766,11 +9778,11 @@ msgstr "Que se passe-t-il cette nuit"
 #: src/ui_astroCalcDialog.h:922
 msgctxt "Planetary Calculator"
 msgid "PC"
-msgstr ""
+msgstr "CP"
 
 #: src/ui_astroCalcDialog.h:924
 msgid "Planetary Calculator"
-msgstr ""
+msgstr "Calculateur planétaire"
 
 #: src/ui_astroCalcDialog.h:932
 msgid "Save positions"
@@ -9924,27 +9936,27 @@ msgstr "Distance angulaire:"
 
 #: src/ui_astroCalcDialog.h:990
 msgid "Linear distance:"
-msgstr ""
+msgstr "Distance linéaire :"
 
 #: src/ui_astroCalcDialog.h:991
 msgid "Second celestial body:"
-msgstr ""
+msgstr "Deuxième corps céleste :"
 
 #: src/ui_astroCalcDialog.h:992
 msgid "First celestial body:"
-msgstr ""
+msgstr "Premier corps céleste :"
 
 #: src/ui_astroCalcDialog.h:993
 msgid "Orbital resonance:"
-msgstr ""
+msgstr "Résonance orbitale :"
 
 #: src/ui_astroCalcDialog.h:994
 msgid "Orbital velocity of first celestial body:"
-msgstr ""
+msgstr "Vitesse orbitale du premier corps céleste :"
 
 #: src/ui_astroCalcDialog.h:995
 msgid "Orbital velocity of second celestial body:"
-msgstr ""
+msgstr "Vitesse orbitale du deuxième corps céleste :"
 
 #: src/ui_astroCalcDialog.h:996
 msgid "Compute"
@@ -11083,11 +11095,13 @@ msgstr "Le critère de séparation de Sparrow"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:946
 msgid "Visual resolution"
-msgstr ""
+msgstr "Résolution visuelle"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:948
 msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
+"La résolution visuelle est fondée sur les propriétés de l'œil et le "
+"grossissement"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:409
@@ -11317,6 +11331,8 @@ msgstr "Changer l'échelle du cercle de l'image"
 #: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr ""
+"Dans le mode oculaire, permettre une certaine visibilité en dehors du cercle"
+" de l'oculaire."
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Use semi-transparent mask"
@@ -11931,7 +11947,7 @@ msgstr "Voir %1ce document%2 pour plus d'informations."
 #: plugins/Novae/src/gui/NovaeDialog.cpp:163
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:160
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:183
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:317
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
 msgid "Internet updates disabled"
 msgstr "Mise à jour via Internet désactivée"
 
@@ -11945,8 +11961,8 @@ msgstr "Mise à jour via Internet désactivée"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:223
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:252
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:319
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:393
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:405
 msgid "Updating now..."
 msgstr "Mise à jour en cours…"
 
@@ -11955,7 +11971,7 @@ msgstr "Mise à jour en cours…"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:167
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:164
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:321
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
 msgid "Next update: < 1 minute"
 msgstr "Prochaine mise à jour: < 1 minute"
 
@@ -11964,31 +11980,31 @@ msgstr "Prochaine mise à jour: < 1 minute"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:171
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:168
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:191
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:337
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prochaine mise à jour : %1 minute(s)"
+msgstr[1] "Prochaine mise à jour : %1 minute(s)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:183
 #: plugins/Novae/src/gui/NovaeDialog.cpp:176
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:173
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:330
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:342
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prochaine mise à jour : %1 heure(s)"
+msgstr[1] "Prochaine mise à jour : %1 heure(s)"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:218
 #: plugins/Novae/src/gui/NovaeDialog.cpp:211
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:226
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:255
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid "Update error"
 msgstr "Erreur lors de la mise à jour"
 
@@ -12016,7 +12032,7 @@ msgstr "[nouvelle source]"
 #: plugins/Quasars/src/ui_quasarsDialog.h:265
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:271
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:382
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:394
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
@@ -12027,7 +12043,7 @@ msgstr "Mettre à jour maintenant"
 #: plugins/Novae/src/gui/NovaeDialog.cpp:199
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:196
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:219
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:384
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
 msgid "Update from files"
 msgstr "Mettre à jour à partir de fichiers"
 
@@ -12448,7 +12464,7 @@ msgstr "Distance de la position cible : "
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:129
 msgid "INDI Settings"
-msgstr ""
+msgstr "Réglages INDI"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:130
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:604
@@ -12469,11 +12485,11 @@ msgstr "Hôte :"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:135
 msgid "Refresh devices"
-msgstr ""
+msgstr "Actualiser les appareils"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:136
 msgid "Devices:"
-msgstr ""
+msgstr "Appareils :"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
@@ -12585,7 +12601,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:272
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
-msgstr ""
+msgstr "INDI par <b>Alessandro Siniscalchi</b>."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -14440,8 +14456,8 @@ msgstr "Russie"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
 msgid_plural "Next update: %1 day(s)"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Prochaine mise à jour : %1 jour(s)"
+msgstr[1] "Prochaine mise à jour : %1 jour(s)"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:225
 msgid "Historical supernovae is updated"
@@ -14832,7 +14848,7 @@ msgctxt "period"
 msgid "days"
 msgstr "jours"
 
-#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:353
+#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Eccentricity"
 msgstr "Excentricité"
 
@@ -14873,7 +14889,7 @@ msgid "mJy"
 msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:273
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 msgid "Notes"
 msgstr "Remarques"
@@ -15387,27 +15403,27 @@ msgstr "neptunienne"
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:951
 msgid "Primary Transit"
-msgstr ""
+msgstr "Transit primaire"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:953
 msgid "Microlensing"
-msgstr ""
+msgstr "Microlentille"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:955
 msgid "Radial Velocity"
-msgstr ""
+msgstr "Vitesse radiale"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:957
 msgid "Imaging"
-msgstr ""
+msgstr "Imagerie"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:959
 msgid "Pulsar"
-msgstr ""
+msgstr "Pulsar"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:963
@@ -15417,95 +15433,89 @@ msgstr "Astrométrie"
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
 #: plugins/Exoplanets/src/Exoplanets.cpp:965
 msgid "TTV"
-msgstr ""
+msgstr "TTV"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:299
+#: plugins/Exoplanets/src/Exoplanet.cpp:301
 msgid "planetary system"
 msgstr "système planétaire"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:331
+#: plugins/Exoplanets/src/Exoplanet.cpp:333
 msgid "Metallicity"
 msgstr "Métallicité"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:335
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
+#: plugins/Exoplanets/src/Exoplanet.cpp:337
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
 msgid "Mass"
 msgstr "Masse"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:339
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:341
+#: plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Radius"
 msgstr "Rayon"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:343
+#: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgid "Effective temperature"
 msgstr "Température effective"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:343
+#: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgctxt "temperature"
 msgid "K"
 msgstr "K"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:347
+#: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Exoplanet"
 msgstr "Exoplanète"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:349
+#: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgid "days"
 msgstr "jours"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:350
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Exoplanets/src/Exoplanet.cpp:353
 msgid "Jup"
 msgstr "Jup"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:352
+#: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Semi-Major Axis"
 msgstr "Demi-grand axe"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:354
+#: plugins/Exoplanets/src/Exoplanet.cpp:356
 msgid "Inclination"
 msgstr "Inclinaison"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Exoplanets/src/Exoplanet.cpp:357
 msgid "Angle Distance"
 msgstr "Distance angulaire"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:356
+#: plugins/Exoplanets/src/Exoplanet.cpp:358
 msgid "Discovered year"
 msgstr "Année de découverte"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:357
+#: plugins/Exoplanets/src/Exoplanet.cpp:359
 msgid "Detection method"
 msgstr "Méthode de détection"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:358
+#: plugins/Exoplanets/src/Exoplanet.cpp:360
 msgid "Planetary class"
 msgstr "Classe planétaire"
 
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
-#: plugins/Exoplanets/src/Exoplanet.cpp:360
+#: plugins/Exoplanets/src/Exoplanet.cpp:362
 msgid "Equilibrium temp."
 msgstr "Temp. d'équilibre"
 
+#. TRANSLATORS: Average stellar flux of the planet
+#: plugins/Exoplanets/src/Exoplanet.cpp:364
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+msgid "Flux"
+msgstr ""
+
 #. TRANSLATORS: ESI = Earth Similarity Index
-#: plugins/Exoplanets/src/Exoplanet.cpp:362
+#: plugins/Exoplanets/src/Exoplanet.cpp:366
 msgid "ESI"
 msgstr "ESI"
 
-#: plugins/Exoplanets/src/Exoplanet.cpp:363
-msgid "Conservative sample"
-msgstr ""
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:466
-msgid "yes"
-msgstr "oui"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:468
-msgid "no"
-msgstr "non"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:505
+#: plugins/Exoplanets/src/Exoplanet.cpp:523
 msgid "Equilibrium temperature on Earth"
 msgstr "Température d'équilibre sur la Terre"
 
@@ -15561,7 +15571,7 @@ msgstr ""
 msgid "Potential habitable exoplanets"
 msgstr "Exoplanètes potentiellement habitables"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
@@ -15569,11 +15579,17 @@ msgstr ""
 "Ce plugin peut afficher les exoplanètes potentiellement habitable (marqueur "
 "orange) et des informations y relatives."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+msgid ""
+"Extra info for the optimistic samples of potentially habitable planets mark "
+"by italic text."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid "Planetary Class"
 msgstr "Classe planétaire"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
@@ -15585,11 +15601,11 @@ msgstr ""
 "neptunienne). À titre d'exemple, la classification de la Terre est G-chaude "
 "terrienne."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
 msgid "Equilibrium Temperature"
 msgstr "Température d'équilibre"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -15601,11 +15617,24 @@ msgstr ""
 "chauffé par son étoile hôte, en supposant un albédo de 0.3). Par exemple, la"
 " température d'équilibre de la Terre est de –18.15 °C (255 K)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+msgid ""
+"Actual surface temperatures are expected to be larger than the equilibrium "
+"temperature depending on the atmosphere of the planets, which are currently "
+"unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+msgid ""
+"Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
+"S<sub>E</sub>)."
+msgstr ""
+
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid "Earth Similarity Index (ESI)"
 msgstr "Indice de similarité avec la Terre (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -15616,11 +15645,11 @@ msgstr ""
 "dépend du rayon de la planète, de sa densité, de sa vitesse de libération et"
 " de sa température de surface."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid "Proper names"
 msgstr "Noms populaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
@@ -15629,7 +15658,7 @@ msgstr ""
 "officiellement les noms de plusieurs exoplanètes, après une votation "
 "publique."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
@@ -15637,7 +15666,7 @@ msgstr ""
 "Du latin <em>veritas</em>, la vérité. La déclinaison à l'ablatif signifie "
 "<em>là où il y a la vérité</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
@@ -15645,11 +15674,11 @@ msgstr ""
 "Du latin <em>spes</em>, l'espoir. La déclinaison à l'ablatif signifie<em>là "
 "où il y a l'espoir</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid "Musica is Latin for <em>music</em>."
 msgstr "Musica est le terme latin pour <em>musique</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
@@ -15659,13 +15688,13 @@ msgstr ""
 "Selon la légende, sa vie fut sauvée en mer par des dauphins après avoir "
 "attiré leur attention en jouant de sa cithare."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 "Fafnir était un nain de la mythologie scandinave qui s'est transformé en "
 "dragon"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
@@ -15673,11 +15702,11 @@ msgstr ""
 "Orbitar est un nom construit pour rendre hommage aux lancements et "
 "opérations spatiales de la NASA."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr "Chalawan est un roi crocodile d'un conte folklore thaïlandais."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
@@ -15685,7 +15714,7 @@ msgstr ""
 "Taphao Thong est l'une des deux soeurs associées au conte de Chalawan, dans "
 "un conte folklore thaïlandais."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
@@ -15693,7 +15722,7 @@ msgstr ""
 "Taphao Kae est l'une des deux soeurs associées au conte de Chalawan, dans un"
 " conte du folklore thaïlandais."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
@@ -15702,7 +15731,7 @@ msgstr ""
 "celte qui occupait le territoire de la Suisse actuelle dans l'antiquité "
 "romaine."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
@@ -15710,7 +15739,7 @@ msgstr ""
 "Dimidium est un adjectif latin signifiant <em>demi</em>, et en référence à "
 "la masse d'une planète au moins égale à la moitié de celle de Jupiter."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
@@ -15720,7 +15749,7 @@ msgstr ""
 "polonais qui proposa un modèle héliocentrique du système solaire dans son "
 "ouvrage <em>De revolutionibus orbium coelestium</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -15734,7 +15763,7 @@ msgstr ""
 "grands satellites de Jupiter et fit les premières observations à la lunette "
 "des phases de Vénus, entre autres découvertes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -15746,7 +15775,7 @@ msgstr ""
 "Ces observations ont permis à Kepler la formulation de ces trois lois des "
 "mouvements planétaires."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
@@ -15756,7 +15785,7 @@ msgstr ""
 "spectacle germano-hollandais. On lui attribue souvent l'invention de la "
 "lunette (réfracteur), en 1608."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
@@ -15766,7 +15795,7 @@ msgstr ""
 " l'on attribue souvent l'invention du microscope, ainsi que, de façon plus "
 "controversée, celle du télescope."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
@@ -15776,7 +15805,7 @@ msgstr ""
 "ethnographe et traducteur anglais à qui l'on attribue le premier dessin de "
 "la Lune fait au moyen d'observations à la lunette."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
@@ -15785,7 +15814,7 @@ msgstr ""
 "<em>Amateru</em> est un nom japonais qui désigne les autels dédiés à "
 "Amaterasu, la déesse Shinto du Soleil, née de l'œil gauche du dieu Izanagi."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
@@ -15796,7 +15825,7 @@ msgstr ""
 "début du Ve siècle de notre ère, jusqu'à son assassinat en 415 par des "
 "chrétiens."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
@@ -15804,7 +15833,7 @@ msgstr ""
 "Rán est la déesse scandinave de la mer, qui engendre les vagues et capture "
 "les marins au moyen de son filet."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
@@ -15814,7 +15843,7 @@ msgstr ""
 "est l'époux de Rán. Ægir et Rán ont neuf filles qui personnifient les "
 "vagues."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
@@ -15822,21 +15851,21 @@ msgstr ""
 "Nom sémitique antique et nom arabe moderne de la cité de Palmyre, un site du"
 " patrimoine mondial de l'UNESCO."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 "Dagon était une divinité sémitique, souvent représentée mi-homme, mi-"
 "poisson."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "Tonatiuh était le dieu aztèque du Soleil."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "Meztli était le déesse aztèque de la Lune."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
@@ -15845,11 +15874,11 @@ msgstr ""
 "Ogma est un dieu de l'éloquence de la mythologie celtique. C'est un champion"
 " à la grande force physique. En Gaule, il était connu sous le nom de Ogmios."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Smertrios was a Gallic deity of war."
 msgstr "Smertrios était un dieu de la guerre vénéré en Gaule."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
@@ -15857,13 +15886,13 @@ msgstr ""
 "Intercrus signifie en latin <em>entre les jambes</em>, faisant référence à "
 "la position de l'étoile dans la constellation de la Grande Ourse."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
 "Arkas était le fiks de Callisto (la Grande Ourse) dans la mythologie "
 "grecque."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15872,7 +15901,7 @@ msgstr ""
 "dramaturge espagnol, célèbre par son roman <em>L’Ingénieux Hidalgo Don "
 "Quichotte de la Manche</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15880,7 +15909,7 @@ msgstr ""
 "Don Quichotte, le héros du roman <em>L’Ingénieux Hidalgo Don Quichotte de la"
 " Manche</em> de Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15888,7 +15917,7 @@ msgstr ""
 "Dulcinée, dame des pensées de Don Quichotte, dans le roman <em>L’Ingénieux "
 "Hidalgo Don Quichotte de la Manche</em> de Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15896,7 +15925,7 @@ msgstr ""
 "Rossinante est le cheval de Don Quichotte, dans le roman <em>L’Ingénieux "
 "Hidalgo Don Quichotte de la Manche</em> de Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -15904,7 +15933,7 @@ msgstr ""
 "Sancho Panza, écuyer de Don Quichotte dans <em>L’Ingénieux Hidalgo Don "
 "Quichotte de la Manche</em> de Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -15914,7 +15943,7 @@ msgstr ""
 "Thestius. Léda était une déesse grecque, mère des jumeaux Castor et Pollux, "
 "ainsi que d'Hélène et de Clytemnestre."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
@@ -15922,11 +15951,11 @@ msgstr ""
 "La liche est, dans la littérature, un sorcier mort-vivant qui se maintient "
 "grâce à ses pouvoirs magiques."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "Un draugr est une créature vampirique de la mythologie scandinave."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
@@ -15934,7 +15963,7 @@ msgstr ""
 "Poltergeist est le nom d'êtres surnaturels qui créent des perturbations "
 "physiques. C'est un terme allemand signifiant <em>fantôme bruyant</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
@@ -15942,7 +15971,7 @@ msgstr ""
 "Phobétor est la divinité des cauchemars, dans la mythologie grecque. Il est "
 "le fils de Nyx, le dieu de la nuit ou de Hypnos, le dieu du sommeil."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -15953,7 +15982,7 @@ msgstr ""
 " un site du patrimoine mondial de l'UNESCO.  À partir du VIIIe siècle, elle "
 "a été le principal point de jonction entre le Maroc et l'Andalousie."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -15966,7 +15995,7 @@ msgstr ""
 "Andalousie. Il a écrit un traité sur l'utilisation l'astrolabe, d'une grande"
 " influence."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
@@ -15976,7 +16005,7 @@ msgstr ""
 "Muhammad ibn al-Samh al-Mahri), un astronome et mathématicien de l'école de "
 "al-Majritî ayant vécu au XIe siècle à Cordoue (Andalousie)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -15987,7 +16016,7 @@ msgstr ""
 "chimiste et astronome ayant vécu aux Xe et XIe siècle à Cordoue "
 "(Andalousie)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -15999,7 +16028,7 @@ msgstr ""
 "constellation dans laquelle Libertas est située, est un symbole de la "
 "liberté."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
@@ -16008,7 +16037,7 @@ msgstr ""
 "Fortitudo est le nom latin de la <em>bravoure</em>. C'est aussi la force "
 "émotionnelle et mentale face à l'adversité, symbolisée par l'aigle."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
@@ -16016,7 +16045,7 @@ msgstr ""
 "Ces noms, basés sur les propositions originales, ont été modifiés afin de "
 "correspondre aux règles de l'IAU."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
@@ -16024,7 +16053,7 @@ msgstr ""
 "Le nom original proposé, <em>Veritas</em>, est déjà celui d'un astéroïde du "
 "système solaire."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
@@ -16032,7 +16061,7 @@ msgstr ""
 "Le nom original proposé, <em>Amaterasu</em>, est déjà celui d'un astéroïde "
 "du système solaire."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -16043,13 +16072,13 @@ msgstr ""
 "la transliteration norvégienne. Le nom <em>Aegir</em>, a été attribué à l'un"
 " des satellites de Saturne, découvert en 2004."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr ""
 "Le nom original proposé, <em>Ogmios</em>, est déjà celui d'un astéroïde du "
 "système solaire."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
@@ -16059,7 +16088,7 @@ msgstr ""
 "système solaire et d'un satellite de Jupiter. Le nom <em>Althée</em> est "
 "aussi déjà attribué à un astéroïde."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -16071,197 +16100,197 @@ msgstr ""
 " un <em>s</em>) provient d'une erreur typographique remontant à 1831, et "
 "doit donc être évitée."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid "Additional info"
 msgstr "Informations supplémentaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Circumstellar habitable zone"
 msgstr "Zone habitable circumstellaire"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Planetary equilibrium temperature"
 msgstr "Température d'équilibre planétaire"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Planetary habitability"
 msgstr "Habitabilité planétaire"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Earth Similarity Index"
 msgstr "Indice de similarité avec la Terre"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr "Résultats définitifs de la votation publique de NameExoWorlds."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "NameExoWorlds website"
 msgstr "Site web de NameExoWorlds"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:279
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "Sites web professionnels sur le thème des planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exoplanètes : une version interactive de xkcd 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:281
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:282
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "Exoplanètes dans des systèmes binaires et multiples (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:283
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "Naming exoplanets (IAU)"
 msgstr "Dénomination des exoplanètes (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Quelques astronomes et groupes actifs dans l'étude des planètes "
 "extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:284
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "update: 16 April 2012"
 msgstr "mise à jour : 16 avril 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:285
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "The Exoplanet Data Explorer"
 msgstr "L'explorateur de données des exoplanètes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:286
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "The Anglo-Australian Planet Search"
 msgstr "The Anglo-Australian Planet Search"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:287
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "The Geneva Extrasolar Planet Search Programmes"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:288
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:289
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA's Exoplanet Exploration Program"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "Pulsar planets"
 msgstr "Planètes de pulsar"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "The NASA Exoplanet Archive"
 msgstr "The NASA Exoplanet Archive"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Commission 53 de l'UAI : Planètes extrasolaires"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "The Habitable Zone Gallery"
 msgstr "The Habitable Zone Gallery"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - The Search for Another Earth"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "Open Exoplanet Catalogue"
 msgstr "Catalogue Open Exoplanet"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid "The Habitable Exoplanets Catalog"
 msgstr "The Habitable Exoplanets Catalog"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:404
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:416
 msgid "Exoplanets is updated"
 msgstr "Les exoplanètes sont à jour"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:525
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
 msgid "Orbital Eccentricity"
 msgstr "Excentricité orbitale"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:526
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
 msgid "Orbit Semi-Major Axis, AU"
 msgstr "Demi-grand-axe de l'orbite, UA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:527
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid "Planetary Mass, Mjup"
 msgstr "Masse planétaire, Mjup"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:528
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:540
 msgid "Planetary Radius, Rjup"
 msgstr "Rayon planétaire, Mjup"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:529
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:541
 msgid "Orbital Period, days"
 msgstr "Période orbitale, jours"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:530
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:542
 msgid "Angular Distance, arcsec"
 msgstr "Distance angulaire, en arcsec"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:531
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:543
 msgid "Effective temperature of host star, K"
 msgstr "Température de l'étoile hôte, en K"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:532
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:544
 msgid "Year of Discovery"
 msgstr "Année de découverte"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:533
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:545
 msgid "Metallicity of host star"
 msgstr "Métallicité de l'étoile hôte"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:534
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:546
 msgid "V magnitude of host star, mag"
 msgstr "Magnitude vis. de l'étoile hôte, en mag"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:535
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:547
 msgid "RA (J2000) of star, deg"
 msgstr "AD (J2000) de l'étoile, en deg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:536
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid "Dec (J2000) of star, deg"
 msgstr "Déc (J2000) de l'étoile, en deg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:537
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
 msgid "Distance to star, pc"
 msgstr "Distance de l'étoile, en pc"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:550
 msgid "Mass of host star, Msol"
 msgstr "Masse de l'étoile hôte, en Msol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:551
 msgid "Radius of host star, Rsol"
 msgstr "Rayon de l'étoile hôte, en Rsol"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:610
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:622
 msgctxt "temperature scale"
 msgid "Kelvin"
-msgstr ""
+msgstr "Kelvin"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:612
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:624
 msgctxt "temperature scale"
 msgid "Celsius"
-msgstr ""
+msgstr "Celsius"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:614
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:626
 msgctxt "temperature scale"
 msgid "Fahrenheit"
-msgstr ""
+msgstr "Fahrenheit"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
 msgid "Exoplanets Configuration"
@@ -16327,7 +16356,7 @@ msgstr "Couleur d'affichage des exoplanètes potentiellement habitables"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
 msgid "Temperature scale:"
-msgstr ""
+msgstr "Unité de température :"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 msgid "Diagrams: scatter plot"
