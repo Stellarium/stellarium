@@ -75,27 +75,23 @@ bool TelescopeClientINDI::hasKnownPosition() const
 	return mConnection.isDeviceConnected();
 }
 
-void TelescopeClientINDI::moveNorth(bool active)
+void TelescopeClientINDI::moveNorth(int speed)
 {
-	mConnection.moveNorth(active);
+	mConnection.moveNorth(speed);
 }
 
-void TelescopeClientINDI::moveEast(bool active)
+void TelescopeClientINDI::moveEast(int speed)
 {
-	mConnection.moveEast(active);
+	mConnection.moveEast(speed);
 }
 
-void TelescopeClientINDI::moveSouth(bool active)
+void TelescopeClientINDI::moveSouth(int speed)
 {
-	mConnection.moveSouth(active);
+	mConnection.moveSouth(speed);
 }
 
-void TelescopeClientINDI::moveWest(bool active)
+void TelescopeClientINDI::moveWest(int speed)
 {
-	mConnection.moveWest(active);
+	mConnection.moveWest(speed);
 }
 
-void TelescopeClientINDI::setSpeed(int speed)
-{
-	mConnection.setSpeed(speed);
-}

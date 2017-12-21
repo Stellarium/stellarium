@@ -26,19 +26,19 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 	if (!mTelescope)
 		return;
 
-    if (!mTelescope->isConnected())
-    {
-        qDebug() << "Error: Telescope not connected";
-        return;
-    }
+	if (!mTelescope->isConnected())
+	{
+		qDebug() << "Error: Telescope not connected";
+		return;
+	}
 
-    INumberVectorProperty *property = nullptr;
-    property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
-    if (!property)
-    {
-        qDebug() << "Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...";
-        return;
-    }
+	INumberVectorProperty *property = nullptr;
+	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
+	if (!property)
+	{
+		qDebug() << "Error: unable to find Telescopeor EQUATORIAL_EOD_COORD property...";
+		return;
+	}
 
 	property->np[0].value = coords.RA;
 	property->np[1].value = coords.DEC;
@@ -60,7 +60,7 @@ const QStringList INDIConnection::devices() const
 	return mDevices;
 }
 
-void INDIConnection::moveNorth(bool active)
+void INDIConnection::moveNorth(int speed)
 {
 	std::lock_guard<std::mutex> lock(mMutex);
 	if (!mTelescope || !mTelescope->isConnected())
@@ -73,17 +73,20 @@ void INDIConnection::moveNorth(bool active)
 		return;
 	}
 
-	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_NORTH");
+	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_NORTH");
 
-	if (active)
-		motionNorth->s = ISS_ON;
+	if (speed > 0)
+	{
+		setSpeed(speed);
+		motion->s = ISS_ON;
+	}
 	else
-		motionNorth->s = ISS_OFF;
+		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }
 
-void INDIConnection::moveEast(bool active)
+void INDIConnection::moveEast(int speed)
 {
 	std::lock_guard<std::mutex> lock(mMutex);
 	if (!mTelescope || !mTelescope->isConnected())
@@ -96,17 +99,20 @@ void INDIConnection::moveEast(bool active)
 		return;
 	}
 
-	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_EAST");
+	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_EAST");
 
-	if (active)
-		motionNorth->s = ISS_ON;
+	if (speed > 0)
+	{
+		setSpeed(speed);
+		motion->s = ISS_ON;
+	}
 	else
-		motionNorth->s = ISS_OFF;
+		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }
 
-void INDIConnection::moveSouth(bool active)
+void INDIConnection::moveSouth(int speed)
 {
 	std::lock_guard<std::mutex> lock(mMutex);
 	if (!mTelescope || !mTelescope->isConnected())
@@ -119,17 +125,20 @@ void INDIConnection::moveSouth(bool active)
 		return;
 	}
 
-	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_SOUTH");
+	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_SOUTH");
 
-	if (active)
-		motionNorth->s = ISS_ON;
+	if (speed > 0)
+	{
+		setSpeed(speed);
+		motion->s = ISS_ON;
+	}
 	else
-		motionNorth->s = ISS_OFF;
+		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }
 
-void INDIConnection::moveWest(bool active)
+void INDIConnection::moveWest(int speed)
 {
 	std::lock_guard<std::mutex> lock(mMutex);
 	if (!mTelescope || !mTelescope->isConnected())
@@ -142,12 +151,15 @@ void INDIConnection::moveWest(bool active)
 		return;
 	}
 
-	ISwitch *motionNorth = IUFindSwitch(switchVector, "MOTION_WEST");
+	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_WEST");
 
-	if (active)
-		motionNorth->s = ISS_ON;
+	if (speed > 0)
+	{
+		setSpeed(speed);
+		motion->s = ISS_ON;
+	}
 	else
-		motionNorth->s = ISS_OFF;
+		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }
@@ -170,12 +182,12 @@ void INDIConnection::newDevice(INDI::BaseDevice *dp)
 	if (!dp)
 		return;
 
-    QString name(dp->getDeviceName());
+	QString name(dp->getDeviceName());
 
-    qDebug() << "INDIConnection::newDevice| %s Device... " << name;
+	qDebug() << "INDIConnection::newDevice| %s Device... " << name;
 
-    mDevices.append(name);
-    mTelescope = dp;
+	mDevices.append(name);
+	mTelescope = dp;
 
 	emit newDeviceReceived(name);
 }
@@ -203,22 +215,22 @@ void INDIConnection::newProperty(INDI::Property *property)
 	if (mTelescope != property->getBaseDevice())
 		return;
 
-    QString name(property->getName());
+	QString name(property->getName());
 
-    qDebug() << "INDIConnection::newProperty| " << name;
+	qDebug() << "INDIConnection::newProperty| " << name;
 
-    if (name == "EQUATORIAL_EOD_COORD")
-    {
-        mCoordinates.RA = property->getNumber()->np[0].value;
-        mCoordinates.DEC = property->getNumber()->np[1].value;
-    }
+	if (name == "EQUATORIAL_EOD_COORD")
+	{
+		mCoordinates.RA = property->getNumber()->np[0].value;
+		mCoordinates.DEC = property->getNumber()->np[1].value;
+	}
 
-    if (!mTelescope->isConnected())
-    {
-        connectDevice(mTelescope->getDeviceName());
-        if (mTelescope->isConnected())
-            qDebug() << "connected\n";
-    }
+	if (!mTelescope->isConnected())
+	{
+		connectDevice(mTelescope->getDeviceName());
+		if (mTelescope->isConnected())
+			qDebug() << "connected\n";
+	}
 }
 
 void INDIConnection::removeProperty(INDI::Property *property)

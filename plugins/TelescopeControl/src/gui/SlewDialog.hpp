@@ -92,11 +92,10 @@ private slots:
 	//! Sets the input fields to selected point info
 	void getStoredPointInfo();
 
-	void onMoveNorth(bool active);
-	void onMoveEast(bool active);
-	void onMoveWest(bool active);
-	void onMoveSouth(bool active);
-	void onSetSpeed(int speed);
+	void onMoveNorth(int speed);
+	void onMoveEast(int speed);
+	void onMoveWest(int speed);
+	void onMoveSouth(int speed);
 	void onCurrentTelescopeChanged();
 
 private:

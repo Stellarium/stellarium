@@ -45,11 +45,10 @@ public:
 	void setPosition(Coordinates coords);
 	bool isDeviceConnected() const;
 	const QStringList devices() const;
-	void moveNorth(bool active);
-	void moveEast(bool active);
-	void moveSouth(bool active);
-	void moveWest(bool active);
-	void setSpeed(int speed);
+	void moveNorth(int speed);
+	void moveEast(int speed);
+	void moveSouth(int speed);
+	void moveWest(int speed);
 
 signals:
 	void newDeviceReceived(QString name);
@@ -59,6 +58,8 @@ signals:
 	void speedChanged(int speed);
 
 private:
+	void setSpeed(int speed);
+
 	mutable std::mutex mMutex;
 	INDI::BaseDevice* mTelescope = nullptr;
 	Coordinates mCoordinates;

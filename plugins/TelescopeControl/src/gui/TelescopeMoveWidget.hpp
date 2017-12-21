@@ -15,14 +15,11 @@ public:
 	explicit TelescopeMoveWidget(QWidget *parent = 0);
 	~TelescopeMoveWidget();
 
-	void setSpeed(int speed);
-
 signals:
-	void moveNorth(bool active);
-	void moveEast(bool active);
-	void moveWest(bool active);
-	void moveSouth(bool active);
-	void onSpeedChanged(int speed);
+	void moveNorth(int speed);
+	void moveEast(int speed);
+	void moveWest(int speed);
+	void moveSouth(int speed);
 
 private slots:
 	void onNorthButtonPressed();
@@ -35,6 +32,8 @@ private slots:
 	void onWestButtonReleased();
 
 private:
+	int speed() const;
+
 	Ui::TelescopeMoveWidget *ui;
 };
 

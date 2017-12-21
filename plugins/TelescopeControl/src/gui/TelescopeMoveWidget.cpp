@@ -15,7 +15,6 @@ TelescopeMoveWidget::TelescopeMoveWidget(QWidget *parent) :
 	QObject::connect(ui->southButton, &QPushButton::released, this, &TelescopeMoveWidget::onSouthButtonReleased);
 	QObject::connect(ui->westButton, &QPushButton::pressed, this, &TelescopeMoveWidget::onWestButtonPressed);
 	QObject::connect(ui->westButton, &QPushButton::released, this, &TelescopeMoveWidget::onWestButtonReleased);
-	QObject::connect(ui->speedSlider, &QSlider::valueChanged, this, &TelescopeMoveWidget::onSpeedChanged);
 }
 
 TelescopeMoveWidget::~TelescopeMoveWidget()
@@ -23,48 +22,48 @@ TelescopeMoveWidget::~TelescopeMoveWidget()
 	delete ui;
 }
 
-void TelescopeMoveWidget::setSpeed(int speed)
-{
-	ui->speedSlider->setValue(speed);
-}
-
 void TelescopeMoveWidget::onNorthButtonPressed()
 {
-	emit moveNorth(true);
+	emit moveNorth(speed());
 }
 
 void TelescopeMoveWidget::onNorthButtonReleased()
 {
-	emit moveNorth(false);
+	emit moveNorth(0);
 }
 
 void TelescopeMoveWidget::onEastButtonPressed()
 {
-	emit moveEast(true);
+	emit moveEast(speed());
 }
 
 void TelescopeMoveWidget::onEastButtonReleased()
 {
-	emit moveEast(false);
+	emit moveEast(0);
 }
 
 void TelescopeMoveWidget::onSouthButtonPressed()
 {
-	emit moveSouth(true);
+	emit moveSouth(speed());
 }
 
 void TelescopeMoveWidget::onSouthButtonReleased()
 {
-	emit moveSouth(false);
+	emit moveSouth(0);
 }
 
 void TelescopeMoveWidget::onWestButtonPressed()
 {
-	emit moveWest(true);
+	emit moveWest(speed());
 }
 
 void TelescopeMoveWidget::onWestButtonReleased()
 {
-	emit moveWest(false);
+	emit moveWest(0);
+}
+
+int TelescopeMoveWidget::speed() const
+{
+	return ui->speedSlider->value();
 }
 
