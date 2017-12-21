@@ -352,9 +352,9 @@ void SlewDialog::onCurrentTelescopeChanged()
 	auto telescope = currentTelescope();
 	auto telescopeINDI = qobject_cast<QSharedPointer<TelescopeClientINDI>>(telescope);
 	if (telescopeINDI)
-		ui->telescopeMoveWidget->setEnabled(true);
+		ui->telescopeMoveWidget->setVisible(true);
 	else
-		ui->telescopeMoveWidget->setEnabled(false);
+		ui->telescopeMoveWidget->setVisible(false);
 }
 
 void SlewDialog::savePointsToFile()
