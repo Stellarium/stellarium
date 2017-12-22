@@ -39,12 +39,27 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%---------------------------------------------------------------------------------------
+%   DETECT SWITCH FOR htlatex.
+%---------------------------------------------------------------------------------------
+% We can use package ifpdf to detect pdf creation. However, htlatex needs dvipdfmx in the document global options. 
+% Therefore we need a new command (\ifhtlatex...\else...\fi) that even works before documentclass.
+
+\newif\ifhtlatex
+\ifx\HCode\UnDeFiNeD
+  \htlatexfalse
+\else
+  \htlatextrue
+\fi
+
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
-
+\ifhtlatex
+\documentclass[12pt,fleqn,dvipdfmx]{book} % Default font size and left-justified equations
+\else
 \documentclass[12pt,fleqn]{book} % Default font size and left-justified equations
-
+\fi
 %----------------------------------------------------------------------------------------
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
@@ -67,7 +82,7 @@
 \coordinate [below=12cm] (midpoint) at (current page.north);
 \node at (current page.north west)
 {\begin{tikzpicture}[remember picture,overlay]
-\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{bookcover_cygnus}}; % Background image
+\node[anchor=north west,inner sep=0pt] at (0,0) {\includegraphics[width=\paperwidth]{bookcover_cygnus.png}}; % Background image
 \draw[anchor=north] (midpoint) node [fill=ocre!30!white,fill opacity=0.6,text opacity=1,inner sep=1cm]%
      {\Huge\centering\bfseries\sffamily\parbox[c][][t]{\paperwidth}%
                                               {\centering Stellarium \StelVersion\space User Guide\\[18pt] % Book title
@@ -122,12 +137,12 @@ implying a violation of copyright law.}}\\
 %	TABLE OF CONTENTS
 %----------------------------------------------------------------------------------------
 
-\chapterimage{chapter-t1-bg} % Table of contents heading image
+\chapterimage{chapter-t1-bg.png} % Table of contents heading image
 
 \pagestyle{empty} % No headers
-
-\tableofcontents % Print the table of contents itself
-
+\ifpdf
+ \tableofcontents % Print the table of contents itself
+\fi
 \cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
 
 \pagestyle{fancy} % Print headers again
@@ -144,7 +159,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	CHAPTER 1 (Introduction)
 %----------------------------------------------------------------------------------------
-\chapterimage{chapter-t2-bg} % Chapter heading image
+\chapterimage{chapter-t2-bg.png} % Chapter heading image
 
 \include{ch_introduction}
 
@@ -154,7 +169,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	CHAPTER 2 (Installation)
 %----------------------------------------------------------------------------------------
-% \chapterimage{chapter-t2-bg} % Chapter heading image Did not change...
+% \chapterimage{chapter-t2-bg.png} % Chapter heading image Did not change...
 
 \include{ch_getting_started}
 
@@ -180,7 +195,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	CHAPTER 5 (Advanced Use)
 %----------------------------------------------------------------------------------------
-\chapterimage{chapter-t3-bg} % Chapter heading image
+\chapterimage{chapter-t3-bg.png} % Chapter heading image
 
 \include{ch_advanced_use}
 %% GZ: I replaced the old chapter with course notes I have developed in late 2015. To get the old version, activate next line instead.
@@ -193,7 +208,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 \renewcommand{\StelTOCdepth}{0}
 \part{Extending Stellarium}
-\chapterimage{chapter-t3-bg} % Chapter heading image
+\chapterimage{chapter-t3-bg.png} % Chapter heading image
 \include{ch_plugins}
 \include{plg_interfaces} % TUI, RemoteControl, RemoteSync, (2018: D-BUS?)
 \include{plg_catalogs}
@@ -214,7 +229,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	CHAPTER 16 (Astronomical Concepts)
 %----------------------------------------------------------------------------------------
-\chapterimage{chapter-t4-bg} % Chapter heading image
+\chapterimage{chapter-t4-bg.png} % Chapter heading image
 \include{ch_astronomical_concepts}
 
 %----------------------------------------------------------------------------------------
@@ -232,7 +247,7 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	CHAPTER 19 (Exercises)
 %----------------------------------------------------------------------------------------
-\chapterimage{chapter-t4-bg} % Chapter heading image
+\chapterimage{chapter-t4-bg.png} % Chapter heading image
 \include{ch_exercises}
 
 %----------------------------------------------------------------------------------------
@@ -245,7 +260,7 @@ implying a violation of copyright law.}}\\
 
 \part{Appendices}
 \renewcommand{\chaptername}{Appendix}
-\chapterimage{chapter-t1-bg} % Chapter heading image
+\chapterimage{chapter-t1-bg.png} % Chapter heading image
 
 %----------------------------------------------------------------------------------------
 %	CHAPTER A (Hotkeys) -- N.B. "H" :-)

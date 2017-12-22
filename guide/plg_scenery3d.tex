@@ -38,9 +38,9 @@ sundials and other shadow casters in action, etc.
 \label{sec:scenery3d:Usage}
 
 
-You activate the plugin with the \emph{circular enclosure} button \guibutton{0.6}{bt_scenery3d_off} at screen
+You activate the plugin with the \emph{circular enclosure} button \guibutton{0.6}{bt_scenery3d_off.png} at screen
 bottom or by pressing \key{\ctrl+W}. The other button with circular enclosure and
-tool icon  \guibutton{0.6}{bt_scenery3d_settings_off} (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
+tool icon  \guibutton{0.6}{bt_scenery3d_settings_off.png} (or \key{\ctrl+\shift+W}) opens the settings dialog. Once loaded and
 displaying, you can walk around pressing \key{\ctrl} plus cursor keys. Change eye
 height with \key{\ctrl+Page\,\arrowkeyup\,}/\key{\ctrl + Page\,\arrowkeydown\,} keys. Adding \key{\shift} key increases speed by 10,
 adding \key{\Alt} multiplies by 5 (pressing both keys multiplies by 50!). If you release \key{\ctrl} before
@@ -291,6 +291,8 @@ already, you can separate them using \program{Blender}:
 \parameter{map\_Ke}       & (none)      & filename       & texture map to be mixed with Ke \\
 \parameter{map\_bump}     & (none)      & filename       & normal map for surface roughness\\  
 \parameter{illum}         & 2           & integer        & illumination mode in the standard MTL format. \\
+\parameter{vis\_fadeIn}   & (none)      & double         & see \ref{sec:scenery3d:Beyond3D}\\
+\parameter{vis\_fadeOut}  & (none)      & double         & see \ref{sec:scenery3d:Beyond3D}\\
 \bottomrule
 \end{tabular}
 \caption{MTL parameters evaluated}
@@ -384,15 +386,15 @@ in order to easily switch the model to the right state prior to exporting.
 
 Filename recommendations: 
 
-
-\begin{longtabu}to \textwidth {lX} 
+\noindent%
+\begin{tabularx}{\textwidth}{lX} 
 \file{<Temple>.skp}         &Name of a Sketchup Model file. 
                              (The \file{<>} brackets signal ``use your own name here!'')
                              The SKP file is not used by Scenery3d, but you may want
                              to leave it in the folder for later improvements.\\
 \file{<Temple>.obj}         &Model in OBJ format. \\
 \file{<Temple>\_ground.obj} &Ground layer, if different from Model file. 
-\end{longtabu}
+\end{tabularx}
 
 \noindent OBJ export may also create folders \file{TX\_<Temple>} and
 \file{TX\_<Temple>\_ground}. You can delete the \file{TX\_<Temple>\_ground} folder, 
@@ -417,12 +419,13 @@ follows.
 %
 % TBD GZ: Release this Sketchup export plugin?
 
-\begin{longtabu}to \textwidth {lX} 
+\noindent%
+\begin{tabularx}{\textwidth}{lX} 
 \texttt{[model]}&\\
 \texttt{name=<Temple>}&      Unique ID within all models in scenery3d directory.
                              Recommendation: use directory name.\\
 \texttt{landscape=<landscapename>}& Name of an available Stellarium landscape.
-\end{longtabu}
+\end{tabularx}
 
 \noindent This is required if the landscape file includes geographical
 coordinates and your model does not: First, the location coordinates
@@ -431,11 +434,12 @@ The landscape also provides the background image of your scenery. If
 you want a zero-height (mathematical) horizon, use the provided
 landscape called \file{Zero Horizon}.
 
-\begin{longtabu}to \textwidth {lX} 
+\noindent%
+\begin{tabularx}{\textwidth}{lX} 
 \texttt{scenery=<Temple>.obj}         &The complete model, including visible ground.\\
 \texttt{ground=<Temple>\_ground.obj}  &Optional: separate ground plane. (NULL for zero altitude.)\\
 \texttt{description=<Description>}    &A basic scene description (including HTML tags)
-\end{longtabu}
+\end{tabularx}
 
 \noindent The \file{scenery3d.ini} may contain a simple scene description, but it is
 recommended to use the \emph{localizable} description format: in the scene's
@@ -444,7 +448,8 @@ directory (which contains \file{scenery3d.ini}) create files in the format
 UTF-8--encoded HTML content. \parameter{<lang>} stands for the ISO~639
 language code.
 
-\begin{longtabu}to \textwidth {lX} 
+\noindent%
+\begin{longtable}{lp{92mm}} 
 \multicolumn{2}{l}{\texttt{author=<Your Name yourname@yourplace.com>}}\\
 \multicolumn{2}{l}{\texttt{copyright=<Copyright Info>}}\\
 \texttt{obj\_order=XYZ}      & Use this if you have used an exporter which swaps Y/Z coordinates. 
@@ -464,22 +469,26 @@ language code.
                                  The default is calculated using a heuristic that incorporates
                                  scene size.\\
 \texttt{[general]}&\\
-\end{longtabu}
+\end{longtable}
 
 \noindent The general section defines some further import/rendering options.
 % GZ TBD: Why do we need ground normals? 
-%
-\begin{longtabu}to \textwidth {lX} 
+
+
+\noindent%
+\begin{tabularx}{\textwidth}{lX} 
 \texttt{transparency\_threshold=0.5}  &Defines the alpha threshold for alpha-testing, as described in section~\ref{sec:scenery3d:OBJlimitations}. Default \texttt{0.5}\\
 \texttt{scenery\_generate\_normals=0} &Boolean, if true normals are recalculated by the plugin, instead of imported. Default \texttt{false}\\
 \texttt{ground\_generate\_normals=0}  &Boolean, same as above, for ground model. Default \texttt{false}.\\
 \texttt{[location]}                   &
-\end{longtabu}
+\end{tabularx}
 
 \noindent Optional section to specify geographic longitude $\lambda$, latitude $\varphi$,
 and altitude. The section is required if \verb|coord/convergence_angle=from_grid|, else
 location is inherited from landscape.
-\begin{longtabu}to \textwidth {lX} 
+
+\noindent%
+\begin{tabularx}{\textwidth}{lX} 
 \multicolumn{2}{l}{\texttt{planet = Earth}}\\
 \texttt{latitude = +48d31'30.4"}      & Required if \texttt{coord/convergence\_angle=from\_grid}\\
 \texttt{longitude = +16d12'25.5"}     & "--"\\
@@ -492,21 +501,21 @@ location is inherited from landscape.
 \multicolumn{2}{l}{\texttt{atmospheric\_pressure = -1}}\\
 \multicolumn{2}{l}{\texttt{light\_pollution = 1}}\\
 \multicolumn{2}{l}{\texttt{[coord]}}\\
-\end{longtabu}
+\end{tabularx}
 
 \noindent Entries in the \verb|[coord]| section are again optional,
 default to zero when not specified, but are required if you want to
 display meaningful eye coordinates in your survey (world) coordinate
 system, like UTM or Gauss-Kr\"uger.
 
-\begin{longtabu}to \textwidth {lX} 
+\begin{longtable}{lp{84mm}} 
 \texttt{grid\_name=<string> }& Name of grid coordinates, e.g. \texttt{"UTM 33 U (WGS 84)"},
                                \texttt{"Gauss-Kr\"uger M34"} or \texttt{"Relative to <Center>"} This name is
                               only displayed, there is no evaluation of its contents.\\
 \texttt{orig\_E=<double> | (Easting)}  &East-West-distance to zone central meridian\\
 \texttt{orig\_N=<double> | (Northing)} &North distance from Equator\\
 \texttt{orig\_H=<double> | (Height)}   &Altitude above Mean Sea Level of model origin\\
-\end{longtabu}
+\end{longtable}
 
 \noindent These entries describe the offset, in metres, of the model coordinates relative
 to coordinates in a geographic grid, like Gauss-Kr\"uger or UTM. If you have your model
@@ -558,14 +567,14 @@ not world coordinates! (If you want the terrain height surrounding your model to
 be \texttt{orig\_H}, use 0, not the correct mean height above sea level!)  Defaults
 to minimum of height of ground level (or model, resp.) bounding box.
 
-\begin{longtabu}to \textwidth {lX} 
+\begin{tabularx}{\textwidth}{lX} 
 \multicolumn{2}{l}{\texttt{start\_E=<double>}}\\ 
 \multicolumn{2}{l}{\texttt{start\_N=<double>}} \\
 \texttt{start\_H=<double>}     &only meaningful if \texttt{ground==NULL}, else \texttt{H} is derived from ground \\
 \texttt{start\_Eye=<double>}   &default: \texttt{1.65m} \\
 \multicolumn{2}{l}{\texttt{start\_az\_alt\_fov=<az\_deg>,<alt\_deg>,<fov\_deg>}}\\
 \                                &initial view direction and field of view.\\
-\end{longtabu}
+\end{tabularx}
 
 \noindent \texttt{start\_...} defines the view position to be set after loading the scenery.
 Defaults to center of model boundingbox.
@@ -701,7 +710,7 @@ really helps if you know how to operate automatic text processors like
 You can also configure and distribute some predefined views with your
 model in a \file{viewpoints.ini} file. The viewpoints can be loaded
 and stored with the viewpoint dialog which you can call with the
-\guibutton{0.6}{bt_scenery3d_eyepoint_off} button. See the provided
+\guibutton{0.6}{bt_scenery3d_eyepoint_off.png} button. See the provided
 ``Sterngarten'' scene for an example. These entries are not editable
 by the user through the interface. The user can always save his own
 views, they will be saved into the file \file{userviews.ini} in the

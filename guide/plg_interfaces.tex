@@ -67,12 +67,12 @@ degrees along the horizon, and includes compass bearing values in
 degrees.
 
 When activated (see section~\ref{sec:Plugins:EnablingPlugins}), there
-is a tool bar button \guibutton{0.6}{bt_compass_off} for toggling the
+is a tool bar button \guibutton{0.6}{bt_compass_off.png} for toggling the
 compass markings.  Note that when you enable compass marks, the
 cardinal points will be turned off.
 
 \begin{figure}[ht]\centering
-\includegraphics[width=\textwidth]{compass-marks-plugin}
+\includegraphics[width=\textwidth]{compass-marks-plugin.png}
 \caption{Markings of Compass Marks Plugin}
 \label{fig:plugins:CompassMarks}
 \end{figure}
@@ -95,8 +95,13 @@ cardinal points will be turned off.
 %\end{figure}
 
 \begin{figure}[h]\centering
+\ifpdf
 \includegraphics[width=.3\textwidth]{GZ_analemma_p1000}
 \includegraphics[width=.3\textwidth]{GZ_analemma_p2000}
+\else
+\includegraphics[width=.3\textwidth]{GZ_analemma_p1000.png}
+\includegraphics[width=.3\textwidth]{GZ_analemma_p2000.png}
+\fi
 \caption{Figure-8 plots for Equation of Time, for years 1000 (left)
   and 2000 (right). These plots, often found on sundials, link solar
   declination (vertical axis) and its deviation at mean noon from the
@@ -123,7 +128,7 @@ is not always followed. Anyone who makes use of a published table or
 graph should first check its sign usage.
 
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), click on
-the Equation of Time button \guibutton{0.6}{bt_EquationOfTime_72dpi}
+the Equation of Time button \guibutton{0.6}{bt_EquationOfTime_72dpi.png}
 on the bottom toolbar to display the value for the equation of time on
 top of the screen.
 
@@ -134,15 +139,16 @@ top of the screen.
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Equation of Time plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-enable\_at\_startup  & bool & Display solution of the equation of time at startup of the planetarium\\\midrule
-flag\_use\_ms\_format & bool & Set format for the displayed solution - minutes and seconds and decimal minutes\\\midrule
-flag\_use\_inverted\_value & bool & Change sign of the equation of time \\\midrule
-flag\_show\_button & bool & Enable displaying plugin button on the bottom toolbar\\\midrule
-text\_color & R,G,B & Color of font for the displayed solution of the equation of time\\\midrule
-font\_size & int & Font size for the displayed solution of the equation of time \\\bottomrule
-\end{longtabu}
+enable\_at\_startup        & bool  & Display solution of the equation of time at startup of the planetarium\\\midrule
+flag\_use\_ms\_format      & bool  & Set format for the displayed solution - minutes and seconds and decimal minutes\\\midrule
+flag\_use\_inverted\_value & bool  & Change sign of the equation of time \\\midrule
+flag\_show\_button         & bool  & Enable displaying plugin button on the bottom toolbar\\\midrule
+text\_color                & R,G,B & Color of font for the displayed solution of the equation of time\\\midrule
+font\_size                 & int   & Font size for the displayed solution of the equation of time \\\bottomrule
+\end{tabularx}
 
 
 
@@ -180,7 +186,8 @@ You can configure the plugin with its dialog (Fig.~\ref{fig:plugins:FieldOfView}
 \file{config.ini} file by yourself for changes of the settings for the
 Field of View plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|r|X}\toprule
+\noindent%
+\begin{tabular}{l|l|r|l}\toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
 fov\_quick\_0  & float & 0.5& Value of FOV for the shortcut \key{\ctrl+\Alt+0} \\\midrule
 fov\_quick\_1  & float &180 & Value of FOV for the shortcut \key{\ctrl+\Alt+1} \\\midrule
@@ -192,7 +199,7 @@ fov\_quick\_6  & float & 10 & Value of FOV for the shortcut \key{\ctrl+\Alt+6} \
 fov\_quick\_7  & float &  5 & Value of FOV for the shortcut \key{\ctrl+\Alt+7} \\\midrule
 fov\_quick\_8  & float &  2 & Value of FOV for the shortcut \key{\ctrl+\Alt+8} \\\midrule
 fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \\\bottomrule
-\end{longtabu}
+\end{tabular}
 
 \newpage
 
@@ -207,7 +214,7 @@ fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \
 \end{figure}
 
 \noindent The Pointer Coordinates plugin shows the coordinates of the mouse pointer.
-If enabled, click on the plugin button \guibutton{0.6}{bt_PointerCoordinates_Off} on the bottom toolbar to display the coordinates of the mouse pointer.
+If enabled, click on the plugin button \guibutton{0.6}{bt_PointerCoordinates_Off.png} on the bottom toolbar to display the coordinates of the mouse pointer.
 
 \subsection{Section \big[PointerCoordinates\big] in config.ini file}
 \label{sec:plugins:PointerCoordinates:config}
@@ -215,18 +222,25 @@ If enabled, click on the plugin button \guibutton{0.6}{bt_PointerCoordinates_Off
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Pointer Coordinates plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
-\emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-enable\_at\_startup  & bool & Enable displaying coordinates of the mouse pointer at startup of the plugin\\\midrule
-flag\_show\_button   & bool & Enable showing the button of the plugin on bottom toolbar\\\midrule
-text\_color          & R,G,B & Color for text with coordinates of the mouse pointer \\\midrule
-font\_size           & int & Font size for the displayed coordinates of the mouse pointer \\\midrule
-current\_displaying\_place  & string & Specifies the place of displaying coordinates of the mouse pointer. \textit{Possible values}: \keymap{TopRight}, \keymap{TopCenter}, \keymap{RightBottomCorner}, \keymap{Custom}. \textit{Default value}: \keymap{TopRight}. \\\midrule
-current\_coordinate\_system & string & Specifies the coordinate system. \textit{Possible values}: \keymap{RaDecJ2000}, \keymap{RaDec}, \keymap{HourAngle}, \keymap{Ecliptic}, \keymap{AltAzi}, \keymap{Galactic}. \textit{Default value}: \keymap{RaDecJ2000}. \\\midrule
-custom\_coordinates  & int,int & Specifies the screen coordinates of the custom place for displaying coordinates of the mouse pointer \\\midrule
-flag\_show\_constellation &bool& Add the 3-letter IAU\index{IAU} abbreviation for the constellation the mouse pointer sits in \cite{1987PASP...99..695R}.\\\midrule
-flag\_show\_crossed\_lines &bool& Show crossed line under mouse cursor.\\\bottomrule
-\end{longtabu}
+\begin{longtable}{l|l|p{83mm}}\toprule
+\emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
+enable\_at\_startup         & bool   & Enable displaying coordinates of the mouse pointer at startup of the plugin\\\midrule
+flag\_show\_button          & bool   & Enable showing the button of the plugin on bottom toolbar\\\midrule
+text\_color                 & R,G,B  & Color for text with coordinates of the mouse pointer \\\midrule
+font\_size                  & int    & Font size for the displayed coordinates of the mouse pointer \\\midrule
+current\_displaying\_place  & string & Specifies the place of displaying coordinates of the mouse pointer. 
+                                       \textit{Possible values}: \keymap{TopRight}, \keymap{TopCenter}, 
+									   \keymap{RightBottomCorner}, \keymap{Custom}. 
+									   \textit{Default value}: \keymap{TopRight}. \\\midrule
+current\_coordinate\_system & string & Specifies the coordinate system. \textit{Possible values}: 
+                                       \keymap{RaDecJ2000}, \keymap{RaDec}, \keymap{HourAngle}, \keymap{Ecliptic}, 
+									   \keymap{AltAzi}, \keymap{Galactic}. 
+									   \textit{Default value}: \keymap{RaDecJ2000}. \\\midrule
+custom\_coordinates        & int,int & Specifies the screen coordinates of the custom place for displaying coordinates of the mouse pointer \\\midrule
+flag\_show\_constellation  & bool    & Add the 3-letter IAU\index{IAU} abbreviation for the constellation the 
+                                       mouse pointer sits in \cite{1987PASP...99..695R}.\\\midrule
+flag\_show\_crossed\_lines & bool    & Show crossed line under mouse cursor.\\\bottomrule
+\end{longtable}
 
 
 
@@ -275,86 +289,86 @@ given in section~\ref{sec:plugins:TUI:commands}.
 
 \subsection{TUI Commands}
 \label{sec:plugins:TUI:commands}
-\begin{longtabu} to \textwidth {l|l|X}
+\begin{longtable}{l|p{45mm}|p{85mm}}
 \toprule
 1   & Location & (menu group)\\\midrule
-1.1 & Latitude & Set the latitude of the observer in degrees\\\midrule
-1.2 & Longitude & Set the longitude of the observer in degrees\\\midrule
-1.3 & Altitude & Set the altitude of the observer in meters\\\midrule
+1.1 & Latitude & Set the latitude of the observer in degrees\\%\midrule
+1.2 & Longitude & Set the longitude of the observer in degrees\\%\midrule
+1.3 & Altitude & Set the altitude of the observer in meters\\%\midrule
 1.4 & Solar System Body & Select the solar system body on which the observer is\\\midrule
 2   & Set Time & (menu group)\\\midrule
-2.1 & Current date/time & Set the time and date for which Stellarium will generate the view\\\midrule
+2.1 & Current date/time & Set the time and date for which Stellarium will generate the view\\%\midrule
 %2.2 & Set Time Zone & Set the time zone. Zones are split into continent or region, and then by city or province\\\midrule
 %2.3 & Days keys & The setting ``Calendar'' makes the \key{-}, \key{=}, \key{[}, \key{]} keys change the date value by calendar days (multiples of 24 hours). 
 %                  The setting ``Sidereal day'' changes these keys to change the date by sidereal days\\\midrule
 2.2 & Set Time Zone & (disabled in 0.15)\\
 2.3 & Days keys & (disabled in 0.15)\\
-2.4 & Startup date/time preset & Select the time which Stellarium starts with (if the ``Sky Time At Start-up'' setting is ``Preset Time''\\\midrule
+2.4 & Startup date/time preset & Select the time which Stellarium starts with (if the ``Sky Time At Start-up'' setting is ``Preset Time''\\%\midrule
 2.5 & Startup date and time & The setting ``system'' sets Stellarium's time to the computer clock when Stellarium runs. 
-                                 The setting ``preset'' selects a time set in menu item ``2.4 - Startup date/time preset''\\\midrule
+                                 The setting ``preset'' selects a time set in menu item ``2.4 - Startup date/time preset''\\%\midrule
 2.6 & Date Display Format & Change how Stellarium formats date values. ``system\_default'' takes the format from the computer settings, 
-                            or it is possible to select ``yyyymmdd'', ``ddmmyyyy'' or ``mmddyyyy'' modes\\\midrule
+                            or it is possible to select ``yyyymmdd'', ``ddmmyyyy'' or ``mmddyyyy'' modes\\%\midrule
 2.7 & Time Display Format & Change how Stellarium formats time values. ``system\_default'' takes the format from the computer settings, 
                             or it is possible to select ``24h'' or ``12h'' clock modes\\\midrule
-3    & General & (menu group)\\\midrule
-3.1  & Starlore & Select the sky culture to use (changes constellation lines, names, artwork)\\\midrule
-3.2  & Sky Language & Change the language used to describe objects in the sky\\\midrule
+3    & General      & (menu group)\\\midrule
+3.1  & Starlore     & Select the sky culture to use (changes constellation lines, names, artwork)\\%\midrule
+3.2  & Sky Language & Change the language used to describe objects in the sky\\%\midrule
 3.3  & App Language & Change the application language (used in GUIs) \\\midrule
-4    & Stars & (menu group)\\\midrule
-4.1  & Show stars & Turn on/off star rendering\\\midrule
-4.2  & Relative Scale & Change the relative brightness of the stars. Larger values make bright stars much larger.\\\midrule
-4.3  & Absolute Scale & Change the absolute brightness of the stars. Large values show more stars. Leave at 1 for realistic views. \\\midrule
-4.4  & Twinkle & Sets how strong the star twinkling effect is - zero is off, the higher the value the more the stars will twinkle.\\\midrule
-5    & Colors & (menu group)\\\midrule
-5.1  & Constellation lines         & Changes the colour of the constellation lines\\\midrule
-5.2  & Constellation labels        & Changes the colour of the labels used to name stars\\\midrule
-5.3  & Art brightness              & Changes the brightness of the constellation art\\\midrule
-5.4  & Constellation boundaries    & Changes the colour of the constellation boundary lines\\\midrule
-5.5  & Cardinal points             & Changes the colour of the cardinal points markers\\\midrule
-5.6  & Planet labels               & Changes the colour of the labels for planets\\\midrule
-5.7  & Planet orbits               & Changes the colour of the orbital guide lines for planets\\\midrule
-5.8  & Planet trails               & Changes the colour of the planet trails lines\\\midrule
-5.9  & Meridian Line               & Changes the colour of the meridian line\\\midrule
-5.10 & Azimuthal Grid              & Changes the colour of the lines and labels for the azimuthal grid\\\midrule
-5.11 & Equatorial Grid             & Changes the colour of the lines and labels for the equatorial grid\\\midrule
-5.12 & Equatorial J2000 Grid       & Changes the colour of the lines and labels for the equatorial J2000.0 grid\\\midrule
-5.13 & Equator Line                & Changes the colour of the equator line\\\midrule
-5.14 & Ecliptic Line               & Changes the colour of the ecliptic line\\\midrule
-5.15 & Ecliptic Line (J2000)       & Changes the colour of the J2000 ecliptic line\\\midrule
-5.16 & Nebula names                & Changes the colour of the labels for nebulae\\\midrule
-5.17 & Nebula hints                & Changes the colour of the circles used to denote the positions of unspecified nebulae\\\midrule
-5.18 & Galaxy hints                & Changes the colour of the ellipses used to denote the positions of galaxies\\\midrule
-5.19 & Bright nebula hints         & Changes the colour of the squares used to denote the positions of bright nebulae\\\midrule
-5.20 & Dark nebula hints           & Changes the colour of the squares used to denote the positions of dark nebulae\\\midrule
-5.21 & Clusters hints              & Changes the colour of the symbols used to denote the positions of clusters\\\midrule
-5.22 & Horizon line                & Changes the colour of the horizon line\\\midrule
-5.23 & Galactic grid               & Changes the colour of the galactic grid\\\midrule
-5.24 & Galactic equator line       & Changes the colour of the galactic equator line\\\midrule
-5.25 & Opposition/conjunction longitude line & Changes the colour of the opposition/conjunction line\\\midrule
-6   & Effects & (menu group)\\\midrule
-6.1 & Light Pollution & Changes the intensity of the light pollution (see Appendix~\ref{ch:BortleScale} Bortle Scale index)\\\midrule
-6.2 & Landscape   & Select the landscape which Stellarium draws when ground drawing is enabled. Press \key{\return} to activate.\\\midrule
-6.3 & Setting Landscape Sets Location & If ``Yes'' then changing the landscape will move the observer location to the location for that landscape (if one is known). 
-                                        Setting this to ``No'' means the observer location is not modified when the landscape is changed.\\\midrule
-6.4 & Auto zoom out returns to initial \ldots view & Changes the behaviour when zooming out from a selected object.
-                    When set to ``Off'', selected object will stay in center.
-                    When set to ``On'', view will return to startup view. \\\midrule
-6.5 & Zoom Duration & Sets the time for zoom operations to take (in seconds)\\\midrule
-6.6 & Milky Way intensity & Changes the brightness of the Milky Way\\\midrule
-6.7 & Zodiacal light intensity & Changes the brightness of the Zodiacal light\\\midrule
-%6.6 & Nebula label frequency & Changes the magnitude limit for labelling of nebulae\\\midrule
-%6.6 & Nebula label frequency & (not active) \\\midrule
-%6.8 & Cursor Timeout & Sets the number of seconds of mouse inactivity before the cursor vanishes\\\midrule
-7 & Scripts & (menu group)\\\midrule
-7.1 & Run local script       & Run a script from the scripts sub-directory of the User Directory or Installation Directory 
-                               (see section~\ref{sec:FilesAndDirectories} (Files and Directories))\\\midrule
-7.1 & Stop running script    & Stop execution of a currently running script \\\midrule
-%7.2 & CD/DVD Script          & Run a script from a CD or DVD (only used in planetarium set-ups)\\\midrule
-8   & Administration             & (menu group)\\\midrule
-8.1 & Load default configuration & Reset all settings according to the main configuration file\\\midrule
-8.2 & Save current configuration & Save the current settings to the main configuration file\\\midrule
-8.3 & Shutdown                   & Emits a command configured in \\\midrule
-\end{longtabu}
+4    & Stars          & (menu group)\\\midrule
+4.1  & Show stars     & Turn on/off star rendering\\%\midrule
+4.2  & Relative Scale & Change the relative brightness of the stars. Larger values make bright stars much larger.\\%\midrule
+4.3  & Absolute Scale & Change the absolute brightness of the stars. Large values show more stars. Leave at 1 for realistic views. \\%\midrule
+4.4  & Twinkle        & Sets how strong the star twinkling effect is - zero is off, the higher the value the more the stars will twinkle.\\\midrule
+5    & Colors                      & (menu group)\\\midrule
+5.1  & Constellation lines         & Changes the colour of the constellation lines\\%\midrule
+5.2  & Constellation labels        & Changes the colour of the labels used to name stars\\%\midrule
+5.3  & Art brightness              & Changes the brightness of the constellation art\\%\midrule
+5.4  & Constellation boundaries    & Changes the colour of the constellation boundary lines\\%\midrule
+5.5  & Cardinal points             & Changes the colour of the cardinal points markers\\%\midrule
+5.6  & Planet labels               & Changes the colour of the labels for planets\\%\midrule
+5.7  & Planet orbits               & Changes the colour of the orbital guide lines for planets\\%\midrule
+5.8  & Planet trails               & Changes the colour of the planet trails lines\\%\midrule
+5.9  & Meridian Line               & Changes the colour of the meridian line\\%\midrule
+5.10 & Azimuthal Grid              & Changes the colour of the lines and labels for the azimuthal grid\\%\midrule
+5.11 & Equatorial Grid             & Changes the colour of the lines and labels for the equatorial grid\\%\midrule
+5.12 & Equatorial J2000 Grid       & Changes the colour of the lines and labels for the equatorial J2000.0 grid\\%\midrule
+5.13 & Equator Line                & Changes the colour of the equator line\\%\midrule
+5.14 & Ecliptic Line               & Changes the colour of the ecliptic line\\%\midrule
+5.15 & Ecliptic Line (J2000)       & Changes the colour of the J2000 ecliptic line\\%\midrule
+5.16 & Nebula names                & Changes the colour of the labels for nebulae\\%\midrule
+5.17 & Nebula hints                & Changes the colour of the circles used to denote the positions of unspecified nebulae\\%\midrule
+5.18 & Galaxy hints                & Changes the colour of the ellipses used to denote the positions of galaxies\\%\midrule
+5.19 & Bright nebula hints         & Changes the colour of the squares used to denote the positions of bright nebulae\\%\midrule
+5.20 & Dark nebula hints           & Changes the colour of the squares used to denote the positions of dark nebulae\\%\midrule
+5.21 & Clusters hints              & Changes the colour of the symbols used to denote the positions of clusters\\%\midrule
+5.22 & Horizon line                & Changes the colour of the horizon line\\%\midrule
+5.23 & Galactic grid               & Changes the colour of the galactic grid\\%\midrule
+5.24 & Galactic equator line       & Changes the colour of the galactic equator line\\%\midrule
+5.25 & Opposition/conjunction longitude line  & Changes the colour of the opposition/conjunction line\\\midrule
+6    & Effects & (menu group)\\\midrule
+6.1  & Light Pollution & Changes the intensity of the light pollution (see Appendix~\ref{ch:BortleScale} Bortle Scale index)\\%\midrule
+6.2  & Landscape       & Select the landscape which Stellarium draws when ground drawing is enabled. Press \key{\return} to activate.\\%\midrule
+6.3  & Setting Landscape Sets Location & If ``Yes'' then changing the landscape will move the observer location to the location for that landscape (if one is known). 
+                                         Setting this to ``No'' means the observer location is not modified when the landscape is changed.\\%\midrule
+6.4  & Auto zoom out returns to initial \ldots view & Changes the behaviour when zooming out from a selected object.
+                                                      When set to ``Off'', selected object will stay in center.
+                                                      When set to ``On'', view will return to startup view. \\%\midrule
+6.5  & Zoom Duration              & Sets the time for zoom operations to take (in seconds)\\%\midrule
+6.6  & Milky Way intensity        & Changes the brightness of the Milky Way\\%\midrule
+6.7  & Zodiacal light intensity   & Changes the brightness of the Zodiacal light\\\midrule
+%6.6 & Nebula label frequency     & Changes the magnitude limit for labelling of nebulae\\\midrule
+%6.6 & Nebula label frequency     & (not active) \\\midrule
+%6.8 & Cursor Timeout             & Sets the number of seconds of mouse inactivity before the cursor vanishes\\\midrule
+7    & Scripts                    & (menu group)\\\midrule
+7.1  & Run local script           & Run a script from the scripts sub-directory of the User Directory or Installation Directory 
+                                   (see section~\ref{sec:FilesAndDirectories} (Files and Directories))\\%\midrule
+7.1  & Stop running script        & Stop execution of a currently running script \\\midrule
+%7.2 & CD/DVD Script              & Run a script from a CD or DVD (only used in planetarium set-ups)\\\midrule
+8    & Administration             & (menu group)\\\midrule
+8.1  & Load default configuration & Reset all settings according to the main configuration file\\%\midrule
+8.2  & Save current configuration & Save the current settings to the main configuration file\\%\midrule
+8.3  & Shutdown                   & Emits a command configured in \\\midrule
+\end{longtable}
 
 
 \subsection{Section \big[tui\big] in config.ini file}
@@ -362,17 +376,20 @@ given in section~\ref{sec:plugins:TUI:commands}.
 
 The section in \file{config.ini} for this plugin is named only \texttt{[tui]} for historical reasons. As always, be careful when editing!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
-\emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-tui\_font\_color     & R,G,B & Font color for TUI text \\\midrule
-tui\_font\_size      & int   & Font size for the TUI \\\midrule
-flag\_show\_gravity\_ui           &bool&Bend menu text around the screen center. 
-                                        May be useful in planetarium setups, and should then be used together with ``Disc viewport'' 
-                                        in the configuration menu (see~\ref{sec:gui:configuration:tools}). \\\midrule
-flag\_show\_tui\_datetime         &bool&Show date and time in lower center.\\\midrule
-flag\_show\_tui\_short\_obj\_info &bool&Show some object info in lower right, or (in planetarium setups with ``Disc viewport'' active,) wrapped along the outer circle border. \\\midrule
-admin\_shutdown\_cmd              &string& executable command to shutdown your system. Best used on Linux or Mac systems. E.g.\ \texttt{shutdown -h now}\\\bottomrule
-\end{longtabu}
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\emph{ID}                   & \emph{Type} & \emph{Description}\\\midrule
+tui\_font\_color                  & R,G,B & Font color for TUI text \\%\midrule
+tui\_font\_size                   & int   & Font size for the TUI \\%\midrule
+flag\_show\_gravity\_ui           & bool  & Bend menu text around the screen center. 
+                                            May be useful in planetarium setups, and should then be used together with ``Disc viewport'' 
+                                            in the configuration menu (see~\ref{sec:gui:configuration:tools}). \\%\midrule
+flag\_show\_tui\_datetime         & bool  & Show date and time in lower center.\\%\midrule
+flag\_show\_tui\_short\_obj\_info & bool  & Show some object info in lower right, or (in planetarium setups with 
+                                            ``Disc viewport'' active,) wrapped along the outer circle border. \\%\midrule
+admin\_shutdown\_cmd              & string & executable command to shutdown your system. 
+                                            Best used on Linux or Mac systems. E.g.\ \command{shutdown -h now}\\\bottomrule
+\end{tabularx}
 
 
 
@@ -403,7 +420,7 @@ and scripts using HTTP calls like with the tools \file{wget} and \file{curl}.
 \label{sec:plugins:RemoteControl:using}
 
 \begin{figure}[h]
-\centering\includegraphics[width=\columnwidth]{remote_web}
+\centering\includegraphics[width=\columnwidth]{remote_web.png}
 \caption{The default remote control web interface}
 \label{fig:plugins:RemoteControl:using}
 \end{figure}
@@ -411,7 +428,7 @@ and scripts using HTTP calls like with the tools \file{wget} and \file{curl}.
 After enabling the plugin, you can set it up through the configuration dialog. 
 You can configure it to start the web server automatically whenever Stellarium starts 
 or manually start/stop the server using the ``Server enabled'' checkbox or the 
-button \includegraphics[scale=0.5]{remote} in the toolbar.
+button \guibutton{0.6}{remote.png} in the toolbar.
 
 The plugin starts an HTTP server on the specified port. The default port is 
 8090, so you should reach the remote control after enabling it by starting 
@@ -438,9 +455,9 @@ forwarding or a DMZ is configured.}
 
 
 If you are familiar with the main Stellarium interface, you should easily find 
-your way around the web interface. The remote control automatically uses the 
-same language as set in the main program. Tabs at the top allow access to 
-different settings and controls. 
+your way around the web interface. 
+%The remote control automatically uses the same language as set in the main program. 
+Tabs at the top allow access to different settings and controls. 
 
 \begin{description}
 \item[Main] Contains the time controls and most of the buttons of the 
@@ -498,8 +515,8 @@ Depending on your operating system or command shell, you may have to use double 
 
 If you are a developer and would like to add functionality to the Remote 
 Control API, customize the web interface or access the API through another 
-program, further information can be found in the 
-\href{http://stellarium.org/doc-plugins/head/}{plugin's developer documentation}.
+program, further information can be found in the plugin's 
+developer documentation\footnote{\url{http://stellarium.org/doc/head/remoteControlDoc.html}}.
 
 This plugin was created by Florian Schaukowitsch in the 2015 campaign of the 
 \href{http://sophia.estec.esa.int/socis/}{ESA Summer of Code in Space} programme. 
@@ -528,7 +545,7 @@ configurable, and the clients must know the IP address or host name and the port
 of the server.
 
 \begin{figure}[h]
-	\centering\includegraphics[width=\columnwidth]{remotesync_settings}
+	\centering\includegraphics[width=\columnwidth]{remotesync_settings.png}
 	\caption{RemoteSync settings window}
 	\label{fig:plugins:RemoteSync:settings}
 \end{figure}
@@ -577,7 +594,7 @@ If all your Stellarium instances run on the same device, this is of course not
 necessary.
 
 \begin{figure}[h]
-	\centering\includegraphics[width=\columnwidth]{remotesync_client}
+	\centering\includegraphics[width=\columnwidth]{remotesync_client.png}
 	\caption{RemoteSync client settings window}
 	\label{fig:plugins:RemoteSync:client}
 \end{figure}
@@ -609,11 +626,11 @@ a close-up view of the currently centered object. Or just show several sky cultu
 or show the sky at different locations, \ldots. 
 
 The names of all available StelProperties from which you might want to select a few to exclude  
-from synchronisation can also be found with a little scripting. 
+from synchronisation can also be found with a little scripting (see chapter ~\ref{ch:scripting}). 
 Open the script console \key{F12} and enter the following call:
-\begin{commands}
+\begin{script}
 core.output(core.getPropertyList());
-\end{commands}
+\end{script}
 Run the script and inspect the output tab. It may take a little guesswork to select the right names, 
 but the general structure of property names like 
 \texttt{<Module>.<Property>} should help you to find your way around.
@@ -664,25 +681,25 @@ On this tab, you also find the option to connect to the MPC and download current
 or load a text file in the format provided by MPC (see figures \ref{fig:SolarSystemEditor:ImportData:InitialView} and \ref{fig:SolarSystemEditor:ImportData:FinalView}). 
 
 \begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile}
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-conffile.png}
 \caption{Interface of Solar System Editor plugin: Configuration file tab}
 \label{fig:SolarSystemEditor:ConfigurationFile}
 \end{figure}
 
 \begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys}
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-solsys.png}
 \caption{Interface of Solar System Editor plugin: Solar System tab}
 \label{fig:SolarSystemEditor:SolarSystem}
 \end{figure}
 
 \begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import}
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import.png}
 \caption{Interface of Solar System Editor plugin: Import data dialog}
 \label{fig:SolarSystemEditor:ImportData:InitialView}
 \end{figure}
 
 \begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import2}
+\includegraphics[width=.75\textwidth]{SolarSystemEditor-plugin-import2.png}
 \caption{Interface of Solar System Editor plugin: Import data dialog --- view after downloading and parsing the MPC data.}
 \label{fig:SolarSystemEditor:ImportData:FinalView}
 \end{figure}

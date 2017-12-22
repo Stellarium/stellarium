@@ -86,7 +86,7 @@ picture of the bear has been removed and only a constellation diagram
 remains.
 
 \begin{figure}[hb]
-\centering\includegraphics[scale=0.8]{uma}
+\centering\includegraphics[scale=0.8]{uma.png}
 \caption{Ursa Major}
 \label{fig:ursamajor}
 \end{figure}
@@ -239,7 +239,7 @@ followed by the RA/Dec coordinates, apparent magnitude, distance and
 other data.
 
 \begin{figure}[h]
-\centering\includegraphics{names}
+\centering\includegraphics{names.png}
 \caption{Star Names and Data}
 \label{fig:starnames}
 \end{figure}
@@ -261,8 +261,8 @@ emits --- the \indexterm{spectrum} --- a great deal of interesting information
 can be discovered about a star including its surface temperature, and
 the presence of various elements in its atmosphere.
 
-\begin{table}[htb]
-  \centering
+\begin{table}[tb]
+  \centering\small
   \begin{tabular}{lll}
 \toprule
 \emph{Spectral Type} & \emph{Surface Temperature (K)} & \emph{Star Colour}\\\midrule
@@ -309,8 +309,8 @@ The \indexterm{luminosity class} is an indication of the type of star ---
 whether it is main sequence, a giant or a dwarf. Luminosity classes are
 denoted by a number in roman numerals, as described in table~\ref{tab:luminosityclass}.
 
-\begin{table}[htb]
-  \centering
+\begin{table}[tb]
+  \centering\small
   \begin{tabular}{lll}
 \toprule
 \emph{Luminosity class} & \emph{Description}\\\midrule
@@ -336,7 +336,7 @@ in figure~\ref{fig:colourmag} (which is technically a colour/magnitude
 plot).
 
 \begin{figure}[tp]
-\centering\includegraphics[width=\textwidth]{colour_magnitude_graph}
+\centering\includegraphics[width=\textwidth]{colour_magnitude_graph.png}
 \caption{Hertzsprung-Russell Diagram}
 \label{fig:colourmag}
 \end{figure}
@@ -367,6 +367,9 @@ in brightness as seen from the Earth. These include rotating variables,
 stars whose apparent brightness change due to rotation, and eclipsing
 binaries.
 
+Stellarium's catalogs include many kinds variable stars. 
+See section~\ref{sec:StarCatalogues:VariableStars} for more details. 
+
 \section{Our Moon}
 \label{sec:Moon}
 
@@ -386,20 +389,23 @@ from being totally in shadow to being fully illuminated and back to
 being in shadow again. This process is divided up into various phases as
 described in table~\ref{tab:moonphases}.
 
-\begin{longtabu} to \textwidth {l|X}
+\begin{table}[b]
+\small
+\begin{tabularx}{\textwidth}{l|X}
 \toprule
-New Moon&The moon's disc is fully in shadow, or there is just a slither of illuminated surface on the edge.\\
+New Moon       & The moon's disc is fully in shadow, or there is just a slither of illuminated surface on the edge.\\
 Waxing Crescent& Less than half the disc is illuminated, but more is illuminated each night.\\
-First Quarter& Approximately half the disc is illuminated, and increasing each night.\\
-Waxing Gibbous& More than half of the disc is illuminated, and still increasing each night.\\
-Full Moon& The whole disc of the moon is illuminated.\\
-Waning Gibbous& More than half of the disc is illuminated, but the amount gets smaller each night.\\
-Last Quarter & Approximately half the disc is illuminated, but this gets less each night.\\
+First Quarter  & Approximately half the disc is illuminated, and increasing each night.\\
+Waxing Gibbous & More than half of the disc is illuminated, and still increasing each night.\\
+Full Moon      & The whole disc of the moon is illuminated.\\
+Waning Gibbous & More than half of the disc is illuminated, but the amount gets smaller each night.\\
+Last Quarter   & Approximately half the disc is illuminated, but this gets less each night.\\
 Waning Crescent& Less than half the disc of the moon is illuminated, and this gets less each night.\\
 \bottomrule
+\end{tabularx}
 \caption{Lunar Phases}
 \label{tab:moonphases}
-\end{longtabu}
+\end{table}
 
 \newpage
 \section{The Major Planets}
@@ -413,7 +419,7 @@ formal definition of a planet, leading to some confusion about the
 classification for some bodies traditionally regarded as being planets, but
 which didn't seem to fit with the others.
 
-In 2006 the International Astronomical Union defined a planet as a
+In 2006 the International Astronomical Union (IAU)\index{IAU} defined a planet as a
 celestial body that, within the Solar System:
 
 \begin{enumerate}
@@ -526,8 +532,9 @@ which has an orbital period of roughly 76~years.
 \label{sec:Phenomena:Meteoroids}
 
 These objects are small pieces of space debris left over from the early
-days of the solar system that orbit the Sun. They come in a variety of
-shapes, sizes an compositions, ranging from microscopic dust particles
+days of the solar system or which crumbled off a comet when it came close to the sun. 
+These particles orbit the Sun and come in a variety of shapes, 
+sizes an compositions, ranging from microscopic dust particles
 up to about ten meters across.
 
 Sometimes these objects collide with the Earth. The closing speed of
@@ -546,13 +553,18 @@ Sometimes the angle of the collision means that larger objects pass
 through the atmosphere but do not strike the Earth. When this happens,
 spectacular fireballs are sometimes seen.
 
-\emph{Meteoroids} is the name given to such objects when they are
-floating in space.
-
-A \emph{Meteor} is the name given to the visible atmospheric phenomenon.
-
-\emph{Meteorites} is the name given to objects that penetrate the
-atmosphere and land on the surface.
+To clarify some terminology:
+\begin{description}
+\item[Meteoroids]  are the objects when they are floating in space.
+\item[Meteor] is the name given to the visible atmospheric phenomenon.
+\begin{description}
+ \item[Shooting Star] colloquial term for a small meteor
+ \item[Fireball, Bolide] term for a very bright meteor. These illuminate the landscape, 
+  sometimes for several seconds, and occasionally even cause sounds. These are also candidates for 
+\end{description}
+\item[Meteorites], the objects that penetrate the
+atmosphere and land (or \emph{impact}) on the surface.
+\end{description}
 
 In some nights over the year you can observe increased meteorite
 activity. Those meteors seem to come from a certain point in the sky,
@@ -794,7 +806,12 @@ side but concentrating on the object's location can often reveal it.
 \label{sec:phenomena:Extinction}
 
 \begin{figure}[tb]
-\centering\includegraphics[width=\textwidth]{gz_extinctionmag}
+\centering
+\ifpdf
+\includegraphics[width=\textwidth]{gz_extinctionmag}
+\else
+\includegraphics[width=\textwidth]{gz_extinctionmag.png}
+\fi
 \caption{Airmass and Extinction.  The figure shows Airmass (blue)
   along the line of sight in the altitude labeled on the left side.
   The green curves show how many magnitudes an object is dimmed down,
@@ -838,7 +855,12 @@ usable for good locations in lower altitudes.
 %\end{figure}
 
 \begin{sidewaysfigure}%[p]
-\centering\includegraphics[width=\textwidth]{gz_refraction}
+\centering
+\ifpdf
+\includegraphics[width=\textwidth]{gz_refraction}
+\else
+\includegraphics[width=\textwidth]{gz_refraction.png}
+\fi
 \caption{Refraction. The figure shows corrective values (degrees)
   which are subtracted from observed altitudes (left side) to reach
   geometric altitudes, or values to be added to computed values (right

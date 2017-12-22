@@ -21,12 +21,13 @@ Stellarium's DSO Catalog contains over 90000 objects\footnote{An extended editio
 with over one million objects may be downloaded and installed manually (see section \ref{sec:ExtraData:DSOs}).} 
 (up to $15.5^m$ for galaxies) and is available for end users as collection of files:
 
-\begin{longtabu} to \textwidth {lX}
+\noindent%
+\begin{tabularx}{\textwidth}{lX}
 %\emph{File} & \emph{Description}\\
 \file{catalog.txt} &Stellarium DSO Catalog in ASCII format for editing data\\
 \file{catalog.dat} &Stellarium DSO Catalog in zipped binary format for usage within Stellarium\\
 \file{names.dat}   &List of proper names of the objects from file \file{catalog.dat}
-\end{longtabu}
+\end{tabularx}
 
 ASCII file can be converted into binary format through enabling an option in the file \file{config.ini} (See \ref{sec:ConfigurationFile}):
 \begin{configfile}
@@ -36,7 +37,11 @@ convert_dso_catalog = true
 
 The file \file{catalog.txt} should be put into the directory
 \file{.../nebulae/default/} and you should create an empty 
-file \file{catalog.pack} to storing the binary catalog. After converting the data into binary format you should gzipped them by the command \command{gzip -nc catalog.pack > catalog.dat}.
+file \file{catalog.pack} to storing the binary catalog. After converting the data into binary format 
+you should gzip them by the command 
+\begin{commands}
+gzip -nc catalog.pack > catalog.dat
+\end{commands}
 
 Stellarium DSO Catalog contains data and supports the designations for
 follow catalogues:
@@ -65,7 +70,10 @@ follow catalogues:
 \item[\textbf{ACO}]  A Catalog of Rich Clusters of Galaxies~\cite{1989ApJS...70....1A}\newFeature{V0.16.1}
 \end{description}
 
-Cross-index data for Stellarium DSO Catalog is partially obtained from ``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M} and astronomical databases SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr/simbad/}}~\cite{2000A&AS..143....9W} and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
+\noindent Cross-index data for Stellarium's DSO Catalog is partially obtained from 
+``Merged catalogue of reflection nebulae''~\cite{2003A&A...399..141M} and astronomical databases 
+SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr/simbad/}}~\cite{2000A&AS..143....9W} 
+and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
 
 \subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
@@ -78,7 +86,7 @@ within the program.
 Each line contains one record, each record consisting of the following
 fields with \emph{tab} char as delimiter:
 
-\begin{longtabu} to \textwidth {l|l|X}
+\begin{longtable}{r|l|p{110mm}}
 \toprule
 \emph{Column} & \emph{Type} & \emph{Description}\\\midrule
  1 & integer & Deep-Sky Object Identificator\\
@@ -119,14 +127,14 @@ fields with \emph{tab} char as delimiter:
 36 & string  & SNR G identificator (A catalogue of Galactic supernova remnants)\\
 37 & string  & ACO identificator (A Catalog of Rich Clusters of Galaxies)\\
 \bottomrule
-\end{longtabu}
+\end{longtable}
 
 \subsubsection{Types of Objects}
 \label{sec:dso:types}
 
 Possible values for type of objects in the file \texttt{catalog.dat}.
 
-\begin{longtabu} to \textwidth {l|X}
+\begin{longtable}{l|p{120mm}}
 \toprule
 \emph{Type} & \emph{Description}\\\midrule
 G   & Galaxy\\
@@ -170,7 +178,7 @@ EM$\ast$ & Emission-line Star\\
 CLG & Cluster of galaxies\\
 \emph{empty} & Unknown type, catalog errors, \emph{Unidentified Southern Objects} etc.\\
 \bottomrule
-\end{longtabu}
+\end{longtable}
 
 \subsection{Modifying names.dat}%\label{modifying-names.dat}
 \label{sec:dso:modifyingNamesDat}
@@ -182,7 +190,8 @@ this file.
 
 The record structure is as follows:
 
-\begin{longtabu} to \textwidth {l|l|l|X}
+\noindent%
+\begin{tabularx}{\textwidth}{r|r|l|X}
 \toprule
 \emph{Offset} & \emph{Length} & \emph{Type} & \emph{Description}\\
 \midrule
@@ -190,9 +199,9 @@ The record structure is as follows:
 5  & 15 & \%d  & Identificator for object in the catalog\\
 20 & 60 & \%s  & Proper name of the object (translatable)\\
 \bottomrule
-\end{longtabu}
+\end{tabularx}
 
-If an object has more than one record in the file \file{names.dat},
+\noindent If an object has more than one record in the file \file{names.dat},
 the last record in the file will be used for the nebula label.
 
 \subsection{Modifying textures.json}%\label{modifying-textures.json}
@@ -288,7 +297,8 @@ textures for a more accurate display.
 
 \noindent\newFeature{V0.16.1}Each line in the file \file{outlines.dat} contains three ``columns'' of data for outline elements. The structure for each line is as follows:
 
-\begin{longtabu} to \textwidth {l|l|l|X}
+\noindent%
+\begin{tabularx}{\textwidth}{r|r|l|X}
 \toprule
 \emph{Offset} & \emph{Length} & \emph{Type} & \emph{Description}\\
 \midrule
@@ -296,13 +306,14 @@ textures for a more accurate display.
 10 & 18 & \%d  & Declination (decimal degrees)\\
 20 & 60 & \%s  & Command\\
 \bottomrule
-\end{longtabu}
+\end{tabularx}
 
-A coordinates for each point of outline is represented in equatorial coordinate system for epoch J2000.0. The possible values of third ``column'' (\emph{Command}) is:
+\noindent Coordinates for each point of outline is represented in the equatorial coordinate system for epoch J2000.0. 
+The possible values of the third ``column'' (\emph{Command}) are:
 \begin{description}
-\item[start] This command mark a start point of the outline. This command should contain designation of deep-sky object also.
-\item[vertex] This command mark a middle point of the outline.
-\item[end] This command mark an end point of the outline.
+\item[start] This command marks a start point of the outline. This command should also contain the designation of the deep-sky object.
+\item[vertex] This command marks an intermediate point of the outline.
+\item[end] This command marks an end point of the outline.
 \end{description}
 
 
@@ -325,17 +336,17 @@ Example for outline of M42:
 05.56948 -05.57675 end
 \end{configfile}
 
-The format of the file \file{outlines.dat} is compatible with similar file of the \program{SkyChart/Cartes du Ciel} planetarium.
+The format of the file \file{outlines.dat} is compatible with the similar file of the \program{SkyChart/Cartes du Ciel} planetarium.
 
 \section{Adding Extra Nebulae Images}%\label{adding-extra-nebulae-images}
 \label{sec:dso:adding_images}
 \sectionauthor*{Barry Gerdes}
 
-\subsection{\texorpdfstring{Preparing a photo for inclusion to the \file{textures.json} file}{Preparing a photo for inclusion to the textures.json file}}
+\subsection{Preparing a photo for inclusion to the \texorpdfstring{\file{textures.json} file}{textures.json file}}
 \label{sec:dso:preparing-a-photo}
 
 \begin{figure}[h]
-\centering\includegraphics[width=\textwidth]{nebula-display}
+\centering\includegraphics[width=\textwidth]{nebula-display.jpg}
 \caption{Screen shot of nebula images displayed in Stellarium}
 \label{fig:dso:preparing-a-photo}
 \end{figure}
@@ -366,7 +377,7 @@ you will need to find the J2000 coordinates of the corners and convert
 them to decimal values to form the world coordinates in the
 \file{textures.json} file.
 
-\begin{figure}[htb]
+\begin{figure}[tb]
 \centering\includegraphics[width=\textwidth]{EQ-Decimal.jpg}
 \caption{\program{Stellarium Textures Generator}: A program to convert Equatorial coordinates into decimal
 form and write a \texttt{textures.json} insert}
@@ -379,7 +390,7 @@ insert for the \file{textures.json} file.\footnote{It is available as a freebee
 from
 \url{http://www.madpc.co.uk/~peterv/astroplover/equipnbits/Stellariumtextures.zip}.}
 
-\begin{figure}[ht]
+\begin{figure}[t]
 \centering\includegraphics[width=\textwidth]{pix-4.jpg}
 \caption{\program{ReadDSS}: A program to write a \file{textures.json} insert with epoch manipulation.}
 \label{fig:dso:ReadDSS}
@@ -423,7 +434,7 @@ see all the matched stars have overlaid the picture. You can now read
 off the corner coordinates from the status bar starting at the bottom
 (south) left and continuing counterclockwise to the top (north) left.
 
-\subsection{\texorpdfstring{Processing into a \texttt{textures.json} insert}{Processing into a textures.json insert}}%\label{processing-into-a-textures.json-insert}
+\subsection{Processing into a \texorpdfstring{\texttt{textures.json} insert}{textures.json insert}}%\label{processing-into-a-textures.json-insert}
 
 Place your image in the \file{*.png} format in the
 \file{.../nebulae/default/} folder. Ensure that the name matches the
@@ -440,7 +451,7 @@ Stellarium. Find the object in the \key{F3} Object selection window and slew to
 it. Your image should be there and with a bit of luck it will nicely
 overlay the stars in Stellarium. However this only rarely
 happens, so a little bit of tweaking of the JSON \parameter{worldcoords} will be
-needed to get a perfect match. Select equatorial mode (\guibutton{0.6}{bt_coord_type} or \keys{\ctrl+M}).
+needed to get a perfect match. Select equatorial mode (\guibutton{0.6}{bt_coord_type.png} or \keys{\ctrl+M}).
 This will show the area with north up. Select each corner in sequence
 and make small changes to the coordinates. Restart Stellarium each time
 and check if you have moved into the right direction. Continue with each

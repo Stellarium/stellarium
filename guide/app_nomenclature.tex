@@ -47,16 +47,17 @@ File \file{data/nomenclature.fab} is a plain text file in UTF-8 encoding and has
 \item Each item contains seven elements with white space (``space'' or ``tab'' character) as delimiter.
 \end{itemize}
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\noindent
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{Item}                              & \emph{Type} & \emph{Comment}\\\midrule
-planet name                              & string  & English name of the planet, moon or minor body carrying the named feature\\\midrule
-ID of planetary feature                  & integer & unique integer, equal to Feature ID obtained from Gazetteer of Planetary Nomenclature\\\midrule
-translatable name of planetary feature   & string  & English name, containing context data for translators\\\midrule
-type of planetary feature                & string  & 2-char code (see \emph{designation} column in table in section \ref{sec:Nomenclature:DescriptorTerms})\\\midrule
-center latitude of planetary feature     & float   & decimal degrees\\\midrule
-center longitude of planetary feature    & float   & decimal degrees\\\midrule
+planet name                              & string  & English name of the planet, moon or minor body carrying the named feature\\%\midrule
+ID of planetary feature                  & integer & unique integer, equal to Feature ID obtained from Gazetteer of Planetary Nomenclature\\%\midrule
+translatable name of planetary feature   & string  & English name, containing context data for translators\\%\midrule
+type of planetary feature                & string  & 2-char code (see \emph{designation} column in table in section \ref{sec:Nomenclature:DescriptorTerms})\\%\midrule
+center latitude of planetary feature     & float   & decimal degrees\\%\midrule
+center longitude of planetary feature    & float   & decimal degrees\\%\midrule
 size of planetary feature                & float   & kilometers\\\bottomrule
-\end{longtabu}
+\end{tabularx}
 
 Example:
 \begin{configfile}
@@ -157,68 +158,72 @@ In such cases, credit for the discovery will go to the science team.
 Descriptor terms are intended to represent morphological characteristics, not geological origin. 
 The WGPSN does not endorse any specific scientific hypotheses when assigning descriptors.
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\begin{longtable}{l|c|p{72mm}}\toprule
 \emph{Feature}        & \emph{Designation} & \emph{Description}\\\midrule
-Albedo Feature        & AL & Geographic area distinguished by amount of reflected light\\\midrule
-Arcus, arcūs          & AR & Arc-shaped feature\\\midrule
+Albedo Feature        & AL & Geographic area distinguished by amount of reflected light\\%\midrule
+Arcus, arcūs          & AR & Arc-shaped feature\\%\midrule
 Astrum, astra         & AS & Radial-patterned features on Venus \\\midrule
-Catena, catenae       & CA & Chain of craters \\\midrule
-Cavus, cavi           & CB & Hollows, irregular steep-sided depressions usually in arrays or clusters\\\midrule
-Chaos, chaoses        & CH & Distinctive area of broken terrain\\\midrule
-Chasma, chasmata      & CM & A deep, elongated, steep-sided depression\\\midrule
-Collis, colles        & CO & Small hills or knobs\\\midrule
-Corona, coronae       & CR & Ovoid-shaped feature\\\midrule   
+Catena, catenae       & CA & Chain of craters \\%\midrule
+Cavus, cavi           & CB & Hollows, irregular steep-sided depressions usually in arrays or clusters\\%\midrule
+Chaos, chaoses        & CH & Distinctive area of broken terrain\\%\midrule
+Chasma, chasmata      & CM & A deep, elongated, steep-sided depression\\%\midrule
+Collis, colles        & CO & Small hills or knobs\\%\midrule
+Corona, coronae       & CR & Ovoid-shaped feature\\%\midrule   
 Crater, craters       & AA & A circular depression\\\midrule
 Dorsum, dorsa         & DO & Ridge\\\midrule
 Eruptive center       & ER & Active volcanic centers on Io\\\midrule
-Facula, faculae       & FA & Bright spot\\\midrule
-Farrum, farra         & FR & Pancake-like structure, or a row of such structures\\\midrule
-Flexus, flexūs        & FE & A very low curvilinear ridge with a scalloped pattern\\\midrule   
-Fluctus, fluctūs      & FL & Flow terrain\\\midrule
-Flumen, flumina       & FM & Channel on Titan that might carry liquid\\\midrule
-Fossa, fossae         & FO & Long, narrow depression\\\midrule
+Facula, faculae       & FA & Bright spot\\%\midrule
+Farrum, farra         & FR & Pancake-like structure, or a row of such structures\\%\midrule
+Flexus, flexūs        & FE & A very low curvilinear ridge with a scalloped pattern\\%\midrule   
+Fluctus, fluctūs      & FL & Flow terrain\\%\midrule
+Flumen, flumina       & FM & Channel on Titan that might carry liquid\\%\midrule
+Fossa, fossae         & FO & Long, narrow depression\\%\midrule
 Fretum, freta         & FT & Strait, a narrow passage of liquid connecting two larger areas of liquid\\\midrule
-Insula, insulae       & IN & Island (islands), an isolated land area (or group of such areas) surrounded by, or nearly surrounded by, a liquid area (sea or lake)\\\midrule
-Labes, labēs          & LA & Landslide\\\midrule   
-Labyrinthus, labyrinthi & LB & Complex of intersecting valleys or ridges\\\midrule
-Lacuna, lacunae       & LU & Irregularly shaped depression on Titan having the appearance of a dry lake bed\\\midrule
-Lacus, lacūs          & LC & ``Lake'' or small plain; on Titan, a ``lake'' or small, dark plain with discrete, sharp boundaries\\\midrule
-Landing site name     & LF & Lunar features at or near Apollo landing sites\\\midrule
-Large ringed feature  & LG & Cryptic ringed features\\\midrule
-Lenticula, lenticulae & LE & Small dark spots on Europa\\\midrule   
-Linea, lineae         & LI & A dark or bright elongate marking, may be curved or straight\\\midrule
+Insula, insulae       & IN & Island (islands), an isolated land area (or group of such areas) surrounded by, 
+                             or nearly surrounded by, a liquid area (sea or lake)\\\midrule
+Labes, labēs          & LA & Landslide\\%\midrule   
+Labyrinthus, labyrinthi & LB & Complex of intersecting valleys or ridges\\%\midrule
+Lacuna, lacunae       & LU & Irregularly shaped depression on Titan having the appearance of a dry lake bed\\%\midrule
+Lacus, lacūs          & LC & ``Lake'' or small plain; on Titan, a ``lake'' or small, 
+                             dark plain with discrete, sharp boundaries\\%\midrule
+Landing site name     & LF & Lunar features at or near Apollo landing sites\\%\midrule
+Large ringed feature  & LG & Cryptic ringed features\\%\midrule
+Lenticula, lenticulae & LE & Small dark spots on Europa\\%\midrule   
+Linea, lineae         & LI & A dark or bright elongate marking, may be curved or straight\\%\midrule
 Lingula, lingulae     & LN & Extension of plateau having rounded lobate or tongue-like boundaries\\\midrule
-Macula, maculae       & MA & Dark spot, may be irregular\\\midrule
+Macula, maculae       & MA & Dark spot, may be irregular\\%\midrule
 Mare, maria           & ME & ``Sea''; on the Moon, low albedo, relatively smooth plain, generally of large extent; 
                              on Mars, dark albedo areas of no known geological significance; 
-                             on Titan, large expanses of dark materials thought to be liquid hydrocarbons\\\midrule
-Mensa, mensae         & MN & A flat-topped prominence with cliff-like edges\\\midrule
+                             on Titan, large expanses of dark materials thought to be liquid hydrocarbons\\%\midrule
+Mensa, mensae         & MN & A flat-topped prominence with cliff-like edges\\%\midrule
 Mons, montes          & MO & Mountain\\\midrule   
 Oceanus, oceani       & OC & A very large dark area on the moon\\\midrule
-Palus, paludes        & PA & ``Swamp''; small plain\\\midrule
-Patera, paterae       & PE & An irregular crater, or a complex one with scalloped edges\\\midrule
-Planitia, planitiae   & PL & Low plain\\\midrule
-Planum, plana         & PM & Plateau or high plain\\\midrule
-Plume, plumes         & PU & Cryo-volcanic features on Triton\\\midrule   
+Palus, paludes        & PA & ``Swamp''; small plain\\%\midrule
+Patera, paterae       & PE & An irregular crater, or a complex one with scalloped edges\\%\midrule
+Planitia, planitiae   & PL & Low plain\\%\midrule
+Planum, plana         & PM & Plateau or high plain\\%\midrule
+Plume, plumes         & PU & Cryo-volcanic features on Triton\\%\midrule   
 Promontorium, promontoria & PR & ``Cape''; headland promontoria\\\midrule
-Regio, regiones       & RE & A large area marked by reflectivity or color distinctions from adjacent areas, or a broad geographic region\\\midrule
-Reticulum, reticula   & RT & Reticular (netlike) pattern on Venus\\\midrule
-Rima, rimae           & RI & Fissure\\\midrule
+Regio, regiones       & RE & A large area marked by reflectivity or color distinctions from adjacent areas, 
+                             or a broad geographic region\\%\midrule
+Reticulum, reticula   & RT & Reticular (netlike) pattern on Venus\\%\midrule
+Rima, rimae           & RI & Fissure\\%\midrule
 Rupes, rupēs          & RU & Scarp\\\midrule
 Satellite Feature     & SF & A feature that shares the name of an associated feature. 
-                             For example, on the Moon the craters referred to as ``Lettered Craters'' are classified in the gazetteer as ``Satellite Features''\\\midrule   
-Scopulus, scopuli     & SC & Lobate or irregular scarp\\\midrule
-Serpens, serpentes    & SE & Sinuous feature with segments of positive and negative relief along its length\\\midrule
-Sinus, sinūs          & SI & ``Bay''; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons\\\midrule
+                             For example, on the Moon the craters referred to as ``Lettered Craters'' 
+							 are classified in the gazetteer as ``Satellite Features''\\%\midrule   
+Scopulus, scopuli     & SC & Lobate or irregular scarp\\%\midrule
+Serpens, serpentes    & SE & Sinuous feature with segments of positive and negative relief along its length\\%\midrule
+Sinus, sinūs          & SI & ``Bay''; small plain; on Titan, bays within seas or lakes of liquid hydrocarbons\\%\midrule
 Sulcus, sulci         & SU & Subparallel furrows and ridges\\\midrule
-Terra, terrae         & TA & Extensive land mass\\\midrule
-Tessera, tesserae     & TE & Tile-like, polygonal terrain\\\midrule   
+Terra, terrae         & TA & Extensive land mass\\%\midrule
+Tessera, tesserae     & TE & Tile-like, polygonal terrain\\%\midrule   
 Tholus, tholi         & TH & Small domical mountain or hill\\\midrule
 Unda, undae           & UN & Dunes\\\midrule
-Vallis, valles        & VA & Valley\\\midrule
-Vastitas, vastitates  & VS & Extensive plain\\\midrule
+Vallis, valles        & VA & Valley\\%\midrule
+Vastitas, vastitates  & VS & Extensive plain\\%\midrule
 Virga, virgae         & VI & A streak or stripe of color\\\bottomrule
-\end{longtabu}
+\end{longtable}
 
 
 \section*{Author and Acknowledgement}

@@ -31,20 +31,21 @@ times. For example, set date and time to 30 August 1975, look at the constellati
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Bright Novae plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-last\_update            & string & Date and time of last update\\\midrule
-update\_frequency\_days & int    & Frequency of updates, in days\\\midrule
-updates\_enable         & bool   & Enable updates of bright novae catalog from Internet \\\midrule
+last\_update            & string & Date and time of last update\\%\midrule
+update\_frequency\_days & int    & Frequency of updates, in days\\%\midrule
+updates\_enable         & bool   & Enable updates of bright novae catalog from Internet \\%\midrule
 url                     & string & URL of bright novae catalog \\\bottomrule
-\end{longtabu}
+\end{tabularx}
 
 \subsection{Format of bright novae catalog}
 \label{sec:plugins:BrightNovae:format}
 
 To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
 
-\begin{configfile}
+\begin{configfile}\small
 "Nova designation":
 {
     "name": "name of nova",
@@ -64,7 +65,7 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 \end{configfile}
 
 \noindent For example, the record for \textbf{Nova Cygni 1975} (\textbf{V1500 Cyg}) looks like:
-\begin{configfile}
+\begin{configfile}\small
 "V1500 Cyg":
 {
     "name": "Nova Cygni 1975",
@@ -97,7 +98,7 @@ generalized values for it.
 \label{sec:plugins:HistoricalSupernovae}
 
 \begin{figure}[ht]
-\includegraphics[width=\textwidth]{sn1604wiki}
+\includegraphics[width=\textwidth]{sn1604wiki.png}
 \caption{Supernova 1604 (also known as \textbf{Kepler's Supernova}, \textbf{Kepler's Nova} or \textbf{Kepler's Star})}
 \label{fig:SN1604}
 \end{figure}
@@ -116,7 +117,7 @@ times. For example, set date and time to 29 April 1006, and look at the constell
 \label{sec:plugins:HistoricalSupernovae:list}
 
 
-\begin{longtabu} to \textwidth {l|l|l|l|X}\toprule
+\begin{longtable}{l|l|l|l|l}\toprule
 \emph{Supernova}            & \emph{Date of max. brightness} & \emph{Max. apparent mag.} & \emph{Type} & \emph{Name} \\\midrule
 SN 185A\footnote{\url{https://en.wikipedia.org/wiki/SN_185}} & 7 December & -6.0 & Ia & \\\midrule
 SN 386A & 24 April & 1.5 & II & \\\midrule
@@ -164,34 +165,42 @@ SN 2012fr  & 16 November & 11.95  & Ia & \\\midrule
 SN 2013aa  & 13 February & 11.9   & Ia & \\\midrule
 SN 2014j   & 30 January  & 10.5   & Ia & \\\midrule
 SN 2017cbv & 22 March    & 11.5   & Ia & \\\bottomrule
-\end{longtabu}
+\end{longtable}
 
 \subsection{Light curves}
 \label{sec:plugins:HistoricalSupernovae:lightcurves}
 
 In this plugin a simple model of light curves for different supernovae
-has been implemented. A typical light curve used in the plugin for
-supernova type~I is shown in Fig.~\ref{fig:SNTypeI} (bottom scale in
-days).
+has been implemented (Figure~\ref{fig:SNTypeI+II}). 
+%% GZ I try to save 1 page by combining the figures. 
+While Type~I supernovae show a peak and slow but steady decay, Type~II supernovae show a longer ``plateau'' in the decay curve.
+
+%A typical light curve used in the plugin for
+%supernova type~I is shown in Fig.~\ref{fig:SNTypeI} (bottom scale in
+%days).
 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=250px]{sn_type_I.jpg}
+%\includegraphics[width=250px]{sn_type_I.jpg}
+\includegraphics[width=70mm,trim=0 10 0 0,clip]{sn_type_I.jpg}\,
+\includegraphics[width=70mm,trim=0 10 0 0,clip]{sn_type_II.jpg}
 \end{center}
-\caption{Light Curve of Supernova Type I}
-\label{fig:SNTypeI}
+%\caption{Light Curve of Supernova Type I}
+%\label{fig:SNTypeI}
+\caption{Light Curves of Supernovae Types I (left) and II (right)}
+\label{fig:SNTypeI+II}
 \end{figure}
 
-For supernova type~II we use a typical light curve with plateau, which
-you can see in Fig.~\ref{fig:SNTypeII} (bottom scale in days).
+%For supernova type~II we use a typical light curve with plateau, which
+%you can see in Fig.~\ref{fig:SNTypeII} (bottom scale in days).
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=260px]{sn_type_II.jpg}
-\end{center}
-\caption{Light Curve of Supernova Type II}
-\label{fig:SNTypeII}
-\end{figure}
+%\begin{figure}[ht]
+%\begin{center}
+%\includegraphics[width=260px]{sn_type_II.jpg}
+%\end{center}
+%\caption{Light Curve of Supernova Type II}
+%\label{fig:SNTypeII}
+%\end{figure}
 
 In both images for light curves the maximum brightness is marked as day 0.
 
@@ -201,13 +210,14 @@ In both images for light curves the maximum brightness is marked as day 0.
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Historical Supernovae plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
 last\_update            & string & Date and time of last update\\\midrule
 update\_frequency\_days & int    & Frequency of updates, in days\\\midrule
 updates\_enable         & bool   & Enable updates of bright novae catalog from Internet \\\midrule
 url                     & string & URL of bright novae catalog \\\bottomrule
-\end{longtabu}
+\end{tabularx}
 
 \newpage
 \subsection{Format of historical supernovae catalog}
@@ -249,7 +259,7 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 \label{sec:plugins:Exoplanets}
 
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{exoplanets}
+\includegraphics[width=\textwidth]{exoplanets.png}
 \caption{Planetary system $\tau$ Ceti}
 \label{fig:Exoplanets}
 \end{figure}
@@ -263,7 +273,7 @@ Catalog''\footnote{\url{http://phl.upr.edu/projects/habitable-exoplanets-catalog
 by the Planetary Habitability
 Laboratory\footnote{\url{http://phl.upr.edu/home}}.  If enabled (see
 section~\ref{sec:Plugins:EnablingPlugins}), just click on the
-Exoplanet button \guibutton{0.6}{btExoplanets-off} on the bottom
+Exoplanet button \guibutton{0.6}{btExoplanets-off.png} on the bottom
 toolbar to display markers for the stars with known exoplanets. You
 can then either click on such a marked star or find the stars with
 exoplanets by their designation (e.g., \emph{24 Sex}) in the \key{F3} dialog (see~\ref{sec:gui:search}).
@@ -352,22 +362,23 @@ All names with asterix mark (*) are modified based on the original proposals, to
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Exoplanets plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
-\emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-last\_update  & string & Date and time of last update \\\midrule
-update\_frequency\_hours  & int & Frequency of updates, in hours \\\midrule
-updates\_enable  & bool & Enable updates of exoplanets catalog from Internet \\\midrule
-url  & string & URL of exoplanets catalog \\\midrule
-flag\_show\_exoplanets\_button  & bool & Enable showing button of exoplanets on bottom bar \\\midrule
-distribution\_enabled  & bool & Enable distribution mode of display \\\midrule
-timeline\_enabled  & bool & Enable timeline mode of display \\\midrule
-habitable\_enabled  & bool & Enable habitable mode of display \\\midrule
-enable\_at\_startup  & bool & Enable displaying exoplanets at startup of the plugin \\\midrule
-exoplanet\_marker\_color & R,G,B & Color for marker of star with planetary system \\\midrule
-habitable\_exoplanet\_marker\_color  & R,G,B & Color for marker of star with planetary system with potential habitable exoplanets
-\\\midrule
-temperature\_scale & string & Temperature scale for equilibrium temperature of exoplanets. Possible values: \emph{Kelvin}, \emph{Celsius}, \emph{Fahrenheit}. Default value: \emph{Celsius}. \\\bottomrule
-\end{longtabu}
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
+last\_update                 & string & Date and time of last update \\\midrule
+update\_frequency\_hours       & int  & Frequency of updates, in hours \\\midrule
+updates\_enable                & bool & Enable updates of exoplanets catalog from Internet \\\midrule
+url                          & string & URL of exoplanets catalog \\\midrule
+flag\_show\_exoplanets\_button & bool & Enable showing button of exoplanets on bottom bar \\\midrule
+distribution\_enabled          & bool & Enable distribution mode of display \\\midrule
+timeline\_enabled              & bool & Enable timeline mode of display \\\midrule
+habitable\_enabled             & bool & Enable habitable mode of display \\\midrule
+enable\_at\_startup            & bool & Enable displaying exoplanets at startup of the plugin \\\midrule
+exoplanet\_marker\_color      & R,G,B & Color for marker of star with planetary system \\\midrule
+habitable\_exoplanet\_marker\_color & R,G,B & Color for marker of star with planetary system with potential habitable exoplanets\\\midrule
+temperature\_scale           & string & Temperature scale for equilibrium temperature of exoplanets. 
+                                        Possible values: \emph{Kelvin}, \emph{Celsius}, \emph{Fahrenheit}. Default value: \emph{Celsius}. \\\bottomrule
+\end{tabularx}
 
 \newpage
 \subsection{Format of exoplanets catalog}
@@ -488,7 +499,7 @@ information about each one. Pulsar data is derived from \textit{The
   ATNF Pulsar Catalogue} \cite{2005AJ....129.1993M}.
 
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), use the
-\guibutton{0.6}{btPulsars-off} button to activate display of
+\guibutton{0.6}{btPulsars-off.png} button to activate display of
 pulsars. The GUI allows a few configuration options.  You can also
 find a pulsar (\key{F3}) by its designation (e.g., \emph{PSR
   J0437-4715}).
@@ -498,7 +509,7 @@ find a pulsar (\key{F3}) by its designation (e.g., \emph{PSR
 \subsection{Section \big[Pulsars\big] in config.ini file}
 \label{sec:plugins:Pulsars:config}
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
 last\_update                & string & Date and time of last update\\\midrule
 update\_frequency\_days     & int    & Frequency of updates, in days\\\midrule
@@ -510,7 +521,7 @@ flag\_show\_pulsars\_button & bool   & Enable displaying pulsars button on toolb
 marker\_color               & R,G,B  & Color for marker of the pulsars \\\midrule
 glitch\_color               & R,G,B  & Color for marker of the pulsars with glitches \\\midrule
 use\_separate\_colors       & bool   & Use separate colors for different types of the pulsars \\\bottomrule
-\end{longtabu}
+\end{tabularx}
 
 \newpage
 \subsection{Format of pulsars catalog}
@@ -581,14 +592,14 @@ To add a new pulsar, open a new line after line 5 and paste the following, note 
 
 
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), use the
-\guibutton{0.6}{btQuasars-off} button to activate display of
+\guibutton{0.6}{btQuasars-off.png} button to activate display of
 quasars. The GUI allows a few configuration options.  You can also
 find a quasar (\key{F3}) by its designation (e.g., \emph{3C 273}).
 
 \subsection{Section \big[Quasars\big] in config.ini file}
 \label{sec:plugins:Quasars:config}
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
 last\_update                & string & Date and time of last update\\\midrule
 update\_frequency\_days     & int    & Frequency of updates, in days\\\midrule
@@ -598,7 +609,7 @@ enable\_at\_startup         & bool   & Enable displaying of quasars at startup o
 distribution\_enabled       & bool   & Enable distribution mode for the quasars \\\midrule
 flag\_show\_quasars\_button & bool   & Enable displaying quasars button on toolbar \\\midrule
 marker\_color               & R,G,B  & Color for marker of the quasars \\\bottomrule
-\end{longtabu}
+\end{tabularx}
 
 \newpage
 \subsection{Format of quasars catalog}
@@ -650,7 +661,7 @@ feature of Stellarium (see section~\ref{sec:Phenomena:Meteoroids}), this
 plugin provides data for real meteor showers and a marker for each 
 active and inactive radiant, showing real information about its activity. 
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), just click 
-on the Meteor Showers button \guibutton{0.6}{btMS-off}  on the bottom
+on the Meteor Showers button \guibutton{0.6}{btMS-off.png}  on the bottom
 toolbar to display markers for the radiants.
 
 
@@ -709,22 +720,23 @@ than usual.
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Meteor Showers plugin~-- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-last\_update         & string & Date and time of last update \\\midrule
+last\_update          & string & Date and time of last update \\\midrule
 update\_frequency\_hours & int & Frequency of updates, in hours \\\midrule
-updates\_enable      & bool & Enable updates of the meteor showers catalog from Internet \\\midrule
-url                  & string & URL of the meteor showers catalog \\\midrule
-flag\_show\_ms\_button & bool & Enable showing button of the meteor showers on bottom bar \\\midrule
-flag\_show\_radiants   & bool & Enable displaying markers for the radiants of the meteor showers \\\midrule
-flag\_active\_radiants & bool & Flag for displaying markers for the radiants of the active meteor showers only \\\midrule
-enable\_at\_startup    & bool & Enable displaying meteor showers at starup plugin \\\midrule
-show\_radiants\_labels & bool & Flag for displaying labels near markers of the radiants of the meteor showers \\\midrule
-font\_size             & int  & Font size for label of markers of the radiants of the meteor showers \\\midrule
+updates\_enable         & bool & Enable updates of the meteor showers catalog from Internet \\\midrule
+url                   & string & URL of the meteor showers catalog \\\midrule
+flag\_show\_ms\_button  & bool & Enable showing button of the meteor showers on bottom bar \\\midrule
+flag\_show\_radiants    & bool & Enable displaying markers for the radiants of the meteor showers \\\midrule
+flag\_active\_radiants  & bool & Flag for displaying markers for the radiants of the active meteor showers only \\\midrule
+enable\_at\_startup     & bool & Enable displaying meteor showers at starup plugin \\\midrule
+show\_radiants\_labels  & bool & Flag for displaying labels near markers of the radiants of the meteor showers \\\midrule
+font\_size              & int  & Font size for label of markers of the radiants of the meteor showers \\\midrule
 colorARG               & R,G,B & Color for marker of active meteor showers with generic data \\\midrule
 colorARR               & R,G,B & Color for marker of active meteor showers with real data \\\midrule
-colorIR               & R,G,B & Color for marker of inactive meteor showers \\\bottomrule
-\end{longtabu}
+colorIR                & R,G,B & Color for marker of inactive meteor showers \\\bottomrule
+\end{tabularx}
 
 \newpage
 \subsection{Format of Meteor Showers catalog}
@@ -827,7 +839,7 @@ This plugin was created as project of ESA Summer of Code in Space 2013\footnote{
 	\item[Russian] --- the 160 stars that are listed in the Russian Nautical Almanac.
 \end{description}
 If enabled (see section~\ref{sec:Plugins:EnablingPlugins}), just click
-on the Sextant button \guibutton{0.6}{bt_NavStars-off} on
+on the Sextant button \guibutton{0.6}{bt_NavStars-off.png} on
 the bottom toolbar to display markers for the navigational stars. This
 can help you in training your skills in astronomical navigation before
 you cruise the ocean in the traditional way, with your sextant and
@@ -840,13 +852,14 @@ chronometer.
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Navigational Stars plugin -- just make it carefully!
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}			& \emph{Type} 	& \emph{Description}\\\midrule
 navstars\_color 	& R,G,B 		& Color of markers of navigational stars  \\
 enable\_at\_startup & bool 		    & Set to \emph{true} to display navigational stars at startup of planetarium  \\
 current\_ns\_set	& string		& Current set of navigational stars. Possible values: \emph{AngloAmerican}, \emph{French} and \emph{Russian}. \\
 \bottomrule
-\end{longtabu}
+\end{tabularx}
 
 \newpage
 \section{Satellites Plugin}
@@ -871,7 +884,7 @@ specify other sources online or load updates from local files.
 
 If enabled (see
 section~\ref{sec:Plugins:EnablingPlugins}), just click on the
-Satellite button \guibutton{0.6}{bt_hint}  on the bottom
+Satellite button \guibutton{0.6}{bt_hint.png}  on the bottom
 toolbar to display markers for the satellites.
 
 It should now be possible to search for artificial satellites using

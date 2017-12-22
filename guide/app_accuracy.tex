@@ -80,22 +80,26 @@ The optionally usable JPL DE431 delivers planet positions strictly for
 Outside of this range, positions from VSOP87 will be shown again.
 
 As far as Stellarium is concerned, the user should bear in mind the
-following limits of the VSOP87 method. Accuracy values for VSOP87 are
-heliocentric as given in \cite{1988A&A...202..309B}.
+limits of the VSOP87 and other models (Table~ref{tab:Accuracy:Planets}).
+Accuracy values for VSOP87 are heliocentric as given in \cite{1988A&A...202..309B}.
 
-\begin{longtabu} to \textwidth {X|l|X}
+\begin{table}[tb]
+\begin{tabularx}{\textwidth}{X|l|X}
 \toprule
 \emph{Object(s)} & \emph{Method} & \emph{Notes}\tabularnewline
 \midrule
-Mercury, Venus, Earth-Moon barycenter, Mars & VSOP87 & Accuracy is 1 arc-second from 2000 B.C. -- 6000 A.D. \\\midrule
-Jupiter, Saturn                             & VSOP87 & Accuracy is 1 arc-second from 0 A.D. -- 4000 A.D.    \\\midrule
-Uranus, Neptune                             & VSOP87 & Accuracy is 1 arc-second from 4000 B.C. -- 8000 A.D. \\\midrule
-Pluto                                       & ?      & Pluto's position is valid only from 1885 A.D. -- 2099 A.D.\\\midrule
+Mercury, Venus, Earth-Moon barycenter, Mars & VSOP87 & Accuracy is 1 arc-second from 2000 B.C. -- 6000 A.D. \\%\midrule
+Jupiter, Saturn                             & VSOP87 & Accuracy is 1 arc-second from 0 A.D. -- 4000 A.D.    \\%\midrule
+Uranus, Neptune                             & VSOP87 & Accuracy is 1 arc-second from 4000 B.C. -- 8000 A.D. \\%\midrule
+Pluto                                       & ?      & Pluto's position is valid only from 1885 A.D. -- 2099 A.D.\\%\midrule
 Earth's Moon                                & ELP2000-82B & Fit against JPL DE200, which provides date range 1850--2050. 
-                                                            Positions should be usable for some (unspecified) longer interval. \\\midrule
+                                                            Positions should be usable for some (unspecified) longer interval. \\%\midrule
 Galilean satellites                         & L2     & Valid from 500 A.D. -- 3500 A.D.\\ % GZ2017: WHY do we give L2 info but use L1 model?
 \bottomrule
-\end{longtabu}
+\end{tabularx}
+\caption{Orbit-centric accuracy of used algorithms}
+\label{tab:Accuracy:Planets}
+\end{table}
 
 \noindent Note that Stellarium models light-time correction (if enabled), but does not yet model aberration of light. 
 Therefore seasons' beginnings are off by a few minutes.

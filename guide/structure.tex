@@ -22,14 +22,21 @@
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 \usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
+\usepackage{ifpdf}
+% We want to create PDF and HTML. Some alternatives are required.
+% https://tex.stackexchange.com/questions/93852/what-is-the-correct-way-to-check-for-latex-pdflatex-and-html-in-the-same-latex
 
-\usepackage{graphicx} % Required for including pictures
+\ifpdf
+  \usepackage{graphicx} % Required for including pictures
+\else % processed with htlatex?
+  \usepackage[dvipdfmx]{graphicx} % Required for including pictures POSSIBLY some other option?
+\fi
 \graphicspath{{pictures/}} % Specifies the directory where pictures are stored
 
 \usepackage{tikz} % Required for drawing custom shapes
 \usepackage{longtable}
 \usepackage{tabularx}
-\usepackage{tabu}
+%\usepackage{tabu} % tabu makes problems with htlatex, sorry.
 \usepackage{gensymb}
 \usepackage[english]{babel} % English language/hyphenation
 
@@ -71,7 +78,11 @@
 \newcommand{\command}[1]{\texttt{#1}}
 %% Names of 3rd-party software products like Photoshop, Sketchup etc. Not for OS names, they are too common. 
 %% The footnotesize is required for a better size match.
+\ifpdf
 \newcommand{\program}[1]{\textsf{\textbf{\footnotesize #1}}}
+\else
+\newcommand{\program}[1]{\textsf{\textbf{#1}}}
+\fi
 \newcommand{\var}[1]{\texttt{#1}} %% variable name
 
 %% Color boxes for config.ini 
@@ -79,10 +90,14 @@
 
 % show small icon in-line. Lower by #2. Optional #1 is scale of icon. Use 0.45 for dialog icons, 0.75 for lower bar buttons.
 % Note that it's not possible to use \baselineskip. In Tabular environments this seems to be 0.
+% htlatex apparently has issues with the raisebox. Just draw a box around the icon.
+\ifpdf
 \newcommand{\guibutton[3]}[0.45]{\raisebox{-#2mm}{\fbox{\includegraphics[scale=#1]{#3}}}}
-
+\else
+\newcommand{\guibutton[3]}[0.45]{\fbox{\includegraphics[scale=#1]{#3}}}
+\fi
 % Will become a boxed text, representing a GUI button label.
-\newcommand{\button}[1]{\textbf{\textsf{\fbox{\scriptsize #1}}}}
+\newcommand{\button}[1]{\fbox{\textbf{\textsf{\scriptsize #1}}}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index.
 %% Names should be given with First names and surnames like \name[Johann]{Bayer}. The index will be built sorted by entry surnames.
 \newcommand{\name}[2][]{%
@@ -183,6 +198,9 @@
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage{newunicodechar} % Must be loaded after [utf8]inputenc
 \newunicodechar{°}{\degree}
+% It seems Ubuntu on Windows10 has a bit outdated utf8 inputenc? https://tex.stackexchange.com/questions/13067/utf8x-vs-utf8-inputenc
+\newunicodechar{ē}{\=e}
+\newunicodechar{ū}{\=u}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -381,7 +399,6 @@
 %----------------------------------------------------------------------------------------
 %	DEFINITION OF COLORED BOXES
 %----------------------------------------------------------------------------------------
-
 \RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
 
 % Theorem box
@@ -629,13 +646,33 @@ innerbottommargin=5pt]{cBox}
 %% \usepackage{layout}
 
 
-\usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
-%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
-%\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
-% Prefer using menukeys.
-\newcommand{\key}[1]{\keys{#1}}
-\newcommand{\keyPageUp}{\keys{Page\,\arrowkeyup\,}}
-\newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
+\ifpdf
+ \usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
+ %% Keypress buttons. This is just a font change now, but can be a boxed key or such.
+ % Prefer using menukeys.
+ \newcommand{\key}[1]{\keys{#1}}
+ \newcommand{\keyPageUp}{\keys{Page\,\arrowkeyup\,}}
+ \newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
+\else
+ %TODO redefine \menu properly!
+ \newcommand{\key}[1]{\fbox{\textbf{\textsf{\small #1}}}}
+ \newcommand{\keys}[1]{\fbox{\textbf{\textsf{\small #1}}}}
+ \newcommand{\keyPageUp}{\keys{Page\,$\uparrow$\,}}
+ \newcommand{\keyPageDown}{\keys{Page\,$\downarrow$\,}}
+ \newcommand{\arrowkeyleft}{\keys{$\leftarrow$}}
+ \newcommand{\arrowkeyright}{\keys{$\rightarrow$}}
+ \newcommand{\arrowkeydown}{\keys{$\downarrow$}}
+ \newcommand{\arrowkeyup}{\keys{$\uparrow$}}
+ \newcommand{\Space}{Space}
+ \newcommand{\ctrl}{Ctrl}
+ \newcommand{\cmdmac}{Command}
+ \newcommand{\Alt}{Alt}
+ \newcommand{\tab}{$\rightleftharpoons$}
+ \newcommand{\shift}{$\Uparrow$}
+ \newcommand{\return}{$\hookleftarrow$}
+ \newcommand{\menu}[1]{\fbox{\textsf #1}}
+\fi
+
 \renewcommand{\topfraction}{0.9}
 
 \definecolor{light-gray}{gray}{0.90}
@@ -643,6 +680,7 @@ innerbottommargin=5pt]{cBox}
 %	HYPERLINKS IN THE DOCUMENTS. These packages should be last, else some PDF bookmarks fail!
 %----------------------------------------------------------------------------------------
 
+\ifpdf
 \usepackage{hyperref}
 \hypersetup{hidelinks,%backref=true,pagebackref=true,hyperindex=true, %% 3 latter are default, produce warnings if specified again.
             colorlinks=false,breaklinks=true,urlcolor= ocre,
@@ -661,6 +699,7 @@ innerbottommargin=5pt]{cBox}
 % Repeat some settings with pdfcatalog:
 %\pdfcatalog{pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
 %            pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,}
+\fi
 
 \usepackage{bookmark}
 \bookmarksetup{

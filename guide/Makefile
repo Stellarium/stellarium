@@ -34,6 +34,7 @@
 # So far we can also assume that we are on pure (poor) Windows commandline if SHELL=sh.exe
 
 PDFLATEX=pdflatex
+HTLATEX=htlatex
 BIBER=biber
 MAKEINDEX=makeindex
 
@@ -68,6 +69,9 @@ else
 	ifneq ($(findstring pdflatex, $(shell which pdflatex)),pdflatex)
 		PDFLATEX=pdflatex.exe
 	endif
+	ifneq ($(findstring htlatex, $(shell which htlatex)),htlatex)
+		HTLATEX=htlatex.exe
+	endif
 	ifneq ($(findstring biber, $(shell which biber)),biber)
 		BIBER=biber.exe
 	endif
@@ -86,7 +90,14 @@ else
 	endif
 	RM=rm -fr 
 	MV=mv
+	SHELL=/bin/bash
 endif
+
+# htlatex needs bounding box files.
+PICSpdf=$(wildcard pictures/*.pdf)
+PICSpng=$(wildcard pictures/*.png) $(subst .pdf,.png, ${PICSpdf})
+PICSjpg=$(wildcard pictures/*.jpg)
+PICSbbx=$(subst .png,.xbb, ${PICSpng}) $(subst .jpg,.xbb, ${PICSjpg})
 
 
 .DEFAULT:
@@ -95,8 +106,10 @@ endif
 .SUFFIXES:
 .SUFFIXES: .tex .aux .log .lot .lof .toc .bbl .ind .dvi .pdf .eps .jpg .png .html .ps
 
+# This is to keep intermediate files until explicitly removed with make clean.
+.SECONDARY:
 
-	
+
 help:
 	@echo               Stellarium Manual Options
 	@echo               ==========================
@@ -110,10 +123,11 @@ help:
 	@echo diag: print some diagnostics about tool names.
 
 clean:
-	${RM} *~ core *.aux *.log *.lof *.toc *.out *.blg *.bcf *.bbl *.idx *.ilg *.ind *.ptc *.run.xml 
-	
+	${RM} *~ core *.aux *.log *.lof *.toc *.out *.blg *.bcf *.bbl *.idx *.ilg *.ind *.ptc
+	${RM} *.run.xml *.4ct *.4tc *.tmp *.dvi guide_meta.txt
+
 distclean: clean
-	${RM} guide.pdf SUG.pdf
+	${RM} guide.pdf SUG.pdf ${PICSbbx}
 
 manual: guide.pdf
 
@@ -151,23 +165,23 @@ guide.pdf : guide.ind guide.bbl
 	${MAKEINDEX} guide.idx -s StyleInd.ist
 	${PDFLATEX} guide.tex
 	${PDFLATEX} guide.tex
-	touch -c guide.ind
-	touch -c guide.bbl
-	touch -c $@
+	@touch -c guide.ind
+	@touch -c guide.bbl
+	@touch -c $@
 
 #guide.ind: guide.idx guide.toc
 guide.ind: guide.idx guide.aux
 	${MAKEINDEX} guide.idx -s StyleInd.ist
-	
+
 guide.bbl: guide.bcf guide.bib
 	${BIBER} guide
-	
+
 guide.idx: guide.log
 
 guide.toc: guide.log	
-	
+
 guide.bcf: guide.log
-	
+
 guide.aux: guide.log
 
 guide.log: $(wildcard *.tex) 
@@ -175,11 +189,11 @@ guide.log: $(wildcard *.tex)
 
 SUG SUG.pdf: guide_opt.pdf
 	${MV} $< SUG.pdf
-	
+
 %_meta.txt : %.pdf
 	${PDFTK} $< dump_data_utf8 > $@
-	
-	
+
+
 # Reduced file size by 65%. But we need to restore some meta info.
 %_opt.pdf : %.pdf %_meta.txt %_pdfmark.ps
 	${GS} -sDEVICE=pdfwrite -dCompatibilityLevel=1.6 -dNOPAUSE -dQUIET -dBATCH  -sOutputFile=$*_gswrite.pdf  $*.pdf $*_pdfmark.ps 
@@ -188,9 +202,15 @@ SUG SUG.pdf: guide_opt.pdf
 
 
 
-	
-	
-	
+
+pictures/%.png : pictures/%.pdf
+	convert $< $@
+
+%.xbb: %.png
+	ebb -x $<
+
+%.xbb: %.jpg
+	ebb -x $<
 
 ## pdfsizeopt unfortunately hardly makes the SUG smaller :-(	
 ## But it is recommended to run Multivalent after that!
@@ -199,15 +219,33 @@ SUG SUG.pdf: guide_opt.pdf
 #	pdfsizeopt $< $@
 #	java -classpath Multivalent20060102.jar tool.pdf.Compress -jpeg $@
 #	mv SUG-o.pdf SUG.pdf
-	
+
+htdia:
+	@echo Want to create ${PICSbbx}
+
+
+# HTML: Work in progress. I run into many issues that have been discussed in various TeX fora.
+# TODO: Whoever knows about htlatex/tex4ht is welcome to help in fixing formatting macros or properly
+# configuring the build of a friendly frame set.
+# it seems tex4ht needs more than just running htlatex, but we need some configuration file.
 #guide.html: guide.bbl guide.ind
-guide.html: 
-	${HTLATEX} guide "htFixes,html,1,next,index=3,fn-in,frames,mouseover,info"
+guide.html: ${PICSbbx}
+	@echo Shell is $(SHELL)
+	${HTLATEX} guide "htFixes,html,2,next,index=3,fn-in,frames,mouseover,info"
+# Currently, everything after running biber fails. :-(
+#	${BIBER} guide
+#	tex '\def\filename{{guide}{idx}{4dx}{ind}} \input  idxmake.4ht'
 #	${MAKEINDEX} -o guide.ind guide.4dx
 #	${HTLATEX} guide "htFixes,html,1,next,index=3,fn-in,frames,mouseover,info"
-	
+#	${HTLATEX} guide "htFixes,html,1,next,index=3,fn-in,frames,mouseover,info"
+
 guide.sxw:
 	oolatex guide 
+
+# Try pandoc? (start to collect arguments here, try "make pandoc")
+# Ubuntu on Windows only has pandoc 1.12. Maybe V2 would be more complete? In any case, tabu or some other package seems to be a problem.
+pandoc:
+		pandoc -f latex -t plain guide2.tex
 
 # Hint on restoring initial view settings
 # from https://stackoverflow.com/questions/25544002/command-line-tool-to-mark-pdf-to-open-in-single-page-view	
@@ -234,8 +272,8 @@ guide.sxw:
 #               %/PageLayout /TwoColumnLeft\n\
 #               >>                        /PUT        pdfmark"\
 #			 > $@
-			 
-			 
+
+
 # Very hackish diagnostics. There are many ways to get a decent Linux-ish system even under Windows. 
 # CygWin, MinGW and Git bash understand calling programs with .exe from the Windows environment. 
 # Ubuntu needs .exe extension to be given explicitly. This makes the Makefile a bit ugly.

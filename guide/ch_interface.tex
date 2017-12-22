@@ -16,12 +16,12 @@
 This chapter describes the dialog windows which can be accessed from the left menu bar.
 
 Most of Stellarium's settings can be changed using the view window
-(press \guibutton[0.35]{2}{btd_view} or \key{F4}) and the
-configuration window (\guibutton[0.35]{2}{btd_config} or
+(press \guibutton[0.35]{2}{btd_view.png} or \key{F4}) and the
+configuration window (\guibutton[0.35]{2}{btd_config.png} or
 \key{F2}). Most settings have short labels. To learn more about some
 settings, more information is available as \emph{tooltips}, small text
 boxes which appear when you hover the mouse cursor over a
-button.\footnote{Unfortunately, on Windows~7 and later, with NVidia
+button.\footnote{Unfortunately, on Windows~7 and later, with some NVidia
   and AMD GPUs in OpenGL mode, these tooltips often do not work.}
 
 \newFeature{0.15} You can drag the
@@ -41,13 +41,14 @@ details.
 \label{sec:gui:date}
 
 \begin{figure}[h]
-\centering\includegraphics[width=\linewidth]{date_and_time_dialog}
+\centering\includegraphics[width=\linewidth]{date_and_time_dialog.png}
 \caption{Date and Time dialog}
 \label{fig:gui:date}
 \end{figure}
 
 In addition to the time rate control buttons on the main toolbar, you
-can use the date and time window (open with the \guibutton[0.35]{2}{btd_time} button or \key{F5}) to set the simulation time. The values
+can use the date and time window (open with the \guibutton[0.35]{2}{btd_time.png} 
+button or \key{F5}) to set the simulation time. The values
 for year, month, day, hour, minutes and seconds may be modified by
 typing new values, by clicking the up and down arrows above and below
 the values, and by using the mouse wheel.
@@ -60,12 +61,12 @@ The other tab in this window allows you to see or set
 \label{sec:gui:location}
 
 \begin{figure}[htb]
-\centering\includegraphics[width=\linewidth]{location_dialog}
+\centering\includegraphics[width=\linewidth]{location_dialog.png}
 \caption{Location window}
 \label{fig:gui:location}
 \end{figure}
 
-The positions of the stars in the sky is dependent on your location on
+\noindent The positions of the stars in the sky is dependent on your location on
 Earth (or other planet) as well as the time and date. For Stellarium to
 show accurately what is (or will be/was) in the sky, you must tell it
 where you are. You only need to do this once -- Stellarium can save your
@@ -75,7 +76,8 @@ location so you won't need to set it again until you move.
 After installation, Stellarium uses an online service which tries to
 find your approximate location based on the IP address you are
 using. This seems very practical, but if you feel this causes privacy
-issues, you may want to switch this feature off. You should also consider switching it off on a computer which does not move, to save network bandwidth.
+issues, you may want to switch this feature off. You should also consider 
+switching it off on a computer which does not move, to save network bandwidth.
 
 To set your location more accurately, or if the lookup service fails,
 press \key{F6} to open the location window (Fig.~\ref{fig:gui:location}). 
@@ -106,7 +108,7 @@ and close the location window.
 
 The configuration window contains general program settings, and many
 other settings which do not concern specific display options. Press
-the tool button \guibutton[0.35]{2}{btd_config} or \key{F2} to open.
+the tool button \guibutton[0.35]{2}{btd_config.png} or \key{F2} to open.
 
 
 \subsection{The Main Tab}
@@ -114,7 +116,7 @@ the tool button \guibutton[0.35]{2}{btd_config} or \key{F2} to open.
 
 
 \begin{figure}[bp]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_main_tab}
+\centering\includegraphics[width=0.65\linewidth]{config_dialog_main_tab.png}
 \caption{Configuration Window: Main Tab}
 \label{fig:gui:configuration:main}
 \end{figure}
@@ -122,21 +124,20 @@ the tool button \guibutton[0.35]{2}{btd_config} or \key{F2} to open.
 The Main tab in the configuration window provides controls for
 changing separately the program and sky culture languages.
 
-The next setting group allows to enable using DE430/DE431 ephemeris
-files. Most users do not require this. Thes files have to be installed
-separately. See section~\ref{sec:ExtraData:ephemerides} if you are
-interested.
+The next setting group allows to enable using DE430/DE431 ephemeris files. 
+These files have to be installed separately. Most users do not require this. 
+See section~\ref{sec:ExtraData:ephemerides} if you are interested.
 
-The tab also provides a button for saving the current program
-configuration. Most display settings have to be explicitly stored to
-make a setting change permanent.
+The tab also provides the buttons for saving the current view direction as default 
+for the next startup, and for saving the program configuration. 
+Most display settings have to be explicitly stored to make a setting change permanent.
 
 \subsection{The Information Tab}
 \label{sec:gui:configuration:info}
 
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_info_tab}
+\centering\includegraphics[width=0.65\linewidth]{config_dialog_info_tab.png}
 \caption{Configuration Window: Information Tab}
 \label{fig:gui:configuration:info}
 \end{figure}
@@ -155,7 +156,7 @@ level of the stored data
 
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_navigation_tab}
+\centering\includegraphics[width=0.65\linewidth]{config_dialog_navigation_tab.png}
 \caption{Configuration Window: Navigation Tab}
 \label{fig:gui:configuration:nav}
 \end{figure}
@@ -177,7 +178,7 @@ when the program starts:
   be used every time Stellarium starts.
 \end{description}
 
-The lowest field allows selection of the correction model for the time
+\noindent The lowest field allows selection of the correction model for the time
 correction $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}). Default
 is ``Espenak and Meeus (2006)''. Please use other values only if you
 know what you are doing.
@@ -187,19 +188,19 @@ know what you are doing.
 
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_tools_tab}
+\centering\includegraphics[width=0.65\linewidth]{config_dialog_tools_tab.png}
 \caption{Configuration Window: Tools Tab}
 \label{fig:gui:configuration:tools}
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_scripts_tab}
+\centering\includegraphics[width=0.65\linewidth]{config_dialog_scripts_tab.png}
 \caption{Configuration Window: Scripts Tab}
 \label{fig:gui:configuration:scripts}
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_plugins_tab}
+\centering\includegraphics[width=0.65\linewidth]{config_dialog_plugins_tab.png}
 \caption{Configuration Window: Plugins Tab}
 \label{fig:gui:plugins}
 \end{figure}
@@ -212,9 +213,9 @@ If your screen is too narrow to show all buttons, you may have to choose your op
 \begin{description}
 \item[Spheric mirror distortion] This option pre-warps the main view
   such that it may be projected onto a spherical mirror using a
-  projector. The resulting image will be refected up from the spherical
-  mirror in such a way that it may be shone onto a small planetarium
-  dome, making a cheap planetarium projection system.
+  projector. The resulting image will be reflected up from the spherical
+  mirror in such a way that it may shine onto a small planetarium
+  dome (or even just the ceiling of your dining room), making a cheap planetarium projection system.
 \item[Select single constellation] When active, clicking on a star
   that is member in the constellation lines will make the
   constellation stand out. You can select several constellations, but
@@ -258,7 +259,8 @@ If your screen is too narrow to show all buttons, you may have to choose your op
 \item[Indication for mount mode] You can activate the short display of a message when switching type of used mount.
 \end{description}
 
-\noindent In addition, you can set the directory where screenshots will be stored, and you can download more star catalogs on this tab.
+\noindent In addition, you can set the directory where screenshots will be stored, 
+and you can download more star catalogs on this tab.
 
 \subsection{The Scripts Tab}
 \label{sec:gui:scripts}
@@ -305,7 +307,7 @@ which are not available via the main toolbar.
 \label{sec:gui:view:sky}
 
 \begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_sky_tab}
+\centering\includegraphics[width=\textwidth]{view_dialog_sky_tab.png}
 \caption{View Settings Window: Sky Tab}
 \label{fig:gui:view:sky}
 \end{figure}
@@ -372,7 +374,7 @@ opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass}
 \label{sec:gui:view:dso}
 
 \begin{figure}[t]
-\includegraphics[width=\textwidth,trim=0 120 0 0,clip]{view_dialog_dso_tab}
+\includegraphics[width=\textwidth,trim=0 120 0 0,clip]{view_dialog_dso_tab.png}
 \caption{View Settings Window: DSO Tab}
 \label{fig:gui:view:dso}
 \end{figure}
@@ -399,7 +401,7 @@ and how to extend it with your own photographs.
 \label{sec:gui:view:markings}
 
 \begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_markings_tab}
+\centering\includegraphics[width=\textwidth]{view_dialog_markings_tab.png}
 \caption{View Settings Window: Markings Tab}
 \label{fig:gui:view:markings}
 \end{figure}
@@ -464,7 +466,7 @@ The Markings tab of the View window
 \label{sec:gui:view:landscape}
 
 \begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_landscape_tab}
+\centering\includegraphics[width=\textwidth]{view_dialog_landscape_tab.png}
 \caption{View Settings Window: Landscape Tab}
 \label{fig:gui:view:landscape}
 \end{figure}
@@ -485,7 +487,7 @@ The controls at the bottom right of the window operate as follows:
 
 \begin{description}
 \item[Show ground] This turns on and off landscape rendering (same
-  as the button \guibutton{0.6}{bt_ground} in the main tool-bar).
+  as the button \guibutton{0.6}{bt_ground.png} in the main tool-bar).
 \item[Show\_fog] This turns on and off rendering of a band of
   fog/haze along the horizon, when available in this landscape.
 \item[Use associated planet and position] When enabled, selecting a
@@ -527,7 +529,7 @@ See section \ref{sec:config.ini:landscape}.
 \label{sec:gui:view:starlore}
 
 \begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_starlore_tab}
+\centering\includegraphics[width=\textwidth]{view_dialog_starlore_tab.png}
 \caption{View Settings Window: Starlore Tab}
 \label{fig:gui:view:starlore}
 \end{figure}
@@ -540,11 +542,11 @@ Western and Inuit), and the rest do not. Configurable options include
 \item[Use this skyculture as default] Activate this option to load
   this skyculture when Stellarium starts.
 \item[Show labels] Activate display of constellation labels, like
-  \guibutton{0.6}{bt_constellation_name} or \keys{V}. You can further
+  \guibutton{0.6}{bt_constellation_name.png} or \keys{V}. You can further
   select whether you want to display abbreviated, original or
   translated names.
 \item[Show lines with thickness\ldots] Activate display of stick
-  figures, like \guibutton{0.6}{bt_constellation} or \keys{C}, and you
+  figures, like \guibutton{0.6}{bt_constellation.png} or \keys{C}, and you
   can configure constellation line thickness here.
 \item[Show asterism lines\ldots] Activate display of asterism stick figures   
   (like the shortcut \keys{Alt+A}), and you can configure asterism line thickness here.\newFeature{v0.16.0}
@@ -557,7 +559,7 @@ Western and Inuit), and the rest do not. Configurable options include
   as used in this skyculture (also shows modern planet name for
   reference). %% TODO THIS FEATURE NEEDS SOME REWORK!
 \item[Show art in brightness\ldots] Activate display of constellation
-  art (if available), like \guibutton{0.6}{bt_constellation_art} or
+  art (if available), like \guibutton{0.6}{bt_constellation_art.png} or
   \keys{R}. You can also select the brightness here.
 \item[Show asterism labels] Activate display of asterism labels, like \keys{Alt+V}.\newFeature{v0.16.0}
 \end{description}
@@ -567,26 +569,26 @@ Western and Inuit), and the rest do not. Configurable options include
 \label{sec:gui:search}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog.png}
 \caption{The Search Window: Objects}
 \label{fig:gui:search}
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog_position}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog_position.png}
 \caption{The Search Window: Positions}
 \label{fig:gui:search:position}
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog_list}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog_list.png}
 \caption{The Search Window: Lists}
 \label{fig:gui:search:lists}
 \end{figure}
 
 
 \begin{figure}[tp]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog_option}
+\centering\includegraphics[width=0.68\linewidth]{search_dialog_option.png}
 \caption{The Search Window: Options}
 \label{fig:gui:search:options}
 \end{figure}
@@ -627,7 +629,7 @@ The Options tab (Fig.~\ref{fig:gui:search:options}) provides a few settings to f
 When the name of an object to find is typed in the object
 window and you are connected to the internet and ``Extend search'' is
 ticked, Stellarium will search the SIMBAD on-line  data bases for its
-coordinates. You can then click the \guibutton{0.6}{bt_search} button or press return.
+coordinates. You can then click the \guibutton{0.6}{bt_search.png} button or press return.
 Stellarium will point you at that object in the sky even if there is no
 object displayed on the screen. The SIMBAD server being used can be
 selected from the scroll window.
@@ -637,7 +639,7 @@ selected from the scroll window.
 \label{sec:gui:AstroCalc}
 
 \newFeature{v0.15.0} This window provides advanced functionality, some of which is still in an experimental phase. 
-You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc} on the left menu bar. 
+You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
 The Astronomical Calculations window shows six tabs with different functionality.
 
 \subsection{The Positions Tab}
@@ -651,7 +653,7 @@ You may also export the list of positions into a CSV file.
 
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.60\textwidth]{astrocalc_dialog_positions_tab}
+\centering\includegraphics[width=0.60\textwidth]{astrocalc_dialog_positions_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Celestial positions}
 \label{fig:gui:AstroCalc:Positions}
 \end{figure}
@@ -669,7 +671,7 @@ Dates and/or magnitudes will show near position markers when \emph{Show dates} a
 You can export the calculated ephemeris into a CSV file. 
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_tab}
+\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Plot trace of planet}
 \label{fig:gui:AstroCalc:Ephemeris}
 \end{figure}
@@ -680,13 +682,13 @@ For example, you can get an analemma of the Sun for any location (Figures~\ref{f
 or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_analemma}
+\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_analemma.png}
 \caption{Astronomical Calculations (AstroCalc): Analemma on the Earth}
 \label{fig:gui:AstroCalc:Ephemeris:Analemma}
 \end{figure}
 
 \begin{figure}[tbp]
-\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_analemma_mars}
+\centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_analemma_mars.png}
 \caption{Astronomical Calculations (AstroCalc): Analemma on Mars}
 \label{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}
 \end{figure}
@@ -701,7 +703,7 @@ occultations and eclipses (in special cases) between planetary objects
 You can export the calculated phenomena into a CSV file.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_phenomena_tab}
+\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_phenomena_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Phenomena}
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
@@ -714,7 +716,7 @@ On this tab you can compute the geometrical altitude of the currently selected o
 and date and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
     
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_altvstime_tab}
+\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_altvstime_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Altitude vs.\ Time}
 \label{fig:gui:AstroCalc:AltVsTime}
 \end{figure}
@@ -724,7 +726,7 @@ and date and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
 \label{sec:gui:AstroCalc:Graphs}
     
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Graphs}
 \label{fig:gui:AstroCalc:Graphs}
 \end{figure}
@@ -751,7 +753,7 @@ The ``What's Up Tonight'' (WUT) tool\newFeature{v0.16.0}%
  displays a list of objects that will be visible at night for the current date and location.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_wut_tab}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_wut_tab.png}
 \caption{Astronomical Calculations (AstroCalc): What's Up Tonight (WUT)}
 \label{fig:gui:AstroCalc:WUT}
 \end{figure}
@@ -779,7 +781,7 @@ It computes the relations between two Solar system bodies for the current date a
 orbital resonances and orbital velocities.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_tab}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC)}
 \label{fig:gui:AstroCalc:PC}
 \end{figure}
@@ -791,7 +793,7 @@ orbital resonances and orbital velocities.
 \label{sec:gui:help}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{help_dialog}
+\centering\includegraphics[width=0.68\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
@@ -814,7 +816,7 @@ the key has been taken already, a message will tell you.
 
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{help_dialog_about}
+\centering\includegraphics[width=0.68\textwidth]{help_dialog_about.png}
 \caption{Help Window: About}
 \label{fig:gui:help:about}
 \end{figure}
@@ -823,7 +825,7 @@ The About Tab (Fig.~\ref{fig:gui:help:about}) shows version and licensing inform
 of people who helped to produce the program.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{help_dialog_log}
+\centering\includegraphics[width=0.68\textwidth]{help_dialog_log.png}
 \caption{Help Window: Logfile}
 \label{fig:gui:help:log}
 \end{figure}

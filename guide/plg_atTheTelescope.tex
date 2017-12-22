@@ -12,9 +12,10 @@ at the telescope: Oculars (section~\ref{sec:plugins:Oculars}), which
 provides field of view hints for telescopes, oculars and sensors, and
 TelescopeControl (section~\ref{sec:plugins:TelescopeControl}), which
 allows you to send GOTO commands to many motorized telescope mounts. Other
-GOTO telescopes are supported by an external program which you must
+GOTO telescopes are supported by external programs which you must
 install separately: \program{StellariumScope}
-(section~\ref{sec:plugins:StellariumScope}). This can also help DIY hardware 
+(section~\ref{sec:plugins:StellariumScope}), \program{RTS2} (section~\ref{sec:plugins:TelescopeControl:RTS2}) 
+or \program{INDI} (section~\ref{sec:plugins:TelescopeControl:INDI}). This can also help DIY hardware 
 tinkerers who like to build their own control systems (section~\ref{sec:plugins:TelescopeControl:Other}).
 
 In addition, the Observability plugin (section~\ref{sec:plugins:Observability})
@@ -44,7 +45,7 @@ By default, the hot key to display the popup is \keys{\Alt+O} (\keys{Option+O} f
 This can be changed in the \menu{Editing Keyboard Shortcuts} window (see section~\ref{sec:gui:help:hotkeys}). The menu will popup where your cursor is located.
 
 \begin{figure}[t]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_menu}
+\includegraphics[width=.75\textwidth]{oculars_usage_menu.png}
 \caption{The on-screen menu (top right) and popup menu (lower right) of the Oculars plugin.}
 \label{fig:plugins:Oculars:Usage:Menu}
 \end{figure}
@@ -64,7 +65,7 @@ The three circles that appear in the center of the screen are $0.5\degree$, $2.0
 They stay centered in the screen, so move the ``telescope'' (click-drag the background) to center the circles on the object of interest. 
 
 \begin{figure}[b]\centering
-\includegraphics[width=\textwidth]{oculars_usage_telrad}
+\includegraphics[width=\textwidth]{oculars_usage_telrad.png}
 \caption{The left image is the default $60\degree$, and the right one is $40\degree$.}
 \label{fig:plugins:Oculars:Usage:Telrad}
 \end{figure}
@@ -75,13 +76,13 @@ While the Telrad finder is active, you can not activate a CCD with the popup men
 
 
 \begin{figure}[ht]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ccd}
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd.png}
 \caption{View of M37 through a CCD sensor of the Oculars plugin.}
 \label{fig:plugins:Oculars:Usage:CCD}
 \end{figure}
 
 \begin{figure}[ht]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ccd_info}
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_info.png}
 \caption{View of M37 through a CCD sensor of the Oculars plugin (without on-screen control panel).}
 \label{fig:plugins:Oculars:Usage:CCD:Info}
 \end{figure}
@@ -104,19 +105,19 @@ Once rotated, the CCD frame on screen displays the new orientation (see fig. \re
 
 % THESE 3 should always be together on one float page.
 \begin{figure}[p]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ccd_menu}
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_menu.png}
 \caption{The CCD sensor popup menu of the Oculars plugin.}
 \label{fig:plugins:Oculars:Usage:CCD:Menu}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ccd_rotmenu}
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_rotmenu.png}
 \caption{Setting rotation of CCD sensor in the popup menu.}
 \label{fig:plugins:Oculars:Usage:CCD:RotMenu}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ccd_rotation}
+\includegraphics[width=.75\textwidth]{oculars_usage_ccd_rotation.png}
 \caption{A rotated CCD sensor frame of the Oculars plugin.}
 \label{fig:plugins:Oculars:Usage:CCD:Rotation}
 \end{figure}
@@ -129,7 +130,8 @@ Once rotated, the CCD frame on screen displays the new orientation (see fig. \re
 \begin{itemize}
 \item Define some eyepieces and telescope (see section \ref{sec:sec:plugins:Oculars:Configuration}).
 \item Select an object to view (i.e. a star, planet, etc.)
-\item Click the toolbar button \guibutton{0.6}{bt_ocular} for toggling the Ocular view, or press \keys{\ctrl+O} (\keys{\cmdmac+O} for Mac users).
+\item Click the toolbar button \guibutton{0.6}{bt_ocular.png} for toggling the Ocular view, 
+      or press \keys{\ctrl+O} (\keys{\cmdmac+O} for Mac users).
 \item Swap between eye pieces and telescopes to see how the view changes.
 \end{itemize}
 
@@ -139,7 +141,7 @@ And it is easy to do so with binoculars too.
 To show this, let us use the M37 cluster as target. Through a pair of Celestron 15x70 binoculars, it would look like in fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37Binos}.
 
 \begin{figure}[h]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37binos}
+\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37binos.png}
 \caption{The M37 cluster through a Celestron 15x70 binocular.}
 \label{fig:plugins:Oculars:Usage:Ocular:M37Binos}
 \end{figure}
@@ -147,7 +149,7 @@ To show this, let us use the M37 cluster as target. Through a pair of Celestron 
 \noindent A very pretty sight. Now, what would it look like through a Celestron 80\,mm EDF finder 'scope, with an Explore Scientific 14\,mm $100\degree$ eyepiece? See fig.~\ref{fig:plugins:Oculars:Usage:Ocular:M37EDF}!
 
 \begin{figure}[h]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37edf}
+\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37edf.png}
 \caption{The M37 cluster through a Celestron 80\,mm EDF with Explore Scientific 14\,mm eyepiece.}
 \label{fig:plugins:Oculars:Usage:Ocular:M37EDF}
 \end{figure}
@@ -157,7 +159,7 @@ To show this, let us use the M37 cluster as target. Through a pair of Celestron 
 %%%%%%%%%%% MISSING CONTEXT SWITCH!! Here might be a paragraph with comparing the 14mm eyepiece with a 31mm Nagler!
 
 \begin{figure}[ht]\centering
-\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37c1400}
+\includegraphics[width=.75\textwidth]{oculars_usage_ocular_m37c1400.png}
 \caption{The M37 cluster through a Celestron C1400 with Tele Vue Nagler 31\,mm eyepiece.}
 \label{fig:plugins:Oculars:Usage:Ocular:M37C1400}
 \end{figure}
@@ -185,7 +187,7 @@ All configuration is done through the user interface in the application.
 To open the configuration dialog hit the \keys{\Alt+O} key, 
 or click the \button{configure} button on the plugin setup dialog (available in the
 \menu{Plugins} tab of Stellarium's Configuration window (opened by 
-pressing \keys{F2} or the \guibutton[0.25]{2}{btd_config} button in the left toolbar)), 
+pressing \keys{F2} or the \guibutton[0.25]{2}{btd_config.png} button in the left toolbar)), 
 or the rightmost button of the on-screen panel (if displayed in the top right corner of screen). 
 There are six tabs in the configuration dialog: \emph{General}, \emph{Eyepieces}, \emph{Lenses}, \emph{Sensors}, \emph{Telescopes}, and \emph{About}. The first five are the ones we are interested in here.
 
@@ -195,7 +197,7 @@ The first option allows you to define the general behaviour of the plugin.
 The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view} and \emph{Sensor view} (see figure \ref{fig:plugins:Oculars:Gui:General}).
 
 \begin{figure}[ht]\centering
-\includegraphics[width=0.75\textwidth]{oculars_gui_general}
+\includegraphics[width=0.75\textwidth]{oculars_gui_general.png}
 \caption{General tab of the Oculars plugin configuration dialog.}
 \label{fig:plugins:Oculars:Gui:General}
 \end{figure}
@@ -236,13 +238,13 @@ This is the tab used to enter your own eyepieces (see figures~\ref{fig:plugins:O
 By default, a few sample ones have been added; feel free to delete those once you've entered your own.
 
 \begin{figure}[p]\centering
-\includegraphics[trim=0 200 0 0,clip,width=.75\textwidth]{oculars_gui_eyepieces}
+\includegraphics[trim=0 200 0 0,clip,width=.75\textwidth]{oculars_gui_eyepieces.png}
 \caption{Eyepieces tab of Oculars plugin configuration dialog.}
 \label{fig:plugins:Oculars:Gui:Eyepieces}
 \end{figure}
 
 \begin{figure}[p]\centering
-\includegraphics[width=0.75\textwidth]{oculars_gui_eyepieces_binos}
+\includegraphics[width=0.75\textwidth]{oculars_gui_eyepieces_binos.png}
 \caption{Eyepieces tab of Oculars plugin configuration dialog (settings for binocular).}
 \label{fig:plugins:Oculars:Gui:Eyepieces_binos}
 \end{figure}
@@ -270,7 +272,7 @@ When Binoculars are described, the relevant fields change to
 This is the tab used to enter your own lenses (see figure \ref{fig:plugins:Oculars:Gui:Lenses}). By default, a few sample ones have been added; feel free to delete them once you've entered your own.
 
 \begin{figure}[ht]\centering
-\includegraphics[trim=0 350 0 0,clip,width=.75\textwidth]{oculars_gui_lenses}
+\includegraphics[trim=0 350 0 0,clip,width=.75\textwidth]{oculars_gui_lenses.png}
 \caption{Lenses tab of Oculars plugin configuration dialog.}
 \label{fig:plugins:Oculars:Gui:Lenses}
 \end{figure}
@@ -289,7 +291,7 @@ When defined and selected, this will draw a red bounding rectangle in the center
 Because of the way floating point numbers are stored, sometimes you may see one of your defined values change (for example from 2.2 to 2.19999) but this should not affect what you see.
 
 \begin{figure}[ht]\centering
-\includegraphics[trim=0 115 0 0,clip,width=.75\textwidth]{oculars_gui_sensors}
+\includegraphics[trim=0 115 0 0,clip,width=.75\textwidth]{oculars_gui_sensors.png}
 \caption{Sensors tab of Oculars plugin configuration dialog.}
 \label{fig:plugins:Oculars:Gui:Sensors}
 \end{figure}
@@ -323,7 +325,7 @@ Pixel size is simply image size divided by resolution. Some cameras may have uns
 This is the tab used to enter your own telescopes (see fig.~\ref{fig:plugins:Oculars:Gui:Telescopes}). The fields on this tab are:
 
 \begin{figure}[ht]\centering
-\includegraphics[trim=0 325 0 0,clip,width=.75\textwidth]{oculars_gui_telescopes}
+\includegraphics[trim=0 325 0 0,clip,width=.75\textwidth]{oculars_gui_telescopes.png}
 \caption{Telescopes tab of Oculars plugin configuration dialog.}
 \label{fig:plugins:Oculars:Gui:Telescopes}
 \end{figure}
@@ -369,9 +371,9 @@ These example all use a Celestron C8 8" SCT telescope, and the target is the Gre
 
 \begin{figure}[p]\centering
 \begin{tabular}{c}
-\includegraphics[width=.825\textwidth]{oculars_tv_ethos}\\
-\includegraphics[width=.825\textwidth]{oculars_tv_nagler}\\
-\includegraphics[width=.825\textwidth]{oculars_tv_delos}
+\includegraphics[width=.825\textwidth]{oculars_tv_ethos.png}\\
+\includegraphics[width=.825\textwidth]{oculars_tv_nagler.png}\\
+\includegraphics[width=.825\textwidth]{oculars_tv_delos.png}
 \end{tabular}
 \caption{Comparing apparent fields of view of (top) a 17\mm\ Tele Vue Ethos eyepiece with an aFOV of $100\degree$. Magnification is $119.5\times$.
 (center) a 17\mm\ Tele Vue Nagler eyepiece with an aFOV of $82\degree$. Magnification is $119.5\times$.
@@ -479,7 +481,7 @@ The plug-in's main window can be opened:
 \begin{itemize}
 \item By pressing the \button{configure} button for the plug-in in the
   \menu{Plugins} tab of Stellarium's Configuration window (opened by
-  pressing \keys{F2} or the \guibutton[0.35]{2}{btd_config} button in the left toolbar).
+  pressing \keys{F2} or the \guibutton[0.35]{2}{btd_config.png} button in the left toolbar).
 \item By pressing the \button{Configure telescopes...} button in the \menu{Slew to}
   window (opened by pressing \keys{\ctrl+0} or the respective button on the
   bottom toolbar).
@@ -911,7 +913,7 @@ One anonymous user sent a troubleshooting solution when connecting Stellarium to
 \section{Observability Plugin}
 \label{sec:plugins:Observability}
 
-This Plugin is activated with the button \guibutton[0.5]{0.3}{bt_observab_off}. 
+This Plugin is activated with the button \guibutton[0.5]{0.3}{bt_observab_off.png}. 
 It analyzes the observability of the selected object (or the
 screen center, if no object is selected). The plugin can show rise,
 transit, and set times, as well as the best epoch of the year (i.e.,

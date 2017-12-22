@@ -44,7 +44,7 @@ introduced in version 0.13.3 as a further tool in the
 archaeoastronomer's toolbox\cite{Zotti:SEAC2015}.
 
 When activated (see section~\ref{sec:Plugins:EnablingPlugins}), you
-can find a a tool bar button \guibutton{0.6}{bt_archaeolines} (in the
+can find a a tool bar button \guibutton{0.6}{bt_archaeolines.png} (in the
 shape of a \emph{trilithon} with the sun shining through it). Press
 this, or \key{\ctrl+U}, to display the currently selected set of
 characteristical diurnal arcs.
@@ -91,7 +91,11 @@ azimuths 69\degree\ and 111\degree. The summer sun rises at
 through the nadir rises at 125\degree.  
 
 \begin{figure}[t]
+\ifpdf
 \includegraphics[trim=5 0 5 0,clip,width=\textwidth]{GZ_MorningLatitude}
+\else
+\includegraphics[trim=5 0 5 0,clip,width=\textwidth]{GZ_MorningLatitude.png}
+\fi
 \caption{Rising azimuths of a few important events for sun and moon,
   and zenith and nadir passages depending on geographic latitudes
   (vertical axis).}
@@ -170,7 +174,7 @@ Apart from changing settings using the plugin configuration dialog,
 you can also edit \file{config.ini} file by yourself for changes of the
 settings for the ArchaeoLines plugin -- just make it carefully!
 
-\begin{longtabu} {l|l|l}\toprule
+\begin{longtable}{l|l|l}\toprule
 \emph{ID}                      &\emph{Type} & \emph{Default}  \\\midrule
 enable\_at\_startup            &bool        & false           \\\midrule
 color\_equinox                 &float R,G,B & \ccbox{1.00,1.00,0.50}  \\
@@ -225,7 +229,7 @@ custom\_declination\_1\_angle  &double      & 0.0      \\
 custom\_declination\_1\_label  &string      & custDec1 \\
 custom\_declination\_2\_angle  &double      & 0.0      \\
 custom\_declination\_2\_label  &string      & custDec2 \\\bottomrule
-\end{longtabu}
+\end{longtable}
 
 
 

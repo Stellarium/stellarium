@@ -87,22 +87,23 @@ instead they contain coordinates relative to the central position of the
 zone they occupy. Thus, when parsing star catalogues, it is necessary to
 know about the zone model to be able to extract positional data.
 
-\begin{longtabu} to \textwidth {l X X X X X}
+\noindent
+\begin{tabular}{ccrcrl}
 \toprule
-\emph{File} & \emph{Data Type} & \emph{Data Record Size} &
-\emph{Geodesic Level} & \emph{\#Records} & \emph{Notes}\\
+\emph{File} & \emph{Data     } & \emph{Data            } & \emph{Geodesic      } & \emph{\#Records} & \emph{Notes}\\
+            & \emph{     Type} & \emph{     Record Size} & \emph{         Level} &                  &             \\
 \midrule
-\file{stars\_0\_0v0\_7.cat} & 0 & 28 bytes & 0 & 4,979 & Hipparcos\\
-\file{stars\_1\_0v0\_7.cat} & 0 & 28 bytes & 1 & 21,806 & Hipparcos\\
-\file{stars\_2\_0v0\_7.cat} & 0 & 28 bytes & 2 & 150,850 & Hipparcos\\
-\file{stars\_3\_1v0\_4.cat} & 1 & 10 bytes & 3 & 425,807 & Tycho 2\\
-\file{stars\_4\_1v0\_2.cat} & 1 & 10 bytes & 4 & 1,692,779 & Tycho 2\\
-\file{stars\_5\_2v0\_1.cat} & 2 & 8 bytes & 5 & 7,083,058 & NOMAD\\
-\file{stars\_6\_2v0\_1.cat} & 2 & 8 bytes & 6 & 24,670,782 & NOMAD\\
-\file{stars\_7\_2v0\_1.cat} & 2 & 8 bytes & 7 & 50,733,321 & NOMAD\\
-\file{stars\_8\_2v0\_1.cat} & 2 & 8 bytes & 7 & 92,304,337 & NOMAD\\
+\file{stars\_0\_0v0\_7.cat} & 0 & 28 bytes & 0 &      4,979 & Hipparcos\\
+\file{stars\_1\_0v0\_7.cat} & 0 & 28 bytes & 1 &     21,806 & Hipparcos\\
+\file{stars\_2\_0v0\_7.cat} & 0 & 28 bytes & 2 &    150,850 & Hipparcos\\
+\file{stars\_3\_1v0\_4.cat} & 1 & 10 bytes & 3 &    425,807 & Tycho 2\\
+\file{stars\_4\_1v0\_2.cat} & 1 & 10 bytes & 4 &  1,692,779 & Tycho 2\\
+\file{stars\_5\_2v0\_1.cat} & 2 &  8 bytes & 5 &  7,083,058 & NOMAD\\
+\file{stars\_6\_2v0\_1.cat} & 2 &  8 bytes & 6 & 24,670,782 & NOMAD\\
+\file{stars\_7\_2v0\_1.cat} & 2 &  8 bytes & 7 & 50,733,321 & NOMAD\\
+\file{stars\_8\_2v0\_1.cat} & 2 &  8 bytes & 7 & 92,304,337 & NOMAD\\
 \bottomrule
-\end{longtabu}
+\end{tabular}
 
 For a given catalogue file, there may be one of three formats for the
 actual star data. The variation comes from the source of the data -- the
@@ -118,7 +119,8 @@ Stellarium's star catalogues based on Hipparcos~\cite{1997ESASP1200.....E, 2012A
 The catalogue files are split into three main sections as described in
 table \emph{File sections}.
 
-\begin{longtabu} to \textwidth {l l X}\toprule
+\noindent%
+\begin{tabularx}{\textwidth}{l l X}\toprule
 \emph{Section} & \emph{Offset} & \emph{Description}\\\midrule
 File Header Record &  0        & Contains magic number, geodesic subdivision level, and magnitude range\\\midrule
 Zone Records       & 32        & A list of how many records there are for each zone.
@@ -128,7 +130,7 @@ Star Data Records  & 32+4$n$   & This section of the file contains fixed-size st
                                  how many records have been read so far and switching zones when enough have been read 
                                  to fill the number of stars for the zone, as specified in the zones section above. 
                                  The value of $n$ used in the offset description is the number of zones, as described above.\\\bottomrule
-\end{longtabu}
+\end{tabularx}
 
 \subsection{Record Types}%\label{record-types}
 \label{sec:Catalogues:stars:record:types}
@@ -137,26 +139,33 @@ Star Data Records  & 32+4$n$   & This section of the file contains fixed-size st
 \label{sec:Catalogues:stars:record:header}
 
 The File Header Record describes file-wide settings. It also contains a
-magic number which servers as a file type identifier. See table
-\emph{Header Record}.
+magic number which servers as a file type identifier. See table~\ref{tab:Catalogues:stars:record:header}.
 
-\begin{longtabu} to \textwidth {l l l l X}\toprule
+\begin{table}[htbp]
+\begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
 Magic             &  0 & int & 4 & The magic number which identifies the file as a star catalogue. \texttt{0xde0955a3}\\\midrule
-Data Type         &  4 & int & 4 & This describes the type of the file, which defines the size and structure of the Star Data record for the file.\\\midrule
+Data Type         &  4 & int & 4 & This describes the type of the file, which defines the size and structure 
+                                   of the Star Data record for the file.\\\midrule
 Major Version     &  8 & int & 4 & The file format major version number\\\midrule
 Minor Version     & 12 & int & 4 & The file format minor version number\\\midrule
 Level             & 16 & int & 4 & Sets the level of sub-division of the geodesic sphere used to create the zones. 
                                    0 means an icosahedron (20 triangular faces), 
                                    subsequent levels of sub-division lead to numbers of zones 
                                    as described in section \href{Star_Catalogue\#Zones}{Zones}\\\midrule
-Magnitude Minimum & 20 & int & 4 & The low bound of the magnitude scale for values in this file. Note that this is still an integer in Stellarium's own internal representation\\\midrule
+Magnitude Minimum & 20 & int & 4 & The low bound of the magnitude scale for values in this file. 
+                                   Note that this is still an integer in Stellarium's own internal representation\\\midrule
 Magnitude Range   & 24 & int & 4 & The range of magnitudes expressed in this file\\\midrule
 Magnitude Steps   & 28 & int & 4 & The number of steps used to describes values in the range\\\bottomrule
-\end{longtabu}
+\end{tabularx}
+\caption{Header Record}
+\label{tab:Catalogues:stars:record:header}
+\end{table}
 
 \subsubsection{Zone Records}%\label{zone-records}
 \label{sec:Catalogues:stars:record:zone}
+
+%% TODO: There are still href links from the wiki. 
 
 The \emph{Zone Records} section of the file lists the number of star
 records there are per zone. The number of zones is determined from the
@@ -164,15 +173,19 @@ level value in the File Header Record, as described in section
 \href{Star_Catalogue\#Zones}{Zones}. The Zones section is simply a list
 of integer values which describe the number of stars for each zone. The
 total length of the Zones section depends on the number of zones. See
-table \emph{Zones section}.
+table~\ref{tab:Catalogues:stars:record:zones}. % \emph{Zones section}.
 
-\begin{longtabu} to \textwidth {l l l l X}\toprule
+\begin{table}[htbp]
+\begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 num stars in zone 0   & 0    & int & 4 & The number of records in this file which are in zone 0\\\midrule
 num stars in zone 1   & 4    & int & 4 & The number of records is this file which are in zone 1\\
 ...                   &      &     &   &\\
 num stars in zone $n$ & $4n$ & int & 4 & The number of records is this file which are in zone $n$\\\bottomrule
-\end{longtabu}
+\end{tabularx}
+\caption{Zones section}
+\label{tab:Catalogues:stars:record:zones}
+\end{table}
 
 \subsubsection{Star Data Records}%\label{star-data-records}
 \label{sec:Catalogues:stars:record:data}
@@ -187,9 +200,10 @@ records have been read so far.
 
 The actual record structure depends on the value of the Data Type, as
 found in the File Header Record.
-
-See tables \emph{Star Data Record Type 0}, \emph{Star Data Record Type
-1} and \emph{Star Data Record Type 2} for record structure details.
+See tables 
+%\emph{Star Data Record Type 0}, \emph{Star Data Record Type 1} and \emph{Star Data Record Type 2} 
+\ref{tab:StarDataRecord0}, \ref{tab:StarDataRecord1} and \ref{tab:StarDataRecord2}
+for record structure details.
 
 It should be noted that although the positional data loses accuracy as
 one progresses though the Star Record Types, this is compensated for by
@@ -198,42 +212,57 @@ smaller precision position fields are used, so the actual resolution on
 the sky isn't significantly worse for the type 1 and 2 records in
 practice.
 
-\begin{longtabu} to \textwidth {l l l l X}\toprule
+\begin{longtable}{llllp{55mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 hip            &  0 & int                & 3 & Hipparcos catalogue number\\\midrule
 component\_ids &  3 & unsigned char      & 1 & This is an index to an array of catalogue number suffixes. The list is read from the
-                                               \textbf{stars\_hip\_component\_ids.cat} file. The value of this field turns out to be the line number in the file - 1\\\midrule
+                                               \file{stars\_hip\_component\_ids.cat} file. The value of this field turns out to be 
+											   the line number in the file - 1\\\midrule
 x0             &  4 & int                & 4 & This is the position of the star relative to the central point in the star's zone, in axis 1\\\midrule
 x1             &  8 & int                & 4 & This is the position of the star relative to the central point in the star's zone, in axis 2\\\midrule
-b\_v           &  9 & unsigned char      & 1 & This is the magnitude level in B-V colour. This value refers to one of 256 discrete steps in the magnitude range for the file\\\midrule
-mag            & 10 & unsigned char      & 1 & This is the magnitude level in the V-I colour. This value refers to one of 256 discrete steps in the magnitude range for the file\\\midrule
+b\_v           &  9 & unsigned char      & 1 & This is the magnitude level in B-V colour. This value refers to one of 256 discrete steps 
+                                               in the magnitude range for the file\\\midrule
+mag            & 10 & unsigned char      & 1 & This is the magnitude level in the V-I colour. This value refers to one of 256 discrete steps 
+                                               in the magnitude range for the file\\\midrule
 sp\_int        & 11 & unsigned short int & 2 & This is the index in an array of spectral type descriptions 
-                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the line number in the file - 1\\\midrule
+                                               which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the 
+											   line number in the file - 1\\\midrule
 dx0            & 13 & int                & 4 & This is the proper motion of the star in axis 1\\\midrule
 dx1            & 17 & int                & 4 & This is the proper motion of the star in axis 2\\\midrule
 plx            & 21 & int                & 4 & This is the parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
-\end{longtabu}
+\caption{Star Data Record Type 0}
+\label{tab:StarDataRecord0}
+\end{longtable}
 
-\begin{longtabu} to \textwidth {l l l l X}\toprule
+\begin{table}[htbp]
+\begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset}& \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
 x0   &  0      & int          & 20 bits & This is the position of the star relative to the central point in the star's zone, in axis 1\\\midrule
 x1   & 20 bits & int          & 20 bits & This is the position of the star relative to the central point in the star's zone, in axis 2\\\midrule
 dx0  & 40 bits & int          & 14 bits & This is the proper motion of the star in axis 1\\\midrule
 dx1  & 54 bits & int          & 14 bits & This is the proper motion of the star in axis 2\\\midrule
-b\_v & 68 bits & unsigned int &  7 bits & This is the magnitude level in B-V colour. This value refers to one of 256 discrete steps in the magnitude range for the file\\\midrule
-mag  & 75 bits & unsigned int &  5 bits & This is the magnitude level in the V-I colour. This value refers to one of 256 discrete steps in the magnitude range for the file\\\bottomrule
-\end{longtabu}
+b\_v & 68 bits & unsigned int &  7 bits & This is the magnitude level in B-V colour. This value refers to one of 128 discrete steps 
+                                          in the magnitude range for the file\\\midrule
+mag  & 75 bits & unsigned int &  5 bits & This is the magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
+                                          in the magnitude range for the file\\\bottomrule
+\end{tabularx}
+\caption{Star Data Record Type 1}
+\label{tab:StarDataRecord1}
+\end{table}
 
-\begin{longtabu} to \textwidth {l l l l X}\toprule
+\begin{table}[htbp]
+\begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
 x0   & 0       & int          & 18 bits & This is the position of the star relative to the central point in the star's zone, in axis 1\\\midrule
 x1   & 18 bits & int          & 18 bits & This is the position of the star relative to the central point in the star's zone, in axis 2\\\midrule
-b\_v & 36 bits & unsigned int &  7 bits & This is the magnitude level in B-V colour. This value refers to one of 256 discrete steps 
+b\_v & 36 bits & unsigned int &  7 bits & This is the magnitude level in B-V colour. This value refers to one of 128 discrete steps 
                                           in the magnitude range for the file\\\midrule
-mag  & 43 bits & unsigned int &  5 bits & This is the magnitude level in the V-I colour. This value refers to one of 256 discrete steps 
+mag  & 43 bits & unsigned int &  5 bits & This is the magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
                                           in the magnitude range for the file\\\bottomrule
-\end{longtabu}
-%% TODO: 5bits=32 values; 7bits=128 values! Clarify!
+\end{tabularx}
+\caption{Star Data Record Type 2}
+\label{tab:StarDataRecord2}
+\end{table}
 
 \section{Variable Stars}
 \label{sec:StarCatalogues:VariableStars}
@@ -258,11 +287,12 @@ User Directory (see section~\ref{sec:Directories}).
 \subsubsection{File Format}%\label{file-format}
 \label{sec:StarCatalogues:VariableStars:file}
 
-The \textbf{gcvs\_hip\_part.dat} file contains data about 6916
-\href{Variable_Stars}{variable stars} which have HIP identificators and
-stored in the plain text format with tab delimiter.
+The \file{gcvs\_hip\_part.dat} file contains data about 6916 Variable Stars 
+(see section~\ref{sec:Phenomena:variableStars}) which have HIP identificators and
+are stored in a plain text format with tab delimiter (Table~\ref{tab:sec:StarCatalogues:VariableStars}).
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\begin{table}[tb]
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
 HIP      & int    & This is the HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
 GCVS     & string & This is the GCVS designation for the variable star.\\\midrule
@@ -278,12 +308,16 @@ Epoch    & float  & Epoch for maximum or minimum light (in Julian days).\\\midru
 Period   & float  & Period for the variable star (in days).\\\midrule
 M-m      & float  & Rising time or duration of the eclipse (in percent).\\\midrule
 Spectrum & string & Spectral class of the variable star.\\\bottomrule
-\end{longtabu}
+\end{tabularx}
+\caption{Variable Star Catalog File Format}
+\label{tab:sec:StarCatalogues:VariableStars}
+\end{table}
 
 \subsection{GCVS Variability Types}\label{gcvs-variability-types}
 
 An improved system of variability classification is used in the fourth
-edition of the GCVS, based on recent developments in classification
+edition of the GCVS%~\cite{GCVS4}, %%%%%%%%% TODO: ADD REFERENCE
+, based on recent developments in classification
 principles and taking into account the suggestions of a number of
 specialists. Variability types are grouped according to the major
 astrophysical reasons for variability.
@@ -292,7 +326,7 @@ All of these classes include objects of a dissimilar nature that belong
 to different types of light variability. On the other hand, an object
 may be variable because of almost all of the possible reasons or because
 of any combination of them. If a variable belongs to several types of
-variability, the types are joined in the data field by a "+" sign, e.g.,
+variability, the types are joined in the data field by a ``+'' sign, e.g.,
 E+UG, UV+BY.
 
 Despite considerable success in understanding stellar variability
@@ -300,8 +334,8 @@ processes, the classification adopted in the Catalogue is far from
 perfect. This is especially the case for explosive, symbiotic and
 novalike variables; X-ray sources; and peculiar objects.
 
-You can read about latest different types of variability
-\href{http://cdsarc.u-strasbg.fr/vizier/ftp/cats/B/gcvs/vartype.txt}{here}.
+You can read about latest different types of variability at VIZIER\footnote{
+\url{http://cdsarc.u-strasbg.fr/vizier/ftp/cats/B/gcvs/vartype.txt}}.
 
 \subsubsection{Eruptive Variable Stars}\label{eruptive-variable-stars}
 
@@ -312,11 +346,8 @@ the form of stellar winds of variable intensity and/or by interaction
 with the surrounding interstellar medium. This class includes the
 following types:
 
-\begin{longtabu} to \textwidth {l|X}
-\toprule
-\emph{Type} & \emph{Description}\\
-\midrule
-\textbf{FU} & Orion variables of the FU Orionis type. Characterized by
+\begin{description}
+\item[FU] Orion variables of the FU Orionis type. Characterized by
 gradual increases in brightness by about 6 mag in several months,
 followed by either almost complete constancy at maximum that is
 sustained for long periods of time or slow decline by 1-2 mag. Spectral
@@ -327,25 +358,20 @@ the evolutionary stages of T Tauri-type Orion variables (INT), as
 evidenced by an outburst of one member, V1057 Cyg, but its decline (2.5
 mag in 11 years) commenced immediately after maximum brightness was
 attained. All presently known FU Ori variables are coupled with
-reflecting cometary nebulae.\\
-\midrule
-\textbf{GCAS} & Eruptive irregular variables of the Gamma Cas type.
+reflecting cometary nebulae.
+\item[GCAS] Eruptive irregular variables of the Gamma Cas type.
 These are rapidly rotating B III-IVe stars with mass outflow from their
 equatorial zones. The formation of equatorial rings or disks is often
 accompanied by temporary fading. Light amplitudes may reach 1.5 mag in
-V.\\
-\midrule
-\textbf{I} & Poorly studied irregular variables with unknown features of
+V.
+\item[I] Poorly studied irregular variables with unknown features of
 light variations and spectral types. This is a very inhomogeneous group
-of objects.\\
-\midrule
-\textbf{IA} & Poorly studied irregular variables of early (O-A) spectral
-type.\\
-\midrule
-\textbf{IB} & Poorly studied irregular variables of intermediate (F-G)
-to late (K-M) spectral type.\\
-\midrule
-\textbf{IN} & Orion variables. Irregular, eruptive variables connected
+of objects.
+\item[IA] Poorly studied irregular variables of early (O-A) spectral
+type.
+\item[IB] Poorly studied irregular variables of intermediate (F-G)
+to late (K-M) spectral type.
+\item[IN] Orion variables. Irregular, eruptive variables connected
 with bright or dark diffuse nebulae or observed in the regions of these
 nebulae. Some of them may show cyclic light variations caused by axial
 rotation. In the Spectrum-Luminosity diagram, they are found in the area
@@ -355,18 +381,15 @@ stars on the zero-age main sequence (ZAMS). The range of brightness
 variations may reach several magnitudes. In the case of rapid light
 variations having been observed (up to 1 mag in 1-10 days), the letter
 ``S'' is added to the symbol for the type (INS). This type may be
-divided into the following subtypes:\\
-\midrule
-\emph{INA} & Orion variables of early spectral types (B-A or Ae). They
-are often characterized by occasional abrupt Algol-like fadings (T
-Ori);\\
-\midrule
-\emph{INB} & Orion variables of intermediate and late spectral types,
+divided into the following subtypes:
+\begin{description}
+\item[INA] Orion variables of early spectral types (B-A or Ae). They
+are often characterized by occasional abrupt Algol-like fadings (T Ori);
+\item[INB] Orion variables of intermediate and late spectral types,
 F-M or Fe-Me (BH Cep, AH Ori). F-type stars may show Algol-like fadings
 similar to those of many INA stars; K-M stars may produce flares along
-with irregular light variations;\\
-\midrule
-\emph{INT,IT} & Orion variables of the T Tauri type. Stars are assigned
+with irregular light variations;
+\item[INT,IT] Orion variables of the T Tauri type. Stars are assigned
 to this type on the basis of the following (purely spectroscopic)
 criteria: spectral types are in the range Fe-Me. The spectra of most
 typical stars resemble the spectrum of the solar chromosphere. The
@@ -376,15 +399,14 @@ stars), emission lines {[}Si II{]} and {[}O I{]}, as well as the
 absorption line Li I 6707 A. These variables are usually observed only
 in diffuse nebulae. If it is not apparent that the star is associated
 with a nebula, the letter ``N'' in the symbol for the type may be
-omitted, e.g., IT (RW AUR);\\
-\midrule
-\emph{IN(YY)} & Some Orion variables (YY Ori) show the presence of
+omitted, e.g., IT (RW AUR);
+\item[IN(YY)] Some Orion variables (YY Ori) show the presence of
 absorption components on the redward sides of emission lines, indicating
 the infall of matter toward the stars' surfaces. In such cases, the
 symbol for the type may be accompanied by the symbol
-``YY''.\\
-\midrule
-\textbf{IS} & Rapid irregular variables having no apparent connection
+``YY''.
+\end{description}
+\item[IS] Rapid irregular variables having no apparent connection
 with diffuse nebulae and showing light changes of about 0.5 - 1.0 mag
 within several hours or days. There is no strict boundary between rapid
 irregular and Orion variables. If a rapid irregular star is observed in
@@ -394,61 +416,52 @@ is necessary to take much care to be certain that its light changes are
 really not periodic. Quite a number of the stars assigned to this type
 in the third edition of the GCVS turned out to be eclipsing binary
 systems, RR Lyrae variables, and even extragalactic BL Lac
-objects.\\
-\midrule
-\emph{ISA} & Rapid irregular variables of the early spectral types, B-A
-or Ae;\\
-\midrule
-\emph{ISB} & Rapid irregular variables of the intermediate and late
-spectral types, F-M and Fe-Me.\\
-\midrule
-\textbf{RCB} & Variables of the R Coronae Borealis type. These are
+objects.
+\item[ISA] Rapid irregular variables of the early spectral types, B-A
+or Ae;
+\item[ISB] Rapid irregular variables of the intermediate and late
+spectral types, F-M and Fe-Me.
+\item[RCB] Variables of the R Coronae Borealis type. These are
 hydrogen-poor, carbon- and helium-rich, high-luminosity stars belonging
 to the spectral types Bpe-R, which are simultaneously eruptive and
 pulsating variables. They show slow nonperiodic fadings by 1-9 mag in V
 lasting from a month or more to several hundred days. These changes are
 superposed on cyclic pulsations with amplitudes up to several tenths of
-a magnitude and periods in the range 30-100 days.\\
-\midrule
-\textbf{RS} & Eruptive variables of the RS Canum Venaticorum type. This
+a magnitude and periods in the range 30-100 days.
+\item[RS] Eruptive variables of the RS Canum Venaticorum type. This
 type is ascribed to close binary systems with spectra showing Ca II H
 and K in emission, their components having enhanced chromospheric
 activity that causes quasi-periodic light variability. The period of
 variation is close to the orbital one, and the variability amplitude is
 usually as great as 0.2 mag in V (UX Ari). They are X-ray sources and
 rotating variables. RS CVn itself is also an eclipsing system (see
-below).\\
-\midrule
-\textbf{SDOR} & Variables of the S Doradus type. These are eruptive,
+below).
+\item[SDOR] Variables of the S Doradus type. These are eruptive,
 high-luminosity Bpec-Fpec stars showing irregular (sometimes cyclic)
 light changes with amplitudes in the range 1-7 mag in V. They belong to
 the brightest blue stars of their parent galaxies. As a rule, these
 stars are connected with diffuse nebulae and surrounded by expanding
-envelopes (P Cyg, Eta Car).\\
-\midrule
-\textbf{UV} & Eruptive variables of the UV Ceti type, these are K Ve-M
+envelopes (P Cyg, Eta Car).
+\item[UV] Eruptive variables of the UV Ceti type, these are K Ve-M
 Ve stars sometimes displaying flare activity with amplitudes from
 several tenths of a magnitude up to 6 mag in V. The amplitude is
 considerably greater in the ultraviolet spectral region. Maximum light
 is attained in several seconds or dozens of seconds after the beginning
 of a flare; the star returns to its normal brightness in several minutes
-or dozens of minutes.\\
-\midrule
-\textbf{UVN} & Flaring Orion variables of spectral types Ke-Me. These
+or dozens of minutes.
+\item[UVN] Flaring Orion variables of spectral types Ke-Me. These
 are phenomenologically almost identical to UV Cet variables observed in
 the solar neighborhood. In addition to being related to nebulae, they
 are normally characterized by being of earlier spectral type and greater
 luminosity, with slower development of flares (V389 Ori). They are
 possibly a specific subgroup of INB variables with irregular variations
-superimposed by flares.\\
-\midrule
-\textbf{WR} & Eruptive Wolf-Rayet variables. Stars with broad emission
+superimposed by flares.
+\item[WR] Eruptive Wolf-Rayet variables. Stars with broad emission
 features of He I and He II as well as C II-C IV, O II-O IV, and N III-N
 V. They display irregular light changes with amplitudes up to 0.1 mag in
 V, which are probably caused by physical processes, in particular, by
-nonstable mass outflow from their atmospheres.\\
-\bottomrule
-\end{longtabu}
+nonstable mass outflow from their atmospheres.
+\end{description}
 
 \subsubsection{Pulsating Variable Stars}\label{pulsating-variable-stars}
 
@@ -463,17 +476,13 @@ Depending on the period value, on the mass and evolutionary status of
 the star, and on the scale of pulsational phenomena, the following types
 of pulsating variables may be distinguished:
 
-\begin{longtabu} to \textwidth {l|X}
-\toprule
-\emph{Type} & \emph{Description}\\
-\midrule
-\textbf{ACYG} & Variables of the Alpha Cygni type, which are nonradially
+\begin{description}
+\item[ACYG] Variables of the Alpha Cygni type, which are nonradially
 pulsating supergiants of Bep-AepIa spectral types. The light changes
 with amplitudes of the order of 0.1 mag often seem irregular, being
 caused by the superposition of many oscillations with close periods.
-Cycles from several days to several weeks are observed.\\
-\midrule
-\textbf{BCEP} & Variables of the Beta Cephei type (Beta Cep, Beta CMa),
+Cycles from several days to several weeks are observed.
+\item[BCEP] Variables of the Beta Cephei type (Beta Cep, Beta CMa),
 which are pulsating O8-B6 I-V stars with periods of light and
 radial-velocity variations in the range of 0.1 - 0.6 days and light
 amplitudes from 0.01 to 0.3 mag in V. The light curves are similar in
@@ -482,29 +491,25 @@ the period, so that maximum brightness corresponds to maximum
 contraction, i.e., to minimum stellar radius. The majority of these
 stars probably show radial pulsations, but some (V469 Per) display
 nonradial pulsations; multiperiodicity is characteristic of many of
-these stars.\\
-\midrule
-\textbf{BCEPS} & A short-period group of Beta Cep variables. The
+these stars.
+\item[BCEPS] A short-period group of Beta Cep variables. The
 spectral types are B2-B3 IV-V; periods and light amplitudes are in the
 ranges 0.02 - 0.04 days and 0.015 - 0.025 days, respectively, i.e., an
 order of magnitude smaller than the normally observed
-ones.\\
-\midrule
-\textbf{CEP} & Cepheids. Radially pulsating, high luminosity (classes
+ones.
+\item[CEP] Cepheids. Radially pulsating, high luminosity (classes
 Ib-II) variables with periods in the range of 1-135 days and amplitudes
 from several hundredths to 2 mag in V (in the B band, the amplitudes are
 greater). Spectral type at maximum light is F; at minimum, the types are
 G-K. The longer the period of light variation, the later is the spectral
 type. The maximum of the surface-layer expansion velocity almost
-coinciding with maximum light.\\
-\midrule
-\textbf{CEP(B)} & Cepheids (TU Cas, V 367 Sct) displaying the presence
+coinciding with maximum light.
+\item[CEP(B)] Cepheids (TU Cas, V 367 Sct) displaying the presence
 of two or more simultaneously operating pulsation modes (usually the
 fundamental tone with the period P0 and the first overtone P1). The
 periods P0 are in the range from 2 to 7 days, with the ratio P1/P0
-approx. 0.71.\\
-\midrule
-\textbf{CW} & Variables of the W Virginis type. These are pulsating
+approx. 0.71.
+\item[CW] Variables of the W Virginis type. These are pulsating
 variables of the galactic spherical component (old disk) population with
 periods of approximately 0.8 to 35 days and amplitudes from 0.3 to 1.2
 mag in V. They obey a period-luminosity relation different from that for
@@ -515,23 +520,19 @@ Delta Cep variables for corresponding periods either by amplitudes or by
 the presence of humps on their descending branches, sometimes turning
 into broad flat maxima. W Vir variables are present in globular clusters
 and at high galactic latitudes. They may be separated into the following
-subtypes:\\
-\midrule
-\emph{CWA} & W Vir variables with periods longer than 8 days (W
-Vir);\\
-\midrule
-\emph{CWB} & W Vir variables with periods shorter than 8 days (BL
-Her).\\
-\midrule
-\textbf{DCEP} & These are the classical cepheids, or Delta Cep-type
+subtypes:
+\begin{description}
+\item[CWA] W Vir variables with periods longer than 8 days (W Vir);
+\item[CWB] W Vir variables with periods shorter than 8 days (BL Her).
+\end{description}
+\item[DCEP] These are the classical cepheids, or Delta Cep-type
 variables. Comparatively young objects that have left the main sequence
 and evolved into the instability strip of the Hertzsprung-Russell (H-R)
 diagram, they obey the well-known Cepheid period-luminosity relation and
 belong to the young disk population. DCEP stars are present in open
 clusters. They display a certain relation between the shapes of their
-light curves and their periods.\\
-\midrule
-\textbf{DCEPS} & These are Delta Cep variables having light amplitudes
+light curves and their periods.
+\item[DCEPS] These are Delta Cep variables having light amplitudes
 \textless{}0.5 mag in V (\textless{}0.7 mag in B) and almost symmetrical
 light curves (M-m approx. 0.4 - 0.5 periods); as a rule, their periods
 do not exceed 7 days. They are probably first-overtone pulsators and/or
@@ -545,9 +546,8 @@ However, these are distinct groups of entirely different objects in
 different evolutionary stages. One of the significant spectral
 differences between W Vir stars and Cepheids is the presence, during a
 certain phase interval, of hydrogen-line emission in the former and of
-Ca II H and K emission in the latter.\\
-\midrule
-\textbf{DSCT} & Variables of the Delta Scuti type. These are pulsating
+Ca II H and K emission in the latter.
+\item[DSCT] Variables of the Delta Scuti type. These are pulsating
 variables of spectral types A0-F5 III-V displaying light amplitudes from
 0.003 to 0.9 mag in V (usually several hundredths of a magnitude) and
 periods from 0.01 to 0.2 days. The shapes of the light curves, periods,
@@ -559,30 +559,25 @@ amplitude not exceeding 0.001 mag in some cases. The maximum of the
 surface layer expansion does not lag behind the maximum light for more
 than 0.1 periods. DSCT stars are representatives of the galactic disk
 (flat component) and are phenomenologically close to the SX Phe
-variables.\\
-\midrule
-\textbf{DSCTC} & Low amplitude group of Delta Sct variables (light
+variables.
+\item[DSCTC] Low amplitude group of Delta Sct variables (light
 amplitude \textless{}0.1 mag in V). The majority of this type's
 representatives are stars of luminosity class V; objects of this subtype
 generally are representative of the Delta Sct variables in open
-clusters.\\
-\midrule
-\textbf{L} & Slow irregular variables. The light variations of these
+clusters.
+\item[L] Slow irregular variables. The light variations of these
 stars show no evidence of periodicity, or any periodicity present is
 very poorly defined and appears only occasionally. Like for the type I,
 stars are often attributed to this type because of being insufficiently
 studied. Many type L variables are really semiregulars or belong to
-other types.\\
-\midrule
-\textbf{LB} & Slow irregular variables of late spectral types (K, M, C,
+other types.
+\item[LB] Slow irregular variables of late spectral types (K, M, C,
 S); as a rule, they are giants (CO Cyg). This type is also ascribed, in
 the GCVS, to slow red irregular variables in the case of unknown
-spectral types and luminosities.\\
-\midrule
-\textbf{LC} & Irregular variable supergiants of late spectral types
-having amplitudes of about 1 mag in V (TZ Cas).\\
-\midrule
-\textbf{M} & Mira (Omicron) Ceti-type variables. These are long-period
+spectral types and luminosities.
+\item[LC] Irregular variable supergiants of late spectral types
+having amplitudes of about 1 mag in V (TZ Cas).
+\item[M] Mira (Omicron) Ceti-type variables. These are long-period
 variable giants with characteristic late-type emission spectra (Me, Ce,
 Se) and light amplitudes from 2.5 to 11 mag in V. Their periodicity is
 well pronounced, and the periods lie in the range between 80 and 1000
@@ -592,19 +587,17 @@ exceed 0.9 mag. If the amplitudes exceed 1 - 1.5 mag , but it is not
 certain that the true light amplitude exceeds 2.5 mag, the symbol ``M''
 is followed by a colon, or the star is attributed to the semiregular
 class with a colon following the symbol for that type
-(SR).\\
-\midrule
-\textbf{PVTEL} & Variables of the PV Telescopii type. These are helium
+(SR).
+\item[PVTEL] Variables of the PV Telescopii type. These are helium
 supergiant Bp stars with weak hydrogen lines and enhanced lines of He
 and C. They pulsate with periods of approximately 0.1 to 1 days, or vary
 in brightness with an amplitude of 0.1 mag in V during a time interval
-of about a year.\\
-\midrule
-\textbf{RR} & Variables of the RR Lyrae type, which are
+of about a year.
+\item[RR] Variables of the RR Lyrae type, which are
 radially-pulsating giant A-F stars having amplitudes from 0.2 to 2 mag
 in V. Cases of variable light-curve shapes as well as variable periods
-are known. If these changes are periodic, they are called the ``Blazhko
-effect.''
+are known. If these changes are periodic, they are called the \indexterm{Blazhko
+effect}.
 
 Traditionally, RR Lyrae stars are sometimes called short-period Cepheids
 or cluster-type variables. The majority of these stars belong to the
@@ -612,22 +605,19 @@ spherical component of the Galaxy; they are present, sometimes in large
 numbers, in some globular clusters, where they are known as pulsating
 horizontal-branch stars. Like Cepheids, maximum expansion velocities of
 surface layers for these stars practically coincide with maximum
-light.\\
-\midrule
-\emph{RR(B)} & RR Lyrae variables showing two simultaneously operating
+light.
+\begin{description}
+\item[RR(B)] RR Lyrae variables showing two simultaneously operating
 pulsation modes, the fundamental tone with the period P0 and the first
-overtone, P1 (AQ Leo). The ratio P1/P0 is approximately
-0.745;\\
-\midrule
-\emph{RRAB} & RR Lyrae variables with asymmetric light curves (steep
+overtone, P1 (AQ Leo). The ratio P1/P0 is approximately 0.745;
+\item[RRAB] RR Lyrae variables with asymmetric light curves (steep
 ascending branches), periods from 0.3 to 1.2 days, and amplitudes from
-0.5 to 2 mag in V;\\
-\midrule
-\emph{RRC} & RR Lyrae variables with nearly symmetric, sometimes
+0.5 to 2 mag in V;
+\item[RRC] RR Lyrae variables with nearly symmetric, sometimes
 sinusoidal, light curves, periods from 0.2 to 0.5 days, and amplitudes
-not greater than 0.8 mag in V (SX UMa).\\
-\midrule
-\textbf{RV} & Variables of the RV Tauri type. These are radially
+not greater than 0.8 mag in V (SX UMa).
+\end{description}
+\item[RV] Variables of the RV Tauri type. These are radially
 pulsating supergiants having spectral types F-G at maximum light and K-M
 at minimum. The light curves are characterized by the presence of double
 waves with alternating primary and secondary minima that can vary in
@@ -635,74 +625,66 @@ depth so that primary minima may become secondary and vice versa. The
 complete light amplitude may reach 3-4 mag in V. Periods between two
 adjacent primary minima (usually called formal periods) lie in the range
 30-150 days (these are the periods appearing in the Catalogue). Two
-subtypes, RVA and RVB, are recognized:\\
-\midrule
-\emph{RVA} & RV Tauri variables that do not vary in mean magnitude (AC
-Her);\\
-\midrule
-\emph{RVB} & RV Tauri variables that periodically (with periods from 600
+subtypes, RVA and RVB, are recognized:
+\begin{description}
+\item[RVA] RV Tauri variables that do not vary in mean magnitude (AC Her);
+\item[RVB] RV Tauri variables that periodically (with periods from 600
 to 1500 days and amplitudes up to 2 mag in V) vary in mean magnitude (DF
-Cyg, RV Tau).\\
-\midrule
-\textbf{SR} & Semiregular variables, which are giants or supergiants of
+Cyg, RV Tau).
+\end{description}
+\item[SR] Semiregular variables, which are giants or supergiants of
 intermediate and late spectral types showing noticeable periodicity in
 their light changes, accompanied or sometimes interrupted by various
 irregularities. Periods lie in the range from 20 to \textgreater{}2000
 days, while the shapes of the light curves are rather different and
 variable, and the amplitudes may be from several hundredths to several
-magnitudes (usually 1-2 mag in V).\\
-\midrule
-\emph{SRA} & Semiregular late-type (M, C, S or Me, Ce, Se) giants
+magnitudes (usually 1-2 mag in V).
+\begin{description}
+\item[SRA] Semiregular late-type (M, C, S or Me, Ce, Se) giants
 displaying persistent periodicity and usually small (\textless{}2.5 mag
 in V) light amplitudes (Z Aqr). Amplitudes and light-curve shapes
 generally vary and periods are in the range of 35-1200 days. Many of
 these stars differ from Miras only by showing smaller light
-amplitudes;\\
-\midrule
-\emph{SRB} & Semiregular late-type (M, C, S or Me, Ce, Se) giants with
+amplitudes;
+\item[SRB] Semiregular late-type (M, C, S or Me, Ce, Se) giants with
 poorly defined periodicity (mean cycles in the range of 20 to 2300 days)
 or with alternating intervals of periodic and slow irregular changes,
 and even with light constancy intervals (RR CrB, AF Cyg). Every star of
 this type may usually be assigned a certain mean period (cycle), which
 is the value given in the Catalogue. In a number of cases, the
 simultaneous presence of two or more periods of light variation is
-observed;\\
-\midrule
-\emph{SRC} & Semiregular late-type (M, C, S or Me, Ce, Se) supergiants
+observed;
+\item[SRC] Semiregular late-type (M, C, S or Me, Ce, Se) supergiants
 (Mu Cep) with amplitudes of about 1 mag and periods of light variation
-from 30 days to several thousand days;\\
-\midrule
-\emph{SRD} & Semiregular variable giants and supergiants of F, G, or K
+from 30 days to several thousand days;
+\item[SRD] Semiregular variable giants and supergiants of F, G, or K
 spectral types, sometimes with emission lines in their spectra.
 Amplitudes of light variation are in the range from 0.1 to 4 mag, and
-the range of periods is from 30 to 1100 days (SX Her, SV
-UMa).\\
-\midrule
-\textbf{SXPHE} & Phenomenologically, these resemble DSCT (Delta Sct)
+the range of periods is from 30 to 1100 days (SX Her, SV UMa).
+\end{description}
+\item[SXPHE] Phenomenologically, these resemble DSCT (Delta Sct)
 variables and are pulsating subdwarfs of the spherical component, or old
 disk galactic population, with spectral types in the range A2-F5. They
 may show several simultaneous periods of oscillation, generally in the
 range 0.04-0.08 days, with variable-amplitude light changes that may
-reach 0.7 mag in V. These stars are present in globular
-clusters.\\
-\midrule
-\textbf{ZZ} & ZZ Ceti variables. These are nonradially pulsating white
+reach 0.7 mag in V. These stars are present in globular clusters.
+\item[ZZ] ZZ Ceti variables. These are nonradially pulsating white
 dwarfs that change their brightnesses with periods from 30 s to 25 min
 and amplitudes from 0.001 to 0.2 mag in V. They usually show several
 close period values. Flares of 1 mag are sometimes observed; however,
 these may be explained by the presence of close UV Ceti companions.
 
-These variables are divided into the following subtypes:\\
-\midrule
-\emph{ZZA} & ZZ Cet-type variables of DA spectral type (ZZ Cet) having
-only hydrogen absorption lines in their spectra;\\
-\midrule
-\emph{ZZB} & ZZ Cet-type variables of DB spectral type having only
+These variables are divided into the following subtypes:
+\begin{description}
+\item[ZZA] ZZ Cet-type variables of DA spectral type (ZZ Cet) having
+only hydrogen absorption lines in their spectra;
+\item[ZZB] ZZ Cet-type variables of DB spectral type having only
 helium absorption lines in their spectra.\\
-\bottomrule
-\end{longtabu}
+\end{description}
+\end{description}
 
-\subsubsection{Rotating Variable Stars}\label{rotating-variable-stars}
+\subsubsection{Rotating Variable Stars}
+\label{rotating-variable-stars}
 
 Variable stars with nonuniform surface brightness and/or ellipsoidal
 shapes, whose variability is caused by axial rotation with respect to
@@ -712,26 +694,20 @@ inhomogeneity of the atmosphere caused by a magnetic field whose axis is
 not coincident with the rotation axis. These stars are subdivided into
 the following types:
 
-\begin{longtabu} to \textwidth {l|X}
-\toprule
-\emph{Type} & \emph{Description}\\
-\midrule
-\textbf{ACV} & Alpha2 Canum Venaticorum variables. These are
+\begin{description}
+\item[ACV] Alpha2 Canum Venaticorum variables. These are
 main-sequence stars with spectral types B8p-A7p and displaying strong
 magnetic fields. Spectra show abnormally strong lines of Si, Sr, Cr, and
 rare earths whose intensities vary with rotation. They exhibit magnetic
 field and brightness changes (periods of 0.5-160 days or more). The
-amplitudes of the brightness changes are usually withine 0.01-0.1 mag in
-V.\\
-\midrule
-\textbf{ACVO} & Rapidly oscillating Alpha2 CVn variables. These are
+amplitudes of the brightness changes are usually within 0.01-0.1 mag in V.
+\item[ACVO] Rapidly oscillating Alpha2 CVn variables. These are
 nonradially pulsating, rotating magnetic variables of Ap spectral type
 (DO Eri). Pulsation periods are in the range of 6-12 mmag (0.004-0.01
 days), while amplitudes of light variation caused by the pulsation are
 about 0.01 mag in V. The pulsational variations are superposed on those
-caused by rotation.\\
-\midrule
-\textbf{BY} & BY Draconis-type variables, which are emission-line dwarfs
+caused by rotation.
+\item[BY] BY Draconis-type variables, which are emission-line dwarfs
 of dKe-dMe spectral type showing quasiperiodic light changes with
 periods from a fraction of a day to 120 days and amplitudes from several
 hundredths to 0.5 mag in V. The light variability is caused by axial
@@ -739,41 +715,36 @@ rotation of a star with a variable degree of nonuniformity of the
 surface brightness (spots) and chromospheric activity. Some of these
 stars also show flares similar to those of UV Cet stars, and in those
 cases they also belong to the latter type and are simultaneously
-considered eruptive variables.\\
-\midrule
-\textbf{ELL} & Rotating ellipsoidal variables (b Per, Alpha Vir). These
+considered eruptive variables.
+\item[ELL] Rotating ellipsoidal variables (b Per, Alpha Vir). These
 are close binary systems with ellipsoidal components, which change
 combined brightnesses with periods equal to those of orbital motion
 because of changes in emitting areas toward an observer, but showing no
-eclipses. Light amplitudes do not exceed 0.1 mag in V.\\
-\midrule
-\textbf{FKCOM} & FK Comae Berenices-type variables. These are rapidly
+eclipses. Light amplitudes do not exceed 0.1 mag in V.
+\item[FKCOM] FK Comae Berenices-type variables. These are rapidly
 rotating giants with nonuniform surface brightnesses, which have G-K
 spectral types with broad H and K Ca II emission and sometimes Halpha.
 They may also be spectroscopic binary systems. Periods of light
 variation (up to several days) are equal to rotational periods, and
 amplitudes are several tenths of a magnitude. It is not excluded that
 these objects are the product of further evolution of EW (W UMa) close
-binary systems (see below).\\
-\midrule
-\textbf{PSR} & Optically variable pulsars (CM Tau), which are rapidly
+binary systems (see below).
+\item[PSR] Optically variable pulsars (CM Tau), which are rapidly
 rotating neutron stars with strong magnetic fields, radiating in the
 radio, optical, and X-ray regions. Pulsars emit narrow beams of
 radiation, and periods of their light changes coincide with rotational
 periods (from 0.004 to 4 s), while amplitudes of the light pulses reach
-0.8 mag.\\
-\midrule
-\textbf{SXARI} & SX Arietis-type variables. These are main-sequence
+0.8 mag.
+\item[SXARI] SX Arietis-type variables. These are main-sequence
 B0p-B9p stars with variable-intensity He I and Si III lines and magnetic
 fields. They are sometimes called helium variables. Periods of light and
 magnetic field changes (about 1 day) coincide with rotational periods,
 while amplitudes are approximately 0.1 mag in V. These stars are
-high-temperature analogs of the ACV variables.\\
-\bottomrule
-\end{longtabu}
+high-temperature analogs of the ACV variables.
+\end{description}
 
-\subsubsection{Cataclysmic (Explosive and Novalike)
-Variables}\label{cataclysmic-explosive-and-novalike-variables}
+\subsubsection{Cataclysmic (Explosive and Novalike) Variables}
+\label{cataclysmic-explosive-and-novalike-variables}
 
 These are variable stars showing outbursts caused by thermonuclear burst
 processes in their surface layers (novae) or deep in their interiors
@@ -789,11 +760,8 @@ accretion disk formed by matter lost by the other, cooler, and more
 extended component. This category is subdivided into the following
 types:
 
-\begin{longtabu} to \textwidth {l|X}
-\toprule
-\emph{Type} & \emph{Description}\\
-\midrule
-\textbf{N} & Novae. Close binary systems with orbital periods from 0.05
+\begin{description}
+\item[N] Novae. Close binary systems with orbital periods from 0.05
 to 230 days. One of the components of these systems is a hot dwarf star
 that suddenly, during a time interval from one to several dozen or
 several hundred days, increases its brightness by 7-19 mag in V, then
@@ -815,20 +783,17 @@ approximately 100 s and amplitudes of about 0.05 mag in V after an
 outburst. Some novae eventually turn out to be eclipsing systems.
 According to the features of their light variations, novae are
 subdivided into fast (NA), slow (NB), very slow (NC), and recurrent (NR)
-categories.\\
-\midrule
-\emph{NA} & Fast novae displaying rapid light increases and then, having
-achieved maximum light, fading by 3 mag in 100 or fewer days (GK
-Per);\\
-\midrule
-\emph{NB} & Slow novae that fade after maximum light by 3 mag in
+categories.
+\begin{description}
+\item[NA] Fast novae displaying rapid light increases and then, having
+achieved maximum light, fading by 3 mag in 100 or fewer days (GK Per);
+\item[NB] Slow novae that fade after maximum light by 3 mag in
 \textgreater{}= 150 days (RR Pic). Here the presence of the well-known
 ``dip'' in the light curves of novae similar to T Aur and DQ Her is not
 taken into account: The rate of fading is estimated on the basis of a
 smooth curve, its parts before and after the ``dip'' being a direct
-continuation of one another;\\
-\midrule
-\emph{NC} & Novae with a very slow development and remaining at maximum
+continuation of one another;
+\item[NC] Novae with a very slow development and remaining at maximum
 light for more than a decade, then fading very slowly. Before an
 outburst these objects may show long-period light changes with
 amplitudes of 1-2 mag in V (RR Tel); cool components of these systems
@@ -837,9 +802,8 @@ even Mira variables. Outburst amplitudes may reach 10 mag. High
 excitation emission spectra resemble those of planetary nebulae,
 Wolf-Rayet stars, and symbiotic variables. The possibility that these
 objects are planetary nebulae in the process of formation is not
-excluded;\\
-\midrule
-\emph{NL} & Novalike variables, which are insufficiently studied objects
+excluded;
+\item[NL] Novalike variables, which are insufficiently studied objects
 resembling novae by the characteristics of their light changes or by
 spectral features. This type includes, in addition to variables showing
 novalike outbursts, objects with no bursts ever observed; the spectra of
@@ -847,13 +811,11 @@ novalike variables resemble those of old novae, and small light changes
 resemble those typical for old novae at minimum light. However, quite
 often a detailed investigation makes it possible to reclassify some
 representatives of this highly inhomogeneous group of objects into other
-types;\\
-\midrule
-\emph{NR} & Recurrent novae, which differ from typical novae by the fact
+types;
+\item[NR] Recurrent novae, which differ from typical novae by the fact
 that two or more outbursts (instead of a single one) separated by 10-80
-years have been observed (T CrB).\\
-\midrule
-\textbf{SN} & Supernovae (B Cas, CM Tau). Stars that increase, as a
+years have been observed (T CrB).
+\item[SN] Supernovae (B Cas, CM Tau). Stars that increase, as a
 result of an outburst, their brightnesses by 20 mag and more, then fade
 slowly. The spectrum during an outburst is characterized by the presence
 of very broad emission bands, their widths being several times greater
@@ -862,22 +824,19 @@ expansion velocities of SN envelopes are in the thousands of km/s. The
 structure of a star after outburst alters completely. An expanding
 emission nebula results and a (not always observable) pulsar remains at
 the position of the original star. According to the light curve shape
-and the spectral features, supernovae are subdivided into types I and
-II.\\
-\midrule
-\emph{SNI} & Type I supernovae. Absorption lines of Ca II, Si, etc., but
+and the spectral features, supernovae are subdivided into types I and II.
+\item[SNI] Type I supernovae. Absorption lines of Ca II, Si, etc., but
 no hydrogen lines are present in the spectra. The expanding envelope
 almost lacks hydrogen. During 20-30 days following maximum light, the
 brightness decreases by approximately 0.1 mag per day, then the rate of
-fading slows and reaches a constant value of 0.014/day;\\
-\midrule
-\emph{SNII} & Type II supernovae. Lines of hydrogen and other elements
+fading slows and reaches a constant value of 0.014/day;
+\item[SNII] Type II supernovae. Lines of hydrogen and other elements
 are apparent in their spectra. The expanding envelope consists mainly of
 H and He. Light curves show greater diversity than those of type I
 supernovae. Usually after 40-100 days since maximum light, the rate of
-fading is 0.1 mag per day.\\
-\midrule
-\textbf{UG} & U Geminorum-type variables, quite often called dwarf
+fading is 0.1 mag per day.
+\end{description}
+\item[UG] U Geminorum-type variables, quite often called dwarf
 novae. They are close binary systems consisting of a dwarf or subgiant
 K-M star that fills the volume of its inner Roche lobe and a white dwarf
 surrounded by an accretion disk. Orbital periods are in the range
@@ -896,15 +855,13 @@ Some of these systems are eclipsing, possibly indicating that the
 primary minimum is caused by the eclipse of a hot spot that originates
 in the accretion disk from the infall of a gaseous stream from the K-M
 star. According to the characteristics of the light changes, U Gem
-variables may be subdivided into three types: SS Cyg, SU UMa, and Z
-Cam.\\
-\midrule
-\emph{UGSS} & SS Cygni-type variables (SS Cyg, U Gem). They increase in
+variables may be subdivided into three types: SS Cyg, SU UMa, and Z Cam.
+\begin{description}
+\item[UGSS] SS Cygni-type variables (SS Cyg, U Gem). They increase in
 brightness by 2-6 mag in V in 1-2 days and in several subsequent days
 return to their original brightnesses. The values of the cycle are in
-the range 10 days to several thousand;\\
-\midrule
-\emph{UGSU} & SU Ursae Majoris-type variables. These are characterized
+the range 10 days to several thousand;
+\item[UGSU] SU Ursae Majoris-type variables. These are characterized
 by the presence of two types of outbursts called ``normal'' and
 ``supermaxima''. Normal, short outbursts are similar to those of UGSS
 stars, while supermaxima are brighter by 2 mag, are more than five times
@@ -912,22 +869,20 @@ longer (wider), and occur several times less frequently. During
 supermaxima the light curves show superposed periodic oscillations
 (superhumps), their periods being close to the orbital ones and
 amplitudes being about 0.2-0.3 mag in V. Orbital periods are shorter
-than 0.1 days; companions are of dM spectral type;\\
-\midrule
-\emph{UGZ} & Z Camelopardalis-type stars. These also show cyclic
+than 0.1 days; companions are of dM spectral type;
+\item[UGZ] Z Camelopardalis-type stars. These also show cyclic
 outbursts, differing from UGSS variables by the fact that sometimes
 after an outburst they do not return to the original brightness, but
 during several cycles retain a magnitude between maximum and minimum.
 The values of cycles are from 10 to 40 days, while light amplitudes are
-from 2 to 5 mag in V.\\
-\midrule
-\textbf{ZAND} & Symbiotic variables of the Z Andromedae type. They are
+from 2 to 5 mag in V.
+\item[ZAND] Symbiotic variables of the Z Andromedae type. They are
 close binaries consisting of a hot star, a star of late type, and an
 extended envelope excited by the hot star's radiation. The combined
 brightness displays irregular variations with amplitudes up to 4 mag in
-V. A very inhomogeneous group of objects.\\
-\bottomrule
-\end{longtabu}
+V. A very inhomogeneous group of objects.
+\end{description}
+\end{description}
 
 \subsubsection{Close Binary Eclipsing Systems}
 \label{close-binary-eclipsing-systems}
@@ -946,16 +901,15 @@ use are given below.
 \subsubsection{Classification based on the shape of the light curve}
 \label{classification-based-on-the-shape-of-the-light-curve}
 
-\begin{longtabu} to \textwidth {l|X}\toprule
-\emph{Type} & \emph{Description}\\\midrule
-\textbf{E}  & Eclipsing binary systems. These are binary systems with
+\begin{description}
+\item[E]      Eclipsing binary systems. These are binary systems with
               orbital planes so close to the observer's line of sight (the inclination
               i of the orbital plane to the plane orthogonal to the line of sight is
               close to 90 deg) that the components periodically eclipse each other.
               Consequently, the observer finds changes of the apparent combined
               brightness of the system with the period coincident with that of the
-              components' orbital motion.\\\midrule
-\textbf{EA} & Algol (Beta Persei)-type eclipsing systems. Binaries with
+              components' orbital motion.
+\item[EA]     Algol (Beta Persei)-type eclipsing systems. Binaries with
               spherical or slightly ellipsoidal components. It is possible to specify,
               for their light curves, the moments of the beginning and end of the
               eclipses. Between eclipses the light remains almost constant or varies
@@ -963,8 +917,8 @@ use are given below.
               components, or physical variations. Secondary minima may be absent. An
               extremely wide range of periods is observed, from 0.2 to \textgreater{}=
               10000 days. Light amplitudes are also quite different and may reach
-              several magnitudes.\\\midrule
-\textbf{EB} & Beta Lyrae-type eclipsing systems. These are eclipsing
+              several magnitudes.
+\item[EB]     Beta Lyrae-type eclipsing systems. These are eclipsing
               systems having ellipsoidal components and light curves for which it is
               impossible to specify the exact times of onset and end of eclipses
               because of a continuous change of a system's apparent combined
@@ -972,26 +926,25 @@ use are given below.
               its depth usually being considerably smaller than that of the primary
               minimum; periods are mainly longer than 1 day. The components generally
               belong to early spectral types (B-A). Light amplitudes are usually
-              \textless{}2 mag in V.\\\midrule
-\textbf{EW} & W Ursae Majoris-type eclipsing variables. These are
+              \textless{}2 mag in V.
+\item[EW]     W Ursae Majoris-type eclipsing variables. These are
               eclipsers with periods shorter than 1 days, consisting of ellipsoidal
               components almost in contact and having light curves for which it is
               impossible to specify the exact times of onset and end of eclipses. The
               depths of the primary and secondary minima are almost equal or differ
               insignificantly. Light amplitudes are usually \textless{}0.8 mag in V.
               The components generally belong to spectral types F-G and
-              later.\\\bottomrule
-\end{longtabu}
+              later.
+\end{description}
 
 \subsubsection{Classification according to the components' physical characteristics}
 \label{classification-according-to-the-components-physical-characteristics}
 
-\begin{longtabu} to \textwidth {l|X}\toprule
-\emph{Type} & \emph{Description}\\\midrule
-\textbf{GS} & Systems with one or both giant and supergiant components;
-              one of the components may be a main sequence star.\\\midrule
-\textbf{PN} & Systems having, among their components, nuclei of planetary nebulae (UU Sge).\\\midrule
-\textbf{RS} & RS Canum Venaticorum-type systems. A significant property
+\begin{description}
+\item[GS]     Systems with one or both giant and supergiant components;
+              one of the components may be a main sequence star.
+\item[PN]     Systems having, among their components, nuclei of planetary nebulae (UU Sge).
+\item[RS]     RS Canum Venaticorum-type systems. A significant property
               of these systems is the presence in their spectra of strong Ca II H and
               K emission lines of variable intensity, indicating increased
               chromospheric activity of the solar type. These systems are also
@@ -1007,33 +960,32 @@ use are given below.
               variability of the wave's amplitude (which may be up to 0.2 mag in V) is
               explained by the existence of a long-period stellar activity cycle
               similar to the 11-year solar activity cycle, during which the number and
-              total area of spots on the star's surface vary.\\\midrule
-\textbf{WD} & Systems with white-dwarf components.\\\midrule
-\textbf{WR} & Systems having Wolf-Rayet stars among their components (V444 Cyg).\\\bottomrule
-\end{longtabu}
+              total area of spots on the star's surface vary.
+\item[WD]     Systems with white-dwarf components.
+\item[WR]     Systems having Wolf-Rayet stars among their components (V444 Cyg).
+\end{description}
 
 \subsubsection{Classification based on the degree of filling of inner Roche lobes}
 \label{classification-based-on-the-degree-of-filling-of-inner-roche-lobes}
 
-\begin{longtabu} to \textwidth {l|X}\toprule
-\emph{Type} & \emph{Description}\\\midrule
-\textbf{AR} & Detached systems of the AR Lacertae type. Both components
-              are subgiants not filling their inner equipotential surfaces.\\\midrule
-\textbf{D}  & Detached systems, with components not filling their inner Roche lobes.\\\midrule
-\textbf{DM} & Detached main-sequence systems. Both components are
-              main-sequence stars and do not fill their inner Roche lobes.\\\midrule
-\textbf{DS} & Detached systems with a subgiant. The subgiant also does
-              not fill its inner critical surface.\\\midrule
-\textbf{DW} & Systems similar to W UMa systems in physical properties (KW, see below), but not in contact.\\\midrule
-\textbf{K}  & Contact systems, both components filling their inner critical surfaces.\\\midrule
-\textbf{KE} & Contact systems of early (O-A) spectral type, both
-              components being close in size to their inner critical surfaces.\\\midrule
-\textbf{KW} & Contact systems of the W UMa type, with ellipsoidal
+\begin{description}
+\item[AR]     Detached systems of the AR Lacertae type. Both components
+              are subgiants not filling their inner equipotential surfaces.
+\item[D]      Detached systems, with components not filling their inner Roche lobes.
+\item[DM]     Detached main-sequence systems. Both components are
+              main-sequence stars and do not fill their inner Roche lobes.
+\item[DS]     Detached systems with a subgiant. The subgiant also does
+              not fill its inner critical surface.
+\item[DW]     Systems similar to W UMa systems in physical properties (KW, see below), but not in contact.
+\item[K]      Contact systems, both components filling their inner critical surfaces.
+\item[KE]     Contact systems of early (O-A) spectral type, both
+              components being close in size to their inner critical surfaces.
+\item[KW]     Contact systems of the W UMa type, with ellipsoidal
               components of F0-K spectral type. Primary components are main-sequence
-              stars and secondaries lie below and to the left of the main sequence in the (MV,B-V) diagram.\\\midrule
-\textbf{SD} & Semidetached systems in which the surface of the less
-              massive component is close to its inner Roche lobe.\\\bottomrule
-\end{longtabu}
+              stars and secondaries lie below and to the left of the main sequence in the (MV,B-V) diagram.
+\item[SD]     Semidetached systems in which the surface of the less
+              massive component is close to its inner Roche lobe.
+\end{description}
 
 The combination of the above three classification systems for eclipsers
 results in the assignment of multiple classifications for object types.
@@ -1043,9 +995,8 @@ E/DM, EA/DS/RS, EB/WR, EW/KW, etc.
 \subsubsection{Optically Variable Close Binary Sources of Strong, Variable X-ray Radiation (X-ray Sources)}
 \label{optically-variable-close-binary-sources-of-strong-variable-x-ray-radiation-x-ray-sources}
 
-\begin{longtabu} to \textwidth {l|X}\toprule
-\emph{Type}& \emph{Description}\\\midrule
-\textbf{X} & Close binary systems that are sources of strong, variable
+\begin{description}
+\item[X]     Close binary systems that are sources of strong, variable
              X-ray emission and which do not belong to or are not yet attributed to
              any of the above types of variable stars. One of the components of the
              system is a hot compact object (white dwarf, neutron star, or possibly a
@@ -1057,53 +1008,55 @@ E/DM, EA/DS/RS, EB/WR, EW/KW, etc.
              that area of the cooler companion's surface an earlier spectral type.
              These effects lead to quite a peculiar complex character of optical
              variability in such systems. These objects may be subdivided into the
-             following types:\\\midrule
-\emph{XB}  & X-ray bursters. Close binary systems showing X-ray and
+             following types:
+	\begin{description}
+\item[XB]    X-ray bursters. Close binary systems showing X-ray and
              optical bursts, their duration being from several seconds to ten
-             minutes, with amplitudes of about 0.1 mag in V (V 801 Ara, V 926 Sco);\\\midrule
-\emph{XF}  & Fluctuating X-ray systems showing rapid variations of X-ray
-             (Cygnus X-1 = V1357 Cyg) and optical (V821 Ara) radiation on time scalesof dozens of milliseconds;\\\midrule
-\emph{XI}  & X-ray irregulars. Close binary systems consisting of a hot
+             minutes, with amplitudes of about 0.1 mag in V (V 801 Ara, V 926 Sco);
+\item[XF]    Fluctuating X-ray systems showing rapid variations of X-ray
+             (Cygnus X-1 = V1357 Cyg) and optical (V821 Ara) radiation on time scalesof dozens of milliseconds;
+\item[XI]    X-ray irregulars. Close binary systems consisting of a hot
              compact object surrounded by an accretion disk and a dA - dM-type dwarf.
              These display irregular light changes on time scales of minutes and
              hours, and amplitudes of about 1 mag in V. Superposition of a periodic
-             variation because of orbital motion is possible (V818 Sco);\\\midrule
-\emph{XJ}  & X-ray binaries characterized by the presence of relativistic
+             variation because of orbital motion is possible (V818 Sco);
+\item[XJ]    X-ray binaries characterized by the presence of relativistic
              jets evident at X-ray and radio wavelengths, as well as in the optical
              spectrum in the form of emission components showing periodic
-             displacements with relativistic velocities (V1343 Aql);\\\midrule
-\emph{XND} & X-ray, novalike (transient) systems containing, along with
+             displacements with relativistic velocities (V1343 Aql);
+\item[XND]   X-ray, novalike (transient) systems containing, along with
              a hot compact object, a dwarf or subgiant of G-M spectral type. These
              systems occasionally rapidly increase in brightness by 4-9 mag in V, in
              the visible simultaneously with the X-ray range, with no envelope
-             ejected. The duration of the outburst may be up to several months (V616 Mon);\\\midrule
-\emph{XNG} & X-ray, novalike (transient) systems with an early-type
+             ejected. The duration of the outburst may be up to several months (V616 Mon);
+\item[XNG]   X-ray, novalike (transient) systems with an early-type
              supergiant or giant primary component and a hot compact object as a
              companion. Following the main component's outburst, the material ejected
              by it falls onto the compact object and causes, with a significant
-             delay, the appearance of X rays. The amplitudes are about 1-2 mag in V (V725 Tau);\\\midrule
-\emph{XP}  & X-ray pulsar systems. The primary component is usually an
+             delay, the appearance of X rays. The amplitudes are about 1-2 mag in V (V725 Tau);
+\item[XP]    X-ray pulsar systems. The primary component is usually an
              ellipsoidal early-type supergiant. The reflection effect is very small
              and light variability is mainly caused by the ellipsoidal primary
              component's rotation. Periods of light changes are between 1 and 10
              days; the period of the pulsar in the system is from 1 s to 100 min.
              Light amplitudes usually do not exceed several tenths of a magnitude
-             (Vela X-1 = GP Vel);\\\midrule
-\emph{XPR} & X-ray pulsar systems featuring the presence of the
+             (Vela X-1 = GP Vel);
+\item[XPR]   X-ray pulsar systems featuring the presence of the
              reflection effect. They consist of a dB-dF-type primary and an X-ray
              pulsar, which may also be an optical pulsar. The mean light of the
              system is brightest when the primary component is irradiated by X rays;
              it is faintest during a low state of the X-ray source. The total light
-             amplitude may reach 2-3 mag in V (HZ Her);\\\midrule
-\emph{XPRM,XM} & X-ray systems consisting of a late-type dwarf (dK-dM)
+             amplitude may reach 2-3 mag in V (HZ Her);
+\item[XPRM,XM] X-ray systems consisting of a late-type dwarf (dK-dM)
              and a pulsar with a strong magnetic field. Matter accretion on the
              compact object's magnetic poles is accompanied by the appearance of
              variable linear and circular polarization; hence, these systems are
              sometimes known as ``polars''. The amplitudes of the light changes are
              usually about 1 mag in V but, provided that the primary component is
              irradiated by X rays, the mean brightness of a system may increase by 3
-             mag in V. The total light amplitude may reach 4-5 mag in V (AM Her, AN UMa).\\\bottomrule
-\end{longtabu}
+             mag in V. The total light amplitude may reach 4-5 mag in V (AM Her, AN UMa).
+	\end{description}
+\end{description}
 
 If the beam of X-ray emission originating at the magnetic poles of the
 rotating hot compact object does not pass through the observer's
@@ -1118,88 +1071,91 @@ sign (e.g., E+X, ELL+X).
 In addition to the variable-star types described above, certain other
 symbols that need to be explained will be found in the Type data field:
 
-\begin{longtabu} to \textwidth {l|X}\toprule
-\emph{Type}   & \emph{Description}\\\midrule
-\textbf{BLLAC} & Extragalactic BL Lacertae-type objects. These are
-               compact quasistellar objects showing almost continuous spectra with weak
-               emission and absorption lines and relatively rapid irregular light
-               changes with amplitudes up to 3 mag in V or more. Sources of strong
-               X-ray radiation and radio waves, their emission displays strong and
-               variable linear polarization in the visible and infrared spectral
-               regions. Some objects of this type, considered erroneously to be
-               variable stars and designated in the GCVS system, will probably
-               sometimes be included in the main table of the Catalogue in the future, too.\\\midrule
-\textbf{CST} & Nonvariable stars, formerly suspected to be variable and
-               hastily designated. Further observations have not confirmed their variability.\\\midrule
-\textbf{GAL} & Optically variable quasistellar extragalactic objects
-               (active galactic nuclei {[}AGNs{]}) considered to be variable stars by mistake.\\\midrule
-\textbf{L:}  & Unstudied variable stars with slow light changes.\\\midrule
-\textbf{QSO} & Optically variable quasistellar extragalactic sources
-               (quasars) that earlier were erroneously considered to be variable stars.\\\midrule
-\textbf{S}   & Unstudied variable stars with rapid light changes.\\\midrule
-\textbf{*}   & Unique variable stars outside the range of the
-               classifications described above. These probably represent either short
-               stages of transition from one variability type to another or the
-               earliest and latest evolutionary stages of these types, or they are
-               insufficiently studied members of future new types of variables.\\\midrule
-\textbf{+}   & If a variable star belongs to several types of light
-               variability simultaneously, the types are joined in the Type field by a
-               "+" sign (e.g., E+UG, UV+BY).\\\midrule
-\textbf{:} & Uncertainty flag on Type of Variability\\\bottomrule
-\end{longtabu}
+\begin{description}
+\item[BLLAC] Extragalactic BL Lacertae-type objects. These are
+             compact quasistellar objects showing almost continuous spectra with weak
+             emission and absorption lines and relatively rapid irregular light
+             changes with amplitudes up to 3 mag in V or more. Sources of strong
+             X-ray radiation and radio waves, their emission displays strong and
+             variable linear polarization in the visible and infrared spectral
+             regions. Some objects of this type, considered erroneously to be
+             variable stars and designated in the GCVS system, will probably
+             sometimes be included in the main table of the Catalogue in the future, too.
+\item[CST]   Nonvariable stars, formerly suspected to be variable and
+             hastily designated. Further observations have not confirmed their variability.
+\item[GAL]   Optically variable quasistellar extragalactic objects
+             (active galactic nuclei {[}AGNs{]}) considered to be variable stars by mistake.
+\item[L:]    Unstudied variable stars with slow light changes.
+\item[QSO]   Optically variable quasistellar extragalactic sources
+             (quasars) that earlier were erroneously considered to be variable stars.
+\item[S]     Unstudied variable stars with rapid light changes.
+\item[*]     Unique variable stars outside the range of the
+             classifications described above. These probably represent either short
+             stages of transition from one variability type to another or the
+             earliest and latest evolutionary stages of these types, or they are
+             insufficiently studied members of future new types of variables.
+\item[+]     If a variable star belongs to several types of light
+             variability simultaneously, the types are joined in the Type field by a
+             ``+'' sign (e.g., E+UG, UV+BY).
+\item[:]     Uncertainty flag on Type of Variability
+\end{description}
 
-\subsubsection{The new variability types}\label{the-new-variability-types}
+\subsubsection{The new variability types}
+\label{the-new-variability-types}
 
 The new variability types have been added in the Name-Lists 67- 77 and
 in the GCVS vol.V.
+% TODO: ADD REFERENCES PROPERLY!
 
-\begin{longtabu} to \textwidth {l|X}\toprule
-\emph{Type}    & \emph{Description}\\\midrule
-\textbf{ZZO}   & ZZ Cet type variables of the DO spectral type showing
-                 HeII and and CIV absorpion lines in their spectra.\\
-\textbf{AM}    & AM Her type variables; close binary systems consisting of
+\begin{description}
+\item[ZZO]     ZZ Cet type variables of the DO spectral type showing
+                 HeII and and CIV absorpion lines in their spectra.
+\item[AM]        AM Her type variables; close binary systems consisting of
                  a dK-dM type dwarf and of a compact object with strong magnetic field,
                  characterized by variable linear and circular polarization of light. The
-                 total range of light variations may reach 4-5 mag V.\\
-\textbf{R}     & Close binary systems characterized by the presence of
+                 total range of light variations may reach 4-5 mag V.
+\item[R]         Close binary systems characterized by the presence of
                  strong reflection (re-radiation) of the light of the hot star
                  illuminating the surface of the cooler companion. Light curves are
                  sinusoidal with the period equal to Porb, maximum brightness coinciding
                  with the passage of the hot star in front of the companion. The eclipse
-                 may be absent. The range of light variation is about 0.5-1.0mag V (KV Vel).\\\midrule
-\textbf{BE}    & It becomes more and more clear that, although the majority
+                 may be absent. The range of light variation is about 0.5-1.0mag V (KV Vel).
+\item[BE]        It becomes more and more clear that, although the majority
                  of Be stars are photometrically variable, not all of them could be
                  properly called GCAS variables. Quite a number of them show small-scale
                  variations not necessarily related to shell events; in some cases the
                  variations are quasi-periodic. By now we are not able to present an
                  elaborated system of classification for Be variables, but we adopt a
                  decision that in the cases when a Be variable cannot be readily
-                 described as a GCAS star we give simply BE for the type of variability.\\\midrule
-\textbf{EP}    & Stars showing eclipses by their planets. Prototype: V0376 Peg.\\\midrule
-\textbf{SRS}   & Semiregular pulsating red giants with short period
-                 (several days to a month), probably high-overtone pulsators. Prototype: AU Ari.\\\midrule
-\textbf{GDOR}  & Gamma Doradus stars. Early type F dwarfs showing
+                 described as a GCAS star we give simply BE for the type of variability.
+\item[EP]        Stars showing eclipses by their planets. Prototype: V0376 Peg.
+\item[SRS]       Semiregular pulsating red giants with short period
+                 (several days to a month), probably high-overtone pulsators. Prototype: AU Ari.
+\item[GDOR]      Gamma Doradus stars. Early type F dwarfs showing
                  (multiple) periods from several tenths of a day to slightly in excess of
                  one day. Amplitudes usually do not exceed 0.1 mag. Presumably low degree
-                 g-mode non-radial pulsators. Prototype: gamma Dor.\\
-\textbf{RPHS}  & Very rapidly pulsating hot (subdwarf B) stars. Typical
+                 g-mode non-radial pulsators. Prototype: gamma Dor.
+\item[RPHS]      Very rapidly pulsating hot (subdwarf B) stars. Typical
                  periods are hundreds of seconds, amplitudes are within several
-                 hundredths of a magnitude. Prototype: V361 Hya = EC 14026-2647.\\\midrule
-\textbf{LPB}   & The comparatively long-period pulsating B stars (periods exceeding (LBV) one day).\\\midrule
-\textbf{BLBOO} & The so-called ``anomalous Cepheids'', i.e. stars with
+                 hundredths of a magnitude. Prototype: V361 Hya = EC 14026-2647.
+\item[LPB]       The comparatively long-period pulsating B stars (periods exceeding (LBV) one day).
+\item[BLBOO]     The so-called ``anomalous Cepheids'', i.e. stars with
                  periods characteristic of comparatively long-period RRAB variables, but
-                 considerably brighter by luminosity (BL Boo = NGC 5466 V19).\\\bottomrule
-\end{longtabu}
+                 considerably brighter by luminosity (BL Boo = NGC 5466 V19).
+\end{description}
 
 
 \section{Double Stars}
 \label{sec:StarCatalogues:DoubleStars}
 
 Since version 0.15.0 Stellarium supports the subset of double stars
-from WDS\footnote{\url{http://ad.usno.navy.mil/wds/}} which have  HIP
+from WDS\footnote{\url{http://ad.usno.navy.mil/wds/}} which have HIP
 identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
 of Double Stars is based on the
-\textbf{Washington Double Star Catalog} \cite{2001AJ....122.3466M}. Cross reference data for WDS and HIP designations based on XHIP catalog \cite{2012AstL...38..331A} through astronomical database SIMBAD  \cite{2000A&AS..143....9W}.
+\emph{Washington Double Star Catalog} \cite{2001AJ....122.3466M}. 
+Cross reference data for WDS and HIP designations is based on the 
+XHIP catalog \cite{2012AstL...38..331A} through the astronomical 
+database SIMBAD  \cite{2000A&AS..143....9W}.
 
 \subsection{Double Star Catalog File Format}
 \label{sec:StarCatalogues:DoubleStars:format}
@@ -1215,23 +1171,29 @@ User Directory (see section~\ref{sec:Directories}).
 \subsubsection{File Format}
 \label{sec:StarCatalogues:DoubleStars:file}
 
-The \textbf{wds\_hip\_part.dat} file contains data about 16411
-\href{Double_Stars}{double stars} which have HIP identificators and
-stored in the plain text format with tab delimiter.
+The \file{wds\_hip\_part.dat} file contains data about 16411
+\indexterm{double stars} which have HIP identificators and
+stored in plain text format with tab delimiters.
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
-	\emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-	HIP      		& int    & This is the HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
-	WDS      		& string & This is the WDS designation for the double star.\\\midrule
-	Observation		& int	 & Date of last satisfactory observation (in years).\\\midrule
-    Position Angle  & float  & Position Angle at date of last satisfactory observation (in decimal degrees).\\\midrule
-	Separation 		& float  & Separation at date of last satisfactory observation (in arcsec).\\\bottomrule
-\end{longtabu}
+\begin{table}[htb]
+\begin{tabularx}{\textwidth}{l|c|X}\toprule
+\emph{Name} & \emph{Type} & \emph{Description}\\\midrule
+HIP      		& int    & HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
+WDS      		& string & WDS designation for the double star.\\\midrule
+Observation		& int	 & Date of last satisfactory observation (in years).\\\midrule
+Position Angle  & float  & Position Angle at date of last satisfactory observation (in decimal degrees).\\\midrule
+Separation 		& float  & Separation at date of last satisfactory observation (in arcsec).\\\bottomrule
+\end{tabularx}
+\end{table}
 
 \section{Cross-Identification Data}
 \label{sec:StarCatalogues:CrossIdentificationData}
 
-Since version 0.14.0 Stellarium supports cross-identification between stars from Hipparcos (HIP)~\cite{2012AstL...38..331A}, Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0 (SAO), Henry Draper Catalogue and Extension (HD)~\cite{1993yCat.3135....0C} and $5^{th}$ Revised Ed. of Bright Star (Hoffleit+, 1991; HR)~\cite{1964cbs..book.....H} catalogues.
+Since version 0.14.0 Stellarium supports cross-identification between stars from 
+Hipparcos (HIP)~\cite{2012AstL...38..331A}, 
+Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0 (SAO), 
+Henry Draper Catalogue and Extension (HD)~\cite{1993yCat.3135....0C} and 
+$5^{th}$ Revised Ed. of Bright Star Catalog (Hoffleit+, 1991; HR)~\cite{1964cbs..book.....H} catalogues.
 
 \subsection{Cross-Identification Catalog File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:format}
@@ -1245,16 +1207,17 @@ in the \file{stars/default} sub-directory of the Installation Directory and/or U
 \subsubsection{File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:file}
 
-The \textbf{cross-id.dat} file contains cross reference data for catalogues HIP, SAO, HD and HR, which stored in the plain text format with tab delimiter.
+The file \file{cross-id.dat} contains cross reference data for catalogues HIP, SAO, HD and HR, which stored in the plain text format with tab delimiter.
 
-\begin{longtabu} to \textwidth {l|l|l|X}\toprule
-	\emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-	HIP	& int & This is the HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
-	SAO	& int & This is the SAO identificator for the star.\\\midrule
-	HD	& int & This is the HD identificator for the star.\\\midrule
-	HR	& int & This is the HR identificator for the star.\\\bottomrule
-\end{longtabu}
-
+\begin{table}[htb]
+\begin{tabularx}{\textwidth}{l|c|X}\toprule
+\emph{Name} & \emph{Type} & \emph{Description}\\\midrule
+HIP	& int & HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
+SAO	& int & SAO identificator for the star.\\\midrule
+HD	& int & HD identificator for the star.\\\midrule
+HR	& int & HR identificator for the star.\\\bottomrule
+\end{tabularx}
+\end{table}
 
 %%% Local Variables: 
 %%% mode: latex

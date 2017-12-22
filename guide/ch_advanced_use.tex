@@ -222,7 +222,7 @@ in appendix~\ref{sec:config.ini} Configuration File.
 \label{sec:ExtraData:stars}
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
-in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{btd_config} or
+in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{btd_config.png} or
 \key{F2}).
 
 \subsection{More Deep-Sky Objects}
@@ -434,17 +434,17 @@ the NMEA strings.
 Stellarium's behaviour can be modified by providing parameters to the
 program when it is called via the command line. See table for a full list:
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\begin{longtable}{l|c|p{68mm}}\toprule
 \emph{Option}         & \emph{Option Parameter} & \emph{Description}\\\midrule
 -\/-help or -h        & {[}none{]}       & Print a quick command line help message, and exit. \\\midrule
 -\/-version or -v     & {[}none{]}       & Print the program name and version information, and exit. \\\midrule
 -\/-config-file or -c & config file name & Specify the configuration file name. The default value is \file{config.ini}.
 
-The parameter can be a full path (which will be used verbatim) or a partial path.
+                                           The parameter can be a full path (which will be used verbatim) or a partial path.
 
-Partial paths will be searched for inside the regular search paths
-unless they start with a ``\file{.}'', which may be used to explicitly
-specify a file in the current directory or similar.
+                                           Partial paths will be searched for inside the regular search paths
+                                           unless they start with a ``\file{.}'', which may be used to explicitly
+                                           specify a file in the current directory or similar.
 
 For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file 
 \file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas 
@@ -478,7 +478,7 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\\midrule
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\\midrule
 -\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2/3 with Raspbian Jessie and VC4 drivers from Mesa 11 (2016).}\\\bottomrule
-\end{longtabu}
+\end{longtable}
 
 \noindent \newFeature{0.15} If you want to avoid adding the same
 switch every time when you start Stellarium from the command line, you

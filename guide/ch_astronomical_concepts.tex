@@ -105,7 +105,7 @@ equator is the line half way between the Earth's poles.
 \label{sec:Concepts:AltAz}
 
 \begin{figure}[ht]
-\centering\includegraphics[width=\textwidth]{cs_azi}
+\centering\includegraphics[width=\textwidth]{cs_azi.png}
 \caption{Altitude/Azimuth (Horizontal) Coordinate System}
 \label{fig:AltAz}
 \end{figure}
@@ -137,11 +137,11 @@ describing the general position of stars and other objects in the sky --
 the altitude and azimuth values for a celestial object change with
 time and the location of the observer.
 
-Stellarium can draw grid lines for altitude/azimuth coordinates. Use the \guibutton{0.6}{bt_az_grid}
+Stellarium can draw grid lines for altitude/azimuth coordinates. Use the \guibutton{0.6}{bt_az_grid.png}
 button on the main tool-bar to activate this grid, or press the \key{Z} key.
 
 In addition, the \indexterm{cardinal points} can be highlighted using
-the \guibutton{0.6}{bt_cardinal} button or \key{Q} key.
+the \guibutton{0.6}{bt_cardinal.png} button or \key{Q} key.
 
 There are a few great circles with special names which Stellarium can
 draw (see section~\ref{sec:gui:view:markings}).
@@ -158,7 +158,7 @@ draw (see section~\ref{sec:gui:view:markings}).
 \label{sec:Concepts:Equatorial}
 
 \begin{figure}[ht]
-\centering\includegraphics[width=\textwidth]{cs_equ}
+\centering\includegraphics[width=\textwidth]{cs_equ.png}
 \caption{Equatorial Coordinates}
 \label{fig:EquatorialCoordinates}
 \end{figure}
@@ -195,7 +195,7 @@ validity. Current catalogs and atlases use coordinates for J2000.0.
 
 
 Stellarium can draw grid lines for Equatorial coordinates. Use the
-button \guibutton{0.6}{bt_eq_grid} on the main tool-bar to activate
+button \guibutton{0.6}{bt_eq_grid.png} on the main tool-bar to activate
 this grid, or press the \key{E} key to draw the equatorial grid for
 the simulation time. The Markings dialog (\ref{sec:gui:view:markings})
 allows you to set also the grid for J2000.0 standard coordinates.
@@ -342,7 +342,7 @@ context of the mind-boggling vastness of space.
 \label{sec:Concepts:Time}
 
 \begin{figure}[ht]
-\centering\includegraphics[width=\textwidth]{sidereal_day}
+\centering\includegraphics[width=\textwidth]{sidereal_day.png}
 \caption{Sidereal day}
 \label{fig:SiderealDay}
 \end{figure}
@@ -817,18 +817,19 @@ from the Sun).
 \begin{table}[htb]
   \centering
 %  \begin{tabular}[t]{lll}
-%  \end{tabular}
-\begin{longtable}[c]{@{}lll@{}}
+  \begin{tabular}{lll}
+%\begin{longtable}[c]{@{}lll@{}}
 \toprule
-\emph{Object} & $m$ & $M$\tabularnewline
-The Sun & -27 & 4.8\tabularnewline
-Vega & 0.05 & 0.6\tabularnewline
-Betelgeuse & 0.47 & -7.2\tabularnewline
-Sirius (the brightest star) & -1.5 & 1.4\tabularnewline
-Venus (at brightest) & -4.4 & ---\tabularnewline
-Full Moon (at brightest) & -12.6 & ---\tabularnewline
+\emph{Object} & $m$ & $M$\\
+The Sun & -27 & 4.8\\
+Vega & 0.05 & 0.6\\
+Betelgeuse & 0.47 & -7.2\\
+Sirius (the brightest star) & -1.5 & 1.4\\
+Venus (at brightest) & -4.4 & ---\\
+Full Moon (at brightest) & -12.6 & ---\\
 \bottomrule
-\end{longtable}
+%\end{longtable}
+\end{tabular}
   \caption{Magnitudes of a few objects}
   \label{tab:Concepts:Magnitudes}
 \end{table}
@@ -847,7 +848,7 @@ and so on. Luminosity is related to absolute magnitude.
 \label{sec:Concepts:Precession}
 
 \begin{figure}[htb]
-\centering\includegraphics[width=\textwidth]{obliquity_ecliptic}
+\centering\includegraphics[width=\textwidth]{obliquity_ecliptic.png}
 \caption{Ecliptic obliquity}
 \label{fig:Obliquity}
 \end{figure}
@@ -863,13 +864,18 @@ $23\degree27'$ and is the angle between equatorial coordinates
 (\ref{sec:Concepts:Ecliptical}).
 
 \begin{figure}[p]
-\centering\includegraphics[width=0.75\textwidth]{precession}
+\centering\includegraphics[width=0.75\textwidth]{precession.png}
 \caption{Precession}
 \label{fig:Precession}
 \end{figure}
 
 \begin{figure}[p]
-\centering\includegraphics[width=\textwidth]{P_BSC-PrecessionShift-Horizon30_85-135_1000BC-0_en}
+\centering
+\ifpdf
+\includegraphics[width=\textwidth]{P_BSC-PrecessionShift-Horizon30_85-135_1000BC-0_en}
+\else
+\includegraphics[width=\textwidth]{P_BSC-PrecessionShift-Horizon30_85-135_1000BC-0_en.png}
+\fi
 \caption{Precession: Change of rising positions of the stars along the
   eastern horizon from azimuths 85 to 135 degrees, between years 1000
   BC and 0, for latitude $\varphi=30\degree$.}
@@ -970,7 +976,7 @@ planet you are located.
 \label{sec:Concepts:StellarParallax}
 
 \begin{figure}[tb]
-\centering\includegraphics[width=\textwidth]{parallax}
+\centering\includegraphics[width=\textwidth]{parallax.png}
 \caption{Stellar Parallax}
 \label{fig:Parallax}
 \end{figure}
