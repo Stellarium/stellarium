@@ -42,6 +42,7 @@
 #include <netdb.h>
 #include <unistd.h>
 #include <sys/types.h>
+#include <sys/socket.h>
 #include <netinet/in.h>
 #define net_read read
 #define net_write write
