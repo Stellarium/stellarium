@@ -255,6 +255,11 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 {
 	float texture_x,texture_y;
 
+	// Input positions are not scaled, so we do it here
+	// Since the effect fbo uses pixel coordinates.
+	x *= originalProjectorParams.devicePixelsPerPixel;
+	y *= originalProjectorParams.devicePixelsPerPixel;
+
 	// find the triangle and interpolate accordingly:
 	float dy = y / step_y;
 	const int j = (int)floorf(dy);
