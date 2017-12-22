@@ -956,7 +956,7 @@ void StelApp::quit()
 void StelApp::setDevicePixelsPerPixel(float dppp)
 {
 	// Check that the device-independent pixel size didn't change
-	if (devicePixelsPerPixel!=dppp)
+	if (!viewportEffect && devicePixelsPerPixel!=dppp)
 	{
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();

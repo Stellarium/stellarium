@@ -72,10 +72,11 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	core->getMovementMgr()->setMaxFov(distorter_max_fov);
 
 	// width of the not yet distorted image
-	newProjectorParams.viewportXywh[2] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[2]idth", originalProjectorParams.viewportXywh[2]).toInt();
+	newProjectorParams.devicePixelsPerPixel = 1;
+	newProjectorParams.viewportXywh[2] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[2]idth", originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel).toInt();
 	if (newProjectorParams.viewportXywh[2] <= 0)
 	{
-		newProjectorParams.viewportXywh[2] = originalProjectorParams.viewportXywh[2];
+		newProjectorParams.viewportXywh[2] = originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel;
 	}
 	else if (newProjectorParams.viewportXywh[2] > screen_w)
 	{
@@ -83,10 +84,10 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	}
 
 	// height of the not yet distorted image
-	newProjectorParams.viewportXywh[3] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[3]eight", originalProjectorParams.viewportXywh[3]).toInt();
+	newProjectorParams.viewportXywh[3] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[3]eight", originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel).toInt();
 	if (newProjectorParams.viewportXywh[3] <= 0)
 	{
-		newProjectorParams.viewportXywh[3] = originalProjectorParams.viewportXywh[3];
+		newProjectorParams.viewportXywh[3] = originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel;
 	}
 	else if (newProjectorParams.viewportXywh[3] > screen_h)
 	{
@@ -106,8 +107,6 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	newProjectorParams.viewportXywh[0] = (screen_w-newProjectorParams.viewportXywh[2]) >> 1;
 	newProjectorParams.viewportXywh[1] = (screen_h-newProjectorParams.viewportXywh[3]) >> 1;
 
-	newProjectorParams.viewportXywh[2] *= originalProjectorParams.devicePixelsPerPixel;
-	newProjectorParams.viewportXywh[3] *= originalProjectorParams.devicePixelsPerPixel;
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newProjectorParams);
 
 	// init transformation
@@ -248,13 +247,7 @@ StelViewportDistorterFisheyeToSphericMirror::~StelViewportDistorterFisheyeToSphe
 {
 	if (texture_point_array)
 		delete[] texture_point_array;
-
-	// TODO repair
-	// prj->setMaxFov(original_max_fov);
-	//	prj->setViewport(original_viewport[0],original_viewport[1],
-	// 	                 original_viewport[2],original_viewport[3],
-	// 	                 original_viewportCenter[0],original_viewportCenter[1],
-	// 	                 original_viewportFovDiameter);
+	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(originalProjectorParams);
 }
 
 
