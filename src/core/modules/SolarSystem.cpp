@@ -1302,7 +1302,7 @@ void SolarSystem::draw(StelCore* core)
 	{
 		StelProjectorP prj;
 		if (getFlagEphemerisHorizontalCoordinates())
-			prj = core->getProjection(StelCore::FrameAltAz);
+			prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 		else
 			prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
 		StelPainter sPainter(prj);
