@@ -148,6 +148,26 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 	return str;
 }
 
+void TelescopeClient::moveNorth(int speed)
+{
+	qDebug() << "TelescopeClient::moveNorth not implemented";
+}
+
+void TelescopeClient::moveEast(int speed)
+{
+	qDebug() << "TelescopeClient::moveEast not implemented";
+}
+
+void TelescopeClient::moveSouth(int speed)
+{
+	qDebug() << "TelescopeClient::moveSouth not implemented";
+}
+
+void TelescopeClient::moveWest(int speed)
+{
+	qDebug() << "TelescopeClient::moveWest not implemented";
+}
+
 //! returns the current system time in microseconds since the Epoch
 //! Prior to revision 6308, it was necessary to put put this method in an
 //! #ifdef block, as duplicate function definition caused errors during static
