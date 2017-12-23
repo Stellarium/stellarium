@@ -1,5 +1,6 @@
 # Stellarium
 [![Build Status](https://travis-ci.org/Stellarium/stellarium.svg?branch=master)](https://travis-ci.org/Stellarium/stellarium)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/Stellarium/stellarium?branch=master&svg=true)](https://ci.appveyor.com/project/cardinot/stellarium)
 
 Stellarium is a free open source planetarium for your computer. It shows a realistic sky
 in 3D, just like what you see with the naked eye, binoculars or a telescope.
