@@ -58,7 +58,13 @@
 \ifhtlatex
 \documentclass[12pt,fleqn,dvipdfmx]{book} % Default font size and left-justified equations
 \else
+% There is still also demand of discerning latex from pdflatex at the documentclass line.
+% http://tug.org/pipermail/macostex-archives/2006-January/020022.html
+\ifx\pdfoutput\undefined
+\documentclass[12pt,fleqn,dvipdfmx]{book} % Default font size and left-justified equations
+\else
 \documentclass[12pt,fleqn]{book} % Default font size and left-justified equations
+\fi
 \fi
 %----------------------------------------------------------------------------------------
 

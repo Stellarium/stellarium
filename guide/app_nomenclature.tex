@@ -47,7 +47,7 @@ File \file{data/nomenclature.fab} is a plain text file in UTF-8 encoding and has
 \item Each item contains seven elements with white space (``space'' or ``tab'' character) as delimiter.
 \end{itemize}
 
-\noindent
+\begin{center}
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{Item}                              & \emph{Type} & \emph{Comment}\\\midrule
 planet name                              & string  & English name of the planet, moon or minor body carrying the named feature\\%\midrule
@@ -58,8 +58,9 @@ center latitude of planetary feature     & float   & decimal degrees\\%\midrule
 center longitude of planetary feature    & float   & decimal degrees\\%\midrule
 size of planetary feature                & float   & kilometers\\\bottomrule
 \end{tabularx}
+\end{center}
 
-Example:
+\noindent Example:
 \begin{configfile}
 Vesta 15201 _("Caesonia","crater") AA 31.20117 249.93457 104.23
 \end{configfile}

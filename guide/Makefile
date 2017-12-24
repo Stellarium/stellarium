@@ -135,6 +135,8 @@ guide: guide.pdf
 
 pdf: guide.pdf 
 
+dvi: guide.dvi
+
 html: guide.html
 
 # Installation notes for some tools:
@@ -169,6 +171,11 @@ guide.pdf : guide.ind guide.bbl
 	@touch -c guide.bbl
 	@touch -c $@
 
+guide.dvi : guide.tex
+	+make ${PICSpng}
+	+make ${PICSbbx}
+	latex $<
+
 #guide.ind: guide.idx guide.toc
 guide.ind: guide.idx guide.aux
 	${MAKEINDEX} guide.idx -s StyleInd.ist
@@ -201,7 +208,7 @@ SUG SUG.pdf: guide_opt.pdf
 	${RM} $*_gswrite.pdf $*_meta.txt 
 
 
-
+pdf2png: $(subst .pdf,.png, ${PICSpdf})
 
 pictures/%.png : pictures/%.pdf
 	convert $< $@
@@ -231,7 +238,7 @@ htdia:
 #guide.html: guide.bbl guide.ind
 guide.html: ${PICSbbx}
 	@echo Shell is $(SHELL)
-	${HTLATEX} guide "htFixes,html,2,next,index=3,fn-in,frames,mouseover,info"
+	${HTLATEX} guide "htFixes,html,2,next,index=3,fn-in,frames,info"
 # Currently, everything after running biber fails. :-(
 #	${BIBER} guide
 #	tex '\def\filename{{guide}{idx}{4dx}{ind}} \input  idxmake.4ht'

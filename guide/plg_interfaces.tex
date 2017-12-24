@@ -96,11 +96,11 @@ cardinal points will be turned off.
 
 \begin{figure}[h]\centering
 \ifpdf
-\includegraphics[width=.3\textwidth]{GZ_analemma_p1000}
-\includegraphics[width=.3\textwidth]{GZ_analemma_p2000}
+\includegraphics[width=.42\textwidth]{GZ_analemma_p1000}
+\includegraphics[width=.42\textwidth]{GZ_analemma_p2000}
 \else
-\includegraphics[width=.3\textwidth]{GZ_analemma_p1000.png}
-\includegraphics[width=.3\textwidth]{GZ_analemma_p2000.png}
+\includegraphics[width=.42\textwidth]{GZ_analemma_p1000.png}
+\includegraphics[width=.42\textwidth]{GZ_analemma_p2000.png}
 \fi
 \caption{Figure-8 plots for Equation of Time, for years 1000 (left)
   and 2000 (right). These plots, often found on sundials, link solar
@@ -142,11 +142,11 @@ settings for the Equation of Time plugin -- just make it carefully!
 \noindent%
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}            & \emph{Type} & \emph{Description}\\\midrule
-enable\_at\_startup        & bool  & Display solution of the equation of time at startup of the planetarium\\\midrule
-flag\_use\_ms\_format      & bool  & Set format for the displayed solution - minutes and seconds and decimal minutes\\\midrule
-flag\_use\_inverted\_value & bool  & Change sign of the equation of time \\\midrule
-flag\_show\_button         & bool  & Enable displaying plugin button on the bottom toolbar\\\midrule
-text\_color                & R,G,B & Color of font for the displayed solution of the equation of time\\\midrule
+enable\_at\_startup        & bool  & Display solution of the equation of time at startup of Stellarium\\%\midrule
+flag\_use\_ms\_format      & bool  & Set format for the displayed solution -- minutes and seconds or decimal minutes\\%\midrule
+flag\_use\_inverted\_value & bool  & Change sign of the equation of time \\%\midrule
+flag\_show\_button         & bool  & Show the tool's button on the bottom toolbar\\%\midrule
+text\_color                & R,G,B & Font color for the displayed solution of the equation of time\\%\midrule
 font\_size                 & int   & Font size for the displayed solution of the equation of time \\\bottomrule
 \end{tabularx}
 
@@ -158,7 +158,7 @@ font\_size                 & int   & Font size for the displayed solution of the
 \label{sec:plugins:FieldOfView}
 
 \begin{figure}[ht]\centering
-\includegraphics[trim=0 55 0 0,clip,width=.52\textwidth]{FOV-plugin.jpg}
+\includegraphics[trim=0 55 0 0,clip,width=.65\textwidth]{FOV-plugin.jpg}
 \caption{Configuration dialog of Field of View plugin}
 \label{fig:plugins:FieldOfView}
 \end{figure}
@@ -186,20 +186,21 @@ You can configure the plugin with its dialog (Fig.~\ref{fig:plugins:FieldOfView}
 \file{config.ini} file by yourself for changes of the settings for the
 Field of View plugin -- just make it carefully!
 
-\noindent%
+\begin{center}
 \begin{tabular}{l|l|r|l}\toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-fov\_quick\_0  & float & 0.5& Value of FOV for the shortcut \key{\ctrl+\Alt+0} \\\midrule
-fov\_quick\_1  & float &180 & Value of FOV for the shortcut \key{\ctrl+\Alt+1} \\\midrule
-fov\_quick\_2  & float & 90 & Value of FOV for the shortcut \key{\ctrl+\Alt+2} \\\midrule
-fov\_quick\_3  & float & 60 & Value of FOV for the shortcut \key{\ctrl+\Alt+3} \\\midrule
-fov\_quick\_4  & float & 45 & Value of FOV for the shortcut \key{\ctrl+\Alt+4} \\\midrule
-fov\_quick\_5  & float & 20 & Value of FOV for the shortcut \key{\ctrl+\Alt+5} \\\midrule
-fov\_quick\_6  & float & 10 & Value of FOV for the shortcut \key{\ctrl+\Alt+6} \\\midrule
-fov\_quick\_7  & float &  5 & Value of FOV for the shortcut \key{\ctrl+\Alt+7} \\\midrule
-fov\_quick\_8  & float &  2 & Value of FOV for the shortcut \key{\ctrl+\Alt+8} \\\midrule
+fov\_quick\_0  & float & 0.5& Value of FOV for the shortcut \key{\ctrl+\Alt+0} \\%\midrule
+fov\_quick\_1  & float &180 & Value of FOV for the shortcut \key{\ctrl+\Alt+1} \\%\midrule
+fov\_quick\_2  & float & 90 & Value of FOV for the shortcut \key{\ctrl+\Alt+2} \\%\midrule
+fov\_quick\_3  & float & 60 & Value of FOV for the shortcut \key{\ctrl+\Alt+3} \\%\midrule
+fov\_quick\_4  & float & 45 & Value of FOV for the shortcut \key{\ctrl+\Alt+4} \\%\midrule
+fov\_quick\_5  & float & 20 & Value of FOV for the shortcut \key{\ctrl+\Alt+5} \\%\midrule
+fov\_quick\_6  & float & 10 & Value of FOV for the shortcut \key{\ctrl+\Alt+6} \\%\midrule
+fov\_quick\_7  & float &  5 & Value of FOV for the shortcut \key{\ctrl+\Alt+7} \\%\midrule
+fov\_quick\_8  & float &  2 & Value of FOV for the shortcut \key{\ctrl+\Alt+8} \\%\midrule
 fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \\\bottomrule
 \end{tabular}
+\end{center}
 
 \newpage
 
@@ -208,7 +209,7 @@ fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \
 
 
 \begin{figure}[th]\centering
-\includegraphics[width=.75\textwidth]{PointerCoordinates-plugin.jpg}
+\includegraphics[width=.55\textwidth]{PointerCoordinates-plugin.jpg}
 \caption{Interface of Pointer Coordinates plugin}
 \label{fig:PointerCoordinates}
 \end{figure}
@@ -224,22 +225,22 @@ settings for the Pointer Coordinates plugin -- just make it carefully!
 
 \begin{longtable}{l|l|p{83mm}}\toprule
 \emph{ID}              & \emph{Type} & \emph{Description}\\\midrule
-enable\_at\_startup         & bool   & Enable displaying coordinates of the mouse pointer at startup of the plugin\\\midrule
-flag\_show\_button          & bool   & Enable showing the button of the plugin on bottom toolbar\\\midrule
-text\_color                 & R,G,B  & Color for text with coordinates of the mouse pointer \\\midrule
-font\_size                  & int    & Font size for the displayed coordinates of the mouse pointer \\\midrule
+enable\_at\_startup         & bool   & Enable displaying mouse pointer coordinates at program startup\\%\midrule
+flag\_show\_button          & bool   & Show the plugin's tool button on the bottom toolbar\\%\midrule
+text\_color                 & R,G,B  & Color for coordinates text of the mouse pointer \\%\midrule
+font\_size                  & int    & Font size for the displayed mouse pointer coordinates  \\%\midrule
 current\_displaying\_place  & string & Specifies the place of displaying coordinates of the mouse pointer. 
                                        \textit{Possible values}: \keymap{TopRight}, \keymap{TopCenter}, 
 									   \keymap{RightBottomCorner}, \keymap{Custom}. 
-									   \textit{Default value}: \keymap{TopRight}. \\\midrule
+									   \textit{Default value}: \keymap{TopRight}. \\%\midrule
+custom\_coordinates        & int,int & Specifies the screen coordinates of the custom place for displaying coordinates of the mouse pointer \\%\midrule
 current\_coordinate\_system & string & Specifies the coordinate system. \textit{Possible values}: 
                                        \keymap{RaDecJ2000}, \keymap{RaDec}, \keymap{HourAngle}, \keymap{Ecliptic}, 
 									   \keymap{AltAzi}, \keymap{Galactic}. 
-									   \textit{Default value}: \keymap{RaDecJ2000}. \\\midrule
-custom\_coordinates        & int,int & Specifies the screen coordinates of the custom place for displaying coordinates of the mouse pointer \\\midrule
-flag\_show\_constellation  & bool    & Add the 3-letter IAU\index{IAU} abbreviation for the constellation the 
-                                       mouse pointer sits in \cite{1987PASP...99..695R}.\\\midrule
-flag\_show\_crossed\_lines & bool    & Show crossed line under mouse cursor.\\\bottomrule
+									   \textit{Default value}: \keymap{RaDecJ2000}. \\%\midrule
+flag\_show\_constellation  & bool    & Add the 3-letter IAU\index{IAU} abbreviation for the constellation of the 
+                                       mouse pointer location \cite{1987PASP...99..695R}.\\%\midrule
+flag\_show\_crossed\_lines & bool    & Show crossed lines under mouse cursor.\\\bottomrule
 \end{longtable}
 
 
