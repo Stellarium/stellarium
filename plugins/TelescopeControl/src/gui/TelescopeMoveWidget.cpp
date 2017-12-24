@@ -24,46 +24,48 @@ TelescopeMoveWidget::~TelescopeMoveWidget()
 
 void TelescopeMoveWidget::onNorthButtonPressed()
 {
-	emit moveNorth(speed());
+	emit move(0, speed());
 }
 
 void TelescopeMoveWidget::onNorthButtonReleased()
 {
-	emit moveNorth(0);
+	emit move(0, 0);
 }
 
 void TelescopeMoveWidget::onEastButtonPressed()
 {
-	emit moveEast(speed());
+	emit move(90, speed());
 }
 
 void TelescopeMoveWidget::onEastButtonReleased()
 {
-	emit moveEast(0);
+	emit move(90, 0);
 }
 
 void TelescopeMoveWidget::onSouthButtonPressed()
 {
-	emit moveSouth(speed());
+	emit move(180, speed());
 }
 
 void TelescopeMoveWidget::onSouthButtonReleased()
 {
-	emit moveSouth(0);
+	emit move(180, 0);
 }
 
 void TelescopeMoveWidget::onWestButtonPressed()
 {
-	emit moveWest(speed());
+	emit move(270, speed());
 }
 
 void TelescopeMoveWidget::onWestButtonReleased()
 {
-	emit moveWest(0);
+	emit move(270, 0);
 }
 
-int TelescopeMoveWidget::speed() const
+double TelescopeMoveWidget::speed() const
 {
-	return ui->speedSlider->value();
+	double speed = ui->speedSlider->value();
+	speed /= ui->speedSlider->maximum();
+	return speed;
 }
 

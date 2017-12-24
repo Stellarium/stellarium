@@ -1,12 +1,14 @@
 #include "TelescopeClientINDI.hpp"
 
 #include <QDebug>
+#include <cmath>
+#include <limits>
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 
 TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params):
-    TelescopeClient(name)
+	TelescopeClient(name)
 {
 	qDebug() << "TelescopeClientINDI::TelescopeClientINDI";
 
@@ -75,6 +77,27 @@ bool TelescopeClientINDI::hasKnownPosition() const
 	return mConnection.isDeviceConnected();
 }
 
+int TelescopeClientINDI::toINDISpeed(double speed) const
+{
+	double absSpeed = std::abs(speed);
+	if (absSpeed > 1.0)
+	{
+		qWarning() << "TelescopeClientINDI::toINDISpeed " << speed << " out of range [-1,1]";
+		return 0;
+	}
+
+	if (absSpeed < std::numeric_limits<double>::epsilon())
+		return 0;
+	else if (absSpeed <= 0.25)
+		return 1;
+	else if (absSpeed <= 0.5)
+		return 2;
+	else if (absSpeed <= 0.75)
+		return 3;
+	else
+		return 4;
+}
+
 void TelescopeClientINDI::moveNorth(int speed)
 {
 	mConnection.moveNorth(speed);
@@ -95,3 +118,47 @@ void TelescopeClientINDI::moveWest(int speed)
 	mConnection.moveWest(speed);
 }
 
+void TelescopeClientINDI::move(double angle, double speed)
+{
+	if (angle < 0.0 || angle >= 360.0)
+	{
+		qWarning() << "TelescopeClientINDI::move angle " << angle << " out of range [0,360)";
+		return;
+	}
+
+	if (speed < 0.0 || speed > 1.0)
+	{
+		qWarning() << "TelescopeClientINDI::move speed " << speed << "out of range [0,1]";
+		return;
+	}
+
+	double vEst = 0; //speed * std::sin(angle);
+	double vNorth = speed * std::cos(angle);
+	int indiSpeedE = toINDISpeed(vEst);
+	int indiSpeedN = toINDISpeed(vNorth);
+
+	if (angle < 90)
+	{
+		mConnection.moveSouth(0);
+		//mConnection.moveEast(indiSpeedE);
+		mConnection.moveNorth(indiSpeedN);
+	}
+	else if (angle < 180)
+	{
+		mConnection.moveNorth(0);
+		//mConnection.moveEast(indiSpeedE);
+		mConnection.moveSouth(indiSpeedN);
+	}
+	else if (angle < 270)
+	{
+		mConnection.moveNorth(0);
+		//mConnection.moveWest(indiSpeedE);
+		mConnection.moveSouth(indiSpeedN);
+	}
+	else
+	{
+		mConnection.moveSouth(0);
+		//mConnection.moveWest(indiSpeedE);
+		mConnection.moveNorth(indiSpeedN);
+	}
+}

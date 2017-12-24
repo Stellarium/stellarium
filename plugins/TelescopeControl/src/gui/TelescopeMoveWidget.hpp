@@ -20,6 +20,7 @@ signals:
 	void moveEast(int speed);
 	void moveWest(int speed);
 	void moveSouth(int speed);
+	void move(double angle, double speed);
 
 private slots:
 	void onNorthButtonPressed();
@@ -32,7 +33,7 @@ private slots:
 	void onWestButtonReleased();
 
 private:
-	int speed() const;
+	double speed() const;
 
 	Ui::TelescopeMoveWidget *ui;
 };

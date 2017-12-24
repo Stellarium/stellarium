@@ -96,6 +96,7 @@ private slots:
 	void onMoveEast(int speed);
 	void onMoveWest(int speed);
 	void onMoveSouth(int speed);
+	void onMove(double angle, double speed);
 	void onCurrentTelescopeChanged();
 
 private:

@@ -168,6 +168,11 @@ void TelescopeClient::moveWest(int speed)
 	qDebug() << "TelescopeClient::moveWest not implemented";
 }
 
+void TelescopeClient::move(double angle, double speed)
+{
+	qDebug() << "TelescopeClient::move not implemented";
+}
+
 //! returns the current system time in microseconds since the Epoch
 //! Prior to revision 6308, it was necessary to put put this method in an
 //! #ifdef block, as duplicate function definition caused errors during static

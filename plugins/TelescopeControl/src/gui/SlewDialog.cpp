@@ -86,6 +86,7 @@ void SlewDialog::createDialogContent()
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveEast, this, &SlewDialog::onMoveEast);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveSouth, this, &SlewDialog::onMoveSouth);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveWest, this, &SlewDialog::onMoveWest);
+	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::move, this, &SlewDialog::onMove);
 	QObject::connect(ui->comboBoxTelescope, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SlewDialog::onCurrentTelescopeChanged);
 
 	//Coordinates are in HMS by default:
@@ -345,6 +346,13 @@ void SlewDialog::onMoveSouth(int speed)
 	auto telescope = currentTelescope();
 	if (telescope)
 		telescope->moveSouth(speed);
+}
+
+void SlewDialog::onMove(double angle, double speed)
+{
+	auto telescope = currentTelescope();
+	if (telescope)
+		telescope->move(angle, speed);
 }
 
 void SlewDialog::onCurrentTelescopeChanged()
