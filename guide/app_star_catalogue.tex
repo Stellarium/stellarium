@@ -122,9 +122,9 @@ table \emph{File sections}.
 \noindent%
 \begin{tabularx}{\textwidth}{l l X}\toprule
 \emph{Section} & \emph{Offset} & \emph{Description}\\\midrule
-File Header Record &  0        & Contains magic number, geodesic subdivision level, and magnitude range\\\midrule
+File Header Record &  0        & Contains magic number, geodesic subdivision level, and magnitude range\\%\midrule
 Zone Records       & 32        & A list of how many records there are for each zone.
-                                 The length of the zones section depends on the level value from the header\\\midrule
+                                 The length of the zones section depends on the level value from the header\\%\midrule
 Star Data Records  & 32+4$n$   & This section of the file contains fixed-size star records, as described below. 
                                  Records do not contain zone information, which must be inferred by counting 
                                  how many records have been read so far and switching zones when enough have been read 
@@ -144,19 +144,19 @@ magic number which servers as a file type identifier. See table~\ref{tab:Catalog
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
-Magic             &  0 & int & 4 & The magic number which identifies the file as a star catalogue. \texttt{0xde0955a3}\\\midrule
-Data Type         &  4 & int & 4 & This describes the type of the file, which defines the size and structure 
-                                   of the Star Data record for the file.\\\midrule
-Major Version     &  8 & int & 4 & The file format major version number\\\midrule
-Minor Version     & 12 & int & 4 & The file format minor version number\\\midrule
-Level             & 16 & int & 4 & Sets the level of sub-division of the geodesic sphere used to create the zones. 
+Magic             &  0 & int & 4 & magic number which identifies the file as a star catalogue. \texttt{0xde0955a3}\\%\midrule
+Data Type         &  4 & int & 4 & type of the file, which defines the size and structure 
+                                   of the Star Data record for the file.\\%\midrule
+Major Version     &  8 & int & 4 & file format major version number\\%\midrule
+Minor Version     & 12 & int & 4 & file format minor version number\\%\midrule
+Level             & 16 & int & 4 & sets the level of sub-division of the geodesic sphere used to create the zones. 
                                    0 means an icosahedron (20 triangular faces), 
                                    subsequent levels of sub-division lead to numbers of zones 
-                                   as described in section \href{Star_Catalogue\#Zones}{Zones}\\\midrule
-Magnitude Minimum & 20 & int & 4 & The low bound of the magnitude scale for values in this file. 
-                                   Note that this is still an integer in Stellarium's own internal representation\\\midrule
-Magnitude Range   & 24 & int & 4 & The range of magnitudes expressed in this file\\\midrule
-Magnitude Steps   & 28 & int & 4 & The number of steps used to describes values in the range\\\bottomrule
+                                   as described in section \ref{sec:Catalogues:stars:record:zone}\\%\midrule
+Magnitude Minimum & 20 & int & 4 &  low bound of the magnitude scale for values in this file. 
+                                   Note that this is still an integer in Stellarium's own internal representation\\%\midrule
+Magnitude Range   & 24 & int & 4 & range of magnitudes expressed in this file\\%\midrule
+Magnitude Steps   & 28 & int & 4 & number of steps used to describes values in the range\\\bottomrule
 \end{tabularx}
 \caption{Header Record}
 \label{tab:Catalogues:stars:record:header}
@@ -178,10 +178,10 @@ table~\ref{tab:Catalogues:stars:record:zones}. % \emph{Zones section}.
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-num stars in zone 0   & 0    & int & 4 & The number of records in this file which are in zone 0\\\midrule
-num stars in zone 1   & 4    & int & 4 & The number of records is this file which are in zone 1\\
+num stars in zone 0   & 0    & int & 4 &  number of records in this file which are in zone 0\\%\midrule
+num stars in zone 1   & 4    & int & 4 &  number of records is this file which are in zone 1\\
 ...                   &      &     &   &\\
-num stars in zone $n$ & $4n$ & int & 4 & The number of records is this file which are in zone $n$\\\bottomrule
+num stars in zone $n$ & $4n$ & int & 4 &  number of records is this file which are in zone $n$\\\bottomrule
 \end{tabularx}
 \caption{Zones section}
 \label{tab:Catalogues:stars:record:zones}
@@ -214,22 +214,22 @@ practice.
 
 \begin{longtable}{llllp{55mm}}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-hip            &  0 & int                & 3 & Hipparcos catalogue number\\\midrule
-component\_ids &  3 & unsigned char      & 1 & This is an index to an array of catalogue number suffixes. The list is read from the
+hip            &  0 & int                & 3 & Hipparcos catalogue number\\%\midrule
+component\_ids &  3 & unsigned char      & 1 & index to an array of catalogue number suffixes. The list is read from the
                                                \file{stars\_hip\_component\_ids.cat} file. The value of this field turns out to be 
-											   the line number in the file - 1\\\midrule
-x0             &  4 & int                & 4 & This is the position of the star relative to the central point in the star's zone, in axis 1\\\midrule
-x1             &  8 & int                & 4 & This is the position of the star relative to the central point in the star's zone, in axis 2\\\midrule
-b\_v           &  9 & unsigned char      & 1 & This is the magnitude level in B-V colour. This value refers to one of 256 discrete steps 
-                                               in the magnitude range for the file\\\midrule
-mag            & 10 & unsigned char      & 1 & This is the magnitude level in the V-I colour. This value refers to one of 256 discrete steps 
-                                               in the magnitude range for the file\\\midrule
-sp\_int        & 11 & unsigned short int & 2 & This is the index in an array of spectral type descriptions 
+											   the line number in the file - 1\\%\midrule
+x0             &  4 & int                & 4 & position of the star relative to the central point in the star's zone, in axis 1\\%\midrule
+x1             &  8 & int                & 4 & position of the star relative to the central point in the star's zone, in axis 2\\%\midrule
+b\_v           &  9 & unsigned char      & 1 & magnitude level in B-V colour. This value refers to one of 256 discrete steps 
+                                               in the magnitude range for the file\\%\midrule
+mag            & 10 & unsigned char      & 1 & magnitude level in the V-I colour. This value refers to one of 256 discrete steps 
+                                               in the magnitude range for the file\\%\midrule
+sp\_int        & 11 & unsigned short int & 2 & index into an array of spectral type descriptions 
                                                which is taken from the file \file{stars\_hip\_sp.cat}, the index corresponds to the 
-											   line number in the file - 1\\\midrule
-dx0            & 13 & int                & 4 & This is the proper motion of the star in axis 1\\\midrule
-dx1            & 17 & int                & 4 & This is the proper motion of the star in axis 2\\\midrule
-plx            & 21 & int                & 4 & This is the parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
+											   line number in the file - 1\\%\midrule
+dx0            & 13 & int                & 4 & proper motion of the star in axis 1\\%\midrule
+dx1            & 17 & int                & 4 & proper motion of the star in axis 2\\%\midrule
+plx            & 21 & int                & 4 & parallax of the star. To get the actual value, divide by 10000.\\\bottomrule
 \caption{Star Data Record Type 0}
 \label{tab:StarDataRecord0}
 \end{longtable}
@@ -237,13 +237,13 @@ plx            & 21 & int                & 4 & This is the parallax of the star.
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset}& \emph{Type} & \emph{Size} &\emph{Description}\\\midrule
-x0   &  0      & int          & 20 bits & This is the position of the star relative to the central point in the star's zone, in axis 1\\\midrule
-x1   & 20 bits & int          & 20 bits & This is the position of the star relative to the central point in the star's zone, in axis 2\\\midrule
-dx0  & 40 bits & int          & 14 bits & This is the proper motion of the star in axis 1\\\midrule
-dx1  & 54 bits & int          & 14 bits & This is the proper motion of the star in axis 2\\\midrule
-b\_v & 68 bits & unsigned int &  7 bits & This is the magnitude level in B-V colour. This value refers to one of 128 discrete steps 
-                                          in the magnitude range for the file\\\midrule
-mag  & 75 bits & unsigned int &  5 bits & This is the magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
+x0   &  0      & int          & 20 bits & position of the star relative to the central point in the star's zone, in axis 1\\%\midrule
+x1   & 20 bits & int          & 20 bits & position of the star relative to the central point in the star's zone, in axis 2\\%\midrule
+dx0  & 40 bits & int          & 14 bits & proper motion of the star in axis 1\\%\midrule
+dx1  & 54 bits & int          & 14 bits & proper motion of the star in axis 2\\%\midrule
+b\_v & 68 bits & unsigned int &  7 bits & magnitude level in B-V colour. This value refers to one of 128 discrete steps 
+                                          in the magnitude range for the file\\%\midrule
+mag  & 75 bits & unsigned int &  5 bits & magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
                                           in the magnitude range for the file\\\bottomrule
 \end{tabularx}
 \caption{Star Data Record Type 1}
@@ -253,11 +253,11 @@ mag  & 75 bits & unsigned int &  5 bits & This is the magnitude level in the V-I
 \begin{table}[htbp]
 \begin{tabularx}{\textwidth}{llllX}\toprule
 \emph{Name} & \emph{Offset} & \emph{Type} & \emph{Size} & \emph{Description}\\\midrule
-x0   & 0       & int          & 18 bits & This is the position of the star relative to the central point in the star's zone, in axis 1\\\midrule
-x1   & 18 bits & int          & 18 bits & This is the position of the star relative to the central point in the star's zone, in axis 2\\\midrule
-b\_v & 36 bits & unsigned int &  7 bits & This is the magnitude level in B-V colour. This value refers to one of 128 discrete steps 
-                                          in the magnitude range for the file\\\midrule
-mag  & 43 bits & unsigned int &  5 bits & This is the magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
+x0   & 0       & int          & 18 bits & position of the star relative to the central point in the star's zone, in axis 1\\%\midrule
+x1   & 18 bits & int          & 18 bits & position of the star relative to the central point in the star's zone, in axis 2\\%\midrule
+b\_v & 36 bits & unsigned int &  7 bits & magnitude level in B-V colour. This value refers to one of 128 discrete steps 
+                                          in the magnitude range for the file\\%\midrule
+mag  & 43 bits & unsigned int &  5 bits & magnitude level in the V-I colour. This value refers to one of 32 discrete steps 
                                           in the magnitude range for the file\\\bottomrule
 \end{tabularx}
 \caption{Star Data Record Type 2}
@@ -294,19 +294,19 @@ are stored in a plain text format with tab delimiter (Table~\ref{tab:sec:StarCat
 \begin{table}[tb]
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP      & int    & This is the HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
-GCVS     & string & This is the GCVS designation for the variable star.\\\midrule
-Type     & string & Type of variability.\\\midrule
-Max      & float  & Magnitude at maximum brightness.\\\midrule
+HIP      & int    & This is the HIP identificator for the star. Used for reference to the main star catalogue.\\%\midrule
+GCVS     & string & This is the GCVS designation for the variable star.\\%\midrule
+Type     & string & Type of variability.\\%\midrule
+Max      & float  & Magnitude at maximum brightness.\\%\midrule
 MFlag    & int    & Magnitude flag code (0=No flag; 1="(" if max. magnitude is an amplitude; 
                     2="\textless{}" if max. magnitude is a bright limit; 
-                    3="\textgreater{}" is max. magnitude is a faint limit).\\\midrule
-Min I    & float  & First minimum magnitude or amplitude.\\\midrule
-Min II   & float  & Second minimum magnitude.\\\midrule
-V        & char   & The photometric system for magnitudes.\\\midrule
-Epoch    & float  & Epoch for maximum or minimum light (in Julian days).\\\midrule
-Period   & float  & Period for the variable star (in days).\\\midrule
-M-m      & float  & Rising time or duration of the eclipse (in percent).\\\midrule
+                    3="\textgreater{}" is max. magnitude is a faint limit).\\%\midrule
+Min I    & float  & First minimum magnitude or amplitude.\\%\midrule
+Min II   & float  & Second minimum magnitude.\\%\midrule
+V        & char   & The photometric system for magnitudes.\\%\midrule
+Epoch    & float  & Epoch for maximum or minimum light (in Julian days).\\%\midrule
+Period   & float  & Period for the variable star (in days).\\%\midrule
+M-m      & float  & Rising time or duration of the eclipse (in percent).\\%\midrule
 Spectrum & string & Spectral class of the variable star.\\\bottomrule
 \end{tabularx}
 \caption{Variable Star Catalog File Format}
@@ -712,7 +712,7 @@ of pulsating variables may be distinguished:
 \item[ZZA]		ZZ Cet-type variables of DA spectral type (ZZ Cet) having
 				only hydrogen absorption lines in their spectra;
 \item[ZZB]		ZZ Cet-type variables of DB spectral type having only
-				helium absorption lines in their spectra.\\
+				helium absorption lines in their spectra.
 \item[ZZO]		ZZ Cet-type variables of the DO spectral type showing
                 HeII and and CIV absorpion lines in their spectra.
 	\end{description}
@@ -1189,10 +1189,10 @@ stored in plain text format with tab delimiters.
 \begin{table}[htb]
 \begin{tabularx}{\textwidth}{l|c|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP      		& int    & HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
-WDS      		& string & WDS designation for the double star.\\\midrule
-Observation		& int	 & Date of last satisfactory observation (in years).\\\midrule
-Position Angle  & float  & Position Angle at date of last satisfactory observation (in decimal degrees).\\\midrule
+HIP      		& int    & HIP identificator for the star. Used for reference to the main star catalogue.\\%\midrule
+WDS      		& string & WDS designation for the double star.\\%\midrule
+Observation		& int	 & Date of last satisfactory observation (in years).\\%\midrule
+Position Angle  & float  & Position Angle at date of last satisfactory observation (in decimal degrees).\\%\midrule
 Separation 		& float  & Separation at date of last satisfactory observation (in arcsec).\\\bottomrule
 \end{tabularx}
 \end{table}
@@ -1223,9 +1223,9 @@ The file \file{cross-id.dat} contains cross reference data for catalogues HIP, S
 \begin{table}[htb]
 \begin{tabularx}{\textwidth}{l|c|X}\toprule
 \emph{Name} & \emph{Type} & \emph{Description}\\\midrule
-HIP	& int & HIP identificator for the star. Used for reference to the main star catalogue.\\\midrule
-SAO	& int & SAO identificator for the star.\\\midrule
-HD	& int & HD identificator for the star.\\\midrule
+HIP	& int & HIP identificator for the star. Used for reference to the main star catalogue.\\%\midrule
+SAO	& int & SAO identificator for the star.\\%\midrule
+HD	& int & HD identificator for the star.\\%\midrule
 HR	& int & HR identificator for the star.\\\bottomrule
 \end{tabularx}
 \end{table}
