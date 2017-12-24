@@ -1,6 +1,6 @@
 # Stellarium
 [![GitHub release](https://img.shields.io/github/release/Stellarium/stellarium.svg)](https://github.com/Stellarium/stellarium/releases/latest)
-[![Github Releases](https://img.shields.io/github/downloads/Stellarium/stellarium/total.svg)](https://github.com/Stellarium/stellarium/releases/latest)
+[![Github Releases](https://img.shields.io/github/downloads/Stellarium/stellarium/total.svg)](https://github.com/Stellarium/stellarium/releases)
 [![license](https://img.shields.io/github/license/Stellarium/stellarium.svg)](https://github.com/Stellarium/stellarium/blob/master/COPYING)
 [![Coverity Scan](https://img.shields.io/coverity/scan/2098.svg)](https://scan.coverity.com/projects/stellarium-stellarium)
 [![Build Status](https://travis-ci.org/Stellarium/stellarium.svg?branch=master)](https://travis-ci.org/Stellarium/stellarium)
