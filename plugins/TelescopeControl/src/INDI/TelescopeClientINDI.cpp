@@ -79,20 +79,15 @@ bool TelescopeClientINDI::hasKnownPosition() const
 
 int TelescopeClientINDI::toINDISpeed(double speed) const
 {
-	double absSpeed = std::abs(speed);
-	if (absSpeed > 1.0)
-	{
-		qWarning() << "TelescopeClientINDI::toINDISpeed " << speed << " out of range [-1,1]";
-		return 0;
-	}
+	speed = std::abs(speed);
 
-	if (absSpeed < std::numeric_limits<double>::epsilon())
+	if (speed < std::numeric_limits<double>::epsilon())
 		return 0;
-	else if (absSpeed <= 0.25)
+	else if (speed <= 0.25)
 		return 1;
-	else if (absSpeed <= 0.5)
+	else if (speed <= 0.5)
 		return 2;
-	else if (absSpeed <= 0.75)
+	else if (speed <= 0.75)
 		return 3;
 	else
 		return 4;
@@ -112,33 +107,39 @@ void TelescopeClientINDI::move(double angle, double speed)
 		return;
 	}
 
-	double vEst = 0; //speed * std::sin(angle);
-	double vNorth = speed * std::cos(angle);
+	double rad = angle * M_PI / 180.0;
+	double vEst = speed * std::sin(rad);
+	double vNorth = speed * std::cos(rad);
+
 	int indiSpeedE = toINDISpeed(vEst);
 	int indiSpeedN = toINDISpeed(vNorth);
 
 	if (angle < 90)
 	{
-		mConnection.moveSouth(0);
-		//mConnection.moveEast(indiSpeedE);
 		mConnection.moveNorth(indiSpeedN);
+		mConnection.moveEast(indiSpeedE);
+		mConnection.moveSouth(0);
+		mConnection.moveWest(0);
 	}
 	else if (angle < 180)
 	{
 		mConnection.moveNorth(0);
-		//mConnection.moveEast(indiSpeedE);
+		mConnection.moveEast(indiSpeedE);
 		mConnection.moveSouth(indiSpeedN);
+		mConnection.moveWest(0);
 	}
 	else if (angle < 270)
 	{
 		mConnection.moveNorth(0);
-		//mConnection.moveWest(indiSpeedE);
+		mConnection.moveEast(0);
 		mConnection.moveSouth(indiSpeedN);
+		mConnection.moveWest(indiSpeedE);
 	}
 	else
 	{
-		mConnection.moveSouth(0);
-		//mConnection.moveWest(indiSpeedE);
 		mConnection.moveNorth(indiSpeedN);
+		mConnection.moveEast(0);
+		mConnection.moveSouth(0);
+		mConnection.moveWest(indiSpeedE);
 	}
 }
