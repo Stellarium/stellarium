@@ -98,26 +98,6 @@ int TelescopeClientINDI::toINDISpeed(double speed) const
 		return 4;
 }
 
-void TelescopeClientINDI::moveNorth(int speed)
-{
-	mConnection.moveNorth(speed);
-}
-
-void TelescopeClientINDI::moveEast(int speed)
-{
-	mConnection.moveEast(speed);
-}
-
-void TelescopeClientINDI::moveSouth(int speed)
-{
-	mConnection.moveSouth(speed);
-}
-
-void TelescopeClientINDI::moveWest(int speed)
-{
-	mConnection.moveWest(speed);
-}
-
 void TelescopeClientINDI::move(double angle, double speed)
 {
 	if (angle < 0.0 || angle >= 360.0)

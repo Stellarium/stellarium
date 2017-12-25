@@ -32,10 +32,6 @@ public:
 	~TelescopeClientINDI();
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
-	void moveNorth(int speed) override;
-	void moveEast(int speed) override;
-	void moveSouth(int speed) override;
-	void moveWest(int speed) override;
 	void move(double angle, double speed) override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isConnected() const override;

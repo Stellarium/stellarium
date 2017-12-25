@@ -80,10 +80,6 @@ public:
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
-	virtual void moveNorth(int speed);
-	virtual void moveEast(int speed);
-	virtual void moveSouth(int speed);
-	virtual void moveWest(int speed);
 
 	//!
 	//! \brief move

@@ -148,26 +148,6 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 	return str;
 }
 
-void TelescopeClient::moveNorth(int speed)
-{
-	qDebug() << "TelescopeClient::moveNorth not implemented";
-}
-
-void TelescopeClient::moveEast(int speed)
-{
-	qDebug() << "TelescopeClient::moveEast not implemented";
-}
-
-void TelescopeClient::moveSouth(int speed)
-{
-	qDebug() << "TelescopeClient::moveSouth not implemented";
-}
-
-void TelescopeClient::moveWest(int speed)
-{
-	qDebug() << "TelescopeClient::moveWest not implemented";
-}
-
 void TelescopeClient::move(double angle, double speed)
 {
 	qDebug() << "TelescopeClient::move not implemented";

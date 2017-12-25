@@ -82,10 +82,6 @@ void SlewDialog::createDialogContent()
 	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
 	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
 
-	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveNorth, this, &SlewDialog::onMoveNorth);
-	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveEast, this, &SlewDialog::onMoveEast);
-	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveSouth, this, &SlewDialog::onMoveSouth);
-	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::moveWest, this, &SlewDialog::onMoveWest);
 	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::move, this, &SlewDialog::onMove);
 	QObject::connect(ui->comboBoxTelescope, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SlewDialog::onCurrentTelescopeChanged);
 
@@ -318,34 +314,6 @@ void SlewDialog::getStoredPointInfo()
 
 	ui->spinBoxRA->setRadians(sp.radiansRA);
 	ui->spinBoxDec->setRadians(sp.radiansDec);
-}
-
-void SlewDialog::onMoveNorth(int speed)
-{
-	auto telescope = currentTelescope();
-	if (telescope)
-		telescope->moveNorth(speed);
-}
-
-void SlewDialog::onMoveEast(int speed)
-{
-	auto telescope = currentTelescope();
-	if (telescope)
-		telescope->moveEast(speed);
-}
-
-void SlewDialog::onMoveWest(int speed)
-{
-	auto telescope = currentTelescope();
-	if (telescope)
-		telescope->moveWest(speed);
-}
-
-void SlewDialog::onMoveSouth(int speed)
-{
-	auto telescope = currentTelescope();
-	if (telescope)
-		telescope->moveSouth(speed);
 }
 
 void SlewDialog::onMove(double angle, double speed)
