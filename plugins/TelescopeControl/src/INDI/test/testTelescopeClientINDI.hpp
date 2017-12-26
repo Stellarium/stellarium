@@ -7,9 +7,8 @@ class testTelescopeClientINDI : public QObject
 {
     Q_OBJECT
 
-signals:
-
-public slots:
+private slots:
+	void isConnectedInitialValue();
 };
 
 #endif // TESTTELESCOPECLIENTINDI_HPP
