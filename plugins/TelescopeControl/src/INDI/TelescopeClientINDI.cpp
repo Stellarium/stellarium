@@ -6,6 +6,7 @@
 
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
+#include "indibase/inditelescope.h"
 
 TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params):
 	TelescopeClient(name)
@@ -82,15 +83,15 @@ int TelescopeClientINDI::toINDISpeed(double speed) const
 	speed = std::abs(speed);
 
 	if (speed < std::numeric_limits<double>::epsilon())
-		return 0;
+		return INDIConnection::SLEW_STOP;
 	else if (speed <= 0.25)
-		return 1;
+		return INDI::Telescope::SLEW_GUIDE;
 	else if (speed <= 0.5)
-		return 2;
+		return INDI::Telescope::SLEW_CENTERING;
 	else if (speed <= 0.75)
-		return 3;
+		return INDI::Telescope::SLEW_FIND;
 	else
-		return 4;
+		return INDI::Telescope::SLEW_MAX;
 }
 
 void TelescopeClientINDI::move(double angle, double speed)
@@ -118,28 +119,28 @@ void TelescopeClientINDI::move(double angle, double speed)
 	{
 		mConnection.moveNorth(indiSpeedN);
 		mConnection.moveEast(indiSpeedE);
-		mConnection.moveSouth(0);
-		mConnection.moveWest(0);
+		mConnection.moveSouth(INDIConnection::SLEW_STOP);
+		mConnection.moveWest(INDIConnection::SLEW_STOP);
 	}
 	else if (angle < 180)
 	{
-		mConnection.moveNorth(0);
+		mConnection.moveNorth(INDIConnection::SLEW_STOP);
 		mConnection.moveEast(indiSpeedE);
 		mConnection.moveSouth(indiSpeedN);
-		mConnection.moveWest(0);
+		mConnection.moveWest(INDIConnection::SLEW_STOP);
 	}
 	else if (angle < 270)
 	{
-		mConnection.moveNorth(0);
-		mConnection.moveEast(0);
+		mConnection.moveNorth(INDIConnection::SLEW_STOP);
+		mConnection.moveEast(INDIConnection::SLEW_STOP);
 		mConnection.moveSouth(indiSpeedN);
 		mConnection.moveWest(indiSpeedE);
 	}
 	else
 	{
 		mConnection.moveNorth(indiSpeedN);
-		mConnection.moveEast(0);
-		mConnection.moveSouth(0);
+		mConnection.moveEast(INDIConnection::SLEW_STOP);
+		mConnection.moveSouth(INDIConnection::SLEW_STOP);
 		mConnection.moveWest(indiSpeedE);
 	}
 }

@@ -9,6 +9,9 @@
 
 #include "indibase/baseclient.h"
 #include "indibase/basedevice.h"
+#include "indibase/inditelescope.h"
+
+const int INDIConnection::SLEW_STOP = INDI::Telescope::SLEW_GUIDE - 1;
 
 INDIConnection::INDIConnection(QObject *parent) : QObject(parent)
 {
@@ -75,13 +78,13 @@ void INDIConnection::moveNorth(int speed)
 
 	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_NORTH");
 
-	if (speed > 0)
+	if (speed == SLEW_STOP)
+		motion->s = ISS_OFF;
+	else
 	{
 		setSpeed(speed);
 		motion->s = ISS_ON;
 	}
-	else
-		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }
@@ -101,13 +104,13 @@ void INDIConnection::moveEast(int speed)
 
 	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_EAST");
 
-	if (speed > 0)
+	if (speed == SLEW_STOP)
+		motion->s = ISS_OFF;
+	else
 	{
 		setSpeed(speed);
 		motion->s = ISS_ON;
 	}
-	else
-		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }
@@ -127,13 +130,13 @@ void INDIConnection::moveSouth(int speed)
 
 	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_SOUTH");
 
-	if (speed > 0)
+	if (speed == SLEW_STOP)
+		motion->s = ISS_OFF;
+	else
 	{
 		setSpeed(speed);
 		motion->s = ISS_ON;
 	}
-	else
-		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }
@@ -153,13 +156,13 @@ void INDIConnection::moveWest(int speed)
 
 	ISwitch *motion = IUFindSwitch(switchVector, "MOTION_WEST");
 
-	if (speed > 0)
+	if (speed == SLEW_STOP)
+		motion->s = ISS_OFF;
+	else
 	{
 		setSpeed(speed);
 		motion->s = ISS_ON;
 	}
-	else
-		motion->s = ISS_OFF;
 
 	sendNewSwitch(switchVector);
 }

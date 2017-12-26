@@ -36,9 +36,10 @@ public:
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;
-	int toINDISpeed(double speed) const;
 
 private:
+	int toINDISpeed(double speed) const;
+
 	INDIConnection mConnection;
 	QString mDevice;
 };

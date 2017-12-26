@@ -30,6 +30,8 @@ class INDIConnection final : public QObject, public INDI::BaseClient
 	Q_OBJECT
 
 public:
+	static const int SLEW_STOP;
+
 	struct Coordinates
 	{
 		double RA = 0.0;
