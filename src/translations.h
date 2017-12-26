@@ -39,6 +39,14 @@ class Translations
 		N_("E");
 		// TRANSLATORS: Cardinals names: West
 		N_("W");
+		// TRANSLATORS: Cardinals names: Northeast
+		N_("NE");
+		// TRANSLATORS: Cardinals names: Southeast
+		N_("SE");
+		// TRANSLATORS: Cardinals names: Southwest
+		N_("SW");
+		// TRANSLATORS: Cardinals names: Northwest
+		N_("NW");
 
 		// =====================================================================
 		// List of types solar system bodies

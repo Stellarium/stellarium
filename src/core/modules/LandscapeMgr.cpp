@@ -65,15 +65,18 @@ private:
 	float radius;
 	QFont font;
 	Vec3f color;
-	QString sNorth, sSouth, sEast, sWest;
+	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest;
 	LinearFader fader;
 };
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2), sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
+Cardinals::Cardinals(float _radius)
+	: radius(_radius), color(0.6,0.2,0.2)
+	, sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
+	, sNortheast("NE"), sSoutheast("SE"), sSouthwest("SW"), sNorthwest("NW")
 {
-	// Font size is 30
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);	
+	// Font size is 24
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+11);
 }
 
 Cardinals::~Cardinals()
@@ -91,16 +94,20 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (!fader.getInterstate()) return;
 
 	// direction text
-	QString d[4];
+	QString d[8];
 
 	d[0] = sNorth;
 	d[1] = sSouth;
 	d[2] = sEast;
 	d[3] = sWest;
+	d[4] = sNortheast;
+	d[5] = sSoutheast;
+	d[6] = sSouthwest;
+	d[7] = sNorthwest;
 
 	// fun polar special cases
-	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
-	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
+	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sSouth;
+	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sNorth;
 
 	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
 	sPainter.setBlending(true);
@@ -108,25 +115,53 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	Vec3f pos;
 	Vec3f xy;
 
-	float shift = sPainter.getFontMetrics().width(sNorth)/2.;
+	float sshift = sPainter.getFontMetrics().width(sNorth)/2.;
+	float bshift = sPainter.getFontMetrics().width(sNortheast)/2.;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-		shift = 0;
+	{
+		sshift = bshift = 0;
+	}
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[0], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -sshift, false);
+
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[1], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -sshift, false);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[2], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -sshift, false);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[3], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -sshift, false);
+
+	// NE for Northeast
+	pos.set(-1.f, 1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -sshift, false);
+
+	// SE for Southeast
+	pos.set(1.f, 1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -sshift, false);
+
+	// SW for Southwest
+	pos.set(1.f, -1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -sshift, false);
+
+	// NW for Northwest
+	pos.set(-1.f, -1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -sshift, false);
 
 }
 
@@ -138,6 +173,10 @@ void Cardinals::updateI18n()
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");
 	sWest = trans.qtranslate("W");
+	sNortheast = trans.qtranslate("NE");
+	sSoutheast = trans.qtranslate("SE");
+	sSouthwest = trans.qtranslate("SW");
+	sNorthwest = trans.qtranslate("NW");
 }
 
 
