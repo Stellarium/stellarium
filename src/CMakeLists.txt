@@ -601,8 +601,6 @@ IF(ENABLE_TESTING)
     SET(tests_testEphemeris_SRCS
         tests/testEphemeris.hpp
         tests/testEphemeris.cpp
-        CLIProcessor.hpp
-        CLIProcessor.cpp
     )
     ADD_EXECUTABLE(testEphemeris ${tests_testEphemeris_SRCS})
     TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})

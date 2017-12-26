@@ -87,6 +87,61 @@ bool RemoteSync::configureGui(bool show)
 	return true;
 }
 
+QVariant RemoteSync::argsGetOptionWithArg(const QStringList& args, QString shortOpt, QString longOpt, QVariant defaultValue)
+{
+	// Don't see anything after a -- as an option
+	int lastOptIdx = args.indexOf("--");
+	if (lastOptIdx == -1)
+		lastOptIdx = args.size();
+
+	for (int i=0; i<lastOptIdx; i++)
+	{
+		bool match(false);
+		QString argStr;
+
+		// form -n=arg
+		if ((!shortOpt.isEmpty() && args.at(i).left(shortOpt.length()+1)==shortOpt+"="))
+		{
+			match=true;
+			argStr=args.at(i).right(args.at(i).length() - shortOpt.length() - 1);
+		}
+		// form --number=arg
+		else if (args.at(i).left(longOpt.length()+1)==longOpt+"=")
+		{
+			match=true;
+			argStr=args.at(i).right(args.at(i).length() - longOpt.length() - 1);
+		}
+		// forms -n arg and --number arg
+		else if ((!shortOpt.isEmpty() && args.at(i)==shortOpt) || args.at(i)==longOpt)
+		{
+			if (i+1>=lastOptIdx)
+			{
+				// i.e., option given as last option, but without arguments. Last chance: default value!
+				if (defaultValue.isValid())
+				{
+					return defaultValue;
+				}
+				else
+				{
+					throw (std::runtime_error(qPrintable("optarg_missing ("+longOpt+")")));
+				}
+			}
+			else
+			{
+				match=true;
+				argStr=args.at(i+1);
+				i++;  // skip option argument in next iteration
+			}
+		}
+
+		if (match)
+		{
+			return QVariant(argStr);
+		}
+	}
+	return defaultValue;
+}
+
 void RemoteSync::init()
 {
 	if (!conf->childGroups().contains("RemoteSync"))
@@ -98,9 +153,9 @@ void RemoteSync::init()
 
 	//parse command line args
 	QStringList args = StelApp::getCommandlineArguments();;
-	QString syncMode = CLIProcessor::argsGetOptionWithArg(args,"","--syncMode","").toString();
-	QString syncHost = CLIProcessor::argsGetOptionWithArg(args,"","--syncHost","").toString();
-	int syncPort = CLIProcessor::argsGetOptionWithArg(args,"","--syncPort",0).toInt();
+	QString syncMode = argsGetOptionWithArg(args,"","--syncMode","").toString();
+	QString syncHost = argsGetOptionWithArg(args,"","--syncHost","").toString();
+	int syncPort = argsGetOptionWithArg(args,"","--syncPort",0).toInt();
 
 	if(syncMode=="server")
 	{
