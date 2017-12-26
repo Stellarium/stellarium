@@ -86,13 +86,19 @@
    <item>
     <widget class="QSlider" name="speedSlider">
      <property name="minimum">
-      <number>0</number>
+      <number>1</number>
      </property>
      <property name="maximum">
-      <number>100</number>
+      <number>4</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
      </property>
      <property name="pageStep">
       <number>1</number>
+     </property>
+     <property name="value">
+      <number>2</number>
      </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
