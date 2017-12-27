@@ -51,6 +51,8 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage{rotating} % Allow sidewaysfigure
+\usepackage{fancyvrb}% provides \VerbatimFootnotes
+
 
 %----------------------------------------------------------------------------------------
 %	NEW COMMANDS AND ADDITIONS
@@ -100,6 +102,11 @@
 \newcommand{\button}[1]{\fbox{\textbf{\textsf{\scriptsize #1}}}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index.
 %% Names should be given with First names and surnames like \name[Johann]{Bayer}. The index will be built sorted by entry surnames.
+%% Unfortunately, these cause problems (Ugly rendering, and Stack size exceeded) with tex4ht. But we don't have an index in the HTML version, so just ignore.
+\ifhtlatex
+\newcommand{\name}[2][]{\textbf{#2}}
+\newcommand{\indexterm}[2][]{\emph{#2}}
+\else
 \newcommand{\name}[2][]{%
 	\ifthenelse{\equal{#1}{}}{\textsc{#2}\index{#2}}%
 	                         {\textsc{#1 #2}\index{#2, #1}}}
@@ -108,7 +115,11 @@
 %\newcommand{\indexterm}[1]{\emph{#2}\index{#2}}
 \newcommand{\indexterm}[2][]{%
 	\ifthenelse{\equal{#1}{}}{\emph{#2}\index{#2}}{\emph{#2}\index{#1}}}
-
+\fi	
+	
+	
+	
+	
 %% This will avoid overshooting of the margin notes out of the page.
 \setlength{\marginparwidth}{0.6\marginparwidth}
 %% A command to show the version number when a feature was introduced in the margin. Give only the version number. TODO Decide on formatting etc.
@@ -132,10 +143,25 @@
 \newcommand{\px}{\ensuremath{\mathrm{px}}} % pixels
 \newcommand{\cy}{\ensuremath{\mathrm{cy}}} % century
 
+% It seems the lstenvironments are much too compicated or need big efforts for decorating in HTML/CSS. Just replace by something simpler.
+% We must repeat the same definitions with small and scriptsize (executed in PDF only), and later remove the optional size argument. 							 
+\ifhtlatex
+\DefineVerbatimEnvironment{commands}{Verbatim}{numbers=left,numbersep=2mm,frame=lines,framerule=1pt}
+\DefineVerbatimEnvironment{commandsScr}{Verbatim}{numbers=left,numbersep=2mm,frame=lines,framerule=1pt}
+\DefineVerbatimEnvironment{configfile}{Verbatim}{frame=single}
+\DefineVerbatimEnvironment{configfileScr}{Verbatim}{frame=single}
+\DefineVerbatimEnvironment{script}{Verbatim}{numbers=left,frame=single}
+\else
 \lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
+\lstnewenvironment{commandsScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+                                     backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
 \lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+                                   backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+\lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{script}{\lstset{language=HTML,%
@@ -151,7 +177,7 @@
                                    stringstyle=\color{orange},%
                                    framerule=1pt}%
                              }{}%
-
+\fi
 %% Allow chapter authors where this seems appropriate.
 %% From http://tex.stackexchange.com/questions/156862/displaying-author-for-each-chapter-in-book
 \usepackage{suffix}
@@ -163,6 +189,27 @@
 \WithSuffix\newcommand\sectionauthor*[1]{\printsectionauthor{#1}}
 
 \makeatletter
+\ifhtlatex
+\newcommand{\printchapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\newcommand{\authortoc}[1]{%
+  \addtocontents{toc}{\vskip-10pt}%
+  \addtocontents{toc}{%
+    \protect\contentsline{chapter}%
+    {\hskip1.3em\mdseries\protect\scriptsize#1}{}{}}
+  \addtocontents{toc}{\vskip5pt}%
+}
+\newcommand{\printsectionauthor}[1]{%
+  {\parindent0pt\vspace*{-5pt}%
+  \linespread{1.1}\large#1%
+  \par\nobreak\vspace*{15pt}}
+  \@afterheading%
+}
+\else
 \newcommand{\printchapterauthor}[1]{%
   {\parindent0pt\vspace*{-25pt}%
   \linespread{1.1}\large\scshape#1%
@@ -182,7 +229,7 @@
   \par\nobreak\vspace*{15pt}}
   \@afterheading%
 }
-
+\fi
 \makeatother
 
 %----------------------------------------------------------------------------------------
@@ -199,8 +246,9 @@
 \usepackage{newunicodechar} % Must be loaded after [utf8]inputenc
 \newunicodechar{°}{\degree}
 % It seems Ubuntu on Windows10 has a bit outdated utf8 inputenc? https://tex.stackexchange.com/questions/13067/utf8x-vs-utf8-inputenc
-\newunicodechar{ē}{\=e}
-\newunicodechar{ū}{\=u}
+% But all is OK in TeXLive2017.
+%\newunicodechar{ē}{\=e}
+%\newunicodechar{ū}{\=u}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
@@ -209,10 +257,14 @@
 \usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{guide.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
-
 \usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
+
+\ifhtlatex
+% We don't have an index in HTML version. If anybody want to play with it, go for it...
+\else
 \usepackage{makeidx} % Required to make an index
 \makeindex % Tells LaTeX to create the files required for indexing
+\fi
 
 %----------------------------------------------------------------------------------------
 %	MAIN TABLE OF CONTENTS
@@ -635,7 +687,6 @@ innerbottommargin=5pt]{cBox}
 \par\vspace*{270\p@}}
 \makeatother
 
-\usepackage{fancyvrb}% provides \VerbatimFootnotes
 \usepackage{marvosym}% For the Zodiac symbols, \Aries etc.
 \usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
 %\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
@@ -655,14 +706,14 @@ innerbottommargin=5pt]{cBox}
  \newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
 \else
  %TODO redefine \menu properly!
- \newcommand{\key}[1]{\fbox{\textbf{\textsf{\small #1}}}}
- \newcommand{\keys}[1]{\fbox{\textbf{\textsf{\small #1}}}}
- \newcommand{\keyPageUp}{\keys{Page\,$\uparrow$\,}}
- \newcommand{\keyPageDown}{\keys{Page\,$\downarrow$\,}}
- \newcommand{\arrowkeyleft}{\keys{$\leftarrow$}}
- \newcommand{\arrowkeyright}{\keys{$\rightarrow$}}
- \newcommand{\arrowkeydown}{\keys{$\downarrow$}}
- \newcommand{\arrowkeyup}{\keys{$\uparrow$}}
+ \newcommand{\key}[1]{\fbox{\textbf{\textsf{\small #1}}} }
+ \newcommand{\keys}[1]{\fbox{\textbf{\textsf{\small #1}}} }
+ \newcommand{\keyPageUp}{\keys{Page\,$\uparrow$\,} }
+ \newcommand{\keyPageDown}{\keys{Page\,$\downarrow$\,} }
+ \newcommand{\arrowkeyleft}{\keys{$\leftarrow$} }
+ \newcommand{\arrowkeyright}{\keys{$\rightarrow$} }
+ \newcommand{\arrowkeydown}{\keys{$\downarrow$} }
+ \newcommand{\arrowkeyup}{\keys{$\uparrow$} }
  \newcommand{\Space}{Space}
  \newcommand{\ctrl}{Ctrl}
  \newcommand{\cmdmac}{Command}
@@ -670,7 +721,7 @@ innerbottommargin=5pt]{cBox}
  \newcommand{\tab}{$\rightleftharpoons$}
  \newcommand{\shift}{$\Uparrow$}
  \newcommand{\return}{$\hookleftarrow$}
- \newcommand{\menu}[1]{\fbox{\textsf #1}}
+ \newcommand{\menu}[1]{\fbox{\textsf #1} }
 \fi
 
 \renewcommand{\topfraction}{0.9}

@@ -37,6 +37,7 @@ PDFLATEX=pdflatex
 HTLATEX=htlatex
 BIBER=biber
 MAKEINDEX=makeindex
+MAKE4HT=make4ht
 
 ifeq ($(OS),Windows_NT) # variable OS not set under Win10/Ubuntu!
 	ifeq ($(findstring /sh, $(SHELL)),/sh)
@@ -50,6 +51,7 @@ ifeq ($(OS),Windows_NT) # variable OS not set under Win10/Ubuntu!
 			else
 				GS=gswin32c.exe
 			endif
+			MAKE4HT=make4ht.exe
 		endif
 		PDFTK=pdftk
 	else # cmd shell. TODO: hide error message of "where".
@@ -61,6 +63,7 @@ ifeq ($(OS),Windows_NT) # variable OS not set under Win10/Ubuntu!
 				GS=gswin32c.exe
 			endif
 		PDFTK=pdftk.exe
+		MAKE4HT=make4ht.exe
 	endif
 else 
 	# OS not Windows on most Non-Windows environments, but may still be Ubuntu bash on Windows! 
@@ -124,10 +127,10 @@ help:
 
 clean:
 	${RM} *~ core *.aux *.log *.lof *.toc *.out *.blg *.bcf *.bbl *.idx *.ilg *.ind *.ptc
-	${RM} *.run.xml *.4ct *.4tc *.tmp *.dvi guide_meta.txt
+	${RM} *.run.xml *.4ct *.4tc *.tmp *.dvi guide_meta.txt *.html *.lg *.idv *.css *.svg *.xref guide*.png 
 
 distclean: clean
-	${RM} guide.pdf SUG.pdf ${PICSbbx}
+	${RM} guide.pdf SUG.pdf ${PICSbbx} html
 
 manual: guide.pdf
 
@@ -236,9 +239,24 @@ htdia:
 # configuring the build of a friendly frame set.
 # it seems tex4ht needs more than just running htlatex, but we need some configuration file.
 #guide.html: guide.bbl guide.ind
-guide.html: ${PICSbbx}
+#
+# See https://github.com/michal-h21/helpers4ht/wiki/tex4ht-tutorial
+# htlatex filename "options for tex4ht.sty" "options for tex4ht" "options for t4ht" "LaTeX options"
+
+html-draft: $(wildcard *.tex) ${PICSbbx}
 	@echo Shell is $(SHELL)
-	${HTLATEX} guide "htFixes,html,2,next,index=3,fn-in,frames,info"
+	make4ht --output-dir html --utf8 guide -m draft guide "htFixes" 
+#	make4ht --output-dir html --utf8 guide -m draft guide "htFixes"
+
+
+# GZ we don't use the htlatex command script because it does not call biber or makeindex. 
+# guide.mk4 is a config file for Stellarium HTML Guide to be processed by make4ht. See https://github.com/michal-h21/make4ht for details.
+
+guide.html: $(wildcard *.tex) guide.mk4 htFixes.cfg ${PICSbbx}
+	@echo Shell is $(SHELL)
+	${MAKE4HT} --output-dir html --utf8 guide "htFixes" 
+#	make4ht --output-dir html --utf8 guide "htFixes" " -cunihtf -utf8"
+#	${HTLATEX} guide "htFixes" " -cunihtf -utf8"
 # Currently, everything after running biber fails. :-(
 #	${BIBER} guide
 #	tex '\def\filename{{guide}{idx}{4dx}{ind}} \input  idxmake.4ht'
@@ -246,14 +264,37 @@ guide.html: ${PICSbbx}
 #	${HTLATEX} guide "htFixes,html,1,next,index=3,fn-in,frames,mouseover,info"
 #	${HTLATEX} guide "htFixes,html,1,next,index=3,fn-in,frames,mouseover,info"
 
-guide.sxw:
-	oolatex guide 
 
-# Try pandoc? (start to collect arguments here, try "make pandoc")
+
+# This throws an error by lua when processing the tex line. The currently used mk4 lacks the index related stuff.
+# Also, it seems ${filename} in the biber argument does not work properly. Should be target without extension.
+guide.mk4: 		
+	@echo if mode == "draft" then   > $@
+	@echo Make:htlatex()           >> $@
+	@echo else                     >> $@
+	@echo   Make:add("biber", "biber ${input}")                                                        >> $@
+	@echo   Make:add("texindex", "tex '\def\filename{{guide}{idx}{4dx}{ind}} \input  idxmake.4ht'") >> $@
+	@echo   Make:add("makeindex", "$makeindex ${filename}.idx -s StyleInd.ist")                     >> $@
+	@echo   local filter = require "make4ht-filter"                                                 >> $@
+	@echo   local process = filter{"cleanspan", "fixligatures", "hruletohr", "fix-links"}           >> $@
+	@echo   Make:htlatex()     >> $@
+	@echo   Make:biber()       >> $@
+	@echo   Make:texindex()    >> $@
+	@echo   Make:makeindex()   >> $@
+	@echo   Make:htlatex()     >> $@
+	@echo   Make:htlatex()     >> $@
+	@echo   Make:match("html$",process)                                 >> $@
+ 	@echo  Make:match("html$", "tidy -m -xml -utf8 -q -i ${filename}")  >> $@
+	@echo end                  >> $@
+
+	
+	
+# Totally non-tex4ht: Try pandoc? (start to collect arguments here, try "make pandoc")
 # Ubuntu on Windows only has pandoc 1.12. Maybe V2 would be more complete? In any case, tabu or some other package seems to be a problem.
 pandoc:
-		pandoc -f latex -t plain guide2.tex
+		pandoc -f latex -t plain guide.tex
 
+		
 # Hint on restoring initial view settings
 # from https://stackoverflow.com/questions/25544002/command-line-tool-to-mark-pdf-to-open-in-single-page-view	
 #guide_pdfmark.ps: Makefile
@@ -292,7 +333,7 @@ else
 	@echo INFO: We are in MinGW/git shell, right?
  else
   ifeq ($(findstring Microsoft, $(shell cat /proc/version)), Microsoft)
-	@echo INFO: This seems to be Ubuntu on Windows
+	@echo INFO: This looks like Ubuntu on Windows
   else
    ifeq ($(findstring CYGWIN, $(shell uname)),CYGWIN)
 	@echo INFO: We are on Cygwin, right?
@@ -310,3 +351,4 @@ endif
 	@echo GS=${GS}
 	@echo RM=${RM}
 	@echo MV=${MV}
+	@echo MAKE4HT=$(MAKE4HT)

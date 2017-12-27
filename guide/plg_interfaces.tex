@@ -134,7 +134,7 @@ top of the screen.
 
 
 \subsection{Section \big[EquationOfTime\big] in config.ini file}
-\label{sec:plugins:EquationOfTime:config}
+%\label{sec:plugins:EquationOfTime:configuration}
 
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Equation of Time plugin -- just make it carefully!
@@ -180,7 +180,7 @@ keyboard for quick-setting of FOV. All values in degrees.
 \end{enumerate}
 
 \subsection{Section \big[FOV\big] in config.ini file}
-\label{sec:plugins:FieldOfView:config}
+%\label{sec:plugins:FieldOfView:configuration}
 
 You can configure the plugin with its dialog (Fig.~\ref{fig:plugins:FieldOfView}) or edit
 \file{config.ini} file by yourself for changes of the settings for the
@@ -218,7 +218,7 @@ fov\_quick\_9  & float &  1 & Value of FOV for the shortcut \key{\ctrl+\Alt+9} \
 If enabled, click on the plugin button \guibutton{0.6}{bt_PointerCoordinates_Off.png} on the bottom toolbar to display the coordinates of the mouse pointer.
 
 \subsection{Section \big[PointerCoordinates\big] in config.ini file}
-\label{sec:plugins:PointerCoordinates:config}
+%\label{sec:plugins:PointerCoordinates:configuration}
 
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Pointer Coordinates plugin -- just make it carefully!
@@ -373,7 +373,7 @@ given in section~\ref{sec:plugins:TUI:commands}.
 
 
 \subsection{Section \big[tui\big] in config.ini file}
-\label{sec:plugins:TUI:config}
+%\label{sec:plugins:TUI:configuration}
 
 The section in \file{config.ini} for this plugin is named only \texttt{[tui]} for historical reasons. As always, be careful when editing!
 
@@ -491,22 +491,22 @@ supported.
 
 It is also possible to send commands via command line, e.g.,
 
-\begin{commands}[\scriptsize]
+\begin{commandsScr}
 wget -q --post-data 'id=show.ssc' http://stella:8090/api/scripts/run >/dev/null 2>&1
 curl --data 'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
 curl -d     'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&1
 curl -d 'id=LandscapeMgr.fogDisplayed&value=false' \ 
       http://localhost:8090/api/stelproperty/set 
-\end{commands}
+\end{commandsScr}
 This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
 
 % TODO: List all available commands with examples here?
 
 You can retrieve a complete pretty-printed list of properties:
-\begin{commands}[\scriptsize]
+\begin{commandsScr}
 curl -G -d 'id=propId=-1&actionId=-2' http://localhost:8090/api/main/status | \
      python -m json.tool 
-\end{commands} 
+\end{commandsScr} 
 Depending on your operating system or command shell, you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.
 
 

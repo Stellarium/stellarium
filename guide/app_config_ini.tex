@@ -3,6 +3,7 @@
 %% 2015-12-30 taken from wiki
 %% 2016-04-06 GZ reformatted a bit. 
 %% 2016-08-01 AW added color boxes for visual representation of colours. 
+%% 2017-12-23..26 GZ removed many \midrules, and reduced labels (where not referenced) to allow processing with tex4ht.
 %% TODO: document the more obscure entries. Add links to the respective chapters.
 %% TODO: remove unused entries, add new ones.  
 
@@ -28,7 +29,7 @@ parts. In addition, plugins can add a section named like the plugin
 for historical reasons).
 
 \subsection{\big[astro\big]}
-\label{sec:config.ini:astro}
+%\label{sec:config.ini:astro}
 
 This section includes settings for the commonly displayed objects.
 
@@ -109,7 +110,7 @@ toast\_survey\_levels			   & int    & 11    & Count of levels for Digitized Sky 
 \end{longtable}
 
 \subsection{\big[astrocalc\big]}
-\label{sec:config.ini:astrocalc}
+%\label{sec:config.ini:astrocalc}
 
 This section includes settings for the Astronomical Calculations feature.
 
@@ -138,7 +139,7 @@ graphs\_second\_id             & int    & 2     & Identificator for right graph 
 \end{longtable}
 
 \subsection{\big[color\big]}
-\label{sec:config.ini:color}
+%\label{sec:config.ini:color}
 
 This section defines the RGB colors for the various objects, lines,
 grids, labels etc. Values are given in float from 0 to
@@ -273,7 +274,7 @@ script\_console\_constant\_color        & \ccbox{1.0,0.5,0.5} & syntax highlight
 \end{longtable}
 
 \subsection{\big[custom\_selected\_info\big]}
-\label{sec:config.ini:custom_selected_info}
+%\label{sec:config.ini:custom_selected_info}
 
 You can fine-tune the bits of information to display for the selected object in this section. Set the entry to \emph{true} to display it.
 
@@ -299,7 +300,7 @@ flag\_show\_constellation     & bool & show 3-letter IAU\index{IAU} constellatio
 \end{longtable}
 
 \subsection{\big[custom\_time\_correction\big]}
-\label{sec:config.ini:custom_time_correction}
+%\label{sec:config.ini:custom_time_correction}
 
 Stellarium allows experiments with $\Delta T$. See \ref{sec:Concepts:DeltaT} for details.
 
@@ -312,7 +313,7 @@ year & int   & Year for custom equation of $\Delta T$\\\bottomrule
 \end{tabularx}
 
 \subsection{\big[devel\big]}
-\label{sec:config.ini:devel}
+%\label{sec:config.ini:devel}
 
 This section is for developers only. 
 %% TODO: Still it has to be documented!
@@ -327,7 +328,7 @@ convert\_dso\_decimal\_coord & bool & Set to \emph{true} to use decimal values f
 \end{tabularx}
 
 \subsection{\big[dso\_catalog\_filters\big]}
-\label{sec:config.ini:dso_catalog_filters}
+%\label{sec:config.ini:dso_catalog_filters}
 In this section you can fine-tune which of the deep-sky catalogs should be selected on startup.
 
 \begin{longtable}{l|l|l|p{90mm}}\toprule
@@ -356,7 +357,7 @@ flag\_show\_aco  & bool & false & A Catalog of Rich Clusters of Galaxies (ACO). 
 \end{longtable}
 
 \subsection{\big[dso\_type\_filters\big]}
-\label{sec:config.ini:dso_type_filters}
+%\label{sec:config.ini:dso_type_filters}
 In this section you can fine-tune which types of the deep-sky objects should be selected on startup.
 
 \noindent%
@@ -375,7 +376,8 @@ flag\_show\_galaxy\_clusters      & bool & true & display clusters of galaxies. 
 flag\_show\_other                 & bool & true & display other deep-sky objects.  \\\bottomrule
 \end{tabularx}
 
-\subsection{\big[gui\big]}\label{sec:config.ini:gui}
+\subsection{\big[gui\big]}
+%\label{sec:config.ini:gui}
 
 This section includes settings for the graphical user interface.
 
@@ -436,7 +438,8 @@ gps\_interface                  & string & "COM3" & Port number of serial/USB GP
 gps\_baudrate                   & int    &  4800  & baudrate of serial/USB GPS device (Windows only)\\\bottomrule
 \end{longtable}
 
-\subsection{\big[init\_location\big]}\label{sec:config.ini:init_location}
+\subsection{\big[init\_location\big]}
+%\label{sec:config.ini:init_location}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
@@ -446,7 +449,12 @@ location          & string & Name of location on which to start stellarium.\\%\m
 last\_location    & string & Coordinates of last used location in stellarium.\\\bottomrule
 \end{tabularx}
 
-\subsection{\big[landscape\big]}\label{sec:config.ini:landscape}
+\subsection{\big[landscape\big]}
+%% Totally crazy, one label, and tex limits are exceeded for tex4ht. 
+\ifhtlatex
+\else
+\label{sec:configini:landscape}
+\fi
 
 \begin{longtable}{l|l|p{80mm}}\toprule
 \emph{ID}                            & \emph{Type} & \emph{Description}\\\midrule
@@ -469,7 +477,8 @@ pressure\_mbar                             & float & Set atmospheric pressure [m
 cache\_size\_mb                            & int   & Set the cache size for landscapes [megabytes]. Default: 100\\\bottomrule
 \end{longtable}
 
-\subsection{\big[localization\big]}\label{sec:config.ini:localization}
+\subsection{\big[localization\big]}
+%\label{sec:config.ini:localization}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}         & \emph{Type} & \emph{Description}\\\midrule
@@ -485,7 +494,8 @@ time\_display\_format & string & time display format: can be \emph{system\_defau
 date\_display\_format & string & date display format: can be \emph{system\_default}, \emph{mmddyyyy}, \emph{ddmmyyyy} or \emph{yyyymmdd} (ISO8601).\\\bottomrule
 \end{tabularx}
 
-\subsection{\big[main\big]}\label{sec:config.ini:main}
+\subsection{\big[main\big]}
+%\label{sec:config.ini:main}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
@@ -501,7 +511,8 @@ check\_requirements         & bool   & Set to \emph{false} if you want to disabl
 \bottomrule
 \end{tabularx}
 
-\subsection{\big[navigation\big]}\label{sec:config.ini:navigation}
+\subsection{\big[navigation\big]}
+%\label{sec:config.ini:navigation}
 
 This section controls much of the look\&feel of Stellarium. Be careful if you change something here.
 
@@ -535,7 +546,7 @@ time\_correction\_algorithm     & string & Algorithm of DeltaT correction.\\\bot
 \end{longtable}
 
 \subsection{\big[plugins\_load\_at\_startup\big]}
-\label{sec:config.ini:plugins_load_at_startup}
+%\label{sec:config.ini:plugins_load_at_startup}
 
 This section lists which plugins are loaded at startup (those with
 \emph{true} values). Each plugin can add another section into this
@@ -568,7 +579,8 @@ Novae                 & bool & \ref{sec:plugins:BrightNovae} Bright Novae plugin
 Scenery3dMgr          & bool & \ref{ch:scenery3d} Scenery 3D plugin \\\bottomrule
 \end{longtable}
 
-\subsection{\big[projection\big]}\label{sec:config.ini:projection}
+\subsection{\big[projection\big]}
+%\label{sec:config.ini:projection}
 
 This section contains the projection of your choice and several
 advanced settings important if you run Stellarium on a single screen,
@@ -597,7 +609,8 @@ viewport\_center\_offset\_y & float & [-0.5\ldots+0.5] Use negative values to mo
 \bottomrule
 \end{longtable}
 
-\subsection{\big[proxy\big]}\label{sec:config.ini:proxy}
+\subsection{\big[proxy\big]}
+%\label{sec:config.ini:proxy}
 This section has setting for connection to network through proxy server (proxy will be using when host of proxy is filled).
 
 \noindent%
@@ -610,7 +623,8 @@ user       & string & Username for proxy. E.g. \emph{michael\_knight}\\%\midrule
 password   & string & Password for proxy. E.g. \emph{xxxxx}\\\bottomrule
 \end{tabularx}
 
-\subsection{\big[scripts\big]}\label{sec:config.ini:scripts}
+\subsection{\big[scripts\big]}
+%\label{sec:config.ini:scripts}
 
 \begin{tabularx}{\textwidth}{l|l|l|X}\toprule
 \emph{ID}                  & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
@@ -620,7 +634,8 @@ startup\_script                & string & startup.ssc & name of script executed 
 %scripting\_allow\_write\_files & bool &\\\bottomrule
 \end{tabularx}
 
-\subsection{\big[search\big]}\label{sec:config.ini:search}
+\subsection{\big[search\big]}
+%\label{sec:config.ini:search}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID} & \emph{Type} & \emph{Description}\\\midrule
@@ -632,7 +647,8 @@ coordinate\_system   & string & Specifies the coordinate system.
 \bottomrule
 \end{tabularx}
 
-\subsection{\big[spheric\_mirror\big]}\label{sec:config.ini:spheric_mirror}
+\subsection{\big[spheric\_mirror\big]}
+%\label{sec:config.ini:spheric_mirror}
 
 Stellarium can be used in planetarium domes. You can use a projector with a hemispheric mirror with geometric properties given in this section. 
 Note: These functions are only rarely used, some may not work as expected.
@@ -671,7 +687,8 @@ viewportCenterY        & float && projected image center Y, pixels\\
 \bottomrule 
 \end{longtable}
 
-\subsection{\big[stars\big]}\label{sec:config.ini:stars}
+\subsection{\big[stars\big]}
+%\label{sec:config.ini:stars}
 
 This section controls how stars are rendered.
 %% TODO: Explain what we mean with "magnitude conversion routine"!
@@ -691,7 +708,8 @@ labels\_amount           & float       & amount of labels. Typical value: \emph{
 init\_bortle\_scale      & int         & initial value of light pollution on the Bortle scale. Typical value: \emph{3}.\\\bottomrule
 \end{tabularx}
 
-\subsection{\big[tui\big]}\label{sec:config.ini:tui}
+\subsection{\big[tui\big]}
+%\label{sec:config.ini:tui}
 
 The built-in text user interface (TUI) plugin (see chapter~\ref{sec:plugins:TextUserInterface}) is most useful for planetariums. You can even configure a system shutdown command. 
 For historical reasons, the section is not called \texttt{[TextUserInterface]} but simply \texttt{[tui]}.
@@ -710,7 +728,8 @@ flag\_show\_tui\_short\_obj\_info   & bool&    &set to \emph{true} if you want t
 tui\_admin\_shutdown\_command       & string  && e.g.\ for Linux: \command{shutdown --poweroff +2} \\\bottomrule
 \end{tabularx}
 
-\subsection{\big[video\big]}\label{sec:config.ini:video}
+\subsection{\big[video\big]}
+%\label{sec:config.ini:video}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}  & \emph{Type} & \emph{Description}\\\midrule
@@ -724,7 +743,8 @@ minimum\_fps     & int    & Sets the minimum number of frames per second to disp
 maximum\_fps     & int    & Sets the maximum number of frames per second to display at. This is useful to reduce power consumption in laptops.\\\bottomrule
 \end{tabularx}
 
-\subsection{\big[viewing\big]}\label{sec:config.ini:viewing}
+\subsection{\big[viewing\big]}
+%\label{sec:config.ini:viewing}
 
 This section defines which objects, labels, lines, grids etc.\ you
 want to see on startup. Set those to \emph{true}. Most items can be
@@ -780,7 +800,8 @@ use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\ %%
 
 
 
-\subsection{\big[DialogPositions\big]}\label{sec:config.ini:DialogPositions}
+\subsection{\big[DialogPositions\big]}
+%\label{sec:config.ini:DialogPositions}
 
 By default, GUI panels appear centered in the screen. You can move them to your favorite location, 
 and on next start they will appear on that location instead.
@@ -798,7 +819,8 @@ DateTime      & int,int     &  1338,944     & Position of time panel\\\bottomrul
 
 %\newpage
 
-\subsection{\big[DialogSizes\big]}\label{sec:config.ini:DialogSizes}
+\subsection{\big[DialogSizes\big]}
+%\label{sec:config.ini:DialogSizes}
 
 \newFeature{0.15.1}
 GUI panels can be resized by dragging on their lower corners or borders.  

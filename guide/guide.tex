@@ -64,12 +64,16 @@
 \documentclass[12pt,fleqn,dvipdfmx]{book} % Default font size and left-justified equations
 \else
 \documentclass[12pt,fleqn]{book} % Default font size and left-justified equations
+\pdfcompresslevel=9
 \fi
 \fi
 %----------------------------------------------------------------------------------------
 
 \input{structure} % Insert the commands.tex file which contains the majority of the structure behind the template
 \input{version}
+
+\title{Stellarium User Guide}
+\author{Georg Zotti \and Alexander Wolf (editors)}
 
 %% GZ Some commands which can be used later, like version number etc.
 
@@ -81,7 +85,9 @@
 %----------------------------------------------------------------------------------------
 %	TITLE PAGE
 %----------------------------------------------------------------------------------------
-
+\ifhtlatex
+\maketitle
+\else
 \begingroup
 \thispagestyle{empty}
 \begin{tikzpicture}[remember picture,overlay]
@@ -99,7 +105,7 @@
 \end{tikzpicture}
 \vfill
 \endgroup
-
+\fi
 %----------------------------------------------------------------------------------------
 %	COPYRIGHT PAGE
 %----------------------------------------------------------------------------------------
@@ -120,7 +126,12 @@
   \end{minipage}
 }\\}{}
 
-\noindent \textsc{stellarium.org}\\ % URL
+\noindent%
+\ifhtlatex
+\url{http://stellarium.org}
+\else
+\textsc{stellarium.org}\\ % URL
+\fi
 
 \noindent Permission is granted to copy, distribute and/or modify 
 this document under the terms of the GNU Free Documentation License, 
@@ -212,9 +223,11 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	PART III
 %----------------------------------------------------------------------------------------
+
+
 \renewcommand{\StelTOCdepth}{0}
 \part{Extending Stellarium}
-\chapterimage{chapter-t3-bg.png} % Chapter heading image
+%\chapterimage{chapter-t3-bg.png} % Chapter heading image
 \include{ch_plugins}
 \include{plg_interfaces} % TUI, RemoteControl, RemoteSync, (2018: D-BUS?)
 \include{plg_catalogs}
@@ -247,7 +260,6 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	CHAPTER 18 (A Short Sky Guide)
 %----------------------------------------------------------------------------------------
-
 \include{ch_sky_guide}
 
 %----------------------------------------------------------------------------------------
@@ -259,7 +271,6 @@ implying a violation of copyright law.}}\\
 %----------------------------------------------------------------------------------------
 %	PART V
 %----------------------------------------------------------------------------------------
-
 \appendix
 %% GZ reset counter to avoid section entries in Appendix.
 \renewcommand{\StelTOCdepth}{0}% reset this to 0 before appendix!
@@ -330,15 +341,17 @@ implying a violation of copyright law.}}\\
 %	INDEX
 %----------------------------------------------------------------------------------------
 
+\ifhtlatex
+% No index for now!
+\else
 \cleardoublepage
 \phantomsection
 \setlength{\columnsep}{0.75cm}
 \addcontentsline{toc}{chapter}{\textcolor{ocre}{Index}}
 \markboth{\textsf{\textbf{INDEX}}}{\textsf{\textbf{INDEX}}}
 \printindex
-
+\fi
 %----------------------------------------------------------------------------------------
-
 \end{document}
 
 %%% Local Variables: 

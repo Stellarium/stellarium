@@ -1,16 +1,16 @@
 # README for Stellarium User Guide
 
-Georg Zotti, December 23, 2017
+Georg Zotti, December 28, 2017
 
 Stellarium's user guide (SUG) for versions 0.15 and later has been re-assembled from the Stellarium wiki by Alexander Wolf and Georg Zotti and greatly extended into what they thought was a complete and optimal format: hyperlinked PDF, created by PDFLaTeX. LaTeX is intimidating to the uninitiated, but the best system in the world for those who are. By V0.17 it had almost 350 pages and came as 28MB PDF file. 
 
-During moving the project to Github some demand has been expressed for again providing an online version of the manual, i.e., HTML. Other developers discussed even leaving LaTeX, but the guide editors resist moving. We decided to widen our typesetting capabilities further by trying to make the PDF smaller, and to make also an HTML version using `htlatex`. 
+During moving the project to Github some demand has been expressed for again providing an online version of the manual, i.e., HTML. Other developers discussed even leaving LaTeX, but the guide editors resist moving. We decided to widen our typesetting capabilities further by trying to make the PDF smaller, and to make also an HTML version using `htlatex` or something similar. 
 
 The interesting part is now getting all tools right to create the documents. Of course `make` is applied by using a Makefile. But regarding variants in TeX Systems, our multi-platform universe provides many options.
 
 ## Installation of tools
 ### Windows
-Windows is still the most common desktop platform in 2017, like it or not. Its command shell is an embarassing relic of the DOS era and a far cry from tools available on the tiniest Linux system. Fortunately the GNUWin32 Project has created the relevant tools to fill in the gaps. From GnuWin32, we need to install make and uname. We also need to install GhostScript. Make sure the relevant programs are found in PATH.
+Windows is still the most common desktop platform in 2017, like it or not. Its command shell is an embarassing relic of the DOS era and a far cry from tools available on the tiniest Linux system. Fortunately the GNUWin32 project has created the relevant tools to fill in the gaps. From GnuWin32, we need to install make and uname. We also need to install GhostScript. Make sure the relevant programs are found in PATH.
 
 The classic TeX environment on Windows is MikTeX, a very complete TeX environment with its own package management system. Install it with the option to download mising packages as required. 
 
@@ -56,7 +56,7 @@ It is assumed that some system similar to TeXlive is available for Mac OS X. See
 
 
 
-## Building the Guide
+## Building the PDF Guide
 
 if you run `make` or `make help`, you will see some instructions. 
 
@@ -64,13 +64,24 @@ With a completely configured system, all that should be required is
 
 ```
 make SUG
+```
+
+* `make SUG` creates guide.pdf (full resolution) and a compressed version, SUG.pdf, which needs only about 33% of the size. 
+
+You will find guide.pdf (full resolution) and the compressed version, SUG.pdf.
+
+
+##Building the HTML Guide
+
+Because of differences in the toolchains we must clean the stuff created with the PDF version.
+
+```
 make clean
 make html
 make clean
 ```
 
-* `make SUG` creates guide.pdf (full resolution) and a compressed version, SUG.pdf, which needs only about 33% of the size. 
-* `make html` creates the online version in a subdirectory. *(DOES NOT WORK YET!)*
+* `make html` creates the online version in a subdirectory. 
 * `make clean` removes intermediate files. PDF and HTML directory will remain.
 * `make distclean` deletes all created files, also the PDF and HTML files.
 
@@ -80,11 +91,11 @@ The workhorse for HTML creation from TeX-based sources is very flexible, but nee
 
 ### Aim for the HTML Version
 
-The Stellarium Online Guide should just become a classical frameset. A narrow box on the left side with table of contents, and the content area on the right. Each chapter should become a page to facilitate fast loading. Colored boxes should be available, largely as they appear in the PDF Version. Hyperlinks to external sites should open a new tab or window, internal links should of course just load the other page.
+The Stellarium Online Guide currently is a set of HTML pages cut at the chapter level. It could become a classical frameset: a narrow box on the left side with table of contents, and the content area on the right, maybe with a separate area for footnotes. Each chapter should become a page to facilitate fast loading. Colored boxes should be available, largely as they appear in the PDF Version. Hyperlinks to external sites should open a new tab or window, internal links should of course just load the other page.
 
 
 ### State
-From what can be seen already: 
+From what we know already: 
 
 `htlatex` does not create HTML from the TeX files, but it creates a classical DVI file which is then further processesd by the HTML creation process `ht4lt`. Therefore it seems useful to make sure a classical dvi file can be created. I added a dvi target for this. 
 
@@ -143,7 +154,7 @@ cd install-tl-DATE
 sudo ./install-tl
 ```
 
-This brings you into a simple text-based menu System. The full Installation takes about 5GB. Press <I> to start. If you are on a slow line, go to sleep. (And hope your Windows does not decide to reboot for an update as soon as you look away! I really despise this "feature"!)
+This brings you into a simple text-based menu System. The full Installation takes about 5GB. Press [I] to start. If you are on a slow line, go to sleep. (And hope your Windows does not decide to reboot for an update as soon as you look away! I really despise this "feature"!)
 
 Then also fix PATHs in `~.profile`:
 
@@ -174,3 +185,43 @@ biblatex&biber is much more flexible. See
 https://tex.stackexchange.com/questions/25701/bibtex-vs-biber-and-biblatex-vs-natbib/25702
 However, both packages need to be updated in sync.
 
+## Finally a guide for beginners!
+
+I hope we can follow https://github.com/michal-h21/helpers4ht/wiki/tex4ht-tutorial
+
+Some more info also at https://www.12000.org/my_notes/faq/LATEX/html_and_latex.htm
+
+OK, we need more tools: tidy can cleanup HTML.
+
+```
+sudo apt-get install tidy
+```
+
+
+## Increase Memory of your LaTeX system
+Edit /usr/local/texlive/2017/texmf.cnf and add these lines:
+
+```
+buf_size=90000000
+pool_size=9000000
+main_memory=8000000
+stack_size = 15000       % simultaneous input sources
+```
+
+Then call
+
+```
+sudo fmtutil-sys --all
+```
+
+## Forbidden things
+
+Very odd: It seems section labels must not contain the name ":config". Or we have far too many labels. This seems to be a problem in the chapters with many tables. I had to reduce the number of valid labels.  Else: stack size exceeded. 
+
+#Help Wanted!
+If you have some experience with tex4ht to create a pleasing online version of Stellarium's User Guide, please feel free to put in your TeXnical wisdom. Discuss with the team what kind of format is most useful. Apparently a frameset is possible but requires some extra work in the configuration. "The LaTeX Web Companion" will be your best friend, it is surprising how little in-depth information is available online.
+
+Some info is in 
+
+* https://tex.stackexchange.com/questions/317686/trouble-building-a-site-with-frames-using-tex4ht and also 
+* http://cvr.cc/?p=504.

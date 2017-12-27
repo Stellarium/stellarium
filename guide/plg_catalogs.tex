@@ -26,7 +26,7 @@ times. For example, set date and time to 30 August 1975, look at the constellati
 
 
 \subsection{Section \big[Novae\big] in config.ini file}
-\label{sec:plugins:BrightNovae:config}
+%\label{sec:plugins:BrightNovae:configuration}
 
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Bright Novae plugin -- just make it carefully!
@@ -45,7 +45,7 @@ url                     & string & URL of bright novae catalog \\\bottomrule
 
 To add a new nova, open a new line after line 5 and paste the following, note commas and brackets, they are important:
 
-\begin{configfile}\small
+\begin{configfile}
 "Nova designation":
 {
     "name": "name of nova",
@@ -65,7 +65,7 @@ To add a new nova, open a new line after line 5 and paste the following, note co
 \end{configfile}
 
 \noindent For example, the record for \textbf{Nova Cygni 1975} (\textbf{V1500 Cyg}) looks like:
-\begin{configfile}\small
+\begin{configfile}
 "V1500 Cyg":
 {
     "name": "Nova Cygni 1975",
@@ -205,7 +205,7 @@ While Type~I supernovae show a peak and slow but steady decay, Type~II supernova
 In both images for light curves the maximum brightness is marked as day 0.
 
 \subsection{Section \big[Supernovae\big] in config.ini file}
-\label{sec:plugins:HistoricalSupernovae:config}
+%\label{sec:plugins:HistoricalSupernovae:configuration}
 
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Historical Supernovae plugin -- just make it carefully!
@@ -357,7 +357,7 @@ All names with asterix mark (*) are modified based on the original proposals, to
 
 
 \subsection{Section \big[Exoplanets\big] in config.ini file}
-\label{sec:plugins:Exoplanets:config}
+%\label{sec:plugins:Exoplanets:configuration}
 
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Exoplanets plugin -- just make it carefully!
@@ -507,7 +507,7 @@ find a pulsar (\key{F3}) by its designation (e.g., \emph{PSR
 
 
 \subsection{Section \big[Pulsars\big] in config.ini file}
-\label{sec:plugins:Pulsars:config}
+%\label{sec:plugins:Pulsars:configuration}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
@@ -597,7 +597,7 @@ quasars. The GUI allows a few configuration options.  You can also
 find a quasar (\key{F3}) by its designation (e.g., \emph{3C 273}).
 
 \subsection{Section \big[Quasars\big] in config.ini file}
-\label{sec:plugins:Quasars:config}
+%\label{sec:plugins:Quasars:configuration}
 
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}               & \emph{Type} & \emph{Description}\\\midrule
@@ -715,7 +715,7 @@ while values above 3.0 mean that the share of faint meteors is larger
 than usual.
 
 \subsection{Section \big[MeteorShowers\big] in config.ini file}
-\label{sec:plugins:MeteorShowers:config}
+%\label{sec:plugins:MeteorShowers:configuration}
 
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Meteor Showers plugin~-- just make it carefully!
@@ -847,7 +847,7 @@ chronometer.
 
 
 \subsection{Section \big[NavigationalStars\big] in config.ini file}
-\label{sec:plugins:NavigationalStars:config}
+%\label{sec:plugins:NavigationalStars:configuration}
 
 You can edit \file{config.ini} file by yourself for changes of the
 settings for the Navigational Stars plugin -- just make it carefully!
@@ -894,7 +894,7 @@ Satellites will be below the horizon.
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.58\textwidth]{satellites_plugin_configuration.png}
 \caption{Configuration of the Satellites plugin.}
-\label{fig:plugins:Satellites:Configuration}
+%\label{fig:plugins:Satellites:Configuration}
 \end{figure}
 
 
@@ -938,7 +938,7 @@ format, in a file named \file{satellites.json}. A default copy is embedded in th
 %   Used in Satellites plug-in 0.7.1 and later (Stellarium 0.11.2 and later) 
 
 To add a new satellite, open a new line after line 5 and paste the following, note commas and brackets, they are important:
-\begin{configfile}[\scriptsize]
+\begin{configfileScr}
 "NORAD number": 
 {
   "name": "name of the satellite"
@@ -960,7 +960,7 @@ To add a new satellite, open a new line after line 5 and paste the following, no
   "tle2": "2 12345 98.2700  53.2702 0011918  71.1776 289.0705 14.31818920   653",
   "visible": true
 },
-\end{configfile}
+\end{configfileScr}
 Explanation of the fields:
 
 \begin{description}
@@ -986,7 +986,7 @@ description field can accept HTML tags such as \texttt{<br/>} (new line), \textt
 You can edit the tags for a satellite, modify the description and comms data, and even add new satellites. 
 
 \subsection{Configuration}
-\label{sec:plugins:Satellites:configuration}
+%\label{sec:plugins:Satellites:configuration}
 
 The plug-in's configuration data is stored in Stellarium's main configuration
 file.
