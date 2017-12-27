@@ -128,6 +128,10 @@ void CompassMarks::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
+	int f = 0;
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		f = 180;
+
 	painter.setColor(markColor[0], markColor[1], markColor[2], markFader.getInterstate());
 	painter.setBlending(true);
 	painter.setLineSmooth(true);
@@ -141,7 +145,7 @@ void CompassMarks::draw(StelCore* core)
 		{
 			h = -0.02;  // the size of the mark every 15 degrees
 
-			QString s = QString("%1").arg((i+90)%360);
+			QString s = QString("%1").arg((i+90+f)%360);
 
 			float shiftx = painter.getFontMetrics().width(s) / 2.;
 			float shifty = painter.getFontMetrics().height() / 2.;
