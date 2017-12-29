@@ -151,8 +151,8 @@ Name: "uk"; MessagesFile: "compiler:Languages\Ukrainian.isl,@CMAKE_SOURCE_DIR@\u
 ; Unofficial translations of GUI of Inno Setup
 Name: "bg"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bulgarian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BulgarianCM.isl"
 Name: "bs"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bosnian.isl,@CMAKE_SOURCE_DIR@\util\ISL\BosnianCM.isl"
-Name: "zh_CN"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplified.isl"
-Name: "zh_TW"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditional.isl"
+Name: "zh_CN"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplified.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplifiedCM.isl"
+Name: "zh_TW"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditional.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditionalCM.isl"
 
 [Code]
 #IFDEF UNICODE
