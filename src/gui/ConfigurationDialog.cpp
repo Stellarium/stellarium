@@ -316,7 +316,7 @@ void ConfigurationDialog::createDialogContent()
 
 	// Screenshots
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
-	connect(ui->screenshotDirEdit, SIGNAL(textChanged(QString)), this, SLOT(selectScreenshotDir(QString)));
+	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 	connectBoolProperty(ui->invertScreenShotColorsCheckBox, "MainView.flagInvertScreenShotColors");
 
@@ -567,8 +567,9 @@ void ConfigurationDialog::browseForScreenshotDir()
 	}
 }
 
-void ConfigurationDialog::selectScreenshotDir(const QString& dir)
+void ConfigurationDialog::selectScreenshotDir()
 {
+	QString dir = ui->screenshotDirEdit->text();
 	try
 	{
 		StelFileMgr::setScreenshotDir(dir);

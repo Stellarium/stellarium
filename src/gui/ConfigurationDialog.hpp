@@ -105,7 +105,7 @@ private slots:
 	//! if a directory is selected (i.e. dialog not cancelled), current
 	//! value will be changed, but not saved to config file.
 	void browseForScreenshotDir();
-	void selectScreenshotDir(const QString& dir);
+	void selectScreenshotDir();
 
 	//! Save the current viewing option including landscape, location and sky culture
 	//! This doesn't include the current viewing direction, time and FOV since those
