@@ -134,7 +134,8 @@ void StelFileMgr::init()
 					 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
 
 			qWarning() << "Maybe this is AppImage or something similar? Let's check relative path...";
-			QString relativePath = "../share/stellarium";
+			// This hook has been added after reverse-engineering an AppImage application
+			QString relativePath =  QCoreApplication::applicationDirPath() + QString("/../share/stellarium");
 			checkFile = QFileInfo(relativePath + QDir::separator() + CHECK_FILE);
 			if (checkFile.exists())
 			{
