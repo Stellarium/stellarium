@@ -748,6 +748,12 @@ ENDIF()
 
 ########### OS X Bundling ###############
 IF(APPLE)
+     IF(CMAKE_OSX_DEPLOYMENT_TARGET)
+          SET(PACKAGE_OSX_TARGET CMAKE_OSX_DEPLOYMENT_TARGET)
+     ELSE()
+          SET(PACKAGE_OSX_TARGET "10.11")
+     ENDIF()
+     ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
 
      # ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
