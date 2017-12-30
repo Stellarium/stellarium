@@ -94,8 +94,8 @@ void StelFileMgr::init()
 		QFileInfo MacOSdir(QCoreApplication::applicationDirPath() + relativePath);
 		// These two lines are used to see if the Qt bug still exists.
 		// The output from C: should simply be the parent of what is show for B:
-		qDebug() << "B: " << MacOSdir.absolutePath();
-		qDebug() << "C: " << MacOSdir.dir().absolutePath();
+		// qDebug() << "B: " << MacOSdir.absolutePath();
+		// qDebug() << "C: " << MacOSdir.dir().absolutePath();
 
 		QDir ResourcesDir(MacOSdir.absolutePath());
 		if (!QCoreApplication::applicationDirPath().contains("src")) {
@@ -132,15 +132,30 @@ void StelFileMgr::init()
 					 << QDir::toNativeSeparators(installLocation.filePath())
 					 << " (we checked for "
 					 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-			#ifndef UNIT_TEST
-			// NOTE: Hook for buildbots (using within testEphemeris)
-			qFatal("Couldn't find install directory location.");
-			#endif
+
+			qWarning() << "Maybe this is AppImage or something similar? Let's check relative path...";
+			QString relativePath = "../share/stellarium";
+			checkFile = QFileInfo(relativePath + QDir::separator() + CHECK_FILE);
+			if (checkFile.exists())
+			{
+				installDir = relativePath;
+			}
+			else
+			{
+				qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
+						 << QDir::toNativeSeparators(relativePath)
+						 << " (we checked for "
+						 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
+				#ifndef UNIT_TEST
+				// NOTE: Hook for buildbots (using within testEphemeris)
+				qFatal("Couldn't find install directory location.");
+				#endif
+			}
 		}
 	}
 
 	// Then add the installation directory to the search path
-	fileLocations.append(installDir);	
+	fileLocations.append(installDir);
 }
 
 
