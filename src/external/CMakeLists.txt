@@ -88,33 +88,33 @@ add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
 target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
 
 ################################# INDI ################################
-set(INDI_SOVERSION "1")
-set(CMAKE_INDI_VERSION_MAJOR 1)
-set(CMAKE_INDI_VERSION_MINOR 6)
-set(CMAKE_INDI_VERSION_RELEASE 0)
-set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
-set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
-set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
-configure_file(libindi/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
-configure_file(libindi/indiversion.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/indiversion.h )
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(libindi)
-include_directories(libindi/libs)
-include_directories(libindi/libs/indibase)
-add_library(indiclient
-    libindi/libs/lilxml.c
-    libindi/base64.c
-    libindi/libs/indibase/basedevice.h
-    libindi/libs/indibase/basedevice.cpp
-    libindi/libs/indibase/baseclient.h
-    libindi/libs/indibase/baseclient.cpp
-    libindi/libs/indibase/indiproperty.cpp
-    libindi/libs/indibase/indistandardproperty.cpp
-    libindi/libs/indicom.c
-    )
-target_link_libraries(indiclient zlib_stel)
-target_include_directories(indiclient INTERFACE libindi)
-target_include_directories(indiclient INTERFACE libindi/libs)
-
-
+IF(USE_PLUGIN_TELESCOPECONTROL)
+    set(INDI_SOVERSION "1")
+    set(CMAKE_INDI_VERSION_MAJOR 1)
+    set(CMAKE_INDI_VERSION_MINOR 6)
+    set(CMAKE_INDI_VERSION_RELEASE 0)
+    set(CMAKE_INDI_VERSION_STRING "${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE}")
+    set(INDI_VERSION ${CMAKE_INDI_VERSION_MAJOR}.${CMAKE_INDI_VERSION_MINOR}.${CMAKE_INDI_VERSION_RELEASE})
+    set(DATA_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/share/indi/")
+    configure_file(libindi/config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config.h )
+    configure_file(libindi/indiversion.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/indiversion.h )
+    include_directories(${CMAKE_CURRENT_BINARY_DIR})
+    include_directories(libindi)
+    include_directories(libindi/libs)
+    include_directories(libindi/libs/indibase)
+    add_library(indiclient
+        libindi/libs/lilxml.c
+        libindi/base64.c
+        libindi/libs/indibase/basedevice.h
+        libindi/libs/indibase/basedevice.cpp
+        libindi/libs/indibase/baseclient.h
+        libindi/libs/indibase/baseclient.cpp
+        libindi/libs/indibase/indiproperty.cpp
+        libindi/libs/indibase/indistandardproperty.cpp
+        libindi/libs/indicom.c
+        )
+    target_link_libraries(indiclient zlib_stel)
+    target_include_directories(indiclient INTERFACE libindi)
+    target_include_directories(indiclient INTERFACE libindi/libs)
+ENDIF()
 
