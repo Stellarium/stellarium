@@ -19,17 +19,12 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelModuleMgr.hpp"
-#include "StelSkyDrawer.hpp"
 #include "AtmosphereDialog.hpp"
-#include "LandscapeMgr.hpp"
 #include "Skylight.hpp"
-#include "Atmosphere.hpp"
 #include "ui_atmosphereDialog.h"
 
 AtmosphereDialog::AtmosphereDialog()
 	: StelDialog("Atmosphere")
-	//refraction(NULL)
-//	, extinction(NULL)
 	, skylight(NULL)
 {
 	ui = new Ui_atmosphereDialogForm;
@@ -61,18 +56,14 @@ void AtmosphereDialog::createDialogContent()
 
 	connect(ui->standardAtmosphereButton, SIGNAL(clicked()), this, SLOT(setStandardAtmosphere()));
 	// TODO: after rebase, change the UI elements below to property changing.
+	connectDoubleProperty(ui->doubleSpinBox_globalBrightness, "LandscapeMgr.atmLumFactor");
 
-	LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
-	ui->doubleSpinBox_globalBrightness->setValue(lmgr->getAtmLumFactor());
-	connect(ui->doubleSpinBox_globalBrightness, SIGNAL(valueChanged(double)), lmgr, SLOT(setAtmLumFactor(double)));
-
-	ui->checkBox_TfromK->setChecked(skyDrawer->getFlagTfromK());
-	connect(ui->checkBox_TfromK, SIGNAL(toggled(bool)), skyDrawer, SLOT(setFlagTfromK(bool)));
+	connectBoolProperty(ui->checkBox_TfromK, "StelSkyDrawer.flagTfromK");
 	connect(ui->checkBox_TfromK, SIGNAL(toggled(bool)), ui->doubleSpinBox_T, SLOT(setDisabled(bool)));
 	connect(ui->extinctionDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setTfromK(double)));
-	connect(ui->doubleSpinBox_T, SIGNAL(valueChanged(double)), skyDrawer, SLOT(setT(bool)));
+	connectDoubleProperty(ui->doubleSpinBox_T, "StelSkyDrawer.turbidity");
 
-
+	connectBoolProperty(ui->checkBox_sRGB, "Skylight.flagSRGB");
 
 	ui->comboBox_skylightDecimals->addItem("1", 1);
 	ui->comboBox_skylightDecimals->addItem("0.1", .1);
@@ -82,126 +73,64 @@ void AtmosphereDialog::createDialogContent()
 	ui->comboBox_skylightDecimals->addItem("0.00001", .00001);
 	connect(ui->comboBox_skylightDecimals, SIGNAL(currentIndexChanged(int)), this, SLOT(setIncrements(int)));
 
-	//skylight = GETSTELMODULE(LandscapeMgr)->getAtmosphere()->getSkyLight();
-	skylight = &(GETSTELMODULE(LandscapeMgr)->getAtmosphere()->sky);
+	connectBoolProperty(ui->checkBox_blendSun, "StelSkyDrawer.flagUseSunBlending");
+	connectBoolProperty(ui->checkBox_drawSunAfterAtmosphere, "StelSkyDrawer.flagDrawSunAfterAtmosphere");
 
-	Q_ASSERT(skylight);
+	connectDoubleProperty(ui->doubleSpinBox_zX11, "Skylight.zX11");
+	connectDoubleProperty(ui->doubleSpinBox_zX12, "Skylight.zX12");
+	connectDoubleProperty(ui->doubleSpinBox_zX13, "Skylight.zX13");
+	connectDoubleProperty(ui->doubleSpinBox_zX21, "Skylight.zX21");
+	connectDoubleProperty(ui->doubleSpinBox_zX22, "Skylight.zX22");
+	connectDoubleProperty(ui->doubleSpinBox_zX23, "Skylight.zX23");
+	connectDoubleProperty(ui->doubleSpinBox_zX24, "Skylight.zX24");
+	connectDoubleProperty(ui->doubleSpinBox_zX31, "Skylight.zX31");
+	connectDoubleProperty(ui->doubleSpinBox_zX32, "Skylight.zX32");
+	connectDoubleProperty(ui->doubleSpinBox_zX33, "Skylight.zX33");
+	connectDoubleProperty(ui->doubleSpinBox_zX34, "Skylight.zX34");
+	connectDoubleProperty(ui->doubleSpinBox_zY11, "Skylight.zY11");
+	connectDoubleProperty(ui->doubleSpinBox_zY12, "Skylight.zY12");
+	connectDoubleProperty(ui->doubleSpinBox_zY13, "Skylight.zY13");
+	connectDoubleProperty(ui->doubleSpinBox_zY21, "Skylight.zY21");
+	connectDoubleProperty(ui->doubleSpinBox_zY22, "Skylight.zY22");
+	connectDoubleProperty(ui->doubleSpinBox_zY23, "Skylight.zY23");
+	connectDoubleProperty(ui->doubleSpinBox_zY24, "Skylight.zY24");
+	connectDoubleProperty(ui->doubleSpinBox_zY31, "Skylight.zY31");
+	connectDoubleProperty(ui->doubleSpinBox_zY32, "Skylight.zY32");
+	connectDoubleProperty(ui->doubleSpinBox_zY33, "Skylight.zY33");
+	connectDoubleProperty(ui->doubleSpinBox_zY34, "Skylight.zY34");
 
-	connect(ui->checkBox_blendSun, SIGNAL(toggled(bool)), skyDrawer, SLOT(setUseSunBlending(bool)));
-	connect(ui->checkBox_drawSunAfterAtmosphere, SIGNAL(toggled(bool)), skyDrawer, SLOT(setDrawSunAfterAtmosphere(bool)));
+	connectDoubleProperty(ui->doubleSpinBox_AYT, "Skylight.AYt");
+	connectDoubleProperty(ui->doubleSpinBox_BYT, "Skylight.BYt");
+	connectDoubleProperty(ui->doubleSpinBox_CYT, "Skylight.CYt");
+	connectDoubleProperty(ui->doubleSpinBox_DYT, "Skylight.DYt");
+	connectDoubleProperty(ui->doubleSpinBox_EYT, "Skylight.EYt");
+	connectDoubleProperty(ui->doubleSpinBox_AY , "Skylight.AYc");
+	connectDoubleProperty(ui->doubleSpinBox_BY , "Skylight.BYc");
+	connectDoubleProperty(ui->doubleSpinBox_CY , "Skylight.CYc");
+	connectDoubleProperty(ui->doubleSpinBox_DY , "Skylight.DYc");
+	connectDoubleProperty(ui->doubleSpinBox_EY , "Skylight.EYc");
 
-	ui->doubleSpinBox_zX11->setValue(skylight->getZX11());
-	ui->doubleSpinBox_zX12->setValue(skylight->getZX12());
-	ui->doubleSpinBox_zX13->setValue(skylight->getZX13());
-	ui->doubleSpinBox_zX21->setValue(skylight->getZX21());
-	ui->doubleSpinBox_zX22->setValue(skylight->getZX22());
-	ui->doubleSpinBox_zX23->setValue(skylight->getZX23());
-	ui->doubleSpinBox_zX24->setValue(skylight->getZX24());
-	ui->doubleSpinBox_zX31->setValue(skylight->getZX31());
-	ui->doubleSpinBox_zX32->setValue(skylight->getZX32());
-	ui->doubleSpinBox_zX33->setValue(skylight->getZX33());
-	ui->doubleSpinBox_zX34->setValue(skylight->getZX34());
-	ui->doubleSpinBox_zY11->setValue(skylight->getZY11());
-	ui->doubleSpinBox_zY12->setValue(skylight->getZY12());
-	ui->doubleSpinBox_zY13->setValue(skylight->getZY13());
-	ui->doubleSpinBox_zY21->setValue(skylight->getZY21());
-	ui->doubleSpinBox_zY22->setValue(skylight->getZY22());
-	ui->doubleSpinBox_zY23->setValue(skylight->getZY23());
-	ui->doubleSpinBox_zY24->setValue(skylight->getZY24());
-	ui->doubleSpinBox_zY31->setValue(skylight->getZY31());
-	ui->doubleSpinBox_zY32->setValue(skylight->getZY32());
-	ui->doubleSpinBox_zY33->setValue(skylight->getZY33());
-	ui->doubleSpinBox_zY34->setValue(skylight->getZY34());
+	connectDoubleProperty(ui->doubleSpinBox_AxT, "Skylight.Axt");
+	connectDoubleProperty(ui->doubleSpinBox_BxT, "Skylight.Bxt");
+	connectDoubleProperty(ui->doubleSpinBox_CxT, "Skylight.Cxt");
+	connectDoubleProperty(ui->doubleSpinBox_DxT, "Skylight.Dxt");
+	connectDoubleProperty(ui->doubleSpinBox_ExT, "Skylight.Ext");
+	connectDoubleProperty(ui->doubleSpinBox_Ax , "Skylight.Axc");
+	connectDoubleProperty(ui->doubleSpinBox_Bx , "Skylight.Bxc");
+	connectDoubleProperty(ui->doubleSpinBox_Cx , "Skylight.Cxc");
+	connectDoubleProperty(ui->doubleSpinBox_Dx , "Skylight.Dxc");
+	connectDoubleProperty(ui->doubleSpinBox_Ex , "Skylight.Exc");
 
-	ui->doubleSpinBox_AYT->setValue(skylight->getAYt());
-	ui->doubleSpinBox_BYT->setValue(skylight->getBYt());
-	ui->doubleSpinBox_CYT->setValue(skylight->getCYt());
-	ui->doubleSpinBox_DYT->setValue(skylight->getDYt());
-	ui->doubleSpinBox_EYT->setValue(skylight->getEYt());
-	ui->doubleSpinBox_AY ->setValue(skylight->getAYc());
-	ui->doubleSpinBox_BY ->setValue(skylight->getBYc());
-	ui->doubleSpinBox_CY ->setValue(skylight->getCYc());
-	ui->doubleSpinBox_DY ->setValue(skylight->getDYc());
-	ui->doubleSpinBox_EY ->setValue(skylight->getEYc());
-
-	ui->doubleSpinBox_AxT->setValue(skylight->getAxt());
-	ui->doubleSpinBox_BxT->setValue(skylight->getBxt());
-	ui->doubleSpinBox_CxT->setValue(skylight->getCxt());
-	ui->doubleSpinBox_DxT->setValue(skylight->getDxt());
-	ui->doubleSpinBox_ExT->setValue(skylight->getExt());
-	ui->doubleSpinBox_Ax ->setValue(skylight->getAxc());
-	ui->doubleSpinBox_Bx ->setValue(skylight->getBxc());
-	ui->doubleSpinBox_Cx ->setValue(skylight->getCxc());
-	ui->doubleSpinBox_Dx ->setValue(skylight->getDxc());
-	ui->doubleSpinBox_Ex ->setValue(skylight->getExc());
-
-	ui->doubleSpinBox_AyT->setValue(skylight->getAyt());
-	ui->doubleSpinBox_ByT->setValue(skylight->getByt());
-	ui->doubleSpinBox_CyT->setValue(skylight->getCyt());
-	ui->doubleSpinBox_DyT->setValue(skylight->getDyt());
-	ui->doubleSpinBox_EyT->setValue(skylight->getEyt());
-	ui->doubleSpinBox_Ay ->setValue(skylight->getAyc());
-	ui->doubleSpinBox_By ->setValue(skylight->getByc());
-	ui->doubleSpinBox_Cy ->setValue(skylight->getCyc());
-	ui->doubleSpinBox_Dy ->setValue(skylight->getDyc());
-	ui->doubleSpinBox_Ey ->setValue(skylight->getEyc());
-
-	connect(ui->doubleSpinBox_zX11, SIGNAL(valueChanged(double)), skylight, SLOT(setZX11(double)));
-	connect(ui->doubleSpinBox_zX12, SIGNAL(valueChanged(double)), skylight, SLOT(setZX12(double)));
-	connect(ui->doubleSpinBox_zX13, SIGNAL(valueChanged(double)), skylight, SLOT(setZX13(double)));
-	connect(ui->doubleSpinBox_zX21, SIGNAL(valueChanged(double)), skylight, SLOT(setZX21(double)));
-	connect(ui->doubleSpinBox_zX22, SIGNAL(valueChanged(double)), skylight, SLOT(setZX22(double)));
-	connect(ui->doubleSpinBox_zX23, SIGNAL(valueChanged(double)), skylight, SLOT(setZX23(double)));
-	connect(ui->doubleSpinBox_zX24, SIGNAL(valueChanged(double)), skylight, SLOT(setZX24(double)));
-	connect(ui->doubleSpinBox_zX31, SIGNAL(valueChanged(double)), skylight, SLOT(setZX31(double)));
-	connect(ui->doubleSpinBox_zX32, SIGNAL(valueChanged(double)), skylight, SLOT(setZX32(double)));
-	connect(ui->doubleSpinBox_zX33, SIGNAL(valueChanged(double)), skylight, SLOT(setZX33(double)));
-	connect(ui->doubleSpinBox_zX34, SIGNAL(valueChanged(double)), skylight, SLOT(setZX34(double)));
-	connect(ui->doubleSpinBox_zY11, SIGNAL(valueChanged(double)), skylight, SLOT(setZY11(double)));
-	connect(ui->doubleSpinBox_zY12, SIGNAL(valueChanged(double)), skylight, SLOT(setZY12(double)));
-	connect(ui->doubleSpinBox_zY13, SIGNAL(valueChanged(double)), skylight, SLOT(setZY13(double)));
-	connect(ui->doubleSpinBox_zY21, SIGNAL(valueChanged(double)), skylight, SLOT(setZY21(double)));
-	connect(ui->doubleSpinBox_zY22, SIGNAL(valueChanged(double)), skylight, SLOT(setZY22(double)));
-	connect(ui->doubleSpinBox_zY23, SIGNAL(valueChanged(double)), skylight, SLOT(setZY23(double)));
-	connect(ui->doubleSpinBox_zY24, SIGNAL(valueChanged(double)), skylight, SLOT(setZY24(double)));
-	connect(ui->doubleSpinBox_zY31, SIGNAL(valueChanged(double)), skylight, SLOT(setZY31(double)));
-	connect(ui->doubleSpinBox_zY32, SIGNAL(valueChanged(double)), skylight, SLOT(setZY32(double)));
-	connect(ui->doubleSpinBox_zY33, SIGNAL(valueChanged(double)), skylight, SLOT(setZY33(double)));
-	connect(ui->doubleSpinBox_zY34, SIGNAL(valueChanged(double)), skylight, SLOT(setZY34(double)));
-
-
-	connect(ui->doubleSpinBox_AYT, SIGNAL(valueChanged(double)), skylight, SLOT(setAYt(double)));
-	connect(ui->doubleSpinBox_BYT, SIGNAL(valueChanged(double)), skylight, SLOT(setBYt(double)));
-	connect(ui->doubleSpinBox_CYT, SIGNAL(valueChanged(double)), skylight, SLOT(setCYt(double)));
-	connect(ui->doubleSpinBox_DYT, SIGNAL(valueChanged(double)), skylight, SLOT(setDYt(double)));
-	connect(ui->doubleSpinBox_EYT, SIGNAL(valueChanged(double)), skylight, SLOT(setEYt(double)));
-	connect(ui->doubleSpinBox_AY,  SIGNAL(valueChanged(double)), skylight, SLOT(setAYc(double)));
-	connect(ui->doubleSpinBox_BY,  SIGNAL(valueChanged(double)), skylight, SLOT(setBYc(double)));
-	connect(ui->doubleSpinBox_CY,  SIGNAL(valueChanged(double)), skylight, SLOT(setCYc(double)));
-	connect(ui->doubleSpinBox_DY,  SIGNAL(valueChanged(double)), skylight, SLOT(setDYc(double)));
-	connect(ui->doubleSpinBox_EY,  SIGNAL(valueChanged(double)), skylight, SLOT(setEYc(double)));
-
-	connect(ui->doubleSpinBox_AxT, SIGNAL(valueChanged(double)), skylight, SLOT(setAxt(double)));
-	connect(ui->doubleSpinBox_BxT, SIGNAL(valueChanged(double)), skylight, SLOT(setBxt(double)));
-	connect(ui->doubleSpinBox_CxT, SIGNAL(valueChanged(double)), skylight, SLOT(setCxt(double)));
-	connect(ui->doubleSpinBox_DxT, SIGNAL(valueChanged(double)), skylight, SLOT(setDxt(double)));
-	connect(ui->doubleSpinBox_ExT, SIGNAL(valueChanged(double)), skylight, SLOT(setExt(double)));
-	connect(ui->doubleSpinBox_Ax,  SIGNAL(valueChanged(double)), skylight, SLOT(setAxc(double)));
-	connect(ui->doubleSpinBox_Bx,  SIGNAL(valueChanged(double)), skylight, SLOT(setBxc(double)));
-	connect(ui->doubleSpinBox_Cx,  SIGNAL(valueChanged(double)), skylight, SLOT(setCxc(double)));
-	connect(ui->doubleSpinBox_Dx,  SIGNAL(valueChanged(double)), skylight, SLOT(setDxc(double)));
-	connect(ui->doubleSpinBox_Ex,  SIGNAL(valueChanged(double)), skylight, SLOT(setExc(double)));
-
-	connect(ui->doubleSpinBox_AyT, SIGNAL(valueChanged(double)), skylight, SLOT(setAyt(double)));
-	connect(ui->doubleSpinBox_ByT, SIGNAL(valueChanged(double)), skylight, SLOT(setByt(double)));
-	connect(ui->doubleSpinBox_CyT, SIGNAL(valueChanged(double)), skylight, SLOT(setCyt(double)));
-	connect(ui->doubleSpinBox_DyT, SIGNAL(valueChanged(double)), skylight, SLOT(setDyt(double)));
-	connect(ui->doubleSpinBox_EyT, SIGNAL(valueChanged(double)), skylight, SLOT(setEyt(double)));
-	connect(ui->doubleSpinBox_Ay,  SIGNAL(valueChanged(double)), skylight, SLOT(setAyc(double)));
-	connect(ui->doubleSpinBox_By,  SIGNAL(valueChanged(double)), skylight, SLOT(setByc(double)));
-	connect(ui->doubleSpinBox_Cy,  SIGNAL(valueChanged(double)), skylight, SLOT(setCyc(double)));
-	connect(ui->doubleSpinBox_Dy,  SIGNAL(valueChanged(double)), skylight, SLOT(setDyc(double)));
-	connect(ui->doubleSpinBox_Ey,  SIGNAL(valueChanged(double)), skylight, SLOT(setEyc(double)));
+	connectDoubleProperty(ui->doubleSpinBox_AyT, "Skylight.Ayt");
+	connectDoubleProperty(ui->doubleSpinBox_ByT, "Skylight.Byt");
+	connectDoubleProperty(ui->doubleSpinBox_CyT, "Skylight.Cyt");
+	connectDoubleProperty(ui->doubleSpinBox_DyT, "Skylight.Dyt");
+	connectDoubleProperty(ui->doubleSpinBox_EyT, "Skylight.Eyt");
+	connectDoubleProperty(ui->doubleSpinBox_Ay , "Skylight.Ayc");
+	connectDoubleProperty(ui->doubleSpinBox_By , "Skylight.Byc");
+	connectDoubleProperty(ui->doubleSpinBox_Cy , "Skylight.Cyc");
+	connectDoubleProperty(ui->doubleSpinBox_Dy , "Skylight.Dyc");
+	connectDoubleProperty(ui->doubleSpinBox_Ey , "Skylight.Eyc");
 
 	connect(ui->pushButton_ResetDistYPreetham, SIGNAL(released()), this, SLOT(resetYPreet()));
 	connect(ui->pushButton_ResetDistxPreetham, SIGNAL(released()), this, SLOT(resetxPreet()));

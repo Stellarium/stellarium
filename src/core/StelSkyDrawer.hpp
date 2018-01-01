@@ -75,6 +75,11 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double atmosphereTemperature READ getAtmosphereTemperature WRITE setAtmosphereTemperature NOTIFY atmosphereTemperatureChanged)
 	Q_PROPERTY(double atmospherePressure READ getAtmospherePressure WRITE setAtmospherePressure NOTIFY atmospherePressureChanged)
 
+	Q_PROPERTY(bool flagDrawSunAfterAtmosphere READ getFlagDrawSunAfterAtmosphere WRITE setFlagDrawSunAfterAtmosphere NOTIFY flagDrawSunAfterAtmosphereChanged)
+	Q_PROPERTY(bool flagUseSunBlending READ getFlagUseSunBlending WRITE setFlagUseSunBlending NOTIFY flagUseSunBlendingChanged)
+	Q_PROPERTY(bool flagTfromK READ getFlagTfromK WRITE setFlagTfromK NOTIFY flagTfromKChanged)
+	Q_PROPERTY(double turbidity READ getT WRITE setT NOTIFY turbidityChanged)
+
 public:
 	//! Constructor
 	StelSkyDrawer(StelCore* core);
@@ -316,6 +321,44 @@ public slots:
 	float getBig3dModelHaloRadius() const {return big3dModelHaloRadius;}
 	//! Set the radius of the big halo texture used when a 3d model is very bright.
 	void setBig3dModelHaloRadius(float r) {big3dModelHaloRadius=r;}
+
+	// GZ These are to find out the best sky parameters. Maybe keep this as program feature for debugging/expert mode?
+	// These will be connected from AtmosphereDialog and forward the settings to SkyLight class.
+
+	void setFlagDrawSunAfterAtmosphere(bool val){
+		flagDrawSunAfterAtmosphere=val;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		 conf->setValue("landscape/draw_sun_after_atmosphere",val);
+		 conf->sync();
+		 emit flagDrawSunAfterAtmosphereChanged(val);
+		}
+	bool getFlagDrawSunAfterAtmosphere() const {return flagDrawSunAfterAtmosphere;}
+	void setFlagUseSunBlending(bool val){
+		flagUseSunBlending= val;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("landscape/use_sun_blending", val);
+		conf->sync();
+		emit flagUseSunBlendingChanged(val);
+		}
+	bool getFlagUseSunBlending() const {return flagUseSunBlending;}
+
+	bool getFlagTfromK(void) const {return flagTfromK;}
+	void setFlagTfromK(bool val){
+		flagTfromK=val;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("landscape/use_T_from_k", val);
+		conf->sync();
+		emit flagTfromKChanged(val);
+		}
+
+	double getT(void) const {return turbidity;}
+	void setT(double newT){
+		turbidity=newT;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->setValue("landscape/turbidity", newT);
+		emit turbidityChanged(newT);
+		}
+
 signals:
 	//! Emitted whenever the relative star scale changed
 	void relativeStarScaleChanged(double b);
@@ -354,37 +397,13 @@ signals:
 	void extinctionCoefficientChanged(double coeff);
 	void atmosphereTemperatureChanged(double celsius);
 	void atmospherePressureChanged(double mbar);
+
+	// GZ atmosphere tweaks
+	void flagTfromKChanged(bool b);
+	void flagDrawSunAfterAtmosphereChanged(bool b);
+	void flagUseSunBlendingChanged(bool b);
+	void turbidityChanged(double t);
 	
-	// GZ These are to find out the best sky parameters. Maybe keep this as program feature for debugging/expert mode?
-	// These will be connected from AtmosphereDialog and forward the settings to SkyLight class.
-	//void setAXt(const float newAXt){
-
-	void setDrawSunAfterAtmosphere(bool val){
-		drawSunAfterAtmosphere=val;
-		QSettings* conf = StelApp::getInstance().getSettings();
-		 conf->setValue("landscape/draw_sun_after_atmosphere",val);
-		}
-	bool getDrawSunAfterAtmosphere() const {return drawSunAfterAtmosphere;}
-	void setUseSunBlending(bool val){
-		useSunBlending= val;
-		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("landscape/use_sun_blending", val);
-		}
-	bool getUseSunBlending() const {return useSunBlending;}
-
-	bool getFlagTfromK(void) const {return flagTfromK;}
-	void setFlagTfromK(bool val){
-		flagTfromK=val;
-		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("landscape/use_T_from_k", val);
-		}
-
-	double getT(void) const {return turbidity;}
-	void setT(double newT){
-		turbidity=newT;
-		QSettings* conf = StelApp::getInstance().getSettings();
-		conf->setValue("landscape/turbidity", newT);
-		}
 
 private:
 	// Debug
@@ -552,8 +571,8 @@ private:
 
 	float big3dModelHaloRadius;
 	// GZ Experiments for Atmospheric tweaks.
-	bool drawSunAfterAtmosphere;
-	bool useSunBlending;
+	bool flagDrawSunAfterAtmosphere;
+	bool flagUseSunBlending;
 	bool flagTfromK; // true to compute T from extinction k
 	float turbidity; // need it here...
 };

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>796</width>
-    <height>737</height>
+    <height>781</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -273,6 +273,17 @@
          <string>Blending for sun</string>
         </property>
        </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_RGBselector">
+        <item>
+         <widget class="QCheckBox" name="checkBox_sRGB">
+          <property name="text">
+           <string>Color Conversion (sRGB if activated; else Adobe RGB)</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
       <item>
        <layout class="QFormLayout" name="formLayout">
@@ -1624,6 +1635,13 @@
          </size>
         </property>
        </spacer>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_36">
+        <property name="text">
+         <string>Note that the brightness (CIE Y) is set by other means, therefore the bottom-left settings don't do anything.</string>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>

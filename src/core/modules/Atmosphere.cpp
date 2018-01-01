@@ -84,30 +84,31 @@ Atmosphere::Atmosphere(void)
 	atmoShaderProgram->addShader(&fShader);
 	StelPainter::linkProg(atmoShaderProgram, "atmosphere");
 
-	atmoShaderProgram->bind();
-	shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern");
-	shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue");
-	shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa");
-	shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma");
-	shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma");
-	shaderAttribLocations.brightnessScale = atmoShaderProgram->uniformLocation("brightnessScale");
-	shaderAttribLocations.sunPos = atmoShaderProgram->uniformLocation("sunPos");
-	shaderAttribLocations.term_x = atmoShaderProgram->uniformLocation("term_x");
-	shaderAttribLocations.Ax = atmoShaderProgram->uniformLocation("Ax");
-	shaderAttribLocations.Bx = atmoShaderProgram->uniformLocation("Bx");
-	shaderAttribLocations.Cx = atmoShaderProgram->uniformLocation("Cx");
-	shaderAttribLocations.Dx = atmoShaderProgram->uniformLocation("Dx");
-	shaderAttribLocations.Ex = atmoShaderProgram->uniformLocation("Ex");
-	shaderAttribLocations.term_y = atmoShaderProgram->uniformLocation("term_y");
-	shaderAttribLocations.Ay = atmoShaderProgram->uniformLocation("Ay");
-	shaderAttribLocations.By = atmoShaderProgram->uniformLocation("By");
-	shaderAttribLocations.Cy = atmoShaderProgram->uniformLocation("Cy");
-	shaderAttribLocations.Dy = atmoShaderProgram->uniformLocation("Dy");
-	shaderAttribLocations.Ey = atmoShaderProgram->uniformLocation("Ey");
-	shaderAttribLocations.projectionMatrix = atmoShaderProgram->uniformLocation("projectionMatrix");
-	shaderAttribLocations.skyVertex = atmoShaderProgram->attributeLocation("skyVertex");
-	shaderAttribLocations.skyColor = atmoShaderProgram->attributeLocation("skyColor");
-	atmoShaderProgram->release();
+	GL(atmoShaderProgram->bind());
+	GL(shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern"));
+	GL(shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue"));
+	GL(shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa"));
+	GL(shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma"));
+	GL(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma"));
+	GL(shaderAttribLocations.brightnessScale = atmoShaderProgram->uniformLocation("brightnessScale"));
+	GL(shaderAttribLocations.sunPos = atmoShaderProgram->uniformLocation("sunPos"));
+	GL(shaderAttribLocations.term_x = atmoShaderProgram->uniformLocation("term_x"));
+	GL(shaderAttribLocations.Ax = atmoShaderProgram->uniformLocation("Ax"));
+	GL(shaderAttribLocations.Bx = atmoShaderProgram->uniformLocation("Bx"));
+	GL(shaderAttribLocations.Cx = atmoShaderProgram->uniformLocation("Cx"));
+	GL(shaderAttribLocations.Dx = atmoShaderProgram->uniformLocation("Dx"));
+	GL(shaderAttribLocations.Ex = atmoShaderProgram->uniformLocation("Ex"));
+	GL(shaderAttribLocations.term_y = atmoShaderProgram->uniformLocation("term_y"));
+	GL(shaderAttribLocations.Ay = atmoShaderProgram->uniformLocation("Ay"));
+	GL(shaderAttribLocations.By = atmoShaderProgram->uniformLocation("By"));
+	GL(shaderAttribLocations.Cy = atmoShaderProgram->uniformLocation("Cy"));
+	GL(shaderAttribLocations.Dy = atmoShaderProgram->uniformLocation("Dy"));
+	GL(shaderAttribLocations.Ey = atmoShaderProgram->uniformLocation("Ey"));
+	GL(shaderAttribLocations.doSRGB = atmoShaderProgram->uniformLocation("doSRGB"));
+	GL(shaderAttribLocations.projectionMatrix = atmoShaderProgram->uniformLocation("projectionMatrix"));
+	GL(shaderAttribLocations.skyVertex = atmoShaderProgram->attributeLocation("skyVertex"));
+	GL(shaderAttribLocations.skyColor = atmoShaderProgram->attributeLocation("skyColor"));
+	GL(atmoShaderProgram->release());
 }
 
 Atmosphere::~Atmosphere(void)
@@ -366,32 +367,34 @@ void Atmosphere::draw(StelCore* core)
 
 	const float atm_intensity = fader.getInterstate();
 
-	atmoShaderProgram->bind();
+	GL(atmoShaderProgram->bind());
 	float a, b, c;
 	eye->getShadersParams(a, b, c);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.alphaWaOverAlphaDa, a));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.oneOverGamma, b));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma, c));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.brightnessScale, atm_intensity));
 	Vec3f sunPos;
 	float term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey;
-	sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.sunPos, sunPos[0], sunPos[1], sunPos[2]);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.term_x, term_x);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ax, Ax);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Bx, Bx);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Cx, Cx);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Dx, Dx);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ex, Ex);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.term_y, term_y);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ay, Ay);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.By, By);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Cy, Cy);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Dy, Dy);
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.Ey, Ey);
+	int skySRGB;
+	sky.getShadersParams(sunPos, term_x, Ax, Bx, Cx, Dx, Ex, term_y, Ay, By, Cy, Dy, Ey, skySRGB);
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.sunPos, sunPos[0], sunPos[1], sunPos[2]));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term_x, term_x));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ax, Ax));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Bx, Bx));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Cx, Cx));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Dx, Dx));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ex, Ex));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.term_y, term_y));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ay, Ay));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.By, By));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Cy, Cy));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Dy, Dy));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.Ey, Ey));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.doSRGB, skySRGB));
 	const Mat4f& m = sPainter.getProjector()->getProjectionMatrix();
-	atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
-		QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+	GL(atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
+					      QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15])));
 
 	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
 	atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
@@ -402,28 +405,28 @@ void Atmosphere::draw(StelCore* core)
 	gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
 	atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1);
 	
-	colorGridBuffer.bind();
-	atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0);
-	colorGridBuffer.release();
-	atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor);
-	posGridBuffer.bind();
-	atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0);
-	posGridBuffer.release();
-	atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex);
+	GL(colorGridBuffer.bind());
+	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0));
+	GL(colorGridBuffer.release());
+	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyColor));
+	GL(posGridBuffer.bind());
+	GL(atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyVertex, GL_FLOAT, 0, 2, 0));
+	GL(posGridBuffer.release());
+	GL(atmoShaderProgram->enableAttributeArray(shaderAttribLocations.skyVertex));
 
 	// And draw everything at once
-	indicesBuffer.bind();
+	GL(indicesBuffer.bind());
 	std::size_t shift=0;
 	for (unsigned int y=0;y<skyResolutionY;++y)
 	{
 		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, static_cast<int>((skyResolutionX+1)*2), GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
 		shift += static_cast<size_t>((skyResolutionX+1)*2*2);
 	}
-	indicesBuffer.release();
+	GL(indicesBuffer.release());
 	
-	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex);
-	atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor);
-	atmoShaderProgram->release();
+	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyVertex));
+	GL(atmoShaderProgram->disableAttributeArray(shaderAttribLocations.skyColor));
+	GL(atmoShaderProgram->release());
 	// GZ: debug output
 	//const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 	//StelPainter painter(prj);

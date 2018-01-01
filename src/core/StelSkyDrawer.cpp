@@ -116,8 +116,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setAtmospherePressure(conf->value("landscape/pressure_mbar", 1013.0).toDouble());
 
 	// GZ four extras
-	setDrawSunAfterAtmosphere(conf->value("landscape/draw_sun_after_atmosphere",false).toBool());
-	setUseSunBlending(conf->value("landscape/use_sun_blending",false).toBool());
+	setFlagDrawSunAfterAtmosphere(conf->value("landscape/draw_sun_after_atmosphere",false).toBool());
+	setFlagUseSunBlending(conf->value("landscape/use_sun_blending",false).toBool());
 	setFlagTfromK(conf->value("landscape/use_T_from_k",false).toBool());
 	setT(conf->value("landscape/turbidity",5.).toFloat());
 
@@ -505,7 +505,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		painter->setBlending(true, GL_ONE, GL_ONE);
 
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
-		float cmag = (rmag>=pxRd) ? 1.f : qMax(0.5f, 1.f-(pxRd-rmag)/100); // was qMax(0, .), but this would remove the halo when sun is dim.
+		float cmag = (rmag>=pxRd) ? 1.f : qMax(0.15f, 1.f-(pxRd-rmag)/100); // was qMax(0, .), but this would remove the halo when sun is dim.
 		Vec3f win;
 		painter->getProjector()->project(v, win);
 		painter->setColor(color*cmag);

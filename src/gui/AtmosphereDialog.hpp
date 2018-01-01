@@ -70,8 +70,6 @@ private slots:
 	void setStandardAtmosphere();
 
 private:
-//        Refraction *refraction;
-//        Extinction *extinction;
 	Skylight *skylight;
 };
 

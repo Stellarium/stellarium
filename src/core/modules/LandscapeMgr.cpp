@@ -465,7 +465,7 @@ void LandscapeMgr::draw(StelCore* core)
 	// GZ 2016-01: When we draw the atmosphere with a low sun, it is possible that the glaring red ball is overpainted and thus invisible.
 	// Attempt to draw the sun only here while not having drawn it by SolarSystem:
 	//if (atmosphere->getFlagShow())
-	if (drawer->getDrawSunAfterAtmosphere())
+	if (drawer->getFlagDrawSunAfterAtmosphere())
 	{
 		SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 		PlanetP sun=ssys->getSun();
@@ -526,6 +526,8 @@ void LandscapeMgr::init()
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
 
 	atmosphere = new Atmosphere();
+	// Put the atmosphere's Skylight under the StelProperty system (simpler and more consistent GUI)
+	StelApp::getInstance().getStelPropertyManager()->registerObject(atmosphere->getSkyLight());
 	setFlagAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
 	setAtmosphereFadeDuration(conf->value("landscape/atmosphere_fade_duration",0.5).toFloat());
 	setAtmosphereLightPollutionLuminance(conf->value("viewing/light_pollution_luminance",0.0).toFloat());

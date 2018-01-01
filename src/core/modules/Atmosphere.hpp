@@ -83,10 +83,8 @@ public:
 
 	Skylight *getSkyLight(void){return &sky;}
 
-public:
-	Skylight sky;
-
 private:
+	Skylight sky;
 	Vec4i viewport;
 	Skybright skyb;
 	unsigned int skyResolutionY,skyResolutionX;
@@ -119,6 +117,7 @@ private:
 		int projectionMatrix;
 		int skyVertex;
 		int skyColor;
+		int doSRGB;
 	} shaderAttribLocations;
 
 	GLuint bayerPatternTex=0;

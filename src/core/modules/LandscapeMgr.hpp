@@ -198,7 +198,7 @@ class LandscapeMgr : public StelModule
 		   WRITE setDefaultLandscapeID
 		   NOTIFY defaultLandscapeChanged)
 	// GZ new
-	Q_PROPERTY(float atmLumFactor READ getAtmLumFactor WRITE setAtmLumFactor NOTIFY atmLumFactorChanged)
+	Q_PROPERTY(double atmLumFactor READ getAtmLumFactor WRITE setAtmLumFactor NOTIFY atmLumFactorChanged)
 
 public:
 	LandscapeMgr();
@@ -646,7 +646,7 @@ private:
 	static QString getLandscapePath(const QString landscapeID);
 
 	// Argl - we must make that a public thing!?
-public:
+//public:
 	Atmosphere* atmosphere;			// Atmosphere
 private:
 	Cardinals* cardinalsPoints;		// Cardinals points
@@ -697,7 +697,7 @@ private:
 	QString currentPlanetName;
 
 	// GZ Luminance factor, allows tweaking via atmosphere detail GUI
-	float atmLumFactor;
+	double atmLumFactor;
 
 };
 
