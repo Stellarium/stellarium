@@ -2386,7 +2386,7 @@
                  <item row="10" column="0">
                   <widget class="QCheckBox" name="showCardinalPointsCheckBox">
                    <property name="toolTip">
-                    <string>Labels for the Cardinal directions.</string>
+                    <string>Labels for the Cardinal and Ordinal directions.</string>
                    </property>
                    <property name="text">
                     <string>Cardinal points</string>
@@ -3901,12 +3901,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
