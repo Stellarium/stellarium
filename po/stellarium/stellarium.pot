@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-26 18:53+0700\n"
+"POT-Creation-Date: 2018-01-01 16:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2807,17 +2807,17 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:936
+#: src/gui/ConfigurationDialog.cpp:937
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:944
+#: src/gui/ConfigurationDialog.cpp:945
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1006
+#: src/gui/ConfigurationDialog.cpp:1007
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:454
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
@@ -2825,11 +2825,11 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1007 src/gui/ViewDialog.cpp:1407
+#: src/gui/ConfigurationDialog.cpp:1008 src/gui/ViewDialog.cpp:1407
 msgid "Contact"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1009 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:1010 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:90
 #: plugins/Oculars/src/gui/OcularDialog.cpp:428
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:452
@@ -2852,7 +2852,7 @@ msgstr ""
 msgid "Version"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1010 src/scripting/StelScriptMgr.cpp:238
+#: src/gui/ConfigurationDialog.cpp:1011 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
 #: plugins/Oculars/src/gui/OcularDialog.cpp:429
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:453
@@ -2875,42 +2875,42 @@ msgstr ""
 msgid "License"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1014
+#: src/gui/ConfigurationDialog.cpp:1015
 msgctxt "license"
 msgid "unknown"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1111
+#: src/gui/ConfigurationDialog.cpp:1112
 msgid "Running script: "
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1118
+#: src/gui/ConfigurationDialog.cpp:1119
 msgid "Running script: [none]"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1183
+#: src/gui/ConfigurationDialog.cpp:1184
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1187
+#: src/gui/ConfigurationDialog.cpp:1188
 msgid "All available star catalogs have been installed."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1192
+#: src/gui/ConfigurationDialog.cpp:1193
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1199
+#: src/gui/ConfigurationDialog.cpp:1200
 #, qt-format
 msgid ""
 "Downloading %1...\n"
 "(You can close this window.)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1206
+#: src/gui/ConfigurationDialog.cpp:1207
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -2918,188 +2918,188 @@ msgid ""
 "Magnitude range: %3 - %4"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1249 src/gui/ConfigurationDialog.cpp:1285
+#: src/gui/ConfigurationDialog.cpp:1250 src/gui/ConfigurationDialog.cpp:1286
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "%2"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1338
+#: src/gui/ConfigurationDialog.cpp:1339
 msgid "Verifying file integrity..."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1342
+#: src/gui/ConfigurationDialog.cpp:1343
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
 "File is corrupted."
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1391 src/gui/ConfigurationDialog.cpp:1400
+#: src/gui/ConfigurationDialog.cpp:1392 src/gui/ConfigurationDialog.cpp:1401
 msgid "Available"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1393 src/gui/ConfigurationDialog.cpp:1402
+#: src/gui/ConfigurationDialog.cpp:1394 src/gui/ConfigurationDialog.cpp:1403
 msgid "Not Available"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1470
+#: src/gui/ConfigurationDialog.cpp:1471
 msgid "Algorithm of"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1484
 msgid "Without correction"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1484
+#: src/gui/ConfigurationDialog.cpp:1485
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1485
+#: src/gui/ConfigurationDialog.cpp:1486
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1486
+#: src/gui/ConfigurationDialog.cpp:1487
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1488
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1488
+#: src/gui/ConfigurationDialog.cpp:1489
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1489
+#: src/gui/ConfigurationDialog.cpp:1490
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1490
+#: src/gui/ConfigurationDialog.cpp:1491
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1491
+#: src/gui/ConfigurationDialog.cpp:1492
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1492
+#: src/gui/ConfigurationDialog.cpp:1493
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1493
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1494
+#: src/gui/ConfigurationDialog.cpp:1495
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1495
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1496
+#: src/gui/ConfigurationDialog.cpp:1497
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1497
+#: src/gui/ConfigurationDialog.cpp:1498
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1498
+#: src/gui/ConfigurationDialog.cpp:1499
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1499
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1500
+#: src/gui/ConfigurationDialog.cpp:1501
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1502
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1503
+#: src/gui/ConfigurationDialog.cpp:1504
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1504
+#: src/gui/ConfigurationDialog.cpp:1505
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1505
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1506
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1509
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1511
+#: src/gui/ConfigurationDialog.cpp:1512
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1513
+#: src/gui/ConfigurationDialog.cpp:1514
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1514
+#: src/gui/ConfigurationDialog.cpp:1515
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1516
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1516
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1517
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1518
+#: src/gui/ConfigurationDialog.cpp:1519
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1520
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1568 src/gui/ConfigurationDialog.cpp:1603
+#: src/gui/ConfigurationDialog.cpp:1569 src/gui/ConfigurationDialog.cpp:1604
 #: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:424
 msgid "System default"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1569
+#: src/gui/ConfigurationDialog.cpp:1570
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1570
+#: src/gui/ConfigurationDialog.cpp:1571
 msgid "dd-mm-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1571
+#: src/gui/ConfigurationDialog.cpp:1572
 msgid "mm-dd-yyyy"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1604
+#: src/gui/ConfigurationDialog.cpp:1605
 msgid "12-hour format"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1605
+#: src/gui/ConfigurationDialog.cpp:1606
 msgid "24-hour format"
 msgstr ""
 
