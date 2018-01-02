@@ -242,7 +242,7 @@ LandscapeMgr::LandscapeMgr()
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
 	, flagEnvironmentAutoEnabling(false)
-	, atmLumFactor(1.3f)
+	, atmLumFactor(1.0)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -338,7 +338,7 @@ void LandscapeMgr::update(double deltaTime)
 
 	// GZ Experimenting with better sunrise, add some factor here.
 	//core->getSkyDrawer()->reportLuminanceInFov(1.3*(3.75+atmosphere->getAverageLuminance()*3.5), true);
-	core->getSkyDrawer()->reportLuminanceInFov(atmLumFactor*(3.75f+atmosphere->getAverageLuminance()*3.5f), true);
+	core->getSkyDrawer()->reportLuminanceInFov(atmLumFactor*(3.75+atmosphere->getAverageLuminance()*3.5), true);
 
 
 	// NOTE: Simple workaround for brightness of landscape when observing from the Sun.
@@ -549,7 +549,7 @@ void LandscapeMgr::init()
 	setFlagPolyLineDisplayed(conf->value("landscape/flag_polyline_only", false).toBool());
 	setPolyLineThickness(conf->value("landscape/polyline_thickness", 1).toInt());
 	// GZ new
-	setAtmLumFactor(conf->value("landscape/atm_lum_factor", 1.3).toFloat());
+	setAtmLumFactor(conf->value("landscape/atm_lum_factor", 1.0).toFloat());
 
 	cardinalsPoints = new Cardinals();
 	cardinalsPoints->setFlagShow4WCRLabels(conf->value("viewing/flag_cardinal_points", true).toBool());

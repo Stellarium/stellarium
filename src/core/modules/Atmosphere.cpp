@@ -269,8 +269,8 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// A hard limit is some assert later, so must be technically at least 1.203.
 	// Also, Preetham has optimized to T in[2..6], which translates now to k in [0.2-0.36].
 	// In Schaefer-Krisciunas Moon brightness paper, k=0.172 for Mauna Kea. Preetham will likely be too bright here.
-	//sky.setParamsv(sunPos, qMax(2.f, qMin(6.f, turbidity)));
-	sky.setParamsv(sunPosF, qMax(2.f, qMin(16.f, turbidity)));
+	//sky.setParamsv(sunPos, qBound(2.f, turbidity, 6.f));
+	sky.setParamsv(sunPosF, qBound(2.f, turbidity, 16.f));  // GZ-AT allow more turbidity for testing
 
 	skyb.setLocation(latitude * M_PI_180f, altitude, temperature, relativeHumidity);
 	skyb.setSunMoon(moonPosF[2], sunPosF[2]);

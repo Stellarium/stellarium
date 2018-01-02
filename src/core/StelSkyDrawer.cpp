@@ -122,9 +122,6 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setT(conf->value("landscape/turbidity",5.).toFloat());
 
 	// Initialize buffers for use by gl vertex array
-	nbPointSources = 0;
-	maxPointSources = 1000;
-
 	vertexArray = new StarVertex[maxPointSources*6];
 	
 	textureCoordArray = new unsigned char[maxPointSources*6*2];
@@ -496,7 +493,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	float pxRd = pixRadius*3.f+100.f;
 	bool noStarHalo = false;
 
-	//if (mag<-15.f) // problem: sun may be dimmed by extinction...
+	//if (mag<-15.f) // GZ-AT problem: sun may be dimmed by extinction...
 	if (isSun)
 	{
 		// Sun, halo size varies in function of the magnitude because sun as seen from pluto should look dimmer

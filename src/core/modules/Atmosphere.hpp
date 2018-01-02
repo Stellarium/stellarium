@@ -45,7 +45,7 @@ public:
 	//! Compute sky brightness values and average luminance.
 	void computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude, StelCore* core,
 		float latitude = 45.f, float altitude = 200.f,
-		float temperature = 15.f, float relativeHumidity = 40.f, float extinctionCoefficient = 0.2f);
+		float temperature = 15.f, float relativeHumidity = 40.f, float extinctionCoefficient = 0.32f);
 	void draw(StelCore* core);
 	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 

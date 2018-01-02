@@ -645,10 +645,7 @@ private:
 	//! @returns an empty string, if no such landscape was found.
 	static QString getLandscapePath(const QString landscapeID);
 
-	// Argl - we must make that a public thing!?
-//public:
 	Atmosphere* atmosphere;			// Atmosphere
-private:
 	Cardinals* cardinalsPoints;		// Cardinals points
 	Landscape* landscape;			// The landscape i.e. the fog, the ground and "decor"
 	Landscape* oldLandscape;		// Used only during transitions to newly loaded landscape.
@@ -696,7 +693,7 @@ private:
 	//! Core current planet name, used to react to planet change.
 	QString currentPlanetName;
 
-	// GZ Luminance factor, allows tweaking via atmosphere detail GUI
+	// GZ Luminance factor, allows tweaking via atmosphere detail GUI. Tried with 1.3, but may also be complete bogus!
 	double atmLumFactor;
 
 };
