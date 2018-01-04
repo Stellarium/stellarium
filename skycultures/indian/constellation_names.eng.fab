@@ -1,43 +1,111 @@
-Lib	"Tulaa Rashi"	_("(Tulaa)")
-Ari	"Mesh Rashi"	_("(Mesh)")
-Cnc	"Karkat Rashi"	_("(Karkat)")
-Cap	"Makar Rashi"	_("(Makar)")
-Gem	"Mithun Rashi"	_("(Mithun)")
-Leo	"Simha Rashi"	_("(Simha)")
-Psc	"Meen Rashi"	_("(Meen)")
-Sgr	"Dhanus Rashi"	_("(Dhanus)")
-Sco	"Brischik Rashi"	_("(Brischik)")
-Tau	"Brisha Rashi"	_("(Brisha)")
-Aqr	"Kumbha Rashi"	_("(Kumbha)")
-Vir	"Kanya Rashi"	_("(Kanya)")
-Ori	"Orion"	_("Kalpurush")
-Cma	"Canis Major"	_("Brihaat Swaan")
-Uma	"Ursa Major"	_("Saptrshi")
-N01	"Aswini"	_("[Aswini]")
-N02	"Bharani"	_("[Bharani]")
-N03	"Krithika"	_("[Krithika]")
-N04	"Rohini"	_("[Rohini]")
-N05	"Mrigasira"	_("[Mrigasira]")
-N06	"Ardhra"	_("[Ardhra]")
-N07	"Punarvasu"	_("[Punarvasu]")
-N08	"Pushya"	_("[Pushya]")
-N09	"Aslesha"	_("[Aslesha]")
-N10	"Magha"	_("[Magha]")
-N11	"Purva Phalguni"	_("[Purva Phalguni]")
-N12	"Uttara Phalguni"	_("[Uttara Phalguni]")
-N13	"Hasta"	_("[Hasta]")
-N14	"Chitra"	_("[Chitra]")
-N15	"Swati"	_("[Swati]")
-N16	"Visakha"	_("[Visakha]")
-N17	"Anuradha"	_("[Anuradha]")
-N18	"Jyeshta"	_("[Jyeshta]")
-N19	"Moola"	_("[Moola]")
-N20	"Purva AshaRa"	_("[Purva AshaRa]")
-N21	"Uttara AshaRa"	_("[Uttara AshaRa]")
-N22	"Shravana"	_("[Shravana]")
-N23	"Dhanista"	_("[Dhanista]")
-N24	"Shatabhisha"	_("[Shatabhisha]")
-N25	"Purva Bhadrapada"	_("[Purva Bhadrapada]")
-N26	"Uttara Bhadrapada"	_("[Uttara Bhadrapada]")
-N27	"Revathi"	_("[Revathi]")
-001	"Abhijit"	_("{Abhijit}")
+# Note from the user guide at https://launchpadlibrarian.net/330148407/stellarium_user_guide-0.16.0-1.pdf:
+#
+# The native constellations are listed in constellation_names.eng.fab. It consists of 3 simple
+# columns: Abbreviation(or just a serial number), native name, and english translation. The writing
+# _("name") allows automatic translation of the English strings to other languages. These strings
+# will be used as constellation labels.
+# The first column (abbreviation) in the Western sky culture provides the canonical 3-letter
+# abbreviation for constellations as used by the International Astronomical Union. Such abbreviations
+# may not be available for the skyculture you are working with, so you must invent your own. These
+# abbreviations are used as keys in the other files, so they must be unique within your skyculture. It
+# is not necessary to have 3-letter keys.
+# The keys can be displayed on screen when labels are requested in the Starlore GUI (section
+# 4.4.5). If you want to prevent certain abbreviations from being displayed, let them start with a
+# dot. See the effect in the Western (H.A.Rey) skyculture: In Abbreviated mode, only the official
+# abbreviations are displayed. In Native mode, the second column of constellation_names.eng.fab
+# is shown. Only with setting Translated , the text translated from the text shown in the third column
+# is shown. If your skyculture is a variant of the Western skyculture, please use the canonical Latin
+# names, they have all been translated already.
+# If your skyculture is not a variant of the generally known Western skyculture, please include an
+# English translation to the name given in the native language. Else translators will not be able to
+# translate the name. See a good example in the Mongolian skyculture.
+
+# Additional notation:
+# Rāśi names are placed within ().
+# Nakṣatra names are placed within [], except for abhijit, which is placed in {}.
+# We use IAST transliteration for unambious transliteration of devanAgarI using latin alphabets, while using phonetically more intuitive equivalents in suggested translations.
+
+## We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below.
+
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Lib	"(Tulā)"	_("Balance (Libra)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Ari	"(Meṣa)"	_("Ram (Aries)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Cnc	"(Karkaṭa)"	_("Crab (Cancer)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Cap	"(Makara)"	_("Crocodile (Capricornus)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Gem	"(Mithuna)"	_("Twins (Geminii)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Leo	"(Siṃha)"	_("Lion (Leo)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Psc	"(Mīna)"	_("Fish (Pisces)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Sgr	"(Dhanuṣ)"	_("Bow (Sagittarius)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Sco	"(Vṛścikā)"	_("Scorpion (Scorpio)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Tau	"(Vṛṣa)"	_("Bull (Taurus)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Aqr	"(Kumbha)"	_("Pot (Aquarius)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Vir	"(Kanyā)"	_("Virgin (Virgo)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+Uma	"Saptarṣi"	_("Seven Sages (Ursa Major)")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N01	"[Aśvinī]"	_("Divine twins [Ashvinii]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N02	"[Bharaṇī]"	_("[Bharanii]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N03	"[Kṛttikā]"	_("[Krittikaa]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N04	"[Rohiṇī]"	_("Riser [Rohinii]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N05	"[Mgṛaśiras]"	_("Deer head [Mgṛaśiras]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N06	"[Ārdrā]"	_("Wet [Aardraa]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N07	"[Punarvasū]"	_("Re-enricher [Punarvasu]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N08	"[Puṣya]"	_("Nourisher [Pushya]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N09	"[Āśleṣā]"	_("Unembracing [Ashlesha]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N10	"[Magha]"	_("Magha")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N11	"[Pūrva-Phalguni]"	_("Earlier Phalguni [Purva Phalguni]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N12	"[Uttara-Phalguni]"	_("Later Phalguni [Uttara Phalguni]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N13	"[Hastā]"	_("Hand [Hastaa]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N14	"[Citrā]"	_("Chitraa")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N15	"[Svāti]"	_("Svaati")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N16	"[Viśākhā]"	_("Vishaakhaa")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N17	"[Anurādhā]"	_("After vishaakhaa [Anuraadhaa]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N18	"[Jyeṣṭhā]"	_("Elder [Jyeshthaa]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N19	"[Mūla]"	_("Root [Muula]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N20	"[Pūrva-Aṣāḍha]"	_("Earlier AshaaDha [Purva Ashaadha]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N21	"[Uttara-Aṣāḍha]"	_("Later AshaaDha [Uttara Ashaadha]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N22	"[Śravaṇa]"	_("Ear [Shravana]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N23	"[Śraviṣṭhā/ Dhaniṣṭhā]"	_("Most prosperous [Dhanisthaa]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N24	"[Śatabhiṣā]"	_("Hundred cures [Shatabhishaa]")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N25	"[Pūrava-Bhādrapada]"	_("Earlier Bhaadrapada")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N26	"[Uttara-Bhādrapada]"	_("Later Bhaadrapada")
+# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
+N27	"[Revatī]"	_("[Revatii]")
+# TRANSLATORS: {} denotes that Abhijit is a special "extra" lunar mansion.
+N28	"{Abhijit}"	_("Abhijit")
