@@ -31,6 +31,7 @@
 #include <unistd.h>
 #include <wordexp.h>
 #include <limits>
+#include <libnova/julian_day.h>
 
 namespace INDI
 {

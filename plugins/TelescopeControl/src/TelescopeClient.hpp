@@ -80,6 +80,13 @@ public:
 		
 	// Methods specific to telescope
 	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
+
+	//!
+	//! \brief move
+	//! \param angle [0,360)
+	//! \param speed [0,1]
+	//!
+	virtual void move(double angle, double speed);
 	virtual bool isConnected(void) const = 0;
 	virtual bool hasKnownPosition(void) const = 0;
 	void addOcular(double fov) {if (fov>=0.0) oculars.push_back(fov);}

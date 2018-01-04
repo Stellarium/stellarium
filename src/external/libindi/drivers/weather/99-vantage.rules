@@ -1,2 +1,0 @@
-SUBSYSTEMS=="usb", ATTRS{idVendor}=="10c4", ATTRS{idProduct}=="ea60", GROUP="plugdev", MODE="0666", SYMLINK+="vantage"
-

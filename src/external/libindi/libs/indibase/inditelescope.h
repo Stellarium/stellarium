@@ -20,9 +20,9 @@
 
 #include "defaultdevice.h"
 
-#include <libnova/julian_day.h>
-
 #include <string>
+
+struct ln_date;
 
 /**
  * \class Telescope

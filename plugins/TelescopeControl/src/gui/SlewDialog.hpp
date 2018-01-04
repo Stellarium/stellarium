@@ -35,10 +35,12 @@
 class Ui_slewDialog;
 class TelescopeControl;
 class StoredPointsDialog;
+class TelescopeClient;
 
 class SlewDialog : public StelDialog
 {
 	Q_OBJECT
+
 public:
 	SlewDialog();
 	virtual ~SlewDialog();
@@ -90,19 +92,21 @@ private slots:
 	//! Sets the input fields to selected point info
 	void getStoredPointInfo();
 
-private:
-	TelescopeControl * telescopeManager;
-	StoredPointsDialog * storedPointsDialog;
-	QHash<QString, int> connectedSlotsByName;
-	QVariantMap storedPointsDescriptions;
+	void onMove(double angle, double speed);
+	void onCurrentTelescopeChanged();
 
+private:
+	QSharedPointer<TelescopeClient> currentTelescope() const;
 	void updateTelescopeList();
 	void updateTelescopeControls();
-
 	void updateStoredPointsList();
-
 	void savePointsToFile();
 	void loadPointsFromFile();
+
+	TelescopeControl * telescopeManager =  nullptr;
+	StoredPointsDialog * storedPointsDialog = nullptr;
+	QHash<QString, int> connectedSlotsByName;
+	QVariantMap storedPointsDescriptions;
 };
 
 #endif // _SLEWDIALOG_

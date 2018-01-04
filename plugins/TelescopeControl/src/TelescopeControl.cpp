@@ -78,7 +78,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	StelPluginInfo info;
 	info.id = "TelescopeControl";
 	info.displayedName = N_("Telescope Control");
-	info.authors = "Bogdan Marinov, Johannes Gajdosik";
+	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi";
 	info.contact = "http://stellarium.org";
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	info.version = TELESCOPE_CONTROL_PLUGIN_VERSION;
@@ -182,8 +182,8 @@ void TelescopeControl::init()
 		connect(slewObj,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToSelectedObject(int)));
 		connect(slewDir,SIGNAL(mapped(int)),this,SLOT(slewTelescopeToViewDirection(int)));
 		connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
-		        this, SLOT(translateActionDescriptions()));
-	
+				this, SLOT(translateActionDescriptions()));
+
 		//Create and initialize dialog windows
 		telescopeDialog = new TelescopeDialog();
 		slewDialog = new SlewDialog();
@@ -195,10 +195,10 @@ void TelescopeControl::init()
 		if (gui!=Q_NULLPTR)
 		{
 			toolbarButton =	new StelButton(Q_NULLPTR,
-						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
-						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
-						       QPixmap(":/graphicGui/glow32x32.png"),
-						       "actionShow_Slew_Window");
+										   QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
+										   QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
+										   QPixmap(":/graphicGui/glow32x32.png"),
+										   "actionShow_Slew_Window");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -271,7 +271,7 @@ void TelescopeControl::draw(StelCore* core)
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
-	reticleTexture->bind();	
+	reticleTexture->bind();
 	foreach (const TelescopeClientP& telescope, telescopeClients)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
@@ -439,6 +439,14 @@ void TelescopeControl::telescopeGoto(int slotNumber, const Vec3d &j2000Pos, Stel
 	//TODO: See the original code. I think that something is wrong here...
 	if(telescopeClients.contains(slotNumber))
 		telescopeClients.value(slotNumber)->telescopeGoto(j2000Pos, selectObject);
+}
+
+QSharedPointer<TelescopeClient> TelescopeControl::telescopeClient(int index) const
+{
+	if(!telescopeClients.contains(index))
+		return QSharedPointer<TelescopeClient>();
+
+	return telescopeClients.value(index);
 }
 
 void TelescopeControl::communicate(void)
@@ -778,7 +786,7 @@ void TelescopeControl::loadTelescopes()
 			if(!deviceModels.contains(deviceModelName))
 			{
 				qWarning() << "[TelescopeControl] Unable to load telescope at slot" << slot
-					   << "because the specified device model is missing:" << deviceModelName;
+						   << "because the specified device model is missing:" << deviceModelName;
 				map.remove(key);
 				continue;
 			}
@@ -807,7 +815,7 @@ void TelescopeControl::loadTelescopes()
 		{
 			portTCP = telescope.value("tcp_port").toInt();
 			hostName = telescope.value("host_name").toString();
-            deviceModelName = telescope.value("device_model").toString();
+			deviceModelName = telescope.value("device_model").toString();
 		}
 
 		if (connectionType == ConnectionRTS2)
@@ -936,7 +944,7 @@ void TelescopeControl::loadTelescopes()
 	{
 		result = map;
 		qDebug() << "[TelescopeControl] Loaded successfully" << telescopesCount
-			 << "telescopes.";
+				 << "telescopes.";
 	}
 
 	telescopeDescriptions = result;
@@ -957,8 +965,8 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 	if (connectionType == ConnectionINDI)
 	{
 		telescope.insert("host_name", host);
-        telescope.insert("tcp_port", portTCP);
-        telescope.insert("device_model", deviceModelName);
+		telescope.insert("tcp_port", portTCP);
+		telescope.insert("device_model", deviceModelName);
 	}
 
 	if (connectionType == ConnectionRemote)
@@ -1062,10 +1070,10 @@ bool TelescopeControl::getTelescopeAtSlot(int slot, ConnectionType& connectionTy
 		rts2Password = telescope.value("password").toString();
 		rts2Refresh = telescope.value("refresh", DEFAULT_RTS2_REFRESH).toInt();
 	}
-    if(connectionType == ConnectionINDI)
-    {
-        deviceModelName = telescope.value("device_model").toString();
-    }
+	if(connectionType == ConnectionINDI)
+	{
+		deviceModelName = telescope.value("device_model").toString();
+	}
 
 	return true;
 }
@@ -1235,8 +1243,8 @@ bool TelescopeControl::startServerAtSlot(int slotNumber, QString deviceModelName
 			serverArguments << QString(StelFileMgr::getUserDir() + "/log_TelescopeServer" + slotName + ".txt");
 
 		qDebug() << "[TelescopeControl] Starting tellescope server at slot" << slotName
-			 << "with path"	 << QDir::toNativeSeparators(serverExecutablePath)
-			 << "and arguments" << serverArguments.join(" ");
+				 << "with path"	 << QDir::toNativeSeparators(serverExecutablePath)
+				 << "and arguments" << serverArguments.join(" ");
 
 		//Starting the new process
 		telescopeServerProcess.insert(slotNumber, new QProcess());
@@ -1290,33 +1298,33 @@ bool TelescopeControl::startClientAtSlot(int slotNumber, ConnectionType connecti
 	QString initString;
 	switch (connectionType)
 	{
-		case ConnectionVirtual:
-			initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
-			break;
+	case ConnectionVirtual:
+		initString = QString("%1:%2:%3").arg(name, "TelescopeServerDummy", "J2000");
+		break;
 
-		case ConnectionInternal:
-			if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
-				initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
-			break;
+	case ConnectionInternal:
+		if(!deviceModelName.isEmpty() && !portSerial.isEmpty())
+			initString = QString("%1:%2:%3:%4:%5").arg(name, deviceModels[deviceModelName].server, equinox, portSerial, QString::number(delay));
+		break;
 
-		case ConnectionLocal:
-			if (isValidPort(portTCP))
-				initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
-			break;
+	case ConnectionLocal:
+		if (isValidPort(portTCP))
+			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, "localhost", QString::number(portTCP), QString::number(delay));
+		break;
 
-		case ConnectionRTS2:
-			if (!rts2Url.isEmpty())
-				initString = QString("%1:RTS2:%2:%3:http://%4:%5@%6").arg(name, equinox, QString::number(rts2Refresh), rts2Username, rts2Password, rts2Url);
-			break;
+	case ConnectionRTS2:
+		if (!rts2Url.isEmpty())
+			initString = QString("%1:RTS2:%2:%3:http://%4:%5@%6").arg(name, equinox, QString::number(rts2Refresh), rts2Username, rts2Password, rts2Url);
+		break;
 
-		case ConnectionINDI:
-            initString = QString("%1:%2:%3:%4:%5:%6").arg(name, "INDI", "J2000", host, QString::number(portTCP), deviceModelName);
-			break;
+	case ConnectionINDI:
+		initString = QString("%1:%2:%3:%4:%5:%6").arg(name, "INDI", "J2000", host, QString::number(portTCP), deviceModelName);
+		break;
 
-		case ConnectionRemote:
-		default:
-			if (isValidPort(portTCP) && !host.isEmpty())
-				initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, host, QString::number(portTCP), QString::number(delay));
+	case ConnectionRemote:
+	default:
+		if (isValidPort(portTCP) && !host.isEmpty())
+			initString = QString("%1:TCP:%2:%3:%4:%5").arg(name, equinox, host, QString::number(portTCP), QString::number(delay));
 	}
 
 	qDebug() << "connectionType:" << connectionType << " initString:" << initString;
@@ -1391,7 +1399,7 @@ void TelescopeControl::loadDeviceModels()
 			//Check the version and move the old file if necessary
 			QVariantMap deviceModelsJsonMap;
 			deviceModelsJsonMap = StelJsonParser::parse(&deviceModelsJsonFile).toMap();
-			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();						
+			QString version = deviceModelsJsonMap.value("version", "0.0.0").toString();
 			if(StelUtils::compareVersions(version, QString(TELESCOPE_CONTROL_PLUGIN_VERSION))!=0)
 			{
 				deviceModelsJsonFile.close();
@@ -1487,13 +1495,13 @@ void TelescopeControl::loadDeviceModels()
 			{
 				qWarning() << "[TelescopeControl] No external telescope server executable found for" << name;
 				qWarning() << "[TelescopeControl] Using embedded telescope server" << server
-					   << "for" << name;
+						   << "for" << name;
 				useExecutable = false;
 			}
 			else
 			{
 				qWarning() << "[TelescopeControl] Skipping device model: No server" << server
-					   << "found for" << name;
+						   << "found for" << name;
 				continue;
 			}
 		}
@@ -1502,7 +1510,7 @@ void TelescopeControl::loadDeviceModels()
 			if(!EMBEDDED_TELESCOPE_SERVERS.contains(server))
 			{
 				qWarning() << "[TelescopeControl] Skipping device model: No server" << server
-					   << "found for" << name;
+						   << "found for" << name;
 				continue;
 			}
 			//else: everything is OK, using embedded server
@@ -1572,7 +1580,7 @@ bool TelescopeControl::setServerExecutablesDirectoryPath(const QString& newPath)
 	if(telescopeServerExecutables.isEmpty())
 	{
 		qWarning() << "[TelescopeControl] No telescope server executables found in"
-			   << QDir::toNativeSeparators(serverExecutablesDirectoryPath);
+				   << QDir::toNativeSeparators(serverExecutablesDirectoryPath);
 		return false;
 	}
 
@@ -1612,7 +1620,7 @@ void TelescopeControl::addLogAtSlot(int slot)
 		if (!logFile->open(QFile::WriteOnly|QFile::Text|QFile::Truncate|QFile::Unbuffered))
 		{
 			qWarning() << "[TelescopeControl] Unable to create a log file for slot" << slot
-				   << ":" << QDir::toNativeSeparators(filePath);
+					   << ":" << QDir::toNativeSeparators(filePath);
 			telescopeServerLogFiles.insert(slot, logFile);
 			telescopeServerLogStreams.insert(slot, new QTextStream(new QFile()));
 		}
@@ -1678,20 +1686,20 @@ void TelescopeControl::translations()
 #if 0
 	// TRANSLATORS: Description for Meade AutoStar compatible mounts
 	N_("Any telescope or telescope mount compatible with Meade's AutoStar controller.")
-	// TRANSLATORS: Description for Meade LX200 (compatible) mounts
-	N_("Any telescope or telescope mount compatible with Meade LX200.")
-	// TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-	N_("Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable Set.")
-	// TRANSLATORS: Description for Losmandy G-11 mounts
-	N_("Losmandy's G-11 telescope mount.")
-	// TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
-	N_("Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode.")
-	// TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-	N_("Any telescope or telescope mount compatible with Celestron NexStar.")
-	// TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
-	N_("Any Sky-Watcher mount that uses version 3 or later of the SynScan hand controller.")
-	// TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-	N_("The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models.")
-#endif
+			// TRANSLATORS: Description for Meade LX200 (compatible) mounts
+			N_("Any telescope or telescope mount compatible with Meade LX200.")
+			// TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
+			N_("Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable Set.")
+			// TRANSLATORS: Description for Losmandy G-11 mounts
+			N_("Losmandy's G-11 telescope mount.")
+			// TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
+			N_("Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode.")
+			// TRANSLATORS: Description for Celestron NexStar (compatible) mounts
+			N_("Any telescope or telescope mount compatible with Celestron NexStar.")
+			// TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
+			N_("Any Sky-Watcher mount that uses version 3 or later of the SynScan hand controller.")
+			// TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
+			N_("The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models.")
+		#endif
 }
 

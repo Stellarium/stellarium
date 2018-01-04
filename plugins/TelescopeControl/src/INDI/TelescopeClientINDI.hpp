@@ -25,16 +25,21 @@
 
 class TelescopeClientINDI : public TelescopeClient
 {
+	Q_OBJECT
+
 public:
-	TelescopeClientINDI(const QString &name, const QString& params);
+	TelescopeClientINDI(const QString &name = "INDI", const QString& params = QString());
 	~TelescopeClientINDI();
 
 	Vec3d getJ2000EquatorialPos(const StelCore *core) const override;
+	void move(double angle, double speed) override;
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) override;
 	bool isConnected() const override;
 	bool hasKnownPosition() const override;
 
 private:
+	int toINDISpeed(double speed) const;
+
 	INDIConnection mConnection;
 	QString mDevice;
 };
