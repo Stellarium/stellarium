@@ -403,6 +403,9 @@
         </layout>
        </widget>
       </item>
+      <item>
+       <widget class="TelescopeMoveWidget" name="telescopeMoveWidget" native="true"/>
+      </item>
      </layout>
     </widget>
    </item>
@@ -443,6 +446,12 @@ margin-bottom:10px;</string>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header location="global">AngleSpinBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>TelescopeMoveWidget</class>
+   <extends>QWidget</extends>
+   <header>TelescopeMoveWidget.hpp</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <tabstops>

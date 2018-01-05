@@ -1,6 +1,6 @@
 {
 	"version": "2",
-	"shortName": "A catalogue of pulsars, based on ATNF Pulsar Catalogue v. 1.56",
+	"shortName": "A catalogue of pulsars, based on ATNF Pulsar Catalogue v. 1.57",
 	"originalCatalogURL": "http://www.atnf.csiro.au/research/pulsar/psrcat/",
 	"pulsars":
 	{
@@ -68,7 +68,16 @@
 			"RA": "00h23m16.8791s",
 			"DE": "+09d23m23.871s"
 		},
-		"PSR J0023+0923":
+		"PSR J0024-7201Z":
+		{
+			"distance": 1.05,
+			"dmeasure": 24.45,
+			"frequency": 219.5656060346,
+			"pfrequency": 0.219E-15,
+			"RA": "00h24m06.041s",
+			"DE": "-72d05m01.48s"
+		},
+		"PSR J0024-7201Z":
 		{
 			"distance": 1.07,
 			"period": 0.00184,
@@ -76,142 +85,141 @@
 			"RA": "00h24m05.67s",
 			"DE": "-72d04m52.62s"
 		},
-		"PSR J0023+0923":
+		"PSR J0024-7201Z":
 		{
 			"distance": 1.04,
 			"dmeasure": 24.37,
-			"frequency": 269.931793752167,
-			"pfrequency": -7.1728E-16,
-			"RA": "00h24m08.1657s",
-			"DE": "-72d04m47.616s"
+			"frequency": 269.93179806134,
+			"pfrequency": -0.7155E-15,
+			"RA": "00h24m08.1615s",
+			"DE": "-72d04m47.602s"
 		},
 		"PSR J0024-7204C":
 		{
-			"distance": 1.05,
-			"dmeasure": 24.599,
-			"frequency": 173.708218966053,
-			"pfrequency": 1.5042E-15,
+			"distance": 0.57,
+			"dmeasure": 24.600,
+			"frequency": 173.708218965958,
+			"pfrequency": 1.50421E-15,
 			"w50": 0.8,
 			"s400": 1.53,
 			"s600": 1.54,
 			"s1400": 0.6,
-			"RA": "00h23m50.35311s",
-			"DE": "-72d04m31.4926s"
+			"RA": "00h23m50.3546s",
+			"DE": "-72d04m31.5048s"
 		},
 		"PSR J0024-7204D":
 		{
-			"distance": 1.06,
-			"dmeasure": 24.729,
-			"frequency": 186.651669856838,
-			"pfrequency": 1.195E-16,
+			"distance": 0.57,
+			"dmeasure": 24.732,
+			"frequency": 186.651669856731,
+			"pfrequency": 0.11922E-15,
 			"w50": 0.6,
 			"s400": 0.95,
 			"s600": 0.55,
-			"RA": "00h24m13.87934s",
-			"DE": "-72d04m43.8405s"
+			"RA": "00h24m13.88092s",
+			"DE": "-72d04m43.8524s"
 		},
 		"PSR J0024-7204E":
 		{
 			"distance": 1.03,
-			"bperiod": 2.256844820,
-			"dmeasure": 24.230,
-			"frequency": 282.77910703517,
-			"pfrequency": -7.8772E-15,
+			"bperiod": 2.2568483,
+			"eccentricity": 3.159E-4,
+			"dmeasure": 24.236,
+			"frequency": 282.779107035000,
+			"pfrequency": -7.87728E-15,
 			"w50": 0.9,
-			"RA": "00h24m11.1036s",
-			"DE": "-72d05m20.1377s"
+			"RA": "00h24m11.10528s",
+			"DE": "-72d05m20.1492s"
 		},
 		"PSR J0024-7204F":
 		{
-			"distance": 1.04,
-			"dmeasure": 24.379,
-			"frequency": 381.15866365655,
-			"pfrequency": -9.3707E-15,
+			"distance": 0.57,
+			"dmeasure": 24.382,
+			"frequency": 381.158663656311,
+			"pfrequency": -9.3711E-15,
 			"w50": 0.5,
-			"RA": "00h24m03.8539s",
-			"DE": "-72d04m42.8065s"
+			"RA": "00h24m03.85547s",
+			"DE": "-72d04m42.8183s"
 		},
 		"PSR J0024-7204G":
 		{
-			"distance": 1.04,
-			"dmeasure": 24.441,
-			"frequency": 247.50152509652,
-			"pfrequency": 2.582E-15,
+			"distance": 0.57,
+			"dmeasure": 24.436,
+			"frequency": 247.501525096385,
+			"pfrequency": 2.5825E-15,
 			"w50": 0.7,
-			"RA": "00h24m07.9587s",
-			"DE": "-72d04m39.6911s"
+			"RA": "00h24m07.9603s",
+			"DE": "-72d04m39.703s"
 		},
 		"PSR J0024-7204H":
 		{
 			"distance": 1.04,
-			"bperiod": 2.35769683,
-			"eccentricity": 0.070560,
-			"dmeasure": 24.36,
-			"frequency": 311.49341784442,
-			"pfrequency": 1.78E-16,
+			"bperiod": 2.357696895,
+			"eccentricity": 7.0558E-2,
+			"dmeasure": 24.369,
+			"frequency": 311.49341784423,
+			"pfrequency": 0.1775E-15,
 			"w50": 0.6,
-			"RA": "00h24m06.7014s",
-			"DE": "-72d04m06.795s"
+			"RA": "00h24m06.7032s",
+			"DE": "-72d04m06.8067s"
 		},
 		"PSR J0024-7204I":
 		{
 			"distance": 1.04,
-			"bperiod": 0.229792249,
-			"dmeasure": 24.42,
-			"frequency": 286.94469953064,
-			"pfrequency": 3.777E-15,
-			"RA": "00h24m07.933s",
-			"DE": "-72d04m39.669s"
+			"bperiod": 0.2297922489,
+			"dmeasure": 24.43,
+			"frequency": 286.94469953049,
+			"pfrequency": 3.7771E-15,
+			"RA": "00h24m07.9347s",
+			"DE": "-72d04m39.6815s"
 		},
 		"PSR J0024-7204J":
 		{
-			"distance": 1.05,
-			"bperiod": 0.12066493779,
-			"dmeasure": 24.5848,
-			"frequency": 476.046858440607,
-			"pfrequency": 2.2191E-15,
+			"distance": 1.04,
+			"dmeasure": 24.588,
+			"frequency": 476.04685844061,
+			"pfrequency": 2.2190E-15,
 			"w50": 0.5,
-			"RA": "00h23m59.40735s",
-			"DE": "-72d03m58.7914s"
+			"RA": "00h23m59.4077s",
+			"DE": "-72d03m58.7908s"
 		},
 		"PSR J0024-7204L":
 		{
-			"distance": 1.04,
-			"dmeasure": 24.38,
-			"frequency": 230.08774629150,
-			"pfrequency": 6.462E-15,
+			"distance": 0.57,
+			"dmeasure": 24.40,
+			"frequency": 230.08774629142,
+			"pfrequency": 6.4611E-15,
 			"w50": 0.7,
-			"RA": "00h24m03.771s",
-			"DE": "-72d04m56.913s"
+			"RA": "00h24m03.7721s",
+			"DE": "-72d04m56.923s"
 		},
 		"PSR J0024-7204M":
 		{
-			"distance": 1.04,
-			"dmeasure": 24.42,
-			"frequency": 271.98722878893,
-			"pfrequency": 2.843E-15,
+			"distance": 0.57,
+			"dmeasure": 24.43,
+			"frequency": 271.98722878874,
+			"pfrequency": 2.8421E-15,
 			"w50": 1.2,
-			"RA": "00h23m54.4877s",
-			"DE": "-72d05m30.741s"
+			"RA": "00h23m54.4899s",
+			"DE": "-72d05m30.756s"
 		},
 		"PSR J0024-7204N":
 		{
-			"distance": 1.05,
-			"dmeasure": 24.56,
-			"frequency": 327.44431861755,
-			"pfrequency": 2.345E-15,
-			"RA": "00h24m09.1865s",
-			"DE": "-72d04m28.88s"
+			"distance": 0.57,
+			"dmeasure": 24.574,
+			"frequency": 327.44431861739,
+			"pfrequency": 2.3435E-15,
+			"RA": "00h24m09.188s",
+			"DE": "-72d04m28.8907s"
 		},
 		"PSR J0024-7204O":
 		{
 			"distance": 1.04,
-			"bperiod": 0.1359743050,
-			"dmeasure": 24.363,
-			"frequency": 378.30878836037,
-			"pfrequency": -4.344E-15,
-			"RA": "00h24m04.6512s",
-			"DE": "-72d04m53.7552s"
+			"dmeasure": 24.356,
+			"frequency": 378.308788360098,
+			"pfrequency": -4.34352E-15,
+			"RA": "00h24m04.65254s",
+			"DE": "-72d04m53.767s"
 		},
 		"PSR J0024-7204P":
 		{
@@ -226,51 +234,52 @@
 		"PSR J0024-7204Q":
 		{
 			"distance": 1.04,
-			"bperiod": 1.189084048,
-			"dmeasure": 24.29,
-			"frequency": 247.94323741908,
-			"pfrequency": -2.091E-15,
-			"RA": "00h24m16.4891s",
-			"DE": "-72d04m25.153s"
+			"bperiod": 1.1890840496,
+			"dmeasure": 24.265,
+			"frequency": 247.943237418920,
+			"pfrequency": -2.0907E-15,
+			"RA": "00h24m16.4909s",
+			"DE": "-72d04m25.1644s"
 		},
 		"PSR J0024-7204R":
 		{
 			"distance": 1.04,
-			"period": 0.003480463,
-			"bperiod": 0.0662,
-			"dmeasure": 24.4,
-			"RA": "00h24m05.67s",
-			"DE": "-72d04m52.62s"
+			"bperiod": 6.623147751,
+			"dmeasure": 24.361,
+			"frequency": 287.31811946930,
+			"pfrequency": -12.2467E-15,
+			"RA": "00h24m07.5851s",
+			"DE": "-72d04m50.3954s"
 		},
 		"PSR J0024-7204S":
 		{
 			"distance": 1.04,
-			"bperiod": 1.201724235,
-			"dmeasure": 24.353,
-			"frequency": 353.30620938559,
-			"pfrequency": 1.5046E-14,
-			"RA": "00h24m03.9779s",
-			"DE": "-72d04m42.342s"
+			"bperiod": 1.2017242354,
+			"dmeasure": 24.376,
+			"frequency": 353.306209385356,
+			"pfrequency": 15.0466E-15,
+			"RA": "00h24m03.9794s",
+			"DE": "-72d04m42.353s"
 		},
 		"PSR J0024-7204T":
 		{
 			"distance": 1.04,
-			"bperiod": 1.126176767,
-			"dmeasure": 24.39,
-			"frequency": 131.77869947412,
-			"pfrequency": -5.101E-15,
-			"RA": "00h24m08.548s",
-			"DE": "-72d04m38.926s"
+			"bperiod": 1.126176771,
+			"dmeasure": 24.41,
+			"frequency": 131.77869947406,
+			"pfrequency": -5.1021E-15,
+			"RA": "00h24m08.5491s",
+			"DE": "-72d04m38.932s"
 		},
 		"PSR J0024-7204U":
 		{
 			"distance": 1.04,
-			"bperiod": 0.4291056833,
-			"dmeasure": 24.335,
-			"frequency": 230.26477221192,
-			"pfrequency": -5.0492E-15,
-			"RA": "00h24m09.8351s",
-			"DE": "-72d03m59.676s"
+			"bperiod": 0.42910568324,
+			"dmeasure": 24.337,
+			"frequency": 230.264772211776,
+			"pfrequency": -5.04916E-15,
+			"RA": "00h24m09.8366s",
+			"DE": "-72d03m59.6882s"
 		},
 		"PSR J0024-7204V":
 		{
@@ -303,11 +312,12 @@
 		"PSR J0024-7204Y":
 		{
 			"distance": 1.04,
-			"period": 0.00219666,
-			"bperiod": 0.52194,
-			"dmeasure": 24.2,
-			"RA": "00h24m05.67s",
-			"DE": "-72d04m52.62s"
+			"bperiod": 0.5219386107,
+			"dmeasure": 24.468,
+			"frequency": 455.23717843241,
+			"pfrequency": 7.2891E-15,
+			"RA": "00h24m01.4026s",
+			"DE": "-72d04m41.8363s"
 		},
 		"PSR J0024-7204Z":
 		{
@@ -2411,6 +2421,14 @@
 			"RA": "06h21m00s",
 			"DE": "+25d00m00s"
 		},
+		"PSR J0621-55":
+		{
+			"distance": 1.06,
+			"dmeasure": 22,
+			"notes": "RRAT",
+			"RA": "06h20m42s",
+			"DE": "-56d05m00s"
+		},
 		"PSR J0622+3749":
 		{
 			"frequency": 3.00112633651,
@@ -2902,14 +2920,16 @@
 			"RA": "07h34m00s",
 			"DE": "-15d59m00s"
 		},
-		"PSR J0735-62":
+		"PSR J0736-6304":
 		{
 			"distance": 0.93,
-			"period": 4.862940,
+			"period": 4.8628739612,
+			"pderivative": 151.89E-15,
 			"dmeasure": 19.4,
+			"w50": 30,
 			"notes": "RRAT",
-			"RA": "07h35m22s",
-			"DE": "-62d58m00s"
+			"RA": "07h36m20.01s",
+			"DE": "-63d04m16s"
 		},
 		"PSR J0737-2202":
 		{
@@ -3049,6 +3069,15 @@
 			"s1400": 0.6,
 			"RA": "07h49m49.675s",
 			"DE": "-42d47m42.14s"
+		},
+		"PSR J0749-68":
+		{
+			"distance": 1.09,
+			"period": 0.915171299,
+			"dmeasure": 26,
+			"s1400": 4.1,
+			"RA": "07h50m50s",
+			"DE": "-68d44m27s"
 		},
 		"PSR J0750+57":
 		{
@@ -3670,7 +3699,6 @@
 			"w50": 20,
 			"s400": 11,
 			"s600": 11,
-			"s1400": 14,
 			"RA": "09h04m10.8s",
 			"DE": "-74d59m42.8s"
 		},
@@ -3777,6 +3805,14 @@
 			"notes": "RRAT",
 			"RA": "09h12m42.7s",
 			"DE": "-38d51m03s"
+		},
+		"PSR J0919-42":
+		{
+			"distance": 0.49,
+			"period": 0.8126,
+			"dmeasure": 57.8,
+			"RA": "09h19m00s",
+			"DE": "-42d00m00s"
 		},
 		"PSR J0919-6040":
 		{
@@ -4093,6 +4129,15 @@
 			"s1400": 0.31,
 			"RA": "09h49m20.567s",
 			"DE": "-69d02m41.6s"
+		},
+		"PSR J0952-0607":
+		{
+			"distance": 0.97,
+			"bperiod": 0.267461038,
+			"dmeasure": 22.41149,
+			"frequency": 707.314434911,
+			"RA": "09h52m08.319s",
+			"DE": "-06d07m23.49s"
 		},
 		"PSR J0952-3839":
 		{
@@ -4774,16 +4819,6 @@
 			"RA": "10h47m0.814s",
 			"DE": "-30d32m18.001s"
 		},
-		"PSR J1047-58":
-		{
-			"distance": 1.85,
-			"period": 1.23129,
-			"dmeasure": 69.3,
-			"w50": 3.7,
-			"notes": "RRAT",
-			"RA": "10h47m56s",
-			"DE": "-58d41m00s"
-		},
 		"PSR J1047-6709":
 		{
 			"distance": 2.88,
@@ -4820,6 +4855,17 @@
 			"notes": "HE",
 			"RA": "10h48m12.2s",
 			"DE": "-58d32m05.8s"
+		},
+		"PSR J1048-5838":
+		{
+			"distance": 1.87,
+			"period": 1.231304776630,
+			"pderivative": 12.19375E-15,
+			"dmeasure": 70.7,
+			"w50": 7,
+			"notes": "RRAT",
+			"RA": "10h48m12.561s",
+			"DE": "-58d38m19.02s"
 		},
 		"PSR J1049-5833":
 		{
@@ -5486,6 +5532,14 @@
 			"notes": "RRAT",
 			"RA": "11h26m00s",
 			"DE": "-27d37m00s"
+		},
+		"PSR J1126-38":
+		{
+			"distance": 1.72,
+			"period": 0.88755,
+			"dmeasure": 46,
+			"RA": "11h26m18s",
+			"DE": "-38d38m00s"
 		},
 		"PSR J1126-6054":
 		{
@@ -6157,14 +6211,16 @@
 			"RA": "12h25m42.8s",
 			"DE": "-64d08m43s"
 		},
-		"PSR J1226-32":
+		"PSR J1226-3223":
 		{
-			"distance": 1.43,
-			"period": 6.192997,
-			"dmeasure": 37,
+			"distance": 1.42,
+			"period": 6.1930040852,
+			"pderivative": 7.05E-15,
+			"dmeasure": 36.7,
+			"w50": 34,
 			"notes": "RRAT",
-			"RA": "12h26m50s",
-			"DE": "-32d27m00s"
+			"RA": "12h26m46.628s",
+			"DE": "-32d23m01s"
 		},
 		"PSR J1227-4853":
 		{
@@ -6531,6 +6587,14 @@
 			"RA": "12h54m32.48s",
 			"DE": "-61d50m50.8s"
 		},
+		"PSR J1255-46":
+		{
+			"distance": 1.23,
+			"period": 0.052,
+			"dmeasure": 42.9,
+			"RA": "12h55m00s",
+			"DE": "-46d00m00s"
+		},
 		"PSR J1255-6131":
 		{
 			"distance": 4.06,
@@ -6722,6 +6786,14 @@
 			"s1400": 0.2,
 			"RA": "13h05m36s",
 			"DE": "-66d39m00s"
+		},
+		"PSR J1306-40":
+		{
+			"distance": 1.20,
+			"period": 0.00220453,
+			"dmeasure": 35,
+			"RA": "13h06m56s",
+			"DE": "-40d35m23s"
 		},
 		"PSR J1306-6242":
 		{
@@ -7125,7 +7197,7 @@
 			"distance": 1.74,
 			"period": 0.0026779231971205,
 			"bperiod": 8.439086019,
-			"pderivative": 1.773E-20,
+			"pderivative": 1.773E-21,
 			"dmeasure": 27.91215,
 			"w50": 0.131,
 			"RA": "13h27m57.588s",
@@ -7265,6 +7337,14 @@
 			"s400": 10,
 			"RA": "13h35m36s",
 			"DE": "-36d42m00s"
+		},
+		"PSR J1337-44":
+		{
+			"distance": 3.54,
+			"period": 1.25752,
+			"dmeasure": 96,
+			"RA": "13h37m06.00000000000009s",
+			"DE": "-44d43m00s"
 		},
 		"PSR J1337-6306":
 		{
@@ -7618,14 +7698,17 @@
 			"RA": "13h59m58.22s",
 			"DE": "-60d38m08s"
 		},
-		"PSR J1400-1438":
+		"PSR J1400-1431":
 		{
+			"parallax": 3.6,
 			"distance": 0.48,
-			"period": 0.0030842332007,
-			"bperiod": 9.54743,
-			"dmeasure": 4.928,
-			"RA": "14h00m30.34s",
-			"DE": "-14d38m14.4s"
+			"period": 0.00308423326039194,
+			"bperiod": 9.5474676743,
+			"pderivative": 7.2333E-21,
+			"dmeasure": 4.932258,
+			"s1400": 0.15,
+			"RA": "14h00m37.004s",
+			"DE": "-14d31m47.045s"
 		},
 		"PSR J1400-6325":
 		{
@@ -7691,6 +7774,14 @@
 			"s400": 3,
 			"RA": "14h04m40s",
 			"DE": "+12d03m00s"
+		},
+		"PSR J1405-42":
+		{
+			"distance": 1.98,
+			"period": 2.34680,
+			"dmeasure": 64,
+			"RA": "14h05m48s",
+			"DE": "-42d33m00s"
 		},
 		"PSR J1405-4656":
 		{
@@ -7980,6 +8071,18 @@
 			"notes": "HE",
 			"RA": "14h20m08.237s",
 			"DE": "-60d48m16.43s"
+		},
+		"PSR J1421-4409":
+		{
+			"distance": 1.57,
+			"period": 0.00638572883816,
+			"bperiod": 30.7464535,
+			"eccentricity": 0.0000128,
+			"pderivative": 1.27E-20,
+			"dmeasure": 54.635,
+			"s1400": 1.4,
+			"RA": "14h21m20.9646s",
+			"DE": "-44d09m04.541s"
 		},
 		"PSR J1422-6138":
 		{
@@ -8446,6 +8549,14 @@
 			"s1400": 1.6,
 			"RA": "14h55m06s",
 			"DE": "-59d23m00s"
+		},
+		"PSR J1456-48":
+		{
+			"distance": 2.48,
+			"period": 0.53681,
+			"dmeasure": 133.0,
+			"RA": "14h56m00s",
+			"DE": "-48d00m00s"
 		},
 		"PSR J1456-6843":
 		{
@@ -9925,6 +10036,16 @@
 			"RA": "15h52m13.2709s",
 			"DE": "-49d37m49.744s"
 		},
+		"PSR J1552+5437":
+		{
+			"distance": 1.23,
+			"dmeasure": 22.9000,
+			"frequency": 411.88053142429,
+			"pfrequency": -4.746E-16,
+			"notes": "HE",
+			"RA": "15h52m53.33117s",
+			"DE": "+54d37m05.7866s"
+		},
 		"PSR J1552-62":
 		{
 			"distance": 2.61,
@@ -10058,6 +10179,14 @@
 			"s1400": 0.19,
 			"RA": "15h58m30.53s",
 			"DE": "-57d56m26.1s"
+		},
+		"PSR J1559-44":
+		{
+			"distance": 2.39,
+			"period": 1.16989,
+			"dmeasure": 122.0,
+			"RA": "15h59m00s",
+			"DE": "-44d00m00s"
 		},
 		"PSR J1559-4438":
 		{
@@ -10257,6 +10386,14 @@
 			"s1400": 3.1,
 			"RA": "16h03m35.67751s",
 			"DE": "-72d02m32.72985s"
+		},
+		"PSR J1604-31":
+		{
+			"distance": 1.88,
+			"period": 0.883883,
+			"dmeasure": 63,
+			"RA": "16h04m24s",
+			"DE": "-31d39m00s"
 		},
 		"PSR J1604-44":
 		{
@@ -10924,9 +11061,9 @@
 		"PSR J1622-4950":
 		{
 			"distance": 8.73,
-			"period": 4.3261,
-			"pderivative": 1.7E-11,
 			"dmeasure": 820,
+			"frequency": 0.2311059204,
+			"pfrequency": -1.4827E-13,
 			"s1400": 4.8,
 			"notes": "AXP,HE",
 			"RA": "16h22m44.8s",
@@ -10946,13 +11083,14 @@
 		},
 		"PSR J1623-0841":
 		{
-			"distance": 3.44,
-			"period": 0.503014997755,
-			"pderivative": 1.958E-15,
-			"dmeasure": 60.42,
-			"w50": 11.2,
-			"RA": "16h23m42.701s",
-			"DE": "-08d41m36.4s"
+			"distance": 3.34,
+			"period": 0.50301500560,
+			"pderivative": 1.9556E-15,
+			"dmeasure": 59.79,
+			"w50": 11,
+			"notes": "RRAT",
+			"RA": "16h23m42.6827s",
+			"DE": "-08d41m36.6s"
 		},
 		"PSR J1623-0908":
 		{
@@ -13216,6 +13354,14 @@
 			"RA": "17h08m12.92s",
 			"DE": "-45d22m51s"
 		},
+		"PSR J1708-52":
+		{
+			"distance": 2.75,
+			"period": 0.44962,
+			"dmeasure": 102.6,
+			"RA": "17h08m00s",
+			"DE": "-52d00m00s"
+		},
 		"PSR J1708-7539":
 		{
 			"distance": 1.22,
@@ -14375,7 +14521,7 @@
 			"w50": 20,
 			"s400": 190,
 			"s1400": 12,
-			"glitch": 3,
+			"glitch": 5,
 			"RA": "17h31m42.103s",
 			"DE": "-47d44m34.56s"
 		},
@@ -14869,6 +15015,17 @@
 			"RA": "17h39m57.821s",
 			"DE": "-13d13m18.6s"
 		},
+		"PSR J1739-2521":
+		{
+			"distance": 3.48,
+			"period": 1.81846119286,
+			"pderivative": 0.24E-15,
+			"dmeasure": 186.4,
+			"w50": 43,
+			"notes": "RRAT",
+			"RA": "17h39m32.629s",
+			"DE": "-25d21m56s"
+		},
 		"PSR J1739-2903":
 		{
 			"distance": 2.47,
@@ -15069,8 +15226,8 @@
 			"pfrequency": -9.923E-14,
 			"s1400": 0.16,
 			"notes": "HE",
-			"RA": "17h41m57.23s",
-			"DE": "-20d53m57s"
+			"RA": "17h41m57.28s",
+			"DE": "-20d54m11.8s"
 		},
 		"PSR J1741-2719":
 		{
@@ -16328,15 +16485,16 @@
 			"RA": "17h54m36.56s",
 			"DE": "-24d22m24s"
 		},
-		"PSR J1754-30":
+		"PSR J1754-3014":
 		{
-			"distance": 4.97,
-			"period": 1.32049,
-			"dmeasure": 293,
-			"w50": 16,
+			"distance": 2.04,
+			"period": 1.3204904144,
+			"pderivative": 4.428E-15,
+			"dmeasure": 89.70,
+			"w50": 36,
 			"notes": "RRAT",
-			"RA": "17h54m16s",
-			"DE": "-30d11m00s"
+			"RA": "17h54m30.181s",
+			"DE": "-30d15m03s"
 		},
 		"PSR J1754-3443":
 		{
@@ -16584,13 +16742,14 @@
 		{
 			"distance": 4.40,
 			"dmeasure": 179.454,
-			"frequency": 4.27166834160,
-			"pfrequency": -2.357385E-13,
+			"frequency": 4.2715730980,
+			"pfrequency": -2.3729E-13,
 			"w50": 15,
 			"s400": 20,
 			"s600": 18.1,
 			"s1400": 3.9,
-			"RA": "17h57m29.336s",
+			"glitch": 1,
+			"RA": "17h57m29.324s",
 			"DE": "-24d22m7.445s"
 		},
 		"PSR J1757-27":
@@ -20265,15 +20424,16 @@
 			"RA": "18h38m33.79s",
 			"DE": "-18d49m59s"
 		},
-		"PSR J1839-01":
+		"PSR J1839-0141":
 		{
-			"distance": 6.41,
-			"period": 0.93190,
-			"dmeasure": 307,
-			"w50": 15,
+			"distance": 6.26,
+			"period": 0.93326558076,
+			"pderivative": 5.944E-15,
+			"dmeasure": 293.2,
+			"w50": 13,
 			"notes": "RRAT",
-			"RA": "18h39m53s",
-			"DE": "-01d36m00s"
+			"RA": "18h39m06.9848s",
+			"DE": "-01d41m56s"
 		},
 		"PSR J1839-0223":
 		{
@@ -21465,16 +21625,6 @@
 			"RA": "18h48m11.81s",
 			"DE": "-11d50m09.2s"
 		},
-		"PSR J1848-12":
-		{
-			"distance": 2.39,
-			"period": 6.7953,
-			"dmeasure": 88,
-			"w50": 2,
-			"notes": "RRAT",
-			"RA": "18h48m02s",
-			"DE": "-12d47m00s"
-		},
 		"PSR J1848+12":
 		{
 			"distance": 5.05,
@@ -21483,6 +21633,17 @@
 			"w50": 107,
 			"RA": "18h48m30s",
 			"DE": "+12d50m00s"
+		},
+		"PSR J1848-1243":
+		{
+			"distance": 2.48,
+			"period": 0.41438335440,
+			"pderivative": 0.4405E-15,
+			"dmeasure": 91.96,
+			"w50": 9,
+			"notes": "RRAT",
+			"RA": "18h48m18.026s",
+			"DE": "-12d43m30s"
 		},
 		"PSR J1848-1414":
 		{
@@ -24206,6 +24367,14 @@
 			"RA": "19h14m17.647s",
 			"DE": "+07d01m11s"
 		},
+		"PSR J1914+08":
+		{
+			"distance": 6.97,
+			"period": 0.440048,
+			"dmeasure": 285,
+			"RA": "19h14m18s",
+			"DE": "+08d45m00s"
+		},
 		"PSR J1914+1122":
 		{
 			"distance": 3.76,
@@ -26038,6 +26207,14 @@
 			"RA": "19h47m06s",
 			"DE": "-42d15m00s"
 		},
+		"PSR J1947-43":
+		{
+			"distance": 1.05,
+			"period": 0.18094,
+			"dmeasure": 29.9,
+			"RA": "19h47m00s",
+			"DE": "-43d00m00s"
+		},
 		"PSR J1948+2333":
 		{
 			"distance": 7.06,
@@ -26975,15 +27152,15 @@
 		"PSR J2032+4127":
 		{
 			"distance": 3.64,
-			"bperiod": 8578,
-			"eccentricity": 0.93,
-			"dmeasure": 114.65,
-			"frequency": 6.980808,
-			"pfrequency": -0.61E-12,
+			"bperiod": 16835,
+			"eccentricity": 0.964,
+			"dmeasure": 114.67,
+			"frequency": 6.980975,
+			"pfrequency": -0.551E-12,
 			"glitch": 1,
 			"notes": "HE",
-			"RA": "20h32m13.107s",
-			"DE": "+41d27m24.36s"
+			"RA": "20h32m13.119s",
+			"DE": "+41d27m24.31s"
 		},
 		"PSR J2033+0042":
 		{
@@ -27534,7 +27711,7 @@
 			"pderivative": 0.00498789E-15,
 			"dmeasure": 67.13,
 			"w50": 1.3,
-			"s400": 0.6,
+			"s400": 0.64,
 			"RA": "21h30m01.2042s",
 			"DE": "+12d10m38.209s"
 		},
@@ -27542,10 +27719,10 @@
 		{
 			"distance": 6.06,
 			"period": 0.0048028043457,
-			"pderivative": -1.075E-17,
+			"pderivative": -1.075E-18,
 			"dmeasure": 67.3,
 			"w50": 1.3,
-			"s400": 0.3,
+			"s400": 0.34,
 			"RA": "21h29m58.274s",
 			"DE": "+12d09m59.74s"
 		},
@@ -27556,7 +27733,7 @@
 			"pderivative": 1.78E-19,
 			"dmeasure": 66.51,
 			"w50": 0.8,
-			"s400": 0.2,
+			"s400": 0.24,
 			"RA": "21h29m58.187s",
 			"DE": "+12d10m08.63s"
 		},
@@ -27567,7 +27744,7 @@
 			"pderivative": 3.2E-20,
 			"dmeasure": 65.52,
 			"w50": 0.8,
-			"s400": 0.1,
+			"s400": 0.14,
 			"RA": "21h29m57.178s",
 			"DE": "+12d10m02.91s"
 		},
@@ -27578,7 +27755,7 @@
 			"pderivative": 2.0E-18,
 			"dmeasure": 66.4,
 			"w50": 0.8,
-			"s400": 0.1,
+			"s400": 0.13,
 			"RA": "21h29m57.95s",
 			"DE": "+12d09m57.3s"
 		},
@@ -27589,7 +27766,7 @@
 			"pderivative": 2.4E-20,
 			"dmeasure": 67.15,
 			"w50": 0.7,
-			"s400": 0.2,
+			"s400": 0.16,
 			"RA": "21h29m58.184s",
 			"DE": "+12d09m59.43s"
 		},
@@ -27759,6 +27936,14 @@
 			"s400": 1.6,
 			"RA": "21h51m28.9s",
 			"DE": "23d15m12.8s"
+		},
+		"PSR J2154-28":
+		{
+			"distance": 1.23,
+			"period": 1.34335,
+			"dmeasure": 28,
+			"RA": "21h54m47.9999999999998s",
+			"DE": "-28d08m00s"
 		},
 		"PSR J2155+2813":
 		{
@@ -27984,12 +28169,12 @@
 		"PSR J2222-0137":
 		{
 			"parallax": 3.742,
-			"distance": 0.31,
-			"period": 0.032817859053065,
-			"bperiod": 2.4457599929,
-			"eccentricity": 3.8086E-4,
-			"pderivative": 5.865E-20,
-			"dmeasure": 3.2842,
+			"distance": 0.26,
+			"bperiod": 2.44576469,
+			"eccentricity": 3.80967E-4,
+			"dmeasure": 3.277,
+			"frequency": 30.47121380904550,
+			"pfrequency": -5.38746E-18,
 			"w50": 0.570,
 			"RA": "22h22m05.969101s",
 			"DE": "-01d37m15.72441s"

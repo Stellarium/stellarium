@@ -39,13 +39,13 @@ class Translations
 		N_("E");
 		// TRANSLATORS: Cardinals names: West
 		N_("W");
-		// TRANSLATORS: Cardinals names: Northeast
+		// TRANSLATORS: Ordinals names: Northeast
 		N_("NE");
-		// TRANSLATORS: Cardinals names: Southeast
+		// TRANSLATORS: Ordinals names: Southeast
 		N_("SE");
-		// TRANSLATORS: Cardinals names: Southwest
+		// TRANSLATORS: Ordinals names: Southwest
 		N_("SW");
-		// TRANSLATORS: Cardinals names: Northwest
+		// TRANSLATORS: Ordinals names: Northwest
 		N_("NW");
 
 		// =====================================================================
@@ -682,5 +682,8 @@ class Translations
 		N_("%1 already exists.\nDo you want to replace it?");
 		N_("&Yes");
 		N_("&No");
+		N_("&Select All");
+		N_("&Step up");
+		N_("Step &down");
 	}
 };

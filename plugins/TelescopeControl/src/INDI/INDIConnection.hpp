@@ -30,6 +30,8 @@ class INDIConnection final : public QObject, public INDI::BaseClient
 	Q_OBJECT
 
 public:
+	static const int SLEW_STOP;
+
 	struct Coordinates
 	{
 		double RA = 0.0;
@@ -45,7 +47,27 @@ public:
 	void setPosition(Coordinates coords);
 	bool isDeviceConnected() const;
 	const QStringList devices() const;
+	void moveNorth(int speed);
+	void moveEast(int speed);
+	void moveSouth(int speed);
+	void moveWest(int speed);
 
+signals:
+	void newDeviceReceived(QString name);
+	void removeDeviceReceived(QString name);
+	void serverConnectedReceived();
+	void serverDisconnectedReceived(int exit_code);
+	void speedChanged(int speed);
+
+private:
+	void setSpeed(int speed);
+
+	mutable std::mutex mMutex;
+	INDI::BaseDevice* mTelescope = nullptr;
+	Coordinates mCoordinates;
+	QStringList mDevices;
+
+public: // from INDI::BaseClient
 	void newDevice(INDI::BaseDevice *dp) override;
 	void removeDevice(INDI::BaseDevice *dp) override;
 	void newProperty(INDI::Property *property) override;
@@ -58,18 +80,6 @@ public:
 	void newMessage(INDI::BaseDevice *dp, int messageID) override;
 	void serverConnected() override;
 	void serverDisconnected(int exit_code) override;
-
-signals:
-	void newDeviceReceived(QString name);
-	void removeDeviceReceived(QString name);
-	void serverConnectedReceived();
-	void serverDisconnectedReceived(int exit_code);
-
-private:
-	mutable std::mutex mMutex;
-	INDI::BaseDevice* mTelescope = nullptr;
-	Coordinates mCoordinates;
-	QStringList mDevices;
 };
 
 #endif // INDICONNECTION_HPP

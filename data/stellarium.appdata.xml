@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<component type="desktop">
-  <id>stellarium.desktop</id>
+<?xml version="1.0" encoding="utf-8"?>
+<component type="desktop-application">
+  <id>org.stellarium</id>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Stellarium</name>
@@ -372,6 +372,7 @@
     <p xml:lang="zh-HK">它也可能前往在太陽系其他行星 - 看阿波羅太空人在月球上看到的星空, 還有在泰坦(土星衛星)上看土星環.</p>
     <p xml:lang="zh-TW">它也可以前往在太陽系其他星球 - 看看阿波羅計畫中的太空人在月球上所看到的星空, 還有在土衛六(Titan)上看土星環會是什麼光景。</p>
   </description>
+  <launchable type="desktop-id">stellarium.desktop</launchable>
   <url type="homepage">http://www.stellarium.org/</url>
   <url type="bugtracker">https://github.com/Stellarium/stellarium/issues</url>
   <screenshots>
