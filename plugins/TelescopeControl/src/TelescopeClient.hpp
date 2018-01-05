@@ -95,6 +95,8 @@ public:
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
 
+	virtual QWidget* controlWidget() const { return nullptr; }
+
 protected:
 	TelescopeClient(const QString &name);
 	QString nameI18n;
