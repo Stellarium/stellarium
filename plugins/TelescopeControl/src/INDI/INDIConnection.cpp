@@ -246,6 +246,7 @@ void INDIConnection::newBLOB(IBLOB *bp)
 
 void INDIConnection::newSwitch(ISwitchVectorProperty *svp)
 {
+	std::lock_guard<std::mutex> lock(mMutex);
 	QString name(svp->name);
 	if (name == "TELESCOPE_SLEW_RATE")
 	{
@@ -280,11 +281,13 @@ void INDIConnection::newMessage(INDI::BaseDevice *dp, int messageID)
 
 void INDIConnection::serverConnected()
 {
+	std::lock_guard<std::mutex> lock(mMutex);
 	emit serverConnectedReceived();
 }
 
 void INDIConnection::serverDisconnected(int exit_code)
 {
+	std::lock_guard<std::mutex> lock(mMutex);
 	mDevices.clear();
 	emit serverDisconnectedReceived(exit_code);
 }
