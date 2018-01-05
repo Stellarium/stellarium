@@ -22,7 +22,6 @@ signals:
 	void moveEast(int speed);
 	void moveWest(int speed);
 	void moveSouth(int speed);
-	void move(double angle, double speed);
 
 private slots:
 	void onNorthButtonPressed();
