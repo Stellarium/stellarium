@@ -327,7 +327,8 @@ void SlewDialog::onCurrentTelescopeChanged()
 	auto telescope = currentTelescope();
 	auto controlWidget = telescope->controlWidget(telescope);
 
-	QLayoutItem *child;
+	// remove previous controlWidget
+	QLayoutItem* child;
 	while ((child = ui->controlWidgetLayout->takeAt(0)) != 0)
 	{
 		delete child->widget();
