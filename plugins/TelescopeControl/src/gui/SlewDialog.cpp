@@ -325,7 +325,7 @@ void SlewDialog::onMove(double angle, double speed)
 void SlewDialog::onCurrentTelescopeChanged()
 {
 	auto telescope = currentTelescope();
-	auto controlWidget = telescope->controlWidget(telescope);
+	auto controlWidget = telescope->createControlWidget(telescope);
 
 	// remove previous controlWidget
 	QLayoutItem* child;
