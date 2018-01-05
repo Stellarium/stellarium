@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-02 17:19+0700\n"
+"POT-Creation-Date: 2018-01-05 22:14+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9335,7 +9335,7 @@ msgid "Include dir:"
 msgstr ""
 
 #: src/ui_scriptConsole.h:380
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:329
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:336
 msgid "..."
 msgstr ""
 
@@ -11866,47 +11866,47 @@ msgid "Move a telescope to a given set of coordinates"
 msgstr ""
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1680
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1688
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1682
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1690
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1684
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1692
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable "
 "Set."
 msgstr ""
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1686
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1694
 msgid "Losmandy's G-11 telescope mount."
 msgstr ""
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1688
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1696
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1690
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1698
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1692
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1700
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1694
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1702
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -12842,73 +12842,73 @@ msgstr ""
 msgid "Declination (J2000)"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:262
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:291
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:412
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:276
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:305
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:443
 msgid "Select one"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:321
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:328
 msgid "Slew telescope to"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:323
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:330
 msgid "There are no active devices."
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:324
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 msgid "Slew telescope to coordinates"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:325
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:332
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:326
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:327
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:334
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:338
 msgid "Hours-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:340
 msgid "&HMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:342
 msgid "Degrees-minutes-seconds format"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:344
 msgid "&DMS"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:346
 msgid "Decimal degrees"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:341
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:348
 msgid "D&ecimal"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:349
 msgid "&Slew"
 msgstr ""
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:343
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:350
 msgid "Configure &telescopes..."
 msgstr ""
 
