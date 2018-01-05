@@ -17,12 +17,6 @@ public:
 	explicit INDIControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget *parent = 0);
     ~INDIControlWidget();
 
-signals:
-	void moveNorth(int speed);
-	void moveEast(int speed);
-	void moveWest(int speed);
-	void moveSouth(int speed);
-
 private slots:
 	void onNorthButtonPressed();
 	void onNorthButtonReleased();
