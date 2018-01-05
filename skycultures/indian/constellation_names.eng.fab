@@ -18,94 +18,50 @@
 # names, they have all been translated already.
 # If your skyculture is not a variant of the generally known Western skyculture, please include an
 # English translation to the name given in the native language. Else translators will not be able to
-# translate the name. See a good example in the Mongolian skyculture.
+# translate the name
 
-# Additional notation:
-# Rāśi names are placed within ().
-# Nakṣatra names are placed within [], except for abhijit, which is placed in {}.
 # We use IAST transliteration for unambious transliteration of devanAgarI using latin alphabets, while using phonetically more intuitive equivalents in suggested translations.
 
 ## We've referred to highly regarded sanskrit to sanskrit dictionaries kalpadruma and vAchaspatyam for etymologies below.
 
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Lib	"(Tulā)"	_("Balance (Libra)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Ari	"(Meṣa)"	_("Ram (Aries)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Cnc	"(Karkaṭa)"	_("Crab (Cancer)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Cap	"(Makara)"	_("Crocodile (Capricornus)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Gem	"(Mithuna)"	_("Twins (Geminii)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Leo	"(Siṃha)"	_("Lion (Leo)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Psc	"(Mīna)"	_("Fish (Pisces)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Sgr	"(Dhanuṣ)"	_("Bow (Sagittarius)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Sco	"(Vṛścikā)"	_("Scorpion (Scorpio)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Tau	"(Vṛṣa)"	_("Bull (Taurus)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Aqr	"(Kumbha)"	_("Pot (Aquarius)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Vir	"(Kanyā)"	_("Virgin (Virgo)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-Uma	"Saptarṣi"	_("Seven Sages (Ursa Major)")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N01	"[Aśvinī]"	_("Divine twins [Ashvinii]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N02	"[Bharaṇī]"	_("[Bharanii]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N03	"[Kṛttikā]"	_("[Krittikaa]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N04	"[Rohiṇī]"	_("Riser [Rohinii]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N05	"[Mgṛaśiras]"	_("Deer head [Mgṛaśiras]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N06	"[Ārdrā]"	_("Wet [Aardraa]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N07	"[Punarvasū]"	_("Re-enricher [Punarvasu]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N08	"[Puṣya]"	_("Nourisher [Pushya]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N09	"[Āśleṣā]"	_("Unembracing [Ashlesha]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N10	"[Magha]"	_("Magha")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N11	"[Pūrva-Phalguni]"	_("Earlier Phalguni [Purva Phalguni]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N12	"[Uttara-Phalguni]"	_("Later Phalguni [Uttara Phalguni]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N13	"[Hastā]"	_("Hand [Hastaa]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N14	"[Citrā]"	_("Chitraa")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N15	"[Svāti]"	_("Svaati")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N16	"[Viśākhā]"	_("Vishaakhaa")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N17	"[Anurādhā]"	_("After vishaakhaa [Anuraadhaa]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N18	"[Jyeṣṭhā]"	_("Elder [Jyeshthaa]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N19	"[Mūla]"	_("Root [Muula]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N20	"[Pūrva-Aṣāḍha]"	_("Earlier AshaaDha [Purva Ashaadha]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N21	"[Uttara-Aṣāḍha]"	_("Later AshaaDha [Uttara Ashaadha]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N22	"[Śravaṇa]"	_("Ear [Shravana]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N23	"[Śraviṣṭhā/ Dhaniṣṭhā]"	_("Most prosperous [Dhanisthaa]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N24	"[Śatabhiṣā]"	_("Hundred cures [Shatabhishaa]")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N25	"[Pūrava-Bhādrapada]"	_("Earlier Bhaadrapada")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N26	"[Uttara-Bhādrapada]"	_("Later Bhaadrapada")
-# TRANSLATORS: Special notation: Rāśi names are placed within () while Nakṣatra names are within [].
-N27	"[Revatī]"	_("[Revatii]")
-# TRANSLATORS: {} denotes that Abhijit is a special "extra" lunar mansion.
-N28	"{Abhijit}"	_("Abhijit")
+# TRANSLATORS: Horse headed twin son of The Sun
+N01	"Aśvinī"		_("Twin physician of Gods")
+# TRANSLATORS: Bearer of life
+N02	"Bharanī"		_("She who bears")
+# TRANSLATORS: kartiikeya - Son of Lord Shiva
+N03	"Kṛittikā"		_("Nurses of kartiikeya")
+# TRANSLATORS: Deer avatar of Uṣa or Dwan
+N04	"Rohiṇī"		_("The spirited one")
+# TRANSLATORS: Deer avatar of King Prajapati
+N05	"Mṛgaśirā"		_("The deer's head")
+# TRANSLATORS: Rudra, Lord Shiva
+N06	"Ārdrā"			_("The moist one")
+N07	"Punarvasu"		_("The restorers of goods")
+N08	"Puṣyā"			_("The nourisher")
+N09	"Aśleṣā"		_("The embrace")
+N10	"Maghā"			_("The bountiful one")
+# TRANSLATORS: phālgun - Red
+N11	"Pūrba phālgunī"	_("The former red one")
+# TRANSLATORS: phālgun - Red
+N12	"Uttara phālgunī"	_("The latter red one")
+N13	"Hasta"			_("The hand")
+N14	"Chitrā"		_("The bright one")
+N15	"Svātī"			_("The honest one")
+# TRANSLATORS: One of the best friend of Radha
+N16	"Viśākhā"		_("The gifted one")
+# TRANSLATORS: Radha - companion of Lord Krishna
+N17	"Anurādhā"		_("Folowers of Radha")
+N18	"Jyeṣṭhā"		_("The eldest one")
+# TRANSLATORS: Origin
+N19	"Mulā"			_("The root")
+# TRANSLATORS: āṣāṛā - Roar
+N20	"Pūrba āṣāṛā"		_("The former undefeated one")
+# TRANSLATORS: āṣāṛā - Roar
+N21	"Uttara āṣāṛā"		_("The latter undefeated one")
+N22	"Śrabaṇā"		_("The Ear")
+N23	"Dhaniṣṭhā"		_("The most famous one")
+N24	"Śatabhiṣā"		_("hundred cures")
+N25	"Pūrba bhādrapada"	_("The first of the blessed feet")
+N26	"Uttara bhādrapada"	_("The second of the blessed feet")
+N27	"Revatī"		_("The prosperous one")
+N28	"Abhijit"		_("The invincible one")
