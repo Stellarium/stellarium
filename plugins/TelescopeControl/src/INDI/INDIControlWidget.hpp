@@ -3,6 +3,8 @@
 
 #include <QWidget>
 
+#include "TelescopeClient.hpp"
+
 namespace Ui {
 class INDIControlWidget;
 }
@@ -12,7 +14,7 @@ class INDIControlWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit INDIControlWidget(QWidget *parent = 0);
+	explicit INDIControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget *parent = 0);
     ~INDIControlWidget();
 
 signals:
@@ -36,6 +38,7 @@ private:
 	double speed() const;
 
     Ui::INDIControlWidget *ui;
+	QSharedPointer<TelescopeClient> mTelescope;
 };
 
 #endif // INDICONTROLWIDGET_HPP

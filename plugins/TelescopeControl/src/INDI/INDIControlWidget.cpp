@@ -1,9 +1,10 @@
 #include "INDIControlWidget.hpp"
 #include "ui_INDIControlWidget.h"
 
-INDIControlWidget::INDIControlWidget(QWidget *parent) :
+INDIControlWidget::INDIControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::INDIControlWidget)
+	ui(new Ui::INDIControlWidget),
+	mTelescope(telescope)
 {
     ui->setupUi(this);
 
@@ -24,42 +25,42 @@ INDIControlWidget::~INDIControlWidget()
 
 void INDIControlWidget::onNorthButtonPressed()
 {
-	emit move(0, speed());
+	mTelescope->move(0, speed());
 }
 
 void INDIControlWidget::onNorthButtonReleased()
 {
-	emit move(0, 0);
+	mTelescope->move(0, 0);
 }
 
 void INDIControlWidget::onEastButtonPressed()
 {
-	emit move(90, speed());
+	mTelescope->move(90, speed());
 }
 
 void INDIControlWidget::onEastButtonReleased()
 {
-	emit move(90, 0);
+	mTelescope->move(90, 0);
 }
 
 void INDIControlWidget::onSouthButtonPressed()
 {
-	emit move(180, speed());
+	mTelescope->move(180, speed());
 }
 
 void INDIControlWidget::onSouthButtonReleased()
 {
-	emit move(180, 0);
+	mTelescope->move(180, 0);
 }
 
 void INDIControlWidget::onWestButtonPressed()
 {
-	emit move(270, speed());
+	mTelescope->move(270, speed());
 }
 
 void INDIControlWidget::onWestButtonReleased()
 {
-	emit move(270, 0);
+	mTelescope->move(270, 0);
 }
 
 double INDIControlWidget::speed() const
