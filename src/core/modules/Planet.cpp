@@ -299,10 +299,10 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		vMagAlgorithmMap.clear();
 	}
-	vMagAlgorithmMap.insert(Planet::Expl_Sup_2013,	"ExpSup2013");
-	vMagAlgorithmMap.insert(Planet::Expl_Sup_1992,	"ExpSup1992");
+	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_2013,	"ExpSup2013");
+	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_1992,	"ExpSup1992");
 	vMagAlgorithmMap.insert(Planet::Mueller_1893,	"Mueller1893"); // better name	
-	vMagAlgorithmMap.insert(Planet::Astr_Alm_1984,	"AstrAlm1984"); // consistent name
+	vMagAlgorithmMap.insert(Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"); // consistent name
 	vMagAlgorithmMap.insert(Planet::Generic,	"Generic"),	
 	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
 }
@@ -1366,7 +1366,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		switch (Planet::getApparentMagnitudeAlgorithm())
 		{
 			case UndefinedAlgorithm:	// The most recent solution should be activated by default			
-			case Expl_Sup_2013:
+			case ExplanatorySupplement_2013:
 			{
 				// GZ2017: This is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 2013 (chap. 10.3)
 				// AW2017: Updated data from Errata in The Explanatory Supplement to the Astronomical Almanac (3rd edition, 1st printing)
@@ -1427,7 +1427,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 				break;
 			}
 
-			case Expl_Sup_1992:
+			case ExplanatorySupplement_1992:
 			{
 				// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
 				// GZ2016: Actually, this is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 1992! (chap. 7.12)
@@ -1470,9 +1470,11 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
+
 			case Mueller_1893:
 			{
 				// (1)
+				// Publicationen des Astrophysikalischen Observatoriums zu Potsdam, 8, 366, 1893.
 				if (englishName=="Mercury")
 				{
 					double ph50=phaseDeg-50.0;
@@ -1510,7 +1512,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
-			case Astr_Alm_1984:
+			case AstronomicalAlmanac_1984:
 			{
 				// (2)
 				if (englishName=="Mercury")
@@ -3159,5 +3161,5 @@ void Planet::update(int deltaTime)
 void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 {
 	// sync default value with ViewDialog and SolarSystem!
-	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::Expl_Sup_2013);
+	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::ExplanatorySupplement_2013);
 }

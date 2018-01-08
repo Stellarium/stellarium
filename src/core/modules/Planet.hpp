@@ -60,13 +60,13 @@ class RotationElements
 {
 public:
 	RotationElements(void) : period(1.), offset(0.), epoch(J2000), obliquity(0.), ascendingNode(0.), precessionRate(0.), siderealPeriod(0.) {}
-	float period;          // (sidereal) rotation period [earth days]
-	float offset;          // rotation at epoch  [degrees]
-	double epoch;          // JDE (JD TT) of epoch for these elements
-	float obliquity;       // tilt of rotation axis w.r.t. ecliptic [radians]
-	float ascendingNode;   // long. of ascending node of equator on the ecliptic [radians]
-	float precessionRate;  // rate of precession of rotation axis in [rads/JulianCentury(36525d)]
-	double siderealPeriod; // sidereal period (Planet year or a moon's sidereal month) [earth days]
+	float period;			// (sidereal) rotation period [earth days]
+	float offset;			// rotation at epoch  [degrees]
+	double epoch;			// JDE (JD TT) of epoch for these elements
+	float obliquity;			// tilt of rotation axis w.r.t. ecliptic [radians]
+	float ascendingNode;		// long. of ascending node of equator on the ecliptic [radians]
+	float precessionRate;		// rate of precession of rotation axis in [rads/JulianCentury(36525d)]
+	double siderealPeriod;		// sidereal period (Planet year or a moon's sidereal month) [earth days]
 };
 
 // Class to manage rings for planets like saturn
@@ -99,21 +99,21 @@ public:
 	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
 	{
-		isStar,			// ssystem.ini: type="star"
+		isStar,		// ssystem.ini: type="star"
 		isPlanet,		// ssystem.ini: type="planet"
-		isMoon,			// ssystem.ini: type="moon"
-		isObserver,		// ssystem.ini: type="observer"
+		isMoon,		// ssystem.ini: type="moon"
+		isObserver,	// ssystem.ini: type="observer"
 		isArtificial,		// Used in transitions from planet to planet.
 		isAsteroid,		// ssystem.ini: type="asteroid". all types >= isAsteroid are "Minor Bodies".
 					// Put other things (spacecraft etc) before isAsteroid.
 		isPlutino,		// ssystem.ini: type="plutino"
 		isComet,		// ssystem.ini: type="comet"
-		isDwarfPlanet,		// ssystem.ini: type="dwarf planet"
-		isCubewano,		// ssystem.ini: type="cubewano"
-		isSDO,			// ssystem.ini: type="scattered disc object"
-		isOCO,			// ssystem.ini: type="oco"
+		isDwarfPlanet,	// ssystem.ini: type="dwarf planet"
+		isCubewano,	// ssystem.ini: type="cubewano"
+		isSDO,		// ssystem.ini: type="scattered disc object"
+		isOCO,		// ssystem.ini: type="oco"
 		isSednoid,		// ssystem.ini: type="sednoid"
-		isUNDEFINED		// ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
+		isUNDEFINED	// ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
 
 	enum PlanetOrbitColorStyle
@@ -125,10 +125,10 @@ public:
 
 	enum ApparentMagnitudeAlgorithm
 	{
-		Mueller_1893,		// G. Mueller, based on visual observations 1877-91. [Expl.Suppl.1961]
-		Astr_Alm_1984,		// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
-		Expl_Sup_1992,		// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
-		Expl_Sup_2013,		// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
+		Mueller_1893,				// G. Mueller, based on visual observations 1877-91. [Explanatory Supplement to the Astronomical Almanac, 1961]
+		AstronomicalAlmanac_1984,	// Astronomical Almanac 1984 and later. These give V (instrumental) magnitudes (allegedly from D.L. Harris, but this is wrong!)
+		ExplanatorySupplement_1992,	// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional) (Was called "Planesas")
+		ExplanatorySupplement_2013,	// Explanatory Supplement to the Astronomical Almanac, 3rd edition 2013
 		UndefinedAlgorithm,
 		Generic			// Visual magnitude based on phase angle and albedo. The formula source for this is totally unknown!
 	};

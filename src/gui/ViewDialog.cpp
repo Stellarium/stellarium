@@ -238,7 +238,7 @@ void ViewDialog::createDialogContent()
 	if (idx==-1)
 	{
 		// Use ExplanSupl2013 as default
-		idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::Expl_Sup_2013, Qt::UserRole, Qt::MatchCaseSensitive);
+		idx = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::ExplanatorySupplement_2013, Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->planetMagnitudeAlgorithmComboBox->setCurrentIndex(idx);
 	connect(ui->planetMagnitudeAlgorithmComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setPlanetMagnitudeAlgorithm(int)));
@@ -1602,9 +1602,9 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 	algorithms->clear();
 	//For each algorithm, display the localized name and store the key as user data.
 	algorithms->addItem(qc_("G. Mueller (1893)", "magnitude algorithm"), Planet::Mueller_1893);
-	algorithms->addItem(qc_("Astronomical Almanach (1984)", "magnitude algorithm"), Planet::Astr_Alm_1984);
-	algorithms->addItem(qc_("Explanatory Supplement (1992)", "magnitude algorithm"), Planet::Expl_Sup_1992);
-	algorithms->addItem(qc_("Explanatory Supplement (2013)", "magnitude algorithm"), Planet::Expl_Sup_2013);
+	algorithms->addItem(qc_("Astronomical Almanach (1984)", "magnitude algorithm"), Planet::AstronomicalAlmanac_1984);
+	algorithms->addItem(qc_("Explanatory Supplement (1992)", "magnitude algorithm"), Planet::ExplanatorySupplement_1992);
+	algorithms->addItem(qc_("Explanatory Supplement (2013)", "magnitude algorithm"), Planet::ExplanatorySupplement_2013);
 	algorithms->addItem(qc_("Generic", "magnitude algorithm"), Planet::Generic);
 	//Restore the selection
 	index = algorithms->findData(selectedAlgorithmId, Qt::UserRole, Qt::MatchCaseSensitive);
@@ -1626,20 +1626,20 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmDescription()
 	if (currentAlgorithm==-1)
 	{
 		// Use ExplanSupl2013 as default
-		currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::Expl_Sup_2013, Qt::UserRole, Qt::MatchCaseSensitive);
+		currentAlgorithm = ui->planetMagnitudeAlgorithmComboBox->findData(Planet::ExplanatorySupplement_2013, Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	QString info = "";
 	switch (currentAlgorithm) {
-		case Planet::Astr_Alm_1984:
+		case Planet::AstronomicalAlmanac_1984:
 			info = q_("The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) and gives V (instrumental) magnitudes (allegedly from D.L. Harris).");
 			break;
 		case Planet::Mueller_1893:
 			info = q_("The algorithm is based on visual observations 1877-1891 by G. Mueller and was published in <em>Explanatory Supplement to the Astronomical Ephemeris</em> (1961).");
 			break;
-		case Planet::Expl_Sup_1992:
+		case Planet::ExplanatorySupplement_1992:
 			info = q_("The algorithm was published in the <em>Explanatory Supplement to the Astronomical Almanac</em> (1992).");
 			break;
-		case Planet::Expl_Sup_2013:
+		case Planet::ExplanatorySupplement_2013:
 			info = q_("The algorithm was published in the 3rd edition of the <em>Explanatory Supplement to the Astronomical Almanac</em> (2013).");
 			break;
 		default:
