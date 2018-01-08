@@ -642,7 +642,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
 			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
 			if (eclipseFactor>1.e-7) // needed to avoid false display of 1e-14 or so.
+			{
 				oss << QString("%1: %2%").arg(q_("Eclipse Factor")).arg(QString::number(eclipseFactor, 'f', 2)) << "<br />";
+				if (core->getCurrentPlanet()==ssystem->getEarth())
+				{
+					PlanetP moon = ssystem->getMoon();
+					const float eclipseMagnitude = (0.5*angularSize + (moon->getAngularSize(core)*M_PI/180.)/moon->getInfoMap(core)["scale"].toFloat() - getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)))/angularSize;
+					oss << QString("%1: %2").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3)) << "<br />";
+				}
+			}
 
 		}
 	}
@@ -675,6 +683,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		// TBD: Is there ANY reason to keep "type"="Planet" and add a "ptype"=getPlanetTypeString() field?
 		map.insert("velocity", getEclipticVelocity().toString());
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
+		map.insert("scale", sphereScale);
 
 	}
 
