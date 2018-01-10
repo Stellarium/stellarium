@@ -563,6 +563,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	double siderealDay = getSiderealDay();
 	if (flags&Extra)
 	{
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		PlanetP earth = ssystem->getEarth();
+		bool onEarth = (core->getCurrentPlanet()==earth);
+
 		// This is a string you can activate for debugging. It shows the distance between observer and center of the body you are standing on.
 		// May be helpful for debugging critical parallax corrections for eclipses.
 		// For general use, find a better location first.
@@ -588,13 +592,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 			const double elongation = getElongation(observerHelioPos);
 			QString moonPhase = "";
-			if (englishName=="Moon" && core->getCurrentLocation().planetName=="Earth")
+			if (englishName=="Moon" && onEarth)
 			{
-				double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
+				double eclJDE = earth->getRotObliquity(core->getJDE());
 				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
 				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, GETSTELMODULE(SolarSystem)->searchByEnglishName("Sun")->getEquinoxEquatorialPos(core));
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
 				int deltaLong = (int)(lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI);
 				if (deltaLong<0) deltaLong+=360;
@@ -636,15 +640,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << QString("%1: %2").arg(q_("Phase"), moonPhase) << "<br />";
 
 		}
+
 		if (englishName=="Sun")
 		{
 			// Only show during eclipse, show percent?
-			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			float eclipseObscuration = 100.f*(1.f-ssystem->getEclipseObscuration(core));
+			float eclipseObscuration = 100.f*(1.f-ssystem->getEclipseFactor(core));
 			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
 			{
 				oss << QString("%1: %2%").arg(q_("Eclipse obscuration")).arg(QString::number(eclipseObscuration, 'f', 2)) << "<br />";
-				if (core->getCurrentPlanet()==ssystem->getEarth())
+				if (onEarth)
 				{
 					PlanetP moon = ssystem->getMoon();
 					const float eclipseMagnitude = (0.5*angularSize + (moon->getAngularSize(core)*M_PI/180.)/moon->getInfoMap(core)["scale"].toFloat() - getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)))/angularSize;
@@ -1294,7 +1298,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 		// check how much of it is visible
 		const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
-		double shadowFactor = ssm->getEclipseObscuration(core);
+		double shadowFactor = ssm->getEclipseFactor(core);
 		// See: Hughes, D. W., Brightness during a solar eclipse // Journal of the British Astronomical Association, vol.110, no.4, p.203-205
 		// URL: http://adsabs.harvard.edu/abs/2000JBAA..110..203H
 		if(shadowFactor < 0.000128)
@@ -1596,7 +1600,7 @@ void Planet::draw(StelCore* core, float maxMagLabels, const QFont& planetNameFon
 	{
 		// Get the eclipse factor to avoid hiding the Moon during a total solar eclipse.
 		// Details: https://answers.launchpad.net/stellarium/+question/395139
-		if (GETSTELMODULE(SolarSystem)->getEclipseObscuration(core)==1.0)
+		if (GETSTELMODULE(SolarSystem)->getEclipseFactor(core)==1.0)
 			return;
 	}
 
@@ -2280,7 +2284,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
 		{
-			float eclipseFactor = ssm->getEclipseObscuration(core);
+			float eclipseFactor = ssm->getEclipseFactor(core);
 			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
 			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));
 			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha);

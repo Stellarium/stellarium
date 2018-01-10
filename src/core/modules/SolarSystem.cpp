@@ -2432,7 +2432,7 @@ QString SolarSystem::getOrbitColorStyle() const
 	return r;
 }
 
-double SolarSystem::getEclipseObscuration(const StelCore* core) const
+double SolarSystem::getEclipseFactor(const StelCore* core) const
 {
 	Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
 	Vec3d P3 = core->getObserverHeliocentricEclipticPos();

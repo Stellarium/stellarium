@@ -872,7 +872,7 @@ public:
 	bool removeMinorPlanet(QString name);
 
 	//! Determines relative amount of sun visible from the observer's position.
-	double getEclipseObscuration(const StelCore *core) const;
+	double getEclipseFactor(const StelCore *core) const;
 
 	//! Compute the position and transform matrix for every element of the solar system.
 	//! @param dateJDE the Julian Day in JDE (Ephemeris Time or equivalent)	
