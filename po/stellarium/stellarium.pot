@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-05 22:57+0700\n"
+"POT-Creation-Date: 2018-01-10 21:59+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1749,96 +1749,100 @@ msgstr ""
 msgid "Apparent diameter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:572 src/core/modules/MinorPlanet.cpp:374
+#: src/core/modules/Planet.cpp:576 src/core/modules/MinorPlanet.cpp:374
 #: src/core/modules/StarWrapper.cpp:258
 msgctxt "duration"
 msgid "days"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:574 src/core/modules/MinorPlanet.cpp:376
+#: src/core/modules/Planet.cpp:578 src/core/modules/MinorPlanet.cpp:376
 #: src/core/modules/Comet.cpp:254
 msgid "Sidereal period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:578
+#: src/core/modules/Planet.cpp:582
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:579
+#: src/core/modules/Planet.cpp:583
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:583
+#: src/core/modules/Planet.cpp:587
 msgid "The period of rotation is chaotic"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:602
-msgctxt "Moon phase"
-msgid "Waxing Crescent"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:604
-msgctxt "Moon phase"
-msgid "First Quarter"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:606
 msgctxt "Moon phase"
-msgid "Waxing Gibbous"
+msgid "Waxing Crescent"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:608
 msgctxt "Moon phase"
-msgid "Full Moon"
+msgid "First Quarter"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:610
 msgctxt "Moon phase"
-msgid "Waning Gibbous"
+msgid "Waxing Gibbous"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:612
 msgctxt "Moon phase"
-msgid "Third Quarter"
+msgid "Full Moon"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:614
 msgctxt "Moon phase"
-msgid "Waning Crescent"
+msgid "Waning Gibbous"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:616
 msgctxt "Moon phase"
+msgid "Third Quarter"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:618
+msgctxt "Moon phase"
+msgid "Waning Crescent"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:620
+msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:631 src/core/modules/MinorPlanet.cpp:394
+#: src/core/modules/Planet.cpp:635 src/core/modules/MinorPlanet.cpp:394
 #: src/core/modules/Comet.cpp:277 src/gui/AstroCalcDialog.cpp:2019
 #: src/gui/AstroCalcDialog.cpp:2054
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:632 src/core/modules/MinorPlanet.cpp:395
+#: src/core/modules/Planet.cpp:636 src/core/modules/MinorPlanet.cpp:395
 #: src/core/modules/Comet.cpp:278 src/gui/AstroCalcDialog.cpp:2009
 #: src/gui/AstroCalcDialog.cpp:2044
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:633
+#: src/core/modules/Planet.cpp:637
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:634
+#: src/core/modules/Planet.cpp:638
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:636 src/gui/AstroCalcDialog.cpp:1999
+#: src/core/modules/Planet.cpp:640 src/gui/AstroCalcDialog.cpp:1999
 #: src/gui/AstroCalcDialog.cpp:2034
 msgid "Phase"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:645
-msgid "Eclipse Factor"
+#: src/core/modules/Planet.cpp:650
+msgid "Eclipse obscuration"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:655
+msgid "Eclipse magnitude"
 msgstr ""
 
 #: src/core/modules/MinorPlanet.cpp:228
