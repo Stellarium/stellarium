@@ -814,7 +814,7 @@ void S3DRenderer::calculateLighting()
 {
 	//calculate which light source we need + intensity
 	float ambientBrightness, directionalBrightness,emissiveFactor;
-	float eclipseFactor=GETSTELMODULE(SolarSystem)->getEclipseFactor(StelApp::getInstance().getCore());
+	float eclipseFactor=GETSTELMODULE(SolarSystem)->getEclipseObscuration(StelApp::getInstance().getCore());
 
 	Vec3d sunPosition = sun->getAltAzPosAuto(core);
 	sunPosition.normalize();

@@ -2375,7 +2375,7 @@ bool StelCore::isBrightDaylight() const
 	const Vec3d& sunPos = ssys->getSun()->getAltAzPosGeometric(this);
 	if (sunPos[2] > -0.10452846326) // Nautical twilight (sin (6 deg))
 		r = true;
-	if (ssys->getEclipseFactor(this)<=0.01) // Total solar eclipse
+	if (ssys->getEclipseObscuration(this)<=0.01) // Total solar eclipse
 		r = false;
 	return r;
 }
