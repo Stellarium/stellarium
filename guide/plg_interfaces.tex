@@ -292,12 +292,12 @@ given in section~\ref{sec:plugins:TUI:commands}.
 \label{sec:plugins:TUI:commands}
 \begin{longtable}{l|p{45mm}|p{85mm}}
 \toprule
-1   & Location & (menu group)\\\midrule
+1   & Location & (menu group)\\%\midrule
 1.1 & Latitude & Set the latitude of the observer in degrees\\%\midrule
 1.2 & Longitude & Set the longitude of the observer in degrees\\%\midrule
 1.3 & Altitude & Set the altitude of the observer in meters\\%\midrule
 1.4 & Solar System Body & Select the solar system body on which the observer is\\\midrule
-2   & Set Time & (menu group)\\\midrule
+2   & Set Time & (menu group)\\%\midrule
 2.1 & Current date/time & Set the time and date for which Stellarium will generate the view\\%\midrule
 %2.2 & Set Time Zone & Set the time zone. Zones are split into continent or region, and then by city or province\\\midrule
 %2.3 & Days keys & The setting ``Calendar'' makes the \key{-}, \key{=}, \key{[}, \key{]} keys change the date value by calendar days (multiples of 24 hours). 
@@ -311,42 +311,43 @@ given in section~\ref{sec:plugins:TUI:commands}.
                             or it is possible to select ``yyyymmdd'', ``ddmmyyyy'' or ``mmddyyyy'' modes\\%\midrule
 2.7 & Time Display Format & Change how Stellarium formats time values. ``system\_default'' takes the format from the computer settings, 
                             or it is possible to select ``24h'' or ``12h'' clock modes\\\midrule
-3    & General      & (menu group)\\\midrule
+3    & General      & (menu group)\\%\midrule
 3.1  & Starlore     & Select the sky culture to use (changes constellation lines, names, artwork)\\%\midrule
 3.2  & Sky Language & Change the language used to describe objects in the sky\\%\midrule
 3.3  & App Language & Change the application language (used in GUIs) \\\midrule
-4    & Stars          & (menu group)\\\midrule
+4    & Stars          & (menu group)\\%\midrule
 4.1  & Show stars     & Turn on/off star rendering\\%\midrule
 4.2  & Relative Scale & Change the relative brightness of the stars. Larger values make bright stars much larger.\\%\midrule
 4.3  & Absolute Scale & Change the absolute brightness of the stars. Large values show more stars. Leave at 1 for realistic views. \\%\midrule
 4.4  & Twinkle        & Sets how strong the star twinkling effect is - zero is off, the higher the value the more the stars will twinkle.\\\midrule
-5    & Colors                      & (menu group)\\\midrule
-5.1  & Constellation lines         & Changes the colour of the constellation lines\\%\midrule
-5.2  & Constellation labels        & Changes the colour of the labels used to name stars\\%\midrule
-5.3  & Art brightness              & Changes the brightness of the constellation art\\%\midrule
-5.4  & Constellation boundaries    & Changes the colour of the constellation boundary lines\\%\midrule
-5.5  & Cardinal points             & Changes the colour of the cardinal points markers\\%\midrule
-5.6  & Planet labels               & Changes the colour of the labels for planets\\%\midrule
-5.7  & Planet orbits               & Changes the colour of the orbital guide lines for planets\\%\midrule
-5.8  & Planet trails               & Changes the colour of the planet trails lines\\%\midrule
-5.9  & Meridian Line               & Changes the colour of the meridian line\\%\midrule
-5.10 & Azimuthal Grid              & Changes the colour of the lines and labels for the azimuthal grid\\%\midrule
-5.11 & Equatorial Grid             & Changes the colour of the lines and labels for the equatorial grid\\%\midrule
-5.12 & Equatorial J2000 Grid       & Changes the colour of the lines and labels for the equatorial J2000.0 grid\\%\midrule
-5.13 & Equator Line                & Changes the colour of the equator line\\%\midrule
-5.14 & Ecliptic Line               & Changes the colour of the ecliptic line\\%\midrule
-5.15 & Ecliptic Line (J2000)       & Changes the colour of the J2000 ecliptic line\\%\midrule
-5.16 & Nebula names                & Changes the colour of the labels for nebulae\\%\midrule
-5.17 & Nebula hints                & Changes the colour of the circles used to denote the positions of unspecified nebulae\\%\midrule
-5.18 & Galaxy hints                & Changes the colour of the ellipses used to denote the positions of galaxies\\%\midrule
-5.19 & Bright nebula hints         & Changes the colour of the squares used to denote the positions of bright nebulae\\%\midrule
-5.20 & Dark nebula hints           & Changes the colour of the squares used to denote the positions of dark nebulae\\%\midrule
-5.21 & Clusters hints              & Changes the colour of the symbols used to denote the positions of clusters\\%\midrule
-5.22 & Horizon line                & Changes the colour of the horizon line\\%\midrule
-5.23 & Galactic grid               & Changes the colour of the galactic grid\\%\midrule
-5.24 & Galactic equator line       & Changes the colour of the galactic equator line\\%\midrule
-5.25 & Opposition/conjunction longitude line  & Changes the colour of the opposition/conjunction line\\\midrule
-6    & Effects & (menu group)\\\midrule
+5    & Colors                      & (menu group) change color/brightness of the\ldots\\%\midrule
+5.1  & Constellation lines         & constellation lines\\%\midrule
+5.2  & Constellation labels        & labels used to name stars\\%\midrule
+5.3  & Art brightness              & constellation art\\%\midrule
+5.4  & Constellation boundaries    & constellation boundary lines\\%\midrule
+5.5  & Cardinal points             & cardinal points markers\\%\midrule
+5.6  & Planet labels               & labels for planets\\%\midrule
+5.7  & Planet orbits               & orbital guide lines for planets\\%\midrule
+5.8  & Planet trails               & planet trails lines\\%\midrule
+5.9  & Meridian Line               & meridian line\\%\midrule
+5.10 & Azimuthal Grid              & lines and labels for the azimuthal grid\\%\midrule
+5.11 & Equatorial Grid             & lines and labels for the equatorial grid\\%\midrule
+5.12 & Equatorial J2000 Grid       & lines and labels for the equatorial J2000.0 grid\\%\midrule
+5.13 & Equator Line                & equator line\\%\midrule
+5.14 & Ecliptic Line               & ecliptic line\\%\midrule
+5.15 & Ecliptic Line (J2000)       & J2000 ecliptic line\\%\midrule
+5.16 & Nebula names                & labels for nebulae\\%\midrule
+5.17 & Nebula hints                & circles  used to mark positions of unspecified nebulae\\%\midrule
+5.18 & Galaxy hints                & ellipses used to mark positions of galaxies\\%\midrule
+5.19 & Bright nebula hints         & squares  used to mark positions of bright nebulae\\%\midrule
+5.20 & Dark nebula hints           & squares  used to mark positions of dark nebulae\\%\midrule
+5.21 & Clusters hints              & symbols  used to mark positions of clusters\\%\midrule
+5.22 & Horizon line                & horizon line\\%\midrule
+5.23 & Galactic grid               & galactic grid\\%\midrule
+5.24 & Galactic equator line       & galactic equator line\\%\midrule
+5.25 & Opposition/conjunction longitude line  & opposition/conjunction line\\
+5.26 & Sky background              & sky background. Note that anything but black is only useful for artistic works.\\\midrule
+6    & Effects & (menu group)\\%\midrule
 6.1  & Light Pollution & Changes the intensity of the light pollution (see Appendix~\ref{ch:BortleScale} Bortle Scale index)\\%\midrule
 6.2  & Landscape       & Select the landscape which Stellarium draws when ground drawing is enabled. Press \key{\return} to activate.\\%\midrule
 6.3  & Setting Landscape Sets Location & If ``Yes'' then changing the landscape will move the observer location to the location for that landscape (if one is known). 
@@ -360,12 +361,12 @@ given in section~\ref{sec:plugins:TUI:commands}.
 %6.6 & Nebula label frequency     & Changes the magnitude limit for labelling of nebulae\\\midrule
 %6.6 & Nebula label frequency     & (not active) \\\midrule
 %6.8 & Cursor Timeout             & Sets the number of seconds of mouse inactivity before the cursor vanishes\\\midrule
-7    & Scripts                    & (menu group)\\\midrule
+7    & Scripts                    & (menu group)\\%\midrule
 7.1  & Run local script           & Run a script from the scripts sub-directory of the User Directory or Installation Directory 
                                    (see section~\ref{sec:FilesAndDirectories} (Files and Directories))\\%\midrule
 7.1  & Stop running script        & Stop execution of a currently running script \\\midrule
 %7.2 & CD/DVD Script              & Run a script from a CD or DVD (only used in planetarium set-ups)\\\midrule
-8    & Administration             & (menu group)\\\midrule
+8    & Administration             & (menu group)\\%\midrule
 8.1  & Load default configuration & Reset all settings according to the main configuration file\\%\midrule
 8.2  & Save current configuration & Save the current settings to the main configuration file\\%\midrule
 8.3  & Shutdown                   & Emits a command configured in \\\midrule

@@ -28,6 +28,7 @@
 #ifdef OPENGL_DEBUG_LOGGING
 #include <QOpenGLDebugMessage>
 #endif
+#include "StelUtils.hpp"
 
 class StelGLWidget;
 class StelGraphicsScene;
@@ -53,7 +54,7 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
-
+	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
 
 public:
 	//! Contains some basic info about the OpenGL context used
@@ -167,6 +168,11 @@ public slots:
 	//! Get the state of the flag of usage background for GUI buttons
 	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
 
+	//! Set the sky background color. (Actually forwards to the StelRootItem.)  Everything else than black creates an work of art!
+	void setSkyBackgroundColor(Vec3f color);
+	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates an work of art!
+	Vec3f getSkyBackgroundColor();
+
 protected:
 	//! Hack to determine current monitor pixel ratio
 	//! @todo Find a better way to handle this
@@ -195,6 +201,7 @@ signals:
 	void flagInvertScreenShotColorsChanged(bool b);
 	void flagOverwriteScreenshotsChanged(bool b);
 	void flagUseButtonsBackgroundChanged(bool b);
+	void skyBackgroundColorChanged(Vec3f color);
 	void flagCursorTimeoutChanged(bool b);
 	void cursorTimeoutChanged(double t);
 

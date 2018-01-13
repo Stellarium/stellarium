@@ -189,7 +189,7 @@ void MilkyWay::draw(StelCore* core)
 
 	StelPainter sPainter(prj);
 	sPainter.setCullFace(true);
-	sPainter.setBlending(false);
+	sPainter.setBlending(true, GL_ONE, GL_ONE); // allow colored sky background
 	tex->bind();
 	sPainter.drawStelVertexArray(*vertexArray);
 	sPainter.setCullFace(false);

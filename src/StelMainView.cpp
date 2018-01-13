@@ -311,7 +311,9 @@ class StelRootItem : public QGraphicsObject
 {
 public:
 	StelRootItem(StelMainView* mainView, QGraphicsItem* parent = Q_NULLPTR)
-		: QGraphicsObject(parent), mainView(mainView)
+		: QGraphicsObject(parent),
+		  mainView(mainView),
+		  skyBackgroundColor(0.f,0.f,0.f)
 	{
 		setFlag(QGraphicsItem::ItemClipsToShape);
 		setFlag(QGraphicsItem::ItemClipsChildrenToShape);
@@ -332,6 +334,13 @@ public:
 		prepareGeometryChange();
 		rect.setSize(size);
 	}
+
+	//! Set the sky background color. Everything else than black creates an work of art!
+	void setSkyBackgroundColor(Vec3f color) { skyBackgroundColor=color; }
+
+	//! Get the sky background color. Everything else than black creates an work of art!
+	Vec3f getSkyBackgroundColor() { return skyBackgroundColor; }
+
 
 protected:
 	virtual void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget) Q_DECL_OVERRIDE
@@ -356,8 +365,9 @@ protected:
 #endif
 		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
 
-		//clear the buffer (not strictly required for us because we repaint all pixels, but should improve perf on tile-based renderers)
-		gl->glClearColor(0,0,0,0); //we also clear alpha to zero
+		//clear the buffer (with black, this would not be strictly required for us because we repaint all pixels, but should improve perf on tile-based renderers)
+		// Here we can set a sky background color if really wanted (art applications. Astronomical sky should be 0/0/0/0)
+		gl->glClearColor(skyBackgroundColor[0], skyBackgroundColor[1], skyBackgroundColor[2], 0.f); //we also clear alpha to zero
 		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		//update and draw
@@ -517,6 +527,7 @@ private:
 	QRectF rect;
 	double previousPaintTime;
 	StelMainView* mainView;
+	Vec3f skyBackgroundColor;           //! color which is used to initialize the frame. Should be black, but for some applications e.g. dark blue may be preferred.
 };
 
 //! Initialize and render Stellarium gui.
@@ -551,7 +562,11 @@ StelMainView::StelMainView(QSettings* settings)
 	  flagOverwriteScreenshots(false),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
-	  flagCursorTimeout(false), maxfps(10000.f)
+	  flagCursorTimeout(false),
+	  flagUseButtonsBackground(true),
+	  lastEventTimeSec(0.0),
+	  minfps(1.f),
+	  maxfps(10000.f)
 {
 	setAttribute(Qt::WA_OpaquePaintEvent);
 	setAttribute(Qt::WA_AcceptTouchEvents);
@@ -586,8 +601,6 @@ StelMainView::StelMainView(QSettings* settings)
 	//because we only want child elements to have focus, we turn it off here
 	setFocusPolicy(Qt::NoFocus);
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
-
-	lastEventTimeSec = 0;
 
 #ifdef OPENGL_DEBUG_LOGGING
 	glLogger = new QOpenGLDebugLogger(this);
@@ -835,6 +848,7 @@ void StelMainView::init()
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
 	setFlagUseButtonsBackground(conf->value("gui/flag_show_buttons_background", true).toBool());
+	setSkyBackgroundColor(StelUtils::strToVec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
 	// plugins, because the gui creates the QActions needed by some plugins.
@@ -1492,4 +1506,18 @@ void StelMainView::glContextMakeCurrent()
 void StelMainView::glContextDoneCurrent()
 {
 	glWidget->doneCurrent();
+}
+
+//! Set the sky background color. Everything else than black creates an work of art!
+void StelMainView::setSkyBackgroundColor(Vec3f color)
+{
+	rootItem->setSkyBackgroundColor(color);
+	StelApp::getInstance().getSettings()->setValue("color/sky_background_color", StelUtils::vec3fToStr(color));
+	emit skyBackgroundColorChanged(color);
+}
+
+//! Get the sky background color. Everything else than black creates an work of art!
+Vec3f StelMainView::getSkyBackgroundColor()
+{
+	return rootItem->getSkyBackgroundColor();
 }

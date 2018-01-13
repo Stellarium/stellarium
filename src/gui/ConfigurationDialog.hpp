@@ -107,8 +107,8 @@ private slots:
 	void browseForScreenshotDir();
 	void selectScreenshotDir();
 
-	//! Save the current viewing option including landscape, location and sky culture
-	//! This doesn't include the current viewing direction, time and FOV since those
+	//! Save the current viewing options including location and sky culture
+	//! This doesn't include the current viewing direction, landscape, time and FOV since those
 	//! have specific controls
 	void saveAllSettings();
 	//! Save the current view direction and field of view.
