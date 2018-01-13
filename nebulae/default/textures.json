@@ -582,9 +582,9 @@
 		"maxBrightness" : 11.5
 	},
 	{
-		"imageCredits": {"short" : "DSS"},
-		"imageUrl" : "m77-dss.png",
-		"worldCoords" : [[[40.7580, -0.0990], [40.5910, -0.0990], [40.5910, 0.0660], [40.7580, 0.0660]]],
+		"imagecredits" : {"short" : "Wang Lingyi","infoUrl": "http://www.astronomy.com.cn"},
+		"imageUrl" : "nebulae/default/m77.png",
+		"worldCoords" : [[[40.7685,-.1067], [40.5735,-.1067], [40.5735,.0883], [40.7685,.0883]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.161899429,
 		"maxBrightness" : 13.5
@@ -1622,12 +1622,149 @@
 		"minResolution" : 1,
 		"maxBrightness" : 13.5
 	},
-	{
+		{
 		"imageCredits": {"short" : "Georg Zotti", "infoUrl": "http://www.waa.at/"},
 		"imageUrl" : "etaCarinae_gzotti.png",
 		"worldCoords" : [[[163.6600, -61.2670], [158.5250, -61.0900], [159.1100, -58.2400], [163.840, -58.3950]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 2.5,
 		"maxBrightness" : 13.0
+	},
+	{
+		"imagecredits" : {"short" : "Wang Lingyi"},
+		"imageUrl" : "nebulae/default/Sh2-264.png",
+		"worldCoords" : [[[88.3755,5.6946], [80.2485,5.7106], [80.1547,13.7946], [88.4733,13.7906]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "nebulae/default/barnard_loop-1.png",
+		"worldCoords" : [[[94.2950,-11.5021], [85.5215,-11.6019], [85.5418,-2.955], [94.1622,-2.9259]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "nebulae/default/barnard_loop-2.png",
+		"worldCoords" : [[[85.5215,-11.6019], [76.773,-11.4539], [76.8736,-2.9103], [85.5418,-2.955]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "nebulae/default/barnard_loop-3.png",
+		"worldCoords" : [[[85.5341,.9194], [81.2479,.9194], [81.2479,5.1994], [85.5341,5.1994]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "nebulae/default/barnard_loop-4.png",
+		"worldCoords" : [[[94.1622,-2.9259], [85.5418,-2.955], [85.5214,5.6272], [94.0544,5.5643]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : " Sun Shuwei"}, 
+		"imageUrl" : "nebulae/default/ic342.png", 
+    "worldCoords" : [[[57.4916,67.7899], [55.9733,67.7902], [55.9612,68.3638], [57.5069,68.3629]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2222381739, 
+		"maxBrightness" : 14.5
+	},
+	{
+		"imagecredits" : {"short" : "www2.lowell.edu","infoUrl": "http://www2.lowell.edu/users/massey/lgsurvey/IC10_BVHa.jpg"},
+		"imageUrl" : "nebulae/default/ic10.png",
+		"worldCoords" : [[[5.3802,59.1378], [4.7928,59.1378], [4.7928,59.4378], [5.3802,59.4378]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imagecredits" : {"short" : "WalkingGeek","infoUrl": "https://www.flickr.com/photos/wengs/285367152"},
+		"imageUrl" : "nebulae/default/ic417.png",
+		"worldCoords" : [[[82.978,33.643], [81.4243,33.643], [81.417,34.9325], [82.9882,34.9322]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.8
+	},
+	{
+		"imagecredits" : {"short" : "s58y","infoUrl": "https://www.flickr.com/photos/s58y/4144731849/in/photostream/"},
+		"imageUrl" : "nebulae/default/ic1396.png",
+		"worldCoords" : [[[327.4095,56.0759], [322.3041,56.0854], [322.1078,58.9304], [327.6338,58.9279]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13
+	},
+	{
+		"imagecredits" : {"short" : "ESO","infoUrl": "http://www.eso.org/public/images/eso1237c/"},
+		"imageUrl" : "nebulae/default/ic2177.png",
+		"worldCoords" : [[[107.6394,-11.9562], [105.191,-11.9561], [105.2043,-9.5621], [107.632,-9.5621]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13
+	},
+	{
+		"imagecredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "http://www.eso.org/public/archives/images/large/eso1003b.jpg"},
+		"imageUrl" : "nebulae/default/n6334.png",
+		"worldCoords" : [[[260.4075,-36.4551], [259.0564,-36.4551], [259.0673,-35.3655], [260.4039,-35.3686]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13
+	},
+	{
+		"imagecredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "http://www.eso.org/public/images/eso1226c/"},
+		"imageUrl" : "nebulae/default/n6357.png",
+		"worldCoords" : [[[262.0591,-34.939], [260.6300,-34.9362], [260.6433,-33.7633], [262.0551,-33.769]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imagecredits" : {"short" : "s58y","infoUrl": "https://www.flickr.com/photos/s58y/4144732481"},
+		"imageUrl" : "nebulae/default/n7000.png",
+		"worldCoords" : [[[316.2366,42.7808], [311.7707,42.779], [311.6536,46.0586], [316.3652,46.0526]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2066023154,
+		"maxBrightness" : 13.2
+	},
+	{
+		"imagecredits" : {"short" : "Wang Lingyi"},
+		"imageUrl" : "nebulae/default/sh2-308.png",
+		"worldCoords" : [[[104.0377,-24.2924], [103.2173,-24.2924], [103.2173,-23.5424], [104.0377,-23.5424]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "ESO¡¯s La Silla Observatory","infoUrl": "http://www.eso.org/public/news/eso1425/"},
+		"imageUrl" : "nebulae/default/n3603.png",
+		"worldCoords" : [[[169.5252,-61.7266], [167.3893,-61.7186], [167.4334,-60.707], [169.508,-60.7137]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.2
+	},
+	{
+		"imagecredits" : {"short" : "Ole Nielsen","infoUrl":"https://en.wikipedia.org/wiki/File:NGC4244.jpg"},
+		"imageUrl" : "nebulae/default/n4244.png",
+		"worldCoords" : [[[184.5037,37.6821], [184.2113,37.6821], [184.2113,37.9131], [184.5037,37.9131]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.8
+                
+  },
+	{
+		"imagecredits" : {"short" : "Ken Crawford","infoUrl": "http://www.imagingdeepsky.com/Galaxies/NGC4565/NGC4565.htm"}, 
+		"imageUrl" : "nebulae/default/n4565.png", 
+		"worldCoords" : [[[189.2138,25.8117], [188.8672,25.8117], [188.8672,26.1233], [189.2138,26.1233]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2222381739, 
+		"maxBrightness" : 13.8 
 	}]
 }
