@@ -33,6 +33,8 @@
 #include <QDebug>
 #include <QSettings>
 
+#include <stdexcept>
+
 Q_LOGGING_CATEGORY(remoteSync,"stel.plugin.remoteSync")
 
 //! This method is the one called automatically by the StelModuleMgr just after loading the dynamic library

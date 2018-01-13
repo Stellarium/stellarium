@@ -37,7 +37,7 @@ private slots:
 	void testJupiterHeliocentricEphemerisVsop87();
 	void testSaturnHeliocentricEphemerisVsop87();
 	void testUranusHeliocentricEphemerisVsop87();
-	void testNeptuneHeliocentricEphemerisVsop87();
+	void testNeptuneHeliocentricEphemerisVsop87();	
 
 	// JPL DE430
 	void testMercuryHeliocentricEphemerisDe430();
