@@ -95,7 +95,7 @@ local unsigned read_buf   OF((z_streamp strm, Bytef *buf, unsigned size));
 local uInt longest_match  OF((deflate_state *s, IPos cur_match));
 #endif
 
-#ifdef ZLIB_DEBUG
+#ifdef DEBUG
 local  void check_match OF((deflate_state *s, IPos start, IPos match,
                             int length));
 #endif
@@ -1437,7 +1437,7 @@ local uInt longest_match(s, cur_match)
 
 #endif /* FASTEST */
 
-#ifdef ZLIB_DEBUG
+#ifdef DEBUG
 
 #define EQUAL 0
 /* result of memcmp for equal strings */
@@ -1467,7 +1467,7 @@ local void check_match(s, start, match, length)
 }
 #else
 #  define check_match(s, start, match, length)
-#endif /* ZLIB_DEBUG */
+#endif /* DEBUG */
 
 /* ===========================================================================
  * Fill the window when the lookahead becomes insufficient.
@@ -1698,7 +1698,7 @@ local block_state deflate_stored(s, flush)
         /* Write the stored block header bytes. */
         flush_pending(s->strm);
 
-#ifdef ZLIB_DEBUG
+#ifdef DEBUG
         /* Update debugging counts for the data about to be copied. */
         s->compressed_len += len << 3;
         s->bits_sent += len << 3;

@@ -1181,7 +1181,7 @@ ZEXTERN uLong ZEXPORT zlibCompileFlags OF((void));
      7.6: size of z_off_t
 
     Compiler, assembler, and debug options:
-     8: ZLIB_DEBUG
+     8: DEBUG
      9: ASMV or ASMINF -- use ASM code
      10: ZLIB_WINAPI -- exported functions use the WINAPI calling convention
      11: 0 (reserved)
