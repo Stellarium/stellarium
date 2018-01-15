@@ -41,8 +41,7 @@ SlewDialog::SlewDialog()
 {
 	ui = new Ui_slewDialog();
 	
-	//TODO: Fix this - it's in the same plugin
-	telescopeManager = GETSTELMODULE(TelescopeControl);
+	//TODO: Fix this - it's in the same plugin	telescopeManager = GETSTELMODULE(TelescopeControl);
 }
 
 SlewDialog::~SlewDialog()
@@ -324,8 +323,8 @@ void SlewDialog::onMove(double angle, double speed)
 
 void SlewDialog::onCurrentTelescopeChanged()
 {
-	auto telescope = currentTelescope();
-	auto controlWidget = telescope->createControlWidget(telescope);
+    auto telescope = currentTelescope();
+    auto controlWidget = telescope->createControlWidget(telescope);
 
 	// remove previous controlWidget
 	QLayoutItem* child;
@@ -335,7 +334,8 @@ void SlewDialog::onCurrentTelescopeChanged()
 		delete child;
 	}
 
-	ui->controlWidgetLayout->addWidget(controlWidget);
+    if (controlWidget)
+        ui->controlWidgetLayout->addWidget(controlWidget);
 }
 
 void SlewDialog::savePointsToFile()
