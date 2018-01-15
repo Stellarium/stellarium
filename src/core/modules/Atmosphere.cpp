@@ -30,10 +30,6 @@
 #include <QSettings>
 #include <QOpenGLShaderProgram>
 
-inline bool myisnan(double value)
-{
-	return value != value;
-}
 
 Atmosphere::Atmosphere(void)
 	: viewport(0,0,0,0)
@@ -182,9 +178,9 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		colorGridBuffer.release();
 	}
 
-	if (myisnan(_sunPos.length()))
+	if (qIsNaN(_sunPos.length()))
 		_sunPos.set(0.,0.,-1.*AU);
-	if (myisnan(moonPos.length()))
+	if (qIsNaN(moonPos.length()))
 		moonPos.set(0.,0.,-1.*AU);
 
 	// Update the eclipse intensity factor to apply on atmosphere model
@@ -227,7 +223,9 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	// No need to calculate if not visible
 	if (!fader.getInterstate())
 	{
-		averageLuminance = 0.001f + lightPollutionLuminance;
+		// GZ 20180114: Why did we add light pollution if atmosphere was not visible?????
+		// And what is the meaning of 0.001? Approximate contribution of stellar background? Then why is it 0.0001 below???
+		averageLuminance = 0.001f;
 		return;
 	}
 
@@ -292,7 +290,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 
 		// Add the light pollution luminance AFTER the scaling to avoid scaling it because it is the cause
 		// of the scaling itself
-		lumi += lightPollutionLuminance;
+		lumi += fader.getInterstate()*lightPollutionLuminance;
 
 		// Store for later statistics
 		sum_lum+=lumi;

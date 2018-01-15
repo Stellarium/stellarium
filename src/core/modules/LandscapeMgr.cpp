@@ -975,6 +975,11 @@ bool LandscapeMgr::getFlagAtmosphere() const
 	return atmosphere->getFlagShow();
 }
 
+float LandscapeMgr::getAtmosphereFadeIntensity()
+{
+	return atmosphere->getFadeIntensity();
+}
+
 //! Set atmosphere fade duration in s
 void LandscapeMgr::setAtmosphereFadeDuration(const float f)
 {

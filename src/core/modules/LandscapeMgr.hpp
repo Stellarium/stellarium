@@ -333,6 +333,9 @@ public slots:
 	//! Set flag for displaying Atmosphere.
 	void setFlagAtmosphere(const bool displayed);
 
+	//! Get current display intensity of atmosphere ([0..1], for smoother transitions)
+	float getAtmosphereFadeIntensity();
+
 	//! Get atmosphere fade duration in s.
 	float getAtmosphereFadeDuration() const;
 	//! Set atmosphere fade duration in s.

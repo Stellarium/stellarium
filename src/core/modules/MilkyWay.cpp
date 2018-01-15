@@ -111,7 +111,7 @@ bool MilkyWay::getFlagShow() const {return *fader;}
 
 void MilkyWay::draw(StelCore* core)
 {
-	if (!getFlagShow())
+	if (!fader->getInterstate())
 		return;
 
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
@@ -134,10 +134,13 @@ void MilkyWay::draw(StelCore* core)
 
 	// We must also adjust milky way to light pollution.
 	// Is there any way to calibrate this?
+	// We compute a float 1..9 from Bortle index and atmosphere display value (allows smooth fade when switching)
+	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
 	int bortle=drawer->getBortleScaleIndex();
+	float bortleIntensity = 1.f+ (bortle-1)*atmFadeIntensity; // Bortle index moderated by atmosphere fader.
 	//aLum*=(11.0f-bortle)*0.1f;
 
-	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15*bortle); // was 11.5; Source? How to calibrate the new texture?
+	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -179,7 +182,7 @@ void MilkyWay::draw(StelCore* core)
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.3f , oneMag) * (1.1f-bortle*0.1f); // drop of one magnitude: should be factor 2.5 or 40%. We take 30%, it looks more realistic.
+			float extinctionFactor=std::pow(0.3f , oneMag) * (1.1f-bortleIntensity*0.1f); // drop of one magnitude: should be factor 2.5 or 40%. We take 30%, it looks more realistic.
 			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
 			vertexArray->colors.append(thisColor);
 		}
