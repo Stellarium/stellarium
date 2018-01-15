@@ -591,34 +591,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		{
 			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 			const double elongation = getElongation(observerHelioPos);
-			QString moonPhase = "";
-			if (englishName=="Moon" && onEarth)
-			{
-				double eclJDE = earth->getRotObliquity(core->getJDE());
-				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
-				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core));
-				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
-				int deltaLong = (int)(lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI);
-				if (deltaLong<0) deltaLong+=360;
-				if (deltaLong==45)
-					moonPhase = qc_("Waxing Crescent", "Moon phase");
-				if (deltaLong==90)
-					moonPhase = qc_("First Quarter", "Moon phase");
-				if (deltaLong==135)
-					moonPhase = qc_("Waxing Gibbous", "Moon phase");
-				if (deltaLong==180)
-					moonPhase = qc_("Full Moon", "Moon phase");
-				if (deltaLong==225)
-					moonPhase = qc_("Waning Gibbous", "Moon phase");
-				if (deltaLong==270)
-					moonPhase = qc_("Third Quarter", "Moon phase");
-				if (deltaLong==315)
-					moonPhase = qc_("Waning Crescent", "Moon phase");
-				if (deltaLong==0 || deltaLong==360)
-					moonPhase = qc_("New Moon", "Moon phase");
-			}
 
 			QString pha, elo;
 			if (withDecimalDegree)
@@ -636,8 +608,44 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
 			oss << QString("%1: %2%").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100, 'f', 1)) << "<br />";
 			oss << QString("%1: %2").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3)) << "<br />";
-			if (!moonPhase.isEmpty())
-				oss << QString("%1: %2").arg(q_("Phase"), moonPhase) << "<br />";
+
+			if (englishName=="Moon" && onEarth)
+			{
+				QString moonPhase = "";
+				double eclJDE = earth->getRotObliquity(core->getJDE());
+				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core));
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
+				double deltaLong = lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI;
+				if (deltaLong<0.) deltaLong += 360.;
+				int deltaLongI = (int)deltaLong;
+				if (deltaLongI==45)
+					moonPhase = qc_("Waxing Crescent", "Moon phase");
+				if (deltaLongI==90)
+					moonPhase = qc_("First Quarter", "Moon phase");
+				if (deltaLongI==135)
+					moonPhase = qc_("Waxing Gibbous", "Moon phase");
+				if (deltaLongI==180)
+					moonPhase = qc_("Full Moon", "Moon phase");
+				if (deltaLongI==225)
+					moonPhase = qc_("Waning Gibbous", "Moon phase");
+				if (deltaLongI==270)
+					moonPhase = qc_("Third Quarter", "Moon phase");
+				if (deltaLongI==315)
+					moonPhase = qc_("Waning Crescent", "Moon phase");
+				if (deltaLongI==0 || deltaLongI==360)
+					moonPhase = qc_("New Moon", "Moon phase");
+
+				QString moonAge = q_("Moon age");
+				QString d = qc_("d", "days");
+				double age = deltaLong*29.530588853/360.;
+				if (!moonPhase.isEmpty())
+					oss << QString("%1: %2 %3 (%4)").arg(moonAge, QString::number(age, 'f', 1), d, moonPhase) << "<br />";
+				else
+					oss << QString("%1: %2 %3").arg(moonAge, QString::number(age, 'f', 1), d) << "<br />";
+			}
 
 		}
 
