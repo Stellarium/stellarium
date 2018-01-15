@@ -333,9 +333,14 @@ void SlewDialog::onCurrentTelescopeChanged()
 	}
 
     auto telescope = currentTelescope();
+    if (!telescope)
+        return;
+
     auto controlWidget = telescope->createControlWidget(telescope);
-    if (controlWidget)
-        ui->controlWidgetLayout->addWidget(controlWidget);
+    if (!controlWidget)
+        return;
+
+    ui->controlWidgetLayout->addWidget(controlWidget);
 }
 
 void SlewDialog::savePointsToFile()
