@@ -323,9 +323,6 @@ void SlewDialog::onMove(double angle, double speed)
 
 void SlewDialog::onCurrentTelescopeChanged()
 {
-    auto telescope = currentTelescope();
-    auto controlWidget = telescope->createControlWidget(telescope);
-
 	// remove previous controlWidget
 	QLayoutItem* child;
 	while ((child = ui->controlWidgetLayout->takeAt(0)) != 0)
@@ -334,6 +331,8 @@ void SlewDialog::onCurrentTelescopeChanged()
 		delete child;
 	}
 
+    auto telescope = currentTelescope();
+    auto controlWidget = telescope->createControlWidget(telescope);
     if (controlWidget)
         ui->controlWidgetLayout->addWidget(controlWidget);
 }
