@@ -41,7 +41,8 @@ SlewDialog::SlewDialog()
 {
 	ui = new Ui_slewDialog();
 	
-	//TODO: Fix this - it's in the same plugin	telescopeManager = GETSTELMODULE(TelescopeControl);
+    //TODO: Fix this - it's in the same plugin
+    telescopeManager = GETSTELMODULE(TelescopeControl);
 }
 
 SlewDialog::~SlewDialog()
