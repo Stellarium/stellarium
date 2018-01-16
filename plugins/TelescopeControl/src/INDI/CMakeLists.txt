@@ -12,6 +12,9 @@ add_library(TelescopeControl_INDI
     TelescopeClientINDIWidget.hpp
     TelescopeClientINDIWidget.cpp
     TelescopeClientINDIWidget.ui
+    INDIControlWidget.hpp
+    INDIControlWidget.cpp
+    INDIControlWidget.ui
     )
 
 target_link_libraries(TelescopeControl_INDI

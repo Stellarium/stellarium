@@ -7,6 +7,7 @@
 #include "StelCore.hpp"
 #include "StelUtils.hpp"
 #include "indibase/inditelescope.h"
+#include "INDIControlWidget.hpp"
 
 TelescopeClientINDI::TelescopeClientINDI(const QString &name, const QString &params):
 	TelescopeClient(name)
@@ -143,4 +144,10 @@ void TelescopeClientINDI::move(double angle, double speed)
 		mConnection.moveSouth(INDIConnection::SLEW_STOP);
 		mConnection.moveWest(indiSpeedE);
 	}
+}
+
+
+QWidget *TelescopeClientINDI::createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget *parent) const
+{
+	return new INDIControlWidget(telescope, parent);
 }

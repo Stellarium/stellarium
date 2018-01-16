@@ -41,8 +41,8 @@ SlewDialog::SlewDialog()
 {
 	ui = new Ui_slewDialog();
 	
-	//TODO: Fix this - it's in the same plugin
-	telescopeManager = GETSTELMODULE(TelescopeControl);
+    //TODO: Fix this - it's in the same plugin
+    telescopeManager = GETSTELMODULE(TelescopeControl);
 }
 
 SlewDialog::~SlewDialog()
@@ -82,7 +82,6 @@ void SlewDialog::createDialogContent()
 	connect(ui->pushButtonCurrent, SIGNAL(clicked()), this, SLOT(getCurrentObjectInfo()));
 	connect(ui->pushButtonCenter, SIGNAL(clicked()), this, SLOT(getCenterInfo()));
 
-	QObject::connect(ui->telescopeMoveWidget, &TelescopeMoveWidget::move, this, &SlewDialog::onMove);
 	QObject::connect(ui->comboBoxTelescope, static_cast<void(QComboBox::*)(int)>(&QComboBox::currentIndexChanged), this, &SlewDialog::onCurrentTelescopeChanged);
 
 	//Coordinates are in HMS by default:
@@ -325,12 +324,23 @@ void SlewDialog::onMove(double angle, double speed)
 
 void SlewDialog::onCurrentTelescopeChanged()
 {
-	auto telescope = currentTelescope();
-	auto telescopeINDI = qobject_cast<QSharedPointer<TelescopeClientINDI>>(telescope);
-	if (telescopeINDI)
-		ui->telescopeMoveWidget->setVisible(true);
-	else
-		ui->telescopeMoveWidget->setVisible(false);
+	// remove previous controlWidget
+	QLayoutItem* child;
+	while ((child = ui->controlWidgetLayout->takeAt(0)) != 0)
+	{
+		delete child->widget();
+		delete child;
+	}
+
+    auto telescope = currentTelescope();
+    if (!telescope)
+        return;
+
+    auto controlWidget = telescope->createControlWidget(telescope);
+    if (!controlWidget)
+        return;
+
+    ui->controlWidgetLayout->addWidget(controlWidget);
 }
 
 void SlewDialog::savePointsToFile()

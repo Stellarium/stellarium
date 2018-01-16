@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>TelescopeMoveWidget</class>
- <widget class="QWidget" name="TelescopeMoveWidget">
+ <class>INDIControlWidget</class>
+ <widget class="QWidget" name="INDIControlWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>266</height>
+    <height>104</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string notr="true">Form</string>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,0,0,0">
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <layout class="QGridLayout" name="gridLayout" columnstretch="0,0,0" columnminimumwidth="0,0,0">
      <item row="1" column="0">
@@ -90,7 +96,7 @@
      </property>
      <property name="sizeHint" stdset="0">
       <size>
-       <width>40</width>
+       <width>217</width>
        <height>20</height>
       </size>
      </property>
@@ -152,6 +158,7 @@
   </layout>
  </widget>
  <resources>
+  <include location="../../../../data/gui/guiRes.qrc"/>
   <include location="../../../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
