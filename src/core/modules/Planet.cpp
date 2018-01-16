@@ -638,15 +638,12 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				if (deltaLongI==0 || deltaLongI==360)
 					moonPhase = qc_("New Moon", "Moon phase");
 
-				QString moonAge = q_("Moon age");
-				QString d = qc_("d", "days");
 				double age = deltaLong*29.530588853/360.;
+				oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 1), q_("days old"));
 				if (!moonPhase.isEmpty())
-					oss << QString("%1: %2 %3 (%4)").arg(moonAge, QString::number(age, 'f', 1), d, moonPhase) << "<br />";
-				else
-					oss << QString("%1: %2 %3").arg(moonAge, QString::number(age, 'f', 1), d) << "<br />";
+					oss << QString(" (%4)").arg(moonPhase);
+				oss << "<br />";
 			}
-
 		}
 
 		if (englishName=="Sun")
