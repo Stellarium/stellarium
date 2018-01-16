@@ -90,6 +90,7 @@ plugins/Satellites/src/ui_satellitesImportDialog.h
 plugins/TelescopeControl/src/TelescopeControl.cpp
 plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp
 plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h
+plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h
 plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp
 plugins/TelescopeControl/src/gui/TelescopeDialog.cpp
 plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp
@@ -98,7 +99,6 @@ plugins/TelescopeControl/src/gui/ui_slewDialog.h
 plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h
 plugins/TelescopeControl/src/gui/ui_telescopeDialog.h
 plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h
-plugins/TelescopeControl/src/gui/ui_TelescopeMoveWidget.h
 plugins/TextUserInterface/src/TextUserInterface.cpp
 plugins/TextUserInterface/src/TuiNodeBool.cpp
 plugins/TextUserInterface/src/TuiNodeColor.cpp

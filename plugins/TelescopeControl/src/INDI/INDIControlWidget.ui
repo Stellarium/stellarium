@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>400</width>
-    <height>104</height>
+    <height>110</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -17,7 +17,7 @@
    </sizepolicy>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string notr="true">Form</string>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -158,7 +158,6 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../../../data/gui/guiRes.qrc"/>
   <include location="../../../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
