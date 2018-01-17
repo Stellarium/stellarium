@@ -3,7 +3,7 @@
 #
 # Tool for generate catalog of pulsars
 #
-# Copyright (C) 2012 Alexander Wolf
+# Copyright (C) 2012-2018 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -33,9 +33,22 @@ use Math::Trig;
 
 $PSRCAT	= "./psrcat.db";
 $JSON	= "./pulsars.json";
+$NAMES	= "./propernames.lst";
 
 $FORMAT = 2;
 $CATVER = 1.57;
+
+open (PSRN, "<$NAMES");
+@psrnames = <PSRN>;
+close PSRN;
+
+%psrname = ();
+for ($i=0;$i<scalar(@psrnames);$i++) {
+	$s = $psrnames[$i];
+	chomp $s;
+	($key,$value) = split('\|', $s);
+	$psrname{$key} = $value;
+}
 
 open (PSRCAT, "<$PSRCAT");
 @catalog = <PSRCAT>;
@@ -178,8 +191,12 @@ for ($i=0;$i<scalar(@cat)-1;$i++) {
 		}
 	}
 
-	$out  = "\t\t\"PSR J".$name."\":\n";
+	$jname = "J".$name;
+	$out  = "\t\t\"PSR ".$jname."\":\n";
 	$out .= "\t\t{\n";
+	if (exists $psrname{$jname}) {
+		$out .= "\t\t\t\"name\": \"".$psrname{$jname}."\",\n";
+	}
 	if ($parallax > 0) {
 		$out .= "\t\t\t\"parallax\": ".$parallax.",\n";
 	}

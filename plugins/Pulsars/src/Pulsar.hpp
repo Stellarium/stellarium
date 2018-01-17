@@ -100,12 +100,11 @@ public:
 	//! Get the angular size of pulsar
 	virtual double getAngularSize(const StelCore* core) const;
 	//! Get the localized name of pulsar
-	virtual QString getNameI18n(void) const
-	{
-		return designation;
-	}
+	virtual QString getNameI18n(void) const;
 	//! Get the english name of pulsar
-	virtual QString getEnglishName(void) const
+	virtual QString getEnglishName(void) const;
+	//! Get the designation of pulsar
+	QString getDesignation(void) const
 	{
 		return designation;
 	}
@@ -128,22 +127,23 @@ private:
 
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
-	float RA;		//! J2000 right ascension
-	float DE;		//! J2000 declination
+	QString pulsarName;	//! The proper name of the pulsar
+	float RA;			//! J2000 right ascension
+	float DE;			//! J2000 declination
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
 	double frequency;	//! Barycentric rotation frequency (Hz)
-	double pfrequency;      //! Time derivative of barycentric rotation frequency (s^-2)
+	double pfrequency;	//! Time derivative of barycentric rotation frequency (s^-2)
 	double pderivative;	//! Time derivative of barcycentric period (dimensionless)
 	double dmeasure;	//! Dispersion measure (cm-3 pc)
 	double bperiod;		//! Binary period of pulsar (days)
 	double eccentricity;	//! Eccentricity	
-	float w50;		//! Profile width at 50% of peak in ms
+	float w50;			//! Profile width at 50% of peak in ms
 	float s400;		//! Time averaged flux density at 400MHz in mJy
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
 	float distance;		//! Distance based on electron density model in kpc
-	int glitch;		//! Number of glitches
+	int glitch;			//! Number of glitches
 	QString notes;		//! Notes to pulsar (Type of pulsar)
 
 	LinearFader labelsFader;

@@ -292,7 +292,7 @@ StelObjectP Pulsars::searchByName(const QString& englishName) const
 
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getEnglishName().toUpper() == englishName.toUpper())
+		if (pulsar->getEnglishName().toUpper() == englishName.toUpper() || pulsar->getDesignation().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -306,7 +306,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper())
+		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper() || pulsar->getDesignation().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -316,9 +316,44 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (flagShowPulsars)
+	if (flagShowPulsars && maxNbItem>0)
 	{
-		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
+		QStringList names;
+
+		if (inEnglish)
+		{
+			foreach(const PulsarP& pulsar, psr)
+			{
+				if (!pulsar->getEnglishName().isEmpty())
+					names << pulsar->getEnglishName();
+				names << pulsar->getDesignation();
+			}
+		}
+		else
+		{
+			foreach(const PulsarP& pulsar, psr)
+			{
+				if (!pulsar->getNameI18n().isEmpty())
+					names << pulsar->getNameI18n();
+				names << pulsar->getDesignation();
+			}
+		}
+
+		foreach (const QString& name, names)
+		{
+			if (!matchObjectName(name, objPrefix, useStartOfWords))
+			{
+				continue;
+			}
+
+			result.append(name);
+			if (result.size() >= maxNbItem)
+			{
+				break;
+			}
+		}
+
+		result.sort();
 	}
 	return result;
 }
@@ -333,16 +368,20 @@ QStringList Pulsars::listAllObjects(bool inEnglish) const
 	{
 		foreach(const PulsarP& pulsar, psr)
 		{
-			result << pulsar->getEnglishName();
+			if (!pulsar->getEnglishName().isEmpty())
+				result << pulsar->getEnglishName();
+			result << pulsar->getDesignation();
 		}
 	}
 	else
 	{
 		foreach(const PulsarP& pulsar, psr)
 		{
-			result << pulsar->getNameI18n();
+			if (!pulsar->getNameI18n().isEmpty())
+				result << pulsar->getNameI18n();
+			result << pulsar->getDesignation();
 		}
-	}
+	}	
 	return result;
 }
 
