@@ -28,17 +28,14 @@ import scipy.interpolate
 def getAllPlatesNames():
   """Return the list of all DSS plates names"""
   ret = []
-  for i in range(1, 895):
-    ret.append("S%03d" % i)
+  ret = ["S%03d" % i for i in range(1, 895)]
   for i in range(2, 899):
     ret.append("N%03d" % i)
   return ret
 
 def getTestingPlatesNames():
   """Return a list of some testing DSS plates names"""
-  ret = []
-  for i in range(100, 305):
-    ret.append("N%03d" % i)
+  ret = ["N%03d" % i for i in range(100, 305)]
   return ret
 
 def getTestingPlatesNamesLMC():
