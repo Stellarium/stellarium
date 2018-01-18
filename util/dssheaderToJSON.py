@@ -175,32 +175,31 @@ def plateRange():
 def mainHeader():
 	# Generate the top level file containing pointers on all
 	outDir = "/tmp/tmpPlate"
-	f = open('/tmp/allDSS.json', 'w')
-	f.write('{\n')
-	f.write('"minResolution" : 0.1,\n')
-	f.write('"maxBrightness" : 13,\n')
-	f.write('"subTiles" : \n[\n')
-	
-	for prefix in ['N', 'S']:
-		if prefix=='N':
-			nRange = range(2, 898)
-		if prefix=='S':
-			nRange = range(1, 894)
-		for i in nRange:
-			plateName = prefix+"%.3i" % i
-			ti = createTile(0, 0, 0, 0, outDir, plateName, True)
-			assert ti != None
-			f.write('\t{\n')
-			f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
-			f.write('\t\t"worldCoords" : ')
-			skyTile.writePolys(ti.skyConvexPolygons, f)
-			f.write(',\n')
-			f.write('\t\t"subTiles" : ["'+plateName+"/x01_00_00.json.qZ"+'"]\n')
-			f.write('\t},\n')
-			
-	f.seek(-2, os.SEEK_CUR)
-	f.write('\n]}\n')	
-	f.close()
+	with open('/tmp/allDSS.json', 'w') as f:
+		f.write('{\n')
+		f.write('"minResolution" : 0.1,\n')
+		f.write('"maxBrightness" : 13,\n')
+		f.write('"subTiles" : \n[\n')
+
+		for prefix in ['N', 'S']:
+			if prefix=='N':
+				nRange = range(2, 898)
+			if prefix=='S':
+				nRange = range(1, 894)
+			for i in nRange:
+				plateName = prefix+"%.3i" % i
+				ti = createTile(0, 0, 0, 0, outDir, plateName, True)
+				assert ti != None
+				f.write('\t{\n')
+				f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
+				f.write('\t\t"worldCoords" : ')
+				skyTile.writePolys(ti.skyConvexPolygons, f)
+				f.write(',\n')
+				f.write('\t\t"subTiles" : ["'+plateName+"/x01_00_00.json.qZ"+'"]\n')
+				f.write('\t},\n')
+
+		f.seek(-2, os.SEEK_CUR)
+		f.write('\n]}\n')
 
 if __name__ == "__main__":
 	import psyco
