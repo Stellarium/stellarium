@@ -92,18 +92,12 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=Fa
 	
 	t.skyConvexPolygons = []
 	for idx,poly in enumerate(pl):
-		p = []
-		for iv,v in enumerate(poly):
-			pos = wcs.pix2wcs(v[0]+0.5,v[1]+0.5)
-			p.append(pos)
+		p = [wcs.pix2wcs(v[0] + 0.5, v[1] + 0.5) for iv, v in enumerate(poly)]
 		t.skyConvexPolygons.append(p)
 
 	t.textureCoords = []
 	for idx,poly in enumerate(pl):
-		p = []
-		for iv,v in enumerate(poly):
-			pos = (float(v[0])/naxis1,float(v[1])/naxis2)
-			p.append(pos)
+		p = [(float(v[0])/naxis1,float(v[1])/naxis2) for iv, v in enumerate(poly)]
 		t.textureCoords.append(p)
 	
 	v10 = wcs.pix2wcs(1,0)
