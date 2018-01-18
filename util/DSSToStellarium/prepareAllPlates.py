@@ -15,17 +15,16 @@
 #
 # Copyright Fabien Chereau <fabien.chereau@gmail.com>
 
-import Image, ImageFilter, ImageStat, ImageChops
-import os
-from astLib import astWCS
 import json
-from subprocess import Popen, PIPE, STDOUT
-import sys
+import os
 from multiprocessing import Pool
-import dssUtils
+
+import Image
+import numpy
 from astropy import wcs
 from astropy.io import fits
-import numpy
+
+import dssUtils
 
 # -----------------------------------------------------------
 # Pre-process zipped plates to extract only necessary data
@@ -41,11 +40,12 @@ import numpy
 # The directory containing the plates .tgz files
 originalPlatesDirectory = "/media/fabien/data/DSS-orig"
 
+
 # Pre-compute meta-infos about the plate as well as a re-combination of all tile into one large image
 def preparePlate(plateName):
     if not os.path.exists("preparedPlates"):
         os.system("mkdir preparedPlates")
-        
+
     if os.path.exists("preparedPlates/%s-x64-FITS-header.hhh" % plateName):
         print "%s already processed, skip." % plateName
         return
@@ -61,46 +61,49 @@ def preparePlate(plateName):
     assert os.path.exists("%s" % plateName)
 
     print "create full plate image"
-    resImg=Image.new("RGB", (64*300, 64*300))
+    resImg = Image.new("RGB", (64 * 300, 64 * 300))
     for j in range(0, 64):
-        for i in range(0,64):
+        for i in range(0, 64):
             if os.path.exists("%s/x1/%s_%.2d_%.2d_x1.jpg" % (plateName, plateName, i, j)):
                 im = Image.open("%s/x1/%s_%.2d_%.2d_x1.jpg" % (plateName, plateName, i, j))
-                resImg.paste(im, (i*300, 64*300-j*300-300))
+                resImg.paste(im, (i * 300, 64 * 300 - j * 300 - 300))
             else:
                 print "Missing jpeg tile: %s/x1/%s_%.2d_%.2d_x1.jpg" % (plateName, plateName, i, j)
 
     print "package and store results"
     os.system("mkdir preparedPlates/%s" % plateName)
     resImg.save("preparedPlates/%s/%s.jpg" % (plateName, plateName))
-    os.system("cp %s/x64/%s_00_00_x64.hhh preparedPlates/%s/%s_00_00_x64-FITS-header.hhh" % (plateName, plateName, plateName, plateName))
-    
+    os.system("cp %s/x64/%s_00_00_x64.hhh preparedPlates/%s/%s_00_00_x64-FITS-header.hhh" % (
+    plateName, plateName, plateName, plateName))
+
     wcsWithoutCorrection = dssUtils.DssWcs(plateName)
-    
+
     print "Compute the array of pixel offsets needed to adjust WCS conversions."
     # Load the x1 FITS headers to get the corrective offset term
     allOffsets = []
-    
-    for i in range(0,64, 4):
-      for j in range(0, 64, 4):
-        if not os.path.exists("%s/x1/%s_%.2d_%.2d_x1.hhh" % (plateName, plateName, i, j)):
-          print "Missing .hhh file"
-          continue
-        hdulist = fits.open("%s/x1/%s_%.2d_%.2d_x1.hhh" % (plateName, plateName, i, j))
-        w = wcs.WCS(hdulist[0].header)
-        arr = numpy.array([[0., 0.]], numpy.float_) # Bottom left corner
-        radecCorner = w.wcs_pix2world(arr, 1)
-        realPixelPos = [i*300, j*300]
-        currPixelPos = wcsWithoutCorrection.raDecToPixel([radecCorner[0][0], radecCorner[0][1]])
-        assert currPixelPos!=None
-        allOffsets.append({'pixelPos': currPixelPos, 'offset': [realPixelPos[0]-currPixelPos[0], realPixelPos[1]-currPixelPos[1]]})
+
+    for i in range(0, 64, 4):
+        for j in range(0, 64, 4):
+            if not os.path.exists("%s/x1/%s_%.2d_%.2d_x1.hhh" % (plateName, plateName, i, j)):
+                print "Missing .hhh file"
+                continue
+            hdulist = fits.open("%s/x1/%s_%.2d_%.2d_x1.hhh" % (plateName, plateName, i, j))
+            w = wcs.WCS(hdulist[0].header)
+            arr = numpy.array([[0., 0.]], numpy.float_)  # Bottom left corner
+            radecCorner = w.wcs_pix2world(arr, 1)
+            realPixelPos = [i * 300, j * 300]
+            currPixelPos = wcsWithoutCorrection.raDecToPixel([radecCorner[0][0], radecCorner[0][1]])
+            assert currPixelPos != None
+            allOffsets.append({'pixelPos': currPixelPos,
+                               'offset': [realPixelPos[0] - currPixelPos[0], realPixelPos[1] - currPixelPos[1]]})
 
     with open("preparedPlates/%s/%s.offsets" % (plateName, plateName), 'w') as f:
         f.write(json.dumps(allOffsets))
-    
+
     print "clean up"
     os.system("rm %s.tgz" % plateName)
     os.system("rm -rf %s" % plateName)
+
 
 jobsArgs = dssUtils.getAllPlatesNames()()
 
@@ -111,6 +114,3 @@ except KeyboardInterrupt:
     print "Caught KeyboardInterrupt, terminating workers"
     pool.terminate()
     pool.join()
-
-
-
