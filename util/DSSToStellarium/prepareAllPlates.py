@@ -95,9 +95,8 @@ def preparePlate(plateName):
         assert currPixelPos!=None
         allOffsets.append({'pixelPos': currPixelPos, 'offset': [realPixelPos[0]-currPixelPos[0], realPixelPos[1]-currPixelPos[1]]})
 
-    f = open("preparedPlates/%s/%s.offsets" % (plateName, plateName), 'w')
-    f.write(json.dumps(allOffsets))
-    f.close()
+    with open("preparedPlates/%s/%s.offsets" % (plateName, plateName), 'w') as f:
+        f.write(json.dumps(allOffsets))
     
     print "clean up"
     os.system("rm %s.tgz" % plateName)

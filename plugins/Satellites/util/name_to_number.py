@@ -6,9 +6,8 @@
 import json;
 
 # Open the satellites.json file and read it as a hash
-old_f = open('satellites.json')
-old_json = json.load(old_f)
-old_f.close()
+with open('satellites.json') as old_f:
+	old_json = json.load(old_f)
 
 # For each key/value pair:
 new_json = dict()
@@ -25,6 +24,5 @@ for name, satellite in old_json['satellites'].items():
 
 # Save the result hash as satellites_with_numbers.json
 old_json['satellites'] = new_json
-new_f = open('satellites_with_numbers.json', 'w')
-json.dump(old_json, new_f, indent = 4)
-new_f.close()
+with open('satellites_with_numbers.json', 'w') as new_f:
+	json.dump(old_json, new_f, indent = 4)

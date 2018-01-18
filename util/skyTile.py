@@ -56,16 +56,15 @@ class SkyImageTile:
 		fName = outDir+prefix+"x%.2d_%.2d_%.2d.json" % (2**self.level, self.i, self.j)
 		
 		# Actually write the file with maxLevelPerFile level
-		f = open(fName, 'w')
-		self.__subOutJSON(prefix, qCompress, maxLevelPerFile, f, 0, outDir)
-		f.close()
+		with open(fName, 'w') as f:
+			self.__subOutJSON(prefix, qCompress, maxLevelPerFile, f, 0, outDir)
 		
 		if (qCompress):
-			ff = open(fName)
-			fout = gzip.GzipFile(fName+".gz", 'w')
-			fout.write(ff.read())
-			fout.close()
-			os.remove(fName)
+			with open(fName) as ff:
+				fout = gzip.GzipFile(fName+".gz", 'w')
+				fout.write(ff.read())
+				fout.close()
+				os.remove(fName)
 
 	def __subOutJSON(self, prefix, qCompress, maxLevelPerFile, f, curLev, outDir):
 		"""Write the tile in the file f"""
