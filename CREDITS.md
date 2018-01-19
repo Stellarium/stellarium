@@ -409,6 +409,38 @@
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Images of NGC40, NGC4631, NGC4627, NGC4656, NGC4657 from Steven
 	     Bellavia
+	4.31 Images of Barnard Loop, IC342 from Sun Shuwei
+ 	4.32 Images of M77, Sh2-264, Sh2-308 from Wang Lingyi
+	4.33 Images of IC10 from Lowell Observatory
+	     http://www2.lowell.edu/
+	     License: public domain
+	4.34 Images of IC2177, NGC6334, NGC6357, Fornax Cluster from ESO/Digitized
+	     Sky Survey 2
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International 
+	4.35 Images of NGC3603 from ESO/La Silla Observatory
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International 
+	4.36 Images of NGC4244 from Ole Nielsen
+	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
+	4.37 Images of NGC7000 from NASA
+	     License: public domain
+	4.38 Images of IC1396 from Giuseppe Donatiello
+	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
+	4.39 Images of Sh2-155 from Hewholooks
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.40 Images of NGC4565 from Ken Crawford
+	     http://www.imagingdeepsky.com/
+	     License: This work is free and may be used by anyone for any purpose.
+	     If you wish to use this content, you do not need to request permission
+	     as long as you follow any licensing requirements mentioned on this page.
+	4.41 Images of Coma Cluster from Caelum Observatory
+	     http://www.caelumobservatory.com/
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.42 Images of NGC1316 from ESO
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
