@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 21:59+0700\n"
+"POT-Creation-Date: 2018-01-19 20:28+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Vietnamese (https://www.transifex.com/stellarium/teams/80998/vi/)\n"
@@ -37,8 +37,8 @@ msgstr ""
 #: src/ui_configurationDialog.h:1375 plugins/Satellites/src/Satellite.cpp:281
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:458
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:159
-#: plugins/Pulsars/src/Pulsar.cpp:170 plugins/Exoplanets/src/Exoplanet.cpp:301
+#: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:180
+#: plugins/Pulsars/src/Pulsar.cpp:185 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "Loại"
@@ -60,7 +60,7 @@ msgstr ""
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:784
+#: src/StelMainView.cpp:797
 msgid "Display Options"
 msgstr "Hiển thị các tuỳ chọn"
 
@@ -1222,7 +1222,7 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:318 src/core/modules/Nebula.cpp:331
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:242 plugins/Exoplanets/src/Exoplanet.cpp:325
+#: plugins/Pulsars/src/Pulsar.cpp:257 plugins/Exoplanets/src/Exoplanet.cpp:325
 msgctxt "distance"
 msgid "ly"
 msgstr ""
@@ -1237,7 +1237,7 @@ msgid "Distance"
 msgstr "Khoảng cách"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:239
+#: src/core/modules/Nebula.cpp:329 plugins/Pulsars/src/Pulsar.cpp:254
 msgctxt "distance"
 msgid "kpc"
 msgstr ""
@@ -1786,76 +1786,79 @@ msgstr ""
 msgid "The period of rotation is chaotic"
 msgstr "Chu kỳ quay hỗn độn"
 
-#: src/core/modules/Planet.cpp:606
-msgctxt "Moon phase"
-msgid "Waxing Crescent"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:608
-msgctxt "Moon phase"
-msgid "First Quarter"
-msgstr "Trăng Thượng huyền"
-
-#: src/core/modules/Planet.cpp:610
-msgctxt "Moon phase"
-msgid "Waxing Gibbous"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:612
-msgctxt "Moon phase"
-msgid "Full Moon"
-msgstr "Trăng tròn"
-
-#: src/core/modules/Planet.cpp:614
-msgctxt "Moon phase"
-msgid "Waning Gibbous"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:616
-msgctxt "Moon phase"
-msgid "Third Quarter"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:618
-msgctxt "Moon phase"
-msgid "Waning Crescent"
-msgstr ""
-
-#: src/core/modules/Planet.cpp:620
-msgctxt "Moon phase"
-msgid "New Moon"
-msgstr "Trăng mới"
-
-#: src/core/modules/Planet.cpp:635 src/core/modules/MinorPlanet.cpp:394
+#: src/core/modules/Planet.cpp:607 src/core/modules/MinorPlanet.cpp:394
 #: src/core/modules/Comet.cpp:277 src/gui/AstroCalcDialog.cpp:2019
 #: src/gui/AstroCalcDialog.cpp:2054
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:636 src/core/modules/MinorPlanet.cpp:395
+#: src/core/modules/Planet.cpp:608 src/core/modules/MinorPlanet.cpp:395
 #: src/core/modules/Comet.cpp:278 src/gui/AstroCalcDialog.cpp:2009
 #: src/gui/AstroCalcDialog.cpp:2044
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:637
+#: src/core/modules/Planet.cpp:609
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:638
+#: src/core/modules/Planet.cpp:610
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:640 src/gui/AstroCalcDialog.cpp:1999
-#: src/gui/AstroCalcDialog.cpp:2034
-msgid "Phase"
+#: src/core/modules/Planet.cpp:625
+msgctxt "Moon phase"
+msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:650
-msgid "Eclipse obscuration"
+#: src/core/modules/Planet.cpp:627
+msgctxt "Moon phase"
+msgid "First Quarter"
+msgstr "Trăng Thượng huyền"
+
+#: src/core/modules/Planet.cpp:629
+msgctxt "Moon phase"
+msgid "Waxing Gibbous"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:631
+msgctxt "Moon phase"
+msgid "Full Moon"
+msgstr "Trăng tròn"
+
+#: src/core/modules/Planet.cpp:633
+msgctxt "Moon phase"
+msgid "Waning Gibbous"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:635
+msgctxt "Moon phase"
+msgid "Third Quarter"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:637
+msgctxt "Moon phase"
+msgid "Waning Crescent"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:639
+msgctxt "Moon phase"
+msgid "New Moon"
+msgstr "Trăng mới"
+
+#: src/core/modules/Planet.cpp:642
+msgid "Moon age"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:642
+msgid "days old"
 msgstr ""
 
 #: src/core/modules/Planet.cpp:655
+msgid "Eclipse obscuration"
+msgstr ""
+
+#: src/core/modules/Planet.cpp:660
 msgid "Eclipse magnitude"
 msgstr ""
 
@@ -2834,7 +2837,7 @@ msgid "Deep-sky objects background images"
 msgstr "Hình ảnh nền những vật thể xa"
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:210
-#: src/StelMainView.cpp:782 src/StelMainView.cpp:783
+#: src/StelMainView.cpp:795 src/StelMainView.cpp:796
 msgid "Miscellaneous"
 msgstr "Đặc tính khác"
 
@@ -4806,6 +4809,10 @@ msgstr ""
 msgid "Mm"
 msgstr ""
 
+#: src/gui/AstroCalcDialog.cpp:1999 src/gui/AstroCalcDialog.cpp:2034
+msgid "Phase"
+msgstr ""
+
 #: src/gui/AstroCalcDialog.cpp:2014 src/gui/AstroCalcDialog.cpp:2049
 msgid "Angular size"
 msgstr ""
@@ -4923,7 +4930,7 @@ msgid "Export bookmarks as..."
 msgstr ""
 
 #: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1564
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:496
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:503
 msgid "Scripts"
 msgstr "Nguyên bản"
 
@@ -4931,19 +4938,19 @@ msgstr "Nguyên bản"
 msgid "Shortcut"
 msgstr "Lối tắt"
 
-#: src/StelMainView.cpp:782
+#: src/StelMainView.cpp:795
 msgid "Save screenshot"
 msgstr "Chụp màn hình"
 
-#: src/StelMainView.cpp:783
+#: src/StelMainView.cpp:796
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:784
+#: src/StelMainView.cpp:797
 msgid "Full-screen mode"
 msgstr "Toàn màn hình"
 
-#: src/StelMainView.cpp:940
+#: src/StelMainView.cpp:954
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -4951,13 +4958,13 @@ msgstr ""
 "Không đủ phiên bản OpenGL. Vui lòng cập nhật trình điều khiển, phần cứng đồ "
 "họa, hoặc sử dụng tùy chọn --chế độ-góc (hoặc --chế độ-đỉnh bằng)."
 
-#: src/StelMainView.cpp:943
+#: src/StelMainView.cpp:957
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Không đủ phiên bản OpenGL. Vui lòng cập nhật drivers, hoặc phần cứng đồ họa."
 
-#: src/StelMainView.cpp:985
+#: src/StelMainView.cpp:999
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -4966,7 +4973,7 @@ msgstr ""
 "tiết. Bỏ qua và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục "
 "ở chế độ hạ thấp không?"
 
-#: src/StelMainView.cpp:1036
+#: src/StelMainView.cpp:1050
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -4975,7 +4982,7 @@ msgstr ""
 " qua và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục ở chế độ"
 " xuống cấp không?"
 
-#: src/StelMainView.cpp:1092
+#: src/StelMainView.cpp:1106
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -4984,7 +4991,7 @@ msgstr ""
 "và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục ở chế độ "
 "xuống cấp không?"
 
-#: src/StelMainView.cpp:1133
+#: src/StelMainView.cpp:1147
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -4993,7 +5000,7 @@ msgstr ""
 "và ngăn chặn thông báo này trong tương lai và cố gắng tiếp tục ở chế độ "
 "xuống cấp không?"
 
-#: src/StelMainView.cpp:1245
+#: src/StelMainView.cpp:1259
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -5800,205 +5807,210 @@ msgstr "Phương Tây"
 msgid "Western (H.A.Rey)"
 msgstr "Phương tây (H.A.Rey)"
 
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:489
+msgid "Western (O.Hlad)"
+msgstr ""
+
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Guereins"
 msgstr "Làng Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Trees"
 msgstr "Cây"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:497 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
+#: src/translations.h:499 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
 msgid "Moon"
 msgstr "Mặt trăng"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Hurricane"
 msgstr "Bão tố"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Ocean"
 msgstr "Đại dương"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:505 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
+#: src/translations.h:507 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
 msgid "Mars"
 msgstr "Hỏa tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:507 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1305
+#: src/translations.h:509 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1305
 msgid "Jupiter"
 msgstr "Mộc tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:509 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1308
+#: src/translations.h:511 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1308
 msgid "Saturn"
 msgstr "Thổ tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Uranus"
 msgstr "Thiên vương tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Neptune"
 msgstr "Hải vương tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:515
+#: src/translations.h:517
 msgid "Geneva"
 msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Zero Horizon"
 msgstr "Không có đường chân trời"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:521 plugins/Exoplanets/src/Exoplanet.cpp:337
+#: src/translations.h:523 plugins/Exoplanets/src/Exoplanet.cpp:337
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "Mặt trời"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:526
+#: src/translations.h:528
 msgid "Vienna Sterngarten"
 msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:528
+#: src/translations.h:530
 msgid "Testscene"
 msgstr "Testscene"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Landscape Tour"
 msgstr "Vòng quanh khung cảnh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:535
+#: src/translations.h:537
 msgid "Partial Lunar Eclipse"
 msgstr "Nguyệt thực một phần"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:537
+#: src/translations.h:539
 msgid "Total Lunar Eclipse"
 msgstr "Nguyệt thực toàn phần"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:539
+#: src/translations.h:541
 msgid "Screensaver"
 msgstr "Trình bảo vệ màn hình"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:541
+#: src/translations.h:543
 msgid "Solar Eclipse 2009"
 msgstr "Nhật thực 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:543
+#: src/translations.h:545
 msgid "Startup Script"
 msgstr "Lệnh khởi động"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:545
+#: src/translations.h:547
 msgid "Zodiac"
 msgstr "Hoàng đạo"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:547
+#: src/translations.h:549
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Thủy Tinh ba lần mặt trời mọc và lặn"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:549
+#: src/translations.h:551
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Che khuất đôi từ Deimos vào năm 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Che khuất đôi từ Deimos vào năm 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Che khuất từ đỉnh Olympus ngày 10/6/2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Sự che khuất của Trái đất và Mộc tinh năm 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 lần vượt qua và 2 lần che khuất từ Deimos năm 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Solar System Screensaver"
 msgstr "Sự kiện hệ mặt trời"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:561
+#: src/translations.h:563
 msgid "Constellations Tour"
 msgstr "Đường đi của chòm sao"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:563
+#: src/translations.h:565
 msgid "Sun from different planets"
 msgstr "Mặt trời từ những hành tinh khác nhau"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:565
+#: src/translations.h:567
 msgid "Earth best views from other bodies"
 msgstr "Quang cảnh trái đất đẹp nhất từ các vật thể khác"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "Transit of Venus"
 msgstr "Sự vượt qua của Kim tinh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Sky Culture Tour"
 msgstr "Vòng quanh Văn hóa Bầu trời"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Earth Events from Mercury"
 msgstr "Sự kiện Trái đất từ Thủy tinh"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Earth Events from a floating city on Venus"
 msgstr "Sự kiện Trái đất từ một thành phố nổi trên Kim tinh"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Earth Events from Mars"
 msgstr "Sự kiện Trái đất từ Hỏa tinh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:577
+#: src/translations.h:579
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
@@ -6006,86 +6018,86 @@ msgstr ""
 "Hỏa Tinh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:579
+#: src/translations.h:581
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "Ly giác lớn nhất và sự vượt qua của Trái Đất và Hỏa Tinh nhìn từ Callisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:581
+#: src/translations.h:583
 msgid "Tycho's Supernova"
 msgstr "Siêu tân tinh của Tycho"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Earth and other Planets from Ceres"
 msgstr "Trái Đất và các hành tinh khác nhìn từ Ceres"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:585
+#: src/translations.h:587
 msgid "Messier Objects Tour"
 msgstr "Hành trình các vật thể Messier"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "Binocular Highlights"
 msgstr "Những điều nổi bật qua đôi mắt"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 Sao Đôi Mắt thường Vui Vẻ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "List of largest known stars"
 msgstr "Danh sách những ngôi sao lớn nhất đã biết"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Herschel 400 Tour"
 msgstr "Hành trình Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:597
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Những thiên thể xa cho ống nhòm"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:599
 msgid "The Jack Bennett Catalog"
 msgstr "Danh mục Jack Bennett"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "Best objects in the New General Catalog"
 msgstr "Những vật thể tốt nhất trong Danh mục Chung Mới"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:605
+#: src/translations.h:607
 msgid "Look around each installed landscape."
 msgstr "Nhìn xung quanh mỗi phong cảnh được cài đặt"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:607
+#: src/translations.h:609
 msgid "Look at each installed sky culture."
 msgstr "Nhìn mỗi nền văn hóa bầu trời được cài đặt"
 
-#: src/translations.h:608
+#: src/translations.h:610
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Bài viết giải thích nguyệt thực một phần"
 
-#: src/translations.h:609
+#: src/translations.h:611
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Bài viết giải thích nguyệt thực toàn phần"
 
-#: src/translations.h:610
+#: src/translations.h:612
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Một hành trình chậm, vô hạn của bầu trời, nhìn vào những đối tượng ngẫu "
 "nhiên."
 
-#: src/translations.h:611
+#: src/translations.h:613
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -6093,11 +6105,11 @@ msgstr ""
 "Bài viết giải thích nhật thực toàn phần đã diễn ra vào 2009 "
 "(location=Rangpur, Bangladesh)."
 
-#: src/translations.h:612
+#: src/translations.h:614
 msgid "Script which runs automatically at startup"
 msgstr "Script chạy tự động khi khởi động"
 
-#: src/translations.h:613
+#: src/translations.h:615
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -6106,7 +6118,7 @@ msgstr ""
 "Lệnh này hiển thị các chòm sao Hoàng đọa. Nghĩa là các chòm sao nằm trên "
 "đường đi của mặt trời trên bầu trời trong suốt một năm"
 
-#: src/translations.h:614
+#: src/translations.h:616
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -6115,7 +6127,7 @@ msgstr ""
 "những thời điểm nhất định mà mặt trời sẽ mọc và lặn 2 lần khác nhau trong "
 "một ngày Thủy Tinh"
 
-#: src/translations.h:615
+#: src/translations.h:617
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -6124,7 +6136,7 @@ msgstr ""
 " khuất nó trước tiên. Diễn ra giữa chòm Bọ Cạp và Nhân Mã vào ngày "
 "26/4/2017."
 
-#: src/translations.h:616
+#: src/translations.h:618
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -6133,11 +6145,11 @@ msgstr ""
 "khuất nó đầu tiên. Hãy tìm nơi giữa chòm Kim Ngưu và Song Tử vào ngày "
 "23/7/2031."
 
-#: src/translations.h:617
+#: src/translations.h:619
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 
-#: src/translations.h:618
+#: src/translations.h:620
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -6147,7 +6159,7 @@ msgstr ""
 "Nhưng che khuất của cả hai trong cùng một ngày là rất hiếm. Đây là một loại "
 "diễn ra 2048/01/23. Trong tốc độ thực tế."
 
-#: src/translations.h:619
+#: src/translations.h:621
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -6163,31 +6175,31 @@ msgstr ""
 " từ sao Hỏa vẫn đang lu mờ và mờ đi trong cái bóng của sao Hỏa, chỉ sáng lên"
 " sau đó."
 
-#: src/translations.h:620
+#: src/translations.h:622
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
 
-#: src/translations.h:621
+#: src/translations.h:623
 msgid "A tour of the western constellations."
 msgstr "Một hành trình của những chòm sao phía tây."
 
-#: src/translations.h:622
+#: src/translations.h:624
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Nhìn mặt trời từ những hành tinh lớn của hệ mặt trời và Pluto"
 
-#: src/translations.h:623
+#: src/translations.h:625
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Hình ảnh tốt nhất của Trái đất từ các thành phần khác của hệ mặt trời trong "
 "thế kỷ 21."
 
-#: src/translations.h:624
+#: src/translations.h:626
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Sự vượt qua của Kim tinh được nhìn từ Sydney Australia ngày 6/6/2012"
 
-#: src/translations.h:625
+#: src/translations.h:627
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -6195,7 +6207,7 @@ msgstr ""
 "Ánh sáng lóe lên của siêu tân tinh được quan sát bới Tycho Brahe vào năm "
 "1572. Phần bổ trợ Siêu tân tinh đã được bật."
 
-#: src/translations.h:626
+#: src/translations.h:628
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -6203,7 +6215,7 @@ msgstr ""
 "Ly giác lớn nhất và sự đối lập của Trái Đất và các hành tinh khác nhìn từ "
 "Hỏa Tinh 2000-3000"
 
-#: src/translations.h:627
+#: src/translations.h:629
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -6215,17 +6227,17 @@ msgstr ""
 " ngoài vành đai bức xạ của Mộc Tinh. Do đó, nếu khi nào mà con người định cư"
 " trên mặt trăng của Mộc Tinh thì Callisto là cái được chọn."
 
-#: src/translations.h:628
+#: src/translations.h:630
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 
-#: src/translations.h:629
+#: src/translations.h:631
 msgid "A tour of Messier Objects"
 msgstr "Một hành trình của các vật thể Messier"
 
-#: src/translations.h:630
+#: src/translations.h:632
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -6234,7 +6246,7 @@ msgstr ""
 "Hành trình quanh đối tượng thú vị, trong đó có thể quan sát bằng ống nhòm. "
 "Các dữ liệu cho kịch bản được lấy từ cuốn sách cùng tên của Gary Seronik."
 
-#: src/translations.h:631
+#: src/translations.h:633
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -6245,17 +6257,17 @@ msgstr ""
 " Telescope 09/2014. Dữ liệu được lấy từ website của ông ấy, "
 "http://www.astropix.com/doubles/"
 
-#: src/translations.h:632
+#: src/translations.h:634
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Kịch bản này giúp bạn tạo một hành trình vòng quanh những ngôi sao lớn nhất "
 "đã được biết."
 
-#: src/translations.h:633
+#: src/translations.h:635
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Một hành trình xung quanh những vật thể trong danh mục Herschel 400"
 
-#: src/translations.h:634
+#: src/translations.h:636
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -6265,216 +6277,216 @@ msgstr ""
 "Ống Nhòm. Trong kịch bản chúng tôi cho một danh sách của 31 vật thể này, "
 "được đưa ra theo Xích Kinh (2000.0)"
 
-#: src/translations.h:635
+#: src/translations.h:637
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:636
+#: src/translations.h:638
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:640
+#: src/translations.h:642
 msgid "&Undo"
 msgstr "&Hoàn tác"
 
-#: src/translations.h:641
+#: src/translations.h:643
 msgid "&Redo"
 msgstr "&Làm lại"
 
-#: src/translations.h:642
+#: src/translations.h:644
 msgid "Cu&t"
 msgstr "Cắ&t"
 
-#: src/translations.h:643
+#: src/translations.h:645
 msgid "&Copy"
 msgstr "&Sao chép"
 
-#: src/translations.h:644
+#: src/translations.h:646
 msgid "&Paste"
 msgstr "&Dán"
 
-#: src/translations.h:645 plugins/Oculars/src/ui_ocularDialog.h:1187
+#: src/translations.h:647 plugins/Oculars/src/ui_ocularDialog.h:1187
 #: plugins/Oculars/src/ui_ocularDialog.h:1196
 #: plugins/Oculars/src/ui_ocularDialog.h:1202
 #: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Delete"
 msgstr "Xóa"
 
-#: src/translations.h:646
+#: src/translations.h:648
 msgid "Select All"
 msgstr "Chọn tất cả"
 
-#: src/translations.h:647
+#: src/translations.h:649
 msgid "Look in:"
 msgstr "Hãy nhìn vào:"
 
-#: src/translations.h:648
+#: src/translations.h:650
 msgid "Directory:"
 msgstr "Danh mục:"
 
-#: src/translations.h:649
+#: src/translations.h:651
 msgid "Folder"
 msgstr "Thư mục"
 
-#: src/translations.h:650
+#: src/translations.h:652
 msgid "&Choose"
 msgstr "&Chọn"
 
-#: src/translations.h:651 src/ui_configurationDialog.h:1534
+#: src/translations.h:653 src/ui_configurationDialog.h:1534
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
-#: src/translations.h:652
+#: src/translations.h:654
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:653
+#: src/translations.h:655
 msgid "Files of type:"
 msgstr "Loại files:"
 
-#: src/translations.h:654
+#: src/translations.h:656
 msgid "Date Modified"
 msgstr "Ngày sửa đổi"
 
-#: src/translations.h:655
+#: src/translations.h:657
 msgid "Directories"
 msgstr "Danh mục"
 
-#: src/translations.h:656
+#: src/translations.h:658
 msgid "Computer"
 msgstr "Máy tính"
 
-#: src/translations.h:657
+#: src/translations.h:659
 msgid "&Open"
 msgstr "&Mở"
 
-#: src/translations.h:658
+#: src/translations.h:660
 msgid "&Save"
 msgstr ""
 
-#: src/translations.h:659
+#: src/translations.h:661
 msgid "File &name:"
 msgstr "Tên &file"
 
-#: src/translations.h:660
+#: src/translations.h:662
 msgid "Copy &Link Location"
 msgstr "Vị trí sao chép và liên kết"
 
-#: src/translations.h:661
+#: src/translations.h:663
 msgid "Abort"
 msgstr "Hủy bỏ"
 
-#: src/translations.h:662
+#: src/translations.h:664
 msgid "Ignore"
 msgstr "Bỏ qua"
 
-#: src/translations.h:663
+#: src/translations.h:665
 msgid "&Basic colors"
 msgstr "&Màu cơ bản"
 
-#: src/translations.h:664
+#: src/translations.h:666
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:665
+#: src/translations.h:667
 msgid "&Custom colors"
 msgstr "&Màu tùy chỉnh"
 
-#: src/translations.h:666
+#: src/translations.h:668
 msgid "&Add to Custom Colors"
 msgstr "&Thêm màu tùy chỉnh"
 
-#: src/translations.h:667
+#: src/translations.h:669
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:668
+#: src/translations.h:670
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:669
+#: src/translations.h:671
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:670
+#: src/translations.h:672
 msgid "&Red:"
 msgstr "&Đỏ:"
 
-#: src/translations.h:671
+#: src/translations.h:673
 msgid "&Green:"
 msgstr "&Lục:"
 
-#: src/translations.h:672
+#: src/translations.h:674
 msgid "Bl&ue:"
 msgstr "&Lam:"
 
-#: src/translations.h:673
+#: src/translations.h:675
 msgid "Select Color"
 msgstr "Chọn màu"
 
-#: src/translations.h:674
+#: src/translations.h:676
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Con trỏ ở %1, %2 Nhấn ESC để xóa"
 
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "Back"
 msgstr ""
 
-#: src/translations.h:676
+#: src/translations.h:678
 msgid "Forward"
 msgstr ""
 
-#: src/translations.h:677
+#: src/translations.h:679
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:678
+#: src/translations.h:680
 msgid "Create New Folder"
 msgstr ""
 
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "List View"
 msgstr ""
 
-#: src/translations.h:680
+#: src/translations.h:682
 msgid "Detail View"
 msgstr ""
 
-#: src/translations.h:681
+#: src/translations.h:683
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:682
+#: src/translations.h:684
 #, qt-format
 msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
 
-#: src/translations.h:683
+#: src/translations.h:685
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:684
+#: src/translations.h:686
 msgid "&No"
 msgstr ""
 
-#: src/translations.h:685
+#: src/translations.h:687
 msgid "&Select All"
 msgstr ""
 
-#: src/translations.h:686
+#: src/translations.h:688
 msgid "&Step up"
 msgstr ""
 
-#: src/translations.h:687
+#: src/translations.h:689
 msgid "Step &down"
 msgstr ""
 
@@ -8047,7 +8059,7 @@ msgid "Markings"
 msgstr "Đánh dấu"
 
 #: src/ui_viewDialog.h:2476
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:450
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Landscape"
 msgstr "Khung cảnh"
 
@@ -8061,7 +8073,7 @@ msgid "Atmosphere visualization"
 msgstr ""
 
 #: src/ui_viewDialog.h:2483
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:445
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Light pollution:"
 msgstr "Ô nhiễm ánh sáng:"
 
@@ -9415,7 +9427,7 @@ msgstr ""
 "nhìn ban đầu"
 
 #: src/ui_configurationDialog.h:1512
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:462
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Tự động thu nhỏ về hướng nhìn ban đầu"
 
@@ -9664,7 +9676,7 @@ msgid "Include dir:"
 msgstr "Bao gồm các thư mục:"
 
 #: src/ui_scriptConsole.h:380
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:336
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "..."
 msgstr "…"
 
@@ -11662,7 +11674,7 @@ msgid "The satellite is not visible"
 msgstr "Vệ tinh không thể nhìn thấy"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:259
+#: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
@@ -12394,6 +12406,14 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:136
 msgid "Devices:"
+msgstr ""
+
+#: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:150
+msgid "Max"
+msgstr ""
+
+#: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:151
+msgid "Min"
 msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
@@ -13477,73 +13497,73 @@ msgstr "Xích kinh (J2000)"
 msgid "Declination (J2000)"
 msgstr "Xích vĩ (J2000)"
 
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:276
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:305
-#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:443
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:275
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:304
+#: plugins/TelescopeControl/src/gui/SlewDialog.cpp:453
 msgid "Select one"
 msgstr "Chọn một cái"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:328
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:327
 msgid "Slew telescope to"
 msgstr "Hướng kính thiên văn đến"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:330
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:329
 msgid "There are no active devices."
 msgstr "Không có thiết bị hoạt động"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:330
 msgid "Slew telescope to coordinates"
 msgstr "Hướng kính thiên văn đến tọa độ"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:332
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
 msgstr "&Xích kinh (J2000):"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:332
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
 msgstr "Độ& lệch (J2000):"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:334
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
 msgid "&Current object"
 msgstr "&Đối tượng hiện tại"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:334
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
 msgstr "Giữa màn hình"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:338
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
 msgid "Hours-minutes-seconds format"
 msgstr "Định dạng giờ-phút-giây"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:340
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "&HMS"
 msgstr "&giờ phút giây"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:342
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:341
 msgid "Degrees-minutes-seconds format"
 msgstr "Định dạng độ-phút-giây"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:344
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:343
 msgid "&DMS"
 msgstr "&độ phút giây"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:346
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:345
 msgid "Decimal degrees"
 msgstr "Độ thập phân"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:348
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:347
 msgid "D&ecimal"
 msgstr "Thập& phân"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:349
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:348
 msgid "&Slew"
 msgstr "&xoay"
 
-#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:350
+#: plugins/TelescopeControl/src/gui/ui_slewDialog.h:349
 msgid "Configure &telescopes..."
 msgstr "Cấu hình %kính thiên văn..."
 
@@ -13748,14 +13768,6 @@ msgstr "Xóa cái được chọn"
 msgid "Clear list"
 msgstr "Xóa danh sách"
 
-#: plugins/TelescopeControl/src/gui/ui_TelescopeMoveWidget.h:146
-msgid "Max"
-msgstr ""
-
-#: plugins/TelescopeControl/src/gui/ui_TelescopeMoveWidget.h:147
-msgid "Min"
-msgstr ""
-
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:88
 msgid "Text User Interface"
 msgstr "Giao diện người dùng văn bản"
@@ -13881,52 +13893,56 @@ msgstr "Gợi ý cụm sao"
 msgid "Galactic equator line"
 msgstr "Đường xích đạo Ngân Hà"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:442
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:415
+msgid "Sky Background (default: black)"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Effects"
 msgstr "Hiệu ứng"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:456
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:463
 msgid "Setting landscape sets location"
 msgstr "Đang cài đặt vị trí cài đặt cảnh quan"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:467
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:474
 msgid "Zoom duration:"
 msgstr "Thời gian phóng to:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:473
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:480
 msgid "Milky Way intensity:"
 msgstr "Cường độ Milky Way:"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:479
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:486
 msgid "Zodiacal light intensity:"
 msgstr "Cường độ ánh sáng hoàng đạo"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:500
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:507
 msgid "Run local script"
 msgstr "Chạy lệnh nội bộ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:506
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:513
 msgid "Stop running script"
 msgstr "Dừng lệnh nội bộ"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:517
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:521
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:524
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:528
 msgid "Administration"
 msgstr "Quản lý"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:527
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:534
 msgid "Load default configuration"
 msgstr "Tải cấu hình mặc định"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:528
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:535
 msgid "Save current configuration"
 msgstr "Lưu cấu hình mặc định"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:531
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:538
 msgid "Shut down"
 msgstr "Tắt"
 
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:607
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:614
 msgid "[no TUI node]"
 msgstr "Không có nút giao diện văn bản"
 
@@ -14640,148 +14656,145 @@ msgstr "Hiển thị ẩn tinh"
 msgid "Pulsars configuration window"
 msgstr "Cửa sổ cấu hình ẩn tinh"
 
-#: plugins/Pulsars/src/Pulsar.cpp:159
+#: plugins/Pulsars/src/Pulsar.cpp:180
 msgid "pulsar"
 msgstr "ẩn tinh"
 
-#: plugins/Pulsars/src/Pulsar.cpp:164
-msgid "has one registered glitch"
-msgstr "có một sự cố được ghi nhận"
-
 #. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
-#: plugins/Pulsars/src/Pulsar.cpp:168
-#, qt-format
-msgid "has %1 registered glitches"
-msgstr "có %1 sự cố được ghi nhận"
+#: plugins/Pulsars/src/Pulsar.cpp:184
+#, qt-format, qt-plural-format
+msgid "has %1 registered glitch(es)"
+msgid_plural "has %1 registered glitch(es)"
+msgstr[0] ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:170
+#: plugins/Pulsars/src/Pulsar.cpp:185
 msgid "pulsar with glitches"
 msgstr "Ẩn tinh với sự trục trặc"
 
-#: plugins/Pulsars/src/Pulsar.cpp:182
+#: plugins/Pulsars/src/Pulsar.cpp:197
 msgid "Barycentric period"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:185
+#: plugins/Pulsars/src/Pulsar.cpp:200
 msgctxt "period"
 msgid "s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:189
+#: plugins/Pulsars/src/Pulsar.cpp:204
 msgid "Time derivative of barycentric period"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:194
+#: plugins/Pulsars/src/Pulsar.cpp:209
 msgid "Dispersion measure"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:197
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgctxt "distance"
 msgid "pc"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:214
 msgctxt "distance"
 msgid "cm"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:206
+#: plugins/Pulsars/src/Pulsar.cpp:221
 msgid "Spin down energy loss rate"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:209
+#: plugins/Pulsars/src/Pulsar.cpp:224
 msgctxt "power"
 msgid "ergs/s"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:215
+#: plugins/Pulsars/src/Pulsar.cpp:230
 msgid "Binary period of pulsar"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:218
+#: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "period"
 msgid "days"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:222 plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Pulsars/src/Pulsar.cpp:237 plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Eccentricity"
 msgstr "Độ lệch tâm"
 
-#: plugins/Pulsars/src/Pulsar.cpp:227
+#: plugins/Pulsars/src/Pulsar.cpp:242
 msgid "Annual parallax"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:230
+#: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:236
+#: plugins/Pulsars/src/Pulsar.cpp:251
 msgid "Distance based on electron density model"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:249
+#: plugins/Pulsars/src/Pulsar.cpp:264
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:252
+#: plugins/Pulsars/src/Pulsar.cpp:267
 msgctxt "time"
 msgid "ms"
 msgstr ""
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:257
+#: plugins/Pulsars/src/Pulsar.cpp:272
 msgid "Time averaged flux density at"
 msgstr "Thời gian thông lượng tỷ trọng trung bình ở"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:261
+#: plugins/Pulsars/src/Pulsar.cpp:276
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:273
+#: plugins/Pulsars/src/Pulsar.cpp:288
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 msgid "Notes"
 msgstr "Ghi chú"
 
-#: plugins/Pulsars/src/Pulsar.cpp:362
+#: plugins/Pulsars/src/Pulsar.cpp:377
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
 "Ẩn tinh phát tia X dị thường hoặc sự lặp lại tia gamma mềm với những rung "
 "động được phát hiện"
 
-#: plugins/Pulsars/src/Pulsar.cpp:367
+#: plugins/Pulsars/src/Pulsar.cpp:382
 msgid "has one or more binary companions"
 msgstr "có một bạn đồng hành hoặc nhiều hơn"
 
-#: plugins/Pulsars/src/Pulsar.cpp:372
+#: plugins/Pulsars/src/Pulsar.cpp:387
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "với phát xung từ tần số vô tuyến đến hồng ngoại hoặc cao hơn"
 
-#: plugins/Pulsars/src/Pulsar.cpp:377
+#: plugins/Pulsars/src/Pulsar.cpp:392
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "với phát xung chỉ ở tần số hồng ngoại hoặc cao hơn"
 
-#: plugins/Pulsars/src/Pulsar.cpp:382
+#: plugins/Pulsars/src/Pulsar.cpp:397
 msgid "with pulsed emission in the radio band"
 msgstr "với phát xung trong dải tầng vô tuyến"
 
-#: plugins/Pulsars/src/Pulsar.cpp:387
+#: plugins/Pulsars/src/Pulsar.cpp:402
 msgid "with intermittently pulsed radio emission"
 msgstr "với phát xung vô tuyến không liên tục"
 
-#: plugins/Pulsars/src/Pulsar.cpp:392
+#: plugins/Pulsars/src/Pulsar.cpp:407
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
@@ -14981,12 +14994,12 @@ msgid "Server disabled - or Server listening on IP: aaa.bbb.ccc.ddd"
 msgstr ""
 "Máy chủ đã vô hiệu hóa - hoặc Máy chủ đang nghe trên IP: aaa.bbb.ccc.ddd"
 
-#: plugins/RemoteSync/src/RemoteSync.cpp:51
+#: plugins/RemoteSync/src/RemoteSync.cpp:53
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Remote Sync"
 msgstr ""
 
-#: plugins/RemoteSync/src/RemoteSync.cpp:54
+#: plugins/RemoteSync/src/RemoteSync.cpp:56
 msgid ""
 "Provides state synchronization for multiple Stellarium instances running in "
 "a network. See manual for detailed description."
@@ -15310,10 +15323,6 @@ msgstr ""
 #: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Exoplanet"
 msgstr "Ngoại hành tinh"
-
-#: plugins/Exoplanets/src/Exoplanet.cpp:351
-msgid "days"
-msgstr "ngày"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:352
 #: plugins/Exoplanets/src/Exoplanet.cpp:353
