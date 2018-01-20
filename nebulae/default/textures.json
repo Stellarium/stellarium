@@ -582,9 +582,9 @@
 		"maxBrightness" : 11.5
 	},
 	{
-		"imageCredits": {"short" : "DSS"},
-		"imageUrl" : "m77-dss.png",
-		"worldCoords" : [[[40.7580, -0.0990], [40.5910, -0.0990], [40.5910, 0.0660], [40.7580, 0.0660]]],
+		"imagecredits" : {"short" : "Wang Lingyi"},
+		"imageUrl" : "m77.png",
+		"worldCoords" : [[[40.7685,-.1067], [40.5735,-.1067], [40.5748,.0883], [40.76998,.089]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.161899429,
 		"maxBrightness" : 13.5
@@ -1622,12 +1622,173 @@
 		"minResolution" : 1,
 		"maxBrightness" : 13.5
 	},
-	{
+		{
 		"imageCredits": {"short" : "Georg Zotti", "infoUrl": "http://www.waa.at/"},
 		"imageUrl" : "etaCarinae_gzotti.png",
 		"worldCoords" : [[[163.6600, -61.2670], [158.5250, -61.0900], [159.1100, -58.2400], [163.840, -58.3950]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 2.5,
 		"maxBrightness" : 13.0
+	},
+	{
+		"imagecredits" : {"short" : "Wang Lingyi"},
+		"imageUrl" : "sh2-264.png",
+		"worldCoords" : [[[88.3755,5.6946], [80.2485,5.7106], [80.1547,13.7946], [88.4733,13.7906]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "barnard_loop-1.png",
+		"worldCoords" : [[[94.3450,-11.5421], [85.5375,-11.6019], [85.5418,-2.9301], [94.1902,-2.9259]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "barnard_loop-2.png",
+		"worldCoords" : [[[85.5375,-11.6019], [76.7651,-11.4499], [76.9066,-2.8553], [85.5448,-2.9400]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "barnard_loop-3.png",
+		"worldCoords" : [[[85.5441,.9194], [81.2479,.9194], [81.2579,5.1794], [85.5491,5.1794]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"},
+		"imageUrl" : "barnard_loop-4.png",
+		"worldCoords" : [[[94.1902,-2.9259], [85.5418,-2.9301], [85.5314,5.6592], [99.9844,5.5843]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 2.066023154,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "Sun Shuwei"}, 
+		"imageUrl" : "ic342.png", 
+    "worldCoords" : [[[57.4909,67.7905], [55.9733,67.7902], [55.9602,68.3628], [57.5069,68.3629]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2222381739, 
+		"maxBrightness" : 14.5
+	},
+	{
+		"imagecredits" : {"short" : "Lowell Observatory","infoUrl": "http://www2.lowell.edu/users/massey/lgsurvey/IC10_BVHa.jpg"},
+		"imageUrl" : "ic10.png",
+		"worldCoords" : [[[5.3802,59.1378], [4.7928,59.1378], [4.7928,59.4378], [5.3802,59.4378]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imagecredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "http://www.eso.org/public/images/eso1237c/"},
+		"imageUrl" : "ic2177.png",
+		"worldCoords" : [[[107.6394,-11.9562], [105.191,-11.9561], [105.2043,-9.5621], [107.632,-9.5621]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13
+	},
+	{
+		"imagecredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "http://www.eso.org/public/archives/images/large/eso1003b.jpg"},
+		"imageUrl" : "n6334.png",
+		"worldCoords" : [[[260.4075,-36.4551], [259.0564,-36.4526], [259.0688,-35.3655], [260.4039,-35.3686]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13
+	},
+	{
+		"imagecredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "http://www.eso.org/public/images/eso1226c/"},
+		"imageUrl" : "n6357.png",
+		"worldCoords" : [[[262.0591,-34.939], [260.6300,-34.9362], [260.6433,-33.7633], [262.0551,-33.769]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imagecredits" : {"short" : "Wang Lingyi"},
+		"imageUrl" : "sh2-308.png",
+		"worldCoords" : [[[104.0377,-24.2924], [103.2173,-24.2924], [103.2173,-23.5424], [104.0377,-23.5424]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 14.2
+	},
+	{
+		"imagecredits" : {"short" : "ESO/La Silla Observatory","infoUrl": "http://www.eso.org/public/news/eso1425/"},
+		"imageUrl" : "n3603.png",
+		"worldCoords" : [[[169.5252,-61.7266], [167.3893,-61.7186], [167.4334,-60.707], [169.508,-60.7137]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.2
+	},
+	{
+		"imagecredits" : {"short" : "Ole Nielsen","infoUrl":"https://en.wikipedia.org/wiki/File:NGC4244.jpg"},
+		"imageUrl" : "n4244.png",
+		"worldCoords" : [[[184.5044,37.6821], [184.2103,37.6813], [184.2098,37.914], [184.5037,37.9144]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.8       
+  },
+  {
+		"imagecredits" : {"short" : "NASA","infoUrl": "http://www.spacetelescope.org/projects/fits_liberator/fitsimages/davidedemartin_2/"},
+		"imageUrl" : "n7000.png",
+		"worldCoords" :  [[[316.8811,42.6619], [311.6901,42.6681], [311.5247,46.4755], [317.0671,46.4701]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2066023154,
+		"maxBrightness" : 13.2
+  },
+  {
+		"imagecredits" : {"short" : "Giuseppe Donatiello","infoUrl": "https://commons.wikimedia.org/wiki/File:IC_1396_rev_20140921_s_(18237481073).jpg"},
+		"imageUrl" : "ic1396.png",
+		"worldCoords" : [[[327.9133,55.6843], [321.7551,55.6883], [321.4523,59.1633], [328.2343,59.1583]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 14.6
+  },
+  {
+		"imagecredits" : {"short" : "Hewholooks","infoUrl": "https://commons.wikimedia.org/wiki/File:CaveHunterWilson.jpg"},
+		"imageUrl" : "sh2-155.png",
+		"worldCoords" : [[[345.4678,61.9341], [343.3816,61.9476], [343.3816,62.9292], [345.5323,62.915]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 15.3
+	},
+	{
+		"imagecredits" : {"short" : "Ken Crawford","infoUrl": "http://www.imagingdeepsky.com/Galaxies/NGC4565/NGC4565.htm"}, 
+		"imageUrl" : "n4565.png", 
+		"worldCoords" : [[[189.2138,25.8117], [188.8672,25.8117], [188.8672,26.1233], [189.2138,26.1233]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2222381739, 
+		"maxBrightness" : 13.8 
+	},
+	{
+		"imagecredits" : {"short" : "Caelum Observatory","infoUrl": "http://www.caelumobservatory.com/gallery/comaclstr.shtml"},
+		"imageUrl" : "coma_cluster.png",
+		"worldCoords" : [[[195.1875,27.81], [194.7842,27.81], [194.7834,28.1666], [195.1877,28.1666]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.4
+	},
+	{
+		"imagecredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "http://www.eso.org/public/images/eso0949m/"},
+		"imageUrl" : "fornax_cluster.png",
+		"worldCoords" : [[[55.7095,-36.3761], [53.1058,-36.3758], [53.1405,-34.2821], [55.6775,-34.2811]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2222381739,
+		"maxBrightness" : 13.2
+	},
+	{
+		"imageCredits": {"short" : "ESO", "infoUrl": "http://www.eso.org/public/images/eso1411a/"},
+		"imageUrl" : "n1316.png",
+		"worldCoords" : [[[50.886,-37.4072], [50.4356,-37.4072], [50.4364,-37.0488], [50.8856,-37.0488]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2169148018,
+		"maxBrightness" : 12.8
 	}]
 }
