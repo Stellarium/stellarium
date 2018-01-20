@@ -410,7 +410,9 @@
 	4.30 Images of NGC40, NGC4631, NGC4627, NGC4656, NGC4657 from Steven
 	     Bellavia
 	4.31 Images of Barnard Loop, IC342 from Sun Shuwei
- 	4.32 Images of M77, Sh2-264, Sh2-308 from Wang Lingyi
+	     License: public domain
+	4.32 Images of M77, Sh2-264, Sh2-308 from Wang Lingyi
+	     License: public domain
 	4.33 Images of IC10 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
