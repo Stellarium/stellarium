@@ -1601,7 +1601,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotAltVsTime) return;
+	if (!plotAltVsTime)
+		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -1688,6 +1689,10 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 // Added vertical line indicating "now"
 void AstroCalcDialog::drawCurrentTimeDiagram()
 {
+	// special case - plot the graph when tab is visible
+	if (!plotAltVsTime)
+		return;
+
 	double currentJD = core->getJD();
 	double now = ((currentJD + 0.5 - (int)currentJD) * 86400.0) + core->getUTCOffset(currentJD) * 3600.0;
 	if (now > 129600) now -= 86400;
@@ -1698,30 +1703,24 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	ay.append(minY);
 	ay.append(maxY);
 	QVector<double> x = ax.toVector(), y = ay.toVector();
-	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->graph(1)->setData(x, y);
-	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
-	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
-	ui->altVsTimePlot->graph(1)->setName("[Now]");
-
 	ui->altVsTimePlot->replot();
 }
 
 // Added vertical line indicating time of transit
 void AstroCalcDialog::drawTransitTimeDiagram()
 {
+	// special case - plot the graph when tab is visible
+	if (!plotAltVsTime)
+		return;
+
 	QList<double> ax, ay;
 	ax.append(transitX);
 	ax.append(transitX);
 	ay.append(minY);
 	ay.append(maxY);
-	QVector<double> x = ax.toVector(), y = ay.toVector();
-	ui->altVsTimePlot->addGraph();
+	QVector<double> x = ax.toVector(), y = ay.toVector();	
 	ui->altVsTimePlot->graph(2)->setData(x, y);
-	ui->altVsTimePlot->graph(2)->setPen(QPen(Qt::cyan, 1));
-	ui->altVsTimePlot->graph(2)->setLineStyle(QCPGraph::lsLine);
-	ui->altVsTimePlot->graph(2)->setName("[Transit]");
-
 	ui->altVsTimePlot->replot();
 }
 
@@ -1739,6 +1738,17 @@ void AstroCalcDialog::prepareAxesAndGraph()
 	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
 	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(0)->rescaleAxes(true);
+
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(1)->setName("[Now]");
+
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(2)->setPen(QPen(Qt::cyan, 1));
+	ui->altVsTimePlot->graph(2)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(2)->setName("[Transit]");
+
 	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
 	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
 

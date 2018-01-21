@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-10 21:59+0700\n"
+"POT-Creation-Date: 2018-01-19 20:28+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2017\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -1105,712 +1105,779 @@ msgctxt "Nova template"
 msgid "Nova"
 msgstr "新星"
 
+#. TRANSLATORS: Proper name of pulsar PSR J0534+2200 (Source: SIMBAD)
+#: skycultures/translations.fab:523
+msgid "Crab Pulsar"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J0633+1746 (Source: SIMBAD;
+#. https://en.wikipedia.org/wiki/Geminga)
+#: skycultures/translations.fab:525
+msgid "Geminga Pulsar"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J0659+1414 (Source: SIMBAD)
+#: skycultures/translations.fab:527
+msgid "Monogem Pulsar"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J0834-4511 or PSR J0835-4510
+#. (Source: SIMBAD; https://en.wikipedia.org/wiki/Vela_Pulsar)
+#: skycultures/translations.fab:529
+msgid "Vela Pulsar"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J1300+1240 (Source: SIMBAD;
+#. https://en.wikipedia.org/wiki/PSR_B1257%2B12)
+#. TRANSLATORS: Proper name of pulsar PSR 1257+12
+#. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12
+#: skycultures/translations.fab:531 skycultures/translations.fab:658
+msgid "Lich"
+msgstr "Lich"
+
+#. TRANSLATORS: Proper name of pulsar PSR J1412+7922 (Source: SIMBAD)
+#: skycultures/translations.fab:533
+msgid "Calvera"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J1513-5908 (Source: SIMBAD)
+#: skycultures/translations.fab:535
+msgid "Cir Pulsar"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J1809-2332 (Source: SIMBAD)
+#: skycultures/translations.fab:537
+msgid "Tasmanian Devil Nebula"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J1915+1606 (Source: SIMBAD;
+#. https://en.wikipedia.org/wiki/Hulse–Taylor_binary)
+#: skycultures/translations.fab:539
+msgid "Hulse-Taylor Pulsar"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J1959+2048 (Source: SIMBAD)
+#: skycultures/translations.fab:541
+msgid "Black Widow"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J2021+3651 (Source: SIMBAD)
+#: skycultures/translations.fab:543
+msgid "Dragonfly Nebula"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J2225+6535 (Source: SIMBAD)
+#: skycultures/translations.fab:545
+msgid "Guitar Nebula"
+msgstr ""
+
+#. TRANSLATORS: Proper name of pulsar PSR J1921+2153 (Source: SIMBAD; LGM is
+#. abbreviation for "little green men";
+#. https://en.wikipedia.org/wiki/PSR_B1919%2B21)
+#: skycultures/translations.fab:547
+msgid "LGM-1"
+msgstr ""
+
 #. TRANSLATORS: Proper name of star 14 Andromedae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/14_Andromedae
-#: skycultures/translations.fab:524 skycultures/western/star_names.fab:11
+#: skycultures/translations.fab:553 skycultures/western/star_names.fab:11
 msgid "Veritate"
 msgstr "螣蛇增九 (Veritate)"
 
 #. TRANSLATORS: Proper name of exoplanet 14 Andromedae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/14_Andromedae_b
-#: skycultures/translations.fab:527
+#: skycultures/translations.fab:556
 msgid "Spe"
 msgstr "仙女座14b（spe）"
 
 #. TRANSLATORS: Proper name of star 18 Delphini
 #. TRANSLATORS: https://en.wikipedia.org/wiki/18_Delphini
-#: skycultures/translations.fab:530 skycultures/western/star_names.fab:334
+#: skycultures/translations.fab:559 skycultures/western/star_names.fab:334
 msgid "Musica"
 msgstr "司非增二 (Musica)"
 
 #. TRANSLATORS: Proper name of exoplanet 18 Delphini b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/18_Delphini_b
-#: skycultures/translations.fab:533
+#: skycultures/translations.fab:562
 msgid "Arion"
 msgstr "海豚座18 b (Arion)"
 
 #. TRANSLATORS: Proper name of star 42 Draconis
 #. TRANSLATORS: https://en.wikipedia.org/wiki/42_Draconis
-#: skycultures/translations.fab:536 skycultures/western/star_names.fab:369
+#: skycultures/translations.fab:565 skycultures/western/star_names.fab:369
 msgid "Fafnir"
 msgstr "扶筐增二 (Fafnir)"
 
 #. TRANSLATORS: Proper name of exoplanet 42 Draconis b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/42_Draconis_b
-#: skycultures/translations.fab:539
+#: skycultures/translations.fab:568
 msgid "Orbitar"
 msgstr "天龍座42 b (Orbitar)"
 
 #. TRANSLATORS: Proper name of star 47 Ursae Majoris
 #. TRANSLATORS: https://en.wikipedia.org/wiki/47_Ursae_Majoris
-#: skycultures/translations.fab:542 skycultures/western/star_names.fab:846
+#: skycultures/translations.fab:571 skycultures/western/star_names.fab:846
 msgid "Chalawan"
 msgstr "天牢三 (Chalawan)"
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/47_Ursae_Majoris_b
-#: skycultures/translations.fab:545
+#: skycultures/translations.fab:574
 msgid "Taphao Thong"
 msgstr "天牢三 b (Taphao Thong)"
 
 #. TRANSLATORS: Proper name of exoplanet 47 Ursae Majoris c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/47_Ursae_Majoris_c
-#: skycultures/translations.fab:548
+#: skycultures/translations.fab:577
 msgid "Taphao Kaew"
 msgstr "天牢三 c (Taphao Kaew)"
 
 #. TRANSLATORS: Proper name of star 51 Pegasi
 #. TRANSLATORS: https://en.wikipedia.org/wiki/51_Pegasi
-#: skycultures/translations.fab:551 skycultures/western/star_names.fab:628
+#: skycultures/translations.fab:580 skycultures/western/star_names.fab:628
 msgid "Helvetios"
 msgstr "室宿增一 (Helvetios)"
 
 #. TRANSLATORS: Proper name of exoplanet 51 Pegasi b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/51_Pegasi_b
-#: skycultures/translations.fab:554
+#: skycultures/translations.fab:583
 msgid "Dimidium"
 msgstr "飛馬座51 b"
 
 #. TRANSLATORS: Proper name of star 55 Cancri
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri
-#: skycultures/translations.fab:557 skycultures/western/star_names.fab:130
+#: skycultures/translations.fab:586 skycultures/western/star_names.fab:130
 msgid "Copernicus"
 msgstr "軒轅增十九 (Copernicus)"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_b
-#: skycultures/translations.fab:560
+#: skycultures/translations.fab:589
 msgid "Galileo"
 msgstr "巨蟹座55 b (Galileo)"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_c
-#: skycultures/translations.fab:563
+#: skycultures/translations.fab:592
 msgid "Brahe"
 msgstr "巨蟹座55 c (Brahe)"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_d
-#: skycultures/translations.fab:566
+#: skycultures/translations.fab:595
 msgid "Lipperhey"
 msgstr "巨蟹座55 d (Lipperhey)"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri e
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_e
-#: skycultures/translations.fab:569
+#: skycultures/translations.fab:598
 msgid "Janssen"
 msgstr "巨蟹座55 e (Janssen)"
 
 #. TRANSLATORS: Proper name of exoplanet 55 Cancri f
 #. TRANSLATORS: https://en.wikipedia.org/wiki/55_Cancri_f
-#: skycultures/translations.fab:572
+#: skycultures/translations.fab:601
 msgid "Harriot"
 msgstr "巨蟹座55 f (Harriot)"
 
 #. TRANSLATORS: Proper name of exoplanet Ain b (epsilon Tauri b)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Epsilon_Tauri_b
-#: skycultures/translations.fab:575
+#: skycultures/translations.fab:604
 msgid "Amateru"
 msgstr "畢宿一 b"
 
 #. TRANSLATORS: Proper name of exoplanet Edasich b (iota Draconis b)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iota_Draconis_b
-#: skycultures/translations.fab:578
+#: skycultures/translations.fab:607
 msgid "Hypatia"
 msgstr "左樞 b (Hypatia)"
 
 #. TRANSLATORS: Proper name of star epsilon Eridani
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Epsilon_Eridani
-#: skycultures/translations.fab:581 skycultures/western/star_names.fab:407
+#: skycultures/translations.fab:610 skycultures/western/star_names.fab:407
 msgid "Ran"
 msgstr "天苑四 (Ran)"
 
 #. TRANSLATORS: Proper name of exoplanet epsilon Eridani b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Epsilon_Eridani_b
-#: skycultures/translations.fab:584
+#: skycultures/translations.fab:613
 msgid "AEgir"
 msgstr "天苑四 b (AEgir)"
 
 #. TRANSLATORS: Proper name of exoplanet Errai b (gamma Cephei Ab)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gamma_Cephei_Ab
-#: skycultures/translations.fab:587
+#: skycultures/translations.fab:616
 msgid "Tadmor"
 msgstr "仙王座γ b (Tadmor)"
 
 #. TRANSLATORS: Proper name of exoplanet Fomalhaut b (alpha Piscis Austrini b)
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Fomalhaut_b
-#: skycultures/translations.fab:590
+#: skycultures/translations.fab:619
 msgid "Dagon"
 msgstr "北落師門 b (Dagon)"
 
 #. TRANSLATORS: Proper name of star HD 104985
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_104985
-#: skycultures/translations.fab:593 skycultures/western/star_names.fab:120
+#: skycultures/translations.fab:622 skycultures/western/star_names.fab:120
 msgid "Tonatiuh"
 msgstr "Tonatiuh"
 
 #. TRANSLATORS: Proper name of exoplanet HD 104985 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_104985_b
-#: skycultures/translations.fab:596
+#: skycultures/translations.fab:625
 msgid "Meztli"
 msgstr "Meztli"
 
 #. TRANSLATORS: Proper name of star HD 149026
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_149026
-#: skycultures/translations.fab:599 skycultures/western/star_names.fab:460
+#: skycultures/translations.fab:628 skycultures/western/star_names.fab:460
 msgid "Ogma"
 msgstr "Ogma"
 
 #. TRANSLATORS: Proper name of exoplanet HD 149026 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/HD_149026_b
-#: skycultures/translations.fab:602
+#: skycultures/translations.fab:631
 msgid "Smertrios"
 msgstr "Smertrios"
 
 #. TRANSLATORS: Proper name of star HD 81688
 #. TRANSLATORS: https://en.wikipedia.org/wiki/41_Lyncis
-#: skycultures/translations.fab:605 skycultures/western/star_names.fab:845
+#: skycultures/translations.fab:634 skycultures/western/star_names.fab:845
 msgid "Intercrus"
 msgstr "Intercrus"
 
 #. TRANSLATORS: Proper name of exoplanet HD 81688 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/41_Lyncis_b
-#: skycultures/translations.fab:608
+#: skycultures/translations.fab:637
 msgid "Arkas"
 msgstr "天貓座41 b"
 
 #. TRANSLATORS: Proper name of star mu Arae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae
-#: skycultures/translations.fab:611 skycultures/western/star_names.fab:50
+#: skycultures/translations.fab:640 skycultures/western/star_names.fab:50
 msgid "Cervantes"
 msgstr "Cervantes"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_b
-#: skycultures/translations.fab:614
+#: skycultures/translations.fab:643
 msgid "Quijote"
 msgstr "天壇座μ b (Quijote)"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_c
-#: skycultures/translations.fab:617
+#: skycultures/translations.fab:646
 msgid "Dulcinea"
 msgstr "天壇座μ c (Dulcinea)"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_d
-#: skycultures/translations.fab:620
+#: skycultures/translations.fab:649
 msgid "Rocinante"
 msgstr "天壇座μ d (Rocinante)"
 
 #. TRANSLATORS: Proper name of exoplanet mu Arae e
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mu_Arae_e
-#: skycultures/translations.fab:623
+#: skycultures/translations.fab:652
 msgid "Sancho"
 msgstr "天壇座μ e (Sancho)"
 
 #. TRANSLATORS: Proper name of exoplanet Pollux b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Pollux_b
-#: skycultures/translations.fab:626
+#: skycultures/translations.fab:655
 msgid "Thestias"
 msgstr "北河三 b (Thestias)"
 
-#. TRANSLATORS: Proper name of pulsar PSR 1257+12
-#. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12
-#: skycultures/translations.fab:629
-msgid "Lich"
-msgstr "Lich"
-
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12_b
-#: skycultures/translations.fab:632
+#: skycultures/translations.fab:661
 msgid "Draugr"
 msgstr "Draugr"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12_c
-#: skycultures/translations.fab:635
+#: skycultures/translations.fab:664
 msgid "Poltergeist"
 msgstr "Poltergeist"
 
 #. TRANSLATORS: Proper name of exoplanet PSR 1257+12 d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/PSR_B1257%2B12_d
-#: skycultures/translations.fab:638
+#: skycultures/translations.fab:667
 msgid "Phobetor"
 msgstr "Phobetor"
 
 #. TRANSLATORS: Proper name of star upsilon Andromedae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae
-#: skycultures/translations.fab:641 skycultures/western/star_names.fab:10
+#: skycultures/translations.fab:670 skycultures/western/star_names.fab:10
 msgid "Titawin"
 msgstr "天大將軍六 (Titawin)"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae_b
-#: skycultures/translations.fab:644
+#: skycultures/translations.fab:673
 msgid "Saffar"
 msgstr "天大將軍六 b (Saffar)"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae c
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae_c
-#: skycultures/translations.fab:647
+#: skycultures/translations.fab:676
 msgid "Samh"
 msgstr "天大將軍六 c (Samh)"
 
 #. TRANSLATORS: Proper name of exoplanet upsilon Andromedae d
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Upsilon_Andromedae_d
-#: skycultures/translations.fab:650
+#: skycultures/translations.fab:679
 msgid "Majriti"
 msgstr "天大將軍六 d (Majriti)"
 
 #. TRANSLATORS: Proper name of star xi Aquilae
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xi_Aquilae
-#: skycultures/translations.fab:653 skycultures/western/star_names.fab:37
+#: skycultures/translations.fab:682 skycultures/western/star_names.fab:37
 msgid "Libertas"
 msgstr "河鼓增八 (Libertas)"
 
 #. TRANSLATORS: Proper name of exoplanet xi Aquilae b
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Xi_Aquilae_b
-#: skycultures/translations.fab:656
+#: skycultures/translations.fab:685
 msgid "Fortitudo"
 msgstr "Fortitudo"
 
-#: skycultures/translations.fab:661
+#: skycultures/translations.fab:690
 msgctxt "Genitive name of constellation"
 msgid "Andromedae"
 msgstr "仙女座"
 
-#: skycultures/translations.fab:662
+#: skycultures/translations.fab:691
 msgctxt "Genitive name of constellation"
 msgid "Antliae"
 msgstr "唧筒座"
 
-#: skycultures/translations.fab:663
+#: skycultures/translations.fab:692
 msgctxt "Genitive name of constellation"
 msgid "Apodis"
 msgstr "天燕座"
 
-#: skycultures/translations.fab:664
+#: skycultures/translations.fab:693
 msgctxt "Genitive name of constellation"
 msgid "Aquarii"
 msgstr "寶瓶座"
 
-#: skycultures/translations.fab:665
+#: skycultures/translations.fab:694
 msgctxt "Genitive name of constellation"
 msgid "Aquilae"
 msgstr "天鷹座"
 
-#: skycultures/translations.fab:666
+#: skycultures/translations.fab:695
 msgctxt "Genitive name of constellation"
 msgid "Arae"
 msgstr "天壇座"
 
-#: skycultures/translations.fab:667
+#: skycultures/translations.fab:696
 msgctxt "Genitive name of constellation"
 msgid "Arietis"
 msgstr "白羊座"
 
-#: skycultures/translations.fab:668
+#: skycultures/translations.fab:697
 msgctxt "Genitive name of constellation"
 msgid "Aurigae"
 msgstr "御夫座"
 
-#: skycultures/translations.fab:669
+#: skycultures/translations.fab:698
 msgctxt "Genitive name of constellation"
 msgid "Bootis"
 msgstr "牧夫座"
 
-#: skycultures/translations.fab:670
+#: skycultures/translations.fab:699
 msgctxt "Genitive name of constellation"
 msgid "Caeli"
 msgstr "雕具座"
 
-#: skycultures/translations.fab:671
+#: skycultures/translations.fab:700
 msgctxt "Genitive name of constellation"
 msgid "Camelopardalis"
 msgstr "鹿豹座"
 
-#: skycultures/translations.fab:672
+#: skycultures/translations.fab:701
 msgctxt "Genitive name of constellation"
 msgid "Cancri"
 msgstr "巨蟹座"
 
-#: skycultures/translations.fab:673
+#: skycultures/translations.fab:702
 msgctxt "Genitive name of constellation"
 msgid "Canum Venaticorum"
 msgstr "獵犬座"
 
-#: skycultures/translations.fab:674
+#: skycultures/translations.fab:703
 msgctxt "Genitive name of constellation"
 msgid "Canis Majoris"
 msgstr "大犬座"
 
-#: skycultures/translations.fab:675
+#: skycultures/translations.fab:704
 msgctxt "Genitive name of constellation"
 msgid "Canis Minoris"
 msgstr "小犬座"
 
-#: skycultures/translations.fab:676
+#: skycultures/translations.fab:705
 msgctxt "Genitive name of constellation"
 msgid "Capricorni"
 msgstr "摩羯座"
 
-#: skycultures/translations.fab:677
+#: skycultures/translations.fab:706
 msgctxt "Genitive name of constellation"
 msgid "Carinae"
 msgstr "船底座"
 
-#: skycultures/translations.fab:678
+#: skycultures/translations.fab:707
 msgctxt "Genitive name of constellation"
 msgid "Cassiopeiae"
 msgstr "仙后座"
 
-#: skycultures/translations.fab:679
+#: skycultures/translations.fab:708
 msgctxt "Genitive name of constellation"
 msgid "Centauri"
 msgstr "半人馬座"
 
-#: skycultures/translations.fab:680
+#: skycultures/translations.fab:709
 msgctxt "Genitive name of constellation"
 msgid "Cephei"
 msgstr "仙王座"
 
-#: skycultures/translations.fab:681
+#: skycultures/translations.fab:710
 msgctxt "Genitive name of constellation"
 msgid "Ceti"
 msgstr "鯨魚座"
 
-#: skycultures/translations.fab:682
+#: skycultures/translations.fab:711
 msgctxt "Genitive name of constellation"
 msgid "Chamaeleontis"
 msgstr "蝘蜓座"
 
-#: skycultures/translations.fab:683
+#: skycultures/translations.fab:712
 msgctxt "Genitive name of constellation"
 msgid "Circini"
 msgstr "圓規座"
 
-#: skycultures/translations.fab:684
+#: skycultures/translations.fab:713
 msgctxt "Genitive name of constellation"
 msgid "Columbae"
 msgstr "天鴿座"
 
-#: skycultures/translations.fab:685
+#: skycultures/translations.fab:714
 msgctxt "Genitive name of constellation"
 msgid "Comae Berenices"
 msgstr "后髮座"
 
-#: skycultures/translations.fab:686
+#: skycultures/translations.fab:715
 msgctxt "Genitive name of constellation"
 msgid "Coronae Australis"
 msgstr "南冕座"
 
-#: skycultures/translations.fab:687
+#: skycultures/translations.fab:716
 msgctxt "Genitive name of constellation"
 msgid "Coronae Borealis"
 msgstr "北冕座"
 
-#: skycultures/translations.fab:688
+#: skycultures/translations.fab:717
 msgctxt "Genitive name of constellation"
 msgid "Corvi"
 msgstr "烏鴉座"
 
-#: skycultures/translations.fab:689
+#: skycultures/translations.fab:718
 msgctxt "Genitive name of constellation"
 msgid "Crateris"
 msgstr "巨爵座"
 
-#: skycultures/translations.fab:690
+#: skycultures/translations.fab:719
 msgctxt "Genitive name of constellation"
 msgid "Crucis"
 msgstr "南十字座"
 
-#: skycultures/translations.fab:691
+#: skycultures/translations.fab:720
 msgctxt "Genitive name of constellation"
 msgid "Cygni"
 msgstr "天鵝座"
 
-#: skycultures/translations.fab:692
+#: skycultures/translations.fab:721
 msgctxt "Genitive name of constellation"
 msgid "Delphini"
 msgstr "海豚座"
 
-#: skycultures/translations.fab:693
+#: skycultures/translations.fab:722
 msgctxt "Genitive name of constellation"
 msgid "Doradus"
 msgstr "劍魚座"
 
-#: skycultures/translations.fab:694
+#: skycultures/translations.fab:723
 msgctxt "Genitive name of constellation"
 msgid "Draconis"
 msgstr "天龍座"
 
-#: skycultures/translations.fab:695
+#: skycultures/translations.fab:724
 msgctxt "Genitive name of constellation"
 msgid "Equulei"
 msgstr "小馬座"
 
-#: skycultures/translations.fab:696
+#: skycultures/translations.fab:725
 msgctxt "Genitive name of constellation"
 msgid "Eridani"
 msgstr "波江座"
 
-#: skycultures/translations.fab:697
+#: skycultures/translations.fab:726
 msgctxt "Genitive name of constellation"
 msgid "Fornacis"
 msgstr "天爐座"
 
-#: skycultures/translations.fab:698
+#: skycultures/translations.fab:727
 msgctxt "Genitive name of constellation"
 msgid "Geminorum"
 msgstr "雙子座"
 
-#: skycultures/translations.fab:699
+#: skycultures/translations.fab:728
 msgctxt "Genitive name of constellation"
 msgid "Gruis"
 msgstr "天鶴座"
 
-#: skycultures/translations.fab:700
+#: skycultures/translations.fab:729
 msgctxt "Genitive name of constellation"
 msgid "Herculis"
 msgstr "武仙座"
 
-#: skycultures/translations.fab:701
+#: skycultures/translations.fab:730
 msgctxt "Genitive name of constellation"
 msgid "Horologii"
 msgstr "時鐘座"
 
-#: skycultures/translations.fab:702
+#: skycultures/translations.fab:731
 msgctxt "Genitive name of constellation"
 msgid "Hydrae"
 msgstr "長蛇座"
 
-#: skycultures/translations.fab:703
+#: skycultures/translations.fab:732
 msgctxt "Genitive name of constellation"
 msgid "Hydri"
 msgstr "水蛇座"
 
-#: skycultures/translations.fab:704
+#: skycultures/translations.fab:733
 msgctxt "Genitive name of constellation"
 msgid "Indi"
 msgstr "印第安座"
 
-#: skycultures/translations.fab:705
+#: skycultures/translations.fab:734
 msgctxt "Genitive name of constellation"
 msgid "Lacertae"
 msgstr "蝎虎座"
 
-#: skycultures/translations.fab:706
+#: skycultures/translations.fab:735
 msgctxt "Genitive name of constellation"
 msgid "Leonis"
 msgstr "獅子座"
 
-#: skycultures/translations.fab:707
+#: skycultures/translations.fab:736
 msgctxt "Genitive name of constellation"
 msgid "Leonis Minoris"
 msgstr "小獅座"
 
-#: skycultures/translations.fab:708
+#: skycultures/translations.fab:737
 msgctxt "Genitive name of constellation"
 msgid "Leporis"
 msgstr "天兔座"
 
-#: skycultures/translations.fab:709
+#: skycultures/translations.fab:738
 msgctxt "Genitive name of constellation"
 msgid "Librae"
 msgstr "天秤座"
 
-#: skycultures/translations.fab:710
+#: skycultures/translations.fab:739
 msgctxt "Genitive name of constellation"
 msgid "Lupi"
 msgstr "豺狼座"
 
-#: skycultures/translations.fab:711
+#: skycultures/translations.fab:740
 msgctxt "Genitive name of constellation"
 msgid "Lyncis"
 msgstr "天貓座"
 
-#: skycultures/translations.fab:712
+#: skycultures/translations.fab:741
 msgctxt "Genitive name of constellation"
 msgid "Lyrae"
 msgstr "天琴座"
 
-#: skycultures/translations.fab:713
+#: skycultures/translations.fab:742
 msgctxt "Genitive name of constellation"
 msgid "Mensae"
 msgstr "山案座"
 
-#: skycultures/translations.fab:714
+#: skycultures/translations.fab:743
 msgctxt "Genitive name of constellation"
 msgid "Microscopii"
 msgstr "顯微鏡座"
 
-#: skycultures/translations.fab:715
+#: skycultures/translations.fab:744
 msgctxt "Genitive name of constellation"
 msgid "Monocerotis"
 msgstr "麒麟座"
 
-#: skycultures/translations.fab:716
+#: skycultures/translations.fab:745
 msgctxt "Genitive name of constellation"
 msgid "Muscae"
 msgstr "蒼蠅座"
 
-#: skycultures/translations.fab:717
+#: skycultures/translations.fab:746
 msgctxt "Genitive name of constellation"
 msgid "Normae"
 msgstr "矩尺座"
 
-#: skycultures/translations.fab:718
+#: skycultures/translations.fab:747
 msgctxt "Genitive name of constellation"
 msgid "Octantis"
 msgstr "南極座"
 
-#: skycultures/translations.fab:719
+#: skycultures/translations.fab:748
 msgctxt "Genitive name of constellation"
 msgid "Ophiuchi"
 msgstr "蛇夫座"
 
-#: skycultures/translations.fab:720
+#: skycultures/translations.fab:749
 msgctxt "Genitive name of constellation"
 msgid "Orionis"
 msgstr "獵戶座"
 
-#: skycultures/translations.fab:721
+#: skycultures/translations.fab:750
 msgctxt "Genitive name of constellation"
 msgid "Pavonis"
 msgstr "孔雀座"
 
-#: skycultures/translations.fab:722
+#: skycultures/translations.fab:751
 msgctxt "Genitive name of constellation"
 msgid "Pegasi"
 msgstr "飛馬座"
 
-#: skycultures/translations.fab:723
+#: skycultures/translations.fab:752
 msgctxt "Genitive name of constellation"
 msgid "Persei"
 msgstr "英仙座"
 
-#: skycultures/translations.fab:724
+#: skycultures/translations.fab:753
 msgctxt "Genitive name of constellation"
 msgid "Phoenicis"
 msgstr "鳳凰座"
 
-#: skycultures/translations.fab:725
+#: skycultures/translations.fab:754
 msgctxt "Genitive name of constellation"
 msgid "Pictoris"
 msgstr "繪架座"
 
-#: skycultures/translations.fab:726
+#: skycultures/translations.fab:755
 msgctxt "Genitive name of constellation"
 msgid "Piscium"
 msgstr "雙魚座"
 
-#: skycultures/translations.fab:727
+#: skycultures/translations.fab:756
 msgctxt "Genitive name of constellation"
 msgid "Piscis Austrini"
 msgstr "南魚座"
 
-#: skycultures/translations.fab:728
+#: skycultures/translations.fab:757
 msgctxt "Genitive name of constellation"
 msgid "Puppis"
 msgstr "船尾座"
 
-#: skycultures/translations.fab:729
+#: skycultures/translations.fab:758
 msgctxt "Genitive name of constellation"
 msgid "Pyxidis"
 msgstr "羅盤座"
 
-#: skycultures/translations.fab:730
+#: skycultures/translations.fab:759
 msgctxt "Genitive name of constellation"
 msgid "Reticuli"
 msgstr "網罟座"
 
-#: skycultures/translations.fab:731
+#: skycultures/translations.fab:760
 msgctxt "Genitive name of constellation"
 msgid "Sagittae"
 msgstr "天箭座"
 
-#: skycultures/translations.fab:732
+#: skycultures/translations.fab:761
 msgctxt "Genitive name of constellation"
 msgid "Sagittarii"
 msgstr "人馬座"
 
-#: skycultures/translations.fab:733
+#: skycultures/translations.fab:762
 msgctxt "Genitive name of constellation"
 msgid "Scorpii"
 msgstr "天蝎座"
 
-#: skycultures/translations.fab:734
+#: skycultures/translations.fab:763
 msgctxt "Genitive name of constellation"
 msgid "Sculptoris"
 msgstr "玉夫座"
 
-#: skycultures/translations.fab:735
+#: skycultures/translations.fab:764
 msgctxt "Genitive name of constellation"
 msgid "Scuti"
 msgstr "盾牌座"
 
-#: skycultures/translations.fab:736
+#: skycultures/translations.fab:765
 msgctxt "Genitive name of constellation"
 msgid "Serpentis"
 msgstr "巨蛇座"
 
-#: skycultures/translations.fab:737
+#: skycultures/translations.fab:766
 msgctxt "Genitive name of constellation"
 msgid "Sextantis"
 msgstr "六分儀座"
 
-#: skycultures/translations.fab:738
+#: skycultures/translations.fab:767
 msgctxt "Genitive name of constellation"
 msgid "Tauri"
 msgstr "金牛座"
 
-#: skycultures/translations.fab:739
+#: skycultures/translations.fab:768
 msgctxt "Genitive name of constellation"
 msgid "Telescopii"
 msgstr "望遠鏡座"
 
-#: skycultures/translations.fab:740
+#: skycultures/translations.fab:769
 msgctxt "Genitive name of constellation"
 msgid "Trianguli"
 msgstr "三角座"
 
-#: skycultures/translations.fab:741
+#: skycultures/translations.fab:770
 msgctxt "Genitive name of constellation"
 msgid "Trianguli Australis"
 msgstr "南三角座"
 
-#: skycultures/translations.fab:742
+#: skycultures/translations.fab:771
 msgctxt "Genitive name of constellation"
 msgid "Tucanae"
 msgstr "杜鵑座"
 
-#: skycultures/translations.fab:743
+#: skycultures/translations.fab:772
 msgctxt "Genitive name of constellation"
 msgid "Ursae Majoris"
 msgstr "大熊座"
 
-#: skycultures/translations.fab:744
+#: skycultures/translations.fab:773
 msgctxt "Genitive name of constellation"
 msgid "Ursae Minoris"
 msgstr "小熊座"
 
-#: skycultures/translations.fab:745
+#: skycultures/translations.fab:774
 msgctxt "Genitive name of constellation"
 msgid "Velorum"
 msgstr "船帆座"
 
-#: skycultures/translations.fab:746
+#: skycultures/translations.fab:775
 msgctxt "Genitive name of constellation"
 msgid "Virginis"
 msgstr "室女座"
 
-#: skycultures/translations.fab:747
+#: skycultures/translations.fab:776
 msgctxt "Genitive name of constellation"
 msgid "Volantis"
 msgstr "飛魚座"
 
-#: skycultures/translations.fab:748
+#: skycultures/translations.fab:777
 msgctxt "Genitive name of constellation"
 msgid "Vulpeculae"
 msgstr "狐狸座"
@@ -1884,7 +1951,7 @@ msgstr "肥皂泡星雲"
 msgid "Voodoo Mask Nebula"
 msgstr "巫毒面具星雲"
 
-#: nebulae/default/names.dat:61 nebulae/default/names.dat:892
+#: nebulae/default/names.dat:61 nebulae/default/names.dat:895
 msgid "Burbidge Chain"
 msgstr "Burbidge 鎖鏈"
 
@@ -1938,7 +2005,7 @@ msgstr "小雲星系"
 
 #: nebulae/default/names.dat:74
 msgid "Mirach's Ghost"
-msgstr "奎宿九 (Mirach) 之魂"
+msgstr "奎宿九（Mirach）之魂"
 
 #: nebulae/default/names.dat:75
 msgid "Lost Pearl Galaxy"
@@ -2486,7 +2553,7 @@ msgstr "Hubble 星雲"
 msgid "Christmas Tree Cluster"
 msgstr "聖誕樹星雲"
 
-#: nebulae/default/names.dat:224 nebulae/default/names.dat:879
+#: nebulae/default/names.dat:224 nebulae/default/names.dat:882
 msgid "Cone Nebula"
 msgstr "圓錐星雲"
 
@@ -2795,7 +2862,7 @@ msgstr "雪茄星系"
 msgid "Ursa Major A"
 msgstr "大熊座 A"
 
-#: nebulae/default/names.dat:306 nebulae/default/names.dat:936
+#: nebulae/default/names.dat:306 nebulae/default/names.dat:939
 msgid "The Garland Galaxy"
 msgstr "花環星系"
 
@@ -3007,7 +3074,7 @@ msgstr "方盒星系群"
 
 #: nebulae/default/names.dat:375
 msgid "Medusa Galaxy"
-msgstr "美杜莎 (Medusa) 星系"
+msgstr "美杜莎（Medusa）星系"
 
 #: nebulae/default/names.dat:376
 msgid "Medusa merger"
@@ -3015,7 +3082,7 @@ msgstr "美杜莎 (Medusa) 合併"
 
 #: nebulae/default/names.dat:377
 msgid "Medusa Galaxy Merger"
-msgstr "美杜莎 (Medusa) 星系合併"
+msgstr "美杜莎（Medusa）星系合併"
 
 #: nebulae/default/names.dat:378
 msgid "Silver Streak Galaxy"
@@ -3039,7 +3106,7 @@ msgstr "St. Catherine 之輪"
 
 #: nebulae/default/names.dat:384
 msgid "Faust V023"
-msgstr "浮士德 (Faust) V023"
+msgstr "浮士德（Faust）V023"
 
 #: nebulae/default/names.dat:385
 msgid "Swelling Spiral Galaxy"
@@ -3159,7 +3226,7 @@ msgid "Coalsack Cluster"
 msgstr "煤炭袋星團"
 
 #: nebulae/default/names.dat:421 nebulae/default/names.dat:424
-#: nebulae/default/names.dat:957
+#: nebulae/default/names.dat:960
 msgid "Centaurus Chain"
 msgstr "半人馬座鎖鏈"
 
@@ -3451,7 +3518,7 @@ msgstr "武仙座球狀星團"
 msgid "Great Hercules Cluster"
 msgstr "巨型武仙座星團"
 
-#: nebulae/default/names.dat:505 nebulae/default/names.dat:1044
+#: nebulae/default/names.dat:505 nebulae/default/names.dat:1047
 msgid "Hercules Cluster"
 msgstr "武仙座星團"
 
@@ -4155,7 +4222,7 @@ msgstr "星霧星團"
 
 #: nebulae/default/names.dat:703
 msgid "Herschel's Spiral Cluster"
-msgstr "赫雪爾 (Herschel) 的螺旋星團"
+msgstr "赫雪爾（Herschel）的螺旋星團"
 
 #: nebulae/default/names.dat:704
 msgid "Crab Cluster"
@@ -4671,7 +4738,7 @@ msgstr "天津一 (天鵝座γ) 區域"
 msgid "Flying Bat Nebula"
 msgstr "飛行蝙蝠星雲"
 
-#: nebulae/default/names.dat:850 nebulae/default/names.dat:872
+#: nebulae/default/names.dat:850 nebulae/default/names.dat:874
 msgid "Cave Nebula"
 msgstr "洞穴星雲"
 
@@ -4751,721 +4818,726 @@ msgstr "雕刻的沙漏星雲"
 msgid "Ghost Nebula"
 msgstr "靈魂星雲"
 
-#: nebulae/default/names.dat:873
+#: nebulae/default/names.dat:872 nebulae/default/names.dat:873
+#: nebulae/default/names.dat:881
+msgid "Dark Shark Nebula"
+msgstr ""
+
+#: nebulae/default/names.dat:875
 msgid "Vulture Head Nebula"
 msgstr "禿鷹頭星雲"
 
-#: nebulae/default/names.dat:874
+#: nebulae/default/names.dat:876
 msgid "Baby Eagle Nebula"
 msgstr "小鷹星雲"
 
-#: nebulae/default/names.dat:875
+#: nebulae/default/names.dat:877
 msgid "Orion B"
 msgstr "獵戶座 B"
 
-#: nebulae/default/names.dat:876
+#: nebulae/default/names.dat:878
 msgid "Coalman Nebula"
 msgstr "煤礦工星雲"
 
-#: nebulae/default/names.dat:877
+#: nebulae/default/names.dat:879
 msgid "Northern Coalsack Nebula"
 msgstr "北煤炭袋星雲"
 
-#: nebulae/default/names.dat:878
+#: nebulae/default/names.dat:880
 msgid "Gulf of Mexico Nebula"
 msgstr "墨西哥灣星雲"
 
-#: nebulae/default/names.dat:880 nebulae/default/names.dat:882
+#: nebulae/default/names.dat:883 nebulae/default/names.dat:885
 msgid "Taffy Galaxies"
 msgstr "太妃糖星系"
 
-#: nebulae/default/names.dat:881 nebulae/default/names.dat:883
+#: nebulae/default/names.dat:884 nebulae/default/names.dat:886
 msgid "Taffy System"
 msgstr "太妃糖系統"
 
-#: nebulae/default/names.dat:884
+#: nebulae/default/names.dat:887
 msgid "Wolf-Lundmark-Melotte Object (WLM)"
 msgstr "Wolf-Lundmark-Melotte (WLM) 天體"
 
-#: nebulae/default/names.dat:885
+#: nebulae/default/names.dat:888
 msgid "Sculptor Dwarf Irregular Galaxy"
 msgstr "玉夫座矮不規則星系"
 
-#: nebulae/default/names.dat:886
+#: nebulae/default/names.dat:889
 msgid "Andromeda III Dwarf Galaxy"
 msgstr "仙女座 III 矮星系"
 
-#: nebulae/default/names.dat:887
+#: nebulae/default/names.dat:890
 msgid "Cartwheel Galaxy"
 msgstr "車輪星系"
 
-#: nebulae/default/names.dat:888
+#: nebulae/default/names.dat:891
 msgid "Cartwheel Ring Galaxy"
 msgstr "車輪圈星系"
 
-#: nebulae/default/names.dat:889
+#: nebulae/default/names.dat:892
 msgid "Zwicky's Ellipse"
 msgstr "Zwicky 的橢圓"
 
-#: nebulae/default/names.dat:890
+#: nebulae/default/names.dat:893
 msgid "Exclamation Mark Galaxy"
 msgstr "感嘆號星系"
 
-#: nebulae/default/names.dat:891
+#: nebulae/default/names.dat:894
 msgid "Andromeda I Dwarf Galaxy"
 msgstr "仙女座 I 矮星系"
 
-#: nebulae/default/names.dat:893
+#: nebulae/default/names.dat:896
 msgid "Baade's Galaxy A"
 msgstr "Baade 星系 A"
 
-#: nebulae/default/names.dat:894
+#: nebulae/default/names.dat:897
 msgid "Baade's Galaxy B"
 msgstr "Baade 星系 B"
 
-#: nebulae/default/names.dat:895
+#: nebulae/default/names.dat:898
 msgid "Sculptor Dwarf Galaxy"
 msgstr "玉夫座矮星系"
 
-#: nebulae/default/names.dat:896
+#: nebulae/default/names.dat:899
 msgid "Sculptor System"
 msgstr "玉夫座系統"
 
-#: nebulae/default/names.dat:897
+#: nebulae/default/names.dat:900
 msgid "Pisces Dwarf Galaxy"
 msgstr "雙魚座矮星系"
 
-#: nebulae/default/names.dat:898
+#: nebulae/default/names.dat:901
 msgid "Pisces I"
 msgstr "雙魚座 I"
 
-#: nebulae/default/names.dat:899
+#: nebulae/default/names.dat:902
 msgid "Shapley-Ames 1"
 msgstr "Shapley-Ames 1"
 
-#: nebulae/default/names.dat:900
+#: nebulae/default/names.dat:903
 msgid "Andromeda II"
 msgstr "仙女座 II"
 
-#: nebulae/default/names.dat:901
+#: nebulae/default/names.dat:904
 msgid "Andromeda II Dwarf Galaxy"
 msgstr "仙女座 II 矮星系"
 
-#: nebulae/default/names.dat:902
+#: nebulae/default/names.dat:905
 msgid "White Rose Galaxy"
 msgstr "白玫瑰星系"
 
-#: nebulae/default/names.dat:903
+#: nebulae/default/names.dat:906
 msgid "Phoenix Dwarf Galaxy"
 msgstr "鳳凰座矮星系"
 
-#: nebulae/default/names.dat:904
+#: nebulae/default/names.dat:907
 msgid "Schuster-West Cluster"
 msgstr "Schuster-West 星團"
 
-#: nebulae/default/names.dat:905
+#: nebulae/default/names.dat:908
 msgid "Maffei 1"
 msgstr "Maffei 1"
 
-#: nebulae/default/names.dat:906
+#: nebulae/default/names.dat:909
 msgid "Maffei I"
 msgstr "Maffei I"
 
-#: nebulae/default/names.dat:907
+#: nebulae/default/names.dat:910
 msgid "Fornax Dwarf Galaxy"
 msgstr "天爐座矮星系"
 
-#: nebulae/default/names.dat:908
+#: nebulae/default/names.dat:911
 msgid "Fornax System"
 msgstr "天爐座系統"
 
-#: nebulae/default/names.dat:909
+#: nebulae/default/names.dat:912
 msgid "Maffei 2"
 msgstr "Maffei 2"
 
-#: nebulae/default/names.dat:910
+#: nebulae/default/names.dat:913
 msgid "Maffei II"
 msgstr "Maffei II"
 
-#: nebulae/default/names.dat:911
+#: nebulae/default/names.dat:914
 msgid "Holmberg VI"
 msgstr "Holmberg VI"
 
-#: nebulae/default/names.dat:912
+#: nebulae/default/names.dat:915
 msgid "E1 Cluster"
 msgstr "E1 星團"
 
-#: nebulae/default/names.dat:913
+#: nebulae/default/names.dat:916
 msgid "Schuster's Spiral Galaxy"
 msgstr "Schuster 的螺旋星系"
 
-#: nebulae/default/names.dat:914
+#: nebulae/default/names.dat:917
 msgid "Horologium Dwarf Galaxy"
 msgstr "時鐘座矮星系"
 
-#: nebulae/default/names.dat:915
+#: nebulae/default/names.dat:918
 msgid "Carafe Nebula"
 msgstr "水瓶星雲"
 
-#: nebulae/default/names.dat:916
+#: nebulae/default/names.dat:919
 msgid "Large Magellanic Cloud"
 msgstr "大麥哲倫雲"
 
-#: nebulae/default/names.dat:917
+#: nebulae/default/names.dat:920
 msgid "Nubecula Major"
 msgstr "大雲星系"
 
-#: nebulae/default/names.dat:918
+#: nebulae/default/names.dat:921
 msgid "Orion Dwarf Galaxy"
 msgstr "獵戶座矮星系"
 
-#: nebulae/default/names.dat:919
+#: nebulae/default/names.dat:922
 msgid "Carina Dwarf Galaxy"
 msgstr "船底座矮星系"
 
-#: nebulae/default/names.dat:920
+#: nebulae/default/names.dat:923
 msgid "Southern Ellipse"
 msgstr "南橢圓"
 
-#: nebulae/default/names.dat:921
+#: nebulae/default/names.dat:924
 msgid "Lindsay-Shapley Ring"
 msgstr "Lindsay-Shapley 環"
 
-#: nebulae/default/names.dat:922
+#: nebulae/default/names.dat:925
 msgid "Graham A"
 msgstr "Graham A"
 
-#: nebulae/default/names.dat:923
+#: nebulae/default/names.dat:926
 msgid "Argo Dwarf Irregular Galaxy"
 msgstr "Argo 號矮不規則星系"
 
-#: nebulae/default/names.dat:924
+#: nebulae/default/names.dat:927
 msgid "Integral Sign Galaxy"
 msgstr "積分符號星系"
 
-#: nebulae/default/names.dat:925
+#: nebulae/default/names.dat:928
 msgid "Phoenix Galaxy"
 msgstr "鳳凰座星系"
 
-#: nebulae/default/names.dat:926
+#: nebulae/default/names.dat:929
 msgid "Holmberg II"
 msgstr "Holmberg II"
 
-#: nebulae/default/names.dat:927
+#: nebulae/default/names.dat:930
 msgid "M81 Dwarf A"
 msgstr "M81 A 矮星系"
 
-#: nebulae/default/names.dat:928
+#: nebulae/default/names.dat:931
 msgid "Holmberg III"
 msgstr "Holmberg III"
 
-#: nebulae/default/names.dat:929
+#: nebulae/default/names.dat:932
 msgid "Grasshopper A"
 msgstr "蚱蜢 A"
 
-#: nebulae/default/names.dat:930 nebulae/default/names.dat:1037
+#: nebulae/default/names.dat:933 nebulae/default/names.dat:1040
 msgid "Hydra A"
 msgstr "長蛇座 A"
 
-#: nebulae/default/names.dat:931
+#: nebulae/default/names.dat:934
 msgid "Holmberg I"
 msgstr "Holmberg I"
 
-#: nebulae/default/names.dat:932
+#: nebulae/default/names.dat:935
 msgid "Holmberg IX"
 msgstr "Holmberg IX"
 
-#: nebulae/default/names.dat:933
+#: nebulae/default/names.dat:936
 msgid "Arp Loop"
 msgstr "Arp 環"
 
-#: nebulae/default/names.dat:934
+#: nebulae/default/names.dat:937
 msgid "Sextans B"
 msgstr "六分儀座 B"
 
-#: nebulae/default/names.dat:935
+#: nebulae/default/names.dat:938
 msgid "Revolver Galaxy"
 msgstr "左輪手槍星系"
 
-#: nebulae/default/names.dat:937
+#: nebulae/default/names.dat:940
 msgid "Antlia Dwarf Galaxy"
 msgstr "唧筒座矮星系"
 
-#: nebulae/default/names.dat:938
+#: nebulae/default/names.dat:941
 msgid "M81 Dwarf B"
 msgstr "M81 B 矮星系"
 
-#: nebulae/default/names.dat:939
+#: nebulae/default/names.dat:942
 msgid "Vela Ring Galaxy"
 msgstr "船帆座環星系"
 
-#: nebulae/default/names.dat:940
+#: nebulae/default/names.dat:943
 msgid "Sextans A"
 msgstr "六分儀座 A"
 
-#: nebulae/default/names.dat:941
+#: nebulae/default/names.dat:944
 msgid "Haro II"
 msgstr "Haro II"
 
-#: nebulae/default/names.dat:942
+#: nebulae/default/names.dat:945
 msgid "Spider Galaxy"
 msgstr "蜘蛛星系"
 
-#: nebulae/default/names.dat:943
+#: nebulae/default/names.dat:946
 msgid "Ant Galaxy"
 msgstr "螞蟻星系"
 
-#: nebulae/default/names.dat:944
+#: nebulae/default/names.dat:947
 msgid "Mayall's Object"
 msgstr "Mayall 天體"
 
-#: nebulae/default/names.dat:945
+#: nebulae/default/names.dat:948
 msgid "Leo II Dwarf Galaxy"
 msgstr "獅子座 II 矮星系"
 
-#: nebulae/default/names.dat:946
+#: nebulae/default/names.dat:949
 msgid "Leo B"
 msgstr "獅子座 B"
 
-#: nebulae/default/names.dat:947
+#: nebulae/default/names.dat:950
 msgid "Harrington-Wilson #2"
 msgstr "Harrington-Wilson #2"
 
-#: nebulae/default/names.dat:948
+#: nebulae/default/names.dat:951
 msgid "Arp's Galaxy"
 msgstr "Arp 星系"
 
-#: nebulae/default/names.dat:949
+#: nebulae/default/names.dat:952
 msgid "A Flying Bird"
 msgstr "飛鳥"
 
-#: nebulae/default/names.dat:950 nebulae/default/names.dat:951
-#: nebulae/default/names.dat:952
+#: nebulae/default/names.dat:953 nebulae/default/names.dat:954
+#: nebulae/default/names.dat:955
 msgid "Wild's Triplet"
 msgstr "荒野三重奏"
 
-#: nebulae/default/names.dat:953
+#: nebulae/default/names.dat:956
 msgid "Syphon"
 msgstr "虹吸管"
 
-#: nebulae/default/names.dat:954
+#: nebulae/default/names.dat:957
 msgid "Reinmuth 80"
 msgstr "Reinmuth 80"
 
-#: nebulae/default/names.dat:955
+#: nebulae/default/names.dat:958
 msgid "Holmberg VII"
 msgstr "Holmberg VII"
 
-#: nebulae/default/names.dat:956
+#: nebulae/default/names.dat:959
 msgid "Malin 1"
 msgstr "Malin 1"
 
-#: nebulae/default/names.dat:958
+#: nebulae/default/names.dat:961
 msgid "Shapley-Ames 3"
 msgstr "Shapley-Ames 3"
 
-#: nebulae/default/names.dat:959
+#: nebulae/default/names.dat:962
 msgid "Shapley-Ames 4"
 msgstr "Shapley-Ames 4"
 
-#: nebulae/default/names.dat:960
+#: nebulae/default/names.dat:963
 msgid "Imprint of a Foot Galaxy"
 msgstr "腳印星系"
 
-#: nebulae/default/names.dat:961
+#: nebulae/default/names.dat:964
 msgid "Hardcastle's Galaxy"
 msgstr "Hardcastle 的星系"
 
-#: nebulae/default/names.dat:962
+#: nebulae/default/names.dat:965
 msgid "Holmberg VIII"
 msgstr "Holmberg VIII"
 
-#: nebulae/default/names.dat:963
+#: nebulae/default/names.dat:966
 msgid "Fourcade-Figueroa Object"
 msgstr "Fourcade-Figueroa 天體"
 
-#: nebulae/default/names.dat:964
+#: nebulae/default/names.dat:967
 msgid "Fourcade-Figueroa Galaxy"
 msgstr "Fourcade-Figueroa 天體"
 
-#: nebulae/default/names.dat:965
+#: nebulae/default/names.dat:968
 msgid "Holmberg V"
 msgstr "Holmberg V"
 
-#: nebulae/default/names.dat:966
+#: nebulae/default/names.dat:969
 msgid "Holmberg IV"
 msgstr "Holmberg IV"
 
-#: nebulae/default/names.dat:967
+#: nebulae/default/names.dat:970
 msgid "Circinus Galaxy"
 msgstr "圓規座星系"
 
-#: nebulae/default/names.dat:968
+#: nebulae/default/names.dat:971
 msgid "Segner's Wheel"
 msgstr "Segner 之輪"
 
-#: nebulae/default/names.dat:969
+#: nebulae/default/names.dat:972
 msgid "Ursa Minor Dwarf Galaxy"
 msgstr "小熊座矮星系"
 
-#: nebulae/default/names.dat:970
+#: nebulae/default/names.dat:973
 msgid "Hoag's Object"
 msgstr "Hoag 天體"
 
-#: nebulae/default/names.dat:971
+#: nebulae/default/names.dat:974
 msgid "Hooked Galaxy"
 msgstr "鉤狀星系"
 
-#: nebulae/default/names.dat:972 nebulae/default/names.dat:973
-#: nebulae/default/names.dat:974
+#: nebulae/default/names.dat:975 nebulae/default/names.dat:976
+#: nebulae/default/names.dat:977
 msgid "Zwicky's Triplet"
 msgstr "Zwicky 三重奏"
 
-#: nebulae/default/names.dat:975
+#: nebulae/default/names.dat:978
 msgid "Hercules A"
 msgstr "武仙座 A"
 
-#: nebulae/default/names.dat:976
+#: nebulae/default/names.dat:979
 msgid "Draco Dwarf Galaxy"
 msgstr "天龍座矮星系"
 
-#: nebulae/default/names.dat:977
+#: nebulae/default/names.dat:980
 msgid "Sagittarius Dwarf Galaxy"
 msgstr "人馬座矮星系"
 
-#: nebulae/default/names.dat:978
+#: nebulae/default/names.dat:981
 msgid "Kowal's Object"
 msgstr "Kowal 天體"
 
-#: nebulae/default/names.dat:979
+#: nebulae/default/names.dat:982
 msgid "Aquarius Dwarf Galaxy"
 msgstr "寶瓶座矮星系"
 
-#: nebulae/default/names.dat:980
+#: nebulae/default/names.dat:983
 msgid "Cygnus A"
 msgstr "天鵝座 A"
 
-#: nebulae/default/names.dat:981
+#: nebulae/default/names.dat:984
 msgid "McLeish's Object"
 msgstr "McLeish 天體"
 
-#: nebulae/default/names.dat:982
+#: nebulae/default/names.dat:985
 msgid "Shapley-Ames 6"
 msgstr "Shapley-Ames 6"
 
-#: nebulae/default/names.dat:983
+#: nebulae/default/names.dat:986
 msgid "Huchra's Lens"
 msgstr "Huchra 的鏡片"
 
-#: nebulae/default/names.dat:984
+#: nebulae/default/names.dat:987
 msgid "Tucana Dwarf Galaxy"
 msgstr "杜鵑座矮星系"
 
-#: nebulae/default/names.dat:985 nebulae/default/names.dat:1002
+#: nebulae/default/names.dat:988 nebulae/default/names.dat:1005
 msgid "Pegasus Dwarf Galaxy"
 msgstr "飛馬座矮星系"
 
-#: nebulae/default/names.dat:986
+#: nebulae/default/names.dat:989
 msgid "Barbon's Galaxy"
 msgstr "Barbon 星系"
 
-#: nebulae/default/names.dat:987 nebulae/default/names.dat:1026
+#: nebulae/default/names.dat:990 nebulae/default/names.dat:1029
 msgid "Minkowski's Object"
 msgstr "Minkowski 天體"
 
-#: nebulae/default/names.dat:988
+#: nebulae/default/names.dat:991
 msgid "Superantennae Galaxy"
 msgstr "超級天線星系"
 
-#: nebulae/default/names.dat:989
+#: nebulae/default/names.dat:992
 msgid "Malin II"
 msgstr "Malin II"
 
-#: nebulae/default/names.dat:990
+#: nebulae/default/names.dat:993
 msgid "Sextans Dwarf Spheroidal Galaxy"
 msgstr "六分儀座矮橢球星系"
 
-#: nebulae/default/names.dat:991
+#: nebulae/default/names.dat:994
 msgid "Mailyan 16"
 msgstr "Mailyan 16"
 
-#: nebulae/default/names.dat:992
+#: nebulae/default/names.dat:995
 msgid "Cassiopeia 1"
 msgstr "仙后座 1"
 
-#: nebulae/default/names.dat:993
+#: nebulae/default/names.dat:996
 msgid "Cassiopeia 2"
 msgstr "仙后座 2"
 
-#: nebulae/default/names.dat:994
+#: nebulae/default/names.dat:997
 msgid "Dwingeloo I"
 msgstr "Dwingeloo I"
 
-#: nebulae/default/names.dat:995
+#: nebulae/default/names.dat:998
 msgid "Speca Galaxy"
 msgstr "Speca 星系"
 
-#: nebulae/default/names.dat:996
+#: nebulae/default/names.dat:999
 msgid "Sextans Ring"
 msgstr "六分儀座之環"
 
-#: nebulae/default/names.dat:997
+#: nebulae/default/names.dat:1000
 msgid "Ring Galaxy in Sextans"
 msgstr "六分儀座的環星系"
 
-#: nebulae/default/names.dat:998
+#: nebulae/default/names.dat:1001
 msgid "Camelopardalis A"
 msgstr "鹿豹座 A"
 
-#: nebulae/default/names.dat:999
+#: nebulae/default/names.dat:1002
 msgid "Camelopardalis B"
 msgstr "鹿豹座 B"
 
-#: nebulae/default/names.dat:1000
+#: nebulae/default/names.dat:1003
 msgid "Cassiopeia Dwarf Spheroidal Galaxy"
 msgstr "仙后座矮橢球星系"
 
-#: nebulae/default/names.dat:1001
+#: nebulae/default/names.dat:1004
 msgid "Andromeda VII"
 msgstr "仙女座 VII"
 
-#: nebulae/default/names.dat:1003
+#: nebulae/default/names.dat:1006
 msgid "Pegasus II"
 msgstr "飛馬座 II"
 
-#: nebulae/default/names.dat:1004
+#: nebulae/default/names.dat:1007
 msgid "Andromeda VI"
 msgstr "仙女座 VI"
 
-#: nebulae/default/names.dat:1005
+#: nebulae/default/names.dat:1008
 msgid "Boomerang Nebula"
 msgstr "回力棒星雲"
 
-#: nebulae/default/names.dat:1006
+#: nebulae/default/names.dat:1009
 msgid "Cepheus I"
 msgstr "仙王座 I"
 
-#: nebulae/default/names.dat:1007
+#: nebulae/default/names.dat:1010
 msgid "Cetus Dwarf Galaxy"
 msgstr "鯨魚座矮星系"
 
-#: nebulae/default/names.dat:1008
+#: nebulae/default/names.dat:1011
 msgid "BW Tauri"
 msgstr "金牛座 BW"
 
-#: nebulae/default/names.dat:1009
+#: nebulae/default/names.dat:1012
 msgid "The Grasshopper Galaxy"
 msgstr "蚱蜢星系"
 
-#: nebulae/default/names.dat:1010
+#: nebulae/default/names.dat:1013
 msgid "Leo A"
 msgstr "獅子座 A"
 
-#: nebulae/default/names.dat:1011
+#: nebulae/default/names.dat:1014
 msgid "Leo III"
 msgstr "獅子座 III"
 
-#: nebulae/default/names.dat:1012
+#: nebulae/default/names.dat:1015
 msgid "Leo Dwarf Irregular Galaxy"
 msgstr "獅子座矮不規則星系"
 
-#: nebulae/default/names.dat:1013
+#: nebulae/default/names.dat:1016
 msgid "Sextans C"
 msgstr "六分儀座 C"
 
-#: nebulae/default/names.dat:1014
+#: nebulae/default/names.dat:1017
 msgid "Regulus Dwarf Galaxy"
 msgstr "軒轅十四 (獅子座α) 矮星系"
 
-#: nebulae/default/names.dat:1015
+#: nebulae/default/names.dat:1018
 msgid "Leo I"
 msgstr "獅子座 I"
 
-#: nebulae/default/names.dat:1016
+#: nebulae/default/names.dat:1019
 msgid "Harrington-Wilson #1"
 msgstr "Harrington-Wilson #1"
 
-#: nebulae/default/names.dat:1017
+#: nebulae/default/names.dat:1020
 msgid "Markarian 421"
 msgstr "馬克仁 (Markarian) 421"
 
-#: nebulae/default/names.dat:1018
+#: nebulae/default/names.dat:1021
 msgid "Zwicky #2"
 msgstr "Zwicky #2"
 
-#: nebulae/default/names.dat:1019
+#: nebulae/default/names.dat:1022
 msgid "Markarian 231"
 msgstr "馬克仁 (Markarian) 231"
 
-#: nebulae/default/names.dat:1020
+#: nebulae/default/names.dat:1023
 msgid "Exclamation Point Galaxy"
 msgstr "感嘆號星系"
 
-#: nebulae/default/names.dat:1021
+#: nebulae/default/names.dat:1024
 msgid "Serpens Dwarf Galaxy"
 msgstr "巨蛇座矮星系"
 
-#: nebulae/default/names.dat:1022
+#: nebulae/default/names.dat:1025
 msgid "Tadpole Galaxy"
 msgstr "蝌蚪星系"
 
-#: nebulae/default/names.dat:1023
+#: nebulae/default/names.dat:1026
 msgid "Egg Nebula"
 msgstr "蛋星雲"
 
-#: nebulae/default/names.dat:1024
+#: nebulae/default/names.dat:1027
 msgid "Cygnus Egg"
 msgstr "天鵝卵"
 
-#: nebulae/default/names.dat:1025
+#: nebulae/default/names.dat:1028
 msgid "Pegasus Dwarf Irregular Galaxy"
 msgstr "飛馬座矮不規則星系"
 
-#: nebulae/default/names.dat:1027
+#: nebulae/default/names.dat:1030
 msgid "Lemon Galaxy"
 msgstr "檸檬星系"
 
-#: nebulae/default/names.dat:1028
+#: nebulae/default/names.dat:1031
 msgid "Minkowski's Butterfly"
 msgstr "Minkowski 的蝴蝶"
 
-#: nebulae/default/names.dat:1029
+#: nebulae/default/names.dat:1032
 msgid "Twin Jet Nebula"
 msgstr "雙噴流星雲"
 
-#: nebulae/default/names.dat:1030
+#: nebulae/default/names.dat:1033
 msgid "M2-9"
 msgstr "M2-9"
 
-#: nebulae/default/names.dat:1031
+#: nebulae/default/names.dat:1034
 msgid "Westbrook Nebula"
 msgstr "Westbrook 星雲"
 
-#: nebulae/default/names.dat:1032
+#: nebulae/default/names.dat:1035
 msgid "Water Lily Nebula"
 msgstr "睡蓮星雲"
 
-#: nebulae/default/names.dat:1033
+#: nebulae/default/names.dat:1036
 msgid "Haufen A"
 msgstr "Haufen A"
 
-#: nebulae/default/names.dat:1034
+#: nebulae/default/names.dat:1037
 msgid "Cetus Cluster"
 msgstr "鯨魚座星團"
 
-#: nebulae/default/names.dat:1035
+#: nebulae/default/names.dat:1038
 msgid "Perseus Cluster"
 msgstr "英仙座星團"
 
-#: nebulae/default/names.dat:1036
+#: nebulae/default/names.dat:1039
 msgid "Train Wreck Cluster"
 msgstr "火車失事星團"
 
-#: nebulae/default/names.dat:1038
+#: nebulae/default/names.dat:1041
 msgid "Hydra Cluster"
 msgstr "長蛇座星團"
 
-#: nebulae/default/names.dat:1039
+#: nebulae/default/names.dat:1042
 msgid "Hydra I"
 msgstr "長蛇座 I"
 
-#: nebulae/default/names.dat:1040
+#: nebulae/default/names.dat:1043
 msgid "Leo Cluster"
 msgstr "獅子座星團"
 
-#: nebulae/default/names.dat:1041
+#: nebulae/default/names.dat:1044
 msgid "Ursa Major I"
 msgstr "大熊座 I"
 
-#: nebulae/default/names.dat:1042
+#: nebulae/default/names.dat:1045
 msgid "Coma Cluster"
 msgstr "彗髮星團"
 
-#: nebulae/default/names.dat:1043
+#: nebulae/default/names.dat:1046
 msgid "Corona Borealis Cluster"
 msgstr "北冕座星團"
 
-#: nebulae/default/names.dat:1045
+#: nebulae/default/names.dat:1048
 msgid "Pandora’s Cluster"
 msgstr "潘多拉星團"
 
-#: nebulae/default/names.dat:1046
+#: nebulae/default/names.dat:1049
 msgid "Centaurus Cluster"
 msgstr "半人馬座星團"
 
-#: nebulae/default/names.dat:1047
+#: nebulae/default/names.dat:1050
 msgid "Shapley 8 Cluster"
 msgstr "Shapley 8 星團"
 
-#: nebulae/default/names.dat:1048
+#: nebulae/default/names.dat:1051
 msgid "Norma Cluster"
 msgstr "矩尺座星團"
 
-#: nebulae/default/names.dat:1049
+#: nebulae/default/names.dat:1052
 msgid "Great Attractor"
 msgstr "巨大吸引源"
 
-#: nebulae/default/names.dat:1050
+#: nebulae/default/names.dat:1053
 msgid "Fornax Cluster"
 msgstr "天爐座星團"
 
-#: nebulae/default/names.dat:1051
+#: nebulae/default/names.dat:1054
 msgid "Fornax Group"
 msgstr "天爐座星系群"
 
-#: nebulae/default/names.dat:1052
+#: nebulae/default/names.dat:1055
 msgid "NGC 1399 Group"
 msgstr "NGC 1399 星系群"
 
-#: nebulae/default/names.dat:1053
+#: nebulae/default/names.dat:1056
 msgid "Antlia Cluster"
 msgstr "唧筒座星團"
 
-#: nebulae/default/names.dat:1054
+#: nebulae/default/names.dat:1057
 msgid "Calabash Nebula"
 msgstr "葫蘆星雲"
 
-#: nebulae/default/names.dat:1055
+#: nebulae/default/names.dat:1058
 msgid "Rotten Egg Nebula"
 msgstr "臭蛋星雲"
 
-#: nebulae/default/names.dat:1056
+#: nebulae/default/names.dat:1059
 msgid "Frosty Leo Nebula"
 msgstr "冷淡的獅子座星雲"
 
-#: nebulae/default/names.dat:1057
+#: nebulae/default/names.dat:1060
 msgid "Gomez's Hamburger"
 msgstr "Gomez 的漢堡"
 
-#: nebulae/default/names.dat:1058
+#: nebulae/default/names.dat:1061
 msgid "Cotton Candy Nebula"
 msgstr "棉花糖星雲"
 
-#: nebulae/default/names.dat:1059
+#: nebulae/default/names.dat:1062
 msgid "Footprint Nebula"
 msgstr "腳印星雲"
 
-#: nebulae/default/names.dat:1060
+#: nebulae/default/names.dat:1063
 msgid "Minkowski's Footprint"
 msgstr "Minkowski 的腳印"
 
-#: nebulae/default/names.dat:1061
+#: nebulae/default/names.dat:1064
 msgid "M1-92"
 msgstr "M1-92"
 
-#: nebulae/default/names.dat:1062
+#: nebulae/default/names.dat:1065
 msgid "Sagittarius A East"
 msgstr "人馬座 A 東"
 
-#: nebulae/default/names.dat:1063
+#: nebulae/default/names.dat:1066
 msgid "Sagittarius A West"
 msgstr "人馬座 A 西"
 
-#: nebulae/default/names.dat:1064
+#: nebulae/default/names.dat:1067
 msgid "Minispiral in Gal Center"
 msgstr "銀心迷你螺旋結構"
 
-#: nebulae/default/names.dat:1065
+#: nebulae/default/names.dat:1068
 msgid "Dark Doodad Nebula"
 msgstr "黑飾品星雲"
 
@@ -5530,6 +5602,7 @@ msgstr "發光的"
 #: skycultures/arabic/constellation_names.eng.fab:15
 #: skycultures/western/constellation_names.eng.fab:6
 #: skycultures/western_rey/constellation_names.eng.fab:140
+#: skycultures/western_hlad/constellation_names.eng.fab:6
 msgid "Cetus"
 msgstr "鯨魚座"
 
@@ -8605,12 +8678,12 @@ msgstr "五帝座"
 
 #: skycultures/chinese/constellation_names.eng.fab:298
 msgid "Five Feudal Kings"
-msgstr "五諸侯 (井宿)"
+msgstr "五諸侯"
 
 #: skycultures/chinese/constellation_names.eng.fab:299
 #: skycultures/korean/constellation_names.eng.fab:159
 msgid "Five Lords"
-msgstr "五諸侯 (太微垣)"
+msgstr "五諸侯"
 
 #: skycultures/chinese/constellation_names.eng.fab:300
 msgid "Western Door"
@@ -21699,6 +21772,7 @@ msgstr ""
 #: skycultures/hawaiian_starlines/constellation_names.eng.fab:4
 #: skycultures/western/constellation_names.eng.fab:49
 #: skycultures/western_rey/constellation_names.eng.fab:23
+#: skycultures/western_hlad/constellation_names.eng.fab:50
 msgid "Leo"
 msgstr "獅子座"
 
@@ -23803,6 +23877,7 @@ msgstr "牛"
 #: skycultures/macedonian/constellation_names.eng.fab:5
 #: skycultures/western/constellation_names.eng.fab:5
 #: skycultures/western_rey/constellation_names.eng.fab:91
+#: skycultures/western_hlad/constellation_names.eng.fab:5
 msgid "Libra"
 msgstr "天秤座"
 
@@ -25780,424 +25855,510 @@ msgstr "Quira-Rupia"
 
 #: skycultures/western/constellation_names.eng.fab:1
 #: skycultures/western_rey/constellation_names.eng.fab:114
+#: skycultures/western_hlad/constellation_names.eng.fab:1
 msgid "Aquila"
 msgstr "天鷹座"
 
 #: skycultures/western/constellation_names.eng.fab:2
 #: skycultures/western_rey/constellation_names.eng.fab:49
+#: skycultures/western_hlad/constellation_names.eng.fab:2
 msgid "Andromeda"
 msgstr "仙女座"
 
 #: skycultures/western/constellation_names.eng.fab:3
 #: skycultures/western_rey/constellation_names.eng.fab:142
+#: skycultures/western_hlad/constellation_names.eng.fab:3
 msgid "Sculptor"
 msgstr "玉夫座"
 
 #: skycultures/western/constellation_names.eng.fab:4
 #: skycultures/western_rey/constellation_names.eng.fab:179
+#: skycultures/western_hlad/constellation_names.eng.fab:4
 msgid "Ara"
 msgstr "天壇座"
 
 #: skycultures/western/constellation_names.eng.fab:7
 #: skycultures/western_rey/constellation_names.eng.fab:58
+#: skycultures/western_hlad/constellation_names.eng.fab:7
 msgid "Aries"
 msgstr "白羊座"
 
 #: skycultures/western/constellation_names.eng.fab:8
 #: skycultures/western_rey/constellation_names.eng.fab:145
+#: skycultures/western_hlad/constellation_names.eng.fab:9
 msgid "Pyxis"
 msgstr "羅盤座"
 
 #: skycultures/western/constellation_names.eng.fab:9
 #: skycultures/western_rey/constellation_names.eng.fab:29
+#: skycultures/western_hlad/constellation_names.eng.fab:10
 msgid "Bootes"
 msgstr "牧夫座"
 
 #: skycultures/western/constellation_names.eng.fab:10
 #: skycultures/western_rey/constellation_names.eng.fab:191
+#: skycultures/western_hlad/constellation_names.eng.fab:11
 msgid "Caelum"
 msgstr "雕具座"
 
 #: skycultures/western/constellation_names.eng.fab:11
 #: skycultures/western_rey/constellation_names.eng.fab:182
+#: skycultures/western_hlad/constellation_names.eng.fab:12
 msgid "Chamaeleon"
 msgstr "蝘蜓座"
 
 #: skycultures/western/constellation_names.eng.fab:12
 #: skycultures/western_rey/constellation_names.eng.fab:71
+#: skycultures/western_hlad/constellation_names.eng.fab:13
 msgid "Cancer"
 msgstr "巨蟹座"
 
 #: skycultures/western/constellation_names.eng.fab:13
 #: skycultures/western_rey/constellation_names.eng.fab:132
+#: skycultures/western_hlad/constellation_names.eng.fab:14
 msgid "Capricornus"
 msgstr "摩羯座"
 
 #: skycultures/western/constellation_names.eng.fab:14
 #: skycultures/western_rey/constellation_names.eng.fab:147
+#: skycultures/western_hlad/constellation_names.eng.fab:15
 msgid "Carina"
 msgstr "船底座"
 
 #: skycultures/western/constellation_names.eng.fab:15
 #: skycultures/western_rey/constellation_names.eng.fab:15
+#: skycultures/western_hlad/constellation_names.eng.fab:16
 msgid "Cassiopeia"
 msgstr "仙后座"
 
 #: skycultures/western/constellation_names.eng.fab:16
 #: skycultures/western_rey/constellation_names.eng.fab:168
+#: skycultures/western_hlad/constellation_names.eng.fab:17
 msgid "Centaurus"
 msgstr "半人馬座"
 
 #: skycultures/western/constellation_names.eng.fab:17
 #: skycultures/western_rey/constellation_names.eng.fab:16
+#: skycultures/western_hlad/constellation_names.eng.fab:18
 msgid "Cepheus"
 msgstr "仙王座"
 
 #: skycultures/western/constellation_names.eng.fab:18
 #: skycultures/western_rey/constellation_names.eng.fab:34
+#: skycultures/western_hlad/constellation_names.eng.fab:19
 msgid "Coma Berenices"
 msgstr "后髮座"
 
 #: skycultures/western/constellation_names.eng.fab:19
 #: skycultures/western_rey/constellation_names.eng.fab:26
+#: skycultures/western_hlad/constellation_names.eng.fab:20
 msgid "Canes Venatici"
 msgstr "獵犬座"
 
 #: skycultures/western/constellation_names.eng.fab:20
 #: skycultures/western_rey/constellation_names.eng.fab:67
+#: skycultures/western_hlad/constellation_names.eng.fab:21
 msgid "Auriga"
 msgstr "御夫座"
 
 #: skycultures/western/constellation_names.eng.fab:21
 #: skycultures/western_rey/constellation_names.eng.fab:155
+#: skycultures/western_hlad/constellation_names.eng.fab:22
 msgid "Columba"
 msgstr "天鴿座"
 
 #: skycultures/western/constellation_names.eng.fab:22
 #: skycultures/western_rey/constellation_names.eng.fab:177
+#: skycultures/western_hlad/constellation_names.eng.fab:23
 msgid "Circinus"
 msgstr "圓規座"
 
 #: skycultures/western/constellation_names.eng.fab:23
 #: skycultures/western_rey/constellation_names.eng.fab:84
+#: skycultures/western_hlad/constellation_names.eng.fab:24
 msgid "Crater"
 msgstr "巨爵座"
 
 #: skycultures/western/constellation_names.eng.fab:24
 #: skycultures/western_rey/constellation_names.eng.fab:125
+#: skycultures/western_hlad/constellation_names.eng.fab:25
 msgid "Corona Australis"
 msgstr "南冕座"
 
 #: skycultures/western/constellation_names.eng.fab:25
 #: skycultures/western_rey/constellation_names.eng.fab:33
+#: skycultures/western_hlad/constellation_names.eng.fab:26
 msgid "Corona Borealis"
 msgstr "北冕座"
 
 #: skycultures/western/constellation_names.eng.fab:26
 #: skycultures/western_rey/constellation_names.eng.fab:92
+#: skycultures/western_hlad/constellation_names.eng.fab:27
 msgid "Corvus"
 msgstr "烏鴉座"
 
 #: skycultures/western/constellation_names.eng.fab:27
 #: skycultures/western_rey/constellation_names.eng.fab:175
+#: skycultures/western_hlad/constellation_names.eng.fab:28
 msgid "Crux"
 msgstr "南十字座"
 
 #: skycultures/western/constellation_names.eng.fab:28
 #: skycultures/western_rey/constellation_names.eng.fab:36
+#: skycultures/western_hlad/constellation_names.eng.fab:29
 msgid "Cygnus"
 msgstr "天鵝座"
 
 #: skycultures/western/constellation_names.eng.fab:29
 #: skycultures/western_rey/constellation_names.eng.fab:113
+#: skycultures/western_hlad/constellation_names.eng.fab:30
 msgid "Delphinus"
 msgstr "海豚座"
 
 #: skycultures/western/constellation_names.eng.fab:30
 #: skycultures/western_rey/constellation_names.eng.fab:154
+#: skycultures/western_hlad/constellation_names.eng.fab:31
 msgid "Dorado"
 msgstr "劍魚座"
 
 #: skycultures/western/constellation_names.eng.fab:31
 #: skycultures/western_rey/constellation_names.eng.fab:10
+#: skycultures/western_hlad/constellation_names.eng.fab:32
 msgid "Draco"
 msgstr "天龍座"
 
 #: skycultures/western/constellation_names.eng.fab:32
 #: skycultures/western_rey/constellation_names.eng.fab:176
+#: skycultures/western_hlad/constellation_names.eng.fab:33
 msgid "Norma"
 msgstr "矩尺座"
 
 #: skycultures/western/constellation_names.eng.fab:33
 #: skycultures/western_rey/constellation_names.eng.fab:80
+#: skycultures/western_hlad/constellation_names.eng.fab:34
 msgid "Eridanus"
 msgstr "波江座"
 
 #: skycultures/western/constellation_names.eng.fab:34
 #: skycultures/western_rey/constellation_names.eng.fab:112
+#: skycultures/western_hlad/constellation_names.eng.fab:35
 msgid "Sagitta"
 msgstr "天箭座"
 
 #: skycultures/western/constellation_names.eng.fab:35
 #: skycultures/western_rey/constellation_names.eng.fab:163
+#: skycultures/western_hlad/constellation_names.eng.fab:36
 msgid "Fornax"
 msgstr "天爐座"
 
 #: skycultures/western/constellation_names.eng.fab:36
 #: skycultures/western_rey/constellation_names.eng.fab:69
+#: skycultures/western_hlad/constellation_names.eng.fab:37
 msgid "Gemini"
 msgstr "雙子座"
 
 #: skycultures/western/constellation_names.eng.fab:37
 #: skycultures/western_rey/constellation_names.eng.fab:17
+#: skycultures/western_hlad/constellation_names.eng.fab:38
 msgid "Camelopardalis"
 msgstr "鹿豹座"
 
 #: skycultures/western/constellation_names.eng.fab:38
 #: skycultures/western_rey/constellation_names.eng.fab:79
+#: skycultures/western_hlad/constellation_names.eng.fab:39
 msgid "Canis Major"
 msgstr "大犬座"
 
 #: skycultures/western/constellation_names.eng.fab:39
 #: skycultures/western_rey/constellation_names.eng.fab:19
+#: skycultures/western_hlad/constellation_names.eng.fab:40
 msgid "Ursa Major"
 msgstr "大熊座"
 
 #: skycultures/western/constellation_names.eng.fab:40
 #: skycultures/western_rey/constellation_names.eng.fab:134
+#: skycultures/western_hlad/constellation_names.eng.fab:41
 msgid "Grus"
 msgstr "天鶴座"
 
 #: skycultures/western/constellation_names.eng.fab:41
 #: skycultures/western/star_names.fab:423
 #: skycultures/western_rey/constellation_names.eng.fab:43
+#: skycultures/western_hlad/constellation_names.eng.fab:42
 msgid "Hercules"
 msgstr "武仙座"
 
 #: skycultures/western/constellation_names.eng.fab:42
 #: skycultures/western_rey/constellation_names.eng.fab:162
+#: skycultures/western_hlad/constellation_names.eng.fab:43
 msgid "Horologium"
 msgstr "時鐘座"
 
 #: skycultures/western/constellation_names.eng.fab:43
 #: skycultures/western_rey/constellation_names.eng.fab:82
+#: skycultures/western_hlad/constellation_names.eng.fab:44
 msgid "Hydra"
 msgstr "長蛇座"
 
 #: skycultures/western/constellation_names.eng.fab:44
 #: skycultures/western_rey/constellation_names.eng.fab:159
+#: skycultures/western_hlad/constellation_names.eng.fab:45
 msgid "Hydrus"
 msgstr "水蛇座"
 
 #: skycultures/western/constellation_names.eng.fab:45
 #: skycultures/western_rey/constellation_names.eng.fab:187
+#: skycultures/western_hlad/constellation_names.eng.fab:46
 msgid "Indus"
 msgstr "印第安座"
 
 #: skycultures/western/constellation_names.eng.fab:46
 #: skycultures/western_rey/constellation_names.eng.fab:47
+#: skycultures/western_hlad/constellation_names.eng.fab:47
 msgid "Lacerta"
 msgstr "蝎虎座"
 
 #: skycultures/western/constellation_names.eng.fab:47
 #: skycultures/western_rey/constellation_names.eng.fab:73
+#: skycultures/western_hlad/constellation_names.eng.fab:48
 msgid "Monoceros"
 msgstr "麒麟座"
 
 #: skycultures/western/constellation_names.eng.fab:48
 #: skycultures/western_rey/constellation_names.eng.fab:78
+#: skycultures/western_hlad/constellation_names.eng.fab:49
 msgid "Lepus"
 msgstr "天兔座"
 
 #: skycultures/western/constellation_names.eng.fab:50
 #: skycultures/western_rey/constellation_names.eng.fab:165
+#: skycultures/western_hlad/constellation_names.eng.fab:51
 msgid "Lupus"
 msgstr "豺狼座"
 
 #: skycultures/western/constellation_names.eng.fab:51
 #: skycultures/western_rey/constellation_names.eng.fab:68
+#: skycultures/western_hlad/constellation_names.eng.fab:52
 msgid "Lynx"
 msgstr "天貓座"
 
 #: skycultures/western/constellation_names.eng.fab:52
 #: skycultures/western_rey/constellation_names.eng.fab:41
+#: skycultures/western_hlad/constellation_names.eng.fab:53
 msgid "Lyra"
 msgstr "天琴座"
 
 #: skycultures/western/constellation_names.eng.fab:53
 #: skycultures/western_rey/constellation_names.eng.fab:85
+#: skycultures/western_hlad/constellation_names.eng.fab:54
 msgid "Antlia"
 msgstr "唧筒座"
 
 #: skycultures/western/constellation_names.eng.fab:54
 #: skycultures/western_rey/constellation_names.eng.fab:190
+#: skycultures/western_hlad/constellation_names.eng.fab:55
 msgid "Microscopium"
 msgstr "顯微鏡座"
 
 #: skycultures/western/constellation_names.eng.fab:55
+#: skycultures/western_hlad/constellation_names.eng.fab:56
 msgid "Musca"
 msgstr "蒼蠅座"
 
 #: skycultures/western/constellation_names.eng.fab:56
 #: skycultures/western_rey/constellation_names.eng.fab:185
+#: skycultures/western_hlad/constellation_names.eng.fab:57
 msgid "Octans"
 msgstr "南極座"
 
 #: skycultures/western/constellation_names.eng.fab:57
 #: skycultures/western_rey/constellation_names.eng.fab:181
+#: skycultures/western_hlad/constellation_names.eng.fab:58
 msgid "Apus"
 msgstr "天燕座"
 
 #: skycultures/western/constellation_names.eng.fab:58
 #: skycultures/western_rey/constellation_names.eng.fab:100
+#: skycultures/western_hlad/constellation_names.eng.fab:59
 msgid "Ophiuchus"
 msgstr "蛇夫座"
 
 #: skycultures/western/constellation_names.eng.fab:59
 #: skycultures/western_rey/constellation_names.eng.fab:74
+#: skycultures/western_hlad/constellation_names.eng.fab:60
 msgid "Orion"
 msgstr "獵戶座"
 
 #: skycultures/western/constellation_names.eng.fab:60
 #: skycultures/western_rey/constellation_names.eng.fab:184
+#: skycultures/western_hlad/constellation_names.eng.fab:61
 msgid "Pavo"
 msgstr "孔雀座"
 
 #: skycultures/western/constellation_names.eng.fab:61
 #: skycultures/western_rey/constellation_names.eng.fab:52
+#: skycultures/western_hlad/constellation_names.eng.fab:62
 msgid "Pegasus"
 msgstr "飛馬座"
 
 #: skycultures/western/constellation_names.eng.fab:62
 #: skycultures/western_rey/constellation_names.eng.fab:160
+#: skycultures/western_hlad/constellation_names.eng.fab:63
 msgid "Pictor"
 msgstr "繪架座"
 
 #: skycultures/western/constellation_names.eng.fab:63
 #: skycultures/western_rey/constellation_names.eng.fab:57
+#: skycultures/western_hlad/constellation_names.eng.fab:64
 msgid "Perseus"
 msgstr "英仙座"
 
 #: skycultures/western/constellation_names.eng.fab:64
 #: skycultures/western_rey/constellation_names.eng.fab:127
+#: skycultures/western_hlad/constellation_names.eng.fab:65
 msgid "Equuleus"
 msgstr "小馬座"
 
 #: skycultures/western/constellation_names.eng.fab:65
 #: skycultures/western_rey/constellation_names.eng.fab:70
+#: skycultures/western_hlad/constellation_names.eng.fab:66
 msgid "Canis Minor"
 msgstr "小犬座"
 
 #: skycultures/western/constellation_names.eng.fab:66
 #: skycultures/western_rey/constellation_names.eng.fab:27
+#: skycultures/western_hlad/constellation_names.eng.fab:67
 msgid "Leo Minor"
 msgstr "小獅座"
 
 #: skycultures/western/constellation_names.eng.fab:67
 #: skycultures/western_rey/constellation_names.eng.fab:42
+#: skycultures/western_hlad/constellation_names.eng.fab:68
 msgid "Vulpecula"
 msgstr "狐狸座"
 
 #: skycultures/western/constellation_names.eng.fab:68
+#: skycultures/western_hlad/constellation_names.eng.fab:69
 msgid "Ursa Minor"
 msgstr "小熊座"
 
 #: skycultures/western/constellation_names.eng.fab:69
 #: skycultures/western_rey/constellation_names.eng.fab:135
+#: skycultures/western_hlad/constellation_names.eng.fab:70
 msgid "Phoenix"
 msgstr "鳳凰座"
 
 #: skycultures/western/constellation_names.eng.fab:70
 #: skycultures/western_rey/constellation_names.eng.fab:137
+#: skycultures/western_hlad/constellation_names.eng.fab:71
 msgid "Pisces"
 msgstr "雙魚座"
 
 #: skycultures/western/constellation_names.eng.fab:71
 #: skycultures/western_rey/constellation_names.eng.fab:133
+#: skycultures/western_hlad/constellation_names.eng.fab:72
 msgid "Piscis Austrinus"
 msgstr "南魚座"
 
 #: skycultures/western/constellation_names.eng.fab:72
 #: skycultures/western_rey/constellation_names.eng.fab:151
+#: skycultures/western_hlad/constellation_names.eng.fab:73
 msgid "Volans"
 msgstr "飛魚座"
 
 #: skycultures/western/constellation_names.eng.fab:73
 #: skycultures/western_rey/constellation_names.eng.fab:149
+#: skycultures/western_hlad/constellation_names.eng.fab:74
 msgid "Puppis"
 msgstr "船尾座"
 
 #: skycultures/western/constellation_names.eng.fab:74
 #: skycultures/western_rey/constellation_names.eng.fab:161
+#: skycultures/western_hlad/constellation_names.eng.fab:75
 msgid "Reticulum"
 msgstr "網罟座"
 
 #: skycultures/western/constellation_names.eng.fab:75
 #: skycultures/western_rey/constellation_names.eng.fab:120
+#: skycultures/western_hlad/constellation_names.eng.fab:76
 msgid "Sagittarius"
 msgstr "人馬座"
 
 #: skycultures/western/constellation_names.eng.fab:76
 #: skycultures/western_rey/constellation_names.eng.fab:107
+#: skycultures/western_hlad/constellation_names.eng.fab:77
 msgid "Scorpius"
 msgstr "天蝎座"
 
 #: skycultures/western/constellation_names.eng.fab:77
 #: skycultures/western_rey/constellation_names.eng.fab:119
+#: skycultures/western_hlad/constellation_names.eng.fab:8
+#: skycultures/western_hlad/constellation_names.eng.fab:78
 msgid "Scutum"
 msgstr "盾牌座"
 
 #: skycultures/western/constellation_names.eng.fab:78
+#: skycultures/western_hlad/constellation_names.eng.fab:79
 msgid "Serpens"
 msgstr "巨蛇座"
 
 #: skycultures/western/constellation_names.eng.fab:79
 #: skycultures/western_rey/constellation_names.eng.fab:193
+#: skycultures/western_hlad/constellation_names.eng.fab:80
 msgid "Sextans"
 msgstr "六分儀座"
 
 #: skycultures/western/constellation_names.eng.fab:80
 #: skycultures/western_rey/constellation_names.eng.fab:192
+#: skycultures/western_hlad/constellation_names.eng.fab:81
 msgid "Mensa"
 msgstr "山案座"
 
 #: skycultures/western/constellation_names.eng.fab:81
 #: skycultures/western_rey/constellation_names.eng.fab:61
+#: skycultures/western_hlad/constellation_names.eng.fab:82
 msgid "Taurus"
 msgstr "金牛座"
 
 #: skycultures/western/constellation_names.eng.fab:82
 #: skycultures/western_rey/constellation_names.eng.fab:188
+#: skycultures/western_hlad/constellation_names.eng.fab:83
 msgid "Telescopium"
 msgstr "望遠鏡座"
 
 #: skycultures/western/constellation_names.eng.fab:83
 #: skycultures/western_rey/constellation_names.eng.fab:186
+#: skycultures/western_hlad/constellation_names.eng.fab:84
 msgid "Tucana"
 msgstr "杜鵑座"
 
 #: skycultures/western/constellation_names.eng.fab:84
 #: skycultures/western_rey/constellation_names.eng.fab:48
+#: skycultures/western_hlad/constellation_names.eng.fab:85
 msgid "Triangulum"
 msgstr "三角座"
 
 #: skycultures/western/constellation_names.eng.fab:85
 #: skycultures/western_rey/constellation_names.eng.fab:178
+#: skycultures/western_hlad/constellation_names.eng.fab:86
 msgid "Triangulum Australe"
 msgstr "南三角座"
 
 #: skycultures/western/constellation_names.eng.fab:86
 #: skycultures/western_rey/constellation_names.eng.fab:128
+#: skycultures/western_hlad/constellation_names.eng.fab:87
 msgid "Aquarius"
 msgstr "寶瓶座"
 
 #: skycultures/western/constellation_names.eng.fab:87
 #: skycultures/western_rey/constellation_names.eng.fab:88
+#: skycultures/western_hlad/constellation_names.eng.fab:88
 msgid "Virgo"
 msgstr "室女座"
 
 #: skycultures/western/constellation_names.eng.fab:88
 #: skycultures/western_rey/constellation_names.eng.fab:144
+#: skycultures/western_hlad/constellation_names.eng.fab:89
 msgid "Vela"
 msgstr "船帆座"
 
