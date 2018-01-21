@@ -1684,6 +1684,13 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		ui->altVsTimePlot->graph(0)->setName(name);
 		ui->altVsTimePlot->replot();
 	}
+
+	// clean up the data when selection is removed
+	if (!objectMgr->getWasSelected())
+	{
+		ui->altVsTimePlot->graph(0)->data()->clear(); // main data: Altitude vs. Time graph
+		ui->altVsTimePlot->graph(2)->data()->clear(); // additional data: Transit Time Diagram
+	}
 }
 
 // Added vertical line indicating "now"
@@ -1733,17 +1740,21 @@ void AstroCalcDialog::prepareAxesAndGraph()
 	QPen axisPen(axisColor, 1);
 
 	ui->altVsTimePlot->clearGraphs();
+
+	// main data: Altitude vs. Time graph
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->setBackground(QBrush(QColor(86, 87, 90)));
 	ui->altVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
 	ui->altVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(0)->rescaleAxes(true);
 
+	// additional data: Current Time Diagram
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
 	ui->altVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(1)->setName("[Now]");
 
+	// additional data: Transit Time Diagram
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->graph(2)->setPen(QPen(Qt::cyan, 1));
 	ui->altVsTimePlot->graph(2)->setLineStyle(QCPGraph::lsLine);
