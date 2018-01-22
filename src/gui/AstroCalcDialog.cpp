@@ -50,6 +50,8 @@ int AstroCalcDialog::DisplayedPositionIndex = -1;
 float AstroCalcDialog::brightLimit = 10.f;
 float AstroCalcDialog::minY = -90.f;
 float AstroCalcDialog::maxY = 90.f;
+float AstroCalcDialog::minYme = -90.f;
+float AstroCalcDialog::maxYme = 90.f;
 float AstroCalcDialog::minY1 = -1001.f;
 float AstroCalcDialog::maxY1 = 1001.f;
 float AstroCalcDialog::minY2 = -1001.f;
@@ -62,6 +64,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent),
 	  currentTimeLine(Q_NULLPTR),
 	  plotAltVsTime(false),
+	  plotMonthlyElevation(false),
 	  delimiter(", "),
 	  acEndl("\n")
 {
@@ -107,6 +110,7 @@ void AstroCalcDialog::retranslate()
 		prepareAxesAndGraph();
 		populateFunctionsList();
 		prepareXVsTimeAxesAndGraph();
+		prepareMonthlyEleveationAxesAndGraph();
 		drawAltVsTimeDiagram();
 		populateTimeIntervalsList();
 		populateWutGroups();
@@ -156,6 +160,8 @@ void AstroCalcDialog::createDialogContent()
 	// Graphs feature
 	populateFunctionsList();
 	prepareXVsTimeAxesAndGraph();
+	// Monthly Elevation
+	prepareMonthlyEleveationAxesAndGraph();
 	// WUT
 	populateTimeIntervalsList();
 	populateWutGroups();
@@ -223,6 +229,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
+
+	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());
+	connect(ui->monthlyElevationTime, SIGNAL(valueChanged(int)), this, SLOT(saveMonthlyElevationDefaultHour()));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
+	drawMonthlyElevationGraph();
 
 	connect(ui->graphsCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsCelestialBody(int)));
 	connect(ui->graphsFirstComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsFirstId(int)));
@@ -2133,6 +2144,139 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->graph(1)->rescaleAxes(true);
 }
 
+void AstroCalcDialog::prepareMonthlyEleveationAxesAndGraph()
+{
+	QString xAxisStr = q_("Date");
+	QString yAxisStr = QString("%1, %2").arg(q_("Altitude"), QChar(0x00B0));
+
+	QColor axisColor(Qt::white);
+	QPen axisPen(axisColor, 1);
+
+	ui->monthlyElevationGraph->xAxis->setLabel(xAxisStr);
+	ui->monthlyElevationGraph->yAxis->setLabel(yAxisStr);
+
+	int dYear = ((int)core->getCurrentPlanet()->getSiderealPeriod() + 1) * 86400;
+	ui->monthlyElevationGraph->xAxis->setRange(0, dYear);
+	ui->monthlyElevationGraph->xAxis->setScaleType(QCPAxis::stLinear);
+	ui->monthlyElevationGraph->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	ui->monthlyElevationGraph->xAxis->setLabelColor(axisColor);
+	ui->monthlyElevationGraph->xAxis->setTickLabelColor(axisColor);
+	ui->monthlyElevationGraph->xAxis->setBasePen(axisPen);
+	ui->monthlyElevationGraph->xAxis->setTickPen(axisPen);
+	ui->monthlyElevationGraph->xAxis->setSubTickPen(axisPen);
+	ui->monthlyElevationGraph->xAxis->setDateTimeFormat("dd/MM");
+	ui->monthlyElevationGraph->xAxis->setDateTimeSpec(Qt::UTC);
+	ui->monthlyElevationGraph->xAxis->setAutoTickStep(true);
+	ui->monthlyElevationGraph->xAxis->setSubTickCount(10);
+
+	ui->monthlyElevationGraph->yAxis->setRange(minYme, maxYme);
+	ui->monthlyElevationGraph->yAxis->setScaleType(QCPAxis::stLinear);
+	ui->monthlyElevationGraph->yAxis->setLabelColor(axisColor);
+	ui->monthlyElevationGraph->yAxis->setTickLabelColor(axisColor);
+	ui->monthlyElevationGraph->yAxis->setBasePen(axisPen);
+	ui->monthlyElevationGraph->yAxis->setTickPen(axisPen);
+	ui->monthlyElevationGraph->yAxis->setSubTickPen(axisPen);
+
+	ui->monthlyElevationGraph->clearGraphs();
+	ui->monthlyElevationGraph->addGraph();
+	ui->monthlyElevationGraph->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->monthlyElevationGraph->graph(0)->setPen(QPen(Qt::red, 1));
+	ui->monthlyElevationGraph->graph(0)->setLineStyle(QCPGraph::lsLine);
+	ui->monthlyElevationGraph->graph(0)->rescaleAxes(true);
+}
+
+void AstroCalcDialog::saveMonthlyElevationDefaultHour()
+{
+	conf->setValue("astrocalc/me_time", ui->monthlyElevationTime->value());
+
+	drawMonthlyElevationGraph();
+}
+
+void AstroCalcDialog::drawMonthlyElevationGraph()
+{
+	// Avoid crash!
+	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
+		return;
+
+	// special case - plot the graph when tab is visible
+	if (!plotMonthlyElevation)
+		return;
+
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+
+	if (!selectedObjects.isEmpty())
+	{
+		// X axis - time; Y axis - altitude
+		QList<double> aX, aY;
+
+		StelObjectP selectedObject = selectedObjects[0];
+
+		if (selectedObject->getType() == "Satellite")
+		{
+			ui->monthlyElevationGraph->graph(0)->data()->clear();
+			return;
+		}
+
+		double currentJD = core->getJD();
+
+		int hour = ui->monthlyElevationTime->value();
+
+		double az, alt, deg;
+		bool sign;
+		int year, month, day;
+		double startJD, JD, ltime;
+		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
+		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
+
+		int dYear = (int)core->getCurrentPlanet()->getSiderealPeriod() + 3;
+
+		for (int i = -2; i <= dYear; i++)
+		{
+			JD = startJD + i;
+			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
+			aX.append(ltime);
+
+			core->setJD(JD);
+			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
+			StelUtils::radToDecDeg(alt, sign, deg);
+			if (!sign) deg *= -1;
+			aY.append(deg);
+
+			core->update(0.0);
+		}
+		core->setJD(currentJD);
+
+		QVector<double> x = aX.toVector(), y = aY.toVector();
+
+		double minYa = aY.first();
+		double maxYa = aY.first();
+
+		foreach (double temp, aY)
+		{
+			if (maxYa < temp) maxYa = temp;
+			if (minYa > temp) minYa = temp;
+		}
+
+		minYme = minYa - 2.0;
+		maxYme = maxYa + 2.0;
+
+		prepareMonthlyEleveationAxesAndGraph();
+
+		QString name = selectedObject->getNameI18n();
+		if (name.isEmpty() && selectedObject->getType() == "Nebula")
+			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
+		ui->monthlyElevationGraph->graph(0)->setData(x, y);
+		ui->monthlyElevationGraph->graph(0)->setName(name);
+		ui->monthlyElevationGraph->replot();
+	}
+
+	// clean up the data when selection is removed
+	if (!objectMgr->getWasSelected())
+		ui->monthlyElevationGraph->graph(0)->data()->clear();
+
+}
+
 void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 {
 	double x = ui->altVsTimePlot->xAxis->pixelToCoord(event->pos().x());
@@ -3041,8 +3185,17 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	else
 		plotAltVsTime = false;
 
+	// special case - plot the graph when tab 'Monthly Elevation' is visible
+	if (ui->stackListWidget->row(current) == 4)
+	{
+		plotMonthlyElevation = true;
+		drawMonthlyElevationGraph(); // Is object already selected?
+	}
+	else
+		plotMonthlyElevation = false;
+
 	// special case (PCalc)
-	if (ui->stackListWidget->row(current) == 6)
+	if (ui->stackListWidget->row(current) == 7)
 		computePlanetaryData();
 }
 

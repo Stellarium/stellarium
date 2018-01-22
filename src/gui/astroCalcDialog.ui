@@ -243,6 +243,19 @@
         </item>
         <item>
          <property name="text">
+          <string>ME</string>
+         </property>
+         <property name="toolTip">
+          <string>Monthly Elevation</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-AstroCalc-AltVsTime.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Graphs</string>
          </property>
          <property name="toolTip">
@@ -821,6 +834,56 @@
          </layout>
         </widget>
         <widget class="QWidget" name="stackedWidgetPage5">
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="0" column="0" colspan="3">
+           <widget class="QCustomPlot" name="monthlyElevationGraph" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="3">
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetMinimumSize</enum>
+            </property>
+            <item>
+             <widget class="QLabel" name="monthlyElevatioLabel">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>16777215</width>
+                <height>30</height>
+               </size>
+              </property>
+              <property name="text">
+               <string>Please select object to plot its graph 'Monthly Elevation' for time (hours):</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSpinBox" name="monthlyElevationTime">
+              <property name="maximum">
+               <number>23</number>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="4" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_20">
@@ -906,7 +969,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage6">
+        <widget class="QWidget" name="stackedWidgetPage7">
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -986,7 +1049,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage7">
+        <widget class="QWidget" name="stackedWidgetPage8">
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">
