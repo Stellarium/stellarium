@@ -245,6 +245,7 @@ void AstroCalcDialog::createDialogContent()
 
 	currentTimeLine = new QTimer(this);
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
+	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(computePlanetaryData()));
 	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
 	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
@@ -3024,6 +3025,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 {
 	if (!current)
 		current = previous;
+
 	ui->stackedWidget->setCurrentIndex(ui->stackListWidget->row(current));
 
 	// special case
@@ -3719,8 +3721,10 @@ void AstroCalcDialog::computePlanetaryData()
 	StelUtils::radToDms(r, sign, d, m, s);
 	StelUtils::radToDecDeg(r, sign, dd);
 
-	int cb1 = std::round(firstCBId->getSiderealPeriod());
-	int cb2 = std::round(secondCBId->getSiderealPeriod());
+	double spcb1 = firstCBId->getSiderealPeriod();
+	double spcb2 = secondCBId->getSiderealPeriod();
+	int cb1 = std::round(spcb1);
+	int cb2 = std::round(spcb2);
 	QString orbitalResonance = QChar(0x2014);
 	bool spin = false;
 	QString parentFCBName = "";
@@ -3777,4 +3781,20 @@ void AstroCalcDialog::computePlanetaryData()
 		orbitalVelocitySCB = QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3)).arg(kms);
 
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
+
+	// TRANSLATORS: Unit of measure for period - days
+	QString days = qc_("days", "duration");
+	QString synodicPeriod = QChar(0x2014);
+	bool showSP = true;
+	if (firstCelestialBody == secondCelestialBody || firstCelestialBody == "Sun" || secondCelestialBody == "Sun")
+		showSP = false;
+	if ((firstCBId->getPlanetTypeString()=="moon" && parentFCBName!=secondCelestialBody) || (secondCBId->getPlanetTypeString()=="moon" && parentSCBName!=firstCelestialBody))
+		showSP = false;
+	if (spcb1 > 0.0 && spcb2 > 0.0 && showSP)
+	{
+		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
+		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3)).arg(days).arg(QString::number(sp/365.25, 'f', 5));
+	}
+
+	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 }

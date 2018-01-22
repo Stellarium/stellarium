@@ -990,53 +990,16 @@
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">
-            <item row="1" column="0">
-             <widget class="QComboBox" name="firstCelestialBodyComboBox">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
+            <item row="7" column="1">
+             <widget class="QLabel" name="labelOrbitalVelocitySCBValue"/>
             </item>
-            <item row="2" column="1">
-             <widget class="QLabel" name="labelLinearDistanceValue"/>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="labelAngularDistance">
+            <item row="7" column="0">
+             <widget class="QLabel" name="labelOrbitalVelocitySCB">
               <property name="text">
-               <string>Angular distance:</string>
+               <string>Orbital velocity of second celestial body:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QLabel" name="labelAngularDistanceValue"/>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="labelLinearDistance">
-              <property name="text">
-               <string>Linear distance:</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="QLabel" name="labelSCB">
-              <property name="text">
-               <string>Second celestial body:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QLabel" name="labelFCB">
-              <property name="text">
-               <string>First celestial body:</string>
               </property>
              </widget>
             </item>
@@ -1047,6 +1010,49 @@
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QComboBox" name="firstCelestialBodyComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLabel" name="labelOrbitalVelocityFCBValue"/>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="labelOrbitalVelocityFCB">
+              <property name="text">
+               <string>Orbital velocity of first celestial body:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="labelLinearDistanceValue"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelFCB">
+              <property name="text">
+               <string>First celestial body:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelAngularDistance">
+              <property name="text">
+               <string>Angular distance:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -1063,20 +1069,30 @@
             <item row="4" column="1">
              <widget class="QLabel" name="labelOrbitalResonanceValue"/>
             </item>
-            <item row="5" column="0">
-             <widget class="QLabel" name="labelOrbitalVelocityFCB">
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelLinearDistance">
               <property name="text">
-               <string>Orbital velocity of first celestial body:</string>
+               <string>Linear distance:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
-            <item row="6" column="0">
-             <widget class="QLabel" name="labelOrbitalVelocitySCB">
+            <item row="3" column="1">
+             <widget class="QLabel" name="labelAngularDistanceValue"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="labelSCB">
               <property name="text">
-               <string>Orbital velocity of second celestial body:</string>
+               <string>Second celestial body:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="labelSynodicPeriod">
+              <property name="text">
+               <string>Synodic period:</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1084,10 +1100,7 @@
              </widget>
             </item>
             <item row="5" column="1">
-             <widget class="QLabel" name="labelOrbitalVelocityFCBValue"/>
-            </item>
-            <item row="6" column="1">
-             <widget class="QLabel" name="labelOrbitalVelocitySCBValue"/>
+             <widget class="QLabel" name="labelSynodicPeriodValue"/>
             </item>
            </layout>
           </item>

@@ -202,7 +202,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	QString str;
 	QTextStream oss(&str);
 	double az_app, alt_app;
-	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));	
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	double distanceAu = getJ2000EquatorialPos(core).length();
 	Q_UNUSED(az_app);
@@ -369,11 +369,19 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			oss << QString("%1: %2").arg(q_("SMASSII spectral type"), specB) << "<br />";
 		}
 
+		QString days = qc_("days", "duration");
 		if (siderealPeriod>0)
 		{
-			QString days = qc_("days", "duration");
 			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
+		}
+
+		double siderealPeriodCurrentPlanet = core->getCurrentPlanet()->getSiderealPeriod();
+		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && core->getCurrentPlanet()->getPlanetType()==Planet::isPlanet && getPlanetType()!=Planet::isArtificial && getPlanetType()!=Planet::isStar && getPlanetType()!=Planet::isMoon)
+		{
+			double sp = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
+			// Synodic period for solar system bodies in days and in Julian years (symbol: a)
+			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Synodic period")).arg(QString::number(sp, 'f', 2)).arg(days).arg(QString::number(sp/365.25, 'f', 3)) << "<br />";
 		}
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();

@@ -248,10 +248,18 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 	{
 		// If semi-major axis not zero then calculate and display orbital period for comet in days
 		double siderealPeriod = getSiderealPeriod();
-		if (siderealPeriod>0)
+		if (siderealPeriod>0.0)
 		{
 			// Sidereal (orbital) period for comets in Julian years (symbol: a)
 			oss << QString("%1: %2 a").arg(q_("Sidereal period"), QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
+		}
+
+		double siderealPeriodCurrentPlanet = core->getCurrentPlanet()->getSiderealPeriod();
+		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && core->getCurrentPlanet()->getPlanetType()==Planet::isPlanet && getPlanetType()!=Planet::isArtificial && getPlanetType()!=Planet::isStar && getPlanetType()!=Planet::isMoon)
+		{
+			double sp = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
+			// Synodic period for comets in Julian years (symbol: a)
+			oss << QString("%1: %2 a").arg(q_("Synodic period"), QString::number(sp/365.25, 'f', 3)) << "<br />";
 		}
 
 //		// TRANSLATORS: Unit of measure for speed - kilometers per second
