@@ -260,7 +260,7 @@ void AstroCalcDialog::createDialogContent()
 
 	currentTimeLine = new QTimer(this);
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
-	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(computePlanetaryData()));
+	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(computePlanetaryData()));	
 	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
 	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
@@ -269,6 +269,8 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(solarSystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateSolarSystemData()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAstroCalcData()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawMonthlyElevationGraph()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 
 	updateTabBarListWidgetWidth();
@@ -2206,6 +2208,8 @@ void AstroCalcDialog::updateMonthlyElevationTime()
 
 void AstroCalcDialog::drawMonthlyElevationGraph()
 {
+	ui->monthlyElevationCelestialObjectLabel->setText("");
+
 	// Avoid crash!
 	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
 		return;
@@ -2231,7 +2235,6 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		}
 
 		double currentJD = core->getJD();
-
 		int hour = ui->monthlyElevationTime->value();
 
 		double az, alt, deg;
@@ -2240,6 +2243,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		double startJD, JD, ltime;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
+		startJD -= core->getUTCOffset(startJD)/24; // Time zone correction
 
 		int dYear = (int)core->getCurrentPlanet()->getSiderealPeriod() + 3;
 
@@ -2282,6 +2286,9 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		ui->monthlyElevationGraph->graph(0)->setData(x, y);
 		ui->monthlyElevationGraph->graph(0)->setName(name);
 		ui->monthlyElevationGraph->replot();
+
+		ui->monthlyElevationCelestialObjectLabel->setText(name);
+
 	}
 
 	// clean up the data when selection is removed
