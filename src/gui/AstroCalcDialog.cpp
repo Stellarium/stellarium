@@ -230,8 +230,10 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
 
+	// Monthly Elevation
 	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());
-	connect(ui->monthlyElevationTime, SIGNAL(valueChanged(int)), this, SLOT(saveMonthlyElevationDefaultHour()));
+	syncMonthlyElevationTime();
+	connect(ui->monthlyElevationTime, SIGNAL(sliderReleased()), this, SLOT(updateMonthlyElevationTime()));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
 	drawMonthlyElevationGraph();
 
@@ -1702,6 +1704,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	{
 		ui->altVsTimePlot->graph(0)->data()->clear(); // main data: Altitude vs. Time graph
 		ui->altVsTimePlot->graph(2)->data()->clear(); // additional data: Transit Time Diagram
+		ui->altVsTimePlot->replot();
 	}
 }
 
@@ -2185,8 +2188,15 @@ void AstroCalcDialog::prepareMonthlyEleveationAxesAndGraph()
 	ui->monthlyElevationGraph->graph(0)->rescaleAxes(true);
 }
 
-void AstroCalcDialog::saveMonthlyElevationDefaultHour()
+void AstroCalcDialog::syncMonthlyElevationTime()
 {
+	ui->monthlyElevationTimeInfo->setValue(ui->monthlyElevationTime->value());
+}
+
+void AstroCalcDialog::updateMonthlyElevationTime()
+{
+	syncMonthlyElevationTime();
+
 	conf->setValue("astrocalc/me_time", ui->monthlyElevationTime->value());
 
 	drawMonthlyElevationGraph();
@@ -2214,6 +2224,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		if (selectedObject->getType() == "Satellite")
 		{
 			ui->monthlyElevationGraph->graph(0)->data()->clear();
+			ui->monthlyElevationGraph->replot();
 			return;
 		}
 
@@ -2273,7 +2284,10 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 
 	// clean up the data when selection is removed
 	if (!objectMgr->getWasSelected())
+	{
 		ui->monthlyElevationGraph->graph(0)->data()->clear();
+		ui->monthlyElevationGraph->replot();
+	}
 
 }
 

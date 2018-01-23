@@ -165,7 +165,7 @@ private slots:
 	void drawXVsTimeGraphs();
 
 	void drawMonthlyElevationGraph();
-	void saveMonthlyElevationDefaultHour();
+	void updateMonthlyElevationTime();
 
 	// WUT
 	void saveWutMagnitudeLimit(double mag);
@@ -228,6 +228,8 @@ private:
 	void populateWutGroups();
 
 	void populateFunctionsList();
+
+	void syncMonthlyElevationTime();
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
