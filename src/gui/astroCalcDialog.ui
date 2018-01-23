@@ -857,18 +857,24 @@
              </widget>
             </item>
             <item>
-             <widget class="QSpinBox" name="monthlyElevationTimeInfo">
-              <property name="toolTip">
-               <string>Time in hours</string>
+             <widget class="QLabel" name="monthlyElevationTimeInfo">
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
               </property>
               <property name="alignment">
-               <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-              </property>
-              <property name="readOnly">
-               <bool>true</bool>
-              </property>
-              <property name="maximum">
-               <number>23</number>
+               <set>Qt::AlignCenter</set>
               </property>
              </widget>
             </item>

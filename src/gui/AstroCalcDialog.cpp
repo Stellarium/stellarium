@@ -172,6 +172,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
+	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt");
 
 	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
 	QDate min = QDate(100, 1, 1);
@@ -234,6 +235,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());
 	syncMonthlyElevationTime();
 	connect(ui->monthlyElevationTime, SIGNAL(sliderReleased()), this, SLOT(updateMonthlyElevationTime()));
+	connect(ui->monthlyElevationTime, SIGNAL(sliderMoved(int)), this, SLOT(syncMonthlyElevationTime()));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
 	drawMonthlyElevationGraph();
 
@@ -2109,10 +2111,10 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->xAxis->setBasePen(axisPen);
 	ui->graphsPlot->xAxis->setTickPen(axisPen);
 	ui->graphsPlot->xAxis->setSubTickPen(axisPen);
-	ui->graphsPlot->xAxis->setDateTimeFormat("dd/MM");
+	ui->graphsPlot->xAxis->setDateTimeFormat("d\nMMM");
 	ui->graphsPlot->xAxis->setDateTimeSpec(Qt::UTC);
-	ui->graphsPlot->xAxis->setAutoTickStep(true);
-	ui->graphsPlot->xAxis->setSubTickCount(10);
+	ui->graphsPlot->xAxis->setAutoTicks(true);
+	ui->graphsPlot->xAxis->setAutoTickCount(15);
 
 	ui->graphsPlot->yAxis->setRange(minY1, maxY1);
 	ui->graphsPlot->yAxis->setScaleType(QCPAxis::stLinear);
@@ -2167,10 +2169,10 @@ void AstroCalcDialog::prepareMonthlyEleveationAxesAndGraph()
 	ui->monthlyElevationGraph->xAxis->setBasePen(axisPen);
 	ui->monthlyElevationGraph->xAxis->setTickPen(axisPen);
 	ui->monthlyElevationGraph->xAxis->setSubTickPen(axisPen);
-	ui->monthlyElevationGraph->xAxis->setDateTimeFormat("dd/MM");
+	ui->monthlyElevationGraph->xAxis->setDateTimeFormat("d\nMMM");
 	ui->monthlyElevationGraph->xAxis->setDateTimeSpec(Qt::UTC);
-	ui->monthlyElevationGraph->xAxis->setAutoTickStep(true);
-	ui->monthlyElevationGraph->xAxis->setSubTickCount(10);
+	ui->monthlyElevationGraph->xAxis->setAutoTicks(true);
+	ui->monthlyElevationGraph->xAxis->setAutoTickCount(15);
 
 	ui->monthlyElevationGraph->yAxis->setRange(minYme, maxYme);
 	ui->monthlyElevationGraph->yAxis->setScaleType(QCPAxis::stLinear);
@@ -2190,7 +2192,7 @@ void AstroCalcDialog::prepareMonthlyEleveationAxesAndGraph()
 
 void AstroCalcDialog::syncMonthlyElevationTime()
 {
-	ui->monthlyElevationTimeInfo->setValue(ui->monthlyElevationTime->value());
+	ui->monthlyElevationTimeInfo->setText(QString("%1 %2").arg(QString::number(ui->monthlyElevationTime->value()), qc_("h", "time")));
 }
 
 void AstroCalcDialog::updateMonthlyElevationTime()
