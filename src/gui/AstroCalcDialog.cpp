@@ -2313,16 +2313,23 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 	{
 		if (graph)
 		{
-			double JD = x / 86400.0 + (int)core->getJD() - 0.5;
-			QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
-
 			QString info;
+			double JD;
 			if (graph->name() == "[Now]")
-				info = q_("Now about %1").arg(LT);
+			{
+				JD = core->getJD();
+				info = q_("Now about %1").arg(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("H:mm"));
+			}
 			else if (graph->name() == "[Transit]")
-				info = q_("Passage of meridian at approximately %1").arg(LT);
+			{
+				JD = transitX / 86400.0 + (int)core->getJD() - 0.5;
+				info = q_("Passage of meridian at approximately %1").arg(StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm"));
+			}
 			else
 			{
+				JD = x / 86400.0 + (int)core->getJD() - 0.5;
+				QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
+
 				if (StelApp::getInstance().getFlagShowDecimalDegrees())
 					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->altVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Altitude"), QString::number(y, 'f', 2), QChar(0x00B0));
 				else
