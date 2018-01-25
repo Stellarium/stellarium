@@ -52,6 +52,10 @@ float AstroCalcDialog::minY = -90.f;
 float AstroCalcDialog::maxY = 90.f;
 float AstroCalcDialog::minYme = -90.f;
 float AstroCalcDialog::maxYme = 90.f;
+float AstroCalcDialog::minYsun = -90.f;
+float AstroCalcDialog::maxYsun = 90.f;
+float AstroCalcDialog::minYmoon = -90.f;
+float AstroCalcDialog::maxYmoon = 90.f;
 float AstroCalcDialog::minY1 = -1001.f;
 float AstroCalcDialog::maxY1 = 1001.f;
 float AstroCalcDialog::minY2 = -1001.f;
@@ -61,12 +65,14 @@ QString AstroCalcDialog::yAxis1Legend = "";
 QString AstroCalcDialog::yAxis2Legend = "";
 
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
-	: StelDialog("AstroCalc", parent),
-	  currentTimeLine(Q_NULLPTR),
-	  plotAltVsTime(false),
-	  plotMonthlyElevation(false),
-	  delimiter(", "),
-	  acEndl("\n")
+	: StelDialog("AstroCalc", parent)
+	, currentTimeLine(Q_NULLPTR)
+	, plotAltVsTime(false)
+	, plotMonthlyElevation(false)
+	, plotAltVsTimeSun(false)
+	, plotAltVsTimeMoon(false)
+	, delimiter(", ")
+	, acEndl("\n")
 {
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
@@ -226,6 +232,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->object1ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialBody(int)));
 	connect(ui->object2ComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(savePhenomenaCelestialGroup(int)));
 
+	plotAltVsTimeSun = conf->value("astrocalc/altvstime_sun", false).toBool();
+	plotAltVsTimeMoon = conf->value("astrocalc/altvstime_moon", false).toBool();
+	ui->sunAltitudeCheckBox->setChecked(plotAltVsTimeSun);
+	ui->moonAltitudeCheckBox->setChecked(plotAltVsTimeMoon);
+	connect(ui->sunAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeSunFlag(bool)));
+	connect(ui->moonAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeMoonFlag(bool)));
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
@@ -281,6 +293,28 @@ void AstroCalcDialog::updateAstroCalcData()
 	drawAltVsTimeDiagram();
 	populateCelestialBodyList();
 	populateMajorPlanetList();
+}
+
+void AstroCalcDialog::saveAltVsTimeSunFlag(bool state)
+{
+	if (plotAltVsTimeSun!=state)
+	{
+		plotAltVsTimeSun = state;
+		conf->setValue("astrocalc/altvstime_sun", plotAltVsTimeSun);
+
+		drawAltVsTimeDiagram();
+	}
+}
+
+void AstroCalcDialog::saveAltVsTimeMoonFlag(bool state)
+{
+	if (plotAltVsTimeMoon!=state)
+	{
+		plotAltVsTimeMoon = state;
+		conf->setValue("astrocalc/altvstime_moon", plotAltVsTimeMoon);
+
+		drawAltVsTimeDiagram();
+	}
 }
 
 void AstroCalcDialog::initListCelestialPositions()
@@ -1623,11 +1657,13 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+	bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 	if (!selectedObjects.isEmpty())
 	{
 		// X axis - time; Y axis - altitude
-		QList<double> aX, aY;
+		QList<double> aX, aY, sX, sY, sYn, sYa, mX, mY;
+		QVector<double> xs, ys, ysn, ysa, xm, ym;
 
 		StelObjectP selectedObject = selectedObjects[0];
 
@@ -1674,6 +1710,43 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			else
 				core->update(0.0);
 		}
+
+		if (plotAltVsTimeSun)
+		{
+			PlanetP sun = solarSystem->getSun();
+			for (int i = -1; i <= 25; i++)
+			{
+				double ltime = i * 3600 + 43200;
+				sX.append(ltime);
+				double JD = noon + ltime / 86400 - shift - 0.5;
+				core->setJD(JD);
+				StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
+				StelUtils::radToDecDeg(alt, sign, deg);
+				if (!sign) deg *= -1;
+				sY.append(deg);
+				sYn.append(deg + 12);
+				sYa.append(deg + 18);
+				core->update(0.0);
+			}
+		}
+
+		if (plotAltVsTimeMoon && onEarth)
+		{
+			PlanetP moon = solarSystem->getMoon();
+			for (int i = -1; i <= 25; i++)
+			{
+				double ltime = i * 3600 + 43200;
+				mX.append(ltime);
+				double JD = noon + ltime / 86400 - shift - 0.5;
+				core->setJD(JD);
+				StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
+				StelUtils::radToDecDeg(alt, sign, deg);
+				if (!sign) deg *= -1;
+				mY.append(deg);
+				core->update(0.0);
+			}
+		}
+
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
@@ -1689,6 +1762,42 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		minY = minYa - 2.0;
 		maxY = maxYa + 2.0;
 
+		if (plotAltVsTimeSun)
+		{
+			xs = sX.toVector();
+			ys = sY.toVector();
+			ysn = sYn.toVector();
+			ysa = sYa.toVector();
+			double minYs = sY.first();
+			double maxYs = sY.first();
+
+			foreach (double temp, sY)
+			{
+				if (maxYs < temp) maxYs = temp;
+				if (minYs > temp) minYs = temp;
+			}
+
+			minY =  (minY < minYs - 2.0) ? minY : minYs - 2.f;
+			maxY = (maxY > maxYs + 2.0) ? maxY : maxYs + 2.0;
+		}
+
+		if (plotAltVsTimeMoon && onEarth)
+		{
+			xm = mX.toVector();
+			ym = mY.toVector();
+			double minYm = mY.first();
+			double maxYm = mY.first();
+
+			foreach (double temp, mY)
+			{
+				if (maxYm < temp) maxYm = temp;
+				if (minYm > temp) minYm = temp;
+			}
+
+			minY =  (minY < minYm - 2.0) ? minY : minYm - 2.f;
+			maxY = (maxY > maxYm + 2.0) ? maxY : maxYm + 2.0;
+		}
+
 		prepareAxesAndGraph();
 		drawCurrentTimeDiagram();
 
@@ -1700,6 +1809,14 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		ui->altVsTimePlot->graph(0)->setData(x, y);
 		ui->altVsTimePlot->graph(0)->setName(name);
+		if (plotAltVsTimeSun)
+		{
+			ui->altVsTimePlot->graph(3)->setData(xs, ys);
+			ui->altVsTimePlot->graph(4)->setData(xs, ysn);
+			ui->altVsTimePlot->graph(5)->setData(xs, ysa);
+		}
+		if (plotAltVsTimeMoon && onEarth)
+			ui->altVsTimePlot->graph(6)->setData(xm, ym);
 		ui->altVsTimePlot->replot();
 	}
 
@@ -1708,6 +1825,14 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	{
 		ui->altVsTimePlot->graph(0)->data()->clear(); // main data: Altitude vs. Time graph
 		ui->altVsTimePlot->graph(2)->data()->clear(); // additional data: Transit Time Diagram
+		if (plotAltVsTimeSun)
+		{
+			ui->altVsTimePlot->graph(3)->data()->clear(); // additional data: Sun
+			ui->altVsTimePlot->graph(4)->data()->clear();
+			ui->altVsTimePlot->graph(5)->data()->clear();
+		}
+		if (plotAltVsTimeMoon && onEarth)
+			ui->altVsTimePlot->graph(6)->data()->clear(); // additional data: Moon
 		ui->altVsTimePlot->replot();
 	}
 }
@@ -1778,6 +1903,30 @@ void AstroCalcDialog::prepareAxesAndGraph()
 	ui->altVsTimePlot->graph(2)->setPen(QPen(Qt::cyan, 1));
 	ui->altVsTimePlot->graph(2)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(2)->setName("[Transit]");
+
+	// additional data: Sun Elevation
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(3)->setPen(QPen(Qt::darkBlue, 1));
+	ui->altVsTimePlot->graph(3)->setLineStyle(QCPGraph::lsLine);
+	ui->altVsTimePlot->graph(3)->setName("[Sun]");
+	QPen pen;
+	pen.setStyle(Qt::DotLine);
+	pen.setWidth(1);
+	pen.setColor(Qt::darkBlue);
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(4)->setPen(pen);
+	ui->altVsTimePlot->graph(4)->setName("[Nautical Twilight]");
+	pen.setColor(Qt::blue);
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(5)->setPen(pen);
+	ui->altVsTimePlot->graph(5)->setName("[Astronomical Twilight]");
+
+	// additional data: Moon Elevation
+	pen.setStyle(Qt::DashLine);
+	pen.setColor(Qt::darkBlue);
+	ui->altVsTimePlot->addGraph();
+	ui->altVsTimePlot->graph(6)->setPen(pen);
+	ui->altVsTimePlot->graph(6)->setName("[Moon]");
 
 	ui->altVsTimePlot->xAxis->setLabel(xAxisStr);
 	ui->altVsTimePlot->yAxis->setLabel(yAxisStr);
@@ -2325,6 +2474,14 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 				JD = transitX / 86400.0 + (int)core->getJD() - 0.5;
 				info = q_("Passage of meridian at approximately %1").arg(StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm"));
 			}
+			else if (graph->name() == "[Sun]")
+				info = solarSystem->getSun()->getNameI18n();
+			else if (graph->name() == "[Moon]")
+				info = solarSystem->getMoon()->getNameI18n();
+			else if (graph->name() == "[Nautical Twilight]")
+				info = q_("Nautical Twilight Line");
+			else if (graph->name() == "[Astronomical Twilight]")
+				info = q_("Astronomical Twilight Line");
 			else
 			{
 				JD = x / 86400.0 + (int)core->getJD() - 0.5;

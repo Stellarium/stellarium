@@ -158,6 +158,8 @@ private slots:
 	void drawTransitTimeDiagram();	
 	//! Show info from graphs under mouse cursor
 	void mouseOverLine(QMouseEvent *event);
+	void saveAltVsTimeSunFlag(bool state);
+	void saveAltVsTimeMoonFlag(bool state);
 
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
@@ -249,11 +251,11 @@ private:
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2);
 
-	bool plotAltVsTime, plotMonthlyElevation;
+	bool plotAltVsTime, plotMonthlyElevation, plotAltVsTimeSun, plotAltVsTimeMoon;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;	
 	static float brightLimit;
-	static float minY, maxY, minYme, maxYme, transitX, minY1, maxY1, minY2, maxY2;
+	static float minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2;
 	static QString yAxis1Legend, yAxis2Legend;
 
 	//! Make sure that no tabs icons are outside of the viewport.
