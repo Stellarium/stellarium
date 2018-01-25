@@ -1657,7 +1657,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
-	bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 	if (!selectedObjects.isEmpty())
 	{
@@ -1666,6 +1665,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		QVector<double> xs, ys, ysn, ysa, xm, ym;
 
 		StelObjectP selectedObject = selectedObjects[0];
+		bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 		double currentJD = core->getJD();
 		double noon = (int)currentJD;
@@ -1762,6 +1762,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		minY = minYa - 2.0;
 		maxY = maxYa + 2.0;
 
+		// additional data: Sun + Twilight
 		if (plotAltVsTimeSun)
 		{
 			xs = sX.toVector();
@@ -1781,6 +1782,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			maxY = (maxY > maxYs + 2.0) ? maxY : maxYs + 2.0;
 		}
 
+		// additional data: Moon
 		if (plotAltVsTimeMoon && onEarth)
 		{
 			xm = mX.toVector();
@@ -1825,14 +1827,10 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 	{
 		ui->altVsTimePlot->graph(0)->data()->clear(); // main data: Altitude vs. Time graph
 		ui->altVsTimePlot->graph(2)->data()->clear(); // additional data: Transit Time Diagram
-		if (plotAltVsTimeSun)
-		{
-			ui->altVsTimePlot->graph(3)->data()->clear(); // additional data: Sun
-			ui->altVsTimePlot->graph(4)->data()->clear();
-			ui->altVsTimePlot->graph(5)->data()->clear();
-		}
-		if (plotAltVsTimeMoon && onEarth)
-			ui->altVsTimePlot->graph(6)->data()->clear(); // additional data: Moon
+		ui->altVsTimePlot->graph(3)->data()->clear(); // additional data: Sun
+		ui->altVsTimePlot->graph(4)->data()->clear(); // additional data: Nautical Twilight
+		ui->altVsTimePlot->graph(5)->data()->clear(); // additional data: Astronomical Twilight
+		ui->altVsTimePlot->graph(6)->data()->clear(); // additional data: Moon
 		ui->altVsTimePlot->replot();
 	}
 }
@@ -1909,6 +1907,7 @@ void AstroCalcDialog::prepareAxesAndGraph()
 	ui->altVsTimePlot->graph(3)->setPen(QPen(Qt::darkBlue, 1));
 	ui->altVsTimePlot->graph(3)->setLineStyle(QCPGraph::lsLine);
 	ui->altVsTimePlot->graph(3)->setName("[Sun]");
+	// additional data: Nautical Twilight
 	QPen pen;
 	pen.setStyle(Qt::DotLine);
 	pen.setWidth(1);
@@ -1916,6 +1915,7 @@ void AstroCalcDialog::prepareAxesAndGraph()
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->graph(4)->setPen(pen);
 	ui->altVsTimePlot->graph(4)->setName("[Nautical Twilight]");
+	// additional data: Astronomical Twilight
 	pen.setColor(Qt::blue);
 	ui->altVsTimePlot->addGraph();
 	ui->altVsTimePlot->graph(5)->setPen(pen);
