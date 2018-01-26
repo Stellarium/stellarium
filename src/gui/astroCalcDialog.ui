@@ -298,7 +298,7 @@
       <item>
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -864,7 +864,7 @@
             <item>
              <widget class="QSlider" name="monthlyElevationTime">
               <property name="toolTip">
-               <string>Time in hours</string>
+               <string>Local Time in hours</string>
               </property>
               <property name="maximum">
                <number>23</number>
