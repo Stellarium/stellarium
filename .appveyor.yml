@@ -5,7 +5,7 @@ configuration: Release
 platform: x64
 clone_folder: c:\stellarium
 environment:
-  QTDIR: C:\Qt\5.9.2\msvc2015_64
+  QTDIR: C:\Qt\5.9.3\msvc2015_64
   PATH: '%PATH%;%QTDIR%\bin;C:\MinGW\bin'
 before_build:
 - cmd: >-
