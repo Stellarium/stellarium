@@ -2479,9 +2479,9 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 			else if (graph->name() == "[Moon]")
 				info = solarSystem->getMoon()->getNameI18n();
 			else if (graph->name() == "[Nautical Twilight]")
-				info = q_("Nautical Twilight Line");
+				info = q_("Line of nautical twilight");
 			else if (graph->name() == "[Astronomical Twilight]")
-				info = q_("Astronomical Twilight Line");
+				info = q_("Line of astronomical twilight");
 			else
 			{
 				JD = x / 86400.0 + (int)core->getJD() - 0.5;
