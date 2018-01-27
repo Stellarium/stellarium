@@ -1,39 +1,26 @@
 version: '{branch}-{build}'
+image: Visual Studio 2015
 configuration: Release
 clone_depth: 5
 clone_folder: c:\stellarium
 environment:
   matrix:
-  - image: Visual Studio 2015
-    platform: x64
+  - platform: x64
     qtver: 5.9.3
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64
-  - image: Visual Studio 2015
-    platform: Win32
+  - platform: Win32
     qtver: 5.9.3
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
-  - image: Visual Studio 2015
-    platform: x64
+  - platform: x64
     qtver: 5.10.0
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64
-  - image: Visual Studio 2015
-    platform: Win32
+  - platform: Win32
     qtver: 5.10.0
-    qtbin: msvc2015_64
+    qtbin: msvc2015
     msvcname: Visual Studio 14 2015
-  - image: Visual Studio 2017
-    platform: x64
-    qtver: 5.9.3
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 15 2017 Win64
-  - image: Visual Studio 2017
-    platform: x64
-    qtver: 5.10.0
-    qtbin: msvc2017_64
-    msvcname: Visual Studio 15 2017 Win64
 before_build:
 - cmd: >-
     set PATH=C:\Qt\%qtver%\%qtbin%\bin;%PATH%
