@@ -39,6 +39,7 @@ test_script:
 notifications:
 - provider: Email
   to:
+  - mcardinot@gmail.com
   - alex.v.wolf@gmail.com
   on_build_success: false
   on_build_failure: true

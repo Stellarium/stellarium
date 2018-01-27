@@ -17,6 +17,8 @@ language: cpp
 matrix:
   include:
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -27,6 +29,8 @@ matrix:
          - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -37,6 +41,8 @@ matrix:
          - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -47,6 +53,8 @@ matrix:
          - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -57,6 +65,8 @@ matrix:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -67,6 +77,8 @@ matrix:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -78,6 +90,8 @@ matrix:
         - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -89,6 +103,8 @@ matrix:
         - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -100,6 +116,8 @@ matrix:
         - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -110,6 +128,8 @@ matrix:
         - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -120,6 +140,8 @@ matrix:
         - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
 
     - os: linux
+      dist: trusty
+      sudo: required
       addons:
         apt:
           sources:
@@ -135,24 +157,39 @@ matrix:
         - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
 
     - os: osx
-      osx_image: xcode9
+      osx_image: xcode8
       env:
         - MATRIX_EVAL="brew install gcc5 && CC=gcc-5 && CXX=g++-5"
 
     - os: osx
-      osx_image: xcode9
+      osx_image: xcode8
       env:
         - MATRIX_EVAL="brew install gcc6 && CC=gcc-6 && CXX=g++-6"
 
     - os: osx
-      osx_image: xcode9
+      osx_image: xcode8
       env:
         - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
 
     - os: osx
-      osx_image: xcode9
+      osx_image: xcode6.4
       env:
-        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+
+    - os: osx
+      osx_image: xcode7.3
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+
+    - os: osx
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+
+    - os: osx
+      osx_image: xcode8.3
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
 
     - os: osx
       osx_image: xcode9
@@ -185,15 +222,16 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew update;
       brew upgrade;
-      brew install qt ninja;
+      brew install qt;
+      brew install ninja;
     fi
 
 install:
 
 before_script:
   - export DISPLAY=:99.0
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sh -e /etc/init.d/xvfb start ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
   - mkdir build
   - cd build
@@ -205,11 +243,14 @@ script:
   - ctest --output-on-failure
 
 after_success:
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then
-  -   sudo pip install transifex-client
-  -   sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc
-  -   tx push -s
-  - fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$TRAVIS_BRANCH" == "master" ]]; then
+      pip install virtualenv;
+      virtualenv ~/env;
+      source ~/env/bin/activate;
+      pip install transifex-client;
+      sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
+      tx push -s;
+    fi
 
 notifications:
   recipients:
