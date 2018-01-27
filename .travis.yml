@@ -172,7 +172,7 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
   -   mkdir qt5
   -   wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download
   -   unzip -qq qt5.zip -d qt5
@@ -180,7 +180,7 @@ before_install:
   -   export QT_PLUGIN_PATH=`pwd`/qt5/plugins
   -   sudo apt-get -qq install ninja-build
   - fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
   -   brew update
   -   brew upgrade
   -   brew install qt ninja
@@ -190,8 +190,8 @@ install:
 
 before_script:
   - export DISPLAY=:99.0
-  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sh -e /etc/init.d/xvfb start ; fi
-  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sh -e /etc/init.d/xvfb start ; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
   - mkdir build
   - cd build
