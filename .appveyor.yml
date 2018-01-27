@@ -1,38 +1,35 @@
 version: '{branch}-{build}'
-image:
-- Visual Studio 2015
-- Visual Studio 2017
 configuration: Release
 clone_depth: 5
 clone_folder: c:\stellarium
 environment:
   matrix:
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+  - image: Visual Studio 2015
     platform: x64
     qtver: 5.9.3
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+  - image: Visual Studio 2015
     platform: Win32
     qtver: 5.9.3
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+  - image: Visual Studio 2015
     platform: x64
     qtver: 5.10.0
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+  - image: Visual Studio 2015
     platform: Win32
     qtver: 5.10.0
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  - image: Visual Studio 2017
     platform: x64
     qtver: 5.9.3
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+  - image: Visual Studio 2017
     platform: x64
     qtver: 5.10.0
     qtbin: msvc2017_64
