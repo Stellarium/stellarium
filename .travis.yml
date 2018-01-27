@@ -167,16 +167,6 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
 
     - os: osx
-      osx_image: xcode9
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-
-    - os: osx
-      osx_image: xcode9.1
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-
-    - os: osx
       osx_image: xcode9.2
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
