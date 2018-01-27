@@ -217,12 +217,12 @@ before_script:
   - cd build
 
 script:
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]];
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       cmake -DENABLE_TESTING=1 .. -G "Ninja";
       ninja all;
       sudo ninja install;
     fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]];
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       cmake -DENABLE_TESTING=1 ..;
       make;
     fi
