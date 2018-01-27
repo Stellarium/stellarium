@@ -172,26 +172,22 @@ matrix:
 
 before_install:
   - eval "${MATRIX_EVAL}"
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then
-  -   mkdir qt5
-  -   wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download
-  -   unzip -qq qt5.zip -d qt5
-  -   export PATH=`pwd`/qt5/bin:$PATH
-  -   export QT_PLUGIN_PATH=`pwd`/qt5/plugins
-  -   sudo apt-get -qq install ninja-build
-  - fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then
-  -   brew update
-  -   brew upgrade
-  -   brew install qt ninja
-  - fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then mkdir qt5; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then unzip -qq qt5.zip -d qt5; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export PATH=`pwd`/qt5/bin:$PATH; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then export QT_PLUGIN_PATH=`pwd`/qt5/plugins; fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sudo apt-get -qq install ninja-build; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew update; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew upgrade; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then brew install qt ninja; fi
 
 install:
 
 before_script:
   - export DISPLAY=:99.0
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sh -e /etc/init.d/xvfb start ; fi
-  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
+  - if [ "$TRAVIS_OS_NAME" == "linux" ]; then sh -e /etc/init.d/xvfb start ; fi
+  - if [ "$TRAVIS_OS_NAME" == "osx" ]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
   - mkdir build
   - cd build
