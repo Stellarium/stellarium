@@ -22,6 +22,16 @@ matrix:
           sources:
             - ubuntu-toolchain-r-test
           packages:
+            - g++-4.8
+      env:
+         - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
+
+    - os: linux
+      addons:
+        apt:
+          sources:
+            - ubuntu-toolchain-r-test
+          packages:
             - g++-4.9
       env:
          - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
@@ -119,20 +129,69 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
 
+    - os: osx
+      osx_image: xcode8
+      env:
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+    - os: osx
+      osx_image: xcode9
+      env:
+        - MATRIX_EVAL="brew install gcc5 && CC=gcc-5 && CXX=g++-5"
+
+    - os: osx
+      osx_image: xcode9
+      env:
+        - MATRIX_EVAL="brew install gcc6 && CC=gcc-6 && CXX=g++-6"
+
+    - os: osx
+      osx_image: xcode9
+      env:
+        - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
+
+    - os: osx
+      osx_image: xcode9
+      env:
+        - MATRIX_EVAL="CC=gcc-4.9 && CXX=g++-4.9"
+
+    - os: osx
+      osx_image: xcode9
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+
+    - os: osx
+      osx_image: xcode9.1
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+
+    - os: osx
+      osx_image: xcode9.2
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+
+
 before_install:
   - eval "${MATRIX_EVAL}"
-  - mkdir qt5
-  - wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download
-  - unzip -qq qt5.zip -d qt5
-  - export PATH=`pwd`/qt5/bin:$PATH
-  - export QT_PLUGIN_PATH=`pwd`/qt5/plugins
-  - sudo apt-get -qq install ninja-build
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+  -   mkdir qt5
+  -   wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download
+  -   unzip -qq qt5.zip -d qt5
+  -   export PATH=`pwd`/qt5/bin:$PATH
+  -   export QT_PLUGIN_PATH=`pwd`/qt5/plugins
+  -   sudo apt-get -qq install ninja-build
+  - fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+  -   brew update
+  -   brew upgrade
+  -   brew install qt ninja
+  - fi
 
 install:
 
 before_script:
   - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then sh -e /etc/init.d/xvfb start ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then ( sudo Xvfb :99 -ac -screen 0 1024x768x8; echo ok )& fi
   - sleep 3 # give xvfb some time to start
   - mkdir build
   - cd build
