@@ -1,27 +1,53 @@
 version: '{branch}-{build}'
-image: Visual Studio 2015
+image:
+- Visual Studio 2015
+- Visual Studio 2017
 configuration: Release
 clone_depth: 5
 clone_folder: c:\stellarium
 environment:
   matrix:
-  - platform: x64
-    qt: msvc2015_64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: x64
+    qtver: 5.9.3
+    qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64
-  - platform: x86
-    qt: msvc2015
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: Win32
+    qtver: 5.9.3
+    qtbin: msvc2015
     msvcname: Visual Studio 14 2015
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: x64
+    qtver: 5.10.0
+    qtbin: msvc2015_64
+    msvcname: Visual Studio 14 2015 Win64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2015
+    platform: Win32
+    qtver: 5.10.0
+    qtbin: msvc2015_64
+    msvcname: Visual Studio 14 2015
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: x64
+    qtver: 5.9.3
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 15 2017 Win64
+  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
+    platform: x64
+    qtver: 5.10.0
+    qtbin: msvc2017_64
+    msvcname: Visual Studio 15 2017 Win64
 before_build:
 - cmd: >-
-    set PATH=C:\Qt\5.9.3\%qt%\bin;%PATH%
+    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%PATH%
 
     cd c:\stellarium
 
-    mkdir build-%qt% && cd build-%qt%
+    mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
 
     cmake -DENABLE_TESTING=1 -G "%msvcname%" ..
 build:
-  project: c:\stellarium\build-%qt%\Stellarium.sln
+  project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
   parallel: true
   verbosity: minimal
 test_script:
