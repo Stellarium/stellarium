@@ -175,17 +175,15 @@ before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      mkdir qt5;
-      wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download;
-      unzip -qq qt5.zip -d qt5;
-      export PATH=`pwd`/qt5/bin:$PATH;
-      export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
-      sudo apt-get -qq install ninja-build;
+      sudo apt-add-repository -y ppa:beineri/opt-qt563-trusty
+      sudo apt-get -qq update
+      sudo apt-get -qq install ninja-build qt56-meta-full;
+      export PATH="/opt/qt56/bin:$PATH";
+      qt56-env.sh
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-      brew update;
-      brew upgrade;
+      brew update > /dev/null;
       brew install qt;
       export PATH="/usr/local/opt/qt/bin:$PATH";
     fi
