@@ -1669,7 +1669,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		double currentJD = core->getJD();
 		double noon = (int)currentJD;
-		double az, alt, deg;
+		double az, alt, deg, ltime, JD;
 		bool sign;
 
 		double shift = core->getUTCOffset(currentJD) / 24.0;
@@ -1687,10 +1687,19 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
 			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
-			double ltime = i * step + 43200;
+			ltime = i * step + 43200;
 			aX.append(ltime);
-			double JD = noon + ltime / 86400 - shift - 0.5;
+			JD = noon + ltime / 86400 - shift - 0.5;
 			core->setJD(JD);
+			if (isSatellite)
+			{
+#ifdef USE_STATIC_PLUGIN_SATELLITES
+				GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
+#endif
+			}
+			else
+				core->update(0.0);
+
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			StelUtils::radToDecDeg(alt, sign, deg);
 			if (!sign) deg *= -1;
@@ -1700,50 +1709,41 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 				xMaxY = deg;
 				transitX = ltime;
 			}
-
-			if (isSatellite)
-			{
-#ifdef USE_STATIC_PLUGIN_SATELLITES
-				GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
-#endif
-			}
-			else
-				core->update(0.0);
 		}
 
 		if (plotAltVsTimeSun)
 		{
-			PlanetP sun = solarSystem->getSun();
+			PlanetP sun = solarSystem->getSun();			
 			for (int i = -1; i <= 25; i++)
 			{
-				double ltime = i * 3600 + 43200;
+				ltime = i * 3600 + 43200;
 				sX.append(ltime);
-				double JD = noon + ltime / 86400 - shift - 0.5;
-				core->setJD(JD);
+				JD = noon + ltime / 86400 - shift - 0.5;
+				core->setJD(JD);				 
+				core->update(0.0);
 				StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
 				StelUtils::radToDecDeg(alt, sign, deg);
 				if (!sign) deg *= -1;
 				sY.append(deg);
 				sYn.append(deg + 12);
 				sYa.append(deg + 18);
-				core->update(0.0);
 			}
 		}
 
 		if (plotAltVsTimeMoon && onEarth)
 		{
-			PlanetP moon = solarSystem->getMoon();
+			PlanetP moon = solarSystem->getMoon();			
 			for (int i = -1; i <= 25; i++)
 			{
-				double ltime = i * 3600 + 43200;
+				ltime = i * 3600 + 43200;
 				mX.append(ltime);
-				double JD = noon + ltime / 86400 - shift - 0.5;
+				JD = noon + ltime / 86400 - shift - 0.5;
 				core->setJD(JD);
+				core->update(0.0);
 				StelUtils::rectToSphe(&az, &alt, moon->getAltAzPosAuto(core));
 				StelUtils::radToDecDeg(alt, sign, deg);
 				if (!sign) deg *= -1;
 				mY.append(deg);
-				core->update(0.0);
 			}
 		}
 
