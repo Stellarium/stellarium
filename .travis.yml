@@ -186,6 +186,7 @@ before_install:
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew update > /dev/null;
+      brew upgrade > /dev/null;
       brew install qt;
       export PATH="/usr/local/opt/qt/bin:$PATH";
     fi
