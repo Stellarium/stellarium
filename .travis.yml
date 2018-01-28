@@ -175,7 +175,7 @@ before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      sudo apt-add-repository -y ppa:beineri/opt-qt563-trusty
+      sudo add-apt-repository ppa:beineri/opt-qt563-trusty -y
       sudo apt-get -qq update
       sudo apt-get -qq install ninja-build qt56-meta-full;
       export PATH="/opt/qt56/bin:$PATH";
