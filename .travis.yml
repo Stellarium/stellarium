@@ -171,22 +171,6 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
 
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="brew install gcc@5 && CC=gcc-5 && CXX=g++-5"
-
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="brew install gcc@6 && CC=gcc-6 && CXX=g++-6"
-
-    - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="brew install gcc && CC=gcc-7 && CXX=g++-7"
-
-
 before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
@@ -217,11 +201,13 @@ before_script:
   - cd build
 
 script:
+  # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       cmake -DENABLE_TESTING=1 .. -G "Ninja";
       ninja all;
       sudo ninja install;
     fi
+  # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       cmake -DENABLE_TESTING=1 ..;
       make;
