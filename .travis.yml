@@ -179,7 +179,7 @@ before_install:
       sudo apt-get -qq update
       sudo apt-get -qq install ninja-build qt56-meta-full;
       export PATH="/opt/qt56/bin:$PATH";
-      qt56-env.sh
+      qt56-env.sh;
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
