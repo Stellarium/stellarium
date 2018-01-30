@@ -472,13 +472,38 @@ void ViewDialog::createDialogContent()
 	updateTabBarListWidgetWidth();
 }
 
+// Heuristic function to decide in which group to put a survey.
+static QString getHipsType(const HipsSurveyP hips)
+{
+	QJsonObject properties = hips->property("properties").toJsonObject();
+	if (!properties.contains("type")) return "dss";
+	if (properties["type"].toString() == "planet") return "sol";
+	return "other";
+}
+
 void ViewDialog::updateHips()
 {
+
+	// Update the groups combobox.
+	QComboBox* typeComboBox = ui->surveyTypeComboBox;
+	disconnect(typeComboBox, 0, 0, 0);
+	int index = typeComboBox->currentIndex();
+	QVariant selectedType = typeComboBox->itemData(index);
+	if (selectedType.isNull()) selectedType = "dss";
+	typeComboBox->clear();
+	typeComboBox->addItem(q_("Deep Sky"), "dss");
+	typeComboBox->addItem(q_("Solar System"), "sol");
+	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
+	typeComboBox->setCurrentIndex(index);
+	connect(typeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
+
+	// Update survey list.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QListWidget* l = ui->surveysListWidget;
 	QJsonObject currentInfo;
-	int currentRow = l->currentRow();
-	QString currentSurvey;
+	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
+	QListWidgetItem* currentItem = NULL;
+	HipsSurveyP currentHips = NULL;
 
 	l->blockSignals(true);
 	l->clear();
@@ -486,26 +511,33 @@ void ViewDialog::updateHips()
 
 	for (auto hips: hipslist)
 	{
+		if (getHipsType(hips) != selectedType) continue;
 		QString url = hips->property("url").toString();
 		QJsonObject properties = hips->property("properties").toJsonObject();
 		QString title = properties["obs_title"].toString();
+		if (title.isEmpty()) continue;
 		QListWidgetItem* item = new QListWidgetItem(title, l);
 		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
 		item->setCheckState(hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
 		item->setData(Qt::UserRole, url);
+		if (url == currentSurvey)
+		{
+			currentItem = item;
+			currentHips = hips;
+		}
 		disconnect(hips.data(), 0, this, 0);
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
-	l->setCurrentRow(currentRow);
+	l->setCurrentItem(currentItem);
 	l->blockSignals(false);
 
-	if (currentRow == -1)
+	if (!currentHips)
 	{
 		ui->surveysTextBrowser->setText("");
 	}
 	else
 	{
-		QJsonObject props = hipslist[currentRow]->property("properties").toJsonObject();
+		QJsonObject props = currentHips->property("properties").toJsonObject();
 		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
 
 		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());

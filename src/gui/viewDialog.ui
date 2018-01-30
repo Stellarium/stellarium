@@ -3508,10 +3508,13 @@
         </widget>
         <widget class="QWidget" name="page_surveys">
          <layout class="QGridLayout" name="gridLayout_21">
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QListWidget" name="surveysListWidget"/>
           </item>
-          <item row="0" column="1">
+          <item row="0" column="0">
+           <widget class="QComboBox" name="surveyTypeComboBox"/>
+          </item>
+          <item row="0" column="1" rowspan="2">
            <widget class="QTextBrowser" name="surveysTextBrowser"/>
           </item>
          </layout>
@@ -3846,12 +3849,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
