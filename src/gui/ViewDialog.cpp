@@ -503,7 +503,7 @@ void ViewDialog::updateHips()
 	QJsonObject currentInfo;
 	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
 	QListWidgetItem* currentItem = NULL;
-	HipsSurveyP currentHips = NULL;
+	HipsSurveyP currentHips;
 
 	l->blockSignals(true);
 	l->clear();
