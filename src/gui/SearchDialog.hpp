@@ -173,6 +173,8 @@ private slots:
 
 	void pasteAndGo();
 
+	void changeTab(int index);
+
 private:
 	class SearchDialogStaticData
 	{
