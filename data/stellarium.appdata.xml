@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component type="desktop-application">
-  <id>org.stellarium</id>
+  <id>org.stellarium.Stellarium</id>
+  <launchable type="desktop-id">stellarium.desktop</launchable>
   <metadata_license>CC0-1.0</metadata_license>
   <project_license>GPL-2.0+</project_license>
   <name>Stellarium</name>
@@ -212,6 +213,7 @@
     <p xml:lang="ko">스텔라리움은 현실적인 3D 하늘 사진들을 OpenGL을 사용하여 렌더링 합니다. 이는 별, 별자리, 행성과 성운, 그리고 다양한 파노라마 배경을 포함한 다른 기능과 안개, 광해 그리고  내장 스크립트 엔진을 보여줍니다.</p>
     <p xml:lang="lt">Stellarium rodo trimatį realistišką dangaus vaizdą realiu ar Jūsų parinktu laiku, naudodamas 3D spartinimą. Jis atvaizduoja žvaigždes, žvaigždynus, planetas ir ūkus, ir turi daugelį kitų funkcijų, tokių kaip panoraminiai kraštovaizdžiai, rūko bei šviesos taršos modeliavimas ir integruotas scenarijų programavimo variklis.</p>
     <p xml:lang="ms">Stellarium menerap langit seakan-foto 3D dengan OpenGL. Ia dapat paparkan bintang, buruj, planet dan nebula, dan banyak lagi fitur-fitur lain termasuklah pelbagai simulasi lanskap panorama, kabus, pencemaran cahaya dan enjin penskripan terbina-dalam.</p>
+    <p xml:lang="nb">Stellarium tegner en fotorealistisk 3D-himmel i sanntid med OpenGL. Programmet viser stjerner, stjernebilder, planeter og stjernetåker og har mange andre funksjoner som panoramalandskap, tåke, simulering av lysforurensing og en innebygd skriptmotor.</p>
     <p xml:lang="nl">Stellarium render 3D-fotorealistische lucht in realtime met OpenGL. Het toont de sterren, sterrenbeelden, planeten en nevels, en heeft vele andere functies, waaronder meerdere panoramische landschappen, mist, lichtvervuilingssimulatie en een ingebouwde scripting engine.</p>
     <p xml:lang="pl">Stellarium wyświetla trójwymiarowe fotorealistyczne niebo w czasie rzeczywistym, używając OpenGL. Pokazuje gwiazdy, gwiazdozbiory, planety i mgławice, a także inne obiekty i zjawiska, m.in. panoramiczne krajobrazy, mgłę, zaświetlenie nieba. Umożliwia też uruchamianie skryptów.</p>
     <p xml:lang="pt">O Stellarium desenha um céu foto-realista tridimensional em tempo real com o OpenGL. Mostra estrelas, constelações, planetas e nebulosas e possui vários outros recursos, incluindo paisagens panorâmicas múltiplas, nevoeiro, simulação da poluição luminosa e um mecanismo de apresentações embutido.</p>
@@ -304,6 +306,7 @@
     <p xml:lang="ko">스텔라리움은 여러 개의 하늘 문화를 가지고 있습니다. 한국, 폴리네시아, 나바호, 티톤,  이집트, 이누이트,  그리고 중국의 전통적인 별자리는 서양의 것과 마찬가지로 잘 되어 있습니다.</p>
     <p xml:lang="lt">Stellarium turi daugybę žvaigždynų piešinių - pamatykite tradicinius Polinezijos, Inuitų, Navaho, Korėjos, Lakotos, Egipto ir Kinijos žvaigždynus, o taip pat ir tradicinius vakarietiškus.</p>
     <p xml:lang="ms">Stellarium mempunyai pelbagai jenis peribudaya langit - sila rujuk  buruj daripada astronomi Polynesia, Inuit, Navajo, Korea, Lakota, Mesir dan China, dan juga buruj tradisi Barat.</p>
+    <p xml:lang="nb">Stellarium byr på mange himmelkulturer – se de tradisjonelle stjernebildene fra polynesiske, inuittiske, navaho, koreanske, lakota, egyptiske og kinesiske astronomer, samt de tradisjonelle vestlige stjernebildene.</p>
     <p xml:lang="nl">Stellarium heeft meerdere hemelculturen - bekijk de sterrenbeelden van de tradities van de Polynesische, Inuitische, Navajoaanse, Koreaanse, Lakotaanse, Egyptische en Chinese astronomen, evenals de traditionele westerse sterrenbeelden.</p>
     <p xml:lang="pl">Stellarium pokazuje niebo oczami różnych kultur - zobacz gwiazdozbiory w tradycji polinezyjskiej, inuickiej, nawaho, koreańskiej, Dakotów, egipskiej i chińskiej, a także tradycyjne gwiazdozbiory kultury zachodniej.</p>
     <p xml:lang="pt">O Stellarium tem diversas culturas estelares: veja as constelações a partir das tradições de astrónomos polinésios, inuítes, navajos, coreanos, lacotas, egípcios e chineses, bem como as constelações ocidentais tradicionais.</p>
@@ -351,7 +354,7 @@
     <p xml:lang="la">Visitate tamen alteras planetas in systema solis - vidite coelum astronautium missionis "Apollo", vel anum Saturni ex locatione Titani.</p>
     <p xml:lang="lt">Taip pat galima apsilankyti kitose Saulės sistemos planetose - pamatykite, kaip dangus atrodė Apollo astronautams, arba kaip Saturno žiedai atrodo iš Titano.</p>
     <p xml:lang="ms">Anda juga boleh melawati planet lain di dalam sistem suria - sila lihat apa yang dilihat oleh ahli astronaut Apollo, atau bagaimanakah rupa gelang Saturn dari pandangan bulan Titan.</p>
-    <p xml:lang="nb">Det er også mulig å besøke andre planeter i solsystemet - se hvordan himmelen så ut for Apollo-astronautene, eller hvordan Saturns ringer ser ut fra Titan.</p>
+    <p xml:lang="nb">Det er også mulig å besøke andre planeter i solsystemet – se hvordan himmelen så ut for Apollo-astronautene, eller hvordan Saturns ringer ser ut fra Titan.</p>
     <p xml:lang="nl">Het is ook mogelijk om andere planeten in het zonnestelsel te bezoeken - zie hoe de hemel eruitzag voor de Apollo-astronauten, of hoe de ringen van Saturnus eruitzien vanuit Titan.</p>
     <p xml:lang="pl">Możliwe jest również odwiedzanie innych obiektów w układzie słonecznym - zobacz niebo z perspektywy astronautów Apollo albo obejrzyj pierścienie Saturna z Tytana.</p>
     <p xml:lang="pt">Também é possível visitar outros planetas no sistema solar: veja como o céu pareceu para os astronautas da Apollo ou como os anéis de Saturno parecem a partir de Titã.</p>
@@ -372,19 +375,36 @@
     <p xml:lang="zh-HK">它也可能前往在太陽系其他行星 - 看阿波羅太空人在月球上看到的星空, 還有在泰坦(土星衛星)上看土星環.</p>
     <p xml:lang="zh-TW">它也可以前往在太陽系其他星球 - 看看阿波羅計畫中的太空人在月球上所看到的星空, 還有在土衛六(Titan)上看土星環會是什麼光景。</p>
   </description>
-  <launchable type="desktop-id">stellarium.desktop</launchable>
   <url type="homepage">http://www.stellarium.org/</url>
   <url type="bugtracker">https://github.com/Stellarium/stellarium/issues</url>
+  <url type="faq">http://stellarium.sourceforge.net/wiki/index.php/FAQ</url>
+  <url type="help">http://www.stellarium.org</url>
+  <url type="donation">http://www.stellarium.org</url>
+  <url type="translate">https://www.transifex.com/stellarium/stellarium/</url>
+  <categories>
+    <category>Education</category>
+    <category>Science</category>
+  </categories>
   <screenshots>
     <screenshot type="default">
       <image>http://www.stellarium.org/img/screenshots/0.10-constellation-art-on.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-from-mars.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-planets.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-constellations.jpg</image>
+    </screenshot>
+    <screenshot>
+      <image>http://stellarium.org/img/screenshots/0.10-orion-nebula.jpg</image>
     </screenshot>
   </screenshots>
   <provides>
     <binary>stellarium</binary>
   </provides>
-  <url type="donation">http://www.stellarium.org</url>
-  <url type="help">http://www.stellarium.org</url>
   <update_contact>stellarium@googlegroups.com</update_contact>
   <developer_name>Stellarium team</developer_name>
 </component>
