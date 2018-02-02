@@ -45,6 +45,7 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 	updateTimer=new QTimer(this); // parenting will auto-delete timer on destruction!
 	connect (updateTimer, SIGNAL(timeout()), this, SLOT(onTimerTimeout()));
 	updateTimer->start(20); // must be short enough to allow fast scroll-through.
+	core = StelApp::getInstance().getCore();
 }
 
 DateTimeDialog::~DateTimeDialog()
@@ -56,7 +57,6 @@ DateTimeDialog::~DateTimeDialog()
 void DateTimeDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
-	StelCore *core = StelApp::getInstance().getCore();
 	setDateTime(core->getJD());
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -119,14 +119,14 @@ bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 	minute = dmin;
 	second = ds;
 	pushToWidgets();
-	StelApp::getInstance().getCore()->setJD(newJd());
+	core->setJD(newJd());
 	return true;
 }
 
 bool DateTimeDialog::validJd(double jday)
 {
 	pushToWidgets();
-	StelApp::getInstance().getCore()->setJD(jday);
+	core->setJD(jday);
 	return true;
 }
 
@@ -157,7 +157,8 @@ void DateTimeDialog::yearChanged(int newyear)
 	if ( year != newyear )
 	{
 		valid( newyear, month, day, hour, minute, second );
-		emit StelApp::getInstance().getCore()->dateChanged();
+		emit core->dateChanged();
+		emit core->dateChangedByYear();
 	}
 }
 
@@ -166,7 +167,8 @@ void DateTimeDialog::monthChanged(int newmonth)
 	if ( month != newmonth )
 	{
 		valid( year, newmonth, day, hour, minute, second );
-		emit StelApp::getInstance().getCore()->dateChanged();
+		emit core->dateChanged();
+		emit core->dateChangedForMonth();
 	}
 }
 
@@ -174,7 +176,7 @@ void DateTimeDialog::dayChanged(int newday)
 {
 	int delta = newday - day;
 	validJd(jd + delta);
-	emit StelApp::getInstance().getCore()->dateChanged();
+	emit core->dateChanged();
 }
 
 void DateTimeDialog::hourChanged(int newhour)
@@ -211,7 +213,7 @@ double DateTimeDialog::newJd()
 {
 	double cjd;
 	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
-	cjd -= (StelApp::getInstance().getCore()->getUTCOffset(cjd)/24.0); // local tz -> UTC
+	cjd -= (core->getUTCOffset(cjd)/24.0); // local tz -> UTC
 
 	return cjd;
 }
@@ -241,7 +243,7 @@ void DateTimeDialog::setDateTime(double newJd)
 {
 	if (this->visible()) {
 		// JD and MJD should be at the UTC scale on the window!
-		double newJdC = newJd + StelApp::getInstance().getCore()->getUTCOffset(newJd)/24.0; // UTC -> local tz
+		double newJdC = newJd + core->getUTCOffset(newJd)/24.0; // UTC -> local tz
 		StelUtils::getDateFromJulianDay(newJdC, &year, &month, &day);
 		StelUtils::getTimeFromJulianDay(newJdC, &hour, &minute, &second);
 		jd = newJd;
@@ -253,5 +255,5 @@ void DateTimeDialog::setDateTime(double newJd)
 // handle timer-triggered update
 void DateTimeDialog::onTimerTimeout(void)
 {
-	this->setDateTime(StelApp::getInstance().getCore()->getJD());
+	this->setDateTime(core->getJD());
 }

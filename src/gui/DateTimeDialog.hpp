@@ -73,6 +73,7 @@ private slots:
 	void onTimerTimeout(void);
 
 private:
+	StelCore* core;
 	Ui_dateTimeDialogForm* ui;
 	QTimer *updateTimer;
 	int year;

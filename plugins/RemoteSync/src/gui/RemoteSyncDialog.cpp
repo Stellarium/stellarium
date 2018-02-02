@@ -142,7 +142,7 @@ void RemoteSyncDialog::updateState()
 	}
 	else if (state == RemoteSync::SERVER)
 	{
-		ui->serverButton->setText("Stop server");
+		ui->serverButton->setText(q_("Stop server"));
 		ui->serverControls->setEnabled(false);
 		connect(ui->serverButton, SIGNAL(clicked(bool)), rs, SLOT(stopServer()));
 		ui->clientGroupBox->setEnabled(false);

@@ -471,6 +471,8 @@ public slots:
 	void setIridiumFlaresPredictionDepth(int depth) { iridiumFlaresPredictionDepth=depth; }
 
 private slots:
+	//! Update satellites visibility on wide range of dates changes - by month or year
+	void updateSatellitesVisibility();
 
 private:
 	//! Add to the current collection the satellite described by the data.

@@ -205,8 +205,17 @@ void Satellites::init()
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
-	// Handle changes to the observer location:
-	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
+	// Handle changes to the observer location or wide range of dates:
+	StelCore* core = StelApp::getInstance().getCore();
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
+	connect(core, SIGNAL(dateChangedForMonth()), this, SLOT(updateSatellitesVisibility()));
+	connect(core, SIGNAL(dateChangedByYear()), this, SLOT(updateSatellitesVisibility()));
+}
+
+void Satellites::updateSatellitesVisibility()
+{
+	if (getFlagHints())
+		setFlagHints(false);
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
