@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 21:28+0700\n"
+"POT-Creation-Date: 2018-02-02 22:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: t4saha <t4saha@gmail.com>, 2017\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -4874,11 +4874,11 @@ msgstr "মধ্যগগনে %1 এ"
 
 #: src/gui/AstroCalcDialog.cpp:2482
 msgid "Line of nautical twilight"
-msgstr ""
+msgstr "ঊষা-গোধূলি সূচনা রেখা"
 
 #: src/gui/AstroCalcDialog.cpp:2484
 msgid "Line of astronomical twilight"
-msgstr ""
+msgstr "ঊষা-গোধূলি রেখা"
 
 #: src/gui/AstroCalcDialog.cpp:2510
 msgid "Phenomenon"
@@ -6533,11 +6533,11 @@ msgstr "&সব নির্বাচন করুন"
 
 #: src/translations.h:688
 msgid "&Step up"
-msgstr ""
+msgstr "পূর্ব&বর্তী"
 
 #: src/translations.h:689
 msgid "Step &down"
-msgstr ""
+msgstr "&পরবর্তী"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Andorra
 #: src/translations_countries.h:32
@@ -9727,265 +9727,263 @@ msgstr "অন্তর্ভুক্ত স্থান :"
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:992
+#: src/ui_astroCalcDialog.h:986
 msgid "Astronomical calculations"
 msgstr "ঘটনাপঞ্জী"
 
-#: src/ui_astroCalcDialog.h:998
+#: src/ui_astroCalcDialog.h:992
 msgid "Positions"
 msgstr "অবস্থান"
 
-#: src/ui_astroCalcDialog.h:1000
+#: src/ui_astroCalcDialog.h:994
 msgid "Celestial bodies above horizon"
 msgstr "দিগন্তের উপরে থাকা মহাজাগতিক জ্যোতিষ্ক সমূহ"
 
-#: src/ui_astroCalcDialog.h:1003
+#: src/ui_astroCalcDialog.h:997
 msgid "Ephemeris"
 msgstr "পঞ্জিকা"
 
-#: src/ui_astroCalcDialog.h:1005
+#: src/ui_astroCalcDialog.h:999
 msgid "Phenomena"
 msgstr "ঘটনা"
 
-#: src/ui_astroCalcDialog.h:1007
+#: src/ui_astroCalcDialog.h:1001
 msgid "Alt. vs. Time"
 msgstr "উন্নতি - সময়"
 
-#: src/ui_astroCalcDialog.h:1009
+#: src/ui_astroCalcDialog.h:1003
 msgid "Altitude vs. Time"
 msgstr "উন্নতি বনাম সময়"
 
-#: src/ui_astroCalcDialog.h:1012
+#: src/ui_astroCalcDialog.h:1006
 msgctxt "Monthly Elevation"
 msgid "ME"
 msgstr "মাসিক উন্নতি"
 
-#: src/ui_astroCalcDialog.h:1014
+#: src/ui_astroCalcDialog.h:1008
 msgid "Monthly Elevation"
 msgstr "মাসিক উন্নতি লেখ"
 
-#: src/ui_astroCalcDialog.h:1017
+#: src/ui_astroCalcDialog.h:1011
 msgid "Graphs"
 msgstr "লেখচিত্র"
 
-#: src/ui_astroCalcDialog.h:1019 src/ui_astroCalcDialog.h:1095
+#: src/ui_astroCalcDialog.h:1013 src/ui_astroCalcDialog.h:1089
 msgid "Graphs on the current year"
 msgstr "বর্তমান বছর অনুযায়ী লেখচিত্র"
 
-#: src/ui_astroCalcDialog.h:1022
+#: src/ui_astroCalcDialog.h:1016
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr "আজ রাত"
 
-#: src/ui_astroCalcDialog.h:1024
+#: src/ui_astroCalcDialog.h:1018
 msgid "What's Up Tonight"
 msgstr "আজ রাতে কি কি দেখা যাবে"
 
-#: src/ui_astroCalcDialog.h:1027
+#: src/ui_astroCalcDialog.h:1021
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr "পরিসংখ্যান"
 
-#: src/ui_astroCalcDialog.h:1029
+#: src/ui_astroCalcDialog.h:1023
 msgid "Planetary Calculator"
 msgstr "গ্রহ গ্রহাণু সংক্রান্ত গণনা"
 
-#: src/ui_astroCalcDialog.h:1037
+#: src/ui_astroCalcDialog.h:1031
 msgid "Save positions"
 msgstr "অবস্থান সঞ্চয় করুন"
 
-#: src/ui_astroCalcDialog.h:1038
+#: src/ui_astroCalcDialog.h:1032
 msgid "Update positions"
 msgstr "টাটকা তথ্য দেখুন"
 
-#: src/ui_astroCalcDialog.h:1039 src/ui_astroCalcDialog.h:1096
+#: src/ui_astroCalcDialog.h:1033 src/ui_astroCalcDialog.h:1090
 msgid "Show objects brighter than magnitude:"
 msgstr "সর্বাধিক উজ্জ্বল্যতা :"
 
-#: src/ui_astroCalcDialog.h:1041
+#: src/ui_astroCalcDialog.h:1035
 msgid "List of objects above horizon"
 msgstr "দিগন্তের উপরে থাকা জ্যোতিষ্ক সমূহ"
 
-#: src/ui_astroCalcDialog.h:1043 src/ui_astroCalcDialog.h:1067
+#: src/ui_astroCalcDialog.h:1037 src/ui_astroCalcDialog.h:1061
 msgid "Use horizontal coordinates"
 msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক"
 
-#: src/ui_astroCalcDialog.h:1044 src/ui_astroCalcDialog.h:1093
+#: src/ui_astroCalcDialog.h:1038 src/ui_astroCalcDialog.h:1087
 msgid "Celestial body:"
 msgstr "স্থান :"
 
-#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1072
+#: src/ui_astroCalcDialog.h:1040 src/ui_astroCalcDialog.h:1066
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "শেষ :"
 
-#: src/ui_astroCalcDialog.h:1047 src/ui_astroCalcDialog.h:1082
+#: src/ui_astroCalcDialog.h:1041 src/ui_astroCalcDialog.h:1076
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "শুরু :"
 
-#: src/ui_astroCalcDialog.h:1048
+#: src/ui_astroCalcDialog.h:1042
 msgid "Time step:"
 msgstr "অবকাশ :"
 
-#: src/ui_astroCalcDialog.h:1049
+#: src/ui_astroCalcDialog.h:1043
 msgid "Cleanup ephemerides"
 msgstr "মুছে ফেলুন"
 
-#: src/ui_astroCalcDialog.h:1050
+#: src/ui_astroCalcDialog.h:1044
 msgid "Save ephemeris"
 msgstr "সঞ্চয় করে রাখুন"
 
-#: src/ui_astroCalcDialog.h:1052 src/ui_astroCalcDialog.h:1079
+#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1073
 #: plugins/Satellites/src/ui_satellitesDialog.h:828
 msgid "Calculations require time, please be patient"
 msgstr "গণনার জন্য কিছু সময়ের প্রয়োজন, ধৈর্য সহকারে একটু অপেক্ষা করুন"
 
-#: src/ui_astroCalcDialog.h:1054
+#: src/ui_astroCalcDialog.h:1048
 msgid "Calculate ephemeris"
 msgstr "গণনা করুন"
 
-#: src/ui_astroCalcDialog.h:1056
+#: src/ui_astroCalcDialog.h:1050
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "আকাশে অবস্থান গুলি চিহ্নিত করে দেখানো হবে"
 
-#: src/ui_astroCalcDialog.h:1058
+#: src/ui_astroCalcDialog.h:1052
 msgid "Show markers"
 msgstr "অবস্থান"
 
-#: src/ui_astroCalcDialog.h:1060
+#: src/ui_astroCalcDialog.h:1054
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "সময় দেখানো হবে"
 
-#: src/ui_astroCalcDialog.h:1062
+#: src/ui_astroCalcDialog.h:1056
 msgid "Show dates"
 msgstr "তারিখ"
 
-#: src/ui_astroCalcDialog.h:1064
+#: src/ui_astroCalcDialog.h:1058
 msgid "Show magnitudes of current celestial body"
 msgstr "উজ্জ্ব্যলতা দেখানো হবে"
 
-#: src/ui_astroCalcDialog.h:1066
+#: src/ui_astroCalcDialog.h:1060
 msgid "Show magnitudes"
 msgstr "উজ্জ্ব্যলতা"
 
-#: src/ui_astroCalcDialog.h:1068
+#: src/ui_astroCalcDialog.h:1062
 msgid "Maximum allowed separation:"
 msgstr "সর্বাধিক ত্রুটি :"
 
-#: src/ui_astroCalcDialog.h:1070
+#: src/ui_astroCalcDialog.h:1064
 msgid "Value in decimal degrees"
 msgstr "দশমিক যুক্ত ডিগ্রি ব্যবহার"
 
-#: src/ui_astroCalcDialog.h:1073
+#: src/ui_astroCalcDialog.h:1067
 msgid "Calculate oppositions"
 msgstr "প্রতিযোগ গণনা"
 
-#: src/ui_astroCalcDialog.h:1074
+#: src/ui_astroCalcDialog.h:1068
 msgid "Between objects:"
 msgstr "এদের মধ্যে :"
 
-#: src/ui_astroCalcDialog.h:1075
+#: src/ui_astroCalcDialog.h:1069
 msgid "and"
 msgstr "ও"
 
-#: src/ui_astroCalcDialog.h:1076
+#: src/ui_astroCalcDialog.h:1070
 msgid "Cleanup of phenomena"
 msgstr "মুছে ফেলুন"
 
-#: src/ui_astroCalcDialog.h:1077
+#: src/ui_astroCalcDialog.h:1071
 msgid "Save phenomena"
 msgstr "সঞ্চয় করে রাখুন"
 
-#: src/ui_astroCalcDialog.h:1081
+#: src/ui_astroCalcDialog.h:1075
 msgid "Calculate phenomena"
 msgstr "গণনা করুন"
 
-#: src/ui_astroCalcDialog.h:1083
+#: src/ui_astroCalcDialog.h:1077
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "উন্নতি - সময় লেখচিত্র তৈরীর জন্য কোনো একটি বস্তু নির্বাচন করুন"
 
-#: src/ui_astroCalcDialog.h:1084
+#: src/ui_astroCalcDialog.h:1078
 msgid "Also the graph for the Sun"
-msgstr ""
+msgstr "সূর্যের পরিক্রমন পথ"
 
-#: src/ui_astroCalcDialog.h:1085
+#: src/ui_astroCalcDialog.h:1079
 msgid "Also the graph for the Moon"
-msgstr ""
+msgstr "চাঁদের পরিক্রমন পথ"
 
-#: src/ui_astroCalcDialog.h:1087
+#: src/ui_astroCalcDialog.h:1081
 msgid "Local Time in hours"
-msgstr ""
+msgstr "স্থানীয় সময় (ঘন্টায়)"
 
-#: src/ui_astroCalcDialog.h:1090
+#: src/ui_astroCalcDialog.h:1084
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
 msgstr ""
+"দিন অনুয়ায়ী কোনো নির্দিষ্ট সময়ে কোনো জ্যোতিষ্কের অবস্থান জানতে সময় ও "
+"জ্যোতিষ্ক নির্বাচন করুন"
 
-#: src/ui_astroCalcDialog.h:1091
+#: src/ui_astroCalcDialog.h:1085
 msgid "Second graph (yellow):"
 msgstr "২য় লেখ (হলুদ) :"
 
-#: src/ui_astroCalcDialog.h:1092
+#: src/ui_astroCalcDialog.h:1086
 msgid "First graph (red):"
 msgstr "১ম লেখ (লাল) :"
 
-#: src/ui_astroCalcDialog.h:1094
+#: src/ui_astroCalcDialog.h:1088
 msgid "Draw graphs"
 msgstr "লেখচিত্র দেখুন"
 
-#: src/ui_astroCalcDialog.h:1097
+#: src/ui_astroCalcDialog.h:1091
 msgid "Select a category:"
 msgstr "ধরন :"
 
-#: src/ui_astroCalcDialog.h:1098
+#: src/ui_astroCalcDialog.h:1092
 msgid "Matching objects:"
 msgstr "জ্যোতিষ্ক সমূহ :"
 
-#: src/ui_astroCalcDialog.h:1099
+#: src/ui_astroCalcDialog.h:1093
 msgid "Save list of objects"
 msgstr "তালিকাটি সঞ্চয় করুন"
 
-#: src/ui_astroCalcDialog.h:1100
+#: src/ui_astroCalcDialog.h:1094
 msgid "Show objects which are up:"
 msgstr "দেখতে পাওয়ার সময় :"
 
-#: src/ui_astroCalcDialog.h:1101
+#: src/ui_astroCalcDialog.h:1095
 msgid "Orbital velocity of second celestial body:"
 msgstr "২য় বস্তুটির কাক্ষিক গতি :"
 
-#: src/ui_astroCalcDialog.h:1102
+#: src/ui_astroCalcDialog.h:1096
 msgid "Orbital velocity of first celestial body:"
 msgstr "১ম বস্তুটির কাক্ষিক গতি :"
 
-#: src/ui_astroCalcDialog.h:1103
+#: src/ui_astroCalcDialog.h:1097
 msgid "First celestial body:"
 msgstr "প্রথম বস্তু :"
 
-#: src/ui_astroCalcDialog.h:1104
+#: src/ui_astroCalcDialog.h:1098
 msgid "Angular distance:"
 msgstr "কৌণিক দূরত্ব :"
 
-#: src/ui_astroCalcDialog.h:1105
+#: src/ui_astroCalcDialog.h:1099
 msgid "Orbital resonance:"
 msgstr "কাক্ষিক সমলয় :"
 
-#: src/ui_astroCalcDialog.h:1106
+#: src/ui_astroCalcDialog.h:1100
 msgid "Linear distance:"
 msgstr "সরলরৈখিক দূরত্ব :"
 
-#: src/ui_astroCalcDialog.h:1107
+#: src/ui_astroCalcDialog.h:1101
 msgid "Second celestial body:"
 msgstr "দ্বিতীয় বস্তু :"
 
-#: src/ui_astroCalcDialog.h:1108
+#: src/ui_astroCalcDialog.h:1102
 msgid "Synodic period:"
 msgstr "সংযোগ অবকাশ :"
-
-#: src/ui_astroCalcDialog.h:1109
-msgid "Compute"
-msgstr "গণনা করুন"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -11530,138 +11528,138 @@ msgstr ""
 "তালিকাটি ব্যবহার করা হচ্ছে"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2041
 msgid "visual"
 msgstr "দৃষ্টিগ্রাহ্য"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2043
 msgid "scientific"
 msgstr "বৈজ্ঞানিক"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2036
+#: plugins/Satellites/src/Satellites.cpp:2045
 msgid "communications"
 msgstr "সংযোগ সংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2038
+#: plugins/Satellites/src/Satellites.cpp:2047
 msgid "navigation"
 msgstr "মার্গদর্শী"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2040
+#: plugins/Satellites/src/Satellites.cpp:2049
 msgid "amateur"
 msgstr "সৌখিন"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2042
+#: plugins/Satellites/src/Satellites.cpp:2051
 msgid "weather"
 msgstr "আবহাওয়া সংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2044
+#: plugins/Satellites/src/Satellites.cpp:2053
 msgid "geostationary"
 msgstr "ভুসমলিত"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2046
+#: plugins/Satellites/src/Satellites.cpp:2055
 msgid "non-operational"
 msgstr "অকেজো"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2057
 msgid "gps"
 msgstr "জিপিএস"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2059
 msgid "glonass"
 msgstr "গ্লোনাস"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2061
 msgid "galileo"
 msgstr "গ্যালিলিও"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2063
 msgid "iridium"
 msgstr "ইরিডিয়াম"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2065
 msgid "stations"
 msgstr "মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2067
 msgid "education"
 msgstr "শিক্ষা সংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2069
 msgid "observatory"
 msgstr "পর্যবেক্ষন সংক্রান্ত"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2065
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "The Hubble Space Telescope"
 msgstr "হাবল স্পেস টেলিস্কোপ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2067
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "The International Space Station"
 msgstr "আন্তর্জাতিক মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2069
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "China's first space station"
 msgstr "চীনের প্রথম মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2071
+#: plugins/Satellites/src/Satellites.cpp:2080
 msgid "The russian space radio telescope RadioAstron"
 msgstr "রাশিয়ান মহাকাশ বেতার দূরবীন রেডিও অ্যাসট্রন"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2073
+#: plugins/Satellites/src/Satellites.cpp:2082
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "আন্তর্জাতিক গামারশ্মি জ্যোতির্পদার্থবিজ্ঞান গবেষনাগার"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2075
+#: plugins/Satellites/src/Satellites.cpp:2084
 msgid "The Gamma-Ray Observatory"
 msgstr "গামারশ্মি পর্যবেক্ষনাগার"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2079
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "ISS (ZARYA)"
 msgstr "আন্তর্জাতিক স্পেস স্টেশন (জারিয়া)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2081
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "HST"
 msgstr "হাবল দূরবীন"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2083
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "SPEKTR-R"
 msgstr "স্পেকটর-আর"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2085
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "INTEGRAL"
 msgstr "ইন্টিগ্রাল"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2087
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "TIANGONG 1"
 msgstr "টিয়াংগং ১"
 
@@ -15086,6 +15084,10 @@ msgstr "সার্ভারে সংযুক্ত করুন"
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
 msgstr "বন্ধ"
+
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:145
+msgid "Stop server"
+msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format

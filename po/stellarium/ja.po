@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 21:28+0700\n"
+"POT-Creation-Date: 2018-02-02 22:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Masahiko Yamaguchi <vineuser7@gmail.com>, 2017\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -41,7 +41,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:185 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
-msgstr ""
+msgstr "種類"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
@@ -1115,7 +1115,7 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:789
 msgid "Diameter"
-msgstr ""
+msgstr "直径"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:790 src/core/modules/Planet.cpp:456
@@ -1131,15 +1131,15 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:795
 msgid "Planetographic long./lat."
-msgstr ""
+msgstr "惑星面経度/緯度"
 
 #: src/core/modules/NomenclatureItem.cpp:796
 msgid "Celestial body"
-msgstr ""
+msgstr "天体"
 
 #: src/core/modules/NomenclatureItem.cpp:799
 msgid "Landform description"
-msgstr ""
+msgstr "地形の説明"
 
 #: src/core/modules/NomenclatureMgr.cpp:75
 msgid "Nomenclature labels"
@@ -1166,7 +1166,7 @@ msgstr ""
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
 #: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:310
 msgid "extincted to"
-msgstr ""
+msgstr "減光後"
 
 #: src/core/modules/Nebula.cpp:243 src/core/modules/StarWrapper.cpp:234
 msgid "Photometric system"
@@ -1176,11 +1176,11 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:216
 #: plugins/Quasars/src/Quasar.cpp:117
 msgid "Color Index (B-V)"
-msgstr ""
+msgstr "色指数 (B-V)"
 
 #: src/core/modules/Nebula.cpp:253
 msgid "Surface brightness"
-msgstr ""
+msgstr "表面輝度"
 
 #: src/core/modules/Nebula.cpp:254
 msgid "after extinction"
@@ -1205,7 +1205,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:280
 msgid "Contrast index"
-msgstr ""
+msgstr "コントラスト指数"
 
 #: src/core/modules/Nebula.cpp:289 src/core/modules/Nebula.cpp:292
 #: src/ui_configurationDialog.h:1371
@@ -1256,15 +1256,15 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:368 plugins/Quasars/src/Quasar.cpp:125
 msgid "Redshift"
-msgstr ""
+msgstr "赤方偏移"
 
 #: src/core/modules/Nebula.cpp:379 src/core/modules/StarWrapper.cpp:255
 msgid "Parallax"
-msgstr ""
+msgstr "視差"
 
 #: src/core/modules/Nebula.cpp:383
 msgid "Morphological description"
-msgstr ""
+msgstr "形態の説明"
 
 #: src/core/modules/Nebula.cpp:1199
 msgctxt "Shapley–Sawyer Concentration Class"
@@ -1545,7 +1545,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1466
 msgid "galaxy"
-msgstr "銀河系"
+msgstr "銀河"
 
 #: src/core/modules/Nebula.cpp:1469
 msgid "active galaxy"
@@ -1565,19 +1565,19 @@ msgstr "クエーサー"
 
 #: src/core/modules/Nebula.cpp:1481
 msgid "star cluster"
-msgstr ""
+msgstr "星団"
 
 #: src/core/modules/Nebula.cpp:1484
 msgid "open star cluster"
-msgstr ""
+msgstr "散開星団"
 
 #: src/core/modules/Nebula.cpp:1487
 msgid "globular star cluster"
-msgstr ""
+msgstr "球状星団"
 
 #: src/core/modules/Nebula.cpp:1490
 msgid "nebula"
-msgstr ""
+msgstr "星雲"
 
 #: src/core/modules/Nebula.cpp:1493
 msgid "planetary nebula"
@@ -1589,31 +1589,31 @@ msgstr "暗黒星雲"
 
 #: src/core/modules/Nebula.cpp:1499
 msgid "cluster associated with nebulosity"
-msgstr ""
+msgstr "星雲を伴う散開星団"
 
 #: src/core/modules/Nebula.cpp:1502
 msgid "bipolar nebula"
-msgstr ""
+msgstr "双極性星雲"
 
 #: src/core/modules/Nebula.cpp:1505
 msgid "emission nebula"
-msgstr ""
+msgstr "輝線星雲"
 
 #: src/core/modules/Nebula.cpp:1508
 msgid "HII region"
-msgstr ""
+msgstr "HII領域"
 
 #: src/core/modules/Nebula.cpp:1511
 msgid "reflection nebula"
-msgstr ""
+msgstr "反射星雲"
 
 #: src/core/modules/Nebula.cpp:1514
 msgid "supernova remnant"
-msgstr "超新星の残骸"
+msgstr "超新星残骸"
 
 #: src/core/modules/Nebula.cpp:1517
 msgid "supernova candidate"
-msgstr ""
+msgstr "超新星候補"
 
 #: src/core/modules/Nebula.cpp:1520
 msgid "supernova remnant candidate"
@@ -1692,7 +1692,7 @@ msgstr ""
 
 #: src/core/modules/NebulaMgr.cpp:410
 msgid "Deep-sky objects"
-msgstr ""
+msgstr "深宇宙の天体"
 
 #: src/core/modules/NebulaMgr.cpp:411
 msgid "Toggle DSO type filter"
@@ -1702,11 +1702,11 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:114
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "絶対等級"
 
 #: src/core/modules/Planet.cpp:431
 msgid "Mean Opposition Magnitude"
-msgstr ""
+msgstr "衝の平均等級"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:454 src/core/modules/MinorPlanet.cpp:271
@@ -1731,7 +1731,7 @@ msgstr ""
 #: src/core/modules/Planet.cpp:473 src/core/modules/MinorPlanet.cpp:287
 #: src/core/modules/Comet.cpp:216
 msgid "Distance from Sun"
-msgstr ""
+msgstr "太陽からの距離"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:311
@@ -1745,11 +1745,11 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:506 src/core/modules/MinorPlanet.cpp:318
 msgid "Orbital Velocity"
-msgstr ""
+msgstr "軌道速度"
 
 #: src/core/modules/Planet.cpp:509 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric Velocity"
-msgstr ""
+msgstr "日心速度"
 
 #: src/core/modules/Planet.cpp:532
 msgid "with rings"
@@ -1761,7 +1761,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:559 src/core/modules/MinorPlanet.cpp:353
 msgid "Apparent diameter"
-msgstr ""
+msgstr "視直径"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:577 src/core/modules/MinorPlanet.cpp:372
@@ -1773,15 +1773,15 @@ msgstr ""
 #: src/core/modules/Planet.cpp:581 src/core/modules/MinorPlanet.cpp:376
 #: src/core/modules/Comet.cpp:254
 msgid "Sidereal period"
-msgstr ""
+msgstr "公転周期"
 
 #: src/core/modules/Planet.cpp:585
 msgid "Sidereal day"
-msgstr ""
+msgstr "恒星日"
 
 #: src/core/modules/Planet.cpp:586
 msgid "Mean solar day"
-msgstr ""
+msgstr "平均太陽日"
 
 #: src/core/modules/Planet.cpp:590
 msgid "The period of rotation is chaotic"
@@ -1790,19 +1790,19 @@ msgstr ""
 #: src/core/modules/Planet.cpp:602 src/core/modules/MinorPlanet.cpp:384
 #: src/core/modules/Comet.cpp:262
 msgid "Synodic period"
-msgstr ""
+msgstr "会合周期"
 
 #: src/core/modules/Planet.cpp:622 src/core/modules/MinorPlanet.cpp:402
 #: src/core/modules/Comet.cpp:285 src/gui/AstroCalcDialog.cpp:2208
 #: src/gui/AstroCalcDialog.cpp:2243
 msgid "Phase angle"
-msgstr ""
+msgstr "位相角"
 
 #: src/core/modules/Planet.cpp:623 src/core/modules/MinorPlanet.cpp:403
 #: src/core/modules/Comet.cpp:286 src/gui/AstroCalcDialog.cpp:2198
 #: src/gui/AstroCalcDialog.cpp:2233
 msgid "Elongation"
-msgstr ""
+msgstr "離角"
 
 #: src/core/modules/Planet.cpp:624
 msgid "Illuminated"
@@ -1810,7 +1810,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:625
 msgid "Albedo"
-msgstr ""
+msgstr "アルベド"
 
 #: src/core/modules/Planet.cpp:640
 msgctxt "Moon phase"
@@ -1854,7 +1854,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:657
 msgid "Moon age"
-msgstr ""
+msgstr "月齢"
 
 #: src/core/modules/Planet.cpp:657
 msgid "days old"
@@ -1866,7 +1866,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:675
 msgid "Eclipse magnitude"
-msgstr ""
+msgstr "食分"
 
 #: src/core/modules/MinorPlanet.cpp:228
 #, qt-format
@@ -1895,7 +1895,7 @@ msgstr ""
 
 #: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1382
 msgid "Velocity"
-msgstr ""
+msgstr "速度"
 
 #: src/core/modules/Comet.cpp:293
 msgid "Coma diameter (estimate)"
@@ -1968,12 +1968,12 @@ msgstr "二重星"
 
 #: src/core/modules/StarWrapper.cpp:234
 msgid "Magnitude range"
-msgstr ""
+msgstr "等級の幅"
 
 #: src/core/modules/StarWrapper.cpp:252
 #: plugins/Exoplanets/src/Exoplanet.cpp:320
 msgid "Spectral Type"
-msgstr ""
+msgstr "スペクトル型"
 
 #: src/core/modules/StarWrapper.cpp:258
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
@@ -1998,16 +1998,16 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:284
 msgid "Position angle"
-msgstr ""
+msgstr "位置角"
 
 #: src/core/modules/StarWrapper.cpp:288 src/core/modules/StarWrapper.cpp:290
 #: src/gui/AstroCalcDialog.cpp:2514
 msgid "Separation"
-msgstr ""
+msgstr "離角"
 
 #: src/core/modules/StarWrapper.cpp:300
 msgid "Proper motions by axes"
-msgstr ""
+msgstr "固有運動"
 
 #: src/core/modules/StarWrapper.cpp:300 src/core/modules/StarWrapper.cpp:302
 msgctxt "milliarc second per year"
@@ -2016,11 +2016,11 @@ msgstr ""
 
 #: src/core/modules/StarWrapper.cpp:301
 msgid "Position angle of the proper motion"
-msgstr ""
+msgstr "固有運動の位置角"
 
 #: src/core/modules/StarWrapper.cpp:302
 msgid "Angular speed of the proper motion"
-msgstr ""
+msgstr "固有運動の角速度"
 
 #: src/core/modules/MilkyWay.cpp:79
 msgid "Milky Way"
@@ -2675,7 +2675,7 @@ msgstr ""
 #: src/core/StelObject.cpp:166
 msgctxt "coordinates for current epoch"
 msgid "on date"
-msgstr ""
+msgstr "瞬時"
 
 #: src/core/StelObject.cpp:171
 msgid "(apparent)"
@@ -2685,57 +2685,57 @@ msgstr "(見かけ上の)"
 #: src/core/StelObject.cpp:177
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
-msgstr ""
+msgstr "赤経/赤緯"
 
 #. TRANSLATORS: Hour angle/Declination
 #: src/core/StelObject.cpp:266
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
-msgstr ""
+msgstr "時角/赤緯"
 
 #. TRANSLATORS: Azimuth/Altitude
 #: src/core/StelObject.cpp:316
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
-msgstr ""
+msgstr "方位/高度角"
 
 #. TRANSLATORS: Galactic longitude/latitude
 #: src/core/StelObject.cpp:342
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
-msgstr ""
+msgstr "銀経/銀緯"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
 #: src/core/StelObject.cpp:368
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
-msgstr ""
+msgstr "超銀河経度/緯度"
 
 #. TRANSLATORS: Ecliptic longitude/latitude
 #: src/core/StelObject.cpp:386
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
-msgstr ""
+msgstr "黄経/黄緯"
 
 #: src/core/StelObject.cpp:451
 msgid "Ecliptic obliquity"
-msgstr ""
+msgstr "黄道傾斜角"
 
 #: src/core/StelObject.cpp:470
 msgid "Mean Sidereal Time"
-msgstr ""
+msgstr "平均恒星時"
 
 #: src/core/StelObject.cpp:485
 msgid "Apparent Sidereal Time"
-msgstr ""
+msgstr "視恒星時"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr ""
+msgstr "IAU星座"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
-msgstr ""
+msgstr "深宇宙天体の背景画像"
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:210
 #: src/StelMainView.cpp:795 src/StelMainView.cpp:796
@@ -4396,7 +4396,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:502
 msgid "Solar system objects"
-msgstr ""
+msgstr "太陽系の天体"
 
 #: src/gui/AstroCalcDialog.cpp:503
 msgid "Solar system objects: comets"
@@ -4914,22 +4914,22 @@ msgstr "西"
 #. TRANSLATORS: Ordinals names: Northeast
 #: src/translations.h:43
 msgid "NE"
-msgstr ""
+msgstr "北東"
 
 #. TRANSLATORS: Ordinals names: Southeast
 #: src/translations.h:45
 msgid "SE"
-msgstr ""
+msgstr "南東"
 
 #. TRANSLATORS: Ordinals names: Southwest
 #: src/translations.h:47
 msgid "SW"
-msgstr ""
+msgstr "南西"
 
 #. TRANSLATORS: Ordinals names: Northwest
 #: src/translations.h:49
 msgid "NW"
-msgstr ""
+msgstr "北西"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
@@ -4984,7 +4984,7 @@ msgstr ""
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:82
 msgid "Moons"
-msgstr ""
+msgstr "衛星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:96
@@ -6331,7 +6331,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Andorra
 #: src/translations_countries.h:32
 msgid "Andorra"
-msgstr "アンドラ公国"
+msgstr "アンドラ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_Arab_Emirates
 #: src/translations_countries.h:34
@@ -6356,7 +6356,7 @@ msgstr "アンギラ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Albania
 #: src/translations_countries.h:42
 msgid "Albania"
-msgstr "アルバニア共和国"
+msgstr "アルバニア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Armenia
 #: src/translations_countries.h:44
@@ -6381,7 +6381,7 @@ msgstr "アルゼンチン"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/American_Samoa
 #: src/translations_countries.h:52
 msgid "Samoa (American)"
-msgstr ""
+msgstr "アメリカ領サモア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Austria
 #: src/translations_countries.h:54
@@ -6401,17 +6401,17 @@ msgstr "アルバ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Åland_Islands
 #: src/translations_countries.h:60
 msgid "Åland Islands"
-msgstr ""
+msgstr "オーランド諸島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Azerbaijan
 #: src/translations_countries.h:62
 msgid "Azerbaijan"
-msgstr "アゼルバイジャン共和国"
+msgstr "アゼルバイジャン"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina
 #: src/translations_countries.h:64
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "ボスニア・ヘルツェゴヴィナ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Barbados
 #: src/translations_countries.h:66
@@ -6451,12 +6451,12 @@ msgstr "ブルンジ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Benin
 #: src/translations_countries.h:80
 msgid "Benin"
-msgstr "ベナン共和国"
+msgstr "ベナン"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Barthélemy
 #: src/translations_countries.h:82
 msgid "St Barthelemy"
-msgstr ""
+msgstr "サン・バルテルミー島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bermuda
 #: src/translations_countries.h:84
@@ -6466,7 +6466,7 @@ msgstr "バミューダ諸島"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brunei
 #: src/translations_countries.h:86
 msgid "Brunei"
-msgstr ""
+msgstr "ブルネイ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bolivia
 #: src/translations_countries.h:88
@@ -6476,7 +6476,7 @@ msgstr "ボリビア"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
 msgid "Caribbean NL"
-msgstr ""
+msgstr "オランダカリブ領域"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
@@ -6491,7 +6491,7 @@ msgstr "バハマ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bhutan
 #: src/translations_countries.h:96
 msgid "Bhutan"
-msgstr "ブータン王国"
+msgstr "ブータン"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bouvet_Island
 #: src/translations_countries.h:98
@@ -6521,22 +6521,22 @@ msgstr "カナダ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
 #: src/translations_countries.h:108
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "ココス (キーリング) 諸島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(DRC)
 #: src/translations_countries.h:110
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "コンゴ民主共和国"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_African_Republic
 #: src/translations_countries.h:112
 msgid "Central African Rep."
-msgstr ""
+msgstr "中央アフリカ共和国"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "コンゴ共和国"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
@@ -6546,7 +6546,7 @@ msgstr "スイス"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ivory_Coast
 #: src/translations_countries.h:118
 msgid "Côte d'Ivoire"
-msgstr ""
+msgstr "コートジボワール"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cook_Islands
 #: src/translations_countries.h:120
@@ -6591,7 +6591,7 @@ msgstr "カーボベルデ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
 msgid "Curacao"
-msgstr ""
+msgstr "キュラソー島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 #: src/translations_countries.h:138
@@ -6711,7 +6711,7 @@ msgstr "ガボン"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_Kingdom
 #: src/translations_countries.h:184
 msgid "Britain (UK)"
-msgstr ""
+msgstr "イギリス"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Grenada
 #: src/translations_countries.h:186
@@ -6721,7 +6721,7 @@ msgstr "グレナダ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Georgia
 #: src/translations_countries.h:188
 msgid "Georgia"
-msgstr "ジョージア州"
+msgstr "ジョージア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Guiana
 #: src/translations_countries.h:190
@@ -6731,7 +6731,7 @@ msgstr "フランス領ギアナ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guernsey
 #: src/translations_countries.h:192
 msgid "Guernsey"
-msgstr ""
+msgstr "ガーンジー"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ghana
 #: src/translations_countries.h:194
@@ -6766,7 +6766,7 @@ msgstr "グアドループ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Equatorial_Guinea
 #: src/translations_countries.h:206
 msgid "Equatorial Guinea"
-msgstr "赤道ギニア共和国"
+msgstr "赤道ギニア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Greece
 #: src/translations_countries.h:208
@@ -6847,7 +6847,7 @@ msgstr "イスラエル"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Isle_of_Man
 #: src/translations_countries.h:238
 msgid "Isle of Man"
-msgstr ""
+msgstr "マン島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/India
 #: src/translations_countries.h:240
@@ -6882,7 +6882,7 @@ msgstr "イタリア"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jersey
 #: src/translations_countries.h:252
 msgid "Jersey"
-msgstr ""
+msgstr "ジャージー"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jamaica
 #: src/translations_countries.h:254
@@ -6927,17 +6927,17 @@ msgstr "コモロ・イスラム連邦共和国"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Kitts_&_Nevis
 #: src/translations_countries.h:270
 msgid "St Kitts and Nevis"
-msgstr ""
+msgstr "セントクリストファー・ネイビス"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/North_Korea
 #: src/translations_countries.h:272
 msgid "Korea (North)"
-msgstr ""
+msgstr "北朝鮮"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Korea
 #: src/translations_countries.h:274
 msgid "Korea (South)"
-msgstr ""
+msgstr "韓国"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kuwait
 #: src/translations_countries.h:276
@@ -6957,7 +6957,7 @@ msgstr "カザフスタン"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Laos
 #: src/translations_countries.h:282
 msgid "Laos"
-msgstr ""
+msgstr "ラオス"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lebanon
 #: src/translations_countries.h:284
@@ -6967,7 +6967,7 @@ msgstr "レバノン"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Lucia
 #: src/translations_countries.h:286
 msgid "St Lucia"
-msgstr ""
+msgstr "セントルシア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Liechtenstein
 #: src/translations_countries.h:288
@@ -7007,7 +7007,7 @@ msgstr "ラトビア"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Libya
 #: src/translations_countries.h:302
 msgid "Libya"
-msgstr ""
+msgstr "リビア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Morocco
 #: src/translations_countries.h:304
@@ -7027,12 +7027,12 @@ msgstr "モルドバ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montenegro
 #: src/translations_countries.h:310
 msgid "Montenegro"
-msgstr ""
+msgstr "モンテネグロ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Martin
 #: src/translations_countries.h:312
 msgid "St Martin (French)"
-msgstr ""
+msgstr "フランス領サン・マルタン"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Madagascar
 #: src/translations_countries.h:314
@@ -7057,7 +7057,7 @@ msgstr "マリ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Myanmar_(Burma)
 #: src/translations_countries.h:322
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "ミャンマー (ビルマ)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mongolia
 #: src/translations_countries.h:324
@@ -7087,7 +7087,7 @@ msgstr "モーリタニア"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montserrat
 #: src/translations_countries.h:334
 msgid "Montserrat"
-msgstr "モントセラト（英国統治）"
+msgstr "モントセラト"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Malta
 #: src/translations_countries.h:336
@@ -7172,7 +7172,7 @@ msgstr "ネパール"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nauru
 #: src/translations_countries.h:368
 msgid "Nauru"
-msgstr "ナウル共和国"
+msgstr "ナウル"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Niue
 #: src/translations_countries.h:370
@@ -7187,7 +7187,7 @@ msgstr "ニュージーランド"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Oman
 #: src/translations_countries.h:374
 msgid "Oman"
-msgstr "オマーン国"
+msgstr "オマーン"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Panama
 #: src/translations_countries.h:376
@@ -7227,7 +7227,7 @@ msgstr "ポーランド"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Pierre_&_Miquelon
 #: src/translations_countries.h:390
 msgid "St Pierre and Miquelon"
-msgstr ""
+msgstr "サンピエール島とミクロン島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Pitcairn_Islands
 #: src/translations_countries.h:392
@@ -7242,7 +7242,7 @@ msgstr "プエルトリコ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palestine
 #: src/translations_countries.h:396
 msgid "Palestine"
-msgstr ""
+msgstr "パレスチナ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Portugal
 #: src/translations_countries.h:398
@@ -7282,7 +7282,7 @@ msgstr "セルビア"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
 msgid "Russia"
-msgstr ""
+msgstr "ロシア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
@@ -7322,7 +7322,7 @@ msgstr "シンガポール"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
 msgid "St Helena"
-msgstr ""
+msgstr "セントヘレナ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
@@ -7347,7 +7347,7 @@ msgstr "シエラレオネ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/San_Marino
 #: src/translations_countries.h:438
 msgid "San Marino"
-msgstr "サンマリノ共和国"
+msgstr "サンマリノ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Senegal
 #: src/translations_countries.h:440
@@ -7362,17 +7362,17 @@ msgstr "ソマリア"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Suriname
 #: src/translations_countries.h:444
 msgid "Suriname"
-msgstr "スリナム共和国"
+msgstr "スリナム"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Sudan
 #: src/translations_countries.h:446
 msgid "South Sudan"
-msgstr ""
+msgstr "南スーダン"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/São_Tomé_&_Príncipe
 #: src/translations_countries.h:448
 msgid "Sao Tome and Principe"
-msgstr "サントメ・プリンシペ民主共和国"
+msgstr "サントメ・プリンシペ"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/El_Salvador
 #: src/translations_countries.h:450
@@ -7382,12 +7382,12 @@ msgstr "エルサルバドル"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sint_Maarten
 #: src/translations_countries.h:452
 msgid "St Maarten (Dutch)"
-msgstr ""
+msgstr "オランダ領シント・マールテン"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
 msgid "Syria"
-msgstr ""
+msgstr "シリア"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
@@ -7397,7 +7397,7 @@ msgstr "スワジランド"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "タークス・カイコス諸島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
@@ -7407,7 +7407,7 @@ msgstr "チャド"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "フランス領南方・南極地域"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
@@ -7487,7 +7487,7 @@ msgstr "ウガンダ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
 msgid "US minor outlying islands"
-msgstr ""
+msgstr "アメリカ合衆国領有小離島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
@@ -7507,12 +7507,12 @@ msgstr "ウズベキスタン"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
 msgid "Vatican City"
-msgstr ""
+msgstr "バチカン市"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
 msgid "St Vincent"
-msgstr ""
+msgstr "セントビンセント"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
@@ -7522,17 +7522,17 @@ msgstr "ベネズエラ"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "イギリス領ヴァージン諸島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "アメリカ領ヴァージン諸島"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512
 msgid "Vietnam"
-msgstr ""
+msgstr "ベトナム"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vanuatu
 #: src/translations_countries.h:514
@@ -7547,7 +7547,7 @@ msgstr "ワリス・フテュナ諸島"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Samoa
 #: src/translations_countries.h:518
 msgid "Samoa (western)"
-msgstr ""
+msgstr "サモア (西サモア)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Yemen
 #: src/translations_countries.h:520
@@ -7576,11 +7576,11 @@ msgstr "ジンバブエ"
 
 #: src/ui_dateTimeDialogGui.h:380
 msgid "Date and Time in Gregorian calendar"
-msgstr ""
+msgstr "グレゴリオ暦での日時"
 
 #: src/ui_dateTimeDialogGui.h:385
 msgid "Modified Julian Day"
-msgstr "準ユリウス日"
+msgstr "修正ユリウス日"
 
 #: src/ui_helpDialogGui.h:277 src/ui_helpDialogGui.h:283
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:430
@@ -7606,15 +7606,15 @@ msgstr "更新"
 #: src/ui_locationDialogGui.h:476 src/ui_locationDialogGui.h:479
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
-msgstr ""
+msgstr "標準の場所リストは英語名のみです (アクセント記号なし)"
 
 #: src/ui_locationDialogGui.h:483
 msgid "Reset location list to show all known locations"
-msgstr ""
+msgstr "登録されている全ての場所を表示します"
 
 #: src/ui_locationDialogGui.h:485
 msgid "Reset Location List"
-msgstr ""
+msgstr "場所のリストをリセット"
 
 #: src/ui_locationDialogGui.h:486
 msgid "Current location information"
@@ -7626,11 +7626,11 @@ msgstr "リストに追加する"
 
 #: src/ui_locationDialogGui.h:488
 msgid "Delete from list"
-msgstr ""
+msgstr "リストから削除"
 
 #: src/ui_locationDialogGui.h:489
 msgid "Return to default location"
-msgstr ""
+msgstr "デフォルトの場所に戻す"
 
 #: src/ui_locationDialogGui.h:490
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:150
@@ -7644,11 +7644,11 @@ msgstr "緯度:"
 
 #: src/ui_locationDialogGui.h:492
 msgid "Use current location as default"
-msgstr ""
+msgstr "現在の場所をデフォルトに設定"
 
 #: src/ui_locationDialogGui.h:493
 msgid "Get location from Network"
-msgstr ""
+msgstr "ネットワークから場所を取得"
 
 #: src/ui_locationDialogGui.h:494
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:153
@@ -7671,7 +7671,7 @@ msgstr " m"
 
 #: src/ui_locationDialogGui.h:506
 msgid "Retrieve current coordinates from GPS. Does not set timezone!"
-msgstr ""
+msgstr "現在の座標をGPSから取得します。タイムゾーンは設定しません！"
 
 #: src/ui_locationDialogGui.h:509
 msgid "New Location"
@@ -7683,11 +7683,11 @@ msgstr "惑星:"
 
 #: src/ui_locationDialogGui.h:511
 msgid "Use custom time zone"
-msgstr ""
+msgstr "タイムゾーンをカスタマイズ"
 
 #: src/ui_locationDialogGui.h:512
 msgid "Time zone:"
-msgstr ""
+msgstr "タイムゾーン:"
 
 #: src/ui_locationDialogGui.h:513
 msgid "Name/City:"
@@ -7699,7 +7699,7 @@ msgstr "国:"
 
 #: src/ui_locationDialogGui.h:518
 msgid "Enable daylight saving time"
-msgstr ""
+msgstr "夏時間を適用"
 
 #: src/ui_searchDialogGui.h:612
 msgid "Find Object"
@@ -7807,7 +7807,7 @@ msgstr "オメガ"
 
 #: src/ui_searchDialogGui.h:696
 msgid "Greek letters for Bayer designations"
-msgstr ""
+msgstr "バイエル符号のためのギリシャ文字"
 
 #: src/ui_searchDialogGui.h:698
 msgid ""
@@ -7965,7 +7965,7 @@ msgstr "恒星の等級を制限する"
 
 #: src/ui_viewDialog.h:2514 src/ui_viewDialog.h:2544 src/ui_viewDialog.h:2657
 msgid "Limit magnitude:"
-msgstr ""
+msgstr "等級の制限:"
 
 #: src/ui_viewDialog.h:2515 src/ui_viewDialog.h:2521 src/ui_viewDialog.h:2645
 msgid "Labels and Markers"
@@ -7974,12 +7974,12 @@ msgstr "名前とマーカー"
 #: src/ui_viewDialog.h:2516
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:269
 msgid "Absolute scale:"
-msgstr "絶対等級:"
+msgstr "絶対尺度:"
 
 #: src/ui_viewDialog.h:2517
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Relative scale:"
-msgstr "相対値:"
+msgstr "相対尺度:"
 
 #: src/ui_viewDialog.h:2518
 msgid "Use additional names of stars"
@@ -8583,7 +8583,7 @@ msgstr "関連する惑星と位置を使う"
 
 #: src/ui_viewDialog.h:2885
 msgid "Use this landscape as default"
-msgstr "この場所をデフォルトに設定"
+msgstr "この背景をデフォルトに設定"
 
 #: src/ui_viewDialog.h:2886
 msgid "Show ground"
@@ -8632,15 +8632,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2906
 msgid "Show constellation lines"
-msgstr ""
+msgstr "星座線の表示"
 
 #: src/ui_viewDialog.h:2908 src/ui_viewDialog.h:2932 src/ui_viewDialog.h:2943
 msgid "Thickness of line in pixels"
-msgstr ""
+msgstr "線の太さ (ピクセル)"
 
 #: src/ui_viewDialog.h:2911
 msgid "Color of constellation lines"
-msgstr ""
+msgstr "星座線の色"
 
 #: src/ui_viewDialog.h:2914
 msgid "Use native names for planets from current culture"
@@ -8664,7 +8664,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2924
 msgid "Color of constellation names"
-msgstr ""
+msgstr "星座名の色"
 
 #: src/ui_viewDialog.h:2926
 msgid "Show boundaries"
@@ -8672,23 +8672,23 @@ msgstr "星座の境界線"
 
 #: src/ui_viewDialog.h:2928
 msgid "Color of constellation boundaries"
-msgstr ""
+msgstr "星座の境界線の色"
 
 #: src/ui_viewDialog.h:2930
 msgid "Show asterism lines"
-msgstr ""
+msgstr "アステリズムの表示"
 
 #: src/ui_viewDialog.h:2935
 msgid "Color of asterism lines"
-msgstr ""
+msgstr "アステリズムの線の色"
 
 #: src/ui_viewDialog.h:2937
 msgid "Show asterism labels"
-msgstr ""
+msgstr "アステリズムの名前"
 
 #: src/ui_viewDialog.h:2939
 msgid "Color of asterism names"
-msgstr ""
+msgstr "アステリズムの名前の色"
 
 #: src/ui_viewDialog.h:2941
 msgid "Show ray helpers"
@@ -8867,7 +8867,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1348
 msgid "Ecliptic coordinates (of date)"
-msgstr ""
+msgstr "黄道座標 (瞬時)"
 
 #: src/ui_configurationDialog.h:1351
 msgid "Equatorial coordinates, equinox of J2000.0"
@@ -8883,11 +8883,11 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1357
 msgid "Ecliptic coordinates (J2000)"
-msgstr ""
+msgstr "黄道座標 (J2000)"
 
 #: src/ui_configurationDialog.h:1358
 msgid "Galactic coordinates"
-msgstr ""
+msgstr "銀河座標"
 
 #: src/ui_configurationDialog.h:1362
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
@@ -8896,7 +8896,7 @@ msgstr "時角/赤緯"
 
 #: src/ui_configurationDialog.h:1363
 msgid "Supergalactic coordinates"
-msgstr ""
+msgstr "超銀河座標"
 
 #: src/ui_configurationDialog.h:1365
 msgid "Horizontal coordinates"
@@ -8904,7 +8904,7 @@ msgstr "地平座標"
 
 #: src/ui_configurationDialog.h:1367
 msgid "Azimuth/Altitude"
-msgstr ""
+msgstr "方位角/高度角"
 
 #: src/ui_configurationDialog.h:1369
 msgid "Angular or physical size"
@@ -8912,7 +8912,7 @@ msgstr "角度または実際の大きさ"
 
 #: src/ui_configurationDialog.h:1373
 msgid "The type of the object (star, planet, etc.)"
-msgstr ""
+msgstr "天体の種類 (恒星、惑星など)"
 
 #: src/ui_configurationDialog.h:1376
 msgid "Absolute magnitude"
@@ -8925,15 +8925,15 @@ msgstr "実視等級"
 #: src/ui_configurationDialog.h:1379
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "3-letter IAU constellation abbreviation"
-msgstr ""
+msgstr "3文字のIAU星座略符"
 
 #: src/ui_configurationDialog.h:1381
 msgid "Constellation"
-msgstr ""
+msgstr "星座"
 
 #: src/ui_configurationDialog.h:1384
 msgid "Sidereal time"
-msgstr ""
+msgstr "恒星時"
 
 #: src/ui_configurationDialog.h:1386
 msgid "Spectral class, nebula type, etc."
@@ -8941,27 +8941,27 @@ msgstr "スペクトル型、星雲の種類など"
 
 #: src/ui_configurationDialog.h:1388
 msgid "Additional information"
-msgstr ""
+msgstr "追加情報"
 
 #: src/ui_configurationDialog.h:1389
 msgid "Additional settings"
-msgstr ""
+msgstr "追加の設定"
 
 #: src/ui_configurationDialog.h:1390
 msgid "Use short notation for unit of measurement of surface brightness"
-msgstr ""
+msgstr "表面輝度の単位を略記する"
 
 #: src/ui_configurationDialog.h:1391
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
-msgstr ""
+msgstr "表面輝度の単位を mag/arcsec^2 にする"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Use formatting output for coordinates"
-msgstr ""
+msgstr "座標の桁を揃える"
 
 #: src/ui_configurationDialog.h:1393
 msgid "Use designations for celestial coordinate systems"
-msgstr ""
+msgstr "座標系を記号で表示する"
 
 #: src/ui_configurationDialog.h:1394
 msgid "Control"
@@ -9457,264 +9457,260 @@ msgstr ""
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:992
+#: src/ui_astroCalcDialog.h:986
 msgid "Astronomical calculations"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:998
+#: src/ui_astroCalcDialog.h:992
 msgid "Positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1000
+#: src/ui_astroCalcDialog.h:994
 msgid "Celestial bodies above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1003
+#: src/ui_astroCalcDialog.h:997
 msgid "Ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1005
+#: src/ui_astroCalcDialog.h:999
 msgid "Phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1007
+#: src/ui_astroCalcDialog.h:1001
 msgid "Alt. vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1009
+#: src/ui_astroCalcDialog.h:1003
 msgid "Altitude vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1012
+#: src/ui_astroCalcDialog.h:1006
 msgctxt "Monthly Elevation"
 msgid "ME"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1014
+#: src/ui_astroCalcDialog.h:1008
 msgid "Monthly Elevation"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1017
+#: src/ui_astroCalcDialog.h:1011
 msgid "Graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1019 src/ui_astroCalcDialog.h:1095
+#: src/ui_astroCalcDialog.h:1013 src/ui_astroCalcDialog.h:1089
 msgid "Graphs on the current year"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1022
+#: src/ui_astroCalcDialog.h:1016
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1024
+#: src/ui_astroCalcDialog.h:1018
 msgid "What's Up Tonight"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1027
+#: src/ui_astroCalcDialog.h:1021
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1029
+#: src/ui_astroCalcDialog.h:1023
 msgid "Planetary Calculator"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1037
+#: src/ui_astroCalcDialog.h:1031
 msgid "Save positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1038
+#: src/ui_astroCalcDialog.h:1032
 msgid "Update positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1039 src/ui_astroCalcDialog.h:1096
+#: src/ui_astroCalcDialog.h:1033 src/ui_astroCalcDialog.h:1090
 msgid "Show objects brighter than magnitude:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1041
+#: src/ui_astroCalcDialog.h:1035
 msgid "List of objects above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1043 src/ui_astroCalcDialog.h:1067
+#: src/ui_astroCalcDialog.h:1037 src/ui_astroCalcDialog.h:1061
 msgid "Use horizontal coordinates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1044 src/ui_astroCalcDialog.h:1093
+#: src/ui_astroCalcDialog.h:1038 src/ui_astroCalcDialog.h:1087
 msgid "Celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1072
+#: src/ui_astroCalcDialog.h:1040 src/ui_astroCalcDialog.h:1066
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1047 src/ui_astroCalcDialog.h:1082
+#: src/ui_astroCalcDialog.h:1041 src/ui_astroCalcDialog.h:1076
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1048
+#: src/ui_astroCalcDialog.h:1042
 msgid "Time step:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1049
+#: src/ui_astroCalcDialog.h:1043
 msgid "Cleanup ephemerides"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1050
+#: src/ui_astroCalcDialog.h:1044
 msgid "Save ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1052 src/ui_astroCalcDialog.h:1079
+#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1073
 #: plugins/Satellites/src/ui_satellitesDialog.h:828
 msgid "Calculations require time, please be patient"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1054
+#: src/ui_astroCalcDialog.h:1048
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1056
+#: src/ui_astroCalcDialog.h:1050
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1058
+#: src/ui_astroCalcDialog.h:1052
 msgid "Show markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1060
+#: src/ui_astroCalcDialog.h:1054
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1062
+#: src/ui_astroCalcDialog.h:1056
 msgid "Show dates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1064
+#: src/ui_astroCalcDialog.h:1058
 msgid "Show magnitudes of current celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1066
+#: src/ui_astroCalcDialog.h:1060
 msgid "Show magnitudes"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1068
+#: src/ui_astroCalcDialog.h:1062
 msgid "Maximum allowed separation:"
 msgstr "許可する最大離角:"
 
-#: src/ui_astroCalcDialog.h:1070
+#: src/ui_astroCalcDialog.h:1064
 msgid "Value in decimal degrees"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1073
+#: src/ui_astroCalcDialog.h:1067
 msgid "Calculate oppositions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1074
+#: src/ui_astroCalcDialog.h:1068
 msgid "Between objects:"
 msgstr "次の天体間で:"
 
-#: src/ui_astroCalcDialog.h:1075
+#: src/ui_astroCalcDialog.h:1069
 msgid "and"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1076
+#: src/ui_astroCalcDialog.h:1070
 msgid "Cleanup of phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1077
+#: src/ui_astroCalcDialog.h:1071
 msgid "Save phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1081
+#: src/ui_astroCalcDialog.h:1075
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1083
+#: src/ui_astroCalcDialog.h:1077
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1084
+#: src/ui_astroCalcDialog.h:1078
 msgid "Also the graph for the Sun"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1085
+#: src/ui_astroCalcDialog.h:1079
 msgid "Also the graph for the Moon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1087
+#: src/ui_astroCalcDialog.h:1081
 msgid "Local Time in hours"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1090
+#: src/ui_astroCalcDialog.h:1084
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1091
+#: src/ui_astroCalcDialog.h:1085
 msgid "Second graph (yellow):"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1092
+#: src/ui_astroCalcDialog.h:1086
 msgid "First graph (red):"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1094
+#: src/ui_astroCalcDialog.h:1088
 msgid "Draw graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1097
+#: src/ui_astroCalcDialog.h:1091
 msgid "Select a category:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1098
+#: src/ui_astroCalcDialog.h:1092
 msgid "Matching objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1099
+#: src/ui_astroCalcDialog.h:1093
 msgid "Save list of objects"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1100
+#: src/ui_astroCalcDialog.h:1094
 msgid "Show objects which are up:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1101
+#: src/ui_astroCalcDialog.h:1095
 msgid "Orbital velocity of second celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1102
+#: src/ui_astroCalcDialog.h:1096
 msgid "Orbital velocity of first celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1103
+#: src/ui_astroCalcDialog.h:1097
 msgid "First celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1104
+#: src/ui_astroCalcDialog.h:1098
 msgid "Angular distance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1105
+#: src/ui_astroCalcDialog.h:1099
 msgid "Orbital resonance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1106
+#: src/ui_astroCalcDialog.h:1100
 msgid "Linear distance:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1107
+#: src/ui_astroCalcDialog.h:1101
 msgid "Second celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1108
+#: src/ui_astroCalcDialog.h:1102
 msgid "Synodic period:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1109
-msgid "Compute"
 msgstr ""
 
 #: src/ui_bookmarksDialog.h:195
@@ -11214,138 +11210,138 @@ msgid ""
 msgstr "古いsatellites.jsonファイルとは互換性がありません - デフォルトファイルを使用します"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2041
 msgid "visual"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2043
 msgid "scientific"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2036
+#: plugins/Satellites/src/Satellites.cpp:2045
 msgid "communications"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2038
+#: plugins/Satellites/src/Satellites.cpp:2047
 msgid "navigation"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2040
+#: plugins/Satellites/src/Satellites.cpp:2049
 msgid "amateur"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2042
+#: plugins/Satellites/src/Satellites.cpp:2051
 msgid "weather"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2044
+#: plugins/Satellites/src/Satellites.cpp:2053
 msgid "geostationary"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2046
+#: plugins/Satellites/src/Satellites.cpp:2055
 msgid "non-operational"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2057
 msgid "gps"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2059
 msgid "glonass"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2061
 msgid "galileo"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2063
 msgid "iridium"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2065
 msgid "stations"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2067
 msgid "education"
 msgstr ""
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2069
 msgid "observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2065
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "The Hubble Space Telescope"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2067
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "The International Space Station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2069
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "China's first space station"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2071
+#: plugins/Satellites/src/Satellites.cpp:2080
 msgid "The russian space radio telescope RadioAstron"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2073
+#: plugins/Satellites/src/Satellites.cpp:2082
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2075
+#: plugins/Satellites/src/Satellites.cpp:2084
 msgid "The Gamma-Ray Observatory"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2079
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "ISS (ZARYA)"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2081
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2083
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2085
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2087
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "TIANGONG 1"
 msgstr ""
 
@@ -14471,6 +14467,10 @@ msgstr ""
 msgid "Not running"
 msgstr ""
 
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:145
+msgid "Stop server"
+msgstr ""
+
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
 msgid "Running as server on port %1"
@@ -14715,7 +14715,7 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:955
 msgid "Radial Velocity"
-msgstr ""
+msgstr "視線速度"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:957
@@ -16068,7 +16068,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:551
 msgid "Meteor Showers"
-msgstr ""
+msgstr "流星群"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 msgid "Toggle meteor showers"
@@ -16133,36 +16133,36 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "meteor shower"
-msgstr ""
+msgstr "流星群"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "放射点の移動 (1日あたり)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "対地速度"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
-msgstr ""
+msgstr "光度比"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
-msgstr ""
+msgstr "母天体"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
-msgstr ""
+msgstr "活動"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:610
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "極大: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"
-msgstr ""
+msgstr "太陽黄経"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:623
 msgid "variable"
@@ -16171,327 +16171,327 @@ msgstr ""
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:33
 msgid "Quadrantids"
-msgstr ""
+msgstr "しぶんぎ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:35
 msgid "Lyrids"
-msgstr ""
+msgstr "こと座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
 msgid "α-Centaurids"
-msgstr ""
+msgstr "ケンタウルス座α流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
 msgid "γ-Normids"
-msgstr ""
+msgstr "じょうぎ座γ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr ""
+msgstr "みずがめ座η流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr ""
+msgstr "6月うしかい座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "みなみのうお座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:47
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "みずがめ座δ南流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:49
 msgid "α-Capricornids"
-msgstr ""
+msgstr "やぎ座α流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:51
 msgid "α-Aurigids"
-msgstr ""
+msgstr "ぎょしゃ座α流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:53
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "9月ペルセウス座ε流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:55
 msgid "Draconids"
-msgstr ""
+msgstr "りゅう座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:57
 msgid "Leonids"
-msgstr ""
+msgstr "しし座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:59
 msgid "Phoenicids"
-msgstr ""
+msgstr "ほうおう座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:61
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "とも座・ほ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:63
 msgid "Ursids"
-msgstr ""
+msgstr "こぐま座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:65
 msgid "Perseids"
-msgstr ""
+msgstr "ペルセウス座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
 msgid "δ-Leonids"
-msgstr ""
+msgstr "しし座δ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:69
 msgid "π-Puppids"
-msgstr ""
+msgstr "とも座π流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:71
 msgid "June Lyrids"
-msgstr ""
+msgstr "6月こと座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:73
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "はくちょう座κ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:75
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "こと座ε流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:77
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "ぎょしゃ座δ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:79
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ふたご座ε流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:81
 msgid "Southern Taurids"
-msgstr ""
+msgstr "おうし座南流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:83
 msgid "Northern Taurids"
-msgstr ""
+msgstr "おうし座北流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:85
 msgid "Monocerotids"
-msgstr ""
+msgstr "いっかくじゅう座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:87
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "いっかくじゅう座α流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:89
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "うみへび座σ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:91
 msgid "Geminids"
-msgstr ""
+msgstr "ふたご座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:93
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "こじし座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:95
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "12月こじし座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:97
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "かみのけ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:99
 msgid "Orionids"
-msgstr ""
+msgstr "オリオン座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:101
 msgid "Andromedids"
-msgstr ""
+msgstr "アンドロメダ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:103
 msgid "η-Lyrids"
-msgstr ""
+msgstr "こと座η流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:105
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "さそり座α流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
 msgid "Ophiuchids"
-msgstr ""
+msgstr "へびつかい座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:109
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "へびつかい座θ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:111
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "へび座κ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:113
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "ケンタウルス座θ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:115
 msgid "ω-Cetids"
-msgstr ""
+msgstr "くじら座ω流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:117
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "さそり座ω南流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:119
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "さそり座ω北流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:121
 msgid "Arietids"
-msgstr ""
+msgstr "おひつじ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:123
 msgid "π-Cetids"
-msgstr ""
+msgstr "くじら座π流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:125
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "かに座δ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:127
 msgid "τ-Herculids"
-msgstr ""
+msgstr "ヘルクレス座τ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:129
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ふたご座ρ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:131
 msgid "η-Carinids"
-msgstr ""
+msgstr "りゅうこつ座η流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:133
 msgid "η-Craterids"
-msgstr ""
+msgstr "コップ座η流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:135
 msgid "π-Virginids"
-msgstr ""
+msgstr "おとめ座π流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:137
 msgid "θ-Virginids"
-msgstr ""
+msgstr "おとめ座θ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:139
 msgid "May Librids"
-msgstr ""
+msgstr "5月てんびん座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:141
 msgid "June Scutids"
-msgstr ""
+msgstr "6月たて座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:143
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "みなみのうお座α流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:145
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "みずがめ座ι南流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:147
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "みずがめ座ι北流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "みずがめ座γ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "秋のおひつじ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:153
 msgid "χ-Orionids"
-msgstr ""
+msgstr "オリオン座χ流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "ろくぶんぎ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "11月オリオン座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr ""
+msgstr "8月ちょうこくぐ座流星群"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "ε-Gruids"
-msgstr ""
+msgstr "つる座ε流星群"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
@@ -16649,7 +16649,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:261
 msgid "Meteor shower"
-msgstr ""
+msgstr "流星群"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 msgid ""
@@ -16890,7 +16890,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:154
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
-msgstr ""
+msgstr "赤経/赤緯"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:177
 msgctxt "abbreviated in the plugin"
@@ -16900,17 +16900,17 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:193
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "銀経/銀緯"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr ""
+msgstr "超銀河経度/緯度"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "黄経/黄緯"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:247
 msgctxt "abbreviated in the plugin"
@@ -16920,7 +16920,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:265
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
-msgstr ""
+msgstr "時角/赤緯"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:123
 msgid "Pointer Coordinates plug-in"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 21:28+0700\n"
+"POT-Creation-Date: 2018-02-02 22:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2017\n"
 "Language-Team: Russian (https://www.transifex.com/stellarium/teams/80998/ru/)\n"
@@ -9774,197 +9774,197 @@ msgstr "Включая каталог:"
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:992
+#: src/ui_astroCalcDialog.h:986
 msgid "Astronomical calculations"
 msgstr "Астрономические расчёты"
 
-#: src/ui_astroCalcDialog.h:998
+#: src/ui_astroCalcDialog.h:992
 msgid "Positions"
 msgstr "Координаты"
 
-#: src/ui_astroCalcDialog.h:1000
+#: src/ui_astroCalcDialog.h:994
 msgid "Celestial bodies above horizon"
 msgstr "Небесные тела над горизонтом"
 
-#: src/ui_astroCalcDialog.h:1003
+#: src/ui_astroCalcDialog.h:997
 msgid "Ephemeris"
 msgstr "Эфемериды"
 
-#: src/ui_astroCalcDialog.h:1005
+#: src/ui_astroCalcDialog.h:999
 msgid "Phenomena"
 msgstr "Явления"
 
-#: src/ui_astroCalcDialog.h:1007
+#: src/ui_astroCalcDialog.h:1001
 msgid "Alt. vs. Time"
 msgstr "Выс. от времени"
 
-#: src/ui_astroCalcDialog.h:1009
+#: src/ui_astroCalcDialog.h:1003
 msgid "Altitude vs. Time"
 msgstr "Высота от времени"
 
-#: src/ui_astroCalcDialog.h:1012
+#: src/ui_astroCalcDialog.h:1006
 msgctxt "Monthly Elevation"
 msgid "ME"
 msgstr "Е.В."
 
-#: src/ui_astroCalcDialog.h:1014
+#: src/ui_astroCalcDialog.h:1008
 msgid "Monthly Elevation"
 msgstr "Ежемесячная высота"
 
-#: src/ui_astroCalcDialog.h:1017
+#: src/ui_astroCalcDialog.h:1011
 msgid "Graphs"
 msgstr "Графики"
 
-#: src/ui_astroCalcDialog.h:1019 src/ui_astroCalcDialog.h:1095
+#: src/ui_astroCalcDialog.h:1013 src/ui_astroCalcDialog.h:1089
 msgid "Graphs on the current year"
 msgstr "Графики текущего года"
 
-#: src/ui_astroCalcDialog.h:1022
+#: src/ui_astroCalcDialog.h:1016
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr "Вечерние события"
 
-#: src/ui_astroCalcDialog.h:1024
+#: src/ui_astroCalcDialog.h:1018
 msgid "What's Up Tonight"
 msgstr "Что сегодня можно наблюдать"
 
-#: src/ui_astroCalcDialog.h:1027
+#: src/ui_astroCalcDialog.h:1021
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr "П.К."
 
-#: src/ui_astroCalcDialog.h:1029
+#: src/ui_astroCalcDialog.h:1023
 msgid "Planetary Calculator"
 msgstr "Планетарный калькулятор"
 
-#: src/ui_astroCalcDialog.h:1037
+#: src/ui_astroCalcDialog.h:1031
 msgid "Save positions"
 msgstr "Сохранить позиции"
 
-#: src/ui_astroCalcDialog.h:1038
+#: src/ui_astroCalcDialog.h:1032
 msgid "Update positions"
 msgstr "Обновить позиции"
 
-#: src/ui_astroCalcDialog.h:1039 src/ui_astroCalcDialog.h:1096
+#: src/ui_astroCalcDialog.h:1033 src/ui_astroCalcDialog.h:1090
 msgid "Show objects brighter than magnitude:"
 msgstr "Показать объекты ярче этой звёздной величины:"
 
-#: src/ui_astroCalcDialog.h:1041
+#: src/ui_astroCalcDialog.h:1035
 msgid "List of objects above horizon"
 msgstr "Список объектов над горизонтом"
 
-#: src/ui_astroCalcDialog.h:1043 src/ui_astroCalcDialog.h:1067
+#: src/ui_astroCalcDialog.h:1037 src/ui_astroCalcDialog.h:1061
 msgid "Use horizontal coordinates"
 msgstr "Использовать горизонтальные координаты"
 
-#: src/ui_astroCalcDialog.h:1044 src/ui_astroCalcDialog.h:1093
+#: src/ui_astroCalcDialog.h:1038 src/ui_astroCalcDialog.h:1087
 msgid "Celestial body:"
 msgstr "Небесное тело:"
 
-#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1072
+#: src/ui_astroCalcDialog.h:1040 src/ui_astroCalcDialog.h:1066
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "До:"
 
-#: src/ui_astroCalcDialog.h:1047 src/ui_astroCalcDialog.h:1082
+#: src/ui_astroCalcDialog.h:1041 src/ui_astroCalcDialog.h:1076
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "От:"
 
-#: src/ui_astroCalcDialog.h:1048
+#: src/ui_astroCalcDialog.h:1042
 msgid "Time step:"
 msgstr "Шаг времени:"
 
-#: src/ui_astroCalcDialog.h:1049
+#: src/ui_astroCalcDialog.h:1043
 msgid "Cleanup ephemerides"
 msgstr "Очистка эфемерид"
 
-#: src/ui_astroCalcDialog.h:1050
+#: src/ui_astroCalcDialog.h:1044
 msgid "Save ephemeris"
 msgstr "Сохранить эфемериды"
 
-#: src/ui_astroCalcDialog.h:1052 src/ui_astroCalcDialog.h:1079
+#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1073
 #: plugins/Satellites/src/ui_satellitesDialog.h:828
 msgid "Calculations require time, please be patient"
 msgstr "Расчеты требуют времени, пожалуйста, будьте терпеливы"
 
-#: src/ui_astroCalcDialog.h:1054
+#: src/ui_astroCalcDialog.h:1048
 msgid "Calculate ephemeris"
 msgstr "Рассчитать эфемериды"
 
-#: src/ui_astroCalcDialog.h:1056
+#: src/ui_astroCalcDialog.h:1050
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "Показать маркеры позиций текущего небесного тела на небе"
 
-#: src/ui_astroCalcDialog.h:1058
+#: src/ui_astroCalcDialog.h:1052
 msgid "Show markers"
 msgstr "Показать маркеры"
 
-#: src/ui_astroCalcDialog.h:1060
+#: src/ui_astroCalcDialog.h:1054
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "Показать даты позиций текущего небесного тела вблизи маркеров"
 
-#: src/ui_astroCalcDialog.h:1062
+#: src/ui_astroCalcDialog.h:1056
 msgid "Show dates"
 msgstr "Показать даты"
 
-#: src/ui_astroCalcDialog.h:1064
+#: src/ui_astroCalcDialog.h:1058
 msgid "Show magnitudes of current celestial body"
 msgstr "Показать звёздные величины текущего небесного тела"
 
-#: src/ui_astroCalcDialog.h:1066
+#: src/ui_astroCalcDialog.h:1060
 msgid "Show magnitudes"
 msgstr "Показать звёздную величину"
 
-#: src/ui_astroCalcDialog.h:1068
+#: src/ui_astroCalcDialog.h:1062
 msgid "Maximum allowed separation:"
 msgstr "Максимально допустимое разделение:"
 
-#: src/ui_astroCalcDialog.h:1070
+#: src/ui_astroCalcDialog.h:1064
 msgid "Value in decimal degrees"
 msgstr "Значение в десятичных градусах"
 
-#: src/ui_astroCalcDialog.h:1073
+#: src/ui_astroCalcDialog.h:1067
 msgid "Calculate oppositions"
 msgstr "Рассчитать противостояния"
 
-#: src/ui_astroCalcDialog.h:1074
+#: src/ui_astroCalcDialog.h:1068
 msgid "Between objects:"
 msgstr "Между объектами:"
 
-#: src/ui_astroCalcDialog.h:1075
+#: src/ui_astroCalcDialog.h:1069
 msgid "and"
 msgstr "и"
 
-#: src/ui_astroCalcDialog.h:1076
+#: src/ui_astroCalcDialog.h:1070
 msgid "Cleanup of phenomena"
 msgstr "Очистить явления"
 
-#: src/ui_astroCalcDialog.h:1077
+#: src/ui_astroCalcDialog.h:1071
 msgid "Save phenomena"
 msgstr "Сохранить явления"
 
-#: src/ui_astroCalcDialog.h:1081
+#: src/ui_astroCalcDialog.h:1075
 msgid "Calculate phenomena"
 msgstr "Рассчитать явления"
 
-#: src/ui_astroCalcDialog.h:1083
+#: src/ui_astroCalcDialog.h:1077
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "Выберите объект для построения его графика «Высоты от времени»."
 
-#: src/ui_astroCalcDialog.h:1084
+#: src/ui_astroCalcDialog.h:1078
 msgid "Also the graph for the Sun"
 msgstr "Также график для Солнца"
 
-#: src/ui_astroCalcDialog.h:1085
+#: src/ui_astroCalcDialog.h:1079
 msgid "Also the graph for the Moon"
 msgstr "Также график для Луны"
 
-#: src/ui_astroCalcDialog.h:1087
+#: src/ui_astroCalcDialog.h:1081
 msgid "Local Time in hours"
 msgstr "Местное время в часах"
 
-#: src/ui_astroCalcDialog.h:1090
+#: src/ui_astroCalcDialog.h:1084
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
@@ -9972,69 +9972,65 @@ msgstr ""
 "Выберите объект для построения его графика «Ежемесячная высота» для текущего"
 " года в выбранное время."
 
-#: src/ui_astroCalcDialog.h:1091
+#: src/ui_astroCalcDialog.h:1085
 msgid "Second graph (yellow):"
 msgstr "Второй график (желтый):"
 
-#: src/ui_astroCalcDialog.h:1092
+#: src/ui_astroCalcDialog.h:1086
 msgid "First graph (red):"
 msgstr "Первый график (красный):"
 
-#: src/ui_astroCalcDialog.h:1094
+#: src/ui_astroCalcDialog.h:1088
 msgid "Draw graphs"
 msgstr "Рисовать графики"
 
-#: src/ui_astroCalcDialog.h:1097
+#: src/ui_astroCalcDialog.h:1091
 msgid "Select a category:"
 msgstr "Категория:"
 
-#: src/ui_astroCalcDialog.h:1098
+#: src/ui_astroCalcDialog.h:1092
 msgid "Matching objects:"
 msgstr "Найденные объекты:"
 
-#: src/ui_astroCalcDialog.h:1099
+#: src/ui_astroCalcDialog.h:1093
 msgid "Save list of objects"
 msgstr "Сохранить список объектов"
 
-#: src/ui_astroCalcDialog.h:1100
+#: src/ui_astroCalcDialog.h:1094
 msgid "Show objects which are up:"
 msgstr "Объекты над горизонтом:"
 
-#: src/ui_astroCalcDialog.h:1101
+#: src/ui_astroCalcDialog.h:1095
 msgid "Orbital velocity of second celestial body:"
 msgstr "Орбитальная скорость второго небесного тела:"
 
-#: src/ui_astroCalcDialog.h:1102
+#: src/ui_astroCalcDialog.h:1096
 msgid "Orbital velocity of first celestial body:"
 msgstr "Орбитальная скорость первого небесного тела:"
 
-#: src/ui_astroCalcDialog.h:1103
+#: src/ui_astroCalcDialog.h:1097
 msgid "First celestial body:"
 msgstr "Первое небесное тело:"
 
-#: src/ui_astroCalcDialog.h:1104
+#: src/ui_astroCalcDialog.h:1098
 msgid "Angular distance:"
 msgstr "Угловое расстояние:"
 
-#: src/ui_astroCalcDialog.h:1105
+#: src/ui_astroCalcDialog.h:1099
 msgid "Orbital resonance:"
 msgstr "Орбитальный резонанс:"
 
-#: src/ui_astroCalcDialog.h:1106
+#: src/ui_astroCalcDialog.h:1100
 msgid "Linear distance:"
 msgstr "Линейное расстояние:"
 
-#: src/ui_astroCalcDialog.h:1107
+#: src/ui_astroCalcDialog.h:1101
 msgid "Second celestial body:"
 msgstr "Второе небесное тело:"
 
-#: src/ui_astroCalcDialog.h:1108
+#: src/ui_astroCalcDialog.h:1102
 msgid "Synodic period:"
 msgstr "Синодический период обращения:"
-
-#: src/ui_astroCalcDialog.h:1109
-msgid "Compute"
-msgstr "Вычислить"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -11594,138 +11590,138 @@ msgstr ""
 "умолчанию"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2041
 msgid "visual"
 msgstr "визуальные"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2043
 msgid "scientific"
 msgstr "научные"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2036
+#: plugins/Satellites/src/Satellites.cpp:2045
 msgid "communications"
 msgstr "коммуникационные"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2038
+#: plugins/Satellites/src/Satellites.cpp:2047
 msgid "navigation"
 msgstr "навигационные"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2040
+#: plugins/Satellites/src/Satellites.cpp:2049
 msgid "amateur"
 msgstr "любительские"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2042
+#: plugins/Satellites/src/Satellites.cpp:2051
 msgid "weather"
 msgstr "метеоспутники"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2044
+#: plugins/Satellites/src/Satellites.cpp:2053
 msgid "geostationary"
 msgstr "геостационарные"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2046
+#: plugins/Satellites/src/Satellites.cpp:2055
 msgid "non-operational"
 msgstr "нерабочие"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2057
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2059
 msgid "glonass"
 msgstr "ГЛОНАСС"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2061
 msgid "galileo"
 msgstr "Галилео"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2063
 msgid "iridium"
 msgstr "иридиумы"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2065
 msgid "stations"
 msgstr "станции"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2067
 msgid "education"
 msgstr "учебные"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2069
 msgid "observatory"
 msgstr "обсерватории"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2065
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "The Hubble Space Telescope"
 msgstr "Космический телескоп им. Э. Хаббла"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2067
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "The International Space Station"
 msgstr "Международная космическая станция"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2069
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "China's first space station"
 msgstr "Первая китайская космическая станция"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2071
+#: plugins/Satellites/src/Satellites.cpp:2080
 msgid "The russian space radio telescope RadioAstron"
 msgstr "Русский космический радиотелескоп РадиоАстрон"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2073
+#: plugins/Satellites/src/Satellites.cpp:2082
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "Международная астрофизическая гамма-лаборатория"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2075
+#: plugins/Satellites/src/Satellites.cpp:2084
 msgid "The Gamma-Ray Observatory"
 msgstr "Гамма-обсерватория"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2079
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "ISS (ZARYA)"
 msgstr "МКС (Заря)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2081
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "HST"
 msgstr "КТХ"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2083
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "SPEKTR-R"
 msgstr "Спектр-Р"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2085
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "INTEGRAL"
 msgstr "ИНТЕГРАЛ"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2087
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "TIANGONG 1"
 msgstr "Тяньгун 1"
 
@@ -15214,6 +15210,10 @@ msgstr "Соединиться с сервером"
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
 msgstr "Не запущен"
+
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:145
+msgid "Stop server"
+msgstr "Остановка сервера"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format

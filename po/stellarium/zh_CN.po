@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-26 21:28+0700\n"
+"POT-Creation-Date: 2018-02-02 22:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Haomin Jin <986394140@qq.com>, 2017\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -4474,7 +4474,7 @@ msgstr "太阳系天体：行星"
 #: src/gui/AstroCalcDialog.cpp:555
 #, qt-format
 msgid "Positions on %1"
-msgstr "坐标 %1"
+msgstr "位置 %1"
 
 #: src/gui/AstroCalcDialog.cpp:579
 msgid "Average angular size"
@@ -4721,7 +4721,7 @@ msgstr "亮星系 (<%1 星等)"
 #: src/gui/AstroCalcDialog.cpp:1878 src/gui/AstroCalcDialog.cpp:2491
 #: src/gui/AstroCalcDialog.cpp:2493
 msgid "Local Time"
-msgstr "当地时间"
+msgstr "地方时"
 
 #: src/gui/AstroCalcDialog.cpp:2104
 msgid "Magnitude vs. Time"
@@ -4769,7 +4769,7 @@ msgstr "角直径"
 #: src/gui/AstroCalcDialog.cpp:2346
 msgctxt "time"
 msgid "h"
-msgstr "小时"
+msgstr "时"
 
 #: src/gui/AstroCalcDialog.cpp:2470
 #, qt-format
@@ -9538,265 +9538,261 @@ msgstr "包含目录："
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:992
+#: src/ui_astroCalcDialog.h:986
 msgid "Astronomical calculations"
 msgstr "天文计算"
 
-#: src/ui_astroCalcDialog.h:998
+#: src/ui_astroCalcDialog.h:992
 msgid "Positions"
 msgstr "坐标位置"
 
-#: src/ui_astroCalcDialog.h:1000
+#: src/ui_astroCalcDialog.h:994
 msgid "Celestial bodies above horizon"
 msgstr "地平线以上天体"
 
-#: src/ui_astroCalcDialog.h:1003
+#: src/ui_astroCalcDialog.h:997
 msgid "Ephemeris"
 msgstr "星历表"
 
-#: src/ui_astroCalcDialog.h:1005
+#: src/ui_astroCalcDialog.h:999
 msgid "Phenomena"
 msgstr "事件"
 
-#: src/ui_astroCalcDialog.h:1007
+#: src/ui_astroCalcDialog.h:1001
 msgid "Alt. vs. Time"
 msgstr "地平高度vs. 时间"
 
-#: src/ui_astroCalcDialog.h:1009
+#: src/ui_astroCalcDialog.h:1003
 msgid "Altitude vs. Time"
 msgstr "地平高度vs. 时间"
 
-#: src/ui_astroCalcDialog.h:1012
+#: src/ui_astroCalcDialog.h:1006
 msgctxt "Monthly Elevation"
 msgid "ME"
-msgstr "月度相对高度"
+msgstr "年内高度"
 
-#: src/ui_astroCalcDialog.h:1014
+#: src/ui_astroCalcDialog.h:1008
 msgid "Monthly Elevation"
-msgstr "月度相对高度"
+msgstr "年内高度"
 
-#: src/ui_astroCalcDialog.h:1017
+#: src/ui_astroCalcDialog.h:1011
 msgid "Graphs"
 msgstr "曲线图"
 
-#: src/ui_astroCalcDialog.h:1019 src/ui_astroCalcDialog.h:1095
+#: src/ui_astroCalcDialog.h:1013 src/ui_astroCalcDialog.h:1089
 msgid "Graphs on the current year"
 msgstr "当年曲线图"
 
-#: src/ui_astroCalcDialog.h:1022
+#: src/ui_astroCalcDialog.h:1016
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr "今夜天象"
 
-#: src/ui_astroCalcDialog.h:1024
+#: src/ui_astroCalcDialog.h:1018
 msgid "What's Up Tonight"
 msgstr "今夜天象"
 
-#: src/ui_astroCalcDialog.h:1027
+#: src/ui_astroCalcDialog.h:1021
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr "行星计算器"
 
-#: src/ui_astroCalcDialog.h:1029
+#: src/ui_astroCalcDialog.h:1023
 msgid "Planetary Calculator"
 msgstr "行星计算器"
 
-#: src/ui_astroCalcDialog.h:1037
+#: src/ui_astroCalcDialog.h:1031
 msgid "Save positions"
 msgstr "保存位置"
 
-#: src/ui_astroCalcDialog.h:1038
+#: src/ui_astroCalcDialog.h:1032
 msgid "Update positions"
 msgstr "更新位置"
 
-#: src/ui_astroCalcDialog.h:1039 src/ui_astroCalcDialog.h:1096
+#: src/ui_astroCalcDialog.h:1033 src/ui_astroCalcDialog.h:1090
 msgid "Show objects brighter than magnitude:"
 msgstr "显示亮于此星等的天体："
 
-#: src/ui_astroCalcDialog.h:1041
+#: src/ui_astroCalcDialog.h:1035
 msgid "List of objects above horizon"
 msgstr "地平线以上对象列表"
 
-#: src/ui_astroCalcDialog.h:1043 src/ui_astroCalcDialog.h:1067
+#: src/ui_astroCalcDialog.h:1037 src/ui_astroCalcDialog.h:1061
 msgid "Use horizontal coordinates"
 msgstr "使用地平坐标"
 
-#: src/ui_astroCalcDialog.h:1044 src/ui_astroCalcDialog.h:1093
+#: src/ui_astroCalcDialog.h:1038 src/ui_astroCalcDialog.h:1087
 msgid "Celestial body:"
 msgstr "天体"
 
-#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1072
+#: src/ui_astroCalcDialog.h:1040 src/ui_astroCalcDialog.h:1066
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "到："
 
-#: src/ui_astroCalcDialog.h:1047 src/ui_astroCalcDialog.h:1082
+#: src/ui_astroCalcDialog.h:1041 src/ui_astroCalcDialog.h:1076
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "从："
 
-#: src/ui_astroCalcDialog.h:1048
+#: src/ui_astroCalcDialog.h:1042
 msgid "Time step:"
 msgstr "时间间隔："
 
-#: src/ui_astroCalcDialog.h:1049
+#: src/ui_astroCalcDialog.h:1043
 msgid "Cleanup ephemerides"
 msgstr "清理星历表"
 
-#: src/ui_astroCalcDialog.h:1050
+#: src/ui_astroCalcDialog.h:1044
 msgid "Save ephemeris"
 msgstr "保存星历表"
 
-#: src/ui_astroCalcDialog.h:1052 src/ui_astroCalcDialog.h:1079
+#: src/ui_astroCalcDialog.h:1046 src/ui_astroCalcDialog.h:1073
 #: plugins/Satellites/src/ui_satellitesDialog.h:828
 msgid "Calculations require time, please be patient"
 msgstr "计算需要时间，请耐心等待"
 
-#: src/ui_astroCalcDialog.h:1054
+#: src/ui_astroCalcDialog.h:1048
 msgid "Calculate ephemeris"
 msgstr "计算星历表"
 
-#: src/ui_astroCalcDialog.h:1056
+#: src/ui_astroCalcDialog.h:1050
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "在天球上显示当前天体的位置标识"
 
-#: src/ui_astroCalcDialog.h:1058
+#: src/ui_astroCalcDialog.h:1052
 msgid "Show markers"
 msgstr "在天球上显示位置标识"
 
-#: src/ui_astroCalcDialog.h:1060
+#: src/ui_astroCalcDialog.h:1054
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "显示当前天体运行到该位置的日期和时间"
 
-#: src/ui_astroCalcDialog.h:1062
+#: src/ui_astroCalcDialog.h:1056
 msgid "Show dates"
 msgstr "在天球上显示日期和时间"
 
-#: src/ui_astroCalcDialog.h:1064
+#: src/ui_astroCalcDialog.h:1058
 msgid "Show magnitudes of current celestial body"
 msgstr "在表识边显示当前天体对应的星等"
 
-#: src/ui_astroCalcDialog.h:1066
+#: src/ui_astroCalcDialog.h:1060
 msgid "Show magnitudes"
 msgstr "在天球上显示星等"
 
-#: src/ui_astroCalcDialog.h:1068
+#: src/ui_astroCalcDialog.h:1062
 msgid "Maximum allowed separation:"
 msgstr "最大允许角距"
 
-#: src/ui_astroCalcDialog.h:1070
+#: src/ui_astroCalcDialog.h:1064
 msgid "Value in decimal degrees"
 msgstr "十进制值"
 
-#: src/ui_astroCalcDialog.h:1073
+#: src/ui_astroCalcDialog.h:1067
 msgid "Calculate oppositions"
 msgstr "计算冲"
 
-#: src/ui_astroCalcDialog.h:1074
+#: src/ui_astroCalcDialog.h:1068
 msgid "Between objects:"
 msgstr "选择"
 
-#: src/ui_astroCalcDialog.h:1075
+#: src/ui_astroCalcDialog.h:1069
 msgid "and"
 msgstr "与"
 
-#: src/ui_astroCalcDialog.h:1076
+#: src/ui_astroCalcDialog.h:1070
 msgid "Cleanup of phenomena"
 msgstr "清除事件"
 
-#: src/ui_astroCalcDialog.h:1077
+#: src/ui_astroCalcDialog.h:1071
 msgid "Save phenomena"
 msgstr "保存事件"
 
-#: src/ui_astroCalcDialog.h:1081
+#: src/ui_astroCalcDialog.h:1075
 msgid "Calculate phenomena"
 msgstr "计算事件"
 
-#: src/ui_astroCalcDialog.h:1083
+#: src/ui_astroCalcDialog.h:1077
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "选择对象绘制其”地平高度vs. 时间”图像。"
 
-#: src/ui_astroCalcDialog.h:1084
+#: src/ui_astroCalcDialog.h:1078
 msgid "Also the graph for the Sun"
-msgstr "关于太阳的曲线图"
+msgstr "叠加太阳的图像"
 
-#: src/ui_astroCalcDialog.h:1085
+#: src/ui_astroCalcDialog.h:1079
 msgid "Also the graph for the Moon"
-msgstr "关于月球的曲线图"
+msgstr "叠加月球的图像"
 
-#: src/ui_astroCalcDialog.h:1087
+#: src/ui_astroCalcDialog.h:1081
 msgid "Local Time in hours"
-msgstr "地方时(以小时计)"
+msgstr "地方时(以时计)"
 
-#: src/ui_astroCalcDialog.h:1090
+#: src/ui_astroCalcDialog.h:1084
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
-msgstr "选择天体以绘制当年规定时间内的“月度相对高度”图。"
+msgstr "选择天体以绘制指定时刻的“年内高度”图。"
 
-#: src/ui_astroCalcDialog.h:1091
+#: src/ui_astroCalcDialog.h:1085
 msgid "Second graph (yellow):"
 msgstr "图像2 (黄色):"
 
-#: src/ui_astroCalcDialog.h:1092
+#: src/ui_astroCalcDialog.h:1086
 msgid "First graph (red):"
 msgstr "图像1 (红色):"
 
-#: src/ui_astroCalcDialog.h:1094
+#: src/ui_astroCalcDialog.h:1088
 msgid "Draw graphs"
 msgstr "绘制曲线图"
 
-#: src/ui_astroCalcDialog.h:1097
+#: src/ui_astroCalcDialog.h:1091
 msgid "Select a category:"
 msgstr "选择类别："
 
-#: src/ui_astroCalcDialog.h:1098
+#: src/ui_astroCalcDialog.h:1092
 msgid "Matching objects:"
 msgstr "匹配天体："
 
-#: src/ui_astroCalcDialog.h:1099
+#: src/ui_astroCalcDialog.h:1093
 msgid "Save list of objects"
 msgstr "保存对象列表"
 
-#: src/ui_astroCalcDialog.h:1100
+#: src/ui_astroCalcDialog.h:1094
 msgid "Show objects which are up:"
 msgstr "显示正在地平线上的天体:"
 
-#: src/ui_astroCalcDialog.h:1101
+#: src/ui_astroCalcDialog.h:1095
 msgid "Orbital velocity of second celestial body:"
 msgstr "第二天体的轨道速度："
 
-#: src/ui_astroCalcDialog.h:1102
+#: src/ui_astroCalcDialog.h:1096
 msgid "Orbital velocity of first celestial body:"
 msgstr "第一天体的轨道速度："
 
-#: src/ui_astroCalcDialog.h:1103
+#: src/ui_astroCalcDialog.h:1097
 msgid "First celestial body:"
 msgstr "第一天体："
 
-#: src/ui_astroCalcDialog.h:1104
+#: src/ui_astroCalcDialog.h:1098
 msgid "Angular distance:"
 msgstr "角距离："
 
-#: src/ui_astroCalcDialog.h:1105
+#: src/ui_astroCalcDialog.h:1099
 msgid "Orbital resonance:"
 msgstr "轨道共振："
 
-#: src/ui_astroCalcDialog.h:1106
+#: src/ui_astroCalcDialog.h:1100
 msgid "Linear distance:"
 msgstr "直线距离："
 
-#: src/ui_astroCalcDialog.h:1107
+#: src/ui_astroCalcDialog.h:1101
 msgid "Second celestial body:"
 msgstr "第二天体："
 
-#: src/ui_astroCalcDialog.h:1108
+#: src/ui_astroCalcDialog.h:1102
 msgid "Synodic period:"
 msgstr "会合周期："
-
-#: src/ui_astroCalcDialog.h:1109
-msgid "Compute"
-msgstr "计算"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -11299,138 +11295,138 @@ msgid ""
 msgstr "旧版本的 satellites.json 文件已不再适用，将使用默认文件。"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2032
+#: plugins/Satellites/src/Satellites.cpp:2041
 msgid "visual"
 msgstr "目视可见"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2034
+#: plugins/Satellites/src/Satellites.cpp:2043
 msgid "scientific"
 msgstr "科研"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2036
+#: plugins/Satellites/src/Satellites.cpp:2045
 msgid "communications"
 msgstr "通讯"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2038
+#: plugins/Satellites/src/Satellites.cpp:2047
 msgid "navigation"
 msgstr "导航"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2040
+#: plugins/Satellites/src/Satellites.cpp:2049
 msgid "amateur"
 msgstr "业余无线电"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2042
+#: plugins/Satellites/src/Satellites.cpp:2051
 msgid "weather"
 msgstr "气象"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2044
+#: plugins/Satellites/src/Satellites.cpp:2053
 msgid "geostationary"
 msgstr "同步卫星"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2046
+#: plugins/Satellites/src/Satellites.cpp:2055
 msgid "non-operational"
 msgstr "不再工作"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2048
+#: plugins/Satellites/src/Satellites.cpp:2057
 msgid "gps"
 msgstr "GPS"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2050
+#: plugins/Satellites/src/Satellites.cpp:2059
 msgid "glonass"
 msgstr "格洛纳斯"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2052
+#: plugins/Satellites/src/Satellites.cpp:2061
 msgid "galileo"
 msgstr "伽利略"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2063
 msgid "iridium"
 msgstr "铱星"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2065
 msgid "stations"
 msgstr "空间站"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2067
 msgid "education"
 msgstr "教育"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2069
 msgid "observatory"
 msgstr "气象"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2065
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "The Hubble Space Telescope"
 msgstr "哈勃太空望远镜"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2067
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "The International Space Station"
 msgstr "国际空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2069
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "China's first space station"
 msgstr "中国第一个空间站"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2071
+#: plugins/Satellites/src/Satellites.cpp:2080
 msgid "The russian space radio telescope RadioAstron"
 msgstr "俄罗斯空间射电望远镜RadioAstron"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2073
+#: plugins/Satellites/src/Satellites.cpp:2082
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "国际伽马射线天体物理实验室"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2075
+#: plugins/Satellites/src/Satellites.cpp:2084
 msgid "The Gamma-Ray Observatory"
 msgstr "伽玛射线观测台"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2079
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "ISS (ZARYA)"
 msgstr "国际空间站(ISS)"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2081
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "HST"
 msgstr "哈勃太空望远镜(HST)"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2083
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "SPEKTR-R"
 msgstr "SPEKTR-R空间天文台"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2085
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "INTEGRAL"
 msgstr "国际伽玛射线天体物理实验室(INTEGRAL)"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2087
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "TIANGONG 1"
 msgstr "天宫1号"
 
@@ -14604,6 +14600,10 @@ msgstr "连接到服务器"
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
 msgstr "未运行"
+
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:145
+msgid "Stop server"
+msgstr "断开服务器"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
