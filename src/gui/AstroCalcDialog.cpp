@@ -2850,6 +2850,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
+			// Added a special case - lunar eclipse
+			if (qAbs(separation) <= 0.02 && ((object1->getEnglishName() == "Moon"  && object2->getEnglishName() == "Sun") || (object1->getEnglishName() == "Sun"  && object2->getEnglishName() == "Moon")))
+				phenomenType = q_("Eclipse");
+
 			separation += M_PI;
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
@@ -2861,7 +2865,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 				phenomenType = q_("Occultation");
 
-			// Added a special case - eclipse
+			// Added a special case - solar eclipse
 			if (qAbs(s1 - s2) <= 0.05 && (object1->getEnglishName() == "Sun"  || object2->getEnglishName() == "Sun")) // 5% error of difference of sizes
 				phenomenType = q_("Eclipse");
 
