@@ -201,8 +201,8 @@ before_script:
   - cd build
 
 script:
-  - cmake -DENABLE_TESTING=1 ..;
-  - make -j2;
+  - cmake -DENABLE_TESTING=1 ..
+  - make -j2
   - ctest --output-on-failure
 
 after_success:
