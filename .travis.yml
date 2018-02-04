@@ -45,8 +45,8 @@ matrix:
             name: "Stellarium/stellarium"
             description: "A realistic, real-time 3D simulation of the night sky."
           notification_email: stellarium@googlegroups.com
-#          build_command_prepend: cmake -DENABLE_TESTING=1 ..
-#          build_command: make -j 2
+          build_command_prepend: cmake -DENABLE_TESTING=1 ..
+          build_command: make -j 2
           branch_pattern: coverity_scan
       env:
          - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
@@ -180,7 +180,6 @@ before_install:
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
       sudo apt-get -qq update;
-#      sudo apt-get -qq install ninja-build;
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -202,7 +201,7 @@ before_script:
 
 script:
   - cmake -DENABLE_TESTING=1 ..
-  - make -j2
+  - make -j 2
   - ctest --output-on-failure
 
 after_success:
