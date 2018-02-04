@@ -203,9 +203,11 @@ before_script:
 script:
   # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      cmake -DENABLE_TESTING=1 .. -G "Ninja";
-      ninja all;
-      sudo ninja install;
+      if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then
+        cmake -DENABLE_TESTING=1 .. -G "Ninja";
+        ninja all;
+        sudo ninja install;
+      fi
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -222,10 +224,10 @@ after_success:
     fi
 
 notifications:
-  recipients:
-    - mcardinot@gmail.com
-    - alex.v.wolf@gmail.com
   email:
+    recipients:
+      - mcardinot@gmail.com
+      - alex.v.wolf@gmail.com
     on_success: change
     on_failure: always
   irc:

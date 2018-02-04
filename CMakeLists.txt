@@ -749,6 +749,9 @@ ADD_CUSTOM_TARGET(uninstall
 ########### Packaging info for CPack ###########
 
 IF(GENERATE_PACKAGE_TARGET)
+     IF(MSVC_VERSION GREATER 1800)
+          SET(CMAKE_INSTALL_UCRT_LIBRARIES TRUE)
+     ENDIF()
      INCLUDE(InstallRequiredSystemLibraries)
      SET(CPACK_PACKAGE_DESCRIPTION_SUMMARY "Stellarium is a free open source planetarium for your computer. It shows a realistic sky in 3D, just like what you see with the naked eye, binoculars or a telescope.")
      SET(CPACK_PACKAGE_VENDOR "Stellarium's team")
