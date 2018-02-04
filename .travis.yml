@@ -2,15 +2,6 @@ env:
   global:
    - secure: "nDBuoowqSmcjCOsK4uXfkRRGuvcLt434lXeZIND/bfOEDgOv7h62w5h4i3ebSgItWkBStLzGB8Owfb2v/S0jC+wSIoP+SD2wRg12LA0/eeb3OBYw/TR5FlCVx21/GzvODTNi8NdWb92AcYGhbLNPqMDIFHGscARjHiP2EnONhTs="
 
-addons:
-  coverity_scan:
-    project:
-      name: "Stellarium/stellarium"
-      description: "A realistic, real-time 3D simulation of the night sky."
-    notification_email: mcardinot@gmail.com
-    build_command_prepend: cmake -DENABLE_TESTING=1 ..
-    build_command: make -j 2
-    branch_pattern: coverity_scan
 
 language: cpp
 
@@ -25,6 +16,14 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-4.8
+        coverity_scan:
+          project:
+            name: "Stellarium/stellarium"
+            description: "A realistic, real-time 3D simulation of the night sky."
+          notification_email: stellarium@googlegroups.com
+          build_command_prepend: cmake -DENABLE_TESTING=1 ..
+          build_command: make -j 2
+          branch_pattern: coverity_scan
       env:
          - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
 
