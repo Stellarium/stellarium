@@ -16,14 +16,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-4.8
-        coverity_scan:
-          project:
-            name: "Stellarium/stellarium"
-            description: "A realistic, real-time 3D simulation of the night sky."
-          notification_email: stellarium@googlegroups.com
-          build_command_prepend: cmake -DENABLE_TESTING=1 ..
-          build_command: make -j 2
-          branch_pattern: coverity_scan
       env:
          - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
 
@@ -48,6 +40,14 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
+        coverity_scan:
+          project:
+            name: "Stellarium/stellarium"
+            description: "A realistic, real-time 3D simulation of the night sky."
+          notification_email: stellarium@googlegroups.com
+          build_command_prepend: cmake -DENABLE_TESTING=1 ..
+          build_command: make -j 2
+          branch_pattern: coverity_scan
       env:
          - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
 
