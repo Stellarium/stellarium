@@ -45,7 +45,7 @@ matrix:
             name: "Stellarium/stellarium"
             description: "A realistic, real-time 3D simulation of the night sky."
           notification_email: stellarium@googlegroups.com
-          build_command_prepend: cmake -DENABLE_TESTING=1 ..
+          build_command_prepend: cmake ..
           build_command: make -j 2
           branch_pattern: coverity_scan
       env:
