@@ -203,7 +203,7 @@ before_script:
 script:
   # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      if [ ${COVERITY_SCAN_BRANCH} != 1 ]; then
+      if [[ "$COVERITY_SCAN_BRANCH" != 1 ]]; then
         cmake -DENABLE_TESTING=1 .. -G "Ninja";
         ninja all;
         sudo ninja install;
