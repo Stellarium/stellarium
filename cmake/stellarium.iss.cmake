@@ -50,7 +50,7 @@ Source: "@QtGui_location@"; DestDir: "{app}";
 @ISS_QT_OPENGL@
 Source: "@QtNetwork_location@"; DestDir: "{app}";
 Source: "@QtWidgets_location@"; DestDir: "{app}";
-Source: "@QtSql_location@"; DestDir: "{app}";
+Source: "@QtSvg_location@"; DestDir: "{app}";
 Source: "@QtXmlPatterns_location@"; DestDir: "{app}";
 Source: "@QtConcurrent_location@"; DestDir: "{app}";
 @ISS_QT_PRINTSUPPORT@
@@ -58,6 +58,7 @@ Source: "@QtConcurrent_location@"; DestDir: "{app}";
 @ISS_QT_MULTIMEDIA@
 @ISS_QT_SERIALPORT@
 @ISS_QT_POSITIONING@
+@ISS_QT_SQL@
 @ISS_ANGLE_LIBS@
 @ISS_ICU_LIBS@
 @ISS_QT_PLUGINS@
