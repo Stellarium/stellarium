@@ -824,19 +824,6 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0" colspan="2">
-           <widget class="QCustomPlot" name="altVsTimePlot" native="true">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
           <item row="2" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_14">
             <item>
@@ -853,7 +840,30 @@
               </property>
              </widget>
             </item>
+            <item>
+             <widget class="QCheckBox" name="positiveAltitudeOnlyCheckBox">
+              <property name="toolTip">
+               <string>Draw only the positive part of the graph</string>
+              </property>
+              <property name="text">
+               <string>Above horizon only</string>
+              </property>
+             </widget>
+            </item>
            </layout>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QCustomPlot" name="altVsTimePlot" native="true">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -861,6 +871,16 @@
          <layout class="QGridLayout" name="gridLayout_7">
           <item row="3" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QCheckBox" name="monthlyElevationPositiveCheckBox">
+              <property name="toolTip">
+               <string>Draw only the positive part of the graph</string>
+              </property>
+              <property name="text">
+               <string>Above horizon only</string>
+              </property>
+             </widget>
+            </item>
             <item>
              <widget class="QSlider" name="monthlyElevationTime">
               <property name="toolTip">

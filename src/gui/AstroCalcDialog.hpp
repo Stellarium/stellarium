@@ -160,6 +160,7 @@ private slots:
 	void mouseOverLine(QMouseEvent *event);
 	void saveAltVsTimeSunFlag(bool state);
 	void saveAltVsTimeMoonFlag(bool state);
+	void saveAltVsTimePositiveFlag(bool state);
 
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
@@ -169,6 +170,7 @@ private slots:
 	void drawMonthlyElevationGraph();
 	void updateMonthlyElevationTime();
 	void syncMonthlyElevationTime();
+	void saveMonthlyElevationPositiveFlag(bool state);
 
 	// WUT
 	void saveWutMagnitudeLimit(double mag);
@@ -251,7 +253,7 @@ private:
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2);
 
-	bool plotAltVsTime, plotMonthlyElevation, plotAltVsTimeSun, plotAltVsTimeMoon;
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;	
 	static float brightLimit;

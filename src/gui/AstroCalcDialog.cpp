@@ -67,10 +67,12 @@ QString AstroCalcDialog::yAxis2Legend = "";
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
 	, currentTimeLine(Q_NULLPTR)
-	, plotAltVsTime(false)
-	, plotMonthlyElevation(false)
+	, plotAltVsTime(false)	
 	, plotAltVsTimeSun(false)
 	, plotAltVsTimeMoon(false)
+	, plotAltVsTimePositive(false)
+	, plotMonthlyElevation(false)
+	, plotMonthlyElevationPositive(false)
 	, delimiter(", ")
 	, acEndl("\n")
 {
@@ -234,20 +236,26 @@ void AstroCalcDialog::createDialogContent()
 
 	plotAltVsTimeSun = conf->value("astrocalc/altvstime_sun", false).toBool();
 	plotAltVsTimeMoon = conf->value("astrocalc/altvstime_moon", false).toBool();
+	plotAltVsTimePositive = conf->value("astrocalc/altvstime_positive_only", false).toBool();
 	ui->sunAltitudeCheckBox->setChecked(plotAltVsTimeSun);
 	ui->moonAltitudeCheckBox->setChecked(plotAltVsTimeMoon);
+	ui->positiveAltitudeOnlyCheckBox->setChecked(plotAltVsTimePositive);
 	connect(ui->sunAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeSunFlag(bool)));
 	connect(ui->moonAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeMoonFlag(bool)));
+	connect(ui->positiveAltitudeOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimePositiveFlag(bool)));
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
 
 	// Monthly Elevation
-	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());
+	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
+	ui->monthlyElevationPositiveCheckBox->setChecked(plotMonthlyElevationPositive);
+	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());	
 	syncMonthlyElevationTime();
 	connect(ui->monthlyElevationTime, SIGNAL(sliderReleased()), this, SLOT(updateMonthlyElevationTime()));
 	connect(ui->monthlyElevationTime, SIGNAL(sliderMoved(int)), this, SLOT(syncMonthlyElevationTime()));
+	connect(ui->monthlyElevationPositiveCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMonthlyElevationPositiveFlag(bool)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
 	connect(core, SIGNAL(dateChangedByYear()), this, SLOT(drawMonthlyElevationGraph()));
 	drawMonthlyElevationGraph();
@@ -312,6 +320,17 @@ void AstroCalcDialog::saveAltVsTimeMoonFlag(bool state)
 	{
 		plotAltVsTimeMoon = state;
 		conf->setValue("astrocalc/altvstime_moon", plotAltVsTimeMoon);
+
+		drawAltVsTimeDiagram();
+	}
+}
+
+void AstroCalcDialog::saveAltVsTimePositiveFlag(bool state)
+{
+	if (plotAltVsTimePositive!=state)
+	{
+		plotAltVsTimePositive = state;
+		conf->setValue("astrocalc/altvstime_positive_only", plotAltVsTimePositive);
 
 		drawAltVsTimeDiagram();
 	}
@@ -1800,6 +1819,9 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			maxY = (maxY > maxYm + 2.0) ? maxY : maxYm + 2.0;
 		}
 
+		if (plotAltVsTimePositive && minY<0.f)
+			minY = 0;
+
 		prepareAxesAndGraph();
 		drawCurrentTimeDiagram();
 
@@ -1819,6 +1841,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		}
 		if (plotAltVsTimeMoon && onEarth)
 			ui->altVsTimePlot->graph(6)->setData(xm, ym);
+
 		ui->altVsTimePlot->replot();
 	}
 
@@ -2355,6 +2378,17 @@ void AstroCalcDialog::updateMonthlyElevationTime()
 	drawMonthlyElevationGraph();
 }
 
+void AstroCalcDialog::saveMonthlyElevationPositiveFlag(bool state)
+{
+	if (plotMonthlyElevationPositive!=state)
+	{
+		plotMonthlyElevationPositive = state;
+		conf->setValue("astrocalc/me_positive_only", plotMonthlyElevationPositive);
+
+		drawMonthlyElevationGraph();
+	}
+}
+
 void AstroCalcDialog::drawMonthlyElevationGraph()
 {
 	ui->monthlyElevationCelestialObjectLabel->setText("");
@@ -2425,6 +2459,9 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 
 		minYme = minYa - 2.0;
 		maxYme = maxYa + 2.0;
+
+		if (plotMonthlyElevationPositive && minYme<0.f)
+			minYme = 0.f;
 
 		prepareMonthlyEleveationAxesAndGraph();
 
