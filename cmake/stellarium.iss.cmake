@@ -34,37 +34,21 @@ ChangesAssociations=yes
 Compression=lzma2/max
 
 [Files]
-Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; Flags: ignoreversion; DestDir: "{app}"
-@STELMAINLIB@
-@MESALIB@
-@REDIST_FILES@
-Source: "@CMAKE_SOURCE_DIR@\data\stellarium.url"; Flags: ignoreversion; DestDir: "{app}"
-Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; Flags: ignoreversion; DestDir: "{app}"
+Source: "@CMAKE_INSTALL_PREFIX@\bin\stellarium.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@CMAKE_INSTALL_PREFIX@\bin\*.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@CMAKE_SOURCE_DIR@\data\stellarium.url"; DestDir: "{app}"; Flags: ignoreversion
+Source: "@CMAKE_SOURCE_DIR@\data\stellarium-devdocs.url"; DestDir: "{app}"; Flags: ignoreversion
 ; Source: "@CMAKE_SOURCE_DIR@\README.md"; DestDir: "{app}"; Flags: isreadme ignoreversion; DestName: "README.txt"
 ; Source: "@CMAKE_SOURCE_DIR@\INSTALL"; DestDir: "{app}"; Flags: ignoreversion; DestName: "INSTALL.txt"
 Source: "@CMAKE_SOURCE_DIR@\COPYING"; DestDir: "{app}"; Flags: ignoreversion; DestName: "GPL.txt"
 ; Source: "@CMAKE_SOURCE_DIR@\AUTHORS"; DestDir: "{app}"; Flags: ignoreversion; DestName: "AUTHORS.txt"
 Source: "@CMAKE_SOURCE_DIR@\ChangeLog"; DestDir: "{app}"; Flags: ignoreversion; DestName: "ChangeLog.txt"
-Source: "@QtCore_location@"; DestDir: "{app}";
-Source: "@QtGui_location@"; DestDir: "{app}";
-@ISS_QT_OPENGL@
-Source: "@QtNetwork_location@"; DestDir: "{app}";
-Source: "@QtWidgets_location@"; DestDir: "{app}";
-Source: "@QtSvg_location@"; DestDir: "{app}";
-Source: "@QtXmlPatterns_location@"; DestDir: "{app}";
-Source: "@QtConcurrent_location@"; DestDir: "{app}";
-@ISS_QT_PRINTSUPPORT@
-@ISS_QT_SCRIPT@
-@ISS_QT_MULTIMEDIA@
-@ISS_QT_SERIALPORT@
-@ISS_QT_POSITIONING@
-@ISS_QT_SQL@
-@ISS_ANGLE_LIBS@
-@ISS_ICU_LIBS@
-@ISS_QT_PLUGINS@
-@ISS_OPENSSL_LIBS@
+; Qt5 stuff
+Source: "@CMAKE_INSTALL_PREFIX@\qt5stuff\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
 ; Stellarium's stuff
 Source: "@CMAKE_INSTALL_PREFIX@\share\stellarium\*"; DestDir: "{app}\"; Flags: recursesubdirs ignoreversion
+@ISS_OPENSSL_LIBS@
+@ISS_STELLARIUM_STUFF@
 
 [Tasks]
 Name: desktopicon; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
@@ -78,8 +62,7 @@ Name: removelandscapes; Description: "{cm:RemoveUILandscapes}"; GroupDescription
 ;Name: removeshortcuts; Description: "{cm:RemoveShortcutsConfig}"; GroupDescription: "{cm:RemoveFromPreviousInstallation}"; Flags: unchecked
 
 [Run]
-;An option to start Stellarium after setup has finished
-@REDIST_RUN@
+; An option to start Stellarium after setup has finished
 Filename: "{app}\stellarium.exe"; Description: "{cm:LaunchProgram,Stellarium}"; Flags: postinstall nowait skipifsilent unchecked
 
 [InstallDelete]
@@ -155,57 +138,3 @@ Name: "bs"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\Bosnian.isl,@CMAKE_SOURCE
 Name: "zh_CN"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplified.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseSimplifiedCM.isl"
 Name: "zh_TW"; MessagesFile: "@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditional.isl,@CMAKE_SOURCE_DIR@\util\ISL\ChineseTraditionalCM.isl"
 
-[Code]
-#IFDEF UNICODE
-  #DEFINE AW "W"
-#ELSE
-  #DEFINE AW "A"
-#ENDIF
-type
-  INSTALLSTATE = Longint;
-const
-  INSTALLSTATE_INVALIDARG = -2;  // An invalid parameter was passed to the function.
-  INSTALLSTATE_UNKNOWN = -1;     // The product is neither advertised or installed.
-  INSTALLSTATE_ADVERTISED = 1;   // The product is advertised but not installed.
-  INSTALLSTATE_ABSENT = 2;       // The product is installed for a different user.
-  INSTALLSTATE_DEFAULT = 5;      // The product is installed for the current user.
-
-  // Visual C++ 2013 Redistributable 12.0.21005
-  // VC_REDIST_X86 = '{13A4EE12-23EA-3371-91EE-EFB36DDFFF3E}';
-  // VC_REDIST_X64 = '{A749D8E6-B613-3BE3-8F5F-045C84EBA29B}';
-  
-  // Visual C++ 2015 Redistributable 14.0.24215
-  VC_REDIST_X86 = '{e2803110-78b3-4664-a479-3611a381656a}';
-  VC_REDIST_X64 = '{d992c12e-cab2-426f-bde3-fb8c53950b0d}';
-
-function MsiQueryProductState(szProduct: string): INSTALLSTATE; 
-  external 'MsiQueryProductState{#AW}@msi.dll stdcall';
-
-function VCVersionInstalled(const ProductID: string): Boolean;
-begin
-  Result := MsiQueryProductState(ProductID) = INSTALLSTATE_DEFAULT;
-end;
-
-function VCRedistNeedsInstall: Boolean;
-begin
-  // here the Result must be True when you need to install your VCRedist
-  // or False when you don't need to, so now it's upon you how you build
-  // this statement, the following won't install your VC redist only when
-  // the Visual C++ 2015 Redist are installed for the current user
-  Result := not (VCVersionInstalled(@REDIST_VERSION@));
-end;
-
-procedure CurUninstallStepChanged (CurUninstallStep: TUninstallStep);
-var
-  mres : integer;
-begin
-  case CurUninstallStep of
-    usPostUninstall:
-      begin
-        mres := SuppressibleMsgBox(ExpandConstant('{cm:DeleteUserData}'), mbConfirmation, MB_YESNO or MB_DEFBUTTON2, IDYES)
-        if mres = IDYES then
-          DelTree(ExpandConstant('{userappdata}\Stellarium'), True, True, True);
-          DelTree(ExpandConstant('{userdocs}\Stellarium'), True, True, True);
-      end;  
-  end;
-end;
