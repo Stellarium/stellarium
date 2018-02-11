@@ -19,7 +19,6 @@ matrix:
           project:
             name: "Stellarium/stellarium"
             description: "A realistic, real-time 3D simulation of the night sky."
-          notification_email: alex.v.wolf@gmail.com
           build_command_prepend: cov-configure --comptype gcc --compiler gcc-4.8 --template && cmake -DENABLE_TESTING=1 ..
           build_command: make -j5
           branch_pattern: coverity_scan
