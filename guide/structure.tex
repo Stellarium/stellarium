@@ -254,9 +254,19 @@
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
 
-\usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+%\usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\usepackage[style=authoryear-comp,citestyle=authoryear,natbib=true,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{guide.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
+% This command prints >>title (name, year)<< for more extensive citations.
+\newcommand{\citetp}[1]{\citetitle{#1} \citep{#1}}
+% NOTE on citations: we have several options, provided with the natbib compatibility interface.
+% \citet  --> Zotti and Wolf (2017)
+% \citep  --> (Zotti and Wolf, 2017)
+% \cite   --> Zotti and Wolf, 2017
+% \citetp --> Stellarium User Guide (Zotti and Wolf, 2017)
+
+
 \usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
 
 \ifhtlatex

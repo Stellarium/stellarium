@@ -41,7 +41,7 @@ to a sunrise on summer or winter solstice. There can hardly be a
 better tool than Scenery3D (see chapter~\ref{ch:scenery3d}) to
 investigate a 3D model of such a building, and this plugin has been
 introduced in version 0.13.3 as a further tool in the
-archaeoastronomer's toolbox\cite{Zotti:SEAC2015}.
+archaeoastronomer's toolbox \citep{Zotti:SEAC2015}.
 
 When activated (see section~\ref{sec:Plugins:EnablingPlugins}), you
 can find a a tool bar button \guibutton{0.6}{bt_archaeolines.png} (in the
@@ -136,12 +136,12 @@ lines for two locations can be shown, these lines indicate the great
 circle direction towards the locations which can be edited in the
 configuration window. Default locations are Mecca (Kaaba) and
 Jerusalem.  The azimuth $q$ towards a location $T=(\lambda_T,
-\varphi_T)$ are computed for an observer at $O=(\lambda_O, \varphi_O)$
+\varphi_T)$ can be computed for an observer at $O=(\lambda_O, \varphi_O)$
 based on spherical trigonometry on a spherical
-Earth~\cite{Abdali:1997}:
+Earth~\citep{Abdali:1997} as
 \begin{equation}
   \label{eq:qibla}
-  q=\arctan\left(\frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - sin \varphi_O \cos(\lambda_{T} - \lambda_O) }\right)
+  q=\arctan \frac{\sin (\lambda_{T} - \lambda_O) } { \cos\varphi_O \tan\varphi_T - sin \varphi_O \cos(\lambda_{T} - \lambda_O) }
 \end{equation}
 
 In addition, up to two vertical lines with arbitrary azimuth and

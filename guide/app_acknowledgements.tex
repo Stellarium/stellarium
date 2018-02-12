@@ -1,13 +1,14 @@
 %% \chapterimage{chapter-t1-bg} % Chapter heading image
+\chapter{Acknowledgements}
 
-\chapter{Contributors}
-
+\section{Contributors}
+\label{sec:Contributors}
 When not listed as chapter authors, the following were the main contributors to the User Guide, mostly for versions before V0.15:
 
 \noindent%
 \begin{tabularx}{\textwidth}{l|X}
 \toprule
-Matthew Gates  & Primary author of the 1st edition\\
+Matthew Gates  & Primary author of the first User Guide (versions 0.9 to 0.12)\\
 Paul Robinson  &Sky guide; exercise ideas\\
 Andras Mohari  &Celestial sphere diagrams; numerous corrections\\
 Rudy Gobits, Dirk Schwarzhans & Mac platform specifics\\
@@ -44,6 +45,378 @@ usual channels (trackers, forums and so on):
 %\item[Blueprints for Stellarium] \url{https://blueprints.launchpad.net/stellarium}
 \end{description}
 
+
+\section{Technical Articles}
+\label{sec:ack:technical}
+% 2018-02-07: Put used data from git here.
+
+Stellarium would not look the same and work without these works from computer graphics and astronomy.
+
+\begin{description}
+	\item[The tone reproductor class]
+		The class mainly performs a fast implementation of the algorithm
+		from \citet{TumblinRushmeier:1993}, with more accurate values from \citet{DevlinChalmersWilkie:2002}. 
+		The blue shift formula is taken from \citet{WannJensen:2000} and combined with the Scotopic vision formula from  \citet{Larson:1997}.
+	\item[The skylight class]
+		The class governs sky colors and is a fast implementation of the algorithm by \citet{Preetham:1999}.
+	\item[The skybright class]
+		The class governs physical sky brightness values based on Bradley Schaefer's  \program{VISLIMIT.BAS} basic source code \citep{Schaefer:1998}.
+%		from Brad Schaefer's article on pages 57-60,  May 1998 _Sky & Telescope_,	"To the Visual Limits". 
+		The basic sources are available on the Sky and Telescope web site (code ``offered as-is and without support'').
+	\item[The $\Delta T$ calculations]
+		For implementation of calculation routines for $\Delta T$ we used the following sources:
+		\begin{enumerate}
+		\item $\Delta T$ webpage by Rob van Gent: \url{http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm}
+		\item \citetp{Espenak-Meeus:2006} (\url{http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html})
+		\item \citetp{1948AJ.....53..169C}
+		\item \citetp{1939MNRAS..99..541S} %``The Rotation of the Earth, and the Secular Accelerations of the Sun, Moon and Planets'' 
+		\item \citetp{1979AcA....29..101S} %``Polynomial approximations for the correction delta T E.T.-U.T. in the period 1800-1975'' 
+		\item \citetp{1988A&A...205L...8B} %"ELP 2000-85 and the dynamic time-universal time relation" 
+		\item \citetp{1988AN....309..219S} %``Empirical Transformations from U.T. to E.T. for the Period 1800-1988''
+		\item \citetp{2004JHA....35..327M} %``Historical values of the Earth's clock error DeltaT and the calculation of eclipses'' 
+		     with Addendum \citep{2005JHA....36..339M}
+		\item \citetp{2000JBAA..110..323M}% ``Polynomial approximations to Delta T, 1620-2000 AD''
+		%% DISABLED NEXT: This only uses Schoch!
+		%\item \citetp{2009ASPC..409..166H} %``Einstein's Theory of Relativity Confirmed by Ancient Solar Eclipses'', Henriksson G.,
+		\item \citetp{Mucke-Meeus:1983}% ``Canon of Solar Eclipses''
+		\item \citetp{1975grhe.conf..459M} %``The accelerations of the earth and moon from early astronomical observations''
+		\item \citetp{1978tfer.conf....5S} %``Pre-Telescopic Astronomical Observations''%, Stephenson F.R.,
+		\item \citetp{1984RSPTA.313...47S} %``Long-term changes in the rotation of the earth - 700 B.C. to A.D. 1980'' 
+		\item \citetp{1995RSPTA.351..165S} %``Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990''
+		\item \citetp{Stephenson:1997}  %``Historical Eclipses and Earth's Rotation''%by F. R. Stephenson (1997)
+		\item \citetp{AstronomicalAlgorithms:1998} %``Astronomical Algorithms''
+		\item \citetp{Montenbruck-Pfleger:2000} % ``Astronomy on the Personal Computer'' 
+		\item \citetp{Reingold-Dershowitz:2001} %``Calendrical Calculations''
+		\item $\Delta T$ webpage by V. Reijs: \url{http://www.iol.ie/~geniet/eng/DeltaTeval.htm}
+		\end{enumerate}
+	\item[Precession:] \citetp{2011AA:Vondrak} with correction \citep{2012AA:Vondrak} 
+	\item[Nutation:]   \citetp{Nutation:IAU2000B} %Dennis D. McCarthy and Brian J. Lizum: An Abridged Model of the Precession-Nutation of the Celestial Pole.
+		This model provides accuracy better than 1 milli-arcsecond in the
+		time 1995-2050. It is applied for years 1500..2500 only.
+\end{description}		
+		
+\section{Included Source Code}
+\label{sec:ack:code}
+
+\begin{itemize}		
+  \item Some computation of the sidereal time (\file{sidereal\_time.h/c}) and Pluto
+      orbit contains code from the libnova library (LGPL) by Liam Girdwood.
+  \item The \file{orbit.cpp/h} and \file{solve.h} files were directly borrowed from
+      \program{Celestia} (Chris Laurel; GPL license). They have now evolved a bit.
+  \item Several implementations of IMCCE theories for planet and satellite movement by Johannes Gajdosik 
+       (MIT-style license, see the corresponding files for the license text)
+  \item The tesselation algorithms were originally extracted from the glues 
+      library version 1.4 by Mike Gorchak \url{<mike@malva.ua>} (SGI FREE SOFTWARE LICENSE B).
+  \item OBJ loader in the Scenery3D plugin based on glObjViewer (c) 2007 dhpoware
+  \item Parts of the code to work with DE430 and DE431 data files have been taken from Project Pluto (GPL license).
+  \item The \file{SpoutLibrary.dll} and header from the SpoutSDK version 2.005 available at \url{http://spout.zeal.co} (BSD license).
+\end{itemize}
+
+\section{Data}
+\label{sec:ack:data}
+
+\begin{enumerate}
+\item The Hipparcos star catalog
+    From ESA (European Space Agency) and the Hipparcos mission. ref. ESA, 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200 \url{http://cdsweb.u-strasbg.fr/ftp/cats/I/239}
+	% TODO: NEXT ENTRY should be changed to ExplanSuppl./WGRE
+\item The solar system data mainly comes from IMCCE and partly from Celestia.
+\item Polynesian constellations are based on diagrams from the Polynesian Voyaging Society
+% TODO: MAKE SURE THIS IS STILL VCALID WITH THE NEW VERSION 2018.
+\item Chinese constellations are based on diagrams from the Hong Kong Space Museum
+\item Egyptian constellations are based on the work of Juan Antonio Belmonte, Instituto de Astrofisica de Canarias
+\item The Tycho-2 Catalogue of the 2.5 Million Brightest Stars Hog E., Fabricius C., Makarov V.V., Urban S., Corbin T., Wycoff G., Bastian U., Schwekendiek P., Wicenec A.
+    Astron. Astrophys. 355, L27 (2000)
+    \url{http://cdsweb.u-strasbg.fr/ftp/cats/I/259}
+\item Naval Observatory Merged Astrometric Dataset (NOMAD) version 1 (\url{http://www.nofs.navy.mil/nomad})
+    Norbert Zacharias writes:
+	\begin{quotation}
+    ``There are no fees, both UCAC and NOMAD are freely available with the only requirement that the source of the data (U.S.
+    Naval Observatory) and original product name need to be provided with any distribution, as well as a description about any
+    changes made to the data, if at all.''
+	\end{quotation}
+    The changes made to the data are:
+	\begin{itemize}
+    \item try to compute visual magnitude and color from the b,v,r values
+    \item compute $\mathrm{nr\_of\_measurements} = the number of valid b,v,r values$
+    \item throw away or keep stars (depending on magnitude, nr\_of\_measurements, combination of flags, tycho2 number)
+    \item add all stars from Hipparcos (incl.\ component solutions), and tycho2+1st supplement
+    \item reorganize the stars in several brigthness levels and triangular zones according to position and magnitude
+	\end{itemize}
+    The programs that are used to generate the star files are called
+    "MakeCombinedCatalogue", "ParseHip", "ParseNomad", and can be
+    found in the util subdirectory in source code. The position,
+    magnitudes, and proper motions of the stars coming from NOMAD
+    are unchanged, except for a possible loss of precision,
+    especially in magnitude. When there is no v-magnitude, it is
+    estimated from r or b magnitude.  When there is no b- or v-
+    magnitude, the color B-V is estimated from the other magnitudes.
+    Also proper motions of faint stars are neglected at all.
+\item Stellarium's Catalog of Variable Stars based on General Catalog of Variable Stars (GCVS) version 2013Apr. \url{http://www.sai.msu.su/gcvs/gcvs/}
+    Samus N.N., Durlevich O.V., Kazarovets E V., Kireeva N.N., Pastukhova E.N., Zharova A.V., et al., General Catalogue of Variable Stars (Samus+ 2007-2012)
+    \url{http://cdsarc.u-strasbg.fr/viz-bin/Cat?cat=B%2Fgcvs&}
+\item Consolidated DSO catalog was created from various data:
+	\begin{enumerate}
+     \item NGC/IC data taken from SIMBAD Astronomical Database \url{http://simbad.u-strasbg.fr}
+     \item Distance to NGC/IC data taken from NED                (NASA/IPAC EXTRAGALACTIC DATABASE)  \url{http://ned.ipac.caltech.edu}
+     \item Catalogue of HII Regions                              (Sharpless, 1959)     taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/20}
+     \item H-$\alpha$ emission regions in the Southern Milky Way (Rodgers+, 1960)      taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/216}
+     \item Catalogue of Reflection Nebulae                       (Van den Bergh, 1966) taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/21}
+     \item Lynds' Catalogue of Dark Nebulae (LDN)                (Lynds, 1962)         taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/7A}
+     \item Lynds' Catalogue of Bright Nebulae                    (Lynds, 1965)         taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/9}
+     \item Catalog of bright diffuse Galactic nebulae            (Cederblad, 1946)     taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/231}
+     \item Barnard's Catalogue of 349 Dark Objects in the Sky    (Barnard, 1927)       taken from VizieR \url{http://vizier.u-strasbg.fr/viz-bin/VizieR?-source=VII/220A}
+     \item A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, 1915) taken from NASA ADS \url{http://adsabs.harvard.edu/abs/1915MmRAS..60..175M}
+     \item On Structural Properties of Open Galactic Clusters and their Spatial Distribution. Catalog of Open Galactic Clusters (Collinder, 1931). 
+	       Taken from NASA ADS \url{http://adsabs.harvard.edu/abs/1931AnLun...2....1C}
+     \item The Collinder Catalog of Open Star Clusters. An Observer’s Checklist. Edited by Thomas Watson. 
+	       Taken from CloudyNights \url{http://www.cloudynights.com/page/articles/cat/articles/the-collinder-catalog-updated-r2467}
+	\end{enumerate}
+\item Cross-identification of objects in consolidated DSO catalog was maked with:
+	\begin{enumerate}
+    \item  SIMBAD Astronomical Database \url{http://simbad.u-strasbg.fr}
+    \item  Merged catalogue of reflection nebulae (Magakian, 2003) \url{http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=J/A+A/399/141}
+    \item  Messier  Catalogue was taken from Wikipedia (includes morphological classification and distances) \url{https://en.wikipedia.org/wiki/List_of_Messier_objects}
+    \item  Caldwell Catalogue was taken from Wikipedia (includes morphological classification and distances) \url{https://en.wikipedia.org/wiki/Caldwell_catalogue}
+	\end{enumerate}
+\item Morphological classification and magnitudes (partially) for Melotte catalogue was taken from DeepSkyPedia \url{http://deepskypedia.com/wiki/List:Melotte}
+
+\end{enumerate}
+
+
+\section{Image Credits}
+\label{sec:ack:images}
+
+% TODO: FIX SPELLINGS ETC. Placed image credits from git here. 
+All graphics are copyrighted by the Stellarium's Team (GPL) except the ones mentioned below:
+\begin{itemize}		
+\item The ``earthmap'' texture was created by NASA (Reto Stockli, NASA Earth
+	  Observatory) using data from the MODIS instrument aboard the
+	  Terra satellite (Public Domain). See section~\ref{sec:ack:credits:stockli} for details.
+\item Moon texture map was combined from maps by USGS Astrogeology Research Program,
+	  (\url{http://astrogeology.usgs.gov}; Public Domain, DFSG-free) and by Lunar
+	  surface textures from Celestia, based on Clementine data (Public Domain).
+\item Saturn map and ring textures created by Björn Jónsson:
+	  ``All the planetary maps available on these pages are publicly
+	  available. You do not need a special permission to use them but if
+	  you do then please mention their origin in your work [..]''
+\item Jupiter map created by James Hastings-Trew from Cassini data. ``The 
+	  maps are free to download and use as source material or resource
+	  in artwork or rendering (CGI or real time).''
+\item The Venus, Amalthea, Proteus, Iapetus and Phoebe maps and rings of Uranus and Neptune are from Celestia (\url{http://shatters.net/celestia/})
+	  under the GNU General Purpose License, version 2 or any later version:
+	  \begin{itemize}
+	     \item Venus is from Björn Jónsson and modified by RVS.
+	     \item Amalthea is a shaded relief map by Phil Stooke, colored by Wm. Robert Johnston 
+	       (\url{http://www.johnstonsarchive.net/spaceart/cylmaps.html}),
+	       and further modified by Jens Meyer and Grant Hutchison.
+	     \item The Proteus map is from Phil Stooke.
+	     \item Triton is probably from David Seal's site (see below), modified by Chris Laurel and Grant Hutchison.
+	     \item Iapetus and Phoebe maps are from dr. Fridger Schrempp (t00fri).
+	  \end{itemize}
+\item Mercury map is produced by NASA from Messenger data
+	  (\url{https://astrogeology.usgs.gov/search/map/Mercury/Messenger/Global/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m})
+	  and modified and colored by RVS. License: public domain.
+\item Europa, Io and Callisto maps are created by John van Vliet from PDS data and modified by RVS. License: cc-by-sa.
+\item Ganymede map is from USGS and modified by RVS. Public domain.
+\item Tethys, Dione, Rhea, Enceladus and Mimas maps are created by NASA (CICLOPS team) from Cassini data, colored by RVS. Public domain.
+\item Hyperion map created by John van Vliet from PDS data, modified by RVS. License: cc-by-sa.
+\item Triton: Image selection, radiometric calibration, geographic registration and photometric correction, and final mosaic assembly 
+	  were performed by Dr. Paul Schenk at the Lunar and Planetary Institute, Houston, Texas. Image data from Voyager 2 (NASA, JPL).
+	  Original texture has ``white spots'', which was filled by Dizel777 (\url{http://spaceengine.org/forum/19-563-25069-16-1409101585}).
+\item Pluto map is produced by NASA from New Horizons data and colored by RVS. (Courtesy NASA/Johns Hopkins University Applied Physics
+	  Laboratory/Southwest Research Institute, \url{http://photojournal.jpl.nasa.gov/catalog/PIA19858}).
+\item Charon map is produced by NASA from New Horizons data and colored by RVS. (Courtesy NASA/Johns Hopkins University Applied Physics
+	  Laboratory/Southwest Research Institute (\url{http://photojournal.jpl.nasa.gov/catalog/PIA19866}).
+\item All other planet maps from David Seal's site: \url{http://maps.jpl.nasa.gov/}; see license in section~\ref{sec:ack:credits:jpl}.
+\item The fullsky milky way panorama has been created by Axel Mellinger, University of Potsdam, Germany. 
+      Further information and more pictures available from \url{http://home.arcor-online.de/axel.mellinger/}.
+      License: permission given to ``Modify and redistribute this image if proper credit to the original image is given.''
+\item All messiers nebula pictures except those mentioned below from the
+	  Grasslands Observatory: ``Images courtesy of Tim Hunter and James McGaha, Grasslands Observatory at \url{http://www.3towers.com}.''
+	  License: permission given to ``use the image freely'' (including right to modify and redistribute) ``as long as it is credited.''
+\item M31, and the Pleiades pictures come from Herm Perez: \url{http://home.att.net/~hermperez/default.htm}
+	  License: ``Feel free to use these images, if you use them in a commercial setting please attribute the source.''
+\item Images of M8, M33, NGC253, NGC1499, NGC2244 from Jean-Pierre Bousquet
+\item Images of M1, M15, M16, M27, M42, M57, M97, NGC6946 from Stephane Dumont
+\item Images of M17, M44, NGC856, NGC884 from Maxime Spano
+\item Constellation art, GUI buttons, logo created by Johan Meuris (Jomejome) (\url{jomejome (at) users.sourceforge.net})
+	  \url{http://www.johanmeuris.eu/}.
+	  License: released under the Free Art License (\url{http://artlibre.org/licence.php/lalgb.html}).
+		 
+	  Icon created by Johan Meuris, License: Creative Commons Attribution-ShareAlike 3.0 Unported.
+\item The ``earth-clouds'' texture includes imagery owned by NASA.
+	  See NASA's Visible Earth project at \url{http://visibleearth.nasa.gov/}.
+
+	  License: \begin{enumerate}
+	                  \item The imagery is free of licensing fees
+		              \item NASA requires that they be provided a credit as the owners of the imagery.
+                \end{enumerate}
+	  The cloud texturing was taken from Celestia (GPL; \url{http://www.shatters.net/celestia/}).
+\item The folder icon derived from the Tango Desktop Project, used under the terms of the Creative Commons Attribution Share-Alike license.
+\item Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7023, NGC7317, NGC7319, NGC7320
+	  from Andrey Kuznetsov, Kepler Observatory (\url{http://kepler-observatorium.ru}). 
+	  License: Creative Commons Attribution 3.0 Unported.
+\item Images of NGC891, NGC1333, NGC2903, NGC3185, NGC3187, NGC3189, NGC3190, NGC3193, NGC3718, NGC3729, NGC4490, NGC5981, NGC5982, NGC5985, NGC7129 
+	  from Oleg Bryzgalov (\url{http://olegbr.astroclub.kiev.ua/}). License: Creative Commons Attribution 3.0 Unported.
+\item Image of solar corona from eclipse 2008-08-01 and image of $\eta$ Carinae by Georg Zotti \url{http://www.waa.at/}. License: Creative Commons Attribution 3.0 Unported.
+\item Images of IC1805, IC1848, NGC6888 from Steve Tuttle (\url{http://www.stuttle1.com/}).
+\item Images of IC4628, M20, M21, M47, NGC2467, IC2948, NGC3324, NGC3293, NGC7590, RCW158 from Trevor Gerdes (\url{http://www.sarcasmogerdes.com/}).
+\item Images of IC2118, NGC1532 from users of Ice In Space (\url{http://www.iceinspace.com.au/}).
+\item Image of IC5146 from James A Weier.
+\item Images of SMC, LMC (Magellanic Clouds) and $\rho$ Oph from Albert Van Donkelaar.
+\item Images of NGC55, NGC300, NGC1365, NGC3628, NGC4945, NGC5128, NGC6726, NGC6744, NGC6752, NGC6822, NGC7293, NGC2070
+	  from Philip Montgomery (\url{http://www.kenthurst.bigpondhosting.com/}).
+\item The Vesta and Ceres map was taken from USGS website \url{https://astrogeology.usgs.gov/} and colored by RVS. License: public domain.
+\item Images of NGC7318, NGC7331, M3, M13, M51, M63, M64, M74, M78, M81, M82, M96, M101, M105, Barnard 22, Barnard 142, Barnard 173, IC405,
+	  IC443, NGC1514, NGC1961, NGC2371, NGC2403, NGC246, NGC2841, NGC3310, NGC3938, NGC4559, NGC7008, NGC7380, NGC7479, NGC7635, Sh2-101
+	  from Peter Vasey, Plover Hill Observatory (\url{http://www.madpc.co.uk/~peterv/}).
+\item Image of IC434 from Marc Aragnou.
+\item Images of IC59, IC63, IC410, NGC2359, Sadr region from Carole Pope (\url{https://sites.google.com/site/caroleastroimaging/}).
+\item Images of NGC3690, NGC5257, NGC6050, IC883, UGC8335 and UGC9618 from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration.
+	  License: public domain; (\url{http://hubblesite.org/copyright/})
+\item Images of NGC40, NGC4631, NGC4627, NGC4656, NGC4657 from Steven Bellavia.
+\item Images of Barnard Loop, IC342 from Sun Shuwei. License: public domain.
+\item Images of M77, Sh2-264, Sh2-308 from Wang Lingyi. License: public domain.
+\item Images of IC10 from Lowell Observatory (\url{http://www2.lowell.edu/}). License: public domain.
+\item Images of IC2177, NGC6334, NGC6357, Fornax Cluster from ESO/Digitized Sky Survey 2 (\url{http://eso.org/public/}).
+	  License: Creative Commons Attribution 4.0 International. 
+\item Images of NGC3603 from ESO/La Silla Observatory (\url{http://eso.org/public/}). License: Creative Commons Attribution 4.0 International. 
+\item Images of NGC4244 from Ole Nielsen. License: Creative Commons Attribution-Share Alike 2.5 Generic. 
+\item Images of NGC7000 from NASA. License: public domain.
+\item Images of IC1396 from Giuseppe Donatiello. License: Creative Commons CC0 1.0 Universal Public Domain Dedication.
+\item Images of Sh2-155 from Hewholooks (\url{https://commons.wikimedia.org/wiki/}). License: Creative Commons Attribution-Share Alike 3.0 Unported.
+\item Images of NGC4565 from Ken Crawford (\url{http://www.imagingdeepsky.com/}).
+	  License: ``This work is free and may be used by anyone for any purpose.
+	  If you wish to use this content, you do not need to request permission
+	  as long as you follow any licensing requirements mentioned on this page.''
+\item Images of Coma Cluster from Caelum Observatory (\url{http://www.caelumobservatory.com/}). License: Creative Commons Attribution-Share Alike 3.0 Unported.
+\item Images of NGC1316 from ESO (\url{http://eso.org/public/}). License: Creative Commons Attribution 4.0 International.
+\end{itemize}
+
+
+\subsection{Full credits for ``earthmap'' texture}
+\label{sec:ack:credits:stockli}
+\begin{description}
+\item[Author:] Reto Stockli, NASA Earth Observatory,
+		\url{rstockli (at) climate.gsfc.nasa.gov}
+\item[Address of correspondence:]
+        \begin{minipage}[t]{\textwidth}
+		Reto Stockli\\
+		ETH/IAC (NFS Klima) \& NASA/GSFC Code 913 (SSAI)\\
+		University Irchel\\
+		Building 25 Room J53\\
+		Winterthurerstrasse 190\\
+		8057 Zurich, Switzerland
+		\end{minipage}
+\item[Phone:]  +41 (0)1 635 5209
+\item[Fax:]    +41 (0)1 362 5197
+\item[Email:]  \url{rstockli (at) climate.gsfc.nasa.gov}
+\item[URL:]	\url{http://earthobservatory.nasa.gov},
+	\url{http://www.iac.ethz.ch/staff/stockli}
+\item[Supervisors:]
+		Fritz Hasler and David Herring, NASA/Goddard Space Flight Center
+\item[Funding:]
+		This project was realized under the SSAI subcontract 2101-01-027 (NAS5-01070)
+\item[License:]
+		``Any and all materials published on the Earth Observatory are
+		freely available for re-publication or re-use, except where
+		copyright is indicated.''
+\end{description}
+
+\subsection{License for the JPL planets images}
+\label{sec:ack:credits:jpl}
+
+From \url{http://www.jpl.nasa.gov/images/policy/index.cfm}:
+\begin{quotation}
+    \noindent Unless otherwise noted, images and video on JPL public web sites (public
+    sites ending with a \texttt{jpl.nasa.gov} address) may be used for any purpose
+    without prior permission, subject to the special cases noted below.
+    Publishers who wish to have authorization may print this page and retain
+    it for their records; JPL does not issue image permissions on an image
+    by image basis.  By electing to download the material from this web site
+    the user agrees:
+	\begin{enumerate}
+    \item that Caltech makes no representations or warranties with respect to
+       ownership of copyrights in the images, and does not represent others
+       who may claim to be authors or owners of copyright of any of the
+       images, and makes no warranties as to the quality of the images.
+       Caltech shall not be responsible for any loss or expenses resulting
+       from the use of the images, and you release and hold Caltech harmless
+       from all liability arising from such use.
+    \item to use a credit line in connection with images. Unless otherwise
+       noted in the caption information for an image, the credit line should
+       be ``Courtesy NASA/JPL-Caltech.''
+    \item that the endorsement of any product or service by Caltech, JPL or
+       NASA must not be claimed or implied.
+    \end{enumerate}
+    Special Cases:
+	\begin{itemize}
+    \item Prior written approval must be obtained to use the NASA insignia logo
+      (the blue ``meatball'' insignia), the NASA logotype (the red ``worm''
+      logo) and the NASA seal. These images may not be used by persons who
+      are not NASA employees or on products (including Web pages) that are
+      not NASA sponsored. In addition, no image may be used to explicitly
+      or implicitly suggest endorsement by NASA, JPL or Caltech of
+      commercial goods or services. Requests to use NASA logos may be
+      directed to Bert Ulrich, Public Services Division, NASA Headquarters,
+      Code POS, Washington, DC 20546, telephone (202) 358-1713, fax (202)
+      358-4331, email \url{bert.ulrich (at) hq.nasa.gov}.
+    \item Prior written approval must be obtained to use the JPL logo (stylized
+      JPL letters in red or other colors). Requests to use the JPL logo may
+      be directed to the Television/Imaging Team Leader, Media Relations
+      Office, Mail Stop 186-120, Jet Propulsion Laboratory, Pasadena CA
+      91109, telephone (818) 354-5011, fax (818) 354-4537.
+    \item If an image includes an identifiable person, using the image for
+      commercial purposes may infringe that person's right of privacy or
+      publicity, and permission should be obtained from the person. NASA
+      and JPL generally do not permit likenesses of current employees to
+      appear on commercial products. For more information, consult the NASA
+      and JPL points of contact listed above.
+    \item JPL/Caltech contractors and vendors who wish to use JPL images in
+      advertising or public relation materials should direct requests to the
+      Television/Imaging Team Leader, Media Relations Office, Mail Stop
+      186-120, Jet Propulsion Laboratory, Pasadena CA 91109, telephone
+      (818) 354-5011, fax (818) 354-4537.
+    \item Some image and video materials on JPL public web sites are owned by
+      organizations other than JPL or NASA. These owners have agreed to
+      make their images and video available for journalistic, educational
+      and personal uses, but restrictions are placed on commercial uses.
+      To obtain permission for commercial use, contact the copyright owner
+      listed in each image caption.  Ownership of images and video by
+      parties other than JPL and NASA is noted in the caption material
+      with each image.
+	\end{itemize}
+\end{quotation}
+
+\subsection{DSS}
+\label{sec:ack:credits:dss}
+
+From \url{http://archive.stsci.edu/dss/acknowledging.html}: %, as of 2018-02-06.
+\begin{quotation}
+\noindent The Digitized Sky Surveys were produced at the Space Telescope Science Institute under U.S. Government grant NAG W-2166. 
+The images of these surveys are based on photographic data obtained using the Oschin Schmidt Telescope on Palomar Mountain and the UK Schmidt Telescope. 
+The plates were processed into the present compressed digital form with the permission of these institutions.
+
+The National Geographic Society - Palomar Observatory Sky Atlas (POSS-I) was made by the 
+California Institute of Technology with grants from the National Geographic Society.
+
+The Second Palomar Observatory Sky Survey (POSS-II) was made by the California Institute of Technology with 
+funds from the National Science Foundation, the National Geographic Society, the Sloan Foundation, 
+the Samuel Oschin Foundation, and the Eastman Kodak Corporation.
+
+The Oschin Schmidt Telescope is operated by the California Institute of Technology and Palomar Observatory.
+
+The UK Schmidt Telescope was operated by the Royal Observatory Edinburgh, with funding from the 
+UK Science and Engineering Research Council (later the UK Particle Physics and Astronomy Research Council), 
+until 1988 June, and thereafter by the Anglo-Australian Observatory. 
+The blue plates of the southern Sky Atlas and its Equatorial Extension (together known as the SERC-J), 
+as well as the Equatorial Red (ER), and the Second Epoch [red] Survey (SES) were all taken with the UK Schmidt.
+
+All data are subject to the copyright given in the copyright summary. 
+Copyright information specific to individual plates is provided in the downloaded FITS headers.
+
+Supplemental funding for sky-survey work at the ST ScI is provided by the European Southern Observatory. 
+\end{quotation}
 
 
 %%% Local Variables: 

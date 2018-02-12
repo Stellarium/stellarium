@@ -60,14 +60,9 @@ revolving about their combined center of gravity.
 \section{Planetary Positions}
 \label{sec:Accuracy:Planets}
 
-Stellarium uses the VSOP87 theory~\cite{1988A&A...202..309B}\footnote{\url{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}}
+Stellarium uses the VSOP87 theory~\citep{1988A&A...202..309B} %\footnote{\url{http://vizier.cfa.harvard.edu/viz-bin/ftp-index?/ftp/cats/VI/81}}
 to calculate the positions of the planets over time.
-
-%As with other methods, the accuracy of the calculations vary according
-%to the planet and the time for which one makes the calculation. Reasons
-%for these inaccuracies include the fact that the motion of the planet
-%isn't as predictable as Newtonian mechanics would have us believe.
-VSOP87 is an analytical ephemeris modeled to match the numerical
+This is an analytical ephemeris modeled to match the numerical
 integration run DE200 from NASA JPL, which by itself gives positions for 1850\ldots2050. 
 Its use is recommended for the years -4000\ldots+8000. You can observe the sun leaving the ``ecliptic
 of date'' and running on the ``ecliptic J2000'' outside this date
@@ -80,8 +75,8 @@ The optionally usable JPL DE431 delivers planet positions strictly for
 Outside of this range, positions from VSOP87 will be shown again.
 
 As far as Stellarium is concerned, the user should bear in mind the
-limits of the VSOP87 and other models (Table~ref{tab:Accuracy:Planets}).
-Accuracy values for VSOP87 are heliocentric as given in \cite{1988A&A...202..309B}.
+limits of the VSOP87 and other models (Table~\ref{tab:Accuracy:Planets}).
+Accuracy values for VSOP87 are heliocentric as given by \citet{1988A&A...202..309B}.
 
 \begin{table}[tb]
 \begin{tabularx}{\textwidth}{X|l|X}
@@ -126,7 +121,7 @@ orbital changes of minor bodies passing major planets.
 
 Since v0.14.0, Stellarium computes the orientation of earth's axis
 according to the IAU2006 Precession in a long-time variant developed
-by Vondr\'ak et al.~\cite{2011AA:Vondrak}, and IAU2000B Nutation~\cite{Nutation:IAU2000B}.
+by \citet{2011AA:Vondrak}, and IAU2000B Nutation~\citep{Nutation:IAU2000B}.
 This also now allows proper depiction of the changes in ecliptic obliquity
 and display of ``instantaneous precession circles'' around the
 ecliptic poles. These circles are indeed varying according to

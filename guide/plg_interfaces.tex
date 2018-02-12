@@ -239,7 +239,7 @@ current\_coordinate\_system & string & Specifies the coordinate system. \textit{
 									   \keymap{AltAzi}, \keymap{Galactic}. 
 									   \textit{Default value}: \keymap{RaDecJ2000}. \\%\midrule
 flag\_show\_constellation  & bool    & Add the 3-letter IAU\index{IAU} abbreviation for the constellation of the 
-                                       mouse pointer location \cite{1987PASP...99..695R}.\\%\midrule
+                                       mouse pointer location \citep{1987PASP...99..695R}.\\%\midrule
 flag\_show\_crossed\_lines & bool    & Show crossed lines under mouse cursor.\\\bottomrule
 \end{longtable}
 
@@ -404,13 +404,14 @@ interface using a standard web browser like Firefox or Chrome, instead of using
 the main GUI. This works on the same computer Stellarium runs as well as over 
 the network. Even more, multiple ``remote controls'' can access the same 
 Stellarium instance at the same time, without getting in the way of each other. 
-Much of the functionality the main interface provides is already available 
-through it, and it is still getting extended.
+Apart from system configuration options, most of the functionality the main interface 
+provides is available through it \citep{Zotti-etal:SEAC2016}. 
 
-The plugin may be useful for presentation scenarios, hiding the GUI from the 
+The plugin may be most useful for presentation scenarios, hiding the GUI from the 
 audience and allowing the presenter to change settings on a separate monitor 
 without showing distracting dialog windows. It also allows to start and stop 
-scripts remotely. Because the web interface can be customized (or completely 
+scripts remotely. 
+Because the web interface can be customized (or completely 
 replaced) with some knowledge of HTML, CSS and JavaScript, another possibility 
 is a kiosk mode, where untrusted users can execute a variety of predefined 
 actions (like starting recorded tours) without having access to all Stellarium 
@@ -546,7 +547,7 @@ A custom TCP protocol is used for the connection. The port used by the server is
 configurable, and the clients must know the IP address or host name and the port
 of the server.
 
-\begin{figure}[h]
+\begin{figure}[htb]
 	\centering\includegraphics[width=\columnwidth]{remotesync_settings.png}
 	\caption{RemoteSync settings window}
 	\label{fig:plugins:RemoteSync:settings}
@@ -595,7 +596,7 @@ operating systems can be found at \url{http://www.pool.ntp.org/en/use.html}.}
 If all your Stellarium instances run on the same device, this is of course not 
 necessary.
 
-\begin{figure}[h]
+\begin{figure}[ht]
 	\centering\includegraphics[width=\columnwidth]{remotesync_client.png}
 	\caption{RemoteSync client settings window}
 	\label{fig:plugins:RemoteSync:client}

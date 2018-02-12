@@ -111,7 +111,7 @@ larger catalogues of fainter stars providing less data per star than the
 brighter star catalogues. See tables \emph{Stellarium's star catalogue}
 and for details.
 
-Stellarium's star catalogues based on Hipparcos~\cite{1997ESASP1200.....E, 2012AstL...38..331A}, Tycho 2~\cite{2000A&A...355L..27H} and NOMAD~\cite{2004AAS...205.4815Z} catalogues.
+Stellarium's star catalogues are based on Hipparcos~\citep{1997ESASP1200.....E, 2012AstL...38..331A}, Tycho 2~\citep{2000A&A...355L..27H} and NOMAD~\citep{2004AAS...205.4815Z} catalogues.
 
 \subsection{File Sections}%\label{file-sections}
 \label{sec:Catalogues:stars:sections}
@@ -270,8 +270,8 @@ mag  & 43 bits & unsigned int &  5 bits & magnitude level in the V-I colour. Thi
 Since version 0.12.2 Stellarium supports the subset of variable stars
 from GCVS\footnote{\url{http://www.sai.msu.su/gcvs/gcvs/}} which have  HIP
 identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
-of Variable Stars is based on the
-\textbf{General Catalogue of Variable Stars} \cite{samus}.
+of Variable Stars is based on the \citetp{samus}.
+%\textbf{General Catalogue of Variable Stars} 
 
 \subsection{Variable Star Catalog File Format}
 \label{sec:StarCatalogues:VariableStars:format}
@@ -316,7 +316,7 @@ Spectrum & string & Spectral class of the variable star.\\\bottomrule
 \subsection{GCVS Variability Types}\label{gcvs-variability-types}
 
 An improved system of variability classification is used in the fourth
-edition of the GCVS%~\cite{GCVS4}, %%%%%%%%% TODO: ADD REFERENCE
+edition of the GCVS%~\citep{GCVS4}, %%%%%%%%% TODO: ADD REFERENCE
 , based on recent developments in classification
 principles and taking into account the suggestions of a number of
 specialists. Variability types are grouped according to the major
@@ -1162,11 +1162,10 @@ symbols that need to be explained will be found in the Type data field:
 Since version 0.15.0 Stellarium supports the subset of double stars
 from WDS\footnote{\url{http://ad.usno.navy.mil/wds/}} which have HIP
 identificators (i.e., stars from the Hipparcos catalog). Stellarium's Catalog
-of Double Stars is based on the
-\emph{Washington Double Star Catalog} \cite{2001AJ....122.3466M}. 
+of Double Stars is based on the \citetp{2001AJ....122.3466M}. %\emph{Washington Double Star Catalog} 
 Cross reference data for WDS and HIP designations is based on the 
-XHIP catalog \cite{2012AstL...38..331A} through the astronomical 
-database SIMBAD  \cite{2000A&AS..143....9W}.
+XHIP catalog \citep{2012AstL...38..331A} through the astronomical 
+database SIMBAD  \citep{2000A&AS..143....9W}.
 
 \subsection{Double Star Catalog File Format}
 \label{sec:StarCatalogues:DoubleStars:format}
@@ -1201,10 +1200,11 @@ Separation 		& float  & Separation at date of last satisfactory observation (in 
 \label{sec:StarCatalogues:CrossIdentificationData}
 
 Since version 0.14.0 Stellarium supports cross-identification between stars from 
-Hipparcos (HIP)~\cite{2012AstL...38..331A}, 
-Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0 (SAO), 
-Henry Draper Catalogue and Extension (HD)~\cite{1993yCat.3135....0C} and 
-$5^{th}$ Revised Ed. of Bright Star Catalog (Hoffleit+, 1991; HR)~\cite{1964cbs..book.....H} catalogues.
+Hipparcos (HIP)~\citep{2012AstL...38..331A}, 
+Smithsonian Astrophysical Observatory (SAO) Star Catalog J2000.0, %% TODO: ADD CITATION! (SAO), 
+Henry Draper Catalogue and Extension (HD)~\citep{1993yCat.3135....0C} and 
+\citetp{1964cbs..book.....H}  (BSC5 or HR) % $5^{th}$ Revised Ed. of Bright Star Catalog (Hoffleit+, 1991; HR)
+catalogues.
 
 \subsection{Cross-Identification Catalog File Format}
 \label{sec:StarCatalogues:CrossIdentificationData:format}
