@@ -513,6 +513,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 		category->addItem(q_("A catalogue of Galactic supernova remnants"), "119");
 	if (catalogFilters & Nebula::CatACO)
 		category->addItem(q_("A Catalog of Rich Clusters of Galaxies"), "120");
+	if (catalogFilters & Nebula::CatHCG)
+		category->addItem(q_("Hickson Compact Group"), "121");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");

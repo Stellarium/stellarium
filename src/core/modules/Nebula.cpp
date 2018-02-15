@@ -121,6 +121,7 @@ Nebula::Nebula()
 	, PNG_nb("")
 	, SNRG_nb("")
 	, ACO_nb("")
+	, HCG_nb("")
 	, withoutID(false)
 	, nameI18("")
 	, mTypeString()
@@ -208,6 +209,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("SNR G%1").arg(SNRG_nb);
 		if (!ACO_nb.isEmpty())
 			catIds << QString("ACO %1").arg(ACO_nb);
+		if (!HCG_nb.isEmpty())
+			catIds << QString("HCG %1").arg(HCG_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -983,6 +986,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("SNR G%1").arg(SNRG_nb);
 	else if (catalogFilters&CatACO && !ACO_nb.isEmpty())
 		str = QString("ACO %1").arg(ACO_nb);
+	else if (catalogFilters&CatHCG && !HCG_nb.isEmpty())
+		str = QString("HCG %1").arg(HCG_nb);
 
 	return str;
 }
@@ -995,10 +1000,11 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
+		>> HCG_nb;
 
 	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb;
-	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty())
+	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty())
 		withoutID = true;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
@@ -1144,6 +1150,8 @@ bool Nebula::objectInDisplayedCatalog() const
 	else if ((catalogFilters&CatSNRG) && !(SNRG_nb.isEmpty()))
 		r = true;
 	else if ((catalogFilters&CatACO) && (!ACO_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&CatHCG) && (!HCG_nb.isEmpty()))
 		r = true;
 
 	// Special case: objects without ID from current catalogs

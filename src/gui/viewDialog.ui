@@ -1478,6 +1478,32 @@
              <property name="spacing">
               <number>6</number>
              </property>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxNGC">
+               <property name="toolTip">
+                <string>New General Catalogue of Nebulae and Clusters of Stars</string>
+               </property>
+               <property name="text">
+                <string notr="true">NGC</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QCheckBox" name="checkBoxArp">
+               <property name="toolTip">
+                <string>Atlas of Peculiar Galaxies (Arp, 1966)</string>
+               </property>
+               <property name="text">
+                <string notr="true">Arp</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
              <item row="1" column="2">
               <widget class="QCheckBox" name="checkBoxRCW">
                <property name="toolTip">
@@ -1498,19 +1524,6 @@
                </property>
                <property name="text">
                 <string notr="true">PGC</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxNGC">
-               <property name="toolTip">
-                <string>New General Catalogue of Nebulae and Clusters of Stars</string>
-               </property>
-               <property name="text">
-                <string notr="true">NGC</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1550,6 +1563,19 @@
                </property>
                <property name="text">
                 <string notr="true">LBN</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxM">
+               <property name="toolTip">
+                <string>Messier Catalogue</string>
+               </property>
+               <property name="text">
+                <string notr="true">M</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1660,19 +1686,6 @@
                </attribute>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxM">
-               <property name="toolTip">
-                <string>Messier Catalogue</string>
-               </property>
-               <property name="text">
-                <string notr="true">M</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
-               </attribute>
-              </widget>
-             </item>
              <item row="1" column="4">
               <widget class="QCheckBox" name="checkBoxUGC">
                <property name="toolTip">
@@ -1693,19 +1706,6 @@
                </property>
                <property name="text">
                 <string notr="true">B</string>
-               </property>
-               <attribute name="buttonGroup">
-                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
-               </attribute>
-              </widget>
-             </item>
-             <item row="0" column="5">
-              <widget class="QCheckBox" name="checkBoxArp">
-               <property name="toolTip">
-                <string>Atlas of Peculiar Galaxies (Arp, 1966)</string>
-               </property>
-               <property name="text">
-                <string notr="true">Arp</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -1745,6 +1745,19 @@
                </property>
                <property name="text">
                 <string notr="true">ACO</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="0" column="7">
+              <widget class="QCheckBox" name="checkBoxHCG">
+               <property name="toolTip">
+                <string>Hickson Compact Group (Hickson+, 1982)</string>
+               </property>
+               <property name="text">
+                <string>HCG</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
@@ -3901,12 +3914,12 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>

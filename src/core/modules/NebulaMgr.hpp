@@ -962,6 +962,7 @@ private:
 	NebulaP searchPNG(QString PNG);
 	NebulaP searchSNRG(QString SNRG);
 	NebulaP searchACO(QString ACO);
+	NebulaP searchHCG(QString HCG);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

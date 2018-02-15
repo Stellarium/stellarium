@@ -407,6 +407,8 @@ class Translations
 		N_("A catalogue of Galactic supernova remnants");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("A Catalog of Rich Clusters of Galaxies");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Hickson Compact Group");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
