@@ -138,7 +138,9 @@ private slots:
 	void askAsterismLinesColor();
 	void askRayHelpersColor();
 	// nomenclature color
-	void askPlanetNomenclatureColor();
+	void askPlanetNomenclatureColor();	
+	void askPlanetLabelsColor();
+	void askPlanetTrailsColor();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

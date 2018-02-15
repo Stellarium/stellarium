@@ -227,6 +227,13 @@ void ViewDialog::createDialogContent()
 	connectCheckBox(ui->planetNomenclatureCheckBox, "actionShow_Planets_Nomenclature");
 	colorButton(ui->planetNomenclatureColor, "NomenclatureMgr.nomenclatureColor");
 	connect(ui->planetNomenclatureColor, SIGNAL(released()), this, SLOT(askPlanetNomenclatureColor()));
+	colorButton(ui->planetLabelColor, "SolarSystem.labelsColor");
+	connect(ui->planetLabelColor, SIGNAL(released()), this, SLOT(askPlanetLabelsColor()));
+	colorButton(ui->planetTrailsColor, "SolarSystem.trailsColor");
+	connect(ui->planetTrailsColor, SIGNAL(released()), this, SLOT(askPlanetTrailsColor()));
+	connectBoolProperty(ui->planetTrailsCheckBox, "SolarSystem.trailsDisplayed");
+	ui->planetIsolatedTrailsCheckBox->setEnabled(ssmgr->getFlagIsolatedTrails());
+	connect(ssmgr,SIGNAL(flagIsolatedTrailsChanged(bool)),ui->planetIsolatedTrailsCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
 
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
@@ -1061,6 +1068,36 @@ void ViewDialog::askPlanetNomenclatureColor()
 		StelApp::getInstance().getModule("NomenclatureMgr")->setProperty("nomenclatureColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/planet_nomenclature_color", StelUtils::vec3fToStr(vColor));
 		ui->planetNomenclatureColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askPlanetLabelsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.labelsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->planetLabelColor->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("labelsColor", QVariant::fromValue(vColor));
+		StelApp::getInstance().getSettings()->setValue("color/planet_names_color", StelUtils::vec3fToStr(vColor));
+		ui->planetLabelColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ViewDialog::askPlanetTrailsColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.trailsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->planetTrailsColor->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("trailsColor", QVariant::fromValue(vColor));
+		StelApp::getInstance().getSettings()->setValue("color/object_trails_color", StelUtils::vec3fToStr(vColor));
+		ui->planetTrailsColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 
