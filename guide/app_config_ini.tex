@@ -702,7 +702,8 @@ relative\_scale          & float       & relative size of bright and faint stars
 absolute\_scale          & float       & Changes how large stars are rendered. larger value lead to larger depiction. Typical value: \emph{1.0}\\%\midrule
 star\_twinkle\_amount    & float       & amount of twinkling. Typical value: \emph{0.3}\\%\midrule
 flag\_star\_twinkle      & bool        & \emph{true} to allow twinkling (but only when atmosphere is active!).\\%\midrule
-flag\_forced\_twinkle    & bool        & \emph{true} to allow twinkling stars without atmosphere also.\\%\midrule
+flag\_forced\_twinkle    & bool        & \emph{true} to allow twinkling stars even without atmosphere. This is obvious nonsense and contrary to nature, but some users seem to like it.\\%\midrule
+flag\_star\_halo         & bool        & \emph{false} to not draw a halo around the brightest stars. This looks poor, but some users seem to prefer it.\\%\midrule
 mag\_converter\_max\_fov & float       & maximum field of view for which the magnitude conversion routine is used. Typical value: \emph{90.0}.\\%\midrule
 mag\_converter\_min\_fov & float       & minimum field of view for which the magnitude conversion routine is used. Typical value: \emph{0.001}.\\%\midrule
 labels\_amount           & float       & amount of labels. Typical value: \emph{3.0}\\%\midrule
