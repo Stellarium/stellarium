@@ -176,15 +176,24 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
-	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");	// Load circle texture
-	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");	// Load ellipse texture
-	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");	// Load open cluster marker texture
-	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");	// Load globular cluster marker texture
-	Nebula::texPlanetaryNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");	// Load planetary nebula marker texture
-	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif.png");	// Load diffuse nebula marker texture
-	Nebula::texDarkNebula			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_drk.png");	// Load dark nebula marker texture
-	Nebula::texOpenClusterWithNebulosity	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");	// Load Ocl/Nebula marker texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");   // Load pointer texture
+	// Load circle texture
+	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");
+	// Load ellipse texture
+	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");
+	// Load open cluster marker texture
+	Nebula::texOpenCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");
+	// Load globular cluster marker texture
+	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");
+	// Load planetary nebula marker texture
+	Nebula::texPlanetaryNebula	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");
+	// Load diffuse nebula marker texture
+	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif.png");
+	// Load dark nebula marker texture
+	Nebula::texDarkNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_drk.png");
+	// Load Ocl/Nebula marker texture
+	Nebula::texOpenClusterWithNebulosity = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");
+	// Load pointer texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
@@ -1047,7 +1056,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 	int currentLineNumber = 0;	// what input line we are on
 	int currentRecordNumber = 0;	// what record number we are on
-	int readOk = 0;			// how many records weree rad without problems
+	int readOk = 0;				// how many records weree rad without problems
 	while (!dsoIn.atEnd())
 	{
 		record = QString::fromUtf8(dsoIn.readLine());
@@ -1067,22 +1076,22 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 		{
 			QStringList list=record.split("\t", QString::KeepEmptyParts);
 
-			id			= list.at(0).toInt();	 // ID (inner identification number)
+			id			= list.at(0).toInt();		// ID (inner identification number)
 			ra			= list.at(1).trimmed();
 			dec			= list.at(2).trimmed();
-			bMag			= list.at(3).toFloat();  // B magnitude
-			vMag			= list.at(4).toFloat();	 // V magnitude
-			oType			= list.at(5).trimmed();  // Object type
-			mType			= list.at(6).trimmed();  // Morphological type of object
-			majorAxisSize		= list.at(7).toFloat();  // major axis size (arcmin)
-			minorAxisSize		= list.at(8).toFloat();	 // minor axis size (arcmin)
-			orientationAngle	= list.at(9).toInt();	 // orientation angle (degrees)
-			z			= list.at(10).toFloat(); // redshift
-			zErr			= list.at(11).toFloat(); // error of redshift
-			plx			= list.at(12).toFloat(); // parallax (mas)
-			plxErr			= list.at(13).toFloat(); // error of parallax (mas)
-			dist			= list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
-			distErr			= list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
+			bMag		= list.at(3).toFloat();		// B magnitude
+			vMag			= list.at(4).toFloat();		// V magnitude
+			oType		= list.at(5).trimmed();	// Object type
+			mType		= list.at(6).trimmed();	// Morphological type of object
+			majorAxisSize	= list.at(7).toFloat();		// major axis size (arcmin)
+			minorAxisSize	= list.at(8).toFloat();		// minor axis size (arcmin)
+			orientationAngle	= list.at(9).toInt();		// orientation angle (degrees)
+			z			= list.at(10).toFloat();	// redshift
+			zErr			= list.at(11).toFloat();	// error of redshift
+			plx			= list.at(12).toFloat();	// parallax (mas)
+			plxErr		= list.at(13).toFloat();	// error of parallax (mas)
+			dist			= list.at(14).toFloat();	// distance (Mpc for galaxies, kpc for other objects)
+			distErr		= list.at(15).toFloat();	// distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
 			// cross-identification data
 			// -----------------------------------------------
