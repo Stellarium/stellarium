@@ -616,7 +616,7 @@ void ConfigurationDialog::saveAllSettings()
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale",			propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toFloat());
 	conf->setValue("stars/relative_scale",			propMgr->getStelPropertyValue("StelSkyDrawer.relativeStarScale").toFloat());
-	conf->setValue("stars/flag_star_twinkle",		propMgr->getStelPropertyValue("StelSkyDrawer.flagTwinkle").toFloat());
+	conf->setValue("stars/flag_star_twinkle",		propMgr->getStelPropertyValue("StelSkyDrawer.flagStarTwinkle").toFloat());
 	conf->setValue("stars/star_twinkle_amount",		propMgr->getStelPropertyValue("StelSkyDrawer.twinkleAmount").toFloat());
 	conf->setValue("astro/flag_star_magnitude_limit",	propMgr->getStelPropertyValue("StelSkyDrawer.flagStarMagnitudeLimit").toBool());
 	conf->setValue("astro/star_magnitude_limit",		propMgr->getStelPropertyValue("StelSkyDrawer.customStarMagLimit").toFloat());
