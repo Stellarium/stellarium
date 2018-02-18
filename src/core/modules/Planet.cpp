@@ -279,19 +279,19 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		pTypeMap.clear();
 	}
-	pTypeMap.insert(Planet::isStar,		"star");
-	pTypeMap.insert(Planet::isPlanet,	"planet");
-	pTypeMap.insert(Planet::isMoon,		"moon");
-	pTypeMap.insert(Planet::isObserver,	"observer");
-	pTypeMap.insert(Planet::isArtificial,	"artificial");
-	pTypeMap.insert(Planet::isAsteroid,	"asteroid");
-	pTypeMap.insert(Planet::isPlutino,	"plutino");
-	pTypeMap.insert(Planet::isComet,	"comet");
+	pTypeMap.insert(Planet::isStar,			"star");
+	pTypeMap.insert(Planet::isPlanet,		"planet");
+	pTypeMap.insert(Planet::isMoon,			"moon");
+	pTypeMap.insert(Planet::isObserver,		"observer");
+	pTypeMap.insert(Planet::isArtificial,		"artificial");
+	pTypeMap.insert(Planet::isAsteroid,		"asteroid");
+	pTypeMap.insert(Planet::isPlutino,		"plutino");
+	pTypeMap.insert(Planet::isComet,		"comet");
 	pTypeMap.insert(Planet::isDwarfPlanet,	"dwarf planet");
-	pTypeMap.insert(Planet::isCubewano,	"cubewano");
-	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
-	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
-	pTypeMap.insert(Planet::isSednoid,	"sednoid");
+	pTypeMap.insert(Planet::isCubewano,		"cubewano");
+	pTypeMap.insert(Planet::isSDO,			"scattered disc object");
+	pTypeMap.insert(Planet::isOCO,			"Oort cloud object");
+	pTypeMap.insert(Planet::isSednoid,		"sednoid");
 	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
 
 	if (vMagAlgorithmMap.count() > 0)
@@ -301,10 +301,10 @@ void Planet::init()
 	}
 	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_2013,	"ExpSup2013");
 	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_1992,	"ExpSup1992");
-	vMagAlgorithmMap.insert(Planet::Mueller_1893,	"Mueller1893"); // better name	
+	vMagAlgorithmMap.insert(Planet::Mueller_1893,				"Mueller1893"); // better name
 	vMagAlgorithmMap.insert(Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"); // consistent name
-	vMagAlgorithmMap.insert(Planet::Generic,	"Generic"),	
-	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
+	vMagAlgorithmMap.insert(Planet::Generic,					"Generic"),
+	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm,			"");
 }
 
 Planet::~Planet()
@@ -580,7 +580,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 
-			if (qAbs(siderealDay)>0)
+			if (qAbs(siderealDay)>0 && getPlanetType()!=isArtificial)
 			{
 				oss << QString("%1: %2").arg(q_("Sidereal day"), StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br />";
 				oss << QString("%1: %2").arg(q_("Mean solar day"), StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br />";

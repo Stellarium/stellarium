@@ -72,6 +72,10 @@ class Translations
 		N_("Oort cloud object");
 		// TRANSLATORS: Type of object
 		N_("sednoid");
+		// TRANSLATORS: Type of object
+		N_("observer");
+		// TRANSLATORS: Type of object
+		N_("artificial");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
