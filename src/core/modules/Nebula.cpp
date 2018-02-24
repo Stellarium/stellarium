@@ -473,22 +473,23 @@ double Nebula::getAngularSize(const StelCore *) const
 
 float Nebula::getSelectPriority(const StelCore* core) const
 {
+	float selectPriority = StelObject::getSelectPriority(core);
 	const NebulaMgr* nebMgr = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"));
 	// minimize unwanted selection of the deep-sky objects
 	if (!nebMgr->getFlagHints())
-		return StelObject::getSelectPriority(core)+3.f;
+		return selectPriority+3.f;
 
 	float lim, mag;
 	lim = mag = getVMagnitude(core);
 	float mLim = 15.0f;
 
 	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
-		return StelObject::getSelectPriority(core)+mLim;
+		return selectPriority+mLim;
 
 	const StelSkyDrawer* drawer = core->getSkyDrawer();
 
 	if (drawer->getFlagNebulaMagnitudeLimit() && (mag>drawer->getCustomNebulaMagnitudeLimit()))
-		return StelObject::getSelectPriority(core)+mLim;
+		return selectPriority+mLim;
 	
 	const float maxMagHint = nebMgr->computeMaxMagHint(drawer);
 	// make very easy to select if labeled	
@@ -503,11 +504,12 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
-	if (std::min(mLim, lim)<maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
-		return -10.f;
+	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
+		selectPriority = -10.f;
 	else
-		return StelObject::getSelectPriority(core)-2.f;
+		selectPriority -= 5.f;
 
+	return selectPriority;
 }
 
 Vec3f Nebula::getInfoColor(void) const
