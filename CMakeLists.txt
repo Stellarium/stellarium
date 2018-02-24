@@ -438,7 +438,7 @@ ENDIF()
 
 
 # Tell CMake to run moc when necessary:
-set(CMAKE_AUTOMOC ON)
+SET(CMAKE_AUTOMOC ON)
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:
 SET(CMAKE_INCLUDE_CURRENT_DIR ON)
 

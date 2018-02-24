@@ -1,7 +1,3 @@
-set(CMAKE_INCLUDE_CURRENT_DIR ON)
-set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTORCC ON)
-
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 
 add_subdirectory(common)
@@ -11,13 +7,16 @@ add_subdirectory(NexStar)
 add_subdirectory(Rts2)
 add_subdirectory(INDI)
 
+SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
+QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
+
 ADD_LIBRARY(TelescopeControl-static STATIC
     TelescopeControlGlobals.hpp
     TelescopeControl.hpp
     TelescopeControl.cpp
     TelescopeClient.hpp
     TelescopeClient.cpp
-    ../resources/TelescopeControl.qrc
+    ${TelescopeControl_RES_CXX}
     )
 
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES OUTPUT_NAME "TelescopeControl")
