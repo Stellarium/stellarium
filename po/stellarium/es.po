@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-15 21:27+0700\n"
+"POT-Creation-Date: 2018-02-18 16:26+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Víctor <vegadark@protonmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/stellarium/teams/80998/es/)\n"
@@ -55,8 +55,8 @@ msgstr "asterismo"
 #: src/core/modules/ConstellationMgr.cpp:143 src/core/modules/StarMgr.cpp:453
 #: src/core/modules/GridLinesMgr.cpp:1226
 #: src/core/modules/LandscapeMgr.cpp:463
-#: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:412
-#: src/core/modules/NebulaMgr.cpp:413 src/core/modules/SolarSystem.cpp:235
+#: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:421
+#: src/core/modules/NebulaMgr.cpp:422 src/core/modules/SolarSystem.cpp:235
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:558
 #: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
@@ -1713,11 +1713,11 @@ msgstr "objeto de naturaleza desconocida"
 msgid "undocumented type"
 msgstr "tipo sin documentar"
 
-#: src/core/modules/NebulaMgr.cpp:412
+#: src/core/modules/NebulaMgr.cpp:421
 msgid "Deep-sky objects"
 msgstr "Objetos de Espacio profundo"
 
-#: src/core/modules/NebulaMgr.cpp:413
+#: src/core/modules/NebulaMgr.cpp:422
 msgid "Toggle DSO type filter"
 msgstr "Conmutar tipo de filtro para OEP"
 
@@ -1930,7 +1930,7 @@ msgstr "Longitud de la estela de gas (estimación)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:236 src/gui/AstroCalcDialog.cpp:1620
-#: src/gui/AstroCalcDialog.cpp:3508 src/translations.h:76
+#: src/gui/AstroCalcDialog.cpp:3508 src/translations.h:80
 msgid "Planets"
 msgstr "Planetas"
 
@@ -4250,256 +4250,256 @@ msgid "Galaxies"
 msgstr "Galaxias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:442 src/translations.h:325
+#: src/gui/AstroCalcDialog.cpp:442 src/translations.h:329
 #: src/ui_viewDialog.h:2689 src/ui_dsoColorsDialog.h:595
 msgid "Active galaxies"
 msgstr "Galaxias activas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:443 src/translations.h:327
+#: src/gui/AstroCalcDialog.cpp:443 src/translations.h:331
 #: src/ui_dsoColorsDialog.h:561
 msgid "Radio galaxies"
 msgstr "Radio galaxias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:444 src/translations.h:329
+#: src/gui/AstroCalcDialog.cpp:444 src/translations.h:333
 #: src/ui_viewDialog.h:2686 src/ui_dsoColorsDialog.h:571
 msgid "Interacting galaxies"
 msgstr "Galaxias interactoras"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:445 src/translations.h:331
+#: src/gui/AstroCalcDialog.cpp:445 src/translations.h:335
 msgid "Bright quasars"
 msgstr "Quásares brillantes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:446 src/gui/AstroCalcDialog.cpp:3513
-#: src/translations.h:333 src/ui_viewDialog.h:2693
+#: src/translations.h:337 src/ui_viewDialog.h:2693
 #: src/ui_dsoColorsDialog.h:625
 msgid "Star clusters"
 msgstr "Cúmulos de estrellas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:447 src/translations.h:309
+#: src/gui/AstroCalcDialog.cpp:447 src/translations.h:313
 #: src/ui_dsoColorsDialog.h:542
 msgid "Open star clusters"
 msgstr "Cúmulos estelares abiertos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:448 src/translations.h:311
+#: src/gui/AstroCalcDialog.cpp:448 src/translations.h:315
 #: src/ui_dsoColorsDialog.h:669
 msgid "Globular star clusters"
 msgstr "Cúmulos estelares globulares"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:449 src/translations.h:335
+#: src/gui/AstroCalcDialog.cpp:449 src/translations.h:339
 #: src/ui_dsoColorsDialog.h:547
 msgid "Stellar associations"
 msgstr "Asociaciones estelares"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:450 src/translations.h:337
+#: src/gui/AstroCalcDialog.cpp:450 src/translations.h:341
 #: src/ui_dsoColorsDialog.h:679
 msgid "Star clouds"
 msgstr "Nubes de estrellas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:451 src/translations.h:313
+#: src/gui/AstroCalcDialog.cpp:451 src/translations.h:317
 #: src/ui_dsoColorsDialog.h:659
 msgid "Nebulae"
 msgstr "Nebulosas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:452 src/gui/AstroCalcDialog.cpp:1633
-#: src/gui/AstroCalcDialog.cpp:3522 src/translations.h:315
+#: src/gui/AstroCalcDialog.cpp:3522 src/translations.h:319
 #: src/ui_viewDialog.h:2687 src/ui_dsoColorsDialog.h:678
 msgid "Planetary nebulae"
 msgstr "Nebulosas planetarias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:453 src/gui/AstroCalcDialog.cpp:1635
-#: src/gui/AstroCalcDialog.cpp:3511 src/translations.h:317
+#: src/gui/AstroCalcDialog.cpp:3511 src/translations.h:321
 #: src/ui_viewDialog.h:2690 src/ui_dsoColorsDialog.h:612
 msgid "Dark nebulae"
 msgstr "Nebulosas obscuras"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:454 src/translations.h:323
+#: src/gui/AstroCalcDialog.cpp:454 src/translations.h:327
 #: src/ui_dsoColorsDialog.h:629
 msgid "Reflection nebulae"
 msgstr "Nebulosas de reflexión"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:455 src/translations.h:339
+#: src/gui/AstroCalcDialog.cpp:455 src/translations.h:343
 #: src/ui_dsoColorsDialog.h:660
 msgid "Bipolar nebulae"
 msgstr "Nebulosa bipolar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:456 src/translations.h:341
+#: src/gui/AstroCalcDialog.cpp:456 src/translations.h:345
 #: src/ui_dsoColorsDialog.h:587
 msgid "Emission nebulae"
 msgstr "Nebulosa de emisión"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:457 src/translations.h:319
+#: src/gui/AstroCalcDialog.cpp:457 src/translations.h:323
 #: src/ui_dsoColorsDialog.h:544
 msgid "Clusters associated with nebulosity"
 msgstr "Cúmulos asociados con nebulosidad"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:458 src/translations.h:321
+#: src/gui/AstroCalcDialog.cpp:458 src/translations.h:325
 msgid "HII regions"
 msgstr "Regiones HII"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/gui/AstroCalcDialog.cpp:3530
-#: src/translations.h:343 src/ui_viewDialog.h:2685
+#: src/translations.h:347 src/ui_viewDialog.h:2685
 #: src/ui_dsoColorsDialog.h:643
 msgid "Supernova remnants"
 msgstr "Remanentes de supernova"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:460 src/translations.h:349
+#: src/gui/AstroCalcDialog.cpp:460 src/translations.h:353
 #: src/ui_dsoColorsDialog.h:555
 msgid "Interstellar matter"
 msgstr "Materia interestelar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:461 src/translations.h:351
+#: src/gui/AstroCalcDialog.cpp:461 src/translations.h:355
 #: src/ui_dsoColorsDialog.h:670
 msgid "Emission objects"
 msgstr "Objetos de emisión"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:462 src/translations.h:353
+#: src/gui/AstroCalcDialog.cpp:462 src/translations.h:357
 #: src/ui_dsoColorsDialog.h:651
 msgid "BL Lac objects"
 msgstr "Objetos BL Lac"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:463 src/translations.h:355
+#: src/gui/AstroCalcDialog.cpp:463 src/translations.h:359
 #: src/ui_dsoColorsDialog.h:548
 msgid "Blazars"
 msgstr "Blazares"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:464 src/translations.h:357
+#: src/gui/AstroCalcDialog.cpp:464 src/translations.h:361
 msgid "Molecular Clouds"
 msgstr "Nubes Moleculares"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:465 src/translations.h:359
+#: src/gui/AstroCalcDialog.cpp:465 src/translations.h:363
 msgid "Young Stellar Objects"
 msgstr "Objetos Estelares Jóvenes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:466 src/translations.h:361
+#: src/gui/AstroCalcDialog.cpp:466 src/translations.h:365
 msgid "Possible Quasars"
 msgstr "Posibles Quásares"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:467 src/translations.h:363
+#: src/gui/AstroCalcDialog.cpp:467 src/translations.h:367
 msgid "Possible Planetary Nebulae"
 msgstr "Posibles Nebulosas Planetarias"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:468 src/translations.h:365
+#: src/gui/AstroCalcDialog.cpp:468 src/translations.h:369
 msgid "Protoplanetary Nebulae"
 msgstr "Nebulosas Protoplanetarias"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:469 src/gui/AstroCalcDialog.cpp:1637
-#: src/gui/AstroCalcDialog.cpp:3526 src/translations.h:367
+#: src/gui/AstroCalcDialog.cpp:3526 src/translations.h:371
 #: src/ui_dsoColorsDialog.h:621
 msgid "Symbiotic stars"
 msgstr "Estrellas simbioticas"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:1638
-#: src/gui/AstroCalcDialog.cpp:3527 src/translations.h:369
+#: src/gui/AstroCalcDialog.cpp:3527 src/translations.h:373
 #: src/ui_dsoColorsDialog.h:636
 msgid "Emission-line stars"
 msgstr "Emisión -linia estrella"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:471 src/gui/AstroCalcDialog.cpp:3528
-#: src/translations.h:345 src/ui_dsoColorsDialog.h:686
+#: src/translations.h:349 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
 msgstr "Supernovas candidatas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/gui/AstroCalcDialog.cpp:3529
-#: src/translations.h:347 src/ui_dsoColorsDialog.h:690
+#: src/translations.h:351 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
 msgstr "Supernova candidatos remanentes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/gui/AstroCalcDialog.cpp:3531
-#: src/translations.h:371 src/ui_viewDialog.h:2694
+#: src/translations.h:375 src/ui_viewDialog.h:2694
 #: src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "Cúmulos de galaxias"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:475 src/translations.h:373
+#: src/gui/AstroCalcDialog.cpp:475 src/translations.h:377
 #: src/ui_viewDialog.h:2640
 msgid "Messier Catalogue"
 msgstr "Catálogo Messier"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:477 src/translations.h:375
+#: src/gui/AstroCalcDialog.cpp:477 src/translations.h:379
 #: src/ui_viewDialog.h:2658
 msgid "Caldwell Catalogue"
 msgstr "Catálogo Caldwell"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:479 src/translations.h:377
+#: src/gui/AstroCalcDialog.cpp:479 src/translations.h:381
 msgid "Barnard Catalogue"
 msgstr "Catálogo Barnard"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:481 src/translations.h:379
+#: src/gui/AstroCalcDialog.cpp:481 src/translations.h:383
 msgid "Sharpless Catalogue"
 msgstr "Catálogo Sharpless"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:483 src/translations.h:381
+#: src/gui/AstroCalcDialog.cpp:483 src/translations.h:385
 msgid "Van den Bergh Catalogue"
 msgstr "Catálogo Van den Bergh"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:485 src/translations.h:383
+#: src/gui/AstroCalcDialog.cpp:485 src/translations.h:387
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr "El Catálogo de Rodgers, Campbell y Whiteoak"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:487 src/translations.h:385
+#: src/gui/AstroCalcDialog.cpp:487 src/translations.h:389
 msgid "Collinder Catalogue"
 msgstr "Catálogo Collinder"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:489 src/translations.h:387
+#: src/gui/AstroCalcDialog.cpp:489 src/translations.h:391
 msgid "Melotte Catalogue"
 msgstr "Catálogo Melotte"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:491 src/translations.h:389
+#: src/gui/AstroCalcDialog.cpp:491 src/translations.h:393
 msgid "New General Catalogue"
 msgstr "Nuevo Catálogo General"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:493 src/translations.h:391
+#: src/gui/AstroCalcDialog.cpp:493 src/translations.h:395
 msgid "Index Catalogue"
 msgstr "Catálogo índices"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:495 src/translations.h:393
+#: src/gui/AstroCalcDialog.cpp:495 src/translations.h:397
 msgid "Lynds' Catalogue of Bright Nebulae"
 msgstr "Catálogo de Nebulosas Brillantes de Lynds"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:497 src/translations.h:395
+#: src/gui/AstroCalcDialog.cpp:497 src/translations.h:399
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr "Catálogo de nebulosas oscuras de Lynds"
 
@@ -4512,70 +4512,70 @@ msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "El Catálogo General de Galaxias de Uppsala"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:397
+#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:401
 msgid "Cederblad Catalog"
 msgstr "Catálogo Cederblad"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:505 src/translations.h:399
+#: src/gui/AstroCalcDialog.cpp:505 src/translations.h:403
 msgid "The Catalogue of Peculiar Galaxies"
 msgstr "Catálogo Galaxias Peculiares"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:507 src/translations.h:401
+#: src/gui/AstroCalcDialog.cpp:507 src/translations.h:405
 msgid "The Catalogue of Interacting Galaxies"
 msgstr "Catálogo Galaxias Interactivas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:509 src/translations.h:403
+#: src/gui/AstroCalcDialog.cpp:509 src/translations.h:407
 msgid "The Catalogue of Galactic Planetary Nebulae"
 msgstr "Catálogo Nebulosas Planetarias Galácticas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:511 src/translations.h:405
+#: src/gui/AstroCalcDialog.cpp:511 src/translations.h:409
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
 msgstr "Catalogo Strasbourg-ESO de Nebulosas Planetarias Galácticas"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:513 src/translations.h:407
+#: src/gui/AstroCalcDialog.cpp:513 src/translations.h:411
 msgid "A catalogue of Galactic supernova remnants"
 msgstr "Catálogo de restos de supernova galáctica"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:409
+#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:413
 msgid "A Catalog of Rich Clusters of Galaxies"
 msgstr "Catálogo de Cúmulos Ricos de Galaxias"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:517 src/translations.h:411
+#: src/gui/AstroCalcDialog.cpp:517 src/translations.h:415
 msgid "Hickson Compact Group"
 msgstr "Grupo Compacto Hickson"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:518 src/translations.h:413
+#: src/gui/AstroCalcDialog.cpp:518 src/translations.h:417
 msgid "Dwarf galaxies"
 msgstr "Enana galaxia"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:519 src/translations.h:415
+#: src/gui/AstroCalcDialog.cpp:519 src/translations.h:419
 msgid "Herschel 400 Catalogue"
 msgstr "Catalago Herschel 400"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:520 src/gui/AstroCalcDialog.cpp:3523
-#: src/translations.h:424
+#: src/translations.h:428
 msgid "Bright double stars"
 msgstr "Estrellas dobles brillantes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:521 src/gui/AstroCalcDialog.cpp:3524
-#: src/translations.h:426
+#: src/translations.h:430
 msgid "Bright variable stars"
 msgstr "Estrellas variables brillantes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:522 src/gui/AstroCalcDialog.cpp:3525
-#: src/translations.h:428
+#: src/translations.h:432
 msgid "Bright stars with high proper motion"
 msgstr "Estrellas brillantes con alto movimiento propio"
 
@@ -4764,51 +4764,51 @@ msgstr "Sistema solar"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1621 src/gui/AstroCalcDialog.cpp:3514
-#: src/translations.h:80
+#: src/translations.h:84
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Asteroids"
 msgstr "Asteroides"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1622 src/gui/AstroCalcDialog.cpp:3516
-#: src/translations.h:84
+#: src/translations.h:88
 msgid "Plutinos"
 msgstr "Plutinos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1623 src/gui/AstroCalcDialog.cpp:3515
-#: src/translations.h:78
+#: src/translations.h:82
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Comets"
 msgstr "Cometas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1624 src/gui/AstroCalcDialog.cpp:3517
-#: src/translations.h:86
+#: src/translations.h:90
 msgid "Dwarf planets"
 msgstr "Planetas enanos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1625 src/gui/AstroCalcDialog.cpp:3518
-#: src/translations.h:88
+#: src/translations.h:92
 msgid "Cubewanos"
 msgstr "Cubewanos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1626 src/gui/AstroCalcDialog.cpp:3519
-#: src/translations.h:90
+#: src/translations.h:94
 msgid "Scattered disc objects"
 msgstr "Objetos del disco disperso"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1627 src/gui/AstroCalcDialog.cpp:3520
-#: src/translations.h:92
+#: src/translations.h:96
 msgid "Oort cloud objects"
 msgstr "Objetos nube de Oort"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1628 src/gui/AstroCalcDialog.cpp:3521
-#: src/translations.h:94
+#: src/translations.h:98
 msgid "Sednoids"
 msgstr "Sednoide"
 
@@ -5179,922 +5179,932 @@ msgstr "objetos de la nube de Oort"
 msgid "sednoid"
 msgstr "sednoide"
 
+#. TRANSLATORS: Type of object
+#: src/translations.h:76
+msgid "observer"
+msgstr "observador"
+
+#. TRANSLATORS: Type of object
+#: src/translations.h:78
+msgid "artificial"
+msgstr "artificial"
+
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:82
+#: src/translations.h:86
 msgid "Moons"
 msgstr "Lunas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:96
+#: src/translations.h:100
 msgid "Constellations"
 msgstr "Constelaciones"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:98
+#: src/translations.h:102
 msgid "Custom Objects"
 msgstr "Objetos Personalizados"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:100
+#: src/translations.h:104
 msgid "Asterisms"
 msgstr "Asterismos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:102
+#: src/translations.h:106
 msgid "Geological features"
 msgstr "Características geológicas"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:107
+#: src/translations.h:111
 msgid "Geological features: albedo features"
 msgstr "Características geológicas: características del albedo"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:109
+#: src/translations.h:113
 msgid "Geological features: arcūs"
 msgstr "Características geológicas: arcūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:111
+#: src/translations.h:115
 msgid "Geological features: astra"
 msgstr "Características geológicas: astra"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:113
+#: src/translations.h:117
 msgid "Geological features: catenae"
 msgstr "Características geológicas: catenae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:115
+#: src/translations.h:119
 msgid "Geological features: cavi"
 msgstr "Características geológicas: cavi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:117
+#: src/translations.h:121
 msgid "Geological features: chaoses"
 msgstr "Características geológicas: chaoses"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:119
+#: src/translations.h:123
 msgid "Geological features: chasmata"
 msgstr "Características geológicas: chasmata"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:121
+#: src/translations.h:125
 msgid "Geological features: colles"
 msgstr "Características geológicas: colles"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:123
+#: src/translations.h:127
 msgid "Geological features: coronae"
 msgstr "Características geológicas: coronae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:125
+#: src/translations.h:129
 msgid "Geological features: craters"
 msgstr "Características geológicas: craters"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:127
+#: src/translations.h:131
 msgid "Geological features: dorsa"
 msgstr "Características geológicas: dorsa"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:129
+#: src/translations.h:133
 msgid "Geological features: eruptive centers"
 msgstr "Características geológicas: centros eruptivos"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:131
+#: src/translations.h:135
 msgid "Geological features: faculae"
 msgstr "Características geológicas: faculae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:133
+#: src/translations.h:137
 msgid "Geological features: farra"
 msgstr "Características geológicas: farra"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:135
+#: src/translations.h:139
 msgid "Geological features: flexūs"
 msgstr "Características geológicas: flexūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:137
+#: src/translations.h:141
 msgid "Geological features: fluctūs"
 msgstr "Características geológicas: fluctūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:139
+#: src/translations.h:143
 msgid "Geological features: flumina"
 msgstr "Características geológicas: flumina"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:141
+#: src/translations.h:145
 msgid "Geological features: freta"
 msgstr "Características geológicas: freta"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:143
+#: src/translations.h:147
 msgid "Geological features: fossae"
 msgstr "Características geológicas: fossae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:145
+#: src/translations.h:149
 msgid "Geological features: insulae"
 msgstr "Características geológicas: insulae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:147
+#: src/translations.h:151
 msgid "Geological features: labēs"
 msgstr "Características geológicas: labēs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:149
+#: src/translations.h:153
 msgid "Geological features: labyrinthi"
 msgstr "Características geológicas: labyrinthi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:151
+#: src/translations.h:155
 msgid "Geological features: lacunae"
 msgstr "Características geológicas: lacunae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:153
+#: src/translations.h:157
 msgid "Geological features: lacūs"
 msgstr "Características geológicas: lacūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:155
+#: src/translations.h:159
 msgid "Geological features: large ringed features"
 msgstr "Características geológicas: características de anillado grande"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:157
+#: src/translations.h:161
 msgid "Geological features: lineae"
 msgstr "Características geológicas: lineae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:159
+#: src/translations.h:163
 msgid "Geological features: lingulae"
 msgstr "Características geológicas: lingulae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:161
+#: src/translations.h:165
 msgid "Geological features: maculae"
 msgstr "Características geológicas: maculae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:163
+#: src/translations.h:167
 msgid "Geological features: maria"
 msgstr "Características geológicas: maria"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:165
+#: src/translations.h:169
 msgid "Geological features: mensae"
 msgstr "Características geológicas: mensae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:167
+#: src/translations.h:171
 msgid "Geological features: montes"
 msgstr "Características geológicas: montes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:169
+#: src/translations.h:173
 msgid "Geological features: oceani"
 msgstr "Características geológicas: oceani"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:171
+#: src/translations.h:175
 msgid "Geological features: paludes"
 msgstr "Características geológicas: paludes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:173
+#: src/translations.h:177
 msgid "Geological features: paterae"
 msgstr "Características geológicas: pateae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:175
+#: src/translations.h:179
 msgid "Geological features: planitiae"
 msgstr "Características geológicas: planitiae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:177
+#: src/translations.h:181
 msgid "Geological features: plana"
 msgstr "Características geológicas: plana"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:179
+#: src/translations.h:183
 msgid "Geological features: plumes"
 msgstr "Características geológicas: plumes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:181
+#: src/translations.h:185
 msgid "Geological features: promontoria"
 msgstr "Características geológicas: promontoria"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:183
+#: src/translations.h:187
 msgid "Geological features: regiones"
 msgstr "Características geológicas: regiones"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:185
+#: src/translations.h:189
 msgid "Geological features: rimae"
 msgstr "Características geológicas: rimae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:187
+#: src/translations.h:191
 msgid "Geological features: rupēs"
 msgstr "Características geológicas: rupēs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:189
+#: src/translations.h:193
 msgid "Geological features: scopuli"
 msgstr "Características geológicas: scopuli"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:191
+#: src/translations.h:195
 msgid "Geological features: serpentes"
 msgstr "Características geológicas: serpentes"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:193
+#: src/translations.h:197
 msgid "Geological features: sulci"
 msgstr "Características geológicas: sulci"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:195
+#: src/translations.h:199
 msgid "Geological features: sinūs"
 msgstr "Características geológicas: sinūs"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:197
+#: src/translations.h:201
 msgid "Geological features: terrae"
 msgstr "Características geológicas: terrae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:199
+#: src/translations.h:203
 msgid "Geological features: tholi"
 msgstr "Características geológicas: tholi"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:201
+#: src/translations.h:205
 msgid "Geological features: undae"
 msgstr "Características geológicas: undae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:203
+#: src/translations.h:207
 msgid "Geological features: valles"
 msgstr "Características geológicas: valles"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:205
+#: src/translations.h:209
 msgid "Geological features: vastitates"
 msgstr "Características geológicas: vastitates"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:207
+#: src/translations.h:211
 msgid "Geological features: virgae"
 msgstr "Características geológicas: virgae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:209
+#: src/translations.h:213
 msgid "Geological features: landing sites"
 msgstr "Características geológicas: sitios de aterrizaje"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:211
+#: src/translations.h:215
 msgid "Geological features: lenticulae"
 msgstr "Características geológicas: lenticulae"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:213
+#: src/translations.h:217
 msgid "Geological features: reticula"
 msgstr "Características geológicas: reticula"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:215
+#: src/translations.h:219
 msgid "Geological features: tesserae"
 msgstr "Características geológicas: tesserae"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:220
+#: src/translations.h:224
 msgid "Named geological features of Epimetheus"
 msgstr "Características geológicas nombradas de Epimeteo"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:222
+#: src/translations.h:226
 msgid "Named geological features of Vesta"
 msgstr "Características geológicas nombradas de Vesta"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:224
+#: src/translations.h:228
 msgid "Named geological features of Mathilde"
 msgstr "Características geológicas nombradas de Matilde"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:226
+#: src/translations.h:230
 msgid "Named geological features of Venus"
 msgstr "Características geológicas nombradas de Venus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:228
+#: src/translations.h:232
 msgid "Named geological features of Mercury"
 msgstr "Características geológicas nombradas de Mercurio"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:230
+#: src/translations.h:234
 msgid "Named geological features of Iapetus"
 msgstr "Características geológicas nombradas de Jápeto"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:232
+#: src/translations.h:236
 msgid "Named geological features of Ganymede"
 msgstr "Características geológicas nombradas de Ganímedes"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:234
+#: src/translations.h:238
 msgid "Named geological features of Ceres"
 msgstr "Características geológicas nombradas de Ceres"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:236
+#: src/translations.h:240
 msgid "Named geological features of Ida"
 msgstr "Características geológicas nombradas de Ida"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:238
+#: src/translations.h:242
 msgid "Named geological features of Triton"
 msgstr "Características geológicas nombradas de Tritón"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:240
+#: src/translations.h:244
 msgid "Named geological features of Oberon"
 msgstr "Características geológicas nombradas de Oberón"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:242
+#: src/translations.h:246
 msgid "Named geological features of Itokawa"
 msgstr "Características geológicas nombradas de Itokawa"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:244
+#: src/translations.h:248
 msgid "Named geological features of Thebe"
 msgstr "Características geológicas nombradas de Tebe"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:246
+#: src/translations.h:250
 msgid "Named geological features of Gaspra"
 msgstr "Características geológicas nombradas de Gaspra"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:248
+#: src/translations.h:252
 msgid "Named geological features of Rhea"
 msgstr "Características geológicas nombradas de Rhea"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:250
+#: src/translations.h:254
 msgid "Named geological features of Enceladus"
 msgstr "Características geológicas nombradas de Encélado"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:252
+#: src/translations.h:256
 msgid "Named geological features of the Moon"
 msgstr "Características geológicas nombradas de la Luna"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:254
+#: src/translations.h:258
 msgid "Named geological features of Dione"
 msgstr "Características geológicas nombradas de Dione"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:256
+#: src/translations.h:260
 msgid "Named geological features of Steins"
 msgstr "Características geológicas nombradas de Steins"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:258
+#: src/translations.h:262
 msgid "Named geological features of Phoebe"
 msgstr "Características geológicas nombradas de Febe"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:260
+#: src/translations.h:264
 msgid "Named geological features of Puck"
 msgstr "Características geológicas nombradas de Puck"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:262
+#: src/translations.h:266
 msgid "Named geological features of Europa"
 msgstr "Características geológicas nombradas de Europa"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:264
+#: src/translations.h:268
 msgid "Named geological features of Lutetia"
 msgstr "Características geológicas nombradas de Lutetia"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:266
+#: src/translations.h:270
 msgid "Named geological features of Tethys"
 msgstr "Características geológicas nombradas de Tetis"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:268
+#: src/translations.h:272
 msgid "Named geological features of Eros"
 msgstr "Características geológicas nombradas de Eros"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:270
+#: src/translations.h:274
 msgid "Named geological features of Callisto"
 msgstr "Características geológicas nombradas de Calisto"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:272
+#: src/translations.h:276
 msgid "Named geological features of Phobos"
 msgstr "Características geológicas nombradas de Fobos"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:274
+#: src/translations.h:278
 msgid "Named geological features of Proteus"
 msgstr "Características geológicas nombradas de Proteo"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:276
+#: src/translations.h:280
 msgid "Named geological features of Hyperion"
 msgstr "Características geológicas nombradas de Hiperión"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:278
+#: src/translations.h:282
 msgid "Named geological features of Titania"
 msgstr "Características geológicas nombradas de Titania"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:280
+#: src/translations.h:284
 msgid "Named geological features of Deimos"
 msgstr "Características geológicas nombradas de Deimos"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:282
+#: src/translations.h:286
 msgid "Named geological features of Io"
 msgstr "Características geológicas nombradas de Ío"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:284
+#: src/translations.h:288
 msgid "Named geological features of Ariel"
 msgstr "Características geológicas nombradas de Ariel"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:286
+#: src/translations.h:290
 msgid "Named geological features of Dactyl"
 msgstr "Características geológicas nombradas de Dactyl"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:288
+#: src/translations.h:292
 msgid "Named geological features of Titan"
 msgstr "Características geológicas nombradas de Titán"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:290
+#: src/translations.h:294
 msgid "Named geological features of Amalthea"
 msgstr "Características geológicas nombradas de Amaltea"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:292
+#: src/translations.h:296
 msgid "Named geological features of Umbriel"
 msgstr "Características geológicas nombradas de Umbriel"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:294
+#: src/translations.h:298
 msgid "Named geological features of Janus"
 msgstr "Características geológicas nombradas de Jano"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:296
+#: src/translations.h:300
 msgid "Named geological features of Mars"
 msgstr "Características geológicas nombradas de Marte"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:298
+#: src/translations.h:302
 msgid "Named geological features of Miranda"
 msgstr "Características geológicas nombradas de Miranda"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:300
+#: src/translations.h:304
 msgid "Named geological features of Mimas"
 msgstr "Características geológicas nombradas de Mimas"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:302
+#: src/translations.h:306
 msgid "Named geological features of Pluto"
 msgstr "Características geológicas nombradas de Plutón"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:307
+#: src/translations.h:311
 msgid "Bright galaxies"
 msgstr "Galaxias brillantes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:420
+#: src/translations.h:424
 msgid "Interesting double stars"
 msgstr "Estrellas dobles interesantes"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:422
+#: src/translations.h:426
 msgid "Interesting variable stars"
 msgstr "Estrellas variables interesantes"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:433
+#: src/translations.h:437
 msgid "Arabic"
 msgstr "Árabe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:435
+#: src/translations.h:439
 msgid "Arabic Moon Stations"
 msgstr "Estaciones Lunares Arábicas"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:437
+#: src/translations.h:441
 msgid "Aztec"
 msgstr "Azteca"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:439
+#: src/translations.h:443
 msgid "Belarusian"
 msgstr "Bielorruso"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:441
+#: src/translations.h:445
 msgid "Boorong"
 msgstr "Boorong"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:443
+#: src/translations.h:447
 msgid "Chinese"
 msgstr "Chino"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:445
+#: src/translations.h:449
 msgid "Egyptian"
 msgstr "Egipcio"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:447
+#: src/translations.h:451
 msgid "Hawaiian Starlines"
 msgstr "Hawaiian Starlines"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:449
+#: src/translations.h:453
 msgid "Inuit"
 msgstr "Esquimal"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:451
+#: src/translations.h:455
 msgid "Indian Vedic"
 msgstr "India Védica"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:453
+#: src/translations.h:457
 msgid "Japanese Moon Stations"
 msgstr "Estaciones Lunares Japonesas"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:455
+#: src/translations.h:459
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroi/Euahlayi"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:457
+#: src/translations.h:461
 msgid "Korean"
 msgstr "Coreano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:459
+#: src/translations.h:463
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakota/Lakota/Nakota"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:461
+#: src/translations.h:465
 msgid "Macedonian"
 msgstr "Macedonio"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:463
+#: src/translations.h:467
 msgid "Maori"
 msgstr "Maorí"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:465
+#: src/translations.h:469
 msgid "Mongolian"
 msgstr "Mongol"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:467
+#: src/translations.h:471
 msgid "Navajo"
 msgstr "Navajo"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:469
+#: src/translations.h:473
 msgid "Norse"
 msgstr "Escandinavo o Nórdico"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:471
+#: src/translations.h:475
 msgid "Ojibwe"
 msgstr "Ojiba"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:473
+#: src/translations.h:477
 msgid "Romanian"
 msgstr "Rumano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:475
+#: src/translations.h:479
 msgid "Sami"
 msgstr "Sami o Lapona"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:477
+#: src/translations.h:481
 msgid "Sardinian"
 msgstr "Sardo"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:479
+#: src/translations.h:483
 msgid "Siberian"
 msgstr "Siberiano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:481
+#: src/translations.h:485
 msgid "Tukano"
 msgstr "Tukano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:483
+#: src/translations.h:487
 msgid "Tupi-Guarani"
 msgstr "Tupí-guaraní"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:485
+#: src/translations.h:489
 msgid "Tongan"
 msgstr "Tongano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:487
+#: src/translations.h:491
 msgid "Western"
 msgstr "Occidental"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489
+#: src/translations.h:493
 msgid "Western (H.A.Rey)"
 msgstr "Occidental (H. A. Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:491
+#: src/translations.h:495
 msgid "Western (O.Hlad)"
 msgstr "Occidental (O.Hlad)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:497
+#: src/translations.h:501
 msgid "Guereins"
 msgstr "Guéreins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:499
+#: src/translations.h:503
 msgid "Trees"
 msgstr "Árboles"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:501 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
+#: src/translations.h:505 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
 msgid "Moon"
 msgstr "Luna"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:503
+#: src/translations.h:507
 msgid "Hurricane"
 msgstr "Huracán"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:505
+#: src/translations.h:509
 msgid "Ocean"
 msgstr "Océano"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:507
+#: src/translations.h:511
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:509 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
+#: src/translations.h:513 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
 msgid "Mars"
 msgstr "Marte"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:511 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1305
+#: src/translations.h:515 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1305
 msgid "Jupiter"
 msgstr "Júpiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1308
+#: src/translations.h:517 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1308
 msgid "Saturn"
 msgstr "Saturno"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:515
+#: src/translations.h:519
 msgid "Uranus"
 msgstr "Urano"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:517
+#: src/translations.h:521
 msgid "Neptune"
 msgstr "Neptuno"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:519
+#: src/translations.h:523
 msgid "Geneva"
 msgstr "Ginebra"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:521
+#: src/translations.h:525
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:523
+#: src/translations.h:527
 msgid "Zero Horizon"
 msgstr "Horizonte cero"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:525 plugins/Exoplanets/src/Exoplanet.cpp:337
+#: src/translations.h:529 plugins/Exoplanets/src/Exoplanet.cpp:337
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "Sol"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:530
+#: src/translations.h:534
 msgid "Vienna Sterngarten"
 msgstr "Viena Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:532
+#: src/translations.h:536
 msgid "Testscene"
 msgstr "Escena de prueba"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:537
+#: src/translations.h:541
 msgid "Landscape Tour"
 msgstr "Recorrido por los paisajes"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:539
+#: src/translations.h:543
 msgid "Partial Lunar Eclipse"
 msgstr "Eclipse Parcial de Luna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:541
+#: src/translations.h:545
 msgid "Total Lunar Eclipse"
 msgstr "Eclipse Total de Luna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:543
+#: src/translations.h:547
 msgid "Screensaver"
 msgstr "Salvapantallas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:545
+#: src/translations.h:549
 msgid "Solar Eclipse 2009"
 msgstr "Eclipse Solar 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:547
+#: src/translations.h:551
 msgid "Startup Script"
 msgstr "Script inicial"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:549
+#: src/translations.h:553
 msgid "Zodiac"
 msgstr "Zodíaco"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:551
+#: src/translations.h:555
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Triple Amanecer y Atardecer de Mercurio"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:553
+#: src/translations.h:557
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Doble eclipse de Deimos en 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:555
+#: src/translations.h:559
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Doble eclipse de Deimos en 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:557
+#: src/translations.h:561
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "Eclipse de Monte Olimpo 10 Ene 2068"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:559
+#: src/translations.h:563
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Ocultación de la Tierra y Júpiter 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:561
+#: src/translations.h:565
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "Tres tránsitos y 2 eclipses de Deimos en 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:563
+#: src/translations.h:567
 msgid "Solar System Screensaver"
 msgstr "Salvapantallas del Sistema Solar"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:565
+#: src/translations.h:569
 msgid "Constellations Tour"
 msgstr "Viaje por las Constelaciones"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:567
+#: src/translations.h:571
 msgid "Sun from different planets"
 msgstr "Sol desde diferentes planetas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:569
+#: src/translations.h:573
 msgid "Earth best views from other bodies"
 msgstr "Mejores vistas de la tierra desde otros cuerpos"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:571
+#: src/translations.h:575
 msgid "Transit of Venus"
 msgstr "Tránsito de Venus"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:573
+#: src/translations.h:577
 msgid "Sky Culture Tour"
 msgstr "Paseo de Culturas Estelares"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:575
+#: src/translations.h:579
 msgid "Earth Events from Mercury"
 msgstr "Eventos terrestres desde Mercurio"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:577
+#: src/translations.h:581
 msgid "Earth Events from a floating city on Venus"
 msgstr "Eventos terrestres desde una ciudad flotante en Venus"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:579
+#: src/translations.h:583
 msgid "Earth Events from Mars"
 msgstr "Eventos Tierra desde Marte"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:581
+#: src/translations.h:585
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
@@ -6102,84 +6112,84 @@ msgstr ""
 "desde Marte"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:583
+#: src/translations.h:587
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "Las Mayores Elongaciones y Tránsitos de la Tierra y Marte desde Calisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:585
+#: src/translations.h:589
 msgid "Tycho's Supernova"
 msgstr "Supernova Tycho"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:587
+#: src/translations.h:591
 msgid "Earth and other Planets from Ceres"
 msgstr "Tierra y otros planetas desde Ceres"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:589
+#: src/translations.h:593
 msgid "Messier Objects Tour"
 msgstr "Tur Objetos Messier"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:591
+#: src/translations.h:595
 msgid "Binocular Highlights"
 msgstr "Prismáticos altas luces"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:597
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 Fun Naked-Eye estrellas dobles"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:599
 msgid "List of largest known stars"
 msgstr "Lista de estrellas más grandes conocidas"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:601
 msgid "Herschel 400 Tour"
 msgstr "Tur  Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:603
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: objetos de cielo profundo para los prismáticos"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:605
 msgid "The Jack Bennett Catalog"
 msgstr "El Catalago de Jack Bennett"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:607
 msgid "Best objects in the New General Catalog"
 msgstr "El Catálogo de Jack Bennett"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:609
+#: src/translations.h:613
 msgid "Look around each installed landscape."
 msgstr "Visualiza alrededor cada paisaje instalado."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:611
+#: src/translations.h:615
 msgid "Look at each installed sky culture."
 msgstr "Visualiza cada cultura estelar instalada."
 
-#: src/translations.h:612
+#: src/translations.h:616
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Script para demostrar un eclipse lunar parcial."
 
-#: src/translations.h:613
+#: src/translations.h:617
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Script para demostrar un eclipse total de luna"
 
-#: src/translations.h:614
+#: src/translations.h:618
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Un recorrido lento e infinito del cielo, mirando objetos aleatorios."
 
-#: src/translations.h:615
+#: src/translations.h:619
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -6187,11 +6197,11 @@ msgstr ""
 "Script para demostrar un eclipse solar total que ha sucedido en 2009 "
 "(ubicación = Rangpur, Bangladesh)."
 
-#: src/translations.h:616
+#: src/translations.h:620
 msgid "Script which runs automatically at startup"
 msgstr "Script que se ejecuta automáticamente al inicio"
 
-#: src/translations.h:617
+#: src/translations.h:621
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -6201,7 +6211,7 @@ msgstr ""
 "constelaciones que se encuentran a lo largo de la línea que traza el Sol "
 "alrededor de la esfera celeste durante el curso del año."
 
-#: src/translations.h:618
+#: src/translations.h:622
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -6210,7 +6220,7 @@ msgstr ""
 "puntos el sol se levantará y se establecerá 3 veces diferentes en un día de "
 "Mercurio."
 
-#: src/translations.h:619
+#: src/translations.h:623
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -6219,7 +6229,7 @@ msgstr ""
 "por primera vez. Se lleva a cabo entre Escorpion y Sagitario el 26 de abril "
 "de 2017."
 
-#: src/translations.h:620
+#: src/translations.h:624
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -6227,11 +6237,11 @@ msgstr ""
 "Justo antes de que Marte eclipse al sol, Fobos sale desde atrás y lo eclipsa"
 " primero. Se lleva a cabo entre el Tauro y Géminis el 23 de julio de 2031."
 
-#: src/translations.h:621
+#: src/translations.h:625
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "Fobos eclipsando al Sol, visto desde el Monte Olimpo en Ene 2, 2021."
 
-#: src/translations.h:622
+#: src/translations.h:626
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -6241,7 +6251,7 @@ msgstr ""
 "ocultaciones de Júpiter. Pero las ocultaciones de ambos en el mismo día son "
 "muy raras. Aquí es una que toma lugar 23/1/2048. En velocidad real."
 
-#: src/translations.h:623
+#: src/translations.h:627
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -6257,32 +6267,32 @@ msgstr ""
 "Phobos emerge de Marte todavía se eclipsa y se atenúa en la sombra de Marte,"
 " sólo para iluminar más tarde."
 
-#: src/translations.h:624
+#: src/translations.h:628
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
 "Salvapantallas de varios eventos en el Sistema Solar, ¡300 eventos en total!"
 
-#: src/translations.h:625
+#: src/translations.h:629
 msgid "A tour of the western constellations."
 msgstr "Un paseo de las constelaciones occidentales."
 
-#: src/translations.h:626
+#: src/translations.h:630
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Mira al sol desde grandes planetas del Sistema solar y Plutón."
 
-#: src/translations.h:627
+#: src/translations.h:631
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Las mejores vistas de la tierra desde otros cuerpos del Sistema solar en el "
 "siglo XXI"
 
-#: src/translations.h:628
+#: src/translations.h:632
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Tránsito de Venus como se ve desde Sidney Australia, 6 de junio 2012."
 
-#: src/translations.h:629
+#: src/translations.h:633
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -6290,7 +6300,7 @@ msgstr ""
 "Destello de la supernova observada por tycho Brahe en 1572. El plugin de "
 "supernovas debe habilitarse."
 
-#: src/translations.h:630
+#: src/translations.h:634
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -6298,7 +6308,7 @@ msgstr ""
 "Elongaciones y oposiciones más grandiosas de la Tierra y otros planetas "
 "desde Marte 2000-3000"
 
-#: src/translations.h:631
+#: src/translations.h:635
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -6310,7 +6320,7 @@ msgstr ""
 "fuera del cinturón de radiación de Júpiter. Por lo tanto si los humanos "
 "colonizaran las lunas de Júpiter, Callisto será la elegida."
 
-#: src/translations.h:632
+#: src/translations.h:636
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
@@ -6318,11 +6328,11 @@ msgstr ""
 "Elongaciones y oposiciones más grandiosas de la Tierra y otros planetas "
 "visibles desde Ceres 2000-2200"
 
-#: src/translations.h:633
+#: src/translations.h:637
 msgid "A tour of Messier Objects"
 msgstr "Un recorrido por los objetos Messier"
 
-#: src/translations.h:634
+#: src/translations.h:638
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -6332,7 +6342,7 @@ msgstr ""
 "binoculares. Los datos de la secuencia de comandos se toman del libro del "
 "mismo nombre por Gary Seronik."
 
-#: src/translations.h:635
+#: src/translations.h:639
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -6343,17 +6353,17 @@ msgstr ""
 "Telescope 09/2014. Datos tomados de su sitio web, "
 "http://www.astropix.com/doubles/"
 
-#: src/translations.h:636
+#: src/translations.h:640
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Este script le ayuda a hacer una excursión alrededor de estrellas más "
 "grandes conocidas."
 
-#: src/translations.h:637
+#: src/translations.h:641
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Una gira alrededor de los objetos del Catálogo Herschel 400"
 
-#: src/translations.h:638
+#: src/translations.h:642
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -6363,7 +6373,7 @@ msgstr ""
 "profundo para los prismáticos. En el guión le damos una lista de estos 31 "
 "objetos, ordenados por ascensión recta (2000.0)."
 
-#: src/translations.h:639
+#: src/translations.h:643
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -6371,7 +6381,7 @@ msgstr ""
 "Catálogo Jack Bennett de Objetos del Cielo Profundo del Sur (152 objetos en "
 "total). El catálogo de Bennett fue aportado por Auke Slotegraaf."
 
-#: src/translations.h:640
+#: src/translations.h:644
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -6381,180 +6391,180 @@ msgstr ""
 "miembros del Club de Astronomía Saguaro de Phoenix, AZ, para el mejor de los"
 " premios NGC."
 
-#: src/translations.h:644
+#: src/translations.h:648
 msgid "&Undo"
 msgstr "&Deshacer"
 
-#: src/translations.h:645
+#: src/translations.h:649
 msgid "&Redo"
 msgstr "&Rehacer"
 
-#: src/translations.h:646
+#: src/translations.h:650
 msgid "Cu&t"
 msgstr "&Cortar"
 
-#: src/translations.h:647
+#: src/translations.h:651
 msgid "&Copy"
 msgstr "C&opiar"
 
-#: src/translations.h:648
+#: src/translations.h:652
 msgid "&Paste"
 msgstr "&Pegar"
 
-#: src/translations.h:649 plugins/Oculars/src/ui_ocularDialog.h:1187
+#: src/translations.h:653 plugins/Oculars/src/ui_ocularDialog.h:1187
 #: plugins/Oculars/src/ui_ocularDialog.h:1196
 #: plugins/Oculars/src/ui_ocularDialog.h:1202
 #: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Delete"
 msgstr "Eliminar"
 
-#: src/translations.h:650
+#: src/translations.h:654
 msgid "Select All"
 msgstr "Seleccionar todo"
 
-#: src/translations.h:651
+#: src/translations.h:655
 msgid "Look in:"
 msgstr "Buscar en:"
 
-#: src/translations.h:652
+#: src/translations.h:656
 msgid "Directory:"
 msgstr "Directorio:"
 
-#: src/translations.h:653
+#: src/translations.h:657
 msgid "Folder"
 msgstr "Carpeta"
 
-#: src/translations.h:654
+#: src/translations.h:658
 msgid "&Choose"
 msgstr "E&legir"
 
-#: src/translations.h:655 src/ui_configurationDialog.h:1534
+#: src/translations.h:659 src/ui_configurationDialog.h:1534
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: src/translations.h:656
+#: src/translations.h:660
 msgid "&Cancel"
 msgstr "cancelar"
 
-#: src/translations.h:657
+#: src/translations.h:661
 msgid "Files of type:"
 msgstr "Archivos de tipo:"
 
-#: src/translations.h:658
+#: src/translations.h:662
 msgid "Date Modified"
 msgstr "Fecha de modificación"
 
-#: src/translations.h:659
+#: src/translations.h:663
 msgid "Directories"
 msgstr "Directorios"
 
-#: src/translations.h:660
+#: src/translations.h:664
 msgid "Computer"
 msgstr "Computadora"
 
-#: src/translations.h:661
+#: src/translations.h:665
 msgid "&Open"
 msgstr "&Abrir"
 
-#: src/translations.h:662
+#: src/translations.h:666
 msgid "&Save"
 msgstr "&Guardar"
 
-#: src/translations.h:663
+#: src/translations.h:667
 msgid "File &name:"
 msgstr "&Nombre de archivo"
 
-#: src/translations.h:664
+#: src/translations.h:668
 msgid "Copy &Link Location"
 msgstr "Copiar &ubicación del enlace"
 
-#: src/translations.h:665
+#: src/translations.h:669
 msgid "Abort"
 msgstr "Abortar"
 
-#: src/translations.h:666
+#: src/translations.h:670
 msgid "Ignore"
 msgstr "Ignorar"
 
-#: src/translations.h:667
+#: src/translations.h:671
 msgid "&Basic colors"
 msgstr "&Colores básicos"
 
-#: src/translations.h:668
+#: src/translations.h:672
 msgid "&Pick Screen Color"
 msgstr "&Seleccione el color de la pantalla"
 
-#: src/translations.h:669
+#: src/translations.h:673
 msgid "&Custom colors"
 msgstr "&Colores propios"
 
-#: src/translations.h:670
+#: src/translations.h:674
 msgid "&Add to Custom Colors"
 msgstr "&Añadir a los colores personalizados"
 
-#: src/translations.h:671
+#: src/translations.h:675
 msgid "Hu&e:"
 msgstr "&Matiz"
 
-#: src/translations.h:672
+#: src/translations.h:676
 msgid "&Sat:"
 msgstr "&Sat:"
 
-#: src/translations.h:673
+#: src/translations.h:677
 msgid "&Val:"
 msgstr "&Val:"
 
-#: src/translations.h:674
+#: src/translations.h:678
 msgid "&Red:"
 msgstr "&Rojo:"
 
-#: src/translations.h:675
+#: src/translations.h:679
 msgid "&Green:"
 msgstr "&Verde:"
 
-#: src/translations.h:676
+#: src/translations.h:680
 msgid "Bl&ue:"
 msgstr "&Azul:"
 
-#: src/translations.h:677
+#: src/translations.h:681
 msgid "Select Color"
 msgstr "Seleccionar color"
 
-#: src/translations.h:678
+#: src/translations.h:682
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Cursor en %1, %2 Pulse ESC para cancelar"
 
-#: src/translations.h:679
+#: src/translations.h:683
 msgid "Back"
 msgstr "Regresar"
 
-#: src/translations.h:680
+#: src/translations.h:684
 msgid "Forward"
 msgstr "Adelantar"
 
-#: src/translations.h:681
+#: src/translations.h:685
 msgid "Parent Directory"
 msgstr "Directorio Principal"
 
-#: src/translations.h:682
+#: src/translations.h:686
 msgid "Create New Folder"
 msgstr "Crear carpeta nueva"
 
-#: src/translations.h:683
+#: src/translations.h:687
 msgid "List View"
 msgstr "Vista de lista"
 
-#: src/translations.h:684
+#: src/translations.h:688
 msgid "Detail View"
 msgstr "Vista Detallada"
 
-#: src/translations.h:685
+#: src/translations.h:689
 msgid "Recent Places"
 msgstr "Lugares Recientes"
 
-#: src/translations.h:686
+#: src/translations.h:690
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -6563,23 +6573,23 @@ msgstr ""
 "%1 ya existe.\n"
 "¿Desea reemplazarlo?"
 
-#: src/translations.h:687
+#: src/translations.h:691
 msgid "&Yes"
 msgstr "&Sí"
 
-#: src/translations.h:688
+#: src/translations.h:692
 msgid "&No"
 msgstr "&No"
 
-#: src/translations.h:689
+#: src/translations.h:693
 msgid "&Select All"
 msgstr "&Seleccionar Todo"
 
-#: src/translations.h:690
+#: src/translations.h:694
 msgid "&Step up"
 msgstr "&Aumentar"
 
-#: src/translations.h:691
+#: src/translations.h:695
 msgid "Step &down"
 msgstr "&Reducir"
 
