@@ -62,8 +62,9 @@ public:
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow() const {return fader;}
 private:
+	QSettings* conf ;
 	float radius;
-	QFont font;
+	QFont fontC, fontSC;
 	Vec3f color;
 	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest;
 	LinearFader fader;
@@ -75,8 +76,13 @@ Cardinals::Cardinals(float _radius)
 	, sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
 	, sNortheast("NE"), sSoutheast("SE"), sSouthwest("SW"), sNorthwest("NW")
 {
-	// Font size is 24
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+11);
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	int baseFontSize = StelApp::getInstance().getBaseFontSize();
+	// Default font size is 24
+	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", baseFontSize+11).toInt());
+	// Default font size is 18
+	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", baseFontSize+5).toInt());
 }
 
 Cardinals::~Cardinals()
@@ -89,7 +95,7 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter sPainter(prj);
-	sPainter.setFont(font);
+	sPainter.setFont(fontC);
 
 	if (!fader.getInterstate()) return;
 
@@ -127,7 +133,6 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	if (prj->project(pos,xy))
 		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -sshift, false);
 
-
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
 	if (prj->project(pos,xy))
@@ -142,6 +147,8 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	pos.set(0.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
 		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -sshift, false);
+
+	sPainter.setFont(fontSC);
 
 	// NE for Northeast
 	pos.set(-1.f, 1.f, 0.f);
