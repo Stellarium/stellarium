@@ -335,10 +335,10 @@ public:
 		rect.setSize(size);
 	}
 
-	//! Set the sky background color. Everything else than black creates an work of art!
+	//! Set the sky background color. Everything else than black creates a work of art!
 	void setSkyBackgroundColor(Vec3f color) { skyBackgroundColor=color; }
 
-	//! Get the sky background color. Everything else than black creates an work of art!
+	//! Get the sky background color. Everything else than black creates a work of art!
 	Vec3f getSkyBackgroundColor() { return skyBackgroundColor; }
 
 
@@ -554,6 +554,7 @@ private:
 
 StelMainView::StelMainView(QSettings* settings)
 	: QGraphicsView(),
+	  configuration(settings),
 	  guiItem(Q_NULLPTR),
 	  gui(Q_NULLPTR),
 	  stelApp(Q_NULLPTR),
@@ -574,7 +575,6 @@ StelMainView::StelMainView(QSettings* settings)
 	setAutoFillBackground(false);
 	setMouseTracking(true);
 
-	configuration = settings;
 	StelApp::initStatic();
 
 	minFpsTimer = new QTimer(this);
