@@ -79,6 +79,11 @@ void LocationDialog::createDialogContent()
 	// We try to directly connect to the observer slots as much as we can
 	ui->setupUi(dialog);
 
+	//enable resizability
+	ui->mapLabel->setMinimumSize(0,0);
+	ui->mapLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
+	ui->mapLabel->setScaledContents(false);
+
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	// Init the SpinBox entries
 	ui->longitudeSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
@@ -174,6 +179,7 @@ void LocationDialog::handleDialogSizeChanged(QSizeF size)
 {
 	StelDialog::handleDialogSizeChanged(size);
 	StelLocation loc = locationFromFields();
+	resizePixmap();
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 }
 
@@ -307,7 +313,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	if (lastPlanet==loc.planetName)
 		return;
 
-	QPixmap pixmap;
+	//QPixmap pixmap;
 	// Try to set the proper planet map image
 	if (loc.planetName=="Earth")
 	{
@@ -329,18 +335,25 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 			pixmap = QPixmap(path);
 		}
 	}
-	StelCore * core = StelApp::getInstance().getCore();
-	pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
+	//StelCore * core = StelApp::getInstance().getCore();
+	//pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 	ui->mapLabel->setPixmap(pixmap);
+	resizePixmap();
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 	// For caching
 	lastPlanet = loc.planetName;
 }
 
+void LocationDialog::resizePixmap()
+{
+	int w = ui->mapLabel->width();
+	int h = ui->mapLabel->height();
+	ui->mapLabel->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation));
+}
+
 void LocationDialog::populatePlanetList()
 {
 	Q_ASSERT(ui->planetNameComboBox);
-
 	QComboBox* planets = ui->planetNameComboBox;
 	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	QList<PlanetP> ss = ssystem->getAllPlanets();
