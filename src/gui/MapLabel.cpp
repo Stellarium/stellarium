@@ -35,14 +35,30 @@ MapLabel::~MapLabel()
 
 void MapLabel::setCursorPos(double longitude, double latitude)
 {
-	const int x = (int)((longitude+180.)/360.*size().width());
-	const int y = (int)((latitude-90.)/-180.*size().height());
+	const int offsetX = (width() - pixmap()->width())/2;
+	const int offsetY = (height() - pixmap()->height())/2;
+	const int x = ((int)((longitude+180.)/360.*pixmap()->size().width())) + offsetX;
+	const int y = ((int)((latitude-90.)/-180.*pixmap()->size().height())) + offsetY;
 	cursor->move(x-cursor->size().width()/2, y-cursor->size().height()/2);
 }
 
 void MapLabel::mousePressEvent(QMouseEvent* event)
 {
-	const double lon = ((double)event->pos().x())/size().width()*360.-180.;
+	/*const double lon = ((double)event->pos().x())/size().width()*360.-180.;
 	const double lat = 90.-((double)event->pos().y())/size().height()*180.;
+	emit(positionChanged(lon, lat));*/
+
+	const int offsetX = (width() - pixmap()->width())/2;
+	const int offsetY = (height() - pixmap()->height())/2;
+
+	const int posX = event->pos().x();
+	const int posY = event->pos().y();
+
+	if((unsigned)(posX-offsetX) > (unsigned)pixmap()->width() || (unsigned)(posY-offsetY) > (unsigned)pixmap()->height())
+	{
+		return;
+	}
+	const double lon = ((double)(posX-offsetX))/pixmap()->size().width()*360.-180.;
+	const double lat = 90.-((double)(posY-offsetY))/pixmap()->size().height()*180.;
 	emit(positionChanged(lon, lat));
 }
