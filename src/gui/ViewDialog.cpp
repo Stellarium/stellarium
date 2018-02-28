@@ -465,7 +465,7 @@ void ViewDialog::createDialogContent()
 	// Hips mgr.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
-	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()));
+	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
 	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
 	updateHips();
 
