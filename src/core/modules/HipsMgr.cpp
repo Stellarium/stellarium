@@ -73,6 +73,8 @@ void HipsMgr::init()
 		});
 	}
 	conf->endGroup();
+
+	addAction("actionShow_DSS", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "showDSS", "Ctrl+Alt+D");
 }
 
 void HipsMgr::deinit()
@@ -113,4 +115,23 @@ HipsSurveyP HipsMgr::getSurveyByUrl(const QString &url)
 		if (survey->getUrl() == url) return survey;
 	}
 	return HipsSurveyP(NULL);
+}
+
+bool HipsMgr::getShowDSS() const
+{
+	for (auto survey: surveys)
+	{
+		if (survey->isVisible() && survey->getUrl().endsWith("DSSColor"))
+			return true;
+	}
+	return false;
+}
+
+void HipsMgr::setShowDSS(bool value)
+{
+	for (auto survey: surveys)
+	{
+		survey->setVisible(value && survey->getUrl().endsWith("DSSColor"));
+	}
+	emit showDSSChanged();
 }

@@ -31,6 +31,9 @@ class HipsMgr : public StelModule
 			MEMBER surveys
 			NOTIFY surveysChanged)
 
+	//! Special property to quicky show the DSS hips survey.
+	Q_PROPERTY(bool showDSS READ getShowDSS WRITE setShowDSS NOTIFY showDSSChanged)
+
 public:
 	HipsMgr();
 	virtual ~HipsMgr();
@@ -44,11 +47,18 @@ public:
 	Q_INVOKABLE
 	HipsSurveyP getSurveyByUrl(const QString &url);
 
+	//! Return whether the DSS survey is visible.
+	bool getShowDSS() const;
+	//! Set whether the DSS survey is visible.
+	void setShowDSS(bool value);
+
 signals:
 	void surveyDisplayedChanged(const bool displayed) const;
 	void surveysChanged() const;
 	//! Emitted when a new survey has been loaded.
 	void gotNewSurvey(HipsSurveyP survey) const;
+	//! Emitted when the DSS survey visible status has changed.
+	void showDSSChanged() const;
 
 private:
 	QList<HipsSurveyP> surveys;
