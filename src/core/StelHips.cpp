@@ -112,6 +112,11 @@ void HipsSurvey::setVisible(bool value)
 {
 	if (value == isVisible()) return;
 	fader = value;
+	if (!value && progressBar)
+	{
+		StelApp::getInstance().removeProgressBar(progressBar);
+		progressBar = NULL;
+	}
 	emit visibleChanged(value);
 }
 
