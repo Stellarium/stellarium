@@ -52,24 +52,37 @@ class HipsSurvey : public QObject
 	Q_PROPERTY(QJsonObject properties MEMBER properties NOTIFY propertiesChanged)
 	Q_PROPERTY(bool isLoading READ isLoading NOTIFY statusChanged)
 	Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
-	// !Set the the name of the planet the survey is attached to or empty if
-	//  this is a skysurvey.
+	//! The name of the planet the survey is attached to, or empty if this is a skysurvey.
 	Q_PROPERTY(QString planet MEMBER planet);
 
 public:
-	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex, const QVector<uint16_t>& indices)> DrawCallback;
+	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex,
+							   const QVector<uint16_t>& indices)> DrawCallback;
 	//! Create a new HipsSurvey from its url.
 	//! @param url The location of the survey.
 	//! @param releaseDate If known the UTC JD release date of the survey.  Used for cache busting.
 	HipsSurvey(const QString& url, double releaseDate=0.0);
 	virtual ~HipsSurvey();
 
+	//! Get whether the survey is visible.
 	bool isVisible() const;
+
+	//! Define whether the survey should be visible.
 	void setVisible(bool value);
 	float getInterstate() const {return fader.getInterstate();}
 
+	//! Render the survey.
+	//! @param sPainter the painter to use.
+	//! @param angle total visible angle of the survey in radians. This is used to optimize the rendering of planet
+	//         surveys.  Should be set to 2 pi for sky surveys.
+	//! @param callback if set this will be called for each visible tile, and the callback should do it rendering
+	//         itself.  If set to NULL, the function will draw the tiles using the default shader.
 	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = NULL);
+
+	//! Return the source URL of the survey.
 	const QString& getUrl() const {return url;}
+
+	//! Get whether the survey is still loading.
 	bool isLoading(void) const;
 
 	//! Parse a hipslist file into a list of surveys.
