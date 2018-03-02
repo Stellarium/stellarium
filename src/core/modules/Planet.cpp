@@ -283,7 +283,7 @@ void Planet::init()
 	pTypeMap.insert(Planet::isPlanet,		"planet");
 	pTypeMap.insert(Planet::isMoon,			"moon");
 	pTypeMap.insert(Planet::isObserver,		"observer");
-	pTypeMap.insert(Planet::isArtificial,		"artificial");
+    pTypeMap.insert(Planet::isArtificial,	"artificial");
 	pTypeMap.insert(Planet::isAsteroid,		"asteroid");
 	pTypeMap.insert(Planet::isPlutino,		"plutino");
 	pTypeMap.insert(Planet::isComet,		"comet");
@@ -341,12 +341,18 @@ void Planet::setIAUMoonNumber(QString designation)
 
 QString Planet::getEnglishName() const
 {
-	return englishName;
+    if (!iauMoonNumber.isEmpty())
+        return QString("%1 (%2)").arg(englishName).arg(iauMoonNumber);
+    else
+        return englishName;
 }
 
 QString Planet::getNameI18n() const
 {
-	return nameI18;
+    if (!iauMoonNumber.isEmpty())
+        return QString("%1 (%2)").arg(nameI18).arg(iauMoonNumber);
+    else
+        return nameI18;
 }
 
 const QString Planet::getContextString() const
@@ -400,9 +406,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
-		if (!iauMoonNumber.isEmpty())
-			oss << QString(" (%1)").arg(iauMoonNumber);
+		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation		
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
