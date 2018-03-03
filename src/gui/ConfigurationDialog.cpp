@@ -291,7 +291,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->showICRSGridButtonCheckBox,		"StelGui.flagShowICRSGridButton");
 	connectBoolProperty(ui->showGalacticGridButtonCheckBox,	"StelGui.flagShowGalacticGridButton");
 	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
-	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButtons");
+	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButton");
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
 
 	//ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
