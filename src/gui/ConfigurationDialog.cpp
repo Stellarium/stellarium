@@ -285,17 +285,15 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
-	connectBoolProperty(ui->showFlipButtonsCheckbox,                   "StelGui.flagShowFlipButtons");
-	connectBoolProperty(ui->showNebulaBgButtonCheckbox,                "StelGui.flagShowNebulaBackgroundButton");
-	connectBoolProperty(ui->showBookmarksButtonCheckBox,               "StelGui.flagShowBookmarksButton");
-	connectBoolProperty(ui->showICRSGridButtonCheckBox,                "StelGui.flagShowICRSGridButton");
-	connectBoolProperty(ui->showGalacticGridButtonCheckBox,            "StelGui.flagShowGalacticGridButton");
-	connectBoolProperty(ui->showEclipticGridButtonCheckBox,            "StelGui.flagShowEclipticGridButton");
+	connectBoolProperty(ui->showFlipButtonsCheckbox,			"StelGui.flagShowFlipButtons");
+	connectBoolProperty(ui->showNebulaBgButtonCheckbox,		"StelGui.flagShowNebulaBackgroundButton");
+	connectBoolProperty(ui->showBookmarksButtonCheckBox,		"StelGui.flagShowBookmarksButton");
+	connectBoolProperty(ui->showICRSGridButtonCheckBox,		"StelGui.flagShowICRSGridButton");
+	connectBoolProperty(ui->showGalacticGridButtonCheckBox,	"StelGui.flagShowGalacticGridButton");
+	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
+	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButtons");
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
 
-  ui->showDSSButtonCheckbox->setChecked(gui->getFlagShowDSSButton());
-	connect(ui->showDSSButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDSSButton(bool)));
-  
 	//ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	//connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
 	// TODO: Make sure to remove this setter function, rather listen to StelApp's signal. 

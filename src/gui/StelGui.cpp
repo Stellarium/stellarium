@@ -849,17 +849,7 @@ void StelGui::setFlagShowDSSButton(bool b)
 	} else {
 		getButtonBar()->hideButton("actionShow_DSS");
 	}
-	flagShowDSSButton = b;
-}
-
-void StelGui::setFlagShowDecimalDegrees(bool b)
-{
-	StelApp::getInstance().setFlagShowDecimalDegrees(b);
-	if (searchDialog->visible())
-	{
-		// Update format of input fields if Search Dialog is open
-		searchDialog->populateCoordinateAxis();		
-	}
+	flagShowDSSButton = b;	
 }
 
 void StelGui::setVisible(bool b)
