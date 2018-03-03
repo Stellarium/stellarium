@@ -23,7 +23,7 @@
 	<key>CFBundleShortVersionString</key>
 	<string>@PACKAGE_VERSION@</string>
 	<key>LSMinimumSystemVersion</key>
-	<string>10.11.0</string>
+	<string>@PACKAGE_OSX_TARGET@</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSHighResolutionCapable</key>

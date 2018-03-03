@@ -46,6 +46,7 @@ bool Exoplanet::habitableMode = false;
 bool Exoplanet::showDesignations = false;
 Vec3f Exoplanet::exoplanetMarkerColor = Vec3f(0.4f,0.9f,0.5f);
 Vec3f Exoplanet::habitableExoplanetMarkerColor = Vec3f(1.f,0.5f,0.f);
+int Exoplanet::temperatureScaleID = 1;
 
 Exoplanet::Exoplanet(const QVariantMap& map)
 	: initialized(false)
@@ -133,7 +134,11 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 			if (!p.pclass.isEmpty())
 				PHEPCount++;			
 			p.EqTemp = exoplanetMap.value("EqTemp", -1).toInt();
+			p.flux = exoplanetMap.value("flux", -1).toInt();
 			p.ESI = exoplanetMap.value("ESI", -1).toInt();
+			p.detectionMethod = exoplanetMap.value("detectionMethod", "").toString();
+			p.conservative = exoplanetMap.value("conservative", false).toBool();
+
 			exoplanets.append(p);
 
 			if (p.eccentricity>0)
@@ -220,7 +225,10 @@ QVariantMap Exoplanet::getMap(void) const
 		if (p.discovered > 0) explMap["discovered"] = p.discovered;
 		if (!p.pclass.isEmpty()) explMap["pclass"] = p.pclass;		
 		if (p.EqTemp > 0) explMap["EqTemp"] = p.EqTemp;
+		if (p.flux > 0) explMap["flux"] = p.flux;
 		if (p.ESI > 0) explMap["ESI"] = p.ESI;
+		if (!p.detectionMethod.isEmpty()) explMap["detectionMethod"] = p.detectionMethod;
+		if (p.conservative) explMap["conservative"] = p.conservative;
 		exoplanetList << explMap;
 	}
 	map["exoplanets"] = exoplanetList;
@@ -340,7 +348,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		{
 			QString planetNameLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Exoplanet"));
 			QString planetProperNameLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Name"));
-			QString periodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Period")).arg(q_("days"));
+			QString periodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Period")).arg(qc_("days", "period"));
 			QString massLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (M<sub>%2</sub>)</td>").arg(q_("Mass")).arg(q_("Jup"));
 			QString radiusLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (R<sub>%2</sub>)</td>").arg(q_("Radius")).arg(q_("Jup"));
 			QString semiAxisLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Semi-Major Axis")).arg(qc_("AU", "distance, astronomical unit"));
@@ -348,11 +356,14 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString inclinationLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Inclination")).arg(QChar(0x00B0));
 			QString angleDistanceLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (\")</td>").arg(q_("Angle Distance"));
 			QString discoveredLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Discovered year"));
-			QString pClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Planetary class"));			
+			QString detectionMethodLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Detection method"));
+			QString pClassLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("Planetary class"));
 			//TRANSLATORS: Full phrase is "Equilibrium Temperature"
-			QString equilibriumTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2C)</td>").arg(q_("Equilibrium temp.")).arg(QChar(0x00B0));
+			QString equilibriumTempLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (%2)</td>").arg(q_("Equilibrium temp.")).arg(getTemperatureScaleUnit());
+			//TRANSLATORS: Average stellar flux of the planet
+			QString fluxLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (S<sub>E</sub>)</td>").arg(q_("Flux"));
 			//TRANSLATORS: ESI = Earth Similarity Index
-			QString ESILabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("ESI"));
+			QString ESILabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("ESI"));			
 			foreach(const exoplanetData &p, exoplanets)
 			{
 				if (!p.planetName.isEmpty())
@@ -437,7 +448,10 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				}
 				if (!p.pclass.isEmpty())
 				{
-					pClassLabel.append("<td style=\"padding:0 2px;\">").append(getPlanetaryClassI18n(p.pclass)).append("</td>");
+					if (!p.conservative)
+						pClassLabel.append("<td style=\"padding:0 2px;\"><em>").append(getPlanetaryClassI18n(p.pclass)).append("</em></td>");
+					else
+						pClassLabel.append("<td style=\"padding:0 2px;\">").append(getPlanetaryClassI18n(p.pclass)).append("</td>");
 				}
 				else
 				{
@@ -445,19 +459,44 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 				}				
 				if (p.EqTemp > 0)
 				{
-					equilibriumTempLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.EqTemp - 273.15, 'f', 2)).append("</td>");
+					if (!p.conservative)
+						equilibriumTempLabel.append("<td style=\"padding:0 2px;\"><em>").append(QString::number(getTemperature(p.EqTemp), 'f', 2)).append("</em></td>");
+					else
+						equilibriumTempLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(getTemperature(p.EqTemp), 'f', 2)).append("</td>");
 				}
 				else
 				{
 					equilibriumTempLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
 				}
+				if (p.flux > 0)
+				{
+					if (!p.conservative)
+						fluxLabel.append("<td style=\"padding:0 2px;\"><em>").append(QString::number(p.flux * 0.01, 'f', 2)).append("</em></td>");
+					else
+						fluxLabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.flux * 0.01, 'f', 2)).append("</td>");
+				}
+				else
+				{
+					fluxLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
 				if (p.ESI > 0)
 				{
-					ESILabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.ESI * 0.01, 'f', 2)).append("</td>");
+					if (!p.conservative)
+						ESILabel.append("<td style=\"padding:0 2px;\"><em>").append(QString::number(p.ESI * 0.01, 'f', 2)).append("</em></td>");
+					else
+						ESILabel.append("<td style=\"padding:0 2px;\">").append(QString::number(p.ESI * 0.01, 'f', 2)).append("</td>");
 				}
 				else
 				{
 					ESILabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				if (p.detectionMethod.isEmpty())
+				{
+					detectionMethodLabel.append("<td style=\"padding:0 2px;\">&mdash;</td>");
+				}
+				else
+				{
+					detectionMethodLabel.append("<td style=\"padding:0 2px;\">").append(q_(p.detectionMethod)).append("</td>");
 				}
 			}
 			oss << "<table>";
@@ -471,18 +510,60 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			oss << "<tr>" << inclinationLabel << "</tr>";
 			oss << "<tr>" << angleDistanceLabel << "</tr>";
 			oss << "<tr>" << discoveredLabel << "</tr>";
+			oss << "<tr>" << detectionMethodLabel << "</tr>";
 			if (hasHabitableExoplanets)
 			{
 				oss << "<tr>" << pClassLabel << "</tr>";				
 				oss << "<tr>" << equilibriumTempLabel << "</tr>";
-				oss << "<tr>" << ESILabel << "</tr>";
+				oss << "<tr>" << fluxLabel << "</tr>";
+				oss << "<tr>" << ESILabel << "</tr>";				
 			}
 			oss << "</table>";
+			if (hasHabitableExoplanets)
+				oss << QString("%1: %2%3").arg(q_("Equilibrium temperature on Earth")).arg(QString::number(getTemperature(255), 'f', 2)).arg(getTemperatureScaleUnit()) << "<br />";
 		}
 	}
 
 	postProcessInfoString(str, flags);
 	return str;
+}
+
+QString Exoplanet::getTemperatureScaleUnit() const
+{
+	QString um = "";
+	switch (temperatureScaleID) {
+		case 0:
+			um = "K";
+			break;
+		case 2:
+			um = QString("%1F").arg(QChar(0x00B0));
+			break;
+		case 1:
+		default:
+			um = QString("%1C").arg(QChar(0x00B0));
+			break;
+	}
+
+	return um;
+}
+
+float Exoplanet::getTemperature(float temperature) const
+{
+	float rt = 0.f;
+	switch (temperatureScaleID) {
+		case 0: // Kelvins
+			rt = temperature;
+			break;
+		case 2: //
+			rt = (temperature - 273.15f)*1.8f + 32.f;
+			break;
+		case 1: // Celsius
+		default:
+			rt = temperature - 273.15f;
+			break;
+	}
+
+	return rt;
 }
 
 QVariantMap Exoplanet::getInfoMap(const StelCore *core) const

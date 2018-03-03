@@ -411,6 +411,12 @@ void TextUserInterface::init()
 					 SLOT(setColorLongitudeLine(Vec3f)),
 					 gridLinesMgr->getColorLongitudeLine(),
 					 m5, m5_24);
+	StelMainView *mainView=&StelMainView::getInstance();
+	TuiNode* m5_26 = new TuiNodeColor(N_("Sky Background (default: black)"),
+					 mainView,
+					 SLOT(setSkyBackgroundColor(Vec3f)),
+					 mainView->getSkyBackgroundColor(),
+					 m5, m5_25);
 	m5_1->setNextNode(m5_2);
 	m5_2->setNextNode(m5_3);
 	m5_3->setNextNode(m5_4);
@@ -435,7 +441,8 @@ void TextUserInterface::init()
 	m5_22->setNextNode(m5_23);
 	m5_23->setNextNode(m5_24);
 	m5_24->setNextNode(m5_25);
-	m5_25->setNextNode(m5_1);
+	m5_25->setNextNode(m5_26);
+	m5_26->setNextNode(m5_1);
 	m5_1->loopToTheLast();
 	m5->setChildNode(m5_1);
 

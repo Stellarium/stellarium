@@ -397,17 +397,17 @@ QSlider {
 }
 
 QSlider::groove:horizontal {
-	border: none;
-	height: 4px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
+        border: none;
+        height: 4px; /* the groove expands to the size of the slider by default. by giving it a height, it has a fixed size */
 	background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(0, 0, 0), stop: 1 rgb(54, 54, 54));
-	margin: 0;
+        margin: 0;
 }
 
 QSlider::handle:horizontal {
 	border: 1px solid rgb(0, 0, 0);
 	border-radius: 2px;
 	width: 32px;
-	margin: -5px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
+        margin: -5px 0; /* handle is placed by default on the contents rect of the groove. Expand outside the groove */
 	color: rgb(31, 31, 31);
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }

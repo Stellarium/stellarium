@@ -90,13 +90,6 @@ private slots:
 	void showShortcutsWindow();
 	void setDiskViewport(bool);
 	void setSphericMirror(bool);
-	void cursorTimeOutChanged();
-	void cursorTimeOutChanged(double) {cursorTimeOutChanged();}
-	void usageButtonsBackgroundChanged(bool b);
-
-	void updateStartPointForAzimuth(bool b);
-	void updateSettingFormattingOutput(bool b);
-	void updateSettingCCSDesignations(bool b);
 
 	void newStarCatalogData();
 	void downloadStars();
@@ -112,10 +105,10 @@ private slots:
 	//! if a directory is selected (i.e. dialog not cancelled), current
 	//! value will be changed, but not saved to config file.
 	void browseForScreenshotDir();
-	void selectScreenshotDir(const QString& dir);
+	void selectScreenshotDir();
 
-	//! Save the current viewing option including landscape, location and sky culture
-	//! This doesn't include the current viewing direction, time and FOV since those
+	//! Save the current viewing options including location and sky culture
+	//! This doesn't include the current viewing direction, landscape, time and FOV since those
 	//! have specific controls
 	void saveAllSettings();
 	//! Save the current view direction and field of view.

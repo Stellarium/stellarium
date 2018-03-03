@@ -1,4 +1,4 @@
-IF(WIN32)
+IF(WIN32 AND NOT MSVC)
      SET(CMAKE_EXE_LINKER_FLAGS ${CMAKE_EXE_LINKER_FLAGS} "-Wl,--enable-runtime-pseudo-reloc")
 ENDIF()
 

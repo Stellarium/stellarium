@@ -39,6 +39,7 @@ NomenclatureMgr::NomenclatureMgr()
 	setObjectName("NomenclatureMgr");
 	conf = StelApp::getInstance().getSettings();
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	ssystem = GETSTELMODULE(SolarSystem);
 }
 
 NomenclatureMgr::~NomenclatureMgr()
@@ -67,17 +68,25 @@ void NomenclatureMgr::init()
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
 	StelApp *app = &StelApp::getInstance();
-	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
+	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));	
+	connect(ssystem, SIGNAL(solarSystemDataReloaded()), this, SLOT(updateNomenclatureData()));
 
 	QString displayGroup = N_("Display Options");
-	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed");
+	addAction("actionShow_Planets_Nomenclature", displayGroup, N_("Nomenclature labels"), "nomenclatureDisplayed", "Alt+N");
+}
+
+void NomenclatureMgr::updateNomenclatureData()
+{
+	bool flag = getFlagLabels();
+	loadNomenclature();
+	updateI18n();
+	setFlagLabels(flag);
 }
 
 void NomenclatureMgr::loadNomenclature()
 {
 	qDebug() << "Loading nomenclature for Solar system bodies ...";
 
-	SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
 	nomenclatureItems.clear();	
 
 	// regular expression to find the comments and empty lines
@@ -85,7 +94,7 @@ void NomenclatureMgr::loadNomenclature()
 
 	// regular expression to find the nomenclature data
 	// Rules:
-	// One rule per line. Each rule contains six elements with white space (or "tab char") as delimiter.
+	// One rule per line. Each rule contains seven elements with white space (or "tab char") as delimiter.
 	// Format:
 	//	planet name				: string
 	//	ID of surface feature			: unique integer (feature id obtained from https://planetarynames.wr.usgs.gov/)
@@ -355,7 +364,7 @@ void NomenclatureMgr::loadNomenclature()
 				{
 					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, ntype, latitude, longitude, size));
 					if (!nom.isNull())
-						nomenclatureItems.append(nom);
+						nomenclatureItems.insert(p, nom);
 
 					readOk++;
 				}				
@@ -379,11 +388,32 @@ void NomenclatureMgr::draw(StelCore* core)
 	StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
 	StelPainter painter(prj);
 	painter.setFont(font);
+	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 
-	foreach (const NomenclatureItemP& nItem, nomenclatureItems)
+	foreach(PlanetP p, nomenclatureItems.uniqueKeys())
 	{
-		if (nItem && nItem->initialized)
-			nItem->draw(core, &painter);
+		// Early exit if the planet is not visible or too small to render the
+		// labels.
+		const Vec3d equPos = p->getJ2000EquatorialPos(core);
+		const double r = p->getRadius() * p->getSphereScale();
+		double angularSize = atan2(r, equPos.length());
+		double screenSize = angularSize * painter.getProjector()->getPixelPerRadAtCenter();
+		if (screenSize < 50)
+			continue;
+		Vec3d n = equPos; n.normalize();
+		SphericalCap boundingCap(n, cos(angularSize));
+		if (!viewportRegion.intersects(boundingCap))
+			continue;
+		if (p->getVMagnitude(core) >= 20.)
+			continue;
+
+		// Render all the items of this planet.
+		for (auto i = nomenclatureItems.find(p); i != nomenclatureItems.end() && i.key() == p; ++i)
+		{
+			const NomenclatureItemP& nItem = i.value();
+			if (nItem)
+				nItem->draw(core, &painter);
+		}
 	}
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
@@ -412,7 +442,7 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 	}
 }
 
-QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFov, const StelCore*) const
+QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFov, const StelCore* core) const
 {
 	QList<StelObjectP> result;
 
@@ -423,14 +453,11 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 
 	foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 	{
-		if (nItem->initialized)
+		equPos = nItem->getJ2000EquatorialPos(core);
+		equPos.normalize();
+		if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
 		{
-			equPos = nItem->XYZ;
-			equPos.normalize();
-			if (equPos[0]*v[0] + equPos[1]*v[1] + equPos[2]*v[2]>=cosLimFov)
-			{
-				result.append(qSharedPointerCast<StelObject>(nItem));
-			}
+			result.append(qSharedPointerCast<StelObject>(nItem));
 		}
 	}
 
@@ -445,7 +472,9 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 		{
 			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
+			{
 				return qSharedPointerCast<StelObject>(nItem);
+			}
 		}
 	}
 
@@ -459,7 +488,9 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
 		{
 			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
+			{
 				return qSharedPointerCast<StelObject>(nItem);
+			}
 		}
 	}
 

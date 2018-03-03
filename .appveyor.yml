@@ -1,0 +1,46 @@
+version: '{branch}-{build}'
+image: Visual Studio 2015
+configuration: Release
+clone_depth: 5
+clone_folder: c:\stellarium
+environment:
+  matrix:
+  - platform: x64
+    qtver: 5.9.3
+    qtbin: msvc2015_64
+    msvcname: Visual Studio 14 2015 Win64
+  - platform: Win32
+    qtver: 5.9.3
+    qtbin: msvc2015
+    msvcname: Visual Studio 14 2015
+  - platform: x64
+    qtver: 5.10.0
+    qtbin: msvc2015_64
+    msvcname: Visual Studio 14 2015 Win64
+  - platform: Win32
+    qtver: 5.10.0
+    qtbin: msvc2015
+    msvcname: Visual Studio 14 2015
+before_build:
+- cmd: >-
+    set PATH=C:\Qt\%qtver%\%qtbin%\bin;%PATH%
+
+    cd c:\stellarium
+
+    mkdir build-%qtver%-%qtbin% && cd build-%qtver%-%qtbin%
+
+    cmake -DENABLE_TESTING=1 -G "%msvcname%" ..
+build:
+  project: c:\stellarium\build-%qtver%-%qtbin%\Stellarium.sln
+  parallel: true
+  verbosity: minimal
+test_script:
+- cmd: ctest --output-on-failure
+notifications:
+- provider: Email
+  to:
+  - mcardinot@gmail.com
+  - alex.v.wolf@gmail.com
+  on_build_success: false
+  on_build_failure: true
+  on_build_status_changed: true

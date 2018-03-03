@@ -128,7 +128,7 @@ public:
 	//! plugin.
 	virtual bool configureGui(bool show=true);
 
-	//! Set up the plugin with default values.  This means clearing out the Pulsars section in the
+	//! Set up the plugin with default values.  This means clearing out the Novae section in the
 	//! main config.ini (if one already exists), and populating it with default values.  It also
 	//! creates the default novae.json file from the resource embedded in the plugin lib/dll file.
 	void restoreDefaults(void);
@@ -185,7 +185,6 @@ public slots:
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void) const;
 
 	void reloadCatalog(void);
 
@@ -235,7 +234,6 @@ private:
 	QString updateUrl;
 	class StelProgressController* progressBar;
 	QTimer* updateTimer;
-	QTimer* messageTimer;
 	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;

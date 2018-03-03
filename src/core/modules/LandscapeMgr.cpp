@@ -62,18 +62,27 @@ public:
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow() const {return fader;}
 private:
+	QSettings* conf ;
 	float radius;
-	QFont font;
+	QFont fontC, fontSC;
 	Vec3f color;
-	QString sNorth, sSouth, sEast, sWest;
+	QString sNorth, sSouth, sEast, sWest, sNortheast, sSoutheast, sSouthwest, sNorthwest;
 	LinearFader fader;
 };
 
 
-Cardinals::Cardinals(float _radius) : radius(_radius), color(0.6,0.2,0.2), sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
+Cardinals::Cardinals(float _radius)
+	: radius(_radius), color(0.6,0.2,0.2)
+	, sNorth("N"), sSouth("S"), sEast("E"), sWest("W")
+	, sNortheast("NE"), sSoutheast("SE"), sSouthwest("SW"), sNorthwest("NW")
 {
-	// Font size is 30
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+17);	
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	int baseFontSize = StelApp::getInstance().getBaseFontSize();
+	// Default font size is 24
+	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", baseFontSize+11).toInt());
+	// Default font size is 18
+	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", baseFontSize+5).toInt());
 }
 
 Cardinals::~Cardinals()
@@ -86,21 +95,25 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 {
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
 	StelPainter sPainter(prj);
-	sPainter.setFont(font);
+	sPainter.setFont(fontC);
 
 	if (!fader.getInterstate()) return;
 
 	// direction text
-	QString d[4];
+	QString d[8];
 
 	d[0] = sNorth;
 	d[1] = sSouth;
 	d[2] = sEast;
 	d[3] = sWest;
+	d[4] = sNortheast;
+	d[5] = sSoutheast;
+	d[6] = sSouthwest;
+	d[7] = sNorthwest;
 
 	// fun polar special cases
-	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = sSouth;
-	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = sNorth;
+	if (latitude ==  90.0 ) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sSouth;
+	if (latitude == -90.0 ) d[0] = d[1] = d[2] = d[3] = d[4] = d[5] = d[6] = d[7] = sNorth;
 
 	sPainter.setColor(color[0],color[1],color[2],fader.getInterstate());
 	sPainter.setBlending(true);
@@ -108,25 +121,54 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	Vec3f pos;
 	Vec3f xy;
 
-	float shift = sPainter.getFontMetrics().width(sNorth)/2.;
+	float sshift = sPainter.getFontMetrics().width(sNorth)/2.;
+	float bshift = sPainter.getFontMetrics().width(sNortheast)/2.;
 	if (core->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk)
-		shift = 0;
+	{
+		sshift = bshift = 0;
+	}
 
 	// N for North
 	pos.set(-1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[0], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[0], 0., -sshift, -sshift, false);
 
 	// S for South
 	pos.set(1.f, 0.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[1], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[1], 0., -sshift, -sshift, false);
 
 	// E for East
 	pos.set(0.f, 1.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[2], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[2], 0., -sshift, -sshift, false);
 
 	// W for West
 	pos.set(0.f, -1.f, 0.f);
-	if (prj->project(pos,xy)) sPainter.drawText(xy[0], xy[1], d[3], 0., -shift, -shift, false);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[3], 0., -sshift, -sshift, false);
+
+	sPainter.setFont(fontSC);
+
+	// NE for Northeast
+	pos.set(-1.f, 1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[4], 0., -bshift, -sshift, false);
+
+	// SE for Southeast
+	pos.set(1.f, 1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[5], 0., -bshift, -sshift, false);
+
+	// SW for Southwest
+	pos.set(1.f, -1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[6], 0., -bshift, -sshift, false);
+
+	// NW for Northwest
+	pos.set(-1.f, -1.f, 0.f);
+	if (prj->project(pos,xy))
+		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -sshift, false);
 
 }
 
@@ -138,6 +180,10 @@ void Cardinals::updateI18n()
 	sSouth = trans.qtranslate("S");
 	sEast = trans.qtranslate("E");
 	sWest = trans.qtranslate("W");
+	sNortheast = trans.qtranslate("NE");
+	sSoutheast = trans.qtranslate("SE");
+	sSouthwest = trans.qtranslate("SW");
+	sNorthwest = trans.qtranslate("NW");
 }
 
 
@@ -412,10 +458,12 @@ void LandscapeMgr::init()
 	setColorCardinalPoints(StelUtils::strToVec3f(conf->value("color/cardinal_color", defaultColor).toString()));
 
 	StelApp *app = &StelApp::getInstance();
+	currentPlanetName = app->getCore()->getCurrentLocation().planetName;
 	//Bortle scale is managed by SkyDrawer
 	StelSkyDrawer* drawer = app->getCore()->getSkyDrawer();
 	setAtmosphereBortleLightPollution(drawer->getBortleScaleIndex());
-	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateLocationBasedPollution(StelLocation)));
+	connect(app->getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(onLocationChanged(StelLocation)));
+	connect(app->getCore(), SIGNAL(targetLocationChanged(StelLocation)), this, SLOT(onTargetLocationChanged(StelLocation)));
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setAtmosphereBortleLightPollution(int)));
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
 
@@ -660,14 +708,14 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 		if (usage)
 		{
 			StelLocation loc = core->getCurrentLocation();
-			updateLocationBasedPollution(loc);
+			onLocationChanged(loc);
 		}
 
 		emit flagUseLightPollutionFromDatabaseChanged(usage);
 	}
 }
 
-void LandscapeMgr::updateLocationBasedPollution(StelLocation loc)
+void LandscapeMgr::onLocationChanged(StelLocation loc)
 {
 	if(flagLightPollutionFromDatabase)
 	{
@@ -680,6 +728,44 @@ void LandscapeMgr::updateLocationBasedPollution(StelLocation loc)
 			bIdx = loc.DEFAULT_BORTLE_SCALE_INDEX;
 
 		core->getSkyDrawer()->setBortleScaleIndex(bIdx);
+	}
+}
+
+void LandscapeMgr::onTargetLocationChanged(StelLocation loc)
+{
+	if (loc.planetName != currentPlanetName)
+	{
+		currentPlanetName = loc.planetName;
+		if (flagLandscapeAutoSelection)
+		{
+			// If we have a landscape for selected planet then set it, otherwise use zero horizon landscape
+			bool landscapeSetsLocation = getFlagLandscapeSetsLocation();
+			setFlagLandscapeSetsLocation(false);
+			if (getAllLandscapeNames().indexOf(loc.planetName)>0)
+				setCurrentLandscapeName(loc.planetName);
+			else
+				setCurrentLandscapeID("zero");
+			setFlagLandscapeSetsLocation(landscapeSetsLocation);
+		}
+
+		if (loc.planetName.contains("Observer", Qt::CaseInsensitive))
+		{
+			setFlagAtmosphere(false);
+			setFlagFog(false);
+			setFlagLandscape(false);
+		}
+		else
+		{
+			SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
+			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
+			if (pl && flagAtmosphereAutoEnabling)
+			{
+				QSettings* conf = StelApp::getInstance().getSettings();
+				setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
+				setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+			}
+			setFlagLandscape(true);
+		}
 	}
 }
 
@@ -894,6 +980,11 @@ void LandscapeMgr::setFlagAtmosphere(const bool displayed)
 bool LandscapeMgr::getFlagAtmosphere() const
 {
 	return atmosphere->getFlagShow();
+}
+
+float LandscapeMgr::getAtmosphereFadeIntensity()
+{
+	return atmosphere->getFadeIntensity();
 }
 
 //! Set atmosphere fade duration in s

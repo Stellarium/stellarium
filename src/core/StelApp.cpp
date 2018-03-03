@@ -440,6 +440,10 @@ void StelApp::init(QSettings* conf)
 	planetLocationMgr = new StelLocationMgr();
 	actionMgr = new StelActionMgr();
 
+	// register non-modules for StelProperty tracking
+	propMgr->registerObject(this);
+	propMgr->registerObject(mainWin);
+
 	// Stel Object Data Base manager
 	stelObjectMgr = new StelObjectMgr();
 	stelObjectMgr->init();
@@ -547,7 +551,7 @@ void StelApp::init(QSettings* conf)
 
 	// Initialisation of the color scheme
 	emit colorSchemeChanged("color");
-	setVisionModeNight(confSettings->value("viewing/flag_night").toBool());
+	setVisionModeNight(confSettings->value("viewing/flag_night", false).toBool());
 
 	// Enable viewport effect at startup if he set
 	setViewportEffect(confSettings->value("video/viewport_effect", "none").toString());
@@ -884,17 +888,29 @@ void StelApp::setVisionModeNight(bool b)
 
 void StelApp::setFlagShowDecimalDegrees(bool b)
 {
-	flagShowDecimalDegrees = b;
+	if (flagShowDecimalDegrees!=b)
+	{
+		flagShowDecimalDegrees = b;
+		emit flagShowDecimalDegreesChanged(b);
+	}
 }
 
 void StelApp::setFlagUseFormattingOutput(bool b)
 {
-	flagUseFormattingOutput = b;
+	if (flagUseFormattingOutput!=b)
+	{
+		flagUseFormattingOutput = b;
+		emit flagUseFormattingOutputChanged(b);
+	}
 }
 
 void StelApp::setFlagUseCCSDesignation(bool b)
 {
-	flagUseCCSDesignation = b;
+	if (flagUseCCSDesignation!=b)
+	{
+		flagUseCCSDesignation = b;
+		emit flagUseCCSDesignationChanged(b);
+	}
 }
 
 // Update translations and font for sky everywhere in the program
@@ -946,7 +962,7 @@ void StelApp::quit()
 void StelApp::setDevicePixelsPerPixel(float dppp)
 {
 	// Check that the device-independent pixel size didn't change
-	if (devicePixelsPerPixel!=dppp)
+	if (!viewportEffect && devicePixelsPerPixel!=dppp)
 	{
 		devicePixelsPerPixel = dppp;
 		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();

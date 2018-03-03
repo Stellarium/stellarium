@@ -93,6 +93,10 @@ Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 bool Nebula::flagUseOutlines = false;
+bool Nebula::flagShowAdditionalNames = true;
+bool Nebula::flagUseSizeLimits = false;
+double Nebula::minSizeLimit = 1.0f;
+double Nebula::maxSizeLimit = 600.0f;
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -117,6 +121,7 @@ Nebula::Nebula()
 	, PNG_nb("")
 	, SNRG_nb("")
 	, ACO_nb("")
+	, HCG_nb("")
 	, withoutID(false)
 	, nameI18("")
 	, mTypeString()
@@ -155,7 +160,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	{
 		oss << getNameI18n();
 		QString aliases = getI18nAliases();
-		if (!aliases.isEmpty())
+		if (!aliases.isEmpty() && flagShowAdditionalNames)
 			oss << " (" << aliases << ")";
 	}
 
@@ -204,6 +209,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("SNR G%1").arg(SNRG_nb);
 		if (!ACO_nb.isEmpty())
 			catIds << QString("ACO %1").arg(ACO_nb);
+		if (!HCG_nb.isEmpty())
+			catIds << QString("HCG %1").arg(HCG_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -333,7 +340,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 				//TRANSLATORS: Unit of measure for distance - Megaparsecs
 				dupc = qc_("Mpc", "distance");
 				//TRANSLATORS: Unit of measure for distance - Millions of Light Years
-				duly = qc_("Mio. ly", "distance");
+				duly = qc_("M ly", "distance");
 			}
 
 			if (oDistanceErr>0.f)
@@ -404,17 +411,49 @@ QVariantMap Nebula::getInfoMap(const StelCore *core) const
 
 QString Nebula::getEnglishAliases() const
 {
-	QString aliases = "";
-	if (englishAliases.size()!=0)
-		aliases = englishAliases.join(" - ");
+	QString aliases = "";	
+	int asize = englishAliases.size();
+	if (asize!=0)
+	{
+		if (asize>3) // Special case for many AKA
+		{
+			for(int i=0; i<asize; i++)
+			{
+				aliases.append(englishAliases.at(i));
+				if (i<asize-1)
+					aliases.append(" - ");
+
+				if (i==1) // 2 AKA-items on first line!
+					aliases.append("<br />");
+			}
+		}
+		else
+			aliases = nameI18Aliases.join(" - ");
+	}
 	return aliases;
 }
 
 QString Nebula::getI18nAliases() const
 {
 	QString aliases = "";
-	if (nameI18Aliases.size()!=0)
-		aliases = nameI18Aliases.join(" - ");
+	int asize = nameI18Aliases.size();
+	if (asize!=0)
+	{
+		if (asize>3) // Special case for many AKA
+		{
+			for(int i=0; i<asize; i++)
+			{
+				aliases.append(nameI18Aliases.at(i));
+				if (i<asize-1)
+					aliases.append(" - ");
+
+				if (i==1) // 2 AKA-items on first line!
+					aliases.append("<br />");
+			}
+		}
+		else
+			aliases = nameI18Aliases.join(" - ");
+	}
 	return aliases;
 }
 
@@ -428,28 +467,29 @@ double Nebula::getAngularSize(const StelCore *) const
 {
 	float size = majorAxisSize;
 	if (majorAxisSize!=minorAxisSize || minorAxisSize>0)
-		size = majorAxisSize+minorAxisSize;
-	return size*0.5f;
+		size = (majorAxisSize+minorAxisSize)*0.5f;
+	return size;
 }
 
 float Nebula::getSelectPriority(const StelCore* core) const
 {
+	float selectPriority = StelObject::getSelectPriority(core);
 	const NebulaMgr* nebMgr = ((NebulaMgr*)StelApp::getInstance().getModuleMgr().getModule("NebulaMgr"));
 	// minimize unwanted selection of the deep-sky objects
 	if (!nebMgr->getFlagHints())
-		return StelObject::getSelectPriority(core)+3.f;
+		return selectPriority+3.f;
 
 	float lim, mag;
 	lim = mag = getVMagnitude(core);
 	float mLim = 15.0f;
 
 	if (!objectInDisplayedCatalog() || !objectInDisplayedType())
-		return StelObject::getSelectPriority(core)+mLim;
+		return selectPriority+mLim;
 
 	const StelSkyDrawer* drawer = core->getSkyDrawer();
 
 	if (drawer->getFlagNebulaMagnitudeLimit() && (mag>drawer->getCustomNebulaMagnitudeLimit()))
-		return StelObject::getSelectPriority(core)+mLim;
+		return selectPriority+mLim;
 	
 	const float maxMagHint = nebMgr->computeMaxMagHint(drawer);
 	// make very easy to select if labeled	
@@ -464,11 +504,12 @@ float Nebula::getSelectPriority(const StelCore* core) const
 	else if (nType==NebHII) // Sharpless and LBN
 		lim=10.0f - 2.0f*qMin(1.5f, majorAxisSize); // Unfortunately, in Sh catalog, we always have mag=99=unknown!
 
-	if (std::min(mLim, lim)<maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
-		return -10.f;
+	if (std::min(mLim, lim)<=maxMagHint || outlineSegments.size()>0) // High priority for big DSO (with outlines)
+		selectPriority = -10.f;
 	else
-		return StelObject::getSelectPriority(core)-2.f;
+		selectPriority -= 5.f;
 
+	return selectPriority;
 }
 
 Vec3f Nebula::getInfoColor(void) const
@@ -947,6 +988,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("SNR G%1").arg(SNRG_nb);
 	else if (catalogFilters&CatACO && !ACO_nb.isEmpty())
 		str = QString("ACO %1").arg(ACO_nb);
+	else if (catalogFilters&CatHCG && !HCG_nb.isEmpty())
+		str = QString("HCG %1").arg(HCG_nb);
 
 	return str;
 }
@@ -959,10 +1002,11 @@ void Nebula::readDSO(QDataStream &in)
 	in	>> DSO_nb >> ra >> dec >> bMag >> vMag >> oType >> mTypeString >> majorAxisSize >> minorAxisSize
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
-		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb;
+		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
+		>> HCG_nb;
 
 	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb;
-	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty())
+	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty())
 		withoutID = true;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
@@ -1109,11 +1153,27 @@ bool Nebula::objectInDisplayedCatalog() const
 		r = true;
 	else if ((catalogFilters&CatACO) && (!ACO_nb.isEmpty()))
 		r = true;
+	else if ((catalogFilters&CatHCG) && (!HCG_nb.isEmpty()))
+		r = true;
 
 	// Special case: objects without ID from current catalogs
 	if (withoutID)
 		r = true;
 
+	return r;
+}
+
+bool Nebula::objectInAllowedSizeRangeLimits(void) const
+{
+	bool r = true;
+	if (flagUseSizeLimits)
+	{
+		float size = 60.f * qMax(majorAxisSize, minorAxisSize);
+		if (size>=minSizeLimit && size<=maxSizeLimit)
+			r = true;
+		else
+			r = false;
+	}
 	return r;
 }
 

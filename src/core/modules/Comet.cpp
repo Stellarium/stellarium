@@ -134,7 +134,7 @@ void Comet::setAbsoluteMagnitudeAndSlope(const float magnitude, const float slop
 
 void Comet::translateName(const StelTranslator &translator)
 {
-	nameI18 = translator.qtranslate(englishName);
+	nameI18 = translator.qtranslate(englishName, "comet");
 }
 
 QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags) const
@@ -171,11 +171,11 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Magnitude)
 	{
-	    QString emag = "";
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		    emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		QString emag = "";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
 
-	    oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
+		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 
 	if (flags&AbsoluteMagnitude)
@@ -187,12 +187,13 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(absoluteMagnitude, 0, 'f', 2) << "<br>";
 	}
 
+
 	oss << getCommonInfoString(core, flags);
 
 	// TRANSLATORS: Unit of measure for distance - kilometers
 	QString km = qc_("km", "distance");
 	// TRANSLATORS: Unit of measure for distance - milliones kilometers
-	QString Mkm = qc_("Mio km", "distance");
+	QString Mkm = qc_("M km", "distance");
 	QString distAU, distKM;
 	if (flags&Distance)
 	{
@@ -231,20 +232,40 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
 	}
 
+	if (flags&Velocity)
+	{
+		QString kms = qc_("km/s", "speed");
+
+		Vec3d orbitalVel=getEclipticVelocity();
+		double orbVel=orbitalVel.length();
+		if (orbVel>0.)
+		{ // AU/d * km/AU /24
+			oss << QString("%1: %2 %3").arg(q_("Velocity")).arg(orbVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+		}
+	}
+
 	if (flags&Extra)
 	{
 		// If semi-major axis not zero then calculate and display orbital period for comet in days
 		double siderealPeriod = getSiderealPeriod();
-		if (siderealPeriod>0)
+		if (siderealPeriod>0.0)
 		{
 			// Sidereal (orbital) period for comets in Julian years (symbol: a)
 			oss << QString("%1: %2 a").arg(q_("Sidereal period"), QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 		}
 
-		// TRANSLATORS: Unit of measure for speed - kilometers per second
-		QString kms = qc_("km/s", "speed");
-		// GZ: Add speed. I don't know where else to place that bit of information.
-		oss << QString("%1: %2 %3").arg(q_("Speed"), QString::number(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 'f', 3), kms) << "<br />";
+		double siderealPeriodCurrentPlanet = core->getCurrentPlanet()->getSiderealPeriod();
+		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && core->getCurrentPlanet()->getPlanetType()==Planet::isPlanet && getPlanetType()!=Planet::isArtificial && getPlanetType()!=Planet::isStar && getPlanetType()!=Planet::isMoon)
+		{
+			double sp = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
+			// Synodic period for comets in Julian years (symbol: a)
+			oss << QString("%1: %2 a").arg(q_("Synodic period"), QString::number(sp/365.25, 'f', 3)) << "<br />";
+		}
+
+//		// TRANSLATORS: Unit of measure for speed - kilometers per second
+//		QString kms = qc_("km/s", "speed");
+//		// GZ: Add speed. I don't know where else to place that bit of information.
+//		oss << QString("%1: %2 %3").arg(q_("Speed"), QString::number(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 'f', 3), kms) << "<br />";
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
@@ -353,11 +374,6 @@ void Comet::update(int deltaTime)
 	{
 		lastJDEtail=dateJDE;
 
-		// The CometOrbit is in fact available in userDataPtr!
-		CometOrbit* orbit=(CometOrbit*)orbitPtr;
-		Q_ASSERT(orbit);
-		if (!orbit->objectDateValid(dateJDE)) return; // out of useful date range. This should allow having hundreds of comet elements.
-
 		if (orbit->getUpdateTails()){
 			// Compute lengths and orientations from orbit object, but only if required.
 			tailFactors=getComaDiameterAndTailLengthAU();
@@ -434,7 +450,8 @@ void Comet::update(int deltaTime)
 	float gasMagFactor=qMin(0.9f*aLum, 0.7f);
 	float dustMagFactor=qMin(dustTailBrightnessFactor*aLum, 0.7f);
 
-	Vec3f gasColor(0.15f*gasMagFactor,0.35f*gasMagFactor,0.6f*gasMagFactor); // Orig color 0.15/0.15/0.6
+	// TODO: Maybe make gas color distance dependent? (various typical ingredients outgas at different temperatures...)
+	Vec3f gasColor(0.15f*gasMagFactor,0.35f*gasMagFactor,0.6f*gasMagFactor); // Orig color 0.15/0.15/0.6.
 	Vec3f dustColor(dustMagFactor, dustMagFactor,0.6f*dustMagFactor);
 
 	if (withAtmosphere)

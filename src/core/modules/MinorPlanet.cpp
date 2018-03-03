@@ -202,7 +202,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 	QString str;
 	QTextStream oss(&str);
 	double az_app, alt_app;
-	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));	
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	double distanceAu = getJ2000EquatorialPos(core).length();
 	Q_UNUSED(az_app);
@@ -282,7 +282,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			distAU = QString::number(hdistanceAu, 'f', 3);
 			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = qc_("Mio km", "distance");
+			km = qc_("M km", "distance");
 		}
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
 
@@ -291,15 +291,35 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		if (distanceAu < 0.1)
 		{
 			distAU = QString::number(distanceAu, 'f', 6);
-			distKM = QString::number(distanceKm, 'f', 3);		}
+			distKM = QString::number(distanceKm, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - kilometers
+			km = qc_("km", "distance");
+		}
 		else
 		{
 			distAU = QString::number(distanceAu, 'f', 3);
 			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = qc_("Mio km", "distance");
+			km = qc_("M km", "distance");
 		}
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
+	}
+
+	if (flags&Velocity)
+	{
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("km/s", "speed");
+
+		Vec3d orbitalVel=getEclipticVelocity();
+		double orbVel=orbitalVel.length();
+		if (orbVel>0.)
+		{ // AU/d * km/AU /24
+			double orbVelKms=orbVel* AU/86400.;
+			oss << QString("%1: %2 %3").arg(q_("Orbital Velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
+			double helioVel=getHeliocentricEclipticVelocity().length(); // just in case we have asteroid moons!
+			if (helioVel!=orbVel)
+				oss << QString("%1: %2 %3").arg(q_("Heliocentric Velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+		}
 	}
 
 	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
@@ -349,11 +369,19 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			oss << QString("%1: %2").arg(q_("SMASSII spectral type"), specB) << "<br />";
 		}
 
+		QString days = qc_("days", "duration");
 		if (siderealPeriod>0)
 		{
-			QString days = qc_("days", "duration");
 			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
+		}
+
+		double siderealPeriodCurrentPlanet = core->getCurrentPlanet()->getSiderealPeriod();
+		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && core->getCurrentPlanet()->getPlanetType()==Planet::isPlanet && getPlanetType()!=Planet::isArtificial && getPlanetType()!=Planet::isStar && getPlanetType()!=Planet::isMoon)
+		{
+			double sp = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
+			// Synodic period for solar system bodies in days and in Julian years (symbol: a)
+			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Synodic period")).arg(QString::number(sp, 'f', 2)).arg(days).arg(QString::number(sp/365.25, 'f', 3)) << "<br />";
 		}
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
@@ -425,7 +453,7 @@ float MinorPlanet::getVMagnitude(const StelCore* core) const
 
 void MinorPlanet::translateName(const StelTranslator &translator)
 {
-	nameI18 = translator.qtranslate(properName);
+	nameI18 = translator.qtranslate(properName, "minor planet");
 	if (englishName.endsWith('*'))
 	{
 		nameI18.append('*');

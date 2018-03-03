@@ -462,8 +462,6 @@ public slots:
 	//! Display a message on the screen for a few seconds.
 	//! This is used for plugin-specific warnings and such.
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	//! Hide all messages.
-	void hideMessages();
 
 	//! Save the current satellite catalog to disk.
 	void saveCatalog(QString path=QString());
@@ -473,6 +471,8 @@ public slots:
 	void setIridiumFlaresPredictionDepth(int depth) { iridiumFlaresPredictionDepth=depth; }
 
 private slots:
+	//! Update satellites visibility on wide range of dates changes - by month or year
+	void updateSatellitesVisibility();
 
 private:
 	//! Add to the current collection the satellite described by the data.
@@ -598,7 +598,6 @@ private:
 	
 	//! @name Screen message infrastructure
 	//@{
-	QTimer* messageTimer;
 	QList<int> messageIDs;
 	//@}
 

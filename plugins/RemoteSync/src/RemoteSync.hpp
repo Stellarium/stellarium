@@ -154,6 +154,7 @@ private slots:
 private:
 	void setState(RemoteSync::SyncState state);
 	void setError(const QString& errorString);
+	QVariant argsGetOptionWithArg(const QStringList &args, QString shortOpt, QString longOpt, QVariant defaultValue);
 
 	SyncState applyClientBehavior(ClientBehavior bh);
 

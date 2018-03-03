@@ -54,18 +54,19 @@ public:
 		AltAzi			= 0x00000020, //!< The position (Altitude/Azimuth)
 		Distance		= 0x00000040, //!< Info about an object's distance
 		Size			= 0x00000080, //!< Info about an object's size
-		Extra			= 0x00000100, //!< Derived class-specific extra fields
-		HourAngle		= 0x00000200, //!< The hour angle + DE (of date)
-		AbsoluteMagnitude	= 0x00000400, //!< The absolute magnitude
-		GalacticCoord		= 0x00000800, //!< The galactic position
-		SupergalacticCoord	= 0x00001000, //!< The supergalactic position
-		ObjectType		= 0x00002000, //!< The type of the object (star, planet, etc.)
-		EclipticCoordJ2000	= 0x00004000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
-		EclipticCoordOfDate	= 0x00008000, //!< The ecliptic position (of date)
-		IAUConstellation        = 0x00010000, //!< Three-letter constellation code (And, Boo, Cas, ...)
-		SiderealTime		= 0x00020000, //!< Mean and Apparent Sidereal Time
-		NoFont			= 0x00040000,
-		PlainText		= 0x00080000,  //!< Strip HTML tags from output
+		Velocity                = 0x00000100, //!< Info about object's velocity
+		Extra			= 0x00000200, //!< Derived class-specific extra fields
+		HourAngle		= 0x00000400, //!< The hour angle + DE (of date)
+		AbsoluteMagnitude	= 0x00000800, //!< The absolute magnitude
+		GalacticCoord		= 0x00001000, //!< The galactic position
+		SupergalacticCoord	= 0x00002000, //!< The supergalactic position
+		ObjectType		= 0x00004000, //!< The type of the object (star, planet, etc.)
+		EclipticCoordJ2000	= 0x00008000, //!< The ecliptic position (J2000.0 ref) [+ XYZ of VSOP87A (used mainly for debugging, not public)]
+		EclipticCoordOfDate	= 0x00010000, //!< The ecliptic position (of date)
+		IAUConstellation        = 0x00020000, //!< Three-letter constellation code (And, Boo, Cas, ...)
+		SiderealTime		= 0x00040000, //!< Mean and Apparent Sidereal Time
+		NoFont			= 0x00080000,
+		PlainText		= 0x00100000,  //!< Strip HTML tags from output
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
@@ -75,7 +76,7 @@ public:
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Extra|HourAngle|
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Velocity|Extra|HourAngle|
 									   AbsoluteMagnitude|GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString

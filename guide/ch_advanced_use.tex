@@ -222,7 +222,7 @@ in appendix~\ref{sec:config.ini} Configuration File.
 \label{sec:ExtraData:stars}
 Stellarium is packaged with over 600 thousand stars in the normal
 program download, but much larger star catalogues may be downloaded
-in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{btd_config} or
+in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{btd_config.png} or
 \key{F2}).
 
 \subsection{More Deep-Sky Objects}
@@ -232,12 +232,12 @@ in the \emph{Tools} tab of the \emph{Configuration} dialog (\guibutton[0.25]{2}{
 objects\footnote{Over 83 thousand deep-sky objects in version 0.16.0.} in the normal
 program download (the standard edition of Stellarium DSO catalog, see section \ref{sec:dso:catalog}), 
 but an extended DSO catalog with over one million objects (up to $19.0^m$) may be downloaded
-from Stellarium's SourceForge website\footnote{\url{https://sourceforge.net/projects/stellarium/files/Extra-data-files/DSO/3.2/}}:
+from Stellarium's SourceForge website\footnote{\url{https://sourceforge.net/projects/stellarium/files/Extra-data-files/DSO/3.3/}}:
 
 \noindent\begin{tabular}{lllr}
 \toprule
 \emph{Version}&\emph{Filename}& \emph{MD5 hash}& \emph{Size}\\\midrule
-3.1; extended edition & \file{catalog.dat} &\texttt{6a2b0deb8deccb6af98f74d9d5cd7177}& 28.2\,MB\\\bottomrule
+3.3; extended edition & \file{catalog.dat} &\texttt{b703354655d7d7f109f2ed97100b8de5}& 28.6\,MB\\\bottomrule
 \end{tabular}
 
 The file can be placed in a folder named \file{nebulae/default} inside either
@@ -249,14 +249,14 @@ the \emph{installation directory} (replacing of standard catalog) or the \emph{u
 
 \noindent\newFeature{v0.15.0}By default, Stellarium uses the \indexterm{VSOP87} planetary theory,
 an analytical solution which is able to deliver planetary positions
-for any input date~\cite{1988A&A...202..309B}. However, its use is recommended only for the year
+for any input date~\citep{1988A&A...202..309B}. However, its use is recommended only for the year
 range $-4000\ldots+8000$. Outside this range, it seems to be usable
 for a few more millennia without too great errors, but with degrading accuracy. 
-Likewise for the moon, Stellarium by default uses ELP~2000-82B~\cite{1982CeMec..26...63C, 1983A&A...124...50C, ELP2000-82B}.
+Likewise for the moon, Stellarium by default uses ELP~2000-82B~\citep{1982CeMec..26...63C, 1983A&A...124...50C, ELP2000-82B}.
 
 Since v0.15.0 you can install extra data files which allow access to the
 numerical integration runs \indexterm{DE430} and \indexterm{DE431}
-from NASA's Jet Propulsion Laboratory (JPL)~\cite{DE43x}. The data files have to be
+from NASA's Jet Propulsion Laboratory (JPL)~\citep{DE43x}. The data files have to be
 downloaded separately, and most users will likely not need them. DE430
 provides highly accurate data for the years $+1550\ldots+2650$, while
 DE431 covers years $-13000\ldots+17000$, which allows e.g.\ 
@@ -265,7 +265,7 @@ year ranges, positional computation falls back to VSOP87.
 
 The integration of this feature is still somewhat experimental, and some other current 
 approximations will lead to numerical data which differ slightly from best possible ephemerides.  
-Please az least compare with JPL Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} for dependable results.
+Please at least compare with JPL Horizons\footnote{\url{https://ssd.jpl.nasa.gov/horizons.cgi}} for dependable results.
 
 To enable use of these data, download the files from
 JPL\footnote{\url{ftp://ssd.jpl.nasa.gov/pub/eph/planets/Linux/}. (Also
@@ -284,7 +284,7 @@ the \emph{installation directory} or the \emph{user directory}
 (see \ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively,
 if you have them already stored elsewhere, you may add the path to
 \file{config.ini} like:
-
+\newpage
 \begin{configfile}
 [astro]
 de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
@@ -434,17 +434,17 @@ the NMEA strings.
 Stellarium's behaviour can be modified by providing parameters to the
 program when it is called via the command line. See table for a full list:
 
-\begin{longtabu} to \textwidth {l|l|X}\toprule
+\begin{longtable}{l|c|p{68mm}}\toprule
 \emph{Option}         & \emph{Option Parameter} & \emph{Description}\\\midrule
 -\/-help or -h        & {[}none{]}       & Print a quick command line help message, and exit. \\\midrule
 -\/-version or -v     & {[}none{]}       & Print the program name and version information, and exit. \\\midrule
 -\/-config-file or -c & config file name & Specify the configuration file name. The default value is \file{config.ini}.
 
-The parameter can be a full path (which will be used verbatim) or a partial path.
+                                           The parameter can be a full path (which will be used verbatim) or a partial path.
 
-Partial paths will be searched for inside the regular search paths
-unless they start with a ``\file{.}'', which may be used to explicitly
-specify a file in the current directory or similar.
+                                           Partial paths will be searched for inside the regular search paths
+                                           unless they start with a ``\file{.}'', which may be used to explicitly
+                                           specify a file in the current directory or similar.
 
 For example, using the option \texttt{-c\ my\_config.ini} would resolve to the file 
 \file{\textless{}user\ directory\textgreater{}/my\_config.ini} whereas 
@@ -477,8 +477,8 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
 -\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\\midrule
 -\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\\midrule
--\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2 with Raspbian Jessie and VC4 drivers from February 2016. A driver update which makes this unnecessary should be available later in 2016.}\\\bottomrule
-\end{longtabu}
+-\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2/3 with Raspbian Jessie and VC4 drivers from Mesa 11 (2016).}\\\bottomrule
+\end{longtable}
 
 \noindent \newFeature{0.15} If you want to avoid adding the same
 switch every time when you start Stellarium from the command line, you

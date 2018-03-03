@@ -91,7 +91,6 @@ Exoplanets::Exoplanets()
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
-	, messageTimer(Q_NULLPTR)
 	, updatesEnabled(false)
 	, updateFrequencyHours(0)
 	, enableAtStartup(false)
@@ -179,13 +178,6 @@ void Exoplanets::init()
 		qWarning() << "[Exoplanets] init error: " << e.what();
 		return;
 	}
-
-	// A timer for hiding alert messages
-	messageTimer = new QTimer(this);
-	messageTimer->setSingleShot(true);   // recurring check for update
-	messageTimer->setInterval(9000);      // 6 seconds should be enough time
-	messageTimer->stop();
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
@@ -696,6 +688,7 @@ void Exoplanets::loadConfiguration(void)
 	setFlagShowExoplanetsDesignations(conf->value("flag_show_designations", true).toBool());
 	setMarkerColor(StelUtils::strToVec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()), false);
 	setMarkerColor(StelUtils::strToVec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()), true);
+	setCurrentTemperatureScaleKey(conf->value("temperature_scale", "Celsius").toString());
 
 	conf->endGroup();
 }
@@ -715,6 +708,7 @@ void Exoplanets::saveConfiguration(void)
 	conf->setValue("flag_show_designations", getFlagShowExoplanetsDesignations());
 	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
 	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(false)));
+	conf->setValue("temperature_scale", getCurrentTemperatureScaleKey());
 
 	conf->endGroup();
 }
@@ -807,16 +801,7 @@ void Exoplanets::updateDownloadComplete(QNetworkReply* reply)
 
 void Exoplanets::displayMessage(const QString& message, const QString hexColor)
 {
-	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
-	messageTimer->start();
-}
-
-void Exoplanets::messageTimeout(void)
-{
-	foreach(int i, messageIDs)
-	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(i);
-	}
+	GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30, true, 16, hexColor, false, 9000);
 }
 
 void Exoplanets::upgradeConfigIni(void)
@@ -922,6 +907,23 @@ void Exoplanets::setFlagShowExoplanets(bool b)
 	}
 }
 
+void Exoplanets::setCurrentTemperatureScaleKey(QString key)
+{
+	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("TemperatureScale"));
+	TemperatureScale ts = (TemperatureScale)en.keyToValue(key.toLatin1().data());
+	if (ts<0)
+	{
+		qWarning() << "Unknown temperature scale:" << key << "setting \"Celsius\" instead";
+		ts = Celsius;
+	}
+	setCurrentTemperatureScale(ts);
+}
+
+QString Exoplanets::getCurrentTemperatureScaleKey() const
+{
+	return metaObject()->enumerator(metaObject()->indexOfEnumerator("TemperatureScale")).key(Exoplanet::temperatureScaleID);
+}
+
 void Exoplanets::translations()
 {
 #if 0
@@ -944,6 +946,23 @@ void Exoplanets::translations()
 	N_("Jovian");
 	// TRANSLATORS: Planet size
 	N_("Neptunian");
+
+	// TRANSLATORS: Exoplanet detection method
+	N_("Primary Transit");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Microlensing");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Radial Velocity");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Imaging");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Pulsar");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Other");
+	// TRANSLATORS: Exoplanet detection method
+	N_("Astrometry");
+	// TRANSLATORS: Detection method. TTV=Transit Timing Variation
+	N_("TTV");
 
 	/* For copy/paste:
 	// TRANSLATORS:

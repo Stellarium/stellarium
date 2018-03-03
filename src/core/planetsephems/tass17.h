@@ -66,7 +66,9 @@ extern "C" {
 #define TASS17_HYPERION  7
 #define TASS17_IAPETUS   6
 
-void GetTass17Coor(double jd,int body,double *xyz);
+// xyz and xyzdot are 3-vectors (position&speed)
+void GetTass17Coor(double jd, int body, double *xyz, double *xyzdot);
+// xyz is a 6-vector (position&speed)
 void GetTass17OsculatingCoor(const double jd0,const double jd, const int body,double *xyz);
 
 #ifdef __cplusplus

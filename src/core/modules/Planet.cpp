@@ -198,6 +198,7 @@ Planet::Planet(const QString& englishName,
 	  radius(radius),
 	  oneMinusOblateness(1.0-oblateness),
 	  eclipticPos(0.,0.,0.),
+	  eclipticVelocity(0.,0.,0.),
 	  haloColor(halocolor),
 	  absoluteMagnitude(-99.0f),
 	  albedo(albedo),
@@ -280,19 +281,19 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		pTypeMap.clear();
 	}
-	pTypeMap.insert(Planet::isStar,		"star");
-	pTypeMap.insert(Planet::isPlanet,	"planet");
-	pTypeMap.insert(Planet::isMoon,		"moon");
-	pTypeMap.insert(Planet::isObserver,	"observer");
-	pTypeMap.insert(Planet::isArtificial,	"artificial");
-	pTypeMap.insert(Planet::isAsteroid,	"asteroid");
-	pTypeMap.insert(Planet::isPlutino,	"plutino");
-	pTypeMap.insert(Planet::isComet,	"comet");
+	pTypeMap.insert(Planet::isStar,			"star");
+	pTypeMap.insert(Planet::isPlanet,		"planet");
+	pTypeMap.insert(Planet::isMoon,			"moon");
+	pTypeMap.insert(Planet::isObserver,		"observer");
+    pTypeMap.insert(Planet::isArtificial,	"artificial");
+	pTypeMap.insert(Planet::isAsteroid,		"asteroid");
+	pTypeMap.insert(Planet::isPlutino,		"plutino");
+	pTypeMap.insert(Planet::isComet,		"comet");
 	pTypeMap.insert(Planet::isDwarfPlanet,	"dwarf planet");
-	pTypeMap.insert(Planet::isCubewano,	"cubewano");
-	pTypeMap.insert(Planet::isSDO,		"scattered disc object");
-	pTypeMap.insert(Planet::isOCO,		"Oort cloud object");
-	pTypeMap.insert(Planet::isSednoid,	"sednoid");
+	pTypeMap.insert(Planet::isCubewano,		"cubewano");
+	pTypeMap.insert(Planet::isSDO,			"scattered disc object");
+	pTypeMap.insert(Planet::isOCO,			"Oort cloud object");
+	pTypeMap.insert(Planet::isSednoid,		"sednoid");
 	pTypeMap.insert(Planet::isUNDEFINED,	"UNDEFINED"); // something must be broken before we ever see this!
 
 	if (vMagAlgorithmMap.count() > 0)
@@ -300,12 +301,12 @@ void Planet::init()
 		qDebug() << "Planet::init(): Non-empty static map. This is a programming error, but we can fix that.";
 		vMagAlgorithmMap.clear();
 	}
-	vMagAlgorithmMap.insert(Planet::Expl_Sup_2013,	"ExpSup2013");
-	vMagAlgorithmMap.insert(Planet::Expl_Sup_1992,	"ExpSup1992");
-	vMagAlgorithmMap.insert(Planet::Mueller_1893,	"Mueller1893"); // better name	
-	vMagAlgorithmMap.insert(Planet::Astr_Alm_1984,	"AstrAlm1984"); // consistent name
-	vMagAlgorithmMap.insert(Planet::Generic,	"Generic"),	
-	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm, "");
+	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_2013,	"ExpSup2013");
+	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_1992,	"ExpSup1992");
+	vMagAlgorithmMap.insert(Planet::Mueller_1893,				"Mueller1893"); // better name
+	vMagAlgorithmMap.insert(Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"); // consistent name
+	vMagAlgorithmMap.insert(Planet::Generic,					"Generic"),
+	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm,			"");
 }
 
 Planet::~Planet()
@@ -326,7 +327,7 @@ void Planet::translateName(const StelTranslator& trans)
 	else
 	{
 		if (getFlagTranslatedName())
-			nameI18 = trans.qtranslate(englishName);
+			nameI18 = trans.qtranslate(englishName, getContextString());
 		else
 			nameI18 = englishName;
 	}
@@ -342,12 +343,56 @@ void Planet::setIAUMoonNumber(QString designation)
 
 QString Planet::getEnglishName() const
 {
-	return englishName;
+    if (!iauMoonNumber.isEmpty())
+        return QString("%1 (%2)").arg(englishName).arg(iauMoonNumber);
+    else
+        return englishName;
 }
 
 QString Planet::getNameI18n() const
 {
-	return nameI18;
+    if (!iauMoonNumber.isEmpty())
+        return QString("%1 (%2)").arg(nameI18).arg(iauMoonNumber);
+    else
+        return nameI18;
+}
+
+const QString Planet::getContextString() const
+{
+	QString context = "";
+	switch (getPlanetType())
+	{
+		case isStar:
+			context = "star";
+			break;
+		case isPlanet:
+			context = "major planet";
+			break;
+		case isMoon:
+			context = "moon";
+			break;
+		case isObserver:
+		case isArtificial:
+			context = "special celestial body";
+			break;
+		case isAsteroid:
+		case isPlutino:
+		case isDwarfPlanet:
+		case isCubewano:
+		case isSDO:
+		case isOCO:
+		case isSednoid:
+			context = "minor planet";
+			break;
+		case isComet:
+			context = "comet";
+			break;
+		default:
+			context = "";
+			break;
+	}
+
+	return context;
 }
 
 // Return the information string "ready to print" :)
@@ -363,9 +408,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation
-		if (!iauMoonNumber.isEmpty())
-			oss << QString(" (%1)").arg(iauMoonNumber);
+		oss << "<h2>" << getNameI18n();  // UI translation can differ from sky translation		
 		oss.setRealNumberNotation(QTextStream::FixedNotation);
 		oss.setRealNumberPrecision(1);
 		if (sphereScale != 1.f)
@@ -430,7 +473,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				distAU = QString::number(hdistanceAu, 'f', 3);
 				distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
 				// TRANSLATORS: Unit of measure for distance - milliones kilometers
-				km = qc_("Mio km", "distance");
+				km = qc_("M km", "distance");
 			}
 
 			oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
@@ -439,17 +482,40 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (distanceAu < 0.1)
 		{
 			distAU = QString::number(distanceAu, 'f', 6);
-			distKM = QString::number(distanceKm, 'f', 3);		}
+			distKM = QString::number(distanceKm, 'f', 3);
+			// TRANSLATORS: Unit of measure for distance - kilometers
+			km = qc_("km", "distance");
+		}
 		else
 		{
 			distAU = QString::number(distanceAu, 'f', 3);
 			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
-			km = qc_("Mio km", "distance");
+			km = qc_("M km", "distance");
 		}
 
 		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 	}
+
+	if (flags&Velocity)
+	{
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
+		QString kms = qc_("km/s", "speed");
+
+		Vec3d orbitalVel=getEclipticVelocity();
+		double orbVel=orbitalVel.length();
+		if (orbVel>0.)
+		{ // AU/d * km/AU /24
+			double orbVelKms=orbVel* AU/86400.;
+//			if (englishName=="Moon")
+//				orbVelKms=orbVel;
+			oss << QString("%1: %2 %3").arg(q_("Orbital Velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
+			double helioVel=getHeliocentricEclipticVelocity().length();
+			if (helioVel!=orbVel)
+				oss << QString("%1: %2 %3").arg(q_("Heliocentric Velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+		}
+	}
+
 
 	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
 	if (flags&Size && angularSize>=4.8e-7)
@@ -503,17 +569,24 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	double siderealDay = getSiderealDay();
 	if (flags&Extra)
 	{
+		static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
+		PlanetP earth = ssystem->getEarth();
+		PlanetP currentPlanet = core->getCurrentPlanet();
+		bool onEarth = (core->getCurrentPlanet()==earth);
+
 		// This is a string you can activate for debugging. It shows the distance between observer and center of the body you are standing on.
 		// May be helpful for debugging critical parallax corrections for eclipses.
 		// For general use, find a better location first.
 		// oss << q_("Planetocentric distance &rho;: %1 (km)").arg(core->getCurrentObserver()->getDistanceFromCenter() * AU) <<"<br>";
-		if (siderealPeriod>0)
+
+		// TRANSLATORS: Unit of measure for period - days
+		QString days = qc_("days", "duration");
+		if (siderealPeriod>0.0)
 		{
-			QString days = qc_("days", "duration");
 			// Sidereal (orbital) period for solar system bodies in days and in Julian years (symbol: a)
 			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Sidereal period"), QString::number(siderealPeriod, 'f', 2), days, QString::number(siderealPeriod/365.25, 'f', 3)) << "<br />";
 
-			if (qAbs(siderealDay)>0)
+			if (qAbs(siderealDay)>0 && getPlanetType()!=isArtificial)
 			{
 				oss << QString("%1: %2").arg(q_("Sidereal day"), StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br />";
 				oss << QString("%1: %2").arg(q_("Mean solar day"), StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br />";
@@ -523,38 +596,22 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				oss << q_("The period of rotation is chaotic") << "<br />";
 			}
 		}
+
+		double siderealPeriodCurrentPlanet = currentPlanet->getSiderealPeriod();
+		QString celestialObject = getEnglishName();
+		if (celestialObject!="Sun")
+			celestialObject = getParent()->getEnglishName();
+		if (siderealPeriodCurrentPlanet > 0.0 && siderealPeriod > 0.0 && currentPlanet->getPlanetType()==Planet::isPlanet && (getPlanetType()==Planet::isPlanet || currentPlanet->getEnglishName()==celestialObject))
+		{
+			double sp = qAbs(1/(1/siderealPeriodCurrentPlanet - 1/siderealPeriod));
+			// Synodic period for major planets in days and in Julian years (symbol: a)
+			oss << QString("%1: %2 %3 (%4 a)").arg(q_("Synodic period")).arg(QString::number(sp, 'f', 2)).arg(days).arg(QString::number(sp/365.25, 'f', 3)) << "<br />";
+		}
+
 		if (englishName != "Sun")
 		{
 			const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 			const double elongation = getElongation(observerHelioPos);
-			QString moonPhase = "";
-			if (englishName=="Moon" && core->getCurrentLocation().planetName=="Earth")
-			{
-				double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(core->getJDE());
-				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
-				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, GETSTELMODULE(SolarSystem)->searchByEnglishName("Sun")->getEquinoxEquatorialPos(core));
-				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
-				int deltaLong = (int)(lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI);
-				if (deltaLong<0) deltaLong+=360;
-				if (deltaLong==45)
-					moonPhase = qc_("Waxing Crescent", "Moon phase");
-				if (deltaLong==90)
-					moonPhase = qc_("First Quarter", "Moon phase");
-				if (deltaLong==135)
-					moonPhase = qc_("Waxing Gibbous", "Moon phase");
-				if (deltaLong==180)
-					moonPhase = qc_("Full Moon", "Moon phase");
-				if (deltaLong==225)
-					moonPhase = qc_("Waning Gibbous", "Moon phase");
-				if (deltaLong==270)
-					moonPhase = qc_("Third Quarter", "Moon phase");
-				if (deltaLong==315)
-					moonPhase = qc_("Waning Crescent", "Moon phase");
-				if (deltaLong==0 || deltaLong==360)
-					moonPhase = qc_("New Moon", "Moon phase");
-			}
 
 			QString pha, elo;
 			if (withDecimalDegree)
@@ -572,17 +629,58 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: %2").arg(q_("Elongation"), elo) << "<br />";
 			oss << QString("%1: %2%").arg(q_("Illuminated"), QString::number(getPhase(observerHelioPos) * 100, 'f', 1)) << "<br />";
 			oss << QString("%1: %2").arg(q_("Albedo"), QString::number(getAlbedo(), 'f', 3)) << "<br />";
-			if (!moonPhase.isEmpty())
-				oss << QString("%1: %2").arg(q_("Phase"), moonPhase) << "<br />";
 
+			if (englishName=="Moon" && onEarth)
+			{
+				QString moonPhase = "";
+				double eclJDE = earth->getRotObliquity(core->getJDE());
+				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core));
+				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
+				double deltaLong = lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI;
+				if (deltaLong<0.) deltaLong += 360.;
+				int deltaLongI = (int)deltaLong;
+				if (deltaLongI==45)
+					moonPhase = qc_("Waxing Crescent", "Moon phase");
+				if (deltaLongI==90)
+					moonPhase = qc_("First Quarter", "Moon phase");
+				if (deltaLongI==135)
+					moonPhase = qc_("Waxing Gibbous", "Moon phase");
+				if (deltaLongI==180)
+					moonPhase = qc_("Full Moon", "Moon phase");
+				if (deltaLongI==225)
+					moonPhase = qc_("Waning Gibbous", "Moon phase");
+				if (deltaLongI==270)
+					moonPhase = qc_("Third Quarter", "Moon phase");
+				if (deltaLongI==315)
+					moonPhase = qc_("Waning Crescent", "Moon phase");
+				if (deltaLongI==0 || deltaLongI==360)
+					moonPhase = qc_("New Moon", "Moon phase");
+
+				double age = deltaLong*29.530588853/360.;
+				oss << QString("%1: %2 %3").arg(q_("Moon age"), QString::number(age, 'f', 1), q_("days old"));
+				if (!moonPhase.isEmpty())
+					oss << QString(" (%4)").arg(moonPhase);
+				oss << "<br />";
+			}
 		}
+
 		if (englishName=="Sun")
 		{
 			// Only show during eclipse, show percent?
-			static SolarSystem *ssystem=GETSTELMODULE(SolarSystem);
-			float eclipseFactor = 100.f*(1.f-ssystem->getEclipseFactor(core));
-			if (eclipseFactor>1.e-7) // needed to avoid false display of 1e-14 or so.
-				oss << QString("%1: %2%").arg(q_("Eclipse Factor")).arg(QString::number(eclipseFactor, 'f', 2)) << "<br />";
+			float eclipseObscuration = 100.f*(1.f-ssystem->getEclipseFactor(core));
+			if (eclipseObscuration>1.e-7) // needed to avoid false display of 1e-14 or so.
+			{
+				oss << QString("%1: %2%").arg(q_("Eclipse obscuration")).arg(QString::number(eclipseObscuration, 'f', 2)) << "<br />";
+				if (onEarth)
+				{
+					PlanetP moon = ssystem->getMoon();
+					const float eclipseMagnitude = (0.5*angularSize + (moon->getAngularSize(core)*M_PI/180.)/moon->getInfoMap(core)["scale"].toFloat() - getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)))/angularSize;
+					oss << QString("%1: %2").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3)) << "<br />";
+				}
+			}
 
 		}
 	}
@@ -613,6 +711,10 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
 		map.insert("type", getPlanetTypeString()); // replace existing "type=Planet" by something more detailed.
 		// TBD: Is there ANY reason to keep "type"="Planet" and add a "ptype"=getPlanetTypeString() field?
+		map.insert("velocity", getEclipticVelocity().toString());
+		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
+		map.insert("scale", sphereScale);
+
 	}
 
 	return map;
@@ -702,7 +804,7 @@ void Planet::computePositionWithoutOrbits(const double dateJDE)
 {
 	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
-		coordFunc(dateJDE, eclipticPos, orbitPtr);
+		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 		lastJDE = dateJDE;
 	}
 }
@@ -815,11 +917,11 @@ void Planet::computePosition(const double dateJDE)
 					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 					if (osculatingFunc)
 					{
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos, orbitPtr);
+						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
 					}
 					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
@@ -845,11 +947,11 @@ void Planet::computePosition(const double dateJDE)
 
 					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 					if (osculatingFunc) {
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
+						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
 					}
 					else
 					{
-						coordFunc(calc_date, eclipticPos, orbitPtr);
+						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
 					}
 					orbitP[d] = eclipticPos;
 					orbit[d] = getHeliocentricEclipticPos();
@@ -874,11 +976,11 @@ void Planet::computePosition(const double dateJDE)
 				computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
 				if (osculatingFunc)
 				{
-					(*osculatingFunc)(dateJDE,calc_date,eclipticPos);
+					(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
 				}
 				else
 				{
-					coordFunc(calc_date, eclipticPos, orbitPtr);
+					coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
 				}
 				orbitP[d] = eclipticPos;
 				orbit[d] = getHeliocentricEclipticPos();
@@ -890,7 +992,7 @@ void Planet::computePosition(const double dateJDE)
 
 
 		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, orbitPtr);
+		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 
 		lastJDE = dateJDE;
 
@@ -898,7 +1000,7 @@ void Planet::computePosition(const double dateJDE)
 	else if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
 		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, orbitPtr);
+		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 		if (orbitFader.getInterstate()>0.000001)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 				orbit[d]=getHeliocentricPos(orbitP[d]);
@@ -1096,6 +1198,23 @@ void Planet::setHeliocentricEclipticPos(const Vec3d &pos)
 		}
 	}
 }
+// Return heliocentric velocity of planet.
+Vec3d Planet::getHeliocentricEclipticVelocity() const
+{
+	// Note: using shared copies is too slow here.  So we use direct access
+	// instead.
+	Vec3d vel = eclipticVelocity;
+	const Planet* pp = parent.data();
+	if (pp)
+	{
+		while (pp->parent.data())
+		{
+			vel += pp->eclipticVelocity;
+			pp = pp->parent.data();
+		}
+	}
+	return vel;
+}
 
 // Compute the distance to the given position in heliocentric coordinate (in AU)
 // This is called by SolarSystem::draw()
@@ -1286,7 +1405,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 		switch (Planet::getApparentMagnitudeAlgorithm())
 		{
 			case UndefinedAlgorithm:	// The most recent solution should be activated by default			
-			case Expl_Sup_2013:
+			case ExplanatorySupplement_2013:
 			{
 				// GZ2017: This is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 2013 (chap. 10.3)
 				// AW2017: Updated data from Errata in The Explanatory Supplement to the Astronomical Almanac (3rd edition, 1st printing)
@@ -1347,7 +1466,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 				break;
 			}
 
-			case Expl_Sup_1992:
+			case ExplanatorySupplement_1992:
 			{
 				// Algorithm provided by Pere Planesas (Observatorio Astronomico Nacional)
 				// GZ2016: Actually, this is taken straight from the Explanatory Supplement to the Astronomical Ephemeris 1992! (chap. 7.12)
@@ -1390,9 +1509,11 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
+
 			case Mueller_1893:
 			{
 				// (1)
+				// Publicationen des Astrophysikalischen Observatoriums zu Potsdam, 8, 366, 1893.
 				if (englishName=="Mercury")
 				{
 					double ph50=phaseDeg-50.0;
@@ -1430,7 +1551,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 				break;
 			}
-			case Astr_Alm_1984:
+			case AstronomicalAlmanac_1984:
 			{
 				// (2)
 				if (englishName=="Mercury")
@@ -3162,5 +3283,5 @@ void Planet::update(int deltaTime)
 void Planet::setApparentMagnitudeAlgorithm(QString algorithm)
 {
 	// sync default value with ViewDialog and SolarSystem!
-	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::Expl_Sup_2013);
+	vMagAlgorithm = vMagAlgorithmMap.key(algorithm, Planet::ExplanatorySupplement_2013);
 }

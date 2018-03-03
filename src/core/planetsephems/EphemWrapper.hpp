@@ -26,7 +26,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * - DE431
  *
  * Extending the old stellplanet-class, this updated version now
- * includes access to DE430 and DE431 for a more precise, yet storage-space intensive solution.
+ * includes access to DE430 and DE431 for a more accurate, yet storage-space intensive solution.
  */
 
 #ifndef _EPHEMWRAPPER_HPP_
@@ -44,51 +44,51 @@ public:
 };
 
 // These functions have an unused void pointer to be compatible to PosFuncType in SolarSystem and Planet classes.
-void get_sun_helio_coordsv(double jd,double xyz[3], void*);
-void get_mercury_helio_coordsv(double jd,double xyz[3], void*);
-void get_venus_helio_coordsv(double jd,double xyz[3], void*);
-void get_earth_helio_coordsv(double jd,double xyz[3], void*);
-void get_mars_helio_coordsv(double jd,double xyz[3], void*);
-void get_jupiter_helio_coordsv(double jd,double xyz[3], void*);
-void get_saturn_helio_coordsv(double jd,double xyz[3], void*);
-void get_uranus_helio_coordsv(double jd,double xyz[3], void*);
-void get_neptune_helio_coordsv(double jd,double xyz[3], void*);
-void get_pluto_helio_coordsv(double jd,double xyz[3], void*);
+void get_sun_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_mercury_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_venus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_earth_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_mars_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_jupiter_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_saturn_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_uranus_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_neptune_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
-void get_mercury_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_venus_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_earth_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_mars_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_jupiter_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_saturn_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3]);
-void get_pluto_helio_osculating_coords(double jd0,double jd,double xyz[3]);
+void get_mercury_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_venus_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_earth_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_mars_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_jupiter_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_saturn_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_uranus_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_neptune_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
+void get_pluto_helio_osculating_coords(double jd0,double jd,double xyz[3], double xyzdot[3]);
 
-void get_lunar_parent_coordsv(double jde, double xyz[3], void*);
+void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*);
 
-void get_phobos_parent_coordsv(double jd,double xyz[3], void*);
-void get_deimos_parent_coordsv(double jd,double xyz[3], void*);
+void get_phobos_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_deimos_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
-void get_io_parent_coordsv(double jd,double xyz[3], void*);
-void get_europa_parent_coordsv(double jd,double xyz[3], void*);
-void get_ganymede_parent_coordsv(double jd,double xyz[3], void*);
-void get_callisto_parent_coordsv(double jd,double xyz[3], void*);
+void get_io_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_europa_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_ganymede_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_callisto_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
-void get_mimas_parent_coordsv(double jd,double xyz[3], void*);
-void get_enceladus_parent_coordsv(double jd,double xyz[3], void*);
-void get_tethys_parent_coordsv(double jd,double xyz[3], void*);
-void get_dione_parent_coordsv(double jd,double xyz[3], void*);
-void get_rhea_parent_coordsv(double jd,double xyz[3], void*);
-void get_titan_parent_coordsv(double jd,double xyz[3], void*);
-void get_hyperion_parent_coordsv(double jd,double xyz[3], void*);
-void get_iapetus_parent_coordsv(double jd,double xyz[3], void*);
+void get_mimas_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_enceladus_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_tethys_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_dione_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_rhea_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_titan_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_hyperion_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_iapetus_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
-void get_miranda_parent_coordsv(double jd,double xyz[3], void*);
-void get_ariel_parent_coordsv(double jd,double xyz[3], void*);
-void get_umbriel_parent_coordsv(double jd,double xyz[3], void*);
-void get_titania_parent_coordsv(double jd,double xyz[3], void*);
-void get_oberon_parent_coordsv(double jd,double xyz[3], void*);
+void get_miranda_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_ariel_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_umbriel_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_titania_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
+void get_oberon_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
 #endif // _EPHEMWRAPPER_HPP_
 

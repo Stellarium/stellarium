@@ -52,8 +52,9 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	//! The absolute star brightness scale
 	Q_PROPERTY(double absoluteStarScale READ getAbsoluteStarScale WRITE setAbsoluteStarScale NOTIFY absoluteStarScaleChanged)
 	Q_PROPERTY(double twinkleAmount READ getTwinkleAmount WRITE setTwinkleAmount NOTIFY twinkleAmountChanged)
-	Q_PROPERTY(bool flagTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
+	Q_PROPERTY(bool flagStarTwinkle READ getFlagTwinkle WRITE setFlagTwinkle NOTIFY flagTwinkleChanged)
 	Q_PROPERTY(int bortleScaleIndex READ getBortleScaleIndex WRITE setBortleScaleIndex NOTIFY bortleScaleIndexChanged)
+	Q_PROPERTY(bool flagDrawBigStarHalo READ getFlagDrawBigStarHalo WRITE setFlagDrawBigStarHalo NOTIFY flagDrawBigStarHaloChanged)
 
 	Q_PROPERTY(bool flagStarMagnitudeLimit READ getFlagStarMagnitudeLimit WRITE setFlagStarMagnitudeLimit NOTIFY flagStarMagnitudeLimitChanged)
 	Q_PROPERTY(bool flagNebulaMagnitudeLimit READ getFlagNebulaMagnitudeLimit WRITE setFlagNebulaMagnitudeLimit NOTIFY flagNebulaMagnitudeLimitChanged)
@@ -190,6 +191,11 @@ public slots:
 	//! Get the average NELM for current Bortle scale index
 	float getNELMFromBortleScale() const;
 
+	//! Set flag for drawing a halo around bright stars.
+	void setFlagDrawBigStarHalo(bool b) {if(b!=flagDrawBigStarHalo){ flagDrawBigStarHalo=b; emit flagDrawBigStarHaloChanged(b);}}
+	//! Get flag for drawing a halo around bright stars.
+	bool getFlagDrawBigStarHalo() const {return flagDrawBigStarHalo;}
+
 	//! Get the magnitude of the currently faintest visible point source
 	//! It depends on the zoom level, on the eye adapation and on the point source rendering parameters
 	//! @return the limit V mag at which a point source will be displayed
@@ -282,6 +288,8 @@ signals:
 	void flagTwinkleChanged(bool b);
 	//! Emitted whenever the Bortle scale index changed
 	void bortleScaleIndexChanged(int index);
+	//! Emitted when flag to draw big halo around stars changed
+	void flagDrawBigStarHaloChanged(bool b);
 
 	//! Emitted whenever the star magnitude limit flag is toggled
 	void flagStarMagnitudeLimitChanged(bool b);
@@ -364,6 +372,7 @@ private:
 	bool flagStarTwinkle;
 	bool flagForcedTwinkle;
 	double twinkleAmount;
+	bool flagDrawBigStarHalo;
 
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.

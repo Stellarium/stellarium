@@ -99,8 +99,7 @@ void ZodiacalLight::handleLocationChanged(StelLocation loc)
 void ZodiacalLight::update(double deltaTime)
 {
 	fader->update((int)(deltaTime*1000));
-
-	if (!getFlagShow() || (getIntensity()<0.01) )
+	if (!fader->getInterstate()  || (getIntensity()<0.01) )
 		return;
 
 	//calculate FOV fade value, linear fade between intensityMaxFov and intensityMinFov
@@ -171,7 +170,7 @@ bool ZodiacalLight::getFlagShow() const
 
 void ZodiacalLight::draw(StelCore* core)
 {
-	if (!getFlagShow() || (getIntensity()<0.01) )
+	if (!fader->getInterstate()  || (getIntensity()<0.01) )
 		return;
 
 	// Test if we are not on Earth. Texture would not fit, so don't draw then.
@@ -181,6 +180,9 @@ void ZodiacalLight::draw(StelCore* core)
 	int bortle=drawer->getBortleScaleIndex();
 	// Test for light pollution, return if too bad.
 	if ( (drawer->getFlagHasAtmosphere()) && (bortle > 5) ) return;
+
+	float atmFadeIntensity = GETSTELMODULE(LandscapeMgr)->getAtmosphereFadeIntensity();
+	float bortleIntensity = 1.f+ (bortle-1)*atmFadeIntensity; // Bortle index moderated by atmosphere fader.
 
 	// The ZL is best observed from Earth only. On the Moon, we must be happy with ZL along the J2000 ecliptic. (Sorry for LP:1628765, I don't find a general solution.)
 	StelProjector::ModelViewTranformP transfo;
@@ -198,7 +200,7 @@ void ZodiacalLight::draw(StelCore* core)
 	Vec3f c = color;
 
 	// ZL is quite sensitive to light pollution. I scale to make it less visible.
-	float lum = drawer->surfaceBrightnessToLuminance(13.5f + 0.5f*bortle); // (8.0f + 0.5*bortle);
+	float lum = drawer->surfaceBrightnessToLuminance(13.5f + 0.5f*bortleIntensity); // (8.0f + 0.5*bortle);
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -246,7 +248,7 @@ void ZodiacalLight::draw(StelCore* core)
 
 			float oneMag=0.0f;
 			extinction.forward(vertAltAz, &oneMag);
-			float extinctionFactor=std::pow(0.4f , oneMag)/bortle; // drop of one magnitude: factor 2.5 or 40%, and further reduced by light pollution
+			float extinctionFactor=std::pow(0.4f , oneMag)/bortleIntensity; // drop of one magnitude: factor 2.5 or 40%, and further reduced by light pollution
 			Vec3f thisColor=Vec3f(c[0]*extinctionFactor, c[1]*extinctionFactor, c[2]*extinctionFactor);
 			vertexArray->colors.append(thisColor);
 		}

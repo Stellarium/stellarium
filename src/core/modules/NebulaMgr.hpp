@@ -78,6 +78,11 @@ class NebulaMgr : public StelObjectModule
 		   WRITE setFlagOutlines
 		   NOTIFY flagOutlinesDisplayedChanged
 		   )
+	Q_PROPERTY(bool flagAdditionalNamesDisplayed
+		   READ getFlagAdditionalNames
+		   WRITE setFlagAdditionalNames
+		   NOTIFY flagAdditionalNamesDisplayedChanged
+		   )
 	Q_PROPERTY(bool flagSurfaceBrightnessUsage
 		   READ getFlagSurfaceBrightnessUsage
 		   WRITE setFlagSurfaceBrightnessUsage
@@ -107,6 +112,21 @@ class NebulaMgr : public StelObjectModule
 		   READ getDesignationUsage
 		   WRITE setDesignationUsage
 		   NOTIFY designationUsageChanged
+		   )
+	Q_PROPERTY(bool flagUseSizeLimits
+		   READ getFlagSizeLimitsUsage
+		   WRITE setFlagSizeLimitsUsage
+		   NOTIFY flagSizeLimitsUsageChanged
+		   )
+	Q_PROPERTY(double minSizeLimit
+		   READ getMinSizeLimit
+		   WRITE setMinSizeLimit
+		   NOTIFY minSizeLimitChanged
+		   )
+	Q_PROPERTY(double maxSizeLimit
+		   READ getMaxSizeLimit
+		   WRITE setMaxSizeLimit
+		   NOTIFY maxSizeLimitChanged
 		   )
 	// Colors
 	Q_PROPERTY(Vec3f labelsColor
@@ -751,25 +771,35 @@ public slots:
 	//! Get flag for usage outlines for big DSO instead their hints.
 	bool getFlagOutlines(void) const;
 
+	//! Set flag for show an additional names for DSO
+	void setFlagAdditionalNames(const bool flag);
+	//! Get flag for show an additional names for DSO
+	bool getFlagAdditionalNames(void) const;
+
 	//! Set flag for usage designations of DSO for their labels instead common names.
 	void setDesignationUsage(const bool flag);
 	//! Get flag for usage designations of DSO for their labels instead common names.
 	bool getDesignationUsage(void) const;
 
 	//! Set whether hints (symbols) should be visible according to surface brightness value.
-	void setFlagSurfaceBrightnessUsage(const bool usage) {if(usage!=Nebula::surfaceBrightnessUsage){ Nebula::surfaceBrightnessUsage=usage; emit flagSurfaceBrightnessUsageChanged(usage);}}
+	void setFlagSurfaceBrightnessUsage(const bool usage);
 	//! Get whether hints (symbols) are visible according to surface brightness value.
-	bool getFlagSurfaceBrightnessUsage(void) const { return Nebula::surfaceBrightnessUsage; }
+	bool getFlagSurfaceBrightnessUsage(void) const;
 
 	//! Set flag for usage of measure unit mag/arcsec^2 to surface brightness value.
-	void setFlagSurfaceBrightnessArcsecUsage(const bool usage) { Nebula::flagUseArcsecSurfaceBrightness=usage; }
+	void setFlagSurfaceBrightnessArcsecUsage(const bool usage);
 	//! Get flag for usage of measure unit mag/arcsec^2 to surface brightness value.
-	bool getFlagSurfaceBrightnessArcsecUsage(void) const { return Nebula::flagUseArcsecSurfaceBrightness; }
+	bool getFlagSurfaceBrightnessArcsecUsage(void) const;
 
 	//! Set flag for usage of short notation for measure unit to surface brightness value.
-	void setFlagSurfaceBrightnessShortNotationUsage(const bool usage) { Nebula::flagUseShortNotationSurfaceBrightness=usage; }
+	void setFlagSurfaceBrightnessShortNotationUsage(const bool usage);
 	//! Get flag for usage of short notation for measure unit to surface brightness value.
-	bool getFlagSurfaceBrightnessShortNotationUsage(void) const { return Nebula::flagUseShortNotationSurfaceBrightness; }
+	bool getFlagSurfaceBrightnessShortNotationUsage(void) const;
+
+	//! Set flag for usage of size limits.
+	void setFlagSizeLimitsUsage(const bool usage);
+	//! Get flag for usage of size limits.
+	bool getFlagSizeLimitsUsage(void) const;
 
 	//! Set flag used to turn on and off Nebula rendering.
 	void setFlagShow(bool b) { flagShow = b; }
@@ -777,9 +807,23 @@ public slots:
 	bool getFlagShow(void) const { return flagShow; }
 
 	//! Set flag used to turn on and off DSO type filtering.
-	void setFlagUseTypeFilters(bool b) { if (Nebula::flagUseTypeFilters!=b) { Nebula::flagUseTypeFilters=b; emit flagUseTypeFiltersChanged(b);}}
+	void setFlagUseTypeFilters(const bool b);
 	//! Get value of flag used to turn on and off DSO type filtering.
-	bool getFlagUseTypeFilters(void) const { return Nebula::flagUseTypeFilters; }
+	bool getFlagUseTypeFilters(void) const;
+
+	//! Set the limit for min. angular size of displayed DSO.
+	//! @param s the angular size between 1 and 600 arcminutes
+	void setMinSizeLimit(double s);
+	//! Get the limit for min. angular size of displayed DSO.
+	//! @return the angular size between 1 and 600 arcminutes
+	double getMinSizeLimit(void) const;
+
+	//! Set the limit for max. angular size of displayed DSO.
+	//! @param s the angular size between 1 and 600 arcminutes
+	void setMaxSizeLimit(double s);
+	//! Get the limit for max. angular size of displayed DSO.
+	//! @return the angular size between 1 and 600 arcminutes
+	double getMaxSizeLimit(void) const;
 
 	//! Set the color used to draw nebula labels.
 	//! @param c The color of the nebula labels
@@ -794,18 +838,18 @@ public slots:
 	//! Set the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param a the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	void setLabelsAmount(double a) {if(a!=labelsAmount){labelsAmount=a; emit labelsAmountChanged(a);}}
+	void setLabelsAmount(double a);
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no labels, 10 is maximum of labels
-	double getLabelsAmount(void) const {return labelsAmount;}
+	double getLabelsAmount(void) const;
 
 	//! Set the amount of nebulae hints. The real amount is also proportional with FOV.
 	//! The limit is set in function of the nebulae magnitude
 	//! @param f the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
-	void setHintsAmount(double f) {if(hintsAmount!=f){hintsAmount = f; emit hintsAmountChanged(f);}}
+	void setHintsAmount(double f);
 	//! Get the amount of nebulae labels. The real amount is also proportional with FOV.
 	//! @return the amount between 0 and 10. 0 is no hints, 10 is maximum of hints
-	double getHintsAmount(void) const {return hintsAmount;}
+	double getHintsAmount(void) const;
 
 signals:
 	//! Emitted when hints are toggled.
@@ -818,10 +862,14 @@ signals:
 	void typeFiltersChanged(Nebula::TypeGroup flags);
 	void hintsProportionalChanged(bool b);
 	void flagOutlinesDisplayedChanged(bool b);
+	void flagAdditionalNamesDisplayedChanged(bool b);
 	void designationUsageChanged(bool b);
 	void flagSurfaceBrightnessUsageChanged(bool b);
 	void flagSurfaceBrightnessArcsecUsageChanged(bool b);
 	void flagSurfaceBrightnessShortNotationUsageChanged(bool b);
+	void flagSizeLimitsUsageChanged(bool b);
+	void minSizeLimitChanged(double s);
+	void maxSizeLimitChanged(double s);
 	void labelsAmountChanged(double a);
 	void hintsAmountChanged(double f);
 
@@ -914,6 +962,7 @@ private:
 	NebulaP searchPNG(QString PNG);
 	NebulaP searchSNRG(QString SNRG);
 	NebulaP searchACO(QString ACO);
+	NebulaP searchHCG(QString HCG);
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

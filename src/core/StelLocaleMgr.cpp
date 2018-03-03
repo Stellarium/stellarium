@@ -104,6 +104,7 @@ void StelLocaleMgr::generateCountryList()
 		QDataStream out(&binaryFile);    // save the data serialized to the file
 		out.setVersion(QDataStream::Qt_5_2);
 		out << countryCodeToStringMap;
+		binaryFile.flush();
 		binaryFile.close();
 	}
 }

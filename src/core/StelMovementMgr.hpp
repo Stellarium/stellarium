@@ -41,6 +41,10 @@ class StelMovementMgr : public StelModule
 		   READ getFlagTracking
 		   WRITE setFlagTracking
 		   NOTIFY flagTrackingChanged)
+	Q_PROPERTY(bool flagIndicationMountMode
+		   READ getFlagIndicationMountMode
+		   WRITE setFlagIndicationMountMode
+		   NOTIFY flagIndicationMountModeChanged)
 
 	//The targets of viewport offset animation
 	Q_PROPERTY(float viewportHorizontalOffsetTarget
@@ -182,7 +186,7 @@ public slots:
 	//! Get the state of flag for indication of mount mode
 	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
 	//! Set the state of flag for indication of mount mode
-	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; }
+	void setFlagIndicationMountMode(bool b) { flagIndicationMountMode=b; emit flagIndicationMountModeChanged(b); }
 
 	//! Move the view to a specified J2000 position.
 	//! @param aim The position to move to expressed as a vector.
@@ -213,8 +217,8 @@ public slots:
 
 	//! Change the zoom level.
 	//! @param aimFov The desired field of view in degrees.
-	//! @param moveDuration The time that the operation should take to complete. [seconds]
-	void zoomTo(double aimFov, float moveDuration = 1.);
+	//! @param zoomDuration The time that the operation should take to complete. [seconds]
+	void zoomTo(double aimFov, float zoomDuration = 1.);
 	//! Get the current Field Of View in degrees
 	double getCurrentFov() const {return currentFov;}
 
@@ -309,6 +313,7 @@ signals:
 	//! Emitted when the tracking property changes
 	void flagTrackingChanged(bool b);
 	void equatorialMountChanged(bool b);
+	void flagIndicationMountModeChanged(bool b);
 
 	void flagAutoZoomOutResetsDirectionChanged(bool b);
 
@@ -321,11 +326,6 @@ private slots:
 
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
-
-	//! Display a message on the screen for a few seconds.
-	void displayMessage(const QString& message, const QString hexColor="#99FF99");
-	//! Hide all messages.
-	void hideMessages();
 
 public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
@@ -471,8 +471,7 @@ private:
 
 	//! @name Screen message infrastructure
 	//@{
-	QTimer* messageTimer;
-	QList<int> messageIDs;
+	int lastMessageID;
 	//@}
 
 };

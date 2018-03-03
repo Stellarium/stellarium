@@ -91,7 +91,8 @@ for($i=0;$i<scalar(@allData);$i++)
 	}
 	$country = $item[8];
 	$country =~ tr/[A-Z]+/[a-z]/;
-	print OUT join("\t", $item[2], $geo{$item[8].".".$item[10]}, $country, $type, $population, $lat, $lon, $item[16], $pollution, $item[17], "", "")."\n";
+	#print OUT join("\t", $item[2], $geo{$item[8].".".$item[10]}, $country, $type, $population, $lat, $lon, $item[16], $pollution, $item[17], "", "")."\n";
+	print OUT join("\t", $item[2], $geo{$item[8].".".$item[10]}, $country, $type, $population, $lat, $lon, $item[16], $pollution, $item[17])."\n";
 }
 for($i=0;$i<scalar(@appdx);$i++)
 {

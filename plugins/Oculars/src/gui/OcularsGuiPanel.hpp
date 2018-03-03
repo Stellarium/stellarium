@@ -118,7 +118,7 @@ private:
 	QGraphicsTextItem* fieldDawesCriterion;
 	QGraphicsTextItem* fieldAbbeyCriterion;
 	QGraphicsTextItem* fieldSparrowCriterion;
-
+	QGraphicsTextItem* fieldVisualResolution;
 
 	//Sensor frame rotation controls
 	StelButton* rotateCcdMinus15Button;

@@ -28,6 +28,8 @@
 #include "StelModuleMgr.hpp"
 #include "StelSkyDrawer.hpp"
 #include "StelProjector.hpp"
+#include "StelLocaleMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include <QTextStream>
 #include <QDebug>
@@ -49,6 +51,7 @@ Vec3f Pulsar::glitchColor = Vec3f(0.2f,0.3f,1.0f);
 Pulsar::Pulsar(const QVariantMap& map)
 	: initialized(false)
 	, designation("")
+	, pulsarName("")
 	, RA(0.)
 	, DE(0.)
 	, parallax(0.)
@@ -75,6 +78,7 @@ Pulsar::Pulsar(const QVariantMap& map)
 	}
 
 	designation  = map.value("designation").toString();
+	pulsarName = map.value("name").toString();
 	parallax = map.value("parallax").toFloat();
 	period = map.value("period").toDouble();
 	bperiod = map.value("bperiod").toDouble();
@@ -116,6 +120,7 @@ QVariantMap Pulsar::getMap(void) const
 {
 	QVariantMap map;
 	map["designation"] = designation;
+	map["name"] = pulsarName;
 	map["parallax"] = parallax;
 	map["bperiod"] = bperiod;
 	map["frequency"] = frequency;
@@ -142,6 +147,21 @@ float Pulsar::getSelectPriority(const StelCore* core) const
 	return StelObject::getSelectPriority(core)-2.f;
 }
 
+QString Pulsar::getNameI18n(void) const
+{
+	QString name = getEnglishName();
+	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
+	if (!pulsarName.isEmpty())
+		name = trans.qtranslate(pulsarName);
+
+	return name;
+}
+
+QString Pulsar::getEnglishName(void) const
+{
+	return pulsarName;
+}
+
 QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
 	QString str;
@@ -149,7 +169,8 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << designation << "</h2>";
+		QString name = pulsarName.isEmpty() ? QString("<h2>%1</h2>").arg(getDesignation()) : QString("<h2>%1 (%2)</h2>").arg(getNameI18n()).arg(getDesignation());
+		oss << name;
 	}
 
 	if (flags&ObjectType)
@@ -159,14 +180,8 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("pulsar")) << "<br />";
 		else
 		{
-			QString sglitch;
-			if (glitch==1)
-				sglitch = q_("has one registered glitch");
-			else
-			{
-				// TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
-				sglitch = q_("has %1 registered glitches").arg(glitch);
-			}
+			// TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
+			QString sglitch = qn_("has %1 registered glitch(es)", glitch).arg(glitch);
 			oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_("pulsar with glitches")).arg(sglitch) << "<br />";
 		}
 	}
@@ -434,7 +449,10 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 
 		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
 		{
-			painter->drawText(XYZ, designation, 0, shift, shift, false);
+			QString name = getDesignation();
+			if (!getNameI18n().isEmpty())
+				name = getNameI18n();
+			painter->drawText(XYZ, name, 0, shift, shift, false);
 		}
 	}
 }

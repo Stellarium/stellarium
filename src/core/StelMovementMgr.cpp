@@ -92,7 +92,7 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, oldViewportOffset(0.0f, 0.0f)
 	, targetViewportOffset(0.0f, 0.0f)
 	, flagIndicationMountMode(false)
-	, messageTimer(Q_NULLPTR)
+	, lastMessageID(0)
 {
 	setObjectName("StelMovementMgr");
 }
@@ -104,12 +104,6 @@ StelMovementMgr::~StelMovementMgr()
 		delete viewportOffsetTimeline;
 		viewportOffsetTimeline=Q_NULLPTR;
 	}
-	if (messageTimer)
-	{
-		delete messageTimer;
-		messageTimer=Q_NULLPTR;
-	}
-
 }
 
 void StelMovementMgr::init()
@@ -212,27 +206,26 @@ void StelMovementMgr::init()
 	viewportOffsetTimeline->setFrameRange(0, 100);
 	connect(viewportOffsetTimeline, SIGNAL(valueChanged(qreal)), this, SLOT(handleViewportOffsetMovement(qreal)));
 	targetViewportOffset.set(core->getViewportHorizontalOffset(), core->getViewportVerticalOffset());
-
-	// A timer for hiding alert messages
-	messageTimer = new QTimer(this);
-	messageTimer->setSingleShot(true);   // recurring check for update
-	messageTimer->setInterval(1000);
-	messageTimer->stop();
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(hideMessages()));
 }
 
 void StelMovementMgr::setEquatorialMount(bool b)
 {
-	QString mode = qc_("Equatorial mount", "mount mode");
-	if (!b)
-		mode = qc_("Alt-azimuth mount", "mount mode");
-
 	setMountMode(b ? MountEquinoxEquatorial : MountAltAzimuthal);
 
 	if (getFlagIndicationMountMode())
 	{
-		hideMessages();
-		displayMessage(mode);
+		QString mode = qc_("Equatorial mount", "mount mode");
+		if (!b)
+			mode = qc_("Alt-azimuth mount", "mount mode");
+
+		if (lastMessageID)
+			GETSTELMODULE(LabelMgr)->deleteLabel(lastMessageID);
+
+		StelProjector::StelProjectorParams projectorParams = StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
+		StelPainter painter(StelApp::getInstance().getCore()->getProjection2d());
+		int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0] - 0.5 * (painter.getFontMetrics().width(mode));
+		int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1] - 0.5 * (painter.getFontMetrics().height());
+		lastMessageID = GETSTELMODULE(LabelMgr)->labelScreen(mode, xPosition, yPosition, true, StelApp::getInstance().getBaseFontSize() + 3, "#99FF99", true, 2000);
 	}
 }
 
@@ -435,7 +428,8 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 			double jdNew;
 			StelUtils::getJDFromDate(&jdNew, year+floor(numSteps), month, day, hour, min, sec);
 			core->setJD(jdNew);
-			emit core->dateChanged();
+			emit core->dateChanged();			
+			emit core->dateChangedByYear();
 		}
 		else if (event->modifiers() & Qt::AltModifier)
 		{
@@ -1498,13 +1492,13 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 }
 
 // Zoom to the given field of view
-void StelMovementMgr::zoomTo(double aim_fov, float moveDuration)
+void StelMovementMgr::zoomTo(double aim_fov, float zoomDuration)
 {
-	moveDuration /= movementsSpeedFactor;
+	zoomDuration /= movementsSpeedFactor;
 
 	zoomMove.aimFov=aim_fov;
 	zoomMove.startFov=currentFov;
-	zoomMove.speed=1.f/(moveDuration*1000);
+	zoomMove.speed=1.f/(zoomDuration*1000);
 	zoomMove.coef=0.;
 	flagAutoZoom = true;
 }
@@ -1572,26 +1566,3 @@ void StelMovementMgr::handleViewportOffsetMovement(qreal value)
 	core->setViewportOffset(offsetX, offsetY);
 }
 
-void StelMovementMgr::displayMessage(const QString& message, const QString hexColor)
-{
-	StelCore* core = StelApp::getInstance().getCore();
-	QFont font;
-
-	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
-	StelPainter painter(prj);
-	painter.setFont(font);
-
-	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-	int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0] - 0.5 * (painter.getFontMetrics().width(message));
-	int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1] - 0.5 * (painter.getFontMetrics().height());
-	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, xPosition, yPosition, true, StelApp::getInstance().getBaseFontSize() + 3, hexColor);
-	messageTimer->start();
-}
-
-void StelMovementMgr::hideMessages()
-{
-	foreach(const int& id, messageIDs)
-	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(id);
-	}
-}

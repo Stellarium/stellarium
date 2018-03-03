@@ -85,7 +85,6 @@ Pulsars::Pulsars()
 	, updateState(CompleteNoUpdates)
 	, downloadMgr(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
-	, messageTimer(Q_NULLPTR)
 	, updatesEnabled(false)
 	, updateFrequencyDays(0)
 	, enableAtStartup(false)
@@ -180,13 +179,6 @@ void Pulsars::init()
 		qWarning() << "[Pulsars] init error:" << e.what();
 		return;
 	}
-
-	// A timer for hiding alert messages
-	messageTimer = new QTimer(this);
-	messageTimer->setSingleShot(true);   // recurring check for update
-	messageTimer->setInterval(9000);      // 6 seconds should be enough time
-	messageTimer->stop();
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(messageTimeout()));
 
 	// If the json file does not already exist, create it from the resource in the Qt resource
 	if(QFileInfo(jsonCatalogPath).exists())
@@ -300,7 +292,7 @@ StelObjectP Pulsars::searchByName(const QString& englishName) const
 
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getEnglishName().toUpper() == englishName.toUpper())
+		if (pulsar->getEnglishName().toUpper() == englishName.toUpper() || pulsar->getDesignation().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -314,7 +306,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 
 	foreach(const PulsarP& pulsar, psr)
 	{
-		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper())
+		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper() || pulsar->getDesignation().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
 	}
 
@@ -324,9 +316,44 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem, bool useStartOfWords, bool inEnglish) const
 {
 	QStringList result;
-	if (flagShowPulsars)
+	if (flagShowPulsars && maxNbItem>0)
 	{
-		result = StelObjectModule::listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
+		QStringList names;
+
+		if (inEnglish)
+		{
+			foreach(const PulsarP& pulsar, psr)
+			{
+				if (!pulsar->getEnglishName().isEmpty())
+					names << pulsar->getEnglishName();
+				names << pulsar->getDesignation();
+			}
+		}
+		else
+		{
+			foreach(const PulsarP& pulsar, psr)
+			{
+				if (!pulsar->getNameI18n().isEmpty())
+					names << pulsar->getNameI18n();
+				names << pulsar->getDesignation();
+			}
+		}
+
+		foreach (const QString& name, names)
+		{
+			if (!matchObjectName(name, objPrefix, useStartOfWords))
+			{
+				continue;
+			}
+
+			result.append(name);
+			if (result.size() >= maxNbItem)
+			{
+				break;
+			}
+		}
+
+		result.sort();
 	}
 	return result;
 }
@@ -341,16 +368,20 @@ QStringList Pulsars::listAllObjects(bool inEnglish) const
 	{
 		foreach(const PulsarP& pulsar, psr)
 		{
-			result << pulsar->getEnglishName();
+			if (!pulsar->getEnglishName().isEmpty())
+				result << pulsar->getEnglishName();
+			result << pulsar->getDesignation();
 		}
 	}
 	else
 	{
 		foreach(const PulsarP& pulsar, psr)
 		{
-			result << pulsar->getNameI18n();
+			if (!pulsar->getNameI18n().isEmpty())
+				result << pulsar->getNameI18n();
+			result << pulsar->getDesignation();
 		}
-	}
+	}	
 	return result;
 }
 
@@ -676,16 +707,7 @@ void Pulsars::updateDownloadComplete(QNetworkReply* reply)
 
 void Pulsars::displayMessage(const QString& message, const QString hexColor)
 {
-	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
-	messageTimer->start();
-}
-
-void Pulsars::messageTimeout(void)
-{
-	foreach(int i, messageIDs)
-	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(i);
-	}
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
 void Pulsars::upgradeConfigIni(void)

@@ -46,6 +46,8 @@ protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
 	Ui_locationDialogForm* ui;
+
+	void resizePixmap();
 	
 private:
 	//! Set the values of all the fields from a location info
@@ -152,6 +154,8 @@ private:
 	QStringListModel* allModel;
 	QStringListModel* pickedModel;
 	QSortFilterProxyModel *proxyModel;
+
+	QPixmap pixmap;
 
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);

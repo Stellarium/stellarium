@@ -72,8 +72,6 @@ static const float MIN_APP_ALTITUDE_DEG=-3.21783f;
 // this must be positive. Transition zone goes that far below the values just specified.
 static const float TRANSITION_WIDTH_GEO_DEG=1.46f;
 static const float TRANSITION_WIDTH_APP_DEG=1.78217f;
-static const float MIN_GEO_ALTITUDE_SIN=std::sin(MIN_GEO_ALTITUDE_DEG*M_PI/180.f);
-static const float MIN_APP_ALTITUDE_SIN=std::sin(MIN_APP_ALTITUDE_DEG*M_PI/180.f);
 
 Refraction::Refraction() : pressure(1013.f), temperature(10.f),
 	preTransfoMat(Mat4d::identity()), invertPreTransfoMat(Mat4d::identity()), preTransfoMatf(Mat4f::identity()), invertPreTransfoMatf(Mat4f::identity()),

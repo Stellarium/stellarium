@@ -1,3 +1,14 @@
+0.17.0 [2017-12-21]
+Version 0.17.0 is based on Qt 5.9.3, but it can still be built from sources with Qt 5.4.
+
+The major changes of this version:
+- Added support for nomenclature of planetary surface (SOCIS 2017 project)
+- Added improvements for AstroCalc tool
+- Added improvements for Oculars plugin
+- Added improvements for Exoplanets plugin
+- Added INDI support for Telescope Control plugin
+- Updated code and data
+
 0.16.1 [2017-09-22]
 Version 0.16.1 is based on Qt 5.6.2, but it can still be built from sources with Qt 5.4.
 This version is bugfix release with some important features:
@@ -68,7 +79,7 @@ a new webserver interface plugin.
 We also introduce another milestone towards providing better astronomical accuracy for 
 historical applications: experimental support of getting planetary positions from JPL DE430 and 
   DE431 ephemerides. This feature is however not fully tested yet. 
-The major changes:
+
 - Added StelProperty system
 - Added new plugin for exhibitions and planetariums - Remote Control
 - Added new skycultures: Macedonian, Ojibwe, Dakota/Lakota/Nakota, 

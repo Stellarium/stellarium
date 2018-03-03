@@ -16,9 +16,9 @@ Landscapes are one of the key features that make Stellarium popular.
 Originally just used for decoration, since version 10.6 they can be
 configured accurately for research and demonstration in ``skyscape
 astronomy'', a term which describes the connection of landscape and
-the sky above~\cite{Brown:JSA2015}. Configured properly, they can act as reliable proxies
+the sky above~\citep{Brown:JSA2015}. Configured properly, they can act as reliable proxies
 of the real landscapes, so that you can take e.g.\ measurements of
-sunrise or stellar alignments~\cite{Zotti-Neubauer:SEAC2011}, or prepare your next moonrise
+sunrise or stellar alignments~\citep{Zotti-Neubauer:SEAC2011}, or prepare your next moonrise
 photograph, as though you were on-site.
 
 In this chapter you can find relevant information required to
@@ -559,7 +559,7 @@ remaining areas of the image (the corners outside the circle) are not
 used.
 
 \begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{trees_512}
+\centering\includegraphics[width=\textwidth]{trees_512.png}
 \caption{Texture for the \landscape{Trees} Fisheye landscape.}
 \label{fig:landscapes:Fisheye}
 \end{figure}
@@ -652,7 +652,7 @@ landscape features. The \landscape{Grossmugl} landscape demonstrates
 an example and should be self-explanatory. This is again multilingual,
 so the files are called \file{gazetteer.<LANG>.utf8}.
 
-\begin{configfile}[\scriptsize]
+\begin{configfileScr}
 # demo gazetteer for Grossmugl landscape.
 # Can be used to better describe the landscape, 
 # i.e. show labels on landscape features.
@@ -670,7 +670,7 @@ so the files are called \file{gazetteer.<LANG>.utf8}.
 305       | 2        |     1          |    0    | Ringendorf
 180       | 2        |     2          |    0    | Vienna (30km)
 135       | 2        |     0.5        |    0    | Wind power plant Strasshof
-\end{configfile}
+\end{configfileScr}
 
 
 \newpage
@@ -691,9 +691,8 @@ film holders and specialized lenses
  \includegraphics[width=9cm]{Horizon202.jpg}
  \caption{Zenit ``Horizon 202'' panorama camera with rotating lens for
    35mm film. \footnotesize{(Source: Wikipedia, ``Horizon202'' by
-     BillC - Own Work. Licensed under CC BY-SA 3.0 via Wikimedia
-     Commons -
-     \url{https://commons.wikimedia.org/wiki/File:Horizon202.jpg\#mediaviewer/File:Horizon202.jpg})}}
+     BillC - Own Work. Licensed under CC BY-SA 3.0 via Wikimedia Commons -
+     \protect\url{https://commons.wikimedia.org/wiki/File:Horizon202.jpg})}}
   \label{fig:landscapes:panoCam}
 \end{figure}
 
@@ -702,7 +701,7 @@ film holders and specialized lenses
 \begin{figure}[tbp]
   \centering
   \includegraphics[width=7cm]{Rodeon_vr_head_01.jpg}
-  \caption{Automated panorama head. \footnotesize{(Source: Wikipedia \url{https://de.wikipedia.org/wiki/Panoramakamera\#mediaviewer/File:Rodeon_vr_head_01.jpg})}}
+  \caption{Automated panorama head. \footnotesize{(Source: Wikipedia \protect\url{https://commons.wikimedia.org/wiki/File:Rodeon_vr_head_01.jpg})}}
   \label{fig:landscapes:panoHead}
 \end{figure}
 
@@ -1470,7 +1469,8 @@ these pictures.
 \label{sec:landscapes:landscapes:Nightscape}
 
 Since version 0.13, Stellarium can simulate artificial illumination,
-like streetlamps, bright windows, or the skyglow over cities\cite{Zotti-Wuchterl:SEAC2014}. One way to
+like streetlamps, bright windows, or the skyglow over cities 
+\citep{Zotti-Wuchterl:SEAC2014}. One way to
 create this layer is to make 2 panorama series during the day and night
 and process these in the same \program{Hugin} project to align those photos,
 and then stitch two separate images by selecting either the daylight or the

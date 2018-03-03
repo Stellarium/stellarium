@@ -110,6 +110,11 @@ class StarMgr : public StelObjectModule
 		   READ getLabelsAmount
 		   WRITE setLabelsAmount
 		   NOTIFY labelsAmountChanged)
+	Q_PROPERTY(bool flagAdditionalNamesDisplayed
+		   READ getFlagAdditionalNames
+		   WRITE setFlagAdditionalNames
+		   NOTIFY flagAdditionalNamesDisplayedChanged
+		   )
 
 public:
 	StarMgr(void);
@@ -201,6 +206,10 @@ public slots:
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}
 	static bool getFlagSciNames(void) {return flagSciNames;}
+
+	//! Show additional star names.
+	void setFlagAdditionalNames(bool flag) { if (flagAdditionalStarNames!=flag){ flagAdditionalStarNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
+	static bool getFlagAdditionalNames(void) { return flagAdditionalStarNames; }
 
 public:
 	///////////////////////////////////////////////////////////////////////////
@@ -360,6 +369,7 @@ private slots:
 signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);
+	void flagAdditionalNamesDisplayedChanged(const bool displayed);
 	void labelsAmountChanged(float a);
 
 private:
@@ -410,7 +420,7 @@ private:
 	LinearFader labelsFader;
 	LinearFader starsFader;
 
-	bool flagStarName;
+	bool flagStarName;	
 	double labelsAmount;
 	bool gravityLabel;
 
@@ -466,6 +476,7 @@ private:
 
 	QFont starFont;
 	static bool flagSciNames;
+	static bool flagAdditionalStarNames;
 	Vec3f labelColor;
 
 	StelTextureSP texPointer;		// The selection pointer texture

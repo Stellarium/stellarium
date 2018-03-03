@@ -26,7 +26,7 @@
 #include "NomenclatureItem.hpp"
 
 #include <QFont>
-#include <QList>
+#include <QMultiHash>
 
 class StelPainter;
 class QSettings;
@@ -123,12 +123,16 @@ public slots:
 	//! Translate nomenclature names.
 	void updateI18n();
 
+	void updateNomenclatureData();
+
 signals:
 	void nomenclatureDisplayedChanged(bool b);
 	void localNomenclatureHidingChanged(bool b);
 	void nomenclatureColorChanged(const Vec3f & color) const;
 
 private:
+	SolarSystem* ssystem;
+
 	//! Load nomenclature for solar system bodies
 	void loadNomenclature();
 
@@ -136,7 +140,7 @@ private:
 	QFont font;
 	QSettings* conf;
 	StelTextureSP texPointer;	
-	QList<NomenclatureItemP> nomenclatureItems;
+	QMultiHash<PlanetP, NomenclatureItemP> nomenclatureItems;
 };
 
 #endif /*_NOMENCLATUREMGR_HPP_*/

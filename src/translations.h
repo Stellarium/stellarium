@@ -39,6 +39,14 @@ class Translations
 		N_("E");
 		// TRANSLATORS: Cardinals names: West
 		N_("W");
+		// TRANSLATORS: Ordinals names: Northeast
+		N_("NE");
+		// TRANSLATORS: Ordinals names: Southeast
+		N_("SE");
+		// TRANSLATORS: Ordinals names: Southwest
+		N_("SW");
+		// TRANSLATORS: Ordinals names: Northwest
+		N_("NW");
 
 		// =====================================================================
 		// List of types solar system bodies
@@ -64,6 +72,10 @@ class Translations
 		N_("Oort cloud object");
 		// TRANSLATORS: Type of object
 		N_("sednoid");
+		// TRANSLATORS: Type of object
+		N_("observer");
+		// TRANSLATORS: Type of object
+		N_("artificial");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Planets");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -399,6 +411,8 @@ class Translations
 		N_("A catalogue of Galactic supernova remnants");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("A Catalog of Rich Clusters of Galaxies");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Hickson Compact Group");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
@@ -477,6 +491,8 @@ class Translations
 		N_("Western");
 		// TRANSLATORS: Name of the sky culture
 		N_("Western (H.A.Rey)");
+		// TRANSLATORS: Name of the sky culture
+		N_("Western (O.Hlad)");
 
 		
 		// =====================================================================
@@ -609,7 +625,7 @@ class Translations
 		N_("Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021.");
 		N_("Phobos occultations of Earth are common, as are occultations of Jupiter. But occultations of both on the same day are very rare. Here's one that takes place 1/23/2048. In real speed.");
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
-		N_("Screensaver of various happenings in the Solar System. 287 events in all!");
+		N_("Screensaver of various happenings in the Solar System. 300 events in all!");
 		N_("A tour of the western constellations.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
@@ -674,5 +690,8 @@ class Translations
 		N_("%1 already exists.\nDo you want to replace it?");
 		N_("&Yes");
 		N_("&No");
+		N_("&Select All");
+		N_("&Step up");
+		N_("Step &down");
 	}
 };

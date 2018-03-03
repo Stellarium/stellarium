@@ -22,14 +22,21 @@
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 \usepackage[top=3cm,bottom=3cm,left=3cm,right=3cm,headsep=10pt,a4paper]{geometry} % Page margins
+\usepackage{ifpdf}
+% We want to create PDF and HTML. Some alternatives are required.
+% https://tex.stackexchange.com/questions/93852/what-is-the-correct-way-to-check-for-latex-pdflatex-and-html-in-the-same-latex
 
-\usepackage{graphicx} % Required for including pictures
+\ifpdf
+  \usepackage{graphicx} % Required for including pictures
+\else % processed with htlatex?
+  \usepackage[dvipdfmx]{graphicx} % Required for including pictures POSSIBLY some other option?
+\fi
 \graphicspath{{pictures/}} % Specifies the directory where pictures are stored
 
 \usepackage{tikz} % Required for drawing custom shapes
 \usepackage{longtable}
 \usepackage{tabularx}
-\usepackage{tabu}
+%\usepackage{tabu} % tabu makes problems with htlatex, sorry.
 \usepackage{gensymb}
 \usepackage[english]{babel} % English language/hyphenation
 
@@ -44,6 +51,8 @@
 \usepackage{color}
 \usepackage{listings}
 \usepackage{rotating} % Allow sidewaysfigure
+\usepackage{fancyvrb}% provides \VerbatimFootnotes
+
 
 %----------------------------------------------------------------------------------------
 %	NEW COMMANDS AND ADDITIONS
@@ -71,7 +80,11 @@
 \newcommand{\command}[1]{\texttt{#1}}
 %% Names of 3rd-party software products like Photoshop, Sketchup etc. Not for OS names, they are too common. 
 %% The footnotesize is required for a better size match.
+\ifpdf
 \newcommand{\program}[1]{\textsf{\textbf{\footnotesize #1}}}
+\else
+\newcommand{\program}[1]{\textsf{\textbf{#1}}}
+\fi
 \newcommand{\var}[1]{\texttt{#1}} %% variable name
 
 %% Color boxes for config.ini 
@@ -79,12 +92,21 @@
 
 % show small icon in-line. Lower by #2. Optional #1 is scale of icon. Use 0.45 for dialog icons, 0.75 for lower bar buttons.
 % Note that it's not possible to use \baselineskip. In Tabular environments this seems to be 0.
+% htlatex apparently has issues with the raisebox. Just draw a box around the icon.
+\ifpdf
 \newcommand{\guibutton[3]}[0.45]{\raisebox{-#2mm}{\fbox{\includegraphics[scale=#1]{#3}}}}
-
+\else
+\newcommand{\guibutton[3]}[0.45]{\fbox{\includegraphics[scale=#1]{#3}}}
+\fi
 % Will become a boxed text, representing a GUI button label.
-\newcommand{\button}[1]{\textbf{\textsf{\fbox{\scriptsize #1}}}}
+\newcommand{\button}[1]{\fbox{\textbf{\textsf{\scriptsize #1}}}}
 %% Person names. In some places they have been italicised, in others bold. Make them appear the same with this, and add them to the index.
 %% Names should be given with First names and surnames like \name[Johann]{Bayer}. The index will be built sorted by entry surnames.
+%% Unfortunately, these cause problems (Ugly rendering, and Stack size exceeded) with tex4ht. But we don't have an index in the HTML version, so just ignore.
+\ifhtlatex
+\newcommand{\name}[2][]{\textbf{#2}}
+\newcommand{\indexterm}[2][]{\emph{#2}}
+\else
 \newcommand{\name}[2][]{%
 	\ifthenelse{\equal{#1}{}}{\textsc{#2}\index{#2}}%
 	                         {\textsc{#1 #2}\index{#2, #1}}}
@@ -93,7 +115,11 @@
 %\newcommand{\indexterm}[1]{\emph{#2}\index{#2}}
 \newcommand{\indexterm}[2][]{%
 	\ifthenelse{\equal{#1}{}}{\emph{#2}\index{#2}}{\emph{#2}\index{#1}}}
-
+\fi	
+	
+	
+	
+	
 %% This will avoid overshooting of the margin notes out of the page.
 \setlength{\marginparwidth}{0.6\marginparwidth}
 %% A command to show the version number when a feature was introduced in the margin. Give only the version number. TODO Decide on formatting etc.
@@ -117,10 +143,25 @@
 \newcommand{\px}{\ensuremath{\mathrm{px}}} % pixels
 \newcommand{\cy}{\ensuremath{\mathrm{cy}}} % century
 
+% It seems the lstenvironments are much too compicated or need big efforts for decorating in HTML/CSS. Just replace by something simpler.
+% We must repeat the same definitions with small and scriptsize (executed in PDF only), and later remove the optional size argument. 							 
+\ifhtlatex
+\DefineVerbatimEnvironment{commands}{Verbatim}{numbers=left,numbersep=2mm,frame=lines,framerule=1pt}
+\DefineVerbatimEnvironment{commandsScr}{Verbatim}{numbers=left,numbersep=2mm,frame=lines,framerule=1pt}
+\DefineVerbatimEnvironment{configfile}{Verbatim}{frame=single}
+\DefineVerbatimEnvironment{configfileScr}{Verbatim}{frame=single}
+\DefineVerbatimEnvironment{script}{Verbatim}{numbers=left,frame=single}
+\else
 \lstnewenvironment{commands}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                      backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
+\lstnewenvironment{commandsScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+                                     backgroundcolor=\color{black!5},frame=leftline,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
 \lstnewenvironment{configfile}[1][\small]{\lstset{language=sh,basicstyle=\ttfamily#1,%
+                                   backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
+                             }{}%
+\lstnewenvironment{configfileScr}[1][\scriptsize]{\lstset{language=sh,basicstyle=\ttfamily#1,%
                                    backgroundcolor=\color{black!5},frame=shadowbox,rulecolor=\color{blue},framerule=1pt}%
                              }{}%
 \lstnewenvironment{script}{\lstset{language=HTML,%
@@ -136,7 +177,7 @@
                                    stringstyle=\color{orange},%
                                    framerule=1pt}%
                              }{}%
-
+\fi
 %% Allow chapter authors where this seems appropriate.
 %% From http://tex.stackexchange.com/questions/156862/displaying-author-for-each-chapter-in-book
 \usepackage{suffix}
@@ -148,6 +189,27 @@
 \WithSuffix\newcommand\sectionauthor*[1]{\printsectionauthor{#1}}
 
 \makeatletter
+\ifhtlatex
+\newcommand{\printchapterauthor}[1]{%
+  {\parindent0pt\vspace*{-25pt}%
+  \linespread{1.1}\large#1%
+  \par\nobreak\vspace*{35pt}}
+  \@afterheading%
+}
+\newcommand{\authortoc}[1]{%
+  \addtocontents{toc}{\vskip-10pt}%
+  \addtocontents{toc}{%
+    \protect\contentsline{chapter}%
+    {\hskip1.3em\mdseries\protect\scriptsize#1}{}{}}
+  \addtocontents{toc}{\vskip5pt}%
+}
+\newcommand{\printsectionauthor}[1]{%
+  {\parindent0pt\vspace*{-5pt}%
+  \linespread{1.1}\large#1%
+  \par\nobreak\vspace*{15pt}}
+  \@afterheading%
+}
+\else
 \newcommand{\printchapterauthor}[1]{%
   {\parindent0pt\vspace*{-25pt}%
   \linespread{1.1}\large\scshape#1%
@@ -167,7 +229,7 @@
   \par\nobreak\vspace*{15pt}}
   \@afterheading%
 }
-
+\fi
 \makeatother
 
 %----------------------------------------------------------------------------------------
@@ -183,18 +245,36 @@
 \usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
 \usepackage{newunicodechar} % Must be loaded after [utf8]inputenc
 \newunicodechar{°}{\degree}
+% It seems Ubuntu on Windows10 has a bit outdated utf8 inputenc? https://tex.stackexchange.com/questions/13067/utf8x-vs-utf8-inputenc
+% But all is OK in TeXLive2017.
+%\newunicodechar{ē}{\=e}
+%\newunicodechar{ū}{\=u}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY AND INDEX
 %----------------------------------------------------------------------------------------
 
-\usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+%\usepackage[style=numeric,citestyle=numeric,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
+\usepackage[style=authoryear-comp,citestyle=authoryear,natbib=true,sorting=nyt,sortcites=true,autopunct=true,autolang=hyphen,hyperref=true,abbreviate=false,backref=true,backend=biber]{biblatex}
 \addbibresource{guide.bib} % BibTeX bibliography file
 \defbibheading{bibempty}{}
+% This command prints >>title (name, year)<< for more extensive citations.
+\newcommand{\citetp}[1]{\citetitle{#1} \citep{#1}}
+% NOTE on citations: we have several options, provided with the natbib compatibility interface.
+% \citet  --> Zotti and Wolf (2017)
+% \citep  --> (Zotti and Wolf, 2017)
+% \cite   --> Zotti and Wolf, 2017
+% \citetp --> Stellarium User Guide (Zotti and Wolf, 2017)
+
 
 \usepackage{calc} % For simpler calculation - used for spacing the index letter headings correctly
+
+\ifhtlatex
+% We don't have an index in HTML version. If anybody want to play with it, go for it...
+\else
 \usepackage{makeidx} % Required to make an index
 \makeindex % Tells LaTeX to create the files required for indexing
+\fi
 
 %----------------------------------------------------------------------------------------
 %	MAIN TABLE OF CONTENTS
@@ -381,7 +461,6 @@
 %----------------------------------------------------------------------------------------
 %	DEFINITION OF COLORED BOXES
 %----------------------------------------------------------------------------------------
-
 \RequirePackage[framemethod=default]{mdframed} % Required for creating the theorem, definition, exercise and corollary boxes
 
 % Theorem box
@@ -618,10 +697,51 @@ innerbottommargin=5pt]{cBox}
 \par\vspace*{270\p@}}
 \makeatother
 
+\usepackage{marvosym}% For the Zodiac symbols, \Aries etc.
+\usepackage{tocvsec2} % Allows fine-tuning TOC depth. (to suppress GPL sections in TOC but have them still numbered)
+%\newenvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\DefineVerbatimEnvironment{commands}{\begin{wBox}\begin{Verbatim}}{\end{Verbatim}\end{wBox}}
+%\lstnewenvironment{commands}{\begin{wBox}\lstset{basicstyle=\ttfamily}\begin{lstlisting}}{\end{lstlisting}\end{wBox}}
+
+%% This can be used to verify general page layout with the command \layout given later.
+%% \usepackage{layout}
+
+
+\ifpdf
+ \usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
+ %% Keypress buttons. This is just a font change now, but can be a boxed key or such.
+ % Prefer using menukeys.
+ \newcommand{\key}[1]{\keys{#1}}
+ \newcommand{\keyPageUp}{\keys{Page\,\arrowkeyup\,}}
+ \newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
+\else
+ %TODO redefine \menu properly!
+ \newcommand{\key}[1]{\fbox{\textbf{\textsf{\small #1}}} }
+ \newcommand{\keys}[1]{\fbox{\textbf{\textsf{\small #1}}} }
+ \newcommand{\keyPageUp}{\keys{Page\,$\uparrow$\,} }
+ \newcommand{\keyPageDown}{\keys{Page\,$\downarrow$\,} }
+ \newcommand{\arrowkeyleft}{\keys{$\leftarrow$} }
+ \newcommand{\arrowkeyright}{\keys{$\rightarrow$} }
+ \newcommand{\arrowkeydown}{\keys{$\downarrow$} }
+ \newcommand{\arrowkeyup}{\keys{$\uparrow$} }
+ \newcommand{\Space}{Space}
+ \newcommand{\ctrl}{Ctrl}
+ \newcommand{\cmdmac}{Command}
+ \newcommand{\Alt}{Alt}
+ \newcommand{\tab}{$\rightleftharpoons$}
+ \newcommand{\shift}{$\Uparrow$}
+ \newcommand{\return}{$\hookleftarrow$}
+ \newcommand{\menu}[1]{\fbox{\textsf #1} }
+\fi
+
+\renewcommand{\topfraction}{0.9}
+
+\definecolor{light-gray}{gray}{0.90}
 %----------------------------------------------------------------------------------------
-%	HYPERLINKS IN THE DOCUMENTS
+%	HYPERLINKS IN THE DOCUMENTS. These packages should be last, else some PDF bookmarks fail!
 %----------------------------------------------------------------------------------------
 
+\ifpdf
 \usepackage{hyperref}
 \hypersetup{hidelinks,%backref=true,pagebackref=true,hyperindex=true, %% 3 latter are default, produce warnings if specified again.
             colorlinks=false,breaklinks=true,urlcolor= ocre,
@@ -630,13 +750,18 @@ innerbottommargin=5pt]{cBox}
             pdfduplex=DuplexFlipLongEdge,
             pdfsubject={Stellarium is a multi-platform open-source desktop planetarium. This document describes version 0.15+ (2016)},
             %pdfcreator={PDFLaTeX},
-            pdfproducer={Stellarium team}, 
-            pdfkeywords={Stellarium Manual}, 
+            %pdfproducer={Stellarium team},%(should be application name!)
+            pdfkeywords={Stellarium Manual},
             pdftitle={Stellarium User Guide},pdfdisplaydoctitle=true,
-            pdfauthor={M. Gates, A. Wolf, G. Zotti, B. Gerdes}% 
+            pdfauthor={Georg Zotti and Alexander Wolf (editors)}%
             }
-%% GZ TODO Maybe in some other style, but links should be visible. 
+%% GZ TODO Maybe in some other style, but links should be visible.
 %\hypersetup{backref=true,pagebackref=true,hyperindex=true,colorlinks=true,breaklinks=true,urlcolor=blue,bookmarks=true,bookmarksopen=false,pdftitle={Title},pdfauthor={Author}}
+% Repeat some settings with pdfcatalog:
+%\pdfcatalog{pdfpagemode=UseOutlines,bookmarksopen=true,%bookmarks=true,bookmarksopenlevel=1,bookmarksnumbered,
+%            pdfview=Fit,pdfstartview=Fit,pdfpagelayout=TwoPageRight,}
+\fi
+
 \usepackage{bookmark}
 \bookmarksetup{
 open,
@@ -651,13 +776,3 @@ addtohook={%
 }
 }
 
-\usepackage[os=win]{menukeys}% For the menu, keycaps, etc. This reqiures the updated catoptions.sty.
-%% Keypress buttons. This is just a font change now, but can be a boxed key or such.
-%\newcommand{\key}[1]{\textbf{\textsf{\small #1}}}
-% Prefer using menukeys. 
-\newcommand{\key}[1]{\keys{#1}}
-\newcommand{\keyPageUp}{\keys{Page\,\arrowkeyup\,}}
-\newcommand{\keyPageDown}{\keys{Page\,\arrowkeydown\,}}
-\renewcommand{\topfraction}{0.9}
-
-\definecolor{light-gray}{gray}{0.90}

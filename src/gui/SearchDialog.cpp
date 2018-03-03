@@ -145,7 +145,7 @@ SearchDialog::SearchDialog(QObject* parent)
 	useStartOfWords = conf->value("search/flag_start_words", false).toBool();
 	useLockPosition = conf->value("search/flag_lock_position", true).toBool();
 	simbadServerUrl = conf->value("search/simbad_server_url", DEF_SIMBAD_URL).toString();
-	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());
+	setCurrentCoordinateSystemKey(conf->value("search/coordinate_system", "equatorialJ2000").toString());	
 }
 
 SearchDialog::~SearchDialog()
@@ -223,7 +223,7 @@ void SearchDialog::populateCoordinateSystemsList()
 
 void SearchDialog::populateCoordinateAxis()
 {
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	bool xnormal = true;
 
 	ui->AxisXSpinBox->setDecimals(2);
@@ -308,10 +308,11 @@ void SearchDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
+	connect(&StelApp::getInstance(), SIGNAL(flagShowDecimalDegreesChanged(bool)), this, SLOT(populateCoordinateAxis()));
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 	connect(ui->lineEditSearchSkyObject, SIGNAL(textChanged(const QString&)),
-		this, SLOT(onSearchTextChanged(const QString&)));
+		     this, SLOT(onSearchTextChanged(const QString&)));
 	connect(ui->pushButtonGotoSearchSkyObject, SIGNAL(clicked()), this, SLOT(gotoObject()));
 	onSearchTextChanged(ui->lineEditSearchSkyObject->text());
 	connect(ui->lineEditSearchSkyObject, SIGNAL(returnPressed()), this, SLOT(gotoObject()));
@@ -387,13 +388,25 @@ void SearchDialog::createDialogContent()
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
-	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
-	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(updateListTab()));
+	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));	
 	updateListTab();
 
+	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
 	// Set the focus directly on the line edit
-	if (ui->lineEditSearchSkyObject->isEnabled())
+	if (ui->tabWidget->currentIndex()==0)
 		ui->lineEditSearchSkyObject->setFocus();
+}
+
+void SearchDialog::changeTab(int index)
+{
+	if (index==0) // First tab: Search
+		ui->lineEditSearchSkyObject->setFocus();
+
+	if (index==2) // Third tab: Lists
+	{
+		updateListTab();
+		ui->searchInListLineEdit->setFocus();
+	}
 }
 
 void SearchDialog::setHasSelectedFlag()

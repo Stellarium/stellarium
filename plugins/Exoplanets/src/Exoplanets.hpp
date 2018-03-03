@@ -70,6 +70,7 @@ typedef QSharedPointer<Exoplanet> ExoplanetP;
 class Exoplanets : public StelObjectModule
 {
 	Q_OBJECT
+	Q_ENUMS(TemperatureScale)
 	Q_PROPERTY(bool showExoplanets
 		   READ getFlagShowExoplanets
 		   WRITE setFlagShowExoplanets
@@ -84,6 +85,14 @@ public:
 		CompleteUpdates,	//!< Update completed, there were updates
 		DownloadError,		//!< Error during download phase
 		OtherError		//!< Other error
+	};
+	//! @enum TemperatureScale
+	//! Available temperature scales
+	enum TemperatureScale
+	{
+		Kelvin		= 0,
+		Celsius		= 1,
+		Fahrenheit		= 2
 	};
 	
 	Exoplanets();
@@ -309,6 +318,21 @@ public slots:
 		return EPCountPH;
 	}
 
+	//! Set the temperature scale
+	void setCurrentTemperatureScale(TemperatureScale tscale)
+	{
+		Exoplanet::temperatureScaleID = (int)tscale;
+	}
+	//! Get the current temperature scale
+	TemperatureScale getCurrentTemperatureScale() const
+	{
+		return (TemperatureScale)Exoplanet::temperatureScaleID;
+	}
+	//! Get the key of current temperature scale
+	QString getCurrentTemperatureScaleKey(void) const;
+	//! Set the temperature scale from its key
+	void setCurrentTemperatureScaleKey(QString key);
+
 private:
 	// Font used for displaying our text
 	QFont font;
@@ -368,8 +392,6 @@ private:
 	QNetworkAccessManager* downloadMgr;
 	QString updateUrl;	
 	QTimer* updateTimer;
-	QTimer* messageTimer;
-	QList<int> messageIDs;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;	
@@ -393,7 +415,6 @@ private slots:
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
-	void messageTimeout(void);
 
 	void reloadCatalog(void);
 };

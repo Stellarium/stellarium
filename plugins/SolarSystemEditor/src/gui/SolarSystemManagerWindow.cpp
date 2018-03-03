@@ -100,7 +100,7 @@ void SolarSystemManagerWindow::updateTexts()
 	//Solar System tab
 	// TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 	QString linkText(q_("website"));
-	QString linkCode = QString("<a href=\"http://www.minorplanetcenter.net/\">%1</a>").arg(linkText);
+	QString linkCode = QString("<a href=\"https://www.minorplanetcenter.net/\">%1</a>").arg(linkText);
 	       
 	// TRANSLATORS: IAU = International Astronomical Union
 	QString mpcText(q_("You can import comet and asteroid data formatted in the export formats of the IAU's Minor Planet Center (%1). You can import files with lists of objects, download such lists from the Internet or search the online Minor Planet and Comet Ephemeris Service (MPES)."));
@@ -227,16 +227,14 @@ void SolarSystemManagerWindow::setAboutHtml(void)
 	html += "<p>" + q_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database.") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Solar System Editor plugin") + "</p>";
+	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Solar System Editor plugin") + "</p>";
 	html += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://groups.google.com/forum/#!forum/stellarium\">")).arg("</a>") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	html += "<li>" + QString(q_("Bug reports and feature requests can be made %1here%2.")).arg("<a href=\"https://github.com/Stellarium/stellarium/issues\">").arg("</a>") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Solar_System_Editor_plugin\">").arg("</a>") + "</li>";
+	html += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Solar_System_Editor_plugin\">").arg("</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());

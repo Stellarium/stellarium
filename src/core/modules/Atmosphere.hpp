@@ -42,6 +42,7 @@ public:
 	Atmosphere();
 	virtual ~Atmosphere();
 	
+	//! Compute sky brightness values and average luminance.
 	void computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moonPhase, float moonMagnitude, StelCore* core,
 		float latitude = 45.f, float altitude = 200.f,
 		float temperature = 15.f, float relativeHumidity = 40.f);
@@ -66,8 +67,9 @@ public:
 	float getFadeIntensity() const {return fader.getInterstate();}
 
 	//! Get the average luminance of the atmosphere in cd/m2
-	//! If atmosphere is off, the luminance includes the background starlight + light pollution.
-	//! Otherwise it includes the atmosphere + background starlight + eclipse factor + light pollution.
+	//! If atmosphere is off, the luminance equals the background starlight (0.001cd/m2).
+	// TODO: Find reference for this value? Why 1 mcd/m2 without atmosphere and 0.1 mcd/m2 inside? Absorption?
+	//! Otherwise it includes the (atmosphere + background starlight (0.0001cd/m2) * eclipse factor + light pollution.
 	//! @return the last computed average luminance of the atmosphere in cd/m2.
 	float getAverageLuminance() const {return averageLuminance;}
 

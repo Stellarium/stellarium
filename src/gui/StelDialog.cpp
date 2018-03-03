@@ -70,6 +70,7 @@ void StelDialog::setVisible(bool v)
 	if (v)
 	{
 		QSize screenSize = StelMainView::getInstance().size();
+		QSize maxSize = 0.8*screenSize;
 		if (dialog)
 		{
 			dialog->show();
@@ -84,6 +85,11 @@ void StelDialog::setVisible(bool v)
 				newPos.setY(screenSize.height() - dialog->size().height());
 			if (newPos != dialog->pos())
 				proxy->setPos(newPos);
+			QSizeF newSize = proxy->size();
+			if (newSize.width() >= maxSize.width())
+				newSize.setWidth(maxSize.width());
+			if (newSize.height() >= maxSize.height())
+				newSize.setHeight(maxSize.height());
 		}
 		else
 		{
@@ -162,6 +168,10 @@ void StelDialog::setVisible(bool v)
 			{
 				//qDebug() << confNameSize << ": resize to " << storedSizeString;
 				proxy->resize(qMax((qreal)newX, proxy->size().width()), qMax((qreal)newY, proxy->size().height()));
+			}
+			if(proxy->size().width() > maxSize.width() || proxy->size().height() > maxSize.height())
+			{
+				proxy->resize(maxSize);
 			}
 			handleDialogSizeChanged(proxy->size()); // This may trigger internal updates in subclasses. E.g. LocationPanel location arrow.
 

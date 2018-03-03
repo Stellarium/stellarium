@@ -311,16 +311,14 @@ void MSConfigDialog::setAboutHtml()
 	"<li>" + QString(q_("%1International Meteor Organization%2").arg("<a href=\"http://www.imo.net/\">")).arg("</a>") + "</li>"
 	"</ul>"
 	"<h3>" + q_("Links") + "</h3>"
-	"<p>" + QString(q_("Support is provided via the Launchpad website. Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers Plugin") + "</p>"
+	"<p>" + QString(q_("Support is provided via the Github website. Be sure to put \"%1\" in the subject when posting.")).arg("Meteor Showers Plugin") + "</p>"
 	"<ul>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	"<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>"
+	"<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://groups.google.com/forum/#!forum/stellarium\">")).arg("</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	"<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>"
+	"<li>" + QString(q_("Bug reports and feature requests can be made %1here%2.")).arg("<a href=\"https://github.com/Stellarium/stellarium/issues\">").arg("</a>") + "</li>"
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	"<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>"
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	"<li>" + q_("If you want to read full information about the plugin, its history and format of the catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Meteor_Showers_plugin\">").arg("</a>") + "</li>"
+	"<li>" + q_("If you want to read full information about the plugin, its history and format of the catalog you can %1get info here%2.").arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Meteor_Showers_plugin\">").arg("</a>") + "</li>"
 	"</ul></body></html>";
 
 	m_ui->about->setHtml(html);

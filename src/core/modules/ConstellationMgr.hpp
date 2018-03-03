@@ -154,7 +154,7 @@ public:
 		constellationsNative      = 1,
 		constellationsTranslated  = 2,
 		constellationsEnglish     = 3 // Maybe this is not useful?
-	};
+	};	
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters

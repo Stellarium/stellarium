@@ -92,7 +92,6 @@ Satellites::Satellites()
 	, autoAddEnabled(false)
 	, autoRemoveEnabled(false)
 	, updateFrequencyHours(0)
-	, messageTimer(Q_NULLPTR)
 	, iridiumFlaresPredictionDepth(7)
 {
 	setObjectName("Satellites");
@@ -167,13 +166,6 @@ void Satellites::init()
 		return;
 	}
 
-	// A timer for hiding alert messages
-	messageTimer = new QTimer(this);
-	messageTimer->setSingleShot(true);   // recurring check for update
-	messageTimer->setInterval(9000);      // 6 seconds should be enough time
-	messageTimer->stop();
-	connect(messageTimer, SIGNAL(timeout()), this, SLOT(hideMessages()));
-
 	// If the json file does not already exist, create it from the resource in the QT resource
 	if(QFileInfo(catalogPath).exists())
 	{
@@ -213,8 +205,17 @@ void Satellites::init()
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 
-	// Handle changes to the observer location:
-	connect(StelApp::getInstance().getCore(), SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
+	// Handle changes to the observer location or wide range of dates:
+	StelCore* core = StelApp::getInstance().getCore();
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateObserverLocation(StelLocation)));
+	connect(core, SIGNAL(dateChangedForMonth()), this, SLOT(updateSatellitesVisibility()));
+	connect(core, SIGNAL(dateChangedByYear()), this, SLOT(updateSatellitesVisibility()));
+}
+
+void Satellites::updateSatellitesVisibility()
+{
+	if (getFlagHints())
+		setFlagHints(false);
 }
 
 bool Satellites::backupCatalog(bool deleteOriginal)
@@ -1390,17 +1391,9 @@ void Satellites::recalculateOrbitLines(void)
 
 void Satellites::displayMessage(const QString& message, const QString hexColor)
 {
-	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor);
-	messageTimer->start();
+	messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20*messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
-void Satellites::hideMessages()
-{
-	foreach(const int& id, messageIDs)
-	{
-		GETSTELMODULE(LabelMgr)->deleteLabel(id);
-	}
-}
 
 void Satellites::saveCatalog(QString path)
 {

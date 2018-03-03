@@ -423,7 +423,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		cons = new Constellation;
 		if(cons->read(record, hipStarMgr))
 		{
-			cons->artFader.setMaxValue(artIntensity);
+			cons->artOpacity = artIntensity;
 			cons->artFader.setDuration((int) (artFadeDuration * 1000.f));
 			cons->setFlagArt(artDisplayed);
 			cons->setFlagBoundaries(boundariesDisplayed);
@@ -881,7 +881,7 @@ void ConstellationMgr::setArtIntensity(const float intensity)
 		vector < Constellation * >::const_iterator iter;
 		for (iter = constellations.begin(); iter != constellations.end(); ++iter)
 		{
-			(*iter)->artFader.setMaxValue(artIntensity);
+			(*iter)->artOpacity = artIntensity;
 		}
 
 		emit artIntensityChanged(intensity);

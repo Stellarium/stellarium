@@ -113,14 +113,8 @@ public:
 	virtual QString getName() const { return "Telescope Control"; }
 	virtual QString getStelObjectType() const;
 	virtual bool configureGui(bool show = true);
-	
-	///////////////////////////////////////////////////////////////////////////
-	// Methods specific to TelescopeControl
-	//! Send a J2000-goto-command to the specified telescope
-	//! @param telescopeNr the number of the telescope
-	//! @param j2000Pos the direction in equatorial J2000 frame
-	//! @param selectObject selected object (if any; Q_NULLPTR if move is not based on an object)
-	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
+
+	QSharedPointer<TelescopeClient> telescopeClient(int index) const;
 	
 	//! Remove all currently registered telescopes
 	void deleteAllTelescopes();
@@ -267,22 +261,18 @@ public slots:
 	//! @endcode
 	void setFontSize(int fontSize);
 	
-	//! slews a telescope to the selected object.
-	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the StelAction which triggered the slot.
+	//! slews a telescope at slot idx to the selected object.
 	//! @code
 	//! // example of usage in scripts
-	//! TelescopeControl.slewTelescopeToSelectedObject();
+	//! TelescopeControl.slewTelescopeToSelectedObject(1);
 	//! @endcode
 	void slewTelescopeToSelectedObject(const int idx);
 
-	//! slews a telescope to the point of the celestial sphere currently
+	//! slews a telescope at slot idx to the point of the celestial sphere currently
 	//! in the center of the screen.
-	//! For use from the GUI. The telescope number will be
-	//! deduced from the name of the StelAction which triggered the slot.
 	//! @code
 	//! // example of usage in scripts
-	//! TelescopeControl.slewTelescopeToViewDirection();
+	//! TelescopeControl.slewTelescopeToViewDirection(1);
 	//! @endcode
 	void slewTelescopeToViewDirection(const int idx);
 	
@@ -298,6 +288,14 @@ private slots:
 	void translateActionDescriptions();
 
 private:
+	///////////////////////////////////////////////////////////////////////////
+	// Methods specific to TelescopeControl
+	//! Send a J2000-goto-command to the specified telescope
+	//! @param telescopeNr the number of the telescope
+	//! @param j2000Pos the direction in equatorial J2000 frame
+	//! @param selectObject selected object (if any; Q_NULLPTR if move is not based on an object)
+	void telescopeGoto(int telescopeNr, const Vec3d &j2000Pos, StelObjectP selectObject = Q_NULLPTR);
+
 	//! Draw a nice animated pointer around the object if it's selected
 	void drawPointer(const StelProjectorP& prj, const StelCore* core, StelPainter& sPainter);
 

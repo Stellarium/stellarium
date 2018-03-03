@@ -105,6 +105,9 @@ public slots:
 	//! Get flag of displaying markers of the navigational stars
 	bool getNavStarsMarks(void) const;
 
+	void setEnableAtStartup(bool b) { enableAtStartup=b; }
+	bool getEnableAtStartup(void) const { return enableAtStartup; }
+
 	//! Set the set of navigational stars
 	void setCurrentNavigationalStarsSet(NavigationalStarsSet nsset)
 	{
@@ -137,6 +140,8 @@ private:
 	// The current set of navigational stars
 	NavigationalStarsSet currentNSSet;
 
+	bool enableAtStartup;
+
 	//! List of the navigational stars' HIP numbers.
 	QList<int> starNumbers;
 	//! List of pointers to the objects representing the stars.
@@ -145,7 +150,7 @@ private:
 	StelTextureSP markerTexture;
 	//! Color used to paint each star's marker and additional label.
 	Vec3f markerColor;	
-	LinearFader markerFader;
+	LinearFader markerFader;	
 
 	//! Button for the bottom toolbar.
 	StelButton* toolbarButton;

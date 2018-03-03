@@ -52,7 +52,7 @@
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
-static const QString StellariumDSOCatalogVersion = "3.2";
+static const QString StellariumDSOCatalogVersion = "3.4";
 
 void NebulaMgr::setLabelsColor(const Vec3f& c) {Nebula::labelColor = c; emit labelsColorChanged(c);}
 const Vec3f NebulaMgr::getLabelsColor(void) const {return Nebula::labelColor;}
@@ -134,6 +134,8 @@ void NebulaMgr::setDesignationUsage(const bool flag) {if(Nebula::designationUsag
 bool NebulaMgr::getDesignationUsage(void) const {return Nebula::designationUsage; }
 void NebulaMgr::setFlagOutlines(const bool flag) {if(Nebula::flagUseOutlines!=flag){ Nebula::flagUseOutlines=flag; emit flagOutlinesDisplayedChanged(flag);}}
 bool NebulaMgr::getFlagOutlines(void) const {return Nebula::flagUseOutlines;}
+void NebulaMgr::setFlagAdditionalNames(const bool flag) {if(Nebula::flagShowAdditionalNames!=flag){ Nebula::flagShowAdditionalNames=flag; emit flagAdditionalNamesDisplayedChanged(flag);}}
+bool NebulaMgr::getFlagAdditionalNames(void) const {return Nebula::flagShowAdditionalNames;}
 
 NebulaMgr::NebulaMgr(void)
 	: nebGrid(200)
@@ -174,26 +176,40 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
-	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");	// Load circle texture
-	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");	// Load ellipse texture
-	Nebula::texOpenCluster			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");	// Load open cluster marker texture
-	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");	// Load globular cluster marker texture
-	Nebula::texPlanetaryNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");	// Load planetary nebula marker texture
-	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif.png");	// Load diffuse nebula marker texture
-	Nebula::texDarkNebula			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_drk.png");	// Load dark nebula marker texture
-	Nebula::texOpenClusterWithNebulosity	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");	// Load Ocl/Nebula marker texture
-	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");   // Load pointer texture
+	// Load circle texture
+	Nebula::texCircle			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");
+	// Load ellipse texture
+	Nebula::texGalaxy			= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gal.png");
+	// Load open cluster marker texture
+	Nebula::texOpenCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl.png");
+	// Load globular cluster marker texture
+	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");
+	// Load planetary nebula marker texture
+	Nebula::texPlanetaryNebula	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");
+	// Load diffuse nebula marker texture
+	Nebula::texDiffuseNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_dif.png");
+	// Load dark nebula marker texture
+	Nebula::texDarkNebula		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_drk.png");
+	// Load Ocl/Nebula marker texture
+	Nebula::texOpenClusterWithNebulosity = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");
+	// Load pointer texture
+	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 
 	setFlagShow(conf->value("astro/flag_nebula",true).toBool());
 	setFlagHints(conf->value("astro/flag_nebula_name",false).toBool());
 	setHintsAmount(conf->value("astro/nebula_hints_amount", 3).toFloat());
 	setLabelsAmount(conf->value("astro/nebula_labels_amount", 3).toFloat());
 	setHintsProportional(conf->value("astro/flag_nebula_hints_proportional", false).toBool());
-	setFlagOutlines(conf->value("gui/flag_dso_outlines_usage", false).toBool());
-	setDesignationUsage(conf->value("gui/flag_dso_designation_usage", false).toBool());
+	setFlagOutlines(conf->value("astro/flag_dso_outlines_usage", false).toBool());
+	setFlagAdditionalNames(conf->value("astro/flag_dso_additional_names",true).toBool());
+	setDesignationUsage(conf->value("astro/flag_dso_designation_usage", false).toBool());
 	setFlagSurfaceBrightnessUsage(conf->value("astro/flag_surface_brightness_usage", false).toBool());
 	setFlagSurfaceBrightnessArcsecUsage(conf->value("gui/flag_surface_brightness_arcsec", false).toBool());
 	setFlagSurfaceBrightnessShortNotationUsage(conf->value("gui/flag_surface_brightness_short", false).toBool());
+
+	setFlagSizeLimitsUsage(conf->value("astro/flag_size_limits_usage", false).toBool());
+	setMinSizeLimit(conf->value("astro/size_limit_min", 1.0).toDouble());
+	setMaxSizeLimit(conf->value("astro/size_limit_max", 600.0).toDouble());
 
 	// Load colors from config file
 	// Upgrade config keys
@@ -350,6 +366,8 @@ void NebulaMgr::init()
 		catalogFilters	|= Nebula::CatSNRG;
 	if (conf->value("flag_show_aco", false).toBool())
 		catalogFilters	|= Nebula::CatACO;
+	if (conf->value("flag_show_hcg", false).toBool())
+		catalogFilters	|= Nebula::CatHCG;
 	conf->endGroup();
 
 	// NB: nebula set loaded inside setter of catalog filter
@@ -433,6 +451,9 @@ struct DrawNebulaFuncObject
 		if (!n->objectInDisplayedCatalog())
 			return;
 
+		if (!n->objectInAllowedSizeRangeLimits())
+			return;
+
 		if (n->majorAxisSize>angularSizeLimit || n->majorAxisSize==0.f || mag <= maxMagHints)
 		{
 			sPainter->getProjector()->project(n->XYZ,n->XY);
@@ -465,6 +486,132 @@ void NebulaMgr::setTypeFilters(Nebula::TypeGroup tflags)
 		Nebula::typeFilters = tflags;
 		emit typeFiltersChanged(tflags);
 	}
+}
+
+void NebulaMgr::setFlagSurfaceBrightnessUsage(const bool usage)
+{
+	if (usage!=Nebula::surfaceBrightnessUsage)
+	{
+		Nebula::surfaceBrightnessUsage=usage;
+		emit flagSurfaceBrightnessUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSurfaceBrightnessUsage(void) const
+{
+	return Nebula::surfaceBrightnessUsage;
+}
+
+void NebulaMgr::setFlagSurfaceBrightnessArcsecUsage(const bool usage)
+{
+	if (usage!=Nebula::flagUseArcsecSurfaceBrightness)
+	{
+		Nebula::flagUseArcsecSurfaceBrightness=usage;
+		emit flagSurfaceBrightnessArcsecUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSurfaceBrightnessArcsecUsage(void) const
+{
+	return Nebula::flagUseArcsecSurfaceBrightness;
+}
+
+void NebulaMgr::setFlagSurfaceBrightnessShortNotationUsage(const bool usage)
+{
+	if (usage!=Nebula::flagUseShortNotationSurfaceBrightness)
+	{
+		Nebula::flagUseShortNotationSurfaceBrightness=usage;
+		emit flagSurfaceBrightnessShortNotationUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSurfaceBrightnessShortNotationUsage(void) const
+{
+	return Nebula::flagUseShortNotationSurfaceBrightness;
+}
+
+void NebulaMgr::setFlagSizeLimitsUsage(const bool usage)
+{
+	if (usage!=Nebula::flagUseSizeLimits)
+	{
+		Nebula::flagUseSizeLimits=usage;
+		emit flagSizeLimitsUsageChanged(usage);
+	}
+}
+
+bool NebulaMgr::getFlagSizeLimitsUsage(void) const
+{
+	return Nebula::flagUseSizeLimits;
+}
+
+void NebulaMgr::setFlagUseTypeFilters(const bool b)
+{
+	if (Nebula::flagUseTypeFilters!=b)
+	{
+		Nebula::flagUseTypeFilters=b;
+		emit flagUseTypeFiltersChanged(b);
+	}
+}
+
+bool NebulaMgr::getFlagUseTypeFilters(void) const
+{
+	return Nebula::flagUseTypeFilters;
+}
+
+void NebulaMgr::setLabelsAmount(double a)
+{
+	if(a!=labelsAmount)
+	{
+		labelsAmount=a;
+		emit labelsAmountChanged(a);
+	}
+}
+
+double NebulaMgr::getLabelsAmount(void) const
+{
+	return labelsAmount;
+}
+
+void NebulaMgr::setHintsAmount(double f)
+{
+	if(hintsAmount!=f)
+	{
+		hintsAmount = f;
+		emit hintsAmountChanged(f);
+	}
+}
+
+double NebulaMgr::getHintsAmount(void) const
+{
+	return hintsAmount;
+}
+
+void NebulaMgr::setMinSizeLimit(double s)
+{
+	if(Nebula::minSizeLimit!=s)
+	{
+		Nebula::minSizeLimit = s;
+		emit minSizeLimitChanged(s);
+	}
+}
+
+double NebulaMgr::getMinSizeLimit() const
+{
+	return Nebula::minSizeLimit;
+}
+
+void NebulaMgr::setMaxSizeLimit(double s)
+{
+	if(Nebula::maxSizeLimit!=s)
+	{
+		Nebula::maxSizeLimit = s;
+		emit maxSizeLimitChanged(s);
+	}
+}
+
+double NebulaMgr::getMaxSizeLimit() const
+{
+	return Nebula::maxSizeLimit;
 }
 
 float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
@@ -576,7 +723,7 @@ NebulaP NebulaMgr::search(const QString& name)
 
 		if (dcat == "SH") return searchSh2(dnum);
 	}
-	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL)\\s*(.+)$");
+	static QRegExp sCatNumRx("^(CED|PK|ACO|ABELL|HCG)\\s*(.+)$");
 	if (sCatNumRx.exactMatch(uname))
 	{
 		QString cat = sCatNumRx.capturedTexts().at(1);
@@ -585,6 +732,7 @@ NebulaP NebulaMgr::search(const QString& name)
 		if (cat == "CED") return searchCed(num);
 		if (cat == "PK") return searchPK(num);
 		if (cat == "ACO" || cat == "ABELL") return searchACO(num);
+		if (cat == "HCG") return searchHCG(num);
 	}
 	static QRegExp gCatNumRx("^(PN|SNR)\\s*G(.+)$");
 	if (gCatNumRx.exactMatch(uname))
@@ -611,7 +759,7 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 	if (flagConverter)
 	{
 		if (!srcCatalogPath.isEmpty())
-			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack"), flagDecimalCoordinates);
+			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack", StelFileMgr::New), flagDecimalCoordinates);
 		else
 			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
 
@@ -850,6 +998,14 @@ NebulaP NebulaMgr::searchACO(QString ACO)
 	return NebulaP();
 }
 
+NebulaP NebulaMgr::searchHCG(QString HCG)
+{
+	foreach (const NebulaP& n, dsoArray)
+		if (n->HCG_nb.trimmed().toUpper() == HCG.trimmed().toUpper())
+			return n;
+	return NebulaP();
+}
+
 QString NebulaMgr::getLatestSelectedDSODesignation()
 {
 	QString result = "";
@@ -894,13 +1050,13 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 	int	id, orientationAngle, NGC, IC, M, C, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Arp, VV;
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
-	QString oType, mType, Ced, PK, PNG, SNRG, ACO, ra, dec;
+	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ra, dec;
 
 	unsigned int nType;
 
 	int currentLineNumber = 0;	// what input line we are on
 	int currentRecordNumber = 0;	// what record number we are on
-	int readOk = 0;			// how many records weree rad without problems
+	int readOk = 0;				// how many records weree rad without problems
 	while (!dsoIn.atEnd())
 	{
 		record = QString::fromUtf8(dsoIn.readLine());
@@ -920,46 +1076,47 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 		{
 			QStringList list=record.split("\t", QString::KeepEmptyParts);
 
-			id			= list.at(0).toInt();	 // ID (inner identification number)
+			id			= list.at(0).toInt();		// ID (inner identification number)
 			ra			= list.at(1).trimmed();
 			dec			= list.at(2).trimmed();
-			bMag			= list.at(3).toFloat();  // B magnitude
-			vMag			= list.at(4).toFloat();	 // V magnitude
-			oType			= list.at(5).trimmed();  // Object type
-			mType			= list.at(6).trimmed();  // Morphological type of object
-			majorAxisSize		= list.at(7).toFloat();  // major axis size (arcmin)
-			minorAxisSize		= list.at(8).toFloat();	 // minor axis size (arcmin)
-			orientationAngle	= list.at(9).toInt();	 // orientation angle (degrees)
-			z			= list.at(10).toFloat(); // redshift
-			zErr			= list.at(11).toFloat(); // error of redshift
-			plx			= list.at(12).toFloat(); // parallax (mas)
-			plxErr			= list.at(13).toFloat(); // error of parallax (mas)
-			dist			= list.at(14).toFloat(); // distance (Mpc for galaxies, kpc for other objects)
-			distErr			= list.at(15).toFloat(); // distance error (Mpc for galaxies, kpc for other objects)
+			bMag		= list.at(3).toFloat();		// B magnitude
+			vMag			= list.at(4).toFloat();		// V magnitude
+			oType		= list.at(5).trimmed();	// Object type
+			mType		= list.at(6).trimmed();	// Morphological type of object
+			majorAxisSize	= list.at(7).toFloat();		// major axis size (arcmin)
+			minorAxisSize	= list.at(8).toFloat();		// minor axis size (arcmin)
+			orientationAngle	= list.at(9).toInt();		// orientation angle (degrees)
+			z			= list.at(10).toFloat();	// redshift
+			zErr			= list.at(11).toFloat();	// error of redshift
+			plx			= list.at(12).toFloat();	// parallax (mas)
+			plxErr		= list.at(13).toFloat();	// error of parallax (mas)
+			dist			= list.at(14).toFloat();	// distance (Mpc for galaxies, kpc for other objects)
+			distErr		= list.at(15).toFloat();	// distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
 			// cross-identification data
 			// -----------------------------------------------
-			NGC			= list.at(16).toInt();	 // NGC number
-			IC			= list.at(17).toInt();	 // IC number
-			M			= list.at(18).toInt();	 // M number
-			C			= list.at(19).toInt();	 // C number
-			B			= list.at(20).toInt();	 // B number
-			Sh2			= list.at(21).toInt();	 // Sh2 number
-			VdB			= list.at(22).toInt();	 // VdB number
-			RCW			= list.at(23).toInt();	 // RCW number
-			LDN			= list.at(24).toInt();	 // LDN number
-			LBN			= list.at(25).toInt();	 // LBN number
-			Cr			= list.at(26).toInt();	 // Cr number (alias: Col)
-			Mel			= list.at(27).toInt();	 // Mel number
-			PGC			= list.at(28).toInt();	 // PGC number (subset)
-			UGC			= list.at(29).toInt();	 // UGC number (subset)
-			Ced			= list.at(30).trimmed(); // Ced number
-			Arp			= list.at(31).toInt();	 // Arp number
-			VV			= list.at(32).toInt();	 // VV number
-			PK			= list.at(33).trimmed(); // PK number
-			PNG			= list.at(34).trimmed(); // PN G number
-			SNRG			= list.at(35).trimmed(); // SNR G number
-			ACO			= list.at(36).trimmed(); // ACO number
+			NGC			= list.at(16).toInt();		// NGC number
+			IC			= list.at(17).toInt();		// IC number
+			M			= list.at(18).toInt();		// M number
+			C			= list.at(19).toInt();		// C number
+			B			= list.at(20).toInt();		// B number
+			Sh2			= list.at(21).toInt();		// Sh2 number
+			VdB			= list.at(22).toInt();		// VdB number
+			RCW			= list.at(23).toInt();		// RCW number
+			LDN			= list.at(24).toInt();		// LDN number
+			LBN			= list.at(25).toInt();		// LBN number
+			Cr			= list.at(26).toInt();		// Cr number (alias: Col)
+			Mel			= list.at(27).toInt();		// Mel number
+			PGC			= list.at(28).toInt();		// PGC number (subset)
+			UGC			= list.at(29).toInt();		// UGC number (subset)
+			Ced			= list.at(30).trimmed();	// Ced number
+			Arp			= list.at(31).toInt();		// Arp number
+			VV			= list.at(32).toInt();		// VV number
+			PK			= list.at(33).trimmed();	// PK number
+			PNG			= list.at(34).trimmed();	// PN G number
+			SNRG		= list.at(35).trimmed();	// SNR G number
+			ACO			= list.at(36).trimmed();	// ACO number
+			HCG			= list.at(37).trimmed();	// HCG number
 
 			if (decimal)
 			{
@@ -1175,7 +1332,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
 				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
 				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << Arp << VV << PK
-				     << PNG << SNRG << ACO;
+				     << PNG << SNRG << ACO << HCG;
 		}
 	}
 	dsoIn.close();
@@ -1275,7 +1432,8 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 
 		QStringList catalogs;
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
-			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG" << "SNRG" << "ACO";
+			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG" << "SNRG" << "ACO"
+			 << "HCG";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -1341,6 +1499,9 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 				break;
 			case 20:
 				e = searchACO(cdes);
+				break;
+			case 21:
+				e = searchHCG(cdes);
 				break;
 			default:
 				e = searchDSO(nb);
@@ -1779,6 +1940,16 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
+	// Search by HCG numbers (possible formats are "HCG31" or "HCG 31")
+	if (objw.left(2) == "HCG")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("HCG%1").arg(n->HCG_nb.trimmed().toUpper()) == objw.trimmed() || QString("HCG %1").arg(n->HCG_nb.trimmed().toUpper()) == objw.trimmed())
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
 	return StelObjectP();
 }
 
@@ -1808,13 +1979,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 			return qSharedPointerCast<StelObject>(n);
 	}
 
-	// Search by aliases of common names
-	foreach (const NebulaP& n, dsoArray)
+	if (getFlagAdditionalNames())
 	{
-		foreach(QString objwcapa, n->englishAliases)
+		// Search by aliases of common names
+		foreach (const NebulaP& n, dsoArray)
 		{
-			if (objwcapa.toUpper()==objw)
-				return qSharedPointerCast<StelObject>(n);
+			foreach(QString objwcapa, n->englishAliases)
+			{
+				if (objwcapa.toUpper()==objw)
+					return qSharedPointerCast<StelObject>(n);
+			}
 		}
 	}
 
@@ -2017,6 +2191,16 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 			|| QString("ACO %1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
 			|| QString("ABELL%1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
 			|| QString("ABELL %1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed())
+				return qSharedPointerCast<StelObject>(n);
+		}
+	}
+
+	// Search by HCG numbers
+	if (objw.startsWith("HCG"))
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (QString("HCG%1").arg(n->HCG_nb.trimmed().toUpper()) == objw.trimmed() || QString("HCG %1").arg(n->HCG_nb.trimmed().toUpper()) == objw.trimmed())
 				return qSharedPointerCast<StelObject>(n);
 		}
 	}
@@ -2452,6 +2636,26 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
+	// Search by HCG objects number
+	if (objw.size()>=1 && objw.left(3)=="HCG")
+	{
+		foreach (const NebulaP& n, dsoArray)
+		{
+			if (n->HCG_nb.isEmpty()) continue;
+			QString constw = QString("HCG%1").arg(n->HCG_nb.trimmed());
+			QString constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+			{
+				result << constws;
+				continue;	// Prevent adding both forms for name
+			}
+			constw = QString("HCG %1").arg(n->HCG_nb.trimmed());
+			constws = constw.mid(0, objw.size());
+			if (constws.toUpper()==objw.toUpper())
+				result << constw;
+		}
+	}
+
 	// Search by common names
 	foreach (const NebulaP& n, dsoArray)
 	{
@@ -2462,14 +2666,17 @@ QStringList NebulaMgr::listMatchingObjects(const QString& objPrefix, int maxNbIt
 		}
 	}
 
-	// Search by aliases of common names
-	foreach (const NebulaP& n, dsoArray)
+	if (getFlagAdditionalNames())
 	{
-		QStringList nameList = inEnglish ? n->englishAliases : n->nameI18Aliases;
-		foreach(QString name, nameList)
+		// Search by aliases of common names
+		foreach (const NebulaP& n, dsoArray)
 		{
-			if (matchObjectName(name, objPrefix, useStartOfWords))
-				result.append(name);
+			QStringList nameList = inEnglish ? n->englishAliases : n->nameI18Aliases;
+			foreach(QString name, nameList)
+			{
+				if (matchObjectName(name, objPrefix, useStartOfWords))
+					result.append(name);
+			}
 		}
 	}
 
@@ -2660,6 +2867,13 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 					result << QString("ACO %1").arg(n->ACO_nb);
 			}
 			break;
+		case 121: // Hickson Compact Group by Hickson et. al. (HCG)
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->HCG_nb.isEmpty())
+					result << QString("HCG %1").arg(n->HCG_nb);
+			}
+			break;
 		case 150: // Dwarf galaxies
 		{
 			QStringList dwarfGalaxies;
@@ -2772,6 +2986,8 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("UGC %1").arg(n->UGC_nb);
 					else if (!n->ACO_nb.isEmpty())
 						result << QString("ACO %1").arg(n->ACO_nb);
+					else if (!n->HCG_nb.isEmpty())
+						result << QString("HCG %1").arg(n->HCG_nb);
 
 				}
 			}
@@ -2933,6 +3149,13 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType)
 			foreach(const NebulaP& n, dsoArray)
 			{
 				if (!n->ACO_nb.isEmpty())
+					dso.append(n);
+			}
+			break;
+		case 121: // Hickson Compact Group by Hickson et. al. (HCG)
+			foreach(const NebulaP& n, dsoArray)
+			{
+				if (!n->HCG_nb.isEmpty())
 					dso.append(n);
 			}
 			break;

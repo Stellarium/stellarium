@@ -165,6 +165,9 @@
         <property name="focusPolicy">
          <enum>Qt::NoFocus</enum>
         </property>
+        <property name="toolTip">
+         <string/>
+        </property>
         <property name="verticalScrollBarPolicy">
          <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
@@ -240,6 +243,19 @@
         </item>
         <item>
          <property name="text">
+          <string comment="Monthly Elevation">ME</string>
+         </property>
+         <property name="toolTip">
+          <string>Monthly Elevation</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-AstroCalc-MonthlyElevation.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
           <string>Graphs</string>
          </property>
          <property name="toolTip">
@@ -261,6 +277,19 @@
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabicon-AstroCalc-WhatsUp.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string comment="Planetary Calculator">PC</string>
+         </property>
+         <property name="toolTip">
+          <string>Planetary Calculator</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-AstroCalc-PC.png</normalon>
           </iconset>
          </property>
         </item>
@@ -770,13 +799,6 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage4">
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="0" column="0" colspan="2">
-           <widget class="QCustomPlot" name="altVsTimePlot" native="true">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
           <item row="1" column="0" colspan="2">
            <widget class="QLabel" name="altVsTimeLabel">
             <property name="sizePolicy">
@@ -802,9 +824,157 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_14">
+            <item>
+             <widget class="QCheckBox" name="sunAltitudeCheckBox">
+              <property name="text">
+               <string>Also the graph for the Sun</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="moonAltitudeCheckBox">
+              <property name="text">
+               <string>Also the graph for the Moon</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QCheckBox" name="positiveAltitudeOnlyCheckBox">
+              <property name="toolTip">
+               <string>Draw only the positive part of the graph</string>
+              </property>
+              <property name="text">
+               <string>Above horizon only</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QCustomPlot" name="altVsTimePlot" native="true">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
         <widget class="QWidget" name="stackedWidgetPage5">
+         <layout class="QGridLayout" name="gridLayout_7">
+          <item row="3" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_10">
+            <item>
+             <widget class="QCheckBox" name="monthlyElevationPositiveCheckBox">
+              <property name="toolTip">
+               <string>Draw only the positive part of the graph</string>
+              </property>
+              <property name="text">
+               <string>Above horizon only</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QSlider" name="monthlyElevationTime">
+              <property name="toolTip">
+               <string>Local Time in hours</string>
+              </property>
+              <property name="maximum">
+               <number>23</number>
+              </property>
+              <property name="pageStep">
+               <number>1</number>
+              </property>
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="monthlyElevationTimeInfo">
+              <property name="minimumSize">
+               <size>
+                <width>60</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>60</width>
+                <height>16777215</height>
+               </size>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="QLabel" name="monthlyElevationLabel">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Please select object to plot its 'Monthly Elevation' graph for the current year at selected time.</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+            <property name="wordWrap">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0" colspan="2">
+           <widget class="QCustomPlot" name="monthlyElevationGraph" native="true">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QLabel" name="monthlyElevationCelestialObjectLabel">
+            <property name="font">
+             <font>
+              <weight>75</weight>
+              <bold>true</bold>
+             </font>
+            </property>
+            <property name="text">
+             <string notr="true">Celestial object</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout_6">
           <item row="4" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_20">
@@ -890,7 +1060,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage6">
+        <widget class="QWidget" name="stackedWidgetPage7">
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -967,6 +1137,139 @@
              <widget class="QComboBox" name="wutComboBox"/>
             </item>
            </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="stackedWidgetPage8">
+         <layout class="QGridLayout" name="gridLayout_8">
+          <item row="0" column="0">
+           <layout class="QGridLayout" name="gridLayoutPCalc">
+            <item row="7" column="1">
+             <widget class="QLabel" name="labelOrbitalVelocitySCBValue"/>
+            </item>
+            <item row="7" column="0">
+             <widget class="QLabel" name="labelOrbitalVelocitySCB">
+              <property name="text">
+               <string>Orbital velocity of second celestial body:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QComboBox" name="secondCelestialBodyComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QComboBox" name="firstCelestialBodyComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+             </widget>
+            </item>
+            <item row="6" column="1">
+             <widget class="QLabel" name="labelOrbitalVelocityFCBValue"/>
+            </item>
+            <item row="6" column="0">
+             <widget class="QLabel" name="labelOrbitalVelocityFCB">
+              <property name="text">
+               <string>Orbital velocity of first celestial body:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLabel" name="labelLinearDistanceValue"/>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="labelFCB">
+              <property name="text">
+               <string>First celestial body:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QLabel" name="labelAngularDistance">
+              <property name="text">
+               <string>Angular distance:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="labelOrbitalResonance">
+              <property name="text">
+               <string>Orbital resonance:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="1">
+             <widget class="QLabel" name="labelOrbitalResonanceValue"/>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="labelLinearDistance">
+              <property name="text">
+               <string>Linear distance:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="1">
+             <widget class="QLabel" name="labelAngularDistanceValue"/>
+            </item>
+            <item row="0" column="1">
+             <widget class="QLabel" name="labelSCB">
+              <property name="text">
+               <string>Second celestial body:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0">
+             <widget class="QLabel" name="labelSynodicPeriod">
+              <property name="text">
+               <string>Synodic period:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="1">
+             <widget class="QLabel" name="labelSynodicPeriodValue"/>
+            </item>
+           </layout>
+          </item>
+          <item row="1" column="0">
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>148</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

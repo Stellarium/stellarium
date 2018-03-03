@@ -179,6 +179,16 @@ class SolarSystem : public StelObjectModule
 		   )
 
 	// Colors
+	Q_PROPERTY(Vec3f labelsColor
+		   READ getLabelsColor
+		   WRITE setLabelsColor
+		   NOTIFY labelsColorChanged
+		   )
+	Q_PROPERTY(Vec3f trailsColor
+		   READ getTrailsColor
+		   WRITE setTrailsColor
+		   NOTIFY trailsColorChanged
+		   )
 	Q_PROPERTY(Vec3f orbitsColor
 		   READ getOrbitsColor
 		   WRITE setOrbitsColor
@@ -811,6 +821,8 @@ signals:
 	void customGrsDriftChanged(double drift);
 	void customGrsJDChanged(double JD);
 
+	void labelsColorChanged(const Vec3f & color) const;
+	void trailsColorChanged(const Vec3f & color) const;
 	void orbitsColorChanged(const Vec3f & color) const;
 	void nomenclatureColorChanged(const Vec3f & color) const;
 	void majorPlanetsOrbitsColorChanged(const Vec3f & color) const;
@@ -976,7 +988,7 @@ private:
 
 	QFont planetNameFont;
 
-	//! The amount of planets labels (between 0 and 10).
+	//! The amount of planet labels (between 0 and 10).
 	double labelsAmount;
 
 	//! List of all the bodies of the solar system.
@@ -1007,7 +1019,6 @@ private:
 	bool ephemerisHorizontalCoordinates;
 
 	class TrailGroup* allTrails;
-	StelGui* gui;
 	QSettings* conf;
 	LinearFader trailFader;
 	Vec3f trailColor;

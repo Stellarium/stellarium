@@ -40,7 +40,8 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 				   float nLatitude,
 				   float nLongitude,
 				   float nSize)
-	: initialized(false)
+	: XYZ(0.0)
+	, jde(0.0)
 	, planet(nPlanet)
 	, identificator(nId)
 	, englishName(nName)
@@ -51,7 +52,7 @@ NomenclatureItem::NomenclatureItem(PlanetP nPlanet,
 	, longitude(nLongitude)
 	, size(nSize)
 {
-	initialized = true;
+	StelUtils::spheToRect((longitude /*+ planet->getAxisRotation()*/) * M_PI/180.0, latitude * M_PI/180.0, XYZpc);
 }
 
 NomenclatureItem::~NomenclatureItem()
@@ -730,7 +731,8 @@ QString NomenclatureItem::getNomenclatureTypeDescription() const
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	if (getFlagLabels() && (getAngularSize(core)>=0.0125)) // TODO: Need a progressive calculations of priority levels
+	 // The item may be selectable when it over 25px size only
+	if (getFlagLabels() && (getAngularSize(core)*M_PI/180.*core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()>=25.))
 		return StelObject::getSelectPriority(core)-25.f;
 	else
 		return StelObject::getSelectPriority(core)-2.f;
@@ -782,7 +784,8 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 	if (flags&Size && size>0.f)
 	{
 		QString sz = q_("Linear size");
-		if (getNomenclatureType()==NomenclatureItem::niCrater)
+		// Satellite Features are almost(?) exclusively lettered craters, and all are on the Moon. Assume craters.
+		if ((getNomenclatureType()==NomenclatureItem::niCrater) || (getNomenclatureType()==NomenclatureItem::niSatelliteFeature))
 			sz = q_("Diameter");
 		oss << QString("%1: %2 %3").arg(sz).arg(QString::number(size, 'f', 2)).arg(qc_("km", "distance")) << "<br />";
 	}
@@ -803,6 +806,29 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 Vec3f NomenclatureItem::getInfoColor(void) const
 {
 	return color;
+}
+
+Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
+{
+	if (jde == core->getJDE()) return XYZ;
+	jde = core->getJDE();
+	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
+	// Calculate the radius of the planet. It is necessary to re-scale it
+	const double r = planet->getRadius() * planet->getSphereScale();
+
+	Vec3d XYZ0;
+//	// For now, assume spherical planets, simply scale by radius.
+	XYZ0 = XYZpc*r;
+	// TODO1: handle ellipsoid bodies
+	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
+
+	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
+	   Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
+	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates.
+	   So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
+	// TODO: Maybe it is more efficient to add some getRotEquatorialToVsop87Zrotation() to the Planet class which returns a Mat4d computed in Planet::computeTransMatrix().
+	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * Mat4d::zrotation(planet->getAxisRotation()* M_PI/180.0) * XYZ0;
+	return XYZ;
 }
 
 float NomenclatureItem::getVMagnitude(const StelCore* core) const
@@ -827,22 +853,8 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 		return;
 
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
+	Vec3d XYZ = getJ2000EquatorialPos(core);
 
-	// Calculate the radius of the planet. It is necessary to re-scale it
-	const double r = planet->getRadius() * planet->getSphereScale();
-
-	Vec3d XYZ0; // XYZ is member variable with equatorial J2000.0 coordinates
-	StelUtils::spheToRect((longitude + planet->getAxisRotation()) * M_PI/180.0, latitude * M_PI/180.0, XYZ0);
-	// For now, assume spherical planets, simply scale by radius.
-	XYZ0 *= r;
-	// TODO1: handle ellipsoid bodies
-	// TODO2: intersect properly with OBJ bodies! (LP:1723742)
-
-	/* We have to calculate feature's coordinates in VSOP87 (this is Ecliptic J2000 coordinates).
-	   Feature's original coordinates are in planetocentric system, so we have to multiply it by the rotation matrix.
-	   planet->getRotEquatorialToVsop87() gives us the rotation matrix between Equatorial (on date) coordinates and Ecliptic J2000 coordinates.
-	   So we have to make another change to obtain the rotation matrix using Equatorial J2000: we have to multiplay by core->matVsop87ToJ2000 */
-	XYZ = equPos + (core->matVsop87ToJ2000 * planet->getRotEquatorialToVsop87()) * XYZ0;
 	// In case we are located at a labeled site, don't show this label or any labels within 150 km. Else we have bad flicker...
 	if (XYZ.lengthSquared() < 150.*150.*AU_KM*AU_KM )
 		return;
@@ -862,7 +874,7 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 
 	// check visibility of feature
 	Vec3d srcPos;
-	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (planet->getVMagnitude(core)<20.) && (screenSize>50. && screenSize<750.))
+	if (painter->getProjector()->projectCheck(XYZ, srcPos) && (equPos.length() >= XYZ.length()) && (screenSize>50. && screenSize<750.))
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);

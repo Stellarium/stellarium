@@ -1,0 +1,14 @@
+if mode == "draft" then
+  Make:htlatex()
+else
+  Make:add("biber", "biber ${input}")
+  local filter = require "make4ht-filter"
+  local process = filter{"cleanspan", "fixligatures", "hruletohr", "fix-links"}
+  Make:htlatex()
+  Make:biber()
+  Make:htlatex()
+  Make:htlatex()
+  Make:match("html$",process)
+  Make:match("html$", "tidy -m -xml -utf8 -q -i ${filename}")
+end
+

@@ -18,7 +18,6 @@
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
-#include "NebulaMgr.hpp"
 #include "StelPropertyMgr.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelModuleMgr.hpp"
@@ -151,7 +150,7 @@ void ConfigureDSOColorsDialog::askDSOLabelsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setLabelsColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("labelsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_label_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOLabels->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -166,7 +165,7 @@ void ConfigureDSOColorsDialog::askDSOMarkersColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setCirclesColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("circlesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_circle_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOMarkers->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -181,7 +180,7 @@ void ConfigureDSOColorsDialog::askDSOGalaxiesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setGalaxyColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("galaxiesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_galaxy_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOGalaxies->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -196,7 +195,7 @@ void ConfigureDSOColorsDialog::askDSOActiveGalaxiesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setActiveGalaxyColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("activeGalaxiesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_active_galaxy_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOActiveGalaxies->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -211,7 +210,7 @@ void ConfigureDSOColorsDialog::askDSORadioGalaxiesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setRadioGalaxyColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("radioGalaxiesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_radio_galaxy_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSORadioGalaxies->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -226,7 +225,7 @@ void ConfigureDSOColorsDialog::askDSOInteractingGalaxiesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setInteractingGalaxyColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("interactingGalaxiesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_interacting_galaxy_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOInteractingGalaxies->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -241,7 +240,7 @@ void ConfigureDSOColorsDialog::askDSOQuasarsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setQuasarColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("quasarsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_quasar_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOQuasars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -256,7 +255,7 @@ void ConfigureDSOColorsDialog::askDSOPossibleQuasarsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setPossibleQuasarColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("possibleQuasarsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_possible_quasar_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOPossibleQuasars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -271,7 +270,7 @@ void ConfigureDSOColorsDialog::askDSOStarClustersColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setClusterColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("clustersColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_cluster_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOStarClusters->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -286,7 +285,7 @@ void ConfigureDSOColorsDialog::askDSOOpenStarClustersColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setOpenClusterColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("openClustersColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_open_cluster_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOOpenStarClusters->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -301,7 +300,7 @@ void ConfigureDSOColorsDialog::askDSOGlobularStarClustersColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setGlobularClusterColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("globularClustersColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_globular_cluster_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOGlobularStarClusters->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -316,7 +315,7 @@ void ConfigureDSOColorsDialog::askDSOStellarAssociationsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setStellarAssociationColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("stellarAssociationsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_stellar_association_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOStellarAssociations->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -331,7 +330,7 @@ void ConfigureDSOColorsDialog::askDSOStarCloudsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setStarCloudColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("starCloudsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_star_cloud_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOStarClouds->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -346,7 +345,7 @@ void ConfigureDSOColorsDialog::askDSOPlanetaryNebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setPlanetaryNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("planetaryNebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_planetary_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOPlanetaryNebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -361,7 +360,7 @@ void ConfigureDSOColorsDialog::askDSODarkNebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setDarkNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("darkNebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_dark_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSODarkNebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -376,7 +375,7 @@ void ConfigureDSOColorsDialog::askDSOReflectionNebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setReflectionNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("reflectionNebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_reflection_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOReflectionNebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -391,7 +390,7 @@ void ConfigureDSOColorsDialog::askDSOBipolarNebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setBipolarNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("bipolarNebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_bipolar_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOBipolarNebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -406,7 +405,7 @@ void ConfigureDSOColorsDialog::askDSOEmissionNebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setEmissionNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("emissionNebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_emission_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOEmissionNebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -421,7 +420,7 @@ void ConfigureDSOColorsDialog::askDSOPossiblePlanetaryNebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setPossiblePlanetaryNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("possiblePlanetaryNebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_possible_planetary_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOPossiblePlanetaryNebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -436,7 +435,7 @@ void ConfigureDSOColorsDialog::askDSOProtoplanetaryNebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setProtoplanetaryNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("protoplanetaryNebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_protoplanetary_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOProtoplanetaryNebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -451,7 +450,7 @@ void ConfigureDSOColorsDialog::askDSONebulosityClustersColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setClusterWithNebulosityColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("clusterWithNebulosityColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_cluster_with_nebulosity_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSONebulosityClusters->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -466,7 +465,7 @@ void ConfigureDSOColorsDialog::askDSONebulaeColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setNebulaColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("nebulaeColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_nebula_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSONebulae->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -481,7 +480,7 @@ void ConfigureDSOColorsDialog::askDSOHydrogenRegionsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setHydrogenRegionColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("hydrogenRegionsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_hydrogen_region_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOHydrogenRegions->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -496,7 +495,7 @@ void ConfigureDSOColorsDialog::askDSOInterstellarMatterColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setInterstellarMatterColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("interstellarMatterColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_interstellar_matter_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOInterstellarMatter->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -511,7 +510,7 @@ void ConfigureDSOColorsDialog::askDSOEmissionObjectsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setEmissionObjectColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("emissionObjectsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_emission_object_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOEmissionObjects->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -526,7 +525,7 @@ void ConfigureDSOColorsDialog::askDSOMolecularCloudsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setMolecularCloudColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("molecularCloudsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_molecular_cloud_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOMolecularClouds->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -541,7 +540,7 @@ void ConfigureDSOColorsDialog::askDSOBLLacObjectsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setBlLacObjectColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("blLacObjectsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_bl_lac_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOBLLacObjects->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -556,7 +555,7 @@ void ConfigureDSOColorsDialog::askDSOBlazarsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setBlazarColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("blazarsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_blazar_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOBlazars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -571,7 +570,7 @@ void ConfigureDSOColorsDialog::askDSOYoungStellarObjectsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setYoungStellarObjectColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("youngStellarObjectsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_young_stellar_object_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOYoungStellarObjects->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -586,7 +585,7 @@ void ConfigureDSOColorsDialog::askDSOSupernovaRemnantsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setSupernovaRemnantColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("supernovaRemnantsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_supernova_remnant_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOSupernovaRemnants->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -601,7 +600,7 @@ void ConfigureDSOColorsDialog::askDSOSupernovaCandidatesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setSupernovaCandidateColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("supernovaCandidatesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_supernova_candidate_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOSupernovaCandidates->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -616,7 +615,7 @@ void ConfigureDSOColorsDialog::askDSOSupernovaRemnantCandidatesColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setSupernovaRemnantCandidateColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("supernovaRemnantCandidatesColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_supernova_remnant_cand_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOSupernovaRemnantCandidates->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -631,7 +630,7 @@ void ConfigureDSOColorsDialog::askDSOStarsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setStarColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("starsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_star_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOStars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -646,7 +645,7 @@ void ConfigureDSOColorsDialog::askDSOSymbioticStarsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setSymbioticStarColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("symbioticStarsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_symbiotic_star_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOSymbioticStars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -661,7 +660,7 @@ void ConfigureDSOColorsDialog::askDSOEmissionLineStarsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setEmissionLineStarColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("emissionLineStarsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_emission_star_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOEmissionLineStars->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
@@ -676,7 +675,7 @@ void ConfigureDSOColorsDialog::askDSOGalaxyClustersColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		GETSTELMODULE(NebulaMgr)->setGalaxyClusterColor(vColor);
+		StelApp::getInstance().getModule("NebulaMgr")->setProperty("galaxyClustersColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/dso_galaxy_cluster_color", StelUtils::vec3fToStr(vColor));
 		ui->colorDSOGalaxyClusters->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}

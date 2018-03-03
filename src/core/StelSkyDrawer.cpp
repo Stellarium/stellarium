@@ -54,6 +54,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	flagStarTwinkle(false),
 	flagForcedTwinkle(false),
 	twinkleAmount(0.0),
+	flagDrawBigStarHalo(true),
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
@@ -84,6 +85,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagForcedTwinkle(conf->value("stars/flag_forced_twinkle",false).toBool());
+	setFlagDrawBigStarHalo(conf->value("stars/flag_star_halo",true).toBool());
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
@@ -436,7 +438,7 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	const float tw = (flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle)) ? (1.f-twinkleFactor*twinkleAmount*qrand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
 
 	// If the rmag is big, draw a big halo
-	if (radius>MAX_LINEAR_RADIUS+5.f)
+	if (flagDrawBigStarHalo && radius>MAX_LINEAR_RADIUS+5.f)
 	{
 		float cmag = qMin(rcMag.luminance,(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
 		float rmag = 150.f;

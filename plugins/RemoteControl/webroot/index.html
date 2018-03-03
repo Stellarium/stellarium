@@ -191,7 +191,7 @@
               <!-- inputs with stelproperty class are automatically connected by mainui.js -->
               <p><label for="stars_absoluteScale"><?= tr("Absolute scale:")?></label><input id="stars_absoluteScale" class="spinner stelproperty" name="StelSkyDrawer.absoluteStarScale" data-min="0" data-max="9" data-step="0.1" data-numberformat="n2"/></p>
               <p><label for="stars_relativeScale"><?= tr("Relative scale:")?></label><input id="stars_relativeScale" class="spinner stelproperty" name="StelSkyDrawer.relativeStarScale" data-min="0.25" data-max="5" data-step="0.05" data-numberformat="n2"/></p>
-              <p><label><input class="stelproperty" name="StelSkyDrawer.flagTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-numberformat="n2"/></p>
+              <p><label><input class="stelproperty" name="StelSkyDrawer.flagStarTwinkle" type="checkbox"/><?= tr("Twinkle:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.twinkleAmount" data-min="0" data-max="1.5" data-step="0.1" data-numberformat="n2"/></p>
               <p><label><input class="stelproperty" name="StelSkyDrawer.flagStarMagnitudeLimit" type="checkbox"/><?= tr("Limit magnitude:")?></label><input class="spinner stelproperty" name="StelSkyDrawer.customStarMagLimit" data-min="0" data-max="21" data-step="0.1" data-numberformat="n2"/></p>
               <p><label for="stars_milkywayintensity"><input class="stelproperty" name="MilkyWay.flagMilkyWayDisplayed" type="checkbox"/><?= tr("Milky Way brightness:")?></label><input id="stars_milkywayintensity" class="spinner stelproperty" name="MilkyWay.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
               <p><label for="stars_zodiacintensity"><input class="stelproperty" name="ZodiacalLight.flagZodiacalLightDisplayed" type="checkbox"/><?= tr("Zodiacal Light brightness:")?></label><input id="stars_zodiacintensity" class="spinner stelproperty" name="ZodiacalLight.intensity" data-min="0" data-max="10" data-step="0.1" data-numberformat="n2"/></p>
@@ -356,6 +356,9 @@
               <label title='<?= tr("Atlas of Peculiar Galaxies (Arp, 1966)")?>'>
                 <input type="checkbox" value="0x8000" />Arp
               </label>
+              <label title='<?= tr("The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)")?>'>
+                <input type="checkbox" value="0x40000" />PN G
+              </label>
             </div>
             <div class="inline-block blocklabel">
               <label title='<?= tr("Caldwell Catalogue")?>'>
@@ -376,6 +379,9 @@
               <label title='<?= tr("The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)")?>'>
                 <input type="checkbox" value="0x10000" />VV
               </label>
+              <label title='<?= tr("A catalogue of Galactic supernova remnants (Green, 2014)")?>'>
+                <input type="checkbox" value="0x80000" />SNR G
+              </label>
             </div>
             <div class="inline-block blocklabel">
               <label title='<?= tr("New General Catalogue of Nebulae and Clusters of Stars")?>'>
@@ -395,7 +401,11 @@
               </label>
               <label title='<?= tr("The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)")?>'>
                 <input type="checkbox" value="0x20000" />PK
-              </label>            </div>
+              </label>
+              <label title='<?= tr("A Catalog of Rich Clusters of Galaxies (Abell+, 1989)")?>'>
+                <input type="checkbox" value="0x100000" />ACO
+              </label>
+            </div>
             <!--div class="stelplugin" data-plugin="Quasars">
                    <label><input type="checkbox" class="stelaction" name="actionShow_Quasars"/><?= tr("Quasars")?></label>
             </div>
@@ -612,7 +622,7 @@
   </div>
   <!-- handled by mainui.js -->
   <div id="noresponse" title='<?= tr("No response from server")?>'>
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server since %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>
+    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span><?= tr("No response from server for %1 seconds. Is Stellarium still running?","<span id='noresponsetime'>0</span>")?></p>
   </div>
   <div id="loadindicator"></div>
 </body>

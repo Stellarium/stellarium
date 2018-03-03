@@ -28,6 +28,7 @@
 #ifdef OPENGL_DEBUG_LOGGING
 #include <QOpenGLDebugMessage>
 #endif
+#include "StelUtils.hpp"
 
 class StelGLWidget;
 class StelGraphicsScene;
@@ -47,7 +48,13 @@ class StelMainView : public QGraphicsView
 	friend class StelGraphicsScene;
 	friend class NightModeGraphicsEffect;
 	Q_OBJECT
-	Q_PROPERTY(bool fullScreen READ isFullScreen WRITE setFullScreen NOTIFY fullScreenChanged)
+	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
+	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
+	Q_PROPERTY(bool flagOverwriteScreenshots   READ getFlagOverwriteScreenShots   WRITE setFlagOverwriteScreenShots   NOTIFY flagOverwriteScreenshotsChanged)
+	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
+	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
+	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
+	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
 
 public:
 	//! Contains some basic info about the OpenGL context used
@@ -117,21 +124,21 @@ public slots:
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
 	//! Set whether colors should be inverted when saving screenshot
-	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b;}
+	void setFlagInvertScreenShotColors(bool b) {flagInvertScreenShotColors=b; emit flagInvertScreenShotColorsChanged(b);}
 
 	//! Get whether existing files are overwritten when saving screenshot
 	bool getFlagOverwriteScreenShots() const {return flagOverwriteScreenshots;}
 	//! Set whether existing files are overwritten when saving screenshot
-	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b;}
+	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b; emit flagOverwriteScreenshotsChanged(b);}
 
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
-	//! Get the mouse cursor timeout in seconds
-	float getCursorTimeout() const {return cursorTimeout;}
 	//! Get the state of the mouse cursor timeout flag
-	void setFlagCursorTimeout(bool b) {flagCursorTimeout=b;}
+	void setFlagCursorTimeout(bool b);
+	//! Get the mouse cursor timeout in seconds
+	double getCursorTimeout() const {return cursorTimeoutTimer->interval() / 1000.0;}
 	//! Set the mouse cursor timeout in seconds
-	void setCursorTimeout(float t) {cursorTimeout=t;}
+	void setCursorTimeout(double t) {cursorTimeoutTimer->setInterval(t * 1000); emit cursorTimeoutChanged(t);}
 
 	//! Set the minimum frames per second. Usually this minimum will be switched to after there are no
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
@@ -157,9 +164,14 @@ public slots:
 	bool needsMaxFPS() const;
 
 	//! Set the state of the flag of usage background for GUI buttons
-	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; }
+	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; emit flagUseButtonsBackgroundChanged(b); }
 	//! Get the state of the flag of usage background for GUI buttons
 	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
+
+	//! Set the sky background color. (Actually forwards to the StelRootItem.)  Everything else than black creates an work of art!
+	void setSkyBackgroundColor(Vec3f color);
+	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates an work of art!
+	Vec3f getSkyBackgroundColor();
 
 protected:
 	//! Hack to determine current monitor pixel ratio
@@ -170,6 +182,8 @@ protected:
 	//! Handle window resized events, and change the size of the underlying
 	//! QGraphicsScene to be the same
 	virtual void resizeEvent(QResizeEvent* event) Q_DECL_OVERRIDE;
+	//! Wake up mouse cursor (if it was hidden)
+	virtual void mouseMoveEvent(QMouseEvent *event) Q_DECL_OVERRIDE;
 signals:
 	//! emitted when saveScreenShot is requested with saveScreenShot().
 	//! doScreenshot() does the actual work (it has to do it in the main
@@ -184,11 +198,19 @@ signals:
 	void reloadShadersRequested();
 
 	void updateIconsRequested();
+	void flagInvertScreenShotColorsChanged(bool b);
+	void flagOverwriteScreenshotsChanged(bool b);
+	void flagUseButtonsBackgroundChanged(bool b);
+	void skyBackgroundColorChanged(Vec3f color);
+	void flagCursorTimeoutChanged(bool b);
+	void cursorTimeoutChanged(double t);
 
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
 	void minFPSUpdate();
+	void hideCursor();
+
 #ifdef OPENGL_DEBUG_LOGGING
 	void logGLMessage(const QOpenGLDebugMessage& debugMessage);
 	void contextDestroyed();
@@ -237,9 +259,9 @@ private:
 	QString screenShotPrefix;
 	QString screenShotDir;
 
-	// Number of second before the mouse cursor disappears
-	float cursorTimeout;
 	bool flagCursorTimeout;
+	//! Timer that triggers with the cursor timeout.
+	QTimer* cursorTimeoutTimer;
 
 	bool flagUseButtonsBackground;
 
@@ -250,6 +272,7 @@ private:
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
 	QTimer* minFpsTimer;
+
 
 #ifdef OPENGL_DEBUG_LOGGING
 	QOpenGLDebugLogger* glLogger;

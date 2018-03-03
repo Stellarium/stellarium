@@ -232,7 +232,7 @@ void HelpDialog::updateHelpText(void)
 	// WARNING! Section titles are re-used above!
 	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
 	htmlText += q_("The following links are external web links, and will launch your web browser:\n").toHtmlEscaped();
-	htmlText += "<p><a href=\"http://stellarium.org/wiki/index.php/Category:User%27s_Guide\">" + q_("The Stellarium User Guide").toHtmlEscaped() + "</a>";
+	htmlText += "<p><a href=\"http://stellarium.sourceforge.net/wiki/index.php/Category:User%27s_Guide\">" + q_("The Stellarium User Guide").toHtmlEscaped() + "</a>";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
@@ -241,7 +241,7 @@ void HelpDialog::updateHelpText(void)
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.org/wiki/\">\\1</a>");
+	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
@@ -290,7 +290,8 @@ void HelpDialog::updateAboutText(void)
 		     << "Maciej Serylak" << "Adriano Steffler" << "Sibi Antony" << "Tony Furr"
 		     << "misibacsi" << "Pavel Klimenko" << "Rumen G. Bogdanovski" << "Colin Gaudion"
 		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
-		     << "henrysky" << "Nick Kanel" << "Petr Kubánek";
+		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
+		     << "Alessandro Siniscalchi";
 	contributors.sort();
 
 	// populate About tab

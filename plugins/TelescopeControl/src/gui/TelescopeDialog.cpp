@@ -259,7 +259,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
 	aboutPage += "<tr><td rowspan=2><strong>" + q_("Contributors") + ":</strong></td><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
-	aboutPage += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+    aboutPage += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+    aboutPage += "<tr><td></td><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt;</td></tr>";
 	aboutPage += "</table>";
 
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
@@ -267,23 +268,22 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<li>" + q_("the telescope server core code (licensed under the LGPL)") + "</li>";
 	aboutPage += "<li>" + q_("the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL)");
 	aboutPage += "<br/>" + q_("Author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.") + "</li>";
-	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li></ul>";
+    aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
+    aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
 
 	aboutPage += "<h3>" + q_("Links") + "</h3>";
-	aboutPage += "<p>" + QString(q_("Support is provided via the Launchpad website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
+	aboutPage += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
 	aboutPage += "<p><ul>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	aboutPage += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://answers.launchpad.net/stellarium\">")).arg("</a>") + "</li>";
+	aboutPage += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://groups.google.com/forum/#!forum/stellarium\">")).arg("</a>") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	aboutPage += "<li>" + QString(q_("Bug reports can be made %1here%2.")).arg("<a href=\"https://bugs.launchpad.net/stellarium\">").arg("</a>") + "</li>";
+	aboutPage += "<li>" + QString(q_("Bug reports and feature requests can be made %1here%2.")).arg("<a href=\"https://github.com/Stellarium/stellarium/issues\">").arg("</a>") + "</li>";
 	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	aboutPage += "<li>" + q_("If you would like to make a feature request, you can create a bug report, and set the severity to \"wishlist\".") + "</li>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	aboutPage += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.org/wiki/index.php/Telescope_Control_plug-in\">").arg("</a>") + "</li>";
+	aboutPage += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug-in\">").arg("</a>") + "</li>";
 	aboutPage += "</ul></p></body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
-	helpPage += "<p>" + QString(q_("A more complete and up-to-date documentation for this plug-in can be found on the %1Telescope Control%2 page in the Stellarium Wiki.")).arg("<a href=\"http://stellarium.org/wiki/index.php/Telescope_Control_plug-in\">").arg("</a>") + "</p>";
+	helpPage += "<p>" + QString(q_("A more complete and up-to-date documentation for this plug-in can be found on the %1Telescope Control%2 page in the Stellarium Wiki.")).arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug-in\">").arg("</a>") + "</p>";
 	helpPage += "<h3><a name=\"top\" />" + q_("Contents") + "</h3><ul>";
 	helpPage += "<li><a href=\"#Abilities_and_limitations\">" + q_("Abilities and limitations") + "</a></li>";
 	helpPage += "<li><a href=\"#originalfeature\">" + q_("The original telescope control feature") + "</a></li>";
@@ -316,7 +316,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<p>" + q_("Here are two general ways to control a device with this plug-in, depending on the situation:") + "</p><ul>";
 	helpPage += "<li><b>" + q_("DIRECT CONNECTION") + "</b>: " + QString(q_("A %1device supported by the plug-in%2 is connected with a cable to the computer running Stellarium;")).arg("<a href=\"#devices\">").arg("</a>") + "</li>";
 	helpPage += "<li><b>" + q_("INDIRECT CONNECTION") + "</b>: <ul>";
-	helpPage += "<li>" + QString(q_("A device is connected to the same computer but it is driven by a %1stand-alone telescope server program%2 or a %3third-party application%4 <b>that can 'talk' to Stellarium</b>;")).arg("<a href=\"http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29\">").arg("</a>").arg("<a href=\"http://stellarium.org/wiki/index.php/Telescope_Control#Third_party_applications\">").arg("</a>") + "</li>";
+	helpPage += "<li>" + QString(q_("A device is connected to the same computer but it is driven by a %1stand-alone telescope server program%2 or a %3third-party application%4 <b>that can 'talk' to Stellarium</b>;")).arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">").arg("</a>").arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control#Third_party_applications\">").arg("</a>") + "</li>";
 	helpPage += "<li>" + q_("A device is connected to a remote computer and the software that drives it can 'talk' to Stellarium <i>over the network</i>; this software can be either one of Stellarium's stand-alone telescope servers, or a third party application.") + "</li></ul></li></ul>";
 	helpPage += "<p>" + QString(q_("Most older telescopes use cables that connect to a %1serial port%2 (RS-232), the newer ones use %3USB%4 (Universal Serial Bus).")).arg("<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:serial_port\">").arg("</a>").arg("<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:Universal_Serial_Bus\">").arg("</a>")
 		 + " " + q_("On Linux and Mac OS X both cases are handled identically by the plug-in. On Windows, a USB connection may require a 'virtual serial port' software, if it is not supplied with the cable or the telescope.")
@@ -433,7 +433,7 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<h3><a name=\"virtual_telescope\" />" + q_("Virtual telescope") + "</h3>";
 	helpPage += "<p>" + q_("If you want to test this plug-in without an actual device connected to the computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the <b>Telescope controlled by:</b> field. It will show a telescope reticle that will react in the same way as the reticle of a real telescope controlled by the plug-in.") + "</p>";
 	helpPage += "<p>" + QString(q_("See the section above about %1field of view indicators%2 for a possible practical application (emulating 'Telrad' circles).")).arg("<a href=\"#fovcircles\">").arg("</a>") + "</p>";
-	helpPage += "<p>" + QString(q_("This feature is equivalent to the 'Dummy' type of telescope supported by %1Stellarium's original telescope control feature%2.")).arg("<a href=\"http://stellarium.org/wiki/index.php/Telescope_Control_%28client-server%29\">").arg("</a>") + "</p>";
+	helpPage += "<p>" + QString(q_("This feature is equivalent to the 'Dummy' type of telescope supported by %1Stellarium's original telescope control feature%2.")).arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">").arg("</a>") + "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "</body></html>";
@@ -511,7 +511,11 @@ QString TelescopeDialog::getTypeLabel(ConnectionType type)
 			break;
 		case ConnectionRTS2:
 			// TRANSLATORS: Telescope connection type
-			typeLabel = N_("RTS2");
+			typeLabel = N_("remote, RTS2");
+			break;
+		case ConnectionINDI:
+			// TRANSLATORS: Telescope connection type
+			typeLabel = N_("remote, INDI");
 			break;
 		default:
 			;
