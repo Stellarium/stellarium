@@ -2532,7 +2532,7 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 	PlanetP pl = searchByEnglishName(planetName);
 	if (!pl || pl->survey) return;
 	pl->survey = survey;
-	survey->setProperty("planet", pl->getEnglishName());
+	survey->setProperty("planet", pl->getCommonEnglishName());
 	// Not visible by default for the moment.
 	survey->setProperty("visible", false);
 }

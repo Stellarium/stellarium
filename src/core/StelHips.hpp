@@ -48,7 +48,7 @@ class HipsSurvey : public QObject
 	friend class HipsMgr;
 	Q_OBJECT
 
-	Q_PROPERTY(QString url MEMBER url CONSTANT)
+	Q_PROPERTY(QString url MEMBER url CONSTANT)	
 	Q_PROPERTY(QJsonObject properties MEMBER properties NOTIFY propertiesChanged)
 	Q_PROPERTY(bool isLoading READ isLoading NOTIFY statusChanged)
 	Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
