@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>764</width>
-    <height>721</height>
+    <width>755</width>
+    <height>703</height>
    </rect>
   </property>
   <property name="font">
@@ -348,12 +348,22 @@
           </iconset>
          </property>
         </item>
+        <item>
+         <property name="text">
+          <string>Surveys</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-surveys.png</normalon>
+          </iconset>
+         </property>
+        </item>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>0</number>
+         <number>5</number>
         </property>
         <widget class="QWidget" name="page_sky">
          <layout class="QGridLayout" name="gridLayout">
@@ -3626,6 +3636,19 @@
              </item>
             </layout>
            </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_surveys">
+         <layout class="QGridLayout" name="gridLayout_21">
+          <item row="1" column="0">
+           <widget class="QListWidget" name="surveysListWidget"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QComboBox" name="surveyTypeComboBox"/>
+          </item>
+          <item row="0" column="1" rowspan="2">
+           <widget class="QTextBrowser" name="surveysTextBrowser"/>
           </item>
          </layout>
         </widget>

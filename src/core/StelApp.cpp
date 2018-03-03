@@ -26,6 +26,7 @@
 #include "StelObjectMgr.hpp"
 #include "ConstellationMgr.hpp"
 #include "AsterismMgr.hpp"
+#include "HipsMgr.hpp"
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "CustomObjectMgr.hpp"
@@ -449,6 +450,11 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(stelObjectMgr);	
 
 	localeMgr->init();
+
+	// Hips surveys
+	HipsMgr* hips = new HipsMgr();
+	hips->init();
+	getModuleMgr().registerModule(hips);
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();

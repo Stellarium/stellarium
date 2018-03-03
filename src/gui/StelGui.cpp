@@ -100,8 +100,8 @@ StelGui::StelGui()
 	, flipHoriz(Q_NULLPTR)
 	, flagShowNebulaBackgroundButton(false)
 	, btShowNebulaeBackground(Q_NULLPTR)
-	, flagShowToastSurveyButton(false)
-	, btShowToastSurvey(Q_NULLPTR)
+	, flagShowDSSButton(false)
+	, btShowDSS(Q_NULLPTR)
 	, flagShowBookmarksButton(false)
 	, btShowBookmarks(Q_NULLPTR)
 	, flagShowICRSGridButton(false)
@@ -392,7 +392,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	// add the flip buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
-	setFlagShowToastSurveyButton(conf->value("gui/flag_show_toast_survey_button", false).toBool());
+	setFlagShowDSSButton(conf->value("gui/flag_show_dss_button", false).toBool());
 	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
 	setFlagShowICRSGridButton(conf->value("gui/flag_show_icrs_grid_button", false).toBool());
 	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
@@ -552,9 +552,9 @@ void StelGui::update()
 	if (getAction("actionShow_DSO_Textures")->isChecked() != flag)
 		getAction("actionShow_DSO_Textures")->setChecked(flag);
 
-	flag = propMgr->getProperty("ToastMgr.surveyDisplayed")->getValue().toBool();
-	if (getAction("actionShow_Toast_Survey")->isChecked() != flag)
-		getAction("actionShow_Toast_Survey")->setChecked(flag);
+	flag = propMgr->getProperty("HipsMgr.showDSS")->getValue().toBool();
+	if (getAction("actionShow_DSS")->isChecked() != flag)
+		getAction("actionShow_DSS")->setChecked(flag);
 
 	flag = propMgr->getProperty("GridLinesMgr.equatorJ2000GridDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
@@ -834,23 +834,32 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 	emit flagShowConstellationBoundariesButtonChanged(b);
 }
 
-// Define whether the button toggling TOAST survey images should be visible
-void StelGui::setFlagShowToastSurveyButton(bool b)
+// Define whether the button toggling DSS images should be visible
+void StelGui::setFlagShowDSSButton(bool b)
 {
 	if (b==true) {
-		if (btShowToastSurvey==Q_NULLPTR) {
+		if (btShowDSS==Q_NULLPTR) {
 			// Create the nebulae background button
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 			QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
 			QPixmap pxmapOff(":/graphicGui/btToastSurvey-off.png");
-			btShowToastSurvey = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
+			btShowDSS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSS");
 		}
-		getButtonBar()->addButton(btShowToastSurvey, "040-nebulaeGroup");
+		getButtonBar()->addButton(btShowDSS, "040-nebulaeGroup");
 	} else {
-		getButtonBar()->hideButton("actionShow_Toast_Survey");
+		getButtonBar()->hideButton("actionShow_DSS");
 	}
-	flagShowToastSurveyButton = b;
-	emit flagShowToastSurveyButtonChanged(b);
+	flagShowDSSButton = b;
+}
+
+void StelGui::setFlagShowDecimalDegrees(bool b)
+{
+	StelApp::getInstance().setFlagShowDecimalDegrees(b);
+	if (searchDialog->visible())
+	{
+		// Update format of input fields if Search Dialog is open
+		searchDialog->populateCoordinateAxis();		
+	}
 }
 
 void StelGui::setVisible(bool b)
@@ -940,9 +949,9 @@ bool StelGui::getFlagShowNebulaBackgroundButton() const
 	return flagShowNebulaBackgroundButton;
 }
 
-bool StelGui::getFlagShowToastSurveyButton() const
+bool StelGui::getFlagShowDSSButton() const
 {
-	return flagShowToastSurveyButton;
+	return flagShowDSSButton;
 }
 
 bool StelGui::getFlagShowBookmarksButton() const

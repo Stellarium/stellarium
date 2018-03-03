@@ -46,6 +46,7 @@ class StelPainter;
 class StelTranslator;
 class StelOBJ;
 class StelOpenGLArray;
+class HipsSurvey;
 template <class T> class QFuture;
 class QOpenGLBuffer;
 class QOpenGLFunctions;
@@ -54,6 +55,8 @@ class QOpenGLTexture;
 #ifdef DEBUG_SHADOWMAP
 class QOpenGLFramebufferObject;
 #endif
+
+typedef QSharedPointer<class HipsSurvey> HipsSurveyP;
 
 // Class used to store rotational elements, i.e. axis orientation for the planetary body.
 class RotationElements
@@ -491,6 +494,9 @@ protected:
 	// Draw the 3D sphere
 	void drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing=false);
 
+	// Draw the Hips survey.
+	void drawSurvey(StelCore* core, StelPainter* painter);
+
 	// Draw the circle and name of the Planet
 	void drawHints(const StelCore* core, const QFont& planetNameFont);
     
@@ -533,6 +539,8 @@ protected:
 	QFuture<PlanetOBJModel*>* objModelLoader;// For async loading of the OBJ file
 
 	QString objModelPath;
+
+	HipsSurveyP survey;
 
 	Ring* rings;                     // Planet rings
 	double distance;                 // Temporary variable used to store the distance to a given point
@@ -656,8 +664,8 @@ private:
 #endif
 	static unsigned int shadowTex;
 
-	
-	static void initShader();
+
+	static bool initShader();
 	static void deinitShader();
 	static bool initFBO();
 	static void deinitFBO();

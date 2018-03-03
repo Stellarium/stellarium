@@ -28,6 +28,8 @@
 #include "StelObjectModule.hpp"
 #include "StelTextureTypes.hpp"
 #include "Planet.hpp"
+#include "StelGui.hpp"
+#include "StelHips.hpp"
 
 #include <QFont>
 
@@ -924,6 +926,9 @@ private slots:
 
 	void setFlagEphemerisMagnitudes(bool b);
 	bool getFlagEphemerisMagnitudes() const;
+
+	//! Called when a new Hips survey has been loaded by the hips mgr.
+	void onNewSurvey(HipsSurveyP survey);
 
 private:
 	//! Search for SolarSystem objects which are close to the position given

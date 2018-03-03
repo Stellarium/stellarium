@@ -1,6 +1,7 @@
 #include "StelPropertyMgr.hpp"
 #include "StelApp.hpp"
 #include <QtDebug>
+#include <QApplication>
 
 StelProperty::StelProperty(const QString &id, QObject *target, const QMetaProperty& prop)
 	: id(id), target(target), prop(prop)
@@ -119,7 +120,8 @@ void StelPropertyMgr::onStelPropChanged(const QVariant &val)
 {
 	StelProperty* prop = qobject_cast<StelProperty*>(sender());
 #ifndef NDEBUG
-	qDebug()<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
+	if (qApp->property("verbose") == true)
+		qDebug()<<"StelProperty"<<prop->getId()<<"changed, value"<<val;
 #endif
 	emit stelPropertyChanged(prop, val);
 }

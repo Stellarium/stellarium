@@ -93,6 +93,30 @@ public:
 	//! Get the SkyGui instance (useful for adding other interface elements).
 	//! It will return a valid object only if called after init().
 	class SkyGui* getSkyGui() const;
+	
+	//! Get whether the buttons toggling image flip are visible
+	bool getFlagShowFlipButtons() const;
+	
+	//! Get whether the button toggling nebulae background is visible
+	bool getFlagShowNebulaBackgroundButton() const;
+
+	//! Get whether the button toggling DSS survey is visible
+	bool getFlagShowDSSButton() const;
+
+	//! Get whether the button toggling bookmarks is visible
+	bool getFlagShowBookmarksButton() const;
+
+	//! Get whether the button toggling ICRS grid is visible
+	bool getFlagShowICRSGridButton() const;
+
+	//! Get whether the button toggling galactic grid is visible
+	bool getFlagShowGalacticGridButton() const;
+
+	//! Get whether the button toggling ecliptic grid is visible
+	bool getFlagShowEclipticGridButton() const;
+
+	//! Get whether the button toggling constellation boundaries is visible
+	bool getFlagShowConstellationBoundariesButton() const;
 
 	//! returns true if the gui has completed init process.
 	bool initComplete(void) const;
@@ -126,10 +150,8 @@ public slots:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
-	//! Define whether the button toggling TOAST survey should be visible
-	void setFlagShowToastSurveyButton(bool b);
-	//! Get whether the button toggling TOAST survey is visible
-	bool getFlagShowToastSurveyButton() const;
+	//! Define whether the button toggling DSS survey should be visible
+	void setFlagShowDSSButton(bool b);
 
 	//! Define whether the button toggling bookmarks should be visible
 	void setFlagShowBookmarksButton(bool b);
@@ -248,8 +270,8 @@ private:
 	bool flagShowNebulaBackgroundButton;
 	StelButton* btShowNebulaeBackground;
 
-	bool flagShowToastSurveyButton;
-	StelButton* btShowToastSurvey;
+	bool flagShowDSSButton;
+	StelButton* btShowDSS;
 
 	bool flagShowBookmarksButton;
 	StelButton* btShowBookmarks;

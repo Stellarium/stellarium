@@ -43,6 +43,9 @@ public:
 	//! @param params the texture creation parameters.
 	StelTextureSP createTexture(const QString& filename, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
 
+	//! Create a texture from a QImage.
+	StelTextureSP createTexture(const QImage &image, const StelTexture::StelTextureParams& params=StelTexture::StelTextureParams());
+
 	//! Load an image from a file and create a new texture from it in a new thread.
 	//! @note This method is safe to be called from threads other than the main thread.
 	//! @param url the texture file name or URL, can be absolute path if starts with '/' otherwise

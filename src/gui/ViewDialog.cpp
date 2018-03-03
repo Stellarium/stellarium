@@ -46,6 +46,7 @@
 #include "StelActionMgr.hpp"
 #include "StelMovementMgr.hpp"
 #include "StelUtils.hpp"
+#include "StelHips.hpp"
 
 #include <QDebug>
 #include <QFrame>
@@ -56,6 +57,7 @@
 #include <QDialog>
 #include <QStringList>
 #include <QColorDialog>
+#include <QJsonArray>
 
 ViewDialog::ViewDialog(QObject* parent) : StelDialog("View", parent)
 	, addRemoveLandscapesDialog(Q_NULLPTR)
@@ -472,7 +474,117 @@ void ViewDialog::createDialogContent()
 	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
 	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
 
+	// Hips mgr.
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
+	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
+	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
+	updateHips();
+
 	updateTabBarListWidgetWidth();
+}
+
+// Heuristic function to decide in which group to put a survey.
+static QString getHipsType(const HipsSurveyP hips)
+{
+	QJsonObject properties = hips->property("properties").toJsonObject();
+	if (!properties.contains("type")) return "dss";
+	if (properties["type"].toString() == "planet") return "sol";
+	return "other";
+}
+
+void ViewDialog::updateHips()
+{
+
+	// Update the groups combobox.
+	QComboBox* typeComboBox = ui->surveyTypeComboBox;
+	disconnect(typeComboBox, 0, 0, 0);
+	int index = typeComboBox->currentIndex();
+	QVariant selectedType = typeComboBox->itemData(index);
+	if (selectedType.isNull()) selectedType = "dss";
+	typeComboBox->clear();
+	typeComboBox->addItem(q_("Deep Sky"), "dss");
+	typeComboBox->addItem(q_("Solar System"), "sol");
+	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
+	typeComboBox->setCurrentIndex(index);
+	connect(typeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
+
+	// Update survey list.
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	QListWidget* l = ui->surveysListWidget;
+	QJsonObject currentInfo;
+	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
+	QListWidgetItem* currentItem = NULL;
+	HipsSurveyP currentHips;
+
+	l->blockSignals(true);
+	l->clear();
+	QList<HipsSurveyP> hipslist = hipsmgr->property("surveys").value<QList<HipsSurveyP>>();
+
+	for (auto hips: hipslist)
+	{
+		if (getHipsType(hips) != selectedType) continue;
+		QString url = hips->property("url").toString();
+		QJsonObject properties = hips->property("properties").toJsonObject();
+		QString title = properties["obs_title"].toString();
+		if (title.isEmpty()) continue;
+		QListWidgetItem* item = new QListWidgetItem(title, l);
+		item->setFlags(item->flags() | Qt::ItemIsUserCheckable);
+		item->setCheckState(hips->property("visible").toBool() ? Qt::Checked : Qt::Unchecked);
+		item->setData(Qt::UserRole, url);
+		if (url == currentSurvey)
+		{
+			currentItem = item;
+			currentHips = hips;
+		}
+		disconnect(hips.data(), 0, this, 0);
+		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
+	}
+	l->setCurrentItem(currentItem);
+	l->blockSignals(false);
+
+	if (!currentHips)
+	{
+		ui->surveysTextBrowser->setText("");
+	}
+	else
+	{
+		QJsonObject props = currentHips->property("properties").toJsonObject();
+		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
+
+		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
+
+		html += "<h2>properties</h2>\n<ul>\n";
+		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
+		{
+			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key()).arg(iter.value().toString());
+		}
+		html += "</ul>\n";
+		ui->surveysTextBrowser->setHtml(html);
+	}
+
+}
+
+void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
+{
+	QListWidget* l = item->listWidget();
+	l->blockSignals(true);
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	QString url = item->data(Qt::UserRole).toString();
+	HipsSurveyP hips;
+	QMetaObject::invokeMethod(hipsmgr, "getSurveyByUrl", Qt::DirectConnection,
+			Q_RETURN_ARG(HipsSurveyP, hips), Q_ARG(QString, url));
+	Q_ASSERT(hips);
+	if (item->checkState() == Qt::Checked)
+	{
+		l->setCurrentItem(item);
+		hips->setProperty("visible", true);
+	}
+	else
+	{
+		hips->setProperty("visible", false);
+	}
+	l->blockSignals(false);
 }
 
 void ViewDialog::colorButton(QToolButton* toolButton, QString propName)

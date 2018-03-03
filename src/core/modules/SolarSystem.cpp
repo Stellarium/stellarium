@@ -241,6 +241,9 @@ void SolarSystem::init()
 	addAction("actionShow_Planets_Hints", displayGroup, N_("Planet markers"), "flagHints", "Ctrl+P");
 	addAction("actionShow_Planets_Pointers", displayGroup, N_("Planet selection marker"), "flagPointer", "Ctrl+Shift+P");
 	addAction("actionShow_Skyculture_NativePlanetNames", displayGroup, N_("Native planet names (from starlore)"), "flagNativePlanetNames", "Ctrl+Shift+N");
+
+	connect(StelApp::getInstance().getModule("HipsMgr"), SIGNAL(gotNewSurvey(HipsSurveyP)),
+			this, SLOT(onNewSurvey(HipsSurveyP)));
 }
 
 void SolarSystem::deinit()
@@ -2519,3 +2522,17 @@ bool SolarSystem::removeMinorPlanet(QString name)
 	return true;
 }
 
+void SolarSystem::onNewSurvey(HipsSurveyP survey)
+{
+	// For the moment we only consider the survey url to decide if we
+	// assign it to a planet.  It would be better to use some property
+	// for that.
+	QString planetName = QUrl(survey->getUrl()).fileName();
+	planetName[0] = planetName[0].toUpper();
+	PlanetP pl = searchByEnglishName(planetName);
+	if (!pl || pl->survey) return;
+	pl->survey = survey;
+	survey->setProperty("planet", pl->getEnglishName());
+	// Not visible by default for the moment.
+	survey->setProperty("visible", false);
+}

@@ -94,7 +94,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 		return StelTextureSP();
 
 	QString canPath = url;
-	if(!url.startsWith("http"))
+	if(!url.startsWith("http") && !url.startsWith("file://"))
 	{
 		QFileInfo info(url);
 		canPath = info.canonicalFilePath();
@@ -123,6 +123,17 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 		tex->load();
 	}
 	textureCache.insert(canPath,tex);
+	return tex;
+}
+
+//! Create a texture from a QImage.
+StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTexture::StelTextureParams& params)
+{
+	bool r;
+	StelTextureSP tex = StelTextureSP(new StelTexture(this));
+	tex->loadParams = params;
+	r = tex->glLoad(image);
+	Q_ASSERT(r);
 	return tex;
 }
 

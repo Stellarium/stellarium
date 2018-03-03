@@ -50,6 +50,8 @@
 #endif
 #include "StelJsonParser.hpp"
 #include "StelTranslator.hpp"
+#include "EphemWrapper.hpp"
+#include "ToastMgr.hpp"
 
 #include <QSettings>
 #include <QDebug>
@@ -285,13 +287,15 @@ void ConfigurationDialog::createDialogContent()
 
 	connectBoolProperty(ui->showFlipButtonsCheckbox,                   "StelGui.flagShowFlipButtons");
 	connectBoolProperty(ui->showNebulaBgButtonCheckbox,                "StelGui.flagShowNebulaBackgroundButton");
-	connectBoolProperty(ui->showToastSurveyButtonCheckbox,             "StelGui.flagShowToastSurveyButton");
 	connectBoolProperty(ui->showBookmarksButtonCheckBox,               "StelGui.flagShowBookmarksButton");
 	connectBoolProperty(ui->showICRSGridButtonCheckBox,                "StelGui.flagShowICRSGridButton");
 	connectBoolProperty(ui->showGalacticGridButtonCheckBox,            "StelGui.flagShowGalacticGridButton");
 	connectBoolProperty(ui->showEclipticGridButtonCheckBox,            "StelGui.flagShowEclipticGridButton");
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
 
+  ui->showDSSButtonCheckbox->setChecked(gui->getFlagShowDSSButton());
+	connect(ui->showDSSButtonCheckbox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDSSButton(bool)));
+  
 	//ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
 	//connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
 	// TODO: Make sure to remove this setter function, rather listen to StelApp's signal. 
@@ -308,6 +312,7 @@ void ConfigurationDialog::createDialogContent()
 	connectDoubleProperty(ui->mouseTimeoutSpinBox, "MainView.cursorTimeout");
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "MainView.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
+
 
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
@@ -864,7 +869,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/auto_hide_horizontal_toolbar", gui->getAutoHideHorizontalButtonBar());
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
-	conf->setValue("gui/flag_show_toast_survey_button", gui->getFlagShowToastSurveyButton());
+	conf->setValue("gui/flag_show_dss_button", gui->getFlagShowDSSButton());
 	conf->setValue("gui/flag_show_bookmarks_button", gui->getFlagShowBookmarksButton());
 	conf->setValue("gui/flag_show_icrs_grid_button", gui->getFlagShowICRSGridButton());
 	conf->setValue("gui/flag_show_galactic_grid_button", gui->getFlagShowGalacticGridButton());
