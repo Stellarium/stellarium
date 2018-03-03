@@ -172,12 +172,15 @@ before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
   - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      mkdir qt5;
-      wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download;
-      unzip -qq qt5.zip -d qt5;
-      export PATH=`pwd`/qt5/bin:$PATH;
-      export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
+#      mkdir qt5;
+#      wget -q -O qt5.zip http://sourceforge.net/projects/cardinot/files/util/qt541.zip/download;
+#      unzip -qq qt5.zip -d qt5;
+#      export PATH=`pwd`/qt5/bin:$PATH;
+#      export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
+      sudo apt-add-repository -y ppa:beineri/opt-qt563-trusty;
       sudo apt-get -qq update;
+      sudo apt-get -qq install qt56-meta-full;
+      source /opt/qt56/bin/qt56-env.sh
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
