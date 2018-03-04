@@ -1803,6 +1803,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 			minY =  (minY < minYs - 2.0) ? minY : minYs - 2.f;
 			maxY = (maxY > maxYs + 2.0) ? maxY : maxYs + 2.0;
+			maxY += 18.0;
 		}
 
 		// additional data: Moon
