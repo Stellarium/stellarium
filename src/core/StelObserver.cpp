@@ -214,7 +214,8 @@ double StelObserver::getDistanceFromCenter(void) const
 	const double latRad=currentLocation.latitude*(M_PI/180.0);
 	const double u = atan( bByA * tan(latRad));
 	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	Q_ASSERT(fabs(u)<= fabs(latRad));
+	//Q_ASSERT(fabs(u)<= fabs(latRad));
+	Q_ASSERT(fabs(u)-fabs(latRad) <= 0.000001);
 	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
@@ -242,7 +243,8 @@ Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
 	const double latRad=currentLocation.latitude*(M_PI/180.0);
 	const double u = atan( bByA * tan(latRad));
 	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	Q_ASSERT(fabs(u)<= fabs(latRad));
+	//Q_ASSERT(fabs(u)<= fabs(latRad));
+	Q_ASSERT(fabs(u)-fabs(latRad) <= 0.000001);
 	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);

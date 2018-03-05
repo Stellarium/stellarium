@@ -36,16 +36,27 @@ public:
 	//! @param longitude longitude in degree in range [-180;180[
 	//! @param latitude latitude in degree in range [-90;90]
 	void setCursorPos(double longitude, double latitude);
+
+	void setPixmap(const QPixmap &pixmap);
+	void resizePixmap();
 	
 signals:
 	//! Signal emitted when we click on the map
 	void positionChanged(double longitude, double latitude);
 
 protected:
-	virtual void mousePressEvent(QMouseEvent * event);
+	virtual void mousePressEvent(QMouseEvent * event) override;
+
+	virtual void resizeEvent(QResizeEvent *event) override;
 
 private:
-	QLabel* cursor;
+	//QLabel* cursor;
+
+	QPixmap map;
+	//map without location cursor drawn on
+	QPixmap origMap;
+
+	QPixmap locCursor;
 };
 
 #endif // _MAPLABEL_HPP_

@@ -179,8 +179,8 @@ void LocationDialog::handleDialogSizeChanged(QSizeF size)
 {
 	StelDialog::handleDialogSizeChanged(size);
 	StelLocation loc = locationFromFields();
-	resizePixmap();
-	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
+	//resizePixmap();
+	//ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 }
 
 void LocationDialog::reloadLocations()
@@ -313,7 +313,7 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 	if (lastPlanet==loc.planetName)
 		return;
 
-	//QPixmap pixmap;
+	QPixmap pixmap;
 	// Try to set the proper planet map image
 	if (loc.planetName=="Earth")
 	{
@@ -335,21 +335,21 @@ void LocationDialog::setMapForLocation(const StelLocation& loc)
 			pixmap = QPixmap(path);
 		}
 	}
-	//StelCore * core = StelApp::getInstance().getCore();
-	//pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
+	StelCore * core = StelApp::getInstance().getCore();
+	pixmap.setDevicePixelRatio(core->getCurrentStelProjectorParams().devicePixelsPerPixel);
 	ui->mapLabel->setPixmap(pixmap);
-	resizePixmap();
+	ui->mapLabel->resizePixmap();
 	ui->mapLabel->setCursorPos(loc.longitude, loc.latitude);
 	// For caching
 	lastPlanet = loc.planetName;
 }
 
-void LocationDialog::resizePixmap()
+/*void LocationDialog::resizePixmap()
 {
 	int w = ui->mapLabel->width();
 	int h = ui->mapLabel->height();
 	ui->mapLabel->setPixmap(pixmap.scaled(w,h,Qt::KeepAspectRatio,Qt::SmoothTransformation));
-}
+}*/
 
 void LocationDialog::populatePlanetList()
 {

@@ -47,7 +47,7 @@ protected:
 	virtual void createDialogContent();
 	Ui_locationDialogForm* ui;
 
-	void resizePixmap();
+	//void resizePixmap();
 	
 private:
 	//! Set the values of all the fields from a location info
@@ -155,7 +155,7 @@ private:
 	QStringListModel* pickedModel;
 	QSortFilterProxyModel *proxyModel;
 
-	QPixmap pixmap;
+	//QPixmap pixmap;
 
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
