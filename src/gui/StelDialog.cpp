@@ -90,6 +90,8 @@ void StelDialog::setVisible(bool v)
 				newSize.setWidth(maxSize.width());
 			if (newSize.height() >= maxSize.height())
 				newSize.setHeight(maxSize.height());
+			if(newSize != dialog->size())
+				proxy->resize(newSize);
 		}
 		else
 		{
