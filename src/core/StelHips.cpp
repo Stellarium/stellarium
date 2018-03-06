@@ -92,6 +92,9 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 			QDateTime date = QDateTime::fromString(properties["hips_release_date"].toString(), Qt::ISODate);
 			releaseDate = StelUtils::qDateTimeToJd(date);
 		}
+		if (properties.contains("hips_frame"))
+			hipsFrame = properties["hips_frame"].toString();
+
 		emit propertiesChanged();
 		emit statusChanged();
 		networkReply->deleteLater();
@@ -179,9 +182,9 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	// Set the projection.
 	StelCore* core = StelApp::getInstance().getCore();
 	StelCore::FrameType frame = StelCore::FrameUninitialized;
-	if (properties["hips_frame"] == "galactic")
+	if (hipsFrame == "galactic")
 		frame = StelCore::FrameGalactic;
-	else if (properties["hips_frame"] == "equatorial")
+	else if (hipsFrame == "equatorial")
 		frame = StelCore::FrameJ2000;
 	if (frame)
 		sPainter->setProjector(core->getProjection(frame));

@@ -48,12 +48,12 @@ class HipsSurvey : public QObject
 	friend class HipsMgr;
 	Q_OBJECT
 
-	Q_PROPERTY(QString url MEMBER url CONSTANT)	
+	Q_PROPERTY(QString url MEMBER url CONSTANT)
 	Q_PROPERTY(QJsonObject properties MEMBER properties NOTIFY propertiesChanged)
 	Q_PROPERTY(bool isLoading READ isLoading NOTIFY statusChanged)
 	Q_PROPERTY(bool visible READ isVisible WRITE setVisible NOTIFY visibleChanged)
 	//! The name of the planet the survey is attached to, or empty if this is a skysurvey.
-	Q_PROPERTY(QString planet MEMBER planet);
+	Q_PROPERTY(QString planet MEMBER planet)
 
 public:
 	typedef std::function<void(const QVector<Vec3d>& verts, const QVector<Vec2f>& tex,
@@ -82,6 +82,9 @@ public:
 	//! Return the source URL of the survey.
 	const QString& getUrl() const {return url;}
 
+	//! Return the frame name of the survey.
+	const QString getFrame() const { return hipsFrame; }
+
 	//! Get whether the survey is still loading.
 	bool isLoading(void) const;
 
@@ -96,6 +99,7 @@ signals:
 private:
 	LinearFader fader;
 	QString url;
+	QString hipsFrame;
 	QString planet;
 	double releaseDate; // As UTC Julian day.
 	QCache<long int, HipsTile> tiles;

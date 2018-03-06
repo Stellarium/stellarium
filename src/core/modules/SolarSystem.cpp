@@ -2530,7 +2530,8 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 	QString planetName = QUrl(survey->getUrl()).fileName();
 	planetName[0] = planetName[0].toUpper();
 	PlanetP pl = searchByEnglishName(planetName);
-	if (!pl || pl->survey) return;
+	if (!pl || pl->survey)
+		return;
 	pl->survey = survey;
 	survey->setProperty("planet", pl->getCommonEnglishName());
 	// Not visible by default for the moment.
