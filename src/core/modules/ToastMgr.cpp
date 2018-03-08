@@ -57,7 +57,7 @@ void ToastMgr::init()
 	// Hide deep-sky survey by default
 	setFlagSurveyShow(conf->value("astro/flag_toast_survey", false).toBool());
 
-	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "surveyDisplayed");
+	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Digitized Sky Survey (TOAST)"), "surveyDisplayed");
 }
 
 void ToastMgr::deinit()
