@@ -104,6 +104,8 @@ class Translations
 		N_("Asterisms");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Geological features");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Artificial objects");
 
 		// =====================================================================
 		// List of geological features by type
