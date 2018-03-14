@@ -6,19 +6,19 @@ clone_folder: c:\stellarium
 environment:
   matrix:
   - platform: x64
-    qtver: 5.9.3
+    qtver: 5.9.4
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64
   - platform: Win32
-    qtver: 5.9.3
+    qtver: 5.9.4
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
   - platform: x64
-    qtver: 5.10.0
+    qtver: 5.10.1
     qtbin: msvc2015_64
     msvcname: Visual Studio 14 2015 Win64
   - platform: Win32
-    qtver: 5.10.0
+    qtver: 5.10.1
     qtbin: msvc2015
     msvcname: Visual Studio 14 2015
 before_build:
