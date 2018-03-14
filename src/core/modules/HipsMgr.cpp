@@ -67,7 +67,9 @@ void HipsMgr::init()
 			QByteArray data = networkReply->readAll();
 			QList<HipsSurveyP> newSurveys = HipsSurvey::parseHipslist(data);
 			for (HipsSurveyP survey: newSurveys)
+			{
 				emit gotNewSurvey(survey);
+			}
 			surveys += newSurveys;
 			emit surveysChanged();
 		});

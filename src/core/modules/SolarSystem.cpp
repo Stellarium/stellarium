@@ -1360,7 +1360,7 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getEnglishName() == planetEnglishName)
+		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 	}
 	return PlanetP();
@@ -1370,7 +1370,7 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) c
 {
 	foreach (const PlanetP& p, systemMinorBodies)
 	{
-		if (p->getCommonEnglishName() == planetEnglishName)
+		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
 	}
 	return PlanetP();
@@ -1381,7 +1381,7 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getNameI18n() == planetNameI18)
+		if (p->getNameI18n().toUpper() == planetNameI18.toUpper())
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -1392,7 +1392,7 @@ StelObjectP SolarSystem::searchByName(const QString& name) const
 {
 	foreach (const PlanetP& p, systemPlanets)
 	{
-		if (p->getEnglishName() == name || p->getCommonEnglishName() == name)
+		if (p->getEnglishName().toUpper() == name.toUpper() || p->getCommonEnglishName().toUpper() == name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
 	}
 	return StelObjectP();
@@ -2528,7 +2528,6 @@ void SolarSystem::onNewSurvey(HipsSurveyP survey)
 	// assign it to a planet.  It would be better to use some property
 	// for that.
 	QString planetName = QUrl(survey->getUrl()).fileName();
-	planetName[0] = planetName[0].toUpper();
 	PlanetP pl = searchByEnglishName(planetName);
 	if (!pl || pl->survey)
 		return;
