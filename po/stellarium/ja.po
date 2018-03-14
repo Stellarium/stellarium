@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-03 20:34+0700\n"
+"POT-Creation-Date: 2018-03-10 17:37+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Masahiko Yamaguchi <vineuser7@gmail.com>, 2017\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -272,11 +272,11 @@ msgstr "地平線"
 #: src/core/modules/GridLinesMgr.cpp:1236
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Equatorial J2000 grid"
-msgstr "赤経/赤緯 (J2000)"
+msgstr "赤経/赤緯 (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:1237
 msgid "Ecliptic J2000 grid"
-msgstr "黄経/黄緯 (J2000)"
+msgstr "黄経/黄緯 (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:1238
 msgid "Ecliptic grid"
@@ -1170,7 +1170,7 @@ msgstr "減光後"
 
 #: src/core/modules/Nebula.cpp:246 src/core/modules/StarWrapper.cpp:234
 msgid "Photometric system"
-msgstr "測光系"
+msgstr "写真測光系"
 
 #: src/core/modules/Nebula.cpp:251 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:216
@@ -1928,11 +1928,11 @@ msgstr "惑星の軌跡"
 
 #: src/core/modules/SolarSystem.cpp:241
 msgid "Planet markers"
-msgstr ""
+msgstr "惑星マーカー"
 
 #: src/core/modules/SolarSystem.cpp:242
 msgid "Planet selection marker"
-msgstr ""
+msgstr "選択惑星のマーカー"
 
 #: src/core/modules/SolarSystem.cpp:243
 msgid "Native planet names (from starlore)"
@@ -2012,7 +2012,7 @@ msgstr "固有運動"
 #: src/core/modules/StarWrapper.cpp:300 src/core/modules/StarWrapper.cpp:302
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr "ミリ秒角(mas)/年"
+msgstr "ミリ秒角/年"
 
 #: src/core/modules/StarWrapper.cpp:301
 msgid "Position angle of the proper motion"
@@ -2031,8 +2031,8 @@ msgid "Zodiacal Light"
 msgstr "黄道光"
 
 #: src/core/modules/ToastMgr.cpp:60
-msgid "Digitized Sky Survey (experimental)"
-msgstr ""
+msgid "Digitized Sky Survey (TOAST)"
+msgstr "デジタル・スカイ・サーベイ(TOSAT)"
 
 #: src/core/StelApp.cpp:564
 msgid "Night mode"
@@ -2652,14 +2652,14 @@ msgstr "正射図法は透視図法に似ていますが視点は無限遠から
 
 #: src/core/StelProjectorClasses.cpp:470
 msgid "Sinusoidal"
-msgstr ""
+msgstr "サンソン図法"
 
 #: src/core/StelProjectorClasses.cpp:475
 msgid ""
 "The sinusoidal projection is a <i>pseudocylindrical equal-area map "
 "projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-"
 "area projection."
-msgstr ""
+msgstr "サンソン図法はサンソン・フラムスチードまたはメルカトル正積図法と呼ばれることもある<i>擬似円柱等積図法</i>です。"
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
@@ -2856,7 +2856,7 @@ msgstr "起動時の方位角/高度: %1/%2"
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:1012 src/gui/ViewDialog.cpp:1559
+#: src/gui/ConfigurationDialog.cpp:1012 src/gui/ViewDialog.cpp:1561
 msgid "Contact"
 msgstr "連絡先"
 
@@ -3270,11 +3270,11 @@ msgstr "以下は有効なキーボードショートカットのみ表示して
 
 #: src/gui/HelpDialog.cpp:223
 msgid "Text User Interface (TUI)"
-msgstr ""
+msgstr "テキスト・ユーザー・インターフェイス(TUI)"
 
 #: src/gui/HelpDialog.cpp:225
 msgid "Activate TUI"
-msgstr ""
+msgstr "TUI有効"
 
 #: src/gui/HelpDialog.cpp:234
 msgid ""
@@ -3350,22 +3350,22 @@ msgstr "開発者: %1"
 #: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Continuous Integration: %1"
-msgstr ""
+msgstr "継続的な調整・統合者: %1"
 
 #: src/gui/HelpDialog.cpp:326
 #, qt-format
 msgid "Tester: %1"
-msgstr ""
+msgstr "テスト者: %1"
 
 #: src/gui/HelpDialog.cpp:327
 msgid "Former Developers"
-msgstr ""
+msgstr "過去の開発者"
 
 #: src/gui/HelpDialog.cpp:328
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
-msgstr ""
+msgstr "何人かは重要な貢献をしましたが、今は活動していません。彼らの仕事でこのプロジェクトは大きな進展がありました:"
 
 #: src/gui/HelpDialog.cpp:329
 #, qt-format
@@ -3388,14 +3388,14 @@ msgstr "OSX 開発者: %1"
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
 msgid "Contributors"
-msgstr ""
+msgstr "貢献者"
 
 #: src/gui/HelpDialog.cpp:341
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
-msgstr ""
+msgstr "彼らは重要な貢献をしてステラリウムはより良いソフトになりました(アルファベット順): %1."
 
 #: src/gui/StelGui.cpp:209
 msgid "Windows"
@@ -3527,7 +3527,7 @@ msgstr ""
 
 #: src/gui/StelGuiItems.cpp:677 src/gui/StelGuiItems.cpp:679
 msgid "Simulation speed"
-msgstr ""
+msgstr "シミュレーション速度"
 
 #: src/gui/StelGuiItems.cpp:748
 msgid "planetocentric distance"
@@ -3558,183 +3558,191 @@ msgstr ""
 msgid "Frames per second"
 msgstr "1秒当たりのフレーム数"
 
-#: src/gui/ViewDialog.cpp:506
+#: src/gui/ViewDialog.cpp:508
 msgid "Deep Sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:507
+#: src/gui/ViewDialog.cpp:509
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "太陽系"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1421
+#: src/gui/ViewDialog.cpp:1423
 msgid "Excellent dark-sky site"
 msgstr "素晴らしく暗い空"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1423
+#: src/gui/ViewDialog.cpp:1425
 msgid "Typical truly dark site"
 msgstr "典型的な田舎の暗い空"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1425
+#: src/gui/ViewDialog.cpp:1427
 msgid "Rural sky"
 msgstr "田舎の空"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1427
+#: src/gui/ViewDialog.cpp:1429
 msgid "Rural/suburban transition"
 msgstr "田舎から郊外の空"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1429
+#: src/gui/ViewDialog.cpp:1431
 msgid "Suburban sky"
 msgstr "郊外の空"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1431
+#: src/gui/ViewDialog.cpp:1433
 msgid "Bright suburban sky"
 msgstr "明るい郊外の空"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1433
+#: src/gui/ViewDialog.cpp:1435
 msgid "Suburban/urban transition"
 msgstr "郊外から都会の空"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1435
+#: src/gui/ViewDialog.cpp:1437
 msgid "City sky"
 msgstr "都会の空"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1437
+#: src/gui/ViewDialog.cpp:1439
 msgid "Inner-city sky"
 msgstr "都心の空"
 
-#: src/gui/ViewDialog.cpp:1451
+#: src/gui/ViewDialog.cpp:1453
 msgid "The naked-eye limiting magnitude is"
 msgstr "肉眼での限界等級"
 
-#: src/gui/ViewDialog.cpp:1459
+#: src/gui/ViewDialog.cpp:1461
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1460
+#: src/gui/ViewDialog.cpp:1462
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1483
+#: src/gui/ViewDialog.cpp:1485
 msgid "Abbreviated"
 msgstr "略号"
 
-#: src/gui/ViewDialog.cpp:1484
+#: src/gui/ViewDialog.cpp:1486
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1485
+#: src/gui/ViewDialog.cpp:1487
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1683
+#: src/gui/ViewDialog.cpp:1685
 msgid "No shooting stars"
 msgstr "流星を表示しない"
 
-#: src/gui/ViewDialog.cpp:1685
+#: src/gui/ViewDialog.cpp:1687
 msgid "Normal rate"
 msgstr "通常レベル"
 
-#: src/gui/ViewDialog.cpp:1687
+#: src/gui/ViewDialog.cpp:1689
 msgid "Standard Orionids rate"
 msgstr "通常のオリオン座流星群レベル"
 
-#: src/gui/ViewDialog.cpp:1689
+#: src/gui/ViewDialog.cpp:1691
 msgid "Standard Perseids rate"
 msgstr "通常のペルセウス流星群レベル"
 
-#: src/gui/ViewDialog.cpp:1691
+#: src/gui/ViewDialog.cpp:1693
 msgid "Standard Geminids rate"
 msgstr "通常のふたご座流星群レベル"
 
-#: src/gui/ViewDialog.cpp:1693
+#: src/gui/ViewDialog.cpp:1695
 msgid "Exceptional Perseid rate"
 msgstr "ペルセウス座流星群の大出現レベル"
 
-#: src/gui/ViewDialog.cpp:1695
+#: src/gui/ViewDialog.cpp:1697
 msgid "Meteor storm rate"
 msgstr "流星雨レベル"
 
-#: src/gui/ViewDialog.cpp:1697
+#: src/gui/ViewDialog.cpp:1699
 msgid "Exceptional Draconid rate"
 msgstr "りゅう座流星群の大出現レベル"
 
-#: src/gui/ViewDialog.cpp:1699
+#: src/gui/ViewDialog.cpp:1701
 msgid "Exceptional Leonid rate"
 msgstr "しし座流星群の多いレベル"
 
-#: src/gui/ViewDialog.cpp:1701
+#: src/gui/ViewDialog.cpp:1703
 msgid "Very high rate (1966 Leonids)"
 msgstr "しし座流星群の大出現(1966年)レベル"
 
-#: src/gui/ViewDialog.cpp:1703
+#: src/gui/ViewDialog.cpp:1705
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "1833年のしし座流星群レベル (過去最大級)"
 
-#: src/gui/ViewDialog.cpp:1756
+#: src/gui/ViewDialog.cpp:1758
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1757
+#: src/gui/ViewDialog.cpp:1759
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1758
+#: src/gui/ViewDialog.cpp:1760
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1759
+#: src/gui/ViewDialog.cpp:1761
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1760
+#: src/gui/ViewDialog.cpp:1762
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1786
+#: src/gui/ViewDialog.cpp:1788
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
+"この計算法は1984年以降の<em>Astronomical Almanac</em>で使用されており、D.L. "
+"Harrisによると(機械計測の)V等級が計算される。"
 
-#: src/gui/ViewDialog.cpp:1789
+#: src/gui/ViewDialog.cpp:1791
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
+"この計算法はG. Muellerによる1877年から1891年の観測を基にしており、<em>Explanatory Supplement to the "
+"Astronomical Ephemeris</em>(1961年)で公開された。"
 
-#: src/gui/ViewDialog.cpp:1792
+#: src/gui/ViewDialog.cpp:1794
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
 msgstr ""
+"この計算法は<em>Explanatory Supplement to the Astronomical "
+"Almanac</em>(1992年)で公開された。"
 
-#: src/gui/ViewDialog.cpp:1795
+#: src/gui/ViewDialog.cpp:1797
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
+"この計算法は<em>Explanatory Supplement to the Astronomical "
+"Almanac</em>第3版(2013年)で公開された。"
 
-#: src/gui/ViewDialog.cpp:1798
+#: src/gui/ViewDialog.cpp:1800
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "位相角と反射率からV等級を計算します。"
 
@@ -4081,256 +4089,256 @@ msgid "Galaxies"
 msgstr "銀河"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:442 src/translations.h:329
+#: src/gui/AstroCalcDialog.cpp:442 src/translations.h:331
 #: src/ui_viewDialog.h:2720 src/ui_dsoColorsDialog.h:595
 msgid "Active galaxies"
-msgstr ""
+msgstr "活動銀河"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:443 src/translations.h:331
+#: src/gui/AstroCalcDialog.cpp:443 src/translations.h:333
 #: src/ui_dsoColorsDialog.h:561
 msgid "Radio galaxies"
-msgstr ""
+msgstr "電波銀河"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:444 src/translations.h:333
+#: src/gui/AstroCalcDialog.cpp:444 src/translations.h:335
 #: src/ui_viewDialog.h:2717 src/ui_dsoColorsDialog.h:571
 msgid "Interacting galaxies"
-msgstr ""
+msgstr "相互作用銀河"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:445 src/translations.h:335
+#: src/gui/AstroCalcDialog.cpp:445 src/translations.h:337
 msgid "Bright quasars"
-msgstr ""
+msgstr "明るいクエーサー"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:446 src/gui/AstroCalcDialog.cpp:3522
-#: src/translations.h:337 src/ui_viewDialog.h:2724
+#: src/translations.h:339 src/ui_viewDialog.h:2724
 #: src/ui_dsoColorsDialog.h:625
 msgid "Star clusters"
-msgstr ""
+msgstr "星団"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:447 src/translations.h:313
+#: src/gui/AstroCalcDialog.cpp:447 src/translations.h:315
 #: src/ui_dsoColorsDialog.h:542
 msgid "Open star clusters"
 msgstr "散開星団"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:448 src/translations.h:315
+#: src/gui/AstroCalcDialog.cpp:448 src/translations.h:317
 #: src/ui_dsoColorsDialog.h:669
 msgid "Globular star clusters"
 msgstr "球状星団"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:449 src/translations.h:339
+#: src/gui/AstroCalcDialog.cpp:449 src/translations.h:341
 #: src/ui_dsoColorsDialog.h:547
 msgid "Stellar associations"
-msgstr ""
+msgstr "アソシエーション"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:450 src/translations.h:341
+#: src/gui/AstroCalcDialog.cpp:450 src/translations.h:343
 #: src/ui_dsoColorsDialog.h:679
 msgid "Star clouds"
-msgstr ""
+msgstr "スタークラウド(恒星集団)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:451 src/translations.h:317
+#: src/gui/AstroCalcDialog.cpp:451 src/translations.h:319
 #: src/ui_dsoColorsDialog.h:659
 msgid "Nebulae"
 msgstr "星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:452 src/gui/AstroCalcDialog.cpp:1633
-#: src/gui/AstroCalcDialog.cpp:3531 src/translations.h:319
+#: src/gui/AstroCalcDialog.cpp:3531 src/translations.h:321
 #: src/ui_viewDialog.h:2718 src/ui_dsoColorsDialog.h:678
 msgid "Planetary nebulae"
 msgstr "惑星状星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:453 src/gui/AstroCalcDialog.cpp:1635
-#: src/gui/AstroCalcDialog.cpp:3520 src/translations.h:321
+#: src/gui/AstroCalcDialog.cpp:3520 src/translations.h:323
 #: src/ui_viewDialog.h:2721 src/ui_dsoColorsDialog.h:612
 msgid "Dark nebulae"
 msgstr "暗黒星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:454 src/translations.h:327
+#: src/gui/AstroCalcDialog.cpp:454 src/translations.h:329
 #: src/ui_dsoColorsDialog.h:629
 msgid "Reflection nebulae"
-msgstr ""
+msgstr "反射星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:455 src/translations.h:343
+#: src/gui/AstroCalcDialog.cpp:455 src/translations.h:345
 #: src/ui_dsoColorsDialog.h:660
 msgid "Bipolar nebulae"
-msgstr ""
+msgstr "双極性星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:456 src/translations.h:345
+#: src/gui/AstroCalcDialog.cpp:456 src/translations.h:347
 #: src/ui_dsoColorsDialog.h:587
 msgid "Emission nebulae"
-msgstr ""
+msgstr "散光星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:457 src/translations.h:323
+#: src/gui/AstroCalcDialog.cpp:457 src/translations.h:325
 #: src/ui_dsoColorsDialog.h:544
 msgid "Clusters associated with nebulosity"
-msgstr ""
+msgstr "星雲を伴う星団"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:458 src/translations.h:325
+#: src/gui/AstroCalcDialog.cpp:458 src/translations.h:327
 msgid "HII regions"
-msgstr ""
+msgstr "HII領域"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:459 src/gui/AstroCalcDialog.cpp:3539
-#: src/translations.h:347 src/ui_viewDialog.h:2716
+#: src/translations.h:349 src/ui_viewDialog.h:2716
 #: src/ui_dsoColorsDialog.h:643
 msgid "Supernova remnants"
-msgstr ""
+msgstr "超新星残骸"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:460 src/translations.h:353
+#: src/gui/AstroCalcDialog.cpp:460 src/translations.h:355
 #: src/ui_dsoColorsDialog.h:555
 msgid "Interstellar matter"
-msgstr ""
+msgstr "星間物質"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:461 src/translations.h:355
+#: src/gui/AstroCalcDialog.cpp:461 src/translations.h:357
 #: src/ui_dsoColorsDialog.h:670
 msgid "Emission objects"
-msgstr ""
+msgstr "発光天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:462 src/translations.h:357
+#: src/gui/AstroCalcDialog.cpp:462 src/translations.h:359
 #: src/ui_dsoColorsDialog.h:651
 msgid "BL Lac objects"
-msgstr ""
+msgstr "とかげ座BL星型天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:463 src/translations.h:359
+#: src/gui/AstroCalcDialog.cpp:463 src/translations.h:361
 #: src/ui_dsoColorsDialog.h:548
 msgid "Blazars"
-msgstr ""
+msgstr "ブレーザー"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:464 src/translations.h:361
+#: src/gui/AstroCalcDialog.cpp:464 src/translations.h:363
 msgid "Molecular Clouds"
-msgstr ""
+msgstr "分子雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:465 src/translations.h:363
+#: src/gui/AstroCalcDialog.cpp:465 src/translations.h:365
 msgid "Young Stellar Objects"
-msgstr ""
+msgstr "若い星状天体 (YSO)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:466 src/translations.h:365
+#: src/gui/AstroCalcDialog.cpp:466 src/translations.h:367
 msgid "Possible Quasars"
-msgstr ""
+msgstr "おそらくクエーサー"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:467 src/translations.h:367
+#: src/gui/AstroCalcDialog.cpp:467 src/translations.h:369
 msgid "Possible Planetary Nebulae"
-msgstr ""
+msgstr "おそらく惑星状星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:468 src/translations.h:369
+#: src/gui/AstroCalcDialog.cpp:468 src/translations.h:371
 msgid "Protoplanetary Nebulae"
-msgstr ""
+msgstr "惑星状星雲の前段階"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:469 src/gui/AstroCalcDialog.cpp:1637
-#: src/gui/AstroCalcDialog.cpp:3535 src/translations.h:371
+#: src/gui/AstroCalcDialog.cpp:3535 src/translations.h:373
 #: src/ui_dsoColorsDialog.h:621
 msgid "Symbiotic stars"
-msgstr ""
+msgstr "共生星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:1638
-#: src/gui/AstroCalcDialog.cpp:3536 src/translations.h:373
+#: src/gui/AstroCalcDialog.cpp:3536 src/translations.h:375
 #: src/ui_dsoColorsDialog.h:636
 msgid "Emission-line stars"
-msgstr ""
+msgstr "輝線星"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:471 src/gui/AstroCalcDialog.cpp:3537
-#: src/translations.h:349 src/ui_dsoColorsDialog.h:686
+#: src/translations.h:351 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
-msgstr ""
+msgstr "超新星候補"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/gui/AstroCalcDialog.cpp:3538
-#: src/translations.h:351 src/ui_dsoColorsDialog.h:690
+#: src/translations.h:353 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
-msgstr ""
+msgstr "超新星残骸の候補"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/gui/AstroCalcDialog.cpp:3540
-#: src/translations.h:375 src/ui_viewDialog.h:2725
+#: src/translations.h:377 src/ui_viewDialog.h:2725
 #: src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
-msgstr ""
+msgstr "系外銀河中の星団"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:475 src/translations.h:377
+#: src/gui/AstroCalcDialog.cpp:475 src/translations.h:379
 #: src/ui_viewDialog.h:2671
 msgid "Messier Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:477 src/translations.h:379
+#: src/gui/AstroCalcDialog.cpp:477 src/translations.h:381
 #: src/ui_viewDialog.h:2689
 msgid "Caldwell Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:479 src/translations.h:381
+#: src/gui/AstroCalcDialog.cpp:479 src/translations.h:383
 msgid "Barnard Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:481 src/translations.h:383
+#: src/gui/AstroCalcDialog.cpp:481 src/translations.h:385
 msgid "Sharpless Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:483 src/translations.h:385
+#: src/gui/AstroCalcDialog.cpp:483 src/translations.h:387
 msgid "Van den Bergh Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:485 src/translations.h:387
+#: src/gui/AstroCalcDialog.cpp:485 src/translations.h:389
 msgid "The Catalogue of Rodgers, Campbell, and Whiteoak"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:487 src/translations.h:389
+#: src/gui/AstroCalcDialog.cpp:487 src/translations.h:391
 msgid "Collinder Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:489 src/translations.h:391
+#: src/gui/AstroCalcDialog.cpp:489 src/translations.h:393
 msgid "Melotte Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:491 src/translations.h:393
+#: src/gui/AstroCalcDialog.cpp:491 src/translations.h:395
 msgid "New General Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:493 src/translations.h:395
+#: src/gui/AstroCalcDialog.cpp:493 src/translations.h:397
 msgid "Index Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:495 src/translations.h:397
+#: src/gui/AstroCalcDialog.cpp:495 src/translations.h:399
 msgid "Lynds' Catalogue of Bright Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:497 src/translations.h:399
+#: src/gui/AstroCalcDialog.cpp:497 src/translations.h:401
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr ""
 
@@ -4343,72 +4351,72 @@ msgid "The Uppsala General Catalogue of Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:401
+#: src/gui/AstroCalcDialog.cpp:503 src/translations.h:403
 msgid "Cederblad Catalog"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:505 src/translations.h:403
+#: src/gui/AstroCalcDialog.cpp:505 src/translations.h:405
 msgid "The Catalogue of Peculiar Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:507 src/translations.h:405
+#: src/gui/AstroCalcDialog.cpp:507 src/translations.h:407
 msgid "The Catalogue of Interacting Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:509 src/translations.h:407
+#: src/gui/AstroCalcDialog.cpp:509 src/translations.h:409
 msgid "The Catalogue of Galactic Planetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:511 src/translations.h:409
+#: src/gui/AstroCalcDialog.cpp:511 src/translations.h:411
 msgid "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:513 src/translations.h:411
+#: src/gui/AstroCalcDialog.cpp:513 src/translations.h:413
 msgid "A catalogue of Galactic supernova remnants"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:413
+#: src/gui/AstroCalcDialog.cpp:515 src/translations.h:415
 msgid "A Catalog of Rich Clusters of Galaxies"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:517 src/translations.h:415
+#: src/gui/AstroCalcDialog.cpp:517 src/translations.h:417
 msgid "Hickson Compact Group"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:518 src/translations.h:417
+#: src/gui/AstroCalcDialog.cpp:518 src/translations.h:419
 msgid "Dwarf galaxies"
-msgstr ""
+msgstr "矮小銀河"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:519 src/translations.h:419
+#: src/gui/AstroCalcDialog.cpp:519 src/translations.h:421
 msgid "Herschel 400 Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:520 src/gui/AstroCalcDialog.cpp:3532
-#: src/translations.h:428
+#: src/translations.h:430
 msgid "Bright double stars"
-msgstr ""
+msgstr "明るい二重星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:521 src/gui/AstroCalcDialog.cpp:3533
-#: src/translations.h:430
+#: src/translations.h:432
 msgid "Bright variable stars"
-msgstr ""
+msgstr "明るい変光星"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:522 src/gui/AstroCalcDialog.cpp:3534
-#: src/translations.h:432
+#: src/translations.h:434
 msgid "Bright stars with high proper motion"
-msgstr ""
+msgstr "固有運動の大きい明るい恒星"
 
 #: src/gui/AstroCalcDialog.cpp:523
 msgid "Solar system objects"
@@ -4416,15 +4424,15 @@ msgstr "太陽系天体"
 
 #: src/gui/AstroCalcDialog.cpp:524
 msgid "Solar system objects: comets"
-msgstr ""
+msgstr "太陽系天体:彗星"
 
 #: src/gui/AstroCalcDialog.cpp:525
 msgid "Solar system objects: minor bodies"
-msgstr ""
+msgstr "太陽系天体:小天体"
 
 #: src/gui/AstroCalcDialog.cpp:526
 msgid "Solar system objects: planets"
-msgstr ""
+msgstr "太陽系天体:惑星"
 
 #: src/gui/AstroCalcDialog.cpp:576
 #, qt-format
@@ -4604,7 +4612,7 @@ msgstr "小惑星"
 #: src/gui/AstroCalcDialog.cpp:1622 src/gui/AstroCalcDialog.cpp:3525
 #: src/translations.h:88
 msgid "Plutinos"
-msgstr ""
+msgstr "冥王星族"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1623 src/gui/AstroCalcDialog.cpp:3524
@@ -4623,25 +4631,25 @@ msgstr "準惑星"
 #: src/gui/AstroCalcDialog.cpp:1625 src/gui/AstroCalcDialog.cpp:3527
 #: src/translations.h:92
 msgid "Cubewanos"
-msgstr ""
+msgstr "キュビワノ族"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1626 src/gui/AstroCalcDialog.cpp:3528
 #: src/translations.h:94
 msgid "Scattered disc objects"
-msgstr ""
+msgstr "散乱円盤天体(SDO)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1627 src/gui/AstroCalcDialog.cpp:3529
 #: src/translations.h:96
 msgid "Oort cloud objects"
-msgstr ""
+msgstr "オールトの雲の天体"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:1628 src/gui/AstroCalcDialog.cpp:3530
 #: src/translations.h:98
 msgid "Sednoids"
-msgstr ""
+msgstr "セドナ族"
 
 #: src/gui/AstroCalcDialog.cpp:1629
 #, qt-format
@@ -4680,27 +4688,27 @@ msgstr "地方時"
 
 #: src/gui/AstroCalcDialog.cpp:2136
 msgid "Magnitude vs. Time"
-msgstr "等級 - 時刻"
+msgstr "等級"
 
 #: src/gui/AstroCalcDialog.cpp:2139
 msgid "Phase vs. Time"
-msgstr "位相 - 時刻"
+msgstr "位相"
 
 #: src/gui/AstroCalcDialog.cpp:2142
 msgid "Distance vs. Time"
-msgstr "距離 - 時刻"
+msgstr "距離"
 
 #: src/gui/AstroCalcDialog.cpp:2145
 msgid "Elongation vs. Time"
-msgstr "離角 - 時刻"
+msgstr "離角"
 
 #: src/gui/AstroCalcDialog.cpp:2148
 msgid "Angular size vs. Time"
-msgstr "視直径 - 時刻"
+msgstr "視直径"
 
 #: src/gui/AstroCalcDialog.cpp:2151
 msgid "Phase angle vs. Time"
-msgstr "位相角 - 時刻"
+msgstr "位相角"
 
 #: src/gui/AstroCalcDialog.cpp:2192 src/gui/AstroCalcDialog.cpp:2337
 msgid "Date"
@@ -4729,7 +4737,7 @@ msgstr "時"
 #: src/gui/AstroCalcDialog.cpp:2516
 #, qt-format
 msgid "Now about %1"
-msgstr ""
+msgstr "およその現在時刻 %1"
 
 #: src/gui/AstroCalcDialog.cpp:2521
 #, qt-format
@@ -4738,11 +4746,11 @@ msgstr "およその子午線通過 %1"
 
 #: src/gui/AstroCalcDialog.cpp:2528
 msgid "Line of civil twilight"
-msgstr ""
+msgstr "市民薄明線"
 
 #: src/gui/AstroCalcDialog.cpp:2530
 msgid "Line of nautical twilight"
-msgstr ""
+msgstr "航海薄明線"
 
 #: src/gui/AstroCalcDialog.cpp:2532
 msgid "Line of astronomical twilight"
@@ -4820,11 +4828,11 @@ msgstr "テキストファイル"
 
 #: src/gui/AstroCalcDialog.cpp:4032
 msgid "Save list of objects as..."
-msgstr ""
+msgstr "天体リストの保存..."
 
 #: src/gui/AstroCalcDialog.cpp:4155
 msgid "spin-orbit resonance"
-msgstr ""
+msgstr "自転と公転の共鳴"
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5037,1024 +5045,1029 @@ msgid "Geological features"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:111
-msgid "Geological features: albedo features"
+#: src/translations.h:108
+msgid "Artificial objects"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
-msgid "Geological features: arcūs"
+msgid "Geological features: albedo features"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:115
-msgid "Geological features: astra"
+msgid "Geological features: arcūs"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:117
-msgid "Geological features: catenae"
+msgid "Geological features: astra"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:119
-msgid "Geological features: cavi"
+msgid "Geological features: catenae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:121
-msgid "Geological features: chaoses"
+msgid "Geological features: cavi"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:123
-msgid "Geological features: chasmata"
+msgid "Geological features: chaoses"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:125
-msgid "Geological features: colles"
+msgid "Geological features: chasmata"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:127
-msgid "Geological features: coronae"
+msgid "Geological features: colles"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:129
-msgid "Geological features: craters"
+msgid "Geological features: coronae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:131
-msgid "Geological features: dorsa"
+msgid "Geological features: craters"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:133
-msgid "Geological features: eruptive centers"
+msgid "Geological features: dorsa"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:135
-msgid "Geological features: faculae"
+msgid "Geological features: eruptive centers"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:137
-msgid "Geological features: farra"
+msgid "Geological features: faculae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:139
-msgid "Geological features: flexūs"
+msgid "Geological features: farra"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:141
-msgid "Geological features: fluctūs"
+msgid "Geological features: flexūs"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:143
-msgid "Geological features: flumina"
+msgid "Geological features: fluctūs"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:145
-msgid "Geological features: freta"
+msgid "Geological features: flumina"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:147
-msgid "Geological features: fossae"
+msgid "Geological features: freta"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:149
-msgid "Geological features: insulae"
+msgid "Geological features: fossae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:151
-msgid "Geological features: labēs"
+msgid "Geological features: insulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:153
-msgid "Geological features: labyrinthi"
+msgid "Geological features: labēs"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:155
-msgid "Geological features: lacunae"
+msgid "Geological features: labyrinthi"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:157
-msgid "Geological features: lacūs"
+msgid "Geological features: lacunae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:159
-msgid "Geological features: large ringed features"
+msgid "Geological features: lacūs"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:161
-msgid "Geological features: lineae"
+msgid "Geological features: large ringed features"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:163
-msgid "Geological features: lingulae"
+msgid "Geological features: lineae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:165
-msgid "Geological features: maculae"
+msgid "Geological features: lingulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:167
-msgid "Geological features: maria"
+msgid "Geological features: maculae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:169
-msgid "Geological features: mensae"
+msgid "Geological features: maria"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:171
-msgid "Geological features: montes"
+msgid "Geological features: mensae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:173
-msgid "Geological features: oceani"
+msgid "Geological features: montes"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:175
-msgid "Geological features: paludes"
+msgid "Geological features: oceani"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:177
-msgid "Geological features: paterae"
+msgid "Geological features: paludes"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:179
-msgid "Geological features: planitiae"
+msgid "Geological features: paterae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:181
-msgid "Geological features: plana"
+msgid "Geological features: planitiae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:183
-msgid "Geological features: plumes"
+msgid "Geological features: plana"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:185
-msgid "Geological features: promontoria"
+msgid "Geological features: plumes"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:187
-msgid "Geological features: regiones"
+msgid "Geological features: promontoria"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:189
-msgid "Geological features: rimae"
+msgid "Geological features: regiones"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:191
-msgid "Geological features: rupēs"
+msgid "Geological features: rimae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:193
-msgid "Geological features: scopuli"
+msgid "Geological features: rupēs"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:195
-msgid "Geological features: serpentes"
+msgid "Geological features: scopuli"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:197
-msgid "Geological features: sulci"
+msgid "Geological features: serpentes"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:199
-msgid "Geological features: sinūs"
+msgid "Geological features: sulci"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:201
-msgid "Geological features: terrae"
+msgid "Geological features: sinūs"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:203
-msgid "Geological features: tholi"
+msgid "Geological features: terrae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:205
-msgid "Geological features: undae"
+msgid "Geological features: tholi"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:207
-msgid "Geological features: valles"
+msgid "Geological features: undae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:209
-msgid "Geological features: vastitates"
+msgid "Geological features: valles"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:211
-msgid "Geological features: virgae"
+msgid "Geological features: vastitates"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:213
-msgid "Geological features: landing sites"
+msgid "Geological features: virgae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:215
-msgid "Geological features: lenticulae"
+msgid "Geological features: landing sites"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:217
-msgid "Geological features: reticula"
+msgid "Geological features: lenticulae"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:219
+msgid "Geological features: reticula"
+msgstr ""
+
+#. TRANSLATORS: Type of objects (for "Lists" in the search tool)
+#: src/translations.h:221
 msgid "Geological features: tesserae"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:224
+#: src/translations.h:226
 msgid "Named geological features of Epimetheus"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:226
+#: src/translations.h:228
 msgid "Named geological features of Vesta"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:228
+#: src/translations.h:230
 msgid "Named geological features of Mathilde"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:230
+#: src/translations.h:232
 msgid "Named geological features of Venus"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:232
+#: src/translations.h:234
 msgid "Named geological features of Mercury"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:234
+#: src/translations.h:236
 msgid "Named geological features of Iapetus"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:236
+#: src/translations.h:238
 msgid "Named geological features of Ganymede"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:238
+#: src/translations.h:240
 msgid "Named geological features of Ceres"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:240
+#: src/translations.h:242
 msgid "Named geological features of Ida"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:242
+#: src/translations.h:244
 msgid "Named geological features of Triton"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:244
+#: src/translations.h:246
 msgid "Named geological features of Oberon"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:246
+#: src/translations.h:248
 msgid "Named geological features of Itokawa"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:248
+#: src/translations.h:250
 msgid "Named geological features of Thebe"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:250
+#: src/translations.h:252
 msgid "Named geological features of Gaspra"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:252
+#: src/translations.h:254
 msgid "Named geological features of Rhea"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:254
+#: src/translations.h:256
 msgid "Named geological features of Enceladus"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:256
+#: src/translations.h:258
 msgid "Named geological features of the Moon"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:258
+#: src/translations.h:260
 msgid "Named geological features of Dione"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:260
+#: src/translations.h:262
 msgid "Named geological features of Steins"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:262
+#: src/translations.h:264
 msgid "Named geological features of Phoebe"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:264
+#: src/translations.h:266
 msgid "Named geological features of Puck"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:266
+#: src/translations.h:268
 msgid "Named geological features of Europa"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:268
+#: src/translations.h:270
 msgid "Named geological features of Lutetia"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:270
+#: src/translations.h:272
 msgid "Named geological features of Tethys"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:272
+#: src/translations.h:274
 msgid "Named geological features of Eros"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:274
+#: src/translations.h:276
 msgid "Named geological features of Callisto"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:276
+#: src/translations.h:278
 msgid "Named geological features of Phobos"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:278
+#: src/translations.h:280
 msgid "Named geological features of Proteus"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:280
+#: src/translations.h:282
 msgid "Named geological features of Hyperion"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:282
+#: src/translations.h:284
 msgid "Named geological features of Titania"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:284
+#: src/translations.h:286
 msgid "Named geological features of Deimos"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:286
+#: src/translations.h:288
 msgid "Named geological features of Io"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:288
+#: src/translations.h:290
 msgid "Named geological features of Ariel"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:290
+#: src/translations.h:292
 msgid "Named geological features of Dactyl"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:292
+#: src/translations.h:294
 msgid "Named geological features of Titan"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:294
+#: src/translations.h:296
 msgid "Named geological features of Amalthea"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:296
+#: src/translations.h:298
 msgid "Named geological features of Umbriel"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:298
+#: src/translations.h:300
 msgid "Named geological features of Janus"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:300
+#: src/translations.h:302
 msgid "Named geological features of Mars"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:302
+#: src/translations.h:304
 msgid "Named geological features of Miranda"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:304
+#: src/translations.h:306
 msgid "Named geological features of Mimas"
 msgstr ""
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
-#: src/translations.h:306
+#: src/translations.h:308
 msgid "Named geological features of Pluto"
 msgstr ""
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/translations.h:311
+#: src/translations.h:313
 msgid "Bright galaxies"
-msgstr ""
-
-#. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/translations.h:424
-msgid "Interesting double stars"
-msgstr ""
+msgstr "明るい銀河"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/translations.h:426
+msgid "Interesting double stars"
+msgstr "興味深い変光星"
+
+#. TRANSLATORS: Type of stars (for "Lists" in the search tool)
+#: src/translations.h:428
 msgid "Interesting variable stars"
-msgstr ""
+msgstr "興味深い変光星"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:437
+#: src/translations.h:439
 msgid "Arabic"
 msgstr "アラビア"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:439
+#: src/translations.h:441
 msgid "Arabic Moon Stations"
 msgstr "アラビアの月宿"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:441
+#: src/translations.h:443
 msgid "Aztec"
 msgstr "アステカ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:443
+#: src/translations.h:445
 msgid "Belarusian"
 msgstr "ベラルーシ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:445
+#: src/translations.h:447
 msgid "Boorong"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:447
+#: src/translations.h:449
 msgid "Chinese"
 msgstr "中国"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:449
+#: src/translations.h:451
 msgid "Egyptian"
 msgstr "エジプト"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:451
+#: src/translations.h:453
 msgid "Hawaiian Starlines"
 msgstr "ハワイ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:453
+#: src/translations.h:455
 msgid "Inuit"
 msgstr "イヌイット"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:455
+#: src/translations.h:457
 msgid "Indian Vedic"
 msgstr "ヴェーダ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Japanese Moon Stations"
 msgstr "日本の星宿"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Kamilaroi/Euahlayi"
 msgstr "カミラロイ族/Euahlayi族(オーストラリア)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Korean"
 msgstr "朝鮮"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Dakota/Lakota/Nakota"
 msgstr "ダコタ族/ラコタ族/ナコタ族(北アメリカ)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Macedonian"
 msgstr "マケドニア"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Maori"
 msgstr "マオリ族(ニュージーランド)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Mongolian"
 msgstr "モンゴル"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Navajo"
 msgstr "ナバホ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "Norse"
 msgstr "北欧"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Ojibwe"
 msgstr "オジブワ族(カナダ)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Romanian"
 msgstr "ローマ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Sami"
 msgstr "サーミ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Sardinian"
 msgstr "サルジニア"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "Siberian"
 msgstr "シベリア"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Tukano"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "Tupi-Guarani"
 msgstr "トゥピ・グアラニー"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Tongan"
 msgstr "トンガ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Western"
 msgstr "西洋"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Western (H.A.Rey)"
 msgstr "西洋 (H.A.Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Western (O.Hlad)"
 msgstr "西洋 (O.Hlad)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Guereins"
 msgstr "ゲラン(フランス)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Trees"
 msgstr "木々"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:505 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
+#: src/translations.h:507 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1290
 msgid "Moon"
 msgstr "月"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:507
+#: src/translations.h:509
 msgid "Hurricane"
 msgstr "ハリケーン(ワシントン)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:509
+#: src/translations.h:511
 msgid "Ocean"
 msgstr "海"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Garching"
 msgstr "ガーヒンク(ドイツ)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
+#: src/translations.h:515 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1302
 msgid "Mars"
 msgstr "火星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:515 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1305
+#: src/translations.h:517 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1305
 msgid "Jupiter"
 msgstr "木星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:517 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1308
+#: src/translations.h:519 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1308
 msgid "Saturn"
 msgstr "土星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Uranus"
 msgstr "天王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Neptune"
 msgstr "海王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Geneva"
 msgstr "ジュネーブ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Grossmugl"
 msgstr "グロースムーグル(オーストリア)"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Zero Horizon"
 msgstr "平原"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:529 plugins/Exoplanets/src/Exoplanet.cpp:337
+#: src/translations.h:531 plugins/Exoplanets/src/Exoplanet.cpp:337
 #: plugins/Exoplanets/src/Exoplanet.cpp:341
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1287
 msgid "Sun"
 msgstr "太陽"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:534
+#: src/translations.h:536
 msgid "Vienna Sterngarten"
 msgstr "星の庭園(ウィーン)"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:536
+#: src/translations.h:538
 msgid "Testscene"
 msgstr "テスト風景"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:541
+#: src/translations.h:543
 msgid "Landscape Tour"
 msgstr "風景ツアー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:543
+#: src/translations.h:545
 msgid "Partial Lunar Eclipse"
 msgstr "部分月食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:545
+#: src/translations.h:547
 msgid "Total Lunar Eclipse"
 msgstr "皆既月食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:547
+#: src/translations.h:549
 msgid "Screensaver"
 msgstr "スクリーンセーバー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:549
+#: src/translations.h:551
 msgid "Solar Eclipse 2009"
 msgstr "2009年の日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Startup Script"
 msgstr "スタートアップスクリプト"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Zodiac"
 msgstr "黄道星座"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "水星での3回の日の出、日の入り"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "Double eclipse from Deimos in 2017"
 msgstr "2017年のダイモスでの二重食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Double eclipse from Deimos in 2031"
 msgstr "2031年のダイモスでの二重食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:561
+#: src/translations.h:563
 msgid "Eclipse from Olympus Mons Jan 10 2068"
 msgstr "オリンポス山からみた2068年1月10日の日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:563
+#: src/translations.h:565
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "2048年の地球と木星の掩蔽"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:565
+#: src/translations.h:567
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "2027年のダイモスでの3つの通過と2つの食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "Solar System Screensaver"
 msgstr "太陽系スクリーンセーバー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Constellations Tour"
 msgstr "星座ツアー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Sun from different planets"
 msgstr "惑星から見たそれぞれの太陽"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Earth best views from other bodies"
 msgstr "他の天体から見た地球のベストショット"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Transit of Venus"
 msgstr "金星の日面通過"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:577
+#: src/translations.h:579
 msgid "Sky Culture Tour"
 msgstr "星の文化ツアー"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:579
+#: src/translations.h:581
 msgid "Earth Events from Mercury"
 msgstr "水星から見た地球関連の天文現象"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:581
+#: src/translations.h:583
 msgid "Earth Events from a floating city on Venus"
 msgstr "金星上の空中都市から見た地球関連の天文現象"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Earth Events from Mars"
 msgstr "火星から見た地球関連の天文現象"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:585
+#: src/translations.h:587
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "火星から見た地球や惑星の最大離角と衝"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "カリストから見た地球と火星の最大離角と日面通過"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "Tycho's Supernova"
 msgstr "ティコの超新星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Earth and other Planets from Ceres"
 msgstr "小惑星ケレスから見た惑星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Messier Objects Tour"
 msgstr "メシエ天体ツアー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:597
 msgid "Binocular Highlights"
 msgstr "双眼鏡で巡るツアー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:599
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "興味深い肉眼二重星20"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "List of largest known stars"
 msgstr "現在知られる最大級の大きさの恒星リスト"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:603
 msgid "Herschel 400 Tour"
 msgstr "ハーシェル400ツアー"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:605
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "ビノスカイ:双眼鏡で見る星雲・星団"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:607
 msgid "The Jack Bennett Catalog"
 msgstr "ジャック・ベネット・カタログ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:609
 msgid "Best objects in the New General Catalog"
 msgstr "NGCのベスト天体"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:613
+#: src/translations.h:615
 msgid "Look around each installed landscape."
 msgstr "それぞれの背景を見る。"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:615
+#: src/translations.h:617
 msgid "Look at each installed sky culture."
 msgstr "それぞれの星の文化を見る。"
 
-#: src/translations.h:616
+#: src/translations.h:618
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "部分月食をデモンストレーションするスクリプト"
 
-#: src/translations.h:617
+#: src/translations.h:619
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "皆既月食をデモンストレーションするスクリプト"
 
-#: src/translations.h:618
+#: src/translations.h:620
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:619
+#: src/translations.h:621
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "2009年に起こった皆既日食をデモンストレーションするスクリプト (位置=ランプル, バングラディッシュ)"
 
-#: src/translations.h:620
+#: src/translations.h:622
 msgid "Script which runs automatically at startup"
 msgstr "起動時に自動実行するスクリプト"
 
-#: src/translations.h:621
+#: src/translations.h:623
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:622
+#: src/translations.h:624
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:623
+#: src/translations.h:625
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:624
+#: src/translations.h:626
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:625
+#: src/translations.h:627
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 
-#: src/translations.h:626
+#: src/translations.h:628
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:627
+#: src/translations.h:629
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -6064,274 +6077,275 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:628
+#: src/translations.h:630
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
-msgstr ""
-
-#: src/translations.h:629
-msgid "A tour of the western constellations."
-msgstr ""
-
-#: src/translations.h:630
-msgid "Look at the Sun from big planets of Solar System and Pluto."
-msgstr ""
+msgstr "太陽系内の様々な現象を見せるスクリーンセーバー。全部で300もの現象があります!"
 
 #: src/translations.h:631
+msgid "A tour of the western constellations."
+msgstr "西洋の星座を巡るツアー。"
+
+#: src/translations.h:632
+msgid "Look at the Sun from big planets of Solar System and Pluto."
+msgstr "8惑星と冥王星から見た太陽。"
+
+#: src/translations.h:633
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:632
+#: src/translations.h:634
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
-msgstr ""
+msgstr "2012年6月6日にオーストラリアのシドニーで見られる金星の日面通過。"
 
-#: src/translations.h:633
+#: src/translations.h:635
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
-msgstr ""
+msgstr "1572年にチコ・ブラーエが観測した超新星。超新星プラグインが必要です。"
 
-#: src/translations.h:634
+#: src/translations.h:636
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
-msgstr ""
+msgstr "2000年から3000年に火星から見た惑星の最大離角と衝。"
 
-#: src/translations.h:635
+#: src/translations.h:637
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
 "Jupiter's radiation belt. Therefore, if humans ever colonize Jupiter's "
 "moons, Callisto will be the one."
 msgstr ""
+"2000年から3000年にカリストから見た地球の最大離角と日面通過。どうしてカリストかって？4つのガリレオ衛星のうち、カリストだけが木星の放射線帯tから離れているからです。だからもし、人類が木星に植民するとしたら、カリストが候補の1つになります。"
 
-#: src/translations.h:636
+#: src/translations.h:638
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 
-#: src/translations.h:637
+#: src/translations.h:639
 msgid "A tour of Messier Objects"
-msgstr ""
+msgstr "メシエ天体ツアー"
 
-#: src/translations.h:638
+#: src/translations.h:640
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
-msgstr ""
+msgstr "双眼鏡で観測出来る興味深い天体を巡るツアー。データはGary Seronikの名著から取りました。"
 
-#: src/translations.h:639
+#: src/translations.h:641
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
 
-#: src/translations.h:640
+#: src/translations.h:642
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 
-#: src/translations.h:641
+#: src/translations.h:643
 msgid "A tour around objects from the Herschel 400 Catalogue"
-msgstr ""
+msgstr "ハーシェル400カタログに掲載の天体を巡るツアー"
 
-#: src/translations.h:642
+#: src/translations.h:644
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
 
-#: src/translations.h:643
+#: src/translations.h:645
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:644
+#: src/translations.h:646
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:648
+#: src/translations.h:650
 msgid "&Undo"
 msgstr "元に戻す(&U)"
 
-#: src/translations.h:649
+#: src/translations.h:651
 msgid "&Redo"
 msgstr "やり直し(&R)"
 
-#: src/translations.h:650
+#: src/translations.h:652
 msgid "Cu&t"
 msgstr "切り取り(&T)"
 
-#: src/translations.h:651
+#: src/translations.h:653
 msgid "&Copy"
 msgstr "コピー(&C)"
 
-#: src/translations.h:652
+#: src/translations.h:654
 msgid "&Paste"
 msgstr "ペースト(&P)"
 
-#: src/translations.h:653 plugins/Oculars/src/ui_ocularDialog.h:1187
+#: src/translations.h:655 plugins/Oculars/src/ui_ocularDialog.h:1187
 #: plugins/Oculars/src/ui_ocularDialog.h:1196
 #: plugins/Oculars/src/ui_ocularDialog.h:1202
 #: plugins/Oculars/src/ui_ocularDialog.h:1220
 msgid "Delete"
 msgstr "削除"
 
-#: src/translations.h:654
+#: src/translations.h:656
 msgid "Select All"
 msgstr "全て選択"
 
-#: src/translations.h:655
+#: src/translations.h:657
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:656
+#: src/translations.h:658
 msgid "Directory:"
 msgstr "ディレクトリ:"
 
-#: src/translations.h:657
+#: src/translations.h:659
 msgid "Folder"
 msgstr "フォルダ"
 
-#: src/translations.h:658
+#: src/translations.h:660
 msgid "&Choose"
 msgstr "選択(&C)"
 
-#: src/translations.h:659 src/ui_configurationDialog.h:1534
+#: src/translations.h:661 src/ui_configurationDialog.h:1534
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: src/translations.h:660
+#: src/translations.h:662
 msgid "&Cancel"
 msgstr "キャンセル(&C)"
 
-#: src/translations.h:661
+#: src/translations.h:663
 msgid "Files of type:"
 msgstr "ファイルタイプ:"
 
-#: src/translations.h:662
+#: src/translations.h:664
 msgid "Date Modified"
 msgstr "更新日"
 
-#: src/translations.h:663
+#: src/translations.h:665
 msgid "Directories"
 msgstr "ディレクトリ"
 
-#: src/translations.h:664
+#: src/translations.h:666
 msgid "Computer"
 msgstr "コンピューター"
 
-#: src/translations.h:665
+#: src/translations.h:667
 msgid "&Open"
 msgstr "開く(&O)"
 
-#: src/translations.h:666
+#: src/translations.h:668
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: src/translations.h:667
+#: src/translations.h:669
 msgid "File &name:"
 msgstr "ファイル名(&n):"
 
-#: src/translations.h:668
+#: src/translations.h:670
 msgid "Copy &Link Location"
 msgstr "リンクのURLをコピー(&L)"
 
-#: src/translations.h:669
+#: src/translations.h:671
 msgid "Abort"
 msgstr "中断"
 
-#: src/translations.h:670
+#: src/translations.h:672
 msgid "Ignore"
 msgstr "無視"
 
-#: src/translations.h:671
+#: src/translations.h:673
 msgid "&Basic colors"
 msgstr "基本色(&B)"
 
-#: src/translations.h:672
+#: src/translations.h:674
 msgid "&Pick Screen Color"
 msgstr "スクリーンの色を選択(&P)"
 
-#: src/translations.h:673
+#: src/translations.h:675
 msgid "&Custom colors"
 msgstr "色のカスタム(&C)"
 
-#: src/translations.h:674
+#: src/translations.h:676
 msgid "&Add to Custom Colors"
 msgstr "カスタムした色を加える(&A)"
 
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "Hu&e:"
 msgstr "色相(&E):"
 
-#: src/translations.h:676
+#: src/translations.h:678
 msgid "&Sat:"
 msgstr "彩度(&S):"
 
-#: src/translations.h:677
+#: src/translations.h:679
 msgid "&Val:"
 msgstr "明度(&V):"
 
-#: src/translations.h:678
+#: src/translations.h:680
 msgid "&Red:"
 msgstr "赤(&R):"
 
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "&Green:"
 msgstr "緑(&G):"
 
-#: src/translations.h:680
+#: src/translations.h:682
 msgid "Bl&ue:"
 msgstr "青(&u):"
 
-#: src/translations.h:681
+#: src/translations.h:683
 msgid "Select Color"
 msgstr "色の選択"
 
-#: src/translations.h:682
+#: src/translations.h:684
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
 
-#: src/translations.h:683
+#: src/translations.h:685
 msgid "Back"
 msgstr "戻る"
 
-#: src/translations.h:684
+#: src/translations.h:686
 msgid "Forward"
 msgstr "次へ"
 
-#: src/translations.h:685
+#: src/translations.h:687
 msgid "Parent Directory"
 msgstr "親ディレクトリ"
 
-#: src/translations.h:686
+#: src/translations.h:688
 msgid "Create New Folder"
 msgstr "新しいフォルダを作成"
 
-#: src/translations.h:687
+#: src/translations.h:689
 msgid "List View"
 msgstr "リスト表示"
 
-#: src/translations.h:688
+#: src/translations.h:690
 msgid "Detail View"
 msgstr "詳細表示"
 
-#: src/translations.h:689
+#: src/translations.h:691
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:690
+#: src/translations.h:692
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -6340,23 +6354,23 @@ msgstr ""
 "%1 は既に存在します。\n"
 "書き換えますか？"
 
-#: src/translations.h:691
+#: src/translations.h:693
 msgid "&Yes"
 msgstr "はい(&Y)"
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "&No"
 msgstr "いいえ(&N)"
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid "&Select All"
 msgstr "全て選択(&A)"
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid "&Step up"
 msgstr ""
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid "Step &down"
 msgstr ""
 
@@ -7914,7 +7928,7 @@ msgstr "空"
 #: src/ui_viewDialog.h:2539
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
-msgstr ""
+msgstr "星雲・星団(深宇宙天体)"
 
 #: src/ui_viewDialog.h:2541
 msgid "Deep-Sky Objects"
@@ -8929,7 +8943,7 @@ msgstr "2000年分点の赤道座標"
 
 #: src/ui_configurationDialog.h:1353
 msgid "Right ascension/Declination (J2000)"
-msgstr "赤経/赤緯 (J2000)"
+msgstr "赤経/赤緯 (J2000.0)"
 
 #: src/ui_configurationDialog.h:1355
 msgid "Ecliptic coordinates, equinox J2000.0"
@@ -8937,7 +8951,7 @@ msgstr "2000年分点の黄道座標"
 
 #: src/ui_configurationDialog.h:1357
 msgid "Ecliptic coordinates (J2000)"
-msgstr "黄道座標 (J2000)"
+msgstr "黄道座標 (J2000.0)"
 
 #: src/ui_configurationDialog.h:1358
 msgid "Galactic coordinates"
@@ -8958,7 +8972,7 @@ msgstr "地平座標"
 
 #: src/ui_configurationDialog.h:1367
 msgid "Azimuth/Altitude"
-msgstr "方位角/高度角"
+msgstr "方位角/高度"
 
 #: src/ui_configurationDialog.h:1369
 msgid "Angular or physical size"
@@ -9082,7 +9096,7 @@ msgstr "その他:"
 
 #: src/ui_configurationDialog.h:1425
 msgid "Use current local date and time"
-msgstr ""
+msgstr "現在の地方時を使用する"
 
 #: src/ui_configurationDialog.h:1427
 msgid "use current"
@@ -9092,11 +9106,11 @@ msgstr "現在の設定を使用"
 msgid ""
 "These settings control the way time and date are displayed in the bottom "
 "bar."
-msgstr ""
+msgstr "これらの設定はボトムバーの日時表示に反映されます。"
 
 #: src/ui_configurationDialog.h:1431
 msgid "Display formats of date and time"
-msgstr ""
+msgstr "日付と時刻のフォーマット"
 
 #: src/ui_configurationDialog.h:1432
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
@@ -9105,7 +9119,7 @@ msgstr "日付:"
 
 #: src/ui_configurationDialog.h:1433
 msgid "and time:"
-msgstr ""
+msgstr "時刻:"
 
 #: src/ui_configurationDialog.h:1434
 msgid "Time correction"
@@ -9472,7 +9486,7 @@ msgstr "ファイルにスクリプトを保存する"
 
 #: src/ui_scriptConsole.h:356
 msgid "clear"
-msgstr ""
+msgstr "クリア"
 
 #: src/ui_scriptConsole.h:360
 msgid "pre-process script using SSC preprocessor"
@@ -9513,31 +9527,31 @@ msgstr "..."
 
 #: src/ui_astroCalcDialog.h:998
 msgid "Astronomical calculations"
-msgstr ""
+msgstr "天文計算"
 
 #: src/ui_astroCalcDialog.h:1004
 msgid "Positions"
-msgstr ""
+msgstr "位置"
 
 #: src/ui_astroCalcDialog.h:1006
 msgid "Celestial bodies above horizon"
-msgstr ""
+msgstr "地平線上にある天体"
 
 #: src/ui_astroCalcDialog.h:1009
 msgid "Ephemeris"
-msgstr ""
+msgstr "天体暦"
 
 #: src/ui_astroCalcDialog.h:1011
 msgid "Phenomena"
-msgstr ""
+msgstr "天文現象"
 
 #: src/ui_astroCalcDialog.h:1013
 msgid "Alt. vs. Time"
-msgstr ""
+msgstr "高度グラフ"
 
 #: src/ui_astroCalcDialog.h:1015
 msgid "Altitude vs. Time"
-msgstr ""
+msgstr "高度の時間変化グラフ"
 
 #: src/ui_astroCalcDialog.h:1018
 msgctxt "Monthly Elevation"
@@ -9550,11 +9564,11 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1023
 msgid "Graphs"
-msgstr ""
+msgstr "グラフ"
 
 #: src/ui_astroCalcDialog.h:1025 src/ui_astroCalcDialog.h:1109
 msgid "Graphs on the current year"
-msgstr ""
+msgstr "その年のグラフ"
 
 #: src/ui_astroCalcDialog.h:1028
 msgctxt "What's Up Tonight"
@@ -9572,19 +9586,19 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1035
 msgid "Planetary Calculator"
-msgstr ""
+msgstr "惑星計算"
 
 #: src/ui_astroCalcDialog.h:1043
 msgid "Save positions"
-msgstr ""
+msgstr "保存"
 
 #: src/ui_astroCalcDialog.h:1044
 msgid "Update positions"
-msgstr ""
+msgstr "再計算"
 
 #: src/ui_astroCalcDialog.h:1045 src/ui_astroCalcDialog.h:1110
 msgid "Show objects brighter than magnitude:"
-msgstr ""
+msgstr "右の光度以上の天体を表示:"
 
 #: src/ui_astroCalcDialog.h:1047
 msgid "List of objects above horizon"
@@ -9614,11 +9628,11 @@ msgstr "計算間隔:"
 
 #: src/ui_astroCalcDialog.h:1055
 msgid "Cleanup ephemerides"
-msgstr ""
+msgstr "クリア"
 
 #: src/ui_astroCalcDialog.h:1056
 msgid "Save ephemeris"
-msgstr ""
+msgstr "保存"
 
 #: src/ui_astroCalcDialog.h:1058 src/ui_astroCalcDialog.h:1085
 #: plugins/Satellites/src/ui_satellitesDialog.h:828
@@ -9627,7 +9641,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1060
 msgid "Calculate ephemeris"
-msgstr "天文現象の計算"
+msgstr "計算"
 
 #: src/ui_astroCalcDialog.h:1062
 msgid "Show markers of positions of the current celestial body on the sky"
@@ -9667,23 +9681,23 @@ msgstr "衝の計算"
 
 #: src/ui_astroCalcDialog.h:1080
 msgid "Between objects:"
-msgstr "次の天体間で:"
+msgstr "次の天体間:"
 
 #: src/ui_astroCalcDialog.h:1081
 msgid "and"
-msgstr ""
+msgstr "と"
 
 #: src/ui_astroCalcDialog.h:1082
 msgid "Cleanup of phenomena"
-msgstr ""
+msgstr "クリア"
 
 #: src/ui_astroCalcDialog.h:1083
 msgid "Save phenomena"
-msgstr ""
+msgstr "保存"
 
 #: src/ui_astroCalcDialog.h:1087
 msgid "Calculate phenomena"
-msgstr ""
+msgstr "計算"
 
 #: src/ui_astroCalcDialog.h:1089
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
@@ -9717,19 +9731,19 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1105
 msgid "Second graph (yellow):"
-msgstr ""
+msgstr "2番目のグラフ(黄):"
 
 #: src/ui_astroCalcDialog.h:1106
 msgid "First graph (red):"
-msgstr ""
+msgstr "1番目のグラフ(赤):"
 
 #: src/ui_astroCalcDialog.h:1108
 msgid "Draw graphs"
-msgstr ""
+msgstr "描画"
 
 #: src/ui_astroCalcDialog.h:1111
 msgid "Select a category:"
-msgstr ""
+msgstr "種類を選択:"
 
 #: src/ui_astroCalcDialog.h:1112
 msgid "Matching objects:"
@@ -9737,7 +9751,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1113
 msgid "Save list of objects"
-msgstr ""
+msgstr "保存"
 
 #: src/ui_astroCalcDialog.h:1114
 msgid "Show objects which are up:"
@@ -10197,33 +10211,33 @@ msgstr "角度測定"
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:524
 msgid "The Angle Measure is enabled:"
-msgstr ""
+msgstr "角度測定が利用可能です:"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:526
 msgid "Drag with the left button to measure, left-click to clear."
-msgstr ""
+msgstr "ドラッグ＆ドロップで角度測定、左クリックでクリアします。"
 
 #. TRANSLATORS: instructions for using the AngleMeasure plugin.
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:528
 msgid "Right-clicking changes the end point only."
-msgstr ""
+msgstr "右クリックで終点を変更できます。"
 
 #. TRANSLATORS: PA is abbreviation for phrase "Position Angle"
 #: plugins/AngleMeasure/src/AngleMeasure.cpp:530
 msgid "PA="
-msgstr ""
+msgstr "位置角="
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:89
 msgid "Angle Measure Plug-in"
-msgstr ""
+msgstr "角度測定プラグイン"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:98
 msgid ""
 "The Angle Measure plugin is a small tool which is used to measure the "
 "angular distance between two points on the sky (and calculation of position "
 "angle between those two points)."
-msgstr ""
+msgstr "角度測定プラグインは天球上の2点間の角度を測定する小さなツールです。また2点間の位置角も測定できます。"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:99
 msgid ""
@@ -10307,7 +10321,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:279
 #, qt-format
 msgid "If you have a question, you can %1get an answer here%2"
-msgstr ""
+msgstr "質問は%1こちら%2"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -10331,7 +10345,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 #, qt-format
 msgid "Bug reports and feature requests can be made %1here%2."
-msgstr ""
+msgstr "バグの報告、リクエストは%1こちら%2。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -10343,52 +10357,52 @@ msgstr ""
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can %1get info here%2."
-msgstr ""
+msgstr "このプラグインの詳細や履歴を知りたいかたは%1こちら%2。"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
 msgid "Pulsars Configuration"
-msgstr ""
+msgstr "パルサーの設定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:218
 msgid "Angle Measure Plug-in Configuration"
-msgstr ""
+msgstr "角度測定の設定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:220
 msgid "Show in Equatorial Coordinates"
-msgstr ""
+msgstr "赤道座標で表示"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:221
 msgid "Display with position angle"
-msgstr ""
+msgstr "位置角も表示"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:222
 msgid "Show in Horizontal Coordinates"
-msgstr ""
+msgstr "地平座標で表示"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:224
 msgid "(e.g. for Dobson starhopping)"
-msgstr ""
+msgstr "(例えばドブソニアン望遠鏡用)"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:226
 msgid "Display with position angle "
-msgstr ""
+msgstr "位置角も表示 "
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:227
 msgid "Attach start point to rotating sky"
-msgstr ""
+msgstr "始点は天球に固定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:228
 msgid "Attach end point to rotating sky"
-msgstr ""
+msgstr "終点は天球に固定"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:229
 msgid "Format"
-msgstr ""
+msgstr "表示形式"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:230
 msgid "Use dms format for angles"
-msgstr ""
+msgstr "角度は分角、秒角で表示"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:231
 #: plugins/Satellites/src/ui_satellitesDialog.h:778
@@ -10403,7 +10417,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:431
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:575
 msgid "Restore default settings"
-msgstr ""
+msgstr "デフォルトの設定に戻す"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
 #: plugins/Oculars/src/ui_ocularDialog.h:1228
@@ -10426,7 +10440,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:577
 msgctxt "tab in plugin windows"
 msgid "About"
-msgstr ""
+msgstr "このプラグインについて"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:52
 #: plugins/CompassMarks/src/CompassMarks.cpp:96
@@ -10435,7 +10449,7 @@ msgstr "方位磁針のマーク"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:55
 msgid "Displays compass bearing marks along the horizon"
-msgstr ""
+msgstr "地平線に沿って方位を表示します"
 
 #: plugins/CompassMarks/src/CompassMarks.cpp:96
 msgid "Compass marks"
@@ -10452,321 +10466,321 @@ msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
-msgstr ""
+msgstr "望遠鏡から見た星空を表示します。ただし等級と視野以外のシミュレーションはありません。またセンサーの視野やテルラドの照準も表示できます。"
 
 #: plugins/Oculars/src/Oculars.cpp:1005
 msgid "Please select an object before switching to ocular view."
-msgstr ""
+msgstr "先に天体を選択して下さい。"
 
 #: plugins/Oculars/src/Oculars.cpp:1101
 msgid "&Previous ocular"
-msgstr ""
+msgstr "前へ(&P)"
 
 #: plugins/Oculars/src/Oculars.cpp:1102
 msgid "&Next ocular"
-msgstr ""
+msgstr "次へ(&N)"
 
 #: plugins/Oculars/src/Oculars.cpp:1103
 msgid "Select &ocular"
-msgstr ""
+msgstr "接眼レンズ(&O)"
 
 #: plugins/Oculars/src/Oculars.cpp:1146
 msgid "Toggle &crosshair"
-msgstr ""
+msgstr "十時線(&C)"
 
 #: plugins/Oculars/src/Oculars.cpp:1156
 msgid "Configure &Oculars"
-msgstr ""
+msgstr "望遠鏡視野設定(&O)"
 
 #: plugins/Oculars/src/Oculars.cpp:1165
 msgid "Toggle &CCD"
-msgstr ""
+msgstr "&CCD視野"
 
 #: plugins/Oculars/src/Oculars.cpp:1173
 msgid "Toggle &Telrad"
-msgstr ""
+msgstr "テルラド(&T)"
 
 #: plugins/Oculars/src/Oculars.cpp:1182
 msgid "&Previous CCD"
-msgstr ""
+msgstr "前へ(&P)"
 
 #: plugins/Oculars/src/Oculars.cpp:1183
 msgid "&Next CCD"
-msgstr ""
+msgstr "次へ(&N)"
 
 #: plugins/Oculars/src/Oculars.cpp:1184
 msgid "&Select CCD"
-msgstr ""
+msgstr "CCD選択(&S)"
 
 #: plugins/Oculars/src/Oculars.cpp:1206
 msgid "&Rotate CCD"
-msgstr ""
+msgstr "回転(&R)"
 
 #: plugins/Oculars/src/Oculars.cpp:1228
 msgid "&Reset rotation"
-msgstr ""
+msgstr "回転リセット(&R)"
 
 #: plugins/Oculars/src/Oculars.cpp:1503
 #: plugins/Oculars/src/ui_ocularDialog.h:1167
 msgid "Ocular view"
-msgstr ""
+msgstr "望遠鏡視野"
 
 #: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Oculars popup menu"
-msgstr ""
+msgstr "ポップアップメニュー"
 
 #: plugins/Oculars/src/Oculars.cpp:1519
 msgid "Show crosshairs"
-msgstr ""
+msgstr "十字線を表示"
 
 #: plugins/Oculars/src/Oculars.cpp:1520
 msgid "Image sensor frame"
-msgstr ""
+msgstr "CCD(センサー)のフレームを表示"
 
 #: plugins/Oculars/src/Oculars.cpp:1521
 msgid "Telrad sight"
-msgstr ""
+msgstr "テルラドの表示"
 
 #: plugins/Oculars/src/Oculars.cpp:1522
 msgid "Oculars plugin configuration"
-msgstr ""
+msgstr "望遠鏡視野の設定"
 
 #: plugins/Oculars/src/Oculars.cpp:1524
 msgid "Select next telescope"
-msgstr ""
+msgstr "次の望遠鏡"
 
 #: plugins/Oculars/src/Oculars.cpp:1526
 msgid "Select previous telescope"
-msgstr ""
+msgstr "前の望遠鏡"
 
 #: plugins/Oculars/src/Oculars.cpp:1528
 msgid "Select next eyepiece"
-msgstr ""
+msgstr "次のアイピース"
 
 #: plugins/Oculars/src/Oculars.cpp:1530
 msgid "Select previous eyepiece"
-msgstr ""
+msgstr "前のアイピース"
 
 #: plugins/Oculars/src/Oculars.cpp:1715
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr ""
+msgstr "赤経/赤緯線 (J2000.0)"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:1723
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "\"/px"
-msgstr ""
+msgstr "\"/ピクセル"
 
 #: plugins/Oculars/src/Oculars.cpp:1912
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:498
 msgid "Ocular"
-msgstr ""
+msgstr "接眼レンズ"
 
 #: plugins/Oculars/src/Oculars.cpp:1914
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 msgid "Binocular"
-msgstr ""
+msgstr "双眼鏡"
 
 #. TRANSLATORS: FL = Focal length
 #: plugins/Oculars/src/Oculars.cpp:1934
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 #, qt-format
 msgid "Ocular FL: %1 mm"
-msgstr ""
+msgstr "焦点距離: %1 mm"
 
 #. TRANSLATORS: aFOV = apparent field of view
 #: plugins/Oculars/src/Oculars.cpp:1941
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr ""
+msgstr "みかけの視野角: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1952
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
 #, qt-format
 msgid "Lens #%1"
-msgstr ""
+msgstr "補正レンズ #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1956
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
 #, qt-format
 msgid "Lens #%1: %2"
-msgstr ""
+msgstr "補正レンズ #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:1961
 msgid "Lens: none"
-msgstr ""
+msgstr "補正レンズ: なし"
 
 #: plugins/Oculars/src/Oculars.cpp:1976 plugins/Oculars/src/Oculars.cpp:2036
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:757
 #, qt-format
 msgid "Telescope #%1"
-msgstr ""
+msgstr "望遠鏡 #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1985
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Magnification: %1"
-msgstr ""
+msgstr "倍率: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:1992
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
 #, qt-format
 msgid "Exit pupil: %1 mm"
-msgstr ""
+msgstr "射出瞳径: %1 mm"
 
 #: plugins/Oculars/src/Oculars.cpp:1999
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:870
 #, qt-format
 msgid "FOV: %1"
-msgstr ""
+msgstr "視野角: %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2020
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 #, qt-format
 msgid "Dimensions: %1"
-msgstr ""
+msgstr "実視野(縦x横): %1"
 
 #: plugins/Oculars/src/Oculars.cpp:2024
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:650
 #, qt-format
 msgid "Sensor #%1"
-msgstr ""
+msgstr "センサー(CCD) #%1"
 
 #: plugins/Oculars/src/Oculars.cpp:2028
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:654
 #, qt-format
 msgid "Sensor #%1: %2"
-msgstr ""
+msgstr "センサー(CCD) #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2041
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:761
 #, qt-format
 msgid "Telescope #%1: %2"
-msgstr ""
+msgstr "望遠鏡 #%1: %2"
 
 #: plugins/Oculars/src/Oculars.cpp:2336
 msgid "&Lens"
-msgstr ""
+msgstr "補正レンズ(&L)"
 
 #: plugins/Oculars/src/Oculars.cpp:2337
 msgid "&Previous lens"
-msgstr ""
+msgstr "前へ(&P)"
 
 #: plugins/Oculars/src/Oculars.cpp:2338
 msgid "&Next lens"
-msgstr ""
+msgstr "次へ(&N)"
 
 #: plugins/Oculars/src/Oculars.cpp:2368
 msgid "&Telescope"
-msgstr ""
+msgstr "望遠鏡(&T)"
 
 #: plugins/Oculars/src/Oculars.cpp:2369
 msgid "&Previous telescope"
-msgstr ""
+msgstr "前へ(&P)"
 
 #: plugins/Oculars/src/Oculars.cpp:2370
 msgid "&Next telescope"
-msgstr ""
+msgstr "次へ(&N)"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:192
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:214
 msgid "Previous ocular"
-msgstr ""
+msgstr "前の接眼レンズ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:193
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:220
 msgid "Next ocular"
-msgstr ""
+msgstr "次の接眼レンズ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:194
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:226
 msgid "Previous lens"
-msgstr ""
+msgstr "前の補正レンズ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:195
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:232
 msgid "Next lens"
-msgstr ""
+msgstr "次の補正レンズ"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:196
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:238
 msgid "Previous CCD frame"
-msgstr ""
+msgstr "前のCCD"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:197
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:244
 msgid "Next CCD frame"
-msgstr ""
+msgstr "次のCCD"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:198
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:250
 msgid "Previous telescope"
-msgstr ""
+msgstr "前の望遠鏡"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:199
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:256
 msgid "Next telescope"
-msgstr ""
+msgstr "次の望遠鏡"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:201
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:320
 msgid "Reset the sensor frame rotation"
-msgstr ""
+msgstr "回転リセット"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:202
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:281
 msgid "Rotate the sensor frame 15 degrees counterclockwise"
-msgstr ""
+msgstr "反時計回り15度回転"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:203
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:294
 msgid "Rotate the sensor frame 5 degrees counterclockwise"
-msgstr ""
+msgstr "反時計回り5度回転"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:204
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:307
 msgid "Rotate the sensor frame 1 degree counterclockwise"
-msgstr ""
+msgstr "反時計回り1度回転"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:205
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:359
 msgid "Rotate the sensor frame 15 degrees clockwise"
-msgstr ""
+msgstr "時計回り15度回転"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:206
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:346
 msgid "Rotate the sensor frame 5 degrees clockwise"
-msgstr ""
+msgstr "時計回り5度回転"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:207
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:333
 msgid "Rotate the sensor frame 1 degree clockwise"
-msgstr ""
+msgstr "時計回り1度回転"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:545
 msgid "Effective focal length of the ocular"
-msgstr ""
+msgstr "接眼レンズの焦点距離"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:555
 msgid "Apparent field of view of the ocular"
-msgstr ""
+msgstr "接眼レンズのみかけの視野角"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:588
 #, qt-format
 msgid "Multiplicity: %1"
-msgstr ""
+msgstr "補正レンズ倍率: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:593
 msgid "Lens: None"
-msgstr ""
+msgstr "補正レンズ無し"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:594
 msgid "Multiplicity: N/A"
-msgstr ""
+msgstr "補正レンズ倍率: 無効"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:598
 msgid "Focal length of eyepiece"
@@ -10775,27 +10789,27 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:692
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:803
 msgid "Dimensions field of view"
-msgstr ""
+msgstr "接眼レンズの焦点距離"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:698
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:807
 msgid "X scale"
-msgstr ""
+msgstr "X方向スケール"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:699
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:808
 msgid "Horizontal scale"
-msgstr ""
+msgstr "水平方向スケール"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:703
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:809
 msgid "Y scale"
-msgstr ""
+msgstr "Y方向スケール"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:704
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:810
 msgid "Vertical scale"
-msgstr ""
+msgstr "垂直方向スケール"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:710
 #, qt-format
@@ -10804,11 +10818,11 @@ msgstr "回転: %1"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:832
 msgid "Magnification provided by these binoculars"
-msgstr ""
+msgstr "双眼鏡の倍率"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:833
 msgid "Actual field of view provided by these binoculars"
-msgstr ""
+msgstr "双眼鏡の実視野角"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:834
 msgid "Exit pupil provided by these binoculars"
@@ -10816,12 +10830,12 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:842
 msgid "Magnification provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "この組み合わせでの望遠鏡倍率"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:843
 msgid ""
 "Actual field of view provided by this ocular/lens/telescope combination"
-msgstr ""
+msgstr "この組み合わせでの実際の視野角"
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:844
 msgid "Exit pupil provided by this ocular/lens/telescope combination"
@@ -10865,17 +10879,17 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:948
 msgid "Visual resolution is based on eye properties and magnification"
-msgstr ""
+msgstr "視野円の大きさ"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
 #: plugins/Oculars/src/gui/OcularDialog.cpp:409
 msgid "tFOV:"
-msgstr ""
+msgstr "実視野角:"
 
 #. TRANSLATORS: Magnification factor for binoculars
 #: plugins/Oculars/src/gui/OcularDialog.cpp:411
 msgid "Magnification factor:"
-msgstr ""
+msgstr "双眼鏡倍率:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:412
 #: plugins/Oculars/src/ui_ocularDialog.h:1223
@@ -10885,13 +10899,13 @@ msgstr "口径:"
 #: plugins/Oculars/src/gui/OcularDialog.cpp:416
 #: plugins/Oculars/src/ui_ocularDialog.h:1189
 msgid "aFOV:"
-msgstr ""
+msgstr "みかけの視野角:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:417
 #: plugins/Oculars/src/ui_ocularDialog.h:1190
 #: plugins/Oculars/src/ui_ocularDialog.h:1222
 msgid "Focal length:"
-msgstr ""
+msgstr "焦点距離:"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:418
 #: plugins/Oculars/src/ui_ocularDialog.h:1191
@@ -10900,7 +10914,7 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:427
 msgid "Oculars Plug-in"
-msgstr ""
+msgstr "望遠鏡視野プラグイン"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Barlow lens feature"
@@ -10968,34 +10982,34 @@ msgstr ""
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:452
 msgid "Hot Keys"
-msgstr ""
+msgstr "ショートカット"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:453
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
-msgstr ""
+msgstr "このプラグインのショートカットは、キーボードショートカットの編集(F7)で編集出来ます。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:467
 #: plugins/Oculars/src/gui/OcularDialog.cpp:472
 msgid "[no key defined]"
-msgstr ""
+msgstr "[ショートカットが設定されていません]"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:476
 msgid "Switches on/off the ocular overlay."
-msgstr ""
+msgstr "接眼鏡視野のオーバーレイの表示/非表示"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:480
 msgid "Opens the pop-up navigation menu."
-msgstr ""
+msgstr "ポップアップメニューを開く。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:484
 msgid "Rotate reticle pattern of the eyepiece clockwise."
-msgstr ""
+msgstr "アイピースのレチクルパターンを時計回りに回転。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:488
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
-msgstr ""
+msgstr "アイピースのレチクルパターンを反時計回りに回転。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -11013,7 +11027,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1156
 msgid "On-screen control panel"
-msgstr ""
+msgstr "コントロールパネルを表示"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1157
 msgid "Arrow button scale (requires restart)"
@@ -11023,21 +11037,21 @@ msgstr ""
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
-msgstr ""
+msgstr "視野の方向を起動時に戻したい場合はチェックする。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1161
 msgid "Restore direction to initial values"
-msgstr ""
+msgstr "視野の方向を初期値に戻す"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1163
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
-msgstr ""
+msgstr "視野角を起動時に戻したい場合はチェックする。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1165
 msgid "Restore FOV to initial values"
-msgstr ""
+msgstr "視野角を初期値に戻す"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1166
 msgid "Show resolution criteria"
@@ -11045,39 +11059,39 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1168
 msgid "Enable only if an object is selected"
-msgstr ""
+msgstr "天体が選択さてれいる時だけ利用可"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1170
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
-msgstr ""
+msgstr "望遠鏡の口径ごとに限界等級を適用"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1172
 msgid "Limit stellar magnitude"
-msgstr ""
+msgstr "限界等級"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1173
 msgid "Scale image circle"
-msgstr ""
+msgstr "イメージ・サークルはみかけの視野角に比例"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1175
 msgid "In ocular mode, allow some visibility outside ocular circle."
-msgstr ""
+msgstr "接眼鏡視野の外側も半透明で表示する。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1177
 msgid "Use semi-transparent mask"
-msgstr ""
+msgstr "半透明マスクを使用する"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1178
 msgid "Hide grids and lines when enabled"
-msgstr ""
+msgstr "可能なら座標線などの線を消す"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1179
 msgid "Sensor view"
-msgstr ""
+msgstr "CCD視野"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1180
 msgid "Use degrees and minutes for FOV of CCD"
-msgstr ""
+msgstr "CCDの実視野は角度の分で表示"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid ""
@@ -11087,13 +11101,13 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Enable automatic switch of mount type"
-msgstr ""
+msgstr "架台別にCCDの向きを自動設定"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1185
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
-msgstr ""
+msgstr "一般"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1186
 #: plugins/Oculars/src/ui_ocularDialog.h:1195
@@ -11102,7 +11116,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
-msgstr ""
+msgstr "追加"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1188
 #: plugins/Oculars/src/ui_ocularDialog.h:1197
@@ -11112,7 +11126,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
-msgstr ""
+msgstr "名前:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1192
 msgid "Binoculars"
@@ -11120,7 +11134,7 @@ msgstr "双眼鏡"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1193
 msgid "Has permanent cross-hairs"
-msgstr ""
+msgstr "十字線を常に表示"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Eyepieces"
@@ -11128,41 +11142,42 @@ msgstr "アイピース"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1198
 msgid "Multiplier:"
-msgstr ""
+msgstr "倍率:"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
+"倍率が1より大きければ焦点距離を伸ばすバローレンズ(Barlow lens)、1より小さければ焦点距離を縮めるレデューサー(reducer) 。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1200
 msgid "Lenses"
-msgstr ""
+msgstr "補正レンズ"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1204
 msgid "Resolution x (pixels):"
-msgstr ""
+msgstr "x方向解像度(ピクセル):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1205
 msgid "Resolution y (pixels):"
-msgstr ""
+msgstr "y方向解像度(ピクセル):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1206
 msgid "Chip height (mm):"
-msgstr ""
+msgstr "チップの高さ(mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid "Chip width (mm):"
-msgstr ""
+msgstr "チップの幅(mm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1208
 msgid "Pixel width (micron):"
-msgstr ""
+msgstr "x方向画素ピッチ(μm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "Pixel height (micron):"
-msgstr ""
+msgstr "y方向画素ピッチ(μm):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1210
 msgid "Prism/CCD distance (mm):"
@@ -11182,11 +11197,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1214
 msgid "Off-Axis guider"
-msgstr ""
+msgstr "オフアックス・ガイド"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1215
 msgid "Rotation Angle (degrees):"
-msgstr ""
+msgstr "回転角(度):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1216
 msgid "Binning x:"
@@ -11198,19 +11213,19 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Sensors"
-msgstr ""
+msgstr "CCD"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1224
 msgid "Horizontal flip"
-msgstr ""
+msgstr "左右反転"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1225
 msgid "Vertical flip"
-msgstr ""
+msgstr "上下反転"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Equatorial Mount"
-msgstr ""
+msgstr "赤道儀"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1227
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
@@ -11442,30 +11457,30 @@ msgstr "運用状態"
 
 #: plugins/Satellites/src/Satellite.cpp:363
 msgid "The satellite and the observer are in sunlight."
-msgstr ""
+msgstr "衛星、観測者ともに昼光下(光学観測不可)。"
 
 #: plugins/Satellites/src/Satellite.cpp:366
 msgid "The satellite is visible."
-msgstr ""
+msgstr "光学観測可能。"
 
 #: plugins/Satellites/src/Satellite.cpp:369
 msgid "The satellite is eclipsed."
-msgstr ""
+msgstr "地球の影に入っている(光学観測不可)。"
 
 #: plugins/Satellites/src/Satellite.cpp:372
 msgid "The satellite is not visible"
-msgstr ""
+msgstr "地平線下(観測不可能)"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:398 plugins/Pulsars/src/Pulsar.cpp:274
 msgctxt "frequency"
 msgid "MHz"
-msgstr ""
+msgstr "MHz"
 
 #: plugins/Satellites/src/Satellite.cpp:402
 msgctxt "frequency"
 msgid "kHz"
-msgstr ""
+msgstr "kHz"
 
 #: plugins/Satellites/src/Satellite.cpp:703
 #: plugins/Satellites/src/Satellite.cpp:728
@@ -11519,13 +11534,13 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
 #: plugins/Satellites/src/ui_satellitesDialog.h:832
 msgid "Iridium flares"
-msgstr ""
+msgstr "イリジウム・フレア"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:461
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
-msgstr ""
+msgstr "人工衛星プラグインは地球軌道にある人工衛星の位置を予測します。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:463
 msgid "Notes for users"
@@ -11534,7 +11549,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:464
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
-msgstr ""
+msgstr "観測者が地球上の場合のみ、人工衛星やその軌道は表示されます。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:465
 msgid ""
@@ -11569,7 +11584,7 @@ msgstr ""
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:478
 msgid "TLE data updates"
-msgstr ""
+msgstr "TLEデータの更新"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:479
 msgid ""
@@ -11594,7 +11609,7 @@ msgstr ""
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:484
 msgid "Adding new satellites"
-msgstr ""
+msgstr "人工衛星の追加"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:485
 msgid ""
@@ -11625,7 +11640,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:491
 #, qt-format
 msgid "See %1this document%2 for details."
-msgstr ""
+msgstr "詳細は%1こちら%2。"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -11649,7 +11664,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:181
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:327
 msgid "Internet updates disabled"
-msgstr ""
+msgstr "更新出来ませんでした"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:525
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:547
@@ -11664,7 +11679,7 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:403
 msgid "Updating now..."
-msgstr ""
+msgstr "更新中..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:530
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:172
@@ -11673,7 +11688,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:185
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
 msgid "Next update: < 1 minute"
-msgstr ""
+msgstr "次回の更新: 1分以内"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:534
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:176
@@ -11684,7 +11699,7 @@ msgstr ""
 #, qt-format, qt-plural-format
 msgid "Next update: %1 minute(s)"
 msgid_plural "Next update: %1 minute(s)"
-msgstr[0] ""
+msgstr[0] "次回の更新: %1 分後"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:181
@@ -11695,7 +11710,7 @@ msgstr[0] ""
 #, qt-format, qt-plural-format
 msgid "Next update: %1 hour(s)"
 msgid_plural "Next update: %1 hour(s)"
-msgstr[0] ""
+msgstr[0] "次回の更新: %1 時間後"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:216
@@ -11704,21 +11719,21 @@ msgstr[0] ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:253
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:406
 msgid "Update error"
-msgstr ""
+msgstr "更新失敗"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:563
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr ""
+msgstr "更新衛星数  %1/%2 ;  追加 %3; 削除 %4"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:565
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr ""
+msgstr "更新衛星数  %1/%2 ;  追加 %3; ミス %4"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:627
 msgid "[new source]"
-msgstr ""
+msgstr "[新しい更新元]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
 #: plugins/Satellites/src/ui_satellitesDialog.h:750
@@ -11734,7 +11749,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:530
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
-msgstr ""
+msgstr "すぐに更新"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:681
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:204
@@ -11743,45 +11758,45 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:217
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:394
 msgid "Update from files"
-msgstr ""
+msgstr "ファイルから更新"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:723
 msgid "[orbit calculation error]"
-msgstr ""
+msgstr "[軌道計算できなかった衛星]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:724
 msgid "[all newly added]"
-msgstr ""
+msgstr "[追加された衛星]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
 msgid "[all not displayed]"
-msgstr ""
+msgstr "[表示されない衛星]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
 msgid "[all displayed]"
-msgstr ""
+msgstr "[表示される衛星]"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
 msgid "[all]"
-msgstr ""
+msgstr "[全て]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:771
 msgid "New group..."
-msgstr ""
+msgstr "衛星種類の追加..."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:977
 msgid "Select TLE Update File"
-msgstr ""
+msgstr "アップデート・ファイルの選択"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:996
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
-msgstr ""
+msgstr "時刻"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:997
 msgid "Brightness"
-msgstr ""
+msgstr "明るさ"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1000
 msgid "Satellite"
@@ -11789,54 +11804,54 @@ msgstr "人工衛星"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:154
 msgid "Downloading data..."
-msgstr ""
+msgstr "ダウンロード中..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:155
 msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
-msgstr ""
+msgstr "更新元から更新された衛星データをダウンロード中。しばらくお待ち下さい..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
-msgstr ""
+msgstr "TLE更新ファイルの選択..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:187
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:188
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:247
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:248
 msgid "Processing data..."
-msgstr ""
+msgstr "更新中..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:242
 msgid "No data could be downloaded. Try again later."
-msgstr ""
+msgstr "ダウンロード出来ませんでした。間隔を空けてもう一度やり直して下さい。"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:264
 msgid "Download aborted."
-msgstr ""
+msgstr "ダウンロード中止。"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:309
 msgid "Get data"
-msgstr ""
+msgstr "データ取得"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:375
 #, qt-format
 msgid "Catalog Number: %1"
-msgstr ""
+msgstr "衛星番号: %1"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:743
 #: plugins/Satellites/src/ui_satellitesDialog.h:744
 msgid "Satellites Configuration"
-msgstr ""
+msgstr "人工衛星の設定"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:746
 msgid "Updates"
-msgstr ""
+msgstr "更新"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:747
 msgid "Update satellite data from Internet sources"
-msgstr ""
+msgstr "インターネットからデータを更新"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:748
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -11845,62 +11860,62 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:268
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
 msgid "Last update:"
-msgstr ""
+msgstr "最終更新日時:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:749
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr ""
+msgstr "更新時、選択した更新元にある新しい人工衛星データの全てを加える"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:751
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
-msgstr ""
+msgstr "更新時、選択した更新元に無い人工衛星データを削除する"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:752
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:454
 msgid "Update frequency (hours):"
-msgstr ""
+msgstr "更新間隔(時間):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:754
 msgid "Label font size (pixels):"
-msgstr ""
+msgstr "フォントの大きさ(ピクセル):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Orbit lines"
-msgstr ""
+msgstr "軌道を表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:757
 #: plugins/Satellites/src/ui_satellitesDialog.h:761
 msgid "Number of segments used to draw the line"
-msgstr ""
+msgstr "軌道描写時の線の分割数"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:759
 msgid "Number of  segments:"
-msgstr ""
+msgstr "セグメントの数:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:764
 #: plugins/Satellites/src/ui_satellitesDialog.h:768
 msgid "Duration of a single segment in seconds"
-msgstr ""
+msgstr "１セグメントの持続期間"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:766
 msgid "Segment length (s):"
-msgstr ""
+msgstr "セグメント1つの長さ(秒):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:771
 #: plugins/Satellites/src/ui_satellitesDialog.h:774
 msgid "Number of segments used to draw each end of the line"
-msgstr ""
+msgstr "軌道の両端でのセグメントの数"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:776
 msgid "Fade length:"
-msgstr ""
+msgstr "フェードアウトの長さ:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:777
 msgid "Realistic mode for the artificial satellites"
-msgstr ""
+msgstr "実際の明るさで表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:779
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -11912,7 +11927,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:557
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
-msgstr ""
+msgstr "デフォルトとして設定を保存"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:780
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
@@ -11926,47 +11941,47 @@ msgstr "設定"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:782
 msgid "Double-click a satellite to start tracking it."
-msgstr ""
+msgstr "ダブルクリックで追跡開始。"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Add more satellites"
-msgstr ""
+msgstr "人工衛星を追加"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:788
 msgid "Remove the selected satellites"
-msgstr ""
+msgstr "選択した人工衛星を削除"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:792
 msgid "Save changes"
-msgstr ""
+msgstr "保存"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:796
 msgid "Catalog number:"
-msgstr ""
+msgstr "衛星番号:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:798
 msgid "Display the selected satellite(s)"
-msgstr ""
+msgstr "選択した人工衛星を表示する"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:800
 msgid "Displayed"
-msgstr ""
+msgstr "人工衛星を表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:802
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr ""
+msgstr "選択した人工衛星の軌道を表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:804
 msgid "Orbit"
-msgstr ""
+msgstr "軌道を表示"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:806
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr ""
+msgstr "選択した人工衛星のデータを更新/削除しない"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:808
 msgid "Do not update"
-msgstr ""
+msgstr "データを更新しない"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:809
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
@@ -11995,11 +12010,11 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:818
 msgid "Add new source"
-msgstr ""
+msgstr "配布元の追加"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:822
 msgid "Remove selected source"
-msgstr ""
+msgstr "選択した配布元を削除"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:825
 msgid "Sources"
@@ -12007,15 +12022,15 @@ msgstr "配布元"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 msgid "Flare prediction (days):"
-msgstr ""
+msgstr "イリジウム・フレアの予想(日):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:830
 msgid "Predict Iridium flares"
-msgstr ""
+msgstr "イリジウム・フレアの予想"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:831
 msgid "Save predictions..."
-msgstr ""
+msgstr "保存..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
@@ -12028,21 +12043,21 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:214
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:526
 msgid "Abort download"
-msgstr ""
+msgstr "ダウンロード中止"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 msgid "New satellites"
-msgstr ""
+msgstr "新しい人工衛星"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
 msgid "Mark all"
-msgstr ""
+msgstr "全てチェック"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:217
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:536
 msgid "Mark none"
-msgstr ""
+msgstr "全てのチェックをはずす"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:218
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:537
@@ -12065,17 +12080,17 @@ msgstr ""
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:224
 #, qt-format
 msgid "Move telescope #%1 to selected object"
-msgstr ""
+msgstr "%1番の望遠鏡を選択した天体の位置へ移動"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:178
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:228
 #, qt-format
 msgid "Move telescope #%1 to the point currently in the center of the screen"
-msgstr ""
+msgstr "%1番の望遠鏡を表示中心へ移動"
 
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:191
 msgid "Move a telescope to a given set of coordinates"
-msgstr ""
+msgstr "望遠鏡制御"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1688
@@ -12188,11 +12203,11 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:223
 msgid "Add New Telescope"
-msgstr ""
+msgstr "新しい望遠鏡を追加"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:233
 msgid "Configure Telescope"
-msgstr ""
+msgstr "それぞれの望遠鏡設定"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:63
 msgid "N/A"
@@ -12200,23 +12215,23 @@ msgstr "無効"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:64
 msgid "Starting"
-msgstr ""
+msgstr "開始"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:65
 msgid "Connecting"
-msgstr ""
+msgstr "接続中"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:66
 msgid "Connected"
-msgstr ""
+msgstr "接続しました"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:67
 msgid "Disconnected"
-msgstr ""
+msgstr "切断しました"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:68
 msgid "Stopped"
-msgstr ""
+msgstr "停止しました"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:255
 msgid "Telescope Control plug-in"
@@ -12963,6 +12978,7 @@ msgid ""
 "telescope's number. To slew it to the center of the current view, hold down "
 "the Alt key and press the key with that telescope's number."
 msgstr ""
+"望遠鏡を目的の天体に向けるには、まず天体を選択し、%1キーを押しながら望遠鏡の番号キーを押して下さい。またステラリウムの表示中心に向けるには、Altキーを押しながら望遠鏡の番号キーを押して下さい。"
 
 #. TRANSLATORS: Currently, it is very unlikely if not impossible to actually
 #. see this text. :)
@@ -13013,19 +13029,19 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:940
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:407
 msgid "Start"
-msgstr ""
+msgstr "開始"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:941
 msgid "Start the selected local telescope"
-msgstr ""
+msgstr "選択した望遠鏡の操作を開始する"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:946
 msgid "Stop"
-msgstr ""
+msgstr "停止"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:947
 msgid "Stop the selected local telescope"
-msgstr ""
+msgstr "選択した望遠鏡の操作を停止する"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:952
 msgid "Connect"
@@ -13033,7 +13049,7 @@ msgstr "接続"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:953
 msgid "Connect to the selected telescope"
-msgstr ""
+msgstr "選択した望遠鏡に接続する"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:958
 msgid "Disconnect"
@@ -13041,47 +13057,47 @@ msgstr "切断"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:959
 msgid "Disconnect from the selected telescope"
-msgstr ""
+msgstr "選択した望遠鏡の接続を切断する"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:980
 msgid "Select a directory"
-msgstr ""
+msgstr "ディレクトリ選択"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 msgid "Right Ascension (J2000)"
-msgstr ""
+msgstr "赤経(J2000.0)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
 msgid "Declination (J2000)"
-msgstr ""
+msgstr "赤緯(J2000.0)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:275
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:304
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:453
 msgid "Select one"
-msgstr ""
+msgstr "選択"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:327
 msgid "Slew telescope to"
-msgstr ""
+msgstr "望遠鏡操作"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:329
 msgid "There are no active devices."
-msgstr ""
+msgstr "望遠鏡が未接続。"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:330
 msgid "Slew telescope to coordinates"
-msgstr ""
+msgstr "この座標に望遠鏡を回転させる"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
-msgstr ""
+msgstr "赤経(J2000.0)(&R):"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:332
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
-msgstr ""
+msgstr "赤緯(J2000.0)(&C):"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
@@ -13091,63 +13107,63 @@ msgstr "現在の天体(&C)"
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:334
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:245
 msgid "Center of the screen"
-msgstr ""
+msgstr "ウィンドウ中心"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:337
 msgid "Hours-minutes-seconds format"
-msgstr ""
+msgstr "時分秒で角度を表示"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:339
 msgid "&HMS"
-msgstr ""
+msgstr "時分秒(&H)"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:341
 msgid "Degrees-minutes-seconds format"
-msgstr ""
+msgstr "度、分角、秒角で表示"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:343
 msgid "&DMS"
-msgstr ""
+msgstr "角度の分秒(&D)"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:345
 msgid "Decimal degrees"
-msgstr ""
+msgstr "角度の小数点で表示"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:347
 msgid "D&ecimal"
-msgstr ""
+msgstr "角度の小数点(&E)"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:348
 msgid "&Slew"
-msgstr ""
+msgstr "望遠鏡操作"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:349
 msgid "Configure &telescopes..."
-msgstr ""
+msgstr "望遠鏡制御の設定(&T)..."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:567
 msgid "Telescope Configuration"
-msgstr ""
+msgstr "それぞれの望遠鏡の設定"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:571
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
-msgstr ""
+msgstr "望遠鏡はこのパソコンのシリアルポートに接続されていて、ステラリウムが直接制御する。"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:573
 msgid "Stellarium, directly through a serial port"
-msgstr ""
+msgstr "シリアルポートで直接制御"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:575
 msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
-msgstr ""
+msgstr "望遠鏡はこのパソコンに接続されているが他の外部ソフトで制御、または他の機器に接続されていてリモート制御。"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:577
 msgid "External software or a remote computer"
-msgstr ""
+msgstr "外部ソフトまたはリモート"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:579
 msgid "Telescope which is accessible through RTS2(.org) JSON API"
@@ -13159,37 +13175,37 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:582
 msgid "Nothing, just simulate one (a moving reticle)"
-msgstr ""
+msgstr "望遠鏡無し(シミュレーション)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:585
 msgid "Connection delay:"
-msgstr ""
+msgstr "接続遅延:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:590
 msgid "J2000 (default)"
-msgstr ""
+msgstr "2000年分点(デフォルト)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:591
 msgid "Equinox of the date (JNow)"
-msgstr ""
+msgstr "瞬時分点(今現在の分点)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:593
 msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
-msgstr ""
+msgstr "ステラリウムを起動した時に自動で望遠鏡の接続を試みます"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 msgid "Start/connect at startup"
-msgstr ""
+msgstr "起動時に接続開始"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:597
 msgid "Serial port:"
-msgstr ""
+msgstr "シリアルポート:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:598
 msgid "Device model:"
-msgstr ""
+msgstr "デバイス・モデル:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:605
 msgid "RTS2 telescope settings"
@@ -13197,15 +13213,15 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:606
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "Username:"
-msgstr ""
+msgstr "ユーザー名:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Password:"
-msgstr ""
+msgstr "パスワード:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "RTS2 username"
@@ -13245,43 +13261,43 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:632
 msgid "OK"
-msgstr "了解"
+msgstr "OK"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes Controlled"
-msgstr ""
+msgstr "制御望遠鏡一覧"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:409
 msgid "Configure the selected telescope"
-msgstr ""
+msgstr "選択した望遠鏡の設定"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:411
 msgid "Configure"
-msgstr ""
+msgstr "それぞれの設定"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:413
 msgid "Add a new telescope"
-msgstr ""
+msgstr "新しい望遠鏡の追加"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Remove the selected telescope"
-msgstr ""
+msgstr "選択した望遠鏡を削除"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:421
 msgid "GUI"
-msgstr ""
+msgstr "表示"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:422
 msgid "Show telescope labels"
-msgstr ""
+msgstr "望遠鏡名の表示"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:423
 msgid "Show telescope reticles"
-msgstr ""
+msgstr "レチクルを表示"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:424
 msgid "Show field of view indicators"
-msgstr ""
+msgstr "望遠鏡視野を表示"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:425
 msgid "Files"
@@ -13526,24 +13542,24 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:135
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:276
 msgid "Import orbital elements in MPC format..."
-msgstr ""
+msgstr "MPCフォーマットで軌道要素を取得..."
 
 #. TRANSLATORS: A link showing the text "Minor Planet & Comet Ephemeris
 #. Service" is inserted.
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:159
 #, qt-format
 msgid "Query the MPC's %1:"
-msgstr ""
+msgstr "MPCの問い合わせ %1:"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:162
 msgid "Only one result will be returned if the query is successful."
-msgstr ""
+msgstr "検索に成功した場合は、結果を1つだけ返します。"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:163
 msgid ""
 "Both comets and asteroids can be identified with their number, name (in "
 "English) or provisional designation."
-msgstr ""
+msgstr "彗星、小惑星ともに登録番号、名称(英語)、仮符号で検索できます。"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:170
 #, qt-format
@@ -13553,19 +13569,21 @@ msgid ""
 "searching for \"%3\" will return %4, Halley's Comet, but a search for \"%5\""
 " will return the asteroid %6."
 msgstr ""
+"彗星の名前の前には %1 (彗星の接頭辞)または %2 (周期彗星の接頭辞)を付けて下さい。候補が多数でも検索結果は最初の候補１つのみです。例えば "
+"\"%3\"の検索結果は「%4」 (ハレー彗星)ですが、 \"%5\"の検索結果は「%6」(小惑星2688番のハレー)になります。"
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:211
 msgid "Select bookmark..."
-msgstr ""
+msgstr "ブックマークリストから選択..."
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "Select a text file"
-msgstr ""
+msgstr "テキストファイルの選択"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
 msgid "website"
-msgstr ""
+msgstr "ウェブサイト"
 
 #. TRANSLATORS: IAU = International Astronomical Union
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:106
@@ -13576,55 +13594,58 @@ msgid ""
 "objects, download such lists from the Internet or search the online Minor "
 "Planet and Comet Ephemeris Service (MPES)."
 msgstr ""
+"彗星と小惑星のデータを国際天文連合(IAU)の Minor Planet "
+"Center(MPC)[%1]から追加できます。ファイルから追加、インターネットからダウンロード、Minor Planet and Comet "
+"Ephemeris Service (MPES)のオンライン検索の3つの方法があります。"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:196
 msgid "Save the minor Solar System bodies as..."
-msgstr ""
+msgstr "太陽系小天体データの保存..."
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:202
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:210
 msgid "Configuration files"
-msgstr ""
+msgstr "設定ファイル"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:204
 msgid "Select a file to replace the Solar System minor bodies"
-msgstr ""
+msgstr "置き換える小天体ファイルの選択"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:212
 msgid "Select a file to add the Solar System minor bodies"
-msgstr ""
+msgstr "追加する小天体ファイルの選択"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Import data"
-msgstr ""
+msgstr "データ取得"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Select the type"
-msgstr ""
+msgstr "天体の種類"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:518
 msgid "Select the source"
-msgstr ""
+msgstr "配布元の選択"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:519
 msgid "Download a list of objects from the Internet"
-msgstr ""
+msgstr "インターネットから天体リストをダウンロード"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:520
 msgid "Select a source from the list:"
-msgstr ""
+msgstr "リストから配布元を選択:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:521
 msgid "Or enter a URL:"
-msgstr ""
+msgstr "または以下にURLを入力:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:522
 msgid "Add this URL to the bookmarks list"
-msgstr ""
+msgstr "このURLをブックマークリストに追加"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:523
 msgid "Bookmark title:"
-msgstr ""
+msgstr "ブックマークのタイトル:"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:524
 msgid "A file containing a list of objects"
@@ -13632,12 +13653,12 @@ msgstr "天体リストを含んだファイル"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:525
 msgid "Get orbital elements"
-msgstr ""
+msgstr "軌道要素を取得"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:528
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:529
 msgid "Online search"
-msgstr ""
+msgstr "オンライン検索"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:530
 msgid "Objects found"
@@ -13654,24 +13675,24 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:532
 msgid "Overwrite existing objects"
-msgstr ""
+msgstr "データを上書きする"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:533
 msgid "Update existing objects"
-msgstr ""
+msgstr "データを更新する"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:534
 msgid "Update only the orbital elements"
-msgstr ""
+msgstr "軌道要素のみ更新する"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:538
 msgid "Add objects"
-msgstr ""
+msgstr "天体の追加"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:261
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:273
 msgid "Minor Solar System objects"
-msgstr ""
+msgstr "太陽系小天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
@@ -13688,33 +13709,33 @@ msgstr ""
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:265
 msgid ""
 "You can also reset all changes and return to the default configuration:"
-msgstr ""
+msgstr "全ての変更をリセットして、デフォルトの設定に戻せます:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:266
 msgid "Reset to defaults"
-msgstr ""
+msgstr "デフォルトに戻す"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:267
 msgid "Export/replace the Solar System minor objects file"
-msgstr ""
+msgstr "太陽系小天体設定ファイルの書き込み/書き換え"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:268
 msgid ""
 "You can create a backup copy of your custom Solar System configuration file "
 "in a convenient location, or replace it with such a copy."
-msgstr ""
+msgstr "太陽系小天体設定ファイルのバックアップコピーを適当な場所に作成できます。またコピーからファイルの書き換えができます。"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:269
 msgid "Export the Solar System minor objects to file..."
-msgstr ""
+msgstr "太陽系小天体設定ファイルの保存..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:270
 msgid "Import and replace the Solar System minor objects from file..."
-msgstr ""
+msgstr "太陽系小天体設定ファイルから書き換え..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:271
 msgid "Import and add Solar System minor objects from file..."
-msgstr ""
+msgstr "太陽系小天体設定ファイルを追加..."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:272
 msgid "Configuration file"
@@ -13722,7 +13743,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:275
 msgid "Add new Minor Solar System objects"
-msgstr ""
+msgstr "太陽系小天体の追加"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 #: plugins/Supernovae/src/Supernovae.cpp:148
@@ -13731,11 +13752,11 @@ msgstr "歴史的な超新星"
 
 #: plugins/Supernovae/src/Supernovae.cpp:74
 msgid "This plugin allows you to see some bright historical supernovae."
-msgstr ""
+msgstr "このプラグインは歴史的な明るい超新星を表示できます。"
 
 #: plugins/Supernovae/src/Supernovae.cpp:148
 msgid "Historical Supernovae configuration window"
-msgstr ""
+msgstr "歴史的な超新星の設定ウィンドウ"
 
 #: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
 msgid "January"
@@ -13799,27 +13820,27 @@ msgstr "最大光度"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:119
 msgid "Historical Supernovae Plug-in"
-msgstr ""
+msgstr "歴史的な超新星プラグイン"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 msgid "This plugin allows you to see some bright historical supernovae: "
-msgstr ""
+msgstr "このプラグインは歴史的な明るい超新星を表示します: "
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 #: plugins/Novae/src/gui/NovaeDialog.cpp:125
 #, qt-format
 msgid "This list altogether contains %1 stars."
-msgstr ""
+msgstr "このリストには%1個の超新星が含まれます。"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
-msgstr ""
+msgstr "これら全ての超新星は最大光度%1以上です。"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
 #: plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid "Light curves"
-msgstr ""
+msgstr "光度曲線"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
 #, qt-format
@@ -13829,16 +13850,17 @@ msgid ""
 "can be seen %1here%2 (right scale in days), and this model is used for this "
 "plugin."
 msgstr ""
+"このプラグインは色々な超新星の簡単な光度曲線モデルを補足します。I型、II型の典型的な光度曲線は%1ここ%2(右の目盛りは日)で見ることが出来、このモデルを使用しています。"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 msgid "Acknowledgments"
-msgstr ""
+msgstr "謝辞"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
-msgstr ""
+msgstr "以下の人たちの貢献と価値あるコメントに感謝します:"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
 msgid "Sergei Blinnikov"
@@ -13846,12 +13868,12 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
 msgid "Institute for Theoretical and Experimental Physics"
-msgstr ""
+msgstr "理論実験物理学研究所"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 msgid "in Russia"
-msgstr ""
+msgstr "(ロシア)"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:186
 #: plugins/Novae/src/gui/NovaeDialog.cpp:179
@@ -13860,26 +13882,26 @@ msgstr ""
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
 msgid_plural "Next update: %1 day(s)"
-msgstr[0] ""
+msgstr[0] "次回の更新: %1 日後"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:223
 msgid "Historical supernovae is updated"
-msgstr ""
+msgstr "データを更新しました"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:229
 msgid "Historical Supernovae Configuration"
-msgstr ""
+msgstr "歴史的な超新星の設定"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:230
 msgid "Historical Supernovae Plug-in Configuration"
-msgstr ""
+msgstr "歴史的な超新星プラグインの設定"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
 #: plugins/Quasars/src/ui_quasarsDialog.h:260
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:266
 msgid "Update catalog from Internet"
-msgstr ""
+msgstr "インターネットからデータの更新"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
@@ -13887,14 +13909,14 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:267
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:526
 msgid "Update from Internet sources"
-msgstr ""
+msgstr "インターネットから更新"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Novae/src/ui_novaeDialog.h:238
 #: plugins/Quasars/src/ui_quasarsDialog.h:263
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:269
 msgid "Update frequency (days):"
-msgstr ""
+msgstr "更新間隔(日):"
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Novae/src/ui_novaeDialog.h:239
@@ -13902,11 +13924,11 @@ msgstr ""
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:270
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:529
 msgid "[next update info]"
-msgstr ""
+msgstr "[次回の更新]"
 
 #: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:112
 msgid "Navigational Stars"
-msgstr ""
+msgstr "天測航法の星"
 
 #: plugins/NavStars/src/NavStars.cpp:55
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
@@ -14001,7 +14023,7 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
 msgid "Enable display at startup"
-msgstr ""
+msgstr "起動時から表示"
 
 #: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae"
@@ -14009,19 +14031,19 @@ msgstr "明るい新星"
 
 #: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:120
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
-msgstr ""
+msgstr "このプラグインは銀河系内の明るい新星を表示します。"
 
 #: plugins/Novae/src/Novae.cpp:142
 msgid "Bright Novae configuration window"
-msgstr ""
+msgstr "明るい新星の設定ウィンドウ"
 
 #: plugins/Novae/src/Nova.cpp:147
 msgid "nova"
-msgstr ""
+msgstr "新星"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:114
 msgid "Bright Novae Plug-in"
-msgstr ""
+msgstr "明るい新星プラグイン"
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid ""
@@ -14059,15 +14081,15 @@ msgstr ""
 
 #: plugins/Novae/src/gui/NovaeDialog.cpp:216
 msgid "Novae is updated"
-msgstr ""
+msgstr "データを更新しました"
 
 #: plugins/Novae/src/ui_novaeDialog.h:232
 msgid "Bright Novae Configuration"
-msgstr ""
+msgstr "明るい新星の設定"
 
 #: plugins/Novae/src/ui_novaeDialog.h:233
 msgid "Bright Novae Plug-in Configuration"
-msgstr ""
+msgstr "明るい新星プラグインの設定"
 
 #: plugins/Quasars/src/Quasars.cpp:75
 msgid ""
@@ -14075,18 +14097,20 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
+"このプラグインはV等級が16等より明るいクエーサーを表示します。出典は、 'Quasars and Active Galactic Nuclei' "
+"(第13版) (Veron他、2010年) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
-msgstr "クエーサーを表示"
+msgstr "クエーサー"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Quasars configuration window"
-msgstr ""
+msgstr "クエーサー設定ウィンドウ"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:118
 msgid "Quasars Plug-in"
-msgstr ""
+msgstr "クエーサー・プラグイン"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
 msgid ""
@@ -14094,43 +14118,45 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"このプラグインは実視等級が16等より明るい主なクエーサーを表示します。出典は 'Quasars and Active Galactic Nuclei' "
+"(第13版) (Veron他、2010年) =2010A&A...518A..10V"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 msgid "Veron+ 2010"
-msgstr ""
+msgstr "Veron他、2010年"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "現在カタログにあるクエーサーの数: %1。"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:231
 msgid "Quasars is updated"
-msgstr ""
+msgstr "データを更新しました"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:257
 msgid "Quasars Configuration"
-msgstr ""
+msgstr "クエーサーの設定"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:258
 msgid "Quasars Plug-in Configuration"
-msgstr ""
+msgstr "クエーサー・プラグインの設定"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:266
 msgid "Settings for quasars"
-msgstr ""
+msgstr "クエーサーの表示"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:268
 msgid "Plot all quasars without labels"
-msgstr ""
+msgstr "名称を表示せずに全てのクエーサーを表示します"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:270
 msgid "Enable display of distribution for quasars"
-msgstr ""
+msgstr "起動時に表示"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:272
 msgid "Show quasars button on toolbar"
-msgstr ""
+msgstr "ツールバーにボタンを表示"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
 #: plugins/Pulsars/src/Pulsars.cpp:168
@@ -14142,15 +14168,15 @@ msgstr "パルサー"
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
-msgstr ""
+msgstr "このプラグインは様々なパルサーを表示します。またそれぞれのデータも表示できます。"
 
 #: plugins/Pulsars/src/Pulsars.cpp:167
 msgid "Show pulsars"
-msgstr "パルサーを表示"
+msgstr "パルサー"
 
 #: plugins/Pulsars/src/Pulsars.cpp:168
 msgid "Pulsars configuration window"
-msgstr ""
+msgstr "パルサー設定ウィンドウ"
 
 #: plugins/Pulsars/src/Pulsar.cpp:180
 msgid "pulsar"
@@ -14161,11 +14187,11 @@ msgstr "パルサー"
 #, qt-format, qt-plural-format
 msgid "has %1 registered glitch(es)"
 msgid_plural "has %1 registered glitch(es)"
-msgstr[0] ""
+msgstr[0] "グリッチ観測回数 %1回"
 
 #: plugins/Pulsars/src/Pulsar.cpp:185
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "グリッチが観測されたパルサー"
 
 #: plugins/Pulsars/src/Pulsar.cpp:197
 msgid "Barycentric period"
@@ -14175,81 +14201,81 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:200
 msgctxt "period"
 msgid "s"
-msgstr ""
+msgstr "秒"
 
 #: plugins/Pulsars/src/Pulsar.cpp:204
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "パルス周期の時間変化率"
 
 #: plugins/Pulsars/src/Pulsar.cpp:209
 msgid "Dispersion measure"
-msgstr ""
+msgstr "ディスパージョン・メジャー"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:212
 msgctxt "distance"
 msgid "pc"
-msgstr ""
+msgstr "パーセク"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
 #: plugins/Pulsars/src/Pulsar.cpp:214
 msgctxt "distance"
 msgid "cm"
-msgstr ""
+msgstr "cm"
 
 #: plugins/Pulsars/src/Pulsar.cpp:221
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "自転エネルギーの減少率"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:224
 msgctxt "power"
 msgid "ergs/s"
-msgstr ""
+msgstr "エルグ/秒"
 
 #: plugins/Pulsars/src/Pulsar.cpp:230
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "連星の公転周期"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:233 plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "period"
 msgid "days"
-msgstr ""
+msgstr "日"
 
 #: plugins/Pulsars/src/Pulsar.cpp:237 plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Eccentricity"
-msgstr ""
+msgstr "離心率"
 
 #: plugins/Pulsars/src/Pulsar.cpp:242
 msgid "Annual parallax"
-msgstr ""
+msgstr "年周視差"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:245
 msgctxt "parallax"
 msgid "mas"
-msgstr ""
+msgstr "ミリ秒角(mas)"
 
 #: plugins/Pulsars/src/Pulsar.cpp:251
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "電子密度モデルによる距離"
 
 #: plugins/Pulsars/src/Pulsar.cpp:264
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "パルスの半値幅"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:267
 msgctxt "time"
 msgid "ms"
-msgstr ""
+msgstr "ミリ秒"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:272
 msgid "Time averaged flux density at"
-msgstr ""
+msgstr "平均フラックス密度"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:276
@@ -14261,42 +14287,42 @@ msgstr ""
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:303
 msgid "Notes"
-msgstr ""
+msgstr "備考"
 
 #: plugins/Pulsars/src/Pulsar.cpp:377
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
-msgstr ""
+msgstr "変則的なX線パルサー、または繰り返しパルスが検知された軟ガンマ線"
 
 #: plugins/Pulsars/src/Pulsar.cpp:382
 msgid "has one or more binary companions"
-msgstr ""
+msgstr "連星系"
 
 #: plugins/Pulsars/src/Pulsar.cpp:387
 msgid "with pulsed emission from radio to infrared or higher frequencies"
-msgstr ""
+msgstr "電波から赤外線以上でのパルス放射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:392
 msgid "with pulsed emission only at infrared or higher frequencies"
-msgstr ""
+msgstr "赤外線以上でのパルス放射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:397
 msgid "with pulsed emission in the radio band"
-msgstr ""
+msgstr "電波でのパルス放射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:402
 msgid "with intermittently pulsed radio emission"
-msgstr ""
+msgstr "間欠的な電波でのパルス放射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:407
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
-msgstr ""
+msgstr "熱的X線パルス放射はあるが電波放射が観測されない孤立した中性子星"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:127
 msgid "Pulsars Plug-in"
-msgstr ""
+msgstr "パルサー・プラグイン"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:134
 #, qt-format
@@ -14305,19 +14331,22 @@ msgid ""
 " Hobbs, G. B., Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) "
 "(%1astro-ph/0412641%2))."
 msgstr ""
+"パルサーのデータの出典は 'The ATNF Pulsar Catalogue'  (Manchester, R. N., Hobbs, G. B., "
+"Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-"
+"ph/0412641%2))。"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "現在のデータ数: %1。"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "pulsar identifiers have the prefix 'PSR'"
-msgstr ""
+msgstr "パルサー表示は'PSR'"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid "Acknowledgment"
-msgstr ""
+msgstr "謝辞"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 msgid "Vladimir Samodourov"
@@ -14341,31 +14370,31 @@ msgstr ""
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:260
 msgid "Pulsars is updated"
-msgstr ""
+msgstr "データを更新しました"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:264
 msgid "Pulsars Plug-in Configuration"
-msgstr ""
+msgstr "パルサー・プラグインの設定"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:272
 msgid "Settings for pulsars"
-msgstr ""
+msgstr "パルサーの表示"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:274
 msgid "Plot all pulsars without labels"
-msgstr ""
+msgstr "名称を表示せずに全てのパルサーを表示します"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:276
 msgid "Enable display of distribution for pulsars"
-msgstr ""
+msgstr "パルサーの分布を表示"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:278
 msgid "Show pulsars button on toolbar"
-msgstr ""
+msgstr "ツールバーにボタンを表示"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:279
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "グリッチの観測されたパルサーは色を変える"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
@@ -14385,7 +14414,7 @@ msgstr "リモートコントロール"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:106
 msgid "Remote Control Plug-in"
-msgstr ""
+msgstr "リモートコントロール・プラグイン"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
 msgid ""
@@ -14435,7 +14464,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:249
 msgid "Port Number:"
-msgstr ""
+msgstr "ポート番号:"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:252
 msgid "Access requires authentication"
@@ -14443,7 +14472,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
 msgid "Password"
-msgstr ""
+msgstr "パスワード"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
 msgid ""
@@ -14458,11 +14487,11 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:256
 msgid "Restart server"
-msgstr ""
+msgstr "サーバーの再起動"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:257
 msgid "Server enabled"
-msgstr ""
+msgstr "サーバーが利用可能"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:258
 msgid "Enable automatically on startup"
@@ -14475,7 +14504,7 @@ msgstr ""
 #: plugins/RemoteSync/src/RemoteSync.cpp:53
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:480
 msgid "Remote Sync"
-msgstr ""
+msgstr "設定の同期"
 
 #: plugins/RemoteSync/src/RemoteSync.cpp:56
 msgid ""
@@ -14486,59 +14515,59 @@ msgstr ""
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:115
 #, qt-format
 msgid "ERROR: %1"
-msgstr ""
+msgstr "エラー: %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:132
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Start server"
-msgstr ""
+msgstr "サーバーとして起動"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:137
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Connect to server"
-msgstr ""
+msgstr "サーバーに接続"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:140
 msgid "Not running"
-msgstr ""
+msgstr "未起動"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:145
 msgid "Stop server"
-msgstr ""
+msgstr "サーバー停止"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:150
 #, qt-format
 msgid "Running as server on port %1"
-msgstr ""
+msgstr "サーバーとして起動中、ポート番号 %1"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:164
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 msgid "Cancel connecting"
-msgstr ""
+msgstr "接続中止"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:165
 #, qt-format
 msgid "Connecting to %1: %2..."
-msgstr ""
+msgstr "接続中(アドレス:%1、ポート:%2)..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:170
 #, qt-format
 msgid "Retrying connection to %1: %2..."
-msgstr ""
+msgstr "再接続中(アドレス:%1、ポート:%2)..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:176
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:177
 msgid "Disconnecting..."
-msgstr ""
+msgstr "切断中..."
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnect from server"
-msgstr ""
+msgstr "サーバーから切断"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:182
 #, qt-format
 msgid "Connected to %1: %2"
-msgstr ""
+msgstr "接続しました(アドレス:%1、ポート:%2)"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:190
 msgid "Remote Sync Plug-in"
@@ -14572,11 +14601,11 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:239
 msgid "Server Name"
-msgstr ""
+msgstr "サーバー名"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server not active."
-msgstr ""
+msgstr "サーバーが起動していません。"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:460
 msgid "Remote Sync Plug-in Configuration"
@@ -14585,48 +14614,48 @@ msgstr ""
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:462
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:458
 msgid "Status:"
-msgstr ""
+msgstr "状態:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:464
 msgid "Server mode"
-msgstr ""
+msgstr "サーバー"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:466
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:471
 msgid "Server port"
-msgstr ""
+msgstr "ポート番号"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:467
 msgid "Client mode"
-msgstr ""
+msgstr "クライアント"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:469
 msgid "Server host address/name"
-msgstr ""
+msgstr "サーバーのアドレス"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:470
 msgid "127.0.0.1"
-msgstr ""
+msgstr "127.0.0.1"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:472
 msgid "When connection is lost"
-msgstr ""
+msgstr "接続切断時"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:475
 msgid "Do nothing"
-msgstr ""
+msgstr "何もしない"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:476
 msgid "Try reconnecting"
-msgstr ""
+msgstr "再接続"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:479
 msgid "When server quits"
-msgstr ""
+msgstr "サーバー終了時"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:481
 msgid "Changes on this page require a re-connection to the server"
-msgstr ""
+msgstr "ここでの設定の変更にはサーバーへの再接続が必要です"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:482
 msgid "Settings applied on this client"
@@ -14638,39 +14667,39 @@ msgstr ""
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:486
 msgid "View direction"
-msgstr ""
+msgstr "表示方向"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:488
 msgid "Property filters"
-msgstr ""
+msgstr "同期するプロパティの選択"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:489
 msgid "Exclude GUI-related properties"
-msgstr ""
+msgstr "除外する表示関係プロパティ"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:491
 msgid "These are all available properties."
-msgstr ""
+msgstr "全てのプロパティ。"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:494
 msgid "These are the properties currently excluded from synchronisation."
-msgstr ""
+msgstr "同期から除外するプロパティ。"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:496
 msgid "Excluded Properties"
-msgstr ""
+msgstr "除外するプロパティ"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:497
 msgid "Synchronized Properties"
-msgstr ""
+msgstr "同期するプロパティ"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:498
 msgid "Additional excluded properties:"
-msgstr ""
+msgstr "除外プロパティの追加:"
 
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:499
 msgid "Client settings"
-msgstr ""
+msgstr "クライアントの設定"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
 #: plugins/Exoplanets/src/Exoplanets.cpp:170
@@ -15395,7 +15424,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:414
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "データを更新しました"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:535
 msgid "Orbital Eccentricity"
@@ -15477,35 +15506,35 @@ msgstr "華氏"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:522
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "太陽系外惑星の設定"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:523
 msgid "Exoplanets Plug-in Configuration"
-msgstr ""
+msgstr "太陽系外惑星プラグインの設定"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "インターネットから更新"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:531
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "太陽系外惑星の設定"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:533
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "名称を表示せずに太陽系外惑星の全てを表示"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:535
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "太陽系外惑星の分布を表示"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:537
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "太陽系外惑星は発見後に表示する"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "太陽系外惑星発見の時系列を可能にする"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid ""
@@ -15515,7 +15544,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "生物の生存可能な環境がある惑星系のみを表示する"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:544
 msgid "Enable display of designations for exoplanets"
@@ -15523,72 +15552,72 @@ msgstr ""
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "ツールバーにボタンを表示"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
 msgid "Exoplanets marker color"
-msgstr ""
+msgstr "太陽系外惑星のマーカーの色"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:551
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:553
 msgid "Marker color for potential habitable exoplanets"
-msgstr ""
+msgstr "生存可能惑星のマーカーの色"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
 msgid "Temperature scale:"
-msgstr ""
+msgstr "温度の単位:"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 msgid "Diagrams: scatter plot"
-msgstr ""
+msgstr "データ図作成"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
 msgid "X axis"
-msgstr ""
+msgstr "X軸"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:570
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "目盛を対数表示にします"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:564
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:572
 msgid "log scale"
-msgstr ""
+msgstr "対数表示"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:566
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
 msgid "min"
-msgstr ""
+msgstr "最小"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:567
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:574
 msgid "max"
-msgstr ""
+msgstr "最大"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:568
 msgid "Y axis"
-msgstr ""
+msgstr "Y軸"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:575
 msgid "Plot"
-msgstr ""
+msgstr "作成"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:576
 msgctxt "tab in plugin windows"
 msgid "Diagram"
-msgstr ""
+msgstr "データ図"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:577
 msgctxt "tab in plugin windows"
 msgid "Info"
-msgstr ""
+msgstr "情報"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:578
 msgctxt "tab in plugin windows"
 msgid "Websites"
-msgstr ""
+msgstr "ウェブサイト"
 
 #: plugins/Observability/src/Observability.cpp:65
 msgid "Observability Analysis"
@@ -15608,211 +15637,211 @@ msgstr ""
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Jan"
-msgstr ""
+msgstr "1月"
 
 #: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Feb"
-msgstr ""
+msgstr "2月"
 
 #: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Mar"
-msgstr ""
+msgstr "3月"
 
 #: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "Apr"
-msgstr ""
+msgstr "4月"
 
 #: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "May"
-msgstr ""
+msgstr "5月"
 
 #: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
+msgstr "6月"
 
 #: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Jul"
-msgstr ""
+msgstr "7月"
 
 #: plugins/Observability/src/Observability.cpp:182
 msgctxt "short month name"
 msgid "Aug"
-msgstr ""
+msgstr "8月"
 
 #: plugins/Observability/src/Observability.cpp:183
 msgctxt "short month name"
 msgid "Sep"
-msgstr ""
+msgstr "9月"
 
 #: plugins/Observability/src/Observability.cpp:184
 msgctxt "short month name"
 msgid "Oct"
-msgstr ""
+msgstr "10月"
 
 #: plugins/Observability/src/Observability.cpp:185
 msgctxt "short month name"
 msgid "Nov"
-msgstr ""
+msgstr "11月"
 
 #: plugins/Observability/src/Observability.cpp:186
 msgctxt "short month name"
 msgid "Dec"
-msgstr ""
+msgstr "12月"
 
 #. TRANSLATORS: Short for "hours".
 #: plugins/Observability/src/Observability.cpp:189
 msgid "h"
-msgstr ""
+msgstr "時"
 
 #. TRANSLATORS: Short for "minutes".
 #: plugins/Observability/src/Observability.cpp:191
 msgid "m"
-msgstr ""
+msgstr "分"
 
 #. TRANSLATORS: Short for "seconds".
 #: plugins/Observability/src/Observability.cpp:193
 msgid "s"
-msgstr ""
+msgstr "秒"
 
 #: plugins/Observability/src/Observability.cpp:194
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr ""
+msgstr "没時刻 %1 (%2 後)"
 
 #: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr ""
+msgstr "出時刻 %1 (%2 前)"
 
 #: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr ""
+msgstr "没時刻 %1 (%2 前)"
 
 #: plugins/Observability/src/Observability.cpp:197
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr ""
+msgstr "出時刻 %1 (%2 後)"
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "Circumpolar."
-msgstr ""
+msgstr "周極星。"
 
 #: plugins/Observability/src/Observability.cpp:199
 msgid "No rise."
-msgstr ""
+msgstr "天体の出無し。"
 
 #: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr ""
+msgstr "正中時刻 %1 ( %2 後)、 高度%3度。"
 
 #: plugins/Observability/src/Observability.cpp:201
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr ""
+msgstr "正中時刻 %1 ( %2 前)、 高度%3度。"
 
 #: plugins/Observability/src/Observability.cpp:202
 msgid "Source is not observable."
-msgstr ""
+msgstr "観測不可能。"
 
 #: plugins/Observability/src/Observability.cpp:203
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr ""
+msgstr "アクロニカル・ライズ/セット、コズミカル・ライズ/セット無し。"
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "最大離角: %1日 (%2度)"
 
 #: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr ""
+msgstr "最大離角:  %1日 (%2度)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may
 #. follow.
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr ""
+msgstr "アクロニカル・ライズ/セット: %1日/%2日。 "
 
 #: plugins/Observability/src/Observability.cpp:209
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr ""
+msgstr "ヘリアカル・ライズ/セット: %1日/%2日。 "
 
 #: plugins/Observability/src/Observability.cpp:210
 msgid "No Heliacal rise/set. "
-msgstr ""
+msgstr "ヘリアカル・ライズ/セット無し。 "
 
 #. TRANSLATORS: The space at the end is significant - another sentence may
 #. follow.
 #: plugins/Observability/src/Observability.cpp:212
 msgid "No Acronycal rise/set. "
-msgstr ""
+msgstr "アクロニカル・ライズ/セット無し。 "
 
 #: plugins/Observability/src/Observability.cpp:213
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr ""
+msgstr "コズミカル・ライズ/セット: %1日/%2日。"
 
 #: plugins/Observability/src/Observability.cpp:214
 msgid "No Cosmical rise/set."
-msgstr ""
+msgstr "コズミカル・ライズ/セット無し。"
 
 #: plugins/Observability/src/Observability.cpp:215
 msgid "Observable during the whole year."
-msgstr ""
+msgstr "通年観測可能。"
 
 #: plugins/Observability/src/Observability.cpp:216
 msgid "Not observable at dark night."
-msgstr ""
+msgstr "夜間観測不可。"
 
 #: plugins/Observability/src/Observability.cpp:217
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr ""
+msgstr "夜間の出現期間: %1"
 
 #: plugins/Observability/src/Observability.cpp:218
 msgid "TODAY:"
-msgstr ""
+msgstr "今日:"
 
 #: plugins/Observability/src/Observability.cpp:219
 msgid "THIS YEAR:"
-msgstr ""
+msgstr "今年:"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may
 #. follow.
 #: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "前回の満月: %1%2日 %3時%4分。 "
 
 #: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr ""
+msgstr "次回の満月: %1%2日 %3時%4分。 "
 
 #: plugins/Observability/src/Observability.cpp:237
 #: plugins/Observability/src/Observability.cpp:238
 #: plugins/Observability/src/Observability.cpp:242
 msgid "Observability"
-msgstr ""
+msgstr "観測可能日時"
 
 #: plugins/Observability/src/Observability.cpp:243
 msgid "Observability configuration window"
-msgstr ""
+msgstr "観測可能日時設定ウインドウ"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:133
 msgid "Observability Plug-in"
-msgstr ""
+msgstr "観測可能日時プラグイン"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
 msgid ""
@@ -15828,7 +15857,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:140
 msgid "Explanation of some parameters"
-msgstr ""
+msgstr "いくつかのパラメーターの説明"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid "Sun altitude at twilight:"
@@ -15841,20 +15870,22 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
+"どんな天体もこの太陽高度以下では観測可能と判断する。通常、天文薄明は太陽高度-12度から-"
+"18度の間。この数値は観測可能期間の推定にのみ使用（以下を参照のこと）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Horizon altitude:"
-msgstr ""
+msgstr "地平線高度:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
-msgstr ""
+msgstr "山やビル、望遠鏡架台の制限等を考慮した観測可能な最低の天体高度。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid "Today ephemeris:"
-msgstr ""
+msgstr "今日の暦:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:145
 msgid ""
@@ -15866,7 +15897,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr ""
+msgstr "アクロニカル/コズミカル/ヘリアカル ライズ/セット:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid ""
@@ -15891,7 +15922,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Largest Sun separation:"
-msgstr ""
+msgstr "最大離角:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
@@ -15904,10 +15935,11 @@ msgid ""
 "at that declination. Hence, that is the 'best' night to observe a particular"
 " object."
 msgstr ""
+"太陽と天体の角距離が最大になること。多くの場合は太陽との赤経差が180度になるので、太陽と正反対の位置にあることになる。惑星、恒星にかぎらずその天体が最大離角にあるときは、およそ真夜中に南中する。だから空の一番暗い場所に位置することになり、観測に最適な夜となる。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid "Nights with source above horizon:"
-msgstr ""
+msgstr "夜間の出現期間:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid ""
@@ -15931,79 +15963,79 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid "Full Moon:"
-msgstr ""
+msgstr "満月:"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
-msgstr ""
+msgstr "月が選択された場合、太陽から最も離れる時刻をプログラムは正確に計算します。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:202
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
-msgstr ""
+msgstr "薄明の太陽高度: %1度。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:208
 #, qt-format
 msgid "Horizon altitude: %1 deg."
-msgstr ""
+msgstr "地平線高度: %1度。"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:342
 msgid "Observability Configuration"
-msgstr ""
+msgstr "観測可能日時の設定"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:343
 msgid "Observability Plug-in Configuration"
-msgstr ""
+msgstr "観測可能日時プラグインの設定"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
-msgstr ""
+msgstr "フォントの色と大きさ"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Red"
-msgstr ""
+msgstr "赤"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:347
 msgid "Green"
-msgstr ""
+msgstr "緑"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:348
 msgid "Blue"
-msgstr ""
+msgstr "青"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font Size"
-msgstr ""
+msgstr "フォント大きさ"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Observing conditions"
-msgstr ""
+msgstr "観測条件"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:351
 msgid "Showing options"
-msgstr ""
+msgstr "表示オプション"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:352
 msgid "Today's ephemeris (rise, set, and transit times)"
-msgstr ""
+msgstr "今日の暦(出没、正中時刻)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr ""
+msgstr "アクロニカル/コズミカル/ヘリアカル 出/没の日"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
-msgstr ""
+msgstr "太陽からの最大離角の日"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "Nights with the source above horizon"
-msgstr ""
+msgstr "天体が夜間観測できる期間"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:356
 msgid "Dates of previous and next Full Moon"
-msgstr ""
+msgstr "直前の満月の日、直後の満月の日"
 
 #: plugins/FOV/src/FOV.cpp:42 plugins/FOV/src/FOV.cpp:82
 #: plugins/FOV/src/ui_fovWindow.h:351 plugins/FOV/src/ui_fovWindow.h:353
@@ -16016,14 +16048,16 @@ msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
 msgstr ""
+"このプラグインは<em>Cartes du "
+"Ciel</em>のプラネタリウム・ソフトのように、キーボードショートカットでの段階的なズームを可能にします。"
 
 #: plugins/FOV/src/FOV.cpp:87
 msgid "Set FOV to"
-msgstr ""
+msgstr "視野角のショートカットの設定"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:81
 msgid "Field of View plug-in"
-msgstr ""
+msgstr "視野角のショートカット・プラグイン"
 
 #: plugins/FOV/src/ui_fovWindow.h:355
 msgid ""
@@ -16033,6 +16067,9 @@ msgid ""
 "feature. You can edit values and use the keyboard for quick-setting of FOV. "
 "All values in degrees."
 msgstr ""
+"ステラリウムではマウスホイールやキーボードショートカットを使ったスムーズなズームが通常使われますが、Cartes du "
+"Cielのプラネタリウムのような視野角固定の段階的なズームが欲しい人もいます。 そこでこのプラグインではその機能を提供します。 "
+"ここで角度を設定しておけば、キーボードで必要な視野角がすぐ設定できます。角度の単位は全て度です。"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
@@ -16041,32 +16078,32 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:237
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:246
 msgid "Equation of Time"
-msgstr ""
+msgstr "均時差"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "このプラグインは均時差を計算して表示します。"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "均時差を表示"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:220
 msgctxt "time"
 msgid "m"
-msgstr ""
+msgstr "分"
 
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:222
 msgctxt "time"
 msgid "s"
-msgstr ""
+msgstr "秒"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:83
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "均時差プラグイン"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:238
 msgid ""
@@ -16083,24 +16120,24 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:240
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "ツールバーにボタンを表示"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:241
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "分秒で表示"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:242
 msgid "Change sign of equation"
-msgstr ""
+msgstr "符号の反転"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
 msgid "Font size:"
-msgstr ""
+msgstr "フォントの大きさ:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:88
 msgid "The current catalog of Meteor Showers is invalid!"
-msgstr ""
+msgstr "現在の流星群データは無効です!"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:551
@@ -16109,25 +16146,25 @@ msgstr "流星群"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 msgid "Toggle meteor showers"
-msgstr ""
+msgstr "流星群"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "流星群名の表示/非表示"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show settings dialog"
-msgstr ""
+msgstr "設定を開く"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Show search dialog"
-msgstr ""
+msgstr "流星群検索"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:256
 msgid "Using the default Meteor Showers catalog."
-msgstr ""
+msgstr "デフォルトの流星群カタログを使用する。"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:555
 msgid ""
@@ -16174,7 +16211,7 @@ msgstr "流星群"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Radiant drift (per day)"
-msgstr "放射点の移動 (1日あたり)"
+msgstr "輻射点の移動量 (1日あたり)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
@@ -16637,23 +16674,23 @@ msgstr "小惑星ファエトン(3200)"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:132
 msgid "Updating..."
-msgstr ""
+msgstr "更新中..."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:137
 msgid "Successfully updated!"
-msgstr ""
+msgstr "更新成功!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:141
 msgid "Failed!"
-msgstr ""
+msgstr "更新失敗!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:145
 msgid "Outdated!"
-msgstr ""
+msgstr "データが古いです!"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:204
 msgid "Meteor Showers Plug-in"
-msgstr ""
+msgstr "流星群プラグイン"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:225
 msgid ""
@@ -16703,7 +16740,7 @@ msgstr ""
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:271
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
 msgid "Radiant"
-msgstr ""
+msgstr "輻射点"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:273
 msgid ""
@@ -16730,7 +16767,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:288
 msgid "Zenithal Hourly Rate (ZHR)"
-msgstr ""
+msgstr "天頂出現数(ZHR)"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:290
 msgid ""
@@ -16743,7 +16780,7 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:296
 msgid "Population index"
-msgstr ""
+msgstr "光度比"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:298
 msgid ""
@@ -16790,68 +16827,68 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:103
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "検索開始日は終了日より前に！"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:107
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "検索期間は1年を超えないでください！"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:192
 msgid "ZHR"
-msgstr ""
+msgstr "ZHR"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:193
 msgid "Data Type"
-msgstr ""
+msgstr "データの型"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:194
 msgid "Peak"
-msgstr ""
+msgstr "極大日"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "流星群の設定"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
-msgstr ""
+msgstr "流星群の設定"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "一般"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "起動時から流星群を表示する"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "流星群のボタンを表示/非表示にする"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "流星群検索のボタンを表示する"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
-msgstr ""
+msgstr "輻射点を表示する"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
-msgstr ""
+msgstr "名称表示"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
-msgstr ""
+msgstr "活動中の流星群のみ表示"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:437
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "名称のフォントの大きさ(ピクセル)"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
-msgstr ""
+msgstr "輻射点の色"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
@@ -16859,11 +16896,11 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "活動していない輻射点"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Inactive"
-msgstr ""
+msgstr "活動期間外"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
@@ -16871,37 +16908,37 @@ msgstr ""
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
-msgstr ""
+msgstr "自動更新する"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:455
 msgid "Next update:"
-msgstr ""
+msgstr "次回の更新:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "前回の更新"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "流星群の検索"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
 msgid "Search"
-msgstr ""
+msgstr "検索"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:195
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:197
 msgid "dd/MM/yyyy"
-msgstr ""
+msgstr "yyyy年MM月dd日"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
-msgstr ""
+msgstr "検索結果"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
@@ -17402,28 +17439,28 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:471
 msgid "3D Scenery"
-msgstr ""
+msgstr "3D背景"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:473
 msgid "Set as default scene"
-msgstr ""
+msgstr "デフォルトの3D背景に設定"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:474
 msgid "Load/save viewpoints"
-msgstr ""
+msgstr "視点のロード/セーブ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:475
 msgid "Torch strength:"
-msgstr ""
+msgstr "トーチライトの明るさ:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:476
 msgid "Torch range:"
-msgstr ""
+msgstr "トーチライトの広がり:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:477
 #, qt-format
 msgid "Torchlight (%1)"
-msgstr ""
+msgstr "トーチライト(%1)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:478
 #, qt-format
@@ -17432,7 +17469,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:479
 msgid "Visual options"
-msgstr ""
+msgstr "表示オプション"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:480
 msgid "Per-Pixel lighting"
@@ -17440,47 +17477,47 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:481
 msgid "Shadows"
-msgstr ""
+msgstr "影"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:482
 msgid "Simple shadows"
-msgstr ""
+msgstr "シンプルな影"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:483
 msgid "Bump mapping"
-msgstr ""
+msgstr "バンプマップ"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:484
 msgid "Cubemap size:"
-msgstr ""
+msgstr "キューブマップのサイズ:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:485
 msgid "Shadowmap size:"
-msgstr ""
+msgstr "シャドウマップのサイズ:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:486
 msgid "Filtering Quality:"
-msgstr ""
+msgstr "フィルター精度:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:490
 msgid "Hardware"
-msgstr ""
+msgstr "ハードウェア"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:491
 msgid "Low"
-msgstr ""
+msgstr "低精度"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:492
 msgid "Low + Hardware"
-msgstr ""
+msgstr "低精度+ハードウェア"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:493
 msgid "High (slow)"
-msgstr ""
+msgstr "高精度(遅い)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:494
 msgid "High + Hardware (slow)"
-msgstr ""
+msgstr "高精度+ハードウェア(遅い)"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:496
 msgid "PCSS"
@@ -17488,7 +17525,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:497
 msgid "Cubemapping mode:"
-msgstr ""
+msgstr "キューブマップのモード:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:498
 msgid "Full cubemap shadows"
@@ -17500,7 +17537,7 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:500
 msgid "Interval:"
-msgstr ""
+msgstr "間隔:"
 
 #: plugins/Scenery3d/src/ui_scenery3dDialog.h:501
 msgid "Only update dominant face when moving"
@@ -17551,11 +17588,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "分点の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "至点の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Crossquarter"
@@ -17571,23 +17608,23 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "天頂通過点の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "天底通過点の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "選択天体の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "その時点での太陽の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "その時点での月の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Vertical for Geographic Location 1"
@@ -17599,27 +17636,27 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Vertical for Custom Azimuth 1"
-msgstr ""
+msgstr "任意設定高度1の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Vertical for Custom Azimuth 2"
-msgstr ""
+msgstr "任意設定高度2の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
-msgstr ""
+msgstr "任意設定赤緯1の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
-msgstr ""
+msgstr "任意設定赤緯2の移動線を表示"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1263
 msgid "Equinox"
-msgstr ""
+msgstr "分点"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1266
 msgid "Solstice"
-msgstr ""
+msgstr "至点"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1269
 msgid "Crossquarter"
@@ -17635,20 +17672,20 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
 msgid "Zenith Passage"
-msgstr ""
+msgstr "天頂通過"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
 msgid "Nadir Passage"
-msgstr ""
+msgstr "天底通過"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
 msgid "Selected Object"
-msgstr ""
+msgstr "選択天体"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1293
 msgid "error if you can read this"
-msgstr ""
+msgstr "エラーがあります"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
 msgid "Mercury"
@@ -17670,7 +17707,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:256
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "分点の赤緯(つまり天の赤道)と至点の赤緯"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:257
 msgid ""
@@ -17688,27 +17725,27 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:260
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "天頂通過する赤緯"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:261
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "天底通過する赤緯"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:262
 msgid "Declination of the currently selected object"
-msgstr ""
+msgstr "選択天体の赤緯"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "その時点での太陽の赤緯"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:264
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "その時点での月の赤緯"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:265
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "その時点での肉眼惑星の赤緯"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:266
 msgid ""
@@ -17735,11 +17772,11 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:363
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "分点の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:374
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "至点の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:385
 msgid "Select color for crossquarter lines"
@@ -17755,27 +17792,27 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:418
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "天頂通過の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:429
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "天底通過の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:440
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "選択天体の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:451
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "その時点での太陽の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:462
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "その時点での月の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:473
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "その時点での惑星の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:484
 msgid "Select color for Geographic Location 1 line"
@@ -17787,19 +17824,19 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:506
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "任意設定高度1の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:517
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "任意設定高度2の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:528
 msgid "Select color for Custom Declination 1 line"
-msgstr ""
+msgstr "任意設定赤緯1の移動線の色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:539
 msgid "Select color for Custom Declination 2 line"
-msgstr ""
+msgstr "任意設定赤緯2の移動線の色"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:527
 msgid "ArchaeoLines Configuration"
@@ -17815,16 +17852,16 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "任意設定の赤緯1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
-msgstr ""
+msgstr "その時点での太陽"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "この線の名前(地名)を入力"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
@@ -17836,7 +17873,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:546
 msgid "Change color"
-msgstr ""
+msgstr "色の変更"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:549
 msgid "Minor Lunar Standstill lines"
@@ -17844,56 +17881,56 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
 msgid "Current Planet: None"
-msgstr ""
+msgstr "惑星無し"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "水星"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "金星"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "火星"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "木星"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:557
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "土星"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "天底通過の赤緯"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
 msgid "Custom Azimuth 1"
-msgstr ""
+msgstr "任意設定の高度1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:561
 msgid "Custom Azimuth 2"
-msgstr ""
+msgstr "任意設定の高度2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:563
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:566
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "線の名称を入力"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
 msgid "Solstice Lines"
-msgstr ""
+msgstr "至点の移動線"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
 msgid "Current Moon"
-msgstr ""
+msgstr "その時点での月"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "天頂通過する赤緯"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
 msgid "Crossquarter Lines"
@@ -17901,7 +17938,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
-msgstr ""
+msgstr "分点の移動線(天の赤道)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Major Lunar Standstill lines"
@@ -17909,4 +17946,4 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "任意設定の赤緯2"
