@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-14 22:50+0700\n"
+"POT-Creation-Date: 2018-03-15 01:05+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,9 +57,9 @@ msgstr ""
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:422 src/core/modules/SolarSystem.cpp:235
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/StelApp.cpp:564
-#: src/core/StelCore.cpp:255 src/core/StelSkyLayerMgr.cpp:89
-#: src/StelMainView.cpp:797
+#: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:79
+#: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:797
 msgid "Display Options"
 msgstr ""
 
@@ -2018,6 +2018,10 @@ msgstr ""
 
 #: src/core/modules/ToastMgr.cpp:60
 msgid "Digitized Sky Survey (TOAST)"
+msgstr ""
+
+#: src/core/modules/HipsMgr.cpp:79
+msgid "Digitized Sky Survey (experimental)"
 msgstr ""
 
 #: src/core/StelApp.cpp:564
