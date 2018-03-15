@@ -236,27 +236,22 @@ void HelpDialog::updateHelpText(void)
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{Frequently Asked Questions} about Stellarium.  Answers too.").toHtmlEscaped().replace(a_rx, "<a href=\"http://www.stellarium.org/wiki/index.php/FAQ\">\\1</a>");
+	htmlText += q_("{Frequently Asked Questions} about Stellarium.  Answers too.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/wiki/FAQ\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/\">\\1</a>");
+	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/wiki\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{Support ticket system} - if you need help using Stellarium, post a support request here and we'll try to help.").toHtmlEscaped().replace(a_rx, "<a href=\"http://answers.launchpad.net/stellarium/+addquestion\">\\1</a>");
+	htmlText += q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{Bug reporting and feature request system} - if something doesn't work properly or is missing and is not listed in the tracker, you can open bug reports here.").toHtmlEscaped().replace(a_rx, "<a href=\"http://bugs.launchpad.net/stellarium/\">\\1</a>");
-	htmlText += "</p>\n";
-
-	htmlText += "<p>";
-	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{Forums} - discuss Stellarium with other users.").toHtmlEscaped().replace(a_rx, "<a href=\"http://sourceforge.net/forum/forum.php?forum_id=278769\">\\1</a>");
+	htmlText += q_("{Google Groups} - discuss Stellarium with other users.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "</body></html>\n";
