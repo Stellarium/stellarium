@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-15 01:05+0700\n"
+"POT-Creation-Date: 2018-03-15 16:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3276,79 +3276,72 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:249
 msgid ""
-"{Support ticket system} - if you need help using Stellarium, post a support "
-"request here and we'll try to help."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:254
-msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
 "reports here."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:259
-msgid "{Forums} - discuss Stellarium with other users."
+#: src/gui/HelpDialog.cpp:254
+msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:312
 msgid "Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:313
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:321
-#: src/gui/HelpDialog.cpp:322 src/gui/HelpDialog.cpp:323
-#: src/gui/HelpDialog.cpp:324 src/gui/HelpDialog.cpp:330
-#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:332
-#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
-#: src/gui/HelpDialog.cpp:335 src/gui/HelpDialog.cpp:336
-#: src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
+#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:326 src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:328 src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
+#: src/gui/HelpDialog.cpp:332
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:320
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:327
+#: src/gui/HelpDialog.cpp:322
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:323
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:338 src/gui/HelpDialog.cpp:339
+#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:340
+#: src/gui/HelpDialog.cpp:335
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:431
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
@@ -3361,7 +3354,7 @@ msgstr ""
 msgid "Contributors"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:341
+#: src/gui/HelpDialog.cpp:336
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
