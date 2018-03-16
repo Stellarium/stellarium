@@ -618,12 +618,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 
 void LandscapeOldStyle::draw(StelCore* core)
 {
+	if (!validLandscape)
+		return;
+
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff));
 	painter.setBlending(true);
 	painter.setCullFace(true);
 
-	if (!validLandscape)
-		return;
 	if (drawGroundFirst)
 		drawGround(core, painter);
 	drawDecor(core, painter, false);
@@ -736,6 +737,8 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 
 float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 {
+	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
+
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(angleRotateZOffset));
 
@@ -878,6 +881,7 @@ void LandscapePolygonal::draw(StelCore* core)
 
 float LandscapePolygonal::getOpacity(Vec3d azalt) const
 {
+	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(angleRotateZOffset));
 
@@ -1000,6 +1004,8 @@ void LandscapeFisheye::draw(StelCore* core)
 
 float LandscapeFisheye::getOpacity(Vec3d azalt) const
 {
+	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
+
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(angleRotateZOffset));
 
@@ -1197,6 +1203,8 @@ void LandscapeSpherical::draw(StelCore* core)
 //! @retval alpha (0..1), where 0=fully transparent.
 float LandscapeSpherical::getOpacity(Vec3d azalt) const
 {
+	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
+
 	if (angleRotateZOffset!=0.0f)
 		azalt.transfo4d(Mat4d::zrotation(angleRotateZOffset));
 
