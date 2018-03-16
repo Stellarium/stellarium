@@ -80,6 +80,7 @@
 \newcommand{\DocumentEdition}{1}
 
 \begin{document}
+\frontmatter
 \VerbatimFootnotes % Allow \verb|whatever| in footnotes 
 
 %----------------------------------------------------------------------------------------
@@ -162,15 +163,14 @@ implying a violation of copyright law.}}\\
 \fi
 \cleardoublepage % Forces the first chapter to start on an odd page so it's on the right
 
+
+\mainmatter
 \pagestyle{fancy} % Print headers again
-
-
 %% There should be one source file per chapter. 
 %% Structural changes (chapter images etc.) should be in this main file to better have an overview.
 %----------------------------------------------------------------------------------------
 %	PART I
 %----------------------------------------------------------------------------------------
-
 \part{Basic Use}
 
 %----------------------------------------------------------------------------------------
@@ -329,6 +329,7 @@ implying a violation of copyright law.}}\\
 
 \include{app_acknowledgements}
 
+\backmatter
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY
 %----------------------------------------------------------------------------------------
