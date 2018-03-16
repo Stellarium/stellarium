@@ -452,31 +452,33 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 \file{my\_config.ini} in the current working directory.\\\midrule
 -\/-restore-defaults &  [none]    & Stellarium will start with the default configuration. 
                                     Note: The old configuration file will be overwritten. \\\midrule
--\/-user-dir         & path       & Specify the user data directory. \\\midrule
+-\/-user-dir         & path       & Specify the user data directory. \\
 -\/-screenshot-dir   & path       & Specify the directory to which screenshots will be saved. \\\midrule
 -\/-full-screen      & yes or no  & Over-rides the full screen setting in the config file. \\\midrule
--\/-home-planet      & planet     & Specify observer planet (English name). \\\midrule
+-\/-home-planet      & planet     & Specify observer planet (English name). \\
+-\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \\
+-\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \\
 -\/-altitude         & altitude   & Specify observer altitude in meters. \\\midrule
--\/-longitude        & longitude  & Specify latitude, e.g. +53d58'16.65" \\\midrule
--\/-latitude         & latitude   & Specify longitude, e.g. -1d4'27.48" \\\midrule
--\/-list-landscapes  & {[}none{]} & Print a list of available landscape IDs and exit. \\\midrule
+-\/-list-landscapes  & {[}none{]} & Print a list of available landscape IDs and exit. \\
 -\/-landscape        & landscape ID & Start using landscape whose ID matches the passed parameter (dir name of landscape). \\\midrule
--\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\\midrule
+-\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\
 -\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
--\/-startup-script   & script name & The name of a script to run after the program has started. \\\midrule
+-\/-startup-script   & script name & The name of a script to run after the program has started. [\file{startup.ssc}] \\\midrule
 -\/-fov              & angle      & The initial field of view in degrees. \\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
-                                    \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\\midrule
+                                    \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\
 -\/-spout-name       & name       & Use \texttt{name} as name of the Spout sender. Default name: \texttt{Stellarium}.\footnotemark[1]\\\midrule									
+-\/-verbose          &            & Even more diagnostic output in logfile (esp.\ multimedia handling)\\
 -\/-dump-opengl-details or -d     & {[}none{]} & Dump information about OpenGL support to logfile. 
                                                  Use this is you have graphics problems and want to send a bug report. \\\midrule
--\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\\\midrule
--\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
--\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
--\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\\midrule
--\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\\midrule
--\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\\midrule
+-\/-angle-mode or -a & {[}none{]} & Use ANGLE as OpenGL ES2 rendering engine (autodetect Direct3D version).\footnotemark[1]\\
+-\/-angle-d3d9 or -9 & {[}none{]} & Force use Direct3D 9 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
+-\/-angle-d3d11      & {[}none{]} & Force use Direct3D 11 for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
+-\/-angle-warp       & {[}none{]} & Force use the Direct3D 11 software rasterizer for ANGLE OpenGL ES2 rendering engine.\footnotemark[1]\\
+-\/-mesa-mode or -m  & {[}none{]} & Use MESA as software OpenGL rendering engine.\footnotemark[1]\\
+-\/-safe-mode or -s  & {[}none{]} & Synonymous to -\/-mesa-mode.\footnotemark[1]\\
+-\/-compat33 or -C   & {[}none{]} & Request OpenGL 3.3 Compatibility Profile. May help for certain driver configurations. Mac?\\
 -\/-fix-text or -t   & {[}none{]} & Alternative way of creating the Info text, required on some systems.\footnote{E.g., Raspberry Pi 2/3 with Raspbian Jessie and VC4 drivers from Mesa 11 (2016).}\\\bottomrule
 \end{longtable}
 
