@@ -114,6 +114,9 @@ void RemoteControlDialog::setAboutHtml(void)
 	html += "<p>" + q_("The Remote Control plugin provides a web interface to allow state changes and triggering scripts using a connected webbrowser.") + "</p>";
 	// TODO Add longer instructions?
 
+	// Regexp to replace {text} with an HTML link.
+	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+
 	html += "<p>" + q_("It is also possible to send commands via command line, e.g..");
 	html += "<pre>\n"
 		"wget -q --post-data 'id=myScript.ssc' http://localhost:8090/api/scripts/run >/dev/null 2>&amp;1\n"
@@ -122,18 +125,20 @@ void RemoteControlDialog::setAboutHtml(void)
 		"</pre>";
 	html += q_("This allows triggering automatic show setups for museums etc.") + "</p>";
 	html += "<p>" + q_("This plugin was developed during ESA SoCiS 2015.") + "</p>";
-	html += "<p>" + q_("This plugin uses the %1QtWebApp HTTP server%2 by Stefan Frings.").arg("<a href=\"http://stefanfrings.de/qtwebapp/index-en.html\">").arg("</a>") + "</p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<p>" + q_("This plugin uses the {QtWebApp HTTP server} by Stefan Frings.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stefanfrings.de/qtwebapp/index-en.html\">\\1</a>") + "</p>";
 
 	html += "<h3>" + q_("Links") + "</h3>";
-	html += "<p>" + QString(q_("Further information can be found in the %1developer documentation%2.")).arg("<a href=\"http://stellarium.org/doc-plugins/head/\">").arg("</a>") + "</p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<p>" + q_("Further information can be found in the {developer documentation}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.org/doc/head/\">\\1</a>") + "</p>";
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Remote Control plugin") + "</p>";
 	html += "<p><ul>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://groups.google.com/forum/#!forum/stellarium\">")).arg("</a>") + "</li>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + QString(q_("Bug reports and feature requests can be made %1here%2.")).arg("<a href=\"https://github.com/Stellarium/stellarium/issues\">").arg("</a>") + "</li>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can %1get info here%2.").arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/RemoteControl_plugin\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<li>" + q_("If you have a question, you can {get an answer here}").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	html += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/RemoteControl_plugin\">\\1</a>") + "</li>";
 	html += "</ul></p></body></html>";
 
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
