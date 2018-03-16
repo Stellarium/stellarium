@@ -137,7 +137,7 @@ void PointerCoordinatesWindow::setAboutHtml(void)
 	html += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Pointer Coordinates plugin") + "</p>";
 	html += "<p><ul>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	html += "<li>" + q_("If you have a question, you can {get an answer here}").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
+	html += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	html += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
