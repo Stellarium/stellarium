@@ -493,6 +493,18 @@ static QString getHipsType(const HipsSurveyP hips)
 	if (properties["type"].toString() == "planet") // || properties["client_category"].toString().contains("solar system", Qt::CaseInsensitive))
 		return "sol";
 	return "other";
+	/*
+	// Let's use decide in which group to put a survey as in official HiPS list aggregator
+	// http://aladin.u-strasbg.fr/hips/list
+	DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS	frames for DSS surveys
+	QJsonObject properties = hips->property("properties").toJsonObject();
+	if (DSSSurveys.contains(properties["hips_frame"].toString(), Qt::CaseInsensitive))
+		return "dss";
+	else if (!DSSSurveys.contains(properties["hips_frame"].toString(), Qt::CaseInsensitive) && properties["client_category"].toString().contains("Solar system", Qt::CaseInsensitive))
+		return "sol";
+	else
+		return "other";
+	*/
 }
 
 void ViewDialog::updateHips()
