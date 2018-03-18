@@ -835,14 +835,15 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 }
 
 // Define whether the button toggling DSS images should be visible
+// TODO: This is now Hips. Decide what to do with TOAST/DSS-only, and rename methods accordingly.
 void StelGui::setFlagShowDSSButton(bool b)
 {
 	if (b==true) {
 		if (btShowDSS==Q_NULLPTR) {
 			// Create the nebulae background button
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
-			QPixmap pxmapOff(":/graphicGui/btToastSurvey-off.png");
+			QPixmap pxmapOn(":/graphicGui/btSurveys-on.png");
+			QPixmap pxmapOff(":/graphicGui/btSurveys-off.png");
 			btShowDSS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys");
 		}
 		getButtonBar()->addButton(btShowDSS, "040-nebulaeGroup");
