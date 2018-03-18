@@ -111,6 +111,16 @@ bool HipsSurvey::isVisible() const
 	return (bool)fader;
 }
 
+bool HipsSurvey::isPlanetarySurvey() const
+{
+	QStringList DSSSurveys;
+	DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS	frames for DSS surveys
+	if (DSSSurveys.contains(hipsFrame, Qt::CaseInsensitive))
+		return false;
+	else
+		return true;
+}
+
 void HipsSurvey::setVisible(bool value)
 {
 	if (value == isVisible()) return;

@@ -495,7 +495,8 @@ static QString getHipsType(const HipsSurveyP hips)
 	return "other";
 	/*
 	// Let's use decide in which group to put a survey as in official HiPS list aggregator
-	// http://aladin.u-strasbg.fr/hips/list
+	// http://aladin.u-strasbg.fr/hips/list#hipsplanet
+	QStringList DSSSurveys;
 	DSSSurveys << "equatorial" << "galactic" << "ecliptic"; // HiPS	frames for DSS surveys
 	QJsonObject properties = hips->property("properties").toJsonObject();
 	if (DSSSurveys.contains(properties["hips_frame"].toString(), Qt::CaseInsensitive))

@@ -88,6 +88,8 @@ public:
 	//! Get whether the survey is still loading.
 	bool isLoading(void) const;
 
+	bool isPlanetarySurvey(void) const;
+
 	//! Parse a hipslist file into a list of surveys.
 	static QList<HipsSurveyP> parseHipslist(const QString& data);
 
