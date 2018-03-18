@@ -552,9 +552,9 @@ void StelGui::update()
 	if (getAction("actionShow_DSO_Textures")->isChecked() != flag)
 		getAction("actionShow_DSO_Textures")->setChecked(flag);
 
-	flag = propMgr->getProperty("HipsMgr.showDSS")->getValue().toBool();
-	if (getAction("actionShow_DSS")->isChecked() != flag)
-		getAction("actionShow_DSS")->setChecked(flag);
+	flag = propMgr->getProperty("HipsMgr.flagShow")->getValue().toBool();
+	if (getAction("actionShow_Hips_Surveys")->isChecked() != flag)
+		getAction("actionShow_Hips_Surveys")->setChecked(flag);
 
 	flag = propMgr->getProperty("GridLinesMgr.equatorJ2000GridDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
@@ -843,11 +843,11 @@ void StelGui::setFlagShowDSSButton(bool b)
 			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 			QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
 			QPixmap pxmapOff(":/graphicGui/btToastSurvey-off.png");
-			btShowDSS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSS");
+			btShowDSS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys");
 		}
 		getButtonBar()->addButton(btShowDSS, "040-nebulaeGroup");
 	} else {
-		getButtonBar()->hideButton("actionShow_DSS");
+		getButtonBar()->hideButton("actionShow_Hips_Surveys");
 	}
 	flagShowDSSButton = b;	
 }

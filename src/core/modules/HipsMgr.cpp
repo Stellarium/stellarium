@@ -76,7 +76,7 @@ void HipsMgr::init()
 	}
 	conf->endGroup();
 
-	addAction("actionShow_DSS", N_("Display Options"), N_("Digitized Sky Survey (experimental)"), "showDSS", "Ctrl+Alt+D");
+	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hips Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
 }
 
 void HipsMgr::deinit()
@@ -85,6 +85,7 @@ void HipsMgr::deinit()
 
 void HipsMgr::draw(StelCore* core)
 {
+	if (!visible) return;
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	for (auto survey: surveys)
 	{
@@ -119,21 +120,16 @@ HipsSurveyP HipsMgr::getSurveyByUrl(const QString &url)
 	return HipsSurveyP(NULL);
 }
 
-bool HipsMgr::getShowDSS() const
+bool HipsMgr::getFlagShow(void) const
 {
-	for (auto survey: surveys)
-	{
-		if (survey->isVisible() && survey->getUrl().endsWith("DSSColor"))
-			return true;
-	}
-	return false;
+	return visible;
 }
 
-void HipsMgr::setShowDSS(bool value)
+void HipsMgr::setFlagShow(bool b)
 {
-	for (auto survey: surveys)
+	if (visible != b)
 	{
-		survey->setVisible(value && survey->getUrl().endsWith("DSSColor"));
+		visible = b;
+		emit showChanged(b);
 	}
-	emit showDSSChanged();
 }
