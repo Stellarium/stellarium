@@ -76,7 +76,7 @@ void HipsMgr::init()
 	}
 	conf->endGroup();
 
-	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hips Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
+	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
 }
 
 void HipsMgr::deinit()
