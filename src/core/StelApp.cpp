@@ -452,9 +452,9 @@ void StelApp::init(QSettings* conf)
 	localeMgr->init();
 
 	// Hips surveys
-	HipsMgr* hips = new HipsMgr();
-	hips->init();
-	getModuleMgr().registerModule(hips);
+	HipsMgr* hipsMgr = new HipsMgr();
+	hipsMgr->init();
+	getModuleMgr().registerModule(hipsMgr);
 
 	// Init the solar system first
 	SolarSystem* ssystem = new SolarSystem();

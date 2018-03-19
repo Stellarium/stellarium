@@ -32,16 +32,35 @@
 HipsMgr::HipsMgr()
 {
 	setObjectName("HipsMgr");
+	connect(this, SIGNAL(surveysChanged()), this, SLOT(restoreVisibleSurveys()));
 }
 
 HipsMgr::~HipsMgr()
 {
+	//store active HIPS to config.ini
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("hips");
+	conf->setValue("show", getFlagShow());
+	conf->beginGroup("visible");
+	if (surveys.count()>0)
+		conf->remove(""); // Don't clear list in case of just a short offline period.
+	for (auto survey: surveys)
+	{
+		if (survey->isVisible() && survey->planet.isEmpty())
+		{
+			conf->setValue(survey->getUrl(), "true");
+		}
+	}
+	conf->endGroup();
+	conf->endGroup();
+	conf->sync();
 }
 
 void HipsMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
+	setFlagShow(conf->value("show", true).toBool());
 
 	// Start to load survey lists
 	QStringList sources;
@@ -74,9 +93,39 @@ void HipsMgr::init()
 			emit surveysChanged();
 		});
 	}
+
 	conf->endGroup();
 
 	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
+}
+
+
+void HipsMgr::restoreVisibleSurveys()
+{
+	//qDebug() << "HipsMgr::restoreVisibleSurveys()";
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("hips");
+
+//	// restore visible state of last run, if possible
+//	for (auto survey: surveys)
+//	{
+//		qDebug() << "Known Survey: " << survey->getUrl();
+//	}
+	conf->beginGroup("visible");
+	for (QString key : conf->allKeys())
+	{
+		if (conf->value(key).toBool()==true)
+		{
+			// We have to restore one slash after colon.
+			QString realURL=key.replace(":/", "://");
+			qDebug() << "HIPS: Restore visible survey:" << realURL;
+			HipsSurveyP survey=getSurveyByUrl(realURL);
+			if (survey)
+				survey->setVisible(true);
+		}
+	}
+	conf->endGroup();
+	conf->endGroup();
 }
 
 void HipsMgr::deinit()

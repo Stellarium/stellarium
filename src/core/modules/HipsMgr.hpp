@@ -57,6 +57,10 @@ signals:
 	//! Emitted when a new survey has been loaded.
 	void gotNewSurvey(HipsSurveyP survey) const;
 
+private slots:
+	// after loading survey list from network, restore the visible surveys from config.ini.
+	void restoreVisibleSurveys();
+
 private:
 	QList<HipsSurveyP> surveys;
 	bool visible = true;
