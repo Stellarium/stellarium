@@ -581,20 +581,20 @@ for description of the surveys format).  Currently, only HiPS surveys are
 supported.
 
 On the left side of the window we see the list of available surveys from
-the configured sources (See section \ref{sec:configini:hips} for how to
+the configured sources (See section \ref{sec:config.ini:hips} for how to
 change the default sources).  On the right side a description of the selected
 survey and its properties are displayed.
 
-Surveys are grouped by types. The top combobox allow to filter the listed
-survey according to a given type (Deep sky or Solar system).
+Surveys are grouped by types. The top combobox allows to filter the listed
+surveys according to a given type (Deep Sky or Solar System).
 
 You can toggle the visibility of a survey by checking the box on the left
 of the survey name in the list.  (Note that as of v0.18.0, only a single deep
-key survey can be rendered at once, so make sure that you only select one in
+sky survey can be rendered at a time, so it makes no sense to select more than one in
 the list!) Once a survey is visible you should be able to see its loading
 status in the loading bar area of the sky view.
 
-Deep sky surveys will be rendered on top of the sky view, while solar system
+Deep sky surveys will be rendered aligned with the sky view, while solar system
 surveys automatically map on the proper body.
 
 
@@ -671,14 +671,14 @@ selected from the scroll window.
 \section{The Astronomical Calculations Window}
 \label{sec:gui:AstroCalc}
 
-\newFeature{v0.15.0} This window provides advanced functionality, some of which is still in an experimental phase. 
+This window \newFeature{v0.15.0} provides advanced functionality, some of which is still in an experimental phase. 
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
 The Astronomical Calculations window shows six tabs with different functionality.
 
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
-\newFeature{v0.16.0} This tab shows J2000.0 or horizontal positions, magnitudes and additional parameters 
+This tab \newFeature{v0.16.0} shows J2000.0 or horizontal positions, magnitudes and additional parameters 
 (e.g.\ surface brightness for deep-sky objects or angular separation for double stars) for various 
 lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
 Double-clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}). 
