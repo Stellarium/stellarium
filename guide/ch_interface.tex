@@ -564,6 +564,39 @@ Western and Inuit), and the rest do not. Configurable options include
 \item[Show asterism labels] Activate display of asterism labels, like \keys{Alt+V}.\newFeature{v0.16.0}
 \end{description}
 
+\subsection{The Surveys Tab}
+\label{sec:gui:view:surveys}
+
+\newFeature{v0.18.0}
+
+\begin{figure}[t]
+\centering\includegraphics[width=\textwidth]{view_dialog_surveys_tab.png}
+\caption{View Settings Window: Surveys Tab}
+\label{fig:gui:view:surveys}
+\end{figure}
+
+The Surveys tab (Fig.~\ref{fig:gui:view:surveys}) allows to toggle the
+visibility of online sky or solar system surveys (see chapter~\ref{ch:surveys}
+for description of the surveys format).  Currently, only HiPS surveys are
+supported.
+
+On the left side of the window we see the list of available surveys from
+the configured sources (See section \ref{sec:configini:hips} for how to
+change the default sources).  On the right side a description of the selected
+survey and its properties are displayed.
+
+Surveys are grouped by types. The top combobox allow to filter the listed
+survey according to a given type (Deep sky or Solar system).
+
+You can toggle the visibility of a survey by checking the box on the left
+of the survey name in the list.  (Note that as of v0.18.0, only a single deep
+key survey can be rendered at once, so make sure that you only select one in
+the list!) Once a survey is visible you should be able to see its loading
+status in the loading bar area of the sky view.
+
+Deep sky surveys will be rendered on top of the sky view, while solar system
+surveys automatically map on the proper body.
+
 
 \section{The Object Search Window}
 \label{sec:gui:search}

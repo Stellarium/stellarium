@@ -842,6 +842,20 @@ AstroCalc     & int,int     &  913,493      & Size of AstroCalc panel\\\bottomru
 \end{tabularx}
 
 
+\subsection{\big[hips\big]}
+%\label{sec:config.ini:hips}
+
+This section define the source list of the HiPS surveys, as well as other
+HiPS related options.
+\newFeature{0.18.0}
+
+\noindent%
+\begin{tabularx}{\textwidth}{l|l|X}\toprule
+\toprule
+\emph{ID}     & \emph{Type} & \emph{Description}\\\midrule
+sources/size  & int         & Number of HiPS survey sources\\%\midrule
+sources/n/url & string      & uri of the nth source hipslist file (n from 1 to sources/size)\\\bottomrule
+\end{tabularx}
 
 
 %%% Local Variables: 
