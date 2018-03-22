@@ -1297,7 +1297,7 @@ void StelMainView::drawEnded()
 	{
 		updateQueued = true;
 		minFpsTimer->stop();
-		glWidget->update();
+		QTimer::singleShot(0, glWidget, SLOT(update()));
 	}
 	else
 	{
@@ -1328,7 +1328,7 @@ void StelMainView::minFPSUpdate()
 	{
 		updateQueued = true;
 		//qDebug()<<"minFPSUpdate";
-		glWidget->update();
+		QTimer::singleShot(0, glWidget, SLOT(update()));
 	}
 	else
 	{
