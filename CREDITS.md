@@ -274,51 +274,34 @@
 	    http://astrogeology.usgs.gov (Public Domain, DFSG-free) and by Lunar
 	    surface textures from Celestia, based on Clementine data (Public
 	    Domain).
-	4.5a Saturn map and ring textures created by Björn Jónsson:
-	     "All the planetary maps available on these pages are publicly
-	     available. You do not need a special permission to use them but if
-	     you do then please mention their origin in your work [..]"
-	4.5b Jupiter map created by James Hastings-Trew from Cassini data. "The 
+	4.5a Jupiter map created by James Hastings-Trew from Cassini data. "The 
 	     maps are free to download and use as source material or resource
 	     in artwork or rendering (CGI or real time)."
-	4.5c The Venus, Amalthea, Proteus, Iapetus and Phoebe maps and rings of
-	     Uranus and Neptune are from Celestia (http://shatters.net/celestia/)
+	4.5b The Venus, Proteus and Iapetus maps and rings of Uranus 
+	     are from Celestia (http://shatters.net/celestia/)
 	     under the GNU General Purpose License, version 2 or any later
 	     version:
 	     - Venus is from Björn Jónsson and modified by RVS.
-	     - Amalthea is a shaded relief map by Phil Stooke, colored by
-	       Wm. Robert Johnston. 
-	       (http://www.johnstonsarchive.net/spaceart/cylmaps.html),
-	       and further modified by Jens Meyer and Grant Hutchison.
 	     - The Proteus map is from Phil Stooke.
 	     - Triton is probably from David Seal's site (see below),
 	       modified by Chris Laurel and Grant Hutchison.
-	     - Iapetus and Phoebe maps are from dr. Fridger Schrempp (t00fri).
-	4.5d Mercury map is produced by NASA from Messenger data
-	     (https://astrogeology.usgs.gov/search/map/Mercury/Messenger/Global/Mercury_MESSENGER_MDIS_Basemap_BDR_Mosaic_Global_166m) 
-	     and modified and colored by RVS. License: public domain.
-	4.5e Europa, Io and Callisto maps are created by John van Vliet from PDS
+	     - Iapetus map is from dr. Fridger Schrempp (t00fri).
+	4.5c The Amalthea, Ariel, Charon, Europa, Ganymede, Gaspra, Haumea, 
+	    Hyperion, Ida, Io, Janus, Mercury, Neptune, Oberon, Phoebe, Pluto, 
+	    Saturn, Sedna, Tethys, Umbriel, Vesta maps are processed by 
+	    Oleg Pluton a.k.a Helleformer
+	    License: Creative Commons Attribution 4.0 International
+	4.5d Callisto map is created by John van Vliet from PDS
 	     data and modified by RVS. License: cc-by-sa.
-	4.5f Ganymede map is from USGS and modified by RVS. Public domain.
-	4.5g Tethys, Dione, Rhea, Enceladus and Mimas maps are created by NASA
+	4.5e Dione, Rhea, Enceladus and Mimas maps are created by NASA
 	     (CICLOPS team) from Cassini data, colored by RVS. Public domain.
-	4.5h Hyperion map created by John van Vliet from PDS data, modified by
-	     RVS. License: cc-by-sa.
-	4.5i Triton: Image selection, radiometric calibration, geographic
+	4.5f Triton: Image selection, radiometric calibration, geographic
 	     registration and photometric correction, and final mosaic assembly 
 	     were performed by Dr. Paul Schenk at the Lunar and Planetary 
 	     Institute, Houston, Texas. Image data from Voyager 2 (NASA, JPL).
 	     Original texture has "white spots", which was filled by
 	     Dizel777 (http://spaceengine.org/forum/19-563-25069-16-1409101585).
-	4.4j Pluto map is produced by NASA from New Horizons data and colored by
-	     RVS. (Courtesy NASA/Johns Hopkins University Applied Physics
-	     Laboratory/Southwest Research Institute)
-	     http://photojournal.jpl.nasa.gov/catalog/PIA19858
-	4.4k Charon map is produced by NASA from New Horizons data and colored
-	     by RVS. (Courtesy NASA/Johns Hopkins University Applied Physics
-	     Laboratory/Southwest Research Institute)
-	     http://photojournal.jpl.nasa.gov/catalog/PIA19866)
-	4.5l All other planet maps from David Seal's site:
+	4.5g All other planet maps from David Seal's site:
 	     http://maps.jpl.nasa.gov/   see license in section 10.2
 	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 	    University of Potsdam, Germany. Further information and more
