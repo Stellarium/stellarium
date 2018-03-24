@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 23:24+0700\n"
+"POT-Creation-Date: 2018-03-18 23:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Matheus Machado <correioimperial@mail.com>, 2018\n"
+"Last-Translator: Franklin Leite <franklin.leite@gmail.com>, 2018\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/stellarium/teams/80998/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -816,7 +816,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
 msgid "Chain of craters."
-msgstr ""
+msgstr "Cadeia de crateras"
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:487
@@ -862,7 +862,7 @@ msgstr "Centro vulcanico ativo"
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
 msgid "Bright spot."
-msgstr ""
+msgstr "Ponto brilhante. "
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:523
@@ -905,7 +905,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "Deslizamento. "
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
@@ -1029,7 +1029,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:659
 msgid "Fissure."
-msgstr ""
+msgstr "Fenda. "
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:663
@@ -1086,17 +1086,17 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
 msgid "Dunes."
-msgstr ""
+msgstr "Dunas. "
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
 msgid "Valley."
-msgstr ""
+msgstr "Vale. "
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:715
 msgid "Extensive plain."
-msgstr ""
+msgstr "Planície extensa"
 
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:719
@@ -1145,7 +1145,7 @@ msgstr ""
 
 #: src/core/modules/NomenclatureMgr.cpp:75
 msgid "Nomenclature labels"
-msgstr ""
+msgstr "Rótulos de nomenclatura"
 
 #: src/core/modules/Nebula.cpp:236 src/core/modules/Nebula.cpp:246
 #: src/core/modules/Planet.cpp:430 src/core/modules/MinorPlanet.cpp:244
@@ -1615,11 +1615,11 @@ msgstr "remanescente de supernova"
 
 #: src/core/modules/Nebula.cpp:1527
 msgid "supernova candidate"
-msgstr ""
+msgstr "Candidato a supernova"
 
 #: src/core/modules/Nebula.cpp:1530
 msgid "supernova remnant candidate"
-msgstr ""
+msgstr "Candidato a remanescente de supernova"
 
 #: src/core/modules/Nebula.cpp:1533
 msgid "stellar association"
@@ -1682,7 +1682,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1575
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "aglomerado de galáxias"
 
 #: src/core/modules/Nebula.cpp:1578
 msgid "object of unknown nature"
@@ -1747,7 +1747,7 @@ msgstr "Km/s"
 
 #: src/core/modules/Planet.cpp:512 src/core/modules/MinorPlanet.cpp:318
 msgid "Orbital Velocity"
-msgstr ""
+msgstr "Velocidade Orbital"
 
 #: src/core/modules/Planet.cpp:515 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric Velocity"
@@ -2037,7 +2037,7 @@ msgid "Digitized Sky Survey (TOAST)"
 msgstr ""
 
 #: src/core/modules/HipsMgr.cpp:79
-msgid "Digitized Sky Survey (experimental)"
+msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
 #: src/core/StelApp.cpp:564
@@ -3699,7 +3699,7 @@ msgstr "Quadros por segundo"
 
 #: src/gui/ViewDialog.cpp:509
 msgid "Deep Sky"
-msgstr ""
+msgstr "Céu profundo "
 
 #: src/gui/ViewDialog.cpp:510
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
@@ -3708,7 +3708,7 @@ msgstr "Sistema solar"
 
 #: src/gui/ViewDialog.cpp:562
 msgid "properties"
-msgstr ""
+msgstr "propriedades"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1426
@@ -4403,7 +4403,7 @@ msgstr "Nebulosas protoplanetárias"
 #: src/gui/AstroCalcDialog.cpp:3535 src/translations.h:373
 #: src/ui_dsoColorsDialog.h:621
 msgid "Symbiotic stars"
-msgstr ""
+msgstr "Estrelas simbólicas"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:470 src/gui/AstroCalcDialog.cpp:1638
@@ -4416,20 +4416,20 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:471 src/gui/AstroCalcDialog.cpp:3537
 #: src/translations.h:351 src/ui_dsoColorsDialog.h:686
 msgid "Supernova candidates"
-msgstr ""
+msgstr "Candidatos a supernova "
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:472 src/gui/AstroCalcDialog.cpp:3538
 #: src/translations.h:353 src/ui_dsoColorsDialog.h:690
 msgid "Supernova remnant candidates"
-msgstr ""
+msgstr "Candidatos a remanescente de supernova"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:473 src/gui/AstroCalcDialog.cpp:3540
 #: src/translations.h:377 src/ui_viewDialog.h:2725
 #: src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
-msgstr ""
+msgstr "Aglomerado de galáxias "
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:475 src/translations.h:379
@@ -4529,7 +4529,7 @@ msgstr ""
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:513 src/translations.h:413
 msgid "A catalogue of Galactic supernova remnants"
-msgstr ""
+msgstr "Um catálogo de remanescentes galácticas de supernova "
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:515 src/translations.h:415
@@ -4979,7 +4979,7 @@ msgstr "Arquivo de texto"
 
 #: src/gui/AstroCalcDialog.cpp:4032
 msgid "Save list of objects as..."
-msgstr ""
+msgstr "Salvar lista de objetos como"
 
 #: src/gui/AstroCalcDialog.cpp:4155
 msgid "spin-orbit resonance"
@@ -5510,7 +5510,7 @@ msgstr ""
 #. the search tool)
 #: src/translations.h:232
 msgid "Named geological features of Venus"
-msgstr ""
+msgstr "Características geológicas nomeadas de Vênus"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -5606,7 +5606,7 @@ msgstr ""
 #. the search tool)
 #: src/translations.h:264
 msgid "Named geological features of Phoebe"
-msgstr ""
+msgstr "Características geológicas nomeadas de Febo"
 
 #. TRANSLATORS: List of geological features by celestial body (for "Lists" in
 #. the search tool)
@@ -8461,7 +8461,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2707
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr ""
+msgstr "Um catálogo de remanescentes galácticas de supernova (Green, 2014)"
 
 #: src/ui_viewDialog.h:2710
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
@@ -10164,7 +10164,7 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:589
 msgid "Color of markers of supernova remnants"
-msgstr ""
+msgstr "Cor dos marcadores de remanescentes de supernova"
 
 #: src/ui_dsoColorsDialog.h:591
 msgid "Possible quasars"
@@ -10289,11 +10289,11 @@ msgstr ""
 
 #: src/ui_dsoColorsDialog.h:688
 msgid "Color of markers of supernova candidates"
-msgstr ""
+msgstr "Cor dos marcadores de candidatos a supernova"
 
 #: src/ui_dsoColorsDialog.h:692
 msgid "Color of markers of supernova remnant candidates"
-msgstr ""
+msgstr "Cor dos marcadores de candidatos a remanescente de supernova"
 
 #: src/ui_dsoColorsDialog.h:696
 msgid "Color of markers for clusters of galaxies"
@@ -14233,7 +14233,7 @@ msgstr "supernova"
 
 #: plugins/Supernovae/src/Supernova.cpp:149
 msgid "Type of supernova"
-msgstr ""
+msgstr "Tipo de supernova "
 
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:163
 msgid "Maximum brightness"

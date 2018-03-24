@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 23:24+0700\n"
+"POT-Creation-Date: 2018-03-18 23:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Latein Lebt, 2018\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -2052,8 +2052,8 @@ msgid "Digitized Sky Survey (TOAST)"
 msgstr "Digitized Sky Survey (TOAST)"
 
 #: src/core/modules/HipsMgr.cpp:79
-msgid "Digitized Sky Survey (experimental)"
-msgstr "Digitized Sky Survey (experimentell)"
+msgid "Toggle Hierarchical Progressive Surveys (experimental)"
+msgstr "Schalte Hierarchical Progressive Surveys (experimentell)"
 
 #: src/core/StelApp.cpp:564
 msgid "Night mode"
@@ -3467,7 +3467,7 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:254
 msgid "{Google Groups} - discuss Stellarium with other users."
-msgstr ""
+msgstr "{Google Groups} - diskutiere über Stellarium mit anderen Anwendern."
 
 #: src/gui/HelpDialog.cpp:312
 msgid "Developers"
@@ -10651,7 +10651,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "If you have a question, you can {get an answer here}."
-msgstr ""
+msgstr "Wenn Sie Fragen haben, können Sie {hier eine Antwort erhalten}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
@@ -10673,6 +10673,7 @@ msgstr ""
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:284
 msgid "Bug reports and feature requests can be made {here}."
 msgstr ""
+"Fehlerberichte und Verbesserungwünsche können {hier} eingebracht werden."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:113
@@ -10696,6 +10697,8 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can {get info here}."
 msgstr ""
+"Vollständige Information über dieses Plugin und seine Entwicklung gibt es "
+"{hier}."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -15134,12 +15137,12 @@ msgstr "Dieses Plugin wurde im Rahmen des Programms ESA SoCiS2015 entwickelt."
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
-msgstr ""
+msgstr "Das Plugin nutzt den {QtWebApp HTTP Server} von Stefan Frings."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Further information can be found in the {developer documentation}."
-msgstr ""
+msgstr "Weitere Information gibt es in der {developer documentation}."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 #, qt-format

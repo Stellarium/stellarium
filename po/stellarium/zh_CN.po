@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 23:24+0700\n"
+"POT-Creation-Date: 2018-03-18 23:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Haomin Jin <986394140@qq.com>, 2017\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -2035,8 +2035,8 @@ msgid "Digitized Sky Survey (TOAST)"
 msgstr "数字巡天 (TOAST)"
 
 #: src/core/modules/HipsMgr.cpp:79
-msgid "Digitized Sky Survey (experimental)"
-msgstr "数字巡天(实验性的)"
+msgid "Toggle Hierarchical Progressive Surveys (experimental)"
+msgstr "分层递进巡天 (实验性的)"
 
 #: src/core/StelApp.cpp:564
 msgid "Night mode"
@@ -10388,7 +10388,7 @@ msgstr "通过Github网站提供支持。 发帖时务必在标题中加入“�
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "If you have a question, you can {get an answer here}."
-msgstr ""
+msgstr "如果你有问题，你可以 {在这里提出}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
@@ -10409,7 +10409,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:284
 msgid "Bug reports and feature requests can be made {here}."
-msgstr ""
+msgstr "在{这里}提出功能请求和bug报告。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:113
@@ -10432,7 +10432,7 @@ msgstr ""
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can {get info here}."
-msgstr ""
+msgstr "如果你想了解这个插件的全部信息和历史版本, 你可以 {点击这里}。"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -14533,12 +14533,12 @@ msgstr "插件开发于ESA SoCiS 2015。"
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
-msgstr ""
+msgstr "这个插件使用来自 Stefan Frings的 {QtWebApp HTTP server}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Further information can be found in the {developer documentation}."
-msgstr ""
+msgstr "进一步的信息请{查阅开发文档}。"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 #, qt-format

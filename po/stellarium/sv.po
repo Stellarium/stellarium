@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 23:24+0700\n"
+"POT-Creation-Date: 2018-03-18 23:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Karl B <birgerssonkarl@outlook.com>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -387,7 +387,7 @@ msgstr "Landskapsetiketter"
 
 #: src/core/modules/LandscapeMgr.cpp:477 src/ui_viewDialog.h:2560
 msgid "Light pollution data from locations database"
-msgstr "Ljusföroreningsdata från position-databasen."
+msgstr "Ljusföroreningsdata från platsdatabasen"
 
 #: src/core/modules/LandscapeMgr.cpp:879 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
@@ -2046,7 +2046,7 @@ msgid "Digitized Sky Survey (TOAST)"
 msgstr ""
 
 #: src/core/modules/HipsMgr.cpp:79
-msgid "Digitized Sky Survey (experimental)"
+msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
 #: src/core/StelApp.cpp:564
@@ -9820,7 +9820,7 @@ msgstr "Fenomen"
 
 #: src/ui_astroCalcDialog.h:1013
 msgid "Alt. vs. Time"
-msgstr "H / T"
+msgstr "H/T"
 
 #: src/ui_astroCalcDialog.h:1015
 msgid "Altitude vs. Time"
@@ -12529,7 +12529,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:150
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:151
 msgid "Min"
@@ -14223,7 +14223,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/Supernova.cpp:150 plugins/Novae/src/Nova.cpp:163
 msgid "Maximum brightness"
-msgstr ""
+msgstr "Maximal ljusstyrka"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 msgid "Historical Supernovae Plug-in"
@@ -14665,7 +14665,7 @@ msgstr "Excentricitet"
 
 #: plugins/Pulsars/src/Pulsar.cpp:242
 msgid "Annual parallax"
-msgstr ""
+msgstr "Årlig parallax"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
 #: plugins/Pulsars/src/Pulsar.cpp:245
@@ -15296,7 +15296,7 @@ msgstr "Jämviktstemperatur"
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Flux"
-msgstr ""
+msgstr "Flöde"
 
 #. TRANSLATORS: ESI = Earth Similarity Index
 #: plugins/Exoplanets/src/Exoplanet.cpp:366
@@ -15395,12 +15395,17 @@ msgid ""
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr ""
+"Den faktiska yttemperaturen förväntas vara högre än jämviktstemperaturen, "
+"beroende på planetens atmosfär, som för närvarande är okänd (t.ex. jordens "
+"globala medeltemperatur är ungefär 288 K eller 15 °C)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
 msgstr ""
+"Genomsnittligt stellärt flöde för planet i jordiskt flöde (jorden = 1.0 "
+"S<sub>E</sub>)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid "Earth Similarity Index (ESI)"
@@ -15460,6 +15465,8 @@ msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
+"Orbitar är ett påhittat ord, för att hylla NASA:s uppskjutnings- och "
+"banoperationer."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
@@ -15512,6 +15519,10 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
+"Tycho Brahe (1546-1601) var en dansk astronom och adelsman som nedtecknade "
+"exakta astronomiska observationer av stjärnor och planeter. Dessa "
+"observationer var viktiga för Keplers formulering av sina tre lagar om "
+"planeternas rörelser."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
@@ -15870,19 +15881,19 @@ msgstr "Exoplaneter uppdaterade"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:538
 msgid "Orbital Eccentricity"
-msgstr ""
+msgstr "Omloppsbanans excentricitet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgstr "Halv storaxel, AU"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:540
 msgid "Planetary Mass, Mjup"
-msgstr ""
+msgstr "Planetmassa, Mjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:541
 msgid "Planetary Radius, Rjup"
-msgstr ""
+msgstr "Planetradie, Rjup"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:542
 msgid "Orbital Period, days"
@@ -15890,7 +15901,7 @@ msgstr "Omloppstid, dagar"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:543
 msgid "Angular Distance, arcsec"
-msgstr ""
+msgstr "Vinkelavstånd, bågsek"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:544
 msgid "Effective temperature of host star, K"
@@ -15898,23 +15909,23 @@ msgstr "Effektiv temperatur för värdstjärna, K"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:545
 msgid "Year of Discovery"
-msgstr ""
+msgstr "Upptäcktsår"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:546
 msgid "Metallicity of host star"
-msgstr ""
+msgstr "Värdstjärnans metallicitet"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:547
 msgid "V magnitude of host star, mag"
-msgstr ""
+msgstr "Värdstjärnans V-magnitud, mag"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid "RA (J2000) of star, deg"
-msgstr ""
+msgstr "Stjärnans RA (J2000), grader"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
 msgid "Dec (J2000) of star, deg"
-msgstr ""
+msgstr "Stjärnans dek (J2000), grader"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:550
 msgid "Distance to star, pc"
@@ -15922,11 +15933,11 @@ msgstr "Avstånd till stjärna, pc"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:551
 msgid "Mass of host star, Msol"
-msgstr ""
+msgstr "Värdstjärnans massa, Msol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
 msgid "Radius of host star, Rsol"
-msgstr ""
+msgstr "Värdstjärnans radie, Rsol"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:623
@@ -16009,25 +16020,25 @@ msgstr "Färg på markör till möjliga beboeliga exoplaneter"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
 msgid "Temperature scale:"
-msgstr ""
+msgstr "Temperaturskala:"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 msgid "Diagrams: scatter plot"
-msgstr ""
+msgstr "Diagram: rita med spridning"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
 msgid "X axis"
-msgstr ""
+msgstr "X-axel"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:570
 msgid "Logarithmic scale"
-msgstr ""
+msgstr "Logaritmisk skala"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:564
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:572
 msgid "log scale"
-msgstr ""
+msgstr "log.-skala"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:566
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:573
@@ -16037,15 +16048,15 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:567
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:574
 msgid "max"
-msgstr ""
+msgstr "max"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:568
 msgid "Y axis"
-msgstr ""
+msgstr "Y-axel"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:575
 msgid "Plot"
-msgstr ""
+msgstr "Rita ut"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:576
 msgctxt "tab in plugin windows"
@@ -16743,7 +16754,7 @@ msgstr "Aktivitet"
 #: plugins/MeteorShowers/src/MeteorShower.cpp:610
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Maximum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"

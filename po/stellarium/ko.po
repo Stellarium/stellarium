@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 23:24+0700\n"
+"POT-Creation-Date: 2018-03-18 23:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: ysjbserver <ysjbserver@naver.com>, 2017\n"
+"Last-Translator: Junghyeon Park <j824h@outlook.com>, 2018\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2035,8 +2035,8 @@ msgid "Digitized Sky Survey (TOAST)"
 msgstr "디지털 전천 탐색 (TOAST)"
 
 #: src/core/modules/HipsMgr.cpp:79
-msgid "Digitized Sky Survey (experimental)"
-msgstr "디지털 전천 탐색 (시험용)"
+msgid "Toggle Hierarchical Progressive Surveys (experimental)"
+msgstr ""
 
 #: src/core/StelApp.cpp:564
 msgid "Night mode"
@@ -2044,7 +2044,7 @@ msgstr "야간 모드"
 
 #: src/core/StelApp.cpp:597
 msgid "Cannot create Spout sender. See log for details."
-msgstr ""
+msgstr "Spout sender를 생성할 수 없습니다. 자세한 상황을 보려면 로그를 보십시오."
 
 #: src/core/StelCore.cpp:253 src/gui/StelGui.cpp:208
 #: src/gui/AstroCalcDialog.cpp:1092 src/gui/AstroCalcDialog.cpp:2559
@@ -6421,7 +6421,7 @@ msgstr "앞으로"
 
 #: src/translations.h:687
 msgid "Parent Directory"
-msgstr ""
+msgstr "상위 주소:"
 
 #: src/translations.h:688
 msgid "Create New Folder"
@@ -8165,15 +8165,15 @@ msgstr "광속 시뮬레이션"
 
 #: src/ui_viewDialog.h:2606
 msgid "Hide nomenclature on the celestial body of observer"
-msgstr ""
+msgstr "관측자가 있는 천체의 명칭 숨기기"
 
 #: src/ui_viewDialog.h:2610
 msgid "Use more accurate 3D models (where available)"
-msgstr ""
+msgstr "더 정확한 3D 모델 사용 (가능할 때)"
 
 #: src/ui_viewDialog.h:2612
 msgid "Show hints and labels for planetary features"
-msgstr ""
+msgstr "행성 지형의 이름표 및 강조 사용"
 
 #: src/ui_viewDialog.h:2614
 msgid "Show planetary nomenclature"
@@ -8387,7 +8387,7 @@ msgstr "표지의 색상 조정"
 
 #: src/ui_viewDialog.h:2747
 msgid "Use outlines for big deep-sky objects"
-msgstr ""
+msgstr "딥스카이 천체의 경계선 사용"
 
 #: src/ui_viewDialog.h:2748
 msgid "Limit angular size (arcmin):"
@@ -8403,7 +8403,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2755
 msgid "Use additional names of DSO"
-msgstr ""
+msgstr "딥스카이 천체의 다른 이름 표시"
 
 #: src/ui_viewDialog.h:2756
 msgid "Celestial Sphere"
@@ -8411,79 +8411,79 @@ msgstr "천구"
 
 #: src/ui_viewDialog.h:2758
 msgid "Color of the opposition/conjunction longitude line"
-msgstr ""
+msgstr "충/합 경선의 색상"
 
 #: src/ui_viewDialog.h:2761
 msgid "Color of meridian"
-msgstr ""
+msgstr "자오선의 색상"
 
 #: src/ui_viewDialog.h:2764
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr ""
+msgstr "J2000.0의 황도선 표시 (VSOP87A 기본면)"
 
 #: src/ui_viewDialog.h:2766
 msgid "Ecliptic (J2000)"
-msgstr ""
+msgstr "황도 (J2000)"
 
 #: src/ui_viewDialog.h:2768
 msgid "Show celestial equator of current planet and date."
-msgstr ""
+msgstr "현재 행성과 날짜의 천구 적도 표시"
 
 #: src/ui_viewDialog.h:2770
 msgid "Equator (of date)"
-msgstr ""
+msgstr "적도 (현재)"
 
 #: src/ui_viewDialog.h:2772
 msgid "Show celestial equator of J2000.0."
-msgstr ""
+msgstr "J2000.0의 천구 적도 표시"
 
 #: src/ui_viewDialog.h:2774
 msgid "Equator (J2000)"
-msgstr ""
+msgstr "적도 (J2000)"
 
 #: src/ui_viewDialog.h:2776
 msgid "Color of equator (J2000.0)"
-msgstr ""
+msgstr "적도의 색상 (J2000.0)"
 
 #: src/ui_viewDialog.h:2779
 msgid "Show ecliptic line of current date."
-msgstr ""
+msgstr "현재의 황도선 표시"
 
 #: src/ui_viewDialog.h:2781
 msgid "Ecliptic (of date)"
-msgstr ""
+msgstr "황도 (현재)"
 
 #: src/ui_viewDialog.h:2783
 msgid "Color of equator (of date)"
-msgstr ""
+msgstr "적도의 색상 (현재)"
 
 #: src/ui_viewDialog.h:2786
 msgid "Show Galactic equator line."
-msgstr ""
+msgstr "은하 적도 표시"
 
 #: src/ui_viewDialog.h:2790
 msgid "Color of supergalactic equator"
-msgstr ""
+msgstr "초은하 적도의 색상"
 
 #: src/ui_viewDialog.h:2793
 msgid "Color of ecliptic (of date)"
-msgstr ""
+msgstr "황도의 색상 (현재)"
 
 #: src/ui_viewDialog.h:2796
 msgid "Color of ecliptic (J2000.0)"
-msgstr ""
+msgstr "황도의 색상 (J2000.0)"
 
 #: src/ui_viewDialog.h:2799
 msgid "Color of galactic equator"
-msgstr ""
+msgstr "은하 적도의 색상"
 
 #: src/ui_viewDialog.h:2802
 msgid "Show mathematical horizon line."
-msgstr ""
+msgstr "수학적 수평선을 표시합니다."
 
 #: src/ui_viewDialog.h:2806
 msgid "Color of horizon"
-msgstr ""
+msgstr "지평선의 색상"
 
 #: src/ui_viewDialog.h:2809
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
@@ -8491,7 +8491,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2813
 msgid "Show meridian line."
-msgstr ""
+msgstr "자오선 표시"
 
 #: src/ui_viewDialog.h:2817
 msgid ""
@@ -8501,15 +8501,15 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2821
 msgid "Color of colures"
-msgstr ""
+msgstr "분지선의 색상"
 
 #: src/ui_viewDialog.h:2824
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
-msgstr ""
+msgstr "분지선 표시 (두 극과 춘분/추분/동지/하지를 지나는 대원)"
 
 #: src/ui_viewDialog.h:2826
 msgid "Colures"
-msgstr ""
+msgstr "분지선"
 
 #: src/ui_viewDialog.h:2828
 msgid "Labels for the Cardinal and Ordinal directions."
@@ -8573,19 +8573,19 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2870
 msgid "Color of galactic poles"
-msgstr ""
+msgstr "은하 극의 색상"
 
 #: src/ui_viewDialog.h:2872
 msgid "Zenith and Nadir"
-msgstr ""
+msgstr "천정과 천저"
 
 #: src/ui_viewDialog.h:2874
 msgid "Color of Zenith and Nadir"
-msgstr ""
+msgstr "천정과 천저의 색상"
 
 #: src/ui_viewDialog.h:2878
 msgid "Color of circumpolar circles"
-msgstr ""
+msgstr "주극원의 색상"
 
 #: src/ui_viewDialog.h:2881
 msgid "Show celestial poles of J2000.0."
@@ -8603,11 +8603,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2887
 msgid "Circumpolar circles"
-msgstr ""
+msgstr "주극원"
 
 #: src/ui_viewDialog.h:2889
 msgid "Color of precession circles"
-msgstr ""
+msgstr "세차 원의 색상"
 
 #: src/ui_viewDialog.h:2892
 msgid ""
@@ -8637,7 +8637,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2907
 msgid "Color of the equinox points (J2000.0)"
-msgstr ""
+msgstr "분점의 색상 (J2000.0)"
 
 #: src/ui_viewDialog.h:2910
 msgid "Ecliptical coordinates for J2000.0."
@@ -8683,7 +8683,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2937
 msgid "Equinoxes (J2000)"
-msgstr ""
+msgstr "분점 (J2000)"
 
 #: src/ui_viewDialog.h:2939
 msgid "Color of the ecliptical grid (of date)"
@@ -8695,7 +8695,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2945
 msgid "Color of the equinox points (of date)"
-msgstr ""
+msgstr "분점의 색상 (현재)"
 
 #: src/ui_viewDialog.h:2948
 msgid "Equatorial coordinates of current date and planet."
@@ -8707,7 +8707,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2951
 msgid "Equinoxes (of date)"
-msgstr ""
+msgstr "분점 (현재)"
 
 #: src/ui_viewDialog.h:2952
 msgid "Solstices (J2000)"
@@ -8776,7 +8776,7 @@ msgstr "조명층 보이기 (밝은 창문, 광공해, 기타 등등)"
 
 #: src/ui_viewDialog.h:2983
 msgid "Show illumination "
-msgstr ""
+msgstr "조명 보이기"
 
 #: src/ui_viewDialog.h:2984
 msgid "Show landscape labels"
@@ -8796,7 +8796,7 @@ msgstr "별자리 선 보이기"
 
 #: src/ui_viewDialog.h:2990 src/ui_viewDialog.h:3014 src/ui_viewDialog.h:3025
 msgid "Thickness of line in pixels"
-msgstr ""
+msgstr "픽셀 안에 있는 선의 굵기 "
 
 #: src/ui_viewDialog.h:2993
 msgid "Color of constellation lines"
@@ -8820,7 +8820,7 @@ msgstr "별자리 이름표 보기"
 
 #: src/ui_viewDialog.h:3002
 msgid "Select if you want names abbreviated, original or translated"
-msgstr ""
+msgstr "이름을 원본, 번역본, 축약명 중 선택"
 
 #: src/ui_viewDialog.h:3006
 msgid "Color of constellation names"
@@ -8836,19 +8836,19 @@ msgstr "별자리 경계선의 색깔"
 
 #: src/ui_viewDialog.h:3012
 msgid "Show asterism lines"
-msgstr ""
+msgstr "성군 선 보이기"
 
 #: src/ui_viewDialog.h:3017
 msgid "Color of asterism lines"
-msgstr ""
+msgstr "성군 선의 색깔"
 
 #: src/ui_viewDialog.h:3019
 msgid "Show asterism labels"
-msgstr ""
+msgstr "성군 이름표 보이기"
 
 #: src/ui_viewDialog.h:3021
 msgid "Color of asterism names"
-msgstr ""
+msgstr "성군 이름표의 색깔"
 
 #: src/ui_viewDialog.h:3023
 msgid "Show ray helpers"
@@ -9011,7 +9011,7 @@ msgstr "표시 항목"
 
 #: src/ui_configurationDialog.h:1341 src/ui_configurationDialog.h:1360
 msgid "Equatorial coordinates, equinox of date"
-msgstr "현재 기준의 적도좌표계 및 분점"
+msgstr "황도좌표계 (현재)"
 
 #: src/ui_configurationDialog.h:1343
 msgid "Right ascension/Declination (of date)"
@@ -9239,7 +9239,7 @@ msgstr "디지털 전천 탐색 기능을 켜고 끄기"
 
 #: src/ui_configurationDialog.h:1447
 msgid "Show DSS button"
-msgstr ""
+msgstr "DSS 버튼 표시"
 
 #: src/ui_configurationDialog.h:1449
 msgid "Mask out everything outside a central circle in the main view"
@@ -9342,23 +9342,23 @@ msgstr "적도 J2000 격자를 켜고 끄는 버튼"
 
 #: src/ui_configurationDialog.h:1499
 msgid "Show ICRS grid button"
-msgstr ""
+msgstr "ICRS 격자 표시"
 
 #: src/ui_configurationDialog.h:1501
 msgid "A button to toggle galactic grid"
-msgstr ""
+msgstr "은하 격자를 켜고 끄는 버튼"
 
 #: src/ui_configurationDialog.h:1503
 msgid "Show galactic grid button"
-msgstr ""
+msgstr "은하 격자 버튼 표시"
 
 #: src/ui_configurationDialog.h:1505
 msgid "A button to toggle ecliptic grid of date"
-msgstr ""
+msgstr "현재 황도 격자를 켜고 끄는 버튼"
 
 #: src/ui_configurationDialog.h:1507
 msgid "Show ecliptic grid button"
-msgstr ""
+msgstr "황도 격자 버튼 표시"
 
 #: src/ui_configurationDialog.h:1508
 msgid "Show constellation boundaries button"
@@ -9845,7 +9845,7 @@ msgstr ""
 
 #: src/ui_astroCalcDialog.h:1113
 msgid "Save list of objects"
-msgstr ""
+msgstr "천체 목록을 저장"
 
 #: src/ui_astroCalcDialog.h:1114
 msgid "Show objects which are up:"
@@ -10678,7 +10678,7 @@ msgstr ""
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "\"/px"
-msgstr ""
+msgstr "\"/px"
 
 #: plugins/Oculars/src/Oculars.cpp:1912
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:498
@@ -12402,7 +12402,7 @@ msgstr "만일 질문이 있다면, %1이 곳%2에서 답변을 받을 수 있�
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #, qt-format
 msgid "Bug reports and feature requests can be made %1here%2."
-msgstr ""
+msgstr "버그 제보와 기능 추가 요청은 %1여기%2에서 할 수 있습니다."
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
@@ -12447,12 +12447,12 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:292
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:343
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "망원경 설정 창"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
 msgid "Connection type"
-msgstr ""
+msgstr "연결 종류"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:294
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
@@ -12515,7 +12515,7 @@ msgstr ""
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
-msgstr ""
+msgstr "경고: 스텔라리움은 망원경이 태양을 향하게 하는 것을 막아줄 수 없습니다!"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:307
 msgid ""
@@ -12523,6 +12523,8 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"태양 필터를 설치하지 않은 상태에서 절대로 태양을 바라보지 마세요. 망원경을 통해 모인 태양빛이 눈과 장비에 돌이킬 수 없는 손상을 입힐"
+" 수 있습니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:308
 msgid ""
@@ -12546,7 +12548,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:437
 msgid "Back to top"
-msgstr ""
+msgstr "맨 위로 돌아가기"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 msgid ""
@@ -12563,7 +12565,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid "DIRECT CONNECTION"
-msgstr ""
+msgstr "직접 연결"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 #, qt-format
@@ -12574,7 +12576,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid "INDIRECT CONNECTION"
-msgstr ""
+msgstr "간접 연결"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
 #, qt-format
@@ -17807,7 +17809,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1263
 msgid "Equinox"
-msgstr ""
+msgstr "분점"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1266
 msgid "Solstice"

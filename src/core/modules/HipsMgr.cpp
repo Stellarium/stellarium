@@ -118,7 +118,7 @@ void HipsMgr::restoreVisibleSurveys()
 		{
 			// We have to restore one slash after colon.
 			QString realURL=key.replace(":/", "://");
-			qDebug() << "HIPS: Restore visible survey:" << realURL;
+			qDebug() << "HiPS: Restore visible survey:" << realURL;
 			HipsSurveyP survey=getSurveyByUrl(realURL);
 			if (survey)
 				survey->setVisible(true);

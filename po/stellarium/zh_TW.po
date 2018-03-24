@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 23:24+0700\n"
+"POT-Creation-Date: 2018-03-18 23:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: freemanli <freeman.tam@gmail.com>, 2018\n"
+"Last-Translator: freemanli <freeman.tam@gmail.com>, 2017\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -2035,8 +2035,8 @@ msgid "Digitized Sky Survey (TOAST)"
 msgstr "數位巡天(TOAST)"
 
 #: src/core/modules/HipsMgr.cpp:79
-msgid "Digitized Sky Survey (experimental)"
-msgstr "數位巡天(實驗)"
+msgid "Toggle Hierarchical Progressive Surveys (experimental)"
+msgstr "切換階層式累進測量 (HiPS 實驗性)"
 
 #: src/core/StelApp.cpp:564
 msgid "Night mode"
@@ -2696,7 +2696,7 @@ msgstr "這個投影法的全名是<i>等距圓柱投影</i>。 所有經緯線�
 
 #: src/core/StelProjectorClasses.cpp:365
 msgid "Mercator"
-msgstr "Mercator"
+msgstr "麥卡托（Mercator）"
 
 #: src/core/StelProjectorClasses.cpp:370
 msgid ""
@@ -3354,7 +3354,7 @@ msgstr "Stellarium 使用手冊"
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:239
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
-msgstr "{FAQ} - 關於 Stellarium 的常見問答"
+msgstr "{常見問答} - 關於 Stellarium 的常見問答"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:244
@@ -8025,7 +8025,7 @@ msgstr "星空述語"
 
 #: src/ui_viewDialog.h:2550
 msgid "Surveys"
-msgstr "測繪"
+msgstr "觀測繪製"
 
 #: src/ui_viewDialog.h:2554
 msgid "Atmosphere visualization"
@@ -8196,11 +8196,11 @@ msgstr "行星光度運算法則:"
 
 #: src/ui_viewDialog.h:2633
 msgid "Use custom settings of GRS:"
-msgstr "使用GRS自訂設置"
+msgstr "使用大紅斑(GRS)自訂設置"
 
 #: src/ui_viewDialog.h:2634
 msgid "GRS details..."
-msgstr "GRS細節..."
+msgstr "大紅斑(GRS)細節..."
 
 #: src/ui_viewDialog.h:2636
 msgid "Limit the magnitude of solar system objects"
@@ -9525,7 +9525,7 @@ msgstr "大紅斑細節"
 
 #: src/ui_greatRedSpotDialog.h:173
 msgid "Custom settings for position of GRS"
-msgstr "大紅斑位置的偏好設置"
+msgstr "大紅斑(GRS)位置的偏好設置"
 
 #: src/ui_greatRedSpotDialog.h:174
 msgid "yyyy.MM.dd hh:mm"
@@ -9537,7 +9537,7 @@ msgstr "年偏移植(度)"
 
 #: src/ui_greatRedSpotDialog.h:176
 msgid "Longitude of GRS (degrees):"
-msgstr "大紅斑的經度(度)"
+msgstr "大紅斑(GRS)的經度(度)"
 
 #: src/ui_greatRedSpotDialog.h:183
 msgid "Date and Time (UTC):"
@@ -9545,7 +9545,7 @@ msgstr "日期和時間(UTC):"
 
 #: src/ui_greatRedSpotDialog.h:187
 msgid "Get the recent GRS measurement"
-msgstr "取得大紅斑最近的測量值"
+msgstr "取得大紅斑(GRS)最近的觀測值"
 
 #: src/ui_scriptConsole.h:345
 msgid "Script console"
@@ -9622,7 +9622,7 @@ msgstr "現象"
 
 #: src/ui_astroCalcDialog.h:1013
 msgid "Alt. vs. Time"
-msgstr "高度角 vs. 時間"
+msgstr "時間 - 高度角"
 
 #: src/ui_astroCalcDialog.h:1015
 msgid "Altitude vs. Time"
@@ -9631,7 +9631,7 @@ msgstr "高度角 vs. 時間"
 #: src/ui_astroCalcDialog.h:1018
 msgctxt "Monthly Elevation"
 msgid "ME"
-msgstr "ME"
+msgstr "每月高度"
 
 #: src/ui_astroCalcDialog.h:1020
 msgid "Monthly Elevation"
@@ -10395,7 +10395,7 @@ msgstr "您可以在 Github 網站上獲得我們的支援，發表時請確認�
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "If you have a question, you can {get an answer here}."
-msgstr ""
+msgstr "若您仍有疑問，您可在 {此處取得解答}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
@@ -10416,7 +10416,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:284
 msgid "Bug reports and feature requests can be made {here}."
-msgstr ""
+msgstr "錯誤報告和功能需求可以點擊 {此處} 進行 。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:113
@@ -10439,7 +10439,7 @@ msgstr ""
 msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can {get info here}."
-msgstr ""
+msgstr "若您想讀取關於這個外掛程式的歷史與完整資訊，您可以點擊 {此處取得資訊} 。"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -14553,12 +14553,12 @@ msgstr "這個外掛程式是歐洲太空總署(ESA)在2015年天空中程式碼
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
-msgstr ""
+msgstr "這個外掛程式使用Stefan Frings 所設計的  {QtWebApp HTTP 伺服器}  。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Further information can be found in the {developer documentation}."
-msgstr ""
+msgstr "進一步的資訊可以在  {開發者文件} 中取得。"
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 #, qt-format

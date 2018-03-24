@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-16 23:24+0700\n"
+"POT-Creation-Date: 2018-03-18 23:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Daniel Alomar <daniel.adastra@gmail.com>, 2017\n"
 "Language-Team: Catalan (https://www.transifex.com/stellarium/teams/80998/ca/)\n"
@@ -2052,10 +2052,10 @@ msgstr "Llum Zodiacal"
 
 #: src/core/modules/ToastMgr.cpp:60
 msgid "Digitized Sky Survey (TOAST)"
-msgstr ""
+msgstr "Digitized Sky Survey (TOAST)"
 
 #: src/core/modules/HipsMgr.cpp:79
-msgid "Digitized Sky Survey (experimental)"
+msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
 #: src/core/StelApp.cpp:564
@@ -3469,7 +3469,7 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:254
 msgid "{Google Groups} - discuss Stellarium with other users."
-msgstr ""
+msgstr "{Grups de Google} - parla de Stellarium amb altres usuaris."
 
 #: src/gui/HelpDialog.cpp:312
 msgid "Developers"
@@ -3713,7 +3713,7 @@ msgstr "Fotogrames per segon"
 
 #: src/gui/ViewDialog.cpp:509
 msgid "Deep Sky"
-msgstr ""
+msgstr "Cel Profund"
 
 #: src/gui/ViewDialog.cpp:510
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
@@ -3722,7 +3722,7 @@ msgstr "Sistema solar"
 
 #: src/gui/ViewDialog.cpp:562
 msgid "properties"
-msgstr ""
+msgstr "propietats"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1426
@@ -4912,7 +4912,7 @@ msgstr "Pas del meridià en aproximadament %1"
 
 #: src/gui/AstroCalcDialog.cpp:2528
 msgid "Line of civil twilight"
-msgstr ""
+msgstr "Línia del crepuscle civil"
 
 #: src/gui/AstroCalcDialog.cpp:2530
 msgid "Line of nautical twilight"
@@ -5225,7 +5225,7 @@ msgstr "Característiques geològiques"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:108
 msgid "Artificial objects"
-msgstr ""
+msgstr "Objectes artificials"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/translations.h:113
@@ -8190,7 +8190,7 @@ msgstr "Mitologia"
 
 #: src/ui_viewDialog.h:2550
 msgid "Surveys"
-msgstr ""
+msgstr "Mapes"
 
 #: src/ui_viewDialog.h:2554
 msgid "Atmosphere visualization"
@@ -10649,7 +10649,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "If you have a question, you can {get an answer here}."
-msgstr ""
+msgstr "Si teniu una pregunta, podeu {obtenir una resposta aquí}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
@@ -10670,7 +10670,7 @@ msgstr ""
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:284
 msgid "Bug reports and feature requests can be made {here}."
-msgstr ""
+msgstr "Es poden fer informes d'error i sol·licituds de funcions {aquí}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:113
@@ -10694,6 +10694,8 @@ msgid ""
 "If you want to read full information about this plugin and its history, you "
 "can {get info here}."
 msgstr ""
+"Si voleu llegir tota la informació sobre aquest complement i el seu "
+"historial, podeu {obtenir informació aquí}."
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:217
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:263
@@ -15159,12 +15161,12 @@ msgstr "Aquest connector es va desenvolupar durant l'ESA SoCiS 2015."
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
-msgstr ""
+msgstr "Aquest connector utilitza el {QtWebApp HTTP server} de Stefan Frings."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:133
 msgid "Further information can be found in the {developer documentation}."
-msgstr ""
+msgstr "Podeu trobar més informació a la {documentació del desenvolupador}."
 
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:180
 #, qt-format
