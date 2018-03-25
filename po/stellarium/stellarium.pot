@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-18 23:00+0700\n"
+"POT-Creation-Date: 2018-03-25 18:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,7 +57,7 @@ msgstr ""
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:422 src/core/modules/SolarSystem.cpp:235
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:79
+#: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:99
 #: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:797
 msgid "Display Options"
@@ -2020,7 +2020,7 @@ msgstr ""
 msgid "Digitized Sky Survey (TOAST)"
 msgstr ""
 
-#: src/core/modules/HipsMgr.cpp:79
+#: src/core/modules/HipsMgr.cpp:99
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
@@ -2842,7 +2842,7 @@ msgstr ""
 msgid "Authors"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1012 src/gui/ViewDialog.cpp:1564
+#: src/gui/ConfigurationDialog.cpp:1012 src/gui/ViewDialog.cpp:1577
 msgid "Contact"
 msgstr ""
 
@@ -3522,187 +3522,187 @@ msgstr ""
 msgid "Frames per second"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:509
+#: src/gui/ViewDialog.cpp:522
 msgid "Deep Sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:510
+#: src/gui/ViewDialog.cpp:523
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:562
+#: src/gui/ViewDialog.cpp:575
 msgid "properties"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1426
+#: src/gui/ViewDialog.cpp:1439
 msgid "Excellent dark-sky site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1428
+#: src/gui/ViewDialog.cpp:1441
 msgid "Typical truly dark site"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1430
+#: src/gui/ViewDialog.cpp:1443
 msgid "Rural sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1432
+#: src/gui/ViewDialog.cpp:1445
 msgid "Rural/suburban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1434
+#: src/gui/ViewDialog.cpp:1447
 msgid "Suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1436
+#: src/gui/ViewDialog.cpp:1449
 msgid "Bright suburban sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1438
+#: src/gui/ViewDialog.cpp:1451
 msgid "Suburban/urban transition"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1440
+#: src/gui/ViewDialog.cpp:1453
 msgid "City sky"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1442
+#: src/gui/ViewDialog.cpp:1455
 msgid "Inner-city sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1456
+#: src/gui/ViewDialog.cpp:1469
 msgid "The naked-eye limiting magnitude is"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1464
+#: src/gui/ViewDialog.cpp:1477
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1465
+#: src/gui/ViewDialog.cpp:1478
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1488
+#: src/gui/ViewDialog.cpp:1501
 msgid "Abbreviated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1489
+#: src/gui/ViewDialog.cpp:1502
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1490
+#: src/gui/ViewDialog.cpp:1503
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1688
+#: src/gui/ViewDialog.cpp:1701
 msgid "No shooting stars"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1690
+#: src/gui/ViewDialog.cpp:1703
 msgid "Normal rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1692
+#: src/gui/ViewDialog.cpp:1705
 msgid "Standard Orionids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1694
+#: src/gui/ViewDialog.cpp:1707
 msgid "Standard Perseids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1696
+#: src/gui/ViewDialog.cpp:1709
 msgid "Standard Geminids rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1698
+#: src/gui/ViewDialog.cpp:1711
 msgid "Exceptional Perseid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1700
+#: src/gui/ViewDialog.cpp:1713
 msgid "Meteor storm rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1702
+#: src/gui/ViewDialog.cpp:1715
 msgid "Exceptional Draconid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1704
+#: src/gui/ViewDialog.cpp:1717
 msgid "Exceptional Leonid rate"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1706
+#: src/gui/ViewDialog.cpp:1719
 msgid "Very high rate (1966 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1708
+#: src/gui/ViewDialog.cpp:1721
 msgid "Highest rate ever (1833 Leonids)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1761
+#: src/gui/ViewDialog.cpp:1774
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1762
+#: src/gui/ViewDialog.cpp:1775
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1763
+#: src/gui/ViewDialog.cpp:1776
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1764
+#: src/gui/ViewDialog.cpp:1777
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1765
+#: src/gui/ViewDialog.cpp:1778
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1791
+#: src/gui/ViewDialog.cpp:1804
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later) "
 "and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1794
+#: src/gui/ViewDialog.cpp:1807
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical Ephemeris</"
 "em> (1961)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1797
+#: src/gui/ViewDialog.cpp:1810
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1800
+#: src/gui/ViewDialog.cpp:1813
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1803
+#: src/gui/ViewDialog.cpp:1816
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
