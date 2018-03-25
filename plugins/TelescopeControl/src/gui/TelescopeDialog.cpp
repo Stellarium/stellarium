@@ -250,6 +250,9 @@ void TelescopeDialog::createDialogContent()
 
 void TelescopeDialog::setAboutText()
 {
+	// Regexp to replace {text} with an HTML link.
+	QRegExp a_rx = QRegExp("[{]([^{]*)[}]");
+
 	//TODO: Expand
 	QString aboutPage = "<html><head></head><body>";
 	aboutPage += "<h2>" + q_("Telescope Control plug-in") + "</h2><table width=\"90%\">";
@@ -259,8 +262,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<tr><td>Michael Heinz</td></tr>";
 	aboutPage += "<tr><td>Bogdan Marinov &lt;bogdan.marinov84@gmail.com&gt; (" + q_("Plug-in and GUI programming") + ")</td></tr>";
 	aboutPage += "<tr><td rowspan=2><strong>" + q_("Contributors") + ":</strong></td><td>Petr Kubánek (" + q_("RTS2 support") + ")</td></tr>";
-    aboutPage += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
-    aboutPage += "<tr><td></td><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt;</td></tr>";
+	aboutPage += "<tr><td>Alexander Wolf &lt;alex.v.wolf@gmail.com&gt;</td></tr>";
+	aboutPage += "<tr><td></td><td>Alessandro Siniscalchi &lt;asiniscalchi@gmail.com&gt;</td></tr>";
 	aboutPage += "</table>";
 
 	aboutPage += "<p>" + q_("This plug-in is based on and reuses a lot of code under the GNU General Public License:") + "</p><ul>";
@@ -268,18 +271,18 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "<li>" + q_("the telescope server core code (licensed under the LGPL)") + "</li>";
 	aboutPage += "<li>" + q_("the TelescopeServerLx200 telescope server core code (originally licensed under the LGPL)");
 	aboutPage += "<br/>" + q_("Author of all of the above - the client, the server core, and the LX200 server, along with the Stellarium telescope control network protocol (over TCP/IP), is <b>Johannes Gajdosik</b>.") + "</li>";
-    aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
-    aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
+	aboutPage += "<li>" + q_("the TelescopeServerNexStar telescope server core code (originally licensed under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>.") + "</li>";
+	aboutPage += "<li>" + q_("INDI by <b>Alessandro Siniscalchi</b>.") + "</li></ul>";
 
 	aboutPage += "<h3>" + q_("Links") + "</h3>";
 	aboutPage += "<p>" + QString(q_("Support is provided via the Github website.  Be sure to put \"%1\" in the subject when posting.")).arg("Telescope Control plug-in") + "</p>";
 	aboutPage += "<p><ul>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	aboutPage += "<li>" + QString(q_("If you have a question, you can %1get an answer here%2").arg("<a href=\"https://groups.google.com/forum/#!forum/stellarium\">")).arg("</a>") + "</li>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	aboutPage += "<li>" + QString(q_("Bug reports and feature requests can be made %1here%2.")).arg("<a href=\"https://github.com/Stellarium/stellarium/issues\">").arg("</a>") + "</li>";
-	// TRANSLATORS: The numbers contain the opening and closing tag of an HTML link
-	aboutPage += "<li>" + q_("If you want to read full information about this plugin, its history and format of catalog, you can %1get info here%2.").arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug-in\">").arg("</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	aboutPage += "<li>" + q_("If you have a question, you can {get an answer here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	aboutPage += "<li>" + q_("Bug reports and feature requests can be made {here}.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/issues\">\\1</a>") + "</li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	aboutPage += "<li>" + q_("If you want to read full information about this plugin and its history, you can {get info here}.").toHtmlEscaped().replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug\">\\1</a>") + "</li>";
 	aboutPage += "</ul></p></body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
