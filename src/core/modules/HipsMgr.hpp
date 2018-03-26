@@ -60,6 +60,8 @@ signals:
 private slots:
 	// after loading survey list from network, restore the visible surveys from config.ini.
 	void restoreVisibleSurveys();
+	//! Start to load the default sources.
+	void loadSources();
 
 private:
 	QList<HipsSurveyP> surveys;

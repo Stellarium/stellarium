@@ -28,6 +28,7 @@
 
 #include <QNetworkReply>
 #include <QSettings>
+#include <QTimer>
 
 HipsMgr::HipsMgr()
 {
@@ -56,11 +57,10 @@ HipsMgr::~HipsMgr()
 	conf->sync();
 }
 
-void HipsMgr::init()
+void HipsMgr::loadSources()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
-	setFlagShow(conf->value("show", true).toBool());
 
 	// Start to load survey lists
 	QStringList sources;
@@ -93,10 +93,20 @@ void HipsMgr::init()
 			emit surveysChanged();
 		});
 	}
+	conf->endGroup();
+}
 
+void HipsMgr::init()
+{
+	QSettings* conf = StelApp::getInstance().getSettings();
+	conf->beginGroup("hips");
+	setFlagShow(conf->value("show", true).toBool());
 	conf->endGroup();
 
 	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
+
+	// Start loading the sources only after stellarium has time to set up the proxy.
+	QTimer::singleShot(0, this, SLOT(loadSources()));
 }
 
 
