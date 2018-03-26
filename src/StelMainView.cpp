@@ -581,7 +581,6 @@ StelMainView::StelMainView(QSettings* settings)
 	fpsTimer->setTimerType(Qt::PreciseTimer);
 	fpsTimer->setInterval(1000/minfps);
 	connect(fpsTimer,SIGNAL(timeout()),this,SLOT(fpsTimerUpdate()));
-	fpsTimer->start();
 
 	cursorTimeoutTimer = new QTimer(this);
 	cursorTimeoutTimer->setSingleShot(true);
@@ -1297,6 +1296,9 @@ void StelMainView::drawEnded()
 
 	if(fpsTimer->interval() != requiredFpsInterval)
 		fpsTimer->setInterval(requiredFpsInterval);
+
+	if(!fpsTimer->isActive())
+		fpsTimer->start();
 }
 
 void StelMainView::setFlagCursorTimeout(bool b)
