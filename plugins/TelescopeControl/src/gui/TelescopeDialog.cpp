@@ -286,7 +286,8 @@ void TelescopeDialog::setAboutText()
 	aboutPage += "</ul></p></body></html>";
 	
 	QString helpPage = "<html><head></head><body>";
-	helpPage += "<p>" + QString(q_("A more complete and up-to-date documentation for this plug-in can be found on the %1Telescope Control%2 page in the Stellarium Wiki.")).arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug-in\">").arg("</a>") + "</p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += "<p>" + q_("A more complete and up-to-date documentation for this plug-in can be found on the {Telescope Control} page in the Stellarium Wiki.").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_plug-in\">\\1</a>") + "</p>";
 	helpPage += "<h3><a name=\"top\" />" + q_("Contents") + "</h3><ul>";
 	helpPage += "<li><a href=\"#Abilities_and_limitations\">" + q_("Abilities and limitations") + "</a></li>";
 	helpPage += "<li><a href=\"#originalfeature\">" + q_("The original telescope control feature") + "</a></li>";
@@ -317,11 +318,22 @@ void TelescopeDialog::setAboutText()
 
 	helpPage += "<h3><a name=\"usingthisplugin\" />" + q_("Using this plug-in") + "</h3>";
 	helpPage += "<p>" + q_("Here are two general ways to control a device with this plug-in, depending on the situation:") + "</p><ul>";
-	helpPage += "<li><b>" + q_("DIRECT CONNECTION") + "</b>: " + QString(q_("A %1device supported by the plug-in%2 is connected with a cable to the computer running Stellarium;")).arg("<a href=\"#devices\">").arg("</a>") + "</li>";
+	helpPage += "<li><b>" + q_("DIRECT CONNECTION") + "</b>: ";
+
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("A {device supported by the plug-in} is connected with a cable to the computer running Stellarium;").replace(a_rx, "<a href=\"#devices\">\\1</a>");
+	helpPage += "</li>";
 	helpPage += "<li><b>" + q_("INDIRECT CONNECTION") + "</b>: <ul>";
-	helpPage += "<li>" + QString(q_("A device is connected to the same computer but it is driven by a %1stand-alone telescope server program%2 or a %3third-party application%4 <b>that can 'talk' to Stellarium</b>;")).arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">").arg("</a>").arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control#Third_party_applications\">").arg("</a>") + "</li>";
+	helpPage += "<li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("A device is connected to the same computer but it is driven by a {stand-alone telescope server program}").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">\\1</a>") + " ";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("or a {third-party application} <b>that can 'talk' to Stellarium</b>;").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control#Third_party_applications\">\\1</a>");
+	helpPage += "</li>";
 	helpPage += "<li>" + q_("A device is connected to a remote computer and the software that drives it can 'talk' to Stellarium <i>over the network</i>; this software can be either one of Stellarium's stand-alone telescope servers, or a third party application.") + "</li></ul></li></ul>";
-	helpPage += "<p>" + QString(q_("Most older telescopes use cables that connect to a %1serial port%2 (RS-232), the newer ones use %3USB%4 (Universal Serial Bus).")).arg("<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:serial_port\">").arg("</a>").arg("<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:Universal_Serial_Bus\">").arg("</a>")
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += "<p>" + q_("Most older telescopes use cables that connect to a {serial port} (RS-232), the newer ones use USB (Universal Serial Bus).").replace(a_rx, "<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:serial_port\">\\1</a>")
 		 + " " + q_("On Linux and Mac OS X both cases are handled identically by the plug-in. On Windows, a USB connection may require a 'virtual serial port' software, if it is not supplied with the cable or the telescope.")
 		 + " " + q_("Such a software creates a virtual ('fake') COM port that corresponds to the real USB port so it can be used by the plug-in.")
 		 + " " + q_("On all three platforms, if the computer has no 'classic' serial ports and the telescope can connect only to a serial port, a serial-to-USB (RS-232-to-USB) adapter may be necessary.") + "</p>";
@@ -331,13 +343,22 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<h3><a name=\"mainwindow\" />" + q_("Main window ('Telescopes')") + "</h3>";
 	helpPage += "<p>" + q_("The plug-in's main window can be opened:") + "</p><ul>";
 	helpPage += "<li>" + q_("By pressing the 'configure' button for the plug-in in the 'Plugins' tab of Stellarium's Configuration window (opened by pressing <b>F2</b> or the respective button in the left toolbar).") + "</li>";
-	helpPage += "<li>" + QString(q_("By pressing the 'Configure telescopes...' button in the %1'Slew to' window%2 (opened by pressing <b>Ctrl+0</b> or the respective button on the bottom toolbar).")).arg("<a href=\"#slew_to\">").arg("</a>") + "</li></ul>";
+	helpPage += "<li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("By pressing the 'Configure telescopes...' button in the {'Slew to' window} (opened by pressing <b>Ctrl+0</b> or the respective button on the bottom toolbar).").replace(a_rx, "<a href=\"#slew_to\">\\1</a>");
+	helpPage += "</li></ul>";
 	helpPage += "<p>" + q_("The <b>Telescopes</b> tab displays a list of the telescope connections that have been set up:") + "</p><ul>";
 	helpPage += "<li>" + q_("The number (<b>#</b>) column shows the number used to control this telescope. For example, for telescope #2, the shortcut is Ctrl+2.") + "</li>";
 	helpPage += "<li>" + q_("The <b>Status</b> column indicates if this connection is currently active or not. Unfortunately, there are some cases in which 'Connected' is displayed when no working connection exists.") + "</li>";
 	helpPage += "<li>" + q_("The <b>Type</b> field indicates what kind of connection is this:") + "</li><ul>";
-	helpPage += "<li>" + QString(q_("<b>virtual</b> means a %1virtual telescope%2;")).arg("<a href=\"#virtual_telescope\">").arg("</a>") + "</li>";
-	helpPage += "<li>" + QString(q_("<b>local, Stellarium</b> means a DIRECT connection to the telescope (see %1above%2);")).arg("<a href=\"#usingthisplugin\">").arg("</a>") + "</li>";
+	helpPage += "<li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("<b>virtual</b> means a {virtual telescope};").replace(a_rx, "<a href=\"#virtual_telescope\">\\1</a>");
+	helpPage += "</li>";
+	helpPage += "<li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("<b>local, Stellarium</b> means a DIRECT connection to the telescope (see {above});").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>");
+	helpPage += "</li>";
 	helpPage += "<li>" + q_("<b>local, external</b> means an INDIRECT connection to a program running on the same computer;") + "</li>";
 	helpPage += "<li>" + q_("<b>remote, unknown</b> means an INDIRECT connection over a network to a remote machine.") + "</li></ul></li></ul>";
 	helpPage += "<p>" + q_("To set up a new telescope connection, press the <b>Add</b> button. To modify the configuration of an existing connection, select it in the list and press the <b>Configure</b> button. In both cases, a telescope connection configuration window will open.") + "</p>";
@@ -346,11 +367,17 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<h3><a name=\"configwindow\" />" + q_("Telescope configuration window") + "</h3>";
 
 	helpPage += "<h4><a name=\"connection_type\" />" + q_("Connection type") + "</h4>";
-	helpPage += "<p>" + QString(q_("The topmost field represents the choice between the two types of connections (see %1above%2):")).arg("<a href=\"#usingthisplugin\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("The topmost field represents the choice between the two types of connections (see {above}):").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p><b>" + q_("Telescope controlled by:") + "</b></p><ul>";
 	helpPage += "<li>" + q_("<b>Stellarium, directly through a serial port</b> is the DIRECT case") + "</li>";
 	helpPage += "<li>" + q_("<b>External software or a remote computer</b> is the INDIRECT case") + "</li>";
-	helpPage += "<li>" + QString(q_("<b>Nothing, just simulate one (a moving reticle)</b> is a %1virtual telescope%2 (no connection)")).arg("<a href=\"#virtual_telescope\">").arg("</a>") + "</li></ul>";
+	helpPage += "<li>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual telescope} (no connection)").replace(a_rx, "<a href=\"#virtual_telescope\">\\1</a>");
+	helpPage += "</li></ul>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h4><a name=\"telescope_properties\" />" + q_("Telescope properties") + "</h4>";
@@ -362,7 +389,10 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h4><a name=\"device_settings\" />" + q_("Device settings") + "</h4>";
-	helpPage += "<p>" + QString(q_("This section is active only for DIRECT connections (see %1above%2).")).arg("<a href=\"#usingthisplugin\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("This section is active only for DIRECT connections (see {above}).").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p>" + q_("<b>Serial port</b> sets the serial port used by the telescope.") + "</p>";
 	helpPage += "<p>" + q_("There is a pop-up box that suggests some default values:") + "</p><ul>";
 	helpPage += "<li>" + q_("On Windows, serial ports COM1 to COM10;") + "</li>";
@@ -371,13 +401,23 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<p>" + q_("If you are using an USB cable, the default serial port of your telescope most probably is not in the list of suggestions.") + "</p>";
 	helpPage += "<p>" + q_("To list all valid serial port names in Mac OS X, open a terminal and type:") + "<br /><samp>ls /dev/*</samp></p>";
 	helpPage += "<p>" + q_("This will list all devices, the full name of your serial port should be somewhere in the list (for example, '/dev/cu.usbserial-FTDFZVMK').") + "</p>";
-	helpPage += "<p>" + QString(q_("<b>Device model</b>: see %1Supported devices%2 below.")).arg("<a href=\"#devices\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("<b>Device model</b>: see {Supported devices} below.").replace(a_rx, "<a href=\"#devices\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h4><a name=\"connection_settings\" />" + q_("Connection settings") + "</h4>";
-	helpPage += "<p>" + QString(q_("Both fields here refer to communication over a network (%1TCP/IP%2).")).arg("<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:TCP/IP\">").arg("</a>")
-		 + " " + QString(q_("Doing something with them is necessary only for INDIRECT connections  (see %1above%2).")).arg("<a href=\"#usingthisplugin\">").arg("</a>") + "</p>";
-	helpPage += "<p>" + QString(q_("<b>Host</b> can be either a host name or an %1IPv4%2 address such as '127.0.0.1'. The default value of 'localhost' means 'this computer'.")).arg("<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:IPv4\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("Both fields here refer to communication over a network ({TCP/IP}).").replace(a_rx, "<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:TCP/IP\">\\1</a>") + " ";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("Doing something with them is necessary only for INDIRECT connections (see {above}).").replace(a_rx, "<a href=\"#usingthisplugin\">\\1</a>") + " ";
+	helpPage += "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("<b>Host</b> can be either a host name or an {IPv4} address such as '127.0.0.1'. The default value of 'localhost' means 'this computer'.").replace(a_rx, "<a href=\"http://meta.wikimedia.org/wiki/wikipedia:en:IPv4\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p>" + q_("<b>Port</b> refers to the TCP port used for communication. The default value depends on the telescope number and ranges between 10001 and 10009.") + "</p>";
 	helpPage += "<p>" + q_("Both values are ignored for DIRECT connections.") + "</p>";
 	helpPage += "<p>" + q_("For INDIRECT connections, modifying the default host name value makes sense only if you are attempting a remote connection over a network.")
@@ -389,19 +429,27 @@ void TelescopeDialog::setAboutText()
 	helpPage += "<p>" + q_("In the telescope configuration window, click on 'User Interface Settings'.")
 		 + " " + q_("Mark the 'Use field of view indicators' option, then enter a list of values separated with commas in the field below.")
 		 + " " + q_("The values are interpreted as degrees of arc.") + "</p>";
-	helpPage += "<p>" + QString(q_("This can be used in combination with a %1virtual telescope%2 to display a moving reticle with the Telrad circles.")).arg("<a href=\"#virtual_telescope\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("This can be used in combination with a {virtual telescope} to display a moving reticle with the Telrad circles.").replace(a_rx, "<a href=\"#virtual_telescope\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h3><a name=\"slew_to\" />" + q_("'Slew telescope to' window") + "</h3>";
 	helpPage += "<p>" + q_("The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or the respective button in the bottom toolbar.") + "</p>";
 	helpPage += "<p>" + q_("It contains two fields for entering celestial coordinates, selectors for the preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or Decimal degrees), a drop-down list and two buttons.") + "</p>";
-	helpPage += "<p>" + q_("The drop-down list contains the names of the currently connected devices.")
-		 + " " + q_("If no devices are connected, it will remain empty, and the 'Slew' button will be disabled.") + "</p>";
-	helpPage += "<p>" + q_("Pressing the <b>Slew</b> button slews the selected device to the selected set of coordinates.")
-		 + " " + QString(q_("See the section about %1keyboard commands%2 below for other ways of controlling the device.")).arg("<a href=\"#commands\">").arg("</a>") + "</p>";
-	helpPage += "<p>" + QString(q_("Pressing the <b>Configure telescopes...</b> button opens the %1main window%2 of the plug-in.")).arg("<a href=\"#mainwindow\">").arg("</a>") + "</p>";
-	helpPage += "<p>" + q_("<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that pressing 'Alt + underlined letter' can be used instead of clicking.")
-		 + " " + q_("For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' button, pressing <b>Alt+E</b> switches to decimal degree format, etc.") + "</p>";
+	helpPage += "<p>" + q_("The drop-down list contains the names of the currently connected devices.") + " ";
+	helpPage += q_("If no devices are connected, it will remain empty, and the 'Slew' button will be disabled.") + "</p>";
+	helpPage += "<p>" + q_("Pressing the <b>Slew</b> button slews the selected device to the selected set of coordinates.") + " ";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("See the section about {keyboard commands} below for other ways of controlling the device.").replace(a_rx, "<a href=\"#commands\">\\1</a>");
+	helpPage += "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("Pressing the <b>Configure telescopes...</b> button opens the {main window} of the plug-in.").replace(a_rx, "<a href=\"#mainwindow\">\\1</a>");
+	helpPage += "</p>";
+	helpPage += "<p>" + q_("<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that pressing 'Alt + underlined letter' can be used instead of clicking.") + " ";
+	helpPage +=  q_("For example, pressing <b>Alt+S</b> is equivalent to clicking the 'Slew' button, pressing <b>Alt+E</b> switches to decimal degree format, etc.") + "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h3><a name=\"commands\" />" + q_("Sending commands") + "</h3>";
@@ -414,29 +462,44 @@ void TelescopeDialog::setAboutText()
 		 + " (" + q_("For example, Alt+1 for telescope #1.") + ") "
 		 + q_("This will slew the device to the point in the center of the current view.")
 		 + " (" + q_("If you move the view after issuing the command, the target won't change unless you issue another command.") + ")</p>";
-	helpPage += "<p>" + QString(q_("<b>To point a device to a given set of coordinates:</b> Use the %1'Slew to' window%2 (press <b>Ctrl+0</b>).")).arg("<a href=\"#slew_to\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' window} (press <b>Ctrl+0</b>).").replace(a_rx, "<a href=\"#slew_to\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h3><a name=\"devices\" />" + q_("Supported devices") + "</h3>";
-	helpPage += "<p>" + QString(q_("All devices listed in the %1'Device model' list%2 are convenience definitions using one of the two built-in interfaces: the Meade LX200 (the Meade Autostar controller) interface and the Celestron NexStar interface.")).arg("<a href=\"#device_settings\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("All devices listed in the {'Device model' list} are convenience definitions using one of the two built-in interfaces: the Meade LX200 (the Meade Autostar controller) interface and the Celestron NexStar interface.").replace(a_rx, "<a href=\"#device_settings\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p>" + q_("The device list contains the following:") + "</p><dl>";
 	helpPage += "<dt><b>Celestron NexStar (compatible)</b></dt><dd>" + q_("Any device using the NexStar interface.") + "</dd>";
 	helpPage += "<dt><b>Losmandy G-11</b></dt><dd>" + q_("A computerized telescope mount made by Losmandy (Meade LX-200/Autostar interface).") + "</dd>";
 	helpPage += "<dt><b>Meade Autostar compatible</b></dt><dd>" + q_("Any device using the LX-200/Autostar interface.") + "</dd>";
-	helpPage += "<dt><b>Meade ETX-70 (#494 Autostar, #506 CCS)</b></dt><dd>" + q_("The Meade ETX-70 telescope with the #494 Autostar controller and the #506 Connector Cable Set.")
-		 + " " + QString(q_("According to the tester, it is a bit slow, so its default setting of %1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds.")).arg("<a href=\"#telescope_properties\">").arg("</a>") + "</dd>";
+	helpPage += "<dt><b>Meade ETX-70 (#494 Autostar, #506 CCS)</b></dt><dd>" + q_("The Meade ETX-70 telescope with the #494 Autostar controller and the #506 Connector Cable Set.") + " ";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("According to the tester, it is a bit slow, so its default setting of %1'Connection delay'%2 is 1.5 seconds instead of 0.5 seconds.").replace(a_rx, "<a href=\"#telescope_properties\">\\1</a>");
+	helpPage += "</dd>";
 	helpPage += "<dt><b>Meade LX200 (compatible)</b></dt><dd>" + q_("Any device using the LX-200/Autostar interface.") + "</dd>";
 	helpPage += "<dt><b>Sky-Watcher SynScan AZ mount</b></dt><dd>" + q_("The Sky-Watcher SynScan AZ GoTo mount is used in a number of telescopes.") + "</dd>";
 	helpPage += "<dt><b>Sky-Watcher SynScan (version 3 or later)</b></dt><dd>" + q_("<b>SynScan</b> is also the name of the hand controller used in other Sky-Watcher GoTo mounts, and it seems that any mount that uses a SynScan controller version 3.0 or greater is supported by the plug-in, as it uses the NexStar protocol.") + "</dd>";
 	helpPage += "<dt><b>Wildcard Innovations Argo Navis (Meade mode)</b></dt><dd>" + q_("Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations.")
 		 + " " + q_("It is an advanced digital setting circle that turns an ordinary telescope (for example, a dobsonian) into a 'Push To' telescope (a telescope that uses a computer to find targets and human power to move the telescope itself).")
-		 + " " + QString(q_("Just don't forget to set it to Meade compatibility mode and set the baud rate to 9600B%1.")).arg("<sup><a href=\"http://www.iceinspace.com.au/forum/showpost.php?p=554948&amp;postcount=18\">1</a></sup>") + "</dd></dl>";
+		 + " " + q_("Just don't forget to set it to Meade compatibility mode and set the baud rate to 9600B")
+		 + "<sup><a href=\"http://www.iceinspace.com.au/forum/showpost.php?p=554948&amp;postcount=18\">1</a></sup>.</dd></dl>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "<h3><a name=\"virtual_telescope\" />" + q_("Virtual telescope") + "</h3>";
 	helpPage += "<p>" + q_("If you want to test this plug-in without an actual device connected to the computer, choose <b>Nothing, just simulate one (a moving reticle)</b> in the <b>Telescope controlled by:</b> field. It will show a telescope reticle that will react in the same way as the reticle of a real telescope controlled by the plug-in.") + "</p>";
-	helpPage += "<p>" + QString(q_("See the section above about %1field of view indicators%2 for a possible practical application (emulating 'Telrad' circles).")).arg("<a href=\"#fovcircles\">").arg("</a>") + "</p>";
-	helpPage += "<p>" + QString(q_("This feature is equivalent to the 'Dummy' type of telescope supported by %1Stellarium's original telescope control feature%2.")).arg("<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">").arg("</a>") + "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("See the section above about {field of view indicators} for a possible practical application (emulating 'Telrad' circles).").replace(a_rx, "<a href=\"#fovcircles\">\\1</a>");
+	helpPage += "</p>";
+	helpPage += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	helpPage += q_("This feature is equivalent to the 'Dummy' type of telescope supported by {Stellarium's original telescope control feature}.").replace(a_rx, "<a href=\"http://stellarium.sourceforge.net/wiki/index.php/Telescope_Control_%28client-server%29\">\\1</a>");
+	helpPage += "</p>";
 	helpPage += "<p><a href=\"#top\"><small>[" + q_("Back to top") + "]</small></a></p>";
 
 	helpPage += "</body></html>";
