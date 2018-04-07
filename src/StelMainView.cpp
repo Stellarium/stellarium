@@ -577,10 +577,10 @@ StelMainView::StelMainView(QSettings* settings)
 
 	StelApp::initStatic();
 
-	minFpsTimer = new QTimer(this);
-	minFpsTimer->setTimerType(Qt::PreciseTimer);
-	minFpsTimer->setInterval(1000/minfps);
-	connect(minFpsTimer,SIGNAL(timeout()),this,SLOT(minFPSUpdate()));
+	fpsTimer = new QTimer(this);
+	fpsTimer->setTimerType(Qt::PreciseTimer);
+	fpsTimer->setInterval(1000/minfps);
+	connect(fpsTimer,SIGNAL(timeout()),this,SLOT(fpsTimerUpdate()));
 
 	cursorTimeoutTimer = new QTimer(this);
 	cursorTimeoutTimer->setSingleShot(true);
@@ -1292,18 +1292,13 @@ void StelMainView::drawEnded()
 {
 	updateQueued = false;
 
-	//requeue the next draw
-	if(needsMaxFPS())
-	{
-		updateQueued = true;
-		minFpsTimer->stop();
-		QTimer::singleShot(0, glWidget, SLOT(update()));
-	}
-	else
-	{
-		if(!minFpsTimer->isActive())
-			minFpsTimer->start();
-	}
+	int requiredFpsInterval = needsMaxFPS()?1000/maxfps:1000/minfps;
+
+	if(fpsTimer->interval() != requiredFpsInterval)
+		fpsTimer->setInterval(requiredFpsInterval);
+
+	if(!fpsTimer->isActive())
+		fpsTimer->start();
 }
 
 void StelMainView::setFlagCursorTimeout(bool b)
@@ -1322,17 +1317,12 @@ void StelMainView::hideCursor()
 	QGuiApplication::setOverrideCursor(Qt::BlankCursor);
 }
 
-void StelMainView::minFPSUpdate()
+void StelMainView::fpsTimerUpdate()
 {
 	if(!updateQueued)
 	{
 		updateQueued = true;
-		//qDebug()<<"minFPSUpdate";
 		QTimer::singleShot(0, glWidget, SLOT(update()));
-	}
-	else
-	{
-		//qDebug()<<"double update";
 	}
 }
 

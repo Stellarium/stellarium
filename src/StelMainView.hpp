@@ -144,7 +144,7 @@ public slots:
 	//! user events for some seconds to save power. However, if can be useful to set this to a high
 	//! value to improve playing smoothness in scripts.
 	//! @param m the new minimum fps setting.
-	void setMinFps(float m) {minfps=m; minFpsTimer->setInterval(1000/minfps);}
+	void setMinFps(float m) {minfps=m;}
 	//! Get the current minimum frames per second.
 	float getMinFps() {return minfps;}
 	//! Set the maximum frames per second.
@@ -208,7 +208,7 @@ signals:
 private slots:
 	// Do the actual screenshot generation in the main thread with this method.
 	void doScreenshot(void);
-	void minFPSUpdate();
+	void fpsTimerUpdate();
 	void hideCursor();
 
 #ifdef OPENGL_DEBUG_LOGGING
@@ -271,7 +271,7 @@ private:
 	float minfps;
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
-	QTimer* minFpsTimer;
+	QTimer* fpsTimer;
 
 
 #ifdef OPENGL_DEBUG_LOGGING
