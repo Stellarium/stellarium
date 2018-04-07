@@ -63,6 +63,15 @@ public:
 		TriangleFan                 = 0x0006  //!< GL_TRIANGLE_FAN
 	};
 
+	enum class DitheringMode
+	{
+		Disabled,    //!< Dithering disabled, will leave the infamous color bands
+		Color565,    //!< 16-bit color (AKA High color) with R5_G6_B5 layout
+		Color666,    //!< TN+film typical color depth in TrueColor mode
+		Color888,    //!< 24-bit color (AKA True color)
+		Color101010, //!< 30-bit color (AKA Deep color)
+	};
+
 	explicit StelPainter(const StelProjectorP& prj);
 	~StelPainter();
 
@@ -306,6 +315,8 @@ public:
 	//! @return true if the link was successful.
 	static bool linkProg(class QOpenGLShaderProgram* prog, const QString& name);
 
+	DitheringMode getDitheringMode() const { return ditheringMode; }
+
 private:
 
 	friend class StelTextureMgr;
@@ -402,6 +413,8 @@ private:
 		int vertex;
 		int texColor;
 		int texture;
+		int bayerPattern;
+		int rgbMaxValue;
 	};
 	static TexturesShaderVars texturesShaderVars;
 	static QOpenGLShaderProgram* texturesColorShaderProgram;
@@ -411,9 +424,14 @@ private:
 		int vertex;
 		int color;
 		int texture;
+		int bayerPattern;
+		int rgbMaxValue;
 	};
 	static TexturesColorShaderVars texturesColorShaderVars;
 
+	GLuint bayerPatternTex=0;
+	DitheringMode ditheringMode;
+	static DitheringMode parseDitheringMode(QString const& s);
 
 	//! The descriptor for the current opengl vertex array
 	ArrayDesc vertexArray;
@@ -424,6 +442,8 @@ private:
 	//! The descriptor for the current opengl color array
 	ArrayDesc colorArray;
 };
+
+Q_DECLARE_METATYPE(StelPainter::DitheringMode)
 
 #endif // _STELPAINTER_HPP_
 

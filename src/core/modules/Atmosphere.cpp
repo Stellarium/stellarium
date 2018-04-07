@@ -25,6 +25,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelFileMgr.hpp"
+#include "Dithering.hpp"
 
 #include <QDebug>
 #include <QSettings>
@@ -58,10 +59,11 @@ Atmosphere::Atmosphere(void)
 	}
 	QOpenGLShader fShader(QOpenGLShader::Fragment);
 	if (!fShader.compileSourceCode(
+					makeDitheringShader()+
 					"varying mediump vec3 resultSkyColor;\n"
 					"void main()\n"
 					"{\n"
-					 "   gl_FragColor = vec4(resultSkyColor, 1.);\n"
+					 "   gl_FragColor = vec4(dither(resultSkyColor), 1.);\n"
 					 "}"))
 	{
 		qFatal("Error while compiling atmosphere fragment shader: %s", fShader.log().toLatin1().constData());
@@ -76,6 +78,8 @@ Atmosphere::Atmosphere(void)
 	StelPainter::linkProg(atmoShaderProgram, "atmosphere");
 
 	atmoShaderProgram->bind();
+	shaderAttribLocations.bayerPattern = atmoShaderProgram->uniformLocation("bayerPattern");
+	shaderAttribLocations.rgbMaxValue = atmoShaderProgram->uniformLocation("rgbMaxValue");
 	shaderAttribLocations.alphaWaOverAlphaDa = atmoShaderProgram->uniformLocation("alphaWaOverAlphaDa");
 	shaderAttribLocations.oneOverGamma = atmoShaderProgram->uniformLocation("oneOverGamma");
 	shaderAttribLocations.term2TimesOneOverMaxdLpOneOverGamma = atmoShaderProgram->uniformLocation("term2TimesOneOverMaxdLpOneOverGamma");
@@ -368,6 +372,15 @@ void Atmosphere::draw(StelCore* core)
 	const Mat4f& m = sPainter.getProjector()->getProjectionMatrix();
 	atmoShaderProgram->setUniformValue(shaderAttribLocations.projectionMatrix,
 		QMatrix4x4(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]));
+
+	const auto rgbMaxValue=calcRGBMaxValue(sPainter.getDitheringMode());
+	atmoShaderProgram->setUniformValue(shaderAttribLocations.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
+	auto& gl=*sPainter.glFuncs();
+	gl.glActiveTexture(GL_TEXTURE1);
+	if(!bayerPatternTex)
+		bayerPatternTex=makeBayerPatternTexture(*sPainter.glFuncs());
+	gl.glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
+	atmoShaderProgram->setUniformValue(shaderAttribLocations.bayerPattern, 1);
 	
 	colorGridBuffer.bind();
 	atmoShaderProgram->setAttributeBuffer(shaderAttribLocations.skyColor, GL_FLOAT, 0, 4, 0);

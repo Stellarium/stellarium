@@ -103,6 +103,8 @@ private:
 	//! Vertex shader used for xyYToRGB computation
 	class QOpenGLShaderProgram* atmoShaderProgram;
 	struct {
+		int bayerPattern;
+		int rgbMaxValue;
 		int alphaWaOverAlphaDa;
 		int oneOverGamma;
 		int term2TimesOneOverMaxdLpOneOverGamma;
@@ -114,6 +116,8 @@ private:
 		int skyVertex;
 		int skyColor;
 	} shaderAttribLocations;
+
+	GLuint bayerPatternTex=0;
 };
 
 #endif // _ATMOSTPHERE_HPP_
