@@ -1416,8 +1416,9 @@ void StelMainView::doScreenshot(void)
 	fbObj->bind();
 	QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
 	fbObjPaintDev.setDevicePixelRatio(pixelRatio);
-	QPainter painter(&fbObjPaintDev);
+	QPainter painter;
 	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+	painter.begin(&fbObjPaintDev);
 	stelScene->render(&painter);
 	painter.end();
 	QImage im = fbObj->toImage();
