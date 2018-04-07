@@ -1409,11 +1409,13 @@ void StelMainView::doScreenshot(void)
 	QImage im = glWidget->grabFrameBuffer();
 #else
 	glWidget->makeCurrent();
+	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width(), stelScene->height(), fbFormat);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width() * pixelRatio, stelScene->height() * pixelRatio, fbFormat);
 	fbObj->bind();
 	QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
+	fbObjPaintDev.setDevicePixelRatio(pixelRatio);
 	QPainter painter(&fbObjPaintDev);
 	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 	stelScene->render(&painter);
