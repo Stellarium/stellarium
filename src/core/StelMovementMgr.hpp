@@ -60,6 +60,11 @@ class StelMovementMgr : public StelModule
 		   READ getFlagAutoZoomOutResetsDirection
 		   WRITE setFlagAutoZoomOutResetsDirection
 		   NOTIFY flagAutoZoomOutResetsDirectionChanged)
+
+	Q_PROPERTY(bool flagEnableMouseNavigation
+		   READ getFlagEnableMouseNavigation
+		   WRITE setFlagEnableMouseNavigation
+		   NOTIFY flagEnableMouseNavigationChanged)
 public:
 
 	//! Possible mount modes defining the reference frame in which head movements occur.
@@ -181,7 +186,7 @@ public slots:
 	//! Get whether mouse can control movement
 	bool getFlagEnableMouseNavigation() const {return flagEnableMouseNavigation;}
 	//! Set whether mouse can control movement
-	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b;}
+	void setFlagEnableMouseNavigation(bool b) {flagEnableMouseNavigation=b; emit flagEnableMouseNavigationChanged(b); }
 
 	//! Get the state of flag for indication of mount mode
 	bool getFlagIndicationMountMode() const {return flagIndicationMountMode;}
@@ -319,6 +324,7 @@ signals:
 
 	void viewportHorizontalOffsetTargetChanged(float f);
 	void viewportVerticalOffsetTargetChanged(float f);
+	void flagEnableMouseNavigationChanged(bool b);
 
 private slots:
 	//! Called when the selected object changes.

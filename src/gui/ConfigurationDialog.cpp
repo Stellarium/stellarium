@@ -225,10 +225,12 @@ void ConfigurationDialog::createDialogContent()
 
 	// TODO: convert to properties
 	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
-	ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
+	//ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMoveKeys(bool)));
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
-	connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
+	//connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
+	connectBoolProperty(ui->enableMouseNavigationCheckBox,  "StelMovementMgr.flagEnableMouseNavigation");
+
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
 	connect(ui->editShortcutsPushButton, SIGNAL(clicked()), this, SLOT(showShortcutsWindow()));
 
@@ -278,39 +280,34 @@ void ConfigurationDialog::createDialogContent()
 	// Tools tab
 	ui->sphericMirrorCheckbox->setChecked(StelApp::getInstance().getViewportEffect() == "sphericMirrorDistorter");
 	connect(ui->sphericMirrorCheckbox, SIGNAL(toggled(bool)), this, SLOT(setSphericMirror(bool)));
-	ui->gravityLabelCheckbox->setChecked(proj->getFlagGravityLabels());
-	connect(ui->gravityLabelCheckbox, SIGNAL(toggled(bool)), StelApp::getInstance().getCore(), SLOT(setFlagGravityLabels(bool)));
+	connectBoolProperty(ui->gravityLabelCheckbox, "StelCore.flagGravityLabels");
+
 	connectBoolProperty(ui->selectSingleConstellationButton, "ConstellationMgr.isolateSelected");
 	ui->diskViewportCheckbox->setChecked(proj->getMaskType() == StelProjector::MaskDisk);
 	connect(ui->diskViewportCheckbox, SIGNAL(toggled(bool)), this, SLOT(setDiskViewport(bool)));
 	connectBoolProperty(ui->autoZoomResetsDirectionCheckbox, "StelMovementMgr.flagAutoZoomOutResetsDirection");
 
-	connectBoolProperty(ui->showFlipButtonsCheckbox,			"StelGui.flagShowFlipButtons");
+	connectBoolProperty(ui->showFlipButtonsCheckbox,		"StelGui.flagShowFlipButtons");
 	connectBoolProperty(ui->showNebulaBgButtonCheckbox,		"StelGui.flagShowNebulaBackgroundButton");
 	connectBoolProperty(ui->showBookmarksButtonCheckBox,		"StelGui.flagShowBookmarksButton");
 	connectBoolProperty(ui->showICRSGridButtonCheckBox,		"StelGui.flagShowICRSGridButton");
-	connectBoolProperty(ui->showGalacticGridButtonCheckBox,	"StelGui.flagShowGalacticGridButton");
+	connectBoolProperty(ui->showGalacticGridButtonCheckBox,		"StelGui.flagShowGalacticGridButton");
 	connectBoolProperty(ui->showEclipticGridButtonCheckBox,		"StelGui.flagShowEclipticGridButton");
+	connectBoolProperty(ui->showHipsButtonCheckBox,			"StelGui.flagShowHiPSButton");
 	connectBoolProperty(ui->showDSSButtonCheckbox,			"StelGui.flagShowDSSButton");
 	connectBoolProperty(ui->showConstellationBoundariesButtonCheckBox, "StelGui.flagShowConstellationBoundariesButton");
 
-	//ui->decimalDegreeCheckBox->setChecked(StelApp::getInstance().getFlagShowDecimalDegrees());
-	//connect(ui->decimalDegreeCheckBox, SIGNAL(toggled(bool)), gui, SLOT(setFlagShowDecimalDegrees(bool)));
-	// TODO: Make sure to remove this setter function, rather listen to StelApp's signal. 
 	connectBoolProperty(ui->decimalDegreeCheckBox, "StelApp.flagShowDecimalDegrees");
-
 	connectBoolProperty(ui->azimuthFromSouthcheckBox, "StelApp.flagUseAzimuthFromSouth");
 
-	//ui->mouseTimeoutCheckbox->setChecked(StelMainView::getInstance().getFlagCursorTimeout());
-	//ui->mouseTimeoutSpinBox->setValue(StelMainView::getInstance().getCursorTimeout());
-	//connect(ui->mouseTimeoutCheckbox, SIGNAL(clicked()), this, SLOT(cursorTimeOutChanged()));
-	//connect(ui->mouseTimeoutCheckbox, SIGNAL(toggled(bool)), this, SLOT(cursorTimeOutChanged()));
-	//connect(ui->mouseTimeoutSpinBox, SIGNAL(valueChanged(double)), this, SLOT(cursorTimeOutChanged(double)));
 	connectBoolProperty(ui->mouseTimeoutCheckbox, "MainView.flagCursorTimeout");
 	connectDoubleProperty(ui->mouseTimeoutSpinBox, "MainView.cursorTimeout");
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "MainView.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
 
+	// Dithering
+	populateDitherList();
+	connect(ui->ditheringComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDitherFormat()));
 
 	// General Option Save
 	connect(ui->saveViewDirAsDefaultPushButton, SIGNAL(clicked()), this, SLOT(saveCurrentViewDirSettings()));
@@ -529,33 +526,6 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 }
 
 
-//void ConfigurationDialog::updateStartPointForAzimuth(bool b)
-//{
-//	StelApp::getInstance().setFlagSouthAzimuthUsage(b);
-//}
-
-//void ConfigurationDialog::updateSettingFormattingOutput(bool b)
-//{
-//	StelApp::getInstance().setFlagUseFormattingOutput(b);
-//}
-
-//void ConfigurationDialog::updateSettingCCSDesignations(bool b)
-//{
-//	StelApp::getInstance().setFlagUseCCSDesignation(b);
-//}
-
-//void ConfigurationDialog::cursorTimeOutChanged()
-//{
-//	StelMainView::getInstance().setFlagCursorTimeout(ui->mouseTimeoutCheckbox->isChecked());
-//	StelMainView::getInstance().setCursorTimeout(ui->mouseTimeoutSpinBox->value());
-//}
-
-//void ConfigurationDialog::usageButtonsBackgroundChanged(bool b)
-//{
-//	StelMainView::getInstance().setFlagUseButtonsBackground(b);
-//	emit StelMainView::getInstance().updateIconsRequested();
-//}
-
 void ConfigurationDialog::browseForScreenshotDir()
 {
 	QString oldScreenshorDir = StelFileMgr::getScreenshotDir();
@@ -596,7 +566,7 @@ void ConfigurationDialog::saveCurrentViewDirSettings()
 }
 
 
-// Save the current viewing options including location and sky culture
+// Save the current viewing options including sky culture
 // This doesn't include the current viewing direction, landscape, time and FOV since those have specific controls
 void ConfigurationDialog::saveAllSettings()
 {
@@ -868,6 +838,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/auto_hide_vertical_toolbar", gui->getAutoHideVerticalButtonBar());
 	conf->setValue("gui/flag_show_nebulae_background_button", gui->getFlagShowNebulaBackgroundButton());
 	conf->setValue("gui/flag_show_dss_button", gui->getFlagShowDSSButton());
+	conf->setValue("gui/flag_show_hips_button", gui->getFlagShowHiPSButton());
 	conf->setValue("gui/flag_show_bookmarks_button", gui->getFlagShowBookmarksButton());
 	conf->setValue("gui/flag_show_icrs_grid_button", gui->getFlagShowICRSGridButton());
 	conf->setValue("gui/flag_show_galactic_grid_button", gui->getFlagShowGalacticGridButton());
@@ -1624,4 +1595,38 @@ void ConfigurationDialog::setTimeFormat()
 		return;
 
 	localeManager.setTimeFormatStr(selectedFormat);	
+}
+
+void ConfigurationDialog::populateDitherList()
+{
+	Q_ASSERT(ui->ditheringComboBox);
+
+	QComboBox* ditherCombo = ui->ditheringComboBox;
+
+	ditherCombo->blockSignals(true);
+	ditherCombo->clear();
+	ditherCombo->addItem(q_("None"),          "disabled"   );
+	ditherCombo->addItem(q_("5/6/5 bits"),    "color565"   );
+	ditherCombo->addItem(q_("6/6/6 bits"),    "color666"   );
+	ditherCombo->addItem(q_("8/8/8 bits"),    "color888"   );
+	ditherCombo->addItem(q_("10/10/10 bits"), "color101010");
+
+	//show current setting
+
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	QVariant selectedDitherFormat = conf->value("video/dithering_mode", "disabled");
+
+	int index = ditherCombo->findData(selectedDitherFormat, Qt::UserRole, Qt::MatchCaseSensitive);
+	ditherCombo->setCurrentIndex(index);
+	ditherCombo->blockSignals(false);
+}
+
+void ConfigurationDialog::setDitherFormat()
+{
+	QString selectedFormat = ui->ditheringComboBox->itemData(ui->ditheringComboBox->currentIndex()).toString();
+	QSettings* conf = StelApp::getInstance().getSettings();
+	Q_ASSERT(conf);
+	conf->setValue("video/dithering_mode", selectedFormat);
+	conf->sync();
 }

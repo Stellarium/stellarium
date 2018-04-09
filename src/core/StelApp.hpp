@@ -425,11 +425,10 @@ private:
 	StelViewportEffect* viewportEffect;
 	QOpenGLFunctions* gl;
 	
-	bool flagShowDecimalDegrees;
-	// flag to indicate we want calculate azimuth from south towards west (as in old astronomical literature)
-	bool flagUseAzimuthFromSouth;
-	bool flagUseFormattingOutput;
-	bool flagUseCCSDesignation;
+	bool flagShowDecimalDegrees;  // Format infotext with decimal degrees, not minutes/seconds
+	bool flagUseAzimuthFromSouth; // Display calculate azimuth from south towards west (as in some astronomical literature)
+	bool flagUseFormattingOutput; // Use tabular coordinate format for infotext
+	bool flagUseCCSDesignation;   // Use symbols like alpha (RA), delta (declination) for coordinate system labels
 #ifdef 	ENABLE_SPOUT
 	SpoutSender* spoutSender;
 #endif

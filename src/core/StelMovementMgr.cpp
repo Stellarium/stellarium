@@ -117,8 +117,8 @@ void StelMovementMgr::init()
 
 	flagEnableMoveAtScreenEdge = conf->value("navigation/flag_enable_move_at_screen_edge",false).toBool();
 	mouseZoomSpeed = conf->value("navigation/mouse_zoom",30).toInt();
-	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys").toBool();
-	flagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys").toBool();
+	flagEnableZoomKeys = conf->value("navigation/flag_enable_zoom_keys", true).toBool();
+	flagEnableMoveKeys = conf->value("navigation/flag_enable_move_keys", true).toBool();
 	keyMoveSpeed = conf->value("navigation/move_speed",0.0004f).toFloat();
 	keyZoomSpeed = conf->value("navigation/zoom_speed", 0.0004f).toFloat();
 	autoMoveDuration = conf->value ("navigation/auto_move_duration",1.5f).toFloat();

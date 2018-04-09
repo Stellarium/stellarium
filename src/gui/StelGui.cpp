@@ -102,6 +102,8 @@ StelGui::StelGui()
 	, btShowNebulaeBackground(Q_NULLPTR)
 	, flagShowDSSButton(false)
 	, btShowDSS(Q_NULLPTR)
+	, flagShowHiPSButton(false)
+	, btShowHiPS(Q_NULLPTR)
 	, flagShowBookmarksButton(false)
 	, btShowBookmarks(Q_NULLPTR)
 	, flagShowICRSGridButton(false)
@@ -393,6 +395,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
 	setFlagShowDSSButton(conf->value("gui/flag_show_dss_button", false).toBool());
+	setFlagShowHiPSButton(conf->value("gui/flag_show_hips_button", false).toBool());
 	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
 	setFlagShowICRSGridButton(conf->value("gui/flag_show_icrs_grid_button", false).toBool());
 	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
@@ -676,181 +679,266 @@ void StelGui::resumeScript()
 
 void StelGui::setFlagShowFlipButtons(bool b)
 {
-	if (b==true) {
-		if (flipVert==Q_NULLPTR) {
-			// Create the vertical flip button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btFlipVertical-on.png");
-			QPixmap pxmapOff(":/graphicGui/btFlipVertical-off.png");
-			flipVert = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionVertical_Flip");
+	if (b!=flagShowFlipButtons)
+	{
+		if (b==true) {
+			if (flipVert==Q_NULLPTR) {
+				// Create the vertical flip button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btFlipVertical-on.png");
+				QPixmap pxmapOff(":/graphicGui/btFlipVertical-off.png");
+				flipVert = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionVertical_Flip");
+			}
+			if (flipHoriz==Q_NULLPTR) {
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btFlipHorizontal-on.png");
+				QPixmap pxmapOff(":/graphicGui/btFlipHorizontal-off.png");
+				flipHoriz = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionHorizontal_Flip");
+			}
+			getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit_Global");
+			getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
+		} else {
+			getButtonBar()->hideButton("actionVertical_Flip");
+			getButtonBar()->hideButton("actionHorizontal_Flip");
 		}
-		if (flipHoriz==Q_NULLPTR) {
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btFlipHorizontal-on.png");
-			QPixmap pxmapOff(":/graphicGui/btFlipHorizontal-off.png");
-			flipHoriz = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionHorizontal_Flip");
+		flagShowFlipButtons = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_flip_buttons", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
 		}
-		getButtonBar()->addButton(flipVert, "060-othersGroup", "actionQuit_Global");
-		getButtonBar()->addButton(flipHoriz, "060-othersGroup", "actionVertical_Flip");
-	} else {
-		getButtonBar()->hideButton("actionVertical_Flip");
-		getButtonBar()->hideButton("actionHorizontal_Flip");
+		emit flagShowFlipButtonsChanged(b);
 	}
-	flagShowFlipButtons = b;
-	if (initDone) {
-		skyGui->updateBarsPos();
-	}
-	emit flagShowFlipButtonsChanged(b);
 }
 
 // Define whether the button toggling nebulae backround images should be visible
 void StelGui::setFlagShowNebulaBackgroundButton(bool b)
 {
-	if (b==true) {
-		if (btShowNebulaeBackground==Q_NULLPTR) {
-			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
-			QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
-			btShowNebulaeBackground = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSO_Textures");
+	if (b!=flagShowNebulaBackgroundButton)
+	{
+		if (b==true) {
+			if (btShowNebulaeBackground==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btDSS-on.png");
+				QPixmap pxmapOff(":/graphicGui/btDSS-off.png");
+				btShowNebulaeBackground = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_DSO_Textures");
+			}
+			getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_DSO_Textures");
 		}
-		getButtonBar()->addButton(btShowNebulaeBackground, "040-nebulaeGroup");
-	} else {
-		getButtonBar()->hideButton("actionShow_DSO_Textures");
+		flagShowNebulaBackgroundButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_nebulae_background_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowNebulaBackgroundButtonChanged(b);
 	}
-	flagShowNebulaBackgroundButton = b;
-	if (initDone) {
-		skyGui->updateBarsPos();
-	}
-	emit flagShowNebulaBackgroundButtonChanged(b);
 }
 
 // Define whether the button toggling bookmarks should be visible
 void StelGui::setFlagShowBookmarksButton(bool b)
 {
-	if (b==true) {
-		if (btShowBookmarks==Q_NULLPTR) {
-			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");			
-			QPixmap pxmapOn(":/graphicGui/btBookmarksA-on.png");
-			QPixmap pxmapOff(":/graphicGui/btBookmarksA-off.png");
-			btShowBookmarks = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Bookmarks_Window_Global");
+	if(b!=flagShowBookmarksButton)
+	{
+		if (b==true) {
+			if (btShowBookmarks==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btBookmarksA-on.png");
+				QPixmap pxmapOff(":/graphicGui/btBookmarksA-off.png");
+				btShowBookmarks = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Bookmarks_Window_Global");
+			}
+			getButtonBar()->addButton(btShowBookmarks, "060-othersGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Bookmarks_Window_Global");
 		}
-		getButtonBar()->addButton(btShowBookmarks, "060-othersGroup");
-	} else {
-		getButtonBar()->hideButton("actionShow_Bookmarks_Window_Global");
+		flagShowBookmarksButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_bookmarks_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowBookmarksButtonChanged(b);
 	}
-	flagShowBookmarksButton = b;
-	if (initDone) {
-		skyGui->updateBarsPos();
-	}
-	emit flagShowBookmarksButtonChanged(b);
 }
 
 // Define whether the button toggling ICRS grid should be visible
 void StelGui::setFlagShowICRSGridButton(bool b)
 {
-	if (b==true) {
-		if (btShowICRSGrid==Q_NULLPTR) {
-			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btEquatorialJ2000Grid-on.png");
-			QPixmap pxmapOff(":/graphicGui/btEquatorialJ2000Grid-off.png");
-			btShowICRSGrid = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Equatorial_J2000_Grid");
+	if (b!=flagShowICRSGridButton)
+	{
+		if (b==true) {
+			if (btShowICRSGrid==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btEquatorialJ2000Grid-on.png");
+				QPixmap pxmapOff(":/graphicGui/btEquatorialJ2000Grid-off.png");
+				btShowICRSGrid = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Equatorial_J2000_Grid");
+			}
+			getButtonBar()->addButton(btShowICRSGrid, "020-gridsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Equatorial_J2000_Grid");
 		}
-		getButtonBar()->addButton(btShowICRSGrid, "020-gridsGroup");
-	} else {
-		getButtonBar()->hideButton("actionShow_Equatorial_J2000_Grid");
+		flagShowICRSGridButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_icrs_grid_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowICRSGridButtonChanged(b);
 	}
-	flagShowICRSGridButton = b;
-	if (initDone) {
-		skyGui->updateBarsPos();
-	}
-	emit flagShowICRSGridButtonChanged(b);
 }
 
 // Define whether the button toggling galactic grid should be visible
 void StelGui::setFlagShowGalacticGridButton(bool b)
 {
-	if (b==true) {
-		if (btShowGalacticGrid==Q_NULLPTR) {
-			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btGalacticGrid-on.png");
-			QPixmap pxmapOff(":/graphicGui/btGalacticGrid-off.png");
-			btShowGalacticGrid = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Galactic_Grid");
+	if (b!=flagShowGalacticGridButton)
+	{
+		if (b==true) {
+			if (btShowGalacticGrid==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btGalacticGrid-on.png");
+				QPixmap pxmapOff(":/graphicGui/btGalacticGrid-off.png");
+				btShowGalacticGrid = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Galactic_Grid");
+			}
+			getButtonBar()->addButton(btShowGalacticGrid, "020-gridsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Galactic_Grid");
 		}
-		getButtonBar()->addButton(btShowGalacticGrid, "020-gridsGroup");
-	} else {
-		getButtonBar()->hideButton("actionShow_Galactic_Grid");
+		flagShowGalacticGridButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_galactic_grid_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowGalacticGridButtonChanged(b);
 	}
-	flagShowGalacticGridButton = b;
-	if (initDone) {
-		skyGui->updateBarsPos();
-	}
-	emit flagShowGalacticGridButtonChanged(b);
 }
 
 // Define whether the button toggling ecliptic grid should be visible
 void StelGui::setFlagShowEclipticGridButton(bool b)
 {
-	if (b==true) {
-		if (btShowEclipticGrid==Q_NULLPTR) {
-			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btEclipticGrid-on.png");
-			QPixmap pxmapOff(":/graphicGui/btEclipticGrid-off.png");
-			btShowEclipticGrid = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Ecliptic_Grid");
+	if (b!=flagShowEclipticGridButton)
+	{
+		if (b==true) {
+			if (btShowEclipticGrid==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btEclipticGrid-on.png");
+				QPixmap pxmapOff(":/graphicGui/btEclipticGrid-off.png");
+				btShowEclipticGrid = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Ecliptic_Grid");
+			}
+			getButtonBar()->addButton(btShowEclipticGrid, "020-gridsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Ecliptic_Grid");
 		}
-		getButtonBar()->addButton(btShowEclipticGrid, "020-gridsGroup");
-	} else {
-		getButtonBar()->hideButton("actionShow_Ecliptic_Grid");
-	}
-	flagShowEclipticGridButton = b;
-	if (initDone) {
-		skyGui->updateBarsPos();
+		flagShowEclipticGridButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_ecliptic_grid_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowEclipticGridButtonChanged(b);
 	}
 }
 
 // Define whether the button toggling constellation boundaries should be visible
 void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 {
-	if (b==true) {
-		if (btShowConstellationBoundaries==Q_NULLPTR) {
-			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btConstellationBoundaries-on.png");
-			QPixmap pxmapOff(":/graphicGui/btConstellationBoundaries-off.png");
-			btShowConstellationBoundaries = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Constellation_Boundaries");
+	if (b!=flagShowConstellationBoundariesButton)
+	{
+		if (b==true) {
+			if (btShowConstellationBoundaries==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btConstellationBoundaries-on.png");
+				QPixmap pxmapOff(":/graphicGui/btConstellationBoundaries-off.png");
+				btShowConstellationBoundaries = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Constellation_Boundaries");
+			}
+			getButtonBar()->addButton(btShowConstellationBoundaries, "010-constellationsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Constellation_Boundaries");
 		}
-		getButtonBar()->addButton(btShowConstellationBoundaries, "010-constellationsGroup");
-	} else {
-		getButtonBar()->hideButton("actionShow_Constellation_Boundaries");
+		flagShowConstellationBoundariesButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_boundaries_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowConstellationBoundariesButtonChanged(b);
 	}
-	flagShowConstellationBoundariesButton = b;
-	if (initDone) {
-		skyGui->updateBarsPos();
-	}
-	emit flagShowConstellationBoundariesButtonChanged(b);
 }
 
 // Define whether the button toggling DSS images should be visible
 // TODO: This is now Hips. Decide what to do with TOAST/DSS-only, and rename methods accordingly.
 void StelGui::setFlagShowDSSButton(bool b)
 {
-	if (b==true) {
-		if (btShowDSS==Q_NULLPTR) {
-			// Create the nebulae background button
-			QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
-			QPixmap pxmapOn(":/graphicGui/btSurveys-on.png");
-			QPixmap pxmapOff(":/graphicGui/btSurveys-off.png");
-			btShowDSS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys");
+	if (b!=flagShowDSSButton)
+	{
+		if (b==true) {
+			if (btShowDSS==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btToastSurvey-on.png");
+				QPixmap pxmapOff(":/graphicGui/btToastSurvey-off");
+				btShowDSS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Toast_Survey");
+			}
+			getButtonBar()->addButton(btShowDSS, "040-nebulaeGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Toast_Survey");
 		}
-		getButtonBar()->addButton(btShowDSS, "040-nebulaeGroup");
-	} else {
-		getButtonBar()->hideButton("actionShow_Hips_Surveys");
+		flagShowDSSButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_dss_button", b);
+		conf->sync();
+		emit flagShowDSSButtonChanged(b);
 	}
-	flagShowDSSButton = b;	
+}
+
+// Define whether the button toggling HiPS images should be visible
+// TODO: This is now Hips. Decide what to do with TOAST/DSS-only, and rename methods accordingly.
+void StelGui::setFlagShowHiPSButton(bool b)
+{
+	if (b!=flagShowHiPSButton)
+	{
+		if (b==true) {
+			if (btShowHiPS==Q_NULLPTR) {
+				// Create the nebulae background button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btSurveys-on.png");
+				QPixmap pxmapOff(":/graphicGui/btSurveys-off.png");
+				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Hips_Surveys");
+			}
+			getButtonBar()->addButton(btShowHiPS, "040-nebulaeGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Hips_Surveys");
+		}
+		flagShowHiPSButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_hips_button", b);
+		conf->sync();
+		emit flagShowHiPSButtonChanged(b);
+	}
 }
 
 void StelGui::setVisible(bool b)
@@ -945,6 +1033,10 @@ bool StelGui::getFlagShowDSSButton() const
 	return flagShowDSSButton;
 }
 
+bool StelGui::getFlagShowHiPSButton() const
+{
+	return flagShowHiPSButton;
+}
 bool StelGui::getFlagShowBookmarksButton() const
 {
 	return flagShowBookmarksButton;

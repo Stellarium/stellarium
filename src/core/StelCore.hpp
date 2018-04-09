@@ -61,6 +61,7 @@ class StelCore : public QObject
 	Q_PROPERTY(QString currentProjectionTypeKey READ getCurrentProjectionTypeKey WRITE setCurrentProjectionTypeKey NOTIFY currentProjectionTypeKeyChanged STORED false)
 	//! Read-only property returning the localized projection name
 	Q_PROPERTY(QString currentProjectionNameI18n READ getCurrentProjectionNameI18n NOTIFY currentProjectionNameI18nChanged STORED false)
+	Q_PROPERTY(bool flagGravityLabels READ getFlagGravityLabels WRITE setFlagGravityLabels NOTIFY flagGravityLabelsChanged)
 
 public:
 
@@ -385,6 +386,8 @@ public slots:
 	//! Set the flag with decides whether to arrage labels so that
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
 	void setFlagGravityLabels(bool gravity);
+	//! return whether dome-aligned labels are in use
+	bool getFlagGravityLabels();
 	//! Set the offset rotation angle in degree to apply to gravity text (only if gravityLabels is set to false).
 	void setDefaultAngleForGravityText(float a);
 	//! Set the horizontal flip status.
@@ -400,7 +403,7 @@ public slots:
 	//! @return True if flipped vertically, else false.
 	bool getFlipVert(void) const;
 
-	//New for 0.15: Vertical offset should even be available for animation, so at last with property mechanism.
+	// Vertical offset should even be available for animation, so at last with property mechanism.
 	//! Get current value for horizontal viewport offset [-50...50]
 	//! An offset of 50 percent means projective image center is on the right screen border
 	double getViewportHorizontalOffset(void) const;
@@ -744,6 +747,8 @@ signals:
 	void currentProjectionTypeKeyChanged(const QString& newValue);
 	//! Emitted whenever the projection type changes
 	void currentProjectionNameI18nChanged(const QString& newValue);
+	//! Emitted when gravity label use is changed
+	void flagGravityLabelsChanged(bool gravity);
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device

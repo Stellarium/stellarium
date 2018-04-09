@@ -593,6 +593,12 @@ void StelCore::setMaskType(StelProjector::StelProjectorMaskType m)
 void StelCore::setFlagGravityLabels(bool gravity)
 {
 	currentProjectorParams.gravityLabels = gravity;
+	emit flagGravityLabelsChanged(gravity);
+}
+
+bool StelCore::getFlagGravityLabels()
+{
+	return currentProjectorParams.gravityLabels;
 }
 
 void StelCore::setDefaultAngleForGravityText(float a)

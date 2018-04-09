@@ -59,6 +59,7 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagShowFlipButtons READ getFlagShowFlipButtons WRITE setFlagShowFlipButtons NOTIFY flagShowFlipButtonsChanged)
 	Q_PROPERTY(bool flagShowNebulaBackgroundButton READ getFlagShowNebulaBackgroundButton WRITE setFlagShowNebulaBackgroundButton NOTIFY flagShowNebulaBackgroundButtonChanged)
 	Q_PROPERTY(bool flagShowDSSButton READ getFlagShowDSSButton WRITE setFlagShowDSSButton NOTIFY  flagShowDSSButtonChanged)
+	Q_PROPERTY(bool flagShowHiPSButton READ getFlagShowHiPSButton WRITE setFlagShowHiPSButton NOTIFY  flagShowHiPSButtonChanged)
 	Q_PROPERTY(bool flagShowBookmarksButton READ getFlagShowBookmarksButton WRITE setFlagShowBookmarksButton NOTIFY flagShowBookmarksButtonChanged)
 	Q_PROPERTY(bool flagShowICRSGridButton READ getFlagShowICRSGridButton WRITE setFlagShowICRSGridButton NOTIFY flagShowICRSGridButtonChanged)
 	Q_PROPERTY(bool flagShowGalacticGridButton READ getFlagShowGalacticGridButton WRITE setFlagShowGalacticGridButton NOTIFY flagShowGalacticGridButtonChanged )
@@ -126,10 +127,15 @@ public slots:
 	//! Get whether the button toggling nebulae background is visible
 	bool getFlagShowNebulaBackgroundButton() const;
 
-	//! Define whether the button toggling DSS survey should be visible
+	//! Define whether the button toggling DSS survey (TOAST) should be visible
 	void setFlagShowDSSButton(bool b);
-	//! Get whether the button toggling DSS survey is visible
+	//! Get whether the button toggling DSS survey (TOAST) is visible
 	bool getFlagShowDSSButton() const;
+
+	//! Define whether the button toggling HiPS surveys should be visible
+	void setFlagShowHiPSButton(bool b);
+	//! Get whether the button toggling HiPS surveys is visible
+	bool getFlagShowHiPSButton() const;
 
 	//! Define whether the button toggling bookmarks should be visible
 	void setFlagShowBookmarksButton(bool b);
@@ -195,6 +201,7 @@ signals:
 	void flagShowFlipButtonsChanged(bool b);
 	void flagShowNebulaBackgroundButtonChanged(bool b);
 	void flagShowDSSButtonChanged(bool b);
+	void flagShowHiPSButtonChanged(bool b);
 	void flagShowBookmarksButtonChanged(bool b);
 	void flagShowICRSGridButtonChanged(bool b);
 	void flagShowGalacticGridButtonChanged(bool b);
@@ -250,6 +257,9 @@ private:
 
 	bool flagShowDSSButton;
 	StelButton* btShowDSS;
+
+	bool flagShowHiPSButton;
+	StelButton* btShowHiPS;
 
 	bool flagShowBookmarksButton;
 	StelButton* btShowBookmarks;

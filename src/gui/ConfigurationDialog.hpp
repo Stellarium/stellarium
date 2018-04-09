@@ -136,6 +136,9 @@ private slots:
 
 	void setButtonBarDTFormat();
 
+	void populateDitherList();
+	void setDitherFormat();
+
 	#ifndef DISABLE_SCRIPTING
 	//! The selection of script in the script list has changed
 	//! Updates the script information panel
