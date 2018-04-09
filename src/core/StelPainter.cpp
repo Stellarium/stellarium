@@ -24,6 +24,7 @@
 #include "StelProjector.hpp"
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
+#include "Dithering.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -110,6 +111,17 @@ bool StelPainter::linkProg(QOpenGLShaderProgram* prog, const QString& name)
 	return ret;
 }
 
+StelPainter::DitheringMode StelPainter::parseDitheringMode(QString const& str)
+{
+	const auto s=str.trimmed().toLower();
+	if(s=="disabled"   ) return DitheringMode::Disabled;
+	if(s=="color565"   ) return DitheringMode::Color565;
+	if(s=="color666"   ) return DitheringMode::Color666;
+	if(s=="color888"   ) return DitheringMode::Color888;
+	if(s=="color101010") return DitheringMode::Color101010;
+	return DitheringMode::Disabled;
+}
+
 StelPainter::StelPainter(const StelProjectorP& proj) : QOpenGLFunctions(QOpenGLContext::currentContext()), glState(this)
 {
 	Q_ASSERT(proj);
@@ -136,6 +148,9 @@ StelPainter::StelPainter(const StelProjectorP& proj) : QOpenGLFunctions(QOpenGLC
 	glStencilMask(0x11111111);
 	glState.apply(); //apply default OpenGL state
 	setProjector(proj);
+
+	QSettings*const conf = StelApp::getInstance().getSettings();
+	ditheringMode = parseDitheringMode(conf->value("video/dithering_mode").toString());
 }
 
 void StelPainter::setProjector(const StelProjectorP& p)
@@ -2026,13 +2041,14 @@ void StelPainter::initGLShaders()
 	if (!vshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader2: " << vshader2.log(); }
 
 	QOpenGLShader fshader2(QOpenGLShader::Fragment);
-	const char *fsrc2 =
+	const auto fsrc2 =
+		makeDitheringShader()+
 		"varying mediump vec2 texc;\n"
 		"uniform sampler2D tex;\n"
 		"uniform mediump vec4 texColor;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = texture2D(tex, texc)*texColor;\n"
+		"    gl_FragColor = dither(texture2D(tex, texc)*texColor);\n"
 		"}\n";
 	fshader2.compileSourceCode(fsrc2);
 	if (!fshader2.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader2: " << fshader2.log(); }
@@ -2046,6 +2062,8 @@ void StelPainter::initGLShaders()
 	texturesShaderVars.vertex = texturesShaderProgram->attributeLocation("vertex");
 	texturesShaderVars.texColor = texturesShaderProgram->uniformLocation("texColor");
 	texturesShaderVars.texture = texturesShaderProgram->uniformLocation("tex");
+	texturesShaderVars.bayerPattern = texturesShaderProgram->uniformLocation("bayerPattern");
+	texturesShaderVars.rgbMaxValue = texturesShaderProgram->uniformLocation("rgbMaxValue");
 
 	// Texture shader program + interpolated color per vertex
 	QOpenGLShader vshader4(QOpenGLShader::Vertex);
@@ -2066,13 +2084,14 @@ void StelPainter::initGLShaders()
 	if (!vshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling vshader4: " << vshader4.log(); }
 
 	QOpenGLShader fshader4(QOpenGLShader::Fragment);
-	const char *fsrc4 =
+	const auto fsrc4 =
+		makeDitheringShader()+
 		"varying mediump vec2 texc;\n"
 		"varying mediump vec4 outColor;\n"
 		"uniform sampler2D tex;\n"
 		"void main(void)\n"
 		"{\n"
-		"    gl_FragColor = texture2D(tex, texc)*outColor;\n"
+		"    gl_FragColor = dither(texture2D(tex, texc)*outColor);\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
 	if (!fshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log(); }
@@ -2086,6 +2105,8 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.vertex = texturesColorShaderProgram->attributeLocation("vertex");
 	texturesColorShaderVars.color = texturesColorShaderProgram->attributeLocation("color");
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
+	texturesColorShaderVars.bayerPattern = texturesColorShaderProgram->uniformLocation("bayerPattern");
+	texturesColorShaderVars.rgbMaxValue = texturesColorShaderProgram->uniformLocation("rgbMaxValue");
 }
 
 
@@ -2146,6 +2167,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 	const Mat4f& m = getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 
+	const auto rgbMaxValue=calcRGBMaxValue(ditheringMode);
 	if (!texCoordArray.enabled && !colorArray.enabled && !normalArray.enabled)
 	{
 		pr = basicShaderProgram;
@@ -2166,6 +2188,12 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeArray(texturesShaderVars.texCoord, texCoordArray.type, texCoordArray.pointer, texCoordArray.size);
 		pr->enableAttributeArray(texturesShaderVars.texCoord);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
+		glActiveTexture(GL_TEXTURE1);
+		if(!bayerPatternTex)
+			bayerPatternTex=makeBayerPatternTexture(*this);
+		glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
+		pr->setUniformValue(texturesShaderVars.bayerPattern, 1);
+		pr->setUniformValue(texturesShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
 	else if (texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
@@ -2179,6 +2207,12 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		pr->setAttributeArray(texturesColorShaderVars.color, colorArray.type, colorArray.pointer, colorArray.size);
 		pr->enableAttributeArray(texturesColorShaderVars.color);
 		//pr->setUniformValue(texturesShaderVars.texture, 0);    // use texture unit 0
+		glActiveTexture(GL_TEXTURE1);
+		if(!bayerPatternTex)
+			bayerPatternTex=makeBayerPatternTexture(*this);
+		glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
+		pr->setUniformValue(texturesColorShaderVars.bayerPattern, 1);
+		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
 	}
 	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{
