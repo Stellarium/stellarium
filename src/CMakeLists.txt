@@ -10,6 +10,7 @@ IF(ENABLE_SPOUT)
 ENDIF()
 
 SET(stellarium_lib_SRCS
+     core/Dithering.hpp
      core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
