@@ -70,19 +70,19 @@ inline Vec3f calcRGBMaxValue(StelPainter::DitheringMode mode)
 inline QString makeDitheringShader()
 {
     return
-R"(uniform vec3 rgbMaxValue;
+R"(uniform mediump vec3 rgbMaxValue;
 uniform sampler2D bayerPattern;
-vec3 dither(vec3 c)
+mediump vec3 dither(mediump vec3 c)
 {
     if(rgbMaxValue.r==0.) return c;
-    float bayer=texture2D(bayerPattern,gl_FragCoord.xy/8.).r;
+    mediump float bayer=texture2D(bayerPattern,gl_FragCoord.xy/8.).r;
 
-    vec3 rgb=c*rgbMaxValue;
-    vec3 head=floor(rgb);
-    vec3 tail=fract(rgb);
+    mediump vec3 rgb=c*rgbMaxValue;
+    mediump vec3 head=floor(rgb);
+    mediump vec3 tail=fract(rgb);
     return (head+step(bayer,tail))/rgbMaxValue;
 }
-vec4 dither(vec4 c) { return vec4(dither(c.xyz),c.w); }
+mediump vec4 dither(mediump vec4 c) { return vec4(dither(c.xyz),c.w); }
 )";
 }
 
