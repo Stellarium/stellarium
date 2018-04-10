@@ -1402,6 +1402,7 @@ void StelMainView::doScreenshot(void)
 	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
+	fbFormat.setInternalTextureFormat(GL_RGB); // avoid transparent background!
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width() * pixelRatio, stelScene->height() * pixelRatio, fbFormat);
 	fbObj->bind();
 	QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
