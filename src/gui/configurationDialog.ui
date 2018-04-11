@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>568</width>
-    <height>496</height>
+    <width>419</width>
+    <height>473</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -197,13 +197,13 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>140</width>
-                   <height>24</height>
+                   <width>160</width>
+                   <height>0</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>140</width>
+                   <width>160</width>
                    <height>24</height>
                   </size>
                  </property>
@@ -235,13 +235,13 @@
                  </property>
                  <property name="minimumSize">
                   <size>
-                   <width>140</width>
-                   <height>24</height>
+                   <width>160</width>
+                   <height>0</height>
                   </size>
                  </property>
                  <property name="maximumSize">
                   <size>
-                   <width>140</width>
+                   <width>160</width>
                    <height>24</height>
                   </size>
                  </property>
@@ -342,6 +342,61 @@
                 </widget>
                </item>
               </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_3">
+            <property name="title">
+             <string>Screenshots</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout_3">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Screenshot Directory</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="screenshotDirEdit"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="screenshotBrowseButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="invertScreenShotColorsCheckBox">
+               <property name="text">
+                <string>Invert colors</string>
+               </property>
+              </widget>
              </item>
             </layout>
            </widget>
@@ -467,61 +522,6 @@
                 </widget>
                </item>
               </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>Screenshots</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>Screenshot Directory</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="screenshotDirEdit"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="screenshotBrowseButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="invertScreenShotColorsCheckBox">
-               <property name="text">
-                <string>Invert colors</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
