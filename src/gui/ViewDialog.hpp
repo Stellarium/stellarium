@@ -80,11 +80,6 @@ private slots:
 	// Two new from the unwanted trunk-rework Not sure if we need them at all?
 	void populateLightPollution();
 
-	// WHAT IS THE SKY LAYER? hidden, under development?
-	void populateSkyLayersList();
-	void skyLayersSelectionChanged(const QString&);
-	void skyLayersEnabledChanged(int);
-
 	void populatePlanetMagnitudeAlgorithmsList();
 	void populatePlanetMagnitudeAlgorithmDescription();
 	void setPlanetMagnitudeAlgorithm(int algorithmID);

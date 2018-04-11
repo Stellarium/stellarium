@@ -467,13 +467,6 @@ void ViewDialog::createDialogContent()
 	connect(ui->colorAsterismLines,		SIGNAL(released()), this, SLOT(askAsterismLinesColor()));
 	connect(ui->colorRayHelpers,			SIGNAL(released()), this, SLOT(askRayHelpersColor()));
 
-	// Sky layers. This not yet finished and not visible in releases.
-	// TODO: These 4 lines are commented away in trunk.
-	populateSkyLayersList();
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(populateSkyLayersList()));
-	connect(ui->skyLayerListWidget, SIGNAL(currentTextChanged(const QString&)), this, SLOT(skyLayersSelectionChanged(const QString&)));
-	connect(ui->skyLayerEnableCheckBox, SIGNAL(stateChanged(int)), this, SLOT(skyLayersEnabledChanged(int)));
-
 	// Hips mgr.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
@@ -1553,37 +1546,6 @@ void ViewDialog::populateLists()
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->property("currentLandscapeHtmlDescription").toString());
 	updateDefaultLandscape();
-}
-
-void ViewDialog::populateSkyLayersList()
-{
-	ui->skyLayerListWidget->clear();
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	ui->skyLayerListWidget->addItems(skyLayerMgr->getAllKeys());
-}
-
-void ViewDialog::skyLayersSelectionChanged(const QString& s)
-{
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	StelSkyLayerP l = skyLayerMgr->getSkyLayer(s);
-
-	if (l.isNull())
-		return;
-
-	QString html = "<html><head></head><body>";
-	html += "<h2>" + l->getShortName()+ "</h2>";
-	html += "<p>" + l->getLayerDescriptionHtml() + "</p>";
-	if (!l->getShortServerCredits().isEmpty())
-		html += "<h3>" + q_("Contact") + ": " + l->getShortServerCredits() + "</h3>";
-	html += "</body></html>";
-	ui->skyLayerTextBrowser->setHtml(html);
-	ui->skyLayerEnableCheckBox->setChecked(skyLayerMgr->getShowLayer(s));
-}
-
-void ViewDialog::skyLayersEnabledChanged(int state)
-{
-	StelSkyLayerMgr* skyLayerMgr = GETSTELMODULE(StelSkyLayerMgr);
-	skyLayerMgr->showLayer(ui->skyLayerListWidget->currentItem()->text(), state);
 }
 
 void ViewDialog::skyCultureChanged()
