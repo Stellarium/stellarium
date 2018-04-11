@@ -80,7 +80,7 @@ inline QString makeDitheringShader()
 			mediump vec3 rgb=c*rgbMaxValue;
 			mediump vec3 head=floor(rgb);
 			mediump vec3 tail=rgb-head;
-			return (head+step(bayer,tail))/rgbMaxValue;
+			return (head+1.-step(tail,vec3(bayer)))/rgbMaxValue;
 			}
 			mediump vec4 dither(mediump vec4 c) { return vec4(dither(c.xyz),c.w); }
 			)";
