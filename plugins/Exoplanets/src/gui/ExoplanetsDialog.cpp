@@ -24,6 +24,7 @@
 #include <QDateTime>
 #include <QUrl>
 #include <QFileDialog>
+#include <QColorDialog>
 
 #include "StelApp.hpp"
 #include "ui_exoplanetsDialog.h"

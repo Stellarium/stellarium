@@ -28,6 +28,7 @@
 class Ui_pulsarsDialog;
 class Pulsars;
 class QTimer;
+class QToolButton;
 
 //! @ingroup pulsars
 class PulsarsDialog : public StelDialog
@@ -59,11 +60,15 @@ private slots:
 	void saveSettings(void);
 	void updateJSON(void);
 
+	void askPulsarsMarkerColor();
+	void askPulsarGlitchesMarkerColor();
+
 private:
 	Ui_pulsarsDialog* ui;
 	Pulsars* psr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
+	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
 
 };
