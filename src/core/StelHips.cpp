@@ -75,6 +75,7 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	// Immediatly download the properties.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 	connect(networkReply, &QNetworkReply::finished, [&, networkReply] {
 		QByteArray data = networkReply->readAll();
@@ -154,6 +155,7 @@ bool HipsSurvey::getAllsky()
 		qDebug() << "Load allsky" << path;
 		QNetworkRequest req = QNetworkRequest(path);
 		req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
+		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		emit statusChanged();
 
