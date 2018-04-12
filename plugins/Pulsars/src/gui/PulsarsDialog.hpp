@@ -54,11 +54,13 @@ private slots:
 	void setSeparateColorsFlag(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
 	void setDisplayShowPulsarsButton(int checkState);
+	void setFilteringEnabled(int checkState);
 	void updateStateReceiver(Pulsars::UpdateState state);
         void updateCompleteReceiver();
 	void restoreDefaults(void);
 	void saveSettings(void);
 	void updateJSON(void);
+	void setFilterValue(double v);
 
 	void askPulsarsMarkerColor();
 	void askPulsarGlitchesMarkerColor();

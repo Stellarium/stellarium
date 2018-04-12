@@ -587,6 +587,8 @@ void Pulsars::restoreDefaultConfigIni(void)
 	conf->setValue("marker_color", "0.4,0.5,1.0");
 	conf->setValue("glitch_color", "0.2,0.3,1.0");
 	conf->setValue("use_separate_colors", false);
+	conf->setValue("filter_enabled", false);
+	conf->setValue("filter_value", "150.00");
 	conf->endGroup();
 }
 
@@ -600,6 +602,8 @@ void Pulsars::readSettingsFromConfig(void)
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
 	setGlitchFlag(conf->value("use_separate_colors", false).toBool());
+	setFilteredMode(conf->value("filter_enabled", false).toBool());
+	setFilterValue(conf->value("filter_value", 150.f).toFloat());
 	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()), true);
 	setMarkerColor(StelUtils::strToVec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()), false);
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
@@ -614,9 +618,11 @@ void Pulsars::saveSettingsToConfig(void)
 
 	conf->setValue("url", updateUrl);
 	conf->setValue("update_frequency_days", updateFrequencyDays);
-	conf->setValue("updates_enabled", updatesEnabled );
+	conf->setValue("updates_enabled", updatesEnabled);
 	conf->setValue("distribution_enabled", getDisplayMode());
 	conf->setValue("use_separate_colors", getGlitchFlag());
+	conf->setValue("filter_enabled", getFilteredMode());
+	conf->setValue("filter_value", QString::number(getFilterValue(), 'f', 2));
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
 	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
@@ -759,6 +765,26 @@ bool Pulsars::getGlitchFlag()
 void Pulsars::setGlitchFlag(bool b)
 {
 	Pulsar::glitchFlag=b;
+}
+
+bool Pulsars::getFilteredMode()
+{
+	return Pulsar::filteredMode;
+}
+
+void Pulsars::setFilteredMode(bool b)
+{
+	Pulsar::filteredMode=b;
+}
+
+float Pulsars::getFilterValue()
+{
+	return Pulsar::filterValue;
+}
+
+void Pulsars::setFilterValue(float v)
+{
+	Pulsar::filterValue=v;
 }
 
 Vec3f Pulsars::getMarkerColor(bool mtype)

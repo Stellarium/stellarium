@@ -90,8 +90,12 @@ void PulsarsDialog::createDialogContent()
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 	ui->displayShowPulsarsButton->setChecked(psr->getFlagShowPulsarsButton());
 	ui->displaySeparateColorsCheckBox->setChecked(psr->getGlitchFlag());
-	connect(ui->displaySeparateColorsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSeparateColorsFlag(int)));
+	ui->displayFilteredPulsarsCheckBox->setChecked(psr->getFilteredMode());
+	ui->mJyDoubleSpinBox->setValue(psr->getFilterValue());
 	connect(ui->displayShowPulsarsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowPulsarsButton(int)));
+	connect(ui->displaySeparateColorsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setSeparateColorsFlag(int)));
+	connect(ui->displayFilteredPulsarsCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setFilteringEnabled(int)));
+	connect(ui->mJyDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(setFilterValue(double)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(psr, SIGNAL(updateStateChanged(Pulsars::UpdateState)), this, SLOT(updateStateReceiver(Pulsars::UpdateState)));
@@ -233,6 +237,17 @@ void PulsarsDialog::setDistributionEnabled(int checkState)
 {
 	bool b = checkState != Qt::Unchecked;
 	psr->setDisplayMode(b);
+}
+
+void PulsarsDialog::setFilteringEnabled(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	psr->setFilteredMode(b);
+}
+
+void PulsarsDialog::setFilterValue(double v)
+{
+	psr->setFilterValue((float)v);
 }
 
 void PulsarsDialog::setDisplayAtStartupEnabled(int checkState)

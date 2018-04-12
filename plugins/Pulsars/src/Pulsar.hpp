@@ -120,6 +120,8 @@ private:
 	static StelTextureSP markerTexture;
 	static bool distributionMode;
 	static bool glitchFlag;
+	static bool filteredMode;
+	static float filterValue;
 	static Vec3f markerColor;
 	static Vec3f glitchColor;
 
@@ -128,8 +130,8 @@ private:
 	//! Variables for description of properties of pulsars
 	QString designation;	//! The designation of the pulsar (J2000 pulsar name)
 	QString pulsarName;	//! The proper name of the pulsar
-	float RA;			//! J2000 right ascension
-	float DE;			//! J2000 declination
+	float RA;		//! J2000 right ascension
+	float DE;		//! J2000 declination
 	float parallax;		//! Annual parallax (mas)
 	double period;		//! Barycentric period of the pulsar (s)
 	double frequency;	//! Barycentric rotation frequency (Hz)
@@ -138,12 +140,12 @@ private:
 	double dmeasure;	//! Dispersion measure (cm-3 pc)
 	double bperiod;		//! Binary period of pulsar (days)
 	double eccentricity;	//! Eccentricity	
-	float w50;			//! Profile width at 50% of peak in ms
+	float w50;		//! Profile width at 50% of peak in ms
 	float s400;		//! Time averaged flux density at 400MHz in mJy
 	float s600;		//! Time averaged flux density at 600MHz in mJy
 	float s1400;		//! Time averaged flux density at 1400MHz in mJy
 	float distance;		//! Distance based on electron density model in kpc
-	int glitch;			//! Number of glitches
+	int glitch;		//! Number of glitches
 	QString notes;		//! Notes to pulsar (Type of pulsar)
 
 	LinearFader labelsFader;

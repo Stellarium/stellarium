@@ -77,7 +77,7 @@ class Pulsars : public StelObjectModule
 		   READ getFlagShowPulsars
 		   WRITE setFlagShowPulsars
 		   NOTIFY flagPulsarsVisibilityChanged
-		   )
+		   )	
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -183,6 +183,7 @@ signals:
 	void jsonUpdateComplete(void);
 
 	void flagPulsarsVisibilityChanged(bool b);
+	void flagUsingFilterChanged(bool b);
 
 public slots:
 	//! Define whether the button toggling pulsars should be visible
@@ -195,6 +196,20 @@ public slots:
 	//! Get status to display of markers of pulsars
 	//! @return true if it's visible
 	bool getFlagShowPulsars(void) { return flagShowPulsars; }
+
+	//! Enable/disable display filter of pulsars
+	//! @param b boolean flag
+	void setFilteredMode(bool b);
+	//! Get status to usage display filter of pulsars
+	//! @return true if it's visible
+	bool getFilteredMode(void);
+
+	//! Set value for filter
+	//! @param v float value
+	void setFilterValue(float v);
+	//! Get value for filter
+	//! @return value
+	float getFilterValue(void);
 
 	//! Get status to display of distribution of pulsars
 	//! @return true if distribution of pulsars is enabled
@@ -289,7 +304,7 @@ private:
 	// GUI
 	PulsarsDialog* configDialog;
 	bool flagShowPulsars;
-	bool flagShowPulsarsButton;
+	bool flagShowPulsarsButton;	
 	QPixmap* OnIcon;
 	QPixmap* OffIcon;
 	QPixmap* GlowIcon;

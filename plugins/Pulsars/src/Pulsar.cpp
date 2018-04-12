@@ -45,6 +45,8 @@ StelTextureSP Pulsar::markerTexture;
 
 bool Pulsar::distributionMode = false;
 bool Pulsar::glitchFlag = false;
+bool Pulsar::filteredMode = false;
+float Pulsar::filterValue = 150.f;
 Vec3f Pulsar::markerColor = Vec3f(0.4f,0.5f,1.0f);
 Vec3f Pulsar::glitchColor = Vec3f(0.2f,0.3f,1.0f);
 
@@ -437,9 +439,13 @@ void Pulsar::draw(StelCore* core, StelPainter *painter)
 		painter->setColor(glitchColor[0], glitchColor[1], glitchColor[2], 1.f);
 	else
 		painter->setColor(markerColor[0], markerColor[1], markerColor[2], 1.f);
-	float mlimit = sd->getLimitMagnitude();
 
-	if (mag <= mlimit)
+	float mlimit = sd->getLimitMagnitude();
+	bool visible = true;
+	if (filteredMode && s400<filterValue)
+		visible = false;
+
+	if (mag <= mlimit && visible)
 	{		
 		Pulsar::markerTexture->bind();
 		float size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter->getProjector()->getPixelPerRadAtCenter();
