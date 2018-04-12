@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>646</width>
-    <height>661</height>
+    <width>574</width>
+    <height>550</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -162,10 +162,7 @@
          <attribute name="title">
           <string>General</string>
          </attribute>
-         <layout class="QVBoxLayout" name="verticalLayoutTabGeneral">
-          <property name="spacing">
-           <number>0</number>
-          </property>
+         <layout class="QGridLayout" name="gridLayout_10">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -178,7 +175,10 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
            <widget class="QGroupBox" name="groupBoxInterface">
             <property name="title">
              <string>Interface</string>
@@ -196,47 +196,51 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="1" column="0">
+             <item row="8" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QLabel" name="arrowButtonScaleLabel">
+                 <property name="toolTip">
+                  <string/>
+                 </property>
+                 <property name="text">
+                  <string>Arrow button scale (requires restart)</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="arrowButtonScaleDoubleSpinBox">
+                 <property name="minimum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>2.500000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.050000000000000</double>
+                 </property>
+                 <property name="value">
+                  <double>1.500000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
+               <property name="text">
+                <string>Show resolution criteria</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxControlPanel">
                <property name="text">
                 <string>On-screen control panel</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
-              <widget class="QDoubleSpinBox" name="arrowButtonScaleDoubleSpinBox">
-               <property name="minimum">
-                <double>1.000000000000000</double>
-               </property>
-               <property name="maximum">
-                <double>2.500000000000000</double>
-               </property>
-               <property name="singleStep">
-                <double>0.050000000000000</double>
-               </property>
-               <property name="value">
-                <double>1.500000000000000</double>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
-              <widget class="QLabel" name="arrowButtonScaleLabel">
-               <property name="text">
-                <string>Arrow button scale (requires restart)</string>
-               </property>
-              </widget>
-             </item>
              <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBoxInitialDirection">
-               <property name="toolTip">
-                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
-               </property>
-               <property name="text">
-                <string>Restore direction to initial values</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
               <widget class="QCheckBox" name="checkBoxInitialFOV">
                <property name="toolTip">
                 <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
@@ -247,16 +251,19 @@
               </widget>
              </item>
              <item row="4" column="0">
-              <widget class="QCheckBox" name="checkBoxResolutionCriterion">
+              <widget class="QCheckBox" name="checkBoxInitialDirection">
+               <property name="toolTip">
+                <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
+               </property>
                <property name="text">
-                <string>Show resolution criteria</string>
+                <string>Restore direction to initial values</string>
                </property>
               </widget>
              </item>
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="0" column="1">
            <widget class="QGroupBox" name="groupBoxOcularOptions">
             <property name="title">
              <string>Ocular view</string>
@@ -274,10 +281,17 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="requireSelectionCheckBox">
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
                <property name="text">
-                <string>Enable only if an object is selected</string>
+                <string>Scale image circle</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="hideGridsLinesCheckBox">
+               <property name="text">
+                <string>Hide grids and lines when enabled</string>
                </property>
               </widget>
              </item>
@@ -291,14 +305,14 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="scaleImageCircleCheckBox">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="requireSelectionCheckBox">
                <property name="text">
-                <string>Scale image circle</string>
+                <string>Enable only if an object is selected</string>
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
+             <item row="4" column="0">
               <widget class="QCheckBox" name="semiTransparencyCheckBox">
                <property name="toolTip">
                 <string>In ocular mode, allow some visibility outside ocular circle.</string>
@@ -308,17 +322,10 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="hideGridsLinesCheckBox">
-               <property name="text">
-                <string>Hide grids and lines when enabled</string>
-               </property>
-              </widget>
-             </item>
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="1" column="0">
            <widget class="QGroupBox" name="groupBoxSensorOptions">
             <property name="title">
              <string>Sensor view</string>
@@ -356,15 +363,49 @@
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="1" column="1">
+           <widget class="QGroupBox" name="groupBoxTelradOptions">
+            <property name="title">
+             <string>Telrad view</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_9">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <property name="spacing">
+              <number>0</number>
+             </property>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxTelradFOVScaling">
+               <property name="text">
+                <string>Enable scaling FOV for Telrad</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
             </property>
             <property name="sizeHint" stdset="0">
              <size>
-              <width>20</width>
-              <height>40</height>
+              <width>187</width>
+              <height>285</height>
              </size>
             </property>
            </spacer>
@@ -1771,7 +1812,6 @@
   </customwidget>
  </customwidgets>
  <tabstops>
-  <tabstop>Tabs</tabstop>
   <tabstop>requireSelectionCheckBox</tabstop>
   <tabstop>ocularListView</tabstop>
   <tabstop>addOcular</tabstop>

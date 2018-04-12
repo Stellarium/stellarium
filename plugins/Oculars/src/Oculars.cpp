@@ -705,6 +705,7 @@ void Oculars::init()
 		setFlagUseSemiTransparency(settings->value("use_semi_transparency", false).toBool());
 		setFlagHideGridsLines(settings->value("hide_grids_and_lines", true).toBool());
 		setFlagAutosetMountForCCD(settings->value("use_mount_autoset", false).toBool());
+		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
 		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
 		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
@@ -1470,7 +1471,8 @@ void Oculars::toggleTelrad(bool show)
 			toggleCCD(false);
 			// NOTE: Added special zoom level for Telrad
 			// Seems problem was introduced with introducing StelProperty feature
-			movementMgr->zoomTo(10.0);
+			if (flagScalingFOVForTelrad)
+				movementMgr->zoomTo(10.0);
 		}
 		else if (getFlagInitFovUsage()) // Restoration of FOV is needed?
 			movementMgr->zoomTo(movementMgr->getInitFov());
@@ -2474,6 +2476,19 @@ void Oculars::setFlagAutosetMountForCCD(const bool b)
 bool Oculars::getFlagAutosetMountForCCD() const
 {
 	return  flagAutosetMountForCCD;
+}
+
+void Oculars::setFlagScalingFOVForTelrad(const bool b)
+{
+	flagScalingFOVForTelrad = b;
+	settings->setValue("use_telrad_fov_scaling", b);
+	settings->sync();
+	emit flagScalingFOVForTelradChanged(b);
+}
+
+bool Oculars::getFlagScalingFOVForTelrad() const
+{
+	return  flagScalingFOVForTelrad;
 }
 
 void Oculars::setFlagUseSemiTransparency(const bool b)
