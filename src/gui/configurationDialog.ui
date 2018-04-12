@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>664</width>
-    <height>534</height>
+    <height>498</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -145,6 +145,146 @@
       <property name="spacing">
        <number>0</number>
       </property>
+      <item row="0" column="0">
+       <widget class="QListWidget" name="stackListWidget">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>74</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>74</height>
+         </size>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::NoFocus</enum>
+        </property>
+        <property name="verticalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="horizontalScrollBarPolicy">
+         <enum>Qt::ScrollBarAlwaysOff</enum>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>50</width>
+          <height>50</height>
+         </size>
+        </property>
+        <property name="movement">
+         <enum>QListView::Static</enum>
+        </property>
+        <property name="flow">
+         <enum>QListView::LeftToRight</enum>
+        </property>
+        <property name="isWrapping" stdset="0">
+         <bool>false</bool>
+        </property>
+        <property name="resizeMode">
+         <enum>QListView::Adjust</enum>
+        </property>
+        <property name="layoutMode">
+         <enum>QListView::SinglePass</enum>
+        </property>
+        <property name="spacing">
+         <number>0</number>
+        </property>
+        <property name="viewMode">
+         <enum>QListView::IconMode</enum>
+        </property>
+        <property name="uniformItemSizes">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>false</bool>
+        </property>
+        <property name="selectionRectVisible">
+         <bool>false</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Main</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-main.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Information</string>
+         </property>
+         <property name="toolTip">
+          <string>Selected object information</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-info.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string comment="Additional settings for Graphical User Interface">Extras</string>
+         </property>
+         <property name="toolTip">
+          <string>Additional settings for Graphical User Interface</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-extras.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Time</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-time.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Tools</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-tools.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Scripts</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-scripts.png</normalon>
+          </iconset>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Plugins</string>
+         </property>
+         <property name="icon">
+          <iconset>
+           <normalon>:/graphicGui/tabicon-plugins.png</normalon>
+          </iconset>
+         </property>
+        </item>
+       </widget>
+      </item>
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
@@ -342,61 +482,6 @@
                 </widget>
                </item>
               </layout>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="groupBox_3">
-            <property name="title">
-             <string>Screenshots</string>
-            </property>
-            <layout class="QVBoxLayout" name="verticalLayout_3">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <item>
-                <widget class="QLabel" name="label">
-                 <property name="text">
-                  <string>Screenshot Directory</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLineEdit" name="screenshotDirEdit"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="screenshotBrowseButton">
-                 <property name="sizePolicy">
-                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                   <horstretch>0</horstretch>
-                   <verstretch>0</verstretch>
-                  </sizepolicy>
-                 </property>
-                 <property name="text">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item>
-              <widget class="QCheckBox" name="invertScreenShotColorsCheckBox">
-               <property name="text">
-                <string>Invert colors</string>
-               </property>
-              </widget>
              </item>
             </layout>
            </widget>
@@ -888,10 +973,7 @@
          </layout>
         </widget>
         <widget class="QWidget" name="page_Extras">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <property name="spacing">
-           <number>0</number>
-          </property>
+         <layout class="QGridLayout" name="gridLayout">
           <property name="leftMargin">
            <number>0</number>
           </property>
@@ -904,56 +986,10 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item>
-           <widget class="QGroupBox" name="groupBoxAdditionalSettings">
-            <property name="title">
-             <string>Additional information settings</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayoutAdditionalSettings">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="checkBoxUMShortNotationSurfaceBrightness">
-               <property name="text">
-                <string>Use short notation for unit of measurement of surface brightness</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="checkBoxUMSurfaceBrightness">
-               <property name="text">
-                <string>Use unit of measurement mag/arcsec^2 for surface brightness</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
-               <property name="text">
-                <string>Use formatting output for coordinates</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="checkBoxUseCCSDesignations">
-               <property name="text">
-                <string>Use designations for celestial coordinate systems</string>
-               </property>
-              </widget>
-             </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="1" column="0" colspan="2">
            <widget class="QGroupBox" name="groupBoxAdditionalButtons">
             <property name="title">
              <string>Additional buttons</string>
@@ -1071,7 +1107,146 @@
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="2" column="0" rowspan="2" colspan="2">
+           <widget class="QGroupBox" name="contentBox">
+            <property name="title">
+             <string>Star catalog updates</string>
+            </property>
+            <layout class="QHBoxLayout" name="horizontalLayout">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item>
+              <widget class="QCommandLinkButton" name="getStarsButton">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <property name="toolTip">
+                <string>Click here to start downloading</string>
+               </property>
+               <property name="text">
+                <string notr="true">Get catalog x of y</string>
+               </property>
+               <property name="icon">
+                <iconset resource="../../data/gui/guiRes.qrc">
+                 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
+               </property>
+               <property name="iconSize">
+                <size>
+                 <width>24</width>
+                 <height>24</height>
+                </size>
+               </property>
+               <property name="description">
+                <string>Download this file to view even more stars</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="downloadLabel">
+               <property name="text">
+                <string notr="true">xxx</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="downloadRetryButton">
+               <property name="toolTip">
+                <string>Restart the download</string>
+               </property>
+               <property name="text">
+                <string>Retry</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="downloadCancelButton">
+               <property name="toolTip">
+                <string>Stop the download. You can always restart it later</string>
+               </property>
+               <property name="text">
+                <string>Cancel</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QGroupBox" name="groupBoxAdditionalSettings">
+            <property name="title">
+             <string>Additional information settings</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayoutAdditionalSettings">
+             <property name="leftMargin">
+              <number>0</number>
+             </property>
+             <property name="topMargin">
+              <number>0</number>
+             </property>
+             <property name="rightMargin">
+              <number>0</number>
+             </property>
+             <property name="bottomMargin">
+              <number>0</number>
+             </property>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="checkBoxUMShortNotationSurfaceBrightness">
+               <property name="text">
+                <string>Use short notation for unit of measurement of surface brightness</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="checkBoxUMSurfaceBrightness">
+               <property name="text">
+                <string>Use unit of measurement mag/arcsec^2 for surface brightness</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="checkBoxUseFormattingOutput">
+               <property name="text">
+                <string>Use formatting output for coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="checkBoxUseCCSDesignations">
+               <property name="text">
+                <string>Use designations for celestial coordinate systems</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="4" column="0">
            <spacer name="verticalSpacer_3">
             <property name="orientation">
              <enum>Qt::Vertical</enum>
@@ -1079,7 +1254,7 @@
             <property name="sizeHint" stdset="0">
              <size>
               <width>20</width>
-              <height>40</height>
+              <height>93</height>
              </size>
             </property>
            </spacer>
@@ -1526,62 +1701,6 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="selectSingleConstellationButton">
-               <property name="toolTip">
-                <string>Hide other constellations when you click one</string>
-               </property>
-               <property name="statusTip">
-                <string>Hide other constellations when you click one</string>
-               </property>
-               <property name="text">
-                <string>Select single constellation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="diskViewportCheckbox">
-               <property name="toolTip">
-                <string>Mask out everything outside a central circle in the main view</string>
-               </property>
-               <property name="text">
-                <string>Disc viewport</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="sphericMirrorCheckbox">
-               <property name="toolTip">
-                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
-               </property>
-               <property name="text">
-                <string>Spheric mirror distortion</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
-             <item row="11" column="1">
-              <widget class="QCheckBox" name="indicationMountModeCheckBox">
-               <property name="toolTip">
-                <string>Flash a short message when toggling mount mode.</string>
-               </property>
-               <property name="text">
-                <string>Indication for mount mode</string>
-               </property>
-              </widget>
-             </item>
-             <item row="8" column="0">
-              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
-               <property name="toolTip">
-                <string>Auto-enable atmosphere when selecting a celestial body in the location window.</string>
-               </property>
-               <property name="text">
-                <string>Auto-enabling for the atmosphere</string>
-               </property>
-              </widget>
-             </item>
              <item row="11" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_10">
                <item>
@@ -1596,23 +1715,16 @@
                </item>
               </layout>
              </item>
-             <item row="13" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="sphericMirrorCheckbox">
                <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>
                <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
+                <string>Spheric mirror distortion</string>
                </property>
-              </widget>
-             </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
-               <property name="toolTip">
-                <string>Activate this option to calculate azimuth from south towards west.</string>
-               </property>
-               <property name="text">
-                <string>Azimuth from South</string>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
@@ -1626,6 +1738,39 @@
                </property>
               </widget>
              </item>
+             <item row="14" column="0">
+              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
+               </property>
+               <property name="text">
+                <string>Enable mouse navigation</string>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0" colspan="2">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="selectSingleConstellationButton">
+               <property name="toolTip">
+                <string>Hide other constellations when you click one</string>
+               </property>
+               <property name="statusTip">
+                <string>Hide other constellations when you click one</string>
+               </property>
+               <property name="text">
+                <string>Select single constellation</string>
+               </property>
+              </widget>
+             </item>
              <item row="3" column="1">
               <widget class="QCheckBox" name="nutationCheckBox">
                <property name="toolTip">
@@ -1636,13 +1781,30 @@
                </property>
               </widget>
              </item>
-             <item row="8" column="1">
-              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
                <property name="toolTip">
-                <string>Automatic change of landscape when planet is changed</string>
+                <string>Auto-enable atmosphere when selecting a celestial body in the location window.</string>
                </property>
                <property name="text">
-                <string>Auto select landscapes</string>
+                <string>Auto-enabling for the atmosphere</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QCheckBox" name="indicationMountModeCheckBox">
+               <property name="toolTip">
+                <string>Flash a short message when toggling mount mode.</string>
+               </property>
+               <property name="text">
+                <string>Indication for mount mode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="1">
+              <widget class="QPushButton" name="editShortcutsPushButton">
+               <property name="text">
+                <string>Edit keyboard shortcuts...</string>
                </property>
               </widget>
              </item>
@@ -1656,55 +1818,17 @@
                </property>
               </widget>
              </item>
-            </layout>
-           </widget>
-          </item>
-          <item>
-           <widget class="QGroupBox" name="controlGroupBox">
-            <property name="title">
-             <string>Control</string>
-            </property>
-            <layout class="QGridLayout" name="gridLayoutNavStartup">
-             <property name="leftMargin">
-              <number>0</number>
-             </property>
-             <property name="topMargin">
-              <number>0</number>
-             </property>
-             <property name="rightMargin">
-              <number>0</number>
-             </property>
-             <property name="bottomMargin">
-              <number>0</number>
-             </property>
              <item row="1" column="0">
-              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
+              <widget class="QCheckBox" name="diskViewportCheckbox">
                <property name="toolTip">
-                <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
+                <string>Mask out everything outside a central circle in the main view</string>
                </property>
                <property name="text">
-                <string>Enable mouse navigation</string>
+                <string>Disc viewport</string>
                </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QPushButton" name="editShortcutsPushButton">
-               <property name="text">
-                <string>Edit keyboard shortcuts...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow keyboard to pan and zoom</string>
-               </property>
-               <property name="text">
-                <string>Enable keyboard navigation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
+             <item row="14" column="1">
               <layout class="QHBoxLayout" name="_8">
                <item>
                 <widget class="QCheckBox" name="mouseTimeoutCheckbox">
@@ -1756,15 +1880,45 @@
                </item>
               </layout>
              </item>
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west.</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
+               <property name="toolTip">
+                <string>Automatic change of landscape when planet is changed</string>
+               </property>
+               <property name="text">
+                <string>Auto select landscapes</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0">
+              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
+               <property name="toolTip">
+                <string>Allow keyboard to pan and zoom</string>
+               </property>
+               <property name="text">
+                <string>Enable keyboard navigation</string>
+               </property>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>
           <item>
-           <widget class="QGroupBox" name="contentBox">
+           <widget class="QGroupBox" name="groupBox_3">
             <property name="title">
-             <string>Star catalog updates</string>
+             <string>Screenshots</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout">
+            <layout class="QVBoxLayout" name="verticalLayout_3">
              <property name="leftMargin">
               <number>0</number>
              </property>
@@ -1778,71 +1932,36 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QCommandLinkButton" name="getStarsButton">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <property name="toolTip">
-                <string>Click here to start downloading</string>
-               </property>
-               <property name="text">
-                <string notr="true">Get catalog x of y</string>
-               </property>
-               <property name="icon">
-                <iconset resource="../../data/gui/guiRes.qrc">
-                 <normaloff>:/graphicGui/btTimeRealtime-off.png</normaloff>:/graphicGui/btTimeRealtime-off.png</iconset>
-               </property>
-               <property name="iconSize">
-                <size>
-                 <width>24</width>
-                 <height>24</height>
-                </size>
-               </property>
-               <property name="description">
-                <string>Download this file to view even more stars</string>
-               </property>
-              </widget>
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QLabel" name="label">
+                 <property name="text">
+                  <string>Screenshot Directory</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLineEdit" name="screenshotDirEdit"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="screenshotBrowseButton">
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="text">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
              </item>
              <item>
-              <widget class="QLabel" name="downloadLabel">
+              <widget class="QCheckBox" name="invertScreenShotColorsCheckBox">
                <property name="text">
-                <string notr="true">xxx</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <spacer name="horizontalSpacer_5">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>40</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item>
-              <widget class="QPushButton" name="downloadRetryButton">
-               <property name="toolTip">
-                <string>Restart the download</string>
-               </property>
-               <property name="text">
-                <string>Retry</string>
-               </property>
-              </widget>
-             </item>
-             <item>
-              <widget class="QPushButton" name="downloadCancelButton">
-               <property name="toolTip">
-                <string>Stop the download. You can always restart it later</string>
-               </property>
-               <property name="text">
-                <string>Cancel</string>
+                <string>Invert colors</string>
                </property>
               </widget>
              </item>
@@ -2076,146 +2195,6 @@
         </widget>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QListWidget" name="stackListWidget">
-        <property name="minimumSize">
-         <size>
-          <width>0</width>
-          <height>74</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>74</height>
-         </size>
-        </property>
-        <property name="focusPolicy">
-         <enum>Qt::NoFocus</enum>
-        </property>
-        <property name="verticalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="horizontalScrollBarPolicy">
-         <enum>Qt::ScrollBarAlwaysOff</enum>
-        </property>
-        <property name="selectionMode">
-         <enum>QAbstractItemView::SingleSelection</enum>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>50</width>
-          <height>50</height>
-         </size>
-        </property>
-        <property name="movement">
-         <enum>QListView::Static</enum>
-        </property>
-        <property name="flow">
-         <enum>QListView::LeftToRight</enum>
-        </property>
-        <property name="isWrapping" stdset="0">
-         <bool>false</bool>
-        </property>
-        <property name="resizeMode">
-         <enum>QListView::Adjust</enum>
-        </property>
-        <property name="layoutMode">
-         <enum>QListView::SinglePass</enum>
-        </property>
-        <property name="spacing">
-         <number>0</number>
-        </property>
-        <property name="viewMode">
-         <enum>QListView::IconMode</enum>
-        </property>
-        <property name="uniformItemSizes">
-         <bool>false</bool>
-        </property>
-        <property name="wordWrap">
-         <bool>false</bool>
-        </property>
-        <property name="selectionRectVisible">
-         <bool>false</bool>
-        </property>
-        <item>
-         <property name="text">
-          <string>Main</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-main.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Information</string>
-         </property>
-         <property name="toolTip">
-          <string>Selected object information</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-info.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string comment="Additional settings for Graphical User Interface">Extras</string>
-         </property>
-         <property name="toolTip">
-          <string>Additional settings for Graphical User Interface</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-extras.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Time</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-time.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Tools</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-tools.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Scripts</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-scripts.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Plugins</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-plugins.png</normalon>
-          </iconset>
-         </property>
-        </item>
-       </widget>
-      </item>
      </layout>
     </widget>
    </item>
@@ -2245,12 +2224,6 @@
   <tabstop>fixedDateTimeEdit</tabstop>
   <tabstop>fixedDateTimeCurrentButton</tabstop>
   <tabstop>sphericMirrorCheckbox</tabstop>
-  <tabstop>screenshotBrowseButton</tabstop>
-  <tabstop>screenshotDirEdit</tabstop>
-  <tabstop>invertScreenShotColorsCheckBox</tabstop>
-  <tabstop>getStarsButton</tabstop>
-  <tabstop>downloadRetryButton</tabstop>
-  <tabstop>downloadCancelButton</tabstop>
   <tabstop>scriptInfoBrowser</tabstop>
   <tabstop>closeWindowAtScriptRunCheckbox</tabstop>
   <tabstop>runScriptButton</tabstop>
