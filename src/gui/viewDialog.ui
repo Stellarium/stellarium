@@ -3607,7 +3607,11 @@
            <widget class="QComboBox" name="surveyTypeComboBox"/>
           </item>
           <item row="0" column="1" rowspan="2">
-           <widget class="QTextBrowser" name="surveysTextBrowser"/>
+           <widget class="QTextBrowser" name="surveysTextBrowser">
+            <property name="openExternalLinks">
+             <bool>true</bool>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>

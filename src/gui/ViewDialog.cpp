@@ -503,7 +503,7 @@ static QString getHipsType(const HipsSurveyP hips)
 
 void ViewDialog::updateHips()
 {
-
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	// Update the groups combobox.
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
 	disconnect(typeComboBox, 0, 0, 0);
@@ -562,15 +562,19 @@ void ViewDialog::updateHips()
 	{
 		QJsonObject props = currentHips->property("properties").toJsonObject();
 		QString html = QString("<h1>%1</h1>\n").arg(props["obs_title"].toString());
-
+		if (props.contains("obs_copyright") && props.contains("obs_copyright_url"))
+		{
+			html += QString("<p>Copyright <a href='%2'>%1</a></p>\n")
+					.arg(props["obs_copyright"].toString()).arg(props["obs_copyright_url"].toString());
+		}
 		html += QString("<p>%1</p>\n").arg(props["obs_description"].toString());
-
 		html += "<h2>" + q_("properties") + "</h2>\n<ul>\n";
 		for (auto iter = props.constBegin(); iter != props.constEnd(); iter++)
 		{
 			html += QString("<li><b>%1</b> %2</li>\n").arg(iter.key()).arg(iter.value().toString());
 		}
 		html += "</ul>\n";
+		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->surveysTextBrowser->setHtml(html);
 	}
 
