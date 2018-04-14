@@ -8,8 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-19 20:28+0700\n"
+"POT-Creation-Date: 2018-03-25 18:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: hoe noue <ydpfyvhpc6qw@opayq.com>, 2018\n"
 "Language-Team: Afrikaans (https://www.transifex.com/stellarium/teams/80998/af/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,50 +20,50 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr ""
+msgstr "Aksie lys onverkrygbaar"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Aksie '%1' nie aanvaar deur bediener: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Fout tydens die stuur van aksie '%1' na bediener: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
 #: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
-msgstr ""
+msgstr "Fout tydens soekfunksie"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr ""
+msgstr "Land lys onverkrygbaar"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr ""
+msgstr "Planeet lys onverkrygbaar"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "Eienskap lys onverkrygbaar"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "Eiienskap '%1' nie aanvaar deur bediener: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "Fout tydens stuur van eienskap '%1' na bediener"
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr ""
+msgstr "Fout tydens stuur van opdrag na bediener"
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr ""
+msgstr "Kon nie stappe lys verkry nie"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
@@ -70,47 +71,47 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr ""
+msgstr "Fout (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Fout tydens Simbad opsoek"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
 #: tablet7in.html:235
 msgid "idle"
-msgstr ""
+msgstr "ledig"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr ""
+msgstr "Fout by laai van voorwerp tipes"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr ""
+msgstr "Fout tydens verkryging van voorwerp lys"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
-msgstr ""
+msgstr "wagtend"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr ""
+msgstr "Projeksie lys onverkrygbaar"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr ""
+msgstr "Landskap lys onverkrygbaar"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:515
 #: index.html:572 tablet7in.html:692 tablet7in.html:752
 msgid "-none-"
-msgstr ""
+msgstr "-geen-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Huidig %1 gelaai)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
@@ -119,24 +120,24 @@ msgstr ""
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "on"
-msgstr ""
+msgstr "aan"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "off"
-msgstr ""
+msgstr "af"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr ""
+msgstr "Wys Ale Items"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr ""
+msgstr "Invoer pas by geen item"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
-msgstr ""
+msgstr "Geen huidige seleksie"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
@@ -144,23 +145,23 @@ msgstr ""
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr ""
+msgstr "Wag asseblief, besig om te laai"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr ""
+msgstr "Stellarium afstandbeheer"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
-msgstr ""
+msgstr "Hoof beheerkontroles"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
+msgstr "DRV"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Aksies en stoorstappe"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
@@ -168,59 +169,59 @@ msgstr ""
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "Wag"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr ""
+msgstr "Tydspronge"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
-msgstr ""
+msgstr "Sonuur"
 
 #: index.html:87 tablet7in.html:188
 msgid "Solar day"
-msgstr ""
+msgstr "Sondag"
 
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
-msgstr ""
+msgstr "Sonweek"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
-msgstr ""
+msgstr "sterrejaar"
 
 #: index.html:92 tablet7in.html:193
 msgid "Sidereal century"
-msgstr ""
+msgstr "sterre eeu of sidereale eeu"
 
 #: index.html:94 tablet7in.html:195
 msgid "Synodic month"
-msgstr ""
+msgstr "Sinodiese maand"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr ""
+msgstr "Drakoniese maand"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr ""
+msgstr "Drakoniese jaar"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
-msgstr ""
+msgstr "Gaussian jaar"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
-msgstr ""
+msgstr "Anomalistiese maand"
 
 #: index.html:102 tablet7in.html:201
 msgid "Anomalistic year"
-msgstr ""
+msgstr "Anomalistiese jaar"
 
 #: index.html:103 tablet7in.html:202
 msgid "Anomalistic century"
-msgstr ""
+msgstr "Anomalistiese eeu"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
@@ -236,15 +237,15 @@ msgstr ""
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
-msgstr ""
+msgstr "Tropiese jaar"
 
 #: index.html:110 tablet7in.html:209
 msgid "Julian year"
-msgstr ""
+msgstr "Julian jaar"
 
 #: index.html:111 tablet7in.html:211
 msgid "Julian century"
-msgstr ""
+msgstr "Julian eeu"
 
 #: index.html:123 tablet7in.html:138
 msgid "FOV"
@@ -252,15 +253,15 @@ msgstr ""
 
 #: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
-msgstr ""
+msgstr "Voer soek term in. Gebruik TAB om te navigeer"
 
 #: index.html:142 tablet7in.html:230
 msgid "Select and focus"
-msgstr ""
+msgstr "Kies en fokus"
 
 #: index.html:168 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Seleksie modus"
 
 #: index.html:168 tablet7in.html:259
 msgid "Center on object"
@@ -272,31 +273,31 @@ msgstr ""
 
 #: index.html:168 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Merk net die voorwerp"
 
 #: index.html:170 tablet7in.html:261
 msgid "Quick select"
-msgstr ""
+msgstr "Vinnig kies"
 
 #: index.html:174 tablet7in.html:265
 msgid "Earth"
-msgstr ""
+msgstr "Aarde"
 
 #: index.html:174 tablet7in.html:265
 msgid "Pluto"
-msgstr ""
+msgstr "Pluto"
 
 #: index.html:180 tablet7in.html:294
 msgid "Current selection"
-msgstr ""
+msgstr "Huidige seleksie"
 
 #: index.html:200 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Gedigitaliseerde hemelruimopname"
 
 #: index.html:243 tablet7in.html:399
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Verskietende sterre"
 
 #: index.html:244 tablet7in.html:400
 msgid "ZHR:"
@@ -310,51 +311,51 @@ msgstr ""
 
 #: index.html:297 tablet7in.html:461
 msgid "Solstices"
-msgstr ""
+msgstr "Sonkeerpunte"
 
 #: index.html:298 tablet7in.html:462
 msgid "Crossquarters"
-msgstr ""
+msgstr "Kruisingkwartiere"
 
 #: index.html:299 tablet7in.html:463
 msgid "Major Standstill"
-msgstr ""
+msgstr "Hoofsaaklike Stilstand"
 
 #: index.html:300 tablet7in.html:464
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Geringe Stilstand"
 
 #: index.html:310 tablet7in.html:474
 msgid "Current Planet:"
-msgstr ""
+msgstr "Huidige Planeet:"
 
 #: index.html:429 tablet7in.html:587
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Helder Newels"
 
 #: index.html:430 tablet7in.html:588
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Donker Newels"
 
 #: index.html:431 tablet7in.html:589
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Planetere Newels"
 
 #: index.html:440 tablet7in.html:598
 msgid "Labels and markers"
-msgstr ""
+msgstr "Byskrifte en merkers"
 
 #: index.html:469 tablet7in.html:627
 msgid "Show illumination"
-msgstr ""
+msgstr "Wys verligting"
 
 #: index.html:474 tablet7in.html:633
 msgid "Current landscape"
-msgstr ""
+msgstr "Huidige landskap"
 
 #: index.html:486 tablet7in.html:646
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Wys lyne met wydtes"
 
 #: index.html:491 tablet7in.html:651
 msgid "Show asterisms with thickness"
@@ -362,35 +363,35 @@ msgstr ""
 
 #: index.html:502 tablet7in.html:667
 msgid "Current sky culture"
-msgstr ""
+msgstr "Huidige lugruimte kultuur"
 
 #: index.html:515 tablet7in.html:692
 msgid "Active script:"
-msgstr ""
+msgstr "Aktiewe stoorstappe"
 
 #: index.html:516 tablet7in.html:693
 msgid "Run selected script"
-msgstr ""
+msgstr "Hardloop verkose stoorstappe"
 
 #: index.html:516 tablet7in.html:693
 msgid "Stop current script"
-msgstr ""
+msgstr "Stop huidige stoorstappe"
 
 #: index.html:521 tablet7in.html:41 tablet7in.html:677
 msgid "Actions"
-msgstr ""
+msgstr "Aksies"
 
 #: index.html:525 tablet7in.html:681
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Hardloop/skakel aksie"
 
 #: index.html:536 tablet7in.html:716
 msgid "Planet map"
-msgstr ""
+msgstr "Planeet kaart"
 
 #: index.html:537 tablet7in.html:717
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Planeet kaart wyser"
 
 #: index.html:541 tablet7in.html:721
 msgid "Type to search location"
@@ -398,7 +399,7 @@ msgstr ""
 
 #: index.html:570 tablet7in.html:750
 msgid "Interaction"
-msgstr ""
+msgstr "Interaksie"
 
 #: index.html:571 tablet7in.html:751
 msgid "Current scene:"
@@ -418,67 +419,67 @@ msgstr ""
 
 #: index.html:600 tablet7in.html:780
 msgid "Load selected scene"
-msgstr ""
+msgstr "Laai verkose toneel"
 
 #: index.html:624 tablet7in.html:805
 msgid "No response from server"
-msgstr ""
+msgstr "Geen respons vanaf bediener"
 
 #: index.html:625 tablet7in.html:806
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
-msgstr ""
+msgstr "Geen respons vanaf bediener na %1 sekondes. Hardloop Stellarium nog?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Tydsprong"
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "Ruite"
 
 #: tablet7in.html:97
 msgid "Up/Left"
-msgstr ""
+msgstr "Opwaarts/Links"
 
 #: tablet7in.html:97
 msgid "Up"
-msgstr ""
+msgstr "Opwaarts"
 
 #: tablet7in.html:97
 msgid "Up/Right"
-msgstr ""
+msgstr "Opwaarts/Regs"
 
 #: tablet7in.html:97
 msgid "Left"
-msgstr ""
+msgstr "Links"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr ""
+msgstr "Fokus op verkose voorwerp"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr ""
+msgstr "Fokus op seleksie"
 
 #: tablet7in.html:97
 msgid "Right"
-msgstr ""
+msgstr "Regs"
 
 #: tablet7in.html:97
 msgid "Down/Left"
-msgstr ""
+msgstr "Afwaarts/Links"
 
 #: tablet7in.html:97
 msgid "Down"
-msgstr ""
+msgstr "Afwaarts"
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr ""
+msgstr "Afwaarts/Regs"
 
 #: tablet7in.html:101
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Sig na die horison by Azimuth"
 
 #: tablet7in.html:123
 msgid "Vertical View offset"
@@ -486,99 +487,99 @@ msgstr ""
 
 #: tablet7in.html:133
 msgid "Reset"
-msgstr ""
+msgstr "herstel"
 
 #: tablet7in.html:266
 msgid "Sirius"
-msgstr ""
+msgstr "Hondster"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr ""
+msgstr "Arcturus "
 
 #: tablet7in.html:268
 msgid "Capella"
-msgstr ""
+msgstr "Capella"
 
 #: tablet7in.html:269
 msgid "Vega"
-msgstr ""
+msgstr "Vega"
 
 #: tablet7in.html:270
 msgid "Deneb"
-msgstr ""
+msgstr "Deneb"
 
 #: tablet7in.html:271
 msgid "Altair"
-msgstr ""
+msgstr "Altair of die vlieende arend"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
-msgstr ""
+msgstr "Andormeda-Galaksie"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
-msgstr ""
+msgstr "Hercules Swerm"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
-msgstr ""
+msgstr "Orion-newel"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Eta Carinae Newel "
 
 #: tablet7in.html:276
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "47 Tucanae swerm"
 
 #: tablet7in.html:277
 msgid "Aries"
-msgstr ""
+msgstr "Ram"
 
 #: tablet7in.html:278
 msgid "Taurus"
-msgstr ""
+msgstr "Bul"
 
 #: tablet7in.html:279
 msgid "Gemini"
-msgstr ""
+msgstr "Tweeling"
 
 #: tablet7in.html:280
 msgid "Cancer"
-msgstr ""
+msgstr "Kreef"
 
 #: tablet7in.html:281
 msgid "Leo"
-msgstr ""
+msgstr "Leeu"
 
 #: tablet7in.html:282
 msgid "Virgo"
-msgstr ""
+msgstr "Maagd"
 
 #: tablet7in.html:283
 msgid "Libra"
-msgstr ""
+msgstr "Weegskaal"
 
 #: tablet7in.html:284
 msgid "Scorpius"
-msgstr ""
+msgstr "Skerpioen"
 
 #: tablet7in.html:285
 msgid "Sagittarius"
-msgstr ""
+msgstr "Boogskutter"
 
 #: tablet7in.html:286
 msgid "Capricornus"
-msgstr ""
+msgstr "Steenbok"
 
 #: tablet7in.html:287
 msgid "Aquarius"
-msgstr ""
+msgstr "Waterdraer"
 
 #: tablet7in.html:288
 msgid "Pisces"
-msgstr ""
+msgstr "Visse"
 
 #: tablet7in.html:663
 msgid "Constellation selection isolated"
@@ -586,16 +587,16 @@ msgstr ""
 
 #: tablet7in.html:701
 msgid "Favorites"
-msgstr ""
+msgstr "Gunstelinge"
 
 #: tablet7in.html:703
 msgid "Show 1"
-msgstr ""
+msgstr "Wys 1"
 
 #: tablet7in.html:704
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "Verwyder Byskrifte en Prente"
 
 #: tablet7in.html:704
 msgid "Cleanup Screen"
-msgstr ""
+msgstr "Skerm Opruim"

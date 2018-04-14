@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-19 20:28+0700\n"
+"POT-Creation-Date: 2018-03-25 18:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: Ľubomír Hambálek <lubomir.hambalek@gmail.com>, 2017\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -75,7 +75,7 @@ msgstr "Chyba (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr "Chyba pri vyhľadávaní v Simbad"
+msgstr "Chyba pri vyhľadávaní v Simbade"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
 #: tablet7in.html:235
@@ -96,7 +96,7 @@ msgstr "čaká"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr "Nie je možné načítať zoznam premietaní"
+msgstr "Nie je možné načítať zoznam projekcií"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
@@ -115,7 +115,7 @@ msgstr "(načítá sa: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr "Nedarí sa načítať zoznam 3D scén"
+msgstr "Nedarí sa načítať zoznam 3D scenérií"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -165,7 +165,7 @@ msgstr "Akcie a skripty"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr "3D scény"
+msgstr "3D scenérie"
 
 #: index.html:77
 msgid "Pause"
@@ -253,7 +253,7 @@ msgstr "FOV"
 
 #: index.html:141 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
-msgstr "Zadajte hľadaný výraz. Klávesou TAB prezriete výsledky."
+msgstr "Zadajte hľadaný výraz. Klávesom TAB prezriete výsledky."
 
 #: index.html:142 tablet7in.html:230
 msgid "Select and focus"
@@ -308,8 +308,8 @@ msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
-"Okamžité kruhy zemskej osi pri jej pohybe okolo pólov ekliptiky. Zobrazuje "
-"sa iba na Zemi."
+"Okamžité kružnice zemskej osi pri jej pohybe okolo pólov ekliptiky. "
+"Zobrazuje sa iba na Zemi."
 
 #: index.html:297 tablet7in.html:461
 msgid "Solstices"
@@ -361,7 +361,7 @@ msgstr "Zobraziť čiary s hrúbkou"
 
 #: index.html:491 tablet7in.html:651
 msgid "Show asterisms with thickness"
-msgstr "Zobraziť obrazce hviezd hrubšie"
+msgstr "Zobraziť asterizmy s hrúbkou"
 
 #: index.html:502 tablet7in.html:667
 msgid "Current sky culture"
@@ -517,15 +517,15 @@ msgstr "Altair"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
-msgstr "Galaxia Androméda"
+msgstr "Galaxia v Androméde"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
-msgstr "Hviezdokopa Herkules"
+msgstr "Hviezdokopa v Herkulovi"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
-msgstr "Hmlovina Orion"
+msgstr "Hmlovina v Orióne"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
@@ -593,11 +593,11 @@ msgstr "Obľúbené"
 
 #: tablet7in.html:703
 msgid "Show 1"
-msgstr "Predstavenie 1"
+msgstr "Ukázať 1"
 
 #: tablet7in.html:704
 msgid "Remove Labels and Images"
-msgstr "Skryť popisky a obrázky"
+msgstr "Skryť menovky a obrázky"
 
 #: tablet7in.html:704
 msgid "Cleanup Screen"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-28 16:37+0700\n"
+"POT-Creation-Date: 2018-03-25 18:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: ysjbserver <ysjbserver@naver.com>, 2017\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -38,15 +38,15 @@ msgstr "탐색 실행 에러 발생"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr "위치 리스트를 불러오지 못했습니다."
+msgstr "위치 목록을 불러오지 못했습니다."
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr "행성 리스트를 불러오지 못했습니다."
+msgstr "행성 목록을 불러오지 못했습니다."
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr "특성 리스트를 불러오지 못했습니다."
+msgstr "특성 목록을 불러오지 못했습니다."
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
@@ -63,7 +63,7 @@ msgstr "명령을 서버에 보내는데 실패하였습니다. "
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr "스크립트 리스트를 불러오지 못했습니다."
+msgstr "스크립트 목록을 불러오지 못했습니다."
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
@@ -71,37 +71,37 @@ msgstr "요청중"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr "에러 (%1)"
+msgstr "오류 (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr "Simbad 검색 과정에서 에러 발생"
+msgstr "Simbad 검색 과정에서 오류 발생"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
 #: tablet7in.html:235
 msgid "idle"
-msgstr "유휴상태"
+msgstr "유휴 상태"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr "오브젝트 타입을 불러오는데 실패하였습니다."
+msgstr "천체 종류를 불러오는 데 실패하였습니다."
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr "오브젝트 리스틀 가져오는데 실패하였습니다."
+msgstr "천체 목록을 가져오는 데 실패하였습니다."
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
-msgstr "기다리는중"
+msgstr "기다리는 중"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr "프로젝션 리스트를 불러오는데 실패하였습니다."
+msgstr "프로젝션 목록을 불러오는 데 실패하였습니다."
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr "풍경 리스트를 불러오는데 실패하였습니다."
+msgstr "풍경 목록을 불러오는 데 실패하였습니다."
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:515
@@ -115,7 +115,7 @@ msgstr "(불러오는 중: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr "Scenery3d 리스트를 불러오지 못했습니다."
+msgstr "Scenery3d 목록을 불러오지 못했습니다."
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
