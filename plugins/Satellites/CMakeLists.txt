@@ -1,7 +1,7 @@
 # WARNING! Update also the version number in resources/satellites.json,
 # otherwise the local copy of that file will be overwritten every time
 # Stellarium starts. (Less of a problem if it manages to get one update.)
-SET(SATELLITES_VERSION "0.10.9")
+SET(SATELLITES_VERSION "0.10.10")
 
 SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/.stellarium)
 

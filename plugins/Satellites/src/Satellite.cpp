@@ -264,12 +264,10 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 	{
 		QString catalogNumbers;
 		if (internationalDesignator.isEmpty())
-			catalogNumbers = QString("%1: %2")
-					 .arg(q_("Catalog #"))
+			catalogNumbers = QString("NORAD %1")
 					 .arg(id);
 		else
-			catalogNumbers = QString("%1: %2; %3: %4")
-					 .arg(q_("Catalog #"))
+			catalogNumbers = QString("NORAD %1; %2: %3")
 			                 .arg(id)
 					 .arg(q_("International Designator"))
 			                 .arg(internationalDesignator);
