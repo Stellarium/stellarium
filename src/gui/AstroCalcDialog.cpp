@@ -1156,11 +1156,13 @@ void AstroCalcDialog::generateEphemeris()
 
 	double solarDay = 1.0;
 	double siderealDay = 1.0;
+	double siderealYear = 365.256363004; // days
 	const PlanetP& cplanet = core->getCurrentPlanet();
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
 		solarDay = cplanet->getMeanSolarDay();
 		siderealDay = cplanet->getSiderealDay();
+		siderealYear = cplanet->getSiderealPeriod();
 	}
 
 	switch (ui->ephemerisStepComboBox->currentData().toInt())
@@ -1242,6 +1244,33 @@ void AstroCalcDialog::generateEphemeris()
 			break;
 		case 26:
 			currentStep = 100 * StelCore::JD_DAY;
+			break;
+		case 27:
+			currentStep = siderealYear*solarDay;
+			break;
+		case 28:
+			currentStep = 365.25*solarDay;
+			break;
+		case 29:
+			currentStep = 365.2568983*solarDay;
+			break;
+		case 30: // 1 synodic month
+			currentStep = 29.530588853*solarDay;
+			break;
+		case 31: // 1 draconic month
+			currentStep = 27.212220817*solarDay;
+			break;
+		case 32: // 1 mean tropical month
+			currentStep = 27.321582241*solarDay;
+			break;
+		case 33: // 1 anomalistic month
+			currentStep = 27.554549878*solarDay;
+			break;
+		case 34: // 1 anomalistic year
+			currentStep = 365.259636*solarDay;
+			break;
+		case 35: // 1 saros (223 synodic months)
+			currentStep = 6585.321314219*solarDay;
 			break;
 		default:
 			currentStep = solarDay;
@@ -1539,6 +1568,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("30 sidereal days"), "22");
 	steps->addItem(q_("60 sidereal days"), "23");
 	steps->addItem(q_("100 sidereal days"), "25");
+	steps->addItem(q_("1 sidereal year"), "27");
 	steps->addItem(q_("1 Julian day"), "12");
 	steps->addItem(q_("5 Julian days"), "13");
 	steps->addItem(q_("10 Julian days"), "14");
@@ -1546,6 +1576,14 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("30 Julian days"), "16");
 	steps->addItem(q_("60 Julian days"), "17");
 	steps->addItem(q_("100 Julian days"), "26");
+	steps->addItem(q_("1 Julian year"), "28");
+	steps->addItem(q_("1 Gaussian year"), "29");
+	steps->addItem(q_("1 synodic month"), "30");
+	steps->addItem(q_("1 draconic month"), "31");
+	steps->addItem(q_("1 mean tropical month"), "32");
+	steps->addItem(q_("1 anomalistic month"), "33");
+	steps->addItem(q_("1 anomalistic year"), "34");
+	steps->addItem(q_("1 saros"), "35");
 
 	index = steps->findData(selectedStepId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
