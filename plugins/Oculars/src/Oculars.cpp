@@ -2177,33 +2177,33 @@ void Oculars::zoom(bool zoomedIn)
 		if (!zoomedIn)
 		{
 			StelCore *core = StelApp::getInstance().getCore();
+			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
 
 			if (flagHideGridsLines)
 			{
 				// Store current state for later resetting
-				StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-				flagGridLinesDisplayedMain = propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-				flagCardinalPointsMain = propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
-				flagConstellationLinesMain = propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
-				flagConstellationBoundariesMain = propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
-				flagAsterismLinesMain = propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
-				flagRayHelpersLinesMain = propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
+				flagGridLinesDisplayedMain	= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
+				flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+				flagConstellationLinesMain	= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
+				flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
+				flagAsterismLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
+				flagRayHelpersLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
 			}
 
 			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 			// Current state
-			flagAdaptationMain = skyDrawer->getFlagLuminanceAdaptation();
-			flagLimitStarsMain = skyDrawer->getFlagStarMagnitudeLimit();
-			flagLimitPlanetsMain = skyDrawer->getFlagPlanetMagnitudeLimit();
-			flagLimitDSOsMain = skyDrawer->getFlagNebulaMagnitudeLimit();
-			magLimitStarsMain = skyDrawer->getCustomStarMagnitudeLimit();
-			magLimitPlanetsMain = skyDrawer->getCustomPlanetMagnitudeLimit();
-			magLimitDSOsMain = skyDrawer->getCustomNebulaMagnitudeLimit();
-			relativeStarScaleMain = skyDrawer->getRelativeStarScale();
-			absoluteStarScaleMain = skyDrawer->getAbsoluteStarScale();
+			flagAdaptationMain	= skyDrawer->getFlagLuminanceAdaptation();
+			flagLimitStarsMain	= skyDrawer->getFlagStarMagnitudeLimit();
+			flagLimitPlanetsMain	= skyDrawer->getFlagPlanetMagnitudeLimit();
+			flagLimitDSOsMain	= skyDrawer->getFlagNebulaMagnitudeLimit();
+			magLimitStarsMain	= skyDrawer->getCustomStarMagnitudeLimit();
+			magLimitPlanetsMain	= skyDrawer->getCustomPlanetMagnitudeLimit();
+			magLimitDSOsMain	= skyDrawer->getCustomNebulaMagnitudeLimit();
+			relativeStarScaleMain	= skyDrawer->getRelativeStarScale();
+			absoluteStarScaleMain	= skyDrawer->getAbsoluteStarScale();
 
-			flagMoonScaleMain = GETSTELMODULE(SolarSystem)->getFlagMoonScale();
-			flagMinorBodiesScaleMain = GETSTELMODULE(SolarSystem)->getFlagMinorBodyScale();
+			flagMoonScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
+			flagMinorBodiesScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool();
 
 			flipHorzMain = core->getFlipHorz();
 			flipVertMain = core->getFlipVert();
@@ -2564,12 +2564,12 @@ void Oculars::setFlagHideGridsLines(const bool b)
 		{
 			// Store current state for later resetting
 			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-			flagGridLinesDisplayedMain = propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
-			flagCardinalPointsMain = propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
-			flagConstellationLinesMain = propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
-			flagConstellationBoundariesMain = propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
-			flagAsterismLinesMain = propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
-			flagRayHelpersLinesMain = propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
+			flagGridLinesDisplayedMain	= propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
+			flagCardinalPointsMain		= propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+			flagConstellationLinesMain	= propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
+			flagConstellationBoundariesMain	= propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
+			flagAsterismLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
+			flagRayHelpersLinesMain		= propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
 			toggleLines(false);
 		}
 		else if (!b && flagShowOculars)
