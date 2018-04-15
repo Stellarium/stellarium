@@ -283,6 +283,8 @@ private:
 	//! Once there is a valid ini file, it is loaded into the settings attribute.
 	void validateAndLoadIniFile();
 
+	void toggleLines(bool visible);
+
 	//! toggles the actual ocular view.
 	//! Record the state of the GridLinesMgr and other settings beforehand, so that they can be reset afterwards.
 	//! @param zoomedIn if true, this zoom operation is starting from an already zoomed state.
@@ -353,6 +355,7 @@ private:
 	bool flagHideGridsLines;         //!< Switch off all grids and lines of GridMgr while in Ocular view
 	bool flagGridLinesDisplayedMain; //!< keep track of gridline display while possibly suppressing their display.
 	bool flagConstellationLinesMain; //!< keep track of constellation display while possibly suppressing their display.
+	bool flagConstellationBoundariesMain; //!< keep track of constellation display while possibly suppressing their display.
 	bool flagAsterismLinesMain;      //!< keep track of asterism display while possibly suppressing their display.
 	bool flagRayHelpersLinesMain;      //!< keep track of ray helpers display while possibly suppressing their display.
 	bool flipVertMain;               //!< keep track of screen flip in main program

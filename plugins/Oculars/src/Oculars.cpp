@@ -135,6 +135,7 @@ Oculars::Oculars():
 	flagHideGridsLines(false),
 	flagGridLinesDisplayedMain(true),
 	flagConstellationLinesMain(true),
+	flagConstellationBoundariesMain(true),
 	flagAsterismLinesMain(true),
 	flagRayHelpersLinesMain(true),
 	flipVertMain(false),
@@ -1463,6 +1464,8 @@ void Oculars::toggleTelrad(bool show)
 {
 	if(show!=flagShowTelrad)
 	{
+		flagShowTelrad = show;
+
 		StelMovementMgr* movementMgr = StelApp::getInstance().getCore()->getMovementMgr();
 		if (show)
 		{
@@ -1480,7 +1483,6 @@ void Oculars::toggleTelrad(bool show)
 		if (getFlagInitDirectionUsage())
 			movementMgr->setViewDirectionJ2000(StelApp::getInstance().getCore()->altAzToJ2000(movementMgr->getInitViewingDirection(), StelCore::RefractionOff));
 
-		flagShowTelrad = show;
 		emit enableTelradChanged(flagShowTelrad);
 	}
 }
@@ -2129,13 +2131,7 @@ void Oculars::unzoomOcular()
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 
 	if (flagHideGridsLines)
-	{
-		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridLinesDisplayedMain);
-		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPointsMain);
-		GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLinesMain);
-		GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLinesMain);
-		GETSTELMODULE(AsterismMgr)->setFlagRayHelpers(flagRayHelpersLinesMain);
-	}
+		toggleLines(true);
 
 	skyDrawer->setFlagLuminanceAdaptation(flagAdaptationMain);
 	skyDrawer->setFlagStarMagnitudeLimit(flagLimitStarsMain);
@@ -2185,11 +2181,13 @@ void Oculars::zoom(bool zoomedIn)
 			if (flagHideGridsLines)
 			{
 				// Store current state for later resetting
-				flagGridLinesDisplayedMain=GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
-				flagCardinalPointsMain = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
-				flagConstellationLinesMain = GETSTELMODULE(ConstellationMgr)->getFlagLines();
-				flagAsterismLinesMain = GETSTELMODULE(AsterismMgr)->getFlagLines();
-				flagRayHelpersLinesMain = GETSTELMODULE(AsterismMgr)->getFlagRayHelpers();
+				StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+				flagGridLinesDisplayedMain = propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
+				flagCardinalPointsMain = propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+				flagConstellationLinesMain = propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
+				flagConstellationBoundariesMain = propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
+				flagAsterismLinesMain = propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
+				flagRayHelpersLinesMain = propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
 			}
 
 			StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -2224,6 +2222,34 @@ void Oculars::zoom(bool zoomedIn)
 	}
 }
 
+void Oculars::toggleLines(bool visible)
+{
+	if (flagShowTelrad)
+		return;
+
+	StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+
+	if (visible)
+	{
+		propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", flagGridLinesDisplayedMain);
+		propMgr->setStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed", flagCardinalPointsMain);
+		propMgr->setStelPropertyValue("ConstellationMgr.linesDisplayed", flagConstellationLinesMain);
+		propMgr->setStelPropertyValue("ConstellationMgr.boundariesDisplayed", flagConstellationBoundariesMain);
+		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", flagAsterismLinesMain);
+		propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", flagRayHelpersLinesMain);
+	}
+	else
+	{
+		propMgr->setStelPropertyValue("GridLinesMgr.gridlinesDisplayed", false);
+		propMgr->setStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed", false);
+		propMgr->setStelPropertyValue("ConstellationMgr.linesDisplayed", false);
+		propMgr->setStelPropertyValue("ConstellationMgr.boundariesDisplayed", false);
+		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", false);
+		propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", false);
+	}
+
+}
+
 void Oculars::zoomOcular()
 {
 	StelCore *core = StelApp::getInstance().getCore();
@@ -2231,12 +2257,7 @@ void Oculars::zoomOcular()
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
 
 	if (flagHideGridsLines)
-	{
-		GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
-		GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
-		GETSTELMODULE(ConstellationMgr)->setFlagLines(false);
-		GETSTELMODULE(AsterismMgr)->setFlagLines(false);
-	}
+		toggleLines(false);
 
 	skyDrawer->setFlagLuminanceAdaptation(false);
 
@@ -2542,24 +2563,19 @@ void Oculars::setFlagHideGridsLines(const bool b)
 		if (b && flagShowOculars)
 		{
 			// Store current state for later resetting
-			flagGridLinesDisplayedMain = GETSTELMODULE(GridLinesMgr)->getFlagGridlines();
-			flagCardinalPointsMain     = GETSTELMODULE(LandscapeMgr)->getFlagCardinalsPoints();
-			flagConstellationLinesMain = GETSTELMODULE(ConstellationMgr)->getFlagLines();
-			flagAsterismLinesMain      = GETSTELMODULE(AsterismMgr)->getFlagLines();
-			flagRayHelpersLinesMain  = GETSTELMODULE(AsterismMgr)->getFlagRayHelpers();
-			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(false);
-			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(false);
-			GETSTELMODULE(ConstellationMgr)->setFlagLines(false);
-			GETSTELMODULE(AsterismMgr)->setFlagLines(false);
+			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+			flagGridLinesDisplayedMain = propMgr->getStelPropertyValue("GridLinesMgr.gridlinesDisplayed").toBool();
+			flagCardinalPointsMain = propMgr->getStelPropertyValue("LandscapeMgr.cardinalsPointsDisplayed").toBool();
+			flagConstellationLinesMain = propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool();
+			flagConstellationBoundariesMain = propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool();
+			flagAsterismLinesMain = propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool();
+			flagRayHelpersLinesMain = propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool();
+			toggleLines(false);
 		}
 		else if (!b && flagShowOculars)
 		{
 			// Restore main program state
-			GETSTELMODULE(GridLinesMgr)->setFlagGridlines(flagGridLinesDisplayedMain);
-			GETSTELMODULE(LandscapeMgr)->setFlagCardinalsPoints(flagCardinalPointsMain);
-			GETSTELMODULE(ConstellationMgr)->setFlagLines(flagConstellationLinesMain);
-			GETSTELMODULE(AsterismMgr)->setFlagLines(flagAsterismLinesMain);
-			GETSTELMODULE(AsterismMgr)->setFlagRayHelpers(flagRayHelpersLinesMain);
+			toggleLines(true);
 		}
 	}
 }
