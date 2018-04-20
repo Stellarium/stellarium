@@ -57,7 +57,11 @@ LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 	{
 		ready = gps_rec->stream(WATCH_ENABLE|WATCH_JSON);
 	}
-	if(!ready)
+	if(ready)
+	{
+		connect(timer, SIGNAL(timeout()), this, SLOT(query()));
+	}
+	else
 		qDebug()<<"libGPS lookup not ready, GPSD probably not running";
 }
 
@@ -71,6 +75,17 @@ bool LibGPSLookupHelper::isReady()
 	return ready;
 }
 
+void LibGPSLookupHelper::setPeriodicQuery(int interval)
+{
+	// TODO: UNTESTED!
+	if (interval==0)
+		timer.stop()
+	else
+		{
+			timer.setSingleShot(false);
+			timer.start(interval);
+		}
+}
 void LibGPSLookupHelper::query()
 {
 	if(!ready)
@@ -221,29 +236,67 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	qint32 baudrate=conf->value("gui/gps_baudrate", 4800).toInt();
 
 	nmea=new QNmeaPositionInfoSource(QNmeaPositionInfoSource::RealTimeMode,this);
-	serial = new QSerialPort(portInfo, nmea);
+	//serial = new QSerialPort(portInfo, nmea);
+	serial = new QSerialPort(portInfo, this);
 	serial->setBaudRate(baudrate);
 	serial->setDataBits(QSerialPort::Data8);
 	serial->setParity(QSerialPort::NoParity);
 	serial->setStopBits(QSerialPort::OneStop);
 	serial->setFlowControl(QSerialPort::NoFlowControl);
-	//serial->open(QIODevice::ReadOnly); // automatic by setDevice below.
-
-	nmea->setDevice(serial);
-	// TODO Find out what happens if some other serial device is connected? Just timeout/error?
-
-	qDebug() << "Query GPS NMEA device at port " << serial->portName();
-	connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
-	connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
-	connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
+	if (serial->open(QIODevice::ReadOnly)) // may fail when line used by other program!
+	{
+		nmea->setDevice(serial);
+		qDebug() << "Query GPS NMEA device at port " << serial->portName();
+		connect(nmea, SIGNAL(error(QGeoPositionInfoSource::Error)), this, SLOT(nmeaError(QGeoPositionInfoSource::Error)));
+		connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
+		connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
+	}
+	else qDebug() << "Cannot open serial port to NMEA device at port " << serial->portName();
+	// This may leave an un-ready object. Must be cleaned-up later.
+}
+NMEALookupHelper::~NMEALookupHelper()
+{
+	if(nmea)
+	{
+		delete nmea;
+		nmea=Q_NULLPTR;
+	}
+	//qDebug() << "NMEALookupHelper destructor: delete serial";
+	if (serial)
+	{
+		if (serial->isOpen())
+		{
+			//qDebug() << "NMEALookupHelper destructor: Close serial first";
+			serial->clear();
+			serial->close();
+		}
+		delete serial;
+		serial=Q_NULLPTR;
+	}
+	//qDebug() << "NMEALookupHelper destructor: done";
 }
 
 void NMEALookupHelper::query()
 {
 	if(isReady())
 	{
-		//kick off a update request
+		//kick off a single update request
 		nmea->requestUpdate(3000);
+	}
+	else
+		emit queryError("NMEA helper not ready");
+}
+void NMEALookupHelper::setPeriodicQuery(int interval)
+{
+	if(isReady())
+	{
+		if (interval==0)
+			nmea->stopUpdates();
+		else
+		{
+			nmea->setUpdateInterval(interval);
+			nmea->startUpdates();
+		}
 	}
 	else
 		emit queryError("NMEA helper not ready");
@@ -251,15 +304,19 @@ void NMEALookupHelper::query()
 
 void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 {
-	qDebug() << "NMEA updated";
+	bool verbose=StelApp::getInstance().property("verbose").toBool();
+	if (verbose)
+		qDebug() << "NMEA updated";
 
 	QGeoCoordinate coord=update.coordinate();
 	QDateTime timestamp=update.timestamp();
 
-	qDebug() << " - time: " << timestamp.toString();
-	qDebug() << " - location: Long=" << coord.longitude() << " Lat=" << coord.latitude() << " Alt=" << coord.altitude();
-
-	if (update.isValid())
+	if (verbose)
+	{
+		qDebug() << " - time: " << timestamp.toString();
+		qDebug() << " - location: Long=" << coord.longitude() << " Lat=" << coord.latitude() << " Alt=" << coord.altitude();
+	}
+	if (update.isValid()) // emit queryFinished(loc) with new location
 	{
 		StelCore *core=StelApp::getInstance().getCore();
 		StelLocation loc;
@@ -267,6 +324,8 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.latitude=coord.latitude();
 		// 2D fix may have only long/lat, invalid altitude.
 		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : (int) floor(coord.altitude()));
+		if (verbose)
+			qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
 		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
 		// Usually you don't leave your time zone with GPS.
 		loc.ianaTimeZone=core->getCurrentTimeZone();
@@ -275,11 +334,15 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.name=QString("GPS %1%2 %3%4")
 				.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
 				.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
+		if (verbose)
+			qDebug() << "New location named " << loc.name;
 
 		emit queryFinished(loc);
 	}
 	else
 	{
+		if (verbose)
+			qDebug() << "(This position update was an invalid package)";
 		emit queryError("NMEA update: invalid package");
 	}
 }
@@ -355,7 +418,16 @@ StelLocationMgr::StelLocationMgr()
 
 StelLocationMgr::~StelLocationMgr()
 {
-
+	if (nmeaHelper)
+	{
+		delete nmeaHelper;
+		nmeaHelper=Q_NULLPTR;
+	}
+	if (libGpsHelper)
+	{
+		delete libGpsHelper;
+		libGpsHelper=Q_NULLPTR;
+	}
 }
 
 StelLocationMgr::StelLocationMgr(const LocationList &locations)
@@ -711,8 +783,10 @@ void StelLocationMgr::locationFromIP()
 }
 
 #ifdef ENABLE_GPS
-bool StelLocationMgr::locationFromGPS()
+void StelLocationMgr::locationFromGPS(int interval)
 {
+	bool verbose=StelApp::getInstance().property("verbose").toBool();
+
 #ifdef ENABLE_LIBGPS
 	if(!libGpsHelper)
 	{
@@ -722,35 +796,81 @@ bool StelLocationMgr::locationFromGPS()
 	}
 	if(libGpsHelper->isReady())
 	{
-		libGpsHelper->query();
-		return true;
+		if (interval<0)
+			libGpsHelper->query();
+		else
+			libGpsHelper->setPeriodicQuery(interval);
+		//return true;
 	}
 #endif
 	if(!nmeaHelper)
 	{
+		if (verbose)
+			qDebug() << "Creating new NMEAhelper...";
 		nmeaHelper = new NMEALookupHelper(this);
 		connect(nmeaHelper, SIGNAL(queryFinished(StelLocation)), this, SLOT(changeLocationFromGPSQuery(StelLocation)));
 		connect(nmeaHelper, SIGNAL(queryError(QString)), this, SLOT(gpsQueryError(QString)));
+		if (verbose)
+			qDebug() << "Creating new NMEAhelper...done";
 	}
 	if(nmeaHelper->isReady())
 	{
-		nmeaHelper->query();
-		return true;
+		if (interval<0)
+			nmeaHelper->query();
+		else
+		{
+			nmeaHelper->setPeriodicQuery(interval);
+			if (interval==0)
+			{
+				if (verbose)
+					qDebug() << "Deactivating and deleting NMEAhelper...";
+				delete nmeaHelper;
+				nmeaHelper=Q_NULLPTR;
+				emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
+				if (verbose)
+					qDebug() << "Deactivating and deleting NMEAhelper... DONE";
+			}
+		}
 	}
-
-	emit gpsQueryFinished(false);
-	return false;
+	else
+	{
+		// something went wrong. However, a dysfunctional nmeaHelper may still exist, better delete it.
+		if (verbose)
+			qDebug() << "nmeaHelper not ready. Something went wrong.";
+		delete nmeaHelper;
+		nmeaHelper=Q_NULLPTR;
+		emit gpsQueryFinished(false);
+	}
 }
 
 void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &loc)
 {
+	bool verbose=StelApp::getInstance().property("verbose").toBool();
+
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0f, 0.0f);
+	if (nmeaHelper)
+	{
+		if (verbose)
+			qDebug() << "Change location from NMEA... successful. NMEAhelper stays active.";
+	}
+	if (verbose)
+		qDebug() << "queryOK, resetting GUI";
 	emit gpsQueryFinished(true);
 }
 
 void StelLocationMgr::gpsQueryError(const QString &err)
 {
 	qWarning()<<err;
+	if (nmeaHelper)
+	{
+		nmeaHelper->setPeriodicQuery(0); // stop queries if they came periodically.
+		//qDebug() << "Would Close nmeaHelper during error...";
+		// We should close the serial line to let other programs use the GPS device. (Not needed for the GPSD solution!)
+		//delete nmeaHelper;
+		//nmeaHelper=Q_NULLPTR;
+		//qDebug() << "Would Close nmeaHelper during error.....successful";
+	}
+	qDebug() << "GPS queryError, resetting GUI";
 	emit gpsQueryFinished(false);
 }
 #endif

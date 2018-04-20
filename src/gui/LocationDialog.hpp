@@ -131,14 +131,18 @@ private slots:
 	void ipQueryLocation(bool state);
 
 #ifdef ENABLE_GPS
-	//! called when the user wants get location from a GPSD or directly attached (USB over virtual serial device) GPS device.
-	//! The easiest way to get GPS coordinates from a Linux device is via GPSD.
-	//! On Windows (and Mac?), or where GPSD is not available, we must parse the NMEA-183 strings ourselves.
-	void gpsQueryLocation();
+	//! called when the user wants to get GPS location from GPSD or directly attached (USB over virtual serial device) GPS device.
+	//! The easiest and cleanest way to get GPS coordinates from a Linux device is via GPSD.
+	//! On Windows (and Mac?), or where GPSD is not available, we must process the NMEA-183 messages and take care of the Serial port.
+	//! The GPS connection stays open (blocking serial GPS device for other programs if not on GPSD) even with the dialog closed, until disabled again.
+	//! @param enable true to start a repeating series of GPS queries, false to stop it.
+	//void gpsQueryLocation(); // ONCE: This was the original implementation.
+	void gpsEnableQueryLocation(bool enable); // Can be toggled by QToolButton
 	//! handle a few GUI elements when GPS query returns. Should be connected to LocationMgr's signal gpsResult().
 	//! @param success true if location was found
 	void gpsReturn(bool success);
 	//! reset the default string after a short time where the button shows either success or failure of GPS data retrieval.
+	//! To achieve this effect, this should be called by a QTimer.
 	void resetGPSbuttonLabel();
 #endif
 
@@ -154,6 +158,9 @@ private:
 	QStringListModel* allModel;
 	QStringListModel* pickedModel;
 	QSortFilterProxyModel *proxyModel;
+#ifdef ENABLE_GPS
+	unsigned int gpsCount; // count received GPS positions (pure GUI eye candy)
+#endif
 
 	//QPixmap pixmap;
 

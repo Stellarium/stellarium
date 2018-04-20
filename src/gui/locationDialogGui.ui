@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>435</height>
+    <height>511</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -553,70 +553,10 @@
             <property name="horizontalSpacing">
              <number>6</number>
             </property>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>Longitude:</string>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <widget class="QLabel" name="label_5">
               <property name="text">
                <string>Latitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="5" column="0" colspan="2">
-             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
-              <property name="text">
-               <string>Use current location as default</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0" colspan="2">
-             <widget class="QCheckBox" name="useIpQueryCheckBox">
-              <property name="text">
-               <string>Get location from Network</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_7">
-              <property name="text">
-               <string>Altitude:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="AngleSpinBox" name="longitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>140</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="1">
-             <widget class="AngleSpinBox" name="latitudeSpinBox">
-              <property name="minimumSize">
-               <size>
-                <width>180</width>
-                <height>24</height>
-               </size>
-              </property>
-              <property name="toolTip">
-               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
              </widget>
             </item>
@@ -648,13 +588,97 @@
               </property>
              </widget>
             </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="QPushButton" name="gpsPushButton">
+            <item row="4" column="0" colspan="2">
+             <widget class="QCheckBox" name="useIpQueryCheckBox">
+              <property name="text">
+               <string>Get location from Network</string>
+              </property>
+             </widget>
+            </item>
+            <item row="5" column="0" colspan="2">
+             <widget class="QCheckBox" name="useAsDefaultLocationCheckBox">
+              <property name="text">
+               <string>Use current location as default</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_7">
+              <property name="text">
+               <string>Altitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="AngleSpinBox" name="longitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>140</width>
+                <height>24</height>
+               </size>
+              </property>
               <property name="toolTip">
-               <string>Retrieve current coordinates from GPS. Does not set timezone!</string>
+               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Longitude:</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <widget class="AngleSpinBox" name="latitudeSpinBox">
+              <property name="minimumSize">
+               <size>
+                <width>180</width>
+                <height>24</height>
+               </size>
+              </property>
+              <property name="toolTip">
+               <string>You can enter values in decimal degrees, or using dms format, for example: +1d 12m 8s</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0" colspan="2">
+             <widget class="QToolButton" name="gpsToolButton">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="toolTip">
+               <string>Toggle fetching GPS location. (Does not change time zone!) When satisfied, toggle off to let other programs access the GPS device.</string>
               </property>
               <property name="text">
                <string>Get location from GPS</string>
+              </property>
+              <property name="checkable">
+               <bool>true</bool>
+              </property>
+              <property name="autoRepeat">
+               <bool>false</bool>
+              </property>
+              <property name="autoRepeatDelay">
+               <number>3500</number>
+              </property>
+              <property name="autoRepeatInterval">
+               <number>3500</number>
+              </property>
+              <property name="toolButtonStyle">
+               <enum>Qt::ToolButtonTextOnly</enum>
+              </property>
+              <property name="autoRaise">
+               <bool>false</bool>
               </property>
              </widget>
             </item>
@@ -869,7 +893,6 @@
   <tabstop>timeZoneNameComboBox</tabstop>
   <tabstop>useCustomTimeZoneCheckBox</tabstop>
   <tabstop>dstCheckBox</tabstop>
-  <tabstop>gpsPushButton</tabstop>
   <tabstop>useIpQueryCheckBox</tabstop>
   <tabstop>useAsDefaultLocationCheckBox</tabstop>
   <tabstop>addLocationToListPushButton</tabstop>

@@ -93,11 +93,14 @@ public slots:
 
 #ifdef ENABLE_GPS
 	//! Try to get a location from GPS lookup.
-	//! This prefers GPSD on non-Windows platforms, and uses Qt positioning/NMEA otherwise
-	//! Use the gpsResult() signal to determine if the location was set successfully
+	//! This prefers GPSD on non-Windows platforms, and uses Qt positioning with a NMEA serial device otherwise
+	//! Use the gpsResult() signal to determine if the location was set successfully.
+	//! With argument 0, this always signals true.
 	//! @note When using GPSD not on localhost, don't forget the -G switch when starting gpsd there!
-	//! @return true if a query has been made, false if not
-	bool locationFromGPS();
+	//! @param interval set negative to just fetch one position, mseconds to start periodic query, or 0 to stop those.
+	//! It may be better to leave it running to observe incoming data, then switch off when fix seems good.
+	//! When disabled, the NMEA device and its serial connection is released.
+	void locationFromGPS(int interval=-1);
 #endif
 
 	//! Check timezone string and return either the same or one that we use in the Stellarium location database.
