@@ -24,7 +24,7 @@
 //! Just contains GPS lookup helpers for now
 
 #include "StelLocationMgr.hpp"
-#include "QDebug"
+#include <QDebug>
 
 #ifdef ENABLE_GPS
 
@@ -56,6 +56,7 @@ signals:
 
 #ifdef ENABLE_LIBGPS
 #include <libgpsmm.h>
+#include <QTimer>
 
 class LibGPSLookupHelper : public GPSLookupHelper
 {
@@ -66,6 +67,7 @@ public:
 
 	virtual bool isReady() Q_DECL_OVERRIDE;
 	virtual void query() Q_DECL_OVERRIDE;
+	virtual void setPeriodicQuery(int interval) Q_DECL_OVERRIDE;
 private:
 	bool ready;
 	gpsmm* gps_rec;

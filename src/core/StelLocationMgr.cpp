@@ -38,6 +38,7 @@
 #include <QUrlQuery>
 #include <QSettings>
 #include <QTimeZone>
+#include <QTimer>
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
@@ -59,7 +60,7 @@ LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 	}
 	if(ready)
 	{
-		connect(timer, SIGNAL(timeout()), this, SLOT(query()));
+		connect(&timer, SIGNAL(timeout()), this, SLOT(query()));
 	}
 	else
 		qDebug()<<"libGPS lookup not ready, GPSD probably not running";
@@ -79,7 +80,7 @@ void LibGPSLookupHelper::setPeriodicQuery(int interval)
 {
 	// TODO: UNTESTED!
 	if (interval==0)
-		timer.stop()
+		timer.stop();
 	else
 		{
 			timer.setSingleShot(false);
