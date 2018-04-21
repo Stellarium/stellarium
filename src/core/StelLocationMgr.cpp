@@ -39,6 +39,7 @@
 #include <QSettings>
 #include <QTimeZone>
 #include <QTimer>
+#include <QApplication>
 
 TimezoneNameMap StelLocationMgr::locationDBToIANAtranslations;
 
@@ -53,6 +54,8 @@ LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 	QString gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toString();
 
 	timer.setSingleShot(false);
+	if (qApp->property("verbose").toBool())
+		qDebug() << "Opening GPSD connection to" << gpsdHostname << ":" << gpsdPort;
 	// Example almost straight from http://www.catb.org/gpsd/client-howto.html
 	gps_rec = new gpsmm(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
 	if(gps_rec->is_open())
@@ -64,7 +67,7 @@ LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 		connect(&timer, SIGNAL(timeout()), this, SLOT(query()));
 	}
 	else
-		qDebug()<<"libGPS lookup not ready, GPSD probably not running";
+		qWarning()<<"libGPS lookup not ready, GPSD probably not running.";
 }
 
 LibGPSLookupHelper::~LibGPSLookupHelper()
@@ -79,7 +82,6 @@ bool LibGPSLookupHelper::isReady()
 
 void LibGPSLookupHelper::setPeriodicQuery(int interval)
 {
-	// TODO: UNTESTED!
 	if (interval==0)
 		timer.stop();
 	else
@@ -89,7 +91,7 @@ void LibGPSLookupHelper::setPeriodicQuery(int interval)
 }
 void LibGPSLookupHelper::query()
 {
-	bool verbose=StelApp::getInstance().property("verbose").toBool();
+	bool verbose=qApp->property("verbose").toBool();
 
 	if(!ready)
 	{
@@ -104,10 +106,12 @@ void LibGPSLookupHelper::query()
 	while (tries<10)
 	{
 		tries++;
+		if (verbose)
+			qDebug() << "query(): tries=" << tries;
 
 		if (!gps_rec->waiting(750000)) // argument usec. wait 0.75 sec. (example had 50s)
 		{
-			//qDebug() << " - waiting timed out after 0.75sec.";
+			qDebug() << " - waiting timed out after 0.75sec.";
 			continue;
 		}
 
@@ -124,7 +128,7 @@ void LibGPSLookupHelper::query()
 //			{
 //				// This can happen indoors.
 //				qDebug() << "GPS has no fix.";
-//				emit gpsResult(false);
+//				emit queryError("GPSD query: No Fix.");
 //				return;
 //			}
 			if (newdata->online==0) // no device?
@@ -135,7 +139,32 @@ void LibGPSLookupHelper::query()
 				return;
 			}
 
+
 			fixmode=newdata->fix.mode; // 0:not_seen, 1:no_fix, 2:2Dfix(no alt), 3:3Dfix(perfect)
+			if (verbose)
+				qDebug() << "GPSD newdata->fix.mode=" << fixmode;
+
+			if (fixmode==0)
+			{
+				// This may come just after creation of the GPSDhelper.
+				// It seems to take some time to fill the data.
+				if (verbose)
+					qDebug() << "GPSD seems not ready yet. Retry.";
+				continue;
+			}
+
+			if (verbose)
+			{
+				//qDebug() << "newdata->online=" << newdata->online;
+				qDebug() << "Solution from " << newdata->satellites_used << "out of " << newdata->satellites_visible << " visible Satellites.";
+				dop_t dop=newdata->dop;
+				qDebug() << "GPSD data: Long" << newdata->fix.longitude << "Lat" << newdata->fix.latitude << "Alt" << newdata->fix.altitude;
+				qDebug() << "Dilution of Precision:";
+				qDebug() << " - xdop:" << dop.xdop << "ydop:" << dop.ydop;
+				qDebug() << " - pdop:" << dop.pdop << "hdop:" << dop.hdop;
+				qDebug() << " - vdop:" << dop.vdop << "tdop:" << dop.tdop << "gdop:" << dop.gdop;
+				qDebug() << "Spherical Position Error (epe):" << newdata->epe;
+			}
 			loc.longitude=newdata->fix.longitude;
 			loc.latitude=newdata->fix.latitude;
 			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
@@ -202,6 +231,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 	if (portInfoList.size()==1)
 	{
 		portInfo=portInfoList.at(0);
+		qDebug() << "Only one port found at " << portInfo.portName();
 	}
 	else
 	{
@@ -258,7 +288,7 @@ NMEALookupHelper::NMEALookupHelper(QObject *parent)
 		connect(nmea, SIGNAL(positionUpdated(const QGeoPositionInfo)),this,SLOT(nmeaUpdated(const QGeoPositionInfo)));
 		connect(nmea, SIGNAL(updateTimeout()),this,SLOT(nmeaTimeout()));
 	}
-	else qDebug() << "Cannot open serial port to NMEA device at port " << serial->portName();
+	else qWarning() << "Cannot open serial port to NMEA device at port " << serial->portName();
 	// This may leave an un-ready object. Must be cleaned-up later.
 }
 NMEALookupHelper::~NMEALookupHelper()
@@ -268,7 +298,6 @@ NMEALookupHelper::~NMEALookupHelper()
 		delete nmea;
 		nmea=Q_NULLPTR;
 	}
-	//qDebug() << "NMEALookupHelper destructor: delete serial";
 	if (serial)
 	{
 		if (serial->isOpen())
@@ -280,7 +309,6 @@ NMEALookupHelper::~NMEALookupHelper()
 		delete serial;
 		serial=Q_NULLPTR;
 	}
-	//qDebug() << "NMEALookupHelper destructor: done";
 }
 
 void NMEALookupHelper::query()
@@ -311,7 +339,7 @@ void NMEALookupHelper::setPeriodicQuery(int interval)
 
 void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 {
-	bool verbose=StelApp::getInstance().property("verbose").toBool();
+	bool verbose=qApp->property("verbose").toBool();
 	if (verbose)
 		qDebug() << "NMEA updated";
 
@@ -792,7 +820,7 @@ void StelLocationMgr::locationFromIP()
 #ifdef ENABLE_GPS
 void StelLocationMgr::locationFromGPS(int interval)
 {
-	bool verbose=StelApp::getInstance().property("verbose").toBool();
+	bool verbose=qApp->property("verbose").toBool();
 
 #ifdef ENABLE_LIBGPS
 	if(!libGpsHelper)
@@ -806,8 +834,31 @@ void StelLocationMgr::locationFromGPS(int interval)
 		if (interval<0)
 			libGpsHelper->query();
 		else
+		{
 			libGpsHelper->setPeriodicQuery(interval);
-		//return true;
+			// It seemed possible to leave the LibGPShelper object alive once created, because it does not block
+			// access to the GPS device. However, under pathological circumstances (start/stop of GPSD daemon
+			// after first query and while Stellarium is running, annoying GPSD in other ways, etc.,
+			// the LibGPSLookupHelper may signal ready but still shows problems.
+			// It seems better to also destroy it after finish of queries here and in case of non-readiness below.
+			if (interval==0)
+			{
+				if (verbose)
+					qDebug() << "Deactivating and deleting LibGPShelper...";
+				delete libGpsHelper;
+				libGpsHelper=Q_NULLPTR;
+				emit gpsQueryFinished(true); // signal "successful operation", avoid showing any error in GUI.
+				if (verbose)
+					qDebug() << "Deactivating and deleting LibGPShelper... DONE";
+			}
+		}
+		return;
+	}
+	else
+	{
+		qDebug() << "LibGPSHelper not ready. Attempting a direct NMEA connection instead.";
+		delete libGpsHelper;
+		libGpsHelper=Q_NULLPTR;
 	}
 #endif
 	if(!nmeaHelper)
@@ -852,7 +903,7 @@ void StelLocationMgr::locationFromGPS(int interval)
 
 void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &loc)
 {
-	bool verbose=StelApp::getInstance().property("verbose").toBool();
+	bool verbose=qApp->property("verbose").toBool();
 
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0f, 0.0f);
 	if (nmeaHelper)
