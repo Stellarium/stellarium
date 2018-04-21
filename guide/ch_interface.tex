@@ -92,9 +92,22 @@ There are a few ways you can set your location:
   your click, then choose from the shortlist.
 \item Enter a new location using the longitude, latitude and other
   data.
-\item Click on \button{Get Location from GPS} if you have a GPS receiver. \newFeature{0.16}
-  See section~\ref{sec:ExtraData:GPS} for configuration details. 
-  Sometimes you have to try several times to get a valid 3D fix including altitude.
+\item Click on \button{Get Location from GPS} if you have a GPS
+  receiver. \newFeature{0.16/0.18.1} You activate a periodic request
+  for GPS fixes. After a few seconds, the button should change color
+  and give a textual feedback. Green indicates a good position, yellow
+  indicates a 2D-fix only, which means altitudes are not
+  available. (Leave the GPS device running for a few minutes and/or
+  search a place with better sky view.) You could leave it running if
+  you are operating a fast-moving observatory platform, but rather
+  switch it off when you see a good fix, so that other programs can
+  use the serial GPS connection.  Red signals an error, and further
+  positions are not retrieved but the button is reset. You may press
+  the button again to start over.
+
+  Sometimes you have to try several times or let it run for a while to get a
+  green button indicating a valid 3D fix including altitude.
+  See section~\ref{sec:ExtraData:GPS} for configuration details.
 \end{enumerate}
 
 \noindent If you want to use the current location permanently, click on the

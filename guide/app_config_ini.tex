@@ -433,10 +433,11 @@ flag\_surface\_brightness\_short  & bool   & false & Toggle usage the short nota
 flag\_enable\_kinetic\_scrolling & bool  & true  & If \emph{true}, use kinetic scrolling in the GUI\footnote{This option is available on Windows tablets only.}.\\\midrule
 pointer\_animation\_speed 		& float  & 1.0 	 & Animation speed of pointers.\\\midrule
 %
-gpsd\_hostname                  & string & "localhost" & hostname of server running \program{gpsd} (non-Windows only)\\%\midrule
+gpsd\_hostname                  & string & localhost & hostname of server running \program{gpsd} (non-Windows only)\\%\midrule
 gpsd\_port                      & int    & 2947   & port number of \program{gpsd} (non-Windows only)\\%\midrule
-gps\_interface                  & string & "COM3" & Port number of serial/USB GPS device (Windows only)\\%\midrule
-gps\_baudrate                   & int    &  4800  & baudrate of serial/USB GPS device (Windows only)\\\bottomrule
+gps\_interface                  & string &  COM3  & Port number of serial/USB GPS device. (May look like \texttt{ttyUSB0} on Linux,
+                                                    if you really don't run \program{gpsd}.)\\%\midrule
+gps\_baudrate                   & int    &  4800  & baudrate of serial/USB GPS device (for direct serial connection only)\\\bottomrule
 \end{longtable}
 
 \subsection{\big[init\_location\big]}

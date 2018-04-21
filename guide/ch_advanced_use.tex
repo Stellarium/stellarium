@@ -305,10 +305,10 @@ Code in Space 2015 initiative.
 \subsection{GPS Position}
 \label{sec:ExtraData:GPS}
 
-\noindent In the \emph{Location} panel (see section~\ref{sec:gui:location})
-you can receive your location from a \indexterm{GPS} device.
-\newFeature{0.16} The exact way to receive GPS location depends on
-your operating system.
+\noindent In the \emph{Location} panel (see
+section~\ref{sec:gui:location}) you can receive your location from a
+\indexterm{GPS} device.  \newFeature{0.16/0.18.1} The exact way to receive
+GPS location depends on your operating system. 
 
 \subsubsection{GPSD (Linux, Mac OS X only)}
 \label{sec:ExtraData:GPS:GPSD}
@@ -354,7 +354,7 @@ configure this system daemon.  A few hints:
 [gui]
 # These values are used on non-Windows systems 
 # supporting GPSD
-gpsd_hostname   = "localhost"
+gpsd_hostname   = localhost
 gpsd_port       = 2947 
 \end{configfile}
 Also, \program{gpsd} must be started with the \texttt{-G} parameter to
@@ -401,8 +401,7 @@ with the software that came with your device.\footnote{On Linux, this
   may read \file{/dev/ttyUSB0}, \file{/dev/gps0} or similar.}
 
 If this is the only serial device, Stellarium should automatically
-connect to it regardless of configuration entries.  You cannot change
-the USB plug after you first have received a location fix.  If you
+connect to it regardless of configuration entries.  If you
 have a device with non-standard baudrate or several serial devices on
 serial ports (e.g., your telescope?), you must find out which serial port is
 used by the GPS device and manually edit \file{config.ini}.  Find
@@ -410,7 +409,7 @@ the \texttt{[gui]} section and edit
 \begin{configfile}
 [gui]
 # These values are used on Windows primarily.
-gps_interface     = "COM3"
+gps_interface     = COM3
 gps_baudrate      = 4800
 \end{configfile}
 From now on, always use the same USB plug configuration to connect GPS
@@ -420,7 +419,9 @@ and telescope.\footnote{Again, for Linux the port number is defined in
   case, you may also need to add your user to the \texttt{dialout}
   group (or whichever group owns your serial port).  Better yet, use
   \program{gpsd} (see above).}
-If GPS lookup fails, see the logfile for diagnostic messages.
+
+If GPS lookup fails, run Stellarium with the \texttt{--verbose} option and
+see the logfile for diagnostic messages.
 
 \paragraph{Bluetooth GPS} Most smartphones provide GPS and Bluetooth
 hardware. You can install a virtual COM port in your Windows Bluetooth
