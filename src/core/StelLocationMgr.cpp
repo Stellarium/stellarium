@@ -52,6 +52,7 @@ LibGPSLookupHelper::LibGPSLookupHelper(QObject *parent)
 	QString gpsdHostname=conf->value("gui/gpsd_hostname", "localhost").toString();
 	QString gpsdPort=conf->value("gui/gpsd_port", DEFAULT_GPSD_PORT).toString();
 
+	timer.setSingleShot(false);
 	// Example almost straight from http://www.catb.org/gpsd/client-howto.html
 	gps_rec = new gpsmm(gpsdHostname.toUtf8(), gpsdPort.toUtf8());
 	if(gps_rec->is_open())
@@ -83,12 +84,13 @@ void LibGPSLookupHelper::setPeriodicQuery(int interval)
 		timer.stop();
 	else
 		{
-			timer.setSingleShot(false);
 			timer.start(interval);
 		}
 }
 void LibGPSLookupHelper::query()
 {
+	bool verbose=StelApp::getInstance().property("verbose").toBool();
+
 	if(!ready)
 	{
 		emit queryError("GPSD helper not ready");
@@ -137,7 +139,7 @@ void LibGPSLookupHelper::query()
 			loc.longitude=newdata->fix.longitude;
 			loc.latitude=newdata->fix.latitude;
 			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
-			if (fixmode<3)
+			if ((verbose) && (fixmode<3))
 			{
 				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
 				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
@@ -145,8 +147,11 @@ void LibGPSLookupHelper::query()
 			else
 			{
 				loc.altitude=newdata->fix.altitude;
-				qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
-				qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m, VDOP " << newdata->dop.vdop <<  "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
+				if (verbose)
+				{
+					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+					qDebug() << "    Estimated HDOP " << newdata->dop.hdop << "m, VDOP " << newdata->dop.vdop <<  "m from " << newdata->satellites_used << "(of" << newdata->satellites_visible  << "visible) satellites";
+				}
 				break; // escape from the tries loop
 			}
 		}
@@ -157,11 +162,12 @@ void LibGPSLookupHelper::query()
 		emit queryError("GPSD: Could not get valid position.");
 		return;
 	}
-	if (fixmode<3)
+	if ((verbose) && (fixmode<3))
 	{
 		qDebug() << "Fix only quality " << fixmode << " after " << tries << " tries";
 	}
-	qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
+	if (verbose)
+		qDebug() << "GPSD location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
 
 	loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;
 	// Usually you don't leave your time zone with GPS.
