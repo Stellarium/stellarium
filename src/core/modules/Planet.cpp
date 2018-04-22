@@ -476,7 +476,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				km = qc_("M km", "distance");
 			}
 
-			oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
+			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
 		}
 		double distanceKm = AU * distanceAu;
 		if (distanceAu < 0.1)
@@ -494,7 +494,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			km = qc_("M km", "distance");
 		}
 
-		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
+		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 	}
 
 	if (flags&Velocity)

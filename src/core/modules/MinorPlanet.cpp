@@ -284,7 +284,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
 			km = qc_("M km", "distance");
 		}
-		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
+		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, km) << "<br />";
 
 		double distanceAu = getJ2000EquatorialPos(core).length();
 		double distanceKm = AU * distanceAu;
@@ -302,7 +302,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			// TRANSLATORS: Unit of measure for distance - milliones kilometers
 			km = qc_("M km", "distance");
 		}
-		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
+		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, km) << "<br />";
 	}
 
 	if (flags&Velocity)

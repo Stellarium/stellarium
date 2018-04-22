@@ -213,7 +213,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			distKM = QString::number(hdistanceKm / 1.0e6, 'f', 3);
 			useKM = false;
 		}
-		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
+		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance from Sun"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
 
 		double distanceAu = getJ2000EquatorialPos(core).length();
 		double distanceKm = AU * distanceAu;
@@ -229,7 +229,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			distKM = QString::number(distanceKm / 1.0e6, 'f', 3);
 			useKM = false;
 		}
-		oss << QString("%1: %2%3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
+		oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), distAU, au, distKM, useKM ? km : Mkm) << "<br />";
 	}
 
 	if (flags&Velocity)
