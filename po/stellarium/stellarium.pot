@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-16 01:47+0700\n"
+"POT-Creation-Date: 2018-04-22 12:08+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -414,7 +414,7 @@ msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:888 src/ui_locationDialogGui.h:472
+#: src/core/modules/LandscapeMgr.cpp:888 src/ui_locationDialogGui.h:483
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Location"
@@ -3096,7 +3096,7 @@ msgid "Custom equation of %1T"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1544 src/gui/ConfigurationDialog.cpp:1579
-#: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:437
+#: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:441
 msgid "System default"
 msgstr ""
 
@@ -3479,11 +3479,11 @@ msgstr ""
 msgid "Time zone"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:649 src/gui/LocationDialog.cpp:435
+#: src/gui/StelGuiItems.cpp:649 src/gui/LocationDialog.cpp:439
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:652 src/gui/LocationDialog.cpp:436
+#: src/gui/StelGuiItems.cpp:652 src/gui/LocationDialog.cpp:440
 msgid "Local True Solar Time"
 msgstr ""
 
@@ -3728,19 +3728,23 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:727
-msgid "GPS..."
+#: src/gui/LocationDialog.cpp:734
+msgid "GPS listening..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:739
-msgid "GPS:SUCCESS"
+#: src/gui/LocationDialog.cpp:741
+msgid "GPS disconnecting..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:750
+#: src/gui/LocationDialog.cpp:753
+msgid "GPS location fix"
+msgstr ""
+
+#: src/gui/LocationDialog.cpp:772
 msgid "GPS:FAILED"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:761 src/ui_locationDialogGui.h:508
+#: src/gui/LocationDialog.cpp:784 src/ui_locationDialogGui.h:519
 msgid "Get location from GPS"
 msgstr ""
 
@@ -7615,101 +7619,103 @@ msgstr ""
 msgid "Refresh"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:476 src/ui_locationDialogGui.h:479
+#: src/ui_locationDialogGui.h:487 src/ui_locationDialogGui.h:490
 msgid ""
 "Standard list of locations contains only English names (without diacritics!)"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:483
+#: src/ui_locationDialogGui.h:494
 msgid "Reset location list to show all known locations"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:485
+#: src/ui_locationDialogGui.h:496
 msgid "Reset Location List"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:486
+#: src/ui_locationDialogGui.h:497
 msgid "Current location information"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:487
+#: src/ui_locationDialogGui.h:498
 msgid "Add to list"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:488
+#: src/ui_locationDialogGui.h:499
 msgid "Delete from list"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:489
+#: src/ui_locationDialogGui.h:500
 msgid "Return to default location"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:490
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:150
-msgid "Longitude:"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:491
+#: src/ui_locationDialogGui.h:501
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:147
 msgid "Latitude:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:492
-msgid "Use current location as default"
+#: src/ui_locationDialogGui.h:503
+msgid "Enter the altitude in meter"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:493
+#: src/ui_locationDialogGui.h:505
+msgid " m"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:506
 msgid "Get location from Network"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:494
+#: src/ui_locationDialogGui.h:507
+msgid "Use current location as default"
+msgstr ""
+
+#: src/ui_locationDialogGui.h:508
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:153
 msgid "Altitude:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:496 src/ui_locationDialogGui.h:499
+#: src/ui_locationDialogGui.h:510 src/ui_locationDialogGui.h:514
 msgid ""
 "You can enter values in decimal degrees, or using dms format, for example: "
 "+1d 12m 8s"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:502
-msgid "Enter the altitude in meter"
+#: src/ui_locationDialogGui.h:512
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:150
+msgid "Longitude:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:504
-msgid " m"
+#: src/ui_locationDialogGui.h:517
+msgid ""
+"Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
+"toggle off to let other programs access the GPS device."
 msgstr ""
 
-#: src/ui_locationDialogGui.h:506
-msgid "Retrieve current coordinates from GPS. Does not set timezone!"
-msgstr ""
-
-#: src/ui_locationDialogGui.h:509
+#: src/ui_locationDialogGui.h:520
 msgid "New Location"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:510
+#: src/ui_locationDialogGui.h:521
 msgid "Planet:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:511
+#: src/ui_locationDialogGui.h:522
 msgid "Use custom time zone"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:512
+#: src/ui_locationDialogGui.h:523
 msgid "Time zone:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:513
+#: src/ui_locationDialogGui.h:524
 msgid "Name/City:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:514
+#: src/ui_locationDialogGui.h:525
 msgid "Country:"
 msgstr ""
 
-#: src/ui_locationDialogGui.h:518
+#: src/ui_locationDialogGui.h:529
 msgid "Enable daylight saving time"
 msgstr ""
 
