@@ -537,6 +537,7 @@ void ConfigurationDialog::browseForScreenshotDir()
 			newScreenshotDir = newScreenshotDir.left(newScreenshotDir.length()-1);
 
 		ui->screenshotDirEdit->setText(newScreenshotDir);
+		selectScreenshotDir();
 	}
 }
 
