@@ -77,7 +77,7 @@ public:
 	//         surveys.  Should be set to 2 pi for sky surveys.
 	//! @param callback if set this will be called for each visible tile, and the callback should do it rendering
 	//         itself.  If set to NULL, the function will draw the tiles using the default shader.
-	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = NULL);
+	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = nullptr);
 
 	//! Return the source URL of the survey.
 	const QString& getUrl() const {return url;}
