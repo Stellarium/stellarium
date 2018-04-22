@@ -107,7 +107,7 @@ private:
 	QCache<long int, HipsTile> tiles;
 	// reply to the initial download of the properties file and to the
 	// allsky texture.
-	QNetworkReply *networkReply = NULL;
+	QNetworkReply *networkReply = nullptr;
 
 	QImage allsky = QImage();
 	bool noAllsky = false;
@@ -116,7 +116,7 @@ private:
 	QJsonObject properties;
 
 	// Used to show the loading progress.
-	StelProgressController* progressBar = NULL;
+	StelProgressController* progressBar = nullptr;
 	int nbVisibleTiles;
 	int nbLoadedTiles;
 
