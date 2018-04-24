@@ -51,6 +51,9 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
 	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
 	Q_PROPERTY(bool flagOverwriteScreenshots   READ getFlagOverwriteScreenShots   WRITE setFlagOverwriteScreenShots   NOTIFY flagOverwriteScreenshotsChanged)
+	Q_PROPERTY(bool flagUseCustomScreenshotSize READ getFlagUseCustomScreenshotSize WRITE setFlagUseCustomScreenshotSize NOTIFY flagUseCustomScreenshotSizeChanged)
+	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
+	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
 	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
@@ -131,6 +134,19 @@ public slots:
 	//! Set whether existing files are overwritten when saving screenshot
 	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b; emit flagOverwriteScreenshotsChanged(b);}
 
+	//! Get whether custom size should be used for screenshots
+	bool getFlagUseCustomScreenshotSize() const {return flagUseCustomScreenshotSize;}
+	//! Set whether custom size should be used for screenshots
+	void setFlagUseCustomScreenshotSize(bool b) {flagUseCustomScreenshotSize=b; emit flagUseCustomScreenshotSizeChanged(b);}
+	//! Get custom screenshot width
+	int getCustomScreenshotWidth() const {return customScreenshotWidth;}
+	//! Set whether custom size should be used for screenshots
+	void setCustomScreenshotWidth(int width) {customScreenshotWidth=width; emit customScreenshotWidthChanged(width);}
+	//! Get custom screenshot height
+	int getCustomScreenshotHeight() const {return customScreenshotHeight;}
+	//! Set whether custom size should be used for screenshots
+	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; emit customScreenshotHeightChanged(height);}
+
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
 	//! Get the state of the mouse cursor timeout flag
@@ -168,9 +184,9 @@ public slots:
 	//! Get the state of the flag of usage background for GUI buttons
 	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
 
-	//! Set the sky background color. (Actually forwards to the StelRootItem.)  Everything else than black creates an work of art!
+	//! Set the sky background color. (Actually forwards to the StelRootItem.)  Everything else than black creates a work of art!
 	void setSkyBackgroundColor(Vec3f color);
-	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates an work of art!
+	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates a work of art!
 	Vec3f getSkyBackgroundColor();
 
 protected:
@@ -200,6 +216,10 @@ signals:
 	void updateIconsRequested();
 	void flagInvertScreenShotColorsChanged(bool b);
 	void flagOverwriteScreenshotsChanged(bool b);
+	void flagUseCustomScreenshotSizeChanged(bool use);
+	void customScreenshotWidthChanged(int width);
+	void customScreenshotHeightChanged(int height);
+
 	void flagUseButtonsBackgroundChanged(bool b);
 	void skyBackgroundColorChanged(Vec3f color);
 	void flagCursorTimeoutChanged(bool b);
@@ -255,6 +275,9 @@ private:
 	bool updateQueued;
 	bool flagInvertScreenShotColors;
 	bool flagOverwriteScreenshots; //! if set to true, screenshot is named exactly screenShotPrefix.png and overwrites existing file
+	bool flagUseCustomScreenshotSize; //! if true, the next 2 values are observed for screenshots.
+	int customScreenshotWidth;            //! used when flagCustomResolutionScreenshots==true
+	int customScreenshotHeight;           //! used when flagCustomResolutionScreenshots==true
 
 	QString screenShotPrefix;
 	QString screenShotDir;

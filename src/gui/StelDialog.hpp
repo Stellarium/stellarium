@@ -30,6 +30,7 @@
 class QAbstractButton;
 class QComboBox;
 class QSpinBox;
+class QLineEdit;
 class QDoubleSpinBox;
 class QSlider;
 class StelAction;
@@ -115,6 +116,12 @@ protected:
 	//! Helper function to connect a checkbox to the given StelAction
 	static void connectCheckBox(QAbstractButton *checkBox, StelAction* action);
 
+	//! Helper function to connect a QLineEdit to an integer StelProperty.
+	//! @note This method also works with flag/enum types (TODO. Does it?)
+	//! You should call something like setInputMask("009") for a 3-place numerical field.
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectIntProperty(QLineEdit* lineEdit, const QString& propName);
 	//! Helper function to connect a QSpinBox to an integer StelProperty.
 	//! @note This method also works with flag/enum types
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted

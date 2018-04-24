@@ -319,6 +319,11 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 	connectBoolProperty(ui->invertScreenShotColorsCheckBox, "MainView.flagInvertScreenShotColors");
+	connectBoolProperty(ui->useCustomScreenshotSizeCheckBox, "MainView.flagUseCustomScreenshotSize");
+	ui->customScreenshotWidthLineEdit->setInputMask("00009");
+	ui->customScreenshotHeightLineEdit->setInputMask("00009");
+	connectIntProperty(ui->customScreenshotWidthLineEdit, "MainView.customScreenshotWidth");
+	connectIntProperty(ui->customScreenshotHeightLineEdit, "MainView.customScreenshotHeight");
 
 	connectBoolProperty(ui->autoEnableAtmosphereCheckBox, "LandscapeMgr.flagAtmosphereAutoEnabling");
 	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");

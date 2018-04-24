@@ -35,6 +35,7 @@
 #include <QSlider>
 #include <QSpinBox>
 #include <QDoubleSpinBox>
+#include <QLineEdit>
 #ifdef Q_OS_WIN
 	#include <QScroller>
 #endif
@@ -208,6 +209,15 @@ void StelDialog::connectCheckBox(QAbstractButton *checkBox, StelAction *action)
 	connect(checkBox, SIGNAL(toggled(bool)), action, SLOT(setChecked(bool)));
 }
 
+void StelDialog::connectIntProperty(QLineEdit* lineEdit, const QString& propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	//use a proxy for the connection
+	new QLineEditStelPropertyConnectionHelper(prop,lineEdit);
+}
+
 void StelDialog::connectIntProperty(QSpinBox *spinBox, const QString &propName)
 {
 	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
@@ -342,6 +352,27 @@ void QComboBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &va
 	combo->blockSignals(b);
 }
 
+
+QLineEditStelPropertyConnectionHelper::QLineEditStelPropertyConnectionHelper(StelProperty *prop, QLineEdit *edit)
+	:StelPropertyProxy(prop,edit), edit(edit)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<int>();
+	Q_ASSERT_X(ok,"QLineEditStelPropertyConnectionHelper","Can not convert to int datatype");
+	Q_UNUSED(ok);
+	onPropertyChanged(val);
+
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(edit, static_cast<void (QLineEdit::*)(const QString&)>(&QLineEdit::textEdited),prop,&StelProperty::setValue);
+}
+
+void QLineEditStelPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = edit->blockSignals(true);
+	edit->setText(value.toString());
+	edit->blockSignals(b);
+}
 
 QSpinBoxStelPropertyConnectionHelper::QSpinBoxStelPropertyConnectionHelper(StelProperty *prop, QSpinBox *spin)
 	:StelPropertyProxy(prop,spin), spin(spin)

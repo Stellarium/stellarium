@@ -25,11 +25,14 @@
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelGui.hpp"
+#include "SkyGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
+#include "StelProjector.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -68,6 +71,9 @@
 #ifdef OPENGL_DEBUG_LOGGING
 #include <QOpenGLDebugLogger>
 #endif
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(mainview, "stel.MainView")
 
 #include <clocale>
 
@@ -561,6 +567,9 @@ StelMainView::StelMainView(QSettings* settings)
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
+	  flagUseCustomScreenshotSize(false),
+	  customScreenshotWidth(1024),
+	  customScreenshotHeight(768),
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
@@ -773,7 +782,7 @@ void StelMainView::init()
 
 	QSettings* conf = configuration;
 
-	// Should be check of requirements disabled?
+	// Should be check of requirements disabled? -- NO! This is intentional here, and does no harm.
 	if (conf->value("main/check_requirements", true).toBool())
 	{
 		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
@@ -843,6 +852,10 @@ void StelMainView::init()
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
+	flagUseCustomScreenshotSize=conf->value("main/screenshot_custom_size", false).toBool();
+	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toUInt();
+	customScreenshotHeight=conf->value("main/screenshot_custom_height", 768).toUInt();
+
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
@@ -1398,23 +1411,100 @@ void StelMainView::doScreenshot(void)
 #ifdef USE_OLD_QGLWIDGET
 	QImage im = glWidget->grabFrameBuffer();
 #else
+	// Make a screenshot which may be larger than the current window. This is harder than you would think:
+	// fbObj the framebuffer governs size of the target image, that's the easy part, but it also has its limits.
+	// However, the GUI parts need to be placed properly,
+	// HiDPI screens interfere, and the viewing angle has to be maintained.
+	// First, image size:
 	glWidget->makeCurrent();
 	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	int imgWidth =stelScene->width()  * pixelRatio;
+	int imgHeight=stelScene->height() * pixelRatio;
+	if (flagUseCustomScreenshotSize)
+	{
+		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
+		QOpenGLContext *context = QOpenGLContext::currentContext();
+		if (context)
+		{
+			context->functions()->initializeOpenGLFunctions();
+			qDebug() << "initializeOpenGLFunctions()...";
+
+			GLint texSize,viewportSize[2],rbSize;
+			context->functions()->glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
+			context->functions()->glGetIntegerv(GL_MAX_VIEWPORT_DIMS, viewportSize);
+			context->functions()->glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &rbSize);
+			qCDebug(mainview)<<"Maximum texture size:"<<texSize;
+			qCDebug(mainview)<<"Maximum viewport dims:"<<viewportSize[0]<<viewportSize[1];
+			qCDebug(mainview)<<"Maximum renderbuffer size:"<<rbSize;
+			int maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
+			qCDebug(mainview)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
+
+			imgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
+			imgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
+		}
+		else
+		{
+			qCWarning(mainview) << "No GL context for screenshot! Aborting.";
+			return;
+		}
+	}
+
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(GL_RGB); // avoid transparent background!
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width() * pixelRatio, stelScene->height() * pixelRatio, fbFormat);
+	//QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width() * pixelRatio, stelScene->height() * pixelRatio, fbFormat);
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth, imgHeight, fbFormat);
 	fbObj->bind();
-	QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
+	// Now the painter has to be convinced to paint to the potentially larger image frame.
+	//QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
+	QOpenGLPaintDevice fbObjPaintDev(imgWidth, imgHeight);
 	fbObjPaintDev.setDevicePixelRatio(pixelRatio);
+
+	// PROBLEM: It seems that when one GUI dialog is visible, FoV tweaking turns out fruitless.
+
+	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
+	StelProjector::StelProjectorParams pParams=StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
+	StelProjector::StelProjectorParams sParams=pParams;
+	sParams.viewportXywh[2]=imgWidth;
+	sParams.viewportXywh[3]=imgHeight;
+	sParams.viewportCenter.set(imgWidth*0.5f, imgHeight*0.5f);
+	// TODO: FoV. This here is wrong, only sets what's already known.
+	//sParams.viewportFovDiameter=(0.f)
+	////StelMovementMgr *movementMgr = GETSTELMODULE(StelMovementMgr);
+	////Q_ASSERT(movementMgr);
+	////sParams.fov=movementMgr->getCurrentFov();
+	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(sParams);
+
+
 	QPainter painter;
-	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 	painter.begin(&fbObjPaintDev);
-	stelScene->render(&painter);
+	// next line was above begin(), but caused a complaint. Maybe use after begin()?
+	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+	//stelScene->render(&painter);
+	qreal x1, y1, x2, y2;
+	stelScene->sceneRect().getCoords(&x1, &y1, &x2, &y2);
+	qDebug() << "SCREENSHOT RECT=" << x1 << "/" << y1 << "/" << x2 << "/" << y2;
+	// TODO: Make sure GUI elements are placed correctly.
+	//stelScene->render(&painter, QRectF(), QRectF(0,0,stelScene->sceneRect().width()*2.0,stelScene->sceneRect().height()*2.0) , Qt::KeepAspectRatio);
+	// The new line here made the GUI panels move up into screen center. FOV not correct.
+	// TODO: Possible stelScene->setSceneRect() or something?
+	// YES! This fixed the FoV issue. --> NOOO! Not when a GUI dialog is visible.
+	stelScene->setSceneRect(0, 0, imgWidth, imgHeight);
+	// TODO: Do something to push the button bars back to the sides where they belong.
+	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, imgWidth, imgHeight);
+	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
+	// TODO: SOMETHING IS STILL MISSING HERE, bottom bar is not visible.
+
+	stelScene->render(&painter, QRectF(), QRectF(0,0,imgWidth,imgHeight) , Qt::KeepAspectRatio);
 	painter.end();
 	QImage im = fbObj->toImage();
 	fbObj->release();
 	delete fbObj;
+	// reset
+	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
+	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
+	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
+	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
 #endif
 
 	if (flagInvertScreenShotColors)
@@ -1502,7 +1592,7 @@ void StelMainView::glContextDoneCurrent()
 	glWidget->doneCurrent();
 }
 
-//! Set the sky background color. Everything else than black creates an work of art!
+// Set the sky background color. Everything else than black creates a work of art!
 void StelMainView::setSkyBackgroundColor(Vec3f color)
 {
 	rootItem->setSkyBackgroundColor(color);
@@ -1510,7 +1600,7 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 	emit skyBackgroundColorChanged(color);
 }
 
-//! Get the sky background color. Everything else than black creates an work of art!
+// Get the sky background color. Everything else than black creates a work of art!
 Vec3f StelMainView::getSkyBackgroundColor()
 {
 	return rootItem->getSkyBackgroundColor();
