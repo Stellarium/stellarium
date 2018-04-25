@@ -320,8 +320,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 	connectBoolProperty(ui->invertScreenShotColorsCheckBox, "MainView.flagInvertScreenShotColors");
 	connectBoolProperty(ui->useCustomScreenshotSizeCheckBox, "MainView.flagUseCustomScreenshotSize");
-	ui->customScreenshotWidthLineEdit->setInputMask("00009");
-	ui->customScreenshotHeightLineEdit->setInputMask("00009");
+	ui->customScreenshotWidthLineEdit->setValidator(new QIntValidator(16, 32768));
+	ui->customScreenshotHeightLineEdit->setValidator(new QIntValidator(16, 32768));
 	connectIntProperty(ui->customScreenshotWidthLineEdit, "MainView.customScreenshotWidth");
 	connectIntProperty(ui->customScreenshotHeightLineEdit, "MainView.customScreenshotHeight");
 
