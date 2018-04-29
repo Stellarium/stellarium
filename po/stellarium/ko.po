@@ -3840,15 +3840,15 @@ msgstr "겉보기등급은 위상과 반사율에 따라 달라집니다."
 
 #: src/gui/LocationDialog.cpp:734
 msgid "GPS listening..."
-msgstr ""
+msgstr "GPS 청취 중..."
 
 #: src/gui/LocationDialog.cpp:741
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "GPS 연결 해제 중..."
 
 #: src/gui/LocationDialog.cpp:753
 msgid "GPS location fix"
-msgstr ""
+msgstr "GPS 위치 고치기"
 
 #: src/gui/LocationDialog.cpp:772
 msgid "GPS:FAILED"
@@ -7876,6 +7876,8 @@ msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
 msgstr ""
+"GPS 신호 감지를 켜고 끕니다. (시간대는 바꾸지 않습니다!) 위치가 결정되면 이 기능을 꺼 다른 ㅍ로그램들이 GPS를 사용하게끔 해 "
+"주세요."
 
 #: src/ui_locationDialogGui.h:520
 msgid "New Location"
@@ -9256,7 +9258,7 @@ msgstr "은하좌표계 격자 버튼 표시"
 
 #: src/ui_configurationDialog.h:1480
 msgid "Enable a feature to store favorite views."
-msgstr ""
+msgstr "좋아하는 시야를 저장하는 기능 활성화"
 
 #: src/ui_configurationDialog.h:1482
 msgid "Show bookmarks button"
@@ -9304,7 +9306,7 @@ msgstr "내려받기 중단. 이후 언제라도 다시 받을 수 있습니다.
 
 #: src/ui_configurationDialog.h:1504
 msgid "Additional information settings"
-msgstr ""
+msgstr "추가 정보 설정"
 
 #: src/ui_configurationDialog.h:1505
 msgid "Use short notation for unit of measurement of surface brightness"
@@ -9394,7 +9396,7 @@ msgstr "플라네타리움 설정"
 
 #: src/ui_configurationDialog.h:1539
 msgid "Align labels with the screen center"
-msgstr ""
+msgstr "이름표를 화면 중앙으로 정렬"
 
 #: src/ui_configurationDialog.h:1541
 msgid "Gravity labels"
@@ -9402,7 +9404,7 @@ msgstr "중력 이름표"
 
 #: src/ui_configurationDialog.h:1542
 msgid "Dithering"
-msgstr ""
+msgstr "디터링"
 
 #: src/ui_configurationDialog.h:1544
 msgid ""
@@ -9460,7 +9462,7 @@ msgstr "장동 포함"
 msgid ""
 "Auto-enable atmosphere when selecting a celestial body in the location "
 "window."
-msgstr ""
+msgstr "위치 창에서 천체를 설정할 때 대기를 자동 활성화합니다."
 
 #: src/ui_configurationDialog.h:1573
 msgid "Auto-enabling for the atmosphere"
@@ -9468,7 +9470,7 @@ msgstr "대기 자동 활성화"
 
 #: src/ui_configurationDialog.h:1575
 msgid "Flash a short message when toggling mount mode."
-msgstr ""
+msgstr "가대 모드를 켜고 끌 때 짧은 메시지를 깜빡입니다."
 
 #: src/ui_configurationDialog.h:1577
 msgid "Indication for mount mode"
@@ -12555,7 +12557,7 @@ msgstr "접속 설정"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:301
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:427
 msgid "Field of view indicators"
-msgstr "시야각 지시기"
+msgstr "시야 지시기"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
@@ -12937,6 +12939,8 @@ msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
 msgstr ""
+"<b>호스트</b>는 호스트 이름 자체나 '127.0.0.1' 등 {IPv4} 주소로 표현될 수 있습니다. 기본값 'localhost'는"
+" '이 컴퓨터'를 나타냅니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid ""
@@ -12968,17 +12972,19 @@ msgid ""
 "around the telescope marker. This is a relic from the times before the "
 "<strong>Oculars</strong> plug-in existed."
 msgstr ""
+"각기 다른 시야를 나타내는 원 여러 개를 망원경 표지 주변에 추가할 수 있습니다. 이 기능은 <strong>접안렌즈</strong> "
+"플러그인이 나오기 전에 사용되었던 유물 기능입니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:429
 msgid ""
 "In the telescope configuration window, click on 'User Interface Settings'."
-msgstr ""
+msgstr "망원경 설정 창에서 '사용자 인터페이스 설정'을 누르세요."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:430
 msgid ""
 "Mark the 'Use field of view indicators' option, then enter a list of values "
 "separated with commas in the field below."
-msgstr ""
+msgstr "'시야 지시기 사용'에 표시한 후, 밑에 있는 값 목록을 각 값을 쉼표로 구분해서 채워넣으세요."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:431
 msgid "The values are interpreted as degrees of arc."
@@ -12989,13 +12995,13 @@ msgstr "값의 단위는 도입니다."
 msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
-msgstr ""
+msgstr "이 기능은 {가상 망원경}과 같이 사용하여 텔라드 원의 움직이는 십자선을 표시할 때 사용할 수도 있습니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
 msgid ""
 "The 'Slew telescope to' window can be opened by pressing <b>Ctrl+0</b> or "
 "the respective button in the bottom toolbar."
-msgstr ""
+msgstr "'망원경 이동' 창은 <b>Ctrl+0</b> 또는 하단 툴바의 버튼을 눌러서 열 수 있습니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
 msgid ""
@@ -13003,43 +13009,46 @@ msgid ""
 " preferred format (Hours-Minutes-Seconds, Degrees-Minutes-Seconds, or "
 "Decimal degrees), a drop-down list and two buttons."
 msgstr ""
+"천체의 좌표를 입력하는 칸이 2개 있으며, 입력 방식 (시-분-초, 도-분-초, 십진법 좌표) 선택,  드롭다운 목록, 버튼 2개가 "
+"있습니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:441
 msgid ""
 "The drop-down list contains the names of the currently connected devices."
-msgstr ""
+msgstr "드롭다운 목록에는 현재 연결된 장비 목록이 표시됩니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:442
 msgid ""
 "If no devices are connected, it will remain empty, and the 'Slew' button "
 "will be disabled."
-msgstr ""
+msgstr "연결된 장비가 없는 경우 비어 있으며, '이동' 버튼은 비활성화된 상태로 남아있습니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:443
 msgid ""
 "Pressing the <b>Slew</b> button slews the selected device to the selected "
 "set of coordinates."
-msgstr ""
+msgstr "<b>이동</b> 버튼을 누르면 선택한 장비를 입력한 좌표로 이동시킵니다."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:445
 msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
-msgstr ""
+msgstr "장비를 이동시키는 다른 방법은 밑의 {키보드 명령어} 문단을 참조하세요."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
-msgstr ""
+msgstr "<b>망원경 설정...</b>버튼을 누르면 플러그인의 {메인 창}이 열립니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
 msgid ""
 "<b>TIP:</b> Inside the 'Slew' window, underlined letters indicate that "
 "pressing 'Alt + underlined letter' can be used instead of clicking."
 msgstr ""
+"<b>팁:</b> '이동' 창 안에서, 밑줄이 그어진 알파벳들은 'Alt + 알파벳'의 형태로 단축키로 사용할 수 있다는 뜻입니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:452
 msgid ""
@@ -13171,7 +13180,7 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:487
 msgid "Argo Navis is a 'Digital Telescope Computer' by Wildcard Innovations."
-msgstr ""
+msgstr "Argo Navis는 Wildcard Innovations의 '디지털 망원경 컴퓨터'입니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:488
 msgid ""
@@ -13179,12 +13188,14 @@ msgid ""
 "(for example, a dobsonian) into a 'Push To' telescope (a telescope that uses"
 " a computer to find targets and human power to move the telescope itself)."
 msgstr ""
+"이것은 고급형 원 설정으로서, 돕소니안 등 일반적인 망원경을 'Push To' 망원경(목표를 컴퓨터가 찾고 사람이 망원경을 옮김)으로 "
+"바꿔 줍니다."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:489
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
-msgstr ""
+msgstr "Meade 호환성 모드로 설정하고 전송속도를 9600 B로 설정하는 것을 잊지 마세요."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid ""
@@ -13194,20 +13205,22 @@ msgid ""
 "that will react in the same way as the reticle of a real telescope "
 "controlled by the plug-in."
 msgstr ""
+"만약 이 플러그인을 장비를 연결하지 않고 시험해보고 싶다면, <b>망원경 제어:</b>에서 <b>없음, 재현만 함 (움직이는 "
+"십자선)</b>을 선택하세요. 이 때 나타나는 십자선은 실제 작동 시 나타나는 십자선 모양과 같은 방식으로 움직입니다."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:497
 msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
-msgstr ""
+msgstr "텔라드 원 모방 등 실제 적용 방식에 대해서는 위 문단의 {시야 지시기} 관련 문단을 참조하세요."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
 msgid ""
 "This feature is equivalent to the 'Dummy' type of telescope supported by "
 "{Stellarium's original telescope control feature}."
-msgstr ""
+msgstr "이 기능은 {스텔라리움의 기존 망원경 조정 기능}에서의 '인형(Dummy)' 기능과 유사합니다."
 
 #. TRANSLATORS: Symbol for "number"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:519
@@ -13285,7 +13298,7 @@ msgstr "시작"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1007
 msgid "Start the selected local telescope"
-msgstr "선택된 로컬 망원경을 시작하세요."
+msgstr "선택된 현지 망원경을 시작"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1012
 msgid "Stop"
@@ -13293,7 +13306,7 @@ msgstr "멈춤"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1013
 msgid "Stop the selected local telescope"
-msgstr "선택된 로컬 망원경을 정지하세요."
+msgstr "선택된 현지 망원경을 정지"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1018
 msgid "Connect"
@@ -13313,7 +13326,7 @@ msgstr "선택된 망원경으로부터 접속을 해제하세요."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1046
 msgid "Select a directory"
-msgstr "디렉토리 선택"
+msgstr "경로 선택"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 msgid "Right Ascension (J2000)"
@@ -13493,7 +13506,7 @@ msgstr "다음 기간마다 갱신:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:622
 msgid "User interface settings"
-msgstr "사용자 인터페이스 세팅"
+msgstr "사용자 인터페이스 설정"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "Show circles with fixed angular size around the telescope reticle"
@@ -13501,11 +13514,11 @@ msgstr "천체 망원경 십자선 주위에 고정 각도 크기의 동그라�
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:626
 msgid "Use field of view indicators"
-msgstr "시야각(FOV) 지시기를 사용"
+msgstr "시야 지시기 사용"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:627
 msgid "Circle size(s):"
-msgstr "원 크기(s):"
+msgstr "원 크기:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:629
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -13521,7 +13534,7 @@ msgstr "제어하는 망원경"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:409
 msgid "Configure the selected telescope"
-msgstr "선택된 망원경 설정"
+msgstr "선택한 망원경 설정"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:411
 msgid "Configure"
@@ -13533,7 +13546,7 @@ msgstr "새로운 망원경 추가"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Remove the selected telescope"
-msgstr "선택된 망원경을 제거"
+msgstr "선택한 망원경을 제거"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:421
 msgid "GUI"
@@ -13541,7 +13554,7 @@ msgstr "GUI"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:422
 msgid "Show telescope labels"
-msgstr "망원경 라벨 표시"
+msgstr "망원경 이름표 표시"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:423
 msgid "Show telescope reticles"
@@ -13549,7 +13562,7 @@ msgstr "망원경 십자선 표시"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:424
 msgid "Show field of view indicators"
-msgstr "시야각(FOV) 표시기 표시"
+msgstr "시야 지시기 사용"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:425
 msgid "Files"
@@ -14350,8 +14363,8 @@ msgid ""
 "catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
 msgstr ""
-"안시등급이 16보다 낮은 몇몇 퀘이사를 보여주는 플러그인입니다. 퀘이사의 카탈로그는 'Quasars and Active Galactic "
-"Nuclei' (13판) (Veron+ 2010) =2010A&A...518A..10V에서 컴파일되었습니다."
+"겉보기등급이 16보다 낮은 몇몇 퀘이사를 보여주는 플러그인입니다. 퀘이사의 목록은 'Quasars and Active Galactic "
+"Nuclei' (13판) (Veron+ 2010) =2010A&A...518A..10V에서 추출되었습니다."
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -14371,8 +14384,8 @@ msgid ""
 "visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
-"퀘이사 플러그인은 안시등급이 16보다 낮은 몇몇 퀘이사를 보여줍니다. 퀘이사의 카탈로그는 \"Quasars and Active "
-"Galactic Nuclei\" (13판)에서 컴파일되었습니다."
+"퀘이사 플러그인은 겉보기등급이 16보다 낮은 몇몇 퀘이사를 보여줍니다. 퀘이사의 목록은 \"Quasars and Active "
+"Galactic Nuclei\" (13판)에서 추출되었습니다."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 msgid "Veron+ 2010"
@@ -14462,7 +14475,7 @@ msgstr "질량중심 주기를 시간에 대해 미분"
 
 #: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Dispersion measure"
-msgstr ""
+msgstr "분산 측정"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:214
@@ -14648,7 +14661,7 @@ msgstr "툴바에 펄서 버튼 표시"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:339
 msgid "Pulsars marker color"
-msgstr ""
+msgstr "펄서 표지 색상"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:340
 msgid "Use separate color for pulsars with glitches"
@@ -14656,7 +14669,7 @@ msgstr "글리치가 있는 펄서에 다른 색상 사용"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
-msgstr ""
+msgstr "시간에 대해 평균한 선속 밀도가 400 MHz 이상인 펄서만 보여줍니다"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
@@ -17055,6 +17068,10 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"유성우는 밤하늘의 어느 한 점에서 유성들이 단체로 \"복사\" 또는 \"방출\" 되는 것처럼 보이는 천문 현상입니다. 유성우는 유성체 "
+"덩어리가 지구 대기에 서로 평행하며 고속으로 진입하면서 생깁니다. 유성 대부분은 모래 알갱이보다 작기 때문에 대기에서 전부 연소하여 지구"
+" 표면에 도달하지 못합니다. 간혹 특이한 유성우들은 \"유성 폭발\" 또는 \"유성 폭풍\"이라고 불리며, 1시간에 유성이 1000개 "
+"이상 떨어지기도 합니다."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
@@ -17068,6 +17085,8 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"유성우의 복사점은 밤하늘의 가상의 점으로, 행성 표면의 관측자가 유성우가 시작되는 것으로 관측되는 점입니다. 예를 들어, 페르세우스자리 "
+"유성우는 모든 유성들이 페르세우스자리에서 나오는 것처럼 보입니다."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:282
 msgid ""
@@ -17076,6 +17095,8 @@ msgid ""
 " point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"만약 관측자가 하늘 어디에선가 유성을 본다면, 방향을 거꾸로 따라가면 복사점에 닿습니다. 특정한 복사점에서 나오지 않는 유성들은 산발적 "
+"유성이라고 부르며, 유성우의 일부로 치지 않습니다."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:287
 msgid ""
@@ -17083,6 +17104,8 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"대부분 유성우의 복사점은 유성우의 주기가 반복될 때마다 약간씩 위치가 움직입니다. 예를 들어, 마차부자리 델타 유성우의 복사점은 하루에 "
+"거의 1도씩 움직입니다."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -17111,6 +17134,8 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the"
 " share of faint meteors is larger than usual."
 msgstr ""
+"인구 지표는 유성우의 등급 분산을 나타냅니다. 값이 2.5보다 작다면 평균보다 밝은 유성이 더 많이 나타남을 뜻하고, 3.0 이상은 "
+"어두운 유성이 평균보다 더 큼을 말합니다."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 msgid ""
@@ -17145,7 +17170,7 @@ msgstr "%1International Meteor Organization%2"
 msgid ""
 "Support is provided via the Github website. Be sure to put \"%1\" in the "
 "subject when posting."
-msgstr ""
+msgstr "지원은 Github 웹사이트를 통해 이루어집니다. 글을 올릴 때 제목에 \"%1\"을 넣는 걸 잊지 말아 주세요."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:103
 msgid "Start date greater than end date!"
@@ -17591,21 +17616,21 @@ msgstr ""
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:399
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
-msgstr ""
+msgstr "Scenery3d 셰이더 오류, 그릴 수 없습니다. 자세한 사항은 디버그 출력을 확인해 주세요."
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1814
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
-msgstr ""
+msgstr "하드웨어가 큐브맵을 지원하지 않습니다. 투시도법으로 전환해 주세요!"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1823
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
-msgstr ""
+msgstr "기하학적 셰이더가 지원되지 않아 '6 텍스처' 모드로 돌아갑니다."
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1833
 msgid "Falling back to '6 Textures' because of ANGLE bug"
-msgstr ""
+msgstr "ANGLE 버그로 인해 '6 텍스처'로 돌아갑니다"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:2358
 msgid ""

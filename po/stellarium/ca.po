@@ -3934,15 +3934,15 @@ msgstr "Magnitud visual basada en funció de l'angle de fase i l'albedo."
 
 #: src/gui/LocationDialog.cpp:734
 msgid "GPS listening..."
-msgstr ""
+msgstr "Escoltant GPS..."
 
 #: src/gui/LocationDialog.cpp:741
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "Desconnectant GPS..."
 
 #: src/gui/LocationDialog.cpp:753
 msgid "GPS location fix"
-msgstr ""
+msgstr "Localització recolzada per GPS"
 
 #: src/gui/LocationDialog.cpp:772
 msgid "GPS:FAILED"
@@ -4763,7 +4763,7 @@ msgstr "100 dies siderals"
 
 #: src/gui/AstroCalcDialog.cpp:1571
 msgid "1 sidereal year"
-msgstr ""
+msgstr "1 any sideral"
 
 #: src/gui/AstroCalcDialog.cpp:1572
 msgid "1 Julian day"
@@ -4795,35 +4795,35 @@ msgstr "100 dies Julians"
 
 #: src/gui/AstroCalcDialog.cpp:1579
 msgid "1 Julian year"
-msgstr ""
+msgstr "1 any Julià"
 
 #: src/gui/AstroCalcDialog.cpp:1580
 msgid "1 Gaussian year"
-msgstr ""
+msgstr "1 any Gaussià"
 
 #: src/gui/AstroCalcDialog.cpp:1581
 msgid "1 synodic month"
-msgstr ""
+msgstr "1 mes sinòdic"
 
 #: src/gui/AstroCalcDialog.cpp:1582
 msgid "1 draconic month"
-msgstr ""
+msgstr "1 mes draconià"
 
 #: src/gui/AstroCalcDialog.cpp:1583
 msgid "1 mean tropical month"
-msgstr ""
+msgstr "1 mes tropical mitjà"
 
 #: src/gui/AstroCalcDialog.cpp:1584
 msgid "1 anomalistic month"
-msgstr ""
+msgstr "1 mes anormal"
 
 #: src/gui/AstroCalcDialog.cpp:1585
 msgid "1 anomalistic year"
-msgstr ""
+msgstr "1 any anomalista"
 
 #: src/gui/AstroCalcDialog.cpp:1586
 msgid "1 saros"
-msgstr ""
+msgstr "1 saros"
 
 #: src/gui/AstroCalcDialog.cpp:1657
 msgid "Solar system"
@@ -8019,6 +8019,9 @@ msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
 msgstr ""
+"Commuta la cerca de la ubicació del GPS. (No canvia la zona horària!) Quan "
+"estigui satisfet, desactiveu-lo per permetre que altres programes accedeixin"
+" al dispositiu GPS."
 
 #: src/ui_locationDialogGui.h:520
 msgid "New Location"
@@ -9083,7 +9086,7 @@ msgstr "Color dels ajudants de raigs"
 #: src/ui_viewDialog.h:2960
 msgctxt "Solar system objects"
 msgid "SSO"
-msgstr ""
+msgstr "SSO"
 
 #: src/ui_viewDialog.h:2965
 msgctxt "Deep-Sky Objects"
@@ -9420,7 +9423,7 @@ msgstr "Commuta la visualització del botó per el Digitized Sky Survey."
 
 #: src/ui_configurationDialog.h:1466
 msgid "Show DSS button"
-msgstr "Mostrar botó EDC"
+msgstr "Mostrar botó DSS"
 
 #: src/ui_configurationDialog.h:1468
 msgid "A button to toggle equatorial J2000 grid"

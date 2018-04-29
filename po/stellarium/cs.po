@@ -1015,7 +1015,7 @@ msgstr "Kryovulkanický útvar."
 #. TRANSLATORS: Description for landform 'promontorium'
 #: src/core/modules/NomenclatureItem.cpp:647
 msgid "'Cape'; headland promontoria."
-msgstr ""
+msgstr "'Mys'; předhoří ostrohu."
 
 #. TRANSLATORS: Description for landform 'regio'
 #: src/core/modules/NomenclatureItem.cpp:651
@@ -1023,31 +1023,33 @@ msgid ""
 "A large area marked by reflectivity or color distinctions from adjacent "
 "areas, or a broad geographic region."
 msgstr ""
+"Velká oblast zvýrazněná odrazivostí nebo barevnými rozdíly od přilehlých "
+"oblastí nebo rozlehlá geografická oblast."
 
 #. TRANSLATORS: Description for landform 'reticulum'
 #: src/core/modules/NomenclatureItem.cpp:655
 msgid "Reticular (netlike) pattern."
-msgstr ""
+msgstr "Síťovitý (síťový) vzor."
 
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:659
 msgid "Fissure."
-msgstr ""
+msgstr "Puklina."
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:663
 msgid "Scarp."
-msgstr ""
+msgstr "Sráz."
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:667
 msgid "A feature that shares the name of an associated feature."
-msgstr ""
+msgstr "Útvar, který sdílí název přidruženého útvaru."
 
 #. TRANSLATORS: Description for landform 'scopulus'
 #: src/core/modules/NomenclatureItem.cpp:671
 msgid "Lobate or irregular scarp."
-msgstr ""
+msgstr "Lalokovitý nebo nepravidelný sráz."
 
 #. TRANSLATORS: Description for landform 'serpens'
 #: src/core/modules/NomenclatureItem.cpp:675
@@ -1055,11 +1057,13 @@ msgid ""
 "Sinuous feature with segments of positive and negative relief along its "
 "length."
 msgstr ""
+"Zakroucený vinoucí se útvar se segmenty pozitivního a negativního reliéfu "
+"podél svojí délky."
 
 #. TRANSLATORS: Description for landform 'sulcus'
 #: src/core/modules/NomenclatureItem.cpp:679
 msgid "Subparallel furrows and ridges."
-msgstr ""
+msgstr "Téměř rovnoběžné brázdy a hřebeny."
 
 #. TRANSLATORS: Description for landform 'sinus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:685
@@ -1074,17 +1078,17 @@ msgstr "'Záliv'; malá rovina."
 #. TRANSLATORS: Description for landform 'terra'
 #: src/core/modules/NomenclatureItem.cpp:695
 msgid "Extensive land mass."
-msgstr ""
+msgstr "Oblast s velkou rozlohou."
 
 #. TRANSLATORS: Description for landform 'tessera'
 #: src/core/modules/NomenclatureItem.cpp:699
 msgid "Tile-like, polygonal terrain."
-msgstr ""
+msgstr "Dlaždicovitý terén, složený z mnohoúhelníků."
 
 #. TRANSLATORS: Description for landform 'tholus'
 #: src/core/modules/NomenclatureItem.cpp:703
 msgid "Small domical mountain or hill."
-msgstr ""
+msgstr "Malá kopulovitá hora nebo kopec."
 
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
@@ -1104,7 +1108,7 @@ msgstr "Rozsáhlá planina."
 #. TRANSLATORS: Description for landform 'virga'
 #: src/core/modules/NomenclatureItem.cpp:719
 msgid "A streak or stripe of color."
-msgstr ""
+msgstr "Barevný proužek nebo pruh."
 
 #: src/core/modules/NomenclatureItem.cpp:726
 msgid "Undocumented landform type."
@@ -2562,7 +2566,7 @@ msgstr ""
 
 #: src/core/StelCore.cpp:2271
 msgid "Used by default."
-msgstr "Standardně použito."
+msgstr "Použito jako výchozí."
 
 #: src/core/StelCore.cpp:2274
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
@@ -2861,7 +2865,7 @@ msgstr "Zdánlivý hvězdný čas"
 
 #: src/core/StelObject.cpp:499
 msgid "IAU Constellation"
-msgstr "Souhvězdí IAU"
+msgstr "Zkratka souhvězdí IAU"
 
 #: src/core/StelSkyLayerMgr.cpp:89
 msgid "Deep-sky objects background images"
@@ -3777,12 +3781,17 @@ msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
+"Používá polygonální 3D model pro některé vybrané podplanetární objekty (malé"
+" měsíce, asteroidy, komety) místo sférické aproximace"
 
 #: src/gui/ViewDialog.cpp:1475
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
+"Používá &quot;stínové mapování&quot; pro simulaci vlastních stínů "
+"nekonvexních objektů ve sluneční soustavě. U některých objektů může být "
+"snížena kvalita simulace polostínu."
 
 #: src/gui/ViewDialog.cpp:1498
 msgid "Abbreviated"
@@ -3870,6 +3879,8 @@ msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
 msgstr ""
+"Algoritmus byl použit v <em>Astronomical Almanac</em> (1984 a později) a "
+"dává V (instrumentální) magnitudy (údajně od D.L. Harrise)."
 
 #: src/gui/ViewDialog.cpp:1773
 msgid ""
@@ -3877,6 +3888,9 @@ msgid ""
 "was published in <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 msgstr ""
+"Algoritmus je založen na vizuálních pozorováních G. Muellera v letech "
+"1877-1891 a byl publikován v <em>Explanatory Supplement to the Astronomical "
+"Ephemeris</em> (1961)."
 
 #: src/gui/ViewDialog.cpp:1776
 msgid ""
@@ -3900,15 +3914,15 @@ msgstr "Vizuální jasnost vypočítaná na základě fázového úhlu a albeda.
 
 #: src/gui/LocationDialog.cpp:734
 msgid "GPS listening..."
-msgstr ""
+msgstr "Naslouchání GPS..."
 
 #: src/gui/LocationDialog.cpp:741
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "Odpojování GPS..."
 
 #: src/gui/LocationDialog.cpp:753
 msgid "GPS location fix"
-msgstr ""
+msgstr "Určení polohy GPS"
 
 #: src/gui/LocationDialog.cpp:772
 msgid "GPS:FAILED"
@@ -8881,7 +8895,7 @@ msgstr "Použít přiřazené planety a pozici"
 
 #: src/ui_viewDialog.h:2891
 msgid "Use this landscape as default"
-msgstr "Použít tuto krajinu jako předvolenou"
+msgstr "Použít tuto krajinu jako výchozí"
 
 #: src/ui_viewDialog.h:2892
 msgid "Show ground"
@@ -9052,7 +9066,7 @@ msgstr "Doplňky"
 
 #: src/ui_configurationDialog.h:1336
 msgid "Additional settings for Graphical User Interface"
-msgstr ""
+msgstr "Další nastavení pro grafické uživatelské rozhraní"
 
 #: src/ui_configurationDialog.h:1339
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
@@ -9128,7 +9142,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1369
 msgid "Default options"
-msgstr "Předvolená nastavení"
+msgstr "Výchozí nastavení"
 
 #: src/ui_configurationDialog.h:1370
 msgid "Save View"
@@ -13462,7 +13476,7 @@ msgstr "Nejsou žádná aktivní zařízení."
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:330
 msgid "Slew telescope to coordinates"
-msgstr "Otočit teleskop na souřadnice"
+msgstr "Otočit dalekohled na souřadnice"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
@@ -16530,11 +16544,11 @@ msgstr "Časová rovnice"
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
 msgid "This plugin shows the solution of the equation of time."
-msgstr ""
+msgstr "Tento zásuvný modul zobrazuje řešení časové rovnice."
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
 msgid "Show solution for Equation of Time"
-msgstr ""
+msgstr "Zobrazit řešení časové rovnice"
 
 #. TRANSLATORS: minutes.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:220
@@ -16550,7 +16564,7 @@ msgstr "s"
 
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
 msgid "Equation of Time plug-in"
-msgstr ""
+msgstr "Zásuvný modul Časová rovnice"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:238
 msgid ""
@@ -16567,15 +16581,15 @@ msgstr ""
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:240
 msgid "Show plug-ins button on toolbar"
-msgstr ""
+msgstr "Zobrazit tlačítko zásuvného modulu na panelu"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:241
 msgid "Use minutes and seconds"
-msgstr ""
+msgstr "Používat minuty a sekundy"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:242
 msgid "Change sign of equation"
-msgstr ""
+msgstr "Změnit znaménko rovnice"
 
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
@@ -16597,21 +16611,21 @@ msgstr "Vypnout/zapnout meteorické roje"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
 msgid "Toggle radiant labels"
-msgstr ""
+msgstr "Vypnout/zapnout popisky radiantů"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:225
 msgid "Show settings dialog"
-msgstr ""
+msgstr "Zobrazit dialogové okno pro nastavení"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Show search dialog"
-msgstr ""
+msgstr "Zobrazit dialogové okno pro hledání"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:256
 msgid "Using the default Meteor Showers catalog."
-msgstr ""
+msgstr "Použít výchozí katalog meteorických rojů."
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:555
 msgid ""
@@ -16629,44 +16643,58 @@ msgid ""
 "year.</li><li><b>Inactive:</b> the radiant is inactive for the current sky "
 "date.</li></ul></p>"
 msgstr ""
+"<p>Tento zásuvný modul umožňuje simulovat pravidelně se opakující meteorické"
+" roje a zobrazovat značku pro každý aktivní i neaktivní "
+"radiant.</p><p>Jedním kliknutím myší na značce radiantu můžete zobrazit "
+"všechny podrobnosti o jeho poloze a aktivitě. Většina údajů v tomto zásuvném"
+" modulu pochází z oficiálního katalogu <a "
+"href=\"http://imo.net\">Mezinárodní meteorické "
+"organizace</a>.</p><p>Používají se tři typy značek:<ul><li><b>Potvrzený:</b>"
+" radiant je aktivní a údaje o něm byly potvrzeny. Je to tedy  meteorický roj"
+" historický (v minulosti skutečně nastal) nebo "
+"předpovězený.</li><li><b>Obecný:</b> radiant je aktivní, ale údaje o něm "
+"nebyly potvrzeny. To znamená, že může být pozorován tak, jak je uvedeno, ale"
+" nemáme spolehlivé údaje o jeho aktivitě v letošním "
+"roce.</li><li><b>Neaktivní:</b> radiant je nenaktivní pro aktuální "
+"datum.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:127
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
 msgid "Confirmed"
-msgstr ""
+msgstr "Potvrzený"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:131
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:443
 msgid "Generic"
-msgstr ""
+msgstr "Obecný"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:526
 msgid "generic data"
-msgstr ""
+msgstr "obecná data"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:530
 msgid "confirmed data"
-msgstr ""
+msgstr "potvrzené údaje"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:534
 msgid "inactive"
-msgstr ""
+msgstr "neaktivní"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "meteor shower"
-msgstr ""
+msgstr "meteorický roj"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:569
 msgid "Radiant drift (per day)"
-msgstr ""
+msgstr "Posun radiantu (za den)"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:577
 msgid "Geocentric meteoric velocity"
-msgstr ""
+msgstr "Geocentrická rychlost meteorů"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:585
 msgid "The population index"
-msgstr ""
+msgstr "Populační index"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:588
 msgid "Parent body"
@@ -16674,345 +16702,345 @@ msgstr "Mateřské těleso"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:593
 msgid "Activity"
-msgstr ""
+msgstr "Aktivita"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:610
 #, qt-format
 msgid "Maximum: %1"
-msgstr ""
+msgstr "Maximum: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"
-msgstr ""
+msgstr "Délka Slunce"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:623
 msgid "variable"
-msgstr ""
+msgstr "proměnný"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:33
 msgid "Quadrantids"
-msgstr ""
+msgstr "Kvadrantidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:35
 msgid "Lyrids"
-msgstr ""
+msgstr "Lyridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:37
 msgid "α-Centaurids"
-msgstr ""
+msgstr "α-Centauridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:39
 msgid "γ-Normids"
-msgstr ""
+msgstr "γ-Normidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:41
 msgid "η-Aquariids"
-msgstr ""
+msgstr "η-Akvaridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:43
 msgid "June Bootids"
-msgstr ""
+msgstr "Červnové Bootidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:45
 msgid "Piscis Austrinids"
-msgstr ""
+msgstr "Piscis Austrinidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:47
 msgid "Southern δ-Aquariids"
-msgstr ""
+msgstr "Jižní δ-Aquaridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:49
 msgid "α-Capricornids"
-msgstr ""
+msgstr "α-Capricornidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:51
 msgid "α-Aurigids"
-msgstr ""
+msgstr "α-Aurigidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:53
 msgid "September ε-Perseids"
-msgstr ""
+msgstr "Zářiové ε-Perseidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:55
 msgid "Draconids"
-msgstr ""
+msgstr "Drakonidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:57
 msgid "Leonids"
-msgstr ""
+msgstr "Leonidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:59
 msgid "Phoenicids"
-msgstr ""
+msgstr "Phoenicidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:61
 msgid "Puppid-Velids"
-msgstr ""
+msgstr "Puppid-Velidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:63
 msgid "Ursids"
-msgstr ""
+msgstr "Ursidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:65
 msgid "Perseids"
-msgstr ""
+msgstr "Perseidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:67
 msgid "δ-Leonids"
-msgstr ""
+msgstr "δ-Leonidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:69
 msgid "π-Puppids"
-msgstr ""
+msgstr "π-Puppidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:71
 msgid "June Lyrids"
-msgstr ""
+msgstr "Červnové Lyridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:73
 msgid "κ-Cygnids"
-msgstr ""
+msgstr "κ-Cygnidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:75
 msgid "ε-Lyrids"
-msgstr ""
+msgstr "ε-Lyridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:77
 msgid "δ-Aurigids"
-msgstr ""
+msgstr "δ-Aurigidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:79
 msgid "ε-Geminids"
-msgstr ""
+msgstr "ε-Geminidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:81
 msgid "Southern Taurids"
-msgstr ""
+msgstr "Jižní Tauridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:83
 msgid "Northern Taurids"
-msgstr ""
+msgstr "Severní Tauridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:85
 msgid "Monocerotids"
-msgstr ""
+msgstr "Monocerotidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:87
 msgid "α-Monocerotids"
-msgstr ""
+msgstr "α-Monocerotidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:89
 msgid "σ-Hydrids"
-msgstr ""
+msgstr "σ-Hydridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:91
 msgid "Geminids"
-msgstr ""
+msgstr "Geminidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:93
 msgid "Leonis Minorids"
-msgstr ""
+msgstr "Leo Minoridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:95
 msgid "December Leonis Minorids"
-msgstr ""
+msgstr "Prosincové Leo Minoridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:97
 msgid "Comae Berenicids"
-msgstr ""
+msgstr "Coma Berenicidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:99
 msgid "Orionids"
-msgstr ""
+msgstr "Orionidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:101
 msgid "Andromedids"
-msgstr ""
+msgstr "Andromedidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:103
 msgid "η-Lyrids"
-msgstr ""
+msgstr "η-Lyridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:105
 msgid "α-Scorpiids"
-msgstr ""
+msgstr "α-Scorpiidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
 msgid "Ophiuchids"
-msgstr ""
+msgstr "Ophiuchidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:109
 msgid "θ-Ophiuchids"
-msgstr ""
+msgstr "θ-Ophiuchidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:111
 msgid "κ-Serpentids"
-msgstr ""
+msgstr "κ-Serpentidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:113
 msgid "θ-Centaurids"
-msgstr ""
+msgstr "θ-Centauridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:115
 msgid "ω-Cetids"
-msgstr ""
+msgstr "ω-Cetidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:117
 msgid "Southern ω-Scorpiids"
-msgstr ""
+msgstr "Jižní ω-Scorpiidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:119
 msgid "Northern ω-Scorpiids"
-msgstr ""
+msgstr "Severní ω-Scorpiidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:121
 msgid "Arietids"
-msgstr ""
+msgstr "Arietidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:123
 msgid "π-Cetids"
-msgstr ""
+msgstr "π-Cetidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:125
 msgid "δ-Cancrids"
-msgstr ""
+msgstr "δ-Cancridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:127
 msgid "τ-Herculids"
-msgstr ""
+msgstr "τ-Herculidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:129
 msgid "ρ-Geminids"
-msgstr ""
+msgstr "ρ-Geminidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:131
 msgid "η-Carinids"
-msgstr ""
+msgstr "η-Carinidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:133
 msgid "η-Craterids"
-msgstr ""
+msgstr "η-Crateridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:135
 msgid "π-Virginids"
-msgstr ""
+msgstr "π-Virginidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:137
 msgid "θ-Virginids"
-msgstr ""
+msgstr "θ-Virginidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:139
 msgid "May Librids"
-msgstr ""
+msgstr "Květnové Libridy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:141
 msgid "June Scutids"
-msgstr ""
+msgstr "Červnové Scutidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:143
 msgid "α-Pisces Australids"
-msgstr ""
+msgstr "α-Pisces Australidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:145
 msgid "Southern ι-Aquariids"
-msgstr ""
+msgstr "Jižní ι-Aquariidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:147
 msgid "Northern ι-Aquariids"
-msgstr ""
+msgstr "Severní ι-Aquariidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:149
 msgid "γ-Aquariids"
-msgstr ""
+msgstr "γ-Aquariidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:151
 msgid "Autumn Arietids"
-msgstr ""
+msgstr "Podzimní Arietidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:153
 msgid "χ-Orionids"
-msgstr ""
+msgstr "χ-Orionidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:155
 msgid "Sextantids"
-msgstr ""
+msgstr "Sextantidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:157
 msgid "November Orionids"
-msgstr ""
+msgstr "Listopadové Orionidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:159
 msgid "August Caelids"
-msgstr ""
+msgstr "Srpnové Caelidy"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:161
 msgid "ε-Gruids"
-msgstr ""
+msgstr "ε-Gruidy"
 
 #. TRANSLATORS: Name of parent object for meteor shower
 #: plugins/MeteorShowers/src/translations.h:165
@@ -17144,6 +17172,8 @@ msgid ""
 "This plugin enables you to simulate periodic meteor showers and to display a"
 " marker for each active and inactive radiant."
 msgstr ""
+"Tento zásuvný modul simuluje pravidelně se opakující meteorické roje a "
+"zobrazuje značku pro každý aktivní i neaktivní radiant."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:234
 msgid ""
@@ -17152,6 +17182,10 @@ msgid ""
 "official <a href=\"http://imo.net\">International Meteor Organization</a> "
 "catalog."
 msgstr ""
+"Jedním kliknutím na značce radiantu zobrazíte všechny podrobnosti o jeho "
+"poloze a aktivitě. Většina údajů použitých v tomto zásuvném modulu pochází z"
+" oficiálního katalogu <a href=\"http://imo.net\">Mezinárodní meteorické "
+"organizace</a>."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:241
 msgid ""
@@ -17163,10 +17197,17 @@ msgid ""
 "activity for the current year.</li><li><b>Inactive:</b> the radiant is "
 "inactive for the current sky date.</li></ul></p>"
 msgstr ""
+"<p>Používají se tři typy značek:<ul><li><b>Potvrzený:</b> radiant je aktivní"
+" a údaje o něm byly potvrzeny. Je to tedy meteorický roj historický (v "
+"minulosti skutečně nastal) nebo předpovězený.</li><li><b>Obecný:</b> radiant"
+" je aktivní, ale údaje o něm nebyly potvrzeny. To znamená, že může být "
+"pozorován tak, jak je uvedeno, ale nemáme spolehlivé údaje o jeho aktivitě v"
+" letošním roce.</li><li><b>Neaktivní:</b> radiant je nenaktivní pro aktuální"
+" datum.</li></ul></p>"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:263
 msgid "Terms"
-msgstr ""
+msgstr "Termíny"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:264
 msgid "Meteor shower"
@@ -17183,6 +17224,14 @@ msgid ""
 "known as meteor outbursts and meteor storms, which may produce greater than "
 "1,000 meteors an hour."
 msgstr ""
+"Meteorický roj je událost na obloze, při které pozorujeme množství meteorů, "
+"které vyletují z jednoho místa noční oblohy. Tyto meteory jsou způsobeny "
+"proudem kosmických úlomků zvaných meteoroidy, které vstupují do zemské "
+"atmosféry extrémně vysokými rychostmi na rovnoběžných trajektoriích. Většina"
+" meteoroidů je menší než zrnko písku, proto většina z nich se rozpadne a "
+"nikdy nezasáhnou povrch Země. Intenzivní nebo neobvyklé meteorické roje jsou"
+" známé jako meteorické deště nebo meteorické bouře, při kterých můžeme "
+"zaznamenat více než 1000 meteorů za hodinu."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:274
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:452
@@ -17196,6 +17245,9 @@ msgid ""
 "Perseids, for example, are meteors which appear to come from a point within "
 "the constellation of Perseus."
 msgstr ""
+"Radiant (či zdánlivý radiant) meteorického roje je bod na obloze, ze kterého"
+" se pozorovateli na povrchu planety jeví, že vyletují meteory. Například "
+"Perseidy jsou meteory, které přichází z bodu uvnitř souhvězdí Persea."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:282
 msgid ""
@@ -17204,6 +17256,10 @@ msgid ""
 " point back to the known radiant for a given shower is known as a sporadic "
 "and is not considered part of that shower."
 msgstr ""
+"Pozorovatel může spatřit takovýto meteor kdekoliv na obloze, ale směr jeho "
+"pohybu, pokud jej prodloužíme směrem zpátky, bude mířit do radiantu. Meteor,"
+" který nevychází z žádného známého radiantu daného roje, nazýváme sporadický"
+" a není uvažován jako součást tohoto roje."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:287
 msgid ""
@@ -17211,6 +17267,9 @@ msgid ""
 "when it appears. For example, the radiant point for the Delta Aurigids "
 "drifts by more than a degree per night."
 msgstr ""
+"Mnoho rojů má radiant, který mění svou polohu v průběhu období, ve kterém se"
+" roj objevuje. Například radiant delta Aurigid se posouvá o více než jeden "
+"stupeň za noc."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:291
 msgid "Zenithal Hourly Rate (ZHR)"
@@ -17224,10 +17283,15 @@ msgid ""
 "were at the zenith. The rate that can effectively be seen is nearly always "
 "lower and decreases the closer the radiant is to the horizon."
 msgstr ""
+"Zenitová hodinová frekvence (ZHF) meteorického roje je počet meteorů, které "
+"může jednotlivý pozorovatel zahlédnout během jedné hodiny za bezoblačné "
+"tmavé noci (při mezní magnitudě 6.5), pokud by se radiant roje nacházel v "
+"zenitu. Skutečná frekvence, kterou pozorujeme, je téměř vždy nižší a klesá "
+"tím víc, čím blíže je radiant k obzoru."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:299
 msgid "Population index"
-msgstr ""
+msgstr "Populační index"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:301
 msgid ""
@@ -17236,34 +17300,40 @@ msgid ""
 "meteors are more frequent than average, while values above 3.0 mean that the"
 " share of faint meteors is larger than usual."
 msgstr ""
+"Populační index charakterizuje rozdělení magnitud meteorických rojů. Hodnoty"
+" pod 2,5 odpovídají rozdělení, ve kterém jsou jasnější meteory častější, "
+"zatímco hodnoty nad 3,0 znamenají, že podíl slabších meteorů je vyšší než je"
+" obvyklé."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
+"Tento zásuvný modul byl původně vytvořen v rámci programu ESA Summer of Code"
+" in Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:308
 msgid "Info"
-msgstr ""
+msgstr "Informace"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
 msgid "Info about meteor showers you can get here:"
-msgstr ""
+msgstr "Informace o meteorických rojích můžete nalézt zde:"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:312
 #, qt-format
 msgid "%1Meteor shower%2 - article in Wikipedia"
-msgstr ""
+msgstr "%1Meteorický roj%2 - článek ve Wikipedii"
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:314
 #, qt-format
 msgid "%1International Meteor Organization%2"
-msgstr ""
+msgstr "%1Mezinárodní meteorická organizace%2"
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
 #, qt-format
@@ -17271,14 +17341,16 @@ msgid ""
 "Support is provided via the Github website. Be sure to put \"%1\" in the "
 "subject when posting."
 msgstr ""
+"Podporu zajišťujeme prostřednictvím webu Github.  Při komunikaci do předmětu"
+" zprávy vložte \"%1\"."
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:103
 msgid "Start date greater than end date!"
-msgstr ""
+msgstr "Počáteční datum je větší než konečné datum!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:107
 msgid "Time interval must be less than one year!"
-msgstr ""
+msgstr "Časový interval musí být menší než jeden rok!"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:192
 msgid "ZHR"
@@ -17286,16 +17358,16 @@ msgstr "ZHF"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:193
 msgid "Data Type"
-msgstr ""
+msgstr "Datový typ"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:194
 msgid "Peak"
-msgstr ""
+msgstr "Vyvrcholení"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:421
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:190
 msgid "Meteor Showers Configuration"
-msgstr ""
+msgstr "Nastavení meteorických rojů"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:422
 msgid "Meteor Showers: Settings"
@@ -17303,35 +17375,35 @@ msgstr "Meteorické roje: nastavení"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:427
 msgid "General settings"
-msgstr ""
+msgstr "Obecná nastavení"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:428
 msgid "Enable plugin at startup"
-msgstr ""
+msgstr "Načíst zásuvný modul při spuštění"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:429
 msgid "Show a button to enable/disable the plugin"
-msgstr ""
+msgstr "Zobrazit tlačítko pro načtení zásuvného modulu při spuštění"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:430
 msgid "Show a button to open the search panel"
-msgstr ""
+msgstr "Zobrazit tlačítko pro otevření okna vyhledávání"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:433
 msgid "Show radiant marker"
-msgstr ""
+msgstr "Zobrazit značku radiantu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:434
 msgid "Show radiant labels"
-msgstr ""
+msgstr "Zobrazit popisky radiantů"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:435
 msgid "Show active radiants only"
-msgstr ""
+msgstr "Zobrazit pouze aktivní radianty"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:437
 msgid "Label font size (pixels)"
-msgstr ""
+msgstr "Velikost písma popisku (v pixelech)"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:439
 msgid "Set radiant color"
@@ -17339,11 +17411,11 @@ msgstr "Nastavit barvu radiantu"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:441
 msgid "Active Radiant - Generic Data"
-msgstr ""
+msgstr "Aktivní radiant - obecná data"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:445
 msgid "Inactive Radiant"
-msgstr ""
+msgstr "Neaktivní radiant"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:447
 msgid "Inactive"
@@ -17351,7 +17423,7 @@ msgstr "Neaktivní"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:449
 msgid "Active Radiant - Confirmed Data"
-msgstr ""
+msgstr "Aktivní radiant - potvrzené údaje"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:453
 msgid "Enable automatic updates"
@@ -17363,7 +17435,7 @@ msgstr "Příští aktualizace:"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:456
 msgid "Last attempt to update"
-msgstr ""
+msgstr "Poslední pokus o aktualizaci"
 
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:461
 msgid "Update"
@@ -17371,7 +17443,7 @@ msgstr "Aktualizovat"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:191
 msgid "Meteor Showers: Search"
-msgstr ""
+msgstr "Meteorické roje: hledat"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:193
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:198
@@ -17393,15 +17465,15 @@ msgstr "Výsledky"
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:291
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:318
 msgid "Pointer Coordinates"
-msgstr ""
+msgstr "Ukazatel souřadnic"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:60
 msgid "This plugin shows the coordinates of the mouse pointer."
-msgstr ""
+msgstr "Tento zásuvný modul zobrazuje souřadnice ukazatele myši."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
 msgid "Show coordinates of the mouse pointer"
-msgstr ""
+msgstr "Ukázat souřadnice ukazatele myši"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:138
 msgctxt "abbreviated in the plugin"
@@ -17416,22 +17488,22 @@ msgstr "RA/Dec"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:177
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
-msgstr "Az./výš."
+msgstr "Azimut/výška"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:193
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
-msgstr ""
+msgstr "Galakt. délka/šířka"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:209
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
-msgstr ""
+msgstr "Supergal. dél./šíř."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:228
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
-msgstr ""
+msgstr "Eklipt. dél./šíř."
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:247
 msgctxt "abbreviated in the plugin"
@@ -17445,11 +17517,11 @@ msgstr "Hod.úhel/Dekl."
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
 msgid "Pointer Coordinates plug-in"
-msgstr ""
+msgstr "Zásuvný modul Ukazatel souřadnic"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
 msgid "Show coordinates of the mouse cursor on the screen."
-msgstr "Zobrazit koordináty kurzoru myši na obrazovce."
+msgstr "Zobrazit souřadnice kurzoru myši na obrazovce."
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:181
 msgid "The top center of the screen"
@@ -17489,7 +17561,7 @@ msgstr "Ekliptikální délka/šířka (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Altitude/Azimuth"
-msgstr "Nadm. výška/Azimut"
+msgstr "Výška/Azimut"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Galactic Longitude/Latitude"
@@ -17509,19 +17581,19 @@ msgstr "Zobrazovat souřadnice při spuštění"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:293
 msgid "Show plug-in button on toolbar"
-msgstr "Zobrazovat tlačítko zásuvného modulu na panelu"
+msgstr "Zobrazit tlačítko zásuvného modulu na panelu"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:297
 msgid "Show IAU constellation code"
-msgstr "Zobrazit zkratku IAU souhhvězdí"
+msgstr "Zobrazit IAU zkratku souhvězdí"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:298
 msgid "Show crossed lines under mouse cursor"
-msgstr "Zobrazovat křížící se čáry pod ukazatelem myši"
+msgstr "Zobrazovat kříž pod ukazatelem myši"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:300
 msgid "Which coordinate system will be used for displaying"
-msgstr ""
+msgstr "Která soustava souřadnic bude použita pro zobrazení"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:302
 msgid "Coordinates:"
@@ -17529,15 +17601,15 @@ msgstr "Souřadnice:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:307
 msgid "Place of the string:"
-msgstr ""
+msgstr "Umístění řetězce:"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:309
 msgid "Coordinate X"
-msgstr "Vodorovná souřadnice"
+msgstr "Souřadnice X"
 
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:313
 msgid "Coordinate Y"
-msgstr "Svislá souřadnice"
+msgstr "Souřadnice Y"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:271
 msgid "Scenery3d plugin loaded!"
