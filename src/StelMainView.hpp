@@ -51,9 +51,11 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(bool fullScreen                 READ isFullScreen                  WRITE setFullScreen                 NOTIFY fullScreenChanged)
 	Q_PROPERTY(bool flagInvertScreenShotColors READ getFlagInvertScreenShotColors WRITE setFlagInvertScreenShotColors NOTIFY flagInvertScreenShotColorsChanged)
 	Q_PROPERTY(bool flagOverwriteScreenshots   READ getFlagOverwriteScreenShots   WRITE setFlagOverwriteScreenShots   NOTIFY flagOverwriteScreenshotsChanged)
+#ifndef USE_OLD_QGLWIDGET
 	Q_PROPERTY(bool flagUseCustomScreenshotSize READ getFlagUseCustomScreenshotSize WRITE setFlagUseCustomScreenshotSize NOTIFY flagUseCustomScreenshotSizeChanged)
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
+#endif
 	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
@@ -134,6 +136,7 @@ public slots:
 	//! Set whether existing files are overwritten when saving screenshot
 	void setFlagOverwriteScreenShots(bool b) {flagOverwriteScreenshots=b; emit flagOverwriteScreenshotsChanged(b);}
 
+#ifndef USE_OLD_QGLWIDGET
 	//! Get whether custom size should be used for screenshots
 	bool getFlagUseCustomScreenshotSize() const {return flagUseCustomScreenshotSize;}
 	//! Set whether custom size should be used for screenshots
@@ -146,7 +149,10 @@ public slots:
 	int getCustomScreenshotHeight() const {return customScreenshotHeight;}
 	//! Set whether custom size should be used for screenshots
 	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; emit customScreenshotHeightChanged(height);}
-
+	//! Get screenshot magnification. This should be used by StarMgr, text drawing and other elements which may
+	//! want to enlarge their output in screenshots to keep them visible.
+	float getCustomScreenshotMagnification() {return customScreenshotMagnification;}
+#endif
 	//! Get the state of the mouse cursor timeout flag
 	bool getFlagCursorTimeout() {return flagCursorTimeout;}
 	//! Get the state of the mouse cursor timeout flag
@@ -275,10 +281,12 @@ private:
 	bool updateQueued;
 	bool flagInvertScreenShotColors;
 	bool flagOverwriteScreenshots; //! if set to true, screenshot is named exactly screenShotPrefix.png and overwrites existing file
+#ifndef USE_OLD_QGLWIDGET
 	bool flagUseCustomScreenshotSize; //! if true, the next 2 values are observed for screenshots.
 	int customScreenshotWidth;            //! used when flagCustomResolutionScreenshots==true
 	int customScreenshotHeight;           //! used when flagCustomResolutionScreenshots==true
-
+	float customScreenshotMagnification;  //! tracks the magnification factor customScreenshotHeight/NormalWindowHeight
+#endif
 	QString screenShotPrefix;
 	QString screenShotDir;
 

@@ -567,9 +567,12 @@ StelMainView::StelMainView(QSettings* settings)
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
+#ifndef USE_OLD_QGLWIDGET
 	  flagUseCustomScreenshotSize(false),
 	  customScreenshotWidth(1024),
 	  customScreenshotHeight(768),
+	  customScreenshotMagnification(1.0f),
+#endif
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
@@ -852,10 +855,11 @@ void StelMainView::init()
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
+#ifndef USE_OLD_QGLWIDGET
 	flagUseCustomScreenshotSize=conf->value("main/screenshot_custom_size", false).toBool();
 	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toUInt();
 	customScreenshotHeight=conf->value("main/screenshot_custom_height", 768).toUInt();
-
+#endif
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
@@ -1427,7 +1431,16 @@ void StelMainView::doScreenshot(void)
 		if (context)
 		{
 			context->functions()->initializeOpenGLFunctions();
-			qDebug() << "initializeOpenGLFunctions()...";
+			//qDebug() << "initializeOpenGLFunctions()...";
+
+			// Make sure we have enough free GPU memory!
+			int freeGLmemory;
+			context->functions()->glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &freeGLmemory);
+			qCDebug(mainview)<<"Free GPU memory:" << freeGLmemory << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*4 / 1024 <<"kB";
+			GLint freeGLmemoryAMD[4];
+			context->functions()->glGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, freeGLmemoryAMD);
+			qCDebug(mainview)<<"Free GPU memory (AMD version):" << freeGLmemoryAMD[1] << "+" << freeGLmemoryAMD[3] << " of " << freeGLmemoryAMD[0] << "+" << freeGLmemoryAMD[2] << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*4 / 1024 <<"kB";
+
 
 			GLint texSize,viewportSize[2],rbSize;
 			context->functions()->glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
@@ -1452,57 +1465,46 @@ void StelMainView::doScreenshot(void)
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
 	fbFormat.setInternalTextureFormat(GL_RGB); // avoid transparent background!
-	//QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width() * pixelRatio, stelScene->height() * pixelRatio, fbFormat);
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth, imgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
-	//QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
 	QOpenGLPaintDevice fbObjPaintDev(imgWidth, imgHeight);
 	fbObjPaintDev.setDevicePixelRatio(pixelRatio);
-
-	// PROBLEM: It seems that when one GUI dialog is visible, FoV tweaking turns out fruitless.
 
 	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
 	StelProjector::StelProjectorParams pParams=StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
 	StelProjector::StelProjectorParams sParams=pParams;
+	//qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
 	sParams.viewportXywh[2]=imgWidth;
 	sParams.viewportXywh[3]=imgHeight;
-	sParams.viewportCenter.set(imgWidth*0.5f, imgHeight*0.5f);
-	// TODO: FoV. This here is wrong, only sets what's already known.
-	//sParams.viewportFovDiameter=(0.f)
-	////StelMovementMgr *movementMgr = GETSTELMODULE(StelMovementMgr);
-	////Q_ASSERT(movementMgr);
-	////sParams.fov=movementMgr->getCurrentFov();
-	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(sParams);
 
+	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
+	customScreenshotMagnification=imgHeight/QApplication::desktop()->screenGeometry().height();
+
+	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
+	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
+	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(sParams);
 
 	QPainter painter;
 	painter.begin(&fbObjPaintDev);
 	// next line was above begin(), but caused a complaint. Maybe use after begin()?
 	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
-	//stelScene->render(&painter);
-	qreal x1, y1, x2, y2;
-	stelScene->sceneRect().getCoords(&x1, &y1, &x2, &y2);
-	qDebug() << "SCREENSHOT RECT=" << x1 << "/" << y1 << "/" << x2 << "/" << y2;
-	// TODO: Make sure GUI elements are placed correctly.
-	//stelScene->render(&painter, QRectF(), QRectF(0,0,stelScene->sceneRect().width()*2.0,stelScene->sceneRect().height()*2.0) , Qt::KeepAspectRatio);
-	// The new line here made the GUI panels move up into screen center. FOV not correct.
-	// TODO: Possible stelScene->setSceneRect() or something?
-	// YES! This fixed the FoV issue. --> NOOO! Not when a GUI dialog is visible.
 	stelScene->setSceneRect(0, 0, imgWidth, imgHeight);
-	// TODO: Do something to push the button bars back to the sides where they belong.
-	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, imgWidth, imgHeight);
-	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
-	// TODO: SOMETHING IS STILL MISSING HERE, bottom bar is not visible.
 
+	// push the button bars back to the sides where they belong, and fix root item clipping its children.
+	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, imgWidth, imgHeight);
+	rootItem->setSize(QSize(imgWidth, imgHeight));
+	dynamic_cast<StelGui*>(gui)->forceRefreshGui(); // refresh bar position.
 	stelScene->render(&painter, QRectF(), QRectF(0,0,imgWidth,imgHeight) , Qt::KeepAspectRatio);
 	painter.end();
 	QImage im = fbObj->toImage();
 	fbObj->release();
 	delete fbObj;
-	// reset
+	// reset viewport and GUI
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
+	customScreenshotMagnification=1.0f;
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
+	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
 	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
 #endif
