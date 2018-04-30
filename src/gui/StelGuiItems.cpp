@@ -927,9 +927,8 @@ void BottomStelBar::buttonHoverChanged(bool b)
 	StelMainView::getInstance().thereWasAnEvent();
 }
 
-StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent)
+StelBarsPath::StelBarsPath(QGraphicsItem* parent) : QGraphicsPathItem(parent), roundSize(6)
 {
-	roundSize = 6;
 	QPen aPen(QColor::fromRgbF(0.7,0.7,0.7,0.5));
 	aPen.setWidthF(1.);
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, 0.2)));
