@@ -732,8 +732,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	fmt.setBlueBufferSize(8);
 	fmt.setAlphaBufferSize(8);
 	fmt.setDepthBufferSize(24);
-	//I dont think we use the stencil buffer for anything
-	//but maybe Qt needs it
+	//Stencil buffer seems necessary for GUI boxes
 	fmt.setStencilBufferSize(8);
 
 #ifdef OPENGL_DEBUG_LOGGING
@@ -1434,12 +1433,12 @@ void StelMainView::doScreenshot(void)
 			//qDebug() << "initializeOpenGLFunctions()...";
 
 			// Make sure we have enough free GPU memory!
-			int freeGLmemory;
+			GLint freeGLmemory;
 			context->functions()->glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &freeGLmemory);
 			qCDebug(mainview)<<"Free GPU memory:" << freeGLmemory << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*4 / 1024 <<"kB";
 			GLint freeGLmemoryAMD[4];
 			context->functions()->glGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, freeGLmemoryAMD);
-			qCDebug(mainview)<<"Free GPU memory (AMD version):" << freeGLmemoryAMD[1] << "+" << freeGLmemoryAMD[3] << " of " << freeGLmemoryAMD[0] << "+" << freeGLmemoryAMD[2] << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*4 / 1024 <<"kB";
+			qCDebug(mainview)<<"Free GPU memory (AMD version):" << (uint)freeGLmemoryAMD[1]/1024 << "+" << (uint)freeGLmemoryAMD[3]/1024 << " of " << (uint)freeGLmemoryAMD[0]/1024 << "+" << (uint)freeGLmemoryAMD[2]/1024 << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*4 / 1024 <<"kB";
 
 
 			GLint texSize,viewportSize[2],rbSize;
@@ -1461,10 +1460,12 @@ void StelMainView::doScreenshot(void)
 			return;
 		}
 	}
+	// The texture format depends on used GL version. RGB is fine on OpenGL. on GLES, we must use RGBA and circumvent problems with a few more steps.
+	bool isGLES=(QOpenGLContext::currentContext()->format().renderableType() == QSurfaceFormat::OpenGLES);
 
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-	fbFormat.setInternalTextureFormat(GL_RGB); // avoid transparent background!
+	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
 	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth, imgHeight, fbFormat);
 	fbObj->bind();
 	// Now the painter has to be convinced to paint to the potentially larger image frame.
@@ -1495,9 +1496,22 @@ void StelMainView::doScreenshot(void)
 	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, imgWidth, imgHeight);
 	rootItem->setSize(QSize(imgWidth, imgHeight));
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui(); // refresh bar position.
+
 	stelScene->render(&painter, QRectF(), QRectF(0,0,imgWidth,imgHeight) , Qt::KeepAspectRatio);
 	painter.end();
-	QImage im = fbObj->toImage();
+
+	QImage im;
+	if (isGLES)
+	{
+		// We have RGBA texture with possibly empty spots when atmosphere was off.
+		// See toImage() help entry why to create wrapper here.
+		QImage fboImage(fbObj->toImage());
+		//qDebug() << "FBOimage format:" << fboImage.format(); // returns Format_RGBA8888_Premultiplied
+		QImage im2(fboImage.constBits(), fboImage.width(), fboImage.height(), QImage::Format_RGBX8888);
+		im=im2.copy();
+	}
+	else
+		im=fbObj->toImage();
 	fbObj->release();
 	delete fbObj;
 	// reset viewport and GUI

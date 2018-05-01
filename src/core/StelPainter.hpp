@@ -205,9 +205,9 @@ public:
 	//! @param stacks: number of horizontal segments ("latitude zones")
 	//! @param orientInside: 1 to have normals point inside, e.g. for Milky Way, Zodiacal Light, etc.
 	//! @param flipTexture: if texture should be mapped to inside of sphere, e.g. Milky Way.
-	//! @param topAngle GZ: new parameter. An opening angle [radians] at top of the sphere. Useful if there is an empty
+	//! @param topAngle: An opening angle [radians] at top of the sphere. Useful if there is an empty
 	//!        region around the top pole, like North Galactic Pole.
-	//! @param bottomAngle GZ: new parameter. An opening angle [radians] at bottom of the sphere. Useful if there is an empty
+	//! @param bottomAngle: An opening angle [radians] at bottom of the sphere. Useful if there is an empty
 	//!        region around the bottom pole, like South Galactic Pole.
 	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks,
                             int orientInside = 0, bool flipTexture = false,
