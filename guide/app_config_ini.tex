@@ -502,11 +502,14 @@ date\_display\_format & string & date display format: can be \emph{system\_defau
 \begin{tabularx}{\textwidth}{l|l|X}\toprule
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
 invert\_screenshots\_colors & bool   & If \emph{true}, Stellarium will saving the screenshorts with inverted colors.\\%\midrule
-restore\_defaults           & bool   & If \emph{true}, Stellarium will restore default settings at startup. 
-                                       This is equivalent to calling Stellarium with the \command{--restore-defaults} option.\\%\midrule
 screenshot\_dir             & string & Path for saving screenshots\\%\midrule
+screenshot\_custom\_size    & bool   & \emph{true} if you want to specify particular dimensions next:\\
+screenshot\_custom\_width   & int    & custom width of screenshots. Max.\ available size is hardware dependent!\\
+screenshot\_custom\_height  & int    & custom height of screenshots. Max.\ available size is hardware dependent!\\\midrule
 version                     & string & Version of Stellarium. This parameter may be used to detect necessary changes in config.ini file, do not edit.\\%\midrule
 use\_separate\_output\_file & bool   & Set to \emph{true} if you want to create a new file for script output for each start of Stellarium\\%\midrule
+restore\_defaults           & bool   & If \emph{true}, Stellarium will restore default settings at startup. 
+                                       This is equivalent to calling Stellarium with the \command{--restore-defaults} option.\\%\midrule
 ignore\_opengl\_warning     & bool   & Set to \emph{true} if you don't want to see OpenGL warnings for each start of Stellarium.\\%\midrule
 check\_requirements         & bool   & Set to \emph{false} if you want to disable and permanently ignore checking hardware requirements at startup. 
                                        Expect problems if hardware is below requirements!\\
