@@ -74,10 +74,10 @@ public:
 	//! Render the survey.
 	//! @param sPainter the painter to use.
 	//! @param angle total visible angle of the survey in radians. This is used to optimize the rendering of planet
-	//         surveys.  Should be set to 2 pi for sky surveys.
+	//!         surveys.  Should be set to 2 pi for sky surveys.
 	//! @param callback if set this will be called for each visible tile, and the callback should do it rendering
-	//         itself.  If set to NULL, the function will draw the tiles using the default shader.
-	void draw(StelPainter* sPainter, double angle = 2 * M_PI, DrawCallback callback = nullptr);
+	//!         itself.  If set to Q_NULLPTR, the function will draw the tiles using the default shader.
+	void draw(StelPainter* sPainter, double angle = 2.0 * M_PI, DrawCallback callback = Q_NULLPTR);
 
 	//! Return the source URL of the survey.
 	const QString& getUrl() const {return url;}

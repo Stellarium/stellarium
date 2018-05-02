@@ -25,11 +25,14 @@
 #include "StelModuleMgr.hpp"
 #include "StelPainter.hpp"
 #include "StelGui.hpp"
+#include "SkyGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelUtils.hpp"
 #include "StelActionMgr.hpp"
 #include "StelOpenGL.hpp"
 #include "StelOpenGLArray.hpp"
+#include "StelProjector.hpp"
+#include "StelMovementMgr.hpp"
 
 #include <QDebug>
 #include <QDir>
@@ -68,6 +71,9 @@
 #ifdef OPENGL_DEBUG_LOGGING
 #include <QOpenGLDebugLogger>
 #endif
+#include <QLoggingCategory>
+
+Q_LOGGING_CATEGORY(mainview, "stel.MainView")
 
 #include <clocale>
 
@@ -561,6 +567,12 @@ StelMainView::StelMainView(QSettings* settings)
 	  updateQueued(false),
 	  flagInvertScreenShotColors(false),
 	  flagOverwriteScreenshots(false),
+#ifndef USE_OLD_QGLWIDGET
+	  flagUseCustomScreenshotSize(false),
+	  customScreenshotWidth(1024),
+	  customScreenshotHeight(768),
+	  customScreenshotMagnification(1.0f),
+#endif
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
@@ -720,8 +732,7 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 	fmt.setBlueBufferSize(8);
 	fmt.setAlphaBufferSize(8);
 	fmt.setDepthBufferSize(24);
-	//I dont think we use the stencil buffer for anything
-	//but maybe Qt needs it
+	//Stencil buffer seems necessary for GUI boxes
 	fmt.setStencilBufferSize(8);
 
 #ifdef OPENGL_DEBUG_LOGGING
@@ -773,7 +784,7 @@ void StelMainView::init()
 
 	QSettings* conf = configuration;
 
-	// Should be check of requirements disabled?
+	// Should be check of requirements disabled? -- NO! This is intentional here, and does no harm.
 	if (conf->value("main/check_requirements", true).toBool())
 	{
 		// Find out lots of debug info about supported version of OpenGL and vendor/renderer.
@@ -843,6 +854,11 @@ void StelMainView::init()
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
+#ifndef USE_OLD_QGLWIDGET
+	flagUseCustomScreenshotSize=conf->value("main/screenshot_custom_size", false).toBool();
+	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toUInt();
+	customScreenshotHeight=conf->value("main/screenshot_custom_height", 768).toUInt();
+#endif
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
@@ -1398,23 +1414,113 @@ void StelMainView::doScreenshot(void)
 #ifdef USE_OLD_QGLWIDGET
 	QImage im = glWidget->grabFrameBuffer();
 #else
+	// Make a screenshot which may be larger than the current window. This is harder than you would think:
+	// fbObj the framebuffer governs size of the target image, that's the easy part, but it also has its limits.
+	// However, the GUI parts need to be placed properly,
+	// HiDPI screens interfere, and the viewing angle has to be maintained.
+	// First, image size:
 	glWidget->makeCurrent();
 	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
+	int imgWidth =stelScene->width()  * pixelRatio;
+	int imgHeight=stelScene->height() * pixelRatio;
+	if (flagUseCustomScreenshotSize)
+	{
+		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
+		QOpenGLContext *context = QOpenGLContext::currentContext();
+		if (context)
+		{
+			context->functions()->initializeOpenGLFunctions();
+			//qDebug() << "initializeOpenGLFunctions()...";
+#ifndef Q_OS_MAC
+			// Make sure we have enough free GPU memory!
+			GLint freeGLmemory;
+			context->functions()->glGetIntegerv(GL_GPU_MEMORY_INFO_CURRENT_AVAILABLE_VIDMEM_NVX, &freeGLmemory);
+			qCDebug(mainview)<<"Free GPU memory:" << freeGLmemory << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
+			GLint freeGLmemoryAMD[4];
+			context->functions()->glGetIntegerv(GL_RENDERBUFFER_FREE_MEMORY_ATI, freeGLmemoryAMD);
+			qCDebug(mainview)<<"Free GPU memory (AMD version):" << (uint)freeGLmemoryAMD[1]/1024 << "+" << (uint)freeGLmemoryAMD[3]/1024 << " of " << (uint)freeGLmemoryAMD[0]/1024 << "+" << (uint)freeGLmemoryAMD[2]/1024 << "kB -- we ask for " << customScreenshotWidth*customScreenshotHeight*8 / 1024 <<"kB";
+#endif
+
+			GLint texSize,viewportSize[2],rbSize;
+			context->functions()->glGetIntegerv(GL_MAX_TEXTURE_SIZE, &texSize);
+			context->functions()->glGetIntegerv(GL_MAX_VIEWPORT_DIMS, viewportSize);
+			context->functions()->glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE, &rbSize);
+			qCDebug(mainview)<<"Maximum texture size:"<<texSize;
+			qCDebug(mainview)<<"Maximum viewport dims:"<<viewportSize[0]<<viewportSize[1];
+			qCDebug(mainview)<<"Maximum renderbuffer size:"<<rbSize;
+			int maximumFramebufferSize = qMin(texSize,qMin(rbSize,qMin(viewportSize[0],viewportSize[1])));
+			qCDebug(mainview)<<"Maximum framebuffer size:"<<maximumFramebufferSize;
+
+			imgWidth =qMin(maximumFramebufferSize, customScreenshotWidth);
+			imgHeight=qMin(maximumFramebufferSize, customScreenshotHeight);
+		}
+		else
+		{
+			qCWarning(mainview) << "No GL context for screenshot! Aborting.";
+			return;
+		}
+	}
+	// The texture format depends on used GL version. RGB is fine on OpenGL. on GLES, we must use RGBA and circumvent problems with a few more steps.
+	bool isGLES=(QOpenGLContext::currentContext()->format().renderableType() == QSurfaceFormat::OpenGLES);
+
 	QOpenGLFramebufferObjectFormat fbFormat;
 	fbFormat.setAttachment(QOpenGLFramebufferObject::CombinedDepthStencil);
-	fbFormat.setInternalTextureFormat(GL_RGB); // avoid transparent background!
-	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(stelScene->width() * pixelRatio, stelScene->height() * pixelRatio, fbFormat);
+	fbFormat.setInternalTextureFormat(isGLES ? GL_RGBA : GL_RGB); // try to avoid transparent background!
+	QOpenGLFramebufferObject * fbObj = new QOpenGLFramebufferObject(imgWidth, imgHeight, fbFormat);
 	fbObj->bind();
-	QOpenGLPaintDevice fbObjPaintDev(stelScene->width(), stelScene->height());
+	// Now the painter has to be convinced to paint to the potentially larger image frame.
+	QOpenGLPaintDevice fbObjPaintDev(imgWidth, imgHeight);
 	fbObjPaintDev.setDevicePixelRatio(pixelRatio);
+
+	// It seems the projector has its own knowledge about image size. We must adjust fov and image size, but reset afterwards.
+	StelProjector::StelProjectorParams pParams=StelApp::getInstance().getCore()->getCurrentStelProjectorParams();
+	StelProjector::StelProjectorParams sParams=pParams;
+	//qCDebug(mainview) << "Screenshot Viewport: x" << pParams.viewportXywh[0] << "/y" << pParams.viewportXywh[1] << "/w" << pParams.viewportXywh[2] << "/h" << pParams.viewportXywh[3];
+	sParams.viewportXywh[2]=imgWidth;
+	sParams.viewportXywh[3]=imgHeight;
+
+	// Configure a helper value to allow some modules to tweak their output sizes. Currently used by StarMgr, maybe solve font issues?
+	customScreenshotMagnification=imgHeight/QApplication::desktop()->screenGeometry().height();
+
+	sParams.viewportCenter.set(0.0+(0.5+pParams.viewportCenterOffset.v[0])*imgWidth, 0.0+(0.5+pParams.viewportCenterOffset.v[1])*imgHeight);
+	sParams.viewportFovDiameter = qMin(imgWidth,imgHeight);
+	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(sParams);
+
 	QPainter painter;
-	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
 	painter.begin(&fbObjPaintDev);
-	stelScene->render(&painter);
+	// next line was above begin(), but caused a complaint. Maybe use after begin()?
+	painter.setRenderHints(QPainter::Antialiasing | QPainter::TextAntialiasing);
+	stelScene->setSceneRect(0, 0, imgWidth, imgHeight);
+
+	// push the button bars back to the sides where they belong, and fix root item clipping its children.
+	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, imgWidth, imgHeight);
+	rootItem->setSize(QSize(imgWidth, imgHeight));
+	dynamic_cast<StelGui*>(gui)->forceRefreshGui(); // refresh bar position.
+
+	stelScene->render(&painter, QRectF(), QRectF(0,0,imgWidth,imgHeight) , Qt::KeepAspectRatio);
 	painter.end();
-	QImage im = fbObj->toImage();
+
+	QImage im;
+	if (isGLES)
+	{
+		// We have RGBA texture with possibly empty spots when atmosphere was off.
+		// See toImage() help entry why to create wrapper here.
+		QImage fboImage(fbObj->toImage());
+		//qDebug() << "FBOimage format:" << fboImage.format(); // returns Format_RGBA8888_Premultiplied
+		QImage im2(fboImage.constBits(), fboImage.width(), fboImage.height(), QImage::Format_RGBX8888);
+		im=im2.copy();
+	}
+	else
+		im=fbObj->toImage();
 	fbObj->release();
 	delete fbObj;
+	// reset viewport and GUI
+	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
+	customScreenshotMagnification=1.0f;
+	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
+	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
+	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
+	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
 #endif
 
 	if (flagInvertScreenShotColors)
@@ -1502,7 +1608,7 @@ void StelMainView::glContextDoneCurrent()
 	glWidget->doneCurrent();
 }
 
-//! Set the sky background color. Everything else than black creates an work of art!
+// Set the sky background color. Everything else than black creates a work of art!
 void StelMainView::setSkyBackgroundColor(Vec3f color)
 {
 	rootItem->setSkyBackgroundColor(color);
@@ -1510,7 +1616,7 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 	emit skyBackgroundColorChanged(color);
 }
 
-//! Get the sky background color. Everything else than black creates an work of art!
+// Get the sky background color. Everything else than black creates a work of art!
 Vec3f StelMainView::getSkyBackgroundColor()
 {
 	return rootItem->getSkyBackgroundColor();

@@ -62,6 +62,21 @@ private:
 };
 
 
+//! A StelPropertyProxy that works with QLineEdit widgets.
+//! When the property changes, the widget's value is updated, while preventing widget signals to be sent.
+//! This avoids emitting the valueChanged() signal, which would unnecessarily set the property value again, which may lead to problems.
+class QLineEditStelPropertyConnectionHelper : public StelPropertyProxy
+{
+	Q_OBJECT
+public:
+	QLineEditStelPropertyConnectionHelper(StelProperty* prop,QLineEdit* edit);
+
+protected slots:
+	virtual void onPropertyChanged(const QVariant& value) Q_DECL_OVERRIDE;
+private:
+	QLineEdit* edit;
+};
+
 //! A StelPropertyProxy that works with QSpinBox widgets.
 //! When the property changes, the widget's value is updated, while preventing widget signals to be sent.
 //! This avoids emitting the valueChanged() signal, which would unnecessarily set the property value again, which may lead to problems.

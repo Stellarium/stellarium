@@ -61,6 +61,20 @@
 #include <QDir>
 #include <QDesktopWidget>
 
+//! Simple helper extension class which can guarantee int inputs in a useful range.
+class MinMaxIntValidator: public QIntValidator
+{
+public:
+	MinMaxIntValidator(int min, int max, QObject *parent=Q_NULLPTR):
+		QIntValidator(min, max, parent){}
+
+	virtual void fixup(QString &input) const
+	{
+		int allowed=qBound(bottom(), input.toInt(), top());
+		input.setNum(allowed);
+	}
+};
+
 ConfigurationDialog::ConfigurationDialog(StelGui* agui, QObject* parent)
 	: StelDialog("Configuration", parent)
 	, isDownloadingStarCatalog(false)
@@ -225,10 +239,8 @@ void ConfigurationDialog::createDialogContent()
 
 	// TODO: convert to properties
 	ui->enableKeysNavigationCheckBox->setChecked(mvmgr->getFlagEnableMoveKeys() || mvmgr->getFlagEnableZoomKeys());
-	//ui->enableMouseNavigationCheckBox->setChecked(mvmgr->getFlagEnableMouseNavigation());
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMoveKeys(bool)));
 	connect(ui->enableKeysNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableZoomKeys(bool)));
-	//connect(ui->enableMouseNavigationCheckBox, SIGNAL(toggled(bool)), mvmgr, SLOT(setFlagEnableMouseNavigation(bool)));
 	connectBoolProperty(ui->enableMouseNavigationCheckBox,  "StelMovementMgr.flagEnableMouseNavigation");
 
 	connect(ui->fixedDateTimeCurrentButton, SIGNAL(clicked()), this, SLOT(setFixedDateTimeToCurrent()));
@@ -319,7 +331,19 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
 	connectBoolProperty(ui->invertScreenShotColorsCheckBox, "MainView.flagInvertScreenShotColors");
-
+#ifdef USE_OLD_QGLWIDGET
+	ui->useCustomScreenshotSizeCheckBox->setEnabled(false);
+	ui->useCustomScreenshotSizeCheckBox->hide();
+	ui->customScreenshotWidthLineEdit->hide();
+	ui->label_times->hide();
+	ui->customScreenshotHeightLineEdit->hide();
+#else
+	connectBoolProperty(ui->useCustomScreenshotSizeCheckBox, "MainView.flagUseCustomScreenshotSize");
+	ui->customScreenshotWidthLineEdit->setValidator(new MinMaxIntValidator(128, 16384, this));
+	ui->customScreenshotHeightLineEdit->setValidator(new MinMaxIntValidator(128, 16384, this));
+	connectIntProperty(ui->customScreenshotWidthLineEdit, "MainView.customScreenshotWidth");
+	connectIntProperty(ui->customScreenshotHeightLineEdit, "MainView.customScreenshotHeight");
+#endif
 	connectBoolProperty(ui->autoEnableAtmosphereCheckBox, "LandscapeMgr.flagAtmosphereAutoEnabling");
 	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");
 
@@ -885,7 +909,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/mouse_cursor_timeout",			StelMainView::getInstance().getCursorTimeout());
 
 	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
-	conf->setValue("main/invert_screenshots_colors",		StelMainView::getInstance().getFlagInvertScreenShotColors());
+	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
+	conf->setValue("main/screenshot_custom_size",			propMgr->getStelPropertyValue("MainView.flagUseCustomScreenshotSize").toBool());
+	conf->setValue("main/screenshot_custom_width",			propMgr->getStelPropertyValue("MainView.customScreenshotWidth").toInt());
+	conf->setValue("main/screenshot_custom_height",			propMgr->getStelPropertyValue("MainView.customScreenshotHeight").toInt());
 
 	int screenNum = qApp->desktop()->screenNumber(&StelMainView::getInstance());
 	conf->setValue("video/screen_number", screenNum);

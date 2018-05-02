@@ -559,6 +559,10 @@ void StelGui::update()
 	if (getAction("actionShow_Hips_Surveys")->isChecked() != flag)
 		getAction("actionShow_Hips_Surveys")->setChecked(flag);
 
+	flag = propMgr->getProperty("ToastMgr.surveyDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Toast_Survey")->isChecked() != flag)
+		getAction("actionShow_Toast_Survey")->setChecked(flag);
+
 	flag = propMgr->getProperty("GridLinesMgr.equatorJ2000GridDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Equatorial_J2000_Grid")->isChecked() != flag)
 		getAction("actionShow_Equatorial_J2000_Grid")->setChecked(flag);
@@ -888,7 +892,7 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 }
 
 // Define whether the button toggling DSS images should be visible
-// TODO: This is now Hips. Decide what to do with TOAST/DSS-only, and rename methods accordingly.
+// We keep Toast even though HiPS is now available: We have a local Toast option better suited for offline operation!
 void StelGui::setFlagShowDSSButton(bool b)
 {
 	if (b!=flagShowDSSButton)
@@ -915,7 +919,6 @@ void StelGui::setFlagShowDSSButton(bool b)
 }
 
 // Define whether the button toggling HiPS images should be visible
-// TODO: This is now Hips. Decide what to do with TOAST/DSS-only, and rename methods accordingly.
 void StelGui::setFlagShowHiPSButton(bool b)
 {
 	if (b!=flagShowHiPSButton)
