@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-22 12:08+0700\n"
+"POT-Creation-Date: 2018-05-02 18:49+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Shopov <ash@kambanaria.org>, 2017\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
@@ -34,7 +34,7 @@ msgstr "друг маркер"
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:195
 #: src/core/modules/StarWrapper.cpp:198 src/gui/AstroCalcDialog.cpp:412
-#: src/ui_configurationDialog.h:1441 plugins/Satellites/src/Satellite.cpp:279
+#: src/ui_configurationDialog.h:1497 plugins/Satellites/src/Satellite.cpp:279
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:182
@@ -60,7 +60,7 @@ msgstr "астеризъм"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:106
 #: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:797
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:808
 msgid "Display Options"
 msgstr "Настройки на изгледа"
 
@@ -99,7 +99,7 @@ msgstr "Надписи на съзвездията"
 msgid "Constellation boundaries"
 msgstr "Граници на съзвездията"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1565
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1621
 msgid "Select single constellation"
 msgstr "Избиране на отделно съзвездие"
 
@@ -1217,7 +1217,7 @@ msgid "Contrast index"
 msgstr "Индекс на контраста"
 
 #: src/core/modules/Nebula.cpp:292 src/core/modules/Nebula.cpp:295
-#: src/ui_configurationDialog.h:1445
+#: src/ui_configurationDialog.h:1501
 msgid "Size"
 msgstr "Размер"
 
@@ -1240,7 +1240,7 @@ msgstr "ly"
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:305
 #: src/core/modules/Comet.cpp:232 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:2263 src/gui/AstroCalcDialog.cpp:2298
-#: src/ui_configurationDialog.h:1447 plugins/Supernovae/src/Supernova.cpp:155
+#: src/ui_configurationDialog.h:1503 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:326
 msgid "Distance"
 msgstr "Разстояние"
@@ -1905,7 +1905,7 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "периодична"
 
-#: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1446
+#: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1502
 msgid "Velocity"
 msgstr "Скорост"
 
@@ -2890,7 +2890,7 @@ msgid "Deep-sky objects background images"
 msgstr "Изображения на обекти от дълбокото небе"
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:212
-#: src/StelMainView.cpp:795 src/StelMainView.cpp:796
+#: src/StelMainView.cpp:806 src/StelMainView.cpp:807
 msgid "Miscellaneous"
 msgstr "Други"
 
@@ -2984,21 +2984,21 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr "ИМСВ"
 
-#: src/gui/ConfigurationDialog.cpp:532
+#: src/gui/ConfigurationDialog.cpp:556
 msgid "Select screenshot directory"
 msgstr "Папка за снимки на екрана"
 
-#: src/gui/ConfigurationDialog.cpp:912
+#: src/gui/ConfigurationDialog.cpp:940
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Зрителен ъгъл (FOV) при стартиране: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:920
+#: src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Посока на наблюдение при стартиране (A/h): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:982
+#: src/gui/ConfigurationDialog.cpp:1010
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
@@ -3006,11 +3006,11 @@ msgstr "Посока на наблюдение при стартиране (A/h)
 msgid "Authors"
 msgstr "Автори"
 
-#: src/gui/ConfigurationDialog.cpp:983
+#: src/gui/ConfigurationDialog.cpp:1011
 msgid "Contact"
 msgstr "За контакт"
 
-#: src/gui/ConfigurationDialog.cpp:985 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:1013 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:455
@@ -3033,7 +3033,7 @@ msgstr "За контакт"
 msgid "Version"
 msgstr "Версия"
 
-#: src/gui/ConfigurationDialog.cpp:986 src/scripting/StelScriptMgr.cpp:238
+#: src/gui/ConfigurationDialog.cpp:1014 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
@@ -3056,20 +3056,20 @@ msgstr "Версия"
 msgid "License"
 msgstr "Лиценз"
 
-#: src/gui/ConfigurationDialog.cpp:990
+#: src/gui/ConfigurationDialog.cpp:1018
 msgctxt "license"
 msgid "unknown"
 msgstr "непознат"
 
-#: src/gui/ConfigurationDialog.cpp:1087
+#: src/gui/ConfigurationDialog.cpp:1115
 msgid "Running script: "
 msgstr "Изпълняван скрипт: "
 
-#: src/gui/ConfigurationDialog.cpp:1094
+#: src/gui/ConfigurationDialog.cpp:1122
 msgid "Running script: [none]"
 msgstr "Изпълняван скрипт: [няма]"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3077,16 +3077,16 @@ msgstr ""
 "Изтеглянето на нови каталози приключи!\n"
 "Stellarium трябва да бъде рестартиран, за да се покажат."
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "All available star catalogs have been installed."
 msgstr "Всички налични звездни каталози са инсталирани."
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1196
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Сваляне на каталог %1 от %2"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1203
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3095,7 +3095,7 @@ msgstr ""
 "Изтегля се %1…\n"
 "(Този прозорец може да бъде затворен.)"
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1210
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3106,7 +3106,7 @@ msgstr ""
 "Брой звезди: %2 милиона\n"
 "Величини: между %3 и %4"
 
-#: src/gui/ConfigurationDialog.cpp:1225 src/gui/ConfigurationDialog.cpp:1261
+#: src/gui/ConfigurationDialog.cpp:1253 src/gui/ConfigurationDialog.cpp:1289
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3115,11 +3115,11 @@ msgstr ""
 "Грешка при свалянето на %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1314
+#: src/gui/ConfigurationDialog.cpp:1342
 msgid "Verifying file integrity..."
 msgstr "Проверка на целостта на файла…"
 
-#: src/gui/ConfigurationDialog.cpp:1318
+#: src/gui/ConfigurationDialog.cpp:1346
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3128,192 +3128,192 @@ msgstr ""
 "Грешка при свалянето на %1:\n"
 "Файлът е повреден."
 
-#: src/gui/ConfigurationDialog.cpp:1367 src/gui/ConfigurationDialog.cpp:1376
+#: src/gui/ConfigurationDialog.cpp:1395 src/gui/ConfigurationDialog.cpp:1404
 msgid "Available"
 msgstr "Достъпен"
 
-#: src/gui/ConfigurationDialog.cpp:1369 src/gui/ConfigurationDialog.cpp:1378
+#: src/gui/ConfigurationDialog.cpp:1397 src/gui/ConfigurationDialog.cpp:1406
 msgid "Not Available"
 msgstr "Недостъпен"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1446
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "Algorithm of"
 msgstr "Алгоритъм за"
 
-#: src/gui/ConfigurationDialog.cpp:1459
+#: src/gui/ConfigurationDialog.cpp:1487
 msgid "Without correction"
 msgstr "Без корекция"
 
-#: src/gui/ConfigurationDialog.cpp:1460
+#: src/gui/ConfigurationDialog.cpp:1488
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1461
+#: src/gui/ConfigurationDialog.cpp:1489
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1462
+#: src/gui/ConfigurationDialog.cpp:1490
 msgid "IAU (1952)"
 msgstr "МАС (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1491
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Астрономически ефемериди (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1464
+#: src/gui/ConfigurationDialog.cpp:1492
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) и Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1465
+#: src/gui/ConfigurationDialog.cpp:1493
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller и Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1466
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1467
+#: src/gui/ConfigurationDialog.cpp:1495
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel и Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1468
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel и Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1469
+#: src/gui/ConfigurationDialog.cpp:1497
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison и Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1470
+#: src/gui/ConfigurationDialog.cpp:1498
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson и Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1499
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson и Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1472
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1473
+#: src/gui/ConfigurationDialog.cpp:1501
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1502
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze и Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1475
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson и Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1476
+#: src/gui/ConfigurationDialog.cpp:1504
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1478
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (с Chapront, Chapront-Touze и Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1479
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1480
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus и Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1481
+#: src/gui/ConfigurationDialog.cpp:1509
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison и Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1482
+#: src/gui/ConfigurationDialog.cpp:1510
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison и Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1484
+#: src/gui/ConfigurationDialog.cpp:1512
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak и Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1515
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak и Meeus (2006) без допълнително ускорение на Луната"
 
-#: src/gui/ConfigurationDialog.cpp:1489
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1490
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1491
+#: src/gui/ConfigurationDialog.cpp:1519
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck и Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1492
+#: src/gui/ConfigurationDialog.cpp:1520
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold и Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1493
+#: src/gui/ConfigurationDialog.cpp:1521
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq и Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1494
+#: src/gui/ConfigurationDialog.cpp:1522
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana и Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1495
+#: src/gui/ConfigurationDialog.cpp:1523
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Друго уравнение за  %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1544 src/gui/ConfigurationDialog.cpp:1579
+#: src/gui/ConfigurationDialog.cpp:1572 src/gui/ConfigurationDialog.cpp:1607
 #: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:441
 msgid "System default"
 msgstr "Системни настройки"
 
-#: src/gui/ConfigurationDialog.cpp:1545
+#: src/gui/ConfigurationDialog.cpp:1573
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "гггг-мм-дд (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1546
+#: src/gui/ConfigurationDialog.cpp:1574
 msgid "dd-mm-yyyy"
 msgstr "дд-мм-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1547
+#: src/gui/ConfigurationDialog.cpp:1575
 msgid "mm-dd-yyyy"
 msgstr "мм-дд-гггг"
 
-#: src/gui/ConfigurationDialog.cpp:1580
+#: src/gui/ConfigurationDialog.cpp:1608
 msgid "12-hour format"
 msgstr "12-часов формат"
 
-#: src/gui/ConfigurationDialog.cpp:1581
+#: src/gui/ConfigurationDialog.cpp:1609
 msgid "24-hour format"
 msgstr "24-часов формат"
 
-#: src/gui/ConfigurationDialog.cpp:1608 src/ui_configurationDialog.h:1398
+#: src/gui/ConfigurationDialog.cpp:1636 src/ui_configurationDialog.h:1454
 #: plugins/Oculars/src/Oculars.cpp:2363
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "Никаква"
 
-#: src/gui/ConfigurationDialog.cpp:1609
+#: src/gui/ConfigurationDialog.cpp:1637
 msgid "5/6/5 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1610
+#: src/gui/ConfigurationDialog.cpp:1638
 msgid "6/6/6 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1611
+#: src/gui/ConfigurationDialog.cpp:1639
 msgid "8/8/8 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1612
+#: src/gui/ConfigurationDialog.cpp:1640
 msgid "10/10/10 bits"
 msgstr ""
 
@@ -3491,46 +3491,46 @@ msgstr ""
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr "{Групи на Google} — може да обсъждате Stellarium с други потребители."
 
-#: src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:313
 msgid "Developers"
 msgstr "Разработчици"
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "Координатор на проекта и главен разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "Графичен/друг дизайнер: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
-#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:325
-#: src/gui/HelpDialog.cpp:326 src/gui/HelpDialog.cpp:327
-#: src/gui/HelpDialog.cpp:328 src/gui/HelpDialog.cpp:329
-#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
-#: src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "Developer: %1"
 msgstr "Разработчик: %1"
 
-#: src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "Непрекъсната интеграция: %1"
 
-#: src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "Tester: %1"
 msgstr "Тестер: %1"
 
-#: src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 msgid "Former Developers"
 msgstr "Бивши разработчици"
 
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
@@ -3538,17 +3538,17 @@ msgstr ""
 "Някои сътрудници са допринесли много, но вече не работят по проекта. Тяхната"
 " работа е от голямо значение за Stellarium:"
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "Разработчик и автор на документацията: %1"
 
-#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "Разработчик за OSX: %1"
 
-#: src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:336
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 #: plugins/Oculars/src/gui/OcularDialog.cpp:435
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
@@ -3561,7 +3561,7 @@ msgstr "Разработчик за OSX: %1"
 msgid "Contributors"
 msgstr "Сътрудници"
 
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:337
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -4205,7 +4205,7 @@ msgid "Secular acceleration of the Moon"
 msgstr "Приливно ускорение на Луната"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:359 src/ui_configurationDialog.h:1434
+#: src/gui/AstroCalcDialog.cpp:359 src/ui_configurationDialog.h:1490
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:523
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:350
@@ -5084,7 +5084,7 @@ msgstr "Внасяна на отметки"
 msgid "Export bookmarks as..."
 msgstr "Изнасяне на отметките като…"
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1343
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:503
 msgid "Scripts"
 msgstr "Скриптове"
@@ -5093,19 +5093,19 @@ msgstr "Скриптове"
 msgid "Shortcut"
 msgstr "Клавишни комбинации"
 
-#: src/StelMainView.cpp:795
+#: src/StelMainView.cpp:806
 msgid "Save screenshot"
 msgstr "Запазване на снимка на екрана"
 
-#: src/StelMainView.cpp:796
+#: src/StelMainView.cpp:807
 msgid "Reload shaders (for development)"
 msgstr "Презареждане на програмите за GPU (за разработка на шейдъри)"
 
-#: src/StelMainView.cpp:797
+#: src/StelMainView.cpp:808
 msgid "Full-screen mode"
 msgstr "Цял екран"
 
-#: src/StelMainView.cpp:954
+#: src/StelMainView.cpp:970
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
@@ -5113,14 +5113,14 @@ msgstr ""
 "Стара версия на OpenGL. Пробвайте да обновите графичните драйвери, с друга "
 "видеокарта или използвайте опциите „--angle-mode“ или „--mesa-mode“."
 
-#: src/StelMainView.cpp:957
+#: src/StelMainView.cpp:973
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 "Стара версия на OpenGL. Пробвайте да обновите графичните драйвери или да "
 "смените видеокартата."
 
-#: src/StelMainView.cpp:999
+#: src/StelMainView.cpp:1015
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5128,7 +5128,7 @@ msgstr ""
 "Подсистемата за DirectX/OpenGL ES има проблем. Погледнете журналния файл.\n"
 "Да се продължи ли във възможно влошен режим (това съобщение няма да се показва повече)?"
 
-#: src/StelMainView.cpp:1050
+#: src/StelMainView.cpp:1066
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5136,7 +5136,7 @@ msgstr ""
 "Подсистемата за OpenGL/Mesa има проблем. Погледнете журналния файл.\n"
 "Да се продължи ли във възможно влошен режим (това съобщение няма да се показва повече)?<"
 
-#: src/StelMainView.cpp:1106
+#: src/StelMainView.cpp:1122
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5144,7 +5144,7 @@ msgstr ""
 "Подсистемата за OpenGL има проблем. Погледнете журналния файл.\n"
 "Да се продължи ли във възможно влошен режим (това съобщение няма да се показва повече)?"
 
-#: src/StelMainView.cpp:1147
+#: src/StelMainView.cpp:1163
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5152,7 +5152,7 @@ msgstr ""
 "Подсистемата за OpenGL ES има проблем. Погледнете журналния файл.\n"
 "Да се продължи ли във възможно влошен режим (това съобщение няма да се показва повече)?"
 
-#: src/StelMainView.cpp:1259
+#: src/StelMainView.cpp:1275
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -6498,7 +6498,7 @@ msgstr "Папка"
 msgid "&Choose"
 msgstr "&Избор"
 
-#: src/translations.h:661 src/ui_configurationDialog.h:1503
+#: src/translations.h:661 src/ui_configurationDialog.h:1559
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Отказ"
@@ -7920,7 +7920,7 @@ msgstr "За програмата"
 msgid "Log"
 msgstr "Журнал"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1578
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1634
 msgid "Edit keyboard shortcuts..."
 msgstr "Избор на клавишни комбинации…"
 
@@ -8196,8 +8196,8 @@ msgid "Lock position when coordinates are used"
 msgstr "Заключване на позициите при ползване на координати"
 
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2888
-#: src/ui_viewDialog.h:2910 src/ui_configurationDialog.h:1610
-#: src/ui_configurationDialog.h:1621
+#: src/ui_viewDialog.h:2910 src/ui_configurationDialog.h:1667
+#: src/ui_configurationDialog.h:1678
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "Настройки"
@@ -9085,70 +9085,70 @@ msgstr "Небесни легенди"
 msgid "Surveys"
 msgstr "Проучване"
 
-#: src/ui_configurationDialog.h:1321
+#: src/ui_configurationDialog.h:1377
 msgid "Configuration"
 msgstr "Настройки"
 
-#: src/ui_configurationDialog.h:1327
+#: src/ui_configurationDialog.h:1383
 msgid "Main"
 msgstr "Главни"
 
-#: src/ui_configurationDialog.h:1329
+#: src/ui_configurationDialog.h:1385
 msgid "Information"
 msgstr "Информация"
 
-#: src/ui_configurationDialog.h:1331 src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1387 src/ui_configurationDialog.h:1442
 msgid "Selected object information"
 msgstr "Информация за избран обект"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1390
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1392
 msgid "Additional settings for Graphical User Interface"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1339
+#: src/ui_configurationDialog.h:1395
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "Време"
 
-#: src/ui_configurationDialog.h:1341
+#: src/ui_configurationDialog.h:1397
 msgid "Tools"
 msgstr "Инструменти"
 
-#: src/ui_configurationDialog.h:1345
+#: src/ui_configurationDialog.h:1401
 msgid "Plugins"
 msgstr "Приставки"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1404
 msgid "Language settings"
 msgstr "Езикови настройки"
 
-#: src/ui_configurationDialog.h:1349
+#: src/ui_configurationDialog.h:1405
 msgid "Program Language"
 msgstr "Език на програмата"
 
-#: src/ui_configurationDialog.h:1350
+#: src/ui_configurationDialog.h:1406
 msgid "Sky Culture Language"
 msgstr "Език на небесната култура"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1408
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "Тази настройка не е напълно тествана."
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1410
 msgid "Ephemeris settings (experimental)"
 msgstr "Настройки на ефемеридите (експериментално)"
 
-#: src/ui_configurationDialog.h:1355 src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1411 src/ui_configurationDialog.h:1412
 msgid "Not installed"
 msgstr "Не е инсталиран"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1414
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
@@ -9156,19 +9156,19 @@ msgstr ""
 "Ефемеридите DE431 съдържат данни за позициите за години -13000…+17000. Само "
 "за специална употреба."
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1416
 msgid "Use DE431 (long-time data)"
 msgstr "Използване на DE431 (по-дълъг период)"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1418
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "Ефемеридите DE430 дават по-висока точност за годините 1550…2650."
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1420
 msgid "Use DE430 (high accuracy)"
 msgstr "Използване на DE430 (по-висока точност)"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1422
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
@@ -9176,22 +9176,22 @@ msgstr ""
 "VSOP87 са препоръчва само за години -4000…+8000, но дава добри позиции и "
 "извън този времеви диапазон."
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1424
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr ""
 "VSOP87/ELP2000-82B се използва, когато тези не са инсталирани или не са "
 "включени."
 
-#: src/ui_configurationDialog.h:1369
+#: src/ui_configurationDialog.h:1425
 msgid "Default options"
 msgstr "Настройки по подразбиране"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1426
 msgid "Save View"
 msgstr "Запазване на изгледа"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1428
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
@@ -9199,7 +9199,7 @@ msgstr ""
 "Запазване на настройките, променени през тази сесия, за да важат при "
 "следващото стартиране"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1430
 #: plugins/NavStars/src/ui_navStarsWindow.h:220
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
@@ -9207,11 +9207,11 @@ msgstr ""
 msgid "Save settings"
 msgstr "Запазване на настройките"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1432
 msgid "Restore the default settings that came with Stellarium"
 msgstr "Възстановяване на стандартните настройки на Stellarium"
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1434
 #: plugins/NavStars/src/ui_navStarsWindow.h:219
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
@@ -9219,7 +9219,7 @@ msgstr "Възстановяване на стандартните настро�
 msgid "Restore defaults"
 msgstr "Първоначални настройки"
 
-#: src/ui_configurationDialog.h:1379
+#: src/ui_configurationDialog.h:1435
 msgid ""
 "Save either the current FOV and direction of view or all the current options"
 " for use at next startup. Restoring default settings requires a restart of "
@@ -9229,310 +9229,310 @@ msgstr ""
 "всички опции за следващото стартиране на Stellarium. Възстановяването на "
 "оригиналните настройки изисква рестартиране на програмата."
 
-#: src/ui_configurationDialog.h:1381
+#: src/ui_configurationDialog.h:1437
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr "Височината по вертикала на изгледа при стартирането на Stellarium"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1440
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Посоката, в която „гледа“ Stellarium при стартиране"
 
-#: src/ui_configurationDialog.h:1388
+#: src/ui_configurationDialog.h:1444
 msgid "Display less information"
 msgstr "Показва по-малко информация"
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1446
 msgid "Short"
 msgstr "Съкратена"
 
-#: src/ui_configurationDialog.h:1392
+#: src/ui_configurationDialog.h:1448
 msgid "Display all information available"
 msgstr "Показва цялата налична информация"
 
-#: src/ui_configurationDialog.h:1394
+#: src/ui_configurationDialog.h:1450
 msgid "All available"
 msgstr "Цялата налична"
 
-#: src/ui_configurationDialog.h:1396
+#: src/ui_configurationDialog.h:1452
 msgid "Display no information"
 msgstr "Не показва информация"
 
-#: src/ui_configurationDialog.h:1400
+#: src/ui_configurationDialog.h:1456
 msgid "Display user settings information"
 msgstr "Извеждане на информация за потребителските настройки"
 
-#: src/ui_configurationDialog.h:1402
+#: src/ui_configurationDialog.h:1458
 msgid "Customized"
 msgstr "По избор"
 
-#: src/ui_configurationDialog.h:1403
+#: src/ui_configurationDialog.h:1459
 msgid "Displayed fields"
 msgstr "Показвани полета"
 
-#: src/ui_configurationDialog.h:1405 src/ui_configurationDialog.h:1431
+#: src/ui_configurationDialog.h:1461 src/ui_configurationDialog.h:1487
 msgid "Equatorial coordinates, equinox of date"
 msgstr "Екваториални координати при равноденствие на определена дата"
 
-#: src/ui_configurationDialog.h:1407
+#: src/ui_configurationDialog.h:1463
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
 msgid "Hour angle/Declination"
 msgstr "Часови ъгъл/деклинация"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1464
 msgid "Catalog number(s)"
 msgstr "Каталожен номер"
 
-#: src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1466
 msgid "Horizontal coordinates"
 msgstr "Хоризонтални координати"
 
-#: src/ui_configurationDialog.h:1412
+#: src/ui_configurationDialog.h:1468
 msgid "Azimuth/Altitude"
 msgstr "Азимут/височина"
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1470
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "Екваториални координати, равноденствие (J2000)"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1472
 msgid "Right ascension/Declination (J2000)"
 msgstr "Ректасцензия/деклинация (J2000)"
 
-#: src/ui_configurationDialog.h:1417
+#: src/ui_configurationDialog.h:1473
 msgid "Galactic coordinates"
 msgstr "Галактични координати"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1475
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr ""
 "Еклиптични координати при равноденствие на определена дата (само на Земята)"
 
-#: src/ui_configurationDialog.h:1421
+#: src/ui_configurationDialog.h:1477
 msgid "Ecliptic coordinates (of date)"
 msgstr "Еклиптични координати (на дата)"
 
-#: src/ui_configurationDialog.h:1423
+#: src/ui_configurationDialog.h:1479
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "Еклиптични координати, равноденствие (J2000.0)"
 
-#: src/ui_configurationDialog.h:1425
+#: src/ui_configurationDialog.h:1481
 msgid "Ecliptic coordinates (J2000)"
 msgstr "Еклиптични координати (J2000.0)"
 
-#: src/ui_configurationDialog.h:1427
+#: src/ui_configurationDialog.h:1483
 msgid "Spectral class, nebula type, etc."
 msgstr "Спектрален клас, вид мъглявина, и други"
 
-#: src/ui_configurationDialog.h:1429
+#: src/ui_configurationDialog.h:1485
 msgid "Additional information"
 msgstr "Допълнителна информация"
 
-#: src/ui_configurationDialog.h:1433
+#: src/ui_configurationDialog.h:1489
 msgid "Right ascension/Declination (of date)"
 msgstr "Ректасцензия/деклинация (по дата)"
 
-#: src/ui_configurationDialog.h:1435
+#: src/ui_configurationDialog.h:1491
 msgid "Supergalactic coordinates"
 msgstr "Свръхгалактични координати"
 
-#: src/ui_configurationDialog.h:1436
+#: src/ui_configurationDialog.h:1492
 msgid "Visual magnitude"
 msgstr "Видима величина"
 
-#: src/ui_configurationDialog.h:1437
+#: src/ui_configurationDialog.h:1493
 msgid "Absolute magnitude"
 msgstr "Абсолютна величина"
 
-#: src/ui_configurationDialog.h:1439
+#: src/ui_configurationDialog.h:1495
 msgid "The type of the object (star, planet, etc.)"
 msgstr "Типът на обекта (звезда, планета и т.н.)"
 
-#: src/ui_configurationDialog.h:1443
+#: src/ui_configurationDialog.h:1499
 msgid "Angular or physical size"
 msgstr "Ъглов или физически размер"
 
-#: src/ui_configurationDialog.h:1448
+#: src/ui_configurationDialog.h:1504
 msgid "Sidereal time"
 msgstr "Астрономическо време"
 
-#: src/ui_configurationDialog.h:1450
+#: src/ui_configurationDialog.h:1506
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "3-letter IAU constellation abbreviation"
 msgstr "Трибуквено съкращение на съзвездията по МАС"
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1508
 msgid "Constellation"
 msgstr "Съзвездие"
 
-#: src/ui_configurationDialog.h:1453
+#: src/ui_configurationDialog.h:1509
 msgid "Additional buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1454
+#: src/ui_configurationDialog.h:1510
 msgid "Show constellation boundaries button"
 msgstr "Показване на бутон за граници на съзвездията"
 
-#: src/ui_configurationDialog.h:1456
+#: src/ui_configurationDialog.h:1512
 msgid "Toggle display of nebula images."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1514
 msgid "Show nebula background button"
 msgstr "Бутон за изображенията на мъглявини"
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1516
 msgid "A button to toggle ecliptic grid of date"
 msgstr "Бутон за еклиптичната мрежа на дата"
 
-#: src/ui_configurationDialog.h:1462
+#: src/ui_configurationDialog.h:1518
 msgid "Show ecliptic grid button"
 msgstr "Бутон за еклиптичната мрежа"
 
-#: src/ui_configurationDialog.h:1464
+#: src/ui_configurationDialog.h:1520
 msgid "Toggle display of the button for the Digitized Sky Survey."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1466
+#: src/ui_configurationDialog.h:1522
 msgid "Show DSS button"
 msgstr "Бутон за ЦОН"
 
-#: src/ui_configurationDialog.h:1468
+#: src/ui_configurationDialog.h:1524
 msgid "A button to toggle equatorial J2000 grid"
 msgstr "Бутон за екваториалната мрежа (J2000)"
 
-#: src/ui_configurationDialog.h:1470
+#: src/ui_configurationDialog.h:1526
 msgid "Show ICRS grid button"
 msgstr "Бутон за мрежата на ICRS (Международна референтна небесна система)"
 
-#: src/ui_configurationDialog.h:1472
+#: src/ui_configurationDialog.h:1528
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1474
+#: src/ui_configurationDialog.h:1530
 msgid "Show HiPS button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1476
+#: src/ui_configurationDialog.h:1532
 msgid "A button to toggle galactic grid"
 msgstr "Бутон за показване на галактичната мрежа"
 
-#: src/ui_configurationDialog.h:1478
+#: src/ui_configurationDialog.h:1534
 msgid "Show galactic grid button"
 msgstr "Бутон за галактичната мрежа"
 
-#: src/ui_configurationDialog.h:1480
+#: src/ui_configurationDialog.h:1536
 msgid "Enable a feature to store favorite views."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1482
+#: src/ui_configurationDialog.h:1538
 msgid "Show bookmarks button"
 msgstr "Бутон за отметки"
 
-#: src/ui_configurationDialog.h:1484
+#: src/ui_configurationDialog.h:1540
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr ""
 "Показване на бутони за обръщане на картината по хоризонтала и вертикала"
 
-#: src/ui_configurationDialog.h:1486
+#: src/ui_configurationDialog.h:1542
 msgid "Show flip buttons"
 msgstr "Показване на бутони за обръщане"
 
-#: src/ui_configurationDialog.h:1488
+#: src/ui_configurationDialog.h:1544
 msgid "Toggle the usage of background under GUI buttons"
 msgstr "Използване на фон под бутоните на интерфейса"
 
-#: src/ui_configurationDialog.h:1490
+#: src/ui_configurationDialog.h:1546
 msgid "Use buttons background"
 msgstr "Фон под бутоните"
 
-#: src/ui_configurationDialog.h:1491
+#: src/ui_configurationDialog.h:1547
 msgid "Star catalog updates"
 msgstr "Обновяване на звездните каталози"
 
-#: src/ui_configurationDialog.h:1493
+#: src/ui_configurationDialog.h:1549
 msgid "Click here to start downloading"
 msgstr "Щракнете тук за изтегляне"
 
-#: src/ui_configurationDialog.h:1495
+#: src/ui_configurationDialog.h:1551
 msgid "Download this file to view even more stars"
 msgstr "Свалете този файл за още повече звезди"
 
-#: src/ui_configurationDialog.h:1497
+#: src/ui_configurationDialog.h:1553
 msgid "Restart the download"
 msgstr "Започване на изтеглянето наново"
 
-#: src/ui_configurationDialog.h:1499
+#: src/ui_configurationDialog.h:1555
 msgid "Retry"
 msgstr "Повторен опит"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1557
 msgid "Stop the download. You can always restart it later"
 msgstr "Спиране на изтеглянето. После може да бъде започнато наново."
 
-#: src/ui_configurationDialog.h:1504
+#: src/ui_configurationDialog.h:1560
 msgid "Additional information settings"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1505
+#: src/ui_configurationDialog.h:1561
 msgid "Use short notation for unit of measurement of surface brightness"
 msgstr "Съкратен вариант на единицата за повърхностна яркост"
 
-#: src/ui_configurationDialog.h:1506
+#: src/ui_configurationDialog.h:1562
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
 msgstr ""
 "Да се ползва mag/arcsec² за повърхностна яркост (зв. вел. на кв. д-ва сек.)"
 
-#: src/ui_configurationDialog.h:1507
+#: src/ui_configurationDialog.h:1563
 msgid "Use formatting output for coordinates"
 msgstr "Форматиран вариант на координатите"
 
-#: src/ui_configurationDialog.h:1508
+#: src/ui_configurationDialog.h:1564
 msgid "Use designations for celestial coordinate systems"
 msgstr "Да се използват означения на небесната координатна система"
 
-#: src/ui_configurationDialog.h:1509
+#: src/ui_configurationDialog.h:1565
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "Startup date and time"
 msgstr "Дата и час при стартиране"
 
-#: src/ui_configurationDialog.h:1511
+#: src/ui_configurationDialog.h:1567
 msgid "Starts Stellarium at system clock date and time"
 msgstr "Stellarium започва с датата и часа на системния часовник"
 
-#: src/ui_configurationDialog.h:1513
+#: src/ui_configurationDialog.h:1569
 msgid "System date and time"
 msgstr "Системна дата и час"
 
-#: src/ui_configurationDialog.h:1515
+#: src/ui_configurationDialog.h:1571
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr ""
 "Симулацията на Stellarium започва на системната дата, но в зададения час"
 
-#: src/ui_configurationDialog.h:1517
+#: src/ui_configurationDialog.h:1573
 msgid "System date at:"
 msgstr "Системна дата в:"
 
-#: src/ui_configurationDialog.h:1519
+#: src/ui_configurationDialog.h:1575
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "Stellarium започва със зададените дата и час"
 
-#: src/ui_configurationDialog.h:1521
+#: src/ui_configurationDialog.h:1577
 msgid "Other:"
 msgstr "Други:"
 
-#: src/ui_configurationDialog.h:1523
+#: src/ui_configurationDialog.h:1579
 msgid "Use current local date and time"
 msgstr "Използване на текуща дата и време"
 
-#: src/ui_configurationDialog.h:1525
+#: src/ui_configurationDialog.h:1581
 msgid "use current"
 msgstr "въвеждане на текущите"
 
-#: src/ui_configurationDialog.h:1527
+#: src/ui_configurationDialog.h:1583
 msgid ""
 "These settings control the way time and date are displayed in the bottom "
 "bar."
@@ -9540,44 +9540,44 @@ msgstr ""
 "Тези настройки определят начина, по който датата и часът се показват в "
 "лентата на дъното на екрана."
 
-#: src/ui_configurationDialog.h:1529
+#: src/ui_configurationDialog.h:1585
 msgid "Display formats of date and time"
 msgstr "Формат на датата и времето"
 
-#: src/ui_configurationDialog.h:1530
+#: src/ui_configurationDialog.h:1586
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "Дата:"
 
-#: src/ui_configurationDialog.h:1531
+#: src/ui_configurationDialog.h:1587
 msgid "and time:"
 msgstr "и час:"
 
-#: src/ui_configurationDialog.h:1532
+#: src/ui_configurationDialog.h:1588
 msgid "Time correction"
 msgstr "Поправка на времето"
 
-#: src/ui_configurationDialog.h:1535
+#: src/ui_configurationDialog.h:1591
 msgid "Edit equation"
 msgstr "Редактиране на уравнението"
 
-#: src/ui_configurationDialog.h:1537
+#: src/ui_configurationDialog.h:1593
 msgid "Planetarium options"
 msgstr "Настройки за планетариум"
 
-#: src/ui_configurationDialog.h:1539
+#: src/ui_configurationDialog.h:1595
 msgid "Align labels with the screen center"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1541
+#: src/ui_configurationDialog.h:1597
 msgid "Gravity labels"
 msgstr "Гравитация за етикетите"
 
-#: src/ui_configurationDialog.h:1542
+#: src/ui_configurationDialog.h:1598
 msgid "Dithering"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1544
+#: src/ui_configurationDialog.h:1600
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
@@ -9585,11 +9585,11 @@ msgstr ""
 "Изкривяване на картината за прожектиране на Stellarium върху сферично "
 "огледало в нискобюджетен планетариум."
 
-#: src/ui_configurationDialog.h:1546
+#: src/ui_configurationDialog.h:1602
 msgid "Spheric mirror distortion"
 msgstr "Изкривяване за сферично огледало"
 
-#: src/ui_configurationDialog.h:1548
+#: src/ui_configurationDialog.h:1604
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
@@ -9597,21 +9597,21 @@ msgstr ""
 "Ако е включено, изгледът е от повърхността на планетата (препоръчва се). "
 "Когато е изключено, изгледът е от центъра на планетата."
 
-#: src/ui_configurationDialog.h:1550
+#: src/ui_configurationDialog.h:1606
 msgid "Topocentric coordinates"
 msgstr "Топоцентрични координати"
 
-#: src/ui_configurationDialog.h:1552
+#: src/ui_configurationDialog.h:1608
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr ""
 "Използване на мишката за местене (с влачене) и увеличаване (с колелцето) на "
 "изображението"
 
-#: src/ui_configurationDialog.h:1554
+#: src/ui_configurationDialog.h:1610
 msgid "Enable mouse navigation"
 msgstr "Управление с мишката"
 
-#: src/ui_configurationDialog.h:1556
+#: src/ui_configurationDialog.h:1612
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
@@ -9619,125 +9619,129 @@ msgstr ""
 "Ако тази опция е включена, клавишът за „автоматично намаляване“ ще връща и "
 "първоначалната посока на наблюдение"
 
-#: src/ui_configurationDialog.h:1558
+#: src/ui_configurationDialog.h:1614
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "Автоматичното намаляване връща първоначалната посока"
 
-#: src/ui_configurationDialog.h:1560 src/ui_configurationDialog.h:1563
+#: src/ui_configurationDialog.h:1616 src/ui_configurationDialog.h:1619
 msgid "Hide other constellations when you click one"
 msgstr "При щракване в/у едно съзвездие всички други се скриват"
 
-#: src/ui_configurationDialog.h:1567
+#: src/ui_configurationDialog.h:1623
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr ""
 "Нутацията е леко поклащане на оста на Земята — в рамките на няколко дъгови "
 "секунди."
 
-#: src/ui_configurationDialog.h:1569
+#: src/ui_configurationDialog.h:1625
 msgid "Include nutation"
 msgstr "Включване на нутацията"
 
-#: src/ui_configurationDialog.h:1571
+#: src/ui_configurationDialog.h:1627
 msgid ""
 "Auto-enable atmosphere when selecting a celestial body in the location "
 "window."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1573
+#: src/ui_configurationDialog.h:1629
 msgid "Auto-enabling for the atmosphere"
 msgstr "Автоматично включване на атмосферата"
 
-#: src/ui_configurationDialog.h:1575
+#: src/ui_configurationDialog.h:1631
 msgid "Flash a short message when toggling mount mode."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1577
+#: src/ui_configurationDialog.h:1633
 msgid "Indication for mount mode"
 msgstr "Показване на вида монтиране"
 
-#: src/ui_configurationDialog.h:1580
+#: src/ui_configurationDialog.h:1636
 msgid "Use decimal degrees for coordinates"
 msgstr "Десетичен запис на координатите"
 
-#: src/ui_configurationDialog.h:1582
+#: src/ui_configurationDialog.h:1638
 msgid "Use decimal degrees"
 msgstr "Десетични градуси"
 
-#: src/ui_configurationDialog.h:1584
+#: src/ui_configurationDialog.h:1640
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "Закриване на всичко извън централния кръг в основния изглед"
 
-#: src/ui_configurationDialog.h:1586
+#: src/ui_configurationDialog.h:1642
 msgid "Disc viewport"
 msgstr "Кръгло зрително поле"
 
-#: src/ui_configurationDialog.h:1588
+#: src/ui_configurationDialog.h:1644
 msgid "Hides the mouse cursor when inactive"
 msgstr "Скриване на курсора на мишката при неактивност"
 
-#: src/ui_configurationDialog.h:1590
+#: src/ui_configurationDialog.h:1646
 msgid "Mouse cursor timeout:"
 msgstr "Скриване на показалеца след:"
 
-#: src/ui_configurationDialog.h:1592
+#: src/ui_configurationDialog.h:1648
 msgid "seconds"
 msgstr "секунди"
 
-#: src/ui_configurationDialog.h:1595
+#: src/ui_configurationDialog.h:1651
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "С тази настройка азимутът се отчита от юг на запад."
 
-#: src/ui_configurationDialog.h:1597
+#: src/ui_configurationDialog.h:1653
 msgid "Azimuth from South"
 msgstr "Отчитане на азимута от юг"
 
-#: src/ui_configurationDialog.h:1599
+#: src/ui_configurationDialog.h:1655
 msgid "Automatic change of landscape when planet is changed"
 msgstr "Автоматична смяна на пейзажа при смяна на планетата"
 
-#: src/ui_configurationDialog.h:1601
+#: src/ui_configurationDialog.h:1657
 msgid "Auto select landscapes"
 msgstr "Автоматичен избор на пейзажа"
 
-#: src/ui_configurationDialog.h:1603
+#: src/ui_configurationDialog.h:1659
 msgid "Allow keyboard to pan and zoom"
 msgstr "Използване на клавиатурата за местене и увеличаване на изображението"
 
-#: src/ui_configurationDialog.h:1605
+#: src/ui_configurationDialog.h:1661
 msgid "Enable keyboard navigation"
 msgstr "Управление с клавиатурата"
 
-#: src/ui_configurationDialog.h:1606
+#: src/ui_configurationDialog.h:1662
 msgid "Screenshots"
 msgstr "Снимки на екрана"
 
-#: src/ui_configurationDialog.h:1607
+#: src/ui_configurationDialog.h:1663
 msgid "Screenshot Directory"
 msgstr "Директория за записване"
 
-#: src/ui_configurationDialog.h:1609
+#: src/ui_configurationDialog.h:1665
 msgid "Invert colors"
 msgstr "Обръщане на цветовете"
 
-#: src/ui_configurationDialog.h:1612
+#: src/ui_configurationDialog.h:1666
+msgid "Custom size"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1669
 msgid "Close window when script runs"
 msgstr "Затваряне на този прозорец"
 
-#: src/ui_configurationDialog.h:1614
+#: src/ui_configurationDialog.h:1671
 msgid "Run the selected script"
 msgstr "Изпълняване на избрания скрипт"
 
-#: src/ui_configurationDialog.h:1618
+#: src/ui_configurationDialog.h:1675
 msgid "Stop a running script"
 msgstr "Спиране на изпълняван скрипт"
 
-#: src/ui_configurationDialog.h:1622
+#: src/ui_configurationDialog.h:1679
 msgid "Load at startup"
 msgstr "Зареждане при стартиране"
 
-#: src/ui_configurationDialog.h:1623
+#: src/ui_configurationDialog.h:1680
 msgid "configure"
 msgstr "настройки"
 
@@ -15281,22 +15285,22 @@ msgstr "Нептун"
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:951
 msgid "Primary Transit"
-msgstr ""
+msgstr "Фотометрия при пасаж"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:953
 msgid "Microlensing"
-msgstr ""
+msgstr "Микрогравитационна леща"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:955
 msgid "Radial Velocity"
-msgstr ""
+msgstr "Лъчева скорост"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:957
 msgid "Imaging"
-msgstr ""
+msgstr "Преки наблюдения"
 
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:959
@@ -15306,7 +15310,7 @@ msgstr ""
 #. TRANSLATORS: Exoplanet detection method
 #: plugins/Exoplanets/src/Exoplanets.cpp:963
 msgid "Astrometry"
-msgstr ""
+msgstr "Астрометрия"
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
 #: plugins/Exoplanets/src/Exoplanets.cpp:965
@@ -15319,7 +15323,7 @@ msgstr "планетна система"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:333
 msgid "Metallicity"
-msgstr ""
+msgstr "Металичност"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:337
 #: plugins/Exoplanets/src/Exoplanet.cpp:352
@@ -15333,12 +15337,12 @@ msgstr "Радиус"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgid "Effective temperature"
-msgstr ""
+msgstr "Ефективна температура"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:345
 msgctxt "temperature"
 msgid "K"
-msgstr ""
+msgstr "K"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:349
 msgid "Exoplanet"
@@ -15351,7 +15355,7 @@ msgstr "Юп."
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:354
 msgid "Semi-Major Axis"
-msgstr ""
+msgstr "Голяма полуос"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:356
 msgid "Inclination"
@@ -15367,7 +15371,7 @@ msgstr "Година на откриване"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:359
 msgid "Detection method"
-msgstr ""
+msgstr "Метод на откриване"
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:360
 msgid "Planetary class"
@@ -15376,7 +15380,7 @@ msgstr "Планетен клас"
 #. TRANSLATORS: Full phrase is "Equilibrium Temperature"
 #: plugins/Exoplanets/src/Exoplanet.cpp:362
 msgid "Equilibrium temp."
-msgstr ""
+msgstr "Равновесна температура"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
@@ -15391,11 +15395,11 @@ msgstr ""
 
 #: plugins/Exoplanets/src/Exoplanet.cpp:523
 msgid "Equilibrium temperature on Earth"
-msgstr ""
+msgstr "Равновесна температура на Земята"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 msgid "Exoplanets Plug-in"
-msgstr ""
+msgstr "Приставка за екзопланети"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #, qt-format
@@ -15403,6 +15407,9 @@ msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr ""
+"Тази приставка указва местоположенията на звездите с екзопланети. Данните за"
+" тях са получени от „%1Енциклопедия на планетите извън Слънчевата система%2“"
+" (The Extrasolar Planets Encyclopaedia)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
 #, qt-format
@@ -15411,6 +15418,10 @@ msgid ""
 "from \"%1The Habitable Exoplanets Catalog%3\" by %2Planetary Habitability "
 "Laboratory%3."
 msgstr ""
+"Списъкът с потенциално обитаемите екзопланети и данните за тях са от "
+"„%1Каталога на обитаемите екзопланети%3“ (The Habitable Exoplanets Catalog) "
+"от %2Лабораторията за обитаемостта на планетите%3 (Planetary Habitability "
+"Laboratory)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 #, qt-format
@@ -15419,16 +15430,20 @@ msgid ""
 "altogether have %2 exoplanets (including %3 potentially habitable "
 "exoplanets)."
 msgstr ""
+"Текущият каталог разполага с информация за около %1 планетни системи, с общо"
+" %2 екзопланети, от които %3 са потенциално обитаеми."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
 msgid "Potential habitable exoplanets"
-msgstr ""
+msgstr "Потенциално обитаеми планети"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr ""
+"Тази приставка може да покаже кои екзопланети са потенциално обитаеми (с "
+"оранжев маркер) и информация за тях."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
 msgid ""
@@ -15446,10 +15461,14 @@ msgid ""
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
 " jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
+"Класификация на планетата по спектралния тип на притежаващата звезда (F, G, "
+"K, M), обитаема зона (гореща, топла, студена) и размер (мини-Земя, почти-"
+"Земя, Земя, свръх-Земя, нептунка, юпитерка) (така Земята се класифицира като"
+" G-топла Земя)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid "Equilibrium Temperature"
-msgstr ""
+msgstr "Равновесна температура"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
@@ -15465,6 +15484,10 @@ msgid ""
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr ""
+"Действителната температура на повърхността се очаква да е над равновесната, "
+"като това много зависи от атмосферите на планетите, а те в момента са "
+"неизвестни. Пример: средната температура на повърхността на Земята е около "
+"288 K или 15 ℃)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
 msgid ""
@@ -15482,32 +15505,41 @@ msgid ""
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr ""
+"Прилика със Земята по скалата [0; 1], като 1 отговаря на най-голяма прилика "
+"със Земята. ИПЗ зависи от радиуса, плътността, втората космическа скорост и "
+"температурата на повърхността."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid "Proper names"
-msgstr ""
+msgstr "Собствени имена"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr ""
+"След публично гласуване през декември 2015, Международният астрономически "
+"съюз одобри официални имена на няколко екзопланети."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr ""
+"От <em>veritas</em> на латински — истина. В отделителен падеж означава: "
+"<em>където има истина</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
+"От <em>spes</em> на латински — надежда. В отделителен падеж означава: "
+"<em>където има надежда</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "От <em>musica</em> на латински — музика."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
@@ -15515,38 +15547,50 @@ msgid ""
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
+"<em>Арион</em> е бил геният на поезията и музиката в древна Гърция. Според "
+"легендите, животът му е спасен от делфини в морето, след като им е привлякъл"
+" вниманието като е свирил на лира."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
+"<em>Фафнир</em> е джудже от скандинавската митология, което се е превърнало "
+"в дракон."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr ""
+"<em>Орбитър</em> е новоизмислена дума, чиято цел е да указва изстрелванията "
+"в Космоса и операциите в орбита на НАСА."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
-msgstr ""
+msgstr "<em>Чалаван</em> е митичен цар-крокодил от тайския фолклор."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"<em>Тафао Тонг</em> е една от двете сестри свързани с тайския мит за "
+"Чалаван."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr ""
+"<em>Тафао Кае</em> е една от двете сестри свързани с тайския мит за Чалаван."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr ""
+"Хелвециос е келтското име на <em>Хелвеция</em> и указва келтското племе, "
+"което е живяло в Швейцария през античния период."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
@@ -15560,6 +15604,9 @@ msgid ""
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr ""
+"Николай Коперник (1473-1543) е полски астроном, който е предложил "
+"хелиоцентричния модел за Слънчевата система в книгата си <em>За въртенето на"
+" небесните сфери</em> (De revolutionibus orbium coelestium)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
@@ -15569,6 +15616,11 @@ msgid ""
 "satellites of Jupiter, and the reported the first telescopic observations of"
 " the phases of Venus, among other discoveries."
 msgstr ""
+"Галилео Галилей (1564-1642) е италиански астроном и физик, който често е "
+"наричан <em>баща на наблюдателната астрономия</em> и <em>баща на модерната "
+"физика</em>. Използвайки телескоп той е открил четирите най-големи спътника "
+"на Юпитер, публикувал е и първите телескопски наблюдения на фазите на Венера"
+" и е направил още много открития."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
@@ -15577,6 +15629,10 @@ msgid ""
 "observations were critical to Kepler's formulation of his three laws of "
 "planetary motion."
 msgstr ""
+"Тихо Брахе (1546-1601) е датски астроном и благородник, който е направил "
+"много точни наблюдения на звездите и планетите. Тези наблюдения са били "
+"критично важни, за да може Йохан Кеплер да формулира трите закона за "
+"движението на планетите."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
@@ -15584,6 +15640,9 @@ msgid ""
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
 msgstr ""
+"Ханс Липерхей (1570-1619) е немско-датски шлифовчик на лещи и производител "
+"на очила. Изобретяването на телескопа-рефрактор често се присъжда на него — "
+"през 1608."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
@@ -15591,6 +15650,9 @@ msgid ""
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
+"Захариас Янсен (1580-те - 1630-те) е бил нидерландски майстор на очила, на "
+"който често се приписват изобретяването на микроскопа и понякога (оспорвано)"
+" — изобретяването на телескопа."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
@@ -15598,6 +15660,9 @@ msgid ""
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
+"Томъс Хариет (около 1560-1621) е английски астроном, математик, етнограф и "
+"преводач, който е известен с първите илюстрации на Луната през телескопски "
+"наблюдения."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -15605,6 +15670,9 @@ msgid ""
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
 " the god Izanagi."
 msgstr ""
+"<em>Аматеру</em> е често срещано японско название на храмовете, посветени на"
+" Аматерасу - богиня на Слънцето в религията Шинто, която е родена от лявото "
+"око на бога Изанги."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
@@ -15612,12 +15680,17 @@ msgid ""
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
+"Хипатия е известна гръцка жена — астроном, математик и философ. Тя е била "
+"начело на неоплатоничната школа в Александрия в началото на 5-ти век — до "
+"415, когато е убита от тълпи християни."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr ""
+"<em>Ран</em> е скандинавска богиня на морето, която предизвиква вълните и "
+"улавя моряците в мрежата си."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
@@ -15625,24 +15698,31 @@ msgid ""
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
+"Егир е съпругът на Ран, той е богът на океана. <em>Егир</em> и <em>Ран</em> "
+"представляват <em>Йотуните</em>, които властват във външната вселена. Те "
+"имат 9 дъщери."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr ""
+"Древно семитско и съвременно арабско име на град <em>Палмира</em>, който е "
+"част от Световното културно наследство на UNESCO."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
+"<em>Дагон</em> е семитско божество. Често се представя като получовек, "
+"полузмия."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Tonatiuh was the Aztec god of the Sun."
-msgstr ""
+msgstr "<em>Тонатуих</em> е ацтекски бог на Слънцето."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Meztli was the Aztec goddess of the Moon."
-msgstr ""
+msgstr "<em>Мезтли</em> е ацтекска богиня на Луната."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid ""
@@ -15650,44 +15730,55 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
+"<em>Огма</em> е божеството на красноречието, писането и голямата физическа "
+"сила в келтските митологии на Ирландия и Шотландия и може да е свързан с "
+"гало-римското божество <em>Огмиос</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid "Smertrios was a Gallic deity of war."
-msgstr ""
+msgstr "<em>Смертриос</em> е галско божество на войната."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr ""
+"От латински <em>intercrus</em> — между краката, което описва "
+"местоположението на звездата в Голямата мечка."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
+"<em>Аркас</em> е синът на Калисто (Голямата мечка) в гръцката митология."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Мигел де Сервантес Сааведра (1547-1616) е известен испански писател и автор "
+"на <em>Дон Кихот де ла Манча</em> (цялото име на романа е „Знаменитият "
+"идалго Дон Кихот де ла Манча“)."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
-msgstr ""
+msgstr "Главен герой от романа на Сервантес <em>Дон Кихот де ла Манча</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"Любимата на Дон Кихот от романа на Сервантес <em>Дон Кихот де ла Манча</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr ""
+"Конят на Дон Кихот от романа на Сервантес <em>Дон Кихот де ла Манча</em>."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
@@ -15701,28 +15792,37 @@ msgid ""
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
 "and of Helen and Clytemnestra."
 msgstr ""
+"<em>Тестия<em> е патроним — име по бащина линия на Леда и нейната сестра "
+"Алтея, дъщерите на Тестий. Леда е гръцка богиня, майка на близнаците Кастор "
+"и Полукс, на Елена и на Клитемнестра."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr ""
+"<em>Лих</em> е фантастично немъртво същество, което може да контролира "
+"другите немъртви същества с магия."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid "Draugr refers to undead creatures in Norse mythology."
-msgstr ""
+msgstr "<em>Дрогр</em> са немъртви същества от скандинавската митология."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
+"От <em>полтъргайст</em> на немски — „шумен дух“. Това е свръхестествено "
+"същество, което предизвиква смут и бъркотия."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr ""
+"<em>Фобетор</em> е гръцкото божество на кошмарите, син на Никс, първичното "
+"божество на нощта."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
@@ -15731,6 +15831,10 @@ msgid ""
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
 msgstr ""
+"Титаун (познато още като Медина на Тетуан) е селище в северно Мароко и част "
+"от световното наследство на ЮНЕСКО. След 8-и век е исторически важно място "
+"за контакти между испанците и арабите и между два континента — Европа и "
+"Африка."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
@@ -15739,6 +15843,10 @@ msgid ""
 "century Cordova in Andalusia (modern Spain), and wrote an influential "
 "treatise on the uses of the astrolabe."
 msgstr ""
+"Сафар е кръстен на Абу ал Касим Ибн Абд Алах Ибн Омар ал Гафики Ибн ал "
+"Сафар, който е преподавал аритметика, геометрия и астрономия през 11-ти век "
+"в Кордоба в Андалусия — съвременна Испания. Той е написал влиятелен труд за "
+"употребата на астролабията."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
@@ -15746,6 +15854,9 @@ msgid ""
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
 " the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
+"Сам е кръстен на Абу ал Касим Асбах ибн Мухамед ибн ал Сам ал Махри (или по-"
+"кратко: <em>Ибн ал Сам</em>), известен астроном и математик в 11-и век от "
+"школата ал Маджрити в Кордоба в Андалусия — съвременна Испания."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid ""
@@ -15753,6 +15864,9 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
+"Маджрити е кръстен на Абу ал Касим ал Куртуби ал Маджрити, известен "
+"математик, астроном, изследовател и учител през 10-и и началото на 11-ти век"
+" в Андалусия — съвременна Испания."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
@@ -15761,6 +15875,10 @@ msgid ""
 " in the world even today. The constellation Aquila represents an eagle - a "
 "popular symbol of liberty."
 msgstr ""
+"От <em>libertas</em> на латински — свобода. Тя се отнася до социалните и "
+"политически свободи и напомня, че има хора, които и днес са лишени от "
+"свобода. Планетата е в съзвездието Орел — птица, която е символ на "
+"свободата."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid ""
@@ -15768,24 +15886,33 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
+"От <em>fortitudo</em> на латински — устойчивост, мъжество. Това се отнася за"
+" емоционалната и психическа сила в лицето беди и несгоди, което е "
+"символизирано от Орела."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr ""
+"Тези имена са базирани на първоначалните предложения, но са променени, за да"
+" отговарят на правилата на МАС."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr ""
+"Първоначално предложеното име — <em>Веритас</em> вече е дадено на астероид, "
+"с роля за проучването на Слънчевата система."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr ""
+"Първоначално предложеното име — <em>Аматерасу</em> вече е дадено на "
+"астероид."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid ""
@@ -15794,10 +15921,14 @@ msgid ""
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
 "discovered in 2004."
 msgstr ""
+"Забележете различното изписване на латиница на <em>AEgir</em> и "
+"<em>Aegir</em> — норвежката транслитерация. Името Егир, с изписване на "
+"латиница: <em>Aegir</em> вече е дадено на един от спътниците на Сатурн, "
+"открит през 2004."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
-msgstr ""
+msgstr "Името <em>Огмиос</em> вече е дадено на астероид."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
@@ -15805,6 +15936,8 @@ msgid ""
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
+"Първоначално предложеното име <em>Леда</em> вече е дадено на астероид и на "
+"един от спътниците на Юпитер. Името <em>Алтея</em> е дадено на астероид."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid ""
@@ -15813,14 +15946,17 @@ msgid ""
 "<em>Lippershey</em> (with an <em>s</em>) results in fact from a "
 "typographical error dating back from 1831, thus should be avoided."
 msgstr ""
+"Оригиналното изписване <em>Липерсхей</em> е поправено на <em>Липерхей</em> "
+"на 15.01.2016. Често срещаният вариант със <em>с</em> — <em>Липерсхей</em> е"
+" резултат от типографска грешка през 1831 и затова трябва да се избягва."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Additional info"
-msgstr ""
+msgstr "Допълнителна информация"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Circumstellar habitable zone"
-msgstr ""
+msgstr "Обитаема зона около звездата"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Planetary equilibrium temperature"
@@ -15836,59 +15972,61 @@ msgstr "Индекс на прилика със Земята"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "Final Results of NameExoWorlds Public Vote Released"
-msgstr ""
+msgstr "Крайни резултати от публичното гласуване на сайта NameExoWorlds"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
 msgid "NameExoWorlds website"
-msgstr ""
+msgstr "Уебсайта NameExoWorlds (имена за екзосветовете)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "General professional Web sites relevant to extrasolar planets"
-msgstr ""
+msgstr "Общи професионални уеб сайтове посветени на екзопланетите"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "Exoplanets: an interactive version of XKCD 1071"
-msgstr ""
+msgstr "Екзопланети: интерактивен комикс от XKCD — 1071"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "HEK (The Hunt for Exomoons with Kepler)"
-msgstr ""
+msgstr "ТЕК (Търсене на екзолуни с Кеплер — HEK)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
-msgstr ""
+msgstr "Екзопланети в двойни и кратни системи (Ричард Шварц)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Naming exoplanets (IAU)"
-msgstr ""
+msgstr "Имена на екзопланетите (МАС)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
+"Някои астрономи и екипи, които работят в областта на изследването на "
+"планетите извън Слънчевата система."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "update: 16 April 2012"
-msgstr ""
+msgstr "обновено: 16 април 2012"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "The Exoplanet Data Explorer"
-msgstr ""
+msgstr "Изследване на данните на екзопланетите"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "The Anglo-Australian Planet Search"
-msgstr ""
+msgstr "Англо-австралийското планетно проучване"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr ""
+msgstr "Женевските програми за търсене на планети извън Слънчевата система"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
-msgstr ""
+msgstr "OLBIN (Известия на оптичната интерферометрия при голяма база)"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "NASA's Exoplanet Exploration Program"
-msgstr ""
+msgstr "Програмата на НАСА за търсене на екзопланети"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "Pulsar planets"
@@ -15896,117 +16034,117 @@ msgstr "Планети около пулсари"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "The NASA Exoplanet Archive"
-msgstr ""
+msgstr "Архивът за екзопланети на НАСА"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr ""
+msgstr "Комисия 53 на МАС: планети извън Слънчевата система"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "ExoMol"
-msgstr ""
+msgstr "ExoMol"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "The Habitable Zone Gallery"
-msgstr ""
+msgstr "Галерия на обитаемата зона"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid "PlanetQuest - The Search for Another Earth"
-msgstr ""
+msgstr "PlanetQuest - Проучването за втора Земя"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
 msgid "Open Exoplanet Catalogue"
-msgstr ""
+msgstr "Общ каталог на екзопланетите"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:311
 msgid "The Habitable Exoplanets Catalog"
-msgstr ""
+msgstr "Каталог на обитаемите екзопланети"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:418
 msgid "Exoplanets is updated"
-msgstr ""
+msgstr "Екзопланетите са обновени"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:539
 msgid "Orbital Eccentricity"
-msgstr ""
+msgstr "Ексцентрицитет на орбитата"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:540
 msgid "Orbit Semi-Major Axis, AU"
-msgstr ""
+msgstr "Голяма полуос на орбитата [AU]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:541
 msgid "Planetary Mass, Mjup"
-msgstr ""
+msgstr "Маса на планетата спрямо Юпитер [M]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:542
 msgid "Planetary Radius, Rjup"
-msgstr ""
+msgstr "Радиус на планетата спрямо Юпитер [R]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:543
 msgid "Orbital Period, days"
-msgstr ""
+msgstr "Орбитален период [дни]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:544
 msgid "Angular Distance, arcsec"
-msgstr ""
+msgstr "Ъглово разстояние [″]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:545
 msgid "Effective temperature of host star, K"
-msgstr ""
+msgstr "Ефективна температура на звездата [K]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:546
 msgid "Year of Discovery"
-msgstr ""
+msgstr "Година на откриване"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:547
 msgid "Metallicity of host star"
-msgstr ""
+msgstr "Металичност на притежаващата звезда"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:548
 msgid "V magnitude of host star, mag"
-msgstr ""
+msgstr "Зв. вел. във филтър V на притежаващата звезда"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:549
 msgid "RA (J2000) of star, deg"
-msgstr ""
+msgstr "α (J2000) на звездата [°]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:550
 msgid "Dec (J2000) of star, deg"
-msgstr ""
+msgstr "δ (J2000) на звездата [°]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:551
 msgid "Distance to star, pc"
-msgstr ""
+msgstr "Разстояние до звездата [pc]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
 msgid "Mass of host star, Msol"
-msgstr ""
+msgstr "Маса на звездата спрямо Слънцето [M☉]"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:553
 msgid "Radius of host star, Rsol"
-msgstr ""
+msgstr "Радиус на звездата спрямо Слънцето [R☉]"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:624
 msgctxt "temperature scale"
 msgid "Kelvin"
-msgstr ""
+msgstr "Келвин"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:626
 msgctxt "temperature scale"
 msgid "Celsius"
-msgstr ""
+msgstr "Целзий"
 
 #. TRANSLATORS: Name of temperature scale
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:628
 msgctxt "temperature scale"
 msgid "Fahrenheit"
-msgstr ""
+msgstr "Фаренхайт"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:524
 msgid "Exoplanets Configuration"
-msgstr ""
+msgstr "Настройки за екзопланетите"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:525
 msgid "Exoplanets Plug-in Configuration"
@@ -16014,63 +16152,63 @@ msgstr "Настройки на приставката Екзопланети"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:527
 msgid "Update exoplanets data from Internet"
-msgstr ""
+msgstr "Обновяване на информацията за екзопланетите през Интернет"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:533
 msgid "Settings for exoplanets"
-msgstr ""
+msgstr "Настройки на екзопланетите"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:535
 msgid "Plot all systems with exoplanets without labels"
-msgstr ""
+msgstr "Изобразяване на системите с екзопланети без етикети"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:537
 msgid "Enable display of distribution for exoplanets"
-msgstr ""
+msgstr "Извеждане на разпределението на екзопланетите"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:539
 msgid "Display exoplanets since their discovery"
-msgstr ""
+msgstr "Извеждане на планетите от момента на откриването им"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:541
 msgid "Enable timeline discovery of exoplanets"
-msgstr ""
+msgstr "Извеждане на планетите според времето на откриването им"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:543
 msgid ""
 "Display of the planetary systems, which contains the potential habitable "
 "exoplanets"
-msgstr ""
+msgstr "Показване на планетните системи с планети с потенциал за живот"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:545
 msgid "Enable display of the potential habitable exoplanets only"
-msgstr ""
+msgstr "Извеждане само на потенциално обитаемите екзопланети"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:546
 msgid "Enable display of designations for exoplanets"
-msgstr ""
+msgstr "Извеждане на информация за екзопланетите"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:548
 msgid "Show exoplanets button on toolbar"
-msgstr ""
+msgstr "Бутон за екзопланетите на лентата с инструменти"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:549
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:551
 msgid "Exoplanets marker color"
-msgstr ""
+msgstr "Цвят за отбелязване на екзопланети"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:553
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:555
 msgid "Marker color for potential habitable exoplanets"
-msgstr ""
+msgstr "Цвят за отбелязване на потенциално обитаемите екзопланети"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:557
 msgid "Temperature scale:"
-msgstr ""
+msgstr "Температурна ска̀ла"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:561
 msgid "Diagrams: scatter plot"
-msgstr ""
+msgstr "Точкови диаграми"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:562
 msgid "X axis"
@@ -16084,7 +16222,7 @@ msgstr "Логаритмична скала"
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:566
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:574
 msgid "log scale"
-msgstr ""
+msgstr "логаритмична скала"
 
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:568
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:575
@@ -18194,75 +18332,75 @@ msgstr "Заглавие:"
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:576
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "Археолинии"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:61
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "Инструмент за архео- и етно- астрономически изследвания"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Equinox"
-msgstr ""
+msgstr "Линия за равноденствието"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Линия за слънцестоениета"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Crossquarter"
-msgstr ""
+msgstr "Линия на среднодневие"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:248
 msgid "Show Line for Major Standstill"
-msgstr ""
+msgstr "Линия на голямо луностоене"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:249
 msgid "Show Line for Minor Standstill"
-msgstr ""
+msgstr "Линия на малко луностоене"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "Линия на преминаване през зенита"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "Линия на преминаване през надира"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "Линия на избрания обект"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Sun"
-msgstr ""
+msgstr "Линия на текущото Слънце"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Current Moon"
-msgstr ""
+msgstr "Линия на текущата Луна"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Vertical for Geographic Location 1"
-msgstr ""
+msgstr "Вертикал за географско положение 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:256
 msgid "Show Vertical for Geographic Location 2"
-msgstr ""
+msgstr "Вертикал за географско положение 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:257
 msgid "Show Vertical for Custom Azimuth 1"
-msgstr ""
+msgstr "Вертикал за азимут 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:258
 msgid "Show Vertical for Custom Azimuth 2"
-msgstr ""
+msgstr "Вертикал за азимут 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
-msgstr ""
+msgstr "Вертикал за деклинация 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
-msgstr ""
+msgstr "Вертикал за деклинация 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1263
 msgid "Equinox"
@@ -18274,23 +18412,23 @@ msgstr "Слънцестоене"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1269
 msgid "Crossquarter"
-msgstr ""
+msgstr "Среднодневие"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1272
 msgid "Major Lunar Standstill"
-msgstr ""
+msgstr "Голямо луностоене"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1275
 msgid "Minor Lunar Standstill"
-msgstr ""
+msgstr "Малко луностоене"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Преминаване през зенита"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Преминаване през надира"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
@@ -18299,7 +18437,7 @@ msgstr "Избран обект"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1293
 msgid "error if you can read this"
-msgstr ""
+msgstr "възникнала е грешка"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1296
 msgid "Mercury"
@@ -18311,39 +18449,43 @@ msgstr "Венера"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Приставка за археолинии"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:258
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"Приставката за археолинии извежда произволна комбинация от дъги, които си "
+"използват при изучаване на архео- и етно- астрономията."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:259
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
-msgstr ""
+msgstr "Деклинация на равноденствията (т.е. екватора) и слънцестоенията"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:260
 msgid ""
 "Declinations of the crossquarter days (days right between solstices and "
 "equinoxes)"
 msgstr ""
+"Деклинация на среднодневията (дните на средата между слънцестоенията и "
+"равноденствията)"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:261
 msgid "Declinations of the Major Lunar Standstills"
-msgstr ""
+msgstr "Деклинация на Луната при големите луностоения"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:262
 msgid "Declinations of the Minor Lunar Standstills"
-msgstr ""
+msgstr "Деклинация на Луната при малките луностоения"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Деклинация при преминаването през зенита"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:264
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Деклинация при преминаването през надира"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:265
 msgid "Declination of the currently selected object"
@@ -18351,15 +18493,15 @@ msgstr "Деклинация на избрания обект"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:266
 msgid "Current declination of the sun"
-msgstr ""
+msgstr "Текуща деклинация на Слънцето"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:267
 msgid "Current declination of the moon"
-msgstr ""
+msgstr "Текуща деклинация на Луната"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:268
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Текуща деклинация на планета при наблюдение с невъоръжено око"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:269
 msgid ""
@@ -18368,6 +18510,10 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is"
 " high in the sky due to parallax effects."
 msgstr ""
+"Линиите за Луната включват ефектите на паралакса на хоризонта. Чертаят се по"
+" две линии  — за най-малкото и най-голямото разстояние до Луната. Поради "
+"ефектите на паралакса при луностоенията деклинацията на Луната ще надхвърля "
+"указаните граници."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:273
 msgid ""
@@ -18377,92 +18523,101 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"В някои религии, особено в Исляма, молитвите се извършват в определена "
+"посока, към определено местоположение. Може да се изведат линиите на азимута"
+" на две местоположения. Стандартните местоположения са Мека (Кааба) и "
+"Йерусалим. Посоките се изчисляват със сферична тригонометрия за сферична "
+"Земя."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and declination"
 " lines with custom label can be shown."
 msgstr ""
+"Допълнително може да покажете и няколко вертикални линии с етикет с "
+"произволен азимут и деклинация"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:366
 msgid "Select color for equinox line"
-msgstr ""
+msgstr "Цвят на линията на равноденствието"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Цвят на линиите на слънцестоенията"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:388
 msgid "Select color for crossquarter lines"
-msgstr ""
+msgstr "Цвят за линиите на среднодневията"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:399
 msgid "Select color for major standstill lines"
-msgstr ""
+msgstr "Цвят на линиите на големите луностоения"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:410
 msgid "Select color for minor standstill lines"
-msgstr ""
+msgstr "Цвят на линиите на малките луностоения"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:421
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Цвят на линията на преминаването през зенита"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:432
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Цвят на линията на преминаването през надира"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:443
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Цвят на линията на текущия обект"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:454
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Цвят на линията на текущото Слънце"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:465
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "Цвят на линията на текущата Луна"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:476
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Цвят на линията на текущата планета"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:487
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Цвят на линията на 1-то географско местоположение"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:498
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Цвят на линията на 2-то географско местоположение"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:509
 msgid "Select color for Custom Azimuth 1 line"
-msgstr ""
+msgstr "Цвят на линията на 1-я азимут"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:520
 msgid "Select color for Custom Azimuth 2 line"
-msgstr ""
+msgstr "Цвят на линията на 2-я азимут"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:531
 msgid "Select color for Custom Declination 1 line"
-msgstr ""
+msgstr "Цвят на линията на 1-та деклинация"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:542
 msgid "Select color for Custom Declination 2 line"
-msgstr ""
+msgstr "Цвят на линията на 2-та деклинация"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:527
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "Настройки на археолиниите"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:528
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "Настройки на приставката за археолиниите"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
 msgid "To change colors you may have to leave fullscreen mode!"
 msgstr ""
+"Може да се наложи да излезете от режима на цял екран, за да смените "
+"цветовете"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:533
 msgid "Custom Declination 1"
@@ -18470,12 +18625,12 @@ msgstr "Деклинация 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
-msgstr ""
+msgstr "Текущо Слънце"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Въведете етикет (местоположение) на тази линия"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
@@ -18487,39 +18642,39 @@ msgstr "Географско местоположение 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:546
 msgid "Change color"
-msgstr ""
+msgstr "Смяна на цвета"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:549
 msgid "Minor Lunar Standstill lines"
-msgstr ""
+msgstr "Линии на малките луностоения"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
 msgid "Current Planet: None"
-msgstr ""
+msgstr "Текуща планета: Няма"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
 msgid "Current Planet: Mercury"
-msgstr ""
+msgstr "Текуща планета: Меркурий"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Текуща планета: Венера"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
 msgid "Current Planet: Mars"
-msgstr ""
+msgstr "Текуща планета: Марс"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
 msgid "Current Planet: Jupiter"
-msgstr ""
+msgstr "Текуща планета: Юпитер"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:557
 msgid "Current Planet: Saturn"
-msgstr ""
+msgstr "Текуща планета: Сатурн"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Деклинация при преминаването през надира"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
 msgid "Custom Azimuth 1"
@@ -18532,7 +18687,7 @@ msgstr "Азимут 2"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:563
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:566
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "Въведете етикет за линията"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
 msgid "Solstice Lines"
@@ -18540,7 +18695,7 @@ msgstr "Линии на слънцестоене"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
 msgid "Current Moon"
-msgstr ""
+msgstr "Текуща Луна"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
 msgid "Declination of Zenith passage"
@@ -18548,7 +18703,7 @@ msgstr "Деклинация на преминаването на зенита"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
 msgid "Crossquarter Lines"
-msgstr ""
+msgstr "Линии на среднодневията"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
@@ -18556,7 +18711,7 @@ msgstr "Линия на равноденствията (на екватора)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Major Lunar Standstill lines"
-msgstr ""
+msgstr "Линии на големите луностоения"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 2"

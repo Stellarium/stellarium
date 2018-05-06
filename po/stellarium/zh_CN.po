@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-04-22 12:08+0700\n"
+"POT-Creation-Date: 2018-05-02 18:49+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Haomin Jin <986394140@qq.com>, 2017\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -34,7 +34,7 @@ msgstr "自定义标识"
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:195
 #: src/core/modules/StarWrapper.cpp:198 src/gui/AstroCalcDialog.cpp:412
-#: src/ui_configurationDialog.h:1441 plugins/Satellites/src/Satellite.cpp:279
+#: src/ui_configurationDialog.h:1497 plugins/Satellites/src/Satellite.cpp:279
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:182
@@ -60,7 +60,7 @@ msgstr "星群"
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:106
 #: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:797
+#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:808
 msgid "Display Options"
 msgstr "显示选项"
 
@@ -99,7 +99,7 @@ msgstr "星座标签"
 msgid "Constellation boundaries"
 msgstr "星座边界"
 
-#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1565
+#: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1621
 msgid "Select single constellation"
 msgstr "选择单一星座"
 
@@ -1208,7 +1208,7 @@ msgid "Contrast index"
 msgstr "反差指数"
 
 #: src/core/modules/Nebula.cpp:292 src/core/modules/Nebula.cpp:295
-#: src/ui_configurationDialog.h:1445
+#: src/ui_configurationDialog.h:1501
 msgid "Size"
 msgstr "大小"
 
@@ -1231,7 +1231,7 @@ msgstr "光年"
 #: src/core/modules/Planet.cpp:497 src/core/modules/MinorPlanet.cpp:305
 #: src/core/modules/Comet.cpp:232 src/core/modules/StarWrapper.cpp:246
 #: src/gui/AstroCalcDialog.cpp:2263 src/gui/AstroCalcDialog.cpp:2298
-#: src/ui_configurationDialog.h:1447 plugins/Supernovae/src/Supernova.cpp:155
+#: src/ui_configurationDialog.h:1503 plugins/Supernovae/src/Supernova.cpp:155
 #: plugins/Novae/src/Nova.cpp:168 plugins/Exoplanets/src/Exoplanet.cpp:326
 msgid "Distance"
 msgstr "距离"
@@ -1893,7 +1893,7 @@ msgctxt "type of comet"
 msgid "periodic"
 msgstr "周期彗星"
 
-#: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1446
+#: src/core/modules/Comet.cpp:243 src/ui_configurationDialog.h:1502
 msgid "Velocity"
 msgstr "速度"
 
@@ -2806,7 +2806,7 @@ msgid "Deep-sky objects background images"
 msgstr "深空天体背景图像"
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:212
-#: src/StelMainView.cpp:795 src/StelMainView.cpp:796
+#: src/StelMainView.cpp:806 src/StelMainView.cpp:807
 msgid "Miscellaneous"
 msgstr "杂项"
 
@@ -2900,21 +2900,21 @@ msgctxt "solar time"
 msgid "LTST"
 msgstr "LTST"
 
-#: src/gui/ConfigurationDialog.cpp:532
+#: src/gui/ConfigurationDialog.cpp:556
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:912
+#: src/gui/ConfigurationDialog.cpp:940
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视野大小: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:920
+#: src/gui/ConfigurationDialog.cpp:948
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/地平高度: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:982
+#: src/gui/ConfigurationDialog.cpp:1010
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:457
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
@@ -2922,11 +2922,11 @@ msgstr "启动时的地平坐标方位角/地平高度: %1/%2"
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:983
+#: src/gui/ConfigurationDialog.cpp:1011
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:985 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:1013 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:432
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:455
@@ -2949,7 +2949,7 @@ msgstr "联系信息"
 msgid "Version"
 msgstr "版本"
 
-#: src/gui/ConfigurationDialog.cpp:986 src/scripting/StelScriptMgr.cpp:238
+#: src/gui/ConfigurationDialog.cpp:1014 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:456
@@ -2972,20 +2972,20 @@ msgstr "版本"
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:990
+#: src/gui/ConfigurationDialog.cpp:1018
 msgctxt "license"
 msgid "unknown"
 msgstr "未知"
 
-#: src/gui/ConfigurationDialog.cpp:1087
+#: src/gui/ConfigurationDialog.cpp:1115
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:1094
+#: src/gui/ConfigurationDialog.cpp:1122
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:1159
+#: src/gui/ConfigurationDialog.cpp:1187
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -2993,16 +2993,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:1163
+#: src/gui/ConfigurationDialog.cpp:1191
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1196
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "在 %2 中取后 %1 目录"
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1203
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3011,7 +3011,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:1182
+#: src/gui/ConfigurationDialog.cpp:1210
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3022,7 +3022,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1225 src/gui/ConfigurationDialog.cpp:1261
+#: src/gui/ConfigurationDialog.cpp:1253 src/gui/ConfigurationDialog.cpp:1289
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3031,11 +3031,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1314
+#: src/gui/ConfigurationDialog.cpp:1342
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:1318
+#: src/gui/ConfigurationDialog.cpp:1346
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3044,192 +3044,192 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "文件被损坏。"
 
-#: src/gui/ConfigurationDialog.cpp:1367 src/gui/ConfigurationDialog.cpp:1376
+#: src/gui/ConfigurationDialog.cpp:1395 src/gui/ConfigurationDialog.cpp:1404
 msgid "Available"
 msgstr "连接可用"
 
-#: src/gui/ConfigurationDialog.cpp:1369 src/gui/ConfigurationDialog.cpp:1378
+#: src/gui/ConfigurationDialog.cpp:1397 src/gui/ConfigurationDialog.cpp:1406
 msgid "Not Available"
 msgstr "连接不可用"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1446
+#: src/gui/ConfigurationDialog.cpp:1474
 msgid "Algorithm of"
 msgstr "ΔT的算法"
 
-#: src/gui/ConfigurationDialog.cpp:1459
+#: src/gui/ConfigurationDialog.cpp:1487
 msgid "Without correction"
 msgstr "未校正"
 
-#: src/gui/ConfigurationDialog.cpp:1460
+#: src/gui/ConfigurationDialog.cpp:1488
 msgid "Schoch (1931)"
 msgstr "Schoch（1931年）"
 
-#: src/gui/ConfigurationDialog.cpp:1461
+#: src/gui/ConfigurationDialog.cpp:1489
 msgid "Clemence (1948)"
 msgstr "克莱曼斯"
 
-#: src/gui/ConfigurationDialog.cpp:1462
+#: src/gui/ConfigurationDialog.cpp:1490
 msgid "IAU (1952)"
 msgstr "IAU （1952年）"
 
-#: src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1491
 msgid "Astronomical Ephemeris (1960)"
 msgstr "星历表（1960年）"
 
-#: src/gui/ConfigurationDialog.cpp:1464
+#: src/gui/ConfigurationDialog.cpp:1492
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "塔克曼（1962, 1964）和哥斯廷（1973）"
 
-#: src/gui/ConfigurationDialog.cpp:1465
+#: src/gui/ConfigurationDialog.cpp:1493
 msgid "Muller & Stephenson (1975)"
 msgstr "穆勒和斯蒂芬森（1975）"
 
-#: src/gui/ConfigurationDialog.cpp:1466
+#: src/gui/ConfigurationDialog.cpp:1494
 msgid "Stephenson (1978)"
 msgstr "斯蒂芬森（1978）"
 
-#: src/gui/ConfigurationDialog.cpp:1467
+#: src/gui/ConfigurationDialog.cpp:1495
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel和 Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1468
+#: src/gui/ConfigurationDialog.cpp:1496
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel 和 Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1469
+#: src/gui/ConfigurationDialog.cpp:1497
 msgid "Morrison & Stephenson (1982)"
 msgstr "莫里森和斯蒂芬森（1982）"
 
-#: src/gui/ConfigurationDialog.cpp:1470
+#: src/gui/ConfigurationDialog.cpp:1498
 msgid "Stephenson & Morrison (1984)"
 msgstr "斯蒂芬森和莫里森（1984）"
 
-#: src/gui/ConfigurationDialog.cpp:1471
+#: src/gui/ConfigurationDialog.cpp:1499
 msgid "Stephenson & Houlden (1986)"
 msgstr "斯蒂芬森和胡尔登（1986）"
 
-#: src/gui/ConfigurationDialog.cpp:1472
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1473
+#: src/gui/ConfigurationDialog.cpp:1501
 msgid "Borkowski (1988)"
 msgstr "博尔科夫斯基（1988）"
 
-#: src/gui/ConfigurationDialog.cpp:1474
+#: src/gui/ConfigurationDialog.cpp:1502
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze 和 Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1475
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "Stephenson & Morrison (1995)"
 msgstr "斯蒂芬森和莫里森（1995）"
 
-#: src/gui/ConfigurationDialog.cpp:1476
+#: src/gui/ConfigurationDialog.cpp:1504
 msgid "Stephenson (1997)"
 msgstr "斯蒂芬森（1997）"
 
-#: src/gui/ConfigurationDialog.cpp:1478
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (以及 Chapront, Chapront-Touze 和 Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1479
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "JPL Horizons"
 msgstr "JPL 新视野"
 
-#: src/gui/ConfigurationDialog.cpp:1480
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus 和 Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1481
+#: src/gui/ConfigurationDialog.cpp:1509
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "莫里森和斯蒂芬森（2004, 2005）"
 
-#: src/gui/ConfigurationDialog.cpp:1482
+#: src/gui/ConfigurationDialog.cpp:1510
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1484
+#: src/gui/ConfigurationDialog.cpp:1512
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak 和 Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1515
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak 和 Meeus (2006)不提供额外的月球加速"
 
-#: src/gui/ConfigurationDialog.cpp:1489
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1490
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1491
+#: src/gui/ConfigurationDialog.cpp:1519
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck 和 Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1492
+#: src/gui/ConfigurationDialog.cpp:1520
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold 和 Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1493
+#: src/gui/ConfigurationDialog.cpp:1521
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq和 Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1494
+#: src/gui/ConfigurationDialog.cpp:1522
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana 和 Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1495
+#: src/gui/ConfigurationDialog.cpp:1523
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
-#: src/gui/ConfigurationDialog.cpp:1544 src/gui/ConfigurationDialog.cpp:1579
+#: src/gui/ConfigurationDialog.cpp:1572 src/gui/ConfigurationDialog.cpp:1607
 #: src/gui/StelGuiItems.cpp:644 src/gui/LocationDialog.cpp:441
 msgid "System default"
 msgstr "系统默认"
 
-#: src/gui/ConfigurationDialog.cpp:1545
+#: src/gui/ConfigurationDialog.cpp:1573
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "年-月-日（ISO 8601）"
 
-#: src/gui/ConfigurationDialog.cpp:1546
+#: src/gui/ConfigurationDialog.cpp:1574
 msgid "dd-mm-yyyy"
 msgstr "日-月-年"
 
-#: src/gui/ConfigurationDialog.cpp:1547
+#: src/gui/ConfigurationDialog.cpp:1575
 msgid "mm-dd-yyyy"
 msgstr "月-日-年"
 
-#: src/gui/ConfigurationDialog.cpp:1580
+#: src/gui/ConfigurationDialog.cpp:1608
 msgid "12-hour format"
 msgstr "12小时制"
 
-#: src/gui/ConfigurationDialog.cpp:1581
+#: src/gui/ConfigurationDialog.cpp:1609
 msgid "24-hour format"
 msgstr "24小时制"
 
-#: src/gui/ConfigurationDialog.cpp:1608 src/ui_configurationDialog.h:1398
+#: src/gui/ConfigurationDialog.cpp:1636 src/ui_configurationDialog.h:1454
 #: plugins/Oculars/src/Oculars.cpp:2363
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "无"
 
-#: src/gui/ConfigurationDialog.cpp:1609
+#: src/gui/ConfigurationDialog.cpp:1637
 msgid "5/6/5 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1610
+#: src/gui/ConfigurationDialog.cpp:1638
 msgid "6/6/6 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1611
+#: src/gui/ConfigurationDialog.cpp:1639
 msgid "8/8/8 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1612
+#: src/gui/ConfigurationDialog.cpp:1640
 msgid "10/10/10 bits"
 msgstr ""
 
@@ -3399,62 +3399,62 @@ msgstr "{Bug 报告及功能请求系统} - 如果出现某些功能异常、缺
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr "{Google Groups} - 与其他用户交流Stellarium"
 
-#: src/gui/HelpDialog.cpp:312
+#: src/gui/HelpDialog.cpp:313
 msgid "Developers"
 msgstr "开发者"
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:314
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr "计划协调&开发经理: %1"
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:315
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr "视觉与其他设计: %1"
 
-#: src/gui/HelpDialog.cpp:315 src/gui/HelpDialog.cpp:316
-#: src/gui/HelpDialog.cpp:317 src/gui/HelpDialog.cpp:318
-#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:325
-#: src/gui/HelpDialog.cpp:326 src/gui/HelpDialog.cpp:327
-#: src/gui/HelpDialog.cpp:328 src/gui/HelpDialog.cpp:329
-#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
-#: src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
+#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
+#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:326
+#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
+#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
+#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:332
+#: src/gui/HelpDialog.cpp:333
 #, qt-format
 msgid "Developer: %1"
 msgstr "开发者: %1"
 
-#: src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr "连续积分：%1"
 
-#: src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:322
 #, qt-format
 msgid "Tester: %1"
 msgstr "测试者：%1"
 
-#: src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323
 msgid "Former Developers"
 msgstr "前开发者"
 
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:324
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr "有一些曾经作出杰出贡献的开发者已不再参与开发。他们的工作曾为这一项目带来巨大的进步："
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr "说明文件撰写: %1"
 
-#: src/gui/HelpDialog.cpp:333 src/gui/HelpDialog.cpp:334
+#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr "OSX开发: %1"
 
-#: src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:336
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 #: plugins/Oculars/src/gui/OcularDialog.cpp:435
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:459
@@ -3467,7 +3467,7 @@ msgstr "OSX开发: %1"
 msgid "Contributors"
 msgstr "贡献者"
 
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:337
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -4093,7 +4093,7 @@ msgid "Secular acceleration of the Moon"
 msgstr "月球的长期加速度"
 
 #. TRANSLATORS: name of object
-#: src/gui/AstroCalcDialog.cpp:359 src/ui_configurationDialog.h:1434
+#: src/gui/AstroCalcDialog.cpp:359 src/ui_configurationDialog.h:1490
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:523
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:350
@@ -4972,7 +4972,7 @@ msgstr "导入书签"
 msgid "Export bookmarks as..."
 msgstr "导出书签为"
 
-#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1343
+#: src/scripting/StelScriptMgr.cpp:142 src/ui_configurationDialog.h:1399
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:503
 msgid "Scripts"
 msgstr "脚本"
@@ -4981,30 +4981,30 @@ msgstr "脚本"
 msgid "Shortcut"
 msgstr "快捷键"
 
-#: src/StelMainView.cpp:795
+#: src/StelMainView.cpp:806
 msgid "Save screenshot"
 msgstr "储存画面快照"
 
-#: src/StelMainView.cpp:796
+#: src/StelMainView.cpp:807
 msgid "Reload shaders (for development)"
 msgstr "重新加载着色器（用于开发）"
 
-#: src/StelMainView.cpp:797
+#: src/StelMainView.cpp:808
 msgid "Full-screen mode"
 msgstr "全屏模式"
 
-#: src/StelMainView.cpp:954
+#: src/StelMainView.cpp:970
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr "OpenGL版本不足。 请更新驱动程序，图形硬件或使用--angle模式（或--mesa模式）选项。"
 
-#: src/StelMainView.cpp:957
+#: src/StelMainView.cpp:973
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr "OpenGL版本不足。 请更新驱动程序或图形硬件。"
 
-#: src/StelMainView.cpp:999
+#: src/StelMainView.cpp:1015
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5012,7 +5012,7 @@ msgstr ""
 "您的DirectX / OpenGL ES驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1050
+#: src/StelMainView.cpp:1066
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5020,7 +5020,7 @@ msgstr ""
 "您的OpenGL / Mesa驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1106
+#: src/StelMainView.cpp:1122
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5028,7 +5028,7 @@ msgstr ""
 "您的OpenGL驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1147
+#: src/StelMainView.cpp:1163
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5036,7 +5036,7 @@ msgstr ""
 "您的OpenGL驱动有问题。 有关详细信息，请参阅日志。\n"
 "忽略并抑制此通知在未来，并尝试继续降级模式吗？"
 
-#: src/StelMainView.cpp:1259
+#: src/StelMainView.cpp:1275
 #, qt-format
 msgid "Stellarium %1"
 msgstr "Stellarium %1"
@@ -6348,7 +6348,7 @@ msgstr "文件夹"
 msgid "&Choose"
 msgstr "&选择"
 
-#: src/translations.h:661 src/ui_configurationDialog.h:1503
+#: src/translations.h:661 src/ui_configurationDialog.h:1559
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "取消"
@@ -7770,7 +7770,7 @@ msgstr "关于"
 msgid "Log"
 msgstr "记录"
 
-#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1578
+#: src/ui_helpDialogGui.h:290 src/ui_configurationDialog.h:1634
 msgid "Edit keyboard shortcuts..."
 msgstr "编辑键盘快捷键..."
 
@@ -8042,8 +8042,8 @@ msgid "Lock position when coordinates are used"
 msgstr "使用坐标时锁定位置"
 
 #: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2888
-#: src/ui_viewDialog.h:2910 src/ui_configurationDialog.h:1610
-#: src/ui_configurationDialog.h:1621
+#: src/ui_viewDialog.h:2910 src/ui_configurationDialog.h:1667
+#: src/ui_configurationDialog.h:1678
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "选项"
@@ -8900,113 +8900,113 @@ msgstr "星空文化"
 msgid "Surveys"
 msgstr "巡天"
 
-#: src/ui_configurationDialog.h:1321
+#: src/ui_configurationDialog.h:1377
 msgid "Configuration"
 msgstr "设定"
 
-#: src/ui_configurationDialog.h:1327
+#: src/ui_configurationDialog.h:1383
 msgid "Main"
 msgstr "主设定画面"
 
-#: src/ui_configurationDialog.h:1329
+#: src/ui_configurationDialog.h:1385
 msgid "Information"
 msgstr "信息"
 
-#: src/ui_configurationDialog.h:1331 src/ui_configurationDialog.h:1386
+#: src/ui_configurationDialog.h:1387 src/ui_configurationDialog.h:1442
 msgid "Selected object information"
 msgstr "已选对象信息"
 
-#: src/ui_configurationDialog.h:1334
+#: src/ui_configurationDialog.h:1390
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1336
+#: src/ui_configurationDialog.h:1392
 msgid "Additional settings for Graphical User Interface"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1339
+#: src/ui_configurationDialog.h:1395
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:999
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "时间"
 
-#: src/ui_configurationDialog.h:1341
+#: src/ui_configurationDialog.h:1397
 msgid "Tools"
 msgstr "工具"
 
-#: src/ui_configurationDialog.h:1345
+#: src/ui_configurationDialog.h:1401
 msgid "Plugins"
 msgstr "插件"
 
-#: src/ui_configurationDialog.h:1348
+#: src/ui_configurationDialog.h:1404
 msgid "Language settings"
 msgstr "语言设置"
 
-#: src/ui_configurationDialog.h:1349
+#: src/ui_configurationDialog.h:1405
 msgid "Program Language"
 msgstr "程序界面语言"
 
-#: src/ui_configurationDialog.h:1350
+#: src/ui_configurationDialog.h:1406
 msgid "Sky Culture Language"
 msgstr "星空文化语言"
 
-#: src/ui_configurationDialog.h:1352
+#: src/ui_configurationDialog.h:1408
 msgid "This feature has not been thoroughly tested yet!"
 msgstr "此功能尚未彻底测试！"
 
-#: src/ui_configurationDialog.h:1354
+#: src/ui_configurationDialog.h:1410
 msgid "Ephemeris settings (experimental)"
 msgstr "星历设置 （实验性）"
 
-#: src/ui_configurationDialog.h:1355 src/ui_configurationDialog.h:1356
+#: src/ui_configurationDialog.h:1411 src/ui_configurationDialog.h:1412
 msgid "Not installed"
 msgstr "未安装"
 
-#: src/ui_configurationDialog.h:1358
+#: src/ui_configurationDialog.h:1414
 msgid ""
 "DE431 provides position data for years -13000...+17000. For special "
 "applications only."
 msgstr "DE431提供从-公元前13000 到公元 17000的数据。 仅适用于特殊场合。"
 
-#: src/ui_configurationDialog.h:1360
+#: src/ui_configurationDialog.h:1416
 msgid "Use DE431 (long-time data)"
 msgstr "使用DE431（长期数据）"
 
-#: src/ui_configurationDialog.h:1362
+#: src/ui_configurationDialog.h:1418
 msgid "DE430 provides highest accuracy, only for years 1550...2650."
 msgstr "DE430提供最高的精度，从1550到2650年"
 
-#: src/ui_configurationDialog.h:1364
+#: src/ui_configurationDialog.h:1420
 msgid "Use DE430 (high accuracy)"
 msgstr "使用DE430（高精度）"
 
-#: src/ui_configurationDialog.h:1366
+#: src/ui_configurationDialog.h:1422
 msgid ""
 "Using VSOP87 is recommended for years -4000...+8000 only, but delivers "
 "useful positions outside this range."
 msgstr "VSOP87推荐使用年份为公元前4000到公元 8000，但提供超出此范围的数据。"
 
-#: src/ui_configurationDialog.h:1368
+#: src/ui_configurationDialog.h:1424
 msgid ""
 "VSOP87/ELP2000-82B is used when these are not installed or not activated."
 msgstr "当这些都没有被安装或激活时，将使用VSOP87/ELP2000-82B"
 
-#: src/ui_configurationDialog.h:1369
+#: src/ui_configurationDialog.h:1425
 msgid "Default options"
 msgstr "默认选项"
 
-#: src/ui_configurationDialog.h:1370
+#: src/ui_configurationDialog.h:1426
 msgid "Save View"
 msgstr "保存视图"
 
-#: src/ui_configurationDialog.h:1372
+#: src/ui_configurationDialog.h:1428
 msgid ""
 "Save the settings you've changed this session to be the same the next time "
 "you start Stellarium"
 msgstr "保存更改并在下次启动 Stellarium 时恢复"
 
-#: src/ui_configurationDialog.h:1374
+#: src/ui_configurationDialog.h:1430
 #: plugins/NavStars/src/ui_navStarsWindow.h:220
 #: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
@@ -9014,11 +9014,11 @@ msgstr "保存更改并在下次启动 Stellarium 时恢复"
 msgid "Save settings"
 msgstr "保存设置"
 
-#: src/ui_configurationDialog.h:1376
+#: src/ui_configurationDialog.h:1432
 msgid "Restore the default settings that came with Stellarium"
 msgstr "恢复 Stellarium 的原有设置"
 
-#: src/ui_configurationDialog.h:1378
+#: src/ui_configurationDialog.h:1434
 #: plugins/NavStars/src/ui_navStarsWindow.h:219
 #: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
@@ -9026,506 +9026,510 @@ msgstr "恢复 Stellarium 的原有设置"
 msgid "Restore defaults"
 msgstr "还原默认值"
 
-#: src/ui_configurationDialog.h:1379
+#: src/ui_configurationDialog.h:1435
 msgid ""
 "Save either the current FOV and direction of view or all the current options"
 " for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
 msgstr "保存当前FOV和视场方向或当前设置以供下次启动使用。 恢复默认设置需重启Stellarium "
 
-#: src/ui_configurationDialog.h:1381
+#: src/ui_configurationDialog.h:1437
 msgid "The vertical field (height) of your view when Stellarium starts"
 msgstr "打开Stellarium时，您的视野的垂直场（高度）"
 
-#: src/ui_configurationDialog.h:1384
+#: src/ui_configurationDialog.h:1440
 msgid "The direction you're looking when Stellarium starts"
 msgstr "Stellarium 默认的地理位置"
 
-#: src/ui_configurationDialog.h:1388
+#: src/ui_configurationDialog.h:1444
 msgid "Display less information"
 msgstr "显示精简信息"
 
-#: src/ui_configurationDialog.h:1390
+#: src/ui_configurationDialog.h:1446
 msgid "Short"
 msgstr "简短显示"
 
-#: src/ui_configurationDialog.h:1392
+#: src/ui_configurationDialog.h:1448
 msgid "Display all information available"
 msgstr "显示所有信息"
 
-#: src/ui_configurationDialog.h:1394
+#: src/ui_configurationDialog.h:1450
 msgid "All available"
 msgstr "完整显示"
 
-#: src/ui_configurationDialog.h:1396
+#: src/ui_configurationDialog.h:1452
 msgid "Display no information"
 msgstr "不要显示信息"
 
-#: src/ui_configurationDialog.h:1400
+#: src/ui_configurationDialog.h:1456
 msgid "Display user settings information"
 msgstr "显示用户设置信息"
 
-#: src/ui_configurationDialog.h:1402
+#: src/ui_configurationDialog.h:1458
 msgid "Customized"
 msgstr "自定义"
 
-#: src/ui_configurationDialog.h:1403
+#: src/ui_configurationDialog.h:1459
 msgid "Displayed fields"
 msgstr "显示区域"
 
-#: src/ui_configurationDialog.h:1405 src/ui_configurationDialog.h:1431
+#: src/ui_configurationDialog.h:1461 src/ui_configurationDialog.h:1487
 msgid "Equatorial coordinates, equinox of date"
 msgstr "赤道坐标春分点(当前)"
 
-#: src/ui_configurationDialog.h:1407
+#: src/ui_configurationDialog.h:1463
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
 msgid "Hour angle/Declination"
 msgstr "时角/赤纬"
 
-#: src/ui_configurationDialog.h:1408
+#: src/ui_configurationDialog.h:1464
 msgid "Catalog number(s)"
 msgstr "星表编号"
 
-#: src/ui_configurationDialog.h:1410
+#: src/ui_configurationDialog.h:1466
 msgid "Horizontal coordinates"
 msgstr "地平坐标"
 
-#: src/ui_configurationDialog.h:1412
+#: src/ui_configurationDialog.h:1468
 msgid "Azimuth/Altitude"
 msgstr "方位角/地平高度"
 
-#: src/ui_configurationDialog.h:1414
+#: src/ui_configurationDialog.h:1470
 msgid "Equatorial coordinates, equinox of J2000.0"
 msgstr "赤道坐标春分点(J2000)"
 
-#: src/ui_configurationDialog.h:1416
+#: src/ui_configurationDialog.h:1472
 msgid "Right ascension/Declination (J2000)"
 msgstr "赤经/赤纬（J2000）"
 
-#: src/ui_configurationDialog.h:1417
+#: src/ui_configurationDialog.h:1473
 msgid "Galactic coordinates"
 msgstr "银道坐标"
 
-#: src/ui_configurationDialog.h:1419
+#: src/ui_configurationDialog.h:1475
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
 msgstr "黄道坐标春分点(当前，仅地球)"
 
-#: src/ui_configurationDialog.h:1421
+#: src/ui_configurationDialog.h:1477
 msgid "Ecliptic coordinates (of date)"
 msgstr "黄道坐标（当前）"
 
-#: src/ui_configurationDialog.h:1423
+#: src/ui_configurationDialog.h:1479
 msgid "Ecliptic coordinates, equinox J2000.0"
 msgstr "黄道坐标春分点(J2000)"
 
-#: src/ui_configurationDialog.h:1425
+#: src/ui_configurationDialog.h:1481
 msgid "Ecliptic coordinates (J2000)"
 msgstr "黄道坐标（J2000）"
 
-#: src/ui_configurationDialog.h:1427
+#: src/ui_configurationDialog.h:1483
 msgid "Spectral class, nebula type, etc."
 msgstr "光谱型、星云类别等。"
 
-#: src/ui_configurationDialog.h:1429
+#: src/ui_configurationDialog.h:1485
 msgid "Additional information"
 msgstr "附加信息"
 
-#: src/ui_configurationDialog.h:1433
+#: src/ui_configurationDialog.h:1489
 msgid "Right ascension/Declination (of date)"
 msgstr "赤经/赤纬（当前）"
 
-#: src/ui_configurationDialog.h:1435
+#: src/ui_configurationDialog.h:1491
 msgid "Supergalactic coordinates"
 msgstr "超星系坐标"
 
-#: src/ui_configurationDialog.h:1436
+#: src/ui_configurationDialog.h:1492
 msgid "Visual magnitude"
 msgstr "视星等"
 
-#: src/ui_configurationDialog.h:1437
+#: src/ui_configurationDialog.h:1493
 msgid "Absolute magnitude"
 msgstr "绝对星等"
 
-#: src/ui_configurationDialog.h:1439
+#: src/ui_configurationDialog.h:1495
 msgid "The type of the object (star, planet, etc.)"
 msgstr "目标的类型（恒星，行星，其他）"
 
-#: src/ui_configurationDialog.h:1443
+#: src/ui_configurationDialog.h:1499
 msgid "Angular or physical size"
 msgstr "角面积或物理面积"
 
-#: src/ui_configurationDialog.h:1448
+#: src/ui_configurationDialog.h:1504
 msgid "Sidereal time"
 msgstr "恒星时"
 
-#: src/ui_configurationDialog.h:1450
+#: src/ui_configurationDialog.h:1506
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:295
 msgid "3-letter IAU constellation abbreviation"
 msgstr "三字母IAU星座缩写"
 
-#: src/ui_configurationDialog.h:1452
+#: src/ui_configurationDialog.h:1508
 msgid "Constellation"
 msgstr "星座"
 
-#: src/ui_configurationDialog.h:1453
+#: src/ui_configurationDialog.h:1509
 msgid "Additional buttons"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1454
+#: src/ui_configurationDialog.h:1510
 msgid "Show constellation boundaries button"
 msgstr "显示星座边界按钮"
 
-#: src/ui_configurationDialog.h:1456
+#: src/ui_configurationDialog.h:1512
 msgid "Toggle display of nebula images."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1458
+#: src/ui_configurationDialog.h:1514
 msgid "Show nebula background button"
 msgstr "显示星云背景开关按钮"
 
-#: src/ui_configurationDialog.h:1460
+#: src/ui_configurationDialog.h:1516
 msgid "A button to toggle ecliptic grid of date"
 msgstr "用于切换某日期的黄道网格的按钮"
 
-#: src/ui_configurationDialog.h:1462
+#: src/ui_configurationDialog.h:1518
 msgid "Show ecliptic grid button"
 msgstr "显示黄道网格按钮"
 
-#: src/ui_configurationDialog.h:1464
+#: src/ui_configurationDialog.h:1520
 msgid "Toggle display of the button for the Digitized Sky Survey."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1466
+#: src/ui_configurationDialog.h:1522
 msgid "Show DSS button"
 msgstr "显示数字巡天按钮"
 
-#: src/ui_configurationDialog.h:1468
+#: src/ui_configurationDialog.h:1524
 msgid "A button to toggle equatorial J2000 grid"
 msgstr "用于切换赤道J2000网格的按钮"
 
-#: src/ui_configurationDialog.h:1470
+#: src/ui_configurationDialog.h:1526
 msgid "Show ICRS grid button"
 msgstr "显示国际天球参考系(ICRS)网格按钮"
 
-#: src/ui_configurationDialog.h:1472
+#: src/ui_configurationDialog.h:1528
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1474
+#: src/ui_configurationDialog.h:1530
 msgid "Show HiPS button"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1476
+#: src/ui_configurationDialog.h:1532
 msgid "A button to toggle galactic grid"
 msgstr "用于切换银道网格的按钮"
 
-#: src/ui_configurationDialog.h:1478
+#: src/ui_configurationDialog.h:1534
 msgid "Show galactic grid button"
 msgstr "显示银道网格按钮"
 
-#: src/ui_configurationDialog.h:1480
+#: src/ui_configurationDialog.h:1536
 msgid "Enable a feature to store favorite views."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1482
+#: src/ui_configurationDialog.h:1538
 msgid "Show bookmarks button"
 msgstr "显示书签按钮"
 
-#: src/ui_configurationDialog.h:1484
+#: src/ui_configurationDialog.h:1540
 msgid "Toggle vertical and horizontal image flip buttons."
 msgstr "转换垂直及水平翻转按钮"
 
-#: src/ui_configurationDialog.h:1486
+#: src/ui_configurationDialog.h:1542
 msgid "Show flip buttons"
 msgstr "显示翻转按键"
 
-#: src/ui_configurationDialog.h:1488
+#: src/ui_configurationDialog.h:1544
 msgid "Toggle the usage of background under GUI buttons"
 msgstr "图形按钮是否带背景"
 
-#: src/ui_configurationDialog.h:1490
+#: src/ui_configurationDialog.h:1546
 msgid "Use buttons background"
 msgstr "选中使按钮带背景"
 
-#: src/ui_configurationDialog.h:1491
+#: src/ui_configurationDialog.h:1547
 msgid "Star catalog updates"
 msgstr "天体目录更新"
 
-#: src/ui_configurationDialog.h:1493
+#: src/ui_configurationDialog.h:1549
 msgid "Click here to start downloading"
 msgstr "点击这里开始下载"
 
-#: src/ui_configurationDialog.h:1495
+#: src/ui_configurationDialog.h:1551
 msgid "Download this file to view even more stars"
 msgstr "下载此文件可观看更多天体"
 
-#: src/ui_configurationDialog.h:1497
+#: src/ui_configurationDialog.h:1553
 msgid "Restart the download"
 msgstr "恢复下载"
 
-#: src/ui_configurationDialog.h:1499
+#: src/ui_configurationDialog.h:1555
 msgid "Retry"
 msgstr "重试"
 
-#: src/ui_configurationDialog.h:1501
+#: src/ui_configurationDialog.h:1557
 msgid "Stop the download. You can always restart it later"
 msgstr "停止下载(你可以随时恢复)"
 
-#: src/ui_configurationDialog.h:1504
+#: src/ui_configurationDialog.h:1560
 msgid "Additional information settings"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1505
+#: src/ui_configurationDialog.h:1561
 msgid "Use short notation for unit of measurement of surface brightness"
 msgstr "面亮度单位使用简短显示"
 
-#: src/ui_configurationDialog.h:1506
+#: src/ui_configurationDialog.h:1562
 msgid "Use unit of measurement mag/arcsec^2 for surface brightness"
 msgstr "使用星等/角秒^2表示面亮度"
 
-#: src/ui_configurationDialog.h:1507
+#: src/ui_configurationDialog.h:1563
 msgid "Use formatting output for coordinates"
 msgstr "对坐标输出使用格式"
 
-#: src/ui_configurationDialog.h:1508
+#: src/ui_configurationDialog.h:1564
 msgid "Use designations for celestial coordinate systems"
 msgstr "天球坐标系名称用符号表示"
 
-#: src/ui_configurationDialog.h:1509
+#: src/ui_configurationDialog.h:1565
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:193
 msgid "Startup date and time"
 msgstr "启动时的日期及时间"
 
-#: src/ui_configurationDialog.h:1511
+#: src/ui_configurationDialog.h:1567
 msgid "Starts Stellarium at system clock date and time"
 msgstr "以系统设定的时间启动"
 
-#: src/ui_configurationDialog.h:1513
+#: src/ui_configurationDialog.h:1569
 msgid "System date and time"
 msgstr "系统日期及时间"
 
-#: src/ui_configurationDialog.h:1515
+#: src/ui_configurationDialog.h:1571
 msgid ""
 "Sets the simulation time to the next instance of this time of day when "
 "Stellarium starts"
 msgstr "下次打开 Stellarium 时设定此时间为模拟时间"
 
-#: src/ui_configurationDialog.h:1517
+#: src/ui_configurationDialog.h:1573
 msgid "System date at:"
 msgstr "系统日期:"
 
-#: src/ui_configurationDialog.h:1519
+#: src/ui_configurationDialog.h:1575
 msgid "Use a specific date and time when Stellarium starts up"
 msgstr "启动Stellarium时，使用特定时间及日期"
 
-#: src/ui_configurationDialog.h:1521
+#: src/ui_configurationDialog.h:1577
 msgid "Other:"
 msgstr "其他:"
 
-#: src/ui_configurationDialog.h:1523
+#: src/ui_configurationDialog.h:1579
 msgid "Use current local date and time"
 msgstr "使用当前本地日期和时间"
 
-#: src/ui_configurationDialog.h:1525
+#: src/ui_configurationDialog.h:1581
 msgid "use current"
 msgstr "使用现在的设定"
 
-#: src/ui_configurationDialog.h:1527
+#: src/ui_configurationDialog.h:1583
 msgid ""
 "These settings control the way time and date are displayed in the bottom "
 "bar."
 msgstr "这些设置能够改变在底部边栏显示时间与日期的格式。"
 
-#: src/ui_configurationDialog.h:1529
+#: src/ui_configurationDialog.h:1585
 msgid "Display formats of date and time"
 msgstr "显示日期和时间格式"
 
-#: src/ui_configurationDialog.h:1530
+#: src/ui_configurationDialog.h:1586
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:457
 msgid "Date:"
 msgstr "日期："
 
-#: src/ui_configurationDialog.h:1531
+#: src/ui_configurationDialog.h:1587
 msgid "and time:"
 msgstr "和时间："
 
-#: src/ui_configurationDialog.h:1532
+#: src/ui_configurationDialog.h:1588
 msgid "Time correction"
 msgstr "时间校正"
 
-#: src/ui_configurationDialog.h:1535
+#: src/ui_configurationDialog.h:1591
 msgid "Edit equation"
 msgstr "编辑公式"
 
-#: src/ui_configurationDialog.h:1537
+#: src/ui_configurationDialog.h:1593
 msgid "Planetarium options"
 msgstr "天文馆选项"
 
-#: src/ui_configurationDialog.h:1539
+#: src/ui_configurationDialog.h:1595
 msgid "Align labels with the screen center"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1541
+#: src/ui_configurationDialog.h:1597
 msgid "Gravity labels"
 msgstr "重力标签"
 
-#: src/ui_configurationDialog.h:1542
+#: src/ui_configurationDialog.h:1598
 msgid "Dithering"
 msgstr ""
 
-#: src/ui_configurationDialog.h:1544
+#: src/ui_configurationDialog.h:1600
 msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr "球面镜扭曲 (使用 Stellarium 做为低成本星象投影系统的场合)"
 
-#: src/ui_configurationDialog.h:1546
+#: src/ui_configurationDialog.h:1602
 msgid "Spheric mirror distortion"
 msgstr "球面镜扭曲"
 
-#: src/ui_configurationDialog.h:1548
+#: src/ui_configurationDialog.h:1604
 msgid ""
 "Activate to view as seen from surface of the planet (recommended). If "
 "switched off, display planetocentric view."
 msgstr "激活以从行星表面查看（推荐）。 如果关闭，显示平面中心视图。"
 
-#: src/ui_configurationDialog.h:1550
+#: src/ui_configurationDialog.h:1606
 msgid "Topocentric coordinates"
 msgstr "地面坐标"
 
-#: src/ui_configurationDialog.h:1552
+#: src/ui_configurationDialog.h:1608
 msgid "Allow mouse to pan (drag) and zoom (mousewheel)"
 msgstr "使用鼠标移动及缩放画面 (拖拉滚轮)"
 
-#: src/ui_configurationDialog.h:1554
+#: src/ui_configurationDialog.h:1610
 msgid "Enable mouse navigation"
 msgstr "启用鼠标导览"
 
-#: src/ui_configurationDialog.h:1556
+#: src/ui_configurationDialog.h:1612
 msgid ""
 "When enabled, the \"auto zoom out\" key will also set the initial viewing "
 "direction"
 msgstr "启动后，「自动缩小」键亦会将还原观测方向。"
 
-#: src/ui_configurationDialog.h:1558
+#: src/ui_configurationDialog.h:1614
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Auto zoom out returns to initial direction of view"
 msgstr "自动缩小时回到原本的观看方向"
 
-#: src/ui_configurationDialog.h:1560 src/ui_configurationDialog.h:1563
+#: src/ui_configurationDialog.h:1616 src/ui_configurationDialog.h:1619
 msgid "Hide other constellations when you click one"
 msgstr "选中星座后隐藏其他其他星座"
 
-#: src/ui_configurationDialog.h:1567
+#: src/ui_configurationDialog.h:1623
 msgid ""
 "Nutation is a small wobble of Earth's axis, amounting to a few arcseconds."
 msgstr "章动是地球轴的小摆动，相当于几个角秒。"
 
-#: src/ui_configurationDialog.h:1569
+#: src/ui_configurationDialog.h:1625
 msgid "Include nutation"
 msgstr "含章动"
 
-#: src/ui_configurationDialog.h:1571
+#: src/ui_configurationDialog.h:1627
 msgid ""
 "Auto-enable atmosphere when selecting a celestial body in the location "
 "window."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1573
+#: src/ui_configurationDialog.h:1629
 msgid "Auto-enabling for the atmosphere"
 msgstr "自动启用大气"
 
-#: src/ui_configurationDialog.h:1575
+#: src/ui_configurationDialog.h:1631
 msgid "Flash a short message when toggling mount mode."
 msgstr ""
 
-#: src/ui_configurationDialog.h:1577
+#: src/ui_configurationDialog.h:1633
 msgid "Indication for mount mode"
 msgstr "指示安装模式"
 
-#: src/ui_configurationDialog.h:1580
+#: src/ui_configurationDialog.h:1636
 msgid "Use decimal degrees for coordinates"
 msgstr "对坐标使用十进制"
 
-#: src/ui_configurationDialog.h:1582
+#: src/ui_configurationDialog.h:1638
 msgid "Use decimal degrees"
 msgstr "使用十进制"
 
-#: src/ui_configurationDialog.h:1584
+#: src/ui_configurationDialog.h:1640
 msgid "Mask out everything outside a central circle in the main view"
 msgstr "遮去在中间圆形范围以外的星空"
 
-#: src/ui_configurationDialog.h:1586
+#: src/ui_configurationDialog.h:1642
 msgid "Disc viewport"
 msgstr "圆形视角"
 
-#: src/ui_configurationDialog.h:1588
+#: src/ui_configurationDialog.h:1644
 msgid "Hides the mouse cursor when inactive"
 msgstr "静止时隐藏滑鼠指标"
 
-#: src/ui_configurationDialog.h:1590
+#: src/ui_configurationDialog.h:1646
 msgid "Mouse cursor timeout:"
 msgstr "指定时间后隐藏鼠标"
 
-#: src/ui_configurationDialog.h:1592
+#: src/ui_configurationDialog.h:1648
 msgid "seconds"
 msgstr "秒"
 
-#: src/ui_configurationDialog.h:1595
+#: src/ui_configurationDialog.h:1651
 msgid "Activate this option to calculate azimuth from south towards west."
 msgstr "激活此选项计算从南向西的方位角。"
 
-#: src/ui_configurationDialog.h:1597
+#: src/ui_configurationDialog.h:1653
 msgid "Azimuth from South"
 msgstr "从南起算方位角"
 
-#: src/ui_configurationDialog.h:1599
+#: src/ui_configurationDialog.h:1655
 msgid "Automatic change of landscape when planet is changed"
 msgstr "行星改变时自动更改地景"
 
-#: src/ui_configurationDialog.h:1601
+#: src/ui_configurationDialog.h:1657
 msgid "Auto select landscapes"
 msgstr "自动选择地景"
 
-#: src/ui_configurationDialog.h:1603
+#: src/ui_configurationDialog.h:1659
 msgid "Allow keyboard to pan and zoom"
 msgstr "使用键盘移动及缩放画面"
 
-#: src/ui_configurationDialog.h:1605
+#: src/ui_configurationDialog.h:1661
 msgid "Enable keyboard navigation"
 msgstr "开启键盘导览"
 
-#: src/ui_configurationDialog.h:1606
+#: src/ui_configurationDialog.h:1662
 msgid "Screenshots"
 msgstr "屏幕截图"
 
-#: src/ui_configurationDialog.h:1607
+#: src/ui_configurationDialog.h:1663
 msgid "Screenshot Directory"
 msgstr "截图储存资料夹"
 
-#: src/ui_configurationDialog.h:1609
+#: src/ui_configurationDialog.h:1665
 msgid "Invert colors"
 msgstr "反色"
 
-#: src/ui_configurationDialog.h:1612
+#: src/ui_configurationDialog.h:1666
+msgid "Custom size"
+msgstr ""
+
+#: src/ui_configurationDialog.h:1669
 msgid "Close window when script runs"
 msgstr "执行指令时关闭窗口"
 
-#: src/ui_configurationDialog.h:1614
+#: src/ui_configurationDialog.h:1671
 msgid "Run the selected script"
 msgstr "执行选取的指令"
 
-#: src/ui_configurationDialog.h:1618
+#: src/ui_configurationDialog.h:1675
 msgid "Stop a running script"
 msgstr "停止执行中的指令"
 
-#: src/ui_configurationDialog.h:1622
+#: src/ui_configurationDialog.h:1679
 msgid "Load at startup"
 msgstr "启动时加载"
 
-#: src/ui_configurationDialog.h:1623
+#: src/ui_configurationDialog.h:1680
 msgid "configure"
 msgstr "配置"
 
