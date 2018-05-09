@@ -740,12 +740,18 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 
 QString NomenclatureItem::getNameI18n() const
 {
-	return nameI18n;
+	if (getNomenclatureType()==niCrater)
+		return QString("%1 %2").arg(qc_("Crater","landform type"), nameI18n);
+	else
+		return nameI18n;
 }
 
 QString NomenclatureItem::getEnglishName() const
 {
-	return englishName;
+	if (getNomenclatureType()==niCrater)
+		return QString("Crater %1").arg(englishName);
+	else
+		return englishName;
 }
 
 void NomenclatureItem::translateName(const StelTranslator& trans)
@@ -878,6 +884,6 @@ void NomenclatureItem::draw(StelCore* core, StelPainter *painter)
 	{
 		painter->setColor(color[0], color[1], color[2], 1.0);
 		painter->drawCircle(srcPos[0], srcPos[1], 2.f);
-		painter->drawText(srcPos[0], srcPos[1], getNameI18n(), 0, 5.f, 5.f, false);
+		painter->drawText(srcPos[0], srcPos[1], nameI18n, 0, 5.f, 5.f, false);
 	}
 }

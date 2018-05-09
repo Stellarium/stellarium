@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-02 18:49+0700\n"
+"POT-Creation-Date: 2018-05-09 19:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgstr ""
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:293
-#: src/core/modules/NomenclatureItem.cpp:774 src/core/modules/Nebula.cpp:228
+#: src/core/modules/NomenclatureItem.cpp:780 src/core/modules/Nebula.cpp:228
 #: src/core/modules/Nebula.cpp:230 src/core/modules/Planet.cpp:421
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:53 src/core/modules/StarWrapper.cpp:195
@@ -1091,20 +1091,25 @@ msgstr ""
 msgid "Undocumented landform type."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:776
+#: src/core/modules/NomenclatureItem.cpp:744
+msgctxt "landform type"
+msgid "Crater"
+msgstr ""
+
+#: src/core/modules/NomenclatureItem.cpp:782
 msgid "geologic term"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:786
+#: src/core/modules/NomenclatureItem.cpp:792
 msgid "Linear size"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:789
+#: src/core/modules/NomenclatureItem.cpp:795
 msgid "Diameter"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:790 src/core/modules/Planet.cpp:462
+#: src/core/modules/NomenclatureItem.cpp:796 src/core/modules/Planet.cpp:462
 #: src/core/modules/Planet.cpp:487 src/core/modules/MinorPlanet.cpp:273
 #: src/core/modules/MinorPlanet.cpp:296 src/core/modules/Comet.cpp:194
 #: src/gui/StelGuiItems.cpp:748 src/gui/AstroCalcDialog.cpp:4127
@@ -1115,15 +1120,15 @@ msgctxt "distance"
 msgid "km"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:795
+#: src/core/modules/NomenclatureItem.cpp:801
 msgid "Planetographic long./lat."
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:796
+#: src/core/modules/NomenclatureItem.cpp:802
 msgid "Celestial body"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:799
+#: src/core/modules/NomenclatureItem.cpp:805
 msgid "Landform description"
 msgstr ""
 
