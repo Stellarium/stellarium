@@ -741,7 +741,7 @@ float NomenclatureItem::getSelectPriority(const StelCore* core) const
 QString NomenclatureItem::getNameI18n() const
 {
 	if (getNomenclatureType()==niCrater)
-		return QString("%1 %2").arg(qc_("Crater","landform type"), nameI18n);
+		return QString("%1 (%2)").arg(nameI18n, getNomenclatureTypeString());
 	else
 		return nameI18n;
 }
@@ -749,7 +749,7 @@ QString NomenclatureItem::getNameI18n() const
 QString NomenclatureItem::getEnglishName() const
 {
 	if (getNomenclatureType()==niCrater)
-		return QString("Crater %1").arg(englishName);
+		return QString("%1 (%2)").arg(englishName, getNomenclatureTypeLatinString());
 	else
 		return englishName;
 }
@@ -766,10 +766,10 @@ QString NomenclatureItem::getInfoString(const StelCore* core, const InfoStringGr
 
 	if (flags&Name)
 	{
-		oss << "<h2>" << getNameI18n();
+		oss << "<h2>" << nameI18n;
 		// englishName here is the original scientific term, usually latin but could be plain english like "landing site".
-		if (getNameI18n()!=getEnglishName())
-			oss << " (" << getEnglishName() << ")";
+		if (nameI18n!=englishName)
+			oss << " (" << englishName << ")";
 		oss << "</h2>";
 	}
 
