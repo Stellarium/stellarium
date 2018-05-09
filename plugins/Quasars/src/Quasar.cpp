@@ -214,16 +214,14 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
 
-	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;	
-	RCMag rcMag;
-	float size, mag, mlimit, shift=0;
-
 	StelUtils::spheToRect(qRA, qDE, XYZ);
 
 	Vec3d win;
 	// Check visibility of quasar
 	if (!(painter.getProjector()->projectCheck(XYZ, win)))
 		return;
+
+	float size, mag, mlimit, shift=0;
 
 	mlimit = sd->getLimitMagnitude();
 	mag = getVMagnitudeWithExtinction(core);
@@ -248,6 +246,9 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 		}
 		else
 		{
+			Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;
+			RCMag rcMag;
+
 			sd->preDrawPointSource(&painter);
 			sd->computeRCMag(mag, &rcMag);
 			sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), true);
