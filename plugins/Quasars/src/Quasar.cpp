@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2011, 2018 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -46,10 +46,13 @@ Quasar::Quasar(const QVariantMap& map)
 	, designation("")
 	, VMagnitude(21.)
 	, AMagnitude(21.)
-	, bV(0.)
+	, bV(-99.)
 	, qRA(0.)
 	, qDE(0.)
 	, redshift(0.)
+	, f6(-9999.)
+	, f20(-9999.)
+	, sclass("")
 {
 	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DE"))
 	{
@@ -61,10 +64,22 @@ Quasar::Quasar(const QVariantMap& map)
 	designation  = map.value("designation").toString();
 	VMagnitude = map.value("Vmag").toFloat();
 	AMagnitude = map.value("Amag").toFloat();
-	bV = map.value("bV").toFloat();
+	if (map.contains("bV"))
+		bV = map.value("bV").toFloat();
+	else
+		bV = -99.f;
 	qRA = StelUtils::getDecAngle(map.value("RA").toString());
 	qDE = StelUtils::getDecAngle(map.value("DE").toString());
 	redshift = map.value("z").toFloat();
+	if (map.contains("f6"))
+		f6 = map.value("f6").toFloat();
+	else
+		f6 = -9999.f;
+	if (map.contains("f20"))
+		f20 = map.value("f20").toFloat();
+	else
+		f20 = -9999.f;
+	sclass = map.value("sclass").toString();
 
 	initialized = true;
 }
@@ -84,6 +99,9 @@ QVariantMap Quasar::getMap(void) const
 	map["RA"] = qRA;
 	map["DE"] = qDE;	
 	map["z"] = redshift;
+	map["f6"] = f6;
+	map["f20"] = f20;
+	map["sclass"] = sclass;
 
 	return map;
 }
@@ -110,10 +128,10 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(mag, 'f', 2), emag) << "<br />";
 	}
 
-	if (flags&AbsoluteMagnitude && AMagnitude!=0)
-		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(AMagnitude, 0, 'f', 2) << "<br />";
+	if (flags&AbsoluteMagnitude && AMagnitude<21.f)
+		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(QString::number(AMagnitude, 'f', 2)) << "<br />";
 
-	if (flags&Extra)
+	if (flags&Extra && bV>-99.f)
 		oss << QString("%1: <b>%2</b>").arg(q_("Color Index (B-V)"), QString::number(bV, 'f', 2)) << "<br />";
 	
 	// Ra/Dec etc.
@@ -121,8 +139,16 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Extra)
 	{
-		if (redshift>0)
+		if (!sclass.isEmpty())
+			oss <<  QString("%1: %2").arg(q_("Spectral Type"), sclass) << "<br />";
+		// TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
+		QString sfd  = qc_("Jy", "radio flux density");
+		if (redshift>0.f)
 			oss << QString("%1: %2").arg(q_("Redshift")).arg(redshift) << "<br />";
+		if (f6>-9999.f)
+			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 5GHz (6cm)")).arg(QString::number(f6, 'f', 3)).arg(sfd) << "<br />";
+		if (f20>-9999.f)
+			oss << QString("%1: %2 %3").arg(q_("Radio flux density around 1.4GHz (21cm)")).arg(QString::number(f20, 'f', 3)).arg(sfd) << "<br />";
 	}
 
 	postProcessInfoString(str, flags);
@@ -136,6 +162,9 @@ QVariantMap Quasar::getInfoMap(const StelCore *core) const
 	map["amag"] = AMagnitude;
 	map["bV"] = bV;
 	map["redshift"] = redshift;
+	map["f6"] = f6;
+	map["f20"] = f20;
+	map["sclass"] = sclass;
 
 	return map;
 }

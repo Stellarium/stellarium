@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-09 19:25+0700\n"
+"POT-Creation-Date: 2018-05-09 20:44+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1497 plugins/Satellites/src/Satellite.cpp:279
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:102 plugins/Pulsars/src/Pulsar.cpp:182
+#: plugins/Quasars/src/Quasar.cpp:120 plugins/Pulsars/src/Pulsar.cpp:182
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
@@ -1141,7 +1141,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:62
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:2252
 #: src/gui/AstroCalcDialog.cpp:2287 plugins/Supernovae/src/Supernova.cpp:140
-#: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:110
+#: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:128
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Magnitude"
 msgstr ""
@@ -1155,7 +1155,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:286
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
-#: plugins/Quasars/src/Quasar.cpp:108 plugins/Exoplanets/src/Exoplanet.cpp:310
+#: plugins/Quasars/src/Quasar.cpp:126 plugins/Exoplanets/src/Exoplanet.cpp:310
 msgid "extincted to"
 msgstr ""
 
@@ -1165,7 +1165,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:251 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:216
-#: plugins/Quasars/src/Quasar.cpp:117
+#: plugins/Quasars/src/Quasar.cpp:135
 msgid "Color Index (B-V)"
 msgstr ""
 
@@ -1245,7 +1245,7 @@ msgctxt "distance"
 msgid "M ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:371 plugins/Quasars/src/Quasar.cpp:125
+#: src/core/modules/Nebula.cpp:371 plugins/Quasars/src/Quasar.cpp:147
 msgid "Redshift"
 msgstr ""
 
@@ -1550,7 +1550,7 @@ msgstr ""
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1488 plugins/Quasars/src/Quasar.cpp:102
+#: src/core/modules/Nebula.cpp:1488 plugins/Quasars/src/Quasar.cpp:120
 msgid "quasar"
 msgstr ""
 
@@ -1691,7 +1691,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:253
 #: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
-#: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:114
+#: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:132
 msgid "Absolute Magnitude"
 msgstr ""
 
@@ -1961,7 +1961,7 @@ msgstr ""
 msgid "Magnitude range"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:252
+#: src/core/modules/StarWrapper.cpp:252 plugins/Quasars/src/Quasar.cpp:143
 #: plugins/Exoplanets/src/Exoplanet.cpp:320
 msgid "Spectral Type"
 msgstr ""
@@ -14049,9 +14049,9 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:75
 msgid ""
-"A plugin that shows some quasars brighter than 16 visual magnitude. A "
+"A plugin that shows some quasars brighter than 18 visual magnitude. A "
 "catalogue of quasars compiled from 'Quasars and Active Galactic "
-"Nuclei' (13th Ed.) (Veron+ 2010) =2010A&A...518A..10V"
+"Nuclei' (13th Ed.) (Veron+ 2010)"
 msgstr ""
 
 #: plugins/Quasars/src/Quasars.cpp:169
@@ -14062,6 +14062,20 @@ msgstr ""
 msgid "Quasars configuration window"
 msgstr ""
 
+#. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
+#: plugins/Quasars/src/Quasar.cpp:145
+msgctxt "radio flux density"
+msgid "Jy"
+msgstr ""
+
+#: plugins/Quasars/src/Quasar.cpp:149
+msgid "Radio flux density around 5GHz (6cm)"
+msgstr ""
+
+#: plugins/Quasars/src/Quasar.cpp:151
+msgid "Radio flux density around 1.4GHz (21cm)"
+msgstr ""
+
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
 msgid "Quasars Plug-in"
 msgstr ""
@@ -14069,7 +14083,7 @@ msgstr ""
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
-"visual magnitude 16. The catalogue of quasars was compiled from \"Quasars "
+"visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 

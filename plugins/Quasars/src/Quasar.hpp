@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 Alexander Wolf
+ * Copyright (C) 2011, 2018 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -56,6 +56,9 @@ public:
 	//! - RA
 	//! - DE
 	//! - z
+	//! - f6
+	//! - f20
+	//! - sclass
 	QVariantMap getMap(void) const;
 
 	virtual QString getType(void) const
@@ -121,6 +124,9 @@ private:
 	double qRA;			//! R.A. J2000 for the quasar
 	double qDE;			//! Dec. J2000 for the quasar
 	float redshift;			//! Distance to quasar (redshift)
+	float f6;			//! Radio flux density around 5GHz (6cm)
+	float f20;			//! Radio flux density around 1.4GHz (21cm)
+	QString sclass;			//! Spectrum classification
 
 	LinearFader labelsFader;
 };

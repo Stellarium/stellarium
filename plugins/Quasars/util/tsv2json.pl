@@ -3,7 +3,7 @@
 #
 # Tool for generate catalog of quasars
 #
-# Copyright (C) 2012 Alexander Wolf
+# Copyright (C) 2012, 2018 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -29,7 +29,7 @@
 #
 
 $TSV	= "./quasars.tsv";
-$JSON	= "./catalog.json";
+$JSON	= "./quasars.json";
 
 open (TSV, "<$TSV");
 @catalog = <TSV>;
@@ -37,14 +37,14 @@ close TSV;
 
 open (JSON, ">$JSON");
 print JSON "{\n";
-print JSON "\t\"version\": \"0.1.1\",\n";
+print JSON "\t\"version\": \"1\",\n";
 print JSON "\t\"shortName\": \"A catalogue of quasars\",\n";
 print JSON "\t\"quasars\":\n";
 print JSON "\t{\n";
 
 for ($i=0;$i<scalar(@catalog);$i++) {
 	if ($catalog[$i] =~ /^([a-zA-Z0-9]+)/) {
-		($name,$RA,$DE,$z,$Vmag,$bV,$Amag) = split(";", $catalog[$i]);
+		($name,$RA,$DE,$f6,$f20,$z,$sp,$Vmag,$bV,$Amag) = split(";", $catalog[$i]);
 
 		($hour,$min,$sec) = split(" ",$RA);
 		$outRA = $hour."h".$min."m".$sec."s";
@@ -55,7 +55,9 @@ for ($i=0;$i<scalar(@catalog);$i++) {
 		$name =~ s/(\s{2,})//gi;
 		$name =~ s/(\s)$//gi;
 		$z =~ s/(\s+)//gi;
-		$bV =~ s/(\s+)//gi;
+		$f6 =~ s/(\s+)//gi;
+		$f20 =~ s/(\s+)//gi;
+		$sp =~ s/(\s+)//gi;
 		$Amag =~ s/(\s+)//gi;
 		$bV =~ s/(\s+)//gi;
 
@@ -73,9 +75,18 @@ for ($i=0;$i<scalar(@catalog);$i++) {
 			if ($bV ne '') {
 				$out .= ",\n\t\t\t\"bV\": ".$bV;
 			}
+			if ($sp ne '') {
+				$out .= ",\n\t\t\t\"sclass\": \"".$sp."\"";
+			}
+			if ($f6 ne '') {
+				$out .= ",\n\t\t\t\"f6\": ".$f6;
+			}
+			if ($f20 ne '') {
+				$out .= ",\n\t\t\t\"f20\": ".$f20;
+			}
 			$out .= "\n\t\t}";
 
-			if ($i<scalar(@catalog)-1) {
+			if ($i<scalar(@catalog)-2) {
 				$out .= ",";
 			}
 

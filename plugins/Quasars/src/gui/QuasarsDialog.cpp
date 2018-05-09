@@ -1,7 +1,7 @@
 /*
  * Stellarium Quasars Plug-in GUI
  *
- * Copyright (C) 2012 Alexander Wolf
+ * Copyright (C) 2012, 2018 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -125,7 +125,7 @@ void QuasarsDialog::setAboutHtml(void)
 	html += "</table>";
 
 	html += QString("<p>%1 (<a href=\"%2\">%3</a>)</p>")
-			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 16. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
+			.arg(q_("The Quasars plugin provides visualization of some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from \"Quasars and Active Galactic Nuclei\" (13th Ed.)"))
 			.arg("http://adsabs.harvard.edu/abs/2010A%26A...518A..10V")
 			.arg(q_("Veron+ 2010"));
 
