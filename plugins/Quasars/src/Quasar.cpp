@@ -44,14 +44,14 @@ Vec3f Quasar::markerColor = Vec3f(1.0f,0.5f,0.4f);
 Quasar::Quasar(const QVariantMap& map)
 	: initialized(false)
 	, designation("")
-	, VMagnitude(21.)
-	, AMagnitude(21.)
-	, bV(-99.)
+	, VMagnitude(-99.f)
+	, AMagnitude(-99.f)
+	, bV(-99.f)
 	, qRA(0.)
 	, qDE(0.)
-	, redshift(0.)
-	, f6(-9999.)
-	, f20(-9999.)
+	, redshift(0.f)
+	, f6(-9999.f)
+	, f20(-9999.f)
 	, sclass("")
 {
 	if (!map.contains("designation") || !map.contains("RA") || !map.contains("DE"))
@@ -62,8 +62,14 @@ Quasar::Quasar(const QVariantMap& map)
 	}
 
 	designation  = map.value("designation").toString();
-	VMagnitude = map.value("Vmag").toFloat();
-	AMagnitude = map.value("Amag").toFloat();
+	if (map.contains("Vmag"))
+		VMagnitude = map.value("Vmag").toFloat();
+	else
+		VMagnitude = -99.f;
+	if (map.contains("Amag"))
+		AMagnitude = map.value("Amag").toFloat();
+	else
+		AMagnitude = -99.f;
 	if (map.contains("bV"))
 		bV = map.value("bV").toFloat();
 	else
@@ -119,7 +125,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&ObjectType)
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("quasar")) << "<br />";
 
-	if (flags&Magnitude)
+	if (flags&Magnitude && VMagnitude>-99.f)
 	{
 		QString emag = "";
 		if (core->getSkyDrawer()->getFlagHasAtmosphere())
@@ -128,7 +134,7 @@ QString Quasar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(mag, 'f', 2), emag) << "<br />";
 	}
 
-	if (flags&AbsoluteMagnitude && AMagnitude<21.f)
+	if (flags&AbsoluteMagnitude && AMagnitude>-99.f)
 		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(QString::number(AMagnitude, 'f', 2)) << "<br />";
 
 	if (flags&Extra && bV>-99.f)
