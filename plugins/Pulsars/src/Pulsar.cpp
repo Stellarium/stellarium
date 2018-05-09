@@ -425,7 +425,7 @@ void Pulsar::update(double deltaTime)
 void Pulsar::draw(StelCore* core, StelPainter *painter)
 {
 	StelSkyDrawer* sd = core->getSkyDrawer();
-	double mag = getVMagnitudeWithExtinction(core);
+	float mag = getVMagnitudeWithExtinction(core);
 	StelUtils::spheToRect(RA, DE, XYZ);
 
 	Vec3d win;

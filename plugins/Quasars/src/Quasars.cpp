@@ -562,6 +562,7 @@ void Quasars::readSettingsFromConfig(void)
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
 	setDisplayMode(conf->value("distribution_enabled", false).toBool());
+	setFlagUseQuasarMarkers(conf->value("flag_use_markers", false).toBool());
 	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "1.0,0.5,0.4").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowQuasarsButton = conf->value("flag_show_quasars_button", true).toBool();
@@ -578,7 +579,8 @@ void Quasars::saveSettingsToConfig(void)
 	conf->setValue("updates_enabled", updatesEnabled );
 	conf->setValue("distribution_enabled", getDisplayMode());
 	conf->setValue("enable_at_startup", enableAtStartup);
-	conf->setValue("flag_show_quasars_button", flagShowQuasarsButton);
+	conf->setValue("flag_show_quasars_button", getFlagShowQuasarsButton());
+	conf->setValue("flag_use_markers", getFlagUseQuasarMarkers());
 	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor()));
 
 	conf->endGroup();
@@ -708,6 +710,16 @@ bool Quasars::getDisplayMode()
 void Quasars::setDisplayMode(bool b)
 {
 	Quasar::distributionMode=b;
+}
+
+bool Quasars::getFlagUseQuasarMarkers()
+{
+	return Quasar::useMarkers;
+}
+
+void Quasars::setFlagUseQuasarMarkers(bool b)
+{
+	Quasar::useMarkers = b;
 }
 
 Vec3f Quasars::getMarkerColor()

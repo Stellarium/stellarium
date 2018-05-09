@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-09 20:44+0700\n"
+"POT-Creation-Date: 2018-05-10 01:35+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: src/ui_configurationDialog.h:1497 plugins/Satellites/src/Satellite.cpp:279
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
-#: plugins/Quasars/src/Quasar.cpp:120 plugins/Pulsars/src/Pulsar.cpp:182
+#: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:182
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
@@ -395,7 +395,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
 #: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
@@ -1141,7 +1141,7 @@ msgstr ""
 #: src/core/modules/Comet.cpp:178 src/core/modules/StarWrapper.cpp:62
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:2252
 #: src/gui/AstroCalcDialog.cpp:2287 plugins/Supernovae/src/Supernova.cpp:140
-#: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:128
+#: plugins/Novae/src/Nova.cpp:155 plugins/Quasars/src/Quasar.cpp:136
 #: plugins/Exoplanets/src/Exoplanet.cpp:312
 msgid "Magnitude"
 msgstr ""
@@ -1155,7 +1155,7 @@ msgstr ""
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:206
 #: plugins/Satellites/src/Satellite.cpp:286
 #: plugins/Supernovae/src/Supernova.cpp:138 plugins/Novae/src/Nova.cpp:153
-#: plugins/Quasars/src/Quasar.cpp:126 plugins/Exoplanets/src/Exoplanet.cpp:310
+#: plugins/Quasars/src/Quasar.cpp:134 plugins/Exoplanets/src/Exoplanet.cpp:310
 msgid "extincted to"
 msgstr ""
 
@@ -1165,7 +1165,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:251 src/core/modules/MinorPlanet.cpp:262
 #: src/core/modules/StarWrapper.cpp:66 src/core/modules/StarWrapper.cpp:216
-#: plugins/Quasars/src/Quasar.cpp:135
+#: plugins/Quasars/src/Quasar.cpp:143
 msgid "Color Index (B-V)"
 msgstr ""
 
@@ -1245,7 +1245,7 @@ msgctxt "distance"
 msgid "M ly"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:371 plugins/Quasars/src/Quasar.cpp:147
+#: src/core/modules/Nebula.cpp:371 plugins/Quasars/src/Quasar.cpp:155
 msgid "Redshift"
 msgstr ""
 
@@ -1550,7 +1550,7 @@ msgstr ""
 msgid "interacting galaxy"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:1488 plugins/Quasars/src/Quasar.cpp:120
+#: src/core/modules/Nebula.cpp:1488 plugins/Quasars/src/Quasar.cpp:128
 msgid "quasar"
 msgstr ""
 
@@ -1691,7 +1691,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:434 src/core/modules/MinorPlanet.cpp:253
 #: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
-#: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:132
+#: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:140
 msgid "Absolute Magnitude"
 msgstr ""
 
@@ -1961,7 +1961,7 @@ msgstr ""
 msgid "Magnitude range"
 msgstr ""
 
-#: src/core/modules/StarWrapper.cpp:252 plugins/Quasars/src/Quasar.cpp:143
+#: src/core/modules/StarWrapper.cpp:252 plugins/Quasars/src/Quasar.cpp:151
 #: plugins/Exoplanets/src/Exoplanet.cpp:320
 msgid "Spectral Type"
 msgstr ""
@@ -2860,7 +2860,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
 #: plugins/Novae/src/gui/NovaeDialog.cpp:118
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:122
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
@@ -2883,7 +2883,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 #: plugins/Novae/src/gui/NovaeDialog.cpp:119
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
@@ -10269,7 +10269,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
 #: plugins/Novae/src/gui/NovaeDialog.cpp:136
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:167
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:131
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
@@ -10290,7 +10290,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
 #: plugins/Novae/src/gui/NovaeDialog.cpp:137
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:140
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
@@ -10314,7 +10314,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
 #: plugins/Novae/src/gui/NovaeDialog.cpp:140
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:143
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:171
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
@@ -10336,7 +10336,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
 #: plugins/Novae/src/gui/NovaeDialog.cpp:142
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:145
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:173
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:139
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:213
@@ -10358,7 +10358,7 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:109
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:141
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:147
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:175
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
@@ -10422,8 +10422,8 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:778
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:238
 #: plugins/Novae/src/ui_novaeDialog.h:241
-#: plugins/Quasars/src/ui_quasarsDialog.h:278
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:343
+#: plugins/Quasars/src/ui_quasarsDialog.h:308
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:349
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:250
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:501
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:558
@@ -10441,8 +10441,8 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:241
 #: plugins/NavStars/src/ui_navStarsWindow.h:222
 #: plugins/Novae/src/ui_novaeDialog.h:244
-#: plugins/Quasars/src/ui_quasarsDialog.h:281
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:346
+#: plugins/Quasars/src/ui_quasarsDialog.h:311
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:352
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:261
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:581
@@ -11640,7 +11640,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:526
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
 #: plugins/Novae/src/gui/NovaeDialog.cpp:164
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:195
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
 msgid "Internet updates disabled"
@@ -11652,8 +11652,8 @@ msgstr ""
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:216
 #: plugins/Novae/src/gui/NovaeDialog.cpp:166
 #: plugins/Novae/src/gui/NovaeDialog.cpp:209
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:163
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:224
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:236
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:275
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
@@ -11664,7 +11664,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:533
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:199
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:335
 msgid "Next update: < 1 minute"
@@ -11673,7 +11673,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:537
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:179
 #: plugins/Novae/src/gui/NovaeDialog.cpp:172
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:203
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:339
 #, qt-format, qt-plural-format
@@ -11685,7 +11685,7 @@ msgstr[1] ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:542
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:184
 #: plugins/Novae/src/gui/NovaeDialog.cpp:177
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:174
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:180
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
 #, qt-format, qt-plural-format
@@ -11697,7 +11697,7 @@ msgstr[1] ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:553
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
 #: plugins/Novae/src/gui/NovaeDialog.cpp:212
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:227
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:278
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:410
 msgid "Update error"
@@ -11723,8 +11723,8 @@ msgstr ""
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
 #: plugins/Novae/src/gui/NovaeDialog.cpp:198
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:195
-#: plugins/Quasars/src/ui_quasarsDialog.h:270
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:201
+#: plugins/Quasars/src/ui_quasarsDialog.h:295
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:229
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:331
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
@@ -11736,7 +11736,7 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
 #: plugins/Novae/src/gui/NovaeDialog.cpp:200
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:197
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:203
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
 msgid "Update from files"
@@ -11833,7 +11833,7 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:748
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
 #: plugins/Novae/src/ui_novaeDialog.h:237
-#: plugins/Quasars/src/ui_quasarsDialog.h:267
+#: plugins/Quasars/src/ui_quasarsDialog.h:292
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:328
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:529
 msgid "Last update:"
@@ -11897,8 +11897,8 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:779
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
 #: plugins/Novae/src/ui_novaeDialog.h:242
-#: plugins/Quasars/src/ui_quasarsDialog.h:279
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:344
+#: plugins/Quasars/src/ui_quasarsDialog.h:309
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:350
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:251
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:502
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
@@ -11909,8 +11909,8 @@ msgstr ""
 #: plugins/Satellites/src/ui_satellitesDialog.h:780
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:280
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:345
+#: plugins/Quasars/src/ui_quasarsDialog.h:310
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:351
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
 #: plugins/Observability/src/ui_ObservabilityDialog.h:359
 msgid "Settings"
@@ -13843,7 +13843,7 @@ msgstr ""
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:189
 #: plugins/Novae/src/gui/NovaeDialog.cpp:182
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:179
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:213
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
@@ -13865,14 +13865,14 @@ msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:232
 #: plugins/Novae/src/ui_novaeDialog.h:235
-#: plugins/Quasars/src/ui_quasarsDialog.h:265
+#: plugins/Quasars/src/ui_quasarsDialog.h:290
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:326
 msgid "Update catalog from Internet"
 msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:233
 #: plugins/Novae/src/ui_novaeDialog.h:236
-#: plugins/Quasars/src/ui_quasarsDialog.h:266
+#: plugins/Quasars/src/ui_quasarsDialog.h:291
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:327
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:528
 msgid "Update from Internet sources"
@@ -13880,14 +13880,14 @@ msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:235
 #: plugins/Novae/src/ui_novaeDialog.h:238
-#: plugins/Quasars/src/ui_quasarsDialog.h:268
+#: plugins/Quasars/src/ui_quasarsDialog.h:293
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:329
 msgid "Update frequency (days):"
 msgstr ""
 
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:236
 #: plugins/Novae/src/ui_novaeDialog.h:239
-#: plugins/Quasars/src/ui_quasarsDialog.h:269
+#: plugins/Quasars/src/ui_quasarsDialog.h:294
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:330
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:531
 msgid "[next update info]"
@@ -13974,7 +13974,7 @@ msgid "Note:"
 msgstr ""
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:218
-#: plugins/Quasars/src/ui_quasarsDialog.h:276
+#: plugins/Quasars/src/ui_quasarsDialog.h:301
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:337
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:547
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:239
@@ -14063,65 +14063,77 @@ msgid "Quasars configuration window"
 msgstr ""
 
 #. TRANSLATORS: Jy is Jansky(10-26W/m2/Hz)
-#: plugins/Quasars/src/Quasar.cpp:145
+#: plugins/Quasars/src/Quasar.cpp:153
 msgctxt "radio flux density"
 msgid "Jy"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:149
+#: plugins/Quasars/src/Quasar.cpp:157
 msgid "Radio flux density around 5GHz (6cm)"
 msgstr ""
 
-#: plugins/Quasars/src/Quasar.cpp:151
+#: plugins/Quasars/src/Quasar.cpp:159
 msgid "Radio flux density around 1.4GHz (21cm)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:121
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 msgid "Quasars Plug-in"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 msgid "Veron+ 2010"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:132
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:234
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:246
 msgid "Quasars is updated"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:262
+#: plugins/Quasars/src/ui_quasarsDialog.h:287
 msgid "Quasars Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:263
+#: plugins/Quasars/src/ui_quasarsDialog.h:288
 msgid "Quasars Plug-in Configuration"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:271
+#: plugins/Quasars/src/ui_quasarsDialog.h:296
 msgid "Settings for quasars"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:273
+#: plugins/Quasars/src/ui_quasarsDialog.h:298
 msgid "Plot all quasars without labels"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:275
+#: plugins/Quasars/src/ui_quasarsDialog.h:300
 msgid "Enable display of distribution for quasars"
 msgstr ""
 
-#: plugins/Quasars/src/ui_quasarsDialog.h:277
+#: plugins/Quasars/src/ui_quasarsDialog.h:302
 msgid "Show quasars button on toolbar"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:303
+msgid "Use markers for quasars"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:304
+msgid "Quasars marker color"
+msgstr ""
+
+#: plugins/Quasars/src/ui_quasarsDialog.h:306
+msgid "Color of markers for quasars"
 msgstr ""
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
@@ -14246,7 +14258,7 @@ msgstr ""
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:278
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:342
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:348
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr ""
@@ -14361,11 +14373,19 @@ msgstr ""
 msgid "Pulsars marker color"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:340
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:341
+msgid "Color of markers for pulsars"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
 msgstr ""
 
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:341
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:345
+msgid "Color of markers for pulsars with glitches"
+msgstr ""
+
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
 msgstr ""
 

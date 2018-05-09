@@ -295,6 +295,31 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QCheckBox" name="displayUseQuasarMarkersButton">
+            <property name="text">
+             <string>Use markers for quasars</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Quasars marker color</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="quasarMarkerColor">
+              <property name="toolTip">
+               <string>Color of markers for quasars</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
          </layout>
         </widget>
        </item>

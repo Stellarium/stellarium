@@ -39,10 +39,12 @@ const QString Quasar::QUASAR_TYPE = QStringLiteral("Quasar");
 StelTextureSP Quasar::markerTexture;
 
 bool Quasar::distributionMode = false;
+bool Quasar::useMarkers = false;
 Vec3f Quasar::markerColor = Vec3f(1.0f,0.5f,0.4f);
 
 Quasar::Quasar(const QVariantMap& map)
 	: initialized(false)
+	, shiftVisibility(3.f) // increase magnitude for better visibility markers of quasars (sync with DSO)
 	, designation("")
 	, VMagnitude(-99.f)
 	, AMagnitude(-99.f)
@@ -194,8 +196,12 @@ double Quasar::getAngularSize(const StelCore*) const
 float Quasar::getSelectPriority(const StelCore* core) const
 {
 	float mag = getVMagnitudeWithExtinction(core);
+	if (useMarkers)
+		mag -= shiftVisibility;
+
 	if (distributionMode)
 		mag = 4.f;
+
 	return mag;
 }
 
@@ -210,47 +216,58 @@ void Quasar::draw(StelCore* core, StelPainter& painter)
 
 	Vec3f color = sd->indexToColor(BvToColorIndex(bV))*0.75f;	
 	RCMag rcMag;
-	float size, shift=0;
-	double mag;
+	float size, mag, mlimit, shift=0;
 
 	StelUtils::spheToRect(qRA, qDE, XYZ);
-	mag = getVMagnitudeWithExtinction(core);	
+
+	Vec3d win;
+	// Check visibility of quasar
+	if (!(painter.getProjector()->projectCheck(XYZ, win)))
+		return;
+
+	mlimit = sd->getLimitMagnitude();
+	mag = getVMagnitudeWithExtinction(core);
+	if (useMarkers)
+		mag -= shiftVisibility;
 
 	if (distributionMode)
-	{
-		painter.setBlending(true, GL_ONE, GL_ONE);
-		painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
+		mag = 3.f;
 
-		Quasar::markerTexture->bind();
-		//size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
-		if (labelsFader.getInterstate()<=0.f)
-		{
-			painter.drawSprite2dMode(XYZ, 4);			
-		}
-	}
-	else
+	if (mag <= mlimit)
 	{
-		sd->preDrawPointSource(&painter);
-	
-		if (mag <= sd->getLimitMagnitude())
+		if (distributionMode || useMarkers)
 		{
+			painter.setBlending(true, GL_ONE, GL_ONE);
+			painter.setColor(markerColor[0], markerColor[1], markerColor[2], 1);
+
+			Quasar::markerTexture->bind();
+			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
+			shift = 5.f + size/1.6f;
+
+			painter.drawSprite2dMode(XYZ, distributionMode ? 4.f : 5.f);
+		}
+		else
+		{
+			sd->preDrawPointSource(&painter);
 			sd->computeRCMag(mag, &rcMag);
 			sd->drawPointSource(&painter, Vec3f(XYZ[0],XYZ[1],XYZ[2]), rcMag, sd->indexToColor(BvToColorIndex(bV)), true);
 			painter.setColor(color[0], color[1], color[2], 1);
 			size = getAngularSize(Q_NULLPTR)*M_PI/180.*painter.getProjector()->getPixelPerRadAtCenter();
 			shift = 6.f + size/1.8f;
-			if (labelsFader.getInterstate()<=0.f)
-			{
-				painter.drawText(XYZ, designation, 0, shift, shift, false);
-			}
+			sd->postDrawPointSource(&painter);
 		}
 
-		sd->postDrawPointSource(&painter);
+		if (labelsFader.getInterstate()<=0.f && !distributionMode && (mag+2.f)<mlimit)
+		{
+			painter.drawText(XYZ, designation, 0, shift, shift, false);
+		}
 	}
 }
 
 unsigned char Quasar::BvToColorIndex(float b_v)
 {
+	if (b_v<-98.f)
+		b_v = 0.f;
 	double dBV = b_v;
 	dBV *= 1000.0;
 	if (dBV < -500)

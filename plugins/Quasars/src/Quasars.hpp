@@ -195,6 +195,13 @@ public slots:
 	//! @return true if it's visible
 	bool getFlagShowQuasars(void) { return flagShowQuasars; }
 
+	//! Enable/disable usage of markers for quasars
+	//! @param b boolean flag
+	void setFlagUseQuasarMarkers(bool b);
+	//! Get status usage of markers for quasars
+	//! @return true if markers are used
+	bool getFlagUseQuasarMarkers(void);
+
 	//! Define whether the button toggling quasars should be visible
 	void setFlagShowQuasarsButton(bool b);
 	bool getFlagShowQuasarsButton(void) { return flagShowQuasarsButton; }

@@ -103,12 +103,14 @@ public:
 
 private:
 	bool initialized;
+	float shiftVisibility;
 
 	Vec3d XYZ;                         // holds J2000 position
 
 	static StelTextureSP hintTexture;
 	static StelTextureSP markerTexture;
 	static bool distributionMode;
+	static bool useMarkers;
 	static Vec3f markerColor;
 
 	void draw(StelCore* core, StelPainter& painter);

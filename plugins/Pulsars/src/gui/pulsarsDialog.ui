@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>531</width>
-    <height>459</height>
+    <width>639</width>
+    <height>490</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -302,7 +302,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="pulsarMarkerColor"/>
+             <widget class="QToolButton" name="pulsarMarkerColor">
+              <property name="toolTip">
+               <string>Color of markers for pulsars</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -316,7 +320,11 @@
              </widget>
             </item>
             <item>
-             <widget class="QToolButton" name="pulsarGlitchesMarkerColor"/>
+             <widget class="QToolButton" name="pulsarGlitchesMarkerColor">
+              <property name="toolTip">
+               <string>Color of markers for pulsars with glitches</string>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>

@@ -23,6 +23,7 @@
 #include <QDateTime>
 #include <QUrl>
 #include <QFileDialog>
+#include <QColorDialog>
 
 #include "StelApp.hpp"
 #include "ui_quasarsDialog.h"
@@ -82,6 +83,8 @@ void QuasarsDialog::createDialogContent()
 	connect(ui->displayAtStartupCheckBox, SIGNAL(stateChanged(int)), this, SLOT(setDisplayAtStartupEnabled(int)));
 	ui->displayShowQuasarsButton->setChecked(qsr->getFlagShowQuasarsButton());
 	connect(ui->displayShowQuasarsButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayShowQuasarsButton(int)));
+	ui->displayUseQuasarMarkersButton->setChecked(qsr->getFlagUseQuasarMarkers());
+	connect(ui->displayUseQuasarMarkersButton, SIGNAL(stateChanged(int)), this, SLOT(setDisplayUseQuasarMarkersButton(int)));
 	connect(ui->internetUpdatesCheckbox, SIGNAL(stateChanged(int)), this, SLOT(setUpdatesEnabled(int)));
 	connect(ui->updateButton, SIGNAL(clicked()), this, SLOT(updateJSON()));
 	connect(qsr, SIGNAL(updateStateChanged(Quasars::UpdateState)), this, SLOT(updateStateReceiver(Quasars::UpdateState)));
@@ -91,6 +94,9 @@ void QuasarsDialog::createDialogContent()
 	refreshUpdateValues(); // fetch values for last updated and so on
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
+
+	colorButton(ui->quasarMarkerColor, qsr->getMarkerColor());
+	connect(ui->quasarMarkerColor,	SIGNAL(released()), this, SLOT(askQuasarsMarkerColor()));
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -217,6 +223,12 @@ void QuasarsDialog::setDisplayShowQuasarsButton(int checkState)
 	qsr->setFlagShowQuasarsButton(b);
 }
 
+void QuasarsDialog::setDisplayUseQuasarMarkersButton(int checkState)
+{
+	bool b = checkState != Qt::Unchecked;
+	qsr->setFlagUseQuasarMarkers(b);
+}
+
 void QuasarsDialog::updateStateReceiver(Quasars::UpdateState state)
 {
 	//qDebug() << "QuasarsDialog::updateStateReceiver got a signal";
@@ -264,4 +276,27 @@ void QuasarsDialog::updateJSON(void)
 	{
 		qsr->updateJSON();
 	}
+}
+
+void QuasarsDialog::askQuasarsMarkerColor()
+{
+	Vec3f vColor = qsr->getMarkerColor();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->quasarMarkerColor->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		qsr->setMarkerColor(vColor);
+		ui->quasarMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void QuasarsDialog::colorButton(QToolButton* toolButton, Vec3f vColor)
+{
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	// Use style sheet for create a nice buttons :)
+	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
+	toolButton->setFixedSize(QSize(18, 18));
 }

@@ -28,6 +28,7 @@
 class Ui_quasarsDialog;
 class QTimer;
 class Quasars;
+class QToolButton;
 
 //! @ingroup quasars
 class QuasarsDialog : public StelDialog
@@ -50,6 +51,7 @@ private slots:
 	void setUpdateValues(int days);
 	void setUpdatesEnabled(int checkState);
 	void setDistributionEnabled(int checkState);
+	void setDisplayUseQuasarMarkersButton(int checkState);
 	void setDisplayAtStartupEnabled(int checkState);
 	void setDisplayShowQuasarsButton(int checkState);
 	void updateStateReceiver(Quasars::UpdateState state);
@@ -58,11 +60,14 @@ private slots:
 	void saveSettings(void);
 	void updateJSON(void);
 
+	void askQuasarsMarkerColor();
+
 private:
 	Ui_quasarsDialog* ui;
 	Quasars* qsr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
+	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
 
 };
