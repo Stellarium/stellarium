@@ -150,6 +150,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	QString str;
 	QTextStream oss(&str);
 	double az_app, alt_app;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
 	Q_UNUSED(az_app);
 
@@ -286,13 +287,25 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	oss << getCommonInfoString(core, flags);
 
-	if (majorAxisSize>0 && flags&Size)
+	if (flags&Size && majorAxisSize>0.f)
 	{
-		if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
-			oss << QString("%1: %2").arg(q_("Size"), StelUtils::radToDmsPStr(majorAxisSize*M_PI/180., 2)) << "<br />";
+		QString majorAxS, minorAxS, sizeAx = q_("Size");
+		if (withDecimalDegree)
+		{
+			majorAxS = StelUtils::radToDecDegStr(majorAxisSize*M_PI/180., 5, false, true);
+			minorAxS = StelUtils::radToDecDegStr(minorAxisSize*M_PI/180., 5, false, true);
+		}
 		else
 		{
-			oss << QString("%1: %2 x %3").arg(q_("Size"), StelUtils::radToDmsPStr(majorAxisSize*M_PI/180., 2), StelUtils::radToDmsPStr(minorAxisSize*M_PI/180., 2)) << "<br />";
+			majorAxS = StelUtils::radToDmsPStr(majorAxisSize*M_PI/180., 2);
+			minorAxS = StelUtils::radToDmsPStr(minorAxisSize*M_PI/180., 2);
+		}
+
+		if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
+			oss << QString("%1: %2").arg(sizeAx, majorAxS) << "<br />";
+		else
+		{
+			oss << QString("%1: %2 x %3").arg(sizeAx, majorAxS, minorAxS) << "<br />";
 			if (orientationAngle>0)
 				oss << QString("%1: %2%3").arg(q_("Orientation angle")).arg(orientationAngle).arg(QChar(0x00B0)) << "<br />";
 		}

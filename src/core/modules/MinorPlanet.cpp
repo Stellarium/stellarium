@@ -331,8 +331,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 			QString sizeOrig, sizeScaled;
 			if (withDecimalDegree)
 			{
-				sizeOrig   = StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true);
-				sizeScaled = StelUtils::radToDecDegStr(angularSize,5,false,true);
+				sizeOrig   = StelUtils::radToDecDegStr(angularSize / sphereScale, 5, false, true);
+				sizeScaled = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 			}
 			else
 			{
@@ -345,7 +345,7 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		else
 		{
 			if (withDecimalDegree)
-				sizeStr = StelUtils::radToDecDegStr(angularSize,5,false,true);
+				sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 			else
 				sizeStr = StelUtils::radToDmsPStr(angularSize, 2);
 		}

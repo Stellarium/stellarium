@@ -526,8 +526,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			double withoutRings = 2.*getSpheroidAngularSize(core)*M_PI/180.;
 			if (withDecimalDegree)
 			{
-				s1 = StelUtils::radToDecDegStr(withoutRings,4,false,true);
-				s2 = StelUtils::radToDecDegStr(angularSize,4,false,true);
+				s1 = StelUtils::radToDecDegStr(withoutRings, 5, false, true);
+				s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 			}
 			else
 			{
@@ -543,8 +543,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			{
 				if (withDecimalDegree)
 				{
-					s1 = StelUtils::radToDecDegStr(angularSize / sphereScale,5,false,true);
-					s2 = StelUtils::radToDecDegStr(angularSize,5,false,true);
+					s1 = StelUtils::radToDecDegStr(angularSize / sphereScale, 5, false, true);
+					s2 = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 				}
 				else
 				{
@@ -557,7 +557,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			else
 			{
 				if (withDecimalDegree)
-					sizeStr = StelUtils::radToDecDegStr(angularSize,5,false,true);
+					sizeStr = StelUtils::radToDecDegStr(angularSize, 5, false, true);
 				else
 					sizeStr = StelUtils::radToDmsPStr(angularSize, 2);
 			}

@@ -630,7 +630,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		deg *= -1;
 	map.insert("size", angularSize);
 	map.insert("size-dd", deg);
-	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 6));
+	map.insert("size-deg", StelUtils::radToDecDegStr(angularSize, 5));
 	map.insert("size-dms", StelUtils::radToDmsPStr(angularSize, 2));
 
 	// english name or designation & localized name
