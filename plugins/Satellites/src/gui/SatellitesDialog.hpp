@@ -113,6 +113,8 @@ private slots:
 	void selectCurrentIridiumFlare(const QModelIndex &modelIndex);
 	void savePredictedIridiumFlares();
 
+	void setFlagRealisticMode(bool state);
+
 private:
 	//! @todo find out if this is really necessary... --BM
 	void enableSatelliteDataForm(bool enabled);

@@ -151,7 +151,9 @@ void SatellitesDialog::createDialogContent()
 
 	// Settings tab / realistic mode group
 	connect(ui->realisticGroup, SIGNAL(clicked(bool)),
-		plugin, SLOT(setFlagRelisticMode(bool)));
+		this, SLOT(setFlagRealisticMode(bool)));
+	connect(ui->hideInvisibleSatellites, SIGNAL(clicked(bool)),
+		plugin, SLOT(setFlagHideInvisibleSatellites(bool)));
 
 	// Settings tab - populate all values
 	updateSettingsPage();
@@ -236,6 +238,11 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->predictIridiumFlaresPushButton, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
 	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
+}
+
+void SatellitesDialog::setFlagRealisticMode(bool state)
+{
+	GETSTELMODULE(Satellites)->setFlagRelisticMode(!state);
 }
 
 void SatellitesDialog::savePredictedIridiumFlares()
@@ -698,7 +705,8 @@ void SatellitesDialog::updateSettingsPage()
 	ui->orbitFadeSpin->setValue(Satellite::orbitLineFadeSegments);
 	ui->orbitDurationSpin->setValue(Satellite::orbitLineSegmentDuration);
 
-	ui->realisticGroup->setChecked(plugin->getFlagRealisticMode());
+	ui->realisticGroup->setChecked(!plugin->getFlagRealisticMode());
+	ui->hideInvisibleSatellites->setChecked(plugin->getFlagHideInvisibleSatellites());
 }
 
 void SatellitesDialog::populateFilterMenu()

@@ -691,6 +691,7 @@ void Satellites::loadSettings()
 
 	// realistic mode
 	setFlagRelisticMode(conf->value("realistic_mode_enabled", true).toBool());
+	setFlagHideInvisibleSatellites(conf->value("hide_invisible_satellites", false).toBool());
 
 	conf->endGroup();
 }
@@ -720,6 +721,7 @@ void Satellites::saveSettings()
 
 	// realistic mode
 	conf->setValue("realistic_mode_enabled", getFlagRealisticMode());
+	conf->setValue("hide_invisible_satellites", getFlagHideInvisibleSatellites());
 
 	conf->endGroup();
 	
@@ -1129,11 +1131,25 @@ bool Satellites::getFlagRealisticMode() const
 	return Satellite::realisticModeFlag;
 }
 
+bool Satellites::getFlagHideInvisibleSatellites() const
+{
+	return Satellite::hideInvisibleSatellitesFlag;
+}
+
 void Satellites::setFlagRelisticMode(bool b)
 {
 	if (Satellite::realisticModeFlag != b)
 	{
 		Satellite::realisticModeFlag = b;
+		emit settingsChanged();
+	}
+}
+
+void Satellites::setFlagHideInvisibleSatellites(bool b)
+{
+	if (Satellite::hideInvisibleSatellitesFlag != b)
+	{
+		Satellite::hideInvisibleSatellitesFlag = b;
 		emit settingsChanged();
 	}
 }

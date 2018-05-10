@@ -367,6 +367,7 @@ public:
 	int getLabelFontSize() const {return labelFont.pixelSize();}
 	bool getFlagLabels() const;
 	bool getFlagRealisticMode() const;
+	bool getFlagHideInvisibleSatellites() const;
 	//! Get the current status of the orbit line rendering flag.
 	bool getOrbitLinesFlag() const;
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
@@ -426,6 +427,8 @@ public slots:
 
 	//! Emits settingsChanged() if the value changes.
 	void setFlagRelisticMode(bool b);
+
+	void setFlagHideInvisibleSatellites(bool b);
 	
 	//! set the label font size.
 	//! @param size the pixel size of the font

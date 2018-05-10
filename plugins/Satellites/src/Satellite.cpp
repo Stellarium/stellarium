@@ -61,6 +61,7 @@ int Satellite::orbitLineFadeSegments = 4;
 int Satellite::orbitLineSegmentDuration = 20;
 bool Satellite::orbitLinesFlag = true;
 bool Satellite::realisticModeFlag = false;
+bool Satellite::hideInvisibleSatellitesFlag = false;
 Vec3f Satellite::invisibleSatelliteColor = Vec3f(0.2f,0.2f,0.2f);
 
 double Satellite::timeRateLimit = 1.0; // one JD per second by default
@@ -930,13 +931,20 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		}
 		else
 		{
-			if (Satellite::showLabels)
-				painter.drawText(XYZ, name, 0, 10, 10, false);
+			bool visible = true;
+			if (Satellite::hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE)
+				visible = false;
 
-			painter.setBlending(true, GL_ONE, GL_ONE);
+			if (visible)
+			{
+				if (Satellite::showLabels)
+					painter.drawText(XYZ, name, 0, 10, 10, false);
 
-			Satellite::hintTexture->bind();
-			painter.drawSprite2dMode(XYZ, 11);
+				painter.setBlending(true, GL_ONE, GL_ONE);
+
+				Satellite::hintTexture->bind();
+				painter.drawSprite2dMode(XYZ, 11);
+			}
 		}
 	}
 

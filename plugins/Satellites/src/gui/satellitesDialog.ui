@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>582</width>
-    <height>505</height>
+    <width>530</width>
+    <height>417</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -375,16 +375,6 @@
           <property name="bottomMargin">
            <number>0</number>
           </property>
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_5">
-            <property name="toolTip">
-             <string>Number of segments used to draw the line</string>
-            </property>
-            <property name="text">
-             <string>Number of  segments:</string>
-            </property>
-           </widget>
-          </item>
           <item row="0" column="1">
            <widget class="QSpinBox" name="orbitSegmentsSpin">
             <property name="toolTip">
@@ -398,16 +388,6 @@
             </property>
             <property name="value">
              <number>60</number>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="2">
-           <widget class="QLabel" name="label_8">
-            <property name="toolTip">
-             <string>Duration of a single segment in seconds</string>
-            </property>
-            <property name="text">
-             <string extracomment="TRANSLATORS: = &quot;duration&quot;. 's' means seconds">Segment length (s):</string>
             </property>
            </widget>
           </item>
@@ -427,7 +407,37 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_5">
+            <property name="toolTip">
+             <string>Number of segments used to draw the line</string>
+            </property>
+            <property name="text">
+             <string>Number of  segments:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="4">
+           <widget class="QLabel" name="label_6">
+            <property name="toolTip">
+             <string>Number of segments used to draw each end of the line</string>
+            </property>
+            <property name="text">
+             <string>Fade length:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <widget class="QLabel" name="label_8">
+            <property name="toolTip">
+             <string>Duration of a single segment in seconds</string>
+            </property>
+            <property name="text">
+             <string extracomment="TRANSLATORS: = &quot;duration&quot;. 's' means seconds">Segment length (s):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="5">
            <widget class="QSpinBox" name="orbitFadeSpin">
             <property name="toolTip">
              <string>Number of segments used to draw each end of the line</string>
@@ -440,29 +450,13 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_6">
-            <property name="toolTip">
-             <string>Number of segments used to draw each end of the line</string>
-            </property>
-            <property name="text">
-             <string>Fade length:</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
        <item>
         <widget class="QGroupBox" name="realisticGroup">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>43</height>
-          </size>
-         </property>
          <property name="title">
-          <string>Realistic mode for the artificial satellites</string>
+          <string>Show artificial satellites as markers</string>
          </property>
          <property name="checkable">
           <bool>true</bool>
@@ -470,6 +464,27 @@
          <property name="checked">
           <bool>false</bool>
          </property>
+         <layout class="QGridLayout" name="gridLayout_4">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QCheckBox" name="hideInvisibleSatellites">
+            <property name="text">
+             <string>Hide invisible artificial satellites</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </widget>
        </item>
        <item>
@@ -1001,7 +1016,6 @@
   <tabstop>orbitLinesGroup</tabstop>
   <tabstop>orbitSegmentsSpin</tabstop>
   <tabstop>orbitDurationSpin</tabstop>
-  <tabstop>orbitFadeSpin</tabstop>
   <tabstop>restoreDefaultsButton</tabstop>
   <tabstop>saveSettingsButton</tabstop>
   <tabstop>groupFilterCombo</tabstop>
