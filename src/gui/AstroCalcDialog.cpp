@@ -2968,7 +2968,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		if (occultation)
 			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
 		else
-			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 	}
 }
 
@@ -3140,7 +3140,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		if (occultation)
 			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
 		else
-			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 	}
 }
 
@@ -3304,7 +3304,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		if (occultation)
 			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
 		else
-			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation));
+			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 	}
 }
 

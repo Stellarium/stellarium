@@ -111,10 +111,16 @@ namespace StelUtils
 	QString radToDmsStrAdapt(const double angle, const bool useD=false);
 
 	//! Convert an angle in radian to a dms formatted string.
-	//! @param angle input angle in radian
-	//! @param useD Define if letter "d" must be used instead of deg sign
+	//! @param angle input angle in radian	
 	//! @param decimal output decimal second value
+	//! @param useD Define if letter "d" must be used instead of deg sign
 	QString radToDmsStr(const double angle, const bool decimal=false, const bool useD=false);
+
+	//! Convert an angle in radian to a dms formatted string.
+	//! @param angle input angle in radian
+	//! @param precision
+	//! @param useD Define if letter "d" must be used instead of deg sign
+	QString radToDmsPStr(const double angle, const int precision = 0, const bool useD=false);
 
 	//! Convert an angle in decimal degree to +-dms format.
 	//! @param angle input angle in decimal degree

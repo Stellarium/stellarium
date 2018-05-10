@@ -434,6 +434,34 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	return str;
 }
 
+/*************************************************************************
+ Convert an angle in radian to a dms formatted string
+*************************************************************************/
+QString radToDmsPStr(const double angle, const int precision, const bool useD)
+{
+	QChar degsign('d');
+	if (!useD)
+	{
+		degsign = 0x00B0;
+	}
+	bool sign;
+	unsigned int d,m;
+	double s;
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	QString str;
+	QTextStream os(&str);
+	os << (sign?'+':'-') << d << degsign;
+
+	os << qSetFieldWidth(2) << qSetPadChar('0') << m << qSetFieldWidth(0) << '\'';
+	int width = 2;
+	if (precision>0)
+		width = 3 + precision;
+	os << qSetRealNumberPrecision(precision);
+	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
+
+	return str;
+}
+
 void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, double &s)
 {
 	sign = true;
