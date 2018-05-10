@@ -234,6 +234,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 
 	if (flags&Velocity)
 	{
+		// TRANSLATORS: Unit of measure for speed - kilometers per second
 		QString kms = qc_("km/s", "speed");
 
 		Vec3d orbitalVel=getEclipticVelocity();
@@ -261,11 +262,6 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 			// Synodic period for comets in Julian years (symbol: a)
 			oss << QString("%1: %2 a").arg(q_("Synodic period"), QString::number(sp/365.25, 'f', 3)) << "<br />";
 		}
-
-//		// TRANSLATORS: Unit of measure for speed - kilometers per second
-//		QString kms = qc_("km/s", "speed");
-//		// GZ: Add speed. I don't know where else to place that bit of information.
-//		oss << QString("%1: %2 %3").arg(q_("Speed"), QString::number(((CometOrbit*)orbitPtr)->getVelocity().length()*AU/86400.0, 'f', 3), kms) << "<br />";
 
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		const double elongation = getElongation(observerHelioPos);
