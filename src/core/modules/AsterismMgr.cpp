@@ -351,6 +351,7 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 	vector < Asterism * >::const_iterator iter;
 	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
 	{
+		if (!(*iter)->flagAsterism) continue;
 		// Check if in the field of view
 		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
 			(*iter)->drawName(sPainter);
