@@ -59,6 +59,9 @@ HipsMgr::~HipsMgr()
 
 void HipsMgr::loadSources()
 {
+	if (state != Created) return; // Already loaded.
+	state = Loading;
+	emit stateChanged(state);
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
 
@@ -91,6 +94,12 @@ void HipsMgr::loadSources()
 			}
 			surveys += newSurveys;
 			emit surveysChanged();
+			nbSourcesLoaded++;
+			if (nbSourcesLoaded == sources.size())
+			{
+				state = Loaded;
+				emit stateChanged(state);
+			}
 		});
 	}
 	conf->endGroup();
