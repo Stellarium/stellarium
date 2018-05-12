@@ -525,6 +525,14 @@ void ViewDialog::updateHips()
 
 	// Update survey list.
 	QListWidget* l = ui->surveysListWidget;
+
+	if (!hipsmgr->property("loaded").toBool())
+	{
+		l->clear();
+		new QListWidgetItem(q_("Loading ..."), l);
+		return;
+	}
+
 	QJsonObject currentInfo;
 	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
 	QListWidgetItem* currentItem = NULL;

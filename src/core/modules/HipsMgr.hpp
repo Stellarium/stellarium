@@ -35,6 +35,7 @@ class HipsMgr : public StelModule
 	Q_PROPERTY(bool flagShow READ getFlagShow WRITE setFlagShow NOTIFY showChanged)
 
 	Q_PROPERTY(State state READ getState NOTIFY stateChanged)
+	Q_PROPERTY(bool loaded READ isLoaded NOTIFY stateChanged)
 
 public:
 
@@ -64,6 +65,7 @@ public:
 	void setFlagShow(bool b);
 
 	State getState() const {return state;}
+	bool isLoaded() const {return state == Loaded;}
 
 signals:
 	void showChanged(bool value) const;
