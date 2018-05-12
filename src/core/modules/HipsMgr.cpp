@@ -116,7 +116,16 @@ void HipsMgr::init()
 	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
 
 	// Start loading the sources only after stellarium has time to set up the proxy.
-	QTimer::singleShot(0, this, SLOT(loadSources()));
+	// We only do it if we actually have a visible survey.  Otherwise it's
+	// better not to do it until the user open the survey ui so that we
+	// don't make a systematic request to the hipslist files!
+	conf->beginGroup("hips");
+	conf->beginGroup("visible");
+	bool hasVisibleSurvey = !conf->allKeys().isEmpty();
+	conf->endGroup();
+	conf->endGroup();
+	if (visible && hasVisibleSurvey)
+		QTimer::singleShot(0, this, SLOT(loadSources()));
 }
 
 
