@@ -163,6 +163,8 @@ void StelPainter::setProjector(const StelProjectorP& p)
 
 StelPainter::~StelPainter()
 {
+	if(bayerPatternTex)
+		glDeleteTextures(1, &bayerPatternTex);
 	//reset opengl state
 	glState.reset();
 
