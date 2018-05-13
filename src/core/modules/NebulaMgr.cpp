@@ -1617,6 +1617,8 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 	}
 	dsoOutlineFile.close();
 	qDebug() << "Loaded" << readOk << "DSO outline records successfully";
+	if (points)
+		points->clear();
 	return true;
 }
 
