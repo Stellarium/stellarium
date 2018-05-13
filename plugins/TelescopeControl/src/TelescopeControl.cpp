@@ -987,6 +987,18 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("refresh", rts2Refresh);
 	}
 
+	if(connectionType == ConnectionLocal)
+	{
+		if (!deviceModels.contains(deviceModelName))
+
+			return false;
+		telescope.insert("device_model", deviceModelName);
+
+		if (portSerial.isEmpty())
+			return false;
+		telescope.insert("serial_port", portSerial);
+	}
+
 	if(connectionType == ConnectionInternal)
 	{
 		if (!deviceModels.contains(deviceModelName))

@@ -165,7 +165,7 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	ui->groupBoxConnectionSettings->hide();
 	ui->groupBoxDeviceSettings->hide();
 	ui->groupBoxRTS2Settings->hide();
-    ui->INDIProperties->hide();
+	ui->INDIProperties->hide();
 
 	//Reusing code used in both methods that call this one
 	deviceModelNames = telescopeManager->getDeviceModels().keys();
@@ -252,10 +252,10 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		//TODO: Add debug
 		return;
 	}
-	
+
 	ui->lineEditTelescopeName->setText(name);
-	
-    if(connectionType == ConnectionLocal && !deviceModelName.isEmpty())
+
+	if(connectionType == ConnectionInternal && !deviceModelName.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setChecked(true);
 		
@@ -285,7 +285,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionLocal)
 	{
 		ui->radioButtonTelescopeConnection->setChecked(true);
-		ui->lineEditHostName->setText("localhost");		
+		ui->lineEditHostName->setText("localhost");
 	}
 	else if (connectionType == ConnectionVirtual)
 	{
@@ -302,9 +302,9 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionINDI)
 	{
 		ui->radioButtonTelescopeINDI->setChecked(true);
-        ui->INDIProperties->setHost(host);
-        ui->INDIProperties->setPort(portTCP);
-        ui->INDIProperties->setSelectedDevice(deviceModelName);
+	ui->INDIProperties->setHost(host);
+	ui->INDIProperties->setPort(portTCP);
+	ui->INDIProperties->setSelectedDevice(deviceModelName);
 	}
 
 	//Equinox
