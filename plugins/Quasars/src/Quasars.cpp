@@ -72,7 +72,7 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	info.displayedName = N_("Quasars");
 	info.authors = "Alexander Wolf";
 	info.contact = "alex.v.wolf@gmail.com";
-	info.description = N_("A plugin that shows some quasars brighter than 18 visual magnitude. A catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010)");
+	info.description = N_("A plugin that shows some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010)");
 	info.version = QUASARS_PLUGIN_VERSION;
 	info.license = QUASARS_PLUGIN_LICENSE;
 	return info;

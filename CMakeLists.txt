@@ -220,7 +220,7 @@ SET(ENABLE_GPS 1 CACHE BOOL "Define whether GPS queries should be supported.")
 # SPOUT allows relaying the Stellarium OpenGL framebuffer as DirectX texture in other programs.
 # It exists on Windows only. Syphon is a similar system for MacOS, this might be added by a Mac developer.
 IF(WIN32)
-     IF(${CMAKE_SYSTEM_VERSION} LESS 6.1 ) # Need Windows 7 to enable support of Spout
+     IF(${CMAKE_SYSTEM_VERSION} LESS 6.1 ) # Need Windows 7 or later to enable support of Spout
           SET(ENABLE_SPOUT 0)
           MESSAGE(STATUS "Spout support disabled due to operating system requirement")
      ELSE()
@@ -400,7 +400,7 @@ IF(WIN32)
           SET(ISS_OPENSSL_LIBS "${ISS_OPENSSL_LIBS}\nSource: \"${OPENSSL_LICENSE}\"; DestDir: \"{app}\"; Flags: ignoreversion")
      ENDIF()
      IF((NOT EXISTS ${OPENSSL_SSLEAY32_LIBRARY_DLL}) AND (NOT EXISTS ${OPENSSL_LIBEAY32_LIBRARY_DLL}))
-          SET(ISS_OPENSSL_LIBS "; OpenSSL libraries isn't found")
+          SET(ISS_OPENSSL_LIBS "; OpenSSL libraries not found")
      ENDIF()
 ENDIF()
 
