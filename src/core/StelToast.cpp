@@ -220,14 +220,14 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 
 /////// ToastSurvey methods ////////////
 ToastSurvey::ToastSurvey(const QString& path, int amaxLevel)
-	: grid(amaxLevel), path(path), maxLevel(amaxLevel), toastCache(200)
+	: path(path), maxLevel(amaxLevel), toastCache(200)
 {
-	rootTile = new ToastTile(this, 0, 0, 0);
 }
 
 ToastSurvey::~ToastSurvey()
 {
 	delete rootTile;
+	delete grid;
 	rootTile = Q_NULLPTR;
 }
 
@@ -250,6 +250,10 @@ void ToastSurvey::draw(StelPainter* sPainter)
 	const double anglePerPixel = 1./sPainter->getProjector()->getPixelPerRadAtCenter()*180./M_PI;
 	const double maxAngle = anglePerPixel * getTilesSize();
 	int maxVisibleLevel = (int)(log2(360. / maxAngle));
+
+	// Lazily creation of the grid and root tile.
+	if (!grid) grid = new ToastGrid(maxLevel);
+	if (!rootTile) rootTile = new ToastTile(this, 0, 0, 0);
 
 	// We also get the viewport shape to discard invisibly tiles.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();

@@ -135,7 +135,7 @@ public:
 	virtual ~ToastSurvey();
 	QString getTilePath(int level, int x, int y) const;
 	void draw(StelPainter* sPainter);
-	const ToastGrid* getGrid() const {return &grid;}
+	const ToastGrid* getGrid() const {Q_ASSERT(grid); return grid;}
 	int getMaxLevel() const {return maxLevel;}
 	int getTilesSize() const {return 256;}
 
@@ -146,9 +146,9 @@ public:
 	void putIntoCache(ToastTile* tile);
 
 private:
-	ToastGrid grid;
+	ToastGrid* grid = Q_NULLPTR;
 	QString path;
-	ToastTile* rootTile;
+	ToastTile* rootTile = Q_NULLPTR;
 	int maxLevel;
 
 	typedef QCache<ToastTile::Coord, ToastTile> ToastCache;
