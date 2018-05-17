@@ -27,13 +27,26 @@
 class HipsMgr : public StelModule
 {
 	Q_OBJECT
+	Q_ENUMS(State)
 	Q_PROPERTY(QList<HipsSurveyP> surveys
 			MEMBER surveys
 			NOTIFY surveysChanged)
 
 	Q_PROPERTY(bool flagShow READ getFlagShow WRITE setFlagShow NOTIFY showChanged)
 
+	Q_PROPERTY(State state READ getState NOTIFY stateChanged)
+	Q_PROPERTY(bool loaded READ isLoaded NOTIFY stateChanged)
+
 public:
+
+	//! @enum State The loading state of the survey sources.
+	enum State
+	{
+		Created,
+		Loading,
+		Loaded,
+	};
+
 	HipsMgr();
 	virtual ~HipsMgr();
 	virtual void init() Q_DECL_OVERRIDE;
@@ -51,21 +64,30 @@ public:
 	//! Set whether the surveys are displayed.
 	void setFlagShow(bool b);
 
+	State getState() const {return state;}
+	bool isLoaded() const {return state == Loaded;}
+
 signals:
 	void showChanged(bool value) const;
 	void surveysChanged() const;
+	void stateChanged(State value) const;
 	//! Emitted when a new survey has been loaded.
 	void gotNewSurvey(HipsSurveyP survey) const;
+
+public slots:
+	//! Start to load the default sources.
+	void loadSources();
 
 private slots:
 	// after loading survey list from network, restore the visible surveys from config.ini.
 	void restoreVisibleSurveys();
-	//! Start to load the default sources.
-	void loadSources();
 
 private:
 	QList<HipsSurveyP> surveys;
 	bool visible = true;
+	State state = Created;
+	//! Used internally to keep track of the loading state.
+	int nbSourcesLoaded = 0;
 };
 
 #endif // _HIPSMGR_HPP_

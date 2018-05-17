@@ -470,6 +470,7 @@ void ViewDialog::createDialogContent()
 	// Hips mgr.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
 	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
 	updateHips();
@@ -503,7 +504,11 @@ static QString getHipsType(const HipsSurveyP hips)
 
 void ViewDialog::updateHips()
 {
+	if (!ui->page_surveys->isVisible()) return;
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	QMetaObject::invokeMethod(hipsmgr, "loadSources");
+
 	// Update the groups combobox.
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
 	disconnect(typeComboBox, 0, 0, 0);
@@ -519,8 +524,15 @@ void ViewDialog::updateHips()
 	connect(typeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 
 	// Update survey list.
-	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QListWidget* l = ui->surveysListWidget;
+
+	if (!hipsmgr->property("loaded").toBool())
+	{
+		l->clear();
+		new QListWidgetItem(q_("Loading ..."), l);
+		return;
+	}
+
 	QJsonObject currentInfo;
 	QString currentSurvey = l->currentItem() ? l->currentItem()->data(Qt::UserRole).toString() : "";
 	QListWidgetItem* currentItem = NULL;
