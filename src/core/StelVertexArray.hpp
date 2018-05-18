@@ -49,7 +49,7 @@ struct StelVertexArray
 	QVector<Vec3d> vertex;
 	//! OpenGL compatible array of edge flags to be displayed using vertex arrays.
 	QVector<Vec2f> texCoords;
-	//! OpenGL compatible array of vertex colors to be displayed using arrays. (GZ/NEW)
+	//! OpenGL compatible array of vertex colors to be displayed using arrays.
 	//! The color (if exists) shall be multiplied with texture to modulate e.g. for extinction of Milky Way or other large items.
 	QVector<Vec3f> colors;
 	//! OpenGL compatible array of indices for the vertex and the textures
@@ -65,7 +65,7 @@ struct StelVertexArray
 
 
 	//! call a function for each triangle of the array.
-	//! func should define the following method : // GZ NEW: colors
+	//! func should define the following method :
 	//!     void operator() (const Vec3d* vertex[3], const Vec2f* tex[3], const Vec3f* colors[3], unsigned int indices[3])
 	//! The method takes arrays of *pointers* as arguments because we can't assume the values are contiguous
 	template<class Func>
