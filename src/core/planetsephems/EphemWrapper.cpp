@@ -79,17 +79,15 @@ bool EphemWrapper::jd_fits_de431(const double jd)
 
 bool EphemWrapper::jd_fits_de430(const double jd)
 {
-	//return !(jd < 2287184.5 || jd > 2688974.5);
-	//return !(jd < 2287184.5 || jd > 2688976.5);
 	return ((jd > 2287184.5) && (jd < 2688976.5));
 }
 
-bool use_de430(const double jd)
+bool EphemWrapper::use_de430(const double jd)
 {
 	return StelApp::getInstance().getCore()->de430IsActive() && EphemWrapper::jd_fits_de430(jd);
 }
 
-bool use_de431(const double jd)
+bool EphemWrapper::use_de431(const double jd)
 {
 	return StelApp::getInstance().getCore()->de431IsActive() && EphemWrapper::jd_fits_de431(jd);
 }
@@ -105,11 +103,11 @@ void get_planet_helio_coordsv(const double jd, double xyz[3], double xyzdot[3], 
 		return;
 	}
 
-	if(use_de430(jd))
+	if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
-	else if(use_de431(jd))
+	else if(EphemWrapper::use_de431(jd))
 	{
 		deOk=GetDe431Coor(jd, planet_id + 1, xyz6);
 	}
@@ -134,11 +132,11 @@ void get_planet_helio_osculating_coordsv(double jd0, double jd, double xyz[3], d
 		return;
 	}
 
-	if(use_de430(jd))
+	if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, planet_id + 1, xyz6);
 	}
-	else if(use_de431(jd))
+	else if(EphemWrapper::use_de431(jd))
 	{
 		deOk=GetDe431Coor(jd, planet_id + 1, xyz6);
 	}
@@ -166,11 +164,11 @@ void get_pluto_helio_coordsv(double jd,double xyz[3], double xyzdot[3], void* un
 		return;
 	}
 
-	if(use_de430(jd))
+	if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
 	}
-	else if(use_de431(jd))
+	else if(EphemWrapper::use_de431(jd))
 	{
 		deOk=GetDe431Coor(jd, EPHEM_JPL_PLUTO_ID, xyz6);
 	}
@@ -218,11 +216,11 @@ void get_earth_helio_coordsv(const double jd,double xyz[3], double xyzdot[3], vo
 		return;
 	}
 
-	if(use_de430(jd))
+	if(EphemWrapper::use_de430(jd))
 	{
 		deOk=GetDe430Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
 	}
-	else if(use_de431(jd))
+	else if(EphemWrapper::use_de431(jd))
 	{
 		deOk=GetDe431Coor(jd, EPHEM_JPL_EARTH_ID, xyz6);
 	}
@@ -325,9 +323,9 @@ void get_lunar_parent_coordsv(double jde, double xyz[3], double xyzdot[3], void*
 	Q_UNUSED(unused);
 	double xyz6[6];
 	bool deOk=false;
-	if(use_de430(jde))
+	if(EphemWrapper::use_de430(jde))
 		deOk=GetDe430Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
-	else if(use_de431(jde))
+	else if(EphemWrapper::use_de431(jde))
 		deOk=GetDe431Coor(jde, EPHEM_JPL_MOON_ID, xyz6, EPHEM_JPL_EARTH_ID);
 
 	if (deOk)

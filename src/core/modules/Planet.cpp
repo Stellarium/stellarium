@@ -28,6 +28,7 @@
 #include "Planet.hpp"
 #include "Orbit.hpp"
 #include "planetsephems/precession.h"
+#include "planetsephems/EphemWrapper.hpp"
 #include "StelObserver.hpp"
 #include "StelProjector.hpp"
 #include "sidereal_time.h"
@@ -442,16 +443,20 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	// Debug help.
 	//oss << "Apparent Magnitude Algorithm: " << getApparentMagnitudeAlgorithmString() << " " << vMagAlgorithm << "<br>";
 
+#ifndef NDEBUG
 	// GZ This is mostly for debugging. Maybe also useful for letting people use our results to cross-check theirs, but we should not act as reference, currently...
 	// TODO: maybe separate this out into:
 	//if (flags&EclipticCoordXYZ)
 	// For now: add to EclipticCoordJ2000 group
-	//if (flags&EclipticCoordJ2000)
-	//{
-	//	Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
-	//	oss << q_("Ecliptical XYZ (VSOP87A): %1/%2/%3").arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
-	//}
-
+	if (flags&EclipticCoordJ2000)
+	{
+		Vec3d eclPos=(englishName=="Sun" ? GETSTELMODULE(SolarSystem)->getLightTimeSunPosition() : eclipticPos);
+		QString algoName("VSOP87");
+		if (EphemWrapper::use_de431(core->getJDE())) algoName="DE431";
+		if (EphemWrapper::use_de430(core->getJDE())) algoName="DE430";
+		oss << q_("Ecliptical XYZ (%1): %2/%3/%4").arg(algoName).arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
+	}
+#endif
 	if (flags&Distance)
 	{
 		double hdistanceAu = getHeliocentricEclipticPos().length();

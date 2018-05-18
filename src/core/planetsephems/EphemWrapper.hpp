@@ -41,6 +41,8 @@ public:
     static void init_de431(const char* filepath);
     static bool jd_fits_de430(const double jd);
     static bool jd_fits_de431(const double jd);
+    static bool use_de430(const double jd);
+    static bool use_de431(const double jd);
 };
 
 // These functions have an unused void pointer to be compatible to PosFuncType in SolarSystem and Planet classes.
