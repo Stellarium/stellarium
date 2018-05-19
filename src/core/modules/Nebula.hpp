@@ -279,13 +279,22 @@ private:
 	SphericalRegionP pointRegion;
 
 	static StelTextureSP texCircle;				// The symbolic circle texture
+	static StelTextureSP texCircleLarge;			// The symbolic circle texture for large objects
 	static StelTextureSP texGalaxy;				// Type 0
+	static StelTextureSP texGalaxyLarge;			// Type 0_large
 	static StelTextureSP texOpenCluster;			// Type 1
+	static StelTextureSP texOpenClusterLarge;		// Type 1_large
+	static StelTextureSP texOpenClusterXLarge;		// Type 1_extralarge
 	static StelTextureSP texGlobularCluster;		// Type 2
+	static StelTextureSP texGlobularClusterLarge;		// Type 2_large
 	static StelTextureSP texPlanetaryNebula;		// Type 3
 	static StelTextureSP texDiffuseNebula;			// Type 4
+	static StelTextureSP texDiffuseNebulaLarge;		// Type 4_large
+	static StelTextureSP texDiffuseNebulaXLarge;		// Type 4_extralarge
 	static StelTextureSP texDarkNebula;			// Type 5
+	static StelTextureSP texDarkNebulaLarge;		// Type 5_large
 	static StelTextureSP texOpenClusterWithNebulosity;	// Type 6
+	static StelTextureSP texOpenClusterWithNebulosityLarge;	// Type 6_large
 	static float hintsBrightness;
 
 	static Vec3f labelColor;				// The color of labels

@@ -40,13 +40,22 @@
 const QString Nebula::NEBULA_TYPE = QStringLiteral("Nebula");
 
 StelTextureSP Nebula::texCircle;
+StelTextureSP Nebula::texCircleLarge;
 StelTextureSP Nebula::texGalaxy;
+StelTextureSP Nebula::texGalaxyLarge;
 StelTextureSP Nebula::texOpenCluster;
+StelTextureSP Nebula::texOpenClusterLarge;
+StelTextureSP Nebula::texOpenClusterXLarge;
 StelTextureSP Nebula::texGlobularCluster;
+StelTextureSP Nebula::texGlobularClusterLarge;
 StelTextureSP Nebula::texPlanetaryNebula;
 StelTextureSP Nebula::texDiffuseNebula;
+StelTextureSP Nebula::texDiffuseNebulaLarge;
+StelTextureSP Nebula::texDiffuseNebulaXLarge;
 StelTextureSP Nebula::texDarkNebula;
+StelTextureSP Nebula::texDarkNebulaLarge;
 StelTextureSP Nebula::texOpenClusterWithNebulosity;
+StelTextureSP Nebula::texOpenClusterWithNebulosityLarge;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
@@ -774,6 +783,8 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 {
 	size_t segments = outlineSegments.size();
+	if (segments>0 && flagUseOutlines)
+		return;
 	Vec3d win;
 	// Check visibility of DSO hints
 	if (!(sPainter.getProjector()->projectCheck(XYZ, win)))
@@ -783,109 +794,92 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		return;
 
 	Vec3f color = getHintColor();
+
+	const float size = 6.0f;
+	float scaledSize = 0.0f;
+	if (drawHintProportional)
+	{
+		scaledSize = getAngularSize(Q_NULLPTR) *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+
+	}
+	const float finalSize=qMax(size, scaledSize);
+
 	switch (nType)
 	{
 		case NebGx:
-			Nebula::texGalaxy->bind();
-			break;
 		case NebIGx:
-			Nebula::texGalaxy->bind();
-			break;
 		case NebAGx:
-			Nebula::texGalaxy->bind();
-			break;
 		case NebQSO:
-			Nebula::texGalaxy->bind();
-			break;
 		case NebPossQSO:
-			Nebula::texGalaxy->bind();
-			break;
 		case NebBLL:
-			Nebula::texGalaxy->bind();
-			break;
 		case NebBLA:
-			Nebula::texGalaxy->bind();
-			break;
 		case NebRGx:
-			Nebula::texGalaxy->bind();
+		case NebGxCl:
+			if (finalSize > 35.0)
+				Nebula::texGalaxyLarge->bind();
+			else
+				Nebula::texGalaxy->bind();
 			break;
 		case NebOc:
-			Nebula::texOpenCluster->bind();
-			break;
 		case NebSA:
-			Nebula::texOpenCluster->bind();
-			break;
 		case NebSC:
-			Nebula::texOpenCluster->bind();
-			break;
 		case NebCl:
-			Nebula::texOpenCluster->bind();
+			if (finalSize > 75.0)
+				Nebula::texOpenClusterXLarge->bind();
+			else if (finalSize > 35.0)
+				Nebula::texOpenClusterLarge->bind();
+			else
+				Nebula::texOpenCluster->bind();
 			break;
 		case NebGc:
-			Nebula::texGlobularCluster->bind();
+			if (finalSize > 35.0)
+				Nebula::texGlobularClusterLarge->bind();
+			else
+				Nebula::texGlobularCluster->bind();
 			break;
 		case NebN:
-			Nebula::texDiffuseNebula->bind();
-			break;
 		case NebHII:
-			Nebula::texDiffuseNebula->bind();
-			break;
 		case NebMolCld:
-			Nebula::texDiffuseNebula->bind();
-			break;
 		case NebYSO:
-			Nebula::texDiffuseNebula->bind();
-			break;
 		case NebRn:		
-			Nebula::texDiffuseNebula->bind();
-			break;
 		case NebSNR:
-			Nebula::texDiffuseNebula->bind();
-			break;
 		case NebBn:
-			Nebula::texDiffuseNebula->bind();
-			break;
 		case NebEn:
-			Nebula::texDiffuseNebula->bind();
+		case NebSNC:
+		case NebSNRC:
+			if (finalSize > 75.0)
+				Nebula::texDiffuseNebulaXLarge->bind();
+			else if (finalSize > 35.0)
+				Nebula::texDiffuseNebulaLarge->bind();
+			else
+				Nebula::texDiffuseNebula->bind();
 			break;
 		case NebPn:
-			Nebula::texPlanetaryNebula->bind();
-			break;
 		case NebPossPN:
-			Nebula::texPlanetaryNebula->bind();
-			break;
 		case NebPPN:
 			Nebula::texPlanetaryNebula->bind();
 			break;
-		case NebDn:		
-			Nebula::texDarkNebula->bind();
+		case NebDn:
+			if (finalSize > 35.0)
+				Nebula::texDarkNebulaLarge->bind();
+			else
+				Nebula::texDarkNebula->bind();
 			break;
 		case NebCn:
-			Nebula::texOpenClusterWithNebulosity->bind();
+			if (finalSize > 35.0)
+				Nebula::texOpenClusterWithNebulosityLarge->bind();
+			else
+				Nebula::texOpenClusterWithNebulosity->bind();
 			break;
-		case NebEMO:
-			Nebula::texCircle->bind();
-			break;
-		case NebStar:
-			Nebula::texCircle->bind();
-			break;
-		case NebSymbioticStar:
-			Nebula::texCircle->bind();
-			break;
-		case NebEmissionLineStar:
-			Nebula::texCircle->bind();
-			break;
-		case NebSNC:
-			Nebula::texDiffuseNebula->bind();
-			break;
-		case NebSNRC:
-			Nebula::texDiffuseNebula->bind();
-			break;
-		case NebGxCl:
-			Nebula::texGalaxy->bind();
-			break;
+		//case NebEMO:
+		//case NebStar:
+		//case NebSymbioticStar:
+		//case NebEmissionLineStar:
 		default:
-			Nebula::texCircle->bind();
+			if (finalSize > 35.0)
+				Nebula::texCircleLarge->bind();
+			else
+				Nebula::texCircle->bind();
 	}
 
 	float lum = 1.f;
@@ -894,15 +888,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		col = Vec3f(0.f,0.f,0.f);
 	sPainter.setColor(col[0], col[1], col[2], 1);
 
-	float size = 6.0f;
-	float scaledSize = 0.0f;
-	if (drawHintProportional && segments==0)
-	{
-		if (majorAxisSize>0.)
-			scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-		else
-			scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	}
+
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
@@ -916,10 +902,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		Vec3d XYrel;
 		sPainter.getProjector()->project(XYZrel, XYrel);
 		float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize), screenAngle*180./M_PI + orientationAngle);
+		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize, screenAngle*180./M_PI + orientationAngle);
 	}
 	else	// no galaxy
-		sPainter.drawSprite2dMode(XY[0], XY[1], qMax(size, scaledSize));
+		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize);
 
 }
 
@@ -940,7 +926,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 		sPainter.setColor(col[0], col[1], col[2], 0.f);
 
 	float size = getAngularSize(Q_NULLPTR)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
+	float shift = 5.f + (drawHintProportional ? size*0.48f : 0.f);
 
 	QString str = getNameI18n();
 	if (str.isEmpty() || designationUsage)
