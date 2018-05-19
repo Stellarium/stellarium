@@ -160,6 +160,7 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texPlanetaryNebula = StelTextureSP();
 	Nebula::texDiffuseNebula = StelTextureSP();
 	Nebula::texDiffuseNebulaLarge = StelTextureSP();
+	Nebula::texDiffuseNebulaXLarge = StelTextureSP();
 	Nebula::texDarkNebula = StelTextureSP();
 	Nebula::texDarkNebulaLarge = StelTextureSP();
 	Nebula::texOpenClusterWithNebulosity = StelTextureSP();
