@@ -799,7 +799,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	float scaledSize = 0.0f;
 	if (drawHintProportional)
 	{
-		scaledSize = getAngularSize(Q_NULLPTR) *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		scaledSize = getAngularSize(Q_NULLPTR) *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
 
 	}
 	const float finalSize=qMax(size, scaledSize);
