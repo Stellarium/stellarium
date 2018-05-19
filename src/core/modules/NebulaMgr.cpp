@@ -165,6 +165,7 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texDarkNebula = StelTextureSP();
 	Nebula::texDarkNebulaLarge = StelTextureSP();
 	Nebula::texOpenClusterWithNebulosity = StelTextureSP();
+	Nebula::texOpenClusterWithNebulosityLarge = StelTextureSP();
 }
 
 /*************************************************************************
@@ -216,6 +217,8 @@ void NebulaMgr::init()
 	Nebula::texDarkNebulaLarge	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_drk_lrg.png");
 	// Load Ocl/Nebula marker texture
 	Nebula::texOpenClusterWithNebulosity = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln.png");
+	// Load Ocl/Nebula marker texture for large objects
+	Nebula::texOpenClusterWithNebulosityLarge = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocln_lrg.png");
 	// Load pointer texture
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur5.png");
 

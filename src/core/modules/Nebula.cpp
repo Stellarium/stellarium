@@ -55,6 +55,7 @@ StelTextureSP Nebula::texDiffuseNebulaXLarge;
 StelTextureSP Nebula::texDarkNebula;
 StelTextureSP Nebula::texDarkNebulaLarge;
 StelTextureSP Nebula::texOpenClusterWithNebulosity;
+StelTextureSP Nebula::texOpenClusterWithNebulosityLarge;
 bool  Nebula::drawHintProportional = false;
 bool  Nebula::surfaceBrightnessUsage = false;
 bool  Nebula::designationUsage = false;
@@ -802,12 +803,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 
 	const float size = 6.0f;
 	float scaledSize = 0.0f;
-	if (drawHintProportional) // && segments==0)
+	if (drawHintProportional)
 	{
-		if (majorAxisSize>0.)
-			scaledSize = majorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-		else
-			scaledSize = minorAxisSize *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+		scaledSize = getAngularSize(Q_NULLPTR) *0.5 *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
+
 	}
 	const float finalSize=qMax(size, scaledSize);
 
@@ -873,7 +872,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 				Nebula::texDarkNebula->bind();
 			break;
 		case NebCn:
-			Nebula::texOpenClusterWithNebulosity->bind();
+			if (finalSize > 35.0)
+				Nebula::texOpenClusterWithNebulosityLarge->bind();
+			else
+				Nebula::texOpenClusterWithNebulosity->bind();
 			break;
 		//case NebEMO:
 		//case NebStar:
@@ -930,7 +932,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 		sPainter.setColor(col[0], col[1], col[2], 0.f);
 
 	float size = getAngularSize(Q_NULLPTR)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 4.f + (drawHintProportional ? size : size/1.8f);
+	float shift = 5.f + (drawHintProportional ? size*0.48f : 0.f);
 
 	QString str = getNameI18n();
 	if (str.isEmpty() || designationUsage)
