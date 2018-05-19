@@ -77,7 +77,7 @@ ConstellationMgr::~ConstellationMgr()
 		delete(*iter);
 	}
 
-	vector<vector<Vec3f> *>::iterator iter1;
+	vector<vector<Vec3d> *>::iterator iter1;
 	for (iter1 = allBoundarySegments.begin(); iter1 != allBoundarySegments.end(); ++iter1)
 	{
 		delete (*iter1);
@@ -1246,7 +1246,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	unsigned int i, j;
 
 	// delete existing boundaries if any exist
-	vector<vector<Vec3f> *>::iterator iter;
+	vector<vector<Vec3d> *>::iterator iter;
 	for (iter = allBoundarySegments.begin(); iter != allBoundarySegments.end(); ++iter)
 	{
 		delete (*iter);
@@ -1264,10 +1264,10 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		return false;
 	}
 
-	float DE, RA;
-	Vec3f XYZ;
+	double DE, RA;
+	Vec3d XYZ;
 	unsigned num, numc;
-	vector<Vec3f> *points = Q_NULLPTR;
+	vector<Vec3d> *points = Q_NULLPTR;
 	QString consname, record, data = "";
 	i = 0;
 
@@ -1295,7 +1295,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 		if(num == 0)
 			continue; // empty line
 
-		points = new vector<Vec3f>;
+		points = new vector<Vec3d>;
 
 		for (j=0;j<num;j++)
 		{

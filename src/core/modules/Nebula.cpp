@@ -751,9 +751,7 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 	if (segments>0 && flagUseOutlines && oLim<=maxMagHints)
 	{
 		unsigned int i, j;
-		Vec3f pt1, pt2;
-		Vec3d ptd1, ptd2;
-		std::vector<Vec3f> *points;
+		std::vector<Vec3d> *points;
 
 		sPainter.setBlending(true);
 		sPainter.setLineSmooth(true);
@@ -765,11 +763,7 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 
 			for (j=0;j<points->size()-1;j++)
 			{
-				pt1 = points->at(j);
-				pt2 = points->at(j+1);
-				ptd1.set(pt1[0], pt1[1], pt1[2]);
-				ptd2.set(pt2[0], pt2[1], pt2[2]);
-				sPainter.drawGreatCircleArc(ptd1, ptd2, &viewportHalfspace);
+				sPainter.drawGreatCircleArc(points->at(j), points->at(j+1), &viewportHalfspace);
 			}
 		}
 		sPainter.setLineSmooth(false);

@@ -373,7 +373,7 @@ private:
 
 	bool isolateSelected; // true to pick individual constellations.
 	bool constellationPickEnabled;
-	std::vector<std::vector<Vec3f> *> allBoundarySegments;
+	std::vector<std::vector<Vec3d> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
 

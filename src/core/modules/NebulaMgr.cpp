@@ -1544,11 +1544,11 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 		return false;
 	}
 
-	float RA, DE;
+	double RA, DE;
 	int i, readOk = 0;
-	Vec3f XYZ;
-	std::vector<Vec3f> *points = Q_NULLPTR;
-	typedef QPair<float, float> coords;
+	Vec3d XYZ;
+	std::vector<Vec3d> *points = Q_NULLPTR;
+	typedef QPair<double, double> coords;
 	coords point, fpoint;
 	QList<coords> outline;
 	QString record, command, dso;
@@ -1562,9 +1562,9 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 			continue;
 
 		// bytes 1 - 8, RA
-		RA = record.left(8).toFloat();
+		RA = record.left(8).toDouble();
 		// bytes 9 -18, DE
-		DE = record.mid(9, 10).toFloat();
+		DE = record.mid(9, 10).toDouble();
 		// bytes 19-25, command
 		command = record.mid(19, 7).trimmed();
 		// bytes 26, designation of DSO
@@ -1600,7 +1600,7 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 
 			if (!e.isNull())
 			{
-				points = new std::vector<Vec3f>;
+				points = new std::vector<Vec3d>;
 				for (i = 0; i < outline.size(); i++)
 				{
 					// Calc the Cartesian coord with RA and DE

@@ -342,7 +342,7 @@ private:
 	static double minSizeLimit;
 	static double maxSizeLimit;
 
-	std::vector<std::vector<Vec3f> *> outlineSegments;
+	std::vector<std::vector<Vec3d> *> outlineSegments;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)
