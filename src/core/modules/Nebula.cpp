@@ -926,7 +926,7 @@ void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
 		sPainter.setColor(col[0], col[1], col[2], 0.f);
 
 	float size = getAngularSize(Q_NULLPTR)*M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-	float shift = 5.f + (drawHintProportional ? size*0.48f : 0.f);
+	float shift = 5.f + (drawHintProportional ? size*0.9f : 0.f);
 
 	QString str = getNameI18n();
 	if (str.isEmpty() || designationUsage)
