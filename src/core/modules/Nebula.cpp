@@ -97,15 +97,15 @@ Vec3f Nebula::supernovaCandidateColor = Vec3f(0.1f,1.0f,0.1f);
 Vec3f Nebula::supernovaRemnantCandidateColor = Vec3f(0.1f,1.0f,0.1f);
 Vec3f Nebula::galaxyClusterColor = Vec3f(0.8f,0.8f,0.5f);
 bool Nebula::flagUseTypeFilters = false;
-Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(0);
+Nebula::CatalogGroup Nebula::catalogFilters = Nebula::CatalogGroup(Q_NULLPTR);
 Nebula::TypeGroup Nebula::typeFilters = Nebula::TypeGroup(Nebula::AllTypes);
 bool Nebula::flagUseArcsecSurfaceBrightness = false;
 bool Nebula::flagUseShortNotationSurfaceBrightness = true;
 bool Nebula::flagUseOutlines = false;
 bool Nebula::flagShowAdditionalNames = true;
 bool Nebula::flagUseSizeLimits = false;
-double Nebula::minSizeLimit = 1.0f;
-double Nebula::maxSizeLimit = 600.0f;
+double Nebula::minSizeLimit = 1.0;
+double Nebula::maxSizeLimit = 600.0;
 
 Nebula::Nebula()
 	: DSO_nb(0)
@@ -815,7 +815,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		case NebBLA:
 		case NebRGx:
 		case NebGxCl:
-			if (finalSize > 35.0)
+			if (finalSize > 35.f)
 				Nebula::texGalaxyLarge->bind();
 			else
 				Nebula::texGalaxy->bind();
@@ -824,15 +824,15 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		case NebSA:
 		case NebSC:
 		case NebCl:
-			if (finalSize > 75.0)
+			if (finalSize > 75.f)
 				Nebula::texOpenClusterXLarge->bind();
-			else if (finalSize > 35.0)
+			else if (finalSize > 35.f)
 				Nebula::texOpenClusterLarge->bind();
 			else
 				Nebula::texOpenCluster->bind();
 			break;
 		case NebGc:
-			if (finalSize > 35.0)
+			if (finalSize > 35.f)
 				Nebula::texGlobularClusterLarge->bind();
 			else
 				Nebula::texGlobularCluster->bind();
@@ -847,9 +847,9 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		case NebEn:
 		case NebSNC:
 		case NebSNRC:
-			if (finalSize > 75.0)
+			if (finalSize > 75.f)
 				Nebula::texDiffuseNebulaXLarge->bind();
-			else if (finalSize > 35.0)
+			else if (finalSize > 35.f)
 				Nebula::texDiffuseNebulaLarge->bind();
 			else
 				Nebula::texDiffuseNebula->bind();
@@ -860,13 +860,13 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 			Nebula::texPlanetaryNebula->bind();
 			break;
 		case NebDn:
-			if (finalSize > 35.0)
+			if (finalSize > 35.f)
 				Nebula::texDarkNebulaLarge->bind();
 			else
 				Nebula::texDarkNebula->bind();
 			break;
 		case NebCn:
-			if (finalSize > 35.0)
+			if (finalSize > 35.f)
 				Nebula::texOpenClusterWithNebulosityLarge->bind();
 			else
 				Nebula::texOpenClusterWithNebulosity->bind();
@@ -876,7 +876,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		//case NebSymbioticStar:
 		//case NebEmissionLineStar:
 		default:
-			if (finalSize > 35.0)
+			if (finalSize > 35.f)
 				Nebula::texCircleLarge->bind();
 			else
 				Nebula::texCircle->bind();
@@ -901,7 +901,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		XYZrel[2]*=0.99;
 		Vec3d XYrel;
 		sPainter.getProjector()->project(XYZrel, XYrel);
-		float screenAngle=atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
+		float screenAngle = atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
 		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize, screenAngle*180./M_PI + orientationAngle);
 	}
 	else	// no galaxy
