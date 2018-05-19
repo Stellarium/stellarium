@@ -47,6 +47,7 @@ StelTextureSP Nebula::texOpenCluster;
 StelTextureSP Nebula::texOpenClusterLarge;
 StelTextureSP Nebula::texOpenClusterXLarge;
 StelTextureSP Nebula::texGlobularCluster;
+StelTextureSP Nebula::texGlobularClusterLarge;
 StelTextureSP Nebula::texPlanetaryNebula;
 StelTextureSP Nebula::texDiffuseNebula;
 StelTextureSP Nebula::texDiffuseNebulaLarge;
@@ -838,7 +839,10 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 				Nebula::texOpenCluster->bind();
 			break;
 		case NebGc:
-			Nebula::texGlobularCluster->bind();
+			if (finalSize > 35.0)
+				Nebula::texGlobularClusterLarge->bind();
+			else
+				Nebula::texGlobularCluster->bind();
 			break;
 		case NebN:
 		case NebHII:

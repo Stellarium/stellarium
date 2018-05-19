@@ -286,6 +286,7 @@ private:
 	static StelTextureSP texOpenClusterLarge;		// Type 1_large
 	static StelTextureSP texOpenClusterXLarge;		// Type 1_extralarge
 	static StelTextureSP texGlobularCluster;		// Type 2
+	static StelTextureSP texGlobularClusterLarge;		// Type 2_large
 	static StelTextureSP texPlanetaryNebula;		// Type 3
 	static StelTextureSP texDiffuseNebula;			// Type 4
 	static StelTextureSP texDiffuseNebulaLarge;		// Type 4_large

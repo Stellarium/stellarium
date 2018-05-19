@@ -157,6 +157,7 @@ NebulaMgr::~NebulaMgr()
 	Nebula::texOpenClusterLarge = StelTextureSP();
 	Nebula::texOpenClusterXLarge = StelTextureSP();
 	Nebula::texGlobularCluster = StelTextureSP();
+	Nebula::texGlobularClusterLarge = StelTextureSP();
 	Nebula::texPlanetaryNebula = StelTextureSP();
 	Nebula::texDiffuseNebula = StelTextureSP();
 	Nebula::texDiffuseNebulaLarge = StelTextureSP();
@@ -199,6 +200,8 @@ void NebulaMgr::init()
 	Nebula::texOpenClusterXLarge		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_ocl_xlrg.png");
 	// Load globular cluster marker texture
 	Nebula::texGlobularCluster		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl.png");
+	// Load globular cluster marker texture for large GCls
+	Nebula::texGlobularClusterLarge		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_gcl_lrg.png");
 	// Load planetary nebula marker texture
 	Nebula::texPlanetaryNebula	= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb_pnb.png");
 	// Load diffuse nebula marker texture
