@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-10 17:35+0700\n"
+"POT-Creation-Date: 2018-05-18 01:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Veikko Mäkelä, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -58,7 +58,7 @@ msgstr "asterismi"
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:422 src/core/modules/SolarSystem.cpp:235
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:106
+#: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:136
 #: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:808
 msgid "Display Options"
@@ -2055,7 +2055,7 @@ msgstr "Eläinratavalo"
 msgid "Digitized Sky Survey (TOAST)"
 msgstr "Digitized Sky Survey (TOAST)"
 
-#: src/core/modules/HipsMgr.cpp:106
+#: src/core/modules/HipsMgr.cpp:136
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "Valitse/poista Hieraksiset etenevät kartoitukset (HiPS) (kokeellinen)"
 
@@ -3726,69 +3726,73 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "Kuvataajuus"
 
-#: src/gui/ViewDialog.cpp:515
+#: src/gui/ViewDialog.cpp:520
 msgid "Deep Sky"
 msgstr "Syvä taivas"
 
-#: src/gui/ViewDialog.cpp:516
+#: src/gui/ViewDialog.cpp:521
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "Aurinkokunta"
 
-#: src/gui/ViewDialog.cpp:571
+#: src/gui/ViewDialog.cpp:532
+msgid "Loading ..."
+msgstr ""
+
+#: src/gui/ViewDialog.cpp:583
 msgid "properties"
 msgstr "ominaisuudet"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1436
+#: src/gui/ViewDialog.cpp:1448
 msgid "Excellent dark-sky site"
 msgstr "Erinomainen pimeän taivaan alue"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1438
+#: src/gui/ViewDialog.cpp:1450
 msgid "Typical truly dark site"
 msgstr "Tyypillinen pimeän taivaan alue"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1440
+#: src/gui/ViewDialog.cpp:1452
 msgid "Rural sky"
 msgstr "Maaseutu"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1442
+#: src/gui/ViewDialog.cpp:1454
 msgid "Rural/suburban transition"
 msgstr "Maaseudun ja esikaupungin vaihde"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1444
+#: src/gui/ViewDialog.cpp:1456
 msgid "Suburban sky"
 msgstr "Esikaupunki"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1446
+#: src/gui/ViewDialog.cpp:1458
 msgid "Bright suburban sky"
 msgstr "Kirkas esikaupunkitaivas"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1448
+#: src/gui/ViewDialog.cpp:1460
 msgid "Suburban/urban transition"
 msgstr "Esikapungin ja kaupungin vaihde"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1450
+#: src/gui/ViewDialog.cpp:1462
 msgid "City sky"
 msgstr "Kaupunki"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1452
+#: src/gui/ViewDialog.cpp:1464
 msgid "Inner-city sky"
 msgstr "Kantakaupunki"
 
-#: src/gui/ViewDialog.cpp:1466
+#: src/gui/ViewDialog.cpp:1478
 msgid "The naked-eye limiting magnitude is"
 msgstr "Paljaan silmän rajamagnitudi on"
 
-#: src/gui/ViewDialog.cpp:1474
+#: src/gui/ViewDialog.cpp:1486
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -3796,7 +3800,7 @@ msgstr ""
 "Käyttää 3D-monikulmiomallia joillekin valikoiduille pienkappaleille (pienet "
 "kuut, asteroidit, komeetat) pallomaisen approksimaation sijaan."
 
-#: src/gui/ViewDialog.cpp:1475
+#: src/gui/ViewDialog.cpp:1487
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -3805,88 +3809,88 @@ msgstr ""
 "aurinkokunnan kappaleita. Voi parantaa joidenkin kohteiden puolivarjojen "
 "laatua."
 
-#: src/gui/ViewDialog.cpp:1498
+#: src/gui/ViewDialog.cpp:1510
 msgid "Abbreviated"
 msgstr "Lyhennetyt"
 
-#: src/gui/ViewDialog.cpp:1499
+#: src/gui/ViewDialog.cpp:1511
 msgid "Native"
 msgstr "Paikalliset"
 
-#: src/gui/ViewDialog.cpp:1500
+#: src/gui/ViewDialog.cpp:1512
 msgid "Translated"
 msgstr "Käännetyt"
 
-#: src/gui/ViewDialog.cpp:1667
+#: src/gui/ViewDialog.cpp:1679
 msgid "No shooting stars"
 msgstr "Ei tähdenlentoja"
 
-#: src/gui/ViewDialog.cpp:1669
+#: src/gui/ViewDialog.cpp:1681
 msgid "Normal rate"
 msgstr "Normaali aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1671
+#: src/gui/ViewDialog.cpp:1683
 msgid "Standard Orionids rate"
 msgstr "Orionidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1673
+#: src/gui/ViewDialog.cpp:1685
 msgid "Standard Perseids rate"
 msgstr "Perseidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1675
+#: src/gui/ViewDialog.cpp:1687
 msgid "Standard Geminids rate"
 msgstr "Geminidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1677
+#: src/gui/ViewDialog.cpp:1689
 msgid "Exceptional Perseid rate"
 msgstr "Poikkeuksellinen perseidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1679
+#: src/gui/ViewDialog.cpp:1691
 msgid "Meteor storm rate"
 msgstr "Meteoreja tunnissa"
 
-#: src/gui/ViewDialog.cpp:1681
+#: src/gui/ViewDialog.cpp:1693
 msgid "Exceptional Draconid rate"
 msgstr "Poikkeuksellinen draconidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1683
+#: src/gui/ViewDialog.cpp:1695
 msgid "Exceptional Leonid rate"
 msgstr "Poikkeuksellinen leonidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1685
+#: src/gui/ViewDialog.cpp:1697
 msgid "Very high rate (1966 Leonids)"
 msgstr "Erittäin korkea aktiivisuus (leonidit 1966)"
 
-#: src/gui/ViewDialog.cpp:1687
+#: src/gui/ViewDialog.cpp:1699
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Suurin tunnettu aktiivisuus (leonidit 1833)"
 
-#: src/gui/ViewDialog.cpp:1740
+#: src/gui/ViewDialog.cpp:1752
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "G. Mueller (1893)"
 
-#: src/gui/ViewDialog.cpp:1741
+#: src/gui/ViewDialog.cpp:1753
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr "Astronomical Almanach (1984)"
 
-#: src/gui/ViewDialog.cpp:1742
+#: src/gui/ViewDialog.cpp:1754
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Explanatory Supplement (1992)"
 
-#: src/gui/ViewDialog.cpp:1743
+#: src/gui/ViewDialog.cpp:1755
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Explanatory Supplement (2013)"
 
-#: src/gui/ViewDialog.cpp:1744
+#: src/gui/ViewDialog.cpp:1756
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Geneerinen"
 
-#: src/gui/ViewDialog.cpp:1770
+#: src/gui/ViewDialog.cpp:1782
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -3895,7 +3899,7 @@ msgstr ""
 "uudemmat) ja se antaa V- (laite-) magnitudit (oletettavasti lähteenä D.L. "
 "Harris)."
 
-#: src/gui/ViewDialog.cpp:1773
+#: src/gui/ViewDialog.cpp:1785
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -3905,7 +3909,7 @@ msgstr ""
 "on julkaistu <em>Explanatory Supplement to the Astronomical Ephemeris</em> "
 "-teoksessa (1961)."
 
-#: src/gui/ViewDialog.cpp:1776
+#: src/gui/ViewDialog.cpp:1788
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -3913,7 +3917,7 @@ msgstr ""
 "Algoritmi on julkaistu <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> -teoksessa (1992)."
 
-#: src/gui/ViewDialog.cpp:1779
+#: src/gui/ViewDialog.cpp:1791
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -3921,7 +3925,7 @@ msgstr ""
 "Algoritmi on julkaistu <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> -teoksen kolmannessa painoksessa (2013)."
 
-#: src/gui/ViewDialog.cpp:1782
+#: src/gui/ViewDialog.cpp:1794
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vaihekulman ja albedon perusteella laskettu visuaalinen magnitudi"
 
@@ -4072,7 +4076,7 @@ msgstr "Tallenna komentosarja"
 
 #: src/gui/ScriptConsole.cpp:227
 msgid "Select Script Include Directory"
-msgstr ""
+msgstr "Valitse komentosarjojen hakemisto"
 
 #: src/gui/SearchDialog.cpp:210
 msgctxt "coordinate system"
@@ -9112,7 +9116,7 @@ msgstr "Valitun kohteen tiedot"
 #: src/ui_configurationDialog.h:1390
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
-msgstr ""
+msgstr "Lisät"
 
 #: src/ui_configurationDialog.h:1392
 msgid "Additional settings for Graphical User Interface"
@@ -9585,7 +9589,7 @@ msgstr "”Gravitaationimet”"
 
 #: src/ui_configurationDialog.h:1598
 msgid "Dithering"
-msgstr ""
+msgstr "Ditterointi"
 
 #: src/ui_configurationDialog.h:1600
 msgid ""
@@ -12563,7 +12567,7 @@ msgid "Move a telescope to a given set of coordinates"
 msgstr "Suuntaa kaukoputki annetuihin koordinaatteihin"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1688
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1700
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
@@ -12572,12 +12576,12 @@ msgstr ""
 "jalustat."
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1690
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1702
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr "Kaikki Meade LX200 -yhteensopivat kaukoputket tai jalustat."
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1692
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1704
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
@@ -12585,24 +12589,24 @@ msgstr ""
 "Meaden ETX70 #494 Autostar -ohjaimella ja #506 Connector Cable -paketilla."
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1694
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1706
 msgid "Losmandy's G-11 telescope mount."
 msgstr "Losmandyn G-11-jalusta."
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1696
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1708
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr "Wildcard Innovationsin Argo Navis DTC Meade LX200 -emulaatiotilassa."
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1698
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1710
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr "Kaikki Celestron NexStar -yhteensopivat kaukoputket ja jalustat."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1700
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1712
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
@@ -12611,7 +12615,7 @@ msgstr ""
 " 3 tai uudempaa."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1702
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1714
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -14801,13 +14805,10 @@ msgstr "Kirkkaat novat -laajennuksen asetukset"
 
 #: plugins/Quasars/src/Quasars.cpp:75
 msgid ""
-"A plugin that shows some quasars brighter than 18 visual magnitude. A "
-"catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
+"A plugin that shows some quasars brighter than visual magnitude 18. The "
+"catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
-"Laajennus näyttää joitakin visuaalimagnitudia 18 kirkkaampia kvasaareita. "
-"Kvasaarien luettelo on koottu lähteestä 'Quasars and Active Galactic Nuclei'"
-" (13. painos) (Veron+ 2010)"
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -15136,16 +15137,16 @@ msgid "Pulsars marker color"
 msgstr "Merkkien väri pulsareille"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
-msgid "Color of markers of pulsars"
-msgstr "Merkkien värit pulsareille"
+msgid "Marker Color for pulsars"
+msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
 msgstr "Käytä erillistä väriä pulsareille joilla on häiriöitä"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:345
-msgid "Color of markers of pulsars with glitches"
-msgstr "Merkkien väri pulsareille, joilla on häiriöitä"
+msgid "Marker Color for pulsars with glitches"
+msgstr ""
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"

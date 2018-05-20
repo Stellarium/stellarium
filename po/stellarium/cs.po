@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-10 17:35+0700\n"
+"POT-Creation-Date: 2018-05-18 01:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2017\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: cs\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
 
 #: src/core/modules/CustomObject.cpp:81
 msgid "custom object"
@@ -58,7 +58,7 @@ msgstr "asterismus"
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:421
 #: src/core/modules/NebulaMgr.cpp:422 src/core/modules/SolarSystem.cpp:235
 #: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
-#: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:106
+#: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:136
 #: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:808
 msgid "Display Options"
@@ -2046,7 +2046,7 @@ msgstr "Zvířetníkové světlo"
 msgid "Digitized Sky Survey (TOAST)"
 msgstr "Digitized Sky Survey (projekce TOAST)"
 
-#: src/core/modules/HipsMgr.cpp:106
+#: src/core/modules/HipsMgr.cpp:136
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "Přepnout hierarchické progresivní přehlídky (experimentální)"
 
@@ -3713,69 +3713,73 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "Snímky za sekundu"
 
-#: src/gui/ViewDialog.cpp:515
+#: src/gui/ViewDialog.cpp:520
 msgid "Deep Sky"
 msgstr "Vzdálený vesmír"
 
-#: src/gui/ViewDialog.cpp:516
+#: src/gui/ViewDialog.cpp:521
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "Sluneční soustava"
 
-#: src/gui/ViewDialog.cpp:571
+#: src/gui/ViewDialog.cpp:532
+msgid "Loading ..."
+msgstr "Načítání …"
+
+#: src/gui/ViewDialog.cpp:583
 msgid "properties"
 msgstr "vlastnosti"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1436
+#: src/gui/ViewDialog.cpp:1448
 msgid "Excellent dark-sky site"
 msgstr "Vynikající temné nebe"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1438
+#: src/gui/ViewDialog.cpp:1450
 msgid "Typical truly dark site"
 msgstr "Typické temné nebe"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1440
+#: src/gui/ViewDialog.cpp:1452
 msgid "Rural sky"
 msgstr "Nebe na venkově"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1442
+#: src/gui/ViewDialog.cpp:1454
 msgid "Rural/suburban transition"
 msgstr "Nebe na venkově přecházející v nebe příměstské"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1444
+#: src/gui/ViewDialog.cpp:1456
 msgid "Suburban sky"
 msgstr "Příměstské nebe"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1446
+#: src/gui/ViewDialog.cpp:1458
 msgid "Bright suburban sky"
 msgstr "Jasné příměstské nebe"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1448
+#: src/gui/ViewDialog.cpp:1460
 msgid "Suburban/urban transition"
 msgstr "Příměstské nebe přecházející v nebe měst"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1450
+#: src/gui/ViewDialog.cpp:1462
 msgid "City sky"
 msgstr "Městské nebe"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1452
+#: src/gui/ViewDialog.cpp:1464
 msgid "Inner-city sky"
 msgstr "Nebe v centru města"
 
-#: src/gui/ViewDialog.cpp:1466
+#: src/gui/ViewDialog.cpp:1478
 msgid "The naked-eye limiting magnitude is"
 msgstr "Mezní magnituda pro pozorování očima je"
 
-#: src/gui/ViewDialog.cpp:1474
+#: src/gui/ViewDialog.cpp:1486
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -3783,7 +3787,7 @@ msgstr ""
 "Používá polygonální 3D model pro některé vybrané podplanetární objekty (malé"
 " měsíce, asteroidy, komety) místo sférické aproximace"
 
-#: src/gui/ViewDialog.cpp:1475
+#: src/gui/ViewDialog.cpp:1487
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -3792,88 +3796,88 @@ msgstr ""
 "nekonvexních objektů ve sluneční soustavě. U některých objektů může být "
 "snížena kvalita simulace polostínu."
 
-#: src/gui/ViewDialog.cpp:1498
+#: src/gui/ViewDialog.cpp:1510
 msgid "Abbreviated"
 msgstr "Zkrácené"
 
-#: src/gui/ViewDialog.cpp:1499
+#: src/gui/ViewDialog.cpp:1511
 msgid "Native"
 msgstr "Nativní"
 
-#: src/gui/ViewDialog.cpp:1500
+#: src/gui/ViewDialog.cpp:1512
 msgid "Translated"
 msgstr "Přeložené"
 
-#: src/gui/ViewDialog.cpp:1667
+#: src/gui/ViewDialog.cpp:1679
 msgid "No shooting stars"
 msgstr "Žádné padající hvězdy"
 
-#: src/gui/ViewDialog.cpp:1669
+#: src/gui/ViewDialog.cpp:1681
 msgid "Normal rate"
 msgstr "Normální četnost"
 
-#: src/gui/ViewDialog.cpp:1671
+#: src/gui/ViewDialog.cpp:1683
 msgid "Standard Orionids rate"
 msgstr "Standardní četnost Orionid"
 
-#: src/gui/ViewDialog.cpp:1673
+#: src/gui/ViewDialog.cpp:1685
 msgid "Standard Perseids rate"
 msgstr "Standardní četnost Perseid"
 
-#: src/gui/ViewDialog.cpp:1675
+#: src/gui/ViewDialog.cpp:1687
 msgid "Standard Geminids rate"
 msgstr "Standardní četnost Geminid"
 
-#: src/gui/ViewDialog.cpp:1677
+#: src/gui/ViewDialog.cpp:1689
 msgid "Exceptional Perseid rate"
 msgstr "Výjimečná četnost Perseid"
 
-#: src/gui/ViewDialog.cpp:1679
+#: src/gui/ViewDialog.cpp:1691
 msgid "Meteor storm rate"
 msgstr "Četnost meteorického deště"
 
-#: src/gui/ViewDialog.cpp:1681
+#: src/gui/ViewDialog.cpp:1693
 msgid "Exceptional Draconid rate"
 msgstr "Výjimečná četnost Draconid"
 
-#: src/gui/ViewDialog.cpp:1683
+#: src/gui/ViewDialog.cpp:1695
 msgid "Exceptional Leonid rate"
 msgstr "Vyjímečná četnost Leonid"
 
-#: src/gui/ViewDialog.cpp:1685
+#: src/gui/ViewDialog.cpp:1697
 msgid "Very high rate (1966 Leonids)"
 msgstr "Velmi vysoká četnost (Leonidy 1966)"
 
-#: src/gui/ViewDialog.cpp:1687
+#: src/gui/ViewDialog.cpp:1699
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Nejvyšší zaznamenaná četnost (Leonidy 1833)"
 
-#: src/gui/ViewDialog.cpp:1740
+#: src/gui/ViewDialog.cpp:1752
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "G. Mueller (1893)"
 
-#: src/gui/ViewDialog.cpp:1741
+#: src/gui/ViewDialog.cpp:1753
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr "Astronomical Almanach (1984)"
 
-#: src/gui/ViewDialog.cpp:1742
+#: src/gui/ViewDialog.cpp:1754
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Explanatory Supplement (1992)"
 
-#: src/gui/ViewDialog.cpp:1743
+#: src/gui/ViewDialog.cpp:1755
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Explanatory Supplement (2013)"
 
-#: src/gui/ViewDialog.cpp:1744
+#: src/gui/ViewDialog.cpp:1756
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Obecný"
 
-#: src/gui/ViewDialog.cpp:1770
+#: src/gui/ViewDialog.cpp:1782
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -3881,7 +3885,7 @@ msgstr ""
 "Algoritmus byl použit v <em>Astronomical Almanac</em> (1984 a později) a "
 "dává V (instrumentální) magnitudy (údajně od D.L. Harrise)."
 
-#: src/gui/ViewDialog.cpp:1773
+#: src/gui/ViewDialog.cpp:1785
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -3891,7 +3895,7 @@ msgstr ""
 "1877-1891 a byl publikován v <em>Explanatory Supplement to the Astronomical "
 "Ephemeris</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:1776
+#: src/gui/ViewDialog.cpp:1788
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -3899,7 +3903,7 @@ msgstr ""
 "Algoritmus byl publikován v <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> (1992)."
 
-#: src/gui/ViewDialog.cpp:1779
+#: src/gui/ViewDialog.cpp:1791
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -3907,7 +3911,7 @@ msgstr ""
 "Algoritmus byl publikován ve 3. vydání <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1782
+#: src/gui/ViewDialog.cpp:1794
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizuální jasnost vypočítaná na základě fázového úhlu a albeda."
 
@@ -8357,7 +8361,7 @@ msgstr "Zobrazit pouze dráhy planet"
 
 #: src/ui_viewDialog.h:2547
 msgid "Show hints and labels for planetary features"
-msgstr "Zobrazit nápovědu a popisky pro planetární útvary"
+msgstr "Zobrazí značky a popisky pro planetární útvary"
 
 #: src/ui_viewDialog.h:2549
 msgid "Show planetary nomenclature"
@@ -8512,11 +8516,11 @@ msgstr "HII oblasti"
 
 #: src/ui_viewDialog.h:2655
 msgid "Use hints proportional to angular size of deep-sky objects"
-msgstr "Použít nápovědu úměrnou úhlové velikosti objektu vzdáleného vesmíru"
+msgstr "Použije značky úměrné úhlové velikosti objektu vzdáleného vesmíru"
 
 #: src/ui_viewDialog.h:2657
 msgid "Use proportional hints"
-msgstr "Použít proporcionální nápovědu"
+msgstr "Použít proporcionální značky"
 
 #: src/ui_viewDialog.h:2659
 msgid ""
@@ -8554,7 +8558,7 @@ msgstr "Popisky"
 
 #: src/ui_viewDialog.h:2671
 msgid "Hints"
-msgstr "Nápovědy"
+msgstr "Značky"
 
 #: src/ui_viewDialog.h:2672
 msgid "Configure colors of markers"
@@ -11665,20 +11669,20 @@ msgid ""
 "Prediction of artificial satellite positions in Earth orbit based on NORAD "
 "TLE data"
 msgstr ""
-"Předpovězení pozice umělých družic, obíhajících okolo Země, na základě NORAD"
-" TLE dat"
+"Předpovědi poloh umělých družic obíhajících okolo Země na základě NORAD TLE "
+"dat"
 
 #: plugins/Satellites/src/Satellites.cpp:147
 msgid "Satellite hints"
-msgstr "Popisy satelitů"
+msgstr "Družice"
 
 #: plugins/Satellites/src/Satellites.cpp:148
 msgid "Satellite labels"
-msgstr "Názvy satelitů"
+msgstr "Popisky družic"
 
 #: plugins/Satellites/src/Satellites.cpp:149
 msgid "Satellites configuration window"
-msgstr "Okno nastavení satelitů"
+msgstr "Okno nastavení družic"
 
 #: plugins/Satellites/src/Satellites.cpp:174
 msgid ""
@@ -11829,7 +11833,7 @@ msgstr "Mezinárodní označení"
 
 #: plugins/Satellites/src/Satellite.cpp:280
 msgid "artificial satellite"
-msgstr "umělý satelit"
+msgstr "umělá družice"
 
 #: plugins/Satellites/src/Satellite.cpp:289
 msgid "Approx. magnitude"
@@ -11847,7 +11851,7 @@ msgstr "Rychlost vůči pozorovateli"
 
 #: plugins/Satellites/src/Satellite.cpp:309
 msgid "SubPoint (Lat./Long.)"
-msgstr "Podbod (delka/šířka)"
+msgstr "Podbod (délka/šířka)"
 
 #. TRANSLATORS: TEME is an Earth-centered inertial coordinate system
 #: plugins/Satellites/src/Satellite.cpp:323
@@ -11877,19 +11881,19 @@ msgstr "Provozní stav"
 
 #: plugins/Satellites/src/Satellite.cpp:362
 msgid "The satellite and the observer are in sunlight."
-msgstr "Satelit a pozorovatel jsou ve slunečním světle."
+msgstr "Družice a pozorovatel jsou ve slunečním světle."
 
 #: plugins/Satellites/src/Satellite.cpp:365
 msgid "The satellite is visible."
-msgstr "Satelit je viditelný."
+msgstr "Družice je viditelná."
 
 #: plugins/Satellites/src/Satellite.cpp:368
 msgid "The satellite is eclipsed."
-msgstr "Satelit je zastíněn."
+msgstr "Družice je zastíněna."
 
 #: plugins/Satellites/src/Satellite.cpp:371
 msgid "The satellite is not visible"
-msgstr "Satelit není viditelný"
+msgstr "Družice není viditelná"
 
 #. TRANSLATORS: Unit of measurement of frequency
 #: plugins/Satellites/src/Satellite.cpp:397 plugins/Pulsars/src/Pulsar.cpp:276
@@ -12010,7 +12014,7 @@ msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr ""
-"Zásuvný modul satelitů je stále ve vývoji. Některé funkce chybí, nejsou "
+"Zásuvný modul Družice je stále ve vývoji. Některé funkce chybí, nejsou "
 "dokončeny nebo mají chyby."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
@@ -12024,8 +12028,8 @@ msgid ""
 "sources, and by default the plugin will do this if the existing data is more"
 " than 72 hours old. "
 msgstr ""
-"Zásuvný modul satelitů může automaticky stáhnout data TLE z internetových "
-"zdrojů a toto modul standardně provede, pokud jsou data starší vice než 72 "
+"Zásuvný modul Družice může automaticky stáhnout data TLE z internetových "
+"zdrojů a toto modul standardně provádí, pokud jsou data starší vice než 72 "
 "hodin. "
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:490
@@ -12044,12 +12048,12 @@ msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr ""
-"<b>Poznámka:</b> pokud název satelitu v aktualizovaných datech má cokoliv na"
-" konci umístěno v hranatých závorkách, budou před použitím obsah odstraněn."
+"<b>Poznámka:</b> pokud má název družice v aktualizovaných datech cokoliv na "
+"konci v hranatých závorkách, bude před použitím odstraněn."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:494
 msgid "Adding new satellites"
-msgstr "Přidávání nových satelitů"
+msgstr "Přidávání nových družic"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:495
 msgid ""
@@ -12058,10 +12062,10 @@ msgid ""
 " to the Satellites tab, and click the '+' button.  Select the satellite(s) "
 "you wish to add and select the \"add\" button."
 msgstr ""
-"1. Ujistěte se, že satelity, které si přejete přidat, jsou zahrnuty do jedné"
-" z URL vypsaných v kartě zdroje v dialogovém okně nastavení satelitů. 2. "
-"Přejdete na kartu Satelity a klikněte na tlačítko '+'. Vyberte satelity, "
-"které si přejete přidat a stiskněte tlačítko \"add\"."
+"1. Ujistěte se, že družice, které si přejete přidat, jsou zahrnuty do jedné "
+"z URL vypsaných na kartě zdroje v dialogovém okně nastavení družic. 2. "
+"Přejdete na kartu Družice a klikněte na tlačítko '+'. Vyberte družice, které"
+" si přejete přidat a stiskněte tlačítko \"Přidat\"."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:497
 msgid "Technical notes"
@@ -12135,6 +12139,7 @@ msgid_plural "Next update: %1 minute(s)"
 msgstr[0] "Další aktualizace: %1 minuta"
 msgstr[1] "Další aktualizace: %1 minuty"
 msgstr[2] "Další aktualizace: %1 minut"
+msgstr[3] "Další aktualizace: %1 minut"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:549
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:184
@@ -12148,6 +12153,7 @@ msgid_plural "Next update: %1 hour(s)"
 msgstr[0] "Další aktualizace: %1 hodina"
 msgstr[1] "Další aktualizace: %1 hodiny"
 msgstr[2] "Další aktualizace: %1 hodin"
+msgstr[3] "Další aktualizace: %1 hodin"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:560
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
@@ -12161,12 +12167,12 @@ msgstr "Chyba aktualizace"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
-msgstr "Aktualizováno %1/%2 satelitů; %3 přidáno; %4 odstraněno"
+msgstr "Aktualizováno %1/%2 družic; %3 přidáno; %4 odstraněno"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:575
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
-msgstr "Aktualizováno %1/%2 satelitů; %3 přidáno; %4 chybí"
+msgstr "Aktualizováno %1/%2 družic; %3 přidáno; %4 chybí"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:637
 msgid "[new source]"
@@ -12232,7 +12238,7 @@ msgstr "Jasnost"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1011
 msgid "Satellite"
-msgstr "Satelit"
+msgstr "Družice"
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:154
 msgid "Downloading data..."
@@ -12243,7 +12249,7 @@ msgid ""
 "Stellarium is downloading satellite data from the update sources. Please "
 "wait..."
 msgstr ""
-"Stellarium stahuje data satelitů ze zdrojů aktualizace. Čekejte prosím..."
+"Stellarium stahuje data pro družice ze zdrojů aktualizace. Čekejte prosím..."
 
 #: plugins/Satellites/src/gui/SatellitesImportDialog.cpp:172
 msgid "Select TLE source file(s)..."
@@ -12276,7 +12282,7 @@ msgstr "Katalogové číslo: %1"
 #: plugins/Satellites/src/ui_satellitesDialog.h:751
 #: plugins/Satellites/src/ui_satellitesDialog.h:752
 msgid "Satellites Configuration"
-msgstr "Nastavení satelitů"
+msgstr "Nastavení družic"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:754
 msgid "Updates"
@@ -12284,7 +12290,7 @@ msgstr "Aktualizace"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:755
 msgid "Update satellite data from Internet sources"
-msgstr "Aktualizovat data satelitů z internetových zdrojů"
+msgstr "Aktualizovat data pro družice z internetových zdrojů"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:756
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:234
@@ -12297,14 +12303,14 @@ msgstr "Poslední aktualizace:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:757
 msgid "On update, add all new satellites from the selected source(s)"
-msgstr "Při aktualizaci přidat všechny nové satelity ze zvolených zdrojů"
+msgstr "Při aktualizaci přidat všechny nové družice ze zvolených zdrojů"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:759
 msgid ""
 "On update, remove the satellites that are no longer listed in the update "
 "sources"
 msgstr ""
-"Při aktualizaci odstranit všechny satelity, které již nejsou uvedeny ve "
+"Při aktualizaci odstranit všechny družice, které již nejsou uvedeny ve "
 "zdrojích aktualizace"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:760
@@ -12350,11 +12356,11 @@ msgstr "Délka části (s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Show artificial satellites as markers"
-msgstr ""
+msgstr "Zobrazit umělé družice jako značky"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:786
 msgid "Hide invisible artificial satellites"
-msgstr ""
+msgstr "Skrýt neviditelné umělé družice"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:788
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -12380,15 +12386,15 @@ msgstr "Nastavení"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:791
 msgid "Double-click a satellite to start tracking it."
-msgstr "Dvojklikem na satelit ho začnete sledovat."
+msgstr "Dvojklikem na družici ji začnete sledovat."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:794
 msgid "Add more satellites"
-msgstr "Přidat další satelity"
+msgstr "Přidat další družice"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:797
 msgid "Remove the selected satellites"
-msgstr "Odstranit zvolené satelity"
+msgstr "Odstranit vybrané družice"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:801
 msgid "Save changes"
@@ -12400,7 +12406,7 @@ msgstr "Katalogové číslo:"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:807
 msgid "Display the selected satellite(s)"
-msgstr "Zobrazit vybrané satelity"
+msgstr "Zobrazit vybrané družice"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:809
 msgid "Displayed"
@@ -12408,7 +12414,7 @@ msgstr "Zobrazeno"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:811
 msgid "Display orbit line(s) for the selected satellite(s)"
-msgstr "Zobrazit oběžné čáry pro zvolené satelity"
+msgstr "Zobrazit oběžné dráhy pro vybrané družice"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:813
 msgid "Orbit"
@@ -12416,8 +12422,7 @@ msgstr "Oběžná dráha"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:815
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr ""
-"Neaktualizovat (nebo odstraňovat při aktualizaci) následující satelity"
+msgstr "Neaktualizuje (nebo odstraní při aktualizaci) vybrané družice"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:817
 msgid "Do not update"
@@ -12442,7 +12447,7 @@ msgid ""
 "next update if they are not already in the collection."
 msgstr ""
 "Satelity v označeném seznamu zdrojů budou automaticky přidány při příští "
-"aktualizaci, pokud již nejsou ve sbírce."
+"aktualizaci, pokud již nejsou v souboru."
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid ""
@@ -12477,7 +12482,7 @@ msgstr "Uložit předpověď..."
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:211
 msgid "More Satellites"
-msgstr "Další satelity"
+msgstr "Více družic"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:213
 msgid "Get data from update sources"
@@ -12490,7 +12495,7 @@ msgstr "Přerušit stahování"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:215
 msgid "New satellites"
-msgstr "Nové satelity"
+msgstr "Nové družice"
 
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:216
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:535
@@ -12538,50 +12543,50 @@ msgid "Move a telescope to a given set of coordinates"
 msgstr "Posunout dalekohled na dané souřadnice"
 
 #. TRANSLATORS: Description for Meade AutoStar compatible mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1688
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1700
 msgid ""
 "Any telescope or telescope mount compatible with Meade's AutoStar "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade LX200 (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1690
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1702
 msgid "Any telescope or telescope mount compatible with Meade LX200."
 msgstr ""
 
 #. TRANSLATORS: Description for Meade ETX70 (#494 Autostar, #506 CCS) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1692
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1704
 msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
 msgstr ""
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1694
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1706
 msgid "Losmandy's G-11 telescope mount."
 msgstr ""
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1696
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1708
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
 msgstr ""
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1698
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1710
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1700
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1712
 msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
-#: plugins/TelescopeControl/src/TelescopeControl.cpp:1702
+#: plugins/TelescopeControl/src/TelescopeControl.cpp:1714
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
@@ -13898,23 +13903,23 @@ msgstr "Názvy mlhovin"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:374
 msgid "Nebula hints"
-msgstr "Náznaky mlhoviny"
+msgstr "Mlhoviny"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:378
 msgid "Galaxy hints"
-msgstr ""
+msgstr "Galaxie"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:382
 msgid "Bright nebulae hints"
-msgstr ""
+msgstr "Jasné mlhoviny"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:386
 msgid "Dark nebulae hints"
-msgstr "Nápověda pro temné mlhoviny"
+msgstr "Temné mlhoviny"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:390
 msgid "Clusters hints"
-msgstr ""
+msgstr "Hvězdokupy"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:404
 msgid "Galactic equator line"
@@ -14376,6 +14381,7 @@ msgid_plural "Next update: %1 day(s)"
 msgstr[0] "Další aktualizace: %1 den"
 msgstr[1] "Další aktualizace: %1 dny"
 msgstr[2] "Další aktualizace: %1 dní"
+msgstr[3] "Další aktualizace: %1 dní"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:226
 msgid "Historical supernovae is updated"
@@ -14421,16 +14427,16 @@ msgstr "[informace o příští aktualizaci]"
 
 #: plugins/NavStars/src/NavStars.cpp:52 plugins/NavStars/src/NavStars.cpp:112
 msgid "Navigational Stars"
-msgstr ""
+msgstr "Navigační hvězdy"
 
 #: plugins/NavStars/src/NavStars.cpp:55
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 msgid "This plugin marks navigational stars from a selected set."
-msgstr ""
+msgstr "Tento zásuvný modul označí navigační hvězdy ze zvolené sady."
 
 #: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
-msgstr ""
+msgstr "Označit navigační hvězdy"
 
 #. TRANSLATORS: The emphasis tags mark a title.
 #: plugins/NavStars/src/NavStars.cpp:295
@@ -14441,6 +14447,10 @@ msgid ""
 "navigational aids such as the <em>2102D Star Finder</em> and "
 "<em>Identifier</em>."
 msgstr ""
+"57 \"vybraných hvězd\", které jsou uvedeny v <em>The Nautical Almanac</em>, "
+"který je od roku 1958 společně publikují Her Majesty's Nautical Almanac "
+"Office a US Naval Observatory. Tyto hvězdy jsou následně rovněž používány v "
+"navigačních pomůckách jako <em>2102D Star Finder</em> a <em>Identifier</em>."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:301
@@ -14449,6 +14459,8 @@ msgid ""
 "The 81 stars that are listed in the <em>%1</em> published by the French "
 "Bureau des Longitudes."
 msgstr ""
+"81 hvězd uvedených v <em>%1</em> publikoaným francouzkým Bureau des "
+"Longitudes."
 
 #. TRANSLATORS: The emphasis tags mark a book title.
 #: plugins/NavStars/src/NavStars.cpp:307
@@ -14457,6 +14469,8 @@ msgid ""
 "The 160 stars that are listed in the Russian Nautical Almanac (The original "
 "Russian title is <em>%1</em>)."
 msgstr ""
+"160 hvězd uvedených v ruském námořním almanachu (jeho původní ruský název je"
+" <em>%1</em>)."
 
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:92
 msgid "Navigational Stars Plug-in"
@@ -14489,15 +14503,15 @@ msgstr "Sada navigačních hvězd"
 #: plugins/NavStars/src/ui_navStarsWindow.h:213
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:305
 msgid "Place of the string with coordinates of the mouse pointer"
-msgstr ""
+msgstr "Umístění řetězce se souřadnicemi ukazatele myši"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:215
 msgid "Current set:"
-msgstr ""
+msgstr "Aktuální sada:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:216
 msgid "Note:"
-msgstr ""
+msgstr "Poznámka:"
 
 #: plugins/NavStars/src/ui_navStarsWindow.h:218
 #: plugins/Quasars/src/ui_quasarsDialog.h:301
@@ -14582,10 +14596,13 @@ msgstr "Nastavení zásuvného modulu Jasné novy"
 
 #: plugins/Quasars/src/Quasars.cpp:75
 msgid ""
-"A plugin that shows some quasars brighter than 18 visual magnitude. A "
-"catalogue of quasars compiled from 'Quasars and Active Galactic Nuclei' "
+"A plugin that shows some quasars brighter than visual magnitude 18. The "
+"catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
+"Zásuvný modul, který zobrazuje některé kvasary jasnější než vizuální "
+"magnituda 18. Katalog kvasarů byl sestaven z 'Quasars and Active Galactic "
+"Nuclei' (13. vydání) (Veron+ 2010)."
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -14599,19 +14616,19 @@ msgstr "Okno nastavení kvasarů"
 #: plugins/Quasars/src/Quasar.cpp:153
 msgctxt "radio flux density"
 msgid "Jy"
-msgstr ""
+msgstr "Jy"
 
 #: plugins/Quasars/src/Quasar.cpp:157
 msgid "Radio flux density around 5GHz (6cm)"
-msgstr ""
+msgstr "Hustota radiového toku kolem 5 GHz (6 cm)"
 
 #: plugins/Quasars/src/Quasar.cpp:159
 msgid "Radio flux density around 1.4GHz (21cm)"
-msgstr ""
+msgstr "Hustota radiového toku kolem  1,4 GHz (21 cm)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 msgid "Quasars Plug-in"
-msgstr "Zásuvný modul kvasarů"
+msgstr "Zásuvný modul Kvasary"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
 msgid ""
@@ -14619,6 +14636,9 @@ msgid ""
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"Zásuvný modul Kvasary zobrazuje některé kvasary jasnější než vizuální "
+"magnituda 18. Katalog kvasarů byl sestaven z 'Quasars and Active Galactic "
+"Nuclei' (13. vydání)."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 msgid "Veron+ 2010"
@@ -14627,7 +14647,7 @@ msgstr "Veron+ 2010"
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
-msgstr ""
+msgstr "Aktuální katalog obsahuje informace o %1 kvasarech."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:246
 msgid "Quasars is updated"
@@ -14659,11 +14679,11 @@ msgstr "Zobrazit tlačítko kvasarů v nástrojové liště"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:303
 msgid "Use markers for quasars"
-msgstr ""
+msgstr "Použít značky pro kvasary"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:304
 msgid "Quasars marker color"
-msgstr ""
+msgstr "Barva značek kvasarů"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
 #: plugins/Pulsars/src/Pulsars.cpp:168
@@ -14696,17 +14716,18 @@ msgstr "pulsar"
 #, qt-format, qt-plural-format
 msgid "has %1 registered glitch(es)"
 msgid_plural "has %1 registered glitch(es)"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "má %1 registrovanou skokovou změnu rotace"
+msgstr[1] "má %1 skokové změny rotace"
+msgstr[2] "má %1 registrovaných změn rotace"
+msgstr[3] "má %1 registrovaných změn rotace"
 
 #: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "pulsar with glitches"
-msgstr ""
+msgstr "pulsar se skokovými změnami rotace"
 
 #: plugins/Pulsars/src/Pulsar.cpp:199
 msgid "Barycentric period"
-msgstr ""
+msgstr "Barycentrická perioda"
 
 #. TRANSLATORS: Unit of measure for period - seconds
 #: plugins/Pulsars/src/Pulsar.cpp:202
@@ -14716,11 +14737,11 @@ msgstr "s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:206
 msgid "Time derivative of barycentric period"
-msgstr ""
+msgstr "Časová změna barycentrické periody"
 
 #: plugins/Pulsars/src/Pulsar.cpp:211
 msgid "Dispersion measure"
-msgstr ""
+msgstr "Míra rozptylu"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
 #: plugins/Pulsars/src/Pulsar.cpp:214
@@ -14736,7 +14757,7 @@ msgstr "cm"
 
 #: plugins/Pulsars/src/Pulsar.cpp:223
 msgid "Spin down energy loss rate"
-msgstr ""
+msgstr "Rychlost ztráty rotační energie"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
 #: plugins/Pulsars/src/Pulsar.cpp:226
@@ -14746,7 +14767,7 @@ msgstr "erg/s"
 
 #: plugins/Pulsars/src/Pulsar.cpp:232
 msgid "Binary period of pulsar"
-msgstr ""
+msgstr "Binární perioda pulsaru"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: plugins/Pulsars/src/Pulsar.cpp:235 plugins/Exoplanets/src/Exoplanet.cpp:351
@@ -14770,12 +14791,12 @@ msgstr "milivteřin"
 
 #: plugins/Pulsars/src/Pulsar.cpp:253
 msgid "Distance based on electron density model"
-msgstr ""
+msgstr "Vzdálenost založená na modelu elektronové hustoty"
 
 #: plugins/Pulsars/src/Pulsar.cpp:266
 #, no-c-format
 msgid "Profile width at 50% of peak"
-msgstr ""
+msgstr "Šířka profilu na 50% maxima"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
 #: plugins/Pulsars/src/Pulsar.cpp:269
@@ -14786,7 +14807,7 @@ msgstr "ms"
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
 #: plugins/Pulsars/src/Pulsar.cpp:274
 msgid "Time averaged flux density at"
-msgstr "Časem způměrovaná hustota toku na"
+msgstr "Časově způměrovaná hustota toku na"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
 #: plugins/Pulsars/src/Pulsar.cpp:278
@@ -14799,18 +14820,18 @@ msgstr "mJy"
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:306
 msgid "Notes"
-msgstr ""
+msgstr "Poznámky"
 
 #: plugins/Pulsars/src/Pulsar.cpp:379
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr ""
-"Neobvyklý pulsar s rentgenovým zářím nebo opakovač vyzařující měkké gama "
-"paprsky se zjištěnými pulsy"
+"Neobvyklý rentgenový pulsar nebo zdroj opakovaně vyzařující měkké gama "
+"záření se zjištěnými pulsy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:384
 msgid "has one or more binary companions"
-msgstr "má jeden nebo více binárních společníků"
+msgstr "má jeden nebo více binárních průvodců"
 
 #: plugins/Pulsars/src/Pulsar.cpp:389
 msgid "with pulsed emission from radio to infrared or higher frequencies"
@@ -14826,19 +14847,19 @@ msgstr "s pulsními emisemi v radiovém pásmu"
 
 #: plugins/Pulsars/src/Pulsar.cpp:404
 msgid "with intermittently pulsed radio emission"
-msgstr "s nepravidelnými pulsními radiovými emisemi"
+msgstr "s přerušovanými pulsními radiovými emisemi"
 
 #: plugins/Pulsars/src/Pulsar.cpp:409
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr ""
-"isolovaná neutronová hvězda s pulsní tepelnou rentgenovou emisí ale žádnou "
-"zjistitelnou radiovou emisí"
+"izolovaná neutronová hvězda s pulsní tepelnou rentgenovou emisí, ale s "
+"žádnou detekovanou radiovou emisí"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 msgid "Pulsars Plug-in"
-msgstr "Zásuvný modul pulsarů"
+msgstr "Zásuvný modul Pulsary"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
 #, qt-format
@@ -14854,7 +14875,7 @@ msgstr ""
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
-msgstr ""
+msgstr "Aktuální katalog obsahuje informace o %1 pulsarech."
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 msgid "pulsar identifiers have the prefix 'PSR'"
@@ -14890,7 +14911,7 @@ msgstr "Pulsary jsou aktualizovány"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:324
 msgid "Pulsars Plug-in Configuration"
-msgstr "Nastavení zásuvného modulu pulsarů"
+msgstr "Nastavení zásuvného modulu Pulsary"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:332
 msgid "Settings for pulsars"
@@ -14898,11 +14919,11 @@ msgstr "Nastavení pro pulsary"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:334
 msgid "Plot all pulsars without labels"
-msgstr "Nakreslit všechny pulsary bez jmenovek"
+msgstr "Zobrazit všechny pulsary bez popisek"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:336
 msgid "Enable display of distribution for pulsars"
-msgstr "Povolit zobrazení šíření pulsarů"
+msgstr "Povolit zobrazení rozdělení pulsarů"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:338
 msgid "Show pulsars button on toolbar"
@@ -14910,23 +14931,24 @@ msgstr "Zobrazit tlačítko pulsarů v nástrojové liště"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:339
 msgid "Pulsars marker color"
-msgstr ""
+msgstr "Barva značek pulsarů"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
-msgid "Color of markers of pulsars"
-msgstr ""
+msgid "Marker Color for pulsars"
+msgstr "Barva značek pro pulsary"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
-msgstr ""
+msgstr "Použít odlišnou barvu pro pulsary se skokovými změnami rotace"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:345
-msgid "Color of markers of pulsars with glitches"
-msgstr ""
+msgid "Marker Color for pulsars with glitches"
+msgstr "Barva značek pro pulsary se skokovými změnami"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
 msgstr ""
+"Zobrazit pouze pulsary s časově zprůměrovanou hustotou toku na 400 MHz a výš"
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
@@ -18243,11 +18265,11 @@ msgstr "Název:"
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:224
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:576
 msgid "ArchaeoLines"
-msgstr ""
+msgstr "ArcheoLinie"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:61
 msgid "A tool for archaeo-/ethnoastronomical alignment studies"
-msgstr ""
+msgstr "Nástroj pro archeo-/etnoastronomické studie postavení nebeských těles"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:245
 msgid "Show Line for Equinox"
@@ -18255,7 +18277,7 @@ msgstr "Zobrazit rovnodennost"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:246
 msgid "Show Line for Solstices"
-msgstr ""
+msgstr "Zobrazit obratníky"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:247
 msgid "Show Line for Crossquarter"
@@ -18271,23 +18293,23 @@ msgstr "Zobrazit nízký lunovrat"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:250
 msgid "Show Line for Zenith Passage"
-msgstr ""
+msgstr "Zobrazit deklinaci procházející zenitem"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:251
 msgid "Show Line for Nadir Passage"
-msgstr ""
+msgstr "Zobrazit deklinaci procházející nadirem"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:252
 msgid "Show Line for Selected Object"
-msgstr ""
+msgstr "Zobrazit deklinaci vybraného tělesa"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:253
 msgid "Show Line for Current Sun"
-msgstr "Zobrazit čáru pro současné Slunce"
+msgstr "Zobrazit deklinaci pro aktuální Slunce"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:254
 msgid "Show Line for Current Moon"
-msgstr "Zobrazit čáru pro současný Měsíc"
+msgstr "Zobrazit deklinaci pro aktuální Měsíc"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:255
 msgid "Show Vertical for Geographic Location 1"
@@ -18307,11 +18329,11 @@ msgstr "Zobrazit vertikál pro uživatelský azimut 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:259
 msgid "Show Line for Custom Declination 1"
-msgstr "Zobrazit čáru pro uživatelskou deklinaci 1"
+msgstr "Zobrazit uživatelskou deklinaci 1"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Custom Declination 2"
-msgstr "Zobrazit čáru pro uživatelskou deklinaci 2"
+msgstr "Zobrazit uživatelskou deklinaci 2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1263
 msgid "Equinox"
@@ -18319,7 +18341,7 @@ msgstr "Rovnodennost"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1266
 msgid "Solstice"
-msgstr "obratník"
+msgstr "Obratník"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1269
 msgid "Crossquarter"
@@ -18335,11 +18357,11 @@ msgstr "Nízký lunovrat"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1278
 msgid "Zenith Passage"
-msgstr ""
+msgstr "Průchod zenitem"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1281
 msgid "Nadir Passage"
-msgstr ""
+msgstr "Průchod nadirem"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1284
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:548
@@ -18360,13 +18382,15 @@ msgstr "Venuše"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:251
 msgid "ArchaeoLines Plug-in"
-msgstr ""
+msgstr "Zásuvný modul ArcheoLinie"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:258
 msgid ""
 "The ArchaeoLines plugin displays any combination of declination arcs most "
 "relevant to archaeo- or ethnoastronomical studies."
 msgstr ""
+"Zásuvný modul ArcheoLinie zobrazí libovolnou kombinaci deklinačních kružnic,"
+" které jsou nejdůležitější pro archeo- nebo etnoastronomické studie."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:259
 msgid "Declinations of equinoxes (i.e. equator) and the solstices"
@@ -18388,11 +18412,11 @@ msgstr "Deklinace nízkého lunovratu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:263
 msgid "Declination of the Zenith passage"
-msgstr ""
+msgstr "Deklinace procházející zenitem"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:264
 msgid "Declination of the Nadir passage"
-msgstr ""
+msgstr "Deklinace procházející nadirem"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:265
 msgid "Declination of the currently selected object"
@@ -18400,15 +18424,15 @@ msgstr "Deklinace aktuálně vybraného objektu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:266
 msgid "Current declination of the sun"
-msgstr "Současná deklinace Slunce"
+msgstr "Aktuální deklinace Slunce"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:267
 msgid "Current declination of the moon"
-msgstr "Současná deklinace Měsíce"
+msgstr "Aktuální deklinace Měsíce"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:268
 msgid "Current declination of a naked-eye planet"
-msgstr ""
+msgstr "Aktuální deklinace planety viditelné pouhým okem"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:269
 msgid ""
@@ -18417,8 +18441,8 @@ msgid ""
 "of the moon at the major standstill can exceed the indicated limits if it is"
 " high in the sky due to parallax effects."
 msgstr ""
-"Měsíční čáry zahrnují vlivy horizontální paralaxy. Vykreslují se vždy dvě "
-"čáry: jedna pro maximální a druhá pro minimální vzdálenost Měsíce. "
+"Kružnice Měsíce zahrnují vliv horizontální paralaxy. Vykreslují se vždy dvě "
+"kružnice: jedna pro maximální a druhá pro minimální vzdálenost Měsíce. "
 "Upozornění: deklinace Měsíce při vysokém lunovratu může vlivem paralaxy "
 "přesáhnout naznačené meze, pokud je Měsíc vysoko na obloze."
 
@@ -18430,66 +18454,70 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
+"Některá náboženství, zejména islám, dodržují při svém praktikování "
+"nasměrování motlitby k určitému místu. Zobrazeny mohou být azimuty pro dvě "
+"místa. Výchozími místy jsou Mekka (Kaaba) a Jeruzalém. Směry jsou vypočítány"
+" na základě sférické trigonometrie na sférické Zemi."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:276
 msgid ""
 "In addition, up to two vertical lines with arbitrary azimuth and declination"
 " lines with custom label can be shown."
 msgstr ""
-"Navíc lze zobrazit až dvě svislé čáry s libovolným azimutem a dvě deklinační"
-" kružnice s uživatelským popiskem."
+"Navíc lze zobrazit až dvě vertikály s libovolným azimutem a dvě deklinační "
+"kružnice s uživatelským popiskem."
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:366
 msgid "Select color for equinox line"
-msgstr "Vybrat barvu pro čáru rovnodennosti"
+msgstr "Vybrat barvu pro rovník"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:377
 msgid "Select color for solstice lines"
-msgstr ""
+msgstr "Vybrat barvu pro obratníky"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:388
 msgid "Select color for crossquarter lines"
-msgstr "Vybrat barvu pro půlobratník"
+msgstr "Vybrat barvu pro půlobratníky"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:399
 msgid "Select color for major standstill lines"
-msgstr "Vybrat barvu pro čáry vysokého lunovratu"
+msgstr "Vybrat barvu pro vysoký lunovrat"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:410
 msgid "Select color for minor standstill lines"
-msgstr "Vybrat barvu pro čáry nízkého lunovratu"
+msgstr "Vybrat barvu pro nízký lunovrat"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:421
 msgid "Select color for zenith passage line"
-msgstr ""
+msgstr "Vybrat barvu kružnice procházející zenitem"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:432
 msgid "Select color for nadir passage line"
-msgstr ""
+msgstr "Vybrat barvu kružnice procházející nadirem"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:443
 msgid "Select color for selected object line"
-msgstr ""
+msgstr "Vybrat barvu pro deklinaci vybraného objektu"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:454
 msgid "Select color for current sun line"
-msgstr ""
+msgstr "Vybrat barvu pro deklinaci aktuálního Slunce"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:465
 msgid "Select color for current moon line"
-msgstr ""
+msgstr "Vybrat barvu pro deklinaci aktuálního Měsíce"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:476
 msgid "Select color for current planet line"
-msgstr ""
+msgstr "Vybrat barvu pro deklinaci aktuální planety"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:487
 msgid "Select color for Geographic Location 1 line"
-msgstr ""
+msgstr "Vybrat barvu pro zeměpisnou polohu 1"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:498
 msgid "Select color for Geographic Location 2 line"
-msgstr ""
+msgstr "Vybrat barvu pro zeměpisnou polohu 2"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:509
 msgid "Select color for Custom Azimuth 1 line"
@@ -18509,11 +18537,11 @@ msgstr "Vybrat barvu pro uživatelskou deklinaci 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:527
 msgid "ArchaeoLines Configuration"
-msgstr ""
+msgstr "Konfigurace ArcheoLinií"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:528
 msgid "ArchaeoLines Plug-in Configuration"
-msgstr ""
+msgstr "Konfigurace zásuvného modulu ArcheoLinie"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:530
 msgid "To change colors you may have to leave fullscreen mode!"
@@ -18525,12 +18553,12 @@ msgstr "Uživatelská deklinace 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:534
 msgid "Current Sun"
-msgstr "Současné Slunce"
+msgstr "Aktuální Slunce"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:536
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:542
 msgid "Enter a label (location name) for this line"
-msgstr ""
+msgstr "Zadejte popisek (jméno místa) pro tuto kružnici"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:538
 msgid "Geographic Location 1"
@@ -18550,31 +18578,31 @@ msgstr "Nízký lunovrat"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:552
 msgid "Current Planet: None"
-msgstr "Stávající planeta: žádná"
+msgstr "Aktuální planeta: žádná"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:553
 msgid "Current Planet: Mercury"
-msgstr "Stávající planeta: Merkur"
+msgstr "Aktuální planeta: Merkur"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:554
 msgid "Current Planet: Venus"
-msgstr "Stávající planeta: Venuše"
+msgstr "Aktuální planeta: Venuše"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:555
 msgid "Current Planet: Mars"
-msgstr "Stávající planeta: Mars"
+msgstr "Aktuální planeta: Mars"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:556
 msgid "Current Planet: Jupiter"
-msgstr "Stávající planeta: Jupiter"
+msgstr "Aktuální planeta: Jupiter"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:557
 msgid "Current Planet: Saturn"
-msgstr "Stávající planeta: Saturn"
+msgstr "Aktuální planeta: Saturn"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:559
 msgid "Declination of Nadir passage"
-msgstr ""
+msgstr "Deklinace procházející nadirem"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:560
 msgid "Custom Azimuth 1"
@@ -18587,7 +18615,7 @@ msgstr "Uživatelský azimut 2"
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:563
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:566
 msgid "Enter a label for this line"
-msgstr ""
+msgstr "Zadejte popisek pro tuto kružnici"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:568
 msgid "Solstice Lines"
@@ -18595,11 +18623,11 @@ msgstr "Obratníky"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:569
 msgid "Current Moon"
-msgstr "Současný Měsíc"
+msgstr "Aktuální Měsíc"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:570
 msgid "Declination of Zenith passage"
-msgstr ""
+msgstr "Deklinace procházející zenitem"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:571
 msgid "Crossquarter Lines"
