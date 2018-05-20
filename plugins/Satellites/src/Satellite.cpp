@@ -889,16 +889,14 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		return;
 
 	XYZ = getJ2000EquatorialPos(core);
-	StelSkyDrawer* sd = core->getSkyDrawer();
-	Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
-	painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
 
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
 	{
 		if (realisticModeFlag)
 		{
-			double mag = getVMagnitude(core);
+			float mag = getVMagnitude(core);
+			StelSkyDrawer* sd = core->getSkyDrawer();
 
 			RCMag rcMag;
 			Vec3f color = Vec3f(1.f,1.f,1.f);
@@ -925,24 +923,27 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 				painter.setColor(color[0], color[1], color[2], 1.f);
 
 			// Draw the label of the satellite when it enabled
-			if (txtMag <= sd->getLimitMagnitude() && Satellite::showLabels)
+			if (txtMag <= sd->getLimitMagnitude() && showLabels)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
 
 		}
 		else
 		{
 			bool visible = true;
-			if (Satellite::hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE)
+			if (hideInvisibleSatellitesFlag && visibility != gSatWrapper::VISIBLE)
 				visible = false;
 
 			if (visible)
 			{
-				if (Satellite::showLabels)
+				Vec3f drawColor = (visibility == gSatWrapper::VISIBLE) ? hintColor : invisibleSatelliteColor; // Use hintColor for visible satellites only
+				painter.setColor(drawColor[0], drawColor[1], drawColor[2], hintBrightness);
+
+				if (showLabels)
 					painter.drawText(XYZ, name, 0, 10, 10, false);
 
 				painter.setBlending(true, GL_ONE, GL_ONE);
 
-				Satellite::hintTexture->bind();
+				hintTexture->bind();
 				painter.drawSprite2dMode(XYZ, 11);
 			}
 		}
