@@ -31,6 +31,8 @@
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
 #include "StelToastGrid.hpp"
+#include "StelVertexArray.hpp"
+#include "StelFader.hpp"
 
 class StelPainter;
 class ToastSurvey;
@@ -61,11 +63,12 @@ public:
 	ToastTile(ToastSurvey *survey, int level, int x, int y);
 	virtual ~ToastTile();
 	Coord getCoord() const { Coord c = { level, x, y }; return c; }
-	void draw(StelPainter* painter, const SphericalCap& viewportShape, int maxVisibleLevel);
+	// color is a global sky color (set to 1/1/1 for full brightness) which may be modulated by atmospheric brightness.
+	void draw(StelPainter* painter, const SphericalCap& viewportShape, int maxVisibleLevel, Vec3f color);
 	bool isTransparent();
 
 protected:
-	void drawTile(StelPainter* painter);
+	void drawTile(StelPainter* painter, Vec3f color);
 	//! Return the survey the tile belongs to.
 	const ToastSurvey* getSurvey() const;
 	//! Return the toast grid used by the tile.
@@ -75,7 +78,8 @@ protected:
 	//! return whether the tile is covered by its children tiles
 	//! This is used to avoid drawing tiles that will be covered anyway
 	bool isCovered(const SphericalCap& viewportShape) const;
-	void prepareDraw();
+	//! prepare arrays. color is set for a global brightness scaling. With atmosphere on, this will also set extinction effects.
+	void prepareDraw(Vec3f color);
 
 private:
 	//! The ToastSurvey object this tile belongs to
@@ -108,7 +112,7 @@ private:
 	QVector<Vec3d> vertexArray;
 	QVector<Vec2f> textureArray;
 	QVector<unsigned short> indexArray;
-
+	QVector<Vec3f> colorArray; // for extinction
 	// Used for smooth fade in
 	QTimeLine texFader;
 };
@@ -146,9 +150,9 @@ public:
 	void putIntoCache(ToastTile* tile);
 
 private:
-	ToastGrid* grid = Q_NULLPTR;
+	ToastGrid* grid;
 	QString path;
-	ToastTile* rootTile = Q_NULLPTR;
+	ToastTile* rootTile;
 	int maxLevel;
 
 	typedef QCache<ToastTile::Coord, ToastTile> ToastCache;

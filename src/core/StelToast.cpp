@@ -20,9 +20,13 @@
 #include "StelApp.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "StelSkyDrawer.hpp"
+#include "StelModuleMgr.hpp"
+#include "RefractionExtinction.hpp"
 #include "StelTexture.hpp"
 #include "StelTextureMgr.hpp"
 #include "StelToast.hpp"
+#include "LandscapeMgr.hpp"
 
 #include <QTimeLine>
 
@@ -101,9 +105,12 @@ bool ToastTile::isCovered(const SphericalCap& viewportShape) const
 }
 
 
-void ToastTile::prepareDraw()
+void ToastTile::prepareDraw(Vec3f color)
 {
 	Q_ASSERT(!empty);
+
+	StelSkyDrawer *drawer=StelApp::getInstance().getCore()->getSkyDrawer();
+	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
 
 	if (texture.isNull())
 	{
@@ -127,7 +134,38 @@ void ToastTile::prepareDraw()
 		vertexArray = getGrid()->getVertexArray(level, x, y, ml);
 		textureArray = getGrid()->getTextureArray(level, x, y, ml);
 		indexArray = getGrid()->getTrianglesIndex(level, x, y, ml);
+		colorArray.clear();
+		for (int i=0; i<vertexArray.size(); ++i)
+			colorArray.append(color);
 	}
+	// Recreate the color array in any case. Assume we must compute extinction on every frame.
+	if (withExtinction)
+	{
+		StelCore *core=StelApp::getInstance().getCore();
+		// We must process the vertices to find geometric altitudes in order to compute vertex colors.
+		const Extinction& extinction=drawer->getExtinction();
+		colorArray.clear();
+
+		for (int i=0; i<vertexArray.size(); ++i)
+		{
+			Vec3d vertAltAz=core->j2000ToAltAz(vertexArray.at(i), StelCore::RefractionOn);
+			Q_ASSERT(fabs(vertAltAz.lengthSquared()-1.0) < 0.001);
+
+			float oneMag=0.0f;
+			extinction.forward(vertAltAz, &oneMag);
+			// drop of one magnitude: should be factor 2.5 or 40%. We take 70% to keep it more visible.
+			// Also, for Toast, we do not observe Bortle as for the default MilkyWay.
+			float extinctionFactor=std::pow(0.7f , oneMag);
+			Vec3f thisColor=Vec3f(color[0]*extinctionFactor, color[1]*extinctionFactor, color[2]*extinctionFactor);
+			colorArray.append(thisColor);
+		}
+
+	}
+	else
+	{
+		colorArray.fill(Vec3f(1.0f));
+	}
+
 
 	if (subTiles.isEmpty() && level < getSurvey()->getMaxLevel())
 	{
@@ -151,10 +189,9 @@ void ToastTile::prepareDraw()
 }
 
 
-void ToastTile::drawTile(StelPainter* sPainter)
+void ToastTile::drawTile(StelPainter* sPainter, Vec3f color)
 {
-	if (!prepared)
-		prepareDraw();
+	prepareDraw(color);
 
 	// Still not ready
 	if (texture.isNull() || !texture->bind())
@@ -170,19 +207,16 @@ void ToastTile::drawTile(StelPainter* sPainter)
 	if (texFader.state()==QTimeLine::Running)
 	{
 		sPainter->setBlending(true);
-		sPainter->setColor(1,1,1, texFader.currentValue());
 	}
 	else
 	{
 		sPainter->setBlending(false);
-		sPainter->setColor(1, 1, 1, 1);
 	}
 
 	Q_ASSERT(vertexArray.size() == textureArray.size());
 
 	sPainter->setCullFace(true);
-	// sPainter.drawArrays(GL_TRIANGLES, vertexArray.size(), vertexArray.data(), textureArray.data(), Q_NULLPTR, Q_NULLPTR, indexArray.size(), indexArray.constData());
-	sPainter->setArrays(vertexArray.constData(), textureArray.constData());
+	sPainter->setArrays(vertexArray.constData(), textureArray.constData(), colorArray.constData());
 	sPainter->drawFromArray(StelPainter::Triangles, indexArray.size(), 0, true, indexArray.constData());
 
 //	SphericalConvexPolygon poly(getGrid()->getPolygon(level, x, y));
@@ -191,7 +225,7 @@ void ToastTile::drawTile(StelPainter* sPainter)
 }
 
 
-void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, int maxVisibleLevel)
+void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, int maxVisibleLevel, Vec3f color)
 {
 	if (!isVisible(viewportShape, maxVisibleLevel))
 	{
@@ -209,26 +243,27 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 		return;
 	}
 	if (level==maxVisibleLevel || !isCovered(viewportShape))
-		drawTile(sPainter);
+		drawTile(sPainter, color);
 
 	// Draw all the children
 	foreach (ToastTile* child, subTiles)
 	{
-		child->draw(sPainter, viewportShape, maxVisibleLevel);
+		child->draw(sPainter, viewportShape, maxVisibleLevel, color);
 	}
 }
 
 /////// ToastSurvey methods ////////////
 ToastSurvey::ToastSurvey(const QString& path, int amaxLevel)
-	: path(path), maxLevel(amaxLevel), toastCache(200)
+	: grid(Q_NULLPTR), path(path), rootTile(Q_NULLPTR), maxLevel(amaxLevel), toastCache(200)
 {
 }
 
 ToastSurvey::~ToastSurvey()
 {
 	delete rootTile;
-	delete grid;
 	rootTile = Q_NULLPTR;
+	delete grid;
+	grid = Q_NULLPTR;
 }
 
 
@@ -255,9 +290,39 @@ void ToastSurvey::draw(StelPainter* sPainter)
 	if (!grid) grid = new ToastGrid(maxLevel);
 	if (!rootTile) rootTile = new ToastTile(this, 0, 0, 0);
 
-	// We also get the viewport shape to discard invisibly tiles.
+	// Compute global brightness depending on sky/atmosphere. (taken from MilkyWay, but without extra Bortle stuff)
+	StelCore *core=StelApp::getInstance().getCore();
+	StelSkyDrawer *drawer=core->getSkyDrawer();
+	const bool withExtinction=(drawer->getFlagHasAtmosphere() && drawer->getExtinction().getExtinctionCoefficient()>=0.01f);
+	Vec3f color(1.0f);
+
+	if (withExtinction)
+	{
+		const float lum = drawer->surfaceBrightnessToLuminance(12.f); // How to calibrate the DSS texture?
+
+		// Get the luminance scaled between 0 and 1
+		StelToneReproducer* eye = core->getToneReproducer();
+		float aLum =eye->adaptLuminanceScaled(lum);
+
+		// Bound a maximum luminance. GZ: Is there any reference/reason, or just trial and error?
+		aLum = qMin(1.0f, aLum*2.f); // Was 0.38 for MilkyWay. TOAST is allowed to look a bit artificial though...
+		color.set(aLum, aLum, aLum);
+
+		// adapt brightness by atmospheric brightness. This block developed for ZodiacalLight, hopefully similarly applicable...
+		const float atmLum = GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance();
+		// 10cd/m^2 at sunset, 3.3 at civil twilight (sun at -6deg). 0.0145 sun at -12, 0.0004 sun at -18,  0.01 at Full Moon!?
+		//qDebug() << "AtmLum: " << atmLum;
+		float atmFactor=qMax(0.35f, 50.0f*(0.02f-atmLum)); // keep visible in twilight, but this is enough for some effect with the moon.
+		color*=atmFactor*atmFactor;
+
+		if (color[0]<0) color[0]=0;
+		if (color[1]<0) color[1]=0;
+		if (color[2]<0) color[2]=0;
+	}
+
+	// We also get the viewport shape to discard invisible tiles.
 	const SphericalCap& viewportRegion = sPainter->getProjector()->getBoundingCap();
-	rootTile->draw(sPainter, viewportRegion, maxVisibleLevel);
+	rootTile->draw(sPainter, viewportRegion, maxVisibleLevel, color);
 }
 
 
