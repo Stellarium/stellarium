@@ -126,10 +126,34 @@ bool StelObject::isAboveRealHorizon(const StelCore *core) const
 	return r;
 }
 
+int StelObject::getCulminationType(const StelCore *core) const
+{
+	float latitude = core->getCurrentLocation().latitude;
+	double dec, ra, declination;
+	bool sign;
+	StelUtils::rectToSphe(&ra, &dec, getJ2000EquatorialPos(core));
+	StelUtils::radToDecDeg(dec, sign, declination);
+	if (!sign)
+		declination *= -1;
+
+	if (qAbs(declination + latitude)>90.f)
+		return 1; // The object is above the horizon even at its lower culmination
+	else if (qAbs(declination - latitude)>90.f)
+		return -1; // The object is below the horizon even at its upper culmination
+	else
+		return 0; // The upper culmination is above and the lower below the horizon, so the body is observed to rise and set daily
+}
+
 float StelObject::getVMagnitude(const StelCore* core) const 
 {
 	Q_UNUSED(core);
 	return 99;
+}
+
+Vec3f StelObject::getRTSTime(const StelCore *core) const
+{
+	Q_UNUSED(core);
+	return Vec3f(-1.f,-1.f,-1.f);
 }
 
 float StelObject::getSelectPriority(const StelCore* core) const

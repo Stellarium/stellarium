@@ -205,6 +205,18 @@ public:
 	//! @return true if object an above real horizon (uses test for landscapes)
 	bool isAboveRealHorizon(const StelCore* core) const;
 
+	//! Get type of culmination (visibility) for celestial object for current location.
+	//! @return int
+	//!	 1 - The object is above the horizon even at its lower culmination (Circumpolar)
+	//!	 0 - The upper culmination is above and the lower below the horizon, so the body is observed to rise and set daily
+	//!	-1 - The object is below the horizon even at its upper culmination
+	int getCulminationType(const StelCore* core) const;
+
+	//! Get time of rise, transit and set for celestial object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	Vec3f getRTSTime(const StelCore* core) const;
+
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
 	
