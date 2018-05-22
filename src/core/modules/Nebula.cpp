@@ -30,8 +30,6 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 
-#include "planetsephems/sidereal_time.h"
-
 #include <QTextStream>
 #include <QFile>
 #include <QString>
