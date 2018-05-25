@@ -1,3 +1,7 @@
+Before reporting an issue around graphics artifacts like missing menu buttons, strange colors, Moon not rendered, or similar, 
+*please make absolutely sure* you are running the latest graphics drivers for your graphics card. 
+95% of graphics problems are solved this way.
+
 Before reporting an issue, please *absolutely make sure* to check the closed issues 
 (https://github.com/Stellarium/stellarium/issues?q=is%3Aissue+is%3Aclosed) 
 whether it has been reported and solved/closed already! Don't report in this case.
