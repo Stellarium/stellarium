@@ -6,7 +6,8 @@ Before reporting an issue, please *absolutely make sure* to check the closed iss
 (https://github.com/Stellarium/stellarium/issues?q=is%3Aissue+is%3Aclosed) 
 whether it has been reported and solved/closed already! Don't report in this case.
 
-Also look into the wiki (https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version) 
+Also look into the wiki (https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version 
+and https://github.com/Stellarium/stellarium/wiki/FAQ) 
 and check if you are attempting to report a known issue. Don't report in this case.
 
 Also look into the User Guide before reporting unexpected but correct behaviour. Don't report in this case.
