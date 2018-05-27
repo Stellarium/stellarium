@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-05-18 01:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: Worachate Boonplod, 2017\n"
 "Language-Team: Thai (https://www.transifex.com/stellarium/teams/80998/th/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -70,7 +70,7 @@ msgstr "เส้นดาวเรียงเด่น"
 
 #: src/core/modules/AsterismMgr.cpp:100
 msgid "Asterism labels"
-msgstr "ป้ายชื่อดาวเรียงเด่น"
+msgstr "ชื่อดาวเรียงเด่น"
 
 #: src/core/modules/AsterismMgr.cpp:101
 msgid "Ray helpers"
@@ -97,7 +97,7 @@ msgstr "ชื่อกลุ่มดาว"
 #: src/core/modules/ConstellationMgr.cpp:147
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:309
 msgid "Constellation boundaries"
-msgstr "ขอบเขตของกลุ่มดาว"
+msgstr "เส้นแบ่งเขตกลุ่มดาว"
 
 #: src/core/modules/ConstellationMgr.cpp:148 src/ui_configurationDialog.h:1621
 msgid "Select single constellation"
@@ -115,7 +115,7 @@ msgstr "ดาวฤกษ์"
 
 #: src/core/modules/StarMgr.cpp:455
 msgid "Stars labels"
-msgstr "ป้ายชื่อดาวฤกษ์"
+msgstr "ชื่อดาวฤกษ์"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2741
 msgid "Meridian"
@@ -131,7 +131,7 @@ msgstr "สุริยวิถีของวัน"
 
 #: src/core/modules/GridLinesMgr.cpp:649
 msgid "Equator of J2000.0"
-msgstr "ศูนย์สูตร J2000.0"
+msgstr "เส้นศูนย์สูตร J2000.0"
 
 #: src/core/modules/GridLinesMgr.cpp:653
 msgid "Equator"
@@ -147,7 +147,7 @@ msgstr "ขอบฟ้า"
 
 #: src/core/modules/GridLinesMgr.cpp:666
 msgid "Galactic Equator"
-msgstr "ศูนย์สูตรดาราจักร"
+msgstr "เส้นศูนย์สูตรดาราจักร"
 
 #: src/core/modules/GridLinesMgr.cpp:670
 msgid "Supergalactic Equator"
@@ -860,7 +860,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
 msgid "Bright spot."
-msgstr ""
+msgstr "จุดสว่าง"
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:523
@@ -975,12 +975,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:619
 msgid "Mountain."
-msgstr ""
+msgstr "ภูเขา"
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:623
 msgid "A very large dark area."
-msgstr ""
+msgstr "พื้นที่มืดขนาดใหญ่มาก"
 
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:627
@@ -1115,7 +1115,7 @@ msgstr ""
 
 #: src/core/modules/NomenclatureItem.cpp:795
 msgid "Diameter"
-msgstr ""
+msgstr "เส้นผ่านศูนย์กลาง"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
 #: src/core/modules/NomenclatureItem.cpp:796 src/core/modules/Planet.cpp:462
@@ -1679,7 +1679,7 @@ msgstr ""
 
 #: src/core/modules/Nebula.cpp:1588
 msgid "cluster of galaxies"
-msgstr ""
+msgstr "กระจุกของดาราจักร"
 
 #: src/core/modules/Nebula.cpp:1591
 msgid "object of unknown nature"
@@ -1701,7 +1701,7 @@ msgstr "สลับการกรองชนิดของวัตถุท
 #: src/core/modules/MinorPlanet.cpp:257 src/core/modules/Comet.cpp:187
 #: src/core/modules/StarWrapper.cpp:212 plugins/Quasars/src/Quasar.cpp:140
 msgid "Absolute Magnitude"
-msgstr ""
+msgstr "โชติมาตรสัมบูรณ์"
 
 #: src/core/modules/Planet.cpp:437
 msgid "Mean Opposition Magnitude"
