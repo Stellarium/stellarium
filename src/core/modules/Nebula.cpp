@@ -29,6 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "SolarSystem.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -382,6 +383,24 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Extra)
 	{
+		Vec3f rts = getRTSTime(core);
+		QString sTransit = qc_("Transit", "celestial event");
+		QString sRise = qc_("Rise", "celestial event");
+		QString sSet = qc_("Set", "celestial event");
+		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
+			oss << q_("The celestial object does never rises") << "<br />";
+		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
+		{
+			oss << QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) << "<br />";
+			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
+			oss << QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) << "<br />";
+		}
+		else
+		{
+			oss << q_("The celestial object does never sets") << "<br />";
+			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
+		}
+
 		if (redshift<99.f)
 		{
 			QString z;
@@ -412,6 +431,61 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 	postProcessInfoString(str, flags);
 
 	return str;
+}
+
+Vec3f Nebula::getRTSTime(const StelCore *core) const
+{
+	Vec3f rts = Vec3f(-1.f,-1.f,-1.f);
+	int culm = getCulminationType(core);
+	if (culm>=0)
+	{
+		float dec, ra, ha, t;
+		StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
+		ra = 2.f*M_PI-ra;
+		ha = ra*12.f/M_PI;
+		if (ha>24.f)
+			ha -= 24.f;
+
+		double JD = core->getJD();
+		float ct = (JD - (int)JD)*24.f;
+
+		t = ct - ha;
+		if (ha>12.f && ha<=24.f)
+			t += 24.f;
+
+		t += core->getUTCOffset(JD) + 12.f;
+		if (t>24.f)
+			t -= 24.f;
+
+		rts[1] = t;
+
+		if (culm==0)
+		{
+			float hz = 0.f;
+			if (core->getSkyDrawer()->getFlagHasAtmosphere())
+				hz = -0.5667 * M_PI/180.;
+			float phi = core->getCurrentLocation().latitude * M_PI/180.;
+			StelUtils::rectToSphe(&ra, &dec, getJ2000EquatorialPos(core));
+			float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
+			cosH = std::fmod(cosH,2.0*M_PI);
+
+			PlanetP cp = core->getCurrentPlanet();
+			double coeff = cp->getSiderealDay()/cp->getMeanSolarDay();
+
+			double HC = acos(cosH)*12*coeff/M_PI;
+
+			float r = t - HC;
+			if (r<0.f)
+				r += 24.f;
+			float s = t + HC;
+			if (s>240.f)
+				s -= 24.f;
+			rts[0] = r;
+			rts[2] = s;
+		}
+	}
+
+	return rts;
 }
 
 QVariantMap Nebula::getInfoMap(const StelCore *core) const

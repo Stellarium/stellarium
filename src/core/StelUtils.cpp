@@ -1383,13 +1383,17 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 }
 
 
-QString hoursToHmsStr(const double hours)
+QString hoursToHmsStr(const double hours, const bool lowprecision)
 {
 	int h = (int)hours;
 	int m = (int)((qAbs(hours)-qAbs(double(h)))*60);
-	float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
-
-	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
+	if (lowprecision)
+		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
+	else
+	{
+		float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
+		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(QString::number(s, 'f', 1));
+	}
 }
 
 /* /////////////////// DELTA T VARIANTS
