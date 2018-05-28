@@ -352,7 +352,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		}
 
 		if (status!=StatusUnknown)
-			oss << QString("%1 %2").arg(q_("Operational status")).arg(getOperationalStatus()) << "<br />";
+			oss << QString("%1: %2").arg(q_("Operational status")).arg(getOperationalStatus()) << "<br />";
 
 		//Visibility: Full text
 		//TODO: Move to a more prominent place.

@@ -1819,7 +1819,7 @@ msgstr "초승달"
 #: src/core/modules/Planet.cpp:648
 msgctxt "Moon phase"
 msgid "First Quarter"
-msgstr "첫 반달"
+msgstr "상현달"
 
 #: src/core/modules/Planet.cpp:650
 msgctxt "Moon phase"
@@ -1839,7 +1839,7 @@ msgstr "하현달"
 #: src/core/modules/Planet.cpp:656
 msgctxt "Moon phase"
 msgid "Third Quarter"
-msgstr "둘째 반달"
+msgstr "하현달"
 
 #: src/core/modules/Planet.cpp:658
 msgctxt "Moon phase"
@@ -3654,7 +3654,7 @@ msgstr "태양계"
 
 #: src/gui/ViewDialog.cpp:532
 msgid "Loading ..."
-msgstr ""
+msgstr "불러오는 중 ..."
 
 #: src/gui/ViewDialog.cpp:583
 msgid "properties"
@@ -9545,7 +9545,7 @@ msgstr "색 반전"
 
 #: src/ui_configurationDialog.h:1666
 msgid "Custom size"
-msgstr ""
+msgstr "크기 조절"
 
 #: src/ui_configurationDialog.h:1669
 msgid "Close window when script runs"
@@ -12123,11 +12123,11 @@ msgstr "조각 길이(s):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Show artificial satellites as markers"
-msgstr ""
+msgstr "인공위성을 표지로 보이기"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:786
 msgid "Hide invisible artificial satellites"
-msgstr ""
+msgstr "보이지 않는 인공위성 숨기기"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:788
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -14165,7 +14165,7 @@ msgstr "러시아"
 #, qt-format, qt-plural-format
 msgid "Next update: %1 day(s)"
 msgid_plural "Next update: %1 day(s)"
-msgstr[0] "다음 업데이트: %1일"
+msgstr[0] "다음 업데이트: %1 일"
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:226
 msgid "Historical supernovae is updated"
@@ -14374,6 +14374,8 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
+"이 플러그인은 겉보기등급이 18보다 밝은 퀘이사 몇몇을 보여줍니다. 퀘이사 목록은 '퀘이사와 활동 은하핵 목록'(제 13판) "
+"(Veron+ 2010)에서 추출했습니다."
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -14387,15 +14389,15 @@ msgstr "퀘이사 설정 창"
 #: plugins/Quasars/src/Quasar.cpp:153
 msgctxt "radio flux density"
 msgid "Jy"
-msgstr ""
+msgstr "Jy"
 
 #: plugins/Quasars/src/Quasar.cpp:157
 msgid "Radio flux density around 5GHz (6cm)"
-msgstr ""
+msgstr "5GHz (6cm) 근처에서의 전파 선속"
 
 #: plugins/Quasars/src/Quasar.cpp:159
 msgid "Radio flux density around 1.4GHz (21cm)"
-msgstr ""
+msgstr "1.4GHz (21cm) 근처에서의 전파 선속"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 msgid "Quasars Plug-in"
@@ -14407,6 +14409,8 @@ msgid ""
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"퀘이사 플러그인은 겉보기등급이 18보다 밝은 퀘이사 몇몇을 보여줍니다. 퀘이사 목록은 \"퀘이사 및 활동 은하핵 목록\" (제 "
+"13판)에서 가져왔습니다."
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 msgid "Veron+ 2010"
@@ -14447,11 +14451,11 @@ msgstr "툴바에 퀘이사 버튼 표시"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:303
 msgid "Use markers for quasars"
-msgstr ""
+msgstr "퀘이사 표지 사용"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:304
 msgid "Quasars marker color"
-msgstr ""
+msgstr "퀘이사 표지 색상"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
 #: plugins/Pulsars/src/Pulsars.cpp:168
@@ -14694,7 +14698,7 @@ msgstr "펄서 표지 색상"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
 msgid "Marker Color for pulsars"
-msgstr ""
+msgstr "퀘이사 표지 색상"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
@@ -14702,7 +14706,7 @@ msgstr "글리치가 있는 펄서에 다른 색상 사용"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:345
 msgid "Marker Color for pulsars with glitches"
-msgstr ""
+msgstr "글리치가 있는 퀘이사 표지의 색상"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
@@ -15328,7 +15332,7 @@ msgstr ""
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid "Musica is Latin for <em>music</em>."
-msgstr ""
+msgstr "무지카(Musica)는 라틴어로 <em>음악</em>이라는 뜻입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid ""
@@ -15336,44 +15340,46 @@ msgid ""
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr ""
+"아리온은 고대 그리스 사람으로, 시와 음악에 천재적인 재능이 있었습니다. 전설에 따르면, 아리온은 바다에서 키타라를 연주해 모여든 "
+"돌고래들 덕택에 목숨을 건졌다고 합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
-msgstr ""
+msgstr "파프니르는 노르드 신화에 등장하는 난쟁이로, 용으로 변했습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
-msgstr ""
+msgstr "오비타르는 NASA의 우주 발사 및 운용에 대한 경의를 표하기 위해 고안된 인공 단어입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
-msgstr ""
+msgstr "찰라완은 타이 설화에 전해오는 악어 왕입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
-msgstr ""
+msgstr "타파오 통은 타이 설화의 찰라완의 두 딸 중 하나입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
-msgstr ""
+msgstr "타파오 깨우는 타이 설화의 찰라완의 두 딸 중 하나입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
-msgstr ""
+msgstr "헬베티오스는 켈트어로 <em>헬베티아</em>를 뜻하며, 그리스·로마 시대에 스위스 지방에 살았던 켈트 부족을 가리킵니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
-msgstr ""
+msgstr "디미디움은 라틴어로 <em>절반</em>이라는 뜻으로, 행성의 질량이 적어도 목성의 절반이라는 것을 가리킵니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
@@ -15410,7 +15416,7 @@ msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
-msgstr ""
+msgstr "한스 리퍼세이(1570-1619)는 독일-네덜란드의 렌즈 세공인으로, 1608년 망원경을 개발한 사람으로 언급됩니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
@@ -15418,6 +15424,7 @@ msgid ""
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr ""
+"자카리아스 얀센(1580년대-1630년대)은 네덜란드의 안경상으로, 현미경의 개발자로 일컬어지며 망원경 개발에 기여했다고 보기도 합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
@@ -15425,6 +15432,8 @@ msgid ""
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr ""
+"토마스 해리엇(약 1560-1621)은 잉글랜드의 천문학자, 수학자, 민족지 학자, 번역가로, 달을 천문 관측을 통해 처음으로 "
+"그려냈습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
@@ -15432,6 +15441,8 @@ msgid ""
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
 " the god Izanagi."
 msgstr ""
+"<em>아마테루</em>는 아마테라스를 가리킬 때 흔히 부르는 말로, 일본 고유 종교 신토에서 태양의 신으로 이자나기 신의 왼쪽 눈에서 "
+"태어났습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
@@ -15439,12 +15450,14 @@ msgid ""
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr ""
+"히파티아는 유명한 그리스의 천문학자, 수학자, 철학자로, 5세기 초 알렉산드리아의 신플라톤주의 학교의 대표였으며, 415년 기독교 폭도에"
+" 의해 암살당했습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
-msgstr ""
+msgstr "란은 노르드 신화에서 바다의 신으로, 파도를 휘저어 선원들을 그물로 잡습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
@@ -15452,24 +15465,26 @@ msgid ""
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr ""
+"에기르는 란의 남편으로, 대양(洋)의 신입니다. <em>에기르</em>와 <em>란</em>은 모두 우주 바깥을 통치하는 "
+"<em>요툰</em>을 대표하며, 둘 사이에는 딸이 아홉 있습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
-msgstr ""
+msgstr "유네스코 세계유산인 팔미라의 고대 셈어 및 현대 아랍어 이름입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
-msgstr ""
+msgstr "다곤은 셈족 신으로, 반인반어로 묘사됩니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Tonatiuh was the Aztec god of the Sun."
-msgstr ""
+msgstr "토나티우는 아즈텍의 해의 신입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid "Meztli was the Aztec goddess of the Moon."
-msgstr ""
+msgstr "메즈틀리는 아즈텍의 달의 신입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid ""
@@ -15477,26 +15492,29 @@ msgid ""
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
 "Roman deity <em>Ogmios</em>."
 msgstr ""
+"오그마는 아일랜드 및 스코틀랜드 지방 켈트족의 신으로, 웅변, 작문, 힘의 상징으로, 갈리아-로마의 신 <em>오그미오스</em>와 "
+"연관됩니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid "Smertrios was a Gallic deity of war."
-msgstr ""
+msgstr "스머트리오스는 갈리아 지방의 전쟁의 신입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
-msgstr ""
+msgstr "인터크루스는 라틴어로 <em>가랑이 사이</em>라는 뜻으로, 큰곰자리 사이에 있는 이 행성의 위치를 말합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
-msgstr ""
+msgstr "아르카스는 그리스 신화에서 칼리스토(큰곰)의 아들로 등장합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
+"미겔 데 세르반테스(1547-1616)은 스페인의 뛰어난 작가로, <em>라 만차의 돈 키호테</em>를 지은 것으로 유명합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
@@ -15580,8 +15598,8 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
-"마즈리티(Majriti)는 11세기 초 안달루시아(스페인) 지방의 수학자, 천문학자, 교사였던 '아부 알-콰심 알-쿼투비 알-마즈리티'의"
-" 이름을 딴 이름입니다."
+"마즈리티는 11세기 초 안달루시아(스페인) 지방의 수학자, 천문학자, 교사였던 '아부 알-콰심 알-쿼투비 알-마즈리티'의 이름을 딴 "
+"이름입니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
@@ -15590,8 +15608,8 @@ msgid ""
 " in the world even today. The constellation Aquila represents an eagle - a "
 "popular symbol of liberty."
 msgstr ""
-"리베르타스(Libertas)는 라틴어로 <em>자유</em>라는 뜻입니다. 자유(libetry)는 사회 및 정치적 자유를 말하며, 아직도"
-" 세계에는 자유를 누리지 못하는 사람이 있음을 상기하는 역할도 합니다. 독수리자리의 상징은 독수리이며, 이는 자유의 상징이기도 합니다."
+"리베르타스는 라틴어로 <em>자유</em>라는 뜻입니다. 자유(libetry)는 사회 및 정치적 자유를 말하며, 아직도 세계에는 자유를 "
+"누리지 못하는 사람이 있음을 상기하는 역할도 합니다. 독수리자리의 상징은 독수리이며, 이는 자유의 상징이기도 합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 msgid ""
@@ -15599,8 +15617,7 @@ msgid ""
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr ""
-"포르티투도(Fortitudo)는 라틴어로 <em>용맹, 용기</em>라는 뜻으로,  독수리(독수리자리)에 의해 역경에 직면했을 때의 "
-"정신력을 뜻합니다."
+"포르티투도는 라틴어로 <em>용맹, 용기</em>라는 뜻으로,  독수리(독수리자리)에 의해 역경에 직면했을 때의 정신력을 뜻합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
@@ -15612,13 +15629,13 @@ msgstr "이 명칭들은 기존안과 큰 차이 없이 IAU의 명명 규칙에 
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
-msgstr "원래 제안되었던 이름인 <em>베리타스</em>(Veritas)는 태양계 연구에 중요한 소행성의 이름이기도 합니다."
+msgstr "원래 제안되었던 이름인 <em>베리타스</em>는 태양계 연구에 중요한 소행성의 이름이기도 합니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
-msgstr "원래 제안되었던 이름인 <em>아마테라스</em>(Amaterasu)는 이미 소행성에 사용되었습니다."
+msgstr "원래 제안되었던 이름인 <em>아마테라스</em>는 이미 소행성의 이름으로 사용되고 있습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid ""
@@ -15627,12 +15644,12 @@ msgid ""
 "<em>Aegir</em>, has been attributed to one of Saturn's satellites, "
 "discovered in 2004."
 msgstr ""
-"<em>AEgir</em>와 <em>Aegir</em> 사이의 차이를 주목해 주세요. 발음이 같은 <em>Aegir</em>는 2004년"
-" 발견된 토성의 위성 이름에 이미 쓰이고 있습니다."
+"같은 에기르이지만 <em>AEgir</em>와 <em>Aegir</em> 사이의 차이를 주목해 주세요. 발음이 같은 "
+"<em>Aegir</em>는 2004년 발견된 토성의 위성 이름에 이미 쓰이고 있습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
-msgstr "<em>오기모스</em>(Ogmios)는 이미 소행성의 이름에 사용되고 있습니다."
+msgstr "<em>오기모스</em>는 이미 소행성의 이름으로 사용되고 있습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
@@ -15640,8 +15657,8 @@ msgid ""
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr ""
-"원래 제안되었던 이름인 <em>레다</em>(Leda)는 소행성 및 목성의 위성 이름이며, <em>알타에아</em>(Althaea)는 "
-"소행성의 이름에 사용되고 있습니다."
+"원래 제안되었던 이름인 <em>레다</em>는 소행성 및 목성의 위성 이름이며, <em>알타에아</em>는 소행성의 이름에 사용되고 "
+"있습니다."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid ""
@@ -16792,12 +16809,12 @@ msgstr "전갈자리 알파 유성우"
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:107
 msgid "Ophiuchids"
-msgstr "땅꾼자리 유성우"
+msgstr "뱀주인자리 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:109
 msgid "θ-Ophiuchids"
-msgstr "땅꾼자리 세타 유성우"
+msgstr "뱀주인자리 세타 유성우"
 
 #. TRANSLATORS: Name of meteor shower
 #: plugins/MeteorShowers/src/translations.h:111

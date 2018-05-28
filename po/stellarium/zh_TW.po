@@ -3644,7 +3644,7 @@ msgstr "太陽系"
 
 #: src/gui/ViewDialog.cpp:532
 msgid "Loading ..."
-msgstr ""
+msgstr "載入中..."
 
 #: src/gui/ViewDialog.cpp:583
 msgid "properties"
@@ -14299,6 +14299,8 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
+"顯示部分亮度大於18視星等類星體的外掛程式，這是選自「類星體與活躍星系核」第13版(Quasars and Active Galactic "
+"Nuclei, 13th Ed.) (Veron+ 2010) 書中所彙編的星表。"
 
 #: plugins/Quasars/src/Quasars.cpp:169
 msgid "Show quasars"
@@ -14620,7 +14622,7 @@ msgstr "脈衝星標籤顏色"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
 msgid "Marker Color for pulsars"
-msgstr ""
+msgstr "脈衝星標記的顏色"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
@@ -14628,7 +14630,7 @@ msgstr "有小問題的脈衝星使用各別的顏色"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:345
 msgid "Marker Color for pulsars with glitches"
-msgstr ""
+msgstr "含突發性類星體標記的顏色"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
