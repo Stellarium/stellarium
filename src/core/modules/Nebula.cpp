@@ -388,7 +388,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
 		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
-			oss << q_("The celestial object does never rises") << "<br />";
+			oss << q_("This celestial object does never rises") << "<br />";
 		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
 		{
 			oss << QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) << "<br />";
@@ -397,7 +397,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		}
 		else
 		{
-			oss << q_("The celestial object does never sets") << "<br />";
+			oss << q_("This celestial object does never sets") << "<br />";
 			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
 		}
 
