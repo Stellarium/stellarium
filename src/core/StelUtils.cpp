@@ -1392,7 +1392,7 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 	else
 	{
 		float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
-		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(QString::number(s, 'f', 1));
+		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
 }
 

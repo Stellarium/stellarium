@@ -160,7 +160,8 @@ Vec3f StelObject::getRTSTime(const StelCore *core) const
 		StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
 		ra = 2.f*M_PI-ra;
 		ha = ra*12.f/M_PI;
-		ha = std::fmod(ha, 24.f);
+		if (ha>24.f)
+			ha -= 24.f;
 
 		double JD = core->getJD();
 		float ct = (JD - (int)JD)*24.f;
@@ -170,7 +171,7 @@ Vec3f StelObject::getRTSTime(const StelCore *core) const
 			t += 24.f;
 
 		t += core->getUTCOffset(JD) + 12.f;
-		t = std::fmod(t, 24.f);
+		t = std::fmod(t, 24.0);
 		rts[1] = t;
 
 		if (culm==0)
@@ -195,9 +196,10 @@ Vec3f StelObject::getRTSTime(const StelCore *core) const
 			double HC = acos(cosH)*12*coeff/M_PI;
 
 			float r = t - HC;
-			r = std::fmod(r, 24.f);
+			if (r<0.f)
+				r += 24.f;
 			float s = t + HC;
-			s = std::fmod(s, 24.f);
+			s = std::fmod(s, 24.0);
 			rts[0] = r;
 			rts[2] = s;
 		}
@@ -537,12 +539,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if ((flags&SiderealTime) && (currentPlanet=="Earth"))
 	{
+		bool tblEnd = true;
 		double longitude=core->getCurrentLocation().longitude;
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=fmod(sidereal, 24.);
 		if (sidereal < 0.) sidereal+=24.;
 		QString STc = q_("Mean Sidereal Time");
 		QString STd = StelUtils::hoursToHmsStr(sidereal);
+
+		if (flags&RTSTime && withTables && getType()!=QStringLiteral("Satellite"))
+			tblEnd = false;
+
 		if (withTables)
 		{
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
@@ -563,7 +570,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				res += QString("%1: %2").arg(STc, STd) + "<br>";
 		}
-		if (withTables)
+		if (withTables && tblEnd)
 			res += "</table>";
 	}
 
@@ -574,17 +581,38 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
 		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
-			res += q_("This celestial object does never rises") + "<br />";
+		{
+			if (withTables)
+				res += "</table>";
+			res += q_("This object never rises") + "<br />";
+		}
 		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
 		{
-			res += QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) + "<br />";
-			res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
-			res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
+			if (withTables)
+			{
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
+				res += "</table>";
+			}
+			else
+			{
+				res += QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) + "<br />";
+				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+				res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
+			}
 		}
 		else
 		{
-			res += q_("This celestial object does never sets") + "<br />";
-			res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+			if (withTables)
+			{
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+				res += "</table>";
+			}
+			else
+				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+			res += q_("Circumpolar (never sets)") + "<br />";
+
 		}
 	}
 
