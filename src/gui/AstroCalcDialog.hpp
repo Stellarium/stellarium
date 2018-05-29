@@ -306,6 +306,10 @@ private:
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}
+		else if (column == AstroCalcDialog::CColumnTransit)
+		{
+			return StelUtils::hmsStrToHours(text(column).append("00s")) < StelUtils::hmsStrToHours(other.text(column).append("00s"));
+		}
 		else
 		{
 			return text(column).toLower() < other.text(column).toLower();

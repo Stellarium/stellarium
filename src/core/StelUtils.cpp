@@ -199,6 +199,24 @@ double hmsToRad(const unsigned int h, const unsigned int m, const double s )
 	return (double)h*M_PI/12.+(double)m*M_PI/10800.+(double)s*M_PI/648000.;
 }
 
+double hmsToHours(const int h, const int m, const double s)
+{
+	return (double)h+(double)m/60.+(double)s*3600.;
+}
+
+double hmsStrToHours(const QString& s)
+{
+	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
+	if (!reg.exactMatch(s))
+		return 0;
+	QStringList list = reg.capturedTexts();
+	int hrs = list[1].toInt();
+	int min = list[2].toInt();
+	int sec = list[3].toInt();
+
+	return hmsToHours(hrs, min, sec);
+}
+
 double dmsToRad(const int d, const unsigned int m, const double s)
 {
 	if (d>=0)

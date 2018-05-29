@@ -360,8 +360,14 @@ namespace StelUtils
 	//! Calculate and return sidereal period in days from semi-major axis (in AU)
 	double calculateSiderealPeriod(const double SemiMajorAxis);
 
-	//! Convert decimal hours to hours, minutes, seconds	
+	//! Convert decimal hours to hours, minutes, seconds
 	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
+
+	//! Convert hours, minutes, seconds to decimal hours
+	double hmsToHours(const int h, const int m, const double s);
+
+	//! Convert a hms formatted string to decimal hours
+	double hmsStrToHours(const QString& s);
 
 	//! Get the number of seconds since program start.
 	//!
