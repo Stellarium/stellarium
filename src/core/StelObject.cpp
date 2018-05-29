@@ -152,8 +152,59 @@ float StelObject::getVMagnitude(const StelCore* core) const
 
 Vec3f StelObject::getRTSTime(const StelCore *core) const
 {
-	Q_UNUSED(core);
-	return Vec3f(-1.f,-1.f,-1.f);
+	Vec3f rts = Vec3f(-1.f,-1.f,-1.f);
+	int culm = getCulminationType(core);
+	if (culm>=0)
+	{
+		float dec, ra, ha, t;
+		StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
+		ra = 2.f*M_PI-ra;
+		ha = ra*12.f/M_PI;
+		if (ha>24.f)
+			ha -= 24.f;
+
+		double JD = core->getJD();
+		float ct = (JD - (int)JD)*24.f;
+
+		t = ct - ha;
+		if (ha>12.f && ha<=24.f)
+			t += 24.f;
+
+		t += core->getUTCOffset(JD) + 12.f;
+		t = std::fmod(t, 24.f);
+		rts[1] = t;
+
+		if (culm==0)
+		{
+			float hz = 0.f;
+			if (core->getSkyDrawer()->getFlagHasAtmosphere())
+			{
+				if (getEnglishName()=="Sun")
+					hz = -0.8333;
+				else
+					hz = -0.5667;
+			}
+			hz *= M_PI/180.;
+			float phi = core->getCurrentLocation().latitude * M_PI/180.;
+			StelUtils::rectToSphe(&ra, &dec, getJ2000EquatorialPos(core));
+			float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
+			cosH = std::fmod(cosH,2.0*M_PI);
+
+			PlanetP cp = core->getCurrentPlanet();
+			double coeff = cp->getSiderealDay()/cp->getMeanSolarDay();
+
+			double HC = acos(cosH)*12*coeff/M_PI;
+
+			float r = t - HC;
+			r = std::fmod(r, 24.f);
+			float s = t + HC;
+			s = std::fmod(s, 24.f);
+			rts[0] = r;
+			rts[2] = s;
+		}
+	}
+
+	return rts;
 }
 
 float StelObject::getSelectPriority(const StelCore* core) const
@@ -515,6 +566,27 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		}
 		if (withTables)
 			res += "</table>";
+	}
+
+	if (flags&RTSTime && getType()!=QStringLiteral("Satellite"))
+	{
+		Vec3f rts = getRTSTime(core);
+		QString sTransit = qc_("Transit", "celestial event");
+		QString sRise = qc_("Rise", "celestial event");
+		QString sSet = qc_("Set", "celestial event");
+		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
+			res += q_("This celestial object does never rises") + "<br />";
+		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
+		{
+			res += QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) + "<br />";
+			res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+			res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
+		}
+		else
+		{
+			res += q_("This celestial object does never sets") + "<br />";
+			res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+		}
 	}
 
 	if (flags&IAUConstellation)

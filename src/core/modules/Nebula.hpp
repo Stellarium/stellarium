@@ -205,11 +205,6 @@ public:
 
 	bool objectInAllowedSizeRangeLimits() const;
 
-	//! Get time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	Vec3f getRTSTime(const StelCore* core) const;
-
 private:
 	friend struct DrawNebulaFuncObject;
 

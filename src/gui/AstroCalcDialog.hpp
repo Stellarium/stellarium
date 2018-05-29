@@ -53,7 +53,8 @@ public:
 		CColumnDec,		//! declination
 		CColumnMagnitude,	//! magnitude
 		CColumnAngularSize,	//! angular size
-		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)		
+		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnTransit,		//! time of transit
 		CColumnType,		//! type of object
 		CColumnCount		//! total number of columns
 	};

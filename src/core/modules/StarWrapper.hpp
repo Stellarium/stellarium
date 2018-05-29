@@ -64,11 +64,6 @@ protected:
 	QString getInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 	virtual float getBV(void) const = 0;
 
-	//! Get time of rise, transit and set for celestial object for current location.
-	//! @return Vec3f - time of rise, transit and set; decimal hours
-	//! @note The value -1.f is used as undefined value
-	Vec3f getRTSTime(const StelCore* core) const;
-
 private:
 	int ref_count;
 };
