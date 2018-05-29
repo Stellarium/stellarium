@@ -160,8 +160,7 @@ Vec3f StelObject::getRTSTime(const StelCore *core) const
 		StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
 		ra = 2.f*M_PI-ra;
 		ha = ra*12.f/M_PI;
-		if (ha>24.f)
-			ha -= 24.f;
+		ha = std::fmod(ha, 24.f);
 
 		double JD = core->getJD();
 		float ct = (JD - (int)JD)*24.f;
@@ -735,6 +734,14 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 
 	// 'above horizon' flag
 	map.insert("above-horizon", isAboveRealHorizon(core));
+
+	Vec3f rts = getRTSTime(core);
+	map.insert("rise", StelUtils::hoursToHmsStr(rts[0], true));
+	map.insert("rise-dhr", rts[0]);
+	map.insert("transit", StelUtils::hoursToHmsStr(rts[1], true));
+	map.insert("transit-dhr", rts[1]);
+	map.insert("set", StelUtils::hoursToHmsStr(rts[2], true));
+	map.insert("set-dhr", rts[2]);
 
 	return map;
 }

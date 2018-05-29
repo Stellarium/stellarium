@@ -129,6 +129,12 @@ public:
 	//! - size-dd : angular size in decimal degrees
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
+	//! - rise : time of rise in HM format
+	//! - rise-dhr : time of rise in decimal hours
+	//! - transit : time of transit in HM format
+	//! - transit-dhr : time of transit in decimal hours
+	//! - set : time of set in HM format
+	//! - set-dhr : time of set in decimal hours
 	//! - name : english name of the object
 	//! - localized-name : localized name	
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
