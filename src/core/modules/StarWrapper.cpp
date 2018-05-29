@@ -68,7 +68,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	
 	oss << getCommonInfoString(core, flags);
 
-	if (flags&Extra)
+	if (flags&RTSTime)
 	{
 		Vec3f rts = getRTSTime(core);
 		QString sTransit = qc_("Transit", "celestial event");
@@ -316,6 +316,27 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	oss << getCommonInfoString(core, flags);
 
+	if (flags&RTSTime)
+	{
+		Vec3f rts = StarWrapperBase::getRTSTime(core);
+		QString sTransit = qc_("Transit", "celestial event");
+		QString sRise = qc_("Rise", "celestial event");
+		QString sSet = qc_("Set", "celestial event");
+		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
+			oss << q_("This celestial object does never rises") << "<br />";
+		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
+		{
+			oss << QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) << "<br />";
+			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
+			oss << QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) << "<br />";
+		}
+		else
+		{
+			oss << q_("This celestial object does never sets") << "<br />";
+			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
+		}
+	}
+
 	if ((flags&Distance) && s->getPlx ()&& !isNan(s->getPlx()) && !isInf(s->getPlx()))
 	{
 		//TRANSLATORS: Unit of measure for distance - Light Years
@@ -377,24 +398,6 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 		oss << QString("%1: %2 %3 (%4)").arg(q_("Proper motions by axes")).arg(QString::number(dx, 'f', 1)).arg(QString::number(dy, 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
 		oss << QString("%1: %2%3").arg(q_("Position angle of the proper motion")).arg(QString::number(pa,'f', 1)).arg(QChar(0x00B0)) << "<br />";
 		oss << QString("%1: %2 (%3)").arg(q_("Angular speed of the proper motion")).arg(QString::number(std::sqrt(dx*dx + dy*dy), 'f', 1)).arg(qc_("mas/yr", "milliarc second per year")) << "<br />";
-
-		Vec3f rts = StarWrapperBase::getRTSTime(core);
-		QString sTransit = qc_("Transit", "celestial event");
-		QString sRise = qc_("Rise", "celestial event");
-		QString sSet = qc_("Set", "celestial event");
-		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
-			oss << q_("This celestial object does never rises") << "<br />";
-		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
-		{
-			oss << QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) << "<br />";
-			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
-			oss << QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) << "<br />";
-		}
-		else
-		{
-			oss << q_("This celestial object does never sets") << "<br />";
-			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
-		}
 	}
 
 	StelObject::postProcessInfoString(str, flags);

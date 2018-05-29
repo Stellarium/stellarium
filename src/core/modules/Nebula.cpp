@@ -297,6 +297,27 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	oss << getCommonInfoString(core, flags);
 
+	if (flags&RTSTime)
+	{
+		Vec3f rts = getRTSTime(core);
+		QString sTransit = qc_("Transit", "celestial event");
+		QString sRise = qc_("Rise", "celestial event");
+		QString sSet = qc_("Set", "celestial event");
+		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
+			oss << q_("This celestial object does never rises") << "<br />";
+		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
+		{
+			oss << QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) << "<br />";
+			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
+			oss << QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) << "<br />";
+		}
+		else
+		{
+			oss << q_("This celestial object does never sets") << "<br />";
+			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
+		}
+	}
+
 	if (flags&Size && majorAxisSize>0.f)
 	{
 		QString majorAxS, minorAxS, sizeAx = q_("Size");
@@ -383,24 +404,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 	if (flags&Extra)
 	{
-		Vec3f rts = getRTSTime(core);
-		QString sTransit = qc_("Transit", "celestial event");
-		QString sRise = qc_("Rise", "celestial event");
-		QString sSet = qc_("Set", "celestial event");
-		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
-			oss << q_("This celestial object does never rises") << "<br />";
-		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
-		{
-			oss << QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) << "<br />";
-			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
-			oss << QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) << "<br />";
-		}
-		else
-		{
-			oss << q_("This celestial object does never sets") << "<br />";
-			oss << QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) << "<br />";
-		}
-
 		if (redshift<99.f)
 		{
 			QString z;

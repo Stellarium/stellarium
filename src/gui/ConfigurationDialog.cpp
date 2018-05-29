@@ -545,6 +545,8 @@ void ConfigurationDialog::setSelectedInfoFromCheckBoxes()
 		flags |= StelObject::IAUConstellation;
 	if (ui->checkBoxSiderealTime->isChecked())
 		flags |= StelObject::SiderealTime;
+	if (ui->checkBoxRTSTime->isChecked())
+		flags |= StelObject::RTSTime;
 
 	gui->setInfoTextFilters(flags);
 }
@@ -854,6 +856,8 @@ void ConfigurationDialog::saveAllSettings()
 			       (bool) (flags & StelObject::IAUConstellation));
 		conf->setValue("flag_show_sidereal_time",
 			       (bool) (flags & StelObject::SiderealTime));
+		conf->setValue("flag_show_rts_time",
+			       (bool) (flags & StelObject::RTSTime));
 		conf->endGroup();
 	}
 
@@ -1430,6 +1434,7 @@ void ConfigurationDialog::updateSelectedInfoCheckBoxes()
 	ui->checkBoxEclipticCoordsOfDate->setChecked(flags & StelObject::EclipticCoordOfDate);
 	ui->checkBoxConstellation->setChecked(flags & StelObject::IAUConstellation);
 	ui->checkBoxSiderealTime->setChecked(flags & StelObject::SiderealTime);
+	ui->checkBoxRTSTime->setChecked(flags & StelObject::RTSTime);
 }
 
 void ConfigurationDialog::updateTabBarListWidgetWidth()
