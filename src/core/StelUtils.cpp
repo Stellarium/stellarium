@@ -2626,18 +2626,31 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 	return out;
 }
 
-float interpolate3(float n, float y1, float y2, float y3)
+template<class T> T interpolate3(T n, T y1, T y2, T y3)
 {
-	// See "Astonomical Algorithms" by J. Meeus
+	// See "Astronomical Algorithms" by J. Meeus
 
 	// Equation 3.2
-	float a = y2-y1;
-	float b = y3-y2;
-	float c = a-b;
+	T a = y2-y1;
+	T b = y3-y2;
+	T c = b-a;
 
 	// Equation 3.3
-	return y2 + n / 2.0 * (a + b + n * c);
+	return y2 + n * 0.5f * (a + b + n * c);
 }
+
+template<class T> T interpolate5(T n, T y1, T y2, T y3, T y4, T y5)
+{
+	// See "Astronomical Algorithms" by J. Meeus
+	// Eq. 3.8
+	T A=y2-y1; T B=y3-y2; T C=y4-y3; T D=y5-y4;
+	T E=B-A; T F=C-B; T G=D-C;
+	T H=F-E; T J=G-F;
+	T K=J-H;
+
+	return (((K*(1.0/24.0)*n + (H+J)/12.0)*n  + (F*0.5-K/24.0))*n + ((B+C)*0.5 - (H+J)/12.0))*n +y3;
+}
+
 
 } // end of the StelUtils namespace
 

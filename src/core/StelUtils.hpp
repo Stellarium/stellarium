@@ -730,13 +730,25 @@ namespace StelUtils
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
 
-	//! Calculate an intermediate value of the 3 arguments for the given interpolation factor.
-	//! @param n Interpolation factor
+	//! Given regularly spaced steps x1, x2, x3 and curve values y1, y2, y3,
+	//! calculate an intermediate value of the 3 arguments for the given interpolation point n.
+	//! @param n Interpolation factor: steps from x2
 	//! @param y1 Argument 1
 	//! @param y2 Argument 2
 	//! @param y3 Argument 3
 	//! @return interpolation value
-	float interpolate3(float n, float y1, float y2, float y3);
+	template<class T> T interpolate3(T n, T y1, T y2, T y3);
+
+	//! Given regularly spaced steps x1, x2, x3, x4, x5 and curve values y1, y2, y3, y4, y5,
+	//! calculate an intermediate value of the 5 arguments for the given interpolation point n.
+	//! @param n Interpolation factor: steps from x3
+	//! @param y1 Argument 1
+	//! @param y2 Argument 2
+	//! @param y3 Argument 3
+	//! @param y3 Argument 4
+	//! @param y3 Argument 5
+	//! @return interpolation value
+	template<class T> T interpolate5(T n, T y1, T y2, T y3, T y4, T y5);
 
 #ifdef _MSC_BUILD
 	inline double trunc(double x)
