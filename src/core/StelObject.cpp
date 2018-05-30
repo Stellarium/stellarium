@@ -186,7 +186,7 @@ Vec3f StelObject::getRTSTime(const StelCore *core) const
 			}
 			hz *= M_PI/180.;
 			float phi = core->getCurrentLocation().latitude * M_PI/180.;
-			StelUtils::rectToSphe(&ra, &dec, getJ2000EquatorialPos(core));
+			StelUtils::rectToSphe(&ra, &dec, getEquinoxEquatorialPos(core));
 			float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
 			cosH = std::fmod(cosH,2.0*M_PI);
 
