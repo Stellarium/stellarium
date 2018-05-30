@@ -730,6 +730,14 @@ namespace StelUtils
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
 
+	//! Calculate an intermediate value of the 3 arguments for the given interpolation factor.
+	//! @param n Interpolation factor
+	//! @param y1 Argument 1
+	//! @param y2 Argument 2
+	//! @param y3 Argument 3
+	//! @return interpolation value
+	float interpolate3(float n, float y1, float y2, float y3);
+
 #ifdef _MSC_BUILD
 	inline double trunc(double x)
 	{

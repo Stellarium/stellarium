@@ -150,7 +150,28 @@ float StelObject::getVMagnitude(const StelCore* core) const
 	return 99;
 }
 
-Vec3f StelObject::getRTSTime(const StelCore *core) const
+Vec3f StelObject::getRTSTime(StelCore *core) const
+{
+	return computeRTSTime(core);
+}
+
+Vec3f StelObject::getNextRTSTime(StelCore *core) const
+{
+	core->addDay();
+	Vec3f rts = computeRTSTime(core);
+	core->subtractDay();
+	return rts;
+}
+
+Vec3f StelObject::getPreviousRTSTime(StelCore *core) const
+{
+	core->subtractDay();
+	Vec3f rts = computeRTSTime(core);
+	core->addDay();
+	return rts;
+}
+
+Vec3f StelObject::computeRTSTime(StelCore *core) const
 {
 	Vec3f rts = Vec3f(-1.f,-1.f,-1.f);
 	int culm = getCulminationType(core);
@@ -576,7 +597,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite"))
 	{
-		Vec3f rts = getRTSTime(core);
+		Vec3f rts = getRTSTime(StelApp::getInstance().getCore()); // required not const StelCore!
 		QString sTransit = qc_("Transit", "celestial event");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
@@ -763,7 +784,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// 'above horizon' flag
 	map.insert("above-horizon", isAboveRealHorizon(core));
 
-	Vec3f rts = getRTSTime(core);
+	Vec3f rts = getRTSTime(StelApp::getInstance().getCore());
 	map.insert("rise", StelUtils::hoursToHmsStr(rts[0], true));
 	map.insert("rise-dhr", rts[0]);
 	map.insert("transit", StelUtils::hoursToHmsStr(rts[1], true));

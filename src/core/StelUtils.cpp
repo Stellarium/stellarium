@@ -2626,5 +2626,18 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 	return out;
 }
 
+float interpolate3(float n, float y1, float y2, float y3)
+{
+	// See "Astonomical Algorithms" by J. Meeus
+
+	// Equation 3.2
+	float a = y2-y1;
+	float b = y3-y2;
+	float c = a-b;
+
+	// Equation 3.3
+	return y2 + n / 2.0 * (a + b + n * c);
+}
+
 } // end of the StelUtils namespace
 

@@ -220,10 +220,20 @@ public:
 	//!	-1 - The object is below the horizon even at its upper culmination
 	int getCulminationType(const StelCore* core) const;
 
-	//! Get time of rise, transit and set for celestial object for current location.
+	//! Get today's time of rise, transit and set for celestial object for current location.
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
-	Vec3f getRTSTime(const StelCore* core) const;
+	Vec3f getRTSTime(StelCore *core) const;
+
+	//! Get tomorrow's time of rise, transit and set for celestial object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	Vec3f getNextRTSTime(StelCore *core) const;
+
+	//! Get yesterday's time of rise, transit and set for celestial object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	Vec3f getPreviousRTSTime(StelCore *core) const;
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -259,6 +269,11 @@ protected:
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 private:
+	//! Compute time of rise, transit and set for celestial object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	Vec3f computeRTSTime(StelCore* core) const;
+
 	static int stelObjectPMetaTypeID;
 };
 
