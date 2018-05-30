@@ -131,7 +131,7 @@ int StelObject::getCulminationType(const StelCore *core) const
 	float latitude = core->getCurrentLocation().latitude;
 	double dec, ra, declination;
 	bool sign;
-	StelUtils::rectToSphe(&ra, &dec, getJ2000EquatorialPos(core));
+	StelUtils::rectToSphe(&ra, &dec, getEquinoxEquatorialPos(core));
 	StelUtils::radToDecDeg(dec, sign, declination);
 	if (!sign)
 		declination *= -1;
