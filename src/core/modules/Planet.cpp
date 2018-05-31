@@ -454,7 +454,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		QString algoName("VSOP87");
 		if (EphemWrapper::use_de431(core->getJDE())) algoName="DE431";
 		if (EphemWrapper::use_de430(core->getJDE())) algoName="DE430";
-		oss << q_("Ecliptical XYZ (%1): %2/%3/%4").arg(algoName).arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
+		// TRANSLATORS: Ecliptical rectangular coordinates
+		oss << QString("%1 XYZ (%2): %3/%4/%5").arg(qc_("Ecliptical","coordinates")).arg(algoName).arg(QString::number(eclPos[0], 'f', 7), QString::number(eclPos[1], 'f', 7), QString::number(eclPos[2], 'f', 7)) << "<br>";
 	}
 #endif
 	if (flags&Distance)
