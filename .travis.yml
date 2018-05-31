@@ -199,7 +199,6 @@ before_install:
       unzip -qq qt5.zip -d qt5;
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
-      # sudo apt-get -qq update;
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
