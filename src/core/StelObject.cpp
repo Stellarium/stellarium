@@ -126,6 +126,8 @@ bool StelObject::isAboveRealHorizon(const StelCore *core) const
 	return r;
 }
 
+/*//// Taken out. This does not work with atmosphere.
+  This may make errors for objects just barely lifted by refraction! If needed, fix that.
 int StelObject::getCulminationType(const StelCore *core) const
 {
 	float latitude = core->getCurrentLocation().latitude;
@@ -143,6 +145,7 @@ int StelObject::getCulminationType(const StelCore *core) const
 	else
 		return 0; // The upper culmination is above and the lower below the horizon, so the body is observed to rise and set daily
 }
+*/
 
 float StelObject::getVMagnitude(const StelCore* core) const 
 {
@@ -155,6 +158,9 @@ Vec3f StelObject::getRTSTime(StelCore *core) const
 	return computeRTSTime(core);
 }
 
+/*
+// These quite likely cause too much overhead. Also, Meeus' algorithm works differently.
+// These functions can likely be removed.
 Vec3f StelObject::getNextRTSTime(StelCore *core) const
 {
 	core->addDay();
@@ -170,13 +176,28 @@ Vec3f StelObject::getPreviousRTSTime(StelCore *core) const
 	core->addDay();
 	return rts;
 }
+*/
 
 Vec3f StelObject::computeRTSTime(StelCore *core) const
 {
-	Vec3f rts = Vec3f(-1.f,-1.f,-1.f);
-	int culm = getCulminationType(core);
-	if (culm>=0)
+	float hz = 0.f;
+	if (getEnglishName()=="Moon")
+		hz = +0.7275*0.95; // horizon parallax factor
+	else if (getEnglishName()=="Sun")
+		hz = -16./60.; // semidiameter
+
+	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
+			hz -= 34./60.; // "canonical" refraction at horizon. TBD: Replace by pressure-dependent value?
+	}
+	hz *= M_PI/180.;
+	const float phi = core->getCurrentLocation().latitude * M_PI/180.;
+
+
+	Vec3f rts = Vec3f(-100.f,-100.f,-100.f);  // init as "never rises" [abs must be larger than 24!]
+	//int culm = getCulminationType(core);
+	//if (culm>=0)
+	//{
 		float dec, ra, ha, t;
 		StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
 		ra = 2.f*M_PI-ra;
@@ -184,8 +205,8 @@ Vec3f StelObject::computeRTSTime(StelCore *core) const
 		if (ha>24.f)
 			ha -= 24.f;
 
-		double JD = core->getJD();
-		float ct = (JD - (int)JD)*24.f;
+		const double JD = core->getJD();
+		const float ct = (JD - (int)JD)*24.f;
 
 		t = ct - ha;
 		if (ha>12.f && ha<=24.f)
@@ -195,36 +216,29 @@ Vec3f StelObject::computeRTSTime(StelCore *core) const
 		t = std::fmod(t, 24.0);
 		rts[1] = t;
 
-		if (culm==0)
+		const float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
+		if (cosH<-1.f) // circumpolar
 		{
-			float hz = 0.f;
-			if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			{
-				if (getEnglishName()=="Sun")
-					hz = -0.8333;
-				else
-					hz = -0.5667;
-			}
-			hz *= M_PI/180.;
-			float phi = core->getCurrentLocation().latitude * M_PI/180.;
-			StelUtils::rectToSphe(&ra, &dec, getEquinoxEquatorialPos(core));
-			float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
-			cosH = std::fmod(cosH,2.0*M_PI);
+			rts[0]=rts[2]=100.f;
+		}
+		else if (cosH>1.f)
+		{
+			rts[0]=rts[2]=-100.f;
+		}
+		else
+		{
+			//StelUtils::rectToSphe(&ra, &dec, getEquinoxEquatorialPos(core));
+			//float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
+			//cosH = std::fmod(cosH,2.0*M_PI); // ??? -1<cosH<1!
 
 			PlanetP cp = core->getCurrentPlanet();
 			double coeff = cp->getSiderealDay()/cp->getMeanSolarDay();
+			float HC = acos(cosH)*12.*coeff/M_PI;
 
-			double HC = acos(cosH)*12*coeff/M_PI;
-
-			float r = t - HC;
-			if (r<0.f)
-				r += 24.f;
-			float s = t + HC;
-			s = std::fmod(s, 24.0);
-			rts[0] = r;
-			rts[2] = s;
+			rts[0] = StelUtils::fmodpos(t - HC, 24.f);
+			rts[2] = StelUtils::fmodpos(t + HC, 24.f);
 		}
-	}
+	//}
 
 	return rts;
 }
@@ -601,13 +615,31 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sTransit = qc_("Transit", "celestial event");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
-		if (rts[0]<0.f && rts[1]<0.f && rts[2]<0.f)
+		if (rts[0]==-100.f && rts[2]==-100.f )
 		{
 			if (withTables)
+			{
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
 				res += "</table>";
+			}
+			else
+				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
 			res += q_("This object never rises") + "<br />";
 		}
-		else if (rts[0]>=0.f && rts[1]>=0.f && rts[2]>=0.f)
+		else if (rts[0]==100.f && rts[2]==100.f ) // circumpolar
+		{
+			if (withTables)
+			{
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+				res += "</table>";
+			}
+			else
+				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+			res += q_("Circumpolar (never sets)") + "<br />";
+
+		}
+
+		else
 		{
 			if (withTables)
 			{
@@ -622,18 +654,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
 				res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
 			}
-		}
-		else
-		{
-			if (withTables)
-			{
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
-				res += "</table>";
-			}
-			else
-				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
-			res += q_("Circumpolar (never sets)") + "<br />";
-
 		}
 	}
 
