@@ -18,6 +18,7 @@ IF(${XGETTEXT_FOUND})
 			--directory=${PROJECT_SOURCE_DIR}
 			--files-from=${CMAKE_CURRENT_SOURCE_DIR}/POTFILES.in
 			--copyright-holder=Stellarium's\ team
+			--msgid-bugs-address=stellarium@googlegroups.com
 			--from-code=utf-8
 		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		COMMENT "Generating stellarium-remotecontrol.jst"
@@ -37,6 +38,7 @@ IF(${XGETTEXT_FOUND})
 			--add-comments=TRANSLATORS:
 			--directory=${PROJECT_SOURCE_DIR}/plugins/RemoteControl/webroot
 			--copyright-holder=Stellarium's\ team
+			--msgid-bugs-address=stellarium@googlegroups.com
 			--package-name=stellarium-remotecontrol
 			--from-code=utf-8
 			index.html tablet7in.html

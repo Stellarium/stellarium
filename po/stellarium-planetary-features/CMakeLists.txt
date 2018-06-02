@@ -16,6 +16,7 @@ IF(${XGETTEXT_FOUND})
                --directory=${PROJECT_SOURCE_DIR}
                --files-from=POTFILES.in
                --copyright-holder=Stellarium's\ team
+               --msgid-bugs-address=stellarium@googlegroups.com
                --from-code=utf-8
           WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
           COMMENT "Generating stellarium-planetary-features.pot"

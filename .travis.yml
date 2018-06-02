@@ -225,6 +225,7 @@ script:
 
 after_success:
   - if [[ "$TRAVIS_OS_NAME" == "linux" && "$TRAVIS_BRANCH" == "master" ]]; then
+      pip install --upgrade pip
       pip install virtualenv;
       virtualenv ~/env;
       source ~/env/bin/activate;
