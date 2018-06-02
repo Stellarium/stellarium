@@ -513,7 +513,11 @@ private slots:
 	void onTargetLocationChanged(StelLocation loc);
 
 	//! Translate labels to new language settings.
-	void updateI18n();	
+	void updateI18n();
+
+	void increaseLightPollution();
+	void reduceLightPollution();
+	void cyclicChangeLightPollution();
 
 private:
 	//! Get light pollution luminance level.

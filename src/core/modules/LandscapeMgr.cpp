@@ -475,6 +475,11 @@ void LandscapeMgr::init()
 	addAction("actionShow_LandscapeIllumination", displayGroup, N_("Landscape illumination"), "illuminationDisplayed", "Shift+G");
 	addAction("actionShow_LandscapeLabels", displayGroup, N_("Landscape labels"), "labelsDisplayed", "Ctrl+Shift+G");
 	addAction("actionShow_LightPollutionFromDatabase", displayGroup, N_("Light pollution data from locations database"), "flagUseLightPollutionFromDatabase");
+	// Details: https://github.com/Stellarium/stellarium/issues/171
+	addAction("actionShow_LightPollutionIncrease", displayGroup, N_("Increase light pollution"), "increaseLightPollution()");
+	addAction("actionShow_LightPollutionReduce", displayGroup, N_("Reduce light pollution"), "reduceLightPollution()");
+	addAction("actionShow_LightPollutionCyclicChange", displayGroup, N_("Cyclic change in light pollution"), "cyclicChangeLightPollution()");
+
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
@@ -1427,6 +1432,33 @@ QString LandscapeMgr::getDescription() const
 	}
 
 	return desc;
+}
+
+void LandscapeMgr::increaseLightPollution()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	int bidx = core->getSkyDrawer()->getBortleScaleIndex() + 1;
+	if (bidx>9)
+		bidx = 9;
+	core->getSkyDrawer()->setBortleScaleIndex(bidx);
+}
+
+void LandscapeMgr::reduceLightPollution()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	int bidx = core->getSkyDrawer()->getBortleScaleIndex() - 1;
+	if (bidx<1)
+		bidx = 1;
+	core->getSkyDrawer()->setBortleScaleIndex(bidx);
+}
+
+void LandscapeMgr::cyclicChangeLightPollution()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	int bidx = core->getSkyDrawer()->getBortleScaleIndex() + 1;
+	if (bidx>9)
+		bidx = 1;
+	core->getSkyDrawer()->setBortleScaleIndex(bidx);
 }
 
 /*

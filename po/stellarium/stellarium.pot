@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-31 21:35+0700\n"
+"Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
+"POT-Creation-Date: 2018-06-02 20:00+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -388,7 +388,19 @@ msgstr ""
 msgid "Light pollution data from locations database"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:879 src/scripting/StelScriptMgr.cpp:233
+#: src/core/modules/LandscapeMgr.cpp:479
+msgid "Increase light pollution"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:480
+msgid "Reduce light pollution"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:481
+msgid "Cyclic change in light pollution"
+msgstr ""
+
+#: src/core/modules/LandscapeMgr.cpp:884 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:434
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
@@ -409,36 +421,36 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:885 src/gui/StelGuiItems.cpp:716
+#: src/core/modules/LandscapeMgr.cpp:890 src/gui/StelGuiItems.cpp:716
 msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:888 src/ui_locationDialogGui.h:483
+#: src/core/modules/LandscapeMgr.cpp:893 src/ui_locationDialogGui.h:483
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:909
+#: src/core/modules/LandscapeMgr.cpp:914
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:919
+#: src/core/modules/LandscapeMgr.cpp:924
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:922
+#: src/core/modules/LandscapeMgr.cpp:927
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:926
+#: src/core/modules/LandscapeMgr.cpp:931
 msgid "Light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:926
+#: src/core/modules/LandscapeMgr.cpp:931
 msgid "by Bortle scale"
 msgstr ""
 
