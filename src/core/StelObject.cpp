@@ -181,64 +181,63 @@ Vec3f StelObject::getPreviousRTSTime(StelCore *core) const
 Vec3f StelObject::computeRTSTime(StelCore *core) const
 {
 	float hz = 0.f;
-	if (getEnglishName()=="Moon")
+	if ( (getEnglishName()=="Moon") && (core->getCurrentLocation().planetName=="Earth"))
 		hz = +0.7275*0.95; // horizon parallax factor
 	else if (getEnglishName()=="Sun")
-		hz = -16./60.; // semidiameter
+		hz = - getAngularSize(core); // semidiameter; Canonical value 16', but this is accurate even from other planets...
+	hz *= M_PI/180.;
 
 	if (core->getSkyDrawer()->getFlagHasAtmosphere())
 	{
-			hz -= 34./60.; // "canonical" refraction at horizon. TBD: Replace by pressure-dependent value?
+		// canonical" refraction at horizon is -34'. Replace by pressure-dependent value here!
+		Refraction refraction=core->getSkyDrawer()->getRefraction();
+		Vec3d zeroAlt(1.0,0.0,0.0);
+		refraction.backward(zeroAlt);
+		hz += asin(zeroAlt[2]);
 	}
-	hz *= M_PI/180.;
-	const float phi = core->getCurrentLocation().latitude * M_PI/180.;
-
+	const float phi = core->getCurrentLocation().latitude * M_PI/180.f;
+	PlanetP cp = core->getCurrentPlanet();
+	const double coeff = cp->getMeanSolarDay() / cp->getSiderealDay();
 
 	Vec3f rts = Vec3f(-100.f,-100.f,-100.f);  // init as "never rises" [abs must be larger than 24!]
-	//int culm = getCulminationType(core);
-	//if (culm>=0)
-	//{
-		float dec, ra, ha, t;
-		StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
-		ra = 2.f*M_PI-ra;
-		ha = ra*12.f/M_PI;
-		if (ha>24.f)
-			ha -= 24.f;
 
-		const double JD = core->getJD();
-		const float ct = (JD - (int)JD)*24.f;
+	double dec, ra, ha, t;
+	StelUtils::rectToSphe(&ra, &dec, getSiderealPosGeometric(core));
+	ra = 2.*M_PI-ra;
+	ha = ra*12./M_PI;
+	if (ha>24.)
+		ha -= 24.;
+	// It seems necessary to have ha in [-12,12]!
+	if (ha>12.)
+		ha -= 24.;
 
-		t = ct - ha;
-		if (ha>12.f && ha<=24.f)
-			t += 24.f;
+	const double JD = core->getJD();
+	const double ct = (JD - (int)JD)*24.;
 
-		t += core->getUTCOffset(JD) + 12.f;
-		t = std::fmod(t, 24.0);
-		rts[1] = t;
+	t = ct - ha*coeff; // earth: coeff=(360.985647/360.);
+	if (ha>12. && ha<=24.)
+		t += 24.;
 
-		const float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
-		if (cosH<-1.f) // circumpolar
-		{
-			rts[0]=rts[2]=100.f;
-		}
-		else if (cosH>1.f)
-		{
-			rts[0]=rts[2]=-100.f;
-		}
-		else
-		{
-			//StelUtils::rectToSphe(&ra, &dec, getEquinoxEquatorialPos(core));
-			//float cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
-			//cosH = std::fmod(cosH,2.0*M_PI); // ??? -1<cosH<1!
+	t += core->getUTCOffset(JD) + 12.;
+	t = StelUtils::fmodpos(t, 24.0);
+	rts[1] = t;
 
-			PlanetP cp = core->getCurrentPlanet();
-			double coeff = cp->getSiderealDay()/cp->getMeanSolarDay();
-			float HC = acos(cosH)*12.*coeff/M_PI;
+	const double cosH = (sin(hz) - sin(phi)*sin(dec))/(cos(phi)*cos(dec));
+	if (cosH<-1.) // circumpolar
+	{
+		rts[0]=rts[2]=100.f;
+	}
+	else if (cosH>1.) // never rises
+	{
+		rts[0]=rts[2]=-100.f;
+	}
+	else
+	{
+		const double HC = acos(cosH)*12.*coeff/M_PI;
 
-			rts[0] = StelUtils::fmodpos(t - HC, 24.f);
-			rts[2] = StelUtils::fmodpos(t + HC, 24.f);
-		}
-	//}
+		rts[0] = StelUtils::fmodpos(t - HC, 24.);
+		rts[2] = StelUtils::fmodpos(t + HC, 24.);
+	}
 
 	return rts;
 }
