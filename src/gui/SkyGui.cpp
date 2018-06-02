@@ -173,7 +173,6 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// just print details of the first item for now
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
-		selected[0]->computeRTSTime(core); // try to update RTS. May have a cached position.
 		QString s = selected[0]->getInfoString(core, infoTextFilters);
 		setHtml(s);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
