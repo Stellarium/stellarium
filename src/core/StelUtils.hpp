@@ -242,6 +242,10 @@ namespace StelUtils
 
 	//! Integer modulo where the result is always positive.
 	int imod(const int a, const int b);
+	//! Double modulo where the result is always positive.
+	double fmodpos(const double a, const double b);
+	//! Float modulo where the result is always positive.
+	float fmodpos(const float a, const float b);
 
 	///////////////////////////////////////////////////
 	// New Qt based General Calendar Functions.
@@ -361,7 +365,13 @@ namespace StelUtils
 	double calculateSiderealPeriod(const double SemiMajorAxis);
 
 	//! Convert decimal hours to hours, minutes, seconds
-	QString hoursToHmsStr(const double hours);
+	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
+
+	//! Convert hours, minutes, seconds to decimal hours
+	double hmsToHours(const int h, const int m, const double s);
+
+	//! Convert a hms formatted string to decimal hours
+	double hmsStrToHours(const QString& s);
 
 	//! Get the number of seconds since program start.
 	//!
@@ -723,6 +733,48 @@ namespace StelUtils
 	//! @param b second number
 	//! @return Greatest Common Divisor
 	int gcd(int a, int b);
+
+	//! Given regularly spaced steps x1, x2, x3 and curve values y1, y2, y3,
+	//! calculate an intermediate value of the 3 arguments for the given interpolation point n.
+	//! @param n Interpolation factor: steps from x2
+	//! @param y1 Argument 1
+	//! @param y2 Argument 2
+	//! @param y3 Argument 3
+	//! @return interpolation value
+	template<class T> T interpolate3(T n, T y1, T y2, T y3)
+	{
+		// See "Astronomical Algorithms" by J. Meeus
+
+		// Equation 3.2
+		T a = y2-y1;
+		T b = y3-y2;
+		T c = b-a;
+
+		// Equation 3.3
+		return y2 + n * 0.5f * (a + b + n * c);
+	}
+
+	//! Given regularly spaced steps x1, x2, x3, x4, x5 and curve values y1, y2, y3, y4, y5,
+	//! calculate an intermediate value of the 5 arguments for the given interpolation point n.
+	//! @param n Interpolation factor: steps from x3
+	//! @param y1 Argument 1
+	//! @param y2 Argument 2
+	//! @param y3 Argument 3
+	//! @param y3 Argument 4
+	//! @param y3 Argument 5
+	//! @return interpolation value
+	template<class T> T interpolate5(T n, T y1, T y2, T y3, T y4, T y5)
+	{
+		// See "Astronomical Algorithms" by J. Meeus
+		// Eq. 3.8
+		T A=y2-y1; T B=y3-y2; T C=y4-y3; T D=y5-y4;
+		T E=B-A; T F=C-B; T G=D-C;
+		T H=F-E; T J=G-F;
+		T K=J-H;
+
+		return (((K*(1.0/24.0)*n + (H+J)/12.0)*n  + (F*0.5-K/24.0))*n + ((B+C)*0.5 - (H+J)/12.0))*n +y3;
+	}
+
 
 #ifdef _MSC_BUILD
 	inline double trunc(double x)

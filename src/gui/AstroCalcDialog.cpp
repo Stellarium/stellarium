@@ -408,6 +408,8 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		// TRANSLATORS: surface brightness
 		positionsHeader << q_("S.B.");
 	}
+	// TRANSLATORS: time of transit
+	positionsHeader << qc_("Transit", "celestial event");
 	// TRANSLATORS: type of object
 	positionsHeader << q_("Type");
 
@@ -563,7 +565,7 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 void AstroCalcDialog::currentCelestialPositions()
 {
 	float ra, dec;
-	QString raStr, decStr, extra, angularSize, celObjName = "", celObjId = "";
+	QString raStr, decStr, extra, angularSize, sTransit, celObjName = "", celObjId = "";
 
 	initListCelestialPositions();
 
@@ -649,6 +651,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (angularSize.toFloat() < 0.01f)
 					angularSize = QChar(0x2014);
 
+				sTransit = QChar(0x2014);
+				Vec3f rts = obj->getRTSTime(core);
+				if (rts[1]>=0.f)
+					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+
 				treeItem->setText(CColumnName, dsoName);
 				treeItem->setText(CColumnRA, raStr);
 				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
@@ -662,6 +669,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, mu);
+				treeItem->setText(CColumnTransit, sTransit);
+				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
 				treeItem->setText(CColumnType, q_(obj->getTypeString()));
 			}
 		}
@@ -706,6 +715,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (angularSize.toFloat() < 1e-4 || planet->getPlanetType() == Planet::isComet)
 					angularSize = QChar(0x2014);
 
+				sTransit = QChar(0x2014);
+				Vec3f rts = planet->getRTSTime(core);
+				if (rts[1]>=0.f)
+					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+
 				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, planet->getNameI18n());
 				treeItem->setText(CColumnRA, raStr);
@@ -720,6 +734,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnTransit, sTransit);
+				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
 				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
 			}
 		}
@@ -759,6 +775,11 @@ void AstroCalcDialog::currentCelestialPositions()
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
+				sTransit = QChar(0x2014);
+				Vec3f rts = planet->getRTSTime(core);
+				if (rts[1]>=0.f)
+					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+
 				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, planet->getNameI18n());
 				treeItem->setText(CColumnRA, raStr);
@@ -773,6 +794,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnTransit, sTransit);
+				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
 				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
 			}
 		}
@@ -819,6 +842,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (angularSize.toFloat() < 1e-4)
 					angularSize = QChar(0x2014);
 
+				sTransit = QChar(0x2014);
+				Vec3f rts = planet->getRTSTime(core);
+				if (rts[1]>=0.f)
+					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+
 				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, planet->getNameI18n());
 				treeItem->setText(CColumnRA, raStr);
@@ -833,6 +861,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnTransit, sTransit);
+				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
 				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
 			}
 		}
@@ -878,6 +908,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (angularSize.toFloat() < 1e-4)
 					angularSize = QChar(0x2014);
 
+				sTransit = QChar(0x2014);
+				Vec3f rts = planet->getRTSTime(core);
+				if (rts[1]>=0.f)
+					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+
 				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, planet->getNameI18n());
 				treeItem->setText(CColumnRA, raStr);
@@ -892,6 +927,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnTransit, sTransit);
+				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
 				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
 			}
 		}
@@ -962,6 +999,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				else												  // stars with high proper motion
 					extra = QString::number(star.value(obj), 'f', 5); // "/yr
 
+				sTransit = QChar(0x2014);
+				Vec3f rts = obj->getRTSTime(core);
+				if (rts[1]>=0.f)
+					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+
 				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
 				treeItem->setText(CColumnName, obj->getNameI18n());
 				treeItem->setText(CColumnRA, raStr);
@@ -976,6 +1018,8 @@ void AstroCalcDialog::currentCelestialPositions()
 				treeItem->setText(CColumnExtra, extra);
 				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
 				treeItem->setToolTip(CColumnExtra, sToolTip);
+				treeItem->setText(CColumnTransit, sTransit);
+				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
 				treeItem->setText(CColumnType, sType);
 			}
 		}
@@ -3605,6 +3649,10 @@ void AstroCalcDialog::calculateWutObjects()
 	ui->wutMatchingObjectsListWidget->clear();
 	if (ui->wutCategoryListWidget->currentItem())
 	{
+		ui->labelRiseValue->setText("");
+		ui->labelTransitValue->setText("");
+		ui->labelSetValue->setText("");
+
 		QString categoryName = ui->wutCategoryListWidget->currentItem()->text();
 		int categoryId = wutCategories.value(categoryName);
 
@@ -4053,10 +4101,28 @@ void AstroCalcDialog::selectWutObject()
 				{
 					mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
 					mvMgr->setFlagTracking(true);
+
+					Vec3f rts = newSelected[0]->getRTSTime(core);
+					QString sRise = QChar(0x2014);
+					if (rts[0]>-99.f && rts[0]<100.f)
+						sRise = StelUtils::hoursToHmsStr(rts[0], true);
+					QString sTransit = QChar(0x2014);
+					if (rts[1]>=0.f)
+						sTransit = StelUtils::hoursToHmsStr(rts[1], true);
+					QString sSet = QChar(0x2014);
+					if (rts[2]>-99.f && rts[2]<100.f)
+						sSet = StelUtils::hoursToHmsStr(rts[2], true);
+
+					ui->labelRiseValue->setText(sRise);
+					ui->labelTransitValue->setText(sTransit);
+					ui->labelSetValue->setText(sSet);
 				}
 				else
 				{
 					GETSTELMODULE(StelObjectMgr)->unSelect();
+					ui->labelRiseValue->setText("");
+					ui->labelTransitValue->setText("");
+					ui->labelSetValue->setText("");
 				}
 			}
 		}

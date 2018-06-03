@@ -29,6 +29,7 @@
 #include "StelModuleMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
+#include "SolarSystem.hpp"
 
 #include <QTextStream>
 #include <QFile>

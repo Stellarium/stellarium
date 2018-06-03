@@ -53,7 +53,8 @@ public:
 		CColumnDec,		//! declination
 		CColumnMagnitude,	//! magnitude
 		CColumnAngularSize,	//! angular size
-		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)		
+		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnTransit,		//! time of transit
 		CColumnType,		//! type of object
 		CColumnCount		//! total number of columns
 	};
@@ -304,6 +305,10 @@ private:
 		else if (column == AstroCalcDialog::CColumnMagnitude || column == AstroCalcDialog::CColumnAngularSize || column == AstroCalcDialog::CColumnExtra)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
+		}
+		else if (column == AstroCalcDialog::CColumnTransit)
+		{
+			return StelUtils::hmsStrToHours(text(column).append("00s")) < StelUtils::hmsStrToHours(other.text(column).append("00s"));
 		}
 		else
 		{

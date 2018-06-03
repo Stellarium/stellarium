@@ -1116,6 +1116,61 @@
              <widget class="QListWidget" name="wutMatchingObjectsListWidget"/>
             </item>
             <item>
+             <layout class="QGridLayout" name="gridLayoutRTSData">
+              <item row="0" column="1">
+               <widget class="QLabel" name="labelRiseValue">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="4">
+               <widget class="QLabel" name="label">
+                <property name="text">
+                 <string comment="celestial event">Set:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="0">
+               <widget class="QLabel" name="labelRise">
+                <property name="text">
+                 <string comment="celestial event">Rise:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QLabel" name="labelTransit">
+                <property name="text">
+                 <string comment="celestial event">Transit:</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QLabel" name="labelTransitValue">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QLabel" name="labelSetValue">
+                <property name="text">
+                 <string/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <widget class="QPushButton" name="saveObjectsButton">
               <property name="text">
                <string>Save list of objects</string>

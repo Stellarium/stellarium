@@ -23,6 +23,7 @@
 
 #include "StarWrapper.hpp"
 #include "ZoneArray.hpp"
+#include "SolarSystem.hpp"
 
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
@@ -71,7 +72,6 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 
 	return str;
 }
-
 
 QString StarWrapper1::getEnglishName(void) const
 {

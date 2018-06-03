@@ -199,6 +199,24 @@ double hmsToRad(const unsigned int h, const unsigned int m, const double s )
 	return (double)h*M_PI/12.+(double)m*M_PI/10800.+(double)s*M_PI/648000.;
 }
 
+double hmsToHours(const int h, const int m, const double s)
+{
+	return (double)h+(double)m/60.+(double)s*3600.;
+}
+
+double hmsStrToHours(const QString& s)
+{
+	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
+	if (!reg.exactMatch(s))
+		return 0;
+	QStringList list = reg.capturedTexts();
+	int hrs = list[1].toInt();
+	int min = list[2].toInt();
+	int sec = list[3].toInt();
+
+	return hmsToHours(hrs, min, sec);
+}
+
 double dmsToRad(const int d, const unsigned int m, const double s)
 {
 	if (d>=0)
@@ -739,6 +757,20 @@ double asinh(const double z)
 int imod(const int a, const int b)
 {
 	int ret = a % b;
+	if(ret < 0)
+		ret+=b;
+	return ret;
+}
+double fmodpos(const double a, const double b)
+{
+	double ret = fmod(a, b);
+	if(ret < 0)
+		ret+=b;
+	return ret;
+}
+float fmodpos(const float a, const float b)
+{
+	float ret = fmodf(a, b);
 	if(ret < 0)
 		ret+=b;
 	return ret;
@@ -1383,13 +1415,17 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 }
 
 
-QString hoursToHmsStr(const double hours)
+QString hoursToHmsStr(const double hours, const bool lowprecision)
 {
 	int h = (int)hours;
 	int m = (int)((qAbs(hours)-qAbs(double(h)))*60);
-	float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
-
-	return QString("%1h%2m%3s").arg(h).arg(m).arg(QString::number(s, 'f', 1));
+	if (lowprecision)
+		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
+	else
+	{
+		float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
+		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
+	}
 }
 
 /* /////////////////// DELTA T VARIANTS
@@ -2603,6 +2639,7 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 
 	return out;
 }
+
 
 } // end of the StelUtils namespace
 

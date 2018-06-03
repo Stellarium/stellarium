@@ -65,8 +65,9 @@ public:
 		EclipticCoordOfDate	= 0x00010000, //!< The ecliptic position (of date)
 		IAUConstellation        = 0x00020000, //!< Three-letter constellation code (And, Boo, Cas, ...)
 		SiderealTime		= 0x00040000, //!< Mean and Apparent Sidereal Time
-		NoFont			= 0x00080000,
-		PlainText		= 0x00100000,  //!< Strip HTML tags from output
+		RTSTime			= 0x00080000, //!< Time of rise, transit and set of celestial object
+		NoFont			= 0x00100000,
+		PlainText		= 0x00200000, //!< Strip HTML tags from output
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
@@ -76,9 +77,10 @@ public:
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|Distance|Size|Velocity|Extra|HourAngle|
-									   AbsoluteMagnitude|GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
-									   EclipticCoordOfDate|IAUConstellation|SiderealTime);
+	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
+									   Distance|Size|Velocity|Extra|HourAngle|AbsoluteMagnitude|
+									   GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
+									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
 	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
@@ -127,6 +129,12 @@ public:
 	//! - size-dd : angular size in decimal degrees
 	//! - size-deg : angular size in decimal degrees (formatted string)
 	//! - size-dms : angular size in DMS format
+	//! - rise : time of rise in HM format
+	//! - rise-dhr : time of rise in decimal hours
+	//! - transit : time of transit in HM format
+	//! - transit-dhr : time of transit in decimal hours
+	//! - set : time of set in HM format
+	//! - set-dhr : time of set in decimal hours
 	//! - name : english name of the object
 	//! - localized-name : localized name	
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
@@ -205,17 +213,31 @@ public:
 	//! @return true if object an above real horizon (uses test for landscapes)
 	bool isAboveRealHorizon(const StelCore* core) const;
 
+	/* Taken out. This solution has a bug. Re-implement if required.
 	//! Get type of culmination (visibility) for celestial object for current location.
 	//! @return int
 	//!	 1 - The object is above the horizon even at its lower culmination (Circumpolar)
 	//!	 0 - The upper culmination is above and the lower below the horizon, so the body is observed to rise and set daily
 	//!	-1 - The object is below the horizon even at its upper culmination
 	int getCulminationType(const StelCore* core) const;
+	*/
 
-	//! Get time of rise, transit and set for celestial object for current location.
+	//! Get today's time of rise, transit and set for celestial object for current location.
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
-	Vec3f getRTSTime(const StelCore* core) const;
+	Vec3f getRTSTime(StelCore *core) const;
+
+	/* Taken out. May not be useful as intended.
+	//! Get tomorrow's time of rise, transit and set for celestial object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	Vec3f getNextRTSTime(StelCore *core) const;
+
+	//! Get yesterday's time of rise, transit and set for celestial object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	Vec3f getPreviousRTSTime(StelCore *core) const;
+	*/
 
 	//! Return object's apparent V magnitude as seen from observer, without including extinction.
 	virtual float getVMagnitude(const StelCore* core) const;
@@ -251,6 +273,11 @@ protected:
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;
 private:
+	//! Compute time of rise, transit and set for celestial object for current location.
+	//! @return Vec3f - time of rise, transit and set; decimal hours
+	//! @note The value -1.f is used as undefined value
+	Vec3f computeRTSTime(StelCore* core) const;
+
 	static int stelObjectPMetaTypeID;
 };
 
