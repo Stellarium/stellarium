@@ -126,27 +126,6 @@ bool StelObject::isAboveRealHorizon(const StelCore *core) const
 	return r;
 }
 
-/*//// Taken out. This does not work with atmosphere.
-  This may make errors for objects just barely lifted by refraction! If needed, fix that.
-int StelObject::getCulminationType(const StelCore *core) const
-{
-	float latitude = core->getCurrentLocation().latitude;
-	double dec, ra, declination;
-	bool sign;
-	StelUtils::rectToSphe(&ra, &dec, getEquinoxEquatorialPos(core));
-	StelUtils::radToDecDeg(dec, sign, declination);
-	if (!sign)
-		declination *= -1;
-
-	if (qAbs(declination + latitude)>90.f)
-		return 1; // The object is above the horizon even at its lower culmination
-	else if (qAbs(declination - latitude)>90.f)
-		return -1; // The object is below the horizon even at its upper culmination
-	else
-		return 0; // The upper culmination is above and the lower below the horizon, so the body is observed to rise and set daily
-}
-*/
-
 float StelObject::getVMagnitude(const StelCore* core) const 
 {
 	Q_UNUSED(core);
@@ -157,26 +136,6 @@ Vec3f StelObject::getRTSTime(StelCore *core) const
 {
 	return computeRTSTime(core);
 }
-
-/*
-// These quite likely cause too much overhead. Also, Meeus' algorithm works differently.
-// These functions can likely be removed.
-Vec3f StelObject::getNextRTSTime(StelCore *core) const
-{
-	core->addDay();
-	Vec3f rts = computeRTSTime(core);
-	core->subtractDay();
-	return rts;
-}
-
-Vec3f StelObject::getPreviousRTSTime(StelCore *core) const
-{
-	core->subtractDay();
-	Vec3f rts = computeRTSTime(core);
-	core->addDay();
-	return rts;
-}
-*/
 
 Vec3f StelObject::computeRTSTime(StelCore *core) const
 {
@@ -614,6 +573,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sTransit = qc_("Transit", "celestial event");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
+		if (withTables && currentPlanet!="Earth")
+			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
+
 		if (rts[0]>-99.f && rts[0]<100.f)
 		{
 			if (withTables)
