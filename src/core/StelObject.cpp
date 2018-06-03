@@ -614,46 +614,49 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sTransit = qc_("Transit", "celestial event");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
-		if (rts[0]==-100.f && rts[2]==-100.f )
+		if (rts[0]>-99.f && rts[0]<100.f)
 		{
 			if (withTables)
-			{
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
-				res += "</table>";
-			}
-			else
-				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
-			res += q_("This object never rises") + "<br />";
-		}
-		else if (rts[0]==100.f && rts[2]==100.f ) // circumpolar
-		{
-			if (withTables)
-			{
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
-				res += "</table>";
-			}
-			else
-				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
-			res += q_("Circumpolar (never sets)") + "<br />";
-
-		}
-
-		else
-		{
-			if (withTables)
-			{
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
-				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
-				res += "</table>";
-			}
 			else
-			{
 				res += QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) + "<br />";
-				res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
-				res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
-			}
 		}
+
+		if (withTables)
+			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true));
+		else
+			res += QString("%1: %2").arg(sTransit, StelUtils::hoursToHmsStr(rts[1], true)) + "<br />";
+
+		if (rts[2]>-99.f && rts[2]<100.f)
+		{
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true));
+			else
+				res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
+
+		}
+
+		if (withTables)
+			res += "</table>";
+
+		if (rts[0]<-99.f && rts[2]<-99.f )
+		{
+			if (getEnglishName()=="Sun")
+				res += q_("Polar night") + "<br />";
+			else
+				res += q_("This object never rises") + "<br />";
+		}
+		else if (rts[0]>99.f && rts[2]>99.f)
+		{
+			if (getEnglishName()=="Sun")
+				res += q_("Polar day") + "<br />";
+			else
+				res += q_("Circumpolar (never sets)") + "<br />";
+		}
+		else if (rts[0]>99.f && rts[2]<99.f)
+			res += q_("Polar dawn") + "<br />";
+		else if (rts[0]<99.f && rts[2]>99.f)
+			res += q_("Polar set") + "<br />";
 	}
 
 	if (flags&IAUConstellation)
