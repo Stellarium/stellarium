@@ -1087,11 +1087,21 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
 
-	QStringList list = nameI18n.split("(");
-	if (list.count() > 0 && nameI18n.lastIndexOf("(") != 0 && nameI18n.lastIndexOf("/") < 0)
-		nameI18n = list.at(0).trimmed();
+	bool founded = false;
 
 	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
+		founded = true;
+	else
+	{
+		QStringList list = nameI18n.split("(");
+		if (list.count() > 0 && nameI18n.lastIndexOf("(") != 0 && nameI18n.lastIndexOf("/") < 0)
+			nameI18n = list.at(0).trimmed();
+
+		if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
+			founded = true;
+	}
+
+	if (founded)
 	{
 		const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 		if (!newSelected.empty())
@@ -1099,7 +1109,7 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 			mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
 			mvMgr->setFlagTracking(true);
 		}
-	}
+	}	
 }
 
 void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
