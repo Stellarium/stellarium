@@ -4104,13 +4104,13 @@ void AstroCalcDialog::selectWutObject()
 
 					Vec3f rts = newSelected[0]->getRTSTime(core);
 					QString sRise = QChar(0x2014);
-					if (rts[0]>=0.f)
+					if (rts[0]>-99.f && rts[0]<100.f)
 						sRise = StelUtils::hoursToHmsStr(rts[0], true);
 					QString sTransit = QChar(0x2014);
 					if (rts[1]>=0.f)
 						sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 					QString sSet = QChar(0x2014);
-					if (rts[2]>=0.f)
+					if (rts[2]>-99.f && rts[2]<100.f)
 						sSet = StelUtils::hoursToHmsStr(rts[2], true);
 
 					ui->labelRiseValue->setText(sRise);
