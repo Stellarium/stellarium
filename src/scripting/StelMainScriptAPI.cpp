@@ -1424,3 +1424,12 @@ QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const Q
 
 	return map;
 }
+
+QString StelMainScriptAPI::getEnv(const QString &var)
+{
+#if QT_VERSION>=0x051000
+	return qEnvironmentVariable(var);
+#else
+	return QString::fromLocal8Bit(qgetenv(var.toLocal8Bit().constData()));
+#endif
+}
