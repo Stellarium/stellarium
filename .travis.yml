@@ -239,7 +239,7 @@ script:
   - ctest --output-on-failure
 
 after_success:
-  - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" ]]; then
+  - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false ]]; then
       pip install virtualenv;
       virtualenv ~/env;
       source ~/env/bin/activate;
