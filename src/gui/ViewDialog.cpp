@@ -1463,14 +1463,14 @@ void ViewDialog::setBortleScaleToolTip(int Bindex)
 	//TRANSLATORS: Short description for Class 9 of the Bortle scale
 	list.append(q_("Inner-city sky"));
 
-	nelm.append("7.6–8.0");
-	nelm.append("7.1–7.5");
-	nelm.append("6.6–7.0");
-	nelm.append("6.1–6.5");
-	nelm.append("5.6–6.0");
+	nelm.append("7.6-8.0");
+	nelm.append("7.1-7.5");
+	nelm.append("6.6-7.0");
+	nelm.append("6.1-6.5");
+	nelm.append("5.6-6.0");
 	nelm.append("5.1-5.5");
-	nelm.append("4.6–5.0");
-	nelm.append("4.1–4.5");
+	nelm.append("4.6-5.0");
+	nelm.append("4.1-4.5");
 	nelm.append("4.0");
 
 	QString tooltip = QString("%1 (%2 %3)")

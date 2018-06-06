@@ -472,7 +472,7 @@ QString StelProjectorSinusoidal::getNameI18() const
 
 QString StelProjectorSinusoidal::getDescriptionI18() const
 {
-	return q_("The sinusoidal projection is a <i>pseudocylindrical equal-area map projection</i>, sometimes called the Sanson–Flamsteed or the Mercator equal-area projection.");
+	return q_("The sinusoidal projection is a <i>pseudocylindrical equal-area map projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-area projection.");
 }
 
 bool StelProjectorSinusoidal::forward(Vec3f &v) const
@@ -514,7 +514,7 @@ QString StelProjectorMiller::getNameI18() const
 
 QString StelProjectorMiller::getDescriptionI18() const
 {
-	return q_("The Miller cylindrical projection is a modified Mercator projection, proposed by Osborn Maitland Miller (1897–1979) in 1942. The poles are no longer mapped to infinity.");
+	return q_("The Miller cylindrical projection is a modified Mercator projection, proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no longer mapped to infinity.");
 }
 
 bool StelProjectorMiller::forward(Vec3f &v) const

@@ -1200,39 +1200,39 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 		switch(glclass.indexOf(GlClRx.capturedTexts().at(1).trimmed()))
 		{
 			case 0:
-				r = qc_("high concentration of stars toward the center", "Shapley–Sawyer Concentration Class");
+				r = qc_("high concentration of stars toward the center", "Shapley-Sawyer Concentration Class");
 				break;
 			case 1:
-				r = qc_("dense central concentration of stars", "Shapley–Sawyer Concentration Class");
+				r = qc_("dense central concentration of stars", "Shapley-Sawyer Concentration Class");
 				break;
 			case 2:
-				r = qc_("strong inner core of stars", "Shapley–Sawyer Concentration Class");
+				r = qc_("strong inner core of stars", "Shapley-Sawyer Concentration Class");
 				break;
 			case 3:
-				r = qc_("intermediate rich concentrations of stars", "Shapley–Sawyer Concentration Class");
+				r = qc_("intermediate rich concentrations of stars", "Shapley-Sawyer Concentration Class");
 				break;
 			case 4:
 			case 5:
 			case 6:
-				r = qc_("intermediate concentrations of stars", "Shapley–Sawyer Concentration Class");
+				r = qc_("intermediate concentrations of stars", "Shapley-Sawyer Concentration Class");
 				break;
 			case 7:
-				r = qc_("rather loosely concentration of stars towards the center", "Shapley–Sawyer Concentration Class");
+				r = qc_("rather loosely concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
 				break;
 			case 8:
-				r = qc_("loose concentration of stars towards the center", "Shapley–Sawyer Concentration Class");
+				r = qc_("loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
 				break;
 			case 9:
-				r = qc_("loose concentration of stars", "Shapley–Sawyer Concentration Class");
+				r = qc_("loose concentration of stars", "Shapley-Sawyer Concentration Class");
 				break;
 			case 10:
-				r = qc_("very loose concentration of stars towards the center", "Shapley–Sawyer Concentration Class");
+				r = qc_("very loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
 				break;
 			case 11:
-				r = qc_("almost no concentration towards the center", "Shapley–Sawyer Concentration Class");
+				r = qc_("almost no concentration towards the center", "Shapley-Sawyer Concentration Class");
 				break;
 			default:
-				r = qc_("undocumented concentration class", "Shapley–Sawyer Concentration Class");
+				r = qc_("undocumented concentration class", "Shapley-Sawyer Concentration Class");
 				break;
 		}
 	}

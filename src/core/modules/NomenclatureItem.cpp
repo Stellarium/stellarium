@@ -181,7 +181,7 @@ QString NomenclatureItem::getNomenclatureTypeString() const
 			nTypeStr = qc_("macula", "landform");
 			break;
 		case niMare:
-			// TRANSLATORS: “Sea”; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
+			// TRANSLATORS: "Sea"; on the Moon, low albedo, relatively smooth plain, generally of large extent; on Mars, dark albedo areas of no known geological significance; on Titan, large expanses of dark materials thought to be liquid hydrocarbons
 			nTypeStr = qc_("mare", "landform");
 			break;
 		case niMensa:

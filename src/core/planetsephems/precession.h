@@ -35,7 +35,7 @@ extern "C" {
 //! This paper describes a precession model valid for +/-200.000 years from J2000.0 and consistent with P03 precession accepted as IAU2006 Precession.
 //! Some better understanding of the angles can be found in:
 //! + 1994AJ____108__711W J.G.Williams: Contributions to the Earth's Obliquity Rate, Precession and Nutation (Angles of eq. (35))
-//! + A&A 459, 981–985 (2006) DOI: 10.1051/0004-6361:20065897: Wallace&Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions
+//! + A&A 459, 981-985 (2006) DOI: 10.1051/0004-6361:20065897: Wallace&Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions
 //!
 //! The angles computed therein are used to rotate the planet Earth's axis, and also to rotate an "Ecliptic of Date", i.e. the current orbital plane of Earth.
 //! Currently this is without Nutation.
@@ -55,7 +55,7 @@ double getPrecessionAngleVondrakEpsilon(const double jde);
 double getPrecessionAngleVondrakCurrentEpsilonA(void);
 
 // To complete the task of correct&accurate precession-nutation handling, we need fitting IAU-2000A or IAU-2000B Nutation.
-// E.g. A&A 459, 981–985 (2006) P. T. Wallace and N. Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions. DOI: 10.1051/0004-6361:20065897
+// E.g. A&A 459, 981-985 (2006) P. T. Wallace and N. Capitaine: Precession-nutation procedures consistent with IAU 2006 resolutions. DOI: 10.1051/0004-6361:20065897
 // IAU 2000A nutation has 1400 terms and goes into micro-arcseconds. All we ever aim for is sub-arcsecond, if at all, this is more than covered by IAU-2000B.
 
 //! Compute and return nutation angles of the abridged IAU-2000B nutation.
