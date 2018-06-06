@@ -573,6 +573,12 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		QString sTransit = qc_("Transit", "celestial event");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
+		float sunrise = 0.f;
+		float sunset = 24.f;
+		bool isSun = false;
+		if (getEnglishName()=="Sun")
+			isSun = true;
+
 		if (withTables && currentPlanet!="Earth")
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
@@ -582,6 +588,8 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true));
 			else
 				res += QString("%1: %2").arg(sRise, StelUtils::hoursToHmsStr(rts[0], true)) + "<br />";
+
+			sunrise = rts[0];
 		}
 
 		if (withTables)
@@ -596,6 +604,17 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				res += QString("%1: %2").arg(sSet, StelUtils::hoursToHmsStr(rts[2], true)) + "<br />";
 
+			sunset = rts[2];
+		}
+
+		float day = sunset - sunrise;
+		if (isSun && day<24.f)
+		{
+			QString sDay = qc_("Day", "duration of the solar day");
+			if (withTables)
+				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sDay, StelUtils::hoursToHmsStr(day, true));
+			else
+				res += QString("%1: %2").arg(sDay, StelUtils::hoursToHmsStr(day, true)) + "<br />";
 		}
 
 		if (withTables)
@@ -603,14 +622,14 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 
 		if (rts[0]<-99.f && rts[2]<-99.f )
 		{
-			if (getEnglishName()=="Sun")
+			if (isSun)
 				res += q_("Polar night") + "<br />";
 			else
 				res += q_("This object never rises") + "<br />";
 		}
 		else if (rts[0]>99.f && rts[2]>99.f)
 		{
-			if (getEnglishName()=="Sun")
+			if (isSun)
 				res += q_("Polar day") + "<br />";
 			else
 				res += q_("Circumpolar (never sets)") + "<br />";
@@ -618,7 +637,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		else if (rts[0]>99.f && rts[2]<99.f)
 			res += q_("Polar dawn") + "<br />";
 		else if (rts[0]<99.f && rts[2]>99.f)
-			res += q_("Polar set") + "<br />";
+			res += q_("Polar dusk") + "<br />";
 	}
 
 	if (flags&IAUConstellation)
