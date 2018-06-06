@@ -625,7 +625,7 @@ namespace StelUtils
 	//! Implementation of algorithm by Islam, Sadiq & Qureshi (2008 + revisited 2013) for DeltaT computation.
 	//! Source: Error Minimization of Polynomial Approximation of DeltaT
 	//! Islam, S. & Sadiq, M. & Qureshi, M. S.
-	//! Journal of Astrophysics & Astronomy, Vol. 29, p. 363–366 (2008)
+	//! Journal of Astrophysics & Astronomy, Vol. 29, p. 363-366 (2008)
 	//! http://www.ias.ac.in/jaa/dec2008/JAA610.pdf
 	//! Note: These polynomials are based on the uncorrected deltaT table from the Astronomical Almanac, thus
 	//! ndot = -26.0 arcsec/cy^2. Meeus & Simons (2000) corrected the deltaT table for years before 1955.5 using
