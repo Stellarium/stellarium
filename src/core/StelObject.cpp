@@ -610,7 +610,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		float day = sunset - sunrise;
 		if (isSun && day<24.f)
 		{
-			QString sDay = qc_("Day", "duration of the solar day");
+			QString sDay = q_("Daytime");
 			if (withTables)
 				res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2</td></tr>").arg(sDay, StelUtils::hoursToHmsStr(day, true));
 			else
