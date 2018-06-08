@@ -1217,7 +1217,7 @@ QString Nebula::getMorphologicalTypeDescription(void) const
 				r = qc_("intermediate concentrations of stars", "Shapley-Sawyer Concentration Class");
 				break;
 			case 7:
-				r = qc_("rather loosely concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
+				r = qc_("rather loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
 				break;
 			case 8:
 				r = qc_("loose concentration of stars towards the center", "Shapley-Sawyer Concentration Class");
