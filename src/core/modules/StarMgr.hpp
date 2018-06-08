@@ -366,6 +366,9 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	void increaseStarsMagnitudeLimit();
+	void reduceStarsMagnitudeLimit();
+
 signals:
 	void starLabelsDisplayedChanged(const bool displayed);
 	void starsDisplayedChanged(const bool displayed);

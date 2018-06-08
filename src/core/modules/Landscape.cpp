@@ -1101,10 +1101,11 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 
 
 //// create a spherical landscape from basic parameters (no ini file needed)
-void LandscapeSpherical::create(const QString _name, const QString& _maptex, const QString& _maptexFog, const QString& _maptexIllum, const float _angleRotateZ,
-								const float _mapTexTop, const float _mapTexBottom,
-								const float _fogTexTop, const float _fogTexBottom,
-								const float _illumTexTop, const float _illumTexBottom)
+void LandscapeSpherical::create(const QString _name, const QString& _maptex, const QString& _maptexFog, const QString& _maptexIllum,
+				const float _angleRotateZ,
+				const float _mapTexTop, const float _mapTexBottom,
+				const float _fogTexTop, const float _fogTexBottom,
+				const float _illumTexTop, const float _illumTexBottom)
 {
 	//qDebug() << "LandscapeSpherical::create():"<< _name << " : " << _maptex << " : " << _maptexFog << " : " << _maptexIllum << " : " << _angleRotateZ;
 	validLandscape = true;  // assume ok...
@@ -1135,7 +1136,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
 		if (mapTexFog)
 			memorySize+=mapTexFog.data()->getGlSize();
-	}
+	}	
 }
 
 void LandscapeSpherical::draw(StelCore* core)

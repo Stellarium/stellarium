@@ -453,6 +453,9 @@ void StarMgr::init()
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Stars", displayGroup, N_("Stars"), "flagStarsDisplayed", "S");
 	addAction("actionShow_Stars_Labels", displayGroup, N_("Stars labels"), "flagLabelsDisplayed", "Alt+S");
+	// Details: https://github.com/Stellarium/stellarium/issues/174
+	addAction("actionShow_Stars_MagnitudeLimitIncrease", displayGroup, N_("Increase the magnitude limit for stars"), "increaseStarsMagnitudeLimit()");
+	addAction("actionShow_Stars_MagnitudeLimitReduce", displayGroup, N_("Reduce the magnitude limit for stars"), "reduceStarsMagnitudeLimit()");
 }
 
 
@@ -1722,6 +1725,18 @@ void StarMgr::updateSkyCulture(const QString& skyCultureDir)
 	// Turn on sci names/catalog names for western culture only
 	setFlagSciNames(skyCultureDir.startsWith("western"));
 	updateI18n();
+}
+
+void StarMgr::increaseStarsMagnitudeLimit()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	core->getSkyDrawer()->setCustomStarMagnitudeLimit(core->getSkyDrawer()->getCustomStarMagnitudeLimit() + 0.1);
+}
+
+void StarMgr::reduceStarsMagnitudeLimit()
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	core->getSkyDrawer()->setCustomStarMagnitudeLimit(core->getSkyDrawer()->getCustomStarMagnitudeLimit() - 0.1);
 }
 
 void StarMgr::populateStarsDesignations()
