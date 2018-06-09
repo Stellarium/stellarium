@@ -436,7 +436,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 			const QString lightTexturePath = getTexturePath(textureName, landscapeId);
 			sideTexs[nbSideTexs+i] = StelApp::getInstance().getTextureManager().createTexture(lightTexturePath);
 			if(sideTexs[nbSideTexs+i])
-				memorySize+=sideTexs[nbSideTexs+i].data()->getGlSize();
+				memorySize+=sideTexs[nbSideTexs+i]->getGlSize();
 		}
 		else
 			sideTexs[nbSideTexs+i].clear();
@@ -480,13 +480,13 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	QString groundTexPath = getTexturePath(groundTexName, landscapeId);
 	groundTex = StelApp::getInstance().getTextureManager().createTexture(groundTexPath, StelTexture::StelTextureParams(true));
 	if (groundTex)
-		memorySize+=groundTex.data()->getGlSize();
+		memorySize+=groundTex->getGlSize();
 
 	QString fogTexName = landscapeIni.value("landscape/fogtex").toString();
 	QString fogTexPath = getTexturePath(fogTexName, landscapeId);
 	fogTex = StelApp::getInstance().getTextureManager().createTexture(fogTexPath, StelTexture::StelTextureParams(true, GL_LINEAR, GL_REPEAT));
 	if (fogTex)
-		memorySize+=fogTex.data()->getGlSize();
+		memorySize+=fogTex->getGlSize();
 
 	// Precompute the vertex arrays for ground display
 	// Make slices_per_side=(3<<K) so that the innermost polygon of the fandisk becomes a triangle:
@@ -943,19 +943,19 @@ void LandscapeFisheye::create(const QString _name, float _texturefov, const QStr
 		memorySize+=mapImage->byteCount();
 	}
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
-	memorySize+=mapTex.data()->getGlSize();
+	memorySize+=mapTex->getGlSize();
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
 	{
 		mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
 		if (mapTexIllum)
-			memorySize+=mapTexIllum.data()->getGlSize();
+			memorySize+=mapTexIllum->getGlSize();
 	}
 	if (_maptexFog.length() && (!_maptexFog.endsWith("/")))
 	{
 		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
 		if (mapTexFog)
-			memorySize+=mapTexFog.data()->getGlSize();
+			memorySize+=mapTexFog->getGlSize();
 	}
 }
 
@@ -1123,19 +1123,19 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 		memorySize+=mapImage->byteCount();
 	}
 	mapTex = StelApp::getInstance().getTextureManager().createTexture(_maptex, StelTexture::StelTextureParams(true));
-	memorySize+=mapTex.data()->getGlSize();
+	memorySize+=mapTex->getGlSize();
 
 	if (_maptexIllum.length() && (!_maptexIllum.endsWith("/")))
 	{
 		mapTexIllum = StelApp::getInstance().getTextureManager().createTexture(_maptexIllum, StelTexture::StelTextureParams(true));
 		if (mapTexIllum)
-			memorySize+=mapTexIllum.data()->getGlSize();
+			memorySize+=mapTexIllum->getGlSize();
 	}
 	if (_maptexFog.length() && (!_maptexFog.endsWith("/")))
 	{
 		mapTexFog = StelApp::getInstance().getTextureManager().createTexture(_maptexFog, StelTexture::StelTextureParams(true));
 		if (mapTexFog)
-			memorySize+=mapTexFog.data()->getGlSize();
+			memorySize+=mapTexFog->getGlSize();
 	}	
 }
 

@@ -1174,7 +1174,7 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 	}
 	else
 	{
-		if (selected.begin() == selected.end()) return;
+		if (selected.empty()) return;
 
 		// Otherwise apply standard flags to all constellations
 		vector < Constellation * >::const_iterator iter;
@@ -1197,21 +1197,21 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 	if (c != Q_NULLPTR)
 	{
 
-		vector < Constellation * >::const_iterator iter;
-		int n=0;
-		for (iter = selected.begin(); iter != selected.end(); ++iter)
+		vector < Constellation * >::iterator iter;
+		for (iter = selected.begin(); iter != selected.end();)
 		{
 			if( (*iter)->getEnglishName() == c->getEnglishName() )
 			{
-				selected.erase(selected.begin()+n, selected.begin()+n+1);
-				iter--;
-				n--;
+				iter = selected.erase(iter);
 			}
-			n++;
+			else
+			{
+				++iter;
+			}
 		}
 
 		// If no longer any selection, restore all flags on all constellations
-		if (selected.begin() == selected.end())
+		if (selected.empty())
 		{
 
 			// Otherwise apply standard flags to all constellations
