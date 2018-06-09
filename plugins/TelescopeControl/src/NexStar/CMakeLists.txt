@@ -16,3 +16,5 @@ target_link_libraries(TelescopeControl_NexStar
     Qt5::Gui
     TelescopeControl_common
     )
+
+SET_TARGET_PROPERTIES(TelescopeControl_NexStar PROPERTIES FOLDER "plugins/TelescopeControl")

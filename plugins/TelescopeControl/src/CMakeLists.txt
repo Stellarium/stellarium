@@ -36,3 +36,4 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
 SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins TelescopeControl-static)
 
+SET_TARGET_PROPERTIES(TelescopeControl-static PROPERTIES FOLDER "plugins/TelescopeControl")

@@ -12,3 +12,5 @@ target_link_libraries(TelescopeControl_Rts2
     Qt5::Gui
     TelescopeControl_common
     )
+
+SET_TARGET_PROPERTIES(TelescopeControl_Rts2 PROPERTIES FOLDER "plugins/TelescopeControl")

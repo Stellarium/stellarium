@@ -30,3 +30,6 @@ TARGET_LINK_LIBRARIES(PointerCoordinates-static Qt5::Core Qt5::Widgets)
 SET_TARGET_PROPERTIES(PointerCoordinates-static PROPERTIES OUTPUT_NAME "PointerCoordinates")
 SET_TARGET_PROPERTIES(PointerCoordinates-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins PointerCoordinates-static)
+
+SET_TARGET_PROPERTIES(PointerCoordinates-static PROPERTIES FOLDER "plugins/PointerCoordinates")
+

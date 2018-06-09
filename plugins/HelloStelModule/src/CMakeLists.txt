@@ -14,3 +14,4 @@ TARGET_LINK_LIBRARIES(HelloStelModule-static Qt5::Core Qt5::Gui)
 SET_TARGET_PROPERTIES(HelloStelModule-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins HelloStelModule-static)
 
+SET_TARGET_PROPERTIES(HelloStelModule-static PROPERTIES FOLDER "plugins/HelloStelModule")

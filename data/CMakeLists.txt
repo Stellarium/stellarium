@@ -20,6 +20,7 @@ ADD_CUSTOM_COMMAND(
 	TARGET splash
 	COMMAND ${CMAKE_COMMAND} -E copy ${_splashSrcFile} ${_splashDstFile}
 )
+SET_TARGET_PROPERTIES(splash PROPERTIES FOLDER "data")
 
 ########### icon target ###############
 ADD_CUSTOM_TARGET(icon ALL)
@@ -44,6 +45,7 @@ ADD_CUSTOM_COMMAND(
 	TARGET icon
 	COMMAND ${CMAKE_COMMAND} -E copy ${_iconSrcFile} ${_iconDstFile}
 )
+SET_TARGET_PROPERTIES(icon PROPERTIES FOLDER "data")
 
 # install splash and icon
 IF(MACOSX)

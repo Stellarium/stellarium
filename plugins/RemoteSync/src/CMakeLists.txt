@@ -38,3 +38,5 @@ TARGET_LINK_LIBRARIES(RemoteSync-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES OUTPUT_NAME "RemoteSync")
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins RemoteSync-static)
+
+SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES FOLDER "plugins/RemoteSync")

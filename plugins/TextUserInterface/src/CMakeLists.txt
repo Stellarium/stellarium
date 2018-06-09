@@ -35,3 +35,5 @@ TARGET_LINK_LIBRARIES(TextUserInterface-static Qt5::Core Qt5::Widgets)
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES OUTPUT_NAME "TextUserInterface")
 SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins TextUserInterface-static)
+
+SET_TARGET_PROPERTIES(TextUserInterface-static PROPERTIES FOLDER "plugins/TextUserInterface")

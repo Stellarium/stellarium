@@ -34,6 +34,7 @@ target_include_directories(glues_stel PUBLIC glues_stel/source)
 target_link_libraries(glues_stel Qt5::Gui)
 #turn off automoc, not needed here
 set_target_properties(glues_stel PROPERTIES AUTOMOC 0)
+SET_TARGET_PROPERTIES(glues_stel PROPERTIES FOLDER "src/external")
 
 SET(zlib_SRCS
      zlib/adler32.c
@@ -67,6 +68,7 @@ add_library(zlib_stel STATIC EXCLUDE_FROM_ALL ${zlib_SRCS})
 target_include_directories(zlib_stel PUBLIC zlib)
 #turn off automoc, not needed here
 set_target_properties(zlib_stel PROPERTIES AUTOMOC 0)
+SET_TARGET_PROPERTIES(zlib_stel PROPERTIES FOLDER "src/external")
 
 set(qtcompress_SRCS
     qtcompress/qzip.cpp
@@ -79,6 +81,7 @@ target_include_directories(qtcompress_stel PUBLIC qtcompress)
 target_link_libraries(qtcompress_stel ${ZLIB_LIBRARIES} Qt5::Core)
 #turn off automoc, not needed here
 set_target_properties(qtcompress_stel PROPERTIES AUTOMOC 0)
+SET_TARGET_PROPERTIES(qtcompress_stel PROPERTIES FOLDER "src/external")
 
 set(qcustomplot_SRCS
     qcustomplot/qcustomplot.cpp
@@ -86,6 +89,7 @@ set(qcustomplot_SRCS
     )
 add_library(qcustomplot_stel STATIC EXCLUDE_FROM_ALL ${qcustomplot_SRCS})
 target_link_libraries(qcustomplot_stel Qt5::PrintSupport Qt5::Widgets)
+SET_TARGET_PROPERTIES(qcustomplot_stel PROPERTIES FOLDER "src/external")
 
 ################################# INDI ################################
 IF(USE_PLUGIN_TELESCOPECONTROL)
@@ -116,5 +120,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
     target_link_libraries(indiclient zlib_stel)
     target_include_directories(indiclient INTERFACE libindi)
     target_include_directories(indiclient INTERFACE libindi/libs)
+
+    SET_TARGET_PROPERTIES(indiclient PROPERTIES FOLDER "src/external")
 ENDIF()
 

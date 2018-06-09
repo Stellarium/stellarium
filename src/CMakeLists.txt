@@ -508,7 +508,10 @@ IF(WIN32)
         "
      )
 ENDIF()
-       
+
+SET_TARGET_PROPERTIES(stelMain PROPERTIES FOLDER "src/core")
+SET_TARGET_PROPERTIES(stellarium PROPERTIES FOLDER "src")
+
 #############################################################################################
 ################################## Build unit tests #########################################
 #############################################################################################
@@ -519,6 +522,7 @@ IF(ENABLE_TESTING)
 
     # Custom target used to build all tests at once
     ADD_CUSTOM_TARGET(buildTests)
+    SET_TARGET_PROPERTIES(buildTests PROPERTIES FOLDER "src/tests")
 
     SET(tests_testDates_SRCS
         tests/testDates.hpp
@@ -530,6 +534,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testDates)
     ADD_TEST(testDates testDates)
+    SET_TARGET_PROPERTIES(testDates PROPERTIES FOLDER "src/tests")
 
     SET(tests_testStelFileMgr_SRCS
         tests/testStelFileMgr.hpp
@@ -539,6 +544,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testStelFileMgr ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testStelFileMgr)
     ADD_TEST(testStelFileMgr testStelFileMgr)
+    SET_TARGET_PROPERTIES(testStelFileMgr PROPERTIES FOLDER "src/tests")
 
     SET(tests_testStelSphereGeometry_SRCS
         tests/testStelSphereGeometry.hpp
@@ -548,6 +554,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testStelSphereGeometry ${TESTS_LIBRARIES} glues_stel)
     ADD_DEPENDENCIES(buildTests testStelSphereGeometry)
     ADD_TEST(testStelSphereGeometry testStelSphereGeometry)
+    SET_TARGET_PROPERTIES(testStelSphereGeometry PROPERTIES FOLDER "src/tests")
 
     SET(tests_testStelSphericalIndex_SRCS
         tests/testStelSphericalIndex.hpp
@@ -557,6 +564,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testStelSphericalIndex ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testStelSphericalIndex)
     ADD_TEST(testStelSphericalIndex testStelSphericalIndex)
+    SET_TARGET_PROPERTIES(testStelSphericalIndex PROPERTIES FOLDER "src/tests")
 
     SET(tests_testStelJsonParser_SRCS
         tests/testStelJsonParser.hpp
@@ -566,6 +574,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testStelJsonParser ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testStelJsonParser)
     ADD_TEST(testStelJsonParser testStelJsonParser)
+    SET_TARGET_PROPERTIES(testStelJsonParser PROPERTIES FOLDER "src/tests")
 
     SET(tests_testStelVertexArray_SRCS
         tests/testStelVertexArray.hpp
@@ -575,6 +584,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testStelVertexArray ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testStelVertexArray)
     ADD_TEST(testStelVertexArray testStelVertexArray)
+    SET_TARGET_PROPERTIES(testStelVertexArray PROPERTIES FOLDER "src/tests")
 
     SET(tests_testDeltaT_SRCS
         tests/testDeltaT.hpp
@@ -584,6 +594,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testDeltaT ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testDeltaT)
     ADD_TEST(testDeltaT testDeltaT)
+    SET_TARGET_PROPERTIES(testDeltaT PROPERTIES FOLDER "src/tests")
 
     SET(tests_testConversions_SRCS
         tests/testConversions.hpp
@@ -593,6 +604,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testConversions ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testConversions)
     ADD_TEST(testConversions testConversions)
+    SET_TARGET_PROPERTIES(testConversions PROPERTIES FOLDER "src/tests")
 
     SET(tests_testExtinction_SRCS
         tests/testExtinction.hpp
@@ -602,6 +614,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testExtinction ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testExtinction)
     ADD_TEST(testExtinction testExtinction)
+    SET_TARGET_PROPERTIES(testExtinction PROPERTIES FOLDER "src/tests")
 
     SET(tests_testRefraction_SRCS
         tests/testRefraction.hpp
@@ -611,6 +624,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testRefraction ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testRefraction)
     ADD_TEST(testRefraction testRefraction)
+    SET_TARGET_PROPERTIES(testRefraction PROPERTIES FOLDER "src/tests")
 
     SET(tests_testPrecession_SRCS
         tests/testPrecession.hpp
@@ -620,6 +634,7 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testPrecession ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testPrecession)
     ADD_TEST(testPrecession testPrecession)
+    SET_TARGET_PROPERTIES(testPrecession PROPERTIES FOLDER "src/tests")
 
     SET(tests_testEphemeris_SRCS
         tests/testEphemeris.hpp
@@ -629,5 +644,6 @@ IF(ENABLE_TESTING)
     TARGET_LINK_LIBRARIES(testEphemeris ${TESTS_LIBRARIES})
     ADD_DEPENDENCIES(buildTests testEphemeris)
     ADD_TEST(testEphemeris testEphemeris)
+    SET_TARGET_PROPERTIES(testEphemeris PROPERTIES FOLDER "src/tests")
 
 ENDIF (ENABLE_TESTING)

@@ -30,3 +30,5 @@ target_include_directories(TelescopeControl_INDI INTERFACE ${CMAKE_CURRENT_SOURC
 IF(ENABLE_TESTING)
     add_subdirectory(test)
 ENDIF(ENABLE_TESTING)
+
+SET_TARGET_PROPERTIES(TelescopeControl_INDI PROPERTIES FOLDER "plugins/TelescopeControl")

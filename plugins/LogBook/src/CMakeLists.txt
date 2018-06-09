@@ -120,3 +120,4 @@ IF(BUILD_STATIC_PLUGINS)
      ADD_DEPENDENCIES(AllStaticPlugins LogBook-static)
 ENDIF()
 
+SET_TARGET_PROPERTIES(LogBook-static PROPERTIES FOLDER "plugins/LogBook")

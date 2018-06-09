@@ -20,6 +20,8 @@ if(PYTHON_EXECUTABLE)
 		)
 		
 	add_dependencies(RemoteControl-update-translationdata generate-pot-stellarium-remotecontrol-js)
+
+    SET_TARGET_PROPERTIES(RemoteControl-update-translationdata PROPERTIES FOLDER "plugins/RemoteControl/util")
 endif()
 
 IF(APPLE)
