@@ -809,7 +809,7 @@ private:
 	double presetSkyTime;
 	QTime initTodayTime;
 	QString startupTimeMode;
-	double milliSecondsOfLastJDUpdate;    // Time in seconds when the time rate or time last changed
+	qint64 milliSecondsOfLastJDUpdate;    // Time in milliseconds when the time rate or time last changed
 	double jdOfLastJDUpdate;         // JD when the time rate or time last changed
 
 	QString currentTimeZone;	
