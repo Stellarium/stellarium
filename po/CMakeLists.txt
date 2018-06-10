@@ -21,6 +21,7 @@
 #   anyway.)
 
 ADD_CUSTOM_TARGET(translations)
+SET_TARGET_PROPERTIES(translations PROPERTIES FOLDER "po")
 
 IF(NOT MSVC)
      # These packages are now used only to generate .pot and .po files
@@ -117,6 +118,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
      # "translations" targets.
      ADD_CUSTOM_TARGET(translations-${_domain} ${_addToAll} DEPENDS ${_gmoFiles})
      ADD_DEPENDENCIES(translations translations-${_domain})
+    SET_TARGET_PROPERTIES(translations-${_domain} PROPERTIES FOLDER "po")
 
 ENDMACRO(GETTEXT_CREATE_TRANSLATIONS )
 

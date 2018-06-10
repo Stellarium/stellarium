@@ -75,3 +75,5 @@ TARGET_LINK_LIBRARIES(RemoteControl-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES OUTPUT_NAME "RemoteControl")
 SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins RemoteControl-static)
+
+SET_TARGET_PROPERTIES(RemoteControl-static PROPERTIES FOLDER "plugins/RemoteControl")

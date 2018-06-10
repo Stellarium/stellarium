@@ -38,3 +38,5 @@ TARGET_LINK_LIBRARIES(MeteorShowers-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES OUTPUT_NAME "MeteorShowers")
 SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins MeteorShowers-static)
+
+SET_TARGET_PROPERTIES(MeteorShowers-static PROPERTIES FOLDER "plugins/MeteorShowers")

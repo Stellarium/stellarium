@@ -30,3 +30,5 @@ TARGET_LINK_LIBRARIES(Observability-static Qt5::Core Qt5::Widgets)
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES OUTPUT_NAME "Observability")
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Observability-static)
+
+SET_TARGET_PROPERTIES(Observability-static PROPERTIES FOLDER "plugins/Observability")

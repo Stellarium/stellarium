@@ -24,3 +24,5 @@ target_link_libraries(TelescopeControl_gui
     TelescopeControl_common
     TelescopeControl_INDI
     )
+
+SET_TARGET_PROPERTIES(TelescopeControl_gui PROPERTIES FOLDER "plugins/TelescopeControl")

@@ -23,6 +23,8 @@ ENDIF()
 # warn about deprecated stuff so that we may try fixing it
 SET(CMAKE_WARN_DEPRECATED 1)
 
+SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
+
 ########### Project name ###########
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
@@ -359,6 +361,7 @@ ADD_PLUGIN(TelescopeControl 1)
 # Custom target used to manage dependencies of stellarium -> Static plugins
 # It is important that static plugins are compiled before stellarium main executable is linked
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
+SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 
 ########### Find packages ###########
 FIND_PACKAGE(Qt5Core REQUIRED)
@@ -646,6 +649,7 @@ CONFIGURE_FILE(
 
 ADD_CUSTOM_TARGET(uninstall
      "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake")
+SET_TARGET_PROPERTIES(uninstall PROPERTIES FOLDER "src")
 
 ########### Packaging info for CPack ###########
 

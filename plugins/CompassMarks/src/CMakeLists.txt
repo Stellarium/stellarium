@@ -15,3 +15,5 @@ TARGET_LINK_LIBRARIES(CompassMarks-static Qt5::Core Qt5::Widgets)
 SET_TARGET_PROPERTIES(CompassMarks-static PROPERTIES OUTPUT_NAME "CompassMarks")
 SET_TARGET_PROPERTIES(CompassMarks-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins CompassMarks-static)
+
+SET_TARGET_PROPERTIES(CompassMarks-static PROPERTIES FOLDER "plugins/CompassMarks")

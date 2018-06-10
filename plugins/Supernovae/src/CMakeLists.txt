@@ -30,3 +30,6 @@ TARGET_LINK_LIBRARIES(Supernovae-static Qt5::Core Qt5::Network Qt5::Widgets)
 SET_TARGET_PROPERTIES(Supernovae-static PROPERTIES OUTPUT_NAME "Supernovae")
 SET_TARGET_PROPERTIES(Supernovae-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Supernovae-static)
+
+SET_TARGET_PROPERTIES(Supernovae-static PROPERTIES FOLDER "plugins/Supernovae")
+

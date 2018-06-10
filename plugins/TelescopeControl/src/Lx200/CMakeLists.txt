@@ -16,3 +16,5 @@ target_link_libraries(TelescopeControl_Lx200
     Qt5::Gui
     TelescopeControl_common
     )
+
+SET_TARGET_PROPERTIES(TelescopeControl_Lx200 PROPERTIES FOLDER "plugins/TelescopeControl")

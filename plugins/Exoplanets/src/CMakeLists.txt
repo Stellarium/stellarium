@@ -29,3 +29,6 @@ TARGET_LINK_LIBRARIES(Exoplanets-static Qt5::Core Qt5::Network Qt5::Widgets qcus
 SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES OUTPUT_NAME "Exoplanets")
 SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Exoplanets-static)
+
+SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES FOLDER "plugins/Exoplanets")
+

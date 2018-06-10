@@ -33,3 +33,5 @@ TARGET_LINK_LIBRARIES(SolarSystemEditor-static Qt5::Core Qt5::Network Qt5::Widge
 SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES OUTPUT_NAME "SolarSystemEditor")
 SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins SolarSystemEditor-static)
+
+SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES FOLDER "plugins/SolarSystemEditor")

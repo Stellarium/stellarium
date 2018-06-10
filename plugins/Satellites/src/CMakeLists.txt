@@ -63,3 +63,5 @@ ELSE()
      SET_TARGET_PROPERTIES(Satellites-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN -Wno-unused-parameter")
 ENDIF()
 ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
+
+SET_TARGET_PROPERTIES(Satellites-static PROPERTIES FOLDER "plugins/Satellites")

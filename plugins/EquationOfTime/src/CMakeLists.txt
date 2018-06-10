@@ -30,3 +30,5 @@ TARGET_LINK_LIBRARIES(EquationOfTime-static Qt5::Core Qt5::Widgets)
 SET_TARGET_PROPERTIES(EquationOfTime-static PROPERTIES OUTPUT_NAME "EquationOfTime")
 SET_TARGET_PROPERTIES(EquationOfTime-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins EquationOfTime-static)
+
+SET_TARGET_PROPERTIES(EquationOfTime-static PROPERTIES FOLDER "plugins/EquationOfTime")
