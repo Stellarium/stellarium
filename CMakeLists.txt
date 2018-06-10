@@ -708,7 +708,7 @@ IF(WIN32)
                VERBATIM
           )
      ELSE()
-          MESSAGE(STATUS "Could NOT find Inno Setup Compiler (missing: ${ISS_COMPILER_PATH}). You won't be able to build setup files.")
+          MESSAGE(STATUS "Could NOT find Inno Setup Compiler (missing: ${ISS_COMPILER_FILENAME}). You won't be able to build setup files.")
      ENDIF()
 ENDIF()
 
