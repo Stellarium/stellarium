@@ -1,10 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
-#IF(POLICY CMP0054)
+IF(POLICY CMP0054)
 # Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
-#     CMAKE_POLICY(SET CMP0054 OLD)
-#ENDIF()
+     CMAKE_POLICY(SET CMP0054 NEW)
+ENDIF()
 IF(POLICY CMP0071)
      CMAKE_POLICY(SET CMP0071 NEW)
 ENDIF()
@@ -708,7 +708,7 @@ IF(WIN32)
                VERBATIM
           )
      ELSE()
-          MESSAGE(WARNING "Inno Setup Compiler not found. You won't be able to build setup files.")
+          MESSAGE(STATUS "Could NOT find Inno Setup Compiler (missing: ${ISS_COMPILER_PATH}). You won't be able to build setup files.")
      ENDIF()
 ENDIF()
 
