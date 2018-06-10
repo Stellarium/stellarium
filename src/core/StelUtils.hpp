@@ -639,7 +639,7 @@ namespace StelUtils
 	//! Implementation of polinomial approximation of time period 1620-2013 for DeltaT by M. Khalid, Mariam Sultana and Faheem Zaidi (2014).
 	//! Source: Delta T: Polynomial Approximation of Time Period 1620-2013
 	//! Journal of Astrophysics, Vol. 2014, Article ID 480964
-	//! http://dx.doi.org/10.1155/2014/480964
+	//! https://doi.org/10.1155/2014/480964
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByKhalidSultanaZaidi(const double jDay);
@@ -648,7 +648,7 @@ namespace StelUtils
 	//! Implementation of a spline approximation for time period -720-2016.0 for DeltaT by Stephenson, Morrison and Hohenkerk (2016).
 	//! Source: Measurement of the Earth’s rotation: 720 BC to AD 2015
 	//! Proc. R. Soc. A 472: 20160404.
-	//! http://dx.doi.org/10.1098/rspa.2016.0404
+	//! https://doi.org/10.1098/rspa.2016.0404
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds. For times outside the limits, return result from the fitting parabola.
 	double getDeltaTByStephensonMorrisonHohenkerk2016(const double jDay);

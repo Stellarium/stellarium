@@ -25,12 +25,12 @@ extern "C" {
 //! Precession modelled from:
 //! J. Vondrák, N. Capitaine, and P. Wallace: New precession expressions, valid for long time intervals
 //! A&A (Astronomy&Astrophysics) 534, A22 (2011)
-//! DOI: http://dx.doi.org/10.1051/0004-6361/201117274
+//! DOI: https://doi.org/10.1051/0004-6361/201117274
 //!    with correction from
 //! J. Vondrak, N. Capitaine, P. Wallace
 //! New precession expressions, valid for long time intervals (Corrigendum)
 //! A&A 541, C1 (2012)
-//! DOI: http://dx.doi.org/10.1051/0004-6361/201117274e
+//! DOI: https://doi.org/10.1051/0004-6361/201117274e
 //!
 //! This paper describes a precession model valid for +/-200.000 years from J2000.0 and consistent with P03 precession accepted as IAU2006 Precession.
 //! Some better understanding of the angles can be found in:
