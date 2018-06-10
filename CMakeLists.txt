@@ -1,19 +1,10 @@
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
+MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
-# just avoid a warning mess. 
-IF(POLICY CMP0043)
-     CMAKE_POLICY(SET CMP0043 OLD)
-ENDIF()
-# silently ignore errors in add_dependency():
-IF(POLICY CMP0046)
-     CMAKE_POLICY(SET CMP0046 OLD)
-ENDIF()
-IF(POLICY CMP0050)
-     CMAKE_POLICY(SET CMP0050 OLD)
-ENDIF()
-IF(POLICY CMP0054)
-     CMAKE_POLICY(SET CMP0054 OLD)
-ENDIF()
+#IF(POLICY CMP0054)
+# Potential dangerous comparison of variables. Details: https://cmake.org/cmake/help/v3.1/policy/CMP0054.html
+#     CMAKE_POLICY(SET CMP0054 OLD)
+#ENDIF()
 IF(POLICY CMP0071)
      CMAKE_POLICY(SET CMP0071 NEW)
 ENDIF()
