@@ -1,7 +1,4 @@
 version: '{branch}-{build}'
-image:
-- Visual Studio 2015
-- Visual Studio 2017
 configuration: Release
 clone_depth: 5
 clone_folder: c:\stellarium
