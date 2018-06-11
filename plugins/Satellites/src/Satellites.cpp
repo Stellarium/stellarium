@@ -1829,7 +1829,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 	predictions.clear();
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat.data()->getEnglishName().startsWith("IRIDIUM"))
+		if (sat->initialized && sat->getEnglishName().startsWith("IRIDIUM"))
 		{
 			double dt  = 0;
 			double angle0 = 100;
@@ -1837,13 +1837,13 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 			while (dt<1)
 			{
 				Satellite::timeShift = dt+delta;
-				sat.data()->update(0);
+				sat->update(0);
 
-				Vec3d pos = sat.data()->getAltAzPosApparent(pcore);
+				Vec3d pos = sat->getAltAzPosApparent(pcore);
 				double lat = pos.latitude();
 				double lon = M_PI - pos.longitude();
-				double v =   sat.data()->getVMagnitude(pcore);
-				double angle =  sat.data()->sunReflAngle;
+				double v =   sat->getVMagnitude(pcore);
+				double angle =  sat->sunReflAngle;
 
 				if (angle>0 && angle<2)
 				{
@@ -1851,7 +1851,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 					{
 						IridiumFlaresPrediction flare;
 						flare.datetime = StelUtils::julianDayToISO8601String(currentJD+dt+StelApp::getInstance().getCore()->getUTCOffset(currentJD+dt)/24.f);
-						flare.satellite = sat.data()->getEnglishName();
+						flare.satellite = sat->getEnglishName();
 						flare.azimuth   = lon;
 						flare.altitude  = lat;
 						flare.magnitude = v;
@@ -1916,13 +1916,13 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 
 	foreach(const SatelliteP& sat, satellites)
 	{
-		if (sat->initialized && sat.data()->getEnglishName().startsWith("IRIDIUM"))
+		if (sat->initialized && sat->getEnglishName().startsWith("IRIDIUM"))
 		{
-			Vec3d pos = sat.data()->getAltAzPosApparent(pcore);
-			sds.angleToSun = sat.data()->sunReflAngle;
+			Vec3d pos = sat->getAltAzPosApparent(pcore);
+			sds.angleToSun = sat->sunReflAngle;
 			sds.altitude = pos.latitude();
 			sds.azimuth = pos.longitude();
-			sds.v = sat.data()->getVMagnitude(pcore);
+			sds.v = sat->getVMagnitude(pcore);
 			double t;
 			if (sds.altitude<0)
 				t = qMax(-sds.altitude, 1.) / 2880;
@@ -1937,7 +1937,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 
 			sds.nextJD = predictionJD + t;
 			iridiums.insert(sat, sds);
-			//qDebug() << sat.data()->getEnglishName() << ": "
+			//qDebug() << sat->getEnglishName() << ": "
 			//		 << sds.altitude
 			//		 << sds.azimuth
 			//		 << sds.angleToSun
@@ -1955,7 +1955,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		nextJD = predictionJD + 1./24;
 		pcore->setJD(predictionJD);
 
-		ssystem->getEarth().data()->computePosition(predictionJD);
+		ssystem->getEarth()->computePosition(predictionJD);
 		pcore->update(0);
 
 		QMap<SatelliteP,SatDataStruct>::iterator i = iridiums.begin();
@@ -1964,9 +1964,9 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 			if ( i.value().nextJD<=predictionJD)
 			{
 
-				i.key().data()->update(0);
+				i.key()->update(0);
 
-				double v = i.key().data()->getVMagnitude(pcore);
+				double v = i.key()->getVMagnitude(pcore);
 				bool flareFound = false;
 				if (v > i.value().v)
 				{
@@ -1976,7 +1976,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 					{
 						IridiumFlaresPrediction flare;
 						flare.datetime = StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f);
-						flare.satellite = i.key().data()->getEnglishName();
+						flare.satellite = i.key()->getEnglishName();
 						flare.azimuth   = i.value().azimuth;
 						if (useSouthAzimuth)
 						{
@@ -1995,7 +1995,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 				}
 
 /*				qDebug() << QString::asprintf("%20s  alt:%6.1f  az:%6.1f  sun:%6.1f  v:%6.1f",
-											 i.key().data()->getEnglishName().toStdString(),
+											 i.key()->getEnglishName().toStdString(),
 											 i.value().altitude*180/M_PI,
 											 i.value().azimuth*180/M_PI,
 											 i.value().angleToSun,
@@ -2005,12 +2005,12 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 							 ;
 */
 
-				Vec3d pos = i.key().data()->getAltAzPosApparent(pcore);
+				Vec3d pos = i.key()->getAltAzPosApparent(pcore);
 
 				i.value().v = flareFound ?  17 : v; // block extra report
 				i.value().altitude = pos.latitude();
 				i.value().azimuth = M_PI - pos.longitude();
-				i.value().angleToSun = i.key().data()->sunReflAngle;
+				i.value().angleToSun = i.key()->sunReflAngle;
 
 
 

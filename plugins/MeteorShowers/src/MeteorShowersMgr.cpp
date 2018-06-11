@@ -102,7 +102,7 @@ void MeteorShowersMgr::init()
 
 	// always check if we are on Earth
 	StelCore* core = StelApp::getInstance().getCore();
-	m_onEarth = core->getCurrentPlanet().data()->getEnglishName() == "Earth";
+	m_onEarth = core->getCurrentPlanet()->getEnglishName() == "Earth";
 	connect(core, SIGNAL(locationChanged(StelLocation)),
 		this, SLOT(locationChanged(StelLocation)));
 
