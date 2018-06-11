@@ -277,31 +277,23 @@
 	4.5a Jupiter map created by James Hastings-Trew from Cassini data. "The 
 	     maps are free to download and use as source material or resource
 	     in artwork or rendering (CGI or real time)."
-	4.5b The Venus, Proteus and Iapetus maps and rings of Uranus 
+	4.5b The Proteus and Iapetus maps and rings of Uranus 
 	     are from Celestia (http://shatters.net/celestia/)
 	     under the GNU General Purpose License, version 2 or any later
 	     version:
-	     - Venus is from Björn Jónsson and modified by RVS.
 	     - The Proteus map is from Phil Stooke.
-	     - Triton is probably from David Seal's site (see below),
-	       modified by Chris Laurel and Grant Hutchison.
 	     - Iapetus map is from dr. Fridger Schrempp (t00fri).
 	4.5c The Amalthea, Ariel, Charon, Europa, Ganymede, Gaspra, Haumea, 
 	    Hyperion, Ida, Io, Janus, Mercury, Neptune, Oberon, Phoebe, Pluto, 
-	    Saturn, Sedna, Tethys, Umbriel, Vesta maps are processed by 
+	    Saturn, Sedna, Tethys, Umbriel, Vesta, Venus, Mimas, Rhea, Bianca,
+	    Ceres, Miranda, Titania, Triton, Uranus and comet maps are processed by 
 	    Oleg Pluton a.k.a Helleformer
 	    License: Creative Commons Attribution 4.0 International
 	4.5d Callisto map is created by John van Vliet from PDS
 	     data and modified by RVS. License: cc-by-sa.
-	4.5e Dione, Rhea, Enceladus and Mimas maps are created by NASA
-	     (CICLOPS team) from Cassini data, colored by RVS. Public domain.
-	4.5f Triton: Image selection, radiometric calibration, geographic
-	     registration and photometric correction, and final mosaic assembly 
-	     were performed by Dr. Paul Schenk at the Lunar and Planetary 
-	     Institute, Houston, Texas. Image data from Voyager 2 (NASA, JPL).
-	     Original texture has "white spots", which was filled by
-	     Dizel777 (http://spaceengine.org/forum/19-563-25069-16-1409101585).
-	4.5g All other planet maps from David Seal's site:
+	4.5e Dione and Enceladus maps are created by NASA (CICLOPS team) 
+	     from Cassini data, colored by RVS. Public domain.
+	4.5f All other planet maps from David Seal's site:
 	     http://maps.jpl.nasa.gov/   see license in section 10.2
 	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 	    University of Potsdam, Germany. Further information and more
