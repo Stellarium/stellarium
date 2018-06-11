@@ -205,6 +205,12 @@ matrix:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
 
+    - os: osx
+      osx_image: xcode9.3
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+
 before_install:
   - eval "${MATRIX_EVAL}"
   # Linux

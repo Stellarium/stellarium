@@ -868,7 +868,8 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 	if (willCastShadow(this, parent.data()))
 		res.append(parent.data());
 	// Test satellites mutual occultations.
-	if (parent.data() != sun) {
+	if (parent.data() != sun)
+	{
 		foreach (const PlanetP& planet, parent->satellites)
 		{
 			//skip self-shadowing
