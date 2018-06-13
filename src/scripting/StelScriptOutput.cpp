@@ -55,8 +55,18 @@ void StelScriptOutput::saveOutputAs(const QString &name)
 	QFile asFile;
 	QFileInfo outputInfo(outputFile);
 	QDir dir=outputInfo.dir(); // will hold complete dirname
+	QFileInfo newFileNameInfo(name);
+	//QDir newFileDir=newFileNameInfo.dir();
 
-	asFile.setFileName(dir.absolutePath() + "/" + name);
+	if (newFileNameInfo.fileName()==name)
+	{
+		asFile.setFileName(dir.absolutePath() + "/" + name);
+	}
+	else
+	{
+		asFile.setFileName(name);
+	}
+
 	if (!asFile.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text | QIODevice::Unbuffered))
 	{
 		qDebug() << "ERROR: Cannot open file" << dir.absolutePath() + "/" + name;

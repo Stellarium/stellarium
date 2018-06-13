@@ -45,7 +45,7 @@ public:
 
 	//! Save to new file, re-create output file.
 	//! This allows reading of results on Windows, where otherwise reading programs cannot access files opened for writing by Stellarium.
-	//! @param name new filename. It will be created in the same directory as output.txt
+	//! @param name new filename. If this is not an absolute path, it will be created in the same directory as output.txt
 	//! Normally you would call saveOutputAs(...), then reset().
 	static void saveOutputAs(const QString& name);
 
