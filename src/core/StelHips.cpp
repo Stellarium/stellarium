@@ -70,7 +70,9 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 	url(url_),
 	releaseDate(releaseDate_),
-	tiles(1000)
+	tiles(1000),
+	nbVisibleTiles(0),
+	nbLoadedTiles(0)
 {
 	// Immediatly download the properties.
 	QNetworkRequest req = QNetworkRequest(getUrlFor("properties"));

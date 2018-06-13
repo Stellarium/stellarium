@@ -167,6 +167,7 @@ Oculars::Oculars():
 	flagInitFOVUsage(false),
 	flagInitDirectionUsage(false),
 	flagAutosetMountForCCD(false),
+	flagScalingFOVForTelrad(false),
 	flagShowResolutionCriterions(false),
 	equatorialMountEnabledMain(false),
 	reticleRotation(0.)
