@@ -24,6 +24,7 @@ matrix:
           build_command_prepend: cov-configure --comptype gcc --compiler gcc-4.8 --template && cmake -DENABLE_TESTING=1 ..
           build_command: make -j5
           branch_pattern: coverity_scan
+          notification_email: stellarium@googlegroups.com
       env:
          - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
          - TRANSLATE=true
