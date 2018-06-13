@@ -123,6 +123,10 @@ public:
 	//! left buttons call panels which receive focus after button press, so those should be configured with b=false)
 	void setFocusOnSky(bool b) { flagChangeFocus=b; }
 
+	//! Configure the button to trigger its action when the mouse click
+	//! is released (by default buttons trigger on press event).
+	void setTriggerOnRelease(bool b) { triggerOnRelease = b;}
+
 signals:
 	//! Triggered when the button state changes
 	void toggled(bool);
@@ -170,6 +174,7 @@ private:
 	bool isTristate_;
 	double opacity;
 	double hoverOpacity;
+	bool triggerOnRelease = false;
 };
 
 // The button bar on the left containing windows toggle buttons

@@ -177,8 +177,11 @@ void StelButton::mousePressEvent(QGraphicsSceneMouseEvent* event)
 	QGraphicsItem::mousePressEvent(event);
 	event->accept();
 	setChecked(toggleChecked(checked));
-	emit(toggled(checked));
-	emit(triggered());
+	if (!triggerOnRelease)
+	{
+		emit(toggled(checked));
+		emit(triggered());
+	}
 }
 
 void StelButton::hoverEnterEvent(QGraphicsSceneHoverEvent*)
@@ -205,6 +208,11 @@ void StelButton::mouseReleaseEvent(QGraphicsSceneMouseEvent*)
 
 	if (flagChangeFocus) // true if button is on bottom bar
 		StelMainView::getInstance().focusSky(); // Change the focus after clicking on button
+	if (triggerOnRelease)
+	{
+		emit(toggled(checked));
+		emit(triggered());
+	}
 }
 
 void StelButton::updateIcon()
