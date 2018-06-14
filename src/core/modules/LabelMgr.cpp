@@ -170,7 +170,8 @@ StelLabel::StelLabel(const QString& text, const QFont& font, const Vec3f& color)
 	  labelFont(font),
 	  labelColor(color),
 	  autoDelete(false),
-	  timer(NULL)
+	  id(0),
+	  timer(Q_NULLPTR)
 {
 }
 

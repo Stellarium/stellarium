@@ -62,7 +62,6 @@ public:
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow() const {return fader;}
 private:
-	QSettings* conf ;
 	float radius;
 	QFont fontC, fontSC;
 	Vec3f color;

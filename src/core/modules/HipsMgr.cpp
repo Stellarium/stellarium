@@ -25,6 +25,7 @@
 #include "StelTranslator.hpp"
 #include "StelModuleMgr.hpp"
 #include "StelSkyLayerMgr.hpp"
+#include "StelUtils.hpp"
 
 #include <QNetworkReply>
 #include <QSettings>
@@ -101,6 +102,7 @@ void HipsMgr::loadSources()
 	{
 		if (source.scheme().isEmpty()) source.setScheme("file");
 		QNetworkRequest req = QNetworkRequest(source);
+		req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 		QNetworkReply* networkReply = StelApp::getInstance().getNetworkAccessManager()->get(req);
 		connect(networkReply, &QNetworkReply::finished, [=] {
 			QByteArray data = networkReply->readAll();
