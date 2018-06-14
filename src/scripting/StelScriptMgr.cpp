@@ -134,7 +134,7 @@ void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QSignalMapper* mapper = new QSignalMapper(this);
-	foreach(const QString script, getScriptList())
+	for (const auto script : getScriptList())
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
@@ -154,7 +154,7 @@ void StelScriptMgr::addModules()
 {
 	// Add all the StelModules into the script engine
 	StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-	foreach (StelModule* m, mmgr->getAllModules())
+	for (auto* m : mmgr->getAllModules())
 	{
 		QScriptValue objectValue = engine->newQObject(m);
 		engine->globalObject().setProperty(m->objectName(), objectValue);
@@ -168,7 +168,7 @@ QStringList StelScriptMgr::getScriptList()
 
 	QSet<QString> files = StelFileMgr::listContents("scripts", StelFileMgr::File, true);
 	QRegExp fileRE("^.*\\.ssc$");
-	foreach(const QString& f, files)
+	for (const auto& f : files)
 	{
 		if (fileRE.exactMatch(f))
 			scriptFiles << f;
@@ -541,7 +541,7 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 {
 	QStringList lines = input.split("\n", QString::SkipEmptyParts);
 	QRegExp includeRe("^include\\s*\\(\\s*\"([^\"]+)\"\\s*\\)\\s*;\\s*(//.*)?$");
-	foreach (const QString& line, lines)
+	for (const auto& line : lines)
 	{
 		if (includeRe.exactMatch(line))
 		{
@@ -589,7 +589,7 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 		QStringList outputList=output.split('\n');
 		qDebug() << "Script after preprocessing:";
 		int lineIdx=0;
-		foreach (const QString& line, outputList)
+		for (const auto& line : outputList)
 		{
 			qDebug() << lineIdx << ":" << line;
 			lineIdx++;

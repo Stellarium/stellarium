@@ -228,7 +228,7 @@ void ScreenImageMgr::init()
 
 void ScreenImageMgr::draw(StelCore* core)
 {
-	foreach(ScreenImage* m, allScreenImages)
+	for (auto* m : allScreenImages)
 		if (m!=Q_NULLPTR)
 			m->draw(core);
 }
@@ -271,7 +271,7 @@ void ScreenImageMgr::deleteImage(const QString& id)
 	
 void ScreenImageMgr::deleteAllImages()
 {
-	foreach(ScreenImage* m, allScreenImages)
+	for (auto* m : allScreenImages)
 	{
 		if (m!=Q_NULLPTR)
 		{
@@ -365,7 +365,7 @@ void ScreenImageMgr::setImageScale(const QString& id, float scaleX, float scaleY
 
 void ScreenImageMgr::update(double deltaTime)
 {
-	foreach(ScreenImage* m, allScreenImages)
+	for (auto* m : allScreenImages)
 		if (m!=Q_NULLPTR)
 			m->update(deltaTime);
 }

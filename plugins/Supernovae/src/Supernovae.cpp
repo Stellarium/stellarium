@@ -193,7 +193,7 @@ void Supernovae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	foreach (const SupernovaP& sn, snstar)
+	for (const auto& sn : snstar)
 	{
 		if (sn && sn->initialized)
 			sn->draw(core, painter);
@@ -234,7 +234,7 @@ QList<StelObjectP> Supernovae::searchAround(const Vec3d& av, double limitFov, co
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const SupernovaP& sn, snstar)
+	for (const auto& sn : snstar)
 	{
 		if (sn->initialized)
 		{
@@ -252,7 +252,7 @@ QList<StelObjectP> Supernovae::searchAround(const Vec3d& av, double limitFov, co
 
 StelObjectP Supernovae::searchByName(const QString& englishName) const
 {
-	foreach(const SupernovaP& sn, snstar)
+	for (const auto& sn : snstar)
 	{
 		if (sn->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(sn);
@@ -263,7 +263,7 @@ StelObjectP Supernovae::searchByName(const QString& englishName) const
 
 StelObjectP Supernovae::searchByNameI18n(const QString& nameI18n) const
 {
-	foreach(const SupernovaP& sn, snstar)
+	for (const auto& sn : snstar)
 	{
 		if (sn->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(sn);
@@ -277,14 +277,14 @@ QStringList Supernovae::listAllObjects(bool inEnglish) const
 	QStringList result;
 	if (inEnglish)
 	{
-		foreach (const SupernovaP& sn, snstar)
+		for (const auto& sn : snstar)
 		{
 			result << sn->getEnglishName();
 		}
 	}
 	else
 	{
-		foreach (const SupernovaP& sn, snstar)
+		for (const auto& sn : snstar)
 		{
 			result << sn->getNameI18n();
 		}
@@ -394,7 +394,7 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 	snlist.clear();
 	SNCount = 0;
 	QVariantMap sneMap = map.value("supernova").toMap();
-	foreach(QString sneKey, sneMap.keys())
+	for (auto sneKey : sneMap.keys())
 	{
 		QVariantMap sneData = sneMap.value(sneKey).toMap();
 		sneData["designation"] = QString("SN %1").arg(sneKey);
@@ -478,7 +478,7 @@ float Supernovae::getLowerLimitBrightness() const
 
 SupernovaP Supernovae::getByID(const QString& id) const
 {
-	foreach(const SupernovaP& sn, snstar)
+	for (const auto& sn : snstar)
 	{
 		if (sn->initialized && sn->designation == id)
 			return sn;
@@ -631,7 +631,7 @@ QString Supernovae::getSupernovaeList() const
 	int year, month, day;
 	QList<double> vals = snlist.values();
 	qSort(vals);
-	foreach(double val, vals)
+	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
 		out << QString("%1 (%2 %3)").arg(snlist.key(val)).arg(day).arg(smonth[month-1]);

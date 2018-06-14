@@ -184,7 +184,7 @@ void ManualImportWindow::selectTextureFile(QLineEdit * filePathLineEdit)
 
 	//Select an existing file
 	QStringList supportedFormats;
-	foreach (QByteArray format, QImageReader::supportedImageFormats())
+	for (auto format : QImageReader::supportedImageFormats())
 	{
 		supportedFormats.append(QString("*.%1").arg(QString(format)));//It's a wee bit long...
 	}

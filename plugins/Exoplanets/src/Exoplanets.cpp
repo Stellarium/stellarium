@@ -219,7 +219,7 @@ void Exoplanets::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	foreach (const ExoplanetP& eps, ep)
+	for (const auto& eps : ep)
 	{
 		if (eps && eps->initialized)
 			eps->draw(core, &painter);
@@ -263,7 +263,7 @@ QList<StelObjectP> Exoplanets::searchAround(const Vec3d& av, double limitFov, co
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const ExoplanetP& eps, ep)
+	for (const auto& eps : ep)
 	{
 		if (eps->initialized)
 		{
@@ -284,7 +284,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 	if (!flagShowExoplanets)
 		return Q_NULLPTR;
 
-	foreach(const ExoplanetP& eps, ep)
+	for (const auto& eps : ep)
 	{
 		if (eps->getEnglishName().toUpper() == englishName.toUpper() || eps->getDesignation().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(eps);
@@ -292,7 +292,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 		QStringList ppn = eps->getExoplanetsEnglishNames();
 		if (!ppn.isEmpty())
 		{
-			foreach (const QString &str, ppn)
+			for (const auto& str : ppn)
 			{
 				if (str.toUpper() == englishName.toUpper())
 					return qSharedPointerCast<StelObject>(eps);
@@ -302,7 +302,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 		ppn = eps->getExoplanetsDesignations();
 		if (!ppn.isEmpty())
 		{
-			foreach (const QString &str, ppn)
+			for (const auto& str : ppn)
 			{
 				if (str.toUpper() == englishName.toUpper())
 					return qSharedPointerCast<StelObject>(eps);
@@ -316,7 +316,7 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 
 StelObjectP Exoplanets::searchByID(const QString &id) const
 {
-	foreach(const ExoplanetP& eps, ep)
+	for (const auto& eps : ep)
 	{
 		if(eps->getID() == id)
 			return qSharedPointerCast<StelObject>(eps);
@@ -329,7 +329,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 	if (!flagShowExoplanets)
 		return Q_NULLPTR;
 
-	foreach(const ExoplanetP& eps, ep)
+	for (const auto& eps : ep)
 	{
 		if (eps->getNameI18n().toUpper() == nameI18n.toUpper() || eps->getDesignation().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(eps);
@@ -337,7 +337,7 @@ StelObjectP Exoplanets::searchByNameI18n(const QString& nameI18n) const
 		QStringList ppn = eps->getExoplanetsNamesI18n();
 		if (!ppn.isEmpty())
 		{
-			foreach (const QString &str, ppn)
+			for (const auto& str : ppn)
 			{
 				if (str.toUpper() == nameI18n.toUpper())
 					return qSharedPointerCast<StelObject>(eps);
@@ -356,7 +356,7 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 		return result;
 	}
 
-	foreach(const ExoplanetP& eps, ep)
+	for (const auto& eps : ep)
 	{
 		QStringList names;
 		if (inEnglish)
@@ -370,7 +370,7 @@ QStringList Exoplanets::listMatchingObjects(const QString& objPrefix, int maxNbI
 			names.append(eps->getExoplanetsNamesI18n());
 		}
 
-		foreach (const QString& name, names)
+		for (const auto& name : names)
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
 			{
@@ -396,17 +396,17 @@ QStringList Exoplanets::listAllObjects(bool inEnglish) const
 	if (!flagShowExoplanets)
 		return result;
 
-	foreach (const ExoplanetP& planet, ep)
+	for (const auto& planet : ep)
 		result << planet->getExoplanetsDesignations();
 
 	if (inEnglish)
 	{
-		foreach (const ExoplanetP& planet, ep)
+		for (const auto& planet : ep)
 			result << planet->getExoplanetsEnglishNames();
 	}
 	else
 	{
-		foreach (const ExoplanetP& planet, ep)
+		for (const auto& planet : ep)
 			result << planet->getExoplanetsNamesI18n();
 	}
 	return result;
@@ -545,7 +545,7 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 	EPPeriodAll.clear();
 	EPAngleDistanceAll.clear();
 	QVariantMap epsMap = map.value("stars").toMap();
-	foreach(QString epsKey, epsMap.keys())
+	for (auto epsKey : epsMap.keys())
 	{
 		QVariantMap epsData = epsMap.value(epsKey).toMap();
 		epsData["designation"] = epsKey;
@@ -636,7 +636,7 @@ bool Exoplanets::checkJsonFileFormat() const
 
 ExoplanetP Exoplanets::getByID(const QString& id)
 {
-	foreach(const ExoplanetP& eps, ep)
+	for (const auto& eps : ep)
 	{
 		if (eps->initialized && eps->designation == id)
 			return eps;

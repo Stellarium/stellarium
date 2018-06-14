@@ -91,7 +91,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	                << "\\bTypeError\\b"
 	                << "\\bURIError\\b";
 
-	foreach(const QString &pattern, keywordPatterns)
+	for (const auto& pattern : keywordPatterns)
 	{
 		rule.pattern = QRegExp(pattern);
 		rule.format = &keywordFormat;
@@ -102,7 +102,7 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 	QStringList moduleNames;
 	QStringList knownFunctionNames;
         StelModuleMgr* mmgr = &StelApp::getInstance().getModuleMgr();
-        foreach (StelModule* m, mmgr->getAllModules())
+        for (auto* m : mmgr->getAllModules())
         {
                 moduleNames << "\\b" + m->objectName() + "\\b";
 
@@ -120,14 +120,14 @@ StelScriptSyntaxHighlighter::StelScriptSyntaxHighlighter(QTextDocument *parent)
 		}
         }
 	moduleNames << "\\bStelSkyImageMgr\\b" << "\\bStelSkyDrawer\\b" << "\\bcore\\b";
-	foreach(const QString &pattern, moduleNames)
+	for (const auto& pattern : moduleNames)
 	{
 		rule.pattern = QRegExp(pattern);
 		rule.format = &moduleFormat;
 		highlightingRules.append(rule);
 	}
 
-	foreach(const QString &pattern, knownFunctionNames)
+	for (const auto& pattern : knownFunctionNames)
 	{
 		rule.pattern = QRegExp(pattern);
 		rule.format = &moduleFormat;
@@ -191,7 +191,7 @@ void StelScriptSyntaxHighlighter::setFormats(void)
 
 void StelScriptSyntaxHighlighter::highlightBlock(const QString &text)
 {
-	foreach(const HighlightingRule &rule, highlightingRules)
+	for (const auto& rule : highlightingRules)
 	{
 		QRegExp expression(rule.pattern);
 		int index = expression.indexIn(text);

@@ -337,7 +337,7 @@ QStringList SceneInfo::getAllSceneIDs()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the values
-	foreach (QString i, nameToDirMap.values())
+	for (auto i : nameToDirMap.values())
 	{
 		result += i;
 	}
@@ -350,7 +350,7 @@ QStringList SceneInfo::getAllSceneNames()
 	QStringList result;
 
 	// We just look over the map of names to IDs and extract the keys
-	foreach (QString i, nameToDirMap.keys())
+	for (auto i : nameToDirMap.keys())
 	{
 		result += i;
 	}
@@ -364,7 +364,7 @@ QMap<QString, QString> SceneInfo::getNameToIDMap()
 
 	scenery3dDirs = StelFileMgr::listContents(SceneInfo::SCENES_PATH, StelFileMgr::Directory);
 
-	foreach (const QString& dir, scenery3dDirs)
+	for (const auto& dir : scenery3dDirs)
 	{
 		QSettings scenery3dIni(StelFileMgr::findFile(SceneInfo::SCENES_PATH + dir + "/scenery3d.ini"), StelIniFormat);
 		QString k = scenery3dIni.value("model/name").toString();

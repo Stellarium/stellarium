@@ -390,7 +390,7 @@ void NomenclatureMgr::draw(StelCore* core)
 	painter.setFont(font);
 	const SphericalCap& viewportRegion = painter.getProjector()->getBoundingCap();
 
-	foreach(PlanetP p, nomenclatureItems.uniqueKeys())
+	for (const auto& p : nomenclatureItems.uniqueKeys())
 	{
 		// Early exit if the planet is not visible or too small to render the
 		// labels.
@@ -451,7 +451,7 @@ QList<StelObjectP> NomenclatureMgr::searchAround(const Vec3d& av, double limitFo
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const NomenclatureItemP& nItem, nomenclatureItems)
+	for (const auto& nItem : nomenclatureItems)
 	{
 		equPos = nItem->getJ2000EquatorialPos(core);
 		equPos.normalize();
@@ -469,7 +469,7 @@ StelObjectP NomenclatureMgr::searchByName(const QString& englishName) const
 {
 	if (getFlagLabels())
 	{
-		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
+		for (const auto& nItem : nomenclatureItems)
 		{
 			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getEnglishName().toUpper() == englishName.toUpper())
 			{
@@ -485,7 +485,7 @@ StelObjectP NomenclatureMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	if (getFlagLabels())
 	{
-		foreach(const NomenclatureItemP& nItem, nomenclatureItems)
+		for (const auto& nItem : nomenclatureItems)
 		{
 			if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && nItem->getNameI18n().toUpper() == nameI18n.toUpper())
 			{
@@ -510,7 +510,7 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 	{
 		if (inEnglish)
 		{
-			foreach(const NomenclatureItemP& nItem, nomenclatureItems)
+			for (const auto& nItem : nomenclatureItems)
 			{
 				if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
 					result << nItem->getEnglishName();
@@ -518,7 +518,7 @@ QStringList NomenclatureMgr::listAllObjects(bool inEnglish) const
 		}
 		else
 		{
-			foreach(const NomenclatureItemP& nItem, nomenclatureItems)
+			for (const auto& nItem : nomenclatureItems)
 			{
 				if (nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
 					result << nItem->getNameI18n();
@@ -540,7 +540,7 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 		{
 			case 0:
 			{
-				foreach (const NomenclatureItemP& nItem, nomenclatureItems)
+				for (const auto& nItem : nomenclatureItems)
 				{
 					if (nItem->getPlanet()->getEnglishName().contains(objType, Qt::CaseSensitive) && nItem->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature)
 					{
@@ -554,7 +554,7 @@ QStringList NomenclatureMgr::listAllObjectsByType(const QString &objType, bool i
 			}
 			default:
 			{
-				foreach (const NomenclatureItemP& nItem, nomenclatureItems)
+				for (const auto& nItem : nomenclatureItems)
 				{
 					if (nItem->getNomenclatureType()==type)
 					{
@@ -577,7 +577,7 @@ NomenclatureItemP NomenclatureMgr::searchByEnglishName(QString nomenclatureItemE
 {
 	if (getFlagLabels())
 	{
-		foreach (const NomenclatureItemP& p, nomenclatureItems)
+		for (const auto& p : nomenclatureItems)
 		{
 			if (p->getNomenclatureType()!=NomenclatureItem::niSatelliteFeature && p->getEnglishName() == nomenclatureItemEnglishName)
 				return p;
@@ -602,7 +602,7 @@ void NomenclatureMgr::setFlagLabels(bool b)
 {
 	if (getFlagLabels() != b)
 	{
-		foreach (NomenclatureItemP i, nomenclatureItems)
+		for (const auto& i : nomenclatureItems)
 			i->setFlagLabels(b);
 		emit nomenclatureDisplayedChanged(b);
 	}
@@ -610,7 +610,7 @@ void NomenclatureMgr::setFlagLabels(bool b)
 
 bool NomenclatureMgr::getFlagLabels() const
 {
-	foreach (NomenclatureItemP i, nomenclatureItems)
+	for (const auto& i : nomenclatureItems)
 	{
 		if (i->getFlagLabels())
 			return true;
@@ -633,6 +633,6 @@ bool NomenclatureMgr::getFlagHideLocalNomenclature() const
 void NomenclatureMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getPlanetaryFeaturesTranslator();
-	foreach (NomenclatureItemP i, nomenclatureItems)
+	for (const auto& i : nomenclatureItems)
 		i->translateName(trans);
 }

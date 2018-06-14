@@ -232,7 +232,7 @@ void RemoteSyncDialog::updateIPlabel(bool running)
 		QString localHostName=QHostInfo::localHostName();
 		QHostInfo hostInfo = QHostInfo::fromName(localHostName);
 		QString ipString("");
-		foreach (QHostAddress a, hostInfo.addresses())
+		for (auto a : hostInfo.addresses())
 		{
 			if ((a.protocol() == QAbstractSocket::IPv4Protocol) && a != QHostAddress(QHostAddress::LocalHost))
 			{
@@ -258,7 +258,7 @@ void RemoteSyncDialog::updateCheckboxesFromSyncOptions()
 {
 	SyncClient::SyncOptions options = rs->getClientSyncOptions();
 
-	foreach(QAbstractButton* bt, ui->buttonGroupSyncOptions->buttons())
+	for (auto* bt : ui->buttonGroupSyncOptions->buttons())
 	{
 		int id = ui->buttonGroupSyncOptions->id(bt);
 		bt->setChecked(options & id);
@@ -283,7 +283,7 @@ void RemoteSyncDialog::populateExclusionLists()
 	excluded.removeOne(""); // Special case
 	ui->listWidgetSelectedProperties->addItems(excluded);
 	QStringList allProps=StelApp::getInstance().getStelPropertyManager()->getPropertyList();
-	foreach (QString str, excluded)
+	for (auto str : excluded)
 	{
 		allProps.removeOne(str);
 	}	
@@ -298,7 +298,7 @@ void RemoteSyncDialog::addPropertiesForExclusion()
 	QStringList strings;
 	if (ui->listWidgetAllProperties->selectedItems().length()>0)
 	{
-		foreach (QListWidgetItem *item, ui->listWidgetAllProperties->selectedItems())
+		for (const auto* item : ui->listWidgetAllProperties->selectedItems())
 		{
 			strings.append(item->text());
 		}
@@ -321,7 +321,7 @@ void RemoteSyncDialog::removePropertiesForExclusion()
 	QStringList strings;
 	if (ui->listWidgetSelectedProperties->selectedItems().length()>0)
 	{
-		foreach (QListWidgetItem *item, ui->listWidgetSelectedProperties->selectedItems())
+		for (const auto* item : ui->listWidgetSelectedProperties->selectedItems())
 		{
 			strings.append(item->text());
 		}
@@ -329,7 +329,7 @@ void RemoteSyncDialog::removePropertiesForExclusion()
 
 		QStringList currentFilter=rs->getStelPropFilter();
 		// Remove the selected from currentFilter...
-		foreach (QString str, strings)
+		for (auto str : strings)
 		{
 			currentFilter.removeOne(str);
 		}

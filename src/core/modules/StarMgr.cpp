@@ -166,7 +166,7 @@ double StarMgr::getCallOrder(StelModuleActionName actionName) const
 
 StarMgr::~StarMgr(void)
 {
-	foreach(ZoneArray* z, gridLevels)
+	for (auto* z : gridLevels)
 		delete z;
 	gridLevels.clear();
 	if (hipIndex)
@@ -444,7 +444,7 @@ void StarMgr::init()
 	texPointer = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/pointeur2.png");   // Load pointer texture
 
 	StelApp::getInstance().getCore()->getGeodesicGrid(maxGeodesicGridLevel)->visitTriangles(maxGeodesicGridLevel,initTriangleFunc,this);
-	foreach(ZoneArray* z, gridLevels)
+	for (auto* z : gridLevels)
 		z->scaleAxis();
 	StelApp *app = &StelApp::getInstance();
 	connect(app, SIGNAL(languageChanged()), this, SLOT(updateI18n()));
@@ -570,7 +570,7 @@ void StarMgr::setCheckFlag(const QString& catId, bool b)
 {
 	// Update the starConfigFileFullPath file to take into account that we now have a new catalog
 	int idx=0;
-	foreach (const QVariant& catV, catalogsDescription)
+	for (const auto& catV : catalogsDescription)
 	{
 		++idx;
 		QVariantMap m = catV.toMap();
@@ -599,7 +599,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 	qDebug() << "Loading star data ...";
 
 	catalogsDescription = starsConfig.value("catalogs").toList();
-	foreach (const QVariant& catV, catalogsDescription)
+	for (const auto& catV : catalogsDescription)
 	{
 		QVariantMap m = catV.toMap();
 		checkAndLoadCatalog(m);
@@ -611,7 +611,7 @@ void StarMgr::loadData(QVariantMap starsConfig)
 		hipIndex[i].z = 0;
 		hipIndex[i].s = 0;
 	}
-	foreach(ZoneArray* z, gridLevels)
+	for (auto* z : gridLevels)
 		z->updateHipIndex(hipIndex);
 
 	const QString cat_hip_sp_file_name = starsConfig.value("hipSpectralFile").toString();
@@ -825,7 +825,7 @@ void StarMgr::loadSciNames(const QString& sciNameFile)
 	// record structure is delimited with a | character. Example record strings:
 	// " 10819|c_And"
 	// "113726|1_And"
-	foreach(const QString& record, allRecords)
+	for (const auto& record : allRecords)
 	{
 		++lineNumber;
 		// skip comments and empty lines
@@ -900,7 +900,7 @@ void StarMgr::loadGcvs(const QString& GcvsFile)
 	int lineNumber=0;
 
 	// record structure is delimited with a tab character.
-	foreach(const QString& record, allRecords)
+	for (const auto& record : allRecords)
 	{
 		++lineNumber;
 		// skip comments and empty lines
@@ -975,7 +975,7 @@ void StarMgr::loadWds(const QString& WdsFile)
 	int lineNumber=0;
 
 	// record structure is delimited with a tab character.
-	foreach(const QString& record, allRecords)
+	for (const auto& record : allRecords)
 	{
 		++lineNumber;
 		// skip comments and empty lines
@@ -1039,7 +1039,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 	// record structure is delimited with a 'tab' character. Example record strings:
 	// "1	128522	224700"
 	// "2	165988	224690"
-	foreach(const QString& record, allRecords)
+	for (const auto& record : allRecords)
 	{
 		++lineNumber;
 		// skip comments and empty lines
@@ -1089,7 +1089,7 @@ void StarMgr::loadCrossIdentificationData(const QString& crossIdFile)
 int StarMgr::getMaxSearchLevel() const
 {
 	int rval = -1;
-	foreach(const ZoneArray* z, gridLevels)
+	for (const auto* z : gridLevels)
 	{
 		const float mag_min = 0.001f*z->mag_min;
 		RCMag rcmag;
@@ -1128,7 +1128,7 @@ void StarMgr::draw(StelCore* core)
 	RCMag rcmag_table[RCMAG_TABLE_SIZE];
 	
 	// Draw all the stars of all the selected zones
-	foreach(const ZoneArray* z, gridLevels)
+	for (const auto* z : gridLevels)
 	{
 		int limitMagIndex=RCMAG_TABLE_SIZE;
 		const float mag_min = 0.001f*z->mag_min;
@@ -1237,7 +1237,7 @@ QList<StelObjectP > StarMgr::searchAround(const Vec3d& vv, double limFov, const 
 
 	// Iterate over the stars inside the triangles
 	f = cos(limFov * M_PI/180.);
-	foreach(ZoneArray* z, gridLevels)
+	for (auto* z : gridLevels)
 	{
 		//qDebug() << "search inside(" << it->first << "):";
 		int zone;
@@ -1278,7 +1278,7 @@ void StarMgr::updateI18n()
 		const int i = ita.key();
 		QStringList a = ita.value().split(" - ");
 		QStringList tn;
-		foreach(const QString &str, a)
+		for (const auto& str : a)
 		{
 			QString tns = trans.qtranslate(str);
 			tn << tns;
@@ -1509,7 +1509,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 				if (maxNbItem<=0)
 					break;
 				QStringList names = (inEnglish ? getAdditionalEnglishNames(ita.value()) : getAdditionalNames(ita.value())).split(" - ");
-				foreach (QString name, names)
+				for (auto name : names)
 				{
 					if (name.contains(objw, Qt::CaseInsensitive))
 					{
@@ -1546,7 +1546,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 				if (maxNbItem<=0)
 					break;
 				QStringList names = (inEnglish ? getAdditionalEnglishNames(j.value()) : getAdditionalNames(j.value())).split(" - ");
-				foreach (QString name, names)
+				for (auto name : names)
 				{
 					if (name.contains(objw, Qt::CaseInsensitive))
 					{
@@ -1818,7 +1818,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			else
 			{
-				foreach (QString star, doubleStars)
+				for (auto star : doubleStars)
 				{
 					result << trans.qtranslate(star);
 				}
@@ -1844,7 +1844,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 			}
 			else
 			{
-				foreach (QString star, variableStars)
+				for (auto star : variableStars)
 				{
 					result << trans.qtranslate(star);
 				}
@@ -1853,7 +1853,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 2: // Bright double stars
 		{
-			foreach (const StelACStarData& star, doubleHipStars)
+			for (const auto& star : doubleHipStars)
 			{
 				if (inEnglish)
 					result << star.firstKey()->getEnglishName();
@@ -1864,7 +1864,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 3: // Bright variable stars
 		{
-			foreach (const StelACStarData& star, variableHipStars)
+			for (const auto& star : variableHipStars)
 			{
 				if (inEnglish)
 					result << star.firstKey()->getEnglishName();
@@ -1875,7 +1875,7 @@ QStringList StarMgr::listAllObjectsByType(const QString &objType, bool inEnglish
 		}
 		case 4:
 		{
-			foreach (const StelACStarData& star, hipStarsHighPM)
+			for (const auto& star : hipStarsHighPM)
 			{
 				if (inEnglish)
 					result << star.firstKey()->getEnglishName();

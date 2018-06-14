@@ -42,10 +42,10 @@ void StelActionService::get(const QByteArray& operation, const APIParameters &pa
 	{
 		//list all registered StelActions, this should be thread safe
 		QJsonObject groupObject;
-		foreach(QString group, actionMgr->getGroupList())
+		for (auto group : actionMgr->getGroupList())
 		{
 			QJsonArray itemArray;
-			foreach(StelAction* action, actionMgr->getActionList(group))
+			for (const auto* action : actionMgr->getActionList(group))
 			{
 				QJsonObject item;
 				item.insert("id",action->getId());

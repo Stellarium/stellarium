@@ -197,7 +197,7 @@ QString StelFileMgr::findFile(const QString& path, Flags flags)
 		}
 	}
 	
-	foreach (const QString& i, fileLocations)
+	for (const auto& i : fileLocations)
 	{
 		const QFileInfo finfo(i + "/" + path);
 		if (fileFlagsCheck(finfo, flags))
@@ -239,7 +239,7 @@ QStringList StelFileMgr::findFileInAllPaths(const QString &path, const Flags &fl
 		return filePaths;
 	}
 
-	foreach (const QString& locationPath, fileLocations)
+	for (const auto& locationPath : fileLocations)
 	{
 		const QFileInfo finfo(locationPath + "/" + path);
 		if (fileFlagsCheck(finfo, flags))
@@ -258,10 +258,10 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 		QSet<QString> dirs = listContents(path, Directory, false);
 		result = listContents(path, flags, false); // root
 		// add results for each sub-directory
-		foreach (const QString& d, dirs)
+		for (const auto& d : dirs)
 		{
 			QSet<QString> subDirResult = listContents(path + "/" + d, flags, true);
-			foreach (const QString& r, subDirResult)
+			for (const auto& r : subDirResult)
 			{
 				result.insert(d + "/" + r);
 			}
@@ -273,14 +273,14 @@ QSet<QString> StelFileMgr::listContents(const QString& path, const StelFileMgr::
 	// we append relative paths to the search paths maintained by this class.
 	QStringList listPaths = QFileInfo(path).isAbsolute() ? QStringList("/") : fileLocations;
 
-	foreach (const QString& li, listPaths)
+	for (const auto& li : listPaths)
 	{
 		QFileInfo thisPath(QDir(li).filePath(path));
 		if (!thisPath.isDir())
 			continue;
 
 		QDir thisDir(thisPath.absoluteFilePath());
-		foreach (const QString& fileIt, thisDir.entryList())
+		for (const auto& fileIt : thisDir.entryList())
 		{
 			if (fileIt == ".." || fileIt == ".")
 				continue;

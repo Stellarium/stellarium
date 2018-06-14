@@ -70,7 +70,7 @@ QStringList* TelescopeConfigurationDialog::listSerialPorts()
 {
 	// list real serial ports
 	QStringList *plist = new QStringList();
-	foreach (const QSerialPortInfo &serialPortInfo, QSerialPortInfo::availablePorts())
+	for (const auto& serialPortInfo : QSerialPortInfo::availablePorts())
 	{
 		#ifdef Q_OS_WIN
 		plist->append(serialPortInfo.portName()); // Use COM1 in the GUI instead \\.\COM1 naming

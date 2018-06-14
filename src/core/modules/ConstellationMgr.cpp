@@ -280,7 +280,7 @@ void ConstellationMgr::deselectConstellations(void)
 	}
 
 	QList<StelObjectP> newSelection;
-	foreach(const StelObjectP& obj, currSelection)
+	for (const auto& obj : currSelection)
 	{
 		if (obj->getType() != "Constellation")
 		{
@@ -558,7 +558,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 
 			QVector<Vec3d> contour;
 			contour.reserve(texCoords.size());
-			foreach (const Vec2f& v, texCoords)
+			for (const auto& v : texCoords)
 				contour << X * Vec3d(v[0]*texSizeX, v[1]*texSizeY, 0.);
 
 			cons->artPolygon.vertex=contour;
@@ -1427,14 +1427,14 @@ QStringList ConstellationMgr::listAllObjects(bool inEnglish) const
 	QStringList result;
 	if (inEnglish)
 	{
-		foreach(Constellation* constellation, constellations)
+		for (auto* constellation : constellations)
 		{
 			result << constellation->getEnglishName();
 		}
 	}
 	else
 	{
-		foreach(Constellation* constellation, constellations)
+		for (auto* constellation : constellations)
 		{
 			result << constellation->getNameI18n();
 		}

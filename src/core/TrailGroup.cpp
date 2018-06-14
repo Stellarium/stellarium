@@ -39,7 +39,7 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 	StelProjector::ModelViewTranformP transfo = core->getJ2000ModelViewTransform();
 	transfo->combine(j2000ToTrailNativeInverted);
 	sPainter->setProjector(core->getProjection(transfo));
-	foreach (const Trail& trail, allTrails)
+	for (const auto& trail : allTrails)
 	{
 		Planet* hpl = dynamic_cast<Planet*>(trail.stelObject.data());
 		if (hpl!=Q_NULLPTR)

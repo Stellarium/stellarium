@@ -22,7 +22,7 @@ HttpConnectionHandlerPool::HttpConnectionHandlerPool(const HttpConnectionHandler
 HttpConnectionHandlerPool::~HttpConnectionHandlerPool()
 {
     // delete all connection handlers and wait until their threads are closed
-    foreach(HttpConnectionHandler* handler, pool)
+    for (auto* handler : pool)
     {
        delete handler;
     }
@@ -36,7 +36,7 @@ HttpConnectionHandler* HttpConnectionHandlerPool::getConnectionHandler()
     HttpConnectionHandler* freeHandler=Q_NULLPTR;
     mutex.lock();
     // find a free handler in pool
-    foreach(HttpConnectionHandler* handler, pool)
+    for (auto* handler : pool)
     {
         if (!handler->isBusy())
         {
@@ -66,7 +66,7 @@ void HttpConnectionHandlerPool::cleanup()
     int maxIdleHandlers=settings.minThreads;
     int idleCounter=0;
     mutex.lock();
-    foreach(HttpConnectionHandler* handler, pool)
+    for (auto* handler : pool)
     {
         if (!handler->isBusy())
         {

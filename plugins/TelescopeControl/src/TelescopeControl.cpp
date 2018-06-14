@@ -272,7 +272,7 @@ void TelescopeControl::draw(StelCore* core)
 	StelPainter sPainter(prj);
 	sPainter.setFont(labelFont);
 	reticleTexture->bind();
-	foreach (const TelescopeClientP& telescope, telescopeClients)
+	for (const auto& telescope : telescopeClients)
 	{
 		if (telescope->isConnected() && telescope->hasKnownPosition())
 		{
@@ -283,7 +283,7 @@ void TelescopeControl::draw(StelCore* core)
 				if (circleFader.getInterstate() >= 0)
 				{
 					sPainter.setColor(circleColor[0], circleColor[1], circleColor[2], circleFader.getInterstate());
-					foreach (double circle, telescope->getOculars())
+					for (auto circle : telescope->getOculars())
 					{
 						sPainter.drawCircle(XY[0], XY[1], 0.5 * prj->getPixelPerRadAtCenter() * (M_PI/180) * (circle));
 					}
@@ -332,7 +332,7 @@ QList<StelObjectP> TelescopeControl::searchAround(const Vec3d& vv, double limitF
 	Vec3d v(vv);
 	v.normalize();
 	double cosLimFov = cos(limitFov * M_PI/180.);
-	foreach (const TelescopeClientP& telescope, telescopeClients)
+	for (const auto& telescope : telescopeClients)
 	{
 		if (telescope->getJ2000EquatorialPos(core).dot(v) >= cosLimFov)
 		{
@@ -344,7 +344,7 @@ QList<StelObjectP> TelescopeControl::searchAround(const Vec3d& vv, double limitF
 
 StelObjectP TelescopeControl::searchByNameI18n(const QString &nameI18n) const
 {
-	foreach (const TelescopeClientP& telescope, telescopeClients)
+	for (const auto& telescope : telescopeClients)
 	{
 		if (telescope->getNameI18n() == nameI18n)
 			return qSharedPointerCast<StelObject>(telescope);
@@ -354,7 +354,7 @@ StelObjectP TelescopeControl::searchByNameI18n(const QString &nameI18n) const
 
 StelObjectP TelescopeControl::searchByName(const QString &name) const
 {
-	foreach (const TelescopeClientP& telescope, telescopeClients)
+	for (const auto& telescope : telescopeClients)
 	{
 		if (telescope->getEnglishName() == name)
 			return qSharedPointerCast<StelObject>(telescope);
@@ -473,7 +473,7 @@ void TelescopeControl::communicate(void)
 void TelescopeControl::deleteAllTelescopes()
 {
 	//TODO: I really hope that this won't cause a memory leak...
-	//foreach (TelescopeClient* telescope, telescopeClients)
+	//for (auto* telescope : telescopeClients)
 	//	delete telescope;
 	telescopeClients.clear();
 }
@@ -515,7 +515,7 @@ void TelescopeControl::loadTelescopeServerExecutables(void)
 	QList<QFileInfo> telescopeServerExecutables = serverDirectory.entryInfoList(QStringList("TelescopeServer*"), (QDir::Files|QDir::Executable|QDir::CaseSensitive), QDir::Name);
 	if(!telescopeServerExecutables.isEmpty())
 	{
-		foreach(QFileInfo telescopeServerExecutable, telescopeServerExecutables)
+		for (auto telescopeServerExecutable : telescopeServerExecutables)
 			telescopeServers.append(telescopeServerExecutable.baseName());//This strips the ".exe" suffix on Windows
 	}
 	else
@@ -1550,7 +1550,7 @@ QHash<int, QString> TelescopeControl::getConnectedClientsNames()
 	if (telescopeClients.isEmpty())
 		return connectedClientsNames;
 
-	foreach (const int slotNumber, telescopeClients.keys())
+	for (const auto slotNumber : telescopeClients.keys())
 	{
 		if (telescopeClients.value(slotNumber)->isConnected())
 			connectedClientsNames.insert(slotNumber, telescopeClients.value(slotNumber)->getNameI18n());
@@ -1667,7 +1667,7 @@ QStringList TelescopeControl::listMatchingObjects(const QString& objPrefix, int 
 
 	QString tn;
 	bool find;
-	foreach (const TelescopeClientP& telescope, telescopeClients)
+	for (const auto& telescope : telescopeClients)
 	{
 		tn = inEnglish ? telescope->getEnglishName() : telescope->getNameI18n();
 		find = false;

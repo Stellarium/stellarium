@@ -977,7 +977,7 @@ void ConfigurationDialog::populatePluginsList()
 	plugins->clear();
 	QString selectedPluginName = "";
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();	
-	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	for (const auto& desc : pluginsList)
 	{
 		QString label = q_(desc.info.displayedName);
 		QListWidgetItem* item = new QListWidgetItem(label);
@@ -1002,7 +1002,7 @@ void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWi
 {
 	Q_UNUSED(previousItem);
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = StelApp::getInstance().getModuleMgr().getPluginsList();
-	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	for (const auto& desc : pluginsList)
 	{
 		if (item->data(Qt::UserRole).toString()==desc.info.id)
 		{
@@ -1042,7 +1042,7 @@ void ConfigurationDialog::pluginConfigureCurrentSelection()
 
 	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = moduleMgr.getPluginsList();
-	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	for (const auto& desc : pluginsList)
 	{
 		if (id == desc.info.id)
 		{
@@ -1064,7 +1064,7 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 	QString id = ui->pluginsListWidget->currentItem()->data(Qt::UserRole).toString();
 	StelModuleMgr& moduleMgr = StelApp::getInstance().getModuleMgr();
 	const QList<StelModuleMgr::PluginDescriptor> pluginsList = moduleMgr.getPluginsList();
-	foreach (const StelModuleMgr::PluginDescriptor& desc, pluginsList)
+	for (const auto& desc : pluginsList)
 	{
 		if (id == desc.info.id)
 		{
@@ -1145,7 +1145,7 @@ void ConfigurationDialog::resetStarCatalogControls()
 	const QVariantList& catalogConfig = GETSTELMODULE(StarMgr)->getCatalogsDescription();
 	nextStarCatalogToDownload.clear();
 	int idx=0;
-	foreach (const QVariant& catV, catalogConfig)
+	for (const auto& catV : catalogConfig)
 	{
 		++idx;
 		const QVariantMap& m = catV.toMap();

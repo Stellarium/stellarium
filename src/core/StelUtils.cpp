@@ -1337,7 +1337,7 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 		qDebug() << indent + key + "(map):";
 		QList<QString> keys = m.toMap().keys();
 		qSort(keys);
-		foreach(QString k, keys)
+		for (auto k : keys)
 		{
 			debugQVariantMap(m.toMap()[k], indent + "    ", k);
 		}
@@ -1345,7 +1345,7 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 	else if (t == QVariant::List)
 	{
 		qDebug() << indent + key + "(list):";
-		foreach(QVariant item, m.toList())
+		for (const auto& item : m.toList())
 		{
 			debugQVariantMap(item, indent + "    ");
 		}

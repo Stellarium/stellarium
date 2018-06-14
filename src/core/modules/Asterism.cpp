@@ -109,7 +109,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
 				StelObjectP s = NULL;
 				float d = 10.f;
-				foreach (const StelObjectP &p, stars)
+				for (const auto& p : stars)
 				{
 					float a = coords.angle(p->getJ2000EquatorialPos(core));
 					if (a<d)

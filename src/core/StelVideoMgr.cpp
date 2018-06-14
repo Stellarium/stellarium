@@ -43,7 +43,7 @@ StelVideoMgr::StelVideoMgr()
 #ifdef ENABLE_MEDIA
 StelVideoMgr::~StelVideoMgr()
 {
-	foreach(QString id, videoObjects.keys())
+	for (const auto& id : videoObjects.keys())
 	{
 		dropVideo(id);
 	}

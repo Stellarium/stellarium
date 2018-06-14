@@ -61,7 +61,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 
 		QStringList allCountries = StelApp::getInstance().getLocaleMgr().getAllCountryNames();
 		QJsonArray list;
-		foreach(QString str, allCountries)
+		for (auto str : allCountries)
 		{
 			QJsonObject obj;
 			obj.insert("name",str);
@@ -75,7 +75,7 @@ void LocationService::get(const QByteArray& operation, const APIParameters &para
 	{
 		QList<PlanetP> ss = ssys->getAllPlanets();
 		QJsonArray list;
-		foreach(const PlanetP& p, ss)
+		for (const auto& p : ss)
 		{
 			QJsonObject obj;
 			obj.insert("name", p->getEnglishName());

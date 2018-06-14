@@ -141,7 +141,7 @@ void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 	if (argsGetOption(argList, "", "--list-landscapes"))
 	{
 		const QSet<QString>& landscapeIds = StelFileMgr::listContents("landscapes", StelFileMgr::Directory);
-		foreach (const QString& i, landscapeIds)
+		for (const auto& i : landscapeIds)
 		{
 			// finding the file will throw an exception if it is not found
 			// in that case we won't output the landscape ID as it cannot work

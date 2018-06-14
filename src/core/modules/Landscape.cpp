@@ -701,7 +701,7 @@ void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const b
 	else
 		sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 
-	foreach (const LOSSide& side, precomputedSides)
+	for (const auto& side : precomputedSides)
 	{
 		if (side.light==drawLight)
 		{

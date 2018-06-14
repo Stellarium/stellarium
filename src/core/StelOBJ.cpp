@@ -869,7 +869,7 @@ bool StelOBJ::load(QIODevice& device, const QString &basePath, const VertexOrder
 				{
 					//load external material file
 					MaterialList newMaterials = Material::loadFromFile(baseDir.absoluteFilePath(fileName));
-					foreach(const Material& m, newMaterials)
+					for (const auto& m : newMaterials)
 					{
 						m_materials.append(m);
 						//the map has the index of the material

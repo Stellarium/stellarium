@@ -308,7 +308,7 @@ SphericalRegionP SphericalRegion::getSubtractionDefault(const SphericalRegion* r
 // Returns whether a SphericalPolygon is contained into the region.
 bool SphericalCap::contains(const SphericalConvexPolygon& cvx) const
 {
-	foreach (const Vec3d& v, cvx.getConvexContour())
+	for (const auto& v : cvx.getConvexContour())
 	{
 		if (!contains(v))
 			return false;
@@ -767,7 +767,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		// Try to first split the set of regions into groups of intersecting regions
 		QList<QList<SphericalRegionP> > res;
 		QList<SphericalCap> groupReferenceCap;
-		foreach (const SphericalRegionP& newReg, regions)
+		for (const auto& newReg : regions)
 		{
 			bool createNewGroup = true;
 			const SphericalCap& newRegBoundingCap = newReg->getBoundingCap();
@@ -793,7 +793,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 		}
 		// res now contains n list of regions to union together		
 		QList<SphericalRegionP> mappedRegions;
-		foreach (const QList<SphericalRegionP>& l, res)
+		for (const auto& l : res)
 		{
 			mappedRegions.append(SphericalPolygon::multiUnion(l));
 		}
@@ -803,7 +803,7 @@ SphericalRegionP SphericalPolygon::multiUnion(const QList<SphericalRegionP>& reg
 	{
 		// Just add all contours to one polygon
 		QList<OctahedronPolygon> l;
-		foreach (const SphericalRegionP& r, regions)
+		for (const auto& r : regions)
 			l.append(r->getOctahedronPolygon());
 		return SphericalRegionP(new SphericalPolygon(l));
 	}
@@ -1000,18 +1000,18 @@ void SphericalConvexPolygon::updateBoundingCap()
 	Q_ASSERT(contour.size()>2);
 	// Use this crapy algorithm instead
 	cachedBoundingCap.n.set(0,0,0);
-	foreach (const Vec3d& v, contour)
+	for (const auto& v : contour)
 		cachedBoundingCap.n+=v;
 	cachedBoundingCap.n.normalize();
 	cachedBoundingCap.d = 1.;
-	foreach (const Vec3d& v, contour)
+	for (const auto& v : contour)
 	{
 		if (cachedBoundingCap.n*v<cachedBoundingCap.d)
 			cachedBoundingCap.d = cachedBoundingCap.n*v;
 	}
 	cachedBoundingCap.d*=cachedBoundingCap.d>0 ? 0.9999999 : 1.0000001;
 #ifndef NDEBUG
-	foreach (const Vec3d& v, contour)
+	for (const auto& v : contour)
 		Q_ASSERT(cachedBoundingCap.contains(v));
 #endif
 }
@@ -1022,7 +1022,7 @@ QVariantList SphericalConvexPolygon::toQVariant() const
 	res << "CONVEX_POLYGON";
 	QVariantList cv;
 	double ra, dec;
-	foreach (const Vec3d& v, contour)
+	for (const auto& v : contour)
 	{
 		StelUtils::rectToSphe(&ra, &dec, v);
 		QVariantList vv;
@@ -1047,7 +1047,7 @@ QVariantList SphericalTexturedConvexPolygon::toQVariant() const
 {
 	QVariantList res = SphericalConvexPolygon::toQVariant();
 	QVariantList cv;
-	foreach (const Vec2f& v, textureCoords)
+	for (const auto& v : textureCoords)
 	{
 		QVariantList vv;
 		vv << v[0] << v[1];
@@ -1237,7 +1237,7 @@ QVector<Vec3d> singleContourFromQVariantList(const QVariantList& l)
 		throw std::runtime_error("a polygon contour must have at least 3 vertices");
 	QVector<Vec3d> vertices;
 	Vec3d v;
-	foreach (const QVariant& vRaDec, l)
+	for (const auto& vRaDec : l)
 	{
 		parseRaDec(vRaDec, v);
 		vertices.append(v);
@@ -1356,7 +1356,7 @@ SphericalRegionP SphericalRegionP::loadFromQVariant(const QVariantMap& map)
 			if (polyRaDecToList.size()<3)
 				throw std::runtime_error("a polygon contour must have at least 3 vertices");
 			SphericalTexturedPolygon::TextureVertex v;
-			foreach (const QVariant& vRaDec, polyRaDecToList)
+			for (const auto& vRaDec : polyRaDecToList)
 			{
 				parseRaDec(vRaDec, v.vertex);
 				vertices.append(v);

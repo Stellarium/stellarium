@@ -73,7 +73,7 @@ void SporadicMeteorMgr::update(double deltaTime)
 	}
 
 	// step through and update all active meteors
-	foreach (SporadicMeteor* m, activeMeteors)
+	for (auto* m : activeMeteors)
 	{
 		if (!m->update(deltaTime))
 		{
@@ -133,7 +133,7 @@ void SporadicMeteorMgr::draw(StelCore* core)
 
 	// step through and draw all active meteors
 	StelPainter sPainter(core->getProjection(StelCore::FrameAltAz));
-	foreach (SporadicMeteor* m, activeMeteors)
+	for (auto* m : activeMeteors)
 	{
 		m->draw(core, sPainter);
 	}

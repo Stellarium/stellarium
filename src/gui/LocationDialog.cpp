@@ -369,7 +369,7 @@ void LocationDialog::populatePlanetList()
 	planets->clear();
 	//For each planet, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
-	foreach(const PlanetP& p, ss)
+	for (const auto& p : ss)
 	{
 		planets->addItem(p->getNameI18n(), p->getEnglishName());
 	}
@@ -394,7 +394,7 @@ void LocationDialog::populateCountryList()
 	countries->clear();
 	//For each country, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a cycle.
-	foreach(const QString& name, countryNames)
+	for (const auto& name : countryNames)
 	{
 		countries->addItem(q_(name), name);
 	}
@@ -432,7 +432,7 @@ void LocationDialog::populateTimeZonesList()
 	timeZones->clear();
 	//For each time zone, display the localized name and store the original as user
 	//data. Unfortunately, there's no other way to do this than with a loop.
-	foreach(const QString& name, tzNames)
+	for (const auto& name : tzNames)
 	{
 		timeZones->addItem(name, name);
 	}

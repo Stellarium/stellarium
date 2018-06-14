@@ -173,7 +173,7 @@ void SatellitesImportDialog::getData()
 		                      homeDirPath, "*.*");
 		if (sourceFilePaths.isEmpty())
 			return;
-		foreach (QString filePath, sourceFilePaths)
+		for (auto filePath : sourceFilePaths)
 		{
 			QFileInfo fileInfo(filePath);
 			if (fileInfo.exists() && fileInfo.isReadable())

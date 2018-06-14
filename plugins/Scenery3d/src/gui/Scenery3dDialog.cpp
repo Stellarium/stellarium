@@ -58,7 +58,7 @@ void Scenery3dDialog::retranslate()
 			si = mgr->getCurrentScene(); //the scene that is currently displayed
 		updateTextBrowser(si);
 
-		foreach(QAbstractButton* but, shortcutButtons)
+		for (auto* but : shortcutButtons)
 		{
 			//replace stored text with re-translated one
 			but->setProperty("stelOriginalText",but->text());
@@ -154,7 +154,7 @@ void Scenery3dDialog::createDialogContent()
 	l->blockSignals(true);
 	l->clear();
 	QStringList sceneList = SceneInfo::getAllSceneNames();
-	foreach (const QString sceneName, sceneList)
+	for (const auto sceneName : sceneList)
 	{
 		QString label = q_(sceneName);
 		QListWidgetItem* item = new QListWidgetItem(label);
@@ -290,7 +290,7 @@ void Scenery3dDialog::updateShortcutStrings()
 {
 	StelActionMgr* acMgr = StelApp::getInstance().getStelActionManager();
 
-	foreach(QAbstractButton* bt, shortcutButtons)
+	for (auto* bt : shortcutButtons)
 	{
 		QVariant v = bt->property("stelActionKey");
 		QVariant t = bt->property("stelOriginalText");

@@ -57,14 +57,14 @@ void HttpResponse::writeHeaders()
     buffer.append(' ');
     buffer.append(statusText);
     buffer.append("\r\n");
-    foreach(QByteArray name, headers.uniqueKeys())
+    for (auto name : headers.uniqueKeys())
     {
         buffer.append(name);
         buffer.append(": ");
         buffer.append(headers.value(name));
         buffer.append("\r\n");
     }
-    foreach(HttpCookie cookie,cookies.values())
+    for (auto cookie : cookies.values())
     {
         buffer.append("Set-Cookie: ");
         buffer.append(cookie.toByteArray());

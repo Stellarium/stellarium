@@ -50,7 +50,7 @@ SyncServer::~SyncServer()
 	stop();
 
 	//delete handlers
-	foreach(SyncMessageHandler* h, handlerList)
+	for (auto* h : handlerList)
 	{
 		if(h)
 			delete h;
@@ -127,7 +127,7 @@ void SyncServer::stop()
 		qserver->close();
 
 		//delete senders
-		foreach(SyncServerEventSender* s, senderList)
+		for (auto* s : senderList)
 		{
 			if(s)
 				delete s;
@@ -149,7 +149,7 @@ void SyncServer::stop()
 
 void SyncServer::update()
 {
-	foreach(SyncServerEventSender* s, senderList)
+	for (auto* s : senderList)
 	{
 		s->update();
 	}
@@ -214,7 +214,7 @@ void SyncServer::handleNewConnection()
 void SyncServer::clientAuthenticated(SyncRemotePeer &peer)
 {
 	//we have to send the client the current app state
-	foreach(SyncServerEventSender* s, senderList)
+	for (auto* s : senderList)
 	{
 		s->newClientConnected(peer);
 	}

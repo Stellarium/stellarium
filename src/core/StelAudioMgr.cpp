@@ -31,7 +31,7 @@ StelAudioMgr::StelAudioMgr()
 
 StelAudioMgr::~StelAudioMgr()
 {
-	foreach(const QString& id, audioObjects.keys())
+	for (const auto& id : audioObjects.keys())
 	{
 		dropSound(id);
 	}

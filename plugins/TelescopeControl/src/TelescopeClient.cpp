@@ -234,7 +234,7 @@ TelescopeTCP::TelescopeTCP(const QString &name, const QString &params, Equinox e
 	}
 	//BM: is info.addresses().isEmpty() if there's no error?
 	//qDebug() << "TelescopeClient::create(): Host addresses:" << info.addresses();
-	foreach(const QHostAddress& resolvedAddress, info.addresses())
+	for (const auto& resolvedAddress : info.addresses())
 	{
 		//For now, Stellarium's telescope servers support only IPv4
 		if(resolvedAddress.protocol() == QTcpSocket::IPv4Protocol)

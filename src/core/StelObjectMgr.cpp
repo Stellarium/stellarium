@@ -250,7 +250,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 {
 	StelObjectP rval;
-	foreach (const StelObjectModule* m, objectsModule)
+	for (const auto* m : objectsModule)
 	{
 		rval = m->searchByNameI18n(name);
 		if (rval)
@@ -263,7 +263,7 @@ StelObjectP StelObjectMgr::searchByNameI18n(const QString &name) const
 StelObjectP StelObjectMgr::searchByName(const QString &name) const
 {
 	StelObjectP rval;
-	foreach (const StelObjectModule* m, objectsModule)
+	for (const auto* m : objectsModule)
 	{
 		rval = m->searchByName(name);
 		if (rval)
@@ -334,13 +334,13 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 	float fov_around = core->getMovementMgr()->getCurrentFov()/qMin(prj->getViewportWidth(), prj->getViewportHeight()) * searchRadiusPixel;
 
 	// Collect the objects inside the range
-	foreach (const StelObjectModule* m, objectsModule)
+	for (const auto* m : objectsModule)
 		candidates += m->searchAround(v, fov_around, core);
 
 	// GZ 2014-08-17: This should be exactly the sky's limit magnitude (or even more, but not less!), else visible stars cannot be clicked.
 	float limitMag = core->getSkyDrawer()->getLimitMagnitude(); // -2.f;
 	QList<StelObjectP> tmp;
-	foreach (const StelObjectP& obj, candidates)
+	for (const auto& obj : candidates)
 	{
 		if (obj->getSelectPriority(core)<=limitMag)
 			tmp.append(obj);
@@ -356,7 +356,7 @@ StelObjectP StelObjectMgr::cleverFind(const StelCore* core, const Vec3d& v) cons
 
 	float best_object_value;
 	best_object_value = 100000.f;
-	foreach (const StelObjectP& obj, candidates)
+	for (const auto& obj : candidates)
 	{
 		prj->project(obj->getJ2000EquatorialPos(core), winpos);
 		float distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]))*distanceWeight;
@@ -462,7 +462,7 @@ QStringList StelObjectMgr::listMatchingObjects(const QString& objPrefix, unsigne
 	}
 
 	// For all StelObjectmodules..
-	foreach (const StelObjectModule* m, objectsModule)
+	for (const auto* m : objectsModule)
 	{
 		// Get matching object for this module
 		QStringList matchingObj = m->listMatchingObjects(objPrefix, maxNbItem, useStartOfWords, inEnglish);
@@ -490,7 +490,7 @@ QStringList StelObjectMgr::listAllModuleObjects(const QString &moduleId, bool in
 	}
 	else
 		objModule = moduleId;
-	foreach(StelObjectModule* m, objectsModule)
+	for (auto* m : objectsModule)
 	{
 		if (m->objectName() == objModule)
 		{

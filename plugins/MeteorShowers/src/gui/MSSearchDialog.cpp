@@ -119,7 +119,7 @@ void MSSearchDialog::searchEvents()
 
 	//Fill list of events
 	initListEvents();
-	foreach (const MeteorShowers::SearchResult& r, searchResult)
+	for (const auto& r : searchResult)
 	{
 		MSTreeWidgetItem* treeItem = new MSTreeWidgetItem(m_ui->listEvents);
 		treeItem->setText(ColumnName, r.name);

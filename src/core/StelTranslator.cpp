@@ -140,7 +140,7 @@ QStringList StelTranslator::getAvailableLanguagesNamesNative(const QString& loca
 		tmpDir.append("/stellarium-" + section + "/");
 	QStringList codeList = getAvailableIso639_1Codes(tmpDir);
 	QStringList output;
-	foreach (const QString& lang, codeList)
+	for (const auto& lang : codeList)
 	{
 		output += iso639_1CodeToNativeName(lang);
 	}
@@ -159,7 +159,7 @@ QStringList StelTranslator::getAvailableIso639_1Codes(const QString& localeDir) 
 	}
 
 	QStringList result;
-	foreach (QString path, dir.entryList(QDir::Files, QDir::Name))
+	for (auto path : dir.entryList(QDir::Files, QDir::Name))
 	{
 		if (!path.endsWith(".qm"))
 			continue;
