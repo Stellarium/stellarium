@@ -319,14 +319,14 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		        .arg(position[0], 5, 'f', 2)
 		        .arg(position[1], 5, 'f', 2)
 		        .arg(position[2], 5, 'f', 2);
-		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME coordinates")).arg(temeCoords).arg(qc_("km", "distance")) << "<br/>";
 		
 		QString temeVel = QString(xyz)
 		        .arg(velocity[0], 5, 'f', 2)
 		        .arg(velocity[1], 5, 'f', 2)
 		        .arg(velocity[2], 5, 'f', 2);
-		// TRANSLATORS: TEME is an Earth-centered inertial coordinate system
+		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME velocity")).arg(temeVel).arg(qc_("km/s", "speed")) << "<br/>";
 
 		if (sunReflAngle>0)
