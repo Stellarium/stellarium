@@ -348,7 +348,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 
 		// add and overwrite existing data in the user's ssystem_minor.ini by the data in the new file.
 		qDebug() << "ADD OBJECTS: Data for " << newData.childGroups().count() << "objects to minor file with " << minorBodies.childGroups().count() << "entries";
-		foreach (QString group, newData.childGroups())
+		for (auto group : newData.childGroups())
 		{
 			QString fixedGroupName=fixGroupName(group);
 			newData.beginGroup(group);
@@ -364,7 +364,7 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 
 			minorBodies.beginGroup(fixedGroupName);
 			QStringList newKeys=newData.allKeys(); // limited to the group!
-			foreach (QString key, newKeys)
+			for (auto key : newKeys)
 			{
 				minorBodies.setValue(key, newData.value(key));
 			}
@@ -405,7 +405,7 @@ QHash<QString,QString> SolarSystemEditor::listAllLoadedObjectsInFile(QString fil
 	QStringList groups = solarSystemIni.childGroups();
 	QStringList planetNames = solarSystem->getAllMinorPlanetCommonEnglishNames();
 	QHash<QString,QString> loadedObjects;
-	foreach (QString group, groups)
+	for (auto group : groups)
 	{
 		QString name = solarSystemIni.value(group + "/name").toString();
 		if (planetNames.contains(name))
@@ -458,7 +458,7 @@ bool SolarSystemEditor::removeSsoWithName(QString name)
 	}
 
 	//Remove the section
-	foreach (QString group, settings.childGroups())
+	for (auto group : settings.childGroups())
 	{
 		if (settings.value(group + "/name").toString() == name)
 		{
@@ -1313,7 +1313,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 		qDebug() << "Error opening ssystem_minor.ini:" << QDir::toNativeSeparators(customSolarSystemFilePath);
 		return false;
 	}
-	foreach (SsoElements object, objectList)
+	for (auto object : objectList)
 	{
 		QString name = object.value("name").toString();
 		if (name.isEmpty())
@@ -1347,7 +1347,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 		QTextStream output (&solarSystemConfigurationFile);
 		bool appendedAtLeastOne = false;
 
-		foreach (SsoElements object, objectList)
+		for (auto object : objectList)
 		{
 			if (!object.contains("section_name"))
 				continue;
@@ -1362,7 +1362,7 @@ bool SolarSystemEditor::appendToSolarSystemConfigurationFile(QList<SsoElements> 
 				continue;
 
 			output << endl << QString("[%1]").arg(sectionName) << endl;
-			foreach(QString key, object.keys())
+			for (auto key : object.keys())
 			{
 				output << QString("%1 = %2").arg(key).arg(object.value(key).toString()) << endl;
 			}
@@ -1446,7 +1446,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 			<< "orbit_TimeAtPericenter";
 
 	qDebug() << "Updating objects...";
-	foreach (SsoElements object, objectList)
+	for (auto object : objectList)
 	{
 		QString name = object.value("name").toString();
 		if (name.isEmpty())
@@ -1472,7 +1472,7 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 					if (!existingSections.contains(sectionName))
 					{
 						solarSystem.beginGroup(sectionName);
-						foreach (QString property, object.keys())
+						for (auto property : object.keys())
 						{
 							solarSystem.setValue(property, object.value(property));
 						}
@@ -1510,12 +1510,12 @@ bool SolarSystemEditor::updateSolarSystemConfigurationFile(QList<SsoElements> ob
 			//Remove all orbital elements first, in case
 			//the new ones use another coordinate function
 			// GZ This seems completely useless now. Type of orbit will not change as it is always comet_orbit.
-			foreach (QString key, orbitalElementsKeys)
+			for (auto key : orbitalElementsKeys)
 			{
 				solarSystem.remove(key);
 			}
 
-			foreach (QString key, orbitalElementsKeys)
+			for (auto key : orbitalElementsKeys)
 			{
 				updateSsoProperty(solarSystem, object, key);
 			}

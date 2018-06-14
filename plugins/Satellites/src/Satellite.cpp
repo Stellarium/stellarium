@@ -139,7 +139,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 	if (map.contains("comms"))
 	{
-		foreach(const QVariant &comm, map.value("comms").toList())
+		for (const auto& comm : map.value("comms").toList())
 		{
 			QVariantMap commMap = comm.toMap();
 			CommLink c;
@@ -153,7 +153,7 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QVariantList groupList =  map.value("groups", QVariantList()).toList();
 	if (!groupList.isEmpty())
 	{
-		foreach(const QVariant& group, groupList)
+		for (const auto& group : groupList)
 			groups.insert(group.toString());
 	}
 
@@ -216,7 +216,7 @@ QVariantMap Satellite::getMap(void)
 	map["hintColor"] = col;
 	map["orbitColor"] = orbitCol;
 	QVariantList commList;
-	foreach(const CommLink &c, comms)
+	for (const auto& c : comms)
 	{
 		QVariantMap commMap;
 		commMap["frequency"] = c.frequency;
@@ -226,7 +226,7 @@ QVariantMap Satellite::getMap(void)
 	}
 	map["comms"] = commList;
 	QVariantList groupList;
-	foreach(const QString &g, groups)
+	for (const auto& g : groups)
 	{
 		groupList << g;
 	}
@@ -339,7 +339,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		// Groups of the artificial satellites
 		QStringList groupList;
-		foreach(const QString &g, groups)
+		for (const auto&g : groups)
 			groupList << q_(g);
 
 		if (!groupList.isEmpty())
@@ -376,7 +376,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		if (comms.size() > 0)
 		{
-			foreach(const CommLink &c, comms)
+			for (const auto& c : comms)
 			{
 				double dop = getDoppler(c.frequency);
 				double ddop = dop;
@@ -465,7 +465,7 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 	map.insert("visibility", visibilityState);
 	if (comms.size() > 0)
 	{
-		foreach(const CommLink &c, comms)
+		for (const auto& c : comms)
 		{
 			double dop = getDoppler(c.frequency);
 			double ddop = dop;

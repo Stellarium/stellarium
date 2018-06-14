@@ -260,7 +260,7 @@ ClientStelPropertyUpdateHandler::ClientStelPropertyUpdateHandler(bool skipGuiPro
 	QString pattern("^(");
 	//construct a regular expression for the excludes
 	bool first = true;
-	foreach(QString str, excludeProps)
+	for (auto str : excludeProps)
 	{
 		QString tmp = QRegularExpression::escape(str);
 		// replace escaped asterisks with the regex "all"

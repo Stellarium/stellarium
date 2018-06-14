@@ -760,7 +760,7 @@ void StelMainView::init()
 		glLogger->disableMessages(disabledMsgs);
 		glLogger->startLogging(QOpenGLDebugLogger::SynchronousLogging);
 		//the internal log buffer may not be empty, so check it
-		foreach(const QOpenGLDebugMessage& msg, glLogger->loggedMessages())
+		for (const auto& msg : glLogger->loggedMessages())
 		{
 			logGLMessage(msg);
 		}

@@ -39,7 +39,7 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 
 	QSet<QString> cultureDirNames = StelFileMgr::listContents("skycultures",StelFileMgr::Directory);
 	
-	foreach (const QString& dir, cultureDirNames)
+	for (const auto& dir : cultureDirNames)
 	{
 		QString pdFile = StelFileMgr::findFile("skycultures/" + dir + "/info.ini");
 		if (pdFile.isEmpty())

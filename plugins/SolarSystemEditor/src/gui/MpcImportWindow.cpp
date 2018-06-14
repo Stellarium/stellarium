@@ -364,7 +364,7 @@ void MpcImportWindow::populateCandidateObjects(QList<SsoElements> objects)
 	model->clear();
 	model->setColumnCount(1);
 
-	foreach (SsoElements object, objects)
+	for (auto object : objects)
 	{
 		QString name = object.value("name").toString();
 		if (name.isEmpty())
@@ -1026,7 +1026,7 @@ void MpcImportWindow::loadBookmarksGroup(QVariantMap source, Bookmarks & bookmar
 	if (source.isEmpty())
 		return;
 
-	foreach (QString title, source.keys())
+	for (auto title : source.keys())
 	{
 		QString url = source.value(title).toString();
 		if (!url.isEmpty())
@@ -1088,7 +1088,7 @@ void MpcImportWindow::saveBookmarks()
 
 void MpcImportWindow::saveBookmarksGroup(Bookmarks & bookmarkGroup, QVariantMap & output)
 {
-	foreach (QString title, bookmarkGroup.keys())
+	for (auto title : bookmarkGroup.keys())
 	{
 		output.insert(title, bookmarkGroup.value(title));
 	}

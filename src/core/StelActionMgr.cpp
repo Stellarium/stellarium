@@ -224,7 +224,7 @@ bool StelActionMgr::pushKey(int key, bool global)
 			      keySequence.size() > 2 ? keySequence[2] : 0,
 			      keySequence.size() > 3 ? keySequence[3] : 0);
 	bool hasPartialMatch = false;
-	foreach(StelAction* action, findChildren<StelAction*>())
+	for (auto* action : findChildren<StelAction*>())
 	{
 		if (global && !action->global) continue;
 		QKeySequence::SequenceMatch match = action->matches(sequence);
@@ -244,7 +244,7 @@ bool StelActionMgr::pushKey(int key, bool global)
 QStringList StelActionMgr::getGroupList() const
 {
 	QStringList ret;
-	foreach(StelAction* action, findChildren<StelAction*>())
+	for (auto* action : findChildren<StelAction*>())
 	{
 		if (!ret.contains(action->group))
 			ret.append(action->group);
@@ -255,7 +255,7 @@ QStringList StelActionMgr::getGroupList() const
 QList<StelAction*> StelActionMgr::getActionList(const QString& group) const
 {
 	QList<StelAction*> ret;
-	foreach(StelAction* action, findChildren<StelAction*>())
+	for (auto* action : findChildren<StelAction*>())
 	{
 		if (action->group == group)
 			ret.append(action);
@@ -273,7 +273,7 @@ void StelActionMgr::saveShortcuts()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("shortcuts");
 	conf->remove("");
-	foreach(StelAction* action, findChildren<StelAction*>())
+	for (auto* action : findChildren<StelAction*>())
 	{
 		if (	action->keySequence == action->defaultKeySequence &&
 				action->altKeySequence == action->defaultAltKeySequence)
@@ -290,7 +290,7 @@ void StelActionMgr::saveShortcuts()
 
 void StelActionMgr::restoreDefaultShortcuts()
 {
-	foreach(StelAction* action, findChildren<StelAction*>())
+	for (auto* action : findChildren<StelAction*>())
 	{
 		action->keySequence = action->defaultKeySequence;
 		action->altKeySequence = action->defaultAltKeySequence;

@@ -78,7 +78,7 @@ ShortcutsDialog::~ShortcutsDialog()
 void ShortcutsDialog::drawCollisions()
 {
 	QBrush brush(Qt::red);
-	foreach(QStandardItem* item, collisionItems)
+	for (auto* item : collisionItems)
 	{
 		// change colors of all columns for better visibility
 		item->setForeground(brush);
@@ -92,7 +92,7 @@ void ShortcutsDialog::resetCollisions()
 {
 	QBrush brush =
 	        ui->shortcutsTreeView->palette().brush(QPalette::Foreground);
-	foreach(QStandardItem* item, collisionItems)
+	for (auto* item : collisionItems)
 	{
 		item->setForeground(brush);
 		QModelIndex index = item->index();
@@ -464,12 +464,12 @@ void ShortcutsDialog::updateTreeData()
 {
 	// Create shortcuts tree
 	QStringList groups = actionMgr->getGroupList();
-	foreach (const QString& group, groups)
+	for (const auto& group : groups)
 	{
 		updateGroup(group);
 		// display group's shortcuts
 		QList<StelAction*> actions = actionMgr->getActionList(group);
-		foreach (StelAction* action, actions)
+		for (auto* action : actions)
 		{
 			updateShortcutsItem(action);
 		}

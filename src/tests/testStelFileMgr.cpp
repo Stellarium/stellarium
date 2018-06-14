@@ -69,7 +69,7 @@ void TestStelFileMgr::initTestCase()
 			  << partialPath2+"/landscapes/ls3/landscape.ini"
 			  << partialPath2+"/inboth.txt";
 
-	foreach(QString path, testDirs)
+	for (const auto& path : testDirs)
 	{
 		if (!QDir().mkdir(path))
 		{
@@ -78,7 +78,7 @@ void TestStelFileMgr::initTestCase()
 	}
 
 	// create test files as empty files...
-	foreach(QString path, testFiles)
+	for (const auto& path : testFiles)
 	{
 		QFile f(path);
 		if (!f.open(QIODevice::WriteOnly))

@@ -159,7 +159,7 @@ void SolarSystemManagerWindow::resetImportManual(bool show)
 void SolarSystemManagerWindow::populateSolarSystemList()
 {
 	unlocalizedNames.clear();
-	foreach (const PlanetP& object, GETSTELMODULE(SolarSystem)->getAllMinorBodies())
+	for (const auto& object : GETSTELMODULE(SolarSystem)->getAllMinorBodies())
 	{
 		// GZ new for 0.16: only insert objects which are minor bodies.
 		unlocalizedNames.insert(object->getCommonNameI18n(), object->getCommonEnglishName());
@@ -178,7 +178,7 @@ void SolarSystemManagerWindow::removeObjects()
 		disconnect(ssEditor, SIGNAL(solarSystemChanged()), this, SLOT(populateSolarSystemList()));
 		// This is slow for many objects.
 		// TODO: For more than 50, it may be better to remove from ini file and reload all ini files.
-		foreach (QListWidgetItem *item, ui->listWidgetObjects->selectedItems())
+		for (auto* item : ui->listWidgetObjects->selectedItems())
 		{
 			QString ssoI18nName = item->text();
 			QString ssoEnglishName = unlocalizedNames.value(ssoI18nName);

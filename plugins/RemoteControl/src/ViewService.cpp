@@ -124,7 +124,7 @@ void ViewService::get(const QByteArray &operation, const APIParameters &paramete
 
 		QJsonObject obj;
 
-		foreach(QString str,keys)
+		for (auto str : keys)
 		{
 			QString name = core->projectionTypeKeyToNameI18n(str);
 			obj.insert(str,name);

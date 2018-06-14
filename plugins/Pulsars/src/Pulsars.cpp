@@ -223,7 +223,7 @@ void Pulsars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	foreach (const PulsarP& pulsar, psr)
+	for (const auto& pulsar : psr)
 	{
 		if (pulsar && pulsar->initialized)
 			pulsar->draw(core, &painter);
@@ -269,7 +269,7 @@ QList<StelObjectP> Pulsars::searchAround(const Vec3d& av, double limitFov, const
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const PulsarP& pulsar, psr)
+	for (const auto& pulsar : psr)
 	{
 		if (pulsar->initialized)
 		{
@@ -290,7 +290,7 @@ StelObjectP Pulsars::searchByName(const QString& englishName) const
 	if (!flagShowPulsars)
 		return Q_NULLPTR;
 
-	foreach(const PulsarP& pulsar, psr)
+	for (const auto& pulsar : psr)
 	{
 		if (pulsar->getEnglishName().toUpper() == englishName.toUpper() || pulsar->getDesignation().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
@@ -304,7 +304,7 @@ StelObjectP Pulsars::searchByNameI18n(const QString& nameI18n) const
 	if (!flagShowPulsars)
 		return Q_NULLPTR;
 
-	foreach(const PulsarP& pulsar, psr)
+	for (const auto& pulsar : psr)
 	{
 		if (pulsar->getNameI18n().toUpper() == nameI18n.toUpper() || pulsar->getDesignation().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(pulsar);
@@ -322,7 +322,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 		if (inEnglish)
 		{
-			foreach(const PulsarP& pulsar, psr)
+			for (const auto& pulsar : psr)
 			{
 				if (!pulsar->getEnglishName().isEmpty())
 					names << pulsar->getEnglishName();
@@ -331,7 +331,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 		}
 		else
 		{
-			foreach(const PulsarP& pulsar, psr)
+			for (const auto& pulsar : psr)
 			{
 				if (!pulsar->getNameI18n().isEmpty())
 					names << pulsar->getNameI18n();
@@ -339,7 +339,7 @@ QStringList Pulsars::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			}
 		}
 
-		foreach (const QString& name, names)
+		for (const auto& name : names)
 		{
 			if (!matchObjectName(name, objPrefix, useStartOfWords))
 			{
@@ -366,7 +366,7 @@ QStringList Pulsars::listAllObjects(bool inEnglish) const
 
 	if (inEnglish)
 	{
-		foreach(const PulsarP& pulsar, psr)
+		for (const auto& pulsar : psr)
 		{
 			if (!pulsar->getEnglishName().isEmpty())
 				result << pulsar->getEnglishName();
@@ -375,7 +375,7 @@ QStringList Pulsars::listAllObjects(bool inEnglish) const
 	}
 	else
 	{
-		foreach(const PulsarP& pulsar, psr)
+		for (const auto& pulsar : psr)
 		{
 			if (!pulsar->getNameI18n().isEmpty())
 				result << pulsar->getNameI18n();
@@ -486,7 +486,7 @@ void Pulsars::setPSRMap(const QVariantMap& map)
 	psr.clear();
 	PsrCount = 0;
 	QVariantMap psrMap = map.value("pulsars").toMap();
-	foreach(QString psrKey, psrMap.keys())
+	for (auto psrKey : psrMap.keys())
 	{
 		QVariantMap psrData = psrMap.value(psrKey).toMap();
 		psrData["designation"] = psrKey;
@@ -548,7 +548,7 @@ bool Pulsars::checkJsonFileFormat()
 
 PulsarP Pulsars::getByID(const QString& id) const
 {
-	foreach(const PulsarP& pulsar, psr)
+	for (const auto& pulsar : psr)
 	{
 		if (pulsar->initialized && pulsar->designation == id)
 			return pulsar;

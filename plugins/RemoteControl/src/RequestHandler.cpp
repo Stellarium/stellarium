@@ -116,7 +116,7 @@ RequestHandler::~RequestHandler()
 
 void RequestHandler::addExtensionServices(QObjectList services)
 {
-	foreach(QObject* obj, services)
+	for (auto* obj : services)
 	{
 		RemoteControlServiceInterface* sv = qobject_cast<RemoteControlServiceInterface*>(obj);
 		if(sv)

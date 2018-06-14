@@ -58,7 +58,7 @@ ToastTile::ToastTile(ToastSurvey* survey, int level, int x, int y)
 ToastTile::~ToastTile()
 {
 	//delete all currently owned tiles
-	foreach(ToastTile* child, subTiles)
+	for (auto* child : subTiles)
 	{
 		delete child;
 	}
@@ -93,7 +93,7 @@ bool ToastTile::isCovered(const SphericalCap& viewportShape) const
 {
 	// The tile is covered if we have at least one visible child and all the visible children are all ready to be drawn.
 	int nbVisibleChildren = 0;
-	foreach (const ToastTile* child, subTiles)
+	for (const auto* child : subTiles)
 	{
 		if (!viewportShape.intersects(child->boundingCap))
 			continue;
@@ -230,7 +230,7 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 	if (!isVisible(viewportShape, maxVisibleLevel))
 	{
 		// Clean up to save memory.
-		foreach (ToastTile* child, subTiles)
+		for (auto* child : subTiles)
 		{
 			//put into cache instead of delete
 			//the subtiles of the child remain owned by it
@@ -246,7 +246,7 @@ void ToastTile::draw(StelPainter* sPainter, const SphericalCap& viewportShape, i
 		drawTile(sPainter, color);
 
 	// Draw all the children
-	foreach (ToastTile* child, subTiles)
+	for (auto* child : subTiles)
 	{
 		child->draw(sPainter, viewportShape, maxVisibleLevel, color);
 	}

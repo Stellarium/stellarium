@@ -298,7 +298,7 @@ void BookmarksDialog::loadBookmarks()
 	bookmarksCollection.clear();
 	QVariantMap bookmarksMap = map.value("bookmarks").toMap();
 	int i = 0;
-	foreach(QString bookmarkKey, bookmarksMap.keys())
+	for (auto bookmarkKey : bookmarksMap.keys())
 	{
 		QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
 		bookmark bm;

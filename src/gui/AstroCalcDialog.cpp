@@ -602,7 +602,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString asToolTip = QString("%1, %2").arg(q_("Average angular size"), q_("arcmin"));
 		// Deep-sky objects
 		QList<NebulaP> celestialObjects = dsoMgr->getDeepSkyObjectsByType(celType);
-		foreach (const NebulaP& obj, celestialObjects)
+		for (const auto& obj : celestialObjects)
 		{
 			if (celTypeId == 12 || celTypeId == 102 || celTypeId == 111) // opacity cannot be extincted
 				magOp = obj->getVMagnitude(core);
@@ -684,7 +684,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
 		Vec3d pos;
-		foreach (const PlanetP& planet, allPlanets)
+		for (const auto& planet : allPlanets)
 		{
 			if ((planet->getPlanetType() != Planet::isUNDEFINED && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
@@ -749,7 +749,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
 		Vec3d pos;
-		foreach (const PlanetP& planet, allMinorBodies)
+		for (const auto& planet : allMinorBodies)
 		{
 			if ((planet->getPlanetType() == Planet::isComet && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
@@ -809,7 +809,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
 		Vec3d pos;
-		foreach (const PlanetP& planet, allMinorBodies)
+		for (const auto& planet : allMinorBodies)
 		{
 			Planet::PlanetType ptype = planet->getPlanetType();
 			if (((ptype == Planet::isAsteroid || ptype == Planet::isCubewano || ptype == Planet::isDwarfPlanet || ptype == Planet::isOCO || ptype == Planet::isPlutino || ptype == Planet::isSDO || ptype == Planet::isSednoid) && planet != core->getCurrentPlanet())
@@ -877,7 +877,7 @@ void AstroCalcDialog::currentCelestialPositions()
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
 		Vec3d pos;
-		foreach (const PlanetP& planet, allPlanets)
+		for (const auto& planet : allPlanets)
 		{
 			if ((planet->getPlanetType() == Planet::isPlanet && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
@@ -959,7 +959,7 @@ void AstroCalcDialog::currentCelestialPositions()
 			sType = q_("star with high proper motion");
 		}
 
-		foreach (const StelACStarData& star, celestialObjects)
+		for (const auto& star : celestialObjects)
 		{
 			StelObjectP obj = star.firstKey();
 			if (obj->getVMagnitudeWithExtinction(core) <= mag && obj->isAboveRealHorizon(core))
@@ -1523,7 +1523,7 @@ void AstroCalcDialog::populateCelestialBodyList()
 
 	// For each planet, display the localized name and store the original as user
 	// data. Unfortunately, there's no other way to do this than with a cycle.
-	foreach (const PlanetP& p, ss)
+	for (const auto& p : ss)
 	{
 		if (!p->getEnglishName().contains("Observer", Qt::CaseInsensitive))
 		{
@@ -1671,7 +1671,7 @@ void AstroCalcDialog::populateMajorPlanetList()
 	majorPlanet->clear();
 	// For each planet, display the localized name and store the original as user
 	// data. Unfortunately, there's no other way to do this than with a cycle.
-	foreach (const PlanetP& planet, planets)
+	for (const auto& planet : planets)
 	{
 		// major planets and the Sun
 		if ((planet->getPlanetType() == Planet::isPlanet || planet->getPlanetType() == Planet::isStar) && planet->getEnglishName() != core->getCurrentPlanet()->getEnglishName())
@@ -1867,7 +1867,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		double minYa = aY.first();
 		double maxYa = aY.first();
 
-		foreach (double temp, aY)
+		for (auto temp : aY)
 		{
 			if (maxYa < temp) maxYa = temp;
 			if (minYa > temp) minYa = temp;
@@ -1887,7 +1887,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			double minYs = sY.first();
 			double maxYs = sY.first();
 
-			foreach (double temp, sY)
+			for (auto temp : sY)
 			{
 				if (maxYs < temp) maxYs = temp;
 				if (minYs > temp) minYs = temp;
@@ -1905,7 +1905,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			double minYm = mY.first();
 			double maxYm = mY.first();
 
-			foreach (double temp, mY)
+			for (auto temp : mY)
 			{
 				if (maxYm < temp) maxYm = temp;
 				if (minYm > temp) minYm = temp;
@@ -2169,7 +2169,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		double minYa = aY.first();
 		double maxYa = aY.first();
 
-		foreach (double temp, aY)
+		for (auto temp : aY)
 		{
 			if (maxYa < temp) maxYa = temp;
 			if (minYa > temp) minYa = temp;
@@ -2182,7 +2182,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 		minYa = bY.first();
 		maxYa = bY.first();
 
-		foreach (double temp, bY)
+		for (auto temp : bY)
 		{
 			if (maxYa < temp) maxYa = temp;
 			if (minYa > temp) minYa = temp;
@@ -2257,7 +2257,7 @@ void AstroCalcDialog::populateFunctionsList()
 	first->clear();
 	second->clear();
 
-	foreach (const graph& f, functions)
+	for (const auto& f : functions)
 	{
 		first->addItem(f.first, f.second);
 		second->addItem(f.first, f.second);
@@ -2552,7 +2552,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		double minYa = aY.first();
 		double maxYa = aY.first();
 
-		foreach (double temp, aY)
+		for (auto temp : aY)
 		{
 			if (maxYa < temp) maxYa = temp;
 			if (minYa > temp) minYa = temp;
@@ -2715,140 +2715,140 @@ void AstroCalcDialog::calculatePhenomena()
 	switch (obj2Type)
 	{
 		case 0: // Solar system
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() != Planet::isUNDEFINED)
 					objects.append(object);
 			}
 			break;
 		case 1: // Planets
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isPlanet && object->getEnglishName() != core->getCurrentPlanet()->getEnglishName() && object->getEnglishName() != currentPlanet)
 					objects.append(object);
 			}
 			break;
 		case 2: // Asteroids
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isAsteroid)
 					objects.append(object);
 			}
 			break;
 		case 3: // Plutinos
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isPlutino)
 					objects.append(object);
 			}
 			break;
 		case 4: // Comets
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isComet)
 					objects.append(object);
 			}
 			break;
 		case 5: // Dwarf planets
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isDwarfPlanet)
 					objects.append(object);
 			}
 			break;
 		case 6: // Cubewanos
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isCubewano)
 					objects.append(object);
 			}
 			break;
 		case 7: // Scattered disc objects
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isSDO)
 					objects.append(object);
 			}
 			break;
 		case 8: // Oort cloud objects
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isOCO)
 					objects.append(object);
 			}
 			break;
 		case 9: // Sednoids
-			foreach (const PlanetP& object, allObjects)
+			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isSednoid)
 					objects.append(object);
 			}
 			break;
 		case 10: // Stars
-			foreach (const StelObjectP& object, hipStars)
+			for (const auto& object : hipStars)
 			{
 				if (object->getVMagnitude(core) < (brightLimit - 5.0f))
 					star.append(object);
 			}
 			break;
 		case 11: // Double stars
-			foreach (const StelACStarData& object, doubleHipStars)
+			for (const auto& object : doubleHipStars)
 			{
 				if (object.firstKey()->getVMagnitude(core) < (brightLimit - 5.0f))
 					star.append(object.firstKey());
 			}
 			break;
 		case 12: // Variable stars
-			foreach (const StelACStarData& object, variableHipStars)
+			for (const auto& object : variableHipStars)
 			{
 				if (object.firstKey()->getVMagnitude(core) < (brightLimit - 5.0f))
 					star.append(object.firstKey());
 			}
 			break;
 		case 13: // Star clusters
-			foreach (const NebulaP& object, allDSO)
+			for (const auto& object : allDSO)
 			{
 				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebCl || object->getDSOType() == Nebula::NebOc || object->getDSOType() == Nebula::NebGc || object->getDSOType() == Nebula::NebSA || object->getDSOType() == Nebula::NebSC || object->getDSOType() == Nebula::NebCn))
 					dso.append(object);
 			}
 			break;
 		case 14: // Planetary nebulae
-			foreach (const NebulaP& object, allDSO)
+			for (const auto& object : allDSO)
 			{
 				if (object->getDSOType() == Nebula::NebPn || object->getDSOType() == Nebula::NebPossPN || object->getDSOType() == Nebula::NebPPN)
 					dso.append(object);
 			}
 			break;
 		case 15: // Bright nebulae
-			foreach (const NebulaP& object, allDSO)
+			for (const auto& object : allDSO)
 			{
 				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebN || object->getDSOType() == Nebula::NebBn || object->getDSOType() == Nebula::NebEn || object->getDSOType() == Nebula::NebRn || object->getDSOType() == Nebula::NebHII || object->getDSOType() == Nebula::NebISM || object->getDSOType() == Nebula::NebCn || object->getDSOType() == Nebula::NebSNR))
 					dso.append(object);
 			}
 			break;
 		case 16: // Dark nebulae
-			foreach (const NebulaP& object, allDSO)
+			for (const auto& object : allDSO)
 			{
 				if (object->getDSOType() == Nebula::NebDn || object->getDSOType() == Nebula::NebMolCld || object->getDSOType() == Nebula::NebYSO)
 					dso.append(object);
 			}
 			break;
 		case 17: // Galaxies
-			foreach (const NebulaP& object, allDSO)
+			for (const auto& object : allDSO)
 			{
 				if (object->getVMagnitude(core) < brightLimit && (object->getDSOType() == Nebula::NebGx || object->getDSOType() == Nebula::NebAGx || object->getDSOType() == Nebula::NebRGx || object->getDSOType() == Nebula::NebQSO || object->getDSOType() == Nebula::NebPossQSO || object->getDSOType() == Nebula::NebBLL || object->getDSOType() == Nebula::NebBLA || object->getDSOType() == Nebula::NebIGx))
 					dso.append(object);
 			}
 			break;
 		case 18: // Symbiotic stars
-			foreach (const NebulaP& object, allDSO)
+			for (const auto& object : allDSO)
 			{
 				if (object->getDSOType() == Nebula::NebSymbioticStar)
 					dso.append(object);
 			}
 			break;
 		case 19: // Emission-line stars
-			foreach (const NebulaP& object, allDSO)
+			for (const auto& object : allDSO)
 			{
 				if (object->getDSOType() == Nebula::NebEmissionLineStar)
 					dso.append(object);
@@ -2874,7 +2874,7 @@ void AstroCalcDialog::calculatePhenomena()
 		if (obj2Type < 10)
 		{
 			// Solar system objects
-			foreach (PlanetP obj, objects)
+			for (auto& obj : objects)
 			{
 				// conjunction
 				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, false), planet, obj, false);
@@ -2886,7 +2886,7 @@ void AstroCalcDialog::calculatePhenomena()
 		else if (obj2Type == 10 || obj2Type == 11 || obj2Type == 12)
 		{
 			// Stars
-			foreach (StelObjectP obj, star)
+			for (auto& obj : star)
 			{
 				StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
 				// Add limits on coordinates for speed-up calculations
@@ -2900,7 +2900,7 @@ void AstroCalcDialog::calculatePhenomena()
 		else
 		{
 			// Deep-sky objects
-			foreach (NebulaP obj, dso)
+			for (auto& obj : dso)
 			{
 				StelUtils::rectToSphe(&ra, &dec, obj->getEquinoxEquatorialPos(core));
 				// Add limits on coordinates for speed-up calculations
@@ -3738,14 +3738,14 @@ void AstroCalcDialog::calculateWutObjects()
 			switch (categoryId)
 			{
 				case 1: // Bright stars
-					foreach (const StelObjectP& object, hipStars)
+					for (const auto& object : hipStars)
 					{
 						if (object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 2: // Bright nebulae
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeBrightNebulae)
@@ -3768,7 +3768,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 3: // Dark nebulae
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeDarkNebulae)
@@ -3791,7 +3791,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 4: // Galaxies
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeGalaxies)
@@ -3815,7 +3815,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 5: // Star clusters
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeStarClusters)
@@ -3839,63 +3839,63 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 6: // Asteroids
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isAsteroid && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 7: // Comets
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isComet && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 8: // Plutinos
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isPlutino && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 9: // Dwarf planets
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 10: // Cubewanos
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isCubewano && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 11: // Scattered disc objects
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isSDO && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 12: // Oort cloud objects
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isOCO && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 13: // Sednoids
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isSednoid && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
 					break;
 				case 14: // Planetary nebulae
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypePlanetaryNebulae)
@@ -3919,7 +3919,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 15: // Bright double stars
-					foreach (const StelACStarData& dblStar, dblHipStars)
+					for (const auto& dblStar : dblHipStars)
 					{
 						StelObjectP object = dblStar.firstKey();
 						if (object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
@@ -3927,7 +3927,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 16: // Bright variale stars
-					foreach (const StelACStarData& varStar, varHipStars)
+					for (const auto& varStar : varHipStars)
 					{
 						StelObjectP object = varStar.firstKey();
 						if (object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
@@ -3935,7 +3935,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 17: // Bright stars with high proper motion
-					foreach (const StelACStarData& hpmStar, hpmHipStars)
+					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
 						if (object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
@@ -3943,7 +3943,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 18: // Symbiotic stars
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebSymbioticStar)
@@ -3966,7 +3966,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 19: // Emission-line stars
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebEmissionLineStar)
@@ -3989,7 +3989,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 20: // Supernova candidates
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						bool visible = ((object->getVMagnitudeWithExtinction(core) <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
@@ -4011,7 +4011,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 21: // Supernova remnant candidates
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						bool visible = ((object->getVMagnitudeWithExtinction(core) <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
@@ -4033,7 +4033,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 22: // Supernova remnants
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						bool visible = ((object->getVMagnitudeWithExtinction(core) <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
@@ -4055,7 +4055,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 23: // Clusters of galaxies
-					foreach (const NebulaP& object, allDSO)
+					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl)
@@ -4078,7 +4078,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				default: // Planets
-					foreach (const PlanetP& object, allObjects)
+					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isPlanet && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());

@@ -1526,7 +1526,7 @@ void ViewDialog::populateLists()
 	l->blockSignals(true);
 	l->clear();	
 	const QStringList mappings = core->getAllProjectionTypeKeys();
-	foreach (QString s, mappings)
+	for (const auto& s : mappings)
 	{
 		l->addItem(core->projectionTypeKeyToNameI18n(s));
 	}
@@ -1541,7 +1541,7 @@ void ViewDialog::populateLists()
 	l->clear();
 	StelModule* lmgr = StelApp::getInstance().getModule("LandscapeMgr");
 	QStringList landscapeList = lmgr->property("allLandscapeNames").toStringList();
-	foreach (const QString landscapeName, landscapeList)
+	for (const auto& landscapeName : landscapeList)
 	{
 		QString label = q_(landscapeName);
 		QListWidgetItem* item = new QListWidgetItem(label);

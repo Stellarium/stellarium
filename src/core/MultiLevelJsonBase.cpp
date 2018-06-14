@@ -228,7 +228,7 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 			//loadThread->wait(2000);
 		}
 	}
-	foreach (MultiLevelJsonBase* tile, subTiles)
+	for (auto* tile : subTiles)
 	{
 		tile->deleteLater();
 	}
@@ -238,7 +238,7 @@ MultiLevelJsonBase::~MultiLevelJsonBase()
 
 void MultiLevelJsonBase::scheduleChildsDeletion()
 {
-	foreach (MultiLevelJsonBase* tile, subTiles)
+	for (auto* tile : subTiles)
 	{
 		if (tile->timeWhenDeletionScheduled<0)
 			tile->timeWhenDeletionScheduled = StelApp::getInstance().getTotalRunTime();
@@ -249,7 +249,7 @@ void MultiLevelJsonBase::scheduleChildsDeletion()
 void MultiLevelJsonBase::cancelDeletion()
 {
 	timeWhenDeletionScheduled=-1.;
-	foreach (MultiLevelJsonBase* tile, subTiles)
+	for (auto* tile : subTiles)
 	{
 		tile->cancelDeletion();
 	}
@@ -353,7 +353,7 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 		return;
 	const double now = StelApp::getInstance().getTotalRunTime();
 	bool deleteAll = true;
-	foreach (MultiLevelJsonBase* tile, subTiles)
+	for (auto* tile : subTiles)
 	{
 		if (tile->timeWhenDeletionScheduled<0 || (now-tile->timeWhenDeletionScheduled)<deletionDelay)
 		{
@@ -364,14 +364,14 @@ void MultiLevelJsonBase::deleteUnusedSubTiles()
 	if (deleteAll==true)
 	{
 		//qDebug() << "Delete all tiles for " << this << ": " << contructorUrl;
-		foreach (MultiLevelJsonBase* tile, subTiles)
+		for (auto* tile : subTiles)
 			tile->deleteLater();
 		subTiles.clear();
 	}
 	else
 	{
 		// Nothing to delete at this level, propagate
-		foreach (MultiLevelJsonBase* tile, subTiles)
+		for (auto* tile : subTiles)
 			tile->deleteUnusedSubTiles();
 	}
 }

@@ -169,7 +169,7 @@ void RemoteControlDialog::updateIPlabel(bool running)
 		QString localHostName=QHostInfo::localHostName();
 		QHostInfo hostInfo = QHostInfo::fromName(localHostName);
 		QString ipString("");
-		foreach (QHostAddress a, hostInfo.addresses())
+		for (auto a : hostInfo.addresses())
 		{
 			if ((a.protocol() == QAbstractSocket::IPv4Protocol) && a != QHostAddress(QHostAddress::LocalHost))
 			{

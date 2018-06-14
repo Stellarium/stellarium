@@ -105,7 +105,7 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 	radiusHostStarList.clear();
 	if (map.contains("exoplanets"))
 	{
-		foreach(const QVariant &expl, map.value("exoplanets").toList())
+		for (const auto& expl : map.value("exoplanets").toList())
 		{
 			QVariantMap exoplanetMap = expl.toMap();
 			exoplanetData p;
@@ -210,7 +210,7 @@ QVariantMap Exoplanet::getMap(void) const
 	map["effectiveTemp"] = effectiveTemp;
 	map["hasHP"] = hasHabitableExoplanets;
 	QVariantList exoplanetList;
-	foreach(const exoplanetData &p, exoplanets)
+	for (const auto& p : exoplanets)
 	{
 		QVariantMap explMap;
 		explMap["planetName"] = p.planetName;
@@ -364,7 +364,7 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 			QString fluxLabel = QString("<td style=\"padding: 0 2px 0 0;\">%1 (S<sub>E</sub>)</td>").arg(q_("Flux"));
 			//TRANSLATORS: ESI = Earth Similarity Index
 			QString ESILabel = QString("<td style=\"padding: 0 2px 0 0;\">%1</td>").arg(q_("ESI"));			
-			foreach(const exoplanetData &p, exoplanets)
+			for (const auto& p : exoplanets)
 			{
 				if (!p.planetName.isEmpty())
 				{
@@ -641,7 +641,7 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 	// This hack need for correct display of discovery mode of exoplanets.
 	StelUtils::getDateFromJulianDay(core->getJD()+0.5, &year, &month, &day);
 	discovery.clear();
-	foreach(const exoplanetData &p, exoplanets)
+	for (const auto& p : exoplanets)
 	{
 		if (p.discovered>0)
 		{

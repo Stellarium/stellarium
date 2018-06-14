@@ -100,7 +100,7 @@ SolarSystem::~SolarSystem()
 {
 	// release selected:
 	selected.clear();
-	foreach (Orbit* orb, orbits)
+	for (auto* orb : orbits)
 	{
 		delete orb;
 		orb = Q_NULLPTR;
@@ -118,7 +118,7 @@ SolarSystem::~SolarSystem()
 	allTrails = Q_NULLPTR;
 
 	// Get rid of circular reference between the shared pointers which prevent proper destruction of the Planet objects.
-	foreach (PlanetP p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		p->satellites.clear();
 	}
@@ -266,7 +266,7 @@ void SolarSystem::recreateTrails()
 	}
 	else
 	{
-		foreach (const PlanetP& p, getSun()->satellites)
+		for (const auto& p : getSun()->satellites)
 		{
 			allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
 		}
@@ -282,7 +282,7 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 
 	if (namesFile.isEmpty())
 	{
-		foreach (const PlanetP& p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setNativeName("");
@@ -339,7 +339,7 @@ void SolarSystem::updateSkyCulture(const QString& skyCultureDir)
 	planetNamesFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "native names of planets";
 
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 			p->setNativeName(planetNativeNamesMap[p->getEnglishName()]);
@@ -435,7 +435,7 @@ void SolarSystem::loadPlanets()
 		return;
 	}
 
-	foreach (const QString& solarSystemFile, solarSystemFiles)
+	for (const auto& solarSystemFile : solarSystemFiles)
 	{
 		if (loadPlanets(solarSystemFile))
 		{
@@ -450,13 +450,12 @@ void SolarSystem::loadPlanets()
 			//qCritical() << "We should not be here!";
 
 			qDebug() << "Removing minor bodies";
-			foreach (PlanetP p, systemPlanets)
+			for (const auto& p : systemPlanets)
 			{
 				// We can only delete minor objects now!
 				if (p->pType >= Planet::isAsteroid)
 				{
 					p->satellites.clear();
-					p.clear();
 				}
 			}			
 			systemPlanets.clear();			
@@ -481,7 +480,7 @@ void SolarSystem::loadPlanets()
 
 	shadowPlanetCount = 0;
 
-	foreach (const PlanetP& planet, systemPlanets)
+	for (const auto& planet : systemPlanets)
 		if(planet->parent != sun || !planet->satellites.isEmpty())
 			shadowPlanetCount++;
 }
@@ -608,7 +607,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (strParent!="none")
 		{
 			// Look in the other planets the one named with strParent
-			foreach (const PlanetP& p, systemPlanets)
+			for (const auto& p : systemPlanets)
 			{
 				if (p->getEnglishName()==strParent)
 				{
@@ -1194,7 +1193,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 {
 	if (flagLightTravelTime)
 	{
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			p->computePositionWithoutOrbits(dateJDE);
 		}
@@ -1212,7 +1211,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 		// We must reset observerPlanet for the next step!
 		observerPlanet->computePosition(dateJDE);
 		// END HACK FOR SOLAR LIGHT TIME/ABERRATION
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-obsPosJDE).length() * (AU / (SPEED_OF_LIGHT * 86400.));
 			p->computePosition(dateJDE-light_speed_correction);
@@ -1220,7 +1219,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	}
 	else
 	{
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			p->computePosition(dateJDE);
 		}
@@ -1237,7 +1236,7 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 
 	if (flagLightTravelTime)
 	{
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			const double light_speed_correction = (p->getHeliocentricEclipticPos()-observerPos).length() * (AU / (SPEED_OF_LIGHT * 86400));
 			p->computeTransMatrix(dateJD-light_speed_correction, dateJDE-light_speed_correction);
@@ -1245,7 +1244,7 @@ void SolarSystem::computeTransMatrices(double dateJDE, const Vec3d& observerPos)
 	}
 	else
 	{
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			p->computeTransMatrix(dateJD, dateJDE);
 		}
@@ -1271,7 +1270,7 @@ void SolarSystem::draw(StelCore* core)
 	// Compute each Planet distance to the observer
 	Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
 
-	foreach (PlanetP p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		p->computeDistance(obsHelioPos);
 	}
@@ -1292,7 +1291,7 @@ void SolarSystem::draw(StelCore* core)
 			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
 
 	// Draw the elements
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		p->draw(core, maxMagLabel, planetNameFont);
 	}
@@ -1358,7 +1357,7 @@ void SolarSystem::draw(StelCore* core)
 
 PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 {
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		if (p->getEnglishName().toUpper() == planetEnglishName.toUpper() || p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
@@ -1368,7 +1367,7 @@ PlanetP SolarSystem::searchByEnglishName(QString planetEnglishName) const
 
 PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) const
 {
-	foreach (const PlanetP& p, systemMinorBodies)
+	for (const auto& p : systemMinorBodies)
 	{
 		if (p->getCommonEnglishName().toUpper() == planetEnglishName.toUpper() || p->getEnglishName().toUpper() == planetEnglishName.toUpper())
 			return p;
@@ -1379,7 +1378,7 @@ PlanetP SolarSystem::searchMinorPlanetByEnglishName(QString planetEnglishName) c
 
 StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 {
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		if (p->getNameI18n().toUpper() == planetNameI18.toUpper())
 			return qSharedPointerCast<StelObject>(p);
@@ -1390,7 +1389,7 @@ StelObjectP SolarSystem::searchByNameI18n(const QString& planetNameI18) const
 
 StelObjectP SolarSystem::searchByName(const QString& name) const
 {
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		if (p->getEnglishName().toUpper() == name.toUpper() || p->getCommonEnglishName().toUpper() == name.toUpper())
 			return qSharedPointerCast<StelObject>(p);
@@ -1485,7 +1484,7 @@ StelObjectP SolarSystem::search(Vec3d pos, const StelCore* core) const
 	double cos_angle_closest = 0.;
 	Vec3d equPos;
 
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		equPos = p->getEquinoxEquatorialPos(core);
 		equPos.normalize();
@@ -1518,7 +1517,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 	double cosAngularSize;
 
 	QString weAreHere = core->getCurrentPlanet()->getEnglishName();
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		equPos = p->getEquinoxEquatorialPos(core);
 		equPos.normalize();
@@ -1537,7 +1536,7 @@ QList<StelObjectP> SolarSystem::searchAround(const Vec3d& vv, double limitFov, c
 void SolarSystem::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	foreach (PlanetP p, systemPlanets)
+	for (const auto& p : systemPlanets)
 		p->translateName(trans);
 }
 
@@ -1563,7 +1562,7 @@ void SolarSystem::setFlagHints(bool b)
 {
 	if (getFlagHints() != b)
 	{
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 			p->setFlagHints(b);
 		emit flagHintsChanged(b);
 	}
@@ -1571,7 +1570,7 @@ void SolarSystem::setFlagHints(bool b)
 
 bool SolarSystem::getFlagHints(void) const
 {
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		if (p->getFlagHints())
 			return true;
@@ -1583,7 +1582,7 @@ void SolarSystem::setFlagLabels(bool b)
 {
 	if (getFlagLabels() != b)
 	{
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 			p->setFlagLabels(b);
 		emit labelsDisplayedChanged(b);
 	}
@@ -1591,7 +1590,7 @@ void SolarSystem::setFlagLabels(bool b)
 
 bool SolarSystem::getFlagLabels() const
 {
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		if (p->getFlagLabels())
 			return true;
@@ -1608,7 +1607,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	{
 		if (flagPlanetsOnly)
 		{
-			foreach (PlanetP p, systemPlanets)
+			for (const auto& p : systemPlanets)
 			{
 				if (p->getPlanetType()==Planet::isPlanet)
 					p->setFlagOrbits(b);
@@ -1618,7 +1617,7 @@ void SolarSystem::setFlagOrbits(bool b)
 		}
 		else
 		{
-			foreach (PlanetP p, systemPlanets)
+			for (const auto& p : systemPlanets)
 				p->setFlagOrbits(b);
 		}
 	}
@@ -1626,7 +1625,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	{
 		if (flagPlanetsOnly)
 		{
-			foreach (PlanetP p, systemPlanets)
+			for (const auto& p : systemPlanets)
 			{
 				if (selected == p && p->getPlanetType()==Planet::isPlanet)
 					p->setFlagOrbits(b);
@@ -1636,7 +1635,7 @@ void SolarSystem::setFlagOrbits(bool b)
 		}
 		else
 		{
-			foreach (PlanetP p, systemPlanets)
+			for (const auto& p : systemPlanets)
 			{
 				if (selected == p)
 					p->setFlagOrbits(b);
@@ -1648,7 +1647,7 @@ void SolarSystem::setFlagOrbits(bool b)
 	else
 	{
 		// A planet is selected and orbits are on - draw orbits for the planet and their moons
-		foreach (PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			if (selected == p || selected == p->parent)
 				p->setFlagOrbits(b);
@@ -1700,7 +1699,7 @@ void SolarSystem::update(double deltaTime)
 		allTrails->update();
 	}
 
-	foreach (PlanetP p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		p->update((int)(deltaTime*1000));
 	}
@@ -1735,14 +1734,14 @@ QStringList SolarSystem::listAllObjects(bool inEnglish) const
 	QStringList result;
 	if (inEnglish)
 	{
-		foreach(const PlanetP& p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			result << p->getEnglishName();
 		}
 	}
 	else
 	{
-		foreach(const PlanetP& p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			result << p->getNameI18n();
 		}
@@ -1755,7 +1754,7 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 	QStringList result;
 	if (inEnglish)
 	{
-		foreach(const PlanetP& p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			if (p->getPlanetTypeString()==objType)
 				result << p->getEnglishName();
@@ -1763,7 +1762,7 @@ QStringList SolarSystem::listAllObjectsByType(const QString &objType, bool inEng
 	}
 	else
 	{
-		foreach(const PlanetP& p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			if (p->getPlanetTypeString()==objType)
 				result << p->getNameI18n();
@@ -1865,7 +1864,7 @@ void SolarSystem::setFlagNativePlanetNames(bool b)
 	if (b!=flagNativePlanetNames)
 	{
 		flagNativePlanetNames=b;
-		foreach (const PlanetP& p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setFlagNativeName(flagNativePlanetNames);
@@ -1885,7 +1884,7 @@ void SolarSystem::setFlagTranslatedNames(bool b)
 	if (b!=flagTranslatedNames)
 	{
 		flagTranslatedNames=b;
-		foreach (const PlanetP& p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			if (p->getPlanetType()==Planet::isPlanet || p->getPlanetType()==Planet::isMoon || p->getPlanetType()==Planet::isStar)
 				p->setFlagTranslatedName(flagTranslatedNames);
@@ -2181,7 +2180,7 @@ void SolarSystem::setFlagMinorBodyScale(bool b)
 
 		double newScale = b ? minorBodyScale : 1.0;
 		//update the bodies with the new scale
-		foreach(PlanetP p, systemPlanets)
+		for (const auto& p : systemPlanets)
 		{
 			if(p == moon) continue;
 			if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
@@ -2199,7 +2198,7 @@ void SolarSystem::setMinorBodyScale(double f)
 		minorBodyScale = f;
 		if(flagMinorBodyScale) //update the bodies with the new scale
 		{
-			foreach(PlanetP p, systemPlanets)
+			for (const auto& p : systemPlanets)
 			{
 				if(p == moon) continue;
 				if (p->getPlanetType()!=Planet::isPlanet && p->getPlanetType()!=Planet::isStar)
@@ -2220,7 +2219,7 @@ void SolarSystem::setSelected(const QString& englishName)
 QStringList SolarSystem::getAllPlanetEnglishNames() const
 {
 	QStringList res;
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 		res.append(p->getEnglishName());
 	return res;
 }
@@ -2228,7 +2227,7 @@ QStringList SolarSystem::getAllPlanetEnglishNames() const
 QStringList SolarSystem::getAllPlanetLocalizedNames() const
 {
 	QStringList res;
-	foreach (const PlanetP& p, systemPlanets)
+	for (const auto& p : systemPlanets)
 		res.append(p->getNameI18n());
 	return res;
 }
@@ -2236,7 +2235,7 @@ QStringList SolarSystem::getAllPlanetLocalizedNames() const
 QStringList SolarSystem::getAllMinorPlanetCommonEnglishNames() const
 {
 	QStringList res;
-	foreach (const PlanetP& p, systemMinorBodies)
+	for (const auto& p : systemMinorBodies)
 		res.append(p->getCommonEnglishName());
 	return res;
 }
@@ -2276,10 +2275,9 @@ void SolarSystem::reloadPlanets()
 	selected.clear();//Release the selected one
 
 	// GZ TODO in case this methods gets converted to only reload minor bodies: Only delete Orbits which are not referenced by some Planet.
-	foreach (Orbit* orb, orbits)
+	for (auto* orb : orbits)
 	{
 		delete orb;
-		orb = Q_NULLPTR;
 	}
 	orbits.clear();
 
@@ -2291,10 +2289,9 @@ void SolarSystem::reloadPlanets()
 	delete allTrails;
 	allTrails = Q_NULLPTR;
 
-	foreach (PlanetP p, systemPlanets)
+	for (const auto& p : systemPlanets)
 	{
 		p->satellites.clear();
-		p.clear();
 	}
 	systemPlanets.clear();
 	systemMinorBodies.clear();
@@ -2443,7 +2440,7 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 
 	double final_illumination = 1.0;
 
-	foreach (const PlanetP& planet, systemPlanets)
+	for (const auto& planet : systemPlanets)
 	{
 		if(planet == sun || planet == core->getCurrentPlanet())
 			continue;

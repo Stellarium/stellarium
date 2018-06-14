@@ -40,7 +40,7 @@ MeteorShowers::~MeteorShowers()
 void MeteorShowers::update(double deltaTime)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	foreach (const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		ms->update(core, deltaTime);
 	}
@@ -48,7 +48,7 @@ void MeteorShowers::update(double deltaTime)
 
 void MeteorShowers::draw(StelCore* core)
 {
-	foreach (const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		ms->draw(core);
 	}
@@ -97,7 +97,7 @@ void MeteorShowers::drawPointer(StelCore* core)
 void MeteorShowers::loadMeteorShowers(const QVariantMap& map)
 {
 	m_meteorShowers.clear();
-	foreach(QString msKey, map.keys())
+	for (auto msKey : map.keys())
 	{
 		QVariantMap msData = map.value(msKey).toMap();
 		msData["showerID"] = msKey;
@@ -117,7 +117,7 @@ QList<MeteorShowers::SearchResult> MeteorShowers::searchEvents(QDate dateFrom, Q
 	QDate date;
 	MeteorShower::Activity a;
 	SearchResult r;
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		date = dateFrom;
 		while(date.operator <=(dateTo))
@@ -163,7 +163,7 @@ QList<StelObjectP> MeteorShowers::searchAround(const Vec3d& av, double limitFov,
 	v.normalize();
 	double cosLimFov = qCos(limitFov * M_PI/180.);
 	Vec3d equPos;
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		if (ms->enabled())
 		{
@@ -185,7 +185,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 		return Q_NULLPTR;
 	}
 
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		if (ms->enabled())
 		{
@@ -203,7 +203,7 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 StelObjectP MeteorShowers::searchByID(const QString &id) const
 {
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		if (ms->getID() == id)
 			return qSharedPointerCast<StelObject>(ms);
@@ -218,7 +218,7 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 		return Q_NULLPTR;
 	}
 
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		if (ms->enabled())
 		{
@@ -239,7 +239,7 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 		return result;
 	}
 
-	foreach(const MeteorShowerP& ms, m_meteorShowers)
+	for (const auto& ms : m_meteorShowers)
 	{
 		QString name = inEnglish ? ms->getEnglishName() : ms->getNameI18n();
 		if (!ms->enabled() || !matchObjectName(name, objPrefix, useStartOfWords))
@@ -268,14 +268,14 @@ QStringList MeteorShowers::listAllObjects(bool inEnglish) const
 
 	if (inEnglish)
 	{
-		foreach(const MeteorShowerP& ms, m_meteorShowers)
+		for (const auto& ms : m_meteorShowers)
 		{
 			result.append(ms->getEnglishName());
 		}
 	}
 	else
 	{
-		foreach(const MeteorShowerP& ms, m_meteorShowers)
+		for (const auto& ms : m_meteorShowers)
 		{
 			result.append(ms->getNameI18n());
 		}

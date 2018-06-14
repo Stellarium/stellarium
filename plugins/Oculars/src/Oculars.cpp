@@ -246,25 +246,25 @@ void Oculars::deinit()
 	settings->remove("telescope");
 	settings->remove("lens");
 	int index = 0;
-	foreach(CCD* ccd, ccds)
+	for (auto* ccd : ccds)
 	{
 		ccd->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	foreach(Ocular * ocular, oculars)
+	for (auto* ocular : oculars)
 	{
 		ocular->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	foreach(Telescope* telescope, telescopes)
+	for (auto* telescope : telescopes)
 	{
 		telescope->writeToSettings(settings, index);
 		index++;
 	}
 	index = 0;
-	foreach(Lens* lens, lenses)
+	for (auto* lens : lenses)
 	{
 		lens->writeToSettings(settings, index);
 		index++;
@@ -738,7 +738,7 @@ void Oculars::determineMaxEyepieceAngle()
 {
 	if (ready)
 	{
-		foreach (Ocular* ocular, oculars)
+		for (const auto* ocular : oculars)
 		{
 			if (ocular->appearentFOV() > maxEyepieceAngle)
 			{
@@ -1556,7 +1556,7 @@ void Oculars::initializeActivationActions()
 bool Oculars::isBinocularDefined()
 {
 	bool binocularFound = false;
-	foreach (Ocular* ocular, oculars)
+	for (auto* ocular : oculars)
 	{
 		if (ocular->isBinoculars())
 		{

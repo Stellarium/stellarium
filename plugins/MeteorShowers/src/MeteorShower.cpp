@@ -73,7 +73,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 
 	// build the activity list
 	QList<QVariant> activities = map.value("activity").toList();
-	foreach(const QVariant &ms, activities)
+	for (const auto& ms : activities)
 	{
 		QVariantMap activityMap = ms.toMap();
 		Activity d;
@@ -169,7 +169,7 @@ MeteorShower::MeteorShower(MeteorShowersMgr* mgr, const QVariantMap& map)
 	if(map.contains("colors"))
 	{
 		int totalIntensity = 0;
-		foreach(const QVariant &ms, map.value("colors").toList())
+		for (const auto& ms : map.value("colors").toList())
 		{
 			QVariantMap colorMap = ms.toMap();
 			QString color = colorMap.value("color").toString();
@@ -266,7 +266,7 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// step through and update all active meteors
-	foreach (MeteorObj* m, m_activeMeteors)
+	for (auto* m : m_activeMeteors)
 	{
 		if (!m->update(deltaTime))
 		{
@@ -390,7 +390,7 @@ void MeteorShower::drawMeteors(StelCore *core)
 
 	// step through and draw all active meteors
 	StelPainter painter(core->getProjection(StelCore::FrameAltAz));
-	foreach (MeteorObj* m, m_activeMeteors)
+	for (auto* m : m_activeMeteors)
 	{
 		m->draw(core, painter);
 	}

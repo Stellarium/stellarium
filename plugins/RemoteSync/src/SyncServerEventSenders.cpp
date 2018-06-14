@@ -129,7 +129,7 @@ void StelPropertyEventSender::newClientConnected(SyncRemotePeer &client)
 {
 	//send all current StelProperty values to the client
 	QList<StelProperty*> propList = propMgr->getAllProperties();
-	foreach(StelProperty* prop, propList)
+	for (const auto* prop : propList)
 	{
 		if(!prop->isSynchronizable())
 			continue;

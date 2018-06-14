@@ -279,7 +279,7 @@ void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 	if (StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", true).toBool() == false)
 		return;
 
-	foreach(QWidget * w, addscroll)
+	for (auto* w : addscroll)
 	{
 		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
 		QScroller::scroller(w);

@@ -198,10 +198,10 @@ void HelpDialog::updateHelpText(void)
 	// Append all StelAction shortcuts.
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	typedef QPair<QString, QString> KeyDescription;
-	foreach (QString group, actionMgr->getGroupList())
+	for (auto group : actionMgr->getGroupList())
 	{
 		QList<KeyDescription> descriptions;
-		foreach (StelAction* action, actionMgr->getActionList(group))
+		for (auto* action : actionMgr->getActionList(group))
 		{
 			if (action->getShortcut().isEmpty())
 				continue;
@@ -212,7 +212,7 @@ void HelpDialog::updateHelpText(void)
 		qSort(descriptions);
 		htmlText += "<tr></tr><tr><td><b><u>" + q_(group) +
 			    ":</u></b></td></tr>\n";
-		foreach (const KeyDescription& desc, descriptions)
+		for (const auto& desc : descriptions)
 		{
 			htmlText += "<tr><td>" + desc.first.toHtmlEscaped() + "</td>";
 			htmlText += "<td><b>" + desc.second.toHtmlEscaped() +

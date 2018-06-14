@@ -88,7 +88,7 @@ void CustomObjectMgr::handleMouseClicks(class QMouseEvent* e)
 		CustomObjectP closest;
 		//Smallest valid radius will be at most `radiusLimit`, so radiusLimit + 10 is plenty as the default
 		float smallestRad = radiusLimit + 10;
-		foreach(CustomObjectP cObj, customObjects)
+		for (const auto& cObj : customObjects)
 		{
 			//Get the position of the custom object
 			Vec3d a = cObj->getJ2000EquatorialPos(core);
@@ -199,7 +199,7 @@ void CustomObjectMgr::removeCustomObject(CustomObjectP obj)
 void CustomObjectMgr::removeCustomObject(QString englishName)
 {
 	setSelected("");
-	foreach(const CustomObjectP& cObj, customObjects)
+	for (const auto& cObj : customObjects)
 	{
 		//If we have a match for the thing we want to delete
 		if(cObj && cObj->getEnglishName()==englishName && cObj->initialized)
@@ -213,7 +213,7 @@ void CustomObjectMgr::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	foreach (const CustomObjectP& cObj, customObjects)
+	for (const auto& cObj : customObjects)
 	{
 		if (cObj && cObj->initialized)
 			cObj->draw(core, &painter);
@@ -256,7 +256,7 @@ QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFo
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const CustomObjectP& cObj, customObjects)
+	for (const auto& cObj : customObjects)
 	{
 		if (cObj->initialized)
 		{
@@ -274,7 +274,7 @@ QList<StelObjectP> CustomObjectMgr::searchAround(const Vec3d& av, double limitFo
 
 StelObjectP CustomObjectMgr::searchByName(const QString& englishName) const
 {
-	foreach(const CustomObjectP& cObj, customObjects)
+	for (const auto& cObj : customObjects)
 	{
 		if (cObj->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(cObj);
@@ -285,7 +285,7 @@ StelObjectP CustomObjectMgr::searchByName(const QString& englishName) const
 
 StelObjectP CustomObjectMgr::searchByNameI18n(const QString& nameI18n) const
 {
-	foreach(const CustomObjectP& cObj, customObjects)
+	for (const auto& cObj : customObjects)
 	{
 		if (cObj->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(cObj);
@@ -305,14 +305,14 @@ QStringList CustomObjectMgr::listAllObjects(bool inEnglish) const
 
 	if (inEnglish)
 	{
-		foreach(const CustomObjectP& cObj, customObjects)
+		for (const auto& cObj : customObjects)
 		{
 			result << cObj->getEnglishName();
 		}
 	}
 	else
 	{
-		foreach(const CustomObjectP& cObj, customObjects)
+		for (const auto& cObj : customObjects)
 		{
 			result << cObj->getNameI18n();
 		}
@@ -347,7 +347,7 @@ void CustomObjectMgr::setSelected(CustomObjectP obj)
 
 CustomObjectP CustomObjectMgr::searchByEnglishName(QString customObjectEnglishName) const
 {
-	foreach (const CustomObjectP& p, customObjects)
+	for (const auto& p : customObjects)
 	{
 		if (p->getEnglishName() == customObjectEnglishName)
 			return p;

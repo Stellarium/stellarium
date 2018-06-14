@@ -225,7 +225,7 @@ void Quasars::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 
-	foreach (const QuasarP& quasar, QSO)
+	for (const auto& quasar : QSO)
 	{
 		if (quasar && quasar->initialized)
 			quasar->draw(core, painter);
@@ -271,7 +271,7 @@ QList<StelObjectP> Quasars::searchAround(const Vec3d& av, double limitFov, const
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const QuasarP& quasar, QSO)
+	for (const auto& quasar : QSO)
 	{
 		if (quasar->initialized)
 		{
@@ -292,7 +292,7 @@ StelObjectP Quasars::searchByName(const QString& englishName) const
 	if (!flagShowQuasars)
 		return Q_NULLPTR;
 
-	foreach(const QuasarP& quasar, QSO)
+	for (const auto& quasar : QSO)
 	{
 		if (quasar->getEnglishName().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(quasar);
@@ -306,7 +306,7 @@ StelObjectP Quasars::searchByNameI18n(const QString& nameI18n) const
 	if (!flagShowQuasars)
 		return Q_NULLPTR;
 
-	foreach(const QuasarP& quasar, QSO)
+	for (const auto& quasar : QSO)
 	{
 		if (quasar->getNameI18n().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(quasar);
@@ -334,14 +334,14 @@ QStringList Quasars::listAllObjects(bool inEnglish) const
 
 	if (inEnglish)
 	{
-		foreach (const QuasarP& quasar, QSO)
+		for (const auto& quasar : QSO)
 		{
 			result << quasar->getEnglishName();
 		}
 	}
 	else
 	{
-		foreach (const QuasarP& quasar, QSO)
+		for (const auto& quasar : QSO)
 		{
 			result << quasar->getNameI18n();
 		}
@@ -451,7 +451,7 @@ void Quasars::setQSOMap(const QVariantMap& map)
 	QSO.clear();
 	QsrCount = 0;
 	QVariantMap qsoMap = map.value("quasars").toMap();
-	foreach(QString qsoKey, qsoMap.keys())
+	for (auto qsoKey : qsoMap.keys())
 	{
 		QVariantMap qsoData = qsoMap.value(qsoKey).toMap();
 		qsoData["designation"] = qsoKey;
@@ -513,7 +513,7 @@ bool Quasars::checkJsonFileFormat()
 
 QuasarP Quasars::getByID(const QString& id) const
 {
-	foreach(const QuasarP& quasar, QSO)
+	for (const auto& quasar : QSO)
 	{
 		if (quasar->initialized && quasar->designation == id)
 			return quasar;

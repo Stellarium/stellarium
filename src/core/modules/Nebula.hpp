@@ -213,7 +213,7 @@ private:
 	{
 		nameI18 = trans.qtranslate(englishName);
 		nameI18Aliases.clear();
-		foreach(QString alias, englishAliases)
+		for (auto alias : englishAliases)
 			nameI18Aliases.append(trans.qtranslate(alias));
 	}
 

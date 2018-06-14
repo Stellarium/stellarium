@@ -606,7 +606,7 @@ QStringList AsterismMgr::listAllObjects(bool inEnglish) const
 	QStringList result;
 	if (inEnglish)
 	{
-		foreach(Asterism* asterism, asterisms)
+		for (auto* asterism : asterisms)
 		{
 			if (asterism->isAsterism())
 				result << asterism->getEnglishName();
@@ -614,7 +614,7 @@ QStringList AsterismMgr::listAllObjects(bool inEnglish) const
 	}
 	else
 	{
-		foreach(Asterism* asterism, asterisms)
+		for (auto* asterism : asterisms)
 		{
 			if (asterism->isAsterism())
 				result << asterism->getNameI18n();

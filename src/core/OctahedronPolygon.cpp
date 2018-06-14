@@ -83,7 +83,7 @@ QString SubContour::toJSON() const
 {
 	QString res("[");
 	double ra, dec;
-	foreach (const EdgeVertex& v, *this)
+	for (const auto& v : *this)
 	{
 		//res += QString("[") + v.vertex.toString() + "],";
 		StelUtils::rectToSphe(&ra, &dec, v.vertex);
@@ -104,7 +104,7 @@ OctahedronPolygon::OctahedronPolygon(const QVector<Vec3d>& contour) : fillCached
 OctahedronPolygon::OctahedronPolygon(const QVector<QVector<Vec3d> >& contours) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
-	foreach (const QVector<Vec3d>& contour, contours)
+	for (const auto& contour : contours)
 		appendSubContour(SubContour(contour));
 	tesselate(WindingPositive);
 	updateVertexArray();
@@ -122,7 +122,7 @@ OctahedronPolygon::OctahedronPolygon(const SubContour& initContour)
 OctahedronPolygon::OctahedronPolygon(const QList<OctahedronPolygon>& octs) : fillCachedVertexArray(StelVertexArray::Triangles), outlineCachedVertexArray(StelVertexArray::Lines)
 {
 	sides.resize(8);
-	foreach (const OctahedronPolygon& oct, octs)
+	for (const auto& oct : octs)
 	{
 		for (int i=0;i<8;++i)
 		{
@@ -181,9 +181,9 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 	
 	// Re-split the contours on the plan X=0
 	QVector<SubContour> splittedVertices2[4];
-	foreach (const SubContour& subContour, splittedContour1[0])
+	for (const auto& subContour : splittedContour1[0])
 		splitContourByPlan(0, subContour, splittedVertices2);
-	foreach (const SubContour& subContour, splittedContour1[1])
+	for (const auto& subContour : splittedContour1[1])
 		splitContourByPlan(0, subContour, splittedVertices2+2);
 
 	// Now complete the contours which cross the areas from one side to another by adding poles
@@ -213,7 +213,7 @@ void OctahedronPolygon::appendSubContour(const SubContour& inContour)
 				Q_ASSERT(std::fabs(v[0])<0.0000001 || std::fabs(v[1])<0.0000001);
 			}
 		}
-		foreach (const SubContour& subContour, splittedVertices2[c])
+		for (const auto& subContour : splittedVertices2[c])
 		{
 			splitContourByPlan(2, subContour, resultSides.data()+c*2);
 		}
@@ -270,7 +270,7 @@ void OctahedronPolygon::appendReversed(const OctahedronPolygon& other)
 	Q_ASSERT(sides.size()==8 && other.sides.size()==8);
 	for (int i=0;i<8;++i)
 	{
-		foreach (const SubContour& sub, other.sides[i])
+		for (const auto& sub : other.sides[i])
 		{
 			sides[i] += sub.reversed();
 		}
@@ -424,7 +424,7 @@ void OctahedronPolygon::updateVertexArray()
 
 		// Now compute the outline contours, getting rid of non edge segments
 		EdgeVertex previous;
-		foreach (const SubContour& c, sides[sidenb])
+		for (const auto& c : sides[sidenb])
 		{
 			Q_ASSERT(!c.isEmpty());
 			previous = c.first();
@@ -581,7 +581,7 @@ QString OctahedronPolygon::toJson() const
 	for (int sidenb=0;sidenb<8;++sidenb)
 	{
 		res += "[";
-		foreach (const SubContour& c, sides[sidenb])
+		for (const auto& c : sides[sidenb])
 		{
 			res += c.toJSON();
 		}
@@ -818,18 +818,18 @@ void OctahedronPolygon::computeBoundingCap()
 	}
 	// This is a quite crapy algorithm
 	capN.set(0,0,0);
-	foreach (const Vec3d& v, trianglesArray)
+	for (const auto& v : trianglesArray)
 		capN+=v;
 	capN.normalize();
 	capD = 1.;
-	foreach (const Vec3d& v, trianglesArray)
+	for (const auto& v : trianglesArray)
 	{
 		if (capN*v<capD)
 			capD = capN*v;
 	}
 	capD*=capD>0 ? 0.9999999 : 1.0000001;
 #ifndef NDEBUG
-	foreach (const Vec3d& v, trianglesArray)
+	for (const auto& v : trianglesArray)
 	{
 		Q_ASSERT(capN*v>=capD);
 	}

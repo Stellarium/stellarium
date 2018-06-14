@@ -251,12 +251,12 @@ private:
 			//! Process all the objects intersecting the given region using the passed function object.
 			template<class FuncObject> void processIntersectingRegions(const Node& node, const SphericalRegion* region, FuncObject& func) const
 			{
-				foreach (const NodeElem& el, node.elements)
+				for (const auto& el : node.elements)
 				{
 					if (region->intersects(el.obj->getRegion().data()))
 						func(&(*el.obj));
 				}
-				foreach (const Node& child, node.children)
+				for (const auto& child : node.children)
 				{
 					if (region->contains(child.triangle))
 						processAll(child, func);
@@ -268,12 +268,12 @@ private:
 			//! Process all the objects with point intersecting the given region using the passed function object.
 			template<class FuncObject> void processIntersectingPointInRegions(const Node& node, const SphericalRegion* region, FuncObject& func) const
 			{
-				foreach (const NodeElem& el, node.elements)
+				for (const auto& el : node.elements)
 				{
 					if (region->contains(el.obj->getPointInRegion()))
 						func(&(*el.obj));
 				}
-				foreach (const Node& child, node.children)
+				for (const auto& child : node.children)
 				{
 					if (region->contains(child.triangle))
 						processAll(child, func);
@@ -284,12 +284,12 @@ private:
 			
 			template<class FuncObject> void processBoundingCapIntersectingRegions(const Node& node, const SphericalCap& cap, FuncObject& func) const
 			{
-				foreach (const NodeElem& el, node.elements)
+				for (const auto& el : node.elements)
 				{
 					if (cap.intersects(el.cap))
 						func(&(*el.obj));
 				}
-				foreach (const Node& child, node.children)
+				for (const auto& child : node.children)
 				{
 					if (cap.contains(child.triangle))
 						processAll(child, func);
@@ -301,12 +301,12 @@ private:
 			//! Process all the objects contained the given region using the passed function object.
 			template<class FuncObject> void processContainedRegions(const Node& node, const SphericalRegion* region, FuncObject& func) const
 			{
-				foreach (const NodeElem& el, node.elements)
+				for (const auto& el : node.elements)
 				{
 					if (region->contains(el.obj->getRegion().data()))
 						func(&(*el.obj));
 				}
-				foreach (const Node& child, node.children)
+				for (const auto& child : node.children)
 				{
 					if (region->contains(child.triangle))
 						processAll(child, func);
@@ -318,9 +318,9 @@ private:
 			//! Process all the objects intersecting the given region using the passed function object.
 			template<class FuncObject> void processAll(const Node& node, FuncObject& func) const
 			{
-				foreach (const NodeElem& el, node.elements)
+				for (const auto& el : node.elements)
 					func(&(*el.obj));
-				foreach (const Node& child, node.children)
+				for (const auto& child : node.children)
 					processAll(child, func);
 			}
 

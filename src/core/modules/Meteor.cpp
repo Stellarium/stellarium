@@ -263,7 +263,7 @@ void Meteor::buildColorVectors(const QList<ColorPair> colors)
 	// building color arrays (line and prism)
 	QList<Vec4f> lineColor;
 	QList<Vec4f> trainColor;
-	foreach (ColorPair color, colors)
+	for (auto color : colors)
 	{
 		// segments to be painted with the current color
 		int segs = qRound(m_segments * (color.second / 100.f)); // rounds to nearest integer

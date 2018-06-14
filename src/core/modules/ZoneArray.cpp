@@ -507,7 +507,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 		{
 			vf.normalize();
 			bool isVisible = true;
-			foreach (const SphericalCap& cap, boundingCaps)
+			for (const auto& cap : boundingCaps)
 			{
 				if (!cap.contains(vf))
 				{

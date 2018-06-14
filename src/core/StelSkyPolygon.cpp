@@ -96,7 +96,7 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 		}
 		else
 		{
-			foreach (const SphericalConvexPolygon poly, skyConvexPolygons)
+			for (const auto& poly : skyConvexPolygons)
 			{
 				if (viewPortPoly->contains(poly))
 				{
@@ -132,7 +132,7 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 		if (subTiles.isEmpty() && !subTilesUrls.isEmpty())
 		{
 			// Load the sub tiles because we reached the maximum resolution and they are not yet loaded
-			foreach (QVariant s, subTilesUrls)
+			for (const auto& s : subTilesUrls)
 			{
 				StelSkyPolygon* nt;
 				if (s.type()==QVariant::Map)
@@ -146,7 +146,7 @@ void StelSkyPolygon::getTilesToDraw(QMultiMap<double, StelSkyPolygon*>& result, 
 			}
 		}
 		// Try to add the subtiles
-		foreach (MultiLevelJsonBase* tile, subTiles)
+		for (auto* tile : subTiles)
 		{
 			qobject_cast<StelSkyPolygon*>(tile)->getTilesToDraw(result, core, viewPortPoly, !fullInScreen);
 		}
@@ -169,7 +169,7 @@ bool StelSkyPolygon::drawTile(StelCore* core)
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 
-	foreach (const SphericalConvexPolygon& poly, skyConvexPolygons)
+	for (const auto& poly : skyConvexPolygons)
 		sPainter.drawSphericalRegion(&poly);
 
 	return true;
@@ -201,10 +201,10 @@ void StelSkyPolygon::loadFromQVariantMap(const QVariantMap& map)
 
 	// Load the convex polygons (if any)
 	QVariantList polyList = map.value("worldCoords").toList();
-	foreach (const QVariant& polyRaDec, polyList)
+	for (const auto& polyRaDec : polyList)
 	{
 		QList<Vec3d> vertices;
-		foreach (QVariant vRaDec, polyRaDec.toList())
+		for (const auto& vRaDec : polyRaDec.toList())
 		{
 			const QVariantList vl = vRaDec.toList();
 			Vec3d v;

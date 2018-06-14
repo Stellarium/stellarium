@@ -145,7 +145,7 @@ void SlewDialog::updateTelescopeList()
 	ui->comboBoxTelescope->clear();
 
 	QHash<int, QString> connectedSlotsByNumber = telescopeManager->getConnectedClientsNames();
-	foreach(const int slot, connectedSlotsByNumber.keys())
+	for (const auto slot : connectedSlotsByNumber.keys())
 	{
 		QString telescopeName = connectedSlotsByNumber.value(slot);
 		connectedSlotsByName.insert(telescopeName, slot);

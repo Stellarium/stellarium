@@ -192,7 +192,7 @@ void TestStelSphericalGeometry::testContains()
 	vt.normalize();
 	QVERIFY2(!triangle.contains(vt), "Triangle not contains point failure");
 
-	foreach(const SphericalCap& h, triangle.getBoundingSphericalCaps())
+	for (const auto& h : triangle.getBoundingSphericalCaps())
 	{
 		QVERIFY(h.contains(p1));
 	}

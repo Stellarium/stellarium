@@ -47,7 +47,7 @@ StelSkyLayerMgr::StelSkyLayerMgr(void) : flagShow(true)
 
 StelSkyLayerMgr::~StelSkyLayerMgr()
 {
-	foreach (SkyLayerElem* s, allSkyLayers)
+	for (auto* s : allSkyLayers)
 		delete s;
 }
 
@@ -72,7 +72,7 @@ void StelSkyLayerMgr::init()
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("skylayers");
-	foreach (const QString& key, conf->childKeys())
+	for (const auto& key : conf->childKeys())
 	{
 		QString uri = conf->value(key, "").toString();
 		if (!uri.isEmpty())
@@ -161,7 +161,7 @@ void StelSkyLayerMgr::draw(StelCore* core)
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
 	sPainter.setBlending(true, GL_ONE, GL_ONE); //additive blending
-	foreach (SkyLayerElem* s, allSkyLayers)
+	for (auto* s : allSkyLayers)
 	{
 		if (s->show) 
 		{
@@ -211,7 +211,7 @@ void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 
 StelSkyLayerMgr::SkyLayerElem* StelSkyLayerMgr::skyLayerElemForLayer(const StelSkyLayer* t)
 {
-	foreach (SkyLayerElem* e, allSkyLayers)
+	for (auto* e : allSkyLayers)
 	{
 		if (e->layer==t)
 		{

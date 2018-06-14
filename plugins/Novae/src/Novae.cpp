@@ -187,7 +187,7 @@ void Novae::draw(StelCore* core)
 	StelPainter painter(prj);
 	painter.setFont(font);
 	
-	foreach (const NovaP& n, nova)
+	for (const auto& n : nova)
 	{
 		if (n && n->initialized)
 		{
@@ -231,7 +231,7 @@ QList<StelObjectP> Novae::searchAround(const Vec3d& av, double limitFov, const S
 	double cosLimFov = cos(limitFov * M_PI/180.);
 	Vec3d equPos;
 
-	foreach(const NovaP& n, nova)
+	for (const auto& n : nova)
 	{
 		if (n->initialized)
 		{
@@ -249,7 +249,7 @@ QList<StelObjectP> Novae::searchAround(const Vec3d& av, double limitFov, const S
 
 StelObjectP Novae::searchByName(const QString& englishName) const
 {
-	foreach(const NovaP& n, nova)
+	for (const auto& n : nova)
 	{
 		if (n->getEnglishName().toUpper() == englishName.toUpper() || n->getDesignation().toUpper() == englishName.toUpper())
 			return qSharedPointerCast<StelObject>(n);
@@ -260,7 +260,7 @@ StelObjectP Novae::searchByName(const QString& englishName) const
 
 StelObjectP Novae::searchByNameI18n(const QString& nameI18n) const
 {
-	foreach(const NovaP& n, nova)
+	for (const auto& n : nova)
 	{
 		if (n->getNameI18n().toUpper() == nameI18n.toUpper() || n->getDesignation().toUpper() == nameI18n.toUpper())
 			return qSharedPointerCast<StelObject>(n);
@@ -280,7 +280,7 @@ QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, 
 	QStringList names;
 	if (inEnglish)
 	{
-		foreach(const NovaP& n, nova)
+		for (const auto& n : nova)
 		{
 			names.append(n->getEnglishName());
 			names.append(n->getDesignation());
@@ -288,13 +288,13 @@ QStringList Novae::listMatchingObjects(const QString& objPrefix, int maxNbItem, 
 	}
 	else
 	{
-		foreach(const NovaP& n, nova)
+		for (const auto& n : nova)
 		{
 			names.append(n->getNameI18n());
 		}
 	}
 
-	foreach (const QString& name, names)
+	for (const auto& name : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{
@@ -317,14 +317,14 @@ QStringList Novae::listAllObjects(bool inEnglish) const
 	QStringList result;
 	if (inEnglish)
 	{
-		foreach (const NovaP& n, nova)
+		for (const auto& n : nova)
 		{
 			result << n->getEnglishName();
 		}
 	}
 	else
 	{
-		foreach (const NovaP& n, nova)
+		for (const auto& n : nova)
 		{
 			result << n->getNameI18n();
 		}
@@ -434,7 +434,7 @@ void Novae::setNovaeMap(const QVariantMap& map)
 	novalist.clear();
 	NovaCnt=0;
 	QVariantMap novaeMap = map.value("nova").toMap();
-	foreach(QString novaeKey, novaeMap.keys())
+	for (auto novaeKey : novaeMap.keys())
 	{
 		QVariantMap novaeData = novaeMap.value(novaeKey).toMap();
 		novaeData["designation"] = QString("%1").arg(novaeKey);
@@ -497,7 +497,7 @@ bool Novae::checkJsonFileFormat() const
 
 NovaP Novae::getByID(const QString& id) const
 {
-	foreach(const NovaP& n, nova)
+	for (const auto& n : nova)
 	{
 		if (n->initialized && n->designation == id)
 			return n;
@@ -653,7 +653,7 @@ QString Novae::getNovaeList()
 	int year, month, day;
 	QList<double> vals = novalist.values();
 	qSort(vals);
-	foreach(double val, vals)
+	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
 		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(smonth[month-1]).arg(year);

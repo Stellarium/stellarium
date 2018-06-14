@@ -50,7 +50,7 @@ QStringList StelObjectModule::listMatchingObjects(const QString &objPrefix, int 
 	}
 
 	QStringList names = listAllObjects(inEnglish);
-	foreach(const QString& name, names)
+	for (const auto& name : names)
 	{
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{

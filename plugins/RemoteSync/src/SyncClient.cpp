@@ -72,7 +72,7 @@ SyncClient::~SyncClient()
 	delete server;
 
 	//delete handlers
-	foreach(SyncMessageHandler* h, handlerList)
+	for (auto* h : handlerList)
 	{
 		if(h)
 			delete h;
