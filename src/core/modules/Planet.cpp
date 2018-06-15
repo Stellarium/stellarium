@@ -523,7 +523,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		if (qAbs(re.period)>0.f)
 		{
 			double eqRotVel = 2.0*M_PI*(AU*getRadius())/(getSiderealDay()*86400.0);
-			oss << QString("%1: %2 %3").arg(q_("Equatorial rotation velocity")).arg(eqRotVel, 0, 'f', 3).arg(kms) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms) << "<br />";
 		}
 	}
 
