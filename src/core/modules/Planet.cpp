@@ -306,7 +306,7 @@ void Planet::init()
 	vMagAlgorithmMap.insert(Planet::ExplanatorySupplement_1992,	"ExpSup1992");
 	vMagAlgorithmMap.insert(Planet::Mueller_1893,			"Mueller1893"); // better name
 	vMagAlgorithmMap.insert(Planet::AstronomicalAlmanac_1984,	"AstrAlm1984"); // consistent name
-	vMagAlgorithmMap.insert(Planet::Generic,			"Generic"),
+	vMagAlgorithmMap.insert(Planet::Generic,			"Generic");
 	vMagAlgorithmMap.insert(Planet::UndefinedAlgorithm,		"");
 }
 

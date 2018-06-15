@@ -551,6 +551,7 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 			// Search for the include file.  Rules are:
 			// 1. If path is absolute, just use that
 			// 2. If path is relative, look in scriptDir + included filename
+			// 3. If path is relative (undefined), look in standard scripts directory + included filename
 			if (QFileInfo(fileName).isAbsolute())
 				path = fileName;
 			else
@@ -558,8 +559,16 @@ bool StelScriptMgr::preprocessScript(const QString &input, QString &output, cons
 				path = StelFileMgr::findFile(scriptDir + "/" + fileName);
 				if (path.isEmpty())
 				{
-					qWarning() << "WARNING: script include:" << QDir::toNativeSeparators(fileName);
-					return false;
+					qWarning() << "WARNING: file not found! Let's check standard scripts directory...";
+
+					// OK, file is not exists in relative path; Let's check standard scripts directory
+					path = StelFileMgr::findFile("scripts/" + fileName);
+
+					if (path.isEmpty())
+					{
+						qWarning() << "WARNING: script include:" << QDir::toNativeSeparators(fileName);
+						return false;
+					}
 				}
 			}
 
