@@ -274,7 +274,7 @@ StelObjectP StelObjectMgr::searchByName(const QString &name) const
 
 StelObjectP StelObjectMgr::searchByID(const QString &type, const QString &id) const
 {
-	QMap<QString, StelObjectModule*>::const_iterator it = typeToModuleMap.constFind(type);
+	auto it = typeToModuleMap.constFind(type);
 	if(it!=typeToModuleMap.constEnd())
 	{
 		return (*it)->searchByID(id);;
@@ -442,10 +442,10 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
 QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
 {
 	QList<StelObjectP> result;
-	for (QList<StelObjectP>::iterator iter=lastSelectedObjects.begin();iter!=lastSelectedObjects.end();++iter)
+	for (const auto& obj : lastSelectedObjects)
 	{
-		if ((*iter)->getType()==type)
-			result.push_back(*iter);
+		if (obj->getType() == type)
+			result.push_back(obj);
 	}
 	return result;
 }

@@ -62,11 +62,9 @@ AsterismMgr::AsterismMgr(StarMgr *_hip_stars)
 
 AsterismMgr::~AsterismMgr()
 {
-	std::vector<Asterism *>::iterator iter;
-
-	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
+	for (auto* asterism : asterisms)
 	{
-		delete(*iter);
+		delete asterism;
 	}
 }
 
@@ -244,9 +242,8 @@ void AsterismMgr::loadLines(const QString &fileName)
 	in.seek(0);
 
 	// delete existing data, if any
-	vector < Asterism * >::iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-		delete(*iter);
+	for (auto* asterism : asterisms)
+		delete asterism;
 
 	asterisms.clear();
 	Asterism *aster = Q_NULLPTR;
@@ -307,11 +304,10 @@ void AsterismMgr::drawLines(StelPainter& sPainter, const StelCore* core) const
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
-	vector < Asterism * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		if ((*iter)->isAsterism())
-			(*iter)->drawOptim(sPainter, core, viewportHalfspace);
+		if (asterism->isAsterism())
+			asterism->drawOptim(sPainter, core, viewportHalfspace);
 	}
 	if (asterismLineThickness>1)
 		sPainter.setLineWidth(1); // restore line thickness
@@ -330,11 +326,10 @@ void AsterismMgr::drawRayHelpers(StelPainter& sPainter, const StelCore* core) co
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
-	vector < Asterism * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		if (!(*iter)->isAsterism())
-			(*iter)->drawOptim(sPainter, core, viewportHalfspace);
+		if (!asterism->isAsterism())
+			asterism->drawOptim(sPainter, core, viewportHalfspace);
 	}
 	if (rayHelperThickness>1)
 		sPainter.setLineWidth(1); // restore line thickness
@@ -348,24 +343,22 @@ void AsterismMgr::drawNames(StelPainter& sPainter) const
 		return;
 
 	sPainter.setBlending(true);
-	vector < Asterism * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); iter++)
+	for (auto* asterism : asterisms)
 	{
-		if (!(*iter)->flagAsterism) continue;
+		if (!asterism->flagAsterism) continue;
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->drawName(sPainter);
+		if (sPainter.getProjector()->projectCheck(asterism->XYZname, asterism->XYname))
+			asterism->drawName(sPainter);
 	}
 }
 
 Asterism *AsterismMgr::isStarIn(const StelObject* s) const
 {
-	vector < Asterism * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		if ((*iter)->isStarIn(s))
+		if (asterism->isStarIn(s))
 		{
-			return (*iter);
+			return asterism;
 		}
 	}
 	return Q_NULLPTR;
@@ -373,11 +366,10 @@ Asterism *AsterismMgr::isStarIn(const StelObject* s) const
 
 Asterism* AsterismMgr::findFromAbbreviation(const QString& abbreviation) const
 {
-	vector < Asterism * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		if ((*iter)->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
-			return (*iter);
+		if (asterism->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
+			return asterism;
 	}
 	return Q_NULLPTR;
 }
@@ -395,10 +387,9 @@ void AsterismMgr::loadNames(const QString& namesFile)
 	if (asterisms.empty()) return;
 
 	// clear previous names
-	vector < Asterism * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		(*iter)->englishName.clear();
+		asterism->englishName.clear();
 	}
 
 	// Open file
@@ -471,21 +462,19 @@ void AsterismMgr::loadNames(const QString& namesFile)
 void AsterismMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	vector < Asterism * >::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName, (*iter)->context);
+		asterism->nameI18 = trans.qtranslate(asterism->englishName, asterism->context);
 	}
 }
 
 // update faders
 void AsterismMgr::update(double deltaTime)
 {
-	vector < Asterism * >::const_iterator iter;
 	const int delta = (int)(deltaTime*1000);
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		(*iter)->update(delta);
+		asterism->update(delta);
 	}
 }
 
@@ -494,10 +483,9 @@ void AsterismMgr::setFlagLines(const bool displayed)
 	if(linesDisplayed != displayed)
 	{
 		linesDisplayed = displayed;
-		vector < Asterism * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		for (auto* asterism : asterisms)
 		{
-			(*iter)->setFlagLines(linesDisplayed);
+			asterism->setFlagLines(linesDisplayed);
 		}
 		emit linesDisplayedChanged(displayed);
 	}
@@ -513,10 +501,9 @@ void AsterismMgr::setFlagRayHelpers(const bool displayed)
 	if(rayHelpersDisplayed != displayed)
 	{
 		rayHelpersDisplayed = displayed;
-		vector < Asterism * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+		for (auto* asterism : asterisms)
 		{
-			(*iter)->setFlagRayHelpers(rayHelpersDisplayed);
+			asterism->setFlagRayHelpers(rayHelpersDisplayed);
 		}
 		emit rayHelpersDisplayedChanged(displayed);
 	}
@@ -532,9 +519,8 @@ void AsterismMgr::setFlagLabels(const bool displayed)
 	if (namesDisplayed != displayed)
 	{
 		namesDisplayed = displayed;
-		vector < Asterism * >::const_iterator iter;
-		for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
-			(*iter)->setFlagLabels(namesDisplayed);
+		for (auto* asterism : asterisms)
+			asterism->setFlagLabels(namesDisplayed);
 
 		emit namesDisplayedChanged(displayed);
 	}
@@ -549,11 +535,10 @@ StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	vector <Asterism*>::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		QString objwcap = (*iter)->nameI18.toUpper();
-		if (objwcap==objw) return *iter;
+		QString objwcap = asterism->nameI18.toUpper();
+		if (objwcap == objw) return asterism;
 	}
 	return Q_NULLPTR;
 }
@@ -561,14 +546,13 @@ StelObjectP AsterismMgr::searchByNameI18n(const QString& nameI18n) const
 StelObjectP AsterismMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
-	vector <Asterism*>::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		QString objwcap = (*iter)->englishName.toUpper();
-		if (objwcap==objw) return *iter;
+		QString objwcap = asterism->englishName.toUpper();
+		if (objwcap == objw) return asterism;
 
-		objwcap = (*iter)->abbreviation.toUpper();
-		if (objwcap==objw) return *iter;
+		objwcap = asterism->abbreviation.toUpper();
+		if (objwcap == objw) return asterism;
 	}
 	return Q_NULLPTR;
 }
@@ -581,10 +565,9 @@ QStringList AsterismMgr::listMatchingObjects(const QString& objPrefix, int maxNb
 		return result;
 	}
 
-	vector<Asterism*>::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		QString name = inEnglish ? (*iter)->getEnglishName() : (*iter)->getNameI18n();
+		QString name = inEnglish ? asterism->getEnglishName() : asterism->getNameI18n();
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{
 			continue;
@@ -625,10 +608,9 @@ QStringList AsterismMgr::listAllObjects(bool inEnglish) const
 
 StelObjectP AsterismMgr::searchByID(const QString &id) const
 {
-	vector <Asterism*>::const_iterator iter;
-	for (iter = asterisms.begin(); iter != asterisms.end(); ++iter)
+	for (auto* asterism : asterisms)
 	{
-		if ((*iter)->getID() == id) return *iter;
+		if (asterism->getID() == id) return asterism;
 	}
 	return Q_NULLPTR;
 }

@@ -759,9 +759,8 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map) const
 	simpleTypeList.push_back(QVariant::UInt);
 	simpleTypeList.push_back(QVariant::Double);
 
-	QVariantMap::const_iterator i=map.constBegin();
-	while (i != map.constEnd()){
-
+	for (auto i = map.constBegin(); i != map.constEnd(); ++i)
+	{
 		if (i.value().type()==QVariant::String)
 		{
 			res.append(QString("[ \"%1\" = \"%2\" ]\n").arg(i.key()).arg(i.value().toString()));
@@ -774,8 +773,6 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map) const
 		{
 			res.append(QString("[ \"%1\" = \"<%2>:%3\" ]\n").arg(i.key()).arg(i.value().typeName()).arg(i.value().toString()));
 		}
-
-		++i;
 	}
 	res.append( QString("]\n"));
 	return res;

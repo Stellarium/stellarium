@@ -11522,7 +11522,7 @@ QCPColorGradient QCPColorGradient::inverted() const
 {
   QCPColorGradient result(*this);
   result.clearColorStops();
-  for (QMap<double, QColor>::const_iterator it=mColorStops.constBegin(); it!=mColorStops.constEnd(); ++it)
+  for (auto it = mColorStops.constBegin(); it != mColorStops.constEnd(); ++it)
     result.setColorStopAt(1.0-it.key(), it.value());
   return result;
 }
@@ -11542,7 +11542,7 @@ void QCPColorGradient::updateColorBuffer()
     for (int i=0; i<mLevelCount; ++i)
     {
       double position = i*indexToPosFactor;
-      QMap<double, QColor>::const_iterator it = mColorStops.lowerBound(position);
+      auto it = mColorStops.lowerBound(position);
       if (it == mColorStops.constEnd()) // position is on or after last stop, use color of last stop
       {
         mColorBuffer[i] = (it-1).value().rgb();
@@ -11551,8 +11551,8 @@ void QCPColorGradient::updateColorBuffer()
         mColorBuffer[i] = it.value().rgb();
       } else // position is in between stops (or on an intermediate stop), interpolate color
       {
-        QMap<double, QColor>::const_iterator high = it;
-        QMap<double, QColor>::const_iterator low = it-1;
+        auto high = it;
+        auto low = it-1;
         double t = (position-low.key())/(high.key()-low.key()); // interpolation factor 0..1
         switch (mColorInterpolation)
         {
@@ -14919,7 +14919,7 @@ void QCPGraph::addData(const QVector<double> &keys, const QVector<double> &value
 */
 void QCPGraph::removeDataBefore(double key)
 {
-  QCPDataMap::iterator it = mData->begin();
+  auto it = mData->begin();
   while (it != mData->end() && it.key() < key)
     it = mData->erase(it);
 }
@@ -14931,7 +14931,7 @@ void QCPGraph::removeDataBefore(double key)
 void QCPGraph::removeDataAfter(double key)
 {
   if (mData->isEmpty()) return;
-  QCPDataMap::iterator it = mData->upperBound(key);
+  auto it = mData->upperBound(key);
   while (it != mData->end())
     it = mData->erase(it);
 }
@@ -14946,8 +14946,8 @@ void QCPGraph::removeDataAfter(double key)
 void QCPGraph::removeData(double fromKey, double toKey)
 {
   if (fromKey >= toKey || mData->isEmpty()) return;
-  QCPDataMap::iterator it = mData->upperBound(fromKey);
-  QCPDataMap::iterator itEnd = mData->upperBound(toKey);
+  auto it = mData->upperBound(fromKey);
+  auto itEnd = mData->upperBound(toKey);
   while (it != itEnd)
     it = mData->erase(it);
 }
@@ -15091,8 +15091,7 @@ void QCPGraph::draw(QCPPainter *painter)
   
   // check data validity if flag set:
 #ifdef QCUSTOMPLOT_CHECK_DATA
-  QCPDataMap::const_iterator it;
-  for (it = mData->constBegin(); it != mData->constEnd(); ++it)
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     if (QCP::isInvalidData(it.value().key, it.value().value) ||
         QCP::isInvalidData(it.value().keyErrorPlus, it.value().keyErrorMinus) ||
@@ -15682,11 +15681,11 @@ void QCPGraph::getPreparedData(QVector<QCPData> *lineData, QVector<QCPData> *sca
   {
     if (lineData)
     {
-      QCPDataMap::const_iterator it = lower;
-      QCPDataMap::const_iterator upperEnd = upper+1;
+      auto it = lower;
+      auto upperEnd = upper+1;
       double minValue = it.value().value;
       double maxValue = it.value().value;
-      QCPDataMap::const_iterator currentIntervalFirstPoint = it;
+      auto currentIntervalFirstPoint = it;
       int reversedFactor = keyAxis->rangeReversed() != (keyAxis->orientation()==Qt::Vertical) ? -1 : 1; // is used to calculate keyEpsilon pixel into the correct direction
       int reversedRound = keyAxis->rangeReversed() != (keyAxis->orientation()==Qt::Vertical) ? 1 : 0; // is used to switch between floor (normal) and ceil (reversed) rounding of currentIntervalStartKey
       double currentIntervalStartKey = keyAxis->pixelToCoord((int)(keyAxis->coordToPixel(lower.key())+reversedRound));
@@ -15742,13 +15741,13 @@ void QCPGraph::getPreparedData(QVector<QCPData> *lineData, QVector<QCPData> *sca
     {
       double valueMaxRange = valueAxis->range().upper;
       double valueMinRange = valueAxis->range().lower;
-      QCPDataMap::const_iterator it = lower;
-      QCPDataMap::const_iterator upperEnd = upper+1;
+      auto it = lower;
+      auto upperEnd = upper+1;
       double minValue = it.value().value;
       double maxValue = it.value().value;
-      QCPDataMap::const_iterator minValueIt = it;
-      QCPDataMap::const_iterator maxValueIt = it;
-      QCPDataMap::const_iterator currentIntervalStart = it;
+      auto minValueIt = it;
+      auto maxValueIt = it;
+      auto currentIntervalStart = it;
       int reversedFactor = keyAxis->rangeReversed() ? -1 : 1; // is used to calculate keyEpsilon pixel into the correct direction
       int reversedRound = keyAxis->rangeReversed() ? 1 : 0; // is used to switch between floor (normal) and ceil (reversed) rounding of currentIntervalStartKey
       double currentIntervalStartKey = keyAxis->pixelToCoord((int)(keyAxis->coordToPixel(lower.key())+reversedRound));
@@ -15777,7 +15776,7 @@ void QCPGraph::getPreparedData(QVector<QCPData> *lineData, QVector<QCPData> *sca
             // determine value pixel span and add as many points in interval to maintain certain vertical data density (this is specific to scatter plot):
             double valuePixelSpan = qAbs(valueAxis->coordToPixel(minValue)-valueAxis->coordToPixel(maxValue));
             int dataModulo = qMax(1, qRound(intervalDataCount/(valuePixelSpan/4.0))); // approximately every 4 value pixels one data point on average
-            QCPDataMap::const_iterator intervalIt = currentIntervalStart;
+            auto intervalIt = currentIntervalStart;
             int c = 0;
             while (intervalIt != it)
             {
@@ -15804,7 +15803,7 @@ void QCPGraph::getPreparedData(QVector<QCPData> *lineData, QVector<QCPData> *sca
         // determine value pixel span and add as many points in interval to maintain certain vertical data density (this is specific to scatter plot):
         double valuePixelSpan = qAbs(valueAxis->coordToPixel(minValue)-valueAxis->coordToPixel(maxValue));
         int dataModulo = qMax(1, qRound(intervalDataCount/(valuePixelSpan/4.0))); // approximately every 4 value pixels one data point on average
-        QCPDataMap::const_iterator intervalIt = currentIntervalStart;
+        auto intervalIt = currentIntervalStart;
         int c = 0;
         while (intervalIt != it)
         {
@@ -15825,8 +15824,8 @@ void QCPGraph::getPreparedData(QVector<QCPData> *lineData, QVector<QCPData> *sca
       dataVector = scatterData;
     if (dataVector)
     {
-      QCPDataMap::const_iterator it = lower;
-      QCPDataMap::const_iterator upperEnd = upper+1;
+      auto it = lower;
+      auto upperEnd = upper+1;
       dataVector->reserve(dataCount+2); // +2 for possible fill end points
       while (it != upperEnd)
       {
@@ -15968,8 +15967,8 @@ void QCPGraph::getVisibleDataBounds(QCPDataMap::const_iterator &lower, QCPDataMa
   }
   
   // get visible data range as QMap iterators
-  QCPDataMap::const_iterator lbound = mData->lowerBound(mKeyAxis->range().lower);
-  QCPDataMap::const_iterator ubound = mData->upperBound(mKeyAxis->range().upper);
+  auto lbound = mData->lowerBound(mKeyAxis->range().lower);
+  auto ubound = mData->upperBound(mKeyAxis->range().upper);
   bool lowoutlier = lbound != mData->constBegin(); // indicates whether there exist points below axis range
   bool highoutlier = ubound != mData->constEnd(); // indicates whether there exist points above axis range
   
@@ -15991,7 +15990,7 @@ int QCPGraph::countDataInBounds(const QCPDataMap::const_iterator &lower, const Q
 {
   if (upper == mData->constEnd() && lower == mData->constEnd())
     return 0;
-  QCPDataMap::const_iterator it = lower;
+  auto it = lower;
   int count = 1;
   while (it != upper && count < maxCount)
   {
@@ -16513,8 +16512,7 @@ QCPRange QCPGraph::getKeyRange(bool &foundRange, SignDomain inSignDomain, bool i
   
   if (inSignDomain == sdBoth) // range may be anywhere
   {
-    QCPDataMap::const_iterator it = mData->constBegin();
-    while (it != mData->constEnd())
+    for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
     {
       if (!qIsNaN(it.value().value))
       {
@@ -16532,12 +16530,10 @@ QCPRange QCPGraph::getKeyRange(bool &foundRange, SignDomain inSignDomain, bool i
           haveUpper = true;
         }
       }
-      ++it;
     }
   } else if (inSignDomain == sdNegative) // range may only be in the negative sign domain
   {
-    QCPDataMap::const_iterator it = mData->constBegin();
-    while (it != mData->constEnd())
+    for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
     {
       if (!qIsNaN(it.value().value))
       {
@@ -16568,12 +16564,10 @@ QCPRange QCPGraph::getKeyRange(bool &foundRange, SignDomain inSignDomain, bool i
           }
         }
       }
-      ++it;
     }
   } else if (inSignDomain == sdPositive) // range may only be in the positive sign domain
   {
-    QCPDataMap::const_iterator it = mData->constBegin();
-    while (it != mData->constEnd())
+    for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
     {
       if (!qIsNaN(it.value().value))
       {
@@ -16604,7 +16598,6 @@ QCPRange QCPGraph::getKeyRange(bool &foundRange, SignDomain inSignDomain, bool i
           }
         }
       }
-      ++it;
     }
   }
   
@@ -16628,8 +16621,7 @@ QCPRange QCPGraph::getValueRange(bool &foundRange, SignDomain inSignDomain, bool
   
   if (inSignDomain == sdBoth) // range may be anywhere
   {
-    QCPDataMap::const_iterator it = mData->constBegin();
-    while (it != mData->constEnd())
+    for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
     {
       current = it.value().value;
       if (!qIsNaN(current))
@@ -16647,12 +16639,10 @@ QCPRange QCPGraph::getValueRange(bool &foundRange, SignDomain inSignDomain, bool
           haveUpper = true;
         }
       }
-      ++it;
     }
   } else if (inSignDomain == sdNegative) // range may only be in the negative sign domain
   {
-    QCPDataMap::const_iterator it = mData->constBegin();
-    while (it != mData->constEnd())
+    for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
     {
       current = it.value().value;
       if (!qIsNaN(current))
@@ -16683,12 +16673,10 @@ QCPRange QCPGraph::getValueRange(bool &foundRange, SignDomain inSignDomain, bool
           }
         }
       }
-      ++it;
     }
   } else if (inSignDomain == sdPositive) // range may only be in the positive sign domain
   {
-    QCPDataMap::const_iterator it = mData->constBegin();
-    while (it != mData->constEnd())
+    for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
     {
       current = it.value().value;
       if (!qIsNaN(current))
@@ -16719,7 +16707,6 @@ QCPRange QCPGraph::getValueRange(bool &foundRange, SignDomain inSignDomain, bool
           }
         }
       }
-      ++it;
     }
   }
   
@@ -16997,7 +16984,7 @@ void QCPCurve::addData(const QVector<double> &ts, const QVector<double> &keys, c
 */
 void QCPCurve::removeDataBefore(double t)
 {
-  QCPCurveDataMap::iterator it = mData->begin();
+  auto it = mData->begin();
   while (it != mData->end() && it.key() < t)
     it = mData->erase(it);
 }
@@ -17009,7 +16996,7 @@ void QCPCurve::removeDataBefore(double t)
 void QCPCurve::removeDataAfter(double t)
 {
   if (mData->isEmpty()) return;
-  QCPCurveDataMap::iterator it = mData->upperBound(t);
+  auto it = mData->upperBound(t);
   while (it != mData->end())
     it = mData->erase(it);
 }
@@ -17024,8 +17011,8 @@ void QCPCurve::removeDataAfter(double t)
 void QCPCurve::removeData(double fromt, double tot)
 {
   if (fromt >= tot || mData->isEmpty()) return;
-  QCPCurveDataMap::iterator it = mData->upperBound(fromt);
-  QCPCurveDataMap::iterator itEnd = mData->upperBound(tot);
+  auto it = mData->upperBound(fromt);
+  auto itEnd = mData->upperBound(tot);
   while (it != itEnd)
     it = mData->erase(it);
 }
@@ -17080,8 +17067,7 @@ void QCPCurve::draw(QCPPainter *painter)
   
   // check data validity if flag set:
 #ifdef QCUSTOMPLOT_CHECK_DATA
-  QCPCurveDataMap::const_iterator it;
-  for (it = mData->constBegin(); it != mData->constEnd(); ++it)
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     if (QCP::isInvalidData(it.value().t) ||
         QCP::isInvalidData(it.value().key, it.value().value))
@@ -17233,8 +17219,8 @@ void QCPCurve::getCurveData(QVector<QPointF> *lineData) const
   double rectBottom = valueAxis->pixelToCoord(valueAxis->coordToPixel(valueAxis->range().lower)+strokeMargin*((valueAxis->orientation()==Qt::Horizontal)!=valueAxis->rangeReversed()?-1:1));
   double rectTop = valueAxis->pixelToCoord(valueAxis->coordToPixel(valueAxis->range().upper)-strokeMargin*((valueAxis->orientation()==Qt::Horizontal)!=valueAxis->rangeReversed()?-1:1));
   int currentRegion;
-  QCPCurveDataMap::const_iterator it = mData->constBegin();
-  QCPCurveDataMap::const_iterator prevIt = mData->constEnd()-1;
+  auto it = mData->constBegin();
+  auto prevIt = mData->constEnd()-1;
   int prevRegion = getRegion(prevIt.value().key, prevIt.value().value, rectLeft, rectTop, rectRight, rectBottom);
   QVector<QPointF> trailingPoints; // points that must be applied after all other points (are generated only when handling first point to get virtual segment between last and first point right)
   while (it != mData->constEnd())
@@ -17948,8 +17934,7 @@ QCPRange QCPCurve::getKeyRange(bool &foundRange, SignDomain inSignDomain) const
   
   double current;
   
-  QCPCurveDataMap::const_iterator it = mData->constBegin();
-  while (it != mData->constEnd())
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     current = it.value().key;
     if (!qIsNaN(current) && !qIsNaN(it.value().value))
@@ -17968,7 +17953,6 @@ QCPRange QCPCurve::getKeyRange(bool &foundRange, SignDomain inSignDomain) const
         }
       }
     }
-    ++it;
   }
   
   foundRange = haveLower && haveUpper;
@@ -17984,8 +17968,7 @@ QCPRange QCPCurve::getValueRange(bool &foundRange, SignDomain inSignDomain) cons
   
   double current;
   
-  QCPCurveDataMap::const_iterator it = mData->constBegin();
-  while (it != mData->constEnd())
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     current = it.value().value;
     if (!qIsNaN(current) && !qIsNaN(it.value().key))
@@ -18004,7 +17987,6 @@ QCPRange QCPCurve::getValueRange(bool &foundRange, SignDomain inSignDomain) cons
         }
       }
     }
-    ++it;
   }
   
   foundRange = haveLower && haveUpper;
@@ -18701,7 +18683,7 @@ void QCPBars::addData(const QVector<double> &keys, const QVector<double> &values
 */
 void QCPBars::removeDataBefore(double key)
 {
-  QCPBarDataMap::iterator it = mData->begin();
+  auto it = mData->begin();
   while (it != mData->end() && it.key() < key)
     it = mData->erase(it);
 }
@@ -18713,7 +18695,7 @@ void QCPBars::removeDataBefore(double key)
 void QCPBars::removeDataAfter(double key)
 {
   if (mData->isEmpty()) return;
-  QCPBarDataMap::iterator it = mData->upperBound(key);
+  auto it = mData->upperBound(key);
   while (it != mData->end())
     it = mData->erase(it);
 }
@@ -18728,8 +18710,8 @@ void QCPBars::removeDataAfter(double key)
 void QCPBars::removeData(double fromKey, double toKey)
 {
   if (fromKey >= toKey || mData->isEmpty()) return;
-  QCPBarDataMap::iterator it = mData->upperBound(fromKey);
-  QCPBarDataMap::iterator itEnd = mData->upperBound(toKey);
+  auto it = mData->upperBound(fromKey);
+  auto itEnd = mData->upperBound(toKey);
   while (it != itEnd)
     it = mData->erase(it);
 }
@@ -18782,9 +18764,9 @@ void QCPBars::draw(QCPPainter *painter)
   if (!mKeyAxis || !mValueAxis) { qDebug() << Q_FUNC_INFO << "invalid key or value axis"; return; }
   if (mData->isEmpty()) return;
   
-  QCPBarDataMap::const_iterator it, lower, upperEnd;
+  QCPBarDataMap::const_iterator lower, upperEnd;
   getVisibleDataBounds(lower, upperEnd);
-  for (it = lower; it != upperEnd; ++it)
+  for (auto it = lower; it != upperEnd; ++it)
   {
     // check data validity if flag set:
 #ifdef QCUSTOMPLOT_CHECK_DATA
@@ -18854,7 +18836,7 @@ void QCPBars::getVisibleDataBounds(QCPBarDataMap::const_iterator &lower, QCPBarD
   double upperPixelBound = mKeyAxis->coordToPixel(mKeyAxis->range().upper);
   bool isVisible = false;
   // walk left from lbound to find lower bar that actually is completely outside visible pixel range:
-  QCPBarDataMap::const_iterator it = lower;
+  auto it = lower;
   while (it != mData->constBegin())
   {
     --it;
@@ -18992,14 +18974,11 @@ double QCPBars::getStackedBaseValue(double key, bool positive) const
     double epsilon = qAbs(key)*1e-6; // should be safe even when changed to use float at some point
     if (key == 0)
       epsilon = 1e-6;
-    QCPBarDataMap::const_iterator it = mBarBelow->mData->lowerBound(key-epsilon);
-    QCPBarDataMap::const_iterator itEnd = mBarBelow->mData->upperBound(key+epsilon);
-    while (it != itEnd)
+    for (auto it = mBarBelow->mData->lowerBound(key-epsilon), itEnd = mBarBelow->mData->upperBound(key+epsilon); it != itEnd; ++it)
     {
       if ((positive && it.value().value > max) ||
           (!positive && it.value().value < max))
         max = it.value().value;
-      ++it;
     }
     // recurse down the bar-stack to find the total height:
     return max + mBarBelow->getStackedBaseValue(key, positive);
@@ -19052,8 +19031,7 @@ QCPRange QCPBars::getKeyRange(bool &foundRange, SignDomain inSignDomain) const
   bool haveUpper = false;
   
   double current;
-  QCPBarDataMap::const_iterator it = mData->constBegin();
-  while (it != mData->constEnd())
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     current = it.value().key;
     if (inSignDomain == sdBoth || (inSignDomain == sdNegative && current < 0) || (inSignDomain == sdPositive && current > 0))
@@ -19069,7 +19047,6 @@ QCPRange QCPBars::getKeyRange(bool &foundRange, SignDomain inSignDomain) const
         haveUpper = true;
       }
     }
-    ++it;
   }
   // determine exact range of bars by including bar width and barsgroup offset:
   if (haveLower && mKeyAxis)
@@ -19104,8 +19081,7 @@ QCPRange QCPBars::getValueRange(bool &foundRange, SignDomain inSignDomain) const
   bool haveUpper = true; // set to true, because baseValue should always be visible in bar charts
   double current;
   
-  QCPBarDataMap::const_iterator it = mData->constBegin();
-  while (it != mData->constEnd())
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     current = it.value().value + getStackedBaseValue(it.value().key, it.value().value >= 0);
     if (inSignDomain == sdBoth || (inSignDomain == sdNegative && current < 0) || (inSignDomain == sdPositive && current > 0))
@@ -19121,7 +19097,6 @@ QCPRange QCPBars::getValueRange(bool &foundRange, SignDomain inSignDomain) const
         haveUpper = true;
       }
     }
-    ++it;
   }
   
   foundRange = true; // return true because bar charts always have the 0-line visible
@@ -20865,7 +20840,7 @@ void QCPFinancial::addData(const QVector<double> &key, const QVector<double> &op
 */
 void QCPFinancial::removeDataBefore(double key)
 {
-  QCPFinancialDataMap::iterator it = mData->begin();
+  auto it = mData->begin();
   while (it != mData->end() && it.key() < key)
     it = mData->erase(it);
 }
@@ -20878,7 +20853,7 @@ void QCPFinancial::removeDataBefore(double key)
 void QCPFinancial::removeDataAfter(double key)
 {
   if (mData->isEmpty()) return;
-  QCPFinancialDataMap::iterator it = mData->upperBound(key);
+  auto it = mData->upperBound(key);
   while (it != mData->end())
     it = mData->erase(it);
 }
@@ -20893,8 +20868,8 @@ void QCPFinancial::removeDataAfter(double key)
 void QCPFinancial::removeData(double fromKey, double toKey)
 {
   if (fromKey >= toKey || mData->isEmpty()) return;
-  QCPFinancialDataMap::iterator it = mData->upperBound(fromKey);
-  QCPFinancialDataMap::iterator itEnd = mData->upperBound(toKey);
+  auto it = mData->upperBound(fromKey);
+  auto itEnd = mData->upperBound(toKey);
   while (it != itEnd)
     it = mData->erase(it);
 }
@@ -21087,8 +21062,7 @@ QCPRange QCPFinancial::getKeyRange(bool &foundRange, QCPAbstractPlottable::SignD
   bool haveUpper = false;
   
   double current;
-  QCPFinancialDataMap::const_iterator it = mData->constBegin();
-  while (it != mData->constEnd())
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     current = it.value().key;
     if (inSignDomain == sdBoth || (inSignDomain == sdNegative && current < 0) || (inSignDomain == sdPositive && current > 0))
@@ -21104,7 +21078,6 @@ QCPRange QCPFinancial::getKeyRange(bool &foundRange, QCPAbstractPlottable::SignD
         haveUpper = true;
       }
     }
-    ++it;
   }
   // determine exact range by including width of bars/flags:
   if (haveLower && mKeyAxis)
@@ -21122,8 +21095,7 @@ QCPRange QCPFinancial::getValueRange(bool &foundRange, QCPAbstractPlottable::Sig
   bool haveLower = false;
   bool haveUpper = false;
   
-  QCPFinancialDataMap::const_iterator it = mData->constBegin();
-  while (it != mData->constEnd())
+  for (auto it = mData->constBegin(); it != mData->constEnd(); ++it)
   {
     // high:
     if (inSignDomain == sdBoth || (inSignDomain == sdNegative && it.value().high < 0) || (inSignDomain == sdPositive && it.value().high > 0))
@@ -21153,7 +21125,6 @@ QCPRange QCPFinancial::getValueRange(bool &foundRange, QCPAbstractPlottable::Sig
         haveUpper = true;
       }
     }
-    ++it;
   }
   
   foundRange = haveLower && haveUpper;
@@ -21176,7 +21147,7 @@ void QCPFinancial::drawOhlcPlot(QCPPainter *painter, const QCPFinancialDataMap::
   
   if (keyAxis->orientation() == Qt::Horizontal)
   {
-    for (QCPFinancialDataMap::const_iterator it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       if (mSelected)
         linePen = mSelectedPen;
@@ -21198,7 +21169,7 @@ void QCPFinancial::drawOhlcPlot(QCPPainter *painter, const QCPFinancialDataMap::
     }
   } else
   {
-    for (QCPFinancialDataMap::const_iterator it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       if (mSelected)
         linePen = mSelectedPen;
@@ -21238,7 +21209,7 @@ void QCPFinancial::drawCandlestickPlot(QCPPainter *painter, const QCPFinancialDa
   
   if (keyAxis->orientation() == Qt::Horizontal)
   {
-    for (QCPFinancialDataMap::const_iterator it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       if (mSelected)
       {
@@ -21275,7 +21246,7 @@ void QCPFinancial::drawCandlestickPlot(QCPPainter *painter, const QCPFinancialDa
     }
   } else // keyAxis->orientation() == Qt::Vertical
   {
-    for (QCPFinancialDataMap::const_iterator it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       if (mSelected)
       {
@@ -21325,10 +21296,9 @@ double QCPFinancial::ohlcSelectTest(const QPointF &pos, const QCPFinancialDataMa
   if (!keyAxis || !valueAxis) { qDebug() << Q_FUNC_INFO << "invalid key or value axis"; return -1; }
 
   double minDistSqr = std::numeric_limits<double>::max();
-  QCPFinancialDataMap::const_iterator it;
   if (keyAxis->orientation() == Qt::Horizontal)
   {
-    for (it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       double keyPixel = keyAxis->coordToPixel(it.value().key);
       // calculate distance to backbone:
@@ -21338,7 +21308,7 @@ double QCPFinancial::ohlcSelectTest(const QPointF &pos, const QCPFinancialDataMa
     }
   } else // keyAxis->orientation() == Qt::Vertical
   {
-    for (it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       double keyPixel = keyAxis->coordToPixel(it.value().key);
       // calculate distance to backbone:
@@ -21363,10 +21333,9 @@ double QCPFinancial::candlestickSelectTest(const QPointF &pos, const QCPFinancia
   if (!keyAxis || !valueAxis) { qDebug() << Q_FUNC_INFO << "invalid key or value axis"; return -1; }
 
   double minDistSqr = std::numeric_limits<double>::max();
-  QCPFinancialDataMap::const_iterator it;
   if (keyAxis->orientation() == Qt::Horizontal)
   {
-    for (it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       double currentDistSqr;
       // determine whether pos is in open-close-box:
@@ -21390,7 +21359,7 @@ double QCPFinancial::candlestickSelectTest(const QPointF &pos, const QCPFinancia
     }
   } else // keyAxis->orientation() == Qt::Vertical
   {
-    for (it = begin; it != end; ++it)
+    for (auto it = begin; it != end; ++it)
     {
       double currentDistSqr;
       // determine whether pos is in open-close-box:
@@ -21443,8 +21412,8 @@ void QCPFinancial::getVisibleDataBounds(QCPFinancialDataMap::const_iterator &low
   }
   
   // get visible data range as QMap iterators
-  QCPFinancialDataMap::const_iterator lbound = mData->lowerBound(mKeyAxis->range().lower);
-  QCPFinancialDataMap::const_iterator ubound = mData->upperBound(mKeyAxis->range().upper);
+  auto lbound = mData->lowerBound(mKeyAxis->range().lower);
+  auto ubound = mData->upperBound(mKeyAxis->range().upper);
   bool lowoutlier = lbound != mData->constBegin(); // indicates whether there exist points below axis range
   bool highoutlier = ubound != mData->constEnd(); // indicates whether there exist points above axis range
   
@@ -23254,18 +23223,18 @@ void QCPItemTracer::updatePosition()
     {
       if (mGraph->data()->size() > 1)
       {
-        QCPDataMap::const_iterator first = mGraph->data()->constBegin();
-        QCPDataMap::const_iterator last = mGraph->data()->constEnd()-1;
+        auto first = mGraph->data()->constBegin();
+        auto last = mGraph->data()->constEnd()-1;
         if (mGraphKey < first.key())
           position->setCoords(first.key(), first.value().value);
         else if (mGraphKey > last.key())
           position->setCoords(last.key(), last.value().value);
         else
         {
-          QCPDataMap::const_iterator it = mGraph->data()->lowerBound(mGraphKey);
+          auto it = mGraph->data()->lowerBound(mGraphKey);
           if (it != first) // mGraphKey is somewhere between iterators
           {
-            QCPDataMap::const_iterator prevIt = it-1;
+            auto prevIt = it-1;
             if (mInterpolating)
             {
               // interpolate between iterators around mGraphKey:
@@ -23285,7 +23254,7 @@ void QCPItemTracer::updatePosition()
         }
       } else if (mGraph->data()->size() == 1)
       {
-        QCPDataMap::const_iterator it = mGraph->data()->constBegin();
+        auto it = mGraph->data()->constBegin();
         position->setCoords(it.key(), it.value().value);
       } else
         qDebug() << Q_FUNC_INFO << "graph has no data";

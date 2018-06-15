@@ -198,9 +198,8 @@ void StelModuleMgr::setPluginLoadAtStartup(const QString& key, bool b)
 *************************************************************************/
 void StelModuleMgr::generateCallingLists()
 {
-	QMap<StelModule::StelModuleActionName, QList<StelModule*> >::iterator mc;
 	// For each actions (e.g. "draw", "update", etc..)
-	for(mc=callOrders.begin();mc!=callOrders.end();++mc)
+	for (auto mc = callOrders.begin(); mc != callOrders.end(); ++mc)
 	{
 		// Flush previous call orders
 		mc.value().clear();
@@ -287,7 +286,7 @@ QList<StelModuleMgr::PluginDescriptor> StelModuleMgr::getPluginsList()
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
 	conf->beginGroup("plugins_load_at_startup");
-	for (QMap<QString, StelModuleMgr::PluginDescriptor>::Iterator iter=pluginDescriptorList.begin();iter!=pluginDescriptorList.end();++iter)
+	for (auto iter = pluginDescriptorList.begin(); iter != pluginDescriptorList.end(); ++iter)
 	{
 		bool startByDefault = iter.value().info.startByDefault;
 		iter->loadAtStartup = conf->value(iter.key(), startByDefault).toBool();

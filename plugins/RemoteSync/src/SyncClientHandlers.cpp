@@ -233,13 +233,13 @@ bool ClientSelectionHandler::handleMessage(QDataStream &stream, SyncProtocol::tP
 	//this might cause problems if 2 objects of different types have the same name!
 	QList<StelObjectP> selection;
 
-	for(QList< QPair<QString,QString> >::iterator it = msg.selectedObjects.begin(); it!=msg.selectedObjects.end();++it)
+	for (const auto& selectedObject : msg.selectedObjects)
 	{
-		StelObjectP obj = objMgr->searchByID(it->first, it->second);
+		StelObjectP obj = objMgr->searchByID(selectedObject.first, selectedObject.second);
 		if(obj)
 			selection.append(obj);
 		else
-			qWarning()<<"Object not found"<<it->first<<it->second;
+			qWarning() << "Object not found" << selectedObject.first << selectedObject.second;
 	}
 
 	if(selection.isEmpty())

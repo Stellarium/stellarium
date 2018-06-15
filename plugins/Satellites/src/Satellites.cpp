@@ -1520,13 +1520,12 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 	
 	// Only those not in the loaded collection have remained
 	// (autoAddEnabled is not checked, because it's already in the flags)
-	QHash<QString, TleData>::const_iterator i;
-	for (i = newTleSets.begin(); i != newTleSets.end(); ++i)
+	for (const auto& tleData : newTleSets)
 	{
-		if (i.value().addThis)
+		if (tleData.addThis)
 		{
 			// Add the satellite...
-			if (add(i.value()))
+			if (add(tleData))
 				addedCount++;
 		}
 	}
@@ -1958,8 +1957,7 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		ssystem->getEarth()->computePosition(predictionJD);
 		pcore->update(0);
 
-		QMap<SatelliteP,SatDataStruct>::iterator i = iridiums.begin();
-		while (i != iridiums.end())
+		for (auto i = iridiums.begin(); i != iridiums.end(); ++i)
 		{
 			if ( i.value().nextJD<=predictionJD)
 			{
@@ -2033,7 +2031,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 				if (nextJD>i.value().nextJD)
 					nextJD = i.value().nextJD;
 			}
-			++i;
 		}
 		predictionJD = nextJD;
 	}

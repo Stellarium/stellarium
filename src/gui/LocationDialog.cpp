@@ -414,13 +414,12 @@ void LocationDialog::populateTimeZonesList()
 	QComboBox* timeZones = ui->timeZoneNameComboBox;
 	// Return a list of all the known time zone names (from Qt)
 	QStringList tzNames;
-	QList<QByteArray> tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
-	QList<QByteArray>::iterator i;
-	for (i = tzList.begin(); i!= tzList.end(); ++i)
+	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
+	for (const auto& tz : tzList)
 	{
-		tzNames.append(*i);
+		tzNames.append(tz);
 		// Activate this to get a list of known TZ names...
-		//qDebug() << "Qt/IANA TZ entry: " << *i;
+		//qDebug() << "Qt/IANA TZ entry: " << tz;
 	}
 
 	tzNames.sort();

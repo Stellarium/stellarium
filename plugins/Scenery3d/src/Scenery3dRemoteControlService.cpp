@@ -63,7 +63,7 @@ void Scenery3dRemoteControlService::get(const QByteArray &operation, const APIPa
 
 		QJsonObject obj;
 
-		for(QMap<QString,QString>::const_iterator it = map.constBegin(); it!=map.constEnd();++it)
+		for (auto it = map.constBegin(); it != map.constEnd(); ++it)
 		{
 			obj.insert(it.value(), StelTranslator::globalTranslator->qtranslate(it.key()));
 		}

@@ -163,8 +163,7 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 			StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 			StelObjectP obj = omgr->searchByName(name);
 			QVariantMap infoMap=StelObjectMgr::getObjectInfo(obj);
-			QVariantMap::const_iterator i;
-			for (i=infoMap.constBegin(); i!=infoMap.constEnd(); ++i)
+			for (auto i = infoMap.constBegin(); i != infoMap.constEnd(); ++i)
 				infoObj.insert(i.key(), i.value().toString());
 
 			// We make use of 2 extra values for linked applications. These govern sky brightness and can be used for ambient settings.

@@ -748,10 +748,9 @@ void StelVideoMgr::handleMetaDataChanged()
 		if (verbose)
 			qDebug() << "StelVideoMgr: " << id << ":  Following metadata are available:";
 		QStringList metadataList=videoObjects[id]->player->availableMetaData();
-		QStringList::const_iterator mdIter;
-		for (mdIter=metadataList.constBegin(); mdIter!=metadataList.constEnd(); ++mdIter)
+		for (const auto& md : metadataList)
 		{
-			QString key=(*mdIter).toLocal8Bit().constData();
+			QString key = md.toLocal8Bit().constData();
 			if (verbose)
 				qDebug() << "\t" << key << "==>" << videoObjects[id]->player->metaData(key);
 
@@ -798,8 +797,7 @@ void StelVideoMgr::handleMetaDataChanged(const QString & key, const QVariant & v
 // update() has only to deal with the faders in all videos, and (re)set positions and sizes of video windows.
 void StelVideoMgr::update(double deltaTime)
 {
-	QMap<QString, VideoPlayer*>::const_iterator voIter;
-	for (voIter=videoObjects.constBegin(); voIter!=videoObjects.constEnd(); ++voIter)
+	for (auto voIter = videoObjects.constBegin(); voIter != videoObjects.constEnd(); ++voIter)
 	{
 		QMediaPlayer::MediaStatus mediaStatus = (*voIter)->player->mediaStatus();
 		QString id=voIter.key();

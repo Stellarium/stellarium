@@ -119,10 +119,10 @@ void ShaderMgr::clearCache()
 
 	//iterate over the shaderContentCache - this contains the same amount of shaders as actually exist!
 	//the shaderCache could contain duplicate entries
-	for(t_ShaderContentCache::iterator it = m_shaderContentCache.begin();it!=m_shaderContentCache.end();++it)
+	for (auto* shader : m_shaderContentCache)
 	{
-		if((*it))
-			delete (*it);
+		if (shader)
+			delete shader;
 	}
 
 	m_shaderCache.clear();
@@ -132,7 +132,7 @@ void ShaderMgr::clearCache()
 
 QOpenGLShaderProgram* ShaderMgr::findOrLoadShader(uint flags)
 {
-	t_ShaderCache::iterator it = m_shaderCache.find(flags);
+	auto it = m_shaderCache.find(flags);
 
 	// This may also return Q_NULLPTR if the load failed.
 	//We wait until user explictly forces shader reload until we try again to avoid spamming errors.
@@ -321,7 +321,7 @@ bool ShaderMgr::preprocessShader(const QString &fileName, const uint flags, QByt
 			lineStream>>word;
 
 			//try to find it in our flags list
-			t_FeatureFlagStrings::iterator it = featureFlagsStrings.find(word);
+			auto it = featureFlagsStrings.find(word);
 			if(it!=featureFlagsStrings.end())
 			{
 				bool val = it.value() & flags;
@@ -461,7 +461,7 @@ void ShaderMgr::buildUniformCache(QOpenGLShaderProgram &program)
 
 		GLint loc = program.uniformLocation(str);
 
-		t_UniformStrings::iterator it = uniformStrings.find(str);
+		auto it = uniformStrings.find(str);
 
 		// This may also return Q_NULLPTR if the load failed.
 		//We wait until user explictly forces shader reload until we try again to avoid spamming errors.

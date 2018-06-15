@@ -891,14 +891,14 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 		for (int i=0;i<128;i++)
 		{
 			const float bV = StelSkyDrawer::indexToBV(i);
-			std::map<float,Vec3f>::const_iterator greater(color_map.upper_bound(bV));
+			auto greater = color_map.upper_bound(bV);
 			if (greater == color_map.begin())
 			{
 				colorTable[i] = greater->second;
 			}
 			else
 			{
-				std::map<float,Vec3f>::const_iterator less(greater);--less;
+				auto less = greater;--less;
 				if (greater == color_map.end())
 				{
 					colorTable[i] = less->second;

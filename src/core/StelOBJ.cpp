@@ -379,7 +379,7 @@ bool StelOBJ::parseFace(const ParseParams& params, const V3Vec& posList, const V
 		}
 
 		//check if the vertex is already in the vertex cache
-		VertexCache::const_iterator it = vertCache.find(v);
+		auto it = vertCache.find(v);
 		if(it!=vertCache.end())
 		{
 			//cache hit, reuse index

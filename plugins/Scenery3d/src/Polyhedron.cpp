@@ -102,7 +102,7 @@ void Polyhedron::intersect(const Plane &p)
 	QVector<Vec3f> intersectionPoints;
 
 	//Iterate over this polyhedron's polygons
-	for(QVector<SPolygon>::iterator it = polygons.begin(); it != polygons.end();)
+	for (auto it = polygons.begin(); it != polygons.end();)
 	{
 		//Retrive the polygon and intersect it with the specified plane, save the intersection points
 		(*it).intersect(p, intersectionPoints);

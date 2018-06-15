@@ -284,13 +284,13 @@ void OctahedronPolygon::projectOnOctahedron(QVarLengthArray<QVector<SubContour>,
 
 	for (int i=0;i<8;++i)
 	{
-		for (QVector<SubContour>::Iterator iter=subs[i].begin();iter!=subs[i].end();++iter)
+		for (auto& sub : subs[i])
 		{
-			for (SubContour::Iterator v=iter->begin();v!=iter->end();++v)
+			for (auto& v : sub)
 			{
 				// Project on the face with aperture = 90 deg
-				v->vertex *= 1./(sideDirections[i]*v->vertex);
-				v->vertex[2]=0.;
+				v.vertex *= 1./(sideDirections[i]*v.vertex);
+				v.vertex[2]=0.;
 				// May want to add offsets after that to map TOAST projection
 			}
 		}

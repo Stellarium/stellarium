@@ -180,7 +180,7 @@ QString StarMgr::getCommonName(int hip)
 	if (cmgr->getConstellationDisplayStyle() == ConstellationMgr::constellationsNative)
 		return getCommonEnglishName(hip);
 
-	QHash<int,QString>::const_iterator it(commonNamesMapI18n.find(hip));
+	auto it = commonNamesMapI18n.find(hip);
 	if (it!=commonNamesMapI18n.end())
 		return it.value();
 	return QString();
@@ -188,7 +188,7 @@ QString StarMgr::getCommonName(int hip)
 
 QString StarMgr::getAdditionalNames(int hip)
 {
-	QHash<int,QString>::const_iterator it(additionalNamesMapI18n.find(hip));
+	auto it = additionalNamesMapI18n.find(hip);
 	if (it!=additionalNamesMapI18n.end())
 		return it.value();
 	return QString();
@@ -196,7 +196,7 @@ QString StarMgr::getAdditionalNames(int hip)
 
 QString StarMgr::getAdditionalEnglishNames(int hip)
 {
-	QHash<int,QString>::const_iterator it(additionalNamesMap.find(hip));
+	auto it = additionalNamesMap.find(hip);
 	if (it!=additionalNamesMap.end())
 		return it.value();
 	return QString();
@@ -204,7 +204,7 @@ QString StarMgr::getAdditionalEnglishNames(int hip)
 
 QString StarMgr::getCommonEnglishName(int hip)
 {
-	QHash<int,QString>::const_iterator it(commonNamesMap.find(hip));
+	auto it = commonNamesMap.find(hip);
 	if (it!=commonNamesMap.end())
 		return it.value();
 	return QString();
@@ -213,7 +213,7 @@ QString StarMgr::getCommonEnglishName(int hip)
 
 QString StarMgr::getSciName(int hip)
 {
-	QHash<int,QString>::const_iterator it(sciNamesMapI18n.find(hip));
+	auto it = sciNamesMapI18n.find(hip);
 	if (it!=sciNamesMapI18n.end())
 		return it.value();
 	return QString();
@@ -221,7 +221,7 @@ QString StarMgr::getSciName(int hip)
 
 QString StarMgr::getSciAdditionalName(int hip)
 {
-	QHash<int,QString>::const_iterator it(sciAdditionalNamesMapI18n.find(hip));
+	auto it = sciAdditionalNamesMapI18n.find(hip);
 	if (it!=sciAdditionalNamesMapI18n.end())
 		return it.value();
 	return QString();
@@ -230,7 +230,7 @@ QString StarMgr::getSciAdditionalName(int hip)
 QString StarMgr::getCrossIdentificationDesignations(QString hip)
 {
 	QString designations;
-	QMap<QString, crossid>::const_iterator cr(crossIdMap.find(hip));
+	auto cr = crossIdMap.find(hip);
 	if (cr==crossIdMap.end() && hip.right(1).toUInt()==0)
 		cr = crossIdMap.find(hip.left(hip.size()-1));
 
@@ -262,7 +262,7 @@ QString StarMgr::getCrossIdentificationDesignations(QString hip)
 
 QString StarMgr::getWdsName(int hip)
 {
-	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
 		return QString("WDS J%1").arg(it.value().designation);
 	return QString();
@@ -270,7 +270,7 @@ QString StarMgr::getWdsName(int hip)
 
 int StarMgr::getWdsLastObservation(int hip)
 {
-	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
 		return it.value().observation;
 	return 0;
@@ -278,7 +278,7 @@ int StarMgr::getWdsLastObservation(int hip)
 
 int StarMgr::getWdsLastPositionAngle(int hip)
 {
-	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
 		return it.value().positionAngle;
 	return 0;
@@ -286,7 +286,7 @@ int StarMgr::getWdsLastPositionAngle(int hip)
 
 float StarMgr::getWdsLastSeparation(int hip)
 {
-	QHash<int,wds>::const_iterator it(wdsStarsMapI18n.find(hip));
+	auto it = wdsStarsMapI18n.find(hip);
 	if (it!=wdsStarsMapI18n.end())
 		return it.value().separation;
 	return 0.f;
@@ -294,7 +294,7 @@ float StarMgr::getWdsLastSeparation(int hip)
 
 QString StarMgr::getGcvsName(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().designation;
 	return QString();
@@ -302,7 +302,7 @@ QString StarMgr::getGcvsName(int hip)
 
 QString StarMgr::getGcvsVariabilityType(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().vtype;
 	return QString();
@@ -310,7 +310,7 @@ QString StarMgr::getGcvsVariabilityType(int hip)
 
 float StarMgr::getGcvsMaxMagnitude(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().maxmag;
 	return -99.f;
@@ -318,7 +318,7 @@ float StarMgr::getGcvsMaxMagnitude(int hip)
 
 int StarMgr::getGcvsMagnitudeFlag(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().mflag;
 	return 0;
@@ -327,7 +327,7 @@ int StarMgr::getGcvsMagnitudeFlag(int hip)
 
 float StarMgr::getGcvsMinMagnitude(int hip, bool firstMinimumFlag)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 	{
 		if (firstMinimumFlag)
@@ -344,7 +344,7 @@ float StarMgr::getGcvsMinMagnitude(int hip, bool firstMinimumFlag)
 
 QString StarMgr::getGcvsPhotometricSystem(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().photosys;
 	return QString();
@@ -352,7 +352,7 @@ QString StarMgr::getGcvsPhotometricSystem(int hip)
 
 double StarMgr::getGcvsEpoch(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().epoch;
 	return -99.f;
@@ -360,7 +360,7 @@ double StarMgr::getGcvsEpoch(int hip)
 
 double StarMgr::getGcvsPeriod(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().period;
 	return -99.f;
@@ -368,7 +368,7 @@ double StarMgr::getGcvsPeriod(int hip)
 
 int StarMgr::getGcvsMM(int hip)
 {
-	QHash<int,varstar>::const_iterator it(varStarsMapI18n.find(hip));
+	auto it = varStarsMapI18n.find(hip);
 	if (it!=varStarsMapI18n.end())
 		return it.value().Mm;
 	return -99;
@@ -1320,7 +1320,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
-		QMap<int, int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
+		auto sao = saoStarsIndex.find(rx2.capturedTexts().at(2).toInt());
 		if (sao!=saoStarsIndex.end())
 			return searchHP(sao.value());
 	}
@@ -1329,7 +1329,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
-		QMap<int, int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
+		auto hd = hdStarsIndex.find(rx3.capturedTexts().at(2).toInt());
 		if (hd!=hdStarsIndex.end())
 			return searchHP(hd.value());
 	}
@@ -1338,13 +1338,13 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
-		QMap<int, int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		auto hr = hrStarsIndex.find(rx4.capturedTexts().at(2).toInt());
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
 
 	// Search by I18n common name
-	QMap<QString,int>::const_iterator it(commonNamesIndexI18n.find(objw));
+	auto it = commonNamesIndexI18n.find(objw);
 	if (it!=commonNamesIndexI18n.end())
 	{
 		return searchHP(it.value());
@@ -1353,7 +1353,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	if (getFlagAdditionalNames())
 	{
 		// Search by I18n additional common names
-		QMap<QString,int>::const_iterator ita(additionalNamesIndexI18n.find(objw));
+		auto ita = additionalNamesIndexI18n.find(objw);
 		if (ita!=additionalNamesIndexI18n.end())
 		{
 			return searchHP(ita.value());
@@ -1361,7 +1361,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 	}
 
 	// Search by sci name
-	QMap<QString,int>::const_iterator it2 = sciNamesIndexI18n.find(objw);
+	auto it2 = sciNamesIndexI18n.find(objw);
 	if (it2!=sciNamesIndexI18n.end())
 	{
 		return searchHP(it2.value());
@@ -1369,7 +1369,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 
 
 	// Search by additional sci name
-	QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
+	auto it3 = sciAdditionalNamesIndexI18n.find(objw);
 	if (it3!=sciAdditionalNamesIndexI18n.end())
 	{
 		return searchHP(it3.value());
@@ -1377,14 +1377,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 
 
 	// Search by GCVS name
-	QMap<QString,int>::const_iterator it4 = varStarsIndexI18n.find(objw);
+	auto it4 = varStarsIndexI18n.find(objw);
 	if (it4!=varStarsIndexI18n.end())
 	{
 		return searchHP(it4.value());
 	}
 
 	// Search by WDS name
-	QMap<QString,int>::const_iterator wdsIt = wdsStarsIndexI18n.find(objw);
+	auto wdsIt = wdsStarsIndexI18n.find(objw);
 	if (wdsIt!=wdsStarsIndexI18n.end())
 	{
 		return searchHP(wdsIt.value());
@@ -1409,7 +1409,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
-		QMap<int, int>::const_iterator sao(saoStarsIndex.find(rx2.capturedTexts().at(2).toInt()));
+		auto sao = saoStarsIndex.find(rx2.capturedTexts().at(2).toInt());
 		if (sao!=saoStarsIndex.end())
 			return searchHP(sao.value());
 	}
@@ -1418,7 +1418,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
-		QMap<int, int>::const_iterator hd(hdStarsIndex.find(rx3.capturedTexts().at(2).toInt()));
+		auto hd = hdStarsIndex.find(rx3.capturedTexts().at(2).toInt());
 		if (hd!=hdStarsIndex.end())
 			return searchHP(hd.value());
 	}
@@ -1427,13 +1427,13 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
-		QMap<int, int>::const_iterator hr(hrStarsIndex.find(rx4.capturedTexts().at(2).toInt()));
+		auto hr = hrStarsIndex.find(rx4.capturedTexts().at(2).toInt());
 		if (hr!=hrStarsIndex.end())
 			return searchHP(hr.value());
 	}
 
 	// Search by English common name
-	QMap<QString,int>::const_iterator it(commonNamesIndex.find(objw));
+	auto it = commonNamesIndex.find(objw);
 	if (it!=commonNamesIndex.end())
 	{
 		return searchHP(it.value());
@@ -1442,7 +1442,7 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	if (getFlagAdditionalNames())
 	{
 		// Search by English additional common names
-		QMap<QString,int>::const_iterator ita(additionalNamesIndex.find(objw));
+		auto ita = additionalNamesIndex.find(objw);
 		if (ita!=additionalNamesIndex.end())
 		{
 			return searchHP(ita.value());
@@ -1450,14 +1450,14 @@ StelObjectP StarMgr::searchByName(const QString& name) const
 	}
 
 	// Search by sci name
-	QMap<QString,int>::const_iterator it2 = sciNamesIndexI18n.find(objw);
+	auto it2 = sciNamesIndexI18n.find(objw);
 	if (it2!=sciNamesIndexI18n.end())
 	{
 		return searchHP(it2.value());
 	}
 
 	// Search by additional sci name
-	QMap<QString,int>::const_iterator it3 = sciAdditionalNamesIndexI18n.find(objw);
+	auto it3 = sciAdditionalNamesIndexI18n.find(objw);
 	if (it3!=sciAdditionalNamesIndexI18n.end())
 	{
 		return searchHP(it3.value());
@@ -1490,7 +1490,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	// Search for common names
 	if (useStartOfWords)
 	{
-		for (QMap<QString,int>::const_iterator it(cNamesIdx.lowerBound(objw)); it!=cNamesIdx.end(); ++it)
+		for (auto it = cNamesIdx.lowerBound(objw); it != cNamesIdx.end(); ++it)
 		{
 			if (it.key().startsWith(objw))
 			{
@@ -1502,7 +1502,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			else
 				break;
 		}
-		for (QMap<QString,int>::const_iterator ita(aNamesIdx.lowerBound(objw)); ita!=aNamesIdx.end(); ++ita)
+		for (auto ita = aNamesIdx.lowerBound(objw); ita != aNamesIdx.end(); ++ita)
 		{
 			if (ita.key().startsWith(objw))
 			{
@@ -1567,7 +1567,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	if (objw.at(0).unicode() >= 0x0391 && objw.at(0).unicode() <= 0x03A9)
 		bayerRegEx.setPattern(bayerPattern.insert(1,"\\d?"));
 
-	for (QMap<QString,int>::const_iterator it(sciNamesIndexI18n.lowerBound(objw)); it!=sciNamesIndexI18n.end(); ++it)
+	for (auto it = sciNamesIndexI18n.lowerBound(objw); it != sciNamesIndexI18n.end(); ++it)
 	{
 		if (it.key().indexOf(bayerRegEx)==0)
 		{
@@ -1580,7 +1580,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			break;
 	}
 
-	for (QMap<QString,int>::const_iterator it(sciAdditionalNamesIndexI18n.lowerBound(objw)); it!=sciAdditionalNamesIndexI18n.end(); ++it)
+	for (auto it = sciAdditionalNamesIndexI18n.lowerBound(objw); it != sciAdditionalNamesIndexI18n.end(); ++it)
 	{
 		if (it.key().indexOf(bayerRegEx)==0)
 		{
@@ -1594,7 +1594,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	}
 
 	// Search for sci names for var stars
-	for (QMap<QString,int>::const_iterator it(varStarsIndexI18n.lowerBound(objw)); it!=varStarsIndexI18n.end(); ++it)
+	for (auto it = varStarsIndexI18n.lowerBound(objw); it != varStarsIndexI18n.end(); ++it)
 	{
 		if (it.key().startsWith(objw))
 		{
@@ -1632,7 +1632,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		bool ok;
 		int saoNum = saoRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int, int>::const_iterator sao(saoStarsIndex.find(saoNum));
+		auto sao = saoStarsIndex.find(saoNum);
 		if (sao!=saoStarsIndex.end())
 		{
 			StelObjectP s = searchHP(sao.value());
@@ -1651,7 +1651,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		bool ok;
 		int hdNum = hdRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int, int>::const_iterator hd(hdStarsIndex.find(hdNum));
+		auto hd = hdStarsIndex.find(hdNum);
 		if (hd!=hdStarsIndex.end())
 		{
 			StelObjectP s = searchHP(hd.value());
@@ -1670,7 +1670,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	{
 		bool ok;
 		int hrNum = hrRx.capturedTexts().at(2).toInt(&ok);
-		QMap<int, int>::const_iterator hr(hrStarsIndex.find(hrNum));
+		auto hr = hrStarsIndex.find(hrNum);
 		if (hr!=hrStarsIndex.end())
 		{
 			StelObjectP s = searchHP(hr.value());
@@ -1688,7 +1688,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 	wdsRx.setCaseSensitivity(Qt::CaseInsensitive);
 	if (wdsRx.exactMatch(objw))
 	{
-		for (QMap<QString,int>::const_iterator wds(wdsStarsIndexI18n.lowerBound(objw)); wds!=wdsStarsIndexI18n.end(); ++wds)
+		for (auto wds = wdsStarsIndexI18n.lowerBound(objw); wds != wdsStarsIndexI18n.end(); ++wds)
 		{
 			if (wds.key().startsWith(objw))
 			{

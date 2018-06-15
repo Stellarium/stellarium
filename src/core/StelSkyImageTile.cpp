@@ -93,7 +93,7 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 
 	// Draw in the good order
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	QMap<double, StelSkyImageTile*>::Iterator i = result.end();
+	auto i = result.end();
 	while (i!=result.begin())
 	{
 		--i;
@@ -506,15 +506,15 @@ void StelSkyImageTile::loadFromQVariantMap(const QVariantMap& map)
 	// This is a list of URLs to the child tiles or a list of already loaded map containing child information
 	// (in this later case, the StelSkyImageTile objects will be created later)
 	subTilesUrls = map.value("subTiles").toList();
-	for (QVariantList::Iterator i=subTilesUrls.begin(); i!=subTilesUrls.end();++i)
+	for (auto& variant : subTilesUrls)
 	{
-		if (i->type()==QVariant::Map)
+		if (variant.type() == QVariant::Map)
 		{
 			// Check if the JSON object is a reference, i.e. if it contains a $ref key
-			QVariantMap m = i->toMap();
+			QVariantMap m = variant.toMap();
 			if (m.size()==1 && m.contains("$ref"))
 			{
-				*i=QString(m["$ref"].toString());
+				variant = QString(m["$ref"].toString());
 			}
 		}
 	}
