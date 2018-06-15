@@ -126,12 +126,10 @@ IPState BaseDevice::getPropertyState(const char *name)
     ILightVectorProperty *lvp;
     IBLOBVectorProperty *bvp;
 
-    std::vector<INDI::Property *>::iterator orderi = pAll.begin();
-
-    for (; orderi != pAll.end(); ++orderi)
+    for (auto* prop : pAll)
     {
-        pType = (*orderi)->getType();
-        pPtr  = (*orderi)->getProperty();
+        pType = prop->getType();
+        pPtr  = prop->getProperty();
 
         switch (pType)
         {
@@ -190,12 +188,10 @@ IPerm BaseDevice::getPropertyPermission(const char *name)
     ISwitchVectorProperty *svp;
     IBLOBVectorProperty *bvp;
 
-    std::vector<INDI::Property *>::iterator orderi = pAll.begin();
-
-    for (; orderi != pAll.end(); ++orderi)
+    for (auto* prop : pAll)
     {
-        pType = (*orderi)->getType();
-        pPtr  = (*orderi)->getProperty();
+        pType = prop->getType();
+        pPtr  = prop->getProperty();
 
         switch (pType)
         {
@@ -241,19 +237,17 @@ void *BaseDevice::getRawProperty(const char *name, INDI_PROPERTY_TYPE type)
     void *pPtr = nullptr;
     bool pRegistered = false;
 
-    std::vector<INDI::Property *>::iterator orderi = pAll.begin();
-
     INumberVectorProperty *nvp = nullptr;
     ITextVectorProperty *tvp = nullptr;
     ISwitchVectorProperty *svp = nullptr;
     ILightVectorProperty *lvp = nullptr;
     IBLOBVectorProperty *bvp = nullptr;
 
-    for (; orderi != pAll.end(); ++orderi)
+    for (auto* prop : pAll)
     {
-        pType       = (*orderi)->getType();
-        pPtr        = (*orderi)->getProperty();
-        pRegistered = (*orderi)->getRegistered();
+        pType       = prop->getType();
+        pPtr        = prop->getProperty();
+        pRegistered = prop->getRegistered();
 
         if (type != INDI_UNKNOWN && pType != type)
             continue;
@@ -314,19 +308,17 @@ INDI::Property *BaseDevice::getProperty(const char *name, INDI_PROPERTY_TYPE typ
     void *pPtr;
     bool pRegistered = false;
 
-    std::vector<INDI::Property *>::iterator orderi;
-
     INumberVectorProperty *nvp;
     ITextVectorProperty *tvp;
     ISwitchVectorProperty *svp;
     ILightVectorProperty *lvp;
     IBLOBVectorProperty *bvp;
 
-    for (orderi = pAll.begin(); orderi != pAll.end(); ++orderi)
+    for (auto* prop : pAll)
     {
-        pType       = (*orderi)->getType();
-        pPtr        = (*orderi)->getProperty();
-        pRegistered = (*orderi)->getRegistered();
+        pType       = prop->getType();
+        pPtr        = prop->getProperty();
+        pRegistered = prop->getRegistered();
 
         if (type != INDI_UNKNOWN && pType != type)
             continue;
@@ -339,7 +331,7 @@ INDI::Property *BaseDevice::getProperty(const char *name, INDI_PROPERTY_TYPE typ
                     continue;
 
                 if (!strcmp(name, nvp->name) && pRegistered)
-                    return *orderi;
+                    return prop;
                 break;
             case INDI_TEXT:
                 tvp = static_cast<ITextVectorProperty *>(pPtr);
@@ -347,7 +339,7 @@ INDI::Property *BaseDevice::getProperty(const char *name, INDI_PROPERTY_TYPE typ
                     continue;
 
                 if (!strcmp(name, tvp->name) && pRegistered)
-                    return *orderi;
+                    return prop;
                 break;
             case INDI_SWITCH:
                 svp = static_cast<ISwitchVectorProperty *>(pPtr);
@@ -356,7 +348,7 @@ INDI::Property *BaseDevice::getProperty(const char *name, INDI_PROPERTY_TYPE typ
 
                 //IDLog("Switch %s and aux value is now %d\n", svp->name, regStatus );
                 if (!strcmp(name, svp->name) && pRegistered)
-                    return *orderi;
+                    return prop;
                 break;
             case INDI_LIGHT:
                 lvp = static_cast<ILightVectorProperty *>(pPtr);
@@ -364,7 +356,7 @@ INDI::Property *BaseDevice::getProperty(const char *name, INDI_PROPERTY_TYPE typ
                     continue;
 
                 if (!strcmp(name, lvp->name) && pRegistered)
-                    return *orderi;
+                    return prop;
                 break;
             case INDI_BLOB:
                 bvp = static_cast<IBLOBVectorProperty *>(pPtr);
@@ -372,7 +364,7 @@ INDI::Property *BaseDevice::getProperty(const char *name, INDI_PROPERTY_TYPE typ
                     continue;
 
                 if (!strcmp(name, bvp->name) && pRegistered)
-                    return *orderi;
+                    return prop;
                 break;
             case INDI_UNKNOWN:
                 break;
@@ -384,8 +376,6 @@ INDI::Property *BaseDevice::getProperty(const char *name, INDI_PROPERTY_TYPE typ
 
 int BaseDevice::removeProperty(const char *name, char *errmsg)
 {
-    std::vector<INDI::Property *>::iterator orderi;
-
     INDI_PROPERTY_TYPE pType;
     void *pPtr;
 
@@ -395,10 +385,11 @@ int BaseDevice::removeProperty(const char *name, char *errmsg)
     ILightVectorProperty *lvp;
     IBLOBVectorProperty *bvp;
 
-    for (orderi = pAll.begin(); orderi != pAll.end(); ++orderi)
+    for (auto orderi = pAll.begin(); orderi != pAll.end(); ++orderi)
     {
-        pType = (*orderi)->getType();
-        pPtr  = (*orderi)->getProperty();
+        auto* prop = *orderi;
+        pType = prop->getType();
+        pPtr  = prop->getProperty();
 
         switch (pType)
         {
@@ -406,10 +397,9 @@ int BaseDevice::removeProperty(const char *name, char *errmsg)
                 nvp = static_cast<INumberVectorProperty *>(pPtr);
                 if (!strcmp(name, nvp->name))
                 {
-                    (*orderi)->setRegistered(false);
-                    delete *orderi;
+                    prop->setRegistered(false);
+                    delete prop;
                     orderi = pAll.erase(orderi);
-
                     return 0;
                 }
                 break;
@@ -417,10 +407,9 @@ int BaseDevice::removeProperty(const char *name, char *errmsg)
                 tvp = static_cast<ITextVectorProperty *>(pPtr);
                 if (!strcmp(name, tvp->name))
                 {
-                    (*orderi)->setRegistered(false);
-                    delete *orderi;
+                    prop->setRegistered(false);
+                    delete prop;
                     orderi = pAll.erase(orderi);
-
                     return 0;
                 }
                 break;
@@ -428,8 +417,8 @@ int BaseDevice::removeProperty(const char *name, char *errmsg)
                 svp = static_cast<ISwitchVectorProperty *>(pPtr);
                 if (!strcmp(name, svp->name))
                 {
-                    (*orderi)->setRegistered(false);
-                    delete *orderi;
+                    prop->setRegistered(false);
+                    delete prop;
                     orderi = pAll.erase(orderi);
                     return 0;
                 }
@@ -438,8 +427,8 @@ int BaseDevice::removeProperty(const char *name, char *errmsg)
                 lvp = static_cast<ILightVectorProperty *>(pPtr);
                 if (!strcmp(name, lvp->name))
                 {
-                    (*orderi)->setRegistered(false);
-                    delete *orderi;
+                    prop->setRegistered(false);
+                    delete prop;
                     orderi = pAll.erase(orderi);
                     return 0;
                 }
@@ -448,8 +437,8 @@ int BaseDevice::removeProperty(const char *name, char *errmsg)
                 bvp = static_cast<IBLOBVectorProperty *>(pPtr);
                 if (!strcmp(name, bvp->name))
                 {
-                    (*orderi)->setRegistered(false);
-                    delete *orderi;
+                    prop->setRegistered(false);
+                    delete prop;
                     orderi = pAll.erase(orderi);
                     return 0;
                 }
@@ -1255,7 +1244,7 @@ void BaseDevice::addMessage(const std::string& msg)
     messageLog.push_back(msg);
 
     if (mediator)
-        mediator->newMessage(this, messageLog.size() - 1);
+        mediator->newMessage(this, static_cast<int>(messageLog.size() - 1));
 }
 
 std::string BaseDevice::messageQueue(int index) const

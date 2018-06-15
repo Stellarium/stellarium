@@ -38,9 +38,9 @@ APIController::~APIController()
 
 void APIController::update(double deltaTime)
 {
-	for(ServiceMap::iterator it = m_serviceMap.begin();it!=m_serviceMap.end();++it)
+	for (auto& service : m_serviceMap)
 	{
-		(*it)->update(deltaTime);
+		service->update(deltaTime);
 	}
 }
 
@@ -89,7 +89,7 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	}
 
 	//try to find service
-	ServiceMap::iterator it = m_serviceMap.find(serviceString);
+	auto it = m_serviceMap.find(serviceString);
 	if(it!=m_serviceMap.end())
 	{
 		RemoteControlServiceInterface* sv = *it;
@@ -149,7 +149,7 @@ void APIController::service(HttpRequest &request, HttpResponse &response)
 	{
 		response.setStatus(400,"Bad Request");
 		QString str(QStringLiteral("Unknown service: '%1'\n\nAvailable services:\n").arg(QString::fromUtf8(pathWithoutPrefix)));
-		for(ServiceMap::iterator it = m_serviceMap.begin();it!=m_serviceMap.end();++it)
+		for (auto it = m_serviceMap.begin(); it != m_serviceMap.end(); ++it)
 		{
 			str.append(QString::fromUtf8(it.key()));
 			str.append("\n");

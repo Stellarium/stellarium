@@ -42,9 +42,8 @@ void StelPropertyService::get(const QByteArray& operation, const APIParameters &
 	{
 		QJsonObject rootObj;
 
-		const StelPropertyMgr::StelPropertyMap& map = propMgr->getPropertyMap();
-		for(StelPropertyMgr::StelPropertyMap::const_iterator it = map.constBegin();
-		    it!=map.constEnd();++it)
+		const auto& map = propMgr->getPropertyMap();
+		for (auto it = map.constBegin(); it != map.constEnd(); ++it)
 		{
 			QJsonObject item;
 			const StelProperty* prop = *it;

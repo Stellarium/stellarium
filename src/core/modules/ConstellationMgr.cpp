@@ -70,19 +70,15 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 
 ConstellationMgr::~ConstellationMgr()
 {
-	std::vector<Constellation *>::iterator iter;
-
-	for (iter = constellations.begin(); iter != constellations.end(); iter++)
+	for (auto* constellation : constellations)
 	{
-		delete(*iter);
+		delete constellation;
 	}
 
-	vector<vector<Vec3d> *>::iterator iter1;
-	for (iter1 = allBoundarySegments.begin(); iter1 != allBoundarySegments.end(); ++iter1)
+	for (auto* segment : allBoundarySegments)
 	{
-		delete (*iter1);
+		delete segment;
 	}
-	allBoundarySegments.clear();
 }
 
 void ConstellationMgr::init()
@@ -403,9 +399,8 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 	in.seek(0);
 
 	// delete existing data, if any
-	vector < Constellation * >::iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
-		delete(*iter);
+	for (auto* constellation : constellations)
+		delete constellation;
 
 	constellations.clear();
 	Constellation *cons = Q_NULLPTR;
@@ -596,11 +591,10 @@ void ConstellationMgr::drawArt(StelPainter& sPainter) const
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setCullFace(true);
 
-	vector < Constellation * >::const_iterator iter;
 	SphericalRegionP region = sPainter.getProjector()->getViewportConvexPolygon();
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		(*iter)->drawArtOptim(sPainter, *region);
+		constellation->drawArtOptim(sPainter, *region);
 	}
 
 	sPainter.setCullFace(false);
@@ -615,10 +609,9 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 	sPainter.setLineSmooth(true);
 
 	const SphericalCap& viewportHalfspace = sPainter.getProjector()->getBoundingCap();
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		(*iter)->drawOptim(sPainter, core, viewportHalfspace);
+		constellation->drawOptim(sPainter, core, viewportHalfspace);
 	}
 	if (constellationLineThickness>1)
 		sPainter.setLineWidth(1); // restore line thickness
@@ -629,24 +622,22 @@ void ConstellationMgr::drawLines(StelPainter& sPainter, const StelCore* core) co
 void ConstellationMgr::drawNames(StelPainter& sPainter) const
 {
 	sPainter.setBlending(true);
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); iter++)
+	for (auto* constellation : constellations)
 	{
 		// Check if in the field of view
-		if (sPainter.getProjector()->projectCheck((*iter)->XYZname, (*iter)->XYname))
-			(*iter)->drawName(sPainter, constellationDisplayStyle);
+		if (sPainter.getProjector()->projectCheck(constellation->XYZname, constellation->XYname))
+			constellation->drawName(sPainter, constellationDisplayStyle);
 	}
 }
 
 Constellation *ConstellationMgr::isStarIn(const StelObject* s) const
 {
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
 		// Check if the star is in one of the constellation
-		if ((*iter)->isStarIn(s))
+		if (constellation->isStarIn(s))
 		{
-			return (*iter);
+			return constellation;
 		}
 	}
 	return Q_NULLPTR;
@@ -657,17 +648,16 @@ Constellation* ConstellationMgr::findFromAbbreviation(const QString& abbreviatio
 	// search in uppercase only
 	//QString tname = abbreviation.toUpper();
 
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		//if ((*iter)->abbreviation.toUpper() == tname)
-		if ((*iter)->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
+		//if (constellation->abbreviation.toUpper() == tname)
+		if (constellation->abbreviation.compare(abbreviation, Qt::CaseInsensitive) == 0)
 		{
-			//if ((*iter)->abbreviation != abbreviation)
-			//	qDebug() << "ConstellationMgr::findFromAbbreviation: not a perfect match, but sufficient:" << (*iter)->abbreviation << "vs." << abbreviation;
-			return (*iter);
+			//if (constellation->abbreviation != abbreviation)
+			//	qDebug() << "ConstellationMgr::findFromAbbreviation: not a perfect match, but sufficient:" << constellation->abbreviation << "vs." << abbreviation;
+			return constellation;
 		}
-		//else qDebug() << "Comparison mismatch: " << abbreviation << "vs." << (*iter)->abbreviation;
+		//else qDebug() << "Comparison mismatch: " << abbreviation << "vs." << constellation->abbreviation;
 	}
 	return Q_NULLPTR;
 }
@@ -684,10 +674,9 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	if (constellations.empty()) return;
 
 	// clear previous names
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		(*iter)->englishName.clear();
+		constellation->englishName.clear();
 	}
 
 	// Open file
@@ -775,12 +764,11 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 		flag = false;
 
 	// clear previous names
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		(*iter)->beginSeason = 1;
-		(*iter)->endSeason = 12;
-		(*iter)->seasonalRuleEnabled = flag;
+		constellation->beginSeason = 1;
+		constellation->endSeason = 12;
+		constellation->seasonalRuleEnabled = flag;
 	}
 
 	// Current starlore didn't support the seasonal rules
@@ -850,10 +838,9 @@ void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
 void ConstellationMgr::updateI18n()
 {
 	const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		(*iter)->nameI18 = trans.qtranslate((*iter)->englishName, (*iter)->context);
+		constellation->nameI18 = trans.qtranslate(constellation->englishName, constellation->context);
 	}
 }
 
@@ -864,11 +851,10 @@ void ConstellationMgr::update(double deltaTime)
 	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
 	Constellation::artIntensityFovScale = qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0);
 
-	vector < Constellation * >::const_iterator iter;
 	const int delta = (int)(deltaTime*1000);
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		(*iter)->update(delta);
+		constellation->update(delta);
 	}
 }
 
@@ -878,10 +864,9 @@ void ConstellationMgr::setArtIntensity(const float intensity)
 	{
 		artIntensity = intensity;
 
-		vector < Constellation * >::const_iterator iter;
-		for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+		for (auto* constellation : constellations)
 		{
-			(*iter)->artOpacity = artIntensity;
+			constellation->artOpacity = artIntensity;
 		}
 
 		emit artIntensityChanged(intensity);
@@ -919,10 +904,9 @@ void ConstellationMgr::setArtFadeDuration(const float duration)
 	{
 		artFadeDuration = duration;
 
-		vector < Constellation * >::const_iterator iter;
-		for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+		for (auto* constellation : constellations)
 		{
-			(*iter)->artFader.setDuration((int) (duration * 1000.f));
+			constellation->artFader.setDuration((int)(duration * 1000.f));
 		}
 		emit artFadeDurationChanged(duration);
 	}
@@ -938,20 +922,18 @@ void ConstellationMgr::setFlagLines(const bool displayed)
 	if(linesDisplayed != displayed)
 	{
 		linesDisplayed = displayed;
-		if (selected.begin() != selected.end()  && isolateSelected)
+		if (!selected.empty() && isolateSelected)
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = selected.begin(); iter != selected.end(); ++iter)
+			for (auto* constellation : selected)
 			{
-				(*iter)->setFlagLines(linesDisplayed);
+				constellation->setFlagLines(linesDisplayed);
 			}
 		}
 		else
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+			for (auto* constellation : constellations)
 			{
-				(*iter)->setFlagLines(linesDisplayed);
+				constellation->setFlagLines(linesDisplayed);
 			}
 		}
 		emit linesDisplayedChanged(displayed);
@@ -968,20 +950,18 @@ void ConstellationMgr::setFlagBoundaries(const bool displayed)
 	if (boundariesDisplayed != displayed)
 	{
 		boundariesDisplayed = displayed;
-		if (selected.begin() != selected.end() && isolateSelected)
+		if (!selected.empty() && isolateSelected)
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = selected.begin(); iter != selected.end(); ++iter)
+			for (auto* constellation : selected)
 			{
-				(*iter)->setFlagBoundaries(boundariesDisplayed);
+				constellation->setFlagBoundaries(boundariesDisplayed);
 			}
 		}
 		else
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+			for (auto* constellation : constellations)
 			{
-				(*iter)->setFlagBoundaries(boundariesDisplayed);
+				constellation->setFlagBoundaries(boundariesDisplayed);
 			}
 		}
 		emit boundariesDisplayedChanged(displayed);
@@ -998,20 +978,18 @@ void ConstellationMgr::setFlagArt(const bool displayed)
 	if (artDisplayed != displayed)
 	{
 		artDisplayed = displayed;
-		if (selected.begin() != selected.end() && isolateSelected)
+		if (!selected.empty() && isolateSelected)
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = selected.begin(); iter != selected.end(); ++iter)
+			for (auto* constellation : selected)
 			{
-				(*iter)->setFlagArt(artDisplayed);
+				constellation->setFlagArt(artDisplayed);
 			}
 		}
 		else
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+			for (auto* constellation : constellations)
 			{
-				(*iter)->setFlagArt(artDisplayed);
+				constellation->setFlagArt(artDisplayed);
 			}
 		}
 		emit artDisplayedChanged(displayed);
@@ -1028,17 +1006,15 @@ void ConstellationMgr::setFlagLabels(const bool displayed)
 	if (namesDisplayed != displayed)
 	{
 		namesDisplayed = displayed;
-		if (selected.begin() != selected.end() && isolateSelected)
+		if (!selected.empty() && isolateSelected)
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = selected.begin(); iter != selected.end(); ++iter)
-				(*iter)->setFlagLabels(namesDisplayed);
+			for (auto* constellation : selected)
+				constellation->setFlagLabels(namesDisplayed);
 		}
 		else
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = constellations.begin(); iter != constellations.end(); ++iter)
-				(*iter)->setFlagLabels(namesDisplayed);
+			for (auto* constellation : constellations)
+				constellation->setFlagLabels(namesDisplayed);
 		}
 		emit namesDisplayedChanged(displayed);
 	}
@@ -1058,13 +1034,12 @@ void ConstellationMgr::setFlagIsolateSelected(const bool isolate)
 		// when turning off isolated selection mode, clear exisiting isolated selections.
 		if (!isolateSelected)
 		{
-			vector < Constellation * >::const_iterator iter;
-			for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+			for (auto* constellation : constellations)
 			{
-				(*iter)->setFlagLines(getFlagLines());
-				(*iter)->setFlagLabels(getFlagLabels());
-				(*iter)->setFlagArt(getFlagArt());
-				(*iter)->setFlagBoundaries(getFlagBoundaries());
+				constellation->setFlagLines(getFlagLines());
+				constellation->setFlagLabels(getFlagLabels());
+				constellation->setFlagArt(getFlagArt());
+				constellation->setFlagBoundaries(getFlagBoundaries());
 			}
 		}
 		emit isolateSelectedChanged(isolate);
@@ -1125,14 +1100,12 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 				c->setFlagArt(getFlagArt());
 				c->setFlagBoundaries(getFlagBoundaries());
 
-				vector < Constellation * >::const_iterator iter;
-				for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+				for (auto* constellation : constellations)
 				{
 					bool match = false;
-					vector < Constellation * >::const_iterator s_iter;
-					for (s_iter = selected.begin(); s_iter != selected.end(); ++s_iter)
+					for (auto* selected_constellation : selected)
 					{
-						if( (*iter)==(*s_iter) )
+						if (constellation == selected_constellation)
 						{
 							match=true; // this is a selected constellation
 							break;
@@ -1142,22 +1115,21 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 					if(!match)
 					{
 						// Not selected constellation
-						(*iter)->setFlagLines(false);
-						(*iter)->setFlagLabels(false);
-						(*iter)->setFlagArt(false);
-						(*iter)->setFlagBoundaries(false);
+						constellation->setFlagLines(false);
+						constellation->setFlagLabels(false);
+						constellation->setFlagArt(false);
+						constellation->setFlagBoundaries(false);
 					}
 				}
 			}
 			else
 			{
-				vector < Constellation * >::const_iterator iter;
-				for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+				for (auto* constellation : constellations)
 				{
-					(*iter)->setFlagLines(false);
-					(*iter)->setFlagLabels(false);
-					(*iter)->setFlagArt(false);
-					(*iter)->setFlagBoundaries(false);
+					constellation->setFlagLines(false);
+					constellation->setFlagLabels(false);
+					constellation->setFlagArt(false);
+					constellation->setFlagBoundaries(false);
 				}
 
 				// Propagate current settings to newly selected constellation
@@ -1177,13 +1149,12 @@ void ConstellationMgr::setSelectedConst(Constellation * c)
 		if (selected.empty()) return;
 
 		// Otherwise apply standard flags to all constellations
-		vector < Constellation * >::const_iterator iter;
-		for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+		for (auto* constellation : constellations)
 		{
-			(*iter)->setFlagLines(getFlagLines());
-			(*iter)->setFlagLabels(getFlagLabels());
-			(*iter)->setFlagArt(getFlagArt());
-			(*iter)->setFlagBoundaries(getFlagBoundaries());
+			constellation->setFlagLines(getFlagLines());
+			constellation->setFlagLabels(getFlagLabels());
+			constellation->setFlagArt(getFlagArt());
+			constellation->setFlagBoundaries(getFlagBoundaries());
 		}
 
 		// And remove all selections
@@ -1197,8 +1168,7 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 	if (c != Q_NULLPTR)
 	{
 
-		vector < Constellation * >::iterator iter;
-		for (iter = selected.begin(); iter != selected.end();)
+		for (auto iter = selected.begin(); iter != selected.end();)
 		{
 			if( (*iter)->getEnglishName() == c->getEnglishName() )
 			{
@@ -1215,12 +1185,12 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 		{
 
 			// Otherwise apply standard flags to all constellations
-			for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+			for (auto* constellation : constellations)
 			{
-				(*iter)->setFlagLines(getFlagLines());
-				(*iter)->setFlagLabels(getFlagLabels());
-				(*iter)->setFlagArt(getFlagArt());
-				(*iter)->setFlagBoundaries(getFlagBoundaries());
+				constellation->setFlagLines(getFlagLines());
+				constellation->setFlagLabels(getFlagLabels());
+				constellation->setFlagArt(getFlagArt());
+				constellation->setFlagBoundaries(getFlagBoundaries());
 			}
 
 			Constellation::singleSelected = false; // For boundaries
@@ -1246,10 +1216,9 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	unsigned int i, j;
 
 	// delete existing boundaries if any exist
-	vector<vector<Vec3d> *>::iterator iter;
-	for (iter = allBoundarySegments.begin(); iter != allBoundarySegments.end(); ++iter)
+	for (auto* segment : allBoundarySegments)
 	{
-		delete (*iter);
+		delete segment;
 	}
 	allBoundarySegments.clear();
 
@@ -1349,10 +1318,9 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	sPainter.setBlending(false);
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		(*iter)->drawBoundaryOptim(sPainter);
+		constellation->drawBoundaryOptim(sPainter);
 	}
 }
 
@@ -1360,11 +1328,10 @@ StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	vector <Constellation*>::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		QString objwcap = (*iter)->nameI18.toUpper();
-		if (objwcap==objw) return *iter;
+		QString objwcap = constellation->nameI18.toUpper();
+		if (objwcap == objw) return constellation;
 	}
 	return Q_NULLPTR;
 }
@@ -1372,24 +1339,22 @@ StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
 StelObjectP ConstellationMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
-	vector <Constellation*>::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		QString objwcap = (*iter)->englishName.toUpper();
-		if (objwcap==objw) return *iter;
+		QString objwcap = constellation->englishName.toUpper();
+		if (objwcap == objw) return constellation;
 
-		objwcap = (*iter)->abbreviation.toUpper();
-		if (objwcap==objw) return *iter;
+		objwcap = constellation->abbreviation.toUpper();
+		if (objwcap == objw) return constellation;
 	}
 	return Q_NULLPTR;
 }
 
 StelObjectP ConstellationMgr::searchByID(const QString &id) const
 {
-	vector <Constellation*>::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		if ((*iter)->getID() == id) return *iter;
+		if (constellation->getID() == id) return constellation;
 	}
 	return Q_NULLPTR;
 }
@@ -1402,10 +1367,9 @@ QStringList ConstellationMgr::listMatchingObjects(const QString& objPrefix, int 
 		return result;
 	}
 
-	vector<Constellation*>::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
-		QString name = inEnglish ? (*iter)->getEnglishName() : (*iter)->getNameI18n();
+		QString name = inEnglish ? constellation->getEnglishName() : constellation->getNameI18n();
 		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{
 			continue;
@@ -1464,12 +1428,11 @@ Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
 	QString IAUConst = core->getIAUConstellation(s->getEquinoxEquatorialPos(core));
-	vector < Constellation * >::const_iterator iter;
-	for (iter = constellations.begin(); iter != constellations.end(); ++iter)
+	for (auto* constellation : constellations)
 	{
 		// Check if the object is in the constellation
-		if ((*iter)->getShortName().toUpper()==IAUConst.toUpper())
-			return (*iter);
+		if (constellation->getShortName().toUpper() == IAUConst.toUpper())
+			return constellation;
 	}
 	return Q_NULLPTR;
 }

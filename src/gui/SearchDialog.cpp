@@ -885,7 +885,7 @@ void SearchDialog::updateListTab()
 	ui->objectTypeComboBox->blockSignals(true);
 	ui->objectTypeComboBox->clear();	
 	QMap<QString, QString> modulesMap = objectMgr->objectModulesMap();
-	for (QMap<QString, QString>::const_iterator it = modulesMap.begin(); it != modulesMap.end(); ++it)
+	for (auto it = modulesMap.begin(); it != modulesMap.end(); ++it)
 	{
 		if (!objectMgr->listAllModuleObjects(it.key(), ui->searchInEnglishCheckBox->isChecked()).isEmpty())
 		{

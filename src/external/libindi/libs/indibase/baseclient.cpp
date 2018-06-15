@@ -570,9 +570,7 @@ int INDI::BaseClient::delPropertyCmd(XMLEle *root, char *errmsg)
 
 int INDI::BaseClient::deleteDevice(const char *devName, char *errmsg)
 {
-    std::vector<INDI::BaseDevice *>::iterator devicei;
-
-    for (devicei = cDevices.begin(); devicei != cDevices.end();)
+    for (auto devicei = cDevices.begin(); devicei != cDevices.end();)
     {
         if (!strcmp(devName, (*devicei)->getDeviceName()))
         {
@@ -591,9 +589,7 @@ int INDI::BaseClient::deleteDevice(const char *devName, char *errmsg)
 
 INDI::BaseDevice *INDI::BaseClient::findDev(const char *devName, char *errmsg)
 {
-    std::vector<INDI::BaseDevice *>::const_iterator devicei;
-
-    for (devicei = cDevices.begin(); devicei != cDevices.end(); devicei++)
+    for (auto devicei = cDevices.begin(); devicei != cDevices.end(); devicei++)
     {
         if (!strcmp(devName, (*devicei)->getDeviceName()))
             return (*devicei);

@@ -66,16 +66,16 @@ void TrailGroup::draw(StelCore* core, StelPainter* sPainter)
 void TrailGroup::update()
 {
 	times.append(StelApp::getInstance().getCore()->getJDE());
-	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
+	for (auto& trail : allTrails)
 	{
-		iter->posHistory.append(j2000ToTrailNative*iter->stelObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
+		trail.posHistory.append(j2000ToTrailNative * trail.stelObject->getJ2000EquatorialPos(StelApp::getInstance().getCore()));
 	}
 	if (StelApp::getInstance().getCore()->getJDE()-times.at(0)>timeExtent)
 	{
 		times.pop_front();
-		for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
+		for (auto& trail : allTrails)
 		{
-			iter->posHistory.pop_front();
+			trail.posHistory.pop_front();
 		}
 	}
 }
@@ -95,8 +95,8 @@ void TrailGroup::addObject(const StelObjectP& obj, const Vec3f* col)
 void TrailGroup::reset()
 {
 	times.clear();
-	for (QList<Trail>::Iterator iter=allTrails.begin();iter!=allTrails.end();++iter)
+	for (auto& trail : allTrails)
 	{
-		iter->posHistory.clear();
+		trail.posHistory.clear();
 	}
 }

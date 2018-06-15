@@ -62,7 +62,7 @@ void StelSkyPolygon::draw(StelCore* core, StelPainter& sPainter, float)
 
 	// Draw in the good order
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
-	QMap<double, StelSkyPolygon*>::Iterator i = result.end();
+	auto i = result.end();
 	while (i!=result.begin())
 	{
 		--i;

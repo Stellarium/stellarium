@@ -417,9 +417,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 BottomStelBar::~BottomStelBar()
 {
 	// Remove currently hidden buttons which are not delete by a parent element
-	for (QMap<QString, ButtonGroup>::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
+	for (auto& group : buttonGroups)
 	{
-		for (auto* b : iter.value().elems)
+		for (auto* b : group.elems)
 		{
 			if (b->parentItem()==0)
 			{
@@ -464,7 +464,7 @@ StelButton* BottomStelBar::hideButton(const QString& actionName)
 {
 	QString gName;
 	StelButton* bToRemove = Q_NULLPTR;
-	for (QMap<QString, ButtonGroup>::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
+	for (auto iter = buttonGroups.begin(); iter != buttonGroups.end(); ++iter)
 	{
 		int i=0;
 		for (auto* b : iter.value().elems)
@@ -547,9 +547,8 @@ void BottomStelBar::updateButtonsGroups()
 {
 	double x = 0;
 	double y = datetime->boundingRect().height() + 3;
-	for (QMap<QString, ButtonGroup >::iterator iter=buttonGroups.begin();iter!=buttonGroups.end();++iter)
+	for (auto& group : buttonGroups)
 	{
-		ButtonGroup& group = iter.value();
 		QList<StelButton*>& buttons = group.elems;
 		if (buttons.empty())
 			continue;

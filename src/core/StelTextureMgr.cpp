@@ -139,7 +139,7 @@ StelTextureSP StelTextureMgr::createTexture(const QImage &image, const StelTextu
 
 StelTextureSP StelTextureMgr::wrapperForGLTexture(GLuint texId)
 {
-	IdMap::iterator it = idMap.find(texId);
+	auto it = idMap.find(texId);
 	if(it!=idMap.end())
 	{
 		//find out if it is valid
@@ -174,7 +174,7 @@ StelTextureSP StelTextureMgr::wrapperForGLTexture(GLuint texId)
 
 StelTextureSP StelTextureMgr::lookupCache(const QString &file)
 {
-	TexCache::iterator it = textureCache.find(file);
+	auto it = textureCache.find(file);
 	if(it!=textureCache.end())
 	{
 		//find out if it is valid

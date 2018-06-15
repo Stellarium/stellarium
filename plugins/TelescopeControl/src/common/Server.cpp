@@ -29,9 +29,9 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 void Server::SocketList::clear(void)
 {
-	for (const_iterator it(begin()); it != end(); it++)
+	for (auto* socket : *this)
 	{
-		delete (*it);
+		delete socket;
 	}
 	list<Socket*>::clear();
 }
@@ -44,11 +44,9 @@ Server::Server(int)
 
 void Server::sendPosition(unsigned int ra_int, int dec_int, int status)
 {
-	for (SocketList::const_iterator it(socket_list.begin());
-	     it != socket_list.end();
-	     it++)
+	for (auto* socket : socket_list)
 	{
-		(*it)->sendPosition(ra_int, dec_int, status);
+		socket->sendPosition(ra_int, dec_int, status);
 	}
 }
 
@@ -59,11 +57,9 @@ void Server::step(long long int timeout_micros)
 	FD_ZERO(&write_fds);
 	int fd_max = -1;
 	
-	for (SocketList::const_iterator it(socket_list.begin());
-	     it != socket_list.end();
-	     it++)
+	for (auto* socket : socket_list)
 	{
-		(*it)->prepareSelectFds(read_fds, write_fds, fd_max);
+		socket->prepareSelectFds(read_fds, write_fds, fd_max);
 	}
 	
 	struct timeval tv;
@@ -74,13 +70,13 @@ void Server::step(long long int timeout_micros)
 	const int select_rc = select(fd_max+1, &read_fds, &write_fds, 0, &tv);
 	if (select_rc > 0)
 	{
-		SocketList::iterator it(socket_list.begin());
+		auto it = socket_list.begin();
 		while (it != socket_list.end())
 		{
 			(*it)->handleSelectFds(read_fds, write_fds);
 			if ((*it)->isClosed())
 			{
-				SocketList::iterator tmp(it);
+				auto tmp = it;
 				it++;
 				delete (*tmp);
 				socket_list.erase(tmp);
@@ -95,13 +91,11 @@ void Server::step(long long int timeout_micros)
 
 void Server::closeAcceptedConnections(void)
 {
-	for (SocketList::iterator it(socket_list.begin());
-	     it != socket_list.end();
-	     it++)
+	for (auto* socket : socket_list)
 	{
-		if ((*it)->isTcpConnection())
+		if (socket->isTcpConnection())
 		{
-			(*it)->hangup();
+			socket->hangup();
 		}
 	}
 }

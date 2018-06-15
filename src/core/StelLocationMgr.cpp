@@ -477,9 +477,9 @@ StelLocationMgr::StelLocationMgr(const LocationList &locations)
 
 void StelLocationMgr::setLocations(const LocationList &locations)
 {
-	for(LocationList::const_iterator it = locations.constBegin();it!=locations.constEnd();++it)
+	for (const auto& loc : locations)
 	{
-		this->locations.insert(it->getID(),*it);
+		this->locations.insert(loc.getID(), loc);
 	}
 
 	emit locationListChanged();
@@ -530,10 +530,8 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 	// Sanity checks: It seems we must translate timezone names. Quite a number on Windows, but also still some on Linux.
 	QList<QByteArray> availableTimeZoneList=QTimeZone::availableTimeZoneIds();
 	QStringList unknownTZlist;
-	QMap<QString, StelLocation>::iterator i=res.begin();
-	while (i!=res.end())
+	for (auto& loc : res)
 	{
-		StelLocation loc=i.value();
 		if ((loc.ianaTimeZone!="LMST") &&  (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
 		{
 			// TZ name which is currently unknown to Qt detected. See if we can translate it, if not: complain to qDebug().
@@ -541,7 +539,6 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 			if (availableTimeZoneList.contains(fixTZname.toUtf8()))
 			{
 				loc.ianaTimeZone=fixTZname;
-				i.value() = loc;
 			}
 			else
 			{
@@ -549,17 +546,14 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 				unknownTZlist.append(loc.ianaTimeZone);
 			}
 		}
-		++i;
 	}
 	if (unknownTZlist.length()>0)
 	{
 		unknownTZlist.removeDuplicates();
 		qDebug() << "StelLocationMgr::loadCitiesBin(): Summary of unknown TimeZones:";
-		QStringList::const_iterator t=unknownTZlist.begin();
-		while (t!=unknownTZlist.end())
+		for (const auto& tz : unknownTZlist)
 		{
-			qDebug() << *t;
-			++t;
+			qDebug() << tz;
 		}
 		qDebug() << "Please report these timezone names (this logfile) to the Stellarium developers.";
 		// Note to developers: Fill those names and replacements to the map above.
@@ -649,7 +643,7 @@ static float parseAngle(const QString& s, bool* ok)
 
 const StelLocation StelLocationMgr::locationForString(const QString& s) const
 {
-	QMap<QString, StelLocation>::const_iterator iter = locations.find(s);
+	auto iter = locations.find(s);
 	if (iter!=locations.end())
 	{
 		return iter.value();
@@ -746,7 +740,7 @@ bool StelLocationMgr::saveUserLocation(const StelLocation& loc)
 // If the location comes from the base read only list, it cannot be deleted
 bool StelLocationMgr::canDeleteUserLocation(const QString& id) const
 {
-	QMap<QString, StelLocation>::const_iterator iter=locations.find(id);
+	auto iter=locations.find(id);
 
 	// If it's not known at all there is a problem
 	if (iter==locations.end())

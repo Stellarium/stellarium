@@ -305,7 +305,7 @@ void LandscapeMgr::update(double deltaTime)
 	// TBD: Reactivate and verify this code!? Source, reference?
 //	float groundLuminance = 0;
 //	const vector<Planet*>& allPlanets = ssystem->getAllPlanets();
-//	for (vector<Planet*>::const_iterator i=allPlanets.begin();i!=allPlanets.end();++i)
+//	for (auto i=allPlanets.begin();i!=allPlanets.end();++i)
 //	{
 //		Vec3d pos = (*i)->getAltAzPos(core);
 //		pos.normalize();

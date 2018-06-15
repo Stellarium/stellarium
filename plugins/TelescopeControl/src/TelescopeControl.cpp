@@ -236,8 +236,8 @@ void TelescopeControl::deinit()
 	//Destroy all clients first in order to avoid displaying a TCP error
 	deleteAllTelescopes();
 
-	QHash<int, QProcess*>::const_iterator iterator = telescopeServerProcess.constBegin();
-	while(iterator != telescopeServerProcess.constEnd())
+	for (auto iterator = telescopeServerProcess.constBegin(); iterator != telescopeServerProcess.constEnd();
+		 ++iterator)
 	{
 		int slotNumber = iterator.key();
 #ifdef Q_OS_WIN
@@ -248,8 +248,6 @@ void TelescopeControl::deinit()
 		telescopeServerProcess[slotNumber]->waitForFinished();
 		delete telescopeServerProcess[slotNumber];
 		qDebug() << "[TelescopeControl] deinit(): Server process at slot" << slotNumber << "terminated successfully.";
-
-		++iterator;
 	}
 
 	//TODO: Decide if it should be saved on change
@@ -453,15 +451,13 @@ void TelescopeControl::communicate(void)
 {
 	if (!telescopeClients.empty())
 	{
-		QMap<int, TelescopeClientP>::const_iterator telescope = telescopeClients.constBegin();
-		while (telescope != telescopeClients.end())
+		for (auto telescope = telescopeClients.constBegin(); telescope != telescopeClients.constEnd(); ++telescope)
 		{
 			logAtSlot(telescope.key());//If there's no log, it will be ignored
 			if(telescope.value()->prepareCommunication())
 			{
 				telescope.value()->performCommunication();
 			}
-			telescope++;
 		}
 	}
 }
@@ -1192,11 +1188,9 @@ bool TelescopeControl::stopAllTelescopes()
 
 	if (!telescopeClients.empty())
 	{
-		QMap<int, TelescopeClientP>::const_iterator telescope = telescopeClients.constBegin();
-		while (telescope != telescopeClients.end())
+		for (auto telescope = telescopeClients.constBegin(); telescope != telescopeClients.constEnd(); ++telescope)
 		{
 			allStoppedSuccessfully = allStoppedSuccessfully && stopTelescopeAtSlot(telescope.key());
-			telescope++;
 		}
 	}
 

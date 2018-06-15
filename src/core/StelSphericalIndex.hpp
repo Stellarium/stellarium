@@ -236,11 +236,11 @@ private:
 				}
 
 				// If we have children and one of them contains the element, store it in a sub-level
-				for (QVector<Node>::iterator iter = node.children.begin(); iter!=node.children.end(); ++iter)
+				for (auto& child : node.children)
 				{
-					if (((SphericalRegion*)&(iter->triangle))->contains(el.obj->getRegion().data()))
+					if (((SphericalRegion*)&(child.triangle))->contains(el.obj->getRegion().data()))
 					{
-						insert(*iter, el, level+1);
+						insert(child, el, level + 1);
 						return;
 					}
 				}

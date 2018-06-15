@@ -277,7 +277,7 @@ QOpenGLShaderProgram* ShaderMgr::getTextureShader()
 
 GLint ShaderMgr::uniformLocation(const QOpenGLShaderProgram *shad, UNIFORM uni)
 {
-	t_UniformCache::iterator it = m_uniformCache.find(shad);
+	auto it = m_uniformCache.find(shad);
 	if(it!=m_uniformCache.end())
 	{
 		return it.value().value(uni,-1);

@@ -71,10 +71,10 @@ void LocationSearchService::get(const QByteArray& operation, const APIParameters
 		//use a regexp in wildcard mode, the app does the same
 		QRegExp exp(term,Qt::CaseInsensitive, QRegExp::Wildcard);
 
-		for(QList<QString>::const_iterator it = list.begin();it!=list.end();++it)
+		for(const auto& str : list)
 		{
-			if(it->contains(exp))
-				results.append(*it);
+			if (str.contains(exp))
+				results.append(str);
 		}
 
 		response.writeJSON(QJsonDocument(results));

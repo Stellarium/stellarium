@@ -1827,11 +1827,9 @@ QOpenGLShaderProgram* Planet::createShader(const QString& name, PlanetShaderVars
 	}
 
 	//process fixed attribute locations
-	QMap<QByteArray,int>::const_iterator it = fixedAttributeLocations.begin();
-	while(it!=fixedAttributeLocations.end())
+	for (auto it = fixedAttributeLocations.begin(); it != fixedAttributeLocations.end(); ++it)
 	{
 		program->bindAttributeLocation(it.key(),it.value());
-		++it;
 	}
 
 	if(!StelPainter::linkProg(program,name))
