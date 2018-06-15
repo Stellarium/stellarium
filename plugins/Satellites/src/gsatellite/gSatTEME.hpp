@@ -38,7 +38,7 @@
 #define _GSATTEME_HPP_ 1
 
 #include "gTime.hpp"
-#include "gVector.hpp"
+#include "VecMath.hpp"
 
 #include "sgp4unit.h"
 #include "sgp4ext.h"
@@ -86,23 +86,23 @@ public:
 
 	// Operation: getPos()
 	//! @brief Get the TEME satellite position Vector
-	//! @return gVector
+	//! @return Vec3d
 	//!   Satellite position vector meassured in Km.
 	//!    x: position[0]
 	//!    y: position[1]
 	//!    z: position[2]
-	gVector getPos()
+	const Vec3d& getPos() const
 	{
 		return m_Position;
 	}
 
 	// Operation: getVel()
 	//! @brief Get the TEME satellite Velocity Vector
-	//! @return gVector Satellite Velocity Vector measured in Km/s
+	//! @return Vec3d Satellite Velocity Vector measured in Km/s
 	//!    x: Vel[0]\n
 	//!    y: Vel[1]\n
 	//!    z: Vel[2]\n
-	gVector getVel()
+	const Vec3d& getVel() const
 	{
 		return m_Vel;
 	}
@@ -115,16 +115,16 @@ public:
 	//! @details To implement this operation, next references has been used:
 	//!	   Orbital Coordinate Systems, Part III  By Dr. T.S. Kelso
 	//!	   http://www.celestrak.com/columns/v02n03/
-	//! @return gVector Geographical coordinates\n
+	//! @return Vec3d Geographical coordinates\n
 	//!    Latitude:  Coord[0]  measured in degrees\n
 	//!    Longitude: Coord[1]  measured in degrees\n
 	//!	   Altitude:  Coord[2]  measured in Km.\n
-	gVector getSubPoint()
+	const Vec3d& getSubPoint() const
 	{
 		return m_SubPoint;
 	}
 
-	int getErrorCode()
+	int getErrorCode() const
 	{
 		return satrec.error;
 	}
@@ -137,11 +137,11 @@ private:
 	//!	   http://www.celestrak.com/columns/v02n03/
 	//! @param[in] ai_Time Epoch time for subpoint calculation. (of course, this must be
 	//!    refactorized to be computed in the setEpoch function)
-	//! @return gVector Geographical coordinates\n
+	//! @return Vec3d Geographical coordinates\n
 	//!    Latitude:  Coord[0]  measured in degrees\n
 	//!    Longitude: Coord[1]  measured in degrees\n
 	//!	   Altitude:  Coord[2]  measured in Km.\n
-	gVector computeSubPoint( gTime ai_time);
+	Vec3d computeSubPoint(gTime ai_time);
 
 
 	// sgp4 proceses variables
@@ -149,9 +149,9 @@ private:
 	elsetrec satrec;
 
 	std::string  m_SatName;
-	gVector 	 m_Position;
-	gVector 	 m_Vel;
-	gVector		 m_SubPoint;
+	Vec3d m_Position;
+	Vec3d m_Vel;
+	Vec3d m_SubPoint;
 };
 
 #endif // _GSATTEME_HPP_

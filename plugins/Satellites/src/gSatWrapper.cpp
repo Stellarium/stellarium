@@ -75,8 +75,7 @@ Vec3d gSatWrapper::getTEMEPos() const
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
 	{
-		gVector position = pSatellite->getPos();
-                returnedVector.set(position[0], position[1], position[2]);
+		returnedVector = pSatellite->getPos();
 	}
 	else
 		qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
@@ -91,8 +90,7 @@ Vec3d gSatWrapper::getTEMEVel() const
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
 	{
-		gVector velocity = pSatellite->getVel();
-                returnedVector.set(velocity[0], velocity[1], velocity[2]);
+		returnedVector = pSatellite->getVel();
 	}
 	else
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
@@ -107,8 +105,7 @@ Vec3d gSatWrapper::getSubPoint() const
 	Vec3d returnedVector;
 	if (pSatellite != Q_NULLPTR)
 	{
-		gVector satelliteSubPoint = pSatellite->getSubPoint();
-                returnedVector.set(satelliteSubPoint[0], satelliteSubPoint[1], satelliteSubPoint[2]);
+		returnedVector = pSatellite->getSubPoint();
 	}
 	else
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";

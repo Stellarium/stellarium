@@ -61,9 +61,6 @@ gSatTEME::gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 	double ro[3] = {};
 	double vo[3] = {};
 
-	m_Position.resize(3);
-	m_Vel.resize(3);
-
 	m_SatName = pstrName;
 
 	//set gravitational constants
@@ -125,10 +122,10 @@ void gSatTEME::setMinSinceKepEpoch(double ai_minSinceKepEpoch)
 	m_SubPoint    = computeSubPoint( Epoch);
 }
 
-gVector gSatTEME::computeSubPoint(gTime ai_Time)
+Vec3d gSatTEME::computeSubPoint(gTime ai_Time)
 {
 
-	gVector resultVector(3); // (0) Latitude, (1) Longitude, (2) altitude
+	Vec3d resultVector; // (0) Latitude, (1) Longitude, (2) altitude
 	double theta, r, e2, phi, c;
 
 	theta = AcTan(m_Position[1], m_Position[0]); // radians
