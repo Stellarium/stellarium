@@ -4277,14 +4277,14 @@ void AstroCalcDialog::computePlanetaryData()
 	double orbVelFCB = firstCBId->getEclipticVelocity().length();
 	QString orbitalVelocityFCB = QChar(0x2014);
 	if (orbVelFCB > 0.)
-		orbitalVelocityFCB = QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'g', 3)).arg(kms);
+		orbitalVelocityFCB = QString("%1 %2").arg(QString::number(orbVelFCB * AU/86400., 'f', 3)).arg(kms);
 
 	ui->labelOrbitalVelocityFCBValue->setText(orbitalVelocityFCB);
 
 	double orbVelSCB = secondCBId->getEclipticVelocity().length();
 	QString orbitalVelocitySCB = QChar(0x2014);
 	if (orbVelSCB>0.)
-		orbitalVelocitySCB = QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'g', 3)).arg(kms);
+		orbitalVelocitySCB = QString("%1 %2").arg(QString::number(orbVelSCB * AU/86400., 'f', 3)).arg(kms);
 
 	ui->labelOrbitalVelocitySCBValue->setText(orbitalVelocitySCB);
 
@@ -4299,7 +4299,7 @@ void AstroCalcDialog::computePlanetaryData()
 	if (spcb1 > 0.0 && spcb2 > 0.0 && showSP)
 	{
 		double sp = qAbs(1/(1/spcb1 - 1/spcb2));
-		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'g', 3)).arg(days).arg(QString::number(sp/365.25, 'g', 5));
+		synodicPeriod = QString("%1 %2 (%3 a)").arg(QString::number(sp, 'f', 3)).arg(days).arg(QString::number(sp/365.25, 'f', 5));
 	}
 
 	ui->labelSynodicPeriodValue->setText(synodicPeriod);
