@@ -308,6 +308,11 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString("%1: %2 %3 (%4)").arg(q_("Gas tail length (estimate)"), QString::number(tail*1e-6, 'G', 3), Mkm, tailDeg) << "<br />";
 	}
 
+	if (flags&Size)
+	{
+		oss << QString("%1: %2 %3").arg(q_("Equatorial radius of core"), QString::number(AU * getRadius(), 'f', 1) , qc_("km", "distance")) << "<br />";
+	}
+
 	postProcessInfoString(str, flags);
 
 	return str;

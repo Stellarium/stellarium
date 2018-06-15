@@ -1291,6 +1291,9 @@
             <item row="3" column="1">
              <widget class="QLabel" name="labelAngularDistanceValue"/>
             </item>
+            <item row="5" column="1">
+             <widget class="QLabel" name="labelSynodicPeriodValue"/>
+            </item>
             <item row="0" column="1">
              <widget class="QLabel" name="labelSCB">
               <property name="text">
@@ -1308,8 +1311,22 @@
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
-             <widget class="QLabel" name="labelSynodicPeriodValue"/>
+            <item row="8" column="0">
+             <widget class="QLabel" name="labelEquatorialRadiiRatioRatio">
+              <property name="text">
+               <string>Equatorial radii ratio:</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="8" column="1">
+             <widget class="QLabel" name="labelEquatorialRadiiRatioValue">
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>

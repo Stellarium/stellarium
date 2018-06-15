@@ -353,6 +353,11 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 		oss << QString("%1: %2").arg(q_("Apparent diameter"), sizeStr) << "<br />";
 	}
 
+	if (flags&Size)
+	{
+		oss << QString("%1: %2 %3").arg(q_("Equatorial radius"), QString::number(AU * getRadius(), 'f', 1) , qc_("km", "distance")) << "<br />";
+	}
+
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
 	double siderealPeriod = getSiderealPeriod();
 	if (flags&Extra)
