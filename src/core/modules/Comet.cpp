@@ -241,7 +241,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		double orbVel=orbitalVel.length();
 		if (orbVel>0.)
 		{ // AU/d * km/AU /24
-			oss << QString("%1: %2 %3").arg(q_("Velocity")).arg(orbVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Orbital velocity")).arg(orbVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
 		}
 	}
 

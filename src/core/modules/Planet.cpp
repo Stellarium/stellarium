@@ -515,10 +515,15 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			double orbVelKms=orbVel* AU/86400.;
 //			if (englishName=="Moon")
 //				orbVelKms=orbVel;
-			oss << QString("%1: %2 %3").arg(q_("Orbital Velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
+			oss << QString("%1: %2 %3").arg(q_("Orbital velocity")).arg(orbVelKms, 0, 'f', 3).arg(kms) << "<br />";
 			double helioVel=getHeliocentricEclipticVelocity().length();
 			if (helioVel!=orbVel)
-				oss << QString("%1: %2 %3").arg(q_("Heliocentric Velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+				oss << QString("%1: %2 %3").arg(q_("Heliocentric velocity")).arg(helioVel* AU/86400., 0, 'f', 3).arg(kms) << "<br />";
+		}
+		if (qAbs(re.period)>0.f)
+		{
+			double eqRotVel = 2.0*M_PI*(AU*getRadius())/(getSiderealDay()*86400.0);
+			oss << QString("%1: %2 %3").arg(q_("Equatorial rotation velocity")).arg(eqRotVel, 0, 'f', 3).arg(kms) << "<br />";
 		}
 	}
 
