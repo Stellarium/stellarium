@@ -32,3 +32,5 @@ SET_TARGET_PROPERTIES(Pulsars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN
 ADD_DEPENDENCIES(AllStaticPlugins Pulsars-static)
 
 SET_TARGET_PROPERTIES(Pulsars-static PROPERTIES FOLDER "plugins/Pulsars")
+
+ADD_PRECOMPILED_HEADER(Pulsars-static "Pulsars.hpp" "Pulsars.cpp")

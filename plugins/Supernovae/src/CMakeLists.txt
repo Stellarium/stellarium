@@ -33,3 +33,4 @@ ADD_DEPENDENCIES(AllStaticPlugins Supernovae-static)
 
 SET_TARGET_PROPERTIES(Supernovae-static PROPERTIES FOLDER "plugins/Supernovae")
 
+ADD_PRECOMPILED_HEADER(Supernovae-static "Supernovae.hpp" "Supernovae.cpp")

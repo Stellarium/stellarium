@@ -41,3 +41,5 @@ SET_TARGET_PROPERTIES(Oculars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN
 ADD_DEPENDENCIES(AllStaticPlugins Oculars-static)
 
 SET_TARGET_PROPERTIES(Oculars-static PROPERTIES FOLDER "plugins/Oculars")
+
+ADD_PRECOMPILED_HEADER(Oculars-static "Oculars.hpp" "Oculars.cpp")

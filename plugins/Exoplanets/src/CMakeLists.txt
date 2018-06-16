@@ -32,3 +32,4 @@ ADD_DEPENDENCIES(AllStaticPlugins Exoplanets-static)
 
 SET_TARGET_PROPERTIES(Exoplanets-static PROPERTIES FOLDER "plugins/Exoplanets")
 
+ADD_PRECOMPILED_HEADER(Exoplanets-static "Exoplanets.hpp" "Exoplanets.cpp")

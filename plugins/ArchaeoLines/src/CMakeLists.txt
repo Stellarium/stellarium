@@ -26,3 +26,5 @@ SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES COMPILE_FLAGS "-DQT_STATICP
 ADD_DEPENDENCIES(AllStaticPlugins ArchaeoLines-static)
 
 SET_TARGET_PROPERTIES(ArchaeoLines-static PROPERTIES FOLDER "plugins/ArchaeoLines")
+
+ADD_PRECOMPILED_HEADER(ArchaeoLines-static "ArchaeoLines.hpp" "ArchaeoLines.cpp")

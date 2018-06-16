@@ -32,3 +32,5 @@ SET_TARGET_PROPERTIES(Observability-static PROPERTIES COMPILE_FLAGS "-DQT_STATIC
 ADD_DEPENDENCIES(AllStaticPlugins Observability-static)
 
 SET_TARGET_PROPERTIES(Observability-static PROPERTIES FOLDER "plugins/Observability")
+
+ADD_PRECOMPILED_HEADER(Observability-static "Observability.hpp" "Observability.cpp")

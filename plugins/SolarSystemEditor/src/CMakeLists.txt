@@ -35,3 +35,5 @@ SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES COMPILE_FLAGS "-DQT_ST
 ADD_DEPENDENCIES(AllStaticPlugins SolarSystemEditor-static)
 
 SET_TARGET_PROPERTIES(SolarSystemEditor-static PROPERTIES FOLDER "plugins/SolarSystemEditor")
+
+ADD_PRECOMPILED_HEADER(SolarSystemEditor-static "SolarSystemEditor.hpp" "SolarSystemEditor.cpp")

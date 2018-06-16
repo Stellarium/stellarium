@@ -32,3 +32,5 @@ SET_TARGET_PROPERTIES(Novae-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN")
 ADD_DEPENDENCIES(AllStaticPlugins Novae-static)
 
 SET_TARGET_PROPERTIES(Novae-static PROPERTIES FOLDER "plugins/Novae")
+
+ADD_PRECOMPILED_HEADER(Novae-static "Novae.hpp" "Novae.cpp")

@@ -40,3 +40,5 @@ SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLU
 ADD_DEPENDENCIES(AllStaticPlugins RemoteSync-static)
 
 SET_TARGET_PROPERTIES(RemoteSync-static PROPERTIES FOLDER "plugins/RemoteSync")
+
+ADD_PRECOMPILED_HEADER(RemoteSync-static "RemoteSync.hpp" "RemoteSync.cpp")

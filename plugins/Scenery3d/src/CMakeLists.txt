@@ -66,3 +66,5 @@ SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUG
 ADD_DEPENDENCIES(AllStaticPlugins Scenery3d-static)
 
 SET_TARGET_PROPERTIES(Scenery3d-static PROPERTIES FOLDER "plugins/Scenery3d")
+
+ADD_PRECOMPILED_HEADER(Scenery3d-static "Scenery3d.hpp" "Scenery3d.cpp")
