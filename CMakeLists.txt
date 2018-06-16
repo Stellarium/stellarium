@@ -119,6 +119,8 @@ IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
 ELSE()
      # Add std=c++11 to gcc flags
      SET(STEL_GCC_CXX_FLAGS "-std=c++11 ${STEL_GCC_CXX_FLAGS}")
+     # Add std=c11 to gcc flags
+     SET(STEL_GCC_C_FLAGS "-std=c11 ${STEL_GCC_C_FLAGS}")
 ENDIF()
 
 IF(WIN32)
