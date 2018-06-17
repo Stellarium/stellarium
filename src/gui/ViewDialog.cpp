@@ -234,8 +234,8 @@ void ViewDialog::createDialogContent()
 	colorButton(ui->planetTrailsColor, "SolarSystem.trailsColor");
 	connect(ui->planetTrailsColor, SIGNAL(released()), this, SLOT(askPlanetTrailsColor()));
 	connectBoolProperty(ui->planetTrailsCheckBox, "SolarSystem.trailsDisplayed");
-	ui->planetIsolatedTrailsCheckBox->setEnabled(ssmgr->getFlagIsolatedTrails());
-	connect(ssmgr,SIGNAL(flagIsolatedTrailsChanged(bool)),ui->planetIsolatedTrailsCheckBox, SLOT(setEnabled(bool)));
+	ui->planetIsolatedTrailsCheckBox->setEnabled(ssmgr->getFlagTrails());
+	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)),ui->planetIsolatedTrailsCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
 
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
