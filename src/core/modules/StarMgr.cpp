@@ -143,10 +143,6 @@ StarMgr::StarMgr(void)
 	, hipIndex(new HipIndexStruct[NR_OF_HIP+1])
 {
 	setObjectName("StarMgr");
-	if (hipIndex == 0)
-	{
-		qFatal("ERROR: StarMgr::StarMgr: no memory");
-	}
 	maxGeodesicGridLevel = -1;
 	lastMaxSearchLevel = -1;	
 	objectMgr = GETSTELMODULE(StelObjectMgr);
