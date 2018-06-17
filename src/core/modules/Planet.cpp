@@ -578,7 +578,10 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Size)
 	{
-		oss << QString("%1: %2 %3").arg(q_("Equatorial radius"), QString::number(AU * getRadius(), 'f', 1) , qc_("km", "distance")) << "<br />";
+		QString diam = q_("Diameter");
+		if (getPlanetType()==isPlanet)
+			diam = q_("Equatorial diameter");
+		oss << QString("%1: %2 %3").arg(diam, QString::number(AU * getRadius() * 2.0, 'f', 1) , qc_("km", "distance")) << "<br />";
 	}
 
 	double siderealPeriod = getSiderealPeriod();

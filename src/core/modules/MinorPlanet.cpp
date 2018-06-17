@@ -360,7 +360,8 @@ QString MinorPlanet::getInfoString(const StelCore *core, const InfoStringGroup &
 
 	if (flags&Size)
 	{
-		oss << QString("%1: %2 %3").arg(q_("Equatorial radius"), QString::number(AU * getRadius(), 'f', 1) , qc_("km", "distance")) << "<br />";
+		// Many asteroides has irregular shape
+		oss << QString("%1: %2 %3").arg(q_("Diameter"), QString::number(AU * getRadius() * 2.0, 'f', 1) , qc_("km", "distance")) << "<br />";
 	}
 
 	// If semi-major axis not zero then calculate and display orbital period for asteroid in days
