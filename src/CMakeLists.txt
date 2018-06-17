@@ -527,8 +527,6 @@ IF(ENABLE_TESTING)
     SET(tests_testDates_SRCS
         tests/testDates.hpp
         tests/testDates.cpp
-        core/StelUtils.hpp
-        core/StelUtils.cpp
     )
     ADD_EXECUTABLE(testDates ${tests_testDates_SRCS})
     TARGET_LINK_LIBRARIES(testDates ${TESTS_LIBRARIES})
