@@ -439,6 +439,7 @@ private:
 		Vec2f pos;
 		unsigned char color[4];
 	};
+	static_assert(sizeof(StarVertex) == 12, "Size of StarVertex must be 12 bytes");
 	
 	//! Buffer for storing the vertex array data
 	StarVertex* vertexArray;

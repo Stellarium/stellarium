@@ -405,12 +405,10 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	const Mat4f& m = sPainter->getProjector()->getProjectionMatrix();
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 	
-	Q_ASSERT(sizeof(StarVertex)==12);
-	
 	starShaderProgram->bind();
-	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, (GLfloat*)vertexArray, 2, 12);
+	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, (GLfloat*)vertexArray, 2, sizeof(StarVertex));
 	starShaderProgram->enableAttributeArray(starShaderVars.pos);
-	starShaderProgram->setAttributeArray(starShaderVars.color, GL_UNSIGNED_BYTE, (GLubyte*)&(vertexArray[0].color), 3, 12);
+	starShaderProgram->setAttributeArray(starShaderVars.color, GL_UNSIGNED_BYTE, (GLubyte*)&(vertexArray[0].color), 3, sizeof(StarVertex));
 	starShaderProgram->enableAttributeArray(starShaderVars.color);
 	starShaderProgram->setUniformValue(starShaderVars.projectionMatrix, qMat);
 	starShaderProgram->setAttributeArray(starShaderVars.texCoord, GL_UNSIGNED_BYTE, (GLubyte*)textureCoordArray, 2, 0);
