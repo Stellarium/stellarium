@@ -369,12 +369,6 @@ protected:
 #ifndef QT_NO_DEBUG
 		StelOpenGL::clearGLErrors();
 #endif
-		QOpenGLFunctions* gl = QOpenGLContext::currentContext()->functions();
-
-		//clear the buffer (with black, this would not be strictly required for us because we repaint all pixels, but should improve perf on tile-based renderers)
-		// Here we can set a sky background color if really wanted (art applications. Astronomical sky should be 0/0/0/0)
-		gl->glClearColor(skyBackgroundColor[0], skyBackgroundColor[1], skyBackgroundColor[2], 0.f); //we also clear alpha to zero
-		gl->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
 		//update and draw
 		StelApp& app = StelApp::getInstance();
