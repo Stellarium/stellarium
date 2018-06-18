@@ -609,8 +609,18 @@ StelMainView::StelMainView(QSettings* settings)
 	connect(this, SIGNAL(screenshotRequested()), this, SLOT(doScreenshot()));
 
 #ifdef OPENGL_DEBUG_LOGGING
-	glLogger = new QOpenGLDebugLogger(this);
-	connect(glLogger, SIGNAL(messageLogged(QOpenGLDebugMessage)), this, SLOT(logGLMessage(QOpenGLDebugMessage)));
+	if (QApplication::testAttribute(Qt::AA_UseOpenGLES))
+	{
+		// QOpenGLDebugLogger doesn't work with OpenGLES's GL_KHR_debug.
+		// See Qt Bug 62070: https://bugreports.qt.io/browse/QTBUG-62070
+
+		glLogger = Q_NULLPTR;
+	}
+	else
+	{
+		glLogger = new QOpenGLDebugLogger(this);
+		connect(glLogger, SIGNAL(messageLogged(QOpenGLDebugMessage)), this, SLOT(logGLMessage(QOpenGLDebugMessage)));
+	}
 #endif
 
 	//get the desired opengl format parameters
@@ -742,29 +752,32 @@ QSurfaceFormat StelMainView::getDesiredGLFormat() const
 void StelMainView::init()
 {
 #ifdef OPENGL_DEBUG_LOGGING
-	if(!QOpenGLContext::currentContext()->hasExtension(QByteArrayLiteral("GL_KHR_debug")))
-		qWarning()<<"GL_KHR_debug extension missing, OpenGL debug logger will likely not work";
-	if(glLogger->initialize())
+	if (glLogger)
 	{
-		qDebug()<<"OpenGL debug logger initialized";
-		QVector<GLuint> disabledMsgs;
-		//if your GL implementation spams some output you are not interested in,
-		//you can disable their message IDs here
-		//disabledMsgs.append(100);
-		glLogger->disableMessages(disabledMsgs);
-		glLogger->startLogging(QOpenGLDebugLogger::SynchronousLogging);
-		//the internal log buffer may not be empty, so check it
-		for (const auto& msg : glLogger->loggedMessages())
+		if(!QOpenGLContext::currentContext()->hasExtension(QByteArrayLiteral("GL_KHR_debug")))
+			qWarning()<<"GL_KHR_debug extension missing, OpenGL debug logger will likely not work";
+		if(glLogger->initialize())
 		{
-			logGLMessage(msg);
+			qDebug()<<"OpenGL debug logger initialized";
+			QVector<GLuint> disabledMsgs;
+			//if your GL implementation spams some output you are not interested in,
+			//you can disable their message IDs here
+			//disabledMsgs.append(100);
+			glLogger->disableMessages(disabledMsgs);
+			glLogger->startLogging(QOpenGLDebugLogger::SynchronousLogging);
+			//the internal log buffer may not be empty, so check it
+			for (const auto& msg : glLogger->loggedMessages())
+			{
+				logGLMessage(msg);
+			}
 		}
-	}
-	else
-		qWarning()<<"Failed to initialize OpenGL debug logger";
+		else
+			qWarning()<<"Failed to initialize OpenGL debug logger";
 
-	connect(QOpenGLContext::currentContext(),SIGNAL(aboutToBeDestroyed()),this,SLOT(contextDestroyed()));
-	//for easier debugging, print the adress of the main GL context
-	qDebug()<<"CurCtxPtr:"<<QOpenGLContext::currentContext();
+		connect(QOpenGLContext::currentContext(),SIGNAL(aboutToBeDestroyed()),this,SLOT(contextDestroyed()));
+		//for easier debugging, print the adress of the main GL context
+		qDebug()<<"CurCtxPtr:"<<QOpenGLContext::currentContext();
+	}
 #endif
 
 	qDebug()<<"StelMainView::init";
