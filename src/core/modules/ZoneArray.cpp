@@ -175,11 +175,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				// When this assertion fails you must redefine Star1
-				// for your compiler.
-				// Because your compiler does not pack the data,
-				// which is crucial for this application.
-				Q_ASSERT(sizeof(Star1) == 28);
 				rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 				if (rval == 0)
 				{
@@ -194,13 +189,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				// When this assertion fails you must redefine Star2
-				// for your compiler.
-				// Because your compiler does not pack the data,
-				// which is crucial for this application.
-#ifndef _MSC_BUILD
-				Q_ASSERT(sizeof(Star2) == 10);
-#endif
 				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 				if (rval == Q_NULLPTR)
 				{
@@ -215,13 +203,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			}
 			else
 			{
-				// When this assertion fails you must redefine Star3
-				// for your compiler.
-				// Because your compiler does not pack the data,
-				// which is crucial for this application.
-#ifndef _MSC_BUILD
-				Q_ASSERT(sizeof(Star3) == 6);
-#endif
 				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
 				if (rval == Q_NULLPTR)
 				{

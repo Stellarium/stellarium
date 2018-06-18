@@ -141,7 +141,7 @@ public:
 	int hasComponentID(void) const;
 	void print(void) const;
 };
-
+static_assert(sizeof(Star1) == 28, "Size of Star1 must be 28 bytes");
 
 struct Star2 {  // 10 byte
 
@@ -219,6 +219,7 @@ public:
 	bool hasName() const {return false;}
 	void print(void) const;
 };
+static_assert(sizeof(Star2) == 10, "Size of Star2 must be 10 bytes");
 
 struct Star3 {  // 6 byte
 
@@ -277,5 +278,6 @@ public:
 	bool hasName() const {return false;}
 	void print();
 };
+static_assert(sizeof(Star3) == 6, "Size of Star3 must be 6 bytes");
 
 #endif // _STAR_HPP_
