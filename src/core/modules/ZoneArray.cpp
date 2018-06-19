@@ -176,10 +176,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			else
 			{
 				rval = new HipZoneArray(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-				if (rval == 0)
-				{
-					dbStr += "error - no memory ";
-				}
 			}
 			break;
 		case 1:
@@ -190,10 +186,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			else
 			{
 				rval = new SpecialZoneArray<Star2>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-				if (rval == Q_NULLPTR)
-				{
-					dbStr += "error - no memory ";
-				}
 			}
 			break;
 		case 2:
@@ -204,10 +196,6 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 			else
 			{
 				rval = new SpecialZoneArray<Star3>(file, byte_swap, use_mmap, level, mag_min, mag_range, mag_steps);
-				if (rval == Q_NULLPTR)
-				{
-					dbStr += "error - no memory ";
-				}
 			}
 			break;
 		default:
@@ -305,20 +293,8 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 	if (nr_of_zones > 0)
 	{
 		zones = new SpecialZoneData<Star>[nr_of_zones];
-		if (zones == Q_NULLPTR)
-		{
-			qDebug() << "ERROR: SpecialZoneArray(" << level
-				 << ")::SpecialZoneArray: no memory (1)";
-			exit(1);
-		}
 
 		unsigned int *zone_size = new unsigned int[nr_of_zones];
-		if (zone_size == Q_NULLPTR)
-		{
-			qDebug() << "ERROR: SpecialZoneArray(" << level
-				 << ")::SpecialZoneArray: no memory (2)";
-			exit(1);
-		}
 		if ((qint64)(sizeof(unsigned int)*nr_of_zones) != file->read((char*)zone_size, sizeof(unsigned int)*nr_of_zones))
 		{
 			qDebug() << "Error reading zones from catalog:"
@@ -382,12 +358,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 			else
 			{
 				stars = new Star[nr_of_stars];
-				if (stars == Q_NULLPTR)
-				{
-					qDebug() << "ERROR: SpecialZoneArray(" << level
-						 << ")::SpecialZoneArray: no memory (3)";
-					exit(1);
-				}
 				if (!readFile(*file,stars,sizeof(Star)*nr_of_stars))
 				{
 					delete[] stars;
