@@ -50,14 +50,14 @@
 #include <QRegExp>
 #include <QDir>
 
-static const int DWARF_GALAXIES[] =
+static const unsigned int DWARF_GALAXIES[] =
 {
 	3589, 3792, 6830, 10074, 19441, 28913,
 	29194, 29653, 50779, 54074, 60095, 63287,
 	69519, 88608, 2807155, 3097691
 };
 
-static const int H400_LIST[] =
+static const unsigned int H400_LIST[] =
 {
 	  40,  129,  136,  157,  185,  205,  225,  246,  247,  253,
 	 278,  288,  381,  404,  436,  457,  488,  524,  559,  584,
@@ -2954,13 +2954,13 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			break;
 		case 150: // Dwarf galaxies
 		{
-			for (int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
+			for (unsigned int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
 				result << QString("PGC %1").arg(DWARF_GALAXIES[i]);
 			break;
 		}
 		case 151: // Herschel 400 Catalogue
 		{
-			for (int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
+			for (unsigned int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
 				result << QString("NGC %1").arg(H400_LIST[i]);
 			break;
 		}
@@ -3195,7 +3195,7 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType)
 		case 150: // Dwarf galaxies
 		{
 			NebulaP ds;
-			for (int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
+			for (unsigned int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
 			{
 				ds = searchPGC(DWARF_GALAXIES[i]);
 				if (!ds.isNull())
@@ -3206,7 +3206,7 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType)
 		case 151: // Herschel 400 Catalogue
 		{
 			NebulaP ds;
-			for (int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
+			for (unsigned int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
 			{
 				ds = searchNGC(H400_LIST[i]);
 				if (!ds.isNull())
