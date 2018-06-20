@@ -1459,7 +1459,7 @@ double getDeltaTByEspenakMeeus(const double jDay)
 	// A summary is described here:
 	// http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
 
-	double y = year+((month-1)*30.5+day/31.*30.5)/366;
+	double y = getDecYear(year, month, day);
 
 	// set the default value for Delta T
 	double u = (y-1820)/100.;
