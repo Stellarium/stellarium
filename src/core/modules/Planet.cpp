@@ -2229,8 +2229,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		StelProjector::ModelViewTranformP transfo2 = transfo->clone();
 		transfo2->combine(Mat4d::zrotation(M_PI/180*(axisRotation + 90.)));
-		StelPainter* sPainter = new StelPainter(core->getProjection(transfo2));
-		gl = sPainter->glFuncs();
+		StelPainter sPainter(core->getProjection(transfo2));
+		gl = sPainter.glFuncs();
 		
 		// Set the main source of light to be the sun
 		Vec3d sunPos(0.);
@@ -2275,33 +2275,30 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 			// when we zoom in, reduce the overbrightness. (LP:#1421173)
 			const float fov=core->getProjection(transfo)->getFov();
 			const float overbright=qBound(0.85f, 0.5f*fov, 2.0f); // scale full brightness to 0.85...2. (<2 when fov gets under 4 degrees)
-			sPainter->setColor(overbright, pow(0.75f, extinctedMag)*overbright, pow(0.42f, 0.9f*extinctedMag)*overbright);
+			sPainter.setColor(overbright, pow(0.75f, extinctedMag)*overbright, pow(0.42f, 0.9f*extinctedMag)*overbright);
 		}
 
 		//if (rings) /// GZ This was the previous condition. Not sure why rings were dropped?
 		if(ssm->getFlagUseObjModels() && !objModelPath.isEmpty())
 		{
-			if(!drawObjModel(sPainter, screenSz))
+			if(!drawObjModel(&sPainter, screenSz))
 			{
-				drawSphere(sPainter, screenSz, drawOnlyRing);
+				drawSphere(&sPainter, screenSz, drawOnlyRing);
 			}
 		}
 		else if (!survey || survey->getInterstate() < 1.0f)
 		{
-			drawSphere(sPainter, screenSz, drawOnlyRing);
+			drawSphere(&sPainter, screenSz, drawOnlyRing);
 		}
 
 		if (survey && survey->getInterstate() > 0.0f)
 		{
-			drawSurvey(core, sPainter);
-			drawSphere(sPainter, screenSz, true);
+			drawSurvey(core, &sPainter);
+			drawSphere(&sPainter, screenSz, true);
 		}
 
 
 		core->setClippingPlanes(n,f);  // Restore old clipping planes
-
-		delete sPainter;
-		sPainter=Q_NULLPTR;
 	}
 
 	bool allowDrawHalo = true;

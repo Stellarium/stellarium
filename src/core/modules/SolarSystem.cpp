@@ -1280,10 +1280,9 @@ void SolarSystem::draw(StelCore* core)
 
 	if (trailFader.getInterstate()>0.0000001f)
 	{
-		StelPainter* sPainter = new StelPainter(core->getProjection2d());
+		StelPainter sPainter(core->getProjection2d());
 		allTrails->setOpacity(trailFader.getInterstate());
-		allTrails->draw(core, sPainter);
-		delete sPainter;
+		allTrails->draw(core, &sPainter);
 	}
 
 	// Make some voodoo to determine when labels should be displayed
