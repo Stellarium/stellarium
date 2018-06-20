@@ -5,7 +5,8 @@
 #0.1.5 using the StelProperty system
 #0.1.6 adding arbitrary declinations
 #0.1.7 adding license info for GUI
-SET(ARCHAEOLINES_VERSION "0.1.7")
+#0.1.8 adding 2 more lines to plugin (selected object azimuth and selected object hour angle)
+SET(ARCHAEOLINES_VERSION "0.1.8")
 ADD_DEFINITIONS(-DARCHAEOLINES_PLUGIN_VERSION="${ARCHAEOLINES_VERSION}")
 ADD_DEFINITIONS(-DARCHAEOLINES_PLUGIN_LICENSE="GNU GPLv2+")
 
