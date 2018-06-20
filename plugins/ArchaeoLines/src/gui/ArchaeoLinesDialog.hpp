@@ -56,6 +56,8 @@ public slots:
 	void setCurrentMoonColor(QColor color){currentMoonColor=color;}
 	void setCurrentPlanetColor(QColor color){currentPlanetColor=color;}
 	void setSelectedObjectColor(QColor color){selectedObjectColor=color;}
+	void setSelectedObjectAzimuthColor(QColor color){selectedObjectAzimuthColor=color;}
+	void setSelectedObjectHourAngleColor(QColor color){selectedObjectHourAngleColor=color;}
 	void setGeographicLocation1Color(QColor color){geographicLocation1Color=color;}
 	void setGeographicLocation2Color(QColor color){geographicLocation2Color=color;}
 	void setCustomAzimuth1Color(QColor color){customAzimuth1Color=color;}
@@ -73,6 +75,8 @@ public slots:
 	void askCurrentMoonColor();
 	void askCurrentPlanetColor();
 	void askSelectedObjectColor();
+	void askSelectedObjectAzimuthColor();
+	void askSelectedObjectHourAngleColor();
 	void askGeographicLocation1Color();
 	void askGeographicLocation2Color();
 	void askCustomAzimuth1Color();
@@ -98,6 +102,8 @@ private:
 	QColor currentMoonColor;
 	QColor currentPlanetColor;
 	QColor selectedObjectColor;
+	QColor selectedObjectAzimuthColor;
+	QColor selectedObjectHourAngleColor;
 	QColor geographicLocation1Color;
 	QColor geographicLocation2Color;
 	QColor customAzimuth1Color;
@@ -115,6 +121,8 @@ private:
 	QPixmap currentMoonColorPixmap;
 	QPixmap currentPlanetColorPixmap;
 	QPixmap selectedObjectColorPixmap;
+	QPixmap selectedObjectAzimuthColorPixmap;
+	QPixmap selectedObjectHourAngleColorPixmap;
 	QPixmap geographicLocation1ColorPixmap;
 	QPixmap geographicLocation2ColorPixmap;
 	QPixmap customAzimuth1ColorPixmap;

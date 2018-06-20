@@ -52,6 +52,8 @@ these declinations are still important in everyday astronomy.
  -# Current declination of the sun
  -# Current declination of the moon
  -# Current declination of a naked-eye planet
+ -# Azimuth of currently selected object
+ -# Hour Angle of currently selected object
 
 Some religions, most notably Islam, adhere to a practice of observing a prayer direction towards a particular location.
 Azimuth lines (vertical semicircles from zenith to nadir) for two locations can be shown. Default locations are Mecca (Kaaba) and Jerusalem.
@@ -107,7 +109,9 @@ public:
 		CurrentMoon,
 		CustomDeclination1,
 		CustomDeclination2,
-		GeographicLocation1, // The following types are in altaz frame!
+		SelectedObjectHourAngle, // also still RA_of_date frame!
+		SelectedObjectAzimuth, // This and the following types are in altaz frame!
+		GeographicLocation1,
 		GeographicLocation2,
 		CustomAzimuth1,
 		CustomAzimuth2
@@ -124,18 +128,18 @@ signals:
 	void definingAngleChanged(double angle);
 public slots:
 	void setColor(const Vec3f& c);
-	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void update(const double deltaTime) {fader.update((int)(deltaTime*1000));}
+	void setFadeDuration(const float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
-	void setFontSize(double newSize){font.setPixelSize(newSize);}
+	void setFontSize(const double newSize){font.setPixelSize(newSize);}
 	//! reset declination/azimuth angle (degrees) of this arc.
-	void setDefiningAngle(double angle);
+	void setDefiningAngle(const double angle);
 	double getDefiningAngle(void) const {return definingAngle;} // returns declination for most, or azimuth.
 	//! Re-translates the label.
 	void updateLabel();
-	void setLabelVisible(bool b);
-	bool isLabelVisible() const{return flagLabel;}
-	void setLineType(ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
+	void setLabelVisible(const bool b);
+	bool isLabelVisible() const {return flagLabel;}
+	void setLineType(const ArchaeoLine::Line line) {lineType=line; updateLabel();} // Meaningful only for CurrentPlanet... types
 	//! change label. Used only for selected-object line - the other labels should not be changed!
 	void setLabel(const QString newLabel){label=newLabel;}
 	QString getLabel() const {return label;}
@@ -201,6 +205,16 @@ class ArchaeoLines : public StelModule
 				READ   isSelectedObjectDisplayed
 				WRITE  showSelectedObject
 				NOTIFY showSelectedObjectChanged
+		   )
+	Q_PROPERTY(bool flagShowSelectedObjectAzimuth
+				READ   isSelectedObjectAzimuthDisplayed
+				WRITE  showSelectedObjectAzimuth
+				NOTIFY showSelectedObjectAzimuthChanged
+		   )
+	Q_PROPERTY(bool flagShowSelectedObjectHourAngle
+				READ   isSelectedObjectHourAngleDisplayed
+				WRITE  showSelectedObjectHourAngle
+				NOTIFY showSelectedObjectHourAngleChanged
 		   )
 	Q_PROPERTY(bool flagShowCurrentSun
 				READ   isCurrentSunDisplayed
@@ -329,6 +343,8 @@ signals:
 	void showZenithPassageChanged(bool on);
 	void showNadirPassageChanged(bool on);
 	void showSelectedObjectChanged(bool on);
+	void showSelectedObjectAzimuthChanged(bool on);
+	void showSelectedObjectHourAngleChanged(bool on);
 	void showCurrentSunChanged(bool on);
 	void showCurrentMoonChanged(bool on);
 	void showGeographicLocation1Changed(bool on);
@@ -364,6 +380,8 @@ public slots:
 	bool isZenithPassageDisplayed() const {return flagShowZenithPassage;}
 	bool isNadirPassageDisplayed() const {return flagShowNadirPassage;}
 	bool isSelectedObjectDisplayed() const {return flagShowSelectedObject;}
+	bool isSelectedObjectAzimuthDisplayed() const {return flagShowSelectedObjectAzimuth;}
+	bool isSelectedObjectHourAngleDisplayed() const {return flagShowSelectedObjectHourAngle;}
 	bool isCurrentSunDisplayed() const {return flagShowCurrentSun;}
 	bool isCurrentMoonDisplayed() const {return flagShowCurrentMoon;}
 	ArchaeoLine::Line whichCurrentPlanetDisplayed() const {return enumShowCurrentPlanet;}
@@ -383,6 +401,8 @@ public slots:
 	void showZenithPassage(bool b);
 	void showNadirPassage(bool b);
 	void showSelectedObject(bool b);
+	void showSelectedObjectAzimuth(bool b);
+	void showSelectedObjectHourAngle(bool b);
 	void showCurrentSun(bool b);
 	void showCurrentMoon(bool b);
 	void showCurrentPlanet(ArchaeoLine::Line l); // Allowed values for l: CurrentPlanetNone...CurrentPlanetSaturn.
@@ -451,6 +471,8 @@ private:
 	Vec3f zenithPassageColor;
 	Vec3f nadirPassageColor;
 	Vec3f selectedObjectColor;
+	Vec3f selectedObjectAzimuthColor;
+	Vec3f selectedObjectHourAngleColor;
 	Vec3f currentSunColor;
 	Vec3f currentMoonColor;
 	Vec3f currentPlanetColor;
@@ -469,6 +491,8 @@ private:
 	bool flagShowZenithPassage;
 	bool flagShowNadirPassage;
 	bool flagShowSelectedObject;
+	bool flagShowSelectedObjectAzimuth;
+	bool flagShowSelectedObjectHourAngle;
 	bool flagShowCurrentSun;
 	bool flagShowCurrentMoon;
 	ArchaeoLine::Line enumShowCurrentPlanet;
@@ -500,6 +524,8 @@ private:
 	ArchaeoLine * zenithPassageLine;
 	ArchaeoLine * nadirPassageLine;
 	ArchaeoLine * selectedObjectLine;
+	ArchaeoLine * selectedObjectAzimuthLine;
+	ArchaeoLine * selectedObjectHourAngleLine;
 	ArchaeoLine * currentSunLine;
 	ArchaeoLine * currentMoonLine;
 	ArchaeoLine * currentPlanetLine;

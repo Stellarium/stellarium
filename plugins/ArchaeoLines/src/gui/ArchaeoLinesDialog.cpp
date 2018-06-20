@@ -73,6 +73,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectBoolProperty(ui->zenithPassageCheckBox,   "ArchaeoLines.flagShowZenithPassage");
 	connectBoolProperty(ui->nadirPassageCheckBox,    "ArchaeoLines.flagShowNadirPassage");
 	connectBoolProperty(ui->selectedObjectCheckBox,  "ArchaeoLines.flagShowSelectedObject");
+	connectBoolProperty(ui->selectedObjectAzimuthCheckBox,    "ArchaeoLines.flagShowSelectedObjectAzimuth");
+	connectBoolProperty(ui->selectedObjectHourAngleCheckBox,  "ArchaeoLines.flagShowSelectedObjectHourAngle");
 	connectBoolProperty(ui->currentSunCheckBox,      "ArchaeoLines.flagShowCurrentSun");
 	connectBoolProperty(ui->currentMoonCheckBox,     "ArchaeoLines.flagShowCurrentMoon");
 	// Planet ComboBox requires special handling!
@@ -119,6 +121,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
 	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
 	selectedObjectColor  = al->getLineColor(ArchaeoLine::SelectedObject);
+	selectedObjectAzimuthColor    = al->getLineColor(ArchaeoLine::SelectedObjectAzimuth);
+	selectedObjectHourAngleColor  = al->getLineColor(ArchaeoLine::SelectedObjectHourAngle);
 	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
 	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
 	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
@@ -160,6 +164,14 @@ void ArchaeoLinesDialog::createDialogContent()
 	selectedObjectColorPixmap.fill(selectedObjectColor);
 	ui->selectedObjectColorToolButton->setIconSize(QSize(48, 12));
 	ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
+	selectedObjectAzimuthColorPixmap=QPixmap(48, 12);
+	selectedObjectAzimuthColorPixmap.fill(selectedObjectAzimuthColor);
+	ui->selectedObjectAzimuthColorToolButton->setIconSize(QSize(48, 12));
+	ui->selectedObjectAzimuthColorToolButton->setIcon(QIcon(selectedObjectAzimuthColorPixmap));
+	selectedObjectHourAngleColorPixmap=QPixmap(48, 12);
+	selectedObjectHourAngleColorPixmap.fill(selectedObjectHourAngleColor);
+	ui->selectedObjectHourAngleColorToolButton->setIconSize(QSize(48, 12));
+	ui->selectedObjectHourAngleColorToolButton->setIcon(QIcon(selectedObjectHourAngleColorPixmap));
 	currentSunColorPixmap=QPixmap(48, 12);
 	currentSunColorPixmap.fill(currentSunColor);
 	ui->currentSunColorToolButton->setIconSize(QSize(48, 12));
@@ -206,6 +218,8 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->zenithPassageColorToolButton,       SIGNAL(released()), this, SLOT(askZenithPassageColor()));
 	connect(ui->nadirPassageColorToolButton,        SIGNAL(released()), this, SLOT(askNadirPassageColor()));
 	connect(ui->selectedObjectColorToolButton,      SIGNAL(released()), this, SLOT(askSelectedObjectColor()));
+	connect(ui->selectedObjectAzimuthColorToolButton,   SIGNAL(released()), this, SLOT(askSelectedObjectAzimuthColor()));
+	connect(ui->selectedObjectHourAngleColorToolButton, SIGNAL(released()), this, SLOT(askSelectedObjectHourAngleColor()));
 	connect(ui->currentSunColorToolButton,          SIGNAL(released()), this, SLOT(askCurrentSunColor()));
 	connect(ui->currentMoonColorToolButton,         SIGNAL(released()), this, SLOT(askCurrentMoonColor()));
 	connect(ui->currentPlanetColorToolButton,       SIGNAL(released()), this, SLOT(askCurrentPlanetColor()));
@@ -263,6 +277,8 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 	html += "<li>" + q_("Declination of the Zenith passage") + "</li>";
 	html += "<li>" + q_("Declination of the Nadir passage") + "</li>";
 	html += "<li>" + q_("Declination of the currently selected object") + "</li>";
+	html += "<li>" + q_("Azimuth of the currently selected object") + "</li>";
+	html += "<li>" + q_("Hour Angle of the currently selected object") + "</li>";
 	html += "<li>" + q_("Current declination of the sun") + "</li>";
 	html += "<li>" + q_("Current declination of the moon") + "</li>";
 	html += "<li>" + q_("Current declination of a naked-eye planet") + "</li></ul>";
@@ -308,6 +324,8 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
 	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
 	selectedObjectColor  = al->getLineColor(ArchaeoLine::SelectedObject);
+	selectedObjectAzimuthColor   = al->getLineColor(ArchaeoLine::SelectedObjectAzimuth);
+	selectedObjectHourAngleColor = al->getLineColor(ArchaeoLine::SelectedObjectHourAngle);
 	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
 	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
 	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
@@ -333,6 +351,10 @@ void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
 	selectedObjectColorPixmap.fill(selectedObjectColor);
 	ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
+	selectedObjectAzimuthColorPixmap.fill(selectedObjectAzimuthColor);
+	ui->selectedObjectAzimuthColorToolButton->setIcon(QIcon(selectedObjectAzimuthColorPixmap));
+	selectedObjectHourAngleColorPixmap.fill(selectedObjectHourAngleColor);
+	ui->selectedObjectHourAngleColorToolButton->setIcon(QIcon(selectedObjectHourAngleColorPixmap));
 	currentSunColorPixmap.fill(currentSunColor);
 	ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
 	currentMoonColorPixmap.fill(currentMoonColor);
@@ -447,6 +469,28 @@ void ArchaeoLinesDialog::askSelectedObjectColor()
 		al->setLineColor(ArchaeoLine::SelectedObject, c);
 		selectedObjectColorPixmap.fill(c);
 		ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
+	}
+}
+void ArchaeoLinesDialog::askSelectedObjectAzimuthColor()
+{
+	QColor c=QColorDialog::getColor(selectedObjectAzimuthColor, Q_NULLPTR, q_("Select color for selected object azimuth line"));
+	if (c.isValid())
+	{
+		selectedObjectColor=c;
+		al->setLineColor(ArchaeoLine::SelectedObjectAzimuth, c);
+		selectedObjectAzimuthColorPixmap.fill(c);
+		ui->selectedObjectAzimuthColorToolButton->setIcon(QIcon(selectedObjectAzimuthColorPixmap));
+	}
+}
+void ArchaeoLinesDialog::askSelectedObjectHourAngleColor()
+{
+	QColor c=QColorDialog::getColor(selectedObjectHourAngleColor, Q_NULLPTR, q_("Select color for selected object hour angle line"));
+	if (c.isValid())
+	{
+		selectedObjectHourAngleColor=c;
+		al->setLineColor(ArchaeoLine::SelectedObjectHourAngle, c);
+		selectedObjectHourAngleColorPixmap.fill(c);
+		ui->selectedObjectHourAngleColorToolButton->setIcon(QIcon(selectedObjectHourAngleColorPixmap));
 	}
 }
 void ArchaeoLinesDialog::askCurrentSunColor()

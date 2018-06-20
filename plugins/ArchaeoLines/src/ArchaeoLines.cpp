@@ -76,6 +76,8 @@ ArchaeoLines::ArchaeoLines()
 	, flagShowZenithPassage(false)
 	, flagShowNadirPassage(false)
 	, flagShowSelectedObject(false)
+	, flagShowSelectedObjectAzimuth(false)
+	, flagShowSelectedObjectHourAngle(false)
 	, flagShowCurrentSun(false)
 	, flagShowCurrentMoon(false)
 	, enumShowCurrentPlanet(ArchaeoLine::CurrentPlanetNone)
@@ -122,6 +124,8 @@ ArchaeoLines::ArchaeoLines()
 	zenithPassageLine  = new ArchaeoLine(ArchaeoLine::ZenithPassage, 48.0);
 	nadirPassageLine   = new ArchaeoLine(ArchaeoLine::NadirPassage, 42.0);
 	selectedObjectLine = new ArchaeoLine(ArchaeoLine::SelectedObject, 0.0);
+	selectedObjectAzimuthLine = new ArchaeoLine(ArchaeoLine::SelectedObjectAzimuth, 0.0);
+	selectedObjectHourAngleLine = new ArchaeoLine(ArchaeoLine::SelectedObjectHourAngle, 0.0);
 	currentSunLine     = new ArchaeoLine(ArchaeoLine::CurrentSun, 0.0);
 	currentMoonLine    = new ArchaeoLine(ArchaeoLine::CurrentMoon, 0.0);
 	currentPlanetLine  = new ArchaeoLine(ArchaeoLine::CurrentPlanetNone, 0.0);
@@ -156,6 +160,8 @@ ArchaeoLines::~ArchaeoLines()
 	delete zenithPassageLine;  zenithPassageLine=Q_NULLPTR;
 	delete nadirPassageLine;   nadirPassageLine=Q_NULLPTR;
 	delete selectedObjectLine; selectedObjectLine=Q_NULLPTR;
+	delete selectedObjectAzimuthLine; selectedObjectAzimuthLine=Q_NULLPTR;
+	delete selectedObjectHourAngleLine; selectedObjectHourAngleLine=Q_NULLPTR;
 	delete currentSunLine;     currentSunLine=Q_NULLPTR;
 	delete currentMoonLine;    currentMoonLine=Q_NULLPTR;
 	delete currentPlanetLine;  currentPlanetLine=Q_NULLPTR;
@@ -202,6 +208,8 @@ void ArchaeoLines::init()
 	Q_ASSERT(zenithPassageLine);
 	Q_ASSERT(nadirPassageLine);
 	Q_ASSERT(selectedObjectLine);
+	Q_ASSERT(selectedObjectAzimuthLine);
+	Q_ASSERT(selectedObjectHourAngleLine);
 	Q_ASSERT(currentSunLine);
 	Q_ASSERT(currentMoonLine);
 	Q_ASSERT(currentPlanetLine);
@@ -250,6 +258,8 @@ void ArchaeoLines::init()
 	addAction("actionAL_showZenithPassageLine",    section, N_("Show Line for Zenith Passage"),     "flagShowZenithPassage"   ); // No Shortcuts configured.
 	addAction("actionAL_showNadirPassageLine",     section, N_("Show Line for Nadir Passage"),      "flagShowNadirPassage"    ); // No Shortcuts configured.
 	addAction("actionAL_showSelectedObjectLine",   section, N_("Show Line for Selected Object"),    "flagShowSelectedObject"  ); // No Shortcuts configured.
+	addAction("actionAL_showSelectedObjectAzimuthLine",   section, N_("Show Line for Selected Object's Azimuth"),    "flagShowSelectedObjectAzimuth"   ); // No Shortcuts configured.
+	addAction("actionAL_showSelectedObjectHourAngleLine", section, N_("Show Line for Selected Object's Hour Angle"), "flagShowSelectedObjectHourAngle" ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentSunLine",       section, N_("Show Line for Current Sun"),        "flagShowCurrentSun"      ); // No Shortcuts configured.
 	addAction("actionAL_showCurrentMoonLine",      section, N_("Show Line for Current Moon"),       "flagShowCurrentMoon"     ); // No Shortcuts configured.
 	addAction("actionAL_showGeographicLocation1Line",section, N_("Show Vertical for Geographic Location 1"),   "flagShowGeographicLocation1"  ); // No Shortcuts configured.
@@ -280,7 +290,7 @@ void ArchaeoLines::update(double deltaTime)
 	static double eps;
 
 	PlanetP planet=ssystem->getSun();
-	double dec_equ, ra_equ;
+	double dec_equ, ra_equ, az, alt;
 	StelUtils::rectToSphe(&ra_equ,&dec_equ,planet->getEquinoxEquatorialPos(core));
 	currentSunLine->setDefiningAngle(dec_equ * 180.0/M_PI);
 	planet=ssystem->getMoon();
@@ -313,10 +323,10 @@ void ArchaeoLines::update(double deltaTime)
 	// compute parallax correction with Meeus 40.6. First, find H from h=0, then add corrections.
 
 	static const double b_over_a=0.99664719;
-	double latRad=loc.latitude*M_PI/180.0;
-	double u=std::atan(b_over_a*std::tan(latRad));
-	double rhoSinPhiP=b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
-	double rhoCosPhiP=         std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
+	const double latRad=loc.latitude*M_PI/180.0;
+	const double u=std::atan(b_over_a*std::tan(latRad));
+	const double rhoSinPhiP=b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
+	const double rhoCosPhiP=         std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
 
 	QVector<double> lunarDE(8), sinPi(8);
 	lunarDE[0]=(eps+lunarI)*M_PI/180.0; // min_distance=max_parallax
@@ -368,7 +378,11 @@ void ArchaeoLines::update(double deltaTime)
 		StelUtils::rectToSphe(&ra_equ,&dec_equ,obj->getEquinoxEquatorialPos(core));
 		selectedObjectLine->setDefiningAngle(dec_equ * 180.0/M_PI);
 		selectedObjectLine->setLabel(obj->getNameI18n());
-
+		selectedObjectHourAngleLine->setDefiningAngle((M_PI-ra_equ) * 180.0/M_PI);
+		selectedObjectHourAngleLine->setLabel(obj->getNameI18n());
+		StelUtils::rectToSphe(&az,&alt,obj->getAltAzPosAuto(core));
+		selectedObjectAzimuthLine->setDefiningAngle((M_PI-az) * 180.0/M_PI);
+		selectedObjectAzimuthLine->setLabel(obj->getNameI18n());
 	}
 
 	// Updates for line brightness
@@ -389,6 +403,8 @@ void ArchaeoLines::update(double deltaTime)
 	zenithPassageLine->update(deltaTime);
 	nadirPassageLine->update(deltaTime);
 	selectedObjectLine->update(deltaTime);
+	selectedObjectAzimuthLine->update(deltaTime);
+	selectedObjectHourAngleLine->update(deltaTime);
 	currentSunLine->update(deltaTime);
 	currentMoonLine->update(deltaTime);
 	currentPlanetLine->update(deltaTime);
@@ -425,7 +441,11 @@ void ArchaeoLines::draw(StelCore* core)
 	zenithPassageLine->draw(core, lineFader.getInterstate());
 	nadirPassageLine->draw(core, lineFader.getInterstate());
 	if (objMgr->getWasSelected())
+	{
 		selectedObjectLine->draw(core, lineFader.getInterstate());
+		selectedObjectAzimuthLine->draw(core, lineFader.getInterstate());
+		selectedObjectHourAngleLine->draw(core, lineFader.getInterstate());
+	}
 	currentSunLine->draw(core, lineFader.getInterstate());
 	currentMoonLine->draw(core, lineFader.getInterstate());
 	if (enumShowCurrentPlanet>ArchaeoLine::CurrentPlanetNone)
@@ -485,6 +505,10 @@ void ArchaeoLines::loadSettings()
 	nadirPassageLine->setColor(nadirPassageColor);
 	selectedObjectColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object",    "1.00,1.00,1.00").toString());
 	selectedObjectLine->setColor(selectedObjectColor);
+	selectedObjectAzimuthColor = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object_azimuth", "1.00,1.00,1.00").toString());
+	selectedObjectAzimuthLine->setColor(selectedObjectAzimuthColor);
+	selectedObjectHourAngleColor = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_selected_object_hour_angle", "1.00,1.00,1.00").toString());
+	selectedObjectHourAngleLine->setColor(selectedObjectHourAngleColor);
 	currentSunColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_sun",    "1.00,1.00,0.75").toString());
 	currentSunLine->setColor(currentSunColor);
 	currentMoonColor    = StelUtils::strToVec3f(conf->value("ArchaeoLines/color_current_moon",    "0.50,1.00,0.50").toString());
@@ -534,8 +558,10 @@ void ArchaeoLines::loadSettings()
 	// esp. Mesoamerica
 	showZenithPassage(conf->value("ArchaeoLines/show_zenith_passage", true).toBool());
 	showNadirPassage(conf->value("ArchaeoLines/show_nadir_passage",  false).toBool());
-	// indicator for a line representing currently selected object
+	// indicators for line representing currently selected object's declination, azimuth and hour angle (or right ascension)
 	showSelectedObject(conf->value("ArchaeoLines/show_selected_object", false).toBool());
+	showSelectedObjectAzimuth(conf->value("ArchaeoLines/show_selected_object_azimuth", false).toBool());
+	showSelectedObjectHourAngle(conf->value("ArchaeoLines/show_selected_object_hour_angle", false).toBool());
 	// indicators for current declinations (those move fast over days...)
 	showCurrentSun(conf->value("ArchaeoLines/show_current_sun", true).toBool());
 	showCurrentMoon(conf->value("ArchaeoLines/show_current_moon", true).toBool());
@@ -637,6 +663,26 @@ void ArchaeoLines::showSelectedObject(bool b)
 		conf->setValue("ArchaeoLines/show_selected_object",       isSelectedObjectDisplayed());
 		selectedObjectLine->setDisplayed(b);
 		emit showSelectedObjectChanged(b);
+	}
+}
+void ArchaeoLines::showSelectedObjectAzimuth(bool b)
+{
+	if (b!=flagShowSelectedObjectAzimuth)
+	{
+		flagShowSelectedObjectAzimuth=b;
+		conf->setValue("ArchaeoLines/show_selected_object_azimuth", isSelectedObjectAzimuthDisplayed());
+		selectedObjectAzimuthLine->setDisplayed(b);
+		emit showSelectedObjectAzimuthChanged(b);
+	}
+}
+void ArchaeoLines::showSelectedObjectHourAngle(bool b)
+{
+	if (b!=flagShowSelectedObjectHourAngle)
+	{
+		flagShowSelectedObjectHourAngle=b;
+		conf->setValue("ArchaeoLines/show_selected_object_hour_angle", isSelectedObjectHourAngleDisplayed());
+		selectedObjectHourAngleLine->setDisplayed(b);
+		emit showSelectedObjectHourAngleChanged(b);
 	}
 }
 void ArchaeoLines::showCurrentSun(bool b)
@@ -930,6 +976,16 @@ void ArchaeoLines::setLineColor(ArchaeoLine::Line whichLine, QColor color)
 			conf->setValue("ArchaeoLines/color_selected_object",      QString("%1,%2,%3").arg(selectedObjectColor.v[0]).arg(selectedObjectColor.v[1]).arg(selectedObjectColor.v[2]));
 			selectedObjectLine->setColor(selectedObjectColor);
 			break;
+		case ArchaeoLine::SelectedObjectAzimuth:
+			selectedObjectAzimuthColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_selected_object_azimuth", QString("%1,%2,%3").arg(selectedObjectAzimuthColor.v[0]).arg(selectedObjectAzimuthColor.v[1]).arg(selectedObjectAzimuthColor.v[2]));
+			selectedObjectAzimuthLine->setColor(selectedObjectAzimuthColor);
+			break;
+		case ArchaeoLine::SelectedObjectHourAngle:
+			selectedObjectHourAngleColor.set(color.redF(), color.greenF(), color.blueF());
+			conf->setValue("ArchaeoLines/color_selected_object_hour_angle", QString("%1,%2,%3").arg(selectedObjectHourAngleColor.v[0]).arg(selectedObjectHourAngleColor.v[1]).arg(selectedObjectHourAngleColor.v[2]));
+			selectedObjectHourAngleLine->setColor(selectedObjectHourAngleColor);
+			break;
 		case ArchaeoLine::CurrentSun:
 			currentSunColor.set(color.redF(), color.greenF(), color.blueF());
 			conf->setValue("ArchaeoLines/color_current_sun",      QString("%1,%2,%3").arg(currentSunColor.v[0]).arg(currentSunColor.v[1]).arg(currentSunColor.v[2]));
@@ -1015,6 +1071,12 @@ QColor ArchaeoLines::getLineColor(ArchaeoLine::Line whichLine) const
 		case ArchaeoLine::SelectedObject:
 			vColor=&selectedObjectColor;
 			break;
+		case ArchaeoLine::SelectedObjectAzimuth:
+			vColor=&selectedObjectAzimuthColor;
+			break;
+		case ArchaeoLine::SelectedObjectHourAngle:
+			vColor=&selectedObjectHourAngleColor;
+			break;
 		case ArchaeoLine::CurrentSun:
 			vColor=&currentSunColor;
 			break;
@@ -1082,6 +1144,12 @@ double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine) const
 		case ArchaeoLine::SelectedObject:
 			return selectedObjectLine->getDefiningAngle();
 			break;
+		case ArchaeoLine::SelectedObjectAzimuth:
+			return selectedObjectAzimuthLine->getDefiningAngle();
+			break;
+		case ArchaeoLine::SelectedObjectHourAngle:
+			return selectedObjectHourAngleLine->getDefiningAngle();
+			break;
 		case ArchaeoLine::CurrentSun:
 			return currentSunLine->getDefiningAngle();
 			break;
@@ -1148,6 +1216,12 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 			break;
 		case ArchaeoLine::SelectedObject:
 			return selectedObjectLine->getLabel();
+			break;
+		case ArchaeoLine::SelectedObjectAzimuth:
+			return selectedObjectAzimuthLine->getLabel();
+			break;
+		case ArchaeoLine::SelectedObjectHourAngle:
+			return selectedObjectHourAngleLine->getLabel();
 			break;
 		case ArchaeoLine::CurrentSun:
 			return currentSunLine->getLabel();
@@ -1242,7 +1316,7 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle) :
 	lineType(lineType), definingAngle(definingAngle), color(0.f, 0.f, 1.f), frameType(StelCore::FrameEquinoxEqu), flagLabel(true)
 {
-	if (lineType>=GeographicLocation1)
+	if (lineType>=SelectedObjectAzimuth)
 		frameType=StelCore::FrameAltAz;
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
@@ -1281,6 +1355,8 @@ void ArchaeoLine::updateLabel()
 			label = q_("Nadir Passage");
 			break;
 		case ArchaeoLine::SelectedObject:
+		case ArchaeoLine::SelectedObjectAzimuth:
+		case ArchaeoLine::SelectedObjectHourAngle:
 			label = q_("Selected Object");
 			break;
 		case ArchaeoLine::CurrentSun:
@@ -1345,7 +1421,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 	userData.text = (isLabelVisible() ? label : "");
 	/////////////////////////////////////////////////
 	// Azimuth lines are Great Semicircles. TODO: Make sure the code commented away below is OK in all cases, then cleanup if full circles are never required.
-	if (lineType>=ArchaeoLine::GeographicLocation1)
+	if (lineType>=ArchaeoLine::SelectedObjectHourAngle)
 	{
 		SphericalCap meridianSphericalCap(Vec3d(0,1,0), 0);
 		Vec3d fpt(-1,0,0);
@@ -1357,7 +1433,7 @@ void ArchaeoLine::draw(StelCore *core, float intensity) const
 //		{
 //			//if ((viewPortSphericalCap.d<meridianSphericalCap.d && viewPortSphericalCap.contains(meridianSphericalCap.n))
 //			//	|| (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
-//			{ // N.B. we had 3x120degrees here. Look into GridLineMgr to restore if neessary.
+//			{ // N.B. we had 3x120degrees here. Look into GridLineMgr to restore if necessary.
 //				// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
 				const Mat4d& rotLonP90 = Mat4d::rotation(meridianSphericalCap.n, 90.*M_PI/180.);
 				const Mat4d& rotLonM90 = Mat4d::rotation(meridianSphericalCap.n, -90.*M_PI/180.);
@@ -1454,7 +1530,7 @@ void ArchaeoLine::setColor(const Vec3f& c)
 		emit colorChanged(c);
 	}
 }
-void ArchaeoLine::setDefiningAngle(double angle)
+void ArchaeoLine::setDefiningAngle(const double angle)
 {
 	if (angle != definingAngle)
 	{
@@ -1462,7 +1538,7 @@ void ArchaeoLine::setDefiningAngle(double angle)
 		emit definingAngleChanged(angle);
 	}
 }
-void ArchaeoLine::setLabelVisible(bool b)
+void ArchaeoLine::setLabelVisible(const bool b)
 {
 	if (b!=flagLabel)
 	{
