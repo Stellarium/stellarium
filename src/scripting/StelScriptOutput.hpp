@@ -46,6 +46,7 @@ public:
 	//! Save to new file, re-create output file.
 	//! This allows reading of results on Windows, where otherwise reading programs cannot access files opened for writing by Stellarium.
 	//! @param name new filename. If this is not an absolute path, it will be created in the same directory as output.txt
+	//! @note For storing to absolute path names, set [scripts]/flag_script_allow_write_absolute_path=true.
 	//! Normally you would call saveOutputAs(...), then reset().
 	static void saveOutputAs(const QString& name);
 

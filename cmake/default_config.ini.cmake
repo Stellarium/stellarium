@@ -309,8 +309,8 @@ landscape_name                      = guereins
 #removable_media_path                = /mount/point
 
 [scripts]
-scripting_allow_write_files         = false
-flag_script_allow_ui                = false
+flag_script_allow_write_absolute_path = false
+#flag_script_allow_ui                  = false
 
 #[proxy]
 #host_name                           = proxy.org

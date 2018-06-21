@@ -636,7 +636,10 @@ password   & string & Password for proxy. E.g. \emph{xxxxx}\\\bottomrule
 
 \begin{tabularx}{\textwidth}{l|l|l|X}\toprule
 \emph{ID}                  & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
-startup\_script                & string & startup.ssc & name of script executed on program start\\\bottomrule 
+startup\_script                            & string & startup.ssc & name of script executed on program start\\
+flag\_script\_allow\_write\_absolute\_path & bool   & false       & set true to let scripts store files to absolute pathnames.
+                                                                    This may pose a security risk if you run scripts from other authors
+                                                                    without checking what they are doing.\\\bottomrule 
 %% These are unused as on 0.15pre.
 %flag\_script\_allow\_ui        & bool &\\\midrule
 %scripting\_allow\_write\_files & bool &\\\bottomrule
