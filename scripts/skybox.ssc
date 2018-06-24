@@ -1,0 +1,179 @@
+//
+// Name: Skybox Tiles
+// License: Public Domain
+// Author: Georg Zotti
+// Version: 2.9
+// Shortcut: Ctrl+D,B
+// Description: Creates 6 tiles (North/East/South/West/Up/Down) for a skybox. These can be further used e.g. in Unity3D or other 3D environments.
+// Output directory and filenames can be set with environment variables STEL_SKYBOX_DIR and STEL_SKYBOX_BASENAME.
+// A data file is also written, you can set its name with environment variable OUTPUT_DATA.
+// Please read the script to understand how to apply it to your projects.
+
+
+// In V0.15.0 we added a web-based remote control API which could be called from Unity3D as well.
+// V2.0 2015-11-21: Exports 5 tiles and writes a few data lines into output.txt. Tiles are now overwritten.
+// This version requires Stellarium 0.14.1 (functionality added in r8046)
+//
+// V2.1 2015-12-07. Fine with V0.14.1. Can use larger vertical fov, works better with Hugin to color-balance.
+// V2.2 2015-12-28. Fine with V0.14.2. Stabilized zenith/nadir views in Stellarium, output.txt written to another file. (Now: unityData.txt)
+// V2.3 2015-12-29. Fine with V0.14.2. report luminance of each shot.
+//                                     ==> TODO: Next iteration should be able to set luminance before creating shot.
+// V2.4 2015-12-29  Towards V0.15: ask luminance of brightest panel, set luminance to balance.
+// V2.5 2016-12-07  The zenith tile was broken in V0.15. (Up-Vector issues again).
+// V2.6 2017-01-28  Alex Wolf had added direct jumps to the cardinal directions. Speeds up skybox processing :-)
+// V2.7 2017-02-05  Revert to azimuth to allow north-angle deviations. Add ambient light info to UnityData.txt
+//                  ATTENTION: This needs Stellarium beta from 2017-02-12. For now, this line 162 has been disabled.
+// V2.8 2018-02-02  ... and back again to direct cardinal orientation: Apply skybox rotation in Unity5!
+// V2.9 2018-06-21  We can read an environment variable STEL_SKYBOX_DIR now which is the path to storage. Likewise, names/directories can be changed by other environment variables.
+//                  You need to enable storing to absolute paths in the [scripts] section of config.ini.
+
+// Not finding this environment variable sets DIR to empty string to make storage into default image dir, i.e., "C:/Users/YOU/Pictures/Stellarium"
+DIR=core.getEnv("STEL_SKYBOX_DIR");
+// Base name for the tile textures. Defaults to Unity, can be overridden by setting environment variable STEL_SKYBOX_BASENAME
+BASENAME=core.getEnv("STEL_SKYBOX_BASENAME");
+if (BASENAME.length == 0)
+	BASENAME="Unity";
+// Output data file name. Defaults to unityData.txt, but can be overridden by setting environment variable STEL_SKYBOX_DATA
+DATANAME=core.getEnv("STEL_SKYBOX_DATA");
+if (DATANAME.length == 0)
+	DATANAME="unityData.txt"
+
+OUTPUT_DATA=DIR + "\\" + DATANAME;
+
+core.output("Writing images to " + DIR);
+core.output("Writing data to " + OUTPUT_DATA);
+
+// The following wait times (seconds) are required to arrive at scene before screenshot. Configure for your machine.
+// This must likely allow 2 frames to be drawn before screenshot is valid.
+MOVE_WAIT=0.05;
+SHOT_WAIT=0.15;
+// Vertical field of view. This should be 90 to use the central square of the panel in a skybox, or a bit larger for overlap to stitch panels e.g. in Hugin.
+SHOT_VFOV=90;
+
+
+///////////////////// NO USER CONFIGURABLE PARAMETERS BELOW //////////////////////////////////////
+
+// Preset for atmospheric luminance. We will later ask for brightness caused by sun or moon, then freeze this brightness prior to export.
+LUM=6000;
+
+// In case of time lapse, make sure skybox is consistent!
+oldTimeRate=core.getTimeRate();
+core.setTimeRate(0.0);
+// Keep view direction for restore after sky box tile creation.
+oldAlt=core.getViewAltitudeAngle();
+oldAz=core.getViewAzimuthAngle();
+
+// Make sure to use the right projection:
+core.setProjectionMode("ProjectionPerspective");
+core.setViewportOffset(0, 0);
+
+// Hide lower/left button bars. Note that you must hide other GUI panels manually.
+core.setGuiVisible(false);
+
+// resetOutput() available since V0.15:
+core.resetOutput();
+core.output("Current Landscape Name:" + LandscapeMgr.getCurrentLandscapeName());
+
+
+// Dump location info (since v0.18):
+locationMap=core.getObserverLocationInfo();
+core.output("Location longitude: "           + locationMap["longitude"]);
+core.output("Location latitude: "            + locationMap["latitude"]);
+core.output("Location altitude: "            + locationMap["altitude"]);
+core.output("Location name: "                + locationMap["location"]);
+core.output("Location planet: "              + locationMap["planet"]);
+core.output("Location local-sidereal-time: " + locationMap["local-sidereal-time"]);
+core.output("Location Bortle Index: "        + core.getBortleScaleIndex());
+
+StelMovementMgr.zoomTo(SHOT_VFOV, .05);
+core.wait(.05);
+
+// We will use the current luminance for all shots to avoid cube map borders!
+// TODO: Move to sun/moon first? But this should be quite good already.
+LUM=LandscapeMgr.getAtmosphereAverageLuminance();
+LandscapeMgr.setAtmosphereAverageLuminance(LUM); // this locks "exposure value".
+
+
+// North panel.
+StelMovementMgr.lookNorth(true);
+core.output("North panel luminance: " + LandscapeMgr.getLuminance());
+core.wait(MOVE_WAIT);
+core.screenshot(BASENAME + "1-north", false, DIR, true);
+core.wait(SHOT_WAIT);
+// East panel.
+StelMovementMgr.lookEast(true);
+core.output("East panel luminance: " + LandscapeMgr.getLuminance());
+core.wait(MOVE_WAIT);
+core.screenshot(BASENAME + "2-east", false, DIR, true);
+core.wait(SHOT_WAIT);
+// South panel.
+StelMovementMgr.lookSouth(true);
+core.output("South panel luminance: " + LandscapeMgr.getLuminance());
+core.wait(MOVE_WAIT);
+core.screenshot(BASENAME + "3-south", false, DIR, true);
+core.wait(SHOT_WAIT);
+// West panel.
+StelMovementMgr.lookWest(true);
+core.output("West panel luminance: " + LandscapeMgr.getLuminance());
+core.wait(MOVE_WAIT);
+core.screenshot(BASENAME + "4-west", false, DIR, true);
+core.wait(SHOT_WAIT);
+// Top panel.
+StelMovementMgr.lookZenith();
+StelMovementMgr.lookWest(false); // we need this orientation with west down.
+core.output("Top panel luminance: " + LandscapeMgr.getLuminance());
+core.wait(MOVE_WAIT);
+core.screenshot(BASENAME + "5-top", false, DIR, true);
+core.wait(SHOT_WAIT);
+// Bottom panel.
+StelMovementMgr.lookNadir();
+StelMovementMgr.lookWest(false); // we need this orientation with west up.
+core.output("Bottom panel luminance: " + LandscapeMgr.getLuminance());
+core.wait(MOVE_WAIT);
+core.screenshot(BASENAME + "6-bottom", false, DIR, true);
+core.wait(SHOT_WAIT);
+
+// make menu visible again.
+core.setGuiVisible(true);
+
+// Write some info about sun, moon and Venus to use as directional light sources in Unity or other applications.
+core.output("Stellarium Skybox lighting data:");
+core.output("Vertical FoV: "      + SHOT_VFOV);
+core.output("Horizontal FoV: "    + 2*Math.atan(Math.tan(SHOT_VFOV/2*Math.PI/180)* core.getScreenWidth()/core.getScreenHeight()) * 180/Math.PI);
+core.output("Date (UTC): "        + core.getDate("utc"));
+core.output("Date: "              + core.getDate("local"));
+core.output("JD: "                + core.getJDay());
+sunMap=core.getObjectInfo("Sun");
+core.output("Sun Azimuth: "       + sunMap["azimuth"]);
+core.output("Sun Altitude: "      + sunMap["altitude"]);
+core.output("Sun Magnitude: "     + sunMap["vmag"]);
+core.output("Sun Magnitude (after extinction): " + sunMap["vmage"]);
+core.output("Sun Longitude: "     + sunMap["elong"]);
+moonMap=core.getObjectInfo("Moon");
+core.output("Moon Azimuth: "      + moonMap["azimuth"]);
+core.output("Moon Altitude: "     + moonMap["altitude"]);
+core.output("Moon Phase: "        + moonMap["phase"]);
+core.output("Moon Phase angle: "  + moonMap["phase-angle"] * 180/Math.PI);
+core.output("Moon illumination: " + moonMap["illumination"]);
+core.output("Moon Magnitude: "    + moonMap["vmag"]);
+core.output("Moon Magnitude (after extinction): " + moonMap["vmage"]);
+core.output("Moon Longitude: "    + moonMap["elong"]);
+venusMap=core.getObjectInfo("Venus");
+core.output("Venus Azimuth: "     + venusMap["azimuth"]);
+core.output("Venus Altitude: "    + venusMap["altitude"]);
+core.output("Venus Magnitude: "   + venusMap["vmag"]);
+core.output("Venus Magnitude (after extinction): " + venusMap["vmage"]);
+core.output("Venus Longitude: "   + venusMap["elong"]);
+
+core.output("Atm. Luminance: "    + LUM);
+core.output("Landscape Brightness: " + LandscapeMgr.getCurrentLandscapeBrightness(false));
+
+core.saveOutputAs(OUTPUT_DATA);
+
+// Reset atmosphere auto brightness computation.
+LandscapeMgr.setAtmosphereAverageLuminance(-1.0);
+
+core.moveToAltAzi(oldAlt, oldAz, 0);
+core.setTimeRate(oldTimeRate);
+
+// EOF
