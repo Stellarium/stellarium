@@ -717,7 +717,7 @@ void StelMainScriptAPI::setSelectedObjectInfo(const QString& level)
 	else if (level == "ShortInfo")
 		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(StelObject::ShortInfo));
 	else if (level == "None")
-		StelApp::getInstance().getGui()->setInfoTextFilters((StelObject::InfoStringGroup)0);
+		StelApp::getInstance().getGui()->setInfoTextFilters(StelObject::InfoStringGroup(Q_NULLPTR));
 	else
 		qWarning() << "setSelectedObjectInfo unknown level string \"" << level << "\"";
 }

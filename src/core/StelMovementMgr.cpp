@@ -61,8 +61,8 @@ StelMovementMgr::StelMovementMgr(StelCore* acore)
 	, mouseZoomSpeed(30)
 	, flagEnableZoomKeys(true)
 	, flagEnableMoveKeys(true)
-	, keyMoveSpeed(0.00025)
-	, keyZoomSpeed(0.00025)
+	, keyMoveSpeed(0.00025f)
+	, keyZoomSpeed(0.00025f)
 	, flagMoveSlow(false)
 	, movementsSpeedFactor(1.0)
 	, move()
@@ -128,7 +128,7 @@ void StelMovementMgr::init()
 	flagIndicationMountMode = conf->value("gui/flag_indication_mount_mode", false).toBool();
 
 	minFov = conf->value("navigation/min_fov",0.001389).toDouble(); // default: minimal FOV = 5"
-	initFov = conf->value("navigation/init_fov",60.f).toFloat();
+	initFov = conf->value("navigation/init_fov",60.0).toDouble();
 	currentFov = initFov;
 
 

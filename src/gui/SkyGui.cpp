@@ -47,11 +47,11 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 	}
 	else if (objectInfo == "none")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(0);
+		infoTextFilters = StelObject::InfoStringGroup(Q_NULLPTR);
 	}
 	else if (objectInfo == "custom")
 	{
-		infoTextFilters = StelObject::InfoStringGroup(0);
+		infoTextFilters = StelObject::InfoStringGroup(Q_NULLPTR);
 		
 		conf->beginGroup("custom_selected_info");
 		if (conf->value("flag_show_name", false).toBool())

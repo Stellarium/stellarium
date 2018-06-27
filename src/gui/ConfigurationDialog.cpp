@@ -190,7 +190,7 @@ void ConfigurationDialog::createDialogContent()
 #endif
 
 	// Selected object info
-	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(0))
+	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(Q_NULLPTR))
 	{
 		ui->noSelectedInfoRadio->setChecked(true);
 	}
@@ -482,7 +482,7 @@ void ConfigurationDialog::setSphericMirror(bool b)
 
 void ConfigurationDialog::setNoSelectedInfo(void)
 {
-	gui->setInfoTextFilters(StelObject::InfoStringGroup(0));
+	gui->setInfoTextFilters(StelObject::InfoStringGroup(Q_NULLPTR));
 	updateSelectedInfoCheckBoxes();
 }
 
@@ -808,7 +808,7 @@ void ConfigurationDialog::saveAllSettings()
 
 	// configuration dialog / selected object info tab
 	const StelObject::InfoStringGroup& flags = gui->getInfoTextFilters();
-	if (flags == StelObject::InfoStringGroup(0))
+	if (flags == StelObject::InfoStringGroup(Q_NULLPTR))
 		conf->setValue("gui/selected_object_info", "none");
 	else if (flags == StelObject::InfoStringGroup(StelObject::ShortInfo))
 		conf->setValue("gui/selected_object_info", "short");
