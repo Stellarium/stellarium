@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-06-20 23:13+0700\n"
+"POT-Creation-Date: 2018-06-24 18:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sin Ilseop <ilsubyeega@gmail.com>, 2018\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -1773,15 +1773,15 @@ msgstr "km/s"
 #: src/core/modules/Planet.cpp:518 src/core/modules/MinorPlanet.cpp:318
 #: src/core/modules/Comet.cpp:244
 msgid "Orbital velocity"
-msgstr ""
+msgstr "궤도 속도"
 
 #: src/core/modules/Planet.cpp:521 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric velocity"
-msgstr ""
+msgstr "태양 주회 속도"
 
 #: src/core/modules/Planet.cpp:526 src/core/modules/MinorPlanet.cpp:326
 msgid "Equatorial rotation velocity"
-msgstr ""
+msgstr "적도 자전 속도"
 
 #: src/core/modules/Planet.cpp:549
 msgid "with rings"
@@ -1797,7 +1797,7 @@ msgstr "시직경"
 
 #: src/core/modules/Planet.cpp:583
 msgid "Equatorial diameter"
-msgstr ""
+msgstr "적도 지름"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:602 src/core/modules/MinorPlanet.cpp:383
@@ -1939,7 +1939,7 @@ msgstr "기체 꼬리 길이 (추산)"
 
 #: src/core/modules/Comet.cpp:314
 msgid "Core diameter"
-msgstr ""
+msgstr "중심 지름"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:236 src/gui/AstroCalcDialog.cpp:1712
@@ -10097,7 +10097,7 @@ msgstr "회합 주기:"
 
 #: src/ui_astroCalcDialog.h:1187
 msgid "Equatorial diameters ratio:"
-msgstr ""
+msgstr "적도 지름 비:"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -18169,11 +18169,11 @@ msgstr "선택된 천체의 선 보이기"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:261
 msgid "Show Line for Selected Object's Azimuth"
-msgstr ""
+msgstr "선택된 천체의 방위각 선 보이기"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:262
 msgid "Show Line for Selected Object's Hour Angle"
-msgstr ""
+msgstr "선택된 천체의 시간각 선 보이기"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:263
 msgid "Show Line for Current Sun"
@@ -18294,11 +18294,11 @@ msgstr "현재 선택된 천체의 적위"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:280
 msgid "Azimuth of the currently selected object"
-msgstr ""
+msgstr "현재 선택된 천체의 방위각"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Hour Angle of the currently selected object"
-msgstr ""
+msgstr "현재 선택된 천체의 시간각"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "Current declination of the sun"
@@ -18373,11 +18373,11 @@ msgstr "선택된 천체 선의 색상 선택"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:476
 msgid "Select color for selected object azimuth line"
-msgstr ""
+msgstr "선택된 천체의 방위각 선의 색상 선택"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:487
 msgid "Select color for selected object hour angle line"
-msgstr ""
+msgstr "선택된 천체의 시간각 선의 색상 선택"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:498
 msgid "Select color for current sun line"
@@ -18527,8 +18527,8 @@ msgstr "사용자 설정 적위 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:601
 msgid "Selected Object Azimuth"
-msgstr ""
+msgstr "선택된 천체의 방위각"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:602
 msgid "Selected Object Hour Angle"
-msgstr ""
+msgstr "선택된 천체의 시간각"

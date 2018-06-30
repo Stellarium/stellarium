@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-06-20 23:13+0700\n"
+"POT-Creation-Date: 2018-06-24 18:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: t4saha <t4saha@gmail.com>, 2017\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -1290,57 +1290,57 @@ msgstr "গঠনগত বৈশিষ্ট্য"
 #: src/core/modules/Nebula.cpp:1203
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "তারাদের কেন্দ্রাভিমুখী অতি উচ্চ সমাবেশ "
 
 #: src/core/modules/Nebula.cpp:1206
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "কেন্দ্রে তারাদের অতি উচ্চ সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1209
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "কেন্দ্রে তারাদের উচ্চ সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1212
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "কেন্দ্রে তারাদের প্রায় উচ্চ সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1217
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "কেন্দ্রে তারাদের মাঝারি সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1220
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
-msgstr ""
+msgstr "তারাদের কেন্দ্রাভিমুখী মাঝারি সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1223
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
-msgstr ""
+msgstr "তারাদের কেন্দ্রাভিমুখী প্রায় আলগা সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1226
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "তারাদের আলগা সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1229
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "তারাদের কেন্দ্রাভিমুখী প্রায় ছন্নছাড়া সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1232
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "তারাদের কেন্দ্রাভিমুখী ছন্নছাড়া সমাবেশ"
 
 #: src/core/modules/Nebula.cpp:1235
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "অনথিভুক্ত"
 
 #: src/core/modules/Nebula.cpp:1255
 msgctxt "Trumpler's Concentration Class"
@@ -1774,15 +1774,15 @@ msgstr "কিমি/সে"
 #: src/core/modules/Planet.cpp:518 src/core/modules/MinorPlanet.cpp:318
 #: src/core/modules/Comet.cpp:244
 msgid "Orbital velocity"
-msgstr ""
+msgstr "কাক্ষিক গতিবেগ"
 
 #: src/core/modules/Planet.cpp:521 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric velocity"
-msgstr ""
+msgstr "সূর্য সাপেক্ষে গতিবেগ"
 
 #: src/core/modules/Planet.cpp:526 src/core/modules/MinorPlanet.cpp:326
 msgid "Equatorial rotation velocity"
-msgstr ""
+msgstr "নিরক্ষীয় ঘুর্ণন বেগ"
 
 #: src/core/modules/Planet.cpp:549
 msgid "with rings"
@@ -1798,7 +1798,7 @@ msgstr "আপাত ব্যাস"
 
 #: src/core/modules/Planet.cpp:583
 msgid "Equatorial diameter"
-msgstr ""
+msgstr "নিরক্ষীয় ব্যাস"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:602 src/core/modules/MinorPlanet.cpp:383
@@ -1940,7 +1940,7 @@ msgstr "গ্যাস লেজের দৈর্ঘ্য (মোটাম�
 
 #: src/core/modules/Comet.cpp:314
 msgid "Core diameter"
-msgstr ""
+msgstr "কেন্দ্রের ব্যাস"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:236 src/gui/AstroCalcDialog.cpp:1712
@@ -2908,7 +2908,7 @@ msgstr "অস্ত"
 
 #: src/core/StelObject.cpp:613
 msgid "Daytime"
-msgstr ""
+msgstr "দিনের দৈর্ঘ্য"
 
 #: src/core/StelObject.cpp:626
 msgid "Polar night"
@@ -2932,7 +2932,7 @@ msgstr "মেরু ভোর"
 
 #: src/core/StelObject.cpp:640
 msgid "Polar dusk"
-msgstr ""
+msgstr "মেরু উষা বা গোধুলী"
 
 #: src/core/StelObject.cpp:646
 msgid "IAU Constellation"
@@ -3798,7 +3798,7 @@ msgstr "তালিকা সন্ধান করা হচ্ছে ..."
 
 #: src/gui/ViewDialog.cpp:583
 msgid "properties"
-msgstr ""
+msgstr "বৈশিষ্ট্য"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1448
@@ -9157,7 +9157,7 @@ msgstr "বিবিধ"
 
 #: src/ui_configurationDialog.h:1399
 msgid "Additional settings for Graphical User Interface"
-msgstr ""
+msgstr "অতিরিক্ত"
 
 #: src/ui_configurationDialog.h:1402
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1007
@@ -9407,7 +9407,7 @@ msgstr "তালিকা সংখ্যা"
 
 #: src/ui_configurationDialog.h:1512
 msgid "Show time of rise, transit and set of celestial object"
-msgstr ""
+msgstr "উদয়, অস্ত ও মাঝ আাকাশে থাকার সময়"
 
 #: src/ui_configurationDialog.h:1514
 msgid "Rises, transits and sets"
@@ -9435,7 +9435,7 @@ msgstr "নক্সত্রমন্ডলের সীমানা প্র�
 
 #: src/ui_configurationDialog.h:1523
 msgid "Toggle display of nebula images."
-msgstr ""
+msgstr "নীহারিকার ছবি দেখাবোর সরঞ্জামটি টুলবারে যুক্ত হয়"
 
 #: src/ui_configurationDialog.h:1525
 msgid "Show nebula background button"
@@ -9451,7 +9451,7 @@ msgstr "তারিখ অনুযায়ী সৌরপথীয় ছক প�
 
 #: src/ui_configurationDialog.h:1531
 msgid "Toggle display of the button for the Digitized Sky Survey."
-msgstr ""
+msgstr "ডিজিটাল নীরিক্ষা সরঞ্জামটি টুলবারে যুক্ত হয়"
 
 #: src/ui_configurationDialog.h:1533
 msgid "Show DSS button"
@@ -9534,7 +9534,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1571
 msgid "Additional information settings"
-msgstr ""
+msgstr "তথ্যাদির বিন্যাস"
 
 #: src/ui_configurationDialog.h:1572
 msgid "Use short notation for unit of measurement of surface brightness"
@@ -9626,7 +9626,7 @@ msgstr "তারমণ্ডলের মানচিত্র সংক্র�
 
 #: src/ui_configurationDialog.h:1606
 msgid "Align labels with the screen center"
-msgstr ""
+msgstr "স্ক্রীনকেন্দ্রিক হরফ প্রদর্শন"
 
 #: src/ui_configurationDialog.h:1608
 msgid "Gravity labels"

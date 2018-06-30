@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-06-20 23:13+0700\n"
+"POT-Creation-Date: 2018-06-24 18:21+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Eric Li <ericljz@hotmail.com>, 2018\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -1315,7 +1315,7 @@ msgstr "恒星中等集中"
 #: src/core/modules/Nebula.cpp:1220
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
-msgstr ""
+msgstr "恒星宽松的趋向中心"
 
 #: src/core/modules/Nebula.cpp:1223
 msgctxt "Shapley-Sawyer Concentration Class"
@@ -1781,7 +1781,7 @@ msgstr "日心速度"
 
 #: src/core/modules/Planet.cpp:526 src/core/modules/MinorPlanet.cpp:326
 msgid "Equatorial rotation velocity"
-msgstr ""
+msgstr "赤道自转速度"
 
 #: src/core/modules/Planet.cpp:549
 msgid "with rings"
@@ -1797,7 +1797,7 @@ msgstr "视直径"
 
 #: src/core/modules/Planet.cpp:583
 msgid "Equatorial diameter"
-msgstr ""
+msgstr "赤道直径"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:602 src/core/modules/MinorPlanet.cpp:383
@@ -1939,7 +1939,7 @@ msgstr "彗尾长度（估计）"
 
 #: src/core/modules/Comet.cpp:314
 msgid "Core diameter"
-msgstr ""
+msgstr "核心直径"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:236 src/gui/AstroCalcDialog.cpp:1712
@@ -10065,7 +10065,7 @@ msgstr "会合周期："
 
 #: src/ui_astroCalcDialog.h:1187
 msgid "Equatorial diameters ratio:"
-msgstr ""
+msgstr "赤道直径比:"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -12634,7 +12634,7 @@ msgstr "视场指示器"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:302
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:438
 msgid "'Slew telescope to' window"
-msgstr "\"旋转望远镜至\"窗口"
+msgstr "\"转动至\"窗口"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:303
 msgid "Telescope commands"
@@ -12891,7 +12891,7 @@ msgstr "<b>外部软件或者远程电脑</b>是间接连接"
 msgid ""
 "<b>Nothing, just simulate one (a moving reticle)</b> is a {virtual "
 "telescope} (no connection)"
-msgstr ""
+msgstr "<b>无，只是模拟一个(一个移动十字丝)</b> 是一台 {虚拟望远镜} (无连接)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:384
 msgid ""
@@ -12930,7 +12930,7 @@ msgstr "否则，要启动望远镜，你需要开启主窗口，选择该望远
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:394
 msgid "This section is active only for DIRECT connections (see {above})."
-msgstr ""
+msgstr "此位置只有在直接连接时发挥作用 (参见 {关于})."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:396
 msgid "<b>Serial port</b> sets the serial port used by the telescope."
@@ -12975,26 +12975,26 @@ msgstr "这将列出所有设备，你的串口全称将出现在列表某处(�
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:406
 msgid "<b>Device model</b>: see {Supported devices} below."
-msgstr ""
+msgstr "<b>设备模型</b>:请参阅以下{支持设备}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:413
 msgid "Both fields here refer to communication over a network ({TCP/IP})."
-msgstr ""
+msgstr "这里的两个位置用于通过网络 ({TCP/IP}) 的通讯。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:415
 msgid ""
 "Doing something with them is necessary only for INDIRECT connections (see "
 "{above})."
-msgstr ""
+msgstr "只需要间接连接就能工作, (参见{关于})."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:419
 msgid ""
 "<b>Host</b> can be either a host name or an {IPv4} address such as "
 "'127.0.0.1'. The default value of 'localhost' means 'this computer'."
-msgstr ""
+msgstr "<b>主机</b>可以是主机名，也可以是{IPv4}地址，例如'127.0.0.1’。缺省值“localhost”意思是“本电脑”。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:421
 msgid ""
@@ -13045,7 +13045,7 @@ msgstr "该值被解释为角度。"
 msgid ""
 "This can be used in combination with a {virtual telescope} to display a "
 "moving reticle with the Telrad circles."
-msgstr ""
+msgstr "这可以与{虚拟望远镜}组合使用，以显示具有Telrad同心圆的移动十字丝。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:439
 msgid ""
@@ -13082,14 +13082,14 @@ msgstr "按下移<b>指向</b>来将设备指向选中的坐标。"
 msgid ""
 "See the section about {keyboard commands} below for other ways of "
 "controlling the device."
-msgstr ""
+msgstr "有关控制设备的其他方法，请参阅下面关于{键盘命令}的章节。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:449
 msgid ""
 "Pressing the <b>Configure telescopes...</b> button opens the {main window} "
 "of the plug-in."
-msgstr ""
+msgstr "按下<b>配置望远镜…</b>按钮打开插件的{主窗口}。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:451
 msgid ""
@@ -13163,7 +13163,7 @@ msgstr "若你发出指令后才移动视场，目标不会改变除非你重新
 msgid ""
 "<b>To point a device to a given set of coordinates:</b> Use the {'Slew to' "
 "window} (press <b>Ctrl+0</b>)."
-msgstr ""
+msgstr "<b>将设备指向给定的一组坐标：</b> 使用{'转动至' 窗口} (点击<b>Ctrl+0</b>)."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:474
@@ -13172,6 +13172,8 @@ msgid ""
 "using one of the two built-in interfaces: the Meade LX200 (the Meade "
 "Autostar controller) interface and the Celestron NexStar interface."
 msgstr ""
+"{设备模型列表}中列出的所有设备都是使用两个内置接口之一的便利定义：Mead LX200（Meade Autostar控制器）接口和CELLSTRON "
+"NEXSTAR接口。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:476
 msgid "The device list contains the following:"
@@ -13236,7 +13238,7 @@ msgstr "这是一种先进的数码设定环能将一个普通(如道布森式)�
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
-msgstr ""
+msgstr "请不要忘记将其设置为Mead兼容模式，并将波特率设置为9600B"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:494
 msgid ""
@@ -13254,7 +13256,7 @@ msgstr ""
 msgid ""
 "See the section above about {field of view indicators} for a possible "
 "practical application (emulating 'Telrad' circles)."
-msgstr ""
+msgstr "请参阅上面关于{视场指示符}的部分，以了解可能的实际应用（模仿Telrad同心圆）。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:501
@@ -17981,15 +17983,15 @@ msgstr "显示天底通道"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:260
 msgid "Show Line for Selected Object"
-msgstr "显示所选对象轨道"
+msgstr "显示所选天体的赤纬线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:261
 msgid "Show Line for Selected Object's Azimuth"
-msgstr ""
+msgstr "显示选定天体的方位线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:262
 msgid "Show Line for Selected Object's Hour Angle"
-msgstr ""
+msgstr "显示选定天体的时角线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:263
 msgid "Show Line for Current Sun"
@@ -18110,11 +18112,11 @@ msgstr "当前选定对象的赤纬"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:280
 msgid "Azimuth of the currently selected object"
-msgstr ""
+msgstr "选定天体的方位角"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Hour Angle of the currently selected object"
-msgstr ""
+msgstr "选定天体的时角"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "Current declination of the sun"
@@ -18186,11 +18188,11 @@ msgstr "设置所选对象轨道颜色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:476
 msgid "Select color for selected object azimuth line"
-msgstr ""
+msgstr "选择选定天体的方位线的颜色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:487
 msgid "Select color for selected object hour angle line"
-msgstr ""
+msgstr "选择选定天体的时角线的颜色"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:498
 msgid "Select color for current sun line"
@@ -18340,8 +18342,8 @@ msgstr "自定义赤纬线2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:601
 msgid "Selected Object Azimuth"
-msgstr ""
+msgstr "所选天体的方位角"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:602
 msgid "Selected Object Hour Angle"
-msgstr ""
+msgstr "所选天体的时角"
