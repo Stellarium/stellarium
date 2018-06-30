@@ -40,8 +40,8 @@ details.
 \section{Setting the Date and Time}
 \label{sec:gui:date}
 
-\begin{figure}[h]
-\centering\includegraphics[width=\linewidth]{date_and_time_dialog.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{date_and_time_dialog.png}
 \caption{Date and Time dialog}
 \label{fig:gui:date}
 \end{figure}
@@ -60,8 +60,8 @@ The other tab in this window allows you to see or set
 \section{Setting Your Location}
 \label{sec:gui:location}
 
-\begin{figure}[htb]
-\centering\includegraphics[width=\linewidth]{location_dialog.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{location_dialog.png}
 \caption{Location window}
 \label{fig:gui:location}
 \end{figure}
@@ -128,13 +128,13 @@ the tool button \guibutton[0.35]{2}{btd_config.png} or \key{F2} to open.
 \label{sec:gui:configuration:main}
 
 
-\begin{figure}[bp]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_main_tab.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_main_tab.png}
 \caption{Configuration Window: Main Tab}
 \label{fig:gui:configuration:main}
 \end{figure}
 
-The Main tab in the configuration window provides controls for
+The Main tab in the configuration window (Fig.~\ref{fig:gui:configuration:main}) provides controls for
 changing separately the program and sky culture languages.
 
 The next setting group allows to enable using DE430/DE431 ephemeris files. 
@@ -148,35 +148,63 @@ Most display settings have to be explicitly stored to make a setting change perm
 \subsection{The Information Tab}
 \label{sec:gui:configuration:info}
 
-
-\begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_info_tab.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_info_tab.png}
 \caption{Configuration Window: Information Tab}
 \label{fig:gui:configuration:info}
 \end{figure}
 
-The Information tab allows you to set the type and amount of information
+The Information tab (Fig.~\ref{fig:gui:configuration:info}) allows you to set the type and amount of information
 displayed about a selected object.
 \begin{itemize}
 \item Ticking or unticking the relevant boxes will control this.
 \item The information displays in various colours depending on the type and
 level of the stored data
-\item Additional settings for the information display
 \end{itemize}
 
-\subsection{The Navigation Tab}
-\label{sec:gui:configuration:nav}
+\subsection{The Extras Tab}
+\label{sec:gui:configuration:extras}
 
-
-\begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_navigation_tab.png}
-\caption{Configuration Window: Navigation Tab}
-\label{fig:gui:configuration:nav}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_extras_tab.png}
+\caption{Configuration Window: Extras Tab}
+\label{fig:gui:configuration:extras}
 \end{figure}
 
-The Navigation tab (Fig.~\ref{fig:gui:configuration:nav}) allows for
-enabling/disabling of keyboard shortcuts for panning and zooming the
-main view, and also how to specify what simulation time should be used
+The Extras tab (Fig.~\ref{fig:gui:configuration:extras}) allows you to customize information
+displayed about a selected object, download more star catalogs and also allows to hide or show additional buttons in the lower button bar. If your screen is too narrow to show all buttons, you may have to choose your optimal setup.
+\begin{itemize}
+\item Customization of information displays.
+\item Customization of visibility of buttons on bottom toolbar:
+\begin{description}
+\item[Show constellation boundaries button] You can toggle display of constellation boundaries with this button.
+\item[Show ecliptic grid button] You can toggle display of ecliptic coordinate grid with this button.
+\item[Show ICRS grid button] You can toggle display of equatorial J2000 coordinate grid with this button.
+\item[Show galactic grid button] You can toggle display of galactic coordinate grid with this button.
+\item[Show flip buttons] When enabled, two buttons will be added to
+  the main tool bar which allow the main view to be mirrored in the
+  vertical and horizontal directions. This is useful when observing
+  through telecopes which may cause the image to be mirrored.
+\item[Show nebula background button] You can disable display of DSO
+  photographs with this button.
+\item[Show DSS button] You can toggle display of Digitized Sky Survey with this button.
+\item[Show HiPS button] You can toggle display of Hierarchical Progressive Surveys with this button.
+\item[Show bookmarks button] You can enable display of Bookmarks dialog with this button.
+\item[Use buttons background] Applies a gray background under the buttons on the bottom bar.
+\end{description}
+\item Download more star catalogs.
+\end{itemize}
+
+\subsection{The Time Tab}
+\label{sec:gui:configuration:time}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_time_tab.png}
+\caption{Configuration Window: Time Tab}
+\label{fig:gui:configuration:time}
+\end{figure}
+
+The Time tab (Fig.~\ref{fig:gui:configuration:time}) allows to specify what simulation time should be used
 when the program starts:
 
 \begin{description}
@@ -191,6 +219,12 @@ when the program starts:
   be used every time Stellarium starts.
 \end{description}
 
+\noindent The middle field allows specify display formats for date and time on bottom toolbar:
+\begin{description}
+\item[JD] Stellarium will display Julian Days (JD).
+\item[Date and time] Stellarium will display date and time in selected format.
+\end{description}
+
 \noindent The lowest field allows selection of the correction model for the time
 correction $\Delta T$ (see section~\ref{sec:Concepts:DeltaT}). Default
 is ``Espenak and Meeus (2006)''. Please use other values only if you
@@ -199,29 +233,13 @@ know what you are doing.
 \subsection{The Tools Tab}
 \label{sec:gui:configuration:tools}
 
-
-\begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_tools_tab.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_tools_tab.png}
 \caption{Configuration Window: Tools Tab}
 \label{fig:gui:configuration:tools}
 \end{figure}
 
-\begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_scripts_tab.png}
-\caption{Configuration Window: Scripts Tab}
-\label{fig:gui:configuration:scripts}
-\end{figure}
-
-\begin{figure}[p]
-\centering\includegraphics[width=0.65\linewidth]{config_dialog_plugins_tab.png}
-\caption{Configuration Window: Plugins Tab}
-\label{fig:gui:plugins}
-\end{figure}
-
-
-The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains miscellaneous utility
-features, and also allows to hide or show additional buttons in the lower button bar. 
-If your screen is too narrow to show all buttons, you may have to choose your optimal setup.
+The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium options (like enabling/disabling of keyboard shortcuts for panning and zooming the main view) and options for screenshots.
 
 \begin{description}
 \item[Spheric mirror distortion] This option pre-warps the main view
@@ -229,27 +247,6 @@ If your screen is too narrow to show all buttons, you may have to choose your op
   projector. The resulting image will be reflected up from the spherical
   mirror in such a way that it may shine onto a small planetarium
   dome (or even just the ceiling of your dining room), making a cheap planetarium projection system.
-\item[Select single constellation] When active, clicking on a star
-  that is member in the constellation lines will make the
-  constellation stand out. You can select several constellations, but
-  clicking onto a star which is not member of a constellation line
-  will display all constellations.
-\item[Show nebula background button] You can disable display of DSO
-  photographs with this button.
-\item[Show bookmarks button] You can enable display of Bookmarks dialog with this button.
-\item[Show ICRS grid button] You can toggle display of equatorial J2000 coordinate grid with this button.
-\item[Show ecliptic grid button] You can toggle display of ecliptic coordinate grid with this button.
-\item[Auto-enabling for the atmosphere] When changing planet during
-  location change, atmosphere will be switched as required.
-\item[Include nutation] Compute the slight wobble of earth's
-  axis. This feature is active only about 500 years around J2000.0.
-\item[Azimuth from South] Some users may be used to counting azimuth
-  from south.
-\item[Use buttons background] Applies a gray background under the buttons on the bottom bar.
-\item[Auto zoom out returns to initial direction of view] When enabled,
-  this option changes the behaviour of the zoom out key
-  \key{\textbackslash{}} so that it resets the initial direction of view in
-  addition to the field of view.
 \item[Disc viewport] This option masks the main view
   producing the effect of a telescope eyepiece. It is also useful when
   projecting Stellarium's output with a fish-eye lens planetarium
@@ -257,16 +254,25 @@ If your screen is too narrow to show all buttons, you may have to choose your op
 \item[Gravity labels] This option makes labels of objects in the
   main view align with the nearest horizon. This means that labels
   projected onto a dome are always aligned properly.
-\item[Show flip buttons] When enabled, two buttons will be added to
-  the main tool bar which allow the main view to be mirrored in the
-  vertical and horizontal directions. This is useful when observing
-  through telecopes which may cause the image to be mirrored.
-\item[Show DSS button] You can toggle display of Digitized Sky Survey with this button.
-\item[Show galactic grid button] You can toggle display of galactic coordinate grid with this button.
-\item[Show constellation boundaries button] You can toggle display of constellation boundaries with this button.
+\item[Select single constellation] When active, clicking on a star
+  that is member in the constellation lines will make the
+  constellation stand out. You can select several constellations, but
+  clicking onto a star which is not member of a constellation line
+  will display all constellations.
+\item[Auto-enabling for the atmosphere] When changing planet during
+  location change, atmosphere will be switched as required.
+\item[Dithering] options to allow select better simulation of sky on different hardware.
+\item[Auto zoom out returns to initial direction of view] When enabled,
+  this option changes the behaviour of the zoom out key
+  \key{\textbackslash{}} so that it resets the initial direction of view in
+  addition to the field of view.
+\item[Azimuth from South] Some users may be used to counting azimuth
+  from south.
 \item[Use decimal degrees] You can toggle usage of decimal degree format for coordinates.
 \item[Topocentric coordinates] If you require planetocentric coordinates, you may switch this off. 
   Usually it should be enabled. (See~\ref{sec:Concepts:Parallax:Topocentric})
+\item[Include nutation] Compute the slight wobble of earth's
+  axis. This feature is active only about 500 years around J2000.0.
 \item[Auto select landscapes] When changing the planet in the location
   panel, a fitting landscape panorama will be shown when available.
 \item[Indication for mount mode] You can activate the short display of a message when switching type of used mount.
@@ -279,11 +285,15 @@ larger size. The maximum possible size depends on your
 hardware. $4096\times4096$ should be possible on most PCs, others may
 even create $16384\times16384$ images.
 
-Another button allows you to download more star catalogs on this tab.
 
 \subsection{The Scripts Tab}
-\label{sec:gui:scripts}
+\label{sec:gui:configuration:scripts}
 
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_scripts_tab.png}
+\caption{Configuration Window: Scripts Tab}
+\label{fig:gui:configuration:scripts}
+\end{figure}
 
 The Scripts tab (Fig.~\ref{fig:gui:configuration:scripts}) allows the
 selection of pre-assembled scripts bundled with Stellarium that can be
@@ -307,13 +317,17 @@ platform and may not work.
 \subsection{The Plugins Tab}
 \label{sec:gui:configuration:plugins}
 
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{config_dialog_plugins_tab.png}
+\caption{Configuration Window: Plugins Tab}
+\label{fig:gui:configuration:plugins}
+\end{figure}
+
 
 Plugins (see chapter~\ref{ch:Plugins} for an introduction) can be
-enabled here (Fig.~\ref{fig:gui:plugins}) to be loaded the next time
+enabled here (Fig.~\ref{fig:gui:configuration:plugins}) to be loaded the next time
 you start Stellarium. When loaded, many plugins allow additional configuration
 which is available by pressing the \button{configure} button on this tab.
-
-
 
 
 \section{The View Settings Window}
@@ -325,16 +339,29 @@ which are not available via the main toolbar.
 \subsection{The Sky Tab}
 \label{sec:gui:view:sky}
 
-\begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_sky_tab.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_sky_tab.png}
 \caption{View Settings Window: Sky Tab}
 \label{fig:gui:view:sky}
 \end{figure}
 
 The Sky tab of the View window (Fig.~\ref{fig:gui:view:sky}) contains settings
-for changing the general appearance of the main sky view. Some
-hightlights:
+for changing the general appearance of the main sky view and projections. Some hightlights of sky field:
+\begin{description}
+\item[Dynamic eye adaptation] When enabled this feature reduces the
+  brightness of faint objects when a bright object is in the field of
+  view. This simulates how the eye can be dazzled by a bright object
+  such as the moon, making it harder to see faint stars and galaxies.
+\item[Light pollution] In urban and suburban areas, the sky is
+  brightned by terrestrial light pollution reflected in the atmophere.
+  Stellarium simulates light pollution and is calibrated to the
+  \emph{Bortle Dark Sky Scale} where 1 means a good dark sky, and 9 is
+  a very badly light-polluted sky. See Appendix~\ref{ch:BortleScale}
+  for more information.
+\end{description}
 
+Some
+hightlights of stars field:
 \begin{description}
 \item[Absolute scale] is the size of stars as rendered by
   Stellarium. If you increase this value, all stars will appear larger
@@ -352,89 +379,16 @@ hightlights:
 \item[Limit magnitude] Inhibits automatic addition of fainter stars
   when zooming in. This may be helpful if you are interested in naked
   eye stars only.
-\item[Dynamic eye adaptation] When enabled this feature reduces the
-  brightness of faint objects when a bright object is in the field of
-  view. This simulates how the eye can be dazzled by a bright object
-  such as the moon, making it harder to see faint stars and galaxies.
-\item[Light pollution] In urban and suburban areas, the sky is
-  brightned by terrestrial light pollution reflected in the atmophere.
-  Stellarium simulates light pollution and is calibrated to the
-  \emph{Bortle Dark Sky Scale} where 1 means a good dark sky, and 9 is
-  a very badly light-polluted sky. See Appendix~\ref{ch:BortleScale}
-  for more information.
-\item[Solar System objects] this group of options lets you turn on
-  and off various features related to the planets. Simulation of light
-  speed will give more precise positions for planetary bodies which move
-  rapidly against backround stars (e.g. the moons of Jupiter). The
-  \emph{Scale Moon} option will increase the apparent size of the moon
-  in the sky, which can be nice for wide field of view shots.
 \item[Labels and markers] you can independantly change the amount of
-  labels displayed for planets, stars and nebulae. The further to the
+  labels displayed for stars. The further to the
   right the sliders are set, the more labels you will see. Note that
   more labels will also appear as you zoom in.
-\item[Shooting stars] Stellarium has a simple meteor simulation
-  option. This setting controls how many shooting stars will be shown.
-  Note that shooting stars are only visible when the time rate is 1, and
-  might not be visiable at some times of day. Meteor showers are not
-  currently simulated.
 \end{description}
 
-\subsubsection{Atmosphere settings}
-\label{sec:gui:view:sky:atmosphere}
-
-An auxiliary dialog contains detail settings for the atmosphere. Here
-you can set atmospheric pressure and temperature which influence
-refraction (see section~\ref{sec:phenomena:Refraction}), and the
-opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
-(see section~\ref{sec:phenomena:Extinction}).
-
-
-\subsection{The Deep-Sky Objects (DSO) Tab}
-\label{sec:gui:view:dso}
-
-\begin{figure}[t]
-\includegraphics[width=\textwidth,trim=0 120 0 0,clip]{view_dialog_dso_tab.png}
-\caption{View Settings Window: DSO Tab}
-\label{fig:gui:view:dso}
-\end{figure}
-
-\indexterm{Deep-sky objects} or DSO are extended objects which are
-external to the solar system, and are not point sources like stars.
-DSO include galaxies, planetary nebulae and star clusters. These
-objects may or may not have images associated with them. Stellarium
-comes with a catalogue of over 90,000 extended objects containing
-the combined data from many catalogues, with 200 images.  
-
-The DSO tab (Fig.~\ref{fig:gui:view:dso}) allows you to specify which 
-catalogs or which object types you are interested in. This selection 
-will also be respected in other parts of the program, 
-most notably Search (section~\ref{sec:gui:search}) and 
-AstroCalc/WUT (section~\ref{sec:gui:AstroCalc:WUT}) 
-will not find objects from catalogs which you have not selected here. 
-
-See chapter~\ref{ch:DSO} for details about the catalog, 
-and how to extend it with your own photographs.
-
-
-\subsection{The Markings Tab}
-\label{sec:gui:view:markings}
-
-\begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_markings_tab.png}
-\caption{View Settings Window: Markings Tab}
-\label{fig:gui:view:markings}
-\end{figure}
-
-The Markings tab of the View window
-(Fig.~\ref{fig:gui:view:markings}) controls the following features:
-
-\begin{description}
-\item[Celestial sphere] this group of options makes it possible to
-  plot various grids and lines in the main view.
-\item[Projection] Selecting items in this list changes the
+Projection field: Selecting items in this list changes the
   projection method which Stellarium uses to draw the sky~\citep{Snyder:MapProjections}. Options are:
 
-  \begin{description}
+\begin{description}
   \item[Perspective] Perspective projection maps the horizon and other
     great circles like equator, ecliptic, hour lines, etc. into
     straight lines. The maximum field of view is 150\degree. The
@@ -478,14 +432,93 @@ The Markings tab of the View window
   \item[Cylinder] The full name of this simple projection mode is
     \emph{cylindrical equidistant projection} or \emph{Plate
       Carr\'ee}. The maximum field of view in this mode is 233\degree.
-  \end{description}
 \end{description}
+
+\subsection{The Solar System Objects (SSO) Tab}
+\label{sec:gui:view:sso}
+
+The Solar System Objects tab of the View window (Fig.~\ref{fig:gui:view:sso}) contains settings
+for changing the general appearance of the view of Solar system objects. Some hightlights:
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_sso_tab.png}
+\caption{View Settings Window: SSO Tab}
+\label{fig:gui:view:sso}
+\end{figure}
+
+
+\begin{description}
+\item[Solar System objects] this group of options lets you turn on
+  and off various features related to the planets. Simulation of light
+  speed will give more precise positions for planetary bodies which move
+  rapidly against backround stars (e.g. the moons of Jupiter). The
+  \emph{Scale Moon} option will increase the apparent size of the moon
+  in the sky, which can be nice for wide field of view shots.
+\item[Labels and markers] you can independantly change the amount of
+  labels displayed for Solar system objects. The further to the
+  right the sliders are set, the more labels you will see. Note that
+  more labels will also appear as you zoom in.
+\item[Shooting stars] Stellarium has a simple meteor simulation
+  option. This setting controls how many shooting stars will be shown.
+  Note that shooting stars are only visible when the time rate is 1, and
+  might not be visiable at some times of day. Meteor showers are not
+  currently simulated.
+\end{description}
+
+\subsubsection{Atmosphere settings}
+\label{sec:gui:view:sky:atmosphere}
+
+An auxiliary dialog contains detail settings for the atmosphere. Here
+you can set atmospheric pressure and temperature which influence
+refraction (see section~\ref{sec:phenomena:Refraction}), and the
+opacity factor $k_v$ for extinction, \emph{magnitude loss per airmass} 
+(see section~\ref{sec:phenomena:Extinction}).
+
+
+\subsection{The Deep-Sky Objects (DSO) Tab}
+\label{sec:gui:view:dso}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_dso_tab.png}
+\caption{View Settings Window: DSO Tab}
+\label{fig:gui:view:dso}
+\end{figure}
+
+\indexterm{Deep-sky objects} or DSO are extended objects which are
+external to the solar system, and are not point sources like stars.
+DSO include galaxies, planetary nebulae and star clusters. These
+objects may or may not have images associated with them. Stellarium
+comes with a catalogue of over 90,000 extended objects containing
+the combined data from many catalogues, with 200 images.  
+
+The DSO tab (Fig.~\ref{fig:gui:view:dso}) allows you to specify which 
+catalogs or which object types you are interested in. This selection 
+will also be respected in other parts of the program, 
+most notably Search (section~\ref{sec:gui:search}) and 
+AstroCalc/WUT (section~\ref{sec:gui:AstroCalc:WUT}) 
+will not find objects from catalogs which you have not selected here. 
+
+See chapter~\ref{ch:DSO} for details about the catalog, 
+and how to extend it with your own photographs.
+
+
+\subsection{The Markings Tab}
+\label{sec:gui:view:markings}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_markings_tab.png}
+\caption{View Settings Window: Markings Tab}
+\label{fig:gui:view:markings}
+\end{figure}
+
+The Markings tab of the View window
+(Fig.~\ref{fig:gui:view:markings}) controls plot various grids and lines on celestial sphere.
 
 \subsection{The Landscape Tab}
 \label{sec:gui:view:landscape}
 
-\begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_landscape_tab.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_landscape_tab.png}
 \caption{View Settings Window: Landscape Tab}
 \label{fig:gui:view:landscape}
 \end{figure}
@@ -547,8 +580,8 @@ See section \ref{sec:configini:landscape}.
 \subsection{The Starlore Tab}
 \label{sec:gui:view:starlore}
 
-\begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_starlore_tab.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_starlore_tab.png}
 \caption{View Settings Window: Starlore Tab}
 \label{fig:gui:view:starlore}
 \end{figure}
@@ -586,15 +619,13 @@ Western and Inuit), and the rest do not. Configurable options include
 \subsection{The Surveys Tab}
 \label{sec:gui:view:surveys}
 
-\newFeature{v0.18.0}
-
-\begin{figure}[t]
-\centering\includegraphics[width=\textwidth]{view_dialog_surveys_tab.png}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{view_dialog_surveys_tab.png}
 \caption{View Settings Window: Surveys Tab}
 \label{fig:gui:view:surveys}
 \end{figure}
 
-The Surveys tab (Fig.~\ref{fig:gui:view:surveys}) allows to toggle the
+\newFeature{v0.18.0} The Surveys tab (Fig.~\ref{fig:gui:view:surveys}) allows to toggle the
 visibility of online sky or solar system surveys (see chapter~\ref{ch:surveys}
 for description of the surveys format).  Currently, only HiPS surveys are
 supported.
@@ -620,27 +651,27 @@ surveys automatically map on the proper body.
 \section{The Object Search Window}
 \label{sec:gui:search}
 
-\begin{figure}[p]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog.png}
+\begin{figure}[h]
+\centering\includegraphics[width=0.68\textwidth]{search_dialog.png}
 \caption{The Search Window: Objects}
 \label{fig:gui:search}
 \end{figure}
 
-\begin{figure}[p]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog_position.png}
+\begin{figure}[h]
+\centering\includegraphics[width=0.68\textwidth]{search_dialog_position.png}
 \caption{The Search Window: Positions}
 \label{fig:gui:search:position}
 \end{figure}
 
-\begin{figure}[p]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog_list.png}
+\begin{figure}[h]
+\centering\includegraphics[width=0.68\textwidth]{search_dialog_list.png}
 \caption{The Search Window: Lists}
 \label{fig:gui:search:lists}
 \end{figure}
 
 
-\begin{figure}[tp]
-\centering\includegraphics[width=0.68\linewidth]{search_dialog_option.png}
+\begin{figure}[h]
+\centering\includegraphics[width=0.68\textwidth]{search_dialog_option.png}
 \caption{The Search Window: Options}
 \label{fig:gui:search:options}
 \end{figure}
@@ -700,12 +731,12 @@ The Astronomical Calculations window shows six tabs with different functionality
 This tab \newFeature{v0.16.0} shows J2000.0 or horizontal positions, magnitudes and additional parameters 
 (e.g.\ surface brightness for deep-sky objects or angular separation for double stars) for various 
 lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
-Double-clicking on an entry brings the object into focus (Figure~\ref{fig:gui:AstroCalc:Positions}). 
+Double-clicking on an entry brings the object into focus (Fig.~\ref{fig:gui:AstroCalc:Positions}). 
 You may also export the list of positions into a CSV file.
 
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.60\textwidth]{astrocalc_dialog_positions_tab.png}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_positions_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Celestial positions}
 \label{fig:gui:AstroCalc:Positions}
 \end{figure}
@@ -714,7 +745,7 @@ You may also export the list of positions into a CSV file.
 \label{sec:gui:AstroCalc:Ephemeris}
 
 Select an object, start and end time, and compute an ephemeris (list of positions and magnitudes evolving over time) for that object. 
-The positions are marked in the sky with yellow circles (Figure~\ref{fig:gui:AstroCalc:Ephemeris}). 
+The positions are marked in the sky with yellow circles (Fig.~\ref{fig:gui:AstroCalc:Ephemeris}). 
 
 When you click on a date, an orange circle indicates this date and/or magnitude. 
 Double-clicking sets the respective date and brings the object to focus. 
@@ -730,7 +761,7 @@ You can export the calculated ephemeris into a CSV file.
 
 Another interesting option in this tool: using horizontal coordinates for plotting traces of the Solar system objects. 
 In this mode, the circle marks are not linked to the sky, but to the horizontal coordinate system.
-For example, you can get an analemma of the Sun for any location (Figures~\ref{fig:gui:AstroCalc:Ephemeris:Analemma} and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
+For example, you can get an analemma of the Sun for any location (Fig.~\ref{fig:gui:AstroCalc:Ephemeris:Analemma} and \ref{fig:gui:AstroCalc:Ephemeris:AnalemmaMars}), 
 or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
 \begin{figure}[tbp]
@@ -751,11 +782,11 @@ or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
-(Figure~\ref{fig:gui:AstroCalc:Phenomena}). 
+(Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
 You can export the calculated phenomena into a CSV file.
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_phenomena_tab.png}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_phenomena_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Phenomena}
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
@@ -765,15 +796,27 @@ You can export the calculated phenomena into a CSV file.
 \label{sec:gui:AstroCalc:AltVsTime}
   
 On this tab you can compute the geometrical altitude of the currently selected object 
-and date and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
+and date and draw it as a graph (Fig.~\ref{fig:gui:AstroCalc:AltVsTime}).
     
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.725\textwidth]{astrocalc_dialog_altvstime_tab.png}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_altvstime_tab.png}
 \caption{Astronomical Calculations (AstroCalc): Altitude vs.\ Time}
 \label{fig:gui:AstroCalc:AltVsTime}
 \end{figure}
 
-\newpage
+An optional graphs for the Sun (with lines for civil, nautical and astronomical twilight) and the Moon also available.
+
+\subsection{The ``Monthly Elevation'' (ME) Tab}
+\label{sec:gui:AstroCalc:ME}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_me_tab.png}
+\caption{Astronomical Calculations (AstroCalc): Monthly Elevation (ME)}
+\label{fig:gui:AstroCalc:ME}
+\end{figure}
+
+\noindent\newFeature{v0.18.0} This tab can show ``Monthly Elevation'' graph for the current year at selected time. This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:AstroCalc:ME}).
+
 \subsection{The Graphs Tab}
 \label{sec:gui:AstroCalc:Graphs}
     
@@ -783,7 +826,7 @@ and date and draw it as a graph (Figure~\ref{fig:gui:AstroCalc:AltVsTime}).
 \label{fig:gui:AstroCalc:Graphs}
 \end{figure}
   
-\noindent\newFeature{v0.16.0}This tab can show two functions over time for the current year and draw graphs for them in one screen (Figure~\ref{fig:gui:AstroCalc:Graphs}). 
+\noindent\newFeature{v0.16.0} This tab can show two functions over time for the current year and draw graphs for them in one screen (Fig.~\ref{fig:gui:AstroCalc:Graphs}). 
 You can select from 
 \begin{itemize}
 \item Magnitude vs. Time
