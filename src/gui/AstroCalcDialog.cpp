@@ -294,6 +294,14 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 
 	updateTabBarListWidgetWidth();
+
+	// Let's improve visibility of rise, set and transit times
+	ui->labelRise->setStyleSheet("QLabel { color: white; }");
+	ui->labelRiseValue->setStyleSheet("QLabel { color: white; }");
+	ui->labelTransit->setStyleSheet("QLabel { color: white; }");
+	ui->labelTransitValue->setStyleSheet("QLabel { color: white; }");
+	ui->labelSet->setStyleSheet("QLabel { color: white; }");
+	ui->labelSetValue->setStyleSheet("QLabel { color: white; }");
 }
 
 void AstroCalcDialog::updateAstroCalcData()

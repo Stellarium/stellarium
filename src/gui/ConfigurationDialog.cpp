@@ -116,6 +116,8 @@ void ConfigurationDialog::retranslate()
 		scriptSelectionChanged(ui->scriptListWidget->currentItem()->text());
 		#endif
 
+		populateDitherList();
+
 		//Plug-in information
 		populatePluginsList();
 
