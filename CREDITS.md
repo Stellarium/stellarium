@@ -277,7 +277,7 @@
 	4.5a Jupiter map created by James Hastings-Trew from Cassini data. "The 
 	     maps are free to download and use as source material or resource
 	     in artwork or rendering (CGI or real time)."
-	4.5b The Proteus and Iapetus maps and rings of Uranus 
+	4.5b The Sun, Proteus and Iapetus maps and rings of Uranus 
 	     are from Celestia (http://shatters.net/celestia/)
 	     under the GNU General Purpose License, version 2 or any later
 	     version:
