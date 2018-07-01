@@ -83,6 +83,9 @@ private:
 	//! The original names are kept in the user data field of each QComboBox
 	//! item.
 	void populateTimeZonesList();
+
+	//! Populates tooltips for GUI elements.
+	void populateTooltips();
 	
 private slots:
 	//! Called whenever the StelLocationMgr is updated

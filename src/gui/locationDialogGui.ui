@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>630</width>
-    <height>511</height>
+    <height>533</height>
    </rect>
   </property>
   <property name="styleSheet">
@@ -379,9 +379,6 @@
             </item>
             <item>
              <widget class="QPushButton" name="resetListPushButton">
-              <property name="toolTip">
-               <string>Reset location list to show all known locations</string>
-              </property>
               <property name="text">
                <string>Reset Location List</string>
               </property>
@@ -655,9 +652,6 @@
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
-              </property>
-              <property name="toolTip">
-               <string>Toggle fetching GPS location. (Does not change time zone!) When satisfied, toggle off to let other programs access the GPS device.</string>
               </property>
               <property name="text">
                <string>Get location from GPS</string>

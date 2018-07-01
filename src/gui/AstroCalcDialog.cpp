@@ -180,7 +180,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->dateToDateTimeEdit->setDateTime(currentDT.addMonths(1));
 	ui->phenomenFromDateEdit->setDateTime(currentDT);
 	ui->phenomenToDateEdit->setDateTime(currentDT.addMonths(1));
-	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt");
+	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
 	QDate min = QDate(100, 1, 1);
@@ -295,13 +295,25 @@ void AstroCalcDialog::createDialogContent()
 
 	updateTabBarListWidgetWidth();
 
-	// Let's improve visibility of rise, set and transit times
-	ui->labelRise->setStyleSheet("QLabel { color: white; }");
-	ui->labelRiseValue->setStyleSheet("QLabel { color: white; }");
-	ui->labelTransit->setStyleSheet("QLabel { color: white; }");
-	ui->labelTransitValue->setStyleSheet("QLabel { color: white; }");
-	ui->labelSet->setStyleSheet("QLabel { color: white; }");
-	ui->labelSetValue->setStyleSheet("QLabel { color: white; }");
+	// Let's improve visibility of the text
+	QString style = "QLabel { color: rgb(238, 238, 238); }";
+	ui->celestialPositionsTimeLabel->setStyleSheet(style);
+	ui->altVsTimeLabel->setStyleSheet(style);
+	ui->monthlyElevationLabel->setStyleSheet(style);
+	ui->graphsFirstLabel->setStyleSheet(style);
+	ui->graphsCelestialBodyLabel->setStyleSheet(style);
+	ui->graphsSecondLabel->setStyleSheet(style);
+	ui->labelRise->setStyleSheet(style);
+	ui->labelRiseValue->setStyleSheet(style);
+	ui->labelTransit->setStyleSheet(style);
+	ui->labelTransitValue->setStyleSheet(style);
+	ui->labelSet->setStyleSheet(style);
+	ui->labelSetValue->setStyleSheet(style);
+	style = "QCheckBox { color: rgb(238, 238, 238); }";
+	ui->sunAltitudeCheckBox->setStyleSheet(style);
+	ui->moonAltitudeCheckBox->setStyleSheet(style);
+	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
+	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
 }
 
 void AstroCalcDialog::updateAstroCalcData()
