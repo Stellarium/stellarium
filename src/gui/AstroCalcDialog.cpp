@@ -271,11 +271,15 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
 	connect(ui->wutMatchingObjectsListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(selectWutObject()));
 	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
+	connect(ui->wutMatchingObjectsLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchWutObjects(QString)));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(minSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(maxSizeLimitChanged(double)), this, SLOT(calculateWutObjects()));
+
+	QAction *clearAction = ui->wutMatchingObjectsLineEdit->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
+	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchWutClear()));
 
 	currentCelestialPositions();
 
@@ -314,6 +318,12 @@ void AstroCalcDialog::createDialogContent()
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
 	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
+}
+
+void AstroCalcDialog::searchWutClear()
+{
+	ui->wutMatchingObjectsLineEdit->clear();
+	ui->wutMatchingObjectsListWidget->reset();
 }
 
 void AstroCalcDialog::updateAstroCalcData()
@@ -4180,6 +4190,17 @@ void AstroCalcDialog::saveWutObjects()
 	}
 
 	objlist.close();
+}
+
+void AstroCalcDialog::searchWutObjects(const QString &newText)
+{
+	QList<QListWidgetItem*> items = ui->wutMatchingObjectsListWidget->findItems(newText, Qt::MatchStartsWith);
+	ui->wutMatchingObjectsListWidget->clearSelection();
+	if (!items.isEmpty())
+	{
+		items.at(0)->setSelected(true);
+		ui->wutMatchingObjectsListWidget->scrollToItem(items.at(0));
+	}
 }
 
 void AstroCalcDialog::saveFirstCelestialBody(int index)

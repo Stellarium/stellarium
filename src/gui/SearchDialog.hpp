@@ -144,6 +144,7 @@ private slots:
 	void gotoObject(QListWidgetItem* item);
 
 	void searchListChanged(const QString& newText);
+	void searchListClear();
 	
 	//! Called when the user edit the manual position controls
 	void manualPositionChanged();

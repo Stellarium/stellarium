@@ -179,6 +179,8 @@ private slots:
 	void calculateWutObjects();
 	void selectWutObject();
 	void saveWutObjects();
+	void searchWutObjects(const QString& newText);
+	void searchWutClear();
 
 	void updateAstroCalcData();
 

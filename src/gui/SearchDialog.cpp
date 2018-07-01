@@ -388,7 +388,9 @@ void SearchDialog::createDialogContent()
 	// list views initialization
 	connect(ui->objectTypeComboBox, SIGNAL(activated(int)), this, SLOT(updateListWidget(int)));
 	connect(ui->searchInListLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchListChanged(QString)));
-	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));	
+	connect(ui->searchInEnglishCheckBox, SIGNAL(toggled(bool)), this, SLOT(updateListTab()));
+	QAction *clearAction = ui->searchInListLineEdit->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
+	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchListClear()));
 	updateListTab();
 
 	connect(ui->tabWidget, SIGNAL(currentChanged(int)), this, SLOT(changeTab(int)));
@@ -761,6 +763,12 @@ void SearchDialog::searchListChanged(const QString &newText)
 		items.at(0)->setSelected(true);
 		ui->objectsListWidget->scrollToItem(items.at(0));
 	}
+}
+
+void SearchDialog::searchListClear()
+{
+	ui->searchInListLineEdit->clear();
+	ui->objectsListWidget->reset();
 }
 
 bool SearchDialog::eventFilter(QObject*, QEvent *event)
