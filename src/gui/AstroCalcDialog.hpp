@@ -39,6 +39,8 @@
 
 class Ui_astroCalcDialogForm;
 class QListWidgetItem;
+class QSortFilterProxyModel;
+class QStringListModel;
 
 class AstroCalcDialog : public StelDialog
 {
@@ -177,9 +179,8 @@ private slots:
 	void saveWutMagnitudeLimit(double mag);
 	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
-	void selectWutObject();
+	void selectWutObject(const QModelIndex& index);
 	void saveWutObjects();
-	void searchWutObjects(const QString& newText);
 	void searchWutClear();
 
 	void updateAstroCalcData();
@@ -196,6 +197,8 @@ private:
 	class StelObjectMgr* objectMgr;
 	class StelLocaleMgr* localeMgr;
 	class StelMovementMgr* mvMgr;
+	QStringListModel* wutModel;
+	QSortFilterProxyModel *proxyModel;
 	QSettings* conf;
 	QTimer *currentTimeLine;
 	QHash<QString,QString> wutObjects;

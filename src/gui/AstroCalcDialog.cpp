@@ -42,6 +42,8 @@
 
 #include <QFileDialog>
 #include <QDir>
+#include <QSortFilterProxyModel>
+#include <QStringListModel>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListCoords;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
@@ -66,6 +68,8 @@ QString AstroCalcDialog::yAxis2Legend = "";
 
 AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	: StelDialog("AstroCalc", parent)
+	, wutModel(Q_NULLPTR)
+	, proxyModel(Q_NULLPTR)
 	, currentTimeLine(Q_NULLPTR)
 	, plotAltVsTime(false)	
 	, plotAltVsTimeSun(false)
@@ -265,13 +269,20 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->graphsSecondComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsSecondId(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
 
+	wutModel = new QStringListModel(this);
+	proxyModel = new QSortFilterProxyModel(ui->wutMatchingObjectsListView);
+	proxyModel->setSourceModel(wutModel);
+	proxyModel->sort(0, Qt::AscendingOrder);
+	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
+	ui->wutMatchingObjectsListView->setModel(proxyModel);
+
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
 	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
 	connect(ui->wutCategoryListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(calculateWutObjects()));
-	connect(ui->wutMatchingObjectsListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(selectWutObject()));
+	connect(ui->wutMatchingObjectsListView, SIGNAL(clicked(const QModelIndex&)), this, SLOT(selectWutObject(const QModelIndex&)));
 	connect(ui->saveObjectsButton, SIGNAL(clicked()), this, SLOT(saveWutObjects()));
-	connect(ui->wutMatchingObjectsLineEdit, SIGNAL(textChanged(QString)), this, SLOT(searchWutObjects(QString)));
+	connect(ui->wutMatchingObjectsLineEdit, SIGNAL(textChanged(const QString&)), proxyModel, SLOT(setFilterWildcard(const QString&)));
 	connect(dsoMgr, SIGNAL(catalogFiltersChanged(Nebula::CatalogGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(calculateWutObjects()));
 	connect(dsoMgr, SIGNAL(flagSizeLimitsUsageChanged(bool)), this, SLOT(calculateWutObjects()));
@@ -323,7 +334,9 @@ void AstroCalcDialog::createDialogContent()
 void AstroCalcDialog::searchWutClear()
 {
 	ui->wutMatchingObjectsLineEdit->clear();
-	ui->wutMatchingObjectsListWidget->reset();
+	proxyModel->setSourceModel(wutModel);
+	proxyModel->sort(0, Qt::AscendingOrder);
+	//ui->wutMatchingObjectsListWidget->reset();
 }
 
 void AstroCalcDialog::updateAstroCalcData()
@@ -3686,7 +3699,6 @@ void AstroCalcDialog::saveWutTimeInterval(int index)
 
 void AstroCalcDialog::calculateWutObjects()
 {
-	ui->wutMatchingObjectsListWidget->clear();
 	if (ui->wutCategoryListWidget->currentItem())
 	{
 		ui->labelRiseValue->setText("");
@@ -4118,19 +4130,18 @@ void AstroCalcDialog::calculateWutObjects()
 		}
 
 		core->setJD(JD);
-		ui->wutMatchingObjectsListWidget->blockSignals(true);
-		ui->wutMatchingObjectsListWidget->clear();
-		ui->wutMatchingObjectsListWidget->addItems(wutObjects.keys());
-		ui->wutMatchingObjectsListWidget->sortItems(Qt::AscendingOrder);
-		ui->wutMatchingObjectsListWidget->blockSignals(false);
+		ui->wutMatchingObjectsListView->blockSignals(true);
+		ui->wutMatchingObjectsListView->reset();
+		wutModel->setStringList(wutObjects.keys());
+		ui->wutMatchingObjectsListView->blockSignals(false);
 	}
 }
 
-void AstroCalcDialog::selectWutObject()
+void AstroCalcDialog::selectWutObject(const QModelIndex &index)
 {
-	if (ui->wutMatchingObjectsListWidget->currentItem())
+	if (index.isValid())
 	{
-		QString wutObjectEnglisName = wutObjects.value(ui->wutMatchingObjectsListWidget->currentItem()->text());
+		QString wutObjectEnglisName = wutObjects.value(index.data().toString());
 		if (objectMgr->findAndSelectI18n(wutObjectEnglisName) || objectMgr->findAndSelect(wutObjectEnglisName))
 		{
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
@@ -4184,23 +4195,12 @@ void AstroCalcDialog::saveWutObjects()
 	QTextStream wutObjList(&objlist);
 	wutObjList.setCodec("UTF-8");
 
-	for (int row = 0; row < ui->wutMatchingObjectsListWidget->count(); ++row)
+	for (int row = 0; row < proxyModel->rowCount(); ++row)
 	{
-		wutObjList << ui->wutMatchingObjectsListWidget->item(row)->text() << acEndl;
+		wutObjList << proxyModel->index(row, 0).data(Qt::DisplayRole).toString() << acEndl;
 	}
 
 	objlist.close();
-}
-
-void AstroCalcDialog::searchWutObjects(const QString &newText)
-{
-	QList<QListWidgetItem*> items = ui->wutMatchingObjectsListWidget->findItems(newText, Qt::MatchStartsWith);
-	ui->wutMatchingObjectsListWidget->clearSelection();
-	if (!items.isEmpty())
-	{
-		items.at(0)->setSelected(true);
-		ui->wutMatchingObjectsListWidget->scrollToItem(items.at(0));
-	}
 }
 
 void AstroCalcDialog::saveFirstCelestialBody(int index)
