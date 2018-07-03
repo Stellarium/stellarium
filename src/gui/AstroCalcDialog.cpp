@@ -145,7 +145,7 @@ void AstroCalcDialog::createDialogContent()
 	// Kinetic scrolling for tablet pc and pc
 	QList<QWidget*> addscroll;
 	addscroll << ui->celestialPositionsTreeWidget << ui->ephemerisTreeWidget << ui->phenomenaTreeWidget
-			  << ui->wutCategoryListWidget << ui->wutMatchingObjectsListWidget;
+		  << ui->wutCategoryListWidget << ui->wutMatchingObjectsListView;
 	installKineticScrolling(addscroll);
 	acEndl = "\r\n";
 #else
@@ -335,8 +335,7 @@ void AstroCalcDialog::searchWutClear()
 {
 	ui->wutMatchingObjectsLineEdit->clear();
 	proxyModel->setSourceModel(wutModel);
-	proxyModel->sort(0, Qt::AscendingOrder);
-	//ui->wutMatchingObjectsListWidget->reset();
+	proxyModel->sort(0, Qt::AscendingOrder);	
 }
 
 void AstroCalcDialog::updateAstroCalcData()
