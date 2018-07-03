@@ -798,9 +798,6 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0" colspan="3">
-        <widget class="QListWidget" name="objectsListWidget"/>
-       </item>
        <item row="0" column="2">
         <widget class="QCheckBox" name="searchInEnglishCheckBox">
          <property name="text">
@@ -814,6 +811,9 @@
           <string>Search in list...</string>
          </property>
         </widget>
+       </item>
+       <item row="2" column="0" colspan="3">
+        <widget class="QListView" name="objectsListView"/>
        </item>
       </layout>
      </widget>

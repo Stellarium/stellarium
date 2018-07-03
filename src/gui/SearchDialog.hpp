@@ -29,6 +29,8 @@
 
 // pre declaration of the ui class
 class Ui_searchDialogForm;
+class QSortFilterProxyModel;
+class QStringListModel;
 
 struct stringLengthCompare
 {
@@ -141,9 +143,8 @@ private slots:
 	void gotoObject();
 	void gotoObject(const QString& nameI18n);
 	// for going from list views
-	void gotoObject(QListWidgetItem* item);
+	void gotoObject(const QModelIndex &modelIndex);
 
-	void searchListChanged(const QString& newText);
 	void searchListClear();
 	
 	//! Called when the user edit the manual position controls
@@ -165,7 +166,7 @@ private slots:
 	void selectSimbadServer(int index);
 
 	//! Called when new type of objects selected in list view tab
-	void updateListWidget(int index);
+	void updateListView(int index);
 
 	// retranslate/recreate tab
 	void updateListTab();
@@ -222,6 +223,8 @@ private:
 	QMap<QString, Vec3d> simbadResults;
 	class StelObjectMgr* objectMgr;
 	class QSettings* conf;
+	QStringListModel* listModel;
+	QSortFilterProxyModel *proxyModel;
 
 	//! Used when substituting text with a Greek letter.
 	bool flagHasSelectedText;
