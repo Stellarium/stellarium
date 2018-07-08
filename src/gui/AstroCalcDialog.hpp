@@ -83,6 +83,7 @@ public:
 		PhenomenaObject1,	//! first object
 		PhenomenaObject2,	//! second object
 		PhenomenaSeparation,	//! angular separation
+		PhenomenaElongation,	//! elongation
 		PhenomenaCount		//! total number of columns
 	};
 

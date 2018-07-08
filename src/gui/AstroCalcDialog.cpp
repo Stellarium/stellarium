@@ -615,6 +615,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	double mag = ui->celestialMagnitudeDoubleSpinBox->value();
 	bool horizon = ui->horizontalCoordinatesCheckBox->isChecked();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
@@ -663,14 +664,30 @@ void AstroCalcDialog::currentCelestialPositions()
 					ra = direction * M_PI - ra;
 					if (ra > M_PI * 2)
 						ra -= M_PI * 2;
-					raStr = StelUtils::radToDmsStr(ra, true);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToDmsStr(ra, true);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 				else
 				{
 					StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
-					raStr = StelUtils::radToHmsStr(ra);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToHmsStr(ra);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 
 				ACCelPosTreeWidgetItem* treeItem =
@@ -741,14 +758,30 @@ void AstroCalcDialog::currentCelestialPositions()
 					ra = direction * M_PI - ra;
 					if (ra > M_PI * 2)
 						ra -= M_PI * 2;
-					raStr = StelUtils::radToDmsStr(ra, true);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToDmsStr(ra, true);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 				else
 				{
 					StelUtils::rectToSphe(&ra, &dec, pos);
-					raStr = StelUtils::radToHmsStr(ra);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToHmsStr(ra);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
@@ -806,14 +839,30 @@ void AstroCalcDialog::currentCelestialPositions()
 					ra = direction * M_PI - ra;
 					if (ra > M_PI * 2)
 						ra -= M_PI * 2;
-					raStr = StelUtils::radToDmsStr(ra, true);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToDmsStr(ra, true);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 				else
 				{
 					StelUtils::rectToSphe(&ra, &dec, pos);
-					raStr = StelUtils::radToHmsStr(ra);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToHmsStr(ra);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
@@ -868,14 +917,30 @@ void AstroCalcDialog::currentCelestialPositions()
 					ra = direction * M_PI - ra;
 					if (ra > M_PI * 2)
 						ra -= M_PI * 2;
-					raStr = StelUtils::radToDmsStr(ra, true);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToDmsStr(ra, true);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 				else
 				{
 					StelUtils::rectToSphe(&ra, &dec, pos);
-					raStr = StelUtils::radToHmsStr(ra);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToHmsStr(ra);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
@@ -934,14 +999,30 @@ void AstroCalcDialog::currentCelestialPositions()
 					ra = direction * M_PI - ra;
 					if (ra > M_PI * 2)
 						ra -= M_PI * 2;
-					raStr = StelUtils::radToDmsStr(ra, true);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToDmsStr(ra, true);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 				else
 				{
 					StelUtils::rectToSphe(&ra, &dec, pos);
-					raStr = StelUtils::radToHmsStr(ra);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToHmsStr(ra);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
@@ -1016,14 +1097,30 @@ void AstroCalcDialog::currentCelestialPositions()
 					ra = direction * M_PI - ra;
 					if (ra > M_PI * 2)
 						ra -= M_PI * 2;
-					raStr = StelUtils::radToDmsStr(ra, true);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToDmsStr(ra, true);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 				else
 				{
 					StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
-					raStr = StelUtils::radToHmsStr(ra);
-					decStr = StelUtils::radToDmsStr(dec, true);
+					if (withDecimalDegree)
+					{
+						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					}
+					else
+					{
+						raStr = StelUtils::radToHmsStr(ra);
+						decStr = StelUtils::radToDmsStr(dec, true);
+					}
 				}
 
 				if (celTypeId == 170) // double stars
@@ -1248,6 +1345,7 @@ void AstroCalcDialog::generateEphemeris()
 	QString elongStr = "", phaseStr = "";
 	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	initListEphemeris();
 
@@ -1417,15 +1515,31 @@ void AstroCalcDialog::generateEphemeris()
 				ra = direction * M_PI - ra;
 				if (ra > M_PI * 2)
 					ra -= M_PI * 2;
-				raStr = StelUtils::radToDmsStr(ra, true);
-				decStr = StelUtils::radToDmsStr(dec, true);
+				if (withDecimalDegree)
+				{
+					raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+					decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+				}
+				else
+				{
+					raStr = StelUtils::radToDmsStr(ra, true);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
 			}
 			else
 			{
 				pos = obj->getJ2000EquatorialPos(core);
 				StelUtils::rectToSphe(&ra, &dec, pos);
-				raStr = StelUtils::radToHmsStr(ra);
-				decStr = StelUtils::radToDmsStr(dec, true);
+				if (withDecimalDegree)
+				{
+					raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+					decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+				}
+				else
+				{
+					raStr = StelUtils::radToHmsStr(ra);
+					decStr = StelUtils::radToDmsStr(dec, true);
+				}
 			}
 
 			EphemerisListCoords.append(pos);
@@ -1442,7 +1556,12 @@ void AstroCalcDialog::generateEphemeris()
 				phaseStr = QString("%1%").arg(QString::number(obj->getPhase(observerHelioPos) * 100, 'f', 2));
 
 			if (elongStr != dash)
-				elongStr = StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true);
+			{
+				if (withDecimalDegree)
+					elongStr = StelUtils::radToDecDegStr(obj->getElongation(observerHelioPos), 5, false, true);
+				else
+					elongStr = StelUtils::radToDmsStr(obj->getElongation(observerHelioPos), true);
+			}
 
 			ACEphemTreeWidgetItem* treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
@@ -2695,6 +2814,7 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 	phenomenaHeader << q_("Object 1");
 	phenomenaHeader << q_("Object 2");
 	phenomenaHeader << q_("Separation");
+	phenomenaHeader << q_("Elongation");
 	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
 
 	// adjust the column width
@@ -3020,6 +3140,10 @@ void AstroCalcDialog::savePhenomena()
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition)
 {
 	QMap<double, double>::ConstIterator it;
+	QString dash = QChar(0x2014); // dash
+	PlanetP sun = solarSystem->getSun();
+	PlanetP moon = solarSystem->getMoon();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
 		core->setJD(it.key());
@@ -3029,12 +3153,12 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		double separation = it.value();
 		bool occultation = false;
 		double s1 = object1->getSpheroidAngularSize(core);
-		double s2 = object2->getSpheroidAngularSize(core);
+		double s2 = object2->getSpheroidAngularSize(core);		
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
 			// Added a special case - lunar eclipse
-			if (qAbs(separation) <= 0.02 && ((object1->getEnglishName() == "Moon"  && object2->getEnglishName() == "Sun") || (object1->getEnglishName() == "Sun"  && object2->getEnglishName() == "Moon")))
+			if (qAbs(separation) <= 0.02 && ((object1 == moon  && object2 == sun) || (object1 == sun  && object2 == moon)))
 				phenomenType = q_("Eclipse");
 
 			separation += M_PI;
@@ -3049,10 +3173,25 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				phenomenType = q_("Occultation");
 
 			// Added a special case - solar eclipse
-			if (qAbs(s1 - s2) <= 0.05 && (object1->getEnglishName() == "Sun"  || object2->getEnglishName() == "Sun")) // 5% error of difference of sizes
+			if (qAbs(s1 - s2) <= 0.05 && (object1 == sun  || object2 == sun)) // 5% error of difference of sizes
 				phenomenType = q_("Eclipse");
 
 			occultation = true;
+		}
+
+		QString elongStr = "";
+		if ((object1 == sun || object2 == sun) && !opposition)
+			elongStr = dash;
+		else
+		{
+			double elongation = object1->getElongation(core->getObserverHeliocentricEclipticPos());
+			if (opposition)
+				elongation = M_PI - (separation - M_PI); // calculate elongation from second object!
+
+			if (withDecimalDegree)
+				elongStr = StelUtils::radToDecDegStr(elongation, 5, false, true);
+			else
+				elongStr = StelUtils::radToDmsStr(elongation, true);
 		}
 
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
@@ -3063,9 +3202,15 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		if (occultation)
-			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+			treeItem->setText(PhenomenaSeparation, dash);
 		else
-			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+		{
+			if (withDecimalDegree)
+				treeItem->setText(PhenomenaSeparation, StelUtils::radToDecDegStr(separation, 5, false, true));
+			else
+				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+		}
+		treeItem->setText(PhenomenaElongation, elongStr);
 	}
 }
 
@@ -3209,6 +3354,9 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, PlanetP object2
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2)
 {
 	QMap<double, double>::ConstIterator it;
+	QString dash = QChar(0x2014); // dash
+	PlanetP sun = solarSystem->getSun();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
 		core->setJD(it.key());
@@ -3223,6 +3371,17 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			occultation = true;
 		}
 
+		QString elongStr = "";
+		if (object1 == sun)
+			elongStr = dash;
+		else
+		{
+			if (withDecimalDegree)
+				elongStr = StelUtils::radToDecDegStr(object1->getElongation(core->getObserverHeliocentricEclipticPos()), 5, false, true);
+			else
+				elongStr = StelUtils::radToDmsStr(object1->getElongation(core->getObserverHeliocentricEclipticPos()), true);
+		}
+
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
@@ -3235,9 +3394,15 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 			treeItem->setText(PhenomenaObject2, object2->getDSODesignation());
 		if (occultation)
-			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+			treeItem->setText(PhenomenaSeparation, dash);
 		else
-			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+		{
+			if (withDecimalDegree)
+				treeItem->setText(PhenomenaSeparation, StelUtils::radToDecDegStr(separation, 5, false, true));
+			else
+				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+		}
+		treeItem->setText(PhenomenaElongation, elongStr);
 	}
 }
 
@@ -3377,6 +3542,9 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, NebulaP object2
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2)
 {
 	QMap<double, double>::ConstIterator it;
+	QString dash = QChar(0x2014); // dash
+	PlanetP sun = solarSystem->getSun();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
 		core->setJD(it.key());
@@ -3391,6 +3559,17 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			occultation = true;
 		}
 
+		QString elongStr = "";
+		if (object1 == sun)
+			elongStr = dash;
+		else
+		{
+			if (withDecimalDegree)
+				elongStr = StelUtils::radToDecDegStr(object1->getElongation(core->getObserverHeliocentricEclipticPos()), 5, false, true);
+			else
+				elongStr = StelUtils::radToDmsStr(object1->getElongation(core->getObserverHeliocentricEclipticPos()), true);
+		}
+
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
@@ -3399,9 +3578,15 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
 		if (occultation)
-			treeItem->setText(PhenomenaSeparation, QChar(0x2014));
+			treeItem->setText(PhenomenaSeparation, dash);
 		else
-			treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+		{
+			if (withDecimalDegree)
+				treeItem->setText(PhenomenaSeparation, StelUtils::radToDecDegStr(separation, 5, false, true));
+			else
+				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+		}
+		treeItem->setText(PhenomenaElongation, elongStr);
 	}
 }
 
@@ -4130,6 +4315,7 @@ void AstroCalcDialog::calculateWutObjects()
 		}
 
 		core->setJD(JD);
+		ui->wutMatchingObjectsLineEdit->clear();
 		ui->wutMatchingObjectsListView->blockSignals(true);
 		ui->wutMatchingObjectsListView->reset();
 		wutModel->setStringList(wutObjects.keys());
