@@ -560,7 +560,7 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Double eclipse from Deimos in 2031");
 		// TRANSLATORS: Name of script
-		N_("Eclipse from Olympus Mons Jan 10 2068");
+		N_("Eclipse from Olympus Mons Jan 2, 2021");
 		// TRANSLATORS: Name of script
 		N_("Occultation of Earth and Jupiter 2048");
 		// TRANSLATORS: Name of script
