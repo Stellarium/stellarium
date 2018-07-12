@@ -13,7 +13,7 @@ function blockText(textArray)
 {
 	var fontSize = 30;
 	var lineSep = fontSize * 1.5;
-	y = 250 + (lineSep*textArray.length);
+	y = 420 + (lineSep*textArray.length);
 	ids = new Array();
 	for(i=0; i<textArray.length; i++)
 	{
