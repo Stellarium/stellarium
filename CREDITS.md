@@ -286,8 +286,8 @@
 	4.5c The Amalthea, Ariel, Charon, Europa, Ganymede, Gaspra, Haumea, 
 	    Hyperion, Ida, Io, Janus, Mercury, Neptune, Oberon, Phoebe, Pluto, 
 	    Saturn, Sedna, Tethys, Umbriel, Vesta, Venus, Mimas, Rhea, Bianca,
-	    Ceres, Miranda, Titania, Triton, Uranus and comet maps are processed by 
-	    Oleg Pluton a.k.a Helleformer
+	    Ceres, Miranda, Titania, Triton, Uranus, Dysnomia, Eris, Epimetheus
+            and comet maps are processed by Oleg Pluton a.k.a Helleformer
 	    License: Creative Commons Attribution 4.0 International
 	4.5d Callisto map is created by John van Vliet from PDS
 	     data and modified by RVS. License: cc-by-sa.
