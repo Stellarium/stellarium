@@ -78,13 +78,14 @@ public:
 	//! Defines the number and the order of the columns in the phenomena table
 	//! @enum PhenomenaColumns
 	enum PhenomenaColumns {
-		PhenomenaType,		//! type of phenomena
-		PhenomenaDate,		//! date and time of ephemeris		
-		PhenomenaObject1,	//! first object
-		PhenomenaObject2,	//! second object
-		PhenomenaSeparation,	//! angular separation
-		PhenomenaElongation,	//! elongation
-		PhenomenaCount		//! total number of columns
+		PhenomenaType,			//! type of phenomena
+		PhenomenaDate,			//! date and time of ephemeris
+		PhenomenaObject1,		//! first object
+		PhenomenaObject2,		//! second object
+		PhenomenaSeparation,		//! angular separation
+		PhenomenaElongation,		//! elongation (from the Sun)
+		PhenomenaAngularDistance,	//! angular distance (from the Moon)
+		PhenomenaCount			//! total number of columns
 	};
 
 	//! Defines the type of graphs
@@ -366,7 +367,7 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::PhenomenaSeparation || column == AstroCalcDialog::PhenomenaElongation)
+		if (column == AstroCalcDialog::PhenomenaSeparation || column == AstroCalcDialog::PhenomenaElongation || column == AstroCalcDialog::PhenomenaAngularDistance)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}

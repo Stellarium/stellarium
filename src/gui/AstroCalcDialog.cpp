@@ -2815,6 +2815,7 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 	phenomenaHeader << q_("Object 2");
 	phenomenaHeader << q_("Separation");
 	phenomenaHeader << q_("Elongation");
+	phenomenaHeader << q_("Angular distance");
 	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
 
 	// adjust the column width
@@ -3143,6 +3144,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	QString dash = QChar(0x2014); // dash
 	PlanetP sun = solarSystem->getSun();
 	PlanetP moon = solarSystem->getMoon();
+	PlanetP earth = solarSystem->getEarth();
+	PlanetP planet = core->getCurrentPlanet();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -3194,6 +3197,23 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				elongStr = StelUtils::radToDmsStr(elongation, true);
 		}
 
+		QString angDistStr = "";
+		if (planet != earth)
+			angDistStr = dash;
+		else
+		{
+			if (object1 == moon || object2 == moon)
+				angDistStr = dash;
+			else
+			{
+				double angularDistance = object1->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
+				if (withDecimalDegree)
+					angDistStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
+				else
+					angDistStr = StelUtils::radToDmsStr(angularDistance, true);
+			}
+		}
+
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
@@ -3211,6 +3231,11 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 		}
 		treeItem->setText(PhenomenaElongation, elongStr);
+		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
+		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
+		treeItem->setText(PhenomenaAngularDistance, angDistStr);
+		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
+		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
 	}
 }
 
@@ -3356,6 +3381,9 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	QMap<double, double>::ConstIterator it;
 	QString dash = QChar(0x2014); // dash
 	PlanetP sun = solarSystem->getSun();
+	PlanetP moon = solarSystem->getMoon();
+	PlanetP earth = solarSystem->getEarth();
+	PlanetP planet = core->getCurrentPlanet();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -3382,6 +3410,23 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				elongStr = StelUtils::radToDmsStr(object1->getElongation(core->getObserverHeliocentricEclipticPos()), true);
 		}
 
+		QString angDistStr = "";
+		if (planet != earth)
+			angDistStr = dash;
+		else
+		{
+			if (object1 == moon)
+				angDistStr = dash;
+			else
+			{
+				double angularDistance = object1->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
+				if (withDecimalDegree)
+					angDistStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
+				else
+					angDistStr = StelUtils::radToDmsStr(angularDistance, true);
+			}
+		}
+
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
@@ -3403,6 +3448,11 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 		}
 		treeItem->setText(PhenomenaElongation, elongStr);
+		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
+		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
+		treeItem->setText(PhenomenaAngularDistance, angDistStr);
+		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
+		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
 	}
 }
 
@@ -3544,6 +3594,9 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	QMap<double, double>::ConstIterator it;
 	QString dash = QChar(0x2014); // dash
 	PlanetP sun = solarSystem->getSun();
+	PlanetP moon = solarSystem->getMoon();
+	PlanetP earth = solarSystem->getEarth();
+	PlanetP planet = core->getCurrentPlanet();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	for (it = list.constBegin(); it != list.constEnd(); ++it)
 	{
@@ -3570,6 +3623,23 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				elongStr = StelUtils::radToDmsStr(object1->getElongation(core->getObserverHeliocentricEclipticPos()), true);
 		}
 
+		QString angDistStr = "";
+		if (planet != earth)
+			angDistStr = dash;
+		else
+		{
+			if (object1 == moon)
+				angDistStr = dash;
+			else
+			{
+				double angularDistance = object1->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
+				if (withDecimalDegree)
+					angDistStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
+				else
+					angDistStr = StelUtils::radToDmsStr(angularDistance, true);
+			}
+		}
+
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
 		treeItem->setText(PhenomenaType, phenomenType);
 		// local date and time
@@ -3587,6 +3657,11 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 		}
 		treeItem->setText(PhenomenaElongation, elongStr);
+		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
+		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
+		treeItem->setText(PhenomenaAngularDistance, angDistStr);
+		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
+		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
 	}
 }
 
