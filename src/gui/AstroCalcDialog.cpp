@@ -383,10 +383,9 @@ void AstroCalcDialog::initListCelestialPositions()
 {
 	ui->celestialPositionsTreeWidget->clear();
 	ui->celestialPositionsTreeWidget->setColumnCount(CColumnCount);
-
 	setCelestialPositionsHeaderNames();
-
 	ui->celestialPositionsTreeWidget->header()->setSectionsMovable(false);
+	ui->celestialPositionsTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
 }
 
 void AstroCalcDialog::setCelestialPositionsHeaderNames()
@@ -1313,7 +1312,7 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	for (int i = 0; i < EphemerisCount; ++i)
 	{
 		ui->ephemerisTreeWidget->resizeColumnToContents(i);
-	}
+	}	
 }
 
 void AstroCalcDialog::initListEphemeris()
@@ -1322,6 +1321,7 @@ void AstroCalcDialog::initListEphemeris()
 	ui->ephemerisTreeWidget->setColumnCount(EphemerisCount);
 	setEphemerisHeaderNames();
 	ui->ephemerisTreeWidget->header()->setSectionsMovable(false);
+	ui->ephemerisTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
 }
 
 void AstroCalcDialog::reGenerateEphemeris()
@@ -2822,7 +2822,7 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 	for (int i = 0; i < PhenomenaCount; ++i)
 	{
 		ui->phenomenaTreeWidget->resizeColumnToContents(i);
-	}
+	}	
 }
 
 void AstroCalcDialog::initListPhenomena()
@@ -2831,6 +2831,7 @@ void AstroCalcDialog::initListPhenomena()
 	ui->phenomenaTreeWidget->setColumnCount(PhenomenaCount);
 	setPhenomenaHeaderNames();
 	ui->phenomenaTreeWidget->header()->setSectionsMovable(false);
+	ui->phenomenaTreeWidget->header()->setDefaultAlignment(Qt::AlignHCenter);
 }
 
 void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex& modelIndex)
@@ -3087,7 +3088,7 @@ void AstroCalcDialog::calculatePhenomena()
 	}
 
 	// sort-by-date
-	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);
+	ui->phenomenaTreeWidget->sortItems(PhenomenaDate, Qt::AscendingOrder);	
 }
 
 void AstroCalcDialog::savePhenomena()
@@ -3156,7 +3157,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		double separation = it.value();
 		bool occultation = false;
 		double s1 = object1->getSpheroidAngularSize(core);
-		double s2 = object2->getSpheroidAngularSize(core);		
+		double s2 = object2->getSpheroidAngularSize(core);
 		if (opposition)
 		{
 			phenomenType = q_("Opposition");
@@ -3176,10 +3177,14 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 				phenomenType = q_("Occultation");
 
 			// Added a special case - solar eclipse
-			if (qAbs(s1 - s2) <= 0.05 && (object1 == sun  || object2 == sun)) // 5% error of difference of sizes
+			if (qAbs(s1 - s2) <= 0.05 && (object1 == sun || object2 == sun)) // 5% error of difference of sizes
 				phenomenType = q_("Eclipse");
 
 			occultation = true;
+		}
+		else if (qAbs(separation) <= 0.0087 && ((object1 == moon  && object2 == sun) || (object1 == sun  && object2 == moon))) // Added a special case - partial solar eclipse
+		{
+			phenomenType = q_("Eclipse");
 		}
 
 		QString elongStr = "";
@@ -3230,6 +3235,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 		}
+		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
 		treeItem->setText(PhenomenaElongation, elongStr);
 		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
 		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
@@ -3447,6 +3453,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 		}
+		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
 		treeItem->setText(PhenomenaElongation, elongStr);
 		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
 		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
@@ -3656,6 +3663,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
 		}
+		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
 		treeItem->setText(PhenomenaElongation, elongStr);
 		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
 		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
