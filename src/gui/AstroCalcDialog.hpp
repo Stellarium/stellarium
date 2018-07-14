@@ -144,7 +144,7 @@ private slots:
 	void cleanupPhenomena();
 	void selectCurrentPhenomen(const QModelIndex &modelIndex);
 	void savePhenomena();
-	void savePhenomenaAngularSeparation(double v);
+	void savePhenomenaAngularSeparation();
 
 	void savePhenomenaCelestialBody(int index);
 	void savePhenomenaCelestialGroup(int index);

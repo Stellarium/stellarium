@@ -26,6 +26,7 @@
 #include "StelTranslator.hpp"
 #include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
+#include "AngleSpinBox.hpp"
 
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
@@ -226,10 +227,17 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->ephemerisStepComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeStep(int)));
 	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
 
+	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
+	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->allowedSeparationSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->allowedSeparationSpinBox->setMinimum(0.0, true);
+	ui->allowedSeparationSpinBox->setMaximum(10.0, true);
+	ui->allowedSeparationSpinBox->setWrapping(false);
+
 	ui->phenomenaOppositionCheckBox->setChecked(conf->value("astrocalc/flag_phenomena_opposition", false).toBool());
 	connect(ui->phenomenaOppositionCheckBox, SIGNAL(toggled(bool)), this, SLOT(savePhenomenaOppositionFlag(bool)));
-	ui->allowedSeparationDoubleSpinBox->setValue(conf->value("astrocalc/phenomena_angular_separation", 1.0).toDouble());
-	connect(ui->allowedSeparationDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(savePhenomenaAngularSeparation(double)));
+	ui->allowedSeparationSpinBox->setDegrees(conf->value("astrocalc/phenomena_angular_separation", 1.0).toDouble());
+	connect(ui->allowedSeparationSpinBox, SIGNAL(valueChanged()), this, SLOT(savePhenomenaAngularSeparation()));
 
 	connect(ui->phenomenaPushButton, SIGNAL(clicked()), this, SLOT(calculatePhenomena()));
 	connect(ui->phenomenaCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupPhenomena()));
@@ -1914,9 +1922,9 @@ void AstroCalcDialog::savePhenomenaOppositionFlag(bool b)
 	conf->setValue("astrocalc/flag_phenomena_opposition", b);
 }
 
-void AstroCalcDialog::savePhenomenaAngularSeparation(double v)
+void AstroCalcDialog::savePhenomenaAngularSeparation()
 {
-	conf->setValue("astrocalc/phenomena_angular_separation", QString::number(v, 'f', 5));
+	conf->setValue("astrocalc/phenomena_angular_separation", QString::number(ui->allowedSeparationSpinBox->valueDegrees(), 'f', 5));
 }
 
 void AstroCalcDialog::drawAltVsTimeDiagram()
@@ -2853,7 +2861,7 @@ void AstroCalcDialog::selectCurrentPhenomen(const QModelIndex& modelIndex)
 void AstroCalcDialog::calculatePhenomena()
 {
 	QString currentPlanet = ui->object1ComboBox->currentData().toString();
-	double separation = ui->allowedSeparationDoubleSpinBox->value();
+	double separation = ui->allowedSeparationSpinBox->valueDegrees();
 	bool opposition = ui->phenomenaOppositionCheckBox->isChecked();
 
 	initListPhenomena();

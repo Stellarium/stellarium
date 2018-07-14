@@ -645,20 +645,7 @@
              </widget>
             </item>
             <item>
-             <widget class="QDoubleSpinBox" name="allowedSeparationDoubleSpinBox">
-              <property name="toolTip">
-               <string>Value in decimal degrees</string>
-              </property>
-              <property name="decimals">
-               <number>5</number>
-              </property>
-              <property name="maximum">
-               <double>10.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>1.000000000000000</double>
-              </property>
-             </widget>
+             <widget class="AngleSpinBox" name="allowedSeparationSpinBox"/>
             </item>
            </layout>
           </item>
@@ -1382,6 +1369,11 @@
    <class>QCustomPlot</class>
    <extends>QWidget</extends>
    <header>external/qcustomplot/qcustomplot.h</header>
+  </customwidget>
+  <customwidget>
+   <class>AngleSpinBox</class>
+   <extends>QSpinBox</extends>
+   <header>AngleSpinBox.hpp</header>
   </customwidget>
  </customwidgets>
  <resources/>
