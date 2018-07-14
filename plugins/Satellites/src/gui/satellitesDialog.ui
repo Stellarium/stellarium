@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>530</width>
-    <height>417</height>
+    <width>579</width>
+    <height>481</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -564,7 +564,11 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEditSearch"/>
+          <widget class="QLineEdit" name="lineEditSearch">
+           <property name="placeholderText">
+            <string>Search in list...</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QListView" name="satellitesList">

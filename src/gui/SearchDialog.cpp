@@ -767,9 +767,7 @@ void SearchDialog::gotoObject(const QModelIndex &modelIndex)
 
 void SearchDialog::searchListClear()
 {
-	ui->searchInListLineEdit->clear();
-	proxyModel->setSourceModel(listModel);
-	proxyModel->sort(0, Qt::AscendingOrder);
+	ui->searchInListLineEdit->clear();	
 }
 
 bool SearchDialog::eventFilter(QObject*, QEvent *event)

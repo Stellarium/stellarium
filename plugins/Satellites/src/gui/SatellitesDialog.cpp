@@ -170,8 +170,11 @@ void SatellitesDialog::createDialogContent()
 	filterModel->setSourceModel(GETSTELMODULE(Satellites)->getSatellitesListModel());
 	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->satellitesList->setModel(filterModel);	
-	connect(ui->lineEditSearch, SIGNAL(textEdited(QString)),
+	connect(ui->lineEditSearch, SIGNAL(textChanged(QString)),
 	        filterModel, SLOT(setFilterWildcard(QString)));
+
+	QAction *clearAction = ui->lineEditSearch->addAction(QIcon(":/graphicGui/backspace-white.png"), QLineEdit::ActionPosition::TrailingPosition);
+	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchSatellitesClear()));
 	
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
 	connect(selectionModel,
@@ -243,6 +246,11 @@ void SatellitesDialog::createDialogContent()
 void SatellitesDialog::setFlagRealisticMode(bool state)
 {
 	GETSTELMODULE(Satellites)->setFlagRelisticMode(!state);
+}
+
+void SatellitesDialog::searchSatellitesClear()
+{
+	ui->lineEditSearch->clear();
 }
 
 void SatellitesDialog::savePredictedIridiumFlares()

@@ -334,9 +334,7 @@ void AstroCalcDialog::createDialogContent()
 
 void AstroCalcDialog::searchWutClear()
 {
-	ui->wutMatchingObjectsLineEdit->clear();
-	proxyModel->setSourceModel(wutModel);
-	proxyModel->sort(0, Qt::AscendingOrder);	
+	ui->wutMatchingObjectsLineEdit->clear();	
 }
 
 void AstroCalcDialog::updateAstroCalcData()

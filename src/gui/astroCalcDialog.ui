@@ -451,6 +451,9 @@
             </item>
             <item>
              <widget class="QDateTimeEdit" name="dateToDateTimeEdit">
+              <property name="wrapping">
+               <bool>true</bool>
+              </property>
               <property name="displayFormat">
                <string notr="true">yyyy.MM.dd hh:mm</string>
               </property>
@@ -472,6 +475,9 @@
             </item>
             <item>
              <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
+              <property name="wrapping">
+               <bool>true</bool>
+              </property>
               <property name="displayFormat">
                <string notr="true">yyyy.MM.dd hh:mm</string>
               </property>
@@ -670,6 +676,9 @@
             </item>
             <item>
              <widget class="QDateEdit" name="phenomenToDateEdit">
+              <property name="wrapping">
+               <bool>true</bool>
+              </property>
               <property name="displayFormat">
                <string notr="true">yyyy.MM.dd</string>
               </property>
@@ -785,6 +794,9 @@
             </item>
             <item>
              <widget class="QDateEdit" name="phenomenFromDateEdit">
+              <property name="wrapping">
+               <bool>true</bool>
+              </property>
               <property name="displayFormat">
                <string notr="true">yyyy.MM.dd</string>
               </property>

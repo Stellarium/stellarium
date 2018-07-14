@@ -115,6 +115,8 @@ private slots:
 
 	void setFlagRealisticMode(bool state);
 
+	void searchSatellitesClear();
+
 private:
 	//! @todo find out if this is really necessary... --BM
 	void enableSatelliteDataForm(bool enabled);
