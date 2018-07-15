@@ -570,7 +570,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (flags&RTSTime && getType()!=QStringLiteral("Satellite"))
 	{
 		Vec3f rts = getRTSTime(StelApp::getInstance().getCore()); // required not const StelCore!
-		QString sTransit = qc_("Transit", "celestial event");
+		QString sTransit = qc_("Transit", "celestial event; passage across a meridian");
 		QString sRise = qc_("Rise", "celestial event");
 		QString sSet = qc_("Set", "celestial event");
 		float sunrise = 0.f;

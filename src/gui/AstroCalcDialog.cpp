@@ -457,7 +457,7 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 		positionsHeader << q_("S.B.");
 	}
 	// TRANSLATORS: time of transit
-	positionsHeader << qc_("Transit", "celestial event");
+	positionsHeader << qc_("Transit", "celestial event; passage across a meridian");
 	// TRANSLATORS: type of object
 	positionsHeader << q_("Type");
 
@@ -3178,7 +3178,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			double d1 = object1->getJ2000EquatorialPos(core).length();
 			double d2 = object2->getJ2000EquatorialPos(core).length();
 			if ((d1 < d2 && s1 <= s2) || (d1 > d2 && s1 > s2))
-				phenomenType = q_("Transit");
+			{
+				// The passage of the celestial body in front of another of greater apparent diameter
+				phenomenType = qc_("Transit", "passage of the celestial body");
+			}
 			else
 				phenomenType = q_("Occultation");
 
