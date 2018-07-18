@@ -2708,6 +2708,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 {
 	if (!Planet::initShader()) return;
+	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
 	painter->setDepthMask(true);
 	painter->setDepthTest(true);
@@ -2724,6 +2725,11 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		shader = ringPlanetShaderProgram;
 		shaderVars = &ringPlanetShaderVars;
 	}
+	if (this == ssm->getMoon())
+	{
+		shader = moonShaderProgram;
+		shaderVars = &moonShaderVars;
+	}
 
 	GL(shader->bind());
 	RenderData rData = setCommonShaderUniforms(*painter, shader, *shaderVars);
@@ -2739,6 +2745,17 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.innerRadius, rings->radiusMin));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.ringS, 2));
 		rings->tex->bind(2);
+	}
+
+	if (this == ssm->getMoon())
+	{
+		GL(normalMap->bind(2));
+		GL(moonShaderProgram->setUniformValue(moonShaderVars.normalMap, 2));
+		if (!rData.shadowCandidates.isEmpty())
+		{
+			GL(texEarthShadow->bind(3));
+			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
+		}
 	}
 
 	// Apply a rotation otherwize the hips surveys don't get rendered at the
