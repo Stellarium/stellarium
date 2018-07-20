@@ -487,7 +487,7 @@ void StelLocationMgr::setLocations(const LocationList &locations)
 
 void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool isUserLocation, const QString& binFilePath) const
 {
-	qWarning() << "Generating a locations list...";
+	qDebug() << "Generating a locations list...";
 	const QMap<QString, StelLocation>& cities = loadCities(fileName, isUserLocation);
 	QFile binfile(StelFileMgr::findFile(binFilePath, StelFileMgr::New));
 	if(binfile.open(QIODevice::WriteOnly))
@@ -498,6 +498,7 @@ void StelLocationMgr::generateBinaryLocationFile(const QString& fileName, bool i
 		binfile.flush();
 		binfile.close();
 	}
+	qDebug() << "[...] Please use 'gzip -nc base_locations.bin > base_locations.bin.gz' to pack a locations list.";
 }
 
 LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
