@@ -27,7 +27,7 @@
 class StelLocation
 {
 public:
-	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2.f), population(0.f), role('X'), isUserLocation(true) {;}
+	StelLocation() : longitude(0.f), latitude(0.f), altitude(0), bortleScaleIndex(2), population(0.f), role('X'), isUserLocation(true) {;}
 
 	//! Return a short string which can be used in a list view.
 	QString getID() const;
@@ -52,7 +52,7 @@ public:
 	//! Altitude in meter
 	int altitude;
 	//! Light pollution index following Bortle scale
-	float bortleScaleIndex;
+	int bortleScaleIndex;
 	//! A hint for associating a landscape to the location
 	QString landscapeKey;
 	//! Population in number of inhabitants
