@@ -126,12 +126,13 @@ Nebula::Nebula()
 	, UGC_nb(0)
 	, Arp_nb(0)
 	, VV_nb(0)	
+	, Abell_nb(0)
 	, Ced_nb("")
 	, PK_nb("")
 	, PNG_nb("")
 	, SNRG_nb("")
 	, ACO_nb("")
-	, HCG_nb("")
+	, HCG_nb("")	
 	, withoutID(false)
 	, nameI18("")
 	, mTypeString()
@@ -222,6 +223,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("ACO %1").arg(ACO_nb);
 		if (!HCG_nb.isEmpty())
 			catIds << QString("HCG %1").arg(HCG_nb);
+		if (Abell_nb > 0)
+			catIds << QString("Abell %1").arg(Abell_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -984,6 +987,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("ACO %1").arg(ACO_nb);
 	else if (catalogFilters&CatHCG && !HCG_nb.isEmpty())
 		str = QString("HCG %1").arg(HCG_nb);
+	else if (catalogFilters&CatAbell && Abell_nb > 0)
+		str = QString("Abell %1").arg(Abell_nb);
 
 	return str;
 }
@@ -997,9 +1002,9 @@ void Nebula::readDSO(QDataStream &in)
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
-		>> HCG_nb;
+		>> HCG_nb >> Abell_nb;
 
-	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb;
+	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + Abell_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty())
 		withoutID = true;
 
@@ -1148,6 +1153,8 @@ bool Nebula::objectInDisplayedCatalog() const
 	else if ((catalogFilters&CatACO) && (!ACO_nb.isEmpty()))
 		r = true;
 	else if ((catalogFilters&CatHCG) && (!HCG_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&CatAbell) && (Abell_nb>0))
 		r = true;
 
 	// Special case: objects without ID from current catalogs

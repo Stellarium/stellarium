@@ -67,7 +67,8 @@ public:
 		CatPNG		= 0x00040000, //!< Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992) (PN G)
 		CatSNRG		= 0x00080000, //!< A catalogue of Galactic supernova remnants (Green, 2014) (SNR G)
 		CatACO		= 0x00100000, //!< A Catalog of Rich Clusters of Galaxies (Abell+ 1989) (ACO)
-		CatHCG		= 0x00200000  //!< Hickson, Compact Group (Hickson+ 1982) (HCG)
+		CatHCG		= 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)
+		CatAbell	= 0x00400000, //!< Abell Catalog of Planetary Nebulae (Abell 1966) (Abell; PN A66)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)
 
@@ -249,6 +250,7 @@ private:
 	unsigned int UGC_nb;		// UGC number (The Uppsala General Catalogue of Galaxies)
 	unsigned int Arp_nb;		// Arp number (Atlas of Peculiar Galaxies (Arp, 1966))
 	unsigned int VV_nb;		// VV number (The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001))
+	unsigned int Abell_nb;		// Abell number (Abell Catalog of Planetary Nebulae (Abell, 1966))
 	QString Ced_nb;			// Ced number (Cederblad Catalog of bright diffuse Galactic nebulae)	
 	QString PK_nb;			// PK number (Catalogue of Galactic Planetary Nebulae)
 	QString PNG_nb;			// PN G number (Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992))

@@ -1884,6 +1884,19 @@
                </attribute>
               </widget>
              </item>
+             <item row="1" column="7">
+              <widget class="QCheckBox" name="checkBoxAbell">
+               <property name="toolTip">
+                <string>Abell Catalog of Planetary Nebulae (Abell, 1966)</string>
+               </property>
+               <property name="text">
+                <string>Abell</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>

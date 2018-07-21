@@ -1309,6 +1309,8 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 		flags |= Nebula::CatACO;
 	if (ui->checkBoxHCG->isChecked())
 		flags |= Nebula::CatHCG;
+	if (ui->checkBoxAbell->isChecked())
+		flags |= Nebula::CatAbell;
 
 	GETSTELMODULE(NebulaMgr)->setCatalogFilters(flags);
 }
@@ -1370,6 +1372,7 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 	ui->checkBoxSNRG->setChecked(flags & Nebula::CatSNRG);
 	ui->checkBoxACO->setChecked(flags & Nebula::CatACO);
 	ui->checkBoxHCG->setChecked(flags & Nebula::CatHCG);
+	ui->checkBoxAbell->setChecked(flags & Nebula::CatAbell);
 }
 
 void ViewDialog::updateSelectedTypesCheckBoxes()

@@ -761,6 +761,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("flag_show_snrg",	(bool) (cflags & Nebula::CatSNRG));
 	conf->setValue("flag_show_aco",		(bool) (cflags & Nebula::CatACO));
 	conf->setValue("flag_show_hcg",		(bool) (cflags & Nebula::CatHCG));
+	conf->setValue("flag_show_abell",	(bool) (cflags & Nebula::CatAbell));
 	conf->endGroup();
 
 	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();

@@ -357,7 +357,9 @@ flag\_show\_vv   & bool & false & The Catalogue of Interacting Galaxies (VV). \\
 flag\_show\_pk   & bool & false & The Catalogue of Galactic Planetary Nebulae (PK). \\%\midrule
 flag\_show\_png  & bool & false & The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (PN G). \\%\midrule
 flag\_show\_snrg & bool & false & A catalogue of Galactic supernova remnants (SNR G). \\%\midrule
-flag\_show\_aco  & bool & false & A Catalog of Rich Clusters of Galaxies (ACO). \\\bottomrule
+flag\_show\_aco  & bool & false & A Catalog of Rich Clusters of Galaxies (ACO). \\%\midrule
+flag\_show\_hcg  & bool & false & A Hickson Compact Group (HCG). \\%\midrule
+flag\_show\_abell  & bool & false & Abell Catalog of Planetary Nebulae (Abell). \\\bottomrule
 \end{longtable}
 
 \subsection{\big[dso\_type\_filters\big]}
@@ -516,6 +518,7 @@ restore\_defaults           & bool   & If \emph{true}, Stellarium will restore d
 ignore\_opengl\_warning     & bool   & Set to \emph{true} if you don't want to see OpenGL warnings for each start of Stellarium.\\%\midrule
 check\_requirements         & bool   & Set to \emph{false} if you want to disable and permanently ignore checking hardware requirements at startup. 
                                        Expect problems if hardware is below requirements!\\
+geoip\_api\_url             & string & URL for JSON interface of GeoIP service.\\
 \bottomrule
 \end{tabularx}
 
