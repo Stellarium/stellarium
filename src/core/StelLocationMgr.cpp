@@ -806,7 +806,7 @@ bool StelLocationMgr::deleteUserLocation(const QString& id)
 void StelLocationMgr::locationFromIP()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QNetworkRequest req( QUrl( conf->value("main/geoip_api_url", "https://ipapi.co/json/").toString() ) );
+	QNetworkRequest req( QUrl( conf->value("main/geoip_api_url", "https://freegeoip.stellarium.org/json/").toString() ) );
 	req.setAttribute(QNetworkRequest::CacheLoadControlAttribute, QNetworkRequest::PreferCache);
 	req.setRawHeader("User-Agent", StelUtils::getUserAgentString().toLatin1());
 	QNetworkReply* networkReply=StelApp::getInstance().getNetworkAccessManager()->get(req);
