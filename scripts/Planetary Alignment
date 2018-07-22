@@ -1,0 +1,202 @@
+//
+// Name: Planetary Alignment
+// License: Public Domain
+// Author: Peter Hickey
+// With thanks to Barrykgerdes and daggerstab for their contributions
+// Description: Planetary Alignment as seen from Sydney Australia, 18th October, 2018.
+//
+//
+
+// The following two functions were copied from a script by Schdefon
+
+function blockText(textArray)
+{
+	var fontSize = 30;
+	var lineSep = fontSize * 1.5;
+	y = 420 + (lineSep*textArray.length);
+	ids = new Array();
+	for(i=0; i<textArray.length; i++)
+	{
+		ids[i] = LabelMgr.labelScreen(textArray[i], 30, y, false, fontSize, "#ff0000");
+		y = y - lineSep;
+	}
+
+	for(i=0; i<ids.length; i++)
+	{
+		LabelMgr.setLabelShow(ids[i], true);
+		core.wait(0.15);
+	}
+	return ids;
+}
+
+function clearLabels(ids)
+{
+	for(i=0; i<ids.length; i++)
+	{
+		LabelMgr.setLabelShow(ids[i], false);
+		core.wait(0.15);
+	}
+	core.wait(1);
+	for(i=0; i<ids.length; i++)
+	{
+		LabelMgr.deleteLabel(ids[i]);
+	}
+}
+
+// Save the current location, if it's from the default list 
+location = core.getObserverLocation();
+
+// Set up the display and the location to Sydney, Australia 
+core.moveToAltAzi(10,90,3);
+
+StelMovementMgr.zoomTo(130,5);
+
+core.setDate("2018:10:18T08:55:00","utc");
+core.setObserverLocation("Sydney, Australia");
+
+core.clear("natural");
+core.selectObjectByName("Sun", false);
+
+ids = blockText(Array("Sydney Australia",
+                      "18 Oct, 2018", "Sunset"));
+core.wait(5);
+
+
+// Select Venus and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Venus", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.08,5);
+clearLabels(ids);
+ids = blockText(Array("just above horizon.",
+                      "The planet Venus"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+core.wait(5);
+
+// Select Mercury and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Mercury", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.05,5);
+clearLabels(ids);
+ids = blockText(Array("just above Venus.",
+                      "The planet Mercury"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+core.wait(5);
+// Select Jupiter and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Jupiter", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.30,5);
+clearLabels(ids);
+ids = blockText(Array("just above Mercury.",
+                      "The planet Jupiter"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+core.wait(5);
+// Select Saturn and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Saturn", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.09,5);
+clearLabels(ids);
+ids = blockText(Array("just above Jupiter.",
+                      "The planet Saturn"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+core.wait(5);
+// Select Mars and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Mars", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.05,5);
+clearLabels(ids);
+ids = blockText(Array("near the Moon.",
+                      "The planet Mars"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+core.wait(5);
+// Select the Moon and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Moon", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(1.08,5);
+clearLabels(ids);
+ids = blockText(Array("high in the sky.",
+                      "The Moon"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+core.wait(5);
+// Select Neptune and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Neptune", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.05,5);
+clearLabels(ids);
+ids = blockText(Array("in the Eastern sky.",
+                      "The planet Neptune"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+core.wait(5);
+// Advance time 30 minutes
+core.setDate("2018:10:18T09:25:00","utc");
+
+// Select Uranus and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Uranus", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.05,5);
+clearLabels(ids);
+ids = blockText(Array("just above horizon.",
+                      "The planet Uranus"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+
+core.wait(5);
+// Select Pluto and  Zoom to a suitable size to display and track
+
+core.selectObjectByName("Pluto", true);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.05,5);
+clearLabels(ids);
+ids = blockText(Array(" ",
+                      "The minor planet Pluto"));
+core.wait(10);
+
+StelMovementMgr.zoomTo(130,5);
+
+
+
+
+
+core.wait(5);
+//Turn off Landscape, Atmosphere and Fog
+LandscapeMgr.setFlagLandscape(false);
+LandscapeMgr.setFlagAtmosphere(false);
+LandscapeMgr.setFlagFog(false);
+clearLabels(ids);
+
+
+//Restore the original location
+core.setObserverLocation(location); 
+core.setDate("now");
+core.clear("natural");
+LandscapeMgr.setFlagLandscape(true);
+LandscapeMgr.setFlagAtmosphere(true);
