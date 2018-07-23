@@ -2,7 +2,7 @@
 // Name: Partial Lunar Eclipse
 // License: Public Domain
 // Author: Matthew Gates
-// Version: 1.0
+// Version: 1.1
 // Description: Script to demonstrate a partial lunar eclipse.
 //
 
@@ -12,7 +12,8 @@ LandscapeMgr.setFlagLandscape(false);
 LandscapeMgr.setFlagAtmosphere(false);
 LandscapeMgr.setFlagFog(false);
 core.wait(1);
-core.setDate("2006:03:14T21:21:32");
+core.setObserverLocation(53.349, 83.7674, 219, 0, "Barnaul, Russia");
+core.setDate("2012:06:04T10:00:00");
 core.selectObjectByName("Moon", false);
 StelMovementMgr.setFlagTracking(true);
 core.wait(2);
