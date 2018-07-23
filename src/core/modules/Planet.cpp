@@ -2449,13 +2449,14 @@ void sRing(Ring3DModel* model, const float rMin, const float rMax, int slices, c
 
 void Planet::computeModelMatrix(Mat4d &result) const
 {
-	result = Mat4d::translation(eclipticPos) * rotLocalToParent * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
+	result = Mat4d::translation(eclipticPos) * rotLocalToParent;
 	PlanetP p = parent;
 	while (p && p->parent)
 	{
 		result = Mat4d::translation(p->eclipticPos) * result * p->rotLocalToParent;
 		p = p->parent;
 	}
+	result = result * Mat4d::zrotation(M_PI/180*(axisRotation + 90.));
 }
 
 Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, QOpenGLShaderProgram* shader, const PlanetShaderVars& shaderVars) const
