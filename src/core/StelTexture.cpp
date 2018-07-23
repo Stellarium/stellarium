@@ -212,7 +212,7 @@ bool StelTexture::load()
 {
 	// If the file is remote, start a network connection.
 	if (loader == Q_NULLPTR && networkReply == Q_NULLPTR &&
-			(fullPath.startsWith("http://") || fullPath.startsWith("https://") || fullPath.startsWith("file://")))
+			(fullPath.startsWith("http", Qt::CaseInsensitive) || fullPath.startsWith("file://", Qt::CaseInsensitive)))
 	{
 		QNetworkRequest req = QNetworkRequest(QUrl(fullPath));
 		// Define that preference should be given to cached files (no etag checks)

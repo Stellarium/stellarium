@@ -109,7 +109,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 {
 	const MultiLevelJsonBase* parent = qobject_cast<MultiLevelJsonBase*>(QObject::parent());
 	contructorUrl = url;
-	if (!url.startsWith("http://") && (parent==Q_NULLPTR || !parent->getBaseUrl().startsWith("http://")))
+	if (!url.startsWith("http", Qt::CaseInsensitive) && (parent==Q_NULLPTR || !parent->getBaseUrl().startsWith("http", Qt::CaseInsensitive)))
 	{
 		// Assume a local file
 		QString fileName = StelFileMgr::findFile(url);
@@ -156,13 +156,13 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 		// This is useful to reduce bandwidth when the user moves rapidely
 		deletionDelay = 0.001;
 		QUrl qurl;
-		if (url.startsWith("http://"))
+		if (url.startsWith("http", Qt::CaseInsensitive))
 		{
 			qurl.setUrl(url);
 		}
 		else
 		{
-			Q_ASSERT(parent->getBaseUrl().startsWith("http://"));
+			Q_ASSERT(parent->getBaseUrl().startsWith("http", Qt::CaseInsensitive));
 			qurl.setUrl(parent->getBaseUrl()+url);
 		}
 		Q_ASSERT(httpReply==Q_NULLPTR);

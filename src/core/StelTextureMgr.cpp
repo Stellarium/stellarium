@@ -94,7 +94,7 @@ StelTextureSP StelTextureMgr::createTextureThread(const QString& url, const Stel
 		return StelTextureSP();
 
 	QString canPath = url;
-	if(!url.startsWith("http") && !url.startsWith("file://"))
+	if(!url.startsWith("http", Qt::CaseInsensitive) && !url.startsWith("file://", Qt::CaseInsensitive))
 	{
 		QFileInfo info(url);
 		canPath = info.canonicalFilePath();

@@ -571,7 +571,7 @@ void MpcImportWindow::startDownload(QString urlString)
 	}
 
 	QUrl url(urlString);
-	if (!url.isValid() || url.isRelative() || !url.scheme().contains("http"))
+	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
 	{
 		qWarning() << "Invalid URL:" << urlString;
 		return;

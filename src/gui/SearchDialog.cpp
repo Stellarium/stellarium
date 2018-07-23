@@ -128,7 +128,7 @@ void CompletionLabel::updateText()
 
 // Start of members for class SearchDialog
 
-const char* SearchDialog::DEF_SIMBAD_URL = "http://simbad.u-strasbg.fr/";
+const char* SearchDialog::DEF_SIMBAD_URL = "https://simbad.u-strasbg.fr/";
 SearchDialog::SearchDialogStaticData SearchDialog::staticData;
 QString SearchDialog::extSearchText = "";
 
