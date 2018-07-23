@@ -51,7 +51,7 @@ Supernova::Supernova(const QVariantMap& map)
 {
 	if (!map.contains("designation") || !map.contains("alpha") || !map.contains("delta"))
 	{
-		qWarning() << "Supernova: INVALID quasar!" << map.value("designation").toString();
+		qWarning() << "Supernova: INVALID supernova!" << map.value("designation").toString();
 		qWarning() << "Supernova: Please, check your 'supernovae.json' catalog!";
 		return;
 	}
