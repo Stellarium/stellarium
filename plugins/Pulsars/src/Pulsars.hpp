@@ -29,9 +29,9 @@
 #include <QDateTime>
 #include <QList>
 #include <QSharedPointer>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
-class QNetworkAccessManager;
-class QNetworkReply;
 class QSettings;
 class QTimer;
 class QPixmap;
@@ -290,7 +290,8 @@ private:
 
 	// variables and functions for the updater
 	UpdateState updateState;
-	QNetworkAccessManager* downloadMgr;
+	QNetworkAccessManager * networkManager;
+	QNetworkReply * downloadReply;
 	QString updateUrl;	
 	QTimer* updateTimer;
 	QList<int> messageIDs;
@@ -298,6 +299,9 @@ private:
 	QDateTime lastUpdate;
 	int updateFrequencyDays;	
 	bool enableAtStartup;
+
+	void startDownload(QString url);
+	void deleteDownloadProgressBar();
 
 	QSettings* conf;
 
@@ -317,7 +321,9 @@ private slots:
 	//! if the last update was longer than updateFrequencyHours ago then the update is
 	//! done.
 	void checkForUpdate(void);
-	void updateDownloadComplete(QNetworkReply* reply);
+
+	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+	void downloadComplete(QNetworkReply * reply);
 
 	void reloadCatalog(void);
 

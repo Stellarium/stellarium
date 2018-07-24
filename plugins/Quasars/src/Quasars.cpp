@@ -84,7 +84,7 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 Quasars::Quasars()
 	: QsrCount(0)
 	, updateState(CompleteNoUpdates)
-	, downloadMgr(Q_NULLPTR)
+	, networkManager(Q_NULLPTR)
 	, updateTimer(Q_NULLPTR)
 	, messageTimer(Q_NULLPTR)
 	, updatesEnabled(false)
@@ -202,14 +202,15 @@ void Quasars::init()
 	readJsonFile();
 
 	// Set up download manager and the update schedule
-	downloadMgr = new QNetworkAccessManager(this);
-	connect(downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateDownloadComplete(QNetworkReply*)));
+	networkManager = StelApp::getInstance().getNetworkAccessManager();
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
 	updateTimer->setInterval(13000);     // check once every 13 seconds to see if it is time for an update
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(checkForUpdate()));
 	updateTimer->start();
+
+	connect(this, SIGNAL(jsonUpdateComplete(void)), this, SLOT(reloadCatalog()));
 
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
@@ -595,7 +596,7 @@ int Quasars::getSecondsToUpdate(void)
 
 void Quasars::checkForUpdate(void)
 {
-	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
+	if (updatesEnabled && lastUpdate.addSecs(updateFrequencyDays * 3600 * 24) <= QDateTime::currentDateTime() && networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
 		updateJSON();
 }
 
@@ -606,65 +607,140 @@ void Quasars::updateJSON(void)
 		qWarning() << "[Quasars] Already updating...  will not start again current update is complete.";
 		return;
 	}
-	else
-	{
-		qDebug() << "[Quasars] Starting update...";
-	}
 
 	lastUpdate = QDateTime::currentDateTime();
 	conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
 
-	updateState = Quasars::Updating;
-	emit(updateStateChanged(updateState));
-
-	if (progressBar==Q_NULLPTR)
-		progressBar = StelApp::getInstance().addProgressBar();
-
-	progressBar->setValue(0);
-	progressBar->setRange(0, 100);
-	progressBar->setFormat("Update quasars");
-
-	QNetworkRequest request;
-	request.setUrl(QUrl(updateUrl));
-	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Quasars Plugin %1; https://stellarium.org/)").arg(QUASARS_PLUGIN_VERSION).toUtf8());
-	downloadMgr->get(request);
-
-	updateState = Quasars::CompleteUpdates;
-	emit(updateStateChanged(updateState));
-	emit(jsonUpdateComplete());
+	qDebug() << "[Quasars] Updating quasars catalog...";
+	startDownload(updateUrl);
 }
 
-void Quasars::updateDownloadComplete(QNetworkReply* reply)
+void Quasars::deleteDownloadProgressBar()
 {
-	// check the download worked, and save the data to file if this is the case.
-	if (reply->error() == QNetworkReply::NoError && reply->bytesAvailable()>0)
+	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
+
+	if (progressBar)
 	{
-		// download completed successfully.
-		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
-		if (jsonFilePath.isEmpty())
+		StelApp::getInstance().removeProgressBar(progressBar);
+		progressBar = Q_NULLPTR;
+	}
+}
+
+void Quasars::startDownload(QString urlString)
+{
+	QUrl url(urlString);
+	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
+	{
+		qWarning() << "[Quasars] Invalid URL:" << urlString;
+		return;
+	}
+
+	if (progressBar == Q_NULLPTR)
+		progressBar = StelApp::getInstance().addProgressBar();
+	progressBar->setValue(0);
+	progressBar->setRange(0, 0);
+
+	connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	QNetworkRequest request;
+	request.setUrl(QUrl(updateUrl));
+	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	downloadReply = networkManager->get(request);
+	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+
+	updateState = Quasars::Updating;
+	emit(updateStateChanged(updateState));
+}
+
+void Quasars::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+	if (progressBar == Q_NULLPTR)
+		return;
+
+	int currentValue = 0;
+	int endValue = 0;
+
+	if (bytesTotal > -1 && bytesReceived <= bytesTotal)
+	{
+		//Round to the greatest possible derived unit
+		while (bytesTotal > 1024)
 		{
-			qWarning() << "[Quasars] Cannot write JSON data to file:" << QDir::toNativeSeparators(jsonFilePath);
-			return;
+			bytesReceived = std::floor(bytesReceived / 1024.);
+			bytesTotal    = std::floor(bytesTotal / 1024.);
 		}
+		currentValue = bytesReceived;
+		endValue = bytesTotal;
+	}
+
+	progressBar->setValue(currentValue);
+	progressBar->setRange(0, endValue);
+}
+
+void Quasars::downloadComplete(QNetworkReply *reply)
+{
+	if (reply == Q_NULLPTR)
+		return;
+
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+
+	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
+	{
+		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
+		qDebug() << "[Quasars] The query has been redirected to" << redirectUrl.toString();
+
+		updateUrl = redirectUrl.toString();
+		conf->setValue("Quasars/url", updateUrl);
+
+		reply->deleteLater();
+		downloadReply = Q_NULLPTR;
+		startDownload(redirectUrl.toString());
+		return;
+	}
+
+	deleteDownloadProgressBar();
+
+	if (reply->error() || reply->bytesAvailable()==0)
+	{
+		qWarning() << "[Quasars] Download error: While trying to access"
+			   << reply->url().toString()
+			   << "the following error occured:"
+			   << reply->errorString();
+
+		reply->deleteLater();
+		downloadReply = Q_NULLPTR;
+		return;
+	}
+
+	// download completed successfully.
+	try
+	{
+		QString jsonFilePath = StelFileMgr::findFile("modules/Quasars", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory)) + "/quasars.json";
 		QFile jsonFile(jsonFilePath);
 		if (jsonFile.exists())
 			jsonFile.remove();
 
-		if(jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
+		if (jsonFile.open(QIODevice::WriteOnly | QIODevice::Text))
 		{
 			jsonFile.write(reply->readAll());
 			jsonFile.close();
 		}
-	}
-	else
-		qWarning() << "[Quasars] FAILED to download" << reply->url() << " Error: " << reply->errorString();
 
-	if (progressBar)
-	{
-		progressBar->setValue(100);
-		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = Q_NULLPTR;
+		updateState = Quasars::CompleteUpdates;
 	}
+	catch (std::runtime_error &e)
+	{
+		qWarning() << "[Quasars] Cannot write JSON data to file:" << e.what();
+		updateState = Quasars::DownloadError;
+	}
+
+	emit(updateStateChanged(updateState));
+	emit(jsonUpdateComplete());
+
+	reply->deleteLater();
+	downloadReply = Q_NULLPTR;
+
+	readJsonFile();
 }
 
 void Quasars::displayMessage(const QString& message, const QString hexColor)
