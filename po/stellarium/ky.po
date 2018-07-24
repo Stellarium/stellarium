@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-21 20:52+0700\n"
+"POT-Creation-Date: 2018-07-23 23:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: d d <m8857785435@dea-love.net>, 2017\n"
 "Language-Team: Kyrgyz (https://www.transifex.com/stellarium/teams/80998/ky/)\n"
@@ -41,7 +41,7 @@ msgstr ""
 #: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
-msgstr "Түр"
+msgstr "Тиби"
 
 #: src/core/modules/CustomObjectMgr.cpp:64
 msgid "Marker"
@@ -2845,7 +2845,7 @@ msgstr ""
 
 #: src/core/StelMovementMgr.cpp:192
 msgid "Zoom out"
-msgstr "Алыстатуу"
+msgstr "Кичирейтүү"
 
 #: src/core/StelMovementMgr.cpp:194
 msgid "Track object"
@@ -3054,7 +3054,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1349
 msgid "Verifying file integrity..."
-msgstr "Файлдын бүтүндүгү текшерилүүлдө..."
+msgstr "Файлдын бүтүндүгү текшерүүдө..."
 
 #: src/gui/ConfigurationDialog.cpp:1353
 #, qt-format
@@ -3063,7 +3063,7 @@ msgid ""
 "File is corrupted."
 msgstr ""
 "%1 жүктөө катасы:\n"
-"Файл бузук."
+"Файл бузулган."
 
 #: src/gui/ConfigurationDialog.cpp:1402 src/gui/ConfigurationDialog.cpp:1411
 msgid "Available"
@@ -3924,7 +3924,7 @@ msgstr "Орнотулган ландшафтты өчүрүү"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:154
 msgid "Do you really want to remove this landscape?"
-msgstr ""
+msgstr "Сиз бул ландшафтты чын эле алып таштоону каалайсызбы?"
 
 #: src/gui/AddRemoveLandscapesDialog.cpp:163
 #, qt-format
@@ -3973,7 +3973,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:77
 msgid "selected text"
-msgstr "Тандалган текст"
+msgstr "белгиленген текст"
 
 #: src/gui/ScriptConsole.cpp:78
 msgid "clear text"
@@ -3997,7 +3997,7 @@ msgstr ""
 
 #: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
 msgid "Script Files"
-msgstr ""
+msgstr "Сценарий файлдары"
 
 #: src/gui/ScriptConsole.cpp:125
 msgid "Save Script"
@@ -4872,7 +4872,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:2454 src/gui/AstroCalcDialog.cpp:2599
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the
 #. metric system,
@@ -5098,42 +5098,42 @@ msgstr "Stellarium %1"
 #. TRANSLATORS: Cardinals names: North
 #: src/translations.h:35
 msgid "N"
-msgstr "Тн"
+msgstr "N"
 
 #. TRANSLATORS: Cardinals names: South
 #: src/translations.h:37
 msgid "S"
-msgstr "Тш"
+msgstr "S"
 
 #. TRANSLATORS: Cardinals names: East
 #: src/translations.h:39
 msgid "E"
-msgstr "Чг"
+msgstr "E"
 
 #. TRANSLATORS: Cardinals names: West
 #: src/translations.h:41
 msgid "W"
-msgstr "Бт"
+msgstr "W"
 
 #. TRANSLATORS: Ordinals names: Northeast
 #: src/translations.h:43
 msgid "NE"
-msgstr ""
+msgstr "NE"
 
 #. TRANSLATORS: Ordinals names: Southeast
 #: src/translations.h:45
 msgid "SE"
-msgstr ""
+msgstr "SE"
 
 #. TRANSLATORS: Ordinals names: Southwest
 #: src/translations.h:47
 msgid "SW"
-msgstr ""
+msgstr "SW"
 
 #. TRANSLATORS: Ordinals names: Northwest
 #: src/translations.h:49
 msgid "NW"
-msgstr ""
+msgstr "NW"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:56
@@ -6410,7 +6410,7 @@ msgstr ""
 
 #: src/translations.h:666
 msgid "Date Modified"
-msgstr "Өзгөртүлгөн күнү"
+msgstr "Өзгөртүлгөн"
 
 #: src/translations.h:667
 msgid "Directories"
@@ -6430,7 +6430,7 @@ msgstr ""
 
 #: src/translations.h:671
 msgid "File &name:"
-msgstr ""
+msgstr "Файлдын &аты:"
 
 #: src/translations.h:672
 msgid "Copy &Link Location"
@@ -6507,11 +6507,11 @@ msgstr ""
 
 #: src/translations.h:690
 msgid "Create New Folder"
-msgstr ""
+msgstr "Жаңы папканы жаратуу"
 
 #: src/translations.h:691
 msgid "List View"
-msgstr ""
+msgstr "Тизме көрүнүш"
 
 #: src/translations.h:692
 msgid "Detail View"
@@ -6527,6 +6527,8 @@ msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
+"Ордунда %1 бар.\n"
+"Мунун ордуна алмаштырууну каалайсызбы?"
 
 #: src/translations.h:695
 msgid "&Yes"
@@ -7132,7 +7134,7 @@ msgstr "Кыргызстан"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cambodia
 #: src/translations_countries.h:264
 msgid "Cambodia"
-msgstr "Камбоджа"
+msgstr "Камбожа"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kiribati
 #: src/translations_countries.h:266
@@ -8169,7 +8171,7 @@ msgstr "басым, температура, экстинкциянын коэф�
 
 #: src/ui_viewDialog.h:2521
 msgid "Refraction/Extinction settings..."
-msgstr "Рефракциянын/экстинкциянын ырастоолору..."
+msgstr "Рефракциянын/экстинкциянын параметрлери..."
 
 #: src/ui_viewDialog.h:2522
 msgid "Zodiacal Light brightness:"
@@ -9038,7 +9040,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1433
 msgid "Save View"
-msgstr ""
+msgstr "Көрүнүштү сактоо"
 
 #: src/ui_configurationDialog.h:1435
 msgid ""
@@ -9052,7 +9054,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
-msgstr "Баптоолорду сактоо"
+msgstr "Параметрлерди сактоо"
 
 #: src/ui_configurationDialog.h:1439
 msgid "Restore the default settings that came with Stellarium"
@@ -10391,7 +10393,7 @@ msgstr ""
 
 #: src/ui_orbitColorsDialog.h:453
 msgid "Orbit of Venus"
-msgstr ""
+msgstr "Чолпондун орбитасы"
 
 #: src/ui_orbitColorsDialog.h:455
 msgid "Color of plutino orbits"
@@ -11394,11 +11396,11 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1232
 msgid "Resolution x (pixels):"
-msgstr "X чечим (пиксельдер):"
+msgstr "X чечим (пиксел):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1233
 msgid "Resolution y (pixels):"
-msgstr "Y чечим (пиксельдер):"
+msgstr "Y чечим (пиксел):"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1234
 msgid "Chip height (mm):"
@@ -12094,7 +12096,7 @@ msgstr "Жаңылоо жыштыгы (саат):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:762
 msgid "Label font size (pixels):"
-msgstr "Аттардын шрифт өлчөмү (пиксель):"
+msgstr "Аталыштын арип көлөмү (пиксел):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:763
 msgid "Orbit lines"
@@ -13440,19 +13442,19 @@ msgstr ""
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "Username:"
-msgstr ""
+msgstr "Колдонуучу аты:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Password:"
-msgstr ""
+msgstr "Жашыруун сөз:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "RTS2 username"
-msgstr ""
+msgstr "RTS2 колдонуучу аты"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
 msgid "RTS2 password"
-msgstr ""
+msgstr "RTS2 жашыруун сөзү"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:616
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
@@ -13799,7 +13801,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/MpcImportWindow.cpp:334
 msgid "Select a text file"
-msgstr ""
+msgstr "Текст файлын тандоо"
 
 #. TRANSLATORS: Appears as the text of hyperlinks linking to websites. :)
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:102
@@ -14710,7 +14712,7 @@ msgstr ""
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:253
 msgid "Password"
-msgstr ""
+msgstr "Жашыруун сөз"
 
 #: plugins/RemoteControl/src/ui_remoteControlDialog.h:254
 msgid ""
@@ -14839,7 +14841,7 @@ msgstr ""
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:243
 msgid "Server Name"
-msgstr ""
+msgstr "Сервердин аты"
 
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:251
 msgid "Server not active."
@@ -16214,7 +16216,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:345
 msgid "Font color and size"
-msgstr "Ариптин түсү жан өлчөмү"
+msgstr "Арип түсү жана көлөмү"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:346
 msgid "Red"
@@ -16230,7 +16232,7 @@ msgstr ""
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:349
 msgid "Font Size"
-msgstr ""
+msgstr "Арип көлөмү"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:350
 msgid "Observing conditions"
@@ -16351,7 +16353,7 @@ msgstr ""
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:243
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:303
 msgid "Font size:"
-msgstr ""
+msgstr "Арип көлөмү:"
 
 #: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:88
 msgid "The current catalog of Meteor Showers is invalid!"
@@ -17771,19 +17773,19 @@ msgstr ""
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
-msgstr ""
+msgstr "Сакталган көрүнүштөр"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
-msgstr ""
+msgstr "Көрүнүштү жүктөө"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:215
 msgid "Delete view"
-msgstr ""
+msgstr "Көрүнүштү өчүрүү"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:216
 msgid "Add current view"
-msgstr ""
+msgstr "Учурдагы көрүнүштү сактоо"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
@@ -18160,7 +18162,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:589
 msgid "Change color"
-msgstr "Түсүн оңдоо"
+msgstr "Түсүн өзгөртүү"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:593
 msgid "Current Planet: None"
@@ -18172,7 +18174,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:595
 msgid "Current Planet: Venus"
-msgstr ""
+msgstr "Учурдагы планета: Чолпон"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:596
 msgid "Current Planet: Mars"

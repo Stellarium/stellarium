@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-19 20:28+0700\n"
+"Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
+"POT-Creation-Date: 2018-07-23 23:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Chinese (Hong Kong) (https://www.transifex.com/stellarium/teams/80998/zh_HK/)\n"
@@ -104,8 +104,8 @@ msgid "Could not retrieve landscape list"
 msgstr "無法取回地景清單"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:515
-#: index.html:572 tablet7in.html:692 tablet7in.html:752
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:521
+#: index.html:578 tablet7in.html:698 tablet7in.html:758
 msgid "-none-"
 msgstr "- 無 -"
 
@@ -329,103 +329,103 @@ msgstr "次要停頓點"
 msgid "Current Planet:"
 msgstr "目前的行星:"
 
-#: index.html:429 tablet7in.html:587
+#: index.html:435 tablet7in.html:593
 msgid "Bright Nebulae"
 msgstr "明亮星雲"
 
-#: index.html:430 tablet7in.html:588
+#: index.html:436 tablet7in.html:594
 msgid "Dark Nebulae"
 msgstr "暗星雲"
 
-#: index.html:431 tablet7in.html:589
+#: index.html:437 tablet7in.html:595
 msgid "Planetary Nebulae"
 msgstr "行星狀星雲"
 
-#: index.html:440 tablet7in.html:598
+#: index.html:446 tablet7in.html:604
 msgid "Labels and markers"
 msgstr "標籤與標記"
 
-#: index.html:469 tablet7in.html:627
+#: index.html:475 tablet7in.html:633
 msgid "Show illumination"
 msgstr "顯示光害"
 
-#: index.html:474 tablet7in.html:633
+#: index.html:480 tablet7in.html:639
 msgid "Current landscape"
 msgstr "目前的地景"
 
-#: index.html:486 tablet7in.html:646
+#: index.html:492 tablet7in.html:652
 msgid "Show lines with thickness"
 msgstr ""
 
-#: index.html:491 tablet7in.html:651
+#: index.html:497 tablet7in.html:657
 msgid "Show asterisms with thickness"
 msgstr ""
 
-#: index.html:502 tablet7in.html:667
+#: index.html:508 tablet7in.html:673
 msgid "Current sky culture"
 msgstr "目前的星空述語"
 
-#: index.html:515 tablet7in.html:692
+#: index.html:521 tablet7in.html:698
 msgid "Active script:"
 msgstr "執行中的腳本(script):"
 
-#: index.html:516 tablet7in.html:693
+#: index.html:522 tablet7in.html:699
 msgid "Run selected script"
 msgstr "執行選取的腳本"
 
-#: index.html:516 tablet7in.html:693
+#: index.html:522 tablet7in.html:699
 msgid "Stop current script"
 msgstr "停止目前的腳本"
 
-#: index.html:521 tablet7in.html:41 tablet7in.html:677
+#: index.html:527 tablet7in.html:41 tablet7in.html:683
 msgid "Actions"
 msgstr "操控"
 
-#: index.html:525 tablet7in.html:681
+#: index.html:531 tablet7in.html:687
 msgid "Run/toggle action"
 msgstr "執行/切換開關 指令"
 
-#: index.html:536 tablet7in.html:716
+#: index.html:542 tablet7in.html:722
 msgid "Planet map"
 msgstr "行星地圖"
 
-#: index.html:537 tablet7in.html:717
+#: index.html:543 tablet7in.html:723
 msgid "Planet map pointer"
 msgstr "行星地圖指標"
 
-#: index.html:541 tablet7in.html:721
+#: index.html:547 tablet7in.html:727
 msgid "Type to search location"
 msgstr "輸入以搜尋位置"
 
-#: index.html:570 tablet7in.html:750
+#: index.html:576 tablet7in.html:756
 msgid "Interaction"
 msgstr ""
 
-#: index.html:571 tablet7in.html:751
+#: index.html:577 tablet7in.html:757
 msgid "Current scene:"
 msgstr ""
 
-#: index.html:574 tablet7in.html:754
+#: index.html:580 tablet7in.html:760
 msgid "View controls"
 msgstr ""
 
-#: index.html:580 tablet7in.html:760
+#: index.html:586 tablet7in.html:766
 msgid "Movement controls"
 msgstr ""
 
-#: index.html:596 tablet7in.html:776
+#: index.html:602 tablet7in.html:782
 msgid "Scene selection"
 msgstr ""
 
-#: index.html:600 tablet7in.html:780
+#: index.html:606 tablet7in.html:786
 msgid "Load selected scene"
 msgstr ""
 
-#: index.html:624 tablet7in.html:805
+#: index.html:630 tablet7in.html:811
 msgid "No response from server"
 msgstr "伺服器沒有回應"
 
-#: index.html:625 tablet7in.html:806
+#: index.html:631 tablet7in.html:812
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "伺服器沒有回應已超過 %1 秒，Stellarium 是否仍在運行？"
 
@@ -581,22 +581,22 @@ msgstr "寶瓶座"
 msgid "Pisces"
 msgstr "雙魚座"
 
-#: tablet7in.html:663
+#: tablet7in.html:669
 msgid "Constellation selection isolated"
 msgstr "選取單一星座"
 
-#: tablet7in.html:701
+#: tablet7in.html:707
 msgid "Favorites"
 msgstr "喜好"
 
-#: tablet7in.html:703
+#: tablet7in.html:709
 msgid "Show 1"
 msgstr "顯示 1"
 
-#: tablet7in.html:704
+#: tablet7in.html:710
 msgid "Remove Labels and Images"
 msgstr "移除名稱標籤和影像"
 
-#: tablet7in.html:704
+#: tablet7in.html:710
 msgid "Cleanup Screen"
 msgstr "清空螢幕"

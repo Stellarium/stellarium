@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-21 20:52+0700\n"
+"POT-Creation-Date: 2018-07-23 23:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Gerard Prins <gejepe@manquehue.net>, 2018\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
@@ -119,11 +119,11 @@ msgstr "Sterren labels"
 
 #: src/core/modules/StarMgr.cpp:453
 msgid "Increase the magnitude limit for stars"
-msgstr ""
+msgstr "De magnitude limiet voor sterren verhogen"
 
 #: src/core/modules/StarMgr.cpp:454
 msgid "Reduce the magnitude limit for stars"
-msgstr ""
+msgstr "De magnitude limiet voor sterren verlagen"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2752
 msgid "Meridian"
@@ -399,15 +399,15 @@ msgstr "Lichtvervuiling gegevens uit de locatiedatabase"
 
 #: src/core/modules/LandscapeMgr.cpp:478
 msgid "Increase light pollution"
-msgstr ""
+msgstr "Lichtvervuiling verhogen"
 
 #: src/core/modules/LandscapeMgr.cpp:479
 msgid "Reduce light pollution"
-msgstr ""
+msgstr "Lichtvervuiling verlagen"
 
 #: src/core/modules/LandscapeMgr.cpp:480
 msgid "Cyclic change in light pollution"
-msgstr ""
+msgstr "Cyclische wijziging in lichtvervuiling"
 
 #: src/core/modules/LandscapeMgr.cpp:883 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
@@ -1307,57 +1307,57 @@ msgstr "Morfologische beschrijving"
 #: src/core/modules/Nebula.cpp:1210
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "hoge concentratie van sterren naar het centrum"
 
 #: src/core/modules/Nebula.cpp:1213
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "dichte centrale concentratie van sterren"
 
 #: src/core/modules/Nebula.cpp:1216
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "sterke binnen kern van sterren"
 
 #: src/core/modules/Nebula.cpp:1219
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "intermediaire rijke concentraties van sterren"
 
 #: src/core/modules/Nebula.cpp:1224
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "intermediaire concentraties van sterren"
 
 #: src/core/modules/Nebula.cpp:1227
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
-msgstr ""
+msgstr "vrij losse concentratie van sterren naar het centrum"
 
 #: src/core/modules/Nebula.cpp:1230
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
-msgstr ""
+msgstr "losse concentratie van sterren naar het midden"
 
 #: src/core/modules/Nebula.cpp:1233
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "losse concentratie van sterren"
 
 #: src/core/modules/Nebula.cpp:1236
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "zeer losse concentratie van sterren naar het midden"
 
 #: src/core/modules/Nebula.cpp:1239
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "bijna geen concentratie van sterren naar het midden"
 
 #: src/core/modules/Nebula.cpp:1242
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "ongedocumenteerde concentratie klasse"
 
 #: src/core/modules/Nebula.cpp:1262
 msgctxt "Trumpler's Concentration Class"
@@ -1754,7 +1754,7 @@ msgstr "Gemiddelde oppositie magnitude"
 #: src/core/modules/Planet.cpp:458
 msgctxt "coordinates"
 msgid "Ecliptical"
-msgstr ""
+msgstr "Ecliptica"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:271
@@ -1794,15 +1794,15 @@ msgstr "km/s"
 #: src/core/modules/Planet.cpp:518 src/core/modules/MinorPlanet.cpp:318
 #: src/core/modules/Comet.cpp:244
 msgid "Orbital velocity"
-msgstr ""
+msgstr "Baansnelheid"
 
 #: src/core/modules/Planet.cpp:521 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric velocity"
-msgstr ""
+msgstr "Heliocentrische snelheid"
 
 #: src/core/modules/Planet.cpp:526 src/core/modules/MinorPlanet.cpp:326
 msgid "Equatorial rotation velocity"
-msgstr ""
+msgstr "Rotatie snelheid evenaar"
 
 #: src/core/modules/Planet.cpp:549
 msgid "with rings"
@@ -1818,7 +1818,7 @@ msgstr "Schijnbare diameter"
 
 #: src/core/modules/Planet.cpp:583
 msgid "Equatorial diameter"
-msgstr ""
+msgstr "Diameter evenaar"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:602 src/core/modules/MinorPlanet.cpp:383
@@ -1960,7 +1960,7 @@ msgstr "Gasstaartlengte (schatting)"
 
 #: src/core/modules/Comet.cpp:314
 msgid "Core diameter"
-msgstr ""
+msgstr "Kerndiameter"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:236 src/gui/AstroCalcDialog.cpp:1882
@@ -2089,7 +2089,7 @@ msgstr "Zodiakaal licht"
 
 #: src/core/modules/ToastMgr.cpp:60
 msgid "Digitized Sky Survey (TOAST)"
-msgstr "Gedigitaliseerd hemel onderzoek (TOAST)"
+msgstr "Digitized Sky Survey (TOAST)"
 
 #: src/core/modules/HipsMgr.cpp:138
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
@@ -2842,6 +2842,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"De sinusoidal projectie is een <i>pseudo-cilindrische gelijk oppervlak "
+"projectie</i>, soms genoemd de Sanson–Flamsteed of de Mercator gelijk "
+"oppervlak projectie."
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
@@ -2853,6 +2856,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"De Miller cilindrische projectie is een gemodificeerde Mercator projectie, "
+"voorgesteld door Osborn Maitland Miller (1897–1979) in 1942. De polen worden"
+" niet langer in het oneindige afgebeeld."
 
 #: src/core/StelObject.cpp:235
 msgctxt "coordinates for current epoch"
@@ -2915,45 +2921,45 @@ msgstr "Schijnbare sterrentijd"
 #: src/core/StelObject.cpp:573 src/gui/AstroCalcDialog.cpp:460
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
-msgstr ""
+msgstr "Overgang"
 
 #: src/core/StelObject.cpp:574
 msgctxt "celestial event"
 msgid "Rise"
-msgstr ""
+msgstr "Opkomst"
 
 #: src/core/StelObject.cpp:575
 msgctxt "celestial event"
 msgid "Set"
-msgstr ""
+msgstr "Ondergang"
 
 #: src/core/StelObject.cpp:613
 msgid "Daytime"
-msgstr ""
+msgstr "Dagtijd"
 
 #: src/core/StelObject.cpp:626
 msgid "Polar night"
-msgstr ""
+msgstr "Poolnacht"
 
 #: src/core/StelObject.cpp:628
 msgid "This object never rises"
-msgstr ""
+msgstr "Dit object komt nooit op"
 
 #: src/core/StelObject.cpp:633
 msgid "Polar day"
-msgstr ""
+msgstr "Pooldag"
 
 #: src/core/StelObject.cpp:635
 msgid "Circumpolar (never sets)"
-msgstr ""
+msgstr "Circumpolair (gaat nooit onder)"
 
 #: src/core/StelObject.cpp:638
 msgid "Polar dawn"
-msgstr ""
+msgstr "pooldageraad"
 
 #: src/core/StelObject.cpp:640
 msgid "Polar dusk"
-msgstr ""
+msgstr "poolschemering"
 
 #: src/core/StelObject.cpp:646
 msgid "IAU Constellation"
@@ -3377,19 +3383,19 @@ msgstr "Geen"
 
 #: src/gui/ConfigurationDialog.cpp:1645
 msgid "5/6/5 bits"
-msgstr ""
+msgstr "5/6/5 bits"
 
 #: src/gui/ConfigurationDialog.cpp:1646
 msgid "6/6/6 bits"
-msgstr ""
+msgstr "6/6/6 bits "
 
 #: src/gui/ConfigurationDialog.cpp:1647
 msgid "8/8/8 bits"
-msgstr ""
+msgstr "8/8/8 bits "
 
 #: src/gui/ConfigurationDialog.cpp:1648
 msgid "10/10/10 bits"
-msgstr ""
+msgstr "10/10/10 bits "
 
 #: src/gui/HelpDialog.cpp:137
 msgid "Stellarium Help"
@@ -3814,7 +3820,7 @@ msgstr "Zonnestelsel"
 
 #: src/gui/ViewDialog.cpp:519
 msgid "Loading ..."
-msgstr ""
+msgstr "Laden..."
 
 #: src/gui/ViewDialog.cpp:570
 msgid "properties"
@@ -4016,18 +4022,21 @@ msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
 msgstr ""
+"Schakelen tussen ophalen GPS-locatie. (wijzigt de tijdzone niet!) Als u "
+"tevreden bent, schakelt u uit om andere programma's toegang te geven tot het"
+" GPS-apparaat."
 
 #: src/gui/LocationDialog.cpp:742
 msgid "GPS listening..."
-msgstr ""
+msgstr "GPS luisteren..."
 
 #: src/gui/LocationDialog.cpp:749
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "GPS verbinding wordt verbroken..."
 
 #: src/gui/LocationDialog.cpp:761
 msgid "GPS location fix"
-msgstr ""
+msgstr "GPS locatie vastgesteld "
 
 #: src/gui/LocationDialog.cpp:780
 msgid "GPS:FAILED"
@@ -4671,7 +4680,7 @@ msgstr "Hickson Compact Group"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:569 src/translations.h:419
 msgid "Abell Catalog of Planetary Nebulae"
-msgstr ""
+msgstr "Abell catalogus van planetaire nevels"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:570 src/translations.h:421
@@ -4854,7 +4863,7 @@ msgstr "100 siderische dagen"
 
 #: src/gui/AstroCalcDialog.cpp:1795
 msgid "1 sidereal year"
-msgstr ""
+msgstr "1 siderisch jaar"
 
 #: src/gui/AstroCalcDialog.cpp:1796
 msgid "1 Julian day"
@@ -4886,35 +4895,35 @@ msgstr "100 Juliaanse dagen"
 
 #: src/gui/AstroCalcDialog.cpp:1803
 msgid "1 Julian year"
-msgstr ""
+msgstr "1 Juliaans jaar"
 
 #: src/gui/AstroCalcDialog.cpp:1804
 msgid "1 Gaussian year"
-msgstr ""
+msgstr "1 Gaussiaans jaar"
 
 #: src/gui/AstroCalcDialog.cpp:1805
 msgid "1 synodic month"
-msgstr ""
+msgstr "1 synodische maand"
 
 #: src/gui/AstroCalcDialog.cpp:1806
 msgid "1 draconic month"
-msgstr ""
+msgstr "1 draconische maand"
 
 #: src/gui/AstroCalcDialog.cpp:1807
 msgid "1 mean tropical month"
-msgstr ""
+msgstr "1 gemiddelde tropische maand"
 
 #: src/gui/AstroCalcDialog.cpp:1808
 msgid "1 anomalistic month"
-msgstr ""
+msgstr "1 anomalistische maand"
 
 #: src/gui/AstroCalcDialog.cpp:1809
 msgid "1 anomalistic year"
-msgstr ""
+msgstr "1 anomalistisch jaar"
 
 #: src/gui/AstroCalcDialog.cpp:1810
 msgid "1 saros"
-msgstr ""
+msgstr "1 saros"
 
 #: src/gui/AstroCalcDialog.cpp:1881
 msgid "Solar system"
@@ -5089,7 +5098,7 @@ msgstr "Object 2"
 
 #: src/gui/AstroCalcDialog.cpp:2826
 msgid "Angular distance"
-msgstr ""
+msgstr "Hoekafstand"
 
 #: src/gui/AstroCalcDialog.cpp:3106
 msgid "Save calculated phenomena as..."
@@ -5112,7 +5121,7 @@ msgstr "Verduistering"
 #: src/gui/AstroCalcDialog.cpp:3185
 msgctxt "passage of the celestial body"
 msgid "Transit"
-msgstr ""
+msgstr "Overgang"
 
 #: src/gui/AstroCalcDialog.cpp:3188 src/gui/AstroCalcDialog.cpp:3415
 #: src/gui/AstroCalcDialog.cpp:3629
@@ -5122,12 +5131,12 @@ msgstr "Verduistering"
 #: src/gui/AstroCalcDialog.cpp:3251 src/gui/AstroCalcDialog.cpp:3469
 #: src/gui/AstroCalcDialog.cpp:3679
 msgid "Angular distance from the Sun"
-msgstr ""
+msgstr "Hoekafstand van de zon"
 
 #: src/gui/AstroCalcDialog.cpp:3254 src/gui/AstroCalcDialog.cpp:3472
 #: src/gui/AstroCalcDialog.cpp:3682
 msgid "Angular distance from the Moon"
-msgstr ""
+msgstr "Hoekafstand van de maan"
 
 #: src/gui/AstroCalcDialog.cpp:3910
 msgctxt "Celestial object is observed..."
@@ -6227,7 +6236,7 @@ msgstr "Dubbele verduistering vanaf Deimos in 2031"
 #. TRANSLATORS: Name of script
 #: src/translations.h:565
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
-msgstr ""
+msgstr "Verduistering vanaf Olympus 2 Jan 2021"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:567
@@ -8630,7 +8639,7 @@ msgstr "Hickson Compact Group (Hickson+, 1982)"
 
 #: src/ui_viewDialog.h:2650
 msgid "Abell Catalog of Planetary Nebulae (Abell, 1966)"
-msgstr ""
+msgstr "Abell catalogus van planetaire nevels (Abell, 1966)"
 
 #: src/ui_viewDialog.h:2652
 msgid "Filter by type"
@@ -9182,7 +9191,7 @@ msgstr "Kleur van ray helpers"
 #: src/ui_viewDialog.h:2971
 msgctxt "Solar system objects"
 msgid "SSO"
-msgstr ""
+msgstr "ZZO"
 
 #: src/ui_viewDialog.h:2976
 msgctxt "Deep-Sky Objects"
@@ -9230,11 +9239,11 @@ msgstr "Informatie over geselecteerd object"
 #: src/ui_configurationDialog.h:1397
 msgctxt "Additional settings for Graphical User Interface"
 msgid "Extras"
-msgstr ""
+msgstr "Extra's "
 
 #: src/ui_configurationDialog.h:1399
 msgid "Additional settings for Graphical User Interface"
-msgstr ""
+msgstr "Aanvullende instellingen voor grafische gebruikersinterface"
 
 #: src/ui_configurationDialog.h:1402
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1017
@@ -9484,10 +9493,11 @@ msgstr "Catalogusnummer(s)"
 #: src/ui_configurationDialog.h:1512
 msgid "Show time of rise, transit and set of celestial object"
 msgstr ""
+"Toon de tijd van opkomst, overgang en ondergang van het hemelse object"
 
 #: src/ui_configurationDialog.h:1514
 msgid "Rises, transits and sets"
-msgstr ""
+msgstr "Opkomst, overgang en ondergang"
 
 #: src/ui_configurationDialog.h:1516
 msgid "Spectral class, nebula type, etc."
@@ -9503,7 +9513,7 @@ msgstr "Galactische coördinaten"
 
 #: src/ui_configurationDialog.h:1520
 msgid "Additional buttons"
-msgstr ""
+msgstr "Extra toetsen"
 
 #: src/ui_configurationDialog.h:1521
 msgid "Show constellation boundaries button"
@@ -9511,7 +9521,7 @@ msgstr "Sterrenbeeldgrenzen toets weergeven"
 
 #: src/ui_configurationDialog.h:1523
 msgid "Toggle display of nebula images."
-msgstr ""
+msgstr "Schakelen tussen weergaven van nevelafbeldingen"
 
 #: src/ui_configurationDialog.h:1525
 msgid "Show nebula background button"
@@ -9527,7 +9537,7 @@ msgstr "Ecliptica raster toets weergeven"
 
 #: src/ui_configurationDialog.h:1531
 msgid "Toggle display of the button for the Digitized Sky Survey."
-msgstr ""
+msgstr "De toets voor het 'Digitized Sky Survey' wel/niet weergeven. "
 
 #: src/ui_configurationDialog.h:1533
 msgid "Show DSS button"
@@ -9545,11 +9555,11 @@ msgstr "ICRS raster toets weergeven"
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
-msgstr ""
+msgstr "De toets voor de 'HiPS overzichten' wel/niet weergeven. "
 
 #: src/ui_configurationDialog.h:1541
 msgid "Show HiPS button"
-msgstr ""
+msgstr "HiPS-toets weergeven"
 
 #: src/ui_configurationDialog.h:1543
 msgid "A button to toggle galactic grid"
@@ -9561,7 +9571,7 @@ msgstr "Galactisch raster toets weergeven"
 
 #: src/ui_configurationDialog.h:1547
 msgid "Enable a feature to store favorite views."
-msgstr ""
+msgstr "Een functie inschakelen om favoriete afbeeldingen op te slaan."
 
 #: src/ui_configurationDialog.h:1549
 msgid "Show bookmarks button"
@@ -9609,7 +9619,7 @@ msgstr "Download stoppen. U kunt het altijd later herstarten"
 
 #: src/ui_configurationDialog.h:1571
 msgid "Additional information settings"
-msgstr ""
+msgstr "Aanvullende informatie-instellingen"
 
 #: src/ui_configurationDialog.h:1572
 msgid "Use short notation for unit of measurement of surface brightness"
@@ -9706,7 +9716,7 @@ msgstr "Planetariumopties"
 
 #: src/ui_configurationDialog.h:1606
 msgid "Align labels with the screen center"
-msgstr ""
+msgstr "Extra informatie-instellingen"
 
 #: src/ui_configurationDialog.h:1608
 msgid "Gravity labels"
@@ -9714,7 +9724,7 @@ msgstr "Zwaartekrachtlabels"
 
 #: src/ui_configurationDialog.h:1609
 msgid "Dithering"
-msgstr ""
+msgstr "Trilling"
 
 #: src/ui_configurationDialog.h:1611
 msgid ""
@@ -9781,6 +9791,8 @@ msgid ""
 "Auto-enable atmosphere when selecting a celestial body in the location "
 "window."
 msgstr ""
+"Automatisch de atmosfeer weergeven van het hemellichaam dat gekozen wordt in"
+" het locatievenster."
 
 #: src/ui_configurationDialog.h:1640
 msgid "Auto-enabling for the atmosphere"
@@ -9789,6 +9801,8 @@ msgstr "Auto-weergave van de atmosfeer"
 #: src/ui_configurationDialog.h:1642
 msgid "Flash a short message when toggling mount mode."
 msgstr ""
+"Een flits van een kort bericht weergeven als de montagemoduus wordt "
+"ingeschakeld."
 
 #: src/ui_configurationDialog.h:1644
 msgid "Indication for mount mode"
@@ -9832,8 +9846,7 @@ msgstr "Azimut vanaf zuid"
 
 #: src/ui_configurationDialog.h:1666
 msgid "Automatic change of landscape when planet is changed"
-msgstr ""
-"Automatische wijzigen van het landschap als de planeet wordt gewijzigd"
+msgstr "Automatische het landschap wijzigen als de planeet wordt gewijzigd"
 
 #: src/ui_configurationDialog.h:1668
 msgid "Auto select landscapes"
@@ -9861,7 +9874,7 @@ msgstr "Kleuren inverteren"
 
 #: src/ui_configurationDialog.h:1677
 msgid "Custom size"
-msgstr ""
+msgstr "Aangepaste grootte"
 
 #: src/ui_configurationDialog.h:1680
 msgid "Close window when script runs"
@@ -10272,17 +10285,17 @@ msgstr "Objecten:"
 #: src/ui_astroCalcDialog.h:1180
 msgctxt "celestial event"
 msgid "Set:"
-msgstr ""
+msgstr "Ondergang:"
 
 #: src/ui_astroCalcDialog.h:1181
 msgctxt "celestial event"
 msgid "Rise:"
-msgstr ""
+msgstr "Opkomst:"
 
 #: src/ui_astroCalcDialog.h:1182
 msgctxt "celestial event"
 msgid "Transit:"
-msgstr ""
+msgstr "Overgang:"
 
 #: src/ui_astroCalcDialog.h:1185
 msgid "Save list of objects"
@@ -10326,7 +10339,7 @@ msgstr "Synodische periode:"
 
 #: src/ui_astroCalcDialog.h:1195
 msgid "Equatorial diameters ratio:"
-msgstr ""
+msgstr "Diameter evenaar ratoi:"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -11694,11 +11707,11 @@ msgstr "Automatisch wisselen van montagetype inschakelen"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Telrad view"
-msgstr ""
+msgstr "Telradbeeld"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Enable scaling FOV for Telrad"
-msgstr ""
+msgstr "FOV-schaling inschakelen voor Telrad "
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1213
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
@@ -12535,11 +12548,11 @@ msgstr "Segment lengte(n):"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:785
 msgid "Show artificial satellites as markers"
-msgstr ""
+msgstr "Kunstmatige satellieten weergeven als markeringen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:786
 msgid "Hide invisible artificial satellites"
-msgstr ""
+msgstr "Onzichtbare kunstmatige satellieten verbergen"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:788
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -15006,6 +15019,9 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
+"Een plug-in die enkele quasars helderder dan de 18 visuele magnitude "
+"weergeeft. De catalogus van quasars is samengesteld uit de 'Quasars and "
+"Active Galactic Nuclei' (13th Ed.) (Veron+ 2010)"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Show quasars"
@@ -15019,15 +15035,15 @@ msgstr "Quasars configuratievenster"
 #: plugins/Quasars/src/Quasar.cpp:153
 msgctxt "radio flux density"
 msgid "Jy"
-msgstr ""
+msgstr "Jy"
 
 #: plugins/Quasars/src/Quasar.cpp:157
 msgid "Radio flux density around 5GHz (6cm)"
-msgstr ""
+msgstr "Radio-flux dichtheid rond 5 GHz (6 cm)"
 
 #: plugins/Quasars/src/Quasar.cpp:159
 msgid "Radio flux density around 1.4GHz (21cm)"
-msgstr ""
+msgstr "Radio-flux dichtheid rond 1.4 GHz (21 cm)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 msgid "Quasars Plug-in"
@@ -15039,6 +15055,9 @@ msgid ""
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
+"De quasars plug-in produceert de visualisatie van enkele quasars helderder "
+"dan de visuele magnitude 18. De catalogus van quasars werd samengesteld uit "
+"de \"Quasars and Active Galactic Nuclei\" (13th Ed.)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
 msgid "Veron+ 2010"
@@ -15079,11 +15098,11 @@ msgstr "Quasars toets op de werkbalk weergeven"
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:303
 msgid "Use markers for quasars"
-msgstr ""
+msgstr "Markeringen gebruiken voor quasars "
 
 #: plugins/Quasars/src/ui_quasarsDialog.h:304
 msgid "Quasars marker color"
-msgstr ""
+msgstr "Quasars markeringskleur"
 
 #: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
 #: plugins/Pulsars/src/Pulsars.cpp:168
@@ -15116,8 +15135,8 @@ msgstr "pulsar"
 #, qt-format, qt-plural-format
 msgid "has %1 registered glitch(es)"
 msgid_plural "has %1 registered glitch(es)"
-msgstr[0] "heeft %1 glitch geregistreerd"
-msgstr[1] "heeft %1 glitchen geregistreerd"
+msgstr[0] "heeft %1 geregistreerde glitch(es) "
+msgstr[1] "heeft %1 geregistreerde 'glitch(es)' "
 
 #: plugins/Pulsars/src/Pulsar.cpp:187
 msgid "pulsar with glitches"
@@ -15329,11 +15348,11 @@ msgstr "Pulsars toets op de werkbalk weergeven"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:339
 msgid "Pulsars marker color"
-msgstr ""
+msgstr "Pulsars markeringskleur"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
 msgid "Marker Color for pulsars"
-msgstr ""
+msgstr "Markeringskleur voor pulsars "
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
@@ -15341,11 +15360,12 @@ msgstr "Een aparte kleur voor pulsars met 'glitches' gebruiken"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:345
 msgid "Marker Color for pulsars with glitches"
-msgstr ""
+msgstr "Markeringskleur voor pulsars met 'glitches'"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
 msgstr ""
+"Alleen pulsars weergeven met tijdgemiddelde flux dichtheid boven de 400 MHz "
 
 #: plugins/RemoteControl/src/RemoteControl.cpp:58
 #: plugins/RemoteControl/src/RemoteControl.cpp:149
@@ -18934,11 +18954,11 @@ msgstr "Lijn voor het geselecteerde object weergeven"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:261
 msgid "Show Line for Selected Object's Azimuth"
-msgstr ""
+msgstr "Azimut lijn weergeven voor het geselecteerde object"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:262
 msgid "Show Line for Selected Object's Hour Angle"
-msgstr ""
+msgstr "Uurhoeklijn weergeven voor het geselecteerde object"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:263
 msgid "Show Line for Current Sun"
@@ -19063,11 +19083,11 @@ msgstr "Declinatie van het huidige geselecteerde object"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:280
 msgid "Azimuth of the currently selected object"
-msgstr ""
+msgstr "Azimut van het momenteel geselecteerde object"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Hour Angle of the currently selected object"
-msgstr ""
+msgstr "Uurhoek van het momenteel geselecteerde object"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "Current declination of the sun"
@@ -19150,11 +19170,11 @@ msgstr "Kleur voor het geselecteerde object lijn selecteren"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:476
 msgid "Select color for selected object azimuth line"
-msgstr ""
+msgstr "Azimutlijn kleur selecteren voor het geselecteerde object"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:487
 msgid "Select color for selected object hour angle line"
-msgstr ""
+msgstr "Uurhoeklijn kleur selecteren voor het geselecteerde object"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:498
 msgid "Select color for current sun line"
@@ -19305,8 +19325,8 @@ msgstr "Aangepaste declinatie 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:601
 msgid "Selected Object Azimuth"
-msgstr ""
+msgstr "Geselecteerd object azimut"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:602
 msgid "Selected Object Hour Angle"
-msgstr ""
+msgstr "Geselecteerd object uurhoek"

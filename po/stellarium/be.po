@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-21 20:52+0700\n"
+"POT-Creation-Date: 2018-07-23 23:33+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hleb Valoshka <375gnu@gmail.com>, 2017\n"
 "Language-Team: Belarusian (https://www.transifex.com/stellarium/teams/80998/be/)\n"
@@ -119,11 +119,11 @@ msgstr "Назвы зорак"
 
 #: src/core/modules/StarMgr.cpp:453
 msgid "Increase the magnitude limit for stars"
-msgstr ""
+msgstr "Павялічыць абмежаваньне велічыні зорак"
 
 #: src/core/modules/StarMgr.cpp:454
 msgid "Reduce the magnitude limit for stars"
-msgstr ""
+msgstr "Зьменшыць абмежаваньне велічыні зорак"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2752
 msgid "Meridian"
@@ -399,11 +399,11 @@ msgstr "Засьветленьне паводле базы мясцовасьц�
 
 #: src/core/modules/LandscapeMgr.cpp:478
 msgid "Increase light pollution"
-msgstr ""
+msgstr "Павялічыць засьветленьне"
 
 #: src/core/modules/LandscapeMgr.cpp:479
 msgid "Reduce light pollution"
-msgstr ""
+msgstr "Зьменшыць засьветленьне"
 
 #: src/core/modules/LandscapeMgr.cpp:480
 msgid "Cyclic change in light pollution"
@@ -1302,57 +1302,57 @@ msgstr "Марфаляґічнае апісаньне"
 #: src/core/modules/Nebula.cpp:1210
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "вялікая канцэнтрацыя зорак у напрамку цэнтру"
 
 #: src/core/modules/Nebula.cpp:1213
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "dense central concentration of stars"
-msgstr ""
+msgstr "шчыльная цэнтральная канцэнтрацыя зорак"
 
 #: src/core/modules/Nebula.cpp:1216
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "strong inner core of stars"
-msgstr ""
+msgstr "моцнае ўнутранае ядро зорак"
 
 #: src/core/modules/Nebula.cpp:1219
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate rich concentrations of stars"
-msgstr ""
+msgstr "сярэдне-багатая канцэнтрацыя зорак"
 
 #: src/core/modules/Nebula.cpp:1224
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "intermediate concentrations of stars"
-msgstr ""
+msgstr "сярэдняя канцэнтрацыя зорак"
 
 #: src/core/modules/Nebula.cpp:1227
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "rather loose concentration of stars towards the center"
-msgstr ""
+msgstr "даволі рэдкая канцэнтрацыя зорак у напрамку цэнтру"
 
 #: src/core/modules/Nebula.cpp:1230
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars towards the center"
-msgstr ""
+msgstr "рэдкая канцэнтрацыя зорак у напрамку цэнтру"
 
 #: src/core/modules/Nebula.cpp:1233
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "рэдкая канцэнтрацыя зорак"
 
 #: src/core/modules/Nebula.cpp:1236
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "вельмі рэдкая канцэнтрацыя зорак у напрамку цэнтру"
 
 #: src/core/modules/Nebula.cpp:1239
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "амаль няма канцэнтрацыі ў напрамку цэнтру"
 
 #: src/core/modules/Nebula.cpp:1242
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "undocumented concentration class"
-msgstr ""
+msgstr "незадакумэнтаваная кляса канцэнтрацыі"
 
 #: src/core/modules/Nebula.cpp:1262
 msgctxt "Trumpler's Concentration Class"
@@ -1749,7 +1749,7 @@ msgstr "Сярэдняя велічыня супрацьстаяньня"
 #: src/core/modules/Planet.cpp:458
 msgctxt "coordinates"
 msgid "Ecliptical"
-msgstr ""
+msgstr "Экватарыяльныя"
 
 #. TRANSLATORS: Unit of measure for distance - astronomical unit
 #: src/core/modules/Planet.cpp:466 src/core/modules/MinorPlanet.cpp:271
@@ -1789,15 +1789,15 @@ msgstr "км/с"
 #: src/core/modules/Planet.cpp:518 src/core/modules/MinorPlanet.cpp:318
 #: src/core/modules/Comet.cpp:244
 msgid "Orbital velocity"
-msgstr ""
+msgstr "Арбітальная хуткасьць"
 
 #: src/core/modules/Planet.cpp:521 src/core/modules/MinorPlanet.cpp:321
 msgid "Heliocentric velocity"
-msgstr ""
+msgstr "Геліяцэнтрычная хуткасьць"
 
 #: src/core/modules/Planet.cpp:526 src/core/modules/MinorPlanet.cpp:326
 msgid "Equatorial rotation velocity"
-msgstr ""
+msgstr "Экватарыяльная хуткасьць аварачэньня"
 
 #: src/core/modules/Planet.cpp:549
 msgid "with rings"
@@ -1813,7 +1813,7 @@ msgstr "Сапраўдны дыямэтар"
 
 #: src/core/modules/Planet.cpp:583
 msgid "Equatorial diameter"
-msgstr ""
+msgstr "Экватарыяльны дыямэтар"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:602 src/core/modules/MinorPlanet.cpp:383
@@ -1955,7 +1955,7 @@ msgstr "Даўжыня ґазавага хваста (ацэнка)"
 
 #: src/core/modules/Comet.cpp:314
 msgid "Core diameter"
-msgstr ""
+msgstr "Дыямэтар ядра"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/core/modules/SolarSystem.cpp:236 src/gui/AstroCalcDialog.cpp:1882
@@ -2799,7 +2799,7 @@ msgstr ""
 
 #: src/core/StelProjectorClasses.cpp:365
 msgid "Mercator"
-msgstr "Меркатар"
+msgstr "Мэркатар"
 
 #: src/core/StelProjectorClasses.cpp:370
 msgid ""
@@ -2807,7 +2807,7 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"Праекцыя Меркатара — гэта адна з найчасьцей ужываных праекцый. Яна захоўвае "
+"Праекцыя Мэркатара — гэта адна з найчасьцей ужываных праекцый. Яна захоўвае "
 "напрамкі й формы, але скажае памер, і чым далей ад экватара, тым болей."
 
 #: src/core/StelProjectorClasses.cpp:418
@@ -2832,6 +2832,9 @@ msgid ""
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
+"Сінусаідальная праекцыя — гэта <i>псэўдацыліндрычная раўнаплошчавая "
+"праекцыя</i>, якую часам называюць праекцыяй Сансона-Флэмстыда або "
+"раўнаплошчавай Мэркатара."
 
 #: src/core/StelProjectorClasses.cpp:512
 msgid "Miller cylindrical"
@@ -2843,6 +2846,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
+"Цыліндрычная праекцыя Мілера — гэта мадыфікаваная праекцыя Мэркатара, "
+"прапанаваная Осбарнам Мэйтландам Мілерам (1897–1979) у 1942 годзе. Полюсы "
+"болей не адлюстроўваюцца як бясконцасьць."
 
 #: src/core/StelObject.cpp:235
 msgctxt "coordinates for current epoch"
@@ -2905,45 +2911,45 @@ msgstr "Сапраўдны сыдэрычны час"
 #: src/core/StelObject.cpp:573 src/gui/AstroCalcDialog.cpp:460
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
-msgstr ""
+msgstr "Транзыт"
 
 #: src/core/StelObject.cpp:574
 msgctxt "celestial event"
 msgid "Rise"
-msgstr ""
+msgstr "Узыход"
 
 #: src/core/StelObject.cpp:575
 msgctxt "celestial event"
 msgid "Set"
-msgstr ""
+msgstr "Захад"
 
 #: src/core/StelObject.cpp:613
 msgid "Daytime"
-msgstr ""
+msgstr "Дзённы час"
 
 #: src/core/StelObject.cpp:626
 msgid "Polar night"
-msgstr ""
+msgstr "Палярная ноч"
 
 #: src/core/StelObject.cpp:628
 msgid "This object never rises"
-msgstr ""
+msgstr "Аб'ект ніколі не ўзыходзіць"
 
 #: src/core/StelObject.cpp:633
 msgid "Polar day"
-msgstr ""
+msgstr "Палярны дзень"
 
 #: src/core/StelObject.cpp:635
 msgid "Circumpolar (never sets)"
-msgstr ""
+msgstr "Каляпалярнае (ніколі не заходзіць)"
 
 #: src/core/StelObject.cpp:638
 msgid "Polar dawn"
-msgstr ""
+msgstr "Палярны сьвітанак"
 
 #: src/core/StelObject.cpp:640
 msgid "Polar dusk"
-msgstr ""
+msgstr "Палярнае зьмярканьне"
 
 #: src/core/StelObject.cpp:646
 msgid "IAU Constellation"
@@ -3807,7 +3813,7 @@ msgstr "Сонечная сыстэма"
 
 #: src/gui/ViewDialog.cpp:519
 msgid "Loading ..."
-msgstr ""
+msgstr "Загрузка..."
 
 #: src/gui/ViewDialog.cpp:570
 msgid "properties"
@@ -4009,15 +4015,15 @@ msgstr ""
 
 #: src/gui/LocationDialog.cpp:742
 msgid "GPS listening..."
-msgstr ""
+msgstr "Слуханьне GPS…"
 
 #: src/gui/LocationDialog.cpp:749
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "Адлучэньне ад GPS…"
 
 #: src/gui/LocationDialog.cpp:761
 msgid "GPS location fix"
-msgstr ""
+msgstr "Папраўка месца GPS"
 
 #: src/gui/LocationDialog.cpp:780
 msgid "GPS:FAILED"
@@ -5078,7 +5084,7 @@ msgstr "Аб'ект 2"
 
 #: src/gui/AstroCalcDialog.cpp:2826
 msgid "Angular distance"
-msgstr ""
+msgstr "Вуглавая адлегласьць"
 
 #: src/gui/AstroCalcDialog.cpp:3106
 msgid "Save calculated phenomena as..."
@@ -5101,7 +5107,7 @@ msgstr "Зацьменьне"
 #: src/gui/AstroCalcDialog.cpp:3185
 msgctxt "passage of the celestial body"
 msgid "Transit"
-msgstr ""
+msgstr "Транзыт"
 
 #: src/gui/AstroCalcDialog.cpp:3188 src/gui/AstroCalcDialog.cpp:3415
 #: src/gui/AstroCalcDialog.cpp:3629
@@ -5111,12 +5117,12 @@ msgstr "Пакрыцьцё"
 #: src/gui/AstroCalcDialog.cpp:3251 src/gui/AstroCalcDialog.cpp:3469
 #: src/gui/AstroCalcDialog.cpp:3679
 msgid "Angular distance from the Sun"
-msgstr ""
+msgstr "Вуглавая адлегласьць ад Сонца"
 
 #: src/gui/AstroCalcDialog.cpp:3254 src/gui/AstroCalcDialog.cpp:3472
 #: src/gui/AstroCalcDialog.cpp:3682
 msgid "Angular distance from the Moon"
-msgstr ""
+msgstr "Вуглавая адлегласьць ад Месяца"
 
 #: src/gui/AstroCalcDialog.cpp:3910
 msgctxt "Celestial object is observed..."
@@ -6217,7 +6223,7 @@ msgstr "Падвойнае зацьменьне на Дэймасе ў 2031 го
 #. TRANSLATORS: Name of script
 #: src/translations.h:565
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
-msgstr ""
+msgstr "Зацьменьне на гары Алімп 2 студзеня 2021 года"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:567
@@ -9455,11 +9461,11 @@ msgstr "Нумар(ы) у каталёґу"
 
 #: src/ui_configurationDialog.h:1512
 msgid "Show time of rise, transit and set of celestial object"
-msgstr ""
+msgstr "Паказваць час узыходу, транзыту й захаду нябесных аб'ектаў"
 
 #: src/ui_configurationDialog.h:1514
 msgid "Rises, transits and sets"
-msgstr ""
+msgstr "Узыходы, транзыты й захады"
 
 #: src/ui_configurationDialog.h:1516
 msgid "Spectral class, nebula type, etc."
@@ -9483,7 +9489,7 @@ msgstr "Паказваць ґузік межаў сузор'яў"
 
 #: src/ui_configurationDialog.h:1523
 msgid "Toggle display of nebula images."
-msgstr ""
+msgstr "Ці паказваць відарысы туманнасьцяў."
 
 #: src/ui_configurationDialog.h:1525
 msgid "Show nebula background button"
@@ -9499,7 +9505,7 @@ msgstr "Паказваць ґузік экліптычнай сеткі"
 
 #: src/ui_configurationDialog.h:1531
 msgid "Toggle display of the button for the Digitized Sky Survey."
-msgstr ""
+msgstr "Ці паказваць ґузік лічбаванага агляду неба."
 
 #: src/ui_configurationDialog.h:1533
 msgid "Show DSS button"
@@ -10238,17 +10244,17 @@ msgstr "Адпаведныя аб'екты:"
 #: src/ui_astroCalcDialog.h:1180
 msgctxt "celestial event"
 msgid "Set:"
-msgstr ""
+msgstr "Захад:"
 
 #: src/ui_astroCalcDialog.h:1181
 msgctxt "celestial event"
 msgid "Rise:"
-msgstr ""
+msgstr "Узыход:"
 
 #: src/ui_astroCalcDialog.h:1182
 msgctxt "celestial event"
 msgid "Transit:"
-msgstr ""
+msgstr "Транзыт:"
 
 #: src/ui_astroCalcDialog.h:1185
 msgid "Save list of objects"
@@ -10292,7 +10298,7 @@ msgstr "Сынадычны пэрыяд:"
 
 #: src/ui_astroCalcDialog.h:1195
 msgid "Equatorial diameters ratio:"
-msgstr ""
+msgstr "Маштаб экватарыяльных дыямэтраў:"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -14947,6 +14953,9 @@ msgid ""
 "catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' "
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
+"Дадатак паказвае некаторыя квазараў, ярчэйшыя за бачную велічыню 18. Каталёґ"
+" квазараў быў сабраны з «Квазары й ядры актыўных ґаляктык» (13 выданьне) "
+"(Вэрон+ 2010)"
 
 #: plugins/Quasars/src/Quasars.cpp:170
 msgid "Show quasars"
@@ -14964,11 +14973,11 @@ msgstr ""
 
 #: plugins/Quasars/src/Quasar.cpp:157
 msgid "Radio flux density around 5GHz (6cm)"
-msgstr ""
+msgstr "Шчыльнасьць плыні радыё ля 5 ҐГц (6 см)"
 
 #: plugins/Quasars/src/Quasar.cpp:159
 msgid "Radio flux density around 1.4GHz (21cm)"
-msgstr ""
+msgstr "Шчыльнасьць плыні радыё ля 1,4 ҐГц (21 см)"
 
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
 msgid "Quasars Plug-in"
@@ -15282,7 +15291,7 @@ msgstr "Колер пазнак пульсараў"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:341
 msgid "Marker Color for pulsars"
-msgstr ""
+msgstr "Колер пазнак пульсараў"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:343
 msgid "Use separate color for pulsars with glitches"
@@ -15290,7 +15299,7 @@ msgstr "выкарыстоўваць асобны колер для пульса
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:345
 msgid "Marker Color for pulsars with glitches"
-msgstr ""
+msgstr "Колер пазнак пульсараў са збоямі"
 
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:347
 msgid "Only show pulsars with Time average flux density at 400 MHz above"
@@ -18839,11 +18848,11 @@ msgstr "Паказваць лінію вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:261
 msgid "Show Line for Selected Object's Azimuth"
-msgstr ""
+msgstr "Паказваць лінію азімуту вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:262
 msgid "Show Line for Selected Object's Hour Angle"
-msgstr ""
+msgstr "Паказваць лінію гадзіннікавага вугла вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:263
 msgid "Show Line for Current Sun"
@@ -18968,11 +18977,11 @@ msgstr "Схіленьне бягучага вылачанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:280
 msgid "Azimuth of the currently selected object"
-msgstr ""
+msgstr "Азімут бягучага вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:281
 msgid "Hour Angle of the currently selected object"
-msgstr ""
+msgstr "Гадзінны вугал бягучага вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:282
 msgid "Current declination of the sun"
@@ -19053,11 +19062,11 @@ msgstr "Выберы колер лініі вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:476
 msgid "Select color for selected object azimuth line"
-msgstr ""
+msgstr "Выберы колер лініі азімуту вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:487
 msgid "Select color for selected object hour angle line"
-msgstr ""
+msgstr "Выберы колер лініі гадзіннікавага вугла вылучанага аб'екту"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:498
 msgid "Select color for current sun line"
@@ -19207,8 +19216,8 @@ msgstr "Сваё схіленьне 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:601
 msgid "Selected Object Azimuth"
-msgstr ""
+msgstr "Азімут вылучанага аб'екта"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:602
 msgid "Selected Object Hour Angle"
-msgstr ""
+msgstr "Гадзінавы вугал вылучанага аб'екта"
