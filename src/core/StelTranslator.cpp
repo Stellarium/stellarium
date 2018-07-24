@@ -55,11 +55,11 @@ StelTranslator::~StelTranslator()
 	translator = Q_NULLPTR;
 }
 
-QString StelTranslator::qtranslate(const QString& s, const QString& c, int n) const
+QString StelTranslator::qtranslate(const QString& s, const QString& c) const
 {
 	if (s.isEmpty())
 		return "";
-	QString res = translator->translate("", s.toUtf8().constData(), c.toUtf8().constData(), n);
+	QString res = translator->translate("", s.toUtf8().constData(), c.toUtf8().constData());
 	if (res.isEmpty())
 		return s;
 	return res;

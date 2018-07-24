@@ -322,6 +322,7 @@ void ExoplanetsDialog::setWebsitesHtml(void)
 
 void ExoplanetsDialog::refreshUpdateValues(void)
 {
+	QString nextUpdate = q_("Next update");
 	ui->lastUpdateDateTimeEdit->setDateTime(ep->getLastUpdate());
 	ui->updateFrequencySpinBox->setValue(ep->getUpdateFrequencyHours());
 	int secondsToUpdate = ep->getSecondsToUpdate();
@@ -331,16 +332,18 @@ void ExoplanetsDialog::refreshUpdateValues(void)
 	else if (ep->getUpdateState() == Exoplanets::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
-		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
+		ui->nextUpdateLabel->setText(QString("%1: %2").arg(nextUpdate, q_("< 1 minute")));
 	else if (secondsToUpdate < 3600)
 	{
 		int n = (secondsToUpdate/60)+1;
-		ui->nextUpdateLabel->setText(qn_("Next update: %1 minute(s)", n).arg(n));
+		// TRANSLATORS: minutes.
+		ui->nextUpdateLabel->setText(QString("%1: %2 %3").arg(nextUpdate, QString::number(n), qc_("m", "time")));
 	}
 	else
 	{
 		int n = (secondsToUpdate/3600)+1;
-		ui->nextUpdateLabel->setText(qn_("Next update: %1 hour(s)", n).arg(n));
+		// TRANSLATORS: hours.
+		ui->nextUpdateLabel->setText(QString("%1: %2 %3").arg(nextUpdate, QString::number(n), qc_("h", "time")));
 	}
 }
 

@@ -162,6 +162,7 @@ void SupernovaeDialog::setAboutHtml(void)
 
 void SupernovaeDialog::refreshUpdateValues(void)
 {
+	QString nextUpdate = q_("Next update");
 	ui->lastUpdateDateTimeEdit->setDateTime(sn->getLastUpdate());
 	ui->updateFrequencySpinBox->setValue(sn->getUpdateFrequencyDays());
 	int secondsToUpdate = sn->getSecondsToUpdate();
@@ -171,21 +172,24 @@ void SupernovaeDialog::refreshUpdateValues(void)
 	else if (sn->getUpdateState() == Supernovae::Updating)
 		ui->nextUpdateLabel->setText(q_("Updating now..."));
 	else if (secondsToUpdate <= 60)
-		ui->nextUpdateLabel->setText(q_("Next update: < 1 minute"));
+		ui->nextUpdateLabel->setText(QString("%1: %2").arg(nextUpdate, q_("< 1 minute")));
 	else if (secondsToUpdate < 3600)
 	{
 		int n = (secondsToUpdate/60)+1;
-		ui->nextUpdateLabel->setText(qn_("Next update: %1 minute(s)", n).arg(n));
+		// TRANSLATORS: minutes.
+		ui->nextUpdateLabel->setText(QString("%1: %2 %3").arg(nextUpdate, QString::number(n), qc_("m", "time")));
 	}
 	else if (secondsToUpdate < 86400)
 	{
 		int n = (secondsToUpdate/3600)+1;
-		ui->nextUpdateLabel->setText(qn_("Next update: %1 hour(s)", n).arg(n));
+		// TRANSLATORS: hours.
+		ui->nextUpdateLabel->setText(QString("%1: %2 %3").arg(nextUpdate, QString::number(n), qc_("h", "time")));
 	}
 	else
 	{
 		int n = (secondsToUpdate/86400)+1;
-		ui->nextUpdateLabel->setText(qn_("Next update: %1 day(s)", n).arg(n));
+		// TRANSLATORS: days.
+		ui->nextUpdateLabel->setText(QString("%1: %2 %3").arg(nextUpdate, QString::number(n), qc_("d", "time")));
 	}
 }
 
