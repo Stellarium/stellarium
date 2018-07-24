@@ -29,9 +29,9 @@
 #include <QDateTime>
 #include <QList>
 #include <QSharedPointer>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
-class QNetworkAccessManager;
-class QNetworkReply;
 class QSettings;
 class QTimer;
 class ExoplanetsDialog;
@@ -389,13 +389,17 @@ private:
 
 	// variables and functions for the updater
 	UpdateState updateState;
-	QNetworkAccessManager* downloadMgr;
+	QNetworkAccessManager * networkManager;
+	QNetworkReply * downloadReply;
 	QString updateUrl;	
 	QTimer* updateTimer;
 	bool updatesEnabled;
 	QDateTime lastUpdate;
 	int updateFrequencyHours;	
 	bool enableAtStartup;
+
+	void startDownload(QString url);
+	void deleteDownloadProgressBar();
 
 	QSettings* conf;
 
@@ -411,12 +415,14 @@ private slots:
 	//! if the last update was longer than updateFrequencyHours ago then the update is
 	//! done.
 	void checkForUpdate(void);
-	void updateDownloadComplete(QNetworkReply* reply);
+
+	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
+	void downloadComplete(QNetworkReply * reply);
 
 	//! Display a message. This is used for plugin-specific warnings and such
 	void displayMessage(const QString& message, const QString hexColor="#999999");
 
-	void reloadCatalog(void);
+	void reloadCatalog(void);	
 };
 
 

@@ -697,7 +697,7 @@ void MpcImportWindow::deleteDownloadProgressBar()
 
 void MpcImportWindow::sendQuery()
 {
-	if (queryReply != 0)
+	if (queryReply != Q_NULLPTR)
 		return;
 
 	query = ui->lineEditQuery->text().trimmed();
@@ -768,7 +768,7 @@ void MpcImportWindow::sendQueryToUrl(QUrl url)
 
 void MpcImportWindow::abortQuery()
 {
-	if (queryReply == 0)
+	if (queryReply == Q_NULLPTR)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
@@ -776,7 +776,7 @@ void MpcImportWindow::abortQuery()
 
 	queryReply->abort();
 	queryReply->deleteLater();
-	queryReply = 0;
+	queryReply = Q_NULLPTR;
 
 	//resetCountdown();
 	enableInterface(true);
@@ -785,7 +785,7 @@ void MpcImportWindow::abortQuery()
 
 void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 {
-	if (reply == 0)
+	if (reply == Q_NULLPTR)
 		return;
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(receiveQueryReply(QNetworkReply*)));
@@ -800,7 +800,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 		//TODO: Add counter and cycle check.
 
 		reply->deleteLater();
-		queryReply = 0;
+		queryReply = Q_NULLPTR;
 		sendQueryToUrl(redirectUrl);
 		return;
 	}
@@ -821,7 +821,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 		enableInterface(true);
 
 		reply->deleteLater();
-		queryReply = 0;
+		queryReply = Q_NULLPTR;
 		return;
 	}
 
@@ -840,7 +840,7 @@ void MpcImportWindow::receiveQueryReply(QNetworkReply *reply)
 	}
 
 	reply->deleteLater();
-	queryReply = 0;
+	queryReply = Q_NULLPTR;
 }
 
 void MpcImportWindow::readQueryReply(QNetworkReply * reply)
@@ -929,7 +929,7 @@ void MpcImportWindow::resetCountdown()
 		countdownTimer->stop();
 
 		//If the query is still active, kill it
-		if (queryReply != 0 && queryReply->isRunning())
+		if (queryReply != Q_NULLPTR && queryReply->isRunning())
 		{
 			abortQuery();
                         ui->labelQueryMessage->setText("The query timed out. You can try again, now or later.");
@@ -953,7 +953,7 @@ void MpcImportWindow::updateCountdown()
 		resetCountdown();
 	}
 	//If there has been an answer
-	else if (countdown > 50 && queryReply == 0)
+	else if (countdown > 50 && queryReply == Q_NULLPTR)
 	{
 		resetCountdown();
 	}
