@@ -85,13 +85,13 @@ public:
 
 
 //! Copies the default configuration file.
-//! This function copies the default_config.ini file to config.ini (or other
+//! This function copies the default_cfg.ini file to config.ini (or other
 //! name specified on the command line located in the user data directory.
 void copyDefaultConfigFile(const QString& newPath)
 {
-	QString defaultConfigFilePath = StelFileMgr::findFile("data/default_config.ini");
+	QString defaultConfigFilePath = StelFileMgr::findFile("data/default_cfg.ini");
 	if (defaultConfigFilePath.isEmpty())
-		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_config.ini. Please check your installation.");
+		qFatal("ERROR copyDefaultConfigFile failed to locate data/default_cfg.ini. Please check your installation.");
 	QFile::copy(defaultConfigFilePath, newPath);
 	if (!StelFileMgr::exists(newPath))
 	{
