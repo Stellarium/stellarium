@@ -53,7 +53,7 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_enableAutoUpdates(true)
 	, m_updateFrequencyHours(0)
 	, m_statusOfLastUpdate(OUTDATED)
-	, m_downloadMgr(Q_NULLPTR)
+	, m_networkManager(Q_NULLPTR)
 	, m_progressBar(Q_NULLPTR)
 {
 	setObjectName("MeteorShowers");
@@ -63,7 +63,7 @@ MeteorShowersMgr::~MeteorShowersMgr()
 {
 	delete m_configDialog;
 	delete m_searchDialog;
-	delete m_downloadMgr;
+	delete m_networkManager;
 }
 
 void MeteorShowersMgr::init()
@@ -90,8 +90,7 @@ void MeteorShowersMgr::init()
 	}
 
 	// Sets up the download manager
-	m_downloadMgr = new QNetworkAccessManager(this);
-	connect(m_downloadMgr, SIGNAL(finished(QNetworkReply*)), this, SLOT(updateFinished(QNetworkReply*)));
+	m_networkManager = StelApp::getInstance().getNetworkAccessManager();
 
 	// every 5 min, check if it's time to update
 	QTimer* updateTimer = new QTimer(this);
@@ -184,7 +183,7 @@ void MeteorShowersMgr::loadTextures()
 
 bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 {
-	qDebug() << "MeteorShowersMgr: Loading catalog file:"
+	qDebug() << "[MeteorShowersMgr] Loading catalog file:"
 		 << QDir::toNativeSeparators(jsonPath);
 
 	QFile jsonFile(jsonPath);
@@ -195,7 +194,7 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 
 	if (!jsonFile.open(QIODevice::ReadOnly))
 	{
-		qWarning() << "MeteorShowersMgr: Cannot to open the catalog file!";
+		qWarning() << "[MeteorShowersMgr] Cannot to open the catalog file!";
 		return false;
 	}
 
@@ -205,7 +204,7 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 	if (json["shortName"].toString() != "meteor showers data"
 		|| json["version"].toInt() != MS_CATALOG_VERSION)
 	{
-		qWarning()  << "MeteorShowersMgr: The current catalog is not compatible!";
+		qWarning()  << "[MeteorShowersMgr] The current catalog is not compatible!";
 		return false;
 	}
 
@@ -217,7 +216,7 @@ bool MeteorShowersMgr::loadCatalog(const QString& jsonPath)
 
 void MeteorShowersMgr::restoreDefaultSettings()
 {
-	qDebug() << "MeteorShowersMgr: Restoring default settings";
+	qDebug() << "[MeteorShowersMgr] Restoring default settings";
 	m_conf->beginGroup(MS_CONFIG_PREFIX);
 	m_conf->remove("");
 	m_conf->endGroup();
@@ -228,20 +227,20 @@ void MeteorShowersMgr::restoreDefaultSettings()
 
 bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 {
-	qDebug() << "MeteorShowersMgr: Trying to restore the default catalog to"
+	qDebug() << "[MeteorShowersMgr] Trying to restore the default catalog to"
 		 << QDir::toNativeSeparators(destination);
 
 	QFile d(destination);
 	if (d.exists() && !d.remove())
 	{
-		qWarning() << "MeteorShowersMgr: Cannot remove the current catalog file!";
+		qWarning() << "[MeteorShowersMgr] Cannot remove the current catalog file!";
 		return false;
 	}
 
 	QFile defaultJson(":/MeteorShowers/showers.json");
 	if (!defaultJson.copy(destination))
 	{
-		qWarning() << "MeteorShowersMgr: Cannot copy the default catalog!";
+		qWarning() << "[MeteorShowersMgr] Cannot copy the default catalog!";
 		return false;
 	}
 
@@ -252,7 +251,7 @@ bool MeteorShowersMgr::restoreDefaultCatalog(const QString& destination)
 
 	setLastUpdate(QDateTime::fromString("2015-07-01T00:00:00"));
 
-	qDebug() << "MeteorShowersMgr: The default catalog was copied!";
+	qDebug() << "[MeteorShowersMgr] The default catalog was copied!";
 	displayMessage(q_("Using the default Meteor Showers catalog."), "#bb0000");
 
 	return true;
@@ -284,77 +283,161 @@ void MeteorShowersMgr::repaint()
 
 void MeteorShowersMgr::checkForUpdates()
 {
-	if (m_enableAutoUpdates && m_lastUpdate.addSecs(m_updateFrequencyHours * 3600.) <= QDateTime::currentDateTime() && m_downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
+	if (m_enableAutoUpdates && m_lastUpdate.addSecs(m_updateFrequencyHours * 3600.) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
 	{
 		updateCatalog();
 	}
+}
+
+
+void MeteorShowersMgr::deleteDownloadProgressBar()
+{
+	disconnect(this, SLOT(updateDownloadProgress(qint64,qint64)));
+
+	if (m_progressBar)
+	{
+		StelApp::getInstance().removeProgressBar(m_progressBar);
+		m_progressBar = Q_NULLPTR;
+	}
+}
+
+void MeteorShowersMgr::startDownload(QString urlString)
+{
+	QUrl url(urlString);
+	if (!url.isValid() || url.isRelative() || !url.scheme().startsWith("http", Qt::CaseInsensitive))
+	{
+		qWarning() << "[MeteorShowersMgr] Invalid URL:" << urlString;
+		return;
+	}
+
+	if (m_progressBar == Q_NULLPTR)
+		m_progressBar = StelApp::getInstance().addProgressBar();
+	m_progressBar->setValue(0);
+	m_progressBar->setRange(0, 0);
+
+	connect(m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+	QNetworkRequest request;
+	request.setUrl(QUrl(m_url));
+	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	m_downloadReply = m_networkManager->get(request);
+	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
+
+	setStatusOfLastUpdate(UPDATING);
+}
+
+void MeteorShowersMgr::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
+{
+	if (m_progressBar == Q_NULLPTR)
+		return;
+
+	int currentValue = 0;
+	int endValue = 0;
+
+	if (bytesTotal > -1 && bytesReceived <= bytesTotal)
+	{
+		//Round to the greatest possible derived unit
+		while (bytesTotal > 1024)
+		{
+			bytesReceived = std::floor(bytesReceived / 1024.);
+			bytesTotal    = std::floor(bytesTotal / 1024.);
+		}
+		currentValue = bytesReceived;
+		endValue = bytesTotal;
+	}
+
+	m_progressBar->setValue(currentValue);
+	m_progressBar->setRange(0, endValue);
+}
+
+void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
+{
+	if (reply == Q_NULLPTR)
+		return;
+
+	disconnect(m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+
+	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
+	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
+	{
+		QUrl rawUrl = reply->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+		QUrl redirectUrl(rawUrl.toString(QUrl::RemoveQuery));
+		qDebug() << "[MeteorShowersMgr] The query has been redirected to" << redirectUrl.toString();
+
+		m_url = redirectUrl.toString();
+		m_conf->setValue(MS_CONFIG_PREFIX + "/url", m_url);
+
+		reply->deleteLater();
+		m_downloadReply = Q_NULLPTR;
+		startDownload(redirectUrl.toString());
+		return;
+	}
+
+	deleteDownloadProgressBar();
+
+	if (reply->error() || reply->bytesAvailable()==0)
+	{
+		qWarning() << "[MeteorShowersMgr] Download error: While trying to access"
+			   << reply->url().toString()
+			   << "the following error occured:"
+			   << reply->errorString();
+
+		reply->deleteLater();
+		m_downloadReply = Q_NULLPTR;
+		return;
+	}
+
+	// download completed successfully.
+	try
+	{
+		QString tempPath(m_catalogPath + "_new.json");
+		QFile newCatalog(tempPath);
+		newCatalog.remove(); // always overwrites
+		if (!newCatalog.open(QIODevice::ReadWrite | QIODevice::Text))
+		{
+			qWarning() << "[MeteorShowersMgr] Cannot write the downloaded catalog!";
+			setStatusOfLastUpdate(FAILED);
+			return;
+		}
+
+		newCatalog.write(reply->readAll());
+		newCatalog.close();
+
+		if (!loadCatalog(tempPath))
+		{
+			setStatusOfLastUpdate(FAILED);
+			return;
+		}
+
+		QFile(m_catalogPath).remove();
+		newCatalog.rename(tempPath.remove("_new.json"));
+
+		qDebug() << "[MeteorShowersMgr] The catalog was updated!";
+		setStatusOfLastUpdate(UPDATED);
+	}
+	catch (std::runtime_error &e)
+	{
+		qWarning() << "[MeteorShowersMgr] Cannot write JSON data to file:" << e.what();
+		setStatusOfLastUpdate(FAILED);
+	}
+
+	reply->deleteLater();
+	m_downloadReply = Q_NULLPTR;
 }
 
 void MeteorShowersMgr::updateCatalog()
 {
 	if (m_statusOfLastUpdate == UPDATING)
 	{
-		qWarning() << "MeteorShowersMgr: The catalog is being updated already!";
+		qWarning() << "[MeteorShowersMgr] The catalog is being updated already!";
 		return;
 	}
 
-	qDebug() << "MeteorShowersMgr: Starting to update the catalog...";
+	qDebug() << "[MeteorShowersMgr] Starting to update the catalog...";
 	setStatusOfLastUpdate(UPDATING);
 
 	setLastUpdate(QDateTime::currentDateTime());
 
-	m_progressBar = StelApp::getInstance().addProgressBar();
-	m_progressBar->setValue(0);
-	m_progressBar->setRange(0, 100);
-	m_progressBar->setFormat("Meteor Showers Catalog");
-
-	QNetworkRequest request;
-	request.setUrl(QUrl(m_url));
-	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Meteor Showers Plugin %1; https://stellarium.org/)").arg(METEORSHOWERS_PLUGIN_VERSION).toUtf8());
-	m_downloadMgr->get(request);
-}
-
-void MeteorShowersMgr::updateFinished(QNetworkReply* reply)
-{
-	if (m_progressBar)
-	{
-		m_progressBar->setValue(100);
-		StelApp::getInstance().removeProgressBar(m_progressBar);
-		m_progressBar = Q_NULLPTR;
-	}
-
-	if (reply->error() != QNetworkReply::NoError || reply->bytesAvailable()==0)
-	{
-		qWarning() << "MeteorShowersMgr: Failed to download!" << reply->url();
-		qWarning() << "MeteorShowersMgr: Error " << reply->errorString();
-		setStatusOfLastUpdate(FAILED);
-		return;
-	}
-
-	QString tempPath(m_catalogPath + "_new.json");
-	QFile newCatalog(tempPath);
-	newCatalog.remove(); // always overwrites
-	if (!newCatalog.open(QIODevice::ReadWrite | QIODevice::Text))
-	{
-		qWarning() << "MeteorShowersMgr: Cannot write the downloaded catalog!";
-		setStatusOfLastUpdate(FAILED);
-		return;
-	}
-
-	newCatalog.write(reply->readAll());
-	newCatalog.close();
-
-	if (!loadCatalog(tempPath))
-	{
-		setStatusOfLastUpdate(FAILED);
-		return;
-	}
-
-	QFile(m_catalogPath).remove();
-	newCatalog.rename(tempPath.remove("_new.json"));
-
-	qDebug() << "MeteorShowersMgr: The catalog was updated!";
-	setStatusOfLastUpdate(UPDATED);
+	startDownload(m_url);
 }
 
 void MeteorShowersMgr::setEnablePlugin(const bool& b)
