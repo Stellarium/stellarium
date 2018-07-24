@@ -198,8 +198,7 @@ void Exoplanets::init()
 	readJsonFile();
 
 	// Set up download manager and the update schedule
-	//networkManager = StelApp::getInstance().getNetworkAccessManager();
-	networkManager = new QNetworkAccessManager(this);
+	networkManager = StelApp::getInstance().getNetworkAccessManager();
 	updateState = CompleteNoUpdates;
 	updateTimer = new QTimer(this);
 	updateTimer->setSingleShot(false);   // recurring check for update
