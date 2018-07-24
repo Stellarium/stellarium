@@ -14,6 +14,8 @@
 #   B500: The 500 Best Deep Sky Objects' by Don Pensack; https://www.cloudynights.com/topic/472872-500-best-dso-list/
 #   ST1: The Summer Triangle Makes its Midnight Debut; http://www.skyandtelescope.com/observing/the-summer-triangle-makes-its-midnight-debut/
 #   ST2: Galaxies in Collision // Sky & Telescope, Vol. 133, N5, p.28-33 (May 2017)
+#   ST3: Aquila's Gems // Sky & Telescope, Vol. 136, N2, p.34-39 (August 2018)
+#   ST4: The Best Abell Planetary Nebulae // Sky & Telescope, p.98-102 (May 2002)
 #   NED: Named Galaxies; https://ned.ipac.caltech.edu/level5/CATALOGS/naga.html
 #   SEDS: A Collection of Some Common Names for Deep Sky Objects; http://messier.seds.org/xtra/supp/d-names.html
 #   SIMBAD: 2000,A&AS,143,9, "The SIMBAD astronomical database", Wenger et al.; http://simbad.u-strasbg.fr/simbad/
@@ -512,7 +514,7 @@ NGC  6231            _("Crocodile Cluster") # SG
 NGC  6266            _("Flickering Globular Cluster") # B500
 NGC  6281            _("Moth Wing Cluster") # B500, SG, HT
 NGC  6302            _("Bug Nebula") # WK, DSW, TSS, WSO, PSA, DN
-NGC  6302            _("Butterfly Nebula") # DN
+NGC  6302            _("Butterfly Nebula") # WK, DN
 NGC  6309            _("Box Nebula") # SIMBAD, DSW, DWH, SD, PSA
 NGC  6309            _("Exclamation Mark Nebula") # SD
 NGC  6334            _("Cat's Paw Nebula") # WK, DSW, TSS, DN
@@ -577,7 +579,7 @@ NGC  6709            _("Flying Unicorn Cluster") # HT
 NGC  6720            _("Ring Nebula") # WK, SIMBAD, DSW, BCH, DWH, SOG, PN, WSO, PSA, BH, CC, DN
 NGC  6723            _("Chandelier Cluster") # B500
 NGC  6729            _("R CrA Nebula")
-NGC  6741            _("Phantom Streak Nebula") # SIMBAD
+NGC  6741            _("Phantom Streak Nebula") # SIMBAD, ST3
 NGC  6745            _("Bird's Head")
 NGC  6751            _("Dandelion Puffball Nebula") # SD
 NGC  6751            _("Glowing Eye Nebula") # SD
@@ -843,7 +845,7 @@ SH2  8               _("Bear Claw Nebula")
 SH2  82              _("Little Cocoon Nebula")
 SH2  101             _("Cygnus Star Cloud")
 SH2  101             _("Tulip Nebula")
-SH2  103             _("Cygnus Loop")
+SH2  103             _("Cygnus Loop") # SIMBAD
 SH2  103             _("Veil Nebula")
 SH2  108             _("Sadr Region")
 SH2  129             _("Flying Bat Nebula")
@@ -855,23 +857,25 @@ SH2  188             _("Dolphin Nebula")
 SH2  216             _("Second Closest Planetary")
 SH2  240             _("Spaghetti Nebula") # WP
 SH2  240             _("Simeis 147") # WP, PSA
-SH2  261             _("Lower's Nebula") # PSA
+SH2  261             _("Lower's Nebula") # PSA, SIMBAD
+SH2  264             _("λ Ori Molecular Ring") # SIMBAD
 SH2  264             _("Angelfish Nebula")
 SH2  264             _("Orion's Head Nebula")
 SH2  264             _("North Orion Bubble")
-SH2  274             _("Medusa Nebula") # DSW, PSA, DN
-SH2  275             _("Rosette Nebula") # WK
-SH2  276             _("Barnard's Loop") # WK, DWH, SD
+SH2  274             _("Medusa Nebula") # DSW, PSA, DN, ST4, SIMBAD
+SH2  275             _("Rosette Nebula") # WK, SIMBAD
+SH2  276             _("Barnard's Loop") # WK, DWH, SD, SIMBAD
+SH2  276             _("Barnard's Arc") # SIMBAD
 SH2  292             _("Seagull Nebula")
 SH2  296             _("Seagull's wings") # DSW
 SH2  302             _("Snowman Nebula")
-RCW   77             _("Etched Hourglass Nebula")
-RCW   77             _("Engraved Hourglass Nebula")
-VDB  107             _("Antares Nebula")
+RCW   77             _("Etched Hourglass Nebula") # SIMBAD
+RCW   77             _("Engraved Hourglass Nebula") # SIMBAD
+VDB  107             _("Antares Nebula") # SIMBAD
 VDB  141             _("Ghost Nebula")
 VDB  149             _("Dark Shark Nebula") # WK
 VDB  150             _("Dark Shark Nebula") # WK
-LBN  531             _("Cave Nebula")
+LBN  531             _("Cave Nebula") # SIMBAD
 LBN  777             _("Vulture Head Nebula")
 LBN  777             _("Baby Eagle Nebula")
 LBN  953             _("Orion B")
@@ -1030,11 +1034,13 @@ ARP  133             _("Minkowski's Object") # WSG
 VV   786             _("Lemon Galaxy") # SIMBAD
 PK   010+18.2        _("Minkowski's Butterfly") # DSW
 PK   010+18.2        _("Twin Jet Nebula")
-PK   010+18.2        _("M2-9")
+PK   064+05.1        _("Campbell's Hydrogen Star") # SIMBAD, ST4
 PK   164+31.1        _("Headphone Nebula") # WP
 PK   164+31.1        _("Jones-Emberson 1") # WP
 PK   166-06.1        _("Westbrook Nebula")
 PK   283+25.1        _("Southern Owl Nebula") # WP
+PK   331-01.1        _("Ant Nebula") # SIMBAD
+PK   331-01.1        _("The Chamber of Horrors") # WP
 PK   331-12.1        _("Stingray Nebula") # WP, SIMBAD
 PK   340-03.1        _("Water Lily Nebula")
 ACO  151             _("Haufen A") # WSG
@@ -1058,6 +1064,8 @@ ACO  S373            _("Fornax Cluster") # NED, WP, BCH, WSO, WSG
 ACO  S737            _("Fornax Group") # SIMBAD
 ACO  S737            _("NGC 1399 Group") # WP, SIMBAD
 ACO  S636            _("Antlia Cluster") # NED, WP
+A66  70              _("Diamond Ring") # ST3, ST4
+A66  79              _("Cosmic Six") # ST4
      18              _("Calabash Nebula") # WP
      18              _("Rotten Egg Nebula") # WP
      19              _("Frosty Leo Nebula")
@@ -1065,7 +1073,6 @@ ACO  S636            _("Antlia Cluster") # NED, WP
      21              _("Cotton Candy Nebula")
      24              _("Footprint Nebula") # PSA
      24              _("Minkowski's Footprint") # DSW
-     24              _("M1-92") # DSW, PSA
      25              _("Sagittarius A East")
      26              _("Sagittarius A West")
      26              _("Minispiral in Gal Center") # SIMBAD

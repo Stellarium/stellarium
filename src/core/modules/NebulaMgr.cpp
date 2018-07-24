@@ -1523,7 +1523,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		QStringList catalogs;
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
 			 << "NGC" << "PGC" << "UGC" << "CED" << "ARP" << "VV" << "PK" << "PNG" << "SNRG" << "ACO"
-			 << "HCG" << "Abell";
+			 << "HCG" << "A66";
 
 		switch (catalogs.indexOf(ref.toUpper()))
 		{
@@ -1593,7 +1593,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 			case 21:
 				e = searchHCG(cdes);
 				break;
-			case 22:
+			case 22: // A66
 				e = searchAbell(nb);
 				break;
 			default:
