@@ -1001,7 +1001,7 @@ void MpcImportWindow::loadBookmarks()
 		qDebug() << "Bookmarks file can't be read. Hard-coded bookmarks will be used.";
 
 	//Initialize with hard-coded values
-	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2017", "https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2017/Soft00Bright.txt");
+	bookmarks[MpcMinorPlanets].insert("MPC's list of bright minor planets at opposition in 2018", "https://www.minorplanetcenter.net/iau/Ephemerides/Bright/2018/Soft00Bright.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable critical-list numbered minor planets", "https://www.minorplanetcenter.net/iau/Ephemerides/CritList/Soft00CritList.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable distant minor planets", "https://www.minorplanetcenter.net/iau/Ephemerides/Distant/Soft00Distant.txt");
 	bookmarks[MpcMinorPlanets].insert("MPC's list of observable unusual minor planets", "https://www.minorplanetcenter.net/iau/Ephemerides/Unusual/Soft00Unusual.txt");
@@ -1013,7 +1013,6 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)", "https://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
-	bookmarks[MpcMinorPlanets].insert("MPCAT: Numbered objects", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/mpn.txt");
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
 	bookmarks[MpcComets].insert("MPCORB: comets", "https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
 
