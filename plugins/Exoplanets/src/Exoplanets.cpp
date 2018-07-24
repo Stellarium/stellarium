@@ -676,7 +676,7 @@ void Exoplanets::loadConfiguration(void)
 {
 	conf->beginGroup("Exoplanets");
 
-	updateUrl = conf->value("url", "http://stellarium.org/json/exoplanets.json").toString();
+	updateUrl = conf->value("url", "https://stellarium.org/json/exoplanets.json").toString();
 	updateFrequencyHours = conf->value("update_frequency_hours", 72).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
@@ -752,7 +752,7 @@ void Exoplanets::updateJSON(void)
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
-	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Exoplanets Plugin %1; http://stellarium.org/)").arg(EXOPLANETS_PLUGIN_VERSION).toUtf8());
+	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Exoplanets Plugin %1; https://stellarium.org/)").arg(EXOPLANETS_PLUGIN_VERSION).toUtf8());
 	downloadMgr->get(request);
 
 	updateState = Exoplanets::CompleteUpdates;

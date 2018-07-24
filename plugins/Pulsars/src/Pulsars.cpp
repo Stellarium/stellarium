@@ -581,7 +581,7 @@ void Pulsars::restoreDefaultConfigIni(void)
 	conf->setValue("distribution_enabled", false);
 	conf->setValue("enable_at_startup", false);
 	conf->setValue("updates_enabled", true);	
-	conf->setValue("url", "http://stellarium.org/json/pulsars.json");
+	conf->setValue("url", "https://stellarium.org/json/pulsars.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->setValue("flag_show_pulsars_button", true);
 	conf->setValue("marker_color", "0.4,0.5,1.0");
@@ -596,7 +596,7 @@ void Pulsars::readSettingsFromConfig(void)
 {
 	conf->beginGroup("Pulsars");
 
-	updateUrl = conf->value("url", "http://stellarium.org/json/pulsars.json").toString();
+	updateUrl = conf->value("url", "https://stellarium.org/json/pulsars.json").toString();
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2012-05-24T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
@@ -670,7 +670,7 @@ void Pulsars::updateJSON(void)
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
-	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Pulsars Plugin %1; http://stellarium.org/)").arg(PULSARS_PLUGIN_VERSION).toUtf8());
+	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Pulsars Plugin %1; https://stellarium.org/)").arg(PULSARS_PLUGIN_VERSION).toUtf8());
 	downloadMgr->get(request);
 
 	updateState = Pulsars::CompleteUpdates;

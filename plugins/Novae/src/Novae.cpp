@@ -528,7 +528,7 @@ void Novae::restoreDefaultConfigIni(void)
 	conf->remove("");
 
 	conf->setValue("updates_enabled", true);
-	conf->setValue("url", "http://stellarium.org/json/novae.json");
+	conf->setValue("url", "https://stellarium.org/json/novae.json");
 	conf->setValue("update_frequency_days", 100);
 	conf->endGroup();
 }
@@ -537,7 +537,7 @@ void Novae::readSettingsFromConfig(void)
 {
 	conf->beginGroup("Novae");
 
-	updateUrl = conf->value("url", "http://stellarium.org/json/novae.json").toString();
+	updateUrl = conf->value("url", "https://stellarium.org/json/novae.json").toString();
 	updateFrequencyDays = conf->value("update_frequency_days", 100).toInt();
 	lastUpdate = QDateTime::fromString(conf->value("last_update", "2013-08-28T12:00:00").toString(), Qt::ISODate);
 	updatesEnabled = conf->value("updates_enabled", true).toBool();
@@ -596,7 +596,7 @@ void Novae::updateJSON(void)
 
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
-	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Bright Novae Plugin %1; http://stellarium.org/)").arg(NOVAE_PLUGIN_VERSION).toUtf8());
+	request.setRawHeader("User-Agent", QString("Mozilla/5.0 (Stellarium Bright Novae Plugin %1; https://stellarium.org/)").arg(NOVAE_PLUGIN_VERSION).toUtf8());
 	downloadMgr->get(request);
 
 	updateState = Novae::CompleteUpdates;
