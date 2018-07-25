@@ -1016,13 +1016,14 @@ void MpcImportWindow::loadBookmarks()
 	int start = 0;
 	int finish = 52;
 	QString limits, idx;
-	for (int i=start; i<=finish; i++) {
+	for (int i=start; i<=finish; i++)
+	{
 		limits = QString("%1%2%3").arg(QString::number(i*10000), QChar(0x2014), QString::number(i*10000 + 9999));
-		if (i==start) {
+		if (i==start)
 			limits = QString("%1%2%3").arg(QString::number(1), QChar(0x2014), QString::number(9999));
-		} else if (i==finish) {
+		else if (i==finish)
 			limits = QString("%1...").arg(QString::number(i*10000));
-		}
+
 		if ((i+1)<10)
 			idx = QString("0%1").arg(i+1);
 		else
