@@ -25,6 +25,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #include "elp82b.h"
 #include "marssat.h"
 #include "l1.h"
+#include "l12.h"
 #include "tass17.h"
 #include "gust86.h"
 #include "de431.hpp"
@@ -355,25 +356,25 @@ void get_deimos_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void*
 void get_io_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd, L1_IO, xyz, xyzdot);
+	GetL12Coor(jd, L1_IO, xyz, xyzdot);
 }
 
 void get_europa_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd, L1_EUROPA, xyz, xyzdot);
+	GetL12Coor(jd, L1_EUROPA, xyz, xyzdot);
 }
 
 void get_ganymede_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd, L1_GANYMEDE, xyz, xyzdot);
+	GetL12Coor(jd, L1_GANYMEDE, xyz, xyzdot);
 }
 
 void get_callisto_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)
 {
 	Q_UNUSED(unused);
-	GetL1Coor(jd, L1_CALLISTO, xyz, xyzdot);
+	GetL12Coor(jd, L1_CALLISTO, xyz, xyzdot);
 }
 
 void get_mimas_parent_coordsv(double jd, double xyz[3], double xyzdot[3], void* unused)

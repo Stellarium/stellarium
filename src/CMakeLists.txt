@@ -138,6 +138,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/gust86.h
      core/planetsephems/l1.c
      core/planetsephems/l1.h
+     core/planetsephems/l12.c
+     core/planetsephems/l12.h
      core/planetsephems/marssat.c
      core/planetsephems/marssat.h
      core/planetsephems/pluto.c
