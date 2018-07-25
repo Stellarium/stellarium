@@ -1897,6 +1897,19 @@
                </attribute>
               </widget>
              </item>
+             <item row="2" column="7">
+              <widget class="QCheckBox" name="checkBoxESO">
+               <property name="toolTip">
+                <string>ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)</string>
+               </property>
+               <property name="text">
+                <string notr="true">ESO</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
             </layout>
            </widget>
           </item>

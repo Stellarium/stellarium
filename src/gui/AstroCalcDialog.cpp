@@ -567,6 +567,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 		category->addItem(q_("Hickson Compact Group"), "121");
 	if (catalogFilters & Nebula::CatAbell)
 		category->addItem(q_("Abell Catalog of Planetary Nebulae"), "122");
+	if (catalogFilters & Nebula::CatESO)
+		category->addItem(q_("ESO/Uppsala Survey of the ESO(B) Atlas"), "123");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
 	category->addItem(q_("Bright double stars"), "170");

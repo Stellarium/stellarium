@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-23 23:33+0700\n"
+"POT-Creation-Date: 2018-07-25 01:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Masahiko Yamaguchi <vineuser7@gmail.com>, 2017\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -38,7 +38,7 @@ msgstr "任意マーカー"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:182
-#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Exoplanets/src/Exoplanet.cpp:301
+#: plugins/Pulsars/src/Pulsar.cpp:184 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "種類"
@@ -413,12 +413,12 @@ msgstr ""
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:434
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
+#: plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/FOV/src/gui/FOVWindow.cpp:87
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
@@ -1243,7 +1243,7 @@ msgstr "長軸の位置角"
 #: src/core/modules/Nebula.cpp:347 src/core/modules/Nebula.cpp:360
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:259 plugins/Exoplanets/src/Exoplanet.cpp:325
+#: plugins/Pulsars/src/Pulsar.cpp:255 plugins/Exoplanets/src/Exoplanet.cpp:325
 msgctxt "distance"
 msgid "ly"
 msgstr "光年"
@@ -1258,7 +1258,7 @@ msgid "Distance"
 msgstr "距離"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:358 plugins/Pulsars/src/Pulsar.cpp:256
+#: src/core/modules/Nebula.cpp:358 plugins/Pulsars/src/Pulsar.cpp:252
 msgctxt "distance"
 msgid "kpc"
 msgstr "キロ・パーセク"
@@ -2948,14 +2948,14 @@ msgstr "連絡先"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:223
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
-#: plugins/Novae/src/gui/NovaeDialog.cpp:118
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Novae/src/gui/NovaeDialog.cpp:117
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/FOV/src/gui/FOVWindow.cpp:85
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
@@ -2971,14 +2971,14 @@ msgstr "バージョン"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:473
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
-#: plugins/Novae/src/gui/NovaeDialog.cpp:119
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
+#: plugins/Novae/src/gui/NovaeDialog.cpp:118
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/FOV/src/gui/FOVWindow.cpp:86
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
@@ -4051,7 +4051,7 @@ msgstr "赤緯"
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:411
 #: src/gui/AstroCalcDialog.cpp:1298
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1023
 msgid "Azimuth"
 msgstr "方位角"
 
@@ -4061,7 +4061,7 @@ msgstr "方位角"
 #: src/gui/AstroCalcDialog.cpp:1300 src/gui/AstroCalcDialog.cpp:2170
 #: src/gui/AstroCalcDialog.cpp:2600 src/gui/AstroCalcDialog.cpp:2801
 #: src/gui/AstroCalcDialog.cpp:2803 plugins/Satellites/src/Satellite.cpp:307
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1019
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1022
 msgid "Altitude"
 msgstr "高度"
 
@@ -4887,7 +4887,14 @@ msgstr "位相"
 msgid "Angular size"
 msgstr "視直径"
 
+#. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:2640
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:562
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:186
+#: plugins/Novae/src/gui/NovaeDialog.cpp:179
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:182
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:346
 msgctxt "time"
 msgid "h"
 msgstr "時"
@@ -8405,7 +8412,7 @@ msgid "Filter by type"
 msgstr "種類で選択"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:2654 plugins/Exoplanets/src/Exoplanets.cpp:961
+#: src/ui_viewDialog.h:2654 plugins/Exoplanets/src/Exoplanets.cpp:1031
 msgid "Other"
 msgstr "その他"
 
@@ -8980,7 +8987,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1402
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1017
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "時刻"
@@ -10508,14 +10515,14 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:513
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:232
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
-#: plugins/Novae/src/gui/NovaeDialog.cpp:136
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:167
+#: plugins/Novae/src/gui/NovaeDialog.cpp:135
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:131
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 #: plugins/FOV/src/gui/FOVWindow.cpp:92
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:94
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:316
@@ -10529,14 +10536,14 @@ msgstr "リンク"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:514
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:233
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
-#: plugins/Novae/src/gui/NovaeDialog.cpp:137
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:140
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Novae/src/gui/NovaeDialog.cpp:136
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:167
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 #: plugins/FOV/src/gui/FOVWindow.cpp:93
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
@@ -10553,14 +10560,14 @@ msgstr "サポートはGithubで行っています。投稿時には題名に\"%
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:517
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
-#: plugins/Novae/src/gui/NovaeDialog.cpp:140
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:143
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:171
+#: plugins/Novae/src/gui/NovaeDialog.cpp:139
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:142
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 #: plugins/FOV/src/gui/FOVWindow.cpp:96
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:320
@@ -10575,14 +10582,14 @@ msgstr "質問は{こちら}。"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:519
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
-#: plugins/Novae/src/gui/NovaeDialog.cpp:142
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:145
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:173
+#: plugins/Novae/src/gui/NovaeDialog.cpp:141
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:139
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:213
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 #: plugins/FOV/src/gui/FOVWindow.cpp:98
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:100
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:322
@@ -10597,14 +10604,14 @@ msgstr "バグの報告やリクエストは{こちら}。"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:521
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:150
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:109
-#: plugins/Novae/src/gui/NovaeDialog.cpp:144
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:147
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:175
+#: plugins/Novae/src/gui/NovaeDialog.cpp:143
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 #: plugins/FOV/src/gui/FOVWindow.cpp:100
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:102
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:324
@@ -11723,7 +11730,7 @@ msgid "The satellite is not visible"
 msgstr "地平線下(観測不可能)"
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:397 plugins/Pulsars/src/Pulsar.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:397 plugins/Pulsars/src/Pulsar.cpp:272
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
@@ -11899,7 +11906,16 @@ msgstr ""
 msgid "See %1this document%2 for details."
 msgstr "詳細は%1こちら%2。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
+#: plugins/Novae/src/gui/NovaeDialog.cpp:158
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
+msgid "Next update"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:544
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
 #: plugins/Novae/src/gui/NovaeDialog.cpp:164
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
@@ -11908,134 +11924,124 @@ msgstr "詳細は%1こちら%2。"
 msgid "Internet updates disabled"
 msgstr "更新出来ませんでした"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:545
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:567
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:546
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:570
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:216
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
 #: plugins/Novae/src/gui/NovaeDialog.cpp:166
-#: plugins/Novae/src/gui/NovaeDialog.cpp:209
+#: plugins/Novae/src/gui/NovaeDialog.cpp:212
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:236
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:275
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:278
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:407
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid "Updating now..."
 msgstr "更新中..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:551
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:199
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:335
-msgid "Next update: < 1 minute"
-msgstr "次回の更新: 1分以内"
+msgid "< 1 minute"
+msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:554
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:179
-#: plugins/Novae/src/gui/NovaeDialog.cpp:172
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:203
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:339
-#, qt-format, qt-plural-format
-msgid "Next update: %1 minute(s)"
-msgid_plural "Next update: %1 minute(s)"
-msgstr[0] "次回の更新: %1 分後"
+#. TRANSLATORS: minutes.
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:556
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
+#: plugins/Novae/src/gui/NovaeDialog.cpp:173
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:176
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:340
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:220
+msgctxt "time"
+msgid "m"
+msgstr "分"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:559
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:184
-#: plugins/Novae/src/gui/NovaeDialog.cpp:177
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:180
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
-#, qt-format, qt-plural-format
-msgid "Next update: %1 hour(s)"
-msgid_plural "Next update: %1 hour(s)"
-msgstr[0] "次回の更新: %1 時間後"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:570
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
-#: plugins/Novae/src/gui/NovaeDialog.cpp:212
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:278
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:410
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:222
+#: plugins/Novae/src/gui/NovaeDialog.cpp:215
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:242
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:281
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
 msgid "Update error"
 msgstr "更新失敗"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:583
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:586
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "更新衛星数  %1/%2 ;  追加 %3; 削除 %4"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:585
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:588
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "更新衛星数  %1/%2 ;  追加 %3; ミス %4"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:647
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
 msgid "[new source]"
 msgstr "[新しい更新元]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:699
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
 #: plugins/Satellites/src/ui_satellitesDialog.h:758
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:208
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:198
+#: plugins/Novae/src/gui/NovaeDialog.cpp:201
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:201
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:295
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:229
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:232
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:331
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "すぐに更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:701
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
-#: plugins/Novae/src/gui/NovaeDialog.cpp:200
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:203
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:704
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:210
+#: plugins/Novae/src/gui/NovaeDialog.cpp:203
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:206
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:400
 msgid "Update from files"
 msgstr "ファイルから更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:744
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 msgid "[orbit calculation error]"
 msgstr "[軌道計算できなかった衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
 msgid "[all newly added]"
 msgstr "[追加された衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:746
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
 msgid "[all not displayed]"
 msgstr "[表示されない衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
 msgid "[all displayed]"
 msgstr "[表示される衛星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
 msgid "[all]"
 msgstr "[全て]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
 msgid "New group..."
 msgstr "衛星種類の追加..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1001
 msgid "Select TLE Update File"
 msgstr "アップデート・ファイルの選択"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1018
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1021
 msgid "Brightness"
 msgstr "明るさ"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1021
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1024
 msgid "Satellite"
 msgstr "人工衛星"
 
@@ -13943,7 +13949,7 @@ msgid "Minor Solar System objects"
 msgstr "太陽系小天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 msgid "Note"
 msgstr ""
 
@@ -14006,51 +14012,51 @@ msgstr "このプラグインは歴史的な明るい超新星を表示できま
 msgid "Historical Supernovae configuration window"
 msgstr "歴史的な超新星の設定ウィンドウ"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "January"
 msgstr "1 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "February"
 msgstr "2 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "March"
 msgstr "3 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "April"
 msgstr "4 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "May"
 msgstr "5 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "June"
 msgstr "6 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "July"
 msgstr "7 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "August"
 msgstr "8 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "September"
 msgstr "9 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "October"
 msgstr "10 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "November"
 msgstr "11 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "December"
 msgstr "12 月"
 
@@ -14066,31 +14072,31 @@ msgstr "超新星の型"
 msgid "Maximum brightness"
 msgstr "最大光度"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Historical Supernovae Plug-in"
 msgstr "歴史的な超新星プラグイン"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr "このプラグインは歴史的な明るい超新星を表示します: "
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Novae/src/gui/NovaeDialog.cpp:127
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr "このリストには%1個の超新星が含まれます。"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr "これら全ての超新星は最大光度%1以上です。"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
+#: plugins/Novae/src/gui/NovaeDialog.cpp:129
 msgid "Light curves"
 msgstr "光度曲線"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -14100,39 +14106,39 @@ msgid ""
 msgstr ""
 "このプラグインは色々な超新星の簡単な光度曲線モデルを補足します。I型、II型の典型的な光度曲線は%1ここ%2(右の目盛りは日)で見ることが出来、このモデルを使用しています。"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 msgid "Acknowledgments"
 msgstr "謝辞"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr "以下の人たちの貢献と価値あるコメントに感謝します:"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
 msgid "Sergei Blinnikov"
 msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr "理論実験物理学研究所"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "in Russia"
 msgstr "(ロシア)"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:189
-#: plugins/Novae/src/gui/NovaeDialog.cpp:182
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:213
-#, qt-format, qt-plural-format
-msgid "Next update: %1 day(s)"
-msgid_plural "Next update: %1 day(s)"
-msgstr[0] "次回の更新: %1 日後"
+#. TRANSLATORS: days.
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
+#: plugins/Novae/src/gui/NovaeDialog.cpp:185
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:216
+msgctxt "time"
+msgid "d"
+msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:226
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:229
 msgid "Historical supernovae is updated"
 msgstr "データを更新しました"
 
@@ -14270,7 +14276,7 @@ msgstr "起動時から表示"
 msgid "Bright Novae"
 msgstr "明るい新星"
 
-#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:122
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "このプラグインは銀河系内の明るい新星を表示します。"
 
@@ -14282,45 +14288,45 @@ msgstr "明るい新星の設定ウィンドウ"
 msgid "nova"
 msgstr "新星"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:117
+#: plugins/Novae/src/gui/NovaeDialog.cpp:116
 msgid "Bright Novae Plug-in"
 msgstr "明るい新星プラグイン"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:124
+#: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr "新星の名称や一般名（例えば 'Nova Cygni 1975'や 'V1500 Cyg'など）で検索することができます。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:125
 msgid "This plugin allows you to see recent bright novae: "
 msgstr "このプラグインを使用すると、近年の明るい新星を見ることができます: "
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:129
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr "これら全ては最大光度が%1等より明るい新星です。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr "このプラグインは非常に単純なモデルを使用して、新星の光度曲線を計算します。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Novae/src/gui/NovaeDialog.cpp:131
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr "このモデルは、最大光度から%1等までの減光期間に基づいています。%1は2,3,6,9等です。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr "減光時のデータがない新星の場合、このプラグインは一般的な値を使用します。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:219
+#: plugins/Novae/src/gui/NovaeDialog.cpp:222
 msgid "Novae is updated"
 msgstr "データを更新しました"
 
@@ -14361,27 +14367,27 @@ msgstr "5GHz (波長6cm)周辺でのフラックス密度"
 msgid "Radio flux density around 1.4GHz (21cm)"
 msgstr "1.4GHz (波長21cm)周辺でのフラックス密度"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Quasars Plug-in"
 msgstr "クエーサー・プラグイン"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 msgid "Veron+ 2010"
 msgstr "Veron他、2010年"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr "現在カタログにあるクエーサーの数: %1。"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:246
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:249
 msgid "Quasars is updated"
 msgstr "データを更新しました"
 
@@ -14423,7 +14429,7 @@ msgid "Pulsars"
 msgstr "パルサー"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -14441,150 +14447,147 @@ msgstr "パルサー設定ウィンドウ"
 msgid "pulsar"
 msgstr "パルサー"
 
-#. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
-#: plugins/Pulsars/src/Pulsar.cpp:186
-#, qt-format, qt-plural-format
-msgid "has %1 registered glitch(es)"
-msgid_plural "has %1 registered glitch(es)"
-msgstr[0] "グリッチ観測回数 %1回"
-
-#: plugins/Pulsars/src/Pulsar.cpp:187
+#: plugins/Pulsars/src/Pulsar.cpp:184
 msgid "pulsar with glitches"
 msgstr "グリッチが観測されたパルサー"
 
-#: plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:184
+msgid "registered glitches"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:195
 msgid "Barycentric period"
 msgstr "パルス周期"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:198
 msgctxt "period"
 msgid "s"
 msgstr "秒"
 
-#: plugins/Pulsars/src/Pulsar.cpp:206
+#: plugins/Pulsars/src/Pulsar.cpp:202
 msgid "Time derivative of barycentric period"
 msgstr "パルス周期の時間変化率"
 
-#: plugins/Pulsars/src/Pulsar.cpp:211
+#: plugins/Pulsars/src/Pulsar.cpp:207
 msgid "Dispersion measure"
 msgstr "ディスパージョン・メジャー"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:210
 msgctxt "distance"
 msgid "pc"
 msgstr "パーセク"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:216
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgctxt "distance"
 msgid "cm"
 msgstr "cm"
 
-#: plugins/Pulsars/src/Pulsar.cpp:223
+#: plugins/Pulsars/src/Pulsar.cpp:219
 msgid "Spin down energy loss rate"
 msgstr "自転エネルギーの減少率"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:226
+#: plugins/Pulsars/src/Pulsar.cpp:222
 msgctxt "power"
 msgid "ergs/s"
 msgstr "エルグ/秒"
 
-#: plugins/Pulsars/src/Pulsar.cpp:232
+#: plugins/Pulsars/src/Pulsar.cpp:228
 msgid "Binary period of pulsar"
 msgstr "連星の公転周期"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:235 plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Pulsars/src/Pulsar.cpp:231 plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "period"
 msgid "days"
 msgstr "日"
 
-#: plugins/Pulsars/src/Pulsar.cpp:239 plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Pulsars/src/Pulsar.cpp:235 plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Eccentricity"
 msgstr "離心率"
 
-#: plugins/Pulsars/src/Pulsar.cpp:244
+#: plugins/Pulsars/src/Pulsar.cpp:240
 msgid "Annual parallax"
 msgstr "年周視差"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:247
+#: plugins/Pulsars/src/Pulsar.cpp:243
 msgctxt "parallax"
 msgid "mas"
 msgstr "ミリ秒角(mas)"
 
-#: plugins/Pulsars/src/Pulsar.cpp:253
+#: plugins/Pulsars/src/Pulsar.cpp:249
 msgid "Distance based on electron density model"
 msgstr "電子密度モデルによる距離"
 
-#: plugins/Pulsars/src/Pulsar.cpp:266
+#: plugins/Pulsars/src/Pulsar.cpp:262
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr "パルスの半値幅"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:269
+#: plugins/Pulsars/src/Pulsar.cpp:265
 msgctxt "time"
 msgid "ms"
 msgstr "ミリ秒"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Pulsars/src/Pulsar.cpp:270
 msgid "Time averaged flux density at"
 msgstr "平均フラックス密度"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:278
+#: plugins/Pulsars/src/Pulsar.cpp:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:348
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsar.cpp:290
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Pulsars/src/Pulsar.cpp:286
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:306
 msgid "Notes"
 msgstr "備考"
 
-#: plugins/Pulsars/src/Pulsar.cpp:379
+#: plugins/Pulsars/src/Pulsar.cpp:375
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr "変則的なX線パルサー、または繰り返しパルスが検知された軟ガンマ線"
 
-#: plugins/Pulsars/src/Pulsar.cpp:384
+#: plugins/Pulsars/src/Pulsar.cpp:380
 msgid "has one or more binary companions"
 msgstr "連星系"
 
-#: plugins/Pulsars/src/Pulsar.cpp:389
+#: plugins/Pulsars/src/Pulsar.cpp:385
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "電波から赤外線以上でのパルス放射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:394
+#: plugins/Pulsars/src/Pulsar.cpp:390
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "赤外線以上でのパルス放射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:399
+#: plugins/Pulsars/src/Pulsar.cpp:395
 msgid "with pulsed emission in the radio band"
 msgstr "電波でのパルス放射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:404
+#: plugins/Pulsars/src/Pulsar.cpp:400
 msgid "with intermittently pulsed radio emission"
 msgstr "間欠的な電波でのパルス放射"
 
-#: plugins/Pulsars/src/Pulsar.cpp:409
+#: plugins/Pulsars/src/Pulsar.cpp:405
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr "熱的X線パルス放射はあるが電波放射が観測されない孤立した中性子星"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Pulsars Plug-in"
 msgstr "パルサー・プラグイン"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N.,"
@@ -14595,40 +14598,40 @@ msgstr ""
 "Teoh, A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-"
 "ph/0412641%2))。"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "現在のデータ数: %1。"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "パルサー表示は'PSR'"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 msgid "Acknowledgment"
 msgstr "謝辞"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 msgid "Vladimir Samodourov"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "プーシチノ電波天文台"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 msgid "Maciej Serylak"
 msgstr ""
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "Nancay Radioastronomical Observatory"
 msgstr "ナンセイ電波天文台"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
 msgid "in France"
 msgstr "(フランス)"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:285
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:288
 msgid "Pulsars is updated"
 msgstr "データを更新しました"
 
@@ -15000,82 +15003,82 @@ msgid "Exoplanets configuration window"
 msgstr "太陽系外惑星設定ウィンドウ"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:931
+#: plugins/Exoplanets/src/Exoplanets.cpp:1001
 msgid "Hot"
 msgstr "灼熱"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:933
+#: plugins/Exoplanets/src/Exoplanets.cpp:1003
 msgid "Warm"
 msgstr "温暖"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:935
+#: plugins/Exoplanets/src/Exoplanets.cpp:1005
 msgid "Cold"
 msgstr "寒冷"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:938
+#: plugins/Exoplanets/src/Exoplanets.cpp:1008
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:940
+#: plugins/Exoplanets/src/Exoplanets.cpp:1010
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:942
+#: plugins/Exoplanets/src/Exoplanets.cpp:1012
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:944
+#: plugins/Exoplanets/src/Exoplanets.cpp:1014
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:946
+#: plugins/Exoplanets/src/Exoplanets.cpp:1016
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:948
+#: plugins/Exoplanets/src/Exoplanets.cpp:1018
 msgid "Neptunian"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:951
+#: plugins/Exoplanets/src/Exoplanets.cpp:1021
 msgid "Primary Transit"
 msgstr "トランジット法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:953
+#: plugins/Exoplanets/src/Exoplanets.cpp:1023
 msgid "Microlensing"
 msgstr "重力マイクロレンズ法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:955
+#: plugins/Exoplanets/src/Exoplanets.cpp:1025
 msgid "Radial Velocity"
 msgstr "視線速度法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:957
+#: plugins/Exoplanets/src/Exoplanets.cpp:1027
 msgid "Imaging"
 msgstr "直接撮像法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:959
+#: plugins/Exoplanets/src/Exoplanets.cpp:1029
 msgid "Pulsar"
 msgstr "パルサータイミング法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:963
+#: plugins/Exoplanets/src/Exoplanets.cpp:1033
 msgid "Astrometry"
 msgstr "アストロメトリー法"
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:965
+#: plugins/Exoplanets/src/Exoplanets.cpp:1035
 msgid "TTV"
 msgstr "位相光度変化法(TTV)"
 
@@ -15146,7 +15149,7 @@ msgstr "平衡温度"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Flux"
 msgstr "フラックス"
 
@@ -15159,11 +15162,11 @@ msgstr "地球類似性指数(ESI)"
 msgid "Equilibrium temperature on Earth"
 msgstr "地球の平衡温度"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid "Exoplanets Plug-in"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -15172,7 +15175,7 @@ msgstr ""
 "このプラグインは太陽系外惑星を持つ恒星の位置を示表示します。 太陽系外惑星のデータは \"%1 Extrasolar Planets "
 "Encyclopaedia%2\"によります。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -15182,7 +15185,7 @@ msgstr ""
 "潜在的に居住可能な太陽系外惑星のリストとそれらに関するデータは、%2Planetary Habitability Laboratory%3の "
 "\"%1The Habitable Exoplanets Catalog%3\"から取りました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -15191,38 +15194,38 @@ msgid ""
 msgstr ""
 "現在のカタログには%1の惑星系に関する情報が含まれていますが、全体では%2の太陽系外惑星（潜在的に居住可能な太陽系外惑星は%3）があります。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Potential habitable exoplanets"
 msgstr "潜在的居住可能惑星"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr "このプラグインは潜在的に居住可能な太陽系外惑星（オレンジ色のマーカー）とそれらの惑星に関するいくつかの情報を表示することができます。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Extra info for the optimistic samples of potentially habitable planets mark "
 "by italic text."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "Planetary Class"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
 " jovian, neptunian) (Earth = G-Warm Terran)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Equilibrium Temperature"
 msgstr "平衡温度"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -15231,57 +15234,57 @@ msgid ""
 msgstr ""
 "惑星の平衡温度は理論上の温度（℃）であり、単に惑星が親星によってのみ加熱される黒体であるかのように考える（ボンド・アルベドを0.3と仮定する）。例えば地球の平衡温度は-18.15℃（255K）です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
 "Actual surface temperatures are expected to be larger than the equilibrium "
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr "実際の表面温度は現在知られていない惑星の大気に依存して、平衡温度よりも大きいと予想される。（例えば地球の平均地表温度は約288K、15℃）"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
 msgstr "地球が太陽から受けるフラックスと、系外惑星が恒星から受ける平均フラックスの比 (地球は1.0 S<sub>E</sub>)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid "Earth Similarity Index (ESI)"
 msgstr "地球類似性指数(ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr "地球類似性指数(ESI)は0から1までの数値で、1はほぼ地球のようなものです。ESIは、惑星の半径、密度、脱出速度、表面温度に依存します。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid "Proper names"
 msgstr "固有名"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr "2015年12月、国際天文学連合（IAU）は、公開投票の後、いくつかの系外惑星の名前を正式に承認しました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr "ラテン語の<em>Veritas</em>は真実の意味。奪格Veritateは<em>真実があるところ</em>を意味します。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr "ラテン語の<em>Spes</em>は希望の意味。奪格Speは<em>希望があるところ</em>を意味します。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Musica is Latin for <em>music</em>."
 msgstr "Musicaはラテン語で<em>音楽(music)</em>のこと。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
@@ -15289,45 +15292,45 @@ msgid ""
 msgstr ""
 "アリオン(Arion)は古代ギリシャの詩歌と音楽の天才でした。伝説によると彼の人生はキタラ(Kithara)の演奏で注目を集めた後、海でイルカに救われました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr "Fafnirは北欧の神話的な小びとで、ドラゴンに変わった。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr "Orbitarは、NASAのロケット打ち上げと軌道運用に敬意を表して作った人工的な言葉です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr "Chalawanはタイの伝説にある、神話のワニです。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "Taphao Thongは、Chalawanのタイの民話に関係する2人の姉妹の1人です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "Taphao Kaeは、Chalawanのタイの民話に関係する2人の姉妹の1人です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr "ヘルベティオス(Helvetios)は<em>ヘルベティア</em>にいたケルト人のことで、古くからスイスに住んでいたケルト族を指します。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr "ディミドゥム(Dimidium)は、木星質量の少なくとも半分の惑星質量を意味する<em>半分(half)</em>のラテン語です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
@@ -15336,7 +15339,7 @@ msgstr ""
 "ニコラウス・コペルニクス(Nicolaus Copernicus)またはMikolaj Kopernik（1473-1543）は、彼の著書<em>De "
 "revolutionibus orbium coelestium</em>で地動説(太陽中心説)を提唱したポーランドの天文学者でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -15347,7 +15350,7 @@ msgstr ""
 "ガリレオ・ガリレイ（Galileo "
 "Galilei、1564-1642）は、イタリアの天文学者、物理学者。<em>観測天文学の父</em>、<em>現代物理学の父</em>と呼ばれていました。望遠鏡を使用して、彼は木星の4大衛星を発見し、他の発見の中では金星の満ち欠けの最初の望遠鏡観測を報告しました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -15357,7 +15360,7 @@ msgstr ""
 "ティコ・ブラーエ(Tycho "
 "Brahe、1546-1601）は、恒星と惑星の正確な天文観測を記録したデンマークの天文学者で貴族でした。これらの観測はケプラーが惑星運動の3法則を定式化する上で重要でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
@@ -15366,7 +15369,7 @@ msgstr ""
 "ハンス・リッペルハイ(Hans "
 "Lipperhey、1570-1619)は、1608年に屈折望遠鏡の発明したドイツ・オランダのレンズ研磨職人で眼鏡職人でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
@@ -15374,7 +15377,7 @@ msgid ""
 msgstr ""
 "サハリアス・ヤンセン（1580年代ー1630年代）はオランダの眼鏡職人であり、たびたび顕微鏡の発明に貢献しています。望遠鏡の発明については多くの論争を呼んでいます。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
@@ -15383,7 +15386,7 @@ msgstr ""
 "トーマス・ハリオット（Thomas "
 "Harriot、約1560-1621）は、天文学者、数学者、民族学者、翻訳者であり、望遠鏡で見た月を初めてスケッチしました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
@@ -15391,7 +15394,7 @@ msgid ""
 msgstr ""
 "<em>アマテル(Amateru)</em>は伊弉諾尊の左目から生まれた、神道での太陽の神。天照は天照大神を祀る日本の神社にとっての一般的な名称です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
@@ -15399,13 +15402,13 @@ msgid ""
 msgstr ""
 "ヒパティア(Hypatia)はギリシャの有名な天文学者、数学者、哲学者。彼女は415年にキリスト教徒の暴徒によって殺されるまで、5世紀初頭にアレクサンドリアにあった新プラトン主義の学校の校長でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr "Ranは北欧の海の女神で大波を起こし、船員を網で捕えます。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
@@ -15413,25 +15416,25 @@ msgid ""
 msgstr ""
 "AEgirはRanの夫、海の神が擬人化されたものです。<em>AEgir</em>と<em>Ran</em>はどちらも、外宇宙を支配する<em>Jotuns</em>を表しています。彼らには9人の娘がいました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr "ユネスコの世界遺産であるパルミラの町の古代セム語の名前と現代アラビア語の名前。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr "Dagonは半分男、半分魚として表現されることが多いセム系の神。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "Tonatiuhはアステカの太陽神。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "Meztliは、アステカの月の女神。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
@@ -15439,21 +15442,21 @@ msgid ""
 msgstr ""
 "Ogmaはアイルランドとスコットランドのケルト神話に登場する弁論、著述、体力の神です。ガロ・ローマ神話の神<em>オグミオス（Ogmios）</em>に関係するかもしれません。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Smertrios was a Gallic deity of war."
 msgstr "Smertriosはガリア人の戦争の神。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr "インテルクスル(Intercrus)はラテン語で<em>脚の間</em>を意味し、おおぐま座の星の位置を指しています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr "アルカス(Arkas)はギリシャ神話の人物でカリスト(おおぐま座)の息子でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15461,13 +15464,13 @@ msgstr ""
 "ミゲル・デ・セルバンテス・サアベドラ(Miguel de Cervantes Saavedra、1547-1616)は有名なスペイン人作家であり、 "
 "小説<em>ドン・キホーテ<em>の作者です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "セルバンテスの小説<em>ドン・キホーテ</em>の主人公で架空の人物。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -15475,19 +15478,19 @@ msgstr ""
 "セルバンテスの小説<em>ドン・キホーテ</em>に出てくる架空の人物で、主人公ドン・キホーテ(Don "
 "QuijoteまたはQuixote）が想いを寄せる人。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "セルバンテスの小説<em>ドン・キホーテ</em>に出てくる主人公ドン・キホーテの乗る架空の馬。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "セルバンテスの小説<em>ドン・キホーテ</em>に出てくる架空の人物で、主人公ドン・キホーテの従者。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -15495,29 +15498,29 @@ msgid ""
 msgstr ""
 "テスティアス(Thestias)は、レダ(Leda)とアルタエア(Althaea)姉妹の父親の名をとった名前。2人は共にテスティウス(Thestius)の娘でした。レダはギリシャの女王で、双子の兄弟ポルックス(Pollux)のカストル(Castor)、姉妹ヘレン(Helen)とクリュテムネストラ(Clytemnestra)の母親でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr "Lichは空想上の不死の生物。他の不死の生物を魔法でコントロールすることが知られています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "Draugrは、北欧神話の不死の生き物を指します。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr "フォベトル(Phobetor)はギリシア神話の悪夢の神であり、夜の原始神であるニュクス(Nyx)の息子です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -15527,7 +15530,7 @@ msgstr ""
 "Titawin（Medina of "
 "Tetouanとも呼ばれる）は北モロッコの植民地で、ユネスコ世界遺産です。歴史的には8世紀以降に2つの文明（スペイン語圏とアラブ語圏）と2つの大陸（ヨーロッパとアフリカ）が繋がる重要な地でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -15537,7 +15540,7 @@ msgstr ""
 "SaffarはAbu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar Al Ghafiqi Ibn-Al-"
 "Saffarから名付けられた。彼は11世紀はアンダルシア（現スペイン）のコルドバで算術、幾何学、天文学を教えていて、アストロラーベの使用について影響のある論文を書きました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
@@ -15546,7 +15549,7 @@ msgstr ""
 "Samhは、Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahh（または<em>Ibn al-"
 "Samh</em>）から名付けられた。彼はコルドバ(アンデルシア、現在のスペイン)のアル・マジリティ学校にいた11世紀の天文学者で数学者です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -15555,7 +15558,7 @@ msgstr ""
 "Majritiは、Abu al-Qasim al-Qurtubi al-"
 "Majritiから名付けられた。彼は10世紀と11世紀初めのアンダルシア（現在のスペイン）の著名な数学者で天文学者、学者、そして教師でした。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -15564,7 +15567,7 @@ msgid ""
 msgstr ""
 "Libertasは<em>自由(liberty)</em>のラテン語です。libertyは社会的、政治的自由を指し、今日でも世界に自由を奪われた人々がいることを思い出させます。わし座は自由の象徴として人気のある鷲を表しています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
@@ -15572,25 +15575,25 @@ msgid ""
 msgstr ""
 "Fortitudoは<em>不屈(fortitude)</em>のラテン語です。fortitudeは、鷲(わし座に代表される)によって具現化される、逆境に直面した感情的および精神的な強さを意味します。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr "これらの名前は、IAU規則と一致するように元の提案から変更されています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr "<em>Veritas</em>と提案された元の名前は、太陽系の研究に重要な小惑星の名前です。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr "もともと提案されていた<em>アマテラス(Amaterasu)</em>という名前は、すでに小惑星に使われています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -15600,11 +15603,11 @@ msgstr ""
 "ノルウェーの音訳である<em>AEgir</em>と<em>Aegir</em>の間の表記の違いに注意してください。 "
 "<em>Aegir</em>という綴りの同じ名前は、2004年に発見された土星の衛星の1つに命名されています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr "<em>Ogmios</em>はすでに小惑星に命名されています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
@@ -15613,7 +15616,7 @@ msgstr ""
 "最初に提案された<em>Leda</em>は、すでに小惑星と木星の衛星の1つに命名されています。 "
 "<em>Althaea</em>という名前は、小惑星にも命名されています。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -15623,111 +15626,111 @@ msgstr ""
 "元のスペル<em>Lippershey</em>は、2016年1月15日に<em>Lipperhey</em>に修正されました。 "
 "<em>Lippershey</em>(<em>s</em>が多い)という一般的なスペルは1831年の誤植によるもので、固有名には避けられました。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Additional info"
 msgstr "追加情報"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Circumstellar habitable zone"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Planetary equilibrium temperature"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Planetary habitability"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "Earth Similarity Index"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "NameExoWorlds website"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Naming exoplanets (IAU)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "update: 16 April 2012"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "The Exoplanet Data Explorer"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "The Anglo-Australian Planet Search"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "NASA's Exoplanet Exploration Program"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "Pulsar planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "The NASA Exoplanet Archive"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "ExoMol"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "The Habitable Zone Gallery"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid "Open Exoplanet Catalogue"
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:311
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
 msgid "The Habitable Exoplanets Catalog"
 msgstr ""
 
@@ -16398,12 +16401,6 @@ msgstr "このプラグインは均時差を計算して表示します。"
 msgid "Show solution for Equation of Time"
 msgstr "均時差を表示"
 
-#. TRANSLATORS: minutes.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:220
-msgctxt "time"
-msgid "m"
-msgstr "分"
-
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:222
 msgctxt "time"
@@ -16448,34 +16445,34 @@ msgstr "フォントの大きさ:"
 msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "現在の流星群データは無効です!"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:551
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:634
 msgid "Meteor Showers"
 msgstr "流星群"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
 msgid "Toggle meteor showers"
 msgstr "流星群"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 msgid "Toggle radiant labels"
 msgstr "流星群名の表示/非表示"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:233
 msgid "Show settings dialog"
 msgstr "設定を開く"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 msgid "Show search dialog"
 msgstr "流星群検索"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:256
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:255
 msgid "Using the default Meteor Showers catalog."
 msgstr "デフォルトの流星群カタログを使用する。"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:555
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:638
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "

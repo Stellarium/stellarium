@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-23 23:33+0700\n"
+"POT-Creation-Date: 2018-07-25 01:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Sin Ilseop <ilsubyeega@gmail.com>, 2018\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -38,7 +38,7 @@ msgstr "사용자 표지"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:522
 #: plugins/Supernovae/src/Supernova.cpp:132 plugins/Novae/src/Nova.cpp:147
 #: plugins/Quasars/src/Quasar.cpp:128 plugins/Pulsars/src/Pulsar.cpp:182
-#: plugins/Pulsars/src/Pulsar.cpp:187 plugins/Exoplanets/src/Exoplanet.cpp:301
+#: plugins/Pulsars/src/Pulsar.cpp:184 plugins/Exoplanets/src/Exoplanet.cpp:301
 #: plugins/MeteorShowers/src/MeteorShower.cpp:552
 msgid "Type"
 msgstr "종류"
@@ -413,12 +413,12 @@ msgstr "광공해 주기적 변화"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:434
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:130
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
+#: plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 #: plugins/FOV/src/gui/FOVWindow.cpp:87
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
@@ -1243,7 +1243,7 @@ msgstr "배향각"
 #: src/core/modules/Nebula.cpp:347 src/core/modules/Nebula.cpp:360
 #: src/core/modules/StarWrapper.cpp:245
 #: plugins/Supernovae/src/Supernova.cpp:154 plugins/Novae/src/Nova.cpp:167
-#: plugins/Pulsars/src/Pulsar.cpp:259 plugins/Exoplanets/src/Exoplanet.cpp:325
+#: plugins/Pulsars/src/Pulsar.cpp:255 plugins/Exoplanets/src/Exoplanet.cpp:325
 msgctxt "distance"
 msgid "ly"
 msgstr "광년"
@@ -1258,7 +1258,7 @@ msgid "Distance"
 msgstr "거리"
 
 #. TRANSLATORS: Unit of measure for distance - kiloparsecs
-#: src/core/modules/Nebula.cpp:358 plugins/Pulsars/src/Pulsar.cpp:256
+#: src/core/modules/Nebula.cpp:358 plugins/Pulsars/src/Pulsar.cpp:252
 msgctxt "distance"
 msgid "kpc"
 msgstr "킬로파섹"
@@ -3019,14 +3019,14 @@ msgstr "연락처"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:223
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
-#: plugins/Novae/src/gui/NovaeDialog.cpp:118
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Novae/src/gui/NovaeDialog.cpp:117
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:194
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
 #: plugins/FOV/src/gui/FOVWindow.cpp:85
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
@@ -3042,14 +3042,14 @@ msgstr "버전"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:473
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
-#: plugins/Novae/src/gui/NovaeDialog.cpp:119
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
+#: plugins/Novae/src/gui/NovaeDialog.cpp:118
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:108
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
 #: plugins/FOV/src/gui/FOVWindow.cpp:86
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
@@ -4126,7 +4126,7 @@ msgstr "적위"
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:411
 #: src/gui/AstroCalcDialog.cpp:1298
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1023
 msgid "Azimuth"
 msgstr "방위각"
 
@@ -4136,7 +4136,7 @@ msgstr "방위각"
 #: src/gui/AstroCalcDialog.cpp:1300 src/gui/AstroCalcDialog.cpp:2170
 #: src/gui/AstroCalcDialog.cpp:2600 src/gui/AstroCalcDialog.cpp:2801
 #: src/gui/AstroCalcDialog.cpp:2803 plugins/Satellites/src/Satellite.cpp:307
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1019
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1022
 msgid "Altitude"
 msgstr "고도"
 
@@ -4962,7 +4962,14 @@ msgstr "위상"
 msgid "Angular size"
 msgstr "각크기"
 
+#. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:2640
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:562
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:186
+#: plugins/Novae/src/gui/NovaeDialog.cpp:179
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:182
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:346
 msgctxt "time"
 msgid "h"
 msgstr "시"
@@ -8490,7 +8497,7 @@ msgid "Filter by type"
 msgstr "종류별 분류"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:2654 plugins/Exoplanets/src/Exoplanets.cpp:961
+#: src/ui_viewDialog.h:2654 plugins/Exoplanets/src/Exoplanets.cpp:1031
 msgid "Other"
 msgstr "기타"
 
@@ -9065,7 +9072,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "사용자 그래픽 인터페이스 추가 설정"
 
 #: src/ui_configurationDialog.h:1402
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1017
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1020
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "시간"
@@ -10598,14 +10605,14 @@ msgstr ""
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:513
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:232
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
-#: plugins/Novae/src/gui/NovaeDialog.cpp:136
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:167
+#: plugins/Novae/src/gui/NovaeDialog.cpp:135
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:131
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
 #: plugins/FOV/src/gui/FOVWindow.cpp:92
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:94
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:316
@@ -10619,14 +10626,14 @@ msgstr "링크"
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:514
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:233
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
-#: plugins/Novae/src/gui/NovaeDialog.cpp:137
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:140
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:168
+#: plugins/Novae/src/gui/NovaeDialog.cpp:136
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:167
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
 #: plugins/FOV/src/gui/FOVWindow.cpp:93
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
@@ -10643,14 +10650,14 @@ msgstr "지원은 Github 웹사이트를 통해 이루어집니다. 글을 올�
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:517
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:147
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
-#: plugins/Novae/src/gui/NovaeDialog.cpp:140
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:143
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:171
+#: plugins/Novae/src/gui/NovaeDialog.cpp:139
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:142
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:170
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:179
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
 #: plugins/FOV/src/gui/FOVWindow.cpp:96
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:320
@@ -10665,14 +10672,14 @@ msgstr "질문이 있으시다면, {여기에서 답을 찾을 수 있습니다}
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:519
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:149
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
-#: plugins/Novae/src/gui/NovaeDialog.cpp:142
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:145
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:173
+#: plugins/Novae/src/gui/NovaeDialog.cpp:141
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:172
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:139
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:213
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:181
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
 #: plugins/FOV/src/gui/FOVWindow.cpp:98
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:100
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:322
@@ -10687,14 +10694,14 @@ msgstr "오류 제보 및 기능 제안은 {여기}에서 하실 수 있습니�
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:521
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:151
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:150
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:109
-#: plugins/Novae/src/gui/NovaeDialog.cpp:144
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:147
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:175
+#: plugins/Novae/src/gui/NovaeDialog.cpp:143
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:174
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:141
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:183
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
 #: plugins/FOV/src/gui/FOVWindow.cpp:100
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:102
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:324
@@ -11820,7 +11827,7 @@ msgid "The satellite is not visible"
 msgstr "인공위성이 보이지 않습니다."
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:397 plugins/Pulsars/src/Pulsar.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:397 plugins/Pulsars/src/Pulsar.cpp:272
 msgctxt "frequency"
 msgid "MHz"
 msgstr "MHz"
@@ -12006,7 +12013,16 @@ msgstr ""
 msgid "See %1this document%2 for details."
 msgstr "세부사항은 %1이 문서%2를 참고하세요."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:543
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:539
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
+#: plugins/Novae/src/gui/NovaeDialog.cpp:158
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:189
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
+msgid "Next update"
+msgstr ""
+
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:544
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
 #: plugins/Novae/src/gui/NovaeDialog.cpp:164
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
@@ -12015,134 +12031,124 @@ msgstr "세부사항은 %1이 문서%2를 참고하세요."
 msgid "Internet updates disabled"
 msgstr "인터넷 업데이트를 할 수 없습니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:545
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:567
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:546
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:570
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:216
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
 #: plugins/Novae/src/gui/NovaeDialog.cpp:166
-#: plugins/Novae/src/gui/NovaeDialog.cpp:209
+#: plugins/Novae/src/gui/NovaeDialog.cpp:212
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:236
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:197
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:275
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:278
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:407
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid "Updating now..."
 msgstr "지금 업데이트중입니다."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:550
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:551
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
 #: plugins/Novae/src/gui/NovaeDialog.cpp:168
 #: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:199
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:335
-msgid "Next update: < 1 minute"
-msgstr "다음 업데이트: 1분 미만"
+msgid "< 1 minute"
+msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:554
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:179
-#: plugins/Novae/src/gui/NovaeDialog.cpp:172
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:175
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:203
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:339
-#, qt-format, qt-plural-format
-msgid "Next update: %1 minute(s)"
-msgid_plural "Next update: %1 minute(s)"
-msgstr[0] "다음 업데이트: %1 분 후"
+#. TRANSLATORS: minutes.
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:556
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
+#: plugins/Novae/src/gui/NovaeDialog.cpp:173
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:176
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:204
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:340
+#: plugins/EquationOfTime/src/EquationOfTime.cpp:220
+msgctxt "time"
+msgid "m"
+msgstr "분"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:559
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:184
-#: plugins/Novae/src/gui/NovaeDialog.cpp:177
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:180
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:208
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
-#, qt-format, qt-plural-format
-msgid "Next update: %1 hour(s)"
-msgid_plural "Next update: %1 hour(s)"
-msgstr[0] "다음 업데이트: %1 시간 후"
-
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:570
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
-#: plugins/Novae/src/gui/NovaeDialog.cpp:212
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:278
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:410
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:573
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:222
+#: plugins/Novae/src/gui/NovaeDialog.cpp:215
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:242
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:281
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
 msgid "Update error"
 msgstr "업데이트 오류"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:583
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:586
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "%1/%2 인공위성이 업데이트되었습니다; %3 추가됨; %4 제거됨"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:585
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:588
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "%1/%2 인공위성이 업데이트되었습니다; %3 추가됨; %4 없어짐"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:647
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
 msgid "[new source]"
 msgstr "[새로운 소스]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:699
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
 #: plugins/Satellites/src/ui_satellitesDialog.h:758
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:205
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:208
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:198
+#: plugins/Novae/src/gui/NovaeDialog.cpp:201
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:201
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:295
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:229
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:232
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:331
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "지금 업데이트"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:701
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:207
-#: plugins/Novae/src/gui/NovaeDialog.cpp:200
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:203
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:704
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:210
+#: plugins/Novae/src/gui/NovaeDialog.cpp:203
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:206
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:400
 msgid "Update from files"
 msgstr "파일에서 업데이트"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:744
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
 msgid "[orbit calculation error]"
 msgstr "[궤도 계산 오류]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:745
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
 msgid "[all newly added]"
 msgstr "[새로 추가된 위성]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:746
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:749
 msgid "[all not displayed]"
 msgstr "[모든 표시되지 않은 위성]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:747
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
 msgid "[all displayed]"
 msgstr "[모든 표시된 위성]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:748
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
 msgid "[all]"
 msgstr "[전부]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:792
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:795
 msgid "New group..."
 msgstr "새 분류..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:998
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1001
 msgid "Select TLE Update File"
 msgstr "TLE 업데이트 파일을 선택하세요"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1018
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1021
 msgid "Brightness"
 msgstr "밝기"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1021
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1024
 msgid "Satellite"
 msgstr "위성"
 
@@ -14111,7 +14117,7 @@ msgid "Minor Solar System objects"
 msgstr "태양계 소천체"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 msgid "Note"
 msgstr "참고"
 
@@ -14176,51 +14182,51 @@ msgstr "이 플러그인은 몇몇 역사적인 밝은 초신성을 보여줍니
 msgid "Historical Supernovae configuration window"
 msgstr "역사적인 초신성 설정 창"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "January"
 msgstr "1월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "February"
 msgstr "2월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "March"
 msgstr "3월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "April"
 msgstr "4월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "May"
 msgstr "5월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "June"
 msgstr "6월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "July"
 msgstr "7월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "August"
 msgstr "8월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "September"
 msgstr "9월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "October"
 msgstr "10월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "November"
 msgstr "11월"
 
-#: plugins/Supernovae/src/Supernovae.cpp:629 plugins/Novae/src/Novae.cpp:651
+#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
 msgid "December"
 msgstr "12월"
 
@@ -14236,31 +14242,31 @@ msgstr "초신성의 종류"
 msgid "Maximum brightness"
 msgstr "최대 밝기"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
 msgid "Historical Supernovae Plug-in"
 msgstr "역사적인 초신성 플러그인"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:128
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr "이 플러그인은 몇몇 역사적인 밝은 초신성을 보여줍니다. "
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
+#: plugins/Novae/src/gui/NovaeDialog.cpp:127
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr "이 목록은 총 %1개의 별을 포함합니다."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr "이 초신성들은 모두 최대 밝기일 때 %1보다 밝습니다."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
+#: plugins/Novae/src/gui/NovaeDialog.cpp:129
 msgid "Light curves"
 msgstr "광도 곡선"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -14271,39 +14277,39 @@ msgstr ""
 "이 플러그인은 초신성의 광도 곡선의 간단한 모델을 포함합니다. I형과 II형 초신성의 일반적인 광도 곡선 모양은 %1여기%2에서 볼 수 "
 "있고(가로 단위는 일), 이 모델이 이 플러그인에 사용되었습니다."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 msgid "Acknowledgments"
 msgstr "감사의 말씀"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr "개발에 기여해 주시고 소중한 의견을 주신 아래 분들께 감사의 말씀을 드립니다 :"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:139
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
 msgid "Sergei Blinnikov"
 msgstr "Sergei Blinnikov"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr "이론 및 실험 물리학 연구소,"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
 msgid "in Russia"
 msgstr "러시아"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:189
-#: plugins/Novae/src/gui/NovaeDialog.cpp:182
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:185
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:213
-#, qt-format, qt-plural-format
-msgid "Next update: %1 day(s)"
-msgid_plural "Next update: %1 day(s)"
-msgstr[0] "다음 업데이트: %1 일"
+#. TRANSLATORS: days.
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
+#: plugins/Novae/src/gui/NovaeDialog.cpp:185
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:216
+msgctxt "time"
+msgid "d"
+msgstr ""
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:226
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:229
 msgid "Historical supernovae is updated"
 msgstr "역사적인 초신성이 업데이트되었습니다."
 
@@ -14440,7 +14446,7 @@ msgstr "시작할 때 퀘이사 보이기"
 msgid "Bright Novae"
 msgstr "밝은 신성"
 
-#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:122
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "우리 은하의 몇몇 밝은 신성을 보여주는 플러그인."
 
@@ -14452,11 +14458,11 @@ msgstr "밝은 신성 설정 창"
 msgid "nova"
 msgstr "신성"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:117
+#: plugins/Novae/src/gui/NovaeDialog.cpp:116
 msgid "Bright Novae Plug-in"
 msgstr "밝은 신성 플러그인"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:124
+#: plugins/Novae/src/gui/NovaeDialog.cpp:123
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
@@ -14464,35 +14470,35 @@ msgstr ""
 "검색 도구에 신성 이름이나 일반적인 이름(예 : 'Nova Cygni 1975' 또는 'V1500 Cyg')을 입력하여 신성을 찾을 수 "
 "있습니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:125
 msgid "This plugin allows you to see recent bright novae: "
 msgstr "이 플러그인은 다음과 같은 밝은 신성들을 볼 수 있게 합니다: "
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:129
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr "이 신성들은 모두 최대 밝기일 때 %1보다 밝습니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr "이 플러그인은 신성의 광도 곡선 계산을 위해 매우 간단한 모델을 사용합니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Novae/src/gui/NovaeDialog.cpp:131
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr "이 모델은 %1이 2, 3, 6, 9일 때 밝기가 최대 등급에서 %1등급만큼 증가되는 시간을 기초로 합니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr "만일 신성의 등급 감소 값이 없는 경우, 플러그인은 일반적인 값을 사용합니다."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:219
+#: plugins/Novae/src/gui/NovaeDialog.cpp:222
 msgid "Novae is updated"
 msgstr "신성이 업데이트되었습니다."
 
@@ -14535,11 +14541,11 @@ msgstr "5GHz (6cm) 근처에서의 전파 선속"
 msgid "Radio flux density around 1.4GHz (21cm)"
 msgstr "1.4GHz (21cm) 근처에서의 전파 선속"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Quasars Plug-in"
 msgstr "퀘이사 플러그인"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:134
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
@@ -14548,16 +14554,16 @@ msgstr ""
 "퀘이사 플러그인은 겉보기등급이 18보다 밝은 퀘이사 몇몇을 보여줍니다. 퀘이사 목록은 \"퀘이사 및 활동 은하핵 목록\" (제 "
 "13판)에서 가져왔습니다."
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 msgid "Veron+ 2010"
 msgstr "Veron+ 2010"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr "현재 카탈로그는 %1개의 퀘이사의 정보를 포함하고 있습니다."
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:246
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:249
 msgid "Quasars is updated"
 msgstr "퀘이사가 업데이트되었습니다."
 
@@ -14599,7 +14605,7 @@ msgid "Pulsars"
 msgstr "펄서"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -14617,150 +14623,147 @@ msgstr "펄서 설정 창"
 msgid "pulsar"
 msgstr "펄서"
 
-#. TRANSLATORS: Full phrase is "Has X registered glitches", where X is number
-#: plugins/Pulsars/src/Pulsar.cpp:186
-#, qt-format, qt-plural-format
-msgid "has %1 registered glitch(es)"
-msgid_plural "has %1 registered glitch(es)"
-msgstr[0] "등록된 글리치 %1가 있습니다"
-
-#: plugins/Pulsars/src/Pulsar.cpp:187
+#: plugins/Pulsars/src/Pulsar.cpp:184
 msgid "pulsar with glitches"
 msgstr "글리치가 있는 펄서"
 
-#: plugins/Pulsars/src/Pulsar.cpp:199
+#: plugins/Pulsars/src/Pulsar.cpp:184
+msgid "registered glitches"
+msgstr ""
+
+#: plugins/Pulsars/src/Pulsar.cpp:195
 msgid "Barycentric period"
 msgstr "질량중심 주기"
 
 #. TRANSLATORS: Unit of measure for period - seconds
-#: plugins/Pulsars/src/Pulsar.cpp:202
+#: plugins/Pulsars/src/Pulsar.cpp:198
 msgctxt "period"
 msgid "s"
 msgstr "초"
 
-#: plugins/Pulsars/src/Pulsar.cpp:206
+#: plugins/Pulsars/src/Pulsar.cpp:202
 msgid "Time derivative of barycentric period"
 msgstr "질량중심 주기를 시간에 대해 미분"
 
-#: plugins/Pulsars/src/Pulsar.cpp:211
+#: plugins/Pulsars/src/Pulsar.cpp:207
 msgid "Dispersion measure"
 msgstr "분산 측정"
 
 #. TRANSLATORS: Unit of measure for distance - parsecs
-#: plugins/Pulsars/src/Pulsar.cpp:214
+#: plugins/Pulsars/src/Pulsar.cpp:210
 msgctxt "distance"
 msgid "pc"
 msgstr "파섹"
 
 #. TRANSLATORS: Unit of measure for distance - centimeters
-#: plugins/Pulsars/src/Pulsar.cpp:216
+#: plugins/Pulsars/src/Pulsar.cpp:212
 msgctxt "distance"
 msgid "cm"
 msgstr "cm"
 
-#: plugins/Pulsars/src/Pulsar.cpp:223
+#: plugins/Pulsars/src/Pulsar.cpp:219
 msgid "Spin down energy loss rate"
 msgstr "회전수-에너지 손실 비율"
 
 #. TRANSLATORS: Unit of measure for power - erg per second
-#: plugins/Pulsars/src/Pulsar.cpp:226
+#: plugins/Pulsars/src/Pulsar.cpp:222
 msgctxt "power"
 msgid "ergs/s"
 msgstr "erg/s"
 
-#: plugins/Pulsars/src/Pulsar.cpp:232
+#: plugins/Pulsars/src/Pulsar.cpp:228
 msgid "Binary period of pulsar"
 msgstr "펄서의 이원 주기"
 
 #. TRANSLATORS: Unit of measure for period - days
-#: plugins/Pulsars/src/Pulsar.cpp:235 plugins/Exoplanets/src/Exoplanet.cpp:351
+#: plugins/Pulsars/src/Pulsar.cpp:231 plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "period"
 msgid "days"
 msgstr "일"
 
-#: plugins/Pulsars/src/Pulsar.cpp:239 plugins/Exoplanets/src/Exoplanet.cpp:355
+#: plugins/Pulsars/src/Pulsar.cpp:235 plugins/Exoplanets/src/Exoplanet.cpp:355
 msgid "Eccentricity"
 msgstr "이심률"
 
-#: plugins/Pulsars/src/Pulsar.cpp:244
+#: plugins/Pulsars/src/Pulsar.cpp:240
 msgid "Annual parallax"
 msgstr "연주시차"
 
 #. TRANSLATORS: Unit of measure for annual parallax - milliarcseconds
-#: plugins/Pulsars/src/Pulsar.cpp:247
+#: plugins/Pulsars/src/Pulsar.cpp:243
 msgctxt "parallax"
 msgid "mas"
 msgstr "mas"
 
-#: plugins/Pulsars/src/Pulsar.cpp:253
+#: plugins/Pulsars/src/Pulsar.cpp:249
 msgid "Distance based on electron density model"
 msgstr "전자 밀도 이론을 기반으로 한 거리"
 
-#: plugins/Pulsars/src/Pulsar.cpp:266
+#: plugins/Pulsars/src/Pulsar.cpp:262
 #, no-c-format
 msgid "Profile width at 50% of peak"
 msgstr "최대치의 50%에서의 폭 조정"
 
 #. TRANSLATORS: Unit of measure for time - milliseconds
-#: plugins/Pulsars/src/Pulsar.cpp:269
+#: plugins/Pulsars/src/Pulsar.cpp:265
 msgctxt "time"
 msgid "ms"
 msgstr "밀리초"
 
 #. TRANSLATORS: Full phrase is "Time averaged flux density at XXXMHz"
-#: plugins/Pulsars/src/Pulsar.cpp:274
+#: plugins/Pulsars/src/Pulsar.cpp:270
 msgid "Time averaged flux density at"
 msgstr "시간에 대해 평균한 선속 밀도"
 
 #. TRANSLATORS: mJy is milliJansky(10-26W/m2/Hz)
-#: plugins/Pulsars/src/Pulsar.cpp:278
+#: plugins/Pulsars/src/Pulsar.cpp:274
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:348
 msgctxt "spectral flux density"
 msgid "mJy"
 msgstr "밀리잰스키"
 
-#: plugins/Pulsars/src/Pulsar.cpp:290
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Pulsars/src/Pulsar.cpp:286
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:306
 msgid "Notes"
 msgstr "비고"
 
-#: plugins/Pulsars/src/Pulsar.cpp:379
+#: plugins/Pulsars/src/Pulsar.cpp:375
 msgid ""
 "anomalous X-ray pulsar or soft gamma-ray repeater with detected pulsations"
 msgstr "비정상적인 엑스선 펄사 또는 발견된 맥동을 가진 연감마선 연속 방출원"
 
-#: plugins/Pulsars/src/Pulsar.cpp:384
+#: plugins/Pulsars/src/Pulsar.cpp:380
 msgid "has one or more binary companions"
 msgstr "하나 혹은 그 이상의 동반성을 가짐"
 
-#: plugins/Pulsars/src/Pulsar.cpp:389
+#: plugins/Pulsars/src/Pulsar.cpp:385
 msgid "with pulsed emission from radio to infrared or higher frequencies"
 msgstr "전파에서 적외선 또는 더 높은 주파수로 펄스 방출"
 
-#: plugins/Pulsars/src/Pulsar.cpp:394
+#: plugins/Pulsars/src/Pulsar.cpp:390
 msgid "with pulsed emission only at infrared or higher frequencies"
 msgstr "적외선 또는 더 높은 주파수로만 펄스 방출"
 
-#: plugins/Pulsars/src/Pulsar.cpp:399
+#: plugins/Pulsars/src/Pulsar.cpp:395
 msgid "with pulsed emission in the radio band"
 msgstr "전파 영역에서 펄스 방출"
 
-#: plugins/Pulsars/src/Pulsar.cpp:404
+#: plugins/Pulsars/src/Pulsar.cpp:400
 msgid "with intermittently pulsed radio emission"
 msgstr "간헐적 전파 펄스 방출"
 
-#: plugins/Pulsars/src/Pulsar.cpp:409
+#: plugins/Pulsars/src/Pulsar.cpp:405
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
 msgstr "엑스선 열복사 펄스를 내보내지만 전파 방출은 감지되지 않는 독립된 중성자별"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
 msgid "Pulsars Plug-in"
 msgstr "펄서 플러그인"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:148
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N.,"
@@ -14771,40 +14774,40 @@ msgstr ""
 "A. & Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2))에서 "
 "얻었습니다."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "현재 카탈로그는 %1개의 펄서를 포함하고 있습니다."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "펄서 식별자는 접두어로 'PSR'을 가지고 있습니다."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:155
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 msgid "Acknowledgment"
 msgstr "감사의 말씀"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
 msgid "Vladimir Samodourov"
 msgstr "Vladimir Samodourov"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:160
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "Pushchino 전파천문대"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
 msgid "Maciej Serylak"
 msgstr "Maciej Serylak"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "Nancay Radioastronomical Observatory"
 msgstr "Nançay 전파천문대"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
 msgid "in France"
 msgstr "프랑스"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:285
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:288
 msgid "Pulsars is updated"
 msgstr "펄서가 업데이트되었습니다."
 
@@ -15180,82 +15183,82 @@ msgid "Exoplanets configuration window"
 msgstr "외계 행성 설정 창"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:931
+#: plugins/Exoplanets/src/Exoplanets.cpp:1001
 msgid "Hot"
 msgstr "뜨거움"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:933
+#: plugins/Exoplanets/src/Exoplanets.cpp:1003
 msgid "Warm"
 msgstr "따듯함"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:935
+#: plugins/Exoplanets/src/Exoplanets.cpp:1005
 msgid "Cold"
 msgstr "추움"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:938
+#: plugins/Exoplanets/src/Exoplanets.cpp:1008
 msgid "Miniterran"
 msgstr "초소형"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:940
+#: plugins/Exoplanets/src/Exoplanets.cpp:1010
 msgid "Subterran"
 msgstr "소형"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:942
+#: plugins/Exoplanets/src/Exoplanets.cpp:1012
 msgid "Terran"
 msgstr "대략 지구"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:944
+#: plugins/Exoplanets/src/Exoplanets.cpp:1014
 msgid "Superterran"
 msgstr "슈퍼 지구"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:946
+#: plugins/Exoplanets/src/Exoplanets.cpp:1016
 msgid "Jovian"
 msgstr "목성형"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:948
+#: plugins/Exoplanets/src/Exoplanets.cpp:1018
 msgid "Neptunian"
 msgstr "해왕성형"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:951
+#: plugins/Exoplanets/src/Exoplanets.cpp:1021
 msgid "Primary Transit"
 msgstr "1차 통과법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:953
+#: plugins/Exoplanets/src/Exoplanets.cpp:1023
 msgid "Microlensing"
 msgstr "렌즈 효과법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:955
+#: plugins/Exoplanets/src/Exoplanets.cpp:1025
 msgid "Radial Velocity"
 msgstr "상대속도법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:957
+#: plugins/Exoplanets/src/Exoplanets.cpp:1027
 msgid "Imaging"
 msgstr "이미징법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:959
+#: plugins/Exoplanets/src/Exoplanets.cpp:1029
 msgid "Pulsar"
 msgstr "펄서법"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:963
+#: plugins/Exoplanets/src/Exoplanets.cpp:1033
 msgid "Astrometry"
 msgstr "위치천문법"
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:965
+#: plugins/Exoplanets/src/Exoplanets.cpp:1035
 msgid "TTV"
 msgstr "통과 시간 변동법"
 
@@ -15326,7 +15329,7 @@ msgstr "평형 온도"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:364
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Flux"
 msgstr "항성풍의 평균 유속"
 
@@ -15339,11 +15342,11 @@ msgstr "지구 유사성 지수 (ESI)"
 msgid "Equilibrium temperature on Earth"
 msgstr "지구의 평형 온도"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid "Exoplanets Plug-in"
 msgstr "외계 행성 플러그인"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -15352,7 +15355,7 @@ msgstr ""
 "이 플러그인은 외계 행성이 있는 별들의 위치를 표시합니다. 외계 행성 자료는 \"%1The Extrasolar Planets "
 "Encyclopaedia%2\"에서 얻었습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -15362,7 +15365,7 @@ msgstr ""
 "잠재적 생명체 거주 가능한 외계 행성들 목록과 데이터는 %2Planetary Habitability Laboratory%3의 "
 "\"%1The Habitable Exoplanets Catalog%3\"에서 얻었습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -15370,27 +15373,27 @@ msgid ""
 "exoplanets)."
 msgstr "현재 목록에는 %1개 행성계와 %2개 외계 행성 (%3개의 잠재적 생명체 거주 가능 행성) 정보가 포함되어 있습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Potential habitable exoplanets"
 msgstr "잠재적 생명체 거주 가능 외계 행성"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr "이 플러그인은 생명 존재 가능성이 있는 행성들을 오렌지색 표지로 표시하며, 몇 가지 정보를 보여줍니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Extra info for the optimistic samples of potentially habitable planets mark "
 "by italic text."
 msgstr "해당 행성들에 대한 추가적인 정보는 기울인체로 표시됩니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "Planetary Class"
 msgstr "행성 등급"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
@@ -15399,11 +15402,11 @@ msgstr ""
 "중심 항성의 분광형 (F, G, K, M), 거주 가능 구역 (뜨거움, 따듯함, 추움), 크기 (초소형, 소형, 대략 지구, 슈퍼 지구,"
 " 목성형, 해왕성형) 에 따른 행성 분류 (지구=G-따듯함 대략 지구)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Equilibrium Temperature"
 msgstr "평형 온도"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -15413,7 +15416,7 @@ msgstr ""
 "행성의 평형 온도는 행성을 흑체로 가정하고 모항성의 본드반사율을 0.3으로 가정했을 때의 이론적인 행성의 표면 온도(°C)로, 지구의 "
 "평형 온도는 18.15°C (255 K) 입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
 "Actual surface temperatures are expected to be larger than the equilibrium "
 "temperature depending on the atmosphere of the planets, which are currently "
@@ -15422,17 +15425,17 @@ msgstr ""
 "실제 표면 온도는 대기권에 의해 평형 온도보다 높으리라 예상되지만, 현재 외계 행성들의 대기권 상태는 알 수 없습니다. 예시로, 지구의 "
 "평균 표면 온도는 15°C, 288 K 입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
 msgstr "지구의 항성풍 유속에 대한 행성의 항성풍 유속 (지구= 1.0 S<sub>E</sub>)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid "Earth Similarity Index (ESI)"
 msgstr "지구 유사성 지수(ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -15441,17 +15444,17 @@ msgstr ""
 "지구와의 유사성을 0에서 1 사이로 표현하고 지구와 가장 비슷한 행성을 1로 둔 지수입니다. ESI는 행성의 반지름, 밀도, 탈출 속도,"
 " 표면 온도에 좌우됩니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid "Proper names"
 msgstr "일반적인 이름"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr "2015년 12월, 국제천문연맹(IAU)은 일반인 대상 투표를 통해 외계 행성 몇몇의 이름을 정했습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
@@ -15459,18 +15462,18 @@ msgstr ""
 "\"진실\"을 뜻하는 라틴어 <em>Veritas</em>에서 유래한 탈격 변화형 어휘로, <em>진실이 있는 곳</em>이라는 "
 "뜻입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr ""
 "\"희망\"을 뜻하는 라틴어 <em>Spes</em>에서 유래한 탈격 변화형 어휘로, <em>희망이 있는 곳</em>이라는 뜻입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Musica is Latin for <em>music</em>."
 msgstr "무지카(Musica)는 라틴어로 <em>음악</em>이라는 뜻입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
@@ -15479,45 +15482,45 @@ msgstr ""
 "아리온은 고대 그리스 사람으로, 시와 음악에 천재적인 재능이 있었습니다. 전설에 따르면, 아리온은 바다에서 키타라를 연주해 모여든 "
 "돌고래들 덕택에 목숨을 건졌다고 합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr "파프니르는 노르드 신화에 등장하는 난쟁이로, 용으로 변했습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr "오비타르는 NASA의 우주 발사 및 운용에 대한 경의를 표하기 위해 고안된 인공 단어입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr "찰라완은 타이 설화에 전해오는 악어 왕입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "타파오 통은 타이 설화의 찰라완의 두 딸 중 하나입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "타파오 깨우는 타이 설화의 찰라완의 두 딸 중 하나입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr "헬베티오스는 켈트어로 <em>헬베티아</em>를 뜻하며, 그리스·로마 시대에 스위스 지방에 살았던 켈트 부족을 가리킵니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr "디미디움은 라틴어로 <em>절반</em>이라는 뜻으로, 행성의 질량이 적어도 목성의 절반이라는 것을 가리킵니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
@@ -15526,7 +15529,7 @@ msgstr ""
 "니콜라우스 코페르니쿠스 또는 미코와이 코페르니크(1473-1543)는 폴란드 천문학자로,  자신의 책 <em>천구의 회전에 "
 "관하여</em>에서 태양 중심 태양계 모형을 제시했습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -15537,7 +15540,7 @@ msgstr ""
 "갈릴레오 갈릴레이(1564-1642)는 이탈리아의 천문학자 및 물리학자로, 간혹 <em>관측천문학의 아버지</em>나 <em>근대 "
 "물리학의 아버지</em>라고도 부릅니다. 갈릴레이는 망원경을 통해 목성의 4대 위성과 금성의 위상 변화 등 많은 발견을 했습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -15547,14 +15550,14 @@ msgstr ""
 "티코 브라헤(1546-1601)는 덴마크 천문학자로, 항성과 행성들의 정밀한 관측 결과를 남겼습니다. 이 자료들은 이후 케플러가 "
 "행성운동법칙을 발견하는 데 큰 공헌을 하게 됩니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
 msgstr "한스 리퍼세이(1570-1619)는 독일-네덜란드의 렌즈 세공인으로, 1608년 망원경을 개발한 사람으로 언급됩니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
@@ -15562,7 +15565,7 @@ msgid ""
 msgstr ""
 "자카리아스 얀센(1580년대-1630년대)은 네덜란드의 안경상으로, 현미경의 개발자로 일컬어지며 망원경 개발에 기여했다고 보기도 합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
@@ -15571,7 +15574,7 @@ msgstr ""
 "토마스 해리엇(약 1560-1621)은 잉글랜드의 천문학자, 수학자, 민족지 학자, 번역가로, 달을 천문 관측을 통해 처음으로 "
 "그려냈습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
@@ -15580,7 +15583,7 @@ msgstr ""
 "<em>아마테루</em>는 아마테라스를 가리킬 때 흔히 부르는 말로, 일본 고유 종교 신토에서 태양의 신으로 이자나기 신의 왼쪽 눈에서 "
 "태어났습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
@@ -15589,13 +15592,13 @@ msgstr ""
 "히파티아는 유명한 그리스의 천문학자, 수학자, 철학자로, 5세기 초 알렉산드리아의 신플라톤주의 학교의 대표였으며, 415년 기독교 폭도에"
 " 의해 암살당했습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr "란은 노르드 신화에서 바다의 신으로, 파도를 휘저어 선원들을 그물로 잡습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
@@ -15604,25 +15607,25 @@ msgstr ""
 "에기르는 란의 남편으로, 대양(洋)의 신입니다. <em>에기르</em>와 <em>란</em>은 모두 우주 바깥을 통치하는 "
 "<em>요툰</em>을 대표하며, 둘 사이에는 딸이 아홉 있습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr "유네스코 세계유산인 팔미라의 고대 셈어 및 현대 아랍어 이름입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr "다곤은 셈족 신으로, 반인반어로 묘사됩니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "토나티우는 아즈텍의 해의 신입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "메즈틀리는 아즈텍의 달의 신입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
@@ -15631,52 +15634,52 @@ msgstr ""
 "오그마는 아일랜드 및 스코틀랜드 지방 켈트족의 신으로, 웅변, 작문, 힘의 상징으로, 갈리아-로마의 신 <em>오그미오스</em>와 "
 "연관됩니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Smertrios was a Gallic deity of war."
 msgstr "스머트리오스는 갈리아 지방의 전쟁의 신입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr "인터크루스는 라틴어로 <em>가랑이 사이</em>라는 뜻으로, 큰곰자리 사이에 있는 이 행성의 위치를 말합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr "아르카스는 그리스 신화에서 칼리스토(큰곰)의 아들로 등장합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr ""
 "미겔 데 세르반테스(1547-1616)는 스페인의 뛰어난 작가로, <em>라 만차의 돈 키호테</em>를 지은 것으로 유명합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "세르반테스의 <em>라 만차의 돈 키호테</em>의 주인공입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr "세르반테스의 <em>라 만차의 돈 키호테</em>에 등장하는 가상의 인물 및 돈 키호테가 사모하는 대상입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "세르반테스의 <em>라 만차의 돈 키호테</em>에 등장하는 가상의 말 이름입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "세르반테스의 <em>라 만차의 돈 키호테</em>에 등장하는 가상의 종자 이름입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -15685,30 +15688,30 @@ msgstr ""
 "테스티아스는 레다와 알타에아 자매의 부칭입니다. 레다는 그리스의 여왕으로, 폴룩스와 카스토르 쌍둥이, 헬렌, 클리타임네스트라를 "
 "낳았습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr "리히는 다른 반생반사 생명체들을 마법으로서 통제하는 가상의 생물입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "드라우그는 노르드 신화에서의 반생반사 생명체를 가리킵니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr ""
 "폴터가이스트는 독일어로 <em>시끄러운 유령</em>이라는 뜻의 낱말이며, 물리적으로 소란을 일으키는 초자연적인 존재의 이름입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr "포비토는 그리스 신화에서 밤의 신인 닉스의 아들로, 악몽의 신입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -15718,7 +15721,7 @@ msgstr ""
 "티타윈(테투안의 메디나)은 모로코 북부에 있는 과거 시가지로, 유네스코 세계 유산으로 지정되었습니다. 티타윈은 8세기 무렵 스페인과 "
 "아랍, 유럽과 아프리카를 잇는 중요한 지점으로서 기능했습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -15728,7 +15731,7 @@ msgstr ""
 "사파르는 11세기 코르도바와 안달루시아(스페인) 지역에서 산수, 기하, 천문을 가르쳤고 아스트롤라베의 사용에 대한 논문을 썼던 아부 "
 "알-콰심 아흐메드 이븐-아브드 알라흐 이븐-오마르 알 가피치 이븐-알-사파르의 이름을 따서 지어진 이름입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
@@ -15737,7 +15740,7 @@ msgstr ""
 "사므흐는 11세기 코르도바(안달루시아, 현 스페인)의 학교에서 수학자 및 천문학자였던 아부 알-콰심 아스바그흐 이븐 무함마드 이븐 "
 "알-사므흐 알-마흐리(<em>이븐 알-사므흐</em>)의 이름을 따서 지어진 이름입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -15746,7 +15749,7 @@ msgstr ""
 "마즈리티는 11세기 초 안달루시아(스페인) 지방의 수학자, 천문학자, 교사였던 '아부 알-콰심 알-쿼투비 알-마즈리티'의 이름을 딴 "
 "이름입니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -15756,7 +15759,7 @@ msgstr ""
 "리베르타스는 라틴어로 <em>자유</em>라는 뜻입니다. 자유(libetry)는 사회 및 정치적 자유를 말하며, 아직도 세계에는 자유를 "
 "누리지 못하는 사람이 있음을 상기하는 역할도 합니다. 독수리자리의 상징은 독수리이며, 이는 자유의 상징이기도 합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
@@ -15764,25 +15767,25 @@ msgid ""
 msgstr ""
 "포르티투도는 라틴어로 <em>용맹, 용기</em>라는 뜻으로,  독수리(독수리자리)에 의해 역경에 직면했을 때의 정신력을 뜻합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr "이 명칭들은 기존안과 큰 차이 없이 IAU의 명명 규칙에 맞도록 약간 조정되었습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr "원래 제안되었던 이름인 <em>베리타스</em>는 태양계 연구에 중요한 소행성의 이름이기도 합니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr "원래 제안되었던 이름인 <em>아마테라스</em>는 이미 소행성의 이름으로 사용되고 있습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -15792,11 +15795,11 @@ msgstr ""
 "같은 에기르이지만 <em>AEgir</em>와 <em>Aegir</em> 사이의 차이를 주목해 주세요. 발음이 같은 "
 "<em>Aegir</em>는 2004년 발견된 토성의 위성 이름에 이미 쓰이고 있습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr "<em>오기모스</em>는 이미 소행성의 이름으로 사용되고 있습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
@@ -15805,7 +15808,7 @@ msgstr ""
 "원래 제안되었던 이름인 <em>레다</em>는 소행성 및 목성의 위성 이름이며, <em>알타에아</em>는 소행성의 이름에 사용되고 "
 "있습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -15816,111 +15819,111 @@ msgstr ""
 "수정되었습니다. <em>s</em>가 포함된  <em>Lippershey</em>는 원래 1831년 발생했던 오타 때문에 생겨난 "
 "이름으로, 고쳐야 한다고 판단되었습니다."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Additional info"
 msgstr "추가 정보"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Circumstellar habitable zone"
 msgstr "별 주위의 거주 가능 구역"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Planetary equilibrium temperature"
 msgstr "행성 평형 온도"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Planetary habitability"
 msgstr "행성 거주 가능성"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "Earth Similarity Index"
 msgstr "지구 유사성 지수"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr "NameExoWorlds 투표의 최종 결과가 발표되었습니다"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:278
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "NameExoWorlds website"
 msgstr "NameExoWorlds 웹사이트"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "외계 행성 관련 일반적인 전문 웹 사이트"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "외계행성: XKCD 1071의 상호작용 버전"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (The Hunt for Exomoons with Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "쌍성계 및 다중성계의 외계 행성 (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Naming exoplanets (IAU)"
 msgstr "외계 행성 명명법(IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "외계 행성을 연구하는 몇몇 천문학자 및 천문 모임"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "update: 16 April 2012"
 msgstr "업데이트: 2012년 4월 16일"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "The Exoplanet Data Explorer"
 msgstr "외계행성 데이터 탐색기"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "The Anglo-Australian Planet Search"
 msgstr "The Anglo-Australian Planet Search"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "제네바 외계 행성 탐색 프로그램"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA의 외계 행성 탐사 프로그램"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "Pulsar planets"
 msgstr "펄서 행성들"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "The NASA Exoplanet Archive"
 msgstr "NASA 외계 행성 목록"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "IAU 위원회 53: 외계 행성"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "The Habitable Zone Gallery"
 msgstr "The Habitable Zone Gallery (외계행성에 대한 소개 웹사이트)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - 또 다른 지구를 위한 탐사"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid "Open Exoplanet Catalogue"
 msgstr "외계 행성 카탈로그 열기"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:311
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
 msgid "The Habitable Exoplanets Catalog"
 msgstr "거주 가능한 외계 행성 카탈로그"
 
@@ -16615,12 +16618,6 @@ msgstr "이 플러그인은 균시차의 값을 보여줍니다."
 msgid "Show solution for Equation of Time"
 msgstr "균시차 값 보이기"
 
-#. TRANSLATORS: minutes.
-#: plugins/EquationOfTime/src/EquationOfTime.cpp:220
-msgctxt "time"
-msgid "m"
-msgstr "분"
-
 #. TRANSLATORS: seconds.
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:222
 msgctxt "time"
@@ -16670,34 +16667,34 @@ msgstr "글꼴 크기:"
 msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "현재 적용된 유성우 목록은 올바르지 않습니다!"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:551
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:634
 msgid "Meteor Showers"
 msgstr "유성우"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
 msgid "Toggle meteor showers"
 msgstr "유성우 켜고 끄기"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 msgid "Toggle radiant labels"
 msgstr "복사점 이름표 켜고 끄기"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:233
 msgid "Show settings dialog"
 msgstr "설정 대화상자 표시"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 msgid "Show search dialog"
 msgstr "유성우 검색"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:256
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:255
 msgid "Using the default Meteor Showers catalog."
 msgstr "기본 유성우 목록을 사용 중입니다."
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:555
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:638
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "

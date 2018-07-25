@@ -889,7 +889,7 @@ PGC  120             _("Taffy System") # SIMBAD
 PGC  129             _("Taffy Galaxies")
 PGC  129             _("Taffy System") # SIMBAD
 PGC  143             _("Wolf-Lundmark-Melotte Object (WLM)") # NED, DSW
-PGC  621             _("Sculptor Dwarf Irregular Galaxy") # NED
+PGC  621             _("Sculptor Dwarf Irregular Galaxy") # NED, SIMBAD
 PGC  2121            _("Andromeda III Dwarf Galaxy")
 PGC  2248            _("Cartwheel Galaxy") # NED, SIMBAD, TSS
 PGC  2248            _("Cartwheel Ring Galaxy") # SIMBAD, WSG
@@ -899,8 +899,9 @@ PGC  2666            _("Andromeda I Dwarf Galaxy")
 PGC  2796            _("Burbidge Chain") # NED, WSG
 PGC  2906            _("Baade's Galaxy A") # NED
 PGC  2907            _("Baade's Galaxy B") # NED
-PGC  3589            _("Sculptor Dwarf Galaxy") # NED, DWH, PSA
+PGC  3589            _("Sculptor Dwarf Galaxy") # NED, DWH, PSA, SIMBAD
 PGC  3589            _("Sculptor System") # BCH
+PGC  3589            _("Reticulum System") # SIMBAD
 PGC  3792            _("Pisces Dwarf Galaxy") # NED, SIMBAD
 PGC  3792            _("Pisces I") # NED, SIMBAD
 PGC  3853            _("Shapley-Ames 1") # NED
@@ -965,27 +966,30 @@ PGC  42911           _("Centaurus Chain") # WSG
 PGC  43345           _("Shapley-Ames 3") # NED
 PGC  44014           _("Shapley-Ames 4") # NED
 PGC  44491           _("Imprint of a Foot Galaxy") # NED
-PGC  45901           _("Hardcastle's Galaxy") # NED
+PGC  45901           _("Hardcastle's Galaxy") # NED, SIMBAD
 PGC  45927           _("Holmberg VIII") # WSG
-PGC  47847           _("Fourcade-Figueroa Object") # NED
-PGC  47847           _("Fourcade-Figueroa Galaxy") # NED
+PGC  47847           _("Fourcade-Figueroa Object") # NED, SIMBAD
+PGC  47847           _("Fourcade-Figueroa Galaxy") # NED, SIMBAD
 PGC  48392           _("Holmberg V") # WSG
 PGC  49448           _("Holmberg IV") # WSG
-PGC  50779           _("Circinus Galaxy") # NED
+PGC  49560           _("The Dentist's Chair") # SIMBAD
+PGC  50779           _("Circinus Galaxy") # NED, SIMBAD
 PGC  52283           _("Segner's Wheel") # SIMBAD
 PGC  54074           _("Ursa Minor Dwarf Galaxy") # NED
 PGC  54559           _("Hoag's Object") # WSG
 PGC  54817           _("Hooked Galaxy")
+PGC  58985           _("Kathryn's Wheel") # SIMBAD
 PGC  59061           _("Zwicky's Triplet") # NED, SIMBAD
 PGC  59085           _("Zwicky's Triplet") # NED, SIMBAD
 PGC  59102           _("Zwicky's Triplet") # NED, SIMBAD
 PGC  59117           _("Hercules A") # NED
 PGC  60095           _("Draco Dwarf Galaxy") # NED, SIMBAD
+PGC  62946           _("The Bird") # SIMBAD
 PGC  63287           _("Sagittarius Dwarf Galaxy") # NED
 PGC  63287           _("Kowal's Object") # NED
 PGC  65367           _("Aquarius Dwarf Galaxy") # NED
-PGC  63932           _("Cygnus A") # NED
-PGC  64180           _("McLeish's Object") # NED
+PGC  63932           _("Cygnus A") # NED, SIMBAD
+PGC  64180           _("McLeish's Object") # NED, SIMBAD
 PGC  66669           _("Shapley-Ames 6") # NED
 PGC  69457           _("Huchra's Lens") # SIMBAD
 PGC  69519           _("Tucana Dwarf Galaxy")
@@ -995,6 +999,7 @@ PGC  73957           _("Minkowski's Object") # NED, SIMBAD
 PGC  84913           _("Superantennae Galaxy") # NED
 PGC  86622           _("Malin II")
 PGC  88608           _("Sextans Dwarf Spheroidal Galaxy")
+PGC  90170           _("Padova 3") # SIMBAD
 PGC  95597           _("Mailyan 16") # WSG
 PGC  100169          _("Cassiopeia 1") # SIMBAD, WSG
 PGC  100170          _("Cassiopeia 2") # SIMBAD
@@ -1004,14 +1009,15 @@ PGC  139235          _("Sextans Ring")
 PGC  139235          _("Ring Galaxy in Sextans")
 PGC  166082          _("Camelopardalis A") # WSG
 PGC  166084          _("Camelopardalis B") # WSG
-PGC  2807155         _("Cassiopeia Dwarf Spheroidal Galaxy")
-PGC  2807155         _("Andromeda VII")
+PGC  2807155         _("Cassiopeia Dwarf Spheroidal Galaxy") # SIMBAD
+PGC  2807155         _("Andromeda VII") # SIMBAD
 PGC  2807158         _("Pegasus Dwarf Galaxy")
 PGC  2807158         _("Pegasus II")
 PGC  2807158         _("Andromeda VI")
-PGC  3074547         _("Boomerang Nebula")
+PGC  3074547         _("Boomerang Nebula") # SIMBAD
+PGC  3074547         _("Centaurus Bipolar Nebula") # SIMBAD
 PGC  3097690         _("Cepheus I")
-PGC  3097691         _("Cetus Dwarf Galaxy")
+PGC  3097691         _("Cetus Dwarf Galaxy") # SIMBAD
 UGC  3087            _("BW Tauri")
 UGC  4881            _("The Grasshopper Galaxy") # ST2
 UGC  5364            _("Leo A") # NED, SIMBAD
@@ -1037,12 +1043,15 @@ PK   010+18.2        _("Twin Jet Nebula")
 PK   064+05.1        _("Campbell's Hydrogen Star") # SIMBAD, ST4
 PK   164+31.1        _("Headphone Nebula") # WP
 PK   164+31.1        _("Jones-Emberson 1") # WP
-PK   166-06.1        _("Westbrook Nebula")
+PK   166-06.1        _("Westbrook Nebula") # SIMBAD
 PK   283+25.1        _("Southern Owl Nebula") # WP
+PK   315+09.1        _("Southern Crab Nebula") # SIMBAD
+PK   329+02.1        _("Fine Ring Nebula") # SIMBAD
 PK   331-01.1        _("Ant Nebula") # SIMBAD
 PK   331-01.1        _("The Chamber of Horrors") # WP
 PK   331-12.1        _("Stingray Nebula") # WP, SIMBAD
-PK   340-03.1        _("Water Lily Nebula")
+PK   340-03.1        _("Water Lily Nebula") # SIMBAD
+PNG  353.8+02.9      _("Cotton Candy Nebula") # SIMBAD
 ACO  151             _("Haufen A") # WSG
 ACO  194             _("Cetus Cluster") # WSO
 ACO  426             _("Perseus Cluster") # NED, WP, DWH, WSO, WSG
@@ -1066,14 +1075,26 @@ ACO  S737            _("NGC 1399 Group") # WP, SIMBAD
 ACO  S636            _("Antlia Cluster") # NED, WP
 A66  70              _("Diamond Ring Nebula") # ST3, ST4
 A66  79              _("Cosmic Six Nebula") # ST4
+ESO  37-1            _("E3 Cluster") # SIMBAD
+ESO  57-76           _("Hodge 11") # SIMBAD
+ESO  86-9            _("Hodge 4") # SIMBAD
+ESO  118-31          _("Sersic Cluster") # SIMBAD
+ESO  118-31          _("Reticulum Cluster") # SIMBAD
+ESO  118-31          _("Reticulum Dwarf Galaxy") # SIMBAD
+ESO  120-8           _("E2 Cluster") # SIMBAD
+ESO  129-25          _("Padova 2") # SIMBAD
+ESO  138-29          _("Sacred Mushroom") # SIMBAD
+ESO  252-18A         _("Pictor A") # SIMBAD
+ESO  277-12          _("Ara Cluster") # SIMBAD
+ESO  333-16          _("Tonantzintla 2") # SIMBAD
+ESO  600-11          _("Capricorn Dwarf Galaxy") # SIMBAD
      18              _("Calabash Nebula") # WP
      18              _("Rotten Egg Nebula") # WP
      19              _("Frosty Leo Nebula")
      20              _("Gomez's Hamburger")
-     21              _("Cotton Candy Nebula")
-     24              _("Footprint Nebula") # PSA
-     24              _("Minkowski's Footprint") # DSW
-     25              _("Sagittarius A East")
-     26              _("Sagittarius A West")
-     26              _("Minispiral in Gal Center") # SIMBAD
-     43              _("Dark Doodad Nebula") # WK, PSA, DN
+     21              _("Footprint Nebula") # PSA
+     21              _("Minkowski's Footprint") # DSW
+     22              _("Sagittarius A East")
+     23              _("Sagittarius A West")
+     23              _("Minispiral in Gal Center") # SIMBAD
+     40              _("Dark Doodad Nebula") # WK, PSA, DN
