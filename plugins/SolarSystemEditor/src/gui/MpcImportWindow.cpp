@@ -1013,6 +1013,22 @@ void MpcImportWindow::loadBookmarks()
 	bookmarks[MpcMinorPlanets].insert("MPCORB: elements of NEAs for current epochs (today)", "https://www.minorplanetcenter.net/iau/MPCORB/NEAm00.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Unusual minor planets (including NEOs)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/unusual.txt");
 	bookmarks[MpcMinorPlanets].insert("MPCAT: Distant minor planets (Centaurs and transneptunians)", "https://www.minorplanetcenter.net/iau/ECS/MPCAT/distant.txt");
+	int start = 0;
+	int finish = 52;
+	QString limits, idx;
+	for (int i=start; i<=finish; i++) {
+		limits = QString("%1%2%3").arg(QString::number(i*10000), QChar(0x2014), QString::number(i*10000 + 9999));
+		if (i==start) {
+			limits = QString("%1%2%3").arg(QString::number(1), QChar(0x2014), QString::number(9999));
+		} else if (i==finish) {
+			limits = QString("%1...").arg(QString::number(i*10000));
+		}
+		if ((i+1)<10)
+			idx = QString("0%1").arg(i+1);
+		else
+			idx = QString::number(i+1);
+		bookmarks[MpcMinorPlanets].insert(QString("MPCAT: Numbered objects (%1)").arg(limits), QString("http://dss.stellarium.org/MPC/mpn-%1.txt").arg(idx));
+	}
 	bookmarks[MpcComets].insert("MPC's list of observable comets", "https://www.minorplanetcenter.net/iau/Ephemerides/Comets/Soft00Cmt.txt");
 	bookmarks[MpcComets].insert("MPCORB: comets", "https://www.minorplanetcenter.net/iau/MPCORB/CometEls.txt");
 
