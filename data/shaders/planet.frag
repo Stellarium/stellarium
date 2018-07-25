@@ -281,7 +281,7 @@ void main()
     if(final_illumination < 0.99)
     {
         lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
-        finalColor = mix(finalColor * litColor, shadowColor, shadowColor.a);
+        finalColor = mix(finalColor * litColor, shadowColor, clamp(shadowColor.a, 0.0, 0.7)); // clamp alpha to allow some maria detail.
     }
     else
 #endif
