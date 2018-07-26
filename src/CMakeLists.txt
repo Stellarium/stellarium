@@ -136,8 +136,6 @@ SET(stellarium_lib_SRCS
      core/planetsephems/elp82b.h
      core/planetsephems/gust86.c
      core/planetsephems/gust86.h
-     core/planetsephems/l1.c
-     core/planetsephems/l1.h
      core/planetsephems/l12.c
      core/planetsephems/l12.h
      core/planetsephems/marssat.c
