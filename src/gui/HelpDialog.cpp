@@ -19,6 +19,7 @@
 
 #include <QString>
 #include <QTextBrowser>
+#include <QScrollBar>
 #include <QVBoxLayout>
 #include <QWidget>
 #include <QFrame>
@@ -129,6 +130,8 @@ void HelpDialog::updateLog(int)
 void HelpDialog::refreshLog()
 {
 	ui->logBrowser->setPlainText(StelLogger::getLog());
+	QScrollBar *sb = ui->logBrowser->verticalScrollBar();
+	sb->setValue(sb->maximum());
 }
 
 void HelpDialog::updateHelpText(void)
