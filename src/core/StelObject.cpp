@@ -675,7 +675,7 @@ void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flag
 	{
 		Vec3f color = getInfoColor();
 		StelCore* core = StelApp::getInstance().getCore();
-		if (core->isBrightDaylight() && core->getSkyDrawer()->getFlagHasAtmosphere()==true && !StelApp::getInstance().getVisionModeNight())
+		if (core->isBrightDaylight() && !StelApp::getInstance().getVisionModeNight())
 		{
 			// make info text more readable when atmosphere enabled at daylight.
 			color = StelUtils::strToVec3f(StelApp::getInstance().getSettings()->value("color/daylight_text_color", "0.0,0.0,0.0").toString());

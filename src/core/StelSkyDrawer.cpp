@@ -78,6 +78,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	maxLum(0.f),
 	oldLum(-1.f),
 	flagLuminanceAdaptation(false),
+	daylightLabelThreshold(250.0),
 	big3dModelHaloRadius(150.f)
 {
 	setObjectName("StelSkyDrawer");
@@ -92,6 +93,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setMaxAdaptFov(conf->value("stars/mag_converter_max_fov",70.0).toFloat());
 	setMinAdaptFov(conf->value("stars/mag_converter_min_fov",0.1).toFloat());
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
+	setDaylightLabelThreshold(conf->value("viewing/sky_brightness_label_threshold", 250.0).toDouble());
 	setFlagStarMagnitudeLimit((conf->value("astro/flag_star_magnitude_limit", false).toBool()));
 	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toFloat());
 	setFlagPlanetMagnitudeLimit((conf->value("astro/flag_planet_magnitude_limit", false).toBool()));
@@ -915,4 +917,9 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 // 		res += QString("Vec3f(%1,%2,%3),\n").arg(colorTable[i][0], 0, 'g', 6).arg(colorTable[i][1], 0, 'g', 6).arg(colorTable[i][2], 0, 'g', 6);
 // 	}
 // 	qDebug() << res;
+}
+
+double StelSkyDrawer::getWorldAdaptationLuminance() const
+{
+	return eye->getWorldAdaptationLuminance();
 }

@@ -2379,21 +2379,27 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 }
 
 // return if sky plus atmosphere is bright enough from sunlight so that e.g. screen labels should be rendered dark.
-// TODO: Why not simply ask the atmosphere for its displayed brightness?
+// DONE: Simply ask the atmosphere for its surrounding brightness
+// TODO2: This could be moved to the SkyDrawer or even some GUI class, as it is used to decide a GUI thing.
 bool StelCore::isBrightDaylight() const
 {
 	SolarSystem* ssys = GETSTELMODULE(SolarSystem);
 	if (!ssys->getFlagPlanets())
 		return false;
-
+	if (!getSkyDrawer()->getFlagHasAtmosphere())
+		return false;
 	if (ssys->getEclipseFactor(this)<=0.01) // Total solar eclipse
 		return false;
 
-	const Vec3d& sunPos = ssys->getSun()->getAltAzPosGeometric(this);
-	if (sunPos[2] > -0.10452846326) // Nautical twilight (sin (6 deg))
-		return true;
-	else
-		return false;
+	// immediately decide upon sky background brightness...
+	return (GETSTELMODULE(LandscapeMgr)->getAtmosphereAverageLuminance() > getSkyDrawer()->getDaylightLabelThreshold());
+
+	// Old solution: based on solar altitude
+//	const Vec3d& sunPos = ssys->getSun()->getAltAzPosGeometric(this);
+//	if (sunPos[2] > -0.10452846326) // Nautical twilight (sin (6 deg))
+//		return true;
+//	else
+//		return false;
 }
 
 double StelCore::getCurrentEpoch() const

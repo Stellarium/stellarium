@@ -735,11 +735,11 @@ For historical reasons, the section is not called \texttt{[TextUserInterface]} b
 \begin{tabularx}{\textwidth}{l|l|l|X}\toprule
 \emph{ID} & \emph{Type} &\emph{Default}& \emph{Description}\\\midrule
 %flag\_enable\_tui\_menu & bool & Enables or disables the TUI menu\\\midrule
-tui\_font\_size           &float    &15       &Font size for TUI.\\%\midrule
-tui\_font\_color          &floatRGB &0.3,1,0.3&Font color for TUI.\\%\midrule
-flag\_show\_gravity\_ui   & bool    &false    & Enables or disables gravity mode for UI\\%\midrule
-flag\_show\_tui\_datetime & bool    &false    &Set to \emph{true} if you want to see a date and time label suited for dome projections\\%\midrule
-flag\_show\_tui\_short\_obj\_info   & bool&    &set to \emph{true} if you want to see object info suited for dome projections\\%\midrule
+tui\_font\_size                   &float    & 15       & Font size for TUI.\\%\midrule
+tui\_font\_color                  &floatRGB &0.3,1,0.3 & Font color for TUI.\\%\midrule
+flag\_show\_gravity\_ui           & bool    & false    & Set to \emph{true} to enable gravity mode for UI (for dome projection)\\%\midrule
+flag\_show\_tui\_datetime         & bool    & false    & Set to \emph{true} if you want to see a date and time label suited for dome projections\\%\midrule
+flag\_show\_tui\_short\_obj\_info & bool    & false    & Set to \emph{true} if you want to see object info suited for dome projections\\%\midrule
 % TODO: DESCRIBE!
 tui\_admin\_shutdown\_command       & string  && e.g.\ for Linux: \command{shutdown --poweroff +2} \\\bottomrule
 \end{tabularx}
@@ -801,18 +801,23 @@ cardinal\_font\_size          & int  & Font size for cardinal points. Typical va
 subcardinal\_font\_size       & int  & Font size for subcardinal points. Typical value: \emph{18}\\%\midrule
 % TODO: This should go into the projection group:
 flag\_gravity\_labels         & bool & Set to \emph{true} if you want labels to undergo gravity (top side of text points toward zenith). Useful with dome projection.\\\midrule
-flag\_moon\_scaled            & bool & Set to \emph{false} if you want to see the real moon size \\%\midrule
-moon\_scale                   & float & Sets the moon scale factor, sometimes useful to correlate to our perception of the moon's size. Typical value: \emph{4}\\\midrule
+flag\_moon\_scaled            & bool & Keep it \emph{false} if you want to see the real moon size \\%\midrule
+moon\_scale                   & float & Sets the moon scale factor, sometimes useful to correlate to our perception of the moon's size. Typical value: \emph{4}\\
+
+flag\_minorbodies\_scaled     & bool & Set to \emph{true} if you want to see minor bodies enlarged \\
+minorbodies\_scale            & float & Set scale factor for minor bodies, to see them in unnatural detail. Typical value: \emph{10}\\
+\midrule
 constellation\_art\_intensity      & float & brightness [0\ldots1] of the constellation art images. Typical value: \emph{0.5}\\%\midrule
 constellation\_art\_fade\_duration & float & time the constellation art takes to fade in or out, in seconds. Typical value: \emph{1.5}\\%\midrule
 constellation\_font\_size          & int   & font size for constellation labels\\%\midrule
-constellation\_line\_thickness     & int   & thickness of lines of the constellations [1\ldots5]. Typical value: \emph{1}\\%\midrule
+constellation\_line\_thickness     & int   & thickness of constellation lines [1\ldots5]. Typical value: \emph{1}\\%\midrule
 asterism\_font\_size               & int   & font size for asterism labels\\%\midrule
-asterism\_line\_thickness          & int   & thickness of lines of the asterisms [1\ldots5]. Typical value: \emph{1}\\%\midrule
-rayhelper\_line\_thickness         & int   & thickness of lines of the ray helpers [1\ldots5]. Typical value: \emph{1}\\\midrule
+asterism\_line\_thickness          & int   & thickness of the asterism lines [1\ldots5]. Typical value: \emph{1}\\%\midrule
+rayhelper\_line\_thickness         & int   & thickness of the ray helper lines [1\ldots5]. Typical value: \emph{1}\\\midrule
 flag\_night                        & bool  & Enable night mode (red-only mode) on startup\\\midrule
 light\_pollution\_luminance        & float & Sets the level of the light pollution simulation\\\midrule %% TODO: WHAT IS THIS?
-use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation.\\ %% TODO: DESCRIBE!
+use\_luminance\_adaptation         & bool  & Enable dynamic eye adaptation\\\midrule %% TODO: DESCRIBE!
+sky\_brightness\_label\_threshold  & float & Sky brightness [$cd/m^2$] to show infotext in black \\ %% 
 \bottomrule
 \end{longtable}
 

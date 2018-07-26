@@ -266,7 +266,7 @@ constellation_art_fade_duration     = 1.5
 flag_night                          = false
 light_pollution_luminance           = 0.0
 use_luminance_adaptation            = true
-flag_render_solar_shadows           = true
+sky_brightness_label_threshold      = 250.0
 
 [astro]
 flag_stars                          = true

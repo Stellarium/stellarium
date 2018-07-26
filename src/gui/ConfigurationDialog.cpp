@@ -708,7 +708,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/asterism_line_thickness",		propMgr->getStelPropertyValue("AsterismMgr.asterismLineThickness").toInt());
 	conf->setValue("viewing/flag_rayhelper_drawing",		propMgr->getStelPropertyValue("AsterismMgr.rayHelpersDisplayed").toBool());
 	conf->setValue("viewing/rayhelper_line_thickness",		propMgr->getStelPropertyValue("AsterismMgr.rayHelperThickness").toInt());
-
+	conf->setValue("viewing/sky_brightness_label_threshold",	propMgr->getStelPropertyValue("StelSkyDrawer.daylightLabelThreshold").toFloat());
 	conf->setValue("viewing/flag_night",				StelApp::getInstance().getVisionModeNight());
 	conf->setValue("astro/flag_stars",				propMgr->getStelPropertyValue("StarMgr.flagStarsDisplayed").toBool());
 	conf->setValue("astro/flag_star_name",				propMgr->getStelPropertyValue("StarMgr.flagLabelsDisplayed").toBool());

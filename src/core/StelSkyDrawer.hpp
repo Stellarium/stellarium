@@ -65,6 +65,7 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double customPlanetMagLimit READ getCustomPlanetMagnitudeLimit WRITE setCustomPlanetMagnitudeLimit NOTIFY customPlanetMagLimitChanged)
 
 	Q_PROPERTY(bool flagLuminanceAdaptation READ getFlagLuminanceAdaptation WRITE setFlagLuminanceAdaptation NOTIFY flagLuminanceAdaptationChanged)
+	Q_PROPERTY(double daylightLabelThreshold READ getDaylightLabelThreshold WRITE setDaylightLabelThreshold NOTIFY daylightLabelThresholdChanged)
 
 	Q_PROPERTY(double extinctionCoefficient READ getExtinctionCoefficient WRITE setExtinctionCoefficient NOTIFY extinctionCoefficientChanged)
 	Q_PROPERTY(double atmosphereTemperature READ getAtmosphereTemperature WRITE setAtmosphereTemperature NOTIFY atmosphereTemperatureChanged)
@@ -249,6 +250,13 @@ public slots:
 	//! Get the current value of eye adaptation flag
 	bool getFlagLuminanceAdaptation() const {return flagLuminanceAdaptation;}
 
+	//! Set the label brightness threshold
+	void setDaylightLabelThreshold(double t) {if(t!=daylightLabelThreshold){ daylightLabelThreshold=t; emit daylightLabelThresholdChanged(t);}}
+	//! Get the current label brightness threshold
+	double getDaylightLabelThreshold() const {return daylightLabelThreshold;}
+	//! Return a brightness value based on objects in view (sky, sun, moon, ...)
+	double getWorldAdaptationLuminance() const;
+
 	//! Informing the drawer whether atmosphere is displayed.
 	//! This is used to avoid twinkling/simulate extinction/refraction.
 	void setFlagHasAtmosphere(bool b) {flagHasAtmosphere=b;}
@@ -307,6 +315,8 @@ signals:
 
 	//! Emitted whenever the luminance adaptation flag is toggled
 	void flagLuminanceAdaptationChanged(bool b);
+	//! Emitted when threshold value to draw info text in black is changed
+	void daylightLabelThresholdChanged(double t);
 
 	void extinctionCoefficientChanged(double coeff);
 	void atmosphereTemperatureChanged(double celsius);
@@ -472,7 +482,10 @@ private:
 	StelTextureSP texSunHalo;
 	StelTextureSP texSunCorona;
 
+	//! Simulate the eye's luminance adaptation?
 	bool flagLuminanceAdaptation;
+	//! a customizable value in cd/m^2 which is used to decide when to render the InfoText in black (when sky is brighter than this)
+	double daylightLabelThreshold;
 
 	float big3dModelHaloRadius;
 };
