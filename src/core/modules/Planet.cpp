@@ -608,7 +608,8 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			if (qAbs(siderealDay)>0 && getPlanetType()!=isArtificial)
 			{
 				oss << QString("%1: %2").arg(q_("Sidereal day"), StelUtils::hoursToHmsStr(qAbs(siderealDay*24))) << "<br />";
-				oss << QString("%1: %2").arg(q_("Mean solar day"), StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br />";
+				if (englishName!="Sun")
+					oss << QString("%1: %2").arg(q_("Mean solar day"), StelUtils::hoursToHmsStr(qAbs(getMeanSolarDay()*24))) << "<br />";
 			}
 			else if (re.period==0.)
 			{
