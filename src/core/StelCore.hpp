@@ -624,6 +624,9 @@ public slots:
 	//! Add one tropical year to the simulation time.
 	void addTropicalYear();
 
+	//! Add one calendric month to the simulation time.
+	void addCalendricMonth();
+
 	//! Add one Julian year to the simulation time.
 	void addJulianYear();
 	//! Add n Julian years to the simulation time.
@@ -659,6 +662,9 @@ public slots:
 	void subtractMeanTropicalYears(float n=100.f);
 	//! Subtract one tropical year to the simulation time.
 	void subtractTropicalYear();
+
+	//! Subtract one calendric month to the simulation time.
+	void subtractCalendricMonth();
 
 	//! Subtract one Julian year to the simulation time.
 	void subtractJulianYear();

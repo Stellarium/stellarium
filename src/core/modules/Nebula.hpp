@@ -199,7 +199,7 @@ public:
 	void addNameAlias(QString name) { englishAliases.append(name); }
 	void removeAllNames() { englishName=""; englishAliases.clear(); }
 
-	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG)
+	//! Get designation for DSO (with priority: M, C, NGC, IC, B, Sh2, VdB, RCW, LDN, LBN, Cr, Mel, PGC, UGC, Ced, Arp, VV, PK, PN G, SNR G, ACO, HCG, Abell, ESO)
 	//! @return a designation
 	QString getDSODesignation() const;
 

@@ -288,6 +288,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionAdd_Julian_Year", timeGroup, N_("Add 1 Julian year"), this, "addJulianYear()");
 	actionsMgr->addAction("actionAdd_Julian_Century", timeGroup, N_("Add 1 Julian century"), this, "addJulianYears()");
 	actionsMgr->addAction("actionAdd_Gaussian_Year", timeGroup, N_("Add 1 Gaussian year"), this, "addGaussianYear()");
+	actionsMgr->addAction("actionAdd_Calendric_Month", timeGroup, N_("Add 1 calendric month"), this, "addCalendricMonth()");
 	actionsMgr->addAction("actionSubtract_Sidereal_Day", timeGroup, N_("Subtract 1 sidereal day"), this, "subtractSiderealDay()", "Alt+-");
 	actionsMgr->addAction("actionSubtract_Sidereal_Week", timeGroup, N_("Subtract 7 sidereal days"), this, "subtractSiderealWeek()");
 	actionsMgr->addAction("actionSubtract_Sidereal_Year", timeGroup, N_("Subtract 1 sidereal year"), this, "subtractSiderealYear()", "Ctrl+Alt+Shift+[");
@@ -306,6 +307,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionSubtract_Julian_Year", timeGroup, N_("Subtract 1 Julian year"), this, "subtractJulianYear()");
 	actionsMgr->addAction("actionSubtract_Julian_Century", timeGroup, N_("Subtract 1 Julian century"), this, "subtractJulianYears()");
 	actionsMgr->addAction("actionSubtract_Gaussian_Year", timeGroup, N_("Subtract 1 Gaussian year"), this, "subtractGaussianYear()");
+	actionsMgr->addAction("actionSubtract_Calendric_Month", timeGroup, N_("Subtract 1 calendric month"), this, "subtractCalendricMonth()");
 
 	actionsMgr->addAction("actionSet_Home_Planet_To_Selected", movementGroup, N_("Set home planet to selected planet"), this, "moveObserverToSelected()", "Ctrl+G");
 	actionsMgr->addAction("actionGo_Home_Global", movementGroup, N_("Go to home"), this, "returnToHome()", "Ctrl+H");
@@ -1495,6 +1497,22 @@ void StelCore::addMeanTropicalMonth()
 	addSolarDays(27.321582241);
 }
 
+void StelCore::addCalendricMonth()
+{
+	double cjd = getJD();
+	int year, month, day, hour, minute, second;
+	StelUtils::getDateFromJulianDay(cjd, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(cjd, &hour, &minute, &second);
+	month++;
+	if (month>12)
+	{
+		month = 1;
+		year++;
+	}
+	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
+	setJD(cjd);
+}
+
 void StelCore::addAnomalisticMonth()
 {
 	addSolarDays(27.554549878);
@@ -1616,6 +1634,22 @@ void StelCore::subtractDraconicMonth()
 void StelCore::subtractMeanTropicalMonth()
 {
 	addSolarDays(-27.321582241);
+}
+
+void StelCore::subtractCalendricMonth()
+{
+	double cjd = getJD();
+	int year, month, day, hour, minute, second;
+	StelUtils::getDateFromJulianDay(cjd, &year, &month, &day);
+	StelUtils::getTimeFromJulianDay(cjd, &hour, &minute, &second);
+	month--;
+	if (month<1)
+	{
+		month = 12;
+		year--;
+	}
+	StelUtils::getJDFromDate(&cjd, year, month, day, hour, minute, second);
+	setJD(cjd);
 }
 
 void StelCore::subtractAnomalisticMonth()
