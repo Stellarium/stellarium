@@ -2557,11 +2557,15 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Generates the vertice
 	Planet3DModel model;
-	sSphere(&model, radius*sphereScale, oneMinusOblateness, nb_facet, nb_facet);
+	sSphere(&model, radius, oneMinusOblateness, nb_facet, nb_facet);
 	
 	QVector<float> projectedVertexArr(model.vertexArr.size());
 	for (int i=0;i<model.vertexArr.size()/3;++i)
-		painter->getProjector()->project(*((Vec3f*)(model.vertexArr.constData()+i*3)), *((Vec3f*)(projectedVertexArr.data()+i*3)));
+	{
+		Vec3f p = *((Vec3f*)(model.vertexArr.constData()+i*3));
+		p *= sphereScale;
+		painter->getProjector()->project(p, *((Vec3f*)(projectedVertexArr.data()+i*3)));
+	}
 	
 	const SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 
@@ -2774,7 +2778,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 			v = verts[i];
 			painter->getProjector()->project(v, v);
 			projectedVertsArray[i] = Vec3f(v[0], v[1], v[2]);
-			v = Mat4d::scaling(radius * sphereScale) * verts[i];
+			v = Mat4d::scaling(radius) * verts[i];
 			v = Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)) * v;
 			// Undo the rotation we applied for the survey fix.
 			v = Mat4d::zrotation(M_PI / 2.0) * v;
