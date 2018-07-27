@@ -305,7 +305,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	SolarSystem* ssm = GETSTELMODULE(SolarSystem);
 	PlanetP p = ssm->searchByEnglishName(loc.planetName);
 	StelModule* ls = StelApp::getInstance().getModule("LandscapeMgr");
-	if (ls->property("flagAtmosphereAutoEnable").toBool())
+	if (ls->property("flagEnvironmentAutoEnable").toBool())
 	{
 		if (loc.planetName != StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 		{

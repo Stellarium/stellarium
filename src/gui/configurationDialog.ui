@@ -1795,12 +1795,12 @@
               </widget>
              </item>
              <item row="8" column="0">
-              <widget class="QCheckBox" name="autoEnableAtmosphereCheckBox">
+              <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
                <property name="toolTip">
-                <string>Auto-enable atmosphere when selecting a celestial body in the location window.</string>
+                <string>Auto-enable atmosphere and landscape when selecting a celestial body in the location window.</string>
                </property>
                <property name="text">
-                <string>Auto-enabling for the atmosphere</string>
+                <string>Auto-enabling for the environment</string>
                </property>
               </widget>
              </item>

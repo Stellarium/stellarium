@@ -346,7 +346,7 @@ void ConfigurationDialog::createDialogContent()
 	connectIntProperty(ui->customScreenshotWidthLineEdit, "MainView.customScreenshotWidth");
 	connectIntProperty(ui->customScreenshotHeightLineEdit, "MainView.customScreenshotHeight");
 #endif
-	connectBoolProperty(ui->autoEnableAtmosphereCheckBox, "LandscapeMgr.flagAtmosphereAutoEnabling");
+	connectBoolProperty(ui->autoEnableEnvironmentCheckBox, "LandscapeMgr.flagEnvironmentAutoEnabling");
 	connectBoolProperty(ui->autoChangeLandscapesCheckBox, "LandscapeMgr.flagLandscapeAutoSelection");
 
 	// script tab controls
@@ -698,7 +698,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_constellation_isolate_selected",	propMgr->getStelPropertyValue("ConstellationMgr.isolateSelected").toBool());
 	conf->setValue("viewing/flag_landscape_autoselection",		propMgr->getStelPropertyValue("LandscapeMgr.flagLandscapeAutoSelection").toBool());
 	conf->setValue("viewing/flag_light_pollution_database",		propMgr->getStelPropertyValue("LandscapeMgr.flagUseLightPollutionFromDatabase").toBool());
-	conf->setValue("viewing/flag_atmosphere_auto_enable",		propMgr->getStelPropertyValue("LandscapeMgr.flagAtmosphereAutoEnabling").toBool());
+	conf->setValue("viewing/flag_environment_auto_enable",		propMgr->getStelPropertyValue("LandscapeMgr.flagEnvironmentAutoEnabling").toBool());
 	conf->setValue("viewing/constellation_art_intensity",		propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_name_style",		ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
 	conf->setValue("viewing/constellation_line_thickness",		propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());

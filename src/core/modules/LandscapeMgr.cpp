@@ -198,7 +198,7 @@ LandscapeMgr::LandscapeMgr()
 	, flagLandscapeUseMinimalBrightness(false)
 	, defaultMinimalBrightness(0.01)
 	, flagLandscapeSetsMinimalBrightness(false)
-	, flagAtmosphereAutoEnabling(false)
+	, flagEnvironmentAutoEnabling(false)
 {
 	setObjectName("LandscapeMgr"); // should be done by StelModule's constructor.
 
@@ -448,7 +448,7 @@ void LandscapeMgr::init()
 	setDefaultMinimalBrightness(conf->value("landscape/minimal_brightness", 0.01).toFloat());
 	setFlagLandscapeUseMinimalBrightness(conf->value("landscape/flag_minimal_brightness", false).toBool());
 	setFlagLandscapeSetsMinimalBrightness(conf->value("landscape/flag_landscape_sets_minimal_brightness",false).toBool());
-	setFlagAtmosphereAutoEnable(conf->value("viewing/flag_atmosphere_auto_enable",true).toBool());
+	setFlagEnvironmentAutoEnable(conf->value("viewing/flag_environment_auto_enable",true).toBool());
 	setFlagIllumination(conf->value("landscape/flag_enable_illumination_layer", true).toBool());
 	setFlagLabels(conf->value("landscape/flag_enable_labels", true).toBool());
 
@@ -754,21 +754,24 @@ void LandscapeMgr::onTargetLocationChanged(StelLocation loc)
 
 		if (loc.planetName.contains("Observer", Qt::CaseInsensitive))
 		{
-			setFlagAtmosphere(false);
-			setFlagFog(false);
-			setFlagLandscape(false);
+			if (flagEnvironmentAutoEnabling)
+			{
+				setFlagAtmosphere(false);
+				setFlagFog(false);
+				setFlagLandscape(false);
+			}
 		}
 		else
 		{
 			SolarSystem* ssystem = (SolarSystem*)StelApp::getInstance().getModuleMgr().getModule("SolarSystem");
 			PlanetP pl = ssystem->searchByEnglishName(loc.planetName);
-			if (pl && flagAtmosphereAutoEnabling)
+			if (pl && flagEnvironmentAutoEnabling)
 			{
 				QSettings* conf = StelApp::getInstance().getSettings();
 				setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
 				setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+				setFlagLandscape(true);
 			}
-			setFlagLandscape(true);
 		}
 	}
 }
@@ -826,19 +829,19 @@ bool LandscapeMgr::getFlagLandscapeAutoSelection() const
 	return flagLandscapeAutoSelection;
 }
 
-void LandscapeMgr::setFlagAtmosphereAutoEnable(bool b)
+void LandscapeMgr::setFlagEnvironmentAutoEnable(bool b)
 {
-	if(b != flagAtmosphereAutoEnabling)
+	if(b != flagEnvironmentAutoEnabling)
 	{
-		flagAtmosphereAutoEnabling = b;
-		emit setFlagAtmosphereAutoEnableChanged(b);
+		flagEnvironmentAutoEnabling = b;
+		emit setFlagEnvironmentAutoEnableChanged(b);
 	}
 
 }
 
-bool LandscapeMgr::getFlagAtmosphereAutoEnable() const
+bool LandscapeMgr::getFlagEnvironmentAutoEnable() const
 {
-	return flagAtmosphereAutoEnabling;
+	return flagEnvironmentAutoEnabling;
 }
 
 /*********************************************************************

@@ -104,10 +104,10 @@ class LandscapeMgr : public StelModule
 		   READ getDefaultMinimalBrightness
 		   WRITE setDefaultMinimalBrightness
 		   NOTIFY defaultMinimalBrightnessChanged)
-	Q_PROPERTY(bool flagAtmosphereAutoEnabling
-		   READ getFlagAtmosphereAutoEnable
-		   WRITE setFlagAtmosphereAutoEnable
-		   NOTIFY setFlagAtmosphereAutoEnableChanged)
+	Q_PROPERTY(bool flagEnvironmentAutoEnabling
+		   READ getFlagEnvironmentAutoEnable
+		   WRITE setFlagEnvironmentAutoEnable
+		   NOTIFY setFlagEnvironmentAutoEnableChanged)
 	Q_PROPERTY(QString currentLandscapeID
 		   READ getCurrentLandscapeID
 		   WRITE setCurrentLandscapeID
@@ -434,10 +434,20 @@ public slots:
 	//! Set flag for autoselect of landscapes for planets.
 	void setFlagLandscapeAutoSelection(bool enableAutoSelect);
 
+	//! Get flag for auto-enable of atmospheres and landscapes for planets.
+	bool getFlagEnvironmentAutoEnable() const;
+	//! Set flag for auto-enable atmosphere and landscape for planets with atmospheres in location window
+	void setFlagEnvironmentAutoEnable(bool b);
+
 	//! Get flag for auto-enable of atmospheres for planets.
-	bool getFlagAtmosphereAutoEnable() const;
+	//! @note this function is enabled for backward compatibility
+	//! @deprecated
+	bool getFlagAtmosphereAutoEnable() const { return getFlagEnvironmentAutoEnable(); }
+
 	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
-	void setFlagAtmosphereAutoEnable(bool b);
+	//! @note this function is enabled for backward compatibility
+	//! @deprecated
+	void setFlagAtmosphereAutoEnable(bool b) { setFlagEnvironmentAutoEnable(b); }
 
 	//! Forward opacity query to current landscape.
 	//! @param azalt direction of view line to sample in azaltimuth coordinates.
@@ -467,7 +477,7 @@ signals:
 	void flagLandscapeUseMinimalBrightnessChanged(const bool value);
 	void flagLandscapeSetsMinimalBrightnessChanged(const bool value);
 	void defaultMinimalBrightnessChanged(const double value);
-	void setFlagAtmosphereAutoEnableChanged(const bool enabled);
+	void setFlagEnvironmentAutoEnableChanged(const bool enabled);
 
 	//! Emitted whenever the default landscape is changed
 	//! @param id the landscape id of the new default landscape
@@ -555,8 +565,8 @@ private:
 	double defaultMinimalBrightness;
 	//! Indicate use of the minimal brightness value specified in the current landscape.ini, if present.
 	bool flagLandscapeSetsMinimalBrightness;
-	//! Indicate auto-enable atmosphere for planets with atmospheres in location window
-	bool flagAtmosphereAutoEnabling;
+	//! Indicate auto-enable atmosphere and landscape for planets with atmospheres in location window
+	bool flagEnvironmentAutoEnabling;
 
 	//! The ID of the currently loaded landscape
 	QString currentLandscapeID;
