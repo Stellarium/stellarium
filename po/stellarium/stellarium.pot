@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-26 00:41+0700\n"
+"POT-Creation-Date: 2018-07-27 16:58+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -407,7 +407,7 @@ msgstr ""
 msgid "Cyclic change in light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:883 src/scripting/StelScriptMgr.cpp:233
+#: src/core/modules/LandscapeMgr.cpp:886 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:434
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
@@ -428,36 +428,36 @@ msgid "Author"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:889 src/gui/StelGuiItems.cpp:723
+#: src/core/modules/LandscapeMgr.cpp:892 src/gui/StelGuiItems.cpp:723
 msgctxt "distance"
 msgid "m"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:892 src/ui_locationDialogGui.h:483
+#: src/core/modules/LandscapeMgr.cpp:895 src/ui_locationDialogGui.h:483
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Location"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
-#: src/core/modules/LandscapeMgr.cpp:913
+#: src/core/modules/LandscapeMgr.cpp:916
 msgctxt "pressure"
 msgid "hPa"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:923
+#: src/core/modules/LandscapeMgr.cpp:926
 msgid "extinction coefficient"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:926
+#: src/core/modules/LandscapeMgr.cpp:929
 msgid "Atmospheric conditions"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:930
+#: src/core/modules/LandscapeMgr.cpp:933
 msgid "Light pollution"
 msgstr ""
 
-#: src/core/modules/LandscapeMgr.cpp:930
+#: src/core/modules/LandscapeMgr.cpp:933
 msgid "by Bortle scale"
 msgstr ""
 
@@ -1800,92 +1800,92 @@ msgstr ""
 msgid "Sidereal day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:611
+#: src/core/modules/Planet.cpp:612
 msgid "Mean solar day"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:615
+#: src/core/modules/Planet.cpp:616
 msgid "The period of rotation is chaotic"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:627 src/core/modules/MinorPlanet.cpp:395
+#: src/core/modules/Planet.cpp:628 src/core/modules/MinorPlanet.cpp:395
 #: src/core/modules/Comet.cpp:263
 msgid "Synodic period"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:647 src/core/modules/MinorPlanet.cpp:413
+#: src/core/modules/Planet.cpp:648 src/core/modules/MinorPlanet.cpp:413
 #: src/core/modules/Comet.cpp:281 src/gui/AstroCalcDialog.cpp:2504
 #: src/gui/AstroCalcDialog.cpp:2539
 msgid "Phase angle"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:648 src/core/modules/MinorPlanet.cpp:414
+#: src/core/modules/Planet.cpp:649 src/core/modules/MinorPlanet.cpp:414
 #: src/core/modules/Comet.cpp:282 src/gui/AstroCalcDialog.cpp:2494
 #: src/gui/AstroCalcDialog.cpp:2529 src/gui/AstroCalcDialog.cpp:2827
 msgid "Elongation"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:649
+#: src/core/modules/Planet.cpp:650
 msgid "Illuminated"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:650
+#: src/core/modules/Planet.cpp:651
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:665
+#: src/core/modules/Planet.cpp:666
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:667
+#: src/core/modules/Planet.cpp:668
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:669
+#: src/core/modules/Planet.cpp:670
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:671
+#: src/core/modules/Planet.cpp:672
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:673
+#: src/core/modules/Planet.cpp:674
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:676
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:677
+#: src/core/modules/Planet.cpp:678
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:679
+#: src/core/modules/Planet.cpp:680
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:682
+#: src/core/modules/Planet.cpp:683
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:682
+#: src/core/modules/Planet.cpp:683
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:695
+#: src/core/modules/Planet.cpp:696
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:700
+#: src/core/modules/Planet.cpp:701
 msgid "Eclipse magnitude"
 msgstr ""
 
@@ -2216,98 +2216,106 @@ msgid "Add 1 Gaussian year"
 msgstr ""
 
 #: src/core/StelCore.cpp:291
-msgid "Subtract 1 sidereal day"
+msgid "Add 1 calendric month"
 msgstr ""
 
 #: src/core/StelCore.cpp:292
-msgid "Subtract 7 sidereal days"
+msgid "Subtract 1 sidereal day"
 msgstr ""
 
 #: src/core/StelCore.cpp:293
-msgid "Subtract 1 sidereal year"
+msgid "Subtract 7 sidereal days"
 msgstr ""
 
 #: src/core/StelCore.cpp:294
-msgid "Subtract 100 sidereal years"
+msgid "Subtract 1 sidereal year"
 msgstr ""
 
 #: src/core/StelCore.cpp:295
-msgid "Subtract 1 synodic month"
+msgid "Subtract 100 sidereal years"
 msgstr ""
 
 #: src/core/StelCore.cpp:296
-msgid "Subtract 1 saros"
+msgid "Subtract 1 synodic month"
 msgstr ""
 
 #: src/core/StelCore.cpp:297
-msgid "Subtract 1 draconic month"
+msgid "Subtract 1 saros"
 msgstr ""
 
 #: src/core/StelCore.cpp:298
-msgid "Subtract 1 draconic year"
+msgid "Subtract 1 draconic month"
 msgstr ""
 
 #: src/core/StelCore.cpp:299
-msgid "Subtract 1 anomalistic month"
+msgid "Subtract 1 draconic year"
 msgstr ""
 
 #: src/core/StelCore.cpp:300
-msgid "Subtract 1 anomalistic year"
+msgid "Subtract 1 anomalistic month"
 msgstr ""
 
 #: src/core/StelCore.cpp:301
-msgid "Subtract 100 anomalistic years"
+msgid "Subtract 1 anomalistic year"
 msgstr ""
 
 #: src/core/StelCore.cpp:302
-msgid "Subtract 1 mean tropical month"
+msgid "Subtract 100 anomalistic years"
 msgstr ""
 
 #: src/core/StelCore.cpp:303
-msgid "Subtract 1 mean tropical year"
+msgid "Subtract 1 mean tropical month"
 msgstr ""
 
 #: src/core/StelCore.cpp:304
-msgid "Subtract 100 mean tropical years"
+msgid "Subtract 1 mean tropical year"
 msgstr ""
 
 #: src/core/StelCore.cpp:305
-msgid "Subtract 1 tropical year"
+msgid "Subtract 100 mean tropical years"
 msgstr ""
 
 #: src/core/StelCore.cpp:306
-msgid "Subtract 1 Julian year"
+msgid "Subtract 1 tropical year"
 msgstr ""
 
 #: src/core/StelCore.cpp:307
-msgid "Subtract 1 Julian century"
+msgid "Subtract 1 Julian year"
 msgstr ""
 
 #: src/core/StelCore.cpp:308
+msgid "Subtract 1 Julian century"
+msgstr ""
+
+#: src/core/StelCore.cpp:309
 msgid "Subtract 1 Gaussian year"
 msgstr ""
 
 #: src/core/StelCore.cpp:310
+msgid "Subtract 1 calendric month"
+msgstr ""
+
+#: src/core/StelCore.cpp:312
 msgid "Set home planet to selected planet"
 msgstr ""
 
-#: src/core/StelCore.cpp:311
+#: src/core/StelCore.cpp:313
 msgid "Go to home"
 msgstr ""
 
-#: src/core/StelCore.cpp:313
+#: src/core/StelCore.cpp:315
 msgid "Flip scene horizontally"
 msgstr ""
 
-#: src/core/StelCore.cpp:314
+#: src/core/StelCore.cpp:316
 msgid "Flip scene vertically"
 msgstr ""
 
-#: src/core/StelCore.cpp:2198
+#: src/core/StelCore.cpp:2232
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:2201
+#: src/core/StelCore.cpp:2235
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -2315,14 +2323,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2204
+#: src/core/StelCore.cpp:2238
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2207
+#: src/core/StelCore.cpp:2241
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2331,14 +2339,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:2211
+#: src/core/StelCore.cpp:2245
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2215
+#: src/core/StelCore.cpp:2249
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -2346,7 +2354,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2219
+#: src/core/StelCore.cpp:2253
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2354,14 +2362,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2222
+#: src/core/StelCore.cpp:2256
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2225
+#: src/core/StelCore.cpp:2259
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2370,14 +2378,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2228
+#: src/core/StelCore.cpp:2262
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:2231
+#: src/core/StelCore.cpp:2265
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2385,25 +2393,25 @@ msgid ""
 "D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2234
+#: src/core/StelCore.cpp:2268
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:2237
+#: src/core/StelCore.cpp:2271
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2240
+#: src/core/StelCore.cpp:2274
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:2243
+#: src/core/StelCore.cpp:2277
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2412,14 +2420,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2246
+#: src/core/StelCore.cpp:2280
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2249
+#: src/core/StelCore.cpp:2283
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2427,42 +2435,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2252
+#: src/core/StelCore.cpp:2286
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2255
+#: src/core/StelCore.cpp:2289
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:2258
+#: src/core/StelCore.cpp:2292
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:2261
+#: src/core/StelCore.cpp:2295
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2264
+#: src/core/StelCore.cpp:2298
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:2267
+#: src/core/StelCore.cpp:2301
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2470,7 +2478,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2270
+#: src/core/StelCore.cpp:2304
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -2478,7 +2486,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2273
+#: src/core/StelCore.cpp:2307
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2487,7 +2495,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:2276 src/core/StelCore.cpp:2279
+#: src/core/StelCore.cpp:2310 src/core/StelCore.cpp:2313
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2497,15 +2505,15 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2276
+#: src/core/StelCore.cpp:2310
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:2279
+#: src/core/StelCore.cpp:2313
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:2282
+#: src/core/StelCore.cpp:2316
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2513,7 +2521,7 @@ msgid ""
 "em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2285
+#: src/core/StelCore.cpp:2319
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2521,7 +2529,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:2288
+#: src/core/StelCore.cpp:2322
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2529,7 +2537,7 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2291
+#: src/core/StelCore.cpp:2325
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -2538,48 +2546,48 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2294
+#: src/core/StelCore.cpp:2328
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:2297 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2331 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr ""
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2339
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2346
+#: src/core/StelCore.cpp:2380
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2349
+#: src/core/StelCore.cpp:2383
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2352
+#: src/core/StelCore.cpp:2386
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2359
+#: src/core/StelCore.cpp:2393
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2369
+#: src/core/StelCore.cpp:2403
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2371
+#: src/core/StelCore.cpp:2405
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -3221,161 +3229,161 @@ msgstr ""
 msgid "10/10/10 bits"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:137
+#: src/gui/HelpDialog.cpp:140
 msgid "Stellarium Help"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:142 src/gui/HelpDialog.cpp:147
+#: src/gui/HelpDialog.cpp:145 src/gui/HelpDialog.cpp:150
 msgid "Keys"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:144 src/gui/HelpDialog.cpp:233
+#: src/gui/HelpDialog.cpp:147 src/gui/HelpDialog.cpp:236
 msgid "Further Reading"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:151
+#: src/gui/HelpDialog.cpp:154
 msgid "Pan view around the sky"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:152
+#: src/gui/HelpDialog.cpp:155
 msgid "Arrow keys & left mouse drag"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:154
+#: src/gui/HelpDialog.cpp:157
 msgid "Zoom in/out"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:156
+#: src/gui/HelpDialog.cpp:159
 msgid "Page Up/Down"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:158
+#: src/gui/HelpDialog.cpp:161
 msgid "Ctrl+Up/Down"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:161
+#: src/gui/HelpDialog.cpp:164
 msgid "Time dragging"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:162
+#: src/gui/HelpDialog.cpp:165
 msgid "Ctrl & left mouse drag"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:163
+#: src/gui/HelpDialog.cpp:166
 msgid "Time scrolling: minutes"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:164
+#: src/gui/HelpDialog.cpp:167
 msgid "Ctrl & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:165
+#: src/gui/HelpDialog.cpp:168
 msgid "Time scrolling: hours"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:166
+#: src/gui/HelpDialog.cpp:169
 msgid "Ctrl+Shift & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:167
+#: src/gui/HelpDialog.cpp:170
 msgid "Time scrolling: days"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:168
+#: src/gui/HelpDialog.cpp:171
 msgid "Ctrl+Alt & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:169
+#: src/gui/HelpDialog.cpp:172
 msgid "Time scrolling: years"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:170
+#: src/gui/HelpDialog.cpp:173
 msgid "Ctrl+Alt+Shift & mouse wheel"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:173
+#: src/gui/HelpDialog.cpp:176
 msgid "Select object"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:174
+#: src/gui/HelpDialog.cpp:177
 msgid "Left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:177
+#: src/gui/HelpDialog.cpp:180
 msgid "Clear selection"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:179
+#: src/gui/HelpDialog.cpp:182
 msgid "Ctrl & left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:181
+#: src/gui/HelpDialog.cpp:184
 msgid "Right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:184
+#: src/gui/HelpDialog.cpp:187
 msgid "Add custom marker"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:185
+#: src/gui/HelpDialog.cpp:188
 msgid "Shift & left click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:187
+#: src/gui/HelpDialog.cpp:190
 msgid "Delete marker closest to mouse cursor"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:188
+#: src/gui/HelpDialog.cpp:191
 msgid "Shift & right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:190
+#: src/gui/HelpDialog.cpp:193
 msgid "Delete all custom markers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:191
+#: src/gui/HelpDialog.cpp:194
 msgid "Shift & Alt & right click"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:194
+#: src/gui/HelpDialog.cpp:197
 #, qt-format
 msgid ""
 "Below are listed only the actions with assigned keys. Further actions may be "
 "available via the \"%1\" button."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:223
+#: src/gui/HelpDialog.cpp:226
 msgid "Text User Interface (TUI)"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:225
+#: src/gui/HelpDialog.cpp:228
 msgid "Activate TUI"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:234
+#: src/gui/HelpDialog.cpp:237
 msgid ""
 "The following links are external web links, and will launch your web "
 "browser:\n"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:235
+#: src/gui/HelpDialog.cpp:238
 msgid "The Stellarium User Guide"
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:239
+#: src/gui/HelpDialog.cpp:242
 msgid "{Frequently Asked Questions} about Stellarium.  Answers too."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:244
+#: src/gui/HelpDialog.cpp:247
 msgid ""
 "{The Stellarium Wiki} - General information.  You can also find user-"
 "contributed landscapes and scripts here."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:249
+#: src/gui/HelpDialog.cpp:252
 msgid ""
 "{Bug reporting and feature request system} - if something doesn't work "
 "properly or is missing and is not listed in the tracker, you can open bug "
@@ -3383,66 +3391,66 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: src/gui/HelpDialog.cpp:254
+#: src/gui/HelpDialog.cpp:257
 msgid "{Google Groups} - discuss Stellarium with other users."
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:313
+#: src/gui/HelpDialog.cpp:316
 msgid "Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:314
+#: src/gui/HelpDialog.cpp:317
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:315
+#: src/gui/HelpDialog.cpp:318
 #, qt-format
 msgid "Graphic/other designer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:316 src/gui/HelpDialog.cpp:317
-#: src/gui/HelpDialog.cpp:318 src/gui/HelpDialog.cpp:319
-#: src/gui/HelpDialog.cpp:320 src/gui/HelpDialog.cpp:326
-#: src/gui/HelpDialog.cpp:327 src/gui/HelpDialog.cpp:328
-#: src/gui/HelpDialog.cpp:329 src/gui/HelpDialog.cpp:330
-#: src/gui/HelpDialog.cpp:331 src/gui/HelpDialog.cpp:332
-#: src/gui/HelpDialog.cpp:333
+#: src/gui/HelpDialog.cpp:319 src/gui/HelpDialog.cpp:320
+#: src/gui/HelpDialog.cpp:321 src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:323 src/gui/HelpDialog.cpp:329
+#: src/gui/HelpDialog.cpp:330 src/gui/HelpDialog.cpp:331
+#: src/gui/HelpDialog.cpp:332 src/gui/HelpDialog.cpp:333
+#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:336
 #, qt-format
 msgid "Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:321
+#: src/gui/HelpDialog.cpp:324
 #, qt-format
 msgid "Continuous Integration: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:322
+#: src/gui/HelpDialog.cpp:325
 #, qt-format
 msgid "Tester: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:323
+#: src/gui/HelpDialog.cpp:326
 msgid "Former Developers"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:324
+#: src/gui/HelpDialog.cpp:327
 msgid ""
 "Several people have made significant contributions, but are no longer "
 "active. Their work has made a big difference to the project:"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:325
+#: src/gui/HelpDialog.cpp:328
 #, qt-format
 msgid "Doc author/developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:334 src/gui/HelpDialog.cpp:335
+#: src/gui/HelpDialog.cpp:337 src/gui/HelpDialog.cpp:338
 #, qt-format
 msgid "OSX Developer: %1"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:336
+#: src/gui/HelpDialog.cpp:339
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
 #: plugins/Oculars/src/gui/OcularDialog.cpp:435
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:476
@@ -3455,7 +3463,7 @@ msgstr ""
 msgid "Contributors"
 msgstr ""
 
-#: src/gui/HelpDialog.cpp:337
+#: src/gui/HelpDialog.cpp:340
 #, qt-format
 msgid ""
 "Several people have made contributions to the project and their work has "
@@ -9405,12 +9413,12 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1638
 msgid ""
-"Auto-enable atmosphere when selecting a celestial body in the location "
-"window."
+"Auto-enable atmosphere and landscape when selecting a celestial body in the "
+"location window."
 msgstr ""
 
 #: src/ui_configurationDialog.h:1640
-msgid "Auto-enabling for the atmosphere"
+msgid "Auto-enabling for the environment"
 msgstr ""
 
 #: src/ui_configurationDialog.h:1642
