@@ -275,9 +275,10 @@ QString Constellation::getInfoString(const StelCore *core, const InfoStringGroup
 
 	if (flags&Name)
 	{
+		QString shortname = getShortName();
 		oss << "<h2>" << getNameI18n();
-		if (!getShortName().isEmpty())
-			oss << " (" << getShortName() << ")";
+		if (!shortname.isEmpty() && shortname.toInt()==0)
+			oss << " (" << shortname << ")";
 		oss << "</h2>";
 	}
 

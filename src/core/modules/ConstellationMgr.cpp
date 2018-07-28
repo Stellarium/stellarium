@@ -266,11 +266,10 @@ void ConstellationMgr::selectedObjectChange(StelModule::StelModuleSelectAction a
 
 void ConstellationMgr::deselectConstellations(void)
 {
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	Q_ASSERT(omgr);
 	if (getFlagIsolateSelected())
 	{
-		StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-		Q_ASSERT(omgr);
-
 		// The list of selected constellations is empty, but...
 		if (selected.size()==0)
 		{
@@ -296,6 +295,14 @@ void ConstellationMgr::deselectConstellations(void)
 			constellation->setFlagArt(false);
 			constellation->setFlagBoundaries(false);
 		}
+		selected.clear();
+	}
+	else
+	{
+		const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Constellation");
+		if (!newSelectedConst.empty())
+			omgr->unSelect();
+		setSelected(Q_NULLPTR);
 		selected.clear();
 	}
 }
