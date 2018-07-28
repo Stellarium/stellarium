@@ -1,13 +1,15 @@
+READ THIS AND FILL IN THIS TEMPLATE!
+
 Before reporting an issue around graphics artifacts like missing menu buttons, strange colors, Moon not rendered, or similar, 
 *please make absolutely sure* you are running the latest graphics drivers for your graphics card. 
 95% of graphics problems are solved this way.
 
-Before reporting an issue, please *absolutely make sure* to check the closed issues 
+Before reporting an issue, please *absolutely make sure* to check the recent open and also closed issues 
 (https://github.com/Stellarium/stellarium/issues?q=is%3Aissue+is%3Aclosed) 
-whether it has been reported and solved/closed already! Don't report in this case.
+whether it has been reported and solved/closed already! Don't report a new issue in this case, you may join the discussion.
 
-Also look into the wiki (https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version 
-and https://github.com/Stellarium/stellarium/wiki/FAQ) 
+Also look into the wiki https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version 
+and FAQ https://github.com/Stellarium/stellarium/wiki/FAQ 
 and check if you are attempting to report a known issue. Don't report in this case.
 
 Also look into the User Guide before reporting unexpected but correct behaviour. Don't report in this case.
@@ -16,7 +18,8 @@ If you want to report a feature wish, delete these template lines above and belo
 
 If you want to report a bug, please make sure to update and verify the bug still exists in the current version. 
 In this case please also check current beta builds from http://stellarium.org
-If bug still persists, delete text above down to and including this line and fill in:
+
+If the bug still persists, give your issue a clear, short title, delete text above down to and including this line and fill in:
 
 ### Expected Behaviour
 
