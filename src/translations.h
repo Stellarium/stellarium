@@ -474,6 +474,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Mongolian");
 		// TRANSLATORS: Name of the sky culture
+		N_("Lokono");
+		// TRANSLATORS: Name of the sky culture
 		N_("Navajo");
 		// TRANSLATORS: Name of the sky culture
 		N_("Norse");
