@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-28 20:02+0700\n"
+"POT-Creation-Date: 2018-07-29 00:28+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
-#: src/core/modules/Constellation.cpp:285
+#: src/core/modules/Constellation.cpp:286
 #: src/core/modules/NomenclatureItem.cpp:780 src/core/modules/Nebula.cpp:245
 #: src/core/modules/Nebula.cpp:247 src/core/modules/Planet.cpp:422
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
@@ -74,7 +74,7 @@ msgstr ""
 msgid "Ray helpers"
 msgstr ""
 
-#: src/core/modules/Constellation.cpp:285
+#: src/core/modules/Constellation.cpp:286
 msgid "constellation"
 msgstr ""
 
@@ -409,7 +409,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:886 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
-#: plugins/Oculars/src/gui/OcularDialog.cpp:434
+#: plugins/Oculars/src/gui/OcularDialog.cpp:435
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:225
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
@@ -2935,7 +2935,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1021 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+#: plugins/Oculars/src/gui/OcularDialog.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:223
@@ -2958,7 +2958,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1022 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
-#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+#: plugins/Oculars/src/gui/OcularDialog.cpp:434
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:473
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:260
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
@@ -3208,7 +3208,7 @@ msgid "24-hour format"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1645 src/ui_configurationDialog.h:1461
-#: plugins/Oculars/src/Oculars.cpp:2364
+#: plugins/Oculars/src/Oculars.cpp:2356
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr ""
@@ -3452,7 +3452,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:339
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:96
-#: plugins/Oculars/src/gui/OcularDialog.cpp:435
+#: plugins/Oculars/src/gui/OcularDialog.cpp:436
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:476
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:264
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:226
@@ -6304,10 +6304,10 @@ msgstr ""
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:661 plugins/Oculars/src/ui_ocularDialog.h:1215
-#: plugins/Oculars/src/ui_ocularDialog.h:1224
-#: plugins/Oculars/src/ui_ocularDialog.h:1230
-#: plugins/Oculars/src/ui_ocularDialog.h:1248
+#: src/translations.h:661 plugins/Oculars/src/ui_ocularDialog.h:1222
+#: plugins/Oculars/src/ui_ocularDialog.h:1231
+#: plugins/Oculars/src/ui_ocularDialog.h:1237
+#: plugins/Oculars/src/ui_ocularDialog.h:1255
 msgid "Delete"
 msgstr ""
 
@@ -10422,7 +10422,7 @@ msgid ""
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:498
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:513
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:232
@@ -10443,7 +10443,7 @@ msgid "Links"
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:106
-#: plugins/Oculars/src/gui/OcularDialog.cpp:498
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:514
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:278
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:233
@@ -10467,7 +10467,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/gui/OcularDialog.cpp:502
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:517
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -10489,7 +10489,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
-#: plugins/Oculars/src/gui/OcularDialog.cpp:503
+#: plugins/Oculars/src/gui/OcularDialog.cpp:504
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:519
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -10511,7 +10511,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:113
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:521
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -10594,7 +10594,7 @@ msgid "Restore default settings"
 msgstr ""
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1256
+#: plugins/Oculars/src/ui_ocularDialog.h:1263
 #: plugins/Satellites/src/ui_satellitesDialog.h:843
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -10629,9 +10629,9 @@ msgstr ""
 msgid "Compass marks"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1507
+#: plugins/Oculars/src/Oculars.cpp:84 plugins/Oculars/src/Oculars.cpp:1513
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:191
-#: plugins/Oculars/src/ui_ocularDialog.h:1176
+#: plugins/Oculars/src/ui_ocularDialog.h:1182
 msgid "Oculars"
 msgstr ""
 
@@ -10642,221 +10642,221 @@ msgid ""
 "frame and a Telrad sight."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1008
+#: plugins/Oculars/src/Oculars.cpp:1014
 msgid "Please select an object before switching to ocular view."
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1104
+#: plugins/Oculars/src/Oculars.cpp:1110
 msgid "&Previous ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1105
+#: plugins/Oculars/src/Oculars.cpp:1111
 msgid "&Next ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1106
+#: plugins/Oculars/src/Oculars.cpp:1112
 msgid "Select &ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1149
+#: plugins/Oculars/src/Oculars.cpp:1155
 msgid "Toggle &crosshair"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1159
+#: plugins/Oculars/src/Oculars.cpp:1165
 msgid "Configure &Oculars"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1168
+#: plugins/Oculars/src/Oculars.cpp:1174
 msgid "Toggle &CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1176
+#: plugins/Oculars/src/Oculars.cpp:1182
 msgid "Toggle &Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1185
+#: plugins/Oculars/src/Oculars.cpp:1191
 msgid "&Previous CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1186
+#: plugins/Oculars/src/Oculars.cpp:1192
 msgid "&Next CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1187
+#: plugins/Oculars/src/Oculars.cpp:1193
 msgid "&Select CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1209
+#: plugins/Oculars/src/Oculars.cpp:1215
 msgid "&Rotate CCD"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1231
+#: plugins/Oculars/src/Oculars.cpp:1237
 msgid "&Reset rotation"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1508
-#: plugins/Oculars/src/ui_ocularDialog.h:1193
+#: plugins/Oculars/src/Oculars.cpp:1514
+#: plugins/Oculars/src/ui_ocularDialog.h:1200
 msgid "Ocular view"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1523
+#: plugins/Oculars/src/Oculars.cpp:1515
 msgid "Oculars popup menu"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1524
+#: plugins/Oculars/src/Oculars.cpp:1516
 msgid "Show crosshairs"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1525
+#: plugins/Oculars/src/Oculars.cpp:1517
 msgid "Image sensor frame"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1526
+#: plugins/Oculars/src/Oculars.cpp:1518
 msgid "Telrad sight"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1527
+#: plugins/Oculars/src/Oculars.cpp:1519
 msgid "Oculars plugin configuration"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1529
+#: plugins/Oculars/src/Oculars.cpp:1521
 msgid "Select next telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1531
+#: plugins/Oculars/src/Oculars.cpp:1523
 msgid "Select previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1533
+#: plugins/Oculars/src/Oculars.cpp:1525
 msgid "Select next eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1535
+#: plugins/Oculars/src/Oculars.cpp:1527
 msgid "Select previous eyepiece"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1720
+#: plugins/Oculars/src/Oculars.cpp:1712
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
 msgstr ""
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
-#: plugins/Oculars/src/Oculars.cpp:1728
+#: plugins/Oculars/src/Oculars.cpp:1720
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:697
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:806
 msgid "\"/px"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1917
+#: plugins/Oculars/src/Oculars.cpp:1909
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:498
 msgid "Ocular"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1919
+#: plugins/Oculars/src/Oculars.cpp:1911
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:500
 msgid "Binocular"
 msgstr ""
 
 #. TRANSLATORS: FL = Focal length
-#: plugins/Oculars/src/Oculars.cpp:1939
+#: plugins/Oculars/src/Oculars.cpp:1931
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:543
 #, qt-format
 msgid "Ocular FL: %1 mm"
 msgstr ""
 
 #. TRANSLATORS: aFOV = apparent field of view
-#: plugins/Oculars/src/Oculars.cpp:1946
+#: plugins/Oculars/src/Oculars.cpp:1938
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 #, qt-format
 msgid "Ocular aFOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1957
+#: plugins/Oculars/src/Oculars.cpp:1949
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
 #, qt-format
 msgid "Lens #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1961
+#: plugins/Oculars/src/Oculars.cpp:1953
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:586
 #, qt-format
 msgid "Lens #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1966
+#: plugins/Oculars/src/Oculars.cpp:1958
 msgid "Lens: none"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1981 plugins/Oculars/src/Oculars.cpp:2041
+#: plugins/Oculars/src/Oculars.cpp:1973 plugins/Oculars/src/Oculars.cpp:2033
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:757
 #, qt-format
 msgid "Telescope #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1990
+#: plugins/Oculars/src/Oculars.cpp:1982
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:851
 #, qt-format
 msgid "Magnification: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:1997
+#: plugins/Oculars/src/Oculars.cpp:1989
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:862
 #, qt-format
 msgid "Exit pupil: %1 mm"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2004
+#: plugins/Oculars/src/Oculars.cpp:1996
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:870
 #, qt-format
 msgid "FOV: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2025
+#: plugins/Oculars/src/Oculars.cpp:2017
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:690
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:801
 #, qt-format
 msgid "Dimensions: %1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2029
+#: plugins/Oculars/src/Oculars.cpp:2021
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:650
 #, qt-format
 msgid "Sensor #%1"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2033
+#: plugins/Oculars/src/Oculars.cpp:2025
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:654
 #, qt-format
 msgid "Sensor #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2046
+#: plugins/Oculars/src/Oculars.cpp:2038
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:761
 #, qt-format
 msgid "Telescope #%1: %2"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2360
+#: plugins/Oculars/src/Oculars.cpp:2352
 msgid "&Lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2361
+#: plugins/Oculars/src/Oculars.cpp:2353
 msgid "&Previous lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2362
+#: plugins/Oculars/src/Oculars.cpp:2354
 msgid "&Next lens"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2392
+#: plugins/Oculars/src/Oculars.cpp:2384
 msgid "&Telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2393
+#: plugins/Oculars/src/Oculars.cpp:2385
 msgid "&Previous telescope"
 msgstr ""
 
-#: plugins/Oculars/src/Oculars.cpp:2394
+#: plugins/Oculars/src/Oculars.cpp:2386
 msgid "&Next telescope"
 msgstr ""
 
@@ -11055,49 +11055,49 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:410
+#: plugins/Oculars/src/gui/OcularDialog.cpp:411
 msgid "tFOV:"
 msgstr ""
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:412
+#: plugins/Oculars/src/gui/OcularDialog.cpp:413
 msgid "Magnification factor:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:413
-#: plugins/Oculars/src/ui_ocularDialog.h:1251
+#: plugins/Oculars/src/gui/OcularDialog.cpp:414
+#: plugins/Oculars/src/ui_ocularDialog.h:1258
 msgid "Diameter:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
-#: plugins/Oculars/src/ui_ocularDialog.h:1217
+#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/ui_ocularDialog.h:1224
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:418
-#: plugins/Oculars/src/ui_ocularDialog.h:1218
-#: plugins/Oculars/src/ui_ocularDialog.h:1250
+#: plugins/Oculars/src/gui/OcularDialog.cpp:419
+#: plugins/Oculars/src/ui_ocularDialog.h:1225
+#: plugins/Oculars/src/ui_ocularDialog.h:1257
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:419
-#: plugins/Oculars/src/ui_ocularDialog.h:1219
+#: plugins/Oculars/src/gui/OcularDialog.cpp:420
+#: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:431
+#: plugins/Oculars/src/gui/OcularDialog.cpp:432
 msgid "Oculars Plug-in"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:436
+#: plugins/Oculars/src/gui/OcularDialog.cpp:437
 msgid "Barlow lens feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:443
+#: plugins/Oculars/src/gui/OcularDialog.cpp:444
 msgid "Overview"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:446
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -11105,42 +11105,42 @@ msgid ""
 "will populate some samples to get your started."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:446
+#: plugins/Oculars/src/gui/OcularDialog.cpp:447
 msgid "You can choose to scale the image you see on the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:447
+#: plugins/Oculars/src/gui/OcularDialog.cpp:448
 msgid ""
 "This is intended to show you a better comparison of what one eyepiece/"
 "telescope combination will be like when compared to another."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:448
+#: plugins/Oculars/src/gui/OcularDialog.cpp:449
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:449
+#: plugins/Oculars/src/gui/OcularDialog.cpp:450
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+#: plugins/Oculars/src/gui/OcularDialog.cpp:451
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:451
+#: plugins/Oculars/src/gui/OcularDialog.cpp:452
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:452
+#: plugins/Oculars/src/gui/OcularDialog.cpp:453
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -11149,254 +11149,258 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:453
+#: plugins/Oculars/src/gui/OcularDialog.cpp:454
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:456
+#: plugins/Oculars/src/gui/OcularDialog.cpp:457
 msgid "Hot Keys"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:457
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:471
-#: plugins/Oculars/src/gui/OcularDialog.cpp:476
+#: plugins/Oculars/src/gui/OcularDialog.cpp:472
+#: plugins/Oculars/src/gui/OcularDialog.cpp:477
 msgid "[no key defined]"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:480
+#: plugins/Oculars/src/gui/OcularDialog.cpp:481
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:484
+#: plugins/Oculars/src/gui/OcularDialog.cpp:485
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:488
+#: plugins/Oculars/src/gui/OcularDialog.cpp:489
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:492
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1178
+#: plugins/Oculars/src/ui_ocularDialog.h:1184
 msgid "Interface"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1182
+#: plugins/Oculars/src/ui_ocularDialog.h:1188
 msgid "Arrow button scale (requires restart)"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1183
+#: plugins/Oculars/src/ui_ocularDialog.h:1189
 msgid "Show resolution criteria"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1184
+#: plugins/Oculars/src/ui_ocularDialog.h:1190
 msgid "On-screen control panel"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1186
+#: plugins/Oculars/src/ui_ocularDialog.h:1192
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1188
+#: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Restore FOV to initial values"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1190
+#: plugins/Oculars/src/ui_ocularDialog.h:1196
 msgid ""
 "Mark it if you want the direction value the same like at the startup of "
 "Stellarium."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1192
+#: plugins/Oculars/src/ui_ocularDialog.h:1198
 msgid "Restore direction to initial values"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1194
+#: plugins/Oculars/src/ui_ocularDialog.h:1199
+msgid "Show oculars button on toolbar"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1201
 msgid "Scale image circle"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1195
+#: plugins/Oculars/src/ui_ocularDialog.h:1202
 msgid "Hide grids and lines when enabled"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1197
+#: plugins/Oculars/src/ui_ocularDialog.h:1204
 msgid "Apply limits stellar magnitude for different apertures of telescopes"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1199
+#: plugins/Oculars/src/ui_ocularDialog.h:1206
 msgid "Limit stellar magnitude"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1200
+#: plugins/Oculars/src/ui_ocularDialog.h:1207
 msgid "Enable only if an object is selected"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1202
+#: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "In ocular mode, allow some visibility outside ocular circle."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1204
+#: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Use semi-transparent mask"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1205
+#: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Sensor view"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1206
+#: plugins/Oculars/src/ui_ocularDialog.h:1213
 msgid "Use degrees and minutes for FOV of CCD"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1208
+#: plugins/Oculars/src/ui_ocularDialog.h:1215
 msgid ""
 "Enable automatic switch of mount type from the telescope settings for "
 "horizontal orientation of CCD frame."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1210
+#: plugins/Oculars/src/ui_ocularDialog.h:1217
 msgid "Enable automatic switch of mount type"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1211
+#: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Telrad view"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1212
+#: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Enable scaling FOV for Telrad"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1213
+#: plugins/Oculars/src/ui_ocularDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1214
-#: plugins/Oculars/src/ui_ocularDialog.h:1223
-#: plugins/Oculars/src/ui_ocularDialog.h:1229
-#: plugins/Oculars/src/ui_ocularDialog.h:1247
+#: plugins/Oculars/src/ui_ocularDialog.h:1221
+#: plugins/Oculars/src/ui_ocularDialog.h:1230
+#: plugins/Oculars/src/ui_ocularDialog.h:1236
+#: plugins/Oculars/src/ui_ocularDialog.h:1254
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1216
-#: plugins/Oculars/src/ui_ocularDialog.h:1225
-#: plugins/Oculars/src/ui_ocularDialog.h:1231
-#: plugins/Oculars/src/ui_ocularDialog.h:1249
+#: plugins/Oculars/src/ui_ocularDialog.h:1223
+#: plugins/Oculars/src/ui_ocularDialog.h:1232
+#: plugins/Oculars/src/ui_ocularDialog.h:1238
+#: plugins/Oculars/src/ui_ocularDialog.h:1256
 #: plugins/Satellites/src/ui_satellitesDialog.h:805
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
 msgid "Name:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1220
+#: plugins/Oculars/src/ui_ocularDialog.h:1227
 msgid "Binoculars"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1221
+#: plugins/Oculars/src/ui_ocularDialog.h:1228
 msgid "Has permanent cross-hairs"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1222
+#: plugins/Oculars/src/ui_ocularDialog.h:1229
 msgid "Eyepieces"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1226
+#: plugins/Oculars/src/ui_ocularDialog.h:1233
 msgid "Multiplier:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1227
+#: plugins/Oculars/src/ui_ocularDialog.h:1234
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1228
+#: plugins/Oculars/src/ui_ocularDialog.h:1235
 msgid "Lenses"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1232
+#: plugins/Oculars/src/ui_ocularDialog.h:1239
 msgid "Resolution x (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1233
+#: plugins/Oculars/src/ui_ocularDialog.h:1240
 msgid "Resolution y (pixels):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1234
+#: plugins/Oculars/src/ui_ocularDialog.h:1241
 msgid "Chip height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1235
+#: plugins/Oculars/src/ui_ocularDialog.h:1242
 msgid "Chip width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1236
+#: plugins/Oculars/src/ui_ocularDialog.h:1243
 msgid "Pixel width (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1237
+#: plugins/Oculars/src/ui_ocularDialog.h:1244
 msgid "Pixel height (micron):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1238
+#: plugins/Oculars/src/ui_ocularDialog.h:1245
 msgid "Prism/CCD distance (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1239
+#: plugins/Oculars/src/ui_ocularDialog.h:1246
 msgid "Prism/CCD height (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1240
+#: plugins/Oculars/src/ui_ocularDialog.h:1247
 msgid "Prism/CCD width (mm):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1241
+#: plugins/Oculars/src/ui_ocularDialog.h:1248
 msgid "Position angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1242
+#: plugins/Oculars/src/ui_ocularDialog.h:1249
 msgid "Off-Axis guider"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1243
+#: plugins/Oculars/src/ui_ocularDialog.h:1250
 msgid "Rotation Angle (degrees):"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1244
+#: plugins/Oculars/src/ui_ocularDialog.h:1251
 msgid "Binning x:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1245
+#: plugins/Oculars/src/ui_ocularDialog.h:1252
 msgid "Binning y:"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1246
+#: plugins/Oculars/src/ui_ocularDialog.h:1253
 msgid "Sensors"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1252
+#: plugins/Oculars/src/ui_ocularDialog.h:1259
 msgid "Horizontal flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1253
+#: plugins/Oculars/src/ui_ocularDialog.h:1260
 msgid "Vertical flip"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1254
+#: plugins/Oculars/src/ui_ocularDialog.h:1261
 msgid "Equatorial Mount"
 msgstr ""
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1255
+#: plugins/Oculars/src/ui_ocularDialog.h:1262
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"

@@ -97,80 +97,81 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 #pragma mark Instance Methods
 #endif
 /* ****************************************************************************************************************** */
-Oculars::Oculars():
-	selectedCCDIndex(-1),
-	selectedOcularIndex(-1),
-	selectedTelescopeIndex(-1),
-	selectedLensIndex(-1),
-	selectedCCDRotationAngle(0.0),
-	arrowButtonScale(1.5),
-	flagShowCCD(false),
-	flagShowOculars(false),
-	flagShowCrosshairs(false),
-	flagShowTelrad(false),
-	usageMessageLabelID(-1),
-	flagCardinalPointsMain(false),
-	flagAdaptationMain(false),
-	flagLimitStarsMain(false),
-	magLimitStarsMain(0.0),
-	flagLimitDSOsMain(false),
-	magLimitDSOsMain(0.0),
-	flagLimitPlanetsMain(false),
-	magLimitPlanetsMain(0.0),
-	relativeStarScaleMain(1.0),
-	absoluteStarScaleMain(1.0),
-	relativeStarScaleOculars(1.0),
-	absoluteStarScaleOculars(1.0),
-	relativeStarScaleCCD(1.0),
-	absoluteStarScaleCCD(1.0),
-	flagMoonScaleMain(false),
-	flagMinorBodiesScaleMain(false),
-	maxEyepieceAngle(0.0),
-	flagRequireSelection(true),
-	flagLimitMagnitude(false),
-	flagScaleImageCircle(true),
-	flagGuiPanelEnabled(false),
-	flagDMSDegrees(false),
-	flagSemiTransparency(false),
-	flagHideGridsLines(false),
-	flagGridLinesDisplayedMain(true),
-	flagConstellationLinesMain(true),
-	flagConstellationBoundariesMain(true),
-	flagAsterismLinesMain(true),
-	flagRayHelpersLinesMain(true),
-	flipVertMain(false),
-	flipHorzMain(false),
-	ccdRotationSignalMapper(Q_NULLPTR),
-	ccdsSignalMapper(Q_NULLPTR),
-	ocularsSignalMapper(Q_NULLPTR),
-	telescopesSignalMapper(Q_NULLPTR),
-	lensesSignalMapper(Q_NULLPTR),
-	pxmapGlow(Q_NULLPTR),
-	pxmapOnIcon(Q_NULLPTR),
-	pxmapOffIcon(Q_NULLPTR),
-	toolbarButton(Q_NULLPTR),
-	ocularDialog(Q_NULLPTR),
-	ready(false),
-	actionShowOcular(Q_NULLPTR),
-	actionShowCrosshairs(Q_NULLPTR),
-	actionShowSensor(Q_NULLPTR),
-	actionShowTelrad(Q_NULLPTR),
-	actionConfiguration(Q_NULLPTR),
-	actionMenu(Q_NULLPTR),
-	actionTelescopeIncrement(Q_NULLPTR),
-	actionTelescopeDecrement(Q_NULLPTR),
-	actionOcularIncrement(Q_NULLPTR),
-	actionOcularDecrement(Q_NULLPTR),
-	guiPanel(Q_NULLPTR),
-	actualFOV(0.),
-	initialFOV(0.),
-	flagInitFOVUsage(false),
-	flagInitDirectionUsage(false),
-	flagAutosetMountForCCD(false),
-	flagScalingFOVForTelrad(false),
-	flagShowResolutionCriterions(false),
-	equatorialMountEnabledMain(false),
-	reticleRotation(0.)
+Oculars::Oculars()
+	: selectedCCDIndex(-1)
+	, selectedOcularIndex(-1)
+	, selectedTelescopeIndex(-1)
+	, selectedLensIndex(-1)
+	, selectedCCDRotationAngle(0.0)
+	, arrowButtonScale(1.5)
+	, flagShowCCD(false)
+	, flagShowOculars(false)
+	, flagShowCrosshairs(false)
+	, flagShowTelrad(false)
+	, usageMessageLabelID(-1)
+	, flagCardinalPointsMain(false)
+	, flagAdaptationMain(false)
+	, flagLimitStarsMain(false)
+	, magLimitStarsMain(0.0)
+	, flagLimitDSOsMain(false)
+	, magLimitDSOsMain(0.0)
+	, flagLimitPlanetsMain(false)
+	, magLimitPlanetsMain(0.0)
+	, relativeStarScaleMain(1.0)
+	, absoluteStarScaleMain(1.0)
+	, relativeStarScaleOculars(1.0)
+	, absoluteStarScaleOculars(1.0)
+	, relativeStarScaleCCD(1.0)
+	, absoluteStarScaleCCD(1.0)
+	, flagMoonScaleMain(false)
+	, flagMinorBodiesScaleMain(false)
+	, maxEyepieceAngle(0.0)
+	, flagRequireSelection(true)
+	, flagLimitMagnitude(false)
+	, flagScaleImageCircle(true)
+	, flagGuiPanelEnabled(false)
+	, flagDMSDegrees(false)
+	, flagSemiTransparency(false)
+	, flagHideGridsLines(false)
+	, flagGridLinesDisplayedMain(true)
+	, flagConstellationLinesMain(true)
+	, flagConstellationBoundariesMain(true)
+	, flagAsterismLinesMain(true)
+	, flagRayHelpersLinesMain(true)
+	, flipVertMain(false)
+	, flipHorzMain(false)
+	, ccdRotationSignalMapper(Q_NULLPTR)
+	, ccdsSignalMapper(Q_NULLPTR)
+	, ocularsSignalMapper(Q_NULLPTR)
+	, telescopesSignalMapper(Q_NULLPTR)
+	, lensesSignalMapper(Q_NULLPTR)
+	, pxmapGlow(Q_NULLPTR)
+	, pxmapOnIcon(Q_NULLPTR)
+	, pxmapOffIcon(Q_NULLPTR)
+	, toolbarButton(Q_NULLPTR)
+	, flagShowOcularsButton(false)
+	, ocularDialog(Q_NULLPTR)
+	, ready(false)
+	, actionShowOcular(Q_NULLPTR)
+	, actionShowCrosshairs(Q_NULLPTR)
+	, actionShowSensor(Q_NULLPTR)
+	, actionShowTelrad(Q_NULLPTR)
+	, actionConfiguration(Q_NULLPTR)
+	, actionMenu(Q_NULLPTR)
+	, actionTelescopeIncrement(Q_NULLPTR)
+	, actionTelescopeDecrement(Q_NULLPTR)
+	, actionOcularIncrement(Q_NULLPTR)
+	, actionOcularDecrement(Q_NULLPTR)
+	, guiPanel(Q_NULLPTR)
+	, actualFOV(0.)
+	, initialFOV(0.)
+	, flagInitFOVUsage(false)
+	, flagInitDirectionUsage(false)
+	, flagAutosetMountForCCD(false)
+	, flagScalingFOVForTelrad(false)
+	, flagShowResolutionCriterions(false)
+	, equatorialMountEnabledMain(false)
+	, reticleRotation(0.)
 {
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
@@ -693,6 +694,10 @@ void Oculars::init()
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 		}
 
+		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
+		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
+		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
+
 		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lenses);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
@@ -710,6 +715,7 @@ void Oculars::init()
 		setFlagScalingFOVForTelrad(settings->value("use_telrad_fov_scaling", true).toBool());
 		setFlagShowResolutionCriterions(settings->value("show_resolution_criterions", false).toBool());
 		setArrowButtonScale(settings->value("arrow_scale", 1.5).toDouble());
+		setFlagShowOcularsButton(settings->value("show_toolbar_button", false).toBool());
 		relativeStarScaleOculars=settings->value("stars_scale_relative", 1.0).toDouble();
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
@@ -822,7 +828,7 @@ void Oculars::enableGuiPanel(bool enable)
 		{
 			guiPanel->hide();
 			delete guiPanel;
-			guiPanel = 0;
+			guiPanel = Q_NULLPTR;
 		}
 	}
 	flagGuiPanelEnabled = enable;
@@ -840,7 +846,7 @@ void Oculars::retranslateGui()
 		// Delete and re-create the panel to retranslate its trings
 		guiPanel->hide();
 		delete guiPanel;
-		guiPanel = 0;
+		guiPanel = Q_NULLPTR;
 		
 		StelApp& app = StelApp::getInstance();
 		StelGui* gui = dynamic_cast<StelGui*>(app.getGui());
@@ -1505,21 +1511,7 @@ void Oculars::initializeActivationActions()
 	Q_ASSERT(gui);
 
 	QString ocularsGroup = N_("Oculars");
-	actionShowOcular = addAction("actionShow_Ocular", ocularsGroup, N_("Ocular view"), "enableOcular", "Ctrl+O");
-	// Make a toolbar button
-	try
-	{
-		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
-		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
-		pxmapOffIcon = new QPixmap(":/ocular/bt_ocular_off.png");
-		toolbarButton = new StelButton(Q_NULLPTR, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Ocular");
-		gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
-	}
-	catch (std::runtime_error& e)
-	{
-		qWarning() << "WARNING: unable create toolbar button for Oculars plugin: " << e.what();
-	}
-
+	actionShowOcular     = addAction("actionShow_Ocular",                ocularsGroup, N_("Ocular view"), "enableOcular", "Ctrl+O");
 	actionMenu           = addAction("actionShow_Ocular_Menu",           ocularsGroup, N_("Oculars popup menu"), "displayPopupMenu()", "Alt+O");
 	actionShowCrosshairs = addAction("actionShow_Ocular_Crosshairs",     ocularsGroup, N_("Show crosshairs"),    "enableCrosshairs", "Alt+C");
 	actionShowSensor     = addAction("actionShow_Sensor",                ocularsGroup, N_("Image sensor frame"), "enableCCD");
@@ -2622,4 +2614,27 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 	}
 
 	return stringFovX + QChar(0x00D7) + stringFovY;
+}
+
+// Define whether the button toggling eyepieces should be visible
+void Oculars::setFlagShowOcularsButton(bool b)
+{
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui!=Q_NULLPTR)
+	{
+		if (b==true) {
+			if (toolbarButton==Q_NULLPTR) {
+				// Create the pulsars button
+				toolbarButton = new StelButton(Q_NULLPTR, *pxmapOnIcon, *pxmapOffIcon, *pxmapGlow, "actionShow_Ocular");
+			}
+			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
+		} else {
+			gui->getButtonBar()->hideButton("actionShow_Ocular");
+		}
+	}
+	flagShowOcularsButton = b;
+	settings->setValue("show_toolbar_button", b);
+	settings->sync();
+
+	emit flagShowOcularsButtonChanged(b);
 }

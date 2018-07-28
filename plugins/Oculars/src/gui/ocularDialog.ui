@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>574</width>
-    <height>550</height>
+    <width>617</width>
+    <height>677</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -257,6 +257,13 @@
                </property>
                <property name="text">
                 <string>Restore direction to initial values</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="checkBoxToolbarButton">
+               <property name="text">
+                <string>Show oculars button on toolbar</string>
                </property>
               </widget>
              </item>

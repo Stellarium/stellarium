@@ -100,6 +100,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagDMSDegrees         READ getFlagDMSDegrees          WRITE setFlagDMSDegrees          NOTIFY flagDMSDegreesChanged)
 	Q_PROPERTY(bool flagAutosetMountForCCD READ getFlagAutosetMountForCCD  WRITE setFlagAutosetMountForCCD  NOTIFY flagAutosetMountForCCDChanged)
 	Q_PROPERTY(bool flagScalingFOVForTelrad	READ getFlagScalingFOVForTelrad  WRITE setFlagScalingFOVForTelrad  NOTIFY flagScalingFOVForTelradChanged)
+	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
 
@@ -219,6 +220,10 @@ public slots:
 	void setFlagScaleImageCircle(bool state);
 	bool getFlagScaleImageCircle(void) const { return flagScaleImageCircle;}
 
+	//! Define whether the button toggling eyepieces should be visible
+	void setFlagShowOcularsButton(bool b);
+	bool getFlagShowOcularsButton(void) { return flagShowOcularsButton; }
+
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -243,6 +248,7 @@ signals:
 	void flagLimitMagnitudeChanged(bool value);
 	void flagDMSDegreesChanged(bool value);
 	void flagScaleImageCircleChanged(bool value);
+	void flagShowOcularsButtonChanged(bool value);
 
 private slots:
 	//! Signifies a change in ocular or telescope.  Sets new zoom level.
@@ -372,6 +378,7 @@ private:
 	QPixmap * pxmapOnIcon;
 	QPixmap * pxmapOffIcon;
 	StelButton * toolbarButton;
+	bool flagShowOcularsButton;
 
 	OcularDialog *ocularDialog;
 	bool ready; //!< A flag that determines that this module is usable.  If false, we won't open.

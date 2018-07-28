@@ -300,6 +300,7 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxDMSDegrees,            "Oculars.flagDMSDegrees");
 	connectBoolProperty(ui->checkBoxTypeOfMount,           "Oculars.flagAutosetMountForCCD");
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,      "Oculars.flagScalingFOVForTelrad");
+	connectBoolProperty(ui->checkBoxToolbarButton,         "Oculars.flagShowOcularsButton");
 	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox, "Oculars.arrowButtonScale");
 
 	// The add & delete buttons
