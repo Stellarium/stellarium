@@ -26,6 +26,7 @@
 // V2.8 2018-02-02  ... and back again to direct cardinal orientation: Apply skybox rotation in Unity5!
 // V2.9 2018-06-21  We can read an environment variable STEL_SKYBOX_DIR now which is the path to storage. Likewise, names/directories can be changed by other environment variables.
 //                  You need to enable storing to absolute paths in the [scripts] section of config.ini.
+// V2.10 2018-07-29 Include diameters on Sun and Moon.
 
 // Not finding this environment variable sets DIR to empty string to make storage into default image dir, i.e., "C:/Users/YOU/Pictures/Stellarium"
 DIR=core.getEnv("STEL_SKYBOX_DIR");
@@ -149,6 +150,7 @@ core.output("Sun Altitude: "      + sunMap["altitude"]);
 core.output("Sun Magnitude: "     + sunMap["vmag"]);
 core.output("Sun Magnitude (after extinction): " + sunMap["vmage"]);
 core.output("Sun Longitude: "     + sunMap["elong"]);
+core.output("Sun Size: "          + sunMap["size-dd"]);
 moonMap=core.getObjectInfo("Moon");
 core.output("Moon Azimuth: "      + moonMap["azimuth"]);
 core.output("Moon Altitude: "     + moonMap["altitude"]);
@@ -158,6 +160,7 @@ core.output("Moon illumination: " + moonMap["illumination"]);
 core.output("Moon Magnitude: "    + moonMap["vmag"]);
 core.output("Moon Magnitude (after extinction): " + moonMap["vmage"]);
 core.output("Moon Longitude: "    + moonMap["elong"]);
+core.output("Moon Size: "         + moonMap["size-dd"]);
 venusMap=core.getObjectInfo("Venus");
 core.output("Venus Azimuth: "     + venusMap["azimuth"]);
 core.output("Venus Altitude: "    + venusMap["altitude"]);
