@@ -1008,7 +1008,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 				openGLerror=true;
 				qDebug() << "This is not enough: we need DirectX9 with vs_2_0 and ps_3_0 or later.";
 				qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
-				qDebug() << "Else, please try to use an older version like 0.12.5, and try with --safe-mode";
+				qDebug() << "Else, please try to use an older version like 0.12.9, and try with --safe-mode";
 
 				if (conf->value("main/ignore_opengl_warning", false).toBool())
 				{
@@ -1059,7 +1059,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 				openGLerror=true;
 				qDebug() << "This is not enough: we need Mesa 10.0 or later.";
 				qDebug() << "You should update graphics drivers or graphics hardware.";
-				qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
+				qDebug() << "Else, please try to use an older version like 0.12.9, and try there with --safe-mode";
 
 				if (conf->value("main/ignore_opengl_warning", false).toBool())
 				{
@@ -1114,8 +1114,12 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL1.30 or later.";
+			#ifdef Q_OS_WIN
 			qDebug() << "You should update graphics drivers, graphics hardware, or use the --mesa-mode option.";
-			qDebug() << "Else, please try to use an older version like 0.12.5, and try there with --safe-mode";
+			#else
+			qDebug() << "You should update graphics drivers or graphics hardware.";
+			#endif
+			qDebug() << "Else, please try to use an older version like 0.12.9, and try there with --safe-mode";
 
 			if (conf->value("main/ignore_opengl_warning", false).toBool())
 			{
