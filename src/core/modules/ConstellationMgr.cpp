@@ -302,9 +302,10 @@ void ConstellationMgr::deselectConstellations(void)
 		const QList<StelObjectP> newSelectedConst = omgr->getSelectedObject("Constellation");
 		if (!newSelectedConst.empty())
 			omgr->unSelect();
-		setSelected(Q_NULLPTR);
+
 		selected.clear();
 	}
+
 }
 
 void ConstellationMgr::setLinesColor(const Vec3f& color)
