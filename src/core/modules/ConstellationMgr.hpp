@@ -272,6 +272,9 @@ public slots:
 	//! Remove constellations from selected objects
 	void deselectConstellations(void);
 
+	//! Select all constellations
+	void selectAllConstellations(void);
+
 signals:
 	void artDisplayedChanged(const bool displayed) const;
 	void artFadeDurationChanged(const float duration) const;
