@@ -446,6 +446,8 @@ bool Supernovae::checkJsonFileFormat() const
 	{
 		map = StelJsonParser::parse(&sneJsonFile).toMap();
 		sneJsonFile.close();
+		if (map.isEmpty())
+			return false;
 	}
 	catch (std::runtime_error& e)
 	{

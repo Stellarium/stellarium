@@ -503,6 +503,8 @@ bool Quasars::checkJsonFileFormat()
 	{
 		map = StelJsonParser::parse(&catalogJsonFile).toMap();
 		catalogJsonFile.close();
+		if (map.isEmpty())
+			return false;
 	}
 	catch (std::runtime_error& e)
 	{

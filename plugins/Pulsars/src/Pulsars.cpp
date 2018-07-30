@@ -535,8 +535,10 @@ bool Pulsars::checkJsonFileFormat()
 	QVariantMap map;
 	try
 	{
-		map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();
+		map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();		
 		jsonPSRCatalogFile.close();
+		if (map.isEmpty())
+			return false;
 	}
 	catch (std::runtime_error& e)
 	{

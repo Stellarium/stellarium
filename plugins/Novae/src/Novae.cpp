@@ -486,6 +486,8 @@ bool Novae::checkJsonFileFormat() const
 	{
 		map = StelJsonParser::parse(&novaeJsonFile).toMap();
 		novaeJsonFile.close();
+		if (map.isEmpty())
+			return false;
 	}
 	catch (std::runtime_error& e)
 	{
