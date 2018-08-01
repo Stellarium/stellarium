@@ -26,8 +26,7 @@
 #include "StelLocationMgr.hpp"
 #include <QDebug>
 
-#ifdef ENABLE_GPS
-
+// Abstract dummy class. Must be available even for non-GPS builds.
 class GPSLookupHelper : public QObject
 {
 	Q_OBJECT
@@ -55,6 +54,7 @@ signals:
 	void queryError(const QString& msg);
 };
 
+#ifdef ENABLE_GPS
 #ifdef ENABLE_LIBGPS
 #include <libgpsmm.h>
 #include <QTimer>
