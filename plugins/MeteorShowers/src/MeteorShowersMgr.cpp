@@ -54,6 +54,7 @@ MeteorShowersMgr::MeteorShowersMgr()
 	, m_updateFrequencyHours(0)
 	, m_statusOfLastUpdate(OUTDATED)
 	, m_networkManager(Q_NULLPTR)
+	, m_downloadReply(Q_NULLPTR)
 	, m_progressBar(Q_NULLPTR)
 {
 	setObjectName("MeteorShowers");
