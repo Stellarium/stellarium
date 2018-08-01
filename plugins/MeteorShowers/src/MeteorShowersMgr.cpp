@@ -319,6 +319,9 @@ void MeteorShowersMgr::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(m_url));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	#if QT_VERSION >= 0x050600
+	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	#endif
 	m_downloadReply = m_networkManager->get(request);
 	connect(m_downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -356,6 +359,7 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 
 	disconnect(m_networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
 
+	#if QT_VERSION < 0x050600
 	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
 	{
@@ -371,6 +375,7 @@ void MeteorShowersMgr::downloadComplete(QNetworkReply *reply)
 		startDownload(redirectUrl.toString());
 		return;
 	}
+	#endif
 
 	deleteDownloadProgressBar();
 

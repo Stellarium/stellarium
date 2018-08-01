@@ -616,6 +616,9 @@ void Novae::startDownload(QString urlString)
 	QNetworkRequest request;
 	request.setUrl(QUrl(updateUrl));
 	request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+	#if QT_VERSION >= 0x050600
+	request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+	#endif
 	downloadReply = networkManager->get(request);
 	connect(downloadReply, SIGNAL(downloadProgress(qint64,qint64)), this, SLOT(updateDownloadProgress(qint64,qint64)));
 
@@ -654,6 +657,7 @@ void Novae::downloadComplete(QNetworkReply *reply)
 
 	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
 
+	#if QT_VERSION < 0x050600
 	int statusCode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
 	if (statusCode == 301 || statusCode == 302 || statusCode == 307)
 	{
@@ -669,6 +673,7 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		startDownload(redirectUrl.toString());
 		return;
 	}
+	#endif
 
 	deleteDownloadProgressBar();
 

@@ -420,6 +420,9 @@ void StelApp::init(QSettings* conf)
 	textureMgr = new StelTextureMgr();
 
 	networkAccessManager = new QNetworkAccessManager(this);
+	#if QT_VERSION >= 0x050900
+	networkAccessManager->setRedirectPolicy(QNetworkRequest::NoLessSafeRedirectPolicy);
+	#endif
 	// Activate http cache if Qt version >= 4.5
 	QNetworkDiskCache* cache = new QNetworkDiskCache(networkAccessManager);
 	//make maximum cache size configurable (in MB)
@@ -429,7 +432,7 @@ void StelApp::init(QSettings* conf)
 
 	qDebug() << "Cache directory is: " << QDir::toNativeSeparators(cachePath);
 	cache->setCacheDirectory(cachePath);
-	networkAccessManager->setCache(cache);
+	networkAccessManager->setCache(cache);	
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 
 	//create non-StelModule managers
