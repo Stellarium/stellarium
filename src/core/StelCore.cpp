@@ -2575,7 +2575,11 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 			numList=list.at(1).split(QRegExp(":"));
 			span.RAhigh=atof(numList.at(0).toLatin1()) + atof(numList.at(1).toLatin1())/60. + atof(numList.at(2).toLatin1())/3600.;
 			numList=list.at(2).split(QRegExp(":"));
-			span.decLow=atof(numList.at(0).toLatin1()) + atof(numList.at(1).toLatin1())/60.;
+			span.decLow=atof(numList.at(0).toLatin1());
+			if (span.decLow<0.0)
+				span.decLow -= atof(numList.at(1).toLatin1())/60.;
+			else
+				span.decLow += atof(numList.at(1).toLatin1())/60.;
 			span.constellation=list.at(3);
 			iau_constlineVec.append(span);
 		}
