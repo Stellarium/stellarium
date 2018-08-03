@@ -142,6 +142,7 @@ public:
 		IslamSadiqQureshi,                  //!< Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
 		KhalidSultanaZaidi,                 //!< M. Khalid, Mariam Sultana and Faheem Zaidi polynomial approximation of time period 1620-2013 (2014)
 		StephensonMorrisonHohenkerk2016,    //!< Stephenson, Morrison, Hohenkerk (2016) RSPA paper provides spline fit to observations for -720..2016 and else parabolic fit.
+		Henriksson,			    //!< Henriksson (2017) algorithm for DeltaT (The solution for Schoch formula for DeltaT (1931))
 		Custom                              //!< User defined coefficients for quadratic equation for DeltaT
 	};
 

@@ -113,7 +113,7 @@ public slots:
 	//! MorrisonStephenson1982, StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski,
 	//! SchmadelZech1988, ChaprontTouze, StephensonMorrison1995, Stephenson1997, ChaprontMeeus,
 	//! JPLHorizons, MeeusSimons, MontenbruckPfleger, ReingoldDershowitz, MorrisonStephenson2004,
-	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Custom.
+	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Henriksson, Custom.
 	void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec

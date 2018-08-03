@@ -1954,35 +1954,35 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case WithoutCorrection:
 			// Without correction, DeltaT is disabled
 			deltaTfunc = StelUtils::getDeltaTwithoutCorrection;
-			deltaTnDot = -26.0; // n.dot = -26.0"/cy/cy OR WHAT SHALL WE DO HERE?
+			deltaTnDot = -26.f; // n.dot = -26.0"/cy/cy OR WHAT SHALL WE DO HERE?
 			deltaTdontUseMoon = true;
 			deltaTstart	= INT_MIN;
 			deltaTfinish	= INT_MAX;
 			break;
 		case Schoch:
 			// Schoch (1931) algorithm for DeltaT
-			deltaTnDot = -29.68; // n.dot = -29.68"/cy/cy
+			deltaTnDot = -29.68f; // n.dot = -29.68"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchoch;
-			deltaTstart	= INT_MIN;
-			deltaTfinish	= INT_MAX;
+			deltaTstart	= -300;
+			deltaTfinish	= 1980;
 			break;
 		case Clemence:
 			// Clemence (1948) algorithm for DeltaT
-			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
+			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByClemence;
 			deltaTstart	= 1681;
 			deltaTfinish	= 1900;
 			break;
 		case IAU:
 			// IAU (1952) algorithm for DeltaT, based on observations by Spencer Jones (1939)
-			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
+			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByIAU;
 			deltaTstart	= 1681;
 			deltaTfinish	= 1936; // Details in http://adsabs.harvard.edu/abs/1939MNRAS..99..541S
 			break;
 		case AstronomicalEphemeris:
 			// Astronomical Ephemeris (1960) algorithm for DeltaT
-			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy
+			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByAstronomicalEphemeris;
 			// GZ: What is the source of "1681..1900"? Expl.Suppl.AE 1961-p87 says "...over periods extending back to ancient times"
 			// I changed to what I estimate.
@@ -1992,35 +1992,35 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case TuckermanGoldstine:
 			// Tuckerman (1962, 1964) & Goldstine (1973) algorithm for DeltaT
 			//FIXME: n.dot
-			deltaTnDot = -22.44; // n.dot = -22.44 "/cy/cy ???
+			deltaTnDot = -22.44f; // n.dot = -22.44 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByTuckermanGoldstine;
 			deltaTstart	= -600;
 			deltaTfinish	= 1649;
 			break;
 		case MullerStephenson:
 			// Muller & Stephenson (1975) algorithm for DeltaT
-			deltaTnDot = -37.5; // n.dot = -37.5 "/cy/cy
+			deltaTnDot = -37.5f; // n.dot = -37.5 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMullerStephenson;
 			deltaTstart	= -1375;
 			deltaTfinish	= 1975;
 			break;
 		case Stephenson1978:
 			// Stephenson (1978) algorithm for DeltaT
-			deltaTnDot = -30.0; // n.dot = -30.0 "/cy/cy
+			deltaTnDot = -30.0f; // n.dot = -30.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephenson1978;
 			deltaTstart	= INT_MIN; // Range unknown!
 			deltaTfinish	= INT_MAX;
 			break;
 		case SchmadelZech1979:
 			// Schmadel & Zech (1979) algorithm for DeltaT
-			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy
+			deltaTnDot = -23.8946f; // n.dot = -23.8946 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchmadelZech1979;
 			deltaTstart	= 1800;
 			deltaTfinish	= 1975;
 			break;
 		case MorrisonStephenson1982:
 			// Morrison & Stephenson (1982) algorithm for DeltaT (used by RedShift)
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson1982;
 			// FIXME: This is correct valid range?
 			deltaTstart	= -4000;
@@ -2028,14 +2028,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case StephensonMorrison1984:
 			// Stephenson & Morrison (1984) algorithm for DeltaT
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1984;
 			deltaTstart	= -391;
 			deltaTfinish	= 1600;
 			break;
 		case StephensonHoulden:
 			// Stephenson & Houlden (1986) algorithm for DeltaT. The limits are implicitly given by the tabulated values.
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonHoulden;
 			deltaTstart	= -600;
 			deltaTfinish	= 1650;
@@ -2043,14 +2043,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case Espenak:
 			// Espenak (1987, 1989) algorithm for DeltaT
 			//FIXME: n.dot
-			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy ???
+			deltaTnDot = -23.8946f; // n.dot = -23.8946 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByEspenak;
 			deltaTstart	= 1950;
 			deltaTfinish	= 2100;
 			break;
 		case Borkowski:
 			// Borkowski (1988) algorithm for DeltaT, relates to ELP2000-85!
-			deltaTnDot = -23.895; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
+			deltaTnDot = -23.895f; // GZ: I see -23.895 in the paper, not -23.859; (?) // n.dot = -23.859 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByBorkowski;
 			deltaTstart	= -2136;
 			deltaTfinish	= 1715;
@@ -2058,14 +2058,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case SchmadelZech1988:
 			// Schmadel & Zech (1988) algorithm for DeltaT
 			//FIXME: n.dot
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTBySchmadelZech1988;
 			deltaTstart	= 1800;
 			deltaTfinish	= 1988;
 			break;
 		case ChaprontTouze:
 			// Chapront-Touzé & Chapront (1991) algorithm for DeltaT
-			deltaTnDot = -23.8946; // n.dot = -23.8946 "/cy/cy
+			deltaTnDot = -23.8946f; // n.dot = -23.8946 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByChaprontTouze;
 			// FIXME: Is it valid range?
 			deltaTstart	= -4000;
@@ -2073,35 +2073,35 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case StephensonMorrison1995:
 			// Stephenson & Morrison (1995) algorithm for DeltaT
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephensonMorrison1995;
 			deltaTstart	= -700;
 			deltaTfinish	= 1600;
 			break;
 		case Stephenson1997:
 			// Stephenson (1997) algorithm for DeltaT
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByStephenson1997;
 			deltaTstart	= -500;
 			deltaTfinish	= 1600;
 			break;
 		case ChaprontMeeus:
 			// Chapront, Chapront-Touze & Francou (1997) & Meeus (1998) algorithm for DeltaT
-			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
+			deltaTnDot = -25.7376f; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByChaprontMeeus;
 			deltaTstart	= -400; // 1800; // not explicitly given, but guess based on his using ChaprontFrancou which is cited elsewhere in a similar term with -391.
 			deltaTfinish	=  2150; // 1997;
 			break;
 		case JPLHorizons:
 			// JPL Horizons algorithm for DeltaT
-			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
+			deltaTnDot = -25.7376f; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByJPLHorizons;
 			deltaTstart	= -2999;
 			deltaTfinish	= 1620;
 			break;
 		case MeeusSimons:
 			// Meeus & Simons (2000) algorithm for DeltaT
-			deltaTnDot = -25.7376; // n.dot = -25.7376 "/cy/cy
+			deltaTnDot = -25.7376f; // n.dot = -25.7376 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMeeusSimons;
 			deltaTstart	= 1620;
 			deltaTfinish	= 2000;
@@ -2109,7 +2109,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case ReingoldDershowitz:
 			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
 			// FIXME: n.dot
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByReingoldDershowitz;
 			// GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
 			deltaTstart	= -400; //1620;
@@ -2119,28 +2119,28 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
 			// NOTE: book does not contain n.dot value
 			// FIXME: n.dot
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy ???
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByMontenbruckPfleger;
 			deltaTstart	= 1825;
 			deltaTfinish	= 2005;
 			break;
 		case MorrisonStephenson2004:
 			// Morrison & Stephenson (2004, 2005) algorithm for DeltaT
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByMorrisonStephenson2004;
 			deltaTstart	= -1000;
 			deltaTfinish	= 2000;
 			break;
 		case Reijs:
 			// Reijs (2006) algorithm for DeltaT
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByReijs;
 			deltaTstart	= -1500; // -500; // GZ: It models long-term variability, so we should reflect this. Not sure on the begin, though.
 			deltaTfinish	= 1100; // not 1620; // GZ: Not applicable for telescopic era, and better not after 1100 (pers.comm.)
 			break;
 		case EspenakMeeus:
 			// Espenak & Meeus (2006) algorithm for DeltaT
-			deltaTnDot = -25.858; // n.dot = -25.858 "/cy/cy
+			deltaTnDot = -25.858f; // n.dot = -25.858 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByEspenakMeeus;
 			deltaTstart	= -1999;
 			deltaTfinish	= 3000;
@@ -2148,7 +2148,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 		case EspenakMeeusZeroMoonAccel:
 			// This is a trying area. Something is wrong with DeltaT, maybe ndot is still not applied correctly.
 			// Espenak & Meeus (2006) algorithm for DeltaT
-			deltaTnDot = -25.858; // n.dot = -25.858 "/cy/cy
+			deltaTnDot = -25.858f; // n.dot = -25.858 "/cy/cy
 			deltaTdontUseMoon = true;
 			deltaTfunc = StelUtils::getDeltaTByEspenakMeeus;
 			deltaTstart	= -1999;
@@ -2156,14 +2156,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case Banjevic:
 			// Banjevic (2006) algorithm for DeltaT
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByBanjevic;
 			deltaTstart	= -2020;
 			deltaTfinish	= 1620;
 			break;
 		case IslamSadiqQureshi:
 			// Islam, Sadiq & Qureshi (2008 + revisited 2013) algorithm for DeltaT (6 polynomials)
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByIslamSadiqQureshi;
 			deltaTdontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			deltaTstart	= 1620;
@@ -2171,17 +2171,26 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case KhalidSultanaZaidi:
 			// M. Khalid, Mariam Sultana and Faheem Zaidi polinomial approximation of time period 1620-2013 (2014)
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc = StelUtils::getDeltaTByKhalidSultanaZaidi;
 			deltaTdontUseMoon = true; // Seems this solutions doesn't use value of secular acceleration of the Moon
 			deltaTstart	= 1620;
 			deltaTfinish	= 2013;
 			break;
 		case StephensonMorrisonHohenkerk2016:
-			deltaTnDot = -25.82; // n.dot = -25.82 "/cy/cy
+			deltaTnDot = -25.82f; // n.dot = -25.82 "/cy/cy
 			deltaTfunc=StelUtils::getDeltaTByStephensonMorrisonHohenkerk2016;
 			deltaTstart	= -720;
 			deltaTfinish	= 2015;
+			break;
+		case Henriksson:
+			// Henriksson solution (2017) for Schoch formula for DeltaT (1931)
+			// The Acceleration of the Moon and the Universe – the Mass of the Graviton. Advances in Astrophysics, Vol. 2, No. 3, August 2017
+			// https://doi.org/10.22606/adap.2017.23004
+			deltaTnDot = -30.128f; // n.dot = -30.128"/cy/cy
+			deltaTfunc = StelUtils::getDeltaTBySchoch;
+			deltaTstart	= -4000;
+			deltaTfinish	= 2000;
 			break;
 		case Custom:
 			// User defined coefficients for quadratic equation for DeltaT. These can change, and we don't use the function pointer here.
@@ -2191,7 +2200,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	= INT_MAX;
 			break;
 		default:
-			deltaTnDot = -26.0; // n.dot = -26.0 "/cy/cy
+			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy
 			deltaTfunc=Q_NULLPTR;
 			deltaTstart	= INT_MIN; // Range unknown!
 			deltaTfinish	= INT_MAX;
@@ -2324,6 +2333,9 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case StephensonMorrisonHohenkerk2016: // PRIMARY SOURCE, SEEMS VERY IMPORTANT
 			description = q_("This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) was published in <em>Measurement of the Earth’s rotation: 720 BC to AD 2015</em> (%1). Outside of the named range (modelled with a spline fit) it provides values from an approximate parabola.").arg("<a href='https://doi.org/10.1098/rspa.2016.0404'>2016</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
+		case Henriksson:
+			description = q_("This solution by G. Henriksson (2016) based on C. Schoch formula and was published in article <em>The Acceleration of the Moon and the Universe - the Mass of the Graviton</em> (%1).").arg("<a href='https://doi.org/10.22606/adap.2017.23004'>2017</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			break;
 		case Custom:
 			description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
 			break;
@@ -2374,6 +2386,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 		case EspenakMeeus: // the default, range stated in the Canon, p. 14.  ... and
 		case EspenakMeeusZeroMoonAccel: // and
 		case StephensonMorrisonHohenkerk2016:
+		case Henriksson:
 			break;
 		case JPLHorizons: // and
 		case MeeusSimons:
