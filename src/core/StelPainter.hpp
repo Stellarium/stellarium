@@ -260,9 +260,8 @@ public:
 	//! Sets the line width. Default is 1.0f.
 	void setLineWidth(float width);
 
-	//! Sets the color saturation effect value, from -1 (no saturation) to +1 (full saturation).
-	//! The default value of 0 means no adjustement.
-	void setSaturationEffect(float v) { saturation = v; }
+	//! Sets the color saturation effect value, from 0 (grayscale) to 1 (no effect).
+	void setSaturation(float v) { saturation = v; }
 
 	//! Create the OpenGL shaders programs used by the StelPainter.
 	//! This method needs to be called once at init.
@@ -399,7 +398,7 @@ private:
 
 	Vec4f currentColor;
 	//! Saturation effect adjustment.
-	float saturation = 0.f;
+	float saturation = 1.f;
 
 	static QOpenGLShaderProgram* basicShaderProgram;
 	struct BasicShaderVars {

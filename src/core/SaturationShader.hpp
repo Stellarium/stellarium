@@ -48,7 +48,7 @@ static inline QString makeSaturationShader()
 	vec3 saturate(vec3 c, float x)
 	{
 		c = rgb2hsv(c);
-		c.y = mix(c.y, x > 0.0 ? 1.0 : 0.0, abs(x));
+		c.y *= x;
 		return hsv2rgb(c);
 	}
 

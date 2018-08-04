@@ -2097,7 +2097,7 @@ void StelPainter::initGLShaders()
 		"void main(void)\n"
 		"{\n"
 		"    gl_FragColor = dither(texture2D(tex, texc)*outColor);\n"
-		"    if (saturation != 0.0)\n"
+		"    if (saturation != 1.0)\n"
 		"        gl_FragColor.rgb = saturate(gl_FragColor.rgb, saturation);\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
