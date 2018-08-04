@@ -731,9 +731,16 @@ QString NomenclatureItem::getNomenclatureTypeDescription() const
 
 float NomenclatureItem::getSelectPriority(const StelCore* core) const
 {
-	 // The item may be selectable when it over 25px size only
-	if (getFlagLabels() && (getAngularSize(core)*M_PI/180.*core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()>=25.))
+	if (planet->getVMagnitude(core)>=20.f)
+	{
+		// The planet is too faint for view (in the deep shadow for example), so let's disable select the nomenclature
+		return StelObject::getSelectPriority(core)+25.f;
+	}
+	else if (getFlagLabels() && (getAngularSize(core)*M_PI/180.*core->getProjection(StelCore::FrameJ2000)->getPixelPerRadAtCenter()>=25.))
+	{
+		// The item may be good selectable when it over 25px size only
 		return StelObject::getSelectPriority(core)-25.f;
+	}
 	else
 		return StelObject::getSelectPriority(core)-2.f;
 }
