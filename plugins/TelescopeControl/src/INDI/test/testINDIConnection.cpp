@@ -24,26 +24,26 @@
 #include "INDIConnection.hpp"
 #include "indibase/basedevice.h"
 
-void testINDIConnection::deafultCoordinates()
+void TestINDIConnection::deafultCoordinates()
 {
     INDIConnection::Coordinates position;
     QVERIFY(std::abs(position.RA - 0.0) < std::numeric_limits<double>::epsilon());
     QVERIFY(std::abs(position.DEC - 0.0) < std::numeric_limits<double>::epsilon());
 }
 
-void testINDIConnection::defaultPosition()
+void TestINDIConnection::defaultPosition()
 {
     INDIConnection instance;
     QVERIFY(instance.position() == INDIConnection::Coordinates());
 }
 
-void testINDIConnection::initialConnectionStatus()
+void TestINDIConnection::initialConnectionStatus()
 {
     INDIConnection instance;
     QVERIFY(instance.isDeviceConnected() == false);
 }
 
-void testINDIConnection::setPositionNotConnected()
+void TestINDIConnection::setPositionNotConnected()
 {
     INDIConnection::Coordinates position;
     position.DEC = 0.1;
@@ -54,7 +54,7 @@ void testINDIConnection::setPositionNotConnected()
     QVERIFY(instance.position() == INDIConnection::Coordinates());
 }
 
-void testINDIConnection::listDevices()
+void TestINDIConnection::listDevices()
 {
     INDIConnection instance;
     QVERIFY(instance.devices().empty());
@@ -68,5 +68,5 @@ void testINDIConnection::listDevices()
     QVERIFY(instance.devices().empty());
 }
 
-QTEST_MAIN(testINDIConnection)
+QTEST_MAIN(TestINDIConnection)
 

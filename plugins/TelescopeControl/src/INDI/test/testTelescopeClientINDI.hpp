@@ -21,7 +21,7 @@
 
 #include <QTest>
 
-class testTelescopeClientINDI : public QObject
+class TestTelescopeClientINDI : public QObject
 {
     Q_OBJECT
 

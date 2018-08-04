@@ -20,11 +20,11 @@
 
 #include "TelescopeClientINDI.hpp"
 
-void testTelescopeClientINDI::isConnectedInitialValue()
+void TestTelescopeClientINDI::isConnectedInitialValue()
 {
 	TelescopeClientINDI client;
 	QVERIFY(client.isConnected() == false);
 }
 
-QTEST_MAIN(testTelescopeClientINDI)
+QTEST_MAIN(TestTelescopeClientINDI)
 

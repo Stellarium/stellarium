@@ -21,7 +21,7 @@
 
 #include <QTest>
 
-class testINDIConnection : public QObject
+class TestINDIConnection : public QObject
 {
     Q_OBJECT
 
