@@ -41,6 +41,9 @@ class MilkyWay : public StelModule
 		   READ getColor
 		   WRITE setColor
 		   NOTIFY colorChanged)
+	Q_PROPERTY(double saturationEffect
+			   MEMBER saturationEffect
+			   NOTIFY saturationEffectChanged)
 public:
 	MilkyWay();
 	virtual ~MilkyWay();
@@ -89,6 +92,7 @@ public slots:
 signals:
 	void milkyWayDisplayedChanged(const bool displayed);
 	void intensityChanged(double intensity);
+	void saturationEffectChanged(double saturationEffect);
 	void colorChanged(Vec3f color);
 
 private:
@@ -99,6 +103,7 @@ private:
 	float intensityMinFov;
 	float intensityMaxFov;
 	class LinearFader* fader;
+	double saturationEffect = 0.0;
 
 	struct StelVertexArray* vertexArray;
 };
