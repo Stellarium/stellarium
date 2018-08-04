@@ -987,15 +987,25 @@ void MpcImportWindow::loadBookmarks()
 		QFile bookmarksFile(bookmarksFilePath);
 		if (bookmarksFile.open(QFile::ReadOnly | QFile::Text))
 		{
-			QVariantMap jsonRoot = StelJsonParser::parse(bookmarksFile.readAll()).toMap();
+			QVariantMap jsonRoot;
+			QString fileVersion = "0.0.0";
+			try
+			{
+				jsonRoot = StelJsonParser::parse(bookmarksFile.readAll()).toMap();
+				bookmarksFile.close();
 
-			QString fileVersion = jsonRoot.value("version").toString();
-			if (fileVersion.isEmpty())
-				fileVersion = "0.0.0";
-			loadBookmarksGroup(jsonRoot.value("mpcMinorPlanets").toMap(), bookmarks[MpcMinorPlanets]);
-			loadBookmarksGroup(jsonRoot.value("mpcComets").toMap(), bookmarks[MpcComets]);
+				fileVersion = jsonRoot.value("version").toString();
+				if (fileVersion.isEmpty())
+					fileVersion = "0.0.0";
 
-			bookmarksFile.close();
+				loadBookmarksGroup(jsonRoot.value("mpcMinorPlanets").toMap(), bookmarks[MpcMinorPlanets]);
+				loadBookmarksGroup(jsonRoot.value("mpcComets").toMap(), bookmarks[MpcComets]);
+			}
+			catch (std::runtime_error &e)
+			{
+				qDebug() << "File format is wrong! Error: " << e.what();
+				outdated = true;
+			}
 
 			if (StelUtils::compareVersions(fileVersion, SOLARSYSTEMEDITOR_PLUGIN_VERSION)<0)
 				outdated = true; // Oops... the list is outdated!

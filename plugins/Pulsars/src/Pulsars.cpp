@@ -474,8 +474,16 @@ QVariantMap Pulsars::loadPSRMap(QString path)
 		qWarning() << "[Pulsars] Cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
-		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-		jsonFile.close();
+		try
+		{
+			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+			jsonFile.close();
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug() << "[Pulsars] File format is wrong! Error: " << e.what();
+			return QVariantMap();
+		}
 	}
 	return map;
 }
@@ -513,13 +521,20 @@ int Pulsars::getJsonFileFormatVersion(void)
 	}
 
 	QVariantMap map;
-	map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();
+	try
+	{
+		map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();
+		jsonPSRCatalogFile.close();
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug() << "[Pulsars] File format is wrong! Error: " << e.what();
+		return jsonVersion;
+	}
 	if (map.contains("version"))
 	{
 		jsonVersion = map.value("version").toInt();
 	}
-
-	jsonPSRCatalogFile.close();
 	qDebug() << "[Pulsars] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
@@ -538,8 +553,6 @@ bool Pulsars::checkJsonFileFormat()
 	{
 		map = StelJsonParser::parse(&jsonPSRCatalogFile).toMap();		
 		jsonPSRCatalogFile.close();
-		if (map.isEmpty())
-			return false;
 	}
 	catch (std::runtime_error& e)
 	{

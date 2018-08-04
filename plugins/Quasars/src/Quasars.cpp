@@ -440,8 +440,16 @@ QVariantMap Quasars::loadQSOMap(QString path)
 		qWarning() << "[Quasars] Cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
-		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-		jsonFile.close();
+		try
+		{
+			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+			jsonFile.close();
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug() << "[Quasars] File format is wrong! Error: " << e.what();
+			return QVariantMap();
+		}
 	}
 	return map;
 }
@@ -479,13 +487,20 @@ int Quasars::getJsonFileFormatVersion(void)
 	}
 
 	QVariantMap map;
-	map = StelJsonParser::parse(&catalogJsonFile).toMap();
+	try
+	{
+		map = StelJsonParser::parse(&catalogJsonFile).toMap();
+		catalogJsonFile.close();
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug() << "[Quasars] File format is wrong! Error: " << e.what();
+		return jsonVersion;
+	}
 	if (map.contains("version"))
 	{
 		jsonVersion = map.value("version").toInt();
 	}
-
-	catalogJsonFile.close();
 	qDebug() << "[Quasars] Version of the format of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
@@ -504,8 +519,6 @@ bool Quasars::checkJsonFileFormat()
 	{
 		map = StelJsonParser::parse(&catalogJsonFile).toMap();
 		catalogJsonFile.close();
-		if (map.isEmpty())
-			return false;
 	}
 	catch (std::runtime_error& e)
 	{

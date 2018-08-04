@@ -745,7 +745,17 @@ const QString Satellites::readCatalogVersion()
 	}
 
 	QVariantMap map;
-	map = StelJsonParser::parse(&satelliteJsonFile).toMap();
+	try
+	{
+		map = StelJsonParser::parse(&satelliteJsonFile).toMap();
+		satelliteJsonFile.close();
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug() << "[Satellites] File format is wrong! Error: " << e.what();
+		return jsonVersion;
+	}
+
 	if (map.contains("creator"))
 	{
 		QString creator = map.value("creator").toString();
@@ -756,7 +766,6 @@ const QString Satellites::readCatalogVersion()
 		}
 	}
 
-	satelliteJsonFile.close();
 	//qDebug() << "[Satellites] catalog version from file:" << jsonVersion;
 	return jsonVersion;
 }
@@ -796,8 +805,16 @@ QVariantMap Satellites::loadDataMap(QString path)
 		qWarning() << "[Satellites] cannot open " << QDir::toNativeSeparators(path);
 	else
 	{
-		map = StelJsonParser::parse(&jsonFile).toMap();
-		jsonFile.close();
+		try
+		{
+			map = StelJsonParser::parse(&jsonFile).toMap();
+			jsonFile.close();
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug() << "[Satellites] File format is wrong! Error: " << e.what();
+			return QVariantMap();
+		}
 	}
 	return map;
 }
@@ -1787,8 +1804,7 @@ bool Satellites::checkJsonFileFormat()
 	}
 	catch (std::runtime_error& e)
 	{
-		qDebug() << "[Satellites] file format is wrong!";
-		qDebug() << "[Satellites] error:" << e.what();
+		qDebug() << "[Satellites] File format is wrong! Error:" << e.what();
 		return false;
 	}
 

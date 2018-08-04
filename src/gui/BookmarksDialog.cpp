@@ -288,48 +288,58 @@ void BookmarksDialog::loadBookmarks()
 	QVariantMap map;
 	QFile jsonFile(bookmarksJsonPath);
 	if (!jsonFile.open(QIODevice::ReadOnly))
-		qWarning() << "Bookmarks: cannot open" << QDir::toNativeSeparators(bookmarksJsonPath);
+		qWarning() << "[Bookmarks] cannot open" << QDir::toNativeSeparators(bookmarksJsonPath);
 	else
 	{
-		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-		jsonFile.close();
-	}
-
-	bookmarksCollection.clear();
-	QVariantMap bookmarksMap = map.value("bookmarks").toMap();
-	int i = 0;
-	for (auto bookmarkKey : bookmarksMap.keys())
-	{
-		QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
-		bookmark bm;
-
-		QString JDs = "";
-
-		bm.name = bookmarkData.value("name").toString();
-		QString nameI18n = bookmarkData.value("nameI18n").toString();
-		if (!nameI18n.isEmpty())
-			bm.nameI18n = nameI18n;
-		QString JD = bookmarkData.value("jd").toString();
-		if (!JD.isEmpty())
+		try
 		{
-			bm.jd = JD;
-			JDs = StelUtils::julianDayToISO8601String(JD.toDouble() + core->getUTCOffset(JD.toDouble())/24.).replace("T", " ");
+			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+			jsonFile.close();
+
+			bookmarksCollection.clear();
+			QVariantMap bookmarksMap = map.value("bookmarks").toMap();
+			int i = 0;
+			for (auto bookmarkKey : bookmarksMap.keys())
+			{
+				QVariantMap bookmarkData = bookmarksMap.value(bookmarkKey).toMap();
+				bookmark bm;
+
+				QString JDs = "";
+
+				bm.name = bookmarkData.value("name").toString();
+				QString nameI18n = bookmarkData.value("nameI18n").toString();
+				if (!nameI18n.isEmpty())
+					bm.nameI18n = nameI18n;
+				QString JD = bookmarkData.value("jd").toString();
+				if (!JD.isEmpty())
+				{
+					bm.jd = JD;
+					JDs = StelUtils::julianDayToISO8601String(JD.toDouble() + core->getUTCOffset(JD.toDouble())/24.).replace("T", " ");
+				}
+				QString Location = bookmarkData.value("location").toString();
+				if (!Location.isEmpty())
+					bm.location = Location;
+				QString RA = bookmarkData.value("ra").toString();
+				if (!RA.isEmpty())
+					bm.ra = RA;
+				QString Dec = bookmarkData.value("dec").toString();
+				if (!Dec.isEmpty())
+					bm.dec = Dec;
+
+				bm.isVisibleMarker = bookmarkData.value("isVisibleMarker", false).toBool();
+
+				bookmarksCollection.insert(bookmarkKey, bm);
+				addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
+				i++;
+			}
+
 		}
-		QString Location = bookmarkData.value("location").toString();
-		if (!Location.isEmpty())
-			bm.location = Location;
-		QString RA = bookmarkData.value("ra").toString();
-		if (!RA.isEmpty())
-			bm.ra = RA;
-		QString Dec = bookmarkData.value("dec").toString();
-		if (!Dec.isEmpty())
-			bm.dec = Dec;
+		catch (std::runtime_error &e)
+		{
+			qDebug() << "[Bookmarks] File format is wrong! Error: " << e.what();
+			return;
+		}
 
-		bm.isVisibleMarker = bookmarkData.value("isVisibleMarker", false).toBool();
-
-		bookmarksCollection.insert(bookmarkKey, bm);
-		addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
-		i++;
 	}
 }
 
@@ -362,13 +372,13 @@ void BookmarksDialog::saveBookmarks()
 {
 	if (bookmarksJsonPath.isEmpty())
 	{
-		qWarning() << "Bookmarks: Error saving bookmarks";
+		qWarning() << "[Bookmarks] Error saving bookmarks";
 		return;
 	}
 	QFile jsonFile(bookmarksJsonPath);
 	if(!jsonFile.open(QFile::WriteOnly|QFile::Text))
 	{
-		qWarning() << "Bookmarks: bookmarks can not be saved. A file can not be open for writing:"
+		qWarning() << "[Bookmarks] bookmarks can not be saved. A file can not be open for writing:"
 			   << QDir::toNativeSeparators(bookmarksJsonPath);
 		return;
 	}

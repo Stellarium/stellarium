@@ -45,8 +45,7 @@ QVariant StelJsonParser::parse(const QByteArray& aar)
 	QJsonDocument doc = QJsonDocument::fromJson(aar, &error);
 	if (error.error != QJsonParseError::NoError)
 	{		
-		throw std::runtime_error(error.errorString().toLatin1().constData());
-		return QVariant(""); // Let's give empty results if document has wrong structure
+		throw std::runtime_error(error.errorString().toLatin1().constData());		
 	}
 	return doc.toVariant();
 }

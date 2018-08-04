@@ -381,8 +381,16 @@ QVariantMap Supernovae::loadSNeMap(QString path)
 		qWarning() << "[Supernovae] cannot open" << QDir::toNativeSeparators(path);
 	else
 	{
-		map = StelJsonParser::parse(jsonFile.readAll()).toMap();
-		jsonFile.close();
+		try
+		{
+			map = StelJsonParser::parse(jsonFile.readAll()).toMap();
+			jsonFile.close();
+		}
+		catch (std::runtime_error &e)
+		{
+			qDebug() << "[Supernovae] File format is wrong! Error: " << e.what();
+			return QVariantMap();
+		}
 	}
 	return map;
 }
@@ -422,13 +430,21 @@ int Supernovae::getJsonFileVersion(void) const
 	}
 
 	QVariantMap map;
-	map = StelJsonParser::parse(&sneJsonFile).toMap();
+	try
+	{
+		map = StelJsonParser::parse(&sneJsonFile).toMap();
+		sneJsonFile.close();
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug() << "[Supernovae] File format is wrong! Error: " << e.what();
+		return jsonVersion;
+	}
 	if (map.contains("version"))
 	{
 		jsonVersion = map.value("version").toInt();
 	}
 
-	sneJsonFile.close();
 	qDebug() << "[Supernovae] version of the catalog:" << jsonVersion;
 	return jsonVersion;
 }
@@ -447,8 +463,6 @@ bool Supernovae::checkJsonFileFormat() const
 	{
 		map = StelJsonParser::parse(&sneJsonFile).toMap();
 		sneJsonFile.close();
-		if (map.isEmpty())
-			return false;
 	}
 	catch (std::runtime_error& e)
 	{
@@ -470,13 +484,21 @@ float Supernovae::getLowerLimitBrightness() const
 	}
 
 	QVariantMap map;
-	map = StelJsonParser::parse(&sneJsonFile).toMap();
+	try
+	{
+		map = StelJsonParser::parse(&sneJsonFile).toMap();
+		sneJsonFile.close();
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug() << "[Supernovae] File format is wrong! Error: " << e.what();
+		return lowerLimit;
+	}
 	if (map.contains("limit"))
 	{
 		lowerLimit = map.value("limit").toFloat();
 	}
 
-	sneJsonFile.close();
 	return lowerLimit;
 }
 
