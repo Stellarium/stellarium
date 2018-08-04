@@ -1458,7 +1458,7 @@ void ConstellationMgr::setSelected(const StelObject *s)
 Constellation* ConstellationMgr::isObjectIn(const StelObject *s) const
 {
 	StelCore *core = StelApp::getInstance().getCore();
-	QString IAUConst = core->getIAUConstellation(s->getEquinoxEquatorialPos(core));
+	QString IAUConst = core->getIAUConstellation(s->getEquinoxEquatorialPosAuto(core));
 	for (auto* constellation : constellations)
 	{
 		// Check if the object is in the constellation
