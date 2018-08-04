@@ -2185,7 +2185,9 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			break;
 		case Henriksson:
 			// Henriksson solution (2017) for Schoch formula for DeltaT (1931)
-			// The Acceleration of the Moon and the Universe – the Mass of the Graviton. Advances in Astrophysics, Vol. 2, No. 3, August 2017
+			// Source: The Acceleration of the Moon and the Universe – the Mass of the Graviton.
+			// Henriksson, G.
+			// Advances in Astrophysics, Vol. 2, No. 3, August 2017
 			// https://doi.org/10.22606/adap.2017.23004
 			deltaTnDot = -30.128f; // n.dot = -30.128"/cy/cy
 			deltaTfunc = StelUtils::getDeltaTBySchoch;
