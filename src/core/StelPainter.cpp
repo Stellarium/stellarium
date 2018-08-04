@@ -25,6 +25,7 @@
 #include "StelProjectorClasses.hpp"
 #include "StelUtils.hpp"
 #include "Dithering.hpp"
+#include "SaturationShader.hpp"
 
 #include <QDebug>
 #include <QString>
@@ -2088,12 +2089,16 @@ void StelPainter::initGLShaders()
 	QOpenGLShader fshader4(QOpenGLShader::Fragment);
 	const auto fsrc4 =
 		makeDitheringShader()+
+		makeSaturationShader()+
 		"varying mediump vec2 texc;\n"
 		"varying mediump vec4 outColor;\n"
 		"uniform sampler2D tex;\n"
+		"uniform lowp float saturation;\n"
 		"void main(void)\n"
 		"{\n"
 		"    gl_FragColor = dither(texture2D(tex, texc)*outColor);\n"
+		"    if (saturation != 1.0)\n"
+		"        gl_FragColor.rgb = saturate(gl_FragColor.rgb, saturation);\n"
 		"}\n";
 	fshader4.compileSourceCode(fsrc4);
 	if (!fshader4.log().isEmpty()) { qWarning() << "StelPainter: Warnings while compiling fshader4: " << fshader4.log(); }
@@ -2109,6 +2114,7 @@ void StelPainter::initGLShaders()
 	texturesColorShaderVars.texture = texturesColorShaderProgram->uniformLocation("tex");
 	texturesColorShaderVars.bayerPattern = texturesColorShaderProgram->uniformLocation("bayerPattern");
 	texturesColorShaderVars.rgbMaxValue = texturesColorShaderProgram->uniformLocation("rgbMaxValue");
+	texturesColorShaderVars.saturation = texturesColorShaderProgram->uniformLocation("saturation");
 }
 
 
@@ -2215,6 +2221,7 @@ void StelPainter::drawFromArray(DrawingMode mode, int count, int offset, bool do
 		glBindTexture(GL_TEXTURE_2D, bayerPatternTex);
 		pr->setUniformValue(texturesColorShaderVars.bayerPattern, 1);
 		pr->setUniformValue(texturesColorShaderVars.rgbMaxValue, rgbMaxValue[0], rgbMaxValue[1], rgbMaxValue[2]);
+		pr->setUniformValue(texturesColorShaderVars.saturation, saturation);
 	}
 	else if (!texCoordArray.enabled && colorArray.enabled && !normalArray.enabled)
 	{

@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>794</width>
+    <width>798</width>
     <height>591</height>
    </rect>
   </property>
@@ -973,7 +973,7 @@
                <item>
                 <widget class="QCheckBox" name="milkyWayCheckBox">
                  <property name="text">
-                  <string>Milky Way brightness:</string>
+                  <string>Milky Way brightness/saturation:</string>
                  </property>
                 </widget>
                </item>
@@ -999,6 +999,31 @@
                  </property>
                  <property name="value">
                   <double>1.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="milkyWaySaturationDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>75</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Changing saturation from totally unsaturated (0.00) to default (1.00) value.</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <double>0.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>1.000000000000000</double>
+                 </property>
+                 <property name="singleStep">
+                  <double>0.100000000000000</double>
                  </property>
                 </widget>
                </item>

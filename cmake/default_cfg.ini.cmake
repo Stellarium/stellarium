@@ -286,6 +286,7 @@ nebula_scale                        = 1
 flag_nebula_hints_proportional      = false
 flag_milky_way                      = true
 milky_way_intensity                 = 1
+milky_way_saturation                = 1
 flag_bright_nebulae                 = false
 meteor_zhr                          = 10
 labels_amount                       = 3.0
