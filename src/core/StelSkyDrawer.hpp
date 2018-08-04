@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSKYDRAWER_HPP_
-#define _STELSKYDRAWER_HPP_
+#ifndef STELSKYDRAWER_HPP
+#define STELSKYDRAWER_HPP
 
 #include "RefractionExtinction.hpp"
 #include "StelTextureTypes.hpp"
@@ -490,4 +490,4 @@ private:
 	float big3dModelHaloRadius;
 };
 
-#endif // _STELSKYDRAWER_HPP_
+#endif // STELSKYDRAWER_HPP

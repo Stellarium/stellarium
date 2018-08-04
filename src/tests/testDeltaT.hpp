@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTDELTAT_HPP_
-#define _TESTDELTAT_HPP_
+#ifndef TESTDELTAT_HPP
+#define TESTDELTAT_HPP
 
 #include <QObject>
 #include <QTest>
@@ -38,5 +38,5 @@ private slots:
 
 };
 
-#endif // _TESTDELTAT_HPP_
+#endif // _TESTDELTAT_HPP
 

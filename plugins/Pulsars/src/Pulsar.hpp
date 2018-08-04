@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _PULSAR_HPP_
-#define _PULSAR_HPP_ 1
+#ifndef PULSAR_HPP
+#define PULSAR_HPP
 
 #include <QVariant>
 #include <QString>
@@ -166,4 +166,4 @@ private:
 
 };
 
-#endif // _PULSAR_HPP_
+#endif // PULSAR_HPP

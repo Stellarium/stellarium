@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _ANGLEMEASUREDIALOG_HPP_
-#define _ANGLEMEASUREDIALOG_HPP_
+#ifndef ANGLEMEASUREDIALOG_HPP
+#define ANGLEMEASUREDIALOG_HPP
 
 #include "StelDialog.hpp"
 #include "StelGui.hpp"
@@ -56,4 +56,4 @@ private slots:
 };
 
 
-#endif /* _ANGLEMEASUREDIALOG_HPP_ */
+#endif /* ANGLEMEASUREDIALOG_HPP */

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _CUSTOMOBJECTMGR_HPP_
-#define _CUSTOMOBJECTMGR_HPP_
+#ifndef CUSTOMOBJECTMGR_HPP
+#define CUSTOMOBJECTMGR_HPP
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
@@ -183,4 +183,4 @@ private:
 	CustomObjectP selected;
 };
 
-#endif /*_CUSTOMOBJECTMGR_HPP_*/
+#endif /* CUSTOMOBJECTMGR_HPP */

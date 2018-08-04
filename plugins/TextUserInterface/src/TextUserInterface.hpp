@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef TEXTUSERINTERFACE_HPP_
-#define _TEXTUSERINTERFACE_HPP_ 1
+#ifndef TEXTUSERINTERFACE_HPP
+#define TEXTUSERINTERFACE_HPP
 
 #include "StelModule.hpp"
 #include "DummyDialog.hpp"
@@ -108,4 +108,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*_TEXTUSERINTERFACE_HPP_*/
+#endif /* TEXTUSERINTERFACE_HPP*/

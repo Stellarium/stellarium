@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELGUIITEMS_HPP_
-#define _STELGUIITEMS_HPP_
+#ifndef STELGUIITEMS_HPP
+#define STELGUIITEMS_HPP
 
 #include <QGraphicsPixmapItem>
 #include <QGraphicsWidget>
@@ -326,4 +326,4 @@ class StelBarsPath : public QGraphicsPathItem
 		double roundSize;
 };
 
-#endif // _STELGUIITEMS_HPP_
+#endif // STELGUIITEMS_HPP

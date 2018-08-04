@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELVIEWPORTEFFECT_HPP_
-#define _STELVIEWPORTEFFECT_HPP_
+#ifndef STELVIEWPORTEFFECT_HPP
+#define STELVIEWPORTEFFECT_HPP
 
 #include "VecMath.hpp"
 #include "StelProjector.hpp"
@@ -70,5 +70,5 @@ private:
 	QVector<Vec2f> displayTexCoordList;
 };
 
-#endif // _STELVIEWPORTEFFECT_HPP_
+#endif // STELVIEWPORTEFFECT_HPP
 

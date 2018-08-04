@@ -21,8 +21,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#ifndef _DE430_HPP_
-#define _DE430_HPP_
+#ifndef DE430_HPP
+#define DE430_HPP
 
 #include "jpleph.h"
 

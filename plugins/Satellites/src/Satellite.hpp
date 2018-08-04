@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SATELLITE_HPP_
-#define _SATELLITE_HPP_ 1
+#ifndef SATELLITE_HPP
+#define SATELLITE_HPP
 
 #include <QDateTime>
 #include <QFont>
@@ -311,5 +311,5 @@ private:
 typedef QSharedPointer<Satellite> SatelliteP;
 bool operator<(const SatelliteP& left, const SatelliteP& right);
 
-#endif // _SATELLITE_HPP_ 
+#endif // SATELLITE_HPP
 

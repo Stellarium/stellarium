@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef COMPASSMARKS_HPP_
-#define COMPASSMARKS_HPP_
+#ifndef COMPASSMARKS_HPP
+#define COMPASSMARKS_HPP
 
 #include "VecMath.hpp"
 #include "StelModule.hpp"
@@ -106,4 +106,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*COMPASSMARKS_HPP_*/
+#endif /*COMPASSMARKS_HPP*/

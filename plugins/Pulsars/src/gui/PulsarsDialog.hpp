@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _PULSARSDIALOG_HPP_
-#define _PULSARSDIALOG_HPP_
+#ifndef PULSARSDIALOG_HPP
+#define PULSARSDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -75,4 +75,4 @@ private:
 
 };
 
-#endif // _PULSARSDIALOG_HPP_
+#endif // PULSARSDIALOG_HPP

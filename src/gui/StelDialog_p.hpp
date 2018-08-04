@@ -21,8 +21,8 @@
 //! This is a private header for some StelDialog implementation classes, which require MOC'cing
 //! Other classes should not include this header.
 
-#ifndef _STELDIALOG_P_HPP_
-#define _STELDIALOG_P_HPP_
+#ifndef STELDIALOG_P_HPP
+#define STELDIALOG_P_HPP
 
 #include "StelPropertyMgr.hpp"
 #include <QAbstractButton>
@@ -123,4 +123,4 @@ private:
 	double minValue, maxValue,dRange;
 };
 
-#endif // _STELDIALOG_P_HPP_
+#endif // STELDIALOG_P_HPP

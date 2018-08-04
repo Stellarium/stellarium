@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef ARCHAEOLINES_HPP_
-#define ARCHAEOLINES_HPP_
+#ifndef ARCHAEOLINES_HPP
+#define ARCHAEOLINES_HPP
 
 #include <QFont>
 #include <QColor>
@@ -563,5 +563,5 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*ARCHAEOLINES_HPP_*/
+#endif /*ARCHAEOLINES_HPP*/
 

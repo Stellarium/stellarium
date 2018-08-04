@@ -34,8 +34,8 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-#ifndef _GSATTEME_HPP_
-#define _GSATTEME_HPP_ 1
+#ifndef GSATTEME_HPP
+#define GSATTEME_HPP
 
 #include "gTime.hpp"
 #include "VecMath.hpp"
@@ -154,4 +154,4 @@ private:
 	Vec3d m_SubPoint;
 };
 
-#endif // _GSATTEME_HPP_
+#endif // GSATTEME_HPP

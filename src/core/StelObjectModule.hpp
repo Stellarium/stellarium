@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOBJECTMODULE_HPP_
-#define _STELOBJECTMODULE_HPP_
+#ifndef STELOBJECTMODULE_HPP
+#define STELOBJECTMODULE_HPP
 
 #include "StelModule.hpp"
 #include "StelObjectType.hpp"
@@ -94,4 +94,4 @@ public:
 	bool matchObjectName(const QString& objName, const QString& objPrefix, bool useStartOfWords) const;
 };
 
-#endif // _STELOBJECTMODULE_HPP_
+#endif // STELOBJECTMODULE_HPP

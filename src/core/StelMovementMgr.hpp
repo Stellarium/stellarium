@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELMOVEMENTMGR_HPP_
-#define _STELMOVEMENTMGR_HPP_
+#ifndef STELMOVEMENTMGR_HPP
+#define STELMOVEMENTMGR_HPP
 
 #include "StelModule.hpp"
 #include "StelProjector.hpp"
@@ -482,5 +482,5 @@ private:
 
 };
 
-#endif // _STELMOVEMENTMGR_HPP_
+#endif // STELMOVEMENTMGR_HPP
 

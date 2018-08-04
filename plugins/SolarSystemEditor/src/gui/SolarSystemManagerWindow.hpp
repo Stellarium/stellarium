@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SOLAR_SYSTEM_MANAGER_WINDOW_
-#define _SOLAR_SYSTEM_MANAGER_WINDOW_
+#ifndef SOLARSYSTEMMANAGERWINDOW_HPP
+#define SOLARSYSTEMMANAGERWINDOW_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -76,4 +76,4 @@ private:
 	void updateTexts();
 };
 
-#endif //_SOLAR_SYSTEM_MANAGER_WINDOW_
+#endif // SOLARSYSTEMMANAGERWINDOW_HPP

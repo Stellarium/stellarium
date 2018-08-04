@@ -17,8 +17,8 @@
  */
 
 
-#ifndef _STELSKYIMAGETILE_HPP_
-#define _STELSKYIMAGETILE_HPP_
+#ifndef STELSKYIMAGETILE_HPP
+#define STELSKYIMAGETILE_HPP
 
 #include "MultiLevelJsonBase.hpp"
 #include "StelSphereGeometry.hpp"
@@ -160,4 +160,4 @@ private:
 	QString htmlDescription;
 };
 
-#endif // _STELSKYIMAGETILE_HPP_
+#endif // STELSKYIMAGETILE_HPP

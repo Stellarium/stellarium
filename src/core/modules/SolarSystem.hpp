@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SOLARSYSTEM_HPP_
-#define _SOLARSYSTEM_HPP_
+#ifndef SOLARSYSTEM_HPP
+#define SOLARSYSTEM_HPP
 //sun is already defined in Sun C/Solaris
 #if defined(sun)
 #undef sun
@@ -1040,4 +1040,4 @@ private:
 };
 
 
-#endif // _SOLARSYSTEM_HPP_
+#endif // SOLARSYSTEM_HPP

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NOVA_HPP_
-#define _NOVA_HPP_ 1
+#ifndef NOVA_HPP
+#define NOVA_HPP
 
 #include <QVariant>
 #include <QString>
@@ -119,4 +119,4 @@ private:
 	QString getMaxBrightnessDate(const double JD) const;
 };
 
-#endif // _NOVA_HPP_
+#endif // NOVA_HPP

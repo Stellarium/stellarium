@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOPENGLARRAY_HPP_
-#define _STELOPENGLARRAY_HPP_
+#ifndef STELOPENGLARRAY_HPP
+#define STELOPENGLARRAY_HPP
 
 #include "VecMath.hpp"
 
@@ -150,4 +150,4 @@ private:
 	static bool s_intElementBuffersSupported;
 };
 
-#endif // _STELOPENGLARRAY_HPP_
+#endif // STELOPENGLARRAY_HPP

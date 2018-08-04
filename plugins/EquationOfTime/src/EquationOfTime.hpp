@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _EQUATIONOFTIME_HPP_
-#define _EQUATIONOFTIME_HPP_
+#ifndef EQUATIONOFTIME_HPP
+#define EQUATIONOFTIME_HPP
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
@@ -174,4 +174,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /* _EQUATIONOFTIME_HPP_ */
+#endif /* EQUATIONOFTIME_HPP */

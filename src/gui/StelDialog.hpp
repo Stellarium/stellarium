@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _STELDIALOG_HPP_
-#define _STELDIALOG_HPP_
+#ifndef STELDIALOG_HPP
+#define STELDIALOG_HPP
 
 #include <QObject>
 #include <QGraphicsProxyWidget>
@@ -222,4 +222,4 @@ class CustomProxy : public QGraphicsProxyWidget
 			QGraphicsProxyWidget::resizeEvent(event);
 		}
 };
-#endif // _STELDIALOG_HPP_
+#endif // STELDIALOG_HPP

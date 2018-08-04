@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSPHERICALINDEX_HPP_
-#define _STELSPHERICALINDEX_HPP_
+#ifndef STELSPHERICALINDEX_HPP
+#define STELSPHERICALINDEX_HPP
 
 #include "StelRegionObject.hpp"
 
@@ -336,6 +336,6 @@ private:
 	RootNode* rootNode;
 };
 
-#endif // _STELSPHERICALINDEX_HPP_
+#endif // STELSPHERICALINDEX_HPP
 
 

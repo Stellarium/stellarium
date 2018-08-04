@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _CONFIGUREORBITCOLORSDIALOG_HPP_
-#define _CONFIGUREORBITCOLORSDIALOG_HPP_
+#ifndef CONFIGUREORBITCOLORSDIALOG_HPP
+#define CONFIGUREORBITCOLORSDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -69,4 +69,4 @@ protected:
 
 };
 
-#endif // _CONFIGUREORBITCOLORSDIALOG_HPP_
+#endif // CONFIGUREORBITCOLORSDIALOG_HPP

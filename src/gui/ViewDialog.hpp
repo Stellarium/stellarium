@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _VIEWDIALOG_HPP_
-#define _VIEWDIALOG_HPP_
+#ifndef VIEWDIALOG_HPP
+#define VIEWDIALOG_HPP
 
 #include "StelDialog.hpp"
 
@@ -156,4 +156,4 @@ private:
 	ConfigureOrbitColorsDialog * configureOrbitColorsDialog;
 };
 
-#endif // _VIEWDIALOG_HPP_
+#endif // _VIEWDIALOG_HPP

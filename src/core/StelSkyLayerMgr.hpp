@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSKYLAYERMGR_HPP_
-#define _STELSKYLAYERMGR_HPP_
+#ifndef STELSKYLAYERMGR_HPP
+#define STELSKYLAYERMGR_HPP
 
 #include "StelModule.hpp"
 #include "StelSkyLayer.hpp"
@@ -206,4 +206,4 @@ private:
 	bool flagShow;
 };
 
-#endif // _STELSKYLAYERMGR_HPP_
+#endif // STELSKYLAYERMGR_HPP

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _TELESCOPEDIALOG_HPP_
-#define _TELESCOPEDIALOG_HPP_
+#ifndef TELESCOPEDIALOG_HPP
+#define TELESCOPEDIALOG_HPP
 
 #include <QObject>
 #include <QHash>
@@ -126,4 +126,4 @@ private:
 	bool configuredTelescopeIsNew;
 };
 
-#endif // _TELESCOPEDIALOG_
+#endif // TELESCOPEDIALOG_HPP

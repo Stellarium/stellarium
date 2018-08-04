@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELMODULE_HPP_
-#define _STELMODULE_HPP_
+#ifndef STELMODULE_HPP
+#define STELMODULE_HPP
 
 #include <QString>
 #include <QObject>
@@ -172,4 +172,4 @@ protected:
 
 Q_DECLARE_METATYPE(StelModule::StelModuleSelectAction)
 
-#endif // _STELMODULE_HPP_
+#endif // STELMODULE_HPP

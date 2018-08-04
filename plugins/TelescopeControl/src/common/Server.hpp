@@ -22,8 +22,8 @@ along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _SERVER_HPP_
-#define _SERVER_HPP_
+#ifndef SERVER_HPP
+#define SERVER_HPP
 
 #include <list>
 using namespace std;

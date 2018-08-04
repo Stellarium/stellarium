@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _MILKYWAY_HPP_
-#define _MILKYWAY_HPP_
+#ifndef MILKYWAY_HPP
+#define MILKYWAY_HPP
 
 #include "StelModule.hpp"
 #include "VecMath.hpp"
@@ -108,4 +108,4 @@ private:
 	struct StelVertexArray* vertexArray;
 };
 
-#endif // _MILKYWAY_HPP_
+#endif // MILKYWAY_HPP

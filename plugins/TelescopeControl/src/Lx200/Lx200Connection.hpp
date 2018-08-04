@@ -22,8 +22,8 @@ along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _LX200_CONNECTION_HPP_
-#define _LX200_CONNECTION_HPP_
+#ifndef LX200CONNECTION_HPP
+#define LX200CONNECTION_HPP
 
 #include "common/SerialPort.hpp"
 
@@ -66,4 +66,4 @@ private:
 	int goto_commands_queued;
 };
 
-#endif //_LX200_CONNECTION_HPP_
+#endif // LX200CONNECTION_HPP

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELTONEREPRODUCER_HPP_
-#define _STELTONEREPRODUCER_HPP_
+#ifndef STELTONEREPRODUCER_HPP
+#define STELTONEREPRODUCER_HPP
 
 #include <cmath>
 
@@ -183,5 +183,5 @@ private:
 	float term2TimesOneOverMaxdLpOneOverGamma;
 };
 
-#endif // _STELTONEREPRODUCER_HPP_
+#endif // STELTONEREPRODUCER_HPP
 

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELFADER_HPP_
-#define _STELFADER_HPP_
+#ifndef STELFADER_HPP
+#define STELFADER_HPP
 
 #include <QtGlobal>
 
@@ -150,4 +150,4 @@ public:
 	float getInterstate(void) const { return LinearFader::getInterstate() * LinearFader::getInterstate();}
 };
 
-#endif // _STELFADER_HPP_
+#endif // STELFADER_HPP

@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _ARCHAEOLINESDIALOG_HPP_
-#define _ARCHAEOLINESDIALOG_HPP_
+#ifndef ARCHAEOLINESDIALOG_HPP
+#define ARCHAEOLINESDIALOG_HPP
 
 #include "StelDialog.hpp"
 #include "StelGui.hpp"
@@ -139,4 +139,4 @@ private slots:
 
 };
 
-#endif /* _ARCHAEOLINESDIALOG_HPP_ */
+#endif /* ARCHAEOLINESDIALOG_HPP */

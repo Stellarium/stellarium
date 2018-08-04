@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTSTELJSONPARSER_HPP_
-#define _TESTSTELJSONPARSER_HPP_
+#ifndef TESTSTELJSONPARSER_HPP
+#define TESTSTELJSONPARSER_HPP
 
 #include <QObject>
 #include <QTest>
@@ -36,4 +36,4 @@ private:
 	QByteArray listJsonBuff;
 };
 
-#endif // _TESTSTELJSONPARSER_HPP_
+#endif // _TESTSTELJSONPARSER_HPP

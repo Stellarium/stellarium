@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELGUI_HPP_
-#define _STELGUI_HPP_
+#ifndef STELGUI_HPP
+#define STELGUI_HPP
 
 #ifndef NO_GUI
 
@@ -317,4 +317,4 @@ private:
 
 #endif
 
-#endif // _STELGUI_HPP_
+#endif // STELGUI_HPP

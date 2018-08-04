@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _TELESCOPE_CONTROL_GLOBALS_
-#define _TELESCOPE_CONTROL_GLOBALS_
+#ifndef TELESCOPECONTROLGLOBALS_HPP
+#define TELESCOPECONTROLGLOBALS_HPP
 
 #include <QString>
 #include <QStringList>
@@ -70,4 +70,4 @@ namespace TelescopeControlGlobals {
 	const QStringList EMBEDDED_TELESCOPE_SERVERS = QString("TelescopeServerDummy TelescopeServerLx200 TelescopeServerNexStar").split(' ', QString::SkipEmptyParts);
 };
 
-#endif //_TELESCOPE_CONTROL_GLOBALS_
+#endif // TELESCOPECONTROLGLOBALS_HPP

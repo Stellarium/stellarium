@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TELESCOPE_HPP_
-#define TELESCOPE_HPP_
+#ifndef TELESCOPE_HPP
+#define TELESCOPE_HPP
 
 #include <QObject>
 #include <QString>
@@ -63,4 +63,4 @@ private:
 	bool m_equatorial;
 };
 
-#endif /*TELESCOPE_HPP_*/
+#endif /*TELESCOPE_HPP*/

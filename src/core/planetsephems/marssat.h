@@ -48,8 +48,8 @@ in MarsSatV1-0.f are
 
 ****************************************************************/
 
-#ifndef _MARS_SAT_H_
-#define _MARS_SAT_H_
+#ifndef MARSSAT_H
+#define MARSSAT_H
 
 #ifdef __cplusplus
 extern "C" {

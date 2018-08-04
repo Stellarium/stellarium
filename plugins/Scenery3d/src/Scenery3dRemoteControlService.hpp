@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SCENERY3DREMOTECONTROLSERVICE_HPP_
-#define _SCENERY3DREMOTECONTROLSERVICE_HPP_
+#ifndef SCENERY3DREMOTECONTROLSERVICE_HPP
+#define SCENERY3DREMOTECONTROLSERVICE_HPP
 
 #include "../../RemoteControl/include/RemoteControlServiceInterface.hpp"
 #include "Scenery3d.hpp"
@@ -50,5 +50,5 @@ private:
 };
 
 
-#endif // _SCENERY3DREMOTECONTROLSERVICE_HPP_
+#endif // SCENERY3DREMOTECONTROLSERVICE_HPP
 

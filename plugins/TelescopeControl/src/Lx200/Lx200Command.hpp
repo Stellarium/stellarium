@@ -23,8 +23,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 */
 
-#ifndef _LX200_COMMAND_HPP_
-#define _LX200_COMMAND_HPP_
+#ifndef LX200COMMAND_HPP
+#define LX200COMMAND_HPP
 
 #include <QTextStream>
 using namespace std;
@@ -150,4 +150,4 @@ public:
 	void print(QTextStream &o) const;
 };
 
-#endif //_LX200_COMMAND_HPP_
+#endif // LX200COMMAND_HPP

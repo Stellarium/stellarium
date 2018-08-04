@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SKYGUI_HPP_
-#define _SKYGUI_HPP_
+#ifndef SKYGUI_HPP
+#define SKYGUI_HPP
 
 #include "StelStyle.hpp"
 #include "StelObject.hpp"
@@ -107,4 +107,4 @@ private:
 	StelGui* stelGui;
 };
 
-#endif // _SKYGUI_HPP_
+#endif // _SKYGUI_HPP

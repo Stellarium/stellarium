@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _SLEWDIALOG_HPP_
-#define _SLEWDIALOG_HPP_
+#ifndef SLEWDIALOG_HPP
+#define SLEWDIALOG_HPP
 
 #include <QObject>
 #include <QHash>
@@ -109,4 +109,4 @@ private:
 	QVariantMap storedPointsDescriptions;
 };
 
-#endif // _SLEWDIALOG_
+#endif // SLEWDIALOG_HPP

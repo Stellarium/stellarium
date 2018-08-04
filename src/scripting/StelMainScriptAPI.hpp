@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELMAINSCRIPTAPI_HPP_
-#define _STELMAINSCRIPTAPI_HPP_
+#ifndef STELMAINSCRIPTAPI_HPP
+#define STELMAINSCRIPTAPI_HPP
 
 #include <QObject>
 #include <QVariant>
@@ -867,5 +867,5 @@ signals:
 	void requestSetHomePosition();
 };
 
-#endif // _STELMAINSCRIPTAPI_HPP_
+#endif // STELMAINSCRIPTAPI_HPP
 

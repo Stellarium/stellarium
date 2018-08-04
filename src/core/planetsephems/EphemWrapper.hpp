@@ -29,8 +29,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  * includes access to DE430 and DE431 for a more accurate, yet storage-space intensive solution.
  */
 
-#ifndef _EPHEMWRAPPER_HPP_
-#define _EPHEMWRAPPER_HPP_
+#ifndef EPHEMWRAPPER_HPP
+#define EPHEMWRAPPER_HPP
 
 #define DE430_FILENAME  "linux_p1550p2650.430"
 #define DE431_FILENAME  "lnxm13000p17000.431"
@@ -92,6 +92,6 @@ void get_umbriel_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*
 void get_titania_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 void get_oberon_parent_coordsv(double jd,double xyz[3], double xyzdot[3], void*);
 
-#endif // _EPHEMWRAPPER_HPP_
+#endif // EPHEMWRAPPER_HPP
 
 

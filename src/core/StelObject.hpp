@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOBJECT_HPP_
-#define _STELOBJECT_HPP_
+#ifndef STELOBJECT_HPP
+#define STELOBJECT_HPP
 
 #include "VecMath.hpp"
 #include "StelObjectType.hpp"
@@ -262,4 +262,4 @@ private:
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(StelObject::InfoStringGroup)
 
-#endif // _STELOBJECT_HPP_
+#endif // STELOBJECT_HPP

@@ -25,8 +25,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TELESCOPE_CONTROL_HPP_
-#define _TELESCOPE_CONTROL_HPP_
+#ifndef TELESCOPECONTROL_HPP
+#define TELESCOPECONTROL_HPP
 
 #include "StelFader.hpp"
 #include "StelGui.hpp"
@@ -401,4 +401,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*_TELESCOPE_CONTROL_HPP_*/
+#endif /* TELESCOPECONTROL_HPP */

@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _POINTERCOORDINATES_HPP_
-#define _POINTERCOORDINATES_HPP_
+#ifndef POINTERCOORDINATES_HPP
+#define POINTERCOORDINATES_HPP
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
@@ -234,4 +234,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /* _POINTERCOORDINATES_HPP_ */
+#endif /* POINTERCOORDINATES_HPP */

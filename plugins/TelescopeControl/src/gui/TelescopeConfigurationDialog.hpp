@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _TELESCOPECONFIGURATIONDIALOG_HPP_
-#define _TELESCOPECONFIGURATIONDIALOG_HPP_
+#ifndef TELESCOPECONFIGURATIONDIALOG_HPP
+#define TELESCOPECONFIGURATIONDIALOG_HPP
 
 #include <QObject>
 #include <QHash>
@@ -87,4 +87,4 @@ private:
 	TelescopeControl * telescopeManager;
 };
 
-#endif // _TELESCOPECONFIGURATIONDIALOG_
+#endif // TELESCOPECONFIGURATIONDIALOG_HPP

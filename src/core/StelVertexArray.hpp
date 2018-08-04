@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef __STELVERTEXARRAY_HPP__
-#define __STELVERTEXARRAY_HPP__
+#ifndef STELVERTEXARRAY_HPP
+#define STELVERTEXARRAY_HPP
 
 #include "VecMath.hpp"
 
@@ -206,4 +206,4 @@ Func StelVertexArray::specForeachTriangle(Func func) const
 }
 
 
-#endif // __STELVERTEXARRAY_HPP__
+#endif // STELVERTEXARRAY_HPP

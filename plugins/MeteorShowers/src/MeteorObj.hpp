@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _METEOROBJ_HPP_
-#define _METEOROBJ_HPP_
+#ifndef METEOROBJ_HPP
+#define METEOROBJ_HPP
 
 #include "Meteor.hpp"
 #include "StelCore.hpp"
@@ -43,4 +43,4 @@ public:
 	virtual ~MeteorObj();
 };
 
-#endif // _METEOROBJ_HPP_
+#endif // METEOROBJ_HPP

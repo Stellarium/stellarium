@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _MPC_IMPORT_WINDOW_
-#define _MPC_IMPORT_WINDOW_
+#ifndef MPCIMPORTWINDOW_HPP
+#define MPCIMPORTWINDOW_HPP
 
 #include <QObject>
 #include <QNetworkAccessManager>
@@ -140,4 +140,4 @@ protected:
 	Ui_mpcImportWindow * ui;
 };
 
-#endif //_MPC_IMPORT_WINDOW_
+#endif // MPCIMPORTWINDOW_HPP

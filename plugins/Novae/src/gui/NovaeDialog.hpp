@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _NOVAEDIALOG_HPP_
-#define _NOVAEDIALOG_HPP_
+#ifndef NOVAEDIALOG_HPP
+#define NOVAEDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -64,4 +64,4 @@ private:
 
 };
 
-#endif // _NOVAEDIALOG_HPP_
+#endif // NOVAEDIALOG_HPP

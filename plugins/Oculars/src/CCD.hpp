@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef CCD_HPP_
-#define CCD_HPP_
+#ifndef CCD_HPP
+#define CCD_HPP
 
 #include <QObject>
 #include <QString>
@@ -129,4 +129,4 @@ private:
 };
 
 
-#endif /* CCD_HPP_ */
+#endif /* CCD_HPP */

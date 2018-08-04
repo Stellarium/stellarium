@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOBJECTMGR_HPP_
-#define _STELOBJECTMGR_HPP_
+#ifndef STELOBJECTMGR_HPP
+#define STELOBJECTMGR_HPP
 
 #include "VecMath.hpp"
 #include "StelModule.hpp"
@@ -175,4 +175,4 @@ private:
 	float distanceWeight;
 };
 
-#endif // _SELECTIONMGR_HPP_
+#endif // _SELECTIONMGR_HPP

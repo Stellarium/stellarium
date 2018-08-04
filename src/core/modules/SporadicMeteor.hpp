@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SPORADICMETEOR_HPP_
-#define _SPORADICMETEOR_HPP_
+#ifndef SPORADICMETEOR_HPP
+#define SPORADICMETEOR_HPP
 
 #include "Meteor.hpp"
 
@@ -37,4 +37,4 @@ private:
 };
 
 
-#endif // _SPORADICMETEOR_HPP_
+#endif // SPORADICMETEOR_HPP

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _GRIDLINESMGR_HPP_
-#define _GRIDLINESMGR_HPP_
+#ifndef GRIDLINESMGR_HPP
+#define GRIDLINESMGR_HPP
 
 #include "VecMath.hpp"
 #include "StelModule.hpp"
@@ -910,4 +910,4 @@ private:
 	SkyPoint * solsticePoints;		// Solstice points
 };
 
-#endif // _GRIDLINESMGR_HPP_
+#endif // GRIDLINESMGR_HPP

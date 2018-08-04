@@ -20,8 +20,8 @@
 
 // GZ: Methods copied largely from AddRemoveLandscapesDialog
 
-#ifndef _ATMOSPHEREDIALOG_HPP_
-#define _ATMOSPHEREDIALOG_HPP_
+#ifndef ATMOSPHEREDIALOG_HPP
+#define ATMOSPHEREDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -50,4 +50,4 @@ private:
         Extinction *extinction;
 };
 
-#endif // _ATMOSPHEREDIALOG_HPP_
+#endif // ATMOSPHEREDIALOG_HPP

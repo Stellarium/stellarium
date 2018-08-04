@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NOMENCLATUREMGR_HPP_
-#define _NOMENCLATUREMGR_HPP_
+#ifndef NOMENCLATUREMGR_HPP
+#define NOMENCLATUREMGR_HPP
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
@@ -143,4 +143,4 @@ private:
 	QMultiHash<PlanetP, NomenclatureItemP> nomenclatureItems;
 };
 
-#endif /*_NOMENCLATUREMGR_HPP_*/
+#endif /* NOMENCLATUREMGR_HPP */

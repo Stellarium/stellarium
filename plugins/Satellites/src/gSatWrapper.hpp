@@ -26,8 +26,8 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-#ifndef _GSATWRAPPER_HPP_
-#define _GSATWRAPPER_HPP_ 1
+#ifndef GSATWRAPPER_HPP
+#define GSATWRAPPER_HPP
 
 #include <QString>
 

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef METEORSHOWERS_HPP_
-#define METEORSHOWERS_HPP_
+#ifndef METEORSHOWERS_HPP
+#define METEORSHOWERS_HPP
 
 #include "MeteorShower.hpp"
 #include "MeteorShowersMgr.hpp"
@@ -90,4 +90,4 @@ private:
 	void drawPointer(StelCore* core);
 };
 
-#endif /*METEORSHOWERS_HPP_*/
+#endif /*METEORSHOWERS_HPP*/

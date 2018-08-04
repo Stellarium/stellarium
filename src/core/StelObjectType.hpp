@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOBJECTTYPE_HPP_
-#define _STELOBJECTTYPE_HPP_
+#ifndef STELOBJECTTYPE_HPP
+#define STELOBJECTTYPE_HPP
 
 #include <QSharedPointer>
 
@@ -45,4 +45,4 @@ typedef QSharedPointerNoDelete<StelObject> StelObjectP;
 
 Q_DECLARE_METATYPE(StelObjectP)
 
-#endif // _STELOBJECTTYPE_HPP_
+#endif // STELOBJECTTYPE_HPP

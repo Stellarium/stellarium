@@ -18,8 +18,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _STELLASTRO_H
-#define _STELLASTRO_H
+#ifndef STELLASTRO_H
+#define STELLASTRO_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,4 +40,4 @@ double get_apparent_sidereal_time (double JD, double JDE);
 #endif
 
 
-#endif /* _STELLASTRO_H */
+#endif /* STELLASTRO_H */

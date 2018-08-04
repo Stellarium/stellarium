@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELAUDIOMGR_HPP_
-#define _STELAUDIOMGR_HPP_
+#ifndef STELAUDIOMGR_HPP
+#define STELAUDIOMGR_HPP
 
 #include <QObject>
 #include <QMap>
@@ -56,4 +56,4 @@ private:
 	QMap<QString, QMediaPlayer*> audioObjects;
 };
 
-#endif // _STELAUDIOMGR_HPP_
+#endif // STELAUDIOMGR_HPP

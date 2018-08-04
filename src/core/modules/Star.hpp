@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STAR_HPP_
-#define _STAR_HPP_
+#ifndef STAR_HPP
+#define STAR_HPP
 
 #include "ZoneData.hpp"
 #include "StelObjectType.hpp"
@@ -280,4 +280,4 @@ public:
 };
 static_assert(sizeof(Star3) == 6, "Size of Star3 must be 6 bytes");
 
-#endif // _STAR_HPP_
+#endif // STAR_HPP

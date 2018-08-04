@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _FOV_WINDOW_HPP_
-#define _FOV_WINDOW_HPP_
+#ifndef FOVWINDOW_HPP
+#define FOVWINDOW_HPP
 
 #include "StelDialog.hpp"
 
@@ -68,4 +68,4 @@ private slots:
 };
 
 
-#endif /* _FOV_WINDOW_HPP_ */
+#endif /* FOVWINDOW_HPP */

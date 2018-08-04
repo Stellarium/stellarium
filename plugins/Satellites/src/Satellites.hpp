@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SATELLITES_HPP_
-#define _SATELLITES_HPP_ 1
+#ifndef SATELLITES_HPP
+#define SATELLITES_HPP
 
 #include "StelObjectModule.hpp"
 #include "Satellite.hpp"
@@ -643,5 +643,5 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*_SATELLITES_HPP_*/
+#endif /* SATELLITES_HPP */
 

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ZONEDATA_HPP_
-#define _ZONEDATA_HPP_
+#ifndef ZONEDATA_HPP
+#define ZONEDATA_HPP
 
 // just for Vect3d.
 // Take any Vector class instead, if you want to use the star feature in a
@@ -67,4 +67,4 @@ struct SpecialZoneData : public ZoneData
 	}
 };
 
-#endif // _ZONEDATA_HPP_
+#endif // ZONEDATA_HPP

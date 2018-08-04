@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SYNCSERVER_HPP_
-#define SYNCSERVER_HPP_
+#ifndef SYNCSERVER_HPP
+#define SYNCSERVER_HPP
 
 #include "SyncProtocol.hpp"
 #include <QObject>

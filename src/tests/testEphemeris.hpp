@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTEPHEMERIS_HPP_
-#define _TESTEPHEMERIS_HPP_
+#ifndef TESTEPHEMERIS_HPP
+#define TESTEPHEMERIS_HPP
 
 #include <QObject>
 #include <QTest>
@@ -62,5 +62,5 @@ private:
 	QVariantList mercury, venus, mars, jupiter, saturn, uranus, neptune;
 };
 
-#endif // _TESTEPHEMERIS_HPP_
+#endif // _TESTEPHEMERIS_HPP
 

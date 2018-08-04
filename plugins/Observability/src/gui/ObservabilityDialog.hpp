@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _OBSERVABILITYDIALOG_HPP_
-#define _OBSERVABILITYDIALOG_HPP_
+#ifndef OBSERVABILITYDIALOG_HPP
+#define OBSERVABILITYDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -60,4 +60,4 @@ private:
 	void setAboutHtml(void);
 };
 
-#endif // _OBSERVABILITYDIALOG_HPP_
+#endif // OBSERVABILITYDIALOG_HPP

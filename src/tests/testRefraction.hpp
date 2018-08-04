@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTREFRACTION_HPP_
-#define _TESTREFRACTION_HPP_
+#ifndef TESTREFRACTION_HPP
+#define TESTREFRACTION_HPP
 
 #include <QObject>
 #include <QtTest>
@@ -34,4 +34,4 @@ private slots:
 	void testComplexRefraction();
 };
 
-#endif // _TESTREFRACTION_HPP_
+#endif // _TESTREFRACTION_HPP

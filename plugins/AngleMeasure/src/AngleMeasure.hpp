@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef ANGLEMEASURE_HPP_
-#define ANGLEMEASURE_HPP_
+#ifndef ANGLEMEASURE_HPP
+#define ANGLEMEASURE_HPP
 
 #include <QFont>
 #include "VecMath.hpp"
@@ -204,5 +204,5 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*ANGLEMEASURE_HPP_*/
+#endif /*ANGLEMEASURE_HPP*/
 

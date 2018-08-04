@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef _DUMMYDIALOG_HPP_
-#define _DUMMYDIALOG_HPP_ 1
+#ifndef DUMMYDIALOG_HPP
+#define DUMMYDIALOG_HPP
 
 #include "StelModule.hpp"
 #include <QObject>
@@ -53,5 +53,5 @@ protected:
 	StelModule* evtHandler;
 };
 
-#endif /* _DUMMYDIALOG_HPP_ */
+#endif /* DUMMYDIALOG_HPP */
 

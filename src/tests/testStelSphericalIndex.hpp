@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTSTELSPHERICALINDEX_HPP_
-#define _TESTSTELSPHERICALINDEX_HPP_
+#ifndef TESTSTELSPHERICALINDEX_HPP
+#define TESTSTELSPHERICALINDEX_HPP
 
 #include <QObject>
 #include <QTest>
@@ -34,4 +34,4 @@ private slots:
 private:
 };
 
-#endif // _TESTSTELSPHERICALINDEX_HPP_
+#endif // _TESTSTELSPHERICALINDEX_HPP

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELLOCALEMGR_HPP_
-#define _STELLOCALEMGR_HPP_
+#ifndef STELLOCALEMGR_HPP
+#define STELLOCALEMGR_HPP
 
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
@@ -173,4 +173,4 @@ private:
 	static void generateCountryList();
 };
 
-#endif // _STELLOCALEMGR_HPP_
+#endif // STELLOCALEMGR_HPP

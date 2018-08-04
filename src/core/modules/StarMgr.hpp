@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STARMGR_HPP_
-#define _STARMGR_HPP_
+#ifndef STARMGR_HPP
+#define STARMGR_HPP
 
 #include <QFont>
 #include <QVariantMap>
@@ -492,5 +492,5 @@ private:
 };
 
 
-#endif // _STARMGR_HPP_
+#endif // STARMGR_HPP
 

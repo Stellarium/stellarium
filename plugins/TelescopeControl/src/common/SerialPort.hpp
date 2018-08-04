@@ -22,8 +22,8 @@ along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _SERIAL_PORT_HPP_
-#define _SERIAL_PORT_HPP_
+#ifndef SERIALPORT_HPP
+#define SERIALPORT_HPP
 
 #include "Connection.hpp"
 

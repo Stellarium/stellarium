@@ -17,8 +17,8 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _HIPSMGR_HPP_
-#define _HIPSMGR_HPP_
+#ifndef HIPSMGR_HPP
+#define HIPSMGR_HPP
 
 #include "StelModule.hpp"
 #include "StelHips.hpp"
@@ -90,4 +90,4 @@ private:
 	int nbSourcesLoaded = 0;
 };
 
-#endif // _HIPSMGR_HPP_
+#endif // HIPSMGR_HPP

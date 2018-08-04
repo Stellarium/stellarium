@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOBJ_HPP_
-#define _STELOBJ_HPP_
+#ifndef STELOBJ_HPP
+#define STELOBJ_HPP
 
 #include "GeomMath.hpp"
 
@@ -374,4 +374,4 @@ inline uint qHash(const StelOBJ::Vertex& key, uint seed)
 	return qHashBits(&key, sizeof(StelOBJ::Vertex), seed);
 }
 
-#endif // _STELOBJ_HPP_
+#endif // STELOBJ_HPP

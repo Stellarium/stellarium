@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _HELPDIALOG_HPP_
-#define _HELPDIALOG_HPP_
+#ifndef HELPDIALOG_HPP
+#define HELPDIALOG_HPP
 
 #include <QString>
 #include <QObject>
@@ -69,5 +69,5 @@ private slots:
 
 };
 
-#endif /*_HELPDIALOG_HPP_*/
+#endif /*_HELPDIALOG_HPP*/
 

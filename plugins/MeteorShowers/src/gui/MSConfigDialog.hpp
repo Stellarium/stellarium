@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _MSCONFIGDIALOG_HPP_
-#define _MSCONFIGDIALOG_HPP_
+#ifndef MSCONFIGDIALOG_HPP
+#define MSCONFIGDIALOG_HPP
 
 #include "MeteorShowers.hpp"
 #include "StelDialog.hpp"
@@ -73,4 +73,4 @@ private:
 	void setAboutHtml();
 };
 
-#endif // _MSCONFIGDIALOG_HPP_
+#endif // MSCONFIGDIALOG_HPP

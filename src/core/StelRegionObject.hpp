@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELREGIONOBJECT_HPP_
-#define _STELREGIONOBJECT_HPP_
+#ifndef STELREGIONOBJECT_HPP
+#define STELREGIONOBJECT_HPP
 
 #include "StelSphereGeometry.hpp"
 
@@ -43,4 +43,4 @@ public:
 //! Shared pointer on a StelRegionObject with smart pointers
 typedef QSharedPointer<StelRegionObject> StelRegionObjectP;
 
-#endif // _STELGRIDOBJECT_HPP_
+#endif // STELGRIDOBJECT_HPP

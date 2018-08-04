@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef METEORSHOWERSMGR_HPP_
-#define METEORSHOWERSMGR_HPP_
+#ifndef METEORSHOWERSMGR_HPP
+#define METEORSHOWERSMGR_HPP
 
 #include <QNetworkReply>
 #include <QNetworkAccessManager>
@@ -348,4 +348,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*METEORSHOWERSMGR_HPP_*/
+#endif /*METEORSHOWERSMGR_HPP*/

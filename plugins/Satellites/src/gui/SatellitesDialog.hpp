@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _SATELLITESDIALOG_HPP_
-#define _SATELLITESDIALOG_HPP_
+#ifndef _SATELLITESDIALOG_HPP
+#define _SATELLITESDIALOG_HPP
 
 #include <QObject>
 #include <QModelIndex>
@@ -185,4 +185,4 @@ private:
 	}
 };
 
-#endif // _SATELLITESDIALOG_HPP_
+#endif // _SATELLITESDIALOG_HPP

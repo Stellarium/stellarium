@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELPROJECTIONS_HPP_
-#define _STELPROJECTIONS_HPP_
+#ifndef STELPROJECTIONS_HPP
+#define STELPROJECTIONS_HPP
 
 #include "StelProjector.hpp"
 
@@ -262,5 +262,5 @@ protected:
 	virtual void computeBoundingCap() {;}
 };
 
-#endif // _STELPROJECTIONS_HPP_
+#endif // STELPROJECTIONS_HPP
 

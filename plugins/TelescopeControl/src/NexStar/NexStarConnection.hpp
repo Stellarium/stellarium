@@ -22,8 +22,8 @@ along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _NEXSTAR_CONNECTION_HPP_
-#define _NEXSTAR_CONNECTION_HPP_
+#ifndef NEXSTARCONNECTION_HPP
+#define NEXSTARCONNECTION_HPP
 
 #include "common/SerialPort.hpp"
 
@@ -50,4 +50,4 @@ private:
 	list<NexStarCommand*> command_list;
 };
 
-#endif //_NEXSTAR_CONNECTION_HPP_
+#endif // NEXSTARCONNECTION_HPP

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef STELPROPERTYSERVICE_HPP_
-#define STELPROPERTYSERVICE_HPP_
+#ifndef STELPROPERTYSERVICE_HPP
+#define STELPROPERTYSERVICE_HPP
 
 #include "AbstractAPIService.hpp"
 #include "StelPropertyMgr.hpp"

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ANGLESPINBOX_HPP_
-#define _ANGLESPINBOX_HPP_
+#ifndef ANGLESPINBOX_HPP
+#define ANGLESPINBOX_HPP
 
 #include <QAbstractSpinBox>
 #include <QString>
@@ -181,4 +181,4 @@ private:
 	double maxRad;
 };
 
-#endif // _ANGLESPINBOX_HPP_
+#endif // ANGLESPINBOX_HPP

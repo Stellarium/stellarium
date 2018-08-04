@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef ABSTRACTAPISERVICE_HPP_
-#define ABSTRACTAPISERVICE_HPP_
+#ifndef ABSTRACTAPISERVICE_HPP
+#define ABSTRACTAPISERVICE_HPP
 
 #include "RemoteControlServiceInterface.hpp"
 

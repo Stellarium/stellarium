@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSKYCULTUREMGR_HPP_
-#define _STELSKYCULTUREMGR_HPP_
+#ifndef STELSKYCULTUREMGR_HPP
+#define STELSKYCULTUREMGR_HPP
 
 #include <QObject>
 #include <QMap>
@@ -153,4 +153,4 @@ private:
 	QString defaultSkyCultureID;
 };
 
-#endif // _STELSKYCULTUREMGR_HPP_
+#endif // STELSKYCULTUREMGR_HPP

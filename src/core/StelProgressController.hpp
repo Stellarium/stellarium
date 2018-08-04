@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELPROGRESSCONTROLLER_HPP_
-#define _STELPROGRESSCONTROLLER_HPP_
+#ifndef STELPROGRESSCONTROLLER_HPP
+#define STELPROGRESSCONTROLLER_HPP
 
 #include <QString>
 #include <QObject>
@@ -58,4 +58,4 @@ private:
 };
 
 
-#endif // _STELPROGRESSCONTROLLER_HPP_
+#endif // STELPROGRESSCONTROLLER_HPP

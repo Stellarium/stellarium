@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _PLANE_HPP_
-#define _PLANE_HPP_
+#ifndef PLANE_HPP
+#define PLANE_HPP
 
 #include "GeomMath.hpp"
 #include "SPolygon.hpp"

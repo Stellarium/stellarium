@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SYNCMESSAGES_HPP_
-#define SYNCMESSAGES_HPP_
+#ifndef SYNCMESSAGES_HPP
+#define SYNCMESSAGES_HPP
 
 #include "SyncProtocol.hpp"
 #include "StelLocation.hpp"

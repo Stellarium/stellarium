@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELPROPERTYMGR_HPP_
-#define _STELPROPERTYMGR_HPP_
+#ifndef STELPROPERTYMGR_HPP
+#define STELPROPERTYMGR_HPP
 
 #include <QObject>
 #include <QSet>

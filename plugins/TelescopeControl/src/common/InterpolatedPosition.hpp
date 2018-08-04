@@ -23,8 +23,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _INTERPOLATED_POSITION_HPP_
-#define _INTERPOLATED_POSITION_HPP_
+#ifndef INTERPOLATEDPOSITION_HPP
+#define INTERPOLATEDPOSITION_HPP
 
 #include <stdint.h>
 #ifndef INT64_MAX
@@ -61,4 +61,4 @@ private:
 	Position *const end_position;
 };
  
- #endif //_INTEPOLATED_POSITION_HPP_
+ #endif // INTEPOLATEDPOSITION_HPP

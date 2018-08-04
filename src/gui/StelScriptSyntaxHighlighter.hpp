@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSCRIPTSYNTAXHIGHLIGHTER_HPP_
-#define _STELSCRIPTSYNTAXHIGHLIGHTER_HPP_
+#ifndef STELSCRIPTSYNTAXHIGHLIGHTER_HPP
+#define STELSCRIPTSYNTAXHIGHLIGHTER_HPP
 
 #include <QSyntaxHighlighter>
 #include <QHash>
@@ -54,5 +54,5 @@ private:
 	QTextCharFormat functionFormat;
 };
 
-#endif // _STELSCRIPTSYNTAXHIGHLIGHTER_HPP_
+#endif // STELSCRIPTSYNTAXHIGHLIGHTER_HPP
 

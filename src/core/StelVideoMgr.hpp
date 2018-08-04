@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELVIDEOMGR_HPP_
-#define _STELVIDEOMGR_HPP_
+#ifndef STELVIDEOMGR_HPP
+#define STELVIDEOMGR_HPP
 
 #include <QObject>
 #include <QMap>
@@ -259,4 +259,4 @@ private:
 #endif
 };
 
-#endif // _STELVIDEOMGR_HPP_
+#endif // STELVIDEOMGR_HPP

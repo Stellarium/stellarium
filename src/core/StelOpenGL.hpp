@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOPENGL_HPP_
-#define _STELOPENGL_HPP_
+#ifndef STELOPENGL_HPP
+#define STELOPENGL_HPP
 
 #include <QOpenGLFunctions>
 
@@ -56,4 +56,4 @@ namespace StelOpenGL
 #endif
 #endif
 
-#endif // _STELOPENGL_HPP_
+#endif // STELOPENGL_HPP

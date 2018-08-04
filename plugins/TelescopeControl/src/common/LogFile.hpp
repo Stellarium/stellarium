@@ -22,8 +22,8 @@ along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _LOG_FILE_H_
-#define _LOG_FILE_H_
+#ifndef LOGFILE_HPP
+#define LOGFILE_HPP
 
 #include <QTextStream>
 

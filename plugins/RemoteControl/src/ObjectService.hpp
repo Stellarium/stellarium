@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef OBJECTSERVICE_HPP_
-#define OBJECTSERVICE_HPP_
+#ifndef OBJECTSERVICE_HPP
+#define OBJECTSERVICE_HPP
 
 #include "AbstractAPIService.hpp"
 #include "StelObjectType.hpp"

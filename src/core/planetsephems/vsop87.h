@@ -47,8 +47,8 @@ ATTENTION! Due to static caching this solution is not reentrant and cannot be pa
 ****************************************************************/
 
 
-#ifndef _VSOP87_H_
-#define _VSOP87_H_
+#ifndef VSOP87_H
+#define VSOP87_H
 
 #ifdef __cplusplus
 extern "C" {

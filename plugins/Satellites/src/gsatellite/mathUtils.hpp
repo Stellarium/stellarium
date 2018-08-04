@@ -28,8 +28,8 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-#ifndef _MATHUTILS_HPP_
-#define _MATHUTILS_HPP_ 1
+#ifndef MATHUTILS_HPP
+#define MATHUTILS_HPP
 
 
 //! Four-quadrant arctan function
@@ -41,4 +41,4 @@ double AcTan(double sinx, double cosx);
 double Sqr(double arg);
 
 
-#endif // _MATHUTILS_HPP_
+#endif // MATHUTILS_HPP

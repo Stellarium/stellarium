@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELJSONPARSER_HPP_
-#define _STELJSONPARSER_HPP_
+#ifndef STELJSONPARSER_HPP
+#define STELJSONPARSER_HPP
 
 #include <QIODevice>
 #include <QVariant>
@@ -54,4 +54,4 @@ public:
 	// static void registerSerializerForType(int t, void (*func)(const QVariant&, QIODevice*, int)) {otherSerializer.insert(t, func);}
 };
 
-#endif // _STELJSONPARSER_HPP_
+#endif // STELJSONPARSER_HPP

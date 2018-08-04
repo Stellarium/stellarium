@@ -17,11 +17,12 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _GEODESICGRIDDRAWER_HPP_
-#define _GEODESICGRIDDRAWER_HPP_
+#ifndef GEODESICGRIDDRAWER_HPP
+#define GEODESICGRIDDRAWER_HPP
 
 #include "StelGeodesicGrid.hpp"
 #include "StelModule.hpp"
+#include <QFont>
 
 class StelProjector;
 class StelNavigator;
@@ -47,4 +48,4 @@ private:
 	QFont font;
 };
 
-#endif // _GEODESICGRIDDRAWER_HPP_
+#endif // GEODESICGRIDDRAWER_HPP

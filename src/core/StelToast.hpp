@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELTOAST_HPP_
-#define _STELTOAST_HPP_
+#ifndef STELTOAST_HPP
+#define STELTOAST_HPP
 
 #include <QCache>
 #include <QObject>
@@ -159,4 +159,4 @@ private:
 	ToastCache toastCache;
 };
 
-#endif // _STELTOAST_HPP_
+#endif // STELTOAST_HPP

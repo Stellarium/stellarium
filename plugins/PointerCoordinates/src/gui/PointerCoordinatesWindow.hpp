@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _POINTER_COORDINATES_WINDOW_HPP_
-#define _POINTER_COORDINATES_WINDOW_HPP_
+#ifndef POINTERCOORDINATESWINDOW_HPP
+#define POINTERCOORDINATESWINDOW_HPP
 
 #include "StelDialog.hpp"
 
@@ -64,4 +64,4 @@ private slots:
 };
 
 
-#endif /* _POINTER_COORDINATES_WINDOW_HPP_ */
+#endif /* POINTERCOORDINATESWINDOW_HPP */

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef STELMAINVIEW_HPP_
-#define STELMAINVIEW_HPP_
+#ifndef STELMAINVIEW_HPP
+#define STELMAINVIEW_HPP
 
 #include <QCoreApplication>
 #include <QGraphicsView>
@@ -311,4 +311,4 @@ private:
 };
 
 
-#endif // STELMAINVIEW_HPP_
+#endif // STELMAINVIEW_HPP

@@ -18,8 +18,8 @@
 
 // AW: Methods copied largely from AddRemoveLandscapesDialog
 
-#ifndef _CUSTOMDELTATEQUATIONDIALOG_HPP_
-#define _CUSTOMDELTATEQUATIONDIALOG_HPP_
+#ifndef CUSTOMDELTATEQUATIONDIALOG_HPP
+#define CUSTOMDELTATEQUATIONDIALOG_HPP
 
 #include "StelDialog.hpp"
 #include "StelCore.hpp"
@@ -68,4 +68,4 @@ private:
 
 };
 
-#endif // _CUSTOMDELTATEQUATIONDIALOG_HPP_
+#endif // CUSTOMDELTATEQUATIONDIALOG_HPP

@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SOLAR_SYSTEM_EDITOR_HPP_
-#define _SOLAR_SYSTEM_EDITOR_HPP_
+#ifndef SOLARSYSTEMEDITOR_HPP
+#define SOLARSYSTEMEDITOR_HPP
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
@@ -328,4 +328,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif //_SOLAR_SYSTEM_EDITOR_HPP_
+#endif // SOLARSYSTEMEDITOR_HPP

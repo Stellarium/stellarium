@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STARWRAPPER_HPP_
-#define _STARWRAPPER_HPP_
+#ifndef STARWRAPPER_HPP
+#define STARWRAPPER_HPP
 
 #include "StelObject.hpp"
 #include "StelApp.hpp"
@@ -156,4 +156,4 @@ public:
 };
 
 
-#endif // _STARWRAPPER_HPP_
+#endif // STARWRAPPER_HPP

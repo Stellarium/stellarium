@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _OCULARDIALOG_HPP_
-#define _OCULARDIALOG_HPP_
+#ifndef OCULARDIALOG_HPP
+#define OCULARDIALOG_HPP
 
 #include <QObject>
 #include "CCD.hpp"
@@ -98,4 +98,4 @@ private:
 	QRegExpValidator*		validatorName;
 };
 
-#endif // _OCULARDIALOG_HPP_
+#endif // OCULARDIALOG_HPP

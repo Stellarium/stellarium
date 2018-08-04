@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef APIHANDLER_HPP_
-#define APIHANDLER_HPP_
+#ifndef APIHANDLER_HPP
+#define APIHANDLER_HPP
 
 #include "httpserver/httprequesthandler.h"
 #include "AbstractAPIService.hpp"

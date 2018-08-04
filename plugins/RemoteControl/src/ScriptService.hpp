@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SCRIPTSERVICE_HPP_
-#define SCRIPTSERVICE_HPP_
+#ifndef SCRIPTSERVICE_HPP
+#define SCRIPTSERVICE_HPP
 
 #include "AbstractAPIService.hpp"
 

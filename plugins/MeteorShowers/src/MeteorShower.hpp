@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _METEORSHOWER_HPP_
-#define _METEORSHOWER_HPP_
+#ifndef METEORSHOWER_HPP
+#define METEORSHOWER_HPP
 
 #include "MeteorObj.hpp"
 #include "MeteorShowersMgr.hpp"
@@ -168,4 +168,4 @@ private:
 	static QString getSolarLongitude(QDate date);
 };
 
-#endif /*_METEORSHOWER_HPP_*/
+#endif /* METEORSHOWER_HPP */

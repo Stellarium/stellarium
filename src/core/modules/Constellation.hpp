@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _CONSTELLATION_HPP_
-#define _CONSTELLATION_HPP_
+#ifndef CONSTELLATION_HPP
+#define CONSTELLATION_HPP
 
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
@@ -194,4 +194,4 @@ private:
 	static float artIntensityFovScale;
 };
 
-#endif // _CONSTELLATION_HPP_
+#endif // CONSTELLATION_HPP

@@ -47,8 +47,8 @@ My implementation of GUST86 has the following modifications:
 ****************************************************************/
 
 
-#ifndef _GUST86_H_
-#define _GUST86_H_
+#ifndef GUST86_H
+#define GUST86_H
 
 #ifdef __cplusplus
 extern "C" {

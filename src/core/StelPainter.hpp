@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELPAINTER_HPP_
-#define _STELPAINTER_HPP_
+#ifndef STELPAINTER_HPP
+#define STELPAINTER_HPP
 
 #include "StelOpenGL.hpp"
 #include "VecMath.hpp"
@@ -451,5 +451,5 @@ private:
 
 Q_DECLARE_METATYPE(StelPainter::DitheringMode)
 
-#endif // _STELPAINTER_HPP_
+#endif // STELPAINTER_HPP
 

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STOREDVIEWDIALOG_HPP_
-#define _STOREDVIEWDIALOG_HPP_
+#ifndef STOREDVIEWDIALOG_HPP
+#define STOREDVIEWDIALOG_HPP
 
 #include "StelDialog.hpp"
 #include "ui_storedViewDialog.h"

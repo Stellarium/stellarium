@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELPROJECTORTYPE_HPP_
-#define _STELPROJECTORTYPE_HPP_
+#ifndef STELPROJECTORTYPE_HPP
+#define STELPROJECTORTYPE_HPP
 
 #include <QSharedPointer>
 
@@ -31,4 +31,4 @@ class StelProjector;
 //! Shared pointer on a StelProjector instance (implement reference counting)
 typedef QSharedPointer<StelProjector> StelProjectorP;
 
-#endif // _STELPROJECTORTYPE_HPP_
+#endif // STELPROJECTORTYPE_HPP

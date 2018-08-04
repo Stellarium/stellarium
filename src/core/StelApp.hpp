@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELAPP_HPP_
-#define _STELAPP_HPP_
+#ifndef STELAPP_HPP
+#define STELAPP_HPP
 
 #include <QString>
 #include <QObject>
@@ -438,4 +438,4 @@ private:
 
 };
 
-#endif // _STELAPP_HPP_
+#endif // STELAPP_HPP

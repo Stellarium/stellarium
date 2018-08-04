@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _METEOR_HPP_
-#define _METEOR_HPP_
+#ifndef METEOR_HPP
+#define METEOR_HPP
 
 #include "StelTextureTypes.hpp"
 #include "VecMath.hpp"
@@ -112,4 +112,4 @@ private:
 	QVector<Vec4f> m_lineColorVector;
 };
 
-#endif // _METEOR_HPP_
+#endif // METEOR_HPP

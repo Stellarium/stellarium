@@ -18,8 +18,8 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-#ifndef _STDSAT_H_
-#define _STDSAT_H_ 1
+#ifndef STDSAT_H
+#define STDSAT_H
 
 static const double KINTERPOLATIONLIMIT=0.0000000000001;
 static const double KMU=3.9861352E5;
@@ -34,4 +34,4 @@ static const double KDEG2RAD  =   KPI / 180.0;   //   0.0174532925199433
 static const double KRAD2DEG  =  180.0 / KPI ;   //   0.0174532925199433
 static const double XPDOTP   =  1440.0 / K2PI;  // 229.1831180523293 minutes per radian (earth rotation)
 
-#endif // _STDSAT_H_
+#endif // STDSAT_H

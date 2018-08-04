@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef REMOTESYNC_HPP_
-#define REMOTESYNC_HPP_
+#ifndef REMOTESYNC_HPP
+#define REMOTESYNC_HPP
 
 #include "StelModule.hpp"
 #include "SyncClient.hpp"
@@ -206,5 +206,5 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*REMOTESYNC_HPP_*/
+#endif /*REMOTESYNC_HPP*/
 

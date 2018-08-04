@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELOBSERVER_HPP_
-#define _STELOBSERVER_HPP_
+#ifndef STELOBSERVER_HPP
+#define STELOBSERVER_HPP
 
 #include "Planet.hpp"
 #include "StelLocation.hpp"
@@ -113,5 +113,5 @@ private:
 	double transitSeconds;
 };
 
-#endif // _STELOBSERVER_HPP_
+#endif // STELOBSERVER_HPP
 

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef _TUINODEDATETIME_HPP_
-#define _TUINODEDATETIME_HPP_ 1
+#ifndef TUINODEDATETIME_HPP
+#define TUINODEDATETIME_HPP
 
 #include "TuiNodeEditable.hpp"
 #include <QObject>
@@ -56,5 +56,5 @@ private:
 
 };
 
-#endif /*_TUINODEDATETIME_HPP_*/
+#endif /*TUINODEDATETIME_HPP*/
 

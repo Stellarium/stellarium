@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSCRIPTMGR_HPP_
-#define _STELSCRIPTMGR_HPP_
+#ifndef STELSCRIPTMGR_HPP
+#define STELSCRIPTMGR_HPP
 
 #include <QObject>
 #include <QStringList>
@@ -246,4 +246,4 @@ private:
 	StelScriptEngineAgent *agent;
 };
 
-#endif // _STELSCRIPTMGR_HPP_
+#endif // STELSCRIPTMGR_HPP

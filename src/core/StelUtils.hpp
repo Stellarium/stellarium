@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELUTILS_HPP_
-#define _STELUTILS_HPP_
+#ifndef STELUTILS_HPP
+#define STELUTILS_HPP
 
 #include <cmath>
 #include "VecMath.hpp"
@@ -786,4 +786,4 @@ namespace StelUtils
 #endif
 }
 
-#endif // _STELUTILS_HPP_
+#endif // STELUTILS_HPP

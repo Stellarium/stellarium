@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _FRUSTUM_HPP_
-#define _FRUSTUM_HPP_
+#ifndef FRUSTUM_HPP
+#define FRUSTUM_HPP
 
 #include <vector>
 #include "Plane.hpp"

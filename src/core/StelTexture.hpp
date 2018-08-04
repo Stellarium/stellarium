@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELTEXTURE_HPP_
-#define _STELTEXTURE_HPP_
+#ifndef STELTEXTURE_HPP
+#define STELTEXTURE_HPP
 
 #include "StelTextureTypes.hpp"
 #include "StelOpenGL.hpp"
@@ -196,4 +196,4 @@ private:
 };
 
 
-#endif // _STELTEXTURE_HPP_
+#endif // STELTEXTURE_HPP

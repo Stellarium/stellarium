@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _OCTAHEDRON_REGION_HPP_
-#define _OCTAHEDRON_REGION_HPP_
+#ifndef OCTAHEDRONREGION_HPP
+#define OCTAHEDRONREGION_HPP
 
 #include "StelVertexArray.hpp"
 #include "VecMath.hpp"
@@ -161,5 +161,5 @@ private:
 QDataStream& operator<<(QDataStream& out, const OctahedronPolygon&);
 QDataStream& operator>>(QDataStream& in, OctahedronPolygon&);
 
-#endif // _OCTAHEDRON_REGION_HPP_
+#endif // OCTAHEDRONREGION_HPP
 

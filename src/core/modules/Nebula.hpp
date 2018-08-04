@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NEBULA_HPP_
-#define _NEBULA_HPP_
+#ifndef NEBULA_HPP
+#define NEBULA_HPP
 
 #include "StelObject.hpp"
 #include "StelTranslator.hpp"
@@ -361,5 +361,5 @@ private:
 Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::CatalogGroup)
 Q_DECLARE_OPERATORS_FOR_FLAGS(Nebula::TypeGroup)
 
-#endif // _NEBULA_HPP_
+#endif // NEBULA_HPP
 

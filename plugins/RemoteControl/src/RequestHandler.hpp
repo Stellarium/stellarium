@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef REQUESTHANDLER_HPP_
-#define REQUESTHANDLER_HPP_
+#ifndef REQUESTHANDLER_HPP
+#define REQUESTHANDLER_HPP
 
 #include "httpserver/httprequesthandler.h"
 #include "httpserver/staticfilecontroller.h"

@@ -21,8 +21,8 @@
 // Use OpenGL compatible ordering ie. you can pass a matrix or vector to
 // openGL functions without changes in the ordering
 
-#ifndef VECMATH_HPP_
-#define VECMATH_HPP_
+#ifndef VECMATH_HPP
+#define VECMATH_HPP
 
 #include <cmath>
 #include <limits>
@@ -1761,4 +1761,4 @@ inline QVector3D operator*(const QMatrix3x3& mat, const QVector3D& vec)
 	return QVector3D(x,y,z);
 }
 
-#endif // VECMATH_HPP_
+#endif // VECMATH_HPP

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTPRECESSION_HPP_
-#define _TESTPRECESSION_HPP_
+#ifndef TESTPRECESSION_HPP
+#define TESTPRECESSION_HPP
 
 #include <QObject>
 #include <QtTest>
@@ -32,4 +32,4 @@ private slots:
 	void testPrecessionAnglesVondrak(); 
 };
 
-#endif // _TESTPRECESSION_HPP_
+#endif // _TESTPRECESSION_HPP

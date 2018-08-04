@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _MANUAL_IMPORT_WINDOW_
-#define _MANUAL_IMPORT_WINDOW_
+#ifndef MANUALIMPORTWINDOW_HPP
+#define MANUALIMPORTWINDOW_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -78,4 +78,4 @@ protected:
 	Ui_manualImportWindow * ui;
 };
 
-#endif //_MANUAL_IMPORT_WINDOW_
+#endif // MANUALIMPORTWINDOW_HPP

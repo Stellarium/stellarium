@@ -18,8 +18,9 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SHADERMANAGER_HPP_
-#define _SHADERMANAGER_HPP_
+#ifndef SHADERMANAGER_HPP
+#define SHADERMANAGER_HPP
+
 #include "S3DScene.hpp"
 #include "StelTexture.hpp"
 #include "S3DEnum.hpp"

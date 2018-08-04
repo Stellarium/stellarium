@@ -1,5 +1,5 @@
-#ifndef _sgp4unit_
-#define _sgp4unit_
+#ifndef SGP4UNIT_H
+#define SGP4UNIT_H
 /*     ----------------------------------------------------------------
 *
 *                                 sgp4unit.h
@@ -124,5 +124,5 @@ void getgravconst
       double& j3oj2
      );
 
-#endif
+#endif // SGP4UNIT_H
 

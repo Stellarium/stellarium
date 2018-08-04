@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _SEARCHDIALOG_HPP_
-#define _SEARCHDIALOG_HPP_
+#ifndef SEARCHDIALOG_HPP
+#define SEARCHDIALOG_HPP
 
 #include <QObject>
 #include <QLabel>
@@ -244,5 +244,5 @@ public:
 
 };
 
-#endif // _SEARCHDIALOG_HPP_
+#endif // _SEARCHDIALOG_HPP
 

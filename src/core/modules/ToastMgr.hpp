@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TOASTMGR_HPP_
-#define _TOASTMGR_HPP_
+#ifndef TOASTMGR_HPP
+#define TOASTMGR_HPP
 
 #include "StelModule.hpp"
 
@@ -51,4 +51,4 @@ private:
 	class LinearFader* fader;
 };
 
-#endif // _TOASTMGR_HPP_
+#endif // TOASTMGR_HPP

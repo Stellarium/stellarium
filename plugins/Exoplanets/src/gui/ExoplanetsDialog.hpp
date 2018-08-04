@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _EXOPLANETSDIALOG_HPP_
-#define _EXOPLANETSDIALOG_HPP_
+#ifndef EXOPLANETSDIALOG_HPP
+#define EXOPLANETSDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -84,4 +84,4 @@ private:
 	typedef QPair<QString, int> axisPair;
 };
 
-#endif // _EXOPLANETSDIALOG_HPP_
+#endif // EXOPLANETSDIALOG_HPP

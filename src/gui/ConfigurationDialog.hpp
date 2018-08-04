@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _CONFIGURATIONDIALOG_HPP_
-#define _CONFIGURATIONDIALOG_HPP_
+#ifndef CONFIGURATIONDIALOG_HPP
+#define CONFIGURATIONDIALOG_HPP
 
 #include <QObject>
 #include <QNetworkReply>
@@ -173,4 +173,4 @@ private:
 	void updateTabBarListWidgetWidth();
 };
 
-#endif // _CONFIGURATIONDIALOG_HPP_
+#endif // CONFIGURATIONDIALOG_HPP

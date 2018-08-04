@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSTYLE_HPP_
-#define _STELSTYLE_HPP_
+#ifndef STELSTYLE_HPP
+#define STELSTYLE_HPP
 
 #include <QString>
 #include <QByteArray>
@@ -38,4 +38,4 @@ public:
 	QString confSectionName;
 };
 
-#endif // _STELSTYLE_HPP_
+#endif // STELSTYLE_HPP

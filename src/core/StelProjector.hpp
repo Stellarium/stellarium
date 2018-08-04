@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELPROJECTOR_HPP_
-#define _STELPROJECTOR_HPP_
+#ifndef STELPROJECTOR_HPP
+#define STELPROJECTOR_HPP
 
 #include "StelProjectorType.hpp"
 #include "VecMath.hpp"
@@ -335,4 +335,4 @@ private:
 	void init(const StelProjectorParams& param);
 };
 
-#endif // _STELPROJECTOR_HPP_
+#endif // STELPROJECTOR_HPP

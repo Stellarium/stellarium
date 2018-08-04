@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ASTERISMMGR_HPP_
-#define _ASTERISMMGR_HPP_
+#ifndef ASTERISMMGR_HPP
+#define ASTERISMMGR_HPP
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
@@ -255,4 +255,4 @@ private:
 	int rayHelperThickness;
 };
 
-#endif // _ASTERISMMGR_HPP_
+#endif // ASTERISMMGR_HPP

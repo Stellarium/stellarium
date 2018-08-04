@@ -50,8 +50,8 @@ My modifications are:
 ****************************************************************/
 
 
-#ifndef _TASS17_H_
-#define _TASS17_H_
+#ifndef TASS17_H
+#define TASS17_H
 
 #ifdef __cplusplus
 extern "C" {

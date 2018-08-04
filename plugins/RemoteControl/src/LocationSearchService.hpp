@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef LOCATIONSEARCHSERVICE_HPP_
-#define LOCATIONSEARCHSERVICE_HPP_
+#ifndef LOCATIONSEARCHSERVICE_HPP
+#define LOCATIONSEARCHSERVICE_HPP
 
 #include "AbstractAPIService.hpp"
 #include "StelLocationMgr.hpp"

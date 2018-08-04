@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _NAV_STARS_WINDOW_HPP_
-#define _NAV_STARS_WINDOW_HPP_
+#ifndef NAVSTARSWINDOW_HPP
+#define NAVSTARSWINDOW_HPP
 
 #include "StelDialog.hpp"
 
@@ -58,4 +58,4 @@ private slots:
 };
 
 
-#endif /* _NAV_STARS_WINDOW_HPP_ */
+#endif /* NAVSTARSWINDOW_HPP */

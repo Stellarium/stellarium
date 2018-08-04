@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELTEXTURETYPES_HPP_
-#define _STELTEXTURETYPES_HPP_
+#ifndef STELTEXTURETYPES_HPP
+#define STELTEXTURETYPES_HPP
 
 #include <QSharedPointer>
 
@@ -31,4 +31,4 @@ class StelTexture;
 //! Use shared pointer to simplify memory managment.
 typedef QSharedPointer<StelTexture> StelTextureSP;
 
-#endif // _STELTEXTURETYPES_HPP_
+#endif // STELTEXTURETYPES_HPP

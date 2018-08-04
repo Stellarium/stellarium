@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef _TUINODECOLOR_HPP_
-#define _TUINODECOLOR_HPP_ 1
+#ifndef TUINODECOLOR_HPP
+#define TUINODECOLOR_HPP
 
 #include "TuiNodeEditable.hpp"
 #include "VecMath.hpp"
@@ -52,5 +52,5 @@ private:
 
 };
 
-#endif /*_TUINODECOLOR_HPP_*/
+#endif /*TUINODECOLOR_HPP*/
 

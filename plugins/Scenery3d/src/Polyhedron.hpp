@@ -21,8 +21,8 @@
 /**
   * This implementation is based on Stingl's Robust Hard Shadows. */
 
-#ifndef _POLYHEDRON_HPP_
-#define _POLYHEDRON_HPP_
+#ifndef POLYHEDRON_HPP
+#define POLYHEDRON_HPP
 
 #include "Frustum.hpp"
 #include "Plane.hpp"

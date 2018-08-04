@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _CONSTELLATIONMGR_HPP_
-#define _CONSTELLATIONMGR_HPP_
+#ifndef CONSTELLATIONMGR_HPP
+#define CONSTELLATIONMGR_HPP
 
 #include "StelObjectType.hpp"
 #include "StelObjectModule.hpp"
@@ -397,4 +397,4 @@ private:
 	int constellationLineThickness;
 };
 
-#endif // _CONSTELLATIONMGR_HPP_
+#endif // CONSTELLATIONMGR_HPP

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _S3DRENDERER_HPP_
-#define _S3DRENDERER_HPP_
+#ifndef S3DRENDERER_HPP
+#define S3DRENDERER_HPP
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
@@ -348,4 +348,4 @@ private:
 	void rendererMessage(const QString& msg) const;
 };
 
-#endif //_S3DRENDERER_HPP_
+#endif // S3DRENDERER_HPP

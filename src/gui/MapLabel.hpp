@@ -18,8 +18,8 @@
  */
 
 
-#ifndef _MAPLABEL_HPP_
-#define _MAPLABEL_HPP_
+#ifndef MAPLABEL_HPP
+#define MAPLABEL_HPP
 
 #include <QLabel>
 
@@ -59,4 +59,4 @@ private:
 	QPixmap locCursor;
 };
 
-#endif // _MAPLABEL_HPP_
+#endif // _MAPLABEL_HPP

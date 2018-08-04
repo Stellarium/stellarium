@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELMODULEMGR_HPP_
-#define _STELMODULEMGR_HPP_
+#ifndef STELMODULEMGR_HPP
+#define STELMODULEMGR_HPP
 
 #include <QObject>
 #include <QMap>
@@ -131,4 +131,4 @@ private:
 	bool pluginDescriptorListLoaded;
 };
 
-#endif // _STELMODULEMGR_HPP_
+#endif // STELMODULEMGR_HPP

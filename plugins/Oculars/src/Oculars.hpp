@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _OCULARS_HPP_
-#define _OCULARS_HPP_
+#ifndef OCULARS_HPP
+#define OCULARS_HPP
 
 #include "CCD.hpp"
 #include "Lens.hpp"
@@ -426,4 +426,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*_OCULARS_HPP_*/
+#endif /* OCULARS_HPP */

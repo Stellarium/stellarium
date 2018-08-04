@@ -20,8 +20,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ZONEARRAY_HPP_
-#define _ZONEARRAY_HPP_
+#ifndef ZONEARRAY_HPP
+#define ZONEARRAY_HPP
 
 #include "ZoneData.hpp"
 #include "Star.hpp"
@@ -209,4 +209,4 @@ public:
 	void updateHipIndex(HipIndexStruct hipIndex[]) const;
 };
 
-#endif // _ZONEARRAY_HPP_
+#endif // ZONEARRAY_HPP

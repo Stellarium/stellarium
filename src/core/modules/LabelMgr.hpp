@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LABELMGR_HPP_
-#define _LABELMGR_HPP_
+#ifndef LABELMGR_HPP
+#define LABELMGR_HPP
 
 #include "StelModule.hpp"
 
@@ -148,4 +148,4 @@ private:
 	int appendLabel(class StelLabel* l, int autoDeleteTimeoutMs);
 };
 
-#endif // _LABELMGR_HPP_
+#endif // LABELMGR_HPP

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _ASTROCALCDIALOG_HPP_
-#define _ASTROCALCDIALOG_HPP_
+#ifndef ASTROCALCDIALOG_HPP
+#define ASTROCALCDIALOG_HPP
 
 #include <QObject>
 #include <QTreeWidget>
@@ -378,4 +378,4 @@ private:
 	}
 };
 
-#endif // _ASTROCALCDIALOG_HPP_
+#endif // ASTROCALCDIALOG_HPP

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _MULTILEVELJSONBASE_HPP_
-#define _MULTILEVELJSONBASE_HPP_
+#ifndef MULTILEVELJSONBASE_HPP
+#define MULTILEVELJSONBASE_HPP
 
 #include "StelSkyLayer.hpp"
 
@@ -139,4 +139,4 @@ private:
 	static QNetworkAccessManager& getNetworkAccessManager();
 };
 
-#endif // _MULTILEVELJSONBASE_HPP_
+#endif // MULTILEVELJSONBASE_HPP

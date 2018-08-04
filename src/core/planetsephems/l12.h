@@ -25,8 +25,8 @@
  * This is a port of the original FORTRAN code to C.
  */
 
-#ifndef _L12_H_
-#define _L12_H_
+#ifndef L12_H
+#define L12_H
 
 #ifdef __cplusplus
 extern "C" {

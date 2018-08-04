@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _BOOKMARKSDIALOG_HPP_
-#define _BOOKMARKSDIALOG_HPP_
+#ifndef BOOKMARKSDIALOG_HPP
+#define BOOKMARKSDIALOG_HPP
 
 #include <QObject>
 #include <QStandardItemModel>
@@ -101,4 +101,4 @@ private:
 };
 
 
-#endif // _BOOKMARKSDIALOG_HPP_
+#endif // BOOKMARKSDIALOG_HPP

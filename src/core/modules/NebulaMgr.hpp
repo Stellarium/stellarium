@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NEBULAMGR_HPP_
-#define _NEBULAMGR_HPP_
+#ifndef NEBULAMGR_HPP
+#define NEBULAMGR_HPP
 
 #include "StelObjectType.hpp"
 #include "StelFader.hpp"
@@ -998,4 +998,4 @@ private:
 	bool flagDecimalCoordinates;
 };
 
-#endif // _NEBULAMGR_HPP_
+#endif // NEBULAMGR_HPP

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef REMOTESYNCDIALOG_HPP_
-#define REMOTESYNCDIALOG_HPP_
+#ifndef REMOTESYNCDIALOG_HPP
+#define REMOTESYNCDIALOG_HPP
 
 #include <QString>
 #include <QListWidgetItem>
@@ -67,4 +67,4 @@ private:
 };
 
 
-#endif /* REMOTESYNCDIALOG_HPP_ */
+#endif /* REMOTESYNCDIALOG_HPP */

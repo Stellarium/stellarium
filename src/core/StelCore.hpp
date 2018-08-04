@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELCORE_HPP_
-#define _STELCORE_HPP_
+#ifndef STELCORE_HPP
+#define STELCORE_HPP
 
 #include "StelProjector.hpp"
 #include "StelProjectorType.hpp"
@@ -840,4 +840,4 @@ private:
 	bool de431Active;    // available and user-activated.
 };
 
-#endif // _STELCORE_HPP_
+#endif // STELCORE_HPP

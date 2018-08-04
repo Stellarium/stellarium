@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _GLFUNCS_HPP_
-#define _GLFUNCS_HPP_
+#ifndef _GLFUNCS_HPP
+#define _GLFUNCS_HPP
 
 #include <QOpenGLContext>
 #include <QOpenGLFunctions_1_0>

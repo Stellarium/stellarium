@@ -19,8 +19,8 @@
 
 // Support for HiPS surveys.
 
-#ifndef _STELHIPS_HPP_
-#define _STELHIPS_HPP_
+#ifndef STELHIPS_HPP
+#define STELHIPS_HPP
 
 #include <QObject>
 #include <QCache>
@@ -137,4 +137,4 @@ private:
 	void updateProgressBar(int nb, int total);
 };
 
-#endif // _STELHIPS_
+#endif // STELHIPS_

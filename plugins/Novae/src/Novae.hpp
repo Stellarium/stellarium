@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NOVAE_HPP_
-#define _NOVAE_HPP_
+#ifndef NOVAE_HPP
+#define NOVAE_HPP
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
@@ -275,4 +275,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*_NOVAE_HPP_*/
+#endif /*NOVAE_HPP*/

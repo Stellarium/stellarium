@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ATMOSTPHERE_HPP_
-#define _ATMOSTPHERE_HPP_
+#ifndef ATMOSTPHERE_HPP
+#define ATMOSTPHERE_HPP
 
 #include "Skylight.hpp"
 #include "VecMath.hpp"
@@ -120,4 +120,4 @@ private:
 	GLuint bayerPatternTex=0;
 };
 
-#endif // _ATMOSTPHERE_HPP_
+#endif // ATMOSTPHERE_HPP

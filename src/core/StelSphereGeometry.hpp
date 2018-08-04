@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSPHEREGEOMETRY_HPP_
-#define _STELSPHEREGEOMETRY_HPP_
+#ifndef STELSPHEREGEOMETRY_HPP
+#define STELSPHEREGEOMETRY_HPP
 
 #include "OctahedronPolygon.hpp"
 #include "StelVertexArray.hpp"
@@ -899,5 +899,5 @@ Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& p3,
 //! @return the intersection point on the sphere (normalized) if ok is true, or undefined of ok is false.
 Vec3d greatCircleIntersection(const Vec3d& p1, const Vec3d& p2, const Vec3d& nHalfSpace, bool& ok);
 
-#endif // _STELSPHEREGEOMETRY_HPP_
+#endif // STELSPHEREGEOMETRY_HPP
 

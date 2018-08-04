@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SPOLYGON_HPP_
-#define _SPOLYGON_HPP_
+#ifndef SPOLYGON_HPP
+#define SPOLYGON_HPP
 
 #include "VecMath.hpp"
 

@@ -1,5 +1,5 @@
-#ifndef _sgp4io_
-#define _sgp4io_
+#ifndef SGP4IO_H
+#define SGP4IO_H
 /*     ----------------------------------------------------------------
 *
 *                                 sgp4io.h;
@@ -42,5 +42,5 @@ void twoline2rv
       elsetrec& satrec
      );
 
-#endif
+#endif // SGP4IO_H
 

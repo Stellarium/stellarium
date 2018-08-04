@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELGUIBASE_HPP_
-#define _STELGUIBASE_HPP_
+#ifndef STELGUIBASE_HPP
+#define STELGUIBASE_HPP
 
 #include "StelObject.hpp"
 
@@ -54,4 +54,4 @@ public:
 	virtual bool isCurrentlyUsed() const =0;
 };
 
-#endif // _STELGUIBASE_HPP_
+#endif // STELGUIBASE_HPP

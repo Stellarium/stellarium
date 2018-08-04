@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _EQUATION_OF_TIME_WINDOW_HPP_
-#define _EQUATION_OF_TIME_WINDOW_HPP_
+#ifndef EQUATIONOFTIMEWINDOW_HPP
+#define EQUATIONOFTIMEWINDOW_HPP
 
 #include "StelDialog.hpp"
 
@@ -58,4 +58,4 @@ private slots:
 };
 
 
-#endif /* _EQUATION_OF_TIME_WINDOW_HPP_ */
+#endif /* EQUATIONOFTIMEWINDOW_HPP */

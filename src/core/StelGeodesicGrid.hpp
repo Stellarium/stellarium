@@ -32,8 +32,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  
 */
 
-#ifndef _STELGEODESICGRID_HPP_
-#define _STELGEODESICGRID_HPP_
+#ifndef STELGEODESICGRID_HPP
+#define STELGEODESICGRID_HPP
 
 #include "StelSphereGeometry.hpp"
 
@@ -197,4 +197,4 @@ private:
 	int count;
 };
 
-#endif // _STELGEODESICGRID_HPP_
+#endif // STELGEODESICGRID_HPP

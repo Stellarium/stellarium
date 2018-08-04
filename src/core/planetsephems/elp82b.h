@@ -44,8 +44,8 @@ the original Fortran code:
 ****************************************************************/
 
 
-#ifndef _ELP82B_H_
-#define _ELP82B_H_
+#ifndef ELP82B_H
+#define ELP82B_H
 
 #ifdef __cplusplus
 extern "C" {

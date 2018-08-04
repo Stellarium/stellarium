@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SIMBADSEARCHER_HPP_
-#define SIMBADSEARCHER_HPP_
+#ifndef SIMBADSEARCHER_HPP
+#define SIMBADSEARCHER_HPP
 
 #include "VecMath.hpp"
 #include <QObject>
@@ -115,4 +115,4 @@ private:
 	QNetworkAccessManager* networkMgr;
 };
 
-#endif /*SIMBADSEARCHER_HPP_*/
+#endif /*SIMBADSEARCHER_HPP*/

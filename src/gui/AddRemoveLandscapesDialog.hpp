@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _ADDREMOVELANDSCAPESDIALOG_HPP_
-#define _ADDREMOVELANDSCAPESDIALOG_HPP_
+#ifndef ADDREMOVELANDSCAPESDIALOG_HPP
+#define ADDREMOVELANDSCAPESDIALOG_HPP
 
 #include <QObject>
 #include <QStringList>
@@ -78,4 +78,4 @@ private:
 	void displayMessage(QString title, QString message);
 };
 
-#endif // _ADDREMOVELANDSCAPESDIALOG_
+#endif // ADDREMOVELANDSCAPESDIALOG_HPP

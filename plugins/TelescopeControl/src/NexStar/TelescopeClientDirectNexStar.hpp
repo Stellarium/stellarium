@@ -24,8 +24,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TELESCOPE_CLIENT_DIRECT_NEXSTAR_
-#define _TELESCOPE_CLIENT_DIRECT_NEXSTAR_
+#ifndef TELESCOPECLIENTDIRECTNEXSTAR_HPP
+#define TELESCOPECLIENTDIRECTNEXSTAR_HPP
 
 #include <QObject>
 #include <QString>
@@ -98,4 +98,4 @@ private:
 	long long int next_pos_time;
 };
 
-#endif //_TELESCOPE_CLIENT_DIRECT_LX200_
+#endif // TELESCOPECLIENTDIRECTLX200_HPP

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SPORADICMETEORMGR_HPP_
-#define _SPORADICMETEORMGR_HPP_
+#ifndef SPORADICMETEORMGR_HPP
+#define SPORADICMETEORMGR_HPP
 
 #include "SporadicMeteor.hpp"
 #include "StelModule.hpp"
@@ -77,4 +77,4 @@ private:
 	bool m_flagForcedShow;
 };
 
-#endif // _SPORADICMETEORMGR_HPP_
+#endif // SPORADICMETEORMGR_HPP

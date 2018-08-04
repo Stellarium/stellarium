@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SPHERICMIRRORCALCULATOR_HPP_
-#define _SPHERICMIRRORCALCULATOR_HPP_
+#ifndef SPHERICMIRRORCALCULATOR_HPP
+#define SPHERICMIRRORCALCULATOR_HPP
 
 #include "VecMath.hpp"
 
@@ -48,4 +48,4 @@ private:
   float alphaDeltaPhi[9];
 };
 
-#endif // _SPHERICMIRRORCALCULATOR_HPP_
+#endif // SPHERICMIRRORCALCULATOR_HPP

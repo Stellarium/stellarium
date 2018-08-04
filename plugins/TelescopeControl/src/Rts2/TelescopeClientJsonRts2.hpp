@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TELESCOPE_CLIENT_JSON_RTS2_HPP_
-#define _TELESCOPE_CLIENT_JSON_RTS2_HPP_
+#ifndef TELESCOPECLIENTJSONRTS2_HPP
+#define TELESCOPECLIENTJSONRTS2_HPP
 
 #include "QNetworkAccessManager"
 #include "QNetworkRequest"
@@ -78,4 +78,4 @@ private slots:
 	void replyFinished(QNetworkReply *reply);
 };
 
-#endif // _TELESCOPE_CLIENT_JSON_RTS2_HPP_
+#endif // TELESCOPECLIENTJSONRTS2_HPP

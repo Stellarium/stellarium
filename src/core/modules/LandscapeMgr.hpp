@@ -19,8 +19,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LANDSCAPEMGR_HPP_
-#define _LANDSCAPEMGR_HPP_
+#ifndef LANDSCAPEMGR_HPP
+#define LANDSCAPEMGR_HPP
 
 #include "StelModule.hpp"
 #include "StelUtils.hpp"
@@ -591,4 +591,4 @@ private:
 	QString currentPlanetName;
 };
 
-#endif // _LANDSCAPEMGR_HPP_
+#endif // LANDSCAPEMGR_HPP

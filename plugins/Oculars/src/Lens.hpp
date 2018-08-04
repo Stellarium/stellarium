@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef LENS_HPP_
-#define LENS_HPP_
+#ifndef LENS_HPP
+#define LENS_HPP
 
 #include <QObject>
 #include <QString>

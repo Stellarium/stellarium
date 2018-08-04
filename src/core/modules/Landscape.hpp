@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LANDSCAPE_HPP_
-#define _LANDSCAPE_HPP_
+#ifndef LANDSCAPE_HPP
+#define LANDSCAPE_HPP
 
 #include "VecMath.hpp"
 #include "StelToneReproducer.hpp"
@@ -433,4 +433,4 @@ private:
 	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
 };
 
-#endif // _LANDSCAPE_HPP_
+#endif // LANDSCAPE_HPP

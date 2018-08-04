@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NAVSTARS_HPP_
-#define _NAVSTARS_HPP_
+#ifndef NAVSTARS_HPP
+#define NAVSTARS_HPP
 
 #include "StelFader.hpp"
 #include "StelModule.hpp"
@@ -173,4 +173,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif // _NAVSTARS_HPP_
+#endif // NAVSTARS_HPP

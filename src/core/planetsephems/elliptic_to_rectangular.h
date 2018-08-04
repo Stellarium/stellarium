@@ -35,8 +35,8 @@ SOFTWARE.
 
 ****************************************************************/
 
-#ifndef _ELLIPTIC_TO_RECTANGULAR_
-#define _ELLIPTIC_TO_RECTANGULAR_
+#ifndef ELLIPTIC_TO_RECTANGULAR_H
+#define ELLIPTIC_TO_RECTANGULAR_H
 
 #ifdef __cplusplus
 extern "C" {

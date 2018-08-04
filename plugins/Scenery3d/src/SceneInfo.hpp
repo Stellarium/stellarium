@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SCENEINFO_HPP_
-#define _SCENEINFO_HPP_
+#ifndef SCENEINFO_HPP
+#define SCENEINFO_HPP
 
 #include "StelLocation.hpp"
 #include "VecMath.hpp"

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
  
-#ifndef _QUASARSDIALOG_HPP_
-#define _QUASARSDIALOG_HPP_
+#ifndef QUASARSDIALOG_HPP
+#define QUASARSDIALOG_HPP
 
 #include <QObject>
 #include "StelDialog.hpp"
@@ -72,4 +72,4 @@ private:
 
 };
 
-#endif // _QUASARSDIALOG_HPP_
+#endif // QUASARSDIALOG_HPP

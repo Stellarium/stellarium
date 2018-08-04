@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
  
-#ifndef _MINOR_PLANET_HPP_
-#define _MINOR_PLANET_HPP_
+#ifndef MINORPLANET_HPP
+#define MINORPLANET_HPP
 
 #include "Planet.hpp"
 
@@ -133,4 +133,4 @@ private:
 	QString specT, specB;
 };
 
-#endif //_MINOR_PLANET_HPP_
+#endif // MINORPLANET_HPP

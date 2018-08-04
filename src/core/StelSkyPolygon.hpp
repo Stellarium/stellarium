@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELSKYPOLYGON_HPP_
-#define _STELSKYPOLYGON_HPP_
+#ifndef STELSKYPOLYGON_HPP
+#define STELSKYPOLYGON_HPP
 
 #include "StelSphereGeometry.hpp"
 #include "MultiLevelJsonBase.hpp"
@@ -96,4 +96,4 @@ private:
 	QTimeLine* texFader;
 };
 
-#endif // _STELSKYPOLYGON_HPP_
+#endif // STELSKYPOLYGON_HPP

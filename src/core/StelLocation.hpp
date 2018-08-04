@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELLOCATION_HPP_
-#define _STELLOCATION_HPP_
+#ifndef STELLOCATION_HPP
+#define STELLOCATION_HPP
 
 #include <QString>
 #include <QMetaType>
@@ -100,4 +100,4 @@ QDataStream& operator<<(QDataStream& out, const StelLocation& loc);
 //! Load the StelLocation from a binary blob.
 QDataStream& operator>>(QDataStream& in, StelLocation& loc);
 
-#endif // _STELLOCATION_HPP_
+#endif // STELLOCATION_HPP

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _PULSARS_HPP_
-#define _PULSARS_HPP_
+#ifndef PULSARS_HPP
+#define PULSARS_HPP
 
 #include "StelObjectModule.hpp"
 #include "StelObject.hpp"
@@ -348,4 +348,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*_PULSARS_HPP_*/
+#endif /* PULSARS_HPP */

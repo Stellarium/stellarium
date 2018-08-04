@@ -31,7 +31,7 @@
 #include "SolarSystem.hpp"
 #include <QDebug>
 
-#include <stdio.h>
+#include <cstdio>
 
 StelSkyImageTile::StelSkyImageTile()
 {

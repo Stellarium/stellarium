@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _STELLOCATIONMGR_P_HPP_
-#define _STELLOCATIONMGR_P_HPP_
+#ifndef STELLOCATIONMGR_P_HPP
+#define STELLOCATIONMGR_P_HPP
 
 //! @file
 //! StelLocationMgr private implementation details
@@ -105,4 +105,4 @@ private:
 
 #endif //ENABLE_GPS
 
-#endif // _STELLOCATIONMGR_P_HPP_
+#endif // STELLOCATIONMGR_P_HPP

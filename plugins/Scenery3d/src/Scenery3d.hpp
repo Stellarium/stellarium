@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SCENERY3D_HPP_
-#define _SCENERY3D_HPP_
+#ifndef SCENERY3D_HPP
+#define SCENERY3D_HPP
 
 #include <QMap>
 #include <QStringList>
@@ -360,5 +360,5 @@ public:
 };
 
 
-#endif // _SCENERY3D_HPP_
+#endif // SCENERY3D_HPP
 

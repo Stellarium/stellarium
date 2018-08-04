@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTSTELSPHERICALGEOMETRY_HPP_
-#define _TESTSTELSPHERICALGEOMETRY_HPP_
+#ifndef TESTSTELSPHERICALGEOMETRY_HPP
+#define TESTSTELSPHERICALGEOMETRY_HPP
 
 #include <QObject>
 #include <QTest>
@@ -56,4 +56,4 @@ private:
 	SphericalPolygon southPoleSquare;
 };
 
-#endif // _TESTSTELSPHERICALGEOMETRY_HPP_
+#endif // _TESTSTELSPHERICALGEOMETRY_HPP

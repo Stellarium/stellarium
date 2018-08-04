@@ -18,8 +18,8 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-#ifndef _GEXCEPTION_HPP_
-#define _GEXCEPTION_HPP_ 1
+#ifndef GEXCEPTION_HPP
+#define GEXCEPTION_HPP
 
 #include <stdexcept>
 
@@ -41,4 +41,4 @@ typedef unsigned int GEXCEPTIONTYPE;
 #define OPERATOR_DIFFEQUAL_INCOMPATIBLE_ORDER "The matrix have incompatible order to calculate the substraction"
 #define DET_INCOMPATIBLE_ORDER                "The matrix is not square, the determinant can't be calculate."
 
-#endif // _GEXCEPTION_HPP_
+#endif // GEXCEPTION_HPP

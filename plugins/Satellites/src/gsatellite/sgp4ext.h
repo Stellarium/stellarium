@@ -1,5 +1,5 @@
-#ifndef _sgp4ext_
-#define _sgp4ext_
+#ifndef SGP4EXT_H
+#define SGP4EXT_H
 /*     ----------------------------------------------------------------
 *
 *                                 sgp4ext.h
@@ -88,5 +88,5 @@ void    invjday
           int& hr, int& minute, double& sec
         );
 
-#endif
+#endif // SGP4EXT_H
 

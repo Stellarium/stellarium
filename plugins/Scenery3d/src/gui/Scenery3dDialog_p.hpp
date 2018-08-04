@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SCENERY3DDIALOG_P_HPP_
-#define _SCENERY3DDIALOG_P_HPP_
+#ifndef SCENERY3DDIALOG_P_HPP
+#define SCENERY3DDIALOG_P_HPP
 
 #include "S3DEnum.hpp"
 #include "Scenery3d.hpp"

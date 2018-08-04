@@ -11,8 +11,8 @@
 //              style -MNG
 
 
-#ifndef _SOLVE_HPP_
-#define _SOLVE_HPP_
+#ifndef SOLVE_HPP
+#define SOLVE_HPP
 
 #include <utility>
 
@@ -81,5 +81,5 @@ template<class T, class F> std::pair<T, T> solveIteration_fixed(F f,
 	return std::make_pair(x2, x2 - x);
 }
 
-#endif // _SOLVE_HPP_
+#endif // SOLVE_HPP
 

@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TESTCONVERSIONS_HPP_
-#define _TESTCONVERSIONS_HPP_
+#ifndef TESTCONVERSIONS_HPP
+#define TESTCONVERSIONS_HPP
 
 #include <QObject>
 #include <QTest>
@@ -34,5 +34,5 @@ private slots:
 	void testDDToDMS();
 };
 
-#endif // _TESTCONVERSIONS_HPP_
+#endif // _TESTCONVERSIONS_HPP
 

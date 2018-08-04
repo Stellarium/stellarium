@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NOMENCLATUREITEM_HPP_
-#define _NOMENCLATUREITEM_HPP_ 1
+#ifndef NOMENCLATUREITEM_HPP
+#define NOMENCLATUREITEM_HPP
 
 #include <QVariant>
 #include <QString>
@@ -174,4 +174,4 @@ private:
 	LinearFader labelsFader;
 };
 
-#endif // _NOMENCLATUREITEM_HPP_
+#endif // NOMENCLATUREITEM_HPP

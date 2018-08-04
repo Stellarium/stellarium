@@ -17,8 +17,8 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _FOV_HPP_
-#define _FOV_HPP_
+#ifndef FOV_HPP
+#define FOV_HPP
 
 #include "StelGui.hpp"
 #include "StelModule.hpp"
@@ -102,4 +102,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /* _FOV_HPP_ */
+#endif /* FOV_HPP */

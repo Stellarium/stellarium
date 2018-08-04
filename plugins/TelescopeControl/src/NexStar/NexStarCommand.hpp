@@ -22,8 +22,8 @@ along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 */
 
-#ifndef _NEXSTAR_COMMAND_HPP_
-#define _NEXSTAR_COMMAND_HPP_
+#ifndef NEXSTARCOMMAND_HPP
+#define NEXSTARCOMMAND_HPP
 
 #include <QTextStream>
 using namespace std;

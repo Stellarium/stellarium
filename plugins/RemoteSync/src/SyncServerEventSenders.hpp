@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SYNCSERVEREVENTSENDERS_HPP_
-#define SYNCSERVEREVENTSENDERS_HPP_
+#ifndef SYNCSERVEREVENTSENDERS_HPP
+#define SYNCSERVEREVENTSENDERS_HPP
 
 #include "SyncProtocol.hpp"
 #include "SyncMessages.hpp"

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ZODIACALLIGHT_
-#define _ZODIACALLIGHT_
+#ifndef ZODIACALLIGHT_HPP
+#define ZODIACALLIGHT_HPP
 
 #include <QVector>
 #include "StelModule.hpp"
@@ -136,4 +136,4 @@ private:
 	QVector<Vec3d> eclipticalVertices;
 };
 
-#endif // _ZODIACALLIGHT_HPP_
+#endif // ZODIACALLIGHT_HPP

@@ -18,8 +18,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SCREENIMAGEMGR_HPP_
-#define _SCREENIMAGEMGR_HPP_
+#ifndef SCREENIMAGEMGR_HPP
+#define SCREENIMAGEMGR_HPP
 
 
 #include "StelModule.hpp"
@@ -212,4 +212,4 @@ private:
 	QMap<QString, ScreenImage*> allScreenImages;
 };
 
-#endif // _SCREENIMAGEMGR_HPP_
+#endif // _SCREENIMAGEMGR_HPP

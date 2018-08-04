@@ -17,8 +17,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _ASTERISM_HPP_
-#define _ASTERISM_HPP_
+#ifndef ASTERISM_HPP
+#define ASTERISM_HPP
 
 #include "StelObject.hpp"
 #include "StelUtils.hpp"
@@ -148,4 +148,4 @@ private:
 	static Vec3f labelColor;
 };
 
-#endif // _ASTERISM_HPP_
+#endif // ASTERISM_HPP

@@ -30,8 +30,8 @@
 
 /////////////////////////////////////////////////////////////////////////////
 // gTimeSpan and gTime
-#ifndef _GTIME_HPP_
-#define _GTIME_HPP_ 1
+#ifndef GTIME_HPP
+#define GTIME_HPP
 
 #include <time.h>
 #include <iostream> // for operator<<(), see below
@@ -327,4 +327,4 @@ inline std::ostream& operator<<(std::ostream& s, gTimeSpan& ai_gTimeSpan)
 }
 
 
-#endif // _GTIME_HPP_
+#endif // GTIME_HPP

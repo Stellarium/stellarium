@@ -20,8 +20,8 @@
  * Implementation: 2010-03-23 GZ=Georg Zotti, Georg.Zotti@univie.ac.at
  * 2010-12 FC split into 2 classes, implemented Refraction */
 
-#ifndef _REFRACTIONEXTINCTION_HPP_
-#define _REFRACTIONEXTINCTION_HPP_
+#ifndef REFRACTIONEXTINCTION_HPP
+#define REFRACTIONEXTINCTION_HPP
 // USABILITY: added 3 more flags/switches in GUI:
 // Temperature [C] [influences refraction]
 // Pressure [mbar]  [influences refraction]
@@ -193,4 +193,4 @@ private:
 	Mat4f invertPostTransfoMatf;
 };
 
-#endif  // _REFRACTIONEXTINCTION_HPP_
+#endif  // REFRACTIONEXTINCTION_HPP
