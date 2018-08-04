@@ -2545,7 +2545,7 @@ static bool iau_constlineVecInitialized=false;
 QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 {
 	// Precess positionJ2000 to 1875.0
-	Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow));
+	Vec3d pos1875=j2000ToJ1875(equinoxEquToJ2000(positionEqJnow, RefractionOff));
 	double RA1875;
 	double dec1875;
 	StelUtils::rectToSphe(&RA1875, &dec1875, pos1875);
