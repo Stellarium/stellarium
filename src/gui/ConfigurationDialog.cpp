@@ -1529,7 +1529,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
 	algorithms->addItem(q_("Khalid, Sultana & Zaidi (2014)"), "KhalidSultanaZaidi");
-	algorithms->addItem(q_("Henriksson (2017)"), "Henriksson");
+	algorithms->addItem(q_("Henriksson (2017)"), "Henriksson2017");
 	algorithms->addItem(q_("Custom equation of %1T").arg(QChar(0x0394)), "Custom");
 
 	//Restore the selection

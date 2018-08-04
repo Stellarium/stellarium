@@ -2183,7 +2183,7 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTstart	= -720;
 			deltaTfinish	= 2015;
 			break;
-		case Henriksson:
+		case Henriksson2017:
 			// Henriksson solution (2017) for Schoch formula for DeltaT (1931)
 			// Source: The Acceleration of the Moon and the Universe – the Mass of the Graviton.
 			// Henriksson, G.
@@ -2335,8 +2335,8 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 		case StephensonMorrisonHohenkerk2016: // PRIMARY SOURCE, SEEMS VERY IMPORTANT
 			description = q_("This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) was published in <em>Measurement of the Earth’s rotation: 720 BC to AD 2015</em> (%1). Outside of the named range (modelled with a spline fit) it provides values from an approximate parabola.").arg("<a href='https://doi.org/10.1098/rspa.2016.0404'>2016</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
-		case Henriksson:
-			description = q_("This solution by G. Henriksson was published in article <em>The Acceleration of the Moon and the Universe - the Mass of the Graviton</em> (%1) and based on C. Schoch formula.").arg("<a href='https://doi.org/10.22606/adap.2017.23004'>2017</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+		case Henriksson2017:
+			description = q_("This solution by G. Henriksson was published in the article <em>The Acceleration of the Moon and the Universe - the Mass of the Graviton</em> (%1) and based on C. Schoch's formula (1931).").arg("<a href='https://doi.org/10.22606/adap.2017.23004'>2017</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case Custom:
 			description = q_("This is a quadratic formula for calculation of %1T with coefficients defined by the user.").arg(QChar(0x0394));
@@ -2366,6 +2366,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
 	switch (currentDeltaTAlgorithm)
 	{
+		// These models provide extrapolated values outside their specified/recommended range.
 		case WithoutCorrection:      // and
 		case Schoch:                 // and
 		case Clemence:               // and
@@ -2387,8 +2388,8 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 		case Reijs:                  // and
 		case EspenakMeeus: // the default, range stated in the Canon, p. 14.  ... and
 		case EspenakMeeusZeroMoonAccel: // and
-		case StephensonMorrisonHohenkerk2016:
-		case Henriksson:
+		case StephensonMorrisonHohenkerk2016: // and
+		case Henriksson2017:
 			break;
 		case JPLHorizons: // and
 		case MeeusSimons:
@@ -2419,7 +2420,7 @@ QString StelCore::getCurrentDeltaTAlgorithmValidRangeDescription(const double JD
 		else
 			validRange = q_("Valid range of usage: between years %1 and %2.").arg(deltaTstart).arg(deltaTfinish);
 		if ((year < deltaTstart) || (deltaTfinish < year))
-			*marker = "*"; // mark "outside designed range, possible wrong"
+			*marker = "*"; // mark "outside designed range, possibly wrong"
 	}
 	else
 		*marker = "?"; // mark "no range given"
