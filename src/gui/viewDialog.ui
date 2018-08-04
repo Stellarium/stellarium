@@ -1010,6 +1010,9 @@
                    <height>16777215</height>
                   </size>
                  </property>
+                 <property name="toolTip">
+                  <string>Changing saturation from totally unsaturated (0.00) to default (1.00) value.</string>
+                 </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
@@ -3988,16 +3991,15 @@
  </tabstops>
  <resources>
   <include location="../../data/gui/guiRes.qrc"/>
-  <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>
  <buttongroups>
-  <buttongroup name="buttonGroupDisplayedDSOTypes">
+  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
    <property name="exclusive">
     <bool>false</bool>
    </property>
   </buttongroup>
-  <buttongroup name="buttonGroupDisplayedDSOCatalogs">
+  <buttongroup name="buttonGroupDisplayedDSOTypes">
    <property name="exclusive">
     <bool>false</bool>
    </property>
