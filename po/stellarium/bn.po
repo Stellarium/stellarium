@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-29 00:28+0700\n"
+"POT-Creation-Date: 2018-08-05 17:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: t4saha <t4saha@gmail.com>, 2017\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -29,7 +29,7 @@ msgstr "পছন্দসই বিন্দু"
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:286
-#: src/core/modules/NomenclatureItem.cpp:780 src/core/modules/Nebula.cpp:245
+#: src/core/modules/NomenclatureItem.cpp:787 src/core/modules/Nebula.cpp:245
 #: src/core/modules/Nebula.cpp:247 src/core/modules/Planet.cpp:422
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:195
@@ -57,9 +57,9 @@ msgstr "নক্ষত্রপুঞ্জ"
 #: src/core/modules/LandscapeMgr.cpp:469
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:503
 #: src/core/modules/NebulaMgr.cpp:504 src/core/modules/SolarSystem.cpp:235
-#: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
+#: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:138
-#: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
+#: src/core/StelApp.cpp:567 src/core/StelCore.cpp:255
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:815
 msgid "Display Options"
 msgstr "দৃশ্যপটের বিকল্পগুলি"
@@ -107,7 +107,11 @@ msgstr "একটি করে তারামন্ডল নির্বাচ
 msgid "Remove selection of constellations"
 msgstr "নতুন করে তারামণ্ডল নির্বাচন করুন"
 
-#: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2495
+#: src/core/modules/ConstellationMgr.cpp:146
+msgid "Select all constellations"
+msgstr ""
+
+#: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2506
 #: src/ui_dsoColorsDialog.h:652
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Stars"
@@ -125,7 +129,7 @@ msgstr ""
 msgid "Reduce the magnitude limit for stars"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2763
+#: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2777
 msgid "Meridian"
 msgstr "মূলমধ্য রেখা"
 
@@ -149,7 +153,7 @@ msgstr "নিরক্ষরেখা"
 msgid "Precession Circle"
 msgstr "অক্ষের সঞ্চারপথ"
 
-#: src/core/modules/GridLinesMgr.cpp:662 src/ui_viewDialog.h:2752
+#: src/core/modules/GridLinesMgr.cpp:662 src/ui_viewDialog.h:2766
 msgid "Horizon"
 msgstr "দিগন্ত"
 
@@ -162,12 +166,12 @@ msgid "Supergalactic Equator"
 msgstr "নক্ষত্রলোকীয় বিষুবরেখা"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:675 src/ui_viewDialog.h:2767
+#: src/core/modules/GridLinesMgr.cpp:675 src/ui_viewDialog.h:2781
 msgid "O./C. longitude"
 msgstr "প্রতিযোগ / সংযোগ দ্রাঘিমা"
 
 #: src/core/modules/GridLinesMgr.cpp:679
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2816
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2830
 msgid "Prime Vertical"
 msgstr "মধ্যরেখা"
 
@@ -244,7 +248,7 @@ msgstr "স্থানাঙ্ক ব্যবস্থা ও ছক"
 msgid "Equatorial grid"
 msgstr "ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা"
 
-#: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2846
+#: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2860
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Azimuthal grid"
 msgstr "দিগন্ত ভিত্তিক স্থানাঙ্ক পদ্ধতি"
@@ -290,20 +294,20 @@ msgstr "J2000 অনুযায়ী সৌরপথ ভিত্তিক স্
 msgid "Ecliptic grid"
 msgstr "সৌরপথ ভিত্তিক স্থানাঙ্ক পদ্ধতি"
 
-#: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2881
+#: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2895
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Galactic grid"
 msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক পদ্ধতি"
 
-#: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2736
+#: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2750
 msgid "Galactic equator"
 msgstr "ছায়াপথ নির্দেশক রেখা"
 
-#: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2870
+#: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2884
 msgid "Supergalactic grid"
 msgstr "নক্ষত্রলোকীয় ছক"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2759
+#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2773
 msgid "Supergalactic equator"
 msgstr "নক্ষত্রলোকীয় বিষুবরেখা"
 
@@ -344,11 +348,11 @@ msgstr "J2000 অনুযায়ী সৌরপথীয় মেরু"
 msgid "Ecliptic poles"
 msgstr "সৌরপথীয় মেরু"
 
-#: src/core/modules/GridLinesMgr.cpp:1253 src/ui_viewDialog.h:2824
+#: src/core/modules/GridLinesMgr.cpp:1253 src/ui_viewDialog.h:2838
 msgid "Galactic poles"
 msgstr "ছায়াপথীয় মেরু"
 
-#: src/core/modules/GridLinesMgr.cpp:1254 src/ui_viewDialog.h:2782
+#: src/core/modules/GridLinesMgr.cpp:1254 src/ui_viewDialog.h:2796
 msgid "Supergalactic poles"
 msgstr "নক্ষত্রলোকীয় মেরু"
 
@@ -376,7 +380,7 @@ msgstr "বায়ুমন্ডল"
 msgid "Fog"
 msgstr "কুয়াশা"
 
-#: src/core/modules/LandscapeMgr.cpp:472 src/ui_viewDialog.h:2778
+#: src/core/modules/LandscapeMgr.cpp:472 src/ui_viewDialog.h:2792
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Cardinal points"
 msgstr "দিকচিহ্ন"
@@ -393,7 +397,7 @@ msgstr "ভূমিরূপের দীপনস্তর"
 msgid "Landscape labels"
 msgstr "ভূমিরূপের বিভিন্ন অংশের নাম"
 
-#: src/core/modules/LandscapeMgr.cpp:476 src/ui_viewDialog.h:2513
+#: src/core/modules/LandscapeMgr.cpp:476 src/ui_viewDialog.h:2524
 msgid "Light pollution data from locations database"
 msgstr "অবস্থান অনুযায়ী আলোক দূষন"
 
@@ -1125,21 +1129,21 @@ msgstr "রঙিন স্তর বা দাগ"
 msgid "Undocumented landform type."
 msgstr "অনথিভুক্ত"
 
-#: src/core/modules/NomenclatureItem.cpp:782
+#: src/core/modules/NomenclatureItem.cpp:789
 msgid "geologic term"
 msgstr "ভূতাত্ত্বিক নাম"
 
-#: src/core/modules/NomenclatureItem.cpp:792
+#: src/core/modules/NomenclatureItem.cpp:799
 msgid "Linear size"
 msgstr "আকার"
 
-#: src/core/modules/NomenclatureItem.cpp:795 src/core/modules/Planet.cpp:581
+#: src/core/modules/NomenclatureItem.cpp:802 src/core/modules/Planet.cpp:581
 #: src/core/modules/MinorPlanet.cpp:364
 msgid "Diameter"
 msgstr "ব্যাস"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:796 src/core/modules/Planet.cpp:468
+#: src/core/modules/NomenclatureItem.cpp:803 src/core/modules/Planet.cpp:468
 #: src/core/modules/Planet.cpp:493 src/core/modules/Planet.cpp:584
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:296
 #: src/core/modules/MinorPlanet.cpp:364 src/core/modules/Comet.cpp:194
@@ -1151,15 +1155,15 @@ msgctxt "distance"
 msgid "km"
 msgstr "কিমি"
 
-#: src/core/modules/NomenclatureItem.cpp:801
+#: src/core/modules/NomenclatureItem.cpp:808
 msgid "Planetographic long./lat."
 msgstr "জ্যোতিষ্কে অবস্থান স্থানাক"
 
-#: src/core/modules/NomenclatureItem.cpp:802
+#: src/core/modules/NomenclatureItem.cpp:809
 msgid "Celestial body"
 msgstr "জ্যোতিষ্ক"
 
-#: src/core/modules/NomenclatureItem.cpp:805
+#: src/core/modules/NomenclatureItem.cpp:812
 msgid "Landform description"
 msgstr "বিবরণ"
 
@@ -2059,7 +2063,7 @@ msgstr "সরণের আপেক্ষিক অভিমুখ"
 msgid "Angular speed of the proper motion"
 msgstr "আপেক্ষিক কৌণিক সরণের হার"
 
-#: src/core/modules/MilkyWay.cpp:79
+#: src/core/modules/MilkyWay.cpp:80
 msgid "Milky Way"
 msgstr "ছায়াপথ"
 
@@ -2075,11 +2079,11 @@ msgstr "ডিজিটাল মহাকাশ নীরিক্ষা"
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "মহাকাশ নীরিক্ষা (পরীক্ষামূলক)"
 
-#: src/core/StelApp.cpp:564
+#: src/core/StelApp.cpp:567
 msgid "Night mode"
 msgstr "রাত্রিকালীন প্রদর্শণ সুবিধা"
 
-#: src/core/StelApp.cpp:597
+#: src/core/StelApp.cpp:600
 msgid "Cannot create Spout sender. See log for details."
 msgstr "স্পাউট প্রেরক তৈরী করা যায় নি । বিশদ তথ্যের জন্য কার্যবিবরণী দেখুন ।"
 
@@ -2327,12 +2331,12 @@ msgstr "আড়াআড়ি ভাবে দৃশ্যপট ঘোরান"
 msgid "Flip scene vertically"
 msgstr "লম্বালম্বিভাবে দৃশ্যপট ঘোরান"
 
-#: src/core/StelCore.cpp:2232
+#: src/core/StelCore.cpp:2243
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "সংশোধন প্রনালি নিস্ক্রিয় করা আছে । সম্যক ধারণা থাকলে তবেই সক্রিয় করুন ।"
 
-#: src/core/StelCore.cpp:2235
+#: src/core/StelCore.cpp:2246
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2344,7 +2348,7 @@ msgstr ""
 " (%1) নামক প্রবন্ধে এটি ব্যবহার করেছেন । বিস্তারিত তথ্য জানতে %2এখানে%3 "
 "দেখুন ।"
 
-#: src/core/StelCore.cpp:2238
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2353,7 +2357,7 @@ msgstr ""
 "এই বিখ্যাত সূত্রটি G. M. Clemence তাঁর  <em>On the system of astronomical "
 "constants</em> (%1) নামক প্রবন্ধে প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2252
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2366,7 +2370,7 @@ msgstr ""
 "<em>Astronomical Formulae for Calculators</em> নামক প্রবন্ধে এটি ব্যবহার "
 "করেছেন ।"
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2256
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -2376,7 +2380,7 @@ msgstr ""
 " প্রবর্তিত <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> ও <em>Canon of Solar "
 "Eclipses</em> নামক প্রবন্ধে গৃহীত হয়েছে ।"
 
-#: src/core/StelCore.cpp:2249
+#: src/core/StelCore.cpp:2260
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2388,7 +2392,7 @@ msgstr ""
 " তালিকা দেওয়া আছে । এই একই সম্পর্ক Goldstine (১৯৭৩) প্রবর্তিত syzygy ছকেও "
 "গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:2253
+#: src/core/StelCore.cpp:2264
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2399,7 +2403,7 @@ msgstr ""
 "observations</em> (%1) নামক প্রবন্ধে P. M. Muller এবং F. R. Stephenson এই "
 "সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2256
+#: src/core/StelCore.cpp:2267
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2408,7 +2412,7 @@ msgstr ""
 "<em>Pre-Telescopic Astronomical Observations</em> (%1) নামক প্রবন্ধে P. M. "
 "Muller এবং F. R. Stephenson এই সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2259
+#: src/core/StelCore.cpp:2270
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2422,7 +2426,7 @@ msgstr ""
 "period 1800-1975</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ "
 "করেন ।"
 
-#: src/core/StelCore.cpp:2262
+#: src/core/StelCore.cpp:2273
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2432,7 +2436,7 @@ msgstr ""
 " and Tables from -4000 to +2800</em> (১৯৮৬) ও RedShift নামক কম্পিউটার "
 "প্রোগ্রামে গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:2265
+#: src/core/StelCore.cpp:2276
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2443,13 +2447,13 @@ msgstr ""
 "rotation of the earth - 700 B.C. to A.D. 1980</em> (%1) নামক প্রবন্ধে এই "
 "সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2268
+#: src/core/StelCore.cpp:2279
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Guide নামক কম্পিউটার প্রোগ্রামের ৭ম সংস্করণে এই কার্যপ্রনালীটি ব্যবহৃত হয়েছে"
 " ।"
 
-#: src/core/StelCore.cpp:2271
+#: src/core/StelCore.cpp:2282
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2459,7 +2463,7 @@ msgstr ""
 "Year Canon of Lunar Eclipses: 1986-2035</em> (১৯৮৯) নামক প্রবন্ধে F. Espenak"
 " এই কার্যপ্রনালীটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2274
+#: src/core/StelCore.cpp:2285
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2468,7 +2472,7 @@ msgstr ""
 "২১৩৭ খ্রীষ্টপূর্বাব্দ থেকে ১৭১৫ খ্রীষ্টাব্দ পর্যন্ত ঘটা সূর্যগ্রহণগুলির "
 "মধ্যের ৩১টির সংগৃহিত তথ্য থেকে K.M. Borkowski (%1) এই সূত্রটি তৈরী করেছেন ।"
 
-#: src/core/StelCore.cpp:2277
+#: src/core/StelCore.cpp:2288
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2480,7 +2484,7 @@ msgstr ""
 "সমীকরনটি <em>Empirical Transformations from U.T. to E.T. for the Period "
 "1800-1988</em> (%1) নামক প্রবন্ধে L. D. Schmadel এবং G. Zech প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2280
+#: src/core/StelCore.cpp:2291
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2490,7 +2494,7 @@ msgstr ""
 "4000 B.C. to A.D. 8000</em> (১৯৯১) প্রবন্ধে চাঁদ সংক্রান্ত ELP 2000-85 "
 "মতবাদের সংক্ষিপ্ত রূপটিতে এই সূত্রটি গৃহিত হয়েছে ।"
 
-#: src/core/StelCore.cpp:2283
+#: src/core/StelCore.cpp:2294
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2501,7 +2505,7 @@ msgstr ""
 " Earth's Rotation: 700 BC to AD 1990</em> (%1) নামক প্রবন্ধে এই সূত্রটি "
 "প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2286
+#: src/core/StelCore.cpp:2297
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2510,7 +2514,7 @@ msgstr ""
 "F. R. Stephenson তাঁর রচিত<em>Historical Eclipses and Earth's Rotation</em> "
 "(%1) বইয়ে এই সূত্রটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2289
+#: src/core/StelCore.cpp:2300
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2521,7 +2525,7 @@ msgstr ""
 "তালিকা ও তার বাইরের দিনগুলির জন্য Chapront, Chapront-Touze এবং Francou "
 "(১৯৯৭) প্রবর্তিত অপেক্ষক যোগ করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:2292
+#: src/core/StelCore.cpp:2303
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2530,7 +2534,7 @@ msgstr ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "তার ওয়েবসাইট %1JPL Horizons%2 এ এই সূত্র ব্যবহার করে ।"
 
-#: src/core/StelCore.cpp:2295
+#: src/core/StelCore.cpp:2306
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2539,7 +2543,7 @@ msgstr ""
 "J. Meeus এবং L. Simons তাঁদের প্রবন্ধ <em>Polynomial approximations to Delta"
 " T, 1620-2000 AD</em> (%1) তে এই বহুপদী সমীকরনটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2298
+#: src/core/StelCore.cpp:2309
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -2549,7 +2553,7 @@ msgstr ""
 "রচিত <em>Astronomy on the Personal Computer</em> (২০০০) এর ৪র্থ সংস্করণে "
 "পাওয়া যায় ।"
 
-#: src/core/StelCore.cpp:2301
+#: src/core/StelCore.cpp:2312
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2561,7 +2565,7 @@ msgstr ""
 "Tabulations</em> (২০০২) এ প্রকাশ করেন । যদিও এটির ভিত্তি Jean Meeus এর "
 "<em>Astronomical Algorithms</em> (১৯৯১) ।"
 
-#: src/core/StelCore.cpp:2304
+#: src/core/StelCore.cpp:2315
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2572,7 +2576,7 @@ msgstr ""
 "the Earth's clock error %1T and the calculation of eclipses</em> (%2) এর "
 "একটি সংযোজনে (%3) এই গুরুত্বপূর্ণ সমাধানটি প্রকাশ করেন ।"
 
-#: src/core/StelCore.cpp:2307
+#: src/core/StelCore.cpp:2318
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2586,7 +2590,7 @@ msgstr ""
 "পর্যায়বৃত্তির উপর ভিত্তি করে নির্ণয় করা হয়েছে । আরও তথ্যের জন্য %3এখানে%4 "
 "দেখুন ।"
 
-#: src/core/StelCore.cpp:2310 src/core/StelCore.cpp:2313
+#: src/core/StelCore.cpp:2321 src/core/StelCore.cpp:2324
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2602,15 +2606,15 @@ msgstr ""
 "গ্রহ উপগ্রহ ইত্যাদির পঞ্জিকা নির্ণয়ের জন্য ব্যবহৃত SOLEX নামক একটি "
 "প্রোগ্রামে এটি ব্যবহার করা হয়েছে ।"
 
-#: src/core/StelCore.cpp:2310
+#: src/core/StelCore.cpp:2321
 msgid "Used by default."
 msgstr "প্রারম্ভিক সূচনা হিসেবে ব্যবহার করা হয়ে থাকে ।"
 
-#: src/core/StelCore.cpp:2313
+#: src/core/StelCore.cpp:2324
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "সংযোজিত সংস্করণ, চন্দ্র জনিত অতিরিক্ত ত্বরণ উপেক্ষিত"
 
-#: src/core/StelCore.cpp:2316
+#: src/core/StelCore.cpp:2327
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2621,7 +2625,7 @@ msgstr ""
 "<em>Ancient eclipses and dating the fall of Babylon</em> (%1) প্রবন্ধে "
 "প্রকাশিত হয় ।"
 
-#: src/core/StelCore.cpp:2319
+#: src/core/StelCore.cpp:2330
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2633,7 +2637,7 @@ msgstr ""
 "DeltaT</em> (%1) প্রবন্ধে প্রকাশিত হয় যা ২০১৩ সালে Sana Islam পুনরুত্থাপন "
 "করেন ।"
 
-#: src/core/StelCore.cpp:2322
+#: src/core/StelCore.cpp:2333
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2644,7 +2648,7 @@ msgstr ""
 "<em>Delta T: Polynomial Approximation of Time Period 1620-2013</em> (%1) "
 "নামক প্রবন্ধে প্রকাশ করেন । এটিতেমাত্র ০.৬ সেকেন্ডের এদিক ওদিক হয় ।"
 
-#: src/core/StelCore.cpp:2325
+#: src/core/StelCore.cpp:2336
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2657,7 +2661,15 @@ msgstr ""
 "বলেছেন । উল্লেখিত সীমার বাইরের সময়ের জন্য একটি আনুমানিক অধিবৃত্ত (বহুপদী "
 "আপেক্ষিক সমীকরন মডেল প্রাপ্ত) থেকে মানগুলি নেওয়া হয় ।"
 
-#: src/core/StelCore.cpp:2328
+#: src/core/StelCore.cpp:2339
+#, qt-format
+msgid ""
+"This solution by G. Henriksson was published in the article <em>The "
+"Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
+"(%1) and based on C. Schoch's formula (1931)."
+msgstr ""
+
+#: src/core/StelCore.cpp:2342
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -2665,11 +2677,11 @@ msgid ""
 msgstr ""
 "এটি %1T নির্ণয় করার জন্য ব্যবহারকারী প্রদত্ত সহগ যুক্ত দ্বিঘাত সমীকরন ।"
 
-#: src/core/StelCore.cpp:2331 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2345 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "ত্রুটি"
 
-#: src/core/StelCore.cpp:2339
+#: src/core/StelCore.cpp:2353
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2678,17 +2690,17 @@ msgstr ""
 "%2 (চাঁদের ক্রমবর্ধমান গতি) এর %1 সমাধানটি ব্যবহার করা হয়ে থাকে, বিশদ জানতে "
 "ব্যবহার সহায়িকা দেখুন ।"
 
-#: src/core/StelCore.cpp:2380
+#: src/core/StelCore.cpp:2396
 msgid "with zero values outside this range"
 msgstr "এই সীমার বাইরের মান সবসময় শূন্য হয়"
 
-#: src/core/StelCore.cpp:2383
+#: src/core/StelCore.cpp:2399
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "সচরাচর হিসাবে ১ সেকেন্ডেরও কম ত্রুটি থাকে এবং এই সীমার বাইরের মান সবসময় "
 "শূন্য হয়"
 
-#: src/core/StelCore.cpp:2386
+#: src/core/StelCore.cpp:2402
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2696,16 +2708,16 @@ msgstr ""
 "সীমার বাইরের সময়ের জন্য ত্রুটি গড়ে এক সেকেন্ডের কমই থাকে । সর্বোচ্চ ত্রুটি "
 "১.৯ সেকেন্ড ।"
 
-#: src/core/StelCore.cpp:2393
+#: src/core/StelCore.cpp:2409
 msgid "with values for the limit years outside this range"
 msgstr "সীমার বাইরের সময়ের জন্য আনুমানিক মান ধরে নেওয়া হয় ।"
 
-#: src/core/StelCore.cpp:2403
+#: src/core/StelCore.cpp:2419
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে , %3 ।"
 
-#: src/core/StelCore.cpp:2405
+#: src/core/StelCore.cpp:2421
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "ব্যবহারিক সীমা : %1 থেকে %2 বছরের মধ্যে ।"
@@ -3049,17 +3061,17 @@ msgstr "প্রকৃত সময়"
 msgid "Select screenshot directory"
 msgstr "দৃশ্যপট সংরক্ষণের স্থান নির্বাচন করুন"
 
-#: src/gui/ConfigurationDialog.cpp:948
+#: src/gui/ConfigurationDialog.cpp:949
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "প্রারম্ভিক দৃষ্টিক্ষেত্রের সীমা : %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:956
+#: src/gui/ConfigurationDialog.cpp:957
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "দৃশ্যপটের প্রারম্ভিক দিক - দিগংশ / উন্নতি : %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1018
+#: src/gui/ConfigurationDialog.cpp:1019
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:474
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
@@ -3067,11 +3079,11 @@ msgstr "দৃশ্যপটের প্রারম্ভিক দিক - �
 msgid "Authors"
 msgstr "প্রস্তুতকারক বৃন্দ"
 
-#: src/gui/ConfigurationDialog.cpp:1019
+#: src/gui/ConfigurationDialog.cpp:1020
 msgid "Contact"
 msgstr "যোগাযোগ"
 
-#: src/gui/ConfigurationDialog.cpp:1021 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:1022 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
@@ -3094,7 +3106,7 @@ msgstr "যোগাযোগ"
 msgid "Version"
 msgstr "সংস্করণ"
 
-#: src/gui/ConfigurationDialog.cpp:1022 src/scripting/StelScriptMgr.cpp:238
+#: src/gui/ConfigurationDialog.cpp:1023 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:434
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:473
@@ -3117,20 +3129,20 @@ msgstr "সংস্করণ"
 msgid "License"
 msgstr "অনুমতিপত্র"
 
-#: src/gui/ConfigurationDialog.cpp:1026
+#: src/gui/ConfigurationDialog.cpp:1027
 msgctxt "license"
 msgid "unknown"
 msgstr "অজ্ঞাত"
 
-#: src/gui/ConfigurationDialog.cpp:1123
+#: src/gui/ConfigurationDialog.cpp:1124
 msgid "Running script: "
 msgstr "চলমান কার্যলিপি : "
 
-#: src/gui/ConfigurationDialog.cpp:1130
+#: src/gui/ConfigurationDialog.cpp:1131
 msgid "Running script: [none]"
 msgstr "চলমান কার্যলিপি : [কিছুই না]"
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3138,16 +3150,16 @@ msgstr ""
 "নতুন তারকাসূচি সংগ্রহ করা সম্পূর্ণ হয়েছে !\n"
 "এদের দেখার জন্য Stellarium নতুন করে চালু করুন ।"
 
-#: src/gui/ConfigurationDialog.cpp:1199
+#: src/gui/ConfigurationDialog.cpp:1200
 msgid "All available star catalogs have been installed."
 msgstr "সমস্ত উপলভ্য তারকাসূচি বহাল করা হয়ে গেছে ।"
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1205
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "%1 নং (%2 টি থেকে) সূচিটি সংগ্রহ করুন ।"
 
-#: src/gui/ConfigurationDialog.cpp:1211
+#: src/gui/ConfigurationDialog.cpp:1212
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3156,7 +3168,7 @@ msgstr ""
 "সংগ্রহ করা হচ্ছে %1...\n"
 "(এই অংশটি বন্ধ করা যেতে পারে)"
 
-#: src/gui/ConfigurationDialog.cpp:1218
+#: src/gui/ConfigurationDialog.cpp:1219
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3167,7 +3179,7 @@ msgstr ""
 "তারকা সংখ্যা : %2 মিলিয়ন\n"
 "ঔজ্জ্বল্যতার সীমা : %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1261 src/gui/ConfigurationDialog.cpp:1297
+#: src/gui/ConfigurationDialog.cpp:1262 src/gui/ConfigurationDialog.cpp:1298
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3176,11 +3188,11 @@ msgstr ""
 "%1 সূচিটি সংগ্রহে ত্রুটি হয়েছে :\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1350
+#: src/gui/ConfigurationDialog.cpp:1351
 msgid "Verifying file integrity..."
 msgstr "তালিকাটির তথ্যসমূহ পরীক্ষা করা হচ্ছে..."
 
-#: src/gui/ConfigurationDialog.cpp:1354
+#: src/gui/ConfigurationDialog.cpp:1355
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3189,192 +3201,196 @@ msgstr ""
 "%1 তালিকাটি সংগ্রহে ত্রুটি দেখা দিয়েছে :\n"
 "তারকা সূচিটি নষ্ট হয়ে গেছে ।"
 
-#: src/gui/ConfigurationDialog.cpp:1403 src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1404 src/gui/ConfigurationDialog.cpp:1413
 msgid "Available"
 msgstr "তথ্য উপলভ্য"
 
-#: src/gui/ConfigurationDialog.cpp:1405 src/gui/ConfigurationDialog.cpp:1414
+#: src/gui/ConfigurationDialog.cpp:1406 src/gui/ConfigurationDialog.cpp:1415
 msgid "Not Available"
 msgstr "উপলভ্য নয়"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1484
 msgid "Algorithm of"
 msgstr "সংশোধন পদ্ধতি -"
 
-#: src/gui/ConfigurationDialog.cpp:1496
+#: src/gui/ConfigurationDialog.cpp:1497
 msgid "Without correction"
 msgstr "সংশোধন ছাড়া"
 
-#: src/gui/ConfigurationDialog.cpp:1497
+#: src/gui/ConfigurationDialog.cpp:1498
 msgid "Schoch (1931)"
 msgstr "Schoch (১৯৩১)"
 
-#: src/gui/ConfigurationDialog.cpp:1498
+#: src/gui/ConfigurationDialog.cpp:1499
 msgid "Clemence (1948)"
 msgstr "Clemence (১৯৪৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1499
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "IAU (1952)"
 msgstr "IAU (১৯৫২)"
 
-#: src/gui/ConfigurationDialog.cpp:1500
+#: src/gui/ConfigurationDialog.cpp:1501
 msgid "Astronomical Ephemeris (1960)"
 msgstr "জ্যোতির্বৈজ্ঞানিক পঞ্জিকা (১৯৬০)"
 
-#: src/gui/ConfigurationDialog.cpp:1501
+#: src/gui/ConfigurationDialog.cpp:1502
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (১৯৬২, ১৯৬৪) এবং Goldstine (১৯৭৩)"
 
-#: src/gui/ConfigurationDialog.cpp:1502
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller এবং Stephenson (১৯৭৫)"
 
-#: src/gui/ConfigurationDialog.cpp:1503
+#: src/gui/ConfigurationDialog.cpp:1504
 msgid "Stephenson (1978)"
 msgstr "Stephenson (১৯৭৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1504
+#: src/gui/ConfigurationDialog.cpp:1505
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel এবং Zech (১৯৭৯)"
 
-#: src/gui/ConfigurationDialog.cpp:1505
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel এবং Zech (১৯৮৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1506
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison এবং Stephenson (১৯৮২)"
 
-#: src/gui/ConfigurationDialog.cpp:1507
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson এবং Morrison (১৯৮৪)"
 
-#: src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1509
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson এবং Houlden (১৯৮৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1509
+#: src/gui/ConfigurationDialog.cpp:1510
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (১৯৮৭, ১৯৮৯)"
 
-#: src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1511
 msgid "Borkowski (1988)"
 msgstr "Borkowski (১৯৮৮)"
 
-#: src/gui/ConfigurationDialog.cpp:1511
+#: src/gui/ConfigurationDialog.cpp:1512
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze এবং Chapront (১৯৯১)"
 
-#: src/gui/ConfigurationDialog.cpp:1512
+#: src/gui/ConfigurationDialog.cpp:1513
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson এবং Morrison (১৯৯৫)"
 
-#: src/gui/ConfigurationDialog.cpp:1513
+#: src/gui/ConfigurationDialog.cpp:1514
 msgid "Stephenson (1997)"
 msgstr "Stephenson (১৯৯৭)"
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1516
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (১৯৯৮) (Chapront, Chapront-Touze এবং Francou (১৯৯৭) সহ)"
 
-#: src/gui/ConfigurationDialog.cpp:1516
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1517
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus এবং Simons (২০০০)"
 
-#: src/gui/ConfigurationDialog.cpp:1518
+#: src/gui/ConfigurationDialog.cpp:1519
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison এবং Stephenson (২০০৪, ২০০৫)"
 
-#: src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1520
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison এবং Hohenkerk (২০১৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1521
+#: src/gui/ConfigurationDialog.cpp:1522
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak এবং Meeus (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1524
+#: src/gui/ConfigurationDialog.cpp:1525
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak এবং Meeus (২০০৬) অতিরিক্ত চন্দ্র ত্বরণ ছাড়া"
 
-#: src/gui/ConfigurationDialog.cpp:1526
+#: src/gui/ConfigurationDialog.cpp:1527
 msgid "Reijs (2006)"
 msgstr "Reijs (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1527
+#: src/gui/ConfigurationDialog.cpp:1528
 msgid "Banjevic (2006)"
 msgstr "Banjevic (২০০৬)"
 
-#: src/gui/ConfigurationDialog.cpp:1528
+#: src/gui/ConfigurationDialog.cpp:1529
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck এবং Pfleger (২০০০)"
 
-#: src/gui/ConfigurationDialog.cpp:1529
+#: src/gui/ConfigurationDialog.cpp:1530
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold এবং Dershowitz (২০০২, ২০০৭)"
 
-#: src/gui/ConfigurationDialog.cpp:1530
+#: src/gui/ConfigurationDialog.cpp:1531
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq এবং Qureshi (২০০৮, ২০১৩)"
 
-#: src/gui/ConfigurationDialog.cpp:1531
+#: src/gui/ConfigurationDialog.cpp:1532
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana এবং Zaidi (২০১৪)"
 
-#: src/gui/ConfigurationDialog.cpp:1532
+#: src/gui/ConfigurationDialog.cpp:1533
+msgid "Henriksson (2017)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1534
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T নির্ণয়ের পছন্দসই সমীকরন"
 
-#: src/gui/ConfigurationDialog.cpp:1581 src/gui/ConfigurationDialog.cpp:1616
+#: src/gui/ConfigurationDialog.cpp:1583 src/gui/ConfigurationDialog.cpp:1618
 #: src/gui/StelGuiItems.cpp:651 src/gui/LocationDialog.cpp:449
 msgid "System default"
 msgstr "সিস্টেমে ব্যবহৃত"
 
-#: src/gui/ConfigurationDialog.cpp:1582
+#: src/gui/ConfigurationDialog.cpp:1584
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "বছর-মাস-দিন (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1583
+#: src/gui/ConfigurationDialog.cpp:1585
 msgid "dd-mm-yyyy"
 msgstr "দিন-মাস-বছর"
 
-#: src/gui/ConfigurationDialog.cpp:1584
+#: src/gui/ConfigurationDialog.cpp:1586
 msgid "mm-dd-yyyy"
 msgstr "মাস-দিন-বছর"
 
-#: src/gui/ConfigurationDialog.cpp:1617
+#: src/gui/ConfigurationDialog.cpp:1619
 msgid "12-hour format"
 msgstr "১২ ঘন্টা"
 
-#: src/gui/ConfigurationDialog.cpp:1618
+#: src/gui/ConfigurationDialog.cpp:1620
 msgid "24-hour format"
 msgstr "২৪ ঘন্টা"
 
-#: src/gui/ConfigurationDialog.cpp:1645 src/ui_configurationDialog.h:1461
+#: src/gui/ConfigurationDialog.cpp:1647 src/ui_configurationDialog.h:1461
 #: plugins/Oculars/src/Oculars.cpp:2356
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "কিছুই না"
 
-#: src/gui/ConfigurationDialog.cpp:1646
+#: src/gui/ConfigurationDialog.cpp:1648
 msgid "5/6/5 bits"
 msgstr "5/6/5 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1647
+#: src/gui/ConfigurationDialog.cpp:1649
 msgid "6/6/6 bits"
 msgstr "6/6/6 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1648
+#: src/gui/ConfigurationDialog.cpp:1650
 msgid "8/8/8 bits"
 msgstr "8/8/8 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1649
+#: src/gui/ConfigurationDialog.cpp:1651
 msgid "10/10/10 bits"
 msgstr "10/10/10 bits"
 
@@ -3791,73 +3807,73 @@ msgstr "FPS"
 msgid "Frames per second"
 msgstr "ফ্রেম প্রতি সেকেন্ড"
 
-#: src/gui/ViewDialog.cpp:507
+#: src/gui/ViewDialog.cpp:508
 msgid "Deep Sky"
 msgstr "মহাকাশ"
 
-#: src/gui/ViewDialog.cpp:508
+#: src/gui/ViewDialog.cpp:509
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "সৌরজগত"
 
-#: src/gui/ViewDialog.cpp:519
+#: src/gui/ViewDialog.cpp:520
 msgid "Loading ..."
 msgstr "তালিকা সন্ধান করা হচ্ছে ..."
 
-#: src/gui/ViewDialog.cpp:570
+#: src/gui/ViewDialog.cpp:571
 msgid "properties"
 msgstr "বৈশিষ্ট্য"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1441
+#: src/gui/ViewDialog.cpp:1442
 msgid "Excellent dark-sky site"
 msgstr "একদম ঝকঝকে আকাশ"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1443
+#: src/gui/ViewDialog.cpp:1444
 msgid "Typical truly dark site"
 msgstr "বাস্তবিক পরিষ্কার আকাশ"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1445
+#: src/gui/ViewDialog.cpp:1446
 msgid "Rural sky"
 msgstr "গ্রাম্য আকাশ"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1447
+#: src/gui/ViewDialog.cpp:1448
 msgid "Rural/suburban transition"
 msgstr "শহরতলি ও গ্রাম মধ্যবর্তী আকাশ"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1449
+#: src/gui/ViewDialog.cpp:1450
 msgid "Suburban sky"
 msgstr "শহরতলিয় আকাশ"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1451
+#: src/gui/ViewDialog.cpp:1452
 msgid "Bright suburban sky"
 msgstr "শহরতলির আলোকিত আকাশ"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1453
+#: src/gui/ViewDialog.cpp:1454
 msgid "Suburban/urban transition"
 msgstr "শহর ও শহরতলি মধ্যবর্তী আকাশ"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1455
+#: src/gui/ViewDialog.cpp:1456
 msgid "City sky"
 msgstr "শহরের আকাশ"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1457
+#: src/gui/ViewDialog.cpp:1458
 msgid "Inner-city sky"
 msgstr "শহর অভ্যন্তরস্থ আকাশ"
 
-#: src/gui/ViewDialog.cpp:1471
+#: src/gui/ViewDialog.cpp:1472
 msgid "The naked-eye limiting magnitude is"
 msgstr "খালি চোখে দৃশ্যমান নক্ষত্রের সর্বোচ্চ ঔজ্জ্বলতা"
 
-#: src/gui/ViewDialog.cpp:1479
+#: src/gui/ViewDialog.cpp:1480
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -3865,7 +3881,7 @@ msgstr ""
 "সৌরজগতের কিছু বস্তুদের (ছোটো উপগ্রহ, গ্রহাণু, ধূমকেতু) ক্ষেত্রে গোলকাকার "
 "প্রতিকৃতির বদলে সেগুলির ত্রিমাতৃক প্রতিকৃতি ব্যবহৃত হবে"
 
-#: src/gui/ViewDialog.cpp:1480
+#: src/gui/ViewDialog.cpp:1481
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -3873,88 +3889,88 @@ msgstr ""
 "আকারহীন জ্যোতিষ্কদের ক্ষেত্রে ছায়া গঠনের জন্য একটি &quot;ছায়া মানচিত্র&quot;"
 " ব্যবহার করা হয়, যদিও এতে প্রচ্ছায়ার গঠন নিম্নমানের হয়ে যায় ।"
 
-#: src/gui/ViewDialog.cpp:1503
+#: src/gui/ViewDialog.cpp:1504
 msgid "Abbreviated"
 msgstr "সংক্ষিপ্ত নাম"
 
-#: src/gui/ViewDialog.cpp:1504
+#: src/gui/ViewDialog.cpp:1505
 msgid "Native"
 msgstr "আঞ্চলিক নাম"
 
-#: src/gui/ViewDialog.cpp:1505
+#: src/gui/ViewDialog.cpp:1506
 msgid "Translated"
 msgstr "ভাষান্তরিত নাম"
 
-#: src/gui/ViewDialog.cpp:1672
+#: src/gui/ViewDialog.cpp:1673
 msgid "No shooting stars"
 msgstr "কোন উল্কাপাত ঘটবে না"
 
-#: src/gui/ViewDialog.cpp:1674
+#: src/gui/ViewDialog.cpp:1675
 msgid "Normal rate"
 msgstr "স্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1676
+#: src/gui/ViewDialog.cpp:1677
 msgid "Standard Orionids rate"
 msgstr "কালপুরুষ মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:1678
+#: src/gui/ViewDialog.cpp:1679
 msgid "Standard Perseids rate"
 msgstr "পারসিউস মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:1680
+#: src/gui/ViewDialog.cpp:1681
 msgid "Standard Geminids rate"
 msgstr "মিথুন রাশি থেকে বর্ষিত উল্কাবৃষ্টির প্রমাণ হার"
 
-#: src/gui/ViewDialog.cpp:1682
+#: src/gui/ViewDialog.cpp:1683
 msgid "Exceptional Perseid rate"
 msgstr "পারসিউস মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1684
+#: src/gui/ViewDialog.cpp:1685
 msgid "Meteor storm rate"
 msgstr "প্রবল উল্কা বৃষ্টির হার"
 
-#: src/gui/ViewDialog.cpp:1686
+#: src/gui/ViewDialog.cpp:1687
 msgid "Exceptional Draconid rate"
 msgstr "ড্রাগন মন্ডল থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1688
+#: src/gui/ViewDialog.cpp:1689
 msgid "Exceptional Leonid rate"
 msgstr "সিংহরাশি থেকে বর্ষিত উল্কাবৃষ্টির অস্বাভাবিক হার"
 
-#: src/gui/ViewDialog.cpp:1690
+#: src/gui/ViewDialog.cpp:1691
 msgid "Very high rate (1966 Leonids)"
 msgstr "অতি প্রবল উল্কা বৃষ্টির হার (১৯৬৬ সাল, সিংহরাশি থেকে)"
 
-#: src/gui/ViewDialog.cpp:1692
+#: src/gui/ViewDialog.cpp:1693
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "সর্বকালের সর্বোচ্চ হার (১৮৩৩ সাল, সিংহরাশি থেকে)"
 
-#: src/gui/ViewDialog.cpp:1745
+#: src/gui/ViewDialog.cpp:1746
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "G. Mueller (১৮৯৩)"
 
-#: src/gui/ViewDialog.cpp:1746
+#: src/gui/ViewDialog.cpp:1747
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr "জ্যোতির্বৈজ্ঞানিক পঞ্জিকা (১৯৮৪)"
 
-#: src/gui/ViewDialog.cpp:1747
+#: src/gui/ViewDialog.cpp:1748
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "ব্যাখ্যা সংযুক্তি (১৯৯২)"
 
-#: src/gui/ViewDialog.cpp:1748
+#: src/gui/ViewDialog.cpp:1749
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "ব্যাখ্যা সংযুক্তি (২০১৩)"
 
-#: src/gui/ViewDialog.cpp:1749
+#: src/gui/ViewDialog.cpp:1750
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "অজ্ঞাত"
 
-#: src/gui/ViewDialog.cpp:1775
+#: src/gui/ViewDialog.cpp:1776
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -3962,7 +3978,7 @@ msgstr ""
 "এই গণনা পদ্ধতি <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকা</em> (১৯৮৪ পরবর্তী) তে ব্যবহার "
 "করা হয়েছে এবং এটির সাহায্যে আপাত উজ্জ্ব্যলতা পরিমাপ করা হবে ।"
 
-#: src/gui/ViewDialog.cpp:1778
+#: src/gui/ViewDialog.cpp:1779
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -3972,7 +3988,7 @@ msgstr ""
 "উপর ভিত্তি করে তৈরী এবং যা <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকার ব্যাখ্যা "
 "সংযুক্তি</em> (১৯৬১)  তে প্রকাশিত হয়েছিল ।"
 
-#: src/gui/ViewDialog.cpp:1781
+#: src/gui/ViewDialog.cpp:1782
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -3980,7 +3996,7 @@ msgstr ""
 "এই গণনা পদ্ধতি <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকার ব্যাখ্যা সংযুক্তি</em> (১৯৯২)"
 "  তে প্রকাশিত হয়েছিল ।"
 
-#: src/gui/ViewDialog.cpp:1784
+#: src/gui/ViewDialog.cpp:1785
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -3988,7 +4004,7 @@ msgstr ""
 "এই গণনা পদ্ধতি <em>জ্যোতির্বৈজ্ঞানিক পঞ্জিকার ব্যাখ্যা সংযুক্তি</em> (২০১৩)"
 "  ৩য় সংস্করনে প্রকাশিত হয়েছিল ।"
 
-#: src/gui/ViewDialog.cpp:1787
+#: src/gui/ViewDialog.cpp:1788
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "প্রতিফলনানুপাত ও দশা অনুযায়ী  উজ্জ্ব্যলতা পরিমাপ"
 
@@ -4347,13 +4363,13 @@ msgid "S.B."
 msgstr "পৃষ্ঠঃ উজ্জ্বঃ"
 
 #: src/gui/AstroCalcDialog.cpp:491 src/gui/AstroCalcDialog.cpp:3937
-#: src/ui_viewDialog.h:2671 src/ui_dsoColorsDialog.h:674
+#: src/ui_viewDialog.h:2685 src/ui_dsoColorsDialog.h:674
 msgid "Galaxies"
 msgstr "নক্ষত্রলোক"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:492 src/translations.h:331
-#: src/ui_viewDialog.h:2664 src/ui_dsoColorsDialog.h:595
+#: src/ui_viewDialog.h:2678 src/ui_dsoColorsDialog.h:595
 msgid "Active galaxies"
 msgstr "সক্রিয় নক্ষত্রলোক"
 
@@ -4365,7 +4381,7 @@ msgstr "বেতার নক্ষত্রলোক"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:494 src/translations.h:335
-#: src/ui_viewDialog.h:2672 src/ui_dsoColorsDialog.h:571
+#: src/ui_viewDialog.h:2686 src/ui_dsoColorsDialog.h:571
 msgid "Interacting galaxies"
 msgstr "পারস্পরিক ক্রিয়াশীল নক্ষত্রলোক"
 
@@ -4376,7 +4392,7 @@ msgstr "উজ্জ্বল কোয়াসার"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:496 src/gui/AstroCalcDialog.cpp:3938
-#: src/translations.h:339 src/ui_viewDialog.h:2674
+#: src/translations.h:339 src/ui_viewDialog.h:2688
 #: src/ui_dsoColorsDialog.h:625
 msgid "Star clusters"
 msgstr "তারকাগুচ্ছ"
@@ -4414,14 +4430,14 @@ msgstr "নীহারিকা"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:502 src/gui/AstroCalcDialog.cpp:1897
 #: src/gui/AstroCalcDialog.cpp:3947 src/translations.h:321
-#: src/ui_viewDialog.h:2666 src/ui_dsoColorsDialog.h:678
+#: src/ui_viewDialog.h:2680 src/ui_dsoColorsDialog.h:678
 msgid "Planetary nebulae"
 msgstr "গ্রহরূপী নীহারিকা"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:503 src/gui/AstroCalcDialog.cpp:1899
 #: src/gui/AstroCalcDialog.cpp:3936 src/translations.h:323
-#: src/ui_viewDialog.h:2668 src/ui_dsoColorsDialog.h:612
+#: src/ui_viewDialog.h:2682 src/ui_dsoColorsDialog.h:612
 msgid "Dark nebulae"
 msgstr "কৃষ্ণবর্ণ নীহারিকা"
 
@@ -4456,7 +4472,7 @@ msgstr "HII বা আয়নিত হাইড্রোজেন অধ্য�
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:509 src/gui/AstroCalcDialog.cpp:3955
-#: src/translations.h:349 src/ui_viewDialog.h:2673
+#: src/translations.h:349 src/ui_viewDialog.h:2687
 #: src/ui_dsoColorsDialog.h:643
 msgid "Supernova remnants"
 msgstr "অতিনোভার ধ্বংসাবশেষ"
@@ -4538,20 +4554,20 @@ msgstr "সম্ভবত অতিনোভা ধ্বংশাবশেষ"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:523 src/gui/AstroCalcDialog.cpp:3956
-#: src/translations.h:377 src/ui_viewDialog.h:2670
+#: src/translations.h:377 src/ui_viewDialog.h:2684
 #: src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "নক্ষত্রলোকপুঞ্জ"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:525 src/translations.h:379
-#: src/ui_viewDialog.h:2613
+#: src/ui_viewDialog.h:2627
 msgid "Messier Catalogue"
 msgstr "মেসিয়ার তালিকা"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:527 src/translations.h:381
-#: src/ui_viewDialog.h:2631
+#: src/ui_viewDialog.h:2645
 msgid "Caldwell Catalogue"
 msgstr "ক্যাডওয়েল তালিকা"
 
@@ -4605,11 +4621,11 @@ msgstr "লিন্ডসের উজ্জ্বল নীহারিকা"
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr "লিন্ডসের কৃষ্ণবর্ণ নীহারিকা"
 
-#: src/gui/AstroCalcDialog.cpp:549 src/ui_viewDialog.h:2601
+#: src/gui/AstroCalcDialog.cpp:549 src/ui_viewDialog.h:2615
 msgid "Principal Galaxy Catalog"
 msgstr "মুখ্য নক্ষত্রলোক তালিকা"
 
-#: src/gui/AstroCalcDialog.cpp:551 src/ui_viewDialog.h:2640
+#: src/gui/AstroCalcDialog.cpp:551 src/ui_viewDialog.h:2654
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr "উত্তর গোলার্ধ থেকে দৃশ্যমান নক্ষত্রলোক সমূহের সাধারন (Uppsala) তালিকা"
 
@@ -4691,7 +4707,7 @@ msgstr "উজ্জ্বল অসম ঔজ্জ্বল্যের তা
 msgid "Bright stars with high proper motion"
 msgstr "বেশি সরণ যুক্ত উজ্জ্বল নক্ষত্র"
 
-#: src/gui/AstroCalcDialog.cpp:577 src/ui_viewDialog.h:2984
+#: src/gui/AstroCalcDialog.cpp:577 src/ui_viewDialog.h:2998
 msgid "Solar system objects"
 msgstr "সৌরজগতের জ্যোতিষ্কসমূহ"
 
@@ -5150,7 +5166,7 @@ msgstr "রাতের যে কোনো সময়"
 msgid "Bright stars"
 msgstr "উজ্জ্বল তারা"
 
-#: src/gui/AstroCalcDialog.cpp:3935 src/ui_viewDialog.h:2667
+#: src/gui/AstroCalcDialog.cpp:3935 src/ui_viewDialog.h:2681
 msgid "Bright nebulae"
 msgstr "উজ্জ্বল নীহারিকা"
 
@@ -5182,11 +5198,11 @@ msgstr "পর্যবেক্ষণ ঠিকানা"
 msgid "Unnamed object"
 msgstr "নামকরন হয়নি এমন বস্তু"
 
-#: src/gui/BookmarksDialog.cpp:341 src/ui_bookmarksDialog.h:204
+#: src/gui/BookmarksDialog.cpp:351 src/ui_bookmarksDialog.h:204
 msgid "Import bookmarks"
 msgstr "বুকমার্ক আমদানি করুন"
 
-#: src/gui/BookmarksDialog.cpp:354
+#: src/gui/BookmarksDialog.cpp:364
 msgid "Export bookmarks as..."
 msgstr "বুকমার্ক পছন্দসই কোথাও সঞ্চয় করুন ..."
 
@@ -5242,7 +5258,7 @@ msgstr ""
 "আপনার OpenGL/Mesa প্রনালীতে ত্রুটি আছে । বিশদে জানতে কার্যবিবরনী দেখুন ।\n"
 "এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে চান ?"
 
-#: src/StelMainView.cpp:1129
+#: src/StelMainView.cpp:1133
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5250,7 +5266,7 @@ msgstr ""
 "আপনার OpenGL প্রনালীতে ত্রুটি আছে । বিশদে জানতে কার্যবিবরনী দেখুন ।\n"
 "এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে চান ?"
 
-#: src/StelMainView.cpp:1170
+#: src/StelMainView.cpp:1174
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5258,7 +5274,7 @@ msgstr ""
 "আপনার OpenGL ES প্রনালীতে ত্রুটি আছে । বিশদে জানতে কার্যবিবরনী দেখুন ।\n"
 "এই বিজ্ঞপ্তিটিকে প্রত্যেকবার এড়িযে গিয়ে স্টেলারিয়ামকে কী পুরোনো ধাঁচে চালাতে চান ?"
 
-#: src/StelMainView.cpp:1282
+#: src/StelMainView.cpp:1286
 #, qt-format
 msgid "Stellarium %1"
 msgstr "স্টেলারিয়াম %1"
@@ -8073,8 +8089,8 @@ msgid "Latitude:"
 msgstr "অক্ষাংশ :"
 
 #: src/ui_locationDialogGui.h:500
-msgid "Enter the altitude in meter"
-msgstr "মিটারে উচ্চতা লিখুন"
+msgid "Enter the elevation in meter"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:502
 msgid " m"
@@ -8089,9 +8105,8 @@ msgid "Use current location as default"
 msgstr "জায়গাটি ঠিকানা হিসাবে ব্যবহার করা হবে"
 
 #: src/ui_locationDialogGui.h:505
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
-msgid "Altitude:"
-msgstr "উচ্চতা :"
+msgid "Elevation:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:507 src/ui_locationDialogGui.h:511
 msgid ""
@@ -8300,124 +8315,129 @@ msgstr "শুধুমাত্র আদ্যমিল থাকা নাম
 msgid "Lock position when coordinates are used"
 msgstr "নির্বাচিত স্থানাঙ্কটিকে অনুসরণ করা হবে"
 
-#: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2910
-#: src/ui_viewDialog.h:2932 src/ui_configurationDialog.h:1678
+#: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2924
+#: src/ui_viewDialog.h:2946 src/ui_configurationDialog.h:1678
 #: src/ui_configurationDialog.h:1689
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "বিকল্পসমূহ"
 
-#: src/ui_viewDialog.h:2491
+#: src/ui_viewDialog.h:2502
 msgid "View"
 msgstr "দৃশ্যপট"
 
-#: src/ui_viewDialog.h:2493
+#: src/ui_viewDialog.h:2504
 msgid "Projection"
 msgstr "অভিক্ষেপন"
 
-#: src/ui_viewDialog.h:2494
+#: src/ui_viewDialog.h:2505
 msgid "Vertical viewport offset"
 msgstr "উলম্ব দৃষ্টিক্ষেত্র"
 
-#: src/ui_viewDialog.h:2496
+#: src/ui_viewDialog.h:2507
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Twinkle:"
 msgstr "তারার ঝিকমিক :"
 
-#: src/ui_viewDialog.h:2497 src/ui_viewDialog.h:2574 src/ui_viewDialog.h:2675
+#: src/ui_viewDialog.h:2508 src/ui_viewDialog.h:2588 src/ui_viewDialog.h:2689
 msgid "Labels and Markers"
 msgstr "নাম এবং চিহ্ন"
 
-#: src/ui_viewDialog.h:2498
+#: src/ui_viewDialog.h:2509
 msgid "Use additional names of stars"
 msgstr "অন্যান্য নাম"
 
-#: src/ui_viewDialog.h:2500
+#: src/ui_viewDialog.h:2511
 msgid "Limit the magnitude of stars"
 msgstr "সর্বনিম্ন যে ঔজ্জ্বল্যতার নক্ষত্র খালি চোখে দেখা যাবে"
 
-#: src/ui_viewDialog.h:2502 src/ui_viewDialog.h:2586 src/ui_viewDialog.h:2687
+#: src/ui_viewDialog.h:2513 src/ui_viewDialog.h:2600 src/ui_viewDialog.h:2701
 msgid "Limit magnitude:"
 msgstr "সর্বনিম্ন দৃশ্যমান ঔজ্জ্বল্যতা :"
 
-#: src/ui_viewDialog.h:2503
+#: src/ui_viewDialog.h:2514
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Relative scale:"
 msgstr "আলোকছটার আপেক্ষিক আকার :"
 
-#: src/ui_viewDialog.h:2504
+#: src/ui_viewDialog.h:2515
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:269
 msgid "Absolute scale:"
 msgstr "আলোকছটার আকার :"
 
-#: src/ui_viewDialog.h:2505 src/ui_viewDialog.h:2980
+#: src/ui_viewDialog.h:2516 src/ui_viewDialog.h:2994
 msgid "Sky"
 msgstr "আকাশ"
 
-#: src/ui_viewDialog.h:2507
+#: src/ui_viewDialog.h:2518
 msgid "Dim faint stars when a very bright object is visible"
 msgstr ""
 "খুবই উজ্জ্বল জ্যোতিষ্কের সান্যিধ্যে কম উজ্জ্বল তারাগুলিকে আরও কম উজ্জ্বল "
 "দেখায়"
 
-#: src/ui_viewDialog.h:2509
+#: src/ui_viewDialog.h:2520
 msgid "Dynamic eye adaptation"
 msgstr "চক্ষু অভিযোজন"
 
-#: src/ui_viewDialog.h:2511
+#: src/ui_viewDialog.h:2522
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr ""
 "পছন্দসই বিন্যাস ব্যবহৃত না হয়ে স্থান অনুযায়ী আলোক দূষনের পরিমান ঠিক হবে"
 
-#: src/ui_viewDialog.h:2514
+#: src/ui_viewDialog.h:2525
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Light pollution:"
 msgstr "আলোক দূষন :"
 
-#: src/ui_viewDialog.h:2516
+#: src/ui_viewDialog.h:2527
 msgid "Settings for sporadic meteors"
 msgstr "বিক্ষিপ্ত ভাবে ঘটা উল্কাপাতের রূপরেখা বিন্যাস"
 
-#: src/ui_viewDialog.h:2518
+#: src/ui_viewDialog.h:2529
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "উল্কাপাত :"
 
-#: src/ui_viewDialog.h:2521 src/ui_viewDialog.h:2524
+#: src/ui_viewDialog.h:2532 src/ui_viewDialog.h:2535
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "প্রতি ঘণ্টায় বিচ্ছিন্নভাবে ঘটা উল্কাপাতের হার"
 
-#: src/ui_viewDialog.h:2527
+#: src/ui_viewDialog.h:2538
 msgid "pressure, temperature, extinction coefficient"
 msgstr "চাপ, তাপমাত্রা, বিলুপ্তি গুণাঙ্ক"
 
-#: src/ui_viewDialog.h:2529
+#: src/ui_viewDialog.h:2540
 msgid "Refraction/Extinction settings..."
 msgstr "প্রতিসরণ / বিলুপ্তি সংক্রান্ত রূপরেখা বিন্যাস ..."
 
-#: src/ui_viewDialog.h:2530
+#: src/ui_viewDialog.h:2541
 msgid "Zodiacal Light brightness:"
 msgstr "সৌর আভার ঔজ্জ্বলতা :"
 
-#: src/ui_viewDialog.h:2531
-msgid "Milky Way brightness:"
-msgstr "ছায়াপথের ঔজ্জ্বলতা :"
+#: src/ui_viewDialog.h:2542
+msgid "Milky Way brightness/saturation:"
+msgstr ""
 
-#: src/ui_viewDialog.h:2532
+#: src/ui_viewDialog.h:2544
+msgid ""
+"Changing saturation from totally unsaturated (0.00) to default (1.00) value."
+msgstr ""
+
+#: src/ui_viewDialog.h:2546
 msgid "Atmosphere visualization"
 msgstr "বায়ুমন্ডল"
 
-#: src/ui_viewDialog.h:2533
+#: src/ui_viewDialog.h:2547
 msgid "Solar System objects"
 msgstr "সৌরজগতিক জ্যোতিষ্ক"
 
-#: src/ui_viewDialog.h:2534
+#: src/ui_viewDialog.h:2548
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "পর্যবেক্ষন স্থল বাদে"
 
-#: src/ui_viewDialog.h:2536
+#: src/ui_viewDialog.h:2550
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
@@ -8425,11 +8445,11 @@ msgstr ""
 "সৌরজগতের সমস্ত বস্তুগুলিরও গমনপথ একসঙ্গে দেখতে হলে এই বিকল্পটি নিষ্ক্রিয় করে"
 " দিন ।"
 
-#: src/ui_viewDialog.h:2538
+#: src/ui_viewDialog.h:2552
 msgid "Show trail only for selected planet"
 msgstr "পছন্দসই বস্তুর গমনপথ"
 
-#: src/ui_viewDialog.h:2540
+#: src/ui_viewDialog.h:2554
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
@@ -8437,358 +8457,358 @@ msgstr ""
 "পছন্দসই বস্তুর সাথে তাকে প্রদক্ষিন করা বস্তুগুলিরও কক্ষপথ একসঙ্গে দেখতে হলে "
 "এই বিকল্পটি নিষ্ক্রিয় করে দিন ।"
 
-#: src/ui_viewDialog.h:2542
+#: src/ui_viewDialog.h:2556
 msgid "Show orbit for selected planet"
 msgstr "পছন্দসই বস্তুর কক্ষপথ"
 
-#: src/ui_viewDialog.h:2543
+#: src/ui_viewDialog.h:2557
 msgid "Show planet orbits"
 msgstr "কক্ষপথ"
 
-#: src/ui_viewDialog.h:2545
+#: src/ui_viewDialog.h:2559
 msgid "Configure colors of orbit lines"
 msgstr "কক্ষপথের পছন্দসই রং বাছুন"
 
-#: src/ui_viewDialog.h:2547
+#: src/ui_viewDialog.h:2561
 msgid "Colors..."
 msgstr "রং বাছুন ..."
 
-#: src/ui_viewDialog.h:2551
+#: src/ui_viewDialog.h:2565
 msgid "Use more accurate 3D models (where available)"
 msgstr "ত্রিমাতৃক প্রতিরূপ (উপলভ্য থাকলে)"
 
-#: src/ui_viewDialog.h:2552
+#: src/ui_viewDialog.h:2566
 msgid "Planets magnitude algorithm:"
 msgstr "গ্রহের উজ্জ্ব্যলতা পরিমাপ পদ্ধতি :"
 
-#: src/ui_viewDialog.h:2556
+#: src/ui_viewDialog.h:2570
 msgid "Simulate self-shadowing"
 msgstr "প্রকৃত ছায়া"
 
-#: src/ui_viewDialog.h:2557
+#: src/ui_viewDialog.h:2571
 msgid "Show planet trails"
 msgstr "গমনপথ"
 
-#: src/ui_viewDialog.h:2559
+#: src/ui_viewDialog.h:2573
 msgid "Color of trails"
 msgstr "গমনপথের রং"
 
-#: src/ui_viewDialog.h:2561
+#: src/ui_viewDialog.h:2575
 msgid "Show planet orbits only"
 msgstr "শুধুমাত্র গ্রহদের কক্ষপথ"
 
-#: src/ui_viewDialog.h:2563
+#: src/ui_viewDialog.h:2577
 msgid "Show hints and labels for planetary features"
 msgstr "ভূমিগত বৈশিষ্ট্যগুলির নাম ও চিহ্ন প্রদর্শিত হবে"
 
-#: src/ui_viewDialog.h:2565
+#: src/ui_viewDialog.h:2579
 msgid "Show planetary nomenclature"
 msgstr "অন্যান্য গ্রহ উপগ্রহের ভূমিগত বৈশিষ্ট্য"
 
-#: src/ui_viewDialog.h:2567
+#: src/ui_viewDialog.h:2581
 msgid "Color of nomenclature labels"
 msgstr "ভূমিগত বৈশিষ্ট্যগুলির নামের রং"
 
-#: src/ui_viewDialog.h:2571
+#: src/ui_viewDialog.h:2585
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr "আলোর গতির প্রভাব প্রদর্শনের জন্য এটি সক্রিয় করুন ।"
 
-#: src/ui_viewDialog.h:2573
+#: src/ui_viewDialog.h:2587
 msgid "Simulate light speed"
 msgstr "আলোর গতির প্রভাব"
 
-#: src/ui_viewDialog.h:2576
+#: src/ui_viewDialog.h:2590
 msgid "Color of planet labels"
 msgstr "হরফের রং"
 
-#: src/ui_viewDialog.h:2578
+#: src/ui_viewDialog.h:2592
 msgid "Scale minor bodies:"
 msgstr "বিবর্ধিত গ্রহাণু :"
 
-#: src/ui_viewDialog.h:2579
+#: src/ui_viewDialog.h:2593
 msgid "Scale Moon:"
 msgstr "বিবর্ধিত চাঁদ :"
 
-#: src/ui_viewDialog.h:2581
+#: src/ui_viewDialog.h:2595
 msgid "Scale factor"
 msgstr "বিবর্ধন গুণাঙ্ক"
 
-#: src/ui_viewDialog.h:2584
+#: src/ui_viewDialog.h:2598
 msgid "Limit the magnitude of solar system objects"
 msgstr ""
 "সর্বনিম্ন যে উজ্জ্বল্যতা সম্পন্ন সৌরজগতের বস্তু খালি চোখে দেখতে পাওয়া যাবে"
 
-#: src/ui_viewDialog.h:2587
+#: src/ui_viewDialog.h:2601
 msgid "Use custom settings of GRS:"
 msgstr "বৃহস্পতির লাল ছোপের পছন্দসই বিন্যাস :"
 
-#: src/ui_viewDialog.h:2588
+#: src/ui_viewDialog.h:2602
 msgid "GRS details..."
 msgstr "বিশদ তথ্য ..."
 
-#: src/ui_viewDialog.h:2589
+#: src/ui_viewDialog.h:2603
 msgid "Show planet markers"
 msgstr "অবস্থান"
 
-#: src/ui_viewDialog.h:2590
+#: src/ui_viewDialog.h:2604
 msgid "Display objects from catalogs"
 msgstr "তালিকা"
 
-#: src/ui_viewDialog.h:2592
+#: src/ui_viewDialog.h:2606
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr "নীহারিকা ও তারকাগুচ্ছের আধুনিক সাধারন তালিকা"
 
-#: src/ui_viewDialog.h:2595
+#: src/ui_viewDialog.h:2609
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr "অদ্ভূতাকার নক্ষত্রলোকের মানচিত্র (এপ্রিল ১৯৬৬)"
 
-#: src/ui_viewDialog.h:2598
+#: src/ui_viewDialog.h:2612
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr "ছায়াপথের দক্ষিন অংশে অবস্থিত Hα-নির্গমন অঞ্চলের তালিকা (রজার+, ১৯৬০)"
 
-#: src/ui_viewDialog.h:2604
+#: src/ui_viewDialog.h:2618
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
 "ফ্রাঙ্কলিন-অ্যাডামস চার্টপ্লেটে থাকা তারাকাগুচ্ছের তালিকা (মেলোটি, ১৯১৫)"
 
-#: src/ui_viewDialog.h:2607
+#: src/ui_viewDialog.h:2621
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr "প্রতিফলিত নীহারিকার তালিকা (ভ্যান ডেন বার্গ, ১৯৬৬)"
 
-#: src/ui_viewDialog.h:2610
+#: src/ui_viewDialog.h:2624
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr "লিন্ডসের উজ্জ্বল নীহারিকার তালিকা (লিন্ডস্ , ১৯৬৫)"
 
-#: src/ui_viewDialog.h:2616
+#: src/ui_viewDialog.h:2630
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr "তারকাগুচ্ছের তালিকা (কলিন্ডার, ১৯৩১)"
 
-#: src/ui_viewDialog.h:2619
+#: src/ui_viewDialog.h:2633
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr "লিন্ডসের কৃষ্ণবর্ণ নীহারিকার তালিকা (লিন্ডস্ , ১৯৬২)"
 
-#: src/ui_viewDialog.h:2622
+#: src/ui_viewDialog.h:2636
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr "পারস্পরিক ক্রিয়াশীল নক্ষত্রলোকের তালিকা (Vorontsov-Velyaminov+, ২০০১)"
 
-#: src/ui_viewDialog.h:2625
+#: src/ui_viewDialog.h:2639
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr "উজ্জ্বল ঝাপসা সীমাযুক্ত নীহারিকা তালিকা (সেডেরব্লাড, ১৯৪৬)"
 
-#: src/ui_viewDialog.h:2628
+#: src/ui_viewDialog.h:2642
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr "HII বা আয়নিত হাইড্রোজেন অধ্যুষিত এলাকার তালিকা (শার্পলেস, ১৯৫৯)"
 
-#: src/ui_viewDialog.h:2634
+#: src/ui_viewDialog.h:2648
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr "ছায়াপথে অবস্থিত গ্রহরূপী নীহারিকাদের তালিকা (Kohoutek, ২০০১)"
 
-#: src/ui_viewDialog.h:2637
+#: src/ui_viewDialog.h:2651
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr "নীহারিকা ও তারকাগুচ্ছের ক্রম তালিকা"
 
-#: src/ui_viewDialog.h:2643
+#: src/ui_viewDialog.h:2657
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr "বারনাড প্রবর্তিত ৩৪৯টি কৃষ্ণবর্ণ নীহারিকার তালিকা (বারনাড, ১৯২৭)"
 
-#: src/ui_viewDialog.h:2646
+#: src/ui_viewDialog.h:2660
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
 "ছায়াপথের গ্রহরূপী নীহারিকার স্ট্রসবুর্গ-ই এস ও তালিকা (অ্যাকের+, ১৯৯২)"
 
-#: src/ui_viewDialog.h:2649
+#: src/ui_viewDialog.h:2663
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr "ছায়াপথের সম্ভবত অতিনোভা ধ্বংশাবশেষগুলির তালিকা (গ্রীন ২০১৪)"
 
-#: src/ui_viewDialog.h:2652
+#: src/ui_viewDialog.h:2666
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr "নক্ষত্রলোকপুঞ্জের তালিকা (অ্যাবেল+, ১৯৮৯)"
 
-#: src/ui_viewDialog.h:2655
+#: src/ui_viewDialog.h:2669
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr "হিকসনের নক্ষত্রলোক সমূহ (হিকসন+, ১৯৮২)"
 
-#: src/ui_viewDialog.h:2658
+#: src/ui_viewDialog.h:2672
 msgid "Abell Catalog of Planetary Nebulae (Abell, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2661
+#: src/ui_viewDialog.h:2675
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2663
+#: src/ui_viewDialog.h:2677
 msgid "Filter by type"
 msgstr "ধরণ অনুসারে"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:2665 plugins/Exoplanets/src/Exoplanets.cpp:1031
+#: src/ui_viewDialog.h:2679 plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Other"
 msgstr "অন্যান্য"
 
-#: src/ui_viewDialog.h:2669 src/ui_dsoColorsDialog.h:556
+#: src/ui_viewDialog.h:2683 src/ui_dsoColorsDialog.h:556
 msgid "Hydrogen regions"
 msgstr "হাইড্রোজেন অধ্যুষিত এলাকা"
 
-#: src/ui_viewDialog.h:2677
+#: src/ui_viewDialog.h:2691
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr "প্রকৃত আকার অনুপাতে নির্দেশকগুলি দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2679
+#: src/ui_viewDialog.h:2693
 msgid "Use proportional hints"
 msgstr "আকার অনুপাতে নির্দেশক ব্যবহার"
 
-#: src/ui_viewDialog.h:2681
+#: src/ui_viewDialog.h:2695
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr "পৃষ্ঠতলের উজ্জ্বল্যতা অনুসারে নাম ও চিহ্নগুলি দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2683
+#: src/ui_viewDialog.h:2697
 msgid "Use surface brightness"
 msgstr "উজ্জ্বল্যতা অনুসারে নাম প্রদর্শন"
 
-#: src/ui_viewDialog.h:2685
+#: src/ui_viewDialog.h:2699
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr "খালি চোখে দেখতে পাওয়া সর্বনিম্ন উজ্জ্বল্যতা"
 
-#: src/ui_viewDialog.h:2689
+#: src/ui_viewDialog.h:2703
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr "মহাজাগতিক জ্যোতিষ্কদের প্রচলিত নামের বদলে বৈজ্ঞানিক নাম দেখানো হবে"
 
-#: src/ui_viewDialog.h:2691
+#: src/ui_viewDialog.h:2705
 msgid "Use designations for screen labels"
 msgstr "বৈজ্ঞানিক নাম ব্যবহার"
 
-#: src/ui_viewDialog.h:2692 plugins/Satellites/src/ui_satellitesDialog.h:761
+#: src/ui_viewDialog.h:2706 plugins/Satellites/src/ui_satellitesDialog.h:761
 msgid "Labels"
 msgstr "নাম"
 
-#: src/ui_viewDialog.h:2693
+#: src/ui_viewDialog.h:2707
 msgid "Hints"
 msgstr "নির্দেশক"
 
-#: src/ui_viewDialog.h:2694
+#: src/ui_viewDialog.h:2708
 msgid "Configure colors of markers"
 msgstr "পছন্দসই রং নির্বাচন"
 
-#: src/ui_viewDialog.h:2695
+#: src/ui_viewDialog.h:2709
 msgid "Use outlines for big deep-sky objects"
 msgstr "বৃহৎ মহাজাগতিক বস্তুদের সীমানা প্রদর্শন"
 
-#: src/ui_viewDialog.h:2696
+#: src/ui_viewDialog.h:2710
 msgid "Limit angular size (arcmin):"
 msgstr "আকার অনুসারে (আর্কমিনিট) প্রদর্শন :"
 
-#: src/ui_viewDialog.h:2698
+#: src/ui_viewDialog.h:2712
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "সর্বনিম্ন আকার"
 
-#: src/ui_viewDialog.h:2701
+#: src/ui_viewDialog.h:2715
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "সর্বোচ্চ আকার"
 
-#: src/ui_viewDialog.h:2703
+#: src/ui_viewDialog.h:2717
 msgid "Use additional names of DSO"
 msgstr "অন্যান্য পরিচিত নামগুলি প্রদর্শন"
 
-#: src/ui_viewDialog.h:2704
+#: src/ui_viewDialog.h:2718
 msgid "Celestial Sphere"
 msgstr "খগোলীয় বিষয়"
 
-#: src/ui_viewDialog.h:2706
+#: src/ui_viewDialog.h:2720
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "সংযোগ/ প্রতিযোগ রেখার রং"
 
-#: src/ui_viewDialog.h:2709
+#: src/ui_viewDialog.h:2723
 msgid "Color of meridian"
 msgstr "মূল মধ্যরেখার রং"
 
-#: src/ui_viewDialog.h:2712
+#: src/ui_viewDialog.h:2726
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "J2000.0 অনুযায়ী সূর্যের বার্ষিক পরিক্রমণ পথ দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2714
+#: src/ui_viewDialog.h:2728
 msgid "Ecliptic (J2000)"
 msgstr "সূর্যের বার্ষিক পরিক্রমণ পথ (J2000.0 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2716
+#: src/ui_viewDialog.h:2730
 msgid "Show celestial equator of current planet and date."
 msgstr "নিরক্ষরেখার বর্তমান অবস্থান দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2718
+#: src/ui_viewDialog.h:2732
 msgid "Equator (of date)"
 msgstr "নিরক্ষরেখা (বর্তমান)"
 
-#: src/ui_viewDialog.h:2720
+#: src/ui_viewDialog.h:2734
 msgid "Show celestial equator of J2000.0."
 msgstr "J2000.0 অনুযায়ী নিরক্ষরেখার অবস্থান দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2722
+#: src/ui_viewDialog.h:2736
 msgid "Equator (J2000)"
 msgstr "নিরক্ষরেখা (J2000.0 অনুযায়ী )"
 
-#: src/ui_viewDialog.h:2724
+#: src/ui_viewDialog.h:2738
 msgid "Color of equator (J2000.0)"
 msgstr "নিরক্ষরেখার রং (J2000.0 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2727
+#: src/ui_viewDialog.h:2741
 msgid "Show ecliptic line of current date."
 msgstr "সূর্যের বর্তমান বার্ষিক পরিক্রমণ পথ দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2729
+#: src/ui_viewDialog.h:2743
 msgid "Ecliptic (of date)"
 msgstr "সূর্যের বার্ষিক পরিক্রমণ পথ (বর্তমান)"
 
-#: src/ui_viewDialog.h:2731
+#: src/ui_viewDialog.h:2745
 msgid "Color of equator (of date)"
 msgstr "নিরক্ষরেখার রং (বর্তমান)"
 
-#: src/ui_viewDialog.h:2734
+#: src/ui_viewDialog.h:2748
 msgid "Show Galactic equator line."
 msgstr "ছায়াপথ নির্দেশক রেখা দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2738
+#: src/ui_viewDialog.h:2752
 msgid "Color of supergalactic equator"
 msgstr "নক্ষত্রলোকীয় বিষুবরেখার রং"
 
-#: src/ui_viewDialog.h:2741
+#: src/ui_viewDialog.h:2755
 msgid "Color of ecliptic (of date)"
 msgstr "সৌরপথের রং (বর্তমান)"
 
-#: src/ui_viewDialog.h:2744
+#: src/ui_viewDialog.h:2758
 msgid "Color of ecliptic (J2000.0)"
 msgstr "সৌরপথের রং (J2000.0 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2747
+#: src/ui_viewDialog.h:2761
 msgid "Color of galactic equator"
 msgstr "ছায়াপথ নির্দেশক রেখার রং"
 
-#: src/ui_viewDialog.h:2750
+#: src/ui_viewDialog.h:2764
 msgid "Show mathematical horizon line."
 msgstr "দিগন্তরেখা দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2754
+#: src/ui_viewDialog.h:2768
 msgid "Color of horizon"
 msgstr "দিগন্ত রেখার রং"
 
-#: src/ui_viewDialog.h:2757
+#: src/ui_viewDialog.h:2771
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr "ডি ভোকুলিউর প্রবর্তিত নক্ষত্রলোকীয় ছকের (১৯৭৬) বিষুবরেখা"
 
-#: src/ui_viewDialog.h:2761
+#: src/ui_viewDialog.h:2775
 msgid "Show meridian line."
 msgstr "বিষুবরেখা দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2765
+#: src/ui_viewDialog.h:2779
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
@@ -8796,119 +8816,119 @@ msgstr ""
 "প্রতিযোগ / সংযোগ দ্রাঘিমা - এটি সৌরপথীয় স্থানাঙ্কের দুটি মেরু, সূর্য ও "
 "প্রতিযোগ বিন্দু দিয়ে গঠিত একটি বৃত্ত"
 
-#: src/ui_viewDialog.h:2769
+#: src/ui_viewDialog.h:2783
 msgid "Color of colures"
 msgstr "বিষুব ও ক্রান্তি বৃত্তের রং"
 
-#: src/ui_viewDialog.h:2772
+#: src/ui_viewDialog.h:2786
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr ""
 "বিষুব ও ক্রান্তি বৃত্ত (বিষুব বিন্দু ও ক্রান্তি বিন্দু গামী দ্রাঘিমা) দেখা "
 "যাবে ।"
 
-#: src/ui_viewDialog.h:2774
+#: src/ui_viewDialog.h:2788
 msgid "Colures"
 msgstr "বিষুব ও ক্রান্তি বৃত্ত"
 
-#: src/ui_viewDialog.h:2776
+#: src/ui_viewDialog.h:2790
 msgid "Labels for the Cardinal and Ordinal directions."
 msgstr "দিক চিহ্নগুলি দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2780
+#: src/ui_viewDialog.h:2794
 msgid "Color of cardinal points"
 msgstr "দিক নির্দেশকের রং"
 
-#: src/ui_viewDialog.h:2784
+#: src/ui_viewDialog.h:2798
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "সৌরপথীয় মেরু বিন্দুর রং (J2000.0 অনুয়াযী)"
 
-#: src/ui_viewDialog.h:2787
+#: src/ui_viewDialog.h:2801
 msgid "Color of Prime Vertical"
 msgstr "মধ্যরেখার রং"
 
-#: src/ui_viewDialog.h:2790
+#: src/ui_viewDialog.h:2804
 msgid "Show ecliptic poles of J2000.0"
 msgstr "J2000.0 অনুয়াযী সৌরপথীয় মেরু দুটি দেখা যাবে"
 
-#: src/ui_viewDialog.h:2792
+#: src/ui_viewDialog.h:2806
 msgid "Ecliptic poles (J2000)"
 msgstr "সৌরপথীয় মেরু (J2000.0 অনুয়াযী)"
 
-#: src/ui_viewDialog.h:2794
+#: src/ui_viewDialog.h:2808
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "মেরু দ্বয়ের রং (J2000.0 অনুয়াযী)"
 
-#: src/ui_viewDialog.h:2797
+#: src/ui_viewDialog.h:2811
 msgid "Show celestial poles of current planet and date."
 msgstr "গ্রহ ও তারিখ অনুযায়ী মেরু দ্বয় দেখা যাবে"
 
-#: src/ui_viewDialog.h:2799
+#: src/ui_viewDialog.h:2813
 msgid "Celestial poles (of date)"
 msgstr "মেরু বিন্দু (বর্তমান)"
 
-#: src/ui_viewDialog.h:2801
+#: src/ui_viewDialog.h:2815
 msgid "Color of ecliptic poles (of date)"
 msgstr "সৌরপথীয় মেরু বিন্দুর রং (বর্তমান)"
 
-#: src/ui_viewDialog.h:2804
+#: src/ui_viewDialog.h:2818
 msgid "Color of celestial poles (of date)"
 msgstr "মেরু বিন্দুর রং (বর্তমান)"
 
-#: src/ui_viewDialog.h:2807
+#: src/ui_viewDialog.h:2821
 msgid "Color of supergalactic poles"
 msgstr "নক্ষত্রলোকীয় মেরু বিন্দুর রং"
 
-#: src/ui_viewDialog.h:2810
+#: src/ui_viewDialog.h:2824
 msgid "Show ecliptic poles of current date."
 msgstr "বর্তমান সৌরপথীয় মেরু দ্বয় দেখা যাবে"
 
-#: src/ui_viewDialog.h:2812
+#: src/ui_viewDialog.h:2826
 msgid "Ecliptic poles (of date)"
 msgstr "সৌরপথীয় মেরু (বর্তমান)"
 
-#: src/ui_viewDialog.h:2814
+#: src/ui_viewDialog.h:2828
 msgid "Show Prime (East-West) Vertical."
 msgstr "মধ্যরেখা (পূর্ব পশ্চিম গামী) দেখা যাবে ।"
 
-#: src/ui_viewDialog.h:2818
+#: src/ui_viewDialog.h:2832
 msgid "Color of galactic poles"
 msgstr "ছায়াপথীয় মেরু বিন্দুর রং"
 
-#: src/ui_viewDialog.h:2820
+#: src/ui_viewDialog.h:2834
 msgid "Zenith and Nadir"
 msgstr "সুবিন্দু ও কুবিন্দু"
 
-#: src/ui_viewDialog.h:2822
+#: src/ui_viewDialog.h:2836
 msgid "Color of Zenith and Nadir"
 msgstr "সুবিন্দু ও কুবিন্দু এর রং"
 
-#: src/ui_viewDialog.h:2826
+#: src/ui_viewDialog.h:2840
 msgid "Color of circumpolar circles"
 msgstr "ধ্রুব বৃত্তের রং"
 
-#: src/ui_viewDialog.h:2829
+#: src/ui_viewDialog.h:2843
 msgid "Show celestial poles of J2000.0."
 msgstr "J2000.0 অনুযায়ী মেরু দ্বয় দেখা যাবে"
 
-#: src/ui_viewDialog.h:2831
+#: src/ui_viewDialog.h:2845
 msgid "Celestial poles (J2000)"
 msgstr "মেরু বিন্দু (J2000.0 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2833
+#: src/ui_viewDialog.h:2847
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the"
 " mathematical horizon."
 msgstr "এই বৃত্তের মধ্যে থাকা তারাগুলি ঐ অঞ্চলে কখনও অস্ত যায় না ।"
 
-#: src/ui_viewDialog.h:2835
+#: src/ui_viewDialog.h:2849
 msgid "Circumpolar circles"
 msgstr "ধ্রুব বৃত্ত"
 
-#: src/ui_viewDialog.h:2837
+#: src/ui_viewDialog.h:2851
 msgid "Color of precession circles"
 msgstr "অক্ষের সঞ্চারপথের রং"
 
-#: src/ui_viewDialog.h:2840
+#: src/ui_viewDialog.h:2854
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
@@ -8916,49 +8936,49 @@ msgstr ""
 "মেরুর বৃত্তাকার সঞ্চারপথ যা পৃথিবীর অক্ষের দোলন জনিত প্রভাবের ফলে উৎপন্ন হয় "
 "(লাট্টুর মত ঘুর্ণনের কারণে)"
 
-#: src/ui_viewDialog.h:2842
+#: src/ui_viewDialog.h:2856
 msgid "Precession circles"
 msgstr "অক্ষের সঞ্চারপথ"
 
-#: src/ui_viewDialog.h:2844
+#: src/ui_viewDialog.h:2858
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "উন্নতি কোন ও দিগংশ (উত্তর দিক থেকে পূর্বাভিমুখী ব্যবস্থা)"
 
-#: src/ui_viewDialog.h:2848
+#: src/ui_viewDialog.h:2862
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr ""
 "বর্তমান সৌরপথীয় স্থানাঙ্ক ব্যবস্থা । পৃথিবী ক্ষেত্রে কেবলমাত্র ব্যবহার করা "
 "যাবে ।"
 
-#: src/ui_viewDialog.h:2850
+#: src/ui_viewDialog.h:2864
 msgid "Ecliptic grid (of date)"
 msgstr "সৌরপথীয় ছক (বর্তমান)"
 
-#: src/ui_viewDialog.h:2852
+#: src/ui_viewDialog.h:2866
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "ভূ-বিষুব ছকের (J2000.0 অনুযায়ী) রং"
 
-#: src/ui_viewDialog.h:2855
+#: src/ui_viewDialog.h:2869
 msgid "Color of the equinox points (J2000.0)"
 msgstr "বিষুব বিন্দুর রং (J2000.0 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2858
+#: src/ui_viewDialog.h:2872
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "J2000 অনুযায়ী সৌরপথীয় স্থানাঙ্ক ব্যবস্থা"
 
-#: src/ui_viewDialog.h:2860
+#: src/ui_viewDialog.h:2874
 msgid "Ecliptic grid (J2000)"
 msgstr "সৌরপথীয় ছক (J2000 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2862
+#: src/ui_viewDialog.h:2876
 msgid "Color of the supergalactic grid"
 msgstr "নক্ষত্রলোকীয় ছকের রং"
 
-#: src/ui_viewDialog.h:2865
+#: src/ui_viewDialog.h:2879
 msgid "Color of the galactic grid"
 msgstr "ছায়াপথ কেন্দ্রিক ছকের রং"
 
-#: src/ui_viewDialog.h:2868
+#: src/ui_viewDialog.h:2882
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
@@ -8966,225 +8986,225 @@ msgstr ""
 "নিকটবর্তী নক্ষত্রলোক সমূহের বন্টন ভিত্তিক ডি ভোকুলিউর প্রবর্তিত নক্ষত্রলোকীয়"
 " স্থানাঙ্ক ব্যবস্থা (১৯৭৬) ।"
 
-#: src/ui_viewDialog.h:2872
+#: src/ui_viewDialog.h:2886
 msgid "Equatorial coordinates of J2000.0."
 msgstr "J2000 অনুযায়ী ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা"
 
-#: src/ui_viewDialog.h:2874
+#: src/ui_viewDialog.h:2888
 msgid "Equatorial grid (J2000)"
 msgstr "ভূ-বিষুব ছক (J2000 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2876
+#: src/ui_viewDialog.h:2890
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "সৌরপথীয় ছকের (J2000.0 অনুযায়ী) রং"
 
-#: src/ui_viewDialog.h:2879
+#: src/ui_viewDialog.h:2893
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "ছায়াপথ কেন্দ্রিক স্থানাঙ্ক, ২য় পদ্ধতি (IAU ১৯৫৮)"
 
-#: src/ui_viewDialog.h:2883
+#: src/ui_viewDialog.h:2897
 msgid "Color of the equatorial grid (of date)"
 msgstr "ভূ-বিষুব ছকের (বর্তমান) রং"
 
-#: src/ui_viewDialog.h:2885
+#: src/ui_viewDialog.h:2899
 msgid "Equinoxes (J2000)"
 msgstr "বিষুব বিন্দু (J2000.0 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2887
+#: src/ui_viewDialog.h:2901
 msgid "Color of the ecliptical grid (of date)"
 msgstr "সৌরপথীয় ছকের (বর্তমান) রং"
 
-#: src/ui_viewDialog.h:2890
+#: src/ui_viewDialog.h:2904
 msgid "Color of the azimuthal grid"
 msgstr "দিগন্ত ভিত্তিক ছকের রং"
 
-#: src/ui_viewDialog.h:2893
+#: src/ui_viewDialog.h:2907
 msgid "Color of the equinox points (of date)"
 msgstr "বিষুব বিন্দুর রং (বর্তমান)"
 
-#: src/ui_viewDialog.h:2896
+#: src/ui_viewDialog.h:2910
 msgid "Equatorial coordinates of current date and planet."
 msgstr "তারিখ ও অবস্থান অনুযায়ী ভূ-বিষুব স্থানাঙ্ক ব্যবস্থা"
 
-#: src/ui_viewDialog.h:2898
+#: src/ui_viewDialog.h:2912
 msgid "Equatorial grid (of date)"
 msgstr "ভূ-বিষুব ছক (বর্তমান)"
 
-#: src/ui_viewDialog.h:2899
+#: src/ui_viewDialog.h:2913
 msgid "Equinoxes (of date)"
 msgstr "বিষুব বিন্দু (বর্তমান)"
 
-#: src/ui_viewDialog.h:2900
+#: src/ui_viewDialog.h:2914
 msgid "Solstices (J2000)"
 msgstr "ক্রান্তি বিন্দু (J2000 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2902
+#: src/ui_viewDialog.h:2916
 msgid "Color of the solstice points (J2000.0)"
 msgstr "ক্রান্তি বিন্দুর রং (J2000 অনুযায়ী)"
 
-#: src/ui_viewDialog.h:2905
+#: src/ui_viewDialog.h:2919
 msgid "Solstices (of date)"
 msgstr "ক্রান্তি বিন্দু (বর্তমান)"
 
-#: src/ui_viewDialog.h:2907
+#: src/ui_viewDialog.h:2921
 msgid "Color of the solstice points (of date)"
 msgstr "ক্রান্তি বিন্দুর রং (বর্তমান)"
 
-#: src/ui_viewDialog.h:2911
+#: src/ui_viewDialog.h:2925
 msgid "Show fog"
 msgstr "কুয়াশার প্রভাব"
 
-#: src/ui_viewDialog.h:2912
+#: src/ui_viewDialog.h:2926
 msgid "Use associated planet and position"
 msgstr "ভূমিরূপ অনুযায়ী ঠিকানা ব্যবহার"
 
-#: src/ui_viewDialog.h:2913
+#: src/ui_viewDialog.h:2927
 msgid "Use this landscape as default"
 msgstr "প্রতিবার শুরুর সময় এই ভূমিরূপটি ব্যবহার করা হবে"
 
-#: src/ui_viewDialog.h:2914
+#: src/ui_viewDialog.h:2928
 msgid "Show ground"
 msgstr "ভূমি"
 
-#: src/ui_viewDialog.h:2916
+#: src/ui_viewDialog.h:2930
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "পুরো অন্ধকারে আশেপাশে দেখার জন্য ব্যবহৃত সর্বনিম্ন ঔজ্জ্বল্যতা"
 
-#: src/ui_viewDialog.h:2918
+#: src/ui_viewDialog.h:2932
 msgid "Minimal brightness:"
 msgstr "সর্বনিম্ন ঔজ্জ্বল্যতা :"
 
-#: src/ui_viewDialog.h:2920
+#: src/ui_viewDialog.h:2934
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "মান ০..১ পর্যন্ত হতে পারে (পুরো অন্ধকার - একদম চকচকে)"
 
-#: src/ui_viewDialog.h:2923
+#: src/ui_viewDialog.h:2937
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "ভূমিরূপ অনুযায়ী সর্বনিম্ন ঔজ্জ্বল্যতা ঠিক করা হবে"
 
-#: src/ui_viewDialog.h:2925
+#: src/ui_viewDialog.h:2939
 msgid "from landscape, if given"
 msgstr "ভূমিরূপ অনুযায়ী, তথ্য উপলভ্য থাকলে"
 
-#: src/ui_viewDialog.h:2927
+#: src/ui_viewDialog.h:2941
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "দীপন স্তরগুলি (আলোক দূষন, পরিবেশের ঔজ্জ্বল্যতা, ইত্যাদি) দেখান হবে"
 
-#: src/ui_viewDialog.h:2929
+#: src/ui_viewDialog.h:2943
 msgid "Show illumination "
 msgstr "দীপন স্তর "
 
-#: src/ui_viewDialog.h:2930
+#: src/ui_viewDialog.h:2944
 msgid "Show landscape labels"
 msgstr "ভূমিরূপের বিভিন্ন অংশের নাম"
 
-#: src/ui_viewDialog.h:2931
+#: src/ui_viewDialog.h:2945
 msgid "Add/remove landscapes..."
 msgstr "ভূমিরূপ জুড়ুন/মুছে ফেলুন"
 
-#: src/ui_viewDialog.h:2933
+#: src/ui_viewDialog.h:2947
 msgid "Show art in brightness"
 msgstr "কল্পচিত্রের উজ্জ্বল্যতা :"
 
-#: src/ui_viewDialog.h:2934
+#: src/ui_viewDialog.h:2948
 msgid "Show constellation lines"
 msgstr "নক্ষত্রমন্ডলের রেখাকৃতি"
 
-#: src/ui_viewDialog.h:2936 src/ui_viewDialog.h:2960 src/ui_viewDialog.h:2971
+#: src/ui_viewDialog.h:2950 src/ui_viewDialog.h:2974 src/ui_viewDialog.h:2985
 msgid "Thickness of line in pixels"
 msgstr "রেখার বেধ (পিক্সেলে)"
 
-#: src/ui_viewDialog.h:2939
+#: src/ui_viewDialog.h:2953
 msgid "Color of constellation lines"
 msgstr "নক্ষত্রমন্ডলের রেখার রং"
 
-#: src/ui_viewDialog.h:2942
+#: src/ui_viewDialog.h:2956
 msgid "Use native names for planets from current culture"
 msgstr "গ্রহদের আঞ্চলিক নাম দেখা যাবে"
 
-#: src/ui_viewDialog.h:2944
+#: src/ui_viewDialog.h:2958
 msgid "Use native names for planets"
 msgstr "গ্রহদের আঞ্চলিক নাম ব্যবহার"
 
-#: src/ui_viewDialog.h:2945
+#: src/ui_viewDialog.h:2959
 msgid "Use this sky culture as default"
 msgstr "প্রতিবার শুরুর সময় এই মহাকাশ সংস্কৃতিটি ব্যবহার করা হবে"
 
-#: src/ui_viewDialog.h:2946
+#: src/ui_viewDialog.h:2960
 msgid "Show labels"
 msgstr "নাম"
 
-#: src/ui_viewDialog.h:2948
+#: src/ui_viewDialog.h:2962
 msgid "Select if you want names abbreviated, original or translated"
 msgstr ""
 "সাংকেতিক নাম, আঞ্চলিক নাম কিংবা ভাষান্তরিত নাম পছন্দমত ব্যবহার করা যায়"
 
-#: src/ui_viewDialog.h:2952
+#: src/ui_viewDialog.h:2966
 msgid "Color of constellation names"
 msgstr "নক্ষত্রমন্ডলের নামের হরফের রং"
 
-#: src/ui_viewDialog.h:2954
+#: src/ui_viewDialog.h:2968
 msgid "Show boundaries"
 msgstr "সীমানা"
 
-#: src/ui_viewDialog.h:2956
+#: src/ui_viewDialog.h:2970
 msgid "Color of constellation boundaries"
 msgstr "নক্ষত্রমন্ডলের সীমানার রং"
 
-#: src/ui_viewDialog.h:2958
+#: src/ui_viewDialog.h:2972
 msgid "Show asterism lines"
 msgstr "নক্ষত্রপুঞ্জের রেখাকৃতি"
 
-#: src/ui_viewDialog.h:2963
+#: src/ui_viewDialog.h:2977
 msgid "Color of asterism lines"
 msgstr "নক্ষত্রপুঞ্জের রেখার রং"
 
-#: src/ui_viewDialog.h:2965
+#: src/ui_viewDialog.h:2979
 msgid "Show asterism labels"
 msgstr "নক্ষত্রপুঞ্জের নাম"
 
-#: src/ui_viewDialog.h:2967
+#: src/ui_viewDialog.h:2981
 msgid "Color of asterism names"
 msgstr "নক্ষত্রপুঞ্জের নামের হরফের রং"
 
-#: src/ui_viewDialog.h:2969
+#: src/ui_viewDialog.h:2983
 msgid "Show ray helpers"
 msgstr "অনুসন্ধান সহায়ক রেখা"
 
-#: src/ui_viewDialog.h:2974
+#: src/ui_viewDialog.h:2988
 msgid "Color of ray helpers"
 msgstr "অনুসন্ধান সহায়ক রেখার রং"
 
-#: src/ui_viewDialog.h:2982
+#: src/ui_viewDialog.h:2996
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "সৌরজগৎ"
 
-#: src/ui_viewDialog.h:2987
+#: src/ui_viewDialog.h:3001
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
-#: src/ui_viewDialog.h:2989
+#: src/ui_viewDialog.h:3003
 msgid "Deep-Sky Objects"
 msgstr "মহাজাগতিক জ্যোতিষ্ক"
 
-#: src/ui_viewDialog.h:2992
+#: src/ui_viewDialog.h:3006
 msgid "Markings"
 msgstr "চিহ্ন"
 
-#: src/ui_viewDialog.h:2994
+#: src/ui_viewDialog.h:3008
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Landscape"
 msgstr "ভূমিরূপ"
 
-#: src/ui_viewDialog.h:2996
+#: src/ui_viewDialog.h:3010
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:231
 msgid "Starlore"
 msgstr "মহাকাশ সম্পর্কীয় নানা সংস্কৃতি"
 
-#: src/ui_viewDialog.h:2998
+#: src/ui_viewDialog.h:3012
 msgid "Surveys"
 msgstr "নিরীক্ষা"
 
@@ -10474,7 +10494,7 @@ msgid "Color of markers of bipolar nebulae"
 msgstr "ডাম্বেলাকার নীহারিকা নির্দেশকের রং"
 
 #: src/ui_dsoColorsDialog.h:647 plugins/Quasars/src/Quasars.cpp:72
-#: plugins/Quasars/src/Quasars.cpp:170 plugins/Quasars/src/Quasars.cpp:171
+#: plugins/Quasars/src/Quasars.cpp:171 plugins/Quasars/src/Quasars.cpp:172
 msgid "Quasars"
 msgstr "কোয়াসার"
 
@@ -11826,138 +11846,143 @@ msgstr ""
 "তালিকাটি ব্যবহার করা হচ্ছে"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2070
 msgid "visual"
 msgstr "দৃষ্টিগ্রাহ্য"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2072
 msgid "scientific"
 msgstr "বৈজ্ঞানিক"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "communications"
 msgstr "সংযোগ সংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "navigation"
 msgstr "মার্গদর্শী"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2062
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "amateur"
 msgstr "সৌখিন"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2080
 msgid "weather"
 msgstr "আবহাওয়া সংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2082
 msgid "geostationary"
 msgstr "ভুসমলিত"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2068
+#: plugins/Satellites/src/Satellites.cpp:2084
 msgid "non-operational"
 msgstr "অকেজো"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2070
+#: plugins/Satellites/src/Satellites.cpp:2086
 msgid "gps"
 msgstr "জিপিএস"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2072
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "glonass"
 msgstr "গ্লোনাস"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2074
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "galileo"
 msgstr "গ্যালিলিও"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2076
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "iridium"
 msgstr "ইরিডিয়াম"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2078
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "stations"
 msgstr "মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2080
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "education"
 msgstr "শিক্ষা সংক্রান্ত"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2082
+#: plugins/Satellites/src/Satellites.cpp:2098
 msgid "observatory"
 msgstr "পর্যবেক্ষন সংক্রান্ত"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2087
+#: plugins/Satellites/src/Satellites.cpp:2103
 msgid "The Hubble Space Telescope"
 msgstr "হাবল স্পেস টেলিস্কোপ"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2089
+#: plugins/Satellites/src/Satellites.cpp:2105
 msgid "The International Space Station"
 msgstr "আন্তর্জাতিক মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2091
+#: plugins/Satellites/src/Satellites.cpp:2107
 msgid "China's first space station"
 msgstr "চীনের প্রথম মহাকাশ কেন্দ্র"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2093
+#: plugins/Satellites/src/Satellites.cpp:2109
 msgid "The russian space radio telescope RadioAstron"
 msgstr "রাশিয়ান মহাকাশ বেতার দূরবীন রেডিও অ্যাসট্রন"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2095
+#: plugins/Satellites/src/Satellites.cpp:2111
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr "আন্তর্জাতিক গামারশ্মি জ্যোতির্পদার্থবিজ্ঞান গবেষনাগার"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2097
+#: plugins/Satellites/src/Satellites.cpp:2113
 msgid "The Gamma-Ray Observatory"
 msgstr "গামারশ্মি পর্যবেক্ষনাগার"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2101
+#: plugins/Satellites/src/Satellites.cpp:2117
 msgid "ISS (ZARYA)"
 msgstr "আন্তর্জাতিক স্পেস স্টেশন (জারিয়া)"
 
+#. TRANSLATORS: Satellite name: International Space Station
+#: plugins/Satellites/src/Satellites.cpp:2119
+msgid "ISS"
+msgstr ""
+
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2103
+#: plugins/Satellites/src/Satellites.cpp:2121
 msgid "HST"
 msgstr "হাবল দূরবীন"
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2105
+#: plugins/Satellites/src/Satellites.cpp:2123
 msgid "SPEKTR-R"
 msgstr "স্পেকটর-আর"
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2107
+#: plugins/Satellites/src/Satellites.cpp:2125
 msgid "INTEGRAL"
 msgstr "ইন্টিগ্রাল"
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2109
+#: plugins/Satellites/src/Satellites.cpp:2127
 msgid "TIANGONG 1"
 msgstr "টিয়াংগং ১"
 
@@ -14080,6 +14105,10 @@ msgstr ""
 "0.9.x সিরিজের টেক্সট ইউজার ইন্টারফেস (TUI), যা সাধারণত গ্রহমণ্ডলীর মানচিত্র "
 "প্রনালীতে ব্যবহৃত হয় ।"
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
+msgid "Altitude:"
+msgstr "উচ্চতা :"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
 msgstr "সৌরমন্ডলীয় বস্তু"
@@ -14502,7 +14531,7 @@ msgid "Add new Minor Solar System objects"
 msgstr "নতুন গ্রহাণু যোগ করুন"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
-#: plugins/Supernovae/src/Supernovae.cpp:148
+#: plugins/Supernovae/src/Supernovae.cpp:149
 msgid "Historical Supernovae"
 msgstr "বিখ্যাত অতিনোভা"
 
@@ -14510,55 +14539,55 @@ msgstr "বিখ্যাত অতিনোভা"
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr "এই সরঞ্জামটি আমাদের কিছু বিখ্যাত অতিনোভা দেখায় ।"
 
-#: plugins/Supernovae/src/Supernovae.cpp:148
+#: plugins/Supernovae/src/Supernovae.cpp:149
 msgid "Historical Supernovae configuration window"
 msgstr "বিখ্যাত অতিনোভার বৈশিষ্ট্য বিন্যাস"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "January"
 msgstr "জানুয়ারী"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "February"
 msgstr "ফেব্রুয়ারী"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "March"
 msgstr "মার্চ"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "April"
 msgstr "এপ্রিল"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "May"
 msgstr "মে"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "June"
 msgstr "জুন"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "July"
 msgstr "জুলাই"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "August"
 msgstr "আগষ্ট"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "September"
 msgstr "সেপ্টেম্বর"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "October"
 msgstr "অক্টোবর"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "November"
 msgstr "নভেম্বর"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "December"
 msgstr "ডিসেম্বর"
 
@@ -14784,7 +14813,7 @@ msgstr "বিঃদ্রঃ"
 msgid "Enable display at startup"
 msgstr "শুরুর সময়েই দৃশ্যপটে দেখানো হবে"
 
-#: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
+#: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae"
 msgstr "বিস্ফোরিত নক্ষত্র বা নোভা"
 
@@ -14792,7 +14821,7 @@ msgstr "বিস্ফোরিত নক্ষত্র বা নোভা"
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "এই সরঞ্জামটি আমাদের ছায়াপথে ঘটা কিছু উজ্জ্বল নক্ষত্র বিস্ফোরণ দেখায় ।"
 
-#: plugins/Novae/src/Novae.cpp:142
+#: plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae configuration window"
 msgstr "বিস্ফোরিত নক্ষত্রের বৈশিষ্ট বিন্যাস"
 
@@ -14868,11 +14897,11 @@ msgstr ""
 " 'Quasars and Active Galactic Nuclei' (১৩ তম সংস্করণ) (ভেরন +২০১০) থেকে "
 "নেওয়া হয়েছে ।"
 
-#: plugins/Quasars/src/Quasars.cpp:170
+#: plugins/Quasars/src/Quasars.cpp:171
 msgid "Show quasars"
 msgstr "কোয়াসার"
 
-#: plugins/Quasars/src/Quasars.cpp:171
+#: plugins/Quasars/src/Quasars.cpp:172
 msgid "Quasars configuration window"
 msgstr "কোয়াসারের বৈশিষ্ট্য বিন্যাস"
 
@@ -14949,8 +14978,8 @@ msgstr "কোয়াসার নির্দেশক"
 msgid "Quasars marker color"
 msgstr "কোয়াসার নির্দেশকের রং"
 
-#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
-#: plugins/Pulsars/src/Pulsars.cpp:168
+#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:168
+#: plugins/Pulsars/src/Pulsars.cpp:169
 msgid "Pulsars"
 msgstr "স্পন্দন তারা বা পালসার"
 
@@ -14963,11 +14992,11 @@ msgstr ""
 "এই সরঞ্জামটি স্পন্দন তারাদের অবস্থান দেখানোর সাথে সাথে তাদের প্রত্যেকটির "
 "সম্পর্কে গুরুত্বপূর্ণ তথ্যও দেখিয়ে থাকে ।"
 
-#: plugins/Pulsars/src/Pulsars.cpp:167
+#: plugins/Pulsars/src/Pulsars.cpp:168
 msgid "Show pulsars"
 msgstr "স্পন্দন তারা"
 
-#: plugins/Pulsars/src/Pulsars.cpp:168
+#: plugins/Pulsars/src/Pulsars.cpp:169
 msgid "Pulsars configuration window"
 msgstr "স্পন্দন তারার বৈশিষ্ট্য বিন্যাস"
 
@@ -15532,8 +15561,8 @@ msgid "Client settings"
 msgstr "ব্যবহারকারী"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
-#: plugins/Exoplanets/src/Exoplanets.cpp:170
 #: plugins/Exoplanets/src/Exoplanets.cpp:171
+#: plugins/Exoplanets/src/Exoplanets.cpp:172
 msgid "Exoplanets"
 msgstr "গ্রহমন্ডল"
 
@@ -15545,91 +15574,91 @@ msgstr ""
 "এই সরঞ্জামটি গ্রহ যুক্ত নক্ষত্রদের অবস্থান দেখায় । গ্রহমন্ডল সম্পর্কে সমস্ত "
 "তথ্য exoplanet.eu -এ প্রাপ্ত 'গ্রহমন্ডল বিশ্বকোষ' থেকে নেওয়া হয়েছে ।"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:170
+#: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Show exoplanets"
 msgstr "গ্রহমন্ডল"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:171
+#: plugins/Exoplanets/src/Exoplanets.cpp:172
 msgid "Exoplanets configuration window"
 msgstr "গ্রহমন্ডলগুলির বৈশিষ্ট্য বিন্যাস"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1001
+#: plugins/Exoplanets/src/Exoplanets.cpp:1023
 msgid "Hot"
 msgstr "গরম"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1003
+#: plugins/Exoplanets/src/Exoplanets.cpp:1025
 msgid "Warm"
 msgstr "মনোরম"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1005
+#: plugins/Exoplanets/src/Exoplanets.cpp:1027
 msgid "Cold"
 msgstr "ঠান্ডা"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1008
+#: plugins/Exoplanets/src/Exoplanets.cpp:1030
 msgid "Miniterran"
 msgstr "বুধের মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1010
+#: plugins/Exoplanets/src/Exoplanets.cpp:1032
 msgid "Subterran"
 msgstr "মঙ্গলের মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1012
+#: plugins/Exoplanets/src/Exoplanets.cpp:1034
 msgid "Terran"
 msgstr "পার্থিব"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1014
+#: plugins/Exoplanets/src/Exoplanets.cpp:1036
 msgid "Superterran"
 msgstr "বৃহৎ পার্থিব"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1016
+#: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "Jovian"
 msgstr "বৃহস্পতির মত"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1018
+#: plugins/Exoplanets/src/Exoplanets.cpp:1040
 msgid "Neptunian"
 msgstr "নেপচুনের মত"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1021
+#: plugins/Exoplanets/src/Exoplanets.cpp:1043
 msgid "Primary Transit"
 msgstr "গ্রহের সরণ"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1023
+#: plugins/Exoplanets/src/Exoplanets.cpp:1045
 msgid "Microlensing"
 msgstr "মহাকর্ষীয় বিকৃতি"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1025
+#: plugins/Exoplanets/src/Exoplanets.cpp:1047
 msgid "Radial Velocity"
 msgstr "নক্ষত্রের দোলন"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1027
+#: plugins/Exoplanets/src/Exoplanets.cpp:1049
 msgid "Imaging"
 msgstr "ছবি তোলা"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1029
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Pulsar"
 msgstr "স্পন্দন  বিচ্যুতি"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1033
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgid "Astrometry"
 msgstr "নক্ষত্রের ঘূর্ণন"
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1035
+#: plugins/Exoplanets/src/Exoplanets.cpp:1057
 msgid "TTV"
 msgstr "সরণ পার্থক্য"
 
@@ -17159,38 +17188,38 @@ msgstr "সময় পার্থক্যের চিহ্ন পরিবর
 msgid "Font size:"
 msgstr "হরফের আকার :"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:88
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:89
 msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "উল্কাবৃষ্টি সংক্রান্ত বর্তমান তালিকাটি বেকার !"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:634
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:640
 msgid "Meteor Showers"
 msgstr "উল্কাবৃষ্টি"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 msgid "Toggle meteor showers"
 msgstr "উল্কাবৃষ্টির উৎসবিন্দু"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
 msgid "Toggle radiant labels"
 msgstr "উৎসবিন্দুর নাম"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:233
 msgid "Show settings dialog"
 msgstr "তথ্য বিন্যাস বিভাগ"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Show search dialog"
 msgstr "উল্কাবৃষ্টি অনুসন্ধান বিভাগ"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:255
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:256
 msgid "Using the default Meteor Showers catalog."
 msgstr "প্রাথমিক তালিকা ব্যবহার করা হচ্ছে ।"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:638
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:644
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "

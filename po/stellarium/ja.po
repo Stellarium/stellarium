@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-07-29 00:28+0700\n"
+"POT-Creation-Date: 2018-08-05 17:11+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Masahiko Yamaguchi <vineuser7@gmail.com>, 2017\n"
 "Language-Team: Japanese (https://www.transifex.com/stellarium/teams/80998/ja/)\n"
@@ -29,7 +29,7 @@ msgstr "任意マーカー"
 #. TRANSLATORS: type of object
 #: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:286
-#: src/core/modules/NomenclatureItem.cpp:780 src/core/modules/Nebula.cpp:245
+#: src/core/modules/NomenclatureItem.cpp:787 src/core/modules/Nebula.cpp:245
 #: src/core/modules/Nebula.cpp:247 src/core/modules/Planet.cpp:422
 #: src/core/modules/MinorPlanet.cpp:235 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:195
@@ -57,9 +57,9 @@ msgstr "アステリズム(星群)"
 #: src/core/modules/LandscapeMgr.cpp:469
 #: src/core/modules/NomenclatureMgr.cpp:74 src/core/modules/NebulaMgr.cpp:503
 #: src/core/modules/NebulaMgr.cpp:504 src/core/modules/SolarSystem.cpp:235
-#: src/core/modules/MilkyWay.cpp:78 src/core/modules/ZodiacalLight.cpp:85
+#: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:138
-#: src/core/StelApp.cpp:564 src/core/StelCore.cpp:255
+#: src/core/StelApp.cpp:567 src/core/StelCore.cpp:255
 #: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:815
 msgid "Display Options"
 msgstr "画面設定"
@@ -107,7 +107,11 @@ msgstr "一つの星座を選択"
 msgid "Remove selection of constellations"
 msgstr "星座選択の解除"
 
-#: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2495
+#: src/core/modules/ConstellationMgr.cpp:146
+msgid "Select all constellations"
+msgstr ""
+
+#: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2506
 #: src/ui_dsoColorsDialog.h:652
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:255
 msgid "Stars"
@@ -125,7 +129,7 @@ msgstr ""
 msgid "Reduce the magnitude limit for stars"
 msgstr ""
 
-#: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2763
+#: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2777
 msgid "Meridian"
 msgstr "子午線"
 
@@ -149,7 +153,7 @@ msgstr "天の赤道"
 msgid "Precession Circle"
 msgstr "歳差円"
 
-#: src/core/modules/GridLinesMgr.cpp:662 src/ui_viewDialog.h:2752
+#: src/core/modules/GridLinesMgr.cpp:662 src/ui_viewDialog.h:2766
 msgid "Horizon"
 msgstr "地平線"
 
@@ -162,12 +166,12 @@ msgid "Supergalactic Equator"
 msgstr "超銀河赤道"
 
 #. TRANSLATORS: Full term is "opposition/conjunction longitude"
-#: src/core/modules/GridLinesMgr.cpp:675 src/ui_viewDialog.h:2767
+#: src/core/modules/GridLinesMgr.cpp:675 src/ui_viewDialog.h:2781
 msgid "O./C. longitude"
 msgstr "衝合判定線"
 
 #: src/core/modules/GridLinesMgr.cpp:679
-#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2816
+#: src/core/modules/GridLinesMgr.cpp:1245 src/ui_viewDialog.h:2830
 msgid "Prime Vertical"
 msgstr "東西線"
 
@@ -244,7 +248,7 @@ msgstr "座標線"
 msgid "Equatorial grid"
 msgstr "赤経/赤緯"
 
-#: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2846
+#: src/core/modules/GridLinesMgr.cpp:1229 src/ui_viewDialog.h:2860
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:338
 msgid "Azimuthal grid"
 msgstr "方位角/高度"
@@ -290,20 +294,20 @@ msgstr "黄経/黄緯 (J2000.0)"
 msgid "Ecliptic grid"
 msgstr "黄経/黄緯"
 
-#: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2881
+#: src/core/modules/GridLinesMgr.cpp:1239 src/ui_viewDialog.h:2895
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:399
 msgid "Galactic grid"
 msgstr "銀経/銀緯"
 
-#: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2736
+#: src/core/modules/GridLinesMgr.cpp:1240 src/ui_viewDialog.h:2750
 msgid "Galactic equator"
 msgstr "銀河赤道"
 
-#: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2870
+#: src/core/modules/GridLinesMgr.cpp:1241 src/ui_viewDialog.h:2884
 msgid "Supergalactic grid"
 msgstr "超銀河経度/緯度"
 
-#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2759
+#: src/core/modules/GridLinesMgr.cpp:1242 src/ui_viewDialog.h:2773
 msgid "Supergalactic equator"
 msgstr "超銀河赤道"
 
@@ -344,11 +348,11 @@ msgstr "黄道の極(J2000.0)"
 msgid "Ecliptic poles"
 msgstr "黄道の極"
 
-#: src/core/modules/GridLinesMgr.cpp:1253 src/ui_viewDialog.h:2824
+#: src/core/modules/GridLinesMgr.cpp:1253 src/ui_viewDialog.h:2838
 msgid "Galactic poles"
 msgstr "銀河極"
 
-#: src/core/modules/GridLinesMgr.cpp:1254 src/ui_viewDialog.h:2782
+#: src/core/modules/GridLinesMgr.cpp:1254 src/ui_viewDialog.h:2796
 msgid "Supergalactic poles"
 msgstr "超銀河極"
 
@@ -376,7 +380,7 @@ msgstr "大気"
 msgid "Fog"
 msgstr "もや"
 
-#: src/core/modules/LandscapeMgr.cpp:472 src/ui_viewDialog.h:2778
+#: src/core/modules/LandscapeMgr.cpp:472 src/ui_viewDialog.h:2792
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:315
 msgid "Cardinal points"
 msgstr "方位"
@@ -393,7 +397,7 @@ msgstr "光害"
 msgid "Landscape labels"
 msgstr "地名"
 
-#: src/core/modules/LandscapeMgr.cpp:476 src/ui_viewDialog.h:2513
+#: src/core/modules/LandscapeMgr.cpp:476 src/ui_viewDialog.h:2524
 msgid "Light pollution data from locations database"
 msgstr "位置情報から光害データを取得"
 
@@ -1125,21 +1129,21 @@ msgstr "色の縞や筋。"
 msgid "Undocumented landform type."
 msgstr "地形の種類の記載無し。"
 
-#: src/core/modules/NomenclatureItem.cpp:782
+#: src/core/modules/NomenclatureItem.cpp:789
 msgid "geologic term"
 msgstr ""
 
-#: src/core/modules/NomenclatureItem.cpp:792
+#: src/core/modules/NomenclatureItem.cpp:799
 msgid "Linear size"
 msgstr "大きさ"
 
-#: src/core/modules/NomenclatureItem.cpp:795 src/core/modules/Planet.cpp:581
+#: src/core/modules/NomenclatureItem.cpp:802 src/core/modules/Planet.cpp:581
 #: src/core/modules/MinorPlanet.cpp:364
 msgid "Diameter"
 msgstr "直径"
 
 #. TRANSLATORS: Unit of measure for distance - kilometers
-#: src/core/modules/NomenclatureItem.cpp:796 src/core/modules/Planet.cpp:468
+#: src/core/modules/NomenclatureItem.cpp:803 src/core/modules/Planet.cpp:468
 #: src/core/modules/Planet.cpp:493 src/core/modules/Planet.cpp:584
 #: src/core/modules/MinorPlanet.cpp:273 src/core/modules/MinorPlanet.cpp:296
 #: src/core/modules/MinorPlanet.cpp:364 src/core/modules/Comet.cpp:194
@@ -1151,15 +1155,15 @@ msgctxt "distance"
 msgid "km"
 msgstr "km"
 
-#: src/core/modules/NomenclatureItem.cpp:801
+#: src/core/modules/NomenclatureItem.cpp:808
 msgid "Planetographic long./lat."
 msgstr "惑星面経度/緯度"
 
-#: src/core/modules/NomenclatureItem.cpp:802
+#: src/core/modules/NomenclatureItem.cpp:809
 msgid "Celestial body"
 msgstr "天体"
 
-#: src/core/modules/NomenclatureItem.cpp:805
+#: src/core/modules/NomenclatureItem.cpp:812
 msgid "Landform description"
 msgstr "地形の説明"
 
@@ -2058,7 +2062,7 @@ msgstr "固有運動の位置角"
 msgid "Angular speed of the proper motion"
 msgstr "固有運動の角速度"
 
-#: src/core/modules/MilkyWay.cpp:79
+#: src/core/modules/MilkyWay.cpp:80
 msgid "Milky Way"
 msgstr "天の川"
 
@@ -2074,11 +2078,11 @@ msgstr "デジタル・スカイ・サーベイ(TOSAT)"
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:564
+#: src/core/StelApp.cpp:567
 msgid "Night mode"
 msgstr "夜間照明"
 
-#: src/core/StelApp.cpp:597
+#: src/core/StelApp.cpp:600
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
@@ -2326,11 +2330,11 @@ msgstr "左右の切り替え"
 msgid "Flip scene vertically"
 msgstr "上下の切り替え"
 
-#: src/core/StelCore.cpp:2232
+#: src/core/StelCore.cpp:2243
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:2235
+#: src/core/StelCore.cpp:2246
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2338,14 +2342,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2238
+#: src/core/StelCore.cpp:2249
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2241
+#: src/core/StelCore.cpp:2252
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2354,14 +2358,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:2245
+#: src/core/StelCore.cpp:2256
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
 " Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2249
+#: src/core/StelCore.cpp:2260
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2369,7 +2373,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2253
+#: src/core/StelCore.cpp:2264
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2377,14 +2381,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2256
+#: src/core/StelCore.cpp:2267
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2259
+#: src/core/StelCore.cpp:2270
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2393,14 +2397,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2262
+#: src/core/StelCore.cpp:2273
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:2265
+#: src/core/StelCore.cpp:2276
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2408,25 +2412,25 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2268
+#: src/core/StelCore.cpp:2279
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:2271
+#: src/core/StelCore.cpp:2282
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2274
+#: src/core/StelCore.cpp:2285
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:2277
+#: src/core/StelCore.cpp:2288
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2435,14 +2439,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2280
+#: src/core/StelCore.cpp:2291
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2283
+#: src/core/StelCore.cpp:2294
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2450,42 +2454,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2286
+#: src/core/StelCore.cpp:2297
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2289
+#: src/core/StelCore.cpp:2300
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:2292
+#: src/core/StelCore.cpp:2303
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:2295
+#: src/core/StelCore.cpp:2306
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2298
+#: src/core/StelCore.cpp:2309
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
 " for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:2301
+#: src/core/StelCore.cpp:2312
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2493,7 +2497,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2304
+#: src/core/StelCore.cpp:2315
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2501,7 +2505,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2307
+#: src/core/StelCore.cpp:2318
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2510,7 +2514,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:2310 src/core/StelCore.cpp:2313
+#: src/core/StelCore.cpp:2321 src/core/StelCore.cpp:2324
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2520,15 +2524,15 @@ msgid ""
 " solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2310
+#: src/core/StelCore.cpp:2321
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:2313
+#: src/core/StelCore.cpp:2324
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:2316
+#: src/core/StelCore.cpp:2327
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2536,7 +2540,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2319
+#: src/core/StelCore.cpp:2330
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2544,7 +2548,7 @@ msgid ""
 " Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:2322
+#: src/core/StelCore.cpp:2333
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2552,7 +2556,7 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2325
+#: src/core/StelCore.cpp:2336
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2561,48 +2565,56 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2328
+#: src/core/StelCore.cpp:2339
+#, qt-format
+msgid ""
+"This solution by G. Henriksson was published in the article <em>The "
+"Acceleration of the Moon and the Universe - the Mass of the Graviton</em> "
+"(%1) and based on C. Schoch's formula (1931)."
+msgstr ""
+
+#: src/core/StelCore.cpp:2342
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
 " by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:2331 src/core/SimbadSearcher.cpp:155
+#: src/core/StelCore.cpp:2345 src/core/SimbadSearcher.cpp:155
 msgid "Error"
 msgstr "エラー"
 
-#: src/core/StelCore.cpp:2339
+#: src/core/StelCore.cpp:2353
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2380
+#: src/core/StelCore.cpp:2396
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2383
+#: src/core/StelCore.cpp:2399
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2386
+#: src/core/StelCore.cpp:2402
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2393
+#: src/core/StelCore.cpp:2409
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2403
+#: src/core/StelCore.cpp:2419
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2405
+#: src/core/StelCore.cpp:2421
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -2928,17 +2940,17 @@ msgstr "地方真太陽時"
 msgid "Select screenshot directory"
 msgstr "スクリーンショットを保存するディレクトリを選択"
 
-#: src/gui/ConfigurationDialog.cpp:948
+#: src/gui/ConfigurationDialog.cpp:949
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "起動時の視野角: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:956
+#: src/gui/ConfigurationDialog.cpp:957
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "起動時の方位角/高度: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1018
+#: src/gui/ConfigurationDialog.cpp:1019
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:474
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
@@ -2946,11 +2958,11 @@ msgstr "起動時の方位角/高度: %1/%2"
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:1019
+#: src/gui/ConfigurationDialog.cpp:1020
 msgid "Contact"
 msgstr "連絡先"
 
-#: src/gui/ConfigurationDialog.cpp:1021 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:1022 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:433
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:472
@@ -2973,7 +2985,7 @@ msgstr "連絡先"
 msgid "Version"
 msgstr "バージョン"
 
-#: src/gui/ConfigurationDialog.cpp:1022 src/scripting/StelScriptMgr.cpp:238
+#: src/gui/ConfigurationDialog.cpp:1023 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:434
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:473
@@ -2996,20 +3008,20 @@ msgstr "バージョン"
 msgid "License"
 msgstr "ライセンス"
 
-#: src/gui/ConfigurationDialog.cpp:1026
+#: src/gui/ConfigurationDialog.cpp:1027
 msgctxt "license"
 msgid "unknown"
 msgstr "不明"
 
-#: src/gui/ConfigurationDialog.cpp:1123
+#: src/gui/ConfigurationDialog.cpp:1124
 msgid "Running script: "
 msgstr "実行中のスクリプト: "
 
-#: src/gui/ConfigurationDialog.cpp:1130
+#: src/gui/ConfigurationDialog.cpp:1131
 msgid "Running script: [none]"
 msgstr "実行中のスクリプト: [なし]"
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1196
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3017,16 +3029,16 @@ msgstr ""
 "新しい星表のダウンロードが終了しました！\n"
 "表示するには Stellarium を再起動してください。"
 
-#: src/gui/ConfigurationDialog.cpp:1199
+#: src/gui/ConfigurationDialog.cpp:1200
 msgid "All available star catalogs have been installed."
 msgstr "利用可能なすべての星表がインストールされました。"
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1205
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "カタログの取得 %1 / %2"
 
-#: src/gui/ConfigurationDialog.cpp:1211
+#: src/gui/ConfigurationDialog.cpp:1212
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3035,7 +3047,7 @@ msgstr ""
 "ダウンロード中 %1...\n"
 "(このウィンドウを閉じても構いません)"
 
-#: src/gui/ConfigurationDialog.cpp:1218
+#: src/gui/ConfigurationDialog.cpp:1219
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3046,7 +3058,7 @@ msgstr ""
 "星の数: %2 Million\n"
 "等級: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1261 src/gui/ConfigurationDialog.cpp:1297
+#: src/gui/ConfigurationDialog.cpp:1262 src/gui/ConfigurationDialog.cpp:1298
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3055,11 +3067,11 @@ msgstr ""
 "ダウンロード中にエラーが発生しました %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1350
+#: src/gui/ConfigurationDialog.cpp:1351
 msgid "Verifying file integrity..."
 msgstr "ファイルの整合性を確認しています..."
 
-#: src/gui/ConfigurationDialog.cpp:1354
+#: src/gui/ConfigurationDialog.cpp:1355
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3068,192 +3080,196 @@ msgstr ""
 "ダウンロード中にエラーが発生しました %1:\n"
 "ファイルが破損しています。"
 
-#: src/gui/ConfigurationDialog.cpp:1403 src/gui/ConfigurationDialog.cpp:1412
+#: src/gui/ConfigurationDialog.cpp:1404 src/gui/ConfigurationDialog.cpp:1413
 msgid "Available"
 msgstr "利用可能"
 
-#: src/gui/ConfigurationDialog.cpp:1405 src/gui/ConfigurationDialog.cpp:1414
+#: src/gui/ConfigurationDialog.cpp:1406 src/gui/ConfigurationDialog.cpp:1415
 msgid "Not Available"
 msgstr "利用不可"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1483
+#: src/gui/ConfigurationDialog.cpp:1484
 msgid "Algorithm of"
 msgstr "アルゴリズム選択"
 
-#: src/gui/ConfigurationDialog.cpp:1496
+#: src/gui/ConfigurationDialog.cpp:1497
 msgid "Without correction"
 msgstr "補正なし"
 
-#: src/gui/ConfigurationDialog.cpp:1497
+#: src/gui/ConfigurationDialog.cpp:1498
 msgid "Schoch (1931)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1498
+#: src/gui/ConfigurationDialog.cpp:1499
 msgid "Clemence (1948)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1499
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "IAU (1952)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1500
+#: src/gui/ConfigurationDialog.cpp:1501
 msgid "Astronomical Ephemeris (1960)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1501
+#: src/gui/ConfigurationDialog.cpp:1502
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1502
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "Muller & Stephenson (1975)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1503
+#: src/gui/ConfigurationDialog.cpp:1504
 msgid "Stephenson (1978)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1504
+#: src/gui/ConfigurationDialog.cpp:1505
 msgid "Schmadel & Zech (1979)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1505
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid "Schmadel & Zech (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1506
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "Morrison & Stephenson (1982)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1507
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "Stephenson & Morrison (1984)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1509
 msgid "Stephenson & Houlden (1986)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1509
+#: src/gui/ConfigurationDialog.cpp:1510
 msgid "Espenak (1987, 1989)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1511
 msgid "Borkowski (1988)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1511
+#: src/gui/ConfigurationDialog.cpp:1512
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1512
+#: src/gui/ConfigurationDialog.cpp:1513
 msgid "Stephenson & Morrison (1995)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1513
+#: src/gui/ConfigurationDialog.cpp:1514
 msgid "Stephenson (1997)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1516
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1516
+#: src/gui/ConfigurationDialog.cpp:1517
 msgid "JPL Horizons"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1517
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "Meeus & Simons (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1518
+#: src/gui/ConfigurationDialog.cpp:1519
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1520
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1521
+#: src/gui/ConfigurationDialog.cpp:1522
 msgid "Espenak & Meeus (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1524
+#: src/gui/ConfigurationDialog.cpp:1525
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1526
+#: src/gui/ConfigurationDialog.cpp:1527
 msgid "Reijs (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1527
+#: src/gui/ConfigurationDialog.cpp:1528
 msgid "Banjevic (2006)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1528
+#: src/gui/ConfigurationDialog.cpp:1529
 msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1529
+#: src/gui/ConfigurationDialog.cpp:1530
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1530
+#: src/gui/ConfigurationDialog.cpp:1531
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1531
+#: src/gui/ConfigurationDialog.cpp:1532
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1532
+#: src/gui/ConfigurationDialog.cpp:1533
+msgid "Henriksson (2017)"
+msgstr ""
+
+#: src/gui/ConfigurationDialog.cpp:1534
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1581 src/gui/ConfigurationDialog.cpp:1616
+#: src/gui/ConfigurationDialog.cpp:1583 src/gui/ConfigurationDialog.cpp:1618
 #: src/gui/StelGuiItems.cpp:651 src/gui/LocationDialog.cpp:449
 msgid "System default"
 msgstr "システムのデフォルト"
 
-#: src/gui/ConfigurationDialog.cpp:1582
+#: src/gui/ConfigurationDialog.cpp:1584
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "yyyy-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1583
+#: src/gui/ConfigurationDialog.cpp:1585
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1584
+#: src/gui/ConfigurationDialog.cpp:1586
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-yyyy"
 
-#: src/gui/ConfigurationDialog.cpp:1617
+#: src/gui/ConfigurationDialog.cpp:1619
 msgid "12-hour format"
 msgstr "12時間表記"
 
-#: src/gui/ConfigurationDialog.cpp:1618
+#: src/gui/ConfigurationDialog.cpp:1620
 msgid "24-hour format"
 msgstr "24時間表記"
 
-#: src/gui/ConfigurationDialog.cpp:1645 src/ui_configurationDialog.h:1461
+#: src/gui/ConfigurationDialog.cpp:1647 src/ui_configurationDialog.h:1461
 #: plugins/Oculars/src/Oculars.cpp:2356
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "なし"
 
-#: src/gui/ConfigurationDialog.cpp:1646
+#: src/gui/ConfigurationDialog.cpp:1648
 msgid "5/6/5 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1647
+#: src/gui/ConfigurationDialog.cpp:1649
 msgid "6/6/6 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1648
+#: src/gui/ConfigurationDialog.cpp:1650
 msgid "8/8/8 bits"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1649
+#: src/gui/ConfigurationDialog.cpp:1651
 msgid "10/10/10 bits"
 msgstr ""
 
@@ -3661,166 +3677,166 @@ msgstr ""
 msgid "Frames per second"
 msgstr "1秒当たりのフレーム数"
 
-#: src/gui/ViewDialog.cpp:507
+#: src/gui/ViewDialog.cpp:508
 msgid "Deep Sky"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:508
+#: src/gui/ViewDialog.cpp:509
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:277
 msgid "Solar System"
 msgstr "太陽系"
 
-#: src/gui/ViewDialog.cpp:519
+#: src/gui/ViewDialog.cpp:520
 msgid "Loading ..."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:570
+#: src/gui/ViewDialog.cpp:571
 msgid "properties"
 msgstr ""
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1441
+#: src/gui/ViewDialog.cpp:1442
 msgid "Excellent dark-sky site"
 msgstr "素晴らしく暗い空"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1443
+#: src/gui/ViewDialog.cpp:1444
 msgid "Typical truly dark site"
 msgstr "典型的な田舎の暗い空"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1445
+#: src/gui/ViewDialog.cpp:1446
 msgid "Rural sky"
 msgstr "田舎の空"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1447
+#: src/gui/ViewDialog.cpp:1448
 msgid "Rural/suburban transition"
 msgstr "田舎から郊外の空"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1449
+#: src/gui/ViewDialog.cpp:1450
 msgid "Suburban sky"
 msgstr "郊外の空"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1451
+#: src/gui/ViewDialog.cpp:1452
 msgid "Bright suburban sky"
 msgstr "明るい郊外の空"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1453
+#: src/gui/ViewDialog.cpp:1454
 msgid "Suburban/urban transition"
 msgstr "郊外から都会の空"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1455
+#: src/gui/ViewDialog.cpp:1456
 msgid "City sky"
 msgstr "都会の空"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1457
+#: src/gui/ViewDialog.cpp:1458
 msgid "Inner-city sky"
 msgstr "都心の空"
 
-#: src/gui/ViewDialog.cpp:1471
+#: src/gui/ViewDialog.cpp:1472
 msgid "The naked-eye limiting magnitude is"
 msgstr "肉眼での限界等級"
 
-#: src/gui/ViewDialog.cpp:1479
+#: src/gui/ViewDialog.cpp:1480
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1480
+#: src/gui/ViewDialog.cpp:1481
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1503
+#: src/gui/ViewDialog.cpp:1504
 msgid "Abbreviated"
 msgstr "略号"
 
-#: src/gui/ViewDialog.cpp:1504
+#: src/gui/ViewDialog.cpp:1505
 msgid "Native"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1505
+#: src/gui/ViewDialog.cpp:1506
 msgid "Translated"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1672
+#: src/gui/ViewDialog.cpp:1673
 msgid "No shooting stars"
 msgstr "流星を表示しない"
 
-#: src/gui/ViewDialog.cpp:1674
+#: src/gui/ViewDialog.cpp:1675
 msgid "Normal rate"
 msgstr "通常レベル"
 
-#: src/gui/ViewDialog.cpp:1676
+#: src/gui/ViewDialog.cpp:1677
 msgid "Standard Orionids rate"
 msgstr "通常のオリオン座流星群レベル"
 
-#: src/gui/ViewDialog.cpp:1678
+#: src/gui/ViewDialog.cpp:1679
 msgid "Standard Perseids rate"
 msgstr "通常のペルセウス流星群レベル"
 
-#: src/gui/ViewDialog.cpp:1680
+#: src/gui/ViewDialog.cpp:1681
 msgid "Standard Geminids rate"
 msgstr "通常のふたご座流星群レベル"
 
-#: src/gui/ViewDialog.cpp:1682
+#: src/gui/ViewDialog.cpp:1683
 msgid "Exceptional Perseid rate"
 msgstr "ペルセウス座流星群の大出現レベル"
 
-#: src/gui/ViewDialog.cpp:1684
+#: src/gui/ViewDialog.cpp:1685
 msgid "Meteor storm rate"
 msgstr "流星雨レベル"
 
-#: src/gui/ViewDialog.cpp:1686
+#: src/gui/ViewDialog.cpp:1687
 msgid "Exceptional Draconid rate"
 msgstr "りゅう座流星群の大出現レベル"
 
-#: src/gui/ViewDialog.cpp:1688
+#: src/gui/ViewDialog.cpp:1689
 msgid "Exceptional Leonid rate"
 msgstr "しし座流星群の多いレベル"
 
-#: src/gui/ViewDialog.cpp:1690
+#: src/gui/ViewDialog.cpp:1691
 msgid "Very high rate (1966 Leonids)"
 msgstr "しし座流星群の大出現(1966年)レベル"
 
-#: src/gui/ViewDialog.cpp:1692
+#: src/gui/ViewDialog.cpp:1693
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "1833年のしし座流星群レベル (過去最大級)"
 
-#: src/gui/ViewDialog.cpp:1745
+#: src/gui/ViewDialog.cpp:1746
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1746
+#: src/gui/ViewDialog.cpp:1747
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1747
+#: src/gui/ViewDialog.cpp:1748
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1748
+#: src/gui/ViewDialog.cpp:1749
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1749
+#: src/gui/ViewDialog.cpp:1750
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:1775
+#: src/gui/ViewDialog.cpp:1776
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -3828,7 +3844,7 @@ msgstr ""
 "この計算法は1984年以降の<em>Astronomical Almanac</em>で使用されており、D.L. "
 "Harrisによると(機械計測の)V等級が計算される。"
 
-#: src/gui/ViewDialog.cpp:1778
+#: src/gui/ViewDialog.cpp:1779
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -3837,7 +3853,7 @@ msgstr ""
 "この計算法はG. Muellerによる1877年から1891年の観測を基にしており、<em>Explanatory Supplement to the "
 "Astronomical Ephemeris</em>(1961年)で公開された。"
 
-#: src/gui/ViewDialog.cpp:1781
+#: src/gui/ViewDialog.cpp:1782
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -3845,7 +3861,7 @@ msgstr ""
 "この計算法は<em>Explanatory Supplement to the Astronomical "
 "Almanac</em>(1992年)で公開された。"
 
-#: src/gui/ViewDialog.cpp:1784
+#: src/gui/ViewDialog.cpp:1785
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -3853,7 +3869,7 @@ msgstr ""
 "この計算法は<em>Explanatory Supplement to the Astronomical "
 "Almanac</em>第3版(2013年)で公開された。"
 
-#: src/gui/ViewDialog.cpp:1787
+#: src/gui/ViewDialog.cpp:1788
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "位相角と反射率からV等級を計算します。"
 
@@ -4209,13 +4225,13 @@ msgid "S.B."
 msgstr "表面輝度"
 
 #: src/gui/AstroCalcDialog.cpp:491 src/gui/AstroCalcDialog.cpp:3937
-#: src/ui_viewDialog.h:2671 src/ui_dsoColorsDialog.h:674
+#: src/ui_viewDialog.h:2685 src/ui_dsoColorsDialog.h:674
 msgid "Galaxies"
 msgstr "銀河"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:492 src/translations.h:331
-#: src/ui_viewDialog.h:2664 src/ui_dsoColorsDialog.h:595
+#: src/ui_viewDialog.h:2678 src/ui_dsoColorsDialog.h:595
 msgid "Active galaxies"
 msgstr "活動銀河"
 
@@ -4227,7 +4243,7 @@ msgstr "電波銀河"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:494 src/translations.h:335
-#: src/ui_viewDialog.h:2672 src/ui_dsoColorsDialog.h:571
+#: src/ui_viewDialog.h:2686 src/ui_dsoColorsDialog.h:571
 msgid "Interacting galaxies"
 msgstr "相互作用銀河"
 
@@ -4238,7 +4254,7 @@ msgstr "明るいクエーサー"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:496 src/gui/AstroCalcDialog.cpp:3938
-#: src/translations.h:339 src/ui_viewDialog.h:2674
+#: src/translations.h:339 src/ui_viewDialog.h:2688
 #: src/ui_dsoColorsDialog.h:625
 msgid "Star clusters"
 msgstr "星団"
@@ -4276,14 +4292,14 @@ msgstr "星雲"
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:502 src/gui/AstroCalcDialog.cpp:1897
 #: src/gui/AstroCalcDialog.cpp:3947 src/translations.h:321
-#: src/ui_viewDialog.h:2666 src/ui_dsoColorsDialog.h:678
+#: src/ui_viewDialog.h:2680 src/ui_dsoColorsDialog.h:678
 msgid "Planetary nebulae"
 msgstr "惑星状星雲"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:503 src/gui/AstroCalcDialog.cpp:1899
 #: src/gui/AstroCalcDialog.cpp:3936 src/translations.h:323
-#: src/ui_viewDialog.h:2668 src/ui_dsoColorsDialog.h:612
+#: src/ui_viewDialog.h:2682 src/ui_dsoColorsDialog.h:612
 msgid "Dark nebulae"
 msgstr "暗黒星雲"
 
@@ -4318,7 +4334,7 @@ msgstr "HII領域"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:509 src/gui/AstroCalcDialog.cpp:3955
-#: src/translations.h:349 src/ui_viewDialog.h:2673
+#: src/translations.h:349 src/ui_viewDialog.h:2687
 #: src/ui_dsoColorsDialog.h:643
 msgid "Supernova remnants"
 msgstr "超新星残骸"
@@ -4400,20 +4416,20 @@ msgstr "超新星残骸の候補"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:523 src/gui/AstroCalcDialog.cpp:3956
-#: src/translations.h:377 src/ui_viewDialog.h:2670
+#: src/translations.h:377 src/ui_viewDialog.h:2684
 #: src/ui_dsoColorsDialog.h:694
 msgid "Clusters of galaxies"
 msgstr "銀河団"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:525 src/translations.h:379
-#: src/ui_viewDialog.h:2613
+#: src/ui_viewDialog.h:2627
 msgid "Messier Catalogue"
 msgstr ""
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:527 src/translations.h:381
-#: src/ui_viewDialog.h:2631
+#: src/ui_viewDialog.h:2645
 msgid "Caldwell Catalogue"
 msgstr ""
 
@@ -4467,11 +4483,11 @@ msgstr ""
 msgid "Lynds' Catalogue of Dark Nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:549 src/ui_viewDialog.h:2601
+#: src/gui/AstroCalcDialog.cpp:549 src/ui_viewDialog.h:2615
 msgid "Principal Galaxy Catalog"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:551 src/ui_viewDialog.h:2640
+#: src/gui/AstroCalcDialog.cpp:551 src/ui_viewDialog.h:2654
 msgid "The Uppsala General Catalogue of Galaxies"
 msgstr ""
 
@@ -4553,7 +4569,7 @@ msgstr "明るい変光星"
 msgid "Bright stars with high proper motion"
 msgstr "固有運動の大きい明るい恒星"
 
-#: src/gui/AstroCalcDialog.cpp:577 src/ui_viewDialog.h:2984
+#: src/gui/AstroCalcDialog.cpp:577 src/ui_viewDialog.h:2998
 msgid "Solar system objects"
 msgstr "太陽系天体"
 
@@ -5012,7 +5028,7 @@ msgstr "一晩中"
 msgid "Bright stars"
 msgstr "明るい恒星"
 
-#: src/gui/AstroCalcDialog.cpp:3935 src/ui_viewDialog.h:2667
+#: src/gui/AstroCalcDialog.cpp:3935 src/ui_viewDialog.h:2681
 msgid "Bright nebulae"
 msgstr "明るい星雲"
 
@@ -5044,11 +5060,11 @@ msgstr "観測者の位置"
 msgid "Unnamed object"
 msgstr "未命名の天体"
 
-#: src/gui/BookmarksDialog.cpp:341 src/ui_bookmarksDialog.h:204
+#: src/gui/BookmarksDialog.cpp:351 src/ui_bookmarksDialog.h:204
 msgid "Import bookmarks"
 msgstr "ブックマークの読み込み"
 
-#: src/gui/BookmarksDialog.cpp:354
+#: src/gui/BookmarksDialog.cpp:364
 msgid "Export bookmarks as..."
 msgstr "ブックマークの保存..."
 
@@ -5102,7 +5118,7 @@ msgstr ""
 "OpenGL/Mesa サブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1129
+#: src/StelMainView.cpp:1133
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5110,7 +5126,7 @@ msgstr ""
 "OpenGLサブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1170
+#: src/StelMainView.cpp:1174
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in degraded mode anyway?"
@@ -5118,7 +5134,7 @@ msgstr ""
 "OpenGL ESサブシステムに問題があります。 詳細はログを参照してください。\n"
 "今後この通知を無視して表示せず、低品質モードで続行しますか？"
 
-#: src/StelMainView.cpp:1282
+#: src/StelMainView.cpp:1286
 #, qt-format
 msgid "Stellarium %1"
 msgstr "ステラリウム %1"
@@ -7893,8 +7909,8 @@ msgid "Latitude:"
 msgstr "緯度:"
 
 #: src/ui_locationDialogGui.h:500
-msgid "Enter the altitude in meter"
-msgstr "高度をメートル法で入力"
+msgid "Enter the elevation in meter"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:502
 msgid " m"
@@ -7909,9 +7925,8 @@ msgid "Use current location as default"
 msgstr "現在の場所をデフォルトに設定"
 
 #: src/ui_locationDialogGui.h:505
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
-msgid "Altitude:"
-msgstr "高度:"
+msgid "Elevation:"
+msgstr ""
 
 #: src/ui_locationDialogGui.h:507 src/ui_locationDialogGui.h:511
 msgid ""
@@ -8116,870 +8131,875 @@ msgstr "単語の先頭からのみ自動補完を使用"
 msgid "Lock position when coordinates are used"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2910
-#: src/ui_viewDialog.h:2932 src/ui_configurationDialog.h:1678
+#: src/ui_searchDialogGui.h:717 src/ui_viewDialog.h:2924
+#: src/ui_viewDialog.h:2946 src/ui_configurationDialog.h:1678
 #: src/ui_configurationDialog.h:1689
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:429
 msgid "Options"
 msgstr "オプション"
 
-#: src/ui_viewDialog.h:2491
+#: src/ui_viewDialog.h:2502
 msgid "View"
 msgstr "表示"
 
-#: src/ui_viewDialog.h:2493
+#: src/ui_viewDialog.h:2504
 msgid "Projection"
 msgstr "投影法"
 
-#: src/ui_viewDialog.h:2494
+#: src/ui_viewDialog.h:2505
 msgid "Vertical viewport offset"
 msgstr "上下方向のオフセット"
 
-#: src/ui_viewDialog.h:2496
+#: src/ui_viewDialog.h:2507
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:275
 msgid "Twinkle:"
 msgstr "またたき:"
 
-#: src/ui_viewDialog.h:2497 src/ui_viewDialog.h:2574 src/ui_viewDialog.h:2675
+#: src/ui_viewDialog.h:2508 src/ui_viewDialog.h:2588 src/ui_viewDialog.h:2689
 msgid "Labels and Markers"
 msgstr "名前とマーカー"
 
-#: src/ui_viewDialog.h:2498
+#: src/ui_viewDialog.h:2509
 msgid "Use additional names of stars"
 msgstr "恒星の別名も表示する"
 
-#: src/ui_viewDialog.h:2500
+#: src/ui_viewDialog.h:2511
 msgid "Limit the magnitude of stars"
 msgstr "恒星の等級を制限する"
 
-#: src/ui_viewDialog.h:2502 src/ui_viewDialog.h:2586 src/ui_viewDialog.h:2687
+#: src/ui_viewDialog.h:2513 src/ui_viewDialog.h:2600 src/ui_viewDialog.h:2701
 msgid "Limit magnitude:"
 msgstr "等級の制限:"
 
-#: src/ui_viewDialog.h:2503
+#: src/ui_viewDialog.h:2514
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Relative scale:"
 msgstr "相対尺度:"
 
-#: src/ui_viewDialog.h:2504
+#: src/ui_viewDialog.h:2515
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:269
 msgid "Absolute scale:"
 msgstr "絶対尺度:"
 
-#: src/ui_viewDialog.h:2505 src/ui_viewDialog.h:2980
+#: src/ui_viewDialog.h:2516 src/ui_viewDialog.h:2994
 msgid "Sky"
 msgstr "空"
 
-#: src/ui_viewDialog.h:2507
+#: src/ui_viewDialog.h:2518
 msgid "Dim faint stars when a very bright object is visible"
 msgstr "非常に明るい天体がある場合、暗い天体を見えにくくする"
 
-#: src/ui_viewDialog.h:2509
+#: src/ui_viewDialog.h:2520
 msgid "Dynamic eye adaptation"
 msgstr "明暗の再現"
 
-#: src/ui_viewDialog.h:2511
+#: src/ui_viewDialog.h:2522
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
 msgstr "位置情報からの光害データが使われ、下記の光害設定は無視する"
 
-#: src/ui_viewDialog.h:2514
+#: src/ui_viewDialog.h:2525
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:452
 msgid "Light pollution:"
 msgstr "光害:"
 
-#: src/ui_viewDialog.h:2516
+#: src/ui_viewDialog.h:2527
 msgid "Settings for sporadic meteors"
 msgstr "散在流星の設定"
 
-#: src/ui_viewDialog.h:2518
+#: src/ui_viewDialog.h:2529
 msgctxt "Zenithal Hourly Rate"
 msgid "Shooting stars:"
 msgstr "天頂出現数(ZHR):"
 
-#: src/ui_viewDialog.h:2521 src/ui_viewDialog.h:2524
+#: src/ui_viewDialog.h:2532 src/ui_viewDialog.h:2535
 msgid "The zenithal hourly rate for the sporadic meteors"
 msgstr "散在流星の天頂出現数"
 
-#: src/ui_viewDialog.h:2527
+#: src/ui_viewDialog.h:2538
 msgid "pressure, temperature, extinction coefficient"
 msgstr "圧力, 温度, 吸光度"
 
-#: src/ui_viewDialog.h:2529
+#: src/ui_viewDialog.h:2540
 msgid "Refraction/Extinction settings..."
 msgstr "屈折/吸光の設定..."
 
-#: src/ui_viewDialog.h:2530
+#: src/ui_viewDialog.h:2541
 msgid "Zodiacal Light brightness:"
 msgstr "黄道光の明るさ:"
 
-#: src/ui_viewDialog.h:2531
-msgid "Milky Way brightness:"
-msgstr "天の川の明るさ:"
+#: src/ui_viewDialog.h:2542
+msgid "Milky Way brightness/saturation:"
+msgstr ""
 
-#: src/ui_viewDialog.h:2532
+#: src/ui_viewDialog.h:2544
+msgid ""
+"Changing saturation from totally unsaturated (0.00) to default (1.00) value."
+msgstr ""
+
+#: src/ui_viewDialog.h:2546
 msgid "Atmosphere visualization"
 msgstr "大気"
 
-#: src/ui_viewDialog.h:2533
+#: src/ui_viewDialog.h:2547
 msgid "Solar System objects"
 msgstr "太陽系天体"
 
-#: src/ui_viewDialog.h:2534
+#: src/ui_viewDialog.h:2548
 msgid "Hide nomenclature on the celestial body of observer"
 msgstr "観測者のいる天体表面の地形名は表示しない"
 
-#: src/ui_viewDialog.h:2536
+#: src/ui_viewDialog.h:2550
 msgid ""
 "Deactivate this option if you want to see the trails for all Solar system "
 "bodies."
 msgstr "全ての太陽系天体の軌道を表示する場合はチェックをはずす。"
 
-#: src/ui_viewDialog.h:2538
+#: src/ui_viewDialog.h:2552
 msgid "Show trail only for selected planet"
 msgstr "選択した惑星のみ軌跡を表示"
 
-#: src/ui_viewDialog.h:2540
+#: src/ui_viewDialog.h:2554
 msgid ""
 "Deactivate this option if you want to see orbit for selected planet and its "
 "moons."
 msgstr "選択した惑星の軌道を表示する場合はチェックをはずす。"
 
-#: src/ui_viewDialog.h:2542
+#: src/ui_viewDialog.h:2556
 msgid "Show orbit for selected planet"
 msgstr "選択天体の軌道を表示"
 
-#: src/ui_viewDialog.h:2543
+#: src/ui_viewDialog.h:2557
 msgid "Show planet orbits"
 msgstr "惑星の軌道を表示"
 
-#: src/ui_viewDialog.h:2545
+#: src/ui_viewDialog.h:2559
 msgid "Configure colors of orbit lines"
 msgstr "軌道の色の設定"
 
-#: src/ui_viewDialog.h:2547
+#: src/ui_viewDialog.h:2561
 msgid "Colors..."
 msgstr "色..."
 
-#: src/ui_viewDialog.h:2551
+#: src/ui_viewDialog.h:2565
 msgid "Use more accurate 3D models (where available)"
 msgstr "使えるならより正確な3Dモデルを使用する"
 
-#: src/ui_viewDialog.h:2552
+#: src/ui_viewDialog.h:2566
 msgid "Planets magnitude algorithm:"
 msgstr "惑星光度の計算式:"
 
-#: src/ui_viewDialog.h:2556
+#: src/ui_viewDialog.h:2570
 msgid "Simulate self-shadowing"
 msgstr "セルフ・シャドウイングを使用する"
 
-#: src/ui_viewDialog.h:2557
+#: src/ui_viewDialog.h:2571
 msgid "Show planet trails"
 msgstr "惑星の軌跡"
 
-#: src/ui_viewDialog.h:2559
+#: src/ui_viewDialog.h:2573
 msgid "Color of trails"
 msgstr "軌跡の色"
 
-#: src/ui_viewDialog.h:2561
+#: src/ui_viewDialog.h:2575
 msgid "Show planet orbits only"
 msgstr "軌道のみ表示"
 
-#: src/ui_viewDialog.h:2563
+#: src/ui_viewDialog.h:2577
 msgid "Show hints and labels for planetary features"
 msgstr "天体表面の地形に位置と名称を表示"
 
-#: src/ui_viewDialog.h:2565
+#: src/ui_viewDialog.h:2579
 msgid "Show planetary nomenclature"
 msgstr "天体表面の地形名を表示"
 
-#: src/ui_viewDialog.h:2567
+#: src/ui_viewDialog.h:2581
 msgid "Color of nomenclature labels"
 msgstr "天体表面の地形名の色"
 
-#: src/ui_viewDialog.h:2571
+#: src/ui_viewDialog.h:2585
 msgid ""
 "Activate this option to simulate the effect of real speed of light "
 "(recommended)."
 msgstr "天体位置の計算に光行差を考慮します(チェックすることを推奨)。"
 
-#: src/ui_viewDialog.h:2573
+#: src/ui_viewDialog.h:2587
 msgid "Simulate light speed"
 msgstr "光行差を計算"
 
-#: src/ui_viewDialog.h:2576
+#: src/ui_viewDialog.h:2590
 msgid "Color of planet labels"
 msgstr "惑星名の色"
 
-#: src/ui_viewDialog.h:2578
+#: src/ui_viewDialog.h:2592
 msgid "Scale minor bodies:"
 msgstr "太陽系小天体の拡大:"
 
-#: src/ui_viewDialog.h:2579
+#: src/ui_viewDialog.h:2593
 msgid "Scale Moon:"
 msgstr "月の拡大:"
 
-#: src/ui_viewDialog.h:2581
+#: src/ui_viewDialog.h:2595
 msgid "Scale factor"
 msgstr "拡大率"
 
-#: src/ui_viewDialog.h:2584
+#: src/ui_viewDialog.h:2598
 msgid "Limit the magnitude of solar system objects"
 msgstr "太陽系天体の等級制限"
 
-#: src/ui_viewDialog.h:2587
+#: src/ui_viewDialog.h:2601
 msgid "Use custom settings of GRS:"
 msgstr "大赤斑の設定を変更する:"
 
-#: src/ui_viewDialog.h:2588
+#: src/ui_viewDialog.h:2602
 msgid "GRS details..."
 msgstr "大赤斑の詳細設定..."
 
-#: src/ui_viewDialog.h:2589
+#: src/ui_viewDialog.h:2603
 msgid "Show planet markers"
 msgstr "惑星マーカーを表示"
 
-#: src/ui_viewDialog.h:2590
+#: src/ui_viewDialog.h:2604
 msgid "Display objects from catalogs"
 msgstr "表示する天体カタログ"
 
-#: src/ui_viewDialog.h:2592
+#: src/ui_viewDialog.h:2606
 msgid "New General Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:2595
+#: src/ui_viewDialog.h:2609
 msgid "Atlas of Peculiar Galaxies (Arp, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2598
+#: src/ui_viewDialog.h:2612
 msgid ""
 "A catalogue of Hα-emission regions in the southern Milky Way (Rodgers+, "
 "1960)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2604
+#: src/ui_viewDialog.h:2618
 msgid ""
 "A Catalogue of Star Clusters shown on Franklin-Adams Chart Plates (Melotte, "
 "1915)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2607
+#: src/ui_viewDialog.h:2621
 msgid "Catalogue of Reflection Nebulae (Van den Bergh, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2610
+#: src/ui_viewDialog.h:2624
 msgid "Lynds' Catalogue of Bright Nebulae (Lynds, 1965)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2616
+#: src/ui_viewDialog.h:2630
 msgid "Catalog of Open Galactic Clusters (Collinder, 1931)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2619
+#: src/ui_viewDialog.h:2633
 msgid "Lynds' Catalogue of Dark Nebulae (Lynds, 1962)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2622
+#: src/ui_viewDialog.h:2636
 msgid "The Catalogue of Interacting Galaxies (Vorontsov-Velyaminov+, 2001)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2625
+#: src/ui_viewDialog.h:2639
 msgid "Catalog of bright diffuse Galactic nebulae (Cederblad, 1946)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2628
+#: src/ui_viewDialog.h:2642
 msgid "Catalogue of HII Regions (Sharpless, 1959)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2634
+#: src/ui_viewDialog.h:2648
 msgid "The Catalogue of Galactic Planetary Nebulae (Kohoutek, 2001)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2637
+#: src/ui_viewDialog.h:2651
 msgid "Index Catalogue of Nebulae and Clusters of Stars"
 msgstr ""
 
-#: src/ui_viewDialog.h:2643
+#: src/ui_viewDialog.h:2657
 msgid "Barnard's Catalogue of 349 Dark Objects in the Sky (Barnard, 1927)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2646
+#: src/ui_viewDialog.h:2660
 msgid ""
 "The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae (Acker+, 1992)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2649
+#: src/ui_viewDialog.h:2663
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2652
+#: src/ui_viewDialog.h:2666
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2655
+#: src/ui_viewDialog.h:2669
 msgid "Hickson Compact Group (Hickson+, 1982)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2658
+#: src/ui_viewDialog.h:2672
 msgid "Abell Catalog of Planetary Nebulae (Abell, 1966)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2661
+#: src/ui_viewDialog.h:2675
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
 msgstr ""
 
-#: src/ui_viewDialog.h:2663
+#: src/ui_viewDialog.h:2677
 msgid "Filter by type"
 msgstr "種類で選択"
 
 #. TRANSLATORS: Exoplanet detection method
-#: src/ui_viewDialog.h:2665 plugins/Exoplanets/src/Exoplanets.cpp:1031
+#: src/ui_viewDialog.h:2679 plugins/Exoplanets/src/Exoplanets.cpp:1053
 msgid "Other"
 msgstr "その他"
 
-#: src/ui_viewDialog.h:2669 src/ui_dsoColorsDialog.h:556
+#: src/ui_viewDialog.h:2683 src/ui_dsoColorsDialog.h:556
 msgid "Hydrogen regions"
 msgstr "HII領域"
 
-#: src/ui_viewDialog.h:2677
+#: src/ui_viewDialog.h:2691
 msgid "Use hints proportional to angular size of deep-sky objects"
 msgstr "星雲星団のマーカーは視直径の応じた大きさにする"
 
-#: src/ui_viewDialog.h:2679
+#: src/ui_viewDialog.h:2693
 msgid "Use proportional hints"
 msgstr "マーカーは実サイズ"
 
-#: src/ui_viewDialog.h:2681
+#: src/ui_viewDialog.h:2695
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
 msgstr "星雲・星団のマーカーと名前の表示はその表面輝度で決める。"
 
-#: src/ui_viewDialog.h:2683
+#: src/ui_viewDialog.h:2697
 msgid "Use surface brightness"
 msgstr "表面輝度で表示を決める"
 
-#: src/ui_viewDialog.h:2685
+#: src/ui_viewDialog.h:2699
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
 msgstr "星雲・星団の限界等級(肉眼や双眼鏡観測者向け)"
 
-#: src/ui_viewDialog.h:2689
+#: src/ui_viewDialog.h:2703
 msgid ""
 "Use designations of deep-sky objects instead of their common names for "
 "screen labels"
 msgstr "星雲・星団のマーカーは実際の大きさに比例して表示する"
 
-#: src/ui_viewDialog.h:2691
+#: src/ui_viewDialog.h:2705
 msgid "Use designations for screen labels"
 msgstr "名前はカタログ名で表示"
 
-#: src/ui_viewDialog.h:2692 plugins/Satellites/src/ui_satellitesDialog.h:761
+#: src/ui_viewDialog.h:2706 plugins/Satellites/src/ui_satellitesDialog.h:761
 msgid "Labels"
 msgstr "名前"
 
-#: src/ui_viewDialog.h:2693
+#: src/ui_viewDialog.h:2707
 msgid "Hints"
 msgstr "マーカー"
 
-#: src/ui_viewDialog.h:2694
+#: src/ui_viewDialog.h:2708
 msgid "Configure colors of markers"
 msgstr "マーカーの色の設定"
 
-#: src/ui_viewDialog.h:2695
+#: src/ui_viewDialog.h:2709
 msgid "Use outlines for big deep-sky objects"
 msgstr "大きな星雲は形状を表示"
 
-#: src/ui_viewDialog.h:2696
+#: src/ui_viewDialog.h:2710
 msgid "Limit angular size (arcmin):"
 msgstr "大きさの制限(分角):"
 
-#: src/ui_viewDialog.h:2698
+#: src/ui_viewDialog.h:2712
 msgid "Minimal angular size in arcminutes for visible DSO"
 msgstr "最小の大きさ(分角)"
 
-#: src/ui_viewDialog.h:2701
+#: src/ui_viewDialog.h:2715
 msgid "Maximum angular size in arcminutes for visible DSO"
 msgstr "最大の大きさ(分角)"
 
-#: src/ui_viewDialog.h:2703
+#: src/ui_viewDialog.h:2717
 msgid "Use additional names of DSO"
 msgstr "別名も表示"
 
-#: src/ui_viewDialog.h:2704
+#: src/ui_viewDialog.h:2718
 msgid "Celestial Sphere"
 msgstr "天球"
 
-#: src/ui_viewDialog.h:2706
+#: src/ui_viewDialog.h:2720
 msgid "Color of the opposition/conjunction longitude line"
 msgstr "衝合判定線の色"
 
-#: src/ui_viewDialog.h:2709
+#: src/ui_viewDialog.h:2723
 msgid "Color of meridian"
 msgstr "子午線の色"
 
-#: src/ui_viewDialog.h:2712
+#: src/ui_viewDialog.h:2726
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
 msgstr "J2000.0 (VSOP87A基準面による)黄道を表示。"
 
-#: src/ui_viewDialog.h:2714
+#: src/ui_viewDialog.h:2728
 msgid "Ecliptic (J2000)"
 msgstr "黄道(J2000.0)"
 
-#: src/ui_viewDialog.h:2716
+#: src/ui_viewDialog.h:2730
 msgid "Show celestial equator of current planet and date."
 msgstr "その時刻、その天体の天の赤道を表示。"
 
-#: src/ui_viewDialog.h:2718
+#: src/ui_viewDialog.h:2732
 msgid "Equator (of date)"
 msgstr "天の赤道(瞬時)"
 
-#: src/ui_viewDialog.h:2720
+#: src/ui_viewDialog.h:2734
 msgid "Show celestial equator of J2000.0."
 msgstr "2000年分点の天の赤道を表示。"
 
-#: src/ui_viewDialog.h:2722
+#: src/ui_viewDialog.h:2736
 msgid "Equator (J2000)"
 msgstr "天の赤道(J2000.0)"
 
-#: src/ui_viewDialog.h:2724
+#: src/ui_viewDialog.h:2738
 msgid "Color of equator (J2000.0)"
 msgstr "天の赤道(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2727
+#: src/ui_viewDialog.h:2741
 msgid "Show ecliptic line of current date."
 msgstr "その時刻の黄道を表示。"
 
-#: src/ui_viewDialog.h:2729
+#: src/ui_viewDialog.h:2743
 msgid "Ecliptic (of date)"
 msgstr "黄道(瞬時)"
 
-#: src/ui_viewDialog.h:2731
+#: src/ui_viewDialog.h:2745
 msgid "Color of equator (of date)"
 msgstr "天の赤道(瞬時)の色"
 
-#: src/ui_viewDialog.h:2734
+#: src/ui_viewDialog.h:2748
 msgid "Show Galactic equator line."
 msgstr "銀河赤道"
 
-#: src/ui_viewDialog.h:2738
+#: src/ui_viewDialog.h:2752
 msgid "Color of supergalactic equator"
 msgstr "超銀河赤道の色"
 
-#: src/ui_viewDialog.h:2741
+#: src/ui_viewDialog.h:2755
 msgid "Color of ecliptic (of date)"
 msgstr "黄道(瞬時)の色"
 
-#: src/ui_viewDialog.h:2744
+#: src/ui_viewDialog.h:2758
 msgid "Color of ecliptic (J2000.0)"
 msgstr "黄道(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2747
+#: src/ui_viewDialog.h:2761
 msgid "Color of galactic equator"
 msgstr "銀河赤道の色"
 
-#: src/ui_viewDialog.h:2750
+#: src/ui_viewDialog.h:2764
 msgid "Show mathematical horizon line."
 msgstr "地平線"
 
-#: src/ui_viewDialog.h:2754
+#: src/ui_viewDialog.h:2768
 msgid "Color of horizon"
 msgstr "地平線の色"
 
-#: src/ui_viewDialog.h:2757
+#: src/ui_viewDialog.h:2771
 msgid "Show equator of de Vaucouleurs' Supergalactic coordinates (1976)."
 msgstr "de Vaucouleurs(1976)による超銀河座標の赤道を表示します。"
 
-#: src/ui_viewDialog.h:2761
+#: src/ui_viewDialog.h:2775
 msgid "Show meridian line."
 msgstr "子午線"
 
-#: src/ui_viewDialog.h:2765
+#: src/ui_viewDialog.h:2779
 msgid ""
 "Opposition/conjunction longitude line - the line of ecliptic longitude which"
 " passes through both ecliptic poles, the Sun and opposition point."
 msgstr "衝合判定線(黄道の北極、南極、太陽とその反対の点を通る黄経線)を表示する。"
 
-#: src/ui_viewDialog.h:2769
+#: src/ui_viewDialog.h:2783
 msgid "Color of colures"
 msgstr "分至経線の色"
 
-#: src/ui_viewDialog.h:2772
+#: src/ui_viewDialog.h:2786
 msgid "Show colures (great circles through poles and solstices/equinoxes)."
 msgstr "分至経線(二至経線は天の極と夏至点、冬至点を通る大円、二分経線は天の極と春分点、秋分点を通る大円)を表示する。"
 
-#: src/ui_viewDialog.h:2774
+#: src/ui_viewDialog.h:2788
 msgid "Colures"
 msgstr "分至経線"
 
-#: src/ui_viewDialog.h:2776
+#: src/ui_viewDialog.h:2790
 msgid "Labels for the Cardinal and Ordinal directions."
 msgstr "東西南北の表示"
 
-#: src/ui_viewDialog.h:2780
+#: src/ui_viewDialog.h:2794
 msgid "Color of cardinal points"
 msgstr "東西南北表示の色"
 
-#: src/ui_viewDialog.h:2784
+#: src/ui_viewDialog.h:2798
 msgid "Color of the ecliptic poles (J2000.0)"
 msgstr "黄道の極(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2787
+#: src/ui_viewDialog.h:2801
 msgid "Color of Prime Vertical"
 msgstr "東西線の色"
 
-#: src/ui_viewDialog.h:2790
+#: src/ui_viewDialog.h:2804
 msgid "Show ecliptic poles of J2000.0"
 msgstr "黄道の極(J2000.0)を表示する"
 
-#: src/ui_viewDialog.h:2792
+#: src/ui_viewDialog.h:2806
 msgid "Ecliptic poles (J2000)"
 msgstr "黄道の極(J2000.0)"
 
-#: src/ui_viewDialog.h:2794
+#: src/ui_viewDialog.h:2808
 msgid "Color of the celestial poles (J2000.0)"
 msgstr "天の極(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2797
+#: src/ui_viewDialog.h:2811
 msgid "Show celestial poles of current planet and date."
 msgstr "その天体、その時間での天の極を表示。"
 
-#: src/ui_viewDialog.h:2799
+#: src/ui_viewDialog.h:2813
 msgid "Celestial poles (of date)"
 msgstr "天の極(瞬時)"
 
-#: src/ui_viewDialog.h:2801
+#: src/ui_viewDialog.h:2815
 msgid "Color of ecliptic poles (of date)"
 msgstr "黄道の極(瞬時)の色"
 
-#: src/ui_viewDialog.h:2804
+#: src/ui_viewDialog.h:2818
 msgid "Color of celestial poles (of date)"
 msgstr "天の極(瞬時)の色"
 
-#: src/ui_viewDialog.h:2807
+#: src/ui_viewDialog.h:2821
 msgid "Color of supergalactic poles"
 msgstr "超銀河極の色"
 
-#: src/ui_viewDialog.h:2810
+#: src/ui_viewDialog.h:2824
 msgid "Show ecliptic poles of current date."
 msgstr "その時点での黄道の極"
 
-#: src/ui_viewDialog.h:2812
+#: src/ui_viewDialog.h:2826
 msgid "Ecliptic poles (of date)"
 msgstr "黄道の極(瞬時)"
 
-#: src/ui_viewDialog.h:2814
+#: src/ui_viewDialog.h:2828
 msgid "Show Prime (East-West) Vertical."
 msgstr "東西線"
 
-#: src/ui_viewDialog.h:2818
+#: src/ui_viewDialog.h:2832
 msgid "Color of galactic poles"
 msgstr "銀河極の色"
 
-#: src/ui_viewDialog.h:2820
+#: src/ui_viewDialog.h:2834
 msgid "Zenith and Nadir"
 msgstr "天頂と天底"
 
-#: src/ui_viewDialog.h:2822
+#: src/ui_viewDialog.h:2836
 msgid "Color of Zenith and Nadir"
 msgstr "天頂と天底の色"
 
-#: src/ui_viewDialog.h:2826
+#: src/ui_viewDialog.h:2840
 msgid "Color of circumpolar circles"
 msgstr "周極星限界線の色"
 
-#: src/ui_viewDialog.h:2829
+#: src/ui_viewDialog.h:2843
 msgid "Show celestial poles of J2000.0."
 msgstr "天の極(J2000.0)の表示。"
 
-#: src/ui_viewDialog.h:2831
+#: src/ui_viewDialog.h:2845
 msgid "Celestial poles (J2000)"
 msgstr "天の極(J2000.0)"
 
-#: src/ui_viewDialog.h:2833
+#: src/ui_viewDialog.h:2847
 msgid ""
 "These circles delimit stars which stay always above (respectively below) the"
 " mathematical horizon."
 msgstr "この円内の星は常に地平線上(または地平線下)にある。"
 
-#: src/ui_viewDialog.h:2835
+#: src/ui_viewDialog.h:2849
 msgid "Circumpolar circles"
 msgstr "周極星限界線"
 
-#: src/ui_viewDialog.h:2837
+#: src/ui_viewDialog.h:2851
 msgid "Color of precession circles"
 msgstr "歳差円の色"
 
-#: src/ui_viewDialog.h:2840
+#: src/ui_viewDialog.h:2854
 msgid ""
 "Instantaneous circles of earth's axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr "歳差による極の運動の軌跡を表示する。地球のみ。"
 
-#: src/ui_viewDialog.h:2842
+#: src/ui_viewDialog.h:2856
 msgid "Precession circles"
 msgstr "歳差円"
 
-#: src/ui_viewDialog.h:2844
+#: src/ui_viewDialog.h:2858
 msgid "Altitudes and azimuth (counted from North towards East)."
 msgstr "高度と方位角(北が0)"
 
-#: src/ui_viewDialog.h:2848
+#: src/ui_viewDialog.h:2862
 msgid "Ecliptical coordinates for current date. Displayed on Earth only."
 msgstr "その時刻での黄道座標(地球上のみ表示)"
 
-#: src/ui_viewDialog.h:2850
+#: src/ui_viewDialog.h:2864
 msgid "Ecliptic grid (of date)"
 msgstr "黄経/黄緯線(瞬時)"
 
-#: src/ui_viewDialog.h:2852
+#: src/ui_viewDialog.h:2866
 msgid "Color of the equatorial grid (J2000.0)"
 msgstr "赤経/赤緯(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2855
+#: src/ui_viewDialog.h:2869
 msgid "Color of the equinox points (J2000.0)"
 msgstr "分点(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2858
+#: src/ui_viewDialog.h:2872
 msgid "Ecliptical coordinates for J2000.0."
 msgstr "2000年分点での黄道座標。"
 
-#: src/ui_viewDialog.h:2860
+#: src/ui_viewDialog.h:2874
 msgid "Ecliptic grid (J2000)"
 msgstr "黄経/黄緯(J2000.0)"
 
-#: src/ui_viewDialog.h:2862
+#: src/ui_viewDialog.h:2876
 msgid "Color of the supergalactic grid"
 msgstr "超銀河経度/緯度の色"
 
-#: src/ui_viewDialog.h:2865
+#: src/ui_viewDialog.h:2879
 msgid "Color of the galactic grid"
 msgstr "銀経/銀緯の色"
 
-#: src/ui_viewDialog.h:2868
+#: src/ui_viewDialog.h:2882
 msgid ""
 "Show de Vaucouleurs' Supergalactic coordinates (1976), defined by the "
 "distribution of nearby galaxies."
 msgstr "de Vaucouleursが1976年提唱した超銀河座標を表示する。座標は近隣の銀河から設定された。"
 
-#: src/ui_viewDialog.h:2872
+#: src/ui_viewDialog.h:2886
 msgid "Equatorial coordinates of J2000.0."
 msgstr "2000年分点での赤道座標。"
 
-#: src/ui_viewDialog.h:2874
+#: src/ui_viewDialog.h:2888
 msgid "Equatorial grid (J2000)"
 msgstr "赤経/赤緯(J2000.0)"
 
-#: src/ui_viewDialog.h:2876
+#: src/ui_viewDialog.h:2890
 msgid "Color of the ecliptical grid (J2000.0)"
 msgstr "黄経/黄緯(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2879
+#: src/ui_viewDialog.h:2893
 msgid "Galactic Coordinates, System II (IAU 1958)."
 msgstr "IAUが1958年に決定した銀河座標(System II)"
 
-#: src/ui_viewDialog.h:2883
+#: src/ui_viewDialog.h:2897
 msgid "Color of the equatorial grid (of date)"
 msgstr "赤経/赤緯(瞬時)の色"
 
-#: src/ui_viewDialog.h:2885
+#: src/ui_viewDialog.h:2899
 msgid "Equinoxes (J2000)"
 msgstr "分点(J2000.0)"
 
-#: src/ui_viewDialog.h:2887
+#: src/ui_viewDialog.h:2901
 msgid "Color of the ecliptical grid (of date)"
 msgstr "黄経/黄緯(瞬時)の色"
 
-#: src/ui_viewDialog.h:2890
+#: src/ui_viewDialog.h:2904
 msgid "Color of the azimuthal grid"
 msgstr "方位角/高度の色"
 
-#: src/ui_viewDialog.h:2893
+#: src/ui_viewDialog.h:2907
 msgid "Color of the equinox points (of date)"
 msgstr "分点(瞬時)の色"
 
-#: src/ui_viewDialog.h:2896
+#: src/ui_viewDialog.h:2910
 msgid "Equatorial coordinates of current date and planet."
 msgstr "その時点、その惑星での赤道座標。"
 
-#: src/ui_viewDialog.h:2898
+#: src/ui_viewDialog.h:2912
 msgid "Equatorial grid (of date)"
 msgstr "赤経/赤緯(瞬時)"
 
-#: src/ui_viewDialog.h:2899
+#: src/ui_viewDialog.h:2913
 msgid "Equinoxes (of date)"
 msgstr "分点(瞬時)"
 
-#: src/ui_viewDialog.h:2900
+#: src/ui_viewDialog.h:2914
 msgid "Solstices (J2000)"
 msgstr "至点(J2000.0)"
 
-#: src/ui_viewDialog.h:2902
+#: src/ui_viewDialog.h:2916
 msgid "Color of the solstice points (J2000.0)"
 msgstr "至点(J2000.0)の色"
 
-#: src/ui_viewDialog.h:2905
+#: src/ui_viewDialog.h:2919
 msgid "Solstices (of date)"
 msgstr "至点(瞬時)"
 
-#: src/ui_viewDialog.h:2907
+#: src/ui_viewDialog.h:2921
 msgid "Color of the solstice points (of date)"
 msgstr "至点(瞬時)の色"
 
-#: src/ui_viewDialog.h:2911
+#: src/ui_viewDialog.h:2925
 msgid "Show fog"
 msgstr "もやを表示"
 
-#: src/ui_viewDialog.h:2912
+#: src/ui_viewDialog.h:2926
 msgid "Use associated planet and position"
 msgstr "関連する惑星と位置を使う"
 
-#: src/ui_viewDialog.h:2913
+#: src/ui_viewDialog.h:2927
 msgid "Use this landscape as default"
 msgstr "この背景をデフォルトに設定"
 
-#: src/ui_viewDialog.h:2914
+#: src/ui_viewDialog.h:2928
 msgid "Show ground"
 msgstr "地表を表示"
 
-#: src/ui_viewDialog.h:2916
+#: src/ui_viewDialog.h:2930
 msgid "Use minimal brightness to leave landscape visible also in darkness"
 msgstr "背景を暗闇で見える最低の明るさにして使用する"
 
-#: src/ui_viewDialog.h:2918
+#: src/ui_viewDialog.h:2932
 msgid "Minimal brightness:"
 msgstr "背景の明るさ:"
 
-#: src/ui_viewDialog.h:2920
+#: src/ui_viewDialog.h:2934
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
 msgstr "0(背景が真っ暗)から1(一番明るい)までの数値"
 
-#: src/ui_viewDialog.h:2923
+#: src/ui_viewDialog.h:2937
 msgid "Use minimal brightness as may be specified in landscape.ini"
 msgstr "設定ファイルに背景の明るさがあればそれを使う"
 
-#: src/ui_viewDialog.h:2925
+#: src/ui_viewDialog.h:2939
 msgid "from landscape, if given"
 msgstr "背景の明るさデータを使用"
 
-#: src/ui_viewDialog.h:2927
+#: src/ui_viewDialog.h:2941
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
 msgstr "照明のレイヤー(窓明かりや光害など)を表示する"
 
-#: src/ui_viewDialog.h:2929
+#: src/ui_viewDialog.h:2943
 msgid "Show illumination "
 msgstr "照明の表示 "
 
-#: src/ui_viewDialog.h:2930
+#: src/ui_viewDialog.h:2944
 msgid "Show landscape labels"
 msgstr "背景名を表示"
 
-#: src/ui_viewDialog.h:2931
+#: src/ui_viewDialog.h:2945
 msgid "Add/remove landscapes..."
 msgstr "背景の追加/削除..."
 
-#: src/ui_viewDialog.h:2933
+#: src/ui_viewDialog.h:2947
 msgid "Show art in brightness"
 msgstr "星座絵の明るさ"
 
-#: src/ui_viewDialog.h:2934
+#: src/ui_viewDialog.h:2948
 msgid "Show constellation lines"
 msgstr "星座線の表示"
 
-#: src/ui_viewDialog.h:2936 src/ui_viewDialog.h:2960 src/ui_viewDialog.h:2971
+#: src/ui_viewDialog.h:2950 src/ui_viewDialog.h:2974 src/ui_viewDialog.h:2985
 msgid "Thickness of line in pixels"
 msgstr "線の太さ (ピクセル)"
 
-#: src/ui_viewDialog.h:2939
+#: src/ui_viewDialog.h:2953
 msgid "Color of constellation lines"
 msgstr "星座線の色"
 
-#: src/ui_viewDialog.h:2942
+#: src/ui_viewDialog.h:2956
 msgid "Use native names for planets from current culture"
 msgstr "現在の星の文化による惑星名を使用します"
 
-#: src/ui_viewDialog.h:2944
+#: src/ui_viewDialog.h:2958
 msgid "Use native names for planets"
 msgstr "惑星名はその星の文化の名前"
 
-#: src/ui_viewDialog.h:2945
+#: src/ui_viewDialog.h:2959
 msgid "Use this sky culture as default"
 msgstr "この星の文化をデフォルトに設定"
 
-#: src/ui_viewDialog.h:2946
+#: src/ui_viewDialog.h:2960
 msgid "Show labels"
 msgstr "名前の表示"
 
-#: src/ui_viewDialog.h:2948
+#: src/ui_viewDialog.h:2962
 msgid "Select if you want names abbreviated, original or translated"
 msgstr "その文化の惑星名を表示する場合、オリジナル名か訳名か選択する"
 
-#: src/ui_viewDialog.h:2952
+#: src/ui_viewDialog.h:2966
 msgid "Color of constellation names"
 msgstr "星座名の色"
 
-#: src/ui_viewDialog.h:2954
+#: src/ui_viewDialog.h:2968
 msgid "Show boundaries"
 msgstr "星座の境界線"
 
-#: src/ui_viewDialog.h:2956
+#: src/ui_viewDialog.h:2970
 msgid "Color of constellation boundaries"
 msgstr "星座の境界線の色"
 
-#: src/ui_viewDialog.h:2958
+#: src/ui_viewDialog.h:2972
 msgid "Show asterism lines"
 msgstr "アステリズムの表示"
 
-#: src/ui_viewDialog.h:2963
+#: src/ui_viewDialog.h:2977
 msgid "Color of asterism lines"
 msgstr "アステリズムの線の色"
 
-#: src/ui_viewDialog.h:2965
+#: src/ui_viewDialog.h:2979
 msgid "Show asterism labels"
 msgstr "アステリズムの名前"
 
-#: src/ui_viewDialog.h:2967
+#: src/ui_viewDialog.h:2981
 msgid "Color of asterism names"
 msgstr "アステリズムの名前の色"
 
-#: src/ui_viewDialog.h:2969
+#: src/ui_viewDialog.h:2983
 msgid "Show ray helpers"
 msgstr "補助線"
 
-#: src/ui_viewDialog.h:2974
+#: src/ui_viewDialog.h:2988
 msgid "Color of ray helpers"
 msgstr "補助線の色"
 
-#: src/ui_viewDialog.h:2982
+#: src/ui_viewDialog.h:2996
 msgctxt "Solar system objects"
 msgid "SSO"
 msgstr "太陽系天体"
 
-#: src/ui_viewDialog.h:2987
+#: src/ui_viewDialog.h:3001
 msgctxt "Deep-Sky Objects"
 msgid "DSO"
 msgstr "星雲・星団(深宇宙天体)"
 
-#: src/ui_viewDialog.h:2989
+#: src/ui_viewDialog.h:3003
 msgid "Deep-Sky Objects"
 msgstr "星雲・星団"
 
-#: src/ui_viewDialog.h:2992
+#: src/ui_viewDialog.h:3006
 msgid "Markings"
 msgstr "表示方法"
 
-#: src/ui_viewDialog.h:2994
+#: src/ui_viewDialog.h:3008
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:457
 msgid "Landscape"
 msgstr "背景"
 
-#: src/ui_viewDialog.h:2996
+#: src/ui_viewDialog.h:3010
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:231
 msgid "Starlore"
 msgstr "星の文化"
 
-#: src/ui_viewDialog.h:2998
+#: src/ui_viewDialog.h:3012
 msgid "Surveys"
 msgstr ""
 
@@ -10236,7 +10256,7 @@ msgid "Color of markers of bipolar nebulae"
 msgstr "双極性星雲のマーカーの色"
 
 #: src/ui_dsoColorsDialog.h:647 plugins/Quasars/src/Quasars.cpp:72
-#: plugins/Quasars/src/Quasars.cpp:170 plugins/Quasars/src/Quasars.cpp:171
+#: plugins/Quasars/src/Quasars.cpp:171 plugins/Quasars/src/Quasars.cpp:172
 msgid "Quasars"
 msgstr "クエーサー"
 
@@ -11550,138 +11570,143 @@ msgid ""
 msgstr "古いsatellites.jsonファイルとは互換性がありません - デフォルトファイルを使用します"
 
 #. TRANSLATORS: Satellite group: Bright/naked-eye-visible satellites
-#: plugins/Satellites/src/Satellites.cpp:2054
+#: plugins/Satellites/src/Satellites.cpp:2070
 msgid "visual"
 msgstr "可視衛星"
 
 #. TRANSLATORS: Satellite group: Scientific satellites
-#: plugins/Satellites/src/Satellites.cpp:2056
+#: plugins/Satellites/src/Satellites.cpp:2072
 msgid "scientific"
 msgstr "科学衛星"
 
 #. TRANSLATORS: Satellite group: Communication satellites
-#: plugins/Satellites/src/Satellites.cpp:2058
+#: plugins/Satellites/src/Satellites.cpp:2074
 msgid "communications"
 msgstr "通信衛星"
 
 #. TRANSLATORS: Satellite group: Navigation satellites
-#: plugins/Satellites/src/Satellites.cpp:2060
+#: plugins/Satellites/src/Satellites.cpp:2076
 msgid "navigation"
 msgstr "航法衛星"
 
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
-#: plugins/Satellites/src/Satellites.cpp:2062
+#: plugins/Satellites/src/Satellites.cpp:2078
 msgid "amateur"
 msgstr "アマチュア無線衛星"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
-#: plugins/Satellites/src/Satellites.cpp:2064
+#: plugins/Satellites/src/Satellites.cpp:2080
 msgid "weather"
 msgstr "気象衛星"
 
 #. TRANSLATORS: Satellite group: Satellites in geostationary orbit
-#: plugins/Satellites/src/Satellites.cpp:2066
+#: plugins/Satellites/src/Satellites.cpp:2082
 msgid "geostationary"
 msgstr "測地衛星"
 
 #. TRANSLATORS: Satellite group: Satellites that are no longer functioning
-#: plugins/Satellites/src/Satellites.cpp:2068
+#: plugins/Satellites/src/Satellites.cpp:2084
 msgid "non-operational"
 msgstr "実験衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GPS constellation
 #. (the Global Positioning System)
-#: plugins/Satellites/src/Satellites.cpp:2070
+#: plugins/Satellites/src/Satellites.cpp:2086
 msgid "gps"
 msgstr "GPS衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the GLONASS
 #. constellation (GLObal NAvigation Satellite System)
-#: plugins/Satellites/src/Satellites.cpp:2072
+#: plugins/Satellites/src/Satellites.cpp:2088
 msgid "glonass"
 msgstr "GLONASS衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Galileo
 #. constellation (global navigation satellite system by the European Union)
-#: plugins/Satellites/src/Satellites.cpp:2074
+#: plugins/Satellites/src/Satellites.cpp:2090
 msgid "galileo"
 msgstr "ガリレオ衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the Iridium
 #. constellation (Iridium is a proper name)
-#: plugins/Satellites/src/Satellites.cpp:2076
+#: plugins/Satellites/src/Satellites.cpp:2092
 msgid "iridium"
 msgstr "イリジウム衛星"
 
 #. TRANSLATORS: Satellite group: Space stations
-#: plugins/Satellites/src/Satellites.cpp:2078
+#: plugins/Satellites/src/Satellites.cpp:2094
 msgid "stations"
 msgstr "宇宙ステーション"
 
 #. TRANSLATORS: Satellite group: Education satellites
-#: plugins/Satellites/src/Satellites.cpp:2080
+#: plugins/Satellites/src/Satellites.cpp:2096
 msgid "education"
 msgstr "教育衛星"
 
 #. TRANSLATORS: Satellite group: Satellites belonging to the space
 #. observatories
-#: plugins/Satellites/src/Satellites.cpp:2082
+#: plugins/Satellites/src/Satellites.cpp:2098
 msgid "observatory"
 msgstr "観測衛星"
 
 #. TRANSLATORS: Satellite description. "Hubble" is a person's name.
-#: plugins/Satellites/src/Satellites.cpp:2087
+#: plugins/Satellites/src/Satellites.cpp:2103
 msgid "The Hubble Space Telescope"
 msgstr "ハッブル宇宙望遠鏡"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2089
+#: plugins/Satellites/src/Satellites.cpp:2105
 msgid "The International Space Station"
 msgstr "国際宇宙ステーション"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2091
+#: plugins/Satellites/src/Satellites.cpp:2107
 msgid "China's first space station"
 msgstr "中国第1宇宙ステーション"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2093
+#: plugins/Satellites/src/Satellites.cpp:2109
 msgid "The russian space radio telescope RadioAstron"
 msgstr "ロシア宇宙電波望遠鏡ラジオアストロン"
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2095
+#: plugins/Satellites/src/Satellites.cpp:2111
 msgid "International Gamma-Ray Astrophysics Laboratory"
 msgstr ""
 
 #. TRANSLATORS: Satellite description.
-#: plugins/Satellites/src/Satellites.cpp:2097
+#: plugins/Satellites/src/Satellites.cpp:2113
 msgid "The Gamma-Ray Observatory"
 msgstr "ガンマ線観測衛星"
 
 #. TRANSLATORS: Satellite name: International Space Station
-#: plugins/Satellites/src/Satellites.cpp:2101
+#: plugins/Satellites/src/Satellites.cpp:2117
 msgid "ISS (ZARYA)"
 msgstr "ISS(ザーリャ)"
 
+#. TRANSLATORS: Satellite name: International Space Station
+#: plugins/Satellites/src/Satellites.cpp:2119
+msgid "ISS"
+msgstr ""
+
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
-#: plugins/Satellites/src/Satellites.cpp:2103
+#: plugins/Satellites/src/Satellites.cpp:2121
 msgid "HST"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)
-#: plugins/Satellites/src/Satellites.cpp:2105
+#: plugins/Satellites/src/Satellites.cpp:2123
 msgid "SPEKTR-R"
 msgstr ""
 
 #. TRANSLATORS: Satellite name: International Gamma-Ray Astrophysics
 #. Laboratory (INTEGRAL)
-#: plugins/Satellites/src/Satellites.cpp:2107
+#: plugins/Satellites/src/Satellites.cpp:2125
 msgid "INTEGRAL"
 msgstr ""
 
 #. TRANSLATORS: China's first space station name
-#: plugins/Satellites/src/Satellites.cpp:2109
+#: plugins/Satellites/src/Satellites.cpp:2127
 msgid "TIANGONG 1"
 msgstr "天宮1号"
 
@@ -13619,6 +13644,10 @@ msgid ""
 "planetarium systems"
 msgstr ""
 
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
+msgid "Altitude:"
+msgstr "高度:"
+
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
 msgstr ""
@@ -14026,7 +14055,7 @@ msgid "Add new Minor Solar System objects"
 msgstr "太陽系小天体の追加"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
-#: plugins/Supernovae/src/Supernovae.cpp:148
+#: plugins/Supernovae/src/Supernovae.cpp:149
 msgid "Historical Supernovae"
 msgstr "歴史的な超新星"
 
@@ -14034,55 +14063,55 @@ msgstr "歴史的な超新星"
 msgid "This plugin allows you to see some bright historical supernovae."
 msgstr "このプラグインは歴史的な明るい超新星を表示できます。"
 
-#: plugins/Supernovae/src/Supernovae.cpp:148
+#: plugins/Supernovae/src/Supernovae.cpp:149
 msgid "Historical Supernovae configuration window"
 msgstr "歴史的な超新星の設定ウィンドウ"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "January"
 msgstr "1 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "February"
 msgstr "2 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "March"
 msgstr "3 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "April"
 msgstr "4 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "May"
 msgstr "5 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "June"
 msgstr "6 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "July"
 msgstr "7 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "August"
 msgstr "8 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "September"
 msgstr "9 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "October"
 msgstr "10 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "November"
 msgstr "11 月"
 
-#: plugins/Supernovae/src/Supernovae.cpp:703 plugins/Novae/src/Novae.cpp:724
+#: plugins/Supernovae/src/Supernovae.cpp:733 plugins/Novae/src/Novae.cpp:745
 msgid "December"
 msgstr "12 月"
 
@@ -14298,7 +14327,7 @@ msgstr "備考:"
 msgid "Enable display at startup"
 msgstr "起動時から表示"
 
-#: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:142
+#: plugins/Novae/src/Novae.cpp:71 plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae"
 msgstr "明るい新星"
 
@@ -14306,7 +14335,7 @@ msgstr "明るい新星"
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "このプラグインは銀河系内の明るい新星を表示します。"
 
-#: plugins/Novae/src/Novae.cpp:142
+#: plugins/Novae/src/Novae.cpp:143
 msgid "Bright Novae configuration window"
 msgstr "明るい新星の設定ウィンドウ"
 
@@ -14371,11 +14400,11 @@ msgid ""
 "(13th Ed.) (Veron+ 2010)"
 msgstr ""
 
-#: plugins/Quasars/src/Quasars.cpp:170
+#: plugins/Quasars/src/Quasars.cpp:171
 msgid "Show quasars"
 msgstr "クエーサー"
 
-#: plugins/Quasars/src/Quasars.cpp:171
+#: plugins/Quasars/src/Quasars.cpp:172
 msgid "Quasars configuration window"
 msgstr "クエーサー設定ウィンドウ"
 
@@ -14449,8 +14478,8 @@ msgstr ""
 msgid "Quasars marker color"
 msgstr ""
 
-#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:167
-#: plugins/Pulsars/src/Pulsars.cpp:168
+#: plugins/Pulsars/src/Pulsars.cpp:71 plugins/Pulsars/src/Pulsars.cpp:168
+#: plugins/Pulsars/src/Pulsars.cpp:169
 msgid "Pulsars"
 msgstr "パルサー"
 
@@ -14461,11 +14490,11 @@ msgid ""
 "about each one."
 msgstr "このプラグインは様々なパルサーを表示します。またそれぞれのデータも表示できます。"
 
-#: plugins/Pulsars/src/Pulsars.cpp:167
+#: plugins/Pulsars/src/Pulsars.cpp:168
 msgid "Show pulsars"
 msgstr "パルサー"
 
-#: plugins/Pulsars/src/Pulsars.cpp:168
+#: plugins/Pulsars/src/Pulsars.cpp:169
 msgid "Pulsars configuration window"
 msgstr "パルサー設定ウィンドウ"
 
@@ -15007,8 +15036,8 @@ msgid "Client settings"
 msgstr "クライアントの設定"
 
 #: plugins/Exoplanets/src/Exoplanets.cpp:75
-#: plugins/Exoplanets/src/Exoplanets.cpp:170
 #: plugins/Exoplanets/src/Exoplanets.cpp:171
+#: plugins/Exoplanets/src/Exoplanets.cpp:172
 msgid "Exoplanets"
 msgstr "太陽系外惑星"
 
@@ -15020,91 +15049,91 @@ msgstr ""
 "このプラグインは太陽系外惑星を持つ恒星の位置を表示します。惑星のデータは'Extrasolar Planets "
 "Encyclopaedia'(exoplanet.eu)によります"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:170
+#: plugins/Exoplanets/src/Exoplanets.cpp:171
 msgid "Show exoplanets"
 msgstr "太陽系外惑星を表示"
 
-#: plugins/Exoplanets/src/Exoplanets.cpp:171
+#: plugins/Exoplanets/src/Exoplanets.cpp:172
 msgid "Exoplanets configuration window"
 msgstr "太陽系外惑星設定ウィンドウ"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1001
+#: plugins/Exoplanets/src/Exoplanets.cpp:1023
 msgid "Hot"
 msgstr "灼熱"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1003
+#: plugins/Exoplanets/src/Exoplanets.cpp:1025
 msgid "Warm"
 msgstr "温暖"
 
 #. TRANSLATORS: Habitable zone
-#: plugins/Exoplanets/src/Exoplanets.cpp:1005
+#: plugins/Exoplanets/src/Exoplanets.cpp:1027
 msgid "Cold"
 msgstr "寒冷"
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1008
+#: plugins/Exoplanets/src/Exoplanets.cpp:1030
 msgid "Miniterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1010
+#: plugins/Exoplanets/src/Exoplanets.cpp:1032
 msgid "Subterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1012
+#: plugins/Exoplanets/src/Exoplanets.cpp:1034
 msgid "Terran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1014
+#: plugins/Exoplanets/src/Exoplanets.cpp:1036
 msgid "Superterran"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1016
+#: plugins/Exoplanets/src/Exoplanets.cpp:1038
 msgid "Jovian"
 msgstr ""
 
 #. TRANSLATORS: Planet size
-#: plugins/Exoplanets/src/Exoplanets.cpp:1018
+#: plugins/Exoplanets/src/Exoplanets.cpp:1040
 msgid "Neptunian"
 msgstr ""
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1021
+#: plugins/Exoplanets/src/Exoplanets.cpp:1043
 msgid "Primary Transit"
 msgstr "トランジット法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1023
+#: plugins/Exoplanets/src/Exoplanets.cpp:1045
 msgid "Microlensing"
 msgstr "重力マイクロレンズ法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1025
+#: plugins/Exoplanets/src/Exoplanets.cpp:1047
 msgid "Radial Velocity"
 msgstr "視線速度法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1027
+#: plugins/Exoplanets/src/Exoplanets.cpp:1049
 msgid "Imaging"
 msgstr "直接撮像法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1029
+#: plugins/Exoplanets/src/Exoplanets.cpp:1051
 msgid "Pulsar"
 msgstr "パルサータイミング法"
 
 #. TRANSLATORS: Exoplanet detection method
-#: plugins/Exoplanets/src/Exoplanets.cpp:1033
+#: plugins/Exoplanets/src/Exoplanets.cpp:1055
 msgid "Astrometry"
 msgstr "アストロメトリー法"
 
 #. TRANSLATORS: Detection method. TTV=Transit Timing Variation
-#: plugins/Exoplanets/src/Exoplanets.cpp:1035
+#: plugins/Exoplanets/src/Exoplanets.cpp:1057
 msgid "TTV"
 msgstr "位相光度変化法(TTV)"
 
@@ -16467,38 +16496,38 @@ msgstr "符号の反転"
 msgid "Font size:"
 msgstr "フォントの大きさ:"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:88
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:89
 msgid "The current catalog of Meteor Showers is invalid!"
 msgstr "現在の流星群データは無効です!"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:145
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:634
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:640
 msgid "Meteor Showers"
 msgstr "流星群"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:146
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
 msgid "Toggle meteor showers"
 msgstr "流星群"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:147
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
 msgid "Toggle radiant labels"
 msgstr "流星群名の表示/非表示"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:148
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
 #: plugins/Scenery3d/src/Scenery3d.cpp:329
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:233
 msgid "Show settings dialog"
 msgstr "設定を開く"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:149
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:150
 msgid "Show search dialog"
 msgstr "流星群検索"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:255
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:256
 msgid "Using the default Meteor Showers catalog."
 msgstr "デフォルトの流星群カタログを使用する。"
 
-#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:638
+#: plugins/MeteorShowers/src/MeteorShowersMgr.cpp:644
 msgid ""
 "<p>This plugin enables you to simulate periodic meteor showers and to "
 "display a marker for each active and inactive radiant.</p><p>By a single "

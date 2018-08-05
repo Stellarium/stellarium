@@ -33,8 +33,8 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 
 #define EPHEM_MERCURY_ID  0
 #define EPHEM_VENUS_ID    1
-#define EPHEM_EMB_ID    2
-#define EPHEM_MARS_ID   3
+#define EPHEM_EMB_ID      2
+#define EPHEM_MARS_ID     3
 #define EPHEM_JUPITER_ID  4
 #define EPHEM_SATURN_ID   5
 #define EPHEM_URANUS_ID   6
@@ -46,7 +46,7 @@ Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
 #define EPHEM_JPL_EARTH_ID 3
 #define EPHEM_JPL_PLUTO_ID 9
 #define EPHEM_JPL_MOON_ID 10
-#define EPHEM_JPL_SUN_ID 11
+#define EPHEM_JPL_SUN_ID  11
 
 /**   JPL PLANET ID LIST
 **            1 = mercury           8 = neptune                             **
