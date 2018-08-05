@@ -2115,6 +2115,8 @@ void Satellites::translations()
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station
 	N_("ISS (ZARYA)");
+	// TRANSLATORS: Satellite name: International Space Station
+	N_("ISS");
 	// TRANSLATORS: Satellite name: Hubble Space Telescope
 	N_("HST");
 	// TRANSLATORS: Satellite name: Spektr-R Space Observatory (or RadioAstron)

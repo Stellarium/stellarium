@@ -26,7 +26,7 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-#include <math.h>
+#include <cmath>
 #include "stdsat.h"
 
 // Four-quadrant arctan function
@@ -36,8 +36,8 @@ double AcTan(double sinx, double cosx)
 	{
 		if(sinx > 0)
 			return (KPI/2.0);
-		else
-			return (3.0*KPI/2.0);
+
+		return (3.0*KPI/2.0);
 	}
 	else
 	{
@@ -45,11 +45,11 @@ double AcTan(double sinx, double cosx)
 		{
 			if(sinx > 0)
 				return (atan(sinx/cosx));
-			else
-				return (K2PI + atan(sinx/cosx));
+
+			return (K2PI + atan(sinx/cosx));
 		}
-		else
-			return (KPI + atan(sinx/cosx));
+
+		return (KPI + atan(sinx/cosx));
 	}
 
 } /* Function AcTan */

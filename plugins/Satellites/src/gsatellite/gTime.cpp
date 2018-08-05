@@ -31,10 +31,9 @@
 // GExcpt
 #include "gException.hpp"
 #include "stdsat.h"
-#include <math.h>
-
-#include <stdio.h>
-#include <stdlib.h>
+#include <cmath>
+#include <cstdio>
+#include <cstdlib>
 
 // Class GTimeSpan
 
@@ -135,7 +134,7 @@ gTimeSpan gTime::getTimeToUTC()
 {
 
 	//Time to utc calculation.
-	time_t when   = time(NULL);
+	time_t when   = time(nullptr);
 	struct tm utc = *gmtime(&when);
 	struct tm lcl = *localtime(&when);
 	gTimeSpan tUTCDiff;
@@ -193,9 +192,9 @@ time_t gTime::toTime() const
 void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 {
 
-	assert(pYear != NULL);
-	assert(pMonth != NULL);
-	assert(pDom != NULL);
+	assert(pYear != nullptr);
+	assert(pMonth != nullptr);
+	assert(pDom != nullptr);
 
 	double jdAdj, F, alpha, A, B, DOM;
 	int Z, C, D, E, month, year;
@@ -307,8 +306,8 @@ bool gTime::operator==(gTime ai_time) const
 
 	if(m_time == ai_time.m_time)
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 bool gTime::operator!=(gTime ai_time) const
@@ -316,8 +315,8 @@ bool gTime::operator!=(gTime ai_time) const
 
 	if(m_time != ai_time.m_time)
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 bool gTime::operator<(gTime ai_time) const
@@ -325,8 +324,8 @@ bool gTime::operator<(gTime ai_time) const
 
 	if(m_time < ai_time.m_time)
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 bool gTime::operator>(gTime ai_time) const
@@ -334,8 +333,8 @@ bool gTime::operator>(gTime ai_time) const
 
 	if(m_time > ai_time.m_time)
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 bool gTime::operator<=(gTime ai_time) const
@@ -343,8 +342,8 @@ bool gTime::operator<=(gTime ai_time) const
 
 	if(m_time <= ai_time.m_time)
 		return true;
-	else
-		return false;
+
+	return false;
 }
 
 bool gTime::operator>=(gTime ai_time) const
@@ -352,6 +351,6 @@ bool gTime::operator>=(gTime ai_time) const
 
 	if(m_time >= ai_time.m_time)
 		return true;
-	else
-		return false;
+
+	return false;
 }

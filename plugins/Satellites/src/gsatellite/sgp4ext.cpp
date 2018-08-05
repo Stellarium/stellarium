@@ -24,26 +24,7 @@
 *       ----------------------------------------------------------------      */
 
 #include "sgp4ext.h"
-#ifdef _MSC_BUILD
 #include "StelUtils.hpp"
-#endif
-
-
-double  sgn
-        (
-          double x
-        )
-   {
-     if (x < 0.0)
-       {
-          return -1.0;
-       }
-       else
-       {
-          return 1.0;
-       }
-
-   }  // end sgn
 
 /* -----------------------------------------------------------------------------
 *
@@ -67,13 +48,10 @@ double  sgn
 *    none.
 * --------------------------------------------------------------------------- */
 
-double  mag
-        (
-          double x[3]
-        )
-   {
-     return std::sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
-   }  // end mag
+double mag(double x[3])
+{
+	return std::sqrt(x[0]*x[0] + x[1]*x[1] + x[2]*x[2]);
+}  // end mag
 
 /* -----------------------------------------------------------------------------
 *
@@ -97,15 +75,12 @@ double  mag
 *    mag           magnitude of a vector
  ---------------------------------------------------------------------------- */
 
-void    cross
-        (
-          double vec1[3], double vec2[3], double outvec[3]
-        )
-   {
-     outvec[0]= vec1[1]*vec2[2] - vec1[2]*vec2[1];
-     outvec[1]= vec1[2]*vec2[0] - vec1[0]*vec2[2];
-     outvec[2]= vec1[0]*vec2[1] - vec1[1]*vec2[0];
-   }  // end cross
+void cross(double vec1[3], double vec2[3], double outvec[3])
+{
+	outvec[0]= vec1[1]*vec2[2] - vec1[2]*vec2[1];
+	outvec[1]= vec1[2]*vec2[0] - vec1[0]*vec2[2];
+	outvec[2]= vec1[0]*vec2[1] - vec1[1]*vec2[0];
+}  // end cross
 
 
 /* -----------------------------------------------------------------------------
@@ -131,13 +106,10 @@ void    cross
 *
 * --------------------------------------------------------------------------- */
 
-double  dot
-        (
-          double x[3], double y[3]
-        )
-   {
-     return (x[0]*y[0] + x[1]*y[1] + x[2]*y[2]);
-   }  // end dot
+double dot(double x[3], double y[3])
+{
+	return (x[0]*y[0] + x[1]*y[1] + x[2]*y[2]);
+}  // end dot
 
 /* -----------------------------------------------------------------------------
 *
@@ -163,29 +135,26 @@ double  dot
 *    dot           dot product of two vectors
 * --------------------------------------------------------------------------- */
 
-double  angle
-        (
-          double vec1[3],
-          double vec2[3]
-        )
-   {
-     double sv, undefined, magv1, magv2, temp;
-     sv     = 0.00000001;
-     undefined = 999999.1;
+double angle(double vec1[3], double vec2[3])
+{
+	double sv, undefined, magv1, magv2, temp;
+	sv        = 0.00000001;
+	undefined = 999999.1;
 
-     magv1 = mag(vec1);
-     magv2 = mag(vec2);
+	magv1 = mag(vec1);
+	magv2 = mag(vec2);
 
-     if (magv1*magv2 > sv*sv)
-       {
-         temp= dot(vec1,vec2) / (magv1*magv2);
-         if (fabs( temp ) > 1.0)
-             temp= sgn(temp) * 1.0;
-         return acos( temp );
-       }
-       else
-         return undefined;
-   }  // end angle
+	if (magv1*magv2 > sv*sv)
+	{
+		temp= dot(vec1,vec2) / (magv1*magv2);
+		if ( std::fabs( temp ) > 1.0)
+			temp = StelUtils::sign(temp) * 1.0;
+
+		return std::acos( temp );
+	}
+
+	return undefined;
+}  // end angle
 
 /* -----------------------------------------------------------------------------
 *
@@ -222,65 +191,55 @@ double  angle
 *    vallado       2007, 85, alg 5
 * --------------------------------------------------------------------------- */
 
-void newtonnu
-     (
-       double ecc, double nu,
-       double& e0, double& m
-     )
-     {
-       double sv, sine, cose;
+void newtonnu(double ecc, double nu, double& e0, double& m)
+{
+	double sv, sine, cose;
 
-     // ---------------------  implementation   ---------------------
-     e0= 999999.9;
-     m = 999999.9;
-     sv = 0.00000001;
+	// ---------------------  implementation   ---------------------
+	e0 = 999999.9;
+	m  = 999999.9;
+	sv = 0.00000001;
 
-     // --------------------------- circular ------------------------
-     if ( fabs( ecc ) < sv  )
-       {
-         m = nu;
-         e0= nu;
-       }
-       else
-         // ---------------------- elliptical -----------------------
-	 if ( ecc < 1.0-sv  )
-           {
-	     sine= ( std::sqrt( 1.0 -ecc*ecc ) * sin(nu) ) / ( 1.0 +ecc*cos(nu) );
-             cose= ( ecc + cos(nu) ) / ( 1.0  + ecc*cos(nu) );
-             e0  = atan2( sine,cose );
-             m   = e0 - ecc*sin(e0);
-           }
-           else
-             // -------------------- hyperbolic  --------------------
-	     if ( ecc > 1.0 + sv  )
-               {
-                 if ((ecc > 1.0 ) && (fabs(nu)+0.00001 < M_PI-acos(1.0 /ecc)))
-                   {
-		     sine= ( std::sqrt( ecc*ecc-1.0  ) * sin(nu) ) / ( 1.0  + ecc*cos(nu) );
-#ifdef _MSC_BUILD
-		     e0  = StelUtils::asinh( sine );
-#else
-                     e0  = asinh( sine );
-#endif
-                     m   = ecc*sinh(e0) - e0;
-                   }
-                }
-               else
-                 // ----------------- parabolic ---------------------
-                 if ( fabs(nu) < 168.0*M_PI/180.0  )
-                   {
-                     e0= tan( nu*0.5  );
-                     m = e0 + (e0*e0*e0)/3.0;
-                   }
+	if ( std::fabs( ecc ) < sv  ) // circular
+	{
+		m  = nu;
+		e0 = nu;
+	}
+	else if ( ecc < 1.0-sv  ) // elliptical
+	{
+		sine = ( std::sqrt( 1.0 -ecc*ecc ) * std::sin(nu) ) / ( 1.0 +ecc*std::cos(nu) );
+		cose = ( ecc + std::cos(nu) ) / ( 1.0  + ecc*std::cos(nu) );
+		e0   = std::atan2( sine,cose );
+		m    = e0 - ecc*std::sin(e0);
+	}
+	else if ( ecc > 1.0 + sv  ) // hyperbolic
+	{
+		if ((ecc > 1.0 ) && (std::fabs(nu)+0.00001 < M_PI-std::acos(1.0 /ecc)))
+		{
+			sine = ( std::sqrt( ecc*ecc-1.0  ) * std::sin(nu) ) / ( 1.0  + ecc*std::cos(nu) );
+			#ifdef _MSC_BUILD
+			e0   = StelUtils::asinh( sine );
+			#else
+			e0   = std::asinh( sine );
+			#endif
+			m    = ecc*std::sinh(e0) - e0;
+		}
+	}
+	else if ( std::fabs(nu) < 168.0*M_PI/180.0  ) // parabolic
+	{
+		e0 = std::tan( nu*0.5  );
+		m  = e0 + (e0*e0*e0)/3.0;
+	}
 
-     if ( ecc < 1.0  )
-       {
-         m = fmod( m,2.0 *M_PI );
-         if ( m < 0.0  )
-             m = m + 2.0 *M_PI;
-         e0 = fmod( e0,2.0 *M_PI );
-       }
-   }  // end newtonnu
+	if ( ecc < 1.0  )
+	{
+		m = std::fmod( m,2.0 *M_PI );
+		if ( m < 0.0  )
+			m = m + 2.0 *M_PI;
+
+		e0 = std::fmod( e0,2.0 *M_PI );
+	}
+}  // end newtonnu
 
 
 /* -----------------------------------------------------------------------------
@@ -340,169 +299,164 @@ void newtonnu
 *    vallado       2007, 126, alg 9, ex 2-5
 * --------------------------------------------------------------------------- */
 
-void rv2coe
-     (
-       double r[3], double v[3], double mu,
-       double& p, double& a, double& ecc, double& incl, double& omega, double& argp,
-       double& nu, double& m, double& arglat, double& truelon, double& lonper
-     )
-     {
-       double undefined, sv, hbar[3], nbar[3], magr, magv, magn, ebar[3], sme,
-              rdotv, infinite, temp, c1, hk, twopi, magh, halfpi, e;
+void rv2coe(double r[3], double v[3], double mu,
+	    double& p, double& a, double& ecc, double& incl, double& omega, double& argp,
+	    double& nu, double& m, double& arglat, double& truelon, double& lonper)
+{
+	double undefined, sv, hbar[3], nbar[3], magr, magv, magn, ebar[3], sme,
+	       rdotv, infinite, temp, c1, hk, twopi, magh, halfpi, e;
 
-       int i;
-       char typeorbit[3];
+	int i;
+	char typeorbit[3];
 
-     twopi  = 2.0 * M_PI;
-     halfpi = 0.5 * M_PI;
-     sv  = 0.00000001;
-     undefined = 999999.1;
-     infinite  = 999999.9;
+	twopi     = 2.0 * M_PI;
+	halfpi    = 0.5 * M_PI;
+	sv        = 0.00000001;
+	undefined = 999999.1;
+	infinite  = 999999.9;
 
-     // -------------------------  implementation   -----------------
-     magr = mag( r );
-     magv = mag( v );
+	// -------------------------  implementation   -----------------
+	magr = mag( r );
+	magv = mag( v );
 
-     // ------------------  find h n and e vectors   ----------------
-     cross( r,v, hbar );
-     magh = mag( hbar );
-     if ( magh > sv )
-       {
-         nbar[0]= -hbar[1];
-         nbar[1]=  hbar[0];
-         nbar[2]=   0.0;
-         magn = mag( nbar );
-         c1 = magv*magv - mu /magr;
-         rdotv = dot( r,v );
-         for (i= 0; i <= 2; i++)
-             ebar[i]= (c1*r[i] - rdotv*v[i])/mu;
-         ecc = mag( ebar );
+	// ------------------  find h n and e vectors   ----------------
+	cross( r,v, hbar );
+	magh = mag( hbar );
+	if ( magh > sv )
+	{
+		nbar[0] = -hbar[1];
+		nbar[1] =  hbar[0];
+		nbar[2] =  0.0;
+		magn    = mag( nbar );
+		c1      = magv*magv - mu /magr;
+		rdotv   = dot( r,v );
+		for (i= 0; i <= 2; i++)
+			ebar[i] = (c1*r[i] - rdotv*v[i])/mu;
 
-         // ------------  find a e and semi-latus rectum   ----------
-         sme= ( magv*magv*0.5  ) - ( mu /magr );
-	 if ( fabs( sme ) > sv )
-             a= -mu  / (2.0 *sme);
-           else
-             a= infinite;
-         p = magh*magh/mu;
+		ecc = mag( ebar );
 
-         // -----------------  find inclination   -------------------
-         hk= hbar[2]/magh;
-         incl= acos( hk );
+		// ------------  find a e and semi-latus rectum   ----------
+		sme = ( magv*magv*0.5  ) - ( mu /magr );
+		if ( std::fabs( sme ) > sv )
+			a = -mu  / (2.0 *sme);
+		else
+			a = infinite;
 
-         // --------  determine type of orbit for later use  --------
-         // ------ elliptical, parabolic, hyperbolic inclined -------
-         strcpy(typeorbit,"ei");
-	 if ( ecc < sv )
-           {
-             // ----------------  circular equatorial ---------------
-	     if  ((incl<sv) | (fabs(incl-M_PI)<sv))
-                 strcpy(typeorbit,"ce");
-               else
-                 // --------------  circular inclined ---------------
-                 strcpy(typeorbit,"ci");
-           }
-           else
-           {
-             // - elliptical, parabolic, hyperbolic equatorial --
-	     if  ((incl<sv) | (fabs(incl-M_PI)<sv))
-                 strcpy(typeorbit,"ee");
-           }
+		p = magh*magh/mu;
 
-         // ----------  find longitude of ascending node ------------
-	 if ( magn > sv )
-           {
-             temp= nbar[0] / magn;
-             if ( fabs(temp) > 1.0  )
-                 temp= sgn(temp);
-             omega= acos( temp );
-             if ( nbar[1] < 0.0  )
-                 omega= twopi - omega;
-           }
-           else
-             omega= undefined;
+		// -----------------  find inclination   -------------------
+		hk   = hbar[2]/magh;
+		incl = std::acos( hk );
 
-         // ---------------- find argument of perigee ---------------
-         if ( strcmp(typeorbit,"ei") == 0 )
-           {
-             argp = angle( nbar,ebar);
-             if ( ebar[2] < 0.0  )
-                 argp= twopi - argp;
-           }
-           else
-             argp= undefined;
+		// --------  determine type of orbit for later use  --------
+		std::strcpy(typeorbit,"ei"); // elliptical, parabolic, hyperbolic inclined
+		if ( ecc < sv )
+		{
+			if  ((incl<sv) | (std::fabs(incl-M_PI)<sv))
+				std::strcpy(typeorbit,"ce"); // circular equatorial
+			else
+				std::strcpy(typeorbit,"ci"); // circular inclined
+		}
+		else
+		{
+			if  ((incl<sv) | (std::fabs(incl-M_PI)<sv))
+				std::strcpy(typeorbit,"ee"); // elliptical, parabolic, hyperbolic equatorial
+		}
 
-         // ------------  find true anomaly at epoch    -------------
-         if ( typeorbit[0] == 'e' )
-           {
-             nu =  angle( ebar,r);
-             if ( rdotv < 0.0  )
-                 nu= twopi - nu;
-           }
-           else
-             nu= undefined;
+		// ----------  find longitude of ascending node ------------
+		if ( magn > sv )
+		{
+			temp  = nbar[0] / magn;
+			if ( std::fabs(temp) > 1.0  )
+				temp = StelUtils::sign(temp);
+			omega = std::acos( temp );
+			if ( nbar[1] < 0.0  )
+				omega = twopi - omega;
+		}
+		else
+			omega = undefined;
 
-         // ----  find argument of latitude - circular inclined -----
-         if ( strcmp(typeorbit,"ci") == 0 )
-           {
-             arglat = angle( nbar,r );
-             if ( r[2] < 0.0  )
-                 arglat= twopi - arglat;
-             m = arglat;
-           }
-           else
-             arglat= undefined;
+		// ---------------- find argument of perigee ---------------
+		if ( std::strcmp(typeorbit,"ei") == 0 )
+		{
+			argp = angle( nbar,ebar);
+			if ( ebar[2] < 0.0  )
+				argp = twopi - argp;
+		}
+		else
+			argp = undefined;
 
-         // -- find longitude of perigee - elliptical equatorial ----
-	 if  (( ecc>sv ) && (strcmp(typeorbit,"ee") == 0))
-           {
-             temp= ebar[0]/ecc;
-             if ( fabs(temp) > 1.0  )
-                 temp= sgn(temp);
-             lonper= acos( temp );
-             if ( ebar[1] < 0.0  )
-                 lonper= twopi - lonper;
-             if ( incl > halfpi )
-                 lonper= twopi - lonper;
-           }
-           else
-             lonper= undefined;
+		// ------------  find true anomaly at epoch    -------------
+		if ( typeorbit[0] == 'e' )
+		{
+			nu =  angle( ebar,r);
+			if ( rdotv < 0.0  )
+				nu= twopi - nu;
+		}
+		else
+			nu = undefined;
 
-         // -------- find true longitude - circular equatorial ------
-	 if  (( magr>sv ) && ( strcmp(typeorbit,"ce") == 0 ))
-           {
-             temp= r[0]/magr;
-             if ( fabs(temp) > 1.0  )
-                 temp= sgn(temp);
-             truelon= acos( temp );
-             if ( r[1] < 0.0  )
-                 truelon= twopi - truelon;
-             if ( incl > halfpi )
-                 truelon= twopi - truelon;
-             m = truelon;
-           }
-           else
-             truelon= undefined;
+		// ----  find argument of latitude - circular inclined -----
+		if ( std::strcmp(typeorbit,"ci") == 0 )
+		{
+			arglat = angle( nbar,r );
+			if ( r[2] < 0.0  )
+				arglat= twopi - arglat;
+			m = arglat;
+		}
+		else
+			arglat = undefined;
 
-         // ------------ find mean anomaly for all orbits -----------
-         if ( typeorbit[0] == 'e' )
-             newtonnu(ecc,nu,  e, m);
-     }
-      else
-     {
-        p    = undefined;
-        a    = undefined;
-        ecc  = undefined;
-        incl = undefined;
-        omega= undefined;
-        argp = undefined;
-        nu   = undefined;
-        m    = undefined;
-        arglat = undefined;
-        truelon= undefined;
-        lonper = undefined;
-     }
-   }  // end rv2coe
+		// -- find longitude of perigee - elliptical equatorial ----
+		if  (( ecc>sv ) && (std::strcmp(typeorbit,"ee") == 0))
+		{
+			temp = ebar[0]/ecc;
+			if ( std::fabs(temp) > 1.0  )
+				temp = StelUtils::sign(temp);
+			lonper = std::acos( temp );
+			if ( ebar[1] < 0.0  )
+				lonper = twopi - lonper;
+			if ( incl > halfpi )
+				lonper = twopi - lonper;
+		}
+		else
+			lonper = undefined;
+
+		// -------- find true longitude - circular equatorial ------
+		if  (( magr>sv ) && ( std::strcmp(typeorbit,"ce") == 0 ))
+		{
+			temp = r[0]/magr;
+			if ( std::fabs(temp) > 1.0  )
+				temp = StelUtils::sign(temp);
+			truelon = std::acos( temp );
+			if ( r[1] < 0.0  )
+				truelon = twopi - truelon;
+			if ( incl > halfpi )
+				truelon = twopi - truelon;
+			m = truelon;
+		}
+		else
+			truelon = undefined;
+
+		// ------------ find mean anomaly for all orbits -----------
+		if ( typeorbit[0] == 'e' )
+			newtonnu(ecc, nu, e, m);
+	}
+	else
+	{
+		p       = undefined;
+		a       = undefined;
+		ecc     = undefined;
+		incl    = undefined;
+		omega   = undefined;
+		argp    = undefined;
+		nu      = undefined;
+		m       = undefined;
+		arglat  = undefined;
+		truelon = undefined;
+		lonper  = undefined;
+	}
+}  // end rv2coe
 
 /* -----------------------------------------------------------------------------
 *
@@ -537,19 +491,15 @@ void rv2coe
 *
 * --------------------------------------------------------------------------- */
 
-void    jday
-        (
-          int year, int mon, int day, int hr, int minute, double sec,
-          double& jd
-        )
-   {
-     jd = 367.0 * year -
-          floor((7 * (year + floor((mon + 9) / 12.0))) * 0.25) +
-          floor( 275 * mon / 9.0 ) +
-          day + 1721013.5 +
-          ((sec / 60.0 + minute) / 60.0 + hr) / 24.0;  // ut in days
-          // - 0.5*sgn(100.0*year + mon - 190002.5) + 0.5;
-   }  // end jday
+void jday(int year, int mon, int day, int hr, int minute, double sec, double& jd)
+{
+	jd = 367.0 * year -
+	     std::floor((7 * (year + floor((mon + 9) / 12.0))) * 0.25) +
+	     std::floor( 275 * mon / 9.0 ) +
+	     day + 1721013.5 +
+	     ((sec / 60.0 + minute) / 60.0 + hr) / 24.0;  // ut in days
+	// - 0.5*StelUtils::sign(100.0*year + mon - 190002.5) + 0.5;
+}  // end jday
 
 /* -----------------------------------------------------------------------------
 *
@@ -588,38 +538,34 @@ void    jday
 *    none.
 * --------------------------------------------------------------------------- */
 
-void    days2mdhms
-        (
-          int year, double days,
-          int& mon, int& day, int& hr, int& minute, double& sec
-        )
-   {
-     int i, inttemp, dayofyr;
-     double    temp;
-     int lmonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+void days2mdhms(int year, double days, int& mon, int& day, int& hr, int& minute, double& sec)
+{
+	int i, inttemp, dayofyr;
+	double    temp;
+	int lmonth[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-     dayofyr = (int)floor(days);
-     /* ----------------- find month and day of month ---------------- */
-     if ( (year % 4) == 0 )
-       lmonth[1] = 29;
+	dayofyr = (int)std::floor(days);
+	/* ----------------- find month and day of month ---------------- */
+	if ( (year % 4) == 0 )
+		lmonth[1] = 29;
 
-     i = 1;
-     inttemp = 0;
-     while ((dayofyr > inttemp + lmonth[i-1]) && (i < 12))
-     {
-       inttemp = inttemp + lmonth[i-1];
-       i++;
-     }
-     mon = i;
-     day = dayofyr - inttemp;
+	i = 1;
+	inttemp = 0;
+	while ((dayofyr > inttemp + lmonth[i-1]) && (i < 12))
+	{
+		inttemp = inttemp + lmonth[i-1];
+		i++;
+	}
+	mon = i;
+	day = dayofyr - inttemp;
 
-     /* ----------------- find hours minutes and seconds ------------- */
-     temp = (days - dayofyr) * 24.0;
-     hr   = (int)floor(temp);
-     temp = (temp - hr) * 60.0;
-     minute  = (int)floor(temp);
-     sec  = (temp - minute) * 60.0;
-   }  // end days2mdhms
+	/* ----------------- find hours minutes and seconds ------------- */
+	temp = (days - dayofyr) * 24.0;
+	hr   = (int)std::floor(temp);
+	temp = (temp - hr) * 60.0;
+	minute  = (int)std::floor(temp);
+	sec  = (temp - minute) * 60.0;
+}  // end days2mdhms
 
 /* -----------------------------------------------------------------------------
 *
@@ -661,34 +607,29 @@ void    days2mdhms
 *    vallado       2007, 208, alg 22, ex 3-13
 * --------------------------------------------------------------------------- */
 
-void    invjday
-        (
-          double jd,
-          int& year, int& mon, int& day,
-          int& hr, int& minute, double& sec
-        )
-   {
-     int leapyrs;
-     double    days, tu, temp;
+void invjday(double jd, int& year, int& mon, int& day, int& hr, int& minute, double& sec)
+{
+	int leapyrs;
+	double    days, tu, temp;
 
-     /* --------------- find year and days of the year --------------- */
-     temp    = jd - 2415019.5;
-     tu      = temp / 365.25;
-     year    = 1900 + (int)floor(tu);
-     leapyrs = (int)floor((year - 1901) * 0.25);
+	/* --------------- find year and days of the year --------------- */
+	temp    = jd - 2415019.5;
+	tu      = temp / 365.25;
+	year    = 1900 + (int)std::floor(tu);
+	leapyrs = (int)std::floor((year - 1901) * 0.25);
 
-     // optional nudge by 8.64x10-7 sec to get even outputs
-     days    = temp - ((year - 1900) * 365.0 + leapyrs) + 0.00000000001;
+	// optional nudge by 8.64x10-7 sec to get even outputs
+	days    = temp - ((year - 1900) * 365.0 + leapyrs) + 0.00000000001;
 
-     /* ------------ check for case of beginning of a year ----------- */
-     if (days < 1.0)
-       {
-         year    = year - 1;
-         leapyrs = (int)floor((year - 1901) * 0.25);
-         days    = temp - ((year - 1900) * 365.0 + leapyrs);
-       }
+	/* ------------ check for case of beginning of a year ----------- */
+	if (days < 1.0)
+	{
+		year    = year - 1;
+		leapyrs = (int)std::floor((year - 1901) * 0.25);
+		days    = temp - ((year - 1900) * 365.0 + leapyrs);
+	}
 
-     /* ----------------- find remaing data  ------------------------- */
-     days2mdhms(year, days, mon, day, hr, minute, sec);
-     sec = sec - 0.00000086400;
-   }  // end invjday
+	/* ----------------- find remaing data  ------------------------- */
+	days2mdhms(year, days, mon, day, hr, minute, sec);
+	sec = sec - 0.00000086400;
+}  // end invjday

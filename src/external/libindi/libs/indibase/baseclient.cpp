@@ -26,7 +26,7 @@
 #include <cerrno>
 #include <fcntl.h>
 #include <cstdlib>
-#include <stdarg.h>
+#include <cstdarg>
 #include <cstring>
 
 #ifdef _WINDOWS

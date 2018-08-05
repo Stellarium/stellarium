@@ -174,44 +174,42 @@ bool gTimeSpan::operator==(gTimeSpan ai_timeSpan) const
 
 	if(m_timeSpan == ai_timeSpan.getDblSeconds())
 		return true;
-	else
-		return false;
+
+	return false;
 
 }
 bool gTimeSpan::operator!=(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan != ai_timeSpan.getDblSeconds())
 		return true;
-	else
-		return false;
 
+	return false;
 }
 bool gTimeSpan::operator<(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan < ai_timeSpan.getDblSeconds())
 		return true;
-	else
-		return false;
 
+	return false;
 }
 bool gTimeSpan::operator>(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan > ai_timeSpan.getDblSeconds())
 		return true;
-	else
-		return false;
+
+	return false;
 }
 bool gTimeSpan::operator<=(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan <= ai_timeSpan.getDblSeconds())
 		return true;
-	else
-		return false;
+
+	return false;
 }
 bool gTimeSpan::operator>=(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan >= ai_timeSpan.getDblSeconds())
 		return true;
-	else
-		return false;
+
+	return false;
 }
