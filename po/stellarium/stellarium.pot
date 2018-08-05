@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-08-04 20:03+0700\n"
+"POT-Creation-Date: 2018-08-05 13:51+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -7805,7 +7805,7 @@ msgid "Latitude:"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:500
-msgid "Enter the altitude in meter"
+msgid "Enter the elevation in meter"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:502
@@ -7821,8 +7821,7 @@ msgid "Use current location as default"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:505
-#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
-msgid "Altitude:"
+msgid "Elevation:"
 msgstr ""
 
 #: src/ui_locationDialogGui.h:507 src/ui_locationDialogGui.h:511
@@ -13499,6 +13498,10 @@ msgstr ""
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
+msgstr ""
+
+#: plugins/TextUserInterface/src/TextUserInterface.cpp:153
+msgid "Altitude:"
 msgstr ""
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
