@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SITESDATAMAPPER_HPP_
-#define _SITESDATAMAPPER_HPP_
+#ifndef SITESDATAMAPPER_HPP
+#define SITESDATAMAPPER_HPP
 
 #include <QObject>
 #include <QMap>
@@ -58,4 +58,4 @@ private:
 	
 };
 
-#endif // _SITESDATAMAPPER_HPP_
+#endif // SITESDATAMAPPER_HPP

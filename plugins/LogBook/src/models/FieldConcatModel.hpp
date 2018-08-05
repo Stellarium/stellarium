@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _FIELDCONCATMODEL_HPP_
-#define _FIELDCONCATMODEL_HPP_
+#ifndef FIELDCONCATMODEL_HPP
+#define FIELDCONCATMODEL_HPP
 
 #include <QObject>
 #include <QAbstractTableModel>
@@ -74,4 +74,4 @@ private:
 	QSqlTableModel *dataModel;
 };
 
-#endif // _FIELDCONCATMODEL_HPP_
+#endif // FIELDCONCATMODEL_HPP

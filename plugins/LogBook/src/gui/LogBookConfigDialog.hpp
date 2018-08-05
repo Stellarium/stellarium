@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LOGBOOKCONFIGDIALOG_HPP_
-#define _LOGBOOKCONFIGDIALOG_HPP_
+#ifndef LOGBOOKCONFIGDIALOG_HPP
+#define LOGBOOKCONFIGDIALOG_HPP
 
 #include <QObject>
 #include "StelDialogLogBook.hpp"
@@ -91,4 +91,4 @@ protected:
 	int selectedSiteRow;
 };
 
-#endif // _LOGBOOKCONFIGDIALOG_HPP_
+#endif // LOGBOOKCONFIGDIALOG_HPP

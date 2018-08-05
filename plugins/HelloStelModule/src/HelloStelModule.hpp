@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef HELLOSTELMODULE_HPP_
-#define HELLOSTELMODULE_HPP_
+#ifndef HELLOSTELMODULE_HPP
+#define HELLOSTELMODULE_HPP
 
 #include "StelModule.hpp"
 #include <QFont>
@@ -56,4 +56,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*HELLOSTELMODULE_HPP_*/
+#endif /* HELLOSTELMODULE_HPP */

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef LOGBOOKCOMMON_HPP_
-#define LOGBOOKCOMMON_HPP_
+#ifndef LOGBOOKCOMMON_HPP
+#define LOGBOOKCOMMON_HPP
 
 // these values are used as the names of SQL tables, and as map keys.
 #define BARLOWS "barlows"
@@ -33,4 +33,4 @@
 #define TARGETS "targets"
 #define TARGET_TYPES "target_types"
 
-#endif /*LOGBOOKCOMMON_HPP_*/
+#endif /*LOGBOOKCOMMON_HPP*/

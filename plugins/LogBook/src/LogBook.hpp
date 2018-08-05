@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef LOGBOOK_HPP_
-#define LOGBOOK_HPP_
+#ifndef LOGBOOK_HPP
+#define LOGBOOK_HPP
 
 #include "StelModule.hpp"
 #include <QMap>
@@ -121,4 +121,4 @@ public:
 	virtual StelPluginInfo getPluginInfo() const;
 };
 
-#endif /*LOGBOOK_HPP_*/
+#endif /*LOGBOOK_HPP*/

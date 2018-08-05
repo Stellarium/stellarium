@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LIMITINGDOUBLEVALIDATOR_HPP_
-#define _LIMITINGDOUBLEVALIDATOR_HPP_
+#ifndef LIMITINGDOUBLEVALIDATOR_HPP
+#define LIMITINGDOUBLEVALIDATOR_HPP
 
 #include <QObject>
 #include <QDoubleValidator>
@@ -32,4 +32,4 @@ public:
 	
 };
 
-#endif // _LIMITINGDOUBLEVALIDATOR_HPP_
+#endif // LIMITINGDOUBLEVALIDATOR_HPP

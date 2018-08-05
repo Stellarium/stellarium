@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _SESSIONSDIALOG_HPP_
-#define _SESSIONSDIALOG_HPP_
+#ifndef SESSIONSDIALOG_HPP
+#define SESSIONSDIALOG_HPP
 
 #include <QObject>
 #include <QMap>
@@ -74,4 +74,4 @@ private:
 	Ui_SessionsDialog*					ui;
 };
 
-#endif // _SESSIONSDIALOG_HPP_
+#endif // SESSIONSDIALOG_HPP

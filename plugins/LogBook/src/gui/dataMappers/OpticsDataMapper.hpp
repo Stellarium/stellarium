@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _OPTICSDATAMAPPER_HPP_
-#define _OPTICSDATAMAPPER_HPP_
+#ifndef OPTICSDATAMAPPER_HPP
+#define OPTICSDATAMAPPER_HPP
 
 #include <QObject>
 #include <QMap>
@@ -61,4 +61,4 @@ private:
 	
 };
 
-#endif // _OPTICSDATAMAPPER_HPP_
+#endif // OPTICSDATAMAPPER_HPP

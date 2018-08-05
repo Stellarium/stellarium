@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _TARGETSDIALOG_HPP_
-#define _TARGETSDIALOG_HPP_
+#ifndef TARGETSDIALOG_HPP
+#define TARGETSDIALOG_HPP
 
 #include <QObject>
 #include <QMap>
@@ -75,4 +75,4 @@ private:
 
 };
 
-#endif // _TARGETSDIALOG_HPP_
+#endif // TARGETSDIALOG_HPP

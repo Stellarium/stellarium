@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _FILTERSDATAMAPPER_HPP_
-#define _FILTERSDATAMAPPER_HPP_
+#ifndef FILTERSDATAMAPPER_HPP
+#define FILTERSDATAMAPPER_HPP
 
 #include <QObject>
 #include <QMap>
@@ -56,4 +56,4 @@ private:
 	
 };
 
-#endif // _FILTERSDATAMAPPER_HPP_
+#endif // FILTERSDATAMAPPER_HPP

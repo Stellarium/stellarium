@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _BARLOWSDATAMAPPER_HPP_
-#define _BARLOWSDATAMAPPER_HPP_
+#ifndef BARLOWSDATAMAPPER_HPP
+#define BARLOWSDATAMAPPER_HPP
 
 #include <QObject>
 #include <QMap>
@@ -55,4 +55,4 @@ private:
 	
 };
 
-#endif // _BARLOWSDATAMAPPER_HPP_
+#endif // BARLOWSDATAMAPPER_HPP

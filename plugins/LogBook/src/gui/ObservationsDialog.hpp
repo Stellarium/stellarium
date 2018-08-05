@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _OBSERVATIONSDIALOG_HPP_
-#define _OBSERVATIONSDIALOG_HPP_
+#ifndef OBSERVATIONSDIALOG_HPP
+#define OBSERVATIONSDIALOG_HPP
 
 #include <QObject>
 #include <QMap>
@@ -79,4 +79,4 @@ private:
 	Ui_ObservationsDialog*				ui;
 };
 
-#endif // _OBSERVATIONSDIALOG_HPP_
+#endif // OBSERVATIONSDIALOG_HPP

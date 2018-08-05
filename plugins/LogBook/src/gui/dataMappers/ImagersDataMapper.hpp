@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _IMAGERSDATAMAPPER_HPP_
-#define _IMAGERSDATAMAPPER_HPP_
+#ifndef IMAGERSDATAMAPPER_HPP
+#define IMAGERSDATAMAPPER_HPP
 
 #include <QObject>
 #include <QMap>
@@ -54,4 +54,4 @@ private:
 	
 };
 
-#endif // _IMAGERSDATAMAPPER_HPP_
+#endif // IMAGERSDATAMAPPER_HPP

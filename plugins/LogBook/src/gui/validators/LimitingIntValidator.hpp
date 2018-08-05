@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LIMITINGINTVALIDATOR_HPP_
-#define _LIMITINGINTVALIDATOR_HPP_
+#ifndef LIMITINGINTVALIDATOR_HPP
+#define LIMITINGINTVALIDATOR_HPP
 
 #include <QObject>
 #include <QIntValidator>
@@ -31,4 +31,4 @@ public:
 	virtual void fixup(QString & input ) const;
 };
 
-#endif // _LIMITINGINTVALIDATOR_HPP_
+#endif // LIMITINGINTVALIDATOR_HPP

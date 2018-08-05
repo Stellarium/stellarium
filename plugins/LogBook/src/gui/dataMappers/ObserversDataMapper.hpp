@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _OBSERVERSDATAMAPPER_HPP_
-#define _OBSERVERSDATAMAPPER_HPP_
+#ifndef OBSERVERSDATAMAPPER_HPP
+#define OBSERVERSDATAMAPPER_HPP
 
 #include <QObject>
 #include <QMap>
@@ -54,4 +54,4 @@ private:
 	
 };
 
-#endif // _OBSERVERSDATAMAPPER_HPP_
+#endif // OBSERVERSDATAMAPPER_HPP

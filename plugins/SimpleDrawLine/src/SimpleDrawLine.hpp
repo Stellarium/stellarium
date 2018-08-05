@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef SIMPLEDRAWLINE_HPP_
-#define SIMPLEDRAWLINE_HPP_
+#ifndef SIMPLEDRAWLINE_HPP
+#define SIMPLEDRAWLINE_HPP
 
 #include "StelModule.hpp"
 #include <QFont>
@@ -56,4 +56,4 @@ public:
 	virtual QObjectList getExtensionList() const { return QObjectList(); }
 };
 
-#endif /*SIMPLEDRAWLINE_HPP_*/
+#endif /* SIMPLEDRAWLINE_HPP */

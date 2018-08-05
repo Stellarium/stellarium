@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _OCULARSDATAMAPPER_HPP_
-#define _OCULARSDATAMAPPER_HPP_
+#ifndef OCULARSDATAMAPPER_HPP
+#define OCULARSDATAMAPPER_HPP
 
 #include <QObject>
 #include <QMap>
@@ -56,4 +56,4 @@ private:
 	
 };
 
-#endif // _OCULARSDATAMAPPER_HPP_
+#endif // OCULARSDATAMAPPER_HPP

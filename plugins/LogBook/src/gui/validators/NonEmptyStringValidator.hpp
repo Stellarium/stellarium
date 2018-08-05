@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _NONEMPTYSTRINGVALIDATOR_HPP_
-#define _NONEMPTYSTRINGVALIDATOR_HPP_
+#ifndef NONEMPTYSTRINGVALIDATOR_HPP
+#define NONEMPTYSTRINGVALIDATOR_HPP
 
 #include <QObject>
 #include <QRegExpValidator>
@@ -32,4 +32,4 @@ public:
 
 };
 
-#endif // _NONEMPTYSTRINGVALIDATOR_HPP_
+#endif // NONEMPTYSTRINGVALIDATOR_HPP

@@ -16,8 +16,8 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef _LOGBOOKTEXTEDIT_HPP_
-#define _LOGBOOKTEXTEDIT_HPP_
+#ifndef LOGBOOKTEXTEDIT_HPP
+#define LOGBOOKTEXTEDIT_HPP
 
 #include <QTextEdit>
 #include <QWidget>
@@ -36,4 +36,4 @@ protected:
 	virtual void focusOutEvent(QFocusEvent *e);
 };
 
-#endif // _LOGBOOKTEXTEDIT_HPP_
+#endif // LOGBOOKTEXTEDIT_HPP
