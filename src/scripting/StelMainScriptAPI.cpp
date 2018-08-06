@@ -146,11 +146,7 @@ void StelMainScriptAPI::setDate(const QString& dateStr, const QString& spec, con
 	StelCore* core = StelApp::getInstance().getCore();
 	double JD = jdFromDateString(dateStr, spec);
 	if (dateIsDT)
-	{
-		qWarning() << "StelMainScriptAPI::setDate() called with final Boolean set to indicate Dynamical Time. This is new in 0.14, make sure you did this intentionally.";
-		qWarning() << "This warning will go away in Stellarium 0.16, please update the script by then to be sure.";
 		core->setJDE(JD);
-	}
 	else
 		core->setJD(JD);
 
