@@ -617,6 +617,8 @@ class Translations
 		N_("Jupiter and triple shadow phenomena");
 		// TRANSLATORS: Name of script
 		N_("Jupiter without Galilean satellites");
+		// TRANSLATORS: Name of script
+		N_("Skybox Tiles");
 		
 		// =====================================================================
 		// Script descriptions
