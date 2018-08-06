@@ -1,0 +1,124 @@
+//
+// Name: Jupiter without Galilean satellites
+// Author: Alexander Wolf
+// License: Public Domain
+// Version: 1.0
+// Shortcut: Ctrl+D,M,2
+// Description: The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstartes these rare phenomena since 1900 to 2100 in Dynamical Time.
+//
+
+// Made on Stellarium 0.18.2
+
+// List of phenomena (date, begin time, end time, begin demo, end demo, time rate)
+var phenomenalist = [["1907-10-03", "19:49", "19:59", "19:29", "20:19", 100],
+                     ["1913-10-22", "05:00", "05:29", "04:40", "05:59", 150],
+                     ["1914-05-11", "05:41", "06:58", "05:21", "07:18", 250],
+                     ["1919-03-05", "09:58", "10:59", "09:38", "10:58", 300],
+                     ["1931-02-14", "20:51", "23:05", "20:31", "23:25", 250],
+                     ["1932-05-04", "03:25", "04:20", "03:05", "04:40", 250],
+                     ["1932-11-21", "02:13", "02:51", "01:53", "03:11", 150],
+                     ["1939-07-17", "04:11", "05:02", "03:51", "05:22", 150],
+                     ["1942-07-10", "13:45", "14:31", "13:25", "14:51", 250],
+                     ["1943-09-27", "20:13", "20:59", "19:53", "21:19", 150],
+                     ["1949-03-04", "17:11", "17:20", "16:51", "17:40", 100],
+                     ["1949-09-21", "09:53", "09:53", "09:33", "10:13", 100],
+                     ["1961-09-27", "15:59", "17:30", "15:39", "17:50", 300],
+                     ["1962-04-16", "17:52", "17:53", "17:32", "18:03", 100],
+                     ["1966-06-28", "06:10", "06:41", "05:50", "07:01", 150],
+                     ["1980-04-09", "13:12", "14:16", "12:52", "14:36", 300],
+                     ["1980-04-09", "14:36", "15:28", "14:16", "15:48", 150],
+                     ["1990-06-15", "22:48", "24:22", "22:28", "24:42", 250],
+                     ["1991-01-02", "20:44", "21:54", "20:24", "22:14", 150],
+                     ["1997-08-27", "21:38", "21:55", "21:18", "22:15", 100],
+                     ["2001-11-08", "16:28", "16:43", "16:08", "17:03", 100],
+                     ["2008-05-22", "03:51", "04:10", "03:31", "04:30", 100],
+                     ["2009-09-03", "04:44", "06:30", "04:24", "06:50", 150],
+                     ["2019-11-09", "12:17", "12:56", "11:57", "13:26", 100],
+                     ["2020-05-28", "11:18", "13:12", "10:58", "13:32", 300],
+                     ["2021-08-15", "15:40", "15:48", "15:20", "17:08", 100],
+                     ["2033-07-28", "03:08", "05:01", "02:48", "05:21", 300],
+                     ["2038-05-22", "09:10", "10:49", "08:50", "11:19", 250],
+                     ["2038-12-09", "08:20", "10:36", "08:00", "10:56", 300],
+                     ["2049-10-15", "03:47", "04:01", "03:27", "04:21", 100],
+                     ["2050-05-28", "17:23", "18:34", "17:03", "18:53", 250],
+                     ["2056-04-27", "15:21", "16:22", "15:01", "16:42", 150],
+                     ["2057-07-15", "22:55", "24:06", "22:35", "24:26", 150],
+                     ["2061-03-16", "18:48", "18:56", "18:28", "19:26", 100],
+                     ["2067-10-15", "22:45", "24:34", "22:25", "24:54", 250],
+                     ["2068-05-03", "23:31", "24:41", "23:11", "24:59", 150],
+                     ["2073-02-26", "03:03", "03:57", "02:43", "04:17", 150],
+                     ["2080-11-26", "23:12", "24:12", "22:52", "24:32", 150],
+                     ["2082-02-14", "06:32", "08:00", "06:12", "08:20", 300],
+                     ["2085-02-07", "14:36", "15:24", "14:16", "15:44", 250],
+                     ["2086-04-27", "19:49", "21:12", "19:29", "21:32", 250],
+                     ["2086-11-14", "19:18", "21:22", "18:58", "21:42", 300],
+                     ["2097-01-20", "02:29", "02:56", "02:09", "03:16", 100],
+                     ["2097-02-13", "22:21", "23:42", "22:01", "24:02", 250],
+                     ["2098-05-04", "03:27", "05:10", "03:07", "05:30", 300]
+                    ];
+
+var timerate = core.getTimeRate();
+var color = "#00AAFF";
+var today = core.getJDay();
+var ass = StelSkyDrawer.getAbsoluteStarScale();
+var rss = StelSkyDrawer.getRelativeStarScale();
+core.clear("starchart");
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(false);
+ConstellationMgr.setFlagLabels(false);
+GridLinesMgr.setFlagGridlines(false);
+NebulaMgr.setFlagHints(false);
+SolarSystem.setFlagLabels(false);
+StelMovementMgr.setEquatorialMount(true);
+core.setGuiVisible(false);
+var id = LabelMgr.labelScreen("Jupiter without Galilean satellites", 20, 20, false, 40, color);
+LabelMgr.setLabelShow(id, true);
+var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 75, false, 28, color);
+LabelMgr.setLabelShow(ph, true);
+core.wait(2);
+core.selectObjectByName("Jupiter", false);
+StelMovementMgr.setFlagTracking(true);
+StelMovementMgr.zoomTo(0.2, 3);
+core.wait(5);
+StelSkyDrawer.setAbsoluteStarScale(3.0);
+StelSkyDrawer.setRelativeStarScale(0.4);
+var deltaT = core.getDeltaTAlgorithm();
+core.setDeltaTAlgorithm("EspenakMeeus");
+
+for (i=0; i<phenomenalist.length; i++)
+{
+	var d = phenomenalist[i][0];
+	var b = phenomenalist[i][3];
+	var e = phenomenalist[i][4];
+	var r = phenomenalist[i][5];
+	var demoBegin = d + "T" + b + ":00";
+	var demoEnd = d + "T" + e + ":00";
+	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
+	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
+	var el = LabelMgr.labelScreen("Limits of the disappearance: " + phenomenalist[i][1] + " - " + phenomenalist[i][2], 20, 180, false, 20, color);
+
+	core.setDate(demoBegin, "utc", true);
+	LabelMgr.setLabelShow(en, true);
+	LabelMgr.setLabelShow(ed, true);
+	LabelMgr.setLabelShow(el, true);
+
+	core.wait(2);
+	core.setTimeRate(r);
+	core.waitFor(demoEnd);
+
+	LabelMgr.setLabelShow(en, false);
+	LabelMgr.setLabelShow(ed, false);
+	LabelMgr.setLabelShow(el, false);
+	
+	core.setTimeRate(timerate);
+	core.wait(2);
+}
+LabelMgr.setLabelShow(id, false);
+LabelMgr.setLabelShow(ph, false);
+StelSkyDrawer.setAbsoluteStarScale(ass);
+StelSkyDrawer.setRelativeStarScale(rss);
+core.clear("natural");
+core.setGuiVisible(true);
+core.setDeltaTAlgorithm(deltaT);
+core.setJDay(today);
+core.goHome();

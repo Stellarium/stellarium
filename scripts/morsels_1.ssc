@@ -55,9 +55,9 @@ GridLinesMgr.setFlagGridlines(false);
 NebulaMgr.setFlagHints(false);
 StelMovementMgr.setEquatorialMount(true);
 core.setGuiVisible(false);
-var id = LabelMgr.labelScreen("Triple shadow phenomena of the satellites of Jupiter", 20, 20, false, 24, color);
+var id = LabelMgr.labelScreen("Triple shadow phenomena of the satellites of Jupiter", 20, 20, false, 40, color);
 LabelMgr.setLabelShow(id, true);
-var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 50, false, 20, color);
+var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 75, false, 28, color);
 LabelMgr.setLabelShow(ph, true);
 core.wait(2);
 core.selectObjectByName("Jupiter", true);
@@ -72,10 +72,10 @@ for (i=0; i<phenomenalist.length; i++)
 	var d = phenomenalist[i][0];
 	var t = phenomenalist[i][1];
 	var event = d + "T" + t + ":00";
-	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 100, false, 18, color);
-	var ed = LabelMgr.labelScreen("Date: " + d, 20, 120, false, 18, color);
-	var et = LabelMgr.labelScreen("Time: " + t, 20, 140, false, 18, color);
-	var es = LabelMgr.labelScreen("Shadows from " + phenomenalist[i][2] + " and Callisto", 20, 160, false, 18, color);
+	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
+	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
+	var et = LabelMgr.labelScreen("Time: " + t, 20, 180, false, 20, color);
+	var es = LabelMgr.labelScreen("Shadows from " + phenomenalist[i][2] + " and Callisto", 20, 205, false, 20, color);
 	
 	core.setDate(event, "utc", true);
 	LabelMgr.setLabelShow(en, true);
