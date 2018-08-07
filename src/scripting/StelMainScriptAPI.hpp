@@ -134,6 +134,13 @@ public slots:
 	//! Set the simulation time to the current system time, and the time rate to 1
 	void setRealTime();
 
+	//! Get the type of calculations in the simulation - is it "planetocentric calculations" or not
+	//! @return true if the calculations is planetocentric (geocentric on Earth), else return false
+	bool isPlanetocentricCalculations();
+
+	//! Set the flag for use planetocentric calculations
+	void setPlanetocentricCalculations(bool f);
+
 	//! Select an object by name
 	//! @param name the name of the object to select (english)
 	//! If the name is "", any currently selected objects will be

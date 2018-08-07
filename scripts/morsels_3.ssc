@@ -1,0 +1,92 @@
+//
+// Name: Occultations of bright stars by planets
+// Author: Alexander Wolf
+// License: Public Domain
+// Version: 1.0
+// Shortcut: Ctrl+D,M,3
+// Description: This script demonstrates an interesting phenomena - occultations bright stars by planets, 2000 to 2040.
+//
+
+// Made on Stellarium 0.18.2
+
+// List of phenomena (date, begin time, end time, star, latitude, longitude)
+var phenomenalist = [["2006-01-12", "06:00", "07:10",     "55 Sgr",    5,   25],
+                     ["2008-02-13", "21:20", "23:40",     "32 Sgr",  -40,  122],
+                     ["2008-02-26", "17:50", "18:20",     "19 Cap",  -72,  160],
+                     ["2009-04-01", "23:20", "24:20",     "32 Psc",  -56, -109],
+                     ["2009-08-03", "22:00", "26:00",     "45 Cap",    7,  -70],
+                     ["2013-06-05", "09:15", "09:40",      "5 Gem",   40,   80],
+                     ["2013-07-31", "14:00", "14:30",  "SAO 78816",  -66, -155],
+                     ["2014-04-16", "17:40", "18:20",     "73 Aqr",    4,  180],
+                     ["2015-10-18", "19:00", "19:50",     "63 Leo",   36,  140],
+                     ["2017-12-09", "05:20", "05:50",      "9 Oph",  -51,  -70],
+                     ["2021-04-02", "08:00", "10:50",     "44 Cap",  -51,  -70],
+                     ["2021-10-26", "14:20", "15:20",     "36 Oph",  -85,  -76],
+                     ["2027-05-13", "07:40", "08:15",    "110 Psc",   70,   -8],
+                     ["2028-07-24", "16:00", "17:00",    "104 Tau",   40,  122],
+                     ["2031-12-24", "17:10", "17:40",     "32 Lib",   65,  -90],
+                     ["2032-04-07", "03:40", "08:50",    "105 Tau",   65,  -90],
+                     ["2032-05-29", "01:40", "02:10",     "53 Tau",  -80, -170],
+                     ["2034-01-31", "10:20", "10:50",     "32 Cap",   69,  110],
+                     ["2035-02-17", "15:00", "15:40",     "41 Sgr",  -85,  140],
+                     ["2035-03-12", "04:30", "05:15", "SAO 187080",   21,   46],
+                     ["2038-11-18", "15:40", "16:20",     "10 Sco",  -67,   33]
+                    ];
+
+var timerate = core.getTimeRate();
+var color = "#00AAFF";
+var today = core.getJDay();
+var rss = StelSkyDrawer.getRelativeStarScale();
+core.clear("starchart");
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(false);
+ConstellationMgr.setFlagLabels(false);
+GridLinesMgr.setFlagGridlines(false);
+NebulaMgr.setFlagHints(false);
+StelMovementMgr.setEquatorialMount(true);
+core.setGuiVisible(false);
+var id = LabelMgr.labelScreen("Occultations of bright stars by planets", 20, 20, false, 36, color);
+LabelMgr.setLabelShow(id, true);
+var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 65, false, 28, color);
+LabelMgr.setLabelShow(ph, true);
+core.wait(2);
+StelSkyDrawer.setRelativeStarScale(0.5);
+var deltaT = core.getDeltaTAlgorithm();
+core.setDeltaTAlgorithm("EspenakMeeus");
+
+for (i=0; i<phenomenalist.length; i++)
+{
+	var d = phenomenalist[i][0];
+    var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
+	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
+	LabelMgr.setLabelShow(en, true);
+	LabelMgr.setLabelShow(ed, true);
+    
+    var demoBegin = d + "T" + phenomenalist[i][1] + ":00";
+	var demoEnd = d + "T" + phenomenalist[i][2] + ":00";
+
+	core.setObserverLocation(phenomenalist[i][5], phenomenalist[i][4], 1, 1, "", "Earth");
+	core.setDate(demoBegin, "utc", true);
+    core.selectObjectByName(phenomenalist[i][3], false);
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(0.05, 3);
+	core.wait(3);
+
+	core.setTimeRate(250);
+	core.waitFor(demoEnd);
+
+	LabelMgr.setLabelShow(en, false);
+	LabelMgr.setLabelShow(ed, false);
+	
+	core.setTimeRate(timerate);
+	core.wait(2);
+}
+LabelMgr.setLabelShow(id, false);
+LabelMgr.setLabelShow(ph, false);
+StelSkyDrawer.setRelativeStarScale(rss);
+core.clear("natural");
+core.setGuiVisible(true);
+core.setDeltaTAlgorithm(deltaT);
+core.setJDay(today);
+core.goHome();
+StelMovementMgr.lookSouth(true);

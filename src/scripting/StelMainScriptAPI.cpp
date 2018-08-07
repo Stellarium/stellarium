@@ -224,6 +224,20 @@ void StelMainScriptAPI::setRealTime()
 	StelApp::getInstance().getCore()->setTimeNow();
 }
 
+bool StelMainScriptAPI::isPlanetocentricCalculations()
+{
+	bool r = true;
+	if (StelApp::getInstance().getCore()->getUseTopocentricCoordinates())
+		r = false;
+
+	return r;
+}
+
+void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
+{
+	StelApp::getInstance().getCore()->setUseTopocentricCoordinates(!f);
+}
+
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();

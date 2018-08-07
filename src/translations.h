@@ -619,6 +619,8 @@ class Translations
 		N_("Jupiter without Galilean satellites");
 		// TRANSLATORS: Name of script
 		N_("Skybox Tiles");
+		// TRANSLATORS: Name of script
+		N_("Occultations of bright stars by planets");
 		
 		// =====================================================================
 		// Script descriptions
@@ -657,7 +659,8 @@ class Translations
 		N_("The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). The Bennett catalog was contributed by Auke Slotegraaf.");
 		N_("This list of 111 objects by A.J. Crayon and Steve Coe is used by members of the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC achievement award.");
 		N_("Demonstration the mid-time of the rare events - triple shadow phenomena of the satellites of Jupiter since 1900 to 2100. All events are given in Dynamical Time.");
-		N_("The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstartes these rare phenomena since 1900 to 2100 in Dynamical Time.");
+		N_("The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstrates these rare phenomena since 1900 to 2100 in Dynamical Time.");
+		N_("This script demonstrates an interesting phenomena - occultations bright stars by planets, 2000 to 2040.");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)

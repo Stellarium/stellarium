@@ -4,7 +4,7 @@
 // License: Public Domain
 // Version: 1.0
 // Shortcut: Ctrl+D,M,2
-// Description: The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstartes these rare phenomena since 1900 to 2100 in Dynamical Time.
+// Description: The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstrates these rare phenomena since 1900 to 2100 in Dynamical Time.
 //
 
 // Made on Stellarium 0.18.2
@@ -71,16 +71,16 @@ NebulaMgr.setFlagHints(false);
 SolarSystem.setFlagLabels(false);
 StelMovementMgr.setEquatorialMount(true);
 core.setGuiVisible(false);
-var id = LabelMgr.labelScreen("Jupiter without Galilean satellites", 20, 20, false, 40, color);
+var id = LabelMgr.labelScreen("Jupiter without Galilean satellites", 20, 20, false, 36, color);
 LabelMgr.setLabelShow(id, true);
-var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 75, false, 28, color);
+var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 65, false, 28, color);
 LabelMgr.setLabelShow(ph, true);
 core.wait(2);
 core.selectObjectByName("Jupiter", false);
 StelMovementMgr.setFlagTracking(true);
 StelMovementMgr.zoomTo(0.2, 3);
 core.wait(5);
-StelSkyDrawer.setAbsoluteStarScale(3.0);
+StelSkyDrawer.setAbsoluteStarScale(2.0);
 StelSkyDrawer.setRelativeStarScale(0.4);
 var deltaT = core.getDeltaTAlgorithm();
 core.setDeltaTAlgorithm("EspenakMeeus");
@@ -122,3 +122,4 @@ core.setGuiVisible(true);
 core.setDeltaTAlgorithm(deltaT);
 core.setJDay(today);
 core.goHome();
+StelMovementMgr.lookSouth(true);
