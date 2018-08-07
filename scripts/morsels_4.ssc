@@ -1,0 +1,118 @@
+//
+// Name: Mutual occultations of planets
+// Author: Alexander Wolf
+// License: Public Domain
+// Version: 1.0
+// Shortcut: Ctrl+D,M,4
+// Description: This script demonstrates an interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.
+//
+
+// Made on Stellarium 0.18.2
+
+// List of phenomena (date, begin time, end time, occulted planet)
+var phenomenalist = [["0021-05-22", "08:41", "07:31", "Jupiter"],
+                     ["0272-06-30", "07:59", "07:10", "Jupiter"],
+                     ["0363-04-19", "18:05", "17:08", "Jupiter"],
+                     ["0392-12-09", "01:42", "01:15", "Mercury"],
+                     ["0428-10-25", "02:43", "01:40", "Jupiter"],
+                     ["0493-06-09", "00:33", "00:10", "Jupiter"],
+                     ["0509-07-24", "18:35", "17:45", "Jupiter"],
+                     ["0757-05-17", "22:12", "22:00", "Mercury"],
+                     ["0796-08-20", "07:43", "07:30",   "Venus"],
+                     ["0829-09-28", "07:48", "07:45", "Jupiter"],
+                     ["0914-07-23", "18:26", "18:46",  "Saturn"],
+                     ["0919-09-07", "11:12", "11:15",  "Saturn"],
+                     ["0992-05-24", "12:57", "13:17",    "Mars"],
+                     ["1026-04-16", "18:43", "18:53",  "Saturn"],
+                     ["1170-09-12", "19:54", "21:24", "Jupiter"],
+                     ["1210-09-17", "10:15", "11:06", "Jupiter"],
+                     ["1253-12-08", "08:52", "09:52",  "Saturn"],
+                     ["1387-09-22", "00:00", "00:30", "Jupiter"],
+                     ["1416-08-08", "23:29", "24:10",  "Saturn"],
+                     ["1477-10-09", "14:45", "15:40",  "Saturn"],
+                     ["1522-01-28", "07:42", "08:35",  "Saturn"],
+                     ["1590-10-13", "04:34", "05:20",    "Mars"],
+                     ["1613-01-03", "16:10", "28:40", "Neptune"],
+                     ["1623-08-15", "13:04", "22:04",  "Uranus"],
+                     ["1702-09-19", "10:08", "17:35", "Neptune"],
+                     ["1708-10-04", "12:21", "13:01", "Jupiter"],
+                     ["1793-07-21", "05:18", "05:58",  "Uranus"],
+                     ["1818-01-03", "21:32", "22:22", "Jupiter"],
+                     ["2067-07-15", "11:40", "12:15", "Neptune"],
+                     ["2079-08-11", "01:21", "01:41",    "Mars"],
+                     ["2094-04-07", "10:29", "11:09", "Jupiter"],
+                     ["2104-08-21", "00:59", "01:39", "Neptune"],
+                     ["2123-09-14", "15:08", "15:48", "Jupiter"],
+                     ["2223-12-02", "12:11", "12:51", "Jupiter"],
+                     ["2251-03-04", "10:33", "11:08",  "Uranus"],
+                     ["2351-04-07", "17:03", "17:33",  "Uranus"],
+                     ["2419-12-30", "01:05", "01:59",  "Uranus"],
+                     ["2478-08-29", "22:52", "23:32", "Jupiter"]
+                    ];
+
+var timerate = core.getTimeRate();
+var color = "#00AAFF";
+var today = core.getJDay();
+var tc = core.isPlanetocentricCalculations();
+var rss = StelSkyDrawer.getRelativeStarScale();
+core.setPlanetocentricCalculations(true);
+core.clear("starchart");
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(false);
+ConstellationMgr.setFlagLabels(false);
+GridLinesMgr.setFlagGridlines(false);
+NebulaMgr.setFlagHints(false);
+core.setGuiVisible(false);
+var id = LabelMgr.labelScreen("Mutual occultations of planets", 20, 20, false, 36, color);
+LabelMgr.setLabelShow(id, true);
+var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 65, false, 28, color);
+LabelMgr.setLabelShow(ph, true);
+core.wait(2);
+StelMovementMgr.setEquatorialMount(true);
+StelSkyDrawer.setRelativeStarScale(0.5);
+var deltaT = core.getDeltaTAlgorithm();
+core.setDeltaTAlgorithm("EspenakMeeus");
+
+for (i=0; i<phenomenalist.length; i++)
+{
+	var d = phenomenalist[i][0];
+	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
+	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
+	LabelMgr.setLabelShow(en, true);
+	LabelMgr.setLabelShow(ed, true);
+
+	var demoBegin = d + "T" + phenomenalist[i][1] + ":00";
+	var demoEnd = d + "T" + phenomenalist[i][2] + ":00";
+
+	core.setDate(demoBegin, "utc", true);
+	core.selectObjectByName(phenomenalist[i][3], false);
+	StelMovementMgr.setFlagTracking(true);
+	StelMovementMgr.zoomTo(0.05, 3);
+	core.wait(3);
+
+	if (phenomenalist[i][3] == "Neptune" || phenomenalist[i][3] == "Uranus")
+	{
+		core.setTimeRate(1000);
+	}
+	else
+	{
+		core.setTimeRate(250);
+	}
+	core.waitFor(demoEnd);
+
+	LabelMgr.setLabelShow(en, false);
+	LabelMgr.setLabelShow(ed, false);
+	
+	core.setTimeRate(timerate);
+	core.wait(2);
+}
+LabelMgr.setLabelShow(id, false);
+LabelMgr.setLabelShow(ph, false);
+core.clear("natural");
+core.setGuiVisible(true);
+StelSkyDrawer.setRelativeStarScale(rss);
+core.setDeltaTAlgorithm(deltaT);
+core.setJDay(today);
+core.goHome();
+core.setPlanetocentricCalculations(tc);
+StelMovementMgr.lookSouth(true);

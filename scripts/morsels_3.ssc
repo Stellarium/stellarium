@@ -57,17 +57,17 @@ core.setDeltaTAlgorithm("EspenakMeeus");
 for (i=0; i<phenomenalist.length; i++)
 {
 	var d = phenomenalist[i][0];
-    var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
+	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
 	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
 	LabelMgr.setLabelShow(en, true);
 	LabelMgr.setLabelShow(ed, true);
-    
-    var demoBegin = d + "T" + phenomenalist[i][1] + ":00";
+
+	var demoBegin = d + "T" + phenomenalist[i][1] + ":00";
 	var demoEnd = d + "T" + phenomenalist[i][2] + ":00";
 
 	core.setObserverLocation(phenomenalist[i][5], phenomenalist[i][4], 1, 1, "", "Earth");
 	core.setDate(demoBegin, "utc", true);
-    core.selectObjectByName(phenomenalist[i][3], false);
+	core.selectObjectByName(phenomenalist[i][3], false);
 	StelMovementMgr.setFlagTracking(true);
 	StelMovementMgr.zoomTo(0.05, 3);
 	core.wait(3);
@@ -77,7 +77,7 @@ for (i=0; i<phenomenalist.length; i++)
 
 	LabelMgr.setLabelShow(en, false);
 	LabelMgr.setLabelShow(ed, false);
-	
+
 	core.setTimeRate(timerate);
 	core.wait(2);
 }

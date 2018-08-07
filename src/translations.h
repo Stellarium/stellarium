@@ -621,6 +621,8 @@ class Translations
 		N_("Skybox Tiles");
 		// TRANSLATORS: Name of script
 		N_("Occultations of bright stars by planets");
+		// TRANSLATORS: Name of script
+		N_("Mutual occultations of planets");
 		
 		// =====================================================================
 		// Script descriptions
@@ -661,6 +663,7 @@ class Translations
 		N_("Demonstration the mid-time of the rare events - triple shadow phenomena of the satellites of Jupiter since 1900 to 2100. All events are given in Dynamical Time.");
 		N_("The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstrates these rare phenomena since 1900 to 2100 in Dynamical Time.");
 		N_("This script demonstrates an interesting phenomena - occultations bright stars by planets, 2000 to 2040.");
+		N_("This script demonstrates an interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
