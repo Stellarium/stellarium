@@ -154,6 +154,8 @@ private slots:
 	void saveFirstCelestialBody(int index);
 	void saveSecondCelestialBody(int index);
 	void computePlanetaryData();
+	void drawDistanceGraph();
+	void mouseOverDistanceGraph(QMouseEvent *event);
 
 	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
@@ -188,6 +190,7 @@ private slots:
 	void updateAstroCalcData();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+	void changePCTab(int index);
 
 	void updateSolarSystemData();
 
@@ -235,6 +238,7 @@ private:
 	void prepareAxesAndGraph();
 	void prepareXVsTimeAxesAndGraph();
 	void prepareMonthlyEleveationAxesAndGraph();
+	void prepareDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();
 	//! Populates the list of groups for WUT tool.
@@ -261,11 +265,11 @@ private:
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2);
 
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive;
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;	
 	static float brightLimit;
-	static float minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2;
+	static float minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2, minYld, maxYld, minYad, maxYad;
 	static QString yAxis1Legend, yAxis2Legend;
 
 	//! Make sure that no tabs icons are outside of the viewport.

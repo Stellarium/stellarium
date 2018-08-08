@@ -440,7 +440,9 @@ QGroupBox::title {
 
 QTabWidget::pane {
 	border: none;
+        margin-top: 0px;
 }
+
 
 QTabWidget::tab-bar {
 	width: 1000px;
@@ -471,12 +473,27 @@ QTabBar::tab {
 }
 
 QTabBar::tab:selected {
-	border: none;
-	margin: 0px;
+        border: none;
+        margin: 0px;
+        color: rgb(220, 223, 214);
+}
+
+QTabBar::tab:top {
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
-	color: rgb(220, 223, 214);
-	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
+}
+
+QTabBar::tab:top:selected {
+        background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(68, 69, 72), stop: 1 rgb(86, 87, 90));
+}
+
+QTabBar::tab:bottom {
+        border-bottom-left-radius: 10px;
+        border-bottom-right-radius: 10px;
+}
+
+QTabBar::tab:bottom:selected {
+        background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(48, 49, 52), stop: 1 rgb(68, 69, 72));
 }
 
 QTabBar QToolButton {
@@ -797,11 +814,6 @@ QMenu::item {
 
 QMenu::item:selected { /* when user selects item using mouse or keyboard */
         background-color: rgb(101, 99, 33);
-}
-
-QTabWidget::pane {
-        margin-top: 0px;
-        border-top: none;
 }
 
 QPushButton#pushButtonMoveSensorUp, QPushButton#pushButtonMoveOcularUp, QPushButton#pushButtonMoveTelescopeUp, QPushButton#pushButtonMoveLensUp {
