@@ -4682,7 +4682,7 @@ void AstroCalcDialog::computePlanetaryData()
 
 void AstroCalcDialog::prepareDistanceAxesAndGraph()
 {
-	QString xAxisStr = q_("Days");
+	QString xAxisStr = q_("Days from today");
 	QString yAxis1Legend = QString("%1, %2").arg(q_("Linear distance"), qc_("AU", "distance, astronomical unit"));
 	QString yAxis2Legend = QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)); // decimal degrees
 
@@ -4807,8 +4807,8 @@ void AstroCalcDialog::drawDistanceGraph()
 	ui->pcDistanceGraphPlot->graph(0)->setData(x, y1);
 	ui->pcDistanceGraphPlot->graph(0)->setName("[LD]");
 	ui->pcDistanceGraphPlot->graph(1)->setData(x, y2);
-	ui->pcDistanceGraphPlot->graph(1)->setName("[AD]");
-	ui->pcDistanceGraphPlot->replot();
+	ui->pcDistanceGraphPlot->graph(1)->setName("[AD]");	
+	ui->pcDistanceGraphPlot->replot();	
 }
 
 void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
@@ -4840,5 +4840,7 @@ void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
 	}
 
 	ui->pcDistanceGraphPlot->update();
+	ui->pcDistanceGraphPlot->rescaleAxes();
 	ui->pcDistanceGraphPlot->replot();
 }
+
