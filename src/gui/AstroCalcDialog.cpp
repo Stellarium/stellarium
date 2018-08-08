@@ -4754,7 +4754,12 @@ void AstroCalcDialog::drawDistanceGraph()
 	PlanetP secondCBId = solarSystem->searchByEnglishName(secondCelestialBody);
 
 	if (firstCBId==secondCBId)
+	{
+		ui->pcDistanceGraphPlot->graph(0)->clearData();
+		ui->pcDistanceGraphPlot->graph(1)->clearData();
+		ui->pcDistanceGraphPlot->replot();
 		return;
+	}
 
 	// X axis - time; Y axis - altitude
 	QList<double> aX, aY1, aY2;
