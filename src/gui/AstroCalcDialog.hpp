@@ -96,7 +96,8 @@ public:
 		GraphDistanceVsTime	= 3,
 		GraphElongationVsTime	= 4,
 		GraphAngularSizeVsTime	= 5,
-		GraphPhaseAngleVsTime	= 6
+		GraphPhaseAngleVsTime	= 6,
+		GraphHDistanceVsTime	= 7
 	};
 
 	AstroCalcDialog(QObject* parent);
@@ -269,7 +270,7 @@ private:
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;	
 	static float brightLimit;
-	static float minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2, minYld, maxYld, minYad, maxYad;
+	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2, minYld, maxYld, minYad, maxYad;
 	static QString yAxis1Legend, yAxis2Legend;
 
 	//! Make sure that no tabs icons are outside of the viewport.

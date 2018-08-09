@@ -32,13 +32,6 @@ IF(${XGETTEXT_FOUND})
           COMMENT "Generating stellarium.pot"
           VERBATIM
      )
-     # TODO: It would be nice to just depend on the exact files in POTFILES.in
-     #file(READ ${CMAKE_CURRENT_SOURCE_DIR}/stellarium.pot UiHeaders)
-     #ADD_DEPENDENCIES(generate-pot-stellarium UiHeaders)
-     #ADD_DEPENDENCIES(generate-pot-stellarium stellarium_UIS_H)
-     # Make sure the UI headers are created first.
-     # NOTE: StelGuiLib was removed in series 0.13
-     #ADD_DEPENDENCIES(generate-pot-stellarium StelGuiLib)
      ADD_DEPENDENCIES(generate-pot-stellarium stelMain)
 
      # Generate this POT file when building the "generate-pot" target.
