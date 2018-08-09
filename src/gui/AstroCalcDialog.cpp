@@ -334,8 +334,7 @@ void AstroCalcDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
-	ui->monthlyElevationLabel->setStyleSheet(style);
-	ui->pcDistanceGraphLabel->setStyleSheet(style);
+	ui->monthlyElevationLabel->setStyleSheet(style);	
 	ui->pcDistanceGraphLegend->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);
 	ui->graphsCelestialBodyLabel->setStyleSheet(style);
