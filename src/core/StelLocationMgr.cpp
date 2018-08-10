@@ -204,8 +204,8 @@ void LibGPSLookupHelper::query()
 	loc.isUserLocation=true;
 	loc.planetName="Earth";
 	loc.name=QString("GPS %1%2 %3%4")
-			.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude))
-			.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude));
+			.arg(loc.latitude<0?"S":"N").arg(floor(loc.latitude))
+			.arg(loc.longitude<0?"W":"E").arg(floor(loc.longitude));
 	emit queryFinished(loc);
 }
 
@@ -650,8 +650,24 @@ const StelLocation StelLocationMgr::locationForString(const QString& s) const
 		return iter.value();
 	}
 	StelLocation ret;
-	// Maybe it is a coordinate set ? (e.g. GPS 25.107363,121.558807 )
-	QRegExp reg("(?:(.+)\\s+)?(.+),(.+)");
+	// Maybe it is a coordinate set with elevation?
+	QRegExp csreg("(.+),\\s*(.+),\\s*(.+)");
+	if (csreg.exactMatch(s))
+	{
+		bool ok;
+		// We have a set of coordinates
+		ret.latitude = parseAngle(csreg.capturedTexts()[1].trimmed(), &ok);
+		if (!ok) ret.role = '!';
+		ret.longitude = parseAngle(csreg.capturedTexts()[2].trimmed(), &ok);
+		if (!ok) ret.role = '!';
+		ret.altitude = csreg.capturedTexts()[3].trimmed().toInt(&ok);
+		if (!ok) ret.role = '!';
+		ret.name = QString("%1, %2").arg(QString::number(ret.latitude, 'f', 2), QString::number(ret.longitude, 'f', 2));
+		ret.planetName = "Earth";
+		return ret;
+	}
+	// Maybe it is a coordinate set without elevation? (e.g. GPS 25.107363,121.558807 )
+	QRegExp reg("(?:(.+)\\s+)?(.+),\\s*(.+)"); // FIXME: Seems regexp is not very good
 	if (reg.exactMatch(s))
 	{
 		bool ok;
@@ -975,7 +991,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
 			core->moveObserverTo(loc, 0.0f, 0.0f);
 			QSettings* conf = StelApp::getInstance().getSettings();
-			conf->setValue("init_location/last_location", QString("%1,%2").arg(latitude).arg(longitude));
+			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 		}
 		catch (std::runtime_error)
 		{

@@ -173,6 +173,11 @@ void StelCore::init()
 	{
 		location = locationMgr->locationFromCLI();
 	}
+	else if (defaultLocationID.startsWith("GPS", Qt::CaseInsensitive))
+	{
+		// The location is obtained already from init_location/last_resort_location
+		location.name = conf->value("init_location/location").toString();
+	}
 	else
 	{
 		location = locationMgr->locationForString(defaultLocationID);
