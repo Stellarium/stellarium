@@ -98,7 +98,7 @@ LandscapeMgr.setAtmosphereAverageLuminance(LUM); // this locks "exposure value".
 // North panel.
 StelMovementMgr.lookNorth(true);
 core.output("North panel luminance: " + LandscapeMgr.getLuminance());
-core.wait(MOVE_WAIT);
+core.wait(5*MOVE_WAIT);
 core.screenshot(BASENAME + "1-north", false, DIR, true);
 core.wait(SHOT_WAIT);
 // East panel.
