@@ -266,13 +266,13 @@ void MeteorShower::update(StelCore* core, double deltaTime)
 	}
 
 	// step through and update all active meteors
-	for (auto* m : m_activeMeteors)
+	foreach (MeteorObj* m, m_activeMeteors)
 	{
 		if (!m->update(deltaTime))
 		{
 			//important to delete when no longer active
-			delete m;
 			m_activeMeteors.removeOne(m);
+			delete m;
 		}
 	}
 
