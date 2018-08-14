@@ -791,6 +791,8 @@ You can export the calculated phenomena into a CSV file.
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
 
+\newFeature{v0.18.2}In version 0.18.2 we added two additional columns for this tool --- \emph{elongation} and \emph{angular distance}. The first of those columns show angular distance from the Sun, second column --- angular distance from the Moon. Both column may be helpful for planning observation of phenomena.
+
 
 \subsection{The ``Altitude vs.\ Time'' Tab}
 \label{sec:gui:AstroCalc:AltVsTime}
@@ -835,6 +837,7 @@ You can select from
 \item Elongation vs. Time 
 \item Angular size vs. Time
 \item Phase angle vs. Time
+\item Heliocentric distance vs. Time\newFeature{v0.18.2}
 \end{itemize}
 
 This tool may be very helpful for educational and statistics purposes.%
@@ -868,6 +871,8 @@ You may center an object from the right list in the sky map just by selecting it
 
 Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
 
+In version 0.18.2 we added tool for search items from list of \emph{Matching Objects}.\newFeature{v0.18.2}
+
 \subsection{The ``Planetary Calculator'' (PC) Tab}
 \label{sec:gui:AstroCalc:PC}
 
@@ -877,8 +882,16 @@ orbital resonances and orbital velocities.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC)}
-\label{fig:gui:AstroCalc:PC}
+\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Data Tab}
+\label{fig:gui:AstroCalc:PC:Data}
+\end{figure}
+
+\newFeature{v0.18.2}In version 0.18.2 we enhanced this tool via add new tab (\emph{Graphs}), where you may see the change in the linear and angular distances between selected celestial bodies in range 600 days (\emph{today} is in the center of graphs) as graphs (Fig.~\ref{fig:gui:AstroCalc:PC:Graphs}).
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_graphs_tab.png}
+\caption{Astronomical Calculations (AstroCalc): Planetary Calculator (PC), Graphs Tab}
+\label{fig:gui:AstroCalc:PC:Graphs}
 \end{figure}
 
 
