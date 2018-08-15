@@ -1,9 +1,10 @@
 # Translators:
+# Thomas Chu, 2017
 # cardinot <mcardinot@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-05-27 15:56+0700\n"
+"POT-Creation-Date: 2018-08-09 15:29+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Chinese (Hong Kong) (https://www.transifex.com/stellarium/teams/80998/zh_HK/)\n"
@@ -11,6 +12,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh_HK\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. (itstool) path: component/name
 #: stellarium.appdata.xml:7
@@ -30,15 +32,14 @@ msgid ""
 "features including multiple panoramic landscapes, fog, light pollution "
 "simulation and a built-in scripting engine."
 msgstr ""
-"Stellarium使用OpenGL為你呈現出3D照片般逼真的天空. 它能夠顯示恆星, 星座, 行星和星雲, 並擁有許多其他功能包括多全景景觀, 霧, "
-"光污染模擬和一個內置的腳本引擎."
+"Stellarium使用OpenGL來顯示和立體照片一樣逼真的實時天空。能顯示恆星、星座、行星和星雲，並有許多其他功能：如多個全景景觀、霧、模擬光污染和內置腳本引擎。"
 
 #. (itstool) path: description/p
 #: stellarium.appdata.xml:11
 msgid ""
 "Stellarium comes with a star catalogue of about 600 thousand stars and it is"
 " possible to download extra catalogues with up to 210 million stars."
-msgstr "Stellarium內置一個60萬粒星的數據庫, 並且可以下載額外21億粒星的數據庫."
+msgstr "Stellarium內置一個有60萬顆星的數據庫，並可以另外下載多至21億顆星的數據庫。"
 
 #. (itstool) path: description/p
 #: stellarium.appdata.xml:12
@@ -46,9 +47,7 @@ msgid ""
 "Stellarium has multiple sky cultures - see the constellations from the "
 "traditions of Polynesian, Inuit, Navajo, Korean, Lakota, Egyptian and "
 "Chinese astronomers, as well as the traditional Western constellations."
-msgstr ""
-"Stellarium具有多個天空文化 - 從 波利尼西亞, 因紐特人, 納瓦霍, 韓國, 拉科塔, 埃及和中國的天文學家, "
-"以及傳統的西方星座看到星座的傳統."
+msgstr "Stellarium能顯示不同的星座文化，包括波利尼西亞、因紐特人、納瓦霍、韓國、拉科塔、埃及和中國的天文傳統，以及西方的星座傳統。"
 
 #. (itstool) path: description/p
 #: stellarium.appdata.xml:13
@@ -56,9 +55,9 @@ msgid ""
 "It is also possible to visit other planets in the solar system - see what "
 "the sky looked like to the Apollo astronauts, or what the rings of Saturn "
 "looks like from Titan."
-msgstr "它也可能前往在太陽系其他行星 - 看阿波羅太空人在月球上看到的星空, 還有在泰坦(土星衛星)上看土星環."
+msgstr "也可以探索太陽系其他行星。親歷阿波羅號太空人在月球上所看到的星空，或從土衛六觀看土星環。"
 
 #. (itstool) path: component/developer_name
-#: stellarium.appdata.xml:46
+#: stellarium.appdata.xml:49
 msgid "Stellarium team"
-msgstr ""
+msgstr "Stellarium團隊"
