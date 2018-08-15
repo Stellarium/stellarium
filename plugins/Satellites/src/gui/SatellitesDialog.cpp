@@ -212,10 +212,8 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->removeSatellitesButton, SIGNAL(clicked()), this, SLOT(removeSatellites()));
 
 	importWindow = new SatellitesImportDialog();
-	connect(ui->addSatellitesButton, SIGNAL(clicked()),
-					importWindow, SLOT(setVisible()));
-	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)),
-					this, SLOT(addSatellites(TleDataList)));
+	connect(ui->addSatellitesButton, SIGNAL(clicked()), importWindow, SLOT(setVisible()));
+	connect(importWindow, SIGNAL(satellitesAccepted(TleDataList)), this, SLOT(addSatellites(TleDataList)));
 
 	// Sources tab
 	connect(ui->sourceList, SIGNAL(currentTextChanged(const QString&)), ui->sourceEdit, SLOT(setText(const QString&)));
@@ -502,7 +500,8 @@ void SatellitesDialog::populateAboutPage()
 	html += "</p>";
 
 	html += "<h3>" + q_("Adding new satellites") + "</h3>";
-	html += "<p>" + QString(q_("1. Make sure the satellite(s) you wish to add are included in one of the URLs listed in the Sources tab of the satellites configuration dialog. 2. Go to the Satellites tab, and click the '+' button.  Select the satellite(s) you wish to add and select the \"add\" button.")) + "</p>";
+	html += "<ol><li>" + q_("Make sure the satellite(s) you wish to add are included in one of the URLs listed in the Sources tab of the satellites configuration dialog.") + "</li>";
+	html += "<li>" + q_("Go to the Satellites tab, and click the '+' button.  Select the satellite(s) you wish to add and select the 'add' button.") + "</li></ol>";
 
 	html += "<h3>" + q_("Technical notes") + "</h3>";
 	html += "<p>" + q_("Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data as the input. ");
