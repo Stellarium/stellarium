@@ -18,8 +18,8 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
-SET(STELLARIUM_MINOR 18)
-SET(STELLARIUM_PATCH 2)
+SET(STELLARIUM_MINOR 90)
+SET(STELLARIUM_PATCH 0)
 ADD_DEFINITIONS(
 -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
 -DSTELLARIUM_MINOR=${STELLARIUM_MINOR}
@@ -35,8 +35,8 @@ ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 # Write version of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
-# currently Qt 5.4 - 5.6 is recommended, we can no longer build with Qt 5.3, and 5.7 may have some bugs (on Mac? 5.7 is fine on Windows) 5.8 on Windows seems OK.
-SET(MINIMAL_QT_VERSION "5.4.0")
+# currently Qt 5.6/5.9 is recommended
+SET(MINIMAL_QT_VERSION "5.6.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
@@ -46,10 +46,10 @@ MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
 
 ########### Main global variables ###########
 IF(NOT CMAKE_BUILD_TYPE)
-     SET(CMAKE_BUILD_TYPE Release CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+     SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
 ENDIF()
 
-SET(STELLARIUM_RELEASE_BUILD 1 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
+SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
 ENDIF()
