@@ -96,6 +96,7 @@ void ViewDialog::retranslate()
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
 		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
+		updateHips();
 
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
