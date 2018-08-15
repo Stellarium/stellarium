@@ -41,9 +41,7 @@ void StelLogger::init(const QString& logFilePath)
 	// write timestamp
 	writeLog(QString("%1").arg(QDateTime::currentDateTime().toString(Qt::ISODate)));
 	// write info about operating system
-	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));
-	// Do a similar query with a new prettier version since Qt5.4:
-	writeLog(QString("Product Name: %1").arg(QSysInfo::prettyProductName()));
+	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));	
 
 	// write compiler version
 #if defined __GNUC__ && !defined __clang__
