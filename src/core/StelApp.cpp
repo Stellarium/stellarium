@@ -1015,12 +1015,8 @@ QString StelApp::getViewportEffect() const
 void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName)
 {
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
-#if QT_VERSION >= 0x050500
 	QMetaEnum me = QMetaEnum::fromType<StelModule::StelModuleActionName>();
 	qDebug() << "Module Priorities for action named" << me.valueToKey(actionName);
-#else
-	qDebug() << "Module Priorities for action named" << actionName;
-#endif
 
 	for (auto* module : modules)
 	{
