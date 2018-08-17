@@ -985,7 +985,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="graphsSecondComboBox"/>
+             <widget class="QComboBox" name="graphsSecondComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -999,7 +1009,17 @@
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="graphsFirstComboBox"/>
+             <widget class="QComboBox" name="graphsFirstComboBox">
+              <property name="editable">
+               <bool>true</bool>
+              </property>
+              <property name="insertPolicy">
+               <enum>QComboBox::NoInsert</enum>
+              </property>
+              <property name="sizeAdjustPolicy">
+               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
@@ -1466,14 +1486,14 @@
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>QCustomPlot</class>
-   <extends>QWidget</extends>
-   <header>external/qcustomplot/qcustomplot.h</header>
-  </customwidget>
-  <customwidget>
    <class>AngleSpinBox</class>
    <extends>QSpinBox</extends>
    <header>AngleSpinBox.hpp</header>
+  </customwidget>
+  <customwidget>
+   <class>QCustomPlot</class>
+   <extends>QWidget</extends>
+   <header>external/qcustomplot/qcustomplot.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

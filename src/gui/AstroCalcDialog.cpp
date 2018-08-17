@@ -2438,6 +2438,7 @@ void AstroCalcDialog::populateFunctionsList()
 	cf.first = q_("Phase angle vs. Time");
 	cf.second = GraphPhaseAngleVsTime;
 	functions.append(cf);
+	// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it to use in the drop-down list.
 	cf.first = q_("Heliocentric distance vs. Time");
 	cf.second = GraphHDistanceVsTime;
 	functions.append(cf);
@@ -2532,6 +2533,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			if (maxY1 > 1000.) maxY1 = 180.0;
 			break;
 		case GraphHDistanceVsTime:
+			// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it.
 			yAxis1Legend = QString("%1, %2").arg(q_("Heliocentric distance"), distMU);
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 50.0;
@@ -2572,6 +2574,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			if (maxY2 > 1000.) maxY2 = 180.0;
 			break;
 		case GraphHDistanceVsTime:
+			// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(q_("Heliocentric distance"), distMU);
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 50.0;
@@ -2859,9 +2862,9 @@ void AstroCalcDialog::setPhenomenaHeaderNames()
 	phenomenaHeader << q_("Date and Time");
 	phenomenaHeader << q_("Object 1");
 	phenomenaHeader << q_("Object 2");
-	phenomenaHeader << q_("Separation");
-	phenomenaHeader << q_("Elongation");
-	phenomenaHeader << q_("Angular distance");
+	phenomenaHeader << q_("Separation");	
+	phenomenaHeader << q_("Solar Elongation");
+	phenomenaHeader << q_("Lunar Elongation");
 	ui->phenomenaTreeWidget->setHeaderLabels(phenomenaHeader);
 
 	// adjust the column width
