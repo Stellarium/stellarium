@@ -65,10 +65,10 @@ private slots:
 	void toggleTypeConnection(bool);
 	void toggleTypeVirtual(bool);
 	void toggleTypeRTS2(bool);
-    void toggleTypeINDI(bool enabled);
+	void toggleTypeINDI(bool enabled);
 	
 	void deviceModelSelected(const QString&);
-	bool validateHost(QString hostName);
+
 
 signals:
 	void changesSaved(QString name, ConnectionType type);
