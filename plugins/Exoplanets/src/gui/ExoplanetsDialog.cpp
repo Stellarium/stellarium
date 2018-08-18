@@ -487,7 +487,7 @@ void ExoplanetsDialog::drawDiagram()
 	if (!ui->maxY->text().isEmpty())
 		maxY = ui->maxY->text().toDouble();
 
-	ui->customPlot->addGraph();
+	ui->customPlot->addGraph();	
 	ui->customPlot->graph(0)->setData(x, y);
 	ui->customPlot->graph(0)->setPen(QPen(Qt::blue));
 	ui->customPlot->graph(0)->setLineStyle(QCPGraph::lsNone);
@@ -521,6 +521,21 @@ void ExoplanetsDialog::populateDiagramsList()
 {
 	Q_ASSERT(ui->comboAxisX);
 	Q_ASSERT(ui->comboAxisY);
+
+	QColor axisColor(Qt::white);
+	QPen axisPen(axisColor, 1);
+
+	ui->customPlot->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->customPlot->xAxis->setLabelColor(axisColor);
+	ui->customPlot->xAxis->setTickLabelColor(axisColor);
+	ui->customPlot->xAxis->setBasePen(axisPen);
+	ui->customPlot->xAxis->setTickPen(axisPen);
+	ui->customPlot->xAxis->setSubTickPen(axisPen);
+	ui->customPlot->yAxis->setLabelColor(axisColor);
+	ui->customPlot->yAxis->setTickLabelColor(axisColor);
+	ui->customPlot->yAxis->setBasePen(axisPen);
+	ui->customPlot->yAxis->setTickPen(axisPen);
+	ui->customPlot->yAxis->setSubTickPen(axisPen);
 
 	QComboBox* axisX = ui->comboAxisX;
 	QComboBox* axisY = ui->comboAxisY;
