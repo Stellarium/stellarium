@@ -2584,6 +2584,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	QColor axisColor(Qt::white);
 	QPen axisPen(axisColor, 1);
 
+	ui->graphsPlot->setLocale(QLocale(StelApp::getInstance().getLocaleMgr().getAppLanguage()));
 	ui->graphsPlot->xAxis->setLabel(xAxisStr);
 	ui->graphsPlot->yAxis->setLabel(yAxis1Legend);
 	ui->graphsPlot->yAxis2->setLabel(yAxis2Legend);
@@ -2643,6 +2644,7 @@ void AstroCalcDialog::prepareMonthlyEleveationAxesAndGraph()
 	QColor axisColor(Qt::white);
 	QPen axisPen(axisColor, 1);
 
+	ui->monthlyElevationGraph->setLocale(QLocale(StelApp::getInstance().getLocaleMgr().getAppLanguage()));
 	ui->monthlyElevationGraph->xAxis->setLabel(xAxisStr);
 	ui->monthlyElevationGraph->yAxis->setLabel(yAxisStr);
 
