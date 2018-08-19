@@ -348,6 +348,7 @@ private:
 	float absoluteStarScaleCCD;     //!< Value to store the absolute star scale when switching off CCD view
 	bool flagMoonScaleMain;	        //!< Flag to track of usage zooming of the Moon
 	bool flagMinorBodiesScaleMain;  //!< Flag to track of usage zooming of minor bodies
+	float milkyWaySaturation;
 
 	double maxEyepieceAngle;        //!< The maximum aFOV of any eyepiece.
 	bool flagRequireSelection;      //!< Read from the ini file, whether an object is required to be selected to zoom in.

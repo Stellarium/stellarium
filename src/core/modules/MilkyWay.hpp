@@ -42,8 +42,8 @@ class MilkyWay : public StelModule
 		   WRITE setColor
 		   NOTIFY colorChanged)
 	Q_PROPERTY(double saturation
-			   MEMBER saturation
-			   NOTIFY saturationChanged)
+		   MEMBER saturation
+		   NOTIFY saturationChanged)
 public:
 	MilkyWay();
 	virtual ~MilkyWay();
