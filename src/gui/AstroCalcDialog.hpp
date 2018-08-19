@@ -192,6 +192,7 @@ private slots:
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 	void changePCTab(int index);
+	void changeGraphsTab(int index);
 
 	void updateSolarSystemData();
 

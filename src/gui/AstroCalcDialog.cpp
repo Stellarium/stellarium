@@ -326,6 +326,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawMonthlyElevationGraph()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
+	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
 	connect(ui->tabWidgetPC, SIGNAL(currentChanged(int)), this, SLOT(changePCTab(int)));
 
 	updateTabBarListWidgetWidth();
@@ -3872,26 +3873,30 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 	if (ui->stackListWidget->row(current) == 0)
 		currentCelestialPositions();
 
-	// special case - plot the graph when tab 'Alt. vs Time' is visible
+	// special case - graphs
 	if (ui->stackListWidget->row(current) == 3)
 	{
-		plotAltVsTime = true;
-		drawAltVsTimeDiagram(); // Is object already selected?
-	}
-	else
-		plotAltVsTime = false;
+		int idx = ui->tabWidgetGraphs->currentIndex();
+		if (idx==0) // First tab - 'Alt. vs Time' is visible
+		{
+			plotAltVsTime = true;
+			drawAltVsTimeDiagram(); // Is object already selected?
+		}
+		else
+			plotAltVsTime = false;
 
-	// special case - plot the graph when tab 'Monthly Elevation' is visible
-	if (ui->stackListWidget->row(current) == 4)
-	{
-		plotMonthlyElevation = true;
-		drawMonthlyElevationGraph(); // Is object already selected?
+		if (idx==1) // Second tab - 'Monthly Elevation' is visible
+		{
+			plotMonthlyElevation = true;
+			drawMonthlyElevationGraph(); // Is object already selected?
+		}
+		else
+			plotMonthlyElevation = false;
+
 	}
-	else
-		plotMonthlyElevation = false;
 
 	// special case (PCalc)
-	if (ui->stackListWidget->row(current) == 7)
+	if (ui->stackListWidget->row(current) == 5)
 	{
 		int index = ui->tabWidgetPC->currentIndex();
 		if (index==0) // First tab: Data
@@ -3918,6 +3923,20 @@ void AstroCalcDialog::changePCTab(int index)
 	{
 		plotDistanceGraph = true;
 		drawDistanceGraph();
+	}
+}
+
+void AstroCalcDialog::changeGraphsTab(int index)
+{
+	if (index==0) // First tab: 'Alt. vs Time'
+	{
+		plotAltVsTime = true;
+		drawAltVsTimeDiagram(); // Is object already selected?
+	}
+	if (index==1) // Second tab: 'Monthly Elevation'
+	{
+		plotMonthlyElevation = true;
+		drawMonthlyElevationGraph(); // Is object already selected?
 	}
 }
 

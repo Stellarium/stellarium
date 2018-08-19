@@ -10,7 +10,7 @@
     <height>407</height>
    </rect>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_4">
+  <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -51,7 +51,7 @@
        <number>0</number>
       </property>
       <property name="rightMargin">
-       <number>4</number>
+       <number>0</number>
       </property>
       <property name="bottomMargin">
        <number>0</number>
@@ -132,10 +132,7 @@
      <property name="frameShadow">
       <enum>QFrame::Plain</enum>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <property name="spacing">
-       <number>0</number>
-      </property>
+     <layout class="QGridLayout" name="gridLayout_6">
       <property name="leftMargin">
        <number>0</number>
       </property>
@@ -148,7 +145,10 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="0" column="0">
        <widget class="QListWidget" name="stackListWidget">
         <property name="minimumSize">
          <size>
@@ -174,6 +174,9 @@
         <property name="horizontalScrollBarPolicy">
          <enum>Qt::ScrollBarAlwaysOff</enum>
         </property>
+        <property name="dragDropMode">
+         <enum>QAbstractItemView::DragDrop</enum>
+        </property>
         <property name="iconSize">
          <size>
           <width>48</width>
@@ -182,6 +185,9 @@
         </property>
         <property name="flow">
          <enum>QListView::LeftToRight</enum>
+        </property>
+        <property name="isWrapping" stdset="0">
+         <bool>false</bool>
         </property>
         <property name="resizeMode">
          <enum>QListView::Adjust</enum>
@@ -230,40 +236,11 @@
         </item>
         <item>
          <property name="text">
-          <string>Alt. vs. Time</string>
-         </property>
-         <property name="toolTip">
-          <string>Altitude vs. Time</string>
+          <string>Graphs</string>
          </property>
          <property name="icon">
           <iconset>
            <normalon>:/graphicGui/tabicon-AstroCalc-AltVsTime.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string comment="Monthly Elevation">ME</string>
-         </property>
-         <property name="toolTip">
-          <string>Monthly Elevation</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-MonthlyElevation.png</normalon>
-          </iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Graphs</string>
-         </property>
-         <property name="toolTip">
-          <string>Graphs on the current year</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normalon>:/graphicGui/tabicon-AstroCalc-Graphs.png</normalon>
           </iconset>
          </property>
         </item>
@@ -295,7 +272,7 @@
         </item>
        </widget>
       </item>
-      <item>
+      <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
          <number>0</number>
@@ -798,288 +775,359 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage4">
          <layout class="QGridLayout" name="gridLayout_5">
-          <item row="1" column="0" colspan="2">
-           <widget class="QLabel" name="altVsTimeLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
+          <item row="2" column="0">
+           <widget class="QTabWidget" name="tabWidgetGraphs">
+            <property name="tabPosition">
+             <enum>QTabWidget::South</enum>
             </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
+            <property name="currentIndex">
+             <number>0</number>
             </property>
-            <property name="text">
-             <string>Please select object to plot its graph 'Altitude vs. Time'.</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_14">
-            <item>
-             <widget class="QCheckBox" name="sunAltitudeCheckBox">
-              <property name="text">
-               <string>Also the graph for the Sun</string>
+            <widget class="QWidget" name="tabAltVsTime">
+             <attribute name="title">
+              <string>Altitude vs. Time</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_12">
+              <property name="leftMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="moonAltitudeCheckBox">
-              <property name="text">
-               <string>Also the graph for the Moon</string>
+              <property name="topMargin">
+               <number>0</number>
               </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QCheckBox" name="positiveAltitudeOnlyCheckBox">
-              <property name="toolTip">
-               <string>Draw only the positive part of the graph</string>
+              <property name="rightMargin">
+               <number>0</number>
               </property>
-              <property name="text">
-               <string>Above horizon only</string>
+              <property name="bottomMargin">
+               <number>4</number>
               </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="0" column="0" colspan="2">
-           <widget class="QCustomPlot" name="altVsTimePlot" native="true">
-            <property name="enabled">
-             <bool>true</bool>
-            </property>
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
+              <item row="0" column="0">
+               <widget class="QCustomPlot" name="altVsTimePlot" native="true">
+                <property name="enabled">
+                 <bool>true</bool>
+                </property>
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QLabel" name="altVsTimeLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Please select object to plot its graph 'Altitude vs. Time'.</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_14">
+                <item>
+                 <widget class="QCheckBox" name="sunAltitudeCheckBox">
+                  <property name="text">
+                   <string>Also the graph for the Sun</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="moonAltitudeCheckBox">
+                  <property name="text">
+                   <string>Also the graph for the Moon</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="positiveAltitudeOnlyCheckBox">
+                  <property name="toolTip">
+                   <string>Draw only the positive part of the graph</string>
+                  </property>
+                  <property name="text">
+                   <string>Above horizon only</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tabMontlyElevation">
+             <attribute name="title">
+              <string>Monthly Elevation</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_15">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QLabel" name="monthlyElevationCelestialObjectLabel">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string notr="true">Celestial object</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0">
+               <widget class="QCustomPlot" name="monthlyElevationGraph" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <widget class="QLabel" name="monthlyElevationLabel">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>30</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Please select object to plot its 'Monthly Elevation' graph for the current year at selected time.</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+                <property name="wordWrap">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+              <item row="3" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_10">
+                <item>
+                 <widget class="QCheckBox" name="monthlyElevationPositiveCheckBox">
+                  <property name="toolTip">
+                   <string>Draw only the positive part of the graph</string>
+                  </property>
+                  <property name="text">
+                   <string>Above horizon only</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QSlider" name="monthlyElevationTime">
+                  <property name="toolTip">
+                   <string>Local Time in hours</string>
+                  </property>
+                  <property name="maximum">
+                   <number>23</number>
+                  </property>
+                  <property name="pageStep">
+                   <number>1</number>
+                  </property>
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QLabel" name="monthlyElevationTimeInfo">
+                  <property name="minimumSize">
+                   <size>
+                    <width>60</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>60</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+            <widget class="QWidget" name="tabTwoGraphs">
+             <attribute name="title">
+              <string>Graphs</string>
+             </attribute>
+             <layout class="QGridLayout" name="gridLayout_7">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>4</number>
+              </property>
+              <item row="0" column="0" colspan="2">
+               <widget class="QLabel" name="graphsLabel">
+                <property name="font">
+                 <font>
+                  <weight>75</weight>
+                  <bold>true</bold>
+                 </font>
+                </property>
+                <property name="text">
+                 <string>Graphs on the current year</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+              <item row="1" column="0" colspan="2">
+               <widget class="QCustomPlot" name="graphsPlot" native="true">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+               </widget>
+              </item>
+              <item row="2" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_22">
+                <item>
+                 <widget class="QLabel" name="graphsFirstLabel">
+                  <property name="text">
+                   <string>First graph (red):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="graphsFirstComboBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="2" column="1">
+               <layout class="QHBoxLayout" name="horizontalLayout_23">
+                <item>
+                 <widget class="QLabel" name="graphsSecondLabel">
+                  <property name="text">
+                   <string>Second graph (yellow):</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="graphsSecondComboBox">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                  <property name="sizeAdjustPolicy">
+                   <enum>QComboBox::AdjustToMinimumContentsLength</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="3" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_24">
+                <item>
+                 <widget class="QLabel" name="graphsCelestialBodyLabel">
+                  <property name="text">
+                   <string>Celestial body:</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="graphsCelestialBodyComboBox">
+                  <property name="editable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="insertPolicy">
+                   <enum>QComboBox::NoInsert</enum>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="3" column="1">
+               <widget class="QPushButton" name="drawGraphsPushButton">
+                <property name="text">
+                 <string>Draw graphs</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
            </widget>
           </item>
          </layout>
         </widget>
         <widget class="QWidget" name="stackedWidgetPage5">
-         <layout class="QGridLayout" name="gridLayout_7">
-          <item row="3" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_10">
-            <item>
-             <widget class="QCheckBox" name="monthlyElevationPositiveCheckBox">
-              <property name="toolTip">
-               <string>Draw only the positive part of the graph</string>
-              </property>
-              <property name="text">
-               <string>Above horizon only</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QSlider" name="monthlyElevationTime">
-              <property name="toolTip">
-               <string>Local Time in hours</string>
-              </property>
-              <property name="maximum">
-               <number>23</number>
-              </property>
-              <property name="pageStep">
-               <number>1</number>
-              </property>
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QLabel" name="monthlyElevationTimeInfo">
-              <property name="minimumSize">
-               <size>
-                <width>60</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="maximumSize">
-               <size>
-                <width>60</width>
-                <height>16777215</height>
-               </size>
-              </property>
-              <property name="text">
-               <string/>
-              </property>
-              <property name="alignment">
-               <set>Qt::AlignCenter</set>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0" colspan="2">
-           <widget class="QLabel" name="monthlyElevationLabel">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Minimum">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>16777215</width>
-              <height>30</height>
-             </size>
-            </property>
-            <property name="text">
-             <string>Please select object to plot its 'Monthly Elevation' graph for the current year at selected time.</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-            <property name="wordWrap">
-             <bool>true</bool>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0" colspan="2">
-           <widget class="QCustomPlot" name="monthlyElevationGraph" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0" colspan="2">
-           <widget class="QLabel" name="monthlyElevationCelestialObjectLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string notr="true">Celestial object</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="stackedWidgetPage6">
-         <layout class="QGridLayout" name="gridLayout_6">
-          <item row="4" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_20">
-            <item>
-             <widget class="QLabel" name="graphsSecondLabel">
-              <property name="text">
-               <string>Second graph (yellow):</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="graphsSecondComboBox">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="4" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_19">
-            <item>
-             <widget class="QLabel" name="graphsFirstLabel">
-              <property name="text">
-               <string>First graph (red):</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="graphsFirstComboBox">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-              <property name="sizeAdjustPolicy">
-               <enum>QComboBox::AdjustToMinimumContentsLength</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="5" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_18">
-            <item>
-             <widget class="QLabel" name="graphsCelestialBodyLabel">
-              <property name="text">
-               <string>Celestial body:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="graphsCelestialBodyComboBox">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="5" column="1">
-           <widget class="QPushButton" name="drawGraphsPushButton">
-            <property name="text">
-             <string>Draw graphs</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0" colspan="2">
-           <widget class="QLabel" name="graphsLabel">
-            <property name="font">
-             <font>
-              <weight>75</weight>
-              <bold>true</bold>
-             </font>
-            </property>
-            <property name="text">
-             <string>Graphs on the current year</string>
-            </property>
-            <property name="alignment">
-             <set>Qt::AlignCenter</set>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0" colspan="2">
-           <widget class="QCustomPlot" name="graphsPlot" native="true">
-            <property name="sizePolicy">
-             <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-              <horstretch>0</horstretch>
-              <verstretch>0</verstretch>
-             </sizepolicy>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="stackedWidgetPage7">
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
@@ -1221,7 +1269,7 @@
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="stackedWidgetPage8">
+        <widget class="QWidget" name="stackedWidgetPage6">
          <layout class="QGridLayout" name="gridLayout_8">
           <item row="0" column="0">
            <layout class="QGridLayout" name="gridLayoutPCalc">
@@ -1267,7 +1315,7 @@
              <enum>QTabWidget::South</enum>
             </property>
             <property name="currentIndex">
-             <number>0</number>
+             <number>1</number>
             </property>
             <widget class="QWidget" name="tabData">
              <attribute name="title">
