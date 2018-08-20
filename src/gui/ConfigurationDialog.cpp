@@ -1239,6 +1239,9 @@ void ConfigurationDialog::newStarCatalogData()
 	Q_ASSERT(starCatalogDownloadReply);
 	Q_ASSERT(progressBar);
 
+	// Ignore data from redirection.  (Not needed after Qt 5.6)
+	if (!starCatalogDownloadReply->attribute(QNetworkRequest::RedirectionTargetAttribute).isNull())
+		return;
 	int size = starCatalogDownloadReply->bytesAvailable();
 	progressBar->setValue((float)progressBar->getValue()+(float)size/1024);
 	currentDownloadFile->write(starCatalogDownloadReply->read(size));
