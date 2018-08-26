@@ -201,13 +201,13 @@ msgstr "JNP"
 #: src/core/modules/GridLinesMgr.cpp:906
 msgctxt "zenith"
 msgid "Z"
-msgstr "Z"
+msgstr "Zenit"
 
 #. TRANSLATORS: Nadir
 #: src/core/modules/GridLinesMgr.cpp:908
 msgctxt "nadir"
 msgid "Z'"
-msgstr "N"
+msgstr "Nadir"
 
 #. TRANSLATORS: North Ecliptic Pole
 #: src/core/modules/GridLinesMgr.cpp:915 src/core/modules/GridLinesMgr.cpp:924
@@ -6439,12 +6439,12 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:623
 msgid "Occultations of bright stars by planets"
-msgstr ""
+msgstr "Zákryty jasných hvězd planetami"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:625
 msgid "Mutual occultations of planets"
-msgstr ""
+msgstr "Vzájemné zákryty planet"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:631
@@ -6683,12 +6683,16 @@ msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
+"Tento skript demonstruje zajímavé jevy - zákryty jasných hvězd planetami v "
+"letech 2000 až 2040."
 
 #: src/translations.h:666
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr ""
+"Tento skript demonstruje zajímavé a velmi vzácné jevy - vzájemné zákryty "
+"planet v letech 0 až 2500."
 
 #: src/translations.h:670
 msgid "&Undo"
@@ -16560,7 +16564,7 @@ msgstr "s"
 #: plugins/Observability/src/Observability.cpp:194
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr "Zapadá v %1 (ve %2)"
+msgstr "Zapadá v %1 (za %2)"
 
 #: plugins/Observability/src/Observability.cpp:195
 #, qt-format

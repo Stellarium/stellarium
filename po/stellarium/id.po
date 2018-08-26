@@ -109,7 +109,7 @@ msgstr "Lepaskan Konstelasi yang dipilih"
 
 #: src/core/modules/ConstellationMgr.cpp:146
 msgid "Select all constellations"
-msgstr ""
+msgstr "Pilih Semua Konstelasi - Konstelasi"
 
 #: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2506
 #: src/ui_dsoColorsDialog.h:652
@@ -123,11 +123,11 @@ msgstr "Nama bintang"
 
 #: src/core/modules/StarMgr.cpp:453
 msgid "Increase the magnitude limit for stars"
-msgstr ""
+msgstr "Meningkatkan Batas Magnitudo Bintang"
 
 #: src/core/modules/StarMgr.cpp:454
 msgid "Reduce the magnitude limit for stars"
-msgstr ""
+msgstr "Mengurangi Batas Magnitudo Bintang"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2777
 msgid "Meridian"
@@ -318,11 +318,11 @@ msgstr "Garis Bujur Oposisi/Konjungsi "
 
 #: src/core/modules/GridLinesMgr.cpp:1244
 msgid "Precession Circles"
-msgstr ""
+msgstr "Lingkaran Presisi"
 
 #: src/core/modules/GridLinesMgr.cpp:1246
 msgid "Colure Lines"
-msgstr ""
+msgstr "Garis Colure"
 
 #: src/core/modules/GridLinesMgr.cpp:1247
 msgid "Circumpolar Circles"
@@ -330,7 +330,7 @@ msgstr "Lingkaran Sirkumpolar"
 
 #: src/core/modules/GridLinesMgr.cpp:1248
 msgid "Celestial J2000 poles"
-msgstr ""
+msgstr "Kutub Celestia J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1249
 msgid "Celestial poles"
@@ -366,11 +366,11 @@ msgstr "Titik Ekuinoks"
 
 #: src/core/modules/GridLinesMgr.cpp:1257
 msgid "Solstice J2000 points"
-msgstr ""
+msgstr "Titik - Titik Solstice J2000"
 
 #: src/core/modules/GridLinesMgr.cpp:1258
 msgid "Solstice points"
-msgstr ""
+msgstr "Titik - Titik Solstice"
 
 #: src/core/modules/LandscapeMgr.cpp:470
 msgid "Atmosphere"
@@ -395,7 +395,7 @@ msgstr "Penerangan lanskap"
 
 #: src/core/modules/LandscapeMgr.cpp:475
 msgid "Landscape labels"
-msgstr ""
+msgstr "Penamaan Pemandangan"
 
 #: src/core/modules/LandscapeMgr.cpp:476 src/ui_viewDialog.h:2524
 msgid "Light pollution data from locations database"
@@ -403,15 +403,15 @@ msgstr "Data polusi cahaya dari database lokasi"
 
 #: src/core/modules/LandscapeMgr.cpp:478
 msgid "Increase light pollution"
-msgstr ""
+msgstr "Meningkatkan Polusi Cahaya"
 
 #: src/core/modules/LandscapeMgr.cpp:479
 msgid "Reduce light pollution"
-msgstr ""
+msgstr "Mengurangi Polusi Cahaya"
 
 #: src/core/modules/LandscapeMgr.cpp:480
 msgid "Cyclic change in light pollution"
-msgstr ""
+msgstr "Perubahan Siklus Polusi Cahaya"
 
 #: src/core/modules/LandscapeMgr.cpp:886 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
@@ -765,13 +765,13 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:257
 msgctxt "landform"
 msgid "sinus"
-msgstr ""
+msgstr "sinus"
 
 #. TRANSLATORS: Extensive land mass
 #: src/core/modules/NomenclatureItem.cpp:261
 msgctxt "landform"
 msgid "terra"
-msgstr ""
+msgstr "terra"
 
 #. TRANSLATORS: Tile-like, polygonal terrain
 #: src/core/modules/NomenclatureItem.cpp:265
@@ -818,12 +818,13 @@ msgstr "Nama situs pendaratan"
 #: src/core/modules/NomenclatureItem.cpp:293
 msgctxt "landform"
 msgid "undocumented landform type"
-msgstr ""
+msgstr "Jenis Bentuk Pertanahan yang belum didokumentasikan"
 
 #. TRANSLATORS: Description for landform 'albedo feature'
 #: src/core/modules/NomenclatureItem.cpp:471
 msgid "Geographic area distinguished by amount of reflected light."
 msgstr ""
+"Wilayah Geografis yang dipisahkan oleh banyaknya cahaya yang dipantulkan"
 
 #. TRANSLATORS: Description for landform 'arcus'
 #: src/core/modules/NomenclatureItem.cpp:475
@@ -838,7 +839,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
 msgid "Chain of craters."
-msgstr ""
+msgstr "Rentetan Kawah - kawah"
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:487
@@ -879,7 +880,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:515
 msgid "Active volcanic center."
-msgstr ""
+msgstr "Pusat Volkanik aktif"
 
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
@@ -929,12 +930,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "Tanah Longsor"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
 msgid "Complex of intersecting valleys or ridges."
-msgstr ""
+msgstr "Kompleks Perpotongan lembah atau punggung bukit"
 
 #. TRANSLATORS: Description for landform 'lacuna'
 #: src/core/modules/NomenclatureItem.cpp:559
@@ -945,12 +946,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:565
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
-msgstr ""
+msgstr "'Danau' atau tanah rata gelap yang kecil, dengan pembatas tajam"
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:570
 msgid "'Lake' or small plain."
-msgstr ""
+msgstr "'Danau' atau tanah rata kecil"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:575
@@ -960,7 +961,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:579
 msgid "Small dark spot."
-msgstr ""
+msgstr "Titik Gelap Kecil"
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:583
@@ -1001,7 +1002,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'mons'
 #: src/core/modules/NomenclatureItem.cpp:619
 msgid "Mountain."
-msgstr ""
+msgstr "Gunung"
 
 #. TRANSLATORS: Description for landform 'oceanus'
 #: src/core/modules/NomenclatureItem.cpp:623
@@ -1115,7 +1116,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
 msgid "Valley."
-msgstr ""
+msgstr "Lembah"
 
 #. TRANSLATORS: Description for landform 'vastitas'
 #: src/core/modules/NomenclatureItem.cpp:715

@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2018-08-19 14:02+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Smrman, 2018\n"
+"Last-Translator: stephane J <stephnane@gmail.com>, 2018\n"
 "Language-Team: French (https://www.transifex.com/stellarium/teams/80998/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,7 +109,7 @@ msgstr "Retirer selection of constellations"
 
 #: src/core/modules/ConstellationMgr.cpp:146
 msgid "Select all constellations"
-msgstr ""
+msgstr "Sélectionner toutes les constellations"
 
 #: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2506
 #: src/ui_dsoColorsDialog.h:652
@@ -123,11 +123,11 @@ msgstr "Noms des étoiles"
 
 #: src/core/modules/StarMgr.cpp:453
 msgid "Increase the magnitude limit for stars"
-msgstr ""
+msgstr "Augmenter la limite de magnitude pour les étoiles"
 
 #: src/core/modules/StarMgr.cpp:454
 msgid "Reduce the magnitude limit for stars"
-msgstr ""
+msgstr "Réduire la limite de magnitude pour les étoiles"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2777
 msgid "Meridian"
@@ -403,11 +403,11 @@ msgstr "Pollution lumineuse tirées de la base de données des lieux"
 
 #: src/core/modules/LandscapeMgr.cpp:478
 msgid "Increase light pollution"
-msgstr ""
+msgstr "Augmenter la pollution lumineuse"
 
 #: src/core/modules/LandscapeMgr.cpp:479
 msgid "Reduce light pollution"
-msgstr ""
+msgstr "Réduire la pollution lumineuse"
 
 #: src/core/modules/LandscapeMgr.cpp:480
 msgid "Cyclic change in light pollution"
@@ -1306,7 +1306,7 @@ msgstr "Description morphologique"
 #: src/core/modules/Nebula.cpp:1217
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "high concentration of stars toward the center"
-msgstr ""
+msgstr "forte concentration d'étoiles vers le centre"
 
 #: src/core/modules/Nebula.cpp:1220
 msgctxt "Shapley-Sawyer Concentration Class"
@@ -1989,7 +1989,7 @@ msgstr "Marqueur de sélection de planète"
 
 #: src/core/modules/SolarSystem.cpp:243
 msgid "Enlarge Moon"
-msgstr ""
+msgstr "Augmenter la taille de la lune"
 
 #: src/core/modules/SolarSystem.cpp:244
 msgid "Enlarge minor bodies"
@@ -2962,7 +2962,7 @@ msgstr ""
 
 #: src/core/StelObject.cpp:628
 msgid "This object never rises"
-msgstr ""
+msgstr "Cet objet ne se lève jamais"
 
 #: src/core/StelObject.cpp:633
 msgid "Polar day"
@@ -3594,7 +3594,7 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: src/gui/HelpDialog.cpp:257
 msgid "{Google Groups} - discuss Stellarium with other users."
-msgstr ""
+msgstr "{Google Groups} - discuter de Stellarium avec d'autres utilisateurs."
 
 #: src/gui/HelpDialog.cpp:316
 msgid "Developers"
@@ -3847,11 +3847,11 @@ msgstr "Système solaire"
 
 #: src/gui/ViewDialog.cpp:521
 msgid "Loading ..."
-msgstr ""
+msgstr "Chargement ..."
 
 #: src/gui/ViewDialog.cpp:572
 msgid "properties"
-msgstr ""
+msgstr "Propriétés"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
 #: src/gui/ViewDialog.cpp:1443
@@ -4050,11 +4050,11 @@ msgstr ""
 
 #: src/gui/LocationDialog.cpp:742
 msgid "GPS listening..."
-msgstr ""
+msgstr "Écoute GPS..."
 
 #: src/gui/LocationDialog.cpp:749
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "Déconnexion GPS..."
 
 #: src/gui/LocationDialog.cpp:761
 msgid "GPS location fix"
@@ -5242,7 +5242,7 @@ msgstr "Distance angulaire"
 
 #: src/gui/AstroCalcDialog.cpp:4882 src/gui/AstroCalcDialog.cpp:4885
 msgid "Day"
-msgstr ""
+msgstr "Jour"
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -8548,12 +8548,14 @@ msgstr "Luminosité de la lumière zodiacale :"
 
 #: src/ui_viewDialog.h:2542
 msgid "Milky Way brightness/saturation:"
-msgstr ""
+msgstr "Luminosité/saturation de la Voie Lactée"
 
 #: src/ui_viewDialog.h:2544
 msgid ""
 "Changing saturation from totally unsaturated (0.00) to default (1.00) value."
 msgstr ""
+"Changement de la saturation de \"totalement saturé\" (0.00) vers la valeur "
+"par défaut (1.00)."
 
 #: src/ui_viewDialog.h:2546
 msgid "Atmosphere visualization"
@@ -12718,7 +12720,7 @@ msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:786
 msgid "Hide invisible artificial satellites"
-msgstr ""
+msgstr "Masquer les satellites artificiels invisibles"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:788
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239

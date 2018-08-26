@@ -3293,7 +3293,7 @@ msgstr "Khalid, Sultana 和 Zaidi (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1533
 msgid "Henriksson (2017)"
-msgstr ""
+msgstr "Henriksson (2017)"
 
 #: src/gui/ConfigurationDialog.cpp:1534
 #, qt-format
@@ -4604,7 +4604,7 @@ msgstr "阿贝尔行星状星云表"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:584 src/translations.h:421
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas"
-msgstr "欧洲南方天文台/乌普萨拉联合项目 欧南台亚特拉斯（B项）"
+msgstr "ESO目录"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:585 src/translations.h:423
@@ -5041,11 +5041,11 @@ msgstr "对象2"
 
 #: src/gui/AstroCalcDialog.cpp:2869
 msgid "Solar Elongation"
-msgstr ""
+msgstr "日角距"
 
 #: src/gui/AstroCalcDialog.cpp:2870
 msgid "Lunar Elongation"
-msgstr ""
+msgstr "月角距"
 
 #: src/gui/AstroCalcDialog.cpp:3150
 msgid "Save calculated phenomena as..."
@@ -5078,12 +5078,12 @@ msgstr "掩"
 #: src/gui/AstroCalcDialog.cpp:3295 src/gui/AstroCalcDialog.cpp:3513
 #: src/gui/AstroCalcDialog.cpp:3723
 msgid "Angular distance from the Sun"
-msgstr ""
+msgstr "与太阳的角距离"
 
 #: src/gui/AstroCalcDialog.cpp:3298 src/gui/AstroCalcDialog.cpp:3516
 #: src/gui/AstroCalcDialog.cpp:3726
 msgid "Angular distance from the Moon"
-msgstr ""
+msgstr "与月球的角距离"
 
 #: src/gui/AstroCalcDialog.cpp:3998
 msgctxt "Celestial object is observed..."
@@ -5127,19 +5127,19 @@ msgstr "自旋－轨道共振"
 
 #: src/gui/AstroCalcDialog.cpp:4732
 msgid "Days from today"
-msgstr ""
+msgstr "从今天开始的日数"
 
 #: src/gui/AstroCalcDialog.cpp:4733 src/gui/AstroCalcDialog.cpp:4882
 msgid "Linear distance"
-msgstr ""
+msgstr "线距离"
 
 #: src/gui/AstroCalcDialog.cpp:4734 src/gui/AstroCalcDialog.cpp:4885
 msgid "Angular distance"
-msgstr "角距"
+msgstr "角距离"
 
 #: src/gui/AstroCalcDialog.cpp:4882 src/gui/AstroCalcDialog.cpp:4885
 msgid "Day"
-msgstr ""
+msgstr "日"
 
 #: src/gui/BookmarksDialog.cpp:106 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5994,7 +5994,7 @@ msgstr "蒙古"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:477
 msgid "Lokono"
-msgstr ""
+msgstr "Lokono"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:479
@@ -6201,7 +6201,7 @@ msgstr "2031年从火卫二观测到的双重食"
 #. TRANSLATORS: Name of script
 #: src/translations.h:569
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
-msgstr ""
+msgstr "奥林匹斯山2021年1月2日的日食"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:571
@@ -6322,7 +6322,7 @@ msgstr "新通用目录内的最佳天体"
 #. TRANSLATORS: Name of script
 #: src/translations.h:617
 msgid "Jupiter and triple shadow phenomena"
-msgstr ""
+msgstr "木星与卫星的三重影子现象"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:619
@@ -6529,7 +6529,7 @@ msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
-msgstr ""
+msgstr "展示罕见事件的中期状态 - 1900年至2100年木星卫星的三重影子现象。所有事件都以动态时间给出。"
 
 #: src/translations.h:664
 msgid ""
@@ -9698,11 +9698,11 @@ msgstr "含章动"
 msgid ""
 "Auto-enable atmosphere and landscape when selecting a celestial body in the "
 "location window."
-msgstr ""
+msgstr "在位置窗口中选择天体时自动启用大气和地景。"
 
 #: src/ui_configurationDialog.h:1640
 msgid "Auto-enabling for the environment"
-msgstr ""
+msgstr "自动启用环境"
 
 #: src/ui_configurationDialog.h:1642
 msgid "Flash a short message when toggling mount mode."
@@ -10239,7 +10239,7 @@ msgstr "所选的天体间线距离与角距离转换"
 
 #: src/ui_astroCalcDialog.h:1270
 msgid "red graph: linear distance; yellow graph: angular distance"
-msgstr ""
+msgstr "红色图像：线距离；黄色图像：角距离"
 
 #: src/ui_bookmarksDialog.h:195
 msgid "Add date and time"
@@ -12082,13 +12082,13 @@ msgstr "添加新卫星"
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
-msgstr ""
+msgstr "确保要添加的人造卫星包含在人造卫星配置对话框的“源”选项卡中列出的其中一个URL中。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:504
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
-msgstr ""
+msgstr "转到“卫星”选项卡，然后单击“+”按钮。 选择您要添加的卫星，然后选择“添加”按钮。"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:506
 msgid "Technical notes"
