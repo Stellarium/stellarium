@@ -171,7 +171,7 @@ void SatellitesDialog::createDialogContent()
 	filterModel->setSourceModel(plugin->getSatellitesListModel());
 	filterModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->satellitesList->setModel(filterModel);
-	connect(ui->lineEditSearch, SIGNAL(textEdited(QString)),
+	connect(ui->lineEditSearch, SIGNAL(textChanged(QString)),
 		filterModel, SLOT(setFilterWildcard(QString)));
 
 	QAction *clearAction = ui->lineEditSearch->addAction(QIcon(":/graphicGui/backspace-white.png"),
