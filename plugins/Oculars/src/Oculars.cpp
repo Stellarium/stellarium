@@ -593,8 +593,8 @@ void Oculars::init()
 		// assume all is well
 		ready = true;
 
-		setFlagRequireSelection(settings->value("require_selection_to_zoom", 1.0).toBool());
-		flagScaleImageCircle = settings->value("use_max_exit_circle", 0.0).toBool();
+		setFlagRequireSelection(settings->value("require_selection_to_zoom", true).toBool());
+		flagScaleImageCircle = settings->value("use_max_exit_circle", false).toBool();
 		int ocularCount = settings->value("ocular_count", 0).toInt();
 		int actualOcularCount = ocularCount;
 		for (int index = 0; index < ocularCount; index++)
@@ -786,6 +786,8 @@ void Oculars::setFlagScaleImageCircle(bool state)
 		determineMaxEyepieceAngle();
 	}
 	flagScaleImageCircle = state;
+	settings->setValue("use_max_exit_circle", state);
+	settings->sync();
 	emit flagScaleImageCircleChanged(state);
 }
 
