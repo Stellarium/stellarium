@@ -110,7 +110,7 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Used to get a list of objects which are near to some position.
-	//! @param v a vector representing the position in th sky around which to search for nebulae.
+	//! @param v a vector representing the position in th sky around which to search for exoplanets.
 	//! @param limitFov the field of view around the position v in which to search for exoplanets.
 	//! @param core the StelCore to use for computations.
 	//! @return an list containing the exoplanets located inside the limitFov circle around position v.

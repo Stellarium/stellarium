@@ -104,8 +104,8 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Used to get a list of objects which are near to some position.
-	//! @param v a vector representing the position in th sky around which to search for nebulae.
-	//! @param limitFov the field of view around the position v in which to search for satellites.
+	//! @param v a vector representing the position in th sky around which to search for pulsars.
+	//! @param limitFov the field of view around the position v in which to search for pulsars.
 	//! @param core the StelCore to use for computations.
 	//! @return an list containing the satellites located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
