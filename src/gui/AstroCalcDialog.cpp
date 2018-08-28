@@ -4808,7 +4808,6 @@ void AstroCalcDialog::drawDistanceGraph()
 		return;
 	}
 
-	// X axis - time; Y axis - altitude
 	QList<double> aX, aY1, aY2;
 	Vec3d posFCB, posSCB;
 	double currentJD = core->getJD();
@@ -4831,36 +4830,47 @@ void AstroCalcDialog::drawDistanceGraph()
 	}
 	core->setJD(currentJD);
 
-	QVector<double> x = aX.toVector(), y1 = aY1.toVector(), y2 = aY2.toVector();
+	QVector<double> x = aX.toVector(), y1 = aY1.toVector(), y2;
 
 	double minY1a = aY1.first();
 	double maxY1a = aY1.first();
-	double minY2a = aY2.first();
-	double maxY2a = aY2.first();
 
 	for (auto temp : aY1)
 	{
 		if (maxY1a < temp) maxY1a = temp;
 		if (minY1a > temp) minY1a = temp;
 	}
-	for (auto temp : aY2)
-	{
-		if (maxY2a < temp) maxY2a = temp;
-		if (minY2a > temp) minY2a = temp;
-	}
 
 	minYld = minY1a;
 	maxYld = maxY1a;
-	minYad = minY2a;
-	maxYad = maxY2a;
+
+	if (!aY2.isEmpty()) // Avoid possible crash!
+	{
+		y2 = aY2.toVector();
+
+		double minY2a = aY2.first();
+		double maxY2a = aY2.first();
+
+		for (auto temp : aY2)
+		{
+			if (maxY2a < temp) maxY2a = temp;
+			if (minY2a > temp) minY2a = temp;
+		}
+
+		minYad = minY2a;
+		maxYad = maxY2a;
+	}
 
 	prepareDistanceAxesAndGraph();
 
 	ui->pcDistanceGraphPlot->graph(0)->setData(x, y1);
 	ui->pcDistanceGraphPlot->graph(0)->setName("[LD]");
-	ui->pcDistanceGraphPlot->graph(1)->setData(x, y2);
-	ui->pcDistanceGraphPlot->graph(1)->setName("[AD]");	
-	ui->pcDistanceGraphPlot->replot();	
+	if (!aY2.isEmpty()) // Avoid possible crash!
+	{
+		ui->pcDistanceGraphPlot->graph(1)->setData(x, y2);
+		ui->pcDistanceGraphPlot->graph(1)->setName("[AD]");
+	}
+	ui->pcDistanceGraphPlot->replot();
 }
 
 void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
