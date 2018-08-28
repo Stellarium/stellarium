@@ -207,7 +207,7 @@ static void dpper(double e3,     double ee2,    double peo,     double pgho,   d
 
 	/* kill warning */
 	inclo = 0.;
-	static_cast<void>(inclo);
+	static_cast<void>(inclo);	
 
 	/* ---------------------- constants ----------------------------- */
 	zns   = 1.19459e-5;
