@@ -95,7 +95,7 @@ public:
 	//! @param v a vector representing the position in th sky around which to search for novae.
 	//! @param limitFov the field of view around the position v in which to search for novae.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the satellites located inside the limitFov circle around position v.
+	//! @return an list containing the novae located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
