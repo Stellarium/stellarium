@@ -84,7 +84,8 @@ void SimbadLookupReply::httpQueryFinished()
 	QByteArray line;
 	bool found = false;
 	//qDebug() << reply->readAll();
-	reply->reset();
+	if (!reply->isSequential())
+		reply->reset();
 	while (!reply->atEnd())
 	{
 		line = reply->readLine();
