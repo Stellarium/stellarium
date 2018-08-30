@@ -92,6 +92,8 @@ InfoPanel::InfoPanel(QGraphicsItem* parent) : QGraphicsTextItem("", parent),
 			infoTextFilters |= StelObject::IAUConstellation;
 		if (conf->value("flag_show_sidereal_time", false).toBool())
 			infoTextFilters |= StelObject::SiderealTime;
+		if (conf->value("flag_show_rts_time", false).toBool())
+			infoTextFilters |= StelObject::RTSTime;
 		conf->endGroup();
 	}
 	else
