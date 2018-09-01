@@ -6429,12 +6429,12 @@ msgstr ""
 #. TRANSLATORS: Name of script
 #: src/translations.h:619
 msgid "Jupiter without Galilean satellites"
-msgstr ""
+msgstr "Jupiter bez Galileových měsíců"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:621
 msgid "Skybox Tiles"
-msgstr ""
+msgstr "Dlaždice z celé oblohy"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:623
@@ -6677,6 +6677,11 @@ msgid ""
 "are in its shadow (eclipse). This script demonstrates these rare phenomena "
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
+"Planeta Jupiter se občas zdánlivě ocitne bez svých měsíců, pokud čtyři "
+"Galileovské měsíce jsou současně neviditelné, neboť přechézí přes kotouč "
+"planety (přechod), jsou za planetou (zákryt), nebo jsou v jejím stínu "
+"(zatmění). Tento skript demonstruje tyto vzácné jevy od roku 1900 do 2100, "
+"časové údaje jsou v dynamickém čase."
 
 #: src/translations.h:665
 msgid ""
@@ -12363,12 +12368,16 @@ msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
+"Ujistěte se, že družice, které si přejete přidat, jsou zahrnuty do jedné z "
+"URL adres vypsaných na kartě Zdroje v dialogovém okně pro nastavení družic."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:504
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
+"Přejděte na kartu Družice a klikněte na tlačítko '+'. Vyberte družice, které"
+" si přejete přidat, a stiskněte tlačítko 'Přidat'."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:506
 msgid "Technical notes"
@@ -14178,11 +14187,11 @@ msgstr "Formát zobrazení času"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:237
 msgid "Sky Language"
-msgstr ""
+msgstr "Jazyk pro oblohu"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:243
 msgid "App Language"
-msgstr ""
+msgstr "Jazyk aplikace"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:259
 msgid "Show stars"

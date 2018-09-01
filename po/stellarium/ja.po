@@ -2802,37 +2802,37 @@ msgstr "視恒星時"
 #: src/core/StelObject.cpp:573 src/gui/AstroCalcDialog.cpp:473
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
-msgstr ""
+msgstr "正中時刻"
 
 #: src/core/StelObject.cpp:574
 msgctxt "celestial event"
 msgid "Rise"
-msgstr ""
+msgstr "出時刻"
 
 #: src/core/StelObject.cpp:575
 msgctxt "celestial event"
 msgid "Set"
-msgstr ""
+msgstr "没時刻"
 
 #: src/core/StelObject.cpp:613
 msgid "Daytime"
-msgstr ""
+msgstr "昼の長さ"
 
 #: src/core/StelObject.cpp:626
 msgid "Polar night"
-msgstr ""
+msgstr "極夜"
 
 #: src/core/StelObject.cpp:628
 msgid "This object never rises"
-msgstr ""
+msgstr "常に地平線下"
 
 #: src/core/StelObject.cpp:633
 msgid "Polar day"
-msgstr ""
+msgstr "白夜"
 
 #: src/core/StelObject.cpp:635
 msgid "Circumpolar (never sets)"
-msgstr ""
+msgstr "周極星"
 
 #: src/core/StelObject.cpp:638
 msgid "Polar dawn"
@@ -5075,7 +5075,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:4733 src/gui/AstroCalcDialog.cpp:4882
 msgid "Linear distance"
-msgstr ""
+msgstr "直線距離"
 
 #: src/gui/AstroCalcDialog.cpp:4734 src/gui/AstroCalcDialog.cpp:4885
 msgid "Angular distance"
@@ -9360,11 +9360,11 @@ msgstr "カタログ番号"
 
 #: src/ui_configurationDialog.h:1512
 msgid "Show time of rise, transit and set of celestial object"
-msgstr ""
+msgstr "天体の出没と正中時刻を表示する"
 
 #: src/ui_configurationDialog.h:1514
 msgid "Rises, transits and sets"
-msgstr ""
+msgstr "出没と正中"
 
 #: src/ui_configurationDialog.h:1516
 msgid "Spectral class, nebula type, etc."
@@ -9380,7 +9380,7 @@ msgstr "銀河座標"
 
 #: src/ui_configurationDialog.h:1520
 msgid "Additional buttons"
-msgstr ""
+msgstr "ボタンの追加"
 
 #: src/ui_configurationDialog.h:1521
 msgid "Show constellation boundaries button"

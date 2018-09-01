@@ -436,7 +436,6 @@ IF(${Qt5Gui_OPENGL_IMPLEMENTATION} MATCHES "GLES")
      SET(STEL_GLES_LIBS Qt5::Gui_EGL Qt5::Gui_GLESv2)
 ENDIF()
 
-
 # Tell CMake to run moc when necessary:
 SET(CMAKE_AUTOMOC ON)
 # As moc files are generated in the binary dir, tell CMake to always look for includes there:

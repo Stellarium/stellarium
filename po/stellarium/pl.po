@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2018-08-19 14:02+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Mateusz 202 <matek159@poczta.fm>, 2018\n"
+"Last-Translator: Dawid Patalong <tmhorpah@gmail.com>, 2018\n"
 "Language-Team: Polish (https://www.transifex.com/stellarium/teams/80998/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,7 +109,7 @@ msgstr "Usuń zaznaczenie gwiazdozbiorów"
 
 #: src/core/modules/ConstellationMgr.cpp:146
 msgid "Select all constellations"
-msgstr ""
+msgstr "Wybierz wszystkie gwiazdozbiory"
 
 #: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2506
 #: src/ui_dsoColorsDialog.h:652
@@ -123,11 +123,11 @@ msgstr "Etykiety gwiazd"
 
 #: src/core/modules/StarMgr.cpp:453
 msgid "Increase the magnitude limit for stars"
-msgstr ""
+msgstr "Zwiększ limi wielkości gwiazdowej dla gwiazd"
 
 #: src/core/modules/StarMgr.cpp:454
 msgid "Reduce the magnitude limit for stars"
-msgstr ""
+msgstr "Zmniejsz limit wielkości gwiazdowej dla gwiazd"
 
 #: src/core/modules/GridLinesMgr.cpp:637 src/ui_viewDialog.h:2777
 msgid "Meridian"
@@ -471,7 +471,7 @@ msgstr "wg skali Bortle'a"
 #: src/core/modules/NomenclatureItem.cpp:69
 msgctxt "landform"
 msgid "albedo feature"
-msgstr ""
+msgstr "Włącz funkcję Albedo"
 
 #. TRANSLATORS: Arc-shaped feature
 #: src/core/modules/NomenclatureItem.cpp:73
@@ -1341,17 +1341,17 @@ msgstr ""
 #: src/core/modules/Nebula.cpp:1240
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "loose concentration of stars"
-msgstr ""
+msgstr "Luźne zagęszczenie gwiazd"
 
 #: src/core/modules/Nebula.cpp:1243
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "very loose concentration of stars towards the center"
-msgstr ""
+msgstr "Bardzo luźne zagęszczenie gwiazd"
 
 #: src/core/modules/Nebula.cpp:1246
 msgctxt "Shapley-Sawyer Concentration Class"
 msgid "almost no concentration towards the center"
-msgstr ""
+msgstr "Prawie brak zagęszczenia gwiazd w centrum"
 
 #: src/core/modules/Nebula.cpp:1249
 msgctxt "Shapley-Sawyer Concentration Class"
@@ -2931,17 +2931,17 @@ msgstr "Pozorny czas gwiazdowy"
 #: src/core/StelObject.cpp:573 src/gui/AstroCalcDialog.cpp:473
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
-msgstr ""
+msgstr "Przejście"
 
 #: src/core/StelObject.cpp:574
 msgctxt "celestial event"
 msgid "Rise"
-msgstr ""
+msgstr "Wschód"
 
 #: src/core/StelObject.cpp:575
 msgctxt "celestial event"
 msgid "Set"
-msgstr ""
+msgstr "Zachód"
 
 #: src/core/StelObject.cpp:613
 msgid "Daytime"
@@ -2949,15 +2949,15 @@ msgstr ""
 
 #: src/core/StelObject.cpp:626
 msgid "Polar night"
-msgstr ""
+msgstr "Noc polarna"
 
 #: src/core/StelObject.cpp:628
 msgid "This object never rises"
-msgstr ""
+msgstr "Ten obiekt nigdy nie wschodzi"
 
 #: src/core/StelObject.cpp:633
 msgid "Polar day"
-msgstr ""
+msgstr "Dzień polarny"
 
 #: src/core/StelObject.cpp:635
 msgid "Circumpolar (never sets)"
@@ -3839,7 +3839,7 @@ msgstr "Układ Słoneczny"
 
 #: src/gui/ViewDialog.cpp:521
 msgid "Loading ..."
-msgstr ""
+msgstr "Wczytywanie... "
 
 #: src/gui/ViewDialog.cpp:572
 msgid "properties"
@@ -4034,19 +4034,19 @@ msgstr ""
 
 #: src/gui/LocationDialog.cpp:742
 msgid "GPS listening..."
-msgstr ""
+msgstr "Nasłuchiwanie GPS... "
 
 #: src/gui/LocationDialog.cpp:749
 msgid "GPS disconnecting..."
-msgstr ""
+msgstr "Rozłączanie GPS... "
 
 #: src/gui/LocationDialog.cpp:761
 msgid "GPS location fix"
-msgstr ""
+msgstr "GPS połączony z satelitami"
 
 #: src/gui/LocationDialog.cpp:784
 msgid "GPS:FAILED"
-msgstr ""
+msgstr "Błąd GPS"
 
 #: src/gui/LocationDialog.cpp:796 src/ui_locationDialogGui.h:513
 msgid "Get location from GPS"
@@ -4167,11 +4167,11 @@ msgstr "mapa nieba"
 
 #: src/gui/ScriptConsole.cpp:105
 msgid "Load Script"
-msgstr ""
+msgstr "Załaduj skrypt"
 
 #: src/gui/ScriptConsole.cpp:107 src/gui/ScriptConsole.cpp:127
 msgid "Script Files"
-msgstr ""
+msgstr "Pliki skryptu"
 
 #: src/gui/ScriptConsole.cpp:125
 msgid "Save Script"
@@ -4878,35 +4878,35 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1811
 msgid "1 Julian day"
-msgstr ""
+msgstr "1 dzień juliański"
 
 #: src/gui/AstroCalcDialog.cpp:1812
 msgid "5 Julian days"
-msgstr ""
+msgstr "5 dni juliańskich"
 
 #: src/gui/AstroCalcDialog.cpp:1813
 msgid "10 Julian days"
-msgstr ""
+msgstr "10 dni juliańskich"
 
 #: src/gui/AstroCalcDialog.cpp:1814
 msgid "15 Julian days"
-msgstr ""
+msgstr "15 dni juliańskich"
 
 #: src/gui/AstroCalcDialog.cpp:1815
 msgid "30 Julian days"
-msgstr ""
+msgstr "30 dni juliańskich"
 
 #: src/gui/AstroCalcDialog.cpp:1816
 msgid "60 Julian days"
-msgstr ""
+msgstr "60 dni juliańskich"
 
 #: src/gui/AstroCalcDialog.cpp:1817
 msgid "100 Julian days"
-msgstr ""
+msgstr "100 dni juliańskich"
 
 #: src/gui/AstroCalcDialog.cpp:1818
 msgid "1 Julian year"
-msgstr ""
+msgstr "1 rok juliański"
 
 #: src/gui/AstroCalcDialog.cpp:1819
 msgid "1 Gaussian year"
@@ -6540,6 +6540,8 @@ msgstr ""
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
+"Wygaszacz ekranu z różnymi wydarzeniami z układu słonecznego. Aż 300 "
+"wydarzeń! "
 
 #: src/translations.h:647
 msgid "A tour of the western constellations."
@@ -6824,27 +6826,27 @@ msgstr "Kursor w poz. %1, %2 Naciśnij ESC aby anulować"
 
 #: src/translations.h:705
 msgid "Back"
-msgstr ""
+msgstr "Wstecz"
 
 #: src/translations.h:706
 msgid "Forward"
-msgstr ""
+msgstr "Naprzód"
 
 #: src/translations.h:707
 msgid "Parent Directory"
-msgstr ""
+msgstr "Nadrzędny folder"
 
 #: src/translations.h:708
 msgid "Create New Folder"
-msgstr ""
+msgstr "Stwórz nowy folder"
 
 #: src/translations.h:709
 msgid "List View"
-msgstr ""
+msgstr "Widok listy"
 
 #: src/translations.h:710
 msgid "Detail View"
-msgstr ""
+msgstr "Widok szczegółów"
 
 #: src/translations.h:711
 msgid "Recent Places"
@@ -19028,7 +19030,7 @@ msgstr ""
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:574
 msgid "Custom Declination 1"
-msgstr ""
+msgstr "Własna deklinacja 1"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:575
 msgid "Geographic Location 1"
@@ -19081,11 +19083,11 @@ msgstr "Bieżąca planeta: Saturn"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:600
 msgid "Custom Declination 2"
-msgstr ""
+msgstr "Własna deklinacja 2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:601
 msgid "Selected Object Azimuth"
-msgstr ""
+msgstr "Azymut wybranego objektu"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:602
 msgid "Selected Object Hour Angle"

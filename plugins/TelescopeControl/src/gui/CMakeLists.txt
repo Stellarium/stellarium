@@ -1,12 +1,16 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
-set(CMAKE_AUTOUIC ON)
 
-add_library(TelescopeControl_gui
+SET(TelescopeControl_GUI_UIS
     slewDialog.ui
     telescopeDialog.ui
     telescopeConfigurationDialog.ui
     storedPointsDialog.ui
+    )
+
+QT5_WRAP_UI(TelescopeControl_GUI_UIS_H ${TelescopeControl_GUI_UIS})
+
+add_library(TelescopeControl_gui
     SlewDialog.hpp
     SlewDialog.cpp
     TelescopeDialog.hpp
@@ -15,6 +19,7 @@ add_library(TelescopeControl_gui
     TelescopeConfigurationDialog.cpp
     StoredPointsDialog.hpp
     StoredPointsDialog.cpp
+    ${TelescopeControl_GUI_UIS_H}
     )
 
 target_link_libraries(TelescopeControl_gui
