@@ -62,7 +62,7 @@ protected:
 	Ui_helpDialogForm* ui;
 
 private:
-	QString releaseURL, message;
+	QString message;
 	UpdateState updateState;
 	QNetworkAccessManager * networkManager;
 	QNetworkReply * downloadReply;

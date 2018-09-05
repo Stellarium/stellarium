@@ -58,7 +58,6 @@ HelpDialog::HelpDialog(QObject* parent)
 {
 	ui = new Ui_helpDialogForm;
 	message = "";
-	releaseURL = "";
 }
 
 HelpDialog::~HelpDialog()
