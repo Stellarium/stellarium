@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>664</width>
-    <height>498</height>
+    <height>538</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -563,12 +563,6 @@
                </property>
                <property name="text">
                 <string>Save either the current FOV and direction of view or all the current options for use at next startup. Restoring default settings requires a restart of Stellarium. </string>
-               </property>
-               <property name="scaledContents">
-                <bool>false</bool>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                </property>
                <property name="wordWrap">
                 <bool>true</bool>
@@ -2321,6 +2315,7 @@
   <tabstop>pluginConfigureButton</tabstop>
  </tabstops>
  <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections>

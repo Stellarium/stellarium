@@ -28,11 +28,23 @@
 
 class Ui_helpDialogForm;
 class QListWidgetItem;
+class QNetworkAccessManager;
+class QNetworkReply;
 
 class HelpDialog : public StelDialog
 {
 	Q_OBJECT
 public:
+	//! @enum UpdateState
+	//! Used for keeping for track of the download/update status
+	enum UpdateState {
+		Updating,				//!< Update in progress
+		CompleteNoUpdates,	//!< Update completed, there we no updates
+		CompleteUpdates,		//!< Update completed, there were updates
+		DownloadError,			//!< Error during download phase
+		OtherError				//!< Other error
+	};
+
 	HelpDialog(QObject* parent);
 	~HelpDialog();
 
@@ -48,6 +60,15 @@ protected:
 	virtual void createDialogContent();
 
 	Ui_helpDialogForm* ui;
+
+private:
+	QString releaseURL, message;
+	UpdateState updateState;
+	QNetworkAccessManager * networkManager;
+	QNetworkReply * downloadReply;
+
+signals:
+	void checkUpdatesComplete(void);
 
 private slots:
 	//! Show/bring to foreground the shortcut editor window.
@@ -66,6 +87,9 @@ private slots:
 	void refreshLog();
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
+
+	void checkUpdates(void);
+	void downloadComplete(QNetworkReply * reply);
 
 };
 

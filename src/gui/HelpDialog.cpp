@@ -36,6 +36,8 @@
 #include <QDir>
 #include <QProcess>
 #include <QSysInfo>
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
 
 #include "ui_helpDialogGui.h"
 #include "HelpDialog.hpp"
@@ -49,11 +51,14 @@
 #include "StelLogger.hpp"
 #include "StelStyle.hpp"
 #include "StelActionMgr.hpp"
+#include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
 	: StelDialog("Help", parent)
 {
 	ui = new Ui_helpDialogForm;
+	message = "";
+	releaseURL = "";
 }
 
 HelpDialog::~HelpDialog()
@@ -105,13 +110,94 @@ void HelpDialog::createDialogContent()
 	// About page
 	updateAboutText();
 
-	// Log page
+	// Log page	
 	ui->logPathLabel->setText(QString("%1/log.txt:").arg(StelFileMgr::getUserDir()));
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 
-	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+	// Set up download manager and the update schedule
+	networkManager = StelApp::getInstance().getNetworkAccessManager();
+	updateState = CompleteNoUpdates;
+	connect(ui->checkUpdatesButton, SIGNAL(clicked()), this, SLOT(checkUpdates()));
+	connect(this, SIGNAL(checkUpdatesComplete(void)), this, SLOT(updateAboutText()));
 
+	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
+}
+
+void HelpDialog::checkUpdates()
+{
+	if (networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+	{
+		if (updateState==HelpDialog::Updating)
+		{
+			qWarning() << "Already checking updates...";
+			return;
+		}
+
+		QUrl API("https://api.github.com/repos/Stellarium/stellarium/releases/latest");
+		connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+		QNetworkRequest request;
+		request.setUrl(API);
+		request.setRawHeader("User-Agent", StelUtils::getUserAgentString().toUtf8());
+		#if QT_VERSION >= 0x050600
+		request.setAttribute(QNetworkRequest::FollowRedirectsAttribute, true);
+		#endif
+		downloadReply = networkManager->get(request);
+
+		updateState = HelpDialog::Updating;
+	}
+}
+
+void HelpDialog::downloadComplete(QNetworkReply *reply)
+{
+	if (reply == Q_NULLPTR)
+		return;
+
+	disconnect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(downloadComplete(QNetworkReply*)));
+
+	if (reply->error() || reply->bytesAvailable()==0)
+	{
+		qWarning() << "Error: While trying to access"
+			   << reply->url().toString()
+			   << "the following error occured:"
+			   << reply->errorString();
+
+		reply->deleteLater();
+		downloadReply = Q_NULLPTR;
+		updateState = HelpDialog::DownloadError;
+		message = q_("Cannot check updates...");
+		return;
+	}
+
+	QVariantMap map;
+	try
+	{
+		map = StelJsonParser::parse(reply->readAll()).toMap();
+	}
+	catch (std::runtime_error &e)
+	{
+		qDebug() << "Answer format is wrong! Error: " << e.what();
+		message = q_("Cannot check updates...");
+		return;
+	}
+
+	updateState = HelpDialog::CompleteUpdates;
+
+	QString latestVersion = map["name"].toString();
+	latestVersion.replace("v","", Qt::CaseInsensitive);
+
+	int r = StelUtils::compareVersions(latestVersion, StelUtils::getApplicationVersion());
+	if (r==-1)
+		message = q_("Looks like you are using the development version of Stellarium.");
+	else if (r==0)
+		message = q_("This is latest stable version of Stellarium.");
+	else
+		message = QString("%1 <a href='%2'>%3</a>").arg(q_("This version of Stellarium is outdated!"), map["html_url"].toString(), q_("Download new version."));
+
+	reply->deleteLater();
+	downloadReply = Q_NULLPTR;
+
+	emit(checkUpdatesComplete());
 }
 
 void HelpDialog::showShortcutsWindow()
@@ -258,7 +344,6 @@ void HelpDialog::updateHelpText(void)
 	htmlText += "</p>\n";
 
 	htmlText += "</body></html>\n";
-#undef E
 
 	ui->helpBrowser->clear();
 	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
@@ -297,6 +382,8 @@ void HelpDialog::updateAboutText(void)
 	QString newHtml = "<h1>" + StelUtils::getApplicationName() + "</h1>";
 	// Note: this legal notice is not suitable for traslation
 	newHtml += QString("<h3>Copyright &copy; %1 Stellarium Developers</h3>").arg(COPYRIGHT_YEARS);
+	if (!message.isEmpty())
+		newHtml += "<p><strong>" + message + "</strong></p>";
 	// newHtml += "<p><em>Version 0.15 is dedicated in memory of our team member Barry Gerdes.</em></p>";
 	newHtml += "<p>This program is free software; you can redistribute it and/or ";
 	newHtml += "modify it under the terms of the GNU General Public License ";
