@@ -3652,7 +3652,11 @@
            <number>3</number>
           </property>
           <item row="1" column="0">
-           <widget class="QListWidget" name="surveysListWidget"/>
+           <widget class="QListWidget" name="surveysListWidget">
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+           </widget>
           </item>
           <item row="0" column="0">
            <widget class="QComboBox" name="surveyTypeComboBox"/>
@@ -3990,6 +3994,7 @@
   <tabstop>colorAsterismLabels</tabstop>
  </tabstops>
  <resources>
+  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections/>

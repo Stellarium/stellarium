@@ -54,12 +54,10 @@ void RemoteSyncDialog::createDialogContent()
 	rs = GETSTELMODULE(RemoteSync);
 	ui->setupUi(dialog);
 
-#ifdef Q_OS_WIN
-	//Kinetic scrolling for tablet pc and pc
+	// Kinetic scrolling
 	QList<QWidget *> addscroll;
 	addscroll << ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
-#endif
 
 	ui->pushButtonSelectProperties->setText(QChar(0x2192));
 	ui->pushButtonDeselectProperties->setText(QChar(0x2190));

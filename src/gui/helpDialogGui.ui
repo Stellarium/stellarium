@@ -240,6 +240,9 @@
       </item>
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
         <property name="currentIndex">
          <number>0</number>
         </property>

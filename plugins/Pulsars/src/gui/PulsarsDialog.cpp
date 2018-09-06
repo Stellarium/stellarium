@@ -76,12 +76,10 @@ void PulsarsDialog::createDialogContent()
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),
 		this, SLOT(retranslate()));
 
-#ifdef Q_OS_WIN
-	//Kinetic scrolling for tablet pc and pc
+	// Kinetic scrolling
 	QList<QWidget *> addscroll;
 	addscroll << ui->aboutTextBrowser;
 	installKineticScrolling(addscroll);
-#endif
 
 	// Settings tab / updates group
 	ui->displayModeCheckBox->setChecked(psr->getDisplayMode());

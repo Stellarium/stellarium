@@ -50,12 +50,10 @@ void MSConfigDialog::createDialogContent()
 	m_ui->setupUi(dialog);
 	m_ui->tabs->setCurrentIndex(0);
 
-#ifdef Q_OS_WIN
-	// Kinetic scrolling for tablet pc and pc
+	// Kinetic scrolling
 	QList<QWidget *> addscroll;
 	addscroll << m_ui->about;
 	installKineticScrolling(addscroll);
-#endif
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));

@@ -325,12 +325,10 @@ void SearchDialog::createDialogContent()
 
 	ui->lineEditSearchSkyObject->installEventFilter(this);	
 
-#ifdef Q_OS_WIN
-	//Kinetic scrolling for tablet pc and pc
+	// Kinetic scrolling
 	QList<QWidget *> addscroll;
 	addscroll << ui->objectsListView;
 	installKineticScrolling(addscroll);
-#endif
 
 	populateCoordinateSystemsList();
 	populateCoordinateAxis();

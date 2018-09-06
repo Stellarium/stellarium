@@ -150,6 +150,11 @@ void ConfigurationDialog::createDialogContent()
 	ui->configurationStackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 
+	// Kinetic scrolling
+	QList<QWidget *> addscroll;
+	addscroll << ui->pluginsListWidget << ui->scriptListWidget;
+	installKineticScrolling(addscroll);
+
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
@@ -184,12 +189,6 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->nutationCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseNutation(bool)));
 	ui->topocentricCheckBox->setChecked(core->getUseTopocentricCoordinates());
 	connect(ui->topocentricCheckBox, SIGNAL(toggled(bool)), core, SLOT(setUseTopocentricCoordinates(bool)));
-#ifdef Q_OS_WIN
-	//Kinetic scrolling for tablet pc and pc
-	QList<QWidget *> addscroll;
-	addscroll << ui->pluginsListWidget << ui->scriptListWidget;
-	installKineticScrolling(addscroll);
-#endif
 
 	// Selected object info
 	if (gui->getInfoTextFilters() == StelObject::InfoStringGroup(Q_NULLPTR))

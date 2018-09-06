@@ -94,12 +94,10 @@ void HelpDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-#ifdef Q_OS_WIN
-	//Kinetic scrolling for tablet pc and pc
+	// Kinetic scrolling
 	QList<QWidget *> addscroll;
 	addscroll << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
 	installKineticScrolling(addscroll);
-#endif
 
 	// Help page
 	updateHelpText();
@@ -114,7 +112,7 @@ void HelpDialog::createDialogContent()
 	connect(ui->stackedWidget, SIGNAL(currentChanged(int)), this, SLOT(updateLog(int)));
 	connect(ui->refreshButton, SIGNAL(clicked()), this, SLOT(refreshLog()));
 
-	// Set up download manager and the update schedule
+	// Set up download manager for checker of updates
 	networkManager = StelApp::getInstance().getNetworkAccessManager();
 	updateState = CompleteNoUpdates;
 	connect(ui->checkUpdatesButton, SIGNAL(clicked()), this, SLOT(checkUpdates()));

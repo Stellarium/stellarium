@@ -36,18 +36,19 @@
 #include <QSpinBox>
 #include <QDoubleSpinBox>
 #include <QLineEdit>
-#ifdef Q_OS_WIN
-	#include <QScroller>
-#endif
+#include <QScroller>
 
 StelDialog::StelDialog(QString dialogName, QObject* parent)
 	: QObject(parent)
 	, dialog(Q_NULLPTR)
 	, proxy(Q_NULLPTR)
-	, dialogName(dialogName)
+	, dialogName(dialogName)	
 {
 	if (parent == Q_NULLPTR)
 		setParent(StelMainView::getInstance().getGuiWidget());
+
+	// The kinetic scrolling is disabled by default
+	flagKineticScrolling = StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", false).toBool();
 }
 
 StelDialog::~StelDialog()
@@ -271,21 +272,17 @@ void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &p
 	new QAbstractButtonStelPropertyConnectionHelper(prop,checkBox);
 }
 
-#ifdef Q_OS_WIN
 void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 {
-	return; // Temporary disable feature, bug in Qt: https://bugreports.qt-project.org/browse/QTBUG-41299
-
-	if (StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", true).toBool() == false)
-		return;
-
-	for (auto* w : addscroll)
+	if (flagKineticScrolling)
 	{
-		QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
-		QScroller::scroller(w);
+		for (auto* w : addscroll)
+		{
+			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
+			QScroller::scroller(w);
+		}
 	}
 }
-#endif
 
 
 void StelDialog::updateNightModeProperty()
