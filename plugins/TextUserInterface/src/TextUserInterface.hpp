@@ -29,8 +29,6 @@
 
 class TuiNode;
 
-//! This is an example of a plug-in which can be dynamically loaded into stellarium
-// TODO: Update this doc. Is it really dynamically loadable? Or just left-over template documentation from the plugin template?
 //! The Text User Interface (TUI) plugin replaces the old (pre-0.10 series) text user interface.
 //! It used to be activated with M until the 0.14 series, but was changed to Alt-T for 0.15 and later (to be consistent with the Ctrl-T hiding of the GUI).
 class TextUserInterface : public StelModule

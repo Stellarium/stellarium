@@ -77,41 +77,6 @@ MinorPlanet::MinorPlanet(const QString& englishName,
 	specT(""),
 	specB("")
 {
-	//TODO: Fix the name
-	// - Detect numeric prefix and set number if any
-	// - detect provisional designation
-	// - create the HTML name
-	//Try to detect number
-	//TODO: Move this to the minor planet parse code in the plug-in?	
-	/*
-	QString name = englishName;
-	QRegExp bracketedNumberPrefixPattern("^\\((\\d+)\\)\\s");
-	QRegExp freeNumberPrefixPattern("^(\\d+)\\s[A-Za-z]{3,}");
-	if (bracketedNumberPrefixPattern.indexIn(name) == 0)
-	{
-		QString numberString = bracketedNumberPrefixPattern.cap(1);
-		bool ok = false;
-		number = numberString.toInt(&ok);
-		if (!ok)
-			number = 0;
-
-		//TODO: Handle a name consisting only of a number
-		name.remove(0, numberString.length() + 3);
-		htmlName = QString("(%1) ").arg(number);
-	}
-	else if (freeNumberPrefixPattern.indexIn(name) == 0)
-	{
-		QString numberString =freeNumberPrefixPattern.cap(1);
-		bool ok = false;
-		number = numberString.toInt(&ok);
-		if (!ok)
-			number = 0;
-
-		//TODO: Handle a name consisting only of a number
-		name.remove(0, numberString.length() + 3);
-		htmlName = QString("(%1) ").arg(number);
-	}*/
-
 	//Try to detect a naming conflict
 	if (englishName.endsWith('*'))
 		properName = englishName.left(englishName.count() - 1);
