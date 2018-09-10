@@ -557,7 +557,7 @@ void SearchDialog::manualPositionChanged()
 		}
 	}
 	mvmgr->setFlagTracking(false);
-	mvmgr->moveToJ2000(pos, aimUp, 0.05);
+	mvmgr->moveToJ2000(pos, aimUp, mvmgr->getAutoMoveDuration());
 	mvmgr->setFlagLockEquPos(useLockPosition);
 }
 

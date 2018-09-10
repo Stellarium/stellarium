@@ -31,6 +31,7 @@
 #include "StelJsonParser.hpp"
 #include "AngleSpinBox.hpp"
 #include "NebulaMgr.hpp"
+#include "StarMgr.hpp"
 
 #include <QFileDialog>
 #include <QDir>
@@ -153,19 +154,22 @@ void BookmarksDialog::addBookmarkButtonPressed()
 
 		QString raStr = "", decStr = "";
 		bool visibleFlag = false;
-		if (selected[0]->getType()=="CustomObject")
+		double fov = -1.0;
+
+		if (name.isEmpty() || selected[0]->getType()=="CustomObject")
 		{
-			if (name.isEmpty())
-			{
-				name = "Unnamed object";
-				nameI18n = q_("Unnamed object");
-			}
 			float ra, dec;
 			StelUtils::rectToSphe(&ra, &dec, selected[0]->getJ2000EquatorialPos(core));
-			raStr = StelUtils::radToHmsStr(ra, false);
-			decStr = StelUtils::radToDmsStr(dec, false);
+			raStr = StelUtils::radToHmsStr(ra, false).trimmed();
+			decStr = StelUtils::radToDmsStr(dec, false).trimmed();
 			if (name.contains("marker", Qt::CaseInsensitive))
 				visibleFlag = true;
+
+			if (name.isEmpty())
+			{
+				name = QString("%1, %2").arg(raStr, decStr);
+				fov = GETSTELMODULE(StelMovementMgr)->getCurrentFov();
+			}
 		}
 
 		bool dateTimeFlag = ui->dateTimeCheckBox->isChecked();
@@ -209,6 +213,8 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			bm.location = Location;
 		if (!visibleFlag)
 			bm.isVisibleMarker = visibleFlag;
+		if (fov > 0.0)
+			bm.fov = fov;
 
 		bookmarksCollection.insert(uuid, bm);
 
@@ -261,14 +267,57 @@ void BookmarksDialog::goToBookmark(QString uuid)
 
 		StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 		objectMgr->unSelect();
+
 		bool status = objectMgr->findAndSelect(bm.name);
+		float amd = mvmgr->getAutoMoveDuration();
 		if (!bm.ra.isEmpty() && !bm.dec.isEmpty() && !status)
 		{
 			Vec3d pos;
 			StelUtils::spheToRect(StelUtils::getDecAngle(bm.ra.trimmed()), StelUtils::getDecAngle(bm.dec.trimmed()), pos);
-			// Add a custom object on the sky
-			GETSTELMODULE(CustomObjectMgr)->addCustomObject(bm.name, pos, bm.isVisibleMarker);
-			status = objectMgr->findAndSelect(bm.name);
+			if (bm.name.contains("marker", Qt::CaseInsensitive))
+			{
+				// Add a custom object on the sky
+				GETSTELMODULE(CustomObjectMgr)->addCustomObject(bm.name, pos, bm.isVisibleMarker);
+				status = objectMgr->findAndSelect(bm.name);
+			}
+			else
+			{
+				// The unnamed stars
+				StelObjectP sobj;
+				const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
+				double fov = 5.0;
+				if (bm.fov > 0.0)
+					fov = bm.fov;
+
+				mvmgr->zoomTo(fov, 0.0);
+				mvmgr->moveToJ2000(pos, mvmgr->mountFrameToJ2000(Vec3d(0., 0., 1.)), 0.0);
+
+				QList<StelObjectP> candidates = GETSTELMODULE(StarMgr)->searchAround(pos, 0.5, core);
+				if (candidates.empty()) // The FOV is too big, let's reduce it
+				{
+					mvmgr->zoomTo(0.5*fov, 0.0);
+					candidates = GETSTELMODULE(StarMgr)->searchAround(pos, 0.5, core);
+				}
+
+				Vec3d winpos;
+				prj->project(pos, winpos);
+				float xpos = winpos[0];
+				float ypos = winpos[1];
+				float best_object_value = 1000.f;
+				for (const auto& obj : candidates)
+				{
+					prj->project(obj->getJ2000EquatorialPos(core), winpos);
+					float distance = std::sqrt((xpos-winpos[0])*(xpos-winpos[0]) + (ypos-winpos[1])*(ypos-winpos[1]));
+					if (distance < best_object_value)
+					{
+						best_object_value = distance;
+						sobj = obj;
+					}
+				}
+
+				if (sobj)
+					status = objectMgr->setSelectedObject(sobj);
+			}
 		}
 
 		if (status)
@@ -276,7 +325,7 @@ void BookmarksDialog::goToBookmark(QString uuid)
 			const QList<StelObjectP> newSelected = objectMgr->getSelectedObject();
 			if (!newSelected.empty())
 			{
-				mvmgr->moveToObject(newSelected[0], mvmgr->getAutoMoveDuration());
+				mvmgr->moveToObject(newSelected[0], amd);
 				mvmgr->setFlagTracking(true);
 			}
 		}
@@ -327,6 +376,9 @@ void BookmarksDialog::loadBookmarks()
 					bm.dec = Dec;
 
 				bm.isVisibleMarker = bookmarkData.value("isVisibleMarker", false).toBool();
+				double fov = bookmarkData.value("fov").toDouble();
+				if (fov > 0.0)
+					bm.fov = fov;
 
 				bookmarksCollection.insert(bookmarkKey, bm);
 				addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
@@ -348,7 +400,7 @@ void BookmarksDialog::importBookmarks()
 	QString originalBookmarksFile = bookmarksJsonPath;
 
 	QString filter = "JSON (*.json)";
-	bookmarksJsonPath = QFileDialog::getOpenFileName(0, q_("Import bookmarks"), QDir::homePath(), filter);
+	bookmarksJsonPath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Import bookmarks"), QDir::homePath(), filter);
 
 	loadBookmarks();
 
@@ -361,7 +413,7 @@ void BookmarksDialog::exportBookmarks()
 	QString originalBookmarksFile = bookmarksJsonPath;
 
 	QString filter = "JSON (*.json)";
-	bookmarksJsonPath = QFileDialog::getSaveFileName(0, q_("Export bookmarks as..."), QDir::homePath() + "/bookmarks.json", filter);
+	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Export bookmarks as..."), QDir::homePath() + "/bookmarks.json", filter);
 
 	saveBookmarks();
 
@@ -391,7 +443,7 @@ void BookmarksDialog::saveBookmarks()
 
 	    bookmark sp = i.value();
 	    QVariantMap bm;
-	    bm.insert("name",	sp.name);
+	    bm.insert("name", sp.name);
 	    if (!sp.nameI18n.isEmpty())
 		    bm.insert("nameI18n", sp.nameI18n);
 	    if (!sp.ra.isEmpty())
@@ -404,6 +456,8 @@ void BookmarksDialog::saveBookmarks()
 		    bm.insert("location", sp.location);
 	    if (sp.isVisibleMarker)
 		    bm.insert("isVisibleMarker", sp.isVisibleMarker);
+	    if (sp.fov > 0.0)
+		    bm.insert("fov", sp.fov);
 
 	    bookmarksDataList.insert(i.key(), bm);
 	}

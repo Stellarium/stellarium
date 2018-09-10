@@ -239,7 +239,7 @@ QString radToHmsStrAdapt(const double angle)
  Convert an angle in radian to a hms formatted string
  If decimal is true,  output should be like this: "  16h29m55.3s"
  If decimal is true,  output should be like this: "  16h20m00.4s"
- If decimal is false, output should be like this: "0h26m5s"
+ If decimal is false, output should be like this: "   0h26m5s"
 *************************************************************************/
 QString radToHmsStr(const double angle, const bool decimal)
 {

@@ -40,6 +40,7 @@ struct bookmark
 	bool isVisibleMarker;
 	QString jd;
 	QString location;
+	double fov;
 };
 Q_DECLARE_METATYPE(bookmark)
 
