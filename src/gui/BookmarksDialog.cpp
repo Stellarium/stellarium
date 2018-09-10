@@ -168,6 +168,7 @@ void BookmarksDialog::addBookmarkButtonPressed()
 			if (name.isEmpty())
 			{
 				name = QString("%1, %2").arg(raStr, decStr);
+				nameI18n = q_("Unnamed star");
 				fov = GETSTELMODULE(StelMovementMgr)->getCurrentFov();
 			}
 		}

@@ -78,9 +78,9 @@ private:
 	enum BookmarksColumns {
 		ColumnUUID,		//! UUID of bookmark
 		ColumnName,		//! name or designation of object
-		ColumnNameI18n,		//! Localized name of object
+		ColumnNameI18n,	//! Localized name of object
 		ColumnDate,		//! date and time (optional)
-		ColumnLocation,		//! location (optional)
+		ColumnLocation,	//! location (optional)
 		ColumnCount		//! total number of columns
 	};
 	QStandardItemModel * bookmarksListModel;
