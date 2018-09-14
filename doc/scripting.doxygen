@@ -105,7 +105,7 @@ command:
 \code
 include("common_objects.inc");
 \endcode
-\note Detailed example can be found <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/view/head:/scripts/constellations_tour.ssc">in Constellations Tour script</a>.
+\note Detailed example can be found <a href="https://github.com/Stellarium/stellarium/blob/master/scripts/constellations_tour.ssc">in Constellations Tour script</a>.
 
 @section script_console Script Console
 
@@ -122,7 +122,7 @@ ENABLE_SCRIPT_CONSOLE=1 or =0 option to cmake.
 The best source of examples is the \b scripts sub-directory of the main Stellarium 
 source tree.  This directory contains a sub-directory called \b tests which are not
 installed with Stellarium, but are nontheless useful sources of example code for
-various scripting features. (The directory can be <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files/head:/scripts/">browsed online</a>. Script files end in <tt>.ssc</tt> and <tt>.inc</tt>. Download links
+various scripting features. (The directory can be <a href="https://github.com/Stellarium/stellarium/tree/master/scripts">browsed online</a>. Script files end in <tt>.ssc</tt> and <tt>.inc</tt>. Download links
 are to the right.)
 
 @subsection minimal_script Minimal Script

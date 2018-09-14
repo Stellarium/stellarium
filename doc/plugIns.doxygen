@@ -76,7 +76,7 @@ You can find some details for static plugins in each item of the list of plugins
  - @ref remoteControl
  - @ref remoteSync
 
-You can find some untechnical details on our wiki [Plugins](http://www.stellarium.org/wiki/index.php/Plugins) page.
+You can find some untechnical details on our wiki [Plugins](http://stellarium.sourceforge.net/wiki/index.php/Plugins) page.
 
 @section code Coding
 A plugin should contain a main class deriving from the StelModule class as well as an instance of the StelPluginInterface which allows Stellarium to load it. At startup, the StelModuleMgr will load the library, and an instance of the StelModule it contains will be instantiated and added to the list of other "normal" StelModules.
@@ -94,16 +94,15 @@ A plugin can interact with the users in many ways, not limited to:
 
 There are a few simple \b static plugins written and maintained by the Stellarium developer team that can serve as examples.
 
- - <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files/head%3A/plugins/HelloStelModule/">HelloStelModule plugin</a>: minimal plugin, intended as an example.
- - <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files/head%3A/plugins/SimpleDrawLine/">SimpleDrawLine</a>: minimal plugin for drawing lines.
- - <a href="http://bazaar.launchpad.net/%7Estellarium/stellarium/trunk/files/head%3A/plugins/AngleMeasure/">AngleMeasure plugin</a>: simple plugin, intended as a guide to new developers.
- - <a href="http://bazaar.launchpad.net/%7Estellarium/stellarium/trunk/files/head%3A/plugins/CompassMarks/"> CompassMarks plugin</a>: another simple plugin intended as a guide to new developers.
+ - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/HelloStelModule">HelloStelModule plugin</a>: minimal plugin, intended as an example.
+ - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/SimpleDrawLine">SimpleDrawLine</a>: minimal plugin for drawing lines.
+ - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/AngleMeasure">AngleMeasure plugin</a>: simple plugin, intended as a guide to new developers.
+ - <a href="https://github.com/Stellarium/stellarium/tree/master/plugins/CompassMarks"> CompassMarks plugin</a>: another simple plugin intended as a guide to new developers.
 
-All static plugins incorporated in Stellarium's main code can be found in the <a href="http://bazaar.launchpad.net/~stellarium/stellarium/trunk/files/head%3A/plugins/">/plugins</a> subdirectory of Stellarium's code tree. Note that some of these plugins are under construction and have not been distributed yet with an official release.
+All static plugins incorporated in Stellarium's main code can be found in the <a href="https://github.com/Stellarium/stellarium/tree/master/plugins">/plugins</a> subdirectory of Stellarium's code tree. Note that some of these plugins are under construction and have not been distributed yet with an official release.
 
-There are also a few simple \b dynamic plugins. Their code is hosted in Stellarium's old Subversion repository at SourceForge.net:
- - <a href="http://sourceforge.net/p/stellarium/code/HEAD/tree/trunk/extmodules/ExampleDialog/">ExampleDialog</a> provides an example on how a plugin can create a Stellarium-style window and add a button to the bottom tool bar.
- - <a href="http://sourceforge.net/p/stellarium/code/HEAD/tree/trunk/extmodules/ExamplePainter/">ExamplePainter</a> provides an example on how a plugin can draw on the viewport.
+There are also an example of simple \b dynamic plugin:
+ - <a href="https://github.com/Stellarium/stellarium-dynamic-plugin">StellariumPluginTemplate</a> provides an example on how a plugin can create a Stellarium-style window and how it can draw on the viewport.
 
 <a href="http://archive.eso.org/cms/virgo/">VirGO</a> is a fully featured extension to Stellarium sponsored by ESO. VirGO is used by professional astronomers to display and analyse data from the ESO archive. Follow the link for more information.
 
@@ -119,7 +118,7 @@ The following instructions can be used to build the Angle Measure plugin and the
  <li>After downloading the stellarium source such that it is in @c /home/me/builds/stellarium, change into the @c /home/me/builds directory and fetch the @c extmodules files from SVN. On Linux, you can use these commands to accomplish this:
 @verbatim
 cd /home/me/builds
-svn co https://stellarium.svn.sourceforge.net/svnroot/stellarium/trunk/extmodules
+git clone https://github.com/Stellarium/stellarium-dynamic-plugin.git
 @endverbatim</li>
  
  <li>Build the main Stellarium program according to the instructions for your platform.  Please note that you must build with the @c Release settings, not the @c Debug settings.  You can do this by adding a step after doing @c cmake. On Windows, use the @c cmakegui tool, or on *nix use the @c ccmake tool (or just edit the @c CMakeCache.txt file) to set the value of @c CMAKE_BUILD_TYPE to @c Release.  Then continue with the @c make stage.</li>
@@ -131,7 +130,7 @@ export STELROOT=/home/me/builds/stellarium
  
  <li>Change into the directory containing the plugin you want to build, then create a build directory.  On *nix systems this should be called @c builds/unix, on Windows it should be called @c builds/msys.  Once made, change into it. e.g. on Linux:
 @verbatim
-cd /home/me/builds/plugins/AngleMeasure
+cd /home/me/builds/stellarium-dynamic-plugin
 mkdir -p builds/unix
 cd builds/unix
 @endverbatim</li>
