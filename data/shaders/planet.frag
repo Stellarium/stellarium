@@ -107,7 +107,7 @@ lowp float sampleShadowMap(in highp sampler2D sTex, in highp vec4 coord, in high
     // everything gets shadowed, but no errors?!
     // so to be sure we just fix the sample count at 4 for now, 
     // even though 16 would look quite a lot better
-    #define SAMPLE_COUNT 4
+    const int SAMPLE_COUNT = 4;
     mediump float sum = 0.0;
     for(int i=0;i<SAMPLE_COUNT;++i)
     {
