@@ -268,7 +268,7 @@ Planet::Planet(const QString& englishName,
 			qWarning()<<"Cannot resolve path to model file"<<aobjModelName<<"of object"<<englishName;
 		}
 	}
-	if (englishName!="Pluto") // TODO: add some far-out slow object types: other Plutoids, KBO, SDO, OCO, ...
+	if ((pType <= isDwarfPlanet) && (englishName!="Pluto")) // concentrate on "inner" objects, KBO etc. stay at 1/s recomputation.
 	{
 		deltaJDE = 0.001*StelCore::JD_SECOND;
 	}
@@ -431,7 +431,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
 			float airmass=extinction.airmass(alt_app, true);
 
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b>)").arg(q_("reduced by"), QString::number(airmass, 'f', 2), q_("Airmasses to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 		}
 
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
@@ -864,6 +864,7 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 	static const double sunRadius = 696000./AU;
 	double d = planetPos.length() / (p->getRadius()/sunRadius+1);
 	double penumbraRadius = (shadowDistance-d)/d*sunRadius;
+	// TODO: Note that Earth's shadow should be enlarged a bit. (6-7% following Danjon?)
 	
 	double penumbraCenterToThisPlanetCenterDistance = (ppVector*shadowDistance-thisPos).length();
 	
@@ -2055,7 +2056,7 @@ bool Planet::initShader()
 		transformFShader = "void main()\n{ }\n";
 	}
 #endif
-	GL(transformShaderProgram = createShader("transformShaderProgam", transformShaderVars, transformVShader, transformFShader,QByteArray(),attrLoc));
+	GL(transformShaderProgram = createShader("transformShaderProgram", transformShaderVars, transformVShader, transformFShader,QByteArray(),attrLoc));
 
 	//check if ALL shaders have been created correctly
 	shaderError = !(planetShaderProgram&&

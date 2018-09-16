@@ -62,7 +62,7 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
 			float airmass=extinction.airmass(alt_app, true);
 
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b>)").arg(q_("reduced by"), QString::number(airmass, 'f', 2), q_("Airmasses to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 		}
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
@@ -215,7 +215,7 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
 			float airmass=extinction.airmass(alt_app, true);
 
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b>)").arg(q_("reduced by"), QString::number(airmass, 'f', 2), q_("Airmasses to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 		}
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
