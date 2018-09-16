@@ -43,6 +43,7 @@
 #include "StelOBJ.hpp"
 #include "StelOpenGLArray.hpp"
 #include "StelHips.hpp"
+#include "RefractionExtinction.hpp"
 
 #include <limits>
 #include <QByteArray>
@@ -425,8 +426,13 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 	if (flags&Magnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
 	{
 		QString emag = "";
-		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		{
+			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
+			float airmass=extinction.airmass(alt_app, true);
+
+			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b>)").arg(q_("reduced by"), QString::number(airmass, 'f', 2), q_("Airmasses to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		}
 
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}

@@ -57,9 +57,13 @@ QString StarWrapperBase::getInfoString(const StelCore *core, const InfoStringGro
 	if (flags&Magnitude)
 	{
 		QString emag = "";
-		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		{
+			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
+			float airmass=extinction.airmass(alt_app, true);
 
+			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b>)").arg(q_("reduced by"), QString::number(airmass, 'f', 2), q_("Airmasses to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		}
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 	
@@ -201,10 +205,18 @@ QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup&
 
 	if (flags&Magnitude)
 	{
-		QString emag = "";
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		double az_app, alt_app;
+		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+		Q_UNUSED(az_app);
 
+		QString emag = "";
+		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		{
+			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
+			float airmass=extinction.airmass(alt_app, true);
+
+			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b>)").arg(q_("reduced by"), QString::number(airmass, 'f', 2), q_("Airmasses to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		}
 		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 

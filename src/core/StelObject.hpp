@@ -111,6 +111,7 @@ public:
 	//! - azimuth : apparent azimuth angle in decimal degrees
 	//! - altitude-geometric : geometric altitude angle in decimal degrees
 	//! - azimuth-geometric : geometric azimuth angle in decimal degrees
+	//! - airmass : number of airmasses the object's light had to pass through the atmosphere. For negative altitudes this number may be meaningless.
 	//! - ra : right ascension angle (current date frame) in decimal degrees
 	//! - dec : declination angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees

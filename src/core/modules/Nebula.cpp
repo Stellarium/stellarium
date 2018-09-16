@@ -30,6 +30,7 @@
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "SolarSystem.hpp"
+#include "RefractionExtinction.hpp"
 
 #include <QTextStream>
 #include <QFile>
@@ -254,9 +255,13 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 		if (nType == NebDn)
 			tmag = q_("Opacity");
 
-		if (nType != NebDn && core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		if (nType != NebDn && core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
+		{
+			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
+			float airmass=extinction.airmass(alt_app, true);
 
+			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b>)").arg(q_("reduced by"), QString::number(airmass, 'f', 2), q_("Airmasses to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		}
 		oss << QString("%1: <b>%2</b>%3").arg(tmag, QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
 	}
 	if (bMag < 50.f && vMag > 50.f && flags&Magnitude)
@@ -289,7 +294,7 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		if (getSurfaceBrightness(core)<99)
 		{
-			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-3.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99) // Don't show extincted surface brightness much below horizon where model is meaningless.
+			if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0) && getSurfaceBrightnessWithExtinction(core)<99) // Don't show extincted surface brightness much below horizon where model is meaningless.
 			{
 				oss << QString("%1: <b>%2</b> %5 (%3: <b>%4</b> %5)").arg(sb, QString::number(getSurfaceBrightness(core, flagUseArcsecSurfaceBrightness), 'f', 2),
 											  ae, QString::number(getSurfaceBrightnessWithExtinction(core, flagUseArcsecSurfaceBrightness), 'f', 2), mu) << "<br />";

@@ -719,6 +719,9 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	map.insert("altitude", alt*180./M_PI);
 	map.insert("azimuth", az*180./M_PI);
 
+	const Extinction &extinction=core->getSkyDrawer()->getExtinction();
+	map.insert("airmass", extinction.airmass(alt, true));
+
 	// geometric altitude/azimuth
 	pos = getAltAzPosGeometric(core);
 	StelUtils::rectToSphe(&az, &alt, pos);
