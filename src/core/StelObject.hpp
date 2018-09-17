@@ -247,8 +247,15 @@ public:
 
 protected:
 
-	//! Format the positional info string contain J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
+	//! Format the positional info string containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
 	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
+
+	//! Format the magnitude info string for the object
+	//! @param core
+	//! @param flags
+	//! @param alt_app apparent altitude (for atmosphere-dependent calculations)
+	//! @param decimals significant digits after the comma.
+	virtual QString getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals=1) const;
 
 	//! Apply post processing on the info string
 	void postProcessInfoString(QString& str, const InfoStringGroup& flags) const;

@@ -425,17 +425,9 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&Magnitude && getVMagnitude(core)!=std::numeric_limits<float>::infinity())
 	{
-		QString emag = "";
-		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		{
-			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
-			float airmass=extinction.airmass(alt_app, true);
-
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
-		}
-
-		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
+		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
+
 	if (flags&AbsoluteMagnitude && (getAbsoluteMagnitude() > -99.))
 	{
 		oss << QString("%1: %2").arg(q_("Absolute Magnitude")).arg(getAbsoluteMagnitude(), 0, 'f', 2) << "<br />";

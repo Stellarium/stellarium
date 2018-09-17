@@ -112,16 +112,25 @@ QString Supernova::getMaxBrightnessDate(const double JD) const
 	return StelApp::getInstance().getLocaleMgr().getPrintableDateLocal(JD);
 }
 
+QString Supernova::getMagnitudeInfoString(const StelCore *core, const InfoStringGroup& flags, const double alt_app, const int decimals) const
+{
+	const float maglimit = 21.f;
+	QString res;
+
+	if (flags&Magnitude)
+	{
+		if (getVMagnitude(core) <= maglimit)
+			res = StelObject::getMagnitudeInfoString(core, flags, alt_app, decimals);
+		else
+			res = QString("%1: <b>--</b><br />").arg(q_("Magnitude"));
+	}
+	return res;
+}
+
 QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
-	float maglimit = 21.f;
-	QString str, mag = "--", mage = "--";
+	QString str;
 	QTextStream oss(&str);
-	if (getVMagnitude(core) <= maglimit)
-	{
-		mag  = QString::number(getVMagnitude(core), 'f', 2);
-		mage = QString::number(getVMagnitudeWithExtinction(core), 'f', 2);
-	}
 
 	if (flags&Name)
 	{
@@ -133,14 +142,11 @@ QString Supernova::getInfoString(const StelCore* core, const InfoStringGroup& fl
 
 	if (flags&Magnitude)
 	{
-	    QString emag = "";
-	    if (core->getSkyDrawer()->getFlagHasAtmosphere())
-		    emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), mage);
-
-	    oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), mag, emag) << "<br />";
-
+		double az_app, alt_app;
+		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+		Q_UNUSED(az_app);
+		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
-
 	// Ra/Dec etc.
 	oss << getCommonInfoString(core, flags);
 

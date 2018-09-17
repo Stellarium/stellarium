@@ -169,18 +169,7 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		oss << QString("%1: <b>%2</b> (%3)").arg(q_("Type"), q_(getPlanetTypeString()), cometType) << "<br />";
 	}
 
-	if (flags&Magnitude)
-	{
-		QString emag = "";
-		if (core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
-		{
-			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
-			float airmass=extinction.airmass(alt_app, true);
-
-			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 1), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
-		}
-		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 1), emag) << "<br />";
-	}
+	oss << getMagnitudeInfoString(core, flags, alt_app, 1);
 
 	if (flags&AbsoluteMagnitude)
 	{

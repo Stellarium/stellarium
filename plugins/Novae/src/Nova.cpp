@@ -135,7 +135,6 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 {
 	QString str;
 	QTextStream oss(&str);
-	double mag = getVMagnitude(core);
 
 	if (flags&Name)
 	{
@@ -148,11 +147,10 @@ QString Nova::getInfoString(const StelCore* core, const InfoStringGroup& flags) 
 
 	if (flags&Magnitude)
 	{
-		QString emag = "";
-		if (core->getSkyDrawer()->getFlagHasAtmosphere())
-			emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
-
-		oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(mag, 'f', 2), emag) << "<br />";
+		double az_app, alt_app;
+		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+		Q_UNUSED(az_app);
+		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
 
 	// Ra/Dec etc.

@@ -301,16 +301,13 @@ QString Exoplanet::getInfoString(const StelCore* core, const InfoStringGroup& fl
 		oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("planetary system")) << "<br />";
 	}
 
-	if (flags&Magnitude)
+	if (flags&Magnitude && Vmag<99 && !distributionMode)
 	{
-		if (Vmag<99 && !distributionMode)
-		{
-			QString emag = "";
-			if (core->getSkyDrawer()->getFlagHasAtmosphere())
-				emag = QString(" (%1: <b>%2</b>)").arg(q_("extincted to"), QString::number(getVMagnitudeWithExtinction(core), 'f', 2));
+		double az_app, alt_app;
+		StelUtils::rectToSphe(&az_app,&alt_app,getAltAzPosApparent(core));
+		Q_UNUSED(az_app);
 
-			oss << QString("%1: <b>%2</b>%3").arg(q_("Magnitude"), QString::number(getVMagnitude(core), 'f', 2), emag) << "<br />";
-		}
+		oss << getMagnitudeInfoString(core, flags, alt_app, 2);
 	}
 
 	// Ra/Dec etc.
