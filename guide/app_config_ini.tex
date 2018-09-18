@@ -436,7 +436,8 @@ flag\_use\_azimuth\_from\_south & bool   & false & If \emph{true}, calculate azi
 flag\_surface\_brightness\_arcsec  & bool  & false & Toggle usage the measure unit $^{mag}/_\square{'}$ ($^{mag}/arcmin^2$) or 
                                                      $^{mag}/_\square{''}$ ($^{mag}/arcsec^2$) for the surface brightness of deep-sky objects.\\%\midrule
 flag\_surface\_brightness\_short  & bool   & false & Toggle usage the short notation for the surface brightness of deep-sky objects.\\\midrule
-flag\_enable\_kinetic\_scrolling & bool  & true  & If \emph{true}, use kinetic scrolling in the GUI\footnote{This option is available on Windows tablets only.}.\\\midrule
+flag\_enable\_kinetic\_scrolling & bool  & true  & If \emph{true}, use kinetic scrolling in the GUI\footnote{%
+                                                   Scroll by dragging in the window directly, not a slider handle. Scrolling stops after a short time.}.\\\midrule
 pointer\_animation\_speed 		& float  & 1.0 	 & Animation speed of pointers.\\\midrule
 %
 gpsd\_hostname                  & string & localhost & hostname of server running \program{gpsd} (non-Windows only)\\%\midrule
