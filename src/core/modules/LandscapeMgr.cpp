@@ -44,6 +44,8 @@
 #include <QFile>
 #include <QTemporaryFile>
 #include <QMouseEvent>
+#include <QPainter>
+#include <QOpenGLPaintDevice>
 
 #include <stdexcept>
 
@@ -421,6 +423,15 @@ void LandscapeMgr::draw(StelCore* core)
 
 	// Draw the cardinal points
 	cardinalsPoints->draw(core, StelApp::getInstance().getCore()->getCurrentLocation().latitude);
+
+	// Workaround for a bug with spherical mirror mode when we don't show the cardinal points.
+	// I am not really sure why this seems to fix the problem.  If you want to
+	// remove this, make sure the spherical mirror mode with cardinal points
+	// toggled off works properly!
+	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	QOpenGLPaintDevice device;
+	device.setSize(QSize(prj->getViewportWidth(), prj->getViewportHeight()));
+	QPainter painter(&device);
 }
 
 void LandscapeMgr::init()
