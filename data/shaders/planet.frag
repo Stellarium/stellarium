@@ -60,6 +60,7 @@ varying highp vec4 shadowCoord;
 #endif
 #ifdef IS_MOON
     uniform sampler2D earthShadow;
+    uniform mediump float eclipsePush;
     uniform sampler2D normalMap;
 
     varying highp vec3 normalX;
@@ -187,6 +188,7 @@ void main()
         highp float sunRadius = sunInfo.w;
         highp float L = length(sunPosition - P);
         highp float R = asin(sunRadius / L);
+
         for (int i = 0; i < 4; ++i)
         {
             if (shadowCount>i)
@@ -195,33 +197,32 @@ void main()
                 highp float satelliteRadius = shadowData[i].w;
                 highp float l = length(satellitePosition - P);
                 highp float r = asin(satelliteRadius / l);
+                // The min(1.0, .) here is required to avoid spurious bright pixels close to the shadow center.
                 highp float d = acos(min(1.0, dot(normalize(sunPosition - P), normalize(satellitePosition - P))));
 
                 mediump float illumination = 1.0;
-                if(d >= R + r)
+                if(d >= R + r) // distance too far
                 {
-                    // distance too far
-                    illumination = 1.0;
+                    // illumination = 1.0; // NOP
                 }
-                else if(r >= R + d)
+                else if( d <= r - R ) // fully inside umbra
                 {
-                    // umbra
 #ifdef IS_MOON
-                    illumination = d / (r - R) * 0.6;
+                    illumination = (d / (r - R)) * 0.6; // prepare texture coordinate!
 #else
                     illumination = 0.0;
 #endif
                 }
-                else if(d + r <= R)
+                else if(d <= R - r)
                 {
-                    // penumbra completely inside
+                    // penumbra completely inside (Annular, or a moon transit in front of the Sun.)
                     illumination = 1.0 - r * r / (R * R);
                 }
-                else
+                else // penumbra: partially inside
                 {
-                    // penumbra partially inside
 #ifdef IS_MOON
-                    illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;
+                    //illumination = ((d - abs(R-r)) / (R + r - abs(R-r))) * 0.4 + 0.6;
+                    illumination = ((d - r + R) / (2.0 * R )) * 0.4 + 0.6;
 #else
                     mediump float x = (R * R + d * d - r * r) / (2.0 * d);
                     mediump float alpha = acos(x / R);
@@ -278,10 +279,12 @@ void main()
     lowp vec4 texColor = texture2D(tex, texc);
     mediump vec4 finalColor = texColor;
 #ifdef IS_MOON
-    if(final_illumination < 0.99)
+    if(final_illumination < 0.9999)
     {
         lowp vec4 shadowColor = texture2D(earthShadow, vec2(final_illumination, 0.5));
-        finalColor = mix(finalColor * litColor, shadowColor, clamp(shadowColor.a, 0.0, 0.7)); // clamp alpha to allow some maria detail.
+        finalColor =
+		eclipsePush*(1.0-0.75*shadowColor.a)*
+		mix(finalColor * litColor, shadowColor, clamp(shadowColor.a, 0.0, 0.7)); // clamp alpha to allow some maria detail.
     }
     else
 #endif

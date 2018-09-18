@@ -44,7 +44,7 @@ varying highp vec3 P; //original unprojected position (in AU)
     varying highp vec3 normalZ;
 #else
     varying mediump vec3 normalVS;
-    //normal objects use gourard shading
+    //normal objects use gouraud shading
     //good enough for our spheres
     uniform highp vec3 lightDirection;
     varying mediump float lambertIllum;
