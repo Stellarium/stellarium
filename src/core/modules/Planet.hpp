@@ -607,6 +607,7 @@ private:
 
 		// Moon-specific variables
 		int earthShadow;
+		int eclipsePush; // apparent brightness push for partial Lunar Eclipse (make bright rim overbright)
 		int normalMap;
 
 		// Rings-specific variables

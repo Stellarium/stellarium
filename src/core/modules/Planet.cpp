@@ -1780,6 +1780,7 @@ void Planet::PlanetShaderVars::initLocations(QOpenGLShaderProgram* p)
 
 	// Moon-specific variables
 	GL(earthShadow = p->uniformLocation("earthShadow"));
+	GL(eclipsePush = p->uniformLocation("eclipsePush"));
 	GL(normalMap = p->uniformLocation("normalMap"));
 
 	// Rings-specific variables
@@ -2648,6 +2649,18 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		{
 			GL(texEarthShadow->bind(3));
 			GL(moonShaderProgram->setUniformValue(moonShaderVars.earthShadow, 3));
+			// Ad-hoc visibility improvement during lunar eclipses:
+			// During partial umbra phase, make moon brighter so that the bright limb and umbra border has more visibility.
+			// When the moon is about half in umbra (geoc.elong 179.4), we start to raise its brightness.
+			float push=1.0f;
+			const double elong=getElongation(ssm->getEarth()->getEclipticPos()) * (180.0/M_PI);
+			const float x=elong - 179.5f;
+			if (x>0.0)
+				push+=20.0f * x;
+			if (x>0.1)
+				push=3.0f;
+
+			GL(moonShaderProgram->setUniformValue(moonShaderVars.eclipsePush, (GLfloat) push)); // constant for now...
 		}
 	}
 
