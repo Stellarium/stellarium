@@ -315,6 +315,7 @@ void AstroCalcDialog::createDialogContent()
 	currentTimeLine = new QTimer(this);
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawCurrentTimeDiagram()));
 	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(computePlanetaryData()));
+	connect(currentTimeLine, SIGNAL(timeout()), this, SLOT(drawDistanceGraph()));
 	currentTimeLine->start(500); // Update 'now' line position every 0.5 seconds
 
 	connect(ui->firstCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveFirstCelestialBody(int)));
@@ -325,6 +326,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(updateAstroCalcData()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawMonthlyElevationGraph()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
@@ -1952,7 +1954,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotAltVsTime)
+	if (!plotAltVsTime || !dialog->isVisible())
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
@@ -2714,7 +2716,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotMonthlyElevation)
+	if (!plotMonthlyElevation || !dialog->isVisible())
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
@@ -4785,7 +4787,7 @@ void AstroCalcDialog::prepareDistanceAxesAndGraph()
 void AstroCalcDialog::drawDistanceGraph()
 {
 	// special case - plot the graph when tab is visible
-	if (!plotDistanceGraph)
+	if (!plotDistanceGraph || !dialog->isVisible())
 		return;
 
 	Q_ASSERT(ui->firstCelestialBodyComboBox);
