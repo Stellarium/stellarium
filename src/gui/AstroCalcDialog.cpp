@@ -68,6 +68,8 @@ double AstroCalcDialog::minYld = 0.;
 double AstroCalcDialog::maxYld = 90.;
 double AstroCalcDialog::minYad = 0.;
 double AstroCalcDialog::maxYad = 180.;
+double AstroCalcDialog::minYadm = 0.;
+double AstroCalcDialog::maxYadm = 180.;
 QString AstroCalcDialog::yAxis1Legend = "";
 QString AstroCalcDialog::yAxis2Legend = "";
 
@@ -83,6 +85,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, plotMonthlyElevation(false)
 	, plotMonthlyElevationPositive(false)
 	, plotDistanceGraph(false)
+	, plotAngularDistanceGraph(false)
 	, delimiter(", ")
 	, acEndl("\n")
 {
@@ -130,6 +133,7 @@ void AstroCalcDialog::retranslate()
 		prepareXVsTimeAxesAndGraph();
 		prepareMonthlyEleveationAxesAndGraph();
 		prepareDistanceAxesAndGraph();
+		prepareAngularDistanceAxesAndGraph();
 		drawAltVsTimeDiagram();
 		populateTimeIntervalsList();
 		populateWutGroups();
@@ -181,12 +185,13 @@ void AstroCalcDialog::createDialogContent()
 	populateFunctionsList();
 	prepareXVsTimeAxesAndGraph();
 	// Monthly Elevation
-	prepareMonthlyEleveationAxesAndGraph();
+	prepareMonthlyEleveationAxesAndGraph();	
 	// WUT
 	populateTimeIntervalsList();
 	populateWutGroups();
 	// PC
 	prepareDistanceAxesAndGraph();
+	prepareAngularDistanceAxesAndGraph();
 
 	double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
@@ -286,6 +291,12 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->graphsSecondComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsSecondId(int)));
 	connect(ui->drawGraphsPushButton, SIGNAL(clicked()), this, SLOT(drawXVsTimeGraphs()));
 
+	ui->angularDistanceLimitSpinBox->setValue(conf->value("astrocalc/angular_distance_limit", 40.0).toInt());
+	connect(ui->angularDistanceLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAngularDistanceLimit(int)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAngularDistanceGraph()));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAngularDistanceGraph()));
+	drawAngularDistanceGraph();
+
 	wutModel = new QStringListModel(this);
 	proxyModel = new QSortFilterProxyModel(ui->wutMatchingObjectsListView);
 	proxyModel->setSourceModel(wutModel);
@@ -327,6 +338,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawMonthlyElevationGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAngularDistanceGraph()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
@@ -349,6 +361,8 @@ void AstroCalcDialog::createDialogContent()
 	ui->labelTransitValue->setStyleSheet(style);
 	ui->labelSet->setStyleSheet(style);
 	ui->labelSetValue->setStyleSheet(style);
+	ui->angularDistanceNote->setStyleSheet(style);
+	ui->angularDistanceLimitLabel->setStyleSheet(style);
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -3896,6 +3910,14 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotMonthlyElevation = false;
 
+		if(idx==3) // Last tab - 'Angular distance' is visible
+		{
+			plotAngularDistanceGraph = true;
+			drawAngularDistanceGraph();
+		}
+		else
+			plotAngularDistanceGraph = false;
+
 	}
 
 	// special case (PCalc)
@@ -3940,6 +3962,11 @@ void AstroCalcDialog::changeGraphsTab(int index)
 	{
 		plotMonthlyElevation = true;
 		drawMonthlyElevationGraph(); // Is object already selected?
+	}
+	if (index==3) // Four tab: 'Angular Distance'
+	{
+		plotAngularDistanceGraph = true;
+		drawAngularDistanceGraph(); // Is object already selected?
 	}
 }
 
@@ -4733,15 +4760,15 @@ void AstroCalcDialog::computePlanetaryData()
 void AstroCalcDialog::prepareDistanceAxesAndGraph()
 {
 	QString xAxisStr = q_("Days from today");
-	QString yAxis1Legend = QString("%1, %2").arg(q_("Linear distance"), qc_("AU", "distance, astronomical unit"));
-	QString yAxis2Legend = QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)); // decimal degrees
+	QString yAxisLegend1 = QString("%1, %2").arg(q_("Linear distance"), qc_("AU", "distance, astronomical unit"));
+	QString yAxisLegend2 = QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)); // decimal degrees
 
 	QColor axisColor(Qt::white);
 	QPen axisPen(axisColor, 1);
 
 	ui->pcDistanceGraphPlot->xAxis->setLabel(xAxisStr);
-	ui->pcDistanceGraphPlot->yAxis->setLabel(yAxis1Legend);
-	ui->pcDistanceGraphPlot->yAxis2->setLabel(yAxis2Legend);
+	ui->pcDistanceGraphPlot->yAxis->setLabel(yAxisLegend1);
+	ui->pcDistanceGraphPlot->yAxis2->setLabel(yAxisLegend2);
 
 	ui->pcDistanceGraphPlot->xAxis->setRange(-300, 300);
 	ui->pcDistanceGraphPlot->xAxis->setScaleType(QCPAxis::stLinear);
@@ -4909,3 +4936,159 @@ void AstroCalcDialog::mouseOverDistanceGraph(QMouseEvent* event)
 	ui->pcDistanceGraphPlot->replot();
 }
 
+void AstroCalcDialog::prepareAngularDistanceAxesAndGraph()
+{
+	QString xAxisStr = q_("Days from today");
+	QString yAxisLegend = QString("%1, %2").arg(q_("Angular distance"), QChar(0x00B0)); // decimal degrees
+
+	QColor axisColor(Qt::white);
+	QPen axisPen(axisColor, 1);
+
+	ui->angularDistancePlot->xAxis->setLabel(xAxisStr);
+	ui->angularDistancePlot->yAxis->setLabel(yAxisLegend);
+
+	ui->angularDistancePlot->xAxis->setRange(-2, 31);
+	ui->angularDistancePlot->xAxis->setScaleType(QCPAxis::stLinear);
+	ui->angularDistancePlot->xAxis->setLabelColor(axisColor);
+	ui->angularDistancePlot->xAxis->setTickLabelColor(axisColor);
+	ui->angularDistancePlot->xAxis->setBasePen(axisPen);
+	ui->angularDistancePlot->xAxis->setTickPen(axisPen);
+	ui->angularDistancePlot->xAxis->setSubTickPen(axisPen);
+	ui->angularDistancePlot->xAxis->setAutoTicks(true);
+
+	ui->angularDistancePlot->yAxis->setRange(minYadm, maxYadm);
+	ui->angularDistancePlot->yAxis->setScaleType(QCPAxis::stLinear);
+	ui->angularDistancePlot->yAxis->setLabelColor(axisColor);
+	ui->angularDistancePlot->yAxis->setTickLabelColor(axisColor);
+	ui->angularDistancePlot->yAxis->setBasePen(axisPen);
+	ui->angularDistancePlot->yAxis->setTickPen(axisPen);
+	ui->angularDistancePlot->yAxis->setSubTickPen(axisPen);
+
+	ui->angularDistancePlot->clearGraphs();
+	ui->angularDistancePlot->addGraph(ui->angularDistancePlot->xAxis, ui->angularDistancePlot->yAxis);
+	ui->angularDistancePlot->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->angularDistancePlot->graph(0)->setPen(QPen(Qt::red, 1));
+	ui->angularDistancePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+	ui->angularDistancePlot->graph(0)->rescaleAxes(true);
+
+	ui->angularDistancePlot->addGraph(ui->angularDistancePlot->xAxis, ui->angularDistancePlot->yAxis);
+	ui->angularDistancePlot->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->angularDistancePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->angularDistancePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+	ui->angularDistancePlot->graph(1)->rescaleAxes(true);
+}
+
+void AstroCalcDialog::drawAngularDistanceGraph()
+{
+	QString label = q_("Change an angular distance between the Moon and selected object");
+	ui->angularDistanceLabel->setText(label);
+
+	// special case - plot the graph when tab is visible
+	if (!plotAngularDistanceGraph || !dialog->isVisible())
+		return;
+
+	// special case - the tool is not applicable on non-Earth locations
+	if (core->getCurrentPlanet()!=solarSystem->getEarth())
+		return;
+
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+	if (!selectedObjects.isEmpty())
+	{
+		PlanetP moon = solarSystem->getMoon();
+		StelObjectP selectedObject = selectedObjects[0];
+
+		if (selectedObject==moon || selectedObject->getType() == "Satellite")
+		{
+			ui->angularDistancePlot->graph(0)->clearData();
+			ui->angularDistancePlot->replot();
+			return;
+		}
+
+		QList<double> aX, aY;
+		QVector<double> xs, ys;
+		Vec3d selectedObjectPosition, moonPosition;
+		double currentJD = core->getJD();
+		double JD, distance, dd;
+		bool sign;
+
+		for (int i = -5; i <= 35; i++)
+		{
+			JD = currentJD + i;
+			core->setJD(JD);
+			moonPosition = moon->getJ2000EquatorialPos(core);
+			selectedObjectPosition = selectedObject->getJ2000EquatorialPos(core);
+			distance = std::acos(sin(moonPosition.latitude()) * sin(selectedObjectPosition.latitude()) + cos(moonPosition.latitude()) * cos(selectedObjectPosition.latitude()) * cos(moonPosition.longitude() - selectedObjectPosition.longitude()));
+			StelUtils::radToDecDeg(distance, sign, dd);
+			aX.append(i);
+			aY.append(dd);
+			core->update(0.0);
+		}
+
+		core->setJD(currentJD);
+
+		QVector<double> x = aX.toVector(), y = aY.toVector();
+
+		double minY = aY.first();
+		double maxY = aY.first();
+
+		for (auto temp : aY)
+		{
+			if (maxY < temp) maxY = temp;
+			if (minY > temp) minY = temp;
+		}
+
+		minYadm = minY - 5.0;
+		maxYadm = maxY + 5.0;
+
+		int limit = ui->angularDistanceLimitSpinBox->value();
+		if (minYadm > limit)
+			minYadm = limit - 5.0;
+		if (maxYadm < limit)
+			maxYadm = limit + 5.0;
+
+		QString name = selectedObject->getNameI18n();
+		if (name.isEmpty() && selectedObject->getType() == "Nebula")
+			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+		ui->angularDistanceLabel->setText(QString("%1 (%2)").arg(label, name));
+
+		prepareAngularDistanceAxesAndGraph();
+
+		ui->angularDistancePlot->graph(0)->setData(x, y);
+		ui->angularDistancePlot->graph(0)->setName("[Angular distance]");
+		ui->angularDistancePlot->replot();
+
+	}
+
+	// clean up the data when selection is removed
+	if (!objectMgr->getWasSelected())
+	{
+		ui->angularDistancePlot->graph(0)->clearData();
+		ui->angularDistancePlot->replot();
+	}
+
+	drawAngularDistanceLimitLine();
+}
+
+void AstroCalcDialog::saveAngularDistanceLimit(int limit)
+{
+	conf->setValue("astrocalc/angular_distance_limit", limit);
+	drawAngularDistanceLimitLine();
+}
+
+void AstroCalcDialog::drawAngularDistanceLimitLine()
+{
+	// special case - plot the graph when tab is visible
+	if (!plotAngularDistanceGraph || !dialog->isVisible())
+		return;
+
+	int limit = ui->angularDistanceLimitSpinBox->value();
+
+	QList<double> ax, ay;
+	ax.append(-5);
+	ax.append(35);
+	ay.append(limit);
+	ay.append(limit);
+	QVector<double> x = ax.toVector(), y = ay.toVector();
+	ui->angularDistancePlot->graph(1)->setData(x, y);
+	ui->angularDistancePlot->replot();
+}

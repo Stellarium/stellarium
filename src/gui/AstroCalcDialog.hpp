@@ -50,27 +50,27 @@ public:
 	//! Defines the number and the order of the columns in the table that lists celestial bodies positions
 	//! @enum CPositionsColumns
 	enum CPositionsColumns {
-		CColumnName,		//! name of object
-		CColumnRA,		//! right ascension
-		CColumnDec,		//! declination
-		CColumnMagnitude,	//! magnitude
+		CColumnName,			//! name of object
+		CColumnRA,			//! right ascension
+		CColumnDec,			//! declination
+		CColumnMagnitude,		//! magnitude
 		CColumnAngularSize,	//! angular size
-		CColumnExtra,		//! extra data (surface brightness, separation, period, etc.)
+		CColumnExtra,			//! extra data (surface brightness, separation, period, etc.)
 		CColumnTransit,		//! time of transit
-		CColumnType,		//! type of object
-		CColumnCount		//! total number of columns
+		CColumnType,			//! type of object
+		CColumnCount			//! total number of columns
 	};
 
 	//! Defines the number and the order of the columns in the ephemeris table
 	//! @enum EphemerisColumns
 	enum EphemerisColumns {
 		EphemerisDate,		//! date and time of ephemeris
-		EphemerisJD,		//! JD
-		EphemerisRA,		//! right ascension
-		EphemerisDec,		//! declination
+		EphemerisJD,			//! JD
+		EphemerisRA,			//! right ascension
+		EphemerisDec,			//! declination
 		EphemerisMagnitude,	//! magnitude
 		EphemerisPhase,		//! phase
-		EphemerisDistance,	//! distance
+		EphemerisDistance,		//! distance
 		EphemerisElongation,	//! elongation
 		EphemerisCount		//! total number of columns
 	};
@@ -80,8 +80,8 @@ public:
 	enum PhenomenaColumns {
 		PhenomenaType,			//! type of phenomena
 		PhenomenaDate,			//! date and time of ephemeris
-		PhenomenaObject1,		//! first object
-		PhenomenaObject2,		//! second object
+		PhenomenaObject1,			//! first object
+		PhenomenaObject2,			//! second object
 		PhenomenaSeparation,		//! angular separation
 		PhenomenaElongation,		//! elongation (from the Sun)
 		PhenomenaAngularDistance,	//! angular distance (from the Moon)
@@ -92,7 +92,7 @@ public:
 	//! @enum GraphsTypes
 	enum GraphsTypes {
 		GraphMagnitudeVsTime	= 1,
-		GraphPhaseVsTime	= 2,
+		GraphPhaseVsTime		= 2,
 		GraphDistanceVsTime	= 3,
 		GraphElongationVsTime	= 4,
 		GraphAngularSizeVsTime	= 5,
@@ -157,6 +157,10 @@ private slots:
 	void computePlanetaryData();
 	void drawDistanceGraph();
 	void mouseOverDistanceGraph(QMouseEvent *event);
+
+	void drawAngularDistanceGraph();
+	void drawAngularDistanceLimitLine();
+	void saveAngularDistanceLimit(int limit);
 
 	//! Draw diagram 'Altitude vs. Time'
 	void drawAltVsTimeDiagram();
@@ -241,6 +245,7 @@ private:
 	void prepareXVsTimeAxesAndGraph();
 	void prepareMonthlyEleveationAxesAndGraph();
 	void prepareDistanceAxesAndGraph();
+	void prepareAngularDistanceAxesAndGraph();
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();
 	//! Populates the list of groups for WUT tool.
@@ -267,11 +272,11 @@ private:
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2);
 
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph;
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader;	
 	static float brightLimit;
-	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2, minYld, maxYld, minYad, maxYad;
+	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2, minYld, maxYld, minYad, maxYad, minYadm, maxYadm;
 	static QString yAxis1Legend, yAxis2Legend;
 
 	//! Make sure that no tabs icons are outside of the viewport.
