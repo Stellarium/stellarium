@@ -117,6 +117,13 @@ private slots:
 
 	void searchSatellitesClear();
 
+	// change selection's color
+	void askSatColor();
+
+	// change description text
+	void descriptionTextChanged();
+
+
 private:
 	//! @todo find out if this is really necessary... --BM
 	void enableSatelliteDataForm(bool enabled);
@@ -158,6 +165,9 @@ private:
 
 	QString delimiter, acEndl;
 	QStringList iridiumFlaresHeader;
+
+	// colorpickerbutton's color
+	QColor buttonColor;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

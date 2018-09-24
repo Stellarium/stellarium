@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>579</width>
-    <height>481</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -715,6 +715,9 @@
          </item>
          <item>
           <layout class="QGridLayout" name="flagsCheckBoxesLayout">
+           <property name="verticalSpacing">
+            <number>6</number>
+           </property>
            <item row="0" column="0">
             <widget class="QCheckBox" name="displayedCheckbox">
              <property name="toolTip">
@@ -751,6 +754,31 @@
              </property>
             </widget>
            </item>
+           <item row="1" column="1" alignment="Qt::AlignLeft">
+            <widget class="QPushButton" name="satColorPickerButton">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>18</width>
+               <height>18</height>
+              </size>
+             </property>
+             <property name="toolTip">
+              <string>Change color for selected satellite(s)</string>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string notr="true"/>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
          <item>
@@ -768,7 +796,13 @@
            <item>
             <widget class="QTextEdit" name="descriptionTextEdit">
              <property name="readOnly">
-              <bool>true</bool>
+              <bool>false</bool>
+             </property>
+             <property name="acceptRichText">
+              <bool>false</bool>
+             </property>
+             <property name="placeholderText">
+              <string notr="true"/>
              </property>
             </widget>
            </item>
