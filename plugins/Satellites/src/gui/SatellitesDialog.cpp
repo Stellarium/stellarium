@@ -28,6 +28,7 @@
 #include <QUrl>
 #include <QTabWidget>
 #include <QAction>
+#include <QColorDialog>
 
 #include "StelApp.hpp"
 #include "StelCore.hpp"
@@ -204,6 +205,10 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->userCheckBox, SIGNAL(clicked()),
 		this, SLOT(setFlags()));
 
+	connect(ui->satColorPickerButton, SIGNAL(clicked(bool)), this, SLOT(askSatColor()));
+	connect(ui->descriptionTextEdit, SIGNAL(textChanged()), this, SLOT(descriptionTextChanged()));
+
+
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
 		this, SLOT(handleGroupChanges(QListWidgetItem*)));
 
@@ -243,6 +248,65 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
 }
+
+// for now, the color picker changes hintColor AND orbitColor at once
+void SatellitesDialog::askSatColor()
+{
+	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
+
+	if (selection.isEmpty()) return;
+
+	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
+	Q_ASSERT(SatellitesMgr);
+
+	QColor c = QColorDialog::getColor(buttonColor, Q_NULLPTR, "");
+	if (c.isValid())
+	{
+		Vec3f vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		SatelliteP sat;
+
+		// colorize all selected satellites
+		for (int i = 0; i < selection.size(); i++)
+		{
+			const QModelIndex& index = selection.at(i);
+			sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
+
+			sat->hintColor = vColor;
+			sat->orbitColor = vColor;
+		}
+
+		// colorize the button
+		buttonColor = c;
+		ui->satColorPickerButton->setStyleSheet(
+		  "QPushButton { background-color:" + buttonColor.name() + "; }");
+	}
+}
+
+// save new description text to selected satellite(s)
+void SatellitesDialog::descriptionTextChanged()
+{
+	QModelIndexList selection = ui->satellitesList->selectionModel()->selectedIndexes();
+
+	if (selection.isEmpty()) return;
+
+	QString newdesc = ui->descriptionTextEdit->toPlainText();
+	SatelliteP sat;
+
+	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
+	Q_ASSERT(SatellitesMgr);
+
+	for (int i = 0; i < selection.size(); i++)
+	{
+		const QModelIndex& index = selection.at(i);
+		sat = SatellitesMgr->getById(index.data(Qt::UserRole).toString());
+
+		if (sat->description != newdesc)
+		{
+			sat->description = newdesc;
+		}
+	}
+}
+
 
 void SatellitesDialog::setFlagRealisticMode(bool state)
 {
@@ -339,13 +403,69 @@ void SatellitesDialog::updateSatelliteData()
 
 	enableSatelliteDataForm(false);
 
+	// needed for colorbutton
+	Satellites* SatellitesMgr = GETSTELMODULE(Satellites);
+	Q_ASSERT(SatellitesMgr);
+	Vec3f vColor;
+
+	// set default
+	buttonColor = QColor(0.4, 0.4, 0.4);
+
+
 	if (selection.count() > 1)
 	{
 		ui->nameEdit->clear();
 		ui->noradNumberEdit->clear();
-		ui->descriptionTextEdit->clear();
 		ui->tleFirstLineEdit->clear();
 		ui->tleSecondLineEdit->clear();
+
+		// get color of first selected item and test against all other selections
+		{
+			const QModelIndex& index = selection.at(0);
+			QString id = index.data(Qt::UserRole).toString();
+			SatelliteP sat = SatellitesMgr->getById(id);
+
+			vColor = sat->hintColor;
+
+			for (int i = 1; i < selection.size(); i++)
+			{
+				const QModelIndex& index = selection.at(i);
+
+				id = index.data(Qt::UserRole).toString();
+				sat = SatellitesMgr->getById(id);
+
+				// test for more than one color in the selection.
+				// if there are, return grey
+				if (sat->hintColor != vColor)
+				{
+					vColor = Vec3f(0.4, 0.4, 0.4);
+					break;
+				}
+			}
+		}
+
+		// get description text of first selection and test against all other selections
+		{
+			const QModelIndex& index = selection.at(0);
+			QString descText = index.data(SatDescriptionRole).toString();
+
+			if (!descText.isEmpty())
+			{
+				for (int i = 1; i < selection.size(); i++)
+				{
+					const QModelIndex& index = selection.at(i);
+
+					if (descText != index.data(SatDescriptionRole).toString())
+					{
+						descText.clear();
+						break;
+					}
+				}
+			}
+
+			ui->descriptionTextEdit->setText(descText);
+		}
+
 	}
 	else
 	{
@@ -358,7 +478,17 @@ void SatellitesDialog::updateSatelliteData()
 		ui->tleFirstLineEdit->setCursorPosition(0);
 		ui->tleSecondLineEdit->setText(index.data(SecondLineRole).toString());
 		ui->tleSecondLineEdit->setCursorPosition(0);
+		
+		
+		// get color of the one selected sat
+		QString id = index.data(Qt::UserRole).toString();
+		SatelliteP sat = SatellitesMgr->getById(id);
+		vColor = sat->hintColor;
 	}
+
+	// colorize the colorpicker button
+	buttonColor.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	ui->satColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonColor.name() + "; }");
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	ui->satellitesList->repaint();
@@ -1011,6 +1141,7 @@ void SatellitesDialog::enableSatelliteDataForm(bool enabled)
 	ui->displayedCheckbox->blockSignals(!enabled);
 	ui->orbitCheckbox->blockSignals(!enabled);
 	ui->userCheckBox->blockSignals(!enabled);
+	ui->descriptionTextEdit->blockSignals(!enabled);
 }
 
 void SatellitesDialog::setIridiumFlaresHeaderNames()
