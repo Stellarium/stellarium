@@ -2111,6 +2111,22 @@ void Satellites::translations()
 	N_("International Gamma-Ray Astrophysics Laboratory");
 	// TRANSLATORS: Satellite description.
 	N_("The Gamma-Ray Observatory");
+	// TRANSLATORS: Satellite description.
+	N_("The Microvariability and Oscillations of Stars telescope");
+	// TRANSLATORS: Satellite description.
+	N_("The Interface Region Imaging Spectrograph");
+	// TRANSLATORS: Satellite description.
+	N_("The Spectroscopic Planet Observatory for Recognition of Interaction of Atmosphere");
+	// TRANSLATORS: Satellite description.
+	M_("Nuclear Spectroscopic Telescope Array");
+	// TRANSLATORS: Satellite description.
+	N_("The Dark Matter Particle Explorer");
+	// TRANSLATORS: Satellite description.
+	N_("Arcsecond Space Telescope Enabling Research in Astrophysics");
+	// TRANSLATORS: Satellite description.
+	N_("Reuven Ramaty High Energy Solar Spectroscopic Imager");
+	// TRANSLATORS: Satellite description.
+	N_("The Chandra X-ray Observatory");
 
 	// Satellite names - a few famous objects only
 	// TRANSLATORS: Satellite name: International Space Station

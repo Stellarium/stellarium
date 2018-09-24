@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>579</width>
-    <height>481</height>
+    <height>491</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -135,7 +135,7 @@
       </sizepolicy>
      </property>
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <property name="documentMode">
       <bool>false</bool>
@@ -757,21 +757,15 @@
            <item row="1" column="1" alignment="Qt::AlignLeft">
             <widget class="QPushButton" name="satColorPickerButton">
              <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+              <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                <horstretch>0</horstretch>
                <verstretch>0</verstretch>
               </sizepolicy>
              </property>
-             <property name="minimumSize">
-              <size>
-               <width>1</width>
-               <height>0</height>
-              </size>
-             </property>
              <property name="maximumSize">
               <size>
-               <width>20</width>
-               <height>20</height>
+               <width>18</width>
+               <height>18</height>
               </size>
              </property>
              <property name="toolTip">
@@ -781,7 +775,7 @@
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="text">
-              <string/>
+              <string notr="true"/>
              </property>
             </widget>
            </item>
@@ -804,15 +798,11 @@
              <property name="readOnly">
               <bool>false</bool>
              </property>
-             <property name="html">
-              <string notr="true">&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-             </property>
              <property name="acceptRichText">
               <bool>false</bool>
+             </property>
+             <property name="cursorWidth">
+              <number>5</number>
              </property>
              <property name="placeholderText">
               <string notr="true"/>

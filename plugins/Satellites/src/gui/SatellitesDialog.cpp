@@ -247,6 +247,8 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->predictIridiumFlaresPushButton, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
 	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
+
+	ui->satColorPickerButton->setFixedSize(QSize(18, 18));
 }
 
 // for now, the color picker changes hintColor AND orbitColor at once
@@ -277,8 +279,7 @@ void SatellitesDialog::askSatColor()
 
 		// colorize the button
 		buttonColor = c;
-		ui->satColorPickerButton->setStyleSheet(
-		  "QPushButton { background-color:" + buttonColor.name() + "; }");
+		ui->satColorPickerButton->setStyleSheet("QPushButton { background-color:" + buttonColor.name() + "; }");
 	}
 }
 
