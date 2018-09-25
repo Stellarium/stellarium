@@ -4980,7 +4980,7 @@ void AstroCalcDialog::prepareAngularDistanceAxesAndGraph()
 
 void AstroCalcDialog::drawAngularDistanceGraph()
 {
-	QString label = q_("Change an angular distance between the Moon and selected object");
+	QString label = q_("Change of angular distance between the Moon and selected object");
 	ui->angularDistanceLabel->setText(label);
 
 	// special case - plot the graph when tab is visible
