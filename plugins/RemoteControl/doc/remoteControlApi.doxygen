@@ -250,9 +250,9 @@ Returns a JSON String array of search matches
 
 \paragraph rcObjectServiceInfo info
 Parameters: <tt>[name (String)]</tt>\n
-Parameters: <tt>[format (String)]</tt>\n
-Returns an info string (StelObject::getInfoString) about the object identified by \p name in HTML or JSON format (strings "json" or "map" for \p format).
-If no parameter is given, the currently selected object is used.
+Parameters: <tt>[format (String)]</tt> (strings "json" or "map" for JSON, any other value provides HTML)\n
+Returns an info string about the object identified by \p name in HTML (StelObject::getInfoString) or JSON (StelObject::getInfoMap) format.
+If no parameter \p name is given, the currently selected object is used.
 
 \paragraph rcObjectServiceListobjecttypes listobjecttypes
 Returns all object types available in the internal catalogs as a JSON array of objects of format

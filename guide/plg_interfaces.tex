@@ -411,6 +411,7 @@ The plugin may be most useful for presentation scenarios, hiding the GUI from th
 audience and allowing the presenter to change settings on a separate monitor 
 without showing distracting dialog windows. It also allows to start and stop 
 scripts remotely. 
+
 Because the web interface can be customized (or completely 
 replaced) with some knowledge of HTML, CSS and JavaScript, another possibility 
 is a kiosk mode, where untrusted users can execute a variety of predefined 
@@ -418,6 +419,8 @@ actions (like starting recorded tours) without having access to all Stellarium
 settings. The web API can also be accessed directly (without using a browser 
 and the HTML interface), allowing control of Stellarium with external programs 
 and scripts using HTTP calls like with the tools \file{wget} and \file{curl}.
+
+This plugin allows also interfacing other programs with Stellarium. 
 
 \subsection{Using the plugin}
 \label{sec:plugins:RemoteControl:using}
@@ -438,6 +441,8 @@ The plugin starts an HTTP server on the specified port. The default port is
 a web browser on the same computer and entering \url{http://localhost:8090} in the 
 address bar. When trying to access the remote control from another computer, 
 you need the IP address or the hostname of the server on which Stellarium runs. 
+On a small tablet, you may want to use \url{http://myserver:8090/tablet7in.html} instead.
+
 The plugin shows the locally detected address, but depending on your network or 
 if you need external access you might need to use a different one 
 --- contact your network administrator if you need help with that.
@@ -459,7 +464,7 @@ forwarding or a DMZ is configured.}
 
 If you are familiar with the main Stellarium interface, you should easily find 
 your way around the web interface. 
-%The remote control automatically uses the same language as set in the main program. 
+The remote control automatically uses the same language as set in the main program. 
 Tabs at the top allow access to different settings and controls. 
 
 \begin{description}
@@ -491,7 +496,11 @@ supported.
 \subsection{Remote Control Commandline API}
 \label{sec:plugins:RemoteControl:CLI}
 
-It is also possible to send commands via command line, e.g.,
+Apart from retrieving quick object info in your browser with e.g.\ \url{http://localhost:8090/api/objects/info?format=json&name=Sun},
+it is also possible to send commands via command line\footnote{%
+  Depending on your operating system or command shell,
+  you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.}%
+, e.g.,
 
 \begin{commandsScr}
 wget -q --post-data 'id=show.ssc' http://stella:8090/api/scripts/run >/dev/null 2>&1
@@ -503,14 +512,11 @@ curl -d 'id=LandscapeMgr.fogDisplayed&value=false' \
 This allows triggering automatic show setups for museums etc.\ via  some centralized schedulers like \command{cron}.
 
 % TODO: List all available commands with examples here?
-
-You can retrieve a complete pretty-printed list of properties:
+To get a complete pretty-printed list of properties, use:
 \begin{commandsScr}
 curl -G -d 'id=propId=-1&actionId=-2' http://localhost:8090/api/main/status | \
      python -m json.tool 
 \end{commandsScr} 
-Depending on your operating system or command shell, you may have to use double quotes in the \texttt{-\/-data} argument to \command{curl}.
-
 
   
 \subsection{Developer information}
