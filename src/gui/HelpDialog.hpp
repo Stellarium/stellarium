@@ -23,13 +23,13 @@
 #include <QString>
 #include <QObject>
 #include <QSettings>
+#include <QNetworkReply>
 
 #include "StelDialog.hpp"
 
 class Ui_helpDialogForm;
 class QListWidgetItem;
 class QNetworkAccessManager;
-class QNetworkReply;
 
 class HelpDialog : public StelDialog
 {

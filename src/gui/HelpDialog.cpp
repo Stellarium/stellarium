@@ -54,13 +54,13 @@
 #include "StelJsonParser.hpp"
 
 HelpDialog::HelpDialog(QObject* parent)
-	: StelDialog("Help", parent),
-	  message(""),
-	  updateState(CompleteNoUpdates),
-	  networkManager(Q_NULLPTR),
-	  downloadReply(Q_NULLPTR)
+	: StelDialog("Help", parent)
+	, message("")
+	, updateState(CompleteNoUpdates)
+	, networkManager(Q_NULLPTR)
+	, downloadReply(Q_NULLPTR)
 {
-	ui = new Ui_helpDialogForm;
+	ui = new Ui_helpDialogForm;	
 }
 
 HelpDialog::~HelpDialog()
