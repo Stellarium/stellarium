@@ -751,19 +751,20 @@ void StelApp::draw()
 *************************************************************************/
 void StelApp::glWindowHasBeenResized(const QRectF& rect)
 {
+	// Remove the effect before resizing the core, or things get messy.
+	QString effect = getViewportEffect();
+	setViewportEffect("none");
 	if (core)
+	{
 		core->windowHasBeenResized(rect.x(), rect.y(), rect.width(), rect.height());
+	}
 	else
 	{
 		saveProjW = rect.width();
 		saveProjH = rect.height();
 	}
-	if (renderBuffer)
-	{
-		ensureGLContextCurrent();
-		delete renderBuffer;
-		renderBuffer = Q_NULLPTR;
-	}
+	// Force to recreate the viewport effect if any.
+	setViewportEffect(effect);
 #ifdef ENABLE_SPOUT
 	if (spoutSender)
 		spoutSender->resize(rect.width(),rect.height());
