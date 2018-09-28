@@ -354,6 +354,21 @@ void OcularDialog::createDialogContent()
 	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
+	connect(ui->ccdChipY,    SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->ccdChipX,    SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->ccdPixelY,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->ccdPixelX,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->ccdResX,     SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
+	connect(ui->ccdResY,     SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
+	connect(ui->ccdRotAngle, SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->ccdBinningX, SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
+	connect(ui->ccdBinningY, SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
+	connect(ui->OAG_checkBox,SIGNAL(stateChanged(int)),    ccdMapper, SLOT(submit()));
+	connect(ui->OAGPrismH,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->OAGPrismW,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->OAGDist,     SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->OAGPrismPA,  SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
 	ocularMapper->setModel(ocularTableModel);
@@ -370,6 +385,13 @@ void OcularDialog::createDialogContent()
 	ui->ocularListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
+	// We need particular refresh methods to see immediate feedback.
+	connect(ui->ocularAFov,                 SIGNAL(valueChanged(double)), this, SLOT(updateOcular()));
+	connect(ui->ocularFL,                   SIGNAL(valueChanged(double)), this, SLOT(updateOcular()));
+	connect(ui->ocularFieldStop,            SIGNAL(valueChanged(double)), this, SLOT(updateOcular()));
+	connect(ui->binocularsCheckBox,         SIGNAL(stateChanged(int)),    this, SLOT(updateOcular()));
+	connect(ui->permanentCrosshairCheckBox, SIGNAL(stateChanged(int)),    this, SLOT(updateOcular()));
+
 	// The lens mapper
 	lensMapper = new QDataWidgetMapper();
 	lensMapper->setModel(lensTableModel);
@@ -382,6 +404,8 @@ void OcularDialog::createDialogContent()
 	ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
+	connect(ui->lensMultiplier, SIGNAL(valueChanged(double)), this, SLOT(updateLens()));
+
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();
 	telescopeMapper->setModel(telescopeTableModel);
@@ -392,13 +416,38 @@ void OcularDialog::createDialogContent()
 	telescopeMapper->addMapping(ui->telescopeHFlip,    3, "checked");
 	telescopeMapper->addMapping(ui->telescopeVFlip,    4, "checked");
 	telescopeMapper->addMapping(ui->telescopeEQ,       5, "checked");
-	ocularMapper->toFirst();
+	telescopeMapper->toFirst();
 	connect(ui->telescopeListView->selectionModel() , SIGNAL(currentRowChanged(QModelIndex, QModelIndex)),
 		telescopeMapper, SLOT(setCurrentModelIndex(QModelIndex)));
 	ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
+	connect(ui->telescopeDiameter, SIGNAL(valueChanged(double)), this, SLOT(updateTelescope()));
+	connect(ui->telescopeFL,       SIGNAL(valueChanged(double)), this, SLOT(updateTelescope()));
+	connect(ui->telescopeHFlip,    SIGNAL(stateChanged(int)),    this, SLOT(updateTelescope()));
+	connect(ui->telescopeVFlip,    SIGNAL(stateChanged(int)),    this, SLOT(updateTelescope()));
+	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)),    this, SLOT(updateTelescope()));
+
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
+}
+
+// We need particular refresh methods to see immediate feedback.
+void OcularDialog::updateOcular()
+{
+	ocularMapper->submit();
+	plugin->selectOcularAtIndex(plugin->getSelectedOcularIndex());
+}
+
+void OcularDialog::updateLens()
+{
+	lensMapper->submit();
+	plugin->selectLensAtIndex(plugin->getSelectedLensIndex());
+}
+
+void OcularDialog::updateTelescope()
+{
+	telescopeMapper->submit();
+	plugin->selectTelescopeAtIndex(plugin->getSelectedTelescopeIndex());
 }
 
 void OcularDialog::setLabelsDescriptionText(bool state)
