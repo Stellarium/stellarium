@@ -317,8 +317,9 @@ void AstroCalcDialog::createDialogContent()
 	ui->wutAngularSizeLimitMaxSpinBox->setMaximum(10.0, true);
 	ui->wutAngularSizeLimitMaxSpinBox->setWrapping(false);
 
-	ui->wutAngularSizeLimitMinSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_min", 0.01667).toDouble());
-	ui->wutAngularSizeLimitMaxSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_max", 10.0).toDouble());
+	// Convert from angular minutes
+	ui->wutAngularSizeLimitMinSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_min", 1.0).toDouble()/60.0);
+	ui->wutAngularSizeLimitMaxSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_max", 600.0).toDouble()/60.0);
 	connect(ui->wutAngularSizeLimitCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveWutAngularSizeFlag(bool)));
 	connect(ui->wutAngularSizeLimitMinSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMinAngularSizeLimit()));
 	connect(ui->wutAngularSizeLimitMaxSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMaxAngularSizeLimit()));
@@ -4105,13 +4106,15 @@ void AstroCalcDialog::saveWutMagnitudeLimit(double mag)
 
 void AstroCalcDialog::saveWutMinAngularSizeLimit()
 {
-	conf->setValue("astrocalc/wut_angular_limit_min", QString::number(ui->wutAngularSizeLimitMinSpinBox->valueDegrees(), 'f', 5));
+	// Convert to angular minutes
+	conf->setValue("astrocalc/wut_angular_limit_min", QString::number(ui->wutAngularSizeLimitMinSpinBox->valueDegrees()*60.0, 'f', 2));
 	calculateWutObjects();
 }
 
 void AstroCalcDialog::saveWutMaxAngularSizeLimit()
 {
-	conf->setValue("astrocalc/wut_angular_limit_max", QString::number(ui->wutAngularSizeLimitMaxSpinBox->valueDegrees(), 'f', 5));
+	// Convert to angular minutes
+	conf->setValue("astrocalc/wut_angular_limit_max", QString::number(ui->wutAngularSizeLimitMaxSpinBox->valueDegrees()*60.0, 'f', 2));
 	calculateWutObjects();
 }
 
