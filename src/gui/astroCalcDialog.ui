@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>643</width>
-    <height>399</height>
+    <height>422</height>
    </rect>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
@@ -1235,6 +1235,12 @@
             </item>
             <item>
              <widget class="QDoubleSpinBox" name="wutMagnitudeDoubleSpinBox">
+              <property name="maximumSize">
+               <size>
+                <width>70</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
@@ -1376,6 +1382,12 @@
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="maximumSize">
+               <size>
+                <width>120</width>
+                <height>16777215</height>
+               </size>
+              </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
               </property>
@@ -1385,6 +1397,12 @@
              <widget class="AngleSpinBox" name="wutAngularSizeLimitMaxSpinBox">
               <property name="enabled">
                <bool>true</bool>
+              </property>
+              <property name="maximumSize">
+               <size>
+                <width>120</width>
+                <height>16777215</height>
+               </size>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
