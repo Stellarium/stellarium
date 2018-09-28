@@ -275,7 +275,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="stackedWidgetPage1">
          <layout class="QGridLayout" name="gridLayout_2">
@@ -1221,8 +1221,11 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage5">
          <layout class="QGridLayout" name="gridLayout">
-          <item row="0" column="0">
+          <item row="1" column="1">
            <layout class="QHBoxLayout" name="horizontalLayout_13">
+            <property name="spacing">
+             <number>6</number>
+            </property>
             <item>
              <widget class="QLabel" name="label_2">
               <property name="text">
@@ -1248,21 +1251,21 @@
             </item>
            </layout>
           </item>
-          <item row="1" column="0">
-           <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item row="0" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_12">
             <item>
-             <widget class="QLabel" name="label_3">
+             <widget class="QLabel" name="wutTimeIntervalLabel">
               <property name="text">
-               <string>Select a category:</string>
+               <string>Show objects which are up:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="wutCategoryListWidget"/>
+             <widget class="QComboBox" name="wutComboBox"/>
             </item>
            </layout>
           </item>
-          <item row="1" column="1">
+          <item row="3" column="1">
            <layout class="QVBoxLayout" name="verticalLayout_5">
             <item>
              <widget class="QLabel" name="label_4">
@@ -1345,17 +1348,48 @@
             </item>
            </layout>
           </item>
-          <item row="0" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item row="0" column="0" rowspan="4">
+           <layout class="QVBoxLayout" name="verticalLayout_3">
             <item>
-             <widget class="QLabel" name="wutTimeIntervalLabel">
+             <widget class="QLabel" name="label_3">
               <property name="text">
-               <string>Show objects which are up:</string>
+               <string>Select a category:</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="wutComboBox"/>
+             <widget class="QListWidget" name="wutCategoryListWidget"/>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="1">
+           <layout class="QHBoxLayout" name="horizontalLayout_20">
+            <item>
+             <widget class="QCheckBox" name="wutAngularSizeLimitCheckBox">
+              <property name="text">
+               <string>Limit angular size:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="AngleSpinBox" name="wutAngularSizeLimitMinSpinBox">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="AngleSpinBox" name="wutAngularSizeLimitMaxSpinBox">
+              <property name="enabled">
+               <bool>true</bool>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>

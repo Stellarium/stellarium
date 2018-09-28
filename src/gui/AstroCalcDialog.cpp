@@ -304,6 +304,25 @@ void AstroCalcDialog::createDialogContent()
 	proxyModel->setFilterCaseSensitivity(Qt::CaseInsensitive);
 	ui->wutMatchingObjectsListView->setModel(proxyModel);
 
+	ui->wutAngularSizeLimitCheckBox->setChecked(conf->value("astrocalc/wut_angular_limit_flag", false).toBool());
+	// Let's use DMS and decimal degrees as acceptable values for angular size limits
+	ui->wutAngularSizeLimitMinSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->wutAngularSizeLimitMinSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->wutAngularSizeLimitMinSpinBox->setMinimum(0.0, true);
+	ui->wutAngularSizeLimitMinSpinBox->setMaximum(10.0, true);
+	ui->wutAngularSizeLimitMinSpinBox->setWrapping(false);
+	ui->wutAngularSizeLimitMaxSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
+	ui->wutAngularSizeLimitMaxSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
+	ui->wutAngularSizeLimitMaxSpinBox->setMinimum(0.0, true);
+	ui->wutAngularSizeLimitMaxSpinBox->setMaximum(10.0, true);
+	ui->wutAngularSizeLimitMaxSpinBox->setWrapping(false);
+
+	ui->wutAngularSizeLimitMinSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_min", 0.01667).toDouble());
+	ui->wutAngularSizeLimitMaxSpinBox->setDegrees(conf->value("astrocalc/wut_angular_limit_max", 10.0).toDouble());
+	connect(ui->wutAngularSizeLimitCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveWutAngularSizeFlag(bool)));
+	connect(ui->wutAngularSizeLimitMinSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMinAngularSizeLimit()));
+	connect(ui->wutAngularSizeLimitMaxSpinBox, SIGNAL(valueChanged()), this, SLOT(saveWutMaxAngularSizeLimit()));
+
 	ui->wutMagnitudeDoubleSpinBox->setValue(conf->value("astrocalc/wut_magnitude_limit", 10.0).toDouble());
 	connect(ui->wutMagnitudeDoubleSpinBox, SIGNAL(valueChanged(double)), this, SLOT(saveWutMagnitudeLimit(double)));
 	connect(ui->wutComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveWutTimeInterval(int)));
@@ -4084,6 +4103,25 @@ void AstroCalcDialog::saveWutMagnitudeLimit(double mag)
 	calculateWutObjects();
 }
 
+void AstroCalcDialog::saveWutMinAngularSizeLimit()
+{
+	conf->setValue("astrocalc/wut_angular_limit_min", QString::number(ui->wutAngularSizeLimitMinSpinBox->valueDegrees(), 'f', 5));
+	calculateWutObjects();
+}
+
+void AstroCalcDialog::saveWutMaxAngularSizeLimit()
+{
+	conf->setValue("astrocalc/wut_angular_limit_max", QString::number(ui->wutAngularSizeLimitMaxSpinBox->valueDegrees(), 'f', 5));
+	calculateWutObjects();
+}
+
+void AstroCalcDialog::saveWutAngularSizeFlag(bool state)
+{
+	conf->setValue("astrocalc/wut_angular_limit_flag", state);
+	calculateWutObjects();
+}
+
+
 void AstroCalcDialog::saveWutTimeInterval(int index)
 {
 	Q_ASSERT(ui->wutComboBox);
@@ -4116,6 +4154,9 @@ void AstroCalcDialog::calculateWutObjects()
 
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
 
+		bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
+		double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
+		double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
 		double JD = core->getJD();
 		double wutJD = (int)JD;
@@ -4179,6 +4220,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 1: // Bright stars
 					for (const auto& object : hipStars)
 					{
+						// Filter for angular size is not applicable
 						if (object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
 					}
@@ -4189,10 +4231,22 @@ void AstroCalcDialog::calculateWutObjects()
 						Nebula::NebulaType ntype = object->getDSOType();
 						if ((bool)(tflags & Nebula::TypeBrightNebulae)
 						    && (ntype == Nebula::NebN || ntype == Nebula::NebBn || ntype == Nebula::NebEn || ntype == Nebula::NebRn || ntype == Nebula::NebHII || ntype == Nebula::NebISM || ntype == Nebula::NebCn || ntype == Nebula::NebSNR)
-						    && object->getVMagnitudeWithExtinction(core) <= magLimit	&& object->isAboveRealHorizon(core))
+						    && object->getVMagnitudeWithExtinction(core) <= magLimit
+						    && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
+
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
 
 							if (d.isEmpty() && n.isEmpty())
 								continue;
@@ -4216,6 +4270,17 @@ void AstroCalcDialog::calculateWutObjects()
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
+
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
 
 							if (d.isEmpty() && n.isEmpty())
 								continue;
@@ -4241,6 +4306,17 @@ void AstroCalcDialog::calculateWutObjects()
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
 
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
@@ -4265,6 +4341,17 @@ void AstroCalcDialog::calculateWutObjects()
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
 
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
@@ -4281,56 +4368,161 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isAsteroid && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
+
 					}
 					break;
 				case 7: // Comets
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isComet && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 				case 8: // Plutinos
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isPlutino && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 				case 9: // Dwarf planets
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isDwarfPlanet && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 				case 10: // Cubewanos
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isCubewano && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 				case 11: // Scattered disc objects
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isSDO && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 				case 12: // Oort cloud objects
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isOCO && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 				case 13: // Sednoids
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isSednoid && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 				case 14: // Planetary nebulae
@@ -4344,6 +4536,17 @@ void AstroCalcDialog::calculateWutObjects()
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
+
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
 
 							if (d.isEmpty() && n.isEmpty())
 								continue;
@@ -4459,6 +4662,17 @@ void AstroCalcDialog::calculateWutObjects()
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
 
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
@@ -4480,6 +4694,17 @@ void AstroCalcDialog::calculateWutObjects()
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
+
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
 
 							if (d.isEmpty() && n.isEmpty())
 								continue;
@@ -4504,6 +4729,17 @@ void AstroCalcDialog::calculateWutObjects()
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
 
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
@@ -4520,7 +4756,20 @@ void AstroCalcDialog::calculateWutObjects()
 					for (const auto& object : allObjects)
 					{
 						if (object->getPlanetType() == Planet::isPlanet && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
 					}
 					break;
 			}
