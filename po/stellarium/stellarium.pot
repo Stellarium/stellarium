@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-09-28 17:58+0700\n"
+"POT-Creation-Date: 2018-09-28 18:04+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -9842,7 +9842,7 @@ msgid "Phenomena"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1259 src/ui_astroCalcDialog.h:1342
-#: src/ui_astroCalcDialog.h:1372
+#: src/ui_astroCalcDialog.h:1378
 msgid "Graphs"
 msgstr ""
 
@@ -10072,53 +10072,61 @@ msgstr ""
 msgid "Limit angular size:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1359
-msgid "First celestial body:"
-msgstr ""
-
 #: src/ui_astroCalcDialog.h:1360
-msgid "Second celestial body:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1361
-msgid "Orbital resonance:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1362
-msgid "Synodic period:"
+msgid "Minimal angular size for visible celestial objects (except stars)"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1363
-msgid "Orbital velocity of first celestial body:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1364
-msgid "Angular distance:"
+msgid "Maximum angular size for visible celestial objects (except stars)"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1365
-msgid "Linear distance:"
+msgid "First celestial body:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1366
-msgid "Orbital velocity of second celestial body:"
+msgid "Second celestial body:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1367
-msgid "Equatorial diameters ratio:"
+msgid "Orbital resonance:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1368
+msgid "Synodic period:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1369
-msgid "Data"
+msgid "Orbital velocity of first celestial body:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1370
+msgid "Angular distance:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1371
+msgid "Linear distance:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1372
+msgid "Orbital velocity of second celestial body:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1373
+msgid "Equatorial diameters ratio:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1375
+msgid "Data"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1376
 msgid ""
 "The change in the linear and angular distances between selected celestial "
 "bodies"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1371
+#: src/ui_astroCalcDialog.h:1377
 msgid "red graph: linear distance; yellow graph: angular distance"
 msgstr ""
 
