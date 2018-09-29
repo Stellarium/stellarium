@@ -1382,6 +1382,12 @@
               <property name="enabled">
                <bool>true</bool>
               </property>
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>0</height>
+               </size>
+              </property>
               <property name="maximumSize">
                <size>
                 <width>120</width>
@@ -1400,6 +1406,12 @@
              <widget class="AngleSpinBox" name="wutAngularSizeLimitMaxSpinBox">
               <property name="enabled">
                <bool>true</bool>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>120</width>
+                <height>0</height>
+               </size>
               </property>
               <property name="maximumSize">
                <size>
