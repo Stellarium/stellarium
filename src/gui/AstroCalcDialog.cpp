@@ -4165,6 +4165,11 @@ void AstroCalcDialog::calculateWutObjects()
 		double wutJD = (int)JD;
 		double az, alt;
 
+		ui->wutAngularSizeLimitCheckBox->setText(q_("Limit angular size:"));
+		ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular size for visible celestial objects"));
+		ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular size for visible celestial objects"));
+		ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular size for visible celestial objects"));
+
 		// Dirty hack to calculate sunrise/sunset
 		// FIXME: This block of code should be replaced in future!
 		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
@@ -4564,6 +4569,12 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 15: // Bright double stars
+					// Special case for double stars
+					ui->wutAngularSizeLimitCheckBox->setText(q_("Limit angular separation:"));
+					ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular separation for visible double stars"));
+					ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular separation for visible double stars"));
+					ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular separation for visible double stars"));
+
 					for (const auto& dblStar : dblHipStars)
 					{
 						StelObjectP object = dblStar.firstKey();
