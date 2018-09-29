@@ -1,26 +1,27 @@
 # Translators:
-# SH LU <smoothman@126.com>, 2017
+# 殳玮 孙 <itun@qq.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
-"POT-Creation-Date: 2018-05-27 15:56+0700\n"
+"POT-Creation-Date: 2018-08-15 15:12+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: SH LU <smoothman@126.com>, 2017\n"
+"Last-Translator: 殳玮 孙 <itun@qq.com>, 2017\n"
 "Language-Team: Chinese (https://www.transifex.com/stellarium/teams/80998/zh/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. (itstool) path: component/name
 #: stellarium.appdata.xml:7
 msgid "Stellarium"
-msgstr "虚拟天文馆"
+msgstr "Stellarium"
 
 #. (itstool) path: component/summary
 #: stellarium.appdata.xml:8
 msgid "Desktop Planetarium"
-msgstr "桌面虚拟天文馆"
+msgstr "桌面天文馆"
 
 #. (itstool) path: description/p
 #: stellarium.appdata.xml:10
@@ -30,14 +31,15 @@ msgid ""
 "features including multiple panoramic landscapes, fog, light pollution "
 "simulation and a built-in scripting engine."
 msgstr ""
-"Stellarium通过OpenGL引擎能够以照片级真实度来渲染三维天空。它能够显示恒星，星座，行星和星云，它还有很多其他特性比如众多的全景地貌，模拟雾和灯光污染，并且有内置的脚本引擎。"
+"Stellarium使用OpenGL实时渲染逼真的3D天空。 "
+"它可以显示恒星、星座、行星和星云，并有许多其他功能，包括多种地景、雾、光污染模拟和一个内置的脚本引擎。"
 
 #. (itstool) path: description/p
 #: stellarium.appdata.xml:11
 msgid ""
 "Stellarium comes with a star catalogue of about 600 thousand stars and it is"
 " possible to download extra catalogues with up to 210 million stars."
-msgstr "Stellarium 包含有约60万的恒星目录，并且可以下载额外的多达2亿1千万的恒星目录"
+msgstr "Stellarium内置一个含约60万颗星的星表，另外还可以下载含多达2.1亿颗星的额外星表。"
 
 #. (itstool) path: description/p
 #: stellarium.appdata.xml:12
@@ -45,9 +47,7 @@ msgid ""
 "Stellarium has multiple sky cultures - see the constellations from the "
 "traditions of Polynesian, Inuit, Navajo, Korean, Lakota, Egyptian and "
 "Chinese astronomers, as well as the traditional Western constellations."
-msgstr ""
-"Stellarium 还有这多种多样的天空文化- 来看看来自世界各地的传统天文学家眼中的星座， "
-"波利尼西亚的，因纽特人的，韩国的，纳瓦霍族人的，拉科他族的，埃及的，中国的，当然还有传统西方的星座。"
+msgstr "Stellarium内置多种星空文化——参见波利尼西亚、因纽特、纳瓦霍、朝鲜、拉科塔、埃及和中国天文学家的传统星座，以及西方的传统星座。"
 
 #. (itstool) path: description/p
 #: stellarium.appdata.xml:13
@@ -55,9 +55,9 @@ msgid ""
 "It is also possible to visit other planets in the solar system - see what "
 "the sky looked like to the Apollo astronauts, or what the rings of Saturn "
 "looks like from Titan."
-msgstr "您还可以访问太阳系中的其他行星 -看看阿波罗宇航员眼中的天空是什么样的，也可以从土星卫星泰坦上观察土星环是什么样的。"
+msgstr "它也可以访问太阳系中的其他行星——比如从阿波罗号宇航员的视角看天空，或者从土卫六看土星光环。"
 
 #. (itstool) path: component/developer_name
-#: stellarium.appdata.xml:46
+#: stellarium.appdata.xml:49
 msgid "Stellarium team"
-msgstr ""
+msgstr "Stellarium团队"
