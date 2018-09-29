@@ -4568,7 +4568,21 @@ void AstroCalcDialog::calculateWutObjects()
 					{
 						StelObjectP object = dblStar.firstKey();
 						if (object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = dblStar.value(object)/3600.0; // convert from arcseconds to degrees
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
 							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
+
 					}
 					break;
 				case 16: // Bright variale stars

@@ -1372,6 +1372,9 @@
            <layout class="QHBoxLayout" name="horizontalLayout_20">
             <item>
              <widget class="QCheckBox" name="wutAngularSizeLimitCheckBox">
+              <property name="toolTip">
+               <string>Set limits for angular size (or angular separation for double stars) for visible celestial objects</string>
+              </property>
               <property name="text">
                <string>Limit angular size:</string>
               </property>
@@ -1395,7 +1398,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>Minimal angular size for visible celestial objects (except stars)</string>
+               <string>Minimal angular size (or angular separation for double stars) for visible celestial objects </string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1420,7 +1423,7 @@
                </size>
               </property>
               <property name="toolTip">
-               <string>Maximum angular size for visible celestial objects (except stars)</string>
+               <string>Maximum angular size (or angular separation for double stars) for visible celestial objects</string>
               </property>
               <property name="alignment">
                <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>

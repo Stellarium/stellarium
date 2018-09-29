@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-09-28 18:04+0700\n"
+"POT-Creation-Date: 2018-09-29 19:48+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -413,7 +413,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:897 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+#: plugins/Oculars/src/gui/OcularDialog.cpp:482
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:223
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
@@ -1133,7 +1133,7 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/MinorPlanet.cpp:323 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:307 src/gui/StelGuiItems.cpp:755
-#: src/gui/AstroCalcDialog.cpp:4896 plugins/Satellites/src/Satellite.cpp:303
+#: src/gui/AstroCalcDialog.cpp:4910 plugins/Satellites/src/Satellite.cpp:303
 #: plugins/Satellites/src/Satellite.cpp:307
 #: plugins/Satellites/src/Satellite.cpp:323
 msgctxt "distance"
@@ -1729,8 +1729,8 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:802 src/gui/AstroCalcDialog.cpp:883
 #: src/gui/AstroCalcDialog.cpp:959 src/gui/AstroCalcDialog.cpp:1043
 #: src/gui/AstroCalcDialog.cpp:1366 src/gui/AstroCalcDialog.cpp:1403
-#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4950
-#: src/gui/AstroCalcDialog.cpp:5015 src/gui/AstroCalcDialog.cpp:5174
+#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4964
+#: src/gui/AstroCalcDialog.cpp:5029 src/gui/AstroCalcDialog.cpp:5188
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -1739,7 +1739,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:480 src/core/modules/Planet.cpp:498
 #: src/core/modules/MinorPlanet.cpp:244 src/core/modules/MinorPlanet.cpp:262
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4898
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4912
 msgctxt "distance"
 msgid "M km"
 msgstr ""
@@ -1751,7 +1751,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:270
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4968
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4982
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/Satellites/src/Satellite.cpp:330
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1790,7 +1790,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:600 src/core/modules/MinorPlanet.cpp:342
-#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:4985
+#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:4999
 msgctxt "duration"
 msgid "days"
 msgstr ""
@@ -2955,7 +2955,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1021 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:431
+#: plugins/Oculars/src/gui/OcularDialog.cpp:480
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:602
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:221
@@ -2978,7 +2978,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1022 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+#: plugins/Oculars/src/gui/OcularDialog.cpp:481
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:603
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:222
@@ -3496,7 +3496,7 @@ msgstr ""
 
 #: src/gui/HelpDialog.cpp:426
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
-#: plugins/Oculars/src/gui/OcularDialog.cpp:434
+#: plugins/Oculars/src/gui/OcularDialog.cpp:483
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:606
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
@@ -5028,36 +5028,36 @@ msgstr ""
 msgid "Bright nebulae"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4835
+#: src/gui/AstroCalcDialog.cpp:4849
 msgid "Text file"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4837
+#: src/gui/AstroCalcDialog.cpp:4851
 msgid "Save list of objects as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4962
+#: src/gui/AstroCalcDialog.cpp:4976
 msgid "spin-orbit resonance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5014 src/gui/AstroCalcDialog.cpp:5193
+#: src/gui/AstroCalcDialog.cpp:5028 src/gui/AstroCalcDialog.cpp:5207
 msgid "Days from today"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5015 src/gui/AstroCalcDialog.cpp:5174
+#: src/gui/AstroCalcDialog.cpp:5029 src/gui/AstroCalcDialog.cpp:5188
 msgid "Linear distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5016 src/gui/AstroCalcDialog.cpp:5177
-#: src/gui/AstroCalcDialog.cpp:5194
+#: src/gui/AstroCalcDialog.cpp:5030 src/gui/AstroCalcDialog.cpp:5191
+#: src/gui/AstroCalcDialog.cpp:5208
 msgid "Angular distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5174 src/gui/AstroCalcDialog.cpp:5177
+#: src/gui/AstroCalcDialog.cpp:5188 src/gui/AstroCalcDialog.cpp:5191
 msgid "Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5235
+#: src/gui/AstroCalcDialog.cpp:5249
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 
@@ -8118,7 +8118,7 @@ msgstr ""
 msgid "names in English"
 msgstr ""
 
-#: src/ui_searchDialogGui.h:707 src/ui_astroCalcDialog.h:1349
+#: src/ui_searchDialogGui.h:707 src/ui_astroCalcDialog.h:1351
 #: plugins/Satellites/src/ui_satellitesDialog.h:804
 msgid "Search in list..."
 msgstr ""
@@ -9821,312 +9821,322 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1244
+#: src/ui_astroCalcDialog.h:1246
 msgid "Astronomical calculations"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1250
+#: src/ui_astroCalcDialog.h:1252
 msgid "Positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1252
+#: src/ui_astroCalcDialog.h:1254
 msgid "Celestial bodies above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1255
+#: src/ui_astroCalcDialog.h:1257
 msgid "Ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1257
+#: src/ui_astroCalcDialog.h:1259
 msgid "Phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1259 src/ui_astroCalcDialog.h:1342
-#: src/ui_astroCalcDialog.h:1378
+#: src/ui_astroCalcDialog.h:1261 src/ui_astroCalcDialog.h:1344
+#: src/ui_astroCalcDialog.h:1383
 msgid "Graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1261
+#: src/ui_astroCalcDialog.h:1263
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1263
+#: src/ui_astroCalcDialog.h:1265
 msgid "What's Up Tonight"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1266
+#: src/ui_astroCalcDialog.h:1268
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1268
+#: src/ui_astroCalcDialog.h:1270
 msgid "Planetary Calculator"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1276
+#: src/ui_astroCalcDialog.h:1278
 msgid "Save positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1277
+#: src/ui_astroCalcDialog.h:1279
 msgid "Update positions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1278 src/ui_astroCalcDialog.h:1346
+#: src/ui_astroCalcDialog.h:1280 src/ui_astroCalcDialog.h:1348
 msgid "Show objects brighter than magnitude:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1280
+#: src/ui_astroCalcDialog.h:1282
 msgid "List of objects above horizon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1282 src/ui_astroCalcDialog.h:1306
+#: src/ui_astroCalcDialog.h:1284 src/ui_astroCalcDialog.h:1308
 msgid "Use horizontal coordinates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1283 src/ui_astroCalcDialog.h:1340
+#: src/ui_astroCalcDialog.h:1285 src/ui_astroCalcDialog.h:1342
 msgid "Celestial body:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1285 src/ui_astroCalcDialog.h:1308
+#: src/ui_astroCalcDialog.h:1287 src/ui_astroCalcDialog.h:1310
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1286 src/ui_astroCalcDialog.h:1318
+#: src/ui_astroCalcDialog.h:1288 src/ui_astroCalcDialog.h:1320
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1287
+#: src/ui_astroCalcDialog.h:1289
 msgid "Time step:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1288
+#: src/ui_astroCalcDialog.h:1290
 msgid "Cleanup ephemerides"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1289
+#: src/ui_astroCalcDialog.h:1291
 msgid "Save ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1291 src/ui_astroCalcDialog.h:1315
+#: src/ui_astroCalcDialog.h:1293 src/ui_astroCalcDialog.h:1317
 #: plugins/Satellites/src/ui_satellitesDialog.h:855
 msgid "Calculations require time, please be patient"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1293
+#: src/ui_astroCalcDialog.h:1295
 msgid "Calculate ephemeris"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1295
+#: src/ui_astroCalcDialog.h:1297
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1297
+#: src/ui_astroCalcDialog.h:1299
 msgid "Show markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1299
+#: src/ui_astroCalcDialog.h:1301
 msgid "Show dates of positions of current celestial body near markers"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1301
+#: src/ui_astroCalcDialog.h:1303
 msgid "Show dates"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1303
+#: src/ui_astroCalcDialog.h:1305
 msgid "Show magnitudes of current celestial body"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1305
+#: src/ui_astroCalcDialog.h:1307
 msgid "Show magnitudes"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1307
+#: src/ui_astroCalcDialog.h:1309
 msgid "Maximum allowed separation:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1309
+#: src/ui_astroCalcDialog.h:1311
 msgid "Calculate oppositions"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1310
+#: src/ui_astroCalcDialog.h:1312
 msgid "Between objects:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1311
+#: src/ui_astroCalcDialog.h:1313
 msgid "and"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1312
+#: src/ui_astroCalcDialog.h:1314
 msgid "Cleanup of phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1313
+#: src/ui_astroCalcDialog.h:1315
 msgid "Save phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1317
+#: src/ui_astroCalcDialog.h:1319
 msgid "Calculate phenomena"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1319
+#: src/ui_astroCalcDialog.h:1321
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1320
+#: src/ui_astroCalcDialog.h:1322
 msgid "Also the graph for the Sun"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1321
+#: src/ui_astroCalcDialog.h:1323
 msgid "Also the graph for the Moon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1323 src/ui_astroCalcDialog.h:1329
+#: src/ui_astroCalcDialog.h:1325 src/ui_astroCalcDialog.h:1331
 msgid "Draw only the positive part of the graph"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1325 src/ui_astroCalcDialog.h:1331
+#: src/ui_astroCalcDialog.h:1327 src/ui_astroCalcDialog.h:1333
 msgid "Above horizon only"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1326
+#: src/ui_astroCalcDialog.h:1328
 msgid "Altitude vs. Time"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1327
+#: src/ui_astroCalcDialog.h:1329
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1333
+#: src/ui_astroCalcDialog.h:1335
 msgid "Local Time in hours"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1336
+#: src/ui_astroCalcDialog.h:1338
 msgid "Monthly Elevation"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1337
+#: src/ui_astroCalcDialog.h:1339
 msgid "Graphs on the current year"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1338
+#: src/ui_astroCalcDialog.h:1340
 msgid "First graph (red):"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1339
+#: src/ui_astroCalcDialog.h:1341
 msgid "Second graph (yellow):"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1341
+#: src/ui_astroCalcDialog.h:1343
 msgid "Draw graphs"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1343
+#: src/ui_astroCalcDialog.h:1345
 msgid "Angular distance limit, degrees:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1344
+#: src/ui_astroCalcDialog.h:1346
 msgid "Important note: this tool works on Earth only!"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1345
+#: src/ui_astroCalcDialog.h:1347
 msgid "Angular Distance"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1347
+#: src/ui_astroCalcDialog.h:1349
 msgid "Show objects which are up:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1348
+#: src/ui_astroCalcDialog.h:1350
 msgid "Matching objects:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1351
-msgctxt "celestial event"
-msgid "Set:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1352
-msgctxt "celestial event"
-msgid "Rise:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1353
 msgctxt "celestial event"
+msgid "Set:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1354
+msgctxt "celestial event"
+msgid "Rise:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1355
+msgctxt "celestial event"
 msgid "Transit:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1356
+#: src/ui_astroCalcDialog.h:1358
 msgid "Save list of objects"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1357
+#: src/ui_astroCalcDialog.h:1359
 msgid "Select a category:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1358
-msgid "Limit angular size:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1360
-msgid "Minimal angular size for visible celestial objects (except stars)"
+#: src/ui_astroCalcDialog.h:1361
+msgid ""
+"Set limits for angular size (or angular separation for double stars) for "
+"visible celestial objects"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1363
-msgid "Maximum angular size for visible celestial objects (except stars)"
+msgid "Limit angular size:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1365
-msgid "First celestial body:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1366
-msgid "Second celestial body:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1367
-msgid "Orbital resonance:"
+msgid ""
+"Minimal angular size (or angular separation for double stars) for visible "
+"celestial objects "
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1368
-msgid "Synodic period:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1369
-msgid "Orbital velocity of first celestial body:"
+msgid ""
+"Maximum angular size (or angular separation for double stars) for visible "
+"celestial objects"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1370
-msgid "Angular distance:"
+msgid "First celestial body:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1371
-msgid "Linear distance:"
+msgid "Second celestial body:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1372
-msgid "Orbital velocity of second celestial body:"
+msgid "Orbital resonance:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1373
-msgid "Equatorial diameters ratio:"
+msgid "Synodic period:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1374
+msgid "Orbital velocity of first celestial body:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1375
-msgid "Data"
+msgid "Angular distance:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1376
+msgid "Linear distance:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1377
+msgid "Orbital velocity of second celestial body:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1378
+msgid "Equatorial diameters ratio:"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1380
+msgid "Data"
+msgstr ""
+
+#: src/ui_astroCalcDialog.h:1381
 msgid ""
 "The change in the linear and angular distances between selected celestial "
 "bodies"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1377
+#: src/ui_astroCalcDialog.h:1382
 msgid "red graph: linear distance; yellow graph: angular distance"
 msgstr ""
 
@@ -10597,7 +10607,7 @@ msgid ""
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
-#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+#: plugins/Oculars/src/gui/OcularDialog.cpp:545
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:644
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -10618,7 +10628,7 @@ msgid "Links"
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:546
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:645
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:231
@@ -10642,7 +10652,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:500
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:648
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:234
@@ -10664,7 +10674,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:551
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -10686,7 +10696,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -11230,49 +11240,49 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr ""
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:409
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "tFOV:"
 msgstr ""
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:411
+#: plugins/Oculars/src/gui/OcularDialog.cpp:460
 msgid "Magnification factor:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:412
+#: plugins/Oculars/src/gui/OcularDialog.cpp:461
 #: plugins/Oculars/src/ui_ocularDialog.h:1258
 msgid "Diameter:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:416
+#: plugins/Oculars/src/gui/OcularDialog.cpp:465
 #: plugins/Oculars/src/ui_ocularDialog.h:1224
 msgid "aFOV:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+#: plugins/Oculars/src/gui/OcularDialog.cpp:466
 #: plugins/Oculars/src/ui_ocularDialog.h:1225
 #: plugins/Oculars/src/ui_ocularDialog.h:1257
 msgid "Focal length:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/gui/OcularDialog.cpp:467
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Field stop:"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:430
+#: plugins/Oculars/src/gui/OcularDialog.cpp:479
 msgid "Oculars Plug-in"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:435
+#: plugins/Oculars/src/gui/OcularDialog.cpp:484
 msgid "Barlow lens feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:442
+#: plugins/Oculars/src/gui/OcularDialog.cpp:491
 msgid "Overview"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:444
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -11280,42 +11290,42 @@ msgid ""
 "will populate some samples to get your started."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
 msgid "You can choose to scale the image you see on the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:446
+#: plugins/Oculars/src/gui/OcularDialog.cpp:495
 msgid ""
 "This is intended to show you a better comparison of what one eyepiece/"
 "telescope combination will be like when compared to another."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:447
+#: plugins/Oculars/src/gui/OcularDialog.cpp:496
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:448
+#: plugins/Oculars/src/gui/OcularDialog.cpp:497
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:449
+#: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:451
+#: plugins/Oculars/src/gui/OcularDialog.cpp:500
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -11324,38 +11334,38 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:452
+#: plugins/Oculars/src/gui/OcularDialog.cpp:501
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:455
+#: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Hot Keys"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:456
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:470
-#: plugins/Oculars/src/gui/OcularDialog.cpp:475
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 msgid "[no key defined]"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:479
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:483
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:487
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:491
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr ""
 
