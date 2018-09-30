@@ -217,6 +217,20 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="clearHighlightsButton">
+             <property name="text">
+              <string>Clear highlights</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="highlightBookmarksButton">
+             <property name="text">
+              <string>Hightlight bookmarks</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
         </layout>
