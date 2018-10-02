@@ -455,7 +455,7 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame now.
+	//! @note since 2017-03, you can select Frame.
 	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon0, double lat0,
