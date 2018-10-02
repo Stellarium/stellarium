@@ -8,6 +8,8 @@ Before reporting an issue, please *absolutely make sure* to check the recent ope
 (https://github.com/Stellarium/stellarium/issues?q=is%3Aissue+is%3Aclosed) 
 whether it has been reported and solved/closed already! Don't report a new issue in this case, you may join the discussion.
 
+Sometimes installing our almost weekly Beta version (i.e., the latest development version) helps: https://github.com/Stellarium/stellarium-data/releases/tag/beta
+
 Also look into the wiki https://github.com/Stellarium/stellarium/wiki/Common-Problems-for-the-current-version 
 and FAQ https://github.com/Stellarium/stellarium/wiki/FAQ 
 and check if you are attempting to report a known issue. Don't report in this case.
