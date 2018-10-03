@@ -69,6 +69,9 @@ private slots:
 	void goToBookmarkButtonPressed();
 	void clearBookmarksButtonPressed();
 
+	void highlightBookrmarksButtonPressed();
+	void clearHighlightsButtonPressed();
+
 	void exportBookmarks();
 	void importBookmarks();
 

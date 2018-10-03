@@ -186,6 +186,9 @@ private slots:
 
 	// WUT
 	void saveWutMagnitudeLimit(double mag);
+	void saveWutMinAngularSizeLimit();
+	void saveWutMaxAngularSizeLimit();
+	void saveWutAngularSizeFlag(bool state);
 	void saveWutTimeInterval(int index);
 	void calculateWutObjects();
 	void selectWutObject(const QModelIndex& index);

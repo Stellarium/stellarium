@@ -71,6 +71,11 @@ public slots:
 	void moveDownSelectedLens();
 	void retranslate();
 
+	// Mini-methods required to immediately update display
+	void updateOcular();
+	void updateLens();
+	void updateTelescope();
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();

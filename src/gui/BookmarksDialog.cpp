@@ -84,6 +84,9 @@ void BookmarksDialog::createDialogContent()
 	connect(ui->clearBookmarksButton, SIGNAL(clicked()), this, SLOT(clearBookmarksButtonPressed()));
 	connect(ui->bookmarksTreeView, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentBookmark(QModelIndex)));
 
+	connect(ui->clearHighlightsButton, SIGNAL(clicked()), this, SLOT(clearHighlightsButtonPressed()));
+	connect(ui->highlightBookmarksButton, SIGNAL(clicked()), this, SLOT(highlightBookrmarksButtonPressed()));
+
 	connect(ui->importBookmarksButton, SIGNAL(clicked()), this, SLOT(importBookmarks()));
 	connect(ui->exportBookmarksButton, SIGNAL(clicked()), this, SLOT(exportBookmarks()));
 
@@ -234,6 +237,7 @@ void BookmarksDialog::removeBookmarkButtonPressed()
 
 void BookmarksDialog::clearBookmarksButtonPressed()
 {
+	GETSTELMODULE(CustomObjectMgr)->cleanHighlightList();
 	bookmarksListModel->clear();
 	bookmarksCollection.clear();
 	setBookmarksHeaderNames();
@@ -244,6 +248,44 @@ void BookmarksDialog::clearBookmarksButtonPressed()
 void BookmarksDialog::goToBookmarkButtonPressed()
 {
 	goToBookmark(bookmarksListModel->index(ui->bookmarksTreeView->currentIndex().row(), ColumnUUID).data().toString());
+}
+
+void BookmarksDialog::highlightBookrmarksButtonPressed()
+{
+	QList<Vec3d> highlights;
+	highlights.clear();
+
+	for (auto bm : bookmarksCollection)
+	{
+		QString name	= bm.name;
+		QString raStr	= bm.ra.trimmed();
+		QString decStr	= bm.dec.trimmed();
+
+		Vec3d pos;
+		bool status = false;
+		if (!raStr.isEmpty() && !decStr.isEmpty())
+		{
+			StelUtils::spheToRect(StelUtils::getDecAngle(raStr), StelUtils::getDecAngle(decStr), pos);
+			status = true;
+		}
+		else
+		{
+			status = objectMgr->findAndSelect(name);
+			const QList<StelObjectP>& selected = objectMgr->getSelectedObject();
+			if (!selected.isEmpty())
+				pos = selected[0]->getJ2000EquatorialPos(core);
+		}
+
+		if (status)
+			highlights.append(pos);
+	}
+
+	GETSTELMODULE(CustomObjectMgr)->fillHighlightList(highlights);
+}
+
+void BookmarksDialog::clearHighlightsButtonPressed()
+{
+	GETSTELMODULE(CustomObjectMgr)->cleanHighlightList();
 }
 
 void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)

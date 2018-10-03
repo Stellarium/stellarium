@@ -138,6 +138,7 @@ public:
 	//! - set-dhr : time of set in decimal hours
 	//! - name : english name of the object
 	//! - localized-name : localized name	
+	//! @note Coordinate values may need modulo operation to bring them into ranges [0..360].
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 
 	//! Return object's type. It should be the name of the class.

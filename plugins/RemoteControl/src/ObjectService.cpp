@@ -115,11 +115,9 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 
 		QString name = QString::fromUtf8(parameters.value("name"));
 		QString formatStr = QString::fromUtf8(parameters.value("format"));
-		bool formatHtml;
+		bool formatHtml=true;
 		if (formatStr == "map" || formatStr == "json")
 			formatHtml=false;
-		else
-			formatHtml=true;
 
 		StelObjectP obj;
 		if(!name.isEmpty())
@@ -159,17 +157,15 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 		}
 		else
 		{
-			QJsonObject infoObj;
 			StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 			StelObjectP obj = omgr->searchByName(name);
 			QVariantMap infoMap=StelObjectMgr::getObjectInfo(obj);
-			for (auto i = infoMap.constBegin(); i != infoMap.constEnd(); ++i)
-				infoObj.insert(i.key(), i.value().toString());
+			QJsonObject infoObj=QJsonObject::fromVariantMap(infoMap);
 
 			// We make use of 2 extra values for linked applications. These govern sky brightness and can be used for ambient settings.
 			LandscapeMgr *lmgr=GETSTELMODULE(LandscapeMgr);
-			infoObj.insert("ambientLum", QString().setNum(lmgr->getAtmosphereAverageLuminance()));
-			infoObj.insert("ambientInt", QString().setNum(lmgr->getCurrentLandscape()->getBrightness()));
+			infoObj.insert("ambientLum", QJsonValue(lmgr->getAtmosphereAverageLuminance()));
+			infoObj.insert("ambientInt", QJsonValue(lmgr->getCurrentLandscape()->getBrightness()));
 			response.writeJSON(QJsonDocument(infoObj));
 
 		}
