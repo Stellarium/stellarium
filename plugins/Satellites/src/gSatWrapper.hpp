@@ -118,7 +118,7 @@ public:
 	Visibility getVisibilityPredict();
 
 	double getPhaseAngle() const;
-	gTime	getEpoch() const { return epoch; }
+	static gTime getEpoch() { return epoch; }
 
 
 //private:

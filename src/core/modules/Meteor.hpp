@@ -73,10 +73,10 @@ private:
 	void buildColorVectors(const QList<ColorPair> colors);
 
 	//! get RGB from color name
-	Vec4f getColorFromName(QString colorName);
+	static Vec4f getColorFromName(QString colorName);
 
 	//! Calculates the train thickness and bolide size.
-	void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
+	static void calculateThickness(const StelCore* core, float &thickness, float &bolideSize);
 
 	//! Draws the meteor bolide.
 	void drawBolide(StelPainter &sPainter, const float &bolideSize);
@@ -85,7 +85,7 @@ private:
 	void drawTrain(StelPainter& sPainter, const float &thickness);
 
 	//! Calculates the z-component of a meteor as a function of meteor zenith angle
-	float meteorZ(float zenithAngle, float altitude);
+	static float meteorZ(float zenithAngle, float altitude);
 
 	//! find meteor position in horizontal coordinate system
 	Vec3d radiantToAltAz(Vec3d position);
