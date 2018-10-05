@@ -230,7 +230,7 @@ public slots:
 	//! Return the initial default FOV in degree.
 	double getInitFov() const {return initFov;}
 	//! Set the initial Field Of View in degree.
-	void setInitFov(double fov) {initFov=fov;}
+	void setInitFov(double fov);
 
 	//! Return the inital viewing direction in altazimuthal coordinates
 	const Vec3d getInitViewingDirection() {return initViewPos;}

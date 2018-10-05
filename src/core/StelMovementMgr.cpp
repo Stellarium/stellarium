@@ -602,6 +602,12 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 	return;
 }
 
+void StelMovementMgr::setInitFov(double fov)
+{
+	initFov=fov;
+	StelApp::getInstance().getSettings()->setValue("navigation/init_fov", fov);
+}
+
 void StelMovementMgr::setInitViewDirectionToCurrent()
 {
 	// 2016-12 TODO: Create azimuth indication for zenith views.

@@ -893,7 +893,6 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("navigation/today_time",				core->getInitTodayTime());
 	conf->setValue("navigation/preset_sky_time",			core->getPresetSkyTime());
 	conf->setValue("navigation/time_correction_algorithm",		core->getCurrentDeltaTAlgorithmKey());
-	conf->setValue("navigation/init_fov",				mvmgr->getInitFov());
 	if (mvmgr->getMountMode() == StelMovementMgr::MountAltAzimuthal)
 		conf->setValue("navigation/viewing_mode", "horizon");
 	else
