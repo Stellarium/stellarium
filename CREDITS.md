@@ -310,7 +310,7 @@
 	    http://home.att.net/~hermperez/default.htm
 	    License: "Feel free to use these images, if you use them in a
 	    commercial setting please attribute the source."
-	4.9 Images of M8, M33, NGC253, NGC1499, NGC2244 
+	4.9 Images of M8, NGC253, NGC1499, NGC2244 
 	    from Jean-Pierre Bousquet
 	4.10 Images of M1, M15, M16, M27, M42, M57, M97, NGC6946 from Stephane
 	     Dumont
@@ -360,30 +360,32 @@
 	4.21 Image of IC5146 from James A Weier
 	4.22 Images of SMC, LMC (Magellanic Clouds) and rho Oph from Albert Van
 	     Donkelaar
-	4.23 Images of NGC55, NGC300, NGC1365, NGC3628, NGC4945, NGC5128,
+	4.23 Images of NGC55, NGC300, NGC1365, NGC4945, NGC5128,
 	     NGC6726, NGC6744, NGC6752, NGC6822, NGC7293, NGC2070
 	     from Philip Montgomery
 	     http://www.kenthurst.bigpondhosting.com/
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
-	4.25 Images of NGC7318, NGC7331, M3, M13, M51, M63, M64, M74, M78, M81,
-	     M82, M96, M101, M105, Barnard 22, Barnard 142, Barnard 173, IC405,
-	     IC443, NGC1514, NGC1961, NGC2371, NGC2403, NGC246, NGC2841,
-	     NGC3310, NGC3938, NGC4559, NGC7008, NGC7380, NGC7479, NGC7635,
-	     Sh2-101
+	4.25 Images of M3, M13, M24, M33, M51, M58, M63, M64, M74, M76, M78, M81,
+	     M82, M94, M96, M100, M101, M105, M106, IC405, IC443, NGC246, NGC457, 
+	     NGC1514, NGC1961, NGC2174, NGC2264, NGC2371, NGC2392, NGC2403, NGC2655, 
+	     NGC2685, NGC2841, NGC3166, NGC3310, NGC3359, NGC3521, NGC3628, NGC3938, 
+	     NGC4151, NGC4535, NGC4559, NGC4631, NGC4656, NGC4657, NGC5033, NGC7008, 
+	     NGC7318, NGC7331, NGC7380, NGC7479, NGC7635, NGC7789, Barnard 22, 
+	     Barnard 142, Barnard 173, Sh2-101, Sadr region (Gamma Cygni), 
+	     Jones-Emberson 1, Medusa
 	     from Peter Vasey, Plover Hill Observatory
 	     http://www.madpc.co.uk/~peterv/
 	4.26 Image of IC434 from Marc Aragnou
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
-	4.28 Images of IC59, IC63, IC410, NGC2359, Sadr region from Carole Pope
+	4.28 Images of IC59, IC63, IC410, NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
 	4.29 Images of NGC3690, NGC5257, NGC6050, IC883, UGC8335 and UGC9618
 	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
-	4.30 Images of NGC40, NGC4631, NGC4627, NGC4656, NGC4657 from Steven
-	     Bellavia
+	4.30 Image of NGC40 from Steven Bellavia
 	4.31 Images of Barnard Loop, IC342 from Sun Shuwei
 	     License: public domain
 	4.32 Images of M77, Sh2-264, Sh2-308 from Wang Lingyi
