@@ -183,12 +183,6 @@ matrix:
         - TRANSLATE=false
 
     - os: osx
-      osx_image: xcode8
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-
-    - os: osx
       osx_image: xcode8.3
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
@@ -199,6 +193,13 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
+
+    - os: osx
+      osx_image: xcode9.3
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+
 
     - os: osx
       osx_image: xcode9.4
