@@ -115,7 +115,7 @@ public:
         //! @par References
         //!   Fundamentals of Astrodynamis and Applications (Third Edition) pg 898
         //!   David A. Vallado
-	Visibility getVisibilityPredict();
+	Visibility getVisibilityPredict() const;
 
 	double getPhaseAngle() const;
 	static gTime getEpoch() { return epoch; }
