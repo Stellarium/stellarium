@@ -902,6 +902,16 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 	}
 }
 
+void StelMainScriptAPI::selectConstellationByName(const QString& name)
+{
+	StelObjectP constellation = Q_NULLPTR;
+	if (!name.isEmpty())
+		constellation = GETSTELMODULE(ConstellationMgr)->searchByName(name);
+
+	if (!constellation.isNull())
+		GETSTELMODULE(StelObjectMgr)->setSelectedObject(constellation);
+}
+
 //DEPRECATED: Use getObjectInfo()
 QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 {

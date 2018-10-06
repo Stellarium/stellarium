@@ -148,6 +148,10 @@ public slots:
 	//! @param pointer whether or not to have the selection pointer enabled
 	void selectObjectByName(const QString& name, bool pointer=false);
 
+	//! Select a constellation by name
+	//! @param name the name of the constellation to select (english)
+	void selectConstellationByName(const QString& name);
+
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
