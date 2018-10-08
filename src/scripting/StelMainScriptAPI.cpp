@@ -548,9 +548,16 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 					  double azi3, double alt3,
 					  double minRes, double maxBright, bool visible)
 {
-	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImageAzAlt()";
+	Q_UNUSED(id) Q_UNUSED(filename)
+	Q_UNUSED(azi0) Q_UNUSED(alt0) Q_UNUSED(azi1) Q_UNUSED(alt1)
+	Q_UNUSED(azi2) Q_UNUSED(alt2) Q_UNUSED(azi3) Q_UNUSED(alt3)
+	Q_UNUSED(minRes) Q_UNUSED(maxBright) Q_UNUSED(visible)
+	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is no longer available! Please use loadSkyImage()";
+	/*
+	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImage()";
 	QString path = "scripts/" + filename;
 	emit(requestLoadSkyImageAltAz(id, path, alt0, azi0, alt1, azi1, alt2, azi2, alt3, azi3, minRes, maxBright, visible));
+	*/
 }
 
 // DEPRECATED with old argument order and name.
@@ -559,7 +566,12 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 					  double angSize, double rotation,
 					  double minRes, double maxBright, bool visible)
 {
-	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImageAzAlt()";
+	Q_UNUSED(id) Q_UNUSED(filename)	Q_UNUSED(alt) Q_UNUSED(azi)
+	Q_UNUSED(angSize) Q_UNUSED(rotation)
+	Q_UNUSED(minRes) Q_UNUSED(maxBright) Q_UNUSED(visible)
+	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is no longer available! Please use loadSkyImage()";
+/*
+	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImage()";
 
 	Vec3f XYZ;
 	static const float RADIUS_NEB = 1.0f;
@@ -589,6 +601,7 @@ void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& file
 			  cornersAltAz[3][0]*180./M_PI, cornersAltAz[3][1]*180./M_PI,
 			  cornersAltAz[2][0]*180./M_PI, cornersAltAz[2][1]*180./M_PI,
 			  minRes, maxBright, visible);
+*/
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)

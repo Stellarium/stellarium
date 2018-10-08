@@ -286,7 +286,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 
 	vm["alphaBlend"] = true; // new 2017-3: Make black correctly see-through.
 
-	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, 0));
+	StelSkyLayerP tile = StelSkyLayerP(new StelSkyImageTile(vm, Q_NULLPTR));
 	tile->setFrameType(frameType);
 	
 	try
@@ -304,7 +304,7 @@ bool StelSkyLayerMgr::loadSkyImage(const QString& id, const QString& filename,
 	}
 }
 
-// DEPRECATED, REMOVE FOR 0.16.
+// DEPRECATED, REMOVE FOR 0.19+?
 bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filename,
 								   double alt0, double azi0,
 								   double alt1, double azi1,
@@ -312,8 +312,14 @@ bool StelSkyLayerMgr::loadSkyImageAltAz(const QString& id, const QString& filena
 								   double alt3, double azi3,
 								   double minRes, double maxBright, bool visible)
 {
-	qDebug() << "StelSkyLayerMgr::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImage() with AzAlt frame argument.";
-	return loadSkyImage( id, filename, azi0, alt0, azi1, alt1, azi2, alt2, azi3, alt3, minRes, maxBright, visible, StelCore::FrameAltAz);
+	Q_UNUSED(id) Q_UNUSED(filename)
+	Q_UNUSED(alt0) Q_UNUSED(azi0) Q_UNUSED(alt1) Q_UNUSED(azi1)
+	Q_UNUSED(alt2) Q_UNUSED(azi2) Q_UNUSED(alt3) Q_UNUSED(azi3)
+	Q_UNUSED(minRes) Q_UNUSED(maxBright) Q_UNUSED(visible)
+
+	qWarning() << "StelSkyLayerMgr::loadSkyImageAltAz() has been deprecated before version 0.16 and is no longer available! Please use loadSkyImage() with AzAlt frame argument.";
+	//return loadSkyImage( id, filename, azi0, alt0, azi1, alt1, azi2, alt2, azi3, alt3, minRes, maxBright, visible, StelCore::FrameAltAz);
+	return false;
 
 	// NOTE: This old version may have inverted series of coordinates. Else, the only difference against the original loadSkyImage (setting J2000 coords) is the frame.
 /*
