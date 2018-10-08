@@ -313,7 +313,19 @@ public slots:
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
 	//! - local-sidereal-time : local sidereal time on the planet in hours (since 0.13.3)
 	//! - local-sidereal-time-hms : local sidereal time on the planet in hours in HMS format (since 0.13.3)
+	//! - timezone : IANA timezone or "LMST" (Local Mean Solar Time) or "LTST" (Local True Solar Time) (since 0.18.3)
+	//! - location-timezone : IANA timezone of current location (as stored in location database) (since 0.18.3)
 	QVariantMap getObserverLocationInfo();
+
+	//! set timezone name. This only changes the currently used timezone (in StelCore).
+	//! Location (database) timezone will not be touched.
+	//! Valid values for tz can be found from the results of getAllTimezoneNames, including:
+	//! "LMST" = Local Mean Solar Time
+	//! "LTST" = Local True Solar Time
+	void setTimezone(QString tz);
+
+	//! Return an array of all timezone names valid for setTimezone(tzName)
+	QStringList getAllTimezoneNames();
 
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use

@@ -147,13 +147,17 @@ void LocationDialog::createDialogContent()
 	}
 	updateDefaultLocationControls(b);
 
-	customTimeZone = conf->value("localization/time_zone", "").toString();
-	if (!customTimeZone.isEmpty())
-		ui->useCustomTimeZoneCheckBox->setChecked(true);
-	else
-		ui->timeZoneNameComboBox->setEnabled(false);
-
 	setFieldsFromLocation(currentLocation);
+	if (currentLocation.ianaTimeZone != core->getCurrentTimeZone())
+	{
+		setTimezone(core->getCurrentTimeZone());
+	}
+	else
+	{
+		ui->timeZoneNameComboBox->setEnabled(false);
+		// TODO Maybe also:
+		// StelApp::getInstance().getSettings()->remove("localization/time_zone");
+	}
 
 #ifdef ENABLE_GPS
 	connect(ui->gpsToolButton, SIGNAL(toggled(bool)), this, SLOT(gpsEnableQueryLocation(bool)));
@@ -167,6 +171,7 @@ void LocationDialog::createDialogContent()
 	connect(ui->useAsDefaultLocationCheckBox, SIGNAL(clicked(bool)), this, SLOT(setDefaultLocation(bool)));
 	connect(ui->pushButtonReturnToDefault, SIGNAL(clicked()), core, SLOT(returnToDefaultLocation()));
 	connect(ui->useCustomTimeZoneCheckBox, SIGNAL(clicked(bool)), this, SLOT(updateTimeZoneControls(bool)));
+	connect(core, SIGNAL(currentTimeZoneChanged(QString)), this, SLOT(setTimezone(QString)));
 
 	ui->dstCheckBox->setChecked(core->getUseDST());
 	connect(ui->dstCheckBox, SIGNAL(clicked(bool)), core, SLOT(setUseDST(bool)));
@@ -259,7 +264,7 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 	if (idx==-1)
 	{
 		// Use France as default
-		ui->countryNameComboBox->findData(QVariant("France"), Qt::UserRole, Qt::MatchCaseSensitive);
+		idx = ui->countryNameComboBox->findData(QVariant("France"), Qt::UserRole, Qt::MatchCaseSensitive);
 	}
 	ui->countryNameComboBox->setCurrentIndex(idx);
 
@@ -505,8 +510,8 @@ void LocationDialog::setPositionFromMap(double longitude, double latitude)
 	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.);
 	if (customTimeZone.isEmpty())
 		ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
-	// GZ: Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
-	LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 3.0f: 30.0f);
+	// Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
+	LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 5.0f: 30.0f);
 	pickedModel->setStringList(results.keys());
 	proxyModel->setSourceModel(pickedModel);
 	proxyModel->sort(0, Qt::AscendingOrder);
@@ -580,6 +585,25 @@ void LocationDialog::saveTimeZone()
 		StelApp::getInstance().getSettings()->setValue("localization/time_zone", tz);
 		core->setUseCustomTimeZone(true);
 	}
+}
+
+void LocationDialog::setTimezone(QString tz)
+{
+	disconnectEditSignals();
+
+	ui->useCustomTimeZoneCheckBox->setChecked(true);
+	int idx=ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
+	if (idx>=0)
+	{
+		ui->timeZoneNameComboBox->setEnabled(true);
+		ui->timeZoneNameComboBox->setCurrentIndex(idx);
+	}
+	else
+	{
+		qWarning() << "LocationDialog::setTimezone(): invalid name:" << tz;
+	}
+
+	connectEditSignals();
 }
 
 void LocationDialog::reportEdit()

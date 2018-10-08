@@ -289,9 +289,24 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	StelUtils::radToHms(core->getLocalSiderealTime(), h, m, s);
 	map.insert("local-sidereal-time", (double)h + (double)m/60 + s/3600);
 	map.insert("local-sidereal-time-hms", StelUtils::radToHmsStr(core->getLocalSiderealTime()));
+	map.insert("location-timezone", core->getCurrentLocation().ianaTimeZone);
+	map.insert("timezone", core->getCurrentTimeZone());
 
 	return map;
 }
+
+void StelMainScriptAPI::setTimezone(QString tz)
+{
+	StelCore* core = StelApp::getInstance().getCore();
+	core->setCurrentTimeZone(tz);
+}
+
+QStringList StelMainScriptAPI::getAllTimezoneNames()
+{
+	return StelApp::getInstance().getLocationMgr().getAllTimezoneNames();
+}
+
+
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite)
 {
