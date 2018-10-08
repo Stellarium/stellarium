@@ -25,6 +25,7 @@
 #include "StelFileMgr.hpp"
 #include "StelIniParser.hpp"
 #include "StelLocation.hpp"
+#include "StelLocationMgr.hpp"
 #include "StelCore.hpp"
 #include "StelPainter.hpp"
 #include "StelLocaleMgr.hpp"
@@ -108,6 +109,11 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 		else
 			location.name = name;
 		location.landscapeKey = name;
+
+		QString tzString=landscapeIni.value("location/timezone", "").toString();
+		if ((tzString.length() > 0) && StelApp::getInstance().getLocationMgr().getAllTimezoneNames().contains(tzString))
+			location.ianaTimeZone=tzString;
+
 		defaultBortleIndex = landscapeIni.value("location/light_pollution", -1).toInt();
 		if (defaultBortleIndex<=0) defaultBortleIndex=-1; // neg. values in ini file signal "no change".
 		if (defaultBortleIndex>9) defaultBortleIndex=9; // correct bad values.
