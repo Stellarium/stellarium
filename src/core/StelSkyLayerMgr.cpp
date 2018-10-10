@@ -64,11 +64,7 @@ double StelSkyLayerMgr::getCallOrder(StelModuleActionName actionName) const
 // read from stream
 void StelSkyLayerMgr::init()
 {
-	QString path = StelFileMgr::findFile("nebulae/default/textures.json");
-	if (path.isEmpty())
-		qWarning() << "ERROR while loading nebula texture set default";
-	else
-		insertSkyImage(path);
+	loadCollection();
 
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("skylayers");
@@ -87,6 +83,19 @@ void StelSkyLayerMgr::init()
 
 	setFlagShow(!conf->value("astro/flag_nebula_display_no_texture", false).toBool());
 	addAction("actionShow_DSO_Textures", N_("Display Options"), N_("Deep-sky objects background images"), "flagShow", "I");
+	addAction("actionShow_DSO_Textures_Reload", N_("Display Options"), N_("Reload the deep-sky objects background images"), "loadCollection()", "Ctrl+I");
+}
+
+void StelSkyLayerMgr::loadCollection()
+{
+	if (!allSkyLayers.isEmpty())
+		allSkyLayers.clear();
+
+	QString path = StelFileMgr::findFile("nebulae/default/textures.json");
+	if (path.isEmpty())
+		qWarning() << "ERROR while loading nebula texture set default";
+	else
+		insertSkyImage(path);
 }
 
 QString StelSkyLayerMgr::insertSkyLayer(StelSkyLayerP tile, const QString& keyHint, bool ashow)
@@ -202,7 +211,7 @@ void StelSkyLayerMgr::loadingStateChanged(bool b)
 void StelSkyLayerMgr::percentLoadedChanged(int percentage)
 {
 	StelSkyLayer* tile = qobject_cast<StelSkyLayer*>(QObject::sender());
-	Q_ASSERT(tile!=0);
+	Q_ASSERT(tile!=Q_NULLPTR);
 	SkyLayerElem* elem = skyLayerElemForLayer(tile);
 	Q_ASSERT(elem!=Q_NULLPTR);
 	Q_ASSERT(elem->progressBar!=Q_NULLPTR);
