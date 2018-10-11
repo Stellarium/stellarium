@@ -295,7 +295,11 @@ Where:
   of the top edge.
 \item[\var{maptex\_bottom}] (optional; default=-90) is the altitude
   angle of the bottom edge. Usually you will not require this, or else
-  there will be a hole at your feet. ;-)
+  there will be a hole at your feet, unless you also specify
+\item[\var{bottom\_cap\_color}] (optional;
+  default=\texttt{-1.0,0.0,0.0} to signal ``no color''). If set, this
+  is used to close any hole in the nadir area (if \var{maptex\_bottom}
+  higher than -90). \newFeature{v0.19.0}
 \item[\var{maptex\_fog}] (optional; default: no fog) is the name of
   the fog image file for this landscape.
 \item[\var{maptex\_fog\_top}] (optional; default=90) is the altitude

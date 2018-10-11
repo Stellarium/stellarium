@@ -1057,6 +1057,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius)
 	, mapTex(StelTextureSP())
 	, mapTexFog(StelTextureSP())
 	, mapTexIllum(StelTextureSP())
+	, bottomCap(Vec3d(0.0,0.0,-1.0), 0.0)
 	, mapTexTop(0.)
 	, mapTexBottom(0.)
 	, fogTexTop(0.)
@@ -1064,6 +1065,7 @@ LandscapeSpherical::LandscapeSpherical(float _radius)
 	, illumTexTop(0.)
 	, illumTexBottom(0.)
 	, mapImage(Q_NULLPTR)
+	, bottomCapColor(-1.0f, 0.0f, 0.0f)
 	, memorySize(sizeof(LandscapeSpherical))
 {}
 
@@ -1101,7 +1103,8 @@ void LandscapeSpherical::load(const QSettings& landscapeIni, const QString& land
 	       landscapeIni.value("landscape/maptex_fog_top"     ,  90.f).toFloat(),
 	       landscapeIni.value("landscape/maptex_fog_bottom"  , -90.f).toFloat(),
 	       landscapeIni.value("landscape/maptex_illum_top"   ,  90.f).toFloat(),
-	       landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat());
+	       landscapeIni.value("landscape/maptex_illum_bottom", -90.f).toFloat(),
+	       StelUtils::strToVec3f(landscapeIni.value("landscape/bottom_cap_color", "-1.0,0.0,0.0").toString()));
 	//qDebug() << "SphericalLandscape" << landscapeId << "loaded, mem size:" << memorySize;
 }
 
@@ -1111,7 +1114,7 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 				const float _angleRotateZ,
 				const float _mapTexTop, const float _mapTexBottom,
 				const float _fogTexTop, const float _fogTexBottom,
-				const float _illumTexTop, const float _illumTexBottom)
+				const float _illumTexTop, const float _illumTexBottom, const Vec3f _bottomCapColor)
 {
 	//qDebug() << "LandscapeSpherical::create():"<< _name << " : " << _maptex << " : " << _maptexFog << " : " << _maptexIllum << " : " << _angleRotateZ;
 	validLandscape = true;  // assume ok...
@@ -1143,6 +1146,13 @@ void LandscapeSpherical::create(const QString _name, const QString& _maptex, con
 		if (mapTexFog)
 			memorySize+=mapTexFog->getGlSize();
 	}	
+
+	// Add a bottom cap in case of maptex_bottom.
+	if ((mapTexBottom>-90.f*M_PI/180.f) && (_bottomCapColor != Vec3f(-1.0f, 0.0f, 0.0f)))
+	{
+		bottomCap = SphericalCap(Vec3d(0.0, 0.0, -1.0), cos(M_PI-mapTexBottom));
+		bottomCapColor = _bottomCapColor;
+	}
 }
 
 void LandscapeSpherical::draw(StelCore* core)
@@ -1156,10 +1166,16 @@ void LandscapeSpherical::draw(StelCore* core)
 	StelPainter sPainter(prj);
 
 	// Normal transparency mode
-	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 	sPainter.setBlending(true);
 	sPainter.setCullFace(true);
 
+	if (bottomCap.d>0.0)
+	{
+		sPainter.setColor(landscapeBrightness*bottomCapColor[0], landscapeBrightness*bottomCapColor[1], landscapeBrightness*bottomCapColor[2], landFader.getInterstate());
+		sPainter.drawSphericalRegion(&bottomCap, StelPainter::SphericalPolygonDrawModeFill);
+	}
+
+	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
 	mapTex->bind();
 
 	// TODO: verify that this works correctly for custom projections [comment not by GZ]

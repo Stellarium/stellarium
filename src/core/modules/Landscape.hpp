@@ -28,6 +28,7 @@
 #include "StelUtils.hpp"
 #include "StelTextureTypes.hpp"
 #include "StelLocation.hpp"
+#include "StelSphereGeometry.hpp"
 
 #include <QMap>
 #include <QImage>
@@ -410,10 +411,11 @@ public:
 	//! @param _fogTexBottom altitude angle of bottom edge of fog texture, degrees [-90]
 	//! @param _illumTexTop altitude angle of top edge of light pollution texture, degrees [90]
 	//! @param _illumTexBottom altitude angle of bottom edge of light pollution texture, degrees [-90]
+	//! @param _bottomCapColor RGB triplet for closing the hole around the nadir, if any. A color value of (-1/0/0) signals "no cap"
 	void create(const QString name, const QString& maptex, const QString &_maptexFog="", const QString& _maptexIllum="", const float _angleRotateZ=0.0f,
 				const float _mapTexTop=90.0f, const float _mapTexBottom=-90.0f,
 				const float _fogTexTop=90.0f, const float _fogTexBottom=-90.0f,
-				const float _illumTexTop=90.0f, const float _illumTexBottom=-90.0f);
+				const float _illumTexTop=90.0f, const float _illumTexBottom=-90.0f, const Vec3f _bottomCapColor=Vec3f(-1.0f, 0.0f, 0.0f));
 private:
 
 	StelTextureSP mapTex;      //!< The equirectangular panorama texture
@@ -421,6 +423,7 @@ private:
 				   //!< can also be smaller, just the texture is again mapped onto the same geometry.
 	StelTextureSP mapTexIllum; //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
 				   //!< To simulate light pollution (skyglow), street lights, light in windows, ... at night
+	SphericalCap bottomCap;	   //!< Geometry to close the bottom with a monochrome color when mapTexBottom is given. (Avoid hole in Nadir!)
 	// These vars are here to conserve texture memory. They must be allowed to be different: a landscape may have its highest elevations at 15°, fog may reach from -25 to +15°,
 	// light pollution may cover -5° (street lamps slightly below) plus parts of or even the whole sky. All have default values to simplify life.
 	float mapTexTop;           //!< zenithal top angle of the landscape texture, radians
@@ -430,6 +433,7 @@ private:
 	float illumTexTop;	   //!< zenithal top angle of the illumination texture, radians
 	float illumTexBottom;	   //!< zenithal bottom angle of the illumination texture, radians
 	QImage *mapImage;          //!< The same image as mapTex, but stored in-mem for opacity sampling.
+	Vec3f bottomCapColor;      //!< The bottomCap, if specified, will be drawn in this color
 	unsigned int memorySize;   //!< holds an approximate value of memory consumption (for cache cost estimate)
 };
 
