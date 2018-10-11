@@ -172,6 +172,13 @@ public slots:
 	//! Clean the list of highlight markers
 	void cleanHighlightList();
 
+	//! Set the select priority for custom objects
+	//! @param priority level
+	void setSelectPriority(float priority);
+
+	//! Get the select priority for custom objects
+	float getSelectPriority(void) const;
+
 private slots:
 	//! Called when a new object is selected.
 	void selectedObjectChange(StelModule::StelModuleSelectAction action);
