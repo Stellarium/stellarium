@@ -57,7 +57,7 @@ public:
 	//! Show or hide the label.  It will fade in/out.
 	void setFlagShow(bool b);
 	//! Get value of flag used to turn on and off the label
-	bool getFlagShow(void);
+	bool getFlagShow(void) const;
 	//! Get value of flag used to turn on and off the label
 	void setText(const QString& newText);
 
@@ -195,7 +195,7 @@ void StelLabel::setFlagShow(bool b)
 	labelFader = b;
 }
 
-bool StelLabel::getFlagShow(void)
+bool StelLabel::getFlagShow(void) const
 {
 	return labelFader;
 }

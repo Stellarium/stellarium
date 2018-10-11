@@ -111,7 +111,7 @@ private:
 	static void initIso639_1LanguageCodes(const QString& fileName);
 	
 	//! Get available language codes from passed locales directory
-	QStringList getAvailableIso639_1Codes(const QString& localeDir="") const;
+	static QStringList getAvailableIso639_1Codes(const QString& localeDir="");
 
 	//! The domain name
 	QString domain;

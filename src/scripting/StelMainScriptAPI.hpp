@@ -148,6 +148,10 @@ public slots:
 	//! @param pointer whether or not to have the selection pointer enabled
 	void selectObjectByName(const QString& name, bool pointer=false);
 
+	//! Select a constellation by name
+	//! @param name the name of the constellation to select (english)
+	void selectConstellationByName(const QString& name);
+
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
@@ -309,7 +313,19 @@ public slots:
 	//! - solar-day : duration of the mean solar day on the planet in Earth's hours (since 0.12.0)
 	//! - local-sidereal-time : local sidereal time on the planet in hours (since 0.13.3)
 	//! - local-sidereal-time-hms : local sidereal time on the planet in hours in HMS format (since 0.13.3)
+	//! - timezone : IANA timezone or "LMST" (Local Mean Solar Time) or "LTST" (Local True Solar Time) (since 0.18.3)
+	//! - location-timezone : IANA timezone of current location (as stored in location database) (since 0.18.3)
 	QVariantMap getObserverLocationInfo();
+
+	//! set timezone name. This only changes the currently used timezone (in StelCore).
+	//! Location (database) timezone will not be touched.
+	//! Valid values for tz can be found from the results of getAllTimezoneNames, including:
+	//! "LMST" = Local Mean Solar Time
+	//! "LTST" = Local True Solar Time
+	void setTimezone(QString tz);
+
+	//! Return an array of all timezone names valid for setTimezone(tzName)
+	QStringList getAllTimezoneNames();
 
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
@@ -489,7 +505,7 @@ public slots:
 	//! @param maxBright The maximum brightness setting for the image, Vmag/arcmin^2. Use this to blend the brightest possible pixels with DSO. mag 15 or brighter seems ok.
 	//! @param visible The initial visibility of the image
 	//! @param frame one of EqJ2000|EqDate|EclJ2000|EclDate|Gal(actic)|SuperG(alactic)|AzAlt.
-	//! @note since 2017-03, you can select Frame now.
+	//! @note since 2017-03, you can select Frame.
 	//! @note Images in AzAlt frame are not affected by atmosphere effects like refraction or extinction.
 	void loadSkyImage(const QString& id, const QString& filename,
 					  double lon, double lat, double angSize, double rotation,
@@ -521,7 +537,7 @@ public slots:
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
-	//! @deprecated since 2017-02 because of inconsistent name. Use loadSkyImage(,,,, "AzAlt") instead!
+	//! @deprecated since 2017-02 and no longer available since 2018-10 because of inconsistent name. Use loadSkyImage(,,,, "AzAlt") instead!
 	void loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double azi0, double alt0,
 					  double azi1, double alt1,
@@ -543,7 +559,7 @@ public slots:
 	//! @param minRes The minimum resolution setting for the image
 	//! @param maxBright The maximum brightness setting for the image
 	//! @param visible The initial visibility of the image
-	//! @deprecated since 2017-03. Use loadSkyImage(,,,, "AzAlt") instead!
+	//! @deprecated since 2017-03 and no longer available since 2018-10. Use loadSkyImage(,,,, "AzAlt") instead!
 	void loadSkyImageAltAz(const QString& id, const QString& filename,
 					  double alt, double azi, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true);

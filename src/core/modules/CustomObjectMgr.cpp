@@ -125,6 +125,7 @@ void CustomObjectMgr::init()
 	setMarkersSize(conf->value("gui/custom_marker_size", 5.f).toFloat());
 	// Limit the click radius to 15px in any direction
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
+	setSelectPriority(conf->value("gui/custom_marker_priority", 0.f).toFloat());
 
 	// Highlights
 	setHighlightColor(StelUtils::strToVec3f(conf->value("gui/highlight_marker_color", "0.0,1.0,1.0").toString()));
@@ -136,6 +137,16 @@ void CustomObjectMgr::deinit()
 {
 	customObjects.clear();	
 	texPointer.clear();
+}
+
+void CustomObjectMgr::setSelectPriority(float priority)
+{
+	CustomObject::selectPriority = priority;
+}
+
+float CustomObjectMgr::getSelectPriority() const
+{
+	return CustomObject::selectPriority;
 }
 
 void CustomObjectMgr::addCustomObject(QString designation, Vec3d coordinates, bool isVisible)

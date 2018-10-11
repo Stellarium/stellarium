@@ -155,7 +155,7 @@ void Polyhedron::intersect(const Line &l, const Vec3f &min, const Vec3f &max, QV
 	if(intersect) vertices.append(newPoint);
 }
 
-bool Polyhedron::clip(float p, float q, float &u1, float &u2) const
+bool Polyhedron::clip(float p, float q, float &u1, float &u2)
 {
 	if(p < 0.0f)
 	{

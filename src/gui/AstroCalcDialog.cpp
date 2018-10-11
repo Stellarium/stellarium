@@ -4135,6 +4135,13 @@ void AstroCalcDialog::saveWutTimeInterval(int index)
 	calculateWutObjects();
 }
 
+void AstroCalcDialog::enableVisibilityAngularLimits(bool visible)
+{
+	ui->wutAngularSizeLimitCheckBox->setVisible(visible);
+	ui->wutAngularSizeLimitMinSpinBox->setVisible(visible);
+	ui->wutAngularSizeLimitMaxSpinBox->setVisible(visible);
+}
+
 void AstroCalcDialog::calculateWutObjects()
 {
 	if (ui->wutCategoryListWidget->currentItem())
@@ -4169,6 +4176,8 @@ void AstroCalcDialog::calculateWutObjects()
 		ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular size for visible celestial objects"));
+
+		enableVisibilityAngularLimits(true);
 
 		// Dirty hack to calculate sunrise/sunset
 		// FIXME: This block of code should be replaced in future!
@@ -4226,6 +4235,7 @@ void AstroCalcDialog::calculateWutObjects()
 			switch (categoryId)
 			{
 				case 1: // Bright stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : hipStars)
 					{
 						// Filter for angular size is not applicable
@@ -4596,7 +4606,8 @@ void AstroCalcDialog::calculateWutObjects()
 
 					}
 					break;
-				case 16: // Bright variale stars
+				case 16: // Bright variable stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& varStar : varHipStars)
 					{
 						StelObjectP object = varStar.firstKey();
@@ -4605,6 +4616,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 17: // Bright stars with high proper motion
+					enableVisibilityAngularLimits(false);
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
@@ -4613,6 +4625,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 18: // Symbiotic stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
@@ -4636,6 +4649,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 19: // Emission-line stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
@@ -4659,6 +4673,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 20: // Supernova candidates
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
