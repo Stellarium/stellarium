@@ -57,7 +57,7 @@ public:
 	virtual ~Cardinals();
 	void draw(const StelCore* core, double latitude) const;
 	void setColor(const Vec3f& c) {color = c;}
-	Vec3f get_color() {return color;}
+	Vec3f get_color() const {return color;}
 	void updateI18n();
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}

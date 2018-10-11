@@ -1479,7 +1479,7 @@ public:
 	inline void operator()(const Vec3d* v0, const Vec3d* v1, const Vec3d* v2,
 						   const Vec2f* t0, const Vec2f* t1, const Vec2f* t2,
 						   const Vec3f* c0, const Vec3f* c1, const Vec3f* c2,
-						   unsigned int, unsigned int, unsigned)
+						   unsigned int, unsigned int, unsigned) const
 	{
 		// XXX: we may optimize more by putting the declaration and the test outside of this method.
 		const Vec3d tmpVertex[3] = {*v0, *v1, *v2};

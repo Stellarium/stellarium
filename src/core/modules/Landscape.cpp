@@ -246,7 +246,7 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 }
 
 #include <iostream>
-const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId) const
+const QString Landscape::getTexturePath(const QString& basename, const QString& landscapeId)
 {
 	// look in the landscape directory first, and if not found default to global textures directory
 	QString path = StelFileMgr::findFile("landscapes/" + landscapeId + "/" + basename);

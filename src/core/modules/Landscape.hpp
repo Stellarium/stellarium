@@ -206,7 +206,7 @@ protected:
 	//! @param basename The name of a texture file, e.g. "fog.png"
 	//! @param landscapeId The landscape ID (directory name) to which the texture belongs
 	//! @exception misc possibility of throwing "file not found" exceptions
-	const QString getTexturePath(const QString& basename, const QString& landscapeId) const;
+	static const QString getTexturePath(const QString& basename, const QString& landscapeId);
 	float radius;
 	QString name;          //! Read from landscape.ini:[landscape]name
 	QString author;        //! Read from landscape.ini:[landscape]author
