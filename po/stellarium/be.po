@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-10-06 13:39+0700\n"
+"POT-Creation-Date: 2018-10-07 19:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Hleb Valoshka <375gnu@gmail.com>, 2017\n"
 "Language-Team: Belarusian (https://www.transifex.com/stellarium/teams/80998/be/)\n"
@@ -109,7 +109,7 @@ msgstr "Прыбраць вылучэньне сузор'яў"
 
 #: src/core/modules/ConstellationMgr.cpp:146
 msgid "Select all constellations"
-msgstr ""
+msgstr "Вылучыць усе сузор'і"
 
 #: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2507
 #: src/ui_dsoColorsDialog.h:652
@@ -1160,7 +1160,7 @@ msgstr "Дыямэтар"
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/MinorPlanet.cpp:323 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:307 src/gui/StelGuiItems.cpp:755
-#: src/gui/AstroCalcDialog.cpp:4921 plugins/Satellites/src/Satellite.cpp:303
+#: src/gui/AstroCalcDialog.cpp:4936 plugins/Satellites/src/Satellite.cpp:303
 #: plugins/Satellites/src/Satellite.cpp:307
 #: plugins/Satellites/src/Satellite.cpp:323
 msgctxt "distance"
@@ -1195,15 +1195,15 @@ msgstr "Непразрыстасьць"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "reduced to"
-msgstr ""
+msgstr "зьменшана да"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "by"
-msgstr ""
+msgstr "на"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "Airmasses"
-msgstr ""
+msgstr "Паветраныя масы"
 
 #: src/core/modules/Nebula.cpp:181 src/core/modules/StarWrapper.cpp:223
 msgid "Photometric system"
@@ -1760,8 +1760,8 @@ msgstr "Экватарыяльныя"
 #: src/gui/AstroCalcDialog.cpp:802 src/gui/AstroCalcDialog.cpp:883
 #: src/gui/AstroCalcDialog.cpp:959 src/gui/AstroCalcDialog.cpp:1043
 #: src/gui/AstroCalcDialog.cpp:1366 src/gui/AstroCalcDialog.cpp:1403
-#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4975
-#: src/gui/AstroCalcDialog.cpp:5040 src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4990
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -1770,7 +1770,7 @@ msgstr "АА"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:480 src/core/modules/Planet.cpp:498
 #: src/core/modules/MinorPlanet.cpp:244 src/core/modules/MinorPlanet.cpp:262
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4923
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4938
 msgctxt "distance"
 msgid "M km"
 msgstr "М км"
@@ -1782,7 +1782,7 @@ msgstr "Адлегласьць ад Сонца"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:270
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4993
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:5008
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/Satellites/src/Satellite.cpp:330
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1821,7 +1821,7 @@ msgstr "Экватарыяльны дыямэтар"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:600 src/core/modules/MinorPlanet.cpp:342
-#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:5010
+#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:5025
 msgctxt "duration"
 msgid "days"
 msgstr "дзён"
@@ -1992,11 +1992,11 @@ msgstr "Пазнака вылучэньня плянэт"
 
 #: src/core/modules/SolarSystem.cpp:243
 msgid "Enlarge Moon"
-msgstr ""
+msgstr "Павялічваць Месяц"
 
 #: src/core/modules/SolarSystem.cpp:244
 msgid "Enlarge minor bodies"
-msgstr ""
+msgstr "Павялічваць малыя целы"
 
 #: src/core/modules/SolarSystem.cpp:245
 msgid "Native planet names (from starlore)"
@@ -2100,7 +2100,7 @@ msgstr ""
 
 #: src/core/modules/HipsMgr.cpp:138
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
-msgstr ""
+msgstr "Укл/выкл Герархічныя пасьлядоўныя назіраньні (экспэрымэнтальнае)"
 
 #: src/core/StelApp.cpp:567
 msgid "Night mode"
@@ -2260,7 +2260,7 @@ msgstr "Дадаць 1 ґаўсіянскі год"
 
 #: src/core/StelCore.cpp:296
 msgid "Add 1 calendric month"
-msgstr ""
+msgstr "Дадаць 1 календрычны месяц"
 
 #: src/core/StelCore.cpp:297
 msgid "Subtract 1 sidereal day"
@@ -2336,7 +2336,7 @@ msgstr "Адняць 1 ґаўсіянскі год"
 
 #: src/core/StelCore.cpp:315
 msgid "Subtract 1 calendric month"
-msgstr ""
+msgstr "Адняць 1 календрычны месяц"
 
 #: src/core/StelCore.cpp:317
 msgid "Set home planet to selected planet"
@@ -3365,7 +3365,7 @@ msgstr "Халід, Султана й Зайдзі (2014)"
 
 #: src/gui/ConfigurationDialog.cpp:1535
 msgid "Henriksson (2017)"
-msgstr ""
+msgstr "Генрыксан (2017)"
 
 #: src/gui/ConfigurationDialog.cpp:1536
 #, qt-format
@@ -3421,23 +3421,23 @@ msgstr "10/10/10 бітаў"
 
 #: src/gui/HelpDialog.cpp:168 src/gui/HelpDialog.cpp:180
 msgid "Cannot check updates..."
-msgstr ""
+msgstr "Не атрымалася праверыць абнаўленьні…"
 
 #: src/gui/HelpDialog.cpp:191
 msgid "Looks like you are using the development version of Stellarium."
-msgstr ""
+msgstr "Падобна на тое, што гэта вэрсія, якая знаходзіцца ў распрацоўцы."
 
 #: src/gui/HelpDialog.cpp:193
 msgid "This is latest stable version of Stellarium."
-msgstr ""
+msgstr "Гэта — апошняя стабільная вэрсія Stellarium."
 
 #: src/gui/HelpDialog.cpp:195
 msgid "This version of Stellarium is outdated!"
-msgstr ""
+msgstr "Гэтая вэрсія Stellarium састарэла!"
 
 #: src/gui/HelpDialog.cpp:195
 msgid "Download new version."
-msgstr ""
+msgstr "Загрузіць новую вэрсію"
 
 #: src/gui/HelpDialog.cpp:226
 msgid "Stellarium Help"
@@ -4718,7 +4718,7 @@ msgstr "Камапктная ґрупа Гіксана"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:619 src/translations.h:419
 msgid "Abell Catalog of Planetary Nebulae"
-msgstr ""
+msgstr "Каталёґ плянэтарных туманнасьцяў Абэля"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:621 src/translations.h:421
@@ -5085,7 +5085,7 @@ msgstr "Фазавы вугал ад часу"
 #. languages and you can short it to use in the drop-down list.
 #: src/gui/AstroCalcDialog.cpp:2480
 msgid "Heliocentric distance vs. Time"
-msgstr ""
+msgstr "Геліяцэнтрычная адлегласьць ад часу"
 
 #: src/gui/AstroCalcDialog.cpp:2521 src/gui/AstroCalcDialog.cpp:2679
 msgid "Date"
@@ -5110,7 +5110,7 @@ msgstr "Вуглавы памер"
 #. languages and you can short it.
 #: src/gui/AstroCalcDialog.cpp:2575 src/gui/AstroCalcDialog.cpp:2616
 msgid "Heliocentric distance"
-msgstr ""
+msgstr "Геліяцэнтрычная адлегласьць"
 
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:2721
@@ -5160,11 +5160,11 @@ msgstr "Аб'ект 2"
 
 #: src/gui/AstroCalcDialog.cpp:2906
 msgid "Solar Elongation"
-msgstr ""
+msgstr "Сонечная эланґацыя"
 
 #: src/gui/AstroCalcDialog.cpp:2907
 msgid "Lunar Elongation"
-msgstr ""
+msgstr "Месяцовая эланґацыя"
 
 #: src/gui/AstroCalcDialog.cpp:3187
 msgid "Save calculated phenomena as..."
@@ -5232,70 +5232,70 @@ msgstr "Яркія зоркі"
 msgid "Bright nebulae"
 msgstr "Яркія туманнасьці"
 
-#: src/gui/AstroCalcDialog.cpp:4168 src/ui_astroCalcDialog.h:1363
+#: src/gui/AstroCalcDialog.cpp:4175 src/ui_astroCalcDialog.h:1363
 msgid "Limit angular size:"
-msgstr ""
+msgstr "Абмежаваць вуглавы памер:"
 
-#: src/gui/AstroCalcDialog.cpp:4169 src/ui_astroCalcDialog.h:1361
+#: src/gui/AstroCalcDialog.cpp:4176 src/ui_astroCalcDialog.h:1361
 msgid "Set limits for angular size for visible celestial objects"
-msgstr ""
+msgstr "Задаць абмежаваньне вуглавога памеру бачных нябесных аб'ектаў"
 
-#: src/gui/AstroCalcDialog.cpp:4170 src/ui_astroCalcDialog.h:1365
+#: src/gui/AstroCalcDialog.cpp:4177 src/ui_astroCalcDialog.h:1365
 msgid "Minimal angular size for visible celestial objects"
-msgstr ""
+msgstr "Найменшы вуглавы памер бачных нябесных аб'ектаў"
 
-#: src/gui/AstroCalcDialog.cpp:4171 src/ui_astroCalcDialog.h:1368
+#: src/gui/AstroCalcDialog.cpp:4178 src/ui_astroCalcDialog.h:1368
 msgid "Maximum angular size for visible celestial objects"
-msgstr ""
+msgstr "Найбольшы вуглавы памер бачных нябесных аб'ектаў"
 
-#: src/gui/AstroCalcDialog.cpp:4573
+#: src/gui/AstroCalcDialog.cpp:4583
 msgid "Limit angular separation:"
-msgstr ""
+msgstr "Абмежаваць вуглавое раздзяленьне"
 
-#: src/gui/AstroCalcDialog.cpp:4574
+#: src/gui/AstroCalcDialog.cpp:4584
 msgid "Set limits for angular separation for visible double stars"
-msgstr ""
+msgstr "Задаць абмежаваньне вуглавога раздзяленьня бачных падвойных зорак"
 
-#: src/gui/AstroCalcDialog.cpp:4575
+#: src/gui/AstroCalcDialog.cpp:4585
 msgid "Minimal angular separation for visible double stars"
-msgstr ""
+msgstr "Найменшае вуглавое раздзяленьне бачных падвойных зорак"
 
-#: src/gui/AstroCalcDialog.cpp:4576
+#: src/gui/AstroCalcDialog.cpp:4586
 msgid "Maximum angular separation for visible double stars"
-msgstr ""
+msgstr "Найбольшае вуглавое раздзяленьне бачных падвойных зорак"
 
-#: src/gui/AstroCalcDialog.cpp:4860
+#: src/gui/AstroCalcDialog.cpp:4875
 msgid "Text file"
 msgstr "Тэкставы файл"
 
-#: src/gui/AstroCalcDialog.cpp:4862
+#: src/gui/AstroCalcDialog.cpp:4877
 msgid "Save list of objects as..."
 msgstr "Захаваць сьпіс аб'ектаў як…"
 
-#: src/gui/AstroCalcDialog.cpp:4987
+#: src/gui/AstroCalcDialog.cpp:5002
 msgid "spin-orbit resonance"
 msgstr "сьпін-арбітальны рэзананс"
 
-#: src/gui/AstroCalcDialog.cpp:5039 src/gui/AstroCalcDialog.cpp:5218
+#: src/gui/AstroCalcDialog.cpp:5054 src/gui/AstroCalcDialog.cpp:5233
 msgid "Days from today"
-msgstr ""
+msgstr "Дзён ад сёньняшняга"
 
-#: src/gui/AstroCalcDialog.cpp:5040 src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 msgid "Linear distance"
-msgstr ""
+msgstr "Лінейная адлегласьць"
 
-#: src/gui/AstroCalcDialog.cpp:5041 src/gui/AstroCalcDialog.cpp:5202
-#: src/gui/AstroCalcDialog.cpp:5219
+#: src/gui/AstroCalcDialog.cpp:5056 src/gui/AstroCalcDialog.cpp:5217
+#: src/gui/AstroCalcDialog.cpp:5234
 msgid "Angular distance"
 msgstr "Вуглавая адлегласьць"
 
-#: src/gui/AstroCalcDialog.cpp:5199 src/gui/AstroCalcDialog.cpp:5202
+#: src/gui/AstroCalcDialog.cpp:5214 src/gui/AstroCalcDialog.cpp:5217
 msgid "Day"
-msgstr ""
+msgstr "Дзень"
 
-#: src/gui/AstroCalcDialog.cpp:5260
+#: src/gui/AstroCalcDialog.cpp:5275
 msgid "Change of angular distance between the Moon and selected object"
-msgstr ""
+msgstr "Зьмяніць вуглавую адлегласьць між Месяцам і вылучаным аб'ектам"
 
 #: src/gui/BookmarksDialog.cpp:110 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5311,7 +5311,7 @@ msgstr "Месца назіральніка"
 
 #: src/gui/BookmarksDialog.cpp:174
 msgid "Unnamed star"
-msgstr ""
+msgstr "Безназоўная зорка"
 
 #: src/gui/BookmarksDialog.cpp:446 src/ui_bookmarksDialog.h:216
 msgid "Import bookmarks"
@@ -6154,7 +6154,7 @@ msgstr "Мангольскія"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:477
 msgid "Lokono"
-msgstr ""
+msgstr "Лакока"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:479
@@ -6224,7 +6224,7 @@ msgstr "Заходняя (О. Глад)"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:505
 msgid "Northern Andes"
-msgstr ""
+msgstr "Паўночныя Анды"
 
 #. TRANSLATORS: Name of landscape
 #: src/translations.h:511
@@ -8233,7 +8233,7 @@ msgstr "Правіць скароты клявіятуры…"
 
 #: src/ui_helpDialogGui.h:252
 msgid "Check updates"
-msgstr ""
+msgstr "Праверыць абнаўленьні"
 
 #: src/ui_helpDialogGui.h:253
 msgid "Refresh"
@@ -8272,7 +8272,7 @@ msgstr "Шырата:"
 
 #: src/ui_locationDialogGui.h:500
 msgid "Enter the elevation in meter"
-msgstr ""
+msgstr "Увядзі вышыню ў мэтрах"
 
 #: src/ui_locationDialogGui.h:502
 msgid " m"
@@ -8288,7 +8288,7 @@ msgstr "Выкарыстоўваць бягучае месца як прадвы
 
 #: src/ui_locationDialogGui.h:505
 msgid "Elevation:"
-msgstr ""
+msgstr "Вышыня:"
 
 #: src/ui_locationDialogGui.h:507 src/ui_locationDialogGui.h:511
 msgid ""
@@ -8599,7 +8599,7 @@ msgstr "Яркасьць задыякальнага сьвятла:"
 
 #: src/ui_viewDialog.h:2543
 msgid "Milky Way brightness/saturation:"
-msgstr ""
+msgstr "Яркасьць/насычанасьць Млечнага шляху:"
 
 #: src/ui_viewDialog.h:2545
 msgid ""
@@ -8820,7 +8820,7 @@ msgstr "Кампактная ґрупа Гіксана (Гіксан+, 1982)"
 
 #: src/ui_viewDialog.h:2673
 msgid "Abell Catalog of Planetary Nebulae (Abell, 1966)"
-msgstr ""
+msgstr "Каталёґ плянэтарных туманнасьцяў Абэля (Абэль, 1966)"
 
 #: src/ui_viewDialog.h:2676
 msgid "ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982)"
@@ -9735,7 +9735,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1539
 msgid "Show HiPS button"
-msgstr ""
+msgstr "Паказваць ґузік ГіПН"
 
 #: src/ui_configurationDialog.h:1541
 msgid "A button to toggle galactic grid"
@@ -9747,7 +9747,7 @@ msgstr "Паказваць ґузік ґаляктычнай сеткі"
 
 #: src/ui_configurationDialog.h:1545
 msgid "Enable a feature to store favorite views."
-msgstr ""
+msgstr "Задзейнічай функцыю каб захоўваць улюбёныя віды."
 
 #: src/ui_configurationDialog.h:1547
 msgid "Show bookmarks button"
@@ -9966,6 +9966,7 @@ msgid ""
 "Auto-enable atmosphere and landscape when selecting a celestial body in the "
 "location window."
 msgstr ""
+"Аўтаматычна ўключаць атмасфэру й краявід пры выбары цела ў вакне месца."
 
 #: src/ui_configurationDialog.h:1638
 msgid "Auto-enabling for the environment"
@@ -9973,7 +9974,7 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1640
 msgid "Flash a short message when toggling mount mode."
-msgstr ""
+msgstr "Міргаць кароткім паведамленьнем пры зьмяненьні рэжыму мацаваньня."
 
 #: src/ui_configurationDialog.h:1642
 msgid "Indication for mount mode"
@@ -10435,15 +10436,15 @@ msgstr "Рысаваць ґрафікі"
 
 #: src/ui_astroCalcDialog.h:1345
 msgid "Angular distance limit, degrees:"
-msgstr ""
+msgstr "Абмежаваць вуглавы памер, у ґрадусах:"
 
 #: src/ui_astroCalcDialog.h:1346
 msgid "Important note: this tool works on Earth only!"
-msgstr ""
+msgstr "Важная заўвага: гэтая прылада працуе толькі на Зямлі!"
 
 #: src/ui_astroCalcDialog.h:1347
 msgid "Angular Distance"
-msgstr ""
+msgstr "Вуглавая адлегласьць"
 
 #: src/ui_astroCalcDialog.h:1349
 msgid "Show objects which are up:"
@@ -10514,7 +10515,7 @@ msgstr "Маштаб экватарыяльных дыямэтраў:"
 
 #: src/ui_astroCalcDialog.h:1380
 msgid "Data"
-msgstr ""
+msgstr "Даньні"
 
 #: src/ui_astroCalcDialog.h:1381
 msgid ""
@@ -11854,7 +11855,7 @@ msgstr "Вернуць напрамак да пачатковага значэн
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1199
 msgid "Show oculars button on toolbar"
-msgstr ""
+msgstr "Паказваць ґузік акуляраў на панэлі прылад"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1201
 msgid "Scale image circle"
@@ -11910,7 +11911,7 @@ msgstr "Прыцэл Telrad"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Enable scaling FOV for Telrad"
-msgstr ""
+msgstr "Задзейнічаць маштабаваньне ПЗ для Telrad"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
@@ -12212,7 +12213,7 @@ msgstr ""
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2123
 msgid "The Dark Matter Particle Explorer"
-msgstr ""
+msgstr "Дасьледнік часьцінак цёмнай матэрыі"
 
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2125
@@ -12227,7 +12228,7 @@ msgstr ""
 #. TRANSLATORS: Satellite description.
 #: plugins/Satellites/src/Satellites.cpp:2129
 msgid "The Chandra X-ray Observatory"
-msgstr ""
+msgstr "Ронтгенаўская абсэрваторыя Чандра"
 
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2133
@@ -12237,7 +12238,7 @@ msgstr "МКС (Зара)"
 #. TRANSLATORS: Satellite name: International Space Station
 #: plugins/Satellites/src/Satellites.cpp:2135
 msgid "ISS"
-msgstr ""
+msgstr "МКС"
 
 #. TRANSLATORS: Satellite name: Hubble Space Telescope
 #: plugins/Satellites/src/Satellites.cpp:2137
@@ -12502,12 +12503,16 @@ msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
+"Пераканайся, што спадарожнікі, якія жадаеш дадаць уключаныя ў адзін з URL, "
+"вызначаных на закладцы «Крыніцы» дыялёґу настаўленьняў."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:636
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
+"Перайдзі на закладку «Спадарожнікі» і націсьні ґузік «+». Вылучы "
+"спадарожнікі, якія жадаеш дадаць і націсьні ґузік «дадаць»."
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:638
 msgid "Technical notes"
@@ -12543,7 +12548,7 @@ msgstr "Глядзі %1гэты дакумэнт%2 дзеля падрабязн
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:187
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
 msgid "Next update"
-msgstr ""
+msgstr "Наступнае абнаўленьне"
 
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:675
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:169
@@ -12866,7 +12871,7 @@ msgstr "Не абнаўляць"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:834
 msgid "Change color for selected satellite(s)"
-msgstr ""
+msgstr "Зьмяніць колер вылучаных спадарожнікаў"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:836
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
@@ -15019,7 +15024,7 @@ msgstr "у Расеі"
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:214
 msgctxt "time"
 msgid "d"
-msgstr ""
+msgstr "дз."
 
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:227
 msgid "Historical supernovae is updated"
@@ -15358,7 +15363,7 @@ msgstr "пульсар са збоямі"
 
 #: plugins/Pulsars/src/Pulsar.cpp:184
 msgid "registered glitches"
-msgstr ""
+msgstr "зарэґістраваныя збоі"
 
 #: plugins/Pulsars/src/Pulsar.cpp:195
 msgid "Barycentric period"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-10-06 13:39+0700\n"
+"POT-Creation-Date: 2018-10-07 19:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Song Li <boltomli@gmail.com>, 2018\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -1148,7 +1148,7 @@ msgstr "直径"
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/MinorPlanet.cpp:323 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:307 src/gui/StelGuiItems.cpp:755
-#: src/gui/AstroCalcDialog.cpp:4921 plugins/Satellites/src/Satellite.cpp:303
+#: src/gui/AstroCalcDialog.cpp:4936 plugins/Satellites/src/Satellite.cpp:303
 #: plugins/Satellites/src/Satellite.cpp:307
 #: plugins/Satellites/src/Satellite.cpp:323
 msgctxt "distance"
@@ -1183,11 +1183,11 @@ msgstr "不透明度"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "reduced to"
-msgstr "减暗至"
+msgstr "消减至"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "by"
-msgstr "通过"
+msgstr "穿过"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "Airmasses"
@@ -1234,7 +1234,7 @@ msgstr "反差指数"
 
 #: src/core/modules/Nebula.cpp:323 src/ui_configurationDialog.h:1496
 msgid "Size"
-msgstr "大小"
+msgstr "角直径"
 
 #: src/core/modules/Nebula.cpp:341
 msgid "Orientation angle"
@@ -1712,7 +1712,7 @@ msgstr "性质不明对象"
 
 #: src/core/modules/Nebula.cpp:1604
 msgid "undocumented type"
-msgstr "无法识别的对象"
+msgstr "无法识别类型"
 
 #: src/core/modules/NebulaMgr.cpp:503
 msgid "Deep-sky objects"
@@ -1744,8 +1744,8 @@ msgstr "黄道"
 #: src/gui/AstroCalcDialog.cpp:802 src/gui/AstroCalcDialog.cpp:883
 #: src/gui/AstroCalcDialog.cpp:959 src/gui/AstroCalcDialog.cpp:1043
 #: src/gui/AstroCalcDialog.cpp:1366 src/gui/AstroCalcDialog.cpp:1403
-#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4975
-#: src/gui/AstroCalcDialog.cpp:5040 src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4990
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -1754,7 +1754,7 @@ msgstr "天文单位"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:480 src/core/modules/Planet.cpp:498
 #: src/core/modules/MinorPlanet.cpp:244 src/core/modules/MinorPlanet.cpp:262
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4923
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4938
 msgctxt "distance"
 msgid "M km"
 msgstr "兆千米"
@@ -1766,7 +1766,7 @@ msgstr "与太阳距离"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:270
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4993
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:5008
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/Satellites/src/Satellite.cpp:330
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1805,7 +1805,7 @@ msgstr "赤道直径"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:600 src/core/modules/MinorPlanet.cpp:342
-#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:5010
+#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:5025
 msgctxt "duration"
 msgid "days"
 msgstr "天"
@@ -2030,11 +2030,11 @@ msgstr "周期"
 
 #: src/core/modules/StarWrapper.cpp:255
 msgid "Next maximum light"
-msgstr "下一个最大光度"
+msgstr "下一次光度极大"
 
 #: src/core/modules/StarWrapper.cpp:257
 msgid "Next minimum light"
-msgstr "下一个最小光度"
+msgstr "下一次光度极小"
 
 #: src/core/modules/StarWrapper.cpp:264
 msgid "Rising time"
@@ -2042,7 +2042,7 @@ msgstr "上升时间"
 
 #: src/core/modules/StarWrapper.cpp:266
 msgid "Duration of eclipse"
-msgstr "日食持续时间"
+msgstr "食持续时间"
 
 #: src/core/modules/StarWrapper.cpp:273
 msgid "Position angle"
@@ -2055,12 +2055,12 @@ msgstr "角间距"
 
 #: src/core/modules/StarWrapper.cpp:289
 msgid "Proper motions by axes"
-msgstr "自行分量"
+msgstr "自行"
 
 #: src/core/modules/StarWrapper.cpp:289 src/core/modules/StarWrapper.cpp:291
 msgctxt "milliarc second per year"
 msgid "mas/yr"
-msgstr "毫角秒"
+msgstr "毫角秒/年"
 
 #: src/core/modules/StarWrapper.cpp:290
 msgid "Position angle of the proper motion"
@@ -2088,7 +2088,7 @@ msgstr "分层递进巡天 (实验性的)"
 
 #: src/core/StelApp.cpp:567
 msgid "Night mode"
-msgstr "夜间模式"
+msgstr "红光模式"
 
 #: src/core/StelApp.cpp:600
 msgid "Cannot create Spout sender. See log for details."
@@ -2124,7 +2124,7 @@ msgstr "减缓时间流逝（小幅度）"
 
 #: src/core/StelCore.cpp:266
 msgid "Set normal time rate"
-msgstr "正常时间速度"
+msgstr "正常时间流逝速度"
 
 #: src/core/StelCore.cpp:267
 msgid "Set time rate to zero"
@@ -2696,7 +2696,7 @@ msgstr "在 %1 年和 %2 年之间有效"
 
 #: src/core/StelProjector.cpp:131
 msgid "Maximum FOV: "
-msgstr "最大视野: "
+msgstr "最大视场: "
 
 #: src/core/StelProjectorClasses.cpp:27
 msgid "Perspective"
@@ -3016,7 +3016,7 @@ msgstr "选择储存截图资料夹"
 #: src/gui/ConfigurationDialog.cpp:947
 #, qt-format
 msgid "Startup FOV: %1%2"
-msgstr "启动时的视野大小: %1%2"
+msgstr "启动时的视场: %1%2"
 
 #: src/gui/ConfigurationDialog.cpp:955
 #, qt-format
@@ -3244,7 +3244,7 @@ msgstr "Meeus (1998) (以及 Chapront, Chapront-Touze 和 Francou (1997))"
 
 #: src/gui/ConfigurationDialog.cpp:1519
 msgid "JPL Horizons"
-msgstr "JPL 新视野"
+msgstr "JPL Horizons"
 
 #: src/gui/ConfigurationDialog.cpp:1520
 msgid "Meeus & Simons (2000)"
@@ -3751,7 +3751,7 @@ msgstr "行星中心观察者"
 #: src/gui/StelGuiItems.cpp:772
 msgctxt "abbreviation"
 msgid "FOV"
-msgstr "视场角"
+msgstr "视场"
 
 #: src/gui/StelGuiItems.cpp:788
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
@@ -3762,11 +3762,11 @@ msgstr "视场"
 #: src/gui/StelGuiItems.cpp:807
 msgctxt "abbreviation"
 msgid "FPS"
-msgstr "帧数"
+msgstr "帧/秒"
 
 #: src/gui/StelGuiItems.cpp:815
 msgid "Frames per second"
-msgstr "帧每秒"
+msgstr "帧/秒"
 
 #: src/gui/ViewDialog.cpp:508
 msgid "Deep Sky"
@@ -4675,7 +4675,7 @@ msgstr "位置 %1"
 
 #: src/gui/AstroCalcDialog.cpp:705
 msgid "Average angular size"
-msgstr "平均角大小"
+msgstr "平均角直径"
 
 #: src/gui/AstroCalcDialog.cpp:800 src/gui/AstroCalcDialog.cpp:881
 #: src/gui/AstroCalcDialog.cpp:957 src/gui/AstroCalcDialog.cpp:1040
@@ -4692,7 +4692,7 @@ msgstr "地面距离"
 #: src/gui/AstroCalcDialog.cpp:804 src/gui/AstroCalcDialog.cpp:885
 #: src/gui/AstroCalcDialog.cpp:961 src/gui/AstroCalcDialog.cpp:1045
 msgid "Angular size (with rings, if any)"
-msgstr "角大小 （如有环则带环）"
+msgstr "角直径 （如有环则带环）"
 
 #: src/gui/AstroCalcDialog.cpp:1142
 msgid "star with high proper motion"
@@ -4974,7 +4974,7 @@ msgstr "距角vs. 时间"
 
 #: src/gui/AstroCalcDialog.cpp:2473
 msgid "Angular size vs. Time"
-msgstr "角大小vs. 时间"
+msgstr "角直径vs. 时间"
 
 #: src/gui/AstroCalcDialog.cpp:2476
 msgid "Phase angle vs. Time"
@@ -5003,7 +5003,7 @@ msgstr "相位"
 
 #: src/gui/AstroCalcDialog.cpp:2564 src/gui/AstroCalcDialog.cpp:2605
 msgid "Angular size"
-msgstr "角大小"
+msgstr "角直径"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it.
@@ -5131,70 +5131,70 @@ msgstr "亮星"
 msgid "Bright nebulae"
 msgstr "亮星云"
 
-#: src/gui/AstroCalcDialog.cpp:4168 src/ui_astroCalcDialog.h:1363
+#: src/gui/AstroCalcDialog.cpp:4175 src/ui_astroCalcDialog.h:1363
 msgid "Limit angular size:"
-msgstr "限制角大小"
+msgstr "限制角直径"
 
-#: src/gui/AstroCalcDialog.cpp:4169 src/ui_astroCalcDialog.h:1361
+#: src/gui/AstroCalcDialog.cpp:4176 src/ui_astroCalcDialog.h:1361
 msgid "Set limits for angular size for visible celestial objects"
-msgstr "为可见天体设置角大小限制"
+msgstr "为可见天体设置角直径限制"
 
-#: src/gui/AstroCalcDialog.cpp:4170 src/ui_astroCalcDialog.h:1365
+#: src/gui/AstroCalcDialog.cpp:4177 src/ui_astroCalcDialog.h:1365
 msgid "Minimal angular size for visible celestial objects"
-msgstr "可见天体的最小角大小"
+msgstr "可见天体的最小角直径"
 
-#: src/gui/AstroCalcDialog.cpp:4171 src/ui_astroCalcDialog.h:1368
+#: src/gui/AstroCalcDialog.cpp:4178 src/ui_astroCalcDialog.h:1368
 msgid "Maximum angular size for visible celestial objects"
-msgstr "可见天体的最大角大小"
+msgstr "可见天体的最大角直径"
 
-#: src/gui/AstroCalcDialog.cpp:4573
+#: src/gui/AstroCalcDialog.cpp:4583
 msgid "Limit angular separation:"
 msgstr "限制角间距："
 
-#: src/gui/AstroCalcDialog.cpp:4574
+#: src/gui/AstroCalcDialog.cpp:4584
 msgid "Set limits for angular separation for visible double stars"
 msgstr "设置可见双星的角间距限制"
 
-#: src/gui/AstroCalcDialog.cpp:4575
+#: src/gui/AstroCalcDialog.cpp:4585
 msgid "Minimal angular separation for visible double stars"
 msgstr "可见双星的最小角间距"
 
-#: src/gui/AstroCalcDialog.cpp:4576
+#: src/gui/AstroCalcDialog.cpp:4586
 msgid "Maximum angular separation for visible double stars"
 msgstr "可见双星的最大角间距"
 
-#: src/gui/AstroCalcDialog.cpp:4860
+#: src/gui/AstroCalcDialog.cpp:4875
 msgid "Text file"
 msgstr "文本文件"
 
-#: src/gui/AstroCalcDialog.cpp:4862
+#: src/gui/AstroCalcDialog.cpp:4877
 msgid "Save list of objects as..."
-msgstr "将对象列表保存为..."
+msgstr "将天体列表保存为..."
 
-#: src/gui/AstroCalcDialog.cpp:4987
+#: src/gui/AstroCalcDialog.cpp:5002
 msgid "spin-orbit resonance"
 msgstr "自旋－轨道共振"
 
-#: src/gui/AstroCalcDialog.cpp:5039 src/gui/AstroCalcDialog.cpp:5218
+#: src/gui/AstroCalcDialog.cpp:5054 src/gui/AstroCalcDialog.cpp:5233
 msgid "Days from today"
 msgstr "从今天开始的天数"
 
-#: src/gui/AstroCalcDialog.cpp:5040 src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 msgid "Linear distance"
 msgstr "线距离"
 
-#: src/gui/AstroCalcDialog.cpp:5041 src/gui/AstroCalcDialog.cpp:5202
-#: src/gui/AstroCalcDialog.cpp:5219
+#: src/gui/AstroCalcDialog.cpp:5056 src/gui/AstroCalcDialog.cpp:5217
+#: src/gui/AstroCalcDialog.cpp:5234
 msgid "Angular distance"
 msgstr "角距离"
 
-#: src/gui/AstroCalcDialog.cpp:5199 src/gui/AstroCalcDialog.cpp:5202
+#: src/gui/AstroCalcDialog.cpp:5214 src/gui/AstroCalcDialog.cpp:5217
 msgid "Day"
 msgstr "日"
 
-#: src/gui/AstroCalcDialog.cpp:5260
+#: src/gui/AstroCalcDialog.cpp:5275
 msgid "Change of angular distance between the Moon and selected object"
-msgstr "月球与所选天体的角距离的变化"
+msgstr "月球与所选天体角距离的变化"
 
 #: src/gui/BookmarksDialog.cpp:110 src/ui_searchDialogGui.h:697
 msgid "Object"
@@ -5979,7 +5979,7 @@ msgstr "阿兹特克"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:449
 msgid "Belarusian"
-msgstr "白俄罗斯"
+msgstr "白罗斯"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:451
@@ -6589,7 +6589,7 @@ msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
-msgstr "演示罕见天文现象的中期状态 - 1900年至2100年木星卫星的三重影子现象。所有天文现象都以动态时间给出。"
+msgstr "演示罕见天文现象 - 1900年至2100年木星的三重木卫影现象 。所有天文现象都以动态时间给出。"
 
 #: src/translations.h:666
 msgid ""
@@ -6993,7 +6993,7 @@ msgstr "博茨瓦纳"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belarus
 #: src/translations_countries.h:102
 msgid "Belarus"
-msgstr "白俄罗斯"
+msgstr "白罗斯"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belize
 #: src/translations_countries.h:104
@@ -8390,12 +8390,12 @@ msgstr "暗于此星等不显示"
 #: src/ui_viewDialog.h:2515
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Relative scale:"
-msgstr "相对大小:"
+msgstr "相对比例:"
 
 #: src/ui_viewDialog.h:2516
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:269
 msgid "Absolute scale:"
-msgstr "绝对大小:"
+msgstr "绝对比例:"
 
 #: src/ui_viewDialog.h:2517 src/ui_viewDialog.h:2995
 msgid "Sky"
@@ -8403,7 +8403,7 @@ msgstr "天空"
 
 #: src/ui_viewDialog.h:2519
 msgid "Dim faint stars when a very bright object is visible"
-msgstr "降低明亮天体附近其馀天体的亮度"
+msgstr "降低亮天体附近其它天体的亮度"
 
 #: src/ui_viewDialog.h:2521
 msgid "Dynamic eye adaptation"
@@ -8684,7 +8684,7 @@ msgstr "使用深空天体比例标识"
 
 #: src/ui_viewDialog.h:2694
 msgid "Use proportional hints"
-msgstr "按实际大小显示深空天体标识"
+msgstr "使用比例标识"
 
 #: src/ui_viewDialog.h:2696
 msgid ""
@@ -8728,15 +8728,15 @@ msgstr "勾勒大型深空天体的轮廓"
 
 #: src/ui_viewDialog.h:2711
 msgid "Limit angular size (arcmin):"
-msgstr "限制角大小 (角分):"
+msgstr "限制角直径 (角分):"
 
 #: src/ui_viewDialog.h:2713
 msgid "Minimal angular size in arcminutes for visible DSO"
-msgstr "该角大小以下不显示（以角分为单位）"
+msgstr "该角直径以下不显示（以角分为单位）"
 
 #: src/ui_viewDialog.h:2716
 msgid "Maximum angular size in arcminutes for visible DSO"
-msgstr "该角大小以上不显示（以角分为单位）"
+msgstr "该角直径以上不显示（以角分为单位）"
 
 #: src/ui_viewDialog.h:2718
 msgid "Use additional names of DSO"
@@ -9084,7 +9084,7 @@ msgstr "使用最小亮度使景观在黑暗中也可见"
 
 #: src/ui_viewDialog.h:2933
 msgid "Minimal brightness:"
-msgstr "最小亮度"
+msgstr "地景的最小亮度"
 
 #: src/ui_viewDialog.h:2935
 msgid ""
@@ -9165,11 +9165,11 @@ msgstr "星座界限的颜色"
 
 #: src/ui_viewDialog.h:2973
 msgid "Show asterism lines"
-msgstr "显示星群线"
+msgstr "显示星群连线"
 
 #: src/ui_viewDialog.h:2978
 msgid "Color of asterism lines"
-msgstr "星群线的颜色"
+msgstr "星群连线的颜色"
 
 #: src/ui_viewDialog.h:2980
 msgid "Show asterism labels"
@@ -9350,11 +9350,11 @@ msgid ""
 "Save either the current FOV and direction of view or all the current options"
 " for use at next startup. Restoring default settings requires a restart of "
 "Stellarium. "
-msgstr "保存当前FOV和视场方向或当前设置以供下次启动使用。 恢复默认设置需重启Stellarium "
+msgstr "保存当前视场和方向或当前设置以供下次启动使用。 恢复默认设置需重启Stellarium "
 
 #: src/ui_configurationDialog.h:1442
 msgid "The vertical field (height) of your view when Stellarium starts"
-msgstr "打开Stellarium时，您的视野的垂直场（高度）"
+msgstr "打开Stellarium时，您的视场的垂直场（高度）"
 
 #: src/ui_configurationDialog.h:1445
 msgid "The direction you're looking when Stellarium starts"
@@ -9570,7 +9570,7 @@ msgstr "转换垂直及水平翻转按钮"
 
 #: src/ui_configurationDialog.h:1551
 msgid "Show flip buttons"
-msgstr "显示翻转按键"
+msgstr "显示翻转按钮"
 
 #: src/ui_configurationDialog.h:1553
 msgid "Toggle the usage of background under GUI buttons"
@@ -9618,7 +9618,7 @@ msgstr "使用星等/角秒^2表示面亮度"
 
 #: src/ui_configurationDialog.h:1572
 msgid "Use formatting output for coordinates"
-msgstr "对坐标输出使用格式"
+msgstr "对坐标显示使用格式"
 
 #: src/ui_configurationDialog.h:1573
 msgid "Use designations for celestial coordinate systems"
@@ -9704,7 +9704,7 @@ msgstr "重力标签"
 
 #: src/ui_configurationDialog.h:1607
 msgid "Dithering"
-msgstr "抖动法"
+msgstr "抖动显示"
 
 #: src/ui_configurationDialog.h:1609
 msgid ""
@@ -9762,19 +9762,19 @@ msgstr "含章动"
 msgid ""
 "Auto-enable atmosphere and landscape when selecting a celestial body in the "
 "location window."
-msgstr "在位置窗口中选择天体时自动启用大气和地景。"
+msgstr "在位置窗口中选择天体时自动启用大气层和地景。"
 
 #: src/ui_configurationDialog.h:1638
 msgid "Auto-enabling for the environment"
-msgstr "自动启用环境"
+msgstr "更改行星自动启用大气和地景"
 
 #: src/ui_configurationDialog.h:1640
 msgid "Flash a short message when toggling mount mode."
-msgstr "切换支架模式时显示信息"
+msgstr "切换望远镜支架型号时闪烁短消息"
 
 #: src/ui_configurationDialog.h:1642
 msgid "Indication for mount mode"
-msgstr "指示安装模式"
+msgstr "指示望远镜支架型号"
 
 #: src/ui_configurationDialog.h:1645
 msgid "Use decimal degrees for coordinates"
@@ -9814,11 +9814,11 @@ msgstr "从南起算方位角"
 
 #: src/ui_configurationDialog.h:1664
 msgid "Automatic change of landscape when planet is changed"
-msgstr "行星更改时自动更改地景"
+msgstr "在位置窗口中选择天体时自动更改为对应地景"
 
 #: src/ui_configurationDialog.h:1666
 msgid "Auto select landscapes"
-msgstr "自动选择地景"
+msgstr "更改行星自动选择对应地景"
 
 #: src/ui_configurationDialog.h:1668
 msgid "Allow keyboard to pan and zoom"
@@ -9926,8 +9926,8 @@ msgid ""
 "given in mag/airmass, where airmass is number of atmospheres light has to "
 "pass. (zenith: 1; horizon: about 40)"
 msgstr ""
-"“消光”是由于地球大气层的存在导致恒星亮度减弱的现象。其单位是星等或是气团。其中，“气团”指光线需要穿过的大气的厚度单位（天顶为 1，地平线为 40 "
-"左右）。"
+"“消光”是由于地球大气层的存在导致恒星亮度减弱的现象。其单位是星等或是大气光学质量。其中，“大气光学质量”指光线需要穿过的大气的厚度单位（天顶为 "
+"1，地平线为 40 左右）。"
 
 #: src/ui_atmosphereDialog.h:188
 msgid "Extinction Coefficient:"
@@ -10077,7 +10077,7 @@ msgstr "显示亮于此星等的天体："
 
 #: src/ui_astroCalcDialog.h:1282
 msgid "List of objects above horizon"
-msgstr "地平线以上对象列表"
+msgstr "地平线以上天体列表"
 
 #: src/ui_astroCalcDialog.h:1284 src/ui_astroCalcDialog.h:1308
 msgid "Use horizontal coordinates"
@@ -10261,7 +10261,7 @@ msgstr "中天："
 
 #: src/ui_astroCalcDialog.h:1358
 msgid "Save list of objects"
-msgstr "保存对象列表"
+msgstr "保存天体列表"
 
 #: src/ui_astroCalcDialog.h:1359
 msgid "Select a category:"
@@ -10790,7 +10790,7 @@ msgid ""
 " at one end, pointing at a <em>photograph</em> of Saturn at the other end of"
 " the lab. We measured. We calculated. We wished we were in Hawaii."
 msgstr ""
-"*朦胧的眼睛*我记得当我是学生时测量卡西尼分部的大小。 "
+"*朦胧的眼睛*我记得当我是学生时测量卡西尼环缝的大小。 "
 "这不是人所期望的高学术魅力。...它是多云的...它是多雨的......天文台实验室有一些旧的范围设置在一端，指向一个<em>照片</ em> "
 "土星在实验室的另一端。 我们测量。 我们计算。 我们希望我们在夏威夷。"
 
@@ -11013,7 +11013,7 @@ msgid ""
 "Shows the sky as if looking through a telescope eyepiece. (Only "
 "magnification and field of view are simulated.) It can also show a sensor "
 "frame and a Telrad sight."
-msgstr "将天空展现得像通过望远镜的目镜观测时的样子。（模拟仅限放大倍率与视场）它同时可以显示图像传感器的边框以及 Telrad sight。"
+msgstr "将天空展现得像通过望远镜的目镜观测时的样子。（模拟仅限放大倍率与视场）它同时可以显示图像传感器的边框以及 Telrad寻星镜视场。"
 
 #: plugins/Oculars/src/Oculars.cpp:1018
 msgid "Please select an object before switching to ocular view."
@@ -11082,11 +11082,11 @@ msgstr "显示十字丝"
 
 #: plugins/Oculars/src/Oculars.cpp:1521
 msgid "Image sensor frame"
-msgstr "图像传感器画幅"
+msgstr "图像传感器边框"
 
 #: plugins/Oculars/src/Oculars.cpp:1522
 msgid "Telrad sight"
-msgstr "红圈寻星镜"
+msgstr "Telrad寻星镜视场"
 
 #: plugins/Oculars/src/Oculars.cpp:1523
 msgid "Oculars plugin configuration"
@@ -11142,7 +11142,7 @@ msgstr "目镜焦距：%1 毫米"
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:552
 #, qt-format
 msgid "Ocular aFOV: %1"
-msgstr "目镜视场：%1"
+msgstr "目镜轴向视场：%1"
 
 #: plugins/Oculars/src/Oculars.cpp:1953
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:582
@@ -11446,7 +11446,7 @@ msgstr "直径："
 #: plugins/Oculars/src/gui/OcularDialog.cpp:465
 #: plugins/Oculars/src/ui_ocularDialog.h:1224
 msgid "aFOV:"
-msgstr "视场角度："
+msgstr "轴向视场："
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:466
 #: plugins/Oculars/src/ui_ocularDialog.h:1225
@@ -11512,7 +11512,7 @@ msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the"
 " top of the screen."
-msgstr "您可以启用视野中的十字丝。我本希望它能指向北方，但我没办法这样做。所以目前十字准心指向屏幕顶端。"
+msgstr "您可以启用视场中的十字丝。我本希望它能指向北方，但我没办法这样做。所以目前十字准心指向屏幕顶端。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:500
 #, qt-format
@@ -11522,7 +11522,7 @@ msgid ""
 "0.5%1, 2.0%1, and 4.0%1, helping you see what you would expect to see with "
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
-"您可以开启红圈寻星镜，但这只能在您没有开启目镜视图时使用。这个功能会显示三个同心圆，分别是0.5%1,2.0%1和4.0%1。这可以帮助您看到您在真实的红圈（或者类似的）寻星镜能看到的。"
+"您可以开启Telrad寻星镜，但这只能在您没有开启目镜视图时使用。这个功能会显示三个同心圆，分别是0.5%1,2.0%1和4.0%1。这可以帮助您看到您在真实的红圈（或者类似的）寻星镜能看到的。"
 
 #: plugins/Oculars/src/gui/OcularDialog.cpp:501
 msgid "If you find any issues, please let me know.  Enjoy!"
@@ -11579,11 +11579,11 @@ msgstr "屏幕上的控制栏"
 msgid ""
 "Mark it if you want the FOV value the same like at the startup of "
 "Stellarium."
-msgstr "如果你想要的FOV值和Stellarium打开时相同，请标记它。"
+msgstr "如果你想要的视场和Stellarium启动时相同，请标记它。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1194
 msgid "Restore FOV to initial values"
-msgstr "恢复FOV为默认值"
+msgstr "恢复为初始视场"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1196
 msgid ""
@@ -11601,7 +11601,7 @@ msgstr "在工具栏中显示目镜按钮"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1201
 msgid "Scale image circle"
-msgstr "缩放图像圈"
+msgstr "缩放成像圈"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1202
 msgid "Hide grids and lines when enabled"
@@ -11621,7 +11621,7 @@ msgstr "仅当选中天体时才可用。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1209
 msgid "In ocular mode, allow some visibility outside ocular circle."
-msgstr "在目镜模式下，允许目镜视野外的一些可见性。"
+msgstr "在目镜模式下，允许目镜视野场外的一些可见性。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1211
 msgid "Use semi-transparent mask"
@@ -11629,7 +11629,7 @@ msgstr "使用半透明蒙版"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1212
 msgid "Sensor view"
-msgstr "传感器视图"
+msgstr "传感器视场"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1213
 msgid "Use degrees and minutes for FOV of CCD"
@@ -11647,11 +11647,11 @@ msgstr "自动切换不同安装"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1218
 msgid "Telrad view"
-msgstr "Telrad视图"
+msgstr "Telrad视场"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1219
 msgid "Enable scaling FOV for Telrad"
-msgstr "允许改变Telrad视野大小"
+msgstr "允许改变Telrad视场大小"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1220
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
@@ -11732,7 +11732,7 @@ msgstr "像素高度（微米）："
 msgid ""
 "This is the distance from the center of the Imaging Sensor to the bottom of "
 "the Prism"
-msgstr ""
+msgstr "这是从图像传感器中心到棱镜底部的距离"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1248
 msgid "Prism/CCD distance (mm):"
@@ -12001,7 +12001,7 @@ msgstr "国际标准化命名"
 
 #: plugins/Satellites/src/Satellite.cpp:280
 msgid "artificial satellite"
-msgstr "人造卫星"
+msgstr "人造卫星提示"
 
 #: plugins/Satellites/src/Satellite.cpp:287
 msgid "extincted to"
@@ -12734,7 +12734,7 @@ msgstr "任何使用SynScan手控制器版本3或更高版本的Sky-Watcher安�
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1708
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
-msgstr "he Sky-Watcher SynScan AZ GOTO底座用于多台望远镜型号。"
+msgstr "he Sky-Watcher SynScan AZ GOTO支架用于多台望远镜型号。"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:276
 msgid "Read-only telescope"
@@ -13867,7 +13867,7 @@ msgstr "用户界面设置"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "Show circles with fixed angular size around the telescope reticle"
-msgstr "在望远镜十字丝周围显示指定角大小的圆圈"
+msgstr "在望远镜十字丝周围显示指定角直径的圆圈"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:626
 msgid "Use field of view indicators"
@@ -13875,7 +13875,7 @@ msgstr "使用视场标记"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:627
 msgid "Circle size(s):"
-msgstr "圆圈大小："
+msgstr "圆圈直径："
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:629
 msgid "Up to ten decimal values in degrees of arc, separated with commas"
@@ -14559,7 +14559,7 @@ msgstr "导航星"
 #: plugins/NavStars/src/NavStars.cpp:55
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
 msgid "This plugin marks navigational stars from a selected set."
-msgstr "此插件标记来自所选设置的导航用恒星。"
+msgstr "此插件标记选定的一组导航星"
 
 #: plugins/NavStars/src/NavStars.cpp:112
 msgid "Mark the navigational stars"
@@ -16716,7 +16716,7 @@ msgstr "这个插件允许通过键盘快捷键进行阶段性变焦像星像软
 
 #: plugins/FOV/src/FOV.cpp:87
 msgid "Set FOV to"
-msgstr "将FOV设置为"
+msgstr "将视场设置为"
 
 #: plugins/FOV/src/gui/FOVWindow.cpp:84
 msgid "Field of View plug-in"
@@ -16731,7 +16731,7 @@ msgid ""
 "All values in degrees."
 msgstr ""
 "默认情况下，Stellarium使用通过鼠标滚轮或键盘快捷方式平滑缩放。 有些用户希望如在Cartes du "
-"Ciel天文馆逐步缩放到固定视场，这个插件提供这一功能。 您可以编对应FOV辑值或使用键盘快速设置。 所有值的单位为度。"
+"Ciel天文馆逐步缩放到固定视场，这个插件提供这一功能。 您可以编辑对应视场或使用键盘快速设置。 所有值的单位为度。"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
@@ -16842,7 +16842,7 @@ msgstr ""
 "<p>此插件允许你模拟周期性的流星雨并为每个流星雨显示活跃和不活跃的辐射点显示标识。</p><p>通过单击辐射点标识可以看到关于它位置和活跃性的所有细节。此插件使用的大多数资料来自"
 " <a "
 "href=\"http://imo.net\">国际流星组织</a>官方目录。</p><p>有三种类型的标识：<ul><li><b>已确认的:</b> "
-"活跃的，并且它的特性是已确认的。因此这是一场历史性(过去实际发生过)的或可预测的流星雨。</li><li><b>常规的:</b>活跃的，但它的特性未被掌握。这意味着它可以发生在实际生活中，但我们没有关于其当年活动的适当数据。</li><li><b>不活跃的:</b>对于当前天文时期而言，该流星雨是不活跃的。</li></ul></p>"
+"活跃的，并且它的特性是已确认的。因此这是一个历史的(过去实际发生过)的或可预测的流星雨。</li><li><b>常规的:</b>活跃的，但它的特性未被掌握。这意味着它可以发生在实际生活中，但我们没有关于其当年活动的适当数据。</li><li><b>不活跃的:</b>对于当前天文时期而言，该流星雨是不活跃的。</li></ul></p>"
 
 #: plugins/MeteorShowers/src/MeteorShowers.cpp:127
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:451
@@ -17936,7 +17936,7 @@ msgid ""
 "parts supported by the Austrian Science Fund (FWF) project ASTROSIM (P "
 "21208-G19). More: http://astrosim.univie.ac.at/</p>"
 msgstr ""
-"<p>3D前景渲染。到处逛，找出并避开你花园中的障碍，查核可能在寺庙见到的天文现象，如看到日晷的阴影等。</p><p>请按[Ctrl]+方向键移动。要抬起视觉高度，请使用[Ctrl]+[PgUp/PgDn]。移动速度取决于视场(例如缩放微调)。你甚至可以放开[Ctrl]而只用方向键移动。</p><p>这个插件的开发由奥地利科学基金会(FWF)ASTROSIM项目(P21208-G19)支持。详情：http://astrosim.univie.ac.at</p>"
+"<p>3D场景渲染。到处逛，找出并避开你花园中的障碍，查核可能在寺庙见到的天文现象，如看到日晷的阴影等。</p><p>请按[Ctrl]+方向键移动。要提高目视高度，请使用[Ctrl]+[PgUp/PgDn]。移动速度取决于视场(例如缩放微调)。你甚至可以放开[Ctrl]而只用方向键移动。</p><p>这个插件的开发由奥地利科学基金会(FWF)ASTROSIM项目(P21208-G19)支持。详情：http://astrosim.univie.ac.at</p>"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:399
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
@@ -18045,7 +18045,7 @@ msgid ""
 "If disabled, the shadowed area is calculated using a perspective projection,"
 " which may cause missing shadows with high FOV values, but is quite a bit "
 "faster!"
-msgstr "如果禁用，则使用透视投影计算阴影区域，这可能导致丢失具有高FOV值的阴影，但会快的多！"
+msgstr "如果禁用，则使用透视投影计算阴影区域，这可能导致丢失具有大视场的阴影，但会快的多！"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:265
 msgid ""
