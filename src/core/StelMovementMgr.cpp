@@ -133,7 +133,7 @@ void StelMovementMgr::init()
 
 
 	// we must set mount mode before potentially loading zenith views etc.
-	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
+	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString().toLower();
 	if (tmpstr=="equator")
 		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 	else
