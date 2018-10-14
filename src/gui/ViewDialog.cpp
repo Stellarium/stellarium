@@ -552,6 +552,7 @@ void ViewDialog::updateHips()
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
 	l->setCurrentItem(currentItem);
+	l->sortItems(Qt::AscendingOrder);
 	l->blockSignals(false);
 
 	if (!currentHips)
