@@ -345,7 +345,7 @@ public:
 	void setSkyBackgroundColor(Vec3f color) { skyBackgroundColor=color; }
 
 	//! Get the sky background color. Everything else than black creates a work of art!
-	Vec3f getSkyBackgroundColor() { return skyBackgroundColor; }
+	Vec3f getSkyBackgroundColor() const { return skyBackgroundColor; }
 
 
 protected:
@@ -1632,7 +1632,7 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 }
 
 // Get the sky background color. Everything else than black creates a work of art!
-Vec3f StelMainView::getSkyBackgroundColor()
+Vec3f StelMainView::getSkyBackgroundColor() const
 {
 	return rootItem->getSkyBackgroundColor();
 }

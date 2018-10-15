@@ -193,7 +193,7 @@ public slots:
 	//! Set the sky background color. (Actually forwards to the StelRootItem.)  Everything else than black creates a work of art!
 	void setSkyBackgroundColor(Vec3f color);
 	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates a work of art!
-	Vec3f getSkyBackgroundColor();
+	Vec3f getSkyBackgroundColor() const;
 
 protected:
 	//! Hack to determine current monitor pixel ratio
