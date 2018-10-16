@@ -285,6 +285,8 @@ private:
 	//! Make sure that no tabs icons are outside of the viewport.
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
+
+	void enableVisibilityAngularLimits(bool visible);
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

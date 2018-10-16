@@ -134,11 +134,11 @@ void StelMovementMgr::init()
 
 	// we must set mount mode before potentially loading zenith views etc.
 	QString tmpstr = conf->value("navigation/viewing_mode", "horizon").toString();
-	if (tmpstr=="equator")
+	if (tmpstr.contains("equator", Qt::CaseInsensitive))
 		setMountMode(StelMovementMgr::MountEquinoxEquatorial);
 	else
 	{
-		if (tmpstr=="horizon")
+		if (tmpstr.contains("horizon", Qt::CaseInsensitive))
 			setMountMode(StelMovementMgr::MountAltAzimuthal);
 		else
 		{
@@ -600,6 +600,12 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 		default: break;
 	}
 	return;
+}
+
+void StelMovementMgr::setInitFov(double fov)
+{
+	initFov=fov;
+	StelApp::getInstance().getSettings()->setValue("navigation/init_fov", fov);
 }
 
 void StelMovementMgr::setInitViewDirectionToCurrent()

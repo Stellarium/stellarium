@@ -552,6 +552,7 @@ void ViewDialog::updateHips()
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
 	l->setCurrentItem(currentItem);
+	l->sortItems(Qt::AscendingOrder);
 	l->blockSignals(false);
 
 	if (!currentHips)
@@ -1087,7 +1088,7 @@ void ViewDialog::askCardinalPointsColor()
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		StelApp::getInstance().getModule("LandscapeMgr")->setProperty("colorCardinalPoints", QVariant::fromValue(vColor));
+		StelApp::getInstance().getModule("LandscapeMgr")->setProperty("cardinalsPointsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/cardinal_color", StelUtils::vec3fToStr(vColor));
 		ui->colorCardinalPoints->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
