@@ -71,9 +71,11 @@ public:
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
+	Q_ENUM(MountMode)
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
+	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
 	virtual ~StelMovementMgr();
@@ -135,6 +137,7 @@ public:
 	void setDragTriggerDistance(float d) {dragTriggerDistance=d;}
 
 public slots:
+	// UNUSED!
 	//! Toggle current mount mode between equatorial and altazimuthal
 	void toggleMountMode() {if (getMountMode()==MountAltAzimuthal) setMountMode(MountEquinoxEquatorial); else setMountMode(MountAltAzimuthal);}
 	//! Define whether we should use equatorial mount or altazimuthal
