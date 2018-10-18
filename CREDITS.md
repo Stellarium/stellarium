@@ -306,11 +306,11 @@
 	    James McGaha, Grasslands Observatory at http://www.3towers.com."
 	    License: permission given to "use the image freely" (including
 	    right to modify and redistribute) "as long as it is credited."
-	4.8 M31, and the Pleiades pictures come from Herm Perez :
+	4.8 M31 pictures come from Herm Perez :
 	    http://home.att.net/~hermperez/default.htm
 	    License: "Feel free to use these images, if you use them in a
 	    commercial setting please attribute the source."
-	4.9 Images of M8, NGC253, NGC1499, NGC2244 
+	4.9 Images of NGC1499, NGC2244 
 	    from Jean-Pierre Bousquet
 	4.10 Images of M1, M16, M27, M42, M57, M97, NGC6946 from Stephane
 	     Dumont
@@ -381,7 +381,7 @@
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
 	4.28 Images of IC59, IC63, IC410, NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
-	4.29 Images of NGC3690, NGC5257, NGC6050, IC883, UGC8335 and UGC9618
+	4.29 Images of NGC3690, NGC5257, NGC6050, IC883, PGC3589, UGC8335 and UGC9618
 	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
@@ -390,17 +390,17 @@
 	     License: public domain
 	4.32 Images of M77, Sh2-264, Sh2-308 from Wang Lingyi
 	     License: public domain
-	4.33 Images of IC10 from Lowell Observatory
+	4.33 Images of IC10, PGC143 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
-	4.34 Images of IC2177, NGC6334, NGC6357, Fornax Cluster from ESO/Digitized
-	     Sky Survey 2
+	4.34 Images of M59, M60, M89, IC2177, NGC6334, NGC6357, PGC10074, Fornax Cluster, Virgo Cluster
+	     from ESO/Digitized Sky Survey 2
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of NGC4244 from Ole Nielsen
+	4.36 Images of M49, NGC4244 from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC7000 from NASA
 	     License: public domain
@@ -414,12 +414,28 @@
 	     License: This work is free and may be used by anyone for any purpose.
 	     If you wish to use this content, you do not need to request permission
 	     as long as you follow any licensing requirements mentioned on this page.
-	4.41 Images of Coma Cluster from Caelum Observatory
+	4.41 Images of Coma Cluster from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.42 Images of NGC1316 from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
+ 	4.43 Images of NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
+	     License: Creative Commons Attribution 3.0 Unported
+	4.44 Images of M8, M104, IC2944, NGC6726 from Dylan O'Donnell
+	     http://deography.com/
+	     License: public domain
+	4.45 Images of NGC247
+	     No machine-readable source provided. Own work assumed (based on copyright claims).
+	     No machine-readable author provided. Fany Toporenko assumed (based on copyright claims).
+	     License: Permission is granted to copy, distribute and/or modify this document
+	     under the terms of the GNU Free Documentation License, Version 1.2 or any later
+	     version published by the Free Software Foundation; with no Invariant Sections,
+	     no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is
+	     included in the section entitled GNU Free Documentation License.
+	4.46 Images of IC1613 
+	     from Philos2000
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 ```
 
 ## Appendix
