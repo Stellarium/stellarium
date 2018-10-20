@@ -444,29 +444,29 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->constellationLineThicknessSpinBox,	"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox,	"actionShow_Constellation_Boundaries");
-	connectCheckBox(ui->showConstellationArtCheckBox,		"actionShow_Constellation_Art");
+	connectCheckBox(ui->showConstellationArtCheckBox,		"actionShow_Constellation_Art");	
 	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,	"ConstellationMgr.artIntensity");
 
 	colorButton(ui->colorConstellationBoundaries,	"ConstellationMgr.boundariesColor");
-	colorButton(ui->colorConstellationLabels,	"ConstellationMgr.namesColor");
-	colorButton(ui->colorConstellationLines,	"ConstellationMgr.linesColor");
+	colorButton(ui->colorConstellationLabels,		"ConstellationMgr.namesColor");
+	colorButton(ui->colorConstellationLines,		"ConstellationMgr.linesColor");
 	connect(ui->colorConstellationBoundaries,	SIGNAL(released()), this, SLOT(askConstellationBoundariesColor()));
 	connect(ui->colorConstellationLabels,		SIGNAL(released()), this, SLOT(askConstellationLabelsColor()));
-	connect(ui->colorConstellationLines,		SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
+	connect(ui->colorConstellationLines,			SIGNAL(released()), this, SLOT(askConstellationLinesColor()));
 
 	connectCheckBox(ui->showAsterismLinesCheckBox,		"actionShow_Asterism_Lines");
 	connectIntProperty(ui->asterismLineThicknessSpinBox,	"AsterismMgr.asterismLineThickness");
-	connectCheckBox(ui->showAsterismLabelsCheckBox,		"actionShow_Asterism_Labels");
+	connectCheckBox(ui->showAsterismLabelsCheckBox,	"actionShow_Asterism_Labels");
 
 	connectCheckBox(ui->showRayHelpersCheckBox,		"actionShow_Ray_Helpers");
-	connectIntProperty(ui->rayHelperThicknessSpinBox,	"AsterismMgr.rayHelperThickness");
+	connectIntProperty(ui->rayHelperThicknessSpinBox,		"AsterismMgr.rayHelperThickness");
 
 	colorButton(ui->colorAsterismLabels,	"AsterismMgr.namesColor");
-	colorButton(ui->colorAsterismLines,	"AsterismMgr.linesColor");
-	colorButton(ui->colorRayHelpers,	"AsterismMgr.rayHelpersColor");
-	connect(ui->colorAsterismLabels,	SIGNAL(released()), this, SLOT(askAsterismLabelsColor()));
+	colorButton(ui->colorAsterismLines,		"AsterismMgr.linesColor");
+	colorButton(ui->colorRayHelpers,		"AsterismMgr.rayHelpersColor");
+	connect(ui->colorAsterismLabels,		SIGNAL(released()), this, SLOT(askAsterismLabelsColor()));
 	connect(ui->colorAsterismLines,		SIGNAL(released()), this, SLOT(askAsterismLinesColor()));
-	connect(ui->colorRayHelpers,		SIGNAL(released()), this, SLOT(askRayHelpersColor()));
+	connect(ui->colorRayHelpers,			SIGNAL(released()), this, SLOT(askRayHelpersColor()));
 
 	// Hips mgr.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");

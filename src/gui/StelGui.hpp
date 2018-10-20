@@ -65,6 +65,8 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagShowGalacticGridButton READ getFlagShowGalacticGridButton WRITE setFlagShowGalacticGridButton NOTIFY flagShowGalacticGridButtonChanged )
 	Q_PROPERTY(bool flagShowEclipticGridButton READ getFlagShowEclipticGridButton WRITE setFlagShowEclipticGridButton NOTIFY flagShowEclipticGridButtonChanged )
 	Q_PROPERTY(bool flagShowConstellationBoundariesButton READ getFlagShowConstellationBoundariesButton WRITE setFlagShowConstellationBoundariesButton NOTIFY flagShowConstellationBoundariesButtonChanged )
+	Q_PROPERTY(bool flagShowAsterismLinesButton READ getFlagShowAsterismLinesButton WRITE setFlagShowAsterismLinesButton NOTIFY flagShowAsterismLinesButtonChanged )
+	Q_PROPERTY(bool flagShowAsterismLabelsButton READ getFlagShowAsterismLabelsButton WRITE setFlagShowAsterismLabelsButton NOTIFY flagShowAsterismLabelsButtonChanged )
 
 public:
 	friend class ViewDialog;
@@ -162,6 +164,16 @@ public slots:
 	//! Get whether the button toggling constellation boundaries is visible
 	bool getFlagShowConstellationBoundariesButton() const;
 
+	//! Define whether the button toggling asterism lines should be visible
+	void setFlagShowAsterismLinesButton(bool b);
+	//! Get whether the button toggling asterism lines is visible
+	bool getFlagShowAsterismLinesButton() const;
+
+	//! Define whether the button toggling asterism labels should be visible
+	void setFlagShowAsterismLabelsButton(bool b);
+	//! Get whether the button toggling asterism labels is visible
+	bool getFlagShowAsterismLabelsButton() const;
+
 	//! Get the auto-hide status of the horizontal toolbar.
 	bool getAutoHideHorizontalButtonBar() const;
 	//! Set the auto-hide status of the horizontal toolbar.
@@ -207,6 +219,8 @@ signals:
 	void flagShowGalacticGridButtonChanged(bool b);
 	void flagShowEclipticGridButtonChanged(bool b);
 	void flagShowConstellationBoundariesButtonChanged(bool b);
+	void flagShowAsterismLinesButtonChanged(bool b);
+	void flagShowAsterismLabelsButtonChanged(bool b);
 
 private slots:
 	void reloadStyle();
@@ -275,6 +289,12 @@ private:
 
 	bool flagShowConstellationBoundariesButton;
 	StelButton* btShowConstellationBoundaries;
+
+	bool flagShowAsterismLinesButton;
+	StelButton* btShowAsterismLines;
+
+	bool flagShowAsterismLabelsButton;
+	StelButton* btShowAsterismLabels;
 
 	bool initDone;
 

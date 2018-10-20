@@ -114,6 +114,10 @@ StelGui::StelGui()
 	, btShowEclipticGrid(Q_NULLPTR)
 	, flagShowConstellationBoundariesButton(false)
 	, btShowConstellationBoundaries(Q_NULLPTR)
+	, flagShowAsterismLinesButton(false)
+	, btShowAsterismLines(Q_NULLPTR)
+	, flagShowAsterismLabelsButton(false)
+	, btShowAsterismLabels(Q_NULLPTR)
 	, initDone(false)
 #ifndef DISABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
@@ -402,6 +406,8 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
 	setFlagShowEclipticGridButton(conf->value("gui/flag_show_ecliptic_grid_button", false).toBool());
 	setFlagShowConstellationBoundariesButton(conf->value("gui/flag_show_boundaries_button", false).toBool());
+	setFlagShowAsterismLinesButton(conf->value("gui/flag_show_asterism_lines_button", false).toBool());
+	setFlagShowAsterismLabelsButton(conf->value("gui/flag_show_asterism_labels_button", false).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -579,6 +585,14 @@ void StelGui::update()
 	flag = propMgr->getProperty("ConstellationMgr.boundariesDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Constellation_Boundaries")->isChecked() != flag)
 		getAction("actionShow_Constellation_Boundaries")->setChecked(flag);
+
+	flag = propMgr->getProperty("AsterismMgr.linesDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Asterism_Lines")->isChecked() != flag)
+		getAction("actionShow_Asterism_Lines")->setChecked(flag);
+
+	flag = propMgr->getProperty("AsterismMgr.namesDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Asterism_Labels")->isChecked() != flag)
+		getAction("actionShow_Asterism_Labels")->setChecked(flag);
 
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
@@ -892,6 +906,65 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 	}
 }
 
+// Define whether the button toggling asterism lines should be visible
+void StelGui::setFlagShowAsterismLinesButton(bool b)
+{
+	if (b!=flagShowAsterismLinesButton)
+	{
+		if (b==true) {
+			if (btShowAsterismLines==Q_NULLPTR) {
+				// Create the asterism lines button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btAsterismLines-on.png");
+				QPixmap pxmapOff(":/graphicGui/btAsterismLines-off.png");
+				btShowAsterismLines = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Asterism_Lines");
+			}
+			getButtonBar()->addButton(btShowAsterismLines, "010-constellationsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Asterism_Lines");
+		}
+		flagShowAsterismLinesButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_asterism_lines_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowAsterismLinesButtonChanged(b);
+	}
+}
+
+// Define whether the button toggling asterism labels should be visible
+void StelGui::setFlagShowAsterismLabelsButton(bool b)
+{
+	if (b!=flagShowAsterismLabelsButton)
+	{
+		if (b==true) {
+			if (btShowAsterismLabels==Q_NULLPTR) {
+				// Create the asterism labels button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btAsterismLabels-on.png");
+				QPixmap pxmapOff(":/graphicGui/btAsterismLabels-off.png");
+				btShowAsterismLabels = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Asterism_Labels");
+			}
+			getButtonBar()->addButton(btShowAsterismLabels, "010-constellationsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Asterism_Labels");
+		}
+		flagShowAsterismLabelsButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_asterism_labels_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowAsterismLabelsButtonChanged(b);
+	}
+}
+
+
 // Define whether the button toggling DSS images should be visible
 // We keep Toast even though HiPS is now available: We have a local Toast option better suited for offline operation!
 void StelGui::setFlagShowDSSButton(bool b)
@@ -1064,6 +1137,16 @@ bool StelGui::getFlagShowEclipticGridButton() const
 bool StelGui::getFlagShowConstellationBoundariesButton() const
 {
 	return flagShowConstellationBoundariesButton;
+}
+
+bool StelGui::getFlagShowAsterismLinesButton() const
+{
+	return flagShowAsterismLinesButton;
+}
+
+bool StelGui::getFlagShowAsterismLabelsButton() const
+{
+	return flagShowAsterismLabelsButton;
 }
 
 bool StelGui::initComplete(void) const

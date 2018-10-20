@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>664</width>
-    <height>538</height>
+    <height>570</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1014,10 +1014,43 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="showConstellationBoundariesButtonCheckBox">
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="showHipsButtonCheckBox">
+               <property name="toolTip">
+                <string>Toggle display of the button for the HiPS Surveys. Select a survey in the View settings.</string>
+               </property>
                <property name="text">
-                <string>Show constellation boundaries button</string>
+                <string>Show HiPS button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="1">
+              <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
+               <property name="toolTip">
+                <string>Enable a feature to store favorite views.</string>
+               </property>
+               <property name="text">
+                <string>Show bookmarks button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="useButtonsBackgroundCheckBox">
+               <property name="toolTip">
+                <string>Toggle the usage of background under GUI buttons</string>
+               </property>
+               <property name="text">
+                <string>Use buttons background</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QCheckBox" name="showDSSButtonCheckbox">
+               <property name="toolTip">
+                <string>Toggle display of the button for the Digitized Sky Survey.</string>
+               </property>
+               <property name="text">
+                <string>Show DSS button</string>
                </property>
               </widget>
              </item>
@@ -1031,67 +1064,21 @@
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="showEclipticGridButtonCheckBox">
-               <property name="toolTip">
-                <string>A button to toggle ecliptic grid of date</string>
-               </property>
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="showConstellationBoundariesButtonCheckBox">
                <property name="text">
-                <string>Show ecliptic grid button</string>
+                <string>Show constellation boundaries button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="showAsterismLinesButtonCheckBox">
+               <property name="text">
+                <string>Show asterism lines button</string>
                </property>
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QCheckBox" name="showDSSButtonCheckbox">
-               <property name="toolTip">
-                <string>Toggle display of the button for the Digitized Sky Survey.</string>
-               </property>
-               <property name="text">
-                <string>Show DSS button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="showICRSGridButtonCheckBox">
-               <property name="toolTip">
-                <string>A button to toggle equatorial J2000 grid</string>
-               </property>
-               <property name="text">
-                <string>Show ICRS grid button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="showHipsButtonCheckBox">
-               <property name="toolTip">
-                <string>Toggle display of the button for the HiPS Surveys. Select a survey in the View settings.</string>
-               </property>
-               <property name="text">
-                <string>Show HiPS button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="0">
-              <widget class="QCheckBox" name="showGalacticGridButtonCheckBox">
-               <property name="toolTip">
-                <string>A button to toggle galactic grid</string>
-               </property>
-               <property name="text">
-                <string>Show galactic grid button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
-               <property name="toolTip">
-                <string>Enable a feature to store favorite views.</string>
-               </property>
-               <property name="text">
-                <string>Show bookmarks button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="5" column="0">
               <widget class="QCheckBox" name="showFlipButtonsCheckbox">
                <property name="toolTip">
                 <string>Toggle vertical and horizontal image flip buttons.</string>
@@ -1101,13 +1088,40 @@
                </property>
               </widget>
              </item>
-             <item row="5" column="1">
-              <widget class="QCheckBox" name="useButtonsBackgroundCheckBox">
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="showGalacticGridButtonCheckBox">
                <property name="toolTip">
-                <string>Toggle the usage of background under GUI buttons</string>
+                <string>A button to toggle galactic grid</string>
                </property>
                <property name="text">
-                <string>Use buttons background</string>
+                <string>Show galactic grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="showICRSGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle equatorial J2000 grid</string>
+               </property>
+               <property name="text">
+                <string>Show ICRS grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0">
+              <widget class="QCheckBox" name="showEclipticGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle ecliptic grid of date</string>
+               </property>
+               <property name="text">
+                <string>Show ecliptic grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="showAsterismLabelsButtonCheckBox">
+               <property name="text">
+                <string>Show asterism labels button</string>
                </property>
               </widget>
              </item>
@@ -2315,7 +2329,6 @@
   <tabstop>pluginConfigureButton</tabstop>
  </tabstops>
  <resources>
-  <include location="../../data/gui/guiRes.qrc"/>
   <include location="../../data/gui/guiRes.qrc"/>
  </resources>
  <connections>
