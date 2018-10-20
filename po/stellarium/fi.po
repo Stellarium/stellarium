@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-10-06 13:39+0700\n"
+"POT-Creation-Date: 2018-10-15 20:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Nikolay Korotkiy <sikmir@gmail.com>, 2018\n"
 "Language-Team: Finnish (https://www.transifex.com/stellarium/teams/80998/fi/)\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Language: fi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: src/core/modules/CustomObject.cpp:81
+#: src/core/modules/CustomObject.cpp:83
 msgid "custom object"
 msgstr "oma kohde"
 
-#: src/core/modules/CustomObject.cpp:83
+#: src/core/modules/CustomObject.cpp:85
 msgid "custom marker"
 msgstr "oma osoitin"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
+#: src/core/modules/CustomObject.cpp:87 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:286
 #: src/core/modules/NomenclatureItem.cpp:787 src/core/modules/Nebula.cpp:272
 #: src/core/modules/Nebula.cpp:274 src/core/modules/Planet.cpp:423
@@ -60,7 +60,8 @@ msgstr "asterismi"
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:138
 #: src/core/StelApp.cpp:567 src/core/StelCore.cpp:260
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:815
+#: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
+#: src/StelMainView.cpp:815
 msgid "Display Options"
 msgstr "Näyttöasetukset"
 
@@ -1166,7 +1167,7 @@ msgstr "Läpimitta"
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/MinorPlanet.cpp:323 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:307 src/gui/StelGuiItems.cpp:755
-#: src/gui/AstroCalcDialog.cpp:4921 plugins/Satellites/src/Satellite.cpp:303
+#: src/gui/AstroCalcDialog.cpp:4936 plugins/Satellites/src/Satellite.cpp:303
 #: plugins/Satellites/src/Satellite.cpp:307
 #: plugins/Satellites/src/Satellite.cpp:323
 msgctxt "distance"
@@ -1766,8 +1767,8 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:802 src/gui/AstroCalcDialog.cpp:883
 #: src/gui/AstroCalcDialog.cpp:959 src/gui/AstroCalcDialog.cpp:1043
 #: src/gui/AstroCalcDialog.cpp:1366 src/gui/AstroCalcDialog.cpp:1403
-#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4975
-#: src/gui/AstroCalcDialog.cpp:5040 src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4990
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -1776,7 +1777,7 @@ msgstr "AU"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:480 src/core/modules/Planet.cpp:498
 #: src/core/modules/MinorPlanet.cpp:244 src/core/modules/MinorPlanet.cpp:262
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4923
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4938
 msgctxt "distance"
 msgid "M km"
 msgstr "milj. km"
@@ -1788,7 +1789,7 @@ msgstr "Etäisyys Auringosta"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:270
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4993
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:5008
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/Satellites/src/Satellite.cpp:330
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1827,7 +1828,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:600 src/core/modules/MinorPlanet.cpp:342
-#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:5010
+#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:5025
 msgctxt "duration"
 msgid "days"
 msgstr "päivää"
@@ -2360,12 +2361,12 @@ msgstr "Peilaa vaakasuunnassa"
 msgid "Flip scene vertically"
 msgstr "Peilaa pystysuunnassa"
 
-#: src/core/StelCore.cpp:2248
+#: src/core/StelCore.cpp:2256
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Korjaus on poistettu käytöstä. Käytä vain, jos tiedät mitä olet tekemässä!"
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2259
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2376,7 +2377,7 @@ msgstr ""
 "artikkelissaan <em>Einstein's Theory of Relativity Confirmed by Ancient "
 "Solar Eclipses</em> (%1). Katso lisätietoa %2täältä%3."
 
-#: src/core/StelCore.cpp:2254
+#: src/core/StelCore.cpp:2262
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2385,7 +2386,7 @@ msgstr ""
 "Tämän empiirisen yhtälön julkaisi G. M. Clemence artikkelissaan <em>On the "
 "system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2257
+#: src/core/StelCore.cpp:2265
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2398,7 +2399,7 @@ msgstr ""
 "teoksessaan <em>Astronomical Formulae for Calculators</em>. Se otettiin "
 "käyttöön myös SunTracker Pro -ohjelmistoon."
 
-#: src/core/StelCore.cpp:2261
+#: src/core/StelCore.cpp:2269
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -2408,7 +2409,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> -almanakkaan, sekä Mucken ja Meeuksen (1983)"
 " <em>Canon of Solar Eclipses</em> -teokseen."
 
-#: src/core/StelCore.cpp:2265
+#: src/core/StelCore.cpp:2273
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2421,7 +2422,7 @@ msgstr ""
 "aikaa eli 16.00 GMT. Sama suhde otettiin epäsuorasti käyttöön myös "
 "Goldstinen (1973) syzygitaulukoihin."
 
-#: src/core/StelCore.cpp:2269
+#: src/core/StelCore.cpp:2277
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2432,7 +2433,7 @@ msgstr ""
 "<em>The accelerations of the earth and moon from early astronomical "
 "observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2272
+#: src/core/StelCore.cpp:2280
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2441,7 +2442,7 @@ msgstr ""
 "Tämän yhtälön julkaisi F. R. Stephenson artikkelissaan <em>Pre-Telescopic "
 "Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2283
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2454,7 +2455,7 @@ msgstr ""
 "E.T.-U.T. in the period 1800-1975</em> (%1). Schmadel ja Zech korvasivat "
 "tämän yhtälön uudella vuonna 1988."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2286
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2464,7 +2465,7 @@ msgstr ""
 "<em>Planetary Programs and Tables from -4000 to +2800</em> (1986). Sen "
 "otettiin käyttöön myös RedShift-planetaario-ohjelmaan."
 
-#: src/core/StelCore.cpp:2281
+#: src/core/StelCore.cpp:2289
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2475,11 +2476,11 @@ msgstr ""
 "<em>Long-term changes in the rotation of the earth - 700 B.C. to A.D. "
 "1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2284
+#: src/core/StelCore.cpp:2292
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Tämä algoritmi on käytössä Guide 7 -planetaario-ohjelmassa."
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2295
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2489,7 +2490,7 @@ msgstr ""
 "Solar Eclipses: 1986-2035</em> (1987) ja <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2298
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2498,7 +2499,7 @@ msgstr ""
 "Tämän kaavan laski K. M. Borkowski (%1) analysoimalla 31:tä vuosien 2173 "
 "eKr.–1715 jKr. välillä tapahtunutta auringonpimennystä."
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2301
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2510,7 +2511,7 @@ msgstr ""
 "artikkelissaan <em>Empirical Transformations from U.T. to E.T. for the "
 "Period 1800-1988</em> (%1)."
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2304
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2520,7 +2521,7 @@ msgstr ""
 "ELP 2000-85 -kuuteoriaan teoksessaan <em>Lunar Tables and Programs from 4000"
 " B.C. to A.D. 8000</em> (1991)."
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2307
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2531,7 +2532,7 @@ msgstr ""
 "<em>Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2310
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2540,7 +2541,7 @@ msgstr ""
 "F. R. Stephenson julkaisi tämän kaavan kirjassaan <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2313
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2550,7 +2551,7 @@ msgstr ""
 "laajasti käytetty. Taulukko vuosille 1620–2000, sisältää myös Chaprontin, "
 "Chapront-Touzen ja Francoun variantin tämän aikavälin ulkopuolelle."
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2316
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2559,7 +2560,7 @@ msgstr ""
 "JPL:n Solar System Dynamics -ryhmä käyttää tätä kaavaa interaktiivisella "
 "%1JPL Horizons%2 -sivustollaan."
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2319
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2568,7 +2569,7 @@ msgstr ""
 "Tämän polynomin julkaisivat J. Meeus ja L. Simons artikkelissaan "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2322
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -2578,7 +2579,7 @@ msgstr ""
 "Computer</em> neljäs painos (2000) tarjoaa kolmannen asteen polynomeja "
 "lähimenneisyydelle."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2325
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2590,7 +2591,7 @@ msgstr ""
 "<em>Calendrical Tabulations</em> (2002). Kaava perustuu Jean Meeuksen "
 "teokseen <em>Astronomical Algorithms</em> (1991)."
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2328
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2601,7 +2602,7 @@ msgstr ""
 "artikkelissaan <em>Historical values of the Earth's clock error %1T and the "
 "calculation of eclipses</em> (%2), seuraavin lisäyksin (%3)."
 
-#: src/core/StelCore.cpp:2323
+#: src/core/StelCore.cpp:2331
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2614,7 +2615,7 @@ msgstr ""
 "neliöfunktion kanssa. Tämä perustuu Stephensonin kuvailemaan mahdolliseen "
 "jaksollisuuteen (%2). Lisätietoa %3täällä%4."
 
-#: src/core/StelCore.cpp:2326 src/core/StelCore.cpp:2329
+#: src/core/StelCore.cpp:2334 src/core/StelCore.cpp:2337
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2629,15 +2630,15 @@ msgstr ""
 "käytössä %1NASA:n pimennyssivustolla%2. Käytössä myös aurinko-, kuu-, ja "
 "planeettaefemeridiohjelma SOLEXissa."
 
-#: src/core/StelCore.cpp:2326
+#: src/core/StelCore.cpp:2334
 msgid "Used by default."
 msgstr "Käytössä oletuksena."
 
-#: src/core/StelCore.cpp:2329
+#: src/core/StelCore.cpp:2337
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Päivitetty versio ilman erillistä Kuun kiihtyvyyttä"
 
-#: src/core/StelCore.cpp:2332
+#: src/core/StelCore.cpp:2340
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2648,7 +2649,7 @@ msgstr ""
 "julkaistiin artikkelissa <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2335
+#: src/core/StelCore.cpp:2343
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2660,7 +2661,7 @@ msgstr ""
 "Polynomial Approximation of DeltaT</em> (%1), ja Sana Islam tarkisti sen "
 "2013."
 
-#: src/core/StelCore.cpp:2338
+#: src/core/StelCore.cpp:2346
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2671,7 +2672,7 @@ msgstr ""
 " M. Khalid, Mariam Sultana ja Faheem Zaidi <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2341
+#: src/core/StelCore.cpp:2349
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2684,7 +2685,7 @@ msgstr ""
 "2015</em>-teoksessa (%1). Mainitun välin ulkopuolella (mallinnettu "
 "splinisovituksella) se antaa arvot summittaiselta paraabelilta."
 
-#: src/core/StelCore.cpp:2344
+#: src/core/StelCore.cpp:2352
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2692,7 +2693,7 @@ msgid ""
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2347
+#: src/core/StelCore.cpp:2355
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -2701,11 +2702,11 @@ msgstr ""
 "Tämä on toisen asteen kaava %1T:n laskemiseksi käyttäjän määrittelemillä "
 "arvoilla."
 
-#: src/core/StelCore.cpp:2350 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2358 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Virhe"
 
-#: src/core/StelCore.cpp:2358
+#: src/core/StelCore.cpp:2366
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2714,15 +2715,15 @@ msgstr ""
 "Ratkaisun arvo %1 arvolle %2 (Kuun sekulaarikiihtyvyys) vaatii "
 "mukauttamista, katso lisätietoja käyttöohjeesta."
 
-#: src/core/StelCore.cpp:2401
+#: src/core/StelCore.cpp:2409
 msgid "with zero values outside this range"
 msgstr "nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2404
+#: src/core/StelCore.cpp:2412
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "tyypillinen yhden sekunnin tarkkuus, nolla-arvo alueen ulkopuolella"
 
-#: src/core/StelCore.cpp:2407
+#: src/core/StelCore.cpp:2415
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2730,16 +2731,16 @@ msgstr ""
 "alle sekunnin keskivirheellä, maksimivirheenä 1,9 s, ja arvot tämän "
 "aikavälin ulkopuolisten vuosien rajoittamiseen"
 
-#: src/core/StelCore.cpp:2414
+#: src/core/StelCore.cpp:2422
 msgid "with values for the limit years outside this range"
 msgstr "tämän aikavälin ulkopuolisten vuosien raja-arvoilla"
 
-#: src/core/StelCore.cpp:2424
+#: src/core/StelCore.cpp:2432
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2, %3."
 
-#: src/core/StelCore.cpp:2426
+#: src/core/StelCore.cpp:2434
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Käyttökelpoinen aikaväli: vuodesta %1 vuoteen %2."
@@ -2982,9 +2983,13 @@ msgstr ""
 msgid "IAU Constellation"
 msgstr "IAU:n tähdistö"
 
-#: src/core/StelSkyLayerMgr.cpp:89
+#: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
 msgstr "Syvän taivaan kohteiden kuvat"
+
+#: src/core/StelSkyLayerMgr.cpp:86
+msgid "Reload the deep-sky objects background images"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:212
 #: src/StelMainView.cpp:813 src/StelMainView.cpp:814
@@ -3372,7 +3377,7 @@ msgid "Custom equation of %1T"
 msgstr "Käyttäjän määrittelemä %1T"
 
 #: src/gui/ConfigurationDialog.cpp:1585 src/gui/ConfigurationDialog.cpp:1620
-#: src/gui/StelGuiItems.cpp:651 src/gui/LocationDialog.cpp:447
+#: src/gui/StelGuiItems.cpp:651 src/gui/LocationDialog.cpp:452
 msgid "System default"
 msgstr "Järjestelmän oletus"
 
@@ -3788,11 +3793,11 @@ msgstr "Välilyönti"
 msgid "Time zone"
 msgstr "Aikavyöhyke"
 
-#: src/gui/StelGuiItems.cpp:656 src/gui/LocationDialog.cpp:445
+#: src/gui/StelGuiItems.cpp:656 src/gui/LocationDialog.cpp:450
 msgid "Local Mean Solar Time"
 msgstr "Paikallinen keskiaurinkoaika"
 
-#: src/gui/StelGuiItems.cpp:659 src/gui/LocationDialog.cpp:446
+#: src/gui/StelGuiItems.cpp:659 src/gui/LocationDialog.cpp:451
 msgid "Local True Solar Time"
 msgstr "Todellinen paikallinen aurinkoaika"
 
@@ -3866,60 +3871,60 @@ msgstr "Aurinkokunta"
 msgid "Loading ..."
 msgstr "Ladataan ..."
 
-#: src/gui/ViewDialog.cpp:571
+#: src/gui/ViewDialog.cpp:572
 msgid "properties"
 msgstr "ominaisuudet"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1442
+#: src/gui/ViewDialog.cpp:1443
 msgid "Excellent dark-sky site"
 msgstr "Erinomainen pimeän taivaan alue"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1444
+#: src/gui/ViewDialog.cpp:1445
 msgid "Typical truly dark site"
 msgstr "Tyypillinen pimeän taivaan alue"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1446
+#: src/gui/ViewDialog.cpp:1447
 msgid "Rural sky"
 msgstr "Maaseutu"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1448
+#: src/gui/ViewDialog.cpp:1449
 msgid "Rural/suburban transition"
 msgstr "Maaseudun ja esikaupungin vaihde"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1450
+#: src/gui/ViewDialog.cpp:1451
 msgid "Suburban sky"
 msgstr "Esikaupunki"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1452
+#: src/gui/ViewDialog.cpp:1453
 msgid "Bright suburban sky"
 msgstr "Kirkas esikaupunkitaivas"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1454
+#: src/gui/ViewDialog.cpp:1455
 msgid "Suburban/urban transition"
 msgstr "Esikapungin ja kaupungin vaihde"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1456
+#: src/gui/ViewDialog.cpp:1457
 msgid "City sky"
 msgstr "Kaupunki"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1458
+#: src/gui/ViewDialog.cpp:1459
 msgid "Inner-city sky"
 msgstr "Kantakaupunki"
 
-#: src/gui/ViewDialog.cpp:1472
+#: src/gui/ViewDialog.cpp:1473
 msgid "The naked-eye limiting magnitude is"
 msgstr "Paljaan silmän rajamagnitudi on"
 
-#: src/gui/ViewDialog.cpp:1480
+#: src/gui/ViewDialog.cpp:1481
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -3927,7 +3932,7 @@ msgstr ""
 "Käyttää 3D-monikulmiomallia joillekin valikoiduille pienkappaleille (pienet "
 "kuut, asteroidit, komeetat) pallomaisen approksimaation sijaan."
 
-#: src/gui/ViewDialog.cpp:1481
+#: src/gui/ViewDialog.cpp:1482
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -3936,88 +3941,88 @@ msgstr ""
 "aurinkokunnan kappaleita. Voi parantaa joidenkin kohteiden puolivarjojen "
 "laatua."
 
-#: src/gui/ViewDialog.cpp:1504
+#: src/gui/ViewDialog.cpp:1505
 msgid "Abbreviated"
 msgstr "Lyhennetyt"
 
-#: src/gui/ViewDialog.cpp:1505
+#: src/gui/ViewDialog.cpp:1506
 msgid "Native"
 msgstr "Paikalliset"
 
-#: src/gui/ViewDialog.cpp:1506
+#: src/gui/ViewDialog.cpp:1507
 msgid "Translated"
 msgstr "Käännetyt"
 
-#: src/gui/ViewDialog.cpp:1673
+#: src/gui/ViewDialog.cpp:1674
 msgid "No shooting stars"
 msgstr "Ei tähdenlentoja"
 
-#: src/gui/ViewDialog.cpp:1675
+#: src/gui/ViewDialog.cpp:1676
 msgid "Normal rate"
 msgstr "Normaali aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1677
+#: src/gui/ViewDialog.cpp:1678
 msgid "Standard Orionids rate"
 msgstr "Orionidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1679
+#: src/gui/ViewDialog.cpp:1680
 msgid "Standard Perseids rate"
 msgstr "Perseidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1681
+#: src/gui/ViewDialog.cpp:1682
 msgid "Standard Geminids rate"
 msgstr "Geminidien normaaliaktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1683
+#: src/gui/ViewDialog.cpp:1684
 msgid "Exceptional Perseid rate"
 msgstr "Poikkeuksellinen perseidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1685
+#: src/gui/ViewDialog.cpp:1686
 msgid "Meteor storm rate"
 msgstr "Meteoreja tunnissa"
 
-#: src/gui/ViewDialog.cpp:1687
+#: src/gui/ViewDialog.cpp:1688
 msgid "Exceptional Draconid rate"
 msgstr "Poikkeuksellinen draconidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1689
+#: src/gui/ViewDialog.cpp:1690
 msgid "Exceptional Leonid rate"
 msgstr "Poikkeuksellinen leonidien aktiivisuus"
 
-#: src/gui/ViewDialog.cpp:1691
+#: src/gui/ViewDialog.cpp:1692
 msgid "Very high rate (1966 Leonids)"
 msgstr "Erittäin korkea aktiivisuus (leonidit 1966)"
 
-#: src/gui/ViewDialog.cpp:1693
+#: src/gui/ViewDialog.cpp:1694
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Suurin tunnettu aktiivisuus (leonidit 1833)"
 
-#: src/gui/ViewDialog.cpp:1746
+#: src/gui/ViewDialog.cpp:1747
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "G. Mueller (1893)"
 
-#: src/gui/ViewDialog.cpp:1747
+#: src/gui/ViewDialog.cpp:1748
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr "Astronomical Almanach (1984)"
 
-#: src/gui/ViewDialog.cpp:1748
+#: src/gui/ViewDialog.cpp:1749
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Explanatory Supplement (1992)"
 
-#: src/gui/ViewDialog.cpp:1749
+#: src/gui/ViewDialog.cpp:1750
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Explanatory Supplement (2013)"
 
-#: src/gui/ViewDialog.cpp:1750
+#: src/gui/ViewDialog.cpp:1751
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Geneerinen"
 
-#: src/gui/ViewDialog.cpp:1776
+#: src/gui/ViewDialog.cpp:1777
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -4026,7 +4031,7 @@ msgstr ""
 "uudemmat) ja se antaa V- (laite-) magnitudit (oletettavasti lähteenä D.L. "
 "Harris)."
 
-#: src/gui/ViewDialog.cpp:1779
+#: src/gui/ViewDialog.cpp:1780
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -4036,7 +4041,7 @@ msgstr ""
 "on julkaistu <em>Explanatory Supplement to the Astronomical Ephemeris</em> "
 "-teoksessa (1961)."
 
-#: src/gui/ViewDialog.cpp:1782
+#: src/gui/ViewDialog.cpp:1783
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -4044,7 +4049,7 @@ msgstr ""
 "Algoritmi on julkaistu <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> -teoksessa (1992)."
 
-#: src/gui/ViewDialog.cpp:1785
+#: src/gui/ViewDialog.cpp:1786
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -4052,15 +4057,15 @@ msgstr ""
 "Algoritmi on julkaistu <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> -teoksen kolmannessa painoksessa (2013)."
 
-#: src/gui/ViewDialog.cpp:1788
+#: src/gui/ViewDialog.cpp:1789
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vaihekulman ja albedon perusteella laskettu visuaalinen magnitudi"
 
-#: src/gui/LocationDialog.cpp:198
+#: src/gui/LocationDialog.cpp:203
 msgid "Reset location list to show all known locations"
 msgstr "Tyhjennä paikkakuntaluettelo näyttääksesi kaikki paikkakunnat"
 
-#: src/gui/LocationDialog.cpp:199
+#: src/gui/LocationDialog.cpp:204
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
@@ -4069,23 +4074,23 @@ msgstr ""
 "kunnossa, poista paikannus käytöstä vapauttaaksesi GPS-laite muiden "
 "ohjelmien käyttöön."
 
-#: src/gui/LocationDialog.cpp:740
+#: src/gui/LocationDialog.cpp:764
 msgid "GPS listening..."
 msgstr "GPS kuuntelee..."
 
-#: src/gui/LocationDialog.cpp:747
+#: src/gui/LocationDialog.cpp:771
 msgid "GPS disconnecting..."
 msgstr "GPS katkaisee yhteyttä..."
 
-#: src/gui/LocationDialog.cpp:759
+#: src/gui/LocationDialog.cpp:783
 msgid "GPS location fix"
 msgstr "GPS-paikannuksen korjaus"
 
-#: src/gui/LocationDialog.cpp:782
+#: src/gui/LocationDialog.cpp:806
 msgid "GPS:FAILED"
 msgstr "GPS: EPÄONNISTUI"
 
-#: src/gui/LocationDialog.cpp:794 src/ui_locationDialogGui.h:513
+#: src/gui/LocationDialog.cpp:818 src/ui_locationDialogGui.h:513
 msgid "Get location from GPS"
 msgstr "Paikanna GPS:llä"
 
@@ -5237,68 +5242,68 @@ msgstr "Kirkkaat tähdet"
 msgid "Bright nebulae"
 msgstr "Kirkkaat sumut"
 
-#: src/gui/AstroCalcDialog.cpp:4168 src/ui_astroCalcDialog.h:1363
+#: src/gui/AstroCalcDialog.cpp:4175 src/ui_astroCalcDialog.h:1363
 msgid "Limit angular size:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4169 src/ui_astroCalcDialog.h:1361
+#: src/gui/AstroCalcDialog.cpp:4176 src/ui_astroCalcDialog.h:1361
 msgid "Set limits for angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4170 src/ui_astroCalcDialog.h:1365
+#: src/gui/AstroCalcDialog.cpp:4177 src/ui_astroCalcDialog.h:1365
 msgid "Minimal angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4171 src/ui_astroCalcDialog.h:1368
+#: src/gui/AstroCalcDialog.cpp:4178 src/ui_astroCalcDialog.h:1368
 msgid "Maximum angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4573
+#: src/gui/AstroCalcDialog.cpp:4583
 msgid "Limit angular separation:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4574
+#: src/gui/AstroCalcDialog.cpp:4584
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4575
+#: src/gui/AstroCalcDialog.cpp:4585
 msgid "Minimal angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4576
+#: src/gui/AstroCalcDialog.cpp:4586
 msgid "Maximum angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4860
+#: src/gui/AstroCalcDialog.cpp:4875
 msgid "Text file"
 msgstr "Tekstitiedosto"
 
-#: src/gui/AstroCalcDialog.cpp:4862
+#: src/gui/AstroCalcDialog.cpp:4877
 msgid "Save list of objects as..."
 msgstr "Tallenna kohdeluettelo nimellä..."
 
-#: src/gui/AstroCalcDialog.cpp:4987
+#: src/gui/AstroCalcDialog.cpp:5002
 msgid "spin-orbit resonance"
 msgstr "pyörähdys-kiertoaikaresonanssi"
 
-#: src/gui/AstroCalcDialog.cpp:5039 src/gui/AstroCalcDialog.cpp:5218
+#: src/gui/AstroCalcDialog.cpp:5054 src/gui/AstroCalcDialog.cpp:5233
 msgid "Days from today"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5040 src/gui/AstroCalcDialog.cpp:5199
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 msgid "Linear distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5041 src/gui/AstroCalcDialog.cpp:5202
-#: src/gui/AstroCalcDialog.cpp:5219
+#: src/gui/AstroCalcDialog.cpp:5056 src/gui/AstroCalcDialog.cpp:5217
+#: src/gui/AstroCalcDialog.cpp:5234
 msgid "Angular distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5199 src/gui/AstroCalcDialog.cpp:5202
+#: src/gui/AstroCalcDialog.cpp:5214 src/gui/AstroCalcDialog.cpp:5217
 msgid "Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5260
+#: src/gui/AstroCalcDialog.cpp:5275
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 
@@ -6103,441 +6108,446 @@ msgstr "Kiinalainen"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:455
+msgid "Chinese Contemporary"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:457
 msgid "Egyptian"
 msgstr "Egyptiläinen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Hawaiian Starlines"
 msgstr "Havaijilainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Inuit"
 msgstr "Inuiittien"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Indian Vedic"
 msgstr "Intialais-vedalainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Japanese Moon Stations"
 msgstr "Japanilaiset Kuun huoneet"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroiden ja euahlayiden"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Korean"
 msgstr "Korealainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakotojen, lakotojen ja nakotojen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Macedonian"
 msgstr "Makedonialainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "Maori"
 msgstr "Maorien"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Mongolian"
 msgstr "Mongolialainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Lokono"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Navajo"
 msgstr "Navajojen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Norse"
 msgstr "Muinaisnorjalainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "Ojibwe"
 msgstr "Ojibwejen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Romanian"
 msgstr "Romanialainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "Sami"
 msgstr "Saamelainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Sardinian"
 msgstr "Sardinialainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Siberian"
 msgstr "Siperialainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Tukano"
 msgstr "Tukanojen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Tupi-Guarani"
 msgstr "Tupi-guaranilainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:497
+#: src/translations.h:499
 msgid "Tongan"
 msgstr "Tongalainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Western"
 msgstr "Länsimainen"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Western (H.A.Rey)"
 msgstr "Länsimainen (H. A. Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Western (O.Hlad)"
 msgstr "Länsimainen (O. Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:505
+#: src/translations.h:507
 msgid "Northern Andes"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Trees"
 msgstr "Puut"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:515 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1366
+#: src/translations.h:517 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1366
 msgid "Moon"
 msgstr "Kuu"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Hurricane"
 msgstr "Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Ocean"
 msgstr "Valtameri"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:523 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1378
+#: src/translations.h:525 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1378
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:525 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1381
+#: src/translations.h:527 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1381
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:527 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1384
+#: src/translations.h:529 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1384
 msgid "Saturn"
 msgstr "Saturnus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Uranus"
 msgstr "Uranus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Neptune"
 msgstr "Neptunus"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Geneva"
 msgstr "Geneve"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:535
+#: src/translations.h:537
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:537
+#: src/translations.h:539
 msgid "Zero Horizon"
 msgstr "Nollahorisontti"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:539 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/translations.h:541 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1363
 msgid "Sun"
 msgstr "Aurinko"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Vienna Sterngarten"
 msgstr "Wienin Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Testscene"
 msgstr "Testinäkymä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Landscape Tour"
 msgstr "Maisemamatka"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Partial Lunar Eclipse"
 msgstr "Osittainen kuunpimennys"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Total Lunar Eclipse"
 msgstr "Täydellinen kuunpimennys"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "Screensaver"
 msgstr "Näytönsäästäjä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Solar Eclipse 2009"
 msgstr "Auringonpimennys 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:561
+#: src/translations.h:563
 msgid "Startup Script"
 msgstr "Käynnistyskomentojono"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:563
+#: src/translations.h:565
 msgid "Zodiac"
 msgstr "Eläinrata"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:565
+#: src/translations.h:567
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Merkurius, kolminkertainen auringonnousu ja -lasku"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Kaksinkertainen pimennys Deimoksessa 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Kaksinkertainen pimennys Deimoksessa 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Phoboksen Maan ja Jupiterin peitto 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 ylikulkua ja 2 pimennystä Deimoksessa 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:577
+#: src/translations.h:579
 msgid "Solar System Screensaver"
 msgstr "Aurinkokuntanäytönsäästäjä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:579
+#: src/translations.h:581
 msgid "Constellations Tour"
 msgstr "Tähdistömatka"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:581
+#: src/translations.h:583
 msgid "Sun from different planets"
 msgstr "Aurinko eri planeetoilta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Earth best views from other bodies"
 msgstr "Parhaat näkymät Maahan eri taivaankappaleilta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:585
+#: src/translations.h:587
 msgid "Transit of Venus"
 msgstr "Venuksen ylikulku"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "Sky Culture Tour"
 msgstr "Taivaskulttuurimatka"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "Earth Events from Mercury"
 msgstr "Maan tapahtumia Merkuriuksesta"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Earth Events from a floating city on Venus"
 msgstr "Maan tapahtumia Venuksesta"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Earth Events from Mars"
 msgstr "Maan tapahtumia Marsista"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:597
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 "Maan ja muiden planeettojen suurimmat elongaatiot ja oppositiot Marsista."
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:599
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Maan ja Marsin suurimmat elongaatiot ja ylikulut Kallistosta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "Tycho's Supernova"
 msgstr "Tykon supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:603
 msgid "Earth and other Planets from Ceres"
 msgstr "Maa ja muut planeetat Cereksestä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:605
 msgid "Messier Objects Tour"
 msgstr "Messier-matka"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:607
 msgid "Binocular Highlights"
 msgstr "Kiikarikohteita"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:609
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 paljain silmin näkyvää kaksoistähteä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:611
 msgid "List of largest known stars"
 msgstr "Luettelo suurimmista tunnetuista tähdistä"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:613
 msgid "Herschel 400 Tour"
 msgstr "Herschel 400 -matka"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:615
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky:  syvän taivaan kiikarikohteita"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:617
 msgid "The Jack Bennett Catalog"
 msgstr "Jack Bennet -luettelo"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:619
 msgid "Best objects in the New General Catalog"
 msgstr "NGC-luettelon parhaat kohteet"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:621
 msgid "Jupiter and triple shadow phenomena"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:623
 msgid "Jupiter without Galilean satellites"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:625
 msgid "Skybox Tiles"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:627
 msgid "Occultations of bright stars by planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:629
 msgid "Mutual occultations of planets"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:633
+#: src/translations.h:635
 msgid "Look around each installed landscape."
 msgstr "Katsele jokaista asennettua maisemaa."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:635
+#: src/translations.h:637
 msgid "Look at each installed sky culture."
 msgstr "Katsele jokaista asennettua taivaskulttuuria."
 
-#: src/translations.h:636
+#: src/translations.h:638
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Komentojono esittelee osittaisen kuunpimennyksen."
 
-#: src/translations.h:637
+#: src/translations.h:639
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Komentojono esittelee täydellisen kuunpimennyksen."
 
-#: src/translations.h:638
+#: src/translations.h:640
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Hidas, loppumaton matka taivaalla; katsellaan satunnaisia kohteita."
 
-#: src/translations.h:639
+#: src/translations.h:641
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -6545,12 +6555,12 @@ msgstr ""
 "Komentojono esittelee vuoden 2009 täydellisen auringonpimennyksen (paikka = "
 "Rangpur, Bangladesh)."
 
-#: src/translations.h:640
+#: src/translations.h:642
 msgid "Script which runs automatically at startup"
 msgstr ""
 "Komentojono joka suoritetaan automaattisesti käynnistyksen yhteydessä."
 
-#: src/translations.h:641
+#: src/translations.h:643
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -6559,7 +6569,7 @@ msgstr ""
 "Komentojono näyttää eläinradan tähdistöt. Eläinrata tarkoittaa tähdistöjä, "
 "joiden poikki Aurinko kulkee taivaanpallolla vuotuisen kiertonsa aikana."
 
-#: src/translations.h:642
+#: src/translations.h:644
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -6567,7 +6577,7 @@ msgstr ""
 "Merkuriuksen radan ja pyörimisen erikoisuuksien vuoksi Aurinko nousee ja "
 "laskee tietyissä paikoissa kolme kertaa yhden Merkuriuksen päivän aikana."
 
-#: src/translations.h:643
+#: src/translations.h:645
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -6576,7 +6586,7 @@ msgstr ""
 "pimentää Auringon ensin. Pimennys tapahtuu Skorpionin ja Jousimiehen välillä"
 " 26. huhtikuuta 2017."
 
-#: src/translations.h:644
+#: src/translations.h:646
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -6585,11 +6595,11 @@ msgstr ""
 "pimentää Auringon ensin. Pimennys tapahtuu Härän ja Kaksosten välillä 23. "
 "heinäkuuta 2031."
 
-#: src/translations.h:645
+#: src/translations.h:647
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "Phobos peittää Auringon nähtynä Olympos Mons -vuorelta 2.1.2021."
 
-#: src/translations.h:646
+#: src/translations.h:648
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -6599,7 +6609,7 @@ msgstr ""
 "peitot samana päivänä ovat kuitnekin harvinaisia. Tässä yksi, joka tapahtuu "
 "23. 1.2048. Todellisella nopeudella."
 
-#: src/translations.h:647
+#: src/translations.h:649
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -6615,31 +6625,31 @@ msgstr ""
 "välissä. Phobos tulee esiin Marsin takaa edelleen pimentyneenä, kunnes se "
 "poistuu Marsin varjosta."
 
-#: src/translations.h:648
+#: src/translations.h:650
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
 "Erilaisia aurinkokunnan tapahtumia esittävä näytönsäästäjä. Kaikkiaan 300 "
 "tapahtumaa!"
 
-#: src/translations.h:649
+#: src/translations.h:651
 msgid "A tour of the western constellations."
 msgstr "Matka länsimaisiin tähtikuvioihin."
 
-#: src/translations.h:650
+#: src/translations.h:652
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Katsele Aurinkoa aurinkokunnan suurilta planeetoilta ja Plutosta."
 
-#: src/translations.h:651
+#: src/translations.h:653
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "Parhaat näkymät Maahan aurinkokunnan muilta kappaleilta 2000-luvulla."
 
-#: src/translations.h:652
+#: src/translations.h:654
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Venuksen ylikulku nähtynä Sydneystä, Australiasta 6. kesäkuuta 2012."
 
-#: src/translations.h:653
+#: src/translations.h:655
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -6647,7 +6657,7 @@ msgstr ""
 "Tyko Brahen vuonna 1572 havainnoiman supernovan räjähdys. Supernovat-"
 "laajennuksen on oltava käytössä."
 
-#: src/translations.h:654
+#: src/translations.h:656
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -6655,7 +6665,7 @@ msgstr ""
 "Maan ja muiden planeettojen suurimmat elongaatiot ja oppositiot Marsista "
 "2000–3000"
 
-#: src/translations.h:655
+#: src/translations.h:657
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -6667,7 +6677,7 @@ msgstr ""
 "säteilyvyöhykkeen ulkopuolella. Jos ihmiset joskus asuttaisivat Jupiterin "
 "kuut, olisi Kallisto siis paras vaihtoehto."
 
-#: src/translations.h:656
+#: src/translations.h:658
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
@@ -6675,11 +6685,11 @@ msgstr ""
 "Maan ja muiden näkyvien planeettojen suurimmat elongaatiot ja oppositiot "
 "Cerekseltä 2000–2200 "
 
-#: src/translations.h:657
+#: src/translations.h:659
 msgid "A tour of Messier Objects"
 msgstr "Matka Messier-luettelon kohteisiin"
 
-#: src/translations.h:658
+#: src/translations.h:660
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -6688,7 +6698,7 @@ msgstr ""
 "Matka kiinnostaviin kiikarikohteisiin. Komentosarjan tiedot ovat peräisin "
 "Gary Seronikin Binocular Highlights -kirjasta."
 
-#: src/translations.h:659
+#: src/translations.h:661
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -6699,15 +6709,15 @@ msgstr ""
 "09/2014. Tiedot ovat peräisin Lodrigussin nettisivuilta, "
 "http://www.astropix.com/doubles/."
 
-#: src/translations.h:660
+#: src/translations.h:662
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "Matka suurimpiin tunnettuihin tähtiin."
 
-#: src/translations.h:661
+#: src/translations.h:663
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Matka Herschel 400 -luettelon kohteisiin."
 
-#: src/translations.h:662
+#: src/translations.h:664
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -6717,7 +6727,7 @@ msgstr ""
 "kohteiden luettelon. Komentosarjassa esittelemme näistä kohteista 31, "
 "rektaskension (J2000.0) mukaisessa järjestyksessä."
 
-#: src/translations.h:663
+#: src/translations.h:665
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -6725,7 +6735,7 @@ msgstr ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (kaikkiaan 152 "
 "kohdetta). Luettelon on antanut Auke Slotegraaf."
 
-#: src/translations.h:664
+#: src/translations.h:666
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -6735,14 +6745,14 @@ msgstr ""
 "Club -seuran (Phoenix, Arizona, USA) jäsenet käyttävät \"Best of the NGC "
 "achievement award\" -palkinto-ohjelmassa."
 
-#: src/translations.h:665
+#: src/translations.h:667
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr ""
 
-#: src/translations.h:666
+#: src/translations.h:668
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -6751,192 +6761,192 @@ msgid ""
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
 
-#: src/translations.h:667
+#: src/translations.h:669
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
 
-#: src/translations.h:668
+#: src/translations.h:670
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr ""
 
-#: src/translations.h:672
+#: src/translations.h:674
 msgid "&Undo"
 msgstr "&Kumoa"
 
-#: src/translations.h:673
+#: src/translations.h:675
 msgid "&Redo"
 msgstr "&Tee uudelleen"
 
-#: src/translations.h:674
+#: src/translations.h:676
 msgid "Cu&t"
 msgstr "&Leikkaa"
 
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "&Copy"
 msgstr "&Kopioi"
 
-#: src/translations.h:676
+#: src/translations.h:678
 msgid "&Paste"
 msgstr "&Liitä"
 
-#: src/translations.h:677 plugins/Oculars/src/ui_ocularDialog.h:1222
+#: src/translations.h:679 plugins/Oculars/src/ui_ocularDialog.h:1222
 #: plugins/Oculars/src/ui_ocularDialog.h:1231
 #: plugins/Oculars/src/ui_ocularDialog.h:1237
 #: plugins/Oculars/src/ui_ocularDialog.h:1258
 msgid "Delete"
 msgstr "Poista"
 
-#: src/translations.h:678
+#: src/translations.h:680
 msgid "Select All"
 msgstr "Valitse kaikki"
 
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "Look in:"
 msgstr "Etsi kohteesta:"
 
-#: src/translations.h:680
+#: src/translations.h:682
 msgid "Directory:"
 msgstr "Hakemisto:"
 
-#: src/translations.h:681
+#: src/translations.h:683
 msgid "Folder"
 msgstr "Kansio"
 
-#: src/translations.h:682
+#: src/translations.h:684
 msgid "&Choose"
 msgstr "&Valitse"
 
-#: src/translations.h:683 src/ui_configurationDialog.h:1568
+#: src/translations.h:685 src/ui_configurationDialog.h:1568
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Peruuta"
 
-#: src/translations.h:684
+#: src/translations.h:686
 msgid "&Cancel"
 msgstr "&Peruuta"
 
-#: src/translations.h:685
+#: src/translations.h:687
 msgid "Files of type:"
 msgstr "Tiedostot tyyppiä:"
 
-#: src/translations.h:686
+#: src/translations.h:688
 msgid "Date Modified"
 msgstr "Muokkauspäivämäärä"
 
-#: src/translations.h:687
+#: src/translations.h:689
 msgid "Directories"
 msgstr "Hakemistot"
 
-#: src/translations.h:688
+#: src/translations.h:690
 msgid "Computer"
 msgstr "Tietokone"
 
-#: src/translations.h:689
+#: src/translations.h:691
 msgid "&Open"
 msgstr "&Avaa"
 
-#: src/translations.h:690
+#: src/translations.h:692
 msgid "&Save"
 msgstr "&Tallenna"
 
-#: src/translations.h:691
+#: src/translations.h:693
 msgid "File &name:"
 msgstr "Tiedoston &nimi:"
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "Copy &Link Location"
 msgstr "Kopioi &linkin osoite"
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid "Abort"
 msgstr "Keskeytä"
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid "Ignore"
 msgstr "Ohita"
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid "&Basic colors"
 msgstr "&Perusvärit"
 
-#: src/translations.h:696
+#: src/translations.h:698
 msgid "&Pick Screen Color"
 msgstr "&Valitse näyttöväri"
 
-#: src/translations.h:697
+#: src/translations.h:699
 msgid "&Custom colors"
 msgstr "&Omat värit"
 
-#: src/translations.h:698
+#: src/translations.h:700
 msgid "&Add to Custom Colors"
 msgstr "&Lisää omiin väreihin"
 
-#: src/translations.h:699
+#: src/translations.h:701
 msgid "Hu&e:"
 msgstr "&Sävy"
 
-#: src/translations.h:700
+#: src/translations.h:702
 msgid "&Sat:"
 msgstr "&Kyll.:"
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid "&Val:"
 msgstr "&Arvo:"
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid "&Red:"
 msgstr "&Pun.:"
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid "&Green:"
 msgstr "&Vihr.:"
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid "Bl&ue:"
 msgstr "&Sin:"
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid "Select Color"
 msgstr "Valitse väri"
 
-#: src/translations.h:706
+#: src/translations.h:708
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Osoittimen koordinaatit %1, %2 Paina ESC lopettaaksesi"
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid "Back"
 msgstr "Taakse"
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid "Forward"
 msgstr "Eteen"
 
-#: src/translations.h:709
+#: src/translations.h:711
 msgid "Parent Directory"
 msgstr "Päähakemisto"
 
-#: src/translations.h:710
+#: src/translations.h:712
 msgid "Create New Folder"
 msgstr "Luo uusi kansio"
 
-#: src/translations.h:711
+#: src/translations.h:713
 msgid "List View"
 msgstr "Listanäkymä"
 
-#: src/translations.h:712
+#: src/translations.h:714
 msgid "Detail View"
 msgstr "Yksityiskohtainen näkymä"
 
-#: src/translations.h:713
+#: src/translations.h:715
 msgid "Recent Places"
 msgstr "Viimeisimmät paikat"
 
-#: src/translations.h:714
+#: src/translations.h:716
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -6945,23 +6955,23 @@ msgstr ""
 "%1 on jo olemassa.\n"
 "Haluatko korvata sen?"
 
-#: src/translations.h:715
+#: src/translations.h:717
 msgid "&Yes"
 msgstr "&Kyllä"
 
-#: src/translations.h:716
+#: src/translations.h:718
 msgid "&No"
 msgstr "&Ei"
 
-#: src/translations.h:717
+#: src/translations.h:719
 msgid "&Select All"
 msgstr "&Valitse kaikki"
 
-#: src/translations.h:718
+#: src/translations.h:720
 msgid "&Step up"
 msgstr "Askel &ylös"
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid "Step &down"
 msgstr "Askel &alas"
 
