@@ -286,6 +286,7 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 void BookmarksDialog::clearHighlightsButtonPressed()
 {
 	GETSTELMODULE(CustomObjectMgr)->cleanHighlightList();
+	objectMgr->unSelect();
 }
 
 void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)
