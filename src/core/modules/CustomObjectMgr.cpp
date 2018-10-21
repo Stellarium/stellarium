@@ -127,9 +127,6 @@ void CustomObjectMgr::init()
 	setActiveRadiusLimit(conf->value("gui/custom_marker_radius_limit", 15).toInt());
 	setSelectPriority(conf->value("gui/custom_marker_priority", 0.f).toFloat());
 
-	// Highlights
-	setHighlightColor(StelUtils::strToVec3f(conf->value("gui/highlight_marker_color", "0.0,1.0,1.0").toString()));
-
 	GETSTELMODULE(StelObjectMgr)->registerStelObjectMgr(this);
 }
 
@@ -235,9 +232,6 @@ void CustomObjectMgr::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
-	// draw all highlights
-	drawHighlights(core, painter);
 }
 
 void CustomObjectMgr::drawPointer(StelCore* core, StelPainter& painter)
@@ -382,16 +376,6 @@ const Vec3f& CustomObjectMgr::getMarkersColor(void) const
 	return CustomObject::markerColor;
 }
 
-void CustomObjectMgr::setHighlightColor(const Vec3f& c)
-{
-	hightlightColor = c;
-}
-
-const Vec3f& CustomObjectMgr::getHighlightColor(void) const
-{
-	return hightlightColor;
-}
-
 void CustomObjectMgr::setMarkersSize(const float size)
 {
 	CustomObject::markerSize = size;
@@ -405,35 +389,4 @@ float CustomObjectMgr::getMarkersSize() const
 void CustomObjectMgr::setActiveRadiusLimit(const int radius)
 {
 	radiusLimit = radius;
-}
-
-void CustomObjectMgr::fillHighlightList(QList<Vec3d> list)
-{
-	highlightList = list;
-}
-
-void CustomObjectMgr::cleanHighlightList()
-{
-	highlightList.clear();
-}
-
-void CustomObjectMgr::drawHighlights(StelCore* core, StelPainter& painter)
-{
-	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000);
-
-	if (!highlightList.empty())
-	{
-		Vec3d screenpos;
-		for (const auto& hlObj : highlightList)
-		{
-			// Compute 2D pos and return if outside screen
-			if (!painter.getProjector()->project(hlObj, screenpos))
-				continue;
-
-			painter.setColor(hightlightColor[0], hightlightColor[1], hightlightColor[2]);
-			texPointer->bind();
-			painter.setBlending(true);
-			painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
-		}
-	}
 }

@@ -154,24 +154,6 @@ public slots:
 	//! @return current size
 	float getMarkersSize(void) const;
 
-	//! Set the color used to draw of the highlight markers.
-	//! @param c The color of the highlight markers (R,G,B)
-	//! @code
-	//! // example of usage in scripts
-	//! CustomObjectMgr.setHighlightColor(Vec3f(1.0,0.0,0.0));
-	//! @endcode
-	void setHighlightColor(const Vec3f& c);
-	//! Get the current color used to draw of the highlight markers.
-	//! @return current color
-	const Vec3f& getHighlightColor(void) const;
-
-	//! Fill the list highlight markers
-	//! @param list - list of coordinates of the highlights
-	void fillHighlightList(QList<Vec3d> list);
-
-	//! Clean the list of highlight markers
-	void cleanHighlightList();
-
 	//! Set the select priority for custom objects
 	//! @param priority level
 	void setSelectPriority(float priority);
@@ -192,7 +174,6 @@ private:
 	QSettings* conf;
 	StelTextureSP texPointer;
 	QList<CustomObjectP> customObjects;
-	QList<Vec3d> highlightList;
 
 	Vec3f hightlightColor;
 	int countMarkers;
