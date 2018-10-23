@@ -56,7 +56,6 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
 #endif
-	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
 	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
@@ -185,11 +184,6 @@ public slots:
 	//! happened.
 	bool needsMaxFPS() const;
 
-	//! Set the state of the flag of usage background for GUI buttons
-	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; emit flagUseButtonsBackgroundChanged(b); }
-	//! Get the state of the flag of usage background for GUI buttons
-	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
-
 	//! Set the sky background color. (Actually forwards to the StelRootItem.)  Everything else than black creates a work of art!
 	void setSkyBackgroundColor(Vec3f color);
 	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates a work of art!
@@ -226,7 +220,6 @@ signals:
 	void customScreenshotWidthChanged(int width);
 	void customScreenshotHeightChanged(int height);
 
-	void flagUseButtonsBackgroundChanged(bool b);
 	void skyBackgroundColorChanged(Vec3f color);
 	void flagCursorTimeoutChanged(bool b);
 	void cursorTimeoutChanged(double t);
@@ -294,8 +287,6 @@ private:
 	//! Timer that triggers with the cursor timeout.
 	QTimer* cursorTimeoutTimer;
 
-	bool flagUseButtonsBackground;
-
 	double lastEventTimeSec;
 
 	//! The minimum desired frame rate in frame per second.
@@ -303,7 +294,6 @@ private:
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
 	QTimer* fpsTimer;
-
 
 #ifdef OPENGL_DEBUG_LOGGING
 	QOpenGLDebugLogger* glLogger;

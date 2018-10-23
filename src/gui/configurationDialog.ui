@@ -1014,16 +1014,6 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="4" column="1">
-              <widget class="QCheckBox" name="showHipsButtonCheckBox">
-               <property name="toolTip">
-                <string>Toggle display of the button for the HiPS Surveys. Select a survey in the View settings.</string>
-               </property>
-               <property name="text">
-                <string>Show HiPS button</string>
-               </property>
-              </widget>
-             </item>
              <item row="5" column="1">
               <widget class="QCheckBox" name="showBookmarksButtonCheckBox">
                <property name="toolTip">
@@ -1034,13 +1024,23 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="1">
-              <widget class="QCheckBox" name="useButtonsBackgroundCheckBox">
+             <item row="7" column="0">
+              <widget class="QCheckBox" name="showGotoSelectedButtonCheckBox">
                <property name="toolTip">
-                <string>Toggle the usage of background under GUI buttons</string>
+                <string>Show button in addition to keyboard shortcut?</string>
                </property>
                <property name="text">
-                <string>Use buttons background</string>
+                <string>Show centering button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1">
+              <widget class="QCheckBox" name="showHipsButtonCheckBox">
+               <property name="toolTip">
+                <string>Toggle display of the button for the HiPS Surveys. Select a survey in the View settings.</string>
+               </property>
+               <property name="text">
+                <string>Show HiPS button</string>
                </property>
               </widget>
              </item>
@@ -1054,30 +1054,6 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
-               <property name="toolTip">
-                <string>Toggle display of nebula images.</string>
-               </property>
-               <property name="text">
-                <string>Show nebula background button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="0">
-              <widget class="QCheckBox" name="showConstellationBoundariesButtonCheckBox">
-               <property name="text">
-                <string>Show constellation boundaries button</string>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="showAsterismLinesButtonCheckBox">
-               <property name="text">
-                <string>Show asterism lines button</string>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="1">
               <widget class="QCheckBox" name="showFlipButtonsCheckbox">
                <property name="toolTip">
@@ -1088,23 +1064,27 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
-              <widget class="QCheckBox" name="showGalacticGridButtonCheckBox">
-               <property name="toolTip">
-                <string>A button to toggle galactic grid</string>
-               </property>
+             <item row="2" column="0">
+              <widget class="QCheckBox" name="showAsterismLinesButtonCheckBox">
                <property name="text">
-                <string>Show galactic grid button</string>
+                <string>Show asterism lines button</string>
                </property>
               </widget>
              </item>
-             <item row="5" column="0">
-              <widget class="QCheckBox" name="showICRSGridButtonCheckBox">
+             <item row="1" column="1">
+              <widget class="QCheckBox" name="showNebulaBgButtonCheckbox">
                <property name="toolTip">
-                <string>A button to toggle equatorial J2000 grid</string>
+                <string>Toggle display of nebula images.</string>
                </property>
                <property name="text">
-                <string>Show ICRS grid button</string>
+                <string>Show nebula background button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QCheckBox" name="showAsterismLabelsButtonCheckBox">
+               <property name="text">
+                <string>Show asterism labels button</string>
                </property>
               </widget>
              </item>
@@ -1118,10 +1098,70 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="0">
-              <widget class="QCheckBox" name="showAsterismLabelsButtonCheckBox">
+             <item row="1" column="0">
+              <widget class="QCheckBox" name="showConstellationBoundariesButtonCheckBox">
                <property name="text">
-                <string>Show asterism labels button</string>
+                <string>Show constellation boundaries button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="5" column="0">
+              <widget class="QCheckBox" name="showICRSGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle equatorial J2000 grid</string>
+               </property>
+               <property name="text">
+                <string>Show ICRS grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="0">
+              <widget class="QCheckBox" name="showNightmodeButtonCheckBox">
+               <property name="toolTip">
+                <string>Show button in addition to keyboard shortcut?</string>
+               </property>
+               <property name="text">
+                <string>Show nightmode button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0">
+              <widget class="QCheckBox" name="showGalacticGridButtonCheckBox">
+               <property name="toolTip">
+                <string>A button to toggle galactic grid</string>
+               </property>
+               <property name="text">
+                <string>Show galactic grid button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="1">
+              <widget class="QCheckBox" name="showFullscreenButtonCheckBox">
+               <property name="toolTip">
+                <string>Show button in addition to keyboard shortcut?</string>
+               </property>
+               <property name="text">
+                <string>Show fullscreen button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1">
+              <widget class="QCheckBox" name="showQuitButtonCheckBox">
+               <property name="toolTip">
+                <string>Show button in addition to keyboard shortcut?</string>
+               </property>
+               <property name="text">
+                <string>Show Quit button</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
+              <widget class="QCheckBox" name="useButtonsBackgroundCheckBox">
+               <property name="toolTip">
+                <string>Toggle the usage of background under GUI buttons</string>
+               </property>
+               <property name="text">
+                <string>Use buttons background</string>
                </property>
               </widget>
              </item>

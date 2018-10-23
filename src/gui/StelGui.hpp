@@ -56,10 +56,14 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool visible READ getVisible WRITE setVisible NOTIFY visibleChanged)
 	Q_PROPERTY(bool autoHideHorizontalButtonBar READ getAutoHideHorizontalButtonBar WRITE setAutoHideHorizontalButtonBar NOTIFY autoHideHorizontalButtonBarChanged)
 	Q_PROPERTY(bool autoHideVerticalButtonBar READ getAutoHideVerticalButtonBar WRITE setAutoHideVerticalButtonBar NOTIFY autoHideVerticalButtonBarChanged)
+	Q_PROPERTY(bool flagShowQuitButton READ getFlagShowQuitButton WRITE setFlagShowQuitButton NOTIFY  flagShowQuitButtonChanged)
 	Q_PROPERTY(bool flagShowFlipButtons READ getFlagShowFlipButtons WRITE setFlagShowFlipButtons NOTIFY flagShowFlipButtonsChanged)
 	Q_PROPERTY(bool flagShowNebulaBackgroundButton READ getFlagShowNebulaBackgroundButton WRITE setFlagShowNebulaBackgroundButton NOTIFY flagShowNebulaBackgroundButtonChanged)
 	Q_PROPERTY(bool flagShowDSSButton READ getFlagShowDSSButton WRITE setFlagShowDSSButton NOTIFY  flagShowDSSButtonChanged)
 	Q_PROPERTY(bool flagShowHiPSButton READ getFlagShowHiPSButton WRITE setFlagShowHiPSButton NOTIFY  flagShowHiPSButtonChanged)
+	Q_PROPERTY(bool flagShowGotoSelectedObjectButton READ getFlagShowGotoSelectedObjectButton WRITE setFlagShowGotoSelectedObjectButton NOTIFY flagShowGotoSelectedObjectButtonChanged)
+	Q_PROPERTY(bool flagShowNightmodeButton READ getFlagShowNightmodeButton WRITE setFlagShowNightmodeButton NOTIFY  flagShowNightmodeButtonChanged)
+	Q_PROPERTY(bool flagShowFullscreenButton READ getFlagShowFullscreenButton WRITE setFlagShowFullscreenButton NOTIFY  flagShowFullscreenButtonChanged)
 	Q_PROPERTY(bool flagShowBookmarksButton READ getFlagShowBookmarksButton WRITE setFlagShowBookmarksButton NOTIFY flagShowBookmarksButtonChanged)
 	Q_PROPERTY(bool flagShowICRSGridButton READ getFlagShowICRSGridButton WRITE setFlagShowICRSGridButton NOTIFY flagShowICRSGridButtonChanged)
 	Q_PROPERTY(bool flagShowGalacticGridButton READ getFlagShowGalacticGridButton WRITE setFlagShowGalacticGridButton NOTIFY flagShowGalacticGridButtonChanged )
@@ -67,6 +71,7 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagShowConstellationBoundariesButton READ getFlagShowConstellationBoundariesButton WRITE setFlagShowConstellationBoundariesButton NOTIFY flagShowConstellationBoundariesButtonChanged )
 	Q_PROPERTY(bool flagShowAsterismLinesButton READ getFlagShowAsterismLinesButton WRITE setFlagShowAsterismLinesButton NOTIFY flagShowAsterismLinesButtonChanged )
 	Q_PROPERTY(bool flagShowAsterismLabelsButton READ getFlagShowAsterismLabelsButton WRITE setFlagShowAsterismLabelsButton NOTIFY flagShowAsterismLabelsButtonChanged )
+	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
 
 public:
 	friend class ViewDialog;
@@ -119,6 +124,16 @@ public:
 	virtual const StelObject::InfoStringGroup& getInfoTextFilters() const;
 
 public slots:
+	//! Set the state of the flag of usage background for GUI buttons
+	void setFlagUseButtonsBackground(bool b);
+	//! Get the state of the flag of usage background for GUI buttons
+	bool getFlagUseButtonsBackground() const { return flagUseButtonsBackground; }
+
+	//! Define whether the button for exit should be visible
+	void setFlagShowQuitButton(bool b);
+	//! Get whether the exit button is visible
+	bool getFlagShowQuitButton() const;
+
 	//! Define whether the buttons toggling image flip should be visible
 	void setFlagShowFlipButtons(bool b);
 	//! Get whether the buttons toggling image flip are visible
@@ -138,6 +153,21 @@ public slots:
 	void setFlagShowHiPSButton(bool b);
 	//! Get whether the button toggling HiPS surveys is visible
 	bool getFlagShowHiPSButton() const;
+
+	//! Define whether the button for centering on selected object should be visible. If not, user can still press SPACE to center.
+	void setFlagShowGotoSelectedObjectButton(bool b);
+	//! Get whether the button for centering on selected object is visible
+	bool getFlagShowGotoSelectedObjectButton() const;
+
+	//! Define whether the button toggling nightmode should be visible in addition to the Ctrl+N hotkey.
+	void setFlagShowNightmodeButton(bool b);
+	//! Get whether the button toggling nightmode is visible
+	bool getFlagShowNightmodeButton() const;
+
+	//! Define whether the button toggling fullscreen view should be visible in addition to F11 hotkey.
+	void setFlagShowFullscreenButton(bool b);
+	//! Get whether the button toggling fullscreen view is visible
+	bool getFlagShowFullscreenButton() const;
 
 	//! Define whether the button toggling bookmarks should be visible
 	void setFlagShowBookmarksButton(bool b);
@@ -210,10 +240,15 @@ signals:
 	void visibleChanged(bool b);
 	void autoHideHorizontalButtonBarChanged(bool b);
 	void autoHideVerticalButtonBarChanged(bool b);
+	void flagUseButtonsBackgroundChanged(bool b);
+	void flagShowQuitButtonChanged(bool b);
 	void flagShowFlipButtonsChanged(bool b);
 	void flagShowNebulaBackgroundButtonChanged(bool b);
 	void flagShowDSSButtonChanged(bool b);
 	void flagShowHiPSButtonChanged(bool b);
+	void flagShowGotoSelectedObjectButtonChanged(bool b);
+	void flagShowNightmodeButtonChanged(bool b);
+	void flagShowFullscreenButtonChanged(bool b);
 	void flagShowBookmarksButtonChanged(bool b);
 	void flagShowICRSGridButtonChanged(bool b);
 	void flagShowGalacticGridButtonChanged(bool b);
@@ -242,11 +277,17 @@ private:
 
 	class SkyGui* skyGui;
 
+	bool flagUseButtonsBackground;
+
 	StelButton* buttonTimeRewind;
 	StelButton* buttonTimeRealTimeSpeed;
 	StelButton* buttonTimeCurrent;
 	StelButton* buttonTimeForward;
 
+	bool flagShowQuitButton;
+	StelButton* buttonQuit;
+
+	bool flagShowGotoSelectedObjectButton;
 	StelButton* buttonGotoSelectedObject;
 
 	LocationDialog* locationDialog;
@@ -274,6 +315,12 @@ private:
 
 	bool flagShowHiPSButton;
 	StelButton* btShowHiPS;
+
+	bool flagShowNightmodeButton;
+	StelButton* buttonNightmode;
+
+	bool flagShowFullscreenButton;
+	StelButton* buttonFullscreen;
 
 	bool flagShowBookmarksButton;
 	StelButton* btShowBookmarks;
