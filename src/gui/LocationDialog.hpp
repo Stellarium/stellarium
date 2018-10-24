@@ -95,6 +95,10 @@ private slots:
 	void reportEdit();
 
 	void saveTimeZone();
+
+	//! Set timezone (to be connected to a signal from StelCore)
+	//! This has to do some GUI element juggling.
+	void setTimezone(QString tz);
 	
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer

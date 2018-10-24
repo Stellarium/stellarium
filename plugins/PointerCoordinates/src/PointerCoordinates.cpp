@@ -291,10 +291,10 @@ void PointerCoordinates::draw(StelCore *core)
 
 	if (flagShowCrossedLines)
 	{
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();		
 		QPoint m = StelMainView::getInstance().getMousePos();
-		sPainter.drawLine2d(m.x(), 0, m.x(), params.viewportXywh[3]);
-		sPainter.drawLine2d(0, params.viewportXywh[3]-m.y(), params.viewportXywh[2], params.viewportXywh[3]-m.y());
+		sPainter.drawLine2d(m.x()*params.devicePixelsPerPixel, 0, m.x()*params.devicePixelsPerPixel, params.viewportXywh[3]*params.devicePixelsPerPixel);
+		sPainter.drawLine2d(0, (params.viewportXywh[3]-m.y())*params.devicePixelsPerPixel, params.viewportXywh[2]*params.devicePixelsPerPixel, (params.viewportXywh[3]-m.y())*params.devicePixelsPerPixel);
 	}
 }
 

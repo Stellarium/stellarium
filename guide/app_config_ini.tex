@@ -389,7 +389,7 @@ flag\_show\_other                 & bool & true & display other deep-sky objects
 \subsection{\big[gui\big]}
 %\label{sec:config.ini:gui}
 
-This section includes settings for the graphical user interface.
+This section includes settings for the graphical user interface. See sections \ref{sec:gui:configuration:extras}--\ref{sec:gui:configuration:tools} for most of these keys.
 
 \begin{longtable}{p{50mm}|l|l|p{55mm}}
 \toprule
@@ -406,12 +406,24 @@ base\_font\_file                & string &      & Selects the name for font file
 flag\_mouse\_cursor\_timeout    & bool  & true  & Set to \emph{false} if you want to have cursor visible at all times.\\%\midrule
 mouse\_cursor\_timeout          & float & 10    & Set to \emph{0} if you want to keep the mouse cursor visible at all times. 
                                                   non-0 values mean the cursor will be hidden after that many seconds of inactivity\\\midrule
-flag\_show\_flip\_buttons       & bool  & false & Enables/disables display of the image flipping buttons in the main 
-                                                  toolbar (see section \ref{sec:gui:configuration:tools})\\\midrule
-flag\_show\_nebulae\_ \mbox{background\_button} & bool & false & Set to \emph{true} if you want to have access to the 
-                                                         button for enabling/disabling backgrounds for deep-sky objects\\\midrule
-flag\_show\_toast\_survey\_button & bool & false & Set to \emph{true} if you want to have access to the button for 
-                                                   enabling/disabling Digitized Sky Survey for deep-sky objects\\\midrule
+%
+flag\_show\_boundaries\_button         & bool  & false & Show a button to toggle constellation boundaries\\
+flag\_show\_asterism\_lines\_button    & bool  & false & Show a button to toggle asterism lines\\
+flag\_show\_asterism\_labels\_button   & bool  & false & Show a button to toggle asterism labels\\
+flag\_show\_ecliptic\_grid\_button     & bool  & false & Show a button to toggle ecliptic grid\\
+flag\_show\_icrs\_grid\_button         & bool  & false & Show a button to toggle ICRS (equatorial J2000.0) grid\\
+flag\_show\_galactic\_grid\_button     & bool  & false & Show a button to toggle galactic grid\\
+flag\_show\_goto\_selected\_button     & bool  & true  & Show a button to center to selected object\\
+flag\_show\_nightmode\_button          & bool  & true  & Show a button to toggle night mode\\
+flag\_show\_nebulae\_ \mbox{background\_button} & bool & false & Show a button to toggle images for deep-sky objects\\%\midrule
+flag\_show\_flip\_buttons              & bool  & false & Show the image flipping buttons in the main toolbar \\%\midrule
+flag\_show\_dss\_button                & bool  & false & Show a button to toggle Digitized Sky Survey (DSS)\\%\midrule
+flag\_show\_hips\_button               & bool  & false & Show a button to toggle HiPS survey display\\%\midrule
+flag\_show\_bookmark\_button           & bool  & false & Show a button to show and edit bookmarks\\
+flag\_show\_fullscreen\_button         & bool  & true  & Show a button to toggle fullscreen view\\
+flag\_show\_quit\_button               & bool  & true  & Show a button to quit via button press\\
+flag\_show\_buttons\_background        & bool  & true  & If \emph{true}, use background under buttons on bottom bar.\\\midrule
+%
 selected\_object\_info            & string & all  & Values: \emph{all}, \emph{short}, \emph{none}, 
                                                     and \emph{custom} (since V0.12.0; see~\ref{sec:gui:configuration:info}).\\\midrule
 custom\_marker\_size             & float   & 5.0 & Size of custom marker.\\%\midrule
@@ -424,7 +436,6 @@ custom\_marker\_radius\_limit    & int   & 15 & Limit the click radius for mouse
 auto\_hide\_horizontal\_toolbar & bool   & true  & Set to \emph{true} if you want auto hide the horizontal toolbar.\\%\midrule
 auto\_hide\_vertical\_toolbar   & bool   & true  & Set to \emph{true} if you want auto hide the vertical toolbar.\\%\midrule
 flag\_use\_window\_transparency & bool   & false & If \emph{false}, show menu bars opaque\\%\midrule
-flag\_show\_buttons\_background & bool   & true  & If \emph{true}, use background under buttons on bottom bar.\\%\midrule
 flag\_show\_datetime            & bool   & true  & display date and time in the bottom bar\\%\midrule
 flag\_time\_jd                  & bool   & false & use JD format for time in the bottom bar\\%\midrule
 flag\_show\_tz                  & bool   & false & show time zone info in the bottom bar\\%\midrule

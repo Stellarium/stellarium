@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-09-28 18:04+0700\n"
+"POT-Creation-Date: 2018-10-15 20:25+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2017\n"
 "Language-Team: Slovak (https://www.transifex.com/stellarium/teams/80998/sk/)\n"
@@ -18,16 +18,16 @@ msgstr ""
 "Language: sk\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
-#: src/core/modules/CustomObject.cpp:81
+#: src/core/modules/CustomObject.cpp:83
 msgid "custom object"
 msgstr "vlastný objekt"
 
-#: src/core/modules/CustomObject.cpp:83
+#: src/core/modules/CustomObject.cpp:85
 msgid "custom marker"
 msgstr "vlastná značka"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:85 src/core/modules/Asterism.cpp:221
+#: src/core/modules/CustomObject.cpp:87 src/core/modules/Asterism.cpp:221
 #: src/core/modules/Constellation.cpp:286
 #: src/core/modules/NomenclatureItem.cpp:787 src/core/modules/Nebula.cpp:272
 #: src/core/modules/Nebula.cpp:274 src/core/modules/Planet.cpp:423
@@ -60,7 +60,8 @@ msgstr "asterizmus"
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:138
 #: src/core/StelApp.cpp:567 src/core/StelCore.cpp:260
-#: src/core/StelSkyLayerMgr.cpp:89 src/StelMainView.cpp:815
+#: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
+#: src/StelMainView.cpp:815
 msgid "Display Options"
 msgstr "Možnosti zobrazenia"
 
@@ -415,7 +416,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:897 src/scripting/StelScriptMgr.cpp:233
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
-#: plugins/Oculars/src/gui/OcularDialog.cpp:433
+#: plugins/Oculars/src/gui/OcularDialog.cpp:482
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:223
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
@@ -1154,7 +1155,7 @@ msgstr "Priemer"
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/MinorPlanet.cpp:323 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:307 src/gui/StelGuiItems.cpp:755
-#: src/gui/AstroCalcDialog.cpp:4896 plugins/Satellites/src/Satellite.cpp:303
+#: src/gui/AstroCalcDialog.cpp:4936 plugins/Satellites/src/Satellite.cpp:303
 #: plugins/Satellites/src/Satellite.cpp:307
 #: plugins/Satellites/src/Satellite.cpp:323
 msgctxt "distance"
@@ -1752,8 +1753,8 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:802 src/gui/AstroCalcDialog.cpp:883
 #: src/gui/AstroCalcDialog.cpp:959 src/gui/AstroCalcDialog.cpp:1043
 #: src/gui/AstroCalcDialog.cpp:1366 src/gui/AstroCalcDialog.cpp:1403
-#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4950
-#: src/gui/AstroCalcDialog.cpp:5015 src/gui/AstroCalcDialog.cpp:5174
+#: src/gui/AstroCalcDialog.cpp:2522 src/gui/AstroCalcDialog.cpp:4990
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 #: plugins/Exoplanets/src/Exoplanet.cpp:351
 msgctxt "distance, astronomical unit"
 msgid "AU"
@@ -1762,7 +1763,7 @@ msgstr "au"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:480 src/core/modules/Planet.cpp:498
 #: src/core/modules/MinorPlanet.cpp:244 src/core/modules/MinorPlanet.cpp:262
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4898
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4938
 msgctxt "distance"
 msgid "M km"
 msgstr "mil. km"
@@ -1774,7 +1775,7 @@ msgstr "Vzdialenosť od Slnka"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:507 src/core/modules/MinorPlanet.cpp:270
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4968
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:5008
 #: plugins/Satellites/src/Satellite.cpp:305
 #: plugins/Satellites/src/Satellite.cpp:330
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1813,7 +1814,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:600 src/core/modules/MinorPlanet.cpp:342
-#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:4985
+#: src/core/modules/StarWrapper.cpp:247 src/gui/AstroCalcDialog.cpp:5025
 msgctxt "duration"
 msgid "days"
 msgstr "dní"
@@ -2104,7 +2105,7 @@ msgstr "Nepodarilo sa vytvoriť odosielač Spout. Podrobnosti sú vo výpise."
 
 #: src/core/StelCore.cpp:258 src/gui/StelGui.cpp:210
 #: src/gui/AstroCalcDialog.cpp:1345 src/gui/AstroCalcDialog.cpp:2902
-#: src/gui/BookmarksDialog.cpp:109 src/ui_dateTimeDialogGui.h:376
+#: src/gui/BookmarksDialog.cpp:112 src/ui_dateTimeDialogGui.h:376
 #: src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
@@ -2346,11 +2347,11 @@ msgstr "Zrkadliť horizontálne"
 msgid "Flip scene vertically"
 msgstr "Zrkadliť vertikálne"
 
-#: src/core/StelCore.cpp:2248
+#: src/core/StelCore.cpp:2256
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "Korekcie sú blokované. Používajte len keď viete, čo robíte!"
 
-#: src/core/StelCore.cpp:2251
+#: src/core/StelCore.cpp:2259
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2361,7 +2362,7 @@ msgstr ""
 "Henrikssonom v jeho článku <em>Einsteinova teória relativity potvrdená "
 "pomocou starodávnych slnečných zatmení</em> (%1). Viac informácii %2tu%3."
 
-#: src/core/StelCore.cpp:2254
+#: src/core/StelCore.cpp:2262
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2370,7 +2371,7 @@ msgstr ""
 "Túto empirickú rovnicu publikoval G. M. Clemence v článku <em>O sústave "
 "astronomických konštánt</em> (%1)."
 
-#: src/core/StelCore.cpp:2257
+#: src/core/StelCore.cpp:2265
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2382,7 +2383,7 @@ msgstr ""
 " 1650 Spencerom Jonesom (%1) a použitý Jeanom Meeusom v jeho <em>Asronomické"
 " vzorce pre kalkulačky</em>. Bol využitý v PC programe SunTracker Pro."
 
-#: src/core/StelCore.cpp:2261
+#: src/core/StelCore.cpp:2269
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -2392,7 +2393,7 @@ msgstr ""
 "<em>Astronomické efemeridy</em> a v <em>Pravidlo zatmení Slnka</em> od "
 "Muckeho a Meeusa (1983)."
 
-#: src/core/StelCore.cpp:2265
+#: src/core/StelCore.cpp:2273
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2403,7 +2404,7 @@ msgstr ""
 "v 5- a 10-dňových intervaloch od 601 p.n.l. do 1649 n.l. Rovnaký vzťah bol "
 "implicitne prijatý v Goldstineových tabuľkách (1973)."
 
-#: src/core/StelCore.cpp:2269
+#: src/core/StelCore.cpp:2277
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2414,7 +2415,7 @@ msgstr ""
 "<em>Zrýchľovanie Zeme a Mesiaca od počiatku astronomických pozorovaní</em> "
 "(%1)."
 
-#: src/core/StelCore.cpp:2272
+#: src/core/StelCore.cpp:2280
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2423,7 +2424,7 @@ msgstr ""
 "Túto rovnicu publikoval F. R. Stephenson v článku <em>Astronomické "
 "pozorovania pred vynálezom ďalekohľadu</em> (%1)."
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2283
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2436,7 +2437,7 @@ msgstr ""
 "<em>Polynomické aproximácie pre korekciu delta T E.T.-U.T. v období "
 "1800-1975</em> (%1) ako preloženie cez dáta Brouwera (1952)."
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2286
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2446,7 +2447,7 @@ msgstr ""
 "<em>Planetárne programy a tabuľky od -4000 do +2800</em> (1986) a z PC "
 "planetária RedShift."
 
-#: src/core/StelCore.cpp:2281
+#: src/core/StelCore.cpp:2289
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2456,11 +2457,11 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé zmeny rotácie Zeme - 700 p.n.l. až 1980 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:2284
+#: src/core/StelCore.cpp:2292
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "Tento algoritmus je použitý v PC planetáriu Guide 7."
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2295
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2470,7 +2471,7 @@ msgstr ""
 "súhrn slnečných zatmení: 1986-2035</em> (1987) a <em>Päťdesiatročný súhrn "
 "lunárnych zatmení: 1986-2035</em> (1989)."
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2298
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2479,7 +2480,7 @@ msgstr ""
 "Tento vzťah bol získaný K.M. Borkowskim (%1) z analýzy 31 slnenčých zatmení "
 "medzi 2137 p.n.l. a 1715 n.l."
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2301
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2491,7 +2492,7 @@ msgstr ""
 "článku <em>Empirické transformácie z U.T. do E.T. v období 1800-1988</em> "
 "(%1) ako preloženie hodnôt od Stephensona a Morrisona (1984)."
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2304
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2501,7 +2502,7 @@ msgstr ""
 "verzii ELP 2000-85 mesačnej teórii v <em>Lunárne tabuľky a programy od 4000 "
 "p.n.l. do 8000 n.l.</em> (1991)."
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2307
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2511,7 +2512,7 @@ msgstr ""
 "Túto rovnicu publikovali F. R. Stephenson a L. V. Morrison v článku "
 "<em>Dlhodobé odchýlky rotácie Zeme: 700 p.n.l. až 1990 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2310
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2520,7 +2521,7 @@ msgstr ""
 "F. R. Stephenson publikoval tento vzorec vo svojej knihe <em>Historické "
 "zatmenia a rotácia Zeme</em> (%1)."
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2313
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2530,7 +2531,7 @@ msgstr ""
 "rozšírený. Tabuľka od 1600 do 2000 zahŕňa variant Chapronta, Chapront-"
 "Touzeovej a Francoua (1997) pre dátumy mimo 1620 do 2000."
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2316
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2539,7 +2540,7 @@ msgstr ""
 "Skupina dynamiky Slnečnej sústavy v Laboratóriách prúdového pohonu NASA "
 "používa tento vzťah na ich interaktívnej webstránke %1JPL Horizons%2."
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2319
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2548,7 +2549,7 @@ msgstr ""
 "Tento polynóm bol publikovaný J. Meeusom a L. Simonsom v článku "
 "<em>Polynomiálne aproximácie pre Delta T, 1620-2000 n.l.</em> (%1)."
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2322
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -2558,7 +2559,7 @@ msgstr ""
 "osobnom počítači</em> (2000) poskytuje jednoduchý kubický polynóm na "
 "prekladanie dát z nedávnej minulosti."
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2325
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
@@ -2570,7 +2571,7 @@ msgstr ""
 "kalendárnych tabuliek</em> (2002). Je založený na knihe <em>Astronomické "
 "algoritmy</em> (1991) Jeana Meeusa."
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2328
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2581,7 +2582,7 @@ msgstr ""
 "Stephensonom v článku <em>Historické hodnoty chyby zemských hodín %1T a "
 "výpočet zatmení</em> (%2) s dodatkom v (%3)."
 
-#: src/core/StelCore.cpp:2323
+#: src/core/StelCore.cpp:2331
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2594,7 +2595,7 @@ msgstr ""
 "mocninou. Je založený na možnej periodicite opísanej Stephensonom v (%2). "
 "Viac informácií %3tu%4."
 
-#: src/core/StelCore.cpp:2326 src/core/StelCore.cpp:2329
+#: src/core/StelCore.cpp:2334 src/core/StelCore.cpp:2337
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2608,15 +2609,15 @@ msgstr ""
 "použité pre %1NASA Eclipse Web Site%2 a v ich <em>Päťtisícročnom pravidle "
 "solárnych zatmení: -1900 do +3000</em>"
 
-#: src/core/StelCore.cpp:2326
+#: src/core/StelCore.cpp:2334
 msgid "Used by default."
 msgstr "Použité v predvolenom nastavení."
 
-#: src/core/StelCore.cpp:2329
+#: src/core/StelCore.cpp:2337
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "Opravená verzia bez dodatočného zrýchlenia Mesiaca."
 
-#: src/core/StelCore.cpp:2332
+#: src/core/StelCore.cpp:2340
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2627,7 +2628,7 @@ msgstr ""
 "publikované v článku <em>Ancient eclipses and dating the fall of "
 "Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2335
+#: src/core/StelCore.cpp:2343
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2639,7 +2640,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1) a revidované S."
 " Islamem v roku 2013."
 
-#: src/core/StelCore.cpp:2338
+#: src/core/StelCore.cpp:2346
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2650,7 +2651,7 @@ msgstr ""
 "Mariama Sultana a Faheema Zaidia publikoval <em>Delta T: Polynomial "
 "Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2341
+#: src/core/StelCore.cpp:2349
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2663,7 +2664,7 @@ msgstr ""
 "2015</em> (%1). Mimo uvedeného rozsahu (modelovaného kĺzavým priemerom) "
 "poskytuje hodnoty podľa približnej paraboly."
 
-#: src/core/StelCore.cpp:2344
+#: src/core/StelCore.cpp:2352
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2671,7 +2672,7 @@ msgid ""
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2347
+#: src/core/StelCore.cpp:2355
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -2680,11 +2681,11 @@ msgstr ""
 "To je kvadratická rovnica pre výpočet %1T s koeficientami definovanými "
 "užívateľom."
 
-#: src/core/StelCore.cpp:2350 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2358 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Chyba"
 
-#: src/core/StelCore.cpp:2358
+#: src/core/StelCore.cpp:2366
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2693,15 +2694,15 @@ msgstr ""
 "Hodnota riešenia %1 pre %2 (sekulárne zrýchlenie Mesiaca) si vyžaduje "
 "prispôsobenie. Podrobnosti sú v príručke."
 
-#: src/core/StelCore.cpp:2401
+#: src/core/StelCore.cpp:2409
 msgid "with zero values outside this range"
 msgstr "s nulovou hodnotou mimo rozsahu"
 
-#: src/core/StelCore.cpp:2404
+#: src/core/StelCore.cpp:2412
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "s typickou presnosťou 1 sekunda a nulová hodnota mimo rozsahu"
 
-#: src/core/StelCore.cpp:2407
+#: src/core/StelCore.cpp:2415
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2709,16 +2710,16 @@ msgstr ""
 "so strednou odchýlkou menej než 1 sekunda, maximálnou chybou 1,9 s a "
 "hodnotami pre okrajové roky mimo tohto rozsahu"
 
-#: src/core/StelCore.cpp:2414
+#: src/core/StelCore.cpp:2422
 msgid "with values for the limit years outside this range"
 msgstr "s hodnotami pre limitné roky mimo tohto rozsahu"
 
-#: src/core/StelCore.cpp:2424
+#: src/core/StelCore.cpp:2432
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2, %3."
 
-#: src/core/StelCore.cpp:2426
+#: src/core/StelCore.cpp:2434
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Prijateľný rozsah použitia: medzi rokmi %1 a %2."
@@ -2961,9 +2962,13 @@ msgstr ""
 msgid "IAU Constellation"
 msgstr "Súhvezdie IAU"
 
-#: src/core/StelSkyLayerMgr.cpp:89
+#: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
 msgstr "Obrázky na pozadí objektov hlbokého vesmíru"
+
+#: src/core/StelSkyLayerMgr.cpp:86
+msgid "Reload the deep-sky objects background images"
+msgstr ""
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:212
 #: src/StelMainView.cpp:813 src/StelMainView.cpp:814
@@ -3064,17 +3069,17 @@ msgstr "MPSČ"
 msgid "Select screenshot directory"
 msgstr "Vybrať adresár pre snímky obrazovky"
 
-#: src/gui/ConfigurationDialog.cpp:948
+#: src/gui/ConfigurationDialog.cpp:947
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Šírka zorného poľa pri spustení: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:956
+#: src/gui/ConfigurationDialog.cpp:955
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Smer pohľadu pri spustení (azimut/výška): %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1018
+#: src/gui/ConfigurationDialog.cpp:1017
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:604
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:259
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:107
@@ -3082,13 +3087,13 @@ msgstr "Smer pohľadu pri spustení (azimut/výška): %1/%2"
 msgid "Authors"
 msgstr "Autori"
 
-#: src/gui/ConfigurationDialog.cpp:1019
+#: src/gui/ConfigurationDialog.cpp:1018
 msgid "Contact"
 msgstr "Kontakt"
 
-#: src/gui/ConfigurationDialog.cpp:1021 src/scripting/StelScriptMgr.cpp:243
+#: src/gui/ConfigurationDialog.cpp:1020 src/scripting/StelScriptMgr.cpp:243
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:91
-#: plugins/Oculars/src/gui/OcularDialog.cpp:431
+#: plugins/Oculars/src/gui/OcularDialog.cpp:480
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:602
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:257
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:221
@@ -3109,9 +3114,9 @@ msgstr "Kontakt"
 msgid "Version"
 msgstr "Verzia"
 
-#: src/gui/ConfigurationDialog.cpp:1022 src/scripting/StelScriptMgr.cpp:238
+#: src/gui/ConfigurationDialog.cpp:1021 src/scripting/StelScriptMgr.cpp:238
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
-#: plugins/Oculars/src/gui/OcularDialog.cpp:432
+#: plugins/Oculars/src/gui/OcularDialog.cpp:481
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:603
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:258
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:222
@@ -3132,20 +3137,20 @@ msgstr "Verzia"
 msgid "License"
 msgstr "Licencia"
 
-#: src/gui/ConfigurationDialog.cpp:1026
+#: src/gui/ConfigurationDialog.cpp:1025
 msgctxt "license"
 msgid "unknown"
 msgstr "neznáma"
 
-#: src/gui/ConfigurationDialog.cpp:1123
+#: src/gui/ConfigurationDialog.cpp:1122
 msgid "Running script: "
 msgstr "Spustený skript: "
 
-#: src/gui/ConfigurationDialog.cpp:1130
+#: src/gui/ConfigurationDialog.cpp:1129
 msgid "Running script: [none]"
 msgstr "Spustený skript: [žiaden]"
 
-#: src/gui/ConfigurationDialog.cpp:1195
+#: src/gui/ConfigurationDialog.cpp:1194
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3153,16 +3158,16 @@ msgstr ""
 "Sťahovanie nových katalógov hviezd je dokončené!\n"
 "Reštartujte Stellarium pre ich zobrazenie."
 
-#: src/gui/ConfigurationDialog.cpp:1199
+#: src/gui/ConfigurationDialog.cpp:1198
 msgid "All available star catalogs have been installed."
 msgstr "Všetky dostupné hviezdne katalógy sú nainštalované."
 
-#: src/gui/ConfigurationDialog.cpp:1204
+#: src/gui/ConfigurationDialog.cpp:1203
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Stiahnuť katalóg %1 z %2"
 
-#: src/gui/ConfigurationDialog.cpp:1211
+#: src/gui/ConfigurationDialog.cpp:1210
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3171,7 +3176,7 @@ msgstr ""
 "Sťahuje sa %1...\n"
 "(Toto okno môžete zatvoriť.)"
 
-#: src/gui/ConfigurationDialog.cpp:1218
+#: src/gui/ConfigurationDialog.cpp:1217
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3182,7 +3187,7 @@ msgstr ""
 "Počet hviezd: %2 miliónov\n"
 "Rozsah magnitúd: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1264 src/gui/ConfigurationDialog.cpp:1301
+#: src/gui/ConfigurationDialog.cpp:1263 src/gui/ConfigurationDialog.cpp:1300
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3191,11 +3196,11 @@ msgstr ""
 "Chyba pri sťahovaní %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1354
+#: src/gui/ConfigurationDialog.cpp:1353
 msgid "Verifying file integrity..."
 msgstr "Kontroluje sa celistvosť súboru..."
 
-#: src/gui/ConfigurationDialog.cpp:1358
+#: src/gui/ConfigurationDialog.cpp:1357
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3204,196 +3209,196 @@ msgstr ""
 "Chyba pri sťahovaní %1:\n"
 "Súbor je poškodený."
 
-#: src/gui/ConfigurationDialog.cpp:1407 src/gui/ConfigurationDialog.cpp:1416
+#: src/gui/ConfigurationDialog.cpp:1406 src/gui/ConfigurationDialog.cpp:1415
 msgid "Available"
 msgstr "K dispozícii"
 
-#: src/gui/ConfigurationDialog.cpp:1409 src/gui/ConfigurationDialog.cpp:1418
+#: src/gui/ConfigurationDialog.cpp:1408 src/gui/ConfigurationDialog.cpp:1417
 msgid "Not Available"
 msgstr "Nedostupné"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1487
+#: src/gui/ConfigurationDialog.cpp:1486
 msgid "Algorithm of"
 msgstr "Algoritmus"
 
-#: src/gui/ConfigurationDialog.cpp:1500
+#: src/gui/ConfigurationDialog.cpp:1499
 msgid "Without correction"
 msgstr "Bez korekcie"
 
-#: src/gui/ConfigurationDialog.cpp:1501
+#: src/gui/ConfigurationDialog.cpp:1500
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1502
+#: src/gui/ConfigurationDialog.cpp:1501
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1503
+#: src/gui/ConfigurationDialog.cpp:1502
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1504
+#: src/gui/ConfigurationDialog.cpp:1503
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomické efemeridy (1960) [Astronomical Ephemeris]"
 
-#: src/gui/ConfigurationDialog.cpp:1505
+#: src/gui/ConfigurationDialog.cpp:1504
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) a Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1506
+#: src/gui/ConfigurationDialog.cpp:1505
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller a Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1507
+#: src/gui/ConfigurationDialog.cpp:1506
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1508
+#: src/gui/ConfigurationDialog.cpp:1507
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel a Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1509
+#: src/gui/ConfigurationDialog.cpp:1508
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel a Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1510
+#: src/gui/ConfigurationDialog.cpp:1509
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison a Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1511
+#: src/gui/ConfigurationDialog.cpp:1510
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson a Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1512
+#: src/gui/ConfigurationDialog.cpp:1511
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson a Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1513
+#: src/gui/ConfigurationDialog.cpp:1512
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1514
+#: src/gui/ConfigurationDialog.cpp:1513
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1515
+#: src/gui/ConfigurationDialog.cpp:1514
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze a Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1516
+#: src/gui/ConfigurationDialog.cpp:1515
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson a Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1517
+#: src/gui/ConfigurationDialog.cpp:1516
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1519
+#: src/gui/ConfigurationDialog.cpp:1518
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (s Chapront, Chapront-Touze a Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1520
+#: src/gui/ConfigurationDialog.cpp:1519
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1521
+#: src/gui/ConfigurationDialog.cpp:1520
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus a Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1522
+#: src/gui/ConfigurationDialog.cpp:1521
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison a Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1523
+#: src/gui/ConfigurationDialog.cpp:1522
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1525
+#: src/gui/ConfigurationDialog.cpp:1524
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak a Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1528
+#: src/gui/ConfigurationDialog.cpp:1527
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak & Meeus (2006) bez dodatočného zrýchlenia mesiaca"
 
-#: src/gui/ConfigurationDialog.cpp:1530
+#: src/gui/ConfigurationDialog.cpp:1529
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1531
+#: src/gui/ConfigurationDialog.cpp:1530
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1532
+#: src/gui/ConfigurationDialog.cpp:1531
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck a Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1533
+#: src/gui/ConfigurationDialog.cpp:1532
 msgid "Reingold & Dershowitz (2002, 2007)"
 msgstr "Reingold a Dershowitz (2002, 2007)"
 
-#: src/gui/ConfigurationDialog.cpp:1534
+#: src/gui/ConfigurationDialog.cpp:1533
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq a Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1535
+#: src/gui/ConfigurationDialog.cpp:1534
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana & Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1536
+#: src/gui/ConfigurationDialog.cpp:1535
 msgid "Henriksson (2017)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1537
+#: src/gui/ConfigurationDialog.cpp:1536
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Užívateľská rovnica %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1586 src/gui/ConfigurationDialog.cpp:1621
-#: src/gui/StelGuiItems.cpp:651 src/gui/LocationDialog.cpp:447
+#: src/gui/ConfigurationDialog.cpp:1585 src/gui/ConfigurationDialog.cpp:1620
+#: src/gui/StelGuiItems.cpp:651 src/gui/LocationDialog.cpp:452
 msgid "System default"
 msgstr "Systémové predvolené"
 
-#: src/gui/ConfigurationDialog.cpp:1587
+#: src/gui/ConfigurationDialog.cpp:1586
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "rrrr-mm-dd (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1588
+#: src/gui/ConfigurationDialog.cpp:1587
 msgid "dd-mm-yyyy"
 msgstr "dd-mm-rrrr"
 
-#: src/gui/ConfigurationDialog.cpp:1589
+#: src/gui/ConfigurationDialog.cpp:1588
 msgid "mm-dd-yyyy"
 msgstr "mm-dd-rrrr"
 
-#: src/gui/ConfigurationDialog.cpp:1622
+#: src/gui/ConfigurationDialog.cpp:1621
 msgid "12-hour format"
 msgstr "12-hodinový formát"
 
-#: src/gui/ConfigurationDialog.cpp:1623
+#: src/gui/ConfigurationDialog.cpp:1622
 msgid "24-hour format"
 msgstr "24-hodinový formát"
 
-#: src/gui/ConfigurationDialog.cpp:1650 src/ui_configurationDialog.h:1459
+#: src/gui/ConfigurationDialog.cpp:1649 src/ui_configurationDialog.h:1459
 #: plugins/Oculars/src/Oculars.cpp:2364
 #: plugins/Observability/src/Observability.cpp:206
 msgid "None"
 msgstr "Žiadne"
 
-#: src/gui/ConfigurationDialog.cpp:1651
+#: src/gui/ConfigurationDialog.cpp:1650
 msgid "5/6/5 bits"
 msgstr "5/6/5 bitov"
 
-#: src/gui/ConfigurationDialog.cpp:1652
+#: src/gui/ConfigurationDialog.cpp:1651
 msgid "6/6/6 bits"
 msgstr "6/6/6 bitov"
 
-#: src/gui/ConfigurationDialog.cpp:1653
+#: src/gui/ConfigurationDialog.cpp:1652
 msgid "8/8/8 bits"
 msgstr "8/8/8 bitov"
 
-#: src/gui/ConfigurationDialog.cpp:1654
+#: src/gui/ConfigurationDialog.cpp:1653
 msgid "10/10/10 bits"
 msgstr "10/10/10 bitov"
 
@@ -3651,7 +3656,7 @@ msgstr "Vývoj pre OSX: %1"
 
 #: src/gui/HelpDialog.cpp:426
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
-#: plugins/Oculars/src/gui/OcularDialog.cpp:434
+#: plugins/Oculars/src/gui/OcularDialog.cpp:483
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:606
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:224
@@ -3739,7 +3744,7 @@ msgstr "Okno klávesových skratiek"
 msgid "Astronomical calculations window"
 msgstr "Okno astronomických výpočtov"
 
-#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:193
+#: src/gui/StelGui.cpp:233 src/ui_bookmarksDialog.h:205
 msgid "Bookmarks"
 msgstr "Záložky"
 
@@ -3767,11 +3772,11 @@ msgstr "Medzerník"
 msgid "Time zone"
 msgstr "Časová zóna"
 
-#: src/gui/StelGuiItems.cpp:656 src/gui/LocationDialog.cpp:445
+#: src/gui/StelGuiItems.cpp:656 src/gui/LocationDialog.cpp:450
 msgid "Local Mean Solar Time"
 msgstr "Miestny stredný slnečný čas"
 
-#: src/gui/StelGuiItems.cpp:659 src/gui/LocationDialog.cpp:446
+#: src/gui/StelGuiItems.cpp:659 src/gui/LocationDialog.cpp:451
 msgid "Local True Solar Time"
 msgstr "Miestny pravý slnečný čas"
 
@@ -3845,60 +3850,60 @@ msgstr "Slnečná sústava"
 msgid "Loading ..."
 msgstr ""
 
-#: src/gui/ViewDialog.cpp:571
+#: src/gui/ViewDialog.cpp:572
 msgid "properties"
 msgstr "vlastnosti"
 
 #. TRANSLATORS: Short description for Class 1 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1442
+#: src/gui/ViewDialog.cpp:1443
 msgid "Excellent dark-sky site"
 msgstr "Dokonale tmavá obloha"
 
 #. TRANSLATORS: Short description for Class 2 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1444
+#: src/gui/ViewDialog.cpp:1445
 msgid "Typical truly dark site"
 msgstr "Typická skutočne tmavá obloha"
 
 #. TRANSLATORS: Short description for Class 3 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1446
+#: src/gui/ViewDialog.cpp:1447
 msgid "Rural sky"
 msgstr "Vidiecka obloha"
 
 #. TRANSLATORS: Short description for Class 4 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1448
+#: src/gui/ViewDialog.cpp:1449
 msgid "Rural/suburban transition"
 msgstr "Prechod vidiecka/predmestská"
 
 #. TRANSLATORS: Short description for Class 5 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1450
+#: src/gui/ViewDialog.cpp:1451
 msgid "Suburban sky"
 msgstr "Predmestská obloha"
 
 #. TRANSLATORS: Short description for Class 6 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1452
+#: src/gui/ViewDialog.cpp:1453
 msgid "Bright suburban sky"
 msgstr "Jasná predmestská obloha"
 
 #. TRANSLATORS: Short description for Class 7 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1454
+#: src/gui/ViewDialog.cpp:1455
 msgid "Suburban/urban transition"
 msgstr "Prechod predmestská/mestská"
 
 #. TRANSLATORS: Short description for Class 8 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1456
+#: src/gui/ViewDialog.cpp:1457
 msgid "City sky"
 msgstr "Mestská obloha"
 
 #. TRANSLATORS: Short description for Class 9 of the Bortle scale
-#: src/gui/ViewDialog.cpp:1458
+#: src/gui/ViewDialog.cpp:1459
 msgid "Inner-city sky"
 msgstr "Obloha v centre mesta"
 
-#: src/gui/ViewDialog.cpp:1472
+#: src/gui/ViewDialog.cpp:1473
 msgid "The naked-eye limiting magnitude is"
 msgstr "Medzná hviezdna veľkosť je"
 
-#: src/gui/ViewDialog.cpp:1480
+#: src/gui/ViewDialog.cpp:1481
 msgid ""
 "Uses a polygonal 3D model for some selected subplanetary objects (small "
 "moons, asteroids, comets) instead of a spherical approximation"
@@ -3906,7 +3911,7 @@ msgstr ""
 "Využíva polygonálny 3D model vybratých menších objektov (mesiačiky, "
 "planétky, kométy) namiesto guľatej náhrady"
 
-#: src/gui/ViewDialog.cpp:1481
+#: src/gui/ViewDialog.cpp:1482
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
@@ -3915,88 +3920,88 @@ msgstr ""
 " nekonvexné telesá Slnečnej sústavy. Môže sa tým znížiť kvalita tieňa "
 "penumbry na niektorých objektoch."
 
-#: src/gui/ViewDialog.cpp:1504
+#: src/gui/ViewDialog.cpp:1505
 msgid "Abbreviated"
 msgstr "Skrátene"
 
-#: src/gui/ViewDialog.cpp:1505
+#: src/gui/ViewDialog.cpp:1506
 msgid "Native"
 msgstr "Pôvodný"
 
-#: src/gui/ViewDialog.cpp:1506
+#: src/gui/ViewDialog.cpp:1507
 msgid "Translated"
 msgstr "Preložený"
 
-#: src/gui/ViewDialog.cpp:1673
+#: src/gui/ViewDialog.cpp:1674
 msgid "No shooting stars"
 msgstr "Žiadne meteory"
 
-#: src/gui/ViewDialog.cpp:1675
+#: src/gui/ViewDialog.cpp:1676
 msgid "Normal rate"
 msgstr "Normálna frekvencia"
 
-#: src/gui/ViewDialog.cpp:1677
+#: src/gui/ViewDialog.cpp:1678
 msgid "Standard Orionids rate"
 msgstr "Normálna frekvencia Orioníd"
 
-#: src/gui/ViewDialog.cpp:1679
+#: src/gui/ViewDialog.cpp:1680
 msgid "Standard Perseids rate"
 msgstr "Normálna frekvencia Perzeíd"
 
-#: src/gui/ViewDialog.cpp:1681
+#: src/gui/ViewDialog.cpp:1682
 msgid "Standard Geminids rate"
 msgstr "Normálna frekvencia Geminíd"
 
-#: src/gui/ViewDialog.cpp:1683
+#: src/gui/ViewDialog.cpp:1684
 msgid "Exceptional Perseid rate"
 msgstr "Výnimočná frekvencia Perzeíd"
 
-#: src/gui/ViewDialog.cpp:1685
+#: src/gui/ViewDialog.cpp:1686
 msgid "Meteor storm rate"
 msgstr "Frekvencia meteorického dažďa"
 
-#: src/gui/ViewDialog.cpp:1687
+#: src/gui/ViewDialog.cpp:1688
 msgid "Exceptional Draconid rate"
 msgstr "Výnimočná frekvencia Drakoníd"
 
-#: src/gui/ViewDialog.cpp:1689
+#: src/gui/ViewDialog.cpp:1690
 msgid "Exceptional Leonid rate"
 msgstr "Výnimočná frekvencia Leoníd"
 
-#: src/gui/ViewDialog.cpp:1691
+#: src/gui/ViewDialog.cpp:1692
 msgid "Very high rate (1966 Leonids)"
 msgstr "Veľmi vysoká frekvencia (Leonidy 1966)"
 
-#: src/gui/ViewDialog.cpp:1693
+#: src/gui/ViewDialog.cpp:1694
 msgid "Highest rate ever (1833 Leonids)"
 msgstr "Najvyššia zaznamenaná frekvencia (Leonidy 1833)"
 
-#: src/gui/ViewDialog.cpp:1746
+#: src/gui/ViewDialog.cpp:1747
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
 msgstr "G. Mueller (1893)"
 
-#: src/gui/ViewDialog.cpp:1747
+#: src/gui/ViewDialog.cpp:1748
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
 msgstr "Astronomický almanach (1984)"
 
-#: src/gui/ViewDialog.cpp:1748
+#: src/gui/ViewDialog.cpp:1749
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
 msgstr "Explanatory Supplement (1992)"
 
-#: src/gui/ViewDialog.cpp:1749
+#: src/gui/ViewDialog.cpp:1750
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
 msgstr "Explanatory Supplement (2013)"
 
-#: src/gui/ViewDialog.cpp:1750
+#: src/gui/ViewDialog.cpp:1751
 msgctxt "magnitude algorithm"
 msgid "Generic"
 msgstr "Všeobecný"
 
-#: src/gui/ViewDialog.cpp:1776
+#: src/gui/ViewDialog.cpp:1777
 msgid ""
 "The algorithm was used in the <em>Astronomical Almanac</em> (1984 and later)"
 " and gives V (instrumental) magnitudes (allegedly from D.L. Harris)."
@@ -4004,7 +4009,7 @@ msgstr ""
 "Algoritmus bol použitý v <em>Astronomickom almanachu</em> (1984 a novších) a"
 " udáva (inštrumentálne) V magnitúdy (údajne od D.L. Harrisa)."
 
-#: src/gui/ViewDialog.cpp:1779
+#: src/gui/ViewDialog.cpp:1780
 msgid ""
 "The algorithm is based on visual observations 1877-1891 by G. Mueller and "
 "was published in <em>Explanatory Supplement to the Astronomical "
@@ -4014,7 +4019,7 @@ msgstr ""
 "1877-1891 a bol publikovaný v <em>Explanatory Supplement to the Astronomical"
 " Ephemeris</em> (1961)."
 
-#: src/gui/ViewDialog.cpp:1782
+#: src/gui/ViewDialog.cpp:1783
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
@@ -4022,7 +4027,7 @@ msgstr ""
 "Algoritmus bol publikovaný v <em>Explanatory Supplement to the Astronomical "
 "Almanac</em> (1992)."
 
-#: src/gui/ViewDialog.cpp:1785
+#: src/gui/ViewDialog.cpp:1786
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
@@ -4030,15 +4035,15 @@ msgstr ""
 "Algoritmus bol publikovaný v 3. vydaní <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (2013)."
 
-#: src/gui/ViewDialog.cpp:1788
+#: src/gui/ViewDialog.cpp:1789
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr "Vizuálna magnitúda podľa fázového uhla a albeda."
 
-#: src/gui/LocationDialog.cpp:198
+#: src/gui/LocationDialog.cpp:203
 msgid "Reset location list to show all known locations"
 msgstr "Vynuluje zoznam lokalít, aby zobrazil všetky lokality"
 
-#: src/gui/LocationDialog.cpp:199
+#: src/gui/LocationDialog.cpp:204
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
@@ -4046,23 +4051,23 @@ msgstr ""
 "Zapnúť získavanie polohy z GPS. (Nezmení časové pásmo!) Vypnite, ak ste s "
 "polohou spokojní a umožníte tak iným programom prístup k zariadeniu GPS."
 
-#: src/gui/LocationDialog.cpp:740
+#: src/gui/LocationDialog.cpp:764
 msgid "GPS listening..."
 msgstr "GPS načúva..."
 
-#: src/gui/LocationDialog.cpp:747
+#: src/gui/LocationDialog.cpp:771
 msgid "GPS disconnecting..."
 msgstr "GPS sa odpája..."
 
-#: src/gui/LocationDialog.cpp:759
+#: src/gui/LocationDialog.cpp:783
 msgid "GPS location fix"
 msgstr "Poloha GPS zachytená"
 
-#: src/gui/LocationDialog.cpp:782
+#: src/gui/LocationDialog.cpp:806
 msgid "GPS:FAILED"
 msgstr "GPS:ZLYHALO"
 
-#: src/gui/LocationDialog.cpp:794 src/ui_locationDialogGui.h:513
+#: src/gui/LocationDialog.cpp:818 src/ui_locationDialogGui.h:513
 msgid "Get location from GPS"
 msgstr "Zistiť polohu pomocou GPS"
 
@@ -5212,60 +5217,92 @@ msgstr "Jasné hviezdy"
 msgid "Bright nebulae"
 msgstr "Jasné hmloviny"
 
-#: src/gui/AstroCalcDialog.cpp:4835
+#: src/gui/AstroCalcDialog.cpp:4175 src/ui_astroCalcDialog.h:1363
+msgid "Limit angular size:"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4176 src/ui_astroCalcDialog.h:1361
+msgid "Set limits for angular size for visible celestial objects"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4177 src/ui_astroCalcDialog.h:1365
+msgid "Minimal angular size for visible celestial objects"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4178 src/ui_astroCalcDialog.h:1368
+msgid "Maximum angular size for visible celestial objects"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4583
+msgid "Limit angular separation:"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4584
+msgid "Set limits for angular separation for visible double stars"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4585
+msgid "Minimal angular separation for visible double stars"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4586
+msgid "Maximum angular separation for visible double stars"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:4875
 msgid "Text file"
 msgstr "Textový súbor"
 
-#: src/gui/AstroCalcDialog.cpp:4837
+#: src/gui/AstroCalcDialog.cpp:4877
 msgid "Save list of objects as..."
 msgstr "Uložiť zoznam objektov ako..."
 
-#: src/gui/AstroCalcDialog.cpp:4962
+#: src/gui/AstroCalcDialog.cpp:5002
 msgid "spin-orbit resonance"
 msgstr "spin-orbitálna rezonancia"
 
-#: src/gui/AstroCalcDialog.cpp:5014 src/gui/AstroCalcDialog.cpp:5193
+#: src/gui/AstroCalcDialog.cpp:5054 src/gui/AstroCalcDialog.cpp:5233
 msgid "Days from today"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5015 src/gui/AstroCalcDialog.cpp:5174
+#: src/gui/AstroCalcDialog.cpp:5055 src/gui/AstroCalcDialog.cpp:5214
 msgid "Linear distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5016 src/gui/AstroCalcDialog.cpp:5177
-#: src/gui/AstroCalcDialog.cpp:5194
+#: src/gui/AstroCalcDialog.cpp:5056 src/gui/AstroCalcDialog.cpp:5217
+#: src/gui/AstroCalcDialog.cpp:5234
 msgid "Angular distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5174 src/gui/AstroCalcDialog.cpp:5177
+#: src/gui/AstroCalcDialog.cpp:5214 src/gui/AstroCalcDialog.cpp:5217
 msgid "Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5235
+#: src/gui/AstroCalcDialog.cpp:5275
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:107 src/ui_searchDialogGui.h:697
+#: src/gui/BookmarksDialog.cpp:110 src/ui_searchDialogGui.h:697
 msgid "Object"
 msgstr "Objekt"
 
-#: src/gui/BookmarksDialog.cpp:108
+#: src/gui/BookmarksDialog.cpp:111
 msgid "Localized name"
 msgstr "Lokalizované meno"
 
-#: src/gui/BookmarksDialog.cpp:110
+#: src/gui/BookmarksDialog.cpp:113
 msgid "Location of observer"
 msgstr "Poloha pozorovateľa"
 
-#: src/gui/BookmarksDialog.cpp:171
+#: src/gui/BookmarksDialog.cpp:174
 msgid "Unnamed star"
 msgstr ""
 
-#: src/gui/BookmarksDialog.cpp:404 src/ui_bookmarksDialog.h:204
+#: src/gui/BookmarksDialog.cpp:446 src/ui_bookmarksDialog.h:216
 msgid "Import bookmarks"
 msgstr "Importovať záložky"
 
-#: src/gui/BookmarksDialog.cpp:417
+#: src/gui/BookmarksDialog.cpp:459
 msgid "Export bookmarks as..."
 msgstr "Exportovať záložky ako..."
 
@@ -6046,440 +6083,445 @@ msgstr "Čínska"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:455
+msgid "Chinese Contemporary"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:457
 msgid "Egyptian"
 msgstr "Egyptská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Hawaiian Starlines"
 msgstr "Havajské spojnice hviezd"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Inuit"
 msgstr "Inuitská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Indian Vedic"
 msgstr "Indicko-védska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Japanese Moon Stations"
 msgstr "Japonské mesačné zastavenia"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroiská/Euahlayiská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Korean"
 msgstr "Kórejská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakotsko/Lakotsko/Nakotská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Macedonian"
 msgstr "Macedónska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "Maori"
 msgstr "Maorská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Mongolian"
 msgstr "Mongolská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Lokono"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Navajo"
 msgstr "Navažská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Norse"
 msgstr "Škandinávska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "Ojibwe"
 msgstr "Odžibvejská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Romanian"
 msgstr "Rumunská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "Sami"
 msgstr "Laponská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Sardinian"
 msgstr "Sardínska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Siberian"
 msgstr "Sibírska"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Tukano"
 msgstr "Tukanská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guaranijská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:497
+#: src/translations.h:499
 msgid "Tongan"
 msgstr "Tonganská"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Western"
 msgstr "Západná"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Western (H.A.Rey)"
 msgstr "Západná (H.A.Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Western (O.Hlad)"
 msgstr "Západná (O.Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:505
+#: src/translations.h:507
 msgid "Northern Andes"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Guereins"
 msgstr "Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Trees"
 msgstr "Stromy"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:515 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1366
+#: src/translations.h:517 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1366
 msgid "Moon"
 msgstr "Mesiac"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Hurricane"
 msgstr "Hrebeň Hurricane"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Ocean"
 msgstr "Oceán"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:523 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1378
+#: src/translations.h:525 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1378
 msgid "Mars"
 msgstr "Mars"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:525 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1381
+#: src/translations.h:527 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1381
 msgid "Jupiter"
 msgstr "Jupiter"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:527 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1384
+#: src/translations.h:529 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1384
 msgid "Saturn"
 msgstr "Saturn"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Uranus"
 msgstr "Urán"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Neptune"
 msgstr "Neptún"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Geneva"
 msgstr "Ženeva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:535
+#: src/translations.h:537
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:537
+#: src/translations.h:539
 msgid "Zero Horizon"
 msgstr "Plochý horizont"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:539 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/translations.h:541 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1363
 msgid "Sun"
 msgstr "Slnko"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Vienna Sterngarten"
 msgstr "Viedenská Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Testscene"
 msgstr "Testovacia scéna"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:551
+#: src/translations.h:553
 msgid "Landscape Tour"
 msgstr "Prehliadka terénov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:553
+#: src/translations.h:555
 msgid "Partial Lunar Eclipse"
 msgstr "Čiastočné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:555
+#: src/translations.h:557
 msgid "Total Lunar Eclipse"
 msgstr "Úplné zatmenie Mesiaca"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:557
+#: src/translations.h:559
 msgid "Screensaver"
 msgstr "Šetrič obrazovky"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:559
+#: src/translations.h:561
 msgid "Solar Eclipse 2009"
 msgstr "Zatmenie Slnka 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:561
+#: src/translations.h:563
 msgid "Startup Script"
 msgstr "Skript pri spustení"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:563
+#: src/translations.h:565
 msgid "Zodiac"
 msgstr "Zvieratník"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:565
+#: src/translations.h:567
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Trojitý východ a západ Slnka na Merkúre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:567
+#: src/translations.h:569
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Dvojité zatmenie z Deimosu v r. 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:569
+#: src/translations.h:571
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Dvojité zatmenie z Deimosu v r. 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Zákryt Zeme a Jupitera v r. 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 prechody a 2 zatmenia z Deimosu v r. 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:577
+#: src/translations.h:579
 msgid "Solar System Screensaver"
 msgstr "Šetrič obrazovky so Slnečnou sústavou"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:579
+#: src/translations.h:581
 msgid "Constellations Tour"
 msgstr "Prehliadka súhvezdí"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:581
+#: src/translations.h:583
 msgid "Sun from different planets"
 msgstr "Slnko z ostatných planét"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:583
+#: src/translations.h:585
 msgid "Earth best views from other bodies"
 msgstr "Najlepšie pohľady na Zem z iných telies"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:585
+#: src/translations.h:587
 msgid "Transit of Venus"
 msgstr "Prechod Venuše"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:587
+#: src/translations.h:589
 msgid "Sky Culture Tour"
 msgstr "Prehliadka nebeskej kultúry"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:589
+#: src/translations.h:591
 msgid "Earth Events from Mercury"
 msgstr "Pozemské úkazy z Merkúra"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:591
+#: src/translations.h:593
 msgid "Earth Events from a floating city on Venus"
 msgstr "Pozemské úkazy zo vznášajúceho sa mesta v atmosfére Venuše"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:593
+#: src/translations.h:595
 msgid "Earth Events from Mars"
 msgstr "Pozemské úkazy z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:597
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "Najväčšie elongácie Zeme a opozície ostatných planét z Marsu"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:599
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "Najväčšie elongácie a prechody Zeme a Marsu pri pohľade z Kallista"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:601
 msgid "Tycho's Supernova"
 msgstr "Tychova supernova"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:603
 msgid "Earth and other Planets from Ceres"
 msgstr "Zem a ostatné planéty z Cerery"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:605
 msgid "Messier Objects Tour"
 msgstr "Prehliadka Messierových objektov"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:607
 msgid "Binocular Highlights"
 msgstr "To najlepšie pre triéder"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:609
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 zábavných dvojhviezd na pozorovanie voľným okom"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:611
 msgid "List of largest known stars"
 msgstr "Zoznam najväčších známych hviezd"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:613
 msgid "Herschel 400 Tour"
 msgstr "Prehliadka Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:615
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Objekty hlbokého vesmíru pre triédre"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:615
+#: src/translations.h:617
 msgid "The Jack Bennett Catalog"
 msgstr "Katalóg Jacka Bennetta"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:617
+#: src/translations.h:619
 msgid "Best objects in the New General Catalog"
 msgstr "Najlepšie objekty z katalógu NGC"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:619
+#: src/translations.h:621
 msgid "Jupiter and triple shadow phenomena"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:623
 msgid "Jupiter without Galilean satellites"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:625
 msgid "Skybox Tiles"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:627
 msgid "Occultations of bright stars by planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:629
 msgid "Mutual occultations of planets"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:633
+#: src/translations.h:635
 msgid "Look around each installed landscape."
 msgstr "Rozhliadnutie sa okolo každého nainštalovaného terénu."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:635
+#: src/translations.h:637
 msgid "Look at each installed sky culture."
 msgstr "Prehliadnite si všetky nainštalované kultúry súhvezdí."
 
-#: src/translations.h:636
+#: src/translations.h:638
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Skript na demonštrovanie čiastočného zatmenia Mesiaca."
 
-#: src/translations.h:637
+#: src/translations.h:639
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Skript na demonštrovanie úplného zatmenia Mesiaca."
 
-#: src/translations.h:638
+#: src/translations.h:640
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "Pomalá, nekonečná prehliadka náhodných objektov na oblohe."
 
-#: src/translations.h:639
+#: src/translations.h:641
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -6487,11 +6529,11 @@ msgstr ""
 "Skript na demonštrovanie úplného zatmenia Slnka, ktoré nastalo v roku 2009 "
 "(poloha=Rangpur, Bangladéš)."
 
-#: src/translations.h:640
+#: src/translations.h:642
 msgid "Script which runs automatically at startup"
 msgstr "Skript, ktorý sa vykoná pri spustení programu"
 
-#: src/translations.h:641
+#: src/translations.h:643
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -6501,7 +6543,7 @@ msgstr ""
 "ktoré ležia pozdĺž čiary, po ktorej sa pohybuje Slnko cez nebeskú sféru "
 "počas roka."
 
-#: src/translations.h:642
+#: src/translations.h:644
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -6510,7 +6552,7 @@ msgstr ""
 "niektorých miestach pozorovať východ a západ Slnka trikrát za jeden deň na "
 "Merkúre."
 
-#: src/translations.h:643
+#: src/translations.h:645
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -6518,7 +6560,7 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Škorpiónom a Strelcom 26. apríla 2017."
 
-#: src/translations.h:644
+#: src/translations.h:646
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -6526,12 +6568,12 @@ msgstr ""
 "Tesne pred zákrytom Slnka Marsom vyjde najprv Fobos a zakryje ho prvý. Úkaz "
 "nastane medzi Býkom a Blížencami 23. júla 2031."
 
-#: src/translations.h:645
+#: src/translations.h:647
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 "Prechod Phobosu pred Slnkom pozorovaný z Olympusu Mons 2. januára 2021."
 
-#: src/translations.h:646
+#: src/translations.h:648
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -6541,7 +6583,7 @@ msgstr ""
 "zákryt oboch telies v rovnaký deň je vzácny úkaz. Takto bude prebiehať "
 "dvojitý zákryt 21. januára 2048. Zobrazenie prebieha reálnou rýchlosťou."
 
-#: src/translations.h:647
+#: src/translations.h:649
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -6556,32 +6598,32 @@ msgstr ""
 "Marsom a Deimosom. Keď Fobos opäť vyjde spoza Marsu, stále je ešte zatienený"
 " Marsom, ale po chvíli ho zaleje slnečný svit."
 
-#: src/translations.h:648
+#: src/translations.h:650
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
 "Šetrič obrazovky s rôznymi úkazmi v Slnečnej sústave. Celkovo 300 úkazov!"
 
-#: src/translations.h:649
+#: src/translations.h:651
 msgid "A tour of the western constellations."
 msgstr "Prehliadka súhvezdiami západnej kultúry."
 
-#: src/translations.h:650
+#: src/translations.h:652
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Pohľad na Slnko z veľkých planét Slnečnej sústavy a z Pluta."
 
-#: src/translations.h:651
+#: src/translations.h:653
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Najlepšie pohľady na Zem z iných telies Slnečnej sústavy v priebehu 21. "
 "storočia."
 
-#: src/translations.h:652
+#: src/translations.h:654
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Prechod Venuše pri pohľade z austrálskeho mesta Sydney, 6. júna 2012."
 
-#: src/translations.h:653
+#: src/translations.h:655
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -6589,13 +6631,13 @@ msgstr ""
 "Záblesk supernovy, ktorú pozoroval Tycho Brahe v roku 1572. Musí byť zapnutý"
 " modul Supernovy."
 
-#: src/translations.h:654
+#: src/translations.h:656
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr "Elongácie Zeme a opozície ostatných planét z Marsu v období 2000-3000"
 
-#: src/translations.h:655
+#: src/translations.h:657
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -6607,18 +6649,18 @@ msgstr ""
 "pásu Jupitera. Ak niekedy ľudia bukú kolonizovať Jupiterove mesiace, Kalisto"
 " bude naporúdzi."
 
-#: src/translations.h:656
+#: src/translations.h:658
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 "Zem. Viditeľné najväčšie elongácie a opozície z Cerery v rokoch 2000-2200"
 
-#: src/translations.h:657
+#: src/translations.h:659
 msgid "A tour of Messier Objects"
 msgstr "Prehliadka Messierových objektov"
 
-#: src/translations.h:658
+#: src/translations.h:660
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -6627,7 +6669,7 @@ msgstr ""
 "Prehliadka zaujímavých objektov, ktoré sú pozorovateľné triédrom. Údaje v "
 "skripte sú prevzaté zo známej knihy Garyho Seronika."
 
-#: src/translations.h:659
+#: src/translations.h:661
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -6637,15 +6679,15 @@ msgstr ""
 "Jerry Lodriguss a vyšiel v časopise Sky & Telescope 09/2014. Údaje "
 "pochádzajú z jeho stránky http://www.astropix.com/doubles/"
 
-#: src/translations.h:660
+#: src/translations.h:662
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "Skript predvedie najväčšie známe hviezdy."
 
-#: src/translations.h:661
+#: src/translations.h:663
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Prehliadka objektov z katalógu Herschel 400"
 
-#: src/translations.h:662
+#: src/translations.h:664
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -6655,7 +6697,7 @@ msgstr ""
 "pozorovanie triédrom. Skript postupne ukáže 31 objektov zoradených podľa "
 "hodinového uhla (epocha 2000.0)."
 
-#: src/translations.h:663
+#: src/translations.h:665
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -6663,7 +6705,7 @@ msgstr ""
 "Katalóg Jacka Bennetta južných objektov hlbokého vesmíru (spolu 152). "
 "Bennettov katalóg poskytol Auke Slotegraaf."
 
-#: src/translations.h:664
+#: src/translations.h:666
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -6673,14 +6715,14 @@ msgstr ""
 "Astronomického klubu Saguaro z Phoenixu v Arizone na získanie oceneniaTo "
 "najlepšie z NGC."
 
-#: src/translations.h:665
+#: src/translations.h:667
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr ""
 
-#: src/translations.h:666
+#: src/translations.h:668
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -6689,192 +6731,192 @@ msgid ""
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
 
-#: src/translations.h:667
+#: src/translations.h:669
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
 
-#: src/translations.h:668
+#: src/translations.h:670
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr ""
 
-#: src/translations.h:672
+#: src/translations.h:674
 msgid "&Undo"
 msgstr "V&rátiť späť"
 
-#: src/translations.h:673
+#: src/translations.h:675
 msgid "&Redo"
 msgstr "&Opakovať vrátené"
 
-#: src/translations.h:674
+#: src/translations.h:676
 msgid "Cu&t"
 msgstr "Vys&trihnúť"
 
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "&Copy"
 msgstr "&Kopírovať"
 
-#: src/translations.h:676
+#: src/translations.h:678
 msgid "&Paste"
 msgstr "V&ložiť"
 
-#: src/translations.h:677 plugins/Oculars/src/ui_ocularDialog.h:1222
+#: src/translations.h:679 plugins/Oculars/src/ui_ocularDialog.h:1222
 #: plugins/Oculars/src/ui_ocularDialog.h:1231
 #: plugins/Oculars/src/ui_ocularDialog.h:1237
-#: plugins/Oculars/src/ui_ocularDialog.h:1255
+#: plugins/Oculars/src/ui_ocularDialog.h:1258
 msgid "Delete"
 msgstr "Vymazať"
 
-#: src/translations.h:678
+#: src/translations.h:680
 msgid "Select All"
 msgstr "Vybrať všetko"
 
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "Look in:"
 msgstr "Hľadať v:"
 
-#: src/translations.h:680
+#: src/translations.h:682
 msgid "Directory:"
 msgstr "Priečinok:"
 
-#: src/translations.h:681
+#: src/translations.h:683
 msgid "Folder"
 msgstr "Priečinok"
 
-#: src/translations.h:682
+#: src/translations.h:684
 msgid "&Choose"
 msgstr "&Zvoliť"
 
-#: src/translations.h:683 src/ui_configurationDialog.h:1568
+#: src/translations.h:685 src/ui_configurationDialog.h:1568
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Zrušiť"
 
-#: src/translations.h:684
+#: src/translations.h:686
 msgid "&Cancel"
 msgstr "&Zrušiť"
 
-#: src/translations.h:685
+#: src/translations.h:687
 msgid "Files of type:"
 msgstr "Súbory typu:"
 
-#: src/translations.h:686
+#: src/translations.h:688
 msgid "Date Modified"
 msgstr "Dátum zmeny"
 
-#: src/translations.h:687
+#: src/translations.h:689
 msgid "Directories"
 msgstr "Priečinky"
 
-#: src/translations.h:688
+#: src/translations.h:690
 msgid "Computer"
 msgstr "Počítač"
 
-#: src/translations.h:689
+#: src/translations.h:691
 msgid "&Open"
 msgstr "&Otvoriť"
 
-#: src/translations.h:690
+#: src/translations.h:692
 msgid "&Save"
 msgstr "Uložiť"
 
-#: src/translations.h:691
+#: src/translations.h:693
 msgid "File &name:"
 msgstr "&Názov súboru:"
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "Copy &Link Location"
 msgstr "Kopírovať &umiestnenie odkazu"
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid "Abort"
 msgstr "Zrušiť"
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid "Ignore"
 msgstr "Ignorovať"
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid "&Basic colors"
 msgstr "&Základné farby"
 
-#: src/translations.h:696
+#: src/translations.h:698
 msgid "&Pick Screen Color"
 msgstr "Vybrať farbu obrazovky"
 
-#: src/translations.h:697
+#: src/translations.h:699
 msgid "&Custom colors"
 msgstr "&Vlastné farby"
 
-#: src/translations.h:698
+#: src/translations.h:700
 msgid "&Add to Custom Colors"
 msgstr "Pridať k &vlastným farbám"
 
-#: src/translations.h:699
+#: src/translations.h:701
 msgid "Hu&e:"
 msgstr "Od&tieň:"
 
-#: src/translations.h:700
+#: src/translations.h:702
 msgid "&Sat:"
 msgstr "&Sýtosť:"
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid "&Val:"
 msgstr "&Hodnota:"
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid "&Red:"
 msgstr "Če&rvená:"
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid "&Green:"
 msgstr "Ze&lená:"
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid "Bl&ue:"
 msgstr "Mo&drá:"
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid "Select Color"
 msgstr "Vyberte farbu"
 
-#: src/translations.h:706
+#: src/translations.h:708
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Kurzor na %1, %2 Zrušíte stlačením ESC"
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid "Back"
 msgstr "Späť"
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid "Forward"
 msgstr "Ďalej"
 
-#: src/translations.h:709
+#: src/translations.h:711
 msgid "Parent Directory"
 msgstr "Domovský priečinok"
 
-#: src/translations.h:710
+#: src/translations.h:712
 msgid "Create New Folder"
 msgstr "Vytvoriť nový priečinok"
 
-#: src/translations.h:711
+#: src/translations.h:713
 msgid "List View"
 msgstr "Zoznam"
 
-#: src/translations.h:712
+#: src/translations.h:714
 msgid "Detail View"
 msgstr "Detaily"
 
-#: src/translations.h:713
+#: src/translations.h:715
 msgid "Recent Places"
 msgstr "Nedávne umiestnenia"
 
-#: src/translations.h:714
+#: src/translations.h:716
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -6883,23 +6925,23 @@ msgstr ""
 "Súbor %1 už existuje.\n"
 "Chcete ho nahradiť?"
 
-#: src/translations.h:715
+#: src/translations.h:717
 msgid "&Yes"
 msgstr "Áno"
 
-#: src/translations.h:716
+#: src/translations.h:718
 msgid "&No"
 msgstr "&Nie"
 
-#: src/translations.h:717
+#: src/translations.h:719
 msgid "&Select All"
 msgstr "Vybrať &všetko"
 
-#: src/translations.h:718
+#: src/translations.h:720
 msgid "&Step up"
 msgstr "Krok &hore"
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid "Step &down"
 msgstr "Krok &dole"
 
@@ -8403,7 +8445,7 @@ msgstr "Niektoré objekty budú nájdené až po aktivácií príslušného modu
 msgid "names in English"
 msgstr "mená v slovenčine"
 
-#: src/ui_searchDialogGui.h:707 src/ui_astroCalcDialog.h:1349
+#: src/ui_searchDialogGui.h:707 src/ui_astroCalcDialog.h:1351
 #: plugins/Satellites/src/ui_satellitesDialog.h:804
 msgid "Search in list..."
 msgstr "Hľadať v zozname..."
@@ -10168,181 +10210,181 @@ msgstr "Zahrnúť adresár:"
 msgid "..."
 msgstr "..."
 
-#: src/ui_astroCalcDialog.h:1244
+#: src/ui_astroCalcDialog.h:1246
 msgid "Astronomical calculations"
 msgstr "Astronomické výpočty"
 
-#: src/ui_astroCalcDialog.h:1250
+#: src/ui_astroCalcDialog.h:1252
 msgid "Positions"
 msgstr "Polohy"
 
-#: src/ui_astroCalcDialog.h:1252
+#: src/ui_astroCalcDialog.h:1254
 msgid "Celestial bodies above horizon"
 msgstr "Nebeské telesá nad horizontom"
 
-#: src/ui_astroCalcDialog.h:1255
+#: src/ui_astroCalcDialog.h:1257
 msgid "Ephemeris"
 msgstr "Efemerida"
 
-#: src/ui_astroCalcDialog.h:1257
+#: src/ui_astroCalcDialog.h:1259
 msgid "Phenomena"
 msgstr "Fenomény"
 
-#: src/ui_astroCalcDialog.h:1259 src/ui_astroCalcDialog.h:1342
-#: src/ui_astroCalcDialog.h:1378
+#: src/ui_astroCalcDialog.h:1261 src/ui_astroCalcDialog.h:1344
+#: src/ui_astroCalcDialog.h:1383
 msgid "Graphs"
 msgstr "Grafy"
 
-#: src/ui_astroCalcDialog.h:1261
+#: src/ui_astroCalcDialog.h:1263
 msgctxt "What's Up Tonight"
 msgid "WUT"
 msgstr "ČDV"
 
-#: src/ui_astroCalcDialog.h:1263
+#: src/ui_astroCalcDialog.h:1265
 msgid "What's Up Tonight"
 msgstr "Čo dnes vidno"
 
-#: src/ui_astroCalcDialog.h:1266
+#: src/ui_astroCalcDialog.h:1268
 msgctxt "Planetary Calculator"
 msgid "PC"
 msgstr "PK"
 
-#: src/ui_astroCalcDialog.h:1268
+#: src/ui_astroCalcDialog.h:1270
 msgid "Planetary Calculator"
 msgstr "Planetárna kalkulačka"
 
-#: src/ui_astroCalcDialog.h:1276
+#: src/ui_astroCalcDialog.h:1278
 msgid "Save positions"
 msgstr "Uložiť polohy"
 
-#: src/ui_astroCalcDialog.h:1277
+#: src/ui_astroCalcDialog.h:1279
 msgid "Update positions"
 msgstr "Aktualizovať polohy"
 
-#: src/ui_astroCalcDialog.h:1278 src/ui_astroCalcDialog.h:1346
+#: src/ui_astroCalcDialog.h:1280 src/ui_astroCalcDialog.h:1348
 msgid "Show objects brighter than magnitude:"
 msgstr "Zobraziť objekty jasnejšie než magnitúda:"
 
-#: src/ui_astroCalcDialog.h:1280
+#: src/ui_astroCalcDialog.h:1282
 msgid "List of objects above horizon"
 msgstr "Zoznam objektov nad horizontom"
 
-#: src/ui_astroCalcDialog.h:1282 src/ui_astroCalcDialog.h:1306
+#: src/ui_astroCalcDialog.h:1284 src/ui_astroCalcDialog.h:1308
 msgid "Use horizontal coordinates"
 msgstr "Použiť horizontálne súradnice"
 
-#: src/ui_astroCalcDialog.h:1283 src/ui_astroCalcDialog.h:1340
+#: src/ui_astroCalcDialog.h:1285 src/ui_astroCalcDialog.h:1342
 msgid "Celestial body:"
 msgstr "Nebeské teleso:"
 
-#: src/ui_astroCalcDialog.h:1285 src/ui_astroCalcDialog.h:1308
+#: src/ui_astroCalcDialog.h:1287 src/ui_astroCalcDialog.h:1310
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:196
 msgid "To:"
 msgstr "Do:"
 
-#: src/ui_astroCalcDialog.h:1286 src/ui_astroCalcDialog.h:1318
+#: src/ui_astroCalcDialog.h:1288 src/ui_astroCalcDialog.h:1320
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:194
 msgid "From:"
 msgstr "Od:"
 
-#: src/ui_astroCalcDialog.h:1287
+#: src/ui_astroCalcDialog.h:1289
 msgid "Time step:"
 msgstr "Časový krok:"
 
-#: src/ui_astroCalcDialog.h:1288
+#: src/ui_astroCalcDialog.h:1290
 msgid "Cleanup ephemerides"
 msgstr "Vyčistenie efemeríd"
 
-#: src/ui_astroCalcDialog.h:1289
+#: src/ui_astroCalcDialog.h:1291
 msgid "Save ephemeris"
 msgstr "Uložiť efemeridy"
 
-#: src/ui_astroCalcDialog.h:1291 src/ui_astroCalcDialog.h:1315
+#: src/ui_astroCalcDialog.h:1293 src/ui_astroCalcDialog.h:1317
 #: plugins/Satellites/src/ui_satellitesDialog.h:855
 msgid "Calculations require time, please be patient"
 msgstr "Výpočet si žiada čas, prosím o strpenie"
 
-#: src/ui_astroCalcDialog.h:1293
+#: src/ui_astroCalcDialog.h:1295
 msgid "Calculate ephemeris"
 msgstr "Výpočet efemeríd"
 
-#: src/ui_astroCalcDialog.h:1295
+#: src/ui_astroCalcDialog.h:1297
 msgid "Show markers of positions of the current celestial body on the sky"
 msgstr "Zobraziť značky polohy aktuálneho nebeského telesa na oblohe"
 
-#: src/ui_astroCalcDialog.h:1297
+#: src/ui_astroCalcDialog.h:1299
 msgid "Show markers"
 msgstr "Zobraziť označovače"
 
-#: src/ui_astroCalcDialog.h:1299
+#: src/ui_astroCalcDialog.h:1301
 msgid "Show dates of positions of current celestial body near markers"
 msgstr "Zobraziť dátumy polohy aktuálneho nebeského telesa vedľa značiek"
 
-#: src/ui_astroCalcDialog.h:1301
+#: src/ui_astroCalcDialog.h:1303
 msgid "Show dates"
 msgstr "Zobraziť dátumy"
 
-#: src/ui_astroCalcDialog.h:1303
+#: src/ui_astroCalcDialog.h:1305
 msgid "Show magnitudes of current celestial body"
 msgstr "Zobraziť magnitúdy pre aktuálne nebeské teleso"
 
-#: src/ui_astroCalcDialog.h:1305
+#: src/ui_astroCalcDialog.h:1307
 msgid "Show magnitudes"
 msgstr "Zobraziť magnitúdy"
 
-#: src/ui_astroCalcDialog.h:1307
+#: src/ui_astroCalcDialog.h:1309
 msgid "Maximum allowed separation:"
 msgstr "Najväčšia prípustná vzdialenosť:"
 
-#: src/ui_astroCalcDialog.h:1309
+#: src/ui_astroCalcDialog.h:1311
 msgid "Calculate oppositions"
 msgstr "Vypočítať opozície"
 
-#: src/ui_astroCalcDialog.h:1310
+#: src/ui_astroCalcDialog.h:1312
 msgid "Between objects:"
 msgstr "Medzi objektami:"
 
-#: src/ui_astroCalcDialog.h:1311
+#: src/ui_astroCalcDialog.h:1313
 msgid "and"
 msgstr "a"
 
-#: src/ui_astroCalcDialog.h:1312
+#: src/ui_astroCalcDialog.h:1314
 msgid "Cleanup of phenomena"
 msgstr "Vyčistiť fenomény"
 
-#: src/ui_astroCalcDialog.h:1313
+#: src/ui_astroCalcDialog.h:1315
 msgid "Save phenomena"
 msgstr "Uložiť fenomén"
 
-#: src/ui_astroCalcDialog.h:1317
+#: src/ui_astroCalcDialog.h:1319
 msgid "Calculate phenomena"
 msgstr "Výpočet fenoménu"
 
-#: src/ui_astroCalcDialog.h:1319
+#: src/ui_astroCalcDialog.h:1321
 msgid "Please select object to plot its graph 'Altitude vs. Time'."
 msgstr "Prosím zvoľte objekt pre vykreslenie grafu 'Výška vs. Čas'."
 
-#: src/ui_astroCalcDialog.h:1320
+#: src/ui_astroCalcDialog.h:1322
 msgid "Also the graph for the Sun"
 msgstr "Aj graf pre Slnko"
 
-#: src/ui_astroCalcDialog.h:1321
+#: src/ui_astroCalcDialog.h:1323
 msgid "Also the graph for the Moon"
 msgstr "Aj graf pre Mesiac"
 
-#: src/ui_astroCalcDialog.h:1323 src/ui_astroCalcDialog.h:1329
+#: src/ui_astroCalcDialog.h:1325 src/ui_astroCalcDialog.h:1331
 msgid "Draw only the positive part of the graph"
 msgstr "Vykresliť len kladnú časť grafu"
 
-#: src/ui_astroCalcDialog.h:1325 src/ui_astroCalcDialog.h:1331
+#: src/ui_astroCalcDialog.h:1327 src/ui_astroCalcDialog.h:1333
 msgid "Above horizon only"
 msgstr "Iba nad horizontom"
 
-#: src/ui_astroCalcDialog.h:1326
+#: src/ui_astroCalcDialog.h:1328
 msgid "Altitude vs. Time"
 msgstr "Výška vs. Čas"
 
-#: src/ui_astroCalcDialog.h:1327
+#: src/ui_astroCalcDialog.h:1329
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
@@ -10350,166 +10392,162 @@ msgstr ""
 "Prosím zvoľte objekt na vykreslenie 'Mesačnej elevácie' pre aktuálny rok a "
 "vybratý čas."
 
-#: src/ui_astroCalcDialog.h:1333
+#: src/ui_astroCalcDialog.h:1335
 msgid "Local Time in hours"
 msgstr "Miestny čas v hodinách"
 
-#: src/ui_astroCalcDialog.h:1336
+#: src/ui_astroCalcDialog.h:1338
 msgid "Monthly Elevation"
 msgstr "Mesačná elevácia"
 
-#: src/ui_astroCalcDialog.h:1337
+#: src/ui_astroCalcDialog.h:1339
 msgid "Graphs on the current year"
 msgstr "Grafy pre aktuálny rok"
 
-#: src/ui_astroCalcDialog.h:1338
+#: src/ui_astroCalcDialog.h:1340
 msgid "First graph (red):"
 msgstr "Prvý graf (červený):"
 
-#: src/ui_astroCalcDialog.h:1339
+#: src/ui_astroCalcDialog.h:1341
 msgid "Second graph (yellow):"
 msgstr "Druhý graf (žltý):"
 
-#: src/ui_astroCalcDialog.h:1341
+#: src/ui_astroCalcDialog.h:1343
 msgid "Draw graphs"
 msgstr "Vykresliť grafy"
 
-#: src/ui_astroCalcDialog.h:1343
+#: src/ui_astroCalcDialog.h:1345
 msgid "Angular distance limit, degrees:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1344
+#: src/ui_astroCalcDialog.h:1346
 msgid "Important note: this tool works on Earth only!"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1345
+#: src/ui_astroCalcDialog.h:1347
 msgid "Angular Distance"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1347
+#: src/ui_astroCalcDialog.h:1349
 msgid "Show objects which are up:"
 msgstr "Zobraziť objekty, ktoré sú vidieť:"
 
-#: src/ui_astroCalcDialog.h:1348
+#: src/ui_astroCalcDialog.h:1350
 msgid "Matching objects:"
 msgstr "Zodpovedajúce objekty:"
 
-#: src/ui_astroCalcDialog.h:1351
+#: src/ui_astroCalcDialog.h:1353
 msgctxt "celestial event"
 msgid "Set:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1352
+#: src/ui_astroCalcDialog.h:1354
 msgctxt "celestial event"
 msgid "Rise:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1353
+#: src/ui_astroCalcDialog.h:1355
 msgctxt "celestial event"
 msgid "Transit:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1356
+#: src/ui_astroCalcDialog.h:1358
 msgid "Save list of objects"
 msgstr "Uložiť zoznam objektov"
 
-#: src/ui_astroCalcDialog.h:1357
+#: src/ui_astroCalcDialog.h:1359
 msgid "Select a category:"
 msgstr "Vybrať kategóriu:"
 
-#: src/ui_astroCalcDialog.h:1358
-msgid "Limit angular size:"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1360
-msgid "Minimal angular size for visible celestial objects (except stars)"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1363
-msgid "Maximum angular size for visible celestial objects (except stars)"
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1365
+#: src/ui_astroCalcDialog.h:1370
 msgid "First celestial body:"
 msgstr "Prvé nebeské teleso:"
 
-#: src/ui_astroCalcDialog.h:1366
+#: src/ui_astroCalcDialog.h:1371
 msgid "Second celestial body:"
 msgstr "Druhé nebeské teleso:"
 
-#: src/ui_astroCalcDialog.h:1367
+#: src/ui_astroCalcDialog.h:1372
 msgid "Orbital resonance:"
 msgstr "Dráhová rezonancia:"
 
-#: src/ui_astroCalcDialog.h:1368
+#: src/ui_astroCalcDialog.h:1373
 msgid "Synodic period:"
 msgstr "Synodická perióda:"
 
-#: src/ui_astroCalcDialog.h:1369
+#: src/ui_astroCalcDialog.h:1374
 msgid "Orbital velocity of first celestial body:"
 msgstr "Obežná rýchlosť prvého nebeského telesa:"
 
-#: src/ui_astroCalcDialog.h:1370
+#: src/ui_astroCalcDialog.h:1375
 msgid "Angular distance:"
 msgstr "Uhlová vzdialenosť:"
 
-#: src/ui_astroCalcDialog.h:1371
+#: src/ui_astroCalcDialog.h:1376
 msgid "Linear distance:"
 msgstr "Vzdialenosť:"
 
-#: src/ui_astroCalcDialog.h:1372
+#: src/ui_astroCalcDialog.h:1377
 msgid "Orbital velocity of second celestial body:"
 msgstr "Obežná rýchlosť druhého nebeského telesa:"
 
-#: src/ui_astroCalcDialog.h:1373
+#: src/ui_astroCalcDialog.h:1378
 msgid "Equatorial diameters ratio:"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1375
+#: src/ui_astroCalcDialog.h:1380
 msgid "Data"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1376
+#: src/ui_astroCalcDialog.h:1381
 msgid ""
 "The change in the linear and angular distances between selected celestial "
 "bodies"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1377
+#: src/ui_astroCalcDialog.h:1382
 msgid "red graph: linear distance; yellow graph: angular distance"
 msgstr ""
 
-#: src/ui_bookmarksDialog.h:195
+#: src/ui_bookmarksDialog.h:207
 msgid "Add date and time"
 msgstr "Pridať dátum a čas"
 
-#: src/ui_bookmarksDialog.h:196
+#: src/ui_bookmarksDialog.h:208
 msgid "Add location"
 msgstr "Pridať umiestnenie"
 
-#: src/ui_bookmarksDialog.h:198
+#: src/ui_bookmarksDialog.h:210
 msgid "Add selected object to bookmarks"
 msgstr "Pridať vybratý objekt do záložiek"
 
-#: src/ui_bookmarksDialog.h:200
+#: src/ui_bookmarksDialog.h:212
 msgid "&Add bookmark"
 msgstr "Prid&ať záložku"
 
-#: src/ui_bookmarksDialog.h:201
+#: src/ui_bookmarksDialog.h:213
 msgid "&Remove bookmark"
 msgstr "Odst&rániť záložku"
 
-#: src/ui_bookmarksDialog.h:202
+#: src/ui_bookmarksDialog.h:214
 msgid "Clear bookmarks"
 msgstr "Vymazať záložky"
 
-#: src/ui_bookmarksDialog.h:203
+#: src/ui_bookmarksDialog.h:215
 msgid "&Go to..."
 msgstr "&Prejsť na..."
 
-#: src/ui_bookmarksDialog.h:205
+#: src/ui_bookmarksDialog.h:217
 msgid "Export bookmarks"
 msgstr "Exportovať záložky"
+
+#: src/ui_bookmarksDialog.h:218
+msgid "Clear the highlights"
+msgstr ""
+
+#: src/ui_bookmarksDialog.h:219
+msgid "Highlight bookmarks"
+msgstr ""
 
 #: src/ui_dsoColorsDialog.h:536 src/ui_orbitColorsDialog.h:378
 msgid "Color settings"
@@ -10960,7 +10998,7 @@ msgstr ""
 "Počítali sme. A želali sme si byť na Havajských ostrovoch."
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:103
-#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+#: plugins/Oculars/src/gui/OcularDialog.cpp:545
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:644
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:275
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
@@ -10981,7 +11019,7 @@ msgid "Links"
 msgstr "Linky"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Oculars/src/gui/OcularDialog.cpp:497
+#: plugins/Oculars/src/gui/OcularDialog.cpp:546
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:645
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:231
@@ -11007,7 +11045,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:107
-#: plugins/Oculars/src/gui/OcularDialog.cpp:500
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:648
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:234
@@ -11029,7 +11067,7 @@ msgstr "Odpovede na prípadné otázky môžete získať {tu}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:109
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:551
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:281
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -11051,7 +11089,7 @@ msgstr "Nahlásenia chýb a požiadavky na nové funkcie {tu}."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:111
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:553
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:238
@@ -11136,7 +11174,7 @@ msgid "Restore default settings"
 msgstr "Obnoviť predvolené nastavenia"
 
 #: plugins/AngleMeasure/src/ui_angleMeasureDialog.h:233
-#: plugins/Oculars/src/ui_ocularDialog.h:1263
+#: plugins/Oculars/src/ui_ocularDialog.h:1266
 #: plugins/Satellites/src/ui_satellitesDialog.h:860
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:431
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:278
@@ -11603,49 +11641,49 @@ msgid "Visual resolution is based on eye properties and magnification"
 msgstr "Vizuálne rozlíšenie závisí od vlastností oka a zväčšenia"
 
 #. TRANSLATORS: tFOV for binoculars (tFOV = True Field of View)
-#: plugins/Oculars/src/gui/OcularDialog.cpp:409
+#: plugins/Oculars/src/gui/OcularDialog.cpp:458
 msgid "tFOV:"
 msgstr "sZP:"
 
 #. TRANSLATORS: Magnification factor for binoculars
-#: plugins/Oculars/src/gui/OcularDialog.cpp:411
+#: plugins/Oculars/src/gui/OcularDialog.cpp:460
 msgid "Magnification factor:"
 msgstr "Zväčšenie:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:412
-#: plugins/Oculars/src/ui_ocularDialog.h:1258
+#: plugins/Oculars/src/gui/OcularDialog.cpp:461
+#: plugins/Oculars/src/ui_ocularDialog.h:1261
 msgid "Diameter:"
 msgstr "Priemer:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:416
+#: plugins/Oculars/src/gui/OcularDialog.cpp:465
 #: plugins/Oculars/src/ui_ocularDialog.h:1224
 msgid "aFOV:"
 msgstr "zZP:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:417
+#: plugins/Oculars/src/gui/OcularDialog.cpp:466
 #: plugins/Oculars/src/ui_ocularDialog.h:1225
-#: plugins/Oculars/src/ui_ocularDialog.h:1257
+#: plugins/Oculars/src/ui_ocularDialog.h:1260
 msgid "Focal length:"
 msgstr "Ohnisková vzdialenosť:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:418
+#: plugins/Oculars/src/gui/OcularDialog.cpp:467
 #: plugins/Oculars/src/ui_ocularDialog.h:1226
 msgid "Field stop:"
 msgstr "Clona:"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:430
+#: plugins/Oculars/src/gui/OcularDialog.cpp:479
 msgid "Oculars Plug-in"
 msgstr "Modul okuláre"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:435
+#: plugins/Oculars/src/gui/OcularDialog.cpp:484
 msgid "Barlow lens feature"
 msgstr "Funkcia Barlowovej šošovky"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:442
+#: plugins/Oculars/src/gui/OcularDialog.cpp:491
 msgid "Overview"
 msgstr "Prehľad"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:444
+#: plugins/Oculars/src/gui/OcularDialog.cpp:493
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece."
 "  This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -11657,11 +11695,11 @@ msgstr ""
 "ďalekohľady, ako aj snímače CCD. Pri prvom spustení aplikácie bude k "
 "dispozícii niekoľko ukážok, ktoré vám pomôžu začať pracovať."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:445
+#: plugins/Oculars/src/gui/OcularDialog.cpp:494
 msgid "You can choose to scale the image you see on the screen."
 msgstr "Môžete si vybrať, či sa majú obrázky na obrazovke škálovať."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:446
+#: plugins/Oculars/src/gui/OcularDialog.cpp:495
 msgid ""
 "This is intended to show you a better comparison of what one "
 "eyepiece/telescope combination will be like when compared to another."
@@ -11669,7 +11707,7 @@ msgstr ""
 "Zámerom je názorne porovnať, ako bude vyzerať kombinácia rôznych druhov "
 "okulárov a ďalekohľadov."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:447
+#: plugins/Oculars/src/gui/OcularDialog.cpp:496
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will"
 " produce two different exit pupils, changing the view somewhat."
@@ -11677,7 +11715,7 @@ msgstr ""
 "Rovnaké okuláre v dvoch rôznych ďalekohľadoch s rôznou ohniskovou "
 "vzdialenosťou zobrazia rôzne výstupné pupily, čo mierne zmení obraz."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:448
+#: plugins/Oculars/src/gui/OcularDialog.cpp:497
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
@@ -11685,14 +11723,14 @@ msgstr ""
 "Nevýhodou môže byť situácia, keď zväčšený obrázok zbytočne zaberie väčšinu "
 "obrazovky."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:449
+#: plugins/Oculars/src/gui/OcularDialog.cpp:498
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need"
 " of it."
 msgstr ""
 "Odporúčam Vám túto funkciu nezapínať, pokiaľ na to nemáte dobrý dôvod."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:450
+#: plugins/Oculars/src/gui/OcularDialog.cpp:499
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the"
@@ -11702,7 +11740,7 @@ msgstr ""
 "kríž orientoval na sever. Nevedel som to urobiť. Preto sa zatiaľ orientuje "
 "voči hornej hrane obrazovky."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:451
+#: plugins/Oculars/src/gui/OcularDialog.cpp:500
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -11715,15 +11753,15 @@ msgstr ""
 "0,5%1, 2,0%1 a 4,0%1, takže ľahšie porovnáte, čo by ste videli voľným okom "
 "cez hľadáčik Telrad (alebo podobný)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:452
+#: plugins/Oculars/src/gui/OcularDialog.cpp:501
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr "Ak nájdete nejaké chyby, prosím dajte mi vedieť. Užite si modul!"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:455
+#: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid "Hot Keys"
 msgstr "Klávesové skratky"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:456
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
@@ -11731,24 +11769,24 @@ msgstr ""
 "Klávesové skratky modulu je možné zmeniť prostredníctvom Editoru skratiek "
 "(F7)."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:470
-#: plugins/Oculars/src/gui/OcularDialog.cpp:475
+#: plugins/Oculars/src/gui/OcularDialog.cpp:519
+#: plugins/Oculars/src/gui/OcularDialog.cpp:524
 msgid "[no key defined]"
 msgstr "[žiadny kláves]"
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:479
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
 msgid "Switches on/off the ocular overlay."
 msgstr "Zapne/vypne okulárovú vrstvu."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:483
+#: plugins/Oculars/src/gui/OcularDialog.cpp:532
 msgid "Opens the pop-up navigation menu."
 msgstr "Zobrazí vyskakovaciu ponuku navigácie."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:487
+#: plugins/Oculars/src/gui/OcularDialog.cpp:536
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr "Otočí mriežku okuláru v smere hodinových ručičiek."
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:491
+#: plugins/Oculars/src/gui/OcularDialog.cpp:540
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr "Otočí mriežku okuláru v protismere hodinových ručičiek."
 
@@ -11858,7 +11896,7 @@ msgstr "Všeobecné"
 #: plugins/Oculars/src/ui_ocularDialog.h:1221
 #: plugins/Oculars/src/ui_ocularDialog.h:1230
 #: plugins/Oculars/src/ui_ocularDialog.h:1236
-#: plugins/Oculars/src/ui_ocularDialog.h:1254
+#: plugins/Oculars/src/ui_ocularDialog.h:1257
 #: plugins/Satellites/src/ui_satellitesImportDialog.h:219
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:415
 msgid "Add"
@@ -11867,7 +11905,7 @@ msgstr "Pridať"
 #: plugins/Oculars/src/ui_ocularDialog.h:1223
 #: plugins/Oculars/src/ui_ocularDialog.h:1232
 #: plugins/Oculars/src/ui_ocularDialog.h:1238
-#: plugins/Oculars/src/ui_ocularDialog.h:1256
+#: plugins/Oculars/src/ui_ocularDialog.h:1259
 #: plugins/Satellites/src/ui_satellitesDialog.h:819
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:584
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:246
@@ -11926,55 +11964,61 @@ msgstr "Šířka pixelu (mikrón)"
 msgid "Pixel height (micron):"
 msgstr "Výška pixelu (mikrón)"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1245
+#: plugins/Oculars/src/ui_ocularDialog.h:1246
+msgid ""
+"This is the distance from the center of the Imaging Sensor to the bottom of "
+"the Prism"
+msgstr ""
+
+#: plugins/Oculars/src/ui_ocularDialog.h:1248
 msgid "Prism/CCD distance (mm):"
 msgstr "Vzdialenosť šošovky/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1246
+#: plugins/Oculars/src/ui_ocularDialog.h:1249
 msgid "Prism/CCD height (mm):"
 msgstr "Výška šošovky/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1247
+#: plugins/Oculars/src/ui_ocularDialog.h:1250
 msgid "Prism/CCD width (mm):"
 msgstr "Šírka šošovky/CCD (mm):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1248
+#: plugins/Oculars/src/ui_ocularDialog.h:1251
 msgid "Position angle (degrees):"
 msgstr "Pozičný uhol (stupne):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1249
+#: plugins/Oculars/src/ui_ocularDialog.h:1252
 msgid "Off-Axis guider"
 msgstr "Navádzanie mimo osi"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1250
+#: plugins/Oculars/src/ui_ocularDialog.h:1253
 msgid "Rotation Angle (degrees):"
 msgstr "Uhol otočenia (stupne):"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1251
+#: plugins/Oculars/src/ui_ocularDialog.h:1254
 msgid "Binning x:"
 msgstr "Binovanie x:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1252
+#: plugins/Oculars/src/ui_ocularDialog.h:1255
 msgid "Binning y:"
 msgstr "Binovanie y:"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1253
+#: plugins/Oculars/src/ui_ocularDialog.h:1256
 msgid "Sensors"
 msgstr "CCD"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1259
+#: plugins/Oculars/src/ui_ocularDialog.h:1262
 msgid "Horizontal flip"
 msgstr "Horizontálne prevrátenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1260
+#: plugins/Oculars/src/ui_ocularDialog.h:1263
 msgid "Vertical flip"
 msgstr "Vertikálne prevrátenie"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1261
+#: plugins/Oculars/src/ui_ocularDialog.h:1264
 msgid "Equatorial Mount"
 msgstr "Ekvatoreálna montáž"
 
-#: plugins/Oculars/src/ui_ocularDialog.h:1262
+#: plugins/Oculars/src/ui_ocularDialog.h:1265
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:404
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:420
 msgid "Telescopes"
