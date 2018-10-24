@@ -127,9 +127,11 @@ void PointerCoordinates::draw(StelCore *core)
 
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 
 	QString coordsSystem, cxt, cyt;
 	double cx, cy;
+	int x, y;
 	switch (getCurrentCoordinateSystem())
 	{
 		case RaDecJ2000:
@@ -287,11 +289,17 @@ void PointerCoordinates::draw(StelCore *core)
 		constel=QString(" (%1)").arg(core->getIAUConstellation(core->j2000ToEquinoxEqu(mousePosition)));
 	}
 	QString coordsText = QString("%1: %2/%3%4").arg(coordsSystem).arg(cxt).arg(cyt).arg(constel);
-	sPainter.drawText(getCoordinatesPlace(coordsText).first, getCoordinatesPlace(coordsText).second, coordsText);
+	x = getCoordinatesPlace(coordsText).first;
+	y = getCoordinatesPlace(coordsText).second;
+	if (getCurrentCoordinatesPlace()!=Custom)
+	{
+		x *= params.devicePixelsPerPixel;
+		y *= params.devicePixelsPerPixel;
+	}
+	sPainter.drawText(x, y, coordsText);
 
 	if (flagShowCrossedLines)
 	{
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();		
 		QPoint m = StelMainView::getInstance().getMousePos();
 		sPainter.drawLine2d(m.x()*params.devicePixelsPerPixel, 0, m.x()*params.devicePixelsPerPixel, params.viewportXywh[3]*params.devicePixelsPerPixel);
 		sPainter.drawLine2d(0, (params.viewportXywh[3]-m.y())*params.devicePixelsPerPixel, params.viewportXywh[2]*params.devicePixelsPerPixel, (params.viewportXywh[3]-m.y())*params.devicePixelsPerPixel);
