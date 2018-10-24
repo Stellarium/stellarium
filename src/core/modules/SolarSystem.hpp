@@ -244,6 +244,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setSednoidsOrbitsColor
 		   NOTIFY sednoidsOrbitsColorChanged
 		   )
+	Q_PROPERTY(Vec3f interstellarOrbitsColor
+		   READ getInterstellarOrbitsColor
+		   WRITE setInterstellarOrbitsColor
+		   NOTIFY interstellarOrbitsColorChanged
+		   )
 	Q_PROPERTY(Vec3f mercuryOrbitColor
 		   READ getMercuryOrbitColor
 		   WRITE setMercuryOrbitColor
@@ -291,6 +296,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setOrbitColorStyle
 		   NOTIFY orbitColorStyleChanged
 		   )
+
+	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth
+		   READ getApparentMagnitudeAlgorithmOnEarth
+		   WRITE setApparentMagnitudeAlgorithmOnEarth
+		   NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
 
 public:
 	SolarSystem();
@@ -545,6 +555,17 @@ public slots:
 	//! Get the current color used to draw sednoid orbit lines.
 	//! @return current color
 	Vec3f getSednoidsOrbitsColor(void) const;
+
+	//! Set the color used to draw interstellar orbit (hyperbolic trajectory) lines.
+	//! @param c The color of the interstellar orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setInterstellarOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setInterstellarOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw interstellar orbit lines.
+	//! @return current color
+	Vec3f getInterstellarOrbitsColor(void) const;
 
 	//! Set the color used to draw Mercury orbit line.
 	//! @param c The color of Mercury orbit line (R,G,B)
@@ -835,6 +856,7 @@ signals:
 	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color) const;
 	void cometsOrbitsColorChanged(const Vec3f & color) const;
 	void sednoidsOrbitsColorChanged(const Vec3f & color) const;
+	void interstellarOrbitsColorChanged(const Vec3f & color) const;
 	void mercuryOrbitColorChanged(const Vec3f & color) const;
 	void venusOrbitColorChanged(const Vec3f & color) const;
 	void earthOrbitColorChanged(const Vec3f & color) const;
@@ -845,6 +867,7 @@ signals:
 	void neptuneOrbitColorChanged(const Vec3f & color) const;
 
 	void orbitColorStyleChanged(QString style) const;
+	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
 
 	void solarSystemDataReloaded();
 
@@ -960,7 +983,8 @@ private:
 	//! @param bV value of B-V color index
 	unsigned char BvToColorIndex(float bV);
 
-	//! Set flag who enable display a permanent orbits for objects or not
+	//! Set flag which enables display of permanent orbits for objects
+	// TODO: DOCUMENT what this really does, under which circumstances etc.
 	void setFlagPermanentOrbits(bool b);
 
 	//! Used to count how many planets actually need shadow information

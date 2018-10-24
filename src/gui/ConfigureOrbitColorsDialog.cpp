@@ -78,6 +78,7 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	colorButton(ui->colorGroupsOCOOrbits,		"SolarSystem.oortCloudObjectsOrbitsColor");
 	colorButton(ui->colorGroupsCometsOrbits,	"SolarSystem.cometsOrbitsColor");
 	colorButton(ui->colorGroupsSednoidsOrbits,	"SolarSystem.sednoidsOrbitsColor");
+	colorButton(ui->colorGroupsInterstellarOrbits,	"SolarSystem.interstellarOrbitsColor");
 	colorButton(ui->colorMPMercuryOrbit,		"SolarSystem.mercuryOrbitColor");
 	colorButton(ui->colorMPVenusOrbit,		"SolarSystem.venusOrbitColor");
 	colorButton(ui->colorMPEarthOrbit,		"SolarSystem.earthOrbitColor");
@@ -98,6 +99,7 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	connect(ui->colorGroupsOCOOrbits,		SIGNAL(released()), this, SLOT(askOCOGroupOrbitColor()));
 	connect(ui->colorGroupsCometsOrbits,		SIGNAL(released()), this, SLOT(askCometsGroupOrbitColor()));
 	connect(ui->colorGroupsSednoidsOrbits,		SIGNAL(released()), this, SLOT(askSednoidsGroupOrbitColor()));
+	connect(ui->colorGroupsInterstellarOrbits,	SIGNAL(released()), this, SLOT(askInterstellarGroupOrbitColor()));
 	connect(ui->colorMPMercuryOrbit,		SIGNAL(released()), this, SLOT(askMercuryOrbitColor()));
 	connect(ui->colorMPVenusOrbit,			SIGNAL(released()), this, SLOT(askVenusOrbitColor()));
 	connect(ui->colorMPEarthOrbit,			SIGNAL(released()), this, SLOT(askEarthOrbitColor()));
@@ -221,6 +223,21 @@ void ConfigureOrbitColorsDialog::askSednoidsGroupOrbitColor()
 		StelApp::getInstance().getModule("SolarSystem")->setProperty("sednoidsOrbitsColor", QVariant::fromValue(vColor));
 		StelApp::getInstance().getSettings()->setValue("color/sednoid_orbits_color", StelUtils::vec3fToStr(vColor));
 		ui->colorGroupsSednoidsOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
+
+void ConfigureOrbitColorsDialog::askInterstellarGroupOrbitColor()
+{
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("SolarSystem.interstellarOrbitsColor")->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->colorGroupsInterstellarOrbits->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		StelApp::getInstance().getModule("SolarSystem")->setProperty("interstellarOrbitsColor", QVariant::fromValue(vColor));
+		StelApp::getInstance().getSettings()->setValue("color/interstellar_orbits_color", StelUtils::vec3fToStr(vColor));
+		ui->colorGroupsInterstellarOrbits->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 

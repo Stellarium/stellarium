@@ -203,6 +203,7 @@ void SolarSystem::init()
 	setOortCloudObjectsOrbitsColor(StelUtils::strToVec3f(conf->value("color/oco_orbits_color", "0.7,0.5,0.5").toString()));
 	setCometsOrbitsColor(StelUtils::strToVec3f(conf->value("color/comet_orbits_color", "0.7,0.8,0.8").toString()));
 	setSednoidsOrbitsColor(StelUtils::strToVec3f(conf->value("color/sednoid_orbits_color", "0.7,0.5,0.5").toString()));
+	setInterstellarOrbitsColor(StelUtils::strToVec3f(conf->value("color/interstellar_orbits_color", "1.0,0.6,1.0").toString()));
 	setMercuryOrbitColor(StelUtils::strToVec3f(conf->value("color/mercury_orbit_color", "0.5,0.5,0.5").toString()));
 	setVenusOrbitColor(StelUtils::strToVec3f(conf->value("color/venus_orbit_color", "0.9,0.9,0.7").toString()));
 	setEarthOrbitColor(StelUtils::strToVec3f(conf->value("color/earth_orbit_color", "0.0,0.0,1.0").toString()));
@@ -961,7 +962,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		// New class objects, named "plutino", "cubewano", "dwarf planet", "SDO", "OCO", has properties
 		// similar to asteroids and we should calculate their positions like for asteroids. Dwarf planets
 		// have one exception: Pluto - we should use special function for calculation of orbit of Pluto.
-		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object") && !englishName.contains("Pluto"))
+		if ((type == "asteroid" || type == "dwarf planet" || type == "cubewano" || type == "plutino" || type == "scattered disc object" || type == "Oort cloud object" || type == "interstellar object") && !englishName.contains("Pluto"))
 		{
 			minorBodies << englishName;
 
@@ -1949,7 +1950,11 @@ bool SolarSystem::getFlagPlanetsOrbitsOnly() const
 // Set/Get planets names color
 void SolarSystem::setLabelsColor(const Vec3f& c)
 {
-	Planet::setLabelColor(c);
+	if (c!=Planet::getLabelColor())
+	{
+		Planet::setLabelColor(c);
+		emit labelsColorChanged(c);
+	}
 }
 
 const Vec3f& SolarSystem::getLabelsColor(void) const
@@ -1960,7 +1965,11 @@ const Vec3f& SolarSystem::getLabelsColor(void) const
 // Set/Get orbits lines color
 void SolarSystem::setOrbitsColor(const Vec3f& c)
 {
-	Planet::setOrbitColor(c);
+	if (c!=Planet::getOrbitColor())
+	{
+		Planet::setOrbitColor(c);
+		emit orbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getOrbitsColor(void) const
@@ -1970,7 +1979,11 @@ Vec3f SolarSystem::getOrbitsColor(void) const
 
 void SolarSystem::setMajorPlanetsOrbitsColor(const Vec3f &c)
 {
-	Planet::setMajorPlanetOrbitColor(c);
+	if (c!=Planet::getMajorPlanetOrbitColor())
+	{
+		Planet::setMajorPlanetOrbitColor(c);
+		emit majorPlanetsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getMajorPlanetsOrbitsColor(void) const
@@ -1980,7 +1993,11 @@ Vec3f SolarSystem::getMajorPlanetsOrbitsColor(void) const
 
 void SolarSystem::setMinorPlanetsOrbitsColor(const Vec3f &c)
 {
-	Planet::setMinorPlanetOrbitColor(c);
+	if (c!=Planet::getMinorPlanetOrbitColor())
+	{
+		Planet::setMinorPlanetOrbitColor(c);
+		emit minorPlanetsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getMinorPlanetsOrbitsColor(void) const
@@ -1990,7 +2007,11 @@ Vec3f SolarSystem::getMinorPlanetsOrbitsColor(void) const
 
 void SolarSystem::setDwarfPlanetsOrbitsColor(const Vec3f &c)
 {
-	Planet::setDwarfPlanetOrbitColor(c);
+	if (c!=Planet::getDwarfPlanetOrbitColor())
+	{
+		Planet::setDwarfPlanetOrbitColor(c);
+		emit dwarfPlanetsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getDwarfPlanetsOrbitsColor(void) const
@@ -2000,7 +2021,11 @@ Vec3f SolarSystem::getDwarfPlanetsOrbitsColor(void) const
 
 void SolarSystem::setMoonsOrbitsColor(const Vec3f &c)
 {
-	Planet::setMoonOrbitColor(c);
+	if (c!=Planet::getMoonOrbitColor())
+	{
+		Planet::setMoonOrbitColor(c);
+		emit moonsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getMoonsOrbitsColor(void) const
@@ -2010,7 +2035,11 @@ Vec3f SolarSystem::getMoonsOrbitsColor(void) const
 
 void SolarSystem::setCubewanosOrbitsColor(const Vec3f &c)
 {
-	Planet::setCubewanoOrbitColor(c);
+	if (c!=Planet::getCubewanoOrbitColor())
+	{
+		Planet::setCubewanoOrbitColor(c);
+		emit cubewanosOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getCubewanosOrbitsColor(void) const
@@ -2020,7 +2049,11 @@ Vec3f SolarSystem::getCubewanosOrbitsColor(void) const
 
 void SolarSystem::setPlutinosOrbitsColor(const Vec3f &c)
 {
-	Planet::setPlutinoOrbitColor(c);
+	if (c!=Planet::getPlutinoOrbitColor())
+	{
+		Planet::setPlutinoOrbitColor(c);
+		emit plutinosOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getPlutinosOrbitsColor(void) const
@@ -2030,7 +2063,11 @@ Vec3f SolarSystem::getPlutinosOrbitsColor(void) const
 
 void SolarSystem::setScatteredDiskObjectsOrbitsColor(const Vec3f &c)
 {
-	Planet::setScatteredDiscObjectOrbitColor(c);
+	if (c!=Planet::getScatteredDiscObjectOrbitColor())
+	{
+		Planet::setScatteredDiscObjectOrbitColor(c);
+		emit scatteredDiskObjectsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getScatteredDiskObjectsOrbitsColor(void) const
@@ -2040,7 +2077,11 @@ Vec3f SolarSystem::getScatteredDiskObjectsOrbitsColor(void) const
 
 void SolarSystem::setOortCloudObjectsOrbitsColor(const Vec3f &c)
 {
-	Planet::setOortCloudObjectOrbitColor(c);
+	if (c!=Planet::getOortCloudObjectOrbitColor())
+	{
+		Planet::setOortCloudObjectOrbitColor(c);
+		emit oortCloudObjectsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getOortCloudObjectsOrbitsColor(void) const
@@ -2050,7 +2091,11 @@ Vec3f SolarSystem::getOortCloudObjectsOrbitsColor(void) const
 
 void SolarSystem::setCometsOrbitsColor(const Vec3f& c)
 {
-	Planet::setCometOrbitColor(c);
+	if (c!=Planet::getCometOrbitColor())
+	{
+		Planet::setCometOrbitColor(c);
+		emit cometsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getCometsOrbitsColor(void) const
@@ -2060,7 +2105,11 @@ Vec3f SolarSystem::getCometsOrbitsColor(void) const
 
 void SolarSystem::setSednoidsOrbitsColor(const Vec3f& c)
 {
-	Planet::setSednoidOrbitColor(c);
+	if (c!=Planet::getSednoidOrbitColor())
+	{
+		Planet::setSednoidOrbitColor(c);
+		emit sednoidsOrbitsColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getSednoidsOrbitsColor(void) const
@@ -2068,9 +2117,27 @@ Vec3f SolarSystem::getSednoidsOrbitsColor(void) const
 	return Planet::getSednoidOrbitColor();
 }
 
+void SolarSystem::setInterstellarOrbitsColor(const Vec3f& c)
+{
+	if (c!=Planet::getInterstellarOrbitColor())
+	{
+		Planet::setInterstellarOrbitColor(c);
+		emit interstellarOrbitsColorChanged(c);
+	}
+}
+
+Vec3f SolarSystem::getInterstellarOrbitsColor(void) const
+{
+	return Planet::getInterstellarOrbitColor();
+}
+
 void SolarSystem::setMercuryOrbitColor(const Vec3f &c)
 {
-	Planet::setMercuryOrbitColor(c);
+	if (c!=Planet::getMercuryOrbitColor())
+	{
+		Planet::setMercuryOrbitColor(c);
+		emit mercuryOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getMercuryOrbitColor(void) const
@@ -2080,7 +2147,11 @@ Vec3f SolarSystem::getMercuryOrbitColor(void) const
 
 void SolarSystem::setVenusOrbitColor(const Vec3f &c)
 {
-	Planet::setVenusOrbitColor(c);
+	if (c!=Planet::getVenusOrbitColor())
+	{
+		Planet::setVenusOrbitColor(c);
+		emit venusOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getVenusOrbitColor(void) const
@@ -2090,7 +2161,11 @@ Vec3f SolarSystem::getVenusOrbitColor(void) const
 
 void SolarSystem::setEarthOrbitColor(const Vec3f &c)
 {
-	Planet::setEarthOrbitColor(c);
+	if (c!=Planet::getEarthOrbitColor())
+	{
+		Planet::setEarthOrbitColor(c);
+		emit earthOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getEarthOrbitColor(void) const
@@ -2100,7 +2175,11 @@ Vec3f SolarSystem::getEarthOrbitColor(void) const
 
 void SolarSystem::setMarsOrbitColor(const Vec3f &c)
 {
-	Planet::setMarsOrbitColor(c);
+	if (c!=Planet::getMarsOrbitColor())
+	{
+		Planet::setMarsOrbitColor(c);
+		emit marsOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getMarsOrbitColor(void) const
@@ -2110,7 +2189,11 @@ Vec3f SolarSystem::getMarsOrbitColor(void) const
 
 void SolarSystem::setJupiterOrbitColor(const Vec3f &c)
 {
-	Planet::setJupiterOrbitColor(c);
+	if (c!=Planet::getJupiterOrbitColor())
+	{
+		Planet::setJupiterOrbitColor(c);
+		emit jupiterOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getJupiterOrbitColor(void) const
@@ -2120,7 +2203,11 @@ Vec3f SolarSystem::getJupiterOrbitColor(void) const
 
 void SolarSystem::setSaturnOrbitColor(const Vec3f &c)
 {
-	Planet::setSaturnOrbitColor(c);
+	if (c!=Planet::getSaturnOrbitColor())
+	{
+		Planet::setSaturnOrbitColor(c);
+		emit saturnOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getSaturnOrbitColor(void) const
@@ -2130,7 +2217,11 @@ Vec3f SolarSystem::getSaturnOrbitColor(void) const
 
 void SolarSystem::setUranusOrbitColor(const Vec3f &c)
 {
-	Planet::setUranusOrbitColor(c);
+	if (c!=Planet::getUranusOrbitColor())
+	{
+		Planet::setUranusOrbitColor(c);
+		emit uranusOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getUranusOrbitColor(void) const
@@ -2140,7 +2231,11 @@ Vec3f SolarSystem::getUranusOrbitColor(void) const
 
 void SolarSystem::setNeptuneOrbitColor(const Vec3f &c)
 {
-	Planet::setNeptuneOrbitColor(c);
+	if (c!=Planet::getNeptuneOrbitColor())
+	{
+		Planet::setNeptuneOrbitColor(c);
+		emit neptuneOrbitColorChanged(c);
+	}
 }
 
 Vec3f SolarSystem::getNeptuneOrbitColor(void) const
@@ -2340,6 +2435,7 @@ void SolarSystem::reloadPlanets()
 void SolarSystem::setApparentMagnitudeAlgorithmOnEarth(QString algorithm)
 {
 	Planet::setApparentMagnitudeAlgorithm(algorithm);
+	emit apparentMagnitudeAlgorithmOnEarthChanged(algorithm);
 }
 
 // Get the algorithm used for computation of apparent magnitudes for planets in case  observer on the Earth
