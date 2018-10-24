@@ -67,8 +67,6 @@ bool StelDialog::visible() const
 
 void StelDialog::setVisible(bool v)
 {
-	if(v == visible())
-		return;
 	if (v)
 	{
 		QSize screenSize = StelMainView::getInstance().size();
