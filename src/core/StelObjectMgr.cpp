@@ -69,6 +69,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["SolarSystem:scattered disc object"] = "Scattered disc objects";
 		objModulesMap["SolarSystem:Oort cloud object"] = "Oort cloud objects";
 		objModulesMap["SolarSystem:sednoid"] = "Sednoids";
+		objModulesMap["SolarSystem:interstellar object"] = "Interstellar objects";
 		objModulesMap["SolarSystem:artificial"] = "Artificial objects";
 	}
 	// Deep-sky objects by type + amateur catalogues
