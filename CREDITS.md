@@ -444,10 +444,12 @@
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.48 Images of NGC4651
 	     from R. Jay GaBany
+	     https://www.cosmotography.com/images/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.49 Images of NGC7662
 	     from Gianluca.pollastri
-	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
