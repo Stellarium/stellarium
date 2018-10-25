@@ -111,11 +111,8 @@ void ExoplanetsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor");
-	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor");
-
-	connect(ui->exoplanetMarkerColor,		SIGNAL(released()), this, SLOT(askExoplanetsMarkerColor()));
-	connect(ui->habitableExoplanetMarkerColor,	SIGNAL(released()), this, SLOT(askHabitableExoplanetsMarkerColor()));
+	connectColorButton(ui->exoplanetMarkerColor,		"Exoplanets.markerColor",    "Exoplanets/exoplanet_marker_color");
+	connectColorButton(ui->habitableExoplanetMarkerColor,	"Exoplanets.habitableColor", "Exoplanets/habitable_exoplanet_marker_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -582,34 +579,6 @@ void ExoplanetsDialog::populateDiagramsList()
 	axisY->setCurrentIndex(indexY);
 	axisX->blockSignals(false);
 	axisY->blockSignals(false);
-}
-
-void ExoplanetsDialog::askExoplanetsMarkerColor()
-{
-	Vec3f vColor = ep->getMarkerColor();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->exoplanetMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		ep->setMarkerColor(vColor);
-		ui->exoplanetMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
-}
-
-void ExoplanetsDialog::askHabitableExoplanetsMarkerColor()
-{
-	Vec3f vColor = ep->getHabitableColor();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->habitableExoplanetMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		ep->setHabitableColor(vColor);
-		ui->habitableExoplanetMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
 }
 
 void ExoplanetsDialog::populateTemperatureScales()

@@ -158,12 +158,14 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectBoolProperty(QAbstractButton* checkBox, const QString& propName);
-	//! Helper function to connect a color swatch to a StelProperty
+
+	//! Prepare a QToolButton so that it can receive and handle askColor() connections properly.
 	//! @param toolButton the QToolButton which shows the color
-	//! @param propName a StelProperty name which must represent a color (coded as Vec3f)
+	//! @param propertyName a StelProperty name which must represent a color (coded as Vec3f)
+	//! @param iniName the associated entry for config.ini, in the form group/name. Usually "color/some_feature_name_color".
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
-	static void connectColorButton(QToolButton *toolButton, QString propName);
+	void connectColorButton(QToolButton* button, QString propertyName, QString iniName);
 
 	//! The main dialog
 	QWidget* dialog;
@@ -174,7 +176,14 @@ protected:
 	//! Kinetic scrolling for lists.
 	void installKineticScrolling(QList<QWidget *> addscroll);
 
+protected slots:
+	//! To be called by a connected QToolButton with a color background.
+	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
+	void askColor();
+
+
 private:
+
 	bool flagKineticScrolling;
 
 private slots:

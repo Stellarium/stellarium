@@ -60,8 +60,6 @@ private slots:
 	void saveSettings(void);
 	void updateJSON(void);
 
-	void askQuasarsMarkerColor();
-
 private:
 	Ui_quasarsDialog* ui;
 	Quasars* qsr;

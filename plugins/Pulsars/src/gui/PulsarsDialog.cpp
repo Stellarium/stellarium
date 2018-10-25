@@ -103,11 +103,8 @@ void PulsarsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	connectColorButton(ui->pulsarMarkerColor,		"Pulsars.markerColor");
-	connectColorButton(ui->pulsarGlitchesMarkerColor,	"Pulsars.glitchColor");
-
-	connect(ui->pulsarMarkerColor,		SIGNAL(released()), this, SLOT(askPulsarsMarkerColor()));
-	connect(ui->pulsarGlitchesMarkerColor,	SIGNAL(released()), this, SLOT(askPulsarGlitchesMarkerColor()));
+	connectColorButton(ui->pulsarMarkerColor,         "Pulsars.markerColor", "Pulsars/marker_color");
+	connectColorButton(ui->pulsarGlitchesMarkerColor, "Pulsars.glitchColor", "Pulsars/glitch_color");
 
 	updateTimer = new QTimer(this);
 	connect(updateTimer, SIGNAL(timeout()), this, SLOT(refreshUpdateValues()));
@@ -315,33 +312,5 @@ void PulsarsDialog::updateJSON(void)
 	if(psr->getUpdatesEnabled())
 	{
 		psr->updateJSON();
-	}
-}
-
-void PulsarsDialog::askPulsarsMarkerColor()
-{
-	Vec3f vColor = psr->getMarkerColor();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->pulsarMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		psr->setMarkerColor(vColor);
-		ui->pulsarMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
-	}
-}
-
-void PulsarsDialog::askPulsarGlitchesMarkerColor()
-{
-	Vec3f vColor = psr->getGlitchColor();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->pulsarGlitchesMarkerColor->toolTip()));
-	if (c.isValid())
-	{
-		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		psr->setGlitchColor(vColor);
-		ui->pulsarGlitchesMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }

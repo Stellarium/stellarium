@@ -36,45 +36,6 @@ public:
 public slots:
         void retranslate();
 
-private slots:
-	// DSO markers and labels colors
-	void askDSOLabelsColor();
-	void askDSOMarkersColor();
-	void askDSOGalaxiesColor();
-	void askDSOActiveGalaxiesColor();
-	void askDSORadioGalaxiesColor();
-	void askDSOInteractingGalaxiesColor();
-	void askDSOQuasarsColor();
-	void askDSOPossibleQuasarsColor();
-	void askDSOStarClustersColor();
-	void askDSOOpenStarClustersColor();
-	void askDSOGlobularStarClustersColor();
-	void askDSOStellarAssociationsColor();
-	void askDSOStarCloudsColor();
-	void askDSOStarsColor();
-	void askDSOSymbioticStarsColor();
-	void askDSOEmissionLineStarsColor();
-	void askDSONebulaeColor();
-	void askDSOPlanetaryNebulaeColor();
-	void askDSODarkNebulaeColor();
-	void askDSOReflectionNebulaeColor();
-	void askDSOBipolarNebulaeColor();
-	void askDSOEmissionNebulaeColor();
-	void askDSONebulosityClustersColor();
-	void askDSOPossiblePlanetaryNebulaeColor();
-	void askDSOProtoplanetaryNebulaeColor();
-	void askDSOHydrogenRegionsColor();
-	void askDSOInterstellarMatterColor();
-	void askDSOEmissionObjectsColor();
-	void askDSOMolecularCloudsColor();
-	void askDSOBLLacObjectsColor();
-	void askDSOBlazarsColor();
-	void askDSOYoungStellarObjectsColor();
-	void askDSOSupernovaRemnantsColor();
-	void askDSOSupernovaCandidatesColor();
-	void askDSOSupernovaRemnantCandidatesColor();
-	void askDSOGalaxyClustersColor();
-
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
         virtual void createDialogContent();

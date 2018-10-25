@@ -62,9 +62,6 @@ private slots:
 	void updateJSON(void);
 	void setFilterValue(double v);
 
-	void askPulsarsMarkerColor();
-	void askPulsarGlitchesMarkerColor();
-
 private:
 	Ui_pulsarsDialog* ui;
 	Pulsars* psr;

@@ -65,9 +65,6 @@ private slots:
 	void drawDiagram(void);
 	void populateDiagramsList();
 
-	void askExoplanetsMarkerColor();
-	void askHabitableExoplanetsMarkerColor();
-
 	void populateTemperatureScales();
 	void setTemperatureScale(int tScaleID);
 

@@ -24,6 +24,7 @@
 #include "StelGui.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 #include <QAbstractButton>
@@ -38,6 +39,7 @@
 #include <QLineEdit>
 #include <QScroller>
 #include <QToolButton>
+#include <QColorDialog>
 
 StelDialog::StelDialog(QString dialogName, QObject* parent)
 	: QObject(parent)
@@ -271,17 +273,55 @@ void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &p
 	new QAbstractButtonStelPropertyConnectionHelper(prop,checkBox);
 }
 
-void StelDialog::connectColorButton(QToolButton* toolButton, QString propName)
+void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName)
 {
-	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	toolButton->setProperty("propName", propertyName);
+	toolButton->setProperty("iniName", iniName);
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propertyName);
 	Vec3f vColor = prop->getValue().value<Vec3f>();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor color=QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
 	// Use style sheet to create a nice button :)
 	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
 	toolButton->setFixedSize(QSize(18, 18));
+
+	connect(toolButton, SIGNAL(released()), this, SLOT(askColor()));
 }
 
+void StelDialog::askColor()
+{
+	// Only work if connected from a QToolButton
+	if (!sender())
+	{
+		qWarning() << "askColor(): No sender? Ignoring.";
+		Q_ASSERT(0);
+		return;
+	}
+	if (QString(sender()->metaObject()->className()) != QString("QToolButton"))
+	{
+		qWarning() << "Sender not a QToolButton but a |" << sender()->metaObject()->className() << "|! ColorButton not set up properly! Ignoring.";
+		Q_ASSERT(0);
+		return;
+	}
+	QString propName=sender()->property("propName").toString();
+	QString iniName=sender()->property("iniName").toString();
+	if ((propName.length()==0) || (iniName.length()==0))
+	{
+		qWarning() << "ColorButton not set up properly! Ignoring.";
+		Q_ASSERT(0);
+		return;
+	}
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor));
+		StelApp::getInstance().getSettings()->setValue(iniName, StelUtils::vec3fToStr(vColor));
+		static_cast<QToolButton*>(QObject::sender())->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
+	}
+}
 
 void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 {

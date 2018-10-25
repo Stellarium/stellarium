@@ -37,26 +37,6 @@ public slots:
         void retranslate();
 
 private slots:
-	void askGenericOrbitColor();
-	void askMajorPlanetsGroupOrbitColor();
-	void askMinorPlanetsGroupOrbitColor();
-	void askDwarfPlanetsGroupOrbitColor();
-	void askMoonsGroupOrbitColor();
-	void askCubewanosGroupOrbitColor();
-	void askPlutinosGroupOrbitColor();
-	void askSDOGroupOrbitColor();
-	void askOCOGroupOrbitColor();
-	void askCometsGroupOrbitColor();
-	void askSednoidsGroupOrbitColor();
-	void askInterstellarGroupOrbitColor();
-	void askMercuryOrbitColor();
-	void askVenusOrbitColor();
-	void askEarthOrbitColor();
-	void askMarsOrbitColor();
-	void askJupiterOrbitColor();
-	void askSaturnOrbitColor();
-	void askUranusOrbitColor();
-	void askNeptuneOrbitColor();
 	void setColorStyle();
 
 protected:
