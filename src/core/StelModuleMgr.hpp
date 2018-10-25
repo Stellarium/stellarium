@@ -78,7 +78,7 @@ public:
 	QList<StelModule*> getAllModules() const {return modules.values();}
 
 	//! Get the list of modules in the correct order for calling the given action
-	const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action) const
+	const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)
 	{
 		return callOrders[action];
 	}
