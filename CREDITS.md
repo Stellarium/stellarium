@@ -381,14 +381,15 @@
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
 	4.28 Images of IC59, IC63, IC410, NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
-	4.29 Images of NGC3690, NGC5257, NGC6050, IC883, PGC3589, UGC8335 and UGC9618
+	4.29 Images of NGC2261, NGC2818, NGC3690, NGC3918, NGC4038-4039,
+	     NGC5257, NGC6050, NGC6826, IC883, PGC3589, UGC8335 and UGC9618
 	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Image of NGC40 from Steven Bellavia
 	4.31 Images of Barnard Loop, IC342 from Sun Shuwei
 	     License: public domain
-	4.32 Images of M77, Sh2-264, Sh2-308 from Wang Lingyi
+	4.32 Images of M77, NGC7009, Sh2-264, Sh2-308 from Wang Lingyi
 	     License: public domain
 	4.33 Images of IC10, PGC143 from Lowell Observatory
 	     http://www2.lowell.edu/
@@ -414,10 +415,12 @@
 	     License: This work is free and may be used by anyone for any purpose.
 	     If you wish to use this content, you do not need to request permission
 	     as long as you follow any licensing requirements mentioned on this page.
-	4.41 Images of Coma Cluster from Adam Block/Mount Lemmon SkyCenter/University of Arizona
+	4.41 Images of NGC1360, NGC1535, NGC2440, NGC3132, NGC3242, NGC3750, NGC4414,
+	     NGC6302, NGC6563, NGC6781, NGC7354, Coma Cluster
+	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.42 Images of NGC1316 from ESO
+	4.42 Images of NGC1316, NGC5189 from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
  	4.43 Images of NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
@@ -436,6 +439,17 @@
 	4.46 Images of IC1613 
 	     from Philos2000
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.47 Images of NGC4236, Perseus Cluster
+	     from Sun Gang
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.48 Images of NGC4651
+	     from R. Jay GaBany
+	     https://www.cosmotography.com/images/
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.49 Images of NGC7662
+	     from Gianluca.pollastri
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
