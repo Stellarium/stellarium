@@ -603,17 +603,6 @@ void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
 	l->blockSignals(false);
 }
 
-void ViewDialog::connectColorButton(QToolButton* toolButton, QString propName)
-{
-	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
-	Vec3f vColor = prop->getValue().value<Vec3f>();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	// Use style sheet for create a nice buttons :)		
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
-}
-
 void ViewDialog::askEclipticJ2000GridColor()
 {
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty("GridLinesMgr.eclipticJ2000GridColor")->getValue().value<Vec3f>();

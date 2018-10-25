@@ -147,8 +147,6 @@ private:
 	//! @todo Limit the width to the width of the screen *available to the window*.
 	void updateTabBarListWidgetWidth();
 
-	static void connectColorButton(QToolButton *toolButton, QString propName);
-
 	AddRemoveLandscapesDialog * addRemoveLandscapesDialog;
 	AtmosphereDialog * atmosphereDialog;
 	GreatRedSpotDialog * greatRedSpotDialog;
