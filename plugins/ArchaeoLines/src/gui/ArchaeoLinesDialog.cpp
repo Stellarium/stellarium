@@ -75,10 +75,7 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectBoolProperty(ui->selectedObjectHourAngleCheckBox,  "ArchaeoLines.flagShowSelectedObjectHourAngle");
 	connectBoolProperty(ui->currentSunCheckBox,      "ArchaeoLines.flagShowCurrentSun");
 	connectBoolProperty(ui->currentMoonCheckBox,     "ArchaeoLines.flagShowCurrentMoon");
-	// Planet ComboBox requires special handling!
-	setCurrentPlanetFromApp();
-	//connect(al, SIGNAL(currentPlanetChanged(ArchaeoLine::Line)), this, SLOT(setCurrentPlanetFromApp()));
-	//connect(ui->currentPlanetComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(setCurrentPlanetFromGUI(int)));
+
 	connectIntProperty(ui->currentPlanetComboBox, "ArchaeoLines.enumShowCurrentPlanet");
 
 	connectBoolProperty(ui->geographicLocation1CheckBox,                 "ArchaeoLines.flagShowGeographicLocation1");
@@ -110,149 +107,30 @@ void ArchaeoLinesDialog::createDialogContent()
 	connect(ui->customDeclination1LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination1Label(QString)));
 	connect(ui->customDeclination2LineEdit, SIGNAL(textChanged(QString)), al, SLOT(setCustomDeclination2Label(QString)));
 
-	{ // just to allow code folding.
-	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
-	solsticeColor        = al->getLineColor(ArchaeoLine::Solstices);
-	crossquarterColor    = al->getLineColor(ArchaeoLine::Crossquarters);
-	majorStandstillColor = al->getLineColor(ArchaeoLine::MajorStandstill);
-	minorStandstillColor = al->getLineColor(ArchaeoLine::MinorStandstill);
-	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
-	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
-	selectedObjectColor  = al->getLineColor(ArchaeoLine::SelectedObject);
-	selectedObjectAzimuthColor    = al->getLineColor(ArchaeoLine::SelectedObjectAzimuth);
-	selectedObjectHourAngleColor  = al->getLineColor(ArchaeoLine::SelectedObjectHourAngle);
-	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
-	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
-	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
-	geographicLocation1Color  = al->getLineColor(ArchaeoLine::GeographicLocation1);
-	geographicLocation2Color  = al->getLineColor(ArchaeoLine::GeographicLocation2);
-	customAzimuth1Color  = al->getLineColor(ArchaeoLine::CustomAzimuth1);
-	customAzimuth2Color  = al->getLineColor(ArchaeoLine::CustomAzimuth2);
-	customDeclination1Color  = al->getLineColor(ArchaeoLine::CustomDeclination1);
-	customDeclination2Color  = al->getLineColor(ArchaeoLine::CustomDeclination2);
-	equinoxColorPixmap=QPixmap(48, 12);
-	equinoxColorPixmap.fill(equinoxColor);
-	ui->equinoxColorToolButton->setIconSize(QSize(48, 12));
-	ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
-	solsticeColorPixmap=QPixmap(48, 12);
-	solsticeColorPixmap.fill(solsticeColor);
-	ui->solsticesColorToolButton->setIconSize(QSize(48, 12));
-	ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
-	crossquarterColorPixmap=QPixmap(48, 12);
-	crossquarterColorPixmap.fill(crossquarterColor);
-	ui->crossquarterColorToolButton->setIconSize(QSize(48, 12));
-	ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
-	minorStandstillColorPixmap=QPixmap(48, 12);
-	minorStandstillColorPixmap.fill(minorStandstillColor);
-	ui->minorStandstillColorToolButton->setIconSize(QSize(48, 12));
-	ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
-	majorStandstillColorPixmap=QPixmap(48, 12);
-	majorStandstillColorPixmap.fill(majorStandstillColor);
-	ui->majorStandstillColorToolButton->setIconSize(QSize(48, 12));
-	ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
-	zenithPassageColorPixmap=QPixmap(48, 12);
-	zenithPassageColorPixmap.fill(zenithPassageColor);
-	ui->zenithPassageColorToolButton->setIconSize(QSize(48, 12));
-	ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
-	nadirPassageColorPixmap=QPixmap(48, 12);
-	nadirPassageColorPixmap.fill(nadirPassageColor);
-	ui->nadirPassageColorToolButton->setIconSize(QSize(48, 12));
-	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
-	selectedObjectColorPixmap=QPixmap(48, 12);
-	selectedObjectColorPixmap.fill(selectedObjectColor);
-	ui->selectedObjectColorToolButton->setIconSize(QSize(48, 12));
-	ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
-	selectedObjectAzimuthColorPixmap=QPixmap(48, 12);
-	selectedObjectAzimuthColorPixmap.fill(selectedObjectAzimuthColor);
-	ui->selectedObjectAzimuthColorToolButton->setIconSize(QSize(48, 12));
-	ui->selectedObjectAzimuthColorToolButton->setIcon(QIcon(selectedObjectAzimuthColorPixmap));
-	selectedObjectHourAngleColorPixmap=QPixmap(48, 12);
-	selectedObjectHourAngleColorPixmap.fill(selectedObjectHourAngleColor);
-	ui->selectedObjectHourAngleColorToolButton->setIconSize(QSize(48, 12));
-	ui->selectedObjectHourAngleColorToolButton->setIcon(QIcon(selectedObjectHourAngleColorPixmap));
-	currentSunColorPixmap=QPixmap(48, 12);
-	currentSunColorPixmap.fill(currentSunColor);
-	ui->currentSunColorToolButton->setIconSize(QSize(48, 12));
-	ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
-	currentMoonColorPixmap=QPixmap(48, 12);
-	currentMoonColorPixmap.fill(currentMoonColor);
-	ui->currentMoonColorToolButton->setIconSize(QSize(48, 12));
-	ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
-	currentPlanetColorPixmap=QPixmap(48, 12);
-	currentPlanetColorPixmap.fill(currentPlanetColor);
-	ui->currentPlanetColorToolButton->setIconSize(QSize(48, 12));
-	ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
-	geographicLocation1ColorPixmap=QPixmap(48, 12);
-	geographicLocation1ColorPixmap.fill(geographicLocation1Color);
-	ui->geographicLocation1ColorToolButton->setIconSize(QSize(48, 12));
-	ui->geographicLocation1ColorToolButton->setIcon(QIcon(geographicLocation1ColorPixmap));
-	geographicLocation2ColorPixmap=QPixmap(48, 12);
-	geographicLocation2ColorPixmap.fill(geographicLocation2Color);
-	ui->geographicLocation2ColorToolButton->setIconSize(QSize(48, 12));
-	ui->geographicLocation2ColorToolButton->setIcon(QIcon(geographicLocation2ColorPixmap));
-	customAzimuth1ColorPixmap=QPixmap(48, 12);
-	customAzimuth1ColorPixmap.fill(customAzimuth1Color);
-	ui->customAzimuth1ColorToolButton->setIconSize(QSize(48, 12));
-	ui->customAzimuth1ColorToolButton->setIcon(QIcon(customAzimuth1ColorPixmap));
-	customAzimuth2ColorPixmap=QPixmap(48, 12);
-	customAzimuth2ColorPixmap.fill(customAzimuth2Color);
-	ui->customAzimuth2ColorToolButton->setIconSize(QSize(48, 12));
-	ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
-	customDeclination1ColorPixmap=QPixmap(48, 12);
-	customDeclination1ColorPixmap.fill(customDeclination1Color);
-	ui->customDeclination1ColorToolButton->setIconSize(QSize(48, 12));
-	ui->customDeclination1ColorToolButton->setIcon(QIcon(customDeclination1ColorPixmap));
-	customDeclination2ColorPixmap=QPixmap(48, 12);
-	customDeclination2ColorPixmap.fill(customDeclination2Color);
-	ui->customDeclination2ColorToolButton->setIconSize(QSize(48, 12));
-	ui->customDeclination2ColorToolButton->setIcon(QIcon(customDeclination2ColorPixmap));
-}
-
-	connect(ui->equinoxColorToolButton,             SIGNAL(released()), this, SLOT(askEquinoxColor()));
-	connect(ui->solsticesColorToolButton,           SIGNAL(released()), this, SLOT(askSolsticeColor()));
-	connect(ui->crossquarterColorToolButton,        SIGNAL(released()), this, SLOT(askCrossquarterColor()));
-	connect(ui->majorStandstillColorToolButton,     SIGNAL(released()), this, SLOT(askMajorStandstillColor()));
-	connect(ui->minorStandstillColorToolButton,     SIGNAL(released()), this, SLOT(askMinorStandstillColor()));
-	connect(ui->zenithPassageColorToolButton,       SIGNAL(released()), this, SLOT(askZenithPassageColor()));
-	connect(ui->nadirPassageColorToolButton,        SIGNAL(released()), this, SLOT(askNadirPassageColor()));
-	connect(ui->selectedObjectColorToolButton,      SIGNAL(released()), this, SLOT(askSelectedObjectColor()));
-	connect(ui->selectedObjectAzimuthColorToolButton,   SIGNAL(released()), this, SLOT(askSelectedObjectAzimuthColor()));
-	connect(ui->selectedObjectHourAngleColorToolButton, SIGNAL(released()), this, SLOT(askSelectedObjectHourAngleColor()));
-	connect(ui->currentSunColorToolButton,          SIGNAL(released()), this, SLOT(askCurrentSunColor()));
-	connect(ui->currentMoonColorToolButton,         SIGNAL(released()), this, SLOT(askCurrentMoonColor()));
-	connect(ui->currentPlanetColorToolButton,       SIGNAL(released()), this, SLOT(askCurrentPlanetColor()));
-	connect(ui->geographicLocation1ColorToolButton, SIGNAL(released()), this, SLOT(askGeographicLocation1Color()));
-	connect(ui->geographicLocation2ColorToolButton, SIGNAL(released()), this, SLOT(askGeographicLocation2Color()));
-	connect(ui->customAzimuth1ColorToolButton,      SIGNAL(released()), this, SLOT(askCustomAzimuth1Color()));
-	connect(ui->customAzimuth2ColorToolButton,      SIGNAL(released()), this, SLOT(askCustomAzimuth2Color()));
-	connect(ui->customDeclination1ColorToolButton,  SIGNAL(released()), this, SLOT(askCustomDeclination1Color()));
-	connect(ui->customDeclination2ColorToolButton,  SIGNAL(released()), this, SLOT(askCustomDeclination2Color()));
+	connectColorButton(ui->equinoxColorToolButton,                 "ArchaeoLines.equinoxColor",                 "ArchaeoLines/color_equinox");
+	connectColorButton(ui->solsticesColorToolButton,               "ArchaeoLines.solsticesColor",               "ArchaeoLines/color_solstices");
+	connectColorButton(ui->crossquarterColorToolButton,            "ArchaeoLines.crossquartersColor",           "ArchaeoLines/color_crossquarters");
+	connectColorButton(ui->majorStandstillColorToolButton,         "ArchaeoLines.majorStandstillColor",         "ArchaeoLines/color_major_standstill");
+	connectColorButton(ui->minorStandstillColorToolButton,         "ArchaeoLines.minorStandstillColor",         "ArchaeoLines/color_minor_standstill");
+	connectColorButton(ui->zenithPassageColorToolButton,           "ArchaeoLines.zenithPassageColor",           "ArchaeoLines/color_zenith_passage");
+	connectColorButton(ui->nadirPassageColorToolButton,            "ArchaeoLines.nadirPassageColor",            "ArchaeoLines/color_nadir_passage");
+	connectColorButton(ui->selectedObjectColorToolButton,          "ArchaeoLines.selectedObjectColor",          "ArchaeoLines/color_selected_object");
+	connectColorButton(ui->selectedObjectAzimuthColorToolButton,   "ArchaeoLines.selectedObjectAzimuthColor",   "ArchaeoLines/color_selected_object_azimuth");
+	connectColorButton(ui->selectedObjectHourAngleColorToolButton, "ArchaeoLines.selectedObjectHourAngleColor", "ArchaeoLines/color_selected_object_hour_angle");
+	connectColorButton(ui->currentSunColorToolButton,              "ArchaeoLines.currentSunColor",              "ArchaeoLines/color_current_sun");
+	connectColorButton(ui->currentMoonColorToolButton,             "ArchaeoLines.currentMoonColor",             "ArchaeoLines/color_current_moon");
+	connectColorButton(ui->currentPlanetColorToolButton,           "ArchaeoLines.currentPlanetColor",           "ArchaeoLines/color_current_planet");
+	connectColorButton(ui->geographicLocation1ColorToolButton,     "ArchaeoLines.geographicLocation1Color",     "ArchaeoLines/color_geographic_location_1");
+	connectColorButton(ui->geographicLocation2ColorToolButton,     "ArchaeoLines.geographicLocation2Color",     "ArchaeoLines/color_geographic_location_2");
+	connectColorButton(ui->customAzimuth1ColorToolButton,          "ArchaeoLines.customAzimuth1Color",          "ArchaeoLines/color_custom_azimuth_1");
+	connectColorButton(ui->customAzimuth2ColorToolButton,          "ArchaeoLines.customAzimuth2Color",          "ArchaeoLines/color_custom_azimuth_2");
+	connectColorButton(ui->customDeclination1ColorToolButton,      "ArchaeoLines.customDeclination1Color",      "ArchaeoLines/color_custom_declination_1");
+	connectColorButton(ui->customDeclination2ColorToolButton,      "ArchaeoLines.customDeclination2Color",      "ArchaeoLines/color_custom_declination_2");
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
-	// We must apparently warn about a potential problem, but only on Windows in OpenGL mode. (QTBUG-35302?)
-	#ifndef Q_OS_WIN
-	ui->switchToWindowedModeLabel->hide();
-	#else
-	// don't call GL functions in GUI code please
-	if (StelMainView::getInstance().getGLInformation().renderer.startsWith("ANGLE", Qt::CaseSensitive))
-		ui->switchToWindowedModeLabel->hide();
-	#endif
 	setAboutHtml();
 }
-
-void ArchaeoLinesDialog::setCurrentPlanetFromGUI(int index)
-{
-	Q_ASSERT(al);
-	al->showCurrentPlanet((ArchaeoLine::Line) (ArchaeoLine::CurrentPlanetNone+index));
-}
-
-void ArchaeoLinesDialog::setCurrentPlanetFromApp()
-{
-	Q_ASSERT(al);
-	ui->currentPlanetComboBox->setCurrentIndex(al->whichCurrentPlanetDisplayed()-ArchaeoLine::CurrentPlanetNone);
-}
-
 
 void ArchaeoLinesDialog::setAboutHtml(void)
 {
@@ -314,281 +192,12 @@ void ArchaeoLinesDialog::setAboutHtml(void)
 void ArchaeoLinesDialog::resetArchaeoLinesSettings()
 {
 	al->restoreDefaultSettings();
-	equinoxColor         = al->getLineColor(ArchaeoLine::Equinox);
-	solsticeColor        = al->getLineColor(ArchaeoLine::Solstices);
-	crossquarterColor    = al->getLineColor(ArchaeoLine::Crossquarters);
-	majorStandstillColor = al->getLineColor(ArchaeoLine::MajorStandstill);
-	minorStandstillColor = al->getLineColor(ArchaeoLine::MinorStandstill);
-	zenithPassageColor   = al->getLineColor(ArchaeoLine::ZenithPassage);
-	nadirPassageColor    = al->getLineColor(ArchaeoLine::NadirPassage);
-	selectedObjectColor  = al->getLineColor(ArchaeoLine::SelectedObject);
-	selectedObjectAzimuthColor   = al->getLineColor(ArchaeoLine::SelectedObjectAzimuth);
-	selectedObjectHourAngleColor = al->getLineColor(ArchaeoLine::SelectedObjectHourAngle);
-	currentSunColor      = al->getLineColor(ArchaeoLine::CurrentSun);
-	currentMoonColor     = al->getLineColor(ArchaeoLine::CurrentMoon);
-	currentPlanetColor   = al->getLineColor(ArchaeoLine::CurrentPlanetNone);
-	geographicLocation1Color  = al->getLineColor(ArchaeoLine::GeographicLocation1);
-	geographicLocation2Color  = al->getLineColor(ArchaeoLine::GeographicLocation2);
-	customAzimuth1Color  = al->getLineColor(ArchaeoLine::CustomAzimuth1);
-	customAzimuth2Color  = al->getLineColor(ArchaeoLine::CustomAzimuth2);
-	customDeclination1Color  = al->getLineColor(ArchaeoLine::CustomDeclination1);
-	customDeclination2Color  = al->getLineColor(ArchaeoLine::CustomDeclination2);
-	equinoxColorPixmap.fill(equinoxColor);
-	ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
-	solsticeColorPixmap.fill(solsticeColor);
-	ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
-	crossquarterColorPixmap.fill(crossquarterColor);
-	ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
-	minorStandstillColorPixmap.fill(minorStandstillColor);
-	ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
-	majorStandstillColorPixmap.fill(majorStandstillColor);
-	ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
-	zenithPassageColorPixmap.fill(zenithPassageColor);
-	ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
-	nadirPassageColorPixmap.fill(nadirPassageColor);
-	ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
-	selectedObjectColorPixmap.fill(selectedObjectColor);
-	ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
-	selectedObjectAzimuthColorPixmap.fill(selectedObjectAzimuthColor);
-	ui->selectedObjectAzimuthColorToolButton->setIcon(QIcon(selectedObjectAzimuthColorPixmap));
-	selectedObjectHourAngleColorPixmap.fill(selectedObjectHourAngleColor);
-	ui->selectedObjectHourAngleColorToolButton->setIcon(QIcon(selectedObjectHourAngleColorPixmap));
-	currentSunColorPixmap.fill(currentSunColor);
-	ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
-	currentMoonColorPixmap.fill(currentMoonColor);
-	ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
-	currentPlanetColorPixmap.fill(currentPlanetColor);
-	ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
-	geographicLocation1ColorPixmap.fill(geographicLocation1Color);
-	ui->geographicLocation1ColorToolButton->setIcon(QIcon(geographicLocation1ColorPixmap));
-	geographicLocation2ColorPixmap.fill(geographicLocation2Color);
-	ui->geographicLocation2ColorToolButton->setIcon(QIcon(geographicLocation2ColorPixmap));
-	customAzimuth1ColorPixmap.fill(customAzimuth1Color);
-	ui->customAzimuth1ColorToolButton->setIcon(QIcon(customAzimuth1ColorPixmap));
-	customAzimuth2ColorPixmap.fill(customAzimuth2Color);
-	ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
-	customDeclination1ColorPixmap.fill(customDeclination1Color);
-	ui->customDeclination1ColorToolButton->setIcon(QIcon(customDeclination1ColorPixmap));
-	customDeclination2ColorPixmap.fill(customDeclination2Color);
-	ui->customDeclination2ColorToolButton->setIcon(QIcon(customDeclination2ColorPixmap));
-
 	ui->geographicLocation1LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation1));
 	ui->geographicLocation2LineEdit->setText(al->getLineLabel(ArchaeoLine::GeographicLocation2));
 	ui->customAzimuth1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth1));
 	ui->customAzimuth2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomAzimuth2));
 	ui->customDeclination1LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination1));
 	ui->customDeclination2LineEdit->setText(al->getLineLabel(ArchaeoLine::CustomDeclination2));
-}
-
-// These are called by the respective buttons.
-void ArchaeoLinesDialog::askEquinoxColor()
-{
-	QColor c=QColorDialog::getColor(equinoxColor, Q_NULLPTR, q_("Select color for equinox line"));
-	if (c.isValid())
-	{
-		equinoxColor=c;
-		al->setLineColor(ArchaeoLine::Equinox, c);
-		equinoxColorPixmap.fill(c);
-		ui->equinoxColorToolButton->setIcon(QIcon(equinoxColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askSolsticeColor()
-{
-	QColor c=QColorDialog::getColor(solsticeColor, Q_NULLPTR, q_("Select color for solstice lines"));
-	if (c.isValid())
-	{
-		solsticeColor=c;
-		al->setLineColor(ArchaeoLine::Solstices, c);
-		solsticeColorPixmap.fill(c);
-		ui->solsticesColorToolButton->setIcon(QIcon(solsticeColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCrossquarterColor()
-{
-	QColor c=QColorDialog::getColor(crossquarterColor, Q_NULLPTR, q_("Select color for crossquarter lines"));
-	if (c.isValid())
-	{
-		crossquarterColor=c;
-		al->setLineColor(ArchaeoLine::Crossquarters, c);
-		crossquarterColorPixmap.fill(c);
-		ui->crossquarterColorToolButton->setIcon(QIcon(crossquarterColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askMajorStandstillColor()
-{
-	QColor c=QColorDialog::getColor(majorStandstillColor, Q_NULLPTR, q_("Select color for major standstill lines"));
-	if (c.isValid())
-	{
-		majorStandstillColor=c;
-		al->setLineColor(ArchaeoLine::MajorStandstill, c);
-		majorStandstillColorPixmap.fill(c);
-		ui->majorStandstillColorToolButton->setIcon(QIcon(majorStandstillColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askMinorStandstillColor()
-{
-	QColor c=QColorDialog::getColor(minorStandstillColor, Q_NULLPTR, q_("Select color for minor standstill lines"));
-	if (c.isValid())
-	{
-		minorStandstillColor=c;
-		al->setLineColor(ArchaeoLine::MinorStandstill, c);
-		minorStandstillColorPixmap.fill(c);
-		ui->minorStandstillColorToolButton->setIcon(QIcon(minorStandstillColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askZenithPassageColor()
-{
-	QColor c=QColorDialog::getColor(zenithPassageColor, Q_NULLPTR, q_("Select color for zenith passage line"));
-	if (c.isValid())
-	{
-		zenithPassageColor=c;
-		al->setLineColor(ArchaeoLine::ZenithPassage, c);
-		zenithPassageColorPixmap.fill(c);
-		ui->zenithPassageColorToolButton->setIcon(QIcon(zenithPassageColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askNadirPassageColor()
-{
-	QColor c=QColorDialog::getColor(nadirPassageColor, Q_NULLPTR, q_("Select color for nadir passage line"));
-	if (c.isValid())
-	{
-		nadirPassageColor=c;
-		al->setLineColor(ArchaeoLine::NadirPassage, c);
-		nadirPassageColorPixmap.fill(c);
-		ui->nadirPassageColorToolButton->setIcon(QIcon(nadirPassageColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askSelectedObjectColor()
-{
-	QColor c=QColorDialog::getColor(selectedObjectColor, Q_NULLPTR, q_("Select color for selected object line"));
-	if (c.isValid())
-	{
-		selectedObjectColor=c;
-		al->setLineColor(ArchaeoLine::SelectedObject, c);
-		selectedObjectColorPixmap.fill(c);
-		ui->selectedObjectColorToolButton->setIcon(QIcon(selectedObjectColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askSelectedObjectAzimuthColor()
-{
-	QColor c=QColorDialog::getColor(selectedObjectAzimuthColor, Q_NULLPTR, q_("Select color for selected object azimuth line"));
-	if (c.isValid())
-	{
-		selectedObjectColor=c;
-		al->setLineColor(ArchaeoLine::SelectedObjectAzimuth, c);
-		selectedObjectAzimuthColorPixmap.fill(c);
-		ui->selectedObjectAzimuthColorToolButton->setIcon(QIcon(selectedObjectAzimuthColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askSelectedObjectHourAngleColor()
-{
-	QColor c=QColorDialog::getColor(selectedObjectHourAngleColor, Q_NULLPTR, q_("Select color for selected object hour angle line"));
-	if (c.isValid())
-	{
-		selectedObjectHourAngleColor=c;
-		al->setLineColor(ArchaeoLine::SelectedObjectHourAngle, c);
-		selectedObjectHourAngleColorPixmap.fill(c);
-		ui->selectedObjectHourAngleColorToolButton->setIcon(QIcon(selectedObjectHourAngleColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCurrentSunColor()
-{
-	QColor c=QColorDialog::getColor(currentSunColor, Q_NULLPTR, q_("Select color for current sun line"));
-	if (c.isValid())
-	{
-		currentSunColor=c;
-		al->setLineColor(ArchaeoLine::CurrentSun, c);
-		currentSunColorPixmap.fill(c);
-		ui->currentSunColorToolButton->setIcon(QIcon(currentSunColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCurrentMoonColor()
-{
-	QColor c=QColorDialog::getColor(currentMoonColor, Q_NULLPTR, q_("Select color for current moon line"));
-	if (c.isValid())
-	{
-		currentMoonColor=c;
-		al->setLineColor(ArchaeoLine::CurrentMoon, c);
-		currentMoonColorPixmap.fill(c);
-		ui->currentMoonColorToolButton->setIcon(QIcon(currentMoonColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCurrentPlanetColor()
-{
-	QColor c=QColorDialog::getColor(currentPlanetColor, Q_NULLPTR, q_("Select color for current planet line"));
-	if (c.isValid())
-	{
-		currentPlanetColor=c;
-		al->setLineColor(ArchaeoLine::CurrentPlanetNone, c);
-		currentPlanetColorPixmap.fill(c);
-		ui->currentPlanetColorToolButton->setIcon(QIcon(currentPlanetColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askGeographicLocation1Color()
-{
-	QColor c=QColorDialog::getColor(geographicLocation1Color, Q_NULLPTR, q_("Select color for Geographic Location 1 line"));
-	if (c.isValid())
-	{
-		geographicLocation1Color=c;
-		al->setLineColor(ArchaeoLine::GeographicLocation1, c);
-		geographicLocation1ColorPixmap.fill(c);
-		ui->geographicLocation1ColorToolButton->setIcon(QIcon(geographicLocation1ColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askGeographicLocation2Color()
-{
-	QColor c=QColorDialog::getColor(geographicLocation2Color, Q_NULLPTR, q_("Select color for Geographic Location 2 line"));
-	if (c.isValid())
-	{
-		geographicLocation2Color=c;
-		al->setLineColor(ArchaeoLine::GeographicLocation2, c);
-		geographicLocation2ColorPixmap.fill(c);
-		ui->geographicLocation2ColorToolButton->setIcon(QIcon(geographicLocation2ColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCustomAzimuth1Color()
-{
-	QColor c=QColorDialog::getColor(customAzimuth1Color, Q_NULLPTR, q_("Select color for Custom Azimuth 1 line"));
-	if (c.isValid())
-	{
-		customAzimuth1Color=c;
-		al->setLineColor(ArchaeoLine::CustomAzimuth1, c);
-		customAzimuth1ColorPixmap.fill(c);
-		ui->customAzimuth1ColorToolButton->setIcon(QIcon(customAzimuth1ColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCustomAzimuth2Color()
-{
-	QColor c=QColorDialog::getColor(customAzimuth2Color, Q_NULLPTR, q_("Select color for Custom Azimuth 2 line"));
-	if (c.isValid())
-	{
-		customAzimuth2Color=c;
-		al->setLineColor(ArchaeoLine::CustomAzimuth2, c);
-		customAzimuth2ColorPixmap.fill(c);
-		ui->customAzimuth2ColorToolButton->setIcon(QIcon(customAzimuth2ColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCustomDeclination1Color()
-{
-	QColor c=QColorDialog::getColor(customDeclination1Color, Q_NULLPTR, q_("Select color for Custom Declination 1 line"));
-	if (c.isValid())
-	{
-		customDeclination1Color=c;
-		al->setLineColor(ArchaeoLine::CustomDeclination1, c);
-		customDeclination1ColorPixmap.fill(c);
-		ui->customDeclination1ColorToolButton->setIcon(QIcon(customDeclination1ColorPixmap));
-	}
-}
-void ArchaeoLinesDialog::askCustomDeclination2Color()
-{
-	QColor c=QColorDialog::getColor(customDeclination2Color, Q_NULLPTR, q_("Select color for Custom Declination 2 line"));
-	if (c.isValid())
-	{
-		customDeclination2Color=c;
-		al->setLineColor(ArchaeoLine::CustomDeclination2, c);
-		customDeclination2ColorPixmap.fill(c);
-		ui->customDeclination2ColorToolButton->setIcon(QIcon(customDeclination2ColorPixmap));
-	}
 }
 
 // Notes/Observations by GZ in 2015-04 with Qt5.4.0/MinGW on Windows7SP1.

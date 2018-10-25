@@ -311,8 +311,7 @@ void StelDialog::askColor()
 		return;
 	}
 	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor color = QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
 	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
 	if (c.isValid())
 	{
