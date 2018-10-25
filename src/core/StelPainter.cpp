@@ -626,7 +626,7 @@ struct StringTexture
 	~StringTexture() {delete texture;}
 };
 
-StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize)
+StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize) const
 {
 	// Render first the text into a QPixmap, then create a QOpenGLTexture
 	// from it.  We could optimize by directly using a QImage, but for some

@@ -442,7 +442,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
  Return the list objects of type "type" which was recently selected by
   the user
 *************************************************************************/
-QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
+QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type) const
 {
 	QList<StelObjectP> result;
 	for (const auto& obj : lastSelectedObjects)

@@ -23,7 +23,6 @@
 #include <QObject>
 #include "StelDialog.hpp"
 
-class QToolButton;
 class Ui_ConfigureOrbitColorsDialogForm;
 
 class ConfigureOrbitColorsDialog : public StelDialog
@@ -59,9 +58,6 @@ private slots:
 	void askUranusOrbitColor();
 	void askNeptuneOrbitColor();
 	void setColorStyle();
-
-private:
-	void colorButton(QToolButton *toolButton, QString propName);
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.

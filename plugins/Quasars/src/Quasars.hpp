@@ -74,6 +74,10 @@ class Quasars : public StelObjectModule
 		   WRITE setFlagShowQuasars
 		   NOTIFY flagQuasarsVisibilityChanged
 		   )
+	Q_PROPERTY(Vec3f quasarsColor
+		   READ getMarkerColor
+		   WRITE setMarkerColor
+		   NOTIFY quasarsColorChanged)
 public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -182,6 +186,7 @@ signals:
 	void jsonUpdateComplete(void);
 
 	void flagQuasarsVisibilityChanged(bool b);
+	void quasarsColorChanged(Vec3f);
 
 public slots:
 	//! Download JSON from web recources described in the module section of the

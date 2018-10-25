@@ -106,7 +106,7 @@ public:
 	bool initComplete(void) const;
 
 #ifdef ENABLE_SCRIPT_CONSOLE
-	ScriptConsole* getScriptConsole() {return scriptConsole;}
+	ScriptConsole* getScriptConsole() const {return scriptConsole;}
 #endif
 
 	//! Used to force a refreshing of the GUI elements such as the button bars.
@@ -116,7 +116,7 @@ public:
 
 	virtual bool getVisible() const;
 
-	virtual bool getAstroCalcVisible();
+	virtual bool getAstroCalcVisible() const;
 
 	virtual bool isCurrentlyUsed() const;
 	
@@ -271,7 +271,7 @@ private slots:
 
 private:
 	//! convenience method to find an action in the StelActionMgr.
-	StelAction* getAction(const QString& actionName);
+	StelAction* getAction(const QString& actionName) const;
 
 	QGraphicsWidget* topLevelGraphicsWidget;
 

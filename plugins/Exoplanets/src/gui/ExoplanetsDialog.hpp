@@ -78,7 +78,6 @@ private:
 	void setInfoHtml(void);
 	void setWebsitesHtml(void);
 	void updateGuiFromSettings(void);
-	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
 
 	typedef QPair<QString, int> axisPair;

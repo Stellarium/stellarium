@@ -103,8 +103,8 @@ void PulsarsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	colorButton(ui->pulsarMarkerColor,		psr->getMarkerColor(true));
-	colorButton(ui->pulsarGlitchesMarkerColor,	psr->getMarkerColor(false));
+	connectColorButton(ui->pulsarMarkerColor,		"Pulsars.markerColor");
+	connectColorButton(ui->pulsarGlitchesMarkerColor,	"Pulsars.glitchColor");
 
 	connect(ui->pulsarMarkerColor,		SIGNAL(released()), this, SLOT(askPulsarsMarkerColor()));
 	connect(ui->pulsarGlitchesMarkerColor,	SIGNAL(released()), this, SLOT(askPulsarGlitchesMarkerColor()));
@@ -320,38 +320,28 @@ void PulsarsDialog::updateJSON(void)
 
 void PulsarsDialog::askPulsarsMarkerColor()
 {
-	Vec3f vColor = psr->getMarkerColor(true);
+	Vec3f vColor = psr->getMarkerColor();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
 	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->pulsarMarkerColor->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		psr->setMarkerColor(vColor, true);
+		psr->setMarkerColor(vColor);
 		ui->pulsarMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 
 void PulsarsDialog::askPulsarGlitchesMarkerColor()
 {
-	Vec3f vColor = psr->getMarkerColor(false);
+	Vec3f vColor = psr->getGlitchColor();
 	QColor color(0,0,0);
 	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
 	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(ui->pulsarGlitchesMarkerColor->toolTip()));
 	if (c.isValid())
 	{
 		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
-		psr->setMarkerColor(vColor, false);
+		psr->setGlitchColor(vColor);
 		ui->pulsarGlitchesMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
-
-void PulsarsDialog::colorButton(QToolButton* toolButton, Vec3f vColor)
-{
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	// Use style sheet for create a nice buttons :)
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
-}
-

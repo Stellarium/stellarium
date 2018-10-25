@@ -37,6 +37,7 @@
 #include <QDoubleSpinBox>
 #include <QLineEdit>
 #include <QScroller>
+#include <QToolButton>
 
 StelDialog::StelDialog(QString dialogName, QObject* parent)
 	: QObject(parent)
@@ -269,6 +270,18 @@ void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &p
 
 	new QAbstractButtonStelPropertyConnectionHelper(prop,checkBox);
 }
+
+void StelDialog::connectColorButton(QToolButton* toolButton, QString propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Vec3f vColor = prop->getValue().value<Vec3f>();
+	QColor color(0,0,0);
+	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	// Use style sheet to create a nice button :)
+	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
+	toolButton->setFixedSize(QSize(18, 18));
+}
+
 
 void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
 {

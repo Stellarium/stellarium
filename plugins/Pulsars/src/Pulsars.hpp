@@ -77,8 +77,18 @@ class Pulsars : public StelObjectModule
 		   READ getFlagShowPulsars
 		   WRITE setFlagShowPulsars
 		   NOTIFY flagPulsarsVisibilityChanged
-		   )	
-public:	
+		   )
+	Q_PROPERTY(Vec3f markerColor
+		   READ getMarkerColor
+		   WRITE setMarkerColor
+		   NOTIFY markerColorChanged
+		   )
+	Q_PROPERTY(Vec3f glitchColor
+		   READ getGlitchColor
+		   WRITE setGlitchColor
+		   NOTIFY glitchColorChanged
+		   )
+public:
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
 	enum UpdateState {
@@ -184,6 +194,8 @@ signals:
 
 	void flagPulsarsVisibilityChanged(bool b);
 	void flagUsingFilterChanged(bool b);
+	void markerColorChanged(Vec3f);
+	void glitchColorChanged(Vec3f);
 
 public slots:
 	//! Define whether the button toggling pulsars should be visible
@@ -202,25 +214,25 @@ public slots:
 	void setFilteredMode(bool b);
 	//! Get status to usage display filter of pulsars
 	//! @return true if it's visible
-	bool getFilteredMode(void);
+	bool getFilteredMode(void) const;
 
 	//! Set value for filter
 	//! @param v float value
 	void setFilterValue(float v);
 	//! Get value for filter
 	//! @return value
-	float getFilterValue(void);
+	float getFilterValue(void) const;
 
 	//! Get status to display of distribution of pulsars
 	//! @return true if distribution of pulsars is enabled
-	bool getDisplayMode(void);
+	bool getDisplayMode(void) const;
 	//! Enable/disable display of distribution of pulsars
 	//! @param b
 	void setDisplayMode(bool b);
 
 	//! Get status for usage of separate color for pulsars with glitches
 	//! @return true if separate color is used for pulsars with glitches
-	bool getGlitchFlag(void);
+	bool getGlitchFlag(void) const;
 	//! Enable/disable the use of a separate color for pulsars with glitches
 	//! @param boolean flag
 	void setGlitchFlag(bool b);
@@ -228,7 +240,7 @@ public slots:
 	//! Get color for pulsars markers
 	//! @param mtype set false if you want get color of pulsars with glitches
 	//! @return color
-	Vec3f getMarkerColor(bool mtype = true);
+	Vec3f getMarkerColor() const;
 	//! Set color for pulsars markers
 	//! @param c color
 	//! @param mtype set false if you want set color for pulsars with glitches
@@ -236,11 +248,23 @@ public slots:
 	//! // example of usage in scripts
 	//! Pulsars.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
 	//! @endcode
-	void setMarkerColor(const Vec3f& c, bool mtype = true);
+	void setMarkerColor(const Vec3f& c);
+
+	//! Get marker color for pulsars with glitches
+	//! @param mtype set false if you want get color of pulsars with glitches
+	//! @return color
+	Vec3f getGlitchColor() const;
+	//! Set markers color for pulsars with glitches
+	//! @param c color
+	//! @code
+	//! // example of usage in scripts
+	//! Pulsars.setGlitchColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setGlitchColor(const Vec3f& c);
 
 	//! Get count of pulsars from catalog
 	//! @return count of pulsars
-	int getCountPulsars(void) {return PsrCount;}
+	int getCountPulsars(void) const {return PsrCount;}
 
 	//! Download JSON from web recources described in the module section of the
 	//! module.ini file and update the local JSON file.

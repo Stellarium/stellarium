@@ -1597,7 +1597,7 @@ void StelMainView::doScreenshot(void)
 	}
 }
 
-QPoint StelMainView::getMousePos()
+QPoint StelMainView::getMousePos() const
 {
 	return glWidget->mapFromGlobal(QCursor::pos());
 }

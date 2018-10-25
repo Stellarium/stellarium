@@ -372,13 +372,13 @@ public:
 	//! Get designation for latest selected DSO with priority
 	//! @note using for bookmarks feature as example
 	//! @return a designation
-	QString getLatestSelectedDSODesignation();
+	QString getLatestSelectedDSODesignation() const;
 
 	//! Get the list of all deep-sky objects.
 	const QVector<NebulaP>& getAllDeepSkyObjects() const { return dsoArray; }
 
 	//! Get the list of deep-sky objects by type.
-	QList<NebulaP> getDeepSkyObjectsByType(const QString& objType);
+	QList<NebulaP> getDeepSkyObjectsByType(const QString& objType) const;
 
 	///////////////////////////////////////////////////////////////////////////
 	// Properties setters and getters
@@ -940,31 +940,31 @@ private:
 	//! Draw a nice animated pointer around the object
 	void drawPointer(const StelCore* core, StelPainter& sPainter);
 
-	NebulaP searchDSO(unsigned int DSO);
-	NebulaP searchM(unsigned int M);
-	NebulaP searchNGC(unsigned int NGC);
-	NebulaP searchIC(unsigned int IC);
-	NebulaP searchC(unsigned int C);
-	NebulaP searchB(unsigned int B);
-	NebulaP searchSh2(unsigned int Sh2);
-	NebulaP searchVdB(unsigned int VdB);
-	NebulaP searchRCW(unsigned int RCW);
-	NebulaP searchLDN(unsigned int LDN);
-	NebulaP searchLBN(unsigned int LBN);
-	NebulaP searchCr(unsigned int Cr);
-	NebulaP searchMel(unsigned int Mel);
-	NebulaP searchPGC(unsigned int PGC);
-	NebulaP searchUGC(unsigned int UGC);
-	NebulaP searchCed(QString Ced);	
-	NebulaP searchArp(unsigned int Arp);
-	NebulaP searchVV(unsigned int VV);
-	NebulaP searchPK(QString PK);
-	NebulaP searchPNG(QString PNG);
-	NebulaP searchSNRG(QString SNRG);
-	NebulaP searchACO(QString ACO);
-	NebulaP searchHCG(QString HCG);
-	NebulaP searchAbell(unsigned int Abell);
-	NebulaP searchESO(QString ESO);
+	NebulaP searchDSO(unsigned int DSO) const;
+	NebulaP searchM(unsigned int M) const;
+	NebulaP searchNGC(unsigned int NGC) const;
+	NebulaP searchIC(unsigned int IC) const;
+	NebulaP searchC(unsigned int C) const;
+	NebulaP searchB(unsigned int B) const;
+	NebulaP searchSh2(unsigned int Sh2) const;
+	NebulaP searchVdB(unsigned int VdB) const;
+	NebulaP searchRCW(unsigned int RCW) const;
+	NebulaP searchLDN(unsigned int LDN) const;
+	NebulaP searchLBN(unsigned int LBN) const;
+	NebulaP searchCr(unsigned int Cr) const;
+	NebulaP searchMel(unsigned int Mel) const;
+	NebulaP searchPGC(unsigned int PGC) const;
+	NebulaP searchUGC(unsigned int UGC) const;
+	NebulaP searchCed(QString Ced) const;
+	NebulaP searchArp(unsigned int Arp) const;
+	NebulaP searchVV(unsigned int VV) const;
+	NebulaP searchPK(QString PK) const;
+	NebulaP searchPNG(QString PNG) const;
+	NebulaP searchSNRG(QString SNRG) const;
+	NebulaP searchACO(QString ACO) const;
+	NebulaP searchHCG(QString HCG) const;
+	NebulaP searchAbell(unsigned int Abell) const;
+	NebulaP searchESO(QString ESO) const;
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

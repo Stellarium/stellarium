@@ -34,6 +34,7 @@ class QLineEdit;
 class QDoubleSpinBox;
 class QSlider;
 class StelAction;
+class QToolButton;
 
 //! Base class for all the GUI windows in Stellarium.
 //! 
@@ -103,7 +104,7 @@ public slots:
 	//! When a subclass needs a size-dependent update, implement such update in the subclass version,
 	//! but call StelDialog::handleDialogSizeChanged() first.
 	virtual void handleDialogSizeChanged(QSizeF size);
-	QString getDialogName(){return dialogName;}
+	QString getDialogName() const {return dialogName;}
 signals:
 	void visibleChanged(bool);
 
@@ -157,6 +158,12 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectBoolProperty(QAbstractButton* checkBox, const QString& propName);
+	//! Helper function to connect a color swatch to a StelProperty
+	//! @param toolButton the QToolButton which shows the color
+	//! @param propName a StelProperty name which must represent a color (coded as Vec3f)
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectColorButton(QToolButton *toolButton, QString propName);
 
 	//! The main dialog
 	QWidget* dialog;

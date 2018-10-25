@@ -121,7 +121,7 @@ public:
 
 	//! Get the zoom speed
 	// TODO: what are the units?
-	double getZoomSpeed() {return keyZoomSpeed;}
+	double getZoomSpeed() const {return keyZoomSpeed;}
 
 	//! Return the current up view vector in J2000 coordinates.
 	Vec3d getViewUpVectorJ2000() const;
@@ -169,7 +169,7 @@ public slots:
 	//! Set whether auto zoom out will reset the viewing direction to the inital value
 	void setFlagAutoZoomOutResetsDirection(bool b) {if (flagAutoZoomOutResetsDirection != b) { flagAutoZoomOutResetsDirection = b; emit flagAutoZoomOutResetsDirectionChanged(b);}}
 	//! Get whether auto zoom out will reset the viewing direction to the inital value
-	bool getFlagAutoZoomOutResetsDirection(void) {return flagAutoZoomOutResetsDirection;}
+	bool getFlagAutoZoomOutResetsDirection(void) const {return flagAutoZoomOutResetsDirection;}
 
 	//! Get whether keys can control zoom
 	bool getFlagEnableZoomKeys() const {return flagEnableZoomKeys;}
@@ -236,7 +236,7 @@ public slots:
 	void setInitFov(double fov);
 
 	//! Return the inital viewing direction in altazimuthal coordinates
-	const Vec3d getInitViewingDirection() {return initViewPos;}
+	const Vec3d getInitViewingDirection() const {return initViewPos;}
 	//! Sets the initial direction of view to the current altitude and azimuth.
 	//! Note: Updates the configuration file.
 	void setInitViewDirectionToCurrent();

@@ -826,6 +826,7 @@ Vec3f Quasars::getMarkerColor()
 void Quasars::setMarkerColor(const Vec3f &c)
 {
 	Quasar::markerColor = c;
+	emit quasarsColorChanged(c);
 }
 
 void Quasars::reloadCatalog(void)

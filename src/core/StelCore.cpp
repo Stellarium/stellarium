@@ -611,7 +611,7 @@ void StelCore::setFlagGravityLabels(bool gravity)
 	emit flagGravityLabelsChanged(gravity);
 }
 
-bool StelCore::getFlagGravityLabels()
+bool StelCore::getFlagGravityLabels() const
 {
 	return currentProjectorParams.gravityLabels;
 }
@@ -1424,7 +1424,7 @@ bool StelCore::getIsTimeNow(void) const
 	return previousResult;
 }
 
-QTime StelCore::getInitTodayTime(void)
+QTime StelCore::getInitTodayTime(void) const
 {
 	return initTodayTime;
 }
@@ -1757,7 +1757,7 @@ double StelCore::getLocalSiderealYearLength() const
 	return position->getHomePlanet()->getSiderealPeriod();
 }
 
-QString StelCore::getStartupTimeMode()
+QString StelCore::getStartupTimeMode() const
 {
 	return startupTimeMode;
 }

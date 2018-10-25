@@ -906,7 +906,7 @@ QList<StelObjectP> NebulaMgr::searchAround(const Vec3d& av, double limitFov, con
 	return result;
 }
 
-NebulaP NebulaMgr::searchDSO(unsigned int DSO)
+NebulaP NebulaMgr::searchDSO(unsigned int DSO) const
 {
 	if (dsoIndex.contains(DSO))
 		return dsoIndex[DSO];
@@ -914,7 +914,7 @@ NebulaP NebulaMgr::searchDSO(unsigned int DSO)
 }
 
 
-NebulaP NebulaMgr::searchM(unsigned int M)
+NebulaP NebulaMgr::searchM(unsigned int M) const
 {
 	for (const auto& n : dsoArray)
 		if (n->M_nb == M)
@@ -922,7 +922,7 @@ NebulaP NebulaMgr::searchM(unsigned int M)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchNGC(unsigned int NGC)
+NebulaP NebulaMgr::searchNGC(unsigned int NGC) const
 {
 	for (const auto& n : dsoArray)
 		if (n->NGC_nb == NGC)
@@ -930,7 +930,7 @@ NebulaP NebulaMgr::searchNGC(unsigned int NGC)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchIC(unsigned int IC)
+NebulaP NebulaMgr::searchIC(unsigned int IC) const
 {
 	for (const auto& n : dsoArray)
 		if (n->IC_nb == IC)
@@ -938,7 +938,7 @@ NebulaP NebulaMgr::searchIC(unsigned int IC)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchC(unsigned int C)
+NebulaP NebulaMgr::searchC(unsigned int C) const
 {
 	for (const auto& n : dsoArray)
 		if (n->C_nb == C)
@@ -946,7 +946,7 @@ NebulaP NebulaMgr::searchC(unsigned int C)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchB(unsigned int B)
+NebulaP NebulaMgr::searchB(unsigned int B) const
 {
 	for (const auto& n : dsoArray)
 		if (n->B_nb == B)
@@ -954,7 +954,7 @@ NebulaP NebulaMgr::searchB(unsigned int B)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchSh2(unsigned int Sh2)
+NebulaP NebulaMgr::searchSh2(unsigned int Sh2) const
 {
 	for (const auto& n : dsoArray)
 		if (n->Sh2_nb == Sh2)
@@ -962,7 +962,7 @@ NebulaP NebulaMgr::searchSh2(unsigned int Sh2)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchVdB(unsigned int VdB)
+NebulaP NebulaMgr::searchVdB(unsigned int VdB) const
 {
 	for (const auto& n : dsoArray)
 		if (n->VdB_nb == VdB)
@@ -970,7 +970,7 @@ NebulaP NebulaMgr::searchVdB(unsigned int VdB)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchRCW(unsigned int RCW)
+NebulaP NebulaMgr::searchRCW(unsigned int RCW) const
 {
 	for (const auto& n : dsoArray)
 		if (n->RCW_nb == RCW)
@@ -978,7 +978,7 @@ NebulaP NebulaMgr::searchRCW(unsigned int RCW)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchLDN(unsigned int LDN)
+NebulaP NebulaMgr::searchLDN(unsigned int LDN) const
 {
 	for (const auto& n : dsoArray)
 		if (n->LDN_nb == LDN)
@@ -986,7 +986,7 @@ NebulaP NebulaMgr::searchLDN(unsigned int LDN)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchLBN(unsigned int LBN)
+NebulaP NebulaMgr::searchLBN(unsigned int LBN) const
 {
 	for (const auto& n : dsoArray)
 		if (n->LBN_nb == LBN)
@@ -994,7 +994,7 @@ NebulaP NebulaMgr::searchLBN(unsigned int LBN)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchCr(unsigned int Cr)
+NebulaP NebulaMgr::searchCr(unsigned int Cr) const
 {
 	for (const auto& n : dsoArray)
 		if (n->Cr_nb == Cr)
@@ -1002,7 +1002,7 @@ NebulaP NebulaMgr::searchCr(unsigned int Cr)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchMel(unsigned int Mel)
+NebulaP NebulaMgr::searchMel(unsigned int Mel) const
 {
 	for (const auto& n : dsoArray)
 		if (n->Mel_nb == Mel)
@@ -1010,7 +1010,7 @@ NebulaP NebulaMgr::searchMel(unsigned int Mel)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchPGC(unsigned int PGC)
+NebulaP NebulaMgr::searchPGC(unsigned int PGC) const
 {
 	for (const auto& n : dsoArray)
 		if (n->PGC_nb == PGC)
@@ -1018,7 +1018,7 @@ NebulaP NebulaMgr::searchPGC(unsigned int PGC)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchUGC(unsigned int UGC)
+NebulaP NebulaMgr::searchUGC(unsigned int UGC) const
 {
 	for (const auto& n : dsoArray)
 		if (n->UGC_nb == UGC)
@@ -1026,7 +1026,7 @@ NebulaP NebulaMgr::searchUGC(unsigned int UGC)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchCed(QString Ced)
+NebulaP NebulaMgr::searchCed(QString Ced) const
 {
 	for (const auto& n : dsoArray)
 		if (n->Ced_nb.trimmed().toUpper() == Ced.trimmed().toUpper())
@@ -1034,7 +1034,7 @@ NebulaP NebulaMgr::searchCed(QString Ced)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchArp(unsigned int Arp)
+NebulaP NebulaMgr::searchArp(unsigned int Arp) const
 {
 	for (const auto& n : dsoArray)
 		if (n->Arp_nb == Arp)
@@ -1042,7 +1042,7 @@ NebulaP NebulaMgr::searchArp(unsigned int Arp)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchVV(unsigned int VV)
+NebulaP NebulaMgr::searchVV(unsigned int VV) const
 {
 	for (const auto& n : dsoArray)
 		if (n->VV_nb == VV)
@@ -1050,7 +1050,7 @@ NebulaP NebulaMgr::searchVV(unsigned int VV)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchPK(QString PK)
+NebulaP NebulaMgr::searchPK(QString PK) const
 {
 	for (const auto& n : dsoArray)
 		if (n->PK_nb.trimmed().toUpper() == PK.trimmed().toUpper())
@@ -1058,7 +1058,7 @@ NebulaP NebulaMgr::searchPK(QString PK)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchPNG(QString PNG)
+NebulaP NebulaMgr::searchPNG(QString PNG) const
 {
 	for (const auto& n : dsoArray)
 		if (n->PNG_nb.trimmed().toUpper() == PNG.trimmed().toUpper())
@@ -1066,7 +1066,7 @@ NebulaP NebulaMgr::searchPNG(QString PNG)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchSNRG(QString SNRG)
+NebulaP NebulaMgr::searchSNRG(QString SNRG) const
 {
 	for (const auto& n : dsoArray)
 		if (n->SNRG_nb.trimmed().toUpper() == SNRG.trimmed().toUpper())
@@ -1074,7 +1074,7 @@ NebulaP NebulaMgr::searchSNRG(QString SNRG)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchACO(QString ACO)
+NebulaP NebulaMgr::searchACO(QString ACO) const
 {
 	for (const auto& n : dsoArray)
 		if (n->ACO_nb.trimmed().toUpper() == ACO.trimmed().toUpper())
@@ -1082,7 +1082,7 @@ NebulaP NebulaMgr::searchACO(QString ACO)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchHCG(QString HCG)
+NebulaP NebulaMgr::searchHCG(QString HCG) const
 {
 	for (const auto& n : dsoArray)
 		if (n->HCG_nb.trimmed().toUpper() == HCG.trimmed().toUpper())
@@ -1090,7 +1090,7 @@ NebulaP NebulaMgr::searchHCG(QString HCG)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchAbell(unsigned int Abell)
+NebulaP NebulaMgr::searchAbell(unsigned int Abell) const
 {
 	for (const auto& n : dsoArray)
 		if (n->Abell_nb == Abell)
@@ -1098,7 +1098,7 @@ NebulaP NebulaMgr::searchAbell(unsigned int Abell)
 	return NebulaP();
 }
 
-NebulaP NebulaMgr::searchESO(QString ESO)
+NebulaP NebulaMgr::searchESO(QString ESO) const
 {
 	for (const auto& n : dsoArray)
 		if (n->ESO_nb.trimmed().toUpper() == ESO.trimmed().toUpper())
@@ -1106,7 +1106,7 @@ NebulaP NebulaMgr::searchESO(QString ESO)
 	return NebulaP();
 }
 
-QString NebulaMgr::getLatestSelectedDSODesignation()
+QString NebulaMgr::getLatestSelectedDSODesignation() const
 {
 	QString result = "";
 
@@ -3156,7 +3156,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 	return result;
 }
 
-QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType)
+QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 {
 	QList<NebulaP> dso;
 	int type = objType.toInt();

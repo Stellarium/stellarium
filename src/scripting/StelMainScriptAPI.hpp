@@ -95,7 +95,7 @@ public slots:
 	//! @param spec if "utc", the returned string's timezone is UTC,
 	//! else it is local time.
 	//! @return the current simulation time.
-	QString getDate(const QString& spec="utc");
+	QString getDate(const QString& spec="utc") const;
 
 	//! get the DeltaT for the simulation date and time as a string
 	//! in HMS format, e.g. "0h1m68.2s"
@@ -129,14 +129,14 @@ public slots:
 	//! Get the simulation time and rate state - is it "real time"
 	//! @return true if the time rate is normal, and the simulation time
 	//! is real time, else return false
-	bool isRealTime();
+	bool isRealTime() const;
 
 	//! Set the simulation time to the current system time, and the time rate to 1
 	void setRealTime();
 
 	//! Get the type of calculations in the simulation - is it "planetocentric calculations" or not
 	//! @return true if the calculations is planetocentric (geocentric on Earth), else return false
-	bool isPlanetocentricCalculations();
+	bool isPlanetocentricCalculations() const;
 
 	//! Set the flag for use planetocentric calculations
 	void setPlanetocentricCalculations(bool f);
@@ -146,18 +146,18 @@ public slots:
 	//! If the name is "", any currently selected objects will be
 	//! de-selected.
 	//! @param pointer whether or not to have the selection pointer enabled
-	void selectObjectByName(const QString& name, bool pointer=false);
+	void selectObjectByName(const QString& name, bool pointer=false) const;
 
 	//! Select a constellation by name
 	//! @param name the name of the constellation to select (english)
-	void selectConstellationByName(const QString& name);
+	void selectConstellationByName(const QString& name) const;
 
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
 	//! @return a map of object data, exactly like getObjectInfo().
 	//! @deprecated Use getObjectInfo()
-	QVariantMap getObjectPosition(const QString& name);
+	QVariantMap getObjectPosition(const QString& name) const;
 
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
@@ -204,11 +204,11 @@ public slots:
 	//! map=core.getSelectedObjectInfo();
 	//! core.output(core.mapToString(map));
 	//! @endcode
-	QVariantMap getObjectInfo(const QString& name);
+	QVariantMap getObjectInfo(const QString& name) const;
 
 	//! Fetch a map with data about the latest selected object's position, magnitude and so on
 	//! @return a map of object data.  See description for getObjectInfo(const QString& name);
-	QVariantMap getSelectedObjectInfo();
+	QVariantMap getSelectedObjectInfo() const;
 
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
@@ -224,30 +224,30 @@ public slots:
 	//! Get the current viewing direction altitude angle at center of view.
 	//! @return the altitude angle in decimal degrees.
 	//! 0 is horizon, zenith is 180, nadir = -180.
-	double getViewAltitudeAngle();
+	double getViewAltitudeAngle() const;
 
 	//! Get the current viewing direction azimuth angle at center of view.
 	//! @return the azimuth angle in decimal degrees as a compass bearing
 	//! i.e.  0 is North, 90 is East, 180 is South, 270 is West.
-	double getViewAzimuthAngle();
+	double getViewAzimuthAngle() const;
 
 	//! Get the current viewing direction Right Ascension at center of view.
 	//! @return the Right Ascension angle in decimal degrees.
 	//! The value returned falls in the range 0 .. 360
-	double getViewRaAngle();
+	double getViewRaAngle() const;
 
 	//! Get the current viewing direction Declination angle at center of view.
 	//! @return the Declination angle in decimal degrees.
 	//! The value returned falls in the range -180 .. 180
-	double getViewDecAngle();
+	double getViewDecAngle() const;
 
 	//! Get the current viewing direction Right Ascension in J2000 frame at center of view.
 	//! @return the Right Ascension angle in J2000 frame in decimal degrees.
-	double getViewRaJ2000Angle();
+	double getViewRaJ2000Angle() const;
 
 	//! Get the current viewing direction Declination angle in J2000 frame at center of view.
 	//! @return the Declination angle in J2000 frame in decimal degrees.
-	double getViewDecJ2000Angle();
+	double getViewDecJ2000Angle() const;
 
 	//! move the current viewing direction to some specified altitude and azimuth.
 	//! The move will run in AltAz coordinates. This will look different from moveToRaDec() when timelapse is fast.
@@ -299,7 +299,7 @@ public slots:
 	void setObserverLocation(const QString id, float duration=1.);
 
 	//! Get the ID of the current observer location.
-	QString getObserverLocation();
+	QString getObserverLocation() const;
 
 	//! Get the info of the current observer location.
 	//! @return a map of object data.  Keys:
@@ -315,7 +315,7 @@ public slots:
 	//! - local-sidereal-time-hms : local sidereal time on the planet in hours in HMS format (since 0.13.3)
 	//! - timezone : IANA timezone or "LMST" (Local Mean Solar Time) or "LTST" (Local True Solar Time) (since 0.18.3)
 	//! - location-timezone : IANA timezone of current location (as stored in location database) (since 0.18.3)
-	QVariantMap getObserverLocationInfo();
+	QVariantMap getObserverLocationInfo() const;
 
 	//! set timezone name. This only changes the currently used timezone (in StelCore).
 	//! Location (database) timezone will not be touched.
@@ -325,7 +325,7 @@ public slots:
 	void setTimezone(QString tz);
 
 	//! Return an array of all timezone names valid for setTimezone(tzName)
-	QStringList getAllTimezoneNames();
+	QStringList getAllTimezoneNames() const;
 
 	//! Save a screenshot.
 	//! @param prefix the prefix for the file name to use
@@ -349,7 +349,7 @@ public slots:
 
 	//! Get the current minimum frames per second.
 	//! @return The current minimum frames per second setting.
-	float getMinFps();
+	float getMinFps() const;
 
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
@@ -357,11 +357,11 @@ public slots:
 
 	//! Get the current maximum frames per second.
 	//! @return The current maximum frames per second setting.
-	float getMaxFps();
+	float getMaxFps() const;
 
 	//! Get the mount mode as a string
 	//! @return "equatorial" or "azimuthal"
-	QString getMountMode();
+	QString getMountMode() const;
 
 	//! Set the mount mode
 	//! @param mode should be "equatorial" or "azimuthal"
@@ -369,7 +369,7 @@ public slots:
 
 	//! Get the current status of Night Mode
 	//! @return true if night mode is currently set
-	bool getNightMode();
+	bool getNightMode() const;
 
 	//! Set the status of Night Mode
 	//! @param b if true, set Night Mode, else set Normal Mode
@@ -378,7 +378,7 @@ public slots:
 	//! Get the current projection mode ID string
 	//! @return the string which identifies the current projection mode.
 	//! For a list of possibl results, see setProjectionMode();
-	QString getProjectionMode();
+	QString getProjectionMode() const;
 
 	//! Set the current projection mode
 	//! @param id the name of the projection mode to use, e.g. "ProjectionPerspective" and so on.
@@ -397,7 +397,7 @@ public slots:
 
 	//! Get the status of the disk viewport
 	//! @return true if the disk view port is currently enabled
-	bool getDiskViewport();
+	bool getDiskViewport() const;
 
 	//! Set the disk viewport
 	//! @param b if true, sets the disk viewport on, else sets it off
@@ -422,12 +422,12 @@ public slots:
 
 	//! Get a list of Sky Culture IDs
 	//! @return a list of valid sky culture IDs
-	QStringList getAllSkyCultureIDs();
+	QStringList getAllSkyCultureIDs() const;
 
 	//! Find out the current sky culture
 	//! @return the ID of the current sky culture (i.e. the name of the directory in
 	//! which the curret sky cultures files are found, e.g. "western")
-	QString getSkyCulture();
+	QString getSkyCulture() const;
 
 	//! Set the current sky culture
 	//! @param id the ID of the sky culture to set, e.g. western or inuit etc.
@@ -435,15 +435,15 @@ public slots:
 
 	//! Find out the current sky culture and get it English name
 	//! @return the English name of the current sky culture
-	QString getSkyCultureName();
+	QString getSkyCultureName() const;
 
 	//! Find out the current sky culture and get it localized name
 	//! @return the translated name of the current sky culture
-	QString getSkyCultureNameI18n();
+	QString getSkyCultureNameI18n() const;
 
 	//! Get the current status of the gravity labels option
 	//! @return true if gravity labels are enabled, else false
-	bool getFlagGravityLabels();
+	bool getFlagGravityLabels() const;
 
 	//! Turn on/off gravity labels
 	//! @param b if true, turn on gravity labels, else turn them off
@@ -575,7 +575,7 @@ public slots:
 	//! @return a map of object data.  Keys:
 	//! - x : x coordinate on the screen
 	//! - y : y coordinate on the screen
-	QVariantMap getScreenXYFromAltAzi(const QString& alt, const QString& azi);
+	QVariantMap getScreenXYFromAltAzi(const QString& alt, const QString& azi) const;
 
 	//! Load a sound from a file.
 	//! @param filename the name of the file to load.
@@ -606,12 +606,12 @@ public slots:
 	//! Get position in a playing sound.
 	//! @param id the identifier used when loadSound was called
 	//! @return position [ms] during play or pause, 0 when stopped, -1 in case of error.
-	qint64 getSoundPosition(const QString& id);
+	qint64 getSoundPosition(const QString& id) const;
 
 	//! Get duration of a sound object (if possible).
 	//! @param id the identifier used when loadSound was called
 	//! @return duration[ms] if known, 0 if unknown (e.g. during load/before playing), -1 in case of error.
-	qint64 getSoundDuration(const QString& id);
+	qint64 getSoundDuration(const QString& id) const;
 
 
 	//! Load a video from a file.
@@ -696,22 +696,22 @@ public slots:
 
 	//! Get the duration of a loaded video, or -1
 	//! @param id the identifier used when loadVideo() was called
-	qint64 getVideoDuration(const QString& id);
+	qint64 getVideoDuration(const QString& id) const;
 
 	//! Get the current position of a loaded video, or -1
 	//! @param id the identifier used when loadVideo() was called
-	qint64 getVideoPosition(const QString& id);
+	qint64 getVideoPosition(const QString& id) const;
 
 	//! Get the screen width in pixels.
 	//! @return The screen width (actually, width of Stellarium main view) in pixels
-	int getScreenWidth();
+	int getScreenWidth() const;
 	//! Get the screen height (actually, height of Stellarium main view) in pixels.
 	//! @return The screen height in pixels
-	int getScreenHeight();
+	int getScreenHeight() const;
 
 	//! Get the script execution rate as a multiple of normal execution speed
 	//! @return the current script execution rate.
-	double getScriptRate();
+	double getScriptRate() const;
 	//! Set the script execution rate as a multiple of normal execution speed
 	//! @param r the multiple of the normal script execution speed, i.e.
 	//! if 5 is passed the script will execute 5 times faster than it would
@@ -747,7 +747,7 @@ public slots:
 	//! @param map QVariantMap e.g. from getObjectInfo() or getLocationInfo()
 	//! @note string values are surrounded with ", simple numeric types are printed as themselves.
 	//! @note More complicated value types like lists are only indicated by their type name. You must extract those (and their contents) yourself.
-	QString mapToString(const QVariantMap &map) const;
+	static QString mapToString(const QVariantMap &map);
 
 	//! Reset (clear) output file
 	void resetOutput(void) const;
@@ -822,14 +822,14 @@ public slots:
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @returns Julian day.
-	double jdFromDateString(const QString& dt, const QString& spec);
+	static double jdFromDateString(const QString& dt, const QString& spec);
 
 	// Methods wait() and waitFor() were added for documentation.
 	// Details: https://bugs.launchpad.net/stellarium/+bug/1402200
 	// re-implemented for 0.15.1 to avoid a busy-loop.
 	//! Pauses the script for \e t seconds
 	//! @param t the number of seconds to wait
-	void wait(double t);
+	void wait(double t) const;
 
 	//! Waits until a specified simulation date/time. This function
 	//! will take into account the rate (and direction) in which simulation
@@ -839,12 +839,12 @@ public slots:
 	//! prevent infinite wait time.
 	//! @param dt the date string to use, format like "2012-06-06T4:44:00" or "-1428-03-04T22:23:45"
 	//! @param spec "local" or "utc"
-	void waitFor(const QString& dt, const QString& spec="utc");
+	void waitFor(const QString& dt, const QString& spec="utc") const;
 
 	//! Retrieve value of environment variable @param name.
 	//! On desktop Windows and Qt before 5.10, this call may result in data loss if the original
 	//! string contains Unicode characters not representable in the ANSI encoding.
-	QString getEnv(const QString& var);
+	static QString getEnv(const QString& var);
 
 signals:
 

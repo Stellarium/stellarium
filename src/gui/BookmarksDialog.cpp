@@ -467,7 +467,7 @@ void BookmarksDialog::exportBookmarks()
 	bookmarksJsonPath = originalBookmarksFile;
 }
 
-void BookmarksDialog::saveBookmarks()
+void BookmarksDialog::saveBookmarks() const
 {
 	if (bookmarksJsonPath.isEmpty())
 	{

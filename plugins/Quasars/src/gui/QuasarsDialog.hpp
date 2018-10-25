@@ -67,7 +67,6 @@ private:
 	Quasars* qsr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
-	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
 
 };

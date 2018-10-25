@@ -70,9 +70,7 @@ private:
 	Pulsars* psr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
-	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
-
 };
 
 #endif // PULSARSDIALOG_HPP

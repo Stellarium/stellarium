@@ -67,26 +67,26 @@ void ConfigureOrbitColorsDialog::createDialogContent()
 	connect(ui->groupsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 	connect(ui->majorPlanetsRadioButton, SIGNAL(clicked(bool)), this, SLOT(setColorStyle()));
 
-	colorButton(ui->colorGenericOrbits,		"SolarSystem.orbitsColor");
-	colorButton(ui->colorGroupsMajorPlanetsOrbits,	"SolarSystem.majorPlanetsOrbitsColor");
-	colorButton(ui->colorGroupsMinorPlanetsOrbits,	"SolarSystem.minorPlanetsOrbitsColor");
-	colorButton(ui->colorGroupsDwarfPlanetsOrbits,	"SolarSystem.dwarfPlanetsOrbitsColor");
-	colorButton(ui->colorGroupsMoonsOrbits,		"SolarSystem.moonsOrbitsColor");
-	colorButton(ui->colorGroupsCubewanosOrbits,	"SolarSystem.cubewanosOrbitsColor");
-	colorButton(ui->colorGroupsPlutinosOrbits,	"SolarSystem.plutinosOrbitsColor");
-	colorButton(ui->colorGroupsSDOOrbits,		"SolarSystem.scatteredDiskObjectsOrbitsColor");
-	colorButton(ui->colorGroupsOCOOrbits,		"SolarSystem.oortCloudObjectsOrbitsColor");
-	colorButton(ui->colorGroupsCometsOrbits,	"SolarSystem.cometsOrbitsColor");
-	colorButton(ui->colorGroupsSednoidsOrbits,	"SolarSystem.sednoidsOrbitsColor");
-	colorButton(ui->colorGroupsInterstellarOrbits,	"SolarSystem.interstellarOrbitsColor");
-	colorButton(ui->colorMPMercuryOrbit,		"SolarSystem.mercuryOrbitColor");
-	colorButton(ui->colorMPVenusOrbit,		"SolarSystem.venusOrbitColor");
-	colorButton(ui->colorMPEarthOrbit,		"SolarSystem.earthOrbitColor");
-	colorButton(ui->colorMPMarsOrbit,		"SolarSystem.marsOrbitColor");
-	colorButton(ui->colorMPJupiterOrbit,		"SolarSystem.jupiterOrbitColor");
-	colorButton(ui->colorMPSaturnOrbit,		"SolarSystem.saturnOrbitColor");
-	colorButton(ui->colorMPUranusOrbit,		"SolarSystem.uranusOrbitColor");
-	colorButton(ui->colorMPNeptuneOrbit,		"SolarSystem.neptuneOrbitColor");
+	connectColorButton(ui->colorGenericOrbits,		"SolarSystem.orbitsColor");
+	connectColorButton(ui->colorGroupsMajorPlanetsOrbits,	"SolarSystem.majorPlanetsOrbitsColor");
+	connectColorButton(ui->colorGroupsMinorPlanetsOrbits,	"SolarSystem.minorPlanetsOrbitsColor");
+	connectColorButton(ui->colorGroupsDwarfPlanetsOrbits,	"SolarSystem.dwarfPlanetsOrbitsColor");
+	connectColorButton(ui->colorGroupsMoonsOrbits,		"SolarSystem.moonsOrbitsColor");
+	connectColorButton(ui->colorGroupsCubewanosOrbits,	"SolarSystem.cubewanosOrbitsColor");
+	connectColorButton(ui->colorGroupsPlutinosOrbits,	"SolarSystem.plutinosOrbitsColor");
+	connectColorButton(ui->colorGroupsSDOOrbits,		"SolarSystem.scatteredDiskObjectsOrbitsColor");
+	connectColorButton(ui->colorGroupsOCOOrbits,		"SolarSystem.oortCloudObjectsOrbitsColor");
+	connectColorButton(ui->colorGroupsCometsOrbits,	"SolarSystem.cometsOrbitsColor");
+	connectColorButton(ui->colorGroupsSednoidsOrbits,	"SolarSystem.sednoidsOrbitsColor");
+	connectColorButton(ui->colorGroupsInterstellarOrbits,	"SolarSystem.interstellarOrbitsColor");
+	connectColorButton(ui->colorMPMercuryOrbit,		"SolarSystem.mercuryOrbitColor");
+	connectColorButton(ui->colorMPVenusOrbit,		"SolarSystem.venusOrbitColor");
+	connectColorButton(ui->colorMPEarthOrbit,		"SolarSystem.earthOrbitColor");
+	connectColorButton(ui->colorMPMarsOrbit,		"SolarSystem.marsOrbitColor");
+	connectColorButton(ui->colorMPJupiterOrbit,		"SolarSystem.jupiterOrbitColor");
+	connectColorButton(ui->colorMPSaturnOrbit,		"SolarSystem.saturnOrbitColor");
+	connectColorButton(ui->colorMPUranusOrbit,		"SolarSystem.uranusOrbitColor");
+	connectColorButton(ui->colorMPNeptuneOrbit,		"SolarSystem.neptuneOrbitColor");
 
 	connect(ui->colorGenericOrbits,			SIGNAL(released()), this, SLOT(askGenericOrbitColor()));
 	connect(ui->colorGroupsMajorPlanetsOrbits,	SIGNAL(released()), this, SLOT(askMajorPlanetsGroupOrbitColor()));
@@ -122,18 +122,6 @@ void ConfigureOrbitColorsDialog::setColorStyle()
 
 	StelApp::getInstance().getModule("SolarSystem")->setProperty("orbitColorStyle", colorStyle);
 	StelApp::getInstance().getSettings()->setValue("astro/planets_orbits_color_style", colorStyle);
-}
-
-
-void ConfigureOrbitColorsDialog::colorButton(QToolButton* toolButton, QString propName)
-{
-	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
-	Vec3f vColor = prop->getValue().value<Vec3f>();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	// Use style sheet for create a nice buttons :)
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
 }
 
 void ConfigureOrbitColorsDialog::askGenericOrbitColor()

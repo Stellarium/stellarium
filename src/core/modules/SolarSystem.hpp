@@ -781,20 +781,20 @@ public slots:
 	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
 	void setFlagCustomGrsSettings(bool b);
 	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
-	bool getFlagCustomGrsSettings();
+	bool getFlagCustomGrsSettings() const;
 
 	//! Set longitude of Great Red Spot (System II is used)
 	//! @param longitude (degrees)
 	void setCustomGrsLongitude(int longitude);
 	//! Get longitude of Great Red Spot (System II is used)
 	//! @return a longitude (degrees)
-	int getCustomGrsLongitude();
+	int getCustomGrsLongitude() const;
 
 	//! Set speed of annual drift for Great Red Spot (System II is used)
 	//! @param annual drift (degrees)
 	void setCustomGrsDrift(double drift);
 	//! Get speed of annual drift for Great Red Spot (System II is used)
-	double getCustomGrsDrift();
+	double getCustomGrsDrift() const;
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
@@ -891,7 +891,7 @@ public:
 	PlanetP getMoon() const {return moon;}
 
 	//! Determine if a lunar eclipse is close at hand?
-	bool nearLunarEclipse();
+	bool nearLunarEclipse() const;
 
 	//! Get the list of all the planet english names
 	QStringList getAllPlanetEnglishNames() const;

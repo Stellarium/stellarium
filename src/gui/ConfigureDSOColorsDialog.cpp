@@ -55,42 +55,42 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
-	colorButton(ui->colorDSOLabels,				"NebulaMgr.labelsColor");
-	colorButton(ui->colorDSOMarkers,			"NebulaMgr.circlesColor");
-	colorButton(ui->colorDSOGalaxies,			"NebulaMgr.galaxiesColor");
-	colorButton(ui->colorDSOActiveGalaxies,			"NebulaMgr.activeGalaxiesColor");
-	colorButton(ui->colorDSORadioGalaxies,			"NebulaMgr.radioGalaxiesColor");
-	colorButton(ui->colorDSOInteractingGalaxies,		"NebulaMgr.interactingGalaxiesColor");
-	colorButton(ui->colorDSOQuasars,			"NebulaMgr.quasarsColor");
-	colorButton(ui->colorDSOPossibleQuasars,		"NebulaMgr.possibleQuasarsColor");
-	colorButton(ui->colorDSOStarClusters,			"NebulaMgr.clustersColor");
-	colorButton(ui->colorDSOOpenStarClusters,		"NebulaMgr.openClustersColor");
-	colorButton(ui->colorDSOGlobularStarClusters,		"NebulaMgr.globularClustersColor");
-	colorButton(ui->colorDSOStellarAssociations,		"NebulaMgr.stellarAssociationsColor");
-	colorButton(ui->colorDSOStarClouds,			"NebulaMgr.starCloudsColor");
-	colorButton(ui->colorDSOStars,				"NebulaMgr.starsColor");
-	colorButton(ui->colorDSOSymbioticStars,			"NebulaMgr.symbioticStarsColor");
-	colorButton(ui->colorDSOEmissionLineStars,		"NebulaMgr.emissionLineStarsColor");
-	colorButton(ui->colorDSONebulae,			"NebulaMgr.nebulaeColor");
-	colorButton(ui->colorDSOPlanetaryNebulae,		"NebulaMgr.planetaryNebulaeColor");
-	colorButton(ui->colorDSODarkNebulae,			"NebulaMgr.darkNebulaeColor");
-	colorButton(ui->colorDSOReflectionNebulae,		"NebulaMgr.reflectionNebulaeColor");
-	colorButton(ui->colorDSOBipolarNebulae,			"NebulaMgr.bipolarNebulaeColor");
-	colorButton(ui->colorDSOEmissionNebulae,		"NebulaMgr.emissionNebulaeColor");
-	colorButton(ui->colorDSONebulosityClusters,		"NebulaMgr.clusterWithNebulosityColor");
-	colorButton(ui->colorDSOPossiblePlanetaryNebulae,	"NebulaMgr.possiblePlanetaryNebulaeColor");
-	colorButton(ui->colorDSOProtoplanetaryNebulae,		"NebulaMgr.protoplanetaryNebulaeColor");
-	colorButton(ui->colorDSOHydrogenRegions,		"NebulaMgr.hydrogenRegionsColor");
-	colorButton(ui->colorDSOInterstellarMatter,		"NebulaMgr.interstellarMatterColor");
-	colorButton(ui->colorDSOEmissionObjects,		"NebulaMgr.emissionObjectsColor");
-	colorButton(ui->colorDSOMolecularClouds,		"NebulaMgr.molecularCloudsColor");
-	colorButton(ui->colorDSOBLLacObjects,			"NebulaMgr.blLacObjectsColor");
-	colorButton(ui->colorDSOBlazars,			"NebulaMgr.blazarsColor");
-	colorButton(ui->colorDSOYoungStellarObjects,		"NebulaMgr.youngStellarObjectsColor");
-	colorButton(ui->colorDSOSupernovaRemnants,		"NebulaMgr.supernovaRemnantsColor");
-	colorButton(ui->colorDSOSupernovaCandidates,		"NebulaMgr.supernovaCandidatesColor");
-	colorButton(ui->colorDSOSupernovaRemnantCandidates,	"NebulaMgr.supernovaRemnantCandidatesColor");
-	colorButton(ui->colorDSOGalaxyClusters,			"NebulaMgr.galaxyClustersColor");
+	connectColorButton(ui->colorDSOLabels,				"NebulaMgr.labelsColor");
+	connectColorButton(ui->colorDSOMarkers,			"NebulaMgr.circlesColor");
+	connectColorButton(ui->colorDSOGalaxies,			"NebulaMgr.galaxiesColor");
+	connectColorButton(ui->colorDSOActiveGalaxies,			"NebulaMgr.activeGalaxiesColor");
+	connectColorButton(ui->colorDSORadioGalaxies,			"NebulaMgr.radioGalaxiesColor");
+	connectColorButton(ui->colorDSOInteractingGalaxies,		"NebulaMgr.interactingGalaxiesColor");
+	connectColorButton(ui->colorDSOQuasars,			"NebulaMgr.quasarsColor");
+	connectColorButton(ui->colorDSOPossibleQuasars,		"NebulaMgr.possibleQuasarsColor");
+	connectColorButton(ui->colorDSOStarClusters,			"NebulaMgr.clustersColor");
+	connectColorButton(ui->colorDSOOpenStarClusters,		"NebulaMgr.openClustersColor");
+	connectColorButton(ui->colorDSOGlobularStarClusters,		"NebulaMgr.globularClustersColor");
+	connectColorButton(ui->colorDSOStellarAssociations,		"NebulaMgr.stellarAssociationsColor");
+	connectColorButton(ui->colorDSOStarClouds,			"NebulaMgr.starCloudsColor");
+	connectColorButton(ui->colorDSOStars,				"NebulaMgr.starsColor");
+	connectColorButton(ui->colorDSOSymbioticStars,			"NebulaMgr.symbioticStarsColor");
+	connectColorButton(ui->colorDSOEmissionLineStars,		"NebulaMgr.emissionLineStarsColor");
+	connectColorButton(ui->colorDSONebulae,			"NebulaMgr.nebulaeColor");
+	connectColorButton(ui->colorDSOPlanetaryNebulae,		"NebulaMgr.planetaryNebulaeColor");
+	connectColorButton(ui->colorDSODarkNebulae,			"NebulaMgr.darkNebulaeColor");
+	connectColorButton(ui->colorDSOReflectionNebulae,		"NebulaMgr.reflectionNebulaeColor");
+	connectColorButton(ui->colorDSOBipolarNebulae,			"NebulaMgr.bipolarNebulaeColor");
+	connectColorButton(ui->colorDSOEmissionNebulae,		"NebulaMgr.emissionNebulaeColor");
+	connectColorButton(ui->colorDSONebulosityClusters,		"NebulaMgr.clusterWithNebulosityColor");
+	connectColorButton(ui->colorDSOPossiblePlanetaryNebulae,	"NebulaMgr.possiblePlanetaryNebulaeColor");
+	connectColorButton(ui->colorDSOProtoplanetaryNebulae,		"NebulaMgr.protoplanetaryNebulaeColor");
+	connectColorButton(ui->colorDSOHydrogenRegions,		"NebulaMgr.hydrogenRegionsColor");
+	connectColorButton(ui->colorDSOInterstellarMatter,		"NebulaMgr.interstellarMatterColor");
+	connectColorButton(ui->colorDSOEmissionObjects,		"NebulaMgr.emissionObjectsColor");
+	connectColorButton(ui->colorDSOMolecularClouds,		"NebulaMgr.molecularCloudsColor");
+	connectColorButton(ui->colorDSOBLLacObjects,			"NebulaMgr.blLacObjectsColor");
+	connectColorButton(ui->colorDSOBlazars,			"NebulaMgr.blazarsColor");
+	connectColorButton(ui->colorDSOYoungStellarObjects,		"NebulaMgr.youngStellarObjectsColor");
+	connectColorButton(ui->colorDSOSupernovaRemnants,		"NebulaMgr.supernovaRemnantsColor");
+	connectColorButton(ui->colorDSOSupernovaCandidates,		"NebulaMgr.supernovaCandidatesColor");
+	connectColorButton(ui->colorDSOSupernovaRemnantCandidates,	"NebulaMgr.supernovaRemnantCandidatesColor");
+	connectColorButton(ui->colorDSOGalaxyClusters,			"NebulaMgr.galaxyClustersColor");
 
 	connect(ui->colorDSOLabels,				SIGNAL(released()), this, SLOT(askDSOLabelsColor()));
 	connect(ui->colorDSOMarkers,				SIGNAL(released()), this, SLOT(askDSOMarkersColor()));
@@ -128,17 +128,6 @@ void ConfigureDSOColorsDialog::createDialogContent()
 	connect(ui->colorDSOSupernovaCandidates,		SIGNAL(released()), this, SLOT(askDSOSupernovaCandidatesColor()));
 	connect(ui->colorDSOSupernovaRemnantCandidates,		SIGNAL(released()), this, SLOT(askDSOSupernovaRemnantCandidatesColor()));
 	connect(ui->colorDSOGalaxyClusters,			SIGNAL(released()), this, SLOT(askDSOGalaxyClustersColor()));
-}
-
-void ConfigureDSOColorsDialog::colorButton(QToolButton* toolButton, QString propName)
-{
-	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
-	Vec3f vColor = prop->getValue().value<Vec3f>();
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	// Use style sheet for create a nice buttons :)
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
 }
 
 void ConfigureDSOColorsDialog::askDSOLabelsColor()

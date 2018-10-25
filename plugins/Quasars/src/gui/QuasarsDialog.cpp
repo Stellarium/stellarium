@@ -94,7 +94,7 @@ void QuasarsDialog::createDialogContent()
 	// if the state didn't change, setUpdatesEnabled will not be called, so we force it
 	setUpdatesEnabled(ui->internetUpdatesCheckbox->checkState());
 
-	colorButton(ui->quasarMarkerColor, qsr->getMarkerColor());
+	connectColorButton(ui->quasarMarkerColor, "Quasars.quasarsColor");
 	connect(ui->quasarMarkerColor,	SIGNAL(released()), this, SLOT(askQuasarsMarkerColor()));
 
 	updateTimer = new QTimer(this);
@@ -293,13 +293,4 @@ void QuasarsDialog::askQuasarsMarkerColor()
 		qsr->setMarkerColor(vColor);
 		ui->quasarMarkerColor->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
-}
-
-void QuasarsDialog::colorButton(QToolButton* toolButton, Vec3f vColor)
-{
-	QColor color(0,0,0);
-	color.setRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
-	// Use style sheet for create a nice buttons :)
-	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
-	toolButton->setFixedSize(QSize(18, 18));
 }

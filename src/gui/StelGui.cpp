@@ -1326,7 +1326,7 @@ void StelGui::setGuiVisible(bool b)
 	emit visibleChanged(b);
 }
 
-StelAction* StelGui::getAction(const QString& actionName)
+StelAction* StelGui::getAction(const QString& actionName) const
 {
 	return StelApp::getInstance().getStelActionManager()->findAction(actionName);
 }
@@ -1336,7 +1336,7 @@ void StelGui::copySelectedObjectInfo(void)
 	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
 }
 
-bool StelGui::getAstroCalcVisible()
+bool StelGui::getAstroCalcVisible() const
 {
 	return astroCalcDialog && astroCalcDialog->visible();
 }

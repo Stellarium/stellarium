@@ -23,7 +23,6 @@
 #include <QObject>
 #include "StelDialog.hpp"
 
-class QToolButton;
 class Ui_ConfigureDSOColorsDialogForm;
 
 class ConfigureDSOColorsDialog : public StelDialog
@@ -75,9 +74,6 @@ private slots:
 	void askDSOSupernovaCandidatesColor();
 	void askDSOSupernovaRemnantCandidatesColor();
 	void askDSOGalaxyClustersColor();
-
-private:
-	void colorButton(QToolButton *toolButton, QString propName);
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.

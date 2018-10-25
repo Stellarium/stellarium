@@ -91,7 +91,7 @@ public:
 	//! the StelDialog instances.
 	QGraphicsWidget* getGuiWidget() const {return guiItem;}
 	//! Return mouse position coordinates
-	QPoint getMousePos();
+	QPoint getMousePos() const;
 
 	//! Returns the main application OpenGL context,
 	//! which should be used for all drawing Stellarium does
@@ -150,10 +150,10 @@ public slots:
 	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; emit customScreenshotHeightChanged(height);}
 	//! Get screenshot magnification. This should be used by StarMgr, text drawing and other elements which may
 	//! want to enlarge their output in screenshots to keep them visible.
-	float getCustomScreenshotMagnification() {return customScreenshotMagnification;}
+	float getCustomScreenshotMagnification() const {return customScreenshotMagnification;}
 #endif
 	//! Get the state of the mouse cursor timeout flag
-	bool getFlagCursorTimeout() {return flagCursorTimeout;}
+	bool getFlagCursorTimeout() const {return flagCursorTimeout;}
 	//! Get the state of the mouse cursor timeout flag
 	void setFlagCursorTimeout(bool b);
 	//! Get the mouse cursor timeout in seconds
@@ -167,13 +167,13 @@ public slots:
 	//! @param m the new minimum fps setting.
 	void setMinFps(float m) {minfps=m;}
 	//! Get the current minimum frames per second.
-	float getMinFps() {return minfps;}
+	float getMinFps() const {return minfps;}
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
 	//! @todo this setting currently does nothing
 	void setMaxFps(float m) {maxfps = m;}
 	//! Get the current maximum frames per second.
-	float getMaxFps() {return maxfps;}
+	float getMaxFps() const {return maxfps;}
 
 	//! Notify that an event was handled by the program and therefore the
 	//! FPS should be maximized for a couple of seconds.

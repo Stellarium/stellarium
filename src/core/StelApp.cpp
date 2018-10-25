@@ -1019,7 +1019,7 @@ QString StelApp::getViewportEffect() const
 }
 
 // Diagnostics
-void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName)
+void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const
 {
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
 	#if QT_VERSION >= 0x050500
@@ -1036,7 +1036,7 @@ void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName action
 	}
 }
 
-StelModule* StelApp::getModule(const QString& moduleID)
+StelModule* StelApp::getModule(const QString& moduleID) const
 {
 	return getModuleMgr().getModule(moduleID);
 }

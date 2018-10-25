@@ -72,13 +72,13 @@ public:
 	//! Get the corresponding module or Q_NULLPTR if can't find it.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	//! @param noWarning if true, don't display any warning if the module is not found.
-	StelModule* getModule(const QString& moduleID, bool noWarning=false);
+	StelModule* getModule(const QString& moduleID, bool noWarning=false) const;
 
 	//! Get the list of all the currently registered modules
-	QList<StelModule*> getAllModules() {return modules.values();}
+	QList<StelModule*> getAllModules() const {return modules.values();}
 
 	//! Get the list of modules in the correct order for calling the given action
-	const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action)
+	const QList<StelModule*>& getCallOrders(StelModule::StelModuleActionName action) const
 	{
 		return callOrders[action];
 	}
@@ -105,7 +105,7 @@ public:
 	//! Returns the list of all currently registered extensions.
 	//! If using this method, you probably also want to subscribe to
 	//! the extensionsAdded() signal to handle all possible initialization orders.
-	QObjectList getExtensionList() { return extensions; }
+	QObjectList getExtensionList() const { return extensions; }
 signals:
 	//! Called whenever new plugin extensions are added
 	void extensionsAdded(QObjectList newExtensions);

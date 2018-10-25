@@ -1708,7 +1708,7 @@ void SolarSystem::update(double deltaTime)
 }
 
 // is a lunar eclipse close at hand?
-bool SolarSystem::nearLunarEclipse()
+bool SolarSystem::nearLunarEclipse() const
 {
 	// TODO: could replace with simpler test
 
@@ -2457,7 +2457,7 @@ void SolarSystem::setFlagCustomGrsSettings(bool b)
 	emit flagCustomGrsSettingsChanged(b);
 }
 
-bool SolarSystem::getFlagCustomGrsSettings()
+bool SolarSystem::getFlagCustomGrsSettings() const
 {
 	return Planet::flagCustomGrsSettings;
 }
@@ -2470,7 +2470,7 @@ void SolarSystem::setCustomGrsLongitude(int longitude)
 	emit customGrsLongitudeChanged(longitude);
 }
 
-int SolarSystem::getCustomGrsLongitude()
+int SolarSystem::getCustomGrsLongitude() const
 {
 	return Planet::customGrsLongitude;
 }
@@ -2483,7 +2483,7 @@ void SolarSystem::setCustomGrsDrift(double drift)
 	emit customGrsDriftChanged(drift);
 }
 
-double SolarSystem::getCustomGrsDrift()
+double SolarSystem::getCustomGrsDrift() const
 {
 	return Planet::customGrsDrift;
 }

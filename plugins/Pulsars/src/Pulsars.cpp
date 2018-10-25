@@ -621,8 +621,8 @@ void Pulsars::readSettingsFromConfig(void)
 	setGlitchFlag(conf->value("use_separate_colors", false).toBool());
 	setFilteredMode(conf->value("filter_enabled", false).toBool());
 	setFilterValue(conf->value("filter_value", 150.f).toFloat());
-	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()), true);
-	setMarkerColor(StelUtils::strToVec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()), false);
+	setMarkerColor(StelUtils::strToVec3f(conf->value("marker_color", "0.4,0.5,1.0").toString()));
+	setGlitchColor(StelUtils::strToVec3f(conf->value("glitch_color", "0.2,0.3,1.0").toString()));
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowPulsarsButton = conf->value("flag_show_pulsars_button", true).toBool();
 
@@ -642,8 +642,8 @@ void Pulsars::saveSettingsToConfig(void)
 	conf->setValue("filter_value", QString::number(getFilterValue(), 'f', 2));
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_pulsars_button", flagShowPulsarsButton);
-	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
-	conf->setValue("glitch_color", StelUtils::vec3fToStr(getMarkerColor(false)));
+	conf->setValue("marker_color", StelUtils::vec3fToStr(getMarkerColor()));
+	conf->setValue("glitch_color", StelUtils::vec3fToStr(getGlitchColor()));
 
 	conf->endGroup();
 }
@@ -843,7 +843,7 @@ void Pulsars::setFlagShowPulsarsButton(bool b)
 	flagShowPulsarsButton = b;
 }
 
-bool Pulsars::getDisplayMode()
+bool Pulsars::getDisplayMode() const
 {
 	return Pulsar::distributionMode;
 }
@@ -853,7 +853,7 @@ void Pulsars::setDisplayMode(bool b)
 	Pulsar::distributionMode=b;
 }
 
-bool Pulsars::getGlitchFlag()
+bool Pulsars::getGlitchFlag() const
 {
 	return Pulsar::glitchFlag;
 }
@@ -863,7 +863,7 @@ void Pulsars::setGlitchFlag(bool b)
 	Pulsar::glitchFlag=b;
 }
 
-bool Pulsars::getFilteredMode()
+bool Pulsars::getFilteredMode() const
 {
 	return Pulsar::filteredMode;
 }
@@ -873,7 +873,7 @@ void Pulsars::setFilteredMode(bool b)
 	Pulsar::filteredMode=b;
 }
 
-float Pulsars::getFilterValue()
+float Pulsars::getFilterValue() const
 {
 	return Pulsar::filterValue;
 }
@@ -883,21 +883,26 @@ void Pulsars::setFilterValue(float v)
 	Pulsar::filterValue=v;
 }
 
-Vec3f Pulsars::getMarkerColor(bool mtype)
+Vec3f Pulsars::getMarkerColor() const
 {
-	Vec3f c = Pulsar::glitchColor;
-	if (mtype)
-		c = Pulsar::markerColor;
-
-	return c;
+	return Pulsar::markerColor;
 }
 
-void Pulsars::setMarkerColor(const Vec3f &c, bool mtype)
+void Pulsars::setMarkerColor(const Vec3f &c)
 {
-	if (mtype)
-		Pulsar::markerColor = c;
-	else
-		Pulsar::glitchColor = c;
+	Pulsar::markerColor = c;
+	emit markerColorChanged(c);
+}
+
+Vec3f Pulsars::getGlitchColor() const
+{
+	return Pulsar::glitchColor;
+}
+
+void Pulsars::setGlitchColor(const Vec3f &c)
+{
+	Pulsar::glitchColor = c;
+	emit glitchColorChanged(c);
 }
 
 void Pulsars::reloadCatalog(void)
