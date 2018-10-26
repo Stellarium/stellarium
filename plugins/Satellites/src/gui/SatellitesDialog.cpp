@@ -106,9 +106,13 @@ void SatellitesDialog::createDialogContent()
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 #ifdef Q_OS_WIN
 	acEndl="\r\n";

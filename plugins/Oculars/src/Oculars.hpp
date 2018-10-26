@@ -224,6 +224,9 @@ public slots:
 	void setFlagShowOcularsButton(bool b);
 	bool getFlagShowOcularsButton(void) { return flagShowOcularsButton; }
 
+	void setFontSize(int s){font.setPixelSize(s);}
+	//! Connect this to StelApp font size.
+	void setFontSizeFromApp(int s){font.setPixelSize(s+1);}
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);

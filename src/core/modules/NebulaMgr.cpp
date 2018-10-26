@@ -236,6 +236,7 @@ void NebulaMgr::init()
 	Q_ASSERT(conf);
 
 	nebulaFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), SLOT(setFontSizeFromApp(int)));
 	// Load circle texture
 	Nebula::texCircle		= StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/neb.png");
 	// Load circle texture for large DSO

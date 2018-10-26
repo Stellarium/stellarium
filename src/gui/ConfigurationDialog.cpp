@@ -151,9 +151,13 @@ void ConfigurationDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->pluginsListWidget << ui->scriptListWidget;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->pluginsListWidget << ui->scriptListWidget;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -324,6 +328,8 @@ void ConfigurationDialog::createDialogContent()
 	connectDoubleProperty(ui->mouseTimeoutSpinBox, "MainView.cursorTimeout");
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "StelGui.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
+	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.baseFontSize");
+	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
 
 	// Dithering
 	populateDitherList();
@@ -620,6 +626,9 @@ void ConfigurationDialog::saveAllSettings()
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
+
+	conf->setValue("gui/base_font_size",			propMgr->getStelPropertyValue("StelApp.baseFontSize").toInt());
+	conf->setValue("gui/flag_enable_kinetic_scrolling", 	propMgr->getStelPropertyValue("StelGui.flagUseKineticScrolling").toBool());
 
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toDouble(), 'f', 2));

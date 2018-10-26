@@ -896,6 +896,9 @@ private slots:
 	//! Must be connected to SolarSystem::solarSystemDataReloaded()
 	void connectEarthFromSolarSystem();
 
+	//! Connect from StelApp to reset all fonts of the grids, lines and points.
+	void setFontSizeFromApp(int size);
+
 private:
 	QSharedPointer<Planet> earth;           // shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
 	bool gridlinesDisplayed;			// master switch to switch off all grids/lines. (useful for oculars plugin)

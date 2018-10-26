@@ -49,9 +49,6 @@ StelDialog::StelDialog(QString dialogName, QObject* parent)
 {
 	if (parent == Q_NULLPTR)
 		setParent(StelMainView::getInstance().getGuiWidget());
-
-	// The kinetic scrolling is disabled by default
-	flagKineticScrolling = StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", false).toBool();
 }
 
 StelDialog::~StelDialog()
@@ -322,18 +319,26 @@ void StelDialog::askColor()
 	}
 }
 
-void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
+void StelDialog::enableKineticScrolling(bool b)
 {
-	if (flagKineticScrolling)
+	if (kineticScrollingList.length()==0) return;
+	if (b)
 	{
-		for (auto* w : addscroll)
+		for (auto* w : kineticScrollingList)
 		{
 			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
-			QScroller::scroller(w);
+			QScroller::scroller(w); // WHAT DOES THIS DO? We don't use the return value.
+		}
+	}
+	else
+	{
+		for (auto* w : kineticScrollingList)
+		{
+			QScroller::ungrabGesture(w);
+			// QScroller::scroller(w);
 		}
 	}
 }
-
 
 void StelDialog::updateNightModeProperty()
 {

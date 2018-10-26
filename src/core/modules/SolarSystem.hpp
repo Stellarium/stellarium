@@ -422,7 +422,7 @@ public slots:
 
 	//! Set planet names font size.
 	//! @return font size
-	void setFontSize(float newFontSize);
+	void setFontSize(int newFontSize);
 
 	//! Set the color used to draw planet labels.
 	//! @param c The color of the planet labels (R,G,B)

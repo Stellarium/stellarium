@@ -33,6 +33,7 @@
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelObserver.hpp"
+#include "SkyGui.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -399,12 +400,8 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
 
-	// Font size is 12
-	int baseFontSize = StelApp::getInstance().getBaseFontSize()-1;
-	datetime->font().setPixelSize(baseFontSize);
-	location->font().setPixelSize(baseFontSize);
-	fov->font().setPixelSize(baseFontSize);
-	fps->font().setPixelSize(baseFontSize);
+	setFontSizeFromApp(StelApp::getInstance().getBaseFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
 	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
@@ -415,6 +412,22 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setFlagFovDms(confSettings->value("gui/flag_fov_dms", false).toBool());
 	setFlagShowTz(confSettings->value("gui/flag_show_tz", true).toBool());
 }
+
+//! connect from StelApp to resize fonts on the fly.
+void BottomStelBar::setFontSizeFromApp(int size)
+{
+	// Font size is 12
+	int baseFontSize = size-1;
+	QFont font;
+	font=datetime->font(); font.setPixelSize(baseFontSize); datetime->setFont(font);
+	font=location->font(); font.setPixelSize(baseFontSize);	location->setFont(font);
+	font=fov->font();      font.setPixelSize(baseFontSize);	fov->setFont(font);
+	font=fps->font();      font.setPixelSize(baseFontSize);	fps->setFont(font);
+	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
+	if (skyGui)
+		skyGui->updateBarsPos();
+}
+
 
 BottomStelBar::~BottomStelBar()
 {

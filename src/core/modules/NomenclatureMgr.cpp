@@ -39,6 +39,7 @@ NomenclatureMgr::NomenclatureMgr()
 	setObjectName("NomenclatureMgr");
 	conf = StelApp::getInstance().getSettings();
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	ssystem = GETSTELMODULE(SolarSystem);
 }
 

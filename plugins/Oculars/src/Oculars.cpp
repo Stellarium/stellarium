@@ -176,7 +176,9 @@ Oculars::Oculars()
 	, reticleRotation(0.)
 {
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	// font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	setFontSizeFromApp(StelApp::getInstance().getBaseFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();

@@ -22,6 +22,7 @@
 #include <QDebug>
 
 #include "StelApp.hpp"
+#include "StelGui.hpp"
 #include "StelTranslator.hpp"
 #include "StelActionMgr.hpp"
 #include "ShortcutLineEdit.hpp"
@@ -293,9 +294,13 @@ void ShortcutsDialog::createDialogContent()
 	ui->shortcutsTreeView->sortByColumn(0, Qt::AscendingOrder);
 	
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->shortcutsTreeView;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->shortcutsTreeView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(ui->shortcutsTreeView->selectionModel(),

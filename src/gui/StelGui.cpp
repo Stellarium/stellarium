@@ -79,6 +79,7 @@ StelGui::StelGui()
 	: topLevelGraphicsWidget(Q_NULLPTR)
 	, skyGui(Q_NULLPTR)
 	, flagUseButtonsBackground(true)
+	, flagUseKineticScrolling(false)
 	, buttonTimeRewind(Q_NULLPTR)
 	, buttonTimeRealTimeSpeed(Q_NULLPTR)
 	, buttonTimeCurrent(Q_NULLPTR)
@@ -1135,7 +1136,6 @@ void StelGui::setFlagUseButtonsBackground(bool b)
 {
 	if (b!=flagUseButtonsBackground)
 	{
-
 		flagUseButtonsBackground=b;
 		QSettings* conf = StelApp::getInstance().getSettings();
 		Q_ASSERT(conf);
@@ -1145,6 +1145,18 @@ void StelGui::setFlagUseButtonsBackground(bool b)
 	}
 }
 
+void StelGui::setFlagUseKineticScrolling(bool b)
+{
+	if (b!=flagUseKineticScrolling)
+	{
+		flagUseKineticScrolling=b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_enable_kinetic_scrolling", b);
+		conf->sync();
+		emit flagUseKineticScrollingChanged(b);
+	}
+}
 
 void StelGui::setVisible(bool b)
 {

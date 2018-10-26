@@ -60,9 +60,13 @@ void SolarSystemManagerWindow::createDialogContent()
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->listWidgetObjects;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->listWidgetObjects;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	//Signals
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()),

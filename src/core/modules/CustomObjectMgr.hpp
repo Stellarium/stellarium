@@ -168,6 +168,8 @@ private slots:
 	//! Remove just one custom object
 	void removeCustomObject(CustomObjectP);
 
+	//! Connect this to StelApp font size.
+	void setFontSize(int s){font.setPixelSize(s);}
 private:
 	// Font used for displaying our text
 	QFont font;

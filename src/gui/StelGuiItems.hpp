@@ -260,6 +260,9 @@ private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
 
+	//! connect from StelApp to resize fonts on the fly.
+	void setFontSizeFromApp(int size);
+
 private:
 	void updateText(bool forceUpdatePos=false);
 	void updateButtonsGroups();

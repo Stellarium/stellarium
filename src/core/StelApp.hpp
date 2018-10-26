@@ -73,6 +73,7 @@ class StelApp : public QObject
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
+	Q_PROPERTY(int  baseFontSize            READ getBaseFontSize            WRITE setBaseFontSize            NOTIFY baseFontSizeChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -189,7 +190,7 @@ public:
 
 	//! Get the size of font
 	int getBaseFontSize() const { return baseFontSize; }
-	void setBaseFontSize(int s) { baseFontSize=s; }
+	void setBaseFontSize(int s) { baseFontSize=s; emit baseFontSizeChanged(s);}
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
@@ -288,6 +289,7 @@ signals:
 	void flagUseFormattingOutputChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
+	void baseFontSizeChanged(int);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);

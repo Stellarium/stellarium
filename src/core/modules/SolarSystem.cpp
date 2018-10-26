@@ -88,10 +88,11 @@ SolarSystem::SolarSystem()
 	, conf(StelApp::getInstance().getSettings())
 {
 	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	setObjectName("SolarSystem");
 }
 
-void SolarSystem::setFontSize(float newFontSize)
+void SolarSystem::setFontSize(int newFontSize)
 {
 	planetNameFont.setPixelSize(newFontSize);
 }

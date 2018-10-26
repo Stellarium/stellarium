@@ -72,6 +72,7 @@ class StelGui : public QObject, public StelGuiBase
 	Q_PROPERTY(bool flagShowAsterismLinesButton READ getFlagShowAsterismLinesButton WRITE setFlagShowAsterismLinesButton NOTIFY flagShowAsterismLinesButtonChanged )
 	Q_PROPERTY(bool flagShowAsterismLabelsButton READ getFlagShowAsterismLabelsButton WRITE setFlagShowAsterismLabelsButton NOTIFY flagShowAsterismLabelsButtonChanged )
 	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
+	Q_PROPERTY(bool flagUseKineticScrolling READ getFlagUseKineticScrolling WRITE setFlagUseKineticScrolling NOTIFY flagUseKineticScrollingChanged)
 
 public:
 	friend class ViewDialog;
@@ -128,6 +129,11 @@ public slots:
 	void setFlagUseButtonsBackground(bool b);
 	//! Get the state of the flag of usage background for GUI buttons
 	bool getFlagUseButtonsBackground() const { return flagUseButtonsBackground; }
+
+	//! Set the state of the flag for kinetic scrolling
+	void setFlagUseKineticScrolling(bool b);
+	//! Get the state of the flag for kinetic scrolling
+	bool getFlagUseKineticScrolling() const { return flagUseKineticScrolling; }
 
 	//! Define whether the button for exit should be visible
 	void setFlagShowQuitButton(bool b);
@@ -241,6 +247,7 @@ signals:
 	void autoHideHorizontalButtonBarChanged(bool b);
 	void autoHideVerticalButtonBarChanged(bool b);
 	void flagUseButtonsBackgroundChanged(bool b);
+	void flagUseKineticScrollingChanged(bool b);
 	void flagShowQuitButtonChanged(bool b);
 	void flagShowFlipButtonsChanged(bool b);
 	void flagShowNebulaBackgroundButtonChanged(bool b);
@@ -278,6 +285,7 @@ private:
 	class SkyGui* skyGui;
 
 	bool flagUseButtonsBackground;
+	bool flagUseKineticScrolling;
 
 	StelButton* buttonTimeRewind;
 	StelButton* buttonTimeRealTimeSpeed;

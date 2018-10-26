@@ -270,6 +270,8 @@ public slots:
 	//! module.ini file and update the local JSON file.
 	void updateJSON(void);
 
+	//! Connect this to StelApp font size.
+	void setFontSize(int s){font.setPixelSize(s);}
 private:
 	// Font used for displaying our text
 	QFont font;

@@ -36,7 +36,8 @@ CustomObjectMgr::CustomObjectMgr()
 {
 	setObjectName("CustomObjectMgr");
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getBaseFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 CustomObjectMgr::~CustomObjectMgr()
