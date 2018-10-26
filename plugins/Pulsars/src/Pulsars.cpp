@@ -668,9 +668,6 @@ void Pulsars::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Pulsars/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Pulsars] Updating pulsars catalog...";
 	startDownload(updateUrl);
 }
@@ -790,6 +787,9 @@ void Pulsars::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Pulsars::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Pulsars/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{

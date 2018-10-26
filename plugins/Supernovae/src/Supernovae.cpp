@@ -583,9 +583,6 @@ void Supernovae::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Supernovae] Updating supernovae catalog...";
 	startDownload(updateUrl);
 }
@@ -705,6 +702,9 @@ void Supernovae::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Supernovae::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{

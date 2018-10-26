@@ -750,10 +750,6 @@ void Exoplanets::updateJSON(void)
 		qWarning() << "[Exoplanets] Already updating...  will not start again current update is complete.";
 		return;
 	}
-
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Exoplanets] Updating exoplanets catalog...";
 	startDownload(updateUrl);
 }
@@ -1002,6 +998,10 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Exoplanets::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
+
 	}
 	catch (std::runtime_error &e)
 	{
