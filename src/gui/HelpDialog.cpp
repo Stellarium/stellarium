@@ -321,7 +321,6 @@ void HelpDialog::updateHelpText(void) const
 	// WARNING! Section titles are re-used above!
 	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
 	htmlText += q_("The following links are external web links, and will launch your web browser:\n").toHtmlEscaped();
-	htmlText += "<p><a href=\"http://stellarium.sourceforge.net/wiki/index.php/Category:User%27s_Guide\">" + q_("The Stellarium User Guide").toHtmlEscaped() + "</a>";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
