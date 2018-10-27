@@ -3108,13 +3108,13 @@ void AstroCalcDialog::calculatePhenomena()
 				if (object->getDSOType() == Nebula::NebEmissionLineStar)
 					dso.append(object);
 			}
+			break;
 		case 20: // Interstellar objects
 			for (const auto& object : allObjects)
 			{
 				if (object->getPlanetType() == Planet::isInterstellar)
 					objects.append(object);
 			}
-			break;
 			break;
 	}
 
@@ -3133,7 +3133,7 @@ void AstroCalcDialog::calculatePhenomena()
 		coordsLimit += separation * M_PI / 180.;
 		double ra, dec;
 
-		if (obj2Type < 10)
+		if (obj2Type < 10 || obj2Type == 20)
 		{
 			// Solar system objects
 			for (auto& obj : objects)
