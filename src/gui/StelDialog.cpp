@@ -69,10 +69,15 @@ void StelDialog::setVisible(bool v)
 {
 	if (v)
 	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
 		QSize screenSize = StelMainView::getInstance().size();
 		QSize maxSize = 0.8*screenSize;
 		if (dialog)
 		{
+			// reload stylesheet, in case size changed!
+			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+
 			dialog->show();
 			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
@@ -98,8 +103,6 @@ void StelDialog::setVisible(bool v)
 			QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
 			dialog = new QDialog(Q_NULLPTR);
 			// dialog->setParent(parent);
-			StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-			Q_ASSERT(gui);
 			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 			createDialogContent();

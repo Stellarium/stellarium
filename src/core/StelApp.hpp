@@ -190,7 +190,9 @@ public:
 
 	//! Get the size of font
 	int getBaseFontSize() const { return baseFontSize; }
-	void setBaseFontSize(int s) { baseFontSize=s; emit baseFontSizeChanged(s);}
+	//! change base font size. TBD: In the implementation, e can decide to scale all fonts (including GUI) or just the screen text font.
+	//! Currently, GUI font is scaled as well, and a GUI dialog is rescaled on next opening.
+	void setBaseFontSize(int s);// { baseFontSize=s; emit baseFontSizeChanged(s);}
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}

@@ -82,6 +82,7 @@
 #include <QTimer>
 #include <QDir>
 #include <QCoreApplication>
+#include <QGuiApplication>
 #include <QScreen>
 #include <QDateTime>
 #ifdef ENABLE_SPOUT
@@ -1039,4 +1040,14 @@ void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName action
 StelModule* StelApp::getModule(const QString& moduleID) const
 {
 	return getModuleMgr().getModule(moduleID);
+}
+void StelApp::setBaseFontSize(int s)
+{
+	baseFontSize=s;
+	// The next 3 lines force GUI dialog resizing.
+	// TBD: Not clear whether even scale two font sizes separately?
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(s);
+	QGuiApplication::setFont(font);
+	emit baseFontSizeChanged(s);
 }

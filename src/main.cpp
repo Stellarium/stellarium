@@ -379,6 +379,9 @@ int main(int argc, char **argv)
 	QFont tmpFont(baseFont);
 #endif
 	tmpFont.setPixelSize(confSettings->value("gui/base_font_size", 13).toInt());
+	// We could separate GUI panel font from screen text font by splitting base_font_size (for screen text) and dialog_font_size (for GUI panels).
+	// TBD.
+	//tmpFont.setPixelSize(confSettings->value("gui/dialog_font_size", 13).toInt());
 	QGuiApplication::setFont(tmpFont);
 
 	// Initialize translator feature
