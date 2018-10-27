@@ -114,7 +114,7 @@ msgstr "모든 별자리 선택"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Reload the sky culture"
-msgstr ""
+msgstr "하늘 문화 다시 불러오기"
 
 #: src/core/modules/StarMgr.cpp:450 src/ui_viewDialog.h:2507
 #: src/ui_dsoColorsDialog.h:652
@@ -2929,7 +2929,7 @@ msgstr "딥스카이 천체 배경 이미지"
 
 #: src/core/StelSkyLayerMgr.cpp:86
 msgid "Reload the deep-sky objects background images"
-msgstr "딥스카이 천체 배경 사진 다시 로드"
+msgstr "딥스카이 천체 배경 사진 다시 불러오기"
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:224
 #: src/StelMainView.cpp:812 src/StelMainView.cpp:813
@@ -5174,15 +5174,15 @@ msgstr "각크기 제한:"
 
 #: src/gui/AstroCalcDialog.cpp:4185 src/ui_astroCalcDialog.h:1361
 msgid "Set limits for angular size for visible celestial objects"
-msgstr ""
+msgstr "천체의 한계 각크기 제한 설정"
 
 #: src/gui/AstroCalcDialog.cpp:4186 src/ui_astroCalcDialog.h:1365
 msgid "Minimal angular size for visible celestial objects"
-msgstr ""
+msgstr "천체의 최소 각크기 한계"
 
 #: src/gui/AstroCalcDialog.cpp:4187 src/ui_astroCalcDialog.h:1368
 msgid "Maximum angular size for visible celestial objects"
-msgstr ""
+msgstr "천체의 최대 각크기 한계"
 
 #: src/gui/AstroCalcDialog.cpp:4592
 msgid "Limit angular separation:"
@@ -5190,15 +5190,15 @@ msgstr "각거리 제한:"
 
 #: src/gui/AstroCalcDialog.cpp:4593
 msgid "Set limits for angular separation for visible double stars"
-msgstr ""
+msgstr "쌍성의 분리각 제한 설정"
 
 #: src/gui/AstroCalcDialog.cpp:4594
 msgid "Minimal angular separation for visible double stars"
-msgstr ""
+msgstr "쌍성의 최소 분리각 한계"
 
 #: src/gui/AstroCalcDialog.cpp:4595
 msgid "Maximum angular separation for visible double stars"
-msgstr ""
+msgstr "쌍성의 최대 분리각 한계"
 
 #: src/gui/AstroCalcDialog.cpp:4904
 msgid "Text file"
@@ -5420,7 +5420,7 @@ msgstr "세드나족"
 #. TRANSLATORS: Type of object
 #: src/translations.h:76
 msgid "interstellar object"
-msgstr ""
+msgstr "성간 천체"
 
 #. TRANSLATORS: Type of object
 #: src/translations.h:78
@@ -6037,7 +6037,7 @@ msgstr "중국"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:459
 msgid "Chinese Contemporary"
-msgstr ""
+msgstr "현대 중국"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:461
@@ -9640,7 +9640,7 @@ msgstr "ICRS 격자 표시"
 
 #: src/ui_configurationDialog.h:1593
 msgid "Show nightmode button"
-msgstr ""
+msgstr "야간  모드 버튼 보이기"
 
 #: src/ui_configurationDialog.h:1595
 msgid "A button to toggle galactic grid"
@@ -9652,11 +9652,11 @@ msgstr "은하좌표계 격자 버튼 표시"
 
 #: src/ui_configurationDialog.h:1601
 msgid "Show fullscreen button"
-msgstr ""
+msgstr "전체화면 모드 버튼 보이기"
 
 #: src/ui_configurationDialog.h:1605
 msgid "Show Quit button"
-msgstr ""
+msgstr "종료 버튼 보이기"
 
 #: src/ui_configurationDialog.h:1607
 msgid "Toggle the usage of background under GUI buttons"
