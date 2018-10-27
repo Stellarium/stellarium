@@ -32,6 +32,7 @@
 const QString CustomObject::CUSTOMOBJECT_TYPE = QStringLiteral("CustomObject");
 Vec3f CustomObject::markerColor = Vec3f(0.1f,1.0f,0.1f);
 float CustomObject::markerSize = 1.f;
+float CustomObject::selectPriority = 0.f;
 
 CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinates, const bool isVisible)
 	: initialized(false)
@@ -40,8 +41,8 @@ CustomObject::CustomObject(const QString& codesignation, const Vec3d& coordinate
 	, designation(codesignation)
 	, isMarker(isVisible)
 {
-	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
-	initialized = true;	
+	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");	
+	initialized = true;
 }
 
 CustomObject::~CustomObject()
@@ -51,7 +52,8 @@ CustomObject::~CustomObject()
 
 float CustomObject::getSelectPriority(const StelCore* core) const
 {
-	return StelObject::getSelectPriority(core)-2.f;
+	Q_UNUSED(core);
+	return selectPriority;
 }
 
 QString CustomObject::getNameI18n() const

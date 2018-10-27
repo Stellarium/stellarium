@@ -58,7 +58,7 @@ protected:
 	virtual void createDialogContent();
 
 private:
-	QString getFileMask();
+	static const QString getFileMask();
 	StelScriptSyntaxHighlighter* highlighter;
 
 };

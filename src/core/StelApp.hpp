@@ -110,63 +110,63 @@ public:
 
 	//! Get the module manager to use for accessing any module loaded in the application.
 	//! @return the module manager.
-	StelModuleMgr& getModuleMgr() {return *moduleMgr;}
+	StelModuleMgr& getModuleMgr() const {return *moduleMgr;}
 
 	//! Get the corresponding module or Q_NULLPTR if can't find it.
 	//! This is a shortcut for getModleMgr().getModule().
 	//! @return the module pointer.
-	StelModule* getModule(const QString& moduleID);
+	StelModule* getModule(const QString& moduleID) const;
 
 	//! Get the locale manager to use for i18n & date/time localization.
 	//! @return the font manager to use for loading fonts.
-	StelLocaleMgr& getLocaleMgr() {return *localeMgr;}
+	StelLocaleMgr& getLocaleMgr() const {return *localeMgr;}
 
 	//! Get the sky cultures manager.
 	//! @return the sky cultures manager
-	StelSkyCultureMgr& getSkyCultureMgr() {return *skyCultureMgr;}
+	StelSkyCultureMgr& getSkyCultureMgr() const {return *skyCultureMgr;}
 
 	//! Get the texture manager to use for loading textures.
 	//! @return the texture manager to use for loading textures.
-	StelTextureMgr& getTextureManager() {return *textureMgr;}
+	StelTextureMgr& getTextureManager() const {return *textureMgr;}
 
 	//! Get the Location manager to use for managing stored locations
 	//! @return the Location manager to use for managing stored locations
-	StelLocationMgr& getLocationMgr() {return *planetLocationMgr;}
+	StelLocationMgr& getLocationMgr() const {return *planetLocationMgr;}
 
 	//! Get the StelObject manager to use for querying from all stellarium objects.
 	//! @return the StelObject manager to use for querying from all stellarium objects 	.
-	StelObjectMgr& getStelObjectMgr() {return *stelObjectMgr;}
+	StelObjectMgr& getStelObjectMgr() const {return *stelObjectMgr;}
 
-	StelSkyLayerMgr& getSkyImageMgr() {return *skyImageMgr;}
+	StelSkyLayerMgr& getSkyImageMgr() const {return *skyImageMgr;}
 
 	//! Get the audio manager
-	StelAudioMgr* getStelAudioMgr() {return audioMgr;}
+	StelAudioMgr* getStelAudioMgr() const {return audioMgr;}
 
 	//! Get the actions manager to use for managing and editing actions
-	StelActionMgr* getStelActionManager() {return actionMgr;}
+	StelActionMgr* getStelActionManager() const {return actionMgr;}
 
 	//! Return the property manager
-	StelPropertyMgr* getStelPropertyManager() {return propMgr;}
+	StelPropertyMgr* getStelPropertyManager() const {return propMgr;}
 
 	//! Get the video manager
-	StelVideoMgr* getStelVideoMgr() {return videoMgr;}
+	StelVideoMgr* getStelVideoMgr() const {return videoMgr;}
 
 	//! Get the core of the program.
 	//! It is the one which provide the projection, navigation and tone converter.
 	//! @return the StelCore instance of the program
-	StelCore* getCore() {return core;}
+	StelCore* getCore() const {return core;}
 
 	//! Get the common instance of QNetworkAccessManager used in stellarium
-	QNetworkAccessManager* getNetworkAccessManager() {return networkAccessManager;}
+	QNetworkAccessManager* getNetworkAccessManager() const {return networkAccessManager;}
 
 	//! Update translations, font for GUI and sky everywhere in the program.
 	void updateI18n();
 
 	//! Return the main configuration options
-	QSettings* getSettings() {return confSettings;}
+	QSettings* getSettings() const {return confSettings;}
 
 	//! Return the currently used style
-	QString getCurrentStelStyle() {return "color";}
+	const QString getCurrentStelStyle() const {return "color";}
 
 	//! Update all object according to the deltaTime in seconds.
 	void update(double deltaTime);
@@ -199,9 +199,9 @@ public:
 
 #ifndef DISABLE_SCRIPTING
 	//! Get the script API proxy (for signal handling)
-	StelMainScriptAPIProxy* getMainScriptAPIProxy() {return scriptAPIProxy;}
+	StelMainScriptAPIProxy* getMainScriptAPIProxy() const {return scriptAPIProxy;}
 	//! Get the script manager
-	StelScriptMgr& getScriptMgr() {return *scriptMgr;}
+	StelScriptMgr& getScriptMgr() const {return *scriptMgr;}
 #endif
 
 	static void initStatic();
@@ -220,7 +220,7 @@ public:
 	QString getViewportEffect() const;
 
 	//! Dump diagnostics about action call priorities
-	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName);
+	void dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Scriptable methods

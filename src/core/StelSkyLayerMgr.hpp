@@ -182,6 +182,8 @@ private slots:
 	//! @param percentage the percentage of loaded data
 	void percentLoadedChanged(int percentage);
 
+	void loadCollection();
+
 private:
 
 	//! Store the informations needed for a graphical element layer.

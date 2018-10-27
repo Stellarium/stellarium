@@ -76,6 +76,16 @@ class Exoplanets : public StelObjectModule
 		   WRITE setFlagShowExoplanets
 		   NOTIFY flagExoplanetsVisibilityChanged
 		   )
+	Q_PROPERTY(Vec3f markerColor
+		   READ getMarkerColor
+		   WRITE setMarkerColor
+		   NOTIFY markerColorChanged
+		   )
+	Q_PROPERTY(Vec3f habitableColor
+		   READ getHabitableColor
+		   WRITE setHabitableColor
+		   NOTIFY habitableColorChanged
+		   )
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -139,7 +149,7 @@ public:
 	virtual QString getStelObjectType() const { return Exoplanet::EXOPLANET_TYPE; }
 
 	//! get a exoplanet object by identifier
-	ExoplanetP getByID(const QString& id);
+	ExoplanetP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
@@ -239,6 +249,8 @@ signals:
 	void jsonUpdateComplete(void);
 
 	void flagExoplanetsVisibilityChanged(bool b);
+	void markerColorChanged(Vec3f);
+	void habitableColorChanged(Vec3f);
 
 public slots:
 	//! Download JSON from web recources described in the module section of the
@@ -261,7 +273,7 @@ public slots:
 
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
-	bool getFlagShowExoplanetsButton(void) { return flagShowExoplanetsButton; }
+	bool getFlagShowExoplanetsButton(void) const { return flagShowExoplanetsButton; }
 
 	//! Get status to display of distribution of exoplanetary systems
 	//! @return true if distribution of exoplanetary systems is enabled
@@ -287,7 +299,7 @@ public slots:
 	//! Get color for markers of exoplanetary systems
 	//! @param h set false if you want get color of markers of potentially habitable exoplanets
 	//! @return color
-	Vec3f getMarkerColor(bool habitable) const;
+	Vec3f getMarkerColor() const;
 	//! Set color for markers of exoplanetary systems
 	//! @param c color
 	//! @param h set true if you want set color for potentially habitable exoplanets
@@ -295,7 +307,20 @@ public slots:
 	//! // example of usage in scripts
 	//! Exoplanets.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
 	//! @endcode
-	void setMarkerColor(const Vec3f& c, bool h);
+	void setMarkerColor(const Vec3f& c);
+
+	//! Get color for markers of habitable exoplanetary systems
+	//! @param h set false if you want get color of markers of potentially habitable exoplanets
+	//! @return color
+	Vec3f getHabitableColor() const;
+	//! Set color for markers of exoplanetary systems
+	//! @param c color
+	//! @param h set true if you want set color for potentially habitable exoplanets
+	//! @code
+	//! // example of usage in scripts
+	//! Exoplanets.setHabitableColor(Vec3f(1.0,0.0,0.0), true);
+	//! @endcode
+	void setHabitableColor(const Vec3f& c);
 
 	//! Get count of planetary systems from catalog
 	//! @return count of planetary systems

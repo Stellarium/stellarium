@@ -79,7 +79,7 @@ declinations very slightly move as well.
 //! Modelled after @class SkyLine found in GridLinesMgr.cpp at V0.13.2, but with small-circle drawing.
 //! @author Georg Zotti
 //! @ingroup archaeoLines
-class ArchaeoLine : QObject
+class ArchaeoLine : public QObject
 {
 	Q_OBJECT
 	Q_PROPERTY(Vec3f color READ getColor WRITE setColor NOTIFY colorChanged)
@@ -158,150 +158,69 @@ private:
 //! Main class of the ArchaeoLines plug-in.
 //! Provides an on-screen visualisation of several small circles relevant mainly to archaeoastronomy.
 //! In addition, a few azimuth lines can be shown.
-//! GZ 2014-12, updated 2016-06.
+//! GZ 2014-12, updated 2016-06, 2018-10.
 class ArchaeoLines : public StelModule
 {
 	Q_OBJECT
-	Q_PROPERTY(bool enabled
-		   READ isEnabled
-		   WRITE enableArchaeoLines
-		   NOTIFY archaeoLinesEnabledChanged)
-	Q_PROPERTY(bool flagShowEquinox
-				READ   isEquinoxDisplayed
-				WRITE  showEquinox
-				NOTIFY showEquinoxChanged
-		   )
-	Q_PROPERTY(bool flagShowSolstices
-				READ   isSolsticesDisplayed
-				WRITE  showSolstices
-				NOTIFY showSolsticesChanged
-		   )
-	Q_PROPERTY(bool flagShowCrossquarters
-				READ   isCrossquartersDisplayed
-				WRITE  showCrossquarters
-				NOTIFY showCrossquartersChanged
-		   )
-	Q_PROPERTY(bool flagShowMajorStandstills
-				READ   isMajorStandstillsDisplayed
-				WRITE  showMajorStandstills
-				NOTIFY showMajorStandstillsChanged
-		   )
-	Q_PROPERTY(bool flagShowMinorStandstills
-				READ   isMinorStandstillsDisplayed
-				WRITE  showMinorStandstills
-				NOTIFY showMinorStandstillsChanged
-		   )
-	Q_PROPERTY(bool flagShowZenithPassage
-				READ   isZenithPassageDisplayed
-				WRITE  showZenithPassage
-				NOTIFY showZenithPassageChanged
-		   )
-	Q_PROPERTY(bool flagShowNadirPassage
-				READ   isNadirPassageDisplayed
-				WRITE  showNadirPassage
-				NOTIFY showNadirPassageChanged
-		   )
-	Q_PROPERTY(bool flagShowSelectedObject
-				READ   isSelectedObjectDisplayed
-				WRITE  showSelectedObject
-				NOTIFY showSelectedObjectChanged
-		   )
-	Q_PROPERTY(bool flagShowSelectedObjectAzimuth
-				READ   isSelectedObjectAzimuthDisplayed
-				WRITE  showSelectedObjectAzimuth
-				NOTIFY showSelectedObjectAzimuthChanged
-		   )
-	Q_PROPERTY(bool flagShowSelectedObjectHourAngle
-				READ   isSelectedObjectHourAngleDisplayed
-				WRITE  showSelectedObjectHourAngle
-				NOTIFY showSelectedObjectHourAngleChanged
-		   )
-	Q_PROPERTY(bool flagShowCurrentSun
-				READ   isCurrentSunDisplayed
-				WRITE  showCurrentSun
-				NOTIFY showCurrentSunChanged
-		   )
-	Q_PROPERTY(bool flagShowCurrentMoon
-				READ   isCurrentMoonDisplayed
-				WRITE  showCurrentMoon
-				NOTIFY showCurrentMoonChanged
-		   )
-	Q_PROPERTY(ArchaeoLine::Line enumShowCurrentPlanet
-				READ   whichCurrentPlanetDisplayed
-				WRITE  showCurrentPlanet
-				NOTIFY currentPlanetChanged)
-	Q_PROPERTY(bool flagShowGeographicLocation1
-				READ   isGeographicLocation1Displayed
-				WRITE  showGeographicLocation1
-				NOTIFY showGeographicLocation1Changed
-		   )
-	Q_PROPERTY(bool flagShowGeographicLocation2
-				READ   isGeographicLocation2Displayed
-				WRITE  showGeographicLocation2
-				NOTIFY showGeographicLocation2Changed
-		   )
-	Q_PROPERTY(double geographicLocation1Longitude
-				READ   getGeographicLocation1Longitude
-				WRITE  setGeographicLocation1Longitude
-				NOTIFY geographicLocation1Changed)
-	Q_PROPERTY(double geographicLocation1Latitude
-				READ   getGeographicLocation1Latitude
-				WRITE  setGeographicLocation1Latitude
-				NOTIFY geographicLocation1Changed)
-	Q_PROPERTY(double geographicLocation2Longitude
-				READ   getGeographicLocation2Longitude
-				WRITE  setGeographicLocation2Longitude
-				NOTIFY geographicLocation2Changed)
-	Q_PROPERTY(double geographicLocation2Latitude
-				READ   getGeographicLocation2Latitude
-				WRITE  setGeographicLocation2Latitude
-				NOTIFY geographicLocation2Changed)
-	Q_PROPERTY(bool flagShowCustomAzimuth1
-				READ   isCustomAzimuth1Displayed
-				WRITE  showCustomAzimuth1
-				NOTIFY showCustomAzimuth1Changed
-		   )
-	Q_PROPERTY(bool flagShowCustomAzimuth2
-				READ   isCustomAzimuth2Displayed
-				WRITE  showCustomAzimuth2
-				NOTIFY showCustomAzimuth2Changed
-		   )
+	Q_PROPERTY(bool enabled                            READ isEnabled                          WRITE enableArchaeoLines              NOTIFY archaeoLinesEnabledChanged)
+	Q_PROPERTY(bool flagShowEquinox                    READ isEquinoxDisplayed                 WRITE showEquinox                     NOTIFY showEquinoxChanged)
+	Q_PROPERTY(bool flagShowSolstices                  READ isSolsticesDisplayed               WRITE showSolstices                   NOTIFY showSolsticesChanged)
+	Q_PROPERTY(bool flagShowCrossquarters              READ isCrossquartersDisplayed           WRITE showCrossquarters               NOTIFY showCrossquartersChanged)
+	Q_PROPERTY(bool flagShowMajorStandstills           READ isMajorStandstillsDisplayed        WRITE showMajorStandstills            NOTIFY showMajorStandstillsChanged)
+	Q_PROPERTY(bool flagShowMinorStandstills           READ isMinorStandstillsDisplayed        WRITE showMinorStandstills            NOTIFY showMinorStandstillsChanged)
+	Q_PROPERTY(bool flagShowZenithPassage              READ isZenithPassageDisplayed           WRITE showZenithPassage               NOTIFY showZenithPassageChanged)
+	Q_PROPERTY(bool flagShowNadirPassage               READ isNadirPassageDisplayed            WRITE showNadirPassage                NOTIFY showNadirPassageChanged)
+	Q_PROPERTY(bool flagShowSelectedObject             READ isSelectedObjectDisplayed          WRITE showSelectedObject              NOTIFY showSelectedObjectChanged)
+	Q_PROPERTY(bool flagShowSelectedObjectAzimuth      READ isSelectedObjectAzimuthDisplayed   WRITE showSelectedObjectAzimuth       NOTIFY showSelectedObjectAzimuthChanged)
+	Q_PROPERTY(bool flagShowSelectedObjectHourAngle    READ isSelectedObjectHourAngleDisplayed WRITE showSelectedObjectHourAngle     NOTIFY showSelectedObjectHourAngleChanged)
+	Q_PROPERTY(bool flagShowCurrentSun                 READ isCurrentSunDisplayed              WRITE showCurrentSun                  NOTIFY showCurrentSunChanged)
+	Q_PROPERTY(bool flagShowCurrentMoon                READ isCurrentMoonDisplayed             WRITE showCurrentMoon                 NOTIFY showCurrentMoonChanged)
+	Q_PROPERTY(ArchaeoLine::Line enumShowCurrentPlanet READ whichCurrentPlanetDisplayed        WRITE showCurrentPlanet               NOTIFY currentPlanetChanged)
+	Q_PROPERTY(bool flagShowGeographicLocation1        READ isGeographicLocation1Displayed     WRITE showGeographicLocation1         NOTIFY showGeographicLocation1Changed)
+	Q_PROPERTY(bool flagShowGeographicLocation2        READ isGeographicLocation2Displayed     WRITE showGeographicLocation2         NOTIFY showGeographicLocation2Changed)
+	Q_PROPERTY(double geographicLocation1Longitude     READ getGeographicLocation1Longitude    WRITE setGeographicLocation1Longitude NOTIFY geographicLocation1Changed)
+	Q_PROPERTY(double geographicLocation1Latitude      READ getGeographicLocation1Latitude     WRITE setGeographicLocation1Latitude  NOTIFY geographicLocation1Changed)
+	Q_PROPERTY(double geographicLocation2Longitude     READ getGeographicLocation2Longitude    WRITE setGeographicLocation2Longitude NOTIFY geographicLocation2Changed)
+	Q_PROPERTY(double geographicLocation2Latitude      READ getGeographicLocation2Latitude     WRITE setGeographicLocation2Latitude  NOTIFY geographicLocation2Changed)
+	Q_PROPERTY(bool flagShowCustomAzimuth1             READ isCustomAzimuth1Displayed          WRITE showCustomAzimuth1              NOTIFY showCustomAzimuth1Changed)
+	Q_PROPERTY(bool flagShowCustomAzimuth2             READ isCustomAzimuth2Displayed          WRITE showCustomAzimuth2              NOTIFY showCustomAzimuth2Changed)
 	// Note: following 2 are only "forwarding properties", no proper variables!
-	Q_PROPERTY(double customAzimuth1
-				READ getCustomAzimuth1
-				WRITE setCustomAzimuth1
-				NOTIFY customAzimuth1Changed)
-	Q_PROPERTY(double customAzimuth2
-				READ getCustomAzimuth2
-				WRITE setCustomAzimuth2
-				NOTIFY customAzimuth2Changed)
-	Q_PROPERTY(bool flagShowCustomDeclination1
-				READ   isCustomDeclination1Displayed
-				WRITE  showCustomDeclination1
-				NOTIFY showCustomDeclination1Changed
-		   )
-	Q_PROPERTY(bool flagShowCustomDeclination2
-				READ   isCustomDeclination2Displayed
-				WRITE  showCustomDeclination2
-				NOTIFY showCustomDeclination2Changed
-		   )
+	Q_PROPERTY(double customAzimuth1 READ getCustomAzimuth1 WRITE setCustomAzimuth1 NOTIFY customAzimuth1Changed)
+	Q_PROPERTY(double customAzimuth2 READ getCustomAzimuth2 WRITE setCustomAzimuth2 NOTIFY customAzimuth2Changed)
+	Q_PROPERTY(bool flagShowCustomDeclination1 READ   isCustomDeclination1Displayed WRITE  showCustomDeclination1 NOTIFY showCustomDeclination1Changed)
+	Q_PROPERTY(bool flagShowCustomDeclination2 READ   isCustomDeclination2Displayed WRITE  showCustomDeclination2 NOTIFY showCustomDeclination2Changed)
 	// Note: following 2 are only "forwarding properties", no proper variables!
-	Q_PROPERTY(double customDeclination1
-				READ getCustomDeclination1
-				WRITE setCustomDeclination1
-				NOTIFY customDeclination1Changed)
-	Q_PROPERTY(double customDeclination2
-				READ getCustomDeclination2
-				WRITE setCustomDeclination2
-				NOTIFY customDeclination2Changed)
+	Q_PROPERTY(double customDeclination1 READ getCustomDeclination1 WRITE setCustomDeclination1 NOTIFY customDeclination1Changed)
+	Q_PROPERTY(double customDeclination2 READ getCustomDeclination2 WRITE setCustomDeclination2 NOTIFY customDeclination2Changed)
 
 	// More "forwarding properties" for geo locations and custom azimuths/declination labels.
 	Q_PROPERTY(QString geographicLocation1Label READ getGeographicLocation1Label WRITE setGeographicLocation1Label NOTIFY geographicLocation1LabelChanged)
 	Q_PROPERTY(QString geographicLocation2Label READ getGeographicLocation2Label WRITE setGeographicLocation2Label NOTIFY geographicLocation2LabelChanged)
-	Q_PROPERTY(QString customAzimuth1Label READ getCustomAzimuth1Label WRITE setCustomAzimuth1Label NOTIFY customAzimuth1LabelChanged)
-	Q_PROPERTY(QString customAzimuth2Label READ getCustomAzimuth2Label WRITE setCustomAzimuth2Label NOTIFY customAzimuth2LabelChanged)
-	Q_PROPERTY(QString customDeclination1Label READ getCustomDeclination1Label WRITE setCustomDeclination1Label NOTIFY customDeclination1LabelChanged)
-	Q_PROPERTY(QString customDeclination2Label READ getCustomDeclination2Label WRITE setCustomDeclination2Label NOTIFY customDeclination2LabelChanged)
+	Q_PROPERTY(QString customAzimuth1Label      READ getCustomAzimuth1Label      WRITE setCustomAzimuth1Label      NOTIFY customAzimuth1LabelChanged)
+	Q_PROPERTY(QString customAzimuth2Label      READ getCustomAzimuth2Label      WRITE setCustomAzimuth2Label      NOTIFY customAzimuth2LabelChanged)
+	Q_PROPERTY(QString customDeclination1Label  READ getCustomDeclination1Label  WRITE setCustomDeclination1Label  NOTIFY customDeclination1LabelChanged)
+	Q_PROPERTY(QString customDeclination2Label  READ getCustomDeclination2Label  WRITE setCustomDeclination2Label  NOTIFY customDeclination2LabelChanged)
+
+	// Properties to simplify color setting.
+	Q_PROPERTY(Vec3f equinoxColor 		      READ getEquinoxColor                 WRITE setEquinoxColor                 NOTIFY equinoxColorChanged                 )
+	Q_PROPERTY(Vec3f solsticesColor               READ getSolsticesColor               WRITE setSolsticesColor               NOTIFY solsticesColorChanged               )
+	Q_PROPERTY(Vec3f crossquartersColor           READ getCrossquartersColor           WRITE setCrossquartersColor           NOTIFY crossquartersColorChanged           )
+	Q_PROPERTY(Vec3f majorStandstillColor         READ getMajorStandstillColor         WRITE setMajorStandstillColor         NOTIFY majorStandstillColorChanged         )
+	Q_PROPERTY(Vec3f minorStandstillColor         READ getMinorStandstillColor         WRITE setMinorStandstillColor         NOTIFY minorStandstillColorChanged         )
+	Q_PROPERTY(Vec3f zenithPassageColor           READ getZenithPassageColor           WRITE setZenithPassageColor           NOTIFY zenithPassageColorChanged           )
+	Q_PROPERTY(Vec3f nadirPassageColor            READ getNadirPassageColor            WRITE setNadirPassageColor            NOTIFY nadirPassageColorChanged            )
+	Q_PROPERTY(Vec3f selectedObjectColor          READ getSelectedObjectColor          WRITE setSelectedObjectColor          NOTIFY selectedObjectColorChanged          )
+	Q_PROPERTY(Vec3f selectedObjectAzimuthColor   READ getSelectedObjectAzimuthColor   WRITE setSelectedObjectAzimuthColor   NOTIFY selectedObjectAzimuthColorChanged   )
+	Q_PROPERTY(Vec3f selectedObjectHourAngleColor READ getSelectedObjectHourAngleColor WRITE setSelectedObjectHourAngleColor NOTIFY selectedObjectHourAngleColorChanged )
+	Q_PROPERTY(Vec3f currentSunColor              READ getCurrentSunColor              WRITE setCurrentSunColor              NOTIFY currentSunColorChanged              )
+	Q_PROPERTY(Vec3f currentMoonColor             READ getCurrentMoonColor             WRITE setCurrentMoonColor             NOTIFY currentMoonColorChanged             )
+	Q_PROPERTY(Vec3f currentPlanetColor           READ getCurrentPlanetColor           WRITE setCurrentPlanetColor           NOTIFY currentPlanetColorChanged           )
+	Q_PROPERTY(Vec3f geographicLocation1Color     READ getGeographicLocation1Color     WRITE setGeographicLocation1Color     NOTIFY geographicLocation1ColorChanged     )
+	Q_PROPERTY(Vec3f geographicLocation2Color     READ getGeographicLocation2Color     WRITE setGeographicLocation2Color     NOTIFY geographicLocation2ColorChanged     )
+	Q_PROPERTY(Vec3f customAzimuth1Color          READ getCustomAzimuth1Color          WRITE setCustomAzimuth1Color          NOTIFY customAzimuth1ColorChanged          )
+	Q_PROPERTY(Vec3f customAzimuth2Color          READ getCustomAzimuth2Color          WRITE setCustomAzimuth2Color          NOTIFY customAzimuth2ColorChanged          )
+	Q_PROPERTY(Vec3f customDeclination1Color      READ getCustomDeclination1Color      WRITE setCustomDeclination1Color      NOTIFY customDeclination1ColorChanged      )
+	Q_PROPERTY(Vec3f customDeclination2Color      READ getCustomDeclination2Color      WRITE setCustomDeclination2Color      NOTIFY customDeclination2ColorChanged      )
 
 public:
 	ArchaeoLines();
@@ -366,6 +285,25 @@ signals:
 	void customAzimuth2LabelChanged(QString label);
 	void customDeclination1LabelChanged(QString label);
 	void customDeclination2LabelChanged(QString label);
+	void equinoxColorChanged(Vec3f color);
+	void solsticesColorChanged(Vec3f color);
+	void crossquartersColorChanged(Vec3f color);
+	void majorStandstillColorChanged(Vec3f color);
+	void minorStandstillColorChanged(Vec3f color);
+	void zenithPassageColorChanged(Vec3f color);
+	void nadirPassageColorChanged(Vec3f color);
+	void selectedObjectColorChanged(Vec3f color);
+	void selectedObjectAzimuthColorChanged(Vec3f color);
+	void selectedObjectHourAngleColorChanged(Vec3f color);
+	void currentSunColorChanged(Vec3f color);
+	void currentMoonColorChanged(Vec3f color);
+	void currentPlanetColorChanged(Vec3f color);
+	void geographicLocation1ColorChanged(Vec3f color);
+	void geographicLocation2ColorChanged(Vec3f color);
+	void customAzimuth1ColorChanged(Vec3f color);
+	void customAzimuth2ColorChanged(Vec3f color);
+	void customDeclination1ColorChanged(Vec3f color);
+	void customDeclination2ColorChanged(Vec3f color);
 
 public slots:
 	void enableArchaeoLines(bool b);
@@ -415,8 +353,8 @@ public slots:
 	void setGeographicLocation2Latitude(double lat);
 	void setGeographicLocation1Label(QString label);
 	void setGeographicLocation2Label(QString label);
-	QString getGeographicLocation1Label(){return geographicLocation1Line->getLabel();}
-	QString getGeographicLocation2Label(){return geographicLocation2Line->getLabel();}
+	QString getGeographicLocation1Label() const {return geographicLocation1Line->getLabel();}
+	QString getGeographicLocation2Label() const {return geographicLocation2Line->getLabel();}
 	double getGeographicLocation1Longitude() const {return geographicLocation1Longitude; }
 	double getGeographicLocation1Latitude()  const {return geographicLocation1Latitude; }
 	double getGeographicLocation2Longitude() const {return geographicLocation2Longitude; }
@@ -429,8 +367,8 @@ public slots:
 	double getCustomAzimuth2() const { return customAzimuth2Line->getDefiningAngle(); }
 	void setCustomAzimuth1Label(QString label);
 	void setCustomAzimuth2Label(QString label);
-	QString getCustomAzimuth1Label(){return customAzimuth1Line->getLabel();}
-	QString getCustomAzimuth2Label(){return customAzimuth2Line->getLabel();}
+	QString getCustomAzimuth1Label() const {return customAzimuth1Line->getLabel();}
+	QString getCustomAzimuth2Label() const {return customAzimuth2Line->getLabel();}
 	void showCustomDeclination1(bool b);
 	void showCustomDeclination2(bool b);
 	void setCustomDeclination1(double dec);
@@ -439,16 +377,59 @@ public slots:
 	double getCustomDeclination2() const { return customDeclination2Line->getDefiningAngle(); }
 	void setCustomDeclination1Label(QString label);
 	void setCustomDeclination2Label(QString label);
-	QString getCustomDeclination1Label(){return customDeclination1Line->getLabel();}
-	QString getCustomDeclination2Label(){return customDeclination2Line->getLabel();}
+	QString getCustomDeclination1Label() const {return customDeclination1Line->getLabel();}
+	QString getCustomDeclination2Label() const {return customDeclination2Line->getLabel();}
 
 	// called by the dialog GUI, converts GUI's QColor (0..255) to Stellarium's Vec3f float color.
-	void setLineColor(ArchaeoLine::Line whichLine, QColor color);
+	//void setLineColor(ArchaeoLine::Line whichLine, QColor color);
 	// called by the dialog UI, converts Stellarium's Vec3f float color to QColor (0..255).
-	QColor getLineColor(ArchaeoLine::Line whichLine) const;
+	//QColor getLineColor(ArchaeoLine::Line whichLine) const;
 	//! query a line for its current defining angle. Returns declination or azimuth, respectively.
 	double getLineAngle(ArchaeoLine::Line whichLine) const;
 	QString getLineLabel(ArchaeoLine::Line whichLine) const;
+
+	// Trivial property getters/setters
+	Vec3f getEquinoxColor()                 const {return equinoxColor;}
+	Vec3f getSolsticesColor()               const {return solsticesColor;}
+	Vec3f getCrossquartersColor()           const {return crossquartersColor;}
+	Vec3f getMajorStandstillColor()         const {return majorStandstillColor;}
+	Vec3f getMinorStandstillColor()         const {return minorStandstillColor;}
+	Vec3f getZenithPassageColor()           const {return zenithPassageColor;}
+	Vec3f getNadirPassageColor()            const {return nadirPassageColor;}
+	Vec3f getSelectedObjectColor()          const {return selectedObjectColor;}
+	Vec3f getSelectedObjectAzimuthColor()   const {return selectedObjectAzimuthColor;}
+	Vec3f getSelectedObjectHourAngleColor() const {return selectedObjectHourAngleColor;}
+	Vec3f getCurrentSunColor()              const {return currentSunColor;}
+	Vec3f getCurrentMoonColor()             const {return currentMoonColor;}
+	Vec3f getCurrentPlanetColor()           const {return currentPlanetColor;}
+	Vec3f getGeographicLocation1Color()     const {return geographicLocation1Color;}
+	Vec3f getGeographicLocation2Color()     const {return geographicLocation2Color;}
+	Vec3f getCustomAzimuth1Color()          const {return customAzimuth1Color;}
+	Vec3f getCustomAzimuth2Color()          const {return customAzimuth2Color;}
+	Vec3f getCustomDeclination1Color()      const {return customDeclination1Color;}
+	Vec3f getCustomDeclination2Color()      const {return customDeclination2Color;}
+	void setEquinoxColor(Vec3f color);
+	void setSolsticesColor(Vec3f color);
+	void setCrossquartersColor(Vec3f color);
+	void setMajorStandstillColor(Vec3f color);
+	void setMinorStandstillColor(Vec3f color);
+	void setZenithPassageColor(Vec3f color);
+	void setNadirPassageColor(Vec3f color);
+	void setSelectedObjectColor(Vec3f color);
+	void setSelectedObjectAzimuthColor(Vec3f color);
+	void setSelectedObjectHourAngleColor(Vec3f color);
+	void setCurrentSunColor(Vec3f color);
+	void setCurrentMoonColor(Vec3f color);
+	void setCurrentPlanetColor(Vec3f color);
+	void setGeographicLocation1Color(Vec3f color);
+	void setGeographicLocation2Color(Vec3f color);
+	void setCustomAzimuth1Color(Vec3f color);
+	void setCustomAzimuth2Color(Vec3f color);
+	void setCustomDeclination1Color(Vec3f color);
+	void setCustomDeclination2Color(Vec3f color);
+
+
+
 
 private slots:
 	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.

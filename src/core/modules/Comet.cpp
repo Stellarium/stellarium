@@ -639,7 +639,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 }
 
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-Vec2f Comet::getComaDiameterAndTailLengthAU()
+Vec2f Comet::getComaDiameterAndTailLengthAU() const
 {
 	float r = getHeliocentricEclipticPos().length();
 	float mhelio = absoluteMagnitude + slopeParameter * log10(r);

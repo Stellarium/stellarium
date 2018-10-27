@@ -30,6 +30,7 @@
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "CustomObjectMgr.hpp"
+#include "HighlightMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
@@ -545,6 +546,11 @@ void StelApp::init(QSettings* conf)
 	custObj->init();
 	getModuleMgr().registerModule(custObj);
 
+	// Init hightlights
+	HighlightMgr* hlMgr = new HighlightMgr();
+	hlMgr->init();
+	getModuleMgr().registerModule(hlMgr);
+
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr
 #ifndef DISABLE_SCRIPTING
@@ -1013,7 +1019,7 @@ QString StelApp::getViewportEffect() const
 }
 
 // Diagnostics
-void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName)
+void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const
 {
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
 	#if QT_VERSION >= 0x050500
@@ -1030,7 +1036,7 @@ void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName action
 	}
 }
 
-StelModule* StelApp::getModule(const QString& moduleID)
+StelModule* StelApp::getModule(const QString& moduleID) const
 {
 	return getModuleMgr().getModule(moduleID);
 }

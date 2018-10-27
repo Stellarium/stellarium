@@ -45,7 +45,7 @@ class InfoPanel : public QGraphicsTextItem
 		void setInfoTextFilters(const StelObject::InfoStringGroup& aflags) {infoTextFilters=aflags;}
 		const StelObject::InfoStringGroup& getInfoTextFilters(void) const {return infoTextFilters;}
 		void setTextFromObjects(const QList<StelObjectP>&);
-		const QString getSelectedText(void);
+		const QString getSelectedText(void) const;
 
 	private:
 		StelObject::InfoStringGroup infoTextFilters;

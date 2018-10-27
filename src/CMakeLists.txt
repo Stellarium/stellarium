@@ -177,6 +177,8 @@ SET(stellarium_lib_SRCS
      core/modules/CustomObject.hpp
      core/modules/CustomObjectMgr.cpp
      core/modules/CustomObjectMgr.hpp
+     core/modules/HighlightMgr.cpp
+     core/modules/HighlightMgr.hpp
      core/modules/GridLinesMgr.cpp
      core/modules/GridLinesMgr.hpp
      core/modules/HipsMgr.hpp

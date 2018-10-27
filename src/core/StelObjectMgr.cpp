@@ -69,6 +69,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["SolarSystem:scattered disc object"] = "Scattered disc objects";
 		objModulesMap["SolarSystem:Oort cloud object"] = "Oort cloud objects";
 		objModulesMap["SolarSystem:sednoid"] = "Sednoids";
+		objModulesMap["SolarSystem:interstellar object"] = "Interstellar objects";
 		objModulesMap["SolarSystem:artificial"] = "Artificial objects";
 	}
 	// Deep-sky objects by type + amateur catalogues
@@ -441,7 +442,7 @@ bool StelObjectMgr::setSelectedObject(const QList<StelObjectP>& objs, StelModule
  Return the list objects of type "type" which was recently selected by
   the user
 *************************************************************************/
-QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type)
+QList<StelObjectP> StelObjectMgr::getSelectedObject(const QString& type) const
 {
 	QList<StelObjectP> result;
 	for (const auto& obj : lastSelectedObjects)

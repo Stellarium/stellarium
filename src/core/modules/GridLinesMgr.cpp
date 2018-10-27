@@ -50,7 +50,7 @@ public:
 	void draw(const StelCore* prj) const;
 	void setFontSize(double newFontSize);
 	void setColor(const Vec3f& c) {color = c;}
-	const Vec3f& getColor() {return color;}
+	const Vec3f& getColor() const {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
@@ -86,7 +86,7 @@ public:
 	virtual ~SkyPoint();
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
-	const Vec3f& getColor() {return color;}
+	const Vec3f& getColor() const {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
@@ -134,7 +134,7 @@ public:
 	virtual ~SkyLine();
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
-	const Vec3f& getColor() {return color;}
+	const Vec3f& getColor() const {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}

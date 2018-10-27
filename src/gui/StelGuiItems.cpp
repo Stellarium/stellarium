@@ -106,7 +106,9 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)),
 	        this, SLOT(animValueChanged(qreal)));
-	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));
+	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));  // Not sure if this is ever called?
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	connect(gui, SIGNAL(flagUseButtonsBackgroundChanged(bool)), this, SLOT(updateIcon()));
 
 	if (action!=Q_NULLPTR)
 	{
@@ -223,7 +225,7 @@ void StelButton::updateIcon()
 	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
-	if (!pixBackground.isNull() && noBckground==false && StelMainView::getInstance().getFlagUseButtonsBackground())
+	if (!pixBackground.isNull() && noBckground==false && StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool())
 		painter.drawPixmap(0, 0, pixBackground);
 
 	painter.drawPixmap(0, 0,

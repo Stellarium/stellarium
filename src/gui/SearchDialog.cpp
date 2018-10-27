@@ -80,7 +80,7 @@ void CompletionLabel::clearValues()
 	updateText();
 }
 
-QString CompletionLabel::getSelected()
+QString CompletionLabel::getSelected() const
 {
 	if (values.isEmpty())
 		return QString();

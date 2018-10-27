@@ -703,8 +703,12 @@ void Oculars::init()
 		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lenses);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
-		
+
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
+
+		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		equatorialMountEnabledMain = propMgr->getStelPropertyValue("StelMovementMgr.equatorialMount").toBool();
 
 		// For historical reasons, name of .ini entry and description of checkbox (and therefore flag name) are reversed.
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
@@ -723,8 +727,6 @@ void Oculars::init()
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 
-		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-		equatorialMountEnabledMain = propMgr->getStelPropertyValue("actionSwitch_Equatorial_Mount").toBool();
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1445,7 +1447,7 @@ void Oculars::toggleCCD(bool show)
 		if (getFlagAutosetMountForCCD())
 		{
 			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-			propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabledMain);
+			propMgr->setStelPropertyValue("StelMovementMgr.equatorialMount", equatorialMountEnabledMain);
 		}
 
 		if (guiPanel)
@@ -1758,10 +1760,8 @@ void Oculars::paintCrosshairs()
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] + length);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] - length);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] + length, centerScreen[1]);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
+	painter.drawLine2d(centerScreen[0], centerScreen[1] - length, centerScreen[0], centerScreen[1] + length);
+	painter.drawLine2d(centerScreen[0] - length, centerScreen[1], centerScreen[0] + length, centerScreen[1]);
 }
 
 void Oculars::paintTelrad()
@@ -2490,7 +2490,7 @@ void Oculars::setFlagAutosetMountForCCD(const bool b)
 	if (!b)
 	{
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-		propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabledMain);
+		propMgr->setStelPropertyValue("StelMovementMgr.equatorialMount", equatorialMountEnabledMain);
 	}
 	emit flagAutosetMountForCCDChanged(b);
 }

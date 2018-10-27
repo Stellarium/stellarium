@@ -624,9 +624,6 @@ void Quasars::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Quasars] Updating quasars catalog...";
 	startDownload(updateUrl);
 }
@@ -746,6 +743,9 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Quasars::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -826,6 +826,7 @@ Vec3f Quasars::getMarkerColor()
 void Quasars::setMarkerColor(const Vec3f &c)
 {
 	Quasar::markerColor = c;
+	emit quasarsColorChanged(c);
 }
 
 void Quasars::reloadCatalog(void)

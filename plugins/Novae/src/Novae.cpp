@@ -593,9 +593,6 @@ void Novae::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Novae] Updating novae catalog...";
 	startDownload(updateUrl);
 
@@ -716,6 +713,10 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Novae::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
+
 	}
 	catch (std::runtime_error &e)
 	{

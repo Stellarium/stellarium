@@ -100,7 +100,7 @@ private:
 	void addModelRow(int number, QString uuid, QString name, QString nameI18n = "", QString date = "", QString Location = "");
 
 	void loadBookmarks();
-	void saveBookmarks();
+	void saveBookmarks() const;
 	void goToBookmark(QString uuid);
 };
 

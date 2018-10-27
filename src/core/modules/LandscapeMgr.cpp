@@ -57,7 +57,7 @@ public:
 	virtual ~Cardinals();
 	void draw(const StelCore* core, double latitude) const;
 	void setColor(const Vec3f& c) {color = c;}
-	Vec3f get_color() {return color;}
+	Vec3f get_color() const {return color;}
 	void updateI18n();
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
@@ -1000,7 +1000,7 @@ bool LandscapeMgr::getFlagAtmosphere() const
 	return atmosphere->getFlagShow();
 }
 
-float LandscapeMgr::getAtmosphereFadeIntensity()
+float LandscapeMgr::getAtmosphereFadeIntensity() const
 {
 	return atmosphere->getFadeIntensity();
 }
@@ -1095,7 +1095,7 @@ Landscape* LandscapeMgr::createFromFile(const QString& landscapeFile, const QStr
 }
 
 
-QString LandscapeMgr::nameToID(const QString& name) const
+QString LandscapeMgr::nameToID(const QString& name)
 {
 	QMap<QString,QString> nameToDirMap = getNameToDirMap();
 
@@ -1113,7 +1113,7 @@ QString LandscapeMgr::nameToID(const QString& name) const
 /****************************************************************************
  get a map of landscape names (from landscape.ini name field) to ID (dir name)
  ****************************************************************************/
-QMap<QString,QString> LandscapeMgr::getNameToDirMap() const
+QMap<QString,QString> LandscapeMgr::getNameToDirMap()
 {
 	QMap<QString,QString> result;
 	QSet<QString> landscapeDirs = StelFileMgr::listContents("landscapes",StelFileMgr::Directory);
@@ -1326,7 +1326,7 @@ bool LandscapeMgr::removeLandscape(const QString landscapeID)
 	return true;
 }
 
-QString LandscapeMgr::getLandscapePath(const QString landscapeID) const
+QString LandscapeMgr::getLandscapePath(const QString landscapeID)
 {
 	QString result;
 	//Is this necessary? This function is private.

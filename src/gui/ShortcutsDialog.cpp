@@ -384,7 +384,7 @@ QStandardItem* ShortcutsDialog::updateGroup(const QString& group)
 	return groupItem;
 }
 
-QStandardItem* ShortcutsDialog::findItemByData(QVariant value, int role, int column)
+QStandardItem* ShortcutsDialog::findItemByData(QVariant value, int role, int column) const
 {
 	for (int row = 0; row < mainModel->rowCount(); row++)
 	{
