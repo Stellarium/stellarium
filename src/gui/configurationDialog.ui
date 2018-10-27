@@ -1943,7 +1943,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>30</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -2002,6 +2002,16 @@
                </property>
                <property name="text">
                 <string>Use kinetic scrolling</string>
+               </property>
+              </widget>
+             </item>
+             <item row="17" column="2">
+              <widget class="QPushButton" name="fontSelectPushButton">
+               <property name="toolTip">
+                <string>Select system font</string>
+               </property>
+               <property name="text">
+                <string>Font...</string>
                </property>
               </widget>
              </item>

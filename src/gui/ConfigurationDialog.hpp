@@ -159,6 +159,8 @@ private slots:
 	void de430ButtonClicked();
 	void de431ButtonClicked();
 
+	void selectAppFont();
+
 private:
 	StelGui* gui;
 

@@ -57,6 +57,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QFontDialog>
 #include <QComboBox>
 #include <QDir>
 #include <QDesktopWidget>
@@ -330,6 +331,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
 	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.baseFontSize");
 	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
+	connect(ui->fontSelectPushButton, SIGNAL(released()), this, SLOT(selectAppFont()));
 
 	// Dithering
 	populateDitherList();
@@ -1692,4 +1694,20 @@ void ConfigurationDialog::setDitherFormat()
 	Q_ASSERT(conf);
 	conf->setValue("video/dithering_mode", selectedFormat);
 	conf->sync();
+}
+
+void ConfigurationDialog::selectAppFont()
+{
+	QFont font=QGuiApplication::font();
+	int size=font.pixelSize();
+	bool ok;
+	QFont newFont=QFontDialog::getFont(&ok, font, Q_NULLPTR, q_("Select main font"), QFontDialog::ScalableFonts | QFontDialog::ProportionalFonts);
+	if (ok)
+	{
+		//newFont.setPixelSize(size); // set to old size?
+		QGuiApplication::setFont(newFont);
+		StelApp::getInstance().setBaseFontSize(newFont.pixelSize());
+	}
+	else
+		return;
 }
