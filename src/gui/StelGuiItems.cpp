@@ -1035,7 +1035,9 @@ void StelProgressBarMgr::oneBarChanged()
 	pb->setFormat(p->getFormat());
 }
 
-CornerButtons::CornerButtons(QGraphicsItem*) : lastOpacity(10)
+CornerButtons::CornerButtons(QGraphicsItem* parent) :
+	QGraphicsItem(parent),
+	lastOpacity(10)
 {
 }
 

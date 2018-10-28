@@ -1704,7 +1704,7 @@ void ConfigurationDialog::selectAppFont()
 	QFont newFont=QFontDialog::getFont(&ok, font, Q_NULLPTR, q_("Select main font"), QFontDialog::ScalableFonts | QFontDialog::ProportionalFonts);
 	if (ok)
 	{
-		//newFont.setPixelSize(size); // set to old size?
+		newFont.setPixelSize(size); // set to old size!
 		QGuiApplication::setFont(newFont);
 		StelApp::getInstance().setBaseFontSize(newFont.pixelSize());
 	}
