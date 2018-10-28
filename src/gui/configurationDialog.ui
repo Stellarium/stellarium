@@ -1993,6 +1993,19 @@
                  </property>
                 </widget>
                </item>
+               <item>
+                <widget class="QFontComboBox" name="fontComboBox"/>
+               </item>
+               <item>
+                <widget class="QPushButton" name="fontSelectPushButton">
+                 <property name="toolTip">
+                  <string>Select system font</string>
+                 </property>
+                 <property name="text">
+                  <string>Font...</string>
+                 </property>
+                </widget>
+               </item>
               </layout>
              </item>
              <item row="17" column="3">
@@ -2002,16 +2015,6 @@
                </property>
                <property name="text">
                 <string>Use kinetic scrolling</string>
-               </property>
-              </widget>
-             </item>
-             <item row="17" column="2">
-              <widget class="QPushButton" name="fontSelectPushButton">
-               <property name="toolTip">
-                <string>Select system font</string>
-               </property>
-               <property name="text">
-                <string>Font...</string>
                </property>
               </widget>
              </item>

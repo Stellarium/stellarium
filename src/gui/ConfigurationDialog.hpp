@@ -159,7 +159,11 @@ private slots:
 	void de430ButtonClicked();
 	void de431ButtonClicked();
 
+	// UNDER CONSTRUCTION: Font selection. Either a system font panel or just a combobox?
+	//! Connect from a Pushbutton to show a font selection for global font switch.
 	void selectAppFont();
+	void setAppFont(QFont font);
+
 
 private:
 	StelGui* gui;

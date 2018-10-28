@@ -333,6 +333,11 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
 	connect(ui->fontSelectPushButton, SIGNAL(released()), this, SLOT(selectAppFont()));
 
+	ui->fontComboBox->setWritingSystem(QFontDatabase::Any); // TODO: Make this Locale-dependent? Or show another combo to preselect?
+	ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
+	ui->fontComboBox->setCurrentFont(QGuiApplication::font());
+	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(setAppFont(QFont)));
+
 	// Dithering
 	populateDitherList();
 	connect(ui->ditheringComboBox, SIGNAL(currentIndexChanged(const QString&)), this, SLOT(setDitherFormat()));
@@ -1710,4 +1715,16 @@ void ConfigurationDialog::selectAppFont()
 	}
 	else
 		return;
+}
+
+
+void ConfigurationDialog::setAppFont(QFont font)
+{
+	QFont oldFont=QGuiApplication::font();
+	int size=oldFont.pixelSize();
+	// MAYBE EXCLUDE SYMBOL FONTS?
+	font.setPixelSize(size); // set to old size!
+	QGuiApplication::setFont(font);
+	StelApp::getInstance().setBaseFontSize(font.pixelSize());
+	// TODO: Store font name in config.ini
 }
