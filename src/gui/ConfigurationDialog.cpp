@@ -332,6 +332,8 @@ void ConfigurationDialog::createDialogContent()
 	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.baseFontSize");
 	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
 	connect(ui->fontSelectPushButton, SIGNAL(released()), this, SLOT(selectAppFont()));
+	populateFontWritingSystemCombo();
+	connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
 
 	ui->fontComboBox->setWritingSystem(QFontDatabase::Any); // TODO: Make this Locale-dependent? Or show another combo to preselect?
 	ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
@@ -1727,4 +1729,22 @@ void ConfigurationDialog::setAppFont(QFont font)
 	QGuiApplication::setFont(font);
 	StelApp::getInstance().setBaseFontSize(font.pixelSize());
 	// TODO: Store font name in config.ini
+}
+
+void ConfigurationDialog::populateFontWritingSystemCombo()
+{
+	QComboBox *combo=ui->fontWritingSystemComboBox;
+	QFontDatabase fontDatabase;
+	const QList<QFontDatabase::WritingSystem> writingSystems=fontDatabase.writingSystems();
+		for (const auto& system : writingSystems)
+		{
+			combo->addItem(QFontDatabase::writingSystemName(system) + "  " + QFontDatabase::writingSystemSample(system), system);
+		}
+}
+
+void ConfigurationDialog::handleFontBoxWritingSystem(int index)
+{
+	Q_UNUSED(index)
+	QComboBox *sender=dynamic_cast<QComboBox *>(QObject::sender());
+	ui->fontComboBox->setWritingSystem((QFontDatabase::WritingSystem) sender->currentData().toInt());
 }

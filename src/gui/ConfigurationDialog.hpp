@@ -163,6 +163,9 @@ private slots:
 	//! Connect from a Pushbutton to show a font selection for global font switch.
 	void selectAppFont();
 	void setAppFont(QFont font);
+	//! feed the combo with useful values. Call in createDialogContent().
+	void populateFontWritingSystemCombo();
+	void handleFontBoxWritingSystem(int index);
 
 
 private:
