@@ -413,7 +413,8 @@ void StelApp::init(QSettings* conf)
 		qDebug() << "Detected a high resolution device! Device pixel ratio:" << devicePixelsPerPixel;
 
 	setBaseFontSize(confSettings->value("gui/base_font_size", 13).toInt());
-	
+	setGuiFontSize(confSettings->value("gui/gui_font_size", 13).toInt());
+
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
@@ -1046,8 +1047,21 @@ void StelApp::setBaseFontSize(int s)
 	baseFontSize=s;
 	// The next 3 lines force GUI dialog resizing.
 	// TBD: Not clear whether even scale two font sizes separately?
+//	QFont font=QGuiApplication::font();
+//	font.setPixelSize(s);
+//	QGuiApplication::setFont(font);
+	emit baseFontSizeChanged(s);
+}
+void StelApp::setGuiFontSize(int s)
+{
+	// The next 3 lines force GUI dialog resizing.
+	// TBD: Not clear whether even scale two font sizes separately?
 	QFont font=QGuiApplication::font();
 	font.setPixelSize(s);
 	QGuiApplication::setFont(font);
-	emit baseFontSizeChanged(s);
+	emit guiFontSizeChanged(s);
+}
+int StelApp::getGuiFontSize() const
+{
+	return QGuiApplication::font().pixelSize();
 }

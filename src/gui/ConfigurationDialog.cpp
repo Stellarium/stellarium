@@ -330,6 +330,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "StelGui.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
 	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.baseFontSize");
+	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
 	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
 	connect(ui->fontSelectPushButton, SIGNAL(released()), this, SLOT(selectAppFont()));
 	populateFontWritingSystemCombo();
@@ -945,6 +946,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("navigation/auto_zoom_out_resets_direction",	mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout",		propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
 	conf->setValue("gui/mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
+	conf->setValue("gui/base_font_name",				QGuiApplication::font().family());
+	conf->setValue("gui/base_font_size",				propMgr->getStelPropertyValue("StelApp.baseFontSize").toInt());
+	conf->setValue("gui/gui_font_size",				propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+
 
 	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
@@ -1703,6 +1708,7 @@ void ConfigurationDialog::setDitherFormat()
 	conf->sync();
 }
 
+// deprecated. Delete before merge!
 void ConfigurationDialog::selectAppFont()
 {
 	QFont font=QGuiApplication::font();
@@ -1722,13 +1728,10 @@ void ConfigurationDialog::selectAppFont()
 
 void ConfigurationDialog::setAppFont(QFont font)
 {
-	QFont oldFont=QGuiApplication::font();
-	int size=oldFont.pixelSize();
-	// MAYBE EXCLUDE SYMBOL FONTS?
-	font.setPixelSize(size); // set to old size!
+	int oldSize=QGuiApplication::font().pixelSize();
+	font.setPixelSize(oldSize);
+	font.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
 	QGuiApplication::setFont(font);
-	StelApp::getInstance().setBaseFontSize(font.pixelSize());
-	// TODO: Store font name in config.ini
 }
 
 void ConfigurationDialog::populateFontWritingSystemCombo()

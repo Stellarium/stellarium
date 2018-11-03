@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
+    <width>681</width>
     <height>570</height>
    </rect>
   </property>
@@ -1976,7 +1976,7 @@
                <item>
                 <widget class="QLabel" name="baseFontSizeLabel">
                  <property name="text">
-                  <string>Base font size</string>
+                  <string>Font size: Screen</string>
                  </property>
                 </widget>
                </item>
@@ -1987,6 +1987,26 @@
                  </property>
                  <property name="maximum">
                   <number>30</number>
+                 </property>
+                 <property name="value">
+                  <number>13</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="guiFontSizeLabel">
+                 <property name="text">
+                  <string>GUI</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="guiFontSizeSpinBox">
+                 <property name="minimum">
+                  <number>7</number>
+                 </property>
+                 <property name="maximum">
+                  <number>25</number>
                  </property>
                  <property name="value">
                   <number>13</number>

@@ -74,6 +74,7 @@ class StelApp : public QObject
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
 	Q_PROPERTY(int  baseFontSize            READ getBaseFontSize            WRITE setBaseFontSize            NOTIFY baseFontSizeChanged)
+	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -188,11 +189,15 @@ public:
 	float getGlobalScalingRatio() const {return globalScalingRatio;}
 	void setGlobalScalingRatio(float r) {globalScalingRatio=r;}
 
-	//! Get the size of font
+	//! Get the fontsize used for screen text. // TODO: Refactor to screenFontSize everywhere!
 	int getBaseFontSize() const { return baseFontSize; }
-	//! change base font size. TBD: In the implementation, e can decide to scale all fonts (including GUI) or just the screen text font.
-	//! Currently, GUI font is scaled as well, and a GUI dialog is rescaled on next opening.
-	void setBaseFontSize(int s);// { baseFontSize=s; emit baseFontSizeChanged(s);}
+	//! change base font size. TODO: Refactor to name screenFontSize etc. everywhere!
+	void setBaseFontSize(int s);
+	//! Get the principal font size used for GUI panels.
+	int getGuiFontSize() const;
+	//! change GUI font size.
+	//! TBD: Currently, GUI dialog is rescaled on next opening.
+	void setGuiFontSize(int s);
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
@@ -292,6 +297,7 @@ signals:
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
 	void baseFontSizeChanged(int);
+	void guiFontSizeChanged(int);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);
