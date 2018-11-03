@@ -79,7 +79,8 @@ public:
 		EQUINOXES_J2000,
 		EQUINOXES_OF_DATE,
 		SOLSTICES_J2000,
-		SOLSTICES_OF_DATE
+		SOLSTICES_OF_DATE,
+		ANTISOLAR
 	};
 	// Create and precompute positions of a SkyGrid
 	SkyPoint(SKY_POINT_TYPE _point_type = CELESTIALPOLES_J2000);
@@ -95,6 +96,7 @@ public:
 	//! Re-translates the label.
 	void updateLabel();
 private:
+	QSharedPointer<Planet> earth, sun;
 	SKY_POINT_TYPE point_type;
 	Vec3f color;
 	StelCore::FrameType frameType;
@@ -864,6 +866,10 @@ SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(
 	// Font size is 14
 	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
 	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
+
+	earth = GETSTELMODULE(SolarSystem)->getEarth();
+	sun = GETSTELMODULE(SolarSystem)->getSun();
+
 	updateLabel();
 }
 
@@ -972,6 +978,13 @@ void SkyPoint::updateLabel()
 			southernLabel = QChar(0x2651); // Winter solstice
 			break;
 		}
+		case ANTISOLAR:
+		{
+			frameType = StelCore::FrameObservercentricEclipticOfDate;
+			// TRANSLATORS: Antisolar Point
+			northernLabel = q_("ASP");
+			break;
+		}
 		default:
 			Q_ASSERT(0);
 	}
@@ -1043,6 +1056,23 @@ void SkyPoint::draw(StelCore *core) const
 			sPainter.drawText(Vec3d(0,-1,0), southernLabel, 0, shift, shift, false);
 			break;
 		}
+		case ANTISOLAR:
+		{
+			// Antisolar Point
+			Vec3d coord;
+			double eclJDE = earth->getRotObliquity(core->getJDE());
+			double ra_equ, dec_equ, lambdaJDE, betaJDE;
+
+			StelUtils::rectToSphe(&ra_equ,&dec_equ, sun->getEquinoxEquatorialPos(core));
+			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
+			if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
+
+			StelUtils::spheToRect(lambdaJDE + M_PI, 0., coord);
+
+			sPainter.drawSprite2dMode(coord, 5.f);
+			sPainter.drawText(coord, northernLabel, 0, shift, shift, false);
+			break;
+		}
 		default:
 			Q_ASSERT(0);
 	}
@@ -1088,6 +1118,7 @@ GridLinesMgr::GridLinesMgr()
 	equinoxPoints = new SkyPoint(SkyPoint::EQUINOXES_OF_DATE);
 	solsticeJ2000Points = new SkyPoint(SkyPoint::SOLSTICES_J2000);
 	solsticePoints = new SkyPoint(SkyPoint::SOLSTICES_OF_DATE);
+	antisolarPoint = new SkyPoint(SkyPoint::ANTISOLAR);
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	connect(GETSTELMODULE(SolarSystem), SIGNAL(solarSystemDataReloaded()), this, SLOT(connectEarthFromSolarSystem()));
@@ -1129,6 +1160,7 @@ GridLinesMgr::~GridLinesMgr()
 	delete equinoxPoints;
 	delete solsticeJ2000Points;
 	delete solsticePoints;
+	delete antisolarPoint;
 }
 
 /*************************************************************************
@@ -1185,6 +1217,7 @@ void GridLinesMgr::init()
 	setFlagEquinoxPoints(conf->value("viewing/flag_equinox_points").toBool());
 	setFlagSolsticeJ2000Points(conf->value("viewing/flag_solstice_J2000_points").toBool());
 	setFlagSolsticePoints(conf->value("viewing/flag_solstice_points").toBool());
+	setFlagAntisolarPoint(conf->value("viewing/flag_antisolar_point").toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
@@ -1219,6 +1252,7 @@ void GridLinesMgr::init()
 	setColorEquinoxPoints(StelUtils::strToVec3f(conf->value("color/equinox_points_color", defaultColor).toString()));
 	setColorSolsticeJ2000Points(StelUtils::strToVec3f(conf->value("color/solstice_J2000_points_color", defaultColor).toString()));
 	setColorSolsticePoints(StelUtils::strToVec3f(conf->value("color/solstice_points_color", defaultColor).toString()));
+	setColorAntisolarPoint(StelUtils::strToVec3f(conf->value("color/antisolar_point_color", defaultColor).toString()));
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
@@ -1256,6 +1290,7 @@ void GridLinesMgr::init()
 	addAction("actionShow_Equinox_Points", displayGroup, N_("Equinox points"), "equinoxPointsDisplayed");
 	addAction("actionShow_Solstice_J2000_Points", displayGroup, N_("Solstice J2000 points"), "solsticeJ2000PointsDisplayed");
 	addAction("actionShow_Solstice_Points", displayGroup, N_("Solstice points"), "solsticePointsDisplayed");
+	addAction("actionShow_Antisolar_Point", displayGroup, N_("Antisolar point"), "antisolarPointDisplayed");
 }
 
 void GridLinesMgr::connectEarthFromSolarSystem()
@@ -1300,6 +1335,7 @@ void GridLinesMgr::update(double deltaTime)
 	equinoxPoints->update(deltaTime);
 	solsticeJ2000Points->update(deltaTime);
 	solsticePoints->update(deltaTime);
+	antisolarPoint->update(deltaTime);
 }
 
 void GridLinesMgr::draw(StelCore* core)
@@ -1325,6 +1361,7 @@ void GridLinesMgr::draw(StelCore* core)
 		equinoxPoints->draw(core);
 		solsticePoints->draw(core);
 		longitudeLine->draw(core);
+		antisolarPoint->draw(core);
 	}
 
 	equJ2000Grid->draw(core);
@@ -1380,6 +1417,7 @@ void GridLinesMgr::updateLineLabels()
 	equinoxPoints->updateLabel();
 	solsticeJ2000Points->updateLabel();
 	solsticePoints->updateLabel();
+	antisolarPoint->updateLabel();
 }
 
 //! Setter ("master switch") for displaying any grid/line.
@@ -2198,5 +2236,32 @@ void GridLinesMgr::setColorSolsticePoints(const Vec3f& newColor)
 	if(newColor != solsticePoints->getColor()) {
 		solsticePoints->setColor(newColor);
 		emit solsticePointsColorChanged(newColor);
+	}
+}
+
+//! Set flag for displaying antisolar point
+void GridLinesMgr::setFlagAntisolarPoint(const bool displayed)
+{
+	if(displayed != antisolarPoint->isDisplayed()) {
+		antisolarPoint->setDisplayed(displayed);
+		emit antisolarPointDisplayedChanged(displayed);
+	}
+}
+//! Get flag for displaying antisolar point
+bool GridLinesMgr::getFlagAntisolarPoint(void) const
+{
+	return antisolarPoint->isDisplayed();
+}
+
+Vec3f GridLinesMgr::getColorAntisolarPoint(void) const
+{
+	return antisolarPoint->getColor();
+}
+
+void GridLinesMgr::setColorAntisolarPoint(const Vec3f& newColor)
+{
+	if(newColor != antisolarPoint->getColor()) {
+		antisolarPoint->setColor(newColor);
+		emit antisolarPointColorChanged(newColor);
 	}
 }

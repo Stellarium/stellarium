@@ -322,6 +322,15 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorSolsticePoints
 		   NOTIFY solsticePointsColorChanged)
 
+	Q_PROPERTY(bool antisolarPointDisplayed
+		   READ getFlagAntisolarPoint
+		   WRITE setFlagAntisolarPoint
+		   NOTIFY antisolarPointDisplayedChanged)
+	Q_PROPERTY(Vec3f antisolarPointColor
+		   READ getColorAntisolarPoint
+		   WRITE setColorAntisolarPoint
+		   NOTIFY antisolarPointColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -798,6 +807,20 @@ public slots:
 	//! @endcode
 	void setColorSolsticePoints(const Vec3f& newColor);
 
+	//! Setter for displaying antisolar point.
+	void setFlagAntisolarPoint(const bool displayed);
+	//! Accessor for displaying antisolar point.
+	bool getFlagAntisolarPoint(void) const;
+	//! Get the current color of the antisolar point.
+	Vec3f getColorAntisolarPoint(void) const;
+	//! Set the color of the antisolar point.
+	//! @param newColor The color of antisolar point
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorAntisolarPoint(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorAntisolarPoint(const Vec3f& newColor);
+
 signals:
 	void gridlinesDisplayedChanged(const bool) const;
 	void azimuthalGridDisplayedChanged(const bool) const;
@@ -862,6 +885,8 @@ signals:
 	void solsticeJ2000PointsColorChanged(const Vec3f & newColor) const;
 	void solsticePointsDisplayedChanged(const bool displayed) const;
 	void solsticePointsColorChanged(const Vec3f & newColor) const;
+	void antisolarPointDisplayedChanged(const bool displayed) const;
+	void antisolarPointColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
@@ -873,14 +898,14 @@ private slots:
 
 private:
 	QSharedPointer<Planet> earth;           // shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
-	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
-	SkyGrid * equGrid;			// Equatorial grid
+	bool gridlinesDisplayed;			// master switch to switch off all grids/lines. (useful for oculars plugin)
+	SkyGrid * equGrid;				// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
 	SkyGrid * galacticGrid;			// Galactic grid
 	SkyGrid * supergalacticGrid;		// Supergalactic grid
-	SkyGrid * eclGrid;			// Ecliptic of Date grid
+	SkyGrid * eclGrid;				// Ecliptic of Date grid
 	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
-	SkyGrid * aziGrid;			// Azimuthal grid
+	SkyGrid * aziGrid;				// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * eclipticLine;			// Ecliptic line
@@ -888,7 +913,7 @@ private:
 	SkyLine * precessionCircleN;		// Northern precession circle
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line
-	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
+	SkyLine * longitudeLine;			// Opposition/conjunction longitude line
 	SkyLine * horizonLine;			// Horizon line
 	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
@@ -898,16 +923,17 @@ private:
 	SkyLine * circumpolarCircleN;		// Northern circumpolar circle
 	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
 	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
-	SkyPoint * celestialPoles;		// Celestial poles
+	SkyPoint * celestialPoles;			// Celestial poles
 	SkyPoint * zenithNadir;			// Zenith and nadir
 	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
-	SkyPoint * eclipticPoles;		// Ecliptic poles
-	SkyPoint * galacticPoles;		// Galactic poles
+	SkyPoint * eclipticPoles;			// Ecliptic poles
+	SkyPoint * galacticPoles;			// Galactic poles
 	SkyPoint * supergalacticPoles;		// Supergalactic poles
-	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
-	SkyPoint * equinoxPoints;		// Equinox points
+	SkyPoint * equinoxJ2000Points;	// Equinox points of J2000
+	SkyPoint * equinoxPoints;			// Equinox points
 	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
-	SkyPoint * solsticePoints;		// Solstice points
+	SkyPoint * solsticePoints;			// Solstice points
+	SkyPoint * antisolarPoint;			// Solstice points
 };
 
 #endif // GRIDLINESMGR_HPP
