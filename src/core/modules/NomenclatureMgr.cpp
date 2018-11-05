@@ -137,6 +137,7 @@ void NomenclatureMgr::loadNomenclature()
 		QString name, ntypecode, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		float latitude, longitude, size;
+		QStringList faultPlanets;
 
 		while (!planetSurfNamesFile.atEnd())
 		{
@@ -153,7 +154,7 @@ void NomenclatureMgr::loadNomenclature()
 			else
 			{
 				// Read the planet name
-				planet		= recRx.capturedTexts().at(1).trimmed();
+				planet	= recRx.capturedTexts().at(1).trimmed();
 				// Read the ID of feature
 				featureId	= recRx.capturedTexts().at(2).toInt();
 				// Read the name of feature and context
@@ -359,7 +360,6 @@ void NomenclatureMgr::loadNomenclature()
 					planetName = planet;					
 				}
 
-
 				if (!p.isNull())
 				{
 					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, ntype, latitude, longitude, size));
@@ -367,12 +367,20 @@ void NomenclatureMgr::loadNomenclature()
 						nomenclatureItems.insert(p, nom);
 
 					readOk++;
-				}				
+				}
+				else
+					faultPlanets << planet;
+
 			}
 		}
 
 		planetSurfNamesFile.close();
 		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
+
+		faultPlanets.removeDuplicates();
+		int err = faultPlanets.size();
+		if (err>0)
+			qDebug() << "WARNING - The next planets to assign nomenclature items is not found:" << faultPlanets.join(", ");
 
 	}
 }
