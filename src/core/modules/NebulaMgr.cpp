@@ -1176,9 +1176,9 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 		{
 			QStringList list=record.split("\t", QString::KeepEmptyParts);
 
-			id			= list.at(0).toInt();		// ID (inner identification number)
-			ra			= list.at(1).trimmed();
-			dec			= list.at(2).trimmed();
+			id				= list.at(0).toInt();		// ID (inner identification number)
+			ra				= list.at(1).trimmed();
+			dec				= list.at(2).trimmed();
 			bMag			= list.at(3).toFloat();		// B magnitude
 			vMag			= list.at(4).toFloat();		// V magnitude
 			oType			= list.at(5).trimmed();		// Object type
@@ -1186,39 +1186,39 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			majorAxisSize		= list.at(7).toFloat();		// major axis size (arcmin)
 			minorAxisSize		= list.at(8).toFloat();		// minor axis size (arcmin)
 			orientationAngle	= list.at(9).toInt();		// orientation angle (degrees)
-			z			= list.at(10).toFloat();	// redshift
-			zErr			= list.at(11).toFloat();	// error of redshift
-			plx			= list.at(12).toFloat();	// parallax (mas)
+			z				= list.at(10).toFloat();	// redshift
+			zErr				= list.at(11).toFloat();	// error of redshift
+			plx				= list.at(12).toFloat();	// parallax (mas)
 			plxErr			= list.at(13).toFloat();	// error of parallax (mas)
-			dist			= list.at(14).toFloat();	// distance (Mpc for galaxies, kpc for other objects)
+			dist				= list.at(14).toFloat();	// distance (Mpc for galaxies, kpc for other objects)
 			distErr			= list.at(15).toFloat();	// distance error (Mpc for galaxies, kpc for other objects)
 			// -----------------------------------------------
 			// cross-identification data
 			// -----------------------------------------------
-			NGC			= list.at(16).toInt();		// NGC number
-			IC			= list.at(17).toInt();		// IC number
-			M			= list.at(18).toInt();		// M number
-			C			= list.at(19).toInt();		// C number
-			B			= list.at(20).toInt();		// B number
-			Sh2			= list.at(21).toInt();		// Sh2 number
-			VdB			= list.at(22).toInt();		// VdB number
-			RCW			= list.at(23).toInt();		// RCW number
-			LDN			= list.at(24).toInt();		// LDN number
-			LBN			= list.at(25).toInt();		// LBN number
-			Cr			= list.at(26).toInt();		// Cr number (alias: Col)
-			Mel			= list.at(27).toInt();		// Mel number
-			PGC			= list.at(28).toInt();		// PGC number (subset)
-			UGC			= list.at(29).toInt();		// UGC number (subset)
-			Ced			= list.at(30).trimmed();	// Ced number
-			Arp			= list.at(31).toInt();		// Arp number
-			VV			= list.at(32).toInt();		// VV number
-			PK			= list.at(33).trimmed();	// PK number
-			PNG			= list.at(34).trimmed();	// PN G number
+			NGC				= list.at(16).toInt();		// NGC number
+			IC				= list.at(17).toInt();		// IC number
+			M				= list.at(18).toInt();		// M number
+			C				= list.at(19).toInt();		// C number
+			B				= list.at(20).toInt();		// B number
+			Sh2				= list.at(21).toInt();		// Sh2 number
+			VdB				= list.at(22).toInt();		// VdB number
+			RCW				= list.at(23).toInt();		// RCW number
+			LDN				= list.at(24).toInt();		// LDN number
+			LBN				= list.at(25).toInt();		// LBN number
+			Cr				= list.at(26).toInt();		// Cr number (alias: Col)
+			Mel				= list.at(27).toInt();		// Mel number
+			PGC				= list.at(28).toInt();		// PGC number (subset)
+			UGC				= list.at(29).toInt();		// UGC number (subset)
+			Ced				= list.at(30).trimmed();	// Ced number
+			Arp				= list.at(31).toInt();		// Arp number
+			VV				= list.at(32).toInt();		// VV number
+			PK				= list.at(33).trimmed();	// PK number
+			PNG				= list.at(34).trimmed();	// PN G number
 			SNRG			= list.at(35).trimmed();	// SNR G number
-			ACO			= list.at(36).trimmed();	// ACO number
-			HCG			= list.at(37).trimmed();	// HCG number
-			Abell			= list.at(38).toInt();		// Abell number
-			ESO			= list.at(39).trimmed();	// ESO number
+			ACO				= list.at(36).trimmed();	// ACO number
+			HCG				= list.at(37).trimmed();	// HCG number
+			Abell				= list.at(38).toInt();		// Abell number
+			ESO				= list.at(39).trimmed();	// ESO number
 
 			if (decimal)
 			{
