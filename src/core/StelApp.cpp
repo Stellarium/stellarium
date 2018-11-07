@@ -1065,3 +1065,12 @@ int StelApp::getGuiFontSize() const
 {
 	return QGuiApplication::font().pixelSize();
 }
+
+void StelApp::setAppFont(QFont font)
+{
+	int oldSize=QGuiApplication::font().pixelSize();
+	font.setPixelSize(oldSize);
+	font.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
+	QGuiApplication::setFont(font);
+	emit fontChanged(font);
+}

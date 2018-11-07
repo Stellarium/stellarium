@@ -332,14 +332,13 @@ void ConfigurationDialog::createDialogContent()
 	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.baseFontSize");
 	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
 	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
-	connect(ui->fontSelectPushButton, SIGNAL(released()), this, SLOT(selectAppFont()));
 	populateFontWritingSystemCombo();
 	connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
 
 	ui->fontComboBox->setWritingSystem(QFontDatabase::Any); // TODO: Make this Locale-dependent? Or show another combo to preselect?
 	ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
 	ui->fontComboBox->setCurrentFont(QGuiApplication::font());
-	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), this, SLOT(setAppFont(QFont)));
+	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), &StelApp::getInstance(), SLOT(setAppFont(QFont)));
 
 	// Dithering
 	populateDitherList();
@@ -1706,32 +1705,6 @@ void ConfigurationDialog::setDitherFormat()
 	Q_ASSERT(conf);
 	conf->setValue("video/dithering_mode", selectedFormat);
 	conf->sync();
-}
-
-// deprecated. Delete before merge!
-void ConfigurationDialog::selectAppFont()
-{
-	QFont font=QGuiApplication::font();
-	int size=font.pixelSize();
-	bool ok;
-	QFont newFont=QFontDialog::getFont(&ok, font, Q_NULLPTR, q_("Select main font"), QFontDialog::ScalableFonts | QFontDialog::ProportionalFonts);
-	if (ok)
-	{
-		newFont.setPixelSize(size); // set to old size!
-		QGuiApplication::setFont(newFont);
-		StelApp::getInstance().setBaseFontSize(newFont.pixelSize());
-	}
-	else
-		return;
-}
-
-
-void ConfigurationDialog::setAppFont(QFont font)
-{
-	int oldSize=QGuiApplication::font().pixelSize();
-	font.setPixelSize(oldSize);
-	font.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
-	QGuiApplication::setFont(font);
 }
 
 void ConfigurationDialog::populateFontWritingSystemCombo()

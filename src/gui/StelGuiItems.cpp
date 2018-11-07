@@ -52,6 +52,7 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
 #include <QSettings>
+#include <QGuiApplication>
 
 // Inspired by text-use-opengl-buffer branch: work around font problems in GUI buttons.
 // May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26. Mesa 13 (2016-11) has finally fixed this on RasPi(VC4).
@@ -402,6 +403,7 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 
 	setFontSizeFromApp(StelApp::getInstance().getBaseFontSize());
 	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
 	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
@@ -416,18 +418,31 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 //! connect from StelApp to resize fonts on the fly.
 void BottomStelBar::setFontSizeFromApp(int size)
 {
-	// Font size is 12
+	// Font size was developed based on base font size 13, i.e. 12
 	int baseFontSize = size-1;
-	QFont font;
-	font=datetime->font(); font.setPixelSize(baseFontSize); datetime->setFont(font);
-	font=location->font(); font.setPixelSize(baseFontSize);	location->setFont(font);
-	font=fov->font();      font.setPixelSize(baseFontSize);	fov->setFont(font);
-	font=fps->font();      font.setPixelSize(baseFontSize);	fps->setFont(font);
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(baseFontSize);
+	datetime->setFont(font);
+	location->setFont(font);
+	fov->setFont(font);
+	fps->setFont(font);
 	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
 	if (skyGui)
 		skyGui->updateBarsPos();
 }
 
+//! connect from StelApp to resize fonts on the fly.
+void BottomStelBar::setFont(QFont font)
+{
+	font.setPixelSize(StelApp::getInstance().getBaseFontSize()-1);
+	datetime->setFont(font);
+	location->setFont(font);
+	fov->setFont(font);
+	fps->setFont(font);
+	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
+	if (skyGui)
+		skyGui->updateBarsPos();
+}
 
 BottomStelBar::~BottomStelBar()
 {

@@ -265,6 +265,11 @@ public slots:
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
 
+	//! Set global application font.
+	//! To retrieve, you can use QGuiApplication::font().
+	//! emits fontChanged(font)
+	void setAppFont(QFont font);
+
 	//! Returns the default FBO handle, to be used when StelModule instances want to release their own FBOs.
 	//! Note that this is usually not the same as QOpenGLContext::defaultFramebufferObject(),
 	//! so use this call instead of the Qt version!
@@ -298,6 +303,7 @@ signals:
 	void languageChanged();
 	void baseFontSizeChanged(int);
 	void guiFontSizeChanged(int);
+	void fontChanged(QFont);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);

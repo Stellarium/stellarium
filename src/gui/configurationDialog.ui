@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>681</width>
+    <width>764</width>
     <height>570</height>
    </rect>
   </property>
@@ -288,7 +288,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page_Main">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -2018,16 +2018,6 @@
                </item>
                <item>
                 <widget class="QFontComboBox" name="fontComboBox"/>
-               </item>
-               <item>
-                <widget class="QPushButton" name="fontSelectPushButton">
-                 <property name="toolTip">
-                  <string>Select system font</string>
-                 </property>
-                 <property name="text">
-                  <string>Font...</string>
-                 </property>
-                </widget>
                </item>
               </layout>
              </item>
