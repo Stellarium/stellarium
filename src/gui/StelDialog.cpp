@@ -49,6 +49,9 @@ StelDialog::StelDialog(QString dialogName, QObject* parent)
 {
 	if (parent == Q_NULLPTR)
 		setParent(StelMainView::getInstance().getGuiWidget());
+
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(handleFontChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(guiFontSizeChanged(int)), this, SLOT(handleFontChanged()));
 }
 
 StelDialog::~StelDialog()
@@ -195,6 +198,17 @@ void StelDialog::setVisible(bool v)
 		StelMainView::getInstance().focusSky();
 	}
 	emit visibleChanged(v);
+}
+
+void StelDialog::handleFontChanged()
+{
+	if (dialog && dialog->isVisible())
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		// reload stylesheet, in case size or font changed!
+		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	}
 }
 
 void StelDialog::connectCheckBox(QAbstractButton *checkBox, const QString &actionName)

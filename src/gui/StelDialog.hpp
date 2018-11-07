@@ -179,12 +179,11 @@ protected slots:
 	void askColor();
 	//! enable kinetic scrolling. This should be connected to StelApp's StelGui signal flagUseKineticScrollingChanged.
 	void enableKineticScrolling(bool b);
+	//! connect from StelApp to handle font and font size changes.
+	void handleFontChanged();
 
 
 protected:
-
-	// MOVED THIS TO StelGui!
-	//bool flagKineticScrolling;
 	//! A list of widgets where kinetic scrolling can be activated or deactivated
 	//! The list must be filled once, in the constructor or init() of fillDialog() etc. functions.
 	QList<QWidget *> kineticScrollingList;
