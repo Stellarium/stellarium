@@ -1982,6 +1982,9 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="baseFontSizeSpinBox">
+                 <property name="toolTip">
+                  <string>Base font size for on-screen text</string>
+                 </property>
                  <property name="minimum">
                   <number>5</number>
                  </property>
@@ -2002,6 +2005,9 @@
                </item>
                <item>
                 <widget class="QSpinBox" name="guiFontSizeSpinBox">
+                 <property name="toolTip">
+                  <string>Base font size for dialogs</string>
+                 </property>
                  <property name="minimum">
                   <number>7</number>
                  </property>
@@ -2014,10 +2020,18 @@
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="fontWritingSystemComboBox"/>
+                <widget class="QComboBox" name="fontWritingSystemComboBox">
+                 <property name="toolTip">
+                  <string>Pre-select fonts for a particular writing system</string>
+                 </property>
+                </widget>
                </item>
                <item>
-                <widget class="QFontComboBox" name="fontComboBox"/>
+                <widget class="QFontComboBox" name="fontComboBox">
+                 <property name="toolTip">
+                  <string>Application font</string>
+                 </property>
+                </widget>
                </item>
               </layout>
              </item>
