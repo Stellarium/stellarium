@@ -329,16 +329,26 @@ void ConfigurationDialog::createDialogContent()
 	connectDoubleProperty(ui->mouseTimeoutSpinBox, "MainView.cursorTimeout");
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "StelGui.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
+	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
+
+	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
 	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.baseFontSize");
 	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
-	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
-	populateFontWritingSystemCombo();
-	connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
+	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", false).toBool())
+	{
+		populateFontWritingSystemCombo();
+		connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
 
-	ui->fontComboBox->setWritingSystem(QFontDatabase::Any); // TODO: Make this Locale-dependent? Or show another combo to preselect?
-	ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
-	ui->fontComboBox->setCurrentFont(QGuiApplication::font());
-	connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), &StelApp::getInstance(), SLOT(setAppFont(QFont)));
+		ui->fontComboBox->setWritingSystem(QFontDatabase::Any); // TODO: Make this Locale-dependent? Or show another combo to preselect?
+		ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
+		ui->fontComboBox->setCurrentFont(QGuiApplication::font());
+		connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), &StelApp::getInstance(), SLOT(setAppFont(QFont)));
+	}
+	else
+	{
+		ui->fontWritingSystemComboBox->hide();
+		ui->fontComboBox->hide();
+	}
 
 	// Dithering
 	populateDitherList();
