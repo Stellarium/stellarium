@@ -182,6 +182,32 @@ matrix:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
         - TRANSLATE=false
 
+    - os: linux
+      dist: xenial
+      sudo: required
+      addons:
+        apt:
+          packages:
+            - g++-5
+          update:
+            - true
+      env:
+         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+         - TRANSLATE=false
+
+    - os: linux
+      dist: xenial
+      sudo: required
+      addons:
+        apt:
+          packages:
+            - clang-7.0
+          update:
+            - true
+      env:
+        - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
+        - TRANSLATE=false
+
     - os: osx
       osx_image: xcode8.3
       env:
