@@ -332,14 +332,14 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
-	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.baseFontSize");
+	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.screenFontSize");
 	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
 	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", false).toBool())
 	{
 		populateFontWritingSystemCombo();
 		connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
 
-		ui->fontComboBox->setWritingSystem(QFontDatabase::Any); // TODO: Make this Locale-dependent? Or show another combo to preselect?
+		ui->fontComboBox->setWritingSystem(QFontDatabase::Any);
 		ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
 		ui->fontComboBox->setCurrentFont(QGuiApplication::font());
 		connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), &StelApp::getInstance(), SLOT(setAppFont(QFont)));
@@ -646,7 +646,7 @@ void ConfigurationDialog::saveAllSettings()
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
 
-	conf->setValue("gui/base_font_size",			propMgr->getStelPropertyValue("StelApp.baseFontSize").toInt());
+	conf->setValue("gui/screen_font_size",			propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
 	conf->setValue("gui/flag_enable_kinetic_scrolling", 	propMgr->getStelPropertyValue("StelGui.flagUseKineticScrolling").toBool());
 
 	// view dialog / sky tab settings
@@ -956,7 +956,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("gui/flag_mouse_cursor_timeout",		propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
 	conf->setValue("gui/mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
 	conf->setValue("gui/base_font_name",				QGuiApplication::font().family());
-	conf->setValue("gui/base_font_size",				propMgr->getStelPropertyValue("StelApp.baseFontSize").toInt());
+	conf->setValue("gui/screen_font_size",				propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
 	conf->setValue("gui/gui_font_size",				propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
 
 
@@ -1042,8 +1042,6 @@ void ConfigurationDialog::populatePluginsList()
 		plugins->setCurrentItem(plugins->findItems(selectedPluginName, Qt::MatchExactly).at(0));
 	else
 		plugins->setCurrentRow(0);
-
-
 }
 
 void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)

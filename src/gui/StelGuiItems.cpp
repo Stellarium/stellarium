@@ -401,8 +401,8 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
 
-	setFontSizeFromApp(StelApp::getInstance().getBaseFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
@@ -419,9 +419,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 void BottomStelBar::setFontSizeFromApp(int size)
 {
 	// Font size was developed based on base font size 13, i.e. 12
-	int baseFontSize = size-1;
+	int screenFontSize = size-1;
 	QFont font=QGuiApplication::font();
-	font.setPixelSize(baseFontSize);
+	font.setPixelSize(screenFontSize);
 	datetime->setFont(font);
 	location->setFont(font);
 	fov->setFont(font);
@@ -434,7 +434,7 @@ void BottomStelBar::setFontSizeFromApp(int size)
 //! connect from StelApp to resize fonts on the fly.
 void BottomStelBar::setFont(QFont font)
 {
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()-1);
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
 	datetime->setFont(font);
 	location->setFont(font);
 	fov->setFont(font);

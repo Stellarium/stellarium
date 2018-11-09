@@ -249,33 +249,33 @@ void ArchaeoLines::init()
 	connect(this, SIGNAL(customDeclination2ColorChanged(Vec3f)),     customDeclination2Line      , SLOT(setColor(Vec3f)));
 
 	StelApp& app=StelApp::getInstance();
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), equinoxLine                 , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), northernSolsticeLine        , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), southernSolsticeLine        , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), northernCrossquarterLine    , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), southernCrossquarterLine    , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), northernMajorStandstillLine0, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), northernMajorStandstillLine1, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), southernMajorStandstillLine6, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), southernMajorStandstillLine7, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), northernMinorStandstillLine2, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), northernMinorStandstillLine3, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), southernMinorStandstillLine4, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), southernMinorStandstillLine5, SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), zenithPassageLine           , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), nadirPassageLine            , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), selectedObjectLine          , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), selectedObjectAzimuthLine   , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), selectedObjectHourAngleLine , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), currentSunLine              , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), currentMoonLine             , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), currentPlanetLine           , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), geographicLocation1Line     , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), geographicLocation2Line     , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), customAzimuth1Line          , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), customAzimuth2Line          , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), customDeclination1Line      , SLOT(setFontSizeFromApp(const int)));
-	connect(&app, SIGNAL(baseFontSizeChanged(int)), customDeclination2Line      , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), equinoxLine                 , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernSolsticeLine        , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernSolsticeLine        , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernCrossquarterLine    , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernCrossquarterLine    , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMajorStandstillLine0, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMajorStandstillLine1, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMajorStandstillLine6, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMajorStandstillLine7, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMinorStandstillLine2, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMinorStandstillLine3, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMinorStandstillLine4, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMinorStandstillLine5, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), zenithPassageLine           , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), nadirPassageLine            , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), selectedObjectLine          , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), selectedObjectAzimuthLine   , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), selectedObjectHourAngleLine , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), currentSunLine              , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), currentMoonLine             , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), currentPlanetLine           , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), geographicLocation1Line     , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), geographicLocation2Line     , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customAzimuth1Line          , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customAzimuth2Line          , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customDeclination1Line      , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customDeclination2Line      , SLOT(setFontSizeFromApp(const int)));
 
 //	if (!conf->childGroups().contains("ArchaeoLines"))
 //	if (!conf->childGroups().contains("ArchaeoLines"))
@@ -1504,7 +1504,7 @@ ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle) :
 	if (lineType>=SelectedObjectAzimuth)
 		frameType=StelCore::FrameAltAz;
 	// Font size is 14
-	setFontSizeFromApp(StelApp::getInstance().getBaseFontSize());
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	updateLabel();
 	fader.setDuration(1000);
 	// Initialize the message strings and make sure they are translated when the language changes.

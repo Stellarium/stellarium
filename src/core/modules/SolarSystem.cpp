@@ -87,8 +87,8 @@ SolarSystem::SolarSystem()
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
 {
-	planetNameFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	planetNameFont.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	setObjectName("SolarSystem");
 }
 

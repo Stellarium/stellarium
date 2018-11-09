@@ -177,7 +177,7 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		StelCore *core=StelApp::getInstance().getCore();
 		QString s = selected[0]->getInfoString(core, infoTextFilters);
 		QFont font;
-		font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
 		setFont(font);
 		setHtml(s);
 		if (qApp->property("text_texture")==true) // CLI option -t given?

@@ -425,8 +425,8 @@ void StarMgr::init()
 	populateStarsDesignations();
 	populateHipparcosLists();
 
-	setFontSize(StelApp::getInstance().getBaseFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSize(int)));
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());

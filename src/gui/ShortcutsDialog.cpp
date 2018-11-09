@@ -373,7 +373,7 @@ QStandardItem* ShortcutsDialog::updateGroup(const QString& group)
 	QFont rootFont = groupItem->font();
 	rootFont.setBold(true);
 	// Font size is 14
-	rootFont.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	rootFont.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
 	groupItem->setFont(rootFont);
 	if (isNew)
 		mainModel->appendRow(groupItem);

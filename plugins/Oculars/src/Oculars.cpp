@@ -176,10 +176,9 @@ Oculars::Oculars()
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
 {
-	// Font size is 14
-	// font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
-	setFontSizeFromApp(StelApp::getInstance().getBaseFontSize());
-	connect(&StelApp::getInstance(), SIGNAL(baseFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	// Design font size is 14, based on default app fontsize 13.
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
@@ -1577,7 +1576,7 @@ bool Oculars::isBinocularDefined()
 
 void Oculars::paintCCDBounds()
 {
-	int fontSize = StelApp::getInstance().getBaseFontSize();
+	int fontSize = StelApp::getInstance().getScreenFontSize();
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;

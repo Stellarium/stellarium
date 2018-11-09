@@ -397,13 +397,15 @@ This section includes settings for the graphical user interface. See sections \r
 \toprule
 \emph{ID} & \emph{Type} & \emph{Default} & \emph{Description}\\\midrule
 flag\_show\_gui                 & bool   & true & If \emph{true}, display GUI.\\\midrule
-base\_font\_size & int    & 13 & Sets the font size. Typical value: \emph{15}\\%\midrule
+screen\_font\_size & int  & 13 & Sets the font size for screen texts. Typical value: \emph{13..15}\\%\midrule
+gui\_font\_size  & int    & 13 & Sets the dialog font size. Typical value: \emph{10..20}\\%\midrule
 base\_font\_name & string & Verdana     & Selects the name \\
                  &        & (Windows)            & for base font\\
                  &        & DejaVu Sans & \\
                  &        & (others)            & \\%\midrule
 %safe\_font\_name               & string &      & Selects the name for safe font, e.g. \emph{Verdana}\\\midrule
-base\_font\_file                & string &      & Selects the name for font file, e.g. \emph{DejaVuSans.ttf}\\\midrule
+base\_font\_file                & string &      & Selects the name for font file, e.g. \emph{DejaVuSans.ttf}\\
+flag\_font\_selection           & bool  & false & Show GUI elements for font selection.\\\midrule
 %% TODO: Is this required? timeout=0 also keeps cursor visible.
 flag\_mouse\_cursor\_timeout    & bool  & true  & Set to \emph{false} if you want to have cursor visible at all times.\\%\midrule
 mouse\_cursor\_timeout          & float & 10    & Set to \emph{0} if you want to keep the mouse cursor visible at all times. 
