@@ -187,6 +187,8 @@ matrix:
       sudo: required
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
             - g++-5
           update:
@@ -200,12 +202,14 @@ matrix:
       sudo: required
       addons:
         apt:
+          sources:
+            - ubuntu-toolchain-r-test
           packages:
-            - clang-7.0
+            - clang
           update:
             - true
       env:
-        - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
 
     - os: osx
