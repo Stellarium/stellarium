@@ -332,7 +332,7 @@ void ConfigurationDialog::createDialogContent()
 	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
 
 	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
-	connectIntProperty(ui->baseFontSizeSpinBox, "StelApp.screenFontSize");
+	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
 	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
 	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", false).toBool())
 	{

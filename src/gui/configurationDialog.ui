@@ -1974,14 +1974,14 @@
              <item row="17" column="1" rowspan="2">
               <layout class="QHBoxLayout" name="fontHorizontalLayout">
                <item>
-                <widget class="QLabel" name="baseFontSizeLabel">
+                <widget class="QLabel" name="fontSizeLabel">
                  <property name="text">
                   <string>Font size: Screen</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="baseFontSizeSpinBox">
+                <widget class="QSpinBox" name="screenFontSizeSpinBox">
                  <property name="toolTip">
                   <string>Base font size for on-screen text</string>
                  </property>

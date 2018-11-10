@@ -2296,15 +2296,15 @@ void GridLinesMgr::setFontSizeFromApp(int size)
 	colureLine_2->setFontSize(lineFontSize);
 	circumpolarCircleN->setFontSize(lineFontSize);
 	circumpolarCircleS->setFontSize(lineFontSize);
-	 celestialJ2000Poles->setFontSize(pointFontSize);
-	 celestialPoles->setFontSize(pointFontSize);
-	 zenithNadir->setFontSize(pointFontSize);
-	 eclipticJ2000Poles->setFontSize(pointFontSize);
-	 eclipticPoles->setFontSize(pointFontSize);
-	 galacticPoles->setFontSize(pointFontSize);
-	 supergalacticPoles->setFontSize(pointFontSize);
-	 equinoxJ2000Points->setFontSize(pointFontSize);
-	 equinoxPoints->setFontSize(pointFontSize);
-	 solsticeJ2000Points->setFontSize(pointFontSize);
-	 solsticePoints->setFontSize(pointFontSize);
+	celestialJ2000Poles->setFontSize(pointFontSize);
+	celestialPoles->setFontSize(pointFontSize);
+	zenithNadir->setFontSize(pointFontSize);
+	eclipticJ2000Poles->setFontSize(pointFontSize);
+	eclipticPoles->setFontSize(pointFontSize);
+	galacticPoles->setFontSize(pointFontSize);
+	supergalacticPoles->setFontSize(pointFontSize);
+	equinoxJ2000Points->setFontSize(pointFontSize);
+	equinoxPoints->setFontSize(pointFontSize);
+	solsticeJ2000Points->setFontSize(pointFontSize);
+	solsticePoints->setFontSize(pointFontSize);
 }
