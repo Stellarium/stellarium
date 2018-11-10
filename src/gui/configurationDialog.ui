@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>764</width>
-    <height>570</height>
+    <width>882</width>
+    <height>634</height>
    </rect>
   </property>
   <layout class="QVBoxLayout">
@@ -1998,8 +1998,11 @@
                </item>
                <item>
                 <widget class="QLabel" name="guiFontSizeLabel">
+                 <property name="toolTip">
+                  <string>Graphical user interface</string>
+                 </property>
                  <property name="text">
-                  <string>GUI</string>
+                  <string comment="abbreviation">GUI</string>
                  </property>
                 </widget>
                </item>
