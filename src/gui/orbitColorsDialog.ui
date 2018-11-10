@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>546</width>
+    <width>470</width>
     <height>482</height>
    </rect>
   </property>
@@ -187,38 +187,21 @@
       <property name="bottomMargin">
        <number>0</number>
       </property>
-      <item row="9" column="2">
-       <widget class="QLabel" name="labelMPVenus">
+      <item row="2" column="1">
+       <widget class="QLabel" name="labelGroupsMajorPlanetsColor">
         <property name="text">
-         <string>Orbit of Venus</string>
+         <string>Orbits of major planets</string>
         </property>
        </widget>
       </item>
-      <item row="6" column="2">
+      <item row="6" column="3">
        <widget class="QLabel" name="labelGroupsOCOColor">
         <property name="text">
          <string>Orbits of Oort cloud objects</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QToolButton" name="colorGroupsPlutinosOrbits">
-        <property name="toolTip">
-         <string>Color of plutino orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0" colspan="4">
-       <widget class="Line" name="line1">
-        <property name="frameShadow">
-         <enum>QFrame::Plain</enum>
-        </property>
-        <property name="orientation">
-         <enum>Qt::Horizontal</enum>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0">
+      <item row="3" column="1">
        <widget class="QLabel" name="labelGroupsMinorPlanetsColor">
         <property name="toolTip">
          <string/>
@@ -228,122 +211,14 @@
         </property>
        </widget>
       </item>
-      <item row="6" column="3">
-       <widget class="QToolButton" name="colorGroupsOCOOrbits">
-        <property name="toolTip">
-         <string>Color of Oort cloud object orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="labelGroupsSDOColor">
-        <property name="text">
-         <string>Orbits of scattered disk objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="3">
-       <widget class="QToolButton" name="colorGroupsSednoidsOrbits">
-        <property name="toolTip">
-         <string>Color of sednoid orbits</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="2">
-       <widget class="QLabel" name="labelGroupsSednoidsColor">
-        <property name="text">
-         <string>Orbits of sednoids</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="3">
-       <widget class="QToolButton" name="colorMPNeptuneOrbit">
-        <property name="toolTip">
-         <string>Color of Neptune orbit</string>
-        </property>
-       </widget>
-      </item>
       <item row="2" column="3">
-       <widget class="QToolButton" name="colorGroupsMoonsOrbits">
-        <property name="toolTip">
-         <string>Color of planet moon orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="2">
-       <widget class="QLabel" name="labelMPMars">
-        <property name="text">
-         <string>Orbit of Mars</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="0">
-       <widget class="QLabel" name="labelMPUranus">
-        <property name="text">
-         <string>Orbit of Uranus</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="0">
-       <widget class="QLabel" name="labelMPMercury">
-        <property name="text">
-         <string>Orbit of Mercury</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QToolButton" name="colorGenericOrbits">
-        <property name="toolTip">
-         <string>Color of generic orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="1">
-       <widget class="QToolButton" name="colorGroupsMajorPlanetsOrbits">
-        <property name="toolTip">
-         <string>Color of major planet orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QToolButton" name="colorGroupsCometsOrbits">
-        <property name="toolTip">
-         <string>Color of comet orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0">
-       <widget class="QLabel" name="labelGroupsMajorPlanetsColor">
-        <property name="text">
-         <string>Orbits of major planets</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="3">
-       <widget class="QToolButton" name="colorMPSaturnOrbit">
-        <property name="toolTip">
-         <string>Color of Saturn orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="9" column="3">
-       <widget class="QToolButton" name="colorMPVenusOrbit">
-        <property name="toolTip">
-         <string>Color of Venus orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="2">
        <widget class="QLabel" name="labelGroupsMoonsColor">
         <property name="text">
          <string>Orbits of moons of planets</string>
         </property>
        </widget>
       </item>
-      <item row="12" column="2">
+      <item row="12" column="3">
        <widget class="QLabel" name="labelMPNeptune">
         <property name="toolTip">
          <string/>
@@ -353,49 +228,28 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="3">
-       <widget class="QToolButton" name="colorGroupsCubewanosOrbits">
-        <property name="toolTip">
-         <string>Color of cubewano orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="0">
+      <item row="11" column="1">
        <widget class="QLabel" name="labelMPJupiter">
         <property name="text">
          <string>Orbit of Jupiter</string>
         </property>
        </widget>
       </item>
-      <item row="12" column="1">
-       <widget class="QToolButton" name="colorMPUranusOrbit">
-        <property name="toolTip">
-         <string>Color of Uranus orbit</string>
-        </property>
-       </widget>
-      </item>
       <item row="10" column="1">
-       <widget class="QToolButton" name="colorMPEarthOrbit">
-        <property name="toolTip">
-         <string>Color of Earth orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="10" column="0">
        <widget class="QLabel" name="labelMPEarth">
         <property name="text">
          <string>Orbit of Earth</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
-       <widget class="QToolButton" name="colorGroupsMinorPlanetsOrbits">
-        <property name="toolTip">
-         <string>Color of minor planet orbits</string>
+      <item row="4" column="1">
+       <widget class="QLabel" name="labelGroupsDwarfPlanetsColor">
+        <property name="text">
+         <string>Orbits of dwarf planets</string>
         </property>
        </widget>
       </item>
-      <item row="11" column="2">
+      <item row="11" column="3">
        <widget class="QLabel" name="labelMPSaturn">
         <property name="toolTip">
          <string/>
@@ -405,49 +259,21 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="labelGroupsDwarfPlanetsColor">
-        <property name="text">
-         <string>Orbits of dwarf planets</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QToolButton" name="colorGroupsDwarfPlanetsOrbits">
-        <property name="toolTip">
-         <string>Color of dwarf planet orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="2">
+      <item row="3" column="3">
        <widget class="QLabel" name="labelGroupsCometsColor">
         <property name="text">
          <string>Orbits of comets</string>
         </property>
        </widget>
       </item>
-      <item row="9" column="1">
-       <widget class="QToolButton" name="colorMPMercuryOrbit">
-        <property name="toolTip">
-         <string>Color of Mercury orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="11" column="1">
-       <widget class="QToolButton" name="colorMPJupiterOrbit">
-        <property name="toolTip">
-         <string>Color of Jupiter orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
+      <item row="5" column="1">
        <widget class="QLabel" name="labelGroupsPlutinosColor">
         <property name="text">
          <string>Orbits of plutinos</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="0">
+      <item row="0" column="1">
        <widget class="QLabel" name="labelGenericOrbitColor">
         <property name="toolTip">
          <string/>
@@ -457,8 +283,207 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="0" colspan="4">
-       <widget class="Line" name="line2">
+      <item row="7" column="1">
+       <widget class="QLabel" name="labelGroupsInterstellarColor">
+        <property name="text">
+         <string>Orbits (trajectories) of interstellar objects</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QLabel" name="labelGroupsCubewanosColor">
+        <property name="text">
+         <string>Orbits of cubewanos</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="3">
+       <widget class="QLabel" name="labelMPVenus">
+        <property name="text">
+         <string>Orbit of Venus</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="3">
+       <widget class="QLabel" name="labelGroupsSednoidsColor">
+        <property name="text">
+         <string>Orbits of sednoids</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QLabel" name="labelGroupsSDOColor">
+        <property name="text">
+         <string>Orbits of scattered disk objects</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="1">
+       <widget class="QLabel" name="labelMPUranus">
+        <property name="text">
+         <string>Orbit of Uranus</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="3">
+       <widget class="QLabel" name="labelMPMars">
+        <property name="text">
+         <string>Orbit of Mars</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="1">
+       <widget class="QLabel" name="labelMPMercury">
+        <property name="text">
+         <string>Orbit of Mercury</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QToolButton" name="colorGenericOrbits">
+        <property name="toolTip">
+         <string>Color of generic orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QToolButton" name="colorGroupsMajorPlanetsOrbits">
+        <property name="toolTip">
+         <string>Color of major planet orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QToolButton" name="colorGroupsMinorPlanetsOrbits">
+        <property name="toolTip">
+         <string>Color of minor planet orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QToolButton" name="colorGroupsDwarfPlanetsOrbits">
+        <property name="toolTip">
+         <string>Color of dwarf planet orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QToolButton" name="colorGroupsPlutinosOrbits">
+        <property name="toolTip">
+         <string>Color of plutino orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="0">
+       <widget class="QToolButton" name="colorGroupsSDOOrbits">
+        <property name="toolTip">
+         <string>Color of scattered disk object orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="7" column="0">
+       <widget class="QToolButton" name="colorGroupsInterstellarOrbits">
+        <property name="toolTip">
+         <string>Color of interstellar objects' orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
+       <widget class="QToolButton" name="colorGroupsMoonsOrbits">
+        <property name="toolTip">
+         <string>Color of planet moon orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="2">
+       <widget class="QToolButton" name="colorGroupsCometsOrbits">
+        <property name="toolTip">
+         <string>Color of comet orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="2">
+       <widget class="QToolButton" name="colorGroupsCubewanosOrbits">
+        <property name="toolTip">
+         <string>Color of cubewano orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="2">
+       <widget class="QToolButton" name="colorGroupsSednoidsOrbits">
+        <property name="toolTip">
+         <string>Color of sednoid orbits</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="2">
+       <widget class="QToolButton" name="colorGroupsOCOOrbits">
+        <property name="toolTip">
+         <string>Color of Oort cloud object orbits</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="0">
+       <widget class="QToolButton" name="colorMPMercuryOrbit">
+        <property name="toolTip">
+         <string>Color of Mercury orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="0">
+       <widget class="QToolButton" name="colorMPEarthOrbit">
+        <property name="toolTip">
+         <string>Color of Earth orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="0">
+       <widget class="QToolButton" name="colorMPJupiterOrbit">
+        <property name="toolTip">
+         <string>Color of Jupiter orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="9" column="2">
+       <widget class="QToolButton" name="colorMPVenusOrbit">
+        <property name="toolTip">
+         <string>Color of Venus orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="10" column="2">
+       <widget class="QToolButton" name="colorMPMarsOrbit">
+        <property name="toolTip">
+         <string>Color of Mars orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="11" column="2">
+       <widget class="QToolButton" name="colorMPSaturnOrbit">
+        <property name="toolTip">
+         <string>Color of Saturn orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="0">
+       <widget class="QToolButton" name="colorMPUranusOrbit">
+        <property name="toolTip">
+         <string>Color of Uranus orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="2">
+       <widget class="QToolButton" name="colorMPNeptuneOrbit">
+        <property name="toolTip">
+         <string>Color of Neptune orbit</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="5">
+       <widget class="Line" name="line1">
         <property name="frameShadow">
          <enum>QFrame::Plain</enum>
         </property>
@@ -467,38 +492,13 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="2">
-       <widget class="QLabel" name="labelGroupsCubewanosColor">
-        <property name="text">
-         <string>Orbits of cubewanos</string>
+      <item row="8" column="0" colspan="5">
+       <widget class="Line" name="line2">
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
         </property>
-       </widget>
-      </item>
-      <item row="10" column="3">
-       <widget class="QToolButton" name="colorMPMarsOrbit">
-        <property name="toolTip">
-         <string>Color of Mars orbit</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="0">
-       <widget class="QLabel" name="labelGroupsInterstellarColor">
-        <property name="text">
-         <string>Orbits (trajectories) of interstellar objects</string>
-        </property>
-       </widget>
-      </item>
-      <item row="7" column="1">
-       <widget class="QToolButton" name="colorGroupsInterstellarOrbits">
-        <property name="toolTip">
-         <string>Color of interstellar objects' orbits</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QToolButton" name="colorGroupsSDOOrbits">
-        <property name="toolTip">
-         <string>Color of scattered disk object orbits</string>
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
        </widget>
       </item>

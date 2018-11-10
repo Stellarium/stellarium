@@ -57,6 +57,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QFileDialog>
+#include <QFontDialog>
 #include <QComboBox>
 #include <QDir>
 #include <QDesktopWidget>
@@ -151,9 +152,13 @@ void ConfigurationDialog::createDialogContent()
 	ui->stackListWidget->setCurrentRow(0);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->pluginsListWidget << ui->scriptListWidget;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->pluginsListWidget << ui->scriptListWidget;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
@@ -324,6 +329,26 @@ void ConfigurationDialog::createDialogContent()
 	connectDoubleProperty(ui->mouseTimeoutSpinBox, "MainView.cursorTimeout");
 	connectBoolProperty(ui->useButtonsBackgroundCheckBox, "StelGui.flagUseButtonsBackground");
 	connectBoolProperty(ui->indicationMountModeCheckBox, "StelMovementMgr.flagIndicationMountMode");
+	connectBoolProperty(ui->kineticScrollingCheckBox, "StelGui.flagUseKineticScrolling");
+
+	// Font selection. We use a hidden, but documented entry in config.ini to optionally show a font selection option.
+	connectIntProperty(ui->screenFontSizeSpinBox, "StelApp.screenFontSize");
+	connectIntProperty(ui->guiFontSizeSpinBox, "StelApp.guiFontSize");
+	if (StelApp::getInstance().getSettings()->value("gui/flag_font_selection", false).toBool())
+	{
+		populateFontWritingSystemCombo();
+		connect(ui->fontWritingSystemComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(handleFontBoxWritingSystem(int)));
+
+		ui->fontComboBox->setWritingSystem(QFontDatabase::Any);
+		ui->fontComboBox->setFontFilters(QFontComboBox::ScalableFonts | QFontComboBox::ProportionalFonts);
+		ui->fontComboBox->setCurrentFont(QGuiApplication::font());
+		connect(ui->fontComboBox, SIGNAL(currentFontChanged(QFont)), &StelApp::getInstance(), SLOT(setAppFont(QFont)));
+	}
+	else
+	{
+		ui->fontWritingSystemComboBox->hide();
+		ui->fontComboBox->hide();
+	}
 
 	// Dithering
 	populateDitherList();
@@ -620,6 +645,9 @@ void ConfigurationDialog::saveAllSettings()
 	StelCore* core = StelApp::getInstance().getCore();
 	const StelProjectorP proj = core->getProjection(StelCore::FrameJ2000);
 	Q_ASSERT(proj);
+
+	conf->setValue("gui/screen_font_size",			propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
+	conf->setValue("gui/flag_enable_kinetic_scrolling", 	propMgr->getStelPropertyValue("StelGui.flagUseKineticScrolling").toBool());
 
 	// view dialog / sky tab settings
 	conf->setValue("stars/absolute_scale",				QString::number(propMgr->getStelPropertyValue("StelSkyDrawer.absoluteStarScale").toDouble(), 'f', 2));
@@ -927,6 +955,10 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("navigation/auto_zoom_out_resets_direction",	mvmgr->getFlagAutoZoomOutResetsDirection());
 	conf->setValue("gui/flag_mouse_cursor_timeout",		propMgr->getStelPropertyValue("MainView.flagCursorTimeout").toBool());
 	conf->setValue("gui/mouse_cursor_timeout",			propMgr->getStelPropertyValue("MainView.cursorTimeout").toFloat());
+	conf->setValue("gui/base_font_name",				QGuiApplication::font().family());
+	conf->setValue("gui/screen_font_size",				propMgr->getStelPropertyValue("StelApp.screenFontSize").toInt());
+	conf->setValue("gui/gui_font_size",				propMgr->getStelPropertyValue("StelApp.guiFontSize").toInt());
+
 
 	conf->setValue("main/screenshot_dir",				StelFileMgr::getScreenshotDir());
 	conf->setValue("main/invert_screenshots_colors",		propMgr->getStelPropertyValue("MainView.flagInvertScreenShotColors").toBool());
@@ -1010,8 +1042,6 @@ void ConfigurationDialog::populatePluginsList()
 		plugins->setCurrentItem(plugins->findItems(selectedPluginName, Qt::MatchExactly).at(0));
 	else
 		plugins->setCurrentRow(0);
-
-
 }
 
 void ConfigurationDialog::pluginsSelectionChanged(QListWidgetItem* item, QListWidgetItem* previousItem)
@@ -1683,4 +1713,22 @@ void ConfigurationDialog::setDitherFormat()
 	Q_ASSERT(conf);
 	conf->setValue("video/dithering_mode", selectedFormat);
 	conf->sync();
+}
+
+void ConfigurationDialog::populateFontWritingSystemCombo()
+{
+	QComboBox *combo=ui->fontWritingSystemComboBox;
+	QFontDatabase fontDatabase;
+	const QList<QFontDatabase::WritingSystem> writingSystems=fontDatabase.writingSystems();
+		for (const auto& system : writingSystems)
+		{
+			combo->addItem(QFontDatabase::writingSystemName(system) + "  " + QFontDatabase::writingSystemSample(system), system);
+		}
+}
+
+void ConfigurationDialog::handleFontBoxWritingSystem(int index)
+{
+	Q_UNUSED(index)
+	QComboBox *sender=dynamic_cast<QComboBox *>(QObject::sender());
+	ui->fontComboBox->setWritingSystem((QFontDatabase::WritingSystem) sender->currentData().toInt());
 }

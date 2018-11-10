@@ -176,6 +176,9 @@ void InfoPanel::setTextFromObjects(const QList<StelObjectP>& selected)
 		// Must set lastRTS for currently selected object here...
 		StelCore *core=StelApp::getInstance().getCore();
 		QString s = selected[0]->getInfoString(core, infoTextFilters);
+		QFont font;
+		font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+		setFont(font);
 		setHtml(s);
 		if (qApp->property("text_texture")==true) // CLI option -t given?
 		{
@@ -255,14 +258,8 @@ void SkyGui::init(StelGui* astelGui)
 {
 	stelGui = astelGui;
 
-	winBar->setParentItem(this);
-	buttonBar->setParentItem(this);
-	buttonBarPath->setParentItem(this);
-	infoPanel->setParentItem(this);
-	progressBarMgr->setParentItem(this);
-
 	// Create the 2 auto hide buttons in the bottom left corner
-	autoHidebts = new CornerButtons();
+	autoHidebts = new CornerButtons(this);
 	QPixmap pxmapOn = QPixmap(":/graphicGui/HorizontalAutoHideOn.png");
 	QPixmap pxmapOff = QPixmap(":/graphicGui/HorizontalAutoHideOff.png");
 	btHorizAutoHide = new StelButton(autoHidebts, pxmapOn, pxmapOff, QPixmap(), "actionAutoHideHorizontalButtonBar", true);
@@ -273,7 +270,6 @@ void SkyGui::init(StelGui* astelGui)
 	btHorizAutoHide->setPos(1,btVertAutoHide->pixmap().height()-btHorizAutoHide->pixmap().height()+1);
 	btVertAutoHide->setPos(0,0);
 	btVertAutoHide->setZValue(1000);
-	autoHidebts->setParentItem(this);
 
 	infoPanel->setPos(8,8);
 

@@ -165,6 +165,7 @@ Oculars::Oculars()
 	, actionOcularIncrement(Q_NULLPTR)
 	, actionOcularDecrement(Q_NULLPTR)
 	, guiPanel(Q_NULLPTR)
+	, guiPanelFontSize(12)
 	, actualFOV(0.)
 	, initialFOV(0.)
 	, flagInitFOVUsage(false)
@@ -175,8 +176,9 @@ Oculars::Oculars()
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
 {
-	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	// Design font size is 14, based on default app fontsize 13.
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
@@ -277,6 +279,10 @@ void Oculars::deinit()
 	settings->setValue("telescope_count", telescopes.count());
 	settings->setValue("ccd_count", ccds.count());
 	settings->setValue("lens_count", lenses.count());
+	settings->setValue("ocular_index", selectedOcularIndex);
+	settings->setValue("telescope_index", selectedTelescopeIndex);
+	settings->setValue("ccd_index", selectedCCDIndex);
+	settings->setValue("lens_index", selectedLensIndex);
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -623,7 +629,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedOcularIndex = 0;
+			selectedOcularIndex = qMin(settings->value("ocular_index", 0).toInt(), actualOcularCount-1);
 		}
 
 		int ccdCount = settings->value("ccd_count", 0).toInt();
@@ -645,6 +651,7 @@ void Oculars::init()
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 			ready = false;
 		}
+		selectedCCDIndex = qMin(settings->value("ccd_index", 0).toInt(), actualCcdCount-1);
 
 		int telescopeCount = settings->value("telescope_count", 0).toInt();
 		int actualTelescopeCount = telescopeCount;
@@ -674,7 +681,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedTelescopeIndex = 0;
+			selectedTelescopeIndex = qMin(settings->value("telescope_index", 0).toInt(), actualTelescopeCount-1);;
 		}
 
 		int lensCount = settings->value("lens_count", 0).toInt();
@@ -695,6 +702,7 @@ void Oculars::init()
 		{
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 		}
+		selectedLensIndex=qMin(settings->value("lens_index", 0).toInt(), actualLensCount-1);;
 
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
@@ -704,6 +712,7 @@ void Oculars::init()
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
 
+		guiPanelFontSize=settings->value("gui_panel_fontsize", 12).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
 
 		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
@@ -1567,7 +1576,7 @@ bool Oculars::isBinocularDefined()
 
 void Oculars::paintCCDBounds()
 {
-	int fontSize = StelApp::getInstance().getBaseFontSize();
+	int fontSize = StelApp::getInstance().getScreenFontSize();
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
@@ -2645,4 +2654,23 @@ void Oculars::setFlagShowOcularsButton(bool b)
 	settings->sync();
 
 	emit flagShowOcularsButtonChanged(b);
+}
+
+
+void Oculars::setGuiPanelFontSize(int size)
+{
+	// This forces a redraw of the panel.
+	if (size!=guiPanelFontSize)
+	{
+		bool guiPanelVisible=guiPanel;
+		if (guiPanelVisible)
+			enableGuiPanel(false);
+		guiPanelFontSize=size;
+		if (guiPanelVisible)
+			enableGuiPanel(true);
+
+		settings->setValue("gui_panel_fontsize", size);
+		settings->sync();
+		emit guiPanelFontSizeChanged(size);
+	}
 }

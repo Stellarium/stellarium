@@ -280,6 +280,9 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
   this option changes the behaviour of the zoom out key
   \key{\textbackslash{}} so that it resets the initial direction of view in
   addition to the field of view.
+\item[Enable keyboard navigation]
+\item[Enable mouse navigation]
+
 \item[Azimuth from South] Some users may be used to counting azimuth
   from south.
 \item[Use decimal degrees] You can toggle usage of decimal degree format for coordinates.
@@ -290,9 +293,34 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Auto select landscapes] When changing the planet in the location
   panel, a fitting landscape panorama will be shown when available.
 \item[Indication for mount mode] You can activate the short display of a message when switching type of used mount.
+\item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
+\item[Mouse cursor timeout] You can decide whether, and when, the
+  mouse cursor should disappear from view when not moved.
+\item[Use kinetic scrolling]  Text fields in \newFeature{v0.18.3} 
+  dialogs can either be moved on sidebar handles (with this switch
+  disabled) or by dragging the text itself (enabled), as it is known
+  from touch-enabled devices like smartphones. 
 \end{description}
 
-\noindent In addition, you can set the directory where screenshots
+\paragraph{Font size and font selection} \newFeature{v0.18.3} You can change the font sizes for on-screen
+text and GUI dialogs separately.  For some purposes like presentations
+it may be helpful to enlarge screen font size while keeping GUI font
+regular, or vice versa.  It also depends on your screen size whether
+all the object info fits on screen. This may also depend on the
+writing system and installed font. If you are using a non-Western
+character system and the default font looks bad, you can select
+another system font. For this, edit \file{config.ini} (see
+chapter~\ref{sec:Directories}): locate the \texttt{[gui]} section and
+set the key \texttt{flag\_font\_selection=true}. On next start of
+Stellarium, you will find two elements for font selection: one allows
+you to pre-select a writing system, the other will then allow
+selection of a font installed in your system that includes the
+characters used in the selected writing system. When you have found
+the best font, store your settings on the Main tab (see
+section~\ref{sec:gui:configuration:main}) and you may edit
+\file{config.ini} again to disable the font selection switches.
+
+\paragraph{Screenshots} You can set the directory where screenshots
 will be stored, and \newFeature{v0.18.1} also whether you want
 screenshots sized like Stellarium's window or some other, likely
 larger size. The maximum possible size depends on your

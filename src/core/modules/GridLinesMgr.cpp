@@ -48,7 +48,7 @@ public:
 	SkyGrid(StelCore::FrameType frame);
 	virtual ~SkyGrid();
 	void draw(const StelCore* prj) const;
-	void setFontSize(double newFontSize);
+	void setFontSize(int newFontSize);
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
 	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
@@ -92,7 +92,7 @@ public:
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed(void) const {return fader;}
-	void setFontSize(double newSize);
+	void setFontSize(int newSize);
 	//! Re-translates the label.
 	void updateLabel();
 private:
@@ -141,7 +141,7 @@ public:
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed(void) const {return fader;}
-	void setFontSize(double newSize);
+	void setFontSize(int newSize);
 	//! Re-translates the label.
 	void updateLabel();
 private:
@@ -158,14 +158,14 @@ private:
 SkyGrid::SkyGrid(StelCore::FrameType frame) : color(0.2,0.2,0.2), frameType(frame)
 {
 	// Font size is 12
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()-1);
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
 }
 
 SkyGrid::~SkyGrid()
 {
 }
 
-void SkyGrid::setFontSize(double newFontSize)
+void SkyGrid::setFontSize(int newFontSize)
 {
 	font.setPixelSize(newFontSize);
 }
@@ -613,7 +613,7 @@ void SkyGrid::draw(const StelCore* core) const
 SkyLine::SkyLine(SKY_LINE_TYPE _line_type) : line_type(_line_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
 	sun = GETSTELMODULE(SolarSystem)->getSun();
@@ -625,7 +625,7 @@ SkyLine::~SkyLine()
 {
 }
 
-void SkyLine::setFontSize(double newFontSize)
+void SkyLine::setFontSize(int newFontSize)
 {
 	font.setPixelSize(newFontSize);
 }
@@ -864,7 +864,7 @@ void SkyLine::draw(StelCore *core) const
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
 {
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()+1);
 	texCross = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/cross.png");
 
 	earth = GETSTELMODULE(SolarSystem)->getEarth();
@@ -878,7 +878,7 @@ SkyPoint::~SkyPoint()
 	texCross.clear();
 }
 
-void SkyPoint::setFontSize(double newFontSize)
+void SkyPoint::setFontSize(int newFontSize)
 {
 	font.setPixelSize(newFontSize);
 }
@@ -1256,6 +1256,7 @@ void GridLinesMgr::init()
 
 	StelApp& app = StelApp::getInstance();
 	connect(&app, SIGNAL(languageChanged()), this, SLOT(updateLineLabels()));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 	
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_Gridlines", displayGroup, N_("Grids and lines"), "gridlinesDisplayed");
@@ -2264,4 +2265,46 @@ void GridLinesMgr::setColorAntisolarPoint(const Vec3f& newColor)
 		antisolarPoint->setColor(newColor);
 		emit antisolarPointColorChanged(newColor);
 	}
+}
+
+void GridLinesMgr::setFontSizeFromApp(int size)
+{
+	const int gridFontSize=size-1;
+	const int lineFontSize=size+1;
+	const int pointFontSize=size+1;
+
+	equGrid->setFontSize(gridFontSize);
+	equJ2000Grid->setFontSize(gridFontSize);
+	galacticGrid->setFontSize(gridFontSize);
+	supergalacticGrid->setFontSize(gridFontSize);
+	eclGrid->setFontSize(gridFontSize);
+	eclJ2000Grid->setFontSize(gridFontSize);
+	aziGrid->setFontSize(gridFontSize);
+	equatorLine->setFontSize(lineFontSize);
+	equatorJ2000Line->setFontSize(lineFontSize);
+	eclipticLine->setFontSize(lineFontSize);
+	eclipticJ2000Line->setFontSize(lineFontSize);
+	precessionCircleN->setFontSize(lineFontSize);
+	precessionCircleS->setFontSize(lineFontSize);
+	meridianLine->setFontSize(lineFontSize);
+	longitudeLine->setFontSize(lineFontSize);
+	horizonLine->setFontSize(lineFontSize);
+	galacticEquatorLine->setFontSize(lineFontSize);
+	supergalacticEquatorLine->setFontSize(lineFontSize);
+	primeVerticalLine->setFontSize(lineFontSize);
+	colureLine_1->setFontSize(lineFontSize);
+	colureLine_2->setFontSize(lineFontSize);
+	circumpolarCircleN->setFontSize(lineFontSize);
+	circumpolarCircleS->setFontSize(lineFontSize);
+	celestialJ2000Poles->setFontSize(pointFontSize);
+	celestialPoles->setFontSize(pointFontSize);
+	zenithNadir->setFontSize(pointFontSize);
+	eclipticJ2000Poles->setFontSize(pointFontSize);
+	eclipticPoles->setFontSize(pointFontSize);
+	galacticPoles->setFontSize(pointFontSize);
+	supergalacticPoles->setFontSize(pointFontSize);
+	equinoxJ2000Points->setFontSize(pointFontSize);
+	equinoxPoints->setFontSize(pointFontSize);
+	solsticeJ2000Points->setFontSize(pointFontSize);
+	solsticePoints->setFontSize(pointFontSize);
 }

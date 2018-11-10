@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
+    <width>764</width>
     <height>570</height>
    </rect>
   </property>
@@ -1752,17 +1752,20 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="gravityLabelCheckbox">
+             <item row="0" column="1">
+              <widget class="QCheckBox" name="sphericMirrorCheckbox">
                <property name="toolTip">
-                <string>Align labels with the screen center</string>
+                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
                </property>
                <property name="text">
-                <string>Gravity labels</string>
+                <string>Spheric mirror distortion</string>
+               </property>
+               <property name="checkable">
+                <bool>true</bool>
                </property>
               </widget>
              </item>
-             <item row="11" column="0">
+             <item row="11" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_10">
                <item>
                 <widget class="QLabel" name="dithering_label">
@@ -1776,50 +1779,17 @@
                </item>
               </layout>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="sphericMirrorCheckbox">
-               <property name="toolTip">
-                <string>Spheric mirror distortion is used when projecting Stellarium onto a spheric mirror for low-cost planetarium systems.</string>
-               </property>
-               <property name="text">
-                <string>Spheric mirror distortion</string>
-               </property>
-               <property name="checkable">
-                <bool>true</bool>
-               </property>
-              </widget>
-             </item>
              <item row="2" column="1">
-              <widget class="QCheckBox" name="topocentricCheckBox">
+              <widget class="QCheckBox" name="gravityLabelCheckbox">
                <property name="toolTip">
-                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+                <string>Align labels with the screen center</string>
                </property>
                <property name="text">
-                <string>Topocentric coordinates</string>
+                <string>Gravity labels</string>
                </property>
               </widget>
              </item>
-             <item row="14" column="0">
-              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
-               <property name="toolTip">
-                <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
-               </property>
-               <property name="text">
-                <string>Enable mouse navigation</string>
-               </property>
-              </widget>
-             </item>
-             <item row="12" column="0" colspan="2">
-              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
-               <property name="toolTip">
-                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
-               </property>
-               <property name="text">
-                <string>Auto zoom out returns to initial direction of view</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
+             <item row="3" column="1">
               <widget class="QCheckBox" name="selectSingleConstellationButton">
                <property name="toolTip">
                 <string>Hide other constellations when you click one</string>
@@ -1832,17 +1802,37 @@
                </property>
               </widget>
              </item>
-             <item row="3" column="1">
-              <widget class="QCheckBox" name="nutationCheckBox">
+             <item row="15" column="1">
+              <widget class="QCheckBox" name="enableMouseNavigationCheckBox">
                <property name="toolTip">
-                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
+                <string>Allow mouse to pan (drag) and zoom (mousewheel)</string>
                </property>
                <property name="text">
-                <string>Include nutation</string>
+                <string>Enable mouse navigation</string>
                </property>
               </widget>
              </item>
-             <item row="8" column="0">
+             <item row="12" column="1" colspan="3">
+              <widget class="QCheckBox" name="autoZoomResetsDirectionCheckbox">
+               <property name="toolTip">
+                <string>When enabled, the &quot;auto zoom out&quot; key will also set the initial viewing direction</string>
+               </property>
+               <property name="text">
+                <string>Auto zoom out returns to initial direction of view</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QCheckBox" name="topocentricCheckBox">
+               <property name="toolTip">
+                <string>Activate to view as seen from surface of the planet (recommended). If switched off, display planetocentric view.</string>
+               </property>
+               <property name="text">
+                <string>Topocentric coordinates</string>
+               </property>
+              </widget>
+             </item>
+             <item row="8" column="1">
               <widget class="QCheckBox" name="autoEnableEnvironmentCheckBox">
                <property name="toolTip">
                 <string>Auto-enable atmosphere and landscape when selecting a celestial body in the location window.</string>
@@ -1852,24 +1842,17 @@
                </property>
               </widget>
              </item>
-             <item row="11" column="1">
-              <widget class="QCheckBox" name="indicationMountModeCheckBox">
+             <item row="3" column="3">
+              <widget class="QCheckBox" name="nutationCheckBox">
                <property name="toolTip">
-                <string>Flash a short message when toggling mount mode.</string>
+                <string>Nutation is a small wobble of Earth's axis, amounting to a few arcseconds.</string>
                </property>
                <property name="text">
-                <string>Indication for mount mode</string>
+                <string>Include nutation</string>
                </property>
               </widget>
              </item>
-             <item row="13" column="1">
-              <widget class="QPushButton" name="editShortcutsPushButton">
-               <property name="text">
-                <string>Edit keyboard shortcuts...</string>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="1">
+             <item row="1" column="3">
               <widget class="QCheckBox" name="decimalDegreeCheckBox">
                <property name="toolTip">
                 <string>Use decimal degrees for coordinates</string>
@@ -1879,7 +1862,24 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="0">
+             <item row="14" column="3">
+              <widget class="QPushButton" name="editShortcutsPushButton">
+               <property name="text">
+                <string>Edit keyboard shortcuts...</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="3">
+              <widget class="QCheckBox" name="indicationMountModeCheckBox">
+               <property name="toolTip">
+                <string>Flash a short message when toggling mount mode.</string>
+               </property>
+               <property name="text">
+                <string>Indication for mount mode</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
               <widget class="QCheckBox" name="diskViewportCheckbox">
                <property name="toolTip">
                 <string>Mask out everything outside a central circle in the main view</string>
@@ -1889,7 +1889,17 @@
                </property>
               </widget>
              </item>
-             <item row="14" column="1">
+             <item row="0" column="3">
+              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+               <property name="toolTip">
+                <string>Activate this option to calculate azimuth from south towards west.</string>
+               </property>
+               <property name="text">
+                <string>Azimuth from South</string>
+               </property>
+              </widget>
+             </item>
+             <item row="15" column="3">
               <layout class="QHBoxLayout" name="_8">
                <item>
                 <widget class="QCheckBox" name="mouseTimeoutCheckbox">
@@ -1933,7 +1943,7 @@
                  </property>
                  <property name="sizeHint" stdset="0">
                   <size>
-                   <width>40</width>
+                   <width>30</width>
                    <height>20</height>
                   </size>
                  </property>
@@ -1941,17 +1951,17 @@
                </item>
               </layout>
              </item>
-             <item row="0" column="1">
-              <widget class="QCheckBox" name="azimuthFromSouthcheckBox">
+             <item row="14" column="1">
+              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
                <property name="toolTip">
-                <string>Activate this option to calculate azimuth from south towards west.</string>
+                <string>Allow keyboard to pan and zoom</string>
                </property>
                <property name="text">
-                <string>Azimuth from South</string>
+                <string>Enable keyboard navigation</string>
                </property>
               </widget>
              </item>
-             <item row="8" column="1">
+             <item row="8" column="3">
               <widget class="QCheckBox" name="autoChangeLandscapesCheckBox">
                <property name="toolTip">
                 <string>Automatic change of landscape when planet is changed</string>
@@ -1961,13 +1971,77 @@
                </property>
               </widget>
              </item>
-             <item row="13" column="0">
-              <widget class="QCheckBox" name="enableKeysNavigationCheckBox">
+             <item row="17" column="1" rowspan="2">
+              <layout class="QHBoxLayout" name="fontHorizontalLayout">
+               <item>
+                <widget class="QLabel" name="fontSizeLabel">
+                 <property name="text">
+                  <string>Font size: Screen</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="screenFontSizeSpinBox">
+                 <property name="toolTip">
+                  <string>Base font size for on-screen text</string>
+                 </property>
+                 <property name="minimum">
+                  <number>5</number>
+                 </property>
+                 <property name="maximum">
+                  <number>30</number>
+                 </property>
+                 <property name="value">
+                  <number>13</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="guiFontSizeLabel">
+                 <property name="text">
+                  <string>GUI</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="guiFontSizeSpinBox">
+                 <property name="toolTip">
+                  <string>Base font size for dialogs</string>
+                 </property>
+                 <property name="minimum">
+                  <number>7</number>
+                 </property>
+                 <property name="maximum">
+                  <number>25</number>
+                 </property>
+                 <property name="value">
+                  <number>13</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="fontWritingSystemComboBox">
+                 <property name="toolTip">
+                  <string>Pre-select fonts for a particular writing system</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFontComboBox" name="fontComboBox">
+                 <property name="toolTip">
+                  <string>Application font</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="17" column="3">
+              <widget class="QCheckBox" name="kineticScrollingCheckBox">
                <property name="toolTip">
-                <string>Allow keyboard to pan and zoom</string>
+                <string>Kinetic scrolling means dragging text panels directly instead of dragging window handles.</string>
                </property>
                <property name="text">
-                <string>Enable keyboard navigation</string>
+                <string>Use kinetic scrolling</string>
                </property>
               </widget>
              </item>

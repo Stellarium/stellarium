@@ -98,9 +98,14 @@ void HelpDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
+
 
 	// Help page
 	updateHelpText();

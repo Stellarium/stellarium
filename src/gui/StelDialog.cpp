@@ -50,8 +50,8 @@ StelDialog::StelDialog(QString dialogName, QObject* parent)
 	if (parent == Q_NULLPTR)
 		setParent(StelMainView::getInstance().getGuiWidget());
 
-	// The kinetic scrolling is disabled by default
-	flagKineticScrolling = StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", false).toBool();
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(handleFontChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(guiFontSizeChanged(int)), this, SLOT(handleFontChanged()));
 }
 
 StelDialog::~StelDialog()
@@ -72,10 +72,15 @@ void StelDialog::setVisible(bool v)
 {
 	if (v)
 	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
 		QSize screenSize = StelMainView::getInstance().size();
 		QSize maxSize = 0.8*screenSize;
 		if (dialog)
 		{
+			// reload stylesheet, in case size changed!
+			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+
 			dialog->show();
 			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
@@ -101,8 +106,6 @@ void StelDialog::setVisible(bool v)
 			QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
 			dialog = new QDialog(Q_NULLPTR);
 			// dialog->setParent(parent);
-			StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-			Q_ASSERT(gui);
 			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 			createDialogContent();
@@ -195,6 +198,17 @@ void StelDialog::setVisible(bool v)
 		StelMainView::getInstance().focusSky();
 	}
 	emit visibleChanged(v);
+}
+
+void StelDialog::handleFontChanged()
+{
+	if (dialog && dialog->isVisible())
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		// reload stylesheet, in case size or font changed!
+		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	}
 }
 
 void StelDialog::connectCheckBox(QAbstractButton *checkBox, const QString &actionName)
@@ -322,18 +336,26 @@ void StelDialog::askColor()
 	}
 }
 
-void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
+void StelDialog::enableKineticScrolling(bool b)
 {
-	if (flagKineticScrolling)
+	if (kineticScrollingList.length()==0) return;
+	if (b)
 	{
-		for (auto* w : addscroll)
+		for (auto* w : kineticScrollingList)
 		{
 			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
-			QScroller::scroller(w);
+			QScroller::scroller(w); // WHAT DOES THIS DO? We don't use the return value.
+		}
+	}
+	else
+	{
+		for (auto* w : kineticScrollingList)
+		{
+			QScroller::ungrabGesture(w);
+			// QScroller::scroller(w);
 		}
 	}
 }
-
 
 void StelDialog::updateNightModeProperty()
 {

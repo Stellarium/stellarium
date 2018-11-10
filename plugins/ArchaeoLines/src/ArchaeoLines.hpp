@@ -131,7 +131,9 @@ public slots:
 	void update(const double deltaTime) {fader.update((int)(deltaTime*1000));}
 	void setFadeDuration(const float duration) {fader.setDuration((int)(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
-	void setFontSize(const double newSize){font.setPixelSize(newSize);}
+	void setFontSize(const int newSize){font.setPixelSize(newSize);}
+	//! To be connected to StelApp font size. newSize will be enlarged by 1.
+	void setFontSizeFromApp(const int newSize){font.setPixelSize(newSize+1);}
 	//! reset declination/azimuth angle (degrees) of this arc.
 	void setDefiningAngle(const double angle);
 	double getDefiningAngle(void) const {return definingAngle;} // returns declination for most, or azimuth.

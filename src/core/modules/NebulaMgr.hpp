@@ -921,6 +921,8 @@ private slots:
 	//! @param skyCultureDir the name of the directory containing the sky culture to use.
 	void updateSkyCulture(const QString& skyCultureDir);
 
+	//! Connect from StelApp to reflect font size change.
+	void setFontSizeFromApp(int size){nebulaFont.setPixelSize(size);}
 private:
 
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.

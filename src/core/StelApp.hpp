@@ -73,6 +73,8 @@ class StelApp : public QObject
 	Q_PROPERTY(bool flagUseAzimuthFromSouth READ getFlagSouthAzimuthUsage   WRITE setFlagSouthAzimuthUsage   NOTIFY flagUseAzimuthFromSouthChanged)
 	Q_PROPERTY(bool flagUseCCSDesignation   READ getFlagUseCCSDesignation   WRITE setFlagUseCCSDesignation   NOTIFY flagUseCCSDesignationChanged)
 	Q_PROPERTY(bool flagUseFormattingOutput READ getFlagUseFormattingOutput WRITE setFlagUseFormattingOutput NOTIFY flagUseFormattingOutputChanged)
+	Q_PROPERTY(int  screenFontSize          READ getScreenFontSize          WRITE setScreenFontSize          NOTIFY screenFontSizeChanged)
+	Q_PROPERTY(int  guiFontSize             READ getGuiFontSize             WRITE setGuiFontSize             NOTIFY guiFontSizeChanged)
 
 public:
 	friend class StelAppGraphicsWidget;
@@ -187,9 +189,14 @@ public:
 	float getGlobalScalingRatio() const {return globalScalingRatio;}
 	void setGlobalScalingRatio(float r) {globalScalingRatio=r;}
 
-	//! Get the size of font
-	int getBaseFontSize() const { return baseFontSize; }
-	void setBaseFontSize(int s) { baseFontSize=s; }
+	//! Get the fontsize used for screen text.
+	int getScreenFontSize() const { return screenFontSize; }
+	//! Change screen font size.
+	void setScreenFontSize(int s);
+	//! Get the principal font size used for GUI panels.
+	int getGuiFontSize() const;
+	//! change GUI font size.
+	void setGuiFontSize(int s);
 
 	//! Get the GUI instance implementing the abstract GUI interface.
 	StelGuiBase* getGui() const {return stelGui;}
@@ -257,6 +264,11 @@ public slots:
 	//! @return the FPS averaged on the last second
 	float getFps() const {return fps;}
 
+	//! Set global application font.
+	//! To retrieve, you can use QGuiApplication::font().
+	//! emits fontChanged(font)
+	void setAppFont(QFont font);
+
 	//! Returns the default FBO handle, to be used when StelModule instances want to release their own FBOs.
 	//! Note that this is usually not the same as QOpenGLContext::defaultFramebufferObject(),
 	//! so use this call instead of the Qt version!
@@ -288,6 +300,9 @@ signals:
 	void flagUseFormattingOutputChanged(bool);
 	void colorSchemeChanged(const QString&);
 	void languageChanged();
+	void screenFontSizeChanged(int);
+	void guiFontSizeChanged(int);
+	void fontChanged(QFont);
 
 	//! Called just after a progress bar is added.
 	void progressBarAdded(const StelProgressController*);
@@ -418,7 +433,7 @@ private:
 
 	QList<StelProgressController*> progressControllers;
 
-	int baseFontSize;	
+	int screenFontSize;
 
 	// Framebuffer object used for viewport effects.
 	QOpenGLFramebufferObject* renderBuffer;

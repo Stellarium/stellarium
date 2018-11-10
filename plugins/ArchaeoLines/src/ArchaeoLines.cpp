@@ -248,12 +248,40 @@ void ArchaeoLines::init()
 	connect(this, SIGNAL(customDeclination1ColorChanged(Vec3f)),     customDeclination1Line      , SLOT(setColor(Vec3f)));
 	connect(this, SIGNAL(customDeclination2ColorChanged(Vec3f)),     customDeclination2Line      , SLOT(setColor(Vec3f)));
 
+	StelApp& app=StelApp::getInstance();
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), equinoxLine                 , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernSolsticeLine        , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernSolsticeLine        , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernCrossquarterLine    , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernCrossquarterLine    , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMajorStandstillLine0, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMajorStandstillLine1, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMajorStandstillLine6, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMajorStandstillLine7, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMinorStandstillLine2, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), northernMinorStandstillLine3, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMinorStandstillLine4, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), southernMinorStandstillLine5, SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), zenithPassageLine           , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), nadirPassageLine            , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), selectedObjectLine          , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), selectedObjectAzimuthLine   , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), selectedObjectHourAngleLine , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), currentSunLine              , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), currentMoonLine             , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), currentPlanetLine           , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), geographicLocation1Line     , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), geographicLocation2Line     , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customAzimuth1Line          , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customAzimuth2Line          , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customDeclination1Line      , SLOT(setFontSizeFromApp(const int)));
+	connect(&app, SIGNAL(screenFontSizeChanged(int)), customDeclination2Line      , SLOT(setFontSizeFromApp(const int)));
+
+//	if (!conf->childGroups().contains("ArchaeoLines"))
 //	if (!conf->childGroups().contains("ArchaeoLines"))
 //		restoreDefaultSettings();
 
 	loadSettings();
-
-	StelApp& app = StelApp::getInstance();
 
 	// Create action for enable/disable & hook up signals
 	QString section=N_("ArchaeoLines");
@@ -1476,7 +1504,7 @@ ArchaeoLine::ArchaeoLine(ArchaeoLine::Line lineType, double definingAngle) :
 	if (lineType>=SelectedObjectAzimuth)
 		frameType=StelCore::FrameAltAz;
 	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
 	updateLabel();
 	fader.setDuration(1000);
 	// Initialize the message strings and make sure they are translated when the language changes.

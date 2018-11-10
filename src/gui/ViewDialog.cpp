@@ -136,10 +136,15 @@ void ViewDialog::createDialogContent()
 	//ui->viewTabWidget->removeTab(4);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
-		       << ui->landscapeTextBrowser << ui->surveysListWidget << ui->surveysTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
+			     << ui->landscapeTextBrowser << ui->surveysListWidget << ui->surveysTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
+
 
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));

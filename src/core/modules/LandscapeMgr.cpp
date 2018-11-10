@@ -79,11 +79,11 @@ Cardinals::Cardinals(float _radius)
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	int baseFontSize = StelApp::getInstance().getBaseFontSize();
+	int screenFontSize = StelApp::getInstance().getScreenFontSize();
 	// Default font size is 24
-	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", baseFontSize+11).toInt());
+	fontC.setPixelSize(conf->value("viewing/cardinal_font_size", screenFontSize+11).toInt());
 	// Default font size is 18
-	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", baseFontSize+5).toInt());
+	fontSC.setPixelSize(conf->value("viewing/subcardinal_font_size", screenFontSize+5).toInt());
 }
 
 Cardinals::~Cardinals()

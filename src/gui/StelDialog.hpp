@@ -173,18 +173,20 @@ protected:
 	//! The name should be set in derived classes' constructors and can be used to store and retrieve the panel locations.
 	QString dialogName;
 
-	//! Kinetic scrolling for lists.
-	void installKineticScrolling(QList<QWidget *> addscroll);
-
 protected slots:
 	//! To be called by a connected QToolButton with a color background.
 	//! This QToolButton needs properties "propName" and "iniName" which should be prepared using connectColorButton().
 	void askColor();
+	//! enable kinetic scrolling. This should be connected to StelApp's StelGui signal flagUseKineticScrollingChanged.
+	void enableKineticScrolling(bool b);
+	//! connect from StelApp to handle font and font size changes.
+	void handleFontChanged();
 
 
-private:
-
-	bool flagKineticScrolling;
+protected:
+	//! A list of widgets where kinetic scrolling can be activated or deactivated
+	//! The list must be filled once, in the constructor or init() of fillDialog() etc. functions.
+	QList<QWidget *> kineticScrollingList;
 
 private slots:
 	void updateNightModeProperty();

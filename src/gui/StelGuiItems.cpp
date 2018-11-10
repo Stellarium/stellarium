@@ -33,6 +33,7 @@
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelObserver.hpp"
+#include "SkyGui.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -51,6 +52,7 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
 #include <QSettings>
+#include <QGuiApplication>
 
 // Inspired by text-use-opengl-buffer branch: work around font problems in GUI buttons.
 // May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26. Mesa 13 (2016-11) has finally fixed this on RasPi(VC4).
@@ -399,12 +401,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
 
-	// Font size is 12
-	int baseFontSize = StelApp::getInstance().getBaseFontSize()-1;
-	datetime->font().setPixelSize(baseFontSize);
-	location->font().setPixelSize(baseFontSize);
-	fov->font().setPixelSize(baseFontSize);
-	fps->font().setPixelSize(baseFontSize);
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
 	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
@@ -414,6 +413,35 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setFlagTimeJd(confSettings->value("gui/flag_time_jd", false).toBool());
 	setFlagFovDms(confSettings->value("gui/flag_fov_dms", false).toBool());
 	setFlagShowTz(confSettings->value("gui/flag_show_tz", true).toBool());
+}
+
+//! connect from StelApp to resize fonts on the fly.
+void BottomStelBar::setFontSizeFromApp(int size)
+{
+	// Font size was developed based on base font size 13, i.e. 12
+	int screenFontSize = size-1;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(screenFontSize);
+	datetime->setFont(font);
+	location->setFont(font);
+	fov->setFont(font);
+	fps->setFont(font);
+	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
+	if (skyGui)
+		skyGui->updateBarsPos();
+}
+
+//! connect from StelApp to resize fonts on the fly.
+void BottomStelBar::setFont(QFont font)
+{
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
+	datetime->setFont(font);
+	location->setFont(font);
+	fov->setFont(font);
+	fps->setFont(font);
+	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
+	if (skyGui)
+		skyGui->updateBarsPos();
 }
 
 BottomStelBar::~BottomStelBar()
@@ -1022,7 +1050,9 @@ void StelProgressBarMgr::oneBarChanged()
 	pb->setFormat(p->getFormat());
 }
 
-CornerButtons::CornerButtons(QGraphicsItem*) : lastOpacity(10)
+CornerButtons::CornerButtons(QGraphicsItem* parent) :
+	QGraphicsItem(parent),
+	lastOpacity(10)
 {
 }
 
