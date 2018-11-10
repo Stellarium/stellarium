@@ -30,6 +30,7 @@
 #include "NebulaMgr.hpp"
 #include "LandscapeMgr.hpp"
 #include "CustomObjectMgr.hpp"
+#include "HighlightMgr.hpp"
 #include "GridLinesMgr.hpp"
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
@@ -81,6 +82,7 @@
 #include <QTimer>
 #include <QDir>
 #include <QCoreApplication>
+#include <QGuiApplication>
 #include <QScreen>
 #include <QDateTime>
 #ifdef ENABLE_SPOUT
@@ -241,7 +243,7 @@ StelApp::StelApp(StelMainView *parent)
 	, totalDownloadedSize(0)
 	, nbUsedCache(0)
 	, totalUsedCacheSize(0)
-	, baseFontSize(13)
+	, screenFontSize(13)
 	, renderBuffer(Q_NULLPTR)
 	, viewportEffect(Q_NULLPTR)
 	, gl(Q_NULLPTR)
@@ -410,8 +412,9 @@ void StelApp::init(QSettings* conf)
 	if (devicePixelsPerPixel>1)
 		qDebug() << "Detected a high resolution device! Device pixel ratio:" << devicePixelsPerPixel;
 
-	setBaseFontSize(confSettings->value("gui/base_font_size", 13).toInt());
-	
+	setScreenFontSize(confSettings->value("gui/screen_font_size", 13).toInt());
+	setGuiFontSize(confSettings->value("gui/gui_font_size", 13).toInt());
+
 	core = new StelCore();
 	if (saveProjW!=-1 && saveProjH!=-1)
 		core->windowHasBeenResized(0, 0, saveProjW, saveProjH);
@@ -544,6 +547,11 @@ void StelApp::init(QSettings* conf)
 	CustomObjectMgr* custObj = new CustomObjectMgr();
 	custObj->init();
 	getModuleMgr().registerModule(custObj);
+
+	// Init hightlights
+	HighlightMgr* hlMgr = new HighlightMgr();
+	hlMgr->init();
+	getModuleMgr().registerModule(hlMgr);
 
 	//Create the script manager here, maybe some modules/plugins may want to connect to it
 	//It has to be initialized later after all modules have been loaded by calling initScriptMgr
@@ -1013,7 +1021,7 @@ QString StelApp::getViewportEffect() const
 }
 
 // Diagnostics
-void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName)
+void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName actionName) const
 {
 	const QList<StelModule*> modules = moduleMgr->getCallOrders(actionName);
 	#if QT_VERSION >= 0x050500
@@ -1030,7 +1038,38 @@ void StelApp::dumpModuleActionPriorities(StelModule::StelModuleActionName action
 	}
 }
 
-StelModule* StelApp::getModule(const QString& moduleID)
+StelModule* StelApp::getModule(const QString& moduleID) const
 {
 	return getModuleMgr().getModule(moduleID);
+}
+void StelApp::setScreenFontSize(int s)
+{
+	if (screenFontSize!=s)
+	{
+		screenFontSize=s;
+		emit screenFontSizeChanged(s);
+	}
+}
+void StelApp::setGuiFontSize(int s)
+{
+	if (getGuiFontSize()!=s)
+	{
+		QFont font=QGuiApplication::font();
+		font.setPixelSize(s);
+		QGuiApplication::setFont(font);
+		emit guiFontSizeChanged(s);
+	}
+}
+int StelApp::getGuiFontSize() const
+{
+	return QGuiApplication::font().pixelSize();
+}
+
+void StelApp::setAppFont(QFont font)
+{
+	int oldSize=QGuiApplication::font().pixelSize();
+	font.setPixelSize(oldSize);
+	font.setStyleHint(QFont::AnyStyle, QFont::OpenGLCompatible);
+	QGuiApplication::setFont(font);
+	emit fontChanged(font);
 }

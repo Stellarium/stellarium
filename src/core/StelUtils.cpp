@@ -1892,11 +1892,23 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	double deltaT; // Return deltaT for the edge year outside valid range.
-	double u;
-	const double ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
+	double u, ub;
 
-	// Limited years!
-	year=qBound(1620, year, 2007);
+	// Limited years: Apply border values!
+	//year=qBound(1620, year, 2007);
+	if (year<1620)
+	{
+		const double j1620=qDateTimeToJd(QDateTime(QDate(1620, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		ub=(j1620-2454101.0)/36525.0;
+	}
+	else if (year>2007)
+	{
+		const double j2008=qDateTimeToJd(QDateTime(QDate(2008, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		ub=(j2008-2454101.0)/36525.0;
+	}
+	else
+		ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
+
 
 	if (year <= 1698)
 	{

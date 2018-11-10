@@ -194,7 +194,7 @@ public slots:
 	void setAtmosphereAverageLuminance(const float overrideLuminance);
 
 	//! Return a map of landscape names to landscape IDs (directory names).
-	QMap<QString,QString> getNameToDirMap() const;
+	static QMap<QString,QString> getNameToDirMap();
 
 	//! Retrieve a list of the names of all the available landscapes in
 	//! the file search path sub-directories of the landscape area
@@ -334,7 +334,7 @@ public slots:
 	void setFlagAtmosphere(const bool displayed);
 
 	//! Get current display intensity of atmosphere ([0..1], for smoother transitions)
-	float getAtmosphereFadeIntensity();
+	float getAtmosphereFadeIntensity() const;
 
 	//! Get atmosphere fade duration in s.
 	float getAtmosphereFadeDuration() const;
@@ -539,13 +539,13 @@ private:
 	//! For a given landscape name, return the landscape ID.
 	//! This takes a name of the landscape, as described in the landscape:name item in the
 	//! landscape.ini, and returns the landscape ID which corresponds to that name.
-	QString nameToID(const QString& name) const;
+	static QString nameToID(const QString& name);
 
 	//! Returns the path to an installed landscape's directory.
 	//! It uses StelFileMgr to look for it in the possible directories.
 	//! @param landscapeID an installed landscape's identifier (the folder name)
 	//! @returns an empty string, if no such landscape was found.
-	QString getLandscapePath(const QString landscapeID) const;
+	static QString getLandscapePath(const QString landscapeID);
 
 	Atmosphere* atmosphere;			// Atmosphere
 	Cardinals* cardinalsPoints;		// Cardinals points

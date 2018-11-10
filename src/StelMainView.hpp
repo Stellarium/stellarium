@@ -56,7 +56,6 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
 #endif
-	Q_PROPERTY(bool flagUseButtonsBackground   READ getFlagUseButtonsBackground   WRITE setFlagUseButtonsBackground   NOTIFY flagUseButtonsBackgroundChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
 	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
@@ -92,7 +91,7 @@ public:
 	//! the StelDialog instances.
 	QGraphicsWidget* getGuiWidget() const {return guiItem;}
 	//! Return mouse position coordinates
-	QPoint getMousePos();
+	QPoint getMousePos() const;
 
 	//! Returns the main application OpenGL context,
 	//! which should be used for all drawing Stellarium does
@@ -151,10 +150,10 @@ public slots:
 	void setCustomScreenshotHeight(int height) {customScreenshotHeight=height; emit customScreenshotHeightChanged(height);}
 	//! Get screenshot magnification. This should be used by StarMgr, text drawing and other elements which may
 	//! want to enlarge their output in screenshots to keep them visible.
-	float getCustomScreenshotMagnification() {return customScreenshotMagnification;}
+	float getCustomScreenshotMagnification() const {return customScreenshotMagnification;}
 #endif
 	//! Get the state of the mouse cursor timeout flag
-	bool getFlagCursorTimeout() {return flagCursorTimeout;}
+	bool getFlagCursorTimeout() const {return flagCursorTimeout;}
 	//! Get the state of the mouse cursor timeout flag
 	void setFlagCursorTimeout(bool b);
 	//! Get the mouse cursor timeout in seconds
@@ -168,13 +167,13 @@ public slots:
 	//! @param m the new minimum fps setting.
 	void setMinFps(float m) {minfps=m;}
 	//! Get the current minimum frames per second.
-	float getMinFps() {return minfps;}
+	float getMinFps() const {return minfps;}
 	//! Set the maximum frames per second.
 	//! @param m the new maximum fps setting.
 	//! @todo this setting currently does nothing
 	void setMaxFps(float m) {maxfps = m;}
 	//! Get the current maximum frames per second.
-	float getMaxFps() {return maxfps;}
+	float getMaxFps() const {return maxfps;}
 
 	//! Notify that an event was handled by the program and therefore the
 	//! FPS should be maximized for a couple of seconds.
@@ -185,15 +184,10 @@ public slots:
 	//! happened.
 	bool needsMaxFPS() const;
 
-	//! Set the state of the flag of usage background for GUI buttons
-	void setFlagUseButtonsBackground(bool b) { flagUseButtonsBackground=b; emit flagUseButtonsBackgroundChanged(b); }
-	//! Get the state of the flag of usage background for GUI buttons
-	bool getFlagUseButtonsBackground() { return flagUseButtonsBackground; }
-
 	//! Set the sky background color. (Actually forwards to the StelRootItem.)  Everything else than black creates a work of art!
 	void setSkyBackgroundColor(Vec3f color);
 	//! Get the sky background color. (Actually retrieves from the StelRootItem.)  Everything else than black creates a work of art!
-	Vec3f getSkyBackgroundColor();
+	Vec3f getSkyBackgroundColor() const;
 
 protected:
 	//! Hack to determine current monitor pixel ratio
@@ -226,7 +220,6 @@ signals:
 	void customScreenshotWidthChanged(int width);
 	void customScreenshotHeightChanged(int height);
 
-	void flagUseButtonsBackgroundChanged(bool b);
 	void skyBackgroundColorChanged(Vec3f color);
 	void flagCursorTimeoutChanged(bool b);
 	void cursorTimeoutChanged(double t);
@@ -294,8 +287,6 @@ private:
 	//! Timer that triggers with the cursor timeout.
 	QTimer* cursorTimeoutTimer;
 
-	bool flagUseButtonsBackground;
-
 	double lastEventTimeSec;
 
 	//! The minimum desired frame rate in frame per second.
@@ -303,7 +294,6 @@ private:
 	//! The maximum desired frame rate in frame per second.
 	float maxfps;
 	QTimer* fpsTimer;
-
 
 #ifdef OPENGL_DEBUG_LOGGING
 	QOpenGLDebugLogger* glLogger;

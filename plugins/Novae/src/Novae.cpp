@@ -94,7 +94,8 @@ Novae::Novae()
 	setObjectName("Novae");
 	configDialog = new NovaeDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -593,9 +594,6 @@ void Novae::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Novae] Updating novae catalog...";
 	startDownload(updateUrl);
 
@@ -716,6 +714,10 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Novae::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
+
 	}
 	catch (std::runtime_error &e)
 	{
