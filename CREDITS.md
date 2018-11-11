@@ -358,7 +358,7 @@
 	4.21 Image of IC5146 from James A Weier
 	4.22 Images of SMC, LMC (Magellanic Clouds) and rho Oph from Albert Van
 	     Donkelaar
-	4.23 Images of NGC55, NGC300, NGC4945, NGC5128,
+	4.23 Images of NGC55, NGC300, NGC1365, NGC4945, NGC5128,
 	     NGC6726, NGC6744, NGC6752, NGC7293, NGC2070
 	     from Philip Montgomery
 	     http://www.kenthurst.bigpondhosting.com/
