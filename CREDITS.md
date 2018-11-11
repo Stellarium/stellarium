@@ -492,18 +492,18 @@
 	     from Chuck Ayoub
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
-	4.59 Images of IC2169, NGC3077, Barnard207
+	4.60 Images of IC2169, NGC3077, Barnard207
 	     from Keesscherer
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
-	4.60 Images of NGC3115
+	4.61 Images of NGC3115
 	     from Mi Lan
 	     License:  Creative Commons Attribution 3.0 Unported
-	4.61 Images of NGC3621
+	4.62 Images of NGC3621
 	     from ESO and Joe DePasquale
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.62 Images of Vela supernova remnant
+	4.63 Images of Vela supernova remnant
 	     from ESO/J.Perez
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
