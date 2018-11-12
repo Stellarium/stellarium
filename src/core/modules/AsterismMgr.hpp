@@ -89,13 +89,13 @@ public:
 	// Methods defined in the StelModule class
 	//! Initialize the AsterismMgr.
 	//! Reads from the asterism parser object and updates the loading bar
-	//! as constellation objects are loaded for the required sky culture.
+	//! as asterism objects are loaded for the required sky culture.
 	virtual void init();
 
-	//! Draw constellation lines, art, names and boundaries.
+	//! Draw asterism lines, art, names and boundaries.
 	virtual void draw(StelCore* core);
 
-	//! Updates time-varying state for each Constellation.
+	//! Updates time-varying state for each asterism.
 	virtual void update(double deltaTime);
 
 	//! Return the value defining the order of call for the given action

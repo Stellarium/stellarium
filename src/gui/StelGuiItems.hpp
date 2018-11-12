@@ -233,25 +233,25 @@ public:
 
 	//! Set whether time must be displayed in the bottom bar
 	void setFlagShowTime(bool b) {flagShowTime=b;}
-	bool getFlagShowTime() { return flagShowTime; }
+	bool getFlagShowTime() const { return flagShowTime; }
 	//! Set whether location info must be displayed in the bottom bar
 	void setFlagShowLocation(bool b) {flagShowLocation=b;}
-	bool getFlagShowLocation() { return flagShowLocation; }
+	bool getFlagShowLocation() const { return flagShowLocation; }
 	//! Set whether FPS info must be displayed in the bottom bar
 	void setFlagShowFps(bool b) {flagShowFps=b;}
-	bool getFlagShowFps() { return flagShowFps; }
+	bool getFlagShowFps() const { return flagShowFps; }
 	//! Set whether FOV info must be displayed in the bottom bar
 	void setFlagShowFov(bool b) {flagShowFov=b;}
-	bool getFlagShowFov() { return flagShowFov; }
+	bool getFlagShowFov() const { return flagShowFov; }
 	//! Set whether DMS format for FOV info must be displayed in the bottom bar
 	void setFlagFovDms(bool b) {flagFovDms=b;}
-	bool getFlagFovDms() { return flagFovDms; }
+	bool getFlagFovDms() const { return flagFovDms; }
 	//! Set whether JD for time info must be displayed in the bottom bar
 	void setFlagTimeJd(bool b) {flagTimeJd=b;}
-	bool getFlagTimeJd() { return flagTimeJd; }
+	bool getFlagTimeJd() const { return flagTimeJd; }
 
 	void setFlagShowTz(bool b) { flagShowTZ=b; }
-	bool getFlagShowTz() { return flagShowTZ; }
+	bool getFlagShowTz() const { return flagShowTZ; }
 
 signals:
 	void sizeChanged();
@@ -259,6 +259,11 @@ signals:
 private slots:
 	//! Update the help label when a button is hovered
 	void buttonHoverChanged(bool b);
+
+	//! connect from StelApp to resize fonts on the fly.
+	void setFontSizeFromApp(int size);
+	//! connect from StelApp to set font on the fly.
+	void setFont(QFont font);
 
 private:
 	void updateText(bool forceUpdatePos=false);

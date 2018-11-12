@@ -300,7 +300,6 @@ private:
 	//static double timeShift; // for Iridium satellites UNUSED
 
 	//Satellite Orbit Draw
-	QFont     font;
 	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days

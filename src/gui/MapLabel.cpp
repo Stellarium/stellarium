@@ -38,8 +38,9 @@ void MapLabel::setCursorPos(double longitude, double latitude)
 {
 	//resets the map to the original map
 	map = origMap;
-	const int x = ((int)((longitude+180.)/360.*map.width()));
-	const int y = ((int)((latitude-90.)/-180.*map.height()));
+	const int scale = devicePixelRatio();
+	const int x = ((int)((longitude+180.)/360.*map.width() / scale));
+	const int y = ((int)((latitude-90.)/-180.*map.height() / scale));
 	//draws the location cursor on the map every time position is changed
 	QPainter painter(&map);
 	painter.drawPixmap(x-locCursor.width()/2,y-locCursor.height()/2,locCursor.width(),locCursor.height(),locCursor);
@@ -48,11 +49,12 @@ void MapLabel::setCursorPos(double longitude, double latitude)
 
 void MapLabel::mousePressEvent(QMouseEvent* event)
 {
-	const int offsetX = (width() - pixmap()->width())/2;
-	const int offsetY = (height() - pixmap()->height())/2;
+	const int scale = devicePixelRatio();
+	const int offsetX = (width() * scale - pixmap()->width())/2;
+	const int offsetY = (height() * scale - pixmap()->height())/2;
 
-	const int posX = event->pos().x();
-	const int posY = event->pos().y();
+	const int posX = event->pos().x() * scale;
+	const int posY = event->pos().y() * scale;
 
 	//checks if position of mouse click is inside the map
 	if((unsigned)(posX-offsetX) > (unsigned)pixmap()->width() || (unsigned)(posY-offsetY) > (unsigned)pixmap()->height())
@@ -73,7 +75,8 @@ void MapLabel::setPixmap(const QPixmap &pixmap)
 
 void MapLabel::resizePixmap()
 {
-	QLabel::setPixmap(map.scaled(width(),height(),Qt::KeepAspectRatio,Qt::SmoothTransformation));
+	const int ratio = this->devicePixelRatio();
+	QLabel::setPixmap(map.scaled(width() * ratio,height() * ratio, Qt::KeepAspectRatio,Qt::SmoothTransformation));
 }
 
 void MapLabel::resizeEvent(QResizeEvent *event)

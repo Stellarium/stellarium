@@ -327,7 +327,7 @@ public:
 
 	//! Return the startup mode, can be "actual" (i.e. take current time from system),
 	//! "today" (take some time e.g. on the evening of today) or "preset" (completely preconfigured).
-	QString getStartupTimeMode();
+	QString getStartupTimeMode() const;
 	void setStartupTimeMode(const QString& s);
 
 	//! Get info about valid range for current algorithm for calculation of Delta-T
@@ -389,7 +389,7 @@ public slots:
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
 	void setFlagGravityLabels(bool gravity);
 	//! return whether dome-aligned labels are in use
-	bool getFlagGravityLabels();
+	bool getFlagGravityLabels() const;
 	//! Set the offset rotation angle in degree to apply to gravity text (only if gravityLabels is set to false).
 	void setDefaultAngleForGravityText(float a);
 	//! Set the horizontal flip status.
@@ -545,7 +545,7 @@ public slots:
 	bool getIsTimeNow() const;
 
 	//! get the initial "today time" from the config file
-	QTime getInitTodayTime(void);
+	QTime getInitTodayTime(void) const;
 	//! set the initial "today time" from the config file
 	void setInitTodayTime(const QTime& time);
 	//! Set the preset sky time from a QDateTime

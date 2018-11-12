@@ -306,11 +306,9 @@
 	    James McGaha, Grasslands Observatory at http://www.3towers.com."
 	    License: permission given to "use the image freely" (including
 	    right to modify and redistribute) "as long as it is credited."
-	4.8 M31, and the Pleiades pictures come from Herm Perez :
-	    http://home.att.net/~hermperez/default.htm
-	    License: "Feel free to use these images, if you use them in a
-	    commercial setting please attribute the source."
-	4.9 Images of M8, NGC253, NGC1499, NGC2244 
+	4.8 M31 pictures come from LEE ang HG731GZ
+	    License: Creative Commons Attribution 3.0 Unported
+	4.9 Images of NGC1499, NGC2244 
 	    from Jean-Pierre Bousquet
 	4.10 Images of M1, M16, M27, M42, M57, M97, NGC6946 from Stephane
 	     Dumont
@@ -332,7 +330,7 @@
 	4.14 The folder icon derived from the Tango Desktop Project, used under
 	     the terms of the Creative Commons Attribution Share-Alike
 	     license.
-	4.15 Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7023, NGC7317,
+	4.15 Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7317,
 	     NGC7319, NGC7320
 	     from Andrey Kuznetsov, Kepler Observatory
 	     http://kepler-observatorium.ru
@@ -361,13 +359,13 @@
 	4.22 Images of SMC, LMC (Magellanic Clouds) and rho Oph from Albert Van
 	     Donkelaar
 	4.23 Images of NGC55, NGC300, NGC1365, NGC4945, NGC5128,
-	     NGC6726, NGC6744, NGC6752, NGC6822, NGC7293, NGC2070
+	     NGC6726, NGC6744, NGC6752, NGC7293, NGC2070
 	     from Philip Montgomery
 	     http://www.kenthurst.bigpondhosting.com/
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
-	4.25 Images of M3, M13, M15, M24, M33, M51, M58, M63, M64, M74, M76, M78, 
+	4.25 Images of M3, M13, M15, M24, M33, M51, M58, M63, M74, M76,
 	     M81, M82, M94, M96, M100, M101, M105, M106, IC405, IC443, NGC246, 
 	     NGC457, NGC1514, NGC1961, NGC2174, NGC2264, NGC2371, NGC2392, NGC2403, 
 	     NGC2655, NGC2685, NGC2841, NGC3166, NGC3310, NGC3359, NGC3521, NGC3628, 
@@ -381,32 +379,36 @@
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
 	4.28 Images of IC59, IC63, IC410, NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
-	4.29 Images of NGC3690, NGC5257, NGC6050, IC883, UGC8335 and UGC9618
+	4.29 Images of NGC2261, NGC2818, NGC2936, NGC3314, NGC3690, NGC3918,
+	     NGC4038-4039, NGC5257, NGC6027, NGC6050, NGC6826, NGC7742, IC883,
+	     IC4406, PGC2248, PGC3589, UGC8335, UGC9618 and Calabash Nebula
 	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Image of NGC40 from Steven Bellavia
-	4.31 Images of Barnard Loop, IC342 from Sun Shuwei
+	4.31 Images of NGC1579, Barnard Loop, IC342 from Sun Shuwei
 	     License: public domain
-	4.32 Images of M77, Sh2-264, Sh2-308 from Wang Lingyi
+	4.32 Images of M77, NGC3109, NGC4449, NGC6397, NGC7009, Sh2-264, Sh2-308
+	     from Wang Lingyi
 	     License: public domain
-	4.33 Images of IC10 from Lowell Observatory
+	4.33 Images of IC10, PGC143 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
-	4.34 Images of IC2177, NGC6334, NGC6357, Fornax Cluster from ESO/Digitized
-	     Sky Survey 2
+	4.34 Images of M59, M60, M89, M90, IC2177, IC2220, IC2631, NGC1433, NGC1761,
+	     NGC2014, NGC2442, NGC6334, NGC6357, PGC10074, Fornax Cluster, Virgo Cluster
+	     from ESO/Digitized Sky Survey 2
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of NGC4244 from Ole Nielsen
+	4.36 Images of M49, NGC147, NGC4244 from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
-	4.37 Images of NGC7000 from NASA
+	4.37 Images of NGC2808, NGC7000, NGC7023 from NASA
 	     License: public domain
 	4.38 Images of IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.39 Images of Sh2-155 from Hewholooks
+	4.39 Images of M88, M108, M109, NGC1931, NGC6823, NGC7814, Sh2-155 from Hewholooks
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.40 Images of NGC4565 from Ken Crawford
@@ -414,12 +416,98 @@
 	     License: This work is free and may be used by anyone for any purpose.
 	     If you wish to use this content, you do not need to request permission
 	     as long as you follow any licensing requirements mentioned on this page.
-	4.41 Images of Coma Cluster from Caelum Observatory
+	4.41 Images of M61, M64, M65, M66, M91, M99, NGC1360, NGC1535, NGC2440,
+	     NGC2775, NGC3132, NGC3242, NGC3750, NGC4216, NGC4414, NGC4676,
+	     NGC5248, NGC6302, NGC6563, NGC6781, NGC7354, Coma Cluster
+	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.42 Images of NGC1316 from ESO
+	4.42 Images of NGC92, NGC1232, NGC1313, NGC1316, NGC2207, NGC2736,
+	     NGC5189, NGC6822, NGC7793
+	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
+ 	4.43 Images of NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
+	     License: Creative Commons Attribution 3.0 Unported
+	4.44 Images of M8, M104, IC2944, NGC6726 from Dylan O'Donnell
+	     http://deography.com/
+	     License: public domain
+	4.45 Images of NGC247
+	     No machine-readable source provided. Own work assumed (based on copyright claims).
+	     No machine-readable author provided. Fany Toporenko assumed (based on copyright claims).
+	     License: Permission is granted to copy, distribute and/or modify this document
+	     under the terms of the GNU Free Documentation License, Version 1.2 or any later
+	     version published by the Free Software Foundation; with no Invariant Sections,
+	     no Front-Cover Texts, and no Back-Cover Texts. A copy of the license is
+	     included in the section entitled GNU Free Documentation License.
+	4.46 Images of IC1613 
+	     from Philos2000
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.47 Images of NGC4236, Perseus Cluster
+	     from Sun Gang
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.48 Images of NGC4651, NGC5906
+	     from R. Jay GaBany
+	     https://www.cosmotography.com/images/
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.49 Images of NGC7662
+	     from Gianluca.pollastri
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.50 Images of M78
+	     from Starhopper
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.51 Images of M95
+	     from Jschulman555, NGC1300
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution 3.0 Unported
+	4.52 Images of M98
+	     from Clh288
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 2.5 Generic
+	4.53 Images of M102
+	     from David Chifiriuc
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.54 Images of NGC6188
+	     from Ivan Bok
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution 3.0 Unported
+	4.55 Images of NGC6188
+	     from Friendlystar
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution 3.0 Unported
+	4.56 Images of NGC1023
+	     from Fryns Fryns
+	     https://commons.wikimedia.org/wiki/
+	     License:  public domain
+	4.57 Images of NGC1269
+	     from Zhu Ying
+	     License:  Creative Commons Attribution 3.0 Unported
+	4.58 Images of NGC1097
+	     from Zhao Jingna
+	     License:  Creative Commons Attribution 3.0 Unported
+	4.59 Images of NGC1491
+	     from Chuck Ayoub
+	     https://commons.wikimedia.org/wiki/
+	     License:  Creative Commons Attribution-Share Alike 4.0 International
+	4.60 Images of IC2169, NGC3077, Barnard207
+	     from Keesscherer
+	     https://commons.wikimedia.org/wiki/
+	     License:  Creative Commons Attribution-Share Alike 4.0 International
+	4.61 Images of NGC3115
+	     from Mi Lan
+	     License:  Creative Commons Attribution 3.0 Unported
+	4.62 Images of NGC3621
+	     from ESO and Joe DePasquale
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International 
+	4.63 Images of Vela supernova remnant
+	     from ESO/J.Perez
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International 
+	     
 ```
 
 ## Appendix
