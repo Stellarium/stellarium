@@ -460,7 +460,10 @@ void BookmarksDialog::exportBookmarks()
 	QString originalBookmarksFile = bookmarksJsonPath;
 
 	QString filter = "JSON (*.json)";
-	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Export bookmarks as..."), QDir::homePath() + "/bookmarks.json", filter);
+	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							 q_("Export bookmarks as..."),
+							 QDir::homePath() + "/bookmarks.json",
+							 filter);
 
 	saveBookmarks();
 

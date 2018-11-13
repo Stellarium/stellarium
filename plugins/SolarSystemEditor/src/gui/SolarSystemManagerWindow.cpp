@@ -195,7 +195,9 @@ void SolarSystemManagerWindow::removeObjects()
 
 void SolarSystemManagerWindow::copyConfiguration()
 {
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save the minor Solar System bodies as..."), QDir::homePath() + "/ssystem_minor.ini");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save the minor Solar System bodies as..."),
+							QDir::homePath() + "/ssystem_minor.ini");
 	ssEditor->copySolarSystemConfigurationFileTo(filePath);
 }
 

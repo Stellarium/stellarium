@@ -327,7 +327,10 @@ void SatellitesDialog::savePredictedIridiumFlares()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save predicted Iridium flares as..."), QDir::homePath() + "/iridium_flares.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save predicted Iridium flares as..."),
+							QDir::homePath() + "/iridium_flares.csv",
+							filter);
 	QFile predictedIridiumFlares(filePath);
 	if (!predictedIridiumFlares.open(QFile::WriteOnly | QFile::Truncate))
 	{

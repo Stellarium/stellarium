@@ -1242,7 +1242,10 @@ void AstroCalcDialog::saveCelestialPositions()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save celestial positions of objects as..."), QDir::homePath() + "/positions.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save celestial positions of objects as..."),
+							QDir::homePath() + "/positions.csv",
+							filter);
 	QFile celPos(filePath);
 	if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -1663,7 +1666,10 @@ void AstroCalcDialog::saveEphemeris()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), QDir::homePath() + "/ephemeris.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated ephemerides as..."),
+							QDir::homePath() + "/ephemeris.csv",
+							filter);
 	QFile ephem(filePath);
 	if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -3196,7 +3202,10 @@ void AstroCalcDialog::savePhenomena()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), QDir::homePath() + "/phenomena.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated phenomena as..."),
+							QDir::homePath() + "/phenomena.csv",
+							filter);
 	QFile phenomena(filePath);
 	if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -4907,7 +4916,10 @@ void AstroCalcDialog::saveWutObjects()
 {
 	QString filter = q_("Text file");
 	filter.append(" (*.txt)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save list of objects as..."), QDir::homePath() + "/wut-objects.txt", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save list of objects as..."),
+							QDir::homePath() + "/wut-objects.txt",
+							filter);
 	QFile objlist(filePath);
 	if (!objlist.open(QFile::WriteOnly | QFile::Truncate))
 	{
