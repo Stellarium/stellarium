@@ -149,15 +149,15 @@ msgstr "子午线"
 
 #: src/core/modules/GridLinesMgr.cpp:643
 msgid "Ecliptic of J2000.0"
-msgstr "黄道（ J2000.0）"
+msgstr "黄道 (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:647
 msgid "Ecliptic of Date"
-msgstr "黄道（当前）"
+msgstr "黄道 (当前)"
 
 #: src/core/modules/GridLinesMgr.cpp:651
 msgid "Equator of J2000.0"
-msgstr "赤道（ J2000.0）"
+msgstr "赤道 (J2000.0)"
 
 #: src/core/modules/GridLinesMgr.cpp:655
 msgid "Equator"
@@ -279,7 +279,7 @@ msgstr "黄道线"
 
 #: src/core/modules/GridLinesMgr.cpp:1266
 msgid "Ecliptic J2000 line"
-msgstr "黄道线（J2000）"
+msgstr "黄道线 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1267
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:353
@@ -288,7 +288,7 @@ msgstr "赤道"
 
 #: src/core/modules/GridLinesMgr.cpp:1268
 msgid "Equator J2000 line"
-msgstr "赤道线（J2000）"
+msgstr "赤道线 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1269
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:333
@@ -303,11 +303,11 @@ msgstr "地平线"
 #: src/core/modules/GridLinesMgr.cpp:1271
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:348
 msgid "Equatorial J2000 grid"
-msgstr "赤道网格 （J2000）"
+msgstr "赤道网格 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1272
 msgid "Ecliptic J2000 grid"
-msgstr "黄道网格（J2000）"
+msgstr "黄道网格 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1273
 msgid "Ecliptic grid"
@@ -341,7 +341,7 @@ msgstr "岁差圈"
 
 #: src/core/modules/GridLinesMgr.cpp:1281
 msgid "Colure Lines"
-msgstr "分至圈线"
+msgstr "分至圈"
 
 #: src/core/modules/GridLinesMgr.cpp:1282
 msgid "Circumpolar Circles"
@@ -349,7 +349,7 @@ msgstr "拱极圈"
 
 #: src/core/modules/GridLinesMgr.cpp:1283
 msgid "Celestial J2000 poles"
-msgstr "天极(J2000)"
+msgstr "天极 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1284
 msgid "Celestial poles"
@@ -361,7 +361,7 @@ msgstr "天顶和天底"
 
 #: src/core/modules/GridLinesMgr.cpp:1286
 msgid "Ecliptic J2000 poles"
-msgstr "黄极(J2000)"
+msgstr "黄极 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1287
 msgid "Ecliptic poles"
@@ -377,15 +377,15 @@ msgstr "超星系坐标极点"
 
 #: src/core/modules/GridLinesMgr.cpp:1290
 msgid "Equinox J2000 points"
-msgstr "春分点(J2000)"
+msgstr "二分点 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1291
 msgid "Equinox points"
-msgstr "春分点"
+msgstr "二分点"
 
 #: src/core/modules/GridLinesMgr.cpp:1292
 msgid "Solstice J2000 points"
-msgstr "二至点  J2000"
+msgstr "二至点 (J2000)"
 
 #: src/core/modules/GridLinesMgr.cpp:1293
 msgid "Solstice points"
@@ -1224,7 +1224,7 @@ msgstr "测光系统"
 #: src/core/modules/StarWrapper.cpp:60 src/core/modules/StarWrapper.cpp:205
 #: plugins/Quasars/src/Quasar.cpp:142
 msgid "Color Index (B-V)"
-msgstr "色指数(B-V)"
+msgstr "色指数 (B-V)"
 
 #: src/core/modules/Nebula.cpp:288
 msgid "Surface brightness"
@@ -1559,36 +1559,36 @@ msgstr "未记录亮度"
 #: src/core/modules/Nebula.cpp:1471
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure"
-msgstr "残骸显示外壳无线电结构"
+msgstr "遗迹显示壳状射电结构"
 
 #: src/core/modules/Nebula.cpp:1474
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a filled center ('plerion') radio structure"
-msgstr "残骸显示一个实心（“类蟹遗迹”）的无线电结构"
+msgstr "遗迹显示一个云心（“实心”）射电结构"
 
 #: src/core/modules/Nebula.cpp:1477
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a composite (or combination) radio structure"
-msgstr "残骸显示混合（或组合）无线电结构"
+msgstr "遗迹显示混合（或复合）射电结构"
 
 #: src/core/modules/Nebula.cpp:1480
 msgctxt "supernova remnant structure classification"
 msgid "remnant shows a shell radio structure with some uncertainty"
-msgstr "显示出一些不确定的壳体无线电结构"
+msgstr "遗迹显示出一些不确定的壳状射电结构"
 
 #: src/core/modules/Nebula.cpp:1483
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a filled center ('plerion') radio structure with some "
 "uncertainty"
-msgstr "显示一个实心（'类蟹遗迹'）的无线电结构，但有不确定性"
+msgstr "遗迹显示一个云心（“实心”）射电结构，但有不确定性"
 
 #: src/core/modules/Nebula.cpp:1486
 msgctxt "supernova remnant structure classification"
 msgid ""
 "remnant shows a composite (or combination) radio structure with some "
 "uncertainty"
-msgstr "显示混合（或组合）无线电结构，但有不确定性"
+msgstr "遗迹显示混合（或复合）射电结构，但有不确定性"
 
 #: src/core/modules/Nebula.cpp:1499
 msgid "galaxy"
@@ -1604,7 +1604,7 @@ msgstr "射电星系"
 
 #: src/core/modules/Nebula.cpp:1508
 msgid "interacting galaxy"
-msgstr "互扰星系"
+msgstr "相互作用星系"
 
 #: src/core/modules/Nebula.cpp:1511 plugins/Quasars/src/Quasar.cpp:127
 msgid "quasar"
@@ -1656,7 +1656,7 @@ msgstr "反射星云"
 
 #: src/core/modules/Nebula.cpp:1547
 msgid "supernova remnant"
-msgstr "超新星残骸"
+msgstr "超新星遗迹"
 
 #: src/core/modules/Nebula.cpp:1550
 msgid "supernova candidate"
@@ -1664,7 +1664,7 @@ msgstr "超新星候选体"
 
 #: src/core/modules/Nebula.cpp:1553
 msgid "supernova remnant candidate"
-msgstr "超新星残骸候选体"
+msgstr "超新星遗迹候选体"
 
 #: src/core/modules/Nebula.cpp:1556
 msgid "stellar association"
@@ -2139,11 +2139,11 @@ msgstr "减缓时间流逝"
 
 #: src/core/StelCore.cpp:264
 msgid "Increase time speed (a little)"
-msgstr "加快时间流逝（小幅度）"
+msgstr "加快时间流逝（微幅）"
 
 #: src/core/StelCore.cpp:265
 msgid "Decrease time speed (a little)"
-msgstr "减缓时间流逝（小幅度）"
+msgstr "减缓时间流逝（微幅）"
 
 #: src/core/StelCore.cpp:266
 msgid "Set normal time rate"
@@ -2383,7 +2383,7 @@ msgid ""
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 "这个经验公式由 G. M. Clemence 在文章《关于天文常数系统》[<em>On the system of astronomical "
-"constants</em>]（%1）中公布。"
+"constants</em>] (%1)中公布。"
 
 #: src/core/StelCore.cpp:2265
 #, qt-format
@@ -2393,7 +2393,7 @@ msgid ""
 "<em>Astronomical Formulae for Calculators</em>. It was also adopted in the "
 "PC program SunTracker Pro."
 msgstr ""
-"此公式基于 Spencer Jones（%1）对1650年后期太阳、月球以及行星观测的研究，并被 Jean Meeus "
+"此公式基于 Spencer Jones (%1) 对1650年后期太阳、月球以及行星观测的研究，并被 Jean Meeus "
 "在他的《用于计算器的天文学公式》[<em>Astronomical Formulae for Calculators</em>] 中使用。计算机程序 "
 "SunTracker Pro 也使用了这一公式。"
 
@@ -2446,7 +2446,7 @@ msgid ""
 msgstr ""
 "这个十二阶的多项式方程（已过时并由 Schmadel 与 Zech 在1988年所取代）由 L. D. Schmadel 和 G. Zech "
 "在文章《1800-1975年期间东部标准时间-国际标准时间校正 ΔT 的多项式近似》[<em>Polynomial approximations for"
-" the correction delta T E.T.-U.T. in the period 1800-1975</em>]（%1）中公布。它与 "
+" the correction delta T E.T.-U.T. in the period 1800-1975</em>] (%1)中公布。它与 "
 "Brouwer 于1952年公布的数据相吻合。"
 
 #: src/core/StelCore.cpp:2286
@@ -2571,9 +2571,9 @@ msgid ""
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
-"E. M. Reingold 及 N. Dershowitz 在 <em>Calendrical Calculations</em> （第3版 "
-"2007）及 <em>Calendrical Tabulations</em> （2002）中发表了多项式数据拟合结果。方法基于 Jean Meeus "
-"的 <em>Astronomical Algorithms</em> （1991）。"
+"E. M. Reingold 及 N. Dershowitz 在 <em>Calendrical Calculations</em>  (第3版 "
+"2007) 及 <em>Calendrical Tabulations</em>  (2002) 中发表了多项式数据拟合结果。方法基于 Jean "
+"Meeus 的 <em>Astronomical Algorithms</em>  (1991)。"
 
 #: src/core/StelCore.cpp:2328
 #, qt-format
@@ -2635,7 +2635,7 @@ msgid ""
 "Simons (2000), was published in article <em>Error Minimization of Polynomial"
 " Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
-"基于Meeus＆Simons（2000）的S.Ilimam，M.Sadiq和MS Qureshi的这个解决方案发表在论文<em>Error "
+"基于Meeus＆Simons (2000) 的S.Ilimam，M.Sadiq和MS Qureshi的这个解决方案发表在论文<em>Error "
 "Minimization of Polynomial Approximation of DeltaT</em> (%1)中，并且由Sana Islam "
 "在2013年评审。"
 
@@ -2657,8 +2657,8 @@ msgid ""
 "2015</em> (%1). Outside of the named range (modelled with a spline fit) it "
 "provides values from an approximate parabola."
 msgstr ""
-"这个解决方案由F. R. Stephenson，L.V.Morrison和C.Y.Hohenkerk（2016）发表在<em>Measurement "
-"of the Earth’s rotation: 720 BC to AD 2015 </ em> (%1)中。 "
+"这个解决方案由F. R. Stephenson，L.V.Morrison和C.Y.Hohenkerk (2016) 发表在<em>Measurement"
+" of the Earth’s rotation: 720 BC to AD 2015 </ em> (%1)中。 "
 "在范围之外（建模具有样条拟合），它提供近似抛物线的值。"
 
 #: src/core/StelCore.cpp:2352
@@ -3199,7 +3199,7 @@ msgstr "未校正"
 
 #: src/gui/ConfigurationDialog.cpp:1543
 msgid "Schoch (1931)"
-msgstr "Schoch（1931年）"
+msgstr "Schoch（1931）"
 
 #: src/gui/ConfigurationDialog.cpp:1544
 msgid "Clemence (1948)"
@@ -3207,11 +3207,11 @@ msgstr "克莱曼斯"
 
 #: src/gui/ConfigurationDialog.cpp:1545
 msgid "IAU (1952)"
-msgstr "IAU （1952年）"
+msgstr "IAU （1952）"
 
 #: src/gui/ConfigurationDialog.cpp:1546
 msgid "Astronomical Ephemeris (1960)"
-msgstr "星历表（1960年）"
+msgstr "星历表（1960）"
 
 #: src/gui/ConfigurationDialog.cpp:1547
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
@@ -3938,12 +3938,12 @@ msgstr "天文历"
 #: src/gui/ViewDialog.cpp:1087
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr "解释性补充（1992）"
+msgstr "解释性补充 (1992)"
 
 #: src/gui/ViewDialog.cpp:1088
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr "解释性补充（2013）"
+msgstr "解释性补充 (2013)"
 
 #: src/gui/ViewDialog.cpp:1089
 msgctxt "magnitude algorithm"
@@ -3967,13 +3967,13 @@ msgstr "该算法基于G. Mueller的视觉观测1877-1891，并出版 <em>天文
 msgid ""
 "The algorithm was published in the <em>Explanatory Supplement to the "
 "Astronomical Almanac</em> (1992)."
-msgstr "该算法发表在 <em>天文历解释性补充</em>（1992）中。"
+msgstr "该算法发表在 <em>天文历解释性补充</em> (1992)。"
 
 #: src/gui/ViewDialog.cpp:1124
 msgid ""
 "The algorithm was published in the 3rd edition of the <em>Explanatory "
 "Supplement to the Astronomical Almanac</em> (2013)."
-msgstr "该算法在<em>天文历解释性补充</em>（2013）第3版中发表。"
+msgstr "该算法发表在<em>天文历解释性补充</em> (2013) 第3版。"
 
 #: src/gui/ViewDialog.cpp:1127
 msgid "Visual magnitude based on phase angle and albedo."
@@ -4138,7 +4138,7 @@ msgstr "选择脚本包含目录"
 #: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr "赤道 （ J2000.0）"
+msgstr "赤道 (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
@@ -4158,7 +4158,7 @@ msgstr "银道"
 #: src/gui/SearchDialog.cpp:218
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr "超星系坐标"
+msgstr "超星系"
 
 #: src/gui/SearchDialog.cpp:219
 msgctxt "coordinate system"
@@ -4168,7 +4168,7 @@ msgstr "黄道"
 #: src/gui/SearchDialog.cpp:220
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr "黄道（ J2000.0）"
+msgstr "黄道 (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
@@ -4273,12 +4273,12 @@ msgstr "名称"
 #. TRANSLATORS: right ascension
 #: src/gui/AstroCalcDialog.cpp:472 src/gui/AstroCalcDialog.cpp:1361
 msgid "RA (J2000)"
-msgstr "赤经（J2000）"
+msgstr "赤经 (J2000)"
 
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:474 src/gui/AstroCalcDialog.cpp:1363
 msgid "Dec (J2000)"
-msgstr "赤纬（J2000）"
+msgstr "赤纬 (J2000)"
 
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:479
@@ -4345,13 +4345,13 @@ msgstr "活动星系"
 #: src/gui/AstroCalcDialog.cpp:547 src/translations.h:337
 #: src/ui_dsoColorsDialog.h:574
 msgid "Radio galaxies"
-msgstr "电波星系"
+msgstr "射电星系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:548 src/translations.h:339
 #: src/ui_viewDialog.h:2617 src/ui_dsoColorsDialog.h:565
 msgid "Interacting galaxies"
-msgstr "互扰星系"
+msgstr "相互作用星系"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:549 src/translations.h:341
@@ -4443,7 +4443,7 @@ msgstr "电离氢区"
 #: src/translations.h:353 src/ui_viewDialog.h:2618
 #: src/ui_dsoColorsDialog.h:540
 msgid "Supernova remnants"
-msgstr "超新星残骸"
+msgstr "超新星遗迹"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:564 src/translations.h:359
@@ -4518,7 +4518,7 @@ msgstr "超新星候选体"
 #: src/gui/AstroCalcDialog.cpp:576 src/gui/AstroCalcDialog.cpp:4102
 #: src/translations.h:357 src/ui_dsoColorsDialog.h:557
 msgid "Supernova remnant candidates"
-msgstr "超新星残骸候选体"
+msgstr "超新星遗迹候选体"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:577 src/gui/AstroCalcDialog.cpp:4104
@@ -4531,13 +4531,13 @@ msgstr "星系团"
 #: src/gui/AstroCalcDialog.cpp:579 src/translations.h:383
 #: src/ui_viewDialog.h:2558
 msgid "Messier Catalogue"
-msgstr "梅西耶目录"
+msgstr "梅西耶星云星团表"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:581 src/translations.h:385
 #: src/ui_viewDialog.h:2576
 msgid "Caldwell Catalogue"
-msgstr "科德韦尔目录"
+msgstr "科德韦尔深空天体表"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:583 src/translations.h:387
@@ -4625,7 +4625,7 @@ msgstr "PN G 行星状星云目录"
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:617 src/translations.h:417
 msgid "A catalogue of Galactic supernova remnants"
-msgstr "SNR G超新星残骸目录"
+msgstr "SNR G 超新星遗迹目录"
 
 #. TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 #: src/gui/AstroCalcDialog.cpp:619 src/translations.h:419
@@ -5274,7 +5274,7 @@ msgstr "全屏模式"
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
-msgstr "OpenGL版本不足。 请更新驱动程序，图形硬件或使用--angle模式（或--mesa模式）选项。"
+msgstr "OpenGL版本过低。 请更新驱动程序，图形硬件或使用--angle模式（或--mesa模式）选项。"
 
 #: src/StelMainView.cpp:978
 msgid ""
@@ -6153,7 +6153,7 @@ msgstr "西方 (H.A.Rey)"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:509
 msgid "Western (O.Hlad)"
-msgstr "西方(O.Hlad)"
+msgstr "西方 (O.Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:511
@@ -8686,7 +8686,7 @@ msgstr "Strasbourg-ESO行星状星云目录 (Acker+, 1992)"
 
 #: src/ui_viewDialog.h:2594
 msgid "A catalogue of Galactic supernova remnants (Green, 2014)"
-msgstr "超新星残骸目录(Green, 2014)"
+msgstr "超新星遗迹目录 (Green, 2014)"
 
 #: src/ui_viewDialog.h:2597
 msgid "A Catalog of Rich Clusters of Galaxies (Abell+, 1989)"
@@ -8787,11 +8787,11 @@ msgstr "天球"
 
 #: src/ui_viewDialog.h:2651
 msgid "Color of the equatorial grid (J2000.0)"
-msgstr "赤道网格颜色（J2000.0）"
+msgstr "赤道网格颜色 (J2000.0)"
 
 #: src/ui_viewDialog.h:2654
 msgid "Equatorial coordinates of J2000.0."
-msgstr "赤道坐标（J2000.0）"
+msgstr "赤道坐标 (J2000.0)"
 
 #: src/ui_viewDialog.h:2656
 msgid "Equatorial grid (J2000)"
@@ -8799,7 +8799,7 @@ msgstr "赤道网格（J2000）"
 
 #: src/ui_viewDialog.h:2658
 msgid "Color of the equatorial grid (of date)"
-msgstr "赤道网格的颜色（当前）"
+msgstr "赤道网格的颜色 (当前)"
 
 #: src/ui_viewDialog.h:2661
 msgid "Equatorial coordinates of current date and planet."
@@ -8807,19 +8807,19 @@ msgstr "当前日期和行星的赤道坐标"
 
 #: src/ui_viewDialog.h:2663
 msgid "Equatorial grid (of date)"
-msgstr "赤道网格（当前）"
+msgstr "赤道网格 (当前)"
 
 #: src/ui_viewDialog.h:2665
 msgid "Color of the ecliptical grid (J2000.0)"
-msgstr "黄道网格颜色（J2000.0）"
+msgstr "黄道网格颜色 (J2000.0)"
 
 #: src/ui_viewDialog.h:2668
 msgid "Ecliptical coordinates for J2000.0."
-msgstr "黄道坐标（J2000.0）"
+msgstr "黄道坐标 (J2000.0)"
 
 #: src/ui_viewDialog.h:2670
 msgid "Ecliptic grid (J2000)"
-msgstr "黄道网格（J2000）"
+msgstr "黄道网格 (J2000)"
 
 #: src/ui_viewDialog.h:2672
 msgid "Color of the ecliptical grid (of date)"
@@ -8831,7 +8831,7 @@ msgstr "当前黄道坐标，仅用于地球"
 
 #: src/ui_viewDialog.h:2677
 msgid "Ecliptic grid (of date)"
-msgstr "黄道网格（当前）"
+msgstr "黄道网格 (当前)"
 
 #: src/ui_viewDialog.h:2679
 msgid "Color of the azimuthal grid"
@@ -8861,19 +8861,19 @@ msgstr "显示de Vaucouleurs的超星系坐标（1976），由附近星系的分
 
 #: src/ui_viewDialog.h:2700
 msgid "Color of the equinox points (J2000.0)"
-msgstr "春分点颜色(J2000)"
+msgstr "二分点颜色 (J2000)"
 
 #: src/ui_viewDialog.h:2702
 msgid "Equinoxes (J2000)"
-msgstr "二分点(J2000)"
+msgstr "二分点 (J2000)"
 
 #: src/ui_viewDialog.h:2704
 msgid "Color of the equinox points (of date)"
-msgstr "春分点颜色(当前)"
+msgstr "二分点颜色 (当前)"
 
 #: src/ui_viewDialog.h:2706
 msgid "Equinoxes (of date)"
-msgstr "二分点(当前)"
+msgstr "二分点 (当前)"
 
 #: src/ui_viewDialog.h:2708
 msgid "Color of the solstice points (J2000.0)"
@@ -8889,19 +8889,19 @@ msgstr "二至点的颜色(实时)"
 
 #: src/ui_viewDialog.h:2716
 msgid "Solstices (of date)"
-msgstr "二至点(当前)"
+msgstr "二至点 (当前)"
 
 #: src/ui_viewDialog.h:2718
 msgid "Color of equator (J2000.0)"
-msgstr "赤道颜色（ J2000.0）"
+msgstr "赤道颜色 (J2000.0)"
 
 #: src/ui_viewDialog.h:2721
 msgid "Show celestial equator of J2000.0."
-msgstr "显示天赤道（J2000.0）"
+msgstr "显示天赤道 (J2000.0)"
 
 #: src/ui_viewDialog.h:2723
 msgid "Equator (J2000)"
-msgstr "赤道（J2000）"
+msgstr "赤道 (J2000)"
 
 #: src/ui_viewDialog.h:2725
 msgid "Color of equator (of date)"
@@ -8913,23 +8913,23 @@ msgstr "显示当前行星天赤道"
 
 #: src/ui_viewDialog.h:2730
 msgid "Equator (of date)"
-msgstr "赤道（当前）"
+msgstr "赤道 (当前)"
 
 #: src/ui_viewDialog.h:2732
 msgid "Color of ecliptic (J2000.0)"
-msgstr "黄道颜色（ J2000.0）"
+msgstr "黄道颜色 (J2000.0)"
 
 #: src/ui_viewDialog.h:2735
 msgid "Show ecliptic line of J2000.0 (VSOP87A fundamental plane)."
-msgstr "显示黄道线（ J2000.0，VSOP87A基准面）"
+msgstr "显示黄道线 (J2000.0，VSOP87A基准面)"
 
 #: src/ui_viewDialog.h:2737
 msgid "Ecliptic (J2000)"
-msgstr "黄道（J2000）"
+msgstr "黄道 (J2000)"
 
 #: src/ui_viewDialog.h:2739
 msgid "Color of ecliptic (of date)"
-msgstr "黄岛颜色 （当前）"
+msgstr "黄道颜色 (当前)"
 
 #: src/ui_viewDialog.h:2742
 msgid "Show ecliptic line of current date."
@@ -8937,7 +8937,7 @@ msgstr "显示当前黄道线"
 
 #: src/ui_viewDialog.h:2744
 msgid "Ecliptic (of date)"
-msgstr "黄道（当前）"
+msgstr "黄道 (当前)"
 
 #: src/ui_viewDialog.h:2746
 msgid "Color of horizon"
@@ -9001,19 +9001,19 @@ msgstr "基点和罗盘方向的标签"
 
 #: src/ui_viewDialog.h:2795
 msgid "Color of the celestial poles (J2000.0)"
-msgstr "天极颜色（J2000.0）"
+msgstr "天极颜色 (J2000.0)"
 
 #: src/ui_viewDialog.h:2798
 msgid "Show celestial poles of J2000.0."
-msgstr "显示天极（J2000.0）"
+msgstr "显示天极 (J2000.0)"
 
 #: src/ui_viewDialog.h:2800
 msgid "Celestial poles (J2000)"
-msgstr "天极（J2000）"
+msgstr "天极 (J2000)"
 
 #: src/ui_viewDialog.h:2802
 msgid "Color of celestial poles (of date)"
-msgstr "天极颜色（当前）"
+msgstr "天极颜色 (当前)"
 
 #: src/ui_viewDialog.h:2805
 msgid "Show celestial poles of current planet and date."
@@ -9021,23 +9021,23 @@ msgstr "显示当前行星天极"
 
 #: src/ui_viewDialog.h:2807
 msgid "Celestial poles (of date)"
-msgstr "天极（当前）"
+msgstr "天极 (当前)"
 
 #: src/ui_viewDialog.h:2809
 msgid "Color of the ecliptic poles (J2000.0)"
-msgstr "黄极颜色（ J2000.0）"
+msgstr "黄极颜色 (J2000.0)"
 
 #: src/ui_viewDialog.h:2812
 msgid "Show ecliptic poles of J2000.0"
-msgstr "显示黄极（ J2000.0）"
+msgstr "显示黄极 (J2000.0)"
 
 #: src/ui_viewDialog.h:2814
 msgid "Ecliptic poles (J2000)"
-msgstr "黄极（J2000）"
+msgstr "黄极 (J2000)"
 
 #: src/ui_viewDialog.h:2816
 msgid "Color of ecliptic poles (of date)"
-msgstr "黄极颜色（当前）"
+msgstr "黄极颜色 (当前)"
 
 #: src/ui_viewDialog.h:2819
 msgid "Show ecliptic poles of current date."
@@ -9045,7 +9045,7 @@ msgstr "显示当前黄极"
 
 #: src/ui_viewDialog.h:2821
 msgid "Ecliptic poles (of date)"
-msgstr "黄极（当前）"
+msgstr "黄极 (当前)"
 
 #: src/ui_viewDialog.h:2823
 msgid "Color of Zenith and Nadir"
@@ -9445,35 +9445,35 @@ msgstr "方位角/地平高度"
 
 #: src/ui_configurationDialog.h:1562
 msgid "Equatorial coordinates, equinox of J2000.0"
-msgstr "赤道坐标春分点(J2000)"
+msgstr "赤道坐标二分点 (J2000)"
 
 #: src/ui_configurationDialog.h:1564
 msgid "Right ascension/Declination (J2000)"
-msgstr "赤经/赤纬（J2000）"
+msgstr "赤经/赤纬 (J2000)"
 
 #: src/ui_configurationDialog.h:1566
 msgid "Ecliptic coordinates, equinox of date (only for Earth)"
-msgstr "黄道坐标春分点(当前，仅地球)"
+msgstr "黄道坐标二分点 (当前，仅地球)"
 
 #: src/ui_configurationDialog.h:1568
 msgid "Ecliptic coordinates (of date)"
-msgstr "黄道坐标（当前）"
+msgstr "黄道坐标 (当前)"
 
 #: src/ui_configurationDialog.h:1570
 msgid "Ecliptic coordinates, equinox J2000.0"
-msgstr "黄道坐标春分点(J2000)"
+msgstr "黄道坐标二分点 (J2000)"
 
 #: src/ui_configurationDialog.h:1572
 msgid "Ecliptic coordinates (J2000)"
-msgstr "黄道坐标（J2000）"
+msgstr "黄道坐标 (J2000)"
 
 #: src/ui_configurationDialog.h:1574 src/ui_configurationDialog.h:1597
 msgid "Equatorial coordinates, equinox of date"
-msgstr "赤道坐标春分点(当前)"
+msgstr "赤道坐标二分点 (当前)"
 
 #: src/ui_configurationDialog.h:1576
 msgid "Right ascension/Declination (of date)"
-msgstr "赤经/赤纬（当前）"
+msgstr "赤经/赤纬 (当前)"
 
 #: src/ui_configurationDialog.h:1578
 msgid "Supergalactic coordinates"
@@ -9902,11 +9902,11 @@ msgstr "更改行星自动选择对应地景"
 
 #: src/ui_configurationDialog.h:1781
 msgid "Font size: Screen"
-msgstr "字号：屏幕"
+msgstr "字号：星图屏幕"
 
 #: src/ui_configurationDialog.h:1783
 msgid "Base font size for on-screen text"
-msgstr "界面文本的基本字号"
+msgstr "屏幕文字的基本字号"
 
 #: src/ui_configurationDialog.h:1786
 msgid "Graphical user interface"
@@ -9915,11 +9915,11 @@ msgstr "图形用户界面"
 #: src/ui_configurationDialog.h:1788
 msgctxt "abbreviation"
 msgid "GUI"
-msgstr "GUI"
+msgstr "GUI 界面"
 
 #: src/ui_configurationDialog.h:1790
 msgid "Base font size for dialogs"
-msgstr "对话框的基本字号"
+msgstr "界面菜单的基本字号"
 
 #: src/ui_configurationDialog.h:1793
 msgid "Pre-select fonts for a particular writing system"
@@ -10543,7 +10543,7 @@ msgstr "深空天体的标识颜色"
 
 #: src/ui_dsoColorsDialog.h:603
 msgid "Color of markers of radio galaxies"
-msgstr "电波星系标识颜色"
+msgstr "射电星系标识颜色"
 
 #: src/ui_dsoColorsDialog.h:606
 msgid "Color of markers of possible quasars"
@@ -10555,7 +10555,7 @@ msgstr "星系标识颜色"
 
 #: src/ui_dsoColorsDialog.h:612
 msgid "Color of markers of interacting galaxies"
-msgstr "互扰星系标识颜色"
+msgstr "相互作用星系标识颜色"
 
 #: src/ui_dsoColorsDialog.h:615
 msgid "Color of markers of BL Lac objects"
@@ -10591,7 +10591,7 @@ msgstr "星际物质标识颜色"
 
 #: src/ui_dsoColorsDialog.h:639
 msgid "Color of markers of supernova remnants"
-msgstr "超新星残骸标识颜色"
+msgstr "超新星遗迹标识颜色"
 
 #: src/ui_dsoColorsDialog.h:642
 msgid "Color of markers of supernova candidates"
@@ -10599,7 +10599,7 @@ msgstr "超新星候选体的标识颜色"
 
 #: src/ui_dsoColorsDialog.h:645
 msgid "Color of markers of supernova remnant candidates"
-msgstr "超新星残骸候选体的标识颜色"
+msgstr "超新星遗迹候选体的标识颜色"
 
 #: src/ui_dsoColorsDialog.h:648
 msgid "Color of markers of symbiotic stars"
@@ -11230,7 +11230,7 @@ msgstr "选择上一个目镜"
 #: plugins/Oculars/src/Oculars.cpp:1727
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0) of cross"
-msgstr "十字丝的赤经/赤纬（J2000.0）"
+msgstr "十字丝的赤经/赤纬 (J2000)"
 
 #. TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 #: plugins/Oculars/src/Oculars.cpp:1735
@@ -11821,7 +11821,7 @@ msgstr "焦距乘数："
 msgid ""
 "Values of multiplicity >1 expand the focal length (Barlow lens). Values of "
 "multiplicity <1 reduce the focal length (Shapley lens)."
-msgstr "倍率值大于1会延长焦距（巴洛透镜）。倍率值小于1会缩短焦距（夏普利透镜）。"
+msgstr "倍率值大于 1 会延长焦距（巴洛透镜）。倍率值小于 1 会缩短焦距（夏普利透镜）。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1258
 msgid "Lenses"
@@ -11963,7 +11963,7 @@ msgstr "导航"
 #. TRANSLATORS: Satellite group: Amateur radio (ham) satellites
 #: plugins/Satellites/src/Satellites.cpp:2078
 msgid "amateur"
-msgstr "业余无线电"
+msgstr "奥斯卡系列卫星"
 
 #. TRANSLATORS: Satellite group: Weather (meteorological) satellites
 #: plugins/Satellites/src/Satellites.cpp:2080
@@ -13353,7 +13353,7 @@ msgid ""
 "updated and now interpret the coordinates they receive as coordinates that "
 "use the equinox of the date (EOD, also known as JNow), making necessary this"
 " override."
-msgstr "<b>坐标系</b>：有些星特朗望远镜固件更新后使用当前春分点(EOD, 或 JNow)解释它们接收到的坐标，这种更替有必要。"
+msgstr "<b>坐标系</b>：有些星特朗望远镜固件更新后使用当前二分点(EOD, 或 JNow)解释它们接收到的坐标，这种更替有必要。"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:389
 msgid ""
@@ -13810,11 +13810,11 @@ msgstr "选择目录"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:96
 msgid "Right Ascension (J2000)"
-msgstr "赤经（J2000）"
+msgstr "赤经 (J2000)"
 
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:97
 msgid "Declination (J2000)"
-msgstr "赤纬（J2000）"
+msgstr "赤纬 (J2000)"
 
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:275
 #: plugins/TelescopeControl/src/gui/SlewDialog.cpp:304
@@ -13837,12 +13837,12 @@ msgstr "把望远镜指向坐标"
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:331
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:247
 msgid "&Right Ascension (J2000):"
-msgstr "赤经（J2000）:"
+msgstr "赤经 (J2000):"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:332
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:248
 msgid "De&clination (J2000):"
-msgstr "赤纬（J2000）:"
+msgstr "赤纬 (J2000):"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:333
 #: plugins/TelescopeControl/src/gui/ui_storedPointsDialog.h:244
@@ -14084,7 +14084,7 @@ msgstr "文本用户界面"
 msgid ""
 "Plugin implementation of 0.9.x series Text User Interface (TUI), used in "
 "planetarium systems"
-msgstr "适用于天文馆系统，为 0.9.x 系列的文本模式的用户界面（TUI）提供实现的插件。"
+msgstr "适用于天文馆系统，为 0.9.x 系列的文本用户界面（TUI）提供实现的插件。"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:153
 msgid "Altitude:"
@@ -14173,7 +14173,7 @@ msgstr "图绘亮度："
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:363
 msgid "Ecliptic line (J2000)"
-msgstr "黄道线（J2000）"
+msgstr "黄道线 (J2000)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:370
 msgid "Nebula names"
@@ -15060,7 +15060,7 @@ msgstr "存在至少一个伴星"
 
 #: plugins/Pulsars/src/Pulsar.cpp:385
 msgid "with pulsed emission from radio to infrared or higher frequencies"
-msgstr "伴随从无线电到红外波段或更高频率的脉冲发射"
+msgstr "伴随从射电到红外波段或更高频率的脉冲发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:390
 msgid "with pulsed emission only at infrared or higher frequencies"
@@ -15068,17 +15068,17 @@ msgstr "有只在红外线波段或更高频率的脉冲发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:395
 msgid "with pulsed emission in the radio band"
-msgstr "有在无线电波段的脉冲发射"
+msgstr "有在射电波段的脉冲发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:400
 msgid "with intermittently pulsed radio emission"
-msgstr "有间歇性的脉冲无线电发射"
+msgstr "有间歇性的脉冲射电发射"
 
 #: plugins/Pulsars/src/Pulsar.cpp:405
 msgid ""
 "isolated neutron star with pulsed thermal X-ray emission but no detectable "
 "radio emission"
-msgstr "有热X射线脉冲发射的孤立中子星，但是没有可检测的无线电发射"
+msgstr "有热X射线脉冲发射的孤立中子星，但是没有可检测的射电发射"
 
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
 msgid "Pulsars Plug-in"
@@ -16004,7 +16004,7 @@ msgid ""
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
-msgstr "Titawin (中文得土安，缔头万)在摩洛哥北部的城市，是联合国教科文组织的世界遗产。"
+msgstr "Titawin (中文得土安，缔头万) 在摩洛哥北部的城市，是联合国教科文组织的世界遗产。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
@@ -16013,8 +16013,8 @@ msgid ""
 "century Cordova in Andalusia (modern Spain), and wrote an influential "
 "treatise on the uses of the astrolabe."
 msgstr ""
-"是Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-al-"
-"Saffa的名，他在11世纪安达卢西亚(现属西班牙)的科尔多瓦教算术、几何和天文学，并写了一篇关于使用星盘的影响深远的论文。"
+"是 Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-al-Saffa 的名，他在 11"
+" 世纪安达卢西亚(现属西班牙)的科尔多瓦教算术、几何和天文学，并写了一篇关于使用星盘的影响深远的论文。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
@@ -16022,8 +16022,8 @@ msgid ""
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
 " the school of al Majriti in Cordova (Andalusia, now modern Spain)."
 msgstr ""
-"是Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri ( 或者<em>Ibn al-"
-"Samh</em>)的名字，他是11世纪科尔多瓦(在安达卢西亚，现属西班牙)艾梅支蒂学校著名的天文学家和数学家。"
+"是 Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri ( 或者<em>Ibn al-"
+"Samh</em>) 的名字，他是11世纪科尔多瓦(在安达卢西亚，现属西班牙)艾梅支蒂学校著名的天文学家和数学家。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
@@ -16031,8 +16031,8 @@ msgid ""
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
 "11th century Andalusia (modern Spain)."
 msgstr ""
-"是MAbu al-Qasim al-Qurtubi al-"
-"Majriti名字，他是10世纪和11世纪初安达卢西亚(现属西班牙)的著名数学家、天文学家、学者和教育家。"
+"是 MAbu al-Qasim al-Qurtubi al-Majriti "
+"名字，他是10世纪和11世纪初安达卢西亚(现属西班牙)的著名数学家、天文学家、学者和教育家。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
@@ -16048,7 +16048,7 @@ msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
-msgstr "是拉丁文<em>fortitude（坚韧）</em>。坚韧是逆境中的情感和精神力量的体现，鹰(天鹰座那只)就是一个象征。"
+msgstr "是拉丁文<em>fortitude（坚韧）</em>。坚韧是逆境中的情感和精神力量的体现，鹰（天鹰座那只）就是一个象征。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
@@ -16548,7 +16548,7 @@ msgstr "大距%1 (%2 度)"
 #: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr "与太阳最大角距: %1 (%2 度)"
+msgstr "与太阳最大角距：%1 (%2 度)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may
 #. follow.
@@ -17752,7 +17752,7 @@ msgstr "显示鼠标指针的坐标"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:140
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
-msgstr "赤经/赤纬（J2000.0）"
+msgstr "赤经/赤纬 (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:156
 msgctxt "abbreviated in the plugin"
@@ -17782,7 +17782,7 @@ msgstr "黄经/黄纬"
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:249
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
-msgstr "黄经/黄纬（J2000.0）"
+msgstr "黄经/黄纬 (J2000.0)"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:267
 msgctxt "abbreviated in the plugin"
@@ -17819,7 +17819,7 @@ msgstr "自定义位置"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
 msgid "Right ascension/Declination (J2000.0)"
-msgstr "赤经/赤纬（J2000.0）"
+msgstr "赤经/赤纬 (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
 msgid "Right ascension/Declination"
@@ -17831,7 +17831,7 @@ msgstr "黄经/黄纬"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
-msgstr "黄经/黄纬（J2000.0）"
+msgstr "黄经/黄纬 (J2000.0)"
 
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Altitude/Azimuth"
@@ -18385,7 +18385,7 @@ msgstr "一个对考古/民族天文校准研究的工具"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:309
 msgid "Show Line for Equinox"
-msgstr "显示春分线"
+msgstr "显示二分圈"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:310
 msgid "Show Line for Solstices"
@@ -18457,7 +18457,7 @@ msgstr "显示自定义赤纬线2"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1522
 msgid "Equinox"
-msgstr "春分点"
+msgstr "二分点"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1525
 msgid "Solstice"
@@ -18662,7 +18662,7 @@ msgstr "跨季线"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:572
 msgid "Equinox line (Equator)"
-msgstr "春分线(赤道)"
+msgstr "二分圈 (赤道)"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:573
 msgid "Declination of Zenith passage"

@@ -5,6 +5,7 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
+# אני ואתה <elishamasw@gmail.com>, 2018
 # 
 #, fuzzy
 msgid ""
@@ -13,7 +14,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2018-11-10 18:56+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"Last-Translator: אני ואתה <elishamasw@gmail.com>, 2018\n"
 "Language-Team: Hebrew (https://www.transifex.com/stellarium/teams/80998/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -109,11 +110,11 @@ msgstr "Select single constellation"
 
 #: src/core/modules/ConstellationMgr.cpp:145
 msgid "Remove selection of constellations"
-msgstr ""
+msgstr "הסר בחירה של קבוצות כוכבים"
 
 #: src/core/modules/ConstellationMgr.cpp:146
 msgid "Select all constellations"
-msgstr ""
+msgstr "בחר את כל קבוצות הכוכבים"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Reload the sky culture"
@@ -420,11 +421,11 @@ msgstr "Light pollution data from locations database"
 
 #: src/core/modules/LandscapeMgr.cpp:489
 msgid "Increase light pollution"
-msgstr ""
+msgstr "הגבר זיהום אור"
 
 #: src/core/modules/LandscapeMgr.cpp:490
 msgid "Reduce light pollution"
-msgstr ""
+msgstr "הפחת זיהום אור"
 
 #: src/core/modules/LandscapeMgr.cpp:491
 msgid "Cyclic change in light pollution"
@@ -478,7 +479,7 @@ msgstr ""
 
 #: src/core/modules/LandscapeMgr.cpp:944
 msgid "Light pollution"
-msgstr ""
+msgstr "זיהום אור"
 
 #: src/core/modules/LandscapeMgr.cpp:944
 msgid "by Bortle scale"
@@ -543,7 +544,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:105
 msgctxt "landform"
 msgid "crater"
-msgstr ""
+msgstr "מכתש"
 
 #. TRANSLATORS: Ridge
 #: src/core/modules/NomenclatureItem.cpp:109
@@ -830,7 +831,7 @@ msgstr ""
 #: src/core/modules/NomenclatureItem.cpp:289
 msgctxt "landform"
 msgid "landing site name"
-msgstr ""
+msgstr "שם אתר נחיתה"
 
 #: src/core/modules/NomenclatureItem.cpp:293
 msgctxt "landform"
@@ -855,7 +856,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'catena'
 #: src/core/modules/NomenclatureItem.cpp:483
 msgid "Chain of craters."
-msgstr ""
+msgstr "שרשרת מכתשים"
 
 #. TRANSLATORS: Description for landform 'cavus'
 #: src/core/modules/NomenclatureItem.cpp:487
@@ -2029,7 +2030,7 @@ msgstr "variable star"
 
 #: src/core/modules/StarWrapper.cpp:182 src/gui/AstroCalcDialog.cpp:1134
 msgid "double star"
-msgstr "double star"
+msgstr "כוכב כפול"
 
 #: src/core/modules/StarWrapper.cpp:223
 msgid "Magnitude range"
@@ -7121,7 +7122,7 @@ msgstr "Belize"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Canada
 #: src/translations_countries.h:106
 msgid "Canada"
-msgstr "Canada"
+msgstr "קנדה"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
 #: src/translations_countries.h:108
@@ -11990,7 +11991,7 @@ msgstr ""
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1258
 msgid "Lenses"
-msgstr "Lenses"
+msgstr "עדשות"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1262
 msgid "Resolution x (pixels):"
@@ -14706,7 +14707,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:513
 msgid "Import data"
-msgstr "Import data"
+msgstr "יבא נתונים"
 
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:515
 msgid "Select the type"
@@ -18340,7 +18341,7 @@ msgstr "dd/MM/yyyy"
 
 #: plugins/MeteorShowers/src/ui_MSSearchDialog.h:199
 msgid "Results"
-msgstr "Results"
+msgstr "תוצאות"
 
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:57
 #: plugins/PointerCoordinates/src/PointerCoordinates.cpp:102
@@ -19000,7 +19001,7 @@ msgstr "Quality/Performance settings"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:212
 msgid "Stored views"
-msgstr "Stored views"
+msgstr "תצוגות שמורות"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:214
 msgid "Load view"
