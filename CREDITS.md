@@ -283,17 +283,31 @@
 	     version:
 	     - The Proteus map is from Phil Stooke.
 	     - Iapetus map is from dr. Fridger Schrempp (t00fri).
-	4.5c The Amalthea, Ariel, Charon, Europa, Ganymede, Gaspra, Haumea, 
-	    Hyperion, Ida, Io, Janus, Mercury, Neptune, Oberon, Phoebe, Pluto, 
-	    Saturn, Sedna, Tethys, Umbriel, Vesta, Venus, Mimas, Rhea, Bianca,
-	    Ceres, Miranda, Titania, Triton, Uranus, Dysnomia, Eris, Epimetheus,
-	    Nereid, Deimos and comet maps are processed by Oleg Pluton a.k.a Helleformer
-	    License: Creative Commons Attribution 4.0 International
-	4.5d Callisto map is created by John van Vliet from PDS
+	4.5c The Amalthea, Europa, Ganymede, Gaspra,Mercury, Uranus, Neptune, Mimas,
+	     Bianca, Epimetheus, Ida, Vesta, Hyperion, Io, Janus, Phoebe, Saturn, 
+	     Tethys, Venus, Ceres, Uranus, Epimetheus, Deimos and comet maps are 
+	     processed by Oleg Pluton a.k.a Helleformer
+	     License: Creative Commons Attribution 4.0 International
+	4.5d The Titania, Umbriel, Pluto, Charon, Sedna and 2007 OR10 maps are created
+	     by Kexitt and postprocessed by Oleg Pluton a.k.a Helleformer
+	     License: Creative Commons Attribution 4.0 International
+	4.5e The Ariel, Haumea, Miranda, Oberon and Nereid maps are created by 
+	     Snowfall and postprocessed by Oleg Pluton a.k.a Helleformer
+	     License: Creative Commons Attribution 4.0 International
+	4.5f The Eris and Dysnomia maps are created by MrSpace43 and postprocessed by 
+	     Oleg Pluton a.k.a Helleformer
+	     License: Creative Commons Attribution 4.0 International
+	4.5g The Rhea map are created by FarGetaNik and postprocessed by Oleg Pluton 
+	     a.k.a Helleformer
+	     License: Creative Commons Attribution 4.0 International
+	4.5i The Titan (Clouds) map are created by Magenta Meteorite and postprocessed
+	     by Oleg Pluton a.k.a Helleformer
+	     License: Creative Commons Attribution 4.0 International
+	4.5k Callisto map is created by John van Vliet from PDS
 	     data and modified by RVS. License: cc-by-sa.
-	4.5e Dione and Enceladus maps are created by NASA (CICLOPS team) 
+	4.5l Dione and Enceladus maps are created by NASA (CICLOPS team) 
 	     from Cassini data, colored by RVS. Public domain.
-	4.5f All other planet maps from David Seal's site:
+	4.5m All other planet maps from David Seal's site:
 	     http://maps.jpl.nasa.gov/   see license in section 10.2
 	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 	    University of Potsdam, Germany. Further information and more
