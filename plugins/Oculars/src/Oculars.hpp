@@ -103,6 +103,7 @@ class Oculars : public StelModule
 	Q_PROPERTY(bool flagShowOcularsButton	READ getFlagShowOcularsButton  WRITE setFlagShowOcularsButton  NOTIFY flagShowOcularsButtonChanged)
 
 	Q_PROPERTY(double arrowButtonScale     READ getArrowButtonScale        WRITE setArrowButtonScale        NOTIFY arrowButtonScaleChanged)
+	Q_PROPERTY(int guiPanelFontSize        READ getGuiPanelFontSize        WRITE setGuiPanelFontSize        NOTIFY guiPanelFontSizeChanged)
 
 	//BM: Temporary, until the GUI is finalized and some other method of getting
 	//info from the main class is implemented.
@@ -183,6 +184,8 @@ public slots:
 	
 	void enableGuiPanel(bool enable = true);
 	bool getFlagGuiPanelEnabled(void) const {return flagGuiPanelEnabled;}
+	void setGuiPanelFontSize(int size);
+	int getGuiPanelFontSize()const {return guiPanelFontSize;}
 
 	void setFlagDMSDegrees(const bool b);
 	bool getFlagDMSDegrees(void) const;
@@ -224,6 +227,9 @@ public slots:
 	void setFlagShowOcularsButton(bool b);
 	bool getFlagShowOcularsButton(void) { return flagShowOcularsButton; }
 
+	void setFontSize(int s){font.setPixelSize(s);}
+	//! Connect this to StelApp font size.
+	void setFontSizeFromApp(int s){font.setPixelSize(s+1);}
 signals:
 	void enableOcularChanged(bool value);
 	void enableCrosshairsChanged(bool value);
@@ -236,6 +242,7 @@ signals:
 	void selectedCCDRotationAngleChanged(double value);
 
 	void flagGuiPanelEnabledChanged(bool value);
+	void guiPanelFontSizeChanged(int value);
 	void flagHideGridsLinesChanged(bool value);
 	void flagAutosetMountForCCDChanged(bool value);
 	void flagScalingFOVForTelradChanged(bool value);
@@ -396,6 +403,7 @@ private:
 	StelAction * actionOcularDecrement;
 
 	class OcularsGuiPanel * guiPanel;
+	int guiPanelFontSize;
 
 	//Reticle
 	StelTextureSP reticleTexture;

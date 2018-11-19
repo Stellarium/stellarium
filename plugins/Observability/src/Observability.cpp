@@ -843,8 +843,8 @@ void Observability::draw(StelCore* core)
 
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	int lineSpacing = (int) (params.devicePixelsPerPixel * 1.3 * ( (double) fontSize));  // between lines
-	int groupSpacing = 6*fontSize;  // between daily and yearly results
-	int yLine = 8*fontSize+110;
+	int groupSpacing = 6*fontSize*params.devicePixelsPerPixel;  // between daily and yearly results
+	int yLine = 8*fontSize*params.devicePixelsPerPixel + 110;
 	int xLine = 80;
 
 	if (show_Today) 

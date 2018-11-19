@@ -307,6 +307,8 @@ private slots:
 	//! in translations.h
 	void updateI18n();
 
+	void reloadSkyCulture(void);
+
 private:
 	//! Read constellation names from the given file.
 	//! @param namesFile Name of the file containing the constellation names

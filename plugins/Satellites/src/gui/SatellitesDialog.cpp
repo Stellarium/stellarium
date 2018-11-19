@@ -106,9 +106,13 @@ void SatellitesDialog::createDialogContent()
 	Satellites* plugin = GETSTELMODULE(Satellites);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->satellitesList << ui->sourceList << ui->aboutTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 #ifdef Q_OS_WIN
 	acEndl="\r\n";
@@ -323,7 +327,10 @@ void SatellitesDialog::savePredictedIridiumFlares()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save predicted Iridium flares as..."), QDir::homePath() + "/iridium_flares.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save predicted Iridium flares as..."),
+							QDir::homePath() + "/iridium_flares.csv",
+							filter);
 	QFile predictedIridiumFlares(filePath);
 	if (!predictedIridiumFlares.open(QFile::WriteOnly | QFile::Truncate))
 	{

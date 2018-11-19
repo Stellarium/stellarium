@@ -144,6 +144,8 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
 	addAction("actionShow_Constellation_Deselect", displayGroup, N_("Remove selection of constellations"), this, "deselectConstellations()", "W");
 	addAction("actionShow_Constellation_Select", displayGroup, N_("Select all constellations"), this, "selectAllConstellations()", "Alt+W");
+	// Reload the current sky culture
+	addAction("actionShow_Starlore_Reload", displayGroup, N_("Reload the sky culture"), this, "reloadSkyCulture()", "Ctrl+Alt+I");
 }
 
 /*************************************************************************
@@ -154,6 +156,11 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr")->getCallOrder(actionName)+10;
 	return 0;
+}
+
+void ConstellationMgr::reloadSkyCulture()
+{
+	updateSkyCulture(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
 }
 
 void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
