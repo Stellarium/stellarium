@@ -638,9 +638,9 @@
 		"maxBrightness" : 12.7
 	},
 	{
-		"imageCredits": {"short" : "Grasslands Observatory", "infoUrl": "http://www.grasslands.org/"},
+		"imageCredits" : {"short" : "TRAPPIST/E. Jehin/ESO","infoUrl": "https://www.eso.org/public/images/eso1023d/"},
 		"imageUrl" : "m83.png",
-		"worldCoords" : [[[-155.6140, -29.9522], [-155.8635, -29.9665], [-155.8797, -29.7503], [-155.6307, -29.7360]]],
+		"worldCoords" : [[[204.4444,-30.0319], [204.0712,-30.0323], [204.0714,-29.7091], [204.4435,-29.7088]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2165786418,
 		"maxBrightness" : 12.8
@@ -846,9 +846,9 @@
 		"maxBrightness" : 13.5
 	},
 	{
-		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageCredits": {"short" : "ESO", "infoUrl": "https://www.eso.org/public/images/eso0914a/"},
 		"imageUrl" : "n55.png",
-		"worldCoords" : [[[4.0800, -39.4439], [3.5067, -39.4520], [3.4940, -39.0120], [4.0654, -39.0012]]],
+		"worldCoords" : [[[4.1476,-39.5096], [3.3945,-39.5101], [3.3973,-38.929], [4.1447,-38.9288]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 12.4
@@ -886,6 +886,14 @@
 		"maxBrightness" : 13.2
 	},
 	{
+		"imageCredits" : {"short" : "Hewholooks","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC225HunterWilson.jpg"},
+		"imageUrl" : "n225.png",
+		"worldCoords" : [[[11.3531,61.6316], [10.252,61.6424], [10.2655,62.1656], [11.3854,62.1543]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.5
+	},
+	{
 		"imageCredits" : {"Short": "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
 		"imageUrl" : "n246-vasey.png",
 		"worldCoords" : [[[11.8563, -11.9868], [11.6514, -11.9645], [11.6742, -11.7638], [11.8790, -11.7860]]],
@@ -918,9 +926,17 @@
 		"maxBrightness" : 15.0
 	},
 	{
-		"imageCredits": {"short" : "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
-		"imageUrl" : "n300.png",
-		"worldCoords" : [[[13.8900, -37.8290], [13.5605, -37.8195], [13.5730, -37.5575], [13.9035, -37.5670]]],
+		"imageCredits" : {"short" : "Sunfishtommy","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC_288.png"},
+		"imageUrl" : "n288.png",
+		"worldCoords" : [[[13.2791,-26.6814], [13.0755,-26.6761], [13.0818,-26.4947], [13.2848,-26.5004]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 12.5
+	},
+	{
+		"imageCredits" : {"short" : "ESO","infoUrl": "http://www.eso.org/public/images/eso1037a/"},
+		"imageUrl" : "nebulae/default/n300.png",
+		"worldCoords" : [[[14.0443,-37.9343], [13.4076,-37.9342], [13.409,-37.4313], [14.0429,-37.4321]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 12.4
@@ -932,6 +948,22 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "Jschulman555","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC520.jpg"},
+		"imageUrl" : "n520.png",
+		"worldCoords" : [[[21.2116,3.7418], [21.0852,3.7418], [21.0852,3.868], [21.2116,3.868]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.8
+	},
+	{
+		"imageCredits" : {"short" : "Jschulman555","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC660.jpg"},
+		"imageUrl" : "n660.png",
+		"worldCoords" : [[[25.8478,13.5701], [25.6802,13.5701], [25.6802,13.7329], [25.8478,13.7329]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.5
 	},
 	{
 		"imageCredits": {"short" : "Maxime Spano"},
@@ -950,12 +982,28 @@
 		"maxBrightness" : 13.0
 	},
 	{
+		"imageCredits" : {"short" : "Jschulman555","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC925.jpg"},
+		"imageUrl" : "n925.png",
+		"worldCoords" : [[[36.923,33.4887], [36.701,33.4893], [36.7014,33.6743], [36.9239,33.6735]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.8
+	},
+	{
 		"imageCredits" : {"short" : "Fryns Fryns","infoUrl": "https://commons.wikimedia.org/wiki/File:Ngc1023_zoom.jpg"},
 		"imageUrl" : "n1023.png",
 		"worldCoords" : [[[40.2062,38.9811], [39.998,38.9811], [39.998,39.1427], [40.2062,39.1427]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "Jeffjnet","infoUrl": "http://www.iceinspace.com.au/"}, 
+		"imageUrl" : "n1055.png",
+		"worldCoords" : [[[40.5408,.3247], [40.3305,.3232], [40.3291,.5332], [40.5389,.5345]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2165786418, 
+		"maxBrightness" : 13.8
 	},
 	{
 		"imageCredits" : {"short" : "Zhu Ying"}, 
@@ -1086,6 +1134,14 @@
 		"maxBrightness" : 10.1
 	},
 	{
+		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n1555.shtml"},
+		"imageUrl" : "n1555.png",
+		"worldCoords" : [[[65.6222,19.5787], [65.5082,19.3673], [65.284,19.475], [65.3974,19.6859]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.5
+	},
+	{
 		"imageCredits" : {"Short": "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
 		"imageUrl" : "n1961-vasey.png",
 		"worldCoords" : [[[85.8540, 69.2918], [85.3602, 69.3032], [85.3910, 69.4777], [85.8884, 69.4663]]],
@@ -1110,6 +1166,14 @@
 		"maxBrightness" : 13.2
 	},
 	{
+		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "ESO/Digitized Sky Survey 2"},
+		"imageUrl" : "n1788.png",
+		"worldCoords" : [[[77.1097,-3.7675], [76.3433,-3.7675], [76.3433,-3.0025], [77.1097,-3.0025]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.5
+	},
+	{
 		"imageCredits" : {"short" : "DSS"},
 		"imageUrl" : "n1851-dss.png",
 		"worldCoords" : [[[78.6703,-40.1513], [78.3917,-40.1513], [78.3917,-39.9379], [78.6703,-39.9379]]],
@@ -1124,6 +1188,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.266023154,
 		"maxBrightness" : 12.5
+	},
+	{
+		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso1304c/"}, 
+		"imageUrl" : "n1999.png",
+		"worldCoords" : [[[84.7628,-7.2337], [83.4756,-7.2301], [83.4818,-5.9558], [84.7648,-5.9594]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2165786418, 
+		"maxBrightness" : 14.0
 	},
 	{
 		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso1125c/"},
@@ -1222,6 +1294,14 @@
 		"maxBrightness" : 13.4
 	},
 	{
+		"imageCredits" : {"short" : "SDSS"},
+		"imageUrl" : "n2419-sdss.png",
+		"worldCoords" : [[[114.5899,38.8398], [114.4811,38.8398], [114.4811,38.9244], [114.5899,38.9244]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13
+	},
+	{
 		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n2440.shtml"},
 		"imageUrl" : "n2440.png",
 		"worldCoords" : [[[115.5008,-18.2319], [115.4581,-18.2311], [115.4584,-18.191], [115.5013,-18.1914]]],
@@ -1244,6 +1324,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 12.8
+	},
+	{
+		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "http://www.eso.org/public/images/eso1316c/"}, 
+		"imageUrl" : "n2547.png",
+		"worldCoords" : [[[122.9697,-49.4576], [122.0876,-49.4571], [122.0928,-48.8842], [122.9661,-48.8842]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2165786418, 
+		"maxBrightness" : 13.8
 	},
 	{
 		"imageCredits" : {"Short":"Plover Hill Observatory","infoUrl": "http://www.madpc.co.uk/~peterv/"},
@@ -1300,6 +1388,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "Howard Bond (ST ScI) and NASA/ESA","infoUrl": "https://www.spacetelescope.org/images/opo9738c11/"},
+		"imageUrl" : "n2867.png",
+		"worldCoords" : [[[140.3649,-58.3156], [140.3469,-58.3156], [140.3469,-58.3061], [140.3649,-58.3061]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 12.8
 	},
 	{
 		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
@@ -1422,6 +1518,14 @@
 		"maxBrightness" : 13.4
 	},
 	{
+		"imageCredits" : {"short" : "ESO","infoUrl": "https://www.eso.org/public/images/eso1439a/"},
+		"imageUrl" : "n3532.png",
+		"worldCoords" : [[[166.954,-59.0192], [165.8424,-59.019], [165.8508,-58.4472], [166.9441,-58.4472]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.5
+	},
+	{
 		"imageCredits" : {"short" : "ESO/La Silla Observatory","infoUrl": "http://www.eso.org/public/news/eso1425/"},
 		"imageUrl" : "n3603.png",
 		"worldCoords" : [[[169.5252,-61.7266], [167.3893,-61.7186], [167.4334,-60.707], [169.508,-60.7137]]],
@@ -1518,6 +1622,14 @@
 		"maxBrightness" : 13.2
 	},
 	{
+		"imageCredits" : {"short" : "Jeffjnet","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC4214_JeffJohnson.jpg"},
+		"imageUrl" : "n4228.png",
+		"worldCoords" : [[[184.115,36.1838], [183.739,36.1838], [183.739,36.4868], [184.115,36.4868]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.8
+	},
+	{
 		"imageCredits" : {"short" : "Sun Gang"},
 		"imageUrl" : "n4236.png",
 		"worldCoords" : [[[184.8043,69.2195], [183.5589,69.221], [183.5509,69.6628], [184.8202,69.6617]]],
@@ -1532,6 +1644,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 13.8       
+	},
+	{
+		"imageCredits" : {"short" : "DSS"},
+		"imageUrl" : "n4372-dss.png",
+		"worldCoords" : [[[187.1307,-72.8576], [185.8622,-72.8575], [185.8753,-72.4836], [187.1124,-72.4822]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.6
 	},
 	{
 		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n4414.shtml"},
@@ -1580,6 +1700,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
 		"minResolution" : 0.2222381739, 
 		"maxBrightness" : 13.8 
+	},
+	{
+		"imageCredits" : {"short" : "Klaus Hohmann","infoUrl": "https://commons.wikimedia.org/wiki/File:NGC4567-NGC4568.jpg"},
+		"imageUrl" : "n4567.png",
+		"worldCoords" : [[[189.1952,11.1917], [189.0868,11.1917], [189.0868,11.2979], [189.1952,11.2979]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.6
 	},
 	{
 		"imageCredits" : {"Short":"Plover Hill Observatory","infoUrl": "http://www.madpc.co.uk/~peterv/"},
@@ -1654,11 +1782,11 @@
 		"maxBrightness" : 13.4
 	},
 	{
-		"imageCredits": {"short" : "Philip Mongomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
+		"imageCredits" : {"short" : "ESO","infoUrl": "https://www.eso.org/public/images/eso1221a/n"},
 		"imageUrl" : "n5128.png",
-		"worldCoords" : [[[-158.4875, -43.1153], [-158.7850, -43.1267], [-158.8000, -42.9083], [-158.5040, -42.8990]]],
+		"worldCoords" : [[[201.7664,-43.2767], [201.0071,-43.2769], [201.0107,-42.7245], [201.7629,-42.7243]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2169148018,
+		"minResolution" : 0.2165786418,
 		"maxBrightness" : 14.2
 	},
 	{
@@ -1694,12 +1822,36 @@
 		"maxBrightness" : 14
 	},
 	{
+		"imageCredits" : {"short" : "Kong Fanxi"},
+		"imageUrl" : "n5286.png",
+		"worldCoords" : [[[206.6969,-51.428], [206.5261,-51.428], [206.5261,-51.3214], [206.6969,-51.3214]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.0
+	},
+	{
 		"imageCredits" : {"short" : "HG731GZ"},
 		"imageUrl" : "n5566.png",
 		"worldCoords" : [[[215.1723,3.845], [214.9617,3.845], [214.9617,4.055], [215.1723,4.055]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 13
+	},
+	{
+		"imageCredits" : {"short" : "DSS"},
+		"imageUrl" : "n5694-dss.png",
+		"worldCoords" : [[[219.9307,-26.5663], [219.8713,-26.5663], [219.8713,-26.5131], [219.9307,-26.5131]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.5
+	},
+	{
+		"imageCredits" : {"short" : "San Esteban","infoUrl": " 	http://www.astrosurf.com"}, 
+		"imageUrl" : "n5897.png",
+		"worldCoords" : [[[229.5009,-21.1294], [229.2184,-21.1312], [229.2172,-20.8676], [229.499,-20.866]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2165786418, 
+		"maxBrightness" : 13.5
 	},
 	{
 		"imageCredits" : {"short" : "Palomar Observatory","infoUrl":"http://www.cosmotography.com/images/small_ring_ngc5907.html"}, 
@@ -1718,6 +1870,14 @@
 		"maxBrightness" : 13.0
 	},
 	{
+		"imageCredits" : {"short" : "DSS"}, 
+		"imageUrl" : "n5986-dss.png",
+		"worldCoords" : [[[236.6299,-37.8785], [236.4011,-37.8782], [236.4016,-37.6977], [236.6294,-37.6982]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2165786418, 
+		"maxBrightness" : 13.5
+	},
+	{
 		"imageCredits" : {"short" : "NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble","infoUrl": "https://www.spacetelescope.org/images/opo0222a/"},
 		"imageUrl" : "n6027.png",
 		"worldCoords" : [[[239.824,20.7376], [239.7796,20.7376], [239.7796,20.7792], [239.824,20.7792]]],
@@ -1732,6 +1892,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 1,
 		"maxBrightness" : 15
+	},
+	{
+		"imageCredits" : {"short" : "DSS"},
+		"imageUrl" : "n6101-dss.png",
+		"worldCoords" : [[[246.7017,-72.2783], [246.2144,-72.2779], [246.2181,-72.1295], [246.7017,-72.1299]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.5
 	},
 	{
 		"imageCredits" : {"short" : "Ivan Bok","infoUrl": "https://commons.wikimedia.org/wiki/File:The_Rim_Nebula.jpg"},
@@ -1755,7 +1923,7 @@
 		"worldCoords" : [[[260.4075,-36.4551], [259.0564,-36.4526], [259.0688,-35.3655], [260.4039,-35.3686]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
-		"maxBrightness" : 13
+		"maxBrightness" : 14.2
 	},
 	{
 		"imageCredits" : {"short" : "DSS"},
@@ -1771,7 +1939,23 @@
 		"worldCoords" : [[[262.0591,-34.939], [260.6300,-34.9362], [260.6433,-33.7633], [262.0551,-33.769]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
-		"maxBrightness" : 13.5
+		"maxBrightness" : 14.2
+	},
+	{
+		"imageCredits" : {"short" : "ESO","infoUrl": "https://www.eso.org/public/images/eso1243a/"},
+		"imageUrl" : "n6362.png",
+		"worldCoords" : [[[263.3481,-67.1934], [262.6137,-67.1934], [262.6169,-66.9082], [263.35,-66.9082]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.0
+	},
+	{
+		"imageCredits" : {"short" : "ESO, F. Ferraro (University of Bologna)","infoUrl": "https://www.eso.org/public/images/eso1252a/"},
+		"imageUrl" : "n6388.png",
+		"worldCoords" : [[[264.1502,-44.7915], [263.9957,-44.7915], [263.9958,-44.6817], [264.1501,-44.6817]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 12.5
 	},
 	{
 		"imageCredits" : {"short" : "Wang Lingyi"}, 
@@ -1779,6 +1963,14 @@
 		"worldCoords" : [[[265.6029,-53.9218], [264.7535,-53.9233], [264.7555,-53.4233], [265.5955,-53.4218]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
 		"minResolution" : 0.2222381739, 
+		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "2MASS"},
+		"imageUrl" : "n6441-2mass.png",
+		"worldCoords" : [[[267.6112,-37.0955], [267.4986,-37.0955], [267.4986,-37.0056], [267.6112,-37.0058]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
 		"maxBrightness" : 13.4
 	},
 	{
@@ -1806,6 +1998,14 @@
 		"maxBrightness" : 10.1
 	},
 	{
+		"imageCredits" : {"short" : "DSS"},
+		"imageUrl" : "n6624-dss.png",
+		"worldCoords" : [[[275.9918,-30.423], [275.8472,-30.423], [275.8472,-30.2982], [275.9918,-30.2982]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 13.9
+	},
+	{
 		"imageCredits": {"short" : "Dylan O'Donnell", "infoUrl": "http://deography.com/caldwell-68-corona-australis-dark-molecular-cloud/#"},
 		"imageUrl" : "n6726.png",
 		"worldCoords" : [[[285.8711,-37.4832], [284.4819,-37.4872], [284.4829,-36.3832], [285.8561,-36.3802]]],
@@ -1828,6 +2028,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 12.4
+	},
+	{
+		"imageCredits" : {"short" : "ESO","infoUrl": "https://www.eso.org/public/images/eso0413a/"},
+		"imageUrl" : "n6769.png",
+		"worldCoords" : [[[289.7407,-60.5617], [289.5228,-60.5617], [289.5233,-60.4547], [289.7401,-60.4544]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.2
 	},
 	{
 		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n6781.shtml"},
@@ -1870,6 +2078,22 @@
 		"maxBrightness" : 10.0
 	},
 	{
+		"imageCredits" : {"short" : "Cristina Cellini","infoUrl": "https://commons.wikimedia.org/wiki/File:Ngc6914_20170924.jpg"},
+		"imageUrl" : "n6914.png",
+		"worldCoords" : [[[306.5245,42.1497], [305.8339,42.1499], [305.8317,42.6605], [306.5265,42.6605]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 13.6
+	},
+	{
+		"imageCredits" : {"short" : "DSS"},
+		"imageUrl" : "n6934-dss.png",
+		"worldCoords" : [[[308.609,7.3412], [308.484,7.3404], [308.4836,7.4636], [308.6077,7.4644]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.6
+	},
+	{
 		"imageCredits": {"short" : "Stephane Dumont"},
 		"imageUrl" : "n6946dumont.png",
 		"worldCoords" : [[[-51.2027, 60.0140], [-51.5591, 60.1122], [-51.3620, 60.2901], [-51.0043, 60.1915]]],
@@ -1893,6 +2117,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2066023154,
 		"maxBrightness" : 13.2
+	},
+	{
+		"imageCredits" : {"short" : "SDSS"},
+		"imageUrl" : "n7006-sdss.png",
+		"worldCoords" : [[[315.4183,16.143], [315.3245,16.143], [315.3245,16.2332], [315.4183,16.2332]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 13.5
 	},
 	{
 		"imageCredits" : {"Short": "Plover Hill Observatory", "infoUrl": "http://www.madpc.co.uk/~peterv/"},
@@ -1919,9 +2151,9 @@
 		"maxBrightness" : 13.0
 	},
 	{
-		"imageCredits": {"short" : "Oleg Bryzgalov", "infoUrl": "http://olegbr.astroclub.kiev.ua/"},
-		"imageUrl" : "n7129oleg.png",
-		"worldCoords" : [[[326.13, 65.95], [325.34, 65.95], [325.34, 66.27], [326.13, 66.27]]],
+		"imageCredits": {"short" : "Jschulman555", "infoUrl": "https://commons.wikimedia.org/wiki/File:NGC7129.jpg"},
+		"imageUrl" : "n7129.png",
+		"worldCoords" : [[[326.0026,65.9666], [325.3757,65.9918], [325.4354,66.2468], [326.0677,66.2215]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 2.1216,
 		"maxBrightness" : 13.0
@@ -1973,6 +2205,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "Jschulman555","infoUrl": "https://commons.wikimedia.org/wiki/File:MB54_and_NGC7497.jpg"},
+		"imageUrl" : "n7497.png",
+		"worldCoords" : [[[347.391,18.1753], [347.0797,18.0384], [346.9357,18.3326], [347.2463,18.4703]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.7
 	},
 	{
 		"imageCredits" : {"Short": "Trevor Gerdes", "infoUrl": "http://www.sarcasmogerdes.com/"},
@@ -2029,6 +2269,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "Davide De Martin & the ESA/ESO/NASA Photoshop FITS Liberator","infoUrl": "https://www.spacetelescope.org/projects/fits_liberator/fitsimages/davidedemartin_6/"},
+		"imageUrl" : "n7822.png",
+		"worldCoords" : [[[5.2526,65.4311], [356.5148,65.4382], [355.8283,69.0483], [5.976,69.0404]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.5
 	},
 	{
 		"imageCredits" : {"short" : "Lowell Observatory","infoUrl": "http://www2.lowell.edu/users/massey/lgsurvey/IC10_BVHa.jpg"},
@@ -2399,12 +2647,28 @@
 		"maxBrightness" : 12.7
 	},
 	{
+		"imageCredits" : {"short" : "Astronomy","infoUrl": "http://www.astronomy.com.cn"},
+		"imageUrl" : "sh2-136.png",
+		"worldCoords" : [[[319.5523,68.0626], [318.6433,68.0633], [318.6424,68.4021], [319.5605,68.4011]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.2
+	},
+	{
 		"imageCredits" : {"short" : "Hewholooks","infoUrl": "https://commons.wikimedia.org/wiki/File:CaveHunterWilson.jpg"},
 		"imageUrl" : "sh2-155.png",
 		"worldCoords" : [[[345.4678,61.9341], [343.3816,61.9476], [343.3816,62.9292], [345.5323,62.915]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 15.3
+	},
+	{
+		"imageCredits" : {"short" : "Rogelio Bernal Andreo","infoUrl": "https://commons.wikimedia.org/wiki/File:Simeis_147.jpg"}, 
+		"imageUrl" : "sh2-240.png",
+		"worldCoords" : [[[87.4576,25.3825], [82.6707,25.4655], [82.6597,29.7918], [87.6505,29.7162]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
+		"minResolution" : 0.2165786418, 
+		"maxBrightness" : 15.8
 	},
 	{
 		"imageCredits" : {"short" : "Wang Lingyi"},
@@ -2421,6 +2685,22 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 14.2
+	},
+	{
+		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso0929d/"},
+		"imageUrl" : "rcw38.png",
+		"worldCoords" : [[[135.3254,-47.7481], [134.3934,-47.7597], [134.3811,-47.1342], [135.3023,-47.1225]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.3
+	},
+	{
+		"imageCredits" : {"short" : "ESO","infoUrl": "http://www.eso.org/public/outreach/press-rel/pr-2008/phot-37-08.html"},
+		"imageUrl" : "rcw49.png",
+		"worldCoords" : [[[156.5676,-58.0382], [155.5399,-58.0378], [155.5481,-57.4941], [156.5601,-57.494]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.3
 	},
 	{
 		"imageCredits" : {"Short": "Carole Pope", "infoUrl": "https://sites.google.com/site/caroleastroimaging/"},
@@ -2479,12 +2759,28 @@
 		"maxBrightness" : 15.5
 	},
 	{
+		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/lbn438.shtml"},
+		"imageUrl" : "lbn438.png",
+		"worldCoords" : [[[340.4981,37.7336], [340.0855,37.6931], [340.033,38.0195], [340.4469,38.0598]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" : 14.0
+	},
+	{
 		"imageCredits" : {"short" : "ESA/Hubble & NASA","infoUrl": "https://www.spacetelescope.org/images/potw1705a/"},
 		"imageUrl" : "calabash.png",
 		"worldCoords" : [[[115.5796,-14.726], [115.5594,-14.726], [115.5594,-14.7066], [115.5796,-14.7066]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2222381739,
 		"maxBrightness" : 12.9
+	},
+	{
+		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/CassA.shtml"},
+		"imageUrl" : "cassiopeia_a.png",
+		"worldCoords" : [[[350.9703,58.75], [350.7177,58.75], [350.7177,58.8808], [350.9703,58.8808]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 14.5
 	},
 	{
 		"imageCredits": {"short" : "Georg Zotti", "infoUrl": "http://www.waa.at/"},
@@ -2517,6 +2813,14 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
 		"minResolution" : 0.2169148018,
 		"maxBrightness" : 13.4
+	},
+	{
+		"imageCredits" : {"short" : "ESA/Hubble and NASA","infoUrl": "https://www.spacetelescope.org/images/potw1007a/"},
+		"imageUrl" : "red_rectangle.png",
+		"worldCoords" : [[[94.9968,-10.6414], [94.9886,-10.6414], [94.9886,-10.6334], [94.9968,-10.6334]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.2165786418,
+		"maxBrightness" : 12.5
 	},
 	{
 		"imageCredits" : {"Short":"Plover Hill Observatory","infoUrl": "http://www.madpc.co.uk/~peterv/"},
