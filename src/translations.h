@@ -631,6 +631,8 @@ class Translations
 		N_("Occultations of bright stars by planets");
 		// TRANSLATORS: Name of script
 		N_("Mutual occultations of planets");
+		// TRANSLATORS: Name of script
+		N_("Planet Objects Tour");
 		
 		// =====================================================================
 		// Script descriptions
@@ -672,6 +674,7 @@ class Translations
 		N_("The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstrates these rare phenomena from 1900 to 2100 in Dynamical Time.");
 		N_("This script demonstrates interesting phenomena - occultations bright stars by planets, 2000 to 2040.");
 		N_("This script demonstrates interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.");
+		N_("A tour of the Solar System planets");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
