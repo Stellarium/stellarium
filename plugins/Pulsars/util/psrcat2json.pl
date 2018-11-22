@@ -36,7 +36,7 @@ $JSON	= "./pulsars.json";
 $NAMES	= "./propernames.lst";
 
 $FORMAT = 2;
-$CATVER = 1.58;
+$CATVER = 1.59;
 
 open (PSRN, "<$NAMES");
 @psrnames = <PSRN>;

@@ -196,7 +196,41 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
-             <item row="8" column="0">
+             <item row="3" column="0">
+              <layout class="QHBoxLayout" name="guiPanelHorizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="checkBoxControlPanel">
+                 <property name="text">
+                  <string>On-screen control panel</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="guiFontSizeLabel">
+                 <property name="text">
+                  <string>Font size</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="guiFontSizeSpinBox">
+                 <property name="minimum">
+                  <number>10</number>
+                 </property>
+                 <property name="maximum">
+                  <number>30</number>
+                 </property>
+                 <property name="value">
+                  <number>12</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="11" column="0">
               <layout class="QHBoxLayout" name="horizontalLayout_8">
                <item>
                 <widget class="QLabel" name="arrowButtonScaleLabel">
@@ -226,21 +260,14 @@
                </item>
               </layout>
              </item>
-             <item row="5" column="0">
+             <item row="8" column="0">
               <widget class="QCheckBox" name="checkBoxResolutionCriterion">
                <property name="text">
                 <string>Show resolution criteria</string>
                </property>
               </widget>
              </item>
-             <item row="2" column="0">
-              <widget class="QCheckBox" name="checkBoxControlPanel">
-               <property name="text">
-                <string>On-screen control panel</string>
-               </property>
-              </widget>
-             </item>
-             <item row="3" column="0">
+             <item row="6" column="0">
               <widget class="QCheckBox" name="checkBoxInitialFOV">
                <property name="toolTip">
                 <string>Mark it if you want the FOV value the same like at the startup of Stellarium.</string>
@@ -250,7 +277,7 @@
                </property>
               </widget>
              </item>
-             <item row="4" column="0">
+             <item row="7" column="0">
               <widget class="QCheckBox" name="checkBoxInitialDirection">
                <property name="toolTip">
                 <string>Mark it if you want the direction value the same like at the startup of Stellarium.</string>
@@ -260,7 +287,7 @@
                </property>
               </widget>
              </item>
-             <item row="6" column="0">
+             <item row="9" column="0">
               <widget class="QCheckBox" name="checkBoxToolbarButton">
                <property name="text">
                 <string>Show oculars button on toolbar</string>

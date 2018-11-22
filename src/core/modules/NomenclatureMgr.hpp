@@ -130,6 +130,10 @@ signals:
 	void localNomenclatureHidingChanged(bool b);
 	void nomenclatureColorChanged(const Vec3f & color) const;
 
+private slots:
+	//! Connect from StelApp to reflect font size change.
+	void setFontSize(int size){font.setPixelSize(size);}
+
 private:
 	SolarSystem* ssystem;
 

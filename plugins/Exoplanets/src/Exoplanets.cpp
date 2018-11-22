@@ -103,7 +103,8 @@ Exoplanets::Exoplanets()
 	setObjectName("Exoplanets");
 	exoplanetsConfigDialog = new ExoplanetsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -652,7 +653,7 @@ bool Exoplanets::checkJsonFileFormat() const
 	return true;
 }
 
-ExoplanetP Exoplanets::getByID(const QString& id)
+ExoplanetP Exoplanets::getByID(const QString& id) const
 {
 	for (const auto& eps : ep)
 	{
@@ -704,8 +705,8 @@ void Exoplanets::loadConfiguration(void)
 	enableAtStartup = conf->value("enable_at_startup", false).toBool();
 	flagShowExoplanetsButton = conf->value("flag_show_exoplanets_button", true).toBool();
 	setFlagShowExoplanetsDesignations(conf->value("flag_show_designations", true).toBool());
-	setMarkerColor(StelUtils::strToVec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()), false);
-	setMarkerColor(StelUtils::strToVec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()), true);
+	setMarkerColor(StelUtils::strToVec3f(conf->value("exoplanet_marker_color", "0.4,0.9,0.5").toString()));
+	setHabitableColor(StelUtils::strToVec3f(conf->value("habitable_exoplanet_marker_color", "1.0,0.5,0.0").toString()));
 	setCurrentTemperatureScaleKey(conf->value("temperature_scale", "Celsius").toString());
 
 	conf->endGroup();
@@ -724,8 +725,8 @@ void Exoplanets::saveConfiguration(void)
 	conf->setValue("enable_at_startup", enableAtStartup);
 	conf->setValue("flag_show_exoplanets_button", flagShowExoplanetsButton);
 	conf->setValue("flag_show_designations", getFlagShowExoplanetsDesignations());
-	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(true)));
-	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor(false)));
+	conf->setValue("habitable_exoplanet_marker_color", StelUtils::vec3fToStr(getHabitableColor()));
+	conf->setValue("exoplanet_marker_color", StelUtils::vec3fToStr(getMarkerColor()));
 	conf->setValue("temperature_scale", getCurrentTemperatureScaleKey());
 
 	conf->endGroup();
@@ -750,10 +751,6 @@ void Exoplanets::updateJSON(void)
 		qWarning() << "[Exoplanets] Already updating...  will not start again current update is complete.";
 		return;
 	}
-
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Exoplanets] Updating exoplanets catalog...";
 	startDownload(updateUrl);
 }
@@ -839,22 +836,26 @@ void Exoplanets::setHabitableMode(bool b)
 	Exoplanet::habitableMode=b;
 }
 
-Vec3f Exoplanets::getMarkerColor(bool habitable) const
+Vec3f Exoplanets::getMarkerColor() const
 {
-	Vec3f c = Exoplanet::exoplanetMarkerColor;
-	if (habitable)
-		c = Exoplanet::habitableExoplanetMarkerColor;
-
-
-	return c;
+	return Exoplanet::exoplanetMarkerColor;
 }
 
-void Exoplanets::setMarkerColor(const Vec3f &c, bool h)
+void Exoplanets::setMarkerColor(const Vec3f &c)
 {
-	if (h)
-		Exoplanet::habitableExoplanetMarkerColor = c;
-	else
-		Exoplanet::exoplanetMarkerColor = c;
+	Exoplanet::exoplanetMarkerColor = c;
+	emit markerColorChanged(c);
+}
+
+Vec3f Exoplanets::getHabitableColor() const
+{
+	return Exoplanet::habitableExoplanetMarkerColor;
+}
+
+void Exoplanets::setHabitableColor(const Vec3f &c)
+{
+	Exoplanet::habitableExoplanetMarkerColor = c;
+	emit habitableColorChanged(c);
 }
 
 void Exoplanets::setFlagShowExoplanets(bool b)
@@ -998,6 +999,10 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Exoplanets::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
+
 	}
 	catch (std::runtime_error &e)
 	{

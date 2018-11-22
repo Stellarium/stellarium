@@ -202,12 +202,12 @@ QAbstractSpinBox::StepEnabled AngleSpinBox::stepEnabled() const
 	return (StepUpEnabled|StepDownEnabled);
 }
 
-double AngleSpinBox::valueRadians()
+double AngleSpinBox::valueRadians() const
 {
 	return radAngle;
 } 
 
-double AngleSpinBox::valueDegrees()
+double AngleSpinBox::valueDegrees() const
 {
 	return radAngle*(180./M_PI);
 } 

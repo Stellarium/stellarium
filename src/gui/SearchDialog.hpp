@@ -51,7 +51,7 @@ public:
 	CompletionLabel(QWidget* parent=Q_NULLPTR);
 	~CompletionLabel();
 
-	QString getSelected(void);
+	QString getSelected(void) const;
 	void setValues(const QStringList&);
 	bool isEmpty() const {return values.isEmpty();}
 	void appendValues(const QStringList&);

@@ -87,10 +87,14 @@ void SatellitesImportDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->listView;
-	installKineticScrolling(addscroll);
-	
+	kineticScrollingList << ui->listView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
+
 	connect(ui->closeStelWindow, SIGNAL(clicked()),
 	        this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)),

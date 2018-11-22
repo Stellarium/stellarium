@@ -153,10 +153,14 @@ void AstroCalcDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget*> addscroll;
-	addscroll << ui->celestialPositionsTreeWidget << ui->ephemerisTreeWidget << ui->phenomenaTreeWidget
-		      << ui->wutCategoryListWidget << ui->wutMatchingObjectsListView;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->celestialPositionsTreeWidget << ui->ephemerisTreeWidget << ui->phenomenaTreeWidget
+			     << ui->wutCategoryListWidget << ui->wutMatchingObjectsListView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 #ifdef Q_OS_WIN
 	acEndl = "\r\n";
@@ -1238,7 +1242,10 @@ void AstroCalcDialog::saveCelestialPositions()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save celestial positions of objects as..."), QDir::homePath() + "/positions.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save celestial positions of objects as..."),
+							QDir::homePath() + "/positions.csv",
+							filter);
 	QFile celPos(filePath);
 	if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -1659,7 +1666,10 @@ void AstroCalcDialog::saveEphemeris()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), QDir::homePath() + "/ephemeris.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated ephemerides as..."),
+							QDir::homePath() + "/ephemeris.csv",
+							filter);
 	QFile ephem(filePath);
 	if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -1950,6 +1960,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "17");
 	groups->addItem(q_("Symbiotic stars"), "18");
 	groups->addItem(q_("Emission-line stars"), "19");
+	groups->addItem(q_("Interstellar objects"), "20");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
@@ -3108,6 +3119,13 @@ void AstroCalcDialog::calculatePhenomena()
 					dso.append(object);
 			}
 			break;
+		case 20: // Interstellar objects
+			for (const auto& object : allObjects)
+			{
+				if (object->getPlanetType() == Planet::isInterstellar)
+					objects.append(object);
+			}
+			break;
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
@@ -3125,7 +3143,7 @@ void AstroCalcDialog::calculatePhenomena()
 		coordsLimit += separation * M_PI / 180.;
 		double ra, dec;
 
-		if (obj2Type < 10)
+		if (obj2Type < 10 || obj2Type == 20)
 		{
 			// Solar system objects
 			for (auto& obj : objects)
@@ -3184,7 +3202,10 @@ void AstroCalcDialog::savePhenomena()
 {
 	QString filter = q_("CSV (Comma delimited)");
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), QDir::homePath() + "/phenomena.csv", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated phenomena as..."),
+							QDir::homePath() + "/phenomena.csv",
+							filter);
 	QFile phenomena(filePath);
 	if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
 	{
@@ -4090,6 +4111,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Supernova remnant candidates"), 21);
 	wutCategories.insert(q_("Supernova remnants"), 22);
 	wutCategories.insert(q_("Clusters of galaxies"), 23);
+	wutCategories.insert(q_("Interstellar objects"), 24);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -4795,6 +4817,26 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					break;
+				case 24: // Interstellar objects
+					for (const auto& object : allObjects)
+					{
+						if (object->getPlanetType() == Planet::isInterstellar && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
+					}
+					break;
 				default: // Planets
 					for (const auto& object : allObjects)
 					{
@@ -4874,7 +4916,10 @@ void AstroCalcDialog::saveWutObjects()
 {
 	QString filter = q_("Text file");
 	filter.append(" (*.txt)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save list of objects as..."), QDir::homePath() + "/wut-objects.txt", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save list of objects as..."),
+							QDir::homePath() + "/wut-objects.txt",
+							filter);
 	QFile objlist(filePath);
 	if (!objlist.open(QFile::WriteOnly | QFile::Truncate))
 	{

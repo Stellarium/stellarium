@@ -73,6 +73,8 @@ class Translations
 		// TRANSLATORS: Type of object
 		N_("sednoid");
 		// TRANSLATORS: Type of object
+		N_("interstellar object");
+		// TRANSLATORS: Type of object
 		N_("observer");
 		// TRANSLATORS: Type of object
 		N_("artificial");
@@ -96,6 +98,8 @@ class Translations
 		N_("Oort cloud objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Sednoids");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Interstellar objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Constellations");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)

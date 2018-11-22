@@ -114,9 +114,13 @@ void LocationDialog::createDialogContent()
 	ui->citiesListView->setModel(proxyModel);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->citiesListView;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->citiesListView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	populatePlanetList();
 	populateCountryList();
