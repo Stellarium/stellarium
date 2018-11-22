@@ -359,7 +359,7 @@
 	     from Georg Zotti
 	     http://www.waa.at/
 	     License: Creative Commons Attribution 3.0 Unported
-	4.18 Images of IC1805, IC1848, NGC6888
+	4.18 Images of IC1805, IC1848
 	     from Steve Tuttle
 	     http://www.stuttle1.com/
 	4.19 Images of IC4628, M20, M21, M47, NGC2467, IC2948, NGC3324, NGC3293,
@@ -389,7 +389,8 @@
 	     Sadr region (Gamma Cygni), Jones-Emberson 1, Medusa
 	     from Peter Vasey, Plover Hill Observatory
 	     http://www.madpc.co.uk/~peterv/
-	4.26 Image of IC434 from Marc Aragnou
+	4.26 Image of IC3568 from Howard Bond (Space Telescope Science Institute), Robin Ciardullo (Pennsylvania State University) and NASA
+	     License: public domain
 	4.27 Image of solar corona from eclipse 2008-08-01 by Georg Zotti
 	4.28 Images of IC59, IC63, IC410, NGC2359 from Carole Pope
 	     https://sites.google.com/site/caroleastroimaging/
@@ -410,7 +411,7 @@
 	     License: public domain
 	4.34 Images of M59, M60, M89, M90, IC2177, IC2220, IC2631, NGC1433, NGC1761,
 	     NGC1788, NGC1999, NGC2014, NGC2442, NGC2547, NGC6334, NGC6357, PGC10074,
-	     RCW38, RCW49, Fornax Cluster, Virgo Cluster
+	     RCW32, RCW38, RCW49, Fornax Cluster, Virgo Cluster
 	     from ESO/Digitized Sky Survey 2
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
@@ -445,7 +446,7 @@
 	     License: Creative Commons Attribution 4.0 International
  	4.43 Images of NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
-	4.44 Images of M8, M104, IC2944, NGC6726 from Dylan O'Donnell
+	4.44 Images of M8, M104, IC434, IC2944, NGC6726 from Dylan O'Donnell
 	     http://deography.com/
 	     License: public domain
 	4.45 Images of NGC247
@@ -474,7 +475,7 @@
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.51 Images of M95, NGC520, NGC660, NGC925, NGC1300, NGC7129, NGC7497
+	4.51 Images of M95, NGC520, NGC660, NGC925, NGC1300, NGC7129, NGC7497, NGC6888
 	     from Jschulman555
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution 3.0 Unported
@@ -566,6 +567,14 @@
 	     from Rogelio Bernal Andreo
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.75 Images of NGC5466
+	     from Egres73
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.76 Images of NGC6905
+	     from Tom Wildoner
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
 ```
 
 ## Appendix
