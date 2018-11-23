@@ -381,12 +381,13 @@
 	     and colored by RVS. License: public domain.
 	4.25 Images of M3, M13, M15, M24, M33, M51, M58, M63, M74, M76,
 	     M81, M82, M94, M96, M100, M101, M105, M106, IC405, IC443, NGC246, 
-	     NGC457, NGC1514, NGC1961, NGC2174, NGC2264, NGC2371, NGC2392, NGC2403, 
-	     NGC2655, NGC2685, NGC2841, NGC3166, NGC3310, NGC3359, NGC3521, NGC3628, 
-	     NGC3938, NGC4151, NGC4535, NGC4559, NGC4631, NGC4656, NGC4657, NGC5033, 
-	     NGC7008, NGC7318, NGC7331, NGC7380, NGC7479, NGC7635, NGC7789, 
-	     Barnard 22, Barnard 142, Barnard 173, Sh2-101, LDN1235
-	     Sadr region (Gamma Cygni), Jones-Emberson 1, Medusa
+	     NGC457, NGC488, NGC1514, NGC1961, NGC2174, NGC2264, NGC2371, 
+             NGC2392, NGC2403, NGC2655, NGC2685, NGC2841, NGC3166, NGC3310, 
+             NGC3344, NGC3359, NGC3521, NGC3628, NGC3938, NGC4151, NGC4535, 
+             NGC4559, NGC4631, NGC4656, NGC4657, NGC5033, NGC7008, NGC7318, 
+             NGC7331, NGC7380, NGC7479, NGC7635, NGC7789, Barnard 22, Barnard 142, 
+             Barnard 173, Sh2-101, LDN1235, Sadr region (Gamma Cygni), 
+             Jones-Emberson 1, Medusa
 	     from Peter Vasey, Plover Hill Observatory
 	     http://www.madpc.co.uk/~peterv/
 	4.26 Image of IC3568 from Howard Bond (Space Telescope Science Institute), Robin Ciardullo (Pennsylvania State University) and NASA
