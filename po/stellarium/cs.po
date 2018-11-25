@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-11-23 16:52+0700\n"
+"POT-Creation-Date: 2018-11-24 16:17+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2018\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
@@ -13145,22 +13145,25 @@ msgid ""
 "Meade's ETX70 with the #494 Autostar controller and the #506 Connector Cable"
 " Set."
 msgstr ""
+"Meade ETX70 s ovladačem #494 Autostar a sada připojovacích kabelů #506."
 
 #. TRANSLATORS: Description for Losmandy G-11 mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1700
 msgid "Losmandy's G-11 telescope mount."
-msgstr ""
+msgstr "Montáž dalekohledu Losmandy G-11."
 
 #. TRANSLATORS: Description for Wildcard Innovations Argo Navis (Meade mode)
 #. mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1702
 msgid "Wildcard Innovations' Argo Navis DTC in Meade LX200 emulation mode."
-msgstr ""
+msgstr "Wildcard Innovations Argo Navis DTC v emulačním režimu Meade LX200."
 
 #. TRANSLATORS: Description for Celestron NexStar (compatible) mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1704
 msgid "Any telescope or telescope mount compatible with Celestron NexStar."
 msgstr ""
+"Libovolný dalekohled nebo montáž dalekohledu kompatibilní se systémem "
+"Celestron NexStar."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan (version 3 or later)
 #. mounts
@@ -13169,28 +13172,32 @@ msgid ""
 "Any Sky-Watcher mount that uses version 3 or later of the SynScan hand "
 "controller."
 msgstr ""
+"Libovolná montáž SkyWatcher, která používá ruční ovladač SynScan ve verzi 3 "
+"nebo starší."
 
 #. TRANSLATORS: Description for Sky-Watcher SynScan AZ GOTO mounts
 #: plugins/TelescopeControl/src/TelescopeControl.cpp:1708
 msgid ""
 "The Sky-Watcher SynScan AZ GOTO mount used in a number of telescope models."
 msgstr ""
+"Montáž SkyWatcher SynScan AZ GOTO se používá u velkého počtu modelů "
+"dalekohledů."
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:276
 msgid "Read-only telescope"
-msgstr ""
+msgstr "Dalekohled pouze pro čtení"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:279
 msgid "Telescope position: "
-msgstr ""
+msgstr "Poloha dalekohledu:"
 
 #: plugins/TelescopeControl/src/Rts2/TelescopeClientJsonRts2.cpp:281
 msgid "Distance to target position: "
-msgstr ""
+msgstr "Vzdálenost do cílové polohy:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:129
 msgid "INDI Settings"
-msgstr ""
+msgstr "Nastavení INDI"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:130
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:604
@@ -13211,31 +13218,36 @@ msgstr "Hostitel:"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:135
 msgid "Refresh devices"
-msgstr ""
+msgstr "Obnovit zařízení"
 
 #: plugins/TelescopeControl/src/INDI/ui_TelescopeClientINDIWidget.h:136
 msgid "Devices:"
-msgstr ""
+msgstr "Zařízení:"
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:150
 msgid "Max"
-msgstr ""
+msgstr "Max"
 
 #: plugins/TelescopeControl/src/INDI/ui_INDIControlWidget.h:151
 msgid "Min"
-msgstr ""
+msgstr "Min"
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:158
 msgid ""
 "The approximate time it takes for the signals from the telescope to reach "
 "Stellarium. Increase this value if the reticle is skipping."
 msgstr ""
+"Přibližná doba, za kterou signál dorazí z dalekohledu do Stallaria, Zvyšte "
+"tuto hodnotu, pokud vláknová mřížka okuláru poskakuje."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:159
 msgid ""
 "Refresh rate of the RTS2 telescope. Delay before sending next telescope "
 "status request. The default value of 0.5 second works fine with most setups."
 msgstr ""
+"Frekvence obnovy pro RTS2 dalekohled. Doba trvání než bude odeslán další "
+"požadavek do dalekohledu. Přednastavená hodnota 0,5 sekundy pracuje dobře ve"
+" většině případů."
 
 #: plugins/TelescopeControl/src/gui/TelescopeConfigurationDialog.cpp:223
 msgid "Add New Telescope"
@@ -13275,11 +13287,11 @@ msgstr "Zásuvný modul pro ovládání dalekohledu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:265
 msgid "Plug-in and GUI programming"
-msgstr ""
+msgstr "Programování zásuvných modulů a GUI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 msgid "RTS2 support"
-msgstr ""
+msgstr "Podpora RTS2"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:271
 msgid ""
@@ -18829,7 +18841,7 @@ msgstr "Přidat stávající pohled"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:217
 msgid "Load/store with date"
-msgstr ""
+msgstr "Načíst/uložit s datem"
 
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:218
 msgid "Title:"
