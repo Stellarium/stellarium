@@ -42,7 +42,7 @@ public:
 	explicit Document(QObject *parent = NULL);
 	Document(const QString& xlsxName, QObject* parent = NULL);
 	Document(QIODevice* device, QObject* parent = NULL);
-	~Document();
+	virtual ~Document();
 
 	bool write(const CellReference &cell, const QVariant &value, const Format &format=Format());
 	bool write(int row, int col, const QVariant &value, const Format &format=Format());

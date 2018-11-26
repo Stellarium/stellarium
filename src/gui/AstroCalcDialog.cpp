@@ -40,6 +40,13 @@
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
 #include "external/qcustomplot/qcustomplot.h"
+#include "external/qxlsx/xlsxdocument.h"
+#include "external/qxlsx/xlsxchartsheet.h"
+#include "external/qxlsx/xlsxcellrange.h"
+#include "external/qxlsx/xlsxchart.h"
+#include "external/qxlsx/xlsxrichstring.h"
+#include "external/qxlsx/xlsxworkbook.h"
+using namespace QXlsx;
 
 #include <QFileDialog>
 #include <QDir>
@@ -1240,52 +1247,42 @@ void AstroCalcDialog::currentCelestialPositions()
 
 void AstroCalcDialog::saveCelestialPositions()
 {
-	QString filter = q_("CSV (Comma delimited)");
-	filter.append(" (*.csv)");
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save celestial positions of objects as..."),
-							QDir::homePath() + "/positions.csv",
+							QDir::homePath() + "/positions.xlsx",
 							filter);
-	QFile celPos(filePath);
-	if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
-	{
-		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-		return;
-	}
 
-	QTextStream celPosList(&celPos);
-	celPosList.setCodec("UTF-8");
+	QXlsx::Document xlsx;
+	xlsx.setDocumentProperty("title", q_("Celestial positions of objects"));
+	xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+	xlsx.addSheet(q_("Celestial positions of objects"));
 
 	int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
 	int columns = positionsHeader.size();
 
+	QXlsx::Format header;
+	header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+	header.setFontBold(true);
 	for (int i = 0; i < columns; i++)
 	{
-		QString h = positionsHeader.at(i).trimmed();
-		if (h.contains(","))
-			celPosList << QString("\"%1\"").arg(h);
-		else
-			celPosList << h;
-
-		if (i < columns - 1)
-			celPosList << delimiter;
-		else
-			celPosList << acEndl;
+		// Row 1: Names of columns
+		xlsx.write(1, i + 1, positionsHeader.at(i).trimmed(), header);
 	}
 
+	QXlsx::Format data;
+	data.setHorizontalAlignment(QXlsx::Format::AlignRight);
 	for (int i = 0; i < count; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
-			if (j < columns - 1)
-				celPosList << delimiter;
-			else
-				celPosList << acEndl;
+			// Row 2 and next: the data
+			xlsx.write(i + 2, j + 1, ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j), data);
 		}
 	}
 
-	celPos.close();
+	xlsx.saveAs(filePath);
 }
 
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelIndex)
@@ -1664,52 +1661,42 @@ void AstroCalcDialog::generateEphemeris()
 
 void AstroCalcDialog::saveEphemeris()
 {
-	QString filter = q_("CSV (Comma delimited)");
-	filter.append(" (*.csv)");
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save calculated ephemerides as..."),
-							QDir::homePath() + "/ephemeris.csv",
+							QDir::homePath() + "/ephemerides.xlsx",
 							filter);
-	QFile ephem(filePath);
-	if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
-	{
-		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-		return;
-	}
 
-	QTextStream ephemList(&ephem);
-	ephemList.setCodec("UTF-8");
+	QXlsx::Document xlsx;
+	xlsx.setDocumentProperty("title", q_("Ephemerides"));
+	xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+	xlsx.addSheet(ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString());
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
 	int columns = ephemerisHeader.size();
 
+	QXlsx::Format header;
+	header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+	header.setFontBold(true);
 	for (int i = 0; i < columns; i++)
 	{
-		QString h = ephemerisHeader.at(i).trimmed();
-		if (h.contains(","))
-			ephemList << QString("\"%1\"").arg(h);
-		else
-			ephemList << h;
-
-		if (i < columns - 1)
-			ephemList << delimiter;
-		else
-			ephemList << acEndl;
+		// Row 1: Names of columns
+		xlsx.write(1, i + 1, ephemerisHeader.at(i).trimmed(), header);
 	}
 
+	QXlsx::Format data;
+	data.setHorizontalAlignment(QXlsx::Format::AlignRight);
 	for (int i = 0; i < count; i++)
 	{
 		for (int j = 0; j < columns; j++)
 		{
-			ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
-			if (j < columns - 1)
-				ephemList << delimiter;
-			else
-				ephemList << acEndl;
+			// Row 2 and next: the data
+			xlsx.write(i + 2, j + 1, ui->ephemerisTreeWidget->topLevelItem(i)->text(j), data);
 		}
 	}
 
-	ephem.close();
+	xlsx.saveAs(filePath);
 }
 
 void AstroCalcDialog::cleanupEphemeris()
@@ -3200,53 +3187,42 @@ void AstroCalcDialog::calculatePhenomena()
 
 void AstroCalcDialog::savePhenomena()
 {
-	QString filter = q_("CSV (Comma delimited)");
-	filter.append(" (*.csv)");
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save calculated phenomena as..."),
-							QDir::homePath() + "/phenomena.csv",
+							QDir::homePath() + "/phenomena.xlsx",
 							filter);
-	QFile phenomena(filePath);
-	if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
-	{
-		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-		return;
-	}
 
-	QTextStream phenomenaList(&phenomena);
-	phenomenaList.setCodec("UTF-8");
+	QXlsx::Document xlsx;
+	xlsx.setDocumentProperty("title", q_("Phenomena"));
+	xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+	xlsx.addSheet(q_("Phenomena"));
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
 	int columns = phenomenaHeader.size();
 
+	QXlsx::Format header;
+	header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+	header.setFontBold(true);
 	for (int i = 0; i < columns; i++)
 	{
-		QString h = phenomenaHeader.at(i).trimmed();
-		if (h.contains(","))
-			phenomenaList << QString("\"%1\"").arg(h);
-		else
-			phenomenaList << h;
-
-		if (i < columns - 1)
-			phenomenaList << delimiter;
-		else
-			phenomenaList << acEndl;
+		// Row 1: Names of columns
+		xlsx.write(1, i + 1, phenomenaHeader.at(i).trimmed(), header);
 	}
 
+	QXlsx::Format data;
+	data.setHorizontalAlignment(QXlsx::Format::AlignRight);
 	for (int i = 0; i < count; i++)
 	{
-
 		for (int j = 0; j < columns; j++)
 		{
-			phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
-			if (j < columns - 1)
-				phenomenaList << delimiter;
-			else
-				phenomenaList << acEndl;
+			// Row 2 and next: the data
+			xlsx.write(i + 2, j + 1, ui->phenomenaTreeWidget->topLevelItem(i)->text(j), data);
 		}
 	}
 
-	phenomena.close();
+	xlsx.saveAs(filePath);
 }
 
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition)

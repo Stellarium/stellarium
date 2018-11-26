@@ -172,9 +172,7 @@ SET(qxlsx_SRCS
     qxlsx/xlsxcelllocation.h
     )
 add_library(qxlsx_stel STATIC EXCLUDE_FROM_ALL ${qxlsx_SRCS})
-target_include_directories(qxlsx_stel PUBLIC qxlsx)
 target_link_libraries(qxlsx_stel Qt5::Core Qt5::Gui qtcompress_stel)
-set_target_properties(qxlsx_stel PROPERTIES AUTOMOC 0)
 set_target_properties(qxlsx_stel PROPERTIES FOLDER "src/external")
 
 ################################# INDI ################################

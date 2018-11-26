@@ -1061,7 +1061,7 @@ bool Document::isLoadPackage() const
 /*!
  * Destroys the document and cleans up.
  */
-Document::~Document()
+ Document::~Document()
 {
 	delete d_ptr;
 }
