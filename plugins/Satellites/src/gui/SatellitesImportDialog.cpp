@@ -235,7 +235,7 @@ void SatellitesImportDialog::receiveDownload(QNetworkReply* networkReply)
 		if (progressBar)
 		{
 			StelApp::getInstance().removeProgressBar(progressBar);
-			progressBar = nullptr;
+			progressBar = Q_NULLPTR;
 		}
 		
 		if (sourceFiles.isEmpty())
@@ -325,7 +325,7 @@ void SatellitesImportDialog::reset()
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = nullptr;
+		progressBar = Q_NULLPTR;
 	}
 }
 

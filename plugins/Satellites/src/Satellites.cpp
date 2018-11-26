@@ -1211,10 +1211,11 @@ void Satellites::setUpdateFrequencyHours(int hours)
 
 void Satellites::checkForUpdate(void)
 {
-	if (updatesEnabled && updateState != Updating
-	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()
-	    && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
+	if (updatesEnabled && (updateState != Updating)
+	    && (lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()))
+	{
 		updateFromOnlineSources();
+	}
 }
 
 void Satellites::updateFromOnlineSources()
@@ -1374,7 +1375,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = 0;
+		progressBar = Q_NULLPTR;
 	}
 	
 	// All files have been downloaded, finish the update
