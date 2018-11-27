@@ -334,41 +334,77 @@ void SatellitesDialog::searchSatellitesClear()
 void SatellitesDialog::savePredictedIridiumFlares()
 {
 	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
-	filter.append(" (*.xlsx)");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
+	filter.append(" (*.csv)");
+	QString defaultFilter("(*.xlsx)");
 	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save predicted Iridium flares as..."),
 							QDir::homePath() + "/iridium_flares.xlsx",
-							filter);
-
-	QXlsx::Document xlsx;
-	xlsx.setDocumentProperty("title", q_("Predicted Iridium flares"));
-	xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-	xlsx.addSheet(q_("Predicted Iridium flares"));
+							filter,
+							&defaultFilter);
 
 	int count = ui->iridiumFlaresTreeWidget->topLevelItemCount();
 	int columns = iridiumFlaresHeader.size();
 
-	QXlsx::Format header;
-	header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-	header.setFontBold(true);
-	for (int i = 0; i < columns; i++)
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 	{
-		// Row 1: Names of columns
-		xlsx.write(1, i + 1, iridiumFlaresHeader.at(i).trimmed(), header);
-	}
-
-	QXlsx::Format data;
-	data.setHorizontalAlignment(QXlsx::Format::AlignRight);
-	for (int i = 0; i < count; i++)
-	{
-		for (int j = 0; j < columns; j++)
+		QFile predictedIridiumFlares(filePath);
+		if (!predictedIridiumFlares.open(QFile::WriteOnly | QFile::Truncate))
 		{
-			// Row 2 and next: the data
-			xlsx.write(i + 2, j + 1, ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j), data);
+			qWarning() << "[Satellites]: Unable to open file"
+					  << QDir::toNativeSeparators(filePath);
+			return;
 		}
-	}
 
-	xlsx.saveAs(filePath);
+		QTextStream predictedIridiumFlaresList(&predictedIridiumFlares);
+		predictedIridiumFlaresList.setCodec("UTF-8");
+
+		predictedIridiumFlaresList << iridiumFlaresHeader.join(delimiter) << acEndl;
+
+		for (int i = 0; i < count; i++)
+		{
+			int columns = iridiumFlaresHeader.size();
+			for (int j=0; j<columns; j++)
+			{
+				predictedIridiumFlaresList << ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j);
+				if (j<columns-1)
+					predictedIridiumFlaresList << delimiter;
+				else
+					predictedIridiumFlaresList << acEndl;
+			}
+		}
+		predictedIridiumFlares.close();
+	}
+	else
+	{
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Predicted Iridium flares"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet(q_("Predicted Iridium flares"));
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			xlsx.write(1, i + 1, iridiumFlaresHeader.at(i).trimmed(), header);
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				xlsx.write(i + 2, j + 1, ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j), data);
+			}
+		}
+
+		xlsx.saveAs(filePath);
+	}
 }
 
 void SatellitesDialog::filterListByGroup(int index)
