@@ -3392,7 +3392,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			if (qAbs(separation) <= 0.02 && ((object1 == moon  && object2 == sun) || (object1 == sun  && object2 == moon)))
 				phenomenType = q_("Eclipse");
 
-			separation += M_PI;
+			separation = M_PI - separation;
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
@@ -3423,8 +3423,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 		{
 			double elongation = object1->getElongation(core->getObserverHeliocentricEclipticPos());
-			if (opposition)
-				elongation = M_PI - (separation - M_PI); // calculate elongation from second object!
+			if (opposition) // calculate elongation for the second object in this case!
+				elongation = object2->getElongation(core->getObserverHeliocentricEclipticPos());
 
 			if (withDecimalDegree)
 				elongStr = StelUtils::radToDecDegStr(elongation, 5, false, true);
@@ -3442,11 +3442,22 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 			{
 				double angularDistance = object1->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
+				if (opposition) // calculate elongation for the second object in this case!
+					angularDistance = object2->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
+
 				if (withDecimalDegree)
 					angDistStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 				else
 					angDistStr = StelUtils::radToDmsStr(angularDistance, true);
 			}
+		}
+
+		QString elongationInfo = q_("Angular distance from the Sun");
+		QString angularDistanceInfo = q_("Angular distance from the Moon");
+		if (opposition)
+		{
+			elongationInfo = q_("Angular distance from the Sun for second object");
+			angularDistanceInfo = q_("Angular distance from the Moon for second object");
 		}
 
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
@@ -3467,10 +3478,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
 		treeItem->setText(PhenomenaElongation, elongStr);
-		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
+		treeItem->setToolTip(PhenomenaElongation, elongationInfo);
 		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
 		treeItem->setText(PhenomenaAngularDistance, angDistStr);
-		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
+		treeItem->setToolTip(PhenomenaAngularDistance, angularDistanceInfo);
 		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
 	}
 }
