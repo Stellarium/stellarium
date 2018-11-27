@@ -175,6 +175,25 @@ add_library(qxlsx_stel STATIC EXCLUDE_FROM_ALL ${qxlsx_SRCS})
 target_link_libraries(qxlsx_stel Qt5::Core Qt5::Gui qtcompress_stel)
 set_target_properties(qxlsx_stel PROPERTIES FOLDER "src/external")
 
+SET(qtcsv_SRCS
+    qtcsv/writer.cpp
+    qtcsv/variantdata.cpp
+    qtcsv/stringdata.cpp
+    qtcsv/reader.cpp
+    qtcsv/contentiterator.cpp
+    qtcsv/writer.h
+    qtcsv/variantdata.h
+    qtcsv/stringdata.h
+    qtcsv/reader.h
+    qtcsv/abstractdata.h
+    qtcsv/filechecker.h
+    qtcsv/contentiterator.h
+    qtcsv/symbols.h
+    )
+add_library(qtcsv_stel STATIC EXCLUDE_FROM_ALL ${qtcsv_SRCS})
+target_link_libraries(qtcsv_stel Qt5::Core)
+set_target_properties(qtcsv_stel PROPERTIES FOLDER "src/external")
+
 ################################# INDI ################################
 IF(USE_PLUGIN_TELESCOPECONTROL)
     set(INDI_SOVERSION "1")
