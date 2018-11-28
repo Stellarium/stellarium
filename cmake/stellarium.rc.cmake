@@ -14,7 +14,7 @@ BEGIN
             VALUE "FileDescription",  "Stellarium, the free open source planetarium\0"
             VALUE "FileVersion",      "@PACKAGE_VERSION@\0"
             VALUE "LegalCopyright",   "Copyright (C) @COPYRIGHT_YEARS@ Stellarium team\0"
-            VALUE "Info",             "https://www.stellarium.org/\0"
+            VALUE "Info",             "@STELLARIUM_URL@/\0"
             VALUE "ProductVersion",   "@PACKAGE_VERSION@\0"
             VALUE "ProductName",      "Stellarium\0"
             VALUE "InternalName",     "stellarium\0"

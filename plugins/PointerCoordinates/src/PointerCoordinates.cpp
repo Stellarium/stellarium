@@ -56,7 +56,7 @@ StelPluginInfo PointerCoordinatesStelPluginInterface::getPluginInfo() const
 	info.id = "PointerCoordinates";
 	info.displayedName = N_("Pointer Coordinates");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://stellarium.org";
+	info.contact = STELLARIUM_URL;
 	info.description = N_("This plugin shows the coordinates of the mouse pointer.");
 	info.version = POINTERCOORDINATES_PLUGIN_VERSION;
 	info.license = POINTERCOORDINATES_PLUGIN_LICENSE;
