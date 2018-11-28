@@ -402,7 +402,7 @@
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Image of NGC40 from Steven Bellavia
-	4.31 Images of NGC1579, Barnard Loop, IC342 from Sun Shuwei
+	4.31 Images of NGC1579, NGC6590, Barnard Loop, IC342 from Sun Shuwei
 	     License: public domain
 	4.32 Images of M77, NGC3109, NGC4449, NGC6397, NGC7009, Sh2-264, Sh2-308
 	     from Wang Lingyi
