@@ -109,7 +109,7 @@ public:
 
 	//! Gets the point that lies on the line according to the
 	//! equation \p startPoint + \p val * \p direction
-	Vec3f getPoint(float val);
+	Vec3f getPoint(float val) const;
 };
 
 #endif

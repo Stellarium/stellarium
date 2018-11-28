@@ -134,7 +134,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 }
 
 //! returns newline delimited list of human readable culture names in english
-QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
+QString StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 {
 	QString cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
@@ -147,7 +147,7 @@ QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
 }
 
 //! returns newline delimited list of human readable culture names translated to current locale
-QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
+QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 {
 	QStringList cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
@@ -161,7 +161,7 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 	return cultures;
 }
 
-QStringList StelSkyCultureMgr::getSkyCultureListIDs(void)
+QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 {
 	return dirToNameEnglish.keys();
 }
@@ -199,7 +199,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 	}
 }
 
-QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)
+QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory) const
 {
 	return dirToNameEnglish[directory].englishName;
 }

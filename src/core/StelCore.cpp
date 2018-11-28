@@ -611,7 +611,7 @@ void StelCore::setFlagGravityLabels(bool gravity)
 	emit flagGravityLabelsChanged(gravity);
 }
 
-bool StelCore::getFlagGravityLabels()
+bool StelCore::getFlagGravityLabels() const
 {
 	return currentProjectorParams.gravityLabels;
 }
@@ -1317,7 +1317,15 @@ QString StelCore::getCurrentTimeZone() const
 
 void StelCore::setCurrentTimeZone(const QString& tz)
 {
-	currentTimeZone = tz;
+	if (StelApp::getInstance().getLocationMgr().getAllTimezoneNames().contains(tz))
+	{
+		currentTimeZone = tz;
+		emit(currentTimeZoneChanged(tz));
+	}
+	else
+	{
+		qWarning() << "StelCore: Invalid timezone name:" << tz << " -- not setting timezone.";
+	}
 }
 
 bool StelCore::getUseDST() const
@@ -1416,7 +1424,7 @@ bool StelCore::getIsTimeNow(void) const
 	return previousResult;
 }
 
-QTime StelCore::getInitTodayTime(void)
+QTime StelCore::getInitTodayTime(void) const
 {
 	return initTodayTime;
 }
@@ -1749,7 +1757,7 @@ double StelCore::getLocalSiderealYearLength() const
 	return position->getHomePlanet()->getSiderealPeriod();
 }
 
-QString StelCore::getStartupTimeMode()
+QString StelCore::getStartupTimeMode() const
 {
 	return startupTimeMode;
 }

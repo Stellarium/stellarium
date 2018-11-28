@@ -171,29 +171,43 @@ level of the stored data
 \label{fig:gui:configuration:extras}
 \end{figure}
 
-The Extras tab (Fig.~\ref{fig:gui:configuration:extras}) allows you to customize information
-displayed about a selected object, download more star catalogs and also allows to hide or show additional buttons in the lower button bar. If your screen is too narrow to show all buttons, you may have to choose your optimal setup.
-\begin{itemize}
-\item Customization of information displays.
-\item Customization of visibility of buttons on bottom toolbar:
+The Extras tab (Fig.~\ref{fig:gui:configuration:extras}) allows you to
+customize information displayed about a selected object, download more
+star catalogs and also allows to hide or show additional buttons in
+the lower button bar. 
+\subsubsection{Customization of information displays}
+The information display can be tweaked a bit with the options found in the GUI section ``Additional information settings''.
+
+\subsubsection{Customization of button visibility on bottom toolbar}
+If your screen is too narrow to show all buttons
+or you simply don't need them because you prefer the keyboard
+shortcuts, you can choose your optimal setup. The selection of buttons is stored immediately. 
 \begin{description}
 \item[Show constellation boundaries button] You can toggle display of constellation boundaries with this button.
+\item[Show asterism lines button] You can toggle display of asterism lines with this button.
+\item[Show asterism labels button] You can toggle display of asterism labels with this button.
 \item[Show ecliptic grid button] You can toggle display of ecliptic coordinate grid with this button.
-\item[Show ICRS grid button] You can toggle display of equatorial J2000 coordinate grid with this button.
+\item[Show ICRS grid button] You can toggle display of the International Coordinate Reference System (equatorial J2000 coordinate grid) with this button.
 \item[Show galactic grid button] You can toggle display of galactic coordinate grid with this button.
+\item[Show centering button] You can toggle display of the ``center on selected object'' button.
+\item[Show nightmode button] You can toggle display of the nightmode button.
+\item[Show nebula background button] You can toggle display of DSO photographs with this button.
 \item[Show flip buttons] When enabled, two buttons will be added to
   the main tool bar which allow the main view to be mirrored in the
   vertical and horizontal directions. This is useful when observing
   through telecopes which may cause the image to be mirrored.
-\item[Show nebula background button] You can disable display of DSO
-  photographs with this button.
 \item[Show DSS button] You can toggle display of Digitized Sky Survey with this button.
-\item[Show HiPS button] You can toggle display of Hierarchical Progressive Surveys with this button.
+\item[Show HiPS button] You can toggle display of Hierarchical Progressive Surveys with this button (see section \ref{sec:gui:view:surveys}).
 \item[Show bookmarks button] You can enable display of Bookmarks dialog with this button.
+\item[Show fullscreen button] You can toggle display of the fullscreen button.
+\item[Show Quit button] You can toggle display of the button to quit Stellarium.
 \item[Use buttons background] Applies a gray background under the buttons on the bottom bar.
 \end{description}
-\item Download more star catalogs.
-\end{itemize}
+
+\subsubsection{Download more star catalogs}
+Stellarium comes with enough stars for casual stargazing with the
+unaided eye or binoculars. If you have a telescope and want to see
+more stars, here you can download more catalogs.
 
 \subsection{The Time Tab}
 \label{sec:gui:configuration:time}
@@ -266,6 +280,9 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
   this option changes the behaviour of the zoom out key
   \key{\textbackslash{}} so that it resets the initial direction of view in
   addition to the field of view.
+\item[Enable keyboard navigation]
+\item[Enable mouse navigation]
+
 \item[Azimuth from South] Some users may be used to counting azimuth
   from south.
 \item[Use decimal degrees] You can toggle usage of decimal degree format for coordinates.
@@ -276,9 +293,34 @@ The Tools tab (Fig.~\ref{fig:gui:configuration:tools}) contains planetarium opti
 \item[Auto select landscapes] When changing the planet in the location
   panel, a fitting landscape panorama will be shown when available.
 \item[Indication for mount mode] You can activate the short display of a message when switching type of used mount.
+\item[Edit keyboard shortcuts\ldots] See section~\ref{sec:gui:help:hotkeys}.
+\item[Mouse cursor timeout] You can decide whether, and when, the
+  mouse cursor should disappear from view when not moved.
+\item[Use kinetic scrolling]  Text fields in \newFeature{v0.18.3} 
+  dialogs can either be moved on sidebar handles (with this switch
+  disabled) or by dragging the text itself (enabled), as it is known
+  from touch-enabled devices like smartphones. 
 \end{description}
 
-\noindent In addition, you can set the directory where screenshots
+\paragraph{Font size and font selection} \newFeature{v0.18.3} You can change the font sizes for on-screen
+text and GUI dialogs separately.  For some purposes like presentations
+it may be helpful to enlarge screen font size while keeping GUI font
+regular, or vice versa.  It also depends on your screen size whether
+all the object info fits on screen. This may also depend on the
+writing system and installed font. If you are using a non-Western
+character system and the default font looks bad, you can select
+another system font. For this, edit \file{config.ini} (see
+chapter~\ref{sec:Directories}): locate the \texttt{[gui]} section and
+set the key \texttt{flag\_font\_selection=true}. On next start of
+Stellarium, you will find two elements for font selection: one allows
+you to pre-select a writing system, the other will then allow
+selection of a font installed in your system that includes the
+characters used in the selected writing system. When you have found
+the best font, store your settings on the Main tab (see
+section~\ref{sec:gui:configuration:main}) and you may edit
+\file{config.ini} again to disable the font selection switches.
+
+\paragraph{Screenshots} You can set the directory where screenshots
 will be stored, and \newFeature{v0.18.1} also whether you want
 screenshots sized like Stellarium's window or some other, likely
 larger size. The maximum possible size depends on your

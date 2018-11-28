@@ -40,6 +40,13 @@
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
 #include "external/qcustomplot/qcustomplot.h"
+#include "external/qxlsx/xlsxdocument.h"
+#include "external/qxlsx/xlsxchartsheet.h"
+#include "external/qxlsx/xlsxcellrange.h"
+#include "external/qxlsx/xlsxchart.h"
+#include "external/qxlsx/xlsxrichstring.h"
+#include "external/qxlsx/xlsxworkbook.h"
+using namespace QXlsx;
 
 #include <QFileDialog>
 #include <QDir>
@@ -153,10 +160,14 @@ void AstroCalcDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget*> addscroll;
-	addscroll << ui->celestialPositionsTreeWidget << ui->ephemerisTreeWidget << ui->phenomenaTreeWidget
-		      << ui->wutCategoryListWidget << ui->wutMatchingObjectsListView;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->celestialPositionsTreeWidget << ui->ephemerisTreeWidget << ui->phenomenaTreeWidget
+			     << ui->wutCategoryListWidget << ui->wutMatchingObjectsListView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 #ifdef Q_OS_WIN
 	acEndl = "\r\n";
@@ -1236,49 +1247,89 @@ void AstroCalcDialog::currentCelestialPositions()
 
 void AstroCalcDialog::saveCelestialPositions()
 {
-	QString filter = q_("CSV (Comma delimited)");
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save celestial positions of objects as..."), QDir::homePath() + "/positions.csv", filter);
-	QFile celPos(filePath);
-	if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
-	{
-		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-		return;
-	}
-
-	QTextStream celPosList(&celPos);
-	celPosList.setCodec("UTF-8");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save celestial positions of objects as..."),
+							QDir::homePath() + "/positions.xlsx",
+							filter,
+							&defaultFilter);
 
 	int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
 	int columns = positionsHeader.size();
 
-	for (int i = 0; i < columns; i++)
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 	{
-		QString h = positionsHeader.at(i).trimmed();
-		if (h.contains(","))
-			celPosList << QString("\"%1\"").arg(h);
-		else
-			celPosList << h;
-
-		if (i < columns - 1)
-			celPosList << delimiter;
-		else
-			celPosList << acEndl;
-	}
-
-	for (int i = 0; i < count; i++)
-	{
-		for (int j = 0; j < columns; j++)
+		QFile celPos(filePath);
+		if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
 		{
-			celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
-			if (j < columns - 1)
+			qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
+			return;
+		}
+
+		QTextStream celPosList(&celPos);
+		celPosList.setCodec("UTF-8");
+
+		for (int i = 0; i < columns; i++)
+		{
+			QString h = positionsHeader.at(i).trimmed();
+			if (h.contains(","))
+				celPosList << QString("\"%1\"").arg(h);
+			else
+				celPosList << h;
+
+			if (i < columns - 1)
 				celPosList << delimiter;
 			else
 				celPosList << acEndl;
 		}
-	}
 
-	celPos.close();
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
+				if (j < columns - 1)
+					celPosList << delimiter;
+				else
+					celPosList << acEndl;
+			}
+		}
+
+		celPos.close();
+	}
+	else
+	{
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Celestial positions of objects"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet(q_("Celestial positions of objects"));
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			xlsx.write(1, i + 1, positionsHeader.at(i).trimmed(), header);
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				xlsx.write(i + 2, j + 1, ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j), data);
+			}
+		}
+
+		xlsx.saveAs(filePath);
+	}
 }
 
 void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelIndex)
@@ -1657,49 +1708,89 @@ void AstroCalcDialog::generateEphemeris()
 
 void AstroCalcDialog::saveEphemeris()
 {
-	QString filter = q_("CSV (Comma delimited)");
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated ephemerides as..."), QDir::homePath() + "/ephemeris.csv", filter);
-	QFile ephem(filePath);
-	if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
-	{
-		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-		return;
-	}
-
-	QTextStream ephemList(&ephem);
-	ephemList.setCodec("UTF-8");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated ephemerides as..."),
+							QDir::homePath() + "/ephemerides.xlsx",
+							filter,
+							&defaultFilter);
 
 	int count = ui->ephemerisTreeWidget->topLevelItemCount();
 	int columns = ephemerisHeader.size();
 
-	for (int i = 0; i < columns; i++)
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 	{
-		QString h = ephemerisHeader.at(i).trimmed();
-		if (h.contains(","))
-			ephemList << QString("\"%1\"").arg(h);
-		else
-			ephemList << h;
-
-		if (i < columns - 1)
-			ephemList << delimiter;
-		else
-			ephemList << acEndl;
-	}
-
-	for (int i = 0; i < count; i++)
-	{
-		for (int j = 0; j < columns; j++)
+		QFile ephem(filePath);
+		if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
 		{
-			ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
-			if (j < columns - 1)
+			qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
+			return;
+		}
+
+		QTextStream ephemList(&ephem);
+		ephemList.setCodec("UTF-8");
+
+		for (int i = 0; i < columns; i++)
+		{
+			QString h = ephemerisHeader.at(i).trimmed();
+			if (h.contains(","))
+				ephemList << QString("\"%1\"").arg(h);
+			else
+				ephemList << h;
+
+			if (i < columns - 1)
 				ephemList << delimiter;
 			else
 				ephemList << acEndl;
 		}
-	}
 
-	ephem.close();
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
+				if (j < columns - 1)
+					ephemList << delimiter;
+				else
+					ephemList << acEndl;
+			}
+		}
+
+		ephem.close();
+	}
+	else
+	{
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Ephemerides"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet(ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString());
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			xlsx.write(1, i + 1, ephemerisHeader.at(i).trimmed(), header);
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				xlsx.write(i + 2, j + 1, ui->ephemerisTreeWidget->topLevelItem(i)->text(j), data);
+			}
+		}
+
+		xlsx.saveAs(filePath);
+	}
 }
 
 void AstroCalcDialog::cleanupEphemeris()
@@ -1950,6 +2041,7 @@ void AstroCalcDialog::populateGroupCelestialBodyList()
 	groups->addItem(q_("Bright galaxies (<%1 mag)").arg(brLimit), "17");
 	groups->addItem(q_("Symbiotic stars"), "18");
 	groups->addItem(q_("Emission-line stars"), "19");
+	groups->addItem(q_("Interstellar objects"), "20");
 
 	index = groups->findData(selectedGroupId, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (index < 0)
@@ -3108,6 +3200,13 @@ void AstroCalcDialog::calculatePhenomena()
 					dso.append(object);
 			}
 			break;
+		case 20: // Interstellar objects
+			for (const auto& object : allObjects)
+			{
+				if (object->getPlanetType() == Planet::isInterstellar)
+					objects.append(object);
+			}
+			break;
 	}
 
 	PlanetP planet = solarSystem->searchByEnglishName(currentPlanet);
@@ -3125,7 +3224,7 @@ void AstroCalcDialog::calculatePhenomena()
 		coordsLimit += separation * M_PI / 180.;
 		double ra, dec;
 
-		if (obj2Type < 10)
+		if (obj2Type < 10 || obj2Type == 20)
 		{
 			// Solar system objects
 			for (auto& obj : objects)
@@ -3182,50 +3281,89 @@ void AstroCalcDialog::calculatePhenomena()
 
 void AstroCalcDialog::savePhenomena()
 {
-	QString filter = q_("CSV (Comma delimited)");
+	QString filter = q_("Microsoft Excel Open XML Spreadsheet");
+	filter.append(" (*.xlsx);;");
+	filter.append(q_("CSV (Comma delimited)"));
 	filter.append(" (*.csv)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save calculated phenomena as..."), QDir::homePath() + "/phenomena.csv", filter);
-	QFile phenomena(filePath);
-	if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
-	{
-		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-		return;
-	}
-
-	QTextStream phenomenaList(&phenomena);
-	phenomenaList.setCodec("UTF-8");
+	QString defaultFilter("(*.xlsx)");
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save calculated phenomena as..."),
+							QDir::homePath() + "/phenomena.xlsx",
+							filter,
+							&defaultFilter);
 
 	int count = ui->phenomenaTreeWidget->topLevelItemCount();
 	int columns = phenomenaHeader.size();
 
-	for (int i = 0; i < columns; i++)
+	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
 	{
-		QString h = phenomenaHeader.at(i).trimmed();
-		if (h.contains(","))
-			phenomenaList << QString("\"%1\"").arg(h);
-		else
-			phenomenaList << h;
-
-		if (i < columns - 1)
-			phenomenaList << delimiter;
-		else
-			phenomenaList << acEndl;
-	}
-
-	for (int i = 0; i < count; i++)
-	{
-
-		for (int j = 0; j < columns; j++)
+		QFile phenomena(filePath);
+		if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
 		{
-			phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
-			if (j < columns - 1)
+			qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
+			return;
+		}
+
+		QTextStream phenomenaList(&phenomena);
+		phenomenaList.setCodec("UTF-8");
+
+		for (int i = 0; i < columns; i++)
+		{
+			QString h = phenomenaHeader.at(i).trimmed();
+			if (h.contains(","))
+				phenomenaList << QString("\"%1\"").arg(h);
+			else
+				phenomenaList << h;
+
+			if (i < columns - 1)
 				phenomenaList << delimiter;
 			else
 				phenomenaList << acEndl;
 		}
-	}
 
-	phenomena.close();
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
+				if (j < columns - 1)
+					phenomenaList << delimiter;
+				else
+					phenomenaList << acEndl;
+			}
+		}
+
+		phenomena.close();
+	}
+	else
+	{
+		QXlsx::Document xlsx;
+		xlsx.setDocumentProperty("title", q_("Phenomena"));
+		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
+		xlsx.addSheet(q_("Phenomena"));
+
+		QXlsx::Format header;
+		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setFontBold(true);
+		for (int i = 0; i < columns; i++)
+		{
+			// Row 1: Names of columns
+			xlsx.write(1, i + 1, phenomenaHeader.at(i).trimmed(), header);
+		}
+
+		QXlsx::Format data;
+		data.setHorizontalAlignment(QXlsx::Format::AlignRight);
+		for (int i = 0; i < count; i++)
+		{
+			for (int j = 0; j < columns; j++)
+			{
+				// Row 2 and next: the data
+				xlsx.write(i + 2, j + 1, ui->phenomenaTreeWidget->topLevelItem(i)->text(j), data);
+			}
+		}
+
+		xlsx.saveAs(filePath);
+	}
 }
 
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition)
@@ -3254,7 +3392,7 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			if (qAbs(separation) <= 0.02 && ((object1 == moon  && object2 == sun) || (object1 == sun  && object2 == moon)))
 				phenomenType = q_("Eclipse");
 
-			separation += M_PI;
+			separation = M_PI - separation;
 		}
 		else if (separation < (s2 * M_PI / 180.) || separation < (s1 * M_PI / 180.))
 		{
@@ -3285,8 +3423,8 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		else
 		{
 			double elongation = object1->getElongation(core->getObserverHeliocentricEclipticPos());
-			if (opposition)
-				elongation = M_PI - (separation - M_PI); // calculate elongation from second object!
+			if (opposition) // calculate elongation for the second object in this case!
+				elongation = object2->getElongation(core->getObserverHeliocentricEclipticPos());
 
 			if (withDecimalDegree)
 				elongStr = StelUtils::radToDecDegStr(elongation, 5, false, true);
@@ -3304,11 +3442,22 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			else
 			{
 				double angularDistance = object1->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
+				if (opposition) // calculate elongation for the second object in this case!
+					angularDistance = object2->getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core));
+
 				if (withDecimalDegree)
 					angDistStr = StelUtils::radToDecDegStr(angularDistance, 5, false, true);
 				else
 					angDistStr = StelUtils::radToDmsStr(angularDistance, true);
 			}
+		}
+
+		QString elongationInfo = q_("Angular distance from the Sun");
+		QString angularDistanceInfo = q_("Angular distance from the Moon");
+		if (opposition)
+		{
+			elongationInfo = q_("Angular distance from the Sun for second object");
+			angularDistanceInfo = q_("Angular distance from the Moon for second object");
 		}
 
 		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
@@ -3329,10 +3478,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		}
 		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
 		treeItem->setText(PhenomenaElongation, elongStr);
-		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
+		treeItem->setToolTip(PhenomenaElongation, elongationInfo);
 		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
 		treeItem->setText(PhenomenaAngularDistance, angDistStr);
-		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
+		treeItem->setToolTip(PhenomenaAngularDistance, angularDistanceInfo);
 		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
 	}
 }
@@ -4090,6 +4239,7 @@ void AstroCalcDialog::populateWutGroups()
 	wutCategories.insert(q_("Supernova remnant candidates"), 21);
 	wutCategories.insert(q_("Supernova remnants"), 22);
 	wutCategories.insert(q_("Clusters of galaxies"), 23);
+	wutCategories.insert(q_("Interstellar objects"), 24);
 
 	category->clear();
 	category->addItems(wutCategories.keys());
@@ -4135,6 +4285,13 @@ void AstroCalcDialog::saveWutTimeInterval(int index)
 	calculateWutObjects();
 }
 
+void AstroCalcDialog::enableVisibilityAngularLimits(bool visible)
+{
+	ui->wutAngularSizeLimitCheckBox->setVisible(visible);
+	ui->wutAngularSizeLimitMinSpinBox->setVisible(visible);
+	ui->wutAngularSizeLimitMaxSpinBox->setVisible(visible);
+}
+
 void AstroCalcDialog::calculateWutObjects()
 {
 	if (ui->wutCategoryListWidget->currentItem())
@@ -4169,6 +4326,8 @@ void AstroCalcDialog::calculateWutObjects()
 		ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMinSpinBox->setToolTip(q_("Minimal angular size for visible celestial objects"));
 		ui->wutAngularSizeLimitMaxSpinBox->setToolTip(q_("Maximum angular size for visible celestial objects"));
+
+		enableVisibilityAngularLimits(true);
 
 		// Dirty hack to calculate sunrise/sunset
 		// FIXME: This block of code should be replaced in future!
@@ -4226,6 +4385,7 @@ void AstroCalcDialog::calculateWutObjects()
 			switch (categoryId)
 			{
 				case 1: // Bright stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : hipStars)
 					{
 						// Filter for angular size is not applicable
@@ -4596,7 +4756,8 @@ void AstroCalcDialog::calculateWutObjects()
 
 					}
 					break;
-				case 16: // Bright variale stars
+				case 16: // Bright variable stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& varStar : varHipStars)
 					{
 						StelObjectP object = varStar.firstKey();
@@ -4605,6 +4766,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 17: // Bright stars with high proper motion
+					enableVisibilityAngularLimits(false);
 					for (const auto& hpmStar : hpmHipStars)
 					{
 						StelObjectP object = hpmStar.firstKey();
@@ -4613,6 +4775,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 18: // Symbiotic stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
@@ -4636,6 +4799,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 19: // Emission-line stars
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
@@ -4659,6 +4823,7 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					break;
 				case 20: // Supernova candidates
+					enableVisibilityAngularLimits(false);
 					for (const auto& object : allDSO)
 					{
 						Nebula::NebulaType ntype = object->getDSOType();
@@ -4780,6 +4945,26 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					break;
+				case 24: // Interstellar objects
+					for (const auto& object : allObjects)
+					{
+						if (object->getPlanetType() == Planet::isInterstellar && object->getVMagnitudeWithExtinction(core) <= magLimit && object->isAboveRealHorizon(core))
+						{
+							if (angularSizeLimit)
+							{
+								bool ok = false;
+								double size = object->getAngularSize(core);
+								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
+									ok = true;
+
+								if (!ok)
+									continue;
+							}
+
+							wutObjects.insert(object->getNameI18n(), object->getEnglishName());
+						}
+					}
+					break;
 				default: // Planets
 					for (const auto& object : allObjects)
 					{
@@ -4859,7 +5044,10 @@ void AstroCalcDialog::saveWutObjects()
 {
 	QString filter = q_("Text file");
 	filter.append(" (*.txt)");
-	QString filePath = QFileDialog::getSaveFileName(0, q_("Save list of objects as..."), QDir::homePath() + "/wut-objects.txt", filter);
+	QString filePath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							q_("Save list of objects as..."),
+							QDir::homePath() + "/wut-objects.txt",
+							filter);
 	QFile objlist(filePath);
 	if (!objlist.open(QFile::WriteOnly | QFile::Truncate))
 	{

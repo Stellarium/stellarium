@@ -100,7 +100,7 @@ void StelModuleMgr::unloadModule(const QString& moduleID, bool alsoDelete)
 /*************************************************************************
  Get the corresponding module or Q_NULLPTR if can't find it.
 *************************************************************************/
-StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning)
+StelModule* StelModuleMgr::getModule(const QString& moduleID, bool noWarning) const
 {
 	StelModule* module = modules.value(moduleID, Q_NULLPTR);
 	if (module == Q_NULLPTR)

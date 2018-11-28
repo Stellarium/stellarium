@@ -345,7 +345,7 @@ public:
 	void setSkyBackgroundColor(Vec3f color) { skyBackgroundColor=color; }
 
 	//! Get the sky background color. Everything else than black creates a work of art!
-	Vec3f getSkyBackgroundColor() { return skyBackgroundColor; }
+	Vec3f getSkyBackgroundColor() const { return skyBackgroundColor; }
 
 
 protected:
@@ -570,7 +570,6 @@ StelMainView::StelMainView(QSettings* settings)
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
-	  flagUseButtonsBackground(true),
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
 	  maxfps(10000.f)
@@ -870,7 +869,6 @@ void StelMainView::init()
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
-	setFlagUseButtonsBackground(conf->value("gui/flag_show_buttons_background", true).toBool());
 	setSkyBackgroundColor(StelUtils::strToVec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
@@ -1599,7 +1597,7 @@ void StelMainView::doScreenshot(void)
 	}
 }
 
-QPoint StelMainView::getMousePos()
+QPoint StelMainView::getMousePos() const
 {
 	return glWidget->mapFromGlobal(QCursor::pos());
 }
@@ -1632,7 +1630,7 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 }
 
 // Get the sky background color. Everything else than black creates a work of art!
-Vec3f StelMainView::getSkyBackgroundColor()
+Vec3f StelMainView::getSkyBackgroundColor() const
 {
 	return rootItem->getSkyBackgroundColor();
 }

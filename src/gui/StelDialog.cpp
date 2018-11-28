@@ -24,6 +24,7 @@
 #include "StelGui.hpp"
 #include "StelActionMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "StelTranslator.hpp"
 
 #include <QDebug>
 #include <QAbstractButton>
@@ -37,6 +38,8 @@
 #include <QDoubleSpinBox>
 #include <QLineEdit>
 #include <QScroller>
+#include <QToolButton>
+#include <QColorDialog>
 
 StelDialog::StelDialog(QString dialogName, QObject* parent)
 	: QObject(parent)
@@ -47,8 +50,8 @@ StelDialog::StelDialog(QString dialogName, QObject* parent)
 	if (parent == Q_NULLPTR)
 		setParent(StelMainView::getInstance().getGuiWidget());
 
-	// The kinetic scrolling is disabled by default
-	flagKineticScrolling = StelApp::getInstance().getSettings()->value("gui/flag_enable_kinetic_scrolling", false).toBool();
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(handleFontChanged()));
+	connect(&StelApp::getInstance(), SIGNAL(guiFontSizeChanged(int)), this, SLOT(handleFontChanged()));
 }
 
 StelDialog::~StelDialog()
@@ -67,14 +70,17 @@ bool StelDialog::visible() const
 
 void StelDialog::setVisible(bool v)
 {
-	if(v == visible())
-		return;
 	if (v)
 	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
 		QSize screenSize = StelMainView::getInstance().size();
 		QSize maxSize = 0.8*screenSize;
 		if (dialog)
 		{
+			// reload stylesheet, in case size changed!
+			dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+
 			dialog->show();
 			StelMainView::getInstance().scene()->setActiveWindow(proxy);
 			// If the main window has been resized, it is possible the dialog
@@ -100,8 +106,6 @@ void StelDialog::setVisible(bool v)
 			QGraphicsWidget* parent = qobject_cast<QGraphicsWidget*>(this->parent());
 			dialog = new QDialog(Q_NULLPTR);
 			// dialog->setParent(parent);
-			StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
-			Q_ASSERT(gui);
 			//dialog->setAttribute(Qt::WA_OpaquePaintEvent, true);
 			connect(dialog, SIGNAL(rejected()), this, SLOT(close()));
 			createDialogContent();
@@ -196,6 +200,17 @@ void StelDialog::setVisible(bool v)
 	emit visibleChanged(v);
 }
 
+void StelDialog::handleFontChanged()
+{
+	if (dialog && dialog->isVisible())
+	{
+		StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+		Q_ASSERT(gui);
+		// reload stylesheet, in case size or font changed!
+		dialog->setStyleSheet(gui->getStelStyle().qtStyleSheet);
+	}
+}
+
 void StelDialog::connectCheckBox(QAbstractButton *checkBox, const QString &actionName)
 {
 	StelAction* action = StelApp::getInstance().getStelActionManager()->findAction(actionName);
@@ -272,18 +287,75 @@ void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &p
 	new QAbstractButtonStelPropertyConnectionHelper(prop,checkBox);
 }
 
-void StelDialog::installKineticScrolling(QList<QWidget *> addscroll)
+void StelDialog::connectColorButton(QToolButton *toolButton, QString propertyName, QString iniName)
 {
-	if (flagKineticScrolling)
+	toolButton->setProperty("propName", propertyName);
+	toolButton->setProperty("iniName", iniName);
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propertyName);
+	Vec3f vColor = prop->getValue().value<Vec3f>();
+	QColor color=QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	// Use style sheet to create a nice button :)
+	toolButton->setStyleSheet("QToolButton { background-color:" + color.name() + "; }");
+	toolButton->setFixedSize(QSize(18, 18));
+
+	connect(toolButton, SIGNAL(released()), this, SLOT(askColor()));
+}
+
+void StelDialog::askColor()
+{
+	// Only work if connected from a QToolButton
+	if (!sender())
 	{
-		for (auto* w : addscroll)
-		{
-			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
-			QScroller::scroller(w);
-		}
+		qWarning() << "askColor(): No sender? Ignoring.";
+		Q_ASSERT(0);
+		return;
+	}
+	if (QString(sender()->metaObject()->className()) != QString("QToolButton"))
+	{
+		qWarning() << "Sender not a QToolButton but a |" << sender()->metaObject()->className() << "|! ColorButton not set up properly! Ignoring.";
+		Q_ASSERT(0);
+		return;
+	}
+	QString propName=sender()->property("propName").toString();
+	QString iniName=sender()->property("iniName").toString();
+	if ((propName.length()==0) || (iniName.length()==0))
+	{
+		qWarning() << "ColorButton not set up properly! Ignoring.";
+		Q_ASSERT(0);
+		return;
+	}
+	Vec3f vColor = StelApp::getInstance().getStelPropertyManager()->getProperty(propName)->getValue().value<Vec3f>();
+	QColor color = QColor::fromRgbF(vColor.v[0], vColor.v[1], vColor.v[2]);
+	QColor c = QColorDialog::getColor(color, Q_NULLPTR, q_(static_cast<QToolButton*>(QObject::sender())->toolTip()));
+	if (c.isValid())
+	{
+		vColor = Vec3f(c.redF(), c.greenF(), c.blueF());
+		StelApp::getInstance().getStelPropertyManager()->setStelPropertyValue(propName, QVariant::fromValue(vColor));
+		StelApp::getInstance().getSettings()->setValue(iniName, StelUtils::vec3fToStr(vColor));
+		static_cast<QToolButton*>(QObject::sender())->setStyleSheet("QToolButton { background-color:" + c.name() + "; }");
 	}
 }
 
+void StelDialog::enableKineticScrolling(bool b)
+{
+	if (kineticScrollingList.length()==0) return;
+	if (b)
+	{
+		for (auto* w : kineticScrollingList)
+		{
+			QScroller::grabGesture(w, QScroller::LeftMouseButtonGesture);
+			QScroller::scroller(w); // WHAT DOES THIS DO? We don't use the return value.
+		}
+	}
+	else
+	{
+		for (auto* w : kineticScrollingList)
+		{
+			QScroller::ungrabGesture(w);
+			// QScroller::scroller(w);
+		}
+	}
+}
 
 void StelDialog::updateNightModeProperty()
 {
