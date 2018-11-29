@@ -397,17 +397,17 @@
 	     https://sites.google.com/site/caroleastroimaging/
 	4.29 Images of NGC2261, NGC2818, NGC2936, NGC3314, NGC3690, NGC3918,
 	     NGC4038-4039, NGC5257, NGC6027, NGC6050, NGC6826, NGC7742, IC883,
-	     IC4406, PGC2248, PGC3589, UGC8335, UGC9618, Red Rectangle and Calabash Nebula
+	     IC4406, PGC2248, PGC3589, UGC1810, UGC8335, UGC9618, Red Rectangle and Calabash Nebula
 	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Image of NGC40 from Steven Bellavia
-	4.31 Images of NGC1579, Barnard Loop, IC342 from Sun Shuwei
+	4.31 Images of NGC1579, NGC6590, Barnard Loop, IC342 from Sun Shuwei
 	     License: public domain
 	4.32 Images of M77, NGC3109, NGC4449, NGC6397, NGC7009, Sh2-264, Sh2-308
 	     from Wang Lingyi
 	     License: public domain
-	4.33 Images of IC10, PGC143 from Lowell Observatory
+	4.33 Images of IC10, PGC143, PGC6830, PGC29653, UGC5373, UGC12613 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
 	4.34 Images of M59, M60, M89, M90, IC2177, IC2220, IC2631, NGC1433, NGC1761,
@@ -419,7 +419,7 @@
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of M49, NGC147, NGC4244 from Ole Nielsen
+	4.36 Images of M49, NGC147, NGC404, NGC4244 from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7000, NGC7023 from NASA
 	     License: public domain
@@ -434,14 +434,15 @@
 	     License: This work is free and may be used by anyone for any purpose.
 	     If you wish to use this content, you do not need to request permission
 	     as long as you follow any licensing requirements mentioned on this page.
-	4.41 Images of M61, M64, M65, M66, M91, M99, NGC1360, NGC1535, NGC1555, NGC2440,
-	     NGC2775, NGC3132, NGC3242, NGC3750, NGC4216, NGC4414, NGC4676, NGC5248,
-	     NGC6302, NGC6563, NGC6781, NGC7354, SH2-136, Coma Cluster, Cassiopeia A, LBN438
+	4.41 Images of M61, M64, M65, M66, M91, M99, NGC772, NGC1360, NGC1501, NGC1535, NGC1555,
+	     NGC2440, NGC2683, NGC2775, NGC3132, NGC3242, NGC3750, NGC4170, NGC4216, NGC4395,
+	     NGC4414,,NGC4676, NGC5248, NGC6302, NGC6563, NGC6781, NGC7354, SH2-136, Coma Cluster,
+	     Cassiopeia A, LBN438
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.42 Images of NGC92, NGC55, NGC300, NGC1232, NGC1313, NGC1316, NGC2207, NGC2736,
-	     NGC3532, NGC5128, NGC5189, NGC6362, NGC6769, NGC6822, NGC7793
+	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC936, NGC1232, NGC1313, NGC1316,
+	     NGC2207, NGC2736, NGC3532, NGC5128, NGC5189, NGC6362, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
@@ -510,7 +511,7 @@
 	     from Chuck Ayoub
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
-	4.60 Images of IC2169, NGC3077, Barnard207
+	4.60 Images of IC2169, NGC3077, UGC10822, Barnard207
 	     from Keesscherer
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
@@ -576,6 +577,30 @@
 	     from Tom Wildoner
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.77 Images of NGC2623
+	     from NASA, ESA and A. Evans (Stony Brook University, New York, University of Virginia & National Radio Astronomy Observatory, Charlottesville, USA)
+	     https://www.spacetelescope.org/
+	     License: Creative Commons Attribution 4.0 International
+	4.78 Images of NGC3808
+	     from ESA/Hubble & NASA
+	     https://www.spacetelescope.org/
+	     License: Creative Commons Attribution 4.0 International
+	4.79 Images of NGC6240, PGC33423
+	     from NASA, ESA, the Hubble Heritage (STScI/AURA)-ESA/Hubble Collaboration, and A. Evans (University of Virginia, Charlottesville/NRAO/Stony Brook University)
+	     https://www.spacetelescope.org/
+	     License: Creative Commons Attribution 4.0 International
+	4.80 Images of UGC5470
+	     from Friendlystar
+	     https://ko.wikipedia.org/
+	     License: Creative Commons Attribution 3.0 Unported
+	4.81 Images of UGC6253, UGC9749
+	     from Giuseppe Donatiello
+	     https://en.wikipedia.org/
+	     License: public domain
+	4.82 Images of UGC10214
+	     from NASA, Holland Ford (JHU), the ACS Science Team and ESA
+	     https://www.spacetelescope.org/
+	     License: Creative Commons Attribution 4.0 International
 ```
 
 ## Appendix
