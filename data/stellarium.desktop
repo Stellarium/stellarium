@@ -180,7 +180,7 @@ GenericName[zh]=桌面天文馆
 GenericName[zh_CN]=桌面天文馆
 GenericName[zh_HK]=桌面星象館
 GenericName[zh_TW]=桌上型星象儀
-Exec=stellarium
+Exec=stellarium --startup-script=%f
 Icon=stellarium
 StartupNotify=false
 Terminal=false
@@ -267,7 +267,7 @@ Comment[zh_CN]=天文馆
 Comment[zh_HK]=星象館
 Comment[zh_TW]=星象儀
 Keywords=astronomy;planetarium;
-
+MimeType=application/x-stellarium-script;
 Actions=Window;Fullscreen;Debugmode;
 
 [Desktop Action Window]
