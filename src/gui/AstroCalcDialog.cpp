@@ -4520,16 +4520,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -4561,16 +4562,17 @@ void AstroCalcDialog::calculateWutObjects()
 								continue;
 
 							mag = object->getVMagnitude(core);
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -4602,16 +4604,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -4643,16 +4646,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -4893,16 +4897,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -4995,16 +5000,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -5026,16 +5032,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -5056,16 +5063,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -5095,16 +5103,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -5134,16 +5143,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
@@ -5174,16 +5184,17 @@ void AstroCalcDialog::calculateWutObjects()
 							if (d.isEmpty() && n.isEmpty())
 								continue;
 
-							if (!objectsList.contains(d))
+							designation = QString("%1:%2").arg(d, n);
+							if (!objectsList.contains(designation))
 							{
 								if (d.isEmpty())
-									fillWUTTable(n, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
+									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else if (n.isEmpty())
 									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 								else
 									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
 
-								objectsList.insert(d);
+								objectsList.insert(designation);
 							}
 						}
 					}
