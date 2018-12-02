@@ -51,7 +51,7 @@ StelPluginInfo NavStarsStelPluginInterface::getPluginInfo() const
 	info.id = "NavStars";
 	info.displayedName = N_("Navigational Stars");
 	info.authors = "Alexander Wolf";
-	info.contact = "https://stellarium.org/";
+	info.contact = STELLARIUM_URL;
 	info.description = N_("This plugin marks navigational stars from a selected set.");
 	info.version = NAVSTARS_PLUGIN_VERSION;
 	info.license = NAVSTARS_PLUGIN_LICENSE;

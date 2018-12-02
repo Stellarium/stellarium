@@ -51,9 +51,13 @@ void MSConfigDialog::createDialogContent()
 	m_ui->tabs->setCurrentIndex(0);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << m_ui->about;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << m_ui->about;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 	connect(m_ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
@@ -87,7 +91,6 @@ void MSConfigDialog::createDialogContent()
 
 	// About tab
 	setAboutHtml();
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if (gui)
 	{
 		m_ui->about->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));

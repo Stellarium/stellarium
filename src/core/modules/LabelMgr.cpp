@@ -532,7 +532,7 @@ int LabelMgr::labelScreen(const QString& text,
 	return appendLabel(l, autoDeleteTimeoutMs);
 }
 
-bool LabelMgr::getLabelShow(int id)
+bool LabelMgr::getLabelShow(int id) const
 {
 	return allLabels[id]->getFlagShow();
 }

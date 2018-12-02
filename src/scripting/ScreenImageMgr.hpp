@@ -67,7 +67,7 @@ public:
 	//! @param b if true, the image will be shown, else it will be hidden
 	virtual void setFlagShow(bool b);
 	//! Get the displayed status of the image
-	virtual bool getFlagShow(void);
+	virtual bool getFlagShow(void) const;
 
 	//! Set the image alpha for when it is in full "on" (after fade in).
 	//! @param a the new alpha (transparency) for the image.  1.0 = totally transparent, 0.0 = fully opaque.
@@ -85,16 +85,16 @@ public:
 	//! @param y the offset in the y-axis
 	//! @param duration how long for the movement to take in seconds
 	virtual void addXY(float x, float y, float duration=0.);
-	virtual int imageHeight(void);
-	virtual int imageWidth(void);
+	virtual int imageHeight(void) const;
+	virtual int imageWidth(void) const;
 
 	//! Set the image scale relative to the size originally loaded.
 	//! @param scaleX new (target) horizontal scale factor. Native size=1.
 	//! @param scaleY new (target) vertical scale factor. Native size=1.
 	//! @param duration how long for the resize to take in seconds
 	virtual void setScale(float scaleX, float scaleY, float duration=0.);
-	virtual float imageScaleX(void);
-	virtual float imageScaleY(void);
+	virtual float imageScaleX(void) const;
+	virtual float imageScaleY(void) const;
 
 protected:
 	QGraphicsPixmapItem* tex;
@@ -160,17 +160,17 @@ public slots:
 	//! Find out if an image is currently visible.
 	//! @param id the ID for the desired image.
 	//! @return true if visible, false if not visible or not loaded.
-	bool getShowImage(const QString& id); 
+	bool getShowImage(const QString& id) const;
 	//! Set an image's visible status.
 	//! @param id the ID for the desired image.
 	//! @param show the new visible state to set.
 	void showImage(const QString& id, bool show);
 	//! @param id the ID for the desired image.
 	//! @return width (unscaled!) in pixels.
-	int getImageWidth(const QString& id);
+	int getImageWidth(const QString& id) const;
 	//! @param id the ID for the desired image.
 	//! @return height (unscaled!) in pixels.
-	int getImageHeight(const QString& id);
+	int getImageHeight(const QString& id) const;
 
 	//! Set the x and y scale for the specified image, relative to size given at load time.
 	//! @param id the ID for the desired image.
@@ -180,10 +180,10 @@ public slots:
 	void setImageScale(const QString& id, float scaleX, float scaleY, float duration=0.);
 	//! @param id the ID for the desired image.
 	//! @return current X scaling factor, relative to loaded size.
-	float getImageScaleX(const QString& id);
+	float getImageScaleX(const QString& id) const;
 	//! @param id the ID for the desired image.
 	//! @return current Y scaling factor, relative to loaded size.
-	float getImageScaleY(const QString& id);
+	float getImageScaleY(const QString& id) const;
 	//! Set an image's alpha value when visible
 	//! @param id the ID for the desired image.
 	//! @param alpha the new alpha value to set.
@@ -206,7 +206,7 @@ public slots:
 	//! Delete all images currently managed by ScreenImageMgr.
 	void deleteAllImages(void);
 	//! Get a list of currently loaded image IDs.
-	QStringList getAllImageIDs(void);
+	QStringList getAllImageIDs(void) const;
 
 private:
 	QMap<QString, ScreenImage*> allScreenImages;

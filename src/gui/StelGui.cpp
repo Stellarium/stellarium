@@ -78,10 +78,15 @@
 StelGui::StelGui()
 	: topLevelGraphicsWidget(Q_NULLPTR)
 	, skyGui(Q_NULLPTR)
+	, flagUseButtonsBackground(true)
+	, flagUseKineticScrolling(false)
 	, buttonTimeRewind(Q_NULLPTR)
 	, buttonTimeRealTimeSpeed(Q_NULLPTR)
 	, buttonTimeCurrent(Q_NULLPTR)
 	, buttonTimeForward(Q_NULLPTR)
+	, flagShowQuitButton(true)
+	, buttonQuit(Q_NULLPTR)
+	, flagShowGotoSelectedObjectButton(true)
 	, buttonGotoSelectedObject(Q_NULLPTR)
 	, locationDialog(Q_NULLPTR)
 	, helpDialog(Q_NULLPTR)
@@ -104,6 +109,10 @@ StelGui::StelGui()
 	, btShowDSS(Q_NULLPTR)
 	, flagShowHiPSButton(false)
 	, btShowHiPS(Q_NULLPTR)
+	, flagShowNightmodeButton(true)
+	, buttonNightmode(Q_NULLPTR)
+	, flagShowFullscreenButton(true)
+	, buttonFullscreen(Q_NULLPTR)
 	, flagShowBookmarksButton(false)
 	, btShowBookmarks(Q_NULLPTR)
 	, flagShowICRSGridButton(false)
@@ -114,6 +123,10 @@ StelGui::StelGui()
 	, btShowEclipticGrid(Q_NULLPTR)
 	, flagShowConstellationBoundariesButton(false)
 	, btShowConstellationBoundaries(Q_NULLPTR)
+	, flagShowAsterismLinesButton(false)
+	, btShowAsterismLines(Q_NULLPTR)
+	, flagShowAsterismLabelsButton(false)
+	, btShowAsterismLabels(Q_NULLPTR)
 	, initDone(false)
 #ifndef DISABLE_SCRIPTING
 	  // We use a QStringList to save the user-configured buttons while script is running, and restore them later.
@@ -255,6 +268,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	//// QGraphicsView based GUI
 	///////////////////////////////////////////////////////////////////////////
 
+	setFlagUseButtonsBackground(conf->value("gui/flag_show_buttons_background", true).toBool());
 	// Add everything
 	QPixmap pxmapDefault;
 	QPixmap pxmapGlow(":/graphicGui/glow.png");
@@ -358,14 +372,14 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 
 	pxmapOn = QPixmap(":/graphicGui/btNightView-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btNightView-off.png");
-	b = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Night_Mode");
-	skyGui->buttonBar->addButton(b, "060-othersGroup");
+	buttonNightmode = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Night_Mode");
+	skyGui->buttonBar->addButton(buttonNightmode, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btFullScreen-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btFullScreen-off.png");
-	b = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
-	b->setTriggerOnRelease(true);
-	skyGui->buttonBar->addButton(b, "060-othersGroup");
+	buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
+	buttonFullscreen->setTriggerOnRelease(true);
+	skyGui->buttonBar->addButton(buttonFullscreen, "060-othersGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btTimeRewind-on.png");
 	pxmapOff = QPixmap(":/graphicGui/btTimeRewind-off.png");
@@ -389,19 +403,25 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	skyGui->buttonBar->addButton(buttonTimeForward, "070-timeGroup");
 
 	pxmapOn = QPixmap(":/graphicGui/btQuit.png");
-	b = new StelButton(Q_NULLPTR, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
-	skyGui->buttonBar->addButton(b, "080-quitGroup");
+	buttonQuit = new StelButton(Q_NULLPTR, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
+	skyGui->buttonBar->addButton(buttonQuit, "080-quitGroup");
 
-	// add the flip buttons if requested in the config
+	// add the flip and other buttons if requested in the config
 	setFlagShowFlipButtons(conf->value("gui/flag_show_flip_buttons", false).toBool());
 	setFlagShowNebulaBackgroundButton(conf->value("gui/flag_show_nebulae_background_button", false).toBool());
 	setFlagShowDSSButton(conf->value("gui/flag_show_dss_button", false).toBool());
 	setFlagShowHiPSButton(conf->value("gui/flag_show_hips_button", false).toBool());
+	setFlagShowGotoSelectedObjectButton(conf->value("gui/flag_show_goto_selected_button", true).toBool());
+	setFlagShowNightmodeButton(conf->value("gui/flag_show_nightmode_button", true).toBool());
+	setFlagShowFullscreenButton(conf->value("gui/flag_show_fullscreen_button", true).toBool());
 	setFlagShowBookmarksButton(conf->value("gui/flag_show_bookmarks_button", false).toBool());
 	setFlagShowICRSGridButton(conf->value("gui/flag_show_icrs_grid_button", false).toBool());
 	setFlagShowGalacticGridButton(conf->value("gui/flag_show_galactic_grid_button", false).toBool());
 	setFlagShowEclipticGridButton(conf->value("gui/flag_show_ecliptic_grid_button", false).toBool());
 	setFlagShowConstellationBoundariesButton(conf->value("gui/flag_show_boundaries_button", false).toBool());
+	setFlagShowAsterismLinesButton(conf->value("gui/flag_show_asterism_lines_button", false).toBool());
+	setFlagShowAsterismLabelsButton(conf->value("gui/flag_show_asterism_labels_button", false).toBool());
+	setFlagShowQuitButton(conf->value("gui/flag_show_quit_button", true).toBool());
 
 	///////////////////////////////////////////////////////////////////////
 	// Create the main base widget
@@ -579,6 +599,14 @@ void StelGui::update()
 	flag = propMgr->getProperty("ConstellationMgr.boundariesDisplayed")->getValue().toBool();
 	if (getAction("actionShow_Constellation_Boundaries")->isChecked() != flag)
 		getAction("actionShow_Constellation_Boundaries")->setChecked(flag);
+
+	flag = propMgr->getProperty("AsterismMgr.linesDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Asterism_Lines")->isChecked() != flag)
+		getAction("actionShow_Asterism_Lines")->setChecked(flag);
+
+	flag = propMgr->getProperty("AsterismMgr.namesDisplayed")->getValue().toBool();
+	if (getAction("actionShow_Asterism_Labels")->isChecked() != flag)
+		getAction("actionShow_Asterism_Labels")->setChecked(flag);
 
 	flag = StelApp::getInstance().getVisionModeNight();
 	if (getAction("actionShow_Night_Mode")->isChecked() != flag)
@@ -892,6 +920,65 @@ void StelGui::setFlagShowConstellationBoundariesButton(bool b)
 	}
 }
 
+// Define whether the button toggling asterism lines should be visible
+void StelGui::setFlagShowAsterismLinesButton(bool b)
+{
+	if (b!=flagShowAsterismLinesButton)
+	{
+		if (b==true) {
+			if (btShowAsterismLines==Q_NULLPTR) {
+				// Create the asterism lines button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btAsterismLines-on.png");
+				QPixmap pxmapOff(":/graphicGui/btAsterismLines-off.png");
+				btShowAsterismLines = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Asterism_Lines");
+			}
+			getButtonBar()->addButton(btShowAsterismLines, "010-constellationsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Asterism_Lines");
+		}
+		flagShowAsterismLinesButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_asterism_lines_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowAsterismLinesButtonChanged(b);
+	}
+}
+
+// Define whether the button toggling asterism labels should be visible
+void StelGui::setFlagShowAsterismLabelsButton(bool b)
+{
+	if (b!=flagShowAsterismLabelsButton)
+	{
+		if (b==true) {
+			if (btShowAsterismLabels==Q_NULLPTR) {
+				// Create the asterism labels button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btAsterismLabels-on.png");
+				QPixmap pxmapOff(":/graphicGui/btAsterismLabels-off.png");
+				btShowAsterismLabels = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Asterism_Labels");
+			}
+			getButtonBar()->addButton(btShowAsterismLabels, "010-constellationsGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Asterism_Labels");
+		}
+		flagShowAsterismLabelsButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_asterism_labels_button", b);
+		conf->sync();
+		if (initDone) {
+			skyGui->updateBarsPos();
+		}
+		emit flagShowAsterismLabelsButtonChanged(b);
+	}
+}
+
+
 // Define whether the button toggling DSS images should be visible
 // We keep Toast even though HiPS is now available: We have a local Toast option better suited for offline operation!
 void StelGui::setFlagShowDSSButton(bool b)
@@ -942,6 +1029,132 @@ void StelGui::setFlagShowHiPSButton(bool b)
 		conf->setValue("gui/flag_show_hips_button", b);
 		conf->sync();
 		emit flagShowHiPSButtonChanged(b);
+	}
+}
+
+// Define whether the button to center on selected object should be visible
+void StelGui::setFlagShowGotoSelectedObjectButton(bool b)
+{
+	if (b!=flagShowGotoSelectedObjectButton)
+	{
+		if (b==true) {
+			if (buttonGotoSelectedObject==Q_NULLPTR) {
+				// Create the button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btGotoSelectedObject-on.png");
+				QPixmap pxmapOff(":/graphicGui/btGotoSelectedObject-off.png");
+				buttonGotoSelectedObject = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionGoto_Selected_Object");
+			}
+			getButtonBar()->addButton(buttonGotoSelectedObject, "060-othersGroup");
+		} else {
+			getButtonBar()->hideButton("actionGoto_Selected_Object");
+		}
+		flagShowGotoSelectedObjectButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_goto_selected_button", b);
+		conf->sync();
+		emit flagShowGotoSelectedObjectButtonChanged(b);
+	}
+}
+// Define whether the button toggling night mode should be visible
+void StelGui::setFlagShowNightmodeButton(bool b)
+{
+	if (b!=flagShowNightmodeButton)
+	{
+		if (b==true) {
+			if (buttonNightmode==Q_NULLPTR) {
+				// Create the nightmode button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btNightView-on.png");
+				QPixmap pxmapOff(":/graphicGui/btNightView-off.png");
+				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Night_Mode");
+			}
+			getButtonBar()->addButton(buttonNightmode, "060-othersGroup");
+		} else {
+			getButtonBar()->hideButton("actionShow_Night_Mode");
+		}
+		flagShowNightmodeButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_nightmode_button", b);
+		conf->sync();
+		emit flagShowNightmodeButtonChanged(b);
+	}
+}
+// Define whether the button toggling fullscreen mode should be visible
+void StelGui::setFlagShowFullscreenButton(bool b)
+{
+	if (b!=flagShowFullscreenButton)
+	{
+		if (b==true) {
+			if (buttonFullscreen==Q_NULLPTR) {
+				// Create the fullscreen button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btFullScreen-on.png");
+				QPixmap pxmapOff(":/graphicGui/btFullScreen-off.png");
+				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
+			}
+			getButtonBar()->addButton(buttonFullscreen, "060-othersGroup");
+		} else {
+			getButtonBar()->hideButton("actionSet_Full_Screen_Global");
+		}
+		flagShowFullscreenButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_fullscreen_button", b);
+		conf->sync();
+		emit flagShowFullscreenButtonChanged(b);
+	}
+}
+// Define whether the quit button should be visible
+void StelGui::setFlagShowQuitButton(bool b)
+{
+	if (b!=flagShowQuitButton)
+	{
+		if (b==true) {
+			if (buttonFullscreen==Q_NULLPTR) {
+				// Create the fullscreen button
+				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
+				QPixmap pxmapOn(":/graphicGui/btQuit.png");
+				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
+			}
+			getButtonBar()->addButton(buttonQuit, "080-quitGroup");
+		} else {
+			getButtonBar()->hideButton("actionQuit_Global");
+		}
+		flagShowQuitButton = b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_quit_button", b);
+		conf->sync();
+		emit flagShowQuitButtonChanged(b);
+	}
+}
+
+void StelGui::setFlagUseButtonsBackground(bool b)
+{
+	if (b!=flagUseButtonsBackground)
+	{
+		flagUseButtonsBackground=b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_show_buttons_background", b);
+		conf->sync();
+		emit flagUseButtonsBackgroundChanged(b);
+	}
+}
+
+void StelGui::setFlagUseKineticScrolling(bool b)
+{
+	if (b!=flagUseKineticScrolling)
+	{
+		flagUseKineticScrolling=b;
+		QSettings* conf = StelApp::getInstance().getSettings();
+		Q_ASSERT(conf);
+		conf->setValue("gui/flag_enable_kinetic_scrolling", b);
+		conf->sync();
+		emit flagUseKineticScrollingChanged(b);
 	}
 }
 
@@ -1022,6 +1235,11 @@ void StelGui::setAutoHideVerticalButtonBar(bool b)
 	}
 }
 
+bool StelGui::getFlagShowQuitButton() const
+{
+	return flagShowQuitButton;
+}
+
 bool StelGui::getFlagShowFlipButtons() const
 {
 	return flagShowFlipButtons;
@@ -1041,6 +1259,22 @@ bool StelGui::getFlagShowHiPSButton() const
 {
 	return flagShowHiPSButton;
 }
+
+bool StelGui::getFlagShowGotoSelectedObjectButton() const
+{
+	return flagShowGotoSelectedObjectButton;
+}
+
+bool StelGui::getFlagShowNightmodeButton() const
+{
+	return flagShowNightmodeButton;
+}
+
+bool StelGui::getFlagShowFullscreenButton() const
+{
+	return flagShowFullscreenButton;
+}
+
 bool StelGui::getFlagShowBookmarksButton() const
 {
 	return flagShowBookmarksButton;
@@ -1064,6 +1298,16 @@ bool StelGui::getFlagShowEclipticGridButton() const
 bool StelGui::getFlagShowConstellationBoundariesButton() const
 {
 	return flagShowConstellationBoundariesButton;
+}
+
+bool StelGui::getFlagShowAsterismLinesButton() const
+{
+	return flagShowAsterismLinesButton;
+}
+
+bool StelGui::getFlagShowAsterismLabelsButton() const
+{
+	return flagShowAsterismLabelsButton;
 }
 
 bool StelGui::initComplete(void) const
@@ -1094,7 +1338,7 @@ void StelGui::setGuiVisible(bool b)
 	emit visibleChanged(b);
 }
 
-StelAction* StelGui::getAction(const QString& actionName)
+StelAction* StelGui::getAction(const QString& actionName) const
 {
 	return StelApp::getInstance().getStelActionManager()->findAction(actionName);
 }
@@ -1104,7 +1348,7 @@ void StelGui::copySelectedObjectInfo(void)
 	QGuiApplication::clipboard()->setText(skyGui->infoPanel->getSelectedText());
 }
 
-bool StelGui::getAstroCalcVisible()
+bool StelGui::getAstroCalcVisible() const
 {
 	return astroCalcDialog && astroCalcDialog->visible();
 }

@@ -97,7 +97,7 @@ public:
 	// GZ: Until 0.13 QStrings were used for types.
 	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
 	// GZ: If other types are introduced, add here and the string in init().
-	// GZ TODO for 0.16: Preferably convert this into a bitfield and allow several bits set:
+	// GZ TODO for 0.19: Preferably convert this into a bitfield and allow several bits set:
 	// Cubewanos, SDO, OCO, Sednoids are Asteroids, Pluto is a Plutino and DwarfPlanet, Ceres is Asteroid and DwarfPlanet etc.!
 	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
@@ -116,6 +116,7 @@ public:
 		isSDO,          // ssystem.ini: type="scattered disc object"
 		isOCO,          // ssystem.ini: type="oco"
 		isSednoid,      // ssystem.ini: type="sednoid"
+		isInterstellar, // ssystem.ini: type="interstellar object"
 		isUNDEFINED     // ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
 
@@ -399,6 +400,10 @@ public:
 	static Vec3f orbitSednoidsColor;
 	static void setSednoidOrbitColor(const Vec3f& oc) { orbitSednoidsColor = oc;}
 	static const Vec3f& getSednoidOrbitColor() {return orbitSednoidsColor;}
+
+	static Vec3f orbitInterstellarColor;
+	static void setInterstellarOrbitColor(const Vec3f& oc) { orbitInterstellarColor = oc;}
+	static const Vec3f& getInterstellarOrbitColor() {return orbitInterstellarColor;}
 
 	static Vec3f orbitMercuryColor;
 	static void setMercuryOrbitColor(const Vec3f& oc) { orbitMercuryColor = oc;}

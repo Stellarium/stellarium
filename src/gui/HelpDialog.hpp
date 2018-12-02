@@ -78,13 +78,13 @@ private slots:
 	void updateLog(int);
 
 	//! Updated text in Help tab.
-	void updateHelpText(void);
+	void updateHelpText(void) const;
 
 	//! Updated text in About tab.
-	void updateAboutText(void);
+	void updateAboutText(void) const;
 
 	//! Sync the displayed log.
-	void refreshLog();
+	void refreshLog() const;
 
 	void changePage(QListWidgetItem *current, QListWidgetItem *previous);
 

@@ -132,7 +132,7 @@ void HipsSurvey::setVisible(bool value)
 	if (!value && progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 	emit visibleChanged(value);
 }
@@ -235,7 +235,7 @@ void HipsSurvey::updateProgressBar(int nb, int total)
 {
 	if (nb == total && progressBar) {
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 	if (nb == total) return;
 

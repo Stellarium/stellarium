@@ -116,10 +116,8 @@ for langfile in files:
             po = polib.pofile(pofilename)
             for entry in po.translated_entries():
                 if entry.msgid.encode('utf-8') in text:
-            origmessage = ('\n' + entry.msgctxt + '=' + entry.msgid + '\n').encode('utf-8')
-            origandtranslated = (
-                    '\n' + entry.msgctxt + '=' + entry.msgid + '\n' + entry.msgctxt + '[' + lang + ']=' + entry.msgstr + '\n').encode(
-                'utf-8')
-            text = text.replace(origmessage, origandtranslated)
+                    origmessage = ('\n' + entry.msgctxt + '=' + entry.msgid + '\n').encode('utf-8')
+                    origandtranslated = ('\n' + entry.msgctxt + '=' + entry.msgid + '\n' + entry.msgctxt + '[' + lang + ']=' + entry.msgstr + '\n').encode('utf-8')
+                    text = text.replace(origmessage, origandtranslated)
 
         deskfile.write(text)

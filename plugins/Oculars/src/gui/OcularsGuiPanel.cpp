@@ -44,9 +44,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	parentWidget(parent),
 	borderPath(Q_NULLPTR)
 {
-	setMaximumSize(300, 450);
 	setContentsMargins(0, 0, 0, 0);
-	//TODO: set font?
 
 	//First create the layout and populate it, then set it?
 	mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
@@ -64,7 +62,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 				      ocularsPlugin->actionShowOcular,
 				      true); //No background
 	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->getText());
-	buttonOcular->setParentItem(buttonBar);
 
 	Q_ASSERT(ocularsPlugin->actionShowCrosshairs);
 	buttonCrosshairs = new StelButton(buttonBar,
@@ -111,16 +108,12 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	//Widgets with control and information fields
 	ocularControls = new QGraphicsWidget(this);
-	ocularControls->setParentItem(this);
 	ocularControls->setVisible(false);
 	lensControls = new QGraphicsWidget(this);
-	lensControls->setParentItem(this);
 	lensControls->setVisible(false);
 	ccdControls = new QGraphicsWidget(this);
-	ccdControls->setParentItem(this);
 	ccdControls->setVisible(false);
 	telescopeControls = new QGraphicsWidget(this);
-	telescopeControls->setParentItem(this);
 	telescopeControls->setVisible(false);
 
 	fieldOcularName = new QGraphicsTextItem(ocularControls);
@@ -145,10 +138,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
 
 	QFont newFont = font();
-	// Font size is 12
-	newFont.setPixelSize(StelApp::getInstance().getBaseFontSize()-1);
+	newFont.setPixelSize(plugin->getGuiPanelFontSize());
 	setControlsFont(newFont);
-	//setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 
 	//Traditional field width from Ocular ;)
 	QFontMetrics fm(fieldOcularName->font());
@@ -381,7 +372,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(rotateCcdPlus5Button,   SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
-
 
 	//Set the layout and update the size
 	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
@@ -1071,9 +1061,9 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 		width += 2 * prevTelescopeButton->getButtonPixmapWidth();
 		posX = prevTelescopeButton->getButtonPixmapWidth();
 	}
-	if (buttonOcular->parentItem())
+	if ( (buttonOcular->parentItem()) && (buttonOcular->parentItem()->parentItem()) )
 	{
-		qreal parentWidth = buttonOcular->parentItem()->boundingRect().width();
+		qreal parentWidth = buttonOcular->parentItem()->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
 		spacing = qRound((parentWidth-width)/nGaps);
 	}

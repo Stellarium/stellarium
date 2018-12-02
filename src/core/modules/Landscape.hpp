@@ -110,7 +110,7 @@ public:
 	//! Get whether landscape is displayed (does not concern fog)
 	bool getFlagShow() const {return (bool)landFader;}
 	//! Returns the currently effective land fade value
-	float getEffectiveLandFadeValue() { return landFader.getInterstate(); }
+	float getEffectiveLandFadeValue() const { return landFader.getInterstate(); }
 	//! Set whether fog is displayed
 	void setFlagShowFog(const bool b) {fogFader=b;}
 	//! Get whether fog is displayed
