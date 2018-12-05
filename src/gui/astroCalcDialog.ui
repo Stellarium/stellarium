@@ -1288,62 +1288,26 @@
              </widget>
             </item>
             <item>
-             <widget class="QListView" name="wutMatchingObjectsListView"/>
-            </item>
-            <item>
-             <layout class="QGridLayout" name="gridLayoutRTSData">
-              <item row="0" column="1">
-               <widget class="QLabel" name="labelRiseValue">
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="4">
-               <widget class="QLabel" name="labelSet">
-                <property name="text">
-                 <string comment="celestial event">Set:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="labelRise">
-                <property name="text">
-                 <string comment="celestial event">Rise:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="2">
-               <widget class="QLabel" name="labelTransit">
-                <property name="text">
-                 <string comment="celestial event">Transit:</string>
-                </property>
-                <property name="alignment">
-                 <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="3">
-               <widget class="QLabel" name="labelTransitValue">
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="5">
-               <widget class="QLabel" name="labelSetValue">
-                <property name="text">
-                 <string/>
-                </property>
-               </widget>
-              </item>
-             </layout>
+             <widget class="QTreeWidget" name="wutMatchingObjectsTreeWidget">
+              <property name="editTriggers">
+               <set>QAbstractItemView::NoEditTriggers</set>
+              </property>
+              <property name="rootIsDecorated">
+               <bool>false</bool>
+              </property>
+              <property name="uniformRowHeights">
+               <bool>true</bool>
+              </property>
+              <property name="itemsExpandable">
+               <bool>false</bool>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="columnCount">
+               <number>0</number>
+              </property>
+             </widget>
             </item>
             <item>
              <widget class="QPushButton" name="saveObjectsButton">
@@ -1364,7 +1328,14 @@
              </widget>
             </item>
             <item>
-             <widget class="QListWidget" name="wutCategoryListWidget"/>
+             <widget class="QListWidget" name="wutCategoryListWidget">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+             </widget>
             </item>
            </layout>
           </item>
