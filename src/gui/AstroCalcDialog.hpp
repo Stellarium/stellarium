@@ -272,6 +272,7 @@ private:
 	void populateFunctionsList();
 
 	void adjustWUTColumns();
+
 	void fillWUTTable(QString objectName, QString designation, double magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
 							  QString angularSize, QString angularSizeToolTip, QString extraData,

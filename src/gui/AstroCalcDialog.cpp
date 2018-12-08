@@ -1146,7 +1146,7 @@ void AstroCalcDialog::currentCelestialPositions()
 					else
 						extra = QChar(0x2014); // dash
 				}
-				else												  // stars with high proper motion
+				else	// stars with high proper motion
 					extra = QString::number(star.value(obj), 'f', 5); // "/yr
 
 				sTransit = QChar(0x2014);
