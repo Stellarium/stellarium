@@ -1235,13 +1235,10 @@ void AstroCalcDialog::saveCelestialPositions()
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Celestial positions of objects"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->celestialCategoryComboBox->currentData(Qt::DisplayRole).toString(), AbstractSheet::ST_WorkSheet);
+		xlsx.addSheet(ui->celestialCategoryComboBox->currentData(Qt::DisplayRole).toString());
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
 		for (int i = 0; i < columns; i++)
 		{
@@ -1274,17 +1271,6 @@ void AstroCalcDialog::saveCelestialPositions()
 		}
 
 		delete[] width;
-
-		// Add the date and time info for celestial positions
-		xlsx.write(count + 2, 1, ui->celestialPositionsTimeLabel->text());
-		QXlsx::CellRange range = CellRange(count+2, 1, count+2, columns);
-		QXlsx::Format extraData;
-		extraData.setBorderStyle(QXlsx::Format::BorderThin);
-		extraData.setBorderColor(Qt::black);
-		extraData.setPatternBackgroundColor(Qt::yellow);
-		extraData.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		xlsx.mergeCells(range, extraData);
-
 		xlsx.saveAs(filePath);
 	}
 }
@@ -1729,13 +1715,10 @@ void AstroCalcDialog::saveEphemeris()
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Ephemerides"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString(), AbstractSheet::ST_WorkSheet);
+		xlsx.addSheet(ui->celestialBodyComboBox->currentData(Qt::DisplayRole).toString());
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
 		for (int i = 0; i < columns; i++)
 		{
@@ -3324,13 +3307,10 @@ void AstroCalcDialog::savePhenomena()
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Phenomena"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(q_("Phenomena"), AbstractSheet::ST_WorkSheet);
+		xlsx.addSheet(q_("Phenomena"));
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
 		for (int i = 0; i < columns; i++)
 		{
@@ -5355,13 +5335,10 @@ void AstroCalcDialog::saveWutObjects()
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("What's Up Tonight"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(ui->wutCategoryListWidget->currentItem()->text(), AbstractSheet::ST_WorkSheet);
+		xlsx.addSheet(ui->wutCategoryListWidget->currentItem()->text());
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
-		header.setPatternBackgroundColor(Qt::yellow);
-		header.setBorderStyle(QXlsx::Format::BorderThin);
-		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
 		for (int i = 0; i < columns; i++)
 		{
