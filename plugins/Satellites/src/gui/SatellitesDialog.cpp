@@ -378,7 +378,8 @@ void SatellitesDialog::savePredictedIridiumFlares()
 	}
 	else
 	{
-		int width[columns];
+		int *width;
+		width = new int[columns];
 		QString sData;
 		int w;
 
@@ -420,6 +421,7 @@ void SatellitesDialog::savePredictedIridiumFlares()
 			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
+		delete[] width;
 		xlsx.saveAs(filePath);
 	}
 }

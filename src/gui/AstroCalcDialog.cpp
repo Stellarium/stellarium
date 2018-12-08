@@ -1302,14 +1302,15 @@ void AstroCalcDialog::saveCelestialPositions()
 	}
 	else
 	{
-		int width[columns];
+		int *width;
+		width = new int[columns];
 		QString sData;
 		int w;
 
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Celestial positions of objects"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(q_("Celestial positions of objects"));
+		xlsx.addSheet(ui->celestialCategoryComboBox->currentData(Qt::DisplayRole).toString());
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
@@ -1344,6 +1345,7 @@ void AstroCalcDialog::saveCelestialPositions()
 			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
+		delete[] width;
 		xlsx.saveAs(filePath);
 	}
 }
@@ -1780,7 +1782,8 @@ void AstroCalcDialog::saveEphemeris()
 	}
 	else
 	{
-		int width[columns];
+		int *width;
+		width = new int[columns];
 		QString sData;
 		int w;
 
@@ -1822,6 +1825,7 @@ void AstroCalcDialog::saveEphemeris()
 			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
+		delete[] width;
 		xlsx.saveAs(filePath);
 	}
 }
@@ -3370,7 +3374,8 @@ void AstroCalcDialog::savePhenomena()
 	}
 	else
 	{
-		int width[columns];
+		int *width;
+		width = new int[columns];
 		QString sData;
 		int w;
 
@@ -3412,6 +3417,7 @@ void AstroCalcDialog::savePhenomena()
 			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
+		delete[] width;
 		xlsx.saveAs(filePath);
 	}
 }
@@ -5396,7 +5402,8 @@ void AstroCalcDialog::saveWutObjects()
 	}
 	else
 	{
-		int width[columns];
+		int *width;
+		width = new int[columns];
 		QString sData;
 		int w;
 
@@ -5443,6 +5450,7 @@ void AstroCalcDialog::saveWutObjects()
 			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
+		delete[] width;
 		xlsx.saveAs(filePath);
 	}
 }
