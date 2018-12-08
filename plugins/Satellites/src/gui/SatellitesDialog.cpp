@@ -386,10 +386,13 @@ void SatellitesDialog::savePredictedIridiumFlares()
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Predicted Iridium flares"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
-		xlsx.addSheet(q_("Predicted Iridium flares"));
+		xlsx.addSheet(q_("Predicted Iridium flares"), AbstractSheet::ST_WorkSheet);
 
 		QXlsx::Format header;
 		header.setHorizontalAlignment(QXlsx::Format::AlignHCenter);
+		header.setPatternBackgroundColor(Qt::yellow);
+		header.setBorderStyle(QXlsx::Format::BorderThin);
+		header.setBorderColor(Qt::black);
 		header.setFontBold(true);
 		for (int i = 0; i < columns; i++)
 		{
