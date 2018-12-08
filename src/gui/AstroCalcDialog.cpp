@@ -674,6 +674,29 @@ void AstroCalcDialog::saveCelestialPositionsCategory(int index)
 	currentCelestialPositions();
 }
 
+void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
+									    QString angularSize, QString angularSizeToolTip, QString extraData,
+									    QString extraDataToolTip, QString transitTime, QString objectType)
+{
+	ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
+	treeItem->setText(CColumnName, objectName);
+	treeItem->setText(CColumnRA, RA);
+	treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
+	treeItem->setText(CColumnDec, Dec);
+	treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
+	treeItem->setText(CColumnMagnitude, QString::number(magnitude, 'f', 2));
+	treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
+	treeItem->setText(CColumnAngularSize, angularSize);
+	treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
+	treeItem->setToolTip(CColumnAngularSize, angularSizeToolTip);
+	treeItem->setText(CColumnExtra, extraData);
+	treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
+	treeItem->setToolTip(CColumnExtra, extraDataToolTip);
+	treeItem->setText(CColumnTransit, transitTime);
+	treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
+	treeItem->setText(CColumnType, objectType);
+}
+
 void AstroCalcDialog::currentCelestialPositions()
 {
 	float ra, dec;
@@ -759,9 +782,6 @@ void AstroCalcDialog::currentCelestialPositions()
 					}
 				}
 
-				ACCelPosTreeWidgetItem* treeItem =
-				  new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-
 				celObjName = obj->getNameI18n();
 				celObjId = obj->getDSODesignation();
 				if (celObjId.isEmpty())
@@ -785,22 +805,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				treeItem->setText(CColumnName, dsoName);
-				treeItem->setText(CColumnRA, raStr);
-				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
-				treeItem->setText(CColumnDec, decStr);
-				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-				treeItem->setText(CColumnMagnitude, QString::number(magOp, 'f', 2));
-				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
-				treeItem->setText(CColumnAngularSize, angularSize);
-				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setToolTip(CColumnAngularSize, asToolTip);
-				treeItem->setText(CColumnExtra, extra);
-				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-				treeItem->setToolTip(CColumnExtra, mu);
-				treeItem->setText(CColumnTransit, sTransit);
-				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
-				treeItem->setText(CColumnType, q_(obj->getTypeString()));
+				fillCelestialPositionTable(dsoName, raStr, decStr, magOp, angularSize, asToolTip, extra, mu, sTransit, q_(obj->getTypeString()));
 			}
 		}
 	}
@@ -865,23 +870,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-				treeItem->setText(CColumnName, planet->getNameI18n());
-				treeItem->setText(CColumnRA, raStr);
-				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
-				treeItem->setText(CColumnDec, decStr);
-				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
-				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
-				treeItem->setText(CColumnAngularSize, angularSize);
-				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setToolTip(CColumnAngularSize, asToolTip);
-				treeItem->setText(CColumnExtra, extra);
-				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-				treeItem->setToolTip(CColumnExtra, sToolTip);
-				treeItem->setText(CColumnTransit, sTransit);
-				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
-				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -941,23 +930,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-				treeItem->setText(CColumnName, planet->getNameI18n());
-				treeItem->setText(CColumnRA, raStr);
-				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
-				treeItem->setText(CColumnDec, decStr);
-				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
-				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
-				treeItem->setText(CColumnAngularSize, QChar(0x2014));
-				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setToolTip(CColumnAngularSize, asToolTip);
-				treeItem->setText(CColumnExtra, extra);
-				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-				treeItem->setToolTip(CColumnExtra, sToolTip);
-				treeItem->setText(CColumnTransit, sTransit);
-				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
-				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), QChar(0x2014), asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -1024,23 +997,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-				treeItem->setText(CColumnName, planet->getNameI18n());
-				treeItem->setText(CColumnRA, raStr);
-				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
-				treeItem->setText(CColumnDec, decStr);
-				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
-				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
-				treeItem->setText(CColumnAngularSize, angularSize);
-				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setToolTip(CColumnAngularSize, asToolTip);
-				treeItem->setText(CColumnExtra, extra);
-				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-				treeItem->setToolTip(CColumnExtra, sToolTip);
-				treeItem->setText(CColumnTransit, sTransit);
-				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
-				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -1106,23 +1063,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-				treeItem->setText(CColumnName, planet->getNameI18n());
-				treeItem->setText(CColumnRA, raStr);
-				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
-				treeItem->setText(CColumnDec, decStr);
-				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-				treeItem->setText(CColumnMagnitude, QString::number(planet->getVMagnitudeWithExtinction(core), 'f', 2));
-				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
-				treeItem->setText(CColumnAngularSize, angularSize);
-				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setToolTip(CColumnAngularSize, asToolTip);
-				treeItem->setText(CColumnExtra, extra);
-				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-				treeItem->setToolTip(CColumnExtra, sToolTip);
-				treeItem->setText(CColumnTransit, sTransit);
-				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
-				treeItem->setText(CColumnType, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -1213,23 +1154,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				ACCelPosTreeWidgetItem* treeItem = new ACCelPosTreeWidgetItem(ui->celestialPositionsTreeWidget);
-				treeItem->setText(CColumnName, obj->getNameI18n());
-				treeItem->setText(CColumnRA, raStr);
-				treeItem->setTextAlignment(CColumnRA, Qt::AlignRight);
-				treeItem->setText(CColumnDec, decStr);
-				treeItem->setTextAlignment(CColumnDec, Qt::AlignRight);
-				treeItem->setText(CColumnMagnitude, QString::number(obj->getVMagnitudeWithExtinction(core), 'f', 2));
-				treeItem->setTextAlignment(CColumnMagnitude, Qt::AlignRight);
-				treeItem->setText(CColumnAngularSize, QChar(0x2014)); // No angular size of stars!
-				treeItem->setToolTip(CColumnAngularSize, "");
-				treeItem->setTextAlignment(CColumnAngularSize, Qt::AlignRight);
-				treeItem->setText(CColumnExtra, extra);
-				treeItem->setTextAlignment(CColumnExtra, Qt::AlignRight);
-				treeItem->setToolTip(CColumnExtra, sToolTip);
-				treeItem->setText(CColumnTransit, sTransit);
-				treeItem->setTextAlignment(CColumnTransit, Qt::AlignRight);
-				treeItem->setText(CColumnType, sType);
+				fillCelestialPositionTable(obj->getNameI18n(), raStr, decStr, obj->getVMagnitudeWithExtinction(core), QChar(0x2014), "", extra, sToolTip, sTransit, sType);
 			}
 		}
 	}

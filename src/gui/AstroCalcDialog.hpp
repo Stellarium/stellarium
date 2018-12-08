@@ -273,6 +273,9 @@ private:
 
 	void adjustWUTColumns();
 	void fillWUTTable(QString objectName, QString designation, double magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees = false);
+	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
+							  QString angularSize, QString angularSizeToolTip, QString extraData,
+							  QString extraDataToolTip, QString transitTime, QString objectType);
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
