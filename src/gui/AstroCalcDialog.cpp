@@ -1302,6 +1302,10 @@ void AstroCalcDialog::saveCelestialPositions()
 	}
 	else
 	{
+		int width[columns];
+		QString sData;
+		int w;
+
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Celestial positions of objects"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
@@ -1313,7 +1317,9 @@ void AstroCalcDialog::saveCelestialPositions()
 		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
-			xlsx.write(1, i + 1, positionsHeader.at(i).trimmed(), header);
+			sData = positionsHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
 		}
 
 		QXlsx::Format data;
@@ -1323,8 +1329,19 @@ void AstroCalcDialog::saveCelestialPositions()
 			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
-				xlsx.write(i + 2, j + 1, ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j), data);
+				sData = ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
 			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
 		xlsx.saveAs(filePath);
@@ -1763,6 +1780,10 @@ void AstroCalcDialog::saveEphemeris()
 	}
 	else
 	{
+		int width[columns];
+		QString sData;
+		int w;
+
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Ephemerides"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
@@ -1774,7 +1795,9 @@ void AstroCalcDialog::saveEphemeris()
 		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
-			xlsx.write(1, i + 1, ephemerisHeader.at(i).trimmed(), header);
+			sData = ephemerisHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
 		}
 
 		QXlsx::Format data;
@@ -1784,8 +1807,19 @@ void AstroCalcDialog::saveEphemeris()
 			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
-				xlsx.write(i + 2, j + 1, ui->ephemerisTreeWidget->topLevelItem(i)->text(j), data);
+				sData = ui->ephemerisTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
 			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
 		xlsx.saveAs(filePath);
@@ -3336,6 +3370,10 @@ void AstroCalcDialog::savePhenomena()
 	}
 	else
 	{
+		int width[columns];
+		QString sData;
+		int w;
+
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Phenomena"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
@@ -3347,7 +3385,9 @@ void AstroCalcDialog::savePhenomena()
 		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
-			xlsx.write(1, i + 1, phenomenaHeader.at(i).trimmed(), header);
+			sData = phenomenaHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
 		}
 
 		QXlsx::Format data;
@@ -3357,8 +3397,19 @@ void AstroCalcDialog::savePhenomena()
 			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
-				xlsx.write(i + 2, j + 1, ui->phenomenaTreeWidget->topLevelItem(i)->text(j), data);
+				sData = ui->phenomenaTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
 			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
 		xlsx.saveAs(filePath);
@@ -5345,6 +5396,10 @@ void AstroCalcDialog::saveWutObjects()
 	}
 	else
 	{
+		int width[columns];
+		QString sData;
+		int w;
+
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("What's Up Tonight"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
@@ -5356,7 +5411,9 @@ void AstroCalcDialog::saveWutObjects()
 		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
-			xlsx.write(1, i + 1, wutHeader.at(i).trimmed(), header);
+			sData = wutHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
 		}
 
 		QXlsx::Format data;
@@ -5368,11 +5425,22 @@ void AstroCalcDialog::saveWutObjects()
 			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
+				sData = ui->wutMatchingObjectsTreeWidget->topLevelItem(i)->text(j).trimmed();
 				if (j==0)
-					xlsx.write(i + 2, j + 1, ui->wutMatchingObjectsTreeWidget->topLevelItem(i)->text(j), left);
+					xlsx.write(i + 2, j + 1, sData, left);
 				else
-					xlsx.write(i + 2, j + 1, ui->wutMatchingObjectsTreeWidget->topLevelItem(i)->text(j), data);
+					xlsx.write(i + 2, j + 1, sData, data);
+				w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
 			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
 		xlsx.saveAs(filePath);

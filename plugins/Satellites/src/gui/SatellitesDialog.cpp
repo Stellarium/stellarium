@@ -378,6 +378,10 @@ void SatellitesDialog::savePredictedIridiumFlares()
 	}
 	else
 	{
+		int width[columns];
+		QString sData;
+		int w;
+
 		QXlsx::Document xlsx;
 		xlsx.setDocumentProperty("title", q_("Predicted Iridium flares"));
 		xlsx.setDocumentProperty("creator", StelUtils::getApplicationName());
@@ -389,7 +393,9 @@ void SatellitesDialog::savePredictedIridiumFlares()
 		for (int i = 0; i < columns; i++)
 		{
 			// Row 1: Names of columns
-			xlsx.write(1, i + 1, iridiumFlaresHeader.at(i).trimmed(), header);
+			sData = iridiumFlaresHeader.at(i).trimmed();
+			xlsx.write(1, i + 1, sData, header);
+			width[i] = sData.size();
 		}
 
 		QXlsx::Format data;
@@ -399,8 +405,19 @@ void SatellitesDialog::savePredictedIridiumFlares()
 			for (int j = 0; j < columns; j++)
 			{
 				// Row 2 and next: the data
-				xlsx.write(i + 2, j + 1, ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j), data);
+				sData = ui->iridiumFlaresTreeWidget->topLevelItem(i)->text(j).trimmed();
+				xlsx.write(i + 2, j + 1, sData, data);
+				w = sData.size();
+				if (w > width[j])
+				{
+					width[j] = w;
+				}
 			}
+		}
+
+		for (int i = 0; i < columns; i++)
+		{
+			xlsx.setColumnWidth(i+1, width[i]+2);
 		}
 
 		xlsx.saveAs(filePath);
