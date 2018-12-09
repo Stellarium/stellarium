@@ -34,16 +34,6 @@ environment:
     qtver: 5.11
     qtbin: msvc2017_64
     msvcname: Visual Studio 15 2017 Win64
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: Win32
-    qtver: 5.11
-    qtbin: winrt_x86_msvc2017
-    msvcname: Visual Studio 15 2017
-  - APPVEYOR_BUILD_WORKER_IMAGE: Visual Studio 2017
-    platform: x64
-    qtver: 5.11
-    qtbin: winrt_x64_msvc2017
-    msvcname: Visual Studio 15 2017 Win64
 before_build:
 - cmd: >-
     set PATH=C:\Qt\%qtver%\%qtbin%\bin;%PATH%
