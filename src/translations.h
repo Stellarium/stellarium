@@ -508,6 +508,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Western (O.Hlad)");
 		// TRANSLATORS: Name of the sky culture
+		N_("Western (Sky & Telescope)");
+		// TRANSLATORS: Name of the sky culture
 		N_("Northern Andes");
 
 		
