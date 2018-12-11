@@ -1141,9 +1141,17 @@ void Worksheet::saveToXmlFile(QIODevice *device) const
 	writer.writeAttribute(QStringLiteral("xmlns:r"), QStringLiteral("http://schemas.openxmlformats.org/officeDocument/2006/relationships"));
 
 	//for Excel 2010
-	//    writer.writeAttribute("xmlns:mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-	//    writer.writeAttribute("xmlns:x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
-	//    writer.writeAttribute("mc:Ignorable", "x14ac");
+	writer.writeAttribute("xmlns:mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+	writer.writeAttribute("xmlns:x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
+	writer.writeAttribute("mc:Ignorable", "x14ac");
+
+	//for Excel 365
+	//writer.writeAttribute(QStringLiteral("mc:Ignorable"), QStringLiteral("x14ac xr xr2 xr3"));
+	//writer.writeAttribute(QStringLiteral("xmlns:x14ac"), QStringLiteral("http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac"));
+	//writer.writeAttribute(QStringLiteral("xmlns:xr"), QStringLiteral("http://schemas.microsoft.com/office/spreadsheetml/2014/revision"));
+	//writer.writeAttribute(QStringLiteral("xmlns:xr2"), QStringLiteral("http://schemas.microsoft.com/office/spreadsheetml/2015/revision2"));
+	//writer.writeAttribute(QStringLiteral("xmlns:xr3"), QStringLiteral("http://schemas.microsoft.com/office/spreadsheetml/2016/revision3"));
+	//writer.writeAttribute(QStringLiteral("xr:uid"), QStringLiteral("{00000000-0000-0000-0000-000000000000}"));
 
 	writer.writeStartElement(QStringLiteral("dimension"));
 	writer.writeAttribute(QStringLiteral("ref"), d->generateDimensionString());
@@ -1228,6 +1236,9 @@ void Worksheet::saveToXmlFile(QIODevice *device) const
 	//{{ liufeijin
     // write  pagesettings  add by liufeijin 20181028
 
+	//TODO: Implement option to define page margins for XLSX files
+	//NOTE: Empty pageMargins element caused problem when document is opened by MS Excel
+	/*
     writer.writeEmptyElement(QStringLiteral("pageMargins"));
     if(!d->PMleft.isEmpty()){
     writer.writeAttribute(QStringLiteral("left"), d->PMleft);}
@@ -1241,6 +1252,7 @@ void Worksheet::saveToXmlFile(QIODevice *device) const
     writer.writeAttribute(QStringLiteral("header"), d->PMheader);}
     if(!d->PMfooter.isEmpty()){
     writer.writeAttribute(QStringLiteral("footer"), d->PMfooter);}
+    */
 
     writer.writeEmptyElement(QStringLiteral("pageSetup"));
     if(!d->PverticalDpi.isEmpty()){
