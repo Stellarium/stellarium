@@ -112,12 +112,12 @@ public:
 
 	//! Return the list objects of type "withType" which was recently selected by the user.
 	//! @param type return only objects of the given type
-	QList<StelObjectP> getSelectedObject(const QString& type);
+	QList<StelObjectP> getSelectedObject(const QString& type) const;
 
 	//! Set whether a pointer is to be drawn over selected object.
 	void setFlagSelectedObjectPointer(bool b) {objectPointerVisibility=b;}
 	//! Get whether a pointer is to be drawn over selected object.
-	bool getFlagSelectedObjectPointer(void) {return objectPointerVisibility;}
+	bool getFlagSelectedObjectPointer(void) const {return objectPointerVisibility;}
 
 	//! Find any kind of object by its translated name.
 	StelObjectP searchByNameI18n(const QString &name) const;

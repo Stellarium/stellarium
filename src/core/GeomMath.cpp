@@ -152,7 +152,7 @@ Line::Line(const Vec3f &p, const Vec3f &dir)
 	endPoint = startPoint + direction;
 }
 
-Vec3f Line::getPoint(float val)
+Vec3f Line::getPoint(float val) const
 {
 	return startPoint + (val*direction);
 }

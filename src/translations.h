@@ -73,6 +73,8 @@ class Translations
 		// TRANSLATORS: Type of object
 		N_("sednoid");
 		// TRANSLATORS: Type of object
+		N_("interstellar object");
+		// TRANSLATORS: Type of object
 		N_("observer");
 		// TRANSLATORS: Type of object
 		N_("artificial");
@@ -96,6 +98,8 @@ class Translations
 		N_("Oort cloud objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Sednoids");
+		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
+		N_("Interstellar objects");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Constellations");
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
@@ -452,6 +456,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Chinese");
 		// TRANSLATORS: Name of the sky culture
+		N_("Chinese Contemporary");
+		// TRANSLATORS: Name of the sky culture
 		N_("Egyptian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Hawaiian Starlines");
@@ -501,6 +507,8 @@ class Translations
 		N_("Western (H.A.Rey)");
 		// TRANSLATORS: Name of the sky culture
 		N_("Western (O.Hlad)");
+		// TRANSLATORS: Name of the sky culture
+		N_("Western (Sky & Telescope)");
 		// TRANSLATORS: Name of the sky culture
 		N_("Northern Andes");
 
@@ -625,6 +633,8 @@ class Translations
 		N_("Occultations of bright stars by planets");
 		// TRANSLATORS: Name of script
 		N_("Mutual occultations of planets");
+		// TRANSLATORS: Name of script
+		N_("Planet Objects Tour");
 		
 		// =====================================================================
 		// Script descriptions
@@ -666,6 +676,7 @@ class Translations
 		N_("The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstrates these rare phenomena from 1900 to 2100 in Dynamical Time.");
 		N_("This script demonstrates interesting phenomena - occultations bright stars by planets, 2000 to 2040.");
 		N_("This script demonstrates interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.");
+		N_("A tour of the Solar System planets");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)

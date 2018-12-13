@@ -234,7 +234,7 @@ Vec3d gSatWrapper::getSunECIPos()
 
 // Operation getVisibilityPredict
 // @brief This operation predicts the satellite visibility conditions.
-gSatWrapper::Visibility gSatWrapper::getVisibilityPredict()
+gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 {
 	Vec3d satAltAzPos = getAltAz();
 

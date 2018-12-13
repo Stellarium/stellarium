@@ -99,9 +99,6 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	if (!map.contains("name") || !map.contains("tle1") || !map.contains("tle2"))
 		return;
 
-	// Font size is 16
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+3);
-
 	id = identifier;
 	name  = map.value("name").toString();
 	if (name.isEmpty())
@@ -329,6 +326,18 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		// TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered inertial coordinate system
 		oss << QString("%1: %2 %3").arg(q_("TEME velocity")).arg(temeVel).arg(qc_("km/s", "speed")) << "<br/>";
 
+		bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+		QString pha;
+		if (withDecimalDegree)
+		{
+			pha = StelUtils::radToDecDegStr(phaseAngle,4,false,true);
+		}
+		else
+		{
+			pha = StelUtils::radToDmsStr(phaseAngle, true);
+		}
+		oss << QString("%1: %2").arg(q_("Phase angle"), pha) << "<br />";
+
 		if (sunReflAngle>0)
 		{  // Iridium
 			oss << QString("%1: %2%3").arg(q_("Sun reflection angle"))
@@ -376,6 +385,7 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 
 		if (comms.size() > 0)
 		{
+			oss << q_("Radio communication") << ":<br/>";
 			for (const auto& c : comms)
 			{
 				double dop = getDoppler(c.frequency);
@@ -389,17 +399,16 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 				else
 					sign='+';
 
-				oss << "<br/>";
 				if (!c.modulation.isEmpty() && c.modulation != "") oss << "  " << c.modulation;
 				if (!c.description.isEmpty() && c.description != "") oss << "  " << c.description;
-				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << "<br/>";
-				oss << QString("%1 %2 (%3%4%5)")
-				       .arg(qc_("MHz", "frequency"))
+				if ((!c.modulation.isEmpty() && c.modulation != "") || (!c.description.isEmpty() && c.description != "")) oss << ": ";
+				oss << QString("%1 %2 (%3%4 %5)")
 				       .arg(c.frequency, 8, 'f', 5)
+				       .arg(qc_("MHz", "frequency"))
 				       .arg(sign)
 				       .arg(ddop, 6, 'f', 3)
 				       .arg(qc_("kHz", "frequency"));
-				oss << "<br />";
+				oss << "<br/>";
 			}
 		}
 	}
@@ -442,6 +451,9 @@ QVariantMap Satellite::getInfoMap(const StelCore *core) const
 		map.insert("sun-reflection-angle", sunReflAngle);
 	}
 	map.insert("operational-status", getOperationalStatus());
+	map.insert("phase-angle", phaseAngle);
+	map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
+	map.insert("phase-angle-deg", StelUtils::radToDecDegStr(phaseAngle));
 
 	//TODO: Move to a more prominent place.
 	QString visibilityState;

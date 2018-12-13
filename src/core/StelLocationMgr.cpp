@@ -1071,3 +1071,20 @@ QString StelLocationMgr::sanitizeTimezoneStringFromLocationDB(QString dbString)
 		return QString(res);
 	return dbString;
 }
+
+QStringList StelLocationMgr::getAllTimezoneNames() const
+{
+	QStringList ret;
+
+	QMapIterator<QString, StelLocation> iter(locations);
+	while (iter.hasNext())
+	{
+		iter.next();
+		const StelLocation *loc=&iter.value();
+		QString tz(loc->ianaTimeZone);
+		if (!ret.contains(tz))
+			ret.append(tz);
+	}
+	ret.sort();
+	return ret;
+}
