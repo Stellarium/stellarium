@@ -5807,7 +5807,6 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		}
 
 		QList<double> aX, aY;
-		QVector<double> xs, ys;
 		Vec3d selectedObjectPosition, moonPosition;
 		double currentJD = core->getJD();
 		double JD, distance, dd;

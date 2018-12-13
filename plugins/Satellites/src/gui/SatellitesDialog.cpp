@@ -485,7 +485,7 @@ void SatellitesDialog::updateSatelliteData()
 	Vec3f vColor;
 
 	// set default
-	buttonColor = QColor(0.4, 0.4, 0.4);
+	buttonColor = QColor(QColor::fromRgbF(0.4, 0.4, 0.4));
 
 
 	if (selection.count() > 1)

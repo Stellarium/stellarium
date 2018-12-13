@@ -151,15 +151,15 @@ void MSConfigDialog::refreshUpdateTab()
 void MSConfigDialog::refreshMarkersColor()
 {
 	Vec3f c = m_mgr->getColorARG();
-	QColor color(c[0], c[1], c[2]);
+	QColor color(QColor::fromRgbF(c[0], c[1], c[2]));
 	m_ui->setColorARG->setStyleSheet("background-color:" + color.name() + ";");
 
 	c = m_mgr->getColorARC();
-	color = QColor(c[0], c[1], c[2]);
+	color = QColor(QColor::fromRgbF(c[0], c[1], c[2]));
 	m_ui->setColorARC->setStyleSheet("background-color:" + color.name() + ";");
 
 	c = m_mgr->getColorIR();
-	color = QColor(c[0], c[1], c[2]);
+	color = QColor(QColor::fromRgbF(c[0], c[1], c[2]));
 	m_ui->setColorIR->setStyleSheet("background-color:" + color.name() + ";");
 }
 

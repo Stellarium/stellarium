@@ -779,8 +779,8 @@ void LandscapeMgr::onTargetLocationChanged(StelLocation loc)
 			if (pl && flagEnvironmentAutoEnabling)
 			{
 				QSettings* conf = StelApp::getInstance().getSettings();
-				setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
-				setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
 				setFlagLandscape(true);
 			}
 		}
