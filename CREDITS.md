@@ -442,7 +442,7 @@
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC936, NGC1232, NGC1313, NGC1316,
-	     NGC2207, NGC2736, NGC3532, NGC5128, NGC5189, NGC6362, NGC6769, NGC6822, NGC7793
+	     NGC1978, NGC2207, NGC2736, NGC3532, NGC5128, NGC5189, NGC6362, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
