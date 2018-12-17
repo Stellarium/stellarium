@@ -277,16 +277,15 @@
 	4.5a Jupiter map created by James Hastings-Trew from Cassini data. "The 
 	     maps are free to download and use as source material or resource
 	     in artwork or rendering (CGI or real time)."
-	4.5b The Sun, Proteus and Iapetus maps and rings of Uranus 
+	4.5b The Sun and Iapetus maps and rings of Uranus 
 	     are from Celestia (http://shatters.net/celestia/)
 	     under the GNU General Purpose License, version 2 or any later
 	     version:
-	     - The Proteus map is from Phil Stooke.
 	     - Iapetus map is from dr. Fridger Schrempp (t00fri).
 	4.5c The Amalthea, Europa, Ganymede, Gaspra,Mercury, Uranus, Neptune, Mimas,
 	     Bianca, Epimetheus, Ida, Vesta, Hyperion, Io, Janus, Phoebe, Saturn, 
-	     Tethys, Venus, Ceres, Uranus, Epimetheus, Deimos and comet maps are 
-	     processed by Oleg Pluton a.k.a Helleformer
+	     Tethys, Venus, Ceres, Uranus, Epimetheus, Deimos, Proteus and comet
+             maps are processed by Oleg Pluton a.k.a Helleformer
 	     License: Creative Commons Attribution 4.0 International
 	4.5d The Titania, Umbriel, Pluto, Charon, Sedna and 2007 OR10 maps are created
 	     by Kexitt and postprocessed by Oleg Pluton a.k.a Helleformer
