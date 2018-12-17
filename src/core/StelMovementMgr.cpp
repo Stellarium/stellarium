@@ -501,7 +501,17 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			break;
 		}
 		case Qt::LeftButton :
-			if (event->type()==QEvent::MouseButtonPress)
+			if (event->type()==QEvent::MouseButtonDblClick)
+			{
+				if (objectMgr->getWasSelected())
+				{
+					moveToObject(objectMgr->getSelectedObject()[0],autoMoveDuration);
+					setFlagTracking(true);
+				}
+				event->accept();
+				return;
+			}
+			else if (event->type()==QEvent::MouseButtonPress)
 			{
 				if (event->modifiers() & Qt::ControlModifier)
 				{

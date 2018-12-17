@@ -509,8 +509,8 @@ private:
 				//note: the old code seems to have ignored double clicks
 				// and handled them the same as normal mouse presses
 				//if we ever want to handle double clicks, switch out these lines
-				//t = QEvent::MouseButtonDblClick;
-				t = QEvent::MouseButtonPress;
+				t = QEvent::MouseButtonDblClick;
+				//t = QEvent::MouseButtonPress;
 				break;
 			default:
 				//warn in release and assert in debug
