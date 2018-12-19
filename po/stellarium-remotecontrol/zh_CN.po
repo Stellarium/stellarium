@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# cardinot <mcardinot@gmail.com>, 2017
+# 殳玮 孙 <itun@qq.com>, 2018
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-10-27 13:49+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-18 12:13+0700\n"
+"PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2018\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +81,7 @@ msgstr "错误 (%1)"
 msgid "Error performing Simbad lookup"
 msgstr "执行Simbad查找时出错"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
 msgstr "空闲"
@@ -104,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "无法检索横向列表"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:524
-#: index.html:581 tablet7in.html:701 tablet7in.html:761
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
+#: index.html:676 tablet7in.html:724 tablet7in.html:784
 msgid "-none-"
 msgstr "-无-"
 
@@ -225,15 +229,15 @@ msgstr "近点世纪"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr "平均热带月"
+msgstr "平回归月"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr "平均回归年"
+msgstr "平回归年"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
-msgstr "平均热带世纪"
+msgstr "平回归世纪"
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
@@ -247,189 +251,217 @@ msgstr "儒略年"
 msgid "Julian century"
 msgstr "儒略世纪"
 
-#: index.html:123 tablet7in.html:138
+#: index.html:123 tablet7in.html:101
+msgid "View towards horizon at Azimuth"
+msgstr "在地平线上显示方位角"
+
+#: index.html:144 tablet7in.html:123
+msgid "Vertical View offset"
+msgstr "垂直视图偏移"
+
+#: index.html:154 tablet7in.html:133
+msgid "Reset"
+msgstr "重置"
+
+#: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "视场角"
 
-#: index.html:141 tablet7in.html:229
+#: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
 msgstr "输入关键字用TAB键导航"
 
-#: index.html:142 tablet7in.html:230
+#: index.html:214 tablet7in.html:230
 msgid "Select and focus"
 msgstr "选择并聚焦"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Selection mode"
 msgstr "选择模式"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center on object"
 msgstr "对象中心"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
 msgstr "居中并且放大对象"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
 msgstr "仅标记对象"
 
-#: index.html:170 tablet7in.html:261
+#: index.html:242 tablet7in.html:261
 msgid "Quick select"
 msgstr "快速选择"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Earth"
 msgstr "地球"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Pluto"
 msgstr "冥王星"
 
-#: index.html:180 tablet7in.html:294
+#: index.html:252 tablet7in.html:294
 msgid "Current selection"
 msgstr "选中区域"
 
-#: index.html:196 tablet7in.html:321
+#: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
 msgstr "银河亮度："
 
-#: index.html:200 tablet7in.html:333
+#: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
 msgstr "数字巡天"
 
-#: index.html:243 tablet7in.html:399
+#: index.html:273 tablet7in.html:334
+msgid "HiPS Survey"
+msgstr "分层渐进式巡天"
+
+#: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
 msgstr "流星"
 
-#: index.html:244 tablet7in.html:400
+#: index.html:323 tablet7in.html:410
 msgid "ZHR:"
 msgstr "ZHR(每小时天顶流星数)："
 
-#: index.html:288 tablet7in.html:452
+#: index.html:368 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr "地球轴章动的瞬时圆周围绕黄极的运动。 仅在地球上显示。"
 
-#: index.html:297 tablet7in.html:461
+#: index.html:377 tablet7in.html:472
 msgid "Solstices"
 msgstr "至点"
 
-#: index.html:298 tablet7in.html:462
+#: index.html:378 tablet7in.html:473
 msgid "Crossquarters"
 msgstr "交点"
 
-#: index.html:299 tablet7in.html:463
+#: index.html:379 tablet7in.html:474
 msgid "Major Standstill"
-msgstr "主要停留"
+msgstr "主要停变期"
 
-#: index.html:300 tablet7in.html:464
+#: index.html:380 tablet7in.html:475
 msgid "Minor Standstill"
-msgstr "次要停留"
+msgstr "次要停变期"
 
-#: index.html:310 tablet7in.html:474
+#: index.html:389 tablet7in.html:484
 msgid "Current Planet:"
-msgstr "当前星球"
+msgstr "当前星球："
 
-#: index.html:438 tablet7in.html:596
+#: index.html:521 tablet7in.html:610
 msgid "Bright Nebulae"
 msgstr "亮星云"
 
-#: index.html:439 tablet7in.html:597
+#: index.html:522 tablet7in.html:611
 msgid "Dark Nebulae"
 msgstr "暗星云"
 
-#: index.html:440 tablet7in.html:598
+#: index.html:523 tablet7in.html:612
 msgid "Planetary Nebulae"
 msgstr "行星状星云"
 
-#: index.html:449 tablet7in.html:607
+#: index.html:532 tablet7in.html:621
 msgid "Labels and markers"
 msgstr "标签和标识"
 
-#: index.html:478 tablet7in.html:636
+#: index.html:566 tablet7in.html:655
 msgid "Show illumination"
 msgstr "显示光照"
 
-#: index.html:483 tablet7in.html:642
+#: index.html:571 tablet7in.html:661
 msgid "Current landscape"
 msgstr "当前地景"
 
-#: index.html:495 tablet7in.html:655
+#: index.html:583 tablet7in.html:674
 msgid "Show lines with thickness"
-msgstr "按粗细显示线条"
+msgstr "连线显示粗细"
 
-#: index.html:500 tablet7in.html:660
+#: index.html:588 tablet7in.html:679
 msgid "Show asterisms with thickness"
-msgstr "显示星座厚度"
+msgstr "星群连线显示粗细"
 
-#: index.html:511 tablet7in.html:676
+#: index.html:592 tablet7in.html:683
+msgid "Show ray helpers with thickness"
+msgstr "导航辅助线显示粗细"
+
+#: index.html:602 tablet7in.html:695
+msgid "Constellation selection isolated"
+msgstr "隔离所选星座"
+
+#: index.html:606 tablet7in.html:699
 msgid "Current sky culture"
-msgstr "星空术语"
+msgstr "星空文化"
 
-#: index.html:524 tablet7in.html:701
+#: index.html:619 tablet7in.html:724
 msgid "Active script:"
 msgstr "活动脚本"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:620 tablet7in.html:725
 msgid "Run selected script"
 msgstr "运行所选脚本"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:620 tablet7in.html:725
 msgid "Stop current script"
 msgstr "停止当前脚本"
 
-#: index.html:530 tablet7in.html:41 tablet7in.html:686
+#: index.html:625 tablet7in.html:41 tablet7in.html:709
 msgid "Actions"
 msgstr "动作"
 
-#: index.html:534 tablet7in.html:690
+#: index.html:629 tablet7in.html:713
 msgid "Run/toggle action"
 msgstr "运行/切换动作"
 
-#: index.html:545 tablet7in.html:725
+#: index.html:640 tablet7in.html:748
 msgid "Planet map"
 msgstr "行星地图"
 
-#: index.html:546 tablet7in.html:726
+#: index.html:641 tablet7in.html:749
 msgid "Planet map pointer"
-msgstr "星系地图鼠标"
+msgstr "行星地图鼠标"
 
-#: index.html:550 tablet7in.html:730
+#: index.html:645 tablet7in.html:753
 msgid "Type to search location"
 msgstr "搜索位置"
 
-#: index.html:579 tablet7in.html:759
+#: index.html:674 tablet7in.html:782
 msgid "Interaction"
 msgstr "交互"
 
-#: index.html:580 tablet7in.html:760
+#: index.html:675 tablet7in.html:783
 msgid "Current scene:"
 msgstr "当前场景"
 
-#: index.html:583 tablet7in.html:763
+#: index.html:678 tablet7in.html:786
 msgid "View controls"
 msgstr "查看控件"
 
-#: index.html:589 tablet7in.html:769
+#: index.html:684 tablet7in.html:792
 msgid "Movement controls"
 msgstr "运动控制"
 
-#: index.html:605 tablet7in.html:785
+#: index.html:696 tablet7in.html:804
+msgid "Torchlight"
+msgstr "光照"
+
+#: index.html:703 tablet7in.html:811
 msgid "Scene selection"
 msgstr "场景选择"
 
-#: index.html:609 tablet7in.html:789
+#: index.html:707 tablet7in.html:815
 msgid "Load selected scene"
 msgstr "加载所有场景"
 
-#: index.html:633 tablet7in.html:814
+#: index.html:731 tablet7in.html:840
 msgid "No response from server"
 msgstr "服务器没有响应"
 
-#: index.html:634 tablet7in.html:815
+#: index.html:732 tablet7in.html:841
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "无响应 %1秒，Stellarium是否继续运行"
 
@@ -480,18 +512,6 @@ msgstr "下"
 #: tablet7in.html:97
 msgid "Down/Right"
 msgstr "下/右"
-
-#: tablet7in.html:101
-msgid "View towards horizon at Azimuth"
-msgstr "在地平线上显示方位角"
-
-#: tablet7in.html:123
-msgid "Vertical View offset"
-msgstr "垂直视图偏移"
-
-#: tablet7in.html:133
-msgid "Reset"
-msgstr "重置"
 
 #: tablet7in.html:266
 msgid "Sirius"
@@ -585,22 +605,18 @@ msgstr "宝瓶座"
 msgid "Pisces"
 msgstr "双鱼座"
 
-#: tablet7in.html:672
-msgid "Constellation selection isolated"
-msgstr "隔离所选星座"
-
-#: tablet7in.html:710
+#: tablet7in.html:733
 msgid "Favorites"
 msgstr "收藏"
 
-#: tablet7in.html:712
+#: tablet7in.html:735
 msgid "Show 1"
 msgstr "显示1"
 
-#: tablet7in.html:713
+#: tablet7in.html:736
 msgid "Remove Labels and Images"
 msgstr "删除标签和图像"
 
-#: tablet7in.html:713
+#: tablet7in.html:736
 msgid "Cleanup Screen"
 msgstr "清除屏幕"

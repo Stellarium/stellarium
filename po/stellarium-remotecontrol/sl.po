@@ -3,13 +3,16 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# cardinot <mcardinot@gmail.com>, 2017
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-10-27 13:49+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2018-12-18 12:13+0700\n"
+"PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Slovenian (https://www.transifex.com/stellarium/teams/80998/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -77,7 +80,7 @@ msgstr ""
 msgid "Error performing Simbad lookup"
 msgstr ""
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
 msgstr ""
@@ -104,8 +107,8 @@ msgid "Could not retrieve landscape list"
 msgstr ""
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:524
-#: index.html:581 tablet7in.html:701 tablet7in.html:761
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
+#: index.html:676 tablet7in.html:724 tablet7in.html:784
 msgid "-none-"
 msgstr ""
 
@@ -247,189 +250,217 @@ msgstr ""
 msgid "Julian century"
 msgstr ""
 
-#: index.html:123 tablet7in.html:138
+#: index.html:123 tablet7in.html:101
+msgid "View towards horizon at Azimuth"
+msgstr ""
+
+#: index.html:144 tablet7in.html:123
+msgid "Vertical View offset"
+msgstr ""
+
+#: index.html:154 tablet7in.html:133
+msgid "Reset"
+msgstr ""
+
+#: index.html:160 tablet7in.html:138
 msgid "FOV"
 msgstr "Vidno polje"
 
-#: index.html:141 tablet7in.html:229
+#: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
 
-#: index.html:142 tablet7in.html:230
+#: index.html:214 tablet7in.html:230
 msgid "Select and focus"
 msgstr ""
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Selection mode"
 msgstr ""
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center on object"
 msgstr ""
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
 msgstr ""
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
 msgstr ""
 
-#: index.html:170 tablet7in.html:261
+#: index.html:242 tablet7in.html:261
 msgid "Quick select"
 msgstr ""
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Earth"
 msgstr "Zemlja"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Pluto"
 msgstr "Pluton"
 
-#: index.html:180 tablet7in.html:294
+#: index.html:252 tablet7in.html:294
 msgid "Current selection"
 msgstr ""
 
-#: index.html:196 tablet7in.html:321
+#: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
 msgstr ""
 
-#: index.html:200 tablet7in.html:333
+#: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
 msgstr ""
 
-#: index.html:243 tablet7in.html:399
+#: index.html:273 tablet7in.html:334
+msgid "HiPS Survey"
+msgstr ""
+
+#: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
 msgstr ""
 
-#: index.html:244 tablet7in.html:400
+#: index.html:323 tablet7in.html:410
 msgid "ZHR:"
 msgstr ""
 
-#: index.html:288 tablet7in.html:452
+#: index.html:368 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
 
-#: index.html:297 tablet7in.html:461
+#: index.html:377 tablet7in.html:472
 msgid "Solstices"
 msgstr ""
 
-#: index.html:298 tablet7in.html:462
+#: index.html:378 tablet7in.html:473
 msgid "Crossquarters"
 msgstr ""
 
-#: index.html:299 tablet7in.html:463
+#: index.html:379 tablet7in.html:474
 msgid "Major Standstill"
 msgstr ""
 
-#: index.html:300 tablet7in.html:464
+#: index.html:380 tablet7in.html:475
 msgid "Minor Standstill"
 msgstr ""
 
-#: index.html:310 tablet7in.html:474
+#: index.html:389 tablet7in.html:484
 msgid "Current Planet:"
 msgstr ""
 
-#: index.html:438 tablet7in.html:596
+#: index.html:521 tablet7in.html:610
 msgid "Bright Nebulae"
 msgstr ""
 
-#: index.html:439 tablet7in.html:597
+#: index.html:522 tablet7in.html:611
 msgid "Dark Nebulae"
 msgstr ""
 
-#: index.html:440 tablet7in.html:598
+#: index.html:523 tablet7in.html:612
 msgid "Planetary Nebulae"
 msgstr "Planetarne meglice"
 
-#: index.html:449 tablet7in.html:607
+#: index.html:532 tablet7in.html:621
 msgid "Labels and markers"
 msgstr "Oznake in označbe"
 
-#: index.html:478 tablet7in.html:636
+#: index.html:566 tablet7in.html:655
 msgid "Show illumination"
 msgstr ""
 
-#: index.html:483 tablet7in.html:642
+#: index.html:571 tablet7in.html:661
 msgid "Current landscape"
 msgstr ""
 
-#: index.html:495 tablet7in.html:655
+#: index.html:583 tablet7in.html:674
 msgid "Show lines with thickness"
 msgstr ""
 
-#: index.html:500 tablet7in.html:660
+#: index.html:588 tablet7in.html:679
 msgid "Show asterisms with thickness"
 msgstr ""
 
-#: index.html:511 tablet7in.html:676
+#: index.html:592 tablet7in.html:683
+msgid "Show ray helpers with thickness"
+msgstr ""
+
+#: index.html:602 tablet7in.html:695
+msgid "Constellation selection isolated"
+msgstr ""
+
+#: index.html:606 tablet7in.html:699
 msgid "Current sky culture"
 msgstr ""
 
-#: index.html:524 tablet7in.html:701
+#: index.html:619 tablet7in.html:724
 msgid "Active script:"
 msgstr ""
 
-#: index.html:525 tablet7in.html:702
+#: index.html:620 tablet7in.html:725
 msgid "Run selected script"
 msgstr ""
 
-#: index.html:525 tablet7in.html:702
+#: index.html:620 tablet7in.html:725
 msgid "Stop current script"
 msgstr ""
 
-#: index.html:530 tablet7in.html:41 tablet7in.html:686
+#: index.html:625 tablet7in.html:41 tablet7in.html:709
 msgid "Actions"
 msgstr ""
 
-#: index.html:534 tablet7in.html:690
+#: index.html:629 tablet7in.html:713
 msgid "Run/toggle action"
 msgstr ""
 
-#: index.html:545 tablet7in.html:725
+#: index.html:640 tablet7in.html:748
 msgid "Planet map"
 msgstr ""
 
-#: index.html:546 tablet7in.html:726
+#: index.html:641 tablet7in.html:749
 msgid "Planet map pointer"
 msgstr ""
 
-#: index.html:550 tablet7in.html:730
+#: index.html:645 tablet7in.html:753
 msgid "Type to search location"
 msgstr ""
 
-#: index.html:579 tablet7in.html:759
+#: index.html:674 tablet7in.html:782
 msgid "Interaction"
 msgstr ""
 
-#: index.html:580 tablet7in.html:760
+#: index.html:675 tablet7in.html:783
 msgid "Current scene:"
 msgstr ""
 
-#: index.html:583 tablet7in.html:763
+#: index.html:678 tablet7in.html:786
 msgid "View controls"
 msgstr ""
 
-#: index.html:589 tablet7in.html:769
+#: index.html:684 tablet7in.html:792
 msgid "Movement controls"
 msgstr ""
 
-#: index.html:605 tablet7in.html:785
+#: index.html:696 tablet7in.html:804
+msgid "Torchlight"
+msgstr ""
+
+#: index.html:703 tablet7in.html:811
 msgid "Scene selection"
 msgstr ""
 
-#: index.html:609 tablet7in.html:789
+#: index.html:707 tablet7in.html:815
 msgid "Load selected scene"
 msgstr ""
 
-#: index.html:633 tablet7in.html:814
+#: index.html:731 tablet7in.html:840
 msgid "No response from server"
 msgstr ""
 
-#: index.html:634 tablet7in.html:815
+#: index.html:732 tablet7in.html:841
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 
@@ -479,18 +510,6 @@ msgstr ""
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr ""
-
-#: tablet7in.html:101
-msgid "View towards horizon at Azimuth"
-msgstr ""
-
-#: tablet7in.html:123
-msgid "Vertical View offset"
-msgstr ""
-
-#: tablet7in.html:133
-msgid "Reset"
 msgstr ""
 
 #: tablet7in.html:266
@@ -585,22 +604,18 @@ msgstr "Vodnar"
 msgid "Pisces"
 msgstr "Ribi"
 
-#: tablet7in.html:672
-msgid "Constellation selection isolated"
-msgstr ""
-
-#: tablet7in.html:710
+#: tablet7in.html:733
 msgid "Favorites"
 msgstr ""
 
-#: tablet7in.html:712
+#: tablet7in.html:735
 msgid "Show 1"
 msgstr ""
 
-#: tablet7in.html:713
+#: tablet7in.html:736
 msgid "Remove Labels and Images"
 msgstr ""
 
-#: tablet7in.html:713
+#: tablet7in.html:736
 msgid "Cleanup Screen"
 msgstr ""

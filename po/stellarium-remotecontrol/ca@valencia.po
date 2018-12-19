@@ -3,14 +3,18 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# cardinot <mcardinot@gmail.com>, 2017
+# Empar Montoro <emontra2018@gmail.com>, 2018
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-10-27 13:49+0700\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
+"POT-Creation-Date: 2018-12-18 12:13+0700\n"
+"PO-Revision-Date: 2017-11-29 01:19+0000\n"
+"Last-Translator: Empar Montoro <emontra2018@gmail.com>, 2018\n"
 "Language-Team: Catalan (Valencian) (https://www.transifex.com/stellarium/teams/80998/ca%40valencia/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,17 +28,17 @@ msgstr "No s'ha pogut recuperar la llista d'accions"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr "Acció '%1' no es acceptada pel servidor: "
+msgstr "Acció '%1' no és acceptada pel servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr "Error enviant acció '%1' al servidor: "
+msgstr "Error quan s'enviava l'acció '%1' al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
 #: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
-msgstr "S'ha produït un error en a l'hora de buscar"
+msgstr "S'ha produït un error en fer la cerca"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
@@ -55,19 +59,19 @@ msgstr "Propietat '%1' no acceptada pel servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr "Error enviant propietat '%1' al servidor: "
+msgstr "Error en enviar la propietat '%1' al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr "Error enviant comandaments al servidor: "
+msgstr "Error en enviar els comandaments al servidor: "
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr "No s'ha pogut recuperar la llista d'scripts"
+msgstr "No s'ha pogut recuperar la llista de scripts"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
-msgstr "consultant"
+msgstr "s'està consultant"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
@@ -75,24 +79,24 @@ msgstr "Error (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr "Error al realitzar operacions de recerca Simbad"
+msgstr "Error en realitzar la cerca en Simbad"
 
-#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:147
+#: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
 msgstr "inactiu"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr "Error carregant tipus d'objecte"
+msgstr "Error en carregar el tipus d'objecte"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr "Error obtenint la llista d'objectes"
+msgstr "Error en obtenir la llista d'objectes"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
-msgstr "esperant"
+msgstr "s'està esperant"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
@@ -104,18 +108,18 @@ msgid "Could not retrieve landscape list"
 msgstr "No s'ha pogut recuperar la llista de paisatges"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:524
-#: index.html:581 tablet7in.html:701 tablet7in.html:761
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
+#: index.html:676 tablet7in.html:724 tablet7in.html:784
 msgid "-none-"
 msgstr "-cap-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(S'està carregant actualment: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "No es pot recuperar la llista de Scenery3d"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
@@ -129,7 +133,7 @@ msgstr "desactivat"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr "Mostra Tots els Elements"
+msgstr "Mostra tots els elements"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
@@ -141,11 +145,11 @@ msgstr "Sense selecció actual"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
-msgstr "Plugin de control remot de Stellarium"
+msgstr "Connector de control remot de Stellarium"
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr "Per favor espere, carregant"
+msgstr "S'està carregant, espereu"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
@@ -165,7 +169,7 @@ msgstr "Accions i scripts"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
@@ -201,11 +205,11 @@ msgstr "Mes sinòdic"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr "Mes draconià"
+msgstr "Mes dracòntic"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr "Any draconià"
+msgstr "Any dracòntic"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
@@ -225,19 +229,19 @@ msgstr "Segle anomalístic"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr "Mes mitjà tropical"
+msgstr "Mes tròpic mitjà"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr "Any mitjà tropical"
+msgstr "Any tròpic mitjà"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
-msgstr "Segle mitjà tropical"
+msgstr "Segle tròpic mitjà"
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
-msgstr "Any tropical"
+msgstr "Any tròpic"
 
 #: index.html:110 tablet7in.html:209
 msgid "Julian year"
@@ -247,197 +251,225 @@ msgstr "Any julià"
 msgid "Julian century"
 msgstr "Segle julià"
 
-#: index.html:123 tablet7in.html:138
-msgid "FOV"
-msgstr "FOV"
+#: index.html:123 tablet7in.html:101
+msgid "View towards horizon at Azimuth"
+msgstr "Vista cap a l'horitzó en l'azimut"
 
-#: index.html:141 tablet7in.html:229
+#: index.html:144 tablet7in.html:123
+msgid "Vertical View offset"
+msgstr "Desfasament de la vista vertical"
+
+#: index.html:154 tablet7in.html:133
+msgid "Reset"
+msgstr "Reinicia"
+
+#: index.html:160 tablet7in.html:138
+msgid "FOV"
+msgstr "FOV, camp de visió"
+
+#: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
 msgstr ""
-"Introdueix els termes de búsqueda. Utilitza TAB per desplaçar-se entre els "
+"Introduïu els termes de cerca. Utilitzeu TAB per desplaçar-vos entre els "
 "resultats."
 
-#: index.html:142 tablet7in.html:230
+#: index.html:214 tablet7in.html:230
 msgid "Select and focus"
 msgstr "Selecció i enfocament"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Mode de selecció"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Centra en l'objecte"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Centra i apropa a l'objecte"
 
-#: index.html:168 tablet7in.html:259
+#: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Marca sols l'objecte"
 
-#: index.html:170 tablet7in.html:261
+#: index.html:242 tablet7in.html:261
 msgid "Quick select"
 msgstr "Selecció ràpida"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Earth"
 msgstr "Terra"
 
-#: index.html:174 tablet7in.html:265
+#: index.html:246 tablet7in.html:265
 msgid "Pluto"
 msgstr "Plutó"
 
-#: index.html:180 tablet7in.html:294
+#: index.html:252 tablet7in.html:294
 msgid "Current selection"
 msgstr "Selecció actual"
 
-#: index.html:196 tablet7in.html:321
+#: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Brillantor de la Via Làctia:"
 
-#: index.html:200 tablet7in.html:333
+#: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
+msgstr "Estudi digital del cel"
+
+#: index.html:273 tablet7in.html:334
+msgid "HiPS Survey"
 msgstr ""
 
-#: index.html:243 tablet7in.html:399
+#: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Estreles fugaces"
 
-#: index.html:244 tablet7in.html:400
+#: index.html:323 tablet7in.html:410
 msgid "ZHR:"
-msgstr "ZHR"
+msgstr "THZ:"
 
-#: index.html:288 tablet7in.html:452
+#: index.html:368 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
-"Cercles instantanis de l'eix de la Terra en el seu moviment al voltant dels "
+"Cercles instantanis d'eix de la Terra en el seu moviment al voltant dels "
 "pols de l'eclíptica. Es mostra només en la Terra."
 
-#: index.html:297 tablet7in.html:461
+#: index.html:377 tablet7in.html:472
 msgid "Solstices"
 msgstr "Solsticis"
 
-#: index.html:298 tablet7in.html:462
+#: index.html:378 tablet7in.html:473
 msgid "Crossquarters"
-msgstr "Punt intermedi entre Solstici i Equinocci"
+msgstr "Crossquarters, punts intermedis entre solstici i equinocci"
 
-#: index.html:299 tablet7in.html:463
+#: index.html:379 tablet7in.html:474
 msgid "Major Standstill"
-msgstr "Lunistici Major"
+msgstr "Lunistici major"
 
-#: index.html:300 tablet7in.html:464
+#: index.html:380 tablet7in.html:475
 msgid "Minor Standstill"
-msgstr "Lunistici Menor"
+msgstr "Lunistici menor"
 
-#: index.html:310 tablet7in.html:474
+#: index.html:389 tablet7in.html:484
 msgid "Current Planet:"
-msgstr "Planeta Actual:"
+msgstr "Planeta actual:"
 
-#: index.html:438 tablet7in.html:596
+#: index.html:521 tablet7in.html:610
 msgid "Bright Nebulae"
-msgstr "Nebuloses Brillants"
+msgstr "Nebuloses brillants"
 
-#: index.html:439 tablet7in.html:597
+#: index.html:522 tablet7in.html:611
 msgid "Dark Nebulae"
-msgstr "Nebuloses Fosques"
+msgstr "Nebuloses fosques"
 
-#: index.html:440 tablet7in.html:598
+#: index.html:523 tablet7in.html:612
 msgid "Planetary Nebulae"
 msgstr "Nebuloses planetàries"
 
-#: index.html:449 tablet7in.html:607
+#: index.html:532 tablet7in.html:621
 msgid "Labels and markers"
 msgstr "Etiquetes i marcadors"
 
-#: index.html:478 tablet7in.html:636
+#: index.html:566 tablet7in.html:655
 msgid "Show illumination"
-msgstr "Mostrar il·luminació"
+msgstr "Mostra la il·luminació "
 
-#: index.html:483 tablet7in.html:642
+#: index.html:571 tablet7in.html:661
 msgid "Current landscape"
 msgstr "Paisatge actual"
 
-#: index.html:495 tablet7in.html:655
+#: index.html:583 tablet7in.html:674
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Mostra línies amb grossària"
 
-#: index.html:500 tablet7in.html:660
+#: index.html:588 tablet7in.html:679
 msgid "Show asterisms with thickness"
+msgstr "Mostra asterismes amb grossària"
+
+#: index.html:592 tablet7in.html:683
+msgid "Show ray helpers with thickness"
 msgstr ""
 
-#: index.html:511 tablet7in.html:676
+#: index.html:602 tablet7in.html:695
+msgid "Constellation selection isolated"
+msgstr "Selecció de constel·lació aïllada"
+
+#: index.html:606 tablet7in.html:699
 msgid "Current sky culture"
 msgstr "Cultura del cel actual"
 
-#: index.html:524 tablet7in.html:701
+#: index.html:619 tablet7in.html:724
 msgid "Active script:"
 msgstr "Script actiu:"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:620 tablet7in.html:725
 msgid "Run selected script"
-msgstr "Executar script seleccionat"
+msgstr "Executa l'script seleccionat"
 
-#: index.html:525 tablet7in.html:702
+#: index.html:620 tablet7in.html:725
 msgid "Stop current script"
-msgstr "Parar script actual"
+msgstr "Parar l'script actual"
 
-#: index.html:530 tablet7in.html:41 tablet7in.html:686
+#: index.html:625 tablet7in.html:41 tablet7in.html:709
 msgid "Actions"
 msgstr "Accions"
 
-#: index.html:534 tablet7in.html:690
+#: index.html:629 tablet7in.html:713
 msgid "Run/toggle action"
-msgstr "Executar/commutar acció"
+msgstr "Executa/commuta l'acció"
 
-#: index.html:545 tablet7in.html:725
+#: index.html:640 tablet7in.html:748
 msgid "Planet map"
-msgstr "Mapa de planeta"
+msgstr "Mapa del planeta"
 
-#: index.html:546 tablet7in.html:726
+#: index.html:641 tablet7in.html:749
 msgid "Planet map pointer"
 msgstr "Punter del mapa del planeta"
 
-#: index.html:550 tablet7in.html:730
+#: index.html:645 tablet7in.html:753
 msgid "Type to search location"
-msgstr "Escriu per buscar ubicació"
+msgstr "Escriviu per buscar la ubicació"
 
-#: index.html:579 tablet7in.html:759
+#: index.html:674 tablet7in.html:782
 msgid "Interaction"
-msgstr ""
+msgstr "Interacció"
 
-#: index.html:580 tablet7in.html:760
+#: index.html:675 tablet7in.html:783
 msgid "Current scene:"
-msgstr ""
+msgstr "Escena actual:"
 
-#: index.html:583 tablet7in.html:763
+#: index.html:678 tablet7in.html:786
 msgid "View controls"
-msgstr ""
+msgstr "Vegeu els controls"
 
-#: index.html:589 tablet7in.html:769
+#: index.html:684 tablet7in.html:792
 msgid "Movement controls"
+msgstr "Controls de moviment"
+
+#: index.html:696 tablet7in.html:804
+msgid "Torchlight"
 msgstr ""
 
-#: index.html:605 tablet7in.html:785
+#: index.html:703 tablet7in.html:811
 msgid "Scene selection"
-msgstr ""
+msgstr "Selecció d'escena"
 
-#: index.html:609 tablet7in.html:789
+#: index.html:707 tablet7in.html:815
 msgid "Load selected scene"
-msgstr ""
+msgstr "Carrega l'escena seleccionada"
 
-#: index.html:633 tablet7in.html:814
+#: index.html:731 tablet7in.html:840
 msgid "No response from server"
 msgstr "No hi ha resposta del sevidor"
 
-#: index.html:634 tablet7in.html:815
+#: index.html:732 tablet7in.html:841
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "No hi ha resposta del servidor des de fa %1 segons. Està Stellarium "
-"executant-se?"
+"executant-se encara?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
@@ -449,15 +481,15 @@ msgstr "Graelles"
 
 #: tablet7in.html:97
 msgid "Up/Left"
-msgstr "Dalt/Esquerra"
+msgstr "Dalt/esquerra"
 
 #: tablet7in.html:97
 msgid "Up"
-msgstr "Dalt"
+msgstr "Amunt"
 
 #: tablet7in.html:97
 msgid "Up/Right"
-msgstr "Dalt/Dreta"
+msgstr "Amunt/dreta"
 
 #: tablet7in.html:97
 msgid "Left"
@@ -465,11 +497,11 @@ msgstr "Esquerra"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr "Centrar-se en l'objecte seleccionat"
+msgstr "Enfoca l'objecte seleccionat"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr "Centrar-se en la selecció"
+msgstr "Enfoca la selecció"
 
 #: tablet7in.html:97
 msgid "Right"
@@ -477,27 +509,15 @@ msgstr "Dreta"
 
 #: tablet7in.html:97
 msgid "Down/Left"
-msgstr "Baix/Esquerra"
+msgstr "Avall/esquerra"
 
 #: tablet7in.html:97
 msgid "Down"
-msgstr "Baix"
+msgstr "Avall"
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr "Baix/Dreta"
-
-#: tablet7in.html:101
-msgid "View towards horizon at Azimuth"
-msgstr "Vista cap a l'horitzó en l'Azimut"
-
-#: tablet7in.html:123
-msgid "Vertical View offset"
-msgstr "Desfasament de la vista vertical"
-
-#: tablet7in.html:133
-msgid "Reset"
-msgstr "Reinicia"
+msgstr "Avall/dreta"
 
 #: tablet7in.html:266
 msgid "Sirius"
@@ -505,7 +525,7 @@ msgstr "Sirius"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr "Arcturus"
+msgstr "Artur"
 
 #: tablet7in.html:268
 msgid "Capella"
@@ -561,15 +581,15 @@ msgstr "Càncer"
 
 #: tablet7in.html:281
 msgid "Leo"
-msgstr "Leo"
+msgstr "Lleó"
 
 #: tablet7in.html:282
 msgid "Virgo"
-msgstr "Virgo"
+msgstr "Verge"
 
 #: tablet7in.html:283
 msgid "Libra"
-msgstr "Libra"
+msgstr "Balança"
 
 #: tablet7in.html:284
 msgid "Scorpius"
@@ -581,32 +601,28 @@ msgstr "Sagitari"
 
 #: tablet7in.html:286
 msgid "Capricornus"
-msgstr "Capricorni"
+msgstr "Capricorn"
 
 #: tablet7in.html:287
 msgid "Aquarius"
-msgstr "Acuari"
+msgstr "Aquari"
 
 #: tablet7in.html:288
 msgid "Pisces"
-msgstr "Piscis"
+msgstr "Pisces"
 
-#: tablet7in.html:672
-msgid "Constellation selection isolated"
-msgstr "Selecció de constel·lació aïllada"
-
-#: tablet7in.html:710
+#: tablet7in.html:733
 msgid "Favorites"
 msgstr "Favorits"
 
-#: tablet7in.html:712
+#: tablet7in.html:735
 msgid "Show 1"
 msgstr "Mostra 1"
 
-#: tablet7in.html:713
+#: tablet7in.html:736
 msgid "Remove Labels and Images"
-msgstr "Eliminar Etiquetes i Imatges"
+msgstr "Elimina etiquetes i imatges"
 
-#: tablet7in.html:713
+#: tablet7in.html:736
 msgid "Cleanup Screen"
-msgstr "Netejar Pantalla"
+msgstr "Neteja la pantalla"

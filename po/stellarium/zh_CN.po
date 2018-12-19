@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-12-11 18:06+0700\n"
+"POT-Creation-Date: 2018-12-18 12:13+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2018\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -2107,7 +2107,7 @@ msgstr "数字巡天 (TOAST)"
 
 #: src/core/modules/HipsMgr.cpp:138
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
-msgstr "分层递进巡天 (实验性的)"
+msgstr "分层渐进式巡天 (实验性的)"
 
 #: src/core/StelApp.cpp:575
 msgid "Night mode"
@@ -4296,7 +4296,7 @@ msgstr "星等"
 #. TRANSLATORS: angular size, arcminutes
 #: src/gui/AstroCalcDialog.cpp:493
 msgid "A.S."
-msgstr "角分"
+msgstr "角大小"
 
 #. TRANSLATORS: separation, arcseconds
 #. TRANSLATORS: separation
@@ -4702,7 +4702,7 @@ msgstr "位置 %1"
 
 #: src/gui/AstroCalcDialog.cpp:738
 msgid "Average angular size"
-msgstr "平均角直径"
+msgstr "平均角大小"
 
 #: src/gui/AstroCalcDialog.cpp:815 src/gui/AstroCalcDialog.cpp:880
 #: src/gui/AstroCalcDialog.cpp:940 src/gui/AstroCalcDialog.cpp:1007
@@ -4719,7 +4719,7 @@ msgstr "地面距离"
 #: src/gui/AstroCalcDialog.cpp:819 src/gui/AstroCalcDialog.cpp:884
 #: src/gui/AstroCalcDialog.cpp:944 src/gui/AstroCalcDialog.cpp:1012
 msgid "Angular size (with rings, if any)"
-msgstr "角直径 （如有环则带环）"
+msgstr "角大小 （如有环则带环）"
 
 #: src/gui/AstroCalcDialog.cpp:1093
 msgid "star with high proper motion"
@@ -5002,7 +5002,7 @@ msgstr "星际天体"
 #: src/gui/AstroCalcDialog.cpp:2292 src/gui/AstroCalcDialog.cpp:2953
 #: src/gui/AstroCalcDialog.cpp:2955
 msgid "Local Time"
-msgstr "地方时"
+msgstr "时间"
 
 #: src/gui/AstroCalcDialog.cpp:2532
 msgid "Magnitude vs. Time"
@@ -5022,7 +5022,7 @@ msgstr "距角vs. 时间"
 
 #: src/gui/AstroCalcDialog.cpp:2544
 msgid "Angular size vs. Time"
-msgstr "角直径vs. 时间"
+msgstr "角大小vs. 时间"
 
 #: src/gui/AstroCalcDialog.cpp:2547
 msgid "Phase angle vs. Time"
@@ -5047,7 +5047,7 @@ msgstr "兆米"
 
 #: src/gui/AstroCalcDialog.cpp:2635 src/gui/AstroCalcDialog.cpp:2676
 msgid "Angular size"
-msgstr "角直径"
+msgstr "角大小"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it.
@@ -5195,19 +5195,19 @@ msgstr "角大小"
 
 #: src/gui/AstroCalcDialog.cpp:4415 src/ui_astroCalcDialog.h:1322
 msgid "Limit angular size:"
-msgstr "极限角直径"
+msgstr "极限角大小"
 
 #: src/gui/AstroCalcDialog.cpp:4416 src/ui_astroCalcDialog.h:1320
 msgid "Set limits for angular size for visible celestial objects"
-msgstr "为可见天体设置角直径极限"
+msgstr "为可观测天体设置角大小极限"
 
 #: src/gui/AstroCalcDialog.cpp:4417 src/ui_astroCalcDialog.h:1324
 msgid "Minimal angular size for visible celestial objects"
-msgstr "可见天体的最小角直径"
+msgstr "可观测天体的最小角大小"
 
 #: src/gui/AstroCalcDialog.cpp:4418 src/ui_astroCalcDialog.h:1327
 msgid "Maximum angular size for visible celestial objects"
-msgstr "可见天体的最大角直径"
+msgstr "可观测天体的最大角大小"
 
 #: src/gui/AstroCalcDialog.cpp:4919
 msgid "Limit angular separation:"
@@ -5215,15 +5215,15 @@ msgstr "极限角间距："
 
 #: src/gui/AstroCalcDialog.cpp:4920
 msgid "Set limits for angular separation for visible double stars"
-msgstr "设置可见双星的角间距极限"
+msgstr "设置可观测双星的角间距极限"
 
 #: src/gui/AstroCalcDialog.cpp:4921
 msgid "Minimal angular separation for visible double stars"
-msgstr "可见双星的最小角间距"
+msgstr "可观测双星的最小角间距"
 
 #: src/gui/AstroCalcDialog.cpp:4922
 msgid "Maximum angular separation for visible double stars"
-msgstr "可见双星的最大角间距"
+msgstr "可观测双星的最大角间距"
 
 #: src/gui/AstroCalcDialog.cpp:5300
 msgid "Save list of objects as..."
@@ -5239,7 +5239,7 @@ msgstr "轨旋共振"
 
 #: src/gui/AstroCalcDialog.cpp:5564 src/gui/AstroCalcDialog.cpp:5743
 msgid "Days from today"
-msgstr "从今天开始的天数"
+msgstr "从今日开始的天数"
 
 #: src/gui/AstroCalcDialog.cpp:5565 src/gui/AstroCalcDialog.cpp:5724
 msgid "Linear distance"
@@ -6191,7 +6191,7 @@ msgstr "西方 (O.Hlad)"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:511
 msgid "Western (Sky & Telescope)"
-msgstr "西方（《天空与望远镜》杂志）"
+msgstr "西方（天空与望远镜杂志）"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:513
@@ -6439,7 +6439,7 @@ msgstr "已知最大恒星列表"
 #. TRANSLATORS: Name of script
 #: src/translations.h:619
 msgid "Herschel 400 Tour"
-msgstr "赫歇尔 400 之旅"
+msgstr "赫歇尔400天体之旅"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:621
@@ -6469,7 +6469,7 @@ msgstr "无伽利略卫星的木星"
 #. TRANSLATORS: Name of script
 #: src/translations.h:631
 msgid "Skybox Tiles"
-msgstr "天空方盒贴图"
+msgstr "天空立方体贴图"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:633
@@ -6642,7 +6642,7 @@ msgstr "这个脚本帮助你游览已知最大的多个恒星。"
 
 #: src/translations.h:671
 msgid "A tour around objects from the Herschel 400 Catalogue"
-msgstr "游历赫歇尔 400目录里的天体"
+msgstr "游历赫歇尔400目录里的天体"
 
 #: src/translations.h:672
 msgid ""
@@ -8525,7 +8525,7 @@ msgstr "压力，温度，消光系数"
 
 #: src/ui_viewDialog.h:2471
 msgid "Refraction/Extinction settings..."
-msgstr "折射/光吸收设置..."
+msgstr "折射/消光设置..."
 
 #: src/ui_viewDialog.h:2472
 msgid "Zodiacal Light brightness:"
@@ -8776,11 +8776,11 @@ msgstr "使用比例标识"
 msgid ""
 "Use surface brightness of deep-sky objects for scale of the visibility of "
 "their markers and labels."
-msgstr "使用面亮度控制缩放标签和标识的可见性。"
+msgstr "缩放时按面亮度（而不是星等）控制标识和标签的可见性。"
 
 #: src/ui_viewDialog.h:2628
 msgid "Use surface brightness"
-msgstr "按照面亮度控制缩放标签和标识的可见性"
+msgstr "按面亮度控制标识和标签的可见性"
 
 #: src/ui_viewDialog.h:2630
 msgid "Limit magnitude (for unaided/binocular observers) of deep-sky objects."
@@ -8794,7 +8794,7 @@ msgstr "使用深空天体的星表编号，而不是屏幕标签的常用名称
 
 #: src/ui_viewDialog.h:2636
 msgid "Use designations for screen labels"
-msgstr "标签都用星表编号"
+msgstr "标签使用星表编号"
 
 #: src/ui_viewDialog.h:2637 plugins/Satellites/src/ui_satellitesDialog.h:775
 msgid "Labels"
@@ -8814,15 +8814,15 @@ msgstr "勾勒大型深空天体的轮廓"
 
 #: src/ui_viewDialog.h:2641
 msgid "Limit angular size (arcmin):"
-msgstr "极限角直径 (角分):"
+msgstr "极限角大小 (角分):"
 
 #: src/ui_viewDialog.h:2643
 msgid "Minimal angular size in arcminutes for visible DSO"
-msgstr "该角直径以下不显示（以角分为单位）"
+msgstr "该角大小以下不显示（以角分为单位）"
 
 #: src/ui_viewDialog.h:2646
 msgid "Maximum angular size in arcminutes for visible DSO"
-msgstr "该角直径以上不显示（以角分为单位）"
+msgstr "该角大小以上不显示（以角分为单位）"
 
 #: src/ui_viewDialog.h:2648
 msgid "Use additional names of DSO"
@@ -9170,7 +9170,7 @@ msgstr "显示地面"
 
 #: src/ui_viewDialog.h:2866
 msgid "Use minimal brightness to leave landscape visible also in darkness"
-msgstr "使用最小亮度使景观在黑暗中也可见"
+msgstr "使用最低亮度使景观在黑暗中也可见"
 
 #: src/ui_viewDialog.h:2868
 msgid "Minimal brightness:"
@@ -9179,7 +9179,7 @@ msgstr "地景的最小亮度"
 #: src/ui_viewDialog.h:2870
 msgid ""
 "Value range 0..1 (landscape is black at night - landscape is fully bright)"
-msgstr "值范围0..1（夜间黑色 - 完全明亮）"
+msgstr "值范围0..1（夜晚黑色 - 完全明亮）"
 
 #: src/ui_viewDialog.h:2873
 msgid "Use minimal brightness as may be specified in landscape.ini"
@@ -9187,7 +9187,7 @@ msgstr "在landscape.ini中指定的最小亮度"
 
 #: src/ui_viewDialog.h:2875
 msgid "from landscape, if given"
-msgstr "如地景内置则按照内置"
+msgstr "如地景内置则按内置"
 
 #: src/ui_viewDialog.h:2877
 msgid "Show illumination layer (bright windows, light pollution, etc.)"
@@ -9613,11 +9613,11 @@ msgstr "显示居中按钮"
 msgid ""
 "Toggle display of the button for the HiPS Surveys. Select a survey in the "
 "View settings."
-msgstr "切换显示分层递进巡天的按钮。在巡天设置里选择一个巡天选项。"
+msgstr "切换显示分层渐进式巡天的按钮。在巡天设置里选择一个巡天选项。"
 
 #: src/ui_configurationDialog.h:1622
 msgid "Show HiPS button"
-msgstr "显示分层递进巡天按钮"
+msgstr "显示分层渐进式巡天按钮"
 
 #: src/ui_configurationDialog.h:1624
 msgid "Toggle display of the button for the Digitized Sky Survey."
@@ -10352,7 +10352,7 @@ msgstr "选择天体以绘制指定时刻的“全年高度”图。"
 
 #: src/ui_astroCalcDialog.h:1300
 msgid "Local Time in hours"
-msgstr "地方时/以时计"
+msgstr "时刻/以时计"
 
 #: src/ui_astroCalcDialog.h:1303
 msgid "Monthly Elevation"
@@ -10979,7 +10979,7 @@ msgstr "链接"
 msgid ""
 "Support is provided via the Github website.  Be sure to put \"%1\" in the "
 "subject when posting."
-msgstr "通过Github网站提供支持。 发帖时务必在标题中加入\"％1\"。"
+msgstr "通过Github网站提供支持。 发帖时务必在标题中加入\"%1\"。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
@@ -11804,7 +11804,7 @@ msgstr "允许改变Telrad视场大小"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:227
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:432
 msgid "General"
-msgstr "一般"
+msgstr "通用"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1244
 #: plugins/Oculars/src/ui_ocularDialog.h:1253
@@ -12206,7 +12206,7 @@ msgstr "此卫星与观测者均位于阳光下。"
 
 #: plugins/Satellites/src/Satellite.cpp:374
 msgid "The satellite is visible."
-msgstr "此卫星可见"
+msgstr "此卫星可观测"
 
 #: plugins/Satellites/src/Satellite.cpp:377
 msgid "The satellite is eclipsed."
@@ -12214,7 +12214,7 @@ msgstr "此卫星被遮挡。"
 
 #: plugins/Satellites/src/Satellite.cpp:380
 msgid "The satellite is not visible"
-msgstr "此卫星不可见"
+msgstr "此卫星不可观测"
 
 #: plugins/Satellites/src/Satellite.cpp:388
 msgid "Radio communication"
@@ -12660,7 +12660,7 @@ msgstr "将人造卫星显示为标识"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:800
 msgid "Hide invisible artificial satellites"
-msgstr "隐藏不可见的人造卫星"
+msgstr "隐藏不可观测的人造卫星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:802
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:239
@@ -14023,7 +14023,7 @@ msgstr "用户界面设置"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "Show circles with fixed angular size around the telescope reticle"
-msgstr "在望远镜十字丝周围显示指定角直径的圆圈"
+msgstr "在望远镜十字丝周围显示指定角大小的圆圈"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:626
 msgid "Use field of view indicators"
@@ -16037,7 +16037,7 @@ msgid ""
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
 "point of contact between two civilizations (Spanish and Arab) and two "
 "continents (Europe and Africa) after the 8th century."
-msgstr "Titawin (中文得土安，缔头万) 在摩洛哥北部的城市，是联合国教科文组织的世界遗产。"
+msgstr "Titawin (中文缔头万) ，就是摩洛哥北部的城市得土安(Tétouan)，是联合国教科文组织的世界遗产。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
@@ -16450,7 +16450,7 @@ msgid ""
 "setting. (Explanations are provided in the 'About' tab of the plugin's "
 "configuration window.)"
 msgstr ""
-"此插件显示一个天体的基于现时可观测性的分析(从地平线出/没中天时间)，以及天体在全年可观测的时间。一个天体可被观测是基于天体在夜晚某时高于地平线的前提下计算出来。此插件也会显示与太阳最大角距以及日没升/日没落/偕日升/偕日落及其它设置(名词解释在插件“设置”/“关于”中提供)。"
+"此插件显示一个天体的基于现时可观测性的分析（升，落和中天时间），以及天体在全年可观测的时间。一个天体可被观测是基于天体在夜晚某时高于地平线的前提下计算出来。此插件也会显示与太阳最大角距以及冲日(Acronycal)升（落），合日(Cosmical)升（落）及其它设置（名词解释在插件“设置”/“关于”中提供）。"
 
 #: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
@@ -16530,22 +16530,22 @@ msgstr "秒"
 #: plugins/Observability/src/Observability.cpp:194
 #, qt-format
 msgid "Sets at %1 (in %2)"
-msgstr "落于 %1 (%2 之后)"
+msgstr "落：%1 (%2內)"
 
 #: plugins/Observability/src/Observability.cpp:195
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
-msgstr "升于 %1 (%2 之前)"
+msgstr "升： %1 (%2前)"
 
 #: plugins/Observability/src/Observability.cpp:196
 #, qt-format
 msgid "Set at %1 (%2 ago)"
-msgstr "落于 %1 (%2 之前)"
+msgstr "落： %1 (%2前)"
 
 #: plugins/Observability/src/Observability.cpp:197
 #, qt-format
 msgid "Rises at %1 (in %2)"
-msgstr "升于 %1 (%2 之后)"
+msgstr "升： %1 (%2内)"
 
 #: plugins/Observability/src/Observability.cpp:198
 msgid "Circumpolar."
@@ -16558,42 +16558,42 @@ msgstr "不会升起"
 #: plugins/Observability/src/Observability.cpp:200
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
-msgstr "%1 上中天(%2 之后)高度为 %3 度"
+msgstr "中天：%1 (%2内)，高度为%3度"
 
 #: plugins/Observability/src/Observability.cpp:201
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
-msgstr "%1 上中天(%2 之前)高度为 %3 度"
+msgstr "中天：%1 (%2前)，高度为%3度"
 
 #: plugins/Observability/src/Observability.cpp:202
 msgid "Source is not observable."
-msgstr "天体不可见"
+msgstr "天体不可观测"
 
 #: plugins/Observability/src/Observability.cpp:203
 msgid "No Acronychal nor Cosmical rise/set."
-msgstr "无冲日升/落)或偕日升/落"
+msgstr "无冲日升/落也无合日升/落"
 
 #: plugins/Observability/src/Observability.cpp:204
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
-msgstr "大距%1 (%2 度)"
+msgstr "大距：%1日 (%2度)"
 
 #: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
-msgstr "与太阳最大角距：%1 (%2 度)"
+msgstr "与太阳最大角距：%1日 (%2度)"
 
 #. TRANSLATORS: The space at the end is significant - another sentence may
 #. follow.
 #: plugins/Observability/src/Observability.cpp:208
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
-msgstr "冲日升/落: %1/%2 "
+msgstr "冲日升/落：%1日/%2日"
 
 #: plugins/Observability/src/Observability.cpp:209
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
-msgstr "偕日升/落: %1/%2 "
+msgstr "偕日升/落：%1日/%2日"
 
 #: plugins/Observability/src/Observability.cpp:210
 msgid "No Heliacal rise/set. "
@@ -16608,11 +16608,11 @@ msgstr "无冲日升/落 "
 #: plugins/Observability/src/Observability.cpp:213
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
-msgstr "偕日升/落: %1/%2."
+msgstr "合日升/落：%1日/%2日"
 
 #: plugins/Observability/src/Observability.cpp:214
 msgid "No Cosmical rise/set."
-msgstr "无偕日升/偕日落(合日)"
+msgstr "无合日升/落"
 
 #: plugins/Observability/src/Observability.cpp:215
 msgid "Observable during the whole year."
@@ -16620,12 +16620,12 @@ msgstr "全年可观测"
 
 #: plugins/Observability/src/Observability.cpp:216
 msgid "Not observable at dark night."
-msgstr "黑夜不可见"
+msgstr "夜晚不可观测"
 
 #: plugins/Observability/src/Observability.cpp:217
 #, qt-format
 msgid "Nights above horizon: %1"
-msgstr "高于地平线的夜晚: %1"
+msgstr "夜晚在地平线以上：%1日"
 
 #: plugins/Observability/src/Observability.cpp:218
 msgid "TODAY:"
@@ -16640,12 +16640,12 @@ msgstr "本年："
 #: plugins/Observability/src/Observability.cpp:221
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
-msgstr "上一次满月：%1 %2 在%3:%4。 "
+msgstr "上一次满月：%1 %2日%3:%4"
 
 #: plugins/Observability/src/Observability.cpp:222
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
-msgstr "下一次满月：%1 %2 在%3:%4。 "
+msgstr "下一次满月：%1 %2日%3:%4 "
 
 #: plugins/Observability/src/Observability.cpp:237
 #: plugins/Observability/src/Observability.cpp:238
@@ -16672,7 +16672,7 @@ msgid ""
 "taken into account.<br><br> The author thanks Alexander Wolf and Georg Zotti"
 " for their advice.<br><br>Ivan Marti-Vidal (Onsala Space Observatory)"
 msgstr ""
-"本插件分析选中天体的可观测性（未选中任何天体时则分析屏幕中心天区）。插件可以显示天体升、中天、落时间和一年中的最佳观测时间。（也就是天体对太阳的角距离最大的时间），天体夜晚在地平线以上的日期范围，以及日没升/日出落（冲日）和偕日升/偕日落（合日）日期。<br>太阳系天体的运行和恒星视差也被考虑在内。<br><br>作者感谢"
+"本插件分析选中天体的可观测性（未选中任何天体时则分析屏幕中心天区）。插件可以显示天体升、中天、落时间和一年中的最佳观测时间（也就是天体对太阳的角距离最大的时间），天体夜晚在地平线以上的日期范围，以及冲日(Acronycal)升(落)和合日(Cosmical)升(落)日期。<br>太阳系天体的运行和恒星视差也被考虑在内。<br><br>作者感谢"
 " Alexander Wolf 和 Georg Zotti 所提出的建议。<br><br>Ivan Marti-Vidal（昂萨拉天文台）"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
@@ -16690,7 +16690,7 @@ msgid ""
 "and -18 degrees. This parameter is only used for the estimate of the range "
 "of observable epochs (see below)."
 msgstr ""
-"当太阳低于这个高度时，可以认为所有天体都是可见的。天文晨昏蒙影的太阳高度大约为-12度到-18度，这个数据只被用于估计可进行观测的时间（见下文）。"
+"当太阳低于这个高度时，可以认为所有天体都是可观测的。天文晨昏蒙影的太阳高度大约为-12度到-18度，这个数据只被用于估计可进行观测的时间（见下文）。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Horizon altitude:"
@@ -16712,11 +16712,11 @@ msgid ""
 "(transit) times. The exact times for these ephemeris are given in two ways: "
 "as time spans (referred to the current time) and as clock hours (in local "
 "time)."
-msgstr "顾名思义，这个程序会显示天体的升落、中天时间。这些星历的具体时间会被用两种形式给出：时间差（根据目前时间）和实际时间（地方时）。"
+msgstr "顾名思义，这个程序会显示天体的升、落、中天时间。这些星历的会用两种形式给出：距离现在的时间和实际发生时刻。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
-msgstr "冲日升/落 或宇宙升/落或偕日升/落："
+msgstr "冲日(Acronychal)升/落或合日(Cosmical)升/落或偕日(Heliacal)升/落"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
 msgid ""
@@ -16738,7 +16738,7 @@ msgid ""
 "visible). At the Heliacal set, the star sets roughly after the beginning of "
 "the astronomical night."
 msgstr ""
-"一个天体的升/落的日子用于估算该天体随太阳升/落的日子。这些星历表的具体日期取决于观测者的位置。相反，冲日升(或落)是指该星体的升/落发生在在日落/出的时候(即与太阳相反)。一方面，很明显宇宙落和宇宙升之间的日子几乎观察不到(或无法完整观测)该现象。另一方面，在接近冲日落与冲日升的日子，天体的高度很高而太阳却远在地平线以下(故此可以很方便观测该天体)。偕日升的日期是指一年里该星体变得可见的首个日子。它发生于天文夜结束时该星体接近东方地平线的时候(即天文曙暮光)。在接下来的夜晚，该星体将长期可见，直到其偕日落(即一年里该星体仍可见的最后一晚)。在偕日落，该星体随天文夜的来临而落下。"
+"一个天体的合日(Cosmical)升（落）日期是估算当这个天体与太阳同时升起(落下)的日期，这些星历表的正确时间与观测者为置有关。反之，冲日(Acronycal)升（落）的日期是当这个天体升起（落下）是与太阳落下（升起）的时间相同来估算(意即与太阳反方向)。换句话说，在合日落到合日升的这段期间，很明显的这个天体很难观测（或是完全无法观测）。反之，在冲日落到冲日升的这段期间，当天体的位置足够高时，太阳远低于地平面（因此天体非常适合观测）。偕日(Heliacal)升那天是这颗星这年第一次可观测的日期，它发生在当拂晓大致开始（天文夜结束后），这颗星正贴近东方地平线，此后起它将会在较长的时间内可观测，一直到偕日(Heliacal)落那天，也就是该颗星这年最后一个可观测日期。在偕日(Heliacal)落时，这颗星在黄昏大致结束时（天文夜发生前）落入地平面。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid "Largest Sun separation:"
@@ -16759,7 +16759,7 @@ msgstr ""
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid "Nights with source above horizon:"
-msgstr "高于地平线的夜晚："
+msgstr "夜晚高于地平线："
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid ""
@@ -16780,7 +16780,7 @@ msgid ""
 "planets (which will not depend on the mere input of a twilight Sun elevation"
 " by the user) will be implemented in future versions of this plugin."
 msgstr ""
-"此插件计算天体在夜晚至少有一刻处于地平线上的时间范围。对于“夜晚”，插件将其定义为太阳地平高度低于晨昏蒙影的高度（用户可设置，见上文）。当天体（或系外行星）被选定时，程序给出的本年可观测时间范围有两种形式：从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日期，再从另一个日期到12月31日）。在第一种情况下，第一个日期（本例中为1月20日）会接近该天体的偕日落（合日）。在第二种情况中（比如从1月1日到5月20日，再从9月21日到12月31日），第一个日期（本例中为5月20日）会接近该天体的偕日升（合日）。用于计算恒星和行星偕日升/偕日落（合日）的更加精确的算法（不依赖于用户设置的晨昏蒙影太阳高度角）会在插件的未来版本中实现。"
+"此插件计算天体在夜晚至少有一刻处于地平线上的时间范围。对于“夜晚”，插件将其定义为太阳地平高度低于晨昏蒙影的高度（用户可设置，见上文）。当天体（或系外行星）被选定时，程序给出的本年可观测时间范围有两种形式：从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日期，再从另一个日期到12月31日）。在第一种情况下，第一个日期（本例中为1月20日）会接近该天体的偕日落。在第二种情况中（比如从1月1日到5月20日，再从9月21日到12月31日），第一个日期（本例中为5月20日）会接近该天体的偕日升。用于计算恒星和行星偕日升（落）的更加精确的算法（不依赖于用户设置的晨昏蒙影太阳高度角）会在插件的未来版本中实现。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid "Full Moon:"
@@ -16790,7 +16790,7 @@ msgstr "满月"
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
-msgstr "当月球被选定时，这个程序可以准切地计算出月球冲日的日期。"
+msgstr "当月球被选定时，这个程序可以准切地计算出满月的日期。"
 
 #: plugins/Observability/src/gui/ObservabilityDialog.cpp:203
 #, qt-format
@@ -16844,7 +16844,7 @@ msgstr "今日星历表(升、落和中天)"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:353
 msgid "Dates of Acronychal/Cosmical/Heliacal rise/set"
-msgstr "冲日升/落 或宇宙升/落 或偕日 升/落日期"
+msgstr "冲日升（落）/合日升（落） 或偕日升（落）日期"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:354
 msgid "Date of largest separation to the Sun"
@@ -16852,11 +16852,11 @@ msgstr "与太阳最大角距发生日期"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:355
 msgid "Nights with the source above horizon"
-msgstr "在地平线上的夜晚"
+msgstr "夜晚高于地平线"
 
 #: plugins/Observability/src/ui_ObservabilityDialog.h:356
 msgid "Dates of previous and next Full Moon"
-msgstr "前后两次满月时间"
+msgstr "上一次和下一次满月的日期"
 
 #: plugins/FOV/src/FOV.cpp:42 plugins/FOV/src/FOV.cpp:82
 #: plugins/FOV/src/ui_fovWindow.h:351 plugins/FOV/src/ui_fovWindow.h:353
@@ -16868,7 +16868,7 @@ msgstr "视场"
 msgid ""
 "This plugin allows stepwise zooming via keyboard shortcuts like in the "
 "<em>Cartes du Ciel</em> planetarium program."
-msgstr "这个插件允许通过键盘快捷键进行阶段性变焦像星像软件《Cartes du Ciel》一样。"
+msgstr "这个插件允许通过键盘快捷键进行逐步缩放，像星像软件《Cartes du Ciel》一样。"
 
 #: plugins/FOV/src/FOV.cpp:87
 msgid "Set FOV to"
@@ -17649,7 +17649,7 @@ msgstr "%1国际流星组织%2"
 msgid ""
 "Support is provided via the Github website. Be sure to put \"%1\" in the "
 "subject when posting."
-msgstr "务必在通过Github网站提供支持。 发帖时务必在标题中加入\"％1\"。"
+msgstr "务必在通过Github网站提供支持。 发帖时务必在标题中加入\"%1\"。"
 
 #: plugins/MeteorShowers/src/gui/MSSearchDialog.cpp:106
 msgid "Start date greater than end date!"
@@ -18599,7 +18599,7 @@ msgid ""
 "drawn, for maximum and minimum distance of the moon. Note that declination "
 "of the moon at the major standstill can exceed the indicated limits if it is"
 " high in the sky due to parallax effects."
-msgstr "月球线包括地平线视差效果。对月亮的最大和最小距离分别画线。注意月亮赤纬在主停变线可能超过指定的极限，当它在高空，由于视差效果造成。"
+msgstr "月球线包括地平线视差效果。对月球的最大和最小距离分别画线。注意月球赤纬在主停变线可能超过指定的极限，当它在高空，由于视差效果造成。"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:166
 msgid ""
