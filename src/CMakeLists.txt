@@ -11,6 +11,7 @@ ENDIF()
 
 SET(stellarium_lib_SRCS
      core/Dithering.hpp
+     core/SaturationShader.hpp
      core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
