@@ -1432,6 +1432,8 @@ void StelMainView::doScreenshot(void)
 	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	int imgWidth =stelScene->width();
 	int imgHeight=stelScene->height();
+	bool nightModeWasEnabled=nightModeEffect->isEnabled();
+	nightModeEffect->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
@@ -1530,12 +1532,24 @@ void StelMainView::doScreenshot(void)
 	// reset viewport and GUI
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
 	customScreenshotMagnification=1.0f;
+	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
 	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
 #endif
 
+	if (nightModeWasEnabled)
+	{
+		for (int row=0; row<im.height(); ++row)
+			for (int col=0; col<im.width(); ++col)
+			{
+				QRgb rgb=im.pixel(col, row);
+				int gray=qGray(rgb);
+				im.setPixel(col, row, qRgb(gray, 0, 0));
+			}
+
+	}
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 
