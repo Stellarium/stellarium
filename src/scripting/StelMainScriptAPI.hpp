@@ -272,6 +272,13 @@ public slots:
 	//! @param duration the duration of the movement in seconds
 	void moveToRaDecJ2000(const QString& ra, const QString& dec, float duration=1.);
 
+	//! move the current viewing direction to some specified galactic coordinates
+	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
+	//! @param lon the galactic longitude
+	//! @param dec the galactic latitude
+	//! @param duration the duration of the movement in seconds
+	void moveToGalLongLat(const QString& lon, const QString& lat, float duration);
+
 	//! Set the observer location
 	//! @param longitude the longitude in degrees. E is +ve.
 	//!        values out of the range -180..180 mean that

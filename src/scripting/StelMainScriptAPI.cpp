@@ -944,6 +944,7 @@ void StelMainScriptAPI::selectConstellationByName(const QString& name) const
 //DEPRECATED: Use getObjectInfo()
 QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name) const
 {
+	qWarning() << "WARNING: script function getObjectPosition() is deprecated and will be removed. Please update script to use getObjectInfo()";
 	return getObjectInfo(name);
 }
 
@@ -1363,6 +1364,30 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 	double dDec = StelUtils::getDecAngle(dec);
 
 	StelUtils::spheToRect(dRa,dDec,aimJ2000);	
+	// make up vector more stable. Not sure if we have to set the up vector in this case though.
+	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
+	Vec3d aimUp;
+	if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(dDec)> (0.9*M_PI/2.0)) )
+		aimUp=Vec3d(-cos(dRa), -sin(dRa), 0.) * (dDec>0. ? 1. : -1. );
+	else
+		aimUp=Vec3d(0., 0., 1.);
+
+	mvmgr->moveToJ2000(aimJ2000, aimUp, duration);
+}
+
+void StelMainScriptAPI::moveToGalLongLat(const QString& lon, const QString& lat, float duration)
+{
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	Q_ASSERT(mvmgr);
+
+	GETSTELMODULE(StelObjectMgr)->unSelect();
+
+	Vec3d aimJ2000;
+	double dRa = StelUtils::getDecAngle(lon);
+	double dDec = StelUtils::getDecAngle(lat);
+
+	StelUtils::spheToRect(dRa,dDec,aimJ2000);
+	aimJ2000=StelApp::getInstance().getCore()->galacticToJ2000(aimJ2000);
 	// make up vector more stable. Not sure if we have to set the up vector in this case though.
 	StelMovementMgr::MountMode mountMode=mvmgr->getMountMode();
 	Vec3d aimUp;
