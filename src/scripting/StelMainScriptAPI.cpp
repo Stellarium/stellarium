@@ -390,6 +390,7 @@ QString StelMainScriptAPI::getSkyCulture() const
 
 void StelMainScriptAPI::setSkyCulture(const QString& id)
 {
+	GETSTELMODULE(StelObjectMgr)->unSelect(); // to avoid possible crash
 	emit(requestSetSkyCulture(id));
 }
 

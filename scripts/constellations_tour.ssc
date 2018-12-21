@@ -3,12 +3,14 @@
 // License: Public Domain
 // Author: Alexander Wolf
 // Shortcut: Ctrl+D,1
-// Version: 1.0
+// Version: 1.1
 // Description:  A tour of the western constellations.
 
 include("common_objects.inc");
 
 core.clear("starchart");
+var skyculture = core.getSkyCulture();
+core.setSkyCulture("western");
 GridLinesMgr.setFlagEquatorGrid(false);
 ConstellationMgr.setFlagArt(false);
 ConstellationMgr.setFlagBoundaries(false);
@@ -28,7 +30,7 @@ ConstellationMgr.setFlagIsolateSelected(true);
 for (i=0; i<constellations.length; i++)
 {
 	objName = constellations[i];
-	core.selectObjectByName(objName, true);
+	core.selectConstellationByName(objName);
 	StelMovementMgr.autoZoomIn(6);
 	core.wait(1);
 	StelMovementMgr.zoomTo(40,8);
@@ -37,4 +39,4 @@ for (i=0; i<constellations.length; i++)
 	core.wait(10);
 	ConstellationMgr.setFlagArt(false);
 }
-
+core.setSkyCulture(skyculture);
