@@ -767,6 +767,8 @@ This window \newFeature{v0.15.0} provides advanced functionality, some of which 
 You can call it by pressing \key{F10} or the button \guibutton{0.6}{btd_astrocalc.png} on the left menu bar. 
 The Astronomical Calculations window shows six tabs with different functionality.
 
+In version 0.18.3 \newFeature{v0.18.3} we added export the data to XLSX files in additional to CSV files.
+
 \subsection{The Positions Tab}
 \label{sec:gui:AstroCalc:Positions}
 
@@ -774,7 +776,7 @@ This tab \newFeature{v0.16.0} shows J2000.0 or horizontal positions, magnitudes 
 (e.g.\ surface brightness for deep-sky objects or angular separation for double stars) for various 
 lists of celestial objects above the horizon at the simulated time, filtered by magnitude. 
 Double-clicking on an entry brings the object into focus (Fig.~\ref{fig:gui:AstroCalc:Positions}). 
-You may also export the list of positions into a CSV file.
+You may also export the list of positions into XLSX or CSV file.
 
 
 \begin{figure}[htbp]
@@ -793,7 +795,7 @@ When you click on a date, an orange circle indicates this date and/or magnitude.
 Double-clicking sets the respective date and brings the object to focus. 
 Dates and/or magnitudes will show near position markers when \emph{Show dates} and/or \emph{Show magnitudes} checkboxes are active.
 
-You can export the calculated ephemeris into a CSV file. 
+You can export the calculated ephemeris into XLSX or CSV file. 
 
 \begin{figure}[tbp]
 \centering\includegraphics[width=0.98\textwidth]{astrocalc_dialog_ephemeris_tab.png}
@@ -825,7 +827,7 @@ or observe the visibility of Mercury, Venus or a comet in the twilight sky.
 This tab allows you to compute phenomena like conjunctions, oppositions, 
 occultations and eclipses (in special cases) between planetary objects 
 (Fig.~\ref{fig:gui:AstroCalc:Phenomena}). 
-You can export the calculated phenomena into a CSV file.
+You can export the calculated phenomena into XLSX or CSV file.
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_phenomena_tab.png}
@@ -833,44 +835,48 @@ You can export the calculated phenomena into a CSV file.
 \label{fig:gui:AstroCalc:Phenomena}
 \end{figure}
 
-\newFeature{v0.18.2}In version 0.18.2 we added two additional columns for this tool --- \emph{elongation} and \emph{angular distance}. The first of those columns show angular distance from the Sun, second column --- angular distance from the Moon. Both column may be helpful for planning observation of phenomena.
+In version 0.18.2 \newFeature{v0.18.2} we added two additional columns for this tool --- \emph{solar elongation} (we used term \emph{elongation} in version 0.18.2 for this column) and \emph{lunar elongation} (we used term \emph{angular distance} in version 0.18.2 for this column). The first of those columns show angular distance from the Sun, second column --- angular distance from the Moon. Both column may be helpful for planning observation of phenomena.
 
+\subsection{The Graphs Tab}
+\label{sec:gui:AstroCalc:Graphs}
 
-\subsection{The ``Altitude vs.\ Time'' Tab}
-\label{sec:gui:AstroCalc:AltVsTime}
+In version 0.18.3 \newFeature{v0.18.3} we added the new graph, who helpful for montly planning the observations of deep-sky objects and merged all graphs in one tab with four subtabs.
+
+\subsubsection{The ``Altitude vs.\ Time'' Subtab}
+\label{sec:gui:AstroCalc:Graphs:AltVsTime}
   
-On this tab you can compute the geometrical altitude of the currently selected object 
-and date and draw it as a graph (Fig.~\ref{fig:gui:AstroCalc:AltVsTime}).
+On this subtab (the first subtab in Graphs tab and it opens by default) you can compute the geometrical altitude of the currently selected object 
+and date and draw it as a graph (Fig.~\ref{fig:gui:AstroCalc:Graphs:AltVsTime}).
     
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_altvstime_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Altitude vs.\ Time}
-\label{fig:gui:AstroCalc:AltVsTime}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_altvstime.png}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Altitude vs.\ Time}
+\label{fig:gui:AstroCalc:Graphs:AltVsTime}
 \end{figure}
 
 An optional graphs for the Sun (with lines for civil, nautical and astronomical twilight) and the Moon also available.
 
-\subsection{The ``Monthly Elevation'' (ME) Tab}
-\label{sec:gui:AstroCalc:ME}
+\subsubsection{The ``Monthly Elevation'' Subtab}
+\label{sec:gui:AstroCalc:Graphs:ME}
 
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_me_tab.png}
-\caption{Astronomical Calculations (AstroCalc): Monthly Elevation (ME)}
-\label{fig:gui:AstroCalc:ME}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_me.png}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Monthly Elevation}
+\label{fig:gui:AstroCalc:Graphs:ME}
 \end{figure}
 
-\noindent\newFeature{v0.18.0} This tab can show ``Monthly Elevation'' graph for the current year at selected time. This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:AstroCalc:ME}).
+This subtab \newFeature{v0.18.0} can show ``Monthly Elevation'' graph for the current year at selected time. This tool was introduced for planning yearly observations (Fig.~\ref{fig:gui:AstroCalc:Graphs:ME}).
 
-\subsection{The Graphs Tab}
-\label{sec:gui:AstroCalc:Graphs}
+\subsubsection{The ``Graphs'' Subtab}
+\label{sec:gui:AstroCalc:Graphs:Graphs}
     
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab.png}
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_graphs.png}
 \caption{Astronomical Calculations (AstroCalc): Graphs}
-\label{fig:gui:AstroCalc:Graphs}
+\label{fig:gui:AstroCalc:Graphs:Graphs}
 \end{figure}
   
-\noindent\newFeature{v0.16.0} This tab can show two functions over time for the current year and draw graphs for them in one screen (Fig.~\ref{fig:gui:AstroCalc:Graphs}). 
+This subtab \newFeature{v0.16.0} can show two functions over time for the current year and draw graphs for them in one screen (Fig.~\ref{fig:gui:AstroCalc:Graphs:Graphs}). 
 You can select from 
 \begin{itemize}
 \item Magnitude vs. Time
@@ -884,6 +890,17 @@ You can select from
 
 This tool may be very helpful for educational and statistics purposes.%
 	\footnote{The idea for this tool has been obtained from \program{SkytechX}: \url{http://www.skytechx.eu/}}
+	
+\subsubsection{The ``Angular Distance'' Subtab}
+\label{sec:gui:AstroCalc:Graphs:AD}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_graphs_tab_ad.png}
+\caption{Astronomical Calculations (AstroCalc): Graphs / Angular Distance}
+\label{fig:gui:AstroCalc:Graphs:AD}
+\end{figure}
+
+This subtab \newFeature{v0.18.3} can show ``Angular Distance'' graph --- change of angular distance between the Moon and selected object (for example some deep-sky object) for the nearest 30 days. This tool was introduced for planning monthly observations (Fig.~\ref{fig:gui:AstroCalc:Graphs:AD}).
 
 \subsection{The ``What's Up Tonight'' (WUT) Tab}
 \label{sec:gui:AstroCalc:WUT}
@@ -913,7 +930,8 @@ You may center an object from the right list in the sky map just by selecting it
 
 Note that only DSO from catalogs which you have selected in the DSO panel (section~\ref{sec:gui:view:dso}) will be found.
 
-In version 0.18.2 we added tool for search items from list of \emph{Matching Objects}.\newFeature{v0.18.2}
+In version 0.18.3 \newFeature{v0.18.3} this tool has been refactored --- the tool for search items from list of \emph{Matching Objects} was removed, the filter for magnitudes was moved in right ``column'' and we added new one filter here by limit the range of acceptable angular sizes of matched objects. In additional to the names we added 5 new sortable columns --- magnitude, rising time, transit time, setting time and angular size of object.
+
 
 \subsection{The ``Planetary Calculator'' (PC) Tab}
 \label{sec:gui:AstroCalc:PC}
@@ -928,7 +946,7 @@ orbital resonances and orbital velocities.
 \label{fig:gui:AstroCalc:PC:Data}
 \end{figure}
 
-\newFeature{v0.18.2}In version 0.18.2 we enhanced this tool via add new tab (\emph{Graphs}), where you may see the change in the linear and angular distances between selected celestial bodies in range 600 days (\emph{today} is in the center of graphs) as graphs (Fig.~\ref{fig:gui:AstroCalc:PC:Graphs}).
+In version 0.18.2 \newFeature{v0.18.2} we enhanced this tool via add new tab (\emph{Graphs}), where you may see the change in the linear and angular distances between selected celestial bodies in range 600 days (\emph{today} is in the center of graphs) as graphs (Fig.~\ref{fig:gui:AstroCalc:PC:Graphs}).
 
 \begin{figure}[htbp]
 \centering\includegraphics[width=0.75\textwidth]{astrocalc_dialog_pc_graphs_tab.png}
@@ -942,18 +960,49 @@ orbital resonances and orbital velocities.
 \section{Help Window}
 \label{sec:gui:help}
 
+\subsection{The Help Tab}
+\label{sec:gui:help:help}
 \begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{help_dialog.png}
+\centering\includegraphics[width=0.6\textwidth]{help_dialog.png}
 \caption{Help Window}
 \label{fig:gui:help}
 \end{figure}
 
-\noindent The Help window lists all of Stellarium's keystrokes. Note that some
+\noindent The Help Tab lists all of Stellarium's keystrokes. Note that some
 features are only available as keystrokes, so it's a good idea to have
 a browse of the information in this window.
 
-\subsection{Editing Keyboard Shortcuts}
-\label{sec:gui:help:hotkeys}
+\subsection{The About Tab}
+\label{sec:gui:help:about}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.6\textwidth]{help_dialog_about.png}
+\caption{Help Window: About}
+\label{fig:gui:help:about}
+\end{figure}
+
+The About Tab (Fig.~\ref{fig:gui:help:about}) shows version and licensing information, and a list of people who helped to produce the program. Since version 0.18.3 \newFeature{0.18.3} this tab has tool for check updates of planetarium.
+
+\subsection{The Log Tab}
+\label{sec:gui:help:log}
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.6\textwidth]{help_dialog_log.png}
+\caption{Help Window: Logfile}
+\label{fig:gui:help:log}
+\end{figure}
+
+The Log Tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
+stellarium runs. It is useful to locate the files that stellarium writes
+to your computer. The same information is written to  the file \file{log.txt} that you will
+find in your user directory (see~\ref{sec:Directories}).
+
+\section{Editing Keyboard Shortcuts}
+\label{sec:gui:hotkeys}
+
+\begin{figure}[htbp]
+\centering\includegraphics[width=0.75\textwidth]{hotkeys_dialog.png}
+\caption{Keyboard Shortcuts}
+\label{fig:gui:hotkeys}
+\end{figure}
 
 You can edit the shortcut keys here. Each available function can be
 configured with up to two key combinations. You may want to
@@ -964,28 +1013,7 @@ hotkeys for similar functions. Simply select the function and click
 with the mouse into the edit field, then press your key of choice. If
 the key has been taken already, a message will tell you.
 
-
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{help_dialog_about.png}
-\caption{Help Window: About}
-\label{fig:gui:help:about}
-\end{figure}
-
-The About Tab (Fig.~\ref{fig:gui:help:about}) shows version and licensing information, and a list
-of people who helped to produce the program.
-
-\begin{figure}[htbp]
-\centering\includegraphics[width=0.68\textwidth]{help_dialog_log.png}
-\caption{Help Window: Logfile}
-\label{fig:gui:help:log}
-\end{figure}
-
-The Log Tab (Fig.~\ref{fig:gui:help:log}) shows messages like the loading confirmations carried out when
-stellarium runs. It is useful to locate the files that stellarium writes
-to your computer. The same information is written to  the file \file{log.txt} that you will
-find in your user directory (see~\ref{sec:Directories}).
-
-
+This tool available through the Help Tab of Help window (see section~\ref{sec:gui:help:help}) and the Tools Tab of Configuration window (see section~\ref{sec:gui:configuration:tools}).
 
 
 %%% Local Variables: 
