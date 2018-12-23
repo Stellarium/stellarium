@@ -275,6 +275,8 @@ public slots:
 	//! Select all constellations
 	void selectAllConstellations(void);
 
+	QStringList getConstellationsEnglishNames();
+
 signals:
 	void artDisplayedChanged(const bool displayed) const;
 	void artFadeDurationChanged(const float duration) const;
@@ -381,6 +383,8 @@ private:
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
+
+	QStringList constellationsEnglishNames;
 
 	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
 	ConstellationDisplayStyle constellationDisplayStyle;

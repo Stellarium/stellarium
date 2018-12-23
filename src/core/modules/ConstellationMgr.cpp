@@ -725,6 +725,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 		return;
 	}
 
+	constellationsEnglishNames.clear();
+
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
@@ -781,6 +783,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 				// Some skycultures already have empty nativeNames. Fill those.
 				if (aster->nativeName.isEmpty())
 					aster->nativeName=aster->englishName;
+
+				constellationsEnglishNames << aster->englishName;
 			}
 			else
 			{
@@ -790,6 +794,11 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	}
 	commonNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation names";
+}
+
+QStringList ConstellationMgr::getConstellationsEnglishNames()
+{
+	return  constellationsEnglishNames;
 }
 
 void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)

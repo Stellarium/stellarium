@@ -1090,7 +1090,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		lmgr->setFlagAtmosphere(false);
 		lmgr->setFlagFog(false);
 		zl->setFlagShow(false);
-	}
+	}	
 	else if (state.toLower() == "deepspace")
 	{
 		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
