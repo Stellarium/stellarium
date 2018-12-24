@@ -275,6 +275,7 @@ public slots:
 	//! Select all constellations
 	void selectAllConstellations(void);
 
+	//! Get the list of English names of all constellations for loaded sky culture
 	QStringList getConstellationsEnglishNames();
 
 signals:

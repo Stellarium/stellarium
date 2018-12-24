@@ -192,9 +192,9 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 
 	QString appVersion = StelUtils::getApplicationVersion();
-	QStringList c = appVersion.split(".");
+	QStringList c = appVersion.split(".");	
 	int r = StelUtils::compareVersions(latestVersion, appVersion);
-	if (r==-1 || c.count()>3)
+	if (r==-1 || c.count()>3 || c.last().contains("-"))
 		message = q_("Looks like you are using the development version of Stellarium.");
 	else if (r==0)
 		message = q_("This is latest stable version of Stellarium.");
