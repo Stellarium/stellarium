@@ -377,8 +377,14 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 
 	if (order < drawOrder)
 	{
-		// XXX: Here we should check that all the childern tiles are loaded, in
-		// that case there is no need to render the parent.
+		// If all the children tiles are loaded, we can skip the parent.
+		int i;
+		for (i = 0; i < 4; i++)
+		{
+			HipsTile* child = getTile(order + 1, pix * 4 + i);
+			if (!child || child->texFader.currentValue() < 1.0) break;
+		}
+		if (i == 4) goto skip_render;
 	}
 
 	// Actually draw the tile, as a single quad.
