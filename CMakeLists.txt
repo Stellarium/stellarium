@@ -112,8 +112,13 @@ ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
 
 # flags shared for gcc-like compilers (also MinGW/Clang)
 # Qt 5.7 requires C++11 support
-SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
-SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter")
+SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter")
+# Intel C/C++ compilers do not have an option -Wno-unused-results
+IF(NOT "${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
+     SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -Wno-unused-result")
+     SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -Wno-unused-result")
+ENDIF()
 
 # Set whether to try using C++11 when compiling. Required for Qt >= 5.7"
 IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
