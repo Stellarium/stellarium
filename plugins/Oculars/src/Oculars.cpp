@@ -681,7 +681,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedTelescopeIndex = qMin(settings->value("telescope_index", 0).toInt(), actualTelescopeCount-1);;
+			selectedTelescopeIndex = qMin(settings->value("telescope_index", 0).toInt(), actualTelescopeCount-1);
 		}
 
 		int lensCount = settings->value("lens_count", 0).toInt();
@@ -702,7 +702,7 @@ void Oculars::init()
 		{
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 		}
-		selectedLensIndex=qMin(settings->value("lens_index", 0).toInt(), actualLensCount-1);;
+		selectedLensIndex=qMin(settings->value("lens_index", -1).toInt(), actualLensCount-1); // Lens is not selected by default!
 
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
