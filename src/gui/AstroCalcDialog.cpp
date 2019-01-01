@@ -2407,8 +2407,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 					break;
 				case GraphDistanceVsTime:
 					distance = ssObj->getJ2000EquatorialPos(core).length();
-					if (distance < 0.1)
-						distance *= AU / 1000.;
 					aY.append(distance);
 					break;
 				case GraphElongationVsTime:
@@ -2425,8 +2423,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 					break;
 				case GraphHDistanceVsTime:
 					distance = ssObj->getHeliocentricEclipticPos().length();
-					if (distance < 0.1)
-						distance *= AU / 1000.;
 					aY.append(distance);
 					break;
 			}
@@ -2441,8 +2437,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 					break;
 				case GraphDistanceVsTime:
 					distance = ssObj->getJ2000EquatorialPos(core).length();
-					if (distance < 0.1)
-						distance *= AU / 1000.;
 					bY.append(distance);
 					break;
 				case GraphElongationVsTime:
@@ -2459,8 +2453,6 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 					break;
 				case GraphHDistanceVsTime:
 					distance = ssObj->getHeliocentricEclipticPos().length();
-					if (distance < 0.1)
-						distance *= AU / 1000.;
 					bY.append(distance);
 			}
 
