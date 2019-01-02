@@ -380,7 +380,7 @@ private:
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
-		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisJD)
+		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisJD || column == AstroCalcDialog::EphemerisDistance)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}
