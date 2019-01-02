@@ -1071,7 +1071,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	{
 		// stars
 		QString sType = q_("star");
-		QString sToolTip = "";
+		QString commonName, sToolTip = "";
 		float wdsSep;
 		QList<StelACStarData> celestialObjects;
 		if (celTypeId == 170)
@@ -1154,7 +1154,11 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				fillCelestialPositionTable(obj->getNameI18n(), raStr, decStr, obj->getVMagnitudeWithExtinction(core), QChar(0x2014), "", extra, sToolTip, sTransit, sType);
+				commonName = obj->getNameI18n();
+				if (commonName.isEmpty())
+					commonName = obj->getID();
+
+				fillCelestialPositionTable(commonName, raStr, decStr, obj->getVMagnitudeWithExtinction(core), QChar(0x2014), "", extra, sToolTip, sTransit, sType);
 			}
 		}
 	}
@@ -2215,8 +2219,15 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		drawCurrentTimeDiagram();
 
 		QString name = selectedObject->getNameI18n();
-		if (name.isEmpty() && selectedObject->getType() == "Nebula")
-			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+		if (name.isEmpty())
+		{
+			QString otype = selectedObject->getType();
+			if (otype == "Nebula")
+				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
+			if (otype == "Star")
+				name = selectedObject->getID();
+		}
 
 		drawTransitTimeDiagram();
 
@@ -2881,8 +2892,15 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		prepareMonthlyEleveationAxesAndGraph();
 
 		QString name = selectedObject->getNameI18n();
-		if (name.isEmpty() && selectedObject->getType() == "Nebula")
-			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+		if (name.isEmpty())
+		{
+			QString otype = selectedObject->getType();
+			if (otype == "Nebula")
+				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
+			if (otype == "Star")
+				name = selectedObject->getID();
+		}
 
 		ui->monthlyElevationGraph->graph(0)->setData(x, y);
 		ui->monthlyElevationGraph->graph(0)->setName(name);
@@ -3887,7 +3905,10 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
 		treeItem->setData(PhenomenaDate, Qt::UserRole, it.key());
 		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
-		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
+		QString commonName = object2->getNameI18n();
+		if (commonName.isEmpty())
+			commonName = object2->getID();
+		treeItem->setText(PhenomenaObject2, commonName);
 		if (occultation)
 			treeItem->setText(PhenomenaSeparation, dash);
 		else
@@ -4402,7 +4423,7 @@ void AstroCalcDialog::calculateWutObjects()
 		double wutJD = (int)JD;
 		double az, alt, mag;
 		QSet<QString> objectsList;
-		QString designation;
+		QString designation, starName;
 
 		ui->wutAngularSizeLimitCheckBox->setText(q_("Limit angular size:"));
 		ui->wutAngularSizeLimitCheckBox->setToolTip(q_("Set limits for angular size for visible celestial objects"));
@@ -4478,9 +4499,16 @@ void AstroCalcDialog::calculateWutObjects()
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
+							if (designation.isEmpty())
+								designation = object->getID();
+
 							if (!objectsList.contains(designation))
 							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 0.0, withDecimalDegree);
+								starName = object->getNameI18n();
+								if (starName.isEmpty())
+									starName = designation;
+
+								fillWUTTable(starName, designation, mag, object->getRTSTime(core), 0.0, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -4932,9 +4960,16 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 
 							designation = object->getEnglishName();
+							if (designation.isEmpty())
+								designation = object->getID();
+
 							if (!objectsList.contains(designation))
 							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), dblStar.value(object)/3600.0, withDecimalDegree);
+								starName = object->getNameI18n();
+								if (starName.isEmpty())
+									starName = designation;
+
+								fillWUTTable(starName, designation, mag, object->getRTSTime(core), dblStar.value(object)/3600.0, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -4950,9 +4985,16 @@ void AstroCalcDialog::calculateWutObjects()
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
+							if (designation.isEmpty())
+								designation = object->getID();
+
 							if (!objectsList.contains(designation))
 							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 0.0, withDecimalDegree);
+								starName = object->getNameI18n();
+								if (starName.isEmpty())
+									starName = designation;
+
+								fillWUTTable(starName, designation, mag, object->getRTSTime(core), 0.0, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -4969,9 +5011,16 @@ void AstroCalcDialog::calculateWutObjects()
 						if (mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							designation = object->getEnglishName();
+							if (designation.isEmpty())
+								designation = object->getID();
+
 							if (!objectsList.contains(designation))
 							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 0.0, withDecimalDegree);
+								starName = object->getNameI18n();
+								if (starName.isEmpty())
+									starName = designation;
+
+								fillWUTTable(starName, designation, mag, object->getRTSTime(core), 0.0, withDecimalDegree);
 								objectsList.insert(designation);
 							}
 						}
@@ -5840,8 +5889,15 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 			maxYadm = limit + 5.0;
 
 		QString name = selectedObject->getNameI18n();
-		if (name.isEmpty() && selectedObject->getType() == "Nebula")
-			name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+		if (name.isEmpty())
+		{
+			QString otype = selectedObject->getType();
+			if (otype == "Nebula")
+				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
+			if (otype == "Star")
+				name = selectedObject->getID();
+		}
 		ui->angularDistanceLabel->setText(QString("%1 (%2)").arg(label, name));
 
 		prepareAngularDistanceAxesAndGraph();

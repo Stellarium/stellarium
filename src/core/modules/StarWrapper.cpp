@@ -73,6 +73,20 @@ QString StarWrapper1::getEnglishName(void) const
 	return StarWrapperBase::getEnglishName();
 }
 
+QString StarWrapper1::getID(void) const
+{
+	QString hip;
+	if (s->getHip())
+	{
+		if (s->hasComponentID())
+			hip = QString("HIP %1 %2").arg(s->getHip()).arg(StarMgr::convertToComponentIds(s->getComponentIds()));
+		else
+			hip = QString("HIP %1").arg(s->getHip());
+	}
+
+	return hip;
+}
+
 QString StarWrapper1::getInfoString(const StelCore *core, const InfoStringGroup& flags) const
 {
 	QString str;
