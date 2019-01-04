@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>798</width>
+    <width>809</width>
     <height>591</height>
    </rect>
   </property>
@@ -97,7 +97,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </active>
           <inactive>
            <colorrole role="WindowText">
@@ -117,7 +117,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </inactive>
           <disabled>
            <colorrole role="WindowText">
@@ -137,7 +137,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>
+           </colorrole>           
           </disabled>
          </palette>
         </property>
@@ -236,7 +236,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="stackedWidget">
         <property name="currentIndex">
-         <number>3</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page_sky">
          <layout class="QGridLayout" name="gridLayout">
@@ -2956,7 +2956,7 @@
                   <string>O./C. longitude</string>
                  </property>
                 </widget>
-               </item>			   
+               </item>
                <item row="8" column="4">
                 <widget class="QToolButton" name="colorAntisolarPoint">
                  <property name="toolTip">
@@ -3374,6 +3374,158 @@
              <property name="bottomMargin">
               <number>0</number>
              </property>
+             <item row="2" column="1">
+              <widget class="QCheckBox" name="nativePlanetNamesCheckBox">
+               <property name="toolTip">
+                <string>Use native names for planets from current culture</string>
+               </property>
+               <property name="text">
+                <string>Use native names for planets</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_constLabels">
+               <item>
+                <widget class="QToolButton" name="colorConstellationLabels">
+                 <property name="toolTip">
+                  <string>Color of constellation names</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="showConstellationLabelsCheckBox">
+                 <property name="text">
+                  <string>Show labels</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <spacer name="horizontalSpacer_7">
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+               <item>
+                <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
+                 <property name="toolTip">
+                  <string>Select if you want names abbreviated, original or translated</string>
+                 </property>
+                 <property name="currentText">
+                  <string/>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="4" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_asterismLines">
+               <item>
+                <widget class="QToolButton" name="colorAsterismLines">
+                 <property name="toolTip">
+                  <string>Color of asterism lines</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="showAsterismLinesCheckBox">
+                 <property name="text">
+                  <string>Show asterism lines</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="asterismLineThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Thickness of line in pixels</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_5">
+               <item>
+                <widget class="QToolButton" name="colorConstellationBoundaries">
+                 <property name="toolTip">
+                  <string>Color of constellation boundaries</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="showConstellationBoundariesCheckBox">
+                 <property name="toolTip">
+                  <string>Show boundaries of constellations</string>
+                 </property>
+                 <property name="text">
+                  <string>Show boundaries</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="5" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_8">
+               <item>
+                <widget class="QToolButton" name="colorRayHelpers">
+                 <property name="toolTip">
+                  <string>Color of ray helpers</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QCheckBox" name="showRayHelpersCheckBox">
+                 <property name="text">
+                  <string>Show ray helpers</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="rayHelperThicknessSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="toolTip">
+                  <string>Thickness of line in pixels</string>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>5</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
              <item row="3" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_constArtbrightness">
                <item>
@@ -3444,124 +3596,12 @@
                </item>
               </layout>
              </item>
-             <item row="2" column="1">
-              <widget class="QCheckBox" name="nativePlanetNamesCheckBox">
-               <property name="toolTip">
-                <string>Use native names for planets from current culture</string>
-               </property>
-               <property name="text">
-                <string>Use native names for planets</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="0">
               <widget class="QCheckBox" name="useAsDefaultSkyCultureCheckBox">
                <property name="text">
                 <string>Use this sky culture as default</string>
                </property>
               </widget>
-             </item>
-             <item row="2" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_constLabels">
-               <item>
-                <widget class="QToolButton" name="colorConstellationLabels">
-                 <property name="toolTip">
-                  <string>Color of constellation names</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="showConstellationLabelsCheckBox">
-                 <property name="text">
-                  <string>Show labels</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <spacer name="horizontalSpacer_7">
-                 <property name="orientation">
-                  <enum>Qt::Horizontal</enum>
-                 </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
-                 </property>
-                </spacer>
-               </item>
-               <item>
-                <widget class="QComboBox" name="skyCultureNamesStyleComboBox">
-                 <property name="toolTip">
-                  <string>Select if you want names abbreviated, original or translated</string>
-                 </property>
-                 <property name="currentText">
-                  <string/>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="0" column="1">
-              <layout class="QHBoxLayout" name="horizontalLayout_5">
-               <property name="bottomMargin">
-                <number>0</number>
-               </property>
-               <item>
-                <widget class="QToolButton" name="colorConstellationBoundaries">
-                 <property name="toolTip">
-                  <string>Color of constellation boundaries</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="showConstellationBoundariesCheckBox">
-                 <property name="text">
-                  <string>Show boundaries</string>
-                 </property>
-                </widget>
-               </item>
-              </layout>
-             </item>
-             <item row="4" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_asterismLines">
-               <item>
-                <widget class="QToolButton" name="colorAsterismLines">
-                 <property name="toolTip">
-                  <string>Color of asterism lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="showAsterismLinesCheckBox">
-                 <property name="text">
-                  <string>Show asterism lines</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QSpinBox" name="asterismLineThicknessSpinBox">
-                 <property name="maximumSize">
-                  <size>
-                   <width>50</width>
-                   <height>16777215</height>
-                  </size>
-                 </property>
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
-                 </property>
-                 <property name="alignment">
-                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                 </property>
-                 <property name="minimum">
-                  <number>1</number>
-                 </property>
-                 <property name="maximum">
-                  <number>5</number>
-                 </property>
-                </widget>
-               </item>
-              </layout>
              </item>
              <item row="4" column="1">
               <layout class="QHBoxLayout" name="horizontalLayout_asterismLabels">
@@ -3581,41 +3621,67 @@
                </item>
               </layout>
              </item>
-             <item row="5" column="0">
-              <layout class="QHBoxLayout" name="horizontalLayout_8">
+             <item row="6" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_4">
                <item>
-                <widget class="QToolButton" name="colorRayHelpers">
-                 <property name="toolTip">
-                  <string>Color of ray helpers</string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QCheckBox" name="showRayHelpersCheckBox">
+                <widget class="QLabel" name="labelConstellationsFontSize">
                  <property name="text">
-                  <string>Show ray helpers</string>
+                  <string>Constellations font size</string>
                  </property>
                 </widget>
                </item>
                <item>
-                <widget class="QSpinBox" name="rayHelperThicknessSpinBox">
+                <widget class="QSpinBox" name="constellationsFontSizeSpinBox">
                  <property name="maximumSize">
                   <size>
                    <width>50</width>
                    <height>16777215</height>
                   </size>
                  </property>
-                 <property name="toolTip">
-                  <string>Thickness of line in pixels</string>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>8</number>
+                 </property>
+                 <property name="maximum">
+                  <number>40</number>
+                 </property>
+                 <property name="value">
+                  <number>14</number>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item row="6" column="1">
+              <layout class="QHBoxLayout" name="horizontalLayout_20">
+               <item>
+                <widget class="QLabel" name="labelAsterismsFontSize">
+                 <property name="text">
+                  <string>Asterisms font size</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="asterismsFontSizeSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777215</height>
+                  </size>
                  </property>
                  <property name="alignment">
                   <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                  </property>
                  <property name="minimum">
-                  <number>1</number>
+                  <number>8</number>
                  </property>
                  <property name="maximum">
-                  <number>5</number>
+                  <number>40</number>
+                 </property>
+                 <property name="value">
+                  <number>14</number>
                  </property>
                 </widget>
                </item>

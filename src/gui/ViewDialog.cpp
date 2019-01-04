@@ -432,6 +432,10 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->colorAsterismLines,      "AsterismMgr.linesColor",      "color/asterism_lines_color");
 	connectColorButton(ui->colorRayHelpers,	        "AsterismMgr.rayHelpersColor", "color/rayhelper_lines_color");
 
+	// Font selection
+	connectIntProperty(ui->constellationsFontSizeSpinBox,	"ConstellationMgr.fontSize");
+	connectIntProperty(ui->asterismsFontSizeSpinBox,		"AsterismMgr.fontSize");
+
 	// Hips mgr.
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));

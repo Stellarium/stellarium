@@ -87,7 +87,7 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 14).toInt());
+	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());	
