@@ -162,7 +162,7 @@ void StelScriptMgr::addModules()
 
 }
 
-QStringList StelScriptMgr::getScriptList()
+QStringList StelScriptMgr::getScriptList() const
 {
 	QStringList scriptFiles;
 
@@ -176,12 +176,12 @@ QStringList StelScriptMgr::getScriptList()
 	return scriptFiles;
 }
 
-bool StelScriptMgr::scriptIsRunning()
+bool StelScriptMgr::scriptIsRunning() const
 {
 	return engine->isEvaluating();
 }
 
-QString StelScriptMgr::runningScriptId()
+QString StelScriptMgr::runningScriptId() const
 {
 	return scriptFileName;
 }
@@ -475,7 +475,7 @@ void StelScriptMgr::resumeScript() {
 	agent->setPauseScript(false);
 }
 
-double StelScriptMgr::getScriptRate()
+double StelScriptMgr::getScriptRate() const
 {
 	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }

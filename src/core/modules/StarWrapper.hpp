@@ -46,9 +46,8 @@ protected:
 	StarWrapperBase(void) : ref_count(0) {;}
 	virtual ~StarWrapperBase(void) {;}
 	QString getType(void) const {return STAR_TYPE;}
-	QString getID(void) const { return getEnglishName(); } //TODO: add a proper ID here (probably based on position?)
 
-	QString getEnglishName(void) const {return "";}
+	QString getEnglishName(void) const {return QString();}
 	QString getNameI18n(void) const = 0;
 
 	//! StarWrapperBase supports the following InfoStringGroup flags <ul>
@@ -92,7 +91,7 @@ protected:
 	}
 	float getBV(void) const {return s->getBV();}
 	QString getEnglishName(void) const {return QString();}
-	QString getNameI18n(void) const {return s->getNameI18n();}
+	QString getNameI18n(void) const {return s->getNameI18n();}	
 	virtual double getAngularSize(const StelCore*) const {return 0.;}	
 protected:
 	const SpecialZoneArray<Star> *const a;
@@ -137,6 +136,7 @@ public:
 	//! - wds-separation (arcseconds; 0 for spectroscopic binaries)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	QString getEnglishName(void) const;
+	QString getID(void) const;
 };
 
 class StarWrapper2 : public StarWrapper<Star2>
@@ -145,6 +145,7 @@ public:
 	StarWrapper2(const SpecialZoneArray<Star2> *a,
 			   const SpecialZoneData<Star2> *z,
 			   const Star2 *s) : StarWrapper<Star2>(a,z,s) {;}
+	QString getID(void) const { return QString(); }
 };
 
 class StarWrapper3 : public StarWrapper<Star3>
@@ -153,6 +154,7 @@ public:
 	StarWrapper3(const SpecialZoneArray<Star3> *a,
 			   const SpecialZoneData<Star3> *z,
 			   const Star3 *s) : StarWrapper<Star3>(a,z,s) {;}
+	QString getID(void) const { return QString(); }
 };
 
 

@@ -126,7 +126,7 @@ public slots:
 					int autoDeleteTimeoutMs = 0);
 
 	//! find out if a label identified by id is presently shown
-	bool getLabelShow(int id); 
+	bool getLabelShow(int id) const;
 	//! set a label identified by id to be shown or not
 	void setLabelShow(int id, bool show); 
 	//! set text of label identified by id to be newText

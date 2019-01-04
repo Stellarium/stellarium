@@ -87,7 +87,7 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 14).toInt());
+	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());	
@@ -144,6 +144,8 @@ void ConstellationMgr::init()
 	addAction("actionShow_Constellation_Isolated", displayGroup, N_("Select single constellation"), "isolateSelected"); // no shortcut, sync with GUI
 	addAction("actionShow_Constellation_Deselect", displayGroup, N_("Remove selection of constellations"), this, "deselectConstellations()", "W");
 	addAction("actionShow_Constellation_Select", displayGroup, N_("Select all constellations"), this, "selectAllConstellations()", "Alt+W");
+	// Reload the current sky culture
+	addAction("actionShow_Starlore_Reload", displayGroup, N_("Reload the sky culture"), this, "reloadSkyCulture()", "Ctrl+Alt+I");
 }
 
 /*************************************************************************
@@ -154,6 +156,11 @@ double ConstellationMgr::getCallOrder(StelModuleActionName actionName) const
 	if (actionName==StelModule::ActionDraw)
 		return StelApp::getInstance().getModuleMgr().getModule("GridLinesMgr")->getCallOrder(actionName)+10;
 	return 0;
+}
+
+void ConstellationMgr::reloadSkyCulture()
+{
+	updateSkyCulture(StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID());
 }
 
 void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
@@ -718,6 +725,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 		return;
 	}
 
+	constellationsEnglishNames.clear();
+
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
@@ -774,6 +783,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 				// Some skycultures already have empty nativeNames. Fill those.
 				if (aster->nativeName.isEmpty())
 					aster->nativeName=aster->englishName;
+
+				constellationsEnglishNames << aster->englishName;
 			}
 			else
 			{
@@ -783,6 +794,11 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	}
 	commonNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation names";
+}
+
+QStringList ConstellationMgr::getConstellationsEnglishNames()
+{
+	return  constellationsEnglishNames;
 }
 
 void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)

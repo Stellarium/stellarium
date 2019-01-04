@@ -105,11 +105,13 @@ flag_show_size                      = false
 [gui]
 flag_show_flip_buttons              = false
 flag_show_nebulae_background_button = false
-base_font_size                      = 13
+screen_font_size                    = 13
+gui_font_size                       = 13
 #Name of custom font file for some languages, like Thai.
 #This file should be stored into data/ folder.
 #base_font_file                      = DejaVuSans.ttf
 #base_font_name                      = DejaVu Sans
+flag_font_selection                 = false
 mouse_cursor_timeout                = 10
 flag_mouse_cursor_timeout           = false
 selected_object_info                = all

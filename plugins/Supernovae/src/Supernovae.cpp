@@ -93,7 +93,8 @@ Supernovae::Supernovae()
 	setObjectName("Supernovae");
 	configDialog = new SupernovaeDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -583,9 +584,6 @@ void Supernovae::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Supernovae] Updating supernovae catalog...";
 	startDownload(updateUrl);
 }
@@ -705,6 +703,9 @@ void Supernovae::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Supernovae::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Supernovae/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{

@@ -425,7 +425,8 @@ void StarMgr::init()
 	populateStarsDesignations();
 	populateHipparcosLists();
 
-	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -1704,7 +1705,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 
 //! Define font file name and size to use for star names display
-void StarMgr::setFontSize(float newFontSize)
+void StarMgr::setFontSize(int newFontSize)
 {
 	starFont.setPixelSize(newFontSize);
 }

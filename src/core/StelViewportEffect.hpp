@@ -32,7 +32,7 @@ class StelViewportEffect
 public:
 	StelViewportEffect() {;}
 	virtual ~StelViewportEffect() {;}
-	virtual QString getName() {return "framebufferOnly";}
+	virtual QString getName() const {return "framebufferOnly";}
 	//! Alter the GL frame buffer, this method must not display anything.
 	//! The default implementation does nothing.
 	virtual void alterBuffer(QOpenGLFramebufferObject*) const {;}
@@ -51,7 +51,7 @@ class StelViewportDistorterFisheyeToSphericMirror : public StelViewportEffect
 public:
 	StelViewportDistorterFisheyeToSphericMirror(int screen_w,int screen_h);
 	~StelViewportDistorterFisheyeToSphericMirror();
-	virtual QString getName() {return "sphericMirrorDistorter";}
+	virtual QString getName() const {return "sphericMirrorDistorter";}
 	virtual void paintViewportBuffer(const QOpenGLFramebufferObject* buf) const;
 	virtual void distortXY(float& x, float& y) const;
 private:
