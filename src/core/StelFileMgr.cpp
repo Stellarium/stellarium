@@ -26,6 +26,7 @@
 #include <QString>
 #include <QDebug>
 #include <QStandardPaths>
+#include <QProcessEnvironment>
 
 #include <stdio.h>
 
@@ -78,11 +79,11 @@ void StelFileMgr::init()
 
 	
 	// Determine install data directory location
-
-	// If we are running from the build tree, we use the files from the current directory
-	if (QFileInfo(CHECK_FILE).exists())
+	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+	QString envRoot = env.value("STELLARIUM_DATA_ROOT");
+	if (QFileInfo(envRoot + QDir::separator() + QString(CHECK_FILE)).exists())
 	{
-		installDir = ".";
+		installDir = envRoot;
 	}
 	else
 	{
