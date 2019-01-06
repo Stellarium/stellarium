@@ -546,6 +546,8 @@ IF(ENABLE_TESTING)
     ADD_DEPENDENCIES(buildTests testStelFileMgr)
     ADD_TEST(testStelFileMgr testStelFileMgr)
     SET_TARGET_PROPERTIES(testStelFileMgr PROPERTIES FOLDER "src/tests")
+    SET_TESTS_PROPERTIES(testStelFileMgr PROPERTIES
+        ENVIRONMENT "STELLARIUM_DATA_ROOT=.")
 
     SET(tests_testStelSphereGeometry_SRCS
         tests/testStelSphereGeometry.hpp
