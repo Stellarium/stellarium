@@ -42,12 +42,7 @@ QTEST_GUILESS_MAIN(TestEphemeris)
 
 void TestEphemeris::initTestCase()
 {
-	#ifndef Q_OS_WIN
-	// FIXME: StelFileMgr::init(); is disabled on Windows due it will caused problem "could not find install location"
-	//        on Windows machines without installed Stellarium (e.g. AppVeyor). So, it will be give "false positive
-	//        test pass" at the moment for DE42x ephemeris.
 	StelFileMgr::init();
-	#endif
 
 	de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
 	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);	
