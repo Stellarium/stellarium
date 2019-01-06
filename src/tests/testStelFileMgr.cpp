@@ -28,7 +28,6 @@
 #include <QDebug>
 #include <QTest>
 #include <QRegExp>
-#include <QProcessEnvironment>
 
 #include "StelFileMgr.hpp"
 
@@ -92,9 +91,6 @@ void TestStelFileMgr::initTestCase()
 	QStringList path;
 	path << "./"+partialPath1;
 	path << workingDir+"/"+partialPath2;
-
-	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
-	env.insert("STELLARIUM_DATA_ROOT", ".");
 
 	StelFileMgr::init();
 	StelFileMgr::setSearchPaths(path);
