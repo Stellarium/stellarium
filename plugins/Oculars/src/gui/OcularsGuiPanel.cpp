@@ -618,7 +618,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	int oindex = ocularsPlugin->selectedOcularIndex;
 	Ocular* ocular = ocularsPlugin->oculars[oindex];
-	if (ocular->isBinoculars())
+	if (ocular->isBinoculars() && ocularsPlugin->flagShowOculars) // Hide the lens info for binoculars in eyepiece mode only
 		setLensControlsVisible(false);
 	else
 		setLensControlsVisible(true);
