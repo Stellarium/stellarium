@@ -586,7 +586,7 @@ void OcularsGuiPanel::updateLensControls()
 	fieldLensName->setPlainText(fullName);
 	fieldLensMultipler->setPlainText(multiplerString);
 	fieldOcularFl->setToolTip(q_("Focal length of eyepiece"));
-	
+
 	qreal posX = 0.;
 	qreal posY = 0.;
 	qreal widgetWidth = 0.;
@@ -840,7 +840,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		magnificationString.append(QString(" (%1D)").arg(QString::number(mag/telescope->diameter(), 'f', 2)));
 		QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
 		fieldMagnification->setPlainText(magnificationLabel);
-		fieldMagnification->setPos(posX, posY);		
+		fieldMagnification->setPos(posX, posY);
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 
@@ -1101,7 +1101,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldSparrowCriterion);
 	Q_ASSERT(fieldVisualResolution);
 	Q_ASSERT(fieldLensName);
-	Q_ASSERT(fieldLensMultipler);	
+	Q_ASSERT(fieldLensMultipler);
 
 	fieldOcularName->setDefaultTextColor(color);
 	fieldOcularFl->setDefaultTextColor(color);
