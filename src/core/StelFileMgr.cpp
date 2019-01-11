@@ -76,15 +76,17 @@ void StelFileMgr::init()
 
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
-
 	
 	// Determine install data directory location
 	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
 	QString envRoot = env.value("STELLARIUM_DATA_ROOT");
+	if (envRoot.isEmpty())
+		envRoot = ".";
+
 	if (QFileInfo(envRoot + QDir::separator() + QString(CHECK_FILE)).exists())
 	{
 		installDir = envRoot;
-	}
+	}	
 	else
 	{
 	#if defined(Q_OS_MAC)
