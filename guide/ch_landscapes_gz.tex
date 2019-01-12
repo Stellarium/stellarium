@@ -816,7 +816,8 @@ After that, we are ready for creating our panoramas.
 The graphical user interface (GUI) consists of a main menu, symbols, and 4 tabs. We start on the tab Photos. 
 \begin{itemize}
 \item \button{Add images\ldots} Opens a file browser. Select the images which you
-  want to stitch. Usually, lens data (focal length, field of view,
+  want to stitch. Usually, lens data (focal length, horizontal field of view\footnote{%
+    contrary to Stellarium, field of view (FoV) in \program{Hugin} means the \emph{horizontal} extent in degrees.},
   \ldots) are read from the EXIF data. If those are not available
   (e.g. cheap cameras, images scanned from film), you can enter those
   data on loading or later.  The images are now listed in the file
@@ -827,7 +828,7 @@ The graphical user interface (GUI) consists of a main menu, symbols, and 4 tabs.
   assign separate lenses to the images.
 
   Caveat: If you have resized the images, or produced copied on your
-  RAW converter with non-native resolution, the Field of View (FoV) in
+  RAW converter with non-native resolution, the horizontal Field of View (FoV) in
   \program{Hugin} may be misidentified. You must edit lens parameters and fill
   in the field of view from a full-size image. Else the first round of
   optimisation will run into unsolvable trouble. 
