@@ -6,7 +6,7 @@
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
 # Jiri Obdrzalek <slowan@seznam.cz>, 2018
-# Zdeněk Moravec <moravec@hapteplice.cz>, 2018
+# Zdeněk Moravec <moravec@hapteplice.cz>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -15,7 +15,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2019-01-04 13:11+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2018\n"
+"Last-Translator: Zdeněk Moravec <moravec@hapteplice.cz>, 2019\n"
 "Language-Team: Czech (https://www.transifex.com/stellarium/teams/80998/cs/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -5006,7 +5006,7 @@ msgstr "1 saros"
 
 #: src/gui/AstroCalcDialog.cpp:2007
 msgid "Latest selected object"
-msgstr ""
+msgstr "Poslední vybraný objekt"
 
 #: src/gui/AstroCalcDialog.cpp:2008
 msgid "Solar system"
@@ -6462,7 +6462,7 @@ msgstr "Spořič obrazovky Sluneční soustava"
 #. TRANSLATORS: Name of script
 #: src/translations.h:587
 msgid "Constellations Tour"
-msgstr "Prohlídky souhvězdí"
+msgstr "Prohlídka souhvězdí"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:589
@@ -9434,11 +9434,11 @@ msgstr "Tloušťka čáry v bodech"
 
 #: src/ui_viewDialog.h:2948
 msgid "Color of constellation boundaries"
-msgstr "Barva hranice souhvězdí"
+msgstr "Barva hranic souhvězdí"
 
 #: src/ui_viewDialog.h:2951
 msgid "Show boundaries of constellations"
-msgstr ""
+msgstr "Zobrazit hranice souhvězdí"
 
 #: src/ui_viewDialog.h:2953
 msgid "Show boundaries"
@@ -9478,11 +9478,11 @@ msgstr "Zobrazit popisky asterismů"
 
 #: src/ui_viewDialog.h:2974
 msgid "Constellations font size"
-msgstr ""
+msgstr "Velikost písma pro souhvězdí"
 
 #: src/ui_viewDialog.h:2975
 msgid "Asterisms font size"
-msgstr ""
+msgstr "Velikost písma pro asterismy"
 
 #: src/ui_viewDialog.h:2982
 msgctxt "Solar system objects"
@@ -13375,12 +13375,18 @@ msgid ""
 "server, along with the Stellarium telescope control network protocol (over "
 "TCP/IP), is <b>Johannes Gajdosik</b>."
 msgstr ""
+"Autorem všeho výše uvedeného - klienta, základního kódu serveru a LX200 "
+"serveru, včetně síťového protokolu pro ovládání dalekohledu Stellariem "
+"(prostřednictvím TCP/IP), je <b>Johannes Gajdosik</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:276
 msgid ""
 "the TelescopeServerNexStar telescope server core code (originally licensed "
 "under the LGPL, based on TelescopeServerLx200) by <b>Michael Heinz</b>."
 msgstr ""
+"Autorem základního kódu serveru dalekohledu TelescopeServerNexStar  (původně"
+" pod licencí LGPL, založený na TelescopeServerLx200) je <b>Michael "
+"Heinz</b>."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:277
 msgid "INDI by <b>Alessandro Siniscalchi</b>."
@@ -13392,6 +13398,8 @@ msgid ""
 "A more complete and up-to-date documentation for this plug-in can be found "
 "on the {Telescope Control} page in the Stellarium Wiki."
 msgstr ""
+"Úplnější a aktuálnější dokumentaci tohoto zásuvného modulu můžete nalézt na "
+"Wiki stránce Stellaria {Ovládání dalekohledu}."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:293
 msgid "Contents"
@@ -13405,22 +13413,22 @@ msgstr "Schopnosti a omezení"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:295
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:317
 msgid "The original telescope control feature"
-msgstr ""
+msgstr "Funkce původního ovládání dalekohledu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:296
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:321
 msgid "Using this plug-in"
-msgstr ""
+msgstr "Používání tohoto zásuvného modulu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:297
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:345
 msgid "Main window ('Telescopes')"
-msgstr "Hlavní okno ('Teleskopy')"
+msgstr "Hlavní okno ('Dalekohledy')"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:298
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:369
 msgid "Telescope configuration window"
-msgstr ""
+msgstr "Okno nastavení dalkohledu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:299
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:371
@@ -13453,11 +13461,11 @@ msgstr "Indikátory zorného pole"
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:304
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:440
 msgid "'Slew telescope to' window"
-msgstr ""
+msgstr "Okno 'Otočit dalekohled na'"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:305
 msgid "Telescope commands"
-msgstr "Příkazy teleskopu"
+msgstr "Příkazy dalekohledu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:306
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:473
@@ -13477,18 +13485,27 @@ msgid ""
 "collisions and similar situations. (To abort a slew, you can start another "
 "one to a safe position.)"
 msgstr ""
+"Tento zásuvný modul umožňuje Stellariu posílat pouze '<b>přejížděcí</b>' "
+"('go to') příkazy do přístroje a přijímat jeho aktuální polohu. Nemůže "
+"vydávat jakékoli jiné příkazy, takže uživatel musí být opatrný, aby nedošlo "
+"ke kolizi montáže apod. (Pro zrušení otáčení můžete vydat další příkaz k "
+"otočení přístroje na bezpečnou pozici.)"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:311
 msgid ""
 "As of the current version, this plug-in doesn't allow satellite tracking, "
 "and is not very suitable for lunar or planetary observations."
 msgstr ""
+"V současné verzi zásuvný modul neumožňuje sledování satelitů a není příliš "
+"vhodný pro pozorování Měsíce a planet."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:312
 msgid ""
 "WARNING: Stellarium CANNOT prevent your telescope from being pointed at the "
 "Sun."
 msgstr ""
+"VAROVÁNÍ: Stellarium NEMŮŽE zabránit vašemu dalekohledu, aby mířil na "
+"Slunce."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:313
 msgid ""
@@ -13496,6 +13513,9 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
+"Nikdy nezaměřujte váš dalekohled na Slunce bez instalovaného vhodného "
+"slunečního filtru. Intenzivní záření zesílené dalekohledem způsobí nevratné "
+"poškození vašeho zraku a/nebo vašeho vybavení."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:314
 msgid ""
@@ -13504,6 +13524,10 @@ msgid ""
 "it is strongly recommended to avoid using the telescope control feature "
 "before sunset without appropriate protection."
 msgstr ""
+"Dokonce se může stát, i když to během dne neuděláte úmyslně, že váš "
+"dalekohled bude mířit na Slunce při přejíždění k zadanému cíli. Proto "
+"důrazně doporučujeme, abyste do západu Slunce nepoužívali ovládání "
+"dalekohledu bez vhodné ochrany."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:315
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:319
@@ -13519,7 +13543,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:493
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:505
 msgid "Back to top"
-msgstr "Zespod nahoru"
+msgstr "Zpět nahoru"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:318
 msgid ""
@@ -13527,6 +13551,8 @@ msgid ""
 "removed. There is no longer a way to control a telescope with Stellarium "
 "without this plug-in."
 msgstr ""
+"Ve verzi Stellaria 0.10.5 bylo původní ovládání dalekohledu odstraněno. Nyní"
+" již není možné ovládat dalekohled ve Stellariu bez tohoto zásuvného modulu."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:322
 msgid ""
@@ -13630,12 +13656,16 @@ msgid ""
 "The <b>Telescopes</b> tab displays a list of the telescope connections that "
 "have been set up:"
 msgstr ""
+"Záložka <b>Dalekohledy</b> zobrazuje seznam připojených dalekohledů,  které "
+"již byly nastaveny:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:353
 msgid ""
 "The number (<b>#</b>) column shows the number used to control this "
 "telescope. For example, for telescope #2, the shortcut is Ctrl+2."
 msgstr ""
+"Sloupec s čísly (<b>#</b>) udává číslo použité k ovládání daného "
+"dalekohledu. Například dalekohled #2 má klávesovou zkratku Ctrl+2."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:354
 msgid ""
@@ -13643,15 +13673,18 @@ msgid ""
 " not. Unfortunately, there are some cases in which 'Connected' is displayed "
 "when no working connection exists."
 msgstr ""
+"Sloupec <b>Status</b> ukazuje, zda je toto připojení momentálně aktivní či "
+"nikoliv. Bohužel je v některých případech zobrazeno 'Připojeno', i když "
+"neexistuje funkční připojení."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:355
 msgid "The <b>Type</b> field indicates what kind of connection is this:"
-msgstr ""
+msgstr "Pole <b>Typ</b> zobrazuje, o jaký druh připojení se jedná:"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:358
 msgid "<b>virtual</b> means a {virtual telescope};"
-msgstr ""
+msgstr "<b>virtuální</b> znamená {virtuální dalekohled};"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:362
@@ -13659,18 +13692,24 @@ msgid ""
 "<b>local, Stellarium</b> means a DIRECT connection to the telescope (see "
 "{above});"
 msgstr ""
+"<b>lokální, Stellarium</b> znamená PŘÍMÉ připojení k dalekohledu (viz "
+"{výše});"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:364
 msgid ""
 "<b>local, external</b> means an INDIRECT connection to a program running on "
 "the same computer;"
 msgstr ""
+"<b>lokální, externí</b> znamená NEPŔÍMÉ připojení k programu, který je "
+"spuštěn na stejném počítači;"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:365
 msgid ""
 "<b>remote, unknown</b> means an INDIRECT connection over a network to a "
 "remote machine."
 msgstr ""
+"<b>vzdálené, neznámý</b> znamená NEPŘÍMÉ připojení po síti ke vzdálenému "
+"počítači."
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:366
 msgid ""
@@ -13690,7 +13729,7 @@ msgstr ""
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:376
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:569
 msgid "Telescope controlled by:"
-msgstr "Teleskop je ovládán:"
+msgstr "Dalekohled je ovládán:"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:377
 msgid "<b>Stellarium, directly through a serial port</b> is the DIRECT case"
@@ -14124,7 +14163,7 @@ msgstr "místní, vnější"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:574
 msgid "remote, unknown"
-msgstr "vzdálená, neznámá"
+msgstr "vzdálené, neznámý"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:578
@@ -14134,12 +14173,12 @@ msgstr "virtuální"
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:582
 msgid "remote, RTS2"
-msgstr ""
+msgstr "vzdálené, RTS2"
 
 #. TRANSLATORS: Telescope connection type
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:586
 msgid "remote, INDI"
-msgstr ""
+msgstr "vzdálené, INDI"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1008
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:407
@@ -14148,7 +14187,7 @@ msgstr "Spustit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1009
 msgid "Start the selected local telescope"
-msgstr "Spustit zvolený místní teleskop"
+msgstr "Spustit vybraný místní dalekohled"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1014
 msgid "Stop"
@@ -14156,7 +14195,7 @@ msgstr "Zastavit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1015
 msgid "Stop the selected local telescope"
-msgstr "Zastavit zvolený místní teleskop"
+msgstr "Zastavit vybraný místní dalekohled"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1020
 msgid "Connect"
@@ -14164,7 +14203,7 @@ msgstr "Připojit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1021
 msgid "Connect to the selected telescope"
-msgstr "Připojit se ke zvolenému teleskopu"
+msgstr "Připojit se k vybranému dalekohledu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1026
 msgid "Disconnect"
@@ -14172,7 +14211,7 @@ msgstr "Odpojit"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1027
 msgid "Disconnect from the selected telescope"
-msgstr "Odpojit se od zvoleného teleskopu"
+msgstr "Odpojit se od vybraného dalekohledu"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:1048
 msgid "Select a directory"
@@ -14194,7 +14233,7 @@ msgstr "Vybrat jeden"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:327
 msgid "Slew telescope to"
-msgstr "Otočit teleskop na"
+msgstr "Otočit dalekohled na"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:329
 msgid "There are no active devices."
@@ -14254,19 +14293,19 @@ msgstr "&Otočit"
 
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:349
 msgid "Configure &telescopes..."
-msgstr "Nastavit &teleskopy..."
+msgstr "Nastavit &dalekohledy..."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:567
 msgid "Telescope Configuration"
-msgstr "Nastavení teleskopu"
+msgstr "Nastavení dalkohledu"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:571
 msgid ""
 "A telescope connected to this computer via a serial port and controlled "
 "directly by Stellarium."
 msgstr ""
-"Teleskop připojený k tomuto počítači přes sériový port a přímo ovládán "
-"Stellarium."
+"Dalekohled připojený k tomuto počítači přes sériový port a přímo ovládaný "
+"Stellariem."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:573
 msgid "Stellarium, directly through a serial port"
@@ -14277,8 +14316,7 @@ msgid ""
 "A telescope controlled by an external application, either at this computer "
 "or at a remote machine."
 msgstr ""
-"Teleskop ovládáný vnější aplikací, buď v tomto počítači nebo ve vzdáleném "
-"stroji."
+"Dalekohled ovládáný vnější aplikací, buď v tomto počítači nebo vzdáleně."
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:577
 msgid "External software or a remote computer"
@@ -14290,7 +14328,7 @@ msgstr "Dalekohled, který je přístupný pomocí RTS2(.org) JSON API"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:581
 msgid "RTS2 telescope"
-msgstr ""
+msgstr "RTS2 dalekohled"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:582
 msgid "Nothing, just simulate one (a moving reticle)"
@@ -14313,8 +14351,8 @@ msgid ""
 "Automatically attempt to start the telescope or establish connection when "
 "Stellarium starts"
 msgstr ""
-"Automaticky se pokusit teleskop spustit nebo navázat spojení při spuštění "
-"Stellarium"
+"Automaticky se pokusit dalekohled spustit nebo navázat spojení při spuštění "
+"Stellaria"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:595
 msgid "Start/connect at startup"
@@ -14330,15 +14368,15 @@ msgstr "Model zařízení:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:605
 msgid "RTS2 telescope settings"
-msgstr ""
+msgstr "Nastavení RTS2 dalekohledu"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:606
 msgid "URL:"
-msgstr ""
+msgstr "URL:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:607
 msgid "Username:"
-msgstr ""
+msgstr "Uživatelské jméno:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:608
 msgid "Password:"
@@ -14346,7 +14384,7 @@ msgstr "Heslo:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:610
 msgid "RTS2 username"
-msgstr ""
+msgstr "RTS2 uživatelské jméno:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:613
 msgid "RTS2 password"
@@ -14354,11 +14392,11 @@ msgstr "RTS2 heslo"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:616
 msgid "URL of the machine that hosts the RTS2 JSON (httpd) server"
-msgstr ""
+msgstr "URL stroje, který je hostitelem RTS2 JSON (httpd) serveru"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:618
 msgid "Refresh every:"
-msgstr ""
+msgstr "Obnovit každých:"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:622
 msgid "User interface settings"
@@ -14367,7 +14405,7 @@ msgstr "Nastavení uživatelského rozhraní:"
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:624
 msgid "Show circles with fixed angular size around the telescope reticle"
 msgstr ""
-"Zobrazit kruhy s pevnou velikostí úhlu okolo záměrného kříže teleskopu"
+"Zobrazit kruhy s pevnou velikostí úhlu okolo záměrného kříže dalekohledu"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:626
 msgid "Use field of view indicators"
@@ -14387,11 +14425,11 @@ msgstr "OK"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:406
 msgid "Telescopes Controlled"
-msgstr "Kontrolované teleskopy"
+msgstr "Ovládané dalekohledy"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:409
 msgid "Configure the selected telescope"
-msgstr "Nastavit zvolený teleskop"
+msgstr "Nastavit zvolený dalekohled"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:411
 msgid "Configure"
@@ -14399,11 +14437,11 @@ msgstr "Nastavit"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:413
 msgid "Add a new telescope"
-msgstr "Přidat nový teleskop"
+msgstr "Přidat nový dalekohled"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:417
 msgid "Remove the selected telescope"
-msgstr "Odstranit zvolený teleskop"
+msgstr "Odstranit vybraný dalekohled"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:421
 msgid "GUI"
@@ -14415,7 +14453,7 @@ msgstr "Zobrazit popisky dalekohledů"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:423
 msgid "Show telescope reticles"
-msgstr "Zobrazit záměrný kříž teleskopu"
+msgstr "Zobrazit záměrný kříž dalekohled"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:424
 msgid "Show field of view indicators"
@@ -14427,12 +14465,13 @@ msgstr "Soubory"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:426
 msgid "Log telescope driver messages to files"
-msgstr "Zaznamenat zprávy ovladače teleskopu do souborů"
+msgstr "Zapisovat hlášky ovladače dalekohledu do souboru"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:427
 msgid "Use telescope server executables (override built-in drivers)"
 msgstr ""
-"Použít spustitelné soubory serveru teleskopu (potlačit zabudované ovladače)"
+"Použít spustitelné soubory serveru dalekohledu (potlačit zabudované "
+"ovladače)"
 
 #: plugins/TelescopeControl/src/gui/ui_telescopeDialog.h:428
 msgid "Executables directory:"
@@ -14585,7 +14624,7 @@ msgstr "Galaktický rovník"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:415
 msgid "Sky Background (default: black)"
-msgstr ""
+msgstr "Pozadí oblohy (výchozí: černá)"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:449
 msgid "Effects"
