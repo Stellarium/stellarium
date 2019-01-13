@@ -100,12 +100,38 @@ public slots:
 	float getMarkersSize(void) const;
 
 	//! Fill the list highlight markers
-	//! @param list - list of coordinates of the highlights
+	//! @param list - list of coordinates of the highlights (J2000 frame)
 	void fillHighlightList(QList<Vec3d> list);
 
 	//! Clean the list of highlight markers
 	void cleanHighlightList();
 
+	//! Add the point into list of the highlight markers
+	//! @param ra - right ascension angle (J2000.0 frame) of highlight marker
+	//! @param dec - declination angle (J2000.0 frame) of highlight marker
+	//! @code
+	//! // example of usage in scripts
+	//! HighlightMgr.addPoint("2h10m15s", "60d01m15s");
+	//! @endcode
+	void addPoint(const QString& ra, const QString& dec);
+
+	//! Add the point into list of the highlight markers
+	//! @param ra - right ascension angle (on date) of highlight marker
+	//! @param dec - declination angle (on date) of highlight marker
+	//! @code
+	//! // example of usage in scripts
+	//! HighlightMgr.addPointRaDec("2h10m15s", "60d01m15s");
+	//! @endcode
+	void addPointRaDec(const QString& ra, const QString& dec);
+
+	//! Add the point into list of the highlight markers
+	//! @param alt - altitude of highlight marker
+	//! @param azi - azimuth of highlight marker
+	//! @code
+	//! // example of usage in scripts
+	//! HighlightMgr.addPointAltAzi("2d10m15s", "60d01m15s");
+	//! @endcode
+	void addPointAltAzi(const QString& alt, const QString& azi);
 
 private:
 	// Font used for displaying our text

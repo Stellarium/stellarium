@@ -164,3 +164,37 @@ void HighlightMgr::drawHighlights(StelCore* core, StelPainter& painter)
 		}
 	}
 }
+
+void HighlightMgr::addPoint(const QString &ra, const QString &dec)
+{
+	Vec3d J2000;
+	double dRa = StelUtils::getDecAngle(ra);
+	double dDec = StelUtils::getDecAngle(dec);
+	StelUtils::spheToRect(dRa, dDec, J2000);
+
+	highlightList.append(J2000);
+}
+
+void HighlightMgr::addPointRaDec(const QString& ra, const QString& dec)
+{
+	Vec3d aim;
+	double dRa = StelUtils::getDecAngle(ra);
+	double dDec = StelUtils::getDecAngle(dec);
+	StelUtils::spheToRect(dRa, dDec, aim);
+
+	highlightList.append(StelApp::getInstance().getCore()->equinoxEquToJ2000(aim, StelCore::RefractionOff));
+}
+
+void HighlightMgr::addPointAltAzi(const QString &alt, const QString &azi)
+{
+	Vec3d aim;
+	double dAlt = StelUtils::getDecAngle(alt);
+	double dAzi = M_PI - StelUtils::getDecAngle(azi);
+
+	if (StelApp::getInstance().getFlagSouthAzimuthUsage())
+		dAzi -= M_PI;
+
+	StelUtils::spheToRect(dAzi, dAlt, aim);
+
+	highlightList.append(StelApp::getInstance().getCore()->altAzToJ2000(aim, StelCore::RefractionAuto));
+}
