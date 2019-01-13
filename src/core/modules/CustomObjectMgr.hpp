@@ -49,8 +49,6 @@ public:
 	virtual void drawPointer(StelCore* core, StelPainter& painter);
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
-	void drawHighlights(StelCore* core, StelPainter& painter);
-
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in StelObjectManager class
 	//! Used to get a list of objects which are near to some position.
