@@ -76,17 +76,21 @@ public:
 	virtual QString getName() const { return "Highlights"; }
 	virtual QString getStelObjectType() const { return QString(); }
 
+	//! Fill the list highlight markers
+	//! @param list - list of coordinates of the highlights (J2000.0 frame)
+	void fillHighlightList(QList<Vec3d> list);
+
 public slots:
 	//! Set the color used to draw of the highlight markers.
 	//! @param c The color of the highlight markers (R,G,B)
 	//! @code
 	//! // example of usage in scripts
-	//! HighlightMgr.setHighlightColor(Vec3f(1.0,0.0,0.0));
+	//! HighlightMgr.setColor(Vec3f(1.0,0.0,0.0));
 	//! @endcode
-	void setHighlightColor(const Vec3f& c);
+	void setColor(const Vec3f& c);
 	//! Get the current color used to draw of the highlight markers.
 	//! @return current color
-	const Vec3f& getHighlightColor(void) const;
+	const Vec3f& getColor(void) const;
 
 	//! Set the size of highlight markers.
 	//! @param c The size of the highlight markers
@@ -98,10 +102,6 @@ public slots:
 	//! Get the current size used to highlight markers.
 	//! @return current size
 	float getMarkersSize(void) const;
-
-	//! Fill the list highlight markers
-	//! @param list - list of coordinates of the highlights (J2000 frame)
-	void fillHighlightList(QList<Vec3d> list);
 
 	//! Clean the list of highlight markers
 	void cleanHighlightList();
