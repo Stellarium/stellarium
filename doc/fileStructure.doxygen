@@ -42,13 +42,13 @@ It is the place where Stellarium saves the configuration file, recorded scripts 
 <tr class="header"><td>OS</td><td>Location</td></tr>
 <tr class="stel"><td>Linux / BSD / other POSIX</td><td><tt>$HOME/.stellarium</tt> where @c $HOME is your home directory.</td></tr>
 <tr class="stel"><td>Windows 2000 / XP</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Documents and Settings\\YOURUSERNAME\\Application Data\\Stellarium</tt></td></tr>
-<tr class="stel"><td>Windows Vista / 7 / 8</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Users\\YOURUSERNAME\\AppData\\Roaming\\Stellarium</tt></td></tr>
+<tr class="stel"><td>Windows Vista / 7 / 8 / 10</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Users\\YOURUSERNAME\\AppData\\Roaming\\Stellarium</tt></td></tr>
 <tr class="stel"><td>MacOS X</td><td><tt>$HOME/Library/Application Support/Stellarium</tt> where @c $HOME is your home directory. Note that you may have to change explorer's settings so you can view hidden files before you can navigate to this directory.</td></tr>
 </table>
 
 The directory tree structure within the <em>User Data Directory</em> is the same as the <em>Installation Data Directory</em>. Any file which exists in the <em>User Data Directory</em> will over-ride that in the <em>Installation Data Directory</em>.
 
-For example, to modify the position of a nebula texture, the user may copy the <tt>nebulae/default/nebula_textures.fab</tt> file from the <em>Installation Data Directory</em> to the <tt>nebulae/default</tt> sub-directory of the <em>User Data Directory</em> and modify it there. In this manner, each user on a multi-user system may have their own customized Stellarium data files.
+For example, to modify the position of a nebula texture, the user may copy the <tt>nebulae/default/textures.json</tt> file from the <em>Installation Data Directory</em> to the <tt>nebulae/default</tt> sub-directory of the <em>User Data Directory</em> and modify it there. In this manner, each user on a multi-user system may have their own customized Stellarium data files.
 </li>
 
 <li>The <b><em>Installation Data Directory</em></b>, which is where the program executable, libraries and all data files which are distributed with the program are installed.
@@ -63,7 +63,8 @@ It is the place where Stellarium's data files are installed on your computer. Th
 
 Important data files which may be found in the <em>Installation Data Directory</em> include:
 <ul>
-<li><tt>data/ssystem.ini</tt>: the solar system bodies description file</li>
+<li><tt>data/ssystem_major.ini</tt>: the solar system bodies description file (major planets and moons)</li>
+<li><tt>data/ssystem_minor.ini</tt>: the solar system bodies description file (minor planets and comets)</li>
 <li><tt>stars/default/</tt>: star catalogues</li>
 <li><tt>nebulae/default/</tt>: nebula textures and data files</li>
 <li><tt>scripts/</tt>: script files</li>
