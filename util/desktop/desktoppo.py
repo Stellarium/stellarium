@@ -53,7 +53,7 @@ pot = polib.POFile('', check_for_duplicates=True)
 potcreationtime = strftime('%Y-%m-%d %H:%M%z')
 pot.metadata = {
     'Project-Id-Version': 'Stellarium desktop file translation',
-    'Report-Msgid-Bugs-To': 'stellarium-translation@lists.launchpad.net',
+    'Report-Msgid-Bugs-To': 'stellarium@googlegroups.com',
     'POT-Creation-Date': potcreationtime,
     'PO-Revision-Date': 'YEAR-MO-DA HO:MI+ZONE',
     'Last-Translator': 'FULL NAME <EMAIL@ADDRESS>',
