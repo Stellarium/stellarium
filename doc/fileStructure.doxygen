@@ -43,7 +43,7 @@ It is the place where Stellarium saves the configuration file, recorded scripts 
 <tr class="stel"><td>Linux / BSD / other POSIX</td><td><tt>$HOME/.stellarium</tt> where @c $HOME is your home directory.</td></tr>
 <tr class="stel"><td>Windows 2000 / XP</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Documents and Settings\\YOURUSERNAME\\Application Data\\Stellarium</tt></td></tr>
 <tr class="stel"><td>Windows Vista / 7 / 8</td><td>This is the <tt>Stellarium</tt> sub-directory of your users application data directory (usually something like <tt>C:\\Users\\YOURUSERNAME\\AppData\\Roaming\\Stellarium</tt></td></tr>
-<tr class="stel"><td>MacOS X</td><td><tt>$HOME/Library/Preferences/Stellarium</tt> where @c $HOME is your home directory. Note that you may have to change explorer's settings so you can view hidden files before you can navigate to this directory.</td></tr>
+<tr class="stel"><td>MacOS X</td><td><tt>$HOME/Library/Application Support/Stellarium</tt> where @c $HOME is your home directory. Note that you may have to change explorer's settings so you can view hidden files before you can navigate to this directory.</td></tr>
 </table>
 
 The directory tree structure within the <em>User Data Directory</em> is the same as the <em>Installation Data Directory</em>. Any file which exists in the <em>User Data Directory</em> will over-ride that in the <em>Installation Data Directory</em>.

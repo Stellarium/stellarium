@@ -1,5 +1,5 @@
 %% Part of Stellarium User Guide
-%% History: 
+%% History:
 %% 2016-04-24 Adapted from GZ's course given at SEAC2015 in Rome.
 %% 2016-04-25 Added section on making Nadir image for old_style landscape.
 %% State: Current for 0.15.
@@ -11,7 +11,7 @@
 
 \newcommand{\landscape}[1]{\textsf{\textit{\footnotesize #1}}}
 
-  
+
 Landscapes are one of the key features that make Stellarium popular.
 Originally just used for decoration, since version 10.6 they can be
 configured accurately for research and demonstration in ``skyscape
@@ -61,7 +61,7 @@ that are referenced from there, like a coordinate list or the
 textures. Those reside in a subdirectory of the \file{landscape}
 folder inside the Stellarium program directory, or, for own work, in a
 subdirectory of the \file{landscape} folder inside your Stellarium
-user data directory (see section~\ref{sec:Directories}). 
+user data directory (see section~\ref{sec:Directories}).
 
 Let us ssume we want to create a landscape for a place called
 Rosenburg.  The location for the files of our new custom landscape
@@ -73,7 +73,7 @@ compatibility, use small letters and no spaces:
 \begin{tabular}{ll}
 Windows&  \file{C:/Users/YOU/AppData/Roaming/Stellarium/landscapes/rosenburg}\\
 Linux&\file{\textasciitilde/.stellarium/landscapes/rosenburg}\\
-Mac&\file{\$HOME/Library/Preferences/Stellarium/landscapes/rosenburg}\\
+Mac&\file{\$HOME/Library/Application\ Support/Stellarium/landscapes/rosenburg}\\
 \end{tabular}
 
 
@@ -90,7 +90,7 @@ Mac&\file{\$HOME/Library/Preferences/Stellarium/landscapes/rosenburg}\\
 %   browser with a funny image. However, you start some unknown program
 %   instead, and running this \file{.exe} executable program may turn
 %   out to be anything but funny!}
-% 
+%
 
 \subsection{Location information}
 \label{sec:landscapes:location}
@@ -190,8 +190,8 @@ which was borrowed from Cartes du Ciel and comes with Stellarium):
 name = Geneve
 type = polygonal
 author = Georg Zotti; Horizon definition by Patrick Chevalley
-description = Horizon line of Geneve. 
-              Demonstrates compatibility with 
+description = Horizon line of Geneve.
+              Demonstrates compatibility with
               horizon descriptions from Cartes du Ciel.
 polygonal_horizon_list = horizon_Geneve.txt
 polygonal_angle_rotatez = 0
@@ -255,19 +255,19 @@ name = Moon
 type = spherical
 maptex = apollo17.png
 \end{configfile}
-A more elaborate example is found with the \landscape{Grossmugl} landscape: 
+A more elaborate example is found with the \landscape{Grossmugl} landscape:
 
 \begin{configfile}
 [landscape]
 name = Grossmugl
 type = spherical
-author = Guenther Wuchterl, Kuffner-Sternwarte.at; 
+author = Guenther Wuchterl, Kuffner-Sternwarte.at;
          Lightscape: Georg Zotti
-description = Field near Leeberg, Grossmugl (Riesentumulus), 
-              Austria - Primary Observing Spot of the Grossmugl 
+description = Field near Leeberg, Grossmugl (Riesentumulus),
+              Austria - Primary Observing Spot of the Grossmugl
               Starlight Oasis - http://starlightoasis.org
 maptex = grossmugl_leeberg_crop11.25.png
-maptex_top=11.25 
+maptex_top=11.25
 maptex_fog = grossmugl_leeberg_fog_crop22.5.png
 maptex_fog_top = 22.5
 maptex_fog_bottom = -22.5
@@ -329,8 +329,8 @@ Where:
   define the exact position of the horizon. If missing, the texture
   can be queried for horizon transparency (for accurate object
   rising/setting times)
-\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}  % 
-      % the two first columns in the list are numbers: azimuth and altitude or zenith distance, in either degrees or radians or gradians(gon). 
+\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}  %
+      % the two first columns in the list are numbers: azimuth and altitude or zenith distance, in either degrees or radians or gradians(gon).
       % The value must be one of azDeg_altDeg|azDeg_zdDeg|azRad_altRad|azRad_zdRad|azGrad_altGrad|azGrad_zdGrad. Default: azDeg_altDeg
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal}  %Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g. when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
 \item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}  %(optional, default: invisible) used to draw a polygonal horizon line.
@@ -343,7 +343,7 @@ Where:
   here. (since v0.14.0)
 \end{description}
 %
-To save texture memory, %since v0.13.0 
+To save texture memory, %since v0.13.0
 you can trim away the transparent
 sky and define the angle \var{maptex\_top}. Likewise,
 \var{fogtex\_top}, \var{fogtex\_bottom}, \var{maptex\_illum\_top} and
@@ -423,7 +423,7 @@ ground = groundtex:0:0:1:1
 nb_decor_repeat = 1
 decor_alt_angle =  82
 decor_angle_shift = -62
-; Rotatez deviates from -90 by the Meridian Convergence. 
+; Rotatez deviates from -90 by the Meridian Convergence.
 ; The original landscape pano is grid-aligned, not north-aligned!
 decor_angle_rotatez =  -90.525837223
 ground_angle_shift = -62
@@ -482,7 +482,7 @@ Where:
   landscape. Fog is mapped onto a simple cylinder.\footnote{In very wide-angle
   views, the fog cylinder may become visible in the corners.} Note that for this
   landscape, accurate overlay of fog and landscape is only guaranteed if
-  \var{calibrated=true} and \var{tan\_mode=true}. 
+  \var{calibrated=true} and \var{tan\_mode=true}.
 %\item[\var{fog}] [NO LONGER USED] used to be the description of the projection of the fog texture in the scene.
 \item[\var{nb\_decor\_repeat}] is the number of times to repeat the
   side textures in the 360 panorama. (Useful photo panoramas should
@@ -549,7 +549,7 @@ Where:
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal} %Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g. when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
 \item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal}  % (optional, default: invisible) used to draw a polygonal horizon line.
 \item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal} % (optional, default=-1, i.e. use landscape/minimal\_brightness from global config.ini) Some minimum brightness to keep landscape visible.
-\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal}  % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0) 
+\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal}  % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0)
 \end{description}
 
 
@@ -612,7 +612,7 @@ Where:
 \item[\var{tesselate\_cols}] (optional, default=40) If straight edges
   in your landscape appear broken, try increasing.
 \item[\var{polygonal\_horizon\_list}] (optional) see \ref{sec:landscapes:Polygonal}  %is the name of the (measured) horizon data file for this landscape.
-\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal} 
+\item[\var{polygonal\_horizon\_list\_mode}] (optional) see \ref{sec:landscapes:Polygonal}
 %
 %  the two first columns in the list are numbers: azimuth and altitude or zenith distance, in either degrees or radians or
 %  gradians(gon). The value must be one of \var{azDeg\_altDeg | azDeg\_zdDeg | azRad\_altRad | azRad\_zdRad | azGrad\_altGrad |  azGrad\_zdGrad}. Default: \var{azDeg\_altDeg}
@@ -620,7 +620,7 @@ Where:
 \item[\var{polygonal\_angle\_rotatez}] (optional, default=0) see \ref{sec:landscapes:Polygonal} % Angle (degrees) to adjust azimuth. This may be used to apply a (usually) small offset rotation, e.g.\ when you have measured the horizon in a grid-based coordinate system like UTM and have to compensate for the meridian convergence.
 \item[\var{horizon\_line\_color}] see \ref{sec:landscapes:Polygonal} % (optional, default: invisible) used to draw a polygonal horizon line.
 \item[\var{minimal\_brightness}]  see \ref{sec:landscapes:Polygonal} % (optional, default=-1, i.e. use preset \var{landscape/minimal\_brightness} from global \file{config.ini}) Some minimum brightness to keep landscape visible.
-\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal} % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0) 
+\item[\var{minimal\_altitude}] see \ref{sec:landscapes:Polygonal} % (optional, default=-2) Some sky elements, e.g. stars, are not drawn below this altitude. Under certain circumstances you may want to specify something else here. (since v0.14.0)
 \end{description}
 
 
@@ -660,16 +660,16 @@ so the files are called \file{gazetteer.<LANG>.utf8}.
 
 \begin{configfileScr}
 # demo gazetteer for Grossmugl landscape.
-# Can be used to better describe the landscape, 
+# Can be used to better describe the landscape,
 # i.e. show labels on landscape features.
-# Fields must be separated by vertical line, 
+# Fields must be separated by vertical line,
 # label must not have such a vertical line.
-# Comments have this hash mark in first column. 
-# coordinates in degrees from true North. 
+# Comments have this hash mark in first column.
+# coordinates in degrees from true North.
 # line towards zenith draws a single line strictly upward.
-# label is centered on line endpoint. 
+# label is centered on line endpoint.
 # Azimuth | Altitude | degrees        | azimuth | label
-#         |          | towards zenith |  shift  |               
+#         |          | towards zenith |  shift  |
 113.66    | 5.5      |     4          |   -6    | Leeberg
 35        | 1.5      |     2.5        |    0    | Grossmugl
 335       | 2        |     2          |    0    | Steinabrunn
@@ -681,13 +681,13 @@ so the files are called \file{gazetteer.<LANG>.utf8}.
 \subsection{Packing and Publishing}
 \label{sec:landscapes:Packing}
 
-You likely have developed your landscape already in your own Stellarium user data directory, but when you are happy with your work, 
+You likely have developed your landscape already in your own Stellarium user data directory, but when you are happy with your work,
 you may consider sharing it with other users.
 For easy distribution and installation via Stellarium's GUI (see section~\ref{sec:gui:view:landscape}), you should create a ZIP file.
-This must contain \file{landscape.ini} and any textures and auxiliary files described above (\file{description.en.utf8}, \file{gazetteer.en.utf8} 
-and their translations, horizon files, images for the description  \ldots) used by your landscape. 
+This must contain \file{landscape.ini} and any textures and auxiliary files described above (\file{description.en.utf8}, \file{gazetteer.en.utf8}
+and their translations, horizon files, images for the description  \ldots) used by your landscape.
 If you want to release the landscape for download, consider adding a \file{README.txt} clarifying license and usage conditions.
-It does not matter whether the ZIP file contains a directory name inside the ZIP. If not, the directory name (ID) of the 
+It does not matter whether the ZIP file contains a directory name inside the ZIP. If not, the directory name (ID) of the
 landscape will be taken from the ZIP file name.
 
 \newpage
@@ -745,7 +745,7 @@ on photographs taken on adjacent but separate positions.
 Often however, both the upper half of the observer's environment (the
 sky) and the ground the photographer is standing on, are regarded of
 lesser importance, and only a series of laterally adjacent photographs
-is taken and combined into a cylindrical or spherical ring that shows 
+is taken and combined into a cylindrical or spherical ring that shows
 the landscape horizon, i.e.,  where ground and sky meet. If the
 closest object of interest is farther away that a few metres,
 requirements on parallax avoidance are far less critical, and the author
@@ -795,7 +795,7 @@ camera, lens, and settings stored in invisible metadata in the EXIF
 format. When \program{Hugin} reads such images, it can automatically derive
 focal length, field of view, and exposure differences (exposure time,
 aperture, color balance) to create panoramas as easily as
-possible. 
+possible.
 
 After starting \program{Hugin} for the first time, select \menu{Interface > Expert} to release several
 options not visible to ``beginners''.  In the Preferences dialog
@@ -813,7 +813,7 @@ After that, we are ready for creating our panoramas.
 \subsection{Regular creation of panoramas}
 \label{sec:landscapes:Hugin:regular}
 
-The graphical user interface (GUI) consists of a main menu, symbols, and 4 tabs. We start on the tab Photos. 
+The graphical user interface (GUI) consists of a main menu, symbols, and 4 tabs. We start on the tab Photos.
 \begin{itemize}
 \item \button{Add images\ldots} Opens a file browser. Select the images which you
   want to stitch. Usually, lens data (focal length, horizontal field of view\footnote{%
@@ -831,12 +831,12 @@ The graphical user interface (GUI) consists of a main menu, symbols, and 4 tabs.
   RAW converter with non-native resolution, the horizontal Field of View (FoV) in
   \program{Hugin} may be misidentified. You must edit lens parameters and fill
   in the field of view from a full-size image. Else the first round of
-  optimisation will run into unsolvable trouble. 
- 
+  optimisation will run into unsolvable trouble.
+
 \item Select one image as \emph{position anchor} (usually the center
   image), and one as \emph{exposure anchor} (this can be the same
   image). For our purpose, \emph{the anchor image should face
-    south}. 
+    south}.
   %In the concrete example of the Rosenburg data set, the
   %Rosenburg Castle is our landmark to the south, so any image that has
   %the castle close to center is a good choice for position anchor.
@@ -876,7 +876,7 @@ The graphical user interface (GUI) consists of a main menu, symbols, and 4 tabs.
   \item The \menu{Move/Drag} dialog may help to interactively adjust a
     panorama.
   \end{itemize}
-  Sometimes the preview image may however be distorted and unusable. 
+  Sometimes the preview image may however be distorted and unusable.
 \item Open the \emph{Control Points Table} dialog (press \key{F3} or click the ``table''
   button). Here you see the points listed which link two
   images. Clicking a column label sorts by this column. It is
@@ -941,7 +941,7 @@ buildings, these can be used to automatically get a correctly levelled
 horizon: Vertical lines are mapped to vertical lines in
 equirectangular panos! In the \menu{Control Points} tab, select the image
 with the vertical edge in both subframes, and mark points on the
-vertical edge. (switch off auto-estimate!). 
+vertical edge. (switch off auto-estimate!).
 Likewise, horizontal lines may help, but make sure lines like rooves
 are perpendicular to your line of view, else the perspective effect
 causes an inclination.
@@ -988,7 +988,7 @@ side. The EV column lists the \emph{Exposure Value}. If you see disbalance
 here and in the preview window, you can run a photometric optimisation
 with the lowest button on the \menu{Photos} tab. Simply select Low dynamic
 range and press \button{Calculate}. The preview should now show a seamless
-image. If all else fails, you can edit the EV values directly. 
+image. If all else fails, you can edit the EV values directly.
 
 Advanced photographers may want to correct exposures in their RAW
 images before creating JPG or TIF images to combine with
@@ -1010,7 +1010,7 @@ When you are happy with the panorama in the preview window and the
 matchpoints promise a good fit, it is time to finally create the
 panorama image. \program{Hugin} can create a large number of different
 projections which all have their application. For Stellarium, we can
-only use the equirectangular projection. You still have 2 options: 
+only use the equirectangular projection. You still have 2 options:
 
 \begin{description}
 \item[spherical] landscapes (see~\ref{sec:landscapes:Spherical}) require single equirectangular images, the
@@ -1018,7 +1018,7 @@ only use the equirectangular projection. You still have 2 options:
   and is likely not larger than $8192\times4096$ pixels.
 \item[old\_style] landscapes (see~\ref{sec:landscapes:oldStyle}) can use several textures for the ring
   along the horizon, and one image for the nadir zone. If you need
-  high resolution, you should aim for creating this one. 
+  high resolution, you should aim for creating this one.
 \end{description}
 
 Sometimes, creating the nadir zone is difficult: this is where usually
@@ -1046,7 +1046,7 @@ enough, and can be used in a \var{spherical} landscape.
 
 We have to edit the file after stitching, therefore select creation of
 an image in the TIFF format. LZW compression is non-lossy, so use this
-to keep file size reasonably small. 
+to keep file size reasonably small.
 
 For regular images, it is enough to create ``Exposure corrected, low
 dynamic range''. If you have a problem with persons that have moved
@@ -1130,7 +1130,7 @@ the image layer, and before exporting the image layer with transparent
 sky to PNG, don't forget to switch off the background.
 
 We need this layer functionality especially to align the panorama on a
-calibration grid, see section~\ref{sec:landscapes:FinalCalibration}. 
+calibration grid, see section~\ref{sec:landscapes:FinalCalibration}.
 
 
 
@@ -1155,7 +1155,7 @@ To open a command window (console, a.k.a.\ DOS window), press the
 Windows key and enter \texttt{cmd}, then press \key{\return}. (On Linux and Mac, you
 surely know how to open a console window.)
 
-There are some  things you might need to know: 
+There are some  things you might need to know:
 \begin{itemize}
 \item The command line is not your enemy, but a way to call expert tools.
 \item The Windows command line processor \program{cmd.exe} is far from user friendly.
@@ -1170,11 +1170,11 @@ There are some  things you might need to know:
 
 Let's start with the commands for final dressing of an equirectangular
 panorama to be used as spherical landscape which has been created in
-size $4096\times2048$, but where you have seen that nothing interesting 
+size $4096\times2048$, but where you have seen that nothing interesting
 is in the image above 11.25\degree. This means we can cut away the sky area
 and compress the image to $4096\times1024$ to save graphics memory.\footnote{Most
 modern graphics cards no longer require the ``powers of two''
-image sizes, but we keep this practice to increase compatibility.} 
+image sizes, but we keep this practice to increase compatibility.}
 % Note that cutting away the top part of the panorama was introduced
 % for version 0.13, so if you are bound (by old/weak hardware) to
 % continue using the 0.12 series, you must use the full-size panorama
@@ -1187,10 +1187,10 @@ $512\px=45°$, $256\px=22.5°$, $128\px=11.25°$. To keep a top
 line of $11.25°$, we keep an image height of $1024+128=1152\px$, but the crop starts at pixel $Y=1024-128=896$.
 
 \begin{commands}
-convert landscape.png -crop 4096x1152+0+896 
+convert landscape.png -crop 4096x1152+0+896
         -resize 4096x1024! landscape_cropped.png
 \end{commands}
-%      
+%
 Note the exclamation mark in the \option{-resize} argument, which is required to
 stretch the image in a non-proportional way.
 
@@ -1200,7 +1200,7 @@ want the lower part of the image to exist completely, you only need to
 compute the size of the cropped image:
 
 \begin{commands}
-convert landscape.png -gravity SouthWest -crop 4096x1152+0+0 
+convert landscape.png -gravity SouthWest -crop 4096x1152+0+0
         -resize 4096x1024! landscape_cropped.png
 \end{commands}
 
@@ -1240,10 +1240,10 @@ of a command line (write all in 1 line!), which puts our files directly into
 \file{STELLARIUM\_LANDSCAPEPATH/LANDSCAPE\_NAME}:
 
 \begin{commands}
- convert PANO.png  -crop 16384xHEIGHT+X_LEFT+Y_TOP +repage  
-      -resize 16384x2048! 
-      -type TrueColorMatte -depth 8 
-      -crop 2048x2048 +repage 
+ convert PANO.png  -crop 16384xHEIGHT+X_LEFT+Y_TOP +repage
+      -resize 16384x2048!
+      -type TrueColorMatte -depth 8
+      -crop 2048x2048 +repage
        png:STELLARIUM_LANDSCAPEPATH/LANDSCAPE_NAME/Horiz-%d.png
 \end{commands}
 %
@@ -1269,14 +1269,14 @@ configuration file.
 \begin{configfile}
 # hugin project file
 #hugin_ptoversion 2
-p f0 w2048 h2048 v92 E0 R0 n"TIFF_m c:LZW r:CROP" 
+p f0 w2048 h2048 v92 E0 R0 n"TIFF_m c:LZW r:CROP"
 m g1 i0 f0 m2 p0.00784314
 
 # image lines
 #-hugin  cropFactor=1
-i w16384 h8192 f4 v360 Ra0 Rb0 Rc0 Rd0 Re0 Eev0 Er1 Eb1 r0 
-  p90 y0 TrX0 TrY0 TrZ0 Tpy0 Tpp0 j0 a0 b0 c0 d0 e0 g0 t0 
-  Va1 Vb0 Vc0 Vd0 Vx0 Vy0  Vm5 n"Eqirect_Pano360.png" 
+i w16384 h8192 f4 v360 Ra0 Rb0 Rc0 Rd0 Re0 Eev0 Er1 Eb1 r0
+  p90 y0 TrX0 TrY0 TrZ0 Tpy0 Tpp0 j0 a0 b0 c0 d0 e0 g0 t0
+  Va1 Vb0 Vc0 Vd0 Vx0 Vy0  Vm5 n"Eqirect_Pano360.png"
 \end{configfile}
 \caption{Project file \file{ground.pto} usable to create the ground image with
   \program{Hugin} or, on the command line, its \program{nona}
@@ -1304,7 +1304,7 @@ most useful tool, \program{convert} from the \program{ImageMagick}
 suite.
 
 \begin{commands}
-nona -v -m PNG  ground.pto -o ground.png 
+nona -v -m PNG  ground.pto -o ground.png
 convert ground.png -depth 8 ground_8bit.png
 \end{commands}
 
@@ -1333,7 +1333,7 @@ into a separate layer over the grid image, and set it
 semi-transparent.
 
 Try to align the center of the image (where the
-geometric anchor has been defined; remember: this should be the 
+geometric anchor has been defined; remember: this should be the
 image pointing south!) with the measured horizon line or the distinct features.
 
 The optimal solution consists of a photo panorama which aligns
@@ -1387,7 +1387,7 @@ again.
 
 \noindent
 \colorbox{light-gray}{\fbox{\parbox[t]{0.975\linewidth}{
-Basic rules to observe (use obvious inverses). 
+Basic rules to observe (use obvious inverses).
 %%%%%%%%%%%%%%%%%%%%%%%%%% DOUBLE-CHECK AGAIN!!!
 \begin{itemize}
 \item If image aligns well in azimuth but overshoots the grid to the
@@ -1487,7 +1487,7 @@ these pictures.
 \label{sec:landscapes:landscapes:Nightscape}
 
 Since version 0.13, Stellarium can simulate artificial illumination,
-like streetlamps, bright windows, or the skyglow over cities 
+like streetlamps, bright windows, or the skyglow over cities
 \citep{Zotti-Wuchterl:SEAC2014}. One way to
 create this layer is to make 2 panorama series during the day and night
 and process these in the same \program{Hugin} project to align those photos,
@@ -1565,10 +1565,10 @@ like figure~\ref{fig:FSPexample}.
 \begin{figure}[h]\centering
 \begin{configfile}
 ImageName=Horizon_Rosenburg.jpg
-WindowTitle=Horizon_Rosenburg 
-hFov=70 
+WindowTitle=Horizon_Rosenburg
+hFov=70
 #Formula: HP=100*(h/2-upper)/(lower-upper) in Hugin crop, or
-#         HP=100*zeroRow/imgHeight 
+#         HP=100*zeroRow/imgHeight
 HorizonPosition=33.8
 \end{configfile}
 \caption{FSP configuration file (example)}
@@ -1609,8 +1609,8 @@ for Windows. If you don't need the inline scripting capabilities in
 \program{awk} or \program{sed} inside your \program{.BAT} scripts, maybe this is enough.
 
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "guide"
-%%% End: 
+%%% End:
 
