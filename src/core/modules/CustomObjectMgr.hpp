@@ -50,20 +50,20 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Used to get a list of objects which are near to some position.
-	//! @param v a vector representing the position in th sky around which to search for nebulae.
-	//! @param limitFov the field of view around the position v in which to search for satellites.
+	//! @param v a vector representing the position in the sky around which to search for objects.
+	//! @param limitFov the field of view around the position v in which to search for objects.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the satellites located inside the limitFov circle around position v.
+	//! @return a list containing the objects located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
-	//! @param nameI18n The case in-sensistive satellite name
+	//! @return the matching object's pointer if exists or Q_NULLPTR.
+	//! @param nameI18n The case in-sensitive localized name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or Q_NULLPTR.
-	//! @param name The case in-sensistive standard program name
+	//! @return the matching object if exists or Q_NULLPTR.
+	//! @param name The case in-sensitive english name
 	virtual StelObjectP searchByName(const QString& name) const;
 
 	virtual StelObjectP searchByID(const QString &id) const { return qSharedPointerCast<StelObject>(searchByEnglishName(id)); }

@@ -1306,14 +1306,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	// Search by HP number if it's an HP formated number
+	// Search by HP number if it's an HP formatted number
 	QRegExp rx("^\\s*(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
 		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
 
-	// Search by SAO number if it's an SAO formated number
+	// Search by SAO number if it's an SAO formatted number
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
@@ -1322,7 +1322,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 			return searchHP(sao.value());
 	}
 
-	// Search by HD number if it's an HD formated number
+	// Search by HD number if it's an HD formatted number
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
@@ -1331,7 +1331,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 			return searchHP(hd.value());
 	}
 
-	// Search by HR number if it's an HR formated number
+	// Search by HR number if it's an HR formatted number
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{

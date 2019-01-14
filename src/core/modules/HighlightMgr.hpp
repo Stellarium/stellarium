@@ -28,6 +28,9 @@
 class StelPainter;
 class QSettings;
 
+//! @class HighlightMgr
+//! A simple StelObjectModule to draw markers.
+//! Currently all search... functions just return empty lists or Q_NULLPTR.
 class HighlightMgr : public StelObjectModule
 {
 	Q_OBJECT
@@ -48,22 +51,31 @@ public:
 	void drawHighlights(StelCore* core, StelPainter& painter);
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
-	//! Used to get a list of objects which are near to some position.
-	//! @param v a vector representing the position in th sky around which to search for nebulae.
-	//! @param limitFov the field of view around the position v in which to search for satellites.
-	//! @param core the StelCore to use for computations.
-	//! @return an list containing the satellites located inside the limitFov circle around position v.
+	// Methods defined in StelObjectModule class
+	//! Search for StelObject in an area around a specified point.
+	//! The function searches in a disk of diameter limitFov centered on v.
+	//! Only visible objects (i.e currently displayed on screen) should be returned.
+	//! @param v equatorial position at epoch J2000.
+	//! @param limitFov angular diameter of the searching zone in degree.
+	//! @param core the core instance to use.
+	//! @return the list of all the displayed objects contained in the defined zone.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
-	//! @param nameI18n The case in-sensistive satellite name
+	//! Find a Highlight by name.
+	//! @param nameI18n The translated case in-sensitive name for the current sky locale.
+	//! @return Q_NULLPTR
+	//! @todo return The matching Highlight if exists or Q_NULLPTR if not found.
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or Q_NULLPTR.
-	//! @param name The case in-sensistive standard program name
+	//! Find a Highlight by name.
+	//! @param name The case in-sensitive standard program name
+	//! @return Q_NULLPTR
+	//! @todo return the matching Highlight object's pointer if exists or Q_NULLPTR if not found.
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	//! @param id the english ID
+	//! @return Q_NULLPTR
+	//! @todo return The matching Highlight if exists or Q_NULLPTR if not found.
 	virtual StelObjectP searchByID(const QString &id) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.

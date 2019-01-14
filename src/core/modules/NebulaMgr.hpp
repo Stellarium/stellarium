@@ -335,21 +335,21 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Used to get a vector of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for nebulae.
 	//! @param limitFov the field of view around the position v in which to search for nebulae.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the nebulae located inside the limitFov circle around position v.
+	//! @return a list containing the nebulae located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching nebula object's pointer if exists or an "empty" StelObjectP.
-	//! @param nameI18n The case in-sensistive nebula name or NGC M catalog name : format can
+	//! @param nameI18n The case in-sensitive nebula name or NGC M catalog name : format can
 	//! be M31, M 31, NGC31, NGC 31
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Return the matching nebula if exists or Q_NULLPTR.
-	//! @param name The case in-sensistive standard program name
+	//! @param name The case in-sensitive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
 	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }

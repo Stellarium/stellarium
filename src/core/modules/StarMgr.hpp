@@ -142,19 +142,20 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Return a list containing the stars located inside the limFov circle around position v
 	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
-	//! @param nameI18n The case in-sensistive star common name or HP
+	//! @param nameI18n The case in-sensitive localized star common name or HIP/HP, SAO, HD, HR, GCVS or WDS number
 	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Return the matching star if exists or Q_NULLPTR
-	//! @param name The case in-sensistive standard program planet name
+	//! @param name The case in-sensitive english star name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	//! Same as searchByName(id);
 	virtual StelObjectP searchByID(const QString &id) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.

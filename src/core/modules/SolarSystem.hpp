@@ -331,24 +331,23 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Search for SolarSystem objects in some area around a point.
 	//! @param v A vector representing a point in the sky.
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
-	//! @return A STL vector of StelObjectP (pointers) containing all SolarSystem
-	//! objects found in the specified area. This vector is not sorted by distance
-	//! from v.
+	//! @return QList of StelObjectP (pointers) containing all SolarSystem objects
+	//! found in the specified area. This vector is not sorted by distance from v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Search for a SolarSystem object based on the localised name.
-	//! @param nameI18n the case in-sensistive translated planet name.
+	//! @param nameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Search for a SolarSystem object based on the English name.
-	//! @param name the case in-sensistive English planet name.
+	//! @param name the case in-sensitive English planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByName(const QString& name) const;
 
@@ -700,35 +699,35 @@ public slots:
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
-	//! Get the V magnitude for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get the V magnitude for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
 	//! @return a magnitude
 	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
 
-	//! Get type for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get type for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a type of planet (planet, moon, asteroid, comet, plutoid)
 	QString getPlanetType(QString planetName) const;
 
-	//! Get distance to Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get distance to Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a distance (in AU)
 	double getDistanceToPlanet(QString planetName) const;
 
-	//! Get elongation for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get elongation for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a elongation (in radians)
 	double getElongationForPlanet(QString planetName) const;
 
-	//! Get phase angle for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get phase angle for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a phase angle (in radians)
 	double getPhaseAngleForPlanet(QString planetName) const;
 
-	//! Get phase for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
-	//! @return a phase
+	//! Get phase for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
+	//! @return phase, i.e. illuminated fraction [0..1]
 	float getPhaseForPlanet(QString planetName) const;
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
