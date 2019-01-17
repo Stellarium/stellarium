@@ -1085,6 +1085,10 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 		if (!ret.contains(tz))
 			ret.append(tz);
 	}
+	// Special cases!
+	ret.append("LMST");
+	ret.append("LTST");
+	ret.append("system_default");
 	ret.sort();
 	return ret;
 }
