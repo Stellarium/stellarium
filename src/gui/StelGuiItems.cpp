@@ -715,8 +715,12 @@ void BottomStelBar::updateText(bool updatePos)
 	if (timeRate>60.)
 		timeRateInfo = QString("%1: x%2 (%3 %4)").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0), QString::number(timeSpeed, 'f', 2), timeRateMU);
 
-	updatePos = true;
-	datetime->setText(newDateInfo);
+	if (datetime->text()!=newDateInfo)
+	{
+		updatePos = true;
+		datetime->setText(newDateInfo);
+	}
+
 	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 	{
 		if (sigma>0)
@@ -746,18 +750,19 @@ void BottomStelBar::updateText(bool updatePos)
 
 	// build location tooltip
 	QString newLocation = "";
-	const StelLocation* loc = &core->getCurrentLocation();
-	if (getFlagShowLocation() && !loc->name.isEmpty())
+	if (getFlagShowLocation())
 	{
-		//TRANSLATORS: Unit of measure for distance - meter
-		newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
-	}
-	if (getFlagShowLocation() && loc->name.isEmpty())
-	{
-		newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		const StelLocation* loc = &core->getCurrentLocation();
+		if(loc->name.isEmpty())
+			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		else
+		{
+			//TRANSLATORS: Unit of measure for distance - meter
+			newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+		}
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
-	if (location->text()!=newLocation || updatePos)
+	if (location->text()!=newLocation)
 	{
 		updatePos = true;
 		location->setText(newLocation);
