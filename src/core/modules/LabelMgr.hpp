@@ -76,16 +76,16 @@ public slots:
 	//! @param autoDelete the label will be automatically deleted after it is displayed once
 	//! @param autoDeleteTimeoutMs if not zero, the label will be automatically deleted after
 	//! autoDeleteTimeoutMs ms
-	int labelObject(const QString& text, 
-	                const QString& objectName,
+	int labelObject(const QString& text,
+			const QString& objectName,
 	                bool visible=true,
 	                float fontSize=14,
 	                const QString& fontColor="#999999",
 	                const QString& side="E",
-	                double labelDistance=-1.0,
-					const QString& style="TextOnly",
-					bool autoDelete = false,
-					int autoDeleteTimeoutMs = 0);
+			double labelDistance=-1.0,
+			const QString& style="TextOnly",
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
 
 	//! Create a label in azimuthal coordinate system. Can be used e.g. to show landscape features
 	//! @param text the text to display
@@ -120,10 +120,10 @@ public slots:
 	                int x,
 	                int y,
 	                bool visible=true,
-	                float fontSize=14,
-					const QString& fontColor="#999999",
-					bool autoDelete = false,
-					int autoDeleteTimeoutMs = 0);
+			float fontSize=14,
+			const QString& fontColor="#999999",
+			bool autoDelete = false,
+			int autoDeleteTimeoutMs = 0);
 
 	//! find out if a label identified by id is presently shown
 	bool getLabelShow(int id) const;

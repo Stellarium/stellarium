@@ -1419,6 +1419,11 @@ void StelMainScriptAPI::setSkyLanguage(QString langCode)
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(langCode);
 }
 
+QString StelMainScriptAPI::translate(QString englishText) const
+{
+	return StelApp::getInstance().getLocaleMgr().getScriptsTranslator().qtranslate(englishText);
+}
+
 void StelMainScriptAPI::goHome()
 {
 	emit(requestSetHomePosition());

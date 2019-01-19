@@ -780,6 +780,9 @@ public slots:
 	//! @param langCode two letter language code, e.g. "en", or "de".
 	void setSkyLanguage(QString langCode);
 
+	//! Translate the string.
+	QString translate(QString englishText) const;
+
 	//! Go to defaults position and direction of view
 	void goHome();
 
