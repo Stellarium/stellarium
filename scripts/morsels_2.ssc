@@ -2,12 +2,14 @@
 // Name: Jupiter without Galilean satellites
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.0
+// Version: 1.1
 // Shortcut: Ctrl+D,M,2
 // Description: The planet Jupiter sometimes appears to be without moons, when the four Galilean satellites are simultaneously invisible because they are passing across the planet's disk (transit), are behind the planet (occultation), or are in its shadow (eclipse). This script demonstrates these rare phenomena from 1900 to 2100 in Dynamical Time.
 //
 
-// Made on Stellarium 0.18.2
+// Made on Stellarium 0.18.2; Translatable with 0.19.0
+
+include("i18n.inc");
 
 // List of phenomena (date, begin time, end time, begin demo, end demo, time rate)
 var phenomenalist = [["1907-10-03", "19:49", "19:59", "19:29", "20:19", 100],
@@ -71,9 +73,9 @@ NebulaMgr.setFlagHints(false);
 SolarSystem.setFlagLabels(false);
 StelMovementMgr.setEquatorialMount(true);
 core.setGuiVisible(false);
-var id = LabelMgr.labelScreen("Jupiter without Galilean satellites", 20, 20, false, 36, color);
+var id = LabelMgr.labelScreen(tr("Jupiter without Galilean satellites"), 20, 20, false, 36, color);
 LabelMgr.setLabelShow(id, true);
-var ph = LabelMgr.labelScreen(phenomenalist.length +  " phenomena in all", 20, 65, false, 28, color);
+var ph = LabelMgr.labelScreen(phenomenalist.length + " " + tr("phenomena in all"), 20, 65, false, 28, color);
 LabelMgr.setLabelShow(ph, true);
 core.wait(2);
 core.selectObjectByName("Jupiter", false);
@@ -93,9 +95,9 @@ for (i=0; i<phenomenalist.length; i++)
 	var r = phenomenalist[i][5];
 	var demoBegin = d + "T" + b + ":00";
 	var demoEnd = d + "T" + e + ":00";
-	var en = LabelMgr.labelScreen("Event #"+ (i+1), 20, 130, false, 20, color);
-	var ed = LabelMgr.labelScreen("Date: " + d, 20, 155, false, 20, color);
-	var el = LabelMgr.labelScreen("Limits of the disappearance: " + phenomenalist[i][1] + " - " + phenomenalist[i][2], 20, 180, false, 20, color);
+	var en = LabelMgr.labelScreen(tr("Event #") + (i+1), 20, 130, false, 20, color);
+	var ed = LabelMgr.labelScreen(tr("Date:") + " " + d, 20, 155, false, 20, color);
+	var el = LabelMgr.labelScreen(tr("Limits of the disappearance:") + " " + phenomenalist[i][1] + " - " + phenomenalist[i][2], 20, 180, false, 20, color);
 
 	core.setDate(demoBegin, "utc", true);
 	LabelMgr.setLabelShow(en, true);

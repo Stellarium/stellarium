@@ -1,8 +1,8 @@
-FILE(GLOB poscfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-scripts/" "*.po")
-LIST(SORT poscfiles)
-STRING(REGEX REPLACE ".po" "" outposcfiles "${poscfiles}")
+FILE(GLOB poscrfiles RELATIVE "${CMAKE_SOURCE_DIR}/po/stellarium-scripts/" "*.po")
+LIST(SORT poscrfiles)
+STRING(REGEX REPLACE ".po" "" outposcrfiles "${poscrfiles}")
 
-GETTEXT_CREATE_TRANSLATIONS(stellarium-scripts DEFAULT_TARGET ${outposcfiles})
+GETTEXT_CREATE_TRANSLATIONS(stellarium-scripts DEFAULT_TARGET ${outposcrfiles})
 
 # Discard this target if xgettext is not installed
 IF(${XGETTEXT_FOUND})
