@@ -458,6 +458,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Chinese Contemporary");
 		// TRANSLATORS: Name of the sky culture
+		N_("Chinese Medieval");
+		// TRANSLATORS: Name of the sky culture
 		N_("Egyptian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Hawaiian Starlines");
