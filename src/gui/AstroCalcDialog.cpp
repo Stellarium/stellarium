@@ -1550,7 +1550,9 @@ void AstroCalcDialog::generateEphemeris()
 		double currentJD = core->getJD(); // save current JD
 		double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
 		firstJD = firstJD - core->getUTCOffset(firstJD) / 24;
-		int elements = (int)((StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime()) - firstJD) / currentStep);
+		double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());
+		secondJD = secondJD - core->getUTCOffset(secondJD) / 24;
+		int elements = (int)((secondJD - firstJD) / currentStep);
 		EphemerisListCoords.clear();
 		EphemerisListCoords.reserve(elements);
 		EphemerisListDates.clear();
