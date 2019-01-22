@@ -267,7 +267,7 @@ void ScriptConsole::rowColumnChanged()
 	                                                .arg(ui->scriptEdit->textCursor().columnNumber()));
 }
 
-QString ScriptConsole::getFileMask()
+const QString ScriptConsole::getFileMask()
 {
 	return "(*.ssc *.inc)";
 }

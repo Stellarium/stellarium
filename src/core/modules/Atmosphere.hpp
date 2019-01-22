@@ -52,7 +52,7 @@ public:
 	//! Set fade in/out duration in seconds
 	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
 	//! Get fade in/out duration in seconds
-	float getFadeDuration() {return (float)fader.getDuration()/1000.f;}
+	float getFadeDuration() const {return (float)fader.getDuration()/1000.f;}
 
 	//! Define whether to display atmosphere
 	void setFlagShow(bool b){fader = b;}

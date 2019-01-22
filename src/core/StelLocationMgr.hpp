@@ -91,6 +91,9 @@ public slots:
 	//! Find location via online lookup of IP address
 	void locationFromIP();
 
+	//! return a QStringList of valid timezone names in Stellarium's location database.
+	QStringList getAllTimezoneNames() const;
+
 #ifdef ENABLE_GPS
 	//! Try to get a location from GPS lookup.
 	//! This prefers GPSD on non-Windows platforms, and uses Qt positioning with a NMEA serial device otherwise

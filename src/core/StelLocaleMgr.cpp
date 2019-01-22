@@ -36,6 +36,7 @@ QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(Q_NULLPTR)
 	, planetaryFeaturesTranslator(Q_NULLPTR)
+	, scriptsTranslator(Q_NULLPTR)
 	, timeFormat()
 	, dateFormat()	
 {
@@ -66,6 +67,8 @@ StelLocaleMgr::~StelLocaleMgr()
 	skyTranslator = Q_NULLPTR;
 	delete planetaryFeaturesTranslator;
 	planetaryFeaturesTranslator = Q_NULLPTR;
+	delete scriptsTranslator;
+	scriptsTranslator = Q_NULLPTR;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
@@ -134,6 +137,12 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	delete StelTranslator::globalTranslator;
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
 	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
+
+	delete scriptsTranslator;
+	// Update the translator with new locale name
+	scriptsTranslator = new StelTranslator("stellarium-scripts", newAppLanguageName);
+	qDebug() << "Scripts language is " << scriptsTranslator->getTrueLocaleName();
+
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();
 }
@@ -197,6 +206,10 @@ const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
 	return *StelTranslator::globalTranslator;
 }
 
+const StelTranslator& StelLocaleMgr::getScriptsTranslator() const
+{
+	return *scriptsTranslator;
+}
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 QString StelLocaleMgr::getISO8601TimeLocal(double JD) const

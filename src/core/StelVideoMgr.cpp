@@ -491,7 +491,7 @@ void StelVideoMgr::showVideo(const QString& id, const bool show)
 	else qDebug() << "StelVideoMgr::showVideo()" << id << ": no such video";
 }
 
-qint64 StelVideoMgr::getVideoDuration(const QString& id)
+qint64 StelVideoMgr::getVideoDuration(const QString& id) const
 {
 	if (videoObjects.contains(id))
 	{
@@ -501,7 +501,7 @@ qint64 StelVideoMgr::getVideoDuration(const QString& id)
 	return -1;
 }
 
-qint64 StelVideoMgr::getVideoPosition(const QString& id)
+qint64 StelVideoMgr::getVideoPosition(const QString& id) const
 {
 	if (videoObjects.contains(id))
 	{
@@ -512,7 +512,7 @@ qint64 StelVideoMgr::getVideoPosition(const QString& id)
 }
 
 //! returns native resolution (in pixels) of loaded video. Returned value may be invalid before video has been fully loaded.
-QSize StelVideoMgr::getVideoResolution(const QString& id)
+QSize StelVideoMgr::getVideoResolution(const QString& id) const
 {
 	if (videoObjects.contains(id))
 	{
@@ -522,7 +522,7 @@ QSize StelVideoMgr::getVideoResolution(const QString& id)
 	return QSize();
 }
 
-int StelVideoMgr::getVideoWidth(const QString& id)
+int StelVideoMgr::getVideoWidth(const QString& id) const
 {
 	if (videoObjects.contains(id))
 	{
@@ -535,7 +535,7 @@ int StelVideoMgr::getVideoWidth(const QString& id)
 	return -1;
 }
 
-int StelVideoMgr::getVideoHeight(const QString& id)
+int StelVideoMgr::getVideoHeight(const QString& id) const
 {
 	if (videoObjects.contains(id))
 	{
@@ -573,7 +573,7 @@ void StelVideoMgr::setVideoVolume(const QString& id, int newVolume)
 	else qDebug() << "StelVideoMgr::setVolume()" << id << ": no such video";
 }
 
-int StelVideoMgr::getVideoVolume(const QString& id)
+int StelVideoMgr::getVideoVolume(const QString& id) const
 {
 	int volume=-1;
 	if (videoObjects.contains(id))
@@ -587,7 +587,7 @@ int StelVideoMgr::getVideoVolume(const QString& id)
 	return volume;
 }
 
-bool StelVideoMgr::isVideoPlaying(const QString& id)
+bool StelVideoMgr::isVideoPlaying(const QString& id) const
 {
 	bool playing=false;
 	if (videoObjects.contains(id))
@@ -967,15 +967,15 @@ void StelVideoMgr::setVideoAlpha(const QString&, float) {;}
 void StelVideoMgr::resizeVideo(const QString&, float, float) {;}
 void StelVideoMgr::showVideo(const QString&, bool) {;}
 // New functions for 0.15
-qint64 StelVideoMgr::getVideoDuration(const QString&){return -1;}
-qint64 StelVideoMgr::getVideoPosition(const QString&){return -1;}
-QSize StelVideoMgr::getVideoResolution(const QString&){return QSize(0,0);}
-int StelVideoMgr::getVideoWidth(const QString&){return -1;}
-int StelVideoMgr::getVideoHeight(const QString&){return -1;}
+qint64 StelVideoMgr::getVideoDuration(const QString&)const{return -1;}
+qint64 StelVideoMgr::getVideoPosition(const QString&)const{return -1;}
+QSize StelVideoMgr::getVideoResolution(const QString&)const{return QSize(0,0);}
+int StelVideoMgr::getVideoWidth(const QString&)const{return -1;}
+int StelVideoMgr::getVideoHeight(const QString&)const{return -1;}
 void StelVideoMgr::muteVideo(const QString&, bool){;}
 void StelVideoMgr::setVideoVolume(const QString&, int){;}
-int StelVideoMgr::getVideoVolume(const QString&){return -1;}
-bool StelVideoMgr::isVideoPlaying(const QString& id)
+int StelVideoMgr::getVideoVolume(const QString&)const{return -1;}
+bool StelVideoMgr::isVideoPlaying(const QString& id) const
 {
 	Q_UNUSED(id)
 	return false;

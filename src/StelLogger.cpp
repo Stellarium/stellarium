@@ -44,7 +44,7 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Operating System: %1").arg(StelUtils::getOperatingSystemInfo()));	
 
 	// write compiler version
-#if defined __GNUC__ && !defined __clang__
+#if defined __GNUC__ && !defined __clang__ && !defined __INTEL_COMPILER
 	#ifdef __MINGW32__
 		#define COMPILER "MinGW GCC"
 	#else
@@ -53,6 +53,10 @@ void StelLogger::init(const QString& logFilePath)
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg(COMPILER).arg(__GNUC__).arg(__GNUC_MINOR__).arg(__GNUC_PATCHLEVEL__));
 #elif defined __clang__
 	writeLog(QString("Compiled using %1 %2.%3.%4").arg("Clang").arg(__clang_major__).arg(__clang_minor__).arg(__clang_patchlevel__));
+#elif defined __INTEL_COMPILER
+	QString iccVer = QString::number(__INTEL_COMPILER);
+	int iccVL = iccVer.length();
+	writeLog(QString("Compiled using %1 %2.%3.%4.%5").arg("Intel C/C++").arg(iccVer.mid(0, iccVL-2)).arg(iccVer.mid(iccVL-2,1)).arg(iccVer.mid(iccVL-1,1)).arg(__INTEL_COMPILER_BUILD_DATE));
 #elif defined _MSC_VER
 	writeLog(QString("Compiled using %1").arg(getMsvcVersionString(_MSC_VER)));
 #else
@@ -323,7 +327,25 @@ QString StelLogger::getMsvcVersionString(int ver)
 			version = "MSVC++ 14.0 (Visual Studio 2015)";
 			break;
 		case 1910:
-			version = "MSVC++ 14.1 (Visual Studio 2017)";
+			version = "MSVC++ 15.0 (Visual Studio 2017 RTW)";
+			break;
+		case 1911:
+			version = "MSVC++ 15.3 (Visual Studio 2017)";
+			break;
+		case 1912:
+			version = "MSVC++ 15.5 (Visual Studio 2017)";
+			break;
+		case 1913:
+			version = "MSVC++ 15.6 (Visual Studio 2017)";
+			break;
+		case 1914:
+			version = "MSVC++ 15.7 (Visual Studio 2017)";
+			break;
+		case 1915:
+			version = "MSVC++ 15.8 (Visual Studio 2017)";
+			break;
+		case 1916:
+			version = "MSVC++ 15.9 (Visual Studio 2017)";
 			break;
 		default:
 			version = "unknown MSVC++ version";
