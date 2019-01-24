@@ -709,7 +709,7 @@ void AstroCalcDialog::currentCelestialPositions()
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
-	StelCore* core = StelApp::getInstance().getCore();
+//	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
 	ui->celestialPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 

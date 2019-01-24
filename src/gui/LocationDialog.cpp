@@ -317,8 +317,8 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		if (loc.planetName != StelApp::getInstance().getCore()->getCurrentLocation().planetName)
 		{
 			QSettings* conf = StelApp::getInstance().getSettings();
-			ls->setProperty("atmosphereDisplayed", p->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
-			ls->setProperty("fogDisplayed", p->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+			ls->setProperty("atmosphereDisplayed", p->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+			ls->setProperty("fogDisplayed", p->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
 		}
 	}
 

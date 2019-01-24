@@ -73,7 +73,7 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.contact = "alex.v.wolf@gmail.com";
 	info.description = N_("This plugin plots the position of various pulsars, with object information about each one.");
 	info.version = PULSARS_PLUGIN_VERSION;
-	info.version = PULSARS_PLUGIN_LICENSE;
+	info.license = PULSARS_PLUGIN_LICENSE;
 	return info;
 }
 

@@ -1020,7 +1020,7 @@ void ViewDialog::updateZhrDescription(int zhr)
 		ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
 	else if ((zhr>=90) && (zhr<=110)) // was 100
 		ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
-	else if ((zhr>=108) && (zhr<=132)) // was 120
+	else if ((zhr>=111) && (zhr<=132)) // was 120
 		ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
 	else if ((zhr>=180) && (zhr<=220)) // was 200
 		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");

@@ -335,11 +335,25 @@ StelLocaleMgr::STimeFormat StelLocaleMgr::stringToSTimeFormat(const QString& tf)
 
 QString StelLocaleMgr::sTimeFormatToString(STimeFormat tf) const
 {
-	if (tf == STimeSystemDefault) return "system_default";
-	if (tf == STime24h) return "24h";
-	if (tf == STime12h) return "12h";
-	qWarning() << "WARNING: unrecognized time_display_format value : " << (int)tf << " system_default used.";
-	return "system_default";
+	QString tfmt;
+	switch (tf)
+	{
+		case STime24h:
+			tfmt = "24h";
+			break;
+		case STime12h:
+			tfmt = "12h";
+			break;
+		case STimeSystemDefault:
+			tfmt = "system_default";
+			break;
+		default:
+			qWarning() << "WARNING: unknown time format, fallback to system default.";
+			tfmt = "system_default";
+			break;
+
+	}
+	return tfmt;
 }
 
 // Convert the date format enum to its associated string and reverse
@@ -355,12 +369,28 @@ StelLocaleMgr::SDateFormat StelLocaleMgr::stringToSDateFormat(const QString& df)
 
 QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 {
-	if (df == SDateSystemDefault) return "system_default";
-	if (df == SDateMMDDYYYY) return "mmddyyyy";
-	if (df == SDateDDMMYYYY) return "ddmmyyyy";
-	if (df == SDateYYYYMMDD) return "yyyymmdd";
-	qWarning() << "WARNING: unrecognized date_display_format value : " << (int)df << " system_default used.";
-	return "system_default";
+	QString dfmt;
+	switch (df)
+	{
+		case SDateMMDDYYYY:
+			dfmt = "mmddyyyy";
+			break;
+		case SDateDDMMYYYY:
+			dfmt = "ddmmyyyy";
+			break;
+		case SDateYYYYMMDD:
+			dfmt = "yyyymmdd";
+			break;
+		case SDateSystemDefault:
+			dfmt = "system_default";
+			break;
+		default:
+			qWarning() << "WARNING: unknown date format, fallback to system default.";
+			dfmt = "system_default";
+			break;
+
+	}
+	return dfmt;
 }
 
 QString StelLocaleMgr::getQtDateFormatStr() const

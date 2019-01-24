@@ -297,10 +297,10 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				lon = M_PI-lon;
 
 				if (raAngle<0)
-					raAngle=+2.*M_PI;
+					raAngle+=2.*M_PI;
 
 				if (lon<0)
-					lon=+2.*M_PI;
+					lon+=2.*M_PI;
 
 				if (std::fabs(2.*M_PI-lon)<0.01) // We are at meridian 0
 					lon = 0.;

@@ -1350,7 +1350,7 @@ void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, do
 		myMoon->computePosition(JD.second);
 		myMoon->computeTransMatrix(JD.first, JD.second);
 		Pos1 = myMoon->getHeliocentricEclipticPos();
-		Pos2 = (core->j2000ToEquinoxEqu(LocTrans*Pos1), StelCore::RefractionOff); //-RotObserver;
+		Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1, StelCore::RefractionOff); //-RotObserver;
 
 		distance = std::sqrt(Pos2*Pos2);
 
