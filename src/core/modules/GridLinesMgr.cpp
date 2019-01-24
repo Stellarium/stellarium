@@ -389,7 +389,7 @@ void SkyGrid::draw(const StelCore* core) const
 	else
 	{
 		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
-		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closestResLon);
+		gridStepMeridianRad = M_PI/180.* closestResLon;
 	}
 
 	// Get the bounding halfspace

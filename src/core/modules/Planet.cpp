@@ -1472,8 +1472,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinx) + 1.25*sinx*sinx; // ExplSup2013: added term as (10.81)
-					return -8.88 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx; // ExplSup2013: added term as (10.81)
+					return -8.88 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -7.19 + d + 0.002*phaseDeg;
@@ -1531,8 +1531,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinx) + 1.25*sinx*sinx;
-					return -8.88 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx;
+					return -8.88 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -7.19 + d + 0.0028*phaseDeg;
@@ -1572,8 +1572,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-					return -8.68 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.68 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -6.85 + d;
@@ -1609,8 +1609,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-					return -8.88 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.88 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -7.19f + d;

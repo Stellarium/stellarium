@@ -908,11 +908,11 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 				.arg(StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.))
 				.arg(landscape->getLocation().altitude).arg(alt);
 
-		QString planetName = landscape->getLocation().planetName;
+		QString planetName = landscape->getLocation().planetName;		
 		if (!planetName.isEmpty())
 		{
 			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-			desc += QString(", %1").arg(trans.qtranslate(planetName));
+			desc += QString(", %1").arg(trans.qtranslate(planetName, "major planet")); // TODO: Enhance the context support
 		}
 		desc += "<br />";
 

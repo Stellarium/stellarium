@@ -155,7 +155,7 @@ Observability::Observability()
 	memset(sunDec,     0,   366*sizeof(double));
 	memset(objectRA,   0,   366*sizeof(double));
 	memset(objectDec,  0,   366*sizeof(double));
-	memset(sunSidT,    0, 2*366*sizeof(double));
+	memset(sunSidT,    0, 4*366*sizeof(double));
 	memset(objectSidT, 0, 2*366*sizeof(double));
 	memset(objectH0,   0,   366*sizeof(double));
 

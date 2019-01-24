@@ -274,17 +274,14 @@ int main(int argc, char **argv)
 	QSettings* confSettings = Q_NULLPTR;
 	if (StelFileMgr::exists(configFileFullPath))
 	{
+		confSettings = new QSettings(configFileFullPath, StelIniFormat, Q_NULLPTR);
 		// Implement "restore default settings" feature.
 		bool restoreDefaultConfigFile = false;
 		if (CLIProcessor::argsGetOption(argList, "", "--restore-defaults"))
-		{
 			restoreDefaultConfigFile=true;
-		}
 		else
-		{
-			confSettings = new QSettings(configFileFullPath, StelIniFormat, Q_NULLPTR);
 			restoreDefaultConfigFile = confSettings->value("main/restore_defaults", false).toBool();
-		}
+
 		if (!restoreDefaultConfigFile)
 		{
 			QString version = confSettings->value("main/version", "0.0.0").toString();
@@ -313,13 +310,16 @@ int main(int argc, char **argv)
 				}
 			}
 		}
+
 		if (restoreDefaultConfigFile)
 		{
 			if (confSettings)
 				delete confSettings;
+
 			QString backupFile(configFileFullPath.left(configFileFullPath.length()-3) + QString("old"));
 			if (QFileInfo(backupFile).exists())
 				QFile(backupFile).remove();
+
 			QFile(configFileFullPath).rename(backupFile);
 			copyDefaultConfigFile(configFileFullPath);
 			confSettings = new QSettings(configFileFullPath, StelIniFormat);

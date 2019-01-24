@@ -459,9 +459,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	for (int i=0;i<nbSide;++i)
 	{
 		QString key = QString("landscape/side%1").arg(i);                             // e.g. side0
-		QString description = landscapeIni.value(key).toString();                     // e.g. tex0:0:0:1:1
 		//sscanf(s.toLocal8Bit(),"tex%d:%f:%f:%f:%f",&texnum,&a,&b,&c,&d);
-		QStringList parameters = description.split(':');
+		QStringList parameters = landscapeIni.value(key).toString().split(':');  // e.g. tex0:0:0:1:1
 		//TODO: How should be handled an invalid texture description?
 		QString textureName = parameters.value(0);                                    // tex0
 		texnum = textureName.right(textureName.length() - 3).toInt();                 // 0
