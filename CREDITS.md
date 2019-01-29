@@ -366,7 +366,7 @@
 	     NGC7590, RCW158
 	     from Trevor Gerdes
 	     http://www.sarcasmogerdes.com/
-	4.20 Images of IC2118, NGC1532
+	4.20 Images of NGC1532
 		from users of Ice In Space
 		http://www.iceinspace.com.au/
 	4.21 Image of IC5146 from James A Weier
@@ -425,7 +425,7 @@
 	     License: public domain
 	4.38 Images of IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.39 Images of M88, M108, M109, NGC225, NGC663, NGC1931, NGC6823, NGC7814, Sh2-155 
+	4.39 Images of M4, M12, M14, M19, M22, M55, M56, M62, M88, M92, M108, 
 	     M109, NGC225, NGC663, NGC1931, NGC6823, NGC7814, Sh2-155 
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
@@ -475,7 +475,7 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M78
+	4.50 Images of M2, M5, M10, M28, M30, M53, M54, M69, M71, M75, M78, M107
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
