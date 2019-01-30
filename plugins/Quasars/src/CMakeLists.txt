@@ -32,3 +32,5 @@ SET_TARGET_PROPERTIES(Quasars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGIN
 ADD_DEPENDENCIES(AllStaticPlugins Quasars-static)
 
 SET_TARGET_PROPERTIES(Quasars-static PROPERTIES FOLDER "plugins/Quasars")
+
+ADD_PRECOMPILED_HEADER(Quasars-static "Quasars.hpp" "Quasars.cpp")

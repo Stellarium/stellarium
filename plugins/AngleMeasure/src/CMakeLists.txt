@@ -26,3 +26,5 @@ SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES COMPILE_FLAGS "-DQT_STATICP
 ADD_DEPENDENCIES(AllStaticPlugins AngleMeasure-static)
 
 SET_TARGET_PROPERTIES(AngleMeasure-static PROPERTIES FOLDER "plugins/AngleMeasure")
+
+ADD_PRECOMPILED_HEADER(AngleMeasure-static "AngleMeasure.hpp" "AngleMeasure.cpp")

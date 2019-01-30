@@ -32,3 +32,5 @@ SET_TARGET_PROPERTIES(EquationOfTime-static PROPERTIES COMPILE_FLAGS "-DQT_STATI
 ADD_DEPENDENCIES(AllStaticPlugins EquationOfTime-static)
 
 SET_TARGET_PROPERTIES(EquationOfTime-static PROPERTIES FOLDER "plugins/EquationOfTime")
+
+ADD_PRECOMPILED_HEADER(EquationOfTime-static "EquationOfTime.hpp" "EquationOfTime.cpp")

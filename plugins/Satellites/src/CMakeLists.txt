@@ -62,3 +62,5 @@ ENDIF()
 ADD_DEPENDENCIES(AllStaticPlugins Satellites-static)
 
 SET_TARGET_PROPERTIES(Satellites-static PROPERTIES FOLDER "plugins/Satellites")
+
+ADD_PRECOMPILED_HEADER(Satellites-static "Satellites.hpp" "Satellites.cpp")

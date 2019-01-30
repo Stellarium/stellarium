@@ -30,3 +30,5 @@ SET_TARGET_PROPERTIES(NavStars-static PROPERTIES COMPILE_FLAGS "-DQT_STATICPLUGI
 ADD_DEPENDENCIES(AllStaticPlugins NavStars-static)
 
 SET_TARGET_PROPERTIES(NavStars-static PROPERTIES FOLDER "plugins/NavStars")
+
+ADD_PRECOMPILED_HEADER(NavStars-static "NavStars.hpp" "NavStars.cpp")

@@ -33,3 +33,4 @@ ADD_DEPENDENCIES(AllStaticPlugins PointerCoordinates-static)
 
 SET_TARGET_PROPERTIES(PointerCoordinates-static PROPERTIES FOLDER "plugins/PointerCoordinates")
 
+ADD_PRECOMPILED_HEADER(PointerCoordinates-static "PointerCoordinates.hpp" "PointerCoordinates.cpp")
