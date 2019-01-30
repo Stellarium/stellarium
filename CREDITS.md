@@ -321,8 +321,9 @@
 	    right to modify and redistribute) "as long as it is credited."
 	4.8 M31 pictures come from LEE ang HG731GZ
 	    License: Creative Commons Attribution 3.0 Unported
-	4.9 Images of NGC1499, NGC2244 
-	    from Jean-Pierre Bousquet
+	4.9 Images of Sh2-261
+	    from Yang Kai
+	    License: public domain 
 	4.10 Images of M1, M16, M27, M42, M57, M97, NGC6946 from Stephane
 	     Dumont
 	4.11 Images of M17, M44, NGC856, NGC884 from Maxime Spano
@@ -355,9 +356,9 @@
 	     http://olegbr.astroclub.kiev.ua/
 	     License: Creative Commons Attribution 3.0 Unported
 	4.17 Image of eta Carinae 
-	     from Georg Zotti
-	     http://www.waa.at/
-	     License: Creative Commons Attribution 3.0 Unported
+	     from Harel Boren
+	     http://www.pbase.com/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
 	4.18 Images of IC1805, IC1848
 	     from Steve Tuttle
 	     http://www.stuttle1.com/
@@ -365,7 +366,7 @@
 	     NGC7590, RCW158
 	     from Trevor Gerdes
 	     http://www.sarcasmogerdes.com/
-	4.20 Images of IC2118, NGC1532
+	4.20 Images of NGC1532
 		from users of Ice In Space
 		http://www.iceinspace.com.au/
 	4.21 Image of IC5146 from James A Weier
@@ -424,7 +425,8 @@
 	     License: public domain
 	4.38 Images of IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
-	4.39 Images of M88, M108, M109, NGC225, NGC663, NGC1931, NGC6823, NGC7814, Sh2-155 
+	4.39 Images of M4, M12, M14, M19, M22, M55, M56, M62, M88, M92, M108, 
+	     M109, NGC225, NGC663, NGC1931, NGC6823, NGC7814, Sh2-155 
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -433,10 +435,11 @@
 	     License: This work is free and may be used by anyone for any purpose.
 	     If you wish to use this content, you do not need to request permission
 	     as long as you follow any licensing requirements mentioned on this page.
-	4.41 Images of M61, M64, M65, M66, M91, M99, NGC772, NGC1360, NGC1501, NGC1535, NGC1555,
-	     NGC2158, NGC2362, NGC2440, NGC2683, NGC2775, NGC3132, NGC3242, NGC3750, NGC4170,
-	     NGC4216, NGC4361, NGC4395, NGC4414,,NGC4676, NGC5248, NGC6302, NGC6563, NGC6781,
-	     NGC6894, NGC7000, NGC7354, SH2-136, Coma Cluster, Cassiopeia A, LBN438
+	4.41 Images of M61, M64, M65, M66, M91, M99, NGC613, NGC772, NGC918, NGC1042, NGC1360,
+	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2362, NGC2440, NGC2683, NGC2775, 
+	     NGC3132, NGC3242, NGC3750, NGC4170,NGC4216, NGC4361, NGC4395, NGC4414,,NGC4676, 
+	     NGC5248, NGC6302, NGC6563, NGC6781, NGC6894, NGC7000, NGC7354, SH2-136, UGC3697,
+	     Coma Cluster, Cassiopeia A, LBN438, Wild's Triplet
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -472,7 +475,7 @@
 	     from Gianluca.pollastri
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.50 Images of M78
+	4.50 Images of M2, M5, M10, M28, M30, M53, M54, M69, M71, M75, M78, M107
 	     from Starhopper
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
@@ -503,14 +506,14 @@
 	4.57 Images of NGC1269
 	     from Zhu Ying
 	     License:  Creative Commons Attribution 3.0 Unported
-	4.58 Images of NGC1097
+	4.58 Images of IC2118, NGC1097, NGC1499
 	     from Zhao Jingna
 	     License:  Creative Commons Attribution 3.0 Unported
 	4.59 Images of NGC1491
 	     from Chuck Ayoub
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
-	4.60 Images of IC2169, NGC3077, UGC10822, Barnard207
+	4.60 Images of IC2169, NGC2244, NGC3077, SH2-263, UGC10822, Barnard207
 	     from Keesscherer
 	     https://commons.wikimedia.org/wiki/
 	     License:  Creative Commons Attribution-Share Alike 4.0 International
@@ -572,7 +575,7 @@
 	     from Egres73
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.76 Images of NGC6905
+	4.76 Images of M72, NGC6905
 	     from Tom Wildoner
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
@@ -619,6 +622,14 @@
 	4.87 Images of NGC6087
 	     from Roberto Mura
 	     https://en.wikipedia.org/
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.88 Images of NGC362
+	     from ESO/VISTA VMC
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International 
+	4.89 Images of NGC2997
+	     from Adam Block/ChileScope
+	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 ```
 
