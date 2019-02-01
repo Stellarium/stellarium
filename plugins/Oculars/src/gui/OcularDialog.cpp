@@ -306,6 +306,8 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,      "Oculars.flagScalingFOVForTelrad");
 	connectBoolProperty(ui->checkBoxToolbarButton,         "Oculars.flagShowOcularsButton");
 	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox, "Oculars.arrowButtonScale");
+	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,    "Oculars.flagShowCcdCropOverlay");
+	connectIntProperty(ui->guiCcdCropOverlaySizeSpinBox,   "Oculars.ccdCropOverlaySize");
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));
