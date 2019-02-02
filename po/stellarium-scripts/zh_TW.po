@@ -5,15 +5,16 @@
 # 
 # Translators:
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2019
+# freemanli <freeman.tam@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-01-20 08:50+0700\n"
+"POT-Creation-Date: 2019-01-21 19:37+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2019\n"
+"Last-Translator: freemanli <freeman.tam@gmail.com>, 2019\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,15 +24,15 @@ msgstr ""
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
-msgstr ""
+msgstr "南天深空天體的 Jack Bennett 星表"
 
 #: scripts/bennett.ssc:48 scripts/best_ngc.ssc:27 scripts/binosky.ssc:20
 msgid "objects in all"
-msgstr ""
+msgstr "所有天體"
 
 #: scripts/best_ngc.ssc:26
 msgid "Best objects in the New General Catalog"
-msgstr "新總表(NGC)內的最棒天體"
+msgstr "新總表(NGC)內最棒的天體"
 
 #: scripts/best_ngc.ssc:42
 msgid "Object #"
@@ -39,35 +40,39 @@ msgstr "天體 #"
 
 #: scripts/binocular_highlights.ssc:12
 msgid "Chapter 1"
-msgstr ""
+msgstr "第 1 章"
 
 #: scripts/binocular_highlights.ssc:12
 msgid "December to February"
-msgstr ""
+msgstr "十二月到二月"
 
 #: scripts/binocular_highlights.ssc:13
 msgid "Kemble's Cascade"
-msgstr "甘伯（Kemble）串珠"
+msgstr "甘伯 Kemble 串珠"
 
 #: scripts/binocular_highlights.ssc:13
 msgid "Kemble's Cascade is visible even in light-polluted skies"
-msgstr ""
+msgstr "即使在有光汙染的夜空中仍可看見甘伯 Kemble 串珠"
 
 #: scripts/binocular_highlights.ssc:14
 msgid "The Glorious Double Cluster"
-msgstr ""
+msgstr "壯麗的雙星團"
+
+#: scripts/binocular_highlights.ssc:14
+msgid "NGC 884 and NGC 869"
+msgstr "NGC 884 與 NGC 869"
 
 #: scripts/binocular_highlights.ssc:15
 msgid "The Alpha Persei Association"
-msgstr ""
+msgstr "英仙座 α 疏散星團"
 
 #: scripts/binocular_highlights.ssc:16
 msgid "M34: A True Binocular Cluster"
-msgstr ""
+msgstr "M34: 一個標準雙筒望遠鏡可見的星團"
 
 #: scripts/binocular_highlights.ssc:17
 msgid "Watching the Demon Star"
-msgstr ""
+msgstr "觀看惡魔之星--大陵五"
 
 #: scripts/binocular_highlights.ssc:18
 msgid "The Pleiades"
@@ -75,621 +80,733 @@ msgstr "昴宿星團"
 
 #: scripts/binocular_highlights.ssc:19
 msgid "Corralling the Hyades"
-msgstr ""
+msgstr "畢宿星團"
 
 #: scripts/binocular_highlights.ssc:20
 msgid "NGC 1647: The Crab Cluster"
-msgstr ""
+msgstr "NGC 1647: 蟹狀星團"
 
 #: scripts/binocular_highlights.ssc:21
+msgid "Messier's Number One"
+msgstr "梅西爾編號第 1 號"
+
+#: scripts/binocular_highlights.ssc:22
 msgid "Auriga's Messier Clusters"
-msgstr ""
+msgstr "御夫座的梅西爾星團"
 
-#: scripts/binocular_highlights.ssc:21
+#: scripts/binocular_highlights.ssc:22
 msgid "M36 and M38"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:22
-msgid "Another Double Cluster"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:22
-msgid "M35 and NGC 2158"
-msgstr ""
+msgstr "M36 與 M38"
 
 #: scripts/binocular_highlights.ssc:23
+msgid "Another Double Cluster"
+msgstr "另一個雙星團"
+
+#: scripts/binocular_highlights.ssc:23
+msgid "M35 and NGC 2158"
+msgstr "M35 與 NGC 2158"
+
+#: scripts/binocular_highlights.ssc:24
 msgid "Golden Betelgeuse"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:24
-msgid "Orion's Sword"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:24
-msgid "NGC 1981, M42, M43 and Struve 747"
-msgstr ""
+msgstr "黃金參宿四 (Betelgeuse)"
 
 #: scripts/binocular_highlights.ssc:25
-msgid "The Overlooked Open Cluster: M41"
-msgstr ""
+msgid "Orion Extras"
+msgstr "獵戶座額外的"
 
 #: scripts/binocular_highlights.ssc:26
-msgid "M50 in a Stream of Starlight"
-msgstr ""
+msgid "Orion's Sword"
+msgstr "獵戶的配劍"
+
+#: scripts/binocular_highlights.ssc:26
+msgid "NGC 1981, M42, M43 and Struve 747"
+msgstr "NGC 1981, M42, M43 與斯特魯維 Struve 747"
 
 #: scripts/binocular_highlights.ssc:27
-msgid "M46 and M47: A Celestial Odd Couple"
-msgstr ""
+msgid "The Overlooked Open Cluster: M41"
+msgstr "被忽略的疏散星團: M41"
 
 #: scripts/binocular_highlights.ssc:28
-msgid "Two Southern Delights"
-msgstr ""
+msgid "M50 in a Stream of Starlight"
+msgstr "在星光閃爍中M50"
 
 #: scripts/binocular_highlights.ssc:29
-msgid "Chapter 2"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:29
-msgid "March to May"
-msgstr ""
+msgid "M46 and M47: A Celestial Odd Couple"
+msgstr "M46 與 M47: 天空中奇特的一對"
 
 #: scripts/binocular_highlights.ssc:30
-msgid "The Engagement Ring"
-msgstr ""
+msgid "Collinders in Canis Minor"
+msgstr "二個在大犬座上的 Collinder 疏散星團"
+
+#: scripts/binocular_highlights.ssc:30
+msgid "Cr 132 and Cr 140"
+msgstr "Cr 132 與 Cr 140"
 
 #: scripts/binocular_highlights.ssc:31
-msgid "M101 in the Mind's Eye"
-msgstr ""
+msgid "Two Southern Delights"
+msgstr "二個南天的樂趣"
+
+#: scripts/binocular_highlights.ssc:31
+msgid "NGC 2477 and NGC 2451"
+msgstr "NGC 2477 與 NGC 2451"
 
 #: scripts/binocular_highlights.ssc:32
-msgid "A Star-Hop to M51"
-msgstr ""
+msgid "Chapter 2"
+msgstr "第 2 章"
+
+#: scripts/binocular_highlights.ssc:32
+msgid "March to May"
+msgstr "三月到五月"
 
 #: scripts/binocular_highlights.ssc:33
-msgid "Galaxy Season"
-msgstr ""
+msgid "The Engagement Ring"
+msgstr "訂婚戒"
 
 #: scripts/binocular_highlights.ssc:34
-msgid "Steady on Galaxy M94"
-msgstr ""
+msgid "The Power of Power"
+msgstr "乘方的乘方"
+
+#: scripts/binocular_highlights.ssc:34
+msgid "M81 and M82"
+msgstr "M81 與 M82"
 
 #: scripts/binocular_highlights.ssc:35
-msgid "Globular Cluster M3"
-msgstr ""
+msgid "M101 in the Mind's Eye"
+msgstr "在腦海中的M101"
 
 #: scripts/binocular_highlights.ssc:36
-msgid "In and Around Melotte 111"
-msgstr ""
+msgid "A Star-Hop to M51"
+msgstr "一顆蹦在 M51 前的恆星"
 
 #: scripts/binocular_highlights.ssc:37
-msgid "A Trio of Doubles in Bootes"
-msgstr ""
+msgid "Galaxy Season"
+msgstr "星系盛開期"
 
 #: scripts/binocular_highlights.ssc:38
-msgid "R Cor Bor's Vanishing Act"
-msgstr ""
+msgid "Steady on Galaxy M94"
+msgstr "航向 M94 星系"
 
 #: scripts/binocular_highlights.ssc:39
-msgid "Two Doubles in Cancer"
-msgstr ""
+msgid "Globular Cluster M3"
+msgstr "球狀星團 M3"
 
 #: scripts/binocular_highlights.ssc:40
+msgid "In and Around Melotte 111"
+msgstr "梅洛特 Melotte 111 的裏面與周圍"
+
+#: scripts/binocular_highlights.ssc:41
+msgid "A Trio of Doubles in Bootes"
+msgstr "牧夫座的雙星三重奏"
+
+#: scripts/binocular_highlights.ssc:42
+msgid "R Cor Bor's Vanishing Act"
+msgstr "北冕座R的消失變化"
+
+#: scripts/binocular_highlights.ssc:43
+msgid "Two Doubles in Cancer"
+msgstr "巨蟹座的二個雙星"
+
+#: scripts/binocular_highlights.ssc:43
+msgid "Rho and Iota Cancri"
+msgstr "巨蟹座 ρ 與巨蟹座 ι"
+
+#: scripts/binocular_highlights.ssc:44
 msgid "The Beehive Cluster"
 msgstr "蜂巢星團"
 
-#: scripts/binocular_highlights.ssc:41
+#: scripts/binocular_highlights.ssc:45
 msgid "A Visit to NGC 2903"
-msgstr ""
+msgstr "拜訪 NGC 2903"
 
-#: scripts/binocular_highlights.ssc:42 scripts/binocular_highlights.ssc:43
+#: scripts/binocular_highlights.ssc:46 scripts/binocular_highlights.ssc:47
 msgid "A Pair of Leo Doubles"
-msgstr ""
+msgstr "獅子座的一對雙星"
 
-#: scripts/binocular_highlights.ssc:42
+#: scripts/binocular_highlights.ssc:46
 msgid "Tau Leonis"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:43
-msgid "Alpha Leonis (Regulus)"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:44
-msgid "Star Cluster M48 in Hydra"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:45
-msgid "U Hydra"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:45
-msgid "Carbon star"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:46
-msgid "V Hydra"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:46
-msgid ""
-"It has been ranging from magnitude 6 to 10 with a period of about 550 days."
-msgstr ""
+msgstr "獅子座τ"
 
 #: scripts/binocular_highlights.ssc:47
-msgid "M104 and the Great Beyond"
-msgstr ""
+msgid "Alpha Leonis (Regulus)"
+msgstr "獅子座α (軒轅十四)"
 
 #: scripts/binocular_highlights.ssc:48
-msgid "Ancient Globular M5"
-msgstr ""
+msgid "Star Cluster M48 in Hydra"
+msgstr "長蛇座的蜂巢星團 M48"
 
 #: scripts/binocular_highlights.ssc:49
-msgid "Chapter 3"
-msgstr ""
+msgid "U Hydra"
+msgstr "長蛇座 U"
 
 #: scripts/binocular_highlights.ssc:49
-msgid "June to August"
-msgstr ""
+msgid "Carbon star"
+msgstr "碳星"
 
 #: scripts/binocular_highlights.ssc:50
-msgid "Resolving Nu Draconis"
-msgstr ""
+msgid "V Hydra"
+msgstr "長蛇座 V"
 
 #: scripts/binocular_highlights.ssc:50
-msgid "Nu Draconis's components separated by 62\""
-msgstr ""
+msgid ""
+"It has been ranging from magnitude 6 to 10 with a period of about 550 days."
+msgstr "它具有550天變星周期，亮度從6等到10等"
 
 #: scripts/binocular_highlights.ssc:51
-msgid "The Great Hercules Cluster"
-msgstr ""
+msgid "M104 and the Great Beyond"
+msgstr "M104 與來世"
 
 #: scripts/binocular_highlights.ssc:52
-msgid "A Colorful Cygnus Triple"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:53 scripts/binocular_highlights.ssc:54
-#: scripts/binocular_highlights.ssc:55
-msgid "Three Cygnus Doubles"
-msgstr ""
+msgid "Ancient Globular M5"
+msgstr "古老的球狀星團 M5"
 
 #: scripts/binocular_highlights.ssc:53
-msgid "Mu Cygni (Its stars are separated by a generous 198\")"
-msgstr ""
+msgid "Magnificent Omega Centauri"
+msgstr "壯觀的半人馬座 ω 星團"
 
 #: scripts/binocular_highlights.ssc:54
-msgid "79 Cygni (Its stars are separated by 150\")"
-msgstr ""
+msgid "Chapter 3"
+msgstr "第 3 章"
+
+#: scripts/binocular_highlights.ssc:54
+msgid "June to August"
+msgstr "六月到八月"
 
 #: scripts/binocular_highlights.ssc:55
-msgid "61 Cygni (Its stars are separated by 31\")"
-msgstr ""
+msgid "Resolving Nu Draconis"
+msgstr "分解天龍座 ν"
+
+#: scripts/binocular_highlights.ssc:55
+msgid "Nu Draconis's components are separated by 62\""
+msgstr "將天龍座 ν 的伴星分開62角秒"
 
 #: scripts/binocular_highlights.ssc:56
-msgid "Open Cluster M39 in Cygnus"
-msgstr ""
+msgid "The Great Hercules Cluster"
+msgstr "巨型武仙座星團"
 
 #: scripts/binocular_highlights.ssc:57
-msgid "The Road to the Cocoon"
-msgstr ""
+msgid "Double Delight Albireo"
+msgstr "賞心悅目的輦道增七"
+
+#: scripts/binocular_highlights.ssc:57
+msgid "Albireo's components are separated by 35\""
+msgstr "輦道增七的伴星分開 35 角秒"
 
 #: scripts/binocular_highlights.ssc:58
-msgid "Summer's Other Triangle"
-msgstr ""
+msgid "A Colorful Cygnus Triple"
+msgstr "一組多彩的天鵝座三星"
+
+#: scripts/binocular_highlights.ssc:58
+msgid "Omicron1, Omicron2 and 30 Cygni"
+msgstr "天鹅座 ο1, 天鹅座 ο2 與天鹅座 30"
+
+#: scripts/binocular_highlights.ssc:59 scripts/binocular_highlights.ssc:60
+#: scripts/binocular_highlights.ssc:61
+msgid "Three Cygnus Doubles"
+msgstr "三組天鵝座雙星"
 
 #: scripts/binocular_highlights.ssc:59
-msgid "M57 and Expectations"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:59
-msgid "Difficult deep-sky object for tests your observing skills..."
-msgstr ""
+msgid "Mu Cygni (Its stars are separated by a generous 198\")"
+msgstr "天鵝座 μ (它的伴星們被分開約198角秒)"
 
 #: scripts/binocular_highlights.ssc:60
-msgid "Splendid Sagitta"
-msgstr ""
+msgid "79 Cygni (Its stars are separated by 150\")"
+msgstr "天鵝座 79 (它的伴星們被分開150角秒)"
 
 #: scripts/binocular_highlights.ssc:61
-msgid "M27 in Vulpecula"
-msgstr ""
+msgid "61 Cygni (Its stars are separated by 31\")"
+msgstr "天鵝座 61 (它的伴星們被分開31角秒)"
 
 #: scripts/binocular_highlights.ssc:62
-msgid "A Milky Way Surprise"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:62
-msgid "Brocchi's Cluster (Cr 399) or Coathanger"
-msgstr ""
+msgid "Open Cluster M39 in Cygnus"
+msgstr "天鵝座內的疏散星團 M39"
 
 #: scripts/binocular_highlights.ssc:63
-msgid "M11 in Scutum"
-msgstr ""
+msgid "The Road to the Cocoon"
+msgstr "前往繭星雲的路徑"
+
+#: scripts/binocular_highlights.ssc:63
+msgid "IC 5146, B168 and M39"
+msgstr "IC 5146, B168 與 M39"
 
 #: scripts/binocular_highlights.ssc:64
-msgid "IC 4756 in Serpens"
-msgstr ""
+msgid "Summer's Other Triangle"
+msgstr "夏季的其他三角形"
+
+#: scripts/binocular_highlights.ssc:64
+msgid "Epsilon, Zeta and Alpha Lyrae"
+msgstr "織女二、織女三與織女一"
 
 #: scripts/binocular_highlights.ssc:65
-msgid "Three Star Clusters in Ophiuchus"
-msgstr ""
+msgid "M57 and Expectations"
+msgstr "M57 與期待"
+
+#: scripts/binocular_highlights.ssc:65
+msgid "Difficult deep-sky object for tests your observing skills..."
+msgstr "測試您觀測技巧的高難度深空天體"
 
 #: scripts/binocular_highlights.ssc:66
-msgid "IC 4665 in Ophiuchus"
-msgstr ""
+msgid "Splendid Sagitta"
+msgstr "華麗的箭頭"
+
+#: scripts/binocular_highlights.ssc:66
+msgid "M71 between Gamma and Delta Sagittae"
+msgstr "位於天箭座 γ 與天箭座 δ 的 M71"
 
 #: scripts/binocular_highlights.ssc:67
-msgid "A Pair of Ophiuchus Globulars"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:67
-msgid "M10 and M12"
-msgstr ""
+msgid "M27 in Vulpecula"
+msgstr "狐狸座的 M27"
 
 #: scripts/binocular_highlights.ssc:68
-msgid "Rho Ophiuchi"
-msgstr ""
+msgid "A Milky Way Surprise"
+msgstr "銀河上的驚奇"
+
+#: scripts/binocular_highlights.ssc:68
+msgid "Brocchi's Cluster (Cr 399) or Coathanger"
+msgstr "Brocchi 星團(Cr 399)，也稱為掛衣架"
 
 #: scripts/binocular_highlights.ssc:69
-msgid "A Solar Twin"
-msgstr ""
+msgid "Barnard's \"E\""
+msgstr "巴納德的 E 字"
 
 #: scripts/binocular_highlights.ssc:69
-msgid "18 Scorpii"
-msgstr ""
+msgid "B143 near Altair"
+msgstr "接近河鼓二的 B143"
 
 #: scripts/binocular_highlights.ssc:70
-msgid "A Double for Steady Hands"
-msgstr ""
+msgid "M11 in Scutum"
+msgstr "位於盾牌座的 M11"
+
+#: scripts/binocular_highlights.ssc:70
+msgid "Also known as the Wild Duck Cluster"
+msgstr "又稱野鴨星團"
 
 #: scripts/binocular_highlights.ssc:71
-msgid "Globular Cluster Season"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:71
-msgid "M4 and M80"
-msgstr ""
+msgid "IC 4756 in Serpens"
+msgstr "位於巨蛇座的 IC 4756"
 
 #: scripts/binocular_highlights.ssc:72
-msgid "A False Comet"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:72
-msgid "Cr 316, NGC 6231 and NGC 6242"
-msgstr ""
+msgid "Three Star Clusters in Ophiuchus"
+msgstr "蛇夫座的三星團"
 
 #: scripts/binocular_highlights.ssc:73
+msgid "IC 4665 in Ophiuchus"
+msgstr "蛇夫座的 IC 4665"
+
+#: scripts/binocular_highlights.ssc:74
+msgid "A Pair of Ophiuchus Globulars"
+msgstr "一對蛇夫座球狀星團"
+
+#: scripts/binocular_highlights.ssc:74
+msgid "M10 and M12"
+msgstr "M10 與 M12"
+
+#: scripts/binocular_highlights.ssc:75
+msgid "Rho Ophiuchi"
+msgstr "蛇夫座 ρ"
+
+#: scripts/binocular_highlights.ssc:75
+msgid "Rho itself is a pretty triple star"
+msgstr "蛇夫座 ρ 本身是一顆漂亮的三合星"
+
+#: scripts/binocular_highlights.ssc:76
+msgid "A Solar Twin"
+msgstr "孿生太陽"
+
+#: scripts/binocular_highlights.ssc:76
+msgid "18 Scorpii"
+msgstr "罰一，天蠍座18 "
+
+#: scripts/binocular_highlights.ssc:77
+msgid "A Double for Steady Hands"
+msgstr "適合不顫抖的手觀測的雙星"
+
+#: scripts/binocular_highlights.ssc:77
+msgid "Nu Scorpii components are separated by 41\""
+msgstr "天蝎座 ν 與其伴星分隔 41 角秒"
+
+#: scripts/binocular_highlights.ssc:78
+msgid "Globular Cluster Season"
+msgstr "球狀星團盛開季"
+
+#: scripts/binocular_highlights.ssc:78
+msgid "M4 and M80"
+msgstr "M4 與 M80"
+
+#: scripts/binocular_highlights.ssc:79
+msgid "A Gorgeous Duo"
+msgstr "美麗動人的搭檔"
+
+#: scripts/binocular_highlights.ssc:79
+msgid "M6 and M7"
+msgstr "M6 與 M7"
+
+#: scripts/binocular_highlights.ssc:80
+msgid "A False Comet"
+msgstr "一顆假彗星"
+
+#: scripts/binocular_highlights.ssc:80
+msgid "Cr 316, NGC 6231 and NGC 6242"
+msgstr "Cr 316, NGC 6231 與 NGC 6242"
+
+#: scripts/binocular_highlights.ssc:81
+msgid "Summer Star Cloud"
+msgstr "夏季的恆星雲"
+
+#: scripts/binocular_highlights.ssc:82
+msgid "Milky Way Messiers"
+msgstr "銀河上的梅西爾天體"
+
+#: scripts/binocular_highlights.ssc:82
+msgid "M16, M17 and M18"
+msgstr "M16, M17 與 M18"
+
+#: scripts/binocular_highlights.ssc:83
 msgid "The Lagoon Nebula"
 msgstr "礁湖星雲"
 
-#: scripts/binocular_highlights.ssc:74
-msgid "M22: A Gen of a Globular"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:74
-msgid "M22 and M28"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:75
-msgid "Chapter 4"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:75
-msgid "September to November"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:76
-msgid "Two Lacerta Clusters"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:76
-msgid "NGC 7209 and NGC 7243"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:77
-msgid "NGC 6939 and NGC 6946"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:78
-msgid "Magnificent Mu Cephei"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:79
-msgid "Watching Delta Cephei"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:79
-msgid "Well-known variable star and striking double also"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:80
-msgid "M52 in Cassiopeia"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:81
-msgid "Galactic Cluster NGC 7789"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:82
-msgid "The E.T. Cluster"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:83
-msgid "Open Cluster M103"
-msgstr ""
+#: scripts/binocular_highlights.ssc:84
+msgid "M22: A Gem of a Globular"
+msgstr "M22: 一顆球狀的寶石"
 
 #: scripts/binocular_highlights.ssc:84
-msgid "Magnificent M31"
-msgstr ""
+msgid "M22 and M28"
+msgstr "M22 與 M28"
 
 #: scripts/binocular_highlights.ssc:85
-msgid "Andromeda's Companions"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:85
-msgid "M32 and M110"
-msgstr ""
+msgid "A Lonesome Messier"
+msgstr "孤單的梅西爾天體"
 
 #: scripts/binocular_highlights.ssc:86
-msgid "Ancient Cluster NGC 752"
-msgstr ""
+msgid "Chapter 4"
+msgstr "第 4 章"
+
+#: scripts/binocular_highlights.ssc:86
+msgid "September to November"
+msgstr "九月到十一月"
 
 #: scripts/binocular_highlights.ssc:87
-msgid "TX Piscium"
-msgstr ""
+msgid "Two Lacerta Clusters"
+msgstr "二個蝎虎座星團"
 
 #: scripts/binocular_highlights.ssc:87
-msgid "Carbon star, which varies slightly from magnitude 4.8 to 5.2"
-msgstr ""
+msgid "NGC 7209 and NGC 7243"
+msgstr "NGC 7209 與 NGC 7243"
 
 #: scripts/binocular_highlights.ssc:88
-msgid "A Farewell to Summer"
-msgstr ""
+msgid "NGC 6939 and NGC 6946"
+msgstr "NGC 6939 與 NGC 6946"
 
 #: scripts/binocular_highlights.ssc:89
-msgid "Messier 2 Shining Through"
-msgstr ""
+msgid "Magnificent Mu Cephei"
+msgstr "狀麗的仙王座 μ"
+
+#: scripts/binocular_highlights.ssc:89
+msgid "A semiregular variable star"
+msgstr "一顆半不規則變星"
 
 #: scripts/binocular_highlights.ssc:90
-msgid "The Ghostly Helix Nebula"
-msgstr ""
+msgid "Watching Delta Cephei"
+msgstr "觀看仙王座 δ"
+
+#: scripts/binocular_highlights.ssc:90
+msgid "Well-known variable star and striking double also"
+msgstr "有名的變星也是一對聯星"
 
 #: scripts/binocular_highlights.ssc:91
+msgid "M52 in Cassiopeia"
+msgstr "在仙后座內的 M52"
+
+#: scripts/binocular_highlights.ssc:92
+msgid "Galactic Cluster NGC 7789"
+msgstr "巨大的星團 NGC 7789"
+
+#: scripts/binocular_highlights.ssc:93
+msgid "The E.T. Cluster"
+msgstr "E.T. 外星人星團"
+
+#: scripts/binocular_highlights.ssc:94
+msgid "Open Cluster M103"
+msgstr "疏散星團 M103"
+
+#: scripts/binocular_highlights.ssc:95
+msgid "Magnificent M31"
+msgstr "壯觀的 M31"
+
+#: scripts/binocular_highlights.ssc:96
+msgid "Andromeda's Companions"
+msgstr "仙女的伴侶"
+
+#: scripts/binocular_highlights.ssc:96
+msgid "M32 and M110"
+msgstr "M32 與 M110"
+
+#: scripts/binocular_highlights.ssc:97
+msgid "Ancient Cluster NGC 752"
+msgstr "古老的星團 NGC 752"
+
+#: scripts/binocular_highlights.ssc:98
+msgid "Triangulum's Treasure"
+msgstr "三角座的寶藏"
+
+#: scripts/binocular_highlights.ssc:99
+msgid "TX Piscium"
+msgstr "雙魚座 TX"
+
+#: scripts/binocular_highlights.ssc:99
+msgid "Carbon star, which varies slightly from magnitude 4.8 to 5.2"
+msgstr "碳星，從4.8到5.2的輕微星等變化。"
+
+#: scripts/binocular_highlights.ssc:100
+msgid "A Farewell to Summer"
+msgstr "向夏季告別"
+
+#: scripts/binocular_highlights.ssc:101
+msgid "Messier 2 Shining Through"
+msgstr "貫穿明亮的 M2 "
+
+#: scripts/binocular_highlights.ssc:102
+msgid "The Ghostly Helix Nebula"
+msgstr "曚曨的螺旋星雲"
+
+#: scripts/binocular_highlights.ssc:103
 msgid "Challenging NGC 253 and NGC 288"
-msgstr ""
+msgstr "引人入勝的 NGC 253 與 NGC 288"
 
-#: scripts/binocular_highlights.ssc:113
+#: scripts/binocular_highlights.ssc:125
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "雙筒望遠鏡最精彩的部份"
 
-#: scripts/binocular_highlights.ssc:114
+#: scripts/binocular_highlights.ssc:126
 msgid "Look through the Meade 10x50 TravelView Binocular"
-msgstr ""
+msgstr "透過 Meade 10x50 TravelView 雙筒望遠鏡瀏覽"
 
 #: scripts/binosky.ssc:19
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "雙筒星空: 適用於雙筒望遠鏡的深空天體"
 
 #: scripts/double_stars.ssc:28
 msgid "Asterope (21 Tauri and 22 Tauri)"
-msgstr ""
+msgstr "昴宿三 (金牛座21和金牛座22)"
 
 #: scripts/double_stars.ssc:28
 msgid "2.5 arcminutes (SE)"
-msgstr ""
+msgstr "2.5 弧分 (東南)"
 
 #: scripts/double_stars.ssc:28
 msgid ""
 "Extremely difficult because of their faintness, separation, and nearby "
 "bright stars"
-msgstr ""
+msgstr "由於它們的暗淡，分離程度，與鄰近亮星的關係所以屬於極端困難觀察的對象。"
 
 #: scripts/double_stars.ssc:29
 msgid "Atlas and Pleione (27 Tauri and 28 Tauri)"
-msgstr ""
+msgstr "Atlas  與 Pleione (金牛座27與金牛座28)"
 
 #: scripts/double_stars.ssc:29
 msgid "5 arcminutes (N)"
-msgstr ""
+msgstr "5 弧秒 (北)"
 
 #: scripts/double_stars.ssc:29 scripts/double_stars.ssc:35
 #: scripts/double_stars.ssc:41 scripts/double_stars.ssc:43
 msgid "Moderately difficult"
-msgstr ""
+msgstr "中等難度"
 
 #: scripts/double_stars.ssc:30
 msgid "θ Tauri"
-msgstr ""
+msgstr "金牛座θ"
 
 #: scripts/double_stars.ssc:30
 msgid "5.6 arcminutes (NNW)"
-msgstr ""
+msgstr "5.6弧秒 (北北西)"
 
 #: scripts/double_stars.ssc:30 scripts/double_stars.ssc:42
 #: scripts/double_stars.ssc:47
 msgid "Showcase naked-eye double!"
-msgstr ""
+msgstr "裸眼可見雙星的示範！"
 
 #: scripts/double_stars.ssc:31
 msgid "δ Tauri"
-msgstr ""
+msgstr "金牛座δ"
 
 #: scripts/double_stars.ssc:31
 msgid "δ1-δ2: 17.6 arcseconds (ESE); δ1-δ3: 43.25 arcseconds (NE)"
-msgstr ""
+msgstr "δ1-δ2: 17.6弧秒 (東南東)；δ1-δ3: 43.25弧秒(東北)"
 
 #: scripts/double_stars.ssc:31
 msgid "Easy naked-eye triple"
-msgstr ""
+msgstr "簡單的裸眼三合星"
 
 #: scripts/double_stars.ssc:32
 msgid "θ Orionis"
-msgstr ""
+msgstr "獵戶座θ"
 
 #: scripts/double_stars.ssc:32
 msgid "2.24 arcminutes (NW)"
-msgstr ""
+msgstr "2.24弧分(西北)"
 
 #: scripts/double_stars.ssc:32
 msgid "Very difficult because of stars and nebulosity in the area"
-msgstr ""
+msgstr "由於在此區域內有眾多恆星與星雲所以非常難觀測"
 
 #: scripts/double_stars.ssc:33
 msgid "42 and 45 Orionis"
-msgstr ""
+msgstr "獵戶座42與獵戶座45"
 
 #: scripts/double_stars.ssc:33
 msgid "4.2 arcminutes (ESE)"
-msgstr ""
+msgstr "4.2弧分 (東南東)"
 
 #: scripts/double_stars.ssc:33 scripts/double_stars.ssc:34
 msgid "Moderately difficult optical double"
-msgstr ""
+msgstr "中等難度的光學雙星"
 
 #: scripts/double_stars.ssc:34
 msgid "ι Orionis"
-msgstr ""
+msgstr "獵戶座ι "
 
 #: scripts/double_stars.ssc:34
 msgid "8 arcminutes (SW)"
-msgstr ""
+msgstr "8弧分 (西南)"
 
 #: scripts/double_stars.ssc:35
 msgid "ζ Corvi"
-msgstr ""
+msgstr "烏鴉座ζ"
 
 #: scripts/double_stars.ssc:35
 msgid "5.85 arcminutes (WNW)"
-msgstr ""
+msgstr "5.85弧分 (西北西)"
 
 #: scripts/double_stars.ssc:36
 msgid "Mizar and Alcor"
-msgstr ""
+msgstr "開陽與輔"
 
 #: scripts/double_stars.ssc:36
 msgid "11.8 arcminutes (ENE)"
-msgstr ""
+msgstr "11.8弧分 (東北東)"
 
 #: scripts/double_stars.ssc:36 scripts/double_stars.ssc:44
 #: scripts/double_stars.ssc:45
 msgid "Easy naked-eye double"
-msgstr ""
+msgstr "易見的裸眼雙星"
 
 #: scripts/double_stars.ssc:37
 msgid "Zubenelgenubi"
-msgstr ""
+msgstr "氐宿一"
 
 #: scripts/double_stars.ssc:37
 msgid "3.83 arcminutes (NW)"
-msgstr ""
+msgstr "3.83弧分 (西ㄅㄟ)"
 
 #: scripts/double_stars.ssc:37
 msgid "Very difficult because of the magnitude difference"
-msgstr ""
+msgstr "由於亮度差距頗大所以非常難觀測"
 
 #: scripts/double_stars.ssc:38
 msgid "ω Scorpii"
-msgstr ""
+msgstr "鈎鈴，天蠍座ω"
 
 #: scripts/double_stars.ssc:38
 msgid "14.6 arcminutes (SSE)"
-msgstr ""
+msgstr "14.6 弧分 (南南東)"
 
 #: scripts/double_stars.ssc:38
 msgid "Easy optical double"
-msgstr ""
+msgstr "容易的光學雙星"
 
 #: scripts/double_stars.ssc:39
 msgid "λ and υ Scorpii"
-msgstr ""
+msgstr "天蝎座λ 與天蝎座υ"
 
 #: scripts/double_stars.ssc:39
 msgid "36 arcminutes (WSW)"
-msgstr ""
+msgstr "36弧分 (西南西)"
 
 #: scripts/double_stars.ssc:39
 msgid "Easy double"
-msgstr ""
+msgstr "容易的雙星"
 
 #: scripts/double_stars.ssc:40
 msgid "μ Scorpii"
-msgstr ""
+msgstr "天蝎座μ "
 
 #: scripts/double_stars.ssc:40
 msgid "5.8 arcminutes (ENE)"
-msgstr ""
+msgstr "5.8弧分 (東北東)"
 
 #: scripts/double_stars.ssc:40
 msgid "Showcase double!"
-msgstr ""
+msgstr "雙星的示範！"
 
 #: scripts/double_stars.ssc:41
 msgid "ζ Scorpii"
-msgstr ""
+msgstr "天蝎座ζ "
 
 #: scripts/double_stars.ssc:41
 msgid "6.5 arcminutes (W)"
-msgstr ""
+msgstr "6.5弧分 (西)"
 
 #: scripts/double_stars.ssc:42
 msgid "ε Lyrae"
-msgstr ""
+msgstr "天琴座ε "
 
 #: scripts/double_stars.ssc:42
 msgid "3.5 arcminutes (N)"
-msgstr ""
+msgstr "3.5弧分 (北)"
 
 #: scripts/double_stars.ssc:43
 msgid "δ Lyrae"
-msgstr ""
+msgstr "天琴座δ "
 
 #: scripts/double_stars.ssc:43
 msgid "10.3 arcminutes (WNW)"
-msgstr ""
+msgstr "10.3弧分 (西北西)"
 
 #: scripts/double_stars.ssc:44
 msgid "ν Sagittarii"
-msgstr ""
+msgstr "人馬座ν "
 
 #: scripts/double_stars.ssc:44
 msgid "13.9 arcminutes (ENE)"
-msgstr ""
+msgstr "13.9弧分 (東北東)"
 
 #: scripts/double_stars.ssc:45
 msgid "ο1 and ο2 Cygni"
-msgstr ""
+msgstr "天鹅座ο1 與 天鹅座ο2"
 
 #: scripts/double_stars.ssc:45
 msgid "61.3 arcminutes (NNE)"
-msgstr ""
+msgstr "61.3 弧分 (北北東)"
 
 #: scripts/double_stars.ssc:46
 msgid "ο1 Cygni (ο1 Cygni, 30 Cyg and HD 192579)"
-msgstr ""
+msgstr "天鹅座ο1 (天鹅座ο1，天鹅座30與HD 192579)"
 
 #: scripts/double_stars.ssc:46
 msgid "5.6 arcminutes (NW)"
-msgstr ""
+msgstr "5.6弧分 (西北)"
 
 #: scripts/double_stars.ssc:46
 msgid "Moderately difficult optical triple star"
-msgstr ""
+msgstr "中等難度的光學三合星"
 
 #: scripts/double_stars.ssc:47
 msgid "Algedi"
-msgstr ""
+msgstr "牛宿二"
 
 #: scripts/double_stars.ssc:47
 msgid "6.3 arcminutes (WNW)"
-msgstr ""
+msgstr "6.3弧分 (西北西)"
 
 #: scripts/double_stars.ssc:78
 msgid "Separation:"
-msgstr ""
+msgstr "間距: "
 
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
 #: scripts/morsels_1.ssc:38 scripts/morsels_1.ssc:43
 msgid "Shadows from Io, Ganymede and Callisto"
-msgstr ""
+msgstr "木衛一、木衛三和木衛四的投影"
 
 #: scripts/morsels_1.ssc:17 scripts/morsels_1.ssc:19 scripts/morsels_1.ssc:20
 #: scripts/morsels_1.ssc:21 scripts/morsels_1.ssc:25 scripts/morsels_1.ssc:26
@@ -698,25 +815,25 @@ msgstr ""
 #: scripts/morsels_1.ssc:39 scripts/morsels_1.ssc:41 scripts/morsels_1.ssc:42
 #: scripts/morsels_1.ssc:44 scripts/morsels_1.ssc:45 scripts/morsels_1.ssc:46
 msgid "Shadows from Io, Europe and Callisto"
-msgstr ""
+msgstr "木衛一、木衛二和木衛四的投影"
 
 #: scripts/morsels_1.ssc:24 scripts/morsels_1.ssc:32 scripts/morsels_1.ssc:40
 msgid "Shadows from Europe, Ganymede and Callisto"
-msgstr ""
+msgstr "木衛二、木衛三和木衛四的投影"
 
 #: scripts/morsels_1.ssc:60
 msgid "Triple shadow phenomena of the satellites of Jupiter"
-msgstr ""
+msgstr "木星衛星所造成的三圈陰影"
 
 #: scripts/morsels_1.ssc:62 scripts/morsels_2.ssc:78 scripts/morsels_3.ssc:52
 #: scripts/morsels_4.ssc:70
 msgid "phenomena in all"
-msgstr ""
+msgstr "所有現象"
 
 #: scripts/morsels_1.ssc:77 scripts/morsels_2.ssc:98 scripts/morsels_3.ssc:62
 #: scripts/morsels_4.ssc:81
 msgid "Event #"
-msgstr ""
+msgstr "事件 #"
 
 #: scripts/morsels_1.ssc:78 scripts/morsels_2.ssc:99 scripts/morsels_3.ssc:63
 #: scripts/morsels_4.ssc:82
@@ -733,7 +850,7 @@ msgstr "不含伽利略衛星的木星"
 
 #: scripts/morsels_2.ssc:100
 msgid "Limits of the disappearance:"
-msgstr ""
+msgstr "掩食的界限:"
 
 #: scripts/morsels_3.ssc:50
 msgid "Occultations of bright stars by planets"
@@ -745,57 +862,358 @@ msgstr "行星交互掩食"
 
 #: scripts/supernova.ssc:22
 msgid "Europe, Uraniborg."
-msgstr ""
+msgstr "在歐洲的Uraniborg."
 
 #: scripts/supernova.ssc:30
 msgid "Evening of 20 October 1572"
-msgstr ""
+msgstr "1572年10月20日的傍晚"
 
 #: scripts/supernova.ssc:39
 msgid "Constellation Cassiopeia"
-msgstr ""
+msgstr "仙后座"
 
 #: scripts/supernova.ssc:60
 msgid "5 days later..."
-msgstr ""
+msgstr "5 天後..."
 
 #: scripts/supernova.ssc:66
 msgid "Next 3 days..."
-msgstr ""
+msgstr "再過 3 天"
 
 #: scripts/supernova.ssc:72
 msgid "New star! But people have not seen it yet..."
-msgstr ""
+msgstr "新恆星！但是人們仍然未曾見過它..."
 
 #: scripts/supernova.ssc:77
 msgid "Evening of 31 October 1572"
-msgstr ""
+msgstr "1572年10月31日的傍晚"
 
 #: scripts/supernova.ssc:85
 msgid "Evening of "
-msgstr ""
+msgstr "在1572年11月"
 
 #: scripts/supernova.ssc:85
 msgid " November 1572"
-msgstr ""
+msgstr "日的傍晚"
 
 #: scripts/supernova.ssc:92
 msgid "Hooray! First observations in Korea and Europe."
-msgstr ""
+msgstr "太棒了！在朝鮮與歐洲都出現首次觀測紀錄"
 
 #: scripts/supernova.ssc:100
 msgid "First observations in China."
-msgstr ""
+msgstr "在中國出現首次觀測紀錄"
 
 #: scripts/supernova.ssc:108
 msgid ""
 "The clouds are gone and Tycho Brahe the first time watching a new star!"
-msgstr ""
+msgstr "雲朵散去後，第谷 Tycho Brahe 第一次看到這顆新恆星！"
 
 #: scripts/supernova.ssc:117
 msgid "Next 60 days..."
-msgstr ""
+msgstr "再過60天.."
 
 #: scripts/supernova.ssc:128
 msgid "Next other 40 days..."
+msgstr "然後再過40天.."
+
+#: scripts/h400_tour.ssc:16
+msgid "The Herschel 400 Catalogue"
+msgstr "赫歇爾 400 目錄"
+
+#: scripts/h400_tour.ssc:17
+msgid ""
+"The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae"
+" and Clusters"
 msgstr ""
+"赫歇爾 400 目錄是從威廉·赫歇爾的星雲和星團總表 CN 中篩選出來的400個天體，CN後來被他的兒子約翰·赫歇爾擴充成為星雲和星團總表 GC。"
+
+#: scripts/h400_tour.ssc:18
+msgid ""
+"published in 1864 of 5,000 objects, and hence also of the New General "
+"Catalogue."
+msgstr "GC 收錄了超過5000個天體並在1864年出版。CN和GC也是現在星雲和星團新總表 NGC 的前身。"
+
+#: scripts/h400_tour.ssc:19
+msgid "Vital statistics:"
+msgstr "核心統計數據: "
+
+#: scripts/h400_tour.ssc:20
+msgid "* The catalogue contains 400 objects"
+msgstr "* 該目錄包含400個天體"
+
+#: scripts/h400_tour.ssc:21
+msgid "* All objects are from the NGC"
+msgstr "* 所有天體都來自 NGC"
+
+#: scripts/h400_tour.ssc:22
+msgid "* All visible in mid northern latitudes"
+msgstr "* 都可在北半球中緯度區域看見"
+
+#: scripts/h400_tour.ssc:23
+msgid "* All visible in 150 mm (6\") or larger telescopes"
+msgstr "* 都可透過口徑150公釐(6英寸)或更大的望遠鏡觀測"
+
+#: scripts/largest_known_stars.ssc:12
+msgid "PZ Cassiopeiae"
+msgstr "仙后座PZ"
+
+#: scripts/largest_known_stars.ssc:13
+msgid ""
+"PZ Cas is located in a region with heavy dust extinction.\n"
+"The quoted size is the average size parameter, the true\n"
+"value is from 1,340-1,940."
+msgstr ""
+"仙后座PZ位於一個具有濃厚塵埃消光的區域\n"
+"引用的大小數據是平均大小，真實的大小\n"
+"數據範圍是 1,340-1,940 倍。"
+
+#: scripts/largest_known_stars.ssc:14
+msgid "VX Sagittarii"
+msgstr "人馬座VX"
+
+#: scripts/largest_known_stars.ssc:15
+msgid ""
+"VX Sgr is a pulsating variable with a large visual range\n"
+"and varies significantly in size."
+msgstr ""
+"人馬座VX是具有大亮度變化的脈動變星\n"
+"而且體積大小的變化也非常明顯。"
+
+#: scripts/largest_known_stars.ssc:16
+msgid "VV Cephei A"
+msgstr "仙王座 VV A"
+
+#: scripts/largest_known_stars.ssc:17
+msgid ""
+"VV Cep A is a highly distorted star in a binary system,\n"
+"losing mass to its B-type companion VV Cephei B for at least\n"
+"part of its orbit."
+msgstr ""
+"仙王座VV A 是在雙星系統中一顆高度變形的恆星，\n"
+"其表面的物質，至少在超過軌道部份，正噴發流向\n"
+"其伴星仙王座VV B。"
+
+#: scripts/largest_known_stars.ssc:18
+msgid "RW Cephei"
+msgstr "仙王座RW"
+
+#: scripts/largest_known_stars.ssc:19
+msgid ""
+"RW Cep is variable both in brightness (by at least a factor\n"
+"of 3) and spectral type (observed from G8 to M), thus\n"
+"probably also in diameter."
+msgstr ""
+"仙王座RW是一顆具有亮度(至少3倍)的變化和\n"
+"光譜(觀測從G8到M)的類型變化，因此可能在\n"
+"直徑上也有相應的變化。"
+
+#: scripts/largest_known_stars.ssc:20
+msgid "VY Canis Majoris"
+msgstr "大犬座VY"
+
+#: scripts/largest_known_stars.ssc:21
+msgid ""
+"Once thought to be a red hypergiant star so large that it\n"
+"contradicted stellar evolutionary theory, improved measurements\n"
+"and estimates have brought it down to size."
+msgstr ""
+"曾經這顆恆星由於太大而被認為是違反恆星演化\n"
+"理論的紅特超巨星。後來改進的觀測和估算已經\n"
+"將它的大小縮進理論的範圍。"
+
+#: scripts/largest_known_stars.ssc:22
+msgid "AH Scorpii"
+msgstr "天蝎座AH"
+
+#: scripts/largest_known_stars.ssc:23
+msgid ""
+"AH Sco is variable by nearly 3 magnitudes in the visual range,\n"
+"and an estimated 20% in total luminosity. The variation in diameter\n"
+"is not clear because the temperature also varies."
+msgstr ""
+"天蝎座AH是一顆具有3個視星等變化和估計有\n"
+"20%總亮度變化的變星，在直徑大小的變化上\n"
+"由於溫度也在變化所以無法確定。"
+
+#: scripts/largest_known_stars.ssc:24
+msgid "V766 Centauri A"
+msgstr "半人馬座V766 A"
+
+#: scripts/largest_known_stars.ssc:25
+msgid ""
+"V766 Centauri A is a highly distorted star in a close binary system,\n"
+"losing mass to the secondary."
+msgstr ""
+"半人馬座V766 A是一顆在密近雙星系統中由於失去質量\n"
+"到伴星上而高度變形的恆星。"
+
+#: scripts/largest_known_stars.ssc:26
+msgid "KW Sagittarii"
+msgstr "人馬座KW"
+
+#: scripts/largest_known_stars.ssc:27
+msgid "BC Cygni"
+msgstr "天鵝座BC"
+
+#: scripts/largest_known_stars.ssc:28
+msgid "RT Carinae"
+msgstr "船底座RT"
+
+#: scripts/largest_known_stars.ssc:29
+msgid "Betelgeuse"
+msgstr "參宿四"
+
+#: scripts/largest_known_stars.ssc:30
+msgid "Ninth brightest star in the night sky."
+msgstr "夜空中排名第九亮的恆星"
+
+#: scripts/largest_known_stars.ssc:31
+msgid "Mu Cephei (Herschel's \"Garnet Star\")"
+msgstr "造父四 (赫歇爾的『柘榴石星』)"
+
+#: scripts/largest_known_stars.ssc:32
+msgid "S Persei"
+msgstr "英仙座S"
+
+#: scripts/largest_known_stars.ssc:33
+msgid "In the Perseus Double Cluster."
+msgstr "在英仙座的雙星團ㄓㄨㄥ"
+
+#: scripts/largest_known_stars.ssc:34
+msgid "RW Cygni"
+msgstr "天鵝座RW"
+
+#: scripts/largest_known_stars.ssc:35
+msgid "Antares A"
+msgstr "心宿二 A"
+
+#: scripts/largest_known_stars.ssc:36
+msgid "Theta Muscae"
+msgstr "蒼蠅座θ"
+
+#: scripts/largest_known_stars.ssc:37
+msgid "V1749 Cygni"
+msgstr "天鵝座V1749"
+
+#: scripts/largest_known_stars.ssc:38
+msgid "TZ Cassiopeiae"
+msgstr "仙后座TZ"
+
+#: scripts/largest_known_stars.ssc:39
+msgid "IX Carinae"
+msgstr "船底座IX"
+
+#: scripts/largest_known_stars.ssc:40
+msgid "TV Geminorum"
+msgstr "雙子座TV"
+
+#: scripts/largest_known_stars.ssc:41
+msgid "T Cephei"
+msgstr "仙王座T"
+
+#: scripts/largest_known_stars.ssc:42
+msgid "V382 Carinae"
+msgstr "船底座V382"
+
+#: scripts/largest_known_stars.ssc:43 scripts/largest_known_stars.ssc:45
+msgid "Yellow hypergiant, one of the rarest types of star."
+msgstr "黃超巨星，最稀有的恆星類型之一"
+
+#: scripts/largest_known_stars.ssc:44
+msgid "V509 Cassiopeiae"
+msgstr "仙后座V509"
+
+#: scripts/largest_known_stars.ssc:46
+msgid "CE Tauri (\"Ruby Star\")"
+msgstr "金牛座CE (紅寶石星)"
+
+#: scripts/largest_known_stars.ssc:47
+msgid ""
+"Can be occulted by the Moon, allowing accurate determination\n"
+"of its apparent diameter."
+msgstr "可被月球掩食，因而可以精確計算它的視直徑。"
+
+#: scripts/largest_known_stars.ssc:48
+msgid "R Leporis (\"Hind's Crimson Star\")"
+msgstr "天兔座R (HInd的血紅星)"
+
+#: scripts/largest_known_stars.ssc:49
+msgid "One of the largest carbon stars existent in the Milky Way Galaxy."
+msgstr "銀河系現存最大的碳星之一"
+
+#: scripts/largest_known_stars.ssc:50
+msgid "Alpha Herculis (\"Ras Algethi\")"
+msgstr "武仙座α (帝座)"
+
+#: scripts/largest_known_stars.ssc:51
+msgid "Rho Cassiopeiae"
+msgstr "仙后座ρ"
+
+#: scripts/largest_known_stars.ssc:52
+msgid "A yellow hypergiant, one of the rarest types of a star."
+msgstr "一顆黃超巨星，最稀有的恆星類型之一。"
+
+#: scripts/largest_known_stars.ssc:53
+msgid "Mira A (Omicron Ceti)"
+msgstr "蒭藁增二 A (Mira A, 鯨魚座ο)"
+
+#: scripts/largest_known_stars.ssc:54
+msgid "Prototype Mira variable"
+msgstr "Mira 變星的原型"
+
+#: scripts/largest_known_stars.ssc:55
+msgid "R Doradus"
+msgstr "劍魚座R"
+
+#: scripts/largest_known_stars.ssc:56
+msgid "Star with the second largest apparent size after the Sun."
+msgstr " 它的視直徑是所有恆星中僅次於太陽排名第二大。"
+
+#: scripts/largest_known_stars.ssc:57
+msgid "La Superba (Y Canum Venaticorum)"
+msgstr "獵犬座Y (La Superba)"
+
+#: scripts/largest_known_stars.ssc:58
+msgid "One of the coolest and reddest known stars."
+msgstr "已知恆星中最冷與最紅的星球之一"
+
+#: scripts/largest_known_stars.ssc:59
+msgid "Deneb (Alpha Cygni)"
+msgstr "天津四 (天鹅座α)"
+
+#: scripts/largest_known_stars.ssc:60
+msgid "19th brightest star in the night sky."
+msgstr "夜空中排名第19亮的恆星"
+
+#: scripts/largest_known_stars.ssc:61
+msgid "Rigel A (Beta Orionis A)"
+msgstr "參宿七 A (獵戶座β A)"
+
+#: scripts/largest_known_stars.ssc:62
+msgid "Seventh brightest star in the night sky."
+msgstr "夜空中排名第7亮的恆星"
+
+#: scripts/largest_known_stars.ssc:63
+msgid "Canopus (Alpha Carinae)"
+msgstr "老人星 (船底座α)"
+
+#: scripts/largest_known_stars.ssc:64
+msgid "Second brightest star in the night sky."
+msgstr "夜空中排名第2亮的恆星"
+
+#: scripts/largest_known_stars.ssc:65
+msgid "Aldebaran (Alpha Tauri)"
+msgstr "畢宿五 (金牛座α)"
+
+#: scripts/largest_known_stars.ssc:66
+msgid "VV Cephei B"
+msgstr "仙王座VV B"
+
+#: scripts/largest_known_stars.ssc:67
+msgid "The B-type main sequence companion of VV Cephei A."
+msgstr "仙王座VV A 的伴星，B型主序星"
+
+#: scripts/largest_known_stars.ssc:92
+msgid "Solar radii"
+msgstr "太陽半徑"

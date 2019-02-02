@@ -7,17 +7,17 @@
 # cardinot <mcardinot@gmail.com>, 2017
 # Marc L., 2018
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2018
-# Georg Zotti <Georg.Zotti@univie.ac.at>, 2018
-# Latein Lebt, 2018
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2019
+# Latein Lebt, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-12-11 18:06+0700\n"
+"POT-Creation-Date: 2019-01-21 19:37+0700\n"
 "PO-Revision-Date: 2017-11-29 01:17+0000\n"
-"Last-Translator: Latein Lebt, 2018\n"
+"Last-Translator: Latein Lebt, 2019\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1853,7 +1853,7 @@ msgstr "Orbitar"
 
 #. TRANSLATORS: Proper name of star 47 Ursae Majoris
 #. TRANSLATORS: https://en.wikipedia.org/wiki/47_Ursae_Majoris
-#: skycultures/translations.fab:841 skycultures/western/star_names.fab:857
+#: skycultures/translations.fab:841 skycultures/western/star_names.fab:858
 msgid "Chalawan"
 msgstr "Chalawan"
 
@@ -1979,7 +1979,7 @@ msgstr "Smertrios"
 
 #. TRANSLATORS: Proper name of star HD 81688
 #. TRANSLATORS: https://en.wikipedia.org/wiki/41_Lyncis
-#: skycultures/translations.fab:904 skycultures/western/star_names.fab:856
+#: skycultures/translations.fab:904 skycultures/western/star_names.fab:857
 msgid "Intercrus"
 msgstr "Intercrus"
 
@@ -6144,7 +6144,7 @@ msgstr "Seerosennebel"
 
 #: nebulae/default/names.dat:1085
 msgid "Necklace Nebula"
-msgstr ""
+msgstr "Halsband-Nebel"
 
 #: nebulae/default/names.dat:1086
 msgid "Cotton Candy Nebula"
@@ -6288,15 +6288,15 @@ msgstr ""
 
 #: nebulae/default/names.dat:1125
 msgid "Tycho's supernova remnant"
-msgstr ""
+msgstr "Tychos Supernova-Rest"
 
 #: nebulae/default/names.dat:1126
 msgid "Puppis A"
-msgstr ""
+msgstr "Puppis A"
 
 #: nebulae/default/names.dat:1127
 msgid "Vela Junior"
-msgstr ""
+msgstr "Vela Junior"
 
 #: nebulae/default/names.dat:1128
 msgid "Calabash Nebula"
@@ -8335,192 +8335,235 @@ msgid "Ginabongbearp"
 msgstr "Ginabongbearp (Jupiter)"
 
 #: skycultures/chinese/constellation_names.eng.fab:1
+#: skycultures/chinese_medieval/constellation_names.eng.fab:266
 #: skycultures/egyptian/constellation_names.eng.fab:21
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:22
 msgid "Net"
 msgstr "Netz"
 
 #: skycultures/chinese/constellation_names.eng.fab:2
+#: skycultures/chinese_medieval/constellation_names.eng.fab:229
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:16
 msgid "Wall"
 msgstr "Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:3
+#: skycultures/chinese_medieval/constellation_names.eng.fab:286
 msgid "Three Stars"
 msgstr "Drei Sterne"
 
 #: skycultures/chinese/constellation_names.eng.fab:4
+#: skycultures/chinese_medieval/constellation_names.eng.fab:103
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:4
 msgid "Root"
 msgstr "Wurzel"
 
 #: skycultures/chinese/constellation_names.eng.fab:5
+#: skycultures/chinese_medieval/constellation_names.eng.fab:141
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:10
 msgid "Dipper"
 msgstr "Schöpflöffel"
 
 #: skycultures/chinese/constellation_names.eng.fab:6
+#: skycultures/chinese_medieval/constellation_names.eng.fab:122
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:15
 msgid "Room"
 msgstr "Raum"
 
 #: skycultures/chinese/constellation_names.eng.fab:7
+#: skycultures/chinese_medieval/constellation_names.eng.fab:313
 msgid "Ghosts"
 msgstr "Geister"
 
 #: skycultures/chinese/constellation_names.eng.fab:8
+#: skycultures/chinese_medieval/constellation_names.eng.fab:138
 msgid "Winnowing Basket"
 msgstr "Worfelkorb"
 
 #: skycultures/chinese/constellation_names.eng.fab:9
+#: skycultures/chinese_medieval/constellation_names.eng.fab:81
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:2
 msgid "Horn"
 msgstr "Horn"
 
 #: skycultures/chinese/constellation_names.eng.fab:10
+#: skycultures/chinese_medieval/constellation_names.eng.fab:293
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:26
 msgid "Well"
 msgstr "Brunnen"
 
 #: skycultures/chinese/constellation_names.eng.fab:11
+#: skycultures/chinese_medieval/constellation_names.eng.fab:96
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:3
 msgid "Neck"
 msgstr "Hals"
 
 #: skycultures/chinese/constellation_names.eng.fab:12
+#: skycultures/chinese_medieval/constellation_names.eng.fab:235
 msgid "Legs"
 msgstr "Beine"
 
 #: skycultures/chinese/constellation_names.eng.fab:13
+#: skycultures/chinese_medieval/constellation_names.eng.fab:320
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:28
 msgid "Willow"
 msgstr "Weide"
 
 #: skycultures/chinese/constellation_names.eng.fab:14
+#: skycultures/chinese_medieval/constellation_names.eng.fab:244
 msgid "Bond"
 msgstr "Fessel"
 
 #: skycultures/chinese/constellation_names.eng.fab:15
+#: skycultures/chinese_medieval/constellation_names.eng.fab:257
 msgid "Hairy Head"
 msgstr "Behaarter Kopf"
 
 #: skycultures/chinese/constellation_names.eng.fab:16
+#: skycultures/chinese_medieval/constellation_names.eng.fab:151
 msgid "Ox"
 msgstr "Ochse"
 
 #: skycultures/chinese/constellation_names.eng.fab:17
+#: skycultures/chinese_medieval/constellation_names.eng.fab:162
 msgid "Girl"
 msgstr "Mädchen"
 
 #: skycultures/chinese/constellation_names.eng.fab:18
+#: skycultures/chinese_medieval/constellation_names.eng.fab:202
 msgid "Encampment"
 msgstr "Feldlager"
 
 #: skycultures/chinese/constellation_names.eng.fab:19
+#: skycultures/chinese_medieval/constellation_names.eng.fab:41
 msgid "Supreme Palace Right Wall"
 msgstr "Herrschaftspalast, Rechte Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:20
+#: skycultures/chinese_medieval/constellation_names.eng.fab:40
 msgid "Supreme Palace Left Wall"
 msgstr "Herrschaftspalast, Linke Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:21
+#: skycultures/chinese_medieval/constellation_names.eng.fab:63
 msgid "Heavenly Market Right Wall"
 msgstr "Himmlischer Markt, Rechte Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:22
+#: skycultures/chinese_medieval/constellation_names.eng.fab:62
 msgid "Heavenly Market Left Wall"
 msgstr "Himmlischer Markt, Linke Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:23
+#: skycultures/chinese_medieval/constellation_names.eng.fab:191
 msgid "Rooftop"
 msgstr "Hausdach"
 
 #: skycultures/chinese/constellation_names.eng.fab:24
+#: skycultures/chinese_medieval/constellation_names.eng.fab:132
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:7
 msgid "Tail"
 msgstr "Schwanz"
 
 #: skycultures/chinese/constellation_names.eng.fab:25
+#: skycultures/chinese_medieval/constellation_names.eng.fab:250
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:20
 msgid "Stomach"
 msgstr "Magen"
 
 #: skycultures/chinese/constellation_names.eng.fab:26
+#: skycultures/chinese_medieval/constellation_names.eng.fab:130
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:6
 msgid "Heart"
 msgstr "Herz"
 
 #: skycultures/chinese/constellation_names.eng.fab:27
+#: skycultures/chinese_medieval/constellation_names.eng.fab:322
 msgid "Star"
 msgstr "Stern"
 
 #: skycultures/chinese/constellation_names.eng.fab:28
+#: skycultures/chinese_medieval/constellation_names.eng.fab:181
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:13
 msgid "Emptiness"
 msgstr "Leere"
 
 #: skycultures/chinese/constellation_names.eng.fab:29
+#: skycultures/chinese_medieval/constellation_names.eng.fab:329
 #: skycultures/japanese_moon_stations/constellation_names.eng.fab:31
 msgid "Wings"
 msgstr "Flügel"
 
 #: skycultures/chinese/constellation_names.eng.fab:30
+#: skycultures/chinese_medieval/constellation_names.eng.fab:327
 msgid "Extended Net"
 msgstr "Ausgeworfenes Netz"
 
 #: skycultures/chinese/constellation_names.eng.fab:31
+#: skycultures/chinese_medieval/constellation_names.eng.fab:331
 msgid "Chariot"
 msgstr "Wagen"
 
 #: skycultures/chinese/constellation_names.eng.fab:32
+#: skycultures/chinese_medieval/constellation_names.eng.fab:6
 msgid "Purple Forbidden Right Wall"
 msgstr "Purpurne verbotene Rechte Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:33
+#: skycultures/chinese_medieval/constellation_names.eng.fab:5
 msgid "Purple Forbidden Left Wall"
 msgstr "Purpurne verbotene Linke Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:34
+#: skycultures/chinese_medieval/constellation_names.eng.fab:283
 msgid "Turtle Beak"
 msgstr "Schildkrötenschnabel"
 
 #: skycultures/chinese/constellation_names.eng.fab:35
+#: skycultures/chinese_medieval/constellation_names.eng.fab:23
 msgid "Eight Kinds of Crops"
 msgstr "Acht Getreidesorten"
 
 #: skycultures/chinese/constellation_names.eng.fab:36
+#: skycultures/chinese_medieval/constellation_names.eng.fab:213
 msgid "Net for Catching Birds"
 msgstr "Vogelfangnetz"
 
 #: skycultures/chinese/constellation_names.eng.fab:37
+#: skycultures/chinese_medieval/constellation_names.eng.fab:164
 msgid "Rotten Gourd"
 msgstr "Fauliger Kürbis"
 
 #: skycultures/chinese/constellation_names.eng.fab:38
+#: skycultures/chinese_medieval/constellation_names.eng.fab:189
 msgid "Decayed Mortar"
 msgstr "Verfallener Mörser"
 
 #: skycultures/chinese/constellation_names.eng.fab:39
+#: skycultures/chinese_medieval/constellation_names.eng.fab:37
 #: skycultures/korean/constellation_names.eng.fab:219
 msgid "Northern Dipper"
 msgstr "Nördlicher Schöpfer"
 
 #: skycultures/chinese/constellation_names.eng.fab:40
+#: skycultures/chinese_medieval/constellation_names.eng.fab:296
 msgid "North River"
 msgstr "Nördlicher Fluss"
 
 #: skycultures/chinese/constellation_names.eng.fab:41
+#: skycultures/chinese_medieval/constellation_names.eng.fab:1
 msgid "Northern Pole"
 msgstr "Nordpol"
 
 #: skycultures/chinese/constellation_names.eng.fab:42
 #: skycultures/chinese/star_names.fab:2212
 #: skycultures/chinese_contemporary/star_names.fab:2233
+#: skycultures/chinese_medieval/constellation_names.eng.fab:210
 msgid "North Gate of the Military Camp"
 msgstr "Nordtor des Militärlagers"
 
 #: skycultures/chinese/constellation_names.eng.fab:43
+#: skycultures/chinese_medieval/constellation_names.eng.fab:144
 msgid "River Turtle"
 msgstr "Flussschildkröte"
 
@@ -8529,14 +8572,17 @@ msgid "Persia"
 msgstr "Persien"
 
 #: skycultures/chinese/constellation_names.eng.fab:46
+#: skycultures/chinese_medieval/constellation_names.eng.fab:69
 msgid "Textile Ruler"
 msgstr "Textilherrscher"
 
 #: skycultures/chinese/constellation_names.eng.fab:47
+#: skycultures/chinese_medieval/constellation_names.eng.fab:280
 msgid "Banner of Three Stars"
 msgstr "Drei-Sterne Banner"
 
 #: skycultures/chinese/constellation_names.eng.fab:48
+#: skycultures/chinese_medieval/constellation_names.eng.fab:291
 #: skycultures/korean/constellation_names.eng.fab:154
 msgid "Toilet"
 msgstr "Toilette"
@@ -8544,102 +8590,125 @@ msgstr "Toilette"
 #: skycultures/chinese/constellation_names.eng.fab:49
 #: skycultures/chinese/star_names.fab:2382
 #: skycultures/chinese_contemporary/star_names.fab:2403
+#: skycultures/chinese_medieval/constellation_names.eng.fab:243
 #: skycultures/korean/constellation_names.eng.fab:100
 msgid "Whip"
 msgstr "Peitsche"
 
 #: skycultures/chinese/constellation_names.eng.fab:50
+#: skycultures/chinese_medieval/constellation_names.eng.fab:53
 msgid "Royal Guards"
 msgstr "Königliche Wachen"
 
 #: skycultures/chinese/constellation_names.eng.fab:51
+#: skycultures/chinese_medieval/constellation_names.eng.fab:196
 msgid "Big Yard for Chariots"
 msgstr "Großer Wagenhof"
 
 #: skycultures/chinese/constellation_names.eng.fab:52
+#: skycultures/chinese_medieval/constellation_names.eng.fab:110
 msgid "Chariots and Cavalry"
 msgstr "Wagen und Kavallerie"
 
 #: skycultures/chinese/constellation_names.eng.fab:53
+#: skycultures/chinese_medieval/constellation_names.eng.fab:65
 msgid "Commodity Market"
 msgstr "Verbrauchsgütermarkt"
 
 #: skycultures/chinese/constellation_names.eng.fab:54
+#: skycultures/chinese_medieval/constellation_names.eng.fab:264
 msgid "Hay"
 msgstr "Heu"
 
 #: skycultures/chinese/constellation_names.eng.fab:55
+#: skycultures/chinese_medieval/constellation_names.eng.fab:139
 msgid "Pestle (In Winnowing Basket Mansion)"
 msgstr "Stößel (in Mondstation Worfelkorb)"
 
 #: skycultures/chinese/constellation_names.eng.fab:56
+#: skycultures/chinese_medieval/constellation_names.eng.fab:195
 msgid "Pestle (In Rooftop Mansion)"
 msgstr "Stößel (in Mondstation Hausdach)"
 
 #: skycultures/chinese/constellation_names.eng.fab:57
+#: skycultures/chinese_medieval/constellation_names.eng.fab:332
 msgid "Changsha (Vassal of Chariot)"
 msgstr "Changsha (Vasall des Wagens)"
 
 #: skycultures/chinese/constellation_names.eng.fab:58
+#: skycultures/chinese_medieval/constellation_names.eng.fab:20
 msgid "Guest House"
 msgstr "Gästehaus"
 
 #: skycultures/chinese/constellation_names.eng.fab:59
+#: skycultures/chinese_medieval/constellation_names.eng.fab:129
 msgid "Retinue (In Room Mansion)"
 msgstr "Gefolge (In Mondstation Raum)"
 
 #: skycultures/chinese/constellation_names.eng.fab:60
 #: skycultures/chinese/star_names.fab:458
 #: skycultures/chinese_contemporary/star_names.fab:479
+#: skycultures/chinese_medieval/constellation_names.eng.fab:50
 msgid "Retinue (In Supreme Palace Enclosure)"
 msgstr "Gefolge (im Höchsten Palast-Bezirk)"
 
 #: skycultures/chinese/constellation_names.eng.fab:61
 #: skycultures/chinese/star_names.fab:1117
 #: skycultures/chinese_contemporary/star_names.fab:1138
+#: skycultures/chinese_medieval/constellation_names.eng.fab:97
 msgid "Great Horn"
 msgstr "Großes Horn"
 
 #: skycultures/chinese/constellation_names.eng.fab:62
+#: skycultures/chinese_medieval/constellation_names.eng.fab:13
 msgid "Chief Judge"
 msgstr "Oberster Richter"
 
 #: skycultures/chinese/constellation_names.eng.fab:63
+#: skycultures/chinese_medieval/constellation_names.eng.fab:253
 #: skycultures/korean/constellation_names.eng.fab:116
 msgid "Mausoleum"
 msgstr "Mausoleum"
 
 #: skycultures/chinese/constellation_names.eng.fab:64
+#: skycultures/chinese_medieval/constellation_names.eng.fab:328
 msgid "Celestial Temple"
 msgstr "Himmlischer Tempel"
 
 #: skycultures/chinese/constellation_names.eng.fab:66
+#: skycultures/chinese_medieval/constellation_names.eng.fab:107
 msgid "Mattress of the Emperor"
 msgstr "Matratze des Kaisers"
 
 #: skycultures/chinese/constellation_names.eng.fab:67
 #: skycultures/chinese/star_names.fab:674
 #: skycultures/chinese_contemporary/star_names.fab:695
+#: skycultures/chinese_medieval/constellation_names.eng.fab:72
 msgid "Emperor's Seat"
 msgstr "Kaisersitz"
 
 #: skycultures/chinese/constellation_names.eng.fab:68
+#: skycultures/chinese_medieval/constellation_names.eng.fab:126
 msgid "Eastern Door"
 msgstr "Östliche Tür"
 
 #: skycultures/chinese/constellation_names.eng.fab:69
+#: skycultures/chinese_medieval/constellation_names.eng.fab:75
 msgid "Dipper for Liquids"
 msgstr "Schöpfer für Flüssigkeiten"
 
 #: skycultures/chinese/constellation_names.eng.fab:70
+#: skycultures/chinese_medieval/constellation_names.eng.fab:101
 msgid "Trials"
 msgstr "Prozesse"
 
 #: skycultures/chinese/constellation_names.eng.fab:71
+#: skycultures/chinese_medieval/constellation_names.eng.fab:287
 msgid "Send Armed Forces To Suppress (Vassal of Three Stars)"
 msgstr "Sende Truppen zur Unterdrückung (Vasall der Drei Sterne)"
 
 #: skycultures/chinese/constellation_names.eng.fab:72
+#: skycultures/chinese_medieval/constellation_names.eng.fab:125
 msgid "Punishment"
 msgstr "Bestrafung"
 
@@ -8648,18 +8717,22 @@ msgid "Flying Fish"
 msgstr "Fliegender Fisch"
 
 #: skycultures/chinese/constellation_names.eng.fab:75
+#: skycultures/chinese_medieval/constellation_names.eng.fab:192
 msgid "Tomb (Vassal of Rooftop)"
 msgstr "Grabmal (Vasall des Hausdachs)"
 
 #: skycultures/chinese/constellation_names.eng.fab:76
+#: skycultures/chinese_medieval/constellation_names.eng.fab:209
 msgid "Axe"
 msgstr "Axt"
 
 #: skycultures/chinese/constellation_names.eng.fab:77
+#: skycultures/chinese_medieval/constellation_names.eng.fab:233
 msgid "Sickle"
 msgstr "Sichel"
 
 #: skycultures/chinese/constellation_names.eng.fab:78
+#: skycultures/chinese_medieval/constellation_names.eng.fab:168
 msgid "Basket for Mulberry Leaves"
 msgstr "Korb für Maulbeerblätter"
 
@@ -8670,57 +8743,70 @@ msgstr "Weiße Flecken in der Nähe"
 #: skycultures/chinese/constellation_names.eng.fab:81
 #: skycultures/chinese/star_names.fab:2385
 #: skycultures/chinese_contemporary/star_names.fab:2406
+#: skycultures/chinese_medieval/constellation_names.eng.fab:241
 msgid "Auxiliary Road"
 msgstr "Behelfsstraße"
 
 #: skycultures/chinese/constellation_names.eng.fab:82
 #: skycultures/chinese/star_names.fab:1377
 #: skycultures/chinese_contemporary/star_names.fab:1398
+#: skycultures/chinese_medieval/constellation_names.eng.fab:136
 msgid "Fu Yue"
 msgstr "Fu Yue"
 
 #: skycultures/chinese/constellation_names.eng.fab:83
+#: skycultures/chinese_medieval/constellation_names.eng.fab:201
 msgid "Roofing"
 msgstr "Dachdeckung"
 
 #: skycultures/chinese/constellation_names.eng.fab:84
+#: skycultures/chinese_medieval/constellation_names.eng.fab:19
 msgid "Canopy Support (Vassal of Canopy of the Emperor)"
 msgstr "Baldachinstütze (Vasall des Kaiserlichen Baldachins)"
 
 #: skycultures/chinese/constellation_names.eng.fab:85
+#: skycultures/chinese_medieval/constellation_names.eng.fab:240
 msgid "Flying Corridor"
 msgstr "Fliegender Korridor"
 
 #: skycultures/chinese/constellation_names.eng.fab:86
+#: skycultures/chinese_medieval/constellation_names.eng.fab:106
 msgid "Celestial Lance"
 msgstr "Himmelslanze"
 
 #: skycultures/chinese/constellation_names.eng.fab:87
+#: skycultures/chinese_medieval/constellation_names.eng.fab:14
 msgid "Curved Array"
 msgstr "Gekrümmte Schlachtordnung"
 
 #: skycultures/chinese/constellation_names.eng.fab:88
+#: skycultures/chinese_medieval/constellation_names.eng.fab:123
 msgid "Lock (Vassal of Room)"
 msgstr "Schloß (Vasall des Raums)"
 
 #: skycultures/chinese/constellation_names.eng.fab:89
+#: skycultures/chinese_medieval/constellation_names.eng.fab:147
 #: skycultures/korean/constellation_names.eng.fab:47
 msgid "Dog"
 msgstr "Hund"
 
 #: skycultures/chinese/constellation_names.eng.fab:90
+#: skycultures/chinese_medieval/constellation_names.eng.fab:148
 msgid "Territory of Dog"
 msgstr "Hunderevier"
 
 #: skycultures/chinese/constellation_names.eng.fab:91
+#: skycultures/chinese_medieval/constellation_names.eng.fab:77
 msgid "Coiled Thong"
 msgstr "Gedrehte Peitsche"
 
 #: skycultures/chinese/constellation_names.eng.fab:92
+#: skycultures/chinese_medieval/constellation_names.eng.fab:315
 msgid "Beacon Fire"
 msgstr "Leuchtfeuer"
 
 #: skycultures/chinese/constellation_names.eng.fab:93
+#: skycultures/chinese_medieval/constellation_names.eng.fab:134
 #: skycultures/tukano/constellation_names.eng.fab:10
 msgid "Tortoise"
 msgstr "Schildkröte"
@@ -8734,10 +8820,12 @@ msgid "Sea Rock"
 msgstr "Meeresfels"
 
 #: skycultures/chinese/constellation_names.eng.fab:98
+#: skycultures/chinese_medieval/constellation_names.eng.fab:335
 msgid "Military Gate"
 msgstr "Militärtor"
 
 #: skycultures/chinese/constellation_names.eng.fab:100
+#: skycultures/chinese_medieval/constellation_names.eng.fab:154
 msgid "Drum at the River"
 msgstr "Trommel am Fluß"
 
@@ -8746,38 +8834,46 @@ msgid "Crane"
 msgstr "Kranich"
 
 #: skycultures/chinese/constellation_names.eng.fab:103
+#: skycultures/chinese_medieval/constellation_names.eng.fab:89
 msgid "Railings"
 msgstr "Brüstungen"
 
 #: skycultures/chinese/constellation_names.eng.fab:104
 #: skycultures/chinese/star_names.fab:677
 #: skycultures/chinese_contemporary/star_names.fab:698
+#: skycultures/chinese_medieval/constellation_names.eng.fab:71
 msgid "Astrologer"
 msgstr "Astrologe"
 
 #: skycultures/chinese/constellation_names.eng.fab:105
+#: skycultures/chinese_medieval/constellation_names.eng.fab:311
 msgid "Bow and Arrow"
 msgstr "Pfeil und Bogen "
 
 #: skycultures/chinese/constellation_names.eng.fab:106
+#: skycultures/chinese_medieval/constellation_names.eng.fab:76
 msgid "Dipper for Solids"
 msgstr "Schöpfer für Feststoffe"
 
 #: skycultures/chinese/constellation_names.eng.fab:107
 #: skycultures/chinese/star_names.fab:609
 #: skycultures/chinese_contemporary/star_names.fab:630
+#: skycultures/chinese_medieval/constellation_names.eng.fab:52
 msgid "Emperor's Bodyguard"
 msgstr "Leibwache des Kaisers"
 
 #: skycultures/chinese/constellation_names.eng.fab:108
+#: skycultures/chinese_medieval/constellation_names.eng.fab:165
 msgid "Good Gourd"
 msgstr "Reifer Kürbis"
 
 #: skycultures/chinese/constellation_names.eng.fab:109
+#: skycultures/chinese_medieval/constellation_names.eng.fab:18
 msgid "Canopy of the Emperor"
 msgstr "Baldachin des Kaisers"
 
 #: skycultures/chinese/constellation_names.eng.fab:110
+#: skycultures/chinese_medieval/constellation_names.eng.fab:73
 msgid "Eunuch Official"
 msgstr "Eunuch-Beauftragter"
 
@@ -8793,20 +8889,24 @@ msgstr "Leichenberg"
 #: skycultures/chinese/constellation_names.eng.fab:114
 #: skycultures/chinese/star_names.fab:2592
 #: skycultures/chinese_contemporary/star_names.fab:2613
+#: skycultures/chinese_medieval/constellation_names.eng.fab:255
 msgid "Heap of Corpses"
 msgstr "Leichenberg"
 
 #: skycultures/chinese/constellation_names.eng.fab:115
+#: skycultures/chinese_medieval/constellation_names.eng.fab:256
 msgid "Stored water"
 msgstr "Wasservorrat"
 
 #: skycultures/chinese/constellation_names.eng.fab:116
 #: skycultures/chinese/star_names.fab:3216
 #: skycultures/chinese_contemporary/star_names.fab:3237
+#: skycultures/chinese_medieval/constellation_names.eng.fab:300
 msgid "Pile of Firewood"
 msgstr "Haufen Brennholz"
 
 #: skycultures/chinese/constellation_names.eng.fab:117
+#: skycultures/chinese_medieval/constellation_names.eng.fab:131
 msgid "Group of Soldiers"
 msgstr "Gruppe von Soldaten"
 
@@ -8815,16 +8915,19 @@ msgid "White Patches Attached"
 msgstr "Weiße Flecken anbei"
 
 #: skycultures/chinese/constellation_names.eng.fab:120
+#: skycultures/chinese_medieval/constellation_names.eng.fab:142
 msgid "Establishment"
 msgstr "Einrichtung"
 
 #: skycultures/chinese/constellation_names.eng.fab:121
+#: skycultures/chinese_medieval/constellation_names.eng.fab:160
 msgid "Clepsydra Terrace"
 msgstr "Wasseruhr-Terrasse"
 
 #: skycultures/chinese/constellation_names.eng.fab:122
 #: skycultures/chinese/star_names.fab:1285
 #: skycultures/chinese_contemporary/star_names.fab:1306
+#: skycultures/chinese_medieval/constellation_names.eng.fab:124
 msgid "Door Bolt"
 msgstr "Türriegel"
 
@@ -8835,67 +8938,81 @@ msgstr "Goldfisch"
 #: skycultures/chinese/constellation_names.eng.fab:125
 #: skycultures/chinese/star_names.fab:1027
 #: skycultures/chinese_contemporary/star_names.fab:1048
+#: skycultures/chinese_medieval/constellation_names.eng.fab:84
 msgid "Recommending Virtuous Men"
 msgstr "Rechtschaffende Männer empfehlend"
 
 #: skycultures/chinese/constellation_names.eng.fab:126
 #: skycultures/chinese/star_names.fab:3213
 #: skycultures/chinese_contemporary/star_names.fab:3234
+#: skycultures/chinese_medieval/constellation_names.eng.fab:299
 msgid "Accumulated Water"
 msgstr "Gesammeltes Wasser"
 
 #: skycultures/chinese/constellation_names.eng.fab:127
+#: skycultures/chinese_medieval/constellation_names.eng.fab:153
 msgid "Nine Water Wells"
 msgstr "Neun Wasserbrunnen"
 
 #: skycultures/chinese/constellation_names.eng.fab:129
+#: skycultures/chinese_medieval/constellation_names.eng.fab:44
 msgid "Nine Senior Officers"
 msgstr "Neun Stabsoffiziere"
 
 #: skycultures/chinese/constellation_names.eng.fab:130
+#: skycultures/chinese_medieval/constellation_names.eng.fab:281
 msgid "Imperial Military Flag"
 msgstr "Kaiserliche Militärflagge"
 
 #: skycultures/chinese/constellation_names.eng.fab:131
+#: skycultures/chinese_medieval/constellation_names.eng.fab:272
 msgid "Interpreters of Nine Dialects"
 msgstr "Übersetzer der neun Dialekte"
 
 #: skycultures/chinese/constellation_names.eng.fab:132
+#: skycultures/chinese_medieval/constellation_names.eng.fab:321
 msgid "Banner of Wine Shop"
 msgstr "Banner einer Weinhandlung"
 
 #: skycultures/chinese/constellation_names.eng.fab:133
+#: skycultures/chinese_medieval/constellation_names.eng.fab:194
 #: skycultures/korean/constellation_names.eng.fab:80
 msgid "Mortar"
 msgstr "Mörser"
 
 #: skycultures/chinese/constellation_names.eng.fab:134
+#: skycultures/chinese_medieval/constellation_names.eng.fab:261
 #: skycultures/korean/constellation_names.eng.fab:122
 msgid "Rolled Tongue"
 msgstr "Gerollte Zunge"
 
 #: skycultures/chinese/constellation_names.eng.fab:135
+#: skycultures/chinese_medieval/constellation_names.eng.fab:290
 msgid "Military Well"
 msgstr "Militärbrunnen"
 
 #: skycultures/chinese/constellation_names.eng.fab:136
 #: skycultures/chinese/star_names.fab:2388
 #: skycultures/chinese_contemporary/star_names.fab:2409
+#: skycultures/chinese_medieval/constellation_names.eng.fab:239
 msgid "Southern Military Gate"
 msgstr "Südliches Militärtor"
 
 #: skycultures/chinese/constellation_names.eng.fab:137
+#: skycultures/chinese_medieval/constellation_names.eng.fab:304
 msgid "Market for Soldiers"
 msgstr "Soldatenmarkt"
 
 #: skycultures/chinese/constellation_names.eng.fab:138
 #: skycultures/chinese/star_names.fab:1395
 #: skycultures/chinese_contemporary/star_names.fab:1416
+#: skycultures/chinese_medieval/constellation_names.eng.fab:140
 #: skycultures/korean/constellation_names.eng.fab:42
 msgid "Chaff"
 msgstr "Spreu"
 
 #: skycultures/chinese/constellation_names.eng.fab:139
+#: skycultures/chinese_medieval/constellation_names.eng.fab:108
 msgid "Boats and Lake"
 msgstr "Boote und See"
 
@@ -8904,68 +9021,85 @@ msgid "Peafowl"
 msgstr "Pfau"
 
 #: skycultures/chinese/constellation_names.eng.fab:142
+#: skycultures/chinese_medieval/constellation_names.eng.fab:186
 msgid "Crying"
 msgstr "Schreien"
 
 #: skycultures/chinese/constellation_names.eng.fab:143
+#: skycultures/chinese_medieval/constellation_names.eng.fab:88
 msgid "Arsenal"
 msgstr "Arsenal"
 
 #: skycultures/chinese/constellation_names.eng.fab:144
 #: skycultures/chinese/star_names.fab:543
 #: skycultures/chinese_contemporary/star_names.fab:564
+#: skycultures/chinese_medieval/constellation_names.eng.fab:51
 msgid "Captain of the Bodyguards"
 msgstr "Hauptmann der Leibwache"
 
 #: skycultures/chinese/constellation_names.eng.fab:145
+#: skycultures/chinese_medieval/constellation_names.eng.fab:54
 msgid "Officers of the Imperial Guard"
 msgstr "Offiziere der Kaiserlichen Wache"
 
 #: skycultures/chinese/constellation_names.eng.fab:146
 #: skycultures/chinese/star_names.fab:3323
 #: skycultures/chinese_contemporary/star_names.fab:3344
+#: skycultures/chinese_medieval/constellation_names.eng.fab:312
 #: skycultures/tupi/constellation_names.eng.fab:2
 msgid "Old Man"
 msgstr "Alter Mann"
 
 #: skycultures/chinese/constellation_names.eng.fab:147
+#: skycultures/chinese_medieval/constellation_names.eng.fab:206
 msgid "Thunder and Lightning"
 msgstr "Blitz und Donner "
 
 #: skycultures/chinese/constellation_names.eng.fab:148
+#: skycultures/chinese_medieval/constellation_names.eng.fab:208
 msgid "Line of Ramparts"
 msgstr "Bollwerkslinie"
 
 #: skycultures/chinese/constellation_names.eng.fab:149
+#: skycultures/chinese_medieval/constellation_names.eng.fab:203
+#: skycultures/chinese_medieval/constellation_names.eng.fab:204
+#: skycultures/chinese_medieval/constellation_names.eng.fab:205
 msgid "Resting Palace (Vassal of Encampment)"
 msgstr "Ruhepalast (Vasall des Feldlagers)"
 
 #: skycultures/chinese/constellation_names.eng.fab:150
+#: skycultures/chinese_medieval/constellation_names.eng.fab:190
 msgid "Jade Ornament on Ladies' Wear"
 msgstr "Jadeschmuck an Frauenkleidern"
 
 #: skycultures/chinese/constellation_names.eng.fab:151
+#: skycultures/chinese_medieval/constellation_names.eng.fab:163
 msgid "Pearls on Ladies' Wear"
 msgstr "Perlen an Frauenkleidern"
 
 #: skycultures/chinese/constellation_names.eng.fab:152
+#: skycultures/chinese_medieval/constellation_names.eng.fab:263
 #: skycultures/korean/constellation_names.eng.fab:121
 msgid "Whetstone"
 msgstr "Wetzstein"
 
 #: skycultures/chinese/constellation_names.eng.fab:153
+#: skycultures/chinese_medieval/constellation_names.eng.fab:74
 msgid "Jewel Market"
 msgstr "Juwelenmarkt"
 
 #: skycultures/chinese/constellation_names.eng.fab:154
+#: skycultures/chinese_medieval/constellation_names.eng.fab:56
 msgid "Astronomical Observatory"
 msgstr "Astronomisches Observatorium"
 
 #: skycultures/chinese/constellation_names.eng.fab:155
+#: skycultures/chinese_medieval/constellation_names.eng.fab:15
 msgid "Six Jia"
 msgstr "Sechs Jia"
 
 #: skycultures/chinese/constellation_names.eng.fab:156
+#: skycultures/chinese_medieval/constellation_names.eng.fab:159
 msgid "Network of Dykes"
 msgstr "Netzwerk von Deichen"
 
@@ -8982,6 +9116,7 @@ msgid "Bee"
 msgstr "Biene"
 
 #: skycultures/chinese/constellation_names.eng.fab:163
+#: skycultures/chinese_medieval/constellation_names.eng.fab:55
 msgid "The Hall of Glory"
 msgstr "Ruhmeshalle"
 
@@ -8990,35 +9125,43 @@ msgid "Southern Boat"
 msgstr "Südliches Boot"
 
 #: skycultures/chinese/constellation_names.eng.fab:166
+#: skycultures/chinese_medieval/constellation_names.eng.fab:295
 msgid "South River"
 msgstr "Südlicher Fluss"
 
 #: skycultures/chinese/constellation_names.eng.fab:167
+#: skycultures/chinese_medieval/constellation_names.eng.fab:330
 msgid "Dongou"
 msgstr "Dongou"
 
 #: skycultures/chinese/constellation_names.eng.fab:169
+#: skycultures/chinese_medieval/constellation_names.eng.fab:90
 msgid "Southern Gate"
 msgstr "Südtor"
 
 #: skycultures/chinese/constellation_names.eng.fab:170
+#: skycultures/chinese_medieval/constellation_names.eng.fab:26
 #: skycultures/korean/constellation_names.eng.fab:224
 msgid "Inner Kitchen"
 msgstr "Innere Küche"
 
 #: skycultures/chinese/constellation_names.eng.fab:171
+#: skycultures/chinese_medieval/constellation_names.eng.fab:21
 msgid "Inner Steps"
 msgstr "Innere Stufen"
 
 #: skycultures/chinese/constellation_names.eng.fab:172
+#: skycultures/chinese_medieval/constellation_names.eng.fab:324
 msgid "High Judge"
 msgstr "Hoher Richter"
 
 #: skycultures/chinese/constellation_names.eng.fab:173
+#: skycultures/chinese_medieval/constellation_names.eng.fab:46
 msgid "Inner Screen"
 msgstr "Innerer Schirm"
 
 #: skycultures/chinese/constellation_names.eng.fab:174
+#: skycultures/chinese_medieval/constellation_names.eng.fab:161
 msgid "Imperial Passageway"
 msgstr "Kaiserlicher Durchgang"
 
@@ -9029,84 +9172,111 @@ msgstr "Vogelschnabel"
 #: skycultures/chinese/constellation_names.eng.fab:177
 #: skycultures/chinese/star_names.fab:1505
 #: skycultures/chinese_contemporary/star_names.fab:1526
+#: skycultures/chinese_medieval/constellation_names.eng.fab:150
 msgid "Peasant"
 msgstr "Bauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:178
+#: skycultures/chinese_medieval/constellation_names.eng.fab:80
 msgid "Woman's Bed"
 msgstr "Bett der Frau"
 
 #: skycultures/chinese/constellation_names.eng.fab:179
 #: skycultures/chinese/star_names.fab:65
 #: skycultures/chinese_contemporary/star_names.fab:86
+#: skycultures/chinese_medieval/constellation_names.eng.fab:9
 msgid "Female Protocol"
 msgstr "Damenprotokoll"
 
 #: skycultures/chinese/constellation_names.eng.fab:180
+#: skycultures/chinese_medieval/constellation_names.eng.fab:230
 msgid "Thunderbolt"
 msgstr "Donnerkeil"
 
 #: skycultures/chinese/constellation_names.eng.fab:181
+#: skycultures/chinese_medieval/constellation_names.eng.fab:87
 msgid "Judging"
 msgstr "Richten"
 
 #: skycultures/chinese/constellation_names.eng.fab:182
+#: skycultures/chinese_medieval/constellation_names.eng.fab:82
 msgid "Flat Road"
 msgstr "Flache Straße"
 
 #: skycultures/chinese/constellation_names.eng.fab:183
+#: skycultures/chinese_medieval/constellation_names.eng.fab:289
 msgid "Screen"
 msgstr "Wandschirm"
 
 #: skycultures/chinese/constellation_names.eng.fab:184
+#: skycultures/chinese_medieval/constellation_names.eng.fab:78
 msgid "Seven Excellencies"
 msgstr "Sieben Exzellenzen"
 
 #: skycultures/chinese/constellation_names.eng.fab:185
+#: skycultures/chinese_medieval/constellation_names.eng.fab:338
 msgid "House for Musical Instruments"
 msgstr "Haus für Musikinstrumente"
 
 #: skycultures/chinese/constellation_names.eng.fab:187
+#: skycultures/chinese_medieval/constellation_names.eng.fab:113
+#: skycultures/chinese_medieval/constellation_names.eng.fab:114
+#: skycultures/chinese_medieval/constellation_names.eng.fab:115
+#: skycultures/chinese_medieval/constellation_names.eng.fab:116
+#: skycultures/chinese_medieval/constellation_names.eng.fab:117
+#: skycultures/chinese_medieval/constellation_names.eng.fab:118
+#: skycultures/chinese_medieval/constellation_names.eng.fab:119
+#: skycultures/chinese_medieval/constellation_names.eng.fab:120
+#: skycultures/chinese_medieval/constellation_names.eng.fab:121
 msgid "Imperial Guards"
 msgstr "Kaiserliche Wachen"
 
 #: skycultures/chinese/constellation_names.eng.fab:188
 #: skycultures/chinese/star_names.fab:1264
 #: skycultures/chinese_contemporary/star_names.fab:1285
+#: skycultures/chinese_medieval/constellation_names.eng.fab:112
 msgid "Chariots and Cavalry General"
 msgstr "General der Wagen und Kavallerie"
 
 #: skycultures/chinese/constellation_names.eng.fab:189
+#: skycultures/chinese_medieval/constellation_names.eng.fab:187
 msgid "Weeping"
 msgstr "Weinen"
 
 #: skycultures/chinese/constellation_names.eng.fab:190
+#: skycultures/chinese_medieval/constellation_names.eng.fab:326
 msgid "Celestial Cereals"
 msgstr "Himmlisches Getreide"
 
 #: skycultures/chinese/constellation_names.eng.fab:192
+#: skycultures/chinese_medieval/constellation_names.eng.fab:337
 msgid "Green Hill"
 msgstr "Grüner Hügel"
 
 #: skycultures/chinese/constellation_names.eng.fab:193
+#: skycultures/chinese_medieval/constellation_names.eng.fab:309
 msgid "Palace Gate"
 msgstr "Palasttor"
 
 #: skycultures/chinese/constellation_names.eng.fab:194
+#: skycultures/chinese_medieval/constellation_names.eng.fab:193
 msgid "Humans"
 msgstr "Menschen"
 
 #: skycultures/chinese/constellation_names.eng.fab:195
 #: skycultures/chinese/star_names.fab:1311
 #: skycultures/chinese_contemporary/star_names.fab:1332
+#: skycultures/chinese_medieval/constellation_names.eng.fab:128
 msgid "Solar Star"
 msgstr "Sonnenstern"
 
 #: skycultures/chinese/constellation_names.eng.fab:196
+#: skycultures/chinese_medieval/constellation_names.eng.fab:43
 msgid "Three Excellencies (In Supreme Palace Enclosure)"
 msgstr "Drei Exzellenzen (im Höchsten Palast-Bezirk)"
 
 #: skycultures/chinese/constellation_names.eng.fab:197
+#: skycultures/chinese_medieval/constellation_names.eng.fab:34
 msgid "Three Excellencies (In Purple Forbidden Enclosure)"
 msgstr "Drei Exzellenzen (im Purpurnen Verbotenen Bezirk)"
 
@@ -9116,6 +9286,7 @@ msgid "Triangle"
 msgstr "Dreieck"
 
 #: skycultures/chinese/constellation_names.eng.fab:200
+#: skycultures/chinese_medieval/constellation_names.eng.fab:28
 msgid "Three Top Instructors"
 msgstr "Drei Oberinstruktoren"
 
@@ -9125,10 +9296,12 @@ msgid "Three Steps"
 msgstr "Drei Stufen"
 
 #: skycultures/chinese/constellation_names.eng.fab:202
+#: skycultures/chinese_medieval/constellation_names.eng.fab:8
 msgid "Royal Secretary"
 msgstr "Königlicher Sekretär"
 
 #: skycultures/chinese/constellation_names.eng.fab:203
+#: skycultures/chinese_medieval/constellation_names.eng.fab:57
 msgid "Junior Officers"
 msgstr "Subalternoffiziere"
 
@@ -9145,6 +9318,7 @@ msgid "Snake's Tail"
 msgstr "Schlangenschwanz"
 
 #: skycultures/chinese/constellation_names.eng.fab:210
+#: skycultures/chinese_medieval/constellation_names.eng.fab:133
 msgid "Changing Room (Vassal of Tail)"
 msgstr "Umkleideraum (Vasall des Schwanzes)"
 
@@ -9160,19 +9334,23 @@ msgstr "Kreuz"
 #: skycultures/chinese/constellation_names.eng.fab:214
 #: skycultures/chinese/star_names.fab:3125
 #: skycultures/chinese_contemporary/star_names.fab:3146
+#: skycultures/chinese_medieval/constellation_names.eng.fab:292
 msgid "Excrement"
 msgstr "Exkrement"
 
 #: skycultures/chinese/constellation_names.eng.fab:215
+#: skycultures/chinese_medieval/constellation_names.eng.fab:64
 msgid "Municipal Office"
 msgstr "Gemeindeamt"
 
 #: skycultures/chinese/constellation_names.eng.fab:216
+#: skycultures/chinese_medieval/constellation_names.eng.fab:32
 #: skycultures/korean/constellation_names.eng.fab:262
 msgid "Eunuch"
 msgstr "Eunuch"
 
 #: skycultures/chinese/constellation_names.eng.fab:217
+#: skycultures/chinese_medieval/constellation_names.eng.fab:301
 msgid "Official for Irrigation"
 msgstr "Beauftragter für die Bewässerung"
 
@@ -9181,50 +9359,61 @@ msgid "Crooked Running Water"
 msgstr "Gekrümmter Wasserlauf"
 
 #: skycultures/chinese/constellation_names.eng.fab:220
+#: skycultures/chinese_medieval/constellation_names.eng.fab:302
 msgid "Water Level"
 msgstr "Wasserspiegel"
 
 #: skycultures/chinese/constellation_names.eng.fab:221
+#: skycultures/chinese_medieval/constellation_names.eng.fab:185
 msgid "Deified Judge of Right and Wrong"
 msgstr "Vergöttlichter Richter über Wahr und Falsch"
 
 #: skycultures/chinese/constellation_names.eng.fab:222
+#: skycultures/chinese_medieval/constellation_names.eng.fab:284
 msgid "Deity in Charge of Monsters"
 msgstr "Für Monster verantwortliche Gottheit"
 
 #: skycultures/chinese/constellation_names.eng.fab:223
+#: skycultures/chinese_medieval/constellation_names.eng.fab:183
 msgid "Deified Judge of Rank"
 msgstr "Vergöttlichter Richter des Ranges"
 
 #: skycultures/chinese/constellation_names.eng.fab:224
+#: skycultures/chinese_medieval/constellation_names.eng.fab:182
 msgid "Deified Judge of Life"
 msgstr "Vergöttlichter Richter des Lebens"
 
 #: skycultures/chinese/constellation_names.eng.fab:225
+#: skycultures/chinese_medieval/constellation_names.eng.fab:184
 msgid "Deified Judge of Disaster and Good Fortune"
 msgstr "Vergöttlichter Richter über Unheil und Glück"
 
 #: skycultures/chinese/constellation_names.eng.fab:226
+#: skycultures/chinese_medieval/constellation_names.eng.fab:303
 msgid "Four Channels"
 msgstr "Vier Kanäle"
 
 #: skycultures/chinese/constellation_names.eng.fab:227
+#: skycultures/chinese_medieval/constellation_names.eng.fab:2
 msgid "Four Advisors"
 msgstr "Vier Berater"
 
 #: skycultures/chinese/constellation_names.eng.fab:228
+#: skycultures/chinese_medieval/constellation_names.eng.fab:306
 msgid "Grandson"
 msgstr "Enkel"
 
 #: skycultures/chinese/constellation_names.eng.fab:229
 #: skycultures/chinese/star_names.fab:280
 #: skycultures/chinese_contemporary/star_names.fab:301
+#: skycultures/chinese_medieval/constellation_names.eng.fab:31
 msgid "Guard of the Sun"
 msgstr "Wächter der Sonne"
 
 #: skycultures/chinese/constellation_names.eng.fab:230
 #: skycultures/chinese/star_names.fab:202
 #: skycultures/chinese_contemporary/star_names.fab:223
+#: skycultures/chinese_medieval/constellation_names.eng.fab:4
 msgid "First Great One"
 msgstr "Der Erste Große"
 
@@ -9232,6 +9421,7 @@ msgstr "Der Erste Große"
 #: skycultures/chinese/star_names.fab:6 skycultures/chinese/star_names.fab:455
 #: skycultures/chinese_contemporary/star_names.fab:27
 #: skycultures/chinese_contemporary/star_names.fab:476
+#: skycultures/chinese_medieval/constellation_names.eng.fab:49
 #: skycultures/korean/constellation_names.eng.fab:205
 msgid "Crown Prince"
 msgstr "Kronprinz"
@@ -9239,130 +9429,159 @@ msgstr "Kronprinz"
 #: skycultures/chinese/constellation_names.eng.fab:232
 #: skycultures/chinese/star_names.fab:284
 #: skycultures/chinese_contemporary/star_names.fab:305
+#: skycultures/chinese_medieval/constellation_names.eng.fab:29
 msgid "Royals"
 msgstr "Königliche"
 
 #: skycultures/chinese/constellation_names.eng.fab:233
+#: skycultures/chinese_medieval/constellation_names.eng.fab:212
 msgid "Flying Serpent"
 msgstr "Fliegende Schlange"
 
 #: skycultures/chinese/constellation_names.eng.fab:234
 #: skycultures/chinese/star_names.fab:2686
 #: skycultures/chinese_contemporary/star_names.fab:2707
+#: skycultures/chinese_medieval/constellation_names.eng.fab:258
 msgid "Celestial Concave"
 msgstr "Himmelshöhlung"
 
 #: skycultures/chinese/constellation_names.eng.fab:235
+#: skycultures/chinese_medieval/constellation_names.eng.fab:24
 msgid "Celestial Flail"
 msgstr "Himmlischer Dreschflegel"
 
 #: skycultures/chinese/constellation_names.eng.fab:236
+#: skycultures/chinese_medieval/constellation_names.eng.fab:143
 msgid "Market Officer"
 msgstr "Wirtschaftsoffizier"
 
 #: skycultures/chinese/constellation_names.eng.fab:237
+#: skycultures/chinese_medieval/constellation_names.eng.fab:247
 msgid "Square Celestial Granary"
 msgstr "Quadratischer himmlischer Getreidespeicher"
 
 #: skycultures/chinese/constellation_names.eng.fab:238
 #: skycultures/chinese/star_names.fab:2708
 #: skycultures/chinese_contemporary/star_names.fab:2729
+#: skycultures/chinese_medieval/constellation_names.eng.fab:262
 msgid "Celestial Slander"
 msgstr "Himmlische Verleumdung"
 
 #: skycultures/chinese/constellation_names.eng.fab:239
+#: skycultures/chinese_medieval/constellation_names.eng.fab:22
 msgid "Celestial Kitchen"
 msgstr "Himmelsküche"
 
 #: skycultures/chinese/constellation_names.eng.fab:240
+#: skycultures/chinese_medieval/constellation_names.eng.fab:254
 msgid "Celestial Boat"
 msgstr "Himmelsboot"
 
 #: skycultures/chinese/constellation_names.eng.fab:241
+#: skycultures/chinese_medieval/constellation_names.eng.fab:25
 msgid "Celestial Bed"
 msgstr "Himmelsbett"
 
 #: skycultures/chinese/constellation_names.eng.fab:242
+#: skycultures/chinese_medieval/constellation_names.eng.fab:249
 msgid "Great General of Heaven"
 msgstr "Großer General des Himmels"
 
 #: skycultures/chinese/constellation_names.eng.fab:243
+#: skycultures/chinese_medieval/constellation_names.eng.fab:158
 msgid "Celestial Drumstick"
 msgstr "Himmlischer Trommelschläger"
 
 #: skycultures/chinese/constellation_names.eng.fab:244
+#: skycultures/chinese_medieval/constellation_names.eng.fab:111
 msgid "Celestial Spokes"
 msgstr "Himmelsspeichen"
 
 #: skycultures/chinese/constellation_names.eng.fab:245
 #: skycultures/chinese/star_names.fab:2209
 #: skycultures/chinese_contemporary/star_names.fab:2230
+#: skycultures/chinese_medieval/constellation_names.eng.fab:211
 msgid "Materials for Making Tents"
 msgstr "Zeltbaumaterial"
 
 #: skycultures/chinese/constellation_names.eng.fab:246
+#: skycultures/chinese_medieval/constellation_names.eng.fab:271
 msgid "Celestial High Terrace"
 msgstr "Himmlische Hohe Terrasse"
 
 #: skycultures/chinese/constellation_names.eng.fab:247
+#: skycultures/chinese_medieval/constellation_names.eng.fab:197
 msgid "Celestial Hook"
 msgstr "Himmelshaken"
 
 #: skycultures/chinese/constellation_names.eng.fab:248
+#: skycultures/chinese_medieval/constellation_names.eng.fab:316
 msgid "Celestial Dog"
 msgstr "Himmelshund"
 
 #: skycultures/chinese/constellation_names.eng.fab:249
 #: skycultures/chinese/star_names.fab:2894
 #: skycultures/chinese_contemporary/star_names.fab:2915
+#: skycultures/chinese_medieval/constellation_names.eng.fab:279
 msgid "Celestial Pass"
 msgstr "Himmelspass"
 
 #: skycultures/chinese/constellation_names.eng.fab:250
 #: skycultures/chinese/star_names.fab:43
 #: skycultures/chinese_contemporary/star_names.fab:64
+#: skycultures/chinese_medieval/constellation_names.eng.fab:16
 msgid "Great Emperor of Heaven"
 msgstr "Großer Kaiser des Himmels"
 
 #: skycultures/chinese/constellation_names.eng.fab:251
+#: skycultures/chinese_medieval/constellation_names.eng.fab:277
 msgid "Celestial Pier"
 msgstr "Himmelsmole"
 
 #: skycultures/chinese/constellation_names.eng.fab:252
+#: skycultures/chinese_medieval/constellation_names.eng.fab:237
 msgid "Celestial Pigsty"
 msgstr "Himmlischer Schweinestall"
 
 #: skycultures/chinese/constellation_names.eng.fab:253
+#: skycultures/chinese_medieval/constellation_names.eng.fab:145
 msgid "Celestial Cock"
 msgstr "Himmelshahn"
 
 #: skycultures/chinese/constellation_names.eng.fab:254
 #: skycultures/chinese/star_names.fab:3440
 #: skycultures/chinese_contemporary/star_names.fab:3461
+#: skycultures/chinese_medieval/constellation_names.eng.fab:318
 msgid "Judge for Estimating the Age of Animals"
 msgstr "Richter zum Schätzen des Alters von Tieren"
 
 #: skycultures/chinese/constellation_names.eng.fab:255
+#: skycultures/chinese_medieval/constellation_names.eng.fab:79
 msgid "Celestial Discipline"
 msgstr "Himmlische Disziplin"
 
 #: skycultures/chinese/constellation_names.eng.fab:256
+#: skycultures/chinese_medieval/constellation_names.eng.fab:135
 msgid "Celestial River"
 msgstr "Himmelsfluß"
 
 #: skycultures/chinese/constellation_names.eng.fab:257
+#: skycultures/chinese_medieval/constellation_names.eng.fab:268
 msgid "Celestial Street"
 msgstr "Himmelsstraße"
 
 #: skycultures/chinese/constellation_names.eng.fab:258
+#: skycultures/chinese_medieval/constellation_names.eng.fab:269
 msgid "Celestial Tally"
 msgstr "Himmlisches Kerbholz"
 
 #: skycultures/chinese/constellation_names.eng.fab:259
+#: skycultures/chinese_medieval/constellation_names.eng.fab:166
 msgid "Celestial Ford"
 msgstr "Himmelsfurt"
 
 #: skycultures/chinese/constellation_names.eng.fab:260
+#: skycultures/chinese_medieval/constellation_names.eng.fab:232
 msgid "Celestial Stable"
 msgstr "Himmlischer Stall"
 
@@ -9373,106 +9592,131 @@ msgid "Celestial Wolf"
 msgstr "Himmelswolf"
 
 #: skycultures/chinese/constellation_names.eng.fab:262
+#: skycultures/chinese_medieval/constellation_names.eng.fab:30
 msgid "Celestial Prison"
 msgstr "Himmlisches Gefängnis"
 
 #: skycultures/chinese/constellation_names.eng.fab:263
+#: skycultures/chinese_medieval/constellation_names.eng.fab:188
 msgid "Celestial Ramparts"
 msgstr "Himmlische Bollwerke"
 
 #: skycultures/chinese/constellation_names.eng.fab:264
+#: skycultures/chinese_medieval/constellation_names.eng.fab:36
 msgid "Judge for Nobility"
 msgstr "Richter für den Adelsstand"
 
 #: skycultures/chinese/constellation_names.eng.fab:265
+#: skycultures/chinese_medieval/constellation_names.eng.fab:252
 msgid "Celestial Foodstuff"
 msgstr "Himmlische Lebensmittel"
 
 #: skycultures/chinese/constellation_names.eng.fab:266
+#: skycultures/chinese_medieval/constellation_names.eng.fab:86
 msgid "Celestial Gate"
 msgstr "Himmelstor"
 
 #: skycultures/chinese/constellation_names.eng.fab:267
+#: skycultures/chinese_medieval/constellation_names.eng.fab:200
 msgid "Celestial Money"
 msgstr "Himmelsgeld"
 
 #: skycultures/chinese/constellation_names.eng.fab:268
+#: skycultures/chinese_medieval/constellation_names.eng.fab:39
 msgid "Celestial Spear"
 msgstr "Himmelsspeer"
 
 #: skycultures/chinese/constellation_names.eng.fab:269
+#: skycultures/chinese_medieval/constellation_names.eng.fab:251
 msgid "Circular Celestial Granary"
 msgstr "Runder himmlischer Getreidespeicher"
 
 #: skycultures/chinese/constellation_names.eng.fab:270
 #: skycultures/chinese/star_names.fab:1228
 #: skycultures/chinese_contemporary/star_names.fab:1249
+#: skycultures/chinese_medieval/constellation_names.eng.fab:104
 msgid "Celestial Milk"
 msgstr "Himmelsmilch"
 
 #: skycultures/chinese/constellation_names.eng.fab:271
+#: skycultures/chinese_medieval/constellation_names.eng.fab:319
 msgid "Celestial Earth God's Temple"
 msgstr "Tempel des Himmlischen Erdgottes"
 
 #: skycultures/chinese/constellation_names.eng.fab:272
+#: skycultures/chinese_medieval/constellation_names.eng.fab:83
 msgid "Celestial Farmland (In Horn Mansion)"
 msgstr "Himmelsflur (in Mondstation Horn)"
 
 #: skycultures/chinese/constellation_names.eng.fab:273
+#: skycultures/chinese_medieval/constellation_names.eng.fab:152
 msgid "Celestial Farmland (In Ox Mansion)"
 msgstr "Himmelsflur (in Mondstation Ochse)"
 
 #: skycultures/chinese/constellation_names.eng.fab:274
+#: skycultures/chinese_medieval/constellation_names.eng.fab:325
 msgid "Celestial Premier"
 msgstr "Himmlischer Premier"
 
 #: skycultures/chinese/constellation_names.eng.fab:275
 #: skycultures/chinese/star_names.fab:199
 #: skycultures/chinese_contemporary/star_names.fab:220
+#: skycultures/chinese_medieval/constellation_names.eng.fab:3
 msgid "Celestial Great One"
 msgstr "Himmlischer Großer"
 
 #: skycultures/chinese/constellation_names.eng.fab:276
+#: skycultures/chinese_medieval/constellation_names.eng.fab:260
 msgid "Celestial Yin Force"
 msgstr "Himmlische Yin-Kraft"
 
 #: skycultures/chinese/constellation_names.eng.fab:277
+#: skycultures/chinese_medieval/constellation_names.eng.fab:248
 msgid "Ricks of Grain"
 msgstr "Getreideschober"
 
 #: skycultures/chinese/constellation_names.eng.fab:279
+#: skycultures/chinese_medieval/constellation_names.eng.fab:149
 msgid "Celestial Spring"
 msgstr "Himmlischer Frühling"
 
 #: skycultures/chinese/constellation_names.eng.fab:280
+#: skycultures/chinese_medieval/constellation_names.eng.fab:282
 msgid "Celestial Orchard"
 msgstr "Himmlischer Obstgarten"
 
 #: skycultures/chinese/constellation_names.eng.fab:281
+#: skycultures/chinese_medieval/constellation_names.eng.fab:265
 msgid "Celestial Meadows"
 msgstr "Himmelsweiden"
 
 #: skycultures/chinese/constellation_names.eng.fab:282
+#: skycultures/chinese_medieval/constellation_names.eng.fab:146
 msgid "Celestial Keyhole"
 msgstr "Himmlisches Schlüsselloch"
 
 #: skycultures/chinese/constellation_names.eng.fab:283
+#: skycultures/chinese_medieval/constellation_names.eng.fab:12
 msgid "Celestial Pillar"
 msgstr "Himmlische Säule"
 
 #: skycultures/chinese/constellation_names.eng.fab:284
+#: skycultures/chinese_medieval/constellation_names.eng.fab:297
 msgid "Celestial Wine Cup"
 msgstr "Himmlischer Weinbecher"
 
 #: skycultures/chinese/constellation_names.eng.fab:285
+#: skycultures/chinese_medieval/constellation_names.eng.fab:70
 msgid "Butcher's Shops"
 msgstr "Fleischhauergeschäfte"
 
 #: skycultures/chinese/constellation_names.eng.fab:286
+#: skycultures/chinese_medieval/constellation_names.eng.fab:234
 msgid "Official for Earthworks and Buildings"
 msgstr "Beauftragter für Erdarbeiten und Bauten"
 
 #: skycultures/chinese/constellation_names.eng.fab:287
+#: skycultures/chinese_medieval/constellation_names.eng.fab:207
 #: skycultures/korean/constellation_names.eng.fab:88
 msgid "Official for Materials Supply"
 msgstr "Nachschubbeauftragter"
@@ -9484,62 +9728,76 @@ msgid "Master of Constructions"
 msgstr "Meister der Konstruktionen"
 
 #: skycultures/chinese/constellation_names.eng.fab:289
+#: skycultures/chinese_medieval/constellation_names.eng.fab:317
 #: skycultures/korean/constellation_names.eng.fab:179
 msgid "Outer Kitchen"
 msgstr "Äußere Küche"
 
 #: skycultures/chinese/constellation_names.eng.fab:290
+#: skycultures/chinese_medieval/constellation_names.eng.fab:236
 msgid "Outer Fence"
 msgstr "Äußerer Zaun"
 
 #: skycultures/chinese/constellation_names.eng.fab:291
+#: skycultures/chinese_medieval/constellation_names.eng.fab:242
 msgid "Wang Liang"
 msgstr "Wang Liang"
 
 #: skycultures/chinese/constellation_names.eng.fab:292
+#: skycultures/chinese_medieval/constellation_names.eng.fab:238
 msgid "Master of Constructions (In Legs Mansion)"
 msgstr "Meister der Konstruktionen (in Mondstation Beine)"
 
 #: skycultures/chinese/constellation_names.eng.fab:294
+#: skycultures/chinese_medieval/constellation_names.eng.fab:27
 msgid "Administrative Center"
 msgstr "Verwaltungszentrum"
 
 #: skycultures/chinese/constellation_names.eng.fab:295
+#: skycultures/chinese_medieval/constellation_names.eng.fab:273
 msgid "Five Chariots"
 msgstr "Fünf Wagen"
 
 #: skycultures/chinese/constellation_names.eng.fab:296
+#: skycultures/chinese_medieval/constellation_names.eng.fab:17
 msgid "Interior Seats of the Five Emperors"
 msgstr "Innere Throne der Fünf Kaiser"
 
 #: skycultures/chinese/constellation_names.eng.fab:297
+#: skycultures/chinese_medieval/constellation_names.eng.fab:47
 msgid "Seats of the Five Emperors"
 msgstr "Throne der Fünf Kaiser"
 
 #: skycultures/chinese/constellation_names.eng.fab:298
+#: skycultures/chinese_medieval/constellation_names.eng.fab:298
 msgid "Five Feudal Kings"
 msgstr "Fünf feudale Könige "
 
 #: skycultures/chinese/constellation_names.eng.fab:299
+#: skycultures/chinese_medieval/constellation_names.eng.fab:45
 #: skycultures/korean/constellation_names.eng.fab:159
 msgid "Five Lords"
 msgstr "Fünf Herren"
 
 #: skycultures/chinese/constellation_names.eng.fab:300
+#: skycultures/chinese_medieval/constellation_names.eng.fab:127
 msgid "Western Door"
 msgstr "Westliche Tür"
 
 #: skycultures/chinese/constellation_names.eng.fab:301
+#: skycultures/chinese_medieval/constellation_names.eng.fab:167
 msgid "Xi Zhong"
 msgstr "Xi Zhong"
 
 #: skycultures/chinese/constellation_names.eng.fab:302
+#: skycultures/chinese_medieval/constellation_names.eng.fab:278
 msgid "Pool of Harmony"
 msgstr "Becken der Harmonie"
 
 #: skycultures/chinese/constellation_names.eng.fab:303
 #: skycultures/chinese/star_names.fab:267
 #: skycultures/chinese_contemporary/star_names.fab:288
+#: skycultures/chinese_medieval/constellation_names.eng.fab:33
 msgid "Prime Minister"
 msgstr "Premierminister"
 
@@ -9551,40 +9809,48 @@ msgstr "Kleiner Schöpfer"
 #: skycultures/chinese/constellation_names.eng.fab:306
 #: skycultures/chinese/star_names.fab:461
 #: skycultures/chinese_contemporary/star_names.fab:482
+#: skycultures/chinese_medieval/constellation_names.eng.fab:48
 msgid "Officer of Honour"
 msgstr "Ehrenoffizier"
 
 #: skycultures/chinese/constellation_names.eng.fab:307
+#: skycultures/chinese_medieval/constellation_names.eng.fab:199
 msgid "Temple"
 msgstr "Tempel"
 
 #: skycultures/chinese/constellation_names.eng.fab:308
+#: skycultures/chinese_medieval/constellation_names.eng.fab:323
 msgid "Xuanyuan"
 msgstr "Xuanyuan"
 
 #: skycultures/chinese/constellation_names.eng.fab:309
 #: skycultures/chinese/star_names.fab:258
 #: skycultures/chinese_contemporary/star_names.fab:279
+#: skycultures/chinese_medieval/constellation_names.eng.fab:35
 msgid "Sombre Lance"
 msgstr "Düstere Lanze"
 
 #: skycultures/chinese/constellation_names.eng.fab:310
+#: skycultures/chinese_medieval/constellation_names.eng.fab:294
 msgid "Battle Axe (Vassal of Well)"
 msgstr "Streitaxt (Vasall des Brunnens)"
 
 #: skycultures/chinese/constellation_names.eng.fab:311
+#: skycultures/chinese_medieval/constellation_names.eng.fab:102
 msgid "Gate of Yang"
 msgstr "Yang-Tor"
 
 #: skycultures/chinese/constellation_names.eng.fab:312
 #: skycultures/chinese/star_names.fab:3294
 #: skycultures/chinese_contemporary/star_names.fab:3315
+#: skycultures/chinese_medieval/constellation_names.eng.fab:305
 msgid "Wild Cockerel"
 msgstr "Wildhähnchen"
 
 #: skycultures/chinese/constellation_names.eng.fab:313
 #: skycultures/chinese/star_names.fab:667
 #: skycultures/chinese_contemporary/star_names.fab:688
+#: skycultures/chinese_medieval/constellation_names.eng.fab:42
 msgid "Usher to the Court"
 msgstr "Gerichtsdiener"
 
@@ -9593,153 +9859,207 @@ msgid "Exotic Bird"
 msgstr "Exotischer Vogel"
 
 #: skycultures/chinese/constellation_names.eng.fab:316
+#: skycultures/chinese_medieval/constellation_names.eng.fab:7
 msgid "Hidden Virtue"
 msgstr "Verborgene Tugend"
 
 #: skycultures/chinese/constellation_names.eng.fab:317
+#: skycultures/chinese_medieval/constellation_names.eng.fab:246
 msgid "Official in Charge of Pasturing"
 msgstr "Beamter für die Beweidung"
 
 #: skycultures/chinese/constellation_names.eng.fab:318
+#: skycultures/chinese_medieval/constellation_names.eng.fab:157
 #: skycultures/korean/constellation_names.eng.fab:57
 msgid "Right Flag"
 msgstr "Rechte Flagge"
 
 #: skycultures/chinese/constellation_names.eng.fab:319
+#: skycultures/chinese_medieval/constellation_names.eng.fab:100
 msgid "Right Conductor"
 msgstr "Rechter Führer"
 
 #: skycultures/chinese/constellation_names.eng.fab:320
 #: skycultures/chinese/dso_names.fab:6
+#: skycultures/chinese_medieval/constellation_names.eng.fab:137
 #: skycultures/korean/constellation_names.eng.fab:36
 msgid "Fish"
 msgstr "Fisch"
 
 #: skycultures/chinese/constellation_names.eng.fab:321
+#: skycultures/chinese_medieval/constellation_names.eng.fab:214
+#: skycultures/chinese_medieval/constellation_names.eng.fab:215
+#: skycultures/chinese_medieval/constellation_names.eng.fab:216
+#: skycultures/chinese_medieval/constellation_names.eng.fab:217
+#: skycultures/chinese_medieval/constellation_names.eng.fab:218
+#: skycultures/chinese_medieval/constellation_names.eng.fab:219
+#: skycultures/chinese_medieval/constellation_names.eng.fab:220
+#: skycultures/chinese_medieval/constellation_names.eng.fab:221
+#: skycultures/chinese_medieval/constellation_names.eng.fab:222
+#: skycultures/chinese_medieval/constellation_names.eng.fab:223
+#: skycultures/chinese_medieval/constellation_names.eng.fab:224
+#: skycultures/chinese_medieval/constellation_names.eng.fab:225
+#: skycultures/chinese_medieval/constellation_names.eng.fab:226
+#: skycultures/chinese_medieval/constellation_names.eng.fab:227
+#: skycultures/chinese_medieval/constellation_names.eng.fab:228
 msgid "Palace Guard"
 msgstr "Palastwache"
 
 #: skycultures/chinese/constellation_names.eng.fab:322
+#: skycultures/chinese_medieval/constellation_names.eng.fab:288
 msgid "Jade Well"
 msgstr "Jadebrunnen"
 
 #: skycultures/chinese/constellation_names.eng.fab:323
 #: skycultures/chinese/star_names.fab:3556
 #: skycultures/chinese_contemporary/star_names.fab:3577
+#: skycultures/chinese_medieval/constellation_names.eng.fab:11
 msgid "Maids-in-waiting"
 msgstr "Dienstmädchen"
 
 #: skycultures/chinese/constellation_names.eng.fab:324
 #: skycultures/chinese/star_names.fab:2689
 #: skycultures/chinese_contemporary/star_names.fab:2710
+#: skycultures/chinese_medieval/constellation_names.eng.fab:259
 msgid "Lunar Star"
 msgstr "Mondstern"
 
 #: skycultures/chinese/constellation_names.eng.fab:325
+#: skycultures/chinese_medieval/constellation_names.eng.fab:267
 msgid "Whisper (Vassal of Net)"
 msgstr "Flüstern (Vasall des Netzes)"
 
 #: skycultures/chinese/constellation_names.eng.fab:326
+#: skycultures/chinese_medieval/constellation_names.eng.fab:231
 msgid "Cloud and Rain"
 msgstr "Wolke und Regen"
 
 #: skycultures/chinese/constellation_names.eng.fab:327
+#: skycultures/chinese_medieval/constellation_names.eng.fab:198
 msgid "Zaofu"
 msgstr "Zaofu"
 
 #: skycultures/chinese/constellation_names.eng.fab:328
+#: skycultures/chinese_medieval/constellation_names.eng.fab:58
 msgid "Long Wall"
 msgstr "Lange Mauer"
 
 #: skycultures/chinese/constellation_names.eng.fab:329
+#: skycultures/chinese_medieval/constellation_names.eng.fab:308
 msgid "Grandfather"
 msgstr "Großvater"
 
 #: skycultures/chinese/constellation_names.eng.fab:330
 #: skycultures/chinese/star_names.fab:1225
 #: skycultures/chinese_contemporary/star_names.fab:1246
+#: skycultures/chinese_medieval/constellation_names.eng.fab:105
 msgid "Twinkling Indicator"
 msgstr "Blinkanzeiger"
 
 #: skycultures/chinese/constellation_names.eng.fab:331
+#: skycultures/chinese_medieval/constellation_names.eng.fab:38
 msgid "Assistant (Vassal of Northern Dipper)"
 msgstr "Gehilfe (Vasall des Nördlichen Schöpfers)"
 
 #: skycultures/chinese/constellation_names.eng.fab:332
+#: skycultures/chinese_medieval/constellation_names.eng.fab:98
 msgid "Executions"
 msgstr "Hinrichtungen"
 
 #: skycultures/chinese/constellation_names.eng.fab:333
+#: skycultures/chinese_medieval/constellation_names.eng.fab:109
 msgid "Battle Chariots"
 msgstr "Streitwagen"
 
 #: skycultures/chinese/constellation_names.eng.fab:334
+#: skycultures/chinese_medieval/constellation_names.eng.fab:334
 msgid "Right linchpin (Vassal of Chariot)"
 msgstr "Rechter Achsnagel (Vasall des Wagens)"
 
 #: skycultures/chinese/constellation_names.eng.fab:335
 #: skycultures/chinese/star_names.fab:1631
 #: skycultures/chinese_contemporary/star_names.fab:1652
+#: skycultures/chinese_medieval/constellation_names.eng.fab:155
 msgid "Weaving Girl"
 msgstr "Webendes Mädchen"
 
 #: skycultures/chinese/constellation_names.eng.fab:336
+#: skycultures/chinese_medieval/constellation_names.eng.fab:333
 msgid "Left linchpin (Vassal of Chariot)"
 msgstr "Linker Achsnagel (Vasall des Wagens)"
 
 #: skycultures/chinese/constellation_names.eng.fab:337
+#: skycultures/chinese_medieval/constellation_names.eng.fab:85
 msgid "Tripod of the Zhou"
 msgstr "Dreibein des Zhou"
 
 #: skycultures/chinese/constellation_names.eng.fab:338
+#: skycultures/chinese_medieval/constellation_names.eng.fab:270
 msgid "Feudal Kings"
 msgstr "Feudale Könige"
 
 #: skycultures/chinese/constellation_names.eng.fab:339
+#: skycultures/chinese_medieval/constellation_names.eng.fab:274
+#: skycultures/chinese_medieval/constellation_names.eng.fab:275
+#: skycultures/chinese_medieval/constellation_names.eng.fab:276
 msgid "Pillars (In Net Mansion)"
 msgstr "Säulen (in Mondstation Netz)"
 
 #: skycultures/chinese/constellation_names.eng.fab:340
+#: skycultures/chinese_medieval/constellation_names.eng.fab:91
+#: skycultures/chinese_medieval/constellation_names.eng.fab:92
+#: skycultures/chinese_medieval/constellation_names.eng.fab:93
+#: skycultures/chinese_medieval/constellation_names.eng.fab:94
+#: skycultures/chinese_medieval/constellation_names.eng.fab:95
 msgid "Pillars (In Horn Mansion)"
 msgstr "Säulen (in Mondstation Horn)"
 
 #: skycultures/chinese/constellation_names.eng.fab:341
 #: skycultures/chinese/star_names.fab:69
 #: skycultures/chinese_contemporary/star_names.fab:90
+#: skycultures/chinese_medieval/constellation_names.eng.fab:10
 msgid "Official of Royal Archives"
 msgstr "Beamter der Königlichen Archive"
 
 #: skycultures/chinese/constellation_names.eng.fab:342
+#: skycultures/chinese_medieval/constellation_names.eng.fab:307
 #: skycultures/korean/constellation_names.eng.fab:172
 msgid "Son"
 msgstr "Sohn"
 
 #: skycultures/chinese/constellation_names.eng.fab:343
+#: skycultures/chinese_medieval/constellation_names.eng.fab:68
 msgid "Patriarchal Clan"
 msgstr "Patriarchaler Clan"
 
 #: skycultures/chinese/constellation_names.eng.fab:344
+#: skycultures/chinese_medieval/constellation_names.eng.fab:67
 msgid "Official of Religious Ceremonies"
 msgstr "Beamter für religiöse Zeremonien"
 
 #: skycultures/chinese/constellation_names.eng.fab:345
+#: skycultures/chinese_medieval/constellation_names.eng.fab:66
 msgid "Official for the Royal Clan"
 msgstr "Beamter für den Königlichen Clan"
 
 #: skycultures/chinese/constellation_names.eng.fab:346
+#: skycultures/chinese_medieval/constellation_names.eng.fab:245
 msgid "Official in Charge of the Forest"
 msgstr "Beamter für den Wald"
 
 #: skycultures/chinese/constellation_names.eng.fab:347
+#: skycultures/chinese_medieval/constellation_names.eng.fab:156
 #: skycultures/korean/constellation_names.eng.fab:54
 msgid "Left Flag"
 msgstr "Linke Flagge"
 
 #: skycultures/chinese/constellation_names.eng.fab:348
+#: skycultures/chinese_medieval/constellation_names.eng.fab:99
 msgid "Left Conductor"
 msgstr "Linker Führer"
 
 #: skycultures/chinese/constellation_names.eng.fab:349
+#: skycultures/chinese_medieval/constellation_names.eng.fab:285
 msgid "Seat Flags"
 msgstr "Sitzflaggen"
 
@@ -12779,6 +13099,7 @@ msgstr "Himmlischer Markt, Rechte Mauer I"
 
 #: skycultures/chinese/star_names.fab:782
 #: skycultures/chinese_contemporary/star_names.fab:803
+#: skycultures/chinese_medieval/star_names.fab:156
 msgid "Hezhong"
 msgstr "Hezhong"
 
@@ -12789,6 +13110,7 @@ msgstr "Himmlischer Markt, Rechte Mauer II"
 
 #: skycultures/chinese/star_names.fab:784
 #: skycultures/chinese_contemporary/star_names.fab:805
+#: skycultures/chinese_medieval/star_names.fab:157
 msgid "Hejian"
 msgstr "Hejian"
 
@@ -12799,6 +13121,8 @@ msgstr "Himmlischer Markt, Rechte Mauer III"
 
 #: skycultures/chinese/star_names.fab:786
 #: skycultures/chinese_contemporary/star_names.fab:807
+#: skycultures/chinese_medieval/star_names.fab:158
+#: skycultures/chinese_medieval/star_names.fab:296
 msgid "Jin"
 msgstr "Jin"
 
@@ -12809,6 +13133,8 @@ msgstr "Himmlischer Markt, Rechte Mauer IV"
 
 #: skycultures/chinese/star_names.fab:788
 #: skycultures/chinese_contemporary/star_names.fab:809
+#: skycultures/chinese_medieval/star_names.fab:159
+#: skycultures/chinese_medieval/star_names.fab:293
 msgid "Zheng"
 msgstr "Zheng"
 
@@ -12819,6 +13145,7 @@ msgstr "Himmlischer Markt, Rechte Mauer V"
 
 #: skycultures/chinese/star_names.fab:790
 #: skycultures/chinese_contemporary/star_names.fab:811
+#: skycultures/chinese_medieval/star_names.fab:160
 msgid "Zhou"
 msgstr "Zhou"
 
@@ -12829,6 +13156,7 @@ msgstr "Himmlischer Markt, Rechte Mauer VI"
 
 #: skycultures/chinese/star_names.fab:792
 #: skycultures/chinese_contemporary/star_names.fab:813
+#: skycultures/chinese_medieval/star_names.fab:161
 msgid "Qin"
 msgstr "Qin"
 
@@ -12839,6 +13167,7 @@ msgstr "Himmlischer Markt, Rechte Mauer VII"
 
 #: skycultures/chinese/star_names.fab:794
 #: skycultures/chinese_contemporary/star_names.fab:815
+#: skycultures/chinese_medieval/star_names.fab:162
 msgid "Shu"
 msgstr "Shu"
 
@@ -12849,6 +13178,7 @@ msgstr "Himmlischer Markt, Rechte Mauer VIII"
 
 #: skycultures/chinese/star_names.fab:796
 #: skycultures/chinese_contemporary/star_names.fab:817
+#: skycultures/chinese_medieval/star_names.fab:163
 msgid "Ba"
 msgstr "Ba"
 
@@ -12859,6 +13189,7 @@ msgstr "Himmlischer Markt, Rechte Mauer IX"
 
 #: skycultures/chinese/star_names.fab:798
 #: skycultures/chinese_contemporary/star_names.fab:819
+#: skycultures/chinese_medieval/star_names.fab:164
 msgid "Liang"
 msgstr "Liang"
 
@@ -12869,6 +13200,8 @@ msgstr "Himmlischer Markt, Rechte Mauer X"
 
 #: skycultures/chinese/star_names.fab:800
 #: skycultures/chinese_contemporary/star_names.fab:821
+#: skycultures/chinese_medieval/star_names.fab:165
+#: skycultures/chinese_medieval/star_names.fab:292
 msgid "Chu"
 msgstr "Chu"
 
@@ -12879,6 +13212,8 @@ msgstr "Himmlischer Markt, Rechte Mauer XI"
 
 #: skycultures/chinese/star_names.fab:802
 #: skycultures/chinese_contemporary/star_names.fab:823
+#: skycultures/chinese_medieval/star_names.fab:166
+#: skycultures/chinese_medieval/star_names.fab:295
 msgid "Han"
 msgstr "Han"
 
@@ -13039,6 +13374,8 @@ msgstr "Himmlischer Markt, Linke Mauer I"
 
 #: skycultures/chinese/star_names.fab:836
 #: skycultures/chinese_contemporary/star_names.fab:857
+#: skycultures/chinese_medieval/star_names.fab:169
+#: skycultures/chinese_medieval/star_names.fab:294
 msgid "Wei"
 msgstr "Wei"
 
@@ -13049,6 +13386,7 @@ msgstr "Himmlischer Markt, Linke Mauer II"
 
 #: skycultures/chinese/star_names.fab:838
 #: skycultures/chinese_contemporary/star_names.fab:859
+#: skycultures/chinese_medieval/star_names.fab:170
 msgid "Zhao"
 msgstr "Zhao"
 
@@ -13059,6 +13397,7 @@ msgstr "Himmlischer Markt, Linke Mauer III"
 
 #: skycultures/chinese/star_names.fab:840
 #: skycultures/chinese_contemporary/star_names.fab:861
+#: skycultures/chinese_medieval/star_names.fab:171
 msgid "Jiuhe"
 msgstr "Jiuhe"
 
@@ -13069,6 +13408,7 @@ msgstr "Himmlischer Markt, Linke Mauer IV"
 
 #: skycultures/chinese/star_names.fab:842
 #: skycultures/chinese_contemporary/star_names.fab:863
+#: skycultures/chinese_medieval/star_names.fab:172
 msgid "Zhongshan"
 msgstr "Zhongshan"
 
@@ -13079,6 +13419,8 @@ msgstr "Himmlischer Markt, Linke Mauer V"
 
 #: skycultures/chinese/star_names.fab:844
 #: skycultures/chinese_contemporary/star_names.fab:865
+#: skycultures/chinese_medieval/star_names.fab:173
+#: skycultures/chinese_medieval/star_names.fab:291
 msgid "Qi"
 msgstr "Qi"
 
@@ -13089,6 +13431,7 @@ msgstr "Himmlischer Markt, Linke Mauer VI"
 
 #: skycultures/chinese/star_names.fab:846
 #: skycultures/chinese_contemporary/star_names.fab:867
+#: skycultures/chinese_medieval/star_names.fab:174
 msgid "Wuyue"
 msgstr "Wuyue"
 
@@ -13099,6 +13442,7 @@ msgstr "Himmlischer Markt, Linke Mauer VII"
 
 #: skycultures/chinese/star_names.fab:848
 #: skycultures/chinese_contemporary/star_names.fab:869
+#: skycultures/chinese_medieval/star_names.fab:175
 msgid "Xu"
 msgstr "Xu"
 
@@ -13109,6 +13453,7 @@ msgstr "Himmlischer Markt, Linke Mauer VIII"
 
 #: skycultures/chinese/star_names.fab:850
 #: skycultures/chinese_contemporary/star_names.fab:871
+#: skycultures/chinese_medieval/star_names.fab:176
 msgid "Donghai"
 msgstr "Donghai"
 
@@ -13119,6 +13464,8 @@ msgstr "Himmlischer Markt, Linke Mauer IX"
 
 #: skycultures/chinese/star_names.fab:852
 #: skycultures/chinese_contemporary/star_names.fab:873
+#: skycultures/chinese_medieval/star_names.fab:177
+#: skycultures/chinese_medieval/star_names.fab:297
 msgid "Yan"
 msgstr "Yan"
 
@@ -13129,6 +13476,7 @@ msgstr "Himmlischer Markt, Linke Mauer X"
 
 #: skycultures/chinese/star_names.fab:854
 #: skycultures/chinese_contemporary/star_names.fab:875
+#: skycultures/chinese_medieval/star_names.fab:178
 msgid "Nanhai"
 msgstr "Nanhai"
 
@@ -13139,6 +13487,7 @@ msgstr "Himmlischer Markt, Linke Mauer XI"
 
 #: skycultures/chinese/star_names.fab:856
 #: skycultures/chinese_contemporary/star_names.fab:877
+#: skycultures/chinese_medieval/star_names.fab:179
 msgid "Song"
 msgstr "Song"
 
@@ -25498,6 +25847,7 @@ msgid "Southern Star"
 msgstr "Südlicher Stern"
 
 #: skycultures/chinese/planet_names.fab:1
+#: skycultures/chinese_medieval/planet_names.fab:1
 msgid "Taiyang"
 msgstr "Taiyang"
 
@@ -25544,7 +25894,7 @@ msgstr "Umkleideraum"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:1
 msgctxt "asterism"
 msgid "Net"
-msgstr ""
+msgstr "Netz"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:2
 msgctxt "asterism"
@@ -25559,12 +25909,12 @@ msgstr "Drei Sterne"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:4
 msgctxt "asterism"
 msgid "Root"
-msgstr ""
+msgstr "Wurzel"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:5
 msgctxt "asterism"
 msgid "Dipper"
-msgstr ""
+msgstr "Schöpflöffel"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:6
 msgctxt "asterism"
@@ -25579,12 +25929,12 @@ msgstr "Geister"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:8
 msgctxt "asterism"
 msgid "Winnowing Basket"
-msgstr ""
+msgstr "Worfelkorb"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:9
 msgctxt "asterism"
 msgid "Horn"
-msgstr ""
+msgstr "Horn"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:10
 msgctxt "asterism"
@@ -25604,12 +25954,12 @@ msgstr "Beine"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:13
 msgctxt "asterism"
 msgid "Willow"
-msgstr ""
+msgstr "Weide"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:14
 msgctxt "asterism"
 msgid "Bond"
-msgstr ""
+msgstr "Fessel"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:15
 msgctxt "asterism"
@@ -25629,32 +25979,32 @@ msgstr "Mädchen"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:18
 msgctxt "asterism"
 msgid "Encampment"
-msgstr ""
+msgstr "Feldlager"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:19
 msgctxt "asterism"
 msgid "Supreme Palace Right Wall"
-msgstr ""
+msgstr "Herrschaftspalast, Rechte Mauer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:20
 msgctxt "asterism"
 msgid "Supreme Palace Left Wall"
-msgstr ""
+msgstr "Herrschaftspalast, Linke Mauer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:21
 msgctxt "asterism"
 msgid "Heavenly Market Right Wall"
-msgstr ""
+msgstr "Himmlischer Markt, Rechte Mauer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:22
 msgctxt "asterism"
 msgid "Heavenly Market Left Wall"
-msgstr ""
+msgstr "Himmlischer Markt, Linke Mauer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:23
 msgctxt "asterism"
 msgid "Rooftop"
-msgstr ""
+msgstr "Hausdach"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:24
 msgctxt "asterism"
@@ -25699,12 +26049,12 @@ msgstr "Streitwagen"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:32
 msgctxt "asterism"
 msgid "Purple Forbidden Right Wall"
-msgstr ""
+msgstr "Purpurne verbotene Rechte Mauer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:33
 msgctxt "asterism"
 msgid "Purple Forbidden Left Wall"
-msgstr ""
+msgstr "Purpurne verbotene Linke Mauer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:34
 msgctxt "asterism"
@@ -25724,12 +26074,12 @@ msgstr "Vogelfangnetz"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:37
 msgctxt "asterism"
 msgid "Rotten Gourd"
-msgstr ""
+msgstr "Fauliger Kürbis"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:38
 msgctxt "asterism"
 msgid "Decayed Mortar"
-msgstr ""
+msgstr "Verfallener Mörser"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:39
 msgctxt "asterism"
@@ -25759,12 +26109,12 @@ msgstr "Flußschildkröte"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:44
 msgctxt "asterism"
 msgid "Persia"
-msgstr ""
+msgstr "Persien"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:46
 msgctxt "asterism"
 msgid "Textile Ruler"
-msgstr ""
+msgstr "Textilherrscher"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:47
 msgctxt "asterism"
@@ -25794,12 +26144,12 @@ msgstr "Großer Wagenplatz"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:52
 msgctxt "asterism"
 msgid "Chariots and Cavalry"
-msgstr ""
+msgstr "Wagen und Kavallerie"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:53
 msgctxt "asterism"
 msgid "Commodity Market"
-msgstr ""
+msgstr "Verbrauchsgütermarkt"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:54
 msgctxt "asterism"
@@ -25809,17 +26159,17 @@ msgstr "Heu"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:55
 msgctxt "asterism"
 msgid "Pestle (In Winnowing Basket Mansion)"
-msgstr ""
+msgstr "Stößel (in Mondstation Worfelkorb)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:56
 msgctxt "asterism"
 msgid "Pestle (In Rooftop Mansion)"
-msgstr ""
+msgstr "Stößel (in Mondstation Hausdach)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:57
 msgctxt "asterism"
 msgid "Changsha (Vassal of Chariot)"
-msgstr ""
+msgstr "Changsha (Vasall des Wagens)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:58
 msgctxt "asterism"
@@ -25829,17 +26179,17 @@ msgstr "Gästehaus"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:59
 msgctxt "asterism"
 msgid "Retinue (In Room Mansion)"
-msgstr ""
+msgstr "Gefolge (In Mondstation Raum)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:60
 msgctxt "asterism"
 msgid "Retinue (In Supreme Palace Enclosure)"
-msgstr ""
+msgstr "Gefolge (im Höchsten Palast-Bezirk)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:61
 msgctxt "asterism"
 msgid "Great Horn"
-msgstr ""
+msgstr "Großes Horn"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:62
 msgctxt "asterism"
@@ -25854,17 +26204,17 @@ msgstr "Mausoleum"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:64
 msgctxt "asterism"
 msgid "Official of Religious Ceremonies"
-msgstr ""
+msgstr "Beamter für religiöse Zeremonien"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:65
 msgctxt "asterism"
 msgid "Mattress of the Emperor"
-msgstr ""
+msgstr "Matratze des Kaisers"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:66
 msgctxt "asterism"
 msgid "Emperor's Seat"
-msgstr ""
+msgstr "Kaisersitz"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:67
 msgctxt "asterism"
@@ -25874,17 +26224,17 @@ msgstr "Östliche Tür"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:68
 msgctxt "asterism"
 msgid "Dipper for Liquids"
-msgstr ""
+msgstr "Schöpfer für Flüssigkeiten"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:69
 msgctxt "asterism"
 msgid "Trials"
-msgstr ""
+msgstr "Prozesse"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:70
 msgctxt "asterism"
 msgid "Send Armed Forces To Suppress (Vassal of Three Stars)"
-msgstr ""
+msgstr "Sende Truppen zur Unterdrückung (Vasall der Drei Sterne)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:71
 msgctxt "asterism"
@@ -25899,7 +26249,7 @@ msgstr "Fliegender Fisch"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:74
 msgctxt "asterism"
 msgid "Tomb (Vassal of Rooftop)"
-msgstr ""
+msgstr "Grabmal (Vasall des Hausdachs)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:75
 msgctxt "asterism"
@@ -25915,17 +26265,17 @@ msgstr "Sichel"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:77
 msgctxt "asterism"
 msgid "Basket for Mulberry Leaves"
-msgstr ""
+msgstr "Korb für Maulbeerblätter"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:78
 msgctxt "asterism"
 msgid "White Patched Nearby"
-msgstr ""
+msgstr "Weiße Flecken in der Nähe"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:80
 msgctxt "asterism"
 msgid "Auxiliary Road"
-msgstr ""
+msgstr "Behelfsstraße"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:81
 msgctxt "asterism"
@@ -25935,32 +26285,32 @@ msgstr "Fu Yue"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:82
 msgctxt "asterism"
 msgid "Roofing"
-msgstr ""
+msgstr "Dachdeckung"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:83
 msgctxt "asterism"
 msgid "Canopy Support (Vassal of Canopy of the Emperor)"
-msgstr ""
+msgstr "Baldachinstütze (Vasall des Kaiserlichen Baldachins)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:84
 msgctxt "asterism"
 msgid "Flying Corridor"
-msgstr ""
+msgstr "Fliegender Korridor"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:85
 msgctxt "asterism"
 msgid "Celestial Lance"
-msgstr ""
+msgstr "Himmelslanze"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:86
 msgctxt "asterism"
 msgid "Curved Array"
-msgstr ""
+msgstr "Gebogene Reihe"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:87
 msgctxt "asterism"
 msgid "Lock (Vassal of Room)"
-msgstr ""
+msgstr "Schloß (Vasall des Raums)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:88
 msgctxt "asterism"
@@ -25970,27 +26320,27 @@ msgstr "Hund"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:89
 msgctxt "asterism"
 msgid "Territory of Dog"
-msgstr ""
+msgstr "Hunderevier"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:90
 msgctxt "asterism"
 msgid "Coiled Thong"
-msgstr ""
+msgstr "Gedrehte Peitsche"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:91
 msgctxt "asterism"
 msgid "Beacon Fire"
-msgstr ""
+msgstr "Leuchtfeuer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:92
 msgctxt "asterism"
 msgid "Tortoise"
-msgstr ""
+msgstr "Schildkröte"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:93
 msgctxt "asterism"
 msgid "Sea and Mountain"
-msgstr ""
+msgstr "Meer und Berg"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:95
 msgctxt "asterism"
@@ -26000,57 +26350,57 @@ msgstr "Meerfelsen"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:97
 msgctxt "asterism"
 msgid "Official for the Royal Clan"
-msgstr ""
+msgstr "Beamter für den Königlichen Clan"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:98
 msgctxt "asterism"
 msgid "Drum at the River"
-msgstr ""
+msgstr "Trommel am Fluß"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:99
 msgctxt "asterism"
 msgid "Crane"
-msgstr ""
+msgstr "Kranich"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:101
 msgctxt "asterism"
 msgid "Railings"
-msgstr ""
+msgstr "Brüstungen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:102
 msgctxt "asterism"
 msgid "Astrologer"
-msgstr ""
+msgstr "Astrologe"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:103
 msgctxt "asterism"
 msgid "Bow and Arrow"
-msgstr ""
+msgstr "Pfeil und Bogen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:104
 msgctxt "asterism"
 msgid "Dipper for Solids"
-msgstr ""
+msgstr "Schöpfer für Feststoffe"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:105
 msgctxt "asterism"
 msgid "Emperor's Bodyguard"
-msgstr ""
+msgstr "Leibwache des Kaisers"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:106
 msgctxt "asterism"
 msgid "Good Gourd"
-msgstr ""
+msgstr "Reifer Kürbis"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:107
 msgctxt "asterism"
 msgid "Canopy of the Emperor"
-msgstr ""
+msgstr "Baldachin des Kaisers"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:108
 msgctxt "asterism"
 msgid "Eunuch Official"
-msgstr ""
+msgstr "Eunuch-Beauftragter"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:109
 msgctxt "asterism"
@@ -26060,47 +26410,47 @@ msgstr "Feuervogel"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:111
 msgctxt "asterism"
 msgid "Cumulative Corpses"
-msgstr ""
+msgstr "Leichenberg"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:112
 msgctxt "asterism"
 msgid "Heap of Corpses"
-msgstr ""
+msgstr "Leichenberg"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:113
 msgctxt "asterism"
 msgid "Stored water"
-msgstr ""
+msgstr "Wasservorrat"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:114
 msgctxt "asterism"
 msgid "Pile of Firewood"
-msgstr ""
+msgstr "Haufen Brennholz"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:115
 msgctxt "asterism"
 msgid "Group of Soldiers"
-msgstr ""
+msgstr "Gruppe von Soldaten"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:116
 msgctxt "asterism"
 msgid "White Patches Attached"
-msgstr ""
+msgstr "Weiße Flecken anbei"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:118
 msgctxt "asterism"
 msgid "Establishment"
-msgstr ""
+msgstr "Einrichtung"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:119
 msgctxt "asterism"
 msgid "Clepsydra Terrace"
-msgstr ""
+msgstr "Wasseruhr-Terrasse"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:120
 msgctxt "asterism"
 msgid "Door Bolt"
-msgstr ""
+msgstr "Türriegel"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:121
 msgctxt "asterism"
@@ -26110,12 +26460,12 @@ msgstr "Goldfisch"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:123
 msgctxt "asterism"
 msgid "Recommending Virtuous Men"
-msgstr ""
+msgstr "Rechtschaffende Männer empfehlend"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:124
 msgctxt "asterism"
 msgid "Accumulated Water"
-msgstr ""
+msgstr "Gesammeltes Wasser"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:125
 msgctxt "asterism"
@@ -26125,37 +26475,37 @@ msgstr "Neun Wasserbrunnen"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:127
 msgctxt "asterism"
 msgid "Nine Senior Officers"
-msgstr ""
+msgstr "Neun Stabsoffiziere"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:128
 msgctxt "asterism"
 msgid "Imperial Military Flag"
-msgstr "Imperiale Militärische Flagge"
+msgstr "Imperiale Militärflagge"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:129
 msgctxt "asterism"
 msgid "Interpreters of Nine Dialects"
-msgstr ""
+msgstr "Übersetzer der neun Dialekte"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:130
 msgctxt "asterism"
 msgid "Banner of Wine Shop"
-msgstr ""
+msgstr "Banner einer Weinhandlung"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:131
 msgctxt "asterism"
 msgid "Mortar"
-msgstr ""
+msgstr "Mörser"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:132
 msgctxt "asterism"
 msgid "Rolled Tongue"
-msgstr ""
+msgstr "Gerollte Zunge"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:133
 msgctxt "asterism"
 msgid "Military Well"
-msgstr "Militärsicher Brunnen"
+msgstr "Militärbrunnen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:134
 msgctxt "asterism"
@@ -26170,7 +26520,7 @@ msgstr "Markt für Soldaten"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:136
 msgctxt "asterism"
 msgid "Chaff"
-msgstr ""
+msgstr "Spreu"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:137
 msgctxt "asterism"
@@ -26180,27 +26530,27 @@ msgstr "Boote und See"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:138
 msgctxt "asterism"
 msgid "Peafowl"
-msgstr ""
+msgstr "Pfau"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:140
 msgctxt "asterism"
 msgid "Crying"
-msgstr ""
+msgstr "Schreien"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:141
 msgctxt "asterism"
 msgid "Arsenal"
-msgstr ""
+msgstr "Arsenal"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:142
 msgctxt "asterism"
 msgid "Captain of the Bodyguards"
-msgstr ""
+msgstr "Hauptmann der Leibwache"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:143
 msgctxt "asterism"
 msgid "Officers of the Imperial Guard"
-msgstr ""
+msgstr "Offiziere der Kaiserlichen Wache"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:144
 msgctxt "asterism"
@@ -26215,57 +26565,57 @@ msgstr "Donner und Blitz"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:146
 msgctxt "asterism"
 msgid "Line of Ramparts"
-msgstr ""
+msgstr "Bollwerkslinie"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:147
 msgctxt "asterism"
 msgid "Resting Palace (Vassal of Encampment)"
-msgstr ""
+msgstr "Ruhepalast (Vasall des Feldlagers)"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:148
 msgctxt "asterism"
 msgid "Jade Ornament on Ladies' Wear"
-msgstr ""
+msgstr "Jadeschmuck an Frauenkleidern"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:149
 msgctxt "asterism"
 msgid "Pearls on Ladies' Wear"
-msgstr ""
+msgstr "Perlen an Frauenkleidern"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:150
 msgctxt "asterism"
 msgid "Whetstone"
-msgstr ""
+msgstr "Wetzstein"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:151
 msgctxt "asterism"
 msgid "Jewel Market"
-msgstr ""
+msgstr "Juwelenmarkt"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:152
 msgctxt "asterism"
 msgid "Astronomical Observatory"
-msgstr ""
+msgstr "Astronomisches Observatorium"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:153
 msgctxt "asterism"
 msgid "Six Jia"
-msgstr ""
+msgstr "Sechs Jia"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:154
 msgctxt "asterism"
 msgid "Network of Dykes"
-msgstr ""
+msgstr "Netzwerk von Deichen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:155
 msgctxt "asterism"
 msgid "Horse's Abdomen"
-msgstr ""
+msgstr "Pferdebauch"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:157
 msgctxt "asterism"
 msgid "Horse's Tail"
-msgstr ""
+msgstr "Pferdeschwanz"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:159
 msgctxt "asterism"
@@ -26275,7 +26625,7 @@ msgstr "Biene"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:161
 msgctxt "asterism"
 msgid "The Hall of Glory"
-msgstr ""
+msgstr "Ruhmeshalle"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:162
 msgctxt "asterism"
@@ -26290,7 +26640,7 @@ msgstr "Südlicher Fluss"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:165
 msgctxt "asterism"
 msgid "Official in Charge of the Forest"
-msgstr ""
+msgstr "Beamter für den Wald"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:166
 msgctxt "asterism"
@@ -26300,22 +26650,22 @@ msgstr "Südliches Tor"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:167
 msgctxt "asterism"
 msgid "Inner Kitchen"
-msgstr ""
+msgstr "Innere Küche"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:168
 msgctxt "asterism"
 msgid "Inner Steps"
-msgstr ""
+msgstr "Innere Stufen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:169
 msgctxt "asterism"
 msgid "High Judge"
-msgstr ""
+msgstr "Hoher Richter"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:170
 msgctxt "asterism"
 msgid "Inner Screen"
-msgstr ""
+msgstr "Innerer Schirm"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:171
 msgctxt "asterism"
@@ -26375,7 +26725,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:183
 msgctxt "asterism"
 msgid "Imperial Guards"
-msgstr ""
+msgstr "Kaiserwachen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:184
 msgctxt "asterism"
@@ -26395,7 +26745,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:187
 msgctxt "asterism"
 msgid "Green Hill"
-msgstr ""
+msgstr "Grüner Hügel"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:188
 msgctxt "asterism"
@@ -26475,7 +26825,7 @@ msgstr "Zwölf Staaten"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:207
 msgctxt "asterism"
 msgid "Cross"
-msgstr ""
+msgstr "Kreuz"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:209
 msgctxt "asterism"
@@ -26490,7 +26840,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:211
 msgctxt "asterism"
 msgid "Eunuch"
-msgstr ""
+msgstr "Eunuch"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:212
 msgctxt "asterism"
@@ -26505,7 +26855,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:215
 msgctxt "asterism"
 msgid "Water Level"
-msgstr "Wasserstand"
+msgstr "Wasserspiegel"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:216
 msgctxt "asterism"
@@ -26640,7 +26990,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:242
 msgctxt "asterism"
 msgid "Celestial Hook"
-msgstr ""
+msgstr "Himmelshaken"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:243
 msgctxt "asterism"
@@ -26690,7 +27040,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:252
 msgctxt "asterism"
 msgid "Celestial Street"
-msgstr ""
+msgstr "Himmelsstraße"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:253
 msgctxt "asterism"
@@ -26705,7 +27055,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:255
 msgctxt "asterism"
 msgid "Celestial Stable"
-msgstr ""
+msgstr "Himmelsstall"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:256
 msgctxt "asterism"
@@ -26715,7 +27065,7 @@ msgstr "Himmelswolf"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:257
 msgctxt "asterism"
 msgid "Celestial Prison"
-msgstr ""
+msgstr "Himmelsgefängnis"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:258
 msgctxt "asterism"
@@ -26735,17 +27085,17 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:261
 msgctxt "asterism"
 msgid "Celestial Gate"
-msgstr ""
+msgstr "Himmelstor"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:262
 msgctxt "asterism"
 msgid "Celestial Money"
-msgstr ""
+msgstr "Himmelsgeld"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:263
 msgctxt "asterism"
 msgid "Celestial Spear"
-msgstr ""
+msgstr "Himmelsspeer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:264
 msgctxt "asterism"
@@ -26755,12 +27105,12 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:265
 msgctxt "asterism"
 msgid "Celestial Milk"
-msgstr ""
+msgstr "Himmelsmilch"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:266
 msgctxt "asterism"
 msgid "Celestial Earth God's Temple"
-msgstr ""
+msgstr "Himmelstempel der Erdgottheit"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:267
 msgctxt "asterism"
@@ -26775,17 +27125,17 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:269
 msgctxt "asterism"
 msgid "Celestial Premier"
-msgstr ""
+msgstr "Himmlischer Premier"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:270
 msgctxt "asterism"
 msgid "Celestial Great One"
-msgstr ""
+msgstr "Himmlischer Großer"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:271
 msgctxt "asterism"
 msgid "Celestial Yin Force"
-msgstr ""
+msgstr "Himmlische Yin-Kraft"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:272
 msgctxt "asterism"
@@ -26795,7 +27145,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:274
 msgctxt "asterism"
 msgid "Celestial Spring"
-msgstr ""
+msgstr "Himmlischer Brunnen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:275
 msgctxt "asterism"
@@ -26845,7 +27195,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:284
 msgctxt "asterism"
 msgid "Outer Kitchen"
-msgstr ""
+msgstr "Äußere Küche"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:285
 msgctxt "asterism"
@@ -26855,7 +27205,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:286
 msgctxt "asterism"
 msgid "Wang Liang"
-msgstr ""
+msgstr "Wang Liang"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:287
 msgctxt "asterism"
@@ -26870,7 +27220,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:289
 msgctxt "asterism"
 msgid "Five Chariots"
-msgstr ""
+msgstr "Fünf Streitwagen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:290
 msgctxt "asterism"
@@ -27021,7 +27371,7 @@ msgstr "Wolke und Regen"
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:321
 msgctxt "asterism"
 msgid "Zaofu"
-msgstr ""
+msgstr "Zaofu"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:322
 msgctxt "asterism"
@@ -27046,7 +27396,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:326
 msgctxt "asterism"
 msgid "Executions"
-msgstr ""
+msgstr "Hinrichtungen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:327
 msgctxt "asterism"
@@ -27061,7 +27411,7 @@ msgstr ""
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:329
 msgctxt "asterism"
 msgid "Weaving Girl"
-msgstr ""
+msgstr "Webermädchen"
 
 #: skycultures/chinese_contemporary/asterism_names.eng.fab:330
 msgctxt "asterism"
@@ -27885,15 +28235,1096 @@ msgid "Vanant"
 msgstr "Vanant"
 
 #: skycultures/chinese_contemporary/star_names.fab:18
-#: skycultures/western/star_names.fab:812
+#: skycultures/western/star_names.fab:813
 msgid "The Ruby Star"
 msgstr "Rubinstern"
 
 #: skycultures/chinese_contemporary/star_names.fab:19
-#: skycultures/western/star_names.fab:878
+#: skycultures/western/star_names.fab:879
 #: skycultures/western_SnT/star_names.fab:105
 msgid "Lalande 21185"
 msgstr "Lalande 21185"
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:59
+msgid "Three Steps (Upper Step)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:60
+msgid "Three Steps (Middle Step)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:61
+msgid "Three Steps (Lower Step)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:169
+msgid "Twelve States (Zhao State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:170
+msgid "Twelve States (Yue State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:171
+msgid "Twelve States (Zhou State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:172
+msgid "Twelve States (Qi State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:173
+msgid "Twelve States (Zheng State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:174
+msgid "Twelve States (Chu State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:175
+msgid "Twelve States (Qin State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:176
+msgid "Twelve States (Yan State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:177
+msgid "Twelve States (Wei State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:178
+msgid "Twelve States (Dai State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:179
+msgid "Twelve States (Jin State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:180
+msgid "Twelve States (Han State)"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:310
+msgid "Wolf"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:314
+msgid "Cumulative Corpse Gas"
+msgstr ""
+
+#: skycultures/chinese_medieval/constellation_names.eng.fab:336
+msgid "Master of Constructions (In Chariot Mansion)"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:4
+#: skycultures/chinese_medieval/star_names.fab:111
+#: skycultures/chinese_medieval/star_names.fab:229
+msgid "Taizi/Crown Prince"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:5
+msgid "Di/Emperor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:6
+#: skycultures/chinese_medieval/star_names.fab:230
+msgid "Shuzi/Bastard"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:7
+msgid "Hougong/Harem"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:8
+#: skycultures/chinese_medieval/star_names.fab:49
+msgid "Tianshu/The Celestial Pivot"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:9
+msgid "Niuxing/Ancient Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:12
+msgid "Yuanshi/The Origin of All Things"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:15
+msgid "Tianhuangdadi/Great Emperor of Heaven"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:18
+msgid "Nüshi/Female Protocol"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:21
+msgid "Zhushi/Official of Royal Archives"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:24
+msgid "Youshu/Right Pivot"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:25
+msgid "Shaowei/The Second Commandant"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:26
+msgid "Shangfu/The Great Advisor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:27
+msgid "Shaofu/The Second Advisor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:28
+#: skycultures/chinese_medieval/star_names.fab:38
+msgid "Shangwei/The Great Imperial Guard"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:29
+#: skycultures/chinese_medieval/star_names.fab:39
+msgid "Shaowei/The Second Imperial Guard"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:30
+msgid "Shangcheng/The Great Imperial Minister"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:33
+msgid "Zuoshu/Left Pivot"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:34
+msgid "Shangzai/The Great Prime Minister"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:35
+msgid "Shaozai/The Second Prime Minister"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:36
+msgid "Shangbi/The Great Protector"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:37
+msgid "Shaobi/The Second Protector"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:40
+msgid "Shaocheng/The Second Imperial Minister"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:43
+msgid "Tianyi/Celestial Great One"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:46
+msgid "Taiyi/First Great One"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:50
+msgid "Tianxuan/The Celestial Rotating Jade"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:51
+msgid "Tianji/The Celestial Shining Pearl"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:52
+msgid "Tianquan/The Celestial Balance"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:53
+msgid "Yuheng/The Jade Sighting-tube"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:54
+msgid "Kaiyang/The Opener of Heat"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:55
+msgid "Yaoguang/The Twinkling Brilliance"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:56
+msgid "Tanlang/Greedy Wolf"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:57
+msgid "Jumen/Giant Gate"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:58
+msgid "Lucun/Good Fortune Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:59
+msgid "Wenqu/Literary Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:60
+msgid "Lianzhen/Clean and Chaste"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:61
+msgid "Wuqu/Military Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:62
+msgid "Pojun/Break the Enemy"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:63
+msgid "Zheng/Justice"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:64
+msgid "Fa/Law"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:65
+#: skycultures/chinese_medieval/star_names.fab:271
+msgid "Ling/Command"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:66
+msgid "Fa/Crusade"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:67
+msgid "Sha/Killing"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:68
+msgid "Wei/Danger"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:69
+msgid "Bu/Army"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:72
+msgid "Fu/Assistant"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:75
+msgid "Xuange/Sombre Lance"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:78
+msgid "Xiang/Prime Minister"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:81
+msgid "Taiyangshou/Guard of the Sun"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:84
+msgid "Taizun/Royals"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:87
+#: skycultures/chinese_medieval/star_names.fab:429
+msgid "Shangjiang/Great General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:88
+#: skycultures/chinese_medieval/star_names.fab:427
+msgid "Cijiang/Second General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:89
+msgid "Shangshu/Royal Secretary"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:90
+msgid "Guixiang/Distinguished Primer"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:91
+msgid "Taichang/Minister of Justice"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:92
+msgid "Silu/Deified Judge of Rank"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:93
+msgid "Sizhong/Deified Judge of Disaster"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:94
+msgid "Sili/Senior Judge"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:95
+msgid "Siming/Deified Judge of Life"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:96
+msgid "Siguai/Deity in Charge of Monsters"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:97
+#: skycultures/chinese_medieval/star_names.fab:385
+msgid "Taishi/Court Historian"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:98
+msgid "Sikou/Supreme Judge"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:99
+msgid "Dali/Minister of Justice"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:104
+msgid "Huangdizuo/Seat of Yellow Emperor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:105
+msgid "Cangdi/Azure Emperor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:106
+msgid "Chidi/Red Emperor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:107
+msgid "Baidi/White Emperor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:108
+msgid "Heidi/Black Emperor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:114
+msgid "Congguan/Retinue"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:117
+msgid "Xingchen/Officer of Honour"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:120
+msgid "Youzhifa/Right Law Administrator"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:121
+msgid "Xishangjiang/The Great Western General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:122
+msgid "Xicijiang/The Second Western General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:123
+msgid "Xicixiang/The Second Western Premier"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:124
+msgid "Xishangxiang/The Great Western Premier"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:127
+msgid "Zuozhifa/Left Law Administrator"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:128
+msgid "Dongshangxiang/The Great Eastern Premier"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:129
+msgid "Dongcixiang/The Second Eastern Premier"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:130
+msgid "Dongcijiang/The Second Eastern General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:131
+msgid "Dongshangjiang/The Great Eastern General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:134
+msgid "Tianzi/Son of Heaven"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:135
+#: skycultures/chinese_medieval/star_names.fab:430
+msgid "Nüzhu/Empress"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:136
+msgid "Zhuhousangong/ Feudal Kings and Three Excellencies"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:137
+msgid "Qingdafu/High Ministers and Nobles"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:138
+msgid "Shi/Gentry"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:139
+msgid "Shuren/Common People"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:142
+msgid "Huben/Emperor's Bodyguard"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:145
+msgid "Yezhe/Usher to the Court"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:150
+msgid "Dizuo/Emperor's Seat"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:153
+msgid "Hou/Astrologer"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:185
+msgid "Jinxian/Recommending Virtuous Men"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:190
+msgid "Dajiao/Great Horn"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:195
+#: skycultures/chinese_medieval/star_names.fab:196
+msgid "Shi/Wedded Wife"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:197
+#: skycultures/chinese_medieval/star_names.fab:198
+#: skycultures/chinese_medieval/star_names.fab:242
+#: skycultures/chinese_medieval/star_names.fab:243
+msgid "Qie/Minor Concubine"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:201
+msgid "Zhaoyao/Twinkling Indicator"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:204
+msgid "Tianru/Celestial Milk"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:207
+msgid "Qizhenjiangjun/Chariots and Cavalry General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:212
+msgid "Cijiang/The Second General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:213
+msgid "Shangjiang/The Great General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:214
+msgid "Cixiang/The Second General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:215
+msgid "Shangxiang/The Great Premier"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:218
+msgid "Jianbi/Door Bolt"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:221
+msgid "Ri/Solar Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:226
+msgid "Tianwang/Celestial King"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:227
+msgid "Mingtang/Cosmological Temple"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:228
+msgid "Dahuo/Great Fire"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:235
+msgid "Hou/Empress Consort"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:236
+#: skycultures/chinese_medieval/star_names.fab:237
+#: skycultures/chinese_medieval/star_names.fab:238
+#: skycultures/chinese_medieval/star_names.fab:426
+msgid "Fei/Imperial Consort"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:239
+#: skycultures/chinese_medieval/star_names.fab:240
+#: skycultures/chinese_medieval/star_names.fab:241
+msgid "Pin/Imperial Concubine"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:246
+msgid "Shengong/Changing Room"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:249
+msgid "Fuyue/Fu Yue"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:254
+msgid "Kang/Chaff"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:260
+msgid "Tiantong/Celestial Collaborators"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:261
+msgid "Fu/Blessing"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:262
+msgid "Tianxiang/Celestial Premier"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:263
+msgid "Yin/Stamp"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:264
+msgid "Qisha/Seven Assassins"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:265
+msgid "Jiang/General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:266
+msgid "Tianji/Celestial Secret"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:267
+msgid "Shan/Kindness"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:268
+msgid "Tianliang/Celestial Beam"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:269
+msgid "Yin/Shade"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:270
+msgid "Tianfu/Celestial Official"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:274
+msgid "Nongzhangren/Peasant"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:279
+msgid "Dajiangjun/Great General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:280
+msgid "Zuojiangjun/Left General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:281
+msgid "Youjiangjun/Right General"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:282
+msgid "Qianniuxing/Cowboy"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:285
+msgid "Zhinüxing/Weaving Girl"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:290
+msgid "Yue"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:302
+msgid "Tiangang/Materials for Making Tents"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:305
+msgid "Beiluoshimen/North Gate of the Military Camp"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:311
+msgid "Wangiang/Wang Liang"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:312
+#: skycultures/chinese_medieval/star_names.fab:313
+#: skycultures/chinese_medieval/star_names.fab:314
+#: skycultures/chinese_medieval/star_names.fab:315
+msgid "Tiansi/Celestial Horse"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:318
+msgid "Ce/Whip"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:321
+msgid "Fulu/Auxiliary Road"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:324
+msgid "Junnanmen/Southern Military Gate"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:327
+msgid "Tusikong/Master of Constructions"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:332
+msgid "Jishi/Heap of Corpses"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:335
+msgid "Jishui/Stored Water"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:340
+msgid "Tiane/Celestial Concave"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:343
+msgid "Yue/Lunar Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:346
+msgid "Tianchan/Celestial Slander"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:351
+msgid "Tiangao/Celestial High Terrace"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:352
+msgid "Bianjiang/Side-general"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:355
+msgid "Fuer/Whisper"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:358
+msgid "Tianguan/Celestial Pass"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:363
+#: skycultures/chinese_medieval/star_names.fab:364
+#: skycultures/chinese_medieval/star_names.fab:365
+msgid "Hengshi/Scales"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:366
+msgid "Zuojian/Left Shoulder"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:367
+msgid "Youjian/Right Shoulder"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:368
+msgid "Zuozu/Left Foot"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:369
+msgid "Youzu/Right Foot"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:372
+msgid "Shi/Excrement"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:378
+msgid "Yue/Battle Axe"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:381
+msgid "Dishi/Emperor Teacher"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:382
+msgid "Diyou/Emperor friend"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:383
+msgid "Sangong/Three excellencies"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:384
+msgid "Boshi/Doctor"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:388
+msgid "Jishui/Accumulated Water"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:391
+msgid "Jixin/Pile of Firewood"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:394
+msgid "Yeji/Wild Cockerel"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:397
+msgid "Lang/Wolf"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:398
+msgid "Tianlang/Celestial Wolf"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:401
+msgid "Laoren/Old Man"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:402
+msgid "Nanjilaoren/The Southernmost Old Man"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:405
+msgid "Shi/Arrow"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:410
+msgid "Tianji/Judge for Estimating the Age of Animals"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:415
+#: skycultures/chinese_medieval/star_names.fab:416
+#: skycultures/chinese_medieval/star_names.fab:417
+#: skycultures/chinese_medieval/star_names.fab:418
+#: skycultures/chinese_medieval/star_names.fab:419
+#: skycultures/chinese_medieval/star_names.fab:420
+#: skycultures/chinese_medieval/star_names.fab:421
+#: skycultures/chinese_medieval/star_names.fab:422
+#: skycultures/chinese_medieval/star_names.fab:423
+#: skycultures/chinese_medieval/star_names.fab:424
+#: skycultures/chinese_medieval/star_names.fab:425
+msgid "Cifei/Minor Imperial Consort"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:428
+msgid "Furen/Highest-ranking Imperial Consort"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:431
+msgid "Damin/Patriarchal Clan of Empress Dowager"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:432
+msgid "Shaomin/Patriarchal Clan of Empress Consort"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:433
+msgid "Yunü/Maids-in-waiting"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:438
+msgid "Youxia/Right linchpin"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:441
+msgid "Zuoxia/Left linchpin"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:444
+msgid "Changsha/Changsha"
+msgstr ""
+
+#: skycultures/chinese_medieval/star_names.fab:447
+#: skycultures/chinese_medieval/star_names.fab:448
+#: skycultures/chinese_medieval/star_names.fab:449
+#: skycultures/chinese_medieval/star_names.fab:450
+#: skycultures/chinese_medieval/star_names.fab:451
+#: skycultures/chinese_medieval/star_names.fab:452
+#: skycultures/chinese_medieval/star_names.fab:453
+#: skycultures/chinese_medieval/star_names.fab:454
+#: skycultures/chinese_medieval/star_names.fab:455
+#: skycultures/chinese_medieval/star_names.fab:456
+#: skycultures/chinese_medieval/star_names.fab:457
+#: skycultures/chinese_medieval/star_names.fab:458
+#: skycultures/chinese_medieval/star_names.fab:459
+#: skycultures/chinese_medieval/star_names.fab:460
+#: skycultures/chinese_medieval/star_names.fab:461
+#: skycultures/chinese_medieval/star_names.fab:462
+#: skycultures/chinese_medieval/star_names.fab:463
+#: skycultures/chinese_medieval/star_names.fab:464
+#: skycultures/chinese_medieval/star_names.fab:465
+#: skycultures/chinese_medieval/star_names.fab:466
+#: skycultures/chinese_medieval/star_names.fab:467
+#: skycultures/chinese_medieval/star_names.fab:468
+#: skycultures/chinese_medieval/star_names.fab:469
+#: skycultures/chinese_medieval/star_names.fab:470
+#: skycultures/chinese_medieval/star_names.fab:471
+#: skycultures/chinese_medieval/star_names.fab:472
+#: skycultures/chinese_medieval/star_names.fab:473
+#: skycultures/chinese_medieval/star_names.fab:474
+#: skycultures/chinese_medieval/star_names.fab:475
+#: skycultures/chinese_medieval/star_names.fab:476
+#: skycultures/chinese_medieval/star_names.fab:477
+#: skycultures/chinese_medieval/star_names.fab:478
+#: skycultures/chinese_medieval/star_names.fab:479
+#: skycultures/chinese_medieval/star_names.fab:480
+#: skycultures/chinese_medieval/star_names.fab:481
+#: skycultures/chinese_medieval/star_names.fab:482
+#: skycultures/chinese_medieval/star_names.fab:483
+#: skycultures/chinese_medieval/star_names.fab:484
+#: skycultures/chinese_medieval/star_names.fab:485
+#: skycultures/chinese_medieval/star_names.fab:486
+#: skycultures/chinese_medieval/star_names.fab:487
+#: skycultures/chinese_medieval/star_names.fab:488
+#: skycultures/chinese_medieval/star_names.fab:489
+#: skycultures/chinese_medieval/star_names.fab:490
+#: skycultures/chinese_medieval/star_names.fab:491
+#: skycultures/chinese_medieval/star_names.fab:492
+#: skycultures/chinese_medieval/star_names.fab:493
+#: skycultures/chinese_medieval/star_names.fab:494
+#: skycultures/chinese_medieval/star_names.fab:495
+#: skycultures/chinese_medieval/star_names.fab:496
+#: skycultures/chinese_medieval/star_names.fab:497
+#: skycultures/chinese_medieval/star_names.fab:498
+#: skycultures/chinese_medieval/star_names.fab:499
+#: skycultures/chinese_medieval/star_names.fab:500
+#: skycultures/chinese_medieval/star_names.fab:501
+#: skycultures/chinese_medieval/star_names.fab:502
+#: skycultures/chinese_medieval/star_names.fab:503
+#: skycultures/chinese_medieval/star_names.fab:504
+#: skycultures/chinese_medieval/star_names.fab:505
+#: skycultures/chinese_medieval/star_names.fab:506
+#: skycultures/chinese_medieval/star_names.fab:507
+#: skycultures/chinese_medieval/star_names.fab:508
+#: skycultures/chinese_medieval/star_names.fab:509
+#: skycultures/chinese_medieval/star_names.fab:510
+#: skycultures/chinese_medieval/star_names.fab:511
+#: skycultures/chinese_medieval/star_names.fab:512
+#: skycultures/chinese_medieval/star_names.fab:513
+#: skycultures/chinese_medieval/star_names.fab:514
+#: skycultures/chinese_medieval/star_names.fab:515
+#: skycultures/chinese_medieval/star_names.fab:516
+#: skycultures/chinese_medieval/star_names.fab:517
+#: skycultures/chinese_medieval/star_names.fab:518
+#: skycultures/chinese_medieval/star_names.fab:519
+#: skycultures/chinese_medieval/star_names.fab:520
+#: skycultures/chinese_medieval/star_names.fab:521
+#: skycultures/chinese_medieval/star_names.fab:522
+#: skycultures/chinese_medieval/star_names.fab:523
+#: skycultures/chinese_medieval/star_names.fab:524
+#: skycultures/chinese_medieval/star_names.fab:525
+#: skycultures/chinese_medieval/star_names.fab:526
+#: skycultures/chinese_medieval/star_names.fab:527
+#: skycultures/chinese_medieval/star_names.fab:528
+#: skycultures/chinese_medieval/star_names.fab:529
+#: skycultures/chinese_medieval/star_names.fab:530
+#: skycultures/chinese_medieval/star_names.fab:531
+#: skycultures/chinese_medieval/star_names.fab:532
+#: skycultures/chinese_medieval/star_names.fab:533
+#: skycultures/chinese_medieval/star_names.fab:534
+#: skycultures/chinese_medieval/star_names.fab:535
+#: skycultures/chinese_medieval/star_names.fab:536
+#: skycultures/chinese_medieval/star_names.fab:537
+#: skycultures/chinese_medieval/star_names.fab:538
+#: skycultures/chinese_medieval/star_names.fab:539
+#: skycultures/chinese_medieval/star_names.fab:540
+#: skycultures/chinese_medieval/star_names.fab:541
+#: skycultures/chinese_medieval/star_names.fab:542
+#: skycultures/chinese_medieval/star_names.fab:543
+#: skycultures/chinese_medieval/star_names.fab:544
+#: skycultures/chinese_medieval/star_names.fab:545
+#: skycultures/chinese_medieval/star_names.fab:546
+#: skycultures/chinese_medieval/star_names.fab:547
+#: skycultures/chinese_medieval/star_names.fab:548
+#: skycultures/chinese_medieval/star_names.fab:549
+#: skycultures/chinese_medieval/star_names.fab:550
+#: skycultures/chinese_medieval/star_names.fab:551
+#: skycultures/chinese_medieval/star_names.fab:552
+#: skycultures/chinese_medieval/star_names.fab:553
+#: skycultures/chinese_medieval/star_names.fab:554
+#: skycultures/chinese_medieval/star_names.fab:555
+#: skycultures/chinese_medieval/star_names.fab:556
+#: skycultures/chinese_medieval/star_names.fab:557
+#: skycultures/chinese_medieval/star_names.fab:558
+#: skycultures/chinese_medieval/star_names.fab:559
+#: skycultures/chinese_medieval/star_names.fab:560
+#: skycultures/chinese_medieval/star_names.fab:561
+#: skycultures/chinese_medieval/star_names.fab:562
+#: skycultures/chinese_medieval/star_names.fab:563
+#: skycultures/chinese_medieval/star_names.fab:564
+#: skycultures/chinese_medieval/star_names.fab:565
+#: skycultures/chinese_medieval/star_names.fab:566
+#: skycultures/chinese_medieval/star_names.fab:567
+#: skycultures/chinese_medieval/star_names.fab:568
+#: skycultures/chinese_medieval/star_names.fab:569
+#: skycultures/chinese_medieval/star_names.fab:570
+#: skycultures/chinese_medieval/star_names.fab:571
+#: skycultures/chinese_medieval/star_names.fab:572
+#: skycultures/chinese_medieval/star_names.fab:573
+#: skycultures/chinese_medieval/star_names.fab:574
+#: skycultures/chinese_medieval/star_names.fab:575
+#: skycultures/chinese_medieval/star_names.fab:576
+#: skycultures/chinese_medieval/star_names.fab:577
+#: skycultures/chinese_medieval/star_names.fab:578
+#: skycultures/chinese_medieval/star_names.fab:579
+#: skycultures/chinese_medieval/star_names.fab:580
+#: skycultures/chinese_medieval/star_names.fab:581
+#: skycultures/chinese_medieval/star_names.fab:582
+#: skycultures/chinese_medieval/star_names.fab:583
+#: skycultures/chinese_medieval/star_names.fab:584
+#: skycultures/chinese_medieval/star_names.fab:585
+#: skycultures/chinese_medieval/star_names.fab:586
+#: skycultures/chinese_medieval/star_names.fab:587
+#: skycultures/chinese_medieval/star_names.fab:588
+#: skycultures/chinese_medieval/star_names.fab:589
+#: skycultures/chinese_medieval/star_names.fab:590
+#: skycultures/chinese_medieval/star_names.fab:591
+#: skycultures/chinese_medieval/star_names.fab:592
+#: skycultures/chinese_medieval/star_names.fab:593
+#: skycultures/chinese_medieval/star_names.fab:594
+#: skycultures/chinese_medieval/star_names.fab:595
+#: skycultures/chinese_medieval/star_names.fab:596
+#: skycultures/chinese_medieval/star_names.fab:597
+#: skycultures/chinese_medieval/star_names.fab:598
+#: skycultures/chinese_medieval/star_names.fab:599
+#: skycultures/chinese_medieval/star_names.fab:600
+#: skycultures/chinese_medieval/star_names.fab:601
+#: skycultures/chinese_medieval/star_names.fab:602
+#: skycultures/chinese_medieval/star_names.fab:603
+#: skycultures/chinese_medieval/star_names.fab:604
+#: skycultures/chinese_medieval/star_names.fab:605
+#: skycultures/chinese_medieval/star_names.fab:606
+#: skycultures/chinese_medieval/star_names.fab:607
+#: skycultures/chinese_medieval/star_names.fab:608
+#: skycultures/chinese_medieval/star_names.fab:609
+#: skycultures/chinese_medieval/star_names.fab:610
+#: skycultures/chinese_medieval/star_names.fab:611
+#: skycultures/chinese_medieval/star_names.fab:612
+#: skycultures/chinese_medieval/star_names.fab:613
+#: skycultures/chinese_medieval/star_names.fab:614
+#: skycultures/chinese_medieval/star_names.fab:615
+#: skycultures/chinese_medieval/star_names.fab:616
+#: skycultures/chinese_medieval/star_names.fab:617
+#: skycultures/chinese_medieval/star_names.fab:618
+#: skycultures/chinese_medieval/star_names.fab:619
+#: skycultures/chinese_medieval/star_names.fab:620
+#: skycultures/chinese_medieval/star_names.fab:621
+#: skycultures/chinese_medieval/star_names.fab:622
+#: skycultures/chinese_medieval/star_names.fab:623
+#: skycultures/chinese_medieval/star_names.fab:624
+#: skycultures/chinese_medieval/star_names.fab:625
+#: skycultures/chinese_medieval/star_names.fab:626
+#: skycultures/chinese_medieval/star_names.fab:627
+#: skycultures/chinese_medieval/star_names.fab:628
+#: skycultures/chinese_medieval/star_names.fab:629
+#: skycultures/chinese_medieval/star_names.fab:630
+#: skycultures/chinese_medieval/star_names.fab:631
+#: skycultures/chinese_medieval/star_names.fab:632
+#: skycultures/chinese_medieval/star_names.fab:633
+#: skycultures/chinese_medieval/star_names.fab:634
+#: skycultures/chinese_medieval/star_names.fab:635
+#: skycultures/chinese_medieval/star_names.fab:636
+#: skycultures/chinese_medieval/star_names.fab:637
+#: skycultures/chinese_medieval/star_names.fab:638
+#: skycultures/chinese_medieval/star_names.fab:639
+#: skycultures/chinese_medieval/star_names.fab:640
+#: skycultures/chinese_medieval/star_names.fab:641
+#: skycultures/chinese_medieval/star_names.fab:642
+#: skycultures/chinese_medieval/star_names.fab:643
+#: skycultures/chinese_medieval/star_names.fab:644
+#: skycultures/chinese_medieval/star_names.fab:645
+#: skycultures/chinese_medieval/star_names.fab:646
+#: skycultures/chinese_medieval/star_names.fab:647
+#: skycultures/chinese_medieval/star_names.fab:648
+#: skycultures/chinese_medieval/star_names.fab:649
+#: skycultures/chinese_medieval/star_names.fab:650
+#: skycultures/chinese_medieval/star_names.fab:651
+#: skycultures/chinese_medieval/star_names.fab:652
+#: skycultures/chinese_medieval/star_names.fab:653
+#: skycultures/chinese_medieval/star_names.fab:654
+#: skycultures/chinese_medieval/star_names.fab:655
+#: skycultures/chinese_medieval/star_names.fab:656
+#: skycultures/chinese_medieval/star_names.fab:657
+#: skycultures/chinese_medieval/star_names.fab:658
+#: skycultures/chinese_medieval/star_names.fab:659
+#: skycultures/chinese_medieval/star_names.fab:660
+#: skycultures/chinese_medieval/star_names.fab:661
+#: skycultures/chinese_medieval/star_names.fab:662
+#: skycultures/chinese_medieval/star_names.fab:663
+#: skycultures/chinese_medieval/star_names.fab:664
+#: skycultures/chinese_medieval/star_names.fab:665
+#: skycultures/chinese_medieval/star_names.fab:666
+#: skycultures/chinese_medieval/star_names.fab:667
+#: skycultures/chinese_medieval/star_names.fab:668
+#: skycultures/chinese_medieval/star_names.fab:669
+#: skycultures/chinese_medieval/star_names.fab:670
+#: skycultures/chinese_medieval/star_names.fab:671
+#: skycultures/chinese_medieval/star_names.fab:672
+#: skycultures/chinese_medieval/star_names.fab:673
+#: skycultures/chinese_medieval/star_names.fab:674
+#: skycultures/chinese_medieval/star_names.fab:675
+#: skycultures/chinese_medieval/star_names.fab:676
+#: skycultures/chinese_medieval/star_names.fab:677
+#: skycultures/chinese_medieval/star_names.fab:678
+#: skycultures/chinese_medieval/star_names.fab:679
+#: skycultures/chinese_medieval/star_names.fab:680
+#: skycultures/chinese_medieval/star_names.fab:681
+msgid "Determinative Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/planet_names.fab:2
+msgid "Taiyin"
+msgstr ""
+
+#: skycultures/chinese_medieval/planet_names.fab:3
+msgid "Chen Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/planet_names.fab:4
+msgid "Taibai"
+msgstr ""
+
+#: skycultures/chinese_medieval/planet_names.fab:5
+msgid "Yinghuo"
+msgstr ""
+
+#: skycultures/chinese_medieval/planet_names.fab:6
+msgid "Sui Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/planet_names.fab:7
+msgid "Zhen Star"
+msgstr ""
+
+#: skycultures/chinese_medieval/dso_names.fab:1
+msgid "Jishiqi / Cumulative Corpse Gas"
+msgstr ""
+
+#: skycultures/chinese_medieval/dso_names.fab:2
+msgid "Yu / Fish"
+msgstr ""
+
+#: skycultures/chinese_medieval/dso_names.fab:3
+msgid "Maotou / Ancient Flag with Yak's Tail"
+msgstr ""
 
 #: skycultures/dakota/constellation_names.eng.fab:1
 msgid "Oceti (Fireplace)"
@@ -30963,7 +32394,7 @@ msgid "Baten Kaitos"
 msgstr "Baten Kaitos"
 
 #: skycultures/romanian/star_names.fab:13
-#: skycultures/western/star_names.fab:824
+#: skycultures/western/star_names.fab:825
 #: skycultures/western_SnT/star_names.fab:12
 msgid "Mothallah"
 msgstr "Mothallah"
@@ -31056,54 +32487,54 @@ msgid "Atik"
 msgstr "Atik"
 
 #: skycultures/romanian/star_names.fab:29
-#: skycultures/western/star_names.fab:799
+#: skycultures/western/star_names.fab:800
 #: skycultures/western_SnT/star_names.fab:28
 msgid "Celaeno"
 msgstr "Celaeno"
 
 #: skycultures/romanian/star_names.fab:30
-#: skycultures/western/star_names.fab:800
+#: skycultures/western/star_names.fab:801
 #: skycultures/western_SnT/star_names.fab:29
 msgid "Electra"
 msgstr "Electra"
 
 #: skycultures/romanian/star_names.fab:31
-#: skycultures/western/star_names.fab:801
+#: skycultures/western/star_names.fab:802
 #: skycultures/western_SnT/star_names.fab:30
 msgid "Taygeta"
 msgstr "Taygeta"
 
 #: skycultures/romanian/star_names.fab:32
-#: skycultures/western/star_names.fab:802
+#: skycultures/western/star_names.fab:803
 #: skycultures/western_SnT/star_names.fab:31
 msgid "Maia"
 msgstr "Maia"
 
 #: skycultures/romanian/star_names.fab:33
-#: skycultures/western/star_names.fab:803
+#: skycultures/western/star_names.fab:804
 msgid "Asterope"
 msgstr "Asterope"
 
 #: skycultures/romanian/star_names.fab:34
-#: skycultures/western/star_names.fab:805
+#: skycultures/western/star_names.fab:806
 #: skycultures/western_SnT/star_names.fab:33
 msgid "Merope"
 msgstr "Merope"
 
 #: skycultures/romanian/star_names.fab:35
-#: skycultures/western/star_names.fab:798
+#: skycultures/western/star_names.fab:799
 #: skycultures/western_SnT/star_names.fab:34
 msgid "Alcyone"
 msgstr "Alcyone"
 
 #: skycultures/romanian/star_names.fab:36
-#: skycultures/western/star_names.fab:806
+#: skycultures/western/star_names.fab:807
 #: skycultures/western_SnT/star_names.fab:35
 msgid "Atlas"
 msgstr "Atlas"
 
 #: skycultures/romanian/star_names.fab:37
-#: skycultures/western/star_names.fab:807
+#: skycultures/western/star_names.fab:808
 #: skycultures/western_SnT/star_names.fab:36
 msgid "Pleione"
 msgstr "Pleione"
@@ -31133,7 +32564,7 @@ msgid "Keid"
 msgstr "Keid"
 
 #: skycultures/romanian/star_names.fab:42
-#: skycultures/western/star_names.fab:796
+#: skycultures/western/star_names.fab:797
 #: skycultures/western_SnT/star_names.fab:42
 msgid "Ain"
 msgstr "Ain"
@@ -31319,7 +32750,7 @@ msgid "Naos"
 msgstr "Naos"
 
 #: skycultures/romanian/star_names.fab:83
-#: skycultures/western/star_names.fab:896
+#: skycultures/western/star_names.fab:897
 #: skycultures/western_SnT/star_names.fab:81
 msgid "Regor"
 msgstr "Regor"
@@ -31337,7 +32768,7 @@ msgid "Avior"
 msgstr "Avior"
 
 #: skycultures/romanian/star_names.fab:86
-#: skycultures/western/star_names.fab:851
+#: skycultures/western/star_names.fab:852
 #: skycultures/western_SnT/star_names.fab:84
 msgid "Muscida"
 msgstr "Muscida"
@@ -31361,14 +32792,14 @@ msgid "Acubens"
 msgstr "Acubens"
 
 #: skycultures/romanian/star_names.fab:90
-#: skycultures/western/star_names.fab:844
+#: skycultures/western/star_names.fab:845
 #: skycultures/western_SnT/star_names.fab:88
 msgid "Talitha"
 msgstr "Talitha"
 
 #: skycultures/romanian/star_names.fab:91
-#: skycultures/western/star_names.fab:898
-#: skycultures/western/star_names.fab:901
+#: skycultures/western/star_names.fab:899
+#: skycultures/western/star_names.fab:902
 #: skycultures/western_SnT/star_names.fab:90
 msgid "Suhail"
 msgstr "Suhail"
@@ -31424,7 +32855,7 @@ msgid "Adhafera"
 msgstr "Adhafera"
 
 #: skycultures/romanian/star_names.fab:100
-#: skycultures/western/star_names.fab:847
+#: skycultures/western/star_names.fab:848
 #: skycultures/western_SnT/star_names.fab:100
 msgid "Tania Borealis"
 msgstr "Tania Borealis"
@@ -31436,7 +32867,7 @@ msgid "Algieba"
 msgstr "Algieba"
 
 #: skycultures/romanian/star_names.fab:102
-#: skycultures/western/star_names.fab:848
+#: skycultures/western/star_names.fab:849
 #: skycultures/western_SnT/star_names.fab:102
 msgid "Tania Australis"
 msgstr "Tania Australis"
@@ -31448,13 +32879,13 @@ msgid "Alkes"
 msgstr "Alkes"
 
 #: skycultures/romanian/star_names.fab:104
-#: skycultures/western/star_names.fab:834
+#: skycultures/western/star_names.fab:835
 #: skycultures/western_SnT/star_names.fab:104
 msgid "Merak"
 msgstr "Merak"
 
 #: skycultures/romanian/star_names.fab:105
-#: skycultures/western/star_names.fab:830
+#: skycultures/western/star_names.fab:831
 #: skycultures/western_SnT/star_names.fab:106
 msgid "Dubhe"
 msgstr "Dubhe"
@@ -31472,13 +32903,13 @@ msgid "Chertan"
 msgstr "Chertan"
 
 #: skycultures/romanian/star_names.fab:108
-#: skycultures/western/star_names.fab:850
+#: skycultures/western/star_names.fab:851
 #: skycultures/western_SnT/star_names.fab:109
 msgid "Alula Australis"
 msgstr "Alula Australis"
 
 #: skycultures/romanian/star_names.fab:109
-#: skycultures/western/star_names.fab:849
+#: skycultures/western/star_names.fab:850
 #: skycultures/western_SnT/star_names.fab:110
 msgid "Alula Borealis"
 msgstr "Alula Borealis"
@@ -31497,13 +32928,13 @@ msgid "Denebola"
 msgstr "Denebola"
 
 #: skycultures/romanian/star_names.fab:112
-#: skycultures/western/star_names.fab:907
+#: skycultures/western/star_names.fab:908
 #: skycultures/western_SnT/star_names.fab:113
 msgid "Zavijava"
 msgstr "Zavijava"
 
 #: skycultures/romanian/star_names.fab:113
-#: skycultures/western/star_names.fab:837
+#: skycultures/western/star_names.fab:838
 msgid "Phad"
 msgstr "Phekda"
 
@@ -31514,7 +32945,7 @@ msgid "Alchiba"
 msgstr "Alchiba"
 
 #: skycultures/romanian/star_names.fab:115
-#: skycultures/western/star_names.fab:838
+#: skycultures/western/star_names.fab:839
 #: skycultures/western_SnT/star_names.fab:118
 msgid "Megrez"
 msgstr "Megrez"
@@ -31527,7 +32958,7 @@ msgid "Gienah"
 msgstr "Gienah"
 
 #: skycultures/romanian/star_names.fab:117
-#: skycultures/western/star_names.fab:913
+#: skycultures/western/star_names.fab:914
 #: skycultures/western_SnT/star_names.fab:120
 msgid "Zaniah"
 msgstr "Zaniah"
@@ -31558,7 +32989,7 @@ msgid "Chara"
 msgstr "Chara"
 
 #: skycultures/romanian/star_names.fab:122
-#: skycultures/western/star_names.fab:909
+#: skycultures/western/star_names.fab:910
 #: skycultures/western_SnT/star_names.fab:126
 msgid "Porrima"
 msgstr "Porrima"
@@ -31570,7 +33001,7 @@ msgid "Mimosa"
 msgstr "Mimosa"
 
 #: skycultures/romanian/star_names.fab:124
-#: skycultures/western/star_names.fab:840
+#: skycultures/western/star_names.fab:841
 #: skycultures/western_SnT/star_names.fab:128
 msgid "Alioth"
 msgstr "Alioth"
@@ -31583,20 +33014,20 @@ msgid "Cor Caroli"
 msgstr "Cor Caroli"
 
 #: skycultures/romanian/star_names.fab:126
-#: skycultures/western/star_names.fab:911
+#: skycultures/western/star_names.fab:912
 #: skycultures/western_SnT/star_names.fab:130
 msgid "Vindemiatrix"
 msgstr "Vindemiatrix"
 
 #: skycultures/romanian/star_names.fab:127
-#: skycultures/western/star_names.fab:841
+#: skycultures/western/star_names.fab:842
 #: skycultures/western_rey/star_names.fab:7
 #: skycultures/western_SnT/star_names.fab:131
 msgid "Mizar"
 msgstr "Mizar"
 
 #: skycultures/romanian/star_names.fab:128
-#: skycultures/western/star_names.fab:905
+#: skycultures/western/star_names.fab:906
 #: skycultures/western_rey/star_names.fab:40
 #: skycultures/western_SnT/star_names.fab:132
 msgid "Spica"
@@ -31607,7 +33038,7 @@ msgid "The Little Bitch"
 msgstr "Die Kleine Hündin"
 
 #: skycultures/romanian/star_names.fab:130
-#: skycultures/western/star_names.fab:842
+#: skycultures/western/star_names.fab:843
 #: skycultures/western_SnT/star_names.fab:134
 msgid "Alkaid"
 msgstr "Alkaid"
@@ -31639,7 +33070,7 @@ msgid "Arcturus"
 msgstr "Arktur"
 
 #: skycultures/romanian/star_names.fab:136
-#: skycultures/western/star_names.fab:914
+#: skycultures/western/star_names.fab:915
 #: skycultures/western_SnT/star_names.fab:141
 msgid "Syrma"
 msgstr "Syrma"
@@ -31690,7 +33121,7 @@ msgid "Zubeneschamali"
 msgstr "Zubeneschamali"
 
 #: skycultures/romanian/star_names.fab:146
-#: skycultures/western/star_names.fab:887
+#: skycultures/western/star_names.fab:888
 #: skycultures/western_SnT/star_names.fab:153
 msgid "Pherkad"
 msgstr "Pherkad"
@@ -31719,7 +33150,7 @@ msgid "Alphekka"
 msgstr "Alphekka"
 
 #: skycultures/romanian/star_names.fab:151
-#: skycultures/western/star_names.fab:782
+#: skycultures/western/star_names.fab:783
 #: skycultures/western_SnT/star_names.fab:158
 msgid "Unukalhai"
 msgstr "Unukalhai"
@@ -31787,7 +33218,7 @@ msgid "Marfik"
 msgstr "Marfik"
 
 #: skycultures/romanian/star_names.fab:162
-#: skycultures/western/star_names.fab:828
+#: skycultures/western/star_names.fab:829
 #: skycultures/western_SnT/star_names.fab:170
 msgid "Atria"
 msgstr "Atria"
@@ -31829,7 +33260,7 @@ msgid "Lesath"
 msgstr "Lesath"
 
 #: skycultures/romanian/star_names.fab:169
-#: skycultures/western/star_names.fab:890
+#: skycultures/western/star_names.fab:891
 #: skycultures/western_SnT/star_names.fab:177
 msgid "Yildun"
 msgstr "Yildun"
@@ -31849,6 +33280,7 @@ msgstr "Rasalhague"
 #: skycultures/romanian/star_names.fab:172
 #: skycultures/western/star_names.fab:754
 #: skycultures/western/star_names.fab:766
+#: skycultures/western/star_names.fab:769
 #: skycultures/western_SnT/star_names.fab:180
 msgid "Girtab"
 msgstr "Girtab"
@@ -31911,7 +33343,7 @@ msgid "Nunki"
 msgstr "Nunki"
 
 #: skycultures/romanian/star_names.fab:184
-#: skycultures/western/star_names.fab:785
+#: skycultures/western/star_names.fab:786
 #: skycultures/western_SnT/star_names.fab:192
 msgid "Alya"
 msgstr "Alya"
@@ -32166,7 +33598,7 @@ msgstr "Scheat"
 
 #: skycultures/romanian/star_names.fab:229
 #: skycultures/western/star_names.fab:619
-#: skycultures/western/star_names.fab:900
+#: skycultures/western/star_names.fab:901
 #: skycultures/western_SnT/star_names.fab:235
 msgid "Markab"
 msgstr "Markab"
@@ -32831,7 +34263,7 @@ msgid "Pulcherrima"
 msgstr "Pulcherrima"
 
 #: skycultures/western/star_names.fab:105
-#: skycultures/western/star_names.fab:835
+#: skycultures/western/star_names.fab:836
 msgid "Mirak"
 msgstr "Mirak"
 
@@ -34541,439 +35973,439 @@ msgstr "Grassias"
 msgid "Mula"
 msgstr "Mula"
 
-#: skycultures/western/star_names.fab:769
+#: skycultures/western/star_names.fab:770
 msgid "Xamidimura"
 msgstr "Xamidimura"
 
-#: skycultures/western/star_names.fab:770
+#: skycultures/western/star_names.fab:771
 msgid "Tali al Shaulah I"
 msgstr "Tali al Shaulah I"
 
-#: skycultures/western/star_names.fab:771
+#: skycultures/western/star_names.fab:772
 msgid "Pipirima"
 msgstr "Pipirima"
 
-#: skycultures/western/star_names.fab:772
+#: skycultures/western/star_names.fab:773
 msgid "Tali al Shaulah II"
 msgstr "Tali al Shaulah II"
 
-#: skycultures/western/star_names.fab:773
+#: skycultures/western/star_names.fab:774
 msgid "Fang"
 msgstr "Fang"
 
-#: skycultures/western/star_names.fab:774
+#: skycultures/western/star_names.fab:775
 msgid "Nur"
 msgstr "Nur"
 
-#: skycultures/western/star_names.fab:775
+#: skycultures/western/star_names.fab:776
 msgid "Iklil"
 msgstr "Iklil"
 
-#: skycultures/western/star_names.fab:776
+#: skycultures/western/star_names.fab:777
 msgid "Iolil"
 msgstr "Iolil"
 
-#: skycultures/western/star_names.fab:777
+#: skycultures/western/star_names.fab:778
 msgid "Jabhat Acrabi I"
 msgstr "Jabhat Acrabi I"
 
-#: skycultures/western/star_names.fab:778
+#: skycultures/western/star_names.fab:779
 msgid "Jabhat Acrabi II"
 msgstr "Jabhat Acrabi II"
 
-#: skycultures/western/star_names.fab:779
+#: skycultures/western/star_names.fab:780
 msgid "Fuyue"
 msgstr "Fuyue"
 
-#: skycultures/western/star_names.fab:780
+#: skycultures/western/star_names.fab:781
 msgid "Larawag"
 msgstr "Larawag"
 
-#: skycultures/western/star_names.fab:783
+#: skycultures/western/star_names.fab:784
 msgid "Cor Serpentis"
 msgstr "Cor Serpentis"
 
-#: skycultures/western/star_names.fab:784
+#: skycultures/western/star_names.fab:785
 msgid "Unuk Al Hay"
 msgstr "Unuk Al Hay"
 
-#: skycultures/western/star_names.fab:786
+#: skycultures/western/star_names.fab:787
 msgid "Nasak Shamiya I"
 msgstr "Nasak Shamiya I"
 
-#: skycultures/western/star_names.fab:787
+#: skycultures/western/star_names.fab:788
 msgid "Nasak Shamiya II"
 msgstr "Nasak Shamiya II"
 
-#: skycultures/western/star_names.fab:788
+#: skycultures/western/star_names.fab:789
 msgid "Nasak Yamani I"
 msgstr "Nasak Yamani I"
 
-#: skycultures/western/star_names.fab:789
+#: skycultures/western/star_names.fab:790
 msgid "Nasak Yamani II"
 msgstr "Nasak Yamani II"
 
-#: skycultures/western/star_names.fab:791
+#: skycultures/western/star_names.fab:792
 #: skycultures/western_rey/star_names.fab:27
 #: skycultures/western_SnT/star_names.fab:43
 msgid "Aldebaran"
 msgstr "Aldebaran"
 
-#: skycultures/western/star_names.fab:792
+#: skycultures/western/star_names.fab:793
 msgid "Cor Tauri"
 msgstr "Cor Tauri"
 
-#: skycultures/western/star_names.fab:793
+#: skycultures/western/star_names.fab:794
 msgid "Parilicium"
 msgstr "Parilicium"
 
-#: skycultures/western/star_names.fab:794
+#: skycultures/western/star_names.fab:795
 #: skycultures/western_SnT/star_names.fab:49
 msgid "Elnath"
 msgstr "Elnath"
 
-#: skycultures/western/star_names.fab:795
+#: skycultures/western/star_names.fab:796
 msgid "El Nath"
 msgstr "El Nath"
 
-#: skycultures/western/star_names.fab:797
+#: skycultures/western/star_names.fab:798
 msgid "Oculus Boreus"
 msgstr "Oculus Boreus"
 
-#: skycultures/western/star_names.fab:804
+#: skycultures/western/star_names.fab:805
 msgid "Sterope I"
 msgstr "Sterope I"
 
-#: skycultures/western/star_names.fab:808
+#: skycultures/western/star_names.fab:809
 msgid "Prima Hyadum"
 msgstr "Prima Hyadum"
 
-#: skycultures/western/star_names.fab:809
+#: skycultures/western/star_names.fab:810
 msgid "Hyadum I"
 msgstr "Hyadum I"
 
-#: skycultures/western/star_names.fab:810
+#: skycultures/western/star_names.fab:811
 msgid "Secunda Hyadum"
 msgstr "Secunda Hyadum"
 
-#: skycultures/western/star_names.fab:811
+#: skycultures/western/star_names.fab:812
 msgid "Hyadum II"
 msgstr "Hyadum II"
 
-#: skycultures/western/star_names.fab:813
+#: skycultures/western/star_names.fab:814
 msgid "Sterope II"
 msgstr "Sterope II"
 
-#: skycultures/western/star_names.fab:814
+#: skycultures/western/star_names.fab:815
 msgid "Hyadum III"
 msgstr "Hyadum III"
 
-#: skycultures/western/star_names.fab:815
+#: skycultures/western/star_names.fab:816
 msgid "Chamukuy"
 msgstr "Chamukuy"
 
-#: skycultures/western/star_names.fab:816
+#: skycultures/western/star_names.fab:817
 msgid "Hyadum IV"
 msgstr "Hyadum IV"
 
-#: skycultures/western/star_names.fab:817
+#: skycultures/western/star_names.fab:818
 msgid "Alkalbain III"
 msgstr "Alkalbain III"
 
-#: skycultures/western/star_names.fab:818
+#: skycultures/western/star_names.fab:819
 msgid "Alkalbain IV"
 msgstr "Alkalbain IV"
 
-#: skycultures/western/star_names.fab:819
+#: skycultures/western/star_names.fab:820
 msgid "Alkalbain V"
 msgstr "Alkalbain V"
 
-#: skycultures/western/star_names.fab:820
+#: skycultures/western/star_names.fab:821
 msgid "Alkalbain I"
 msgstr "Alkalbain I"
 
-#: skycultures/western/star_names.fab:821
+#: skycultures/western/star_names.fab:822
 msgid "Alkalbain II"
 msgstr "Alkalbain II"
 
-#: skycultures/western/star_names.fab:822
+#: skycultures/western/star_names.fab:823
 msgid "Tianguan"
 msgstr "Tianguan"
 
-#: skycultures/western/star_names.fab:825
+#: skycultures/western/star_names.fab:826
 msgid "Caput Trianguli"
 msgstr "Caput Trianguli"
 
-#: skycultures/western/star_names.fab:826
+#: skycultures/western/star_names.fab:827
 msgid "Mizan"
 msgstr "Mizan"
 
-#: skycultures/western/star_names.fab:831
+#: skycultures/western/star_names.fab:832
 msgid "Dubb"
 msgstr "Dubb"
 
-#: skycultures/western/star_names.fab:832
+#: skycultures/western/star_names.fab:833
 msgid "Ak"
 msgstr "Ak"
 
-#: skycultures/western/star_names.fab:833
+#: skycultures/western/star_names.fab:834
 msgid "Dubh"
 msgstr "Dubh"
 
-#: skycultures/western/star_names.fab:836
+#: skycultures/western/star_names.fab:837
 #: skycultures/western_SnT/star_names.fab:115
 msgid "Phecda"
 msgstr "Phecda"
 
-#: skycultures/western/star_names.fab:839
+#: skycultures/western/star_names.fab:840
 msgid "Kaffa"
 msgstr "Kaffa"
 
-#: skycultures/western/star_names.fab:843
+#: skycultures/western/star_names.fab:844
 msgid "Benetnasch"
 msgstr "Benetnasch"
 
-#: skycultures/western/star_names.fab:845
+#: skycultures/western/star_names.fab:846
 msgid "Talita"
 msgstr "Talita"
 
-#: skycultures/western/star_names.fab:846
+#: skycultures/western/star_names.fab:847
 msgid "Dnoces"
 msgstr "Dnoces"
 
-#: skycultures/western/star_names.fab:852
+#: skycultures/western/star_names.fab:853
 #: skycultures/western_rey/star_names.fab:8
 #: skycultures/western_SnT/star_names.fab:133
 msgid "Alcor"
 msgstr "Alcor"
 
-#: skycultures/western/star_names.fab:853
+#: skycultures/western/star_names.fab:854
 #: skycultures/western_SnT/star_names.fab:114
 msgid "Groombridge 1830"
 msgstr "Groombridge 1830"
 
-#: skycultures/western/star_names.fab:854
+#: skycultures/western/star_names.fab:855
 msgid "Flying Star"
 msgstr "Fliegender Stern"
 
-#: skycultures/western/star_names.fab:855
+#: skycultures/western/star_names.fab:856
 msgid "Runaway Star"
 msgstr "Ausreißerstern"
 
-#: skycultures/western/star_names.fab:858
+#: skycultures/western/star_names.fab:859
 msgid "Taiyangshou"
 msgstr "Taiyangshou"
 
-#: skycultures/western/star_names.fab:859
+#: skycultures/western/star_names.fab:860
 msgid "Al Kaphrah"
 msgstr "Al Kaphrah"
 
-#: skycultures/western/star_names.fab:860
+#: skycultures/western/star_names.fab:861
 msgid "Alkafzah"
 msgstr "Alkafzah"
 
-#: skycultures/western/star_names.fab:861
+#: skycultures/western/star_names.fab:862
 msgid "Althiba I"
 msgstr "Althiba I"
 
-#: skycultures/western/star_names.fab:862
+#: skycultures/western/star_names.fab:863
 msgid "Althiba VII"
 msgstr "Althiba VII"
 
-#: skycultures/western/star_names.fab:863
+#: skycultures/western/star_names.fab:864
 msgid "Alhaud III"
 msgstr "Alhaud III"
 
-#: skycultures/western/star_names.fab:864
+#: skycultures/western/star_names.fab:865
 msgid "Alhaud I"
 msgstr "Alhaud I"
 
-#: skycultures/western/star_names.fab:865
+#: skycultures/western/star_names.fab:866
 msgid "Alhaud IV"
 msgstr "Alhaud IV"
 
-#: skycultures/western/star_names.fab:866
+#: skycultures/western/star_names.fab:867
 msgid "Alhaud V"
 msgstr "Alhaud V"
 
-#: skycultures/western/star_names.fab:867
+#: skycultures/western/star_names.fab:868
 msgid "Alkaphrah"
 msgstr "Alkaphrah"
 
-#: skycultures/western/star_names.fab:868
+#: skycultures/western/star_names.fab:869
 msgid "Kafzatania"
 msgstr "Kafzatania"
 
-#: skycultures/western/star_names.fab:869
+#: skycultures/western/star_names.fab:870
 msgid "Al Kaprah"
 msgstr "Al Kaprah"
 
-#: skycultures/western/star_names.fab:870
+#: skycultures/western/star_names.fab:871
 msgid "Althiba II"
 msgstr "Althiba II"
 
-#: skycultures/western/star_names.fab:871
+#: skycultures/western/star_names.fab:872
 msgid "Althiba III"
 msgstr "Althiba III"
 
-#: skycultures/western/star_names.fab:872
+#: skycultures/western/star_names.fab:873
 msgid "Althiba IV"
 msgstr "Althiba IV"
 
-#: skycultures/western/star_names.fab:873
+#: skycultures/western/star_names.fab:874
 msgid "Althiba V"
 msgstr "Althiba V"
 
-#: skycultures/western/star_names.fab:874
+#: skycultures/western/star_names.fab:875
 msgid "Althiba VI"
 msgstr "Althiba VI"
 
-#: skycultures/western/star_names.fab:875
+#: skycultures/western/star_names.fab:876
 msgid "Alhaud II"
 msgstr "Alhaud II"
 
-#: skycultures/western/star_names.fab:876
+#: skycultures/western/star_names.fab:877
 msgid "Alhaud VI"
 msgstr "Alhaud VI"
 
-#: skycultures/western/star_names.fab:877
+#: skycultures/western/star_names.fab:878
 msgid "Alhaud VII"
 msgstr "Alhaud VII"
 
-#: skycultures/western/star_names.fab:880
+#: skycultures/western/star_names.fab:881
 #: skycultures/western_SnT/star_names.fab:19
 msgid "Polaris"
 msgstr "Polarstern"
 
-#: skycultures/western/star_names.fab:881
+#: skycultures/western/star_names.fab:882
 msgid "Alrucaba"
 msgstr "Alrucaba"
 
-#: skycultures/western/star_names.fab:882
+#: skycultures/western/star_names.fab:883
 msgid "Cinosura"
 msgstr "Cinosura"
 
-#: skycultures/western/star_names.fab:883
+#: skycultures/western/star_names.fab:884
 msgid "Tramontana"
 msgstr "Tramontana"
 
-#: skycultures/western/star_names.fab:884
+#: skycultures/western/star_names.fab:885
 msgid "Yilduz"
 msgstr "Yilduz"
 
-#: skycultures/western/star_names.fab:885
+#: skycultures/western/star_names.fab:886
 msgid "Mismar"
 msgstr "Mismar"
 
-#: skycultures/western/star_names.fab:886
+#: skycultures/western/star_names.fab:887
 #: skycultures/western_rey/star_names.fab:6
 #: skycultures/western_SnT/star_names.fab:148
 msgid "Kochab"
 msgstr "Kochab"
 
-#: skycultures/western/star_names.fab:888
+#: skycultures/western/star_names.fab:889
 msgid "Pherkad Major"
 msgstr "Pherkad Major"
 
-#: skycultures/western/star_names.fab:889
+#: skycultures/western/star_names.fab:890
 msgid "Pherkad Minor"
 msgstr "Pherkad Minor"
 
-#: skycultures/western/star_names.fab:891
+#: skycultures/western/star_names.fab:892
 msgid "Vildiur"
 msgstr "Vildiur"
 
-#: skycultures/western/star_names.fab:892
+#: skycultures/western/star_names.fab:893
 msgid "Circitores"
 msgstr "Circitores"
 
-#: skycultures/western/star_names.fab:893
+#: skycultures/western/star_names.fab:894
 msgid "Akfa Farkadain"
 msgstr "Akfa Farkadain"
 
-#: skycultures/western/star_names.fab:894
+#: skycultures/western/star_names.fab:895
 msgid "Anwa Farkadain"
 msgstr "Anwa Farkadain"
 
-#: skycultures/western/star_names.fab:897
+#: skycultures/western/star_names.fab:898
 msgid "Suhail al Muhlif"
 msgstr "Suhail al Muhlif"
 
-#: skycultures/western/star_names.fab:899
+#: skycultures/western/star_names.fab:900
 #: skycultures/western_SnT/star_names.fab:93
 msgid "Markeb"
 msgstr "Markeb"
 
-#: skycultures/western/star_names.fab:902
+#: skycultures/western/star_names.fab:903
 msgid "Al Suhail al Wazn"
 msgstr "Al Suhail al Wazn"
 
-#: skycultures/western/star_names.fab:903
+#: skycultures/western/star_names.fab:904
 msgid "Alsephina"
 msgstr "Alsephina"
 
-#: skycultures/western/star_names.fab:906
+#: skycultures/western/star_names.fab:907
 msgid "Azimech"
 msgstr "Azimech"
 
-#: skycultures/western/star_names.fab:908
-#: skycultures/western/star_names.fab:917
+#: skycultures/western/star_names.fab:909
+#: skycultures/western/star_names.fab:918
 msgid "Minelauva"
 msgstr "Minelauva"
 
-#: skycultures/western/star_names.fab:910
+#: skycultures/western/star_names.fab:911
 msgid "Antevorta"
 msgstr "Antevorta"
 
-#: skycultures/western/star_names.fab:912
+#: skycultures/western/star_names.fab:913
 msgid "Almuredin"
 msgstr "Almuredin"
 
-#: skycultures/western/star_names.fab:915
+#: skycultures/western/star_names.fab:916
 msgid "Arich"
 msgstr "Arich"
 
-#: skycultures/western/star_names.fab:916
+#: skycultures/western/star_names.fab:917
 msgid "Heze"
 msgstr "Heze"
 
-#: skycultures/western/star_names.fab:918
+#: skycultures/western/star_names.fab:919
 msgid "Auva"
 msgstr "Auva"
 
-#: skycultures/western/star_names.fab:919
+#: skycultures/western/star_names.fab:920
 msgid "Khambaliya"
 msgstr "Khambaliya"
 
-#: skycultures/western/star_names.fab:920
+#: skycultures/western/star_names.fab:921
 msgid "Kambalia"
 msgstr "Kambalia"
 
-#: skycultures/western/star_names.fab:921
+#: skycultures/western/star_names.fab:922
 msgid "Rijl al Awwa"
 msgstr "Rijl al Awwa"
 
-#: skycultures/western/star_names.fab:922
+#: skycultures/western/star_names.fab:923
 msgid "Rigilawwa"
 msgstr "Rigilawwa"
 
-#: skycultures/western/star_names.fab:923
+#: skycultures/western/star_names.fab:924
 msgid "Kang"
 msgstr "Kang"
 
-#: skycultures/western/star_names.fab:924
+#: skycultures/western/star_names.fab:925
 msgid "Algafar I"
 msgstr "Algafar I"
 
-#: skycultures/western/star_names.fab:925
+#: skycultures/western/star_names.fab:926
 msgid "Elgafar"
 msgstr "Elgafar"
 
-#: skycultures/western/star_names.fab:926
+#: skycultures/western/star_names.fab:927
 msgid "Algafar II"
 msgstr "Algafar II"
 
-#: skycultures/western/star_names.fab:928
+#: skycultures/western/star_names.fab:929
 msgid "Anser"
 msgstr "Anser"
 
@@ -35204,31 +36636,31 @@ msgstr "Beta Centauri"
 
 #: skycultures/western_SnT/star_names.fab:5
 msgid "Schedar"
-msgstr ""
+msgstr "Schedar"
 
 #: skycultures/western_SnT/star_names.fab:13
 msgid "Mesartim"
-msgstr ""
+msgstr "Mesartim"
 
 #: skycultures/western_SnT/star_names.fab:32
 msgid "Sterope"
-msgstr ""
+msgstr "Sterope"
 
 #: skycultures/western_SnT/star_names.fab:89
 msgid "Vela X-1"
-msgstr ""
+msgstr "Vela X-1"
 
 #: skycultures/western_SnT/star_names.fab:117
 msgid "Rmk 14"
-msgstr ""
+msgstr "Rmk 14"
 
 #: skycultures/western_SnT/star_names.fab:142
 msgid "V1002"
-msgstr ""
+msgstr "V1002"
 
 #: skycultures/western_SnT/star_names.fab:150
 msgid "H N 28"
-msgstr ""
+msgstr "H N 28"
 
 #: skycultures/western_SnT/star_names.fab:159
 msgid "T = Blaze Star"
@@ -35236,16 +36668,16 @@ msgstr ""
 
 #: skycultures/western_SnT/star_names.fab:212
 msgid "Lacaille 8760"
-msgstr ""
+msgstr "Lacaille 8760"
 
 #: skycultures/western_SnT/star_names.fab:218
 msgid "Herschel's Garnet Star"
-msgstr ""
+msgstr "Herschels Granatstern"
 
 #: skycultures/western_SnT/star_names.fab:227
 msgid "Krueger 60"
-msgstr ""
+msgstr "Krueger 60"
 
 #: skycultures/western_SnT/star_names.fab:236
 msgid "Bradley 3077"
-msgstr ""
+msgstr "Bradley 3077"

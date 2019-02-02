@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the stellarium-remotecontrol package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# abuyop <abuyop@gmail.com>, 2019
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2018-12-18 12:13+0700\n"
+"POT-Creation-Date: 2019-01-21 19:37+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
+"Last-Translator: abuyop <abuyop@gmail.com>, 2019\n"
 "Language-Team: Malay (https://www.transifex.com/stellarium/teams/80998/ms/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,599 +23,603 @@ msgstr ""
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:60
 msgid "Could not retrieve action list"
-msgstr ""
+msgstr "Tidak memperoleh senarai tindakan"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:88
 msgid "Action '%1' not accepted by server: "
-msgstr ""
+msgstr "Tindakan '%1' tidak diterima oleh pelayan:"
 
 #: plugins/RemoteControl/webroot/js/api/actions.js:95
 msgid "Error sending action '%1' to server: "
-msgstr ""
+msgstr "Ralat menghantar tindakan '%1' kepada pelayan:"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:33
 #: plugins/RemoteControl/webroot/js/api/location.js:61
 #: plugins/RemoteControl/webroot/js/api/search.js:188
 msgid "Error performing search"
-msgstr ""
+msgstr "Ralat melakukan gelintar"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:125
 msgid "Could not retrieve country list"
-msgstr ""
+msgstr "Tidak memperoleh senarai negara"
 
 #: plugins/RemoteControl/webroot/js/api/location.js:138
 msgid "Could not retrieve planet list"
-msgstr ""
+msgstr "Tidak memperoleh senarai planet"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:28
 msgid "Could not retrieve property list"
-msgstr ""
+msgstr "Tidak memperoleh senarai sifat"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:89
 #: plugins/RemoteControl/webroot/js/api/properties.js:110
 msgid "Property '%1' not accepted by server: "
-msgstr ""
+msgstr "Sifat '%1' tidak diterima oleh pelayan:"
 
 #: plugins/RemoteControl/webroot/js/api/properties.js:96
 msgid "Error sending property '%1' to server: "
-msgstr ""
+msgstr "Ralat menghantar sifat '%1' kepada pelayan:"
 
 #: plugins/RemoteControl/webroot/js/api/remotecontrol.js:197
 msgid "Error sending command to server: "
-msgstr ""
+msgstr "Ralat menghantar perintah kepada pelayan:"
 
 #: plugins/RemoteControl/webroot/js/api/scripts.js:27
 msgid "Could not retrieve script list"
-msgstr ""
+msgstr "Tidak memperoleh senarai skrip"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:35
 msgid "querying"
-msgstr ""
+msgstr "menanya"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:44
 msgid "Error (%1)"
-msgstr ""
+msgstr "Ralat (%1)"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:60
 msgid "Error performing Simbad lookup"
-msgstr ""
+msgstr "Ralat melakukan carian Simbad"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:79 index.html:219
 #: tablet7in.html:235
 msgid "idle"
-msgstr ""
+msgstr "melahu"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:105
 msgid "Error loading object types"
-msgstr ""
+msgstr "Ralat memuatkan jenis objek"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:138
 msgid "Error getting object list"
-msgstr ""
+msgstr "Ralat mendapatkan senarai objek"
 
 #: plugins/RemoteControl/webroot/js/api/search.js:200
 msgid "waiting"
-msgstr ""
+msgstr "menunggu"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:38
 msgid "Could not retrieve projection list"
-msgstr ""
+msgstr "Tidak memperoleh senarai unjuran"
 
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:51
 #: plugins/RemoteControl/webroot/js/api/viewoptions.js:64
 msgid "Could not retrieve landscape list"
-msgstr ""
+msgstr "Tidak memperoleh senarai landskap"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
 #: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
 #: index.html:676 tablet7in.html:724 tablet7in.html:784
 msgid "-none-"
-msgstr ""
+msgstr "-tiada-"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:28
 msgid "(Currently loading: %1)"
-msgstr ""
+msgstr "(Kini memuatkan: %1)"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:71
 msgid "Could not retrieve Scenery3d list"
-msgstr ""
+msgstr "Tidak memperoleh senarai Scenery3d"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "on"
-msgstr ""
+msgstr "hidup"
 
 #: plugins/RemoteControl/webroot/js/ui/actions.js:44
 #: plugins/RemoteControl/webroot/js/ui/actions.js:77
 msgid "off"
-msgstr ""
+msgstr "mati"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:58
 msgid "Show All Items"
-msgstr ""
+msgstr "Tunjuk Semua Item"
 
 #: plugins/RemoteControl/webroot/js/ui/combobox.js:124
 msgid "Input did not match any item"
-msgstr ""
+msgstr "Input tidak sepadan dengan mana-mana item"
 
 #: plugins/RemoteControl/webroot/js/ui/search.js:285
 msgid "No current selection"
-msgstr ""
+msgstr "Tiada pemilihan semasa"
 
 #: index.html:5 tablet7in.html:5
 msgid "Stellarium remote control plugin"
-msgstr ""
+msgstr "Pemalam kawalan jauh Stellarium"
 
 #: index.html:17 tablet7in.html:18
 msgid "Please wait, loading"
-msgstr ""
+msgstr "Tunggu sebentar, memuatkan"
 
 #: index.html:26 tablet7in.html:27
 msgid "Stellarium remote control"
-msgstr ""
+msgstr "Kawalan jauh Stellarium"
 
 #: index.html:30 tablet7in.html:31
 msgid "Main controls"
-msgstr ""
+msgstr "Kawalan utama"
 
 #: index.html:33 tablet7in.html:38
 msgid "DSO"
-msgstr ""
+msgstr "DSO"
 
 #: index.html:36
 msgid "Actions and scripts"
-msgstr ""
+msgstr "Tindakan dan skrip"
 
 #: index.html:39 tablet7in.html:45
 msgid "Scenery3d"
-msgstr ""
+msgstr "Scenery3d"
 
 #: index.html:77
 msgid "Pause"
-msgstr ""
+msgstr "Jeda"
 
 #: index.html:82 tablet7in.html:183
 msgid "Time jumps"
-msgstr ""
+msgstr "Lompat waktu"
 
 #: index.html:86 tablet7in.html:187
 msgid "Solar hour"
-msgstr ""
+msgstr "Jam suria"
 
 #: index.html:87 tablet7in.html:188
 msgid "Solar day"
-msgstr ""
+msgstr "Hari suria"
 
 #: index.html:88 tablet7in.html:189
 msgid "Solar week"
-msgstr ""
+msgstr "Minggu suria"
 
 #: index.html:91 tablet7in.html:192
 msgid "Sidereal year"
-msgstr ""
+msgstr "Tahun ikut bintang"
 
 #: index.html:92 tablet7in.html:193
 msgid "Sidereal century"
-msgstr ""
+msgstr "Kurun ikut bintang"
 
 #: index.html:94 tablet7in.html:195
 msgid "Synodic month"
-msgstr ""
+msgstr "Bulan qamari"
 
 #: index.html:95 tablet7in.html:196
 msgid "Draconic month"
-msgstr ""
+msgstr "Bulan drakonik"
 
 #: index.html:96 tablet7in.html:197
 msgid "Draconic year"
-msgstr ""
+msgstr "Tahun drakonik"
 
 #: index.html:98 tablet7in.html:210
 msgid "Gaussian year"
-msgstr ""
+msgstr "Tahun Gauss"
 
 #: index.html:101 tablet7in.html:200
 msgid "Anomalistic month"
-msgstr ""
+msgstr "Bulan anomali"
 
 #: index.html:102 tablet7in.html:201
 msgid "Anomalistic year"
-msgstr ""
+msgstr "Tahun anomali"
 
 #: index.html:103 tablet7in.html:202
 msgid "Anomalistic century"
-msgstr ""
+msgstr "Kurun anomali"
 
 #: index.html:105 tablet7in.html:204
 msgid "Mean tropical month"
-msgstr ""
+msgstr "Bulan min tropika"
 
 #: index.html:106 tablet7in.html:205
 msgid "Mean tropical year"
-msgstr ""
+msgstr "Tahun min tropika"
 
 #: index.html:107 tablet7in.html:206
 msgid "Mean tropical century"
-msgstr ""
+msgstr "Kurun min tropika"
 
 #: index.html:109 tablet7in.html:208
 msgid "Tropical year"
-msgstr ""
+msgstr "Tahun tropika"
 
 #: index.html:110 tablet7in.html:209
 msgid "Julian year"
-msgstr ""
+msgstr "Tahun masihi"
 
 #: index.html:111 tablet7in.html:211
 msgid "Julian century"
-msgstr ""
+msgstr "Kurun masihi"
 
 #: index.html:123 tablet7in.html:101
 msgid "View towards horizon at Azimuth"
-msgstr ""
+msgstr "Lihat terus ke horizon pada Azimut"
 
 #: index.html:144 tablet7in.html:123
 msgid "Vertical View offset"
-msgstr ""
+msgstr "Ofset Pandangan Menegak"
 
 #: index.html:154 tablet7in.html:133
 msgid "Reset"
-msgstr ""
+msgstr "Tetap Semula"
 
 #: index.html:160 tablet7in.html:138
 msgid "FOV"
-msgstr ""
+msgstr "FOV"
 
 #: index.html:213 tablet7in.html:229
 msgid "Enter search term. Use TAB to navigate results."
-msgstr ""
+msgstr "Masukkan terma gelintar. Guna TAB untuk menavigasi keputusan."
 
 #: index.html:214 tablet7in.html:230
 msgid "Select and focus"
-msgstr ""
+msgstr "Pilih dan fokus"
 
 #: index.html:240 tablet7in.html:259
 msgid "Selection mode"
-msgstr ""
+msgstr "Mod pemilihan"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center on object"
-msgstr ""
+msgstr "Tengahkan pada objek"
 
 #: index.html:240 tablet7in.html:259
 msgid "Center and zoom to object"
-msgstr ""
+msgstr "Tengahkan dan zum kepada objek"
 
 #: index.html:240 tablet7in.html:259
 msgid "Just mark the object"
-msgstr ""
+msgstr "Hanya tandakan objek"
 
 #: index.html:242 tablet7in.html:261
 msgid "Quick select"
-msgstr ""
+msgstr "Pilih pantas"
 
 #: index.html:246 tablet7in.html:265
 msgid "Earth"
-msgstr ""
+msgstr "Bumi"
 
 #: index.html:246 tablet7in.html:265
 msgid "Pluto"
-msgstr ""
+msgstr "Pluto"
 
 #: index.html:252 tablet7in.html:294
 msgid "Current selection"
-msgstr ""
+msgstr "Pemilihan semasa"
 
 #: index.html:268 tablet7in.html:321
 msgid "Milky Way brightness:"
-msgstr ""
+msgstr "Kecerahan Bima Sakti:"
 
 #: index.html:272 tablet7in.html:333
 msgid "Digitized Sky Survey"
-msgstr ""
+msgstr "Tinjauan Langit Berdigital"
 
 #: index.html:273 tablet7in.html:334
 msgid "HiPS Survey"
-msgstr ""
+msgstr "Tinjauan HiPS"
 
 #: index.html:322 tablet7in.html:409
 msgid "Shooting Stars"
-msgstr ""
+msgstr "Tahi Bintang"
 
 #: index.html:323 tablet7in.html:410
 msgid "ZHR:"
-msgstr ""
+msgstr "ZHR:"
 
 #: index.html:368 tablet7in.html:463
 msgid ""
 "Instantaneous circles of earth´s axis on its motion around ecliptical poles."
 " Displayed on Earth only."
 msgstr ""
+"Lingkaran serta-merta pada paksi bumi di atas pergerakannya disekitar kutub "
+"gerhana. Dipapar pada Bumi sahaja."
 
 #: index.html:377 tablet7in.html:472
 msgid "Solstices"
-msgstr ""
+msgstr "Solstis"
 
 #: index.html:378 tablet7in.html:473
 msgid "Crossquarters"
-msgstr ""
+msgstr "Suku-silang"
 
 #: index.html:379 tablet7in.html:474
 msgid "Major Standstill"
-msgstr ""
+msgstr "Henti Major"
 
 #: index.html:380 tablet7in.html:475
 msgid "Minor Standstill"
-msgstr ""
+msgstr "Henti Minor"
 
 #: index.html:389 tablet7in.html:484
 msgid "Current Planet:"
-msgstr ""
+msgstr "Planet Semasa"
 
 #: index.html:521 tablet7in.html:610
 msgid "Bright Nebulae"
-msgstr ""
+msgstr "Nebula Cerah"
 
 #: index.html:522 tablet7in.html:611
 msgid "Dark Nebulae"
-msgstr ""
+msgstr "Nebula Gelap"
 
 #: index.html:523 tablet7in.html:612
 msgid "Planetary Nebulae"
-msgstr ""
+msgstr "Nebula Planet"
 
 #: index.html:532 tablet7in.html:621
 msgid "Labels and markers"
-msgstr ""
+msgstr "Label dan penanda"
 
 #: index.html:566 tablet7in.html:655
 msgid "Show illumination"
-msgstr ""
+msgstr "Tunjuk pencahayaan"
 
 #: index.html:571 tablet7in.html:661
 msgid "Current landscape"
-msgstr ""
+msgstr "Landskap semasa"
 
 #: index.html:583 tablet7in.html:674
 msgid "Show lines with thickness"
-msgstr ""
+msgstr "Tunjuk garisan dengan ketebalan"
 
 #: index.html:588 tablet7in.html:679
 msgid "Show asterisms with thickness"
-msgstr ""
+msgstr "Tunjuk asterisme dengan ketebalan"
 
 #: index.html:592 tablet7in.html:683
 msgid "Show ray helpers with thickness"
-msgstr ""
+msgstr "Tunjuk pembantu sinar dengan ketebalan"
 
 #: index.html:602 tablet7in.html:695
 msgid "Constellation selection isolated"
-msgstr ""
+msgstr "Pemilihan terpencil buruj"
 
 #: index.html:606 tablet7in.html:699
 msgid "Current sky culture"
-msgstr ""
+msgstr "Peribudaya semasa"
 
 #: index.html:619 tablet7in.html:724
 msgid "Active script:"
-msgstr ""
+msgstr "Skrip aktif:"
 
 #: index.html:620 tablet7in.html:725
 msgid "Run selected script"
-msgstr ""
+msgstr "Jalankan skrip terpilih"
 
 #: index.html:620 tablet7in.html:725
 msgid "Stop current script"
-msgstr ""
+msgstr "Henti skrip terpilih"
 
 #: index.html:625 tablet7in.html:41 tablet7in.html:709
 msgid "Actions"
-msgstr ""
+msgstr "Tindakan"
 
 #: index.html:629 tablet7in.html:713
 msgid "Run/toggle action"
-msgstr ""
+msgstr "Jalan/togol tindakan"
 
 #: index.html:640 tablet7in.html:748
 msgid "Planet map"
-msgstr ""
+msgstr "Peta planet"
 
 #: index.html:641 tablet7in.html:749
 msgid "Planet map pointer"
-msgstr ""
+msgstr "Penunjuk peta planet"
 
 #: index.html:645 tablet7in.html:753
 msgid "Type to search location"
-msgstr ""
+msgstr "Taip untuk gelintar lokasi"
 
 #: index.html:674 tablet7in.html:782
 msgid "Interaction"
-msgstr ""
+msgstr "Interaksi"
 
 #: index.html:675 tablet7in.html:783
 msgid "Current scene:"
-msgstr ""
+msgstr "Pandangan semasa:"
 
 #: index.html:678 tablet7in.html:786
 msgid "View controls"
-msgstr ""
+msgstr "Kawalan pandangan"
 
 #: index.html:684 tablet7in.html:792
 msgid "Movement controls"
-msgstr ""
+msgstr "Kawalan pergerakan"
 
 #: index.html:696 tablet7in.html:804
 msgid "Torchlight"
-msgstr ""
+msgstr "Lampu Suluh"
 
 #: index.html:703 tablet7in.html:811
 msgid "Scene selection"
-msgstr ""
+msgstr "Pemilihan pandangan"
 
 #: index.html:707 tablet7in.html:815
 msgid "Load selected scene"
-msgstr ""
+msgstr "Muat pandangan terpilih"
 
 #: index.html:731 tablet7in.html:840
 msgid "No response from server"
-msgstr ""
+msgstr "Tiada respon daripada pelayan"
 
 #: index.html:732 tablet7in.html:841
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
+"Tiada respon daripada pelayan dalam tempoh %1 saat. Adakah Stellarium masih "
+"berjalan?"
 
 #: tablet7in.html:32
 msgid "Time Jump"
-msgstr ""
+msgstr "Lompat Waktu"
 
 #: tablet7in.html:37
 msgid "Grids"
-msgstr ""
+msgstr "Grid"
 
 #: tablet7in.html:97
 msgid "Up/Left"
-msgstr ""
+msgstr "Atas/Kiri"
 
 #: tablet7in.html:97
 msgid "Up"
-msgstr ""
+msgstr "Atas"
 
 #: tablet7in.html:97
 msgid "Up/Right"
-msgstr ""
+msgstr "Atas/Kanan"
 
 #: tablet7in.html:97
 msgid "Left"
-msgstr ""
+msgstr "Kiri"
 
 #: tablet7in.html:97
 msgid "Focus on selected object"
-msgstr ""
+msgstr "Fokus pada objek terpilih"
 
 #: tablet7in.html:97
 msgid "Focus on selection"
-msgstr ""
+msgstr "Fokus pada pemilihan"
 
 #: tablet7in.html:97
 msgid "Right"
-msgstr ""
+msgstr "Kanan"
 
 #: tablet7in.html:97
 msgid "Down/Left"
-msgstr ""
+msgstr "Bawah/Kiri"
 
 #: tablet7in.html:97
 msgid "Down"
-msgstr ""
+msgstr "Bawah"
 
 #: tablet7in.html:97
 msgid "Down/Right"
-msgstr ""
+msgstr "Bawah/Kanan"
 
 #: tablet7in.html:266
 msgid "Sirius"
-msgstr ""
+msgstr "Sirius"
 
 #: tablet7in.html:267
 msgid "Arcturus"
-msgstr ""
+msgstr "Arcturus"
 
 #: tablet7in.html:268
 msgid "Capella"
-msgstr ""
+msgstr "Capella"
 
 #: tablet7in.html:269
 msgid "Vega"
-msgstr ""
+msgstr "Vega"
 
 #: tablet7in.html:270
 msgid "Deneb"
-msgstr ""
+msgstr "Deneb"
 
 #: tablet7in.html:271
 msgid "Altair"
-msgstr ""
+msgstr "Altair"
 
 #: tablet7in.html:272
 msgid "Andromeda Galaxy"
-msgstr ""
+msgstr "Bima Sakti Puteri Teratai (Andromeda)"
 
 #: tablet7in.html:273
 msgid "Hercules Cluster"
-msgstr ""
+msgstr "Gugusan Aljati (Hercules)"
 
 #: tablet7in.html:274
 msgid "Orion Nebula"
-msgstr ""
+msgstr "Nebula Belantik (Orion)"
 
 #: tablet7in.html:275
 msgid "Eta Carinae Nebula"
-msgstr ""
+msgstr "Nebula Eta Carinae"
 
 #: tablet7in.html:276
 msgid "47 Tucanae Cluster"
-msgstr ""
+msgstr "Gugusan Tucanae 47"
 
 #: tablet7in.html:277
 msgid "Aries"
-msgstr ""
+msgstr "Hamal (Aries)"
 
 #: tablet7in.html:278
 msgid "Taurus"
-msgstr ""
+msgstr "Lembu Jantan (Taurus)"
 
 #: tablet7in.html:279
 msgid "Gemini"
-msgstr ""
+msgstr "Jauza (Germini)"
 
 #: tablet7in.html:280
 msgid "Cancer"
-msgstr ""
+msgstr "Sarta (Cancer)"
 
 #: tablet7in.html:281
 msgid "Leo"
-msgstr ""
+msgstr "Asad (Leo)"
 
 #: tablet7in.html:282
 msgid "Virgo"
-msgstr ""
+msgstr "Perawan (Virgo)"
 
 #: tablet7in.html:283
 msgid "Libra"
-msgstr ""
+msgstr "Mizan (Libra)"
 
 #: tablet7in.html:284
 msgid "Scorpius"
-msgstr ""
+msgstr "Kala (Scorpius)"
 
 #: tablet7in.html:285
 msgid "Sagittarius"
-msgstr ""
+msgstr "Kaus (Sagittarius)"
 
 #: tablet7in.html:286
 msgid "Capricornus"
-msgstr ""
+msgstr "Kambing Duyung (Capricornus)"
 
 #: tablet7in.html:287
 msgid "Aquarius"
-msgstr ""
+msgstr "Timba (Aquarius)"
 
 #: tablet7in.html:288
 msgid "Pisces"
-msgstr ""
+msgstr "Ikan (Pices)"
 
 #: tablet7in.html:733
 msgid "Favorites"
-msgstr ""
+msgstr "Kegemaran"
 
 #: tablet7in.html:735
 msgid "Show 1"
-msgstr ""
+msgstr "Tunjuk 1"
 
 #: tablet7in.html:736
 msgid "Remove Labels and Images"
-msgstr ""
+msgstr "Buang Label dan Imej"
 
 #: tablet7in.html:736
 msgid "Cleanup Screen"
-msgstr ""
+msgstr "Bersihkan Skrin"

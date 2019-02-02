@@ -5,15 +5,17 @@
 # 
 # Translators:
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2019
+# Luigi Ghia <viarigi@yahoo.it>, 2019
+# Giuseppe Putzolu <giuseppe.putzolu@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-01-20 08:50+0700\n"
+"POT-Creation-Date: 2019-01-21 19:37+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2019\n"
+"Last-Translator: Giuseppe Putzolu <giuseppe.putzolu@gmail.com>, 2019\n"
 "Language-Team: Italian (https://www.transifex.com/stellarium/teams/80998/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,11 +25,11 @@ msgstr ""
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
-msgstr ""
+msgstr "Il Jack Bennett Catalog del Southern Deep-Sky Objects"
 
 #: scripts/bennett.ssc:48 scripts/best_ngc.ssc:27 scripts/binosky.ssc:20
 msgid "objects in all"
-msgstr ""
+msgstr "oggetti in tutto"
 
 #: scripts/best_ngc.ssc:26
 msgid "Best objects in the New General Catalog"
@@ -39,11 +41,11 @@ msgstr "Oggetto #"
 
 #: scripts/binocular_highlights.ssc:12
 msgid "Chapter 1"
-msgstr ""
+msgstr "Capitolo 1"
 
 #: scripts/binocular_highlights.ssc:12
 msgid "December to February"
-msgstr ""
+msgstr "Da Dicembre a Febbraio"
 
 #: scripts/binocular_highlights.ssc:13
 msgid "Kemble's Cascade"
@@ -51,23 +53,27 @@ msgstr "Cascata di Kemble"
 
 #: scripts/binocular_highlights.ssc:13
 msgid "Kemble's Cascade is visible even in light-polluted skies"
-msgstr ""
+msgstr "Kemble's Cascade è visibile anche in cieli inquinati dalla luce"
 
 #: scripts/binocular_highlights.ssc:14
 msgid "The Glorious Double Cluster"
-msgstr ""
+msgstr "Il Glorioso Doppio Ammasso"
+
+#: scripts/binocular_highlights.ssc:14
+msgid "NGC 884 and NGC 869"
+msgstr "NGC 884 e NGC 869"
 
 #: scripts/binocular_highlights.ssc:15
 msgid "The Alpha Persei Association"
-msgstr ""
+msgstr "The Alpha Persei Association"
 
 #: scripts/binocular_highlights.ssc:16
 msgid "M34: A True Binocular Cluster"
-msgstr ""
+msgstr "M34: Un vero Cluster Binoculare"
 
 #: scripts/binocular_highlights.ssc:17
 msgid "Watching the Demon Star"
-msgstr ""
+msgstr "Guardando Demon Star"
 
 #: scripts/binocular_highlights.ssc:18
 msgid "The Pleiades"
@@ -75,424 +81,542 @@ msgstr "Le Pleiadi"
 
 #: scripts/binocular_highlights.ssc:19
 msgid "Corralling the Hyades"
-msgstr ""
+msgstr "Radunando le  Iadi"
 
 #: scripts/binocular_highlights.ssc:20
 msgid "NGC 1647: The Crab Cluster"
-msgstr ""
+msgstr "NGC 1647: Il Crab Cluster"
 
 #: scripts/binocular_highlights.ssc:21
+msgid "Messier's Number One"
+msgstr "Il Numero Uno di Messier"
+
+#: scripts/binocular_highlights.ssc:22
 msgid "Auriga's Messier Clusters"
-msgstr ""
+msgstr "L'Ammasso Messier di Auriga"
 
-#: scripts/binocular_highlights.ssc:21
+#: scripts/binocular_highlights.ssc:22
 msgid "M36 and M38"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:22
-msgid "Another Double Cluster"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:22
-msgid "M35 and NGC 2158"
-msgstr ""
+msgstr "M36 e M38"
 
 #: scripts/binocular_highlights.ssc:23
-msgid "Golden Betelgeuse"
-msgstr ""
+msgid "Another Double Cluster"
+msgstr "Un altro Doppio Ammasso"
+
+#: scripts/binocular_highlights.ssc:23
+msgid "M35 and NGC 2158"
+msgstr "M35 e NGC 2158"
 
 #: scripts/binocular_highlights.ssc:24
+msgid "Golden Betelgeuse"
+msgstr "Betelgeuse Dorato"
+
+#: scripts/binocular_highlights.ssc:25
+msgid "Orion Extras"
+msgstr "Orion Extra"
+
+#: scripts/binocular_highlights.ssc:26
 msgid "Orion's Sword"
 msgstr "Spada di Orione"
 
-#: scripts/binocular_highlights.ssc:24
-msgid "NGC 1981, M42, M43 and Struve 747"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:25
-msgid "The Overlooked Open Cluster: M41"
-msgstr ""
-
 #: scripts/binocular_highlights.ssc:26
-msgid "M50 in a Stream of Starlight"
-msgstr ""
+msgid "NGC 1981, M42, M43 and Struve 747"
+msgstr "NGC 1981, M42, M43 e Struve 747"
 
 #: scripts/binocular_highlights.ssc:27
-msgid "M46 and M47: A Celestial Odd Couple"
-msgstr ""
+msgid "The Overlooked Open Cluster: M41"
+msgstr "L'Ammasso Aperto Dimenticato: M41"
 
 #: scripts/binocular_highlights.ssc:28
-msgid "Two Southern Delights"
-msgstr ""
+msgid "M50 in a Stream of Starlight"
+msgstr "M50 in un Flusso di Luce Stellare"
 
 #: scripts/binocular_highlights.ssc:29
-msgid "Chapter 2"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:29
-msgid "March to May"
-msgstr ""
+msgid "M46 and M47: A Celestial Odd Couple"
+msgstr "M46 e M47: Una strana coppia celeste"
 
 #: scripts/binocular_highlights.ssc:30
+msgid "Collinders in Canis Minor"
+msgstr "Collinders in Canis Minor"
+
+#: scripts/binocular_highlights.ssc:30
+msgid "Cr 132 and Cr 140"
+msgstr "Cr 132 e Cr 140"
+
+#: scripts/binocular_highlights.ssc:31
+msgid "Two Southern Delights"
+msgstr "Due delizie del Sud"
+
+#: scripts/binocular_highlights.ssc:31
+msgid "NGC 2477 and NGC 2451"
+msgstr "NGC 2477 e NGC 2451"
+
+#: scripts/binocular_highlights.ssc:32
+msgid "Chapter 2"
+msgstr "Capitolo 2"
+
+#: scripts/binocular_highlights.ssc:32
+msgid "March to May"
+msgstr "Da Marzo a Maggio"
+
+#: scripts/binocular_highlights.ssc:33
 msgid "The Engagement Ring"
 msgstr "Anello di fidanzamento"
 
-#: scripts/binocular_highlights.ssc:31
-msgid "M101 in the Mind's Eye"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:32
-msgid "A Star-Hop to M51"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:33
-msgid "Galaxy Season"
-msgstr ""
+#: scripts/binocular_highlights.ssc:34
+msgid "The Power of Power"
+msgstr "Il Potere del Potere"
 
 #: scripts/binocular_highlights.ssc:34
-msgid "Steady on Galaxy M94"
-msgstr ""
+msgid "M81 and M82"
+msgstr "M81 e M82"
 
 #: scripts/binocular_highlights.ssc:35
-msgid "Globular Cluster M3"
-msgstr ""
+msgid "M101 in the Mind's Eye"
+msgstr "M101 nell'Occhio della Mente"
 
 #: scripts/binocular_highlights.ssc:36
-msgid "In and Around Melotte 111"
-msgstr ""
+msgid "A Star-Hop to M51"
+msgstr "Una Star-Hop in M51"
 
 #: scripts/binocular_highlights.ssc:37
-msgid "A Trio of Doubles in Bootes"
-msgstr ""
+msgid "Galaxy Season"
+msgstr "Galassia Stagione"
 
 #: scripts/binocular_highlights.ssc:38
-msgid "R Cor Bor's Vanishing Act"
-msgstr ""
+msgid "Steady on Galaxy M94"
+msgstr "Stabile sulla Galassia M94"
 
 #: scripts/binocular_highlights.ssc:39
-msgid "Two Doubles in Cancer"
-msgstr ""
+msgid "Globular Cluster M3"
+msgstr "Ammasso Globulare M3"
 
 #: scripts/binocular_highlights.ssc:40
+msgid "In and Around Melotte 111"
+msgstr "In and Around Melotte 111"
+
+#: scripts/binocular_highlights.ssc:41
+msgid "A Trio of Doubles in Bootes"
+msgstr "Un Trio di Doppie in Bootes"
+
+#: scripts/binocular_highlights.ssc:42
+msgid "R Cor Bor's Vanishing Act"
+msgstr "R Cor Bor's Vanishing Act"
+
+#: scripts/binocular_highlights.ssc:43
+msgid "Two Doubles in Cancer"
+msgstr "Due Doppie nel Cancro"
+
+#: scripts/binocular_highlights.ssc:43
+msgid "Rho and Iota Cancri"
+msgstr "Rho e Iota Cancri"
+
+#: scripts/binocular_highlights.ssc:44
 msgid "The Beehive Cluster"
 msgstr "Ammasso Alveare"
 
-#: scripts/binocular_highlights.ssc:41
+#: scripts/binocular_highlights.ssc:45
 msgid "A Visit to NGC 2903"
-msgstr ""
+msgstr "Una Visita a NGC 2903"
 
-#: scripts/binocular_highlights.ssc:42 scripts/binocular_highlights.ssc:43
+#: scripts/binocular_highlights.ssc:46 scripts/binocular_highlights.ssc:47
 msgid "A Pair of Leo Doubles"
-msgstr ""
+msgstr "Un Paio di Doppie del Leone"
 
-#: scripts/binocular_highlights.ssc:42
+#: scripts/binocular_highlights.ssc:46
 msgid "Tau Leonis"
-msgstr ""
+msgstr "Tau Leonis"
 
-#: scripts/binocular_highlights.ssc:43
+#: scripts/binocular_highlights.ssc:47
 msgid "Alpha Leonis (Regulus)"
-msgstr ""
+msgstr "Alpha Leonis (Regolo)"
 
-#: scripts/binocular_highlights.ssc:44
+#: scripts/binocular_highlights.ssc:48
 msgid "Star Cluster M48 in Hydra"
-msgstr ""
+msgstr "Ammasso Stellare M48 in Idra"
 
-#: scripts/binocular_highlights.ssc:45
+#: scripts/binocular_highlights.ssc:49
 msgid "U Hydra"
-msgstr ""
+msgstr "U Hydra"
 
-#: scripts/binocular_highlights.ssc:45
+#: scripts/binocular_highlights.ssc:49
 msgid "Carbon star"
-msgstr ""
+msgstr "Stella di Carbonio"
 
-#: scripts/binocular_highlights.ssc:46
+#: scripts/binocular_highlights.ssc:50
 msgid "V Hydra"
-msgstr ""
+msgstr "V Hydra"
 
-#: scripts/binocular_highlights.ssc:46
+#: scripts/binocular_highlights.ssc:50
 msgid ""
 "It has been ranging from magnitude 6 to 10 with a period of about 550 days."
 msgstr ""
-
-#: scripts/binocular_highlights.ssc:47
-msgid "M104 and the Great Beyond"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:48
-msgid "Ancient Globular M5"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:49
-msgid "Chapter 3"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:49
-msgid "June to August"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:50
-msgid "Resolving Nu Draconis"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:50
-msgid "Nu Draconis's components separated by 62\""
-msgstr ""
+"Ha spaziato dalla magnitudine 6 alla 10 con un periodo di circa 550 giorni."
 
 #: scripts/binocular_highlights.ssc:51
-msgid "The Great Hercules Cluster"
-msgstr ""
+msgid "M104 and the Great Beyond"
+msgstr "M104 e il Grande Oltre"
 
 #: scripts/binocular_highlights.ssc:52
-msgid "A Colorful Cygnus Triple"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:53 scripts/binocular_highlights.ssc:54
-#: scripts/binocular_highlights.ssc:55
-msgid "Three Cygnus Doubles"
-msgstr ""
+msgid "Ancient Globular M5"
+msgstr "Antico Globulare M5"
 
 #: scripts/binocular_highlights.ssc:53
-msgid "Mu Cygni (Its stars are separated by a generous 198\")"
-msgstr ""
+msgid "Magnificent Omega Centauri"
+msgstr "Magnifica Omega Centauri"
 
 #: scripts/binocular_highlights.ssc:54
-msgid "79 Cygni (Its stars are separated by 150\")"
-msgstr ""
+msgid "Chapter 3"
+msgstr "Capitolo 3"
+
+#: scripts/binocular_highlights.ssc:54
+msgid "June to August"
+msgstr "Da Giugno ad Agosto"
 
 #: scripts/binocular_highlights.ssc:55
-msgid "61 Cygni (Its stars are separated by 31\")"
-msgstr ""
+msgid "Resolving Nu Draconis"
+msgstr "Risolve Nu Draconis"
+
+#: scripts/binocular_highlights.ssc:55
+msgid "Nu Draconis's components are separated by 62\""
+msgstr "I componenti di Nu Draconis sono separati di 62\""
 
 #: scripts/binocular_highlights.ssc:56
-msgid "Open Cluster M39 in Cygnus"
-msgstr ""
+msgid "The Great Hercules Cluster"
+msgstr "Il Grande Ammasso di Ercole"
 
 #: scripts/binocular_highlights.ssc:57
-msgid "The Road to the Cocoon"
-msgstr ""
+msgid "Double Delight Albireo"
+msgstr "Doppia Meraviglia Albireo"
+
+#: scripts/binocular_highlights.ssc:57
+msgid "Albireo's components are separated by 35\""
+msgstr "I componenti di Albireo sono separati di 35\" "
 
 #: scripts/binocular_highlights.ssc:58
-msgid "Summer's Other Triangle"
-msgstr ""
+msgid "A Colorful Cygnus Triple"
+msgstr "La Cororata tripla del Cigno"
+
+#: scripts/binocular_highlights.ssc:58
+msgid "Omicron1, Omicron2 and 30 Cygni"
+msgstr "Omicron1, Omicron2 e 30 Cygni"
+
+#: scripts/binocular_highlights.ssc:59 scripts/binocular_highlights.ssc:60
+#: scripts/binocular_highlights.ssc:61
+msgid "Three Cygnus Doubles"
+msgstr "Le tre doppie del Cigno"
 
 #: scripts/binocular_highlights.ssc:59
-msgid "M57 and Expectations"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:59
-msgid "Difficult deep-sky object for tests your observing skills..."
-msgstr ""
+msgid "Mu Cygni (Its stars are separated by a generous 198\")"
+msgstr "Mu Cygni (le sue stelle sono separate da un generoso 198\")"
 
 #: scripts/binocular_highlights.ssc:60
-msgid "Splendid Sagitta"
-msgstr ""
+msgid "79 Cygni (Its stars are separated by 150\")"
+msgstr "79 Cygni (le sue stelle sono separate da 150\")"
 
 #: scripts/binocular_highlights.ssc:61
-msgid "M27 in Vulpecula"
-msgstr ""
+msgid "61 Cygni (Its stars are separated by 31\")"
+msgstr "61 Cygni (le sue stelle sono separate da 31\")"
 
 #: scripts/binocular_highlights.ssc:62
-msgid "A Milky Way Surprise"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:62
-msgid "Brocchi's Cluster (Cr 399) or Coathanger"
-msgstr ""
+msgid "Open Cluster M39 in Cygnus"
+msgstr "Ammasso Aperto M39 in Cygnus"
 
 #: scripts/binocular_highlights.ssc:63
-msgid "M11 in Scutum"
-msgstr ""
+msgid "The Road to the Cocoon"
+msgstr "La Strada per il Bozzolo"
+
+#: scripts/binocular_highlights.ssc:63
+msgid "IC 5146, B168 and M39"
+msgstr "IC 5146, B168 e M39"
 
 #: scripts/binocular_highlights.ssc:64
-msgid "IC 4756 in Serpens"
-msgstr ""
+msgid "Summer's Other Triangle"
+msgstr "Altro Triangolo Estivo"
+
+#: scripts/binocular_highlights.ssc:64
+msgid "Epsilon, Zeta and Alpha Lyrae"
+msgstr "Epsilon, Zeta e Alpha Lyrae"
 
 #: scripts/binocular_highlights.ssc:65
-msgid "Three Star Clusters in Ophiuchus"
+msgid "M57 and Expectations"
+msgstr "M57 e Asptettative"
+
+#: scripts/binocular_highlights.ssc:65
+msgid "Difficult deep-sky object for tests your observing skills..."
 msgstr ""
+"Difficile oggetto del cielo profondo per testare le tue capacità di "
+"osservazione..."
 
 #: scripts/binocular_highlights.ssc:66
-msgid "IC 4665 in Ophiuchus"
-msgstr ""
+msgid "Splendid Sagitta"
+msgstr "Splendido Sagitta"
+
+#: scripts/binocular_highlights.ssc:66
+msgid "M71 between Gamma and Delta Sagittae"
+msgstr "M71 tra Gamma e Delta Sagittae"
 
 #: scripts/binocular_highlights.ssc:67
-msgid "A Pair of Ophiuchus Globulars"
-msgstr ""
-
-#: scripts/binocular_highlights.ssc:67
-msgid "M10 and M12"
-msgstr ""
+msgid "M27 in Vulpecula"
+msgstr "M27 in Vulpecula"
 
 #: scripts/binocular_highlights.ssc:68
+msgid "A Milky Way Surprise"
+msgstr "Una Sopresa della Via Lattea"
+
+#: scripts/binocular_highlights.ssc:68
+msgid "Brocchi's Cluster (Cr 399) or Coathanger"
+msgstr "Ammasso Brocchi (Cr 399) o Coathanger"
+
+#: scripts/binocular_highlights.ssc:69
+msgid "Barnard's \"E\""
+msgstr "Barnard's \"E\""
+
+#: scripts/binocular_highlights.ssc:69
+msgid "B143 near Altair"
+msgstr "B143 vicina ad Altair"
+
+#: scripts/binocular_highlights.ssc:70
+msgid "M11 in Scutum"
+msgstr "M11 in Scutum"
+
+#: scripts/binocular_highlights.ssc:70
+msgid "Also known as the Wild Duck Cluster"
+msgstr "Conosciuto anche come Ammasso Anatra Selvatica"
+
+#: scripts/binocular_highlights.ssc:71
+msgid "IC 4756 in Serpens"
+msgstr "IC 4756 in Serpens"
+
+#: scripts/binocular_highlights.ssc:72
+msgid "Three Star Clusters in Ophiuchus"
+msgstr "Ammasso Tre Stelle in Ofiuco"
+
+#: scripts/binocular_highlights.ssc:73
+msgid "IC 4665 in Ophiuchus"
+msgstr "IC 4665 in Ophiuchus"
+
+#: scripts/binocular_highlights.ssc:74
+msgid "A Pair of Ophiuchus Globulars"
+msgstr "Un Paio di Globulari in Ofiuco"
+
+#: scripts/binocular_highlights.ssc:74
+msgid "M10 and M12"
+msgstr "M10 e M12"
+
+#: scripts/binocular_highlights.ssc:75
 msgid "Rho Ophiuchi"
 msgstr "Rho Ophiuchi"
 
-#: scripts/binocular_highlights.ssc:69
-msgid "A Solar Twin"
-msgstr ""
+#: scripts/binocular_highlights.ssc:75
+msgid "Rho itself is a pretty triple star"
+msgstr "Rho stesso è una bella stella tripla"
 
-#: scripts/binocular_highlights.ssc:69
+#: scripts/binocular_highlights.ssc:76
+msgid "A Solar Twin"
+msgstr "Un Gemello Solare"
+
+#: scripts/binocular_highlights.ssc:76
 msgid "18 Scorpii"
 msgstr "18 Scorpii"
 
-#: scripts/binocular_highlights.ssc:70
+#: scripts/binocular_highlights.ssc:77
 msgid "A Double for Steady Hands"
-msgstr ""
+msgstr "Una Doppia per Mani Ferme"
 
-#: scripts/binocular_highlights.ssc:71
+#: scripts/binocular_highlights.ssc:77
+msgid "Nu Scorpii components are separated by 41\""
+msgstr "I componenti di Nu Scorpii sono separati da 41\""
+
+#: scripts/binocular_highlights.ssc:78
 msgid "Globular Cluster Season"
-msgstr ""
+msgstr "Ammasso Globulare Stagione"
 
-#: scripts/binocular_highlights.ssc:71
+#: scripts/binocular_highlights.ssc:78
 msgid "M4 and M80"
-msgstr ""
+msgstr "M4 e M80"
 
-#: scripts/binocular_highlights.ssc:72
+#: scripts/binocular_highlights.ssc:79
+msgid "A Gorgeous Duo"
+msgstr "Un fantastico Duo"
+
+#: scripts/binocular_highlights.ssc:79
+msgid "M6 and M7"
+msgstr "M6 e M7"
+
+#: scripts/binocular_highlights.ssc:80
 msgid "A False Comet"
-msgstr ""
+msgstr "Una Falsa Cometa"
 
-#: scripts/binocular_highlights.ssc:72
+#: scripts/binocular_highlights.ssc:80
 msgid "Cr 316, NGC 6231 and NGC 6242"
-msgstr ""
+msgstr "Cr 316, NGC 6231 e NGC 6242"
 
-#: scripts/binocular_highlights.ssc:73
+#: scripts/binocular_highlights.ssc:81
+msgid "Summer Star Cloud"
+msgstr "Summer Star Cloud"
+
+#: scripts/binocular_highlights.ssc:82
+msgid "Milky Way Messiers"
+msgstr "Milky Way Messiers"
+
+#: scripts/binocular_highlights.ssc:82
+msgid "M16, M17 and M18"
+msgstr "M16, M17 e M18"
+
+#: scripts/binocular_highlights.ssc:83
 msgid "The Lagoon Nebula"
 msgstr "Nebulosa Laguna"
 
-#: scripts/binocular_highlights.ssc:74
-msgid "M22: A Gen of a Globular"
-msgstr ""
+#: scripts/binocular_highlights.ssc:84
+msgid "M22: A Gem of a Globular"
+msgstr "M22: Un Gem di un Globulare"
 
-#: scripts/binocular_highlights.ssc:74
+#: scripts/binocular_highlights.ssc:84
 msgid "M22 and M28"
-msgstr ""
+msgstr "M22 e M28"
 
-#: scripts/binocular_highlights.ssc:75
+#: scripts/binocular_highlights.ssc:85
+msgid "A Lonesome Messier"
+msgstr "Un solitario Messier"
+
+#: scripts/binocular_highlights.ssc:86
 msgid "Chapter 4"
-msgstr ""
+msgstr "Capitolo 4"
 
-#: scripts/binocular_highlights.ssc:75
+#: scripts/binocular_highlights.ssc:86
 msgid "September to November"
-msgstr ""
+msgstr "Da Settembre a Novembre"
 
-#: scripts/binocular_highlights.ssc:76
+#: scripts/binocular_highlights.ssc:87
 msgid "Two Lacerta Clusters"
-msgstr ""
+msgstr "Due Ammassi Lucertola"
 
-#: scripts/binocular_highlights.ssc:76
+#: scripts/binocular_highlights.ssc:87
 msgid "NGC 7209 and NGC 7243"
-msgstr ""
+msgstr "NGC 7209 e NGC 7243"
 
-#: scripts/binocular_highlights.ssc:77
+#: scripts/binocular_highlights.ssc:88
 msgid "NGC 6939 and NGC 6946"
-msgstr ""
+msgstr "NGC 6939 e NGC 6946"
 
-#: scripts/binocular_highlights.ssc:78
+#: scripts/binocular_highlights.ssc:89
 msgid "Magnificent Mu Cephei"
-msgstr ""
+msgstr "Magnifico Mu Cephei"
 
-#: scripts/binocular_highlights.ssc:79
+#: scripts/binocular_highlights.ssc:89
+msgid "A semiregular variable star"
+msgstr "Una stella variabile semiregolare"
+
+#: scripts/binocular_highlights.ssc:90
 msgid "Watching Delta Cephei"
-msgstr ""
+msgstr "Guardando Delta Cephei"
 
-#: scripts/binocular_highlights.ssc:79
+#: scripts/binocular_highlights.ssc:90
 msgid "Well-known variable star and striking double also"
-msgstr ""
+msgstr "Stella doppia e  variabile ben nota e degna di nota"
 
-#: scripts/binocular_highlights.ssc:80
+#: scripts/binocular_highlights.ssc:91
 msgid "M52 in Cassiopeia"
-msgstr ""
+msgstr "M52 in Cassiopeia"
 
-#: scripts/binocular_highlights.ssc:81
+#: scripts/binocular_highlights.ssc:92
 msgid "Galactic Cluster NGC 7789"
-msgstr ""
+msgstr "Ammasso Galattico NGC 7789"
 
-#: scripts/binocular_highlights.ssc:82
+#: scripts/binocular_highlights.ssc:93
 msgid "The E.T. Cluster"
 msgstr "Ammasso E.T."
 
-#: scripts/binocular_highlights.ssc:83
+#: scripts/binocular_highlights.ssc:94
 msgid "Open Cluster M103"
-msgstr ""
+msgstr "Ammasso Aperto M103"
 
-#: scripts/binocular_highlights.ssc:84
+#: scripts/binocular_highlights.ssc:95
 msgid "Magnificent M31"
-msgstr ""
+msgstr "Magnifica M31"
 
-#: scripts/binocular_highlights.ssc:85
+#: scripts/binocular_highlights.ssc:96
 msgid "Andromeda's Companions"
-msgstr ""
+msgstr "Compagni di Andromeda"
 
-#: scripts/binocular_highlights.ssc:85
+#: scripts/binocular_highlights.ssc:96
 msgid "M32 and M110"
-msgstr ""
+msgstr "M32 e M110"
 
-#: scripts/binocular_highlights.ssc:86
+#: scripts/binocular_highlights.ssc:97
 msgid "Ancient Cluster NGC 752"
-msgstr ""
+msgstr "Antico Ammasso NGC 752"
 
-#: scripts/binocular_highlights.ssc:87
+#: scripts/binocular_highlights.ssc:98
+msgid "Triangulum's Treasure"
+msgstr "Tesoro del Triangolo"
+
+#: scripts/binocular_highlights.ssc:99
 msgid "TX Piscium"
 msgstr "TX Piscium"
 
-#: scripts/binocular_highlights.ssc:87
+#: scripts/binocular_highlights.ssc:99
 msgid "Carbon star, which varies slightly from magnitude 4.8 to 5.2"
 msgstr ""
+"Stella di carbonio, che varia leggermente dalla magnitudine 4.8 alla 5.2"
 
-#: scripts/binocular_highlights.ssc:88
+#: scripts/binocular_highlights.ssc:100
 msgid "A Farewell to Summer"
-msgstr ""
+msgstr "Un addio all'estate"
 
-#: scripts/binocular_highlights.ssc:89
+#: scripts/binocular_highlights.ssc:101
 msgid "Messier 2 Shining Through"
-msgstr ""
+msgstr "Splendente Attraverso Messier 2"
 
-#: scripts/binocular_highlights.ssc:90
+#: scripts/binocular_highlights.ssc:102
 msgid "The Ghostly Helix Nebula"
-msgstr ""
+msgstr "La Nebulosa Elica Spettrale"
 
-#: scripts/binocular_highlights.ssc:91
+#: scripts/binocular_highlights.ssc:103
 msgid "Challenging NGC 253 and NGC 288"
-msgstr ""
+msgstr "Sfidando NGC 253 e NGC 288"
 
-#: scripts/binocular_highlights.ssc:113
+#: scripts/binocular_highlights.ssc:125
 msgid "Binocular Highlights"
-msgstr ""
+msgstr "Binoculari Evidenziati"
 
-#: scripts/binocular_highlights.ssc:114
+#: scripts/binocular_highlights.ssc:126
 msgid "Look through the Meade 10x50 TravelView Binocular"
-msgstr ""
+msgstr "Guarda attraverso il binocolo TravelView 10x50 Meade"
 
 #: scripts/binosky.ssc:19
 msgid "Binosky: Deep Sky Objects for Binoculars"
-msgstr ""
+msgstr "Binosky: oggetti Deep Sky per binocoli"
 
 #: scripts/double_stars.ssc:28
 msgid "Asterope (21 Tauri and 22 Tauri)"
-msgstr ""
+msgstr "Asterope (21 Tauri e 22 Tauri)"
 
 #: scripts/double_stars.ssc:28
 msgid "2.5 arcminutes (SE)"
-msgstr ""
+msgstr "2.5 arcominuti (SE)"
 
 #: scripts/double_stars.ssc:28
 msgid ""
 "Extremely difficult because of their faintness, separation, and nearby "
 "bright stars"
 msgstr ""
+"Estremamente difficile a causa della loro debolezza, separazione e stelle "
+"luminose vicine"
 
 #: scripts/double_stars.ssc:29
 msgid "Atlas and Pleione (27 Tauri and 28 Tauri)"
-msgstr ""
+msgstr "Atlante e Pleione (27 Tauri e 28 Tauri)"
 
 #: scripts/double_stars.ssc:29
 msgid "5 arcminutes (N)"
-msgstr ""
+msgstr "5 arcominuti (N)"
 
 #: scripts/double_stars.ssc:29 scripts/double_stars.ssc:35
 #: scripts/double_stars.ssc:41 scripts/double_stars.ssc:43
 msgid "Moderately difficult"
-msgstr ""
+msgstr "Moderatamente difficile"
 
 #: scripts/double_stars.ssc:30
 msgid "θ Tauri"
@@ -500,12 +624,12 @@ msgstr "θ Tauri"
 
 #: scripts/double_stars.ssc:30
 msgid "5.6 arcminutes (NNW)"
-msgstr ""
+msgstr "5.6 arcominuti (NNW)"
 
 #: scripts/double_stars.ssc:30 scripts/double_stars.ssc:42
 #: scripts/double_stars.ssc:47
 msgid "Showcase naked-eye double!"
-msgstr ""
+msgstr "Mostra Doppia a occhio nudo!"
 
 #: scripts/double_stars.ssc:31
 msgid "δ Tauri"
@@ -513,11 +637,11 @@ msgstr "δ Tauri"
 
 #: scripts/double_stars.ssc:31
 msgid "δ1-δ2: 17.6 arcseconds (ESE); δ1-δ3: 43.25 arcseconds (NE)"
-msgstr ""
+msgstr "δ1-δ2: 17.6 arcosecondi (ESE); δ1-δ3: 43.25 arcosecondi (NE)"
 
 #: scripts/double_stars.ssc:31
 msgid "Easy naked-eye triple"
-msgstr ""
+msgstr "Semplice Tripla ad occhio nudo"
 
 #: scripts/double_stars.ssc:32
 msgid "θ Orionis"
@@ -525,23 +649,23 @@ msgstr "θ Orionis"
 
 #: scripts/double_stars.ssc:32
 msgid "2.24 arcminutes (NW)"
-msgstr ""
+msgstr "2.24 arcominuti (NW)"
 
 #: scripts/double_stars.ssc:32
 msgid "Very difficult because of stars and nebulosity in the area"
-msgstr ""
+msgstr "Molto difficile a causa delle stelle e della nebulosità nell'area"
 
 #: scripts/double_stars.ssc:33
 msgid "42 and 45 Orionis"
-msgstr ""
+msgstr "42 e 45 Orionis"
 
 #: scripts/double_stars.ssc:33
 msgid "4.2 arcminutes (ESE)"
-msgstr ""
+msgstr "4.2 arcominuti (ESE)"
 
 #: scripts/double_stars.ssc:33 scripts/double_stars.ssc:34
 msgid "Moderately difficult optical double"
-msgstr ""
+msgstr "Moderatamente difficile doppia ottica"
 
 #: scripts/double_stars.ssc:34
 msgid "ι Orionis"
@@ -549,7 +673,7 @@ msgstr "ι Orionis"
 
 #: scripts/double_stars.ssc:34
 msgid "8 arcminutes (SW)"
-msgstr ""
+msgstr "8 arcominuti (SW)"
 
 #: scripts/double_stars.ssc:35
 msgid "ζ Corvi"
@@ -557,20 +681,20 @@ msgstr "ζ Corvi"
 
 #: scripts/double_stars.ssc:35
 msgid "5.85 arcminutes (WNW)"
-msgstr ""
+msgstr "5.85 arcominuti (WNW)"
 
 #: scripts/double_stars.ssc:36
 msgid "Mizar and Alcor"
-msgstr ""
+msgstr "Mizar e Alcor"
 
 #: scripts/double_stars.ssc:36
 msgid "11.8 arcminutes (ENE)"
-msgstr ""
+msgstr "11.8 arcominuti (ENE)"
 
 #: scripts/double_stars.ssc:36 scripts/double_stars.ssc:44
 #: scripts/double_stars.ssc:45
 msgid "Easy naked-eye double"
-msgstr ""
+msgstr "Semplice doppia a occhio nudo"
 
 #: scripts/double_stars.ssc:37
 msgid "Zubenelgenubi"
@@ -578,11 +702,11 @@ msgstr "Zubenelgenubi"
 
 #: scripts/double_stars.ssc:37
 msgid "3.83 arcminutes (NW)"
-msgstr ""
+msgstr "3.83 arcominuti (NW)"
 
 #: scripts/double_stars.ssc:37
 msgid "Very difficult because of the magnitude difference"
-msgstr ""
+msgstr "Molto difficile a causa della differenza di magnitudine"
 
 #: scripts/double_stars.ssc:38
 msgid "ω Scorpii"
@@ -590,23 +714,23 @@ msgstr "ω Scorpii"
 
 #: scripts/double_stars.ssc:38
 msgid "14.6 arcminutes (SSE)"
-msgstr ""
+msgstr "14.6 arcominuti (SSE)"
 
 #: scripts/double_stars.ssc:38
 msgid "Easy optical double"
-msgstr ""
+msgstr "Seplice ottica doppia"
 
 #: scripts/double_stars.ssc:39
 msgid "λ and υ Scorpii"
-msgstr ""
+msgstr "λ e υ Scorpii"
 
 #: scripts/double_stars.ssc:39
 msgid "36 arcminutes (WSW)"
-msgstr ""
+msgstr "36 arcominuti (WSW)"
 
 #: scripts/double_stars.ssc:39
 msgid "Easy double"
-msgstr ""
+msgstr "Semplcie doppia"
 
 #: scripts/double_stars.ssc:40
 msgid "μ Scorpii"
@@ -614,11 +738,11 @@ msgstr "μ Scorpii"
 
 #: scripts/double_stars.ssc:40
 msgid "5.8 arcminutes (ENE)"
-msgstr ""
+msgstr "5.8 arcominuti (ENE)"
 
 #: scripts/double_stars.ssc:40
 msgid "Showcase double!"
-msgstr ""
+msgstr "Mostra doppia!"
 
 #: scripts/double_stars.ssc:41
 msgid "ζ Scorpii"
@@ -626,7 +750,7 @@ msgstr "ζ Scorpii"
 
 #: scripts/double_stars.ssc:41
 msgid "6.5 arcminutes (W)"
-msgstr ""
+msgstr "6.5 arcominuti (W)"
 
 #: scripts/double_stars.ssc:42
 msgid "ε Lyrae"
@@ -634,7 +758,7 @@ msgstr "ε Lyrae"
 
 #: scripts/double_stars.ssc:42
 msgid "3.5 arcminutes (N)"
-msgstr ""
+msgstr "3.5 arcominuti (N)"
 
 #: scripts/double_stars.ssc:43
 msgid "δ Lyrae"
@@ -642,7 +766,7 @@ msgstr "δ Lyrae"
 
 #: scripts/double_stars.ssc:43
 msgid "10.3 arcminutes (WNW)"
-msgstr ""
+msgstr "10.3 arcominuti (WNW)"
 
 #: scripts/double_stars.ssc:44
 msgid "ν Sagittarii"
@@ -650,27 +774,27 @@ msgstr "ν Sagittarii"
 
 #: scripts/double_stars.ssc:44
 msgid "13.9 arcminutes (ENE)"
-msgstr ""
+msgstr "13.9 arcominuti (ENE)"
 
 #: scripts/double_stars.ssc:45
 msgid "ο1 and ο2 Cygni"
-msgstr ""
+msgstr "ο1 e ο2 Cygni"
 
 #: scripts/double_stars.ssc:45
 msgid "61.3 arcminutes (NNE)"
-msgstr ""
+msgstr "61.3 arcominuti (NNE)"
 
 #: scripts/double_stars.ssc:46
 msgid "ο1 Cygni (ο1 Cygni, 30 Cyg and HD 192579)"
-msgstr ""
+msgstr "ο1 Cygni (ο1 Cygni, 30 Cyg e HD 192579)"
 
 #: scripts/double_stars.ssc:46
 msgid "5.6 arcminutes (NW)"
-msgstr ""
+msgstr "5.6 arcominuti (NW)"
 
 #: scripts/double_stars.ssc:46
 msgid "Moderately difficult optical triple star"
-msgstr ""
+msgstr "Stella tripla ottica moderatamente difficile"
 
 #: scripts/double_stars.ssc:47
 msgid "Algedi"
@@ -678,7 +802,7 @@ msgstr "Algedi"
 
 #: scripts/double_stars.ssc:47
 msgid "6.3 arcminutes (WNW)"
-msgstr ""
+msgstr "6.3 arcominuti (WNW)"
 
 #: scripts/double_stars.ssc:78
 msgid "Separation:"
@@ -689,7 +813,7 @@ msgstr "Separazione:"
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
 #: scripts/morsels_1.ssc:38 scripts/morsels_1.ssc:43
 msgid "Shadows from Io, Ganymede and Callisto"
-msgstr ""
+msgstr "Ombre da Io, Ganimede e Callisto"
 
 #: scripts/morsels_1.ssc:17 scripts/morsels_1.ssc:19 scripts/morsels_1.ssc:20
 #: scripts/morsels_1.ssc:21 scripts/morsels_1.ssc:25 scripts/morsels_1.ssc:26
@@ -698,25 +822,25 @@ msgstr ""
 #: scripts/morsels_1.ssc:39 scripts/morsels_1.ssc:41 scripts/morsels_1.ssc:42
 #: scripts/morsels_1.ssc:44 scripts/morsels_1.ssc:45 scripts/morsels_1.ssc:46
 msgid "Shadows from Io, Europe and Callisto"
-msgstr ""
+msgstr "Ombre da Io, Europa e Callisto"
 
 #: scripts/morsels_1.ssc:24 scripts/morsels_1.ssc:32 scripts/morsels_1.ssc:40
 msgid "Shadows from Europe, Ganymede and Callisto"
-msgstr ""
+msgstr "Ombre da Europa, Ganimede e Callisto"
 
 #: scripts/morsels_1.ssc:60
 msgid "Triple shadow phenomena of the satellites of Jupiter"
-msgstr ""
+msgstr "Fenomeno della tripla ombra dei satelliti di Giove"
 
 #: scripts/morsels_1.ssc:62 scripts/morsels_2.ssc:78 scripts/morsels_3.ssc:52
 #: scripts/morsels_4.ssc:70
 msgid "phenomena in all"
-msgstr ""
+msgstr "fenomeno in tutto"
 
 #: scripts/morsels_1.ssc:77 scripts/morsels_2.ssc:98 scripts/morsels_3.ssc:62
 #: scripts/morsels_4.ssc:81
 msgid "Event #"
-msgstr ""
+msgstr "Evento #"
 
 #: scripts/morsels_1.ssc:78 scripts/morsels_2.ssc:99 scripts/morsels_3.ssc:63
 #: scripts/morsels_4.ssc:82
@@ -733,7 +857,7 @@ msgstr "Giove senza satelliti Galileiani"
 
 #: scripts/morsels_2.ssc:100
 msgid "Limits of the disappearance:"
-msgstr ""
+msgstr "Limiti della scomparsa:"
 
 #: scripts/morsels_3.ssc:50
 msgid "Occultations of bright stars by planets"
@@ -745,57 +869,365 @@ msgstr "Occultazioni a vicenda di pianeti"
 
 #: scripts/supernova.ssc:22
 msgid "Europe, Uraniborg."
-msgstr ""
+msgstr "Europa, Uraniborg."
 
 #: scripts/supernova.ssc:30
 msgid "Evening of 20 October 1572"
-msgstr ""
+msgstr "Sera del 20 ottobre 1572"
 
 #: scripts/supernova.ssc:39
 msgid "Constellation Cassiopeia"
-msgstr ""
+msgstr "Constellazione Cassiopeia"
 
 #: scripts/supernova.ssc:60
 msgid "5 days later..."
-msgstr ""
+msgstr "5 giorni dopo..."
 
 #: scripts/supernova.ssc:66
 msgid "Next 3 days..."
-msgstr ""
+msgstr "Prossimi 3 giorni..."
 
 #: scripts/supernova.ssc:72
 msgid "New star! But people have not seen it yet..."
-msgstr ""
+msgstr "Nuova stella! Ma la gente non l'ha ancora vista..."
 
 #: scripts/supernova.ssc:77
 msgid "Evening of 31 October 1572"
-msgstr ""
+msgstr "Sera del 31 ottobre 1572"
 
 #: scripts/supernova.ssc:85
 msgid "Evening of "
-msgstr ""
+msgstr "Sera del"
 
 #: scripts/supernova.ssc:85
 msgid " November 1572"
-msgstr ""
+msgstr " Novembre 1572"
 
 #: scripts/supernova.ssc:92
 msgid "Hooray! First observations in Korea and Europe."
-msgstr ""
+msgstr "Evviva! Prime osservazioni in Corea e in Europa."
 
 #: scripts/supernova.ssc:100
 msgid "First observations in China."
-msgstr ""
+msgstr "Prime osservazioni in Cina."
 
 #: scripts/supernova.ssc:108
 msgid ""
 "The clouds are gone and Tycho Brahe the first time watching a new star!"
 msgstr ""
+"Le nuvole sono sparite e per Tycho Brahe è la prima volta che guarda una "
+"nuova stella!"
 
 #: scripts/supernova.ssc:117
 msgid "Next 60 days..."
-msgstr ""
+msgstr "Prossimi 60 giorni..."
 
 #: scripts/supernova.ssc:128
 msgid "Next other 40 days..."
+msgstr "Prossimi altri 40 giorni..."
+
+#: scripts/h400_tour.ssc:16
+msgid "The Herschel 400 Catalogue"
+msgstr "Il Catalogo Herschel  400"
+
+#: scripts/h400_tour.ssc:17
+msgid ""
+"The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae"
+" and Clusters"
 msgstr ""
+"L'Herschel 400 è un sottogruppo del Catalogo Generale di Nebulose e Ammassi "
+"di John Herschel"
+
+#: scripts/h400_tour.ssc:18
+msgid ""
+"published in 1864 of 5,000 objects, and hence also of the New General "
+"Catalogue."
+msgstr ""
+"pubblicato nel 1864 su 5.000 oggetti, e quindi anche del New General "
+"Catalogue."
+
+#: scripts/h400_tour.ssc:19
+msgid "Vital statistics:"
+msgstr "Statistiche vitali:"
+
+#: scripts/h400_tour.ssc:20
+msgid "* The catalogue contains 400 objects"
+msgstr "* Il catalogo contiene 400 oggetti"
+
+#: scripts/h400_tour.ssc:21
+msgid "* All objects are from the NGC"
+msgstr "* Tutti gli oggetti provengono dal NGC"
+
+#: scripts/h400_tour.ssc:22
+msgid "* All visible in mid northern latitudes"
+msgstr "* Tutti visibili alle medie latitudini dell'emisfero nord"
+
+#: scripts/h400_tour.ssc:23
+msgid "* All visible in 150 mm (6\") or larger telescopes"
+msgstr "* Tutti visibili con telescopi da 150 mm (6\") o più grandi"
+
+#: scripts/largest_known_stars.ssc:12
+msgid "PZ Cassiopeiae"
+msgstr "PZ Cassiopeiae"
+
+#: scripts/largest_known_stars.ssc:13
+msgid ""
+"PZ Cas is located in a region with heavy dust extinction.\n"
+"The quoted size is the average size parameter, the true\n"
+"value is from 1,340-1,940."
+msgstr ""
+"PZ Cas si trova in una regione con forte estinzione di polvere.\n"
+"La dimensione quotata è il parametro della dimensione media, la vera\n"
+"il valore è da 1,340 - 1,940."
+
+#: scripts/largest_known_stars.ssc:14
+msgid "VX Sagittarii"
+msgstr "VX Sagittarii"
+
+#: scripts/largest_known_stars.ssc:15
+msgid ""
+"VX Sgr is a pulsating variable with a large visual range\n"
+"and varies significantly in size."
+msgstr ""
+"VX Sgr è una variabile pulsante con un ampio intervallo visivo\n"
+"e varia in misura significativa."
+
+#: scripts/largest_known_stars.ssc:16
+msgid "VV Cephei A"
+msgstr "VV Cephei A"
+
+#: scripts/largest_known_stars.ssc:17
+msgid ""
+"VV Cep A is a highly distorted star in a binary system,\n"
+"losing mass to its B-type companion VV Cephei B for at least\n"
+"part of its orbit."
+msgstr ""
+"VV Cep A è una stella altamente distorta in un sistema binario,\n"
+"fa perdere massa al suo compagno di tipo B VV Cephei B per almeno\n"
+"una parte della sua orbita."
+
+#: scripts/largest_known_stars.ssc:18
+msgid "RW Cephei"
+msgstr "RW Cephei"
+
+#: scripts/largest_known_stars.ssc:19
+msgid ""
+"RW Cep is variable both in brightness (by at least a factor\n"
+"of 3) and spectral type (observed from G8 to M), thus\n"
+"probably also in diameter."
+msgstr ""
+"RW Cep è una variabile sia in luminosità (di almeno un fattore\n"
+" 3) e tipo spettrale (osservato da G8 a M), quindi\n"
+"probabilmente anche di diametro."
+
+#: scripts/largest_known_stars.ssc:20
+msgid "VY Canis Majoris"
+msgstr "VY Canis Majoris"
+
+#: scripts/largest_known_stars.ssc:21
+msgid ""
+"Once thought to be a red hypergiant star so large that it\n"
+"contradicted stellar evolutionary theory, improved measurements\n"
+"and estimates have brought it down to size."
+msgstr ""
+"Una volta si pensava essere una stella ipergigante rossa così grande che \n"
+"contraddiceva la teoria evolutiva stellare, misurazioni più accurate\n"
+"e le reltive stime lo hanno ridotto la misura."
+
+#: scripts/largest_known_stars.ssc:22
+msgid "AH Scorpii"
+msgstr "AH Scorpii"
+
+#: scripts/largest_known_stars.ssc:23
+msgid ""
+"AH Sco is variable by nearly 3 magnitudes in the visual range,\n"
+"and an estimated 20% in total luminosity. The variation in diameter\n"
+"is not clear because the temperature also varies."
+msgstr ""
+"AH Sco è variabile di quasi 3 magnitudini nell'intervallo visivo,\n"
+"e un 20% stimato della luminosità totale. La variazione di diametro\n"
+"non è chiara perché anche la temperatura varia."
+
+#: scripts/largest_known_stars.ssc:24
+msgid "V766 Centauri A"
+msgstr "V766 Centauri A"
+
+#: scripts/largest_known_stars.ssc:25
+msgid ""
+"V766 Centauri A is a highly distorted star in a close binary system,\n"
+"losing mass to the secondary."
+msgstr ""
+"V766 Centauri A è una stella altamente distorta in un sistema binario chiuso,\n"
+"perde massa in favore del secondario."
+
+#: scripts/largest_known_stars.ssc:26
+msgid "KW Sagittarii"
+msgstr "KW Sagittarii"
+
+#: scripts/largest_known_stars.ssc:27
+msgid "BC Cygni"
+msgstr "BC Cygni"
+
+#: scripts/largest_known_stars.ssc:28
+msgid "RT Carinae"
+msgstr "RT Carinae"
+
+#: scripts/largest_known_stars.ssc:29
+msgid "Betelgeuse"
+msgstr "Betelgeuse"
+
+#: scripts/largest_known_stars.ssc:30
+msgid "Ninth brightest star in the night sky."
+msgstr "Nona stella più luminosa nel cielo notturno."
+
+#: scripts/largest_known_stars.ssc:31
+msgid "Mu Cephei (Herschel's \"Garnet Star\")"
+msgstr "Mu Cephei (Herschel's \"Garnet Star\")"
+
+#: scripts/largest_known_stars.ssc:32
+msgid "S Persei"
+msgstr "S Persei"
+
+#: scripts/largest_known_stars.ssc:33
+msgid "In the Perseus Double Cluster."
+msgstr "Nel Doppio Ammasso di Perseo"
+
+#: scripts/largest_known_stars.ssc:34
+msgid "RW Cygni"
+msgstr "RW Cygni"
+
+#: scripts/largest_known_stars.ssc:35
+msgid "Antares A"
+msgstr "Antares A"
+
+#: scripts/largest_known_stars.ssc:36
+msgid "Theta Muscae"
+msgstr "Theta Muscae"
+
+#: scripts/largest_known_stars.ssc:37
+msgid "V1749 Cygni"
+msgstr "V1749 Cygni"
+
+#: scripts/largest_known_stars.ssc:38
+msgid "TZ Cassiopeiae"
+msgstr "TZ Cassiopeiae"
+
+#: scripts/largest_known_stars.ssc:39
+msgid "IX Carinae"
+msgstr "IX Carinae"
+
+#: scripts/largest_known_stars.ssc:40
+msgid "TV Geminorum"
+msgstr "TV Geminorum"
+
+#: scripts/largest_known_stars.ssc:41
+msgid "T Cephei"
+msgstr "T Cephei"
+
+#: scripts/largest_known_stars.ssc:42
+msgid "V382 Carinae"
+msgstr "V382 Carinae"
+
+#: scripts/largest_known_stars.ssc:43 scripts/largest_known_stars.ssc:45
+msgid "Yellow hypergiant, one of the rarest types of star."
+msgstr "Ipergigante gialla, uno dei tipi più rari di stelle."
+
+#: scripts/largest_known_stars.ssc:44
+msgid "V509 Cassiopeiae"
+msgstr "V509 Cassiopeiae"
+
+#: scripts/largest_known_stars.ssc:46
+msgid "CE Tauri (\"Ruby Star\")"
+msgstr "CE Tauri (\"Ruby Star\")"
+
+#: scripts/largest_known_stars.ssc:47
+msgid ""
+"Can be occulted by the Moon, allowing accurate determination\n"
+"of its apparent diameter."
+msgstr ""
+"Può essere occultata dalla Luna, permettendone una determinazione accurata\n"
+"del suo diametro apparente."
+
+#: scripts/largest_known_stars.ssc:48
+msgid "R Leporis (\"Hind's Crimson Star\")"
+msgstr "R Leporis (\"Hind's Crimson Star\")"
+
+#: scripts/largest_known_stars.ssc:49
+msgid "One of the largest carbon stars existent in the Milky Way Galaxy."
+msgstr "Una delle più grandi stelle di carbonio esistenti nella Via Lattea."
+
+#: scripts/largest_known_stars.ssc:50
+msgid "Alpha Herculis (\"Ras Algethi\")"
+msgstr "Alpha Herculis (\"Ras Algethi\")"
+
+#: scripts/largest_known_stars.ssc:51
+msgid "Rho Cassiopeiae"
+msgstr "Rho Cassiopeiae"
+
+#: scripts/largest_known_stars.ssc:52
+msgid "A yellow hypergiant, one of the rarest types of a star."
+msgstr "Una ipergigante gialla, uno dei tipi più rari di stella."
+
+#: scripts/largest_known_stars.ssc:53
+msgid "Mira A (Omicron Ceti)"
+msgstr "Mira A (Omicron Ceti)"
+
+#: scripts/largest_known_stars.ssc:54
+msgid "Prototype Mira variable"
+msgstr "Prototipo variabile Mira"
+
+#: scripts/largest_known_stars.ssc:55
+msgid "R Doradus"
+msgstr "R Doradus"
+
+#: scripts/largest_known_stars.ssc:56
+msgid "Star with the second largest apparent size after the Sun."
+msgstr "Stella con la seconda dimensione apparente più grande dopo il Sole."
+
+#: scripts/largest_known_stars.ssc:57
+msgid "La Superba (Y Canum Venaticorum)"
+msgstr "La Superba (Y Canum Venaticorum)"
+
+#: scripts/largest_known_stars.ssc:58
+msgid "One of the coolest and reddest known stars."
+msgstr "Una delle stelle più fredde conosciute."
+
+#: scripts/largest_known_stars.ssc:59
+msgid "Deneb (Alpha Cygni)"
+msgstr "Deneb (Alpha Cygni)"
+
+#: scripts/largest_known_stars.ssc:60
+msgid "19th brightest star in the night sky."
+msgstr "19° stella più luminosa nel cielo notturno."
+
+#: scripts/largest_known_stars.ssc:61
+msgid "Rigel A (Beta Orionis A)"
+msgstr "Rigel A (Beta Orionis A)"
+
+#: scripts/largest_known_stars.ssc:62
+msgid "Seventh brightest star in the night sky."
+msgstr "Settima stella più luminosa nel cielo notturno."
+
+#: scripts/largest_known_stars.ssc:63
+msgid "Canopus (Alpha Carinae)"
+msgstr "Canopus (Alpha Carinae)"
+
+#: scripts/largest_known_stars.ssc:64
+msgid "Second brightest star in the night sky."
+msgstr "Seconda stella più luminosa nel cielo notturno."
+
+#: scripts/largest_known_stars.ssc:65
+msgid "Aldebaran (Alpha Tauri)"
+msgstr "Aldebaran (Alpha Tauri)"
+
+#: scripts/largest_known_stars.ssc:66
+msgid "VV Cephei B"
+msgstr "VV Cephei B"
+
+#: scripts/largest_known_stars.ssc:67
+msgid "The B-type main sequence companion of VV Cephei A."
+msgstr "Il compagno della sequenza principale di tipo B di VV Cephei A."
+
+#: scripts/largest_known_stars.ssc:92
+msgid "Solar radii"
+msgstr "Raggio solare"
