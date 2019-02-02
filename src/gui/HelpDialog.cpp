@@ -381,7 +381,8 @@ void HelpDialog::updateAboutText(void) const
 		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
 		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
 		     << "Alessandro Siniscalchi" << "Ruslan Kabatsayev" << "Pawel Stolowski"
-		     << "Antoine Jacoutot" << "Sebastian Jennen";
+		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
+		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong";
 	contributors.sort();
 
 	// populate About tab
