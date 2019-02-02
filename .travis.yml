@@ -272,7 +272,7 @@ after_success:
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
-  - if [[ "$COVERAGE" == true ]]; then coveralls --gcov-options '\-lp' ; fi 
+  - if [[ "$COVERAGE" == true ]]; then coveralls ; fi 
 
 notifications:
   email:
