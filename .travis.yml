@@ -261,7 +261,7 @@ script:
   - cmake -DENABLE_TESTING=1 ..
   - make -j5
   - ctest --output-on-failure
-  - if [[ "$COVERAGE" == true ]]; make coverage; fi
+  - if [[ "$COVERAGE" == true ]]; then make coverage ; fi
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
@@ -272,7 +272,7 @@ after_success:
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
-  - if [[ "$COVERAGE" == true ]]; then coveralls --gcov-options '\-lp'; fi 
+  - if [[ "$COVERAGE" == true ]]; then coveralls --gcov-options '\-lp' ; fi 
 
 notifications:
   email:
