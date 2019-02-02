@@ -175,6 +175,8 @@ Oculars::Oculars()
 	, flagShowResolutionCriterions(false)
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
+	, flagShowCcdCropOverlay(false)
+	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -735,6 +737,8 @@ void Oculars::init()
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
+		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
+		setCcdCropOverlaySize(settings->value("resolution_box_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toDouble());
 
 	}
 	catch (std::runtime_error& e)
@@ -1614,6 +1618,10 @@ void Oculars::paintCCDBounds()
 			float width = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 			float height = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
 
+			// Calculate the size of the CCD crop overlay
+			float overlayWidth = width * ccdCropOverlaySize / ccd->resolutionX();
+			float overlayHeight = height * ccdCropOverlaySize / ccd->resolutionY();
+
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
 			if (telescope->isEquatorial())
@@ -1657,6 +1665,26 @@ void Oculars::paintCCDBounds()
 				a = transform.map(QPoint(width/2.0, height/2.0));
 				b = transform.map(QPoint(width/2.0, -height/2.0));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+
+				// Tool for showing a resolution box overlay
+				if (flagShowCcdCropOverlay) {
+					// bottom line
+					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// top line
+					a = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// left line
+					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
+					b = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// right line
+					a = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				}
 
 				if(ccd->hasOAG())
 				{
@@ -1744,6 +1772,14 @@ void Oculars::paintCCDBounds()
 					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
 					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(angle), height/2.0 + 5.f));
 					painter.drawText(a.x(), a.y(), angle, -(ccd->chipRotAngle() + polarAngle));
+
+					if(flagShowCcdCropOverlay) {
+						// show the CCD crop overlay text
+						QString resolutionOverlayText = QString("%1x%1 px")
+								.arg(QString::number(ccdCropOverlaySize, 'd', 0));
+						a = transform.map(QPoint(overlayWidth/2.0 - painter.getFontMetrics().width(resolutionOverlayText), -overlayHeight/2.0 - fontSize*1.2f));
+						painter.drawText(a.x(), a.y(), resolutionOverlayText, -(ccd->chipRotAngle() + polarAngle));
+					}
 				}
 			}
 		}
@@ -2546,6 +2582,26 @@ void Oculars::setFlagShowResolutionCriterions(const bool b)
 bool Oculars::getFlagShowResolutionCriterions() const
 {
 	return flagShowResolutionCriterions;
+}
+
+void Oculars::setCcdCropOverlaySize(int size) {
+	ccdCropOverlaySize = size;
+	settings->setValue("ccd_crop_overlay_size", size);
+	settings->sync();
+	emit ccdCropOverlaySizeChanged(size);
+}
+
+void Oculars::setFlagShowCcdCropOverlay(const bool b)
+{
+	flagShowCcdCropOverlay = b;
+	settings->setValue("show_ccd_crop_overlay", b);
+	settings->sync();
+	emit flagShowCcdCropOverlayChanged(b);
+}
+
+bool Oculars::getFlagShowCcdCropOverlay(void) const
+{
+	return flagShowCcdCropOverlay;
 }
 
 void Oculars::setArrowButtonScale(const double val)
