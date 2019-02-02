@@ -50,19 +50,28 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
 
 ########### Main global variables ###########
+SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+ENDIF()
+
+IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+     INCLUDE(CodeCoverage)
+     IF(LCOV_PATH AND ENABLE_TESTING)
+          APPEND_COVERAGE_COMPILER_FLAGS()
+          MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
+          SETUP_TARGET_FOR_COVERAGE_LCOV(
+               NAME coverage 
+               EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
+               DEPENDENCIES buildTests
+          )
+     ENDIF()
 ENDIF()
 
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
-ENDIF()
-
-# GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
-# Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
-IF(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-     ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
 ENDIF()
 
 SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
@@ -297,7 +306,7 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
-SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+
 IF(ENABLE_TESTING)
     ENABLE_TESTING()
     FIND_PACKAGE(Qt5Test REQUIRED)

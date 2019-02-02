@@ -28,6 +28,7 @@ matrix:
       env:
          - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
          - TRANSLATE=true
+         - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -58,6 +59,7 @@ matrix:
       env:
          - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
          - TRANSLATE=false
+         - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -73,6 +75,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -83,11 +86,13 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-7
+            - lcov
           update:
             - true
       env:
         - MATRIX_EVAL="CC=gcc-7 && CXX=g++-7"
         - TRANSLATE=false
+        - COVERAGE=true
 
     - os: linux
       dist: trusty
@@ -104,6 +109,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-3.6 && CXX=clang++-3.6"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -120,6 +126,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-3.7 && CXX=clang++-3.7"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -136,6 +143,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-3.8 && CXX=clang++-3.8"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -151,6 +159,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-3.9 && CXX=clang++-3.9"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -166,6 +175,7 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-4.0 && CXX=clang++-4.0"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: linux
       dist: trusty
@@ -181,37 +191,42 @@ matrix:
       env:
         - MATRIX_EVAL="CC=clang-5.0 && CXX=clang++-5.0"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: osx
       osx_image: xcode8.3
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: osx
       osx_image: xcode9.2
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: osx
       osx_image: xcode9.3
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
-
+        - COVERAGE=false
 
     - os: osx
       osx_image: xcode9.4
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
+        - COVERAGE=false
 
     - os: osx
       osx_image: xcode10.1
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
         - TRANSLATE=false
+        - COVERAGE=false
 
 before_install:
   - eval "${MATRIX_EVAL}"
@@ -222,6 +237,7 @@ before_install:
       unzip -qq qt5.zip -d qt5;
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
+      if [[ "$COVERAGE" == true ]]; then pip install --user cpp-coveralls; fi
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -245,6 +261,7 @@ script:
   - cmake -DENABLE_TESTING=1 ..
   - make -j5
   - ctest --output-on-failure
+  - if [[ "$COVERAGE" == true ]]; make coverage; fi
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
@@ -255,6 +272,7 @@ after_success:
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
+  - if [[ "$COVERAGE" == true ]]; then coveralls --gcov-options '\-lp'; fi 
 
 notifications:
   email:
