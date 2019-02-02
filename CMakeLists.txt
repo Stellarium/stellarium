@@ -57,15 +57,17 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF()
 
 IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
-     INCLUDE(CodeCoverage)
-     IF(LCOV_PATH AND ENABLE_TESTING)
-          APPEND_COVERAGE_COMPILER_FLAGS()
-          MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
-          SETUP_TARGET_FOR_COVERAGE_LCOV(
-               NAME coverage 
-               EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
-               DEPENDENCIES buildTests
-          )
+     IF(CMAKE_COMPILER_IS_GNUCXX)
+          INCLUDE(CodeCoverage)
+          IF(LCOV_PATH AND ENABLE_TESTING)
+               APPEND_COVERAGE_COMPILER_FLAGS()
+               MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
+               SETUP_TARGET_FOR_COVERAGE_LCOV(
+                    NAME coverage 
+                    EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
+                    DEPENDENCIES buildTests
+               )
+          ENDIF()
      ENDIF()
 ENDIF()
 
