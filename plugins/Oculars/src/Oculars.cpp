@@ -738,7 +738,7 @@ void Oculars::init()
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
-		setCcdCropOverlaySize(settings->value("resolution_box_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toDouble());
+		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toDouble());
 
 	}
 	catch (std::runtime_error& e)
@@ -1724,6 +1724,7 @@ void Oculars::paintCCDBounds()
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
 				float ratioLimit = 0.25f;
+				float ratioLimitCrop = 0.75f;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
 					// draw cross at center
@@ -1773,10 +1774,13 @@ void Oculars::paintCCDBounds()
 					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(angle), height/2.0 + 5.f));
 					painter.drawText(a.x(), a.y(), angle, -(ccd->chipRotAngle() + polarAngle));
 
-					if(flagShowCcdCropOverlay) {
+					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
+					{
 						// show the CCD crop overlay text
-						QString resolutionOverlayText = QString("%1x%1 px")
-								.arg(QString::number(ccdCropOverlaySize, 'd', 0));
+						QString resolutionOverlayText = QString("%1%2 %3 %1%2")
+								.arg(QString::number(ccdCropOverlaySize, 'd', 0))
+								.arg(qc_("px", "pixel"))
+								.arg(QChar(0x00D7));
 						a = transform.map(QPoint(overlayWidth/2.0 - painter.getFontMetrics().width(resolutionOverlayText), -overlayHeight/2.0 - fontSize*1.2f));
 						painter.drawText(a.x(), a.y(), resolutionOverlayText, -(ccd->chipRotAngle() + polarAngle));
 					}

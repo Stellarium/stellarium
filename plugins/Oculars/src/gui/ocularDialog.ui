@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>617</width>
+    <width>707</width>
     <height>693</height>
    </rect>
   </property>
@@ -266,6 +266,15 @@
                </item>
                <item>
                 <widget class="QDoubleSpinBox" name="arrowButtonScaleDoubleSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>80</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
                  <property name="minimum">
                   <double>1.000000000000000</double>
                  </property>
@@ -344,6 +353,13 @@
                </property>
               </widget>
              </item>
+             <item row="0" column="0">
+              <widget class="QCheckBox" name="requireSelectionCheckBox">
+               <property name="text">
+                <string>Enable only if an object is selected</string>
+               </property>
+              </widget>
+             </item>
              <item row="6" column="0">
               <widget class="QCheckBox" name="hideGridsLinesCheckBox">
                <property name="text">
@@ -361,13 +377,6 @@
                </property>
               </widget>
              </item>
-             <item row="0" column="0">
-              <widget class="QCheckBox" name="requireSelectionCheckBox">
-               <property name="text">
-                <string>Enable only if an object is selected</string>
-               </property>
-              </widget>
-             </item>
              <item row="4" column="0">
               <widget class="QCheckBox" name="semiTransparencyCheckBox">
                <property name="toolTip">
@@ -377,6 +386,19 @@
                 <string>Use semi-transparent mask</string>
                </property>
               </widget>
+             </item>
+             <item row="7" column="0">
+              <spacer name="verticalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
@@ -417,19 +439,19 @@
               </widget>
              </item>
              <item row="3" column="0">
-               <layout class="QHBoxLayout" name="guiSensorPanelHorizontalLayout">
-                <item>
-                 <widget class="QCheckBox" name="checkBoxShowCcdCropOverlay">
-                  <property name="toolTip">
-                    <string>Enable a square overlay showing the effective size of a number of pixels.</string>
-                  </property>
+              <layout class="QHBoxLayout" name="guiSensorPanelHorizontalLayout">
+               <item>
+                <widget class="QCheckBox" name="checkBoxShowCcdCropOverlay">
+                 <property name="toolTip">
+                  <string>Enable a square overlay showing the effective size of a number of pixels.</string>
+                 </property>
                  <property name="text">
                   <string>Show sensor crop overlay</string>
                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="orientationHorizontalSpacer">
+                </widget>
+               </item>
+               <item>
+                <spacer name="orientationHorizontalSpacer">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>
                  </property>
@@ -508,6 +530,19 @@
                 <string>Enable scaling FOV for Telrad</string>
                </property>
               </widget>
+             </item>
+             <item row="1" column="0">
+              <spacer name="verticalSpacer_5">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>40</height>
+                </size>
+               </property>
+              </spacer>
              </item>
             </layout>
            </widget>
