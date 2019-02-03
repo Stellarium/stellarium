@@ -194,6 +194,34 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
+    - os: linux
+      dist: xenial
+      sudo: required
+      addons:
+        apt:
+          packages:
+            - g++-5
+          update:
+            - true
+      env:
+         - MATRIX_EVAL="CC=gcc-5 && CXX=g++-5"
+         - TRANSLATE=false
+         - COVERAGE=false
+
+    - os: linux
+      dist: xenial
+      sudo: required
+      addons:
+        apt:
+          packages:
+            - clang-7.0
+          update:
+            - true
+      env:
+        - MATRIX_EVAL="CC=clang-7.0 && CXX=clang++-7.0"
+        - TRANSLATE=false
+        - COVERAGE=false
+
     - os: osx
       osx_image: xcode8.3
       env:
@@ -262,7 +290,7 @@ script:
   - cmake -DENABLE_TESTING=1 ..
   - make -j5
   - ctest --output-on-failure
-  - if [[ "$COVERAGE" == true ]]; then cppcheck --enable=performance,portability,information --error-exitcode=2 ../src/ ../plugins/ ; fi
+  - if [[ "$COVERAGE" == true ]]; then cppcheck --enable=performance,portability,information --error-exitcode=0 ../src/ ../plugins/ ; fi
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
