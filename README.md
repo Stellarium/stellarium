@@ -23,3 +23,7 @@ Refer to our [wiki page](https://github.com/Stellarium/stellarium/wiki)
 ## Full References and Credits
 
 See the [full credit file](CREDITS.md)
+
+## Contributing to Stellarium
+
+See the [contributing guideline](https://github.com/Stellarium/stellarium/blob/master/CONTRIBUTING.md)
