@@ -281,3 +281,125 @@ void TestConversions::testStringCoordinateToRad()
 									    .arg(QString::number(expectedValue, 'f', 5))));
 	}
 }
+
+void TestConversions::testHMSToHours()
+{
+	QVariantList data;
+
+	data << 0	<< 0	<< 0	<< 0.;
+	data << 1	<< 0	<< 0	<< 1.;
+	data << 6	<< 0	<< 0	<< 6.;
+	data << 12	<< 0	<< 0	<< 12.;
+	data << 15	<< 0	<< 0	<< 15.;
+	data << 0	<< 15	<< 0	<< 0.25;
+	data << 0	<< 0	<< 15	<< 0.004167;
+	data << 2	<< 15	<< 45	<< 2.2625;
+	data << 20	<< 0	<< 0	<< 20.;
+	data << 24	<< 0	<< 0	<< 24.;
+	data << 0	<< 59	<< 0	<< 0.983333;
+	data << 0	<< 0	<< 59	<< 0.016389;
+	data << 0	<< 59	<< 59	<< 0.999722;
+	data << 3	<< 59	<< 59	<< 3.999722;
+
+	while (data.count() >= 4)
+	{
+		int h, m, s;
+		double expectedHours;
+		h = data.takeFirst().toInt();
+		m = data.takeFirst().toInt();
+		s = data.takeFirst().toInt();
+		expectedHours = data.takeFirst().toDouble();
+		double hours = StelUtils::hmsToHours(h, m, s);
+		QVERIFY2(qAbs(hours-expectedHours)<=ERROR_LIMIT, qPrintable(QString("%1h%2m%3s = %4h (expected %5h)")
+									    .arg(h)
+									    .arg(m)
+									    .arg(s)
+									    .arg(QString::number(hours, 'f', 6))
+									    .arg(QString::number(expectedHours, 'f', 6))));
+	}
+}
+
+void TestConversions::testHMSStringToHours()
+{
+	QVariantList data;
+
+	data << "0h0m0s"		<< 0.;
+	data << "1h0m0s"		<< 1.;
+	data << "6h0m0s"		<< 6.;
+	data << "12h0m0s"		<< 12.;
+	data << "15h0m0s"		<< 15.;
+	data << "0h15m0s"		<< 0.25;
+	data << "0h0m15s"		<< 0.004167;
+	data << "2h15m45s"	<< 2.2625;
+	data << "20h0m0s"		<< 20.;
+	data << "24h0m0s"		<< 24.;
+	data << "0h59m0s"		<< 0.983333;
+	data << "0h0m59s"		<< 0.016389;
+	data << "0h59m59s"	<< 0.999722;
+	data << "3h59m59s"	<< 3.999722;
+
+	while (data.count() >= 2)
+	{
+		QString hms;
+		double expectedHours;
+		hms = data.takeFirst().toString();
+		expectedHours = data.takeFirst().toDouble();
+		double hours = StelUtils::hmsStrToHours(hms);
+		QVERIFY2(qAbs(hours-expectedHours)<=ERROR_LIMIT, qPrintable(QString("%1 = %2h (expected %3h)")
+									    .arg(hms)
+									    .arg(QString::number(hours, 'f', 6))
+									    .arg(QString::number(expectedHours, 'f', 6))));
+	}
+}
+
+void TestConversions::testHoursToHMSStr()
+{
+	QVariantList data;
+
+	data << "0h00m00.0s"	<< 0.;
+	data << "1h00m00.0s"	<< 1.;
+	data << "6h00m00.0s"	<< 6.;
+	data << "12h00m00.0s"	<< 12.;
+	data << "15h00m00.0s"	<< 15.;
+	data << "0h15m00.0s"	<< 0.25;
+	data << "0h00m15.0s"	<< 0.004167;
+	data << "2h15m45.0s"	<< 2.2625;
+	data << "20h00m00.0s"	<< 20.;
+	data << "24h00m00.0s"	<< 24.;
+	data << "0h59m00.0s"	<< 0.983333;
+	data << "0h00m59.0s"	<< 0.016389;
+	data << "0h59m59.0s"	<< 0.999722;
+	data << "3h59m59.0s"	<< 3.999722;
+
+	while (data.count() >= 2)
+	{
+		QString expectedHMS = data.takeFirst().toString();
+		double hours = data.takeFirst().toDouble();
+		QString hms = StelUtils::hoursToHmsStr(hours);
+		QVERIFY2(expectedHMS==hms, qPrintable(QString("%1h = %2 (expected %3)")
+									    .arg(QString::number(hours, 'f', 6))
+									    .arg(hms)
+									    .arg(expectedHMS)));
+	}
+}
+
+void TestConversions::testRadToHMSStr()
+{
+	QVariantList data;
+
+	data << 0.		<< "0h00m00.0s";
+	data << M_PI/36	<< "0h20m00.0s";
+	data << 7*M_PI/8	<< "10h30m00.0s";
+	data << 2*M_PI/5	<< "4h48m00.0s";
+
+	while (data.count()>=2)
+	{
+		double rad = data.takeFirst().toDouble();
+		QString expectedHMS = data.takeFirst().toString();
+		QString hms = StelUtils::radToHmsStr(rad).trimmed();
+		QVERIFY2(expectedHMS==hms, qPrintable(QString("%1 radians = %2 (expected %3)")
+						      .arg(rad)
+						      .arg(hms)
+						      .arg(expectedHMS)));
+	}
+}

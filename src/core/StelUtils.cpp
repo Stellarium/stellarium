@@ -98,7 +98,7 @@ double hmsToRad(const unsigned int h, const unsigned int m, const double s )
 
 double hmsToHours(const int h, const int m, const double s)
 {
-	return (double)h+(double)m/60.+(double)s*3600.;
+	return (double)h+(double)m/60.+(double)s/3600.;
 }
 
 double hmsStrToHours(const QString& s)
@@ -1321,6 +1321,16 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 	else
 	{
 		float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
+		if (s>59.9f)
+		{
+			m += 1;
+			s = 0.f;
+		}
+		if (m==60)
+		{
+			h += 1;
+			m = 0;
+		}
 		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
 }

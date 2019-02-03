@@ -34,6 +34,10 @@ private slots:
 	void testDDToDMS();
 	void testRadToDD();
 	void testStringCoordinateToRad();
+	void testHMSToHours();
+	void testHMSStringToHours();
+	void testHoursToHMSStr();
+	void testRadToHMSStr();
 };
 
 #endif // _TESTCONVERSIONS_HPP
