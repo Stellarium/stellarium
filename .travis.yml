@@ -193,20 +193,6 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
-    - os: linux
-      dist: xenial
-      sudo: required
-      addons:
-        apt:
-          packages:
-            - clang
-          update:
-            - true
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
     - os: osx
       osx_image: xcode8.3
       env:
