@@ -1,6 +1,5 @@
 /*
- * Stellarium
- * Copyright (C) 2013 Alexander Wolf
+ * Copyright (C) 2019 Alexander Wolf <alex.v.wolf@gmail.com>
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,24 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTCONVERSIONS_HPP
-#define TESTCONVERSIONS_HPP
+#include "testHistoricalSupernovae.hpp"
 
-#include <QObject>
-#include <QTest>
-
-class TestConversions : public QObject
-{
-Q_OBJECT
-private slots:
-	void testHMSToRad();
-	void testDMSToRad();
-	void testRadToHMS();
-	void testRadToDMS();	
-	void testDDToDMS();
-	void testRadToDD();
-	void testStringCoordinateToRad();
-};
-
-#endif // _TESTCONVERSIONS_HPP
-
+QTEST_MAIN(TestHistoricalSupernovae)

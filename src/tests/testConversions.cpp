@@ -211,3 +211,73 @@ void TestConversions::testDDToDMS()
 		QVERIFY2(qAbs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1degrees=%2%3d%4m%5s").arg(angle).arg(s).arg(dego).arg(mino).arg(seco)));
 	}
 }
+
+void TestConversions::testRadToDD()
+{
+	QVariantList data;
+
+	data << 0.			<< 0.;
+	data << M_PI/6			<< 30.;
+	data << M_PI/4			<< 45.;
+	data << M_PI/3			<< 60.;
+	data << M_PI/2			<< 90.;
+	data << 2*M_PI/3		<< 120.;
+	data << M_PI			<< 180.;
+	data << 3*M_PI/2		<< 270.;
+	data << M_PI/360		<< 0.5;
+	data << 61*M_PI/360	<< 30.5;
+	data << -M_PI/36		<< -5.;
+	data << -7*M_PI/8		<< -157.5;
+	data << -2*M_PI/5		<< -72.;
+
+	while (data.count()>=2)
+	{
+		double angle, decimalValue, degree;
+		bool sign;
+		angle		= data.takeFirst().toDouble();
+		decimalValue	= data.takeFirst().toDouble();
+		StelUtils::radToDecDeg(angle, sign, degree);
+		if (!sign)
+			decimalValue *= -1;
+
+		QVERIFY2(qAbs(degree-decimalValue)<=ERROR_LIMIT, qPrintable(QString("%1 radians = %2 degrees (expected %3 degrees)")
+									    .arg(QString::number(angle, 'f', 5))
+									    .arg(QString::number(degree, 'f', 2))
+									    .arg(QString::number(decimalValue, 'f', 2))));
+	}
+}
+
+void TestConversions::testStringCoordinateToRad()
+{
+	QVariantList data;
+
+	data << "+0d0m0s"	<< 0.;
+	data << "+30d0m0s"	<< M_PI/6.;
+	data << "+45d0m0s"	<< M_PI/4.;
+	data << "+90d0m0s"	<< M_PI/2.;
+	data << "+80d25m10s"	<< 1.404;
+	data << "+400d0m5s"	<< 6.981;
+	data << "-30d0m50s"	<< -0.5235;
+	data << "123.567 N"	<< 2.1567;
+	data << "123.567 S"	<< -2.1567;
+	data << "123.567 W"	<< -2.1567;
+	data << "+46d6'31\""	<< 0.8047;
+	data << "12h0m0s"		<< M_PI;
+	data << "6h0m0s"		<< M_PI/2.;
+	data << "10h30m0s"	<< 2.749;
+
+	while (data.count()>=2)
+	{
+		QString coordinate;
+		double angle, expectedValue;
+
+		coordinate	= data.takeFirst().toString();
+		expectedValue	= data.takeFirst().toDouble();
+		angle = StelUtils::getDecAngle(coordinate);
+
+		QVERIFY2(qAbs(angle-expectedValue)<=1e-3, qPrintable(QString("%1 = %2 radians (expected %3 radians)")
+									    .arg(coordinate)
+									    .arg(QString::number(angle, 'f', 5))
+									    .arg(QString::number(expectedValue, 'f', 5))));
+	}
+}
