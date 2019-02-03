@@ -252,17 +252,17 @@ before_install:
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
     fi
-  # Linux + Coverage
-  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$COVERAGE" == true ]]; then
-      pip install --user pyyaml cpp-coveralls;
-      gem install coveralls-lcov;
-    fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
       brew update > /dev/null;
       brew upgrade > /dev/null;
       brew install qt;
       export PATH="/usr/local/opt/qt/bin:$PATH";
+    fi
+  # ... + Coverage
+  - if [[ "$COVERAGE" == true ]]; then
+      pip install --user cpp-coveralls;
+      gem install coveralls-lcov;
     fi
 
 install:
@@ -291,7 +291,7 @@ after_success:
       tx push -s;
     fi
   - if [[ "$COVERAGE" == true ]]; then 
-      lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '/usr/*' '*gmock*' --output-file coverage.info;
+      lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info;
       coveralls-lcov coverage.info; 
     fi 
 
