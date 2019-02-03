@@ -87,6 +87,7 @@ matrix:
           packages:
             - g++-7
             - lcov
+            - cppcheck
           update:
             - true
       env:
@@ -237,7 +238,7 @@ before_install:
       unzip -qq qt5.zip -d qt5;
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
-      if [[ "$COVERAGE" == true ]]; then pip install --user cpp-coveralls; fi
+      if [[ "$COVERAGE" == true ]]; then pip install --user pyyaml cpp-coveralls; fi
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -261,7 +262,7 @@ script:
   - cmake -DENABLE_TESTING=1 ..
   - make -j5
   - ctest --output-on-failure
-  - if [[ "$COVERAGE" == true ]]; then make coverage ; fi
+  - if [[ "$COVERAGE" == true ]]; then cppcheck --enable=performance,portability,information --error-exitcode=2 ../src/ ../plugins/ ; fi
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
@@ -272,7 +273,7 @@ after_success:
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
-  - if [[ "$COVERAGE" == true ]]; then coveralls ; fi 
+  - if [[ "$COVERAGE" == true ]]; then coveralls -i ../src/ -i ../plugins/; fi 
 
 notifications:
   email:
