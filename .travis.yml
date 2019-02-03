@@ -251,7 +251,11 @@ before_install:
       unzip -qq qt5.zip -d qt5;
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
-      if [[ "$COVERAGE" == true ]]; then pip install --user pyyaml cpp-coveralls; fi
+    fi
+  # Linux + Coverage
+  - if [[ "$TRAVIS_OS_NAME" == "linux" && "$COVERAGE" == true ]]; then
+      pip install --user pyyaml cpp-coveralls;
+      gem install coveralls-lcov;
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -286,7 +290,10 @@ after_success:
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
-  - if [[ "$COVERAGE" == true ]]; then coveralls -i ../src/ -i ../plugins/ ; fi 
+  - if [[ "$COVERAGE" == true ]]; then 
+      lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '/usr/*' '*gmock*' --output-file coverage.info;
+      coveralls-lcov coverage.info; 
+    fi 
 
 notifications:
   email:
