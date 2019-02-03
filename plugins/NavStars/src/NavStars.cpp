@@ -157,13 +157,15 @@ void NavStars::draw(StelCore* core)
 		return;
 	}
 	
+	QList<int> sn = getStarsNumbers();
+
 	if (stars.isEmpty())
 	{
 		StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-		stars.fill(StelObjectP(), starNumbers.size());
-		for (int i = 0; i < starNumbers.size(); ++i)
+		stars.fill(StelObjectP(), sn.size());
+		for (int i = 0; i < sn.size(); ++i)
 		{
-			QString name = QString("HIP %1").arg(starNumbers.at(i));
+			QString name = QString("HIP %1").arg(sn.at(i));
 			stars[i] = omgr->searchByName(name);
 		}
 	}
@@ -172,7 +174,7 @@ void NavStars::draw(StelCore* core)
 	StelPainter painter(prj);
 	
 	Vec3d pos;
-	for (int i = 0; i < starNumbers.size(); ++i)
+	for (int i = 0; i < sn.size(); ++i)
 	{
 		if (stars[i].isNull())
 			continue;
