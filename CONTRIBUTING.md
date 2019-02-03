@@ -52,7 +52,7 @@ branch, not against any of the other branches), please make sure that you
 include the following:
 
 - **Code**: the code you are adding, which should follow as much as possible
-  our [coding guidelines](hhttp://stellarium.org/doc/head/codingStyle.html).
+  our [coding guidelines](http://stellarium.org/doc/head/codingStyle.html).
 
 - **Tests**: these are usually tests to ensure that code that previously
   failed now works (regression tests) or tests that cover as much as possible
