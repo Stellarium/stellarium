@@ -38,6 +38,9 @@ private slots:
 	void testHMSStringToHours();
 	void testHoursToHMSStr();
 	void testRadToHMSStr();
+	void testRadToDecDegStr();
+	void testVec3fToHtmlColor();
+	void testHtmlColorToVec3f();
 };
 
 #endif // _TESTCONVERSIONS_HPP

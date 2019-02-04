@@ -384,6 +384,77 @@ void TestDates::testJulianDays()
 	testJulianDaysRange(-400001000, -400000000);	
 }
 
+void TestDates::testLeapYears()
+{
+	QVariantList data;
+
+	data << 2000 << true;
+	data << 2100 << false;
+	data << 2200 << false;
+	data << 2300 << false;
+	data << 2016 << true;
+	data << 2017 << false;
+	data << 2018 << false;
+	data << 2019 << false;
+	data << 2020 << true;
+
+	while (data.count()>=2)
+	{
+		int year	= data.takeFirst().toInt();
+		bool expected	= data.takeFirst().toBool();
+		bool status	= StelUtils::isLeapYear(year);
+
+		QVERIFY2(status==expected, qPrintable(QString("Year %1 is %2 (expected %3)")
+							   .arg(year)
+							   .arg(status ? "leap" : "not leap")
+							   .arg(expected ? "leap" : "not leap")));
+	}
+}
+
+void TestDates::testNumberOfDaysInMonthInYear()
+{
+	QVariantList data;
+
+	data << 2019 << 1	<< 31;
+	data << 2019 << 2	<< 28;
+	data << 2019 << 3	<< 31;
+	data << 2019 << 4	<< 30;
+	data << 2019 << 5	<< 31;
+	data << 2019 << 6	<< 30;
+	data << 2019 << 7	<< 31;
+	data << 2019 << 8	<< 31;
+	data << 2019 << 9	<< 30;
+	data << 2019 << 10	<< 31;
+	data << 2019 << 11	<< 30;
+	data << 2019 << 12	<< 31;
+	data << 2020 << 1	<< 31;
+	data << 2020 << 2	<< 29;
+	data << 2020 << 3	<< 31;
+	data << 2020 << 4	<< 30;
+	data << 2020 << 5	<< 31;
+	data << 2020 << 6	<< 30;
+	data << 2020 << 7	<< 31;
+	data << 2020 << 8	<< 31;
+	data << 2020 << 9	<< 30;
+	data << 2020 << 10	<< 31;
+	data << 2020 << 11	<< 30;
+	data << 2020 << 12	<< 31;
+
+	while (data.count()>=3)
+	{
+		int year	= data.takeFirst().toInt();
+		int month	= data.takeFirst().toInt();
+		int expected	= data.takeFirst().toInt();
+		int days	= StelUtils::numberOfDaysInMonthInYear(month, year);
+
+		QVERIFY2(days==expected, qPrintable(QString("Month %1 in year %2 has %3 days (expected %4 days)")
+						    .arg(month)
+						    .arg(year)
+						    .arg(days)
+						    .arg(expected)));
+	}
+}
+
 #define TJ1 (2450000)
 
 void TestDates::benchmarkOldGetDateFromJulianDay()

@@ -216,19 +216,19 @@ void TestConversions::testRadToDD()
 {
 	QVariantList data;
 
-	data << 0.			<< 0.;
-	data << M_PI/6			<< 30.;
-	data << M_PI/4			<< 45.;
-	data << M_PI/3			<< 60.;
-	data << M_PI/2			<< 90.;
-	data << 2*M_PI/3		<< 120.;
-	data << M_PI			<< 180.;
-	data << 3*M_PI/2		<< 270.;
-	data << M_PI/360		<< 0.5;
+	data << 0.		<< 0.;
+	data << M_PI/6		<< 30.;
+	data << M_PI/4		<< 45.;
+	data << M_PI/3		<< 60.;
+	data << M_PI/2		<< 90.;
+	data << 2*M_PI/3	<< 120.;
+	data << M_PI		<< 180.;
+	data << 3*M_PI/2	<< 270.;
+	data << M_PI/360	<< 0.5;
 	data << 61*M_PI/360	<< 30.5;
-	data << -M_PI/36		<< -5.;
-	data << -7*M_PI/8		<< -157.5;
-	data << -2*M_PI/5		<< -72.;
+	data << -M_PI/36	<< -5.;
+	data << -7*M_PI/8	<< -157.5;
+	data << -2*M_PI/5	<< -72.;
 
 	while (data.count()>=2)
 	{
@@ -262,9 +262,10 @@ void TestConversions::testStringCoordinateToRad()
 	data << "123.567 S"	<< -2.1567;
 	data << "123.567 W"	<< -2.1567;
 	data << "+46d6'31\""	<< 0.8047;
-	data << "12h0m0s"		<< M_PI;
-	data << "6h0m0s"		<< M_PI/2.;
+	data << "12h0m0s"	<< M_PI;
+	data << "6h0m0s"	<< M_PI/2.;
 	data << "10h30m0s"	<< 2.749;
+	data << "+80°25'10\""	<< 1.404;
 
 	while (data.count()>=2)
 	{
@@ -323,18 +324,19 @@ void TestConversions::testHMSStringToHours()
 {
 	QVariantList data;
 
-	data << "0h0m0s"		<< 0.;
-	data << "1h0m0s"		<< 1.;
-	data << "6h0m0s"		<< 6.;
-	data << "12h0m0s"		<< 12.;
-	data << "15h0m0s"		<< 15.;
-	data << "0h15m0s"		<< 0.25;
-	data << "0h0m15s"		<< 0.004167;
+	data << "0h0m0s"	<< 0.;
+	data << "0h"		<< 0.;
+	data << "1h0m0s"	<< 1.;
+	data << "6h0m0s"	<< 6.;
+	data << "12h0m0s"	<< 12.;
+	data << "15h0m0s"	<< 15.;
+	data << "0h15m0s"	<< 0.25;
+	data << "0h0m15s"	<< 0.004167;
 	data << "2h15m45s"	<< 2.2625;
-	data << "20h0m0s"		<< 20.;
-	data << "24h0m0s"		<< 24.;
-	data << "0h59m0s"		<< 0.983333;
-	data << "0h0m59s"		<< 0.016389;
+	data << "20h0m0s"	<< 20.;
+	data << "24h0m0s"	<< 24.;
+	data << "0h59m0s"	<< 0.983333;
+	data << "0h0m59s"	<< 0.016389;
 	data << "0h59m59s"	<< 0.999722;
 	data << "3h59m59s"	<< 3.999722;
 
@@ -388,7 +390,7 @@ void TestConversions::testRadToHMSStr()
 	QVariantList data;
 
 	data << 0.		<< "0h00m00.0s";
-	data << M_PI/36	<< "0h20m00.0s";
+	data << M_PI/36		<< "0h20m00.0s";
 	data << 7*M_PI/8	<< "10h30m00.0s";
 	data << 2*M_PI/5	<< "4h48m00.0s";
 
@@ -401,5 +403,92 @@ void TestConversions::testRadToHMSStr()
 						      .arg(rad)
 						      .arg(hms)
 						      .arg(expectedHMS)));
+	}
+}
+
+void TestConversions::testRadToDecDegStr()
+{
+	QVariantList data;
+
+	data << 0.		<< "+0.00d";
+	data << M_PI/6		<< "+30.00d";
+	data << M_PI/4		<< "+45.00d";
+	data << M_PI/3		<< "+60.00d";
+	data << M_PI/2		<< "+90.00d";
+	data << 2*M_PI/3	<< "+120.00d";
+	data << M_PI		<< "+180.00d";
+	data << 3*M_PI/2	<< "+270.00d";
+	data << M_PI/360	<< "+0.50d";
+	data << 61*M_PI/360	<< "+30.50d";
+	data << -M_PI/36	<< "+355.00d";
+	data << -7*M_PI/8	<< "+202.50d";
+	data << -2*M_PI/5	<< "+288.00d";
+
+	while (data.count()>=2)
+	{
+		double angle		= data.takeFirst().toDouble();
+		QString expectedValue	= data.takeFirst().toString();
+		QString degree = StelUtils::radToDecDegStr(angle, 2, true, true);
+
+		QVERIFY2(degree==expectedValue, qPrintable(QString("%1 radians = %2 (expected %3)")
+							   .arg(QString::number(angle, 'f', 5))
+							   .arg(degree)
+							   .arg(expectedValue)));
+	}
+}
+
+void TestConversions::testVec3fToHtmlColor()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 1.f << 1.f << 1.f;
+	data << "#FF0000" << 1.f << 0.f << 0.f;
+	data << "#00FF00" << 0.f << 1.f << 0.f;
+	data << "#0000FF" << 0.f << 0.f << 1.f;
+	data << "#999999" << .6f << .6f << .6f;
+	data << "#666666" << .4f << .4f << .4f;
+	data << "#000000" << 0.f << 0.f << 0.f;
+
+	while (data.count()>=4)
+	{
+		QString color	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f srcColor	= Vec3f(v1, v2, v3);
+		QString cColor	= StelUtils::vec3fToHtmlColor(srcColor).toUpper();
+
+		QVERIFY2(cColor==color, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(srcColor.toString())
+							   .arg(cColor)
+							   .arg(color)));
+	}
+}
+
+void TestConversions::testHtmlColorToVec3f()
+{
+	QVariantList data;
+
+	data << "#FFFFFF" << 1.f << 1.f << 1.f;
+	data << "#FF0000" << 1.f << 0.f << 0.f;
+	data << "#00FF00" << 0.f << 1.f << 0.f;
+	data << "#0000FF" << 0.f << 0.f << 1.f;
+	data << "#999999" << .6f << .6f << .6f;
+	data << "#666666" << .4f << .4f << .4f;
+	data << "#000000" << 0.f << 0.f << 0.f;
+
+	while (data.count()>=4)
+	{
+		QString color	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f expected	= Vec3f(v1, v2, v3);
+		Vec3f v3fcolor	= StelUtils::htmlColorToVec3f(color);
+
+		QVERIFY2(v3fcolor==expected, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(color)
+							   .arg(v3fcolor.toString())
+							   .arg(expected.toString())));
 	}
 }

@@ -105,7 +105,7 @@ double hmsStrToHours(const QString& s)
 {
 	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
 	if (!reg.exactMatch(s))
-		return 0;
+		return 0.;
 	QStringList list = reg.capturedTexts();
 	int hrs = list[1].toInt();
 	int min = list[2].toInt();
@@ -161,7 +161,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}
 	if (m==60)
 	{
-		m = 0.;
+		m = 0;
 		d += 1;
 	}	
 }
@@ -264,7 +264,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 	// handle carry case (when seconds are rounded up)
 	if (QString("%1").arg(s, 0, 'f', precision) == carry)
 	{
-		s=0;
+		s=0.;
 		m+=1;
 	}
 	if (m==60)
@@ -272,7 +272,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 		m=0;
 		h+=1;
 	}
-	if (h==24 && m==0 && s==0)
+	if (h==24 && m==0 && s==0.)
 		h=0;
 
 	return QString("%1h%2m%3s").arg(h, width).arg(m, 2, 10, QChar('0')).arg(s, 3+precision, 'f', precision, QChar('0'));
@@ -390,7 +390,7 @@ void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, dou
 	m = (unsigned int)((angle-d)*60);
 	s = (angle-d)*3600.-60.*m;
 
-	if (s==60.)
+	if (s>59.9)
 	{
 		s = 0.;
 		m += 1;
@@ -614,8 +614,8 @@ double getDecAngle(const QString& str)
 		float min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toFloat();
 		float sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toFloat();
 		float r = qAbs(deg) + min / 60 + sec / 3600;
-		if (deg<0)
-			r *= -1.;
+		if (deg<0.f)
+			r *= -1.f;
 		return (r * 2 * M_PI / 360.);
 	}
 
