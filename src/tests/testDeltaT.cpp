@@ -337,3 +337,90 @@ void TestDeltaT::testDeltaTByStephensonMorrison1984WideDates()
 							.toUtf8());
 	}
 }
+
+void TestDeltaT::testDeltaTByStephensonMorrison2004WideDates()
+{
+	// test data from Stephenson, F. R.; Morrison, L. V., "Historical Eclipses", The Light-Time Effect in Astrophysics, 335 (2005), 159-180
+	QVariantList data;
+	data << -1000 << 25400 << 640;
+	data <<  -900 << 23700 << 590;
+	data <<  -800 << 22000 << 550;
+	//data <<  -700 << 21000 << 500;
+	data <<  -600 << 19040 << 460;
+	data <<  -500 << 17190 << 430;
+	data <<  -400 << 15530 << 390;
+	data <<  -300 << 14080 << 360;
+	data <<  -200 << 12790 << 330;
+	data <<  -100 << 11640 << 290;
+	data <<     0 << 10580 << 260;
+	data <<   100 <<  9600 << 240;
+	/*
+	data <<   200 <<  8640 << 210;
+	data <<   300 <<  7680 << 180;
+	data <<   400 <<  6700 << 160;
+	data <<   500 <<  5710 << 140;
+	data <<   600 <<  4740 << 120;
+	data <<   700 <<  3810 << 100;
+	data <<   800 <<  2960 <<  80;
+	data <<   900 <<  2200 <<  70;
+	data <<  1000 <<  1570 <<  55;
+	data <<  1100 <<  1090 <<  40;
+	data <<  1200 <<   740 <<  30;
+	data <<  1300 <<   490 <<  20;
+	data <<  1400 <<   320 <<  20;
+	data <<  1500 <<   200 <<  20;
+	data <<  1600 <<   120 <<   9;
+	data <<  1700 <<     9 <<   5;
+	data <<  1710 <<    10 <<   3;
+	data <<  1720 <<    11 <<   3;
+	data <<  1730 <<    11 <<   3;
+	data <<  1740 <<    12 <<   2;
+	data <<  1750 <<    13 <<   2;
+	data <<  1760 <<    15 <<   2;
+	data <<  1770 <<    16 <<   2;
+	data <<  1780 <<    17 <<   1;
+	data <<  1790 <<    17 <<   1;
+	data <<  1800 <<    14 <<   1;
+	data <<  1810 <<    13 <<   1;
+	data <<  1820 <<    12 <<   1;
+	data <<  1830 <<     8 <<   1; // *  - <1
+	data <<  1840 <<     6 <<   1; // ** - undefined error
+	data <<  1850 <<     7 <<   1; // **
+	data <<  1860 <<     8 <<   1; // **
+	data <<  1870 <<     2 <<   1; // **
+	data <<  1880 <<    -5 <<   1; // **
+	data <<  1890 <<    -6 <<   1; // **
+	data <<  1900 <<    -3 <<   1; // **
+	data <<  1910 <<    10 <<   1; // **
+	data <<  1920 <<    21 <<   1; // **
+	data <<  1930 <<    24 <<   1; // **
+	data <<  1940 <<    24 <<   1; // **
+	data <<  1950 <<    29 <<   1; // **
+	data <<  1960 <<    33 <<   1; // **
+	data <<  1970 <<    40 <<   1; // **
+	data <<  1980 <<    51 <<   1; // **
+	data <<  1990 <<    57 <<   1; // **
+	data <<  2000 <<    65 <<   1; // **
+	*/
+
+	while(data.count() >= 3)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByMorrisonStephenson2004(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
