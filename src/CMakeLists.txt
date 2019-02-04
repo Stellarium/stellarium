@@ -607,6 +607,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testConversions testConversions)
     SET_TARGET_PROPERTIES(testConversions PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testComputations_SRCS
+        tests/testComputations.hpp
+        tests/testComputations.cpp
+    )
+    ADD_EXECUTABLE(testComputations ${tests_testComputations_SRCS})
+    TARGET_LINK_LIBRARIES(testComputations ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testComputations)
+    ADD_TEST(testComputations testComputations)
+    SET_TARGET_PROPERTIES(testComputations PROPERTIES FOLDER "src/tests")
+
     SET(tests_testExtinction_SRCS
         tests/testExtinction.hpp
         tests/testExtinction.cpp
