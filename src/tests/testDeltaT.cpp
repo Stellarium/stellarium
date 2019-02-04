@@ -340,13 +340,16 @@ void TestDeltaT::testDeltaTByStephensonMorrison1984WideDates()
 
 void TestDeltaT::testDeltaTByStephensonMorrison2004WideDates()
 {
-	// test data from Stephenson, F. R.; Morrison, L. V., "Historical Eclipses", The Light-Time Effect in Astrophysics, 335 (2005), 159-180
+	// test data from
+	// * Morrison, L. V.; Stephenson, F. R., "Historical values of the Earth's clock error ΔT and the calculation of eclipses",
+	//    Journal for the History of Astronomy, 35(2004), 327-336 - http://adsabs.harvard.edu/abs/2004JHA....35..327M
+	// * addendum in ibid., 36 (2005), 339 - http://adsabs.harvard.edu/abs/2005JHA....36..339M
 	QVariantList data;
 	data << -1000 << 25400 << 640;
 	data <<  -900 << 23700 << 590;
 	data <<  -800 << 22000 << 550;
-	//data <<  -700 << 21000 << 500;
-	data <<  -600 << 19040 << 460;
+	data <<  -700 << 20400 << 500;
+	data <<  -600 << 18800 << 460;
 	data <<  -500 << 17190 << 430;
 	data <<  -400 << 15530 << 390;
 	data <<  -300 << 14080 << 360;
@@ -421,6 +424,56 @@ void TestDeltaT::testDeltaTByStephensonMorrison2004WideDates()
 							.arg(expectedResult)
 							.arg(actualError)
 							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByMeeusSimons()
+{
+	// test data from Meeus, Jean, "The Effect of Delta T on Astronomical Calculations",
+	// The Journal of the British Astronomical Association, 108 (1998), 154-156
+	// http://adsabs.harvard.edu/abs/1998JBAA..108..154M
+
+	QVariantList data;
+	data << 1974 << 44.49;
+	data << 1975 << 45.48;
+	data << 1976 << 46.46;
+	data << 1977 << 47.52;
+	data << 1978 << 48.53;
+	data << 1979 << 49.59;
+	data << 1980 << 50.54;
+	data << 1981 << 51.38;
+	data << 1982 << 52.17;
+	data << 1983 << 52.96;
+	data << 1984 << 53.79;
+	data << 1985 << 54.34;
+	data << 1986 << 54.87;
+	data << 1987 << 55.32;
+	data << 1988 << 55.82;
+	data << 1989 << 56.30;
+	data << 1990 << 56.86;
+	data << 1991 << 57.57;
+	data << 1992 << 58.31;
+	data << 1993 << 59.12;
+	data << 1994 << 59.99;
+	data << 1995 << 60.79;
+	data << 1996 << 61.63;
+	data << 1997 << 62.30;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByMeeusSimons(JD);
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(qAbs(result-expectedResult)<=1, QString("date=%2 year=%3 result=%4 expected=%5")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
 							.toUtf8());
 	}
 }
