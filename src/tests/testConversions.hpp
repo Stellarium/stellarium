@@ -29,9 +29,11 @@ Q_OBJECT
 private slots:
 	void testHMSToRad();
 	void testDMSToRad();
+	void testDMSStrToRad();
 	void testRadToHMS();
 	void testRadToDMS();	
 	void testDDToDMS();
+	void testDDToDMSStr();
 	void testRadToDD();
 	void testStringCoordinateToRad();
 	void testHMSToHours();
@@ -41,6 +43,12 @@ private slots:
 	void testRadToDecDegStr();
 	void testVec3fToHtmlColor();
 	void testHtmlColorToVec3f();
+	void testStrToVec2f();
+	void testVec2fToStr();
+	void testStrToVec3f();
+	void testVec3fToStr();
+	void testStrToVec4d();
+	void testVec4dToStr();
 };
 
 #endif // _TESTCONVERSIONS_HPP

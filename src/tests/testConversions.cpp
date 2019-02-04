@@ -94,6 +94,44 @@ void TestConversions::testDMSToRad()
 	}
 }
 
+void TestConversions::testDMSStrToRad()
+{
+	QVariantList data;
+
+	data << "+0d0'0\""	<< 0.;
+	data << "+30d0'0\""	<< M_PI/6;
+	data << "+45d0'0\""	<< M_PI/4;
+	data << "+60d0'0\""	<< M_PI/3;
+	data << "+90d0'0\""	<< M_PI/2;
+	data << "+120d0'0\""	<< 2*M_PI/3;
+	data << "+180d0'0\""	<< M_PI;
+	data << "+270d0'0\""	<< 3*M_PI/2;
+	data << "+360d0'0\""	<< 2*M_PI;
+	data << "+0d30'0\""	<< M_PI/360;
+	data << "+0d45'0\""	<< M_PI/240;
+	data << "+30d30'0\""	<< 61*M_PI/360;
+	data << "+0d0'1\""	<< M_PI/648000;
+	data << "+90d58'30\""	<< 1213*M_PI/2400;
+	data << "+10d59'59\""	<< 39599*M_PI/648000;
+	data << "-120d0'0\""	<< -2*M_PI/3;
+	data << "-180d0'0\""	<< -M_PI;
+	data << "-270d0'0\""	<< -3*M_PI/2;
+	data << "-0d30'0\""	<< -M_PI/360;
+	data << "-0d45'0\""	<< -M_PI/240;
+
+	while (data.count() >= 2)
+	{
+		QString DMSStr = data.takeFirst().toString();
+		double radians = data.takeFirst().toDouble();
+		double dms = StelUtils::dmsStrToRad(DMSStr);
+
+		QVERIFY2(qAbs(dms-radians)<=ERROR_LIMIT, qPrintable(QString("%1 = %2 radians (expected %3 radians)")
+								    .arg(DMSStr)
+								    .arg(QString::number(dms, 'f', 5))
+								    .arg(QString::number(radians, 'f', 5))));
+	}
+}
+
 void TestConversions::testRadToHMS()
 {
 	QVariantList data;
@@ -209,6 +247,30 @@ void TestConversions::testDDToDMS()
 			s = "-";
 		}
 		QVERIFY2(qAbs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1degrees=%2%3d%4m%5s").arg(angle).arg(s).arg(dego).arg(mino).arg(seco)));
+	}
+}
+
+void TestConversions::testDDToDMSStr()
+{
+	QVariantList data;
+
+	data << 0.	<< "+0°00'00\"";
+	data << 10.	<< "+10°00'00\"";
+	data << -13.5	<< "-13°30'00\"";
+	data << -90.1	<< "-90°06'00\"";
+	data << 360.6	<< "+360°36'00\"";
+	data << -0.01	<< "-0°00'36\"";
+
+	while (data.count()>=2)
+	{
+		double angle	= data.takeFirst().toDouble();
+		QString expDMS	= data.takeFirst().toString();
+		QString DMS	= StelUtils::decDegToDmsStr(angle);
+
+		QVERIFY2(DMS==expDMS, qPrintable(QString("%1 degrees = %2 (expected %3)")
+						 .arg(QString::number(angle, 'f', 5))
+						 .arg(DMS)
+						 .arg(expDMS)));
 	}
 }
 
@@ -490,5 +552,155 @@ void TestConversions::testHtmlColorToVec3f()
 							   .arg(color)
 							   .arg(v3fcolor.toString())
 							   .arg(expected.toString())));
+	}
+}
+
+void TestConversions::testStrToVec2f()
+{
+	QVariantList data;
+
+	data << "1,1" << 1.f << 1.f;
+	data << "1,0" << 1.f << 0.f;
+	data << "0,1" << 0.f << 1.f;
+	data << "0,0" << 0.f << 0.f;
+
+	while (data.count()>=3)
+	{
+		QString vec	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		Vec2f srcVec	= Vec2f(v1, v2);
+		Vec2f dstVec	= StelUtils::strToVec2f(vec);
+
+		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(vec)
+							   .arg(dstVec.toString())
+							   .arg(srcVec.toString())));
+	}
+}
+
+void TestConversions::testVec2fToStr()
+{
+	QVariantList data;
+
+	data << "1.000000,1.000000" << 1.f << 1.f;
+	data << "1.000000,0.000000" << 1.f << 0.f;
+	data << "0.000000,1.000000" << 0.f << 1.f;
+	data << "0.000000,0.000000" << 0.f << 0.f;
+
+	while (data.count()>=3)
+	{
+		QString vec	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		Vec2f srcVec	= Vec2f(v1, v2);
+		QString dstVec	= StelUtils::vec2fToStr(srcVec);
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(srcVec.toString())
+							   .arg(dstVec)
+							   .arg(vec)));
+	}
+}
+
+void TestConversions::testStrToVec3f()
+{
+	QVariantList data;
+
+	data << "1,1,1" << 1.f << 1.f << 1.f;
+	data << "1,0,1" << 1.f << 0.f << 1.f;
+	data << "0,1,0" << 0.f << 1.f << 0.f;
+	data << "0,0,0" << 0.f << 0.f << 0.f;
+
+	while (data.count()>=4)
+	{
+		QString vec	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f srcVec	= Vec3f(v1, v2, v3);
+		Vec3f dstVec	= StelUtils::strToVec3f(vec);
+
+		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(vec)
+							   .arg(dstVec.toString())
+							   .arg(srcVec.toString())));
+	}
+}
+
+void TestConversions::testVec3fToStr()
+{
+	QVariantList data;
+
+	data << "1.000000,1.000000,1.000000" << 1.f << 1.f << 1.f;
+	data << "1.000000,0.000000,1.000000" << 1.f << 0.f << 1.f;
+	data << "0.000000,1.000000,0.000000" << 0.f << 1.f << 0.f;
+	data << "0.000000,0.000000,0.000000" << 0.f << 0.f << 0.f;
+
+	while (data.count()>=4)
+	{
+		QString vec	= data.takeFirst().toString();
+		float v1	= data.takeFirst().toFloat();
+		float v2	= data.takeFirst().toFloat();
+		float v3	= data.takeFirst().toFloat();
+		Vec3f srcVec	= Vec3f(v1, v2, v3);
+		QString dstVec	= StelUtils::vec3fToStr(srcVec);
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(srcVec.toString())
+							   .arg(dstVec)
+							   .arg(vec)));
+	}
+}
+
+void TestConversions::testStrToVec4d()
+{
+	QVariantList data;
+
+	data << "1,1,1,1" << 1. << 1. << 1. << 1.;
+	data << "1,0,1,0" << 1. << 0. << 1. << 0.;
+	data << "0,1,0,1" << 0. << 1. << 0. << 1.;
+	data << "0,0,0,0" << 0. << 0. << 0. << 0.;
+
+	while (data.count()>=5)
+	{
+		QString vec	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		double v4	= data.takeFirst().toDouble();
+		Vec4d srcVec	= Vec4d(v1, v2, v3, v4);
+		Vec4d dstVec	= StelUtils::strToVec4d(vec);
+
+		QVERIFY2(srcVec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(vec)
+							   .arg(dstVec.toString())
+							   .arg(srcVec.toString())));
+	}
+}
+
+void TestConversions::testVec4dToStr()
+{
+	QVariantList data;
+
+	data << "1.0000000000,1.0000000000,1.0000000000,1.0000000000" << 1. << 1. << 1. << 1.;
+	data << "1.0000000000,0.0000000000,1.0000000000,0.0000000000" << 1. << 0. << 1. << 0.;
+	data << "0.0000000000,1.0000000000,0.0000000000,1.0000000000" << 0. << 1. << 0. << 1.;
+	data << "0.0000000000,0.0000000000,0.0000000000,0.0000000000" << 0. << 0. << 0. << 0.;
+
+	while (data.count()>=5)
+	{
+		QString vec	= data.takeFirst().toString();
+		double v1	= data.takeFirst().toDouble();
+		double v2	= data.takeFirst().toDouble();
+		double v3	= data.takeFirst().toDouble();
+		double v4	= data.takeFirst().toDouble();
+		Vec4d srcVec	= Vec4d(v1, v2, v3, v4);
+		QString dstVec	= StelUtils::vec4dToStr(srcVec);
+
+		QVERIFY2(vec==dstVec, qPrintable(QString("%1 = %2 (expected %3)")
+							   .arg(srcVec.toString())
+							   .arg(dstVec)
+							   .arg(vec)));
 	}
 }

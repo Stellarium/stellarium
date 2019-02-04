@@ -116,9 +116,10 @@ double hmsStrToHours(const QString& s)
 
 double dmsToRad(const int d, const unsigned int m, const double s)
 {
-	if (d>=0)
-		return (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
-	return (double)M_PI/180.*d-(double)M_PI/10800.*m-s*M_PI/648000.;
+	double rad = (double)M_PI/180.*qAbs(d)+(double)M_PI/10800.*m+s*M_PI/648000.;
+	if (d<0)
+		rad *= -1;
+	return rad;
 }
 
 /*************************************************************************
@@ -419,12 +420,16 @@ double dmsStrToRad(const QString& s)
 	if (!reg.exactMatch(s))
 		return 0;
 	QStringList list = reg.capturedTexts();
-	bool sign = (list[1] == "+");
+	bool sign = (list[1] == "-");
 	int deg = list[2].toInt();
 	int min = list[3].toInt();
 	int sec = list[4].toInt();
 
-	return dmsToRad(sign ? deg : -deg, min, sec);
+	double rad = dmsToRad(qAbs(deg), min, sec);
+	if (sign)
+		rad *= -1;
+
+	return rad;
 }
 
 Vec2f strToVec2f(const QStringList &s)

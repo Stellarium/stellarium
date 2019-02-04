@@ -18,4 +18,4 @@
 
 #include "testHistoricalSupernovae.hpp"
 
-QTEST_MAIN(TestHistoricalSupernovae)
+QTEST_GUILESS_MAIN(TestHistoricalSupernovae)

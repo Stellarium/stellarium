@@ -18,4 +18,4 @@
 
 #include "testNavStars.hpp"
 
-QTEST_MAIN(TestNavStars)
+QTEST_GUILESS_MAIN(TestNavStars)
