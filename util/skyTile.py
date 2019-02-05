@@ -25,9 +25,9 @@ def writePolys(pl, f):
 
 class StructCredits:
     def __init__(self):
-        self.short = None;
-        self.full = None;
-        self.infoUrl = None;
+        self.short = None
+        self.full = None
+        self.infoUrl = None
         return
 
     def outJSON(self, f, levTab):

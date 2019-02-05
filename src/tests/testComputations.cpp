@@ -81,3 +81,75 @@ void TestComputations::testJDFormBesselianEpoch()
 									.arg(QString::number(expectedJD, 'f', 4))));
 	}
 }
+
+void TestComputations::testEquToEqlTransformations()
+{
+	double eps0 = 23.4392911*M_PI/180.;
+	double ra, dec, lambdaE, lambda, betaE, beta;
+
+	QVariantList data;
+	//                  RA                   DE                     Lambda           Beta
+	data <<     0.		<<    0.		<<     0.		<<    0.;
+	data <<   12.		<<  45.		<<   31.03451	<<  36.17676;
+	data <<     2.5		<<  23.5		<<   12.03425	<<  20.48324;
+	data <<   25.1225	<< -46.0025	<<    -1.41879	<< -51.01554;
+	data <<  -60.		<<  60.		<<  -11.92479	<<  75.19595;
+
+	while (data.count() >= 4)
+	{
+		ra		= data.takeFirst().toDouble();
+		dec		= data.takeFirst().toDouble();
+		lambdaE	= data.takeFirst().toDouble();
+		betaE	= data.takeFirst().toDouble();
+
+		StelUtils::equToEcl(ra*M_PI/180., dec*M_PI/180., eps0, &lambda, &beta);
+
+		lambda *= 180/M_PI;
+		beta *= 180/M_PI;
+
+		QVERIFY2(qAbs(lambda-lambdaE)<=ERROR_LOW_LIMIT && qAbs(lambda-lambdaE)<=ERROR_LOW_LIMIT,
+				qPrintable(QString("RA/Dec: %1/%2 Lam/Bet: %3/%4 (expected Lam/Bet: %5/%6)")
+					   .arg(QString::number(ra, 'f', 5))
+					   .arg(QString::number(dec, 'f', 5))
+					   .arg(QString::number(lambda, 'f', 5))
+					   .arg(QString::number(beta, 'f', 5))
+					   .arg(QString::number(lambdaE, 'f', 5))
+					   .arg(QString::number(betaE, 'f', 5))));
+	}
+}
+
+void TestComputations::testEclToEquTransformations()
+{
+	double eps0 = 23.4392911*M_PI/180.;
+	double ra, dec, raE, decE, lambda, beta;
+
+	QVariantList data;
+	//                  RA                   DE                     Lambda           Beta
+	data <<     0.		<<    0.		<<     0.		<<    0.;
+	data <<   12.		<<  45.		<<   31.03451	<<  36.17676;
+	data <<     2.5		<<  23.5		<<   12.03425	<<  20.48324;
+	data <<   25.1225	<< -46.0025	<<    -1.41879	<< -51.01554;
+	data <<  -60.		<<  60.		<<  -11.92479	<<  75.19595;
+
+	while (data.count() >= 4)
+	{
+		raE		= data.takeFirst().toDouble();
+		decE		= data.takeFirst().toDouble();
+		lambda	= data.takeFirst().toDouble();
+		beta		= data.takeFirst().toDouble();
+
+		StelUtils::eclToEqu(lambda*M_PI/180., beta*M_PI/180., eps0, &ra, &dec);
+
+		ra *= 180/M_PI;
+		dec *= 180/M_PI;
+
+		QVERIFY2(qAbs(ra-raE)<=ERROR_LOW_LIMIT && qAbs(dec-decE)<=ERROR_LOW_LIMIT,
+				qPrintable(QString("Lam/Bet: %1/%2 RA/Dec: %3/%4 (expected RA/Dec: %5/%6)")
+					   .arg(QString::number(lambda, 'f', 5))
+					   .arg(QString::number(beta, 'f', 5))
+					   .arg(QString::number(ra, 'f', 5))
+					   .arg(QString::number(dec, 'f', 5))
+					   .arg(QString::number(raE, 'f', 5))
+					   .arg(QString::number(decE, 'f', 5))));
+	}
+}
