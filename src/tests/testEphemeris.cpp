@@ -999,7 +999,6 @@ void TestEphemeris::initTestCase()
 	neptune << 2652428.5 <<  1.183461314456774E+01 <<  2.735324675669263E+01 << -8.365215425062809E-01;
 	neptune << 2661559.5 << -1.583326485146195E+01 <<  2.549828522494925E+01 << -1.600501215414427E-01;
 	neptune << 2670690.5 << -3.019399440765067E+01 <<  2.025533659377639E+00 <<  6.548570322183085E-01;
-
 }
 
 void TestEphemeris::testMercuryHeliocentricEphemerisVsop87()
@@ -1099,7 +1098,6 @@ void TestEphemeris::testMarsHeliocentricEphemerisVsop87()
 			 .arg(QString::number(     z, 'f', 15))
 			 .toUtf8());
 	}
-
 }
 
 void TestEphemeris::testJupiterHeliocentricEphemerisVsop87()

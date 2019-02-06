@@ -847,7 +847,6 @@ void NebulaMgr::loadNebulaSet(const QString& setName)
 			convertDSOCatalog(srcCatalogPath, StelFileMgr::findFile("nebulae/" + setName + "/catalog.pack", StelFileMgr::New), flagDecimalCoordinates);
 		else
 			qWarning() << "ERROR convert catalogue, because source data set is not exists for " << setName;
-
 	}
 
 	if (dsoCatalogPath.isEmpty())
@@ -1722,7 +1721,6 @@ bool NebulaMgr::loadDSOOutlines(const QString &filename)
 			}
 			readOk++;
 		}
-
 	}
 	dsoOutlineFile.close();
 	qDebug() << "Loaded" << readOk << "DSO outline records successfully";	
@@ -3146,7 +3144,6 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 						result << QString("Abell %1").arg(n->Abell_nb);
 					else if (!n->ESO_nb.isEmpty())
 						result << QString("ESO %1").arg(n->ESO_nb);
-
 				}
 			}
 			break;

@@ -158,7 +158,6 @@ Observability::Observability()
 	memset(sunSidT,    0, 4*366*sizeof(double));
 	memset(objectSidT, 0, 2*366*sizeof(double));
 	memset(objectH0,   0,   366*sizeof(double));
-
 }
 
 Observability::~Observability()
@@ -364,7 +363,6 @@ void Observability::draw(StelCore* core)
 	{
 		updateSunH();
 		lastJDMoon = 0.0;
-
 	};
 
 //////////////////////////////////////////////////////////////////
@@ -378,7 +376,6 @@ void Observability::draw(StelCore* core)
 
 	if (isSource) // There is something selected!
 	{ 
-
 // Get the selected source and its name:
 		selectedObject = StelApp::getInstance().getStelObjectMgr().getSelectedObject()[0]; 
 
@@ -408,8 +405,8 @@ void Observability::draw(StelCore* core)
 			souChanged = false;
 		}
 		else 
-		{ // Check also if the (new) source belongs to the Solar System:
-
+		{
+			// Check also if the (new) source belongs to the Solar System:
 			souChanged = true;
 			selName = name;
 
@@ -418,7 +415,6 @@ void Observability::draw(StelCore* core)
 
 			if (!isStar && !isMoon && !isSun)  // Object in the Solar System, but is not Sun nor Moon.
 			{ 
-
 				int gene = -1;
 
 			// If object is a planet's moon, we get its parent planet:
@@ -508,8 +504,8 @@ void Observability::draw(StelCore* core)
 			}
 		}
 		else if (horizH>0.0)
-		{ // The source is not circumpolar and can be seen from this latitude.
-			
+		{
+			// The source is not circumpolar and can be seen from this latitude.
 			if ( LocPos[1]>0.0 ) // The source is at the eastern side...
 			{
 				if ( currH>horizH ) // ... and below the horizon.
@@ -653,7 +649,6 @@ void Observability::draw(StelCore* core)
 	}
 	else if (!isMoon && show_Year)
 	{
-
 		if (!isStar && (souChanged || yearChanged)) // Object moves.
 			updatePlanetData(core); // Re-compute ephemeris.
 		else
@@ -687,7 +682,6 @@ void Observability::draw(StelCore* core)
 			}
 			else
 			{ // Source can be seen.
-
 ///////////////////////////
 // - Part 1. Determine the best observing night (i.e., opposition to the Sun):
 				if (show_Best_Night)
@@ -769,7 +763,6 @@ void Observability::draw(StelCore* core)
 ////////////////////////////
 // - Part 3. Determine range of good nights 
 // (i.e., above horizon before/after twilight):
-
 				if (show_Good_Nights)
 				{
 					int selday = 0;
@@ -781,7 +774,6 @@ void Observability::draw(StelCore* core)
 
 					for (int i=0; i<nDays; i++)
 					{
-
 						poleNight = sunSidT[0][i]<0.0 && qAbs(sunDec[i]-mylat)>=halfpi; // Is it night during 24h?
 						twiGood = (poleNight && qAbs(objectDec[i]-mylat)<halfpi)?true:CheckRise(i);
 						
@@ -840,7 +832,6 @@ void Observability::draw(StelCore* core)
 	}; // Comes from the "else" with "!isMoon"
 
 // Print all results:
-
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	int lineSpacing = (int) (params.devicePixelsPerPixel * 1.3 * ( (double) fontSize));  // between lines
 	int groupSpacing = 6*fontSize*params.devicePixelsPerPixel;  // between daily and yearly results
@@ -917,7 +908,6 @@ double Observability::Lambda(double RA1, double Dec1, double RA2, double Dec2)
 }
 ////////////////////////////////////
 
-
 ////////////////////////////////////
 // Returns the hour angle for a given a Sid. Time:
 double Observability::HourAngle2(double RA, double ST)
@@ -925,10 +915,8 @@ double Observability::HourAngle2(double RA, double ST)
 	double result = toUnsignedRA(RA-ST/15.);
 	result -= (result > 12.) ? 24.0 : 0.0;
 	return result;
-
 }
 ////////////////////////////////////
-
 
 ////////////////////////////////////
 // Converts a float time/angle span (in hours/degrees) in the (integer) format hh/dd,mm,ss:
@@ -939,7 +927,6 @@ void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 	h3 = (int)(((qAbs(hfloat)-qAbs(double(h1)))*60)-h2)*60;
 } 
 ////////////////////////////////////
-
 
 ////////////////////////////////////
 // Adds/subtracts 24hr to ensure a RA between 0 and 24hr:
@@ -1125,9 +1112,6 @@ bool Observability::CheckRise(int day)
 }
 ///////////////////////////////////////////
 
-
-
-
 ///////////////////////////////////////////
 // Finds the dates of Acronichal (Rise, Set) and Cosmical (Rise2, Set2) dates.
 int Observability::calculateHeli(int imethod, int &heliRise, int &heliSet)
@@ -1167,7 +1151,6 @@ int Observability::calculateHeli(int imethod, int &heliRise, int &heliSet)
 				bestDiffHeliSet = qAbs(hourDiffHeliSet);
 				heliSet = i;
 			};
-			
 		};
 	};
 
@@ -1175,13 +1158,7 @@ int Observability::calculateHeli(int imethod, int &heliRise, int &heliSet)
 	heliSet *= (bestDiffHeliSet > 0.083)?-1:1; // Check that difference is lower than 5 minutes.
 	int result = (heliRise>0 || heliSet>0) ? 1 : 0;
 	return (success) ? result : 0;
-
-
 };
-
-
-
-
 
 ///////////////////////////////////////////
 // Finds the dates of Acronichal (Rise, Set) and Cosmical (Rise2, Set2) dates.
@@ -1282,7 +1259,6 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 				     double &eclLon, bool getBack)
                                      //, Vec3d &AltAzVector)
 {
-
 	if (getBack) // Return the Moon and Earth to their current position:
 	{
 		myEarth->computePosition(JD.second);
@@ -1316,8 +1292,6 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 	};
 }
 //////////////////////////////////////////////
-
-
 
 //////////////////////////
 // Get the Observer-to-Moon distance JD:
@@ -1359,14 +1333,10 @@ void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, do
 }
 //////////////////////////////////////////////
 
-
-
-
 //////////////////////////////////////////////
 // Get the Coords of a planet:
 void Observability::getPlanetCoords(StelCore *core, QPair<double, double> JD, double &RA, double &Dec, bool getBack)
 {
-
 	if (getBack)
 	{
 	// Return the planet to its current time:
@@ -1387,17 +1357,13 @@ void Observability::getPlanetCoords(StelCore *core, QPair<double, double> JD, do
 		Pos2 = core->j2000ToEquinoxEqu(LocTrans*Pos1, StelCore::RefractionOff);
 		toRADec(Pos2,RA,Dec);
 	};
-
 }
 //////////////////////////////////////////////
-
-
 
 //////////////////////////////////////////////
 // Solves Moon's, Sun's, or Planet's ephemeris by bissection.
 bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 {
-
 	const int NUM_ITER = 100;
 	int i;
 	double hHoriz, ra, dec, raSun, decSun, tempH, /* tempJd, */ tempEphH, curSidT, eclLon;
@@ -1412,8 +1378,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 // or if the source has changed (i.e., Sun <-> Moon). This saves resources:
 	if (qAbs(myJD.first-lastJDMoon)>StelCore::JD_SECOND || lastType!=bodyType || souChanged)
 	{
-
-
 		lastType = bodyType;
 
 		myEarth->computePosition(myJD.second);
@@ -1503,7 +1467,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				tempEphH = tempH;
 				MoonRise = myJD.first + (tempEphH/24.);
 			};
-
 // Set time:  
 			tempEphH = MoonSet;
 			MoonSet = myJD.first + (MoonSet/24.);
@@ -1584,15 +1547,9 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			MoonCulm = myJD.first + (tempEphH/24.);
 			culmAlt = qAbs(mylat-dec); // 90 - altitude at transit.
 		};
-
-
-
 	lastJDMoon = myJD.first;
 
 	}; // Comes from if (qAbs(myJD.first-lastJDMoon)>JDsec || LastObject!=Kind)
-
-
-
 
 // Find out the days of Full Moon:
 	if (bodyType==2 && show_FullMoon) // || show_SuperMoon))
@@ -1665,7 +1622,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 					
 				};
 
-
 				if (TempFullMoon > myJD.first)
 				{
 					nextFullMoon = TempFullMoon;
@@ -1675,9 +1631,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 					prevFullMoon = TempFullMoon;
 					TempFullMoon += MoonT;
 				};
-
 			};
-
 
 	// Update the string shown in the screen: 
 			int fullDay, fullMonth,fullYear, fullHour, fullMinute, fullSecond;
@@ -1736,7 +1690,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 		lineAcroCos.clear();
 	}; 
 
-
 // Return the Moon and Earth to its current position:
 	if (bodyType<3)
 	{
@@ -1750,9 +1703,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 	return raises;
 }
-
-
-
 
 //////////////////////////////////
 ///  STUFF FOR THE GUI CONFIG

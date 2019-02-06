@@ -702,7 +702,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 					oss << QString("%1: %2").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3)) << "<br />";
 				}
 			}
-
 		}
 	}
 
@@ -735,7 +734,6 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("velocity", getEclipticVelocity().toString());
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
 		map.insert("scale", sphereScale);
-
 	}
 
 	return map;
@@ -928,7 +926,6 @@ void Planet::computePosition(const double dateJDE)
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
-
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
 				if(d + delta_points >= ORBIT_SEGMENTS-1 )
@@ -960,7 +957,6 @@ void Planet::computePosition(const double dateJDE)
 		}
 		else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS  && orbitCached)
 		{
-
 			for( int d=ORBIT_SEGMENTS-1; d>=0; d-- )
 			{
 				if(d + delta_points < 0 )
@@ -987,7 +983,6 @@ void Planet::computePosition(const double dateJDE)
 			}
 
 			lastOrbitJDE = new_date;
-
 		}
 		else if( delta_points || !orbitCached)
 		{
@@ -1018,7 +1013,6 @@ void Planet::computePosition(const double dateJDE)
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 
 		lastJDE = dateJDE;
-
 	}
 	else if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
@@ -1029,7 +1023,6 @@ void Planet::computePosition(const double dateJDE)
 				orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJDE = dateJDE;
 	}
-
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.

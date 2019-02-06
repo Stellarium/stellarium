@@ -411,7 +411,6 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 			event->setAccepted(true);
 			return;
 		}
-
 	}
 
 	// In case we show oculars with black circle, ignore mouse presses outside image circle:
@@ -739,7 +738,6 @@ void Oculars::init()
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
 		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toDouble());
-
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1788,7 +1786,6 @@ void Oculars::paintCCDBounds()
 			}
 		}
 	}
-
 }
 
 void Oculars::paintCrosshairs()
@@ -1815,7 +1812,8 @@ void Oculars::paintCrosshairs()
 
 void Oculars::paintTelrad()
 {
-	if (!flagShowOculars) {
+	if (!flagShowOculars)
+	{
 		StelCore *core = StelApp::getInstance().getCore();
 		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 		// StelPainter drawing
@@ -1828,7 +1826,6 @@ void Oculars::paintTelrad()
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
-
 	}
 }
 
@@ -2098,7 +2095,6 @@ void Oculars::paintText(const StelCore* core)
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
-	
 }
 
 void Oculars::validateAndLoadIniFile()
@@ -2296,7 +2292,6 @@ void Oculars::toggleLines(bool visible)
 		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", false);
 		propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", false);
 	}
-
 }
 
 void Oculars::zoomOcular()

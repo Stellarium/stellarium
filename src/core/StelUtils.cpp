@@ -907,8 +907,6 @@ QString localeDateString(const int year, const int month, const int day, const i
 		{
 			out += fmt.at(i);
 		}
-
-
 	}
 
 	return out;
@@ -918,7 +916,6 @@ QString localeDateString(const int year, const int month, const int day, const i
 //! limitations of qdatetime for large dates in the past.  see QDateTime::toString().
 QString localeDateString(const int year, const int month, const int day, const int dayOfWeek)
 {
-
 	// try the QDateTime first
 	QDate test(year, month, day);
 
@@ -1140,7 +1137,6 @@ double yearFraction(const int year, const int month, const double day)
 	double d=dayInYear(year, month, 0)+day;
 	double daysInYear=( isLeapYear(year) ? 366.0 : 365.0);
 	return year+d/daysInYear;
-
 }
 
 //! given the submitted year/month/day hour:minute:second, try to
@@ -2545,10 +2541,8 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 			}
 
 			out.append(inflateBuffer.constData(), CHUNK - strm.avail_out);
-
-		}while(strm.avail_out == 0); //if zlib has more data for us, repeat
-
-	}while(ret!=Z_STREAM_END);
+		} while(strm.avail_out == 0); //if zlib has more data for us, repeat
+	} while(ret!=Z_STREAM_END);
 
 	// close zlib
 	inflateEnd(&strm);

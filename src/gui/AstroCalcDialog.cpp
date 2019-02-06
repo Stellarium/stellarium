@@ -2910,7 +2910,6 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		ui->monthlyElevationGraph->replot();
 
 		ui->monthlyElevationCelestialObjectLabel->setText(name);
-
 	}
 
 	// clean up the data when selection is removed
@@ -2919,7 +2918,6 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		ui->monthlyElevationGraph->graph(0)->data()->clear();
 		ui->monthlyElevationGraph->replot();
 	}
-
 }
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
@@ -4151,7 +4149,6 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		}
 		else
 			plotAngularDistanceGraph = false;
-
 	}
 
 	// special case (PCalc)
@@ -5024,7 +5021,6 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-
 					}
 					break;
 				case 16: // Bright variable stars
@@ -5049,7 +5045,6 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-
 					}
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
@@ -5372,7 +5367,6 @@ void AstroCalcDialog::selectWutObject(const QModelIndex &index)
 				{
 					mvMgr->moveToObject(newSelected[0], mvMgr->getAutoMoveDuration());
 					mvMgr->setFlagTracking(true);
-
 				}
 				else
 					GETSTELMODULE(StelObjectMgr)->unSelect();
@@ -5956,7 +5950,6 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		ui->angularDistancePlot->graph(0)->setData(x, y);
 		ui->angularDistancePlot->graph(0)->setName("[Angular distance]");
 		ui->angularDistancePlot->replot();
-
 	}
 
 	// clean up the data when selection is removed

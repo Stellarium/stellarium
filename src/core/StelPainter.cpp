@@ -67,7 +67,6 @@ StelPainter::GLState::GLState(QOpenGLFunctions* gl)
 	  lineWidth(1.0f),
 	  gl(gl)
 {
-
 }
 
 void StelPainter::GLState::apply()
@@ -447,8 +446,6 @@ void StelPainter::computeFanDisk(float radius, int innerFanSlices, int level, QV
 			vertexArr << x << y << 0;
 		}
 	}
-
-
 }
 
 static void sSphereMapTexCoordFast(float rho_div_fov, const float costheta, const float sintheta, QVector<float>& out)

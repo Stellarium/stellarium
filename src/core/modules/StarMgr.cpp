@@ -1518,7 +1518,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			else
 				break;
 		}
-
 	}
 	else
 	{

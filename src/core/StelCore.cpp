@@ -1011,8 +1011,6 @@ void StelCore::updateTransformMatrices()
 
 //		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 //				Mat4d::translation(-position->getCenterVsop87Pos());
-
-
 	}
 	else
 	{
@@ -1303,7 +1301,6 @@ float StelCore::getUTCOffset(const double JD) const
 
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
-
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;
@@ -2620,8 +2617,8 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 	int entry=0;
 	while (iau_constlineVec.at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size()){
-
+	while (entry<iau_constlineVec.size())
+	{
 		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
 			entry++;
 		while (iau_constlineVec.at(entry).RAlow >= RA1875)

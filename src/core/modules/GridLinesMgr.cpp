@@ -742,7 +742,6 @@ void SkyLine::draw(StelCore *core) const
 				lat=(obsLatRad>0 ? -1.0 : +1.0) * obsLatRad + (M_PI/2.0);
 			else // southern circle
 				lat=(obsLatRad>0 ? +1.0 : -1.0) * obsLatRad - (M_PI/2.0);
-
 		}
 		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
 		const Vec3d rotCenter(0,0,declinationCap.d);
@@ -842,7 +841,6 @@ void SkyLine::draw(StelCore *core) const
 			return;
 	}
 
-
 	Vec3d middlePoint = p1+p2;
 	middlePoint.normalize();
 	if (!viewPortSphericalCap.contains(middlePoint))
@@ -858,7 +856,6 @@ void SkyLine::draw(StelCore *core) const
 // 	// Johannes: use a big radius as a dirty workaround for the bug that the
 // 	// ecliptic line is not drawn around the observer, but around the sun:
 // 	const Vec3d vv(1000000,0,0);
-
 }
 
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
