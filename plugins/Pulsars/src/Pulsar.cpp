@@ -177,7 +177,6 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 	if (flags&ObjectType)
 	{
-
 		if (glitch==0)
 			oss << QString("%1: <b>%2</b>").arg(q_("Type"), q_("pulsar")) << "<br />";
 		else
@@ -284,7 +283,6 @@ QString Pulsar::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 		if (notes.length()>0)
 			oss << "<br />" << QString("%1: %2").arg(q_("Notes")).arg(getPulsarTypeInfoString(notes)) << "<br />";
-
 	}
 
 	postProcessInfoString(str, flags);

@@ -227,7 +227,6 @@ void Scenery3d::draw(StelCore* core)
 	//the message is always drawn
 	if (messageFader.getInterstate() > 0.000001f)
 	{
-
 		const StelProjectorP prj = core->getProjection(StelCore::FrameEquinoxEqu);
 		StelPainter painter(prj);
 		painter.setFont(font);

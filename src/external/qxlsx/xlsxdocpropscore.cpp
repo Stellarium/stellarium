@@ -159,7 +159,6 @@ bool DocPropsCore::loadFromXmlFile(QIODevice *device)
 
          if (reader.hasError()) {
              qDebug()<<"Error when read doc props core file."<<reader.errorString();
-
          }
     }
     return true;

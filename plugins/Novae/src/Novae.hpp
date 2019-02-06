@@ -260,9 +260,7 @@ private slots:
 
 	void updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal);
 	void downloadComplete(QNetworkReply * reply);
-
 };
-
 
 #include <QObject>
 #include "StelPluginInterface.hpp"

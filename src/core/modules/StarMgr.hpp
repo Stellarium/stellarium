@@ -67,7 +67,6 @@ typedef struct
 	unsigned int sao;
 	unsigned int hd;
 	unsigned int hr;
-
 } crossid;
 
 typedef QMap<StelObjectP, float> StelACStarData;

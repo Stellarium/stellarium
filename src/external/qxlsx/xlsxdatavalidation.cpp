@@ -38,7 +38,6 @@ DataValidationPrivate::DataValidationPrivate()
     , errorStyle(DataValidation::Stop), allowBlank(false), isPromptMessageVisible(true)
     , isErrorMessageVisible(true)
 {
-
 }
 
 DataValidationPrivate::DataValidationPrivate(DataValidation::ValidationType type, DataValidation::ValidationOperator op, const QString &formula1, const QString &formula2, bool allowBlank)
@@ -55,7 +54,6 @@ DataValidationPrivate::DataValidationPrivate(const DataValidationPrivate &other)
     , errorStyle(DataValidation::Stop), allowBlank(false), isPromptMessageVisible(true)
     , isErrorMessageVisible(true)
 {
-
 }
 
 DataValidationPrivate::~DataValidationPrivate()
@@ -120,7 +118,6 @@ DataValidationPrivate::~DataValidationPrivate()
 DataValidation::DataValidation(ValidationType type, ValidationOperator op, const QString &formula1, const QString &formula2, bool allowBlank)
     :d(new DataValidationPrivate(type, op, formula1, formula2, allowBlank))
 {
-
 }
 
 /*!
@@ -129,7 +126,6 @@ DataValidation::DataValidation(ValidationType type, ValidationOperator op, const
 DataValidation::DataValidation()
     :d(new DataValidationPrivate())
 {
-
 }
 
 /*!
@@ -138,7 +134,6 @@ DataValidation::DataValidation()
 DataValidation::DataValidation(const DataValidation &other)
     :d(other.d)
 {
-
 }
 
 /*!

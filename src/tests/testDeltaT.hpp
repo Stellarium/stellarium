@@ -27,7 +27,8 @@
 
 class TestDeltaT : public QObject
 {
-Q_OBJECT
+	Q_OBJECT
+
 private slots:
 	void initTestCase();
 	void testDeltaTByEspenakMeeus();
@@ -37,7 +38,6 @@ private slots:
 	void testDeltaTByStephensonMorrison1984WideDates();
 	void testDeltaTByStephensonMorrison2004WideDates();
 	void testDeltaTByMeeusSimons();
-
 };
 
 #endif // _TESTDELTAT_HPP

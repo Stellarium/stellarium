@@ -49,7 +49,6 @@ struct XlsxMarker
     XlsxMarker(int row, int column, int rowOffset, int colOffset)
         :cell(QPoint(row, column)), offset(rowOffset, colOffset)
     {
-
     }
 
     int row() const {return cell.x();}

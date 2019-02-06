@@ -38,12 +38,10 @@ QT_BEGIN_NAMESPACE_XLSX
 ChartPrivate::ChartPrivate(Chart *q, Chart::CreateFlag flag)
     :AbstractOOXmlFilePrivate(q, flag), chartType(static_cast<Chart::ChartType>(0))
 {
-
 }
 
 ChartPrivate::~ChartPrivate()
 {
-
 }
 
 /*!
@@ -276,7 +274,6 @@ bool ChartPrivate::loadXmlXxxChart(QXmlStreamReader &reader)
             if (reader.name() == QLatin1String("ser")) {
                 loadXmlSer(reader);
             } else if (reader.name() == QLatin1String("axId")) {
-
             }
         } else if (reader.tokenType() == QXmlStreamReader::EndElement
                    && reader.name() == name) {

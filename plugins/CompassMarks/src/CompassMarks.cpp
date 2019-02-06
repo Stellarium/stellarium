@@ -114,8 +114,6 @@ void CompassMarks::init()
 	{
 		qWarning() << "WARNING: unable create toolbar button for CompassMarks plugin: " << e.what();
 	}
-
-
 }
 
 //! Draw any parts on the screen which are for our module

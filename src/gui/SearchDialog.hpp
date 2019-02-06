@@ -104,6 +104,7 @@ public:
 	static QString getGreekLetterByName(const QString& potentialGreekLetterName);
 	//! URL of the default SIMBAD server (Strasbourg).
 	static const char* DEF_SIMBAD_URL;
+
 public slots:
 	void retranslate();
 	//! This style only displays the text search field and the search button
@@ -241,7 +242,6 @@ private:
 
 public:
 	static QString extSearchText;
-
 };
 
 #endif // _SEARCHDIALOG_HPP

@@ -405,9 +405,7 @@ private:
         QString msgHeliRise, msgHeliSet, msgNoHeliRise;
 	QString msgWholeYear, msgNotObs, msgAboveHoriz, msgToday, msgThisYear, msgPrevFullMoon, msgNextFullMoon;
 	//! @}
-
 };
-
 
 #include <QObject>
 #include "StelPluginInterface.hpp"

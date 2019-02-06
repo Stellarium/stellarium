@@ -431,14 +431,12 @@ void BookmarksDialog::loadBookmarks()
 				addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 				i++;
 			}
-
 		}
 		catch (std::runtime_error &e)
 		{
 			qDebug() << "[Bookmarks] File format is wrong! Error: " << e.what();
 			return;
 		}
-
 	}
 }
 
@@ -519,6 +517,5 @@ void BookmarksDialog::saveBookmarks() const
 	StelJsonParser::write(bmList, &jsonFile);
 	jsonFile.flush();
 	jsonFile.close();
-
 }
 

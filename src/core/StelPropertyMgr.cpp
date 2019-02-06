@@ -57,12 +57,10 @@ void StelProperty::propertyChanged()
 
 StelPropertyMgr::StelPropertyMgr()
 {
-
 }
 
 StelPropertyMgr::~StelPropertyMgr()
 {
-
 }
 
 StelProperty* StelPropertyMgr::registerProperty(const QString& id, QObject* target, const char* propertyName)
@@ -201,7 +199,6 @@ StelPropertyProxy::StelPropertyProxy(StelProperty *prop, QObject *parent)
 StelPropertyIntProxy::StelPropertyIntProxy(StelProperty *prop, QObject *parent)
 	: StelPropertyProxy(prop,parent)
 {
-
 }
 
 void StelPropertyIntProxy::onPropertyChanged(const QVariant &value)
@@ -212,7 +209,6 @@ void StelPropertyIntProxy::onPropertyChanged(const QVariant &value)
 StelPropertyBoolProxy::StelPropertyBoolProxy(StelProperty *prop, QObject *parent)
 	: StelPropertyProxy(prop,parent)
 {
-
 }
 
 void StelPropertyBoolProxy::onPropertyChanged(const QVariant &value)
@@ -223,7 +219,6 @@ void StelPropertyBoolProxy::onPropertyChanged(const QVariant &value)
 StelPropertyDoubleProxy::StelPropertyDoubleProxy(StelProperty *prop, QObject *parent)
 	: StelPropertyProxy(prop,parent)
 {
-
 }
 
 void StelPropertyDoubleProxy::onPropertyChanged(const QVariant &value)

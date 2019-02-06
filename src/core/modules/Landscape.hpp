@@ -365,8 +365,8 @@ public:
 	//! @param angleRotateZ azimuth rotation angle, degrees
 	void create(const QString name, const QString& maptex, float texturefov, float angleRotateZ);
 	void create(const QString name, float texturefov, const QString& maptex, const QString &_maptexFog="", const QString& _maptexIllum="", const float angleRotateZ=0.0f);
-private:
 
+private:
 	StelTextureSP mapTex;      //!< The fisheye image, centered on the zenith.
 	StelTextureSP mapTexFog;   //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
 				   //!< can also be smaller, just the texture is again mapped onto the same geometry.
@@ -416,8 +416,8 @@ public:
 				const float _mapTexTop=90.0f, const float _mapTexBottom=-90.0f,
 				const float _fogTexTop=90.0f, const float _fogTexBottom=-90.0f,
 				const float _illumTexTop=90.0f, const float _illumTexBottom=-90.0f, const Vec3f _bottomCapColor=Vec3f(-1.0f, 0.0f, 0.0f));
-private:
 
+private:
 	StelTextureSP mapTex;      //!< The equirectangular panorama texture
 	StelTextureSP mapTexFog;   //!< Optional panorama of identical size (create as layer over the mapTex image in your favorite image processor).
 				   //!< can also be smaller, just the texture is again mapped onto the same geometry.

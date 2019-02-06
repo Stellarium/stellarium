@@ -37,18 +37,15 @@ QT_BEGIN_NAMESPACE_XLSX
 
 ConditionalFormattingPrivate::ConditionalFormattingPrivate()
 {
-
 }
 
 ConditionalFormattingPrivate::ConditionalFormattingPrivate(const ConditionalFormattingPrivate &other)
     :QSharedData(other)
 {
-
 }
 
 ConditionalFormattingPrivate::~ConditionalFormattingPrivate()
 {
-
 }
 
 void ConditionalFormattingPrivate::writeCfVo(QXmlStreamWriter &writer, const XlsxCfVoData &cfvo) const
@@ -142,7 +139,6 @@ void ConditionalFormattingPrivate::writeCfVo(QXmlStreamWriter &writer, const Xls
 ConditionalFormatting::ConditionalFormatting()
     :d(new ConditionalFormattingPrivate())
 {
-
 }
 
 /*!
@@ -151,7 +147,6 @@ ConditionalFormatting::ConditionalFormatting()
 ConditionalFormatting::ConditionalFormatting(const ConditionalFormatting &other)
     :d(other.d)
 {
-
 }
 
 /*!

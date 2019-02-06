@@ -65,7 +65,6 @@ class StelCore : public QObject
 	Q_PROPERTY(QString currentTimeZone READ getCurrentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
 
 public:
-
 	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType

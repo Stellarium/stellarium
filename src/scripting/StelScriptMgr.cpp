@@ -89,7 +89,6 @@ public:
 
 private:
 	bool isPaused;
-
 };
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
@@ -159,7 +158,6 @@ void StelScriptMgr::addModules()
 		QScriptValue objectValue = engine->newQObject(m);
 		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
-
 }
 
 QStringList StelScriptMgr::getScriptList() const
@@ -464,14 +462,15 @@ void StelScriptMgr::setScriptRate(float r)
 	
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(core->getTimeRate());
 	engine->globalObject().setProperty("scriptRateReadOnly", r);
-
 }
 
-void StelScriptMgr::pauseScript() {
+void StelScriptMgr::pauseScript()
+{
 	agent->setPauseScript(true);
 }
 
-void StelScriptMgr::resumeScript() {
+void StelScriptMgr::resumeScript()
+{
 	agent->setPauseScript(false);
 }
 

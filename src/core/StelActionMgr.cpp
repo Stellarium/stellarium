@@ -195,7 +195,6 @@ StelActionMgr::StelActionMgr() :
 
 StelActionMgr::~StelActionMgr()
 {
-	
 }
 
 StelAction* StelActionMgr::addAction(const QString& id, const QString& groupId, const QString& text,

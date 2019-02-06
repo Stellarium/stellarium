@@ -200,7 +200,6 @@ void NavStars::draw(StelCore* core)
 			painter.drawText(pos[0], pos[1], label, 0, 10.f, 10.f, false);
 		}
 	}
-
 }
 
 

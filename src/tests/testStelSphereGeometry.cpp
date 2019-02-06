@@ -351,7 +351,6 @@ void TestStelSphericalGeometry::testSphericalPolygon()
 	bug1 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[52.99403, -27.683551], [53.047302, -27.683551], [53.047302, -27.729923], [52.99403, -27.729923]]]}");
 	bug2 = SphericalRegionP::loadFromJson("{\"worldCoords\": [[[52.993701, -27.683092], [53.047302, -27.683092], [53.047302, -27.729839], [52.993701, -27.729839]]]}");
 	SphericalRegionP bugIntersect = bug1->getIntersection(bug2);
-
 }
 
 void TestStelSphericalGeometry::testLoading()

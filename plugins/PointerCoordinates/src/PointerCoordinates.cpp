@@ -272,7 +272,6 @@ void PointerCoordinates::draw(StelCore *core)
 					ha_sidereal -= 24.;
 				cxt = QString("%1h").arg(ha_sidereal, 0, 'f', 5);
 				cyt = StelUtils::radToDecDegStr(cy);
-
 			}
 			else
 			{

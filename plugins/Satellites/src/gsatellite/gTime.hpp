@@ -127,12 +127,7 @@ public:
 
 private:
 	double m_timeSpan; //time span in julian days
-
 };
-
-
-
-
 
 //! @class gTime
 //! This class implements time calculations.
@@ -195,8 +190,6 @@ public:
 		m_time = t;
 		return *this;
 	}
-
-
 
 	//////////////////////////////////////
 	// Time Machine getting operations
@@ -304,7 +297,6 @@ public:
 
 private:
 	double m_time; //Time in Julian Days
-
 };
 
 

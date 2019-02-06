@@ -439,7 +439,6 @@ void StelProjector::computeBoundingCap()
 	h = boundingCap.n*e5;
 	if (boundingCap.d > h)
 		boundingCap.d=h;
-
 }
 
 /*************************************************************************

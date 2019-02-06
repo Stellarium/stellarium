@@ -32,7 +32,6 @@ private slots:
 	void testJDFormBesselianEpoch();
 	void testEquToEqlTransformations();
 	void testEclToEquTransformations();
-
 };
 
 #endif // _TESTCOMPUTATIONS_HPP

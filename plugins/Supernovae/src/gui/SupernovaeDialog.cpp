@@ -110,7 +110,6 @@ void SupernovaeDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
-
 }
 
 void SupernovaeDialog::setAboutHtml(void)

@@ -62,6 +62,7 @@ class StelPainter;
 class Exoplanet : public StelObject
 {
 	friend class Exoplanets;
+
 public:
 	static const QString EXOPLANET_TYPE;
 
@@ -183,7 +184,6 @@ public:
 	}
 
 private:
-
 	QString getPlanetaryClassI18n(QString ptype) const;
 
 	bool initialized;

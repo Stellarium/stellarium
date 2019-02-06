@@ -130,7 +130,6 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				break;
 			}
 		}
-
 	}
 
 	if (typeOfAsterism>0)
@@ -188,7 +187,6 @@ void Asterism::drawName(StelPainter& sPainter) const
 	QString name = getNameI18n();
 	sPainter.setColor(labelColor[0], labelColor[1], labelColor[2], nameFader.getInterstate());
 	sPainter.drawText(XYname[0], XYname[1], name, 0., -sPainter.getFontMetrics().width(name)/2, 0, false);
-
 }
 
 const Asterism* Asterism::isStarIn(const StelObject* s) const

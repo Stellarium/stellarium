@@ -310,8 +310,8 @@ signals:
 	void progressBarRemoved(const StelProgressController*);
 	//! Called just before we exit Qt mainloop.
 	void aboutToQuit();
-private:
 
+private:
 	//! Handle mouse clics.
 	void handleClick(class QMouseEvent* event);
 	//! Handle mouse wheel.
@@ -384,8 +384,6 @@ private:
 	StelScriptMgr* scriptMgr;
 #endif
 
-
-
 	StelGuiBase* stelGui;
 	
 	// Store the ratio between real device pixel in "Device Independent Pixel"
@@ -450,7 +448,6 @@ private:
 
 	// The current main FBO/render target handle, without requiring GL queries. Valid through a draw() call
 	quint32 currentFbo;
-
 };
 
 #endif // STELAPP_HPP

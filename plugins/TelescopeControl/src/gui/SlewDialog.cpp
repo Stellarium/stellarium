@@ -251,7 +251,6 @@ void SlewDialog::getCenterInfo()
 
 void SlewDialog::editStoredPoints()
 {
-
 	storedPointsDialog->setVisible(true);
 	QVariantList qvl;
 	for (int i = 1;i< ui->comboBoxStoredPoints->count(); i++)

@@ -106,7 +106,6 @@ void StelSkyImageTile::draw(StelCore* core, StelPainter& sPainter, float)
 // Return the list of tiles which should be drawn.
 void StelSkyImageTile::getTilesToDraw(QMultiMap<double, StelSkyImageTile*>& result, StelCore* core, const SphericalRegionP& viewPortPoly, float limitLuminance, bool recheckIntersect)
 {
-
 #ifndef NDEBUG
 	// When this method is called, we can assume that:
 	// - the parent tile min resolution was reached
@@ -329,7 +328,6 @@ bool StelSkyImageTile::drawTile(StelCore* core, StelPainter& sPainter)
 		}
 		sPainter.setColor(extinctedColor[0], extinctedColor[1], extinctedColor[2], extinctedColor[3]);
 		sPainter.drawSphericalRegion(poly.data(), StelPainter::SphericalPolygonDrawModeTextureFill);
-		
 	}
 
 #ifdef DEBUG_STELSKYIMAGE_TILE

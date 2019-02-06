@@ -46,12 +46,10 @@ CellFormulaPrivate::CellFormulaPrivate(const CellFormulaPrivate &other)
     , formula(other.formula), type(other.type), reference(other.reference)
     , ca(other.ca), si(other.si)
 {
-
 }
 
 CellFormulaPrivate::~CellFormulaPrivate()
 {
-
 }
 
 /*!
@@ -83,7 +81,6 @@ CellFormula::CellFormula()
 CellFormula::CellFormula(const char *formula, FormulaType type)
     :d(new CellFormulaPrivate(QString::fromLatin1(formula), CellRange(), type))
 {
-
 }
 
 /*!
@@ -92,7 +89,6 @@ CellFormula::CellFormula(const char *formula, FormulaType type)
 CellFormula::CellFormula(const QString &formula, FormulaType type)
     :d(new CellFormulaPrivate(formula, CellRange(), type))
 {
-
 }
 
 /*!
@@ -101,7 +97,6 @@ CellFormula::CellFormula(const QString &formula, FormulaType type)
 CellFormula::CellFormula(const QString &formula, const CellRange &ref, FormulaType type)
     :d(new CellFormulaPrivate(formula, ref, type))
 {
-
 }
 
 /*!
@@ -127,7 +122,6 @@ CellFormula &CellFormula::operator =(const CellFormula &other)
  */
 CellFormula::~CellFormula()
 {
-
 }
 
 /*!

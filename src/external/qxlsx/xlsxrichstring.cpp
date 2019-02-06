@@ -34,7 +34,6 @@ QT_BEGIN_NAMESPACE_XLSX
 RichStringPrivate::RichStringPrivate()
     :_dirty(true)
 {
-
 }
 
 RichStringPrivate::RichStringPrivate(const RichStringPrivate &other)
@@ -42,12 +41,10 @@ RichStringPrivate::RichStringPrivate(const RichStringPrivate &other)
     ,fragmentFormats(other.fragmentFormats)
     , _idKey(other.idKey()), _dirty(other._dirty)
 {
-
 }
 
 RichStringPrivate::~RichStringPrivate()
 {
-
 }
 
 /*!
@@ -79,7 +76,6 @@ RichString::RichString(const QString text)
 RichString::RichString(const RichString &other)
     :d(other.d)
 {
-
 }
 
 /*!
@@ -87,7 +83,6 @@ RichString::RichString(const RichString &other)
  */
 RichString::~RichString()
 {
-
 }
 
 /*!

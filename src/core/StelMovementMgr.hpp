@@ -66,7 +66,6 @@ class StelMovementMgr : public StelModule
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
 public:
-
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
@@ -482,7 +481,6 @@ private:
 	//@{
 	int lastMessageID;
 	//@}
-
 };
 
 #endif // STELMOVEMENTMGR_HPP
