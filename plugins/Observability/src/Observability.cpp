@@ -755,10 +755,7 @@ void Observability::draw(StelCore* core)
 						lineHeli = msgHeliRise.arg(heliRiseStr).arg(heliSetStr);
 					else
 						lineHeli = msgNoHeliRise;
-
-
 				}
-
 
 ////////////////////////////
 // - Part 3. Determine range of good nights 
@@ -825,7 +822,6 @@ void Observability::draw(StelCore* core)
 						// Nights when the target is above the horizon
 						lineObservableRange = msgAboveHoriz.arg(dateRange);
 					};
-
 				}; // Comes from show_Good_Nights==True"
 			}; // Comes from the "else" of "culmAlt>=..." 
 		};// Comes from  "souChanged || ..."
@@ -1083,12 +1079,10 @@ void Observability::updateSunH()
 }
 ////////////////////////////////////////////
 
-
 ///////////////////////////////////////////
 // Checks if a source can be observed with the Sun below the twilight altitude.
 bool Observability::CheckRise(int day)
 {
-
 	// If Sun can't reach twilight elevation, the target is not visible.
 	if (sunSidT[0][day]<0.0 || sunSidT[1][day]<0.0)
 		return false;
@@ -1298,7 +1292,6 @@ void Observability::getSunMoonCoords(StelCore *core, QPair<double, double> JD,
 // getBack controls whether Earth and Moon must be returned to their original positions after computation.
 void Observability::getMoonDistance(StelCore *core, QPair<double, double> JD, double &distance, bool getBack)
 {
-
 	if (getBack) // Return the Moon and Earth to their current position:
 	{
 		myEarth->computePosition(JD.second);
@@ -1554,12 +1547,9 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 // Find out the days of Full Moon:
 	if (bodyType==2 && show_FullMoon) // || show_SuperMoon))
 	{
-
 	// Only estimate date of Full Moon if we have changed Lunar month:
 		if (myJD.first > nextFullMoon || myJD.first < prevFullMoon)
 		{
-
-
 	// Estimate the nearest (in time) Full Moon:
 			double nT;
 			double dT = std::modf((myJD.first-RefFullMoon)/MoonT,&nT);
@@ -1578,11 +1568,10 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			double Phase1;
 
 			for (int j=0; j<2; j++) 
-			{ // Two steps: one for the previos Full Moon and the other for the next one.
-
+			{
+				// Two steps: one for the previos Full Moon and the other for the next one.
 				iniEst1 =  TempFullMoon - 0.25*MoonT; 
 				iniEst2 =  TempFullMoon + 0.25*MoonT; 
-
 
 				Sec1.first = iniEst1; // TempFullMoon - 0.05*MoonT; // Initial estimates of Full-Moon dates
 				Sec1.second= core->computeDeltaT(Sec1.first)/86400.0; // enough to compute this once.
@@ -1594,7 +1583,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 				Temp1 = eclLon; //Lambda(RA,Dec,RAS,DecS);
 				getSunMoonCoords(core,QPair<double, double>(Sec2.first, Sec2.first+Sec2.second),raSun,decSun,ra,dec,eclLon,false);
 				Temp2 = eclLon; //Lambda(RA,Dec,RAS,DecS);
-
 
 				for (int i=0; i<100; i++) // A limit of 100 iterations.
 				{
@@ -1612,14 +1600,11 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 					};
 
-
-
 					if (qAbs(Sec2.first-Sec1.first) < 10.*dT)  // 1 minute accuracy; convergence.
 					{
 						TempFullMoon = (Sec1.first+Sec2.first)/2.;
 						break;
 					};
-					
 				};
 
 				if (TempFullMoon > myJD.first)
@@ -1656,7 +1641,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 
 			lineObservableRange.clear(); 
 			lineAcroCos.clear();
-
 
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
 //			double monthFrac, monthTemp, maxMoonDate;
@@ -1699,7 +1683,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	{
 		getPlanetCoords(core, myJD, ra, dec, true);
 	};
-
 
 	return raises;
 }

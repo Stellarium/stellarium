@@ -986,7 +986,6 @@ void Planet::computePosition(const double dateJDE)
 		}
 		else if( delta_points || !orbitCached)
 		{
-
 			// update all points (less efficient)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
