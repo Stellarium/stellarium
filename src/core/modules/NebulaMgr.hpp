@@ -923,8 +923,8 @@ private slots:
 
 	//! Connect from StelApp to reflect font size change.
 	void setFontSizeFromApp(int size){nebulaFont.setPixelSize(size);}
-private:
 
+private:
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
 

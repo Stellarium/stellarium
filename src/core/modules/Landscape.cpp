@@ -1045,8 +1045,6 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 #endif
 */
 	return qAlpha(pixVal)/255.0f;
-
-
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // spherical panoramas
@@ -1274,5 +1272,4 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 #endif
 */
 	return qAlpha(pixVal)/255.0f;
-
 }

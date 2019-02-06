@@ -1012,7 +1012,6 @@ void ConfigurationDialog::setDefaultViewOptions()
 	conf->beginGroup("DialogPositions");
 	conf->remove("");
 	conf->endGroup();
-
 }
 
 void ConfigurationDialog::populatePluginsList()

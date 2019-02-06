@@ -295,7 +295,6 @@ public:
 	}
 
 protected:
-
 	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE
 	{
 		// Try to trigger a global shortcut.
@@ -1265,10 +1264,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 	{
 		qDebug() << "dumpOpenGLdiagnostics(): No OpenGL context";
 	}
-
-
 }
-
 
 void StelMainView::deinit()
 {
@@ -1548,7 +1544,6 @@ void StelMainView::doScreenshot(void)
 				int gray=qGray(rgb);
 				im.setPixel(col, row, qRgb(gray, 0, 0));
 			}
-
 	}
 	if (flagInvertScreenShotColors)
 		im.invertPixels();

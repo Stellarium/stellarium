@@ -351,7 +351,6 @@ QString StelLocaleMgr::sTimeFormatToString(STimeFormat tf) const
 			qWarning() << "WARNING: unknown time format, fallback to system default.";
 			tfmt = "system_default";
 			break;
-
 	}
 	return tfmt;
 }
@@ -388,7 +387,6 @@ QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 			qWarning() << "WARNING: unknown date format, fallback to system default.";
 			dfmt = "system_default";
 			break;
-
 	}
 	return dfmt;
 }

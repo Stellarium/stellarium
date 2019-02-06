@@ -456,7 +456,6 @@ void Novae::setNovaeMap(const QVariantMap& map)
 		NovaP n(new Nova(novaeData));
 		if (n->initialized)
 			nova.append(n);
-
 	}
 }
 
@@ -596,7 +595,6 @@ void Novae::updateJSON(void)
 
 	qDebug() << "[Novae] Updating novae catalog...";
 	startDownload(updateUrl);
-
 }
 
 void Novae::deleteDownloadProgressBar()
@@ -717,7 +715,6 @@ void Novae::downloadComplete(QNetworkReply *reply)
 
 		lastUpdate = QDateTime::currentDateTime();
 		conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
-
 	}
 	catch (std::runtime_error &e)
 	{

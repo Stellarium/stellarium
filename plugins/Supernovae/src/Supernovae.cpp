@@ -204,7 +204,6 @@ void Supernovae::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Supernovae::drawPointer(StelCore* core, StelPainter& painter)
@@ -416,7 +415,6 @@ void Supernovae::setSNeMap(const QVariantMap& map)
 		SupernovaP sn(new Supernova(sneData));
 		if (sn->initialized)
 			snstar.append(sn);
-
 	}
 }
 

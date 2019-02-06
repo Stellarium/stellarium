@@ -221,7 +221,6 @@ void StelLogger::init(const QString& logFilePath)
 		{
 			writeLog(systemLines.at(i).trimmed());
 		}
-
 	}
 
 #elif defined Q_OS_BSD4

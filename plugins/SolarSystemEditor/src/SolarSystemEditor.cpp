@@ -133,7 +133,6 @@ void SolarSystemEditor::init()
 
 	// key bindings and other actions
 	addAction("actionShow_MPC_Import", N_("Solar System Editor"), N_("Import orbital elements in MPC format..."), mainWindow, "newImportMPC()", "Ctrl+Alt+S");
-
 }
 
 double SolarSystemEditor::getCallOrder(StelModuleActionName) const// actionName
@@ -343,7 +342,6 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	//Process the existing and new files:
 	if (QFile::exists(customSolarSystemFilePath))
 	{
-
 		QSettings minorBodies(customSolarSystemFilePath, StelIniFormat);
 
 		// add and overwrite existing data in the user's ssystem_minor.ini by the data in the new file.

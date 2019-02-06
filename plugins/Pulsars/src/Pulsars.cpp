@@ -234,7 +234,6 @@ void Pulsars::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
@@ -507,7 +506,6 @@ void Pulsars::setPSRMap(const QVariantMap& map)
 		PulsarP pulsar(new Pulsar(psrData));
 		if (pulsar->initialized)
 			psr.append(pulsar);
-
 	}
 }
 

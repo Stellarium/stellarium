@@ -128,7 +128,6 @@ void TestDates::formatting()
 	// qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar122008), -4.f);
 	// double mar012008 = QDate(2008,3,1).toJulianDay();
 	// qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar012008), -5.f);
-
 }
 
 void TestDates::testRolloverAndValidity()
@@ -357,7 +356,6 @@ void TestDates::testJulianDaysRange(int jd_a, int jd_b)
 		mm0 = mm;
 		yy0 = yy;
 	}
-
 }
 
 void TestDates::testJulianDays()

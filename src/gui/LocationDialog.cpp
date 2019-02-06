@@ -420,7 +420,6 @@ void LocationDialog::populateCountryList()
 	countries->setCurrentIndex(index);
 	countries->model()->sort(0);
 	countries->blockSignals(false);
-
 }
 
 void LocationDialog::populateTimeZonesList()
@@ -460,7 +459,6 @@ void LocationDialog::populateTimeZonesList()
 	//Q_ASSERT(index!=-1);
 	timeZones->setCurrentIndex(index);
 	timeZones->blockSignals(false);
-
 }
 
 // Create a StelLocation instance from the fields
@@ -556,7 +554,6 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 			ui->countryNameComboBox->setCurrentIndex(ui->countryNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
 			if (customTimeZone.isEmpty())
 				ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
-
 		}
 		proxyModel->sort(0, Qt::AscendingOrder);
 		ui->citySearchLineEdit->clear();
@@ -821,7 +818,6 @@ void LocationDialog::resetGPSbuttonLabel()
 	ui->gpsToolButton->setChecked(false);
 	ui->gpsToolButton->setText(q_("Get location from GPS"));
 	ui->gpsToolButton->setStyleSheet(QString("QToolButton{ background: gray; }"));
-
 }
 #endif
 

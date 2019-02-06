@@ -79,7 +79,6 @@ DrawingAnchor::DrawingAnchor(Drawing *drawing, ObjectType objectType)
 
 DrawingAnchor::~DrawingAnchor()
 {
-
 }
 
 void DrawingAnchor::setObjectPicture(const QImage &img)
@@ -281,7 +280,6 @@ void DrawingAnchor::loadXmlObjectConnectionShape(QXmlStreamReader &reader)
     }
 
     return;
-
 }
 
 void DrawingAnchor::loadXmlObjectGraphicFrame(QXmlStreamReader &reader)
@@ -822,7 +820,6 @@ void DrawingAnchor::saveXmlObjectShape(QXmlStreamWriter &writer) const
 DrawingAbsoluteAnchor::DrawingAbsoluteAnchor(Drawing *drawing, ObjectType objectType)
     :DrawingAnchor(drawing, objectType)
 {
-
 }
 
 bool DrawingAbsoluteAnchor::loadFromXml(QXmlStreamReader &reader)
@@ -864,7 +861,6 @@ void DrawingAbsoluteAnchor::saveToXml(QXmlStreamWriter &writer) const
 DrawingOneCellAnchor::DrawingOneCellAnchor(Drawing *drawing, ObjectType objectType)
     :DrawingAnchor(drawing, objectType)
 {
-
 }
 
 bool DrawingOneCellAnchor::loadFromXml(QXmlStreamReader &reader)
@@ -911,7 +907,6 @@ void DrawingOneCellAnchor::saveToXml(QXmlStreamWriter &writer) const
 DrawingTwoCellAnchor::DrawingTwoCellAnchor(Drawing *drawing, ObjectType objectType)
     :DrawingAnchor(drawing, objectType)
 {
-
 }
 
 bool DrawingTwoCellAnchor::loadFromXml(QXmlStreamReader &reader)
@@ -941,7 +936,6 @@ bool DrawingTwoCellAnchor::loadFromXml(QXmlStreamReader &reader)
     return true;
 }
 
-
    void DrawingTwoCellAnchor::saveToXml(QXmlStreamWriter &writer) const
 {
     writer.writeStartElement(QStringLiteral("xdr:twoCellAnchor"));
@@ -960,8 +954,6 @@ bool DrawingTwoCellAnchor::loadFromXml(QXmlStreamReader &reader)
 
     writer.writeEmptyElement(QStringLiteral("xdr:clientData"));
     writer.writeEndElement(); //xdr:twoCellAnchor
-
 }
-
 
 } // namespace QXlsx

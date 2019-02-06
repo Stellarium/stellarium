@@ -107,7 +107,6 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 
 HipsSurvey::~HipsSurvey()
 {
-
 }
 
 bool HipsSurvey::isVisible() const
@@ -165,7 +164,6 @@ bool HipsSurvey::getAllsky()
 		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
 			updateProgressBar(received, total);
 		});
-
 	}
 	if (networkReply->isFinished())
 	{
@@ -186,7 +184,6 @@ bool HipsSurvey::isLoading(void) const
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
 {
-
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
 	bool outside = (angle == 2.0 * M_PI);
@@ -228,7 +225,6 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	}
 
 	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
-
 }
 
 void HipsSurvey::updateProgressBar(int nb, int total)

@@ -667,8 +667,6 @@ float Satellite::getVMagnitude(const StelCore* core) const
 					myText += QString("Angle = %1").arg(QString::number(sunReflAngle, 'f', 1)) + "<br>";
 #endif
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 				}
 
 				// very simple flare model
@@ -687,7 +685,6 @@ float Satellite::getVMagnitude(const StelCore* core) const
 					iridiumFlare = -3.92 + (sunReflAngle-0.7)*5;
 				}
 
-
 				 vmag = qMin(stdMag, iridiumFlare);
 			}
 			else // not Iridium
@@ -697,7 +694,6 @@ float Satellite::getVMagnitude(const StelCore* core) const
 			}
 
 			vmag = vmag - 15.75 + 2.5 * std::log10(range * range / fracil);
-
 		}
 	}
 	return vmag;
@@ -937,7 +933,6 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			// Draw the label of the satellite when it enabled
 			if (txtMag <= sd->getLimitMagnitude() && showLabels)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
-
 		}
 		else
 		{
@@ -1036,8 +1031,8 @@ void Satellite::computeOrbitPoints()
 		lastEpochCompForOrbit = epochTime;
 	}
 	else if (epochTime > lastEpochCompForOrbit)
-	{ // compute next orbit point when clock runs forward
-
+	{
+		// compute next orbit point when clock runs forward
 		gTimeSpan diffTime = epoch - lastEpochComp;
 		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
@@ -1069,7 +1064,8 @@ void Satellite::computeOrbitPoints()
 		}
 	}
 	else if (epochTime < lastEpochCompForOrbit)
-	{ // compute next orbit point when clock runs backward
+	{
+		// compute next orbit point when clock runs backward
 		gTimeSpan diffTime = lastEpochComp - epoch;
 		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
@@ -1093,7 +1089,6 @@ void Satellite::computeOrbitPoints()
 				orbitPoints.push_front(elAzVector);
 				visibilityPoints.push_front(pSatWrapper->getVisibilityPredict());
 				epochTm -= computeInterval;
-
 			}
 			lastEpochCompForOrbit = epochTime;
 		}

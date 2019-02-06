@@ -546,7 +546,6 @@ void ViewDialog::updateHips()
 		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->surveysTextBrowser->setHtml(html);
 	}
-
 }
 
 void ViewDialog::hipsListItemChanged(QListWidgetItem* item)

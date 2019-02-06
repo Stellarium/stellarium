@@ -40,12 +40,10 @@ FormatPrivate::FormatPrivate(const FormatPrivate &other)
 	, theme(other.theme)
 	, properties(other.properties)
 {
-
 }
 
 FormatPrivate::~FormatPrivate()
 {
-
 }
 
 /*!
@@ -176,7 +174,6 @@ Format::Format()
 Format::Format(const Format &other)
 	:d(other.d)
 {
-
 }
 
 /*!

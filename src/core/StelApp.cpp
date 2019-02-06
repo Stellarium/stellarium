@@ -611,7 +611,6 @@ void StelApp::init(QSettings* conf)
 				qApp->setProperty("spout", "");
 			}
 		}
-
 	}
 	else
 	{
@@ -751,7 +750,6 @@ void StelApp::draw()
 		spoutSender->captureAndSendFrame(drawFbo);
 #endif
 	applyRenderBuffer(drawFbo);
-
 }
 
 /*************************************************************************

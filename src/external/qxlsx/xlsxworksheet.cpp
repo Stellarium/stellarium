@@ -359,7 +359,6 @@ bool Worksheet::isRulerVisible() const
 {
 	Q_D(const Worksheet);
 	return d->showRuler;
-
 }
 
 /*!
@@ -369,7 +368,6 @@ void Worksheet::setRulerVisible(bool visible)
 {
 	Q_D(Worksheet);
 	d->showRuler = visible;
-
 }
 
 /*!
@@ -771,7 +769,6 @@ bool Worksheet::writeFormula(int row, int column, const CellFormula &formula_, c
 			}
 		}
 	} else if (formula.formulaType() == CellFormula::SharedType) {
-
 	}
 
 	return true;
@@ -2048,7 +2045,6 @@ void WorksheetPrivate::loadXmlSheetData(QXmlStreamReader &reader)
 						|| attributes.hasAttribute(QLatin1String("outlineLevel"))
 						|| attributes.hasAttribute(QLatin1String("collapsed"))) 
 				{
-
 					QSharedPointer<XlsxRowInfo> info(new XlsxRowInfo);
 					if (attributes.hasAttribute(QLatin1String("customFormat")) && attributes.hasAttribute(QLatin1String("s"))) {
 						int idx = attributes.value(QLatin1String("s")).toString().toInt();
@@ -2076,11 +2072,9 @@ void WorksheetPrivate::loadXmlSheetData(QXmlStreamReader &reader)
 						rowsInfo[row] = info;
 					}
 				}
-
 			} 
 			else if (reader.name() == QLatin1String("c")) // Cell
 			{ 
-				
 				//Cell
 				QXmlStreamAttributes attributes = reader.attributes();
 				QString r = attributes.value(QLatin1String("r")).toString();
@@ -2338,7 +2332,6 @@ void WorksheetPrivate::loadXmlSheetFormatProps(QXmlStreamReader &reader)
 	if(formatProps.defaultColWidth == 0.0) { //not set
 	   formatProps.defaultColWidth = WorksheetPrivate::calculateColWidth(formatProps.baseColWidth);
 	}
-
 }
 double WorksheetPrivate::calculateColWidth(int characters)
 {

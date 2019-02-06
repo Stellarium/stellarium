@@ -294,7 +294,6 @@ void StelVideoMgr::playVideoPopout(const QString& id, float fromX, float fromY, 
 
 			if (verbose)
 				qDebug() << "StelVideoMgr::playVideoPopout(): fader triggered.";
-
 		}
 	}
 	else qDebug() << "StelVideoMgr::playVideoPopout(" << id << "): no such video";

@@ -541,7 +541,6 @@ void SatellitesDialog::updateSatelliteData()
 
 			ui->descriptionTextEdit->setText(descText);
 		}
-
 	}
 	else
 	{

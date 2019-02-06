@@ -237,7 +237,6 @@ void Quasars::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Quasars::drawPointer(StelCore* core, StelPainter& painter)
@@ -379,7 +378,6 @@ void Quasars::restoreDefaultJsonFile(void)
 		// manner
 		conf->remove("Quasars/last_update");
 		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
-
 	}
 }
 
@@ -473,7 +471,6 @@ void Quasars::setQSOMap(const QVariantMap& map)
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)
 			QSO.append(quasar);
-
 	}
 }
 

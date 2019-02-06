@@ -220,7 +220,6 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 			qWarning() << "ERROR loading constellation boundaries file: " << fic;
 		else
 			loadBoundaries(fic);
-
 	}
 
 	lastLoadedSkyCulture = skyCultureDir;
@@ -313,7 +312,6 @@ void ConstellationMgr::deselectConstellations(void)
 
 		selected.clear();
 	}
-
 }
 
 void ConstellationMgr::selectAllConstellations()
@@ -1214,7 +1212,6 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 {
 	if (c != Q_NULLPTR)
 	{
-
 		for (auto iter = selected.begin(); iter != selected.end();)
 		{
 			if( (*iter)->getEnglishName() == c->getEnglishName() )
@@ -1230,7 +1227,6 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 		// If no longer any selection, restore all flags on all constellations
 		if (selected.empty())
 		{
-
 			// Otherwise apply standard flags to all constellations
 			for (auto* constellation : constellations)
 			{
@@ -1241,11 +1237,9 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 			}
 
 			Constellation::singleSelected = false; // For boundaries
-
 		}
 		else if(isolateSelected)
 		{
-
 			// No longer selected constellation
 			c->setFlagLines(false);
 			c->setFlagLabels(false);

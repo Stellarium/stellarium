@@ -892,7 +892,6 @@ void TelescopeControl::loadTelescopes()
 				{
 					if(startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))
 					{
-
 						if(!startServerAtSlot(slot, deviceModelName, portTCP, portSerial))
 						{
 							stopClientAtSlot(slot);

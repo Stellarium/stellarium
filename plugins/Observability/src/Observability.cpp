@@ -1540,8 +1540,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			MoonCulm = myJD.first + (tempEphH/24.);
 			culmAlt = qAbs(mylat-dec); // 90 - altitude at transit.
 		};
-	lastJDMoon = myJD.first;
-
+		lastJDMoon = myJD.first;
 	}; // Comes from if (qAbs(myJD.first-lastJDMoon)>JDsec || LastObject!=Kind)
 
 // Find out the days of Full Moon:
@@ -1597,7 +1596,6 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 					} else {
 						Sec1.first = Phase1;
 						Temp1 = eclLon;
-
 					};
 
 					if (qAbs(Sec2.first-Sec1.first) < 10.*dT)  // 1 minute accuracy; convergence.

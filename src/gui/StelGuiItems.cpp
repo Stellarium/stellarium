@@ -541,7 +541,6 @@ void BottomStelBar::setGroupBackground(const QString& groupName,
                                        const QPixmap& pixMiddle,
                                        const QPixmap& pixSingle)
 {
-
 	if (!buttonGroups.contains(groupName))
 		return;
 

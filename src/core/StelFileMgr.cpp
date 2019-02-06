@@ -404,7 +404,6 @@ bool StelFileMgr::fileFlagsCheck(const QFileInfo& thePath, const Flags& flags)
 
 QString StelFileMgr::getDesktopDir()
 {
-
 	if (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).isEmpty())
 		return "";
 
