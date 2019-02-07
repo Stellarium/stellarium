@@ -81,11 +81,11 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=Fa
     # t.maxBrightness = 10
 
     # Create the matching sky polygons, return if there is no relevant polygons
-    if special == True:
+    if special is True:
         pl = [[[0, 0], [300, 0], [300, 300], [0, 300]]]
     else:
         pl = getIntersectPoly(plateName, currentLevel, i, j)
-    if pl == None or len(pl) == 0:
+    if pl is None or len(pl) == 0:
         return None
 
     # Get the WCS from the input FITS header file for the tile

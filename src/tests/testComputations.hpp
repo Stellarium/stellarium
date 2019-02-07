@@ -35,6 +35,7 @@ private slots:
 	void testSpheToRectTransformations();
 	void testRectToSpheTransformations();
 	void testVector2Operators();
+	void testVector3Operators();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP

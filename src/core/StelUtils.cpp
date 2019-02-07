@@ -547,7 +547,7 @@ void spheToRect(const float lng, const float lat, Vec3f& v)
 	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 }
 
-void rectToSphe(double *lng, double *lat, const Vec3d& v)
+void rectToSphe(double *lng, double *lat, const Vec3d &v)
 {
 	double r = v.length();
 	*lat = asin(v[2]/r);
