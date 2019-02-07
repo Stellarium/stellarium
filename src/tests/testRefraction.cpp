@@ -102,7 +102,6 @@ void TestRefraction::testSaemundssonEquation()
 							.arg(actualErrorF)
 							.arg(acceptableError)
 							.toUtf8());
-
 	}
 }
 

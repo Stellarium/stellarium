@@ -111,8 +111,7 @@ struct SPOUTLIBRARY
 	virtual int  GetAdapter() = 0; // Get the SpoutDirectX global adapter index
 	
 	// Library release function
-    virtual void Release() = 0;
-
+	virtual void Release() = 0;
 };
 
 
