@@ -233,7 +233,6 @@ void Scenery3d::draw(StelCore* core)
 		painter.setColor(textColor[0], textColor[1], textColor[2], messageFader.getInterstate());
 		painter.drawText(83, 120, currentMessage);
 	}
-
 }
 
 void Scenery3d::init()

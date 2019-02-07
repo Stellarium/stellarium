@@ -138,7 +138,6 @@ private:
 class gTime
 {
 public:
-
 	// Constructors
 	gTime(double ai_jDays = 0);
 	gTime(int year, double day);

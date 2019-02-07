@@ -37,8 +37,8 @@ class Chart;
 class   Chartsheet : public AbstractSheet
 {
     Q_DECLARE_PRIVATE(Chartsheet)
-public:
 
+public:
     ~Chartsheet();
     Chart *chart();
 

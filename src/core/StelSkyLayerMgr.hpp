@@ -185,7 +185,6 @@ private slots:
 	void loadCollection();
 
 private:
-
 	//! Store the informations needed for a graphical element layer.
 	class SkyLayerElem
 	{

@@ -64,7 +64,6 @@ private slots:
 	void updateFOV7(double value);
 	void updateFOV8(double value);
 	void updateFOV9(double value);
-
 };
 
 

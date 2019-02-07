@@ -66,7 +66,6 @@ private:
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
 	QTimer* updateTimer;
-
 };
 
 #endif // QUASARSDIALOG_HPP

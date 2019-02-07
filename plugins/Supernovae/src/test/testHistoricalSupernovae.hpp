@@ -29,8 +29,6 @@ class TestHistoricalSupernovae : public QObject
 	Q_OBJECT
 
 private slots:
-
-
 };
 
 #endif // TESTHISTORICALSUPERNOVAE_HPP

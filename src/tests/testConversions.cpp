@@ -157,6 +157,27 @@ void TestConversions::testRadToHMS()
 	}
 }
 
+void TestConversions::testRadToHMSStrAdapt()
+{
+	QVariantList data;
+
+	data << 0.		<< "0h";
+	data << M_PI/36		<< "0h20m";
+	data << 7*M_PI/8	<< "10h30m";
+	data << 2*M_PI/5	<< "4h48m";
+
+	while (data.count()>=2)
+	{
+		double rad	= data.takeFirst().toDouble();
+		QString ehms	= data.takeFirst().toString();
+		QString rhms	= StelUtils::radToHmsStrAdapt(rad);
+		QVERIFY2(rhms==ehms, qPrintable(QString("%1 radians = %2 (expected %3)")
+					    .arg(QString::number(rad, 'f', 5))
+					    .arg(rhms)
+					    .arg(ehms)));
+	}
+}
+
 void TestConversions::testRadToDMS()
 {
 	QVariantList data;
@@ -206,6 +227,42 @@ void TestConversions::testRadToDMS()
 		else
 			s = "+";
 		QVERIFY2(qAbs(angle1-angle2)<=ERROR_LIMIT, qPrintable(QString("%1rad=%2%3d%4m%5s").arg(rad).arg(s).arg(dego).arg(mino).arg(seco)));
+	}
+}
+
+void TestConversions::testRadToDMSStrAdapt()
+{
+	QVariantList data;
+
+	data << 0.			<< "+0°";
+	data << M_PI/6			<< "+30°";
+	data << M_PI/4			<< "+45°";
+	data << M_PI/3			<< "+60°";
+	data << M_PI/2			<< "+90°";
+	data << 2*M_PI/3		<< "+120°";
+	data << M_PI			<< "+180°";
+	data << 3*M_PI/2		<< "+270°";
+	data << M_PI/360		<< "+0°30'";
+	data << M_PI/240		<< "+0°45'";
+	data << 61*M_PI/360		<< "+30°30'";
+	data << M_PI/648000		<< "+0°0'1\"";
+	data << 1213*M_PI/2400		<< "+90°58'30\"";
+	data << 39599*M_PI/648000	<< "+10°59'59\"";
+	data << -M_PI/36		<< "-5°";
+	data << -7*M_PI/8		<< "-157°30'";
+	data << -2*M_PI/5		<< "-72°";
+	data << -M_PI			<< "-180°";
+	data << -10*M_PI/648		<< "-2°46'40\"";
+
+	while (data.count()>=2)
+	{
+		double rad	= data.takeFirst().toDouble();
+		QString edms	= data.takeFirst().toString();
+		QString rdms	= StelUtils::radToDmsStrAdapt(rad, false);
+		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3)")
+						.arg(QString::number(rad, 'f', 5))
+						.arg(rdms)
+						.arg(edms)));
 	}
 }
 
@@ -510,6 +567,7 @@ void TestConversions::testVec3fToHtmlColor()
 	data << "#999999" << .6f << .6f << .6f;
 	data << "#666666" << .4f << .4f << .4f;
 	data << "#000000" << 0.f << 0.f << 0.f;
+	data << "#000000" << 0.f << 0.f << 0.f;
 
 	while (data.count()>=4)
 	{
@@ -537,7 +595,7 @@ void TestConversions::testHtmlColorToVec3f()
 	data << "#0000FF" << 0.f << 0.f << 1.f;
 	data << "#999999" << .6f << .6f << .6f;
 	data << "#666666" << .4f << .4f << .4f;
-	data << "#000000" << 0.f << 0.f << 0.f;
+	data << "#000"    << 0.f << 0.f << 0.f;
 
 	while (data.count()>=4)
 	{

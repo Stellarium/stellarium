@@ -45,7 +45,6 @@ DataValidationPrivate::DataValidationPrivate(DataValidation::ValidationType type
     , errorStyle(DataValidation::Stop), allowBlank(allowBlank), isPromptMessageVisible(true)
     , isErrorMessageVisible(true), formula1(formula1), formula2(formula2)
 {
-
 }
 
 DataValidationPrivate::DataValidationPrivate(const DataValidationPrivate &other)
@@ -58,7 +57,6 @@ DataValidationPrivate::DataValidationPrivate(const DataValidationPrivate &other)
 
 DataValidationPrivate::~DataValidationPrivate()
 {
-
 }
 
 /*!

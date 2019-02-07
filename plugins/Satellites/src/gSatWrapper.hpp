@@ -40,7 +40,6 @@
 //! @ingroup satellites
 class gSatWrapper
 {
-
 public:
 	enum Visibility
 	{
@@ -136,7 +135,6 @@ public:
         //! @param[out] ao_vel Observer ECI velocity vector measured in Km/s
 	static void calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel) ;
 
-
 private:
 	//! do the actual work to compute a cached value.
 	static void updateSunECIPos();
@@ -150,7 +148,6 @@ private:
 	static Vec3d observerECIPos;
 	static Vec3d observerECIVel;
 	static gTime lastCalcObserverECIPosition;
-
 };
 
 #endif

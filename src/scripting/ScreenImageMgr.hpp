@@ -109,7 +109,6 @@ private slots:
 
 private:
 	float maxAlpha;
-
 };
 
 //! @class ScreenImageMgr

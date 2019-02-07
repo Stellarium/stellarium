@@ -42,6 +42,7 @@ public slots:
 	void retranslate();
 	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
 	virtual void handleDialogSizeChanged(QSizeF size);
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -173,7 +174,6 @@ private:
 
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
-
 };
 
 #endif // _LOCATIONDIALOG_HPP

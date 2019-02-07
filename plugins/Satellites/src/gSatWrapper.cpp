@@ -117,7 +117,6 @@ void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 
 void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity)
 {
-
 	if (epoch != lastCalcObserverECIPosition)
 	{
 		StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();

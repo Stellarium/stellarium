@@ -53,8 +53,6 @@ private:
 private slots:
 	void saveEquationOfTimeSettings();
 	void resetEquationOfTimeSettings();
-
-
 };
 
 

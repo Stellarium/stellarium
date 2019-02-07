@@ -34,12 +34,10 @@ QT_BEGIN_NAMESPACE_XLSX
 AbstractOOXmlFilePrivate::AbstractOOXmlFilePrivate(AbstractOOXmlFile *q, AbstractOOXmlFile::CreateFlag flag=AbstractOOXmlFile::F_NewFromScratch)
     :relationships(new Relationships), flag(flag), q_ptr(q)
 {
-
 }
 
 AbstractOOXmlFilePrivate::~AbstractOOXmlFilePrivate()
 {
-
 }
 
 /*!
@@ -58,7 +56,6 @@ AbstractOOXmlFile::AbstractOOXmlFile(CreateFlag flag)
 AbstractOOXmlFile::AbstractOOXmlFile(AbstractOOXmlFilePrivate *d)
     :d_ptr(d)
 {
-
 }
 
 AbstractOOXmlFile::~AbstractOOXmlFile()

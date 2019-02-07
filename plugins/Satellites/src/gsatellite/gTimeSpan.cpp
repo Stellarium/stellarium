@@ -39,7 +39,6 @@ gTimeSpan::gTimeSpan(double timeSpanSrc)  //timeSpanScr meassured in days and da
 
 gTimeSpan::gTimeSpan(long lDays, int nHours, int nMins, double nSecs)
 {
-
 	m_timeSpan= (lDays     * KSEC_PER_DAY)
 	            + (nHours * KSEC_PER_HR)
 	            + (nMins  * KSEC_PER_MIN)
@@ -156,7 +155,6 @@ const gTimeSpan& gTimeSpan::operator-=(gTimeSpan ai_timeSpan)
 
 bool gTimeSpan::operator==(gTimeSpan ai_timeSpan) const
 {
-
 	if(m_timeSpan == ai_timeSpan.getDblSeconds())
 		return true;
 

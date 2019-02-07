@@ -38,7 +38,6 @@ MediaFile::MediaFile(const QByteArray &bytes, const QString &suffix, const QStri
 MediaFile::MediaFile(const QString &fileName)
     :m_fileName(fileName), m_index(0), m_indexValid(false)
 {
-
 }
 
 void MediaFile::set(const QByteArray &bytes, const QString &suffix, const QString &mimeType)

@@ -211,7 +211,6 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 	signals: void sizeChanged(QSizeF);
 	protected:
-
 		virtual bool event(QEvent* event)
 		{
 			if (StelApp::getInstance().getSettings()->value("gui/flag_use_window_transparency", true).toBool())

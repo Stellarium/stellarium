@@ -28,7 +28,6 @@ class TestNavStars : public QObject
 	Q_OBJECT
 
 private slots:
-
 };
 
 #endif // TESTNAVSTARS_HPP

@@ -38,7 +38,6 @@ class HipsMgr : public StelModule
 	Q_PROPERTY(bool loaded READ isLoaded NOTIFY stateChanged)
 
 public:
-
 	//! @enum State The loading state of the survey sources.
 	enum State
 	{
