@@ -34,6 +34,8 @@ private slots:
 	void testRadToHMSStrAdapt();
 	void testRadToDMS();	
 	void testRadToDMSStrAdapt();
+	void testRadToDMSStr();
+	void testRadToDMSPStr();
 	void testDDToDMS();
 	void testDDToDMSStr();
 	void testRadToDD();

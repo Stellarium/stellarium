@@ -293,7 +293,7 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	bool sign;
 	unsigned int d,m;
 	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s); // NOTE: WTF???
 	QString str;
 	QTextStream os(&str);
 
@@ -320,6 +320,12 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 *************************************************************************/
 QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 {
+	int precission = 0;
+	if (decimal)
+		precission = 1;
+
+	return StelUtils::radToDmsPStr(angle, precission, useD);
+	/*
 	QChar degsign('d');
 	if (!useD)
 	{
@@ -348,6 +354,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 
 	return str;
+	*/
 }
 
 /*************************************************************************
@@ -363,7 +370,7 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	bool sign;
 	unsigned int d,m;
 	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	StelUtils::radToDms(angle, sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
 	os << (sign?'+':'-') << d << degsign;

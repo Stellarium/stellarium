@@ -234,35 +234,257 @@ void TestConversions::testRadToDMSStrAdapt()
 {
 	QVariantList data;
 
-	data << 0.			<< "+0°";
-	data << M_PI/6			<< "+30°";
-	data << M_PI/4			<< "+45°";
-	data << M_PI/3			<< "+60°";
-	data << M_PI/2			<< "+90°";
-	data << 2*M_PI/3		<< "+120°";
-	data << M_PI			<< "+180°";
-	data << 3*M_PI/2		<< "+270°";
-	data << M_PI/360		<< "+0°30'";
-	data << M_PI/240		<< "+0°45'";
-	data << 61*M_PI/360		<< "+30°30'";
-	data << M_PI/648000		<< "+0°0'1\"";
-	data << 1213*M_PI/2400		<< "+90°58'30\"";
-	data << 39599*M_PI/648000	<< "+10°59'59\"";
-	data << -M_PI/36		<< "-5°";
-	data << -7*M_PI/8		<< "-157°30'";
-	data << -2*M_PI/5		<< "-72°";
-	data << -M_PI			<< "-180°";
-	data << -10*M_PI/648		<< "-2°46'40\"";
+	data << 0.			<< "+0°"		<< false;
+	data << M_PI/6			<< "+30°"		<< false;
+	data << M_PI/4			<< "+45°"		<< false;
+	data << M_PI/3			<< "+60°"		<< false;
+	data << M_PI/2			<< "+90°"		<< false;
+	data << 2*M_PI/3		<< "+120°"		<< false;
+	data << M_PI			<< "+180°"		<< false;
+	data << 3*M_PI/2		<< "+270°"		<< false;
+	data << M_PI/360		<< "+0°30'"		<< false;
+	data << M_PI/240		<< "+0°45'"		<< false;
+	data << 61*M_PI/360		<< "+30°30'"		<< false;
+	data << M_PI/648000		<< "+0°0'1\""		<< false;
+	data << 1213*M_PI/2400		<< "+90°58'30\""	<< false;
+	data << 39599*M_PI/648000	<< "+10°59'59\""	<< false;
+	data << -M_PI/36		<< "-5°"		<< false;
+	data << -7*M_PI/8		<< "-157°30'"		<< false;
+	data << -2*M_PI/5		<< "-72°"		<< false;
+	data << -M_PI			<< "-180°"		<< false;
+	data << -10*M_PI/648		<< "-2°46'40\""		<< false;
 
-	while (data.count()>=2)
+	data << 0.			<< "+0d"		<< true;
+	data << M_PI/6			<< "+30d"		<< true;
+	data << M_PI/4			<< "+45d"		<< true;
+	data << M_PI/3			<< "+60d"		<< true;
+	data << M_PI/2			<< "+90d"		<< true;
+	data << 2*M_PI/3		<< "+120d"		<< true;
+	data << M_PI			<< "+180d"		<< true;
+	data << 3*M_PI/2		<< "+270d"		<< true;
+	data << M_PI/360		<< "+0d30'"		<< true;
+	data << M_PI/240		<< "+0d45'"		<< true;
+	data << 61*M_PI/360		<< "+30d30'"		<< true;
+	data << M_PI/648000		<< "+0d0'1\""		<< true;
+	data << 1213*M_PI/2400		<< "+90d58'30\""	<< true;
+	data << 39599*M_PI/648000	<< "+10d59'59\""	<< true;
+	data << -M_PI/36		<< "-5d"		<< true;
+	data << -7*M_PI/8		<< "-157d30'"		<< true;
+	data << -2*M_PI/5		<< "-72d"		<< true;
+	data << -M_PI			<< "-180d"		<< true;
+	data << -10*M_PI/648		<< "-2d46'40\""		<< true;
+
+	while (data.count()>=3)
 	{
 		double rad	= data.takeFirst().toDouble();
 		QString edms	= data.takeFirst().toString();
-		QString rdms	= StelUtils::radToDmsStrAdapt(rad, false);
-		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3)")
+		bool flag	= data.takeFirst().toBool();
+		QString rdms	= StelUtils::radToDmsStrAdapt(rad, flag);
+		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [flag: %4]")
 						.arg(QString::number(rad, 'f', 5))
 						.arg(rdms)
-						.arg(edms)));
+						.arg(edms)
+						.arg(flag)));
+	}
+}
+
+void TestConversions::testRadToDMSStr()
+{
+	QVariantList data;
+
+	data << 0.			<<   "+0°00'00.0\""	<< true		<< false;
+	data << M_PI/6			<<  "+30°00'00.0\""	<< true		<< false;
+	data << M_PI/4			<<  "+45°00'00.0\""	<< true		<< false;
+	data << M_PI/3			<<  "+60°00'00.0\""	<< true		<< false;
+	data << M_PI/2			<<  "+90°00'00.0\""	<< true		<< false;
+	data << 2*M_PI/3		<< "+120°00'00.0\""	<< true		<< false;
+	data << M_PI			<< "+180°00'00.0\""	<< true		<< false;
+	data << 3*M_PI/2		<< "+270°00'00.0\""	<< true		<< false;
+	data << M_PI/360		<<   "+0°30'00.0\""	<< true		<< false;
+	data << M_PI/240		<<   "+0°45'00.0\""	<< true		<< false;
+	data << 61*M_PI/360		<<  "+30°30'00.0\""	<< true		<< false;
+	data << M_PI/648000		<<   "+0°00'01.0\""	<< true		<< false;
+	data << 1213*M_PI/2400		<<  "+90°58'30.0\""	<< true		<< false;
+	data << 39599*M_PI/648000	<<  "+10°59'59.0\""	<< true		<< false;
+	data << -M_PI/36		<<   "-5°00'00.0\""	<< true		<< false;
+	data << -7*M_PI/8		<< "-157°30'00.0\""	<< true		<< false;
+	data << -2*M_PI/5		<<  "-72°00'00.0\""	<< true		<< false;
+	data << -M_PI			<< "-180°00'00.0\""	<< true		<< false;
+	data << -10*M_PI/648		<<   "-2°46'40.0\""	<< true		<< false;
+
+	data << 0.			<<   "+0d00'00.0\""	<< true		<< true;
+	data << M_PI/6			<<  "+30d00'00.0\""	<< true		<< true;
+	data << M_PI/4			<<  "+45d00'00.0\""	<< true		<< true;
+	data << M_PI/3			<<  "+60d00'00.0\""	<< true		<< true;
+	data << M_PI/2			<<  "+90d00'00.0\""	<< true		<< true;
+	data << 2*M_PI/3		<< "+120d00'00.0\""	<< true		<< true;
+	data << M_PI			<< "+180d00'00.0\""	<< true		<< true;
+	data << 3*M_PI/2		<< "+270d00'00.0\""	<< true		<< true;
+	data << M_PI/360		<<   "+0d30'00.0\""	<< true		<< true;
+	data << M_PI/240		<<   "+0d45'00.0\""	<< true		<< true;
+	data << 61*M_PI/360		<<  "+30d30'00.0\""	<< true		<< true;
+	data << M_PI/648000		<<   "+0d00'01.0\""	<< true		<< true;
+	data << 1213*M_PI/2400		<<  "+90d58'30.0\""	<< true		<< true;
+	data << 39599*M_PI/648000	<<  "+10d59'59.0\""	<< true		<< true;
+	data << -M_PI/36		<<   "-5d00'00.0\""	<< true		<< true;
+	data << -7*M_PI/8		<< "-157d30'00.0\""	<< true		<< true;
+	data << -2*M_PI/5		<<  "-72d00'00.0\""	<< true		<< true;
+	data << -M_PI			<< "-180d00'00.0\""	<< true		<< true;
+	data << -10*M_PI/648		<<   "-2d46'40.0\""	<< true		<< true;
+
+	data << 0.			<<   "+0°00'00\""	<< false	<< false;
+	data << M_PI/6			<<  "+30°00'00\""	<< false	<< false;
+	data << M_PI/4			<<  "+45°00'00\""	<< false	<< false;
+	data << M_PI/3			<<  "+60°00'00\""	<< false	<< false;
+	data << M_PI/2			<<  "+90°00'00\""	<< false	<< false;
+	data << 2*M_PI/3		<< "+120°00'00\""	<< false	<< false;
+	data << M_PI			<< "+180°00'00\""	<< false	<< false;
+	data << 3*M_PI/2		<< "+270°00'00\""	<< false	<< false;
+	data << M_PI/360		<<   "+0°30'00\""	<< false	<< false;
+	data << M_PI/240		<<   "+0°45'00\""	<< false	<< false;
+	data << 61*M_PI/360		<<  "+30°30'00\""	<< false	<< false;
+	data << M_PI/648000		<<   "+0°00'01\""	<< false	<< false;
+	data << 1213*M_PI/2400		<<  "+90°58'30\""	<< false	<< false;
+	data << 39599*M_PI/648000	<<  "+10°59'59\""	<< false	<< false;
+	data << -M_PI/36		<<   "-5°00'00\""	<< false	<< false;
+	data << -7*M_PI/8		<< "-157°30'00\""	<< false	<< false;
+	data << -2*M_PI/5		<<  "-72°00'00\""	<< false	<< false;
+	data << -M_PI			<< "-180°00'00\""	<< false	<< false;
+	data << -10*M_PI/648		<<   "-2°46'40\""	<< false	<< false;
+
+	data << 0.			<<   "+0d00'00\""	<< false	<< true;
+	data << M_PI/6			<<  "+30d00'00\""	<< false	<< true;
+	data << M_PI/4			<<  "+45d00'00\""	<< false	<< true;
+	data << M_PI/3			<<  "+60d00'00\""	<< false	<< true;
+	data << M_PI/2			<<  "+90d00'00\""	<< false	<< true;
+	data << 2*M_PI/3		<< "+120d00'00\""	<< false	<< true;
+	data << M_PI			<< "+180d00'00\""	<< false	<< true;
+	data << 3*M_PI/2		<< "+270d00'00\""	<< false	<< true;
+	data << M_PI/360		<<   "+0d30'00\""	<< false	<< true;
+	data << M_PI/240		<<   "+0d45'00\""	<< false	<< true;
+	data << 61*M_PI/360		<<  "+30d30'00\""	<< false	<< true;
+	data << M_PI/648000		<<   "+0d00'01\""	<< false	<< true;
+	data << 1213*M_PI/2400		<<  "+90d58'30\""	<< false	<< true;
+	data << 39599*M_PI/648000	<<  "+10d59'59\""	<< false	<< true;
+	data << -M_PI/36		<<   "-5d00'00\""	<< false	<< true;
+	data << -7*M_PI/8		<< "-157d30'00\""	<< false	<< true;
+	data << -2*M_PI/5		<<  "-72d00'00\""	<< false	<< true;
+	data << -M_PI			<< "-180d00'00\""	<< false	<< true;
+	data << -10*M_PI/648		<<   "-2d46'40\""	<< false	<< true;
+
+	while (data.count()>=4)
+	{
+		double rad	= data.takeFirst().toDouble();
+		QString edms	= data.takeFirst().toString();
+		bool decimalF	= data.takeFirst().toBool();
+		bool useDF	= data.takeFirst().toBool();
+		QString rdms	= StelUtils::radToDmsStr(rad, decimalF, useDF);
+		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [flags: %4, %5]")
+						.arg(QString::number(rad, 'f', 5))
+						.arg(rdms)
+						.arg(edms)
+						.arg(decimalF)
+						.arg(useDF)));
+	}
+}
+
+void TestConversions::testRadToDMSPStr()
+{
+	QVariantList data;
+
+	data << 0.			<< "+0°00'00.00\""	<< 2	<< false;
+	data << M_PI/6			<< "+30°00'00.00\""	<< 2	<< false;
+	data << M_PI/4			<< "+45°00'00.00\""	<< 2	<< false;
+	data << M_PI/3			<< "+60°00'00.00\""	<< 2	<< false;
+	data << M_PI/2			<< "+90°00'00.00\""	<< 2	<< false;
+	data << 2*M_PI/3		<< "+120°00'00.00\""	<< 2	<< false;
+	data << M_PI			<< "+180°00'00.00\""	<< 2	<< false;
+	data << 3*M_PI/2		<< "+270°00'00.00\""	<< 2	<< false;
+	data << M_PI/360		<< "+0°30'00.00\""	<< 2	<< false;
+	data << M_PI/240		<< "+0°45'00.00\""	<< 2	<< false;
+	data << 61*M_PI/360		<< "+30°30'00.00\""	<< 2	<< false;
+	data << M_PI/648000		<< "+0°00'01.00\""	<< 2	<< false;
+	data << 1213*M_PI/2400		<< "+90°58'30.00\""	<< 2	<< false;
+	data << 39599*M_PI/648000	<< "+10°59'59.00\""	<< 2	<< false;
+	data << -M_PI/36		<< "-5°00'00.00\""	<< 2	<< false;
+	data << -7*M_PI/8		<< "-157°30'00.00\""	<< 2	<< false;
+	data << -2*M_PI/5		<< "-72°00'00.00\""	<< 2	<< false;
+	data << -M_PI			<< "-180°00'00.00\""	<< 2	<< false;
+	data << -10*M_PI/648		<< "-2°46'40.00\""	<< 2	<< false;
+
+	data << 0.			<< "+0d00'00.00\""	<< 2	<< true;
+	data << M_PI/6			<< "+30d00'00.00\""	<< 2	<< true;
+	data << M_PI/4			<< "+45d00'00.00\""	<< 2	<< true;
+	data << M_PI/3			<< "+60d00'00.00\""	<< 2	<< true;
+	data << M_PI/2			<< "+90d00'00.00\""	<< 2	<< true;
+	data << 2*M_PI/3		<< "+120d00'00.00\""	<< 2	<< true;
+	data << M_PI			<< "+180d00'00.00\""	<< 2	<< true;
+	data << 3*M_PI/2		<< "+270d00'00.00\""	<< 2	<< true;
+	data << M_PI/360		<< "+0d30'00.00\""	<< 2	<< true;
+	data << M_PI/240		<< "+0d45'00.00\""	<< 2	<< true;
+	data << 61*M_PI/360		<< "+30d30'00.00\""	<< 2	<< true;
+	data << M_PI/648000		<< "+0d00'01.00\""	<< 2	<< true;
+	data << 1213*M_PI/2400		<< "+90d58'30.00\""	<< 2	<< true;
+	data << 39599*M_PI/648000	<< "+10d59'59.00\""	<< 2	<< true;
+	data << -M_PI/36		<< "-5d00'00.00\""	<< 2	<< true;
+	data << -7*M_PI/8		<< "-157d30'00.00\""	<< 2	<< true;
+	data << -2*M_PI/5		<< "-72d00'00.00\""	<< 2	<< true;
+	data << -M_PI			<< "-180d00'00.00\""	<< 2	<< true;
+	data << -10*M_PI/648		<< "-2d46'40.00\""	<< 2	<< true;
+
+	data << 0.			<< "+0°00'00.000\""	<< 3	<< false;
+	data << M_PI/6			<< "+30°00'00.000\""	<< 3	<< false;
+	data << M_PI/4			<< "+45°00'00.000\""	<< 3	<< false;
+	data << M_PI/3			<< "+60°00'00.000\""	<< 3	<< false;
+	data << M_PI/2			<< "+90°00'00.000\""	<< 3	<< false;
+	data << 2*M_PI/3		<< "+120°00'00.000\""	<< 3	<< false;
+	data << M_PI			<< "+180°00'00.000\""	<< 3	<< false;
+	data << 3*M_PI/2		<< "+270°00'00.000\""	<< 3	<< false;
+	data << M_PI/360		<< "+0°30'00.000\""	<< 3	<< false;
+	data << M_PI/240		<< "+0°45'00.000\""	<< 3	<< false;
+	data << 61*M_PI/360		<< "+30°30'00.000\""	<< 3	<< false;
+	data << M_PI/648000		<< "+0°00'01.000\""	<< 3	<< false;
+	data << 1213*M_PI/2400		<< "+90°58'30.000\""	<< 3	<< false;
+	data << 39599*M_PI/648000	<< "+10°59'59.000\""	<< 3	<< false;
+	data << -M_PI/36		<< "-5°00'00.000\""	<< 3	<< false;
+	data << -7*M_PI/8		<< "-157°30'00.000\""	<< 3	<< false;
+	data << -2*M_PI/5		<< "-72°00'00.000\""	<< 3	<< false;
+	data << -M_PI			<< "-180°00'00.000\""	<< 3	<< false;
+	data << -10*M_PI/648		<< "-2°46'40.000\""	<< 3	<< false;
+
+	data << 0.			<< "+0d00'00.000\""	<< 3	<< true;
+	data << M_PI/6			<< "+30d00'00.000\""	<< 3	<< true;
+	data << M_PI/4			<< "+45d00'00.000\""	<< 3	<< true;
+	data << M_PI/3			<< "+60d00'00.000\""	<< 3	<< true;
+	data << M_PI/2			<< "+90d00'00.000\""	<< 3	<< true;
+	data << 2*M_PI/3		<< "+120d00'00.000\""	<< 3	<< true;
+	data << M_PI			<< "+180d00'00.000\""	<< 3	<< true;
+	data << 3*M_PI/2		<< "+270d00'00.000\""	<< 3	<< true;
+	data << M_PI/360		<< "+0d30'00.000\""	<< 3	<< true;
+	data << M_PI/240		<< "+0d45'00.000\""	<< 3	<< true;
+	data << 61*M_PI/360		<< "+30d30'00.000\""	<< 3	<< true;
+	data << M_PI/648000		<< "+0d00'01.000\""	<< 3	<< true;
+	data << 1213*M_PI/2400		<< "+90d58'30.000\""	<< 3	<< true;
+	data << 39599*M_PI/648000	<< "+10d59'59.000\""	<< 3	<< true;
+	data << -M_PI/36		<< "-5d00'00.000\""	<< 3	<< true;
+	data << -7*M_PI/8		<< "-157d30'00.000\""	<< 3	<< true;
+	data << -2*M_PI/5		<< "-72d00'00.000\""	<< 3	<< true;
+	data << -M_PI			<< "-180d00'00.000\""	<< 3	<< true;
+	data << -10*M_PI/648		<< "-2d46'40.000\""	<< 3	<< true;
+
+	while (data.count()>=4)
+	{
+		double rad	= data.takeFirst().toDouble();
+		QString edms	= data.takeFirst().toString();
+		int precission	= data.takeFirst().toInt();
+		bool flag	= data.takeFirst().toBool();
+		QString rdms	= StelUtils::radToDmsPStr(rad, precission, flag);
+		QVERIFY2(rdms==edms, qPrintable(QString("%1 radians = %2 (expected %3) [precission: %4; flag: %5]")
+						.arg(QString::number(rad, 'f', 5))
+						.arg(rdms)
+						.arg(edms)
+						.arg(precission)
+						.arg(flag)));
 	}
 }
 
