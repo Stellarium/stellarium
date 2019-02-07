@@ -33,7 +33,7 @@ for o, a in opts:
 
 directory = directory.rstrip('/')
 
-if (directory != '') and (os.path.isdir(directory) == False):
+if (directory != '') and (os.path.isdir(directory) is False):
     sys.exit('Specified directory does not exist')
 
 # Find all desktop files

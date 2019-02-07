@@ -34,6 +34,7 @@ private slots:
 	void testEclToEquTransformations();
 	void testSpheToRectTransformations();
 	void testRectToSpheTransformations();
+	void testVector2Operators();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP

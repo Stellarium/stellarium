@@ -98,7 +98,7 @@ class SkyImageTile:
         f.write(',\n')
         if self.maxBrightness:
             f.write(levTab + '\t"maxBrightness": %f,\n' % self.maxBrightness)
-        if self.alphaBlend == True:
+        if self.alphaBlend:
             f.write(levTab + '\t"alphaBlend": true,\n')
         f.write(levTab + '\t"minResolution": %f' % self.minResolution)
         if len(self.subTiles) == 0:
