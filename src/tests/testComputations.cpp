@@ -97,8 +97,8 @@ void TestComputations::testEquToEqlTransformations()
 
 	while (data.count() >= 4)
 	{
-		ra		= data.takeFirst().toDouble();
-		dec		= data.takeFirst().toDouble();
+		ra	= data.takeFirst().toDouble();
+		dec	= data.takeFirst().toDouble();
 		lambdaE	= data.takeFirst().toDouble();
 		betaE	= data.takeFirst().toDouble();
 
@@ -133,10 +133,10 @@ void TestComputations::testEclToEquTransformations()
 
 	while (data.count() >= 4)
 	{
-		raE		= data.takeFirst().toDouble();
-		decE		= data.takeFirst().toDouble();
+		raE	= data.takeFirst().toDouble();
+		decE	= data.takeFirst().toDouble();
 		lambda	= data.takeFirst().toDouble();
-		beta		= data.takeFirst().toDouble();
+		beta	= data.takeFirst().toDouble();
 
 		StelUtils::eclToEqu(lambda*M_PI/180., beta*M_PI/180., eps0, &ra, &dec);
 
@@ -151,5 +151,131 @@ void TestComputations::testEclToEquTransformations()
 					   .arg(QString::number(dec, 'f', 5))
 					   .arg(QString::number(raE, 'f', 5))
 					   .arg(QString::number(decE, 'f', 5))));
+	}
+}
+
+void TestComputations::testSpheToRectTransformations()
+{
+	float longitude, latitude;
+	double longituded, latituded;
+	Vec3f eVec3f, rVec3f;
+	Vec3d eVec3d, rVec3d;
+
+	QVariantList data;
+	//     Longitude          Latitude         Expected
+	data <<     0.		<<   0.		<< "1,0,0";
+	data <<    90.		<<   0.		<< "0,1,0";
+	data <<     0.		<<  90.		<< "0,0,1";
+	data <<   -90.		<<  90.		<< "0,0,1";
+	data <<   180.		<< -90.		<< "0,0,-1";
+	data <<   270.		<< -90.		<< "0,0,-1";
+	data <<   -90.		<<  45.		<< "0,-0.7071,0.7071";
+
+	while (data.count() >= 3)
+	{
+		longitude	= data.takeFirst().toFloat();
+		latitude	= data.takeFirst().toFloat();
+		eVec3f		= StelUtils::strToVec3f(data.takeFirst().toString());
+
+		StelUtils::spheToRect(longitude*M_PI/180.f, latitude*M_PI/180.f, rVec3f);
+
+		QVERIFY2(qAbs(rVec3f[0]-eVec3f[0])<=ERROR_MID_LIMIT && qAbs(rVec3f[1]-eVec3f[1])<=ERROR_MID_LIMIT && qAbs(rVec3f[2]-eVec3f[2])<=ERROR_MID_LIMIT,
+			 qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
+					   .arg(QString::number(longitude, 'f', 4))
+					   .arg(QString::number(latitude, 'f', 4))
+					   .arg(rVec3f.toString())
+					   .arg(eVec3f.toString())));
+	}
+
+	while (data.count() >= 3)
+	{
+		longituded	= data.takeFirst().toDouble();
+		latituded	= data.takeFirst().toDouble();
+		eVec3d		= StelUtils::strToVec3f(data.takeFirst().toString()).toVec3d();
+
+		StelUtils::spheToRect(longituded*M_PI/180., latituded*M_PI/180., rVec3d);
+
+		QVERIFY2(qAbs(rVec3d[0]-eVec3d[0])<=ERROR_MID_LIMIT && qAbs(rVec3d[1]-eVec3d[1])<=ERROR_MID_LIMIT && qAbs(rVec3d[2]-eVec3d[2])<=ERROR_MID_LIMIT,
+			 qPrintable(QString("Long/Lat: %1/%2 = %3 (expected %4)")
+					   .arg(QString::number(longituded, 'f', 4))
+					   .arg(QString::number(latituded, 'f', 4))
+					   .arg(rVec3d.toString())
+					   .arg(eVec3d.toString())));
+	}
+}
+
+void TestComputations::testRectToSpheTransformations()
+{
+	float longitude, latitude, longitudeE, latitudeE;
+	double longituded, latituded, longitudedE, latitudedE;
+	Vec3f rVec3f;
+	Vec3d rVec3d;
+
+	QVariantList data;
+	//     Longitude          Latitude         Source
+	data <<     0.		<<   0.		<< "1,0,0";
+	data <<    90.		<<   0.		<< "0,1,0";
+	data <<     0.		<<  90.		<< "0,0,1";
+	data <<     0.		<< -90.		<< "0,0,-1";
+	data <<   -90.		<<  45.		<< "0,-0.7071,0.7071";
+
+	while (data.count() >= 3)
+	{
+		longitudeE	= data.takeFirst().toFloat();
+		latitudeE	= data.takeFirst().toFloat();
+		rVec3f		= StelUtils::strToVec3f(data.takeFirst().toString());
+
+		StelUtils::rectToSphe(&longitude, &latitude, rVec3f);
+
+		longitude *= 180.f/M_PI;
+		latitude  *= 180.f/M_PI;
+
+		QVERIFY2(qAbs(longitude-longitudeE)<=ERROR_MID_LIMIT && qAbs(latitude-latitudeE)<=ERROR_MID_LIMIT,
+			 qPrintable(QString("Vec3 %1 = Long/Lat: %2/%3 (expected %4/%5)")
+				    .arg(rVec3f.toString())
+				    .arg(QString::number(longitude, 'f', 4))
+				    .arg(QString::number(latitude, 'f', 4))
+				    .arg(QString::number(longitudeE, 'f', 4))
+				    .arg(QString::number(latitudeE, 'f', 4))));
+	}
+
+	while (data.count() >= 3)
+	{
+		longitudeE	= data.takeFirst().toFloat();
+		latitudeE	= data.takeFirst().toFloat();
+		rVec3d		= StelUtils::strToVec3f(data.takeFirst().toString()).toVec3d();
+
+		StelUtils::rectToSphe(&longitude, &latitude, rVec3d);
+
+		longitude *= 180.f/M_PI;
+		latitude  *= 180.f/M_PI;
+
+		QVERIFY2(qAbs(longitude-longitudeE)<=ERROR_MID_LIMIT && qAbs(latitude-latitudeE)<=ERROR_MID_LIMIT,
+			 qPrintable(QString("Vec3 %1 = Long/Lat: %2/%3 (expected %4/%5)")
+				    .arg(rVec3f.toString())
+				    .arg(QString::number(longitude, 'f', 4))
+				    .arg(QString::number(latitude, 'f', 4))
+				    .arg(QString::number(longitudeE, 'f', 4))
+				    .arg(QString::number(latitudeE, 'f', 4))));
+	}
+
+	while (data.count() >= 3)
+	{
+		longitudedE	= data.takeFirst().toDouble();
+		latitudedE	= data.takeFirst().toDouble();
+		rVec3d		= StelUtils::strToVec3f(data.takeFirst().toString()).toVec3d();
+
+		StelUtils::rectToSphe(&longituded, &latituded, rVec3d);
+
+		longituded *= 180./M_PI;
+		latituded  *= 180./M_PI;
+
+		QVERIFY2(qAbs(longituded-longitudedE)<=ERROR_MID_LIMIT && qAbs(latituded-latitudedE)<=ERROR_MID_LIMIT,
+			 qPrintable(QString("Vec3 %1 = Long/Lat: %2/%3 (expected %4/%5)")
+				    .arg(rVec3f.toString())
+				    .arg(QString::number(longituded, 'f', 4))
+				    .arg(QString::number(latituded, 'f', 4))
+				    .arg(QString::number(longitudedE, 'f', 4))
+				    .arg(QString::number(latitudedE, 'f', 4))));
 	}
 }
