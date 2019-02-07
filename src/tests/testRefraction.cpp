@@ -85,6 +85,24 @@ void TestRefraction::testSaemundssonEquation()
 							.arg(actualError)
 							.arg(acceptableError)
 							.toUtf8());
+
+		float refF = (float)ref;
+		Vec3f vF;
+		float hF = height * M_PI/180.f;
+		StelUtils::spheToRect(0.f, hF, vF);
+		refCls.forward(vF);
+		float lngF, latF;
+		StelUtils::rectToSphe(&lngF, &latF, vF);
+		float resultF = qAbs((hF-latF)*180.f/M_PI)*60.f;
+		float actualErrorF = qAbs(refF - resultF);
+		QVERIFY2(actualErrorF <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" error=%4 acceptable=%5")
+							.arg(height)
+							.arg(resultF)
+							.arg(refF)
+							.arg(actualErrorF)
+							.arg(acceptableError)
+							.toUtf8());
+
 	}
 }
 
@@ -136,6 +154,23 @@ void TestRefraction::testBennettEquation()
 							.arg(result)
 							.arg(ref)
 							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+
+		float refF = (float)ref;
+		Vec3f vF;
+		float hF = height * M_PI/180.f;
+		StelUtils::spheToRect(0.f, hF, vF);
+		refCls.backward(vF);
+		float lngF, latF;
+		StelUtils::rectToSphe(&lngF, &latF, vF);
+		float resultF = qAbs((hF-latF)*180.f/M_PI)*60.f;
+		double actualErrorF = qAbs(refF - resultF);
+		QVERIFY2(actualErrorF <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" error=%4 acceptable=%5")
+							.arg(height)
+							.arg(resultF)
+							.arg(refF)
+							.arg(actualErrorF)
 							.arg(acceptableError)
 							.toUtf8());
 	}
@@ -192,6 +227,26 @@ void TestRefraction::testComplexRefraction()
 							.arg(height)
 							.arg(result)
 							.arg(expD)
+							.arg(acceptableError)
+							.toUtf8());
+
+		float expDF = (float)expD;
+		Vec3f vF;
+		float lngF, latSF, latBF;
+		float hF = height * M_PI/180.f;
+		StelUtils::spheToRect(0.0, hF, vF);
+		refCls.forward(vF);
+		StelUtils::rectToSphe(&lngF, &latSF, vF);
+		StelUtils::spheToRect(0.f, hF, vF);
+		refCls.backward(vF);
+		StelUtils::rectToSphe(&lngF, &latBF, vF);
+		float rSF = qAbs((hF-latSF)*180.f/M_PI)*60.f;
+		float rBF = qAbs((hF-latBF)*180.f/M_PI)*60.f;
+		float resultF = qAbs(rSF-rBF);
+		QVERIFY2(qAbs(resultF - expDF) <= acceptableError, QString("height=%1deg result=%2\" expected=%3\" acceptable=%5")
+							.arg(height)
+							.arg(resultF)
+							.arg(expDF)
 							.arg(acceptableError)
 							.toUtf8());
 	}
