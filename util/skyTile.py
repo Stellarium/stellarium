@@ -101,7 +101,7 @@ class SkyImageTile:
         if self.alphaBlend:
             f.write(levTab + '\t"alphaBlend": true,\n')
         f.write(levTab + '\t"minResolution": %f' % self.minResolution)
-        if len(self.subTiles) == 0:
+        if not self.subTiles:
             f.write('\n' + levTab + '}')
             return
         f.write(',\n')

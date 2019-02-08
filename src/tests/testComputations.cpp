@@ -83,6 +83,97 @@ void TestComputations::testJDFormBesselianEpoch()
 	}
 }
 
+void TestComputations::testIsPowerOfTwo()
+{
+	int n;
+	bool f, r;
+	QVariantList data;
+	data	<< 0	<< true;
+	data	<< 1	<< true;
+	data	<< 2	<< true;
+	data	<< 3	<< false;
+	data	<< 4	<< true;
+	data	<< 5	<< false;
+	data	<< 6	<< false;
+	data	<< 7	<< false;
+	data	<< 8	<< true;
+	data	<< 9	<< false;
+
+	while (data.count() >= 2)
+	{
+		n	= data.takeFirst().toInt();
+		f	= data.takeFirst().toBool();
+
+		r = StelUtils::isPowerOfTwo(n);
+
+		QVERIFY2(r==f, qPrintable(QString("%1 %2 power of two (expected: %3)")
+					   .arg(n)
+					   .arg(r ? "is":"is not")
+					   .arg(f)));
+	}
+}
+
+void TestComputations::testDayInYear()
+{
+	int year, month, day, en, n;
+
+	QVariantList data;
+	data	<< 2000	<< 1	<< 1	<< 1;
+	data	<< 2019	<< 1	<< 1	<< 1;
+	data	<< 2019	<< 1	<< 31	<< 31;
+	data	<< 2019	<< 2	<< 28	<< 59;
+	data	<< 2019	<< 3	<< 10	<< 69;
+	data	<< 2020	<< 3	<< 10	<< 70;
+
+	while (data.count() >= 4)
+	{
+		year	= data.takeFirst().toInt();
+		month	= data.takeFirst().toInt();
+		day	= data.takeFirst().toInt();
+		en	= data.takeFirst().toInt();
+
+		n = StelUtils::dayInYear(year, month, day);
+
+		QVERIFY2(n==en, qPrintable(QString("%1-%2-%3 is %4 day (expected: %5)")
+					   .arg(year)
+					   .arg(month)
+					   .arg(day)
+					   .arg(n)
+					   .arg(en)));
+	}
+}
+
+void TestComputations::testYearFraction()
+{
+	int year, month, day;
+	double fraction, efrac;
+
+	QVariantList data;
+	data	<< 2000	<< 1	<< 1	<< 2000.00274;
+	data	<< 2019	<< 1	<< 1	<< 2019.00274;
+	data	<< 2019	<< 1	<< 31	<< 2019.08493;
+	data	<< 2019	<< 2	<< 28	<< 2019.16164;
+	data	<< 2019	<< 3	<< 10	<< 2019.18904;
+	data	<< 2020	<< 3	<< 10	<< 2020.19126;
+
+	while (data.count() >= 4)
+	{
+		year	= data.takeFirst().toInt();
+		month	= data.takeFirst().toInt();
+		day	= data.takeFirst().toInt();
+		efrac	= data.takeFirst().toDouble();
+
+		fraction = StelUtils::yearFraction(year, month, day);
+
+		QVERIFY2(qAbs(fraction-efrac)<=ERROR_HIGH_LIMIT, qPrintable(QString("%1-%2-%3 is %4 (expected: %5)")
+					   .arg(year)
+					   .arg(month)
+					   .arg(day)
+					   .arg(QString::number(fraction, 'f', 5))
+					   .arg(QString::number(efrac, 'f', 5))));
+	}
+}
+
 void TestComputations::testEquToEqlTransformations()
 {
 	double eps0 = 23.4392911*M_PI/180.;

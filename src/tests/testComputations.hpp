@@ -30,6 +30,9 @@ class TestComputations : public QObject
 private slots:
 	void testSiderealPeriodComputations();
 	void testJDFormBesselianEpoch();
+	void testIsPowerOfTwo();
+	void testDayInYear();
+	void testYearFraction();
 	void testEquToEqlTransformations();
 	void testEclToEquTransformations();
 	void testSpheToRectTransformations();

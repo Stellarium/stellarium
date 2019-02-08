@@ -17,6 +17,6 @@ except urllib2.URLError as e:
     print 'Reason: ', e.reason
 else:
     csvdata = response.read()
-    file = open(CSV, 'w')
-    file.write(csvdata)
-    file.close()
+    datafile = open(CSV, 'w')
+    datafile.write(csvdata)
+    datafile.close()
