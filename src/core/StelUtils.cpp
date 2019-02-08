@@ -98,14 +98,14 @@ double hmsToRad(const unsigned int h, const unsigned int m, const double s )
 
 double hmsToHours(const int h, const int m, const double s)
 {
-	return (double)h+(double)m/60.+(double)s*3600.;
+	return (double)h+(double)m/60.+(double)s/3600.;
 }
 
 double hmsStrToHours(const QString& s)
 {
 	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
 	if (!reg.exactMatch(s))
-		return 0;
+		return 0.;
 	QStringList list = reg.capturedTexts();
 	int hrs = list[1].toInt();
 	int min = list[2].toInt();
@@ -116,9 +116,10 @@ double hmsStrToHours(const QString& s)
 
 double dmsToRad(const int d, const unsigned int m, const double s)
 {
-	if (d>=0)
-		return (double)M_PI/180.*d+(double)M_PI/10800.*m+s*M_PI/648000.;
-	return (double)M_PI/180.*d-(double)M_PI/10800.*m-s*M_PI/648000.;
+	double rad = (double)M_PI/180.*qAbs(d)+(double)M_PI/10800.*m+s*M_PI/648000.;
+	if (d<0)
+		rad *= -1;
+	return rad;
 }
 
 /*************************************************************************
@@ -161,7 +162,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}
 	if (m==60)
 	{
-		m = 0.;
+		m = 0;
 		d += 1;
 	}	
 }
@@ -264,7 +265,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 	// handle carry case (when seconds are rounded up)
 	if (QString("%1").arg(s, 0, 'f', precision) == carry)
 	{
-		s=0;
+		s=0.;
 		m+=1;
 	}
 	if (m==60)
@@ -272,7 +273,7 @@ QString radToHmsStr(const double angle, const bool decimal)
 		m=0;
 		h+=1;
 	}
-	if (h==24 && m==0 && s==0)
+	if (h==24 && m==0 && s==0.)
 		h=0;
 
 	return QString("%1h%2m%3s").arg(h, width).arg(m, 2, 10, QChar('0')).arg(s, 3+precision, 'f', precision, QChar('0'));
@@ -292,7 +293,7 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	bool sign;
 	unsigned int d,m;
 	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s); // NOTE: WTF???
 	QString str;
 	QTextStream os(&str);
 
@@ -319,6 +320,12 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 *************************************************************************/
 QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 {
+	int precission = 0;
+	if (decimal)
+		precission = 1;
+
+	return StelUtils::radToDmsPStr(angle, precission, useD);
+	/*
 	QChar degsign('d');
 	if (!useD)
 	{
@@ -347,6 +354,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 
 	return str;
+	*/
 }
 
 /*************************************************************************
@@ -362,7 +370,7 @@ QString radToDmsPStr(const double angle, const int precision, const bool useD)
 	bool sign;
 	unsigned int d,m;
 	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
+	StelUtils::radToDms(angle, sign, d, m, s);
 	QString str;
 	QTextStream os(&str);
 	os << (sign?'+':'-') << d << degsign;
@@ -390,7 +398,7 @@ void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, dou
 	m = (unsigned int)((angle-d)*60);
 	s = (angle-d)*3600.-60.*m;
 
-	if (s==60.)
+	if (s>59.9)
 	{
 		s = 0.;
 		m += 1;
@@ -419,12 +427,16 @@ double dmsStrToRad(const QString& s)
 	if (!reg.exactMatch(s))
 		return 0;
 	QStringList list = reg.capturedTexts();
-	bool sign = (list[1] == "+");
+	bool sign = (list[1] == "-");
 	int deg = list[2].toInt();
 	int min = list[3].toInt();
 	int sec = list[4].toInt();
 
-	return dmsToRad(sign ? deg : -deg, min, sec);
+	double rad = dmsToRad(qAbs(deg), min, sec);
+	if (sign)
+		rad *= -1;
+
+	return rad;
 }
 
 Vec2f strToVec2f(const QStringList &s)
@@ -535,7 +547,7 @@ void spheToRect(const float lng, const float lat, Vec3f& v)
 	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
 }
 
-void rectToSphe(double *lng, double *lat, const Vec3d& v)
+void rectToSphe(double *lng, double *lat, const Vec3d &v)
 {
 	double r = v.length();
 	*lat = asin(v[2]/r);
@@ -614,8 +626,8 @@ double getDecAngle(const QString& str)
 		float min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toFloat();
 		float sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toFloat();
 		float r = qAbs(deg) + min / 60 + sec / 3600;
-		if (deg<0)
-			r *= -1.;
+		if (deg<0.f)
+			r *= -1.f;
 		return (r * 2 * M_PI / 360.);
 	}
 
@@ -902,8 +914,6 @@ QString localeDateString(const int year, const int month, const int day, const i
 		{
 			out += fmt.at(i);
 		}
-
-
 	}
 
 	return out;
@@ -913,7 +923,6 @@ QString localeDateString(const int year, const int month, const int day, const i
 //! limitations of qdatetime for large dates in the past.  see QDateTime::toString().
 QString localeDateString(const int year, const int month, const int day, const int dayOfWeek)
 {
-
 	// try the QDateTime first
 	QDate test(year, month, day);
 
@@ -1135,7 +1144,6 @@ double yearFraction(const int year, const int month, const double day)
 	double d=dayInYear(year, month, 0)+day;
 	double daysInYear=( isLeapYear(year) ? 366.0 : 365.0);
 	return year+d/daysInYear;
-
 }
 
 //! given the submitted year/month/day hour:minute:second, try to
@@ -1321,6 +1329,16 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 	else
 	{
 		float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
+		if (s>59.9f)
+		{
+			m += 1;
+			s = 0.f;
+		}
+		if (m==60)
+		{
+			h += 1;
+			m = 0;
+		}
 		return QString("%1h%2m%3s").arg(h).arg(m, 2, 10, QChar('0')).arg(s, 4, 'f', 1, QChar('0'));
 	}
 }
@@ -1892,11 +1910,23 @@ double getDeltaTByIslamSadiqQureshi(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	double deltaT; // Return deltaT for the edge year outside valid range.
-	double u;
-	const double ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
+	double u, ub;
 
-	// Limited years!
-	year=qBound(1620, year, 2007);
+	// Limited years: Apply border values!
+	//year=qBound(1620, year, 2007);
+	if (year<1620)
+	{
+		const double j1620=qDateTimeToJd(QDateTime(QDate(1620, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		ub=(j1620-2454101.0)/36525.0;
+	}
+	else if (year>2007)
+	{
+		const double j2008=qDateTimeToJd(QDateTime(QDate(2008, 1, 1), QTime(0, 0, 0), Qt::UTC));
+		ub=(j2008-2454101.0)/36525.0;
+	}
+	else
+		ub=(jDay-2454101.0)/36525.0; // (2007-jan-0.5)
+
 
 	if (year <= 1698)
 	{
@@ -1969,7 +1999,7 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	else // if (year<=2013)
 		i=8;
 
-	double u = k[i] + (year - 2000)/100;
+	double u = k[i] + (year - 2000.)/100.; // Avoid possible wrong calculations!
 
 	return (((a4[i]*u + a3[i])*u + a2[i])*u + a1[i])*u + a0[i];
 }
@@ -2518,10 +2548,8 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 			}
 
 			out.append(inflateBuffer.constData(), CHUNK - strm.avail_out);
-
-		}while(strm.avail_out == 0); //if zlib has more data for us, repeat
-
-	}while(ret!=Z_STREAM_END);
+		} while(strm.avail_out == 0); //if zlib has more data for us, repeat
+	} while(ret!=Z_STREAM_END);
 
 	// close zlib
 	inflateEnd(&strm);

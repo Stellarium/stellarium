@@ -321,7 +321,6 @@ public:
 	DitheringMode getDitheringMode() const { return ditheringMode; }
 
 private:
-
 	friend class StelTextureMgr;
 	friend class StelTexture;
 
@@ -349,7 +348,7 @@ private:
 
 	// From text-use-opengl-buffer
 	static QCache<QByteArray, struct StringTexture> texCache;
-	struct StringTexture* getTexTexture(const QString& str, int pixelSize);
+	struct StringTexture* getTexTexture(const QString& str, int pixelSize) const;
 
 	//! Struct describing one opengl array
 	typedef struct ArrayDesc

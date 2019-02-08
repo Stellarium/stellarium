@@ -104,7 +104,6 @@ void SpoutSender::captureAndSendFrame(GLuint fbo)
 				return;
 			}
 		}
-
 	}
 
 	//if no FBO is bound, or the above method failed, we have

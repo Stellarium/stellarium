@@ -232,7 +232,6 @@ void S3DRenderer::setupFrameUniforms(QOpenGLShaderProgram *shader)
 		loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION_VIEW);
 		if(loc>=0)
 			shader->setUniformValue(loc,(normalMatrix * lightInfo.lightDirectionWorld));
-
 	}
 }
 
@@ -1373,7 +1372,6 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
-
 }
 
 void S3DRenderer::drawWithCubeMap()
@@ -1573,7 +1571,6 @@ void S3DRenderer::drawDebug()
 			painter.drawText(screen_x+165.0f, screen_y-215.0f, QString("Splitweight: %1").arg(info.shadowSplitWeight, 3, 'f', 2));
 			painter.drawText(screen_x+165.0f, screen_y-230.0f, QString("Light near/far: %1/%2").arg(lightOrthoNear, 3, 'f', 2).arg(lightOrthoFar, 3, 'f', 2));
 		}
-
 	}
 
 	screen_y -= 100.f;
@@ -1625,8 +1622,8 @@ void S3DRenderer::determineFeatureSupport()
 	// graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
 	// In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
 	// OpenGL ES2 has framebuffers in the Spec
-	if ( !ctx->functions()->hasOpenGLFeature(QOpenGLFunctions::Framebuffers) ) {
-
+	if ( !ctx->functions()->hasOpenGLFeature(QOpenGLFunctions::Framebuffers) )
+	{
 		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
 		qCWarning(s3drenderer) << "Your hardware does not support EXT_framebuffer_object.";
 		qCWarning(s3drenderer) << "Shadow mapping disabled, and display limited to perspective projection.";

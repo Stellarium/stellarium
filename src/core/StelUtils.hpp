@@ -203,6 +203,12 @@ namespace StelUtils
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
 
+	//! Convert from spherical coordinates to Rectangular direction.
+	//! @param lng double* to store longitude in radian
+	//! @param lat double* to store latitude in radian
+	//! @param v the input 3D vector
+	void rectToSphe(double *lng, double *lat, const Vec3f &v);
+
 	//! Coordinate Transformation from equatorial to ecliptical
 	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
 

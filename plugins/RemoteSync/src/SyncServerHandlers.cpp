@@ -25,7 +25,6 @@ using namespace SyncProtocol;
 ServerHandler::ServerHandler(SyncServer *server)
 	: server(server)
 {
-
 }
 
 bool ServerErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peerData)
@@ -42,7 +41,6 @@ bool ServerErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPaylo
 ServerAuthHandler::ServerAuthHandler(SyncServer* server, bool allowDivergingAppVersions)
 	: ServerHandler(server), allowDivergingAppVersions(allowDivergingAppVersions)
 {
-
 }
 
 bool ServerAuthHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)

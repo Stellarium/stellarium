@@ -26,8 +26,6 @@
  *   51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.             *
  ***************************************************************************/
 
-
-
 #include "gsatellite/stdsat.h"
 #include "gsatellite/mathUtils.hpp"
 
@@ -81,9 +79,7 @@ Vec3d gSatWrapper::getTEMEPos() const
 		qWarning() << "gSatWrapper::getTEMEPos Method called without pSatellite initialized";
 
 	return returnedVector;
-
 }
-
 
 Vec3d gSatWrapper::getTEMEVel() const
 {
@@ -96,9 +92,7 @@ Vec3d gSatWrapper::getTEMEVel() const
 		qWarning() << "gSatWrapper::getTEMEVel Method called without pSatellite initialized";
 
 	return returnedVector;
-
 }
-
 
 Vec3d gSatWrapper::getSubPoint() const
 {
@@ -123,7 +117,6 @@ void gSatWrapper::setEpoch(double ai_julianDaysEpoch)
 
 void gSatWrapper::calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_velocity)
 {
-
 	if (epoch != lastCalcObserverECIPosition)
 	{
 		StelLocation loc   = StelApp::getInstance().getCore()->getCurrentLocation();
@@ -217,9 +210,6 @@ void gSatWrapper::updateSunECIPos()
 	//Vec3d sunECIPos;
 	sunECIPos.set(sunEquinoxEqPos[0]*AU, sunEquinoxEqPos[1]*AU, sunEquinoxEqPos[2]*AU);
 	sunECIPos = sunECIPos + observerECIPos; //Change ref system centre
-
-
-
 }
 
 Vec3d gSatWrapper::getSunECIPos()
@@ -234,7 +224,7 @@ Vec3d gSatWrapper::getSunECIPos()
 
 // Operation getVisibilityPredict
 // @brief This operation predicts the satellite visibility conditions.
-gSatWrapper::Visibility gSatWrapper::getVisibilityPredict()
+gSatWrapper::Visibility gSatWrapper::getVisibilityPredict() const
 {
 	Vec3d satAltAzPos = getAltAz();
 

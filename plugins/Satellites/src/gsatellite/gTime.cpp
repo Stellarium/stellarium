@@ -66,7 +66,6 @@ void gTime::setTime(int year, double day)
 
 gTime gTime::getCurrentTime()
 {
-
 	time_t rawtime;
 	struct tm * timeinfo;
 
@@ -110,18 +109,15 @@ gTime::gTime(int nYear, int nMonth, int nDay, int nHour, int nMin, double nSec)
 
 
 	setTime(nYear, dDay);
-
 }
 
 
 gTime::gTime(const gTime& timeSrc):m_time(timeSrc.m_time)
 {
-
 }
 
 gTime::gTime(struct tm ai_timestruct)
 {
-
 	int    year = ai_timestruct.tm_year + 1900;
 
 	double day  = ai_timestruct.tm_yday + 1;
@@ -132,7 +128,6 @@ gTime::gTime(struct tm ai_timestruct)
 
 gTimeSpan gTime::getTimeToUTC()
 {
-
 	//Time to utc calculation.
 	time_t when   = time(nullptr);
 	struct tm utc = *gmtime(&when);
@@ -166,7 +161,6 @@ const gTime& gTime::operator=(time_t t)
 	setTime(year, day);
 
 	return (*this);
-
 }
 
 
@@ -185,13 +179,10 @@ double gTime::getLocalTm() const
 time_t gTime::toTime() const
 {
 	return ((m_time - JDAY_JAN1_00H_1970)*KSEC_PER_DAY);
-
-
 }
 
 void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 {
-
 	assert(pYear != nullptr);
 	assert(pMonth != nullptr);
 	assert(pDom != nullptr);
@@ -229,7 +220,6 @@ void gTime::toCalendarDate(int *pYear, int *pMonth , double *pDom) const
 
 double gTime::toJCenturies() const
 {
-
 	double jd;
 	double UT = fmod((m_time + 0.5), 1.0);
 	jd = m_time - UT;
@@ -244,7 +234,6 @@ double gTime::toJCenturies() const
 // prime meridian.
 double gTime::toThetaGMST() const
 {
-
 	double jd, Theta_JD;
 	double UT = fmod((m_time + 0.5), 1.0);
 	jd = m_time - UT;
@@ -292,7 +281,6 @@ const gTime& gTime::operator+=(gTimeSpan ai_timeSpan)
 {
 	m_time += ai_timeSpan.getDblDays();
 	return (*this);
-
 }
 
 const gTime& gTime::operator-=(gTimeSpan ai_timeSpan)
@@ -303,7 +291,6 @@ const gTime& gTime::operator-=(gTimeSpan ai_timeSpan)
 
 bool gTime::operator==(gTime ai_time) const
 {
-
 	if(m_time == ai_time.m_time)
 		return true;
 
@@ -312,7 +299,6 @@ bool gTime::operator==(gTime ai_time) const
 
 bool gTime::operator!=(gTime ai_time) const
 {
-
 	if(m_time != ai_time.m_time)
 		return true;
 
@@ -321,7 +307,6 @@ bool gTime::operator!=(gTime ai_time) const
 
 bool gTime::operator<(gTime ai_time) const
 {
-
 	if(m_time < ai_time.m_time)
 		return true;
 
@@ -330,7 +315,6 @@ bool gTime::operator<(gTime ai_time) const
 
 bool gTime::operator>(gTime ai_time) const
 {
-
 	if(m_time > ai_time.m_time)
 		return true;
 
@@ -339,7 +323,6 @@ bool gTime::operator>(gTime ai_time) const
 
 bool gTime::operator<=(gTime ai_time) const
 {
-
 	if(m_time <= ai_time.m_time)
 		return true;
 
@@ -348,7 +331,6 @@ bool gTime::operator<=(gTime ai_time) const
 
 bool gTime::operator>=(gTime ai_time) const
 {
-
 	if(m_time >= ai_time.m_time)
 		return true;
 

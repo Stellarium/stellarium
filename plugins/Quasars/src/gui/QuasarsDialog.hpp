@@ -60,16 +60,12 @@ private slots:
 	void saveSettings(void);
 	void updateJSON(void);
 
-	void askQuasarsMarkerColor();
-
 private:
 	Ui_quasarsDialog* ui;
 	Quasars* qsr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
-	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
-
 };
 
 #endif // QUASARSDIALOG_HPP

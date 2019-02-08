@@ -31,6 +31,12 @@ source_file = po/stellarium-planetary-features/stellarium-planetary-features.pot
 source_lang = en
 type = PO
 
+[stellarium.stellarium-scripts]
+file_filter = po/stellarium-scripts/<lang>.po
+source_file = po/stellarium-scripts/stellarium-scripts.pot
+source_lang = en
+type = PO
+
 [stellarium.stellarium-remotecontrol]
 file_filter = po/stellarium-remotecontrol/<lang>.po
 source_file = po/stellarium-remotecontrol/stellarium-remotecontrol.pot

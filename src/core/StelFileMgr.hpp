@@ -195,7 +195,6 @@ public:
 	static QString getLocaleDir();
 
 private:
-
 	//! No one can create an instance.
 	StelFileMgr() {;}
 
@@ -222,7 +221,6 @@ private:
 	//! @param csidlId identifier for directoy, e.g. CSIDL_APPDATA
 	static QString getWin32SpecialDirPath(int csidlId);
 #endif
-
 };
 
 #endif // STELFILEMGR_HPP

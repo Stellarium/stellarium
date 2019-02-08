@@ -295,7 +295,6 @@ public:
 	}
 
 protected:
-
 	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE
 	{
 		// Try to trigger a global shortcut.
@@ -345,7 +344,7 @@ public:
 	void setSkyBackgroundColor(Vec3f color) { skyBackgroundColor=color; }
 
 	//! Get the sky background color. Everything else than black creates a work of art!
-	Vec3f getSkyBackgroundColor() { return skyBackgroundColor; }
+	Vec3f getSkyBackgroundColor() const { return skyBackgroundColor; }
 
 
 protected:
@@ -509,8 +508,8 @@ private:
 				//note: the old code seems to have ignored double clicks
 				// and handled them the same as normal mouse presses
 				//if we ever want to handle double clicks, switch out these lines
-				//t = QEvent::MouseButtonDblClick;
-				t = QEvent::MouseButtonPress;
+				t = QEvent::MouseButtonDblClick;
+				//t = QEvent::MouseButtonPress;
 				break;
 			default:
 				//warn in release and assert in debug
@@ -570,7 +569,6 @@ StelMainView::StelMainView(QSettings* settings)
 	  screenShotPrefix("stellarium-"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
-	  flagUseButtonsBackground(true),
 	  lastEventTimeSec(0.0),
 	  minfps(1.f),
 	  maxfps(10000.f)
@@ -870,7 +868,6 @@ void StelMainView::init()
 	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
-	setFlagUseButtonsBackground(conf->value("gui/flag_show_buttons_background", true).toBool());
 	setSkyBackgroundColor(StelUtils::strToVec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
 
 	// XXX: This should be done in StelApp::init(), unfortunately for the moment we need to init the gui before the
@@ -1267,10 +1264,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 	{
 		qDebug() << "dumpOpenGLdiagnostics(): No OpenGL context";
 	}
-
-
 }
-
 
 void StelMainView::deinit()
 {
@@ -1434,6 +1428,8 @@ void StelMainView::doScreenshot(void)
 	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	int imgWidth =stelScene->width();
 	int imgHeight=stelScene->height();
+	bool nightModeWasEnabled=nightModeEffect->isEnabled();
+	nightModeEffect->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
@@ -1532,12 +1528,23 @@ void StelMainView::doScreenshot(void)
 	// reset viewport and GUI
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
 	customScreenshotMagnification=1.0f;
+	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
 	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
 #endif
 
+	if (nightModeWasEnabled)
+	{
+		for (int row=0; row<im.height(); ++row)
+			for (int col=0; col<im.width(); ++col)
+			{
+				QRgb rgb=im.pixel(col, row);
+				int gray=qGray(rgb);
+				im.setPixel(col, row, qRgb(gray, 0, 0));
+			}
+	}
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 
@@ -1599,7 +1606,7 @@ void StelMainView::doScreenshot(void)
 	}
 }
 
-QPoint StelMainView::getMousePos()
+QPoint StelMainView::getMousePos() const
 {
 	return glWidget->mapFromGlobal(QCursor::pos());
 }
@@ -1632,7 +1639,7 @@ void StelMainView::setSkyBackgroundColor(Vec3f color)
 }
 
 // Get the sky background color. Everything else than black creates a work of art!
-Vec3f StelMainView::getSkyBackgroundColor()
+Vec3f StelMainView::getSkyBackgroundColor() const
 {
 	return rootItem->getSkyBackgroundColor();
 }

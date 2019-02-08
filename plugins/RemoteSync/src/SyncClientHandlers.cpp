@@ -48,7 +48,6 @@ ClientHandler::ClientHandler(SyncClient *client)
 ClientErrorHandler::ClientErrorHandler(SyncClient *client)
 	: ClientHandler(client)
 {
-
 }
 
 bool ClientErrorHandler::handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)

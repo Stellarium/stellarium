@@ -3468,7 +3468,6 @@ double QCPLineEnding::boundingDistance() const
     case esBar:
     case esHalfBar:
       return mWidth*1.42; // items that only have a width -> width*sqrt(2)
-
   }
   return 0;
 }
@@ -15411,7 +15410,6 @@ void QCPGraph::getStepCenterPlotData(QVector<QPointF> *linePixelData, QVector<QC
     (*linePixelData)[lineData.size()*2-1].setX(lastKey);
     (*linePixelData)[lineData.size()*2-1].setY(lastValue);
   }
-
 }
 
 /*!

@@ -80,7 +80,7 @@ void CompletionLabel::clearValues()
 	updateText();
 }
 
-QString CompletionLabel::getSelected()
+QString CompletionLabel::getSelected() const
 {
 	if (values.isEmpty())
 		return QString();
@@ -288,7 +288,6 @@ void SearchDialog::populateCoordinateAxis()
 		ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 		ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 		ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
-
 	}
 	else
 	{
@@ -326,9 +325,13 @@ void SearchDialog::createDialogContent()
 	ui->lineEditSearchSkyObject->installEventFilter(this);	
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->objectsListView;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->objectsListView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	populateCoordinateSystemsList();
 	populateCoordinateAxis();

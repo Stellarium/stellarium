@@ -123,7 +123,6 @@ private:
 	QContiguousCache<PropertyCacheEntry> propCache;
 	QMutex propMutex;
 	QJsonObject getPropertyChangesSinceID(int changeId);
-
 };
 
 

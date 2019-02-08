@@ -639,7 +639,7 @@ void Comet::drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo)
 }
 
 // Formula found at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-Vec2f Comet::getComaDiameterAndTailLengthAU()
+Vec2f Comet::getComaDiameterAndTailLengthAU() const
 {
 	float r = getHeliocentricEclipticPos().length();
 	float mhelio = absoluteMagnitude + slopeParameter * log10(r);
@@ -661,8 +661,9 @@ void Comet::computeComa(const float diameter)
 // Parabola equation: z=x²/2p.
 // xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 void Comet::computeParabola(const float parameter, const float radius, const float zshift,
-			    QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
-
+						  QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr,
+						  QVector<unsigned short> &indices, const float xOffset)
+{
 	// keep the array and replace contents. However, using replace() is only slightly faster.
 	if (vertexArr.length() < ((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
 		vertexArr.resize((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));

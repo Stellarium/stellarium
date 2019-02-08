@@ -732,7 +732,6 @@ void INDI::BaseClient::sendNewText(ITextVectorProperty *tvp)
         sendString("  </oneText>\n");
     }
     sendString("</newTextVector>\n");
-
 }
 
 void INDI::BaseClient::sendNewText(const char *deviceName, const char *propertyName, const char *elementName,

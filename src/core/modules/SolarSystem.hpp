@@ -244,6 +244,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setSednoidsOrbitsColor
 		   NOTIFY sednoidsOrbitsColorChanged
 		   )
+	Q_PROPERTY(Vec3f interstellarOrbitsColor
+		   READ getInterstellarOrbitsColor
+		   WRITE setInterstellarOrbitsColor
+		   NOTIFY interstellarOrbitsColorChanged
+		   )
 	Q_PROPERTY(Vec3f mercuryOrbitColor
 		   READ getMercuryOrbitColor
 		   WRITE setMercuryOrbitColor
@@ -292,6 +297,11 @@ class SolarSystem : public StelObjectModule
 		   NOTIFY orbitColorStyleChanged
 		   )
 
+	Q_PROPERTY(QString apparentMagnitudeAlgorithmOnEarth
+		   READ getApparentMagnitudeAlgorithmOnEarth
+		   WRITE setApparentMagnitudeAlgorithmOnEarth
+		   NOTIFY apparentMagnitudeAlgorithmOnEarthChanged)
+
 public:
 	SolarSystem();
 	virtual ~SolarSystem();
@@ -321,24 +331,23 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Search for SolarSystem objects in some area around a point.
 	//! @param v A vector representing a point in the sky.
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
-	//! @return A STL vector of StelObjectP (pointers) containing all SolarSystem
-	//! objects found in the specified area. This vector is not sorted by distance
-	//! from v.
+	//! @return QList of StelObjectP (pointers) containing all SolarSystem objects
+	//! found in the specified area. This vector is not sorted by distance from v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Search for a SolarSystem object based on the localised name.
-	//! @param nameI18n the case in-sensistive translated planet name.
+	//! @param nameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Search for a SolarSystem object based on the English name.
-	//! @param name the case in-sensistive English planet name.
+	//! @param name the case in-sensitive English planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByName(const QString& name) const;
 
@@ -412,7 +421,7 @@ public slots:
 
 	//! Set planet names font size.
 	//! @return font size
-	void setFontSize(float newFontSize);
+	void setFontSize(int newFontSize);
 
 	//! Set the color used to draw planet labels.
 	//! @param c The color of the planet labels (R,G,B)
@@ -545,6 +554,17 @@ public slots:
 	//! Get the current color used to draw sednoid orbit lines.
 	//! @return current color
 	Vec3f getSednoidsOrbitsColor(void) const;
+
+	//! Set the color used to draw interstellar orbit (hyperbolic trajectory) lines.
+	//! @param c The color of the interstellar orbit lines (R,G,B)
+	//! @code
+	//! // example of usage in scripts
+	//! SolarSystem.setInterstellarOrbitsColor(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setInterstellarOrbitsColor(const Vec3f& c);
+	//! Get the current color used to draw interstellar orbit lines.
+	//! @return current color
+	Vec3f getInterstellarOrbitsColor(void) const;
 
 	//! Set the color used to draw Mercury orbit line.
 	//! @param c The color of Mercury orbit line (R,G,B)
@@ -679,35 +699,35 @@ public slots:
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
-	//! Get the V magnitude for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get the V magnitude for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
 	//! @return a magnitude
 	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
 
-	//! Get type for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get type for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a type of planet (planet, moon, asteroid, comet, plutoid)
 	QString getPlanetType(QString planetName) const;
 
-	//! Get distance to Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get distance to Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a distance (in AU)
 	double getDistanceToPlanet(QString planetName) const;
 
-	//! Get elongation for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get elongation for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a elongation (in radians)
 	double getElongationForPlanet(QString planetName) const;
 
-	//! Get phase angle for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get phase angle for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a phase angle (in radians)
 	double getPhaseAngleForPlanet(QString planetName) const;
 
-	//! Get phase for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
-	//! @return a phase
+	//! Get phase for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
+	//! @return phase, i.e. illuminated fraction [0..1]
 	float getPhaseForPlanet(QString planetName) const;
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
@@ -760,20 +780,20 @@ public slots:
 	//! Set flag which determines if custom settings is using for Great Red Spot on Jupiter
 	void setFlagCustomGrsSettings(bool b);
 	//! Get the current value of the flag which determines if custom settings for Great Red Spot on Jupiter is used or not.
-	bool getFlagCustomGrsSettings();
+	bool getFlagCustomGrsSettings() const;
 
 	//! Set longitude of Great Red Spot (System II is used)
 	//! @param longitude (degrees)
 	void setCustomGrsLongitude(int longitude);
 	//! Get longitude of Great Red Spot (System II is used)
 	//! @return a longitude (degrees)
-	int getCustomGrsLongitude();
+	int getCustomGrsLongitude() const;
 
 	//! Set speed of annual drift for Great Red Spot (System II is used)
 	//! @param annual drift (degrees)
 	void setCustomGrsDrift(double drift);
 	//! Get speed of annual drift for Great Red Spot (System II is used)
-	double getCustomGrsDrift();
+	double getCustomGrsDrift() const;
 
 	//! Set initial JD for calculation of position of Great Red Spot
 	//! @param JD
@@ -835,6 +855,7 @@ signals:
 	void oortCloudObjectsOrbitsColorChanged(const Vec3f & color) const;
 	void cometsOrbitsColorChanged(const Vec3f & color) const;
 	void sednoidsOrbitsColorChanged(const Vec3f & color) const;
+	void interstellarOrbitsColorChanged(const Vec3f & color) const;
 	void mercuryOrbitColorChanged(const Vec3f & color) const;
 	void venusOrbitColorChanged(const Vec3f & color) const;
 	void earthOrbitColorChanged(const Vec3f & color) const;
@@ -845,6 +866,7 @@ signals:
 	void neptuneOrbitColorChanged(const Vec3f & color) const;
 
 	void orbitColorStyleChanged(QString style) const;
+	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
 
 	void solarSystemDataReloaded();
 
@@ -868,7 +890,7 @@ public:
 	PlanetP getMoon() const {return moon;}
 
 	//! Determine if a lunar eclipse is close at hand?
-	bool nearLunarEclipse();
+	bool nearLunarEclipse() const;
 
 	//! Get the list of all the planet english names
 	QStringList getAllPlanetEnglishNames() const;
@@ -960,7 +982,8 @@ private:
 	//! @param bV value of B-V color index
 	unsigned char BvToColorIndex(float bV);
 
-	//! Set flag who enable display a permanent orbits for objects or not
+	//! Set flag which enables display of permanent orbits for objects
+	// TODO: DOCUMENT what this really does, under which circumstances etc.
 	void setFlagPermanentOrbits(bool b);
 
 	//! Used to count how many planets actually need shadow information

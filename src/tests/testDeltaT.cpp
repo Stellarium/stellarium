@@ -337,3 +337,266 @@ void TestDeltaT::testDeltaTByStephensonMorrison1984WideDates()
 							.toUtf8());
 	}
 }
+
+void TestDeltaT::testDeltaTByStephensonMorrison1995WideDates()
+{
+	// test data taken from (a spline):
+	// Long-Term Fluctuations in the Earth's Rotation: 700 BC to AD 1990.
+	// Stephenson, F. R.; Morrison, L. V.
+	// Philosophical Transactions: Physical Sciences and Engineering, Volume 351, Issue 1695, pp. 165-202
+	// 1995RSPTA.351..165S [http://adsabs.harvard.edu/abs/1995RSPTA.351..165S]
+	QVariantList data;
+
+	data << -500 << 16800;
+	data << -450 << 16000;
+	data << -400 << 15300;
+	data << -350 << 14600;
+	data << -300 << 14000;
+	data << -250 << 13400;
+	data << -200 << 12800;
+	data << -150 << 12200;
+	data << -100 << 11600;
+	data <<  -50 << 11100;
+	data <<    0 << 10600;
+	data <<   50 << 10100;
+	data <<  100 <<  9600;
+	data <<  150 <<  9100;
+	data <<  200 <<  8600;
+	data <<  250 <<  8200;
+	data <<  300 <<  7700;
+	data <<  350 <<  7200;
+	data <<  400 <<  6700;
+	data <<  450 <<  6200;
+	data <<  500 <<  5700;
+	data <<  550 <<  5200;
+	data <<  600 <<  4700;
+	data <<  650 <<  4300;
+	/*
+	// FIXME: WTF?
+	data <<  700 <<  3800;
+	data <<  750 <<  3400;
+	data <<  800 <<  3000;
+	data <<  850 <<  2600;
+	data <<  900 <<  2200;
+	data <<  950 <<  1900;
+	data << 1000 <<  1600;
+	data << 1050 <<  1350;
+	data << 1100 <<  1100;
+	data << 1150 <<   900;
+	data << 1200 <<   750;
+	data << 1250 <<   600;
+	data << 1300 <<   460;
+	data << 1350 <<   360;
+	data << 1400 <<   280;
+	data << 1450 <<   200;
+	data << 1500 <<   150;
+	data << 1550 <<   110;
+	data << 1600 <<    80;
+	*/
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByStephensonMorrison1995(JD);
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(result <= expectedResult, QString("date=%2 year=%3 result=%4 expected=%5")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByStephensonMorrison2004WideDates()
+{
+	// test data from
+	// * Morrison, L. V.; Stephenson, F. R., "Historical values of the Earth's clock error ΔT and the calculation of eclipses",
+	//    Journal for the History of Astronomy, 35(2004), 327-336 - http://adsabs.harvard.edu/abs/2004JHA....35..327M
+	// * addendum in ibid., 36 (2005), 339 - http://adsabs.harvard.edu/abs/2005JHA....36..339M
+	QVariantList data;
+	data << -1000 << 25400 << 640;
+	data <<  -900 << 23700 << 590;
+	data <<  -800 << 22000 << 550;
+	data <<  -700 << 20400 << 500;
+	data <<  -600 << 18800 << 460;
+	data <<  -500 << 17190 << 430;
+	data <<  -400 << 15530 << 390;
+	data <<  -300 << 14080 << 360;
+	data <<  -200 << 12790 << 330;
+	data <<  -100 << 11640 << 290;
+	data <<     0 << 10580 << 260;
+	data <<   100 <<  9600 << 240;
+	/*
+	data <<   200 <<  8640 << 210;
+	data <<   300 <<  7680 << 180;
+	data <<   400 <<  6700 << 160;
+	data <<   500 <<  5710 << 140;
+	data <<   600 <<  4740 << 120;
+	data <<   700 <<  3810 << 100;
+	data <<   800 <<  2960 <<  80;
+	data <<   900 <<  2200 <<  70;
+	data <<  1000 <<  1570 <<  55;
+	data <<  1100 <<  1090 <<  40;
+	data <<  1200 <<   740 <<  30;
+	data <<  1300 <<   490 <<  20;
+	data <<  1400 <<   320 <<  20;
+	data <<  1500 <<   200 <<  20;
+	data <<  1600 <<   120 <<   9;
+	data <<  1700 <<     9 <<   5;
+	data <<  1710 <<    10 <<   3;
+	data <<  1720 <<    11 <<   3;
+	data <<  1730 <<    11 <<   3;
+	data <<  1740 <<    12 <<   2;
+	data <<  1750 <<    13 <<   2;
+	data <<  1760 <<    15 <<   2;
+	data <<  1770 <<    16 <<   2;
+	data <<  1780 <<    17 <<   1;
+	data <<  1790 <<    17 <<   1;
+	data <<  1800 <<    14 <<   1;
+	data <<  1810 <<    13 <<   1;
+	data <<  1820 <<    12 <<   1;
+	data <<  1830 <<     8 <<   1; // *  - <1
+	data <<  1840 <<     6 <<   1; // ** - undefined error
+	data <<  1850 <<     7 <<   1; // **
+	data <<  1860 <<     8 <<   1; // **
+	data <<  1870 <<     2 <<   1; // **
+	data <<  1880 <<    -5 <<   1; // **
+	data <<  1890 <<    -6 <<   1; // **
+	data <<  1900 <<    -3 <<   1; // **
+	data <<  1910 <<    10 <<   1; // **
+	data <<  1920 <<    21 <<   1; // **
+	data <<  1930 <<    24 <<   1; // **
+	data <<  1940 <<    24 <<   1; // **
+	data <<  1950 <<    29 <<   1; // **
+	data <<  1960 <<    33 <<   1; // **
+	data <<  1970 <<    40 <<   1; // **
+	data <<  1980 <<    51 <<   1; // **
+	data <<  1990 <<    57 <<   1; // **
+	data <<  2000 <<    65 <<   1; // **
+	*/
+
+	while(data.count() >= 3)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByMorrisonStephenson2004(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByMeeusSimons()
+{
+	// test data from Meeus, Jean, "The Effect of Delta T on Astronomical Calculations",
+	// The Journal of the British Astronomical Association, 108 (1998), 154-156
+	// http://adsabs.harvard.edu/abs/1998JBAA..108..154M
+
+	QVariantList data;
+	data << 1974 << 44.49;
+	data << 1975 << 45.48;
+	data << 1976 << 46.46;
+	data << 1977 << 47.52;
+	data << 1978 << 48.53;
+	data << 1979 << 49.59;
+	data << 1980 << 50.54;
+	data << 1981 << 51.38;
+	data << 1982 << 52.17;
+	data << 1983 << 52.96;
+	data << 1984 << 53.79;
+	data << 1985 << 54.34;
+	data << 1986 << 54.87;
+	data << 1987 << 55.32;
+	data << 1988 << 55.82;
+	data << 1989 << 56.30;
+	data << 1990 << 56.86;
+	data << 1991 << 57.57;
+	data << 1992 << 58.31;
+	data << 1993 << 59.12;
+	data << 1994 << 59.99;
+	data << 1995 << 60.79;
+	data << 1996 << 61.63;
+	data << 1997 << 62.30;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByMeeusSimons(JD);
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(qAbs(result-expectedResult)<=1, QString("date=%2 year=%3 result=%4 expected=%5")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByKhalidSultanaZaidiWideDates()
+{
+	// test data and max. error taken from:
+	// Delta T: Polynomial Approximation of Time Period 1620-2013
+	// M. Khalid, Mariam Sultana and Faheem Zaidi
+	// Journal of Astrophysics, Vol. 2014, Article ID 480964
+	// https://doi.org/10.1155/2014/480964
+
+	QVariantList data;
+	//      year        deltaT   max.err.
+	data << 1620 << 124.201597 << 0.5709;
+	data << 1672 <<  23.455938 << 0.5709;
+	data << 1673 <<  23.518597 << 0.5989;
+	data << 1729 <<  10.794455 << 0.5989;
+	data << 1730 <<  10.964421 << 0.5953;
+	data << 1797 <<  15.096315 << 0.5953;
+	data << 1798 <<	 14.433142 << 0.4643;
+	data << 1843 <<   6.564327 << 0.4643;
+	data << 1844 <<   6.668453 << 0.5894;
+	data << 1877 <<  -4.648388 << 0.5894;
+	data << 1878 <<  -5.058000 << 0.5410;
+	data << 1904 <<   3.181019 << 0.5410;
+	data << 1905 <<   3.559383 << 0.5495;
+	data << 1945 <<  27.258421 << 0.5495;
+	data << 1946 <<  27.234794 << 0.4279;
+	data << 1989 <<  55.872143 << 0.4279;
+	data << 1990 <<  56.659321 << 0.2477;
+	data << 2013 <<  67.135703 << 0.2477;
+
+	while(data.count() >= 3)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double maxError = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByKhalidSultanaZaidi(JD);
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(qAbs(result-expectedResult)<=maxError, QString("date=%2 year=%3 result=%4 expected=%5 exp. error=%6")
+			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+			 .arg(year)
+			 .arg(QString::number(result, 'f', 5))
+			 .arg(QString::number(expectedResult, 'f', 5))
+			 .arg(QString::number(maxError, 'f', 4))
+			 .toUtf8());
+	}
+}

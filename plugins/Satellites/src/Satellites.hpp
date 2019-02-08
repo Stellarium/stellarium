@@ -199,22 +199,24 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Used to get a list of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for satellites.
 	//! @param limitFov the field of view around the position v in which to search for satellites.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the satellites located inside the limitFov circle around position v.
+	//! @return a list containing the satellites located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
-	//! @param nameI18n The case in-sensistive satellite name
+	//! @param nameI18n The case in-sensitive satellite name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Return the matching satellite if exists or Q_NULLPTR.
-	//! @param name The case in-sensistive standard program name
+	//! @param name The case in-sensitive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	//! Return the matching satellite if exists or Q_NULLPTR.
+	//! @param id The satellite id (NORAD)
 	virtual StelObjectP searchByID(const QString &id) const;
 	
 	//! Return the satellite with the given catalog number.

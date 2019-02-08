@@ -611,7 +611,7 @@ void StelCore::setFlagGravityLabels(bool gravity)
 	emit flagGravityLabelsChanged(gravity);
 }
 
-bool StelCore::getFlagGravityLabels()
+bool StelCore::getFlagGravityLabels() const
 {
 	return currentProjectorParams.gravityLabels;
 }
@@ -1011,8 +1011,6 @@ void StelCore::updateTransformMatrices()
 
 //		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 //				Mat4d::translation(-position->getCenterVsop87Pos());
-
-
 	}
 	else
 	{
@@ -1303,7 +1301,6 @@ float StelCore::getUTCOffset(const double JD) const
 
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
-
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;
@@ -1317,7 +1314,15 @@ QString StelCore::getCurrentTimeZone() const
 
 void StelCore::setCurrentTimeZone(const QString& tz)
 {
-	currentTimeZone = tz;
+	if (StelApp::getInstance().getLocationMgr().getAllTimezoneNames().contains(tz))
+	{
+		currentTimeZone = tz;
+		emit(currentTimeZoneChanged(tz));
+	}
+	else
+	{
+		qWarning() << "StelCore: Invalid timezone name:" << tz << " -- not setting timezone.";
+	}
 }
 
 bool StelCore::getUseDST() const
@@ -1416,7 +1421,7 @@ bool StelCore::getIsTimeNow(void) const
 	return previousResult;
 }
 
-QTime StelCore::getInitTodayTime(void)
+QTime StelCore::getInitTodayTime(void) const
 {
 	return initTodayTime;
 }
@@ -1749,7 +1754,7 @@ double StelCore::getLocalSiderealYearLength() const
 	return position->getHomePlanet()->getSiderealPeriod();
 }
 
-QString StelCore::getStartupTimeMode()
+QString StelCore::getStartupTimeMode() const
 {
 	return startupTimeMode;
 }
@@ -2612,8 +2617,8 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 	int entry=0;
 	while (iau_constlineVec.at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size()){
-
+	while (entry<iau_constlineVec.size())
+	{
 		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
 			entry++;
 		while (iau_constlineVec.at(entry).RAlow >= RA1875)

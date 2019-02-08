@@ -27,6 +27,7 @@
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
 #include "CustomObjectMgr.hpp"
+#include "HighlightMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "AngleSpinBox.hpp"
@@ -237,7 +238,7 @@ void BookmarksDialog::removeBookmarkButtonPressed()
 
 void BookmarksDialog::clearBookmarksButtonPressed()
 {
-	GETSTELMODULE(CustomObjectMgr)->cleanHighlightList();
+	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
 	bookmarksListModel->clear();
 	bookmarksCollection.clear();
 	setBookmarksHeaderNames();
@@ -278,14 +279,17 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 
 		if (status)
 			highlights.append(pos);
+
+		objectMgr->unSelect();
 	}
 
-	GETSTELMODULE(CustomObjectMgr)->fillHighlightList(highlights);
+	GETSTELMODULE(HighlightMgr)->fillHighlightList(highlights);
 }
 
 void BookmarksDialog::clearHighlightsButtonPressed()
 {
-	GETSTELMODULE(CustomObjectMgr)->cleanHighlightList();
+	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
+	objectMgr->unSelect();
 }
 
 void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)
@@ -427,14 +431,12 @@ void BookmarksDialog::loadBookmarks()
 				addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 				i++;
 			}
-
 		}
 		catch (std::runtime_error &e)
 		{
 			qDebug() << "[Bookmarks] File format is wrong! Error: " << e.what();
 			return;
 		}
-
 	}
 }
 
@@ -456,14 +458,17 @@ void BookmarksDialog::exportBookmarks()
 	QString originalBookmarksFile = bookmarksJsonPath;
 
 	QString filter = "JSON (*.json)";
-	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Export bookmarks as..."), QDir::homePath() + "/bookmarks.json", filter);
+	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							 q_("Export bookmarks as..."),
+							 QDir::homePath() + "/bookmarks.json",
+							 filter);
 
 	saveBookmarks();
 
 	bookmarksJsonPath = originalBookmarksFile;
 }
 
-void BookmarksDialog::saveBookmarks()
+void BookmarksDialog::saveBookmarks() const
 {
 	if (bookmarksJsonPath.isEmpty())
 	{
@@ -512,6 +517,5 @@ void BookmarksDialog::saveBookmarks()
 	StelJsonParser::write(bmList, &jsonFile);
 	jsonFile.flush();
 	jsonFile.close();
-
 }
 
