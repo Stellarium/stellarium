@@ -38,8 +38,10 @@ private slots:
 	void testDeltaTByStephensonMorrison1984WideDates();
 	void testDeltaTByStephensonMorrison1995WideDates();
 	void testDeltaTByStephensonMorrison2004WideDates();
+	void testDeltaTByStephenson1997WideDates();
 	void testDeltaTByMeeusSimons();
 	void testDeltaTByKhalidSultanaZaidiWideDates();
+	void testDeltaTByMontenbruckPfleger();
 };
 
 #endif // _TESTDELTAT_HPP

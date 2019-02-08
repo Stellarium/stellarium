@@ -604,7 +604,7 @@ namespace StelUtils
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Montenbruck & Pfleger (2000) for DeltaT computation,
 	//! a data fit through the table of values found in Meeus, Astronomical algorithms (1991).
-	//! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000)
+	//! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000), p.181-182
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds or 0 if not 1825<=year<2005
 	double getDeltaTByMontenbruckPfleger(const double jDay);

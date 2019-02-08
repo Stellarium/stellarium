@@ -1738,31 +1738,48 @@ double getDeltaTByChaprontMeeus(const double jDay)
 double getDeltaTByMontenbruckPfleger(const double jDay)
 {
 	double deltaT = 0.;
-
-	const double T=(jDay-2451545)/36525;
+	const double T=(jDay-2451545.)/36525.;
 	double t;
-	if (jDay<2387627.5) // 1825-01-01 0:00 ...
+	if (jDay<2387627.5 || jDay >=2453736.5) // ...1825-01-01 0:00 or 2006-01-01 0:00...
 		deltaT=0.0;
-	else if (jDay < 2396758.5) { // 1850-01-01 0:00
+	else if (jDay < 2396758.5) // 1850-01-01 0:00
+	{
 		t=T+1.75;
 		deltaT=(( -572.3*t+413.9)*t  -80.8)*t +10.4;
-	} else if (jDay < 2405889.5) { // 1875-01-01 0:00
+	}
+	else if (jDay < 2405889.5) // 1875-01-01 0:00
+	{
 		t=T+1.50;
 		deltaT=((   18.8*t-358.4)*t  +46.3)*t + 6.6;
-	} else if (jDay < 2415020.5) { // 1900-01-01 0:00
+	}
+	else if (jDay < 2415020.5) // 1900-01-01 0:00
+	{
 		t=T+1.25;
 		deltaT=((  867.4*t-166.2)*t  -10.8)*t - 3.9;
-	} else if (jDay < 2424151.5) { // 1925-01-01 0:00
+	}
+	else if (jDay < 2424151.5) // 1925-01-01 0:00
+	{
 		t=T+1.00;
 		deltaT=((-1467.4*t+327.5)*t +114.1)*t - 2.6;
-	} else if (jDay < 2433282.5) { // 1950-01-01 0:00
+	}
+	else if (jDay < 2433282.5) // 1950-01-01 0:00
+	{
 		t=T+0.75;
 		deltaT=((  483.4*t - 8.2)*t  - 6.3)*t +24.2;
-	} else if (jDay < 2442413.5) { // 1975-01-01 0:00
+	}
+	else if (jDay < 2442413.5) // 1975-01-01 0:00
+	{
 		t=T+0.50;
 		deltaT=((  550.7*t - 3.8)*t  +32.5)*t +29.3;
-	} else if (jDay < 2453736.5) { // 2006-01-01 0:00
+	}
+	else if (jDay < 2451545.5) // 2000-01-01 0:00
+	{
 		t=T+0.25;
+		deltaT=(( 1516.7*t-570.5)*t +130.5)*t +45.3;
+	}
+	else if (jDay < 2453736.5) // 2006-01-01 0:00 [extrapolation from 2000]
+	{
+		t=T+0.5;
 		deltaT=(( 1516.7*t-570.5)*t +130.5)*t +45.3;
 	}
 
