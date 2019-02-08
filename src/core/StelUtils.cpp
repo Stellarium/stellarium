@@ -1999,7 +1999,7 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	else // if (year<=2013)
 		i=8;
 
-	double u = k[i] + (year - 2000)/100;
+	double u = k[i] + (year - 2000.)/100.; // Avoid possible wrong calculations!
 
 	return (((a4[i]*u + a3[i])*u + a2[i])*u + a1[i])*u + a0[i];
 }
