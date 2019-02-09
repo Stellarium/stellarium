@@ -699,8 +699,7 @@ void AstroCalcDialog::fillCelestialPositionTable(QString objectName, QString RA,
 
 void AstroCalcDialog::currentCelestialPositions()
 {
-	float ra, dec;
-	QString raStr, decStr, extra, angularSize, sTransit, celObjName = "", celObjId = "";
+	QString extra, angularSize, sTransit, celObjName = "", celObjId = "";
 	QPair<QString, QString> coordinates;
 
 	initListCelestialPositions();
@@ -710,7 +709,6 @@ void AstroCalcDialog::currentCelestialPositions()
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
-//	StelCore* core = StelApp::getInstance().getCore();
 	double JD = core->getJD();
 	ui->celestialPositionsTimeLabel->setText(q_("Positions on %1").arg(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))));
 
@@ -791,7 +789,8 @@ void AstroCalcDialog::currentCelestialPositions()
 		Vec3d pos;
 		for (const auto& planet : allPlanets)
 		{
-			if ((planet->getPlanetType() != Planet::isUNDEFINED && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
+			if ((planet->getPlanetType() != Planet::isUNDEFINED && planet != core->getCurrentPlanet())
+			     && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
 
@@ -859,7 +858,9 @@ void AstroCalcDialog::currentCelestialPositions()
 		for (const auto& planet : allMinorBodies)
 		{
 			Planet::PlanetType ptype = planet->getPlanetType();
-			if (((ptype == Planet::isAsteroid || ptype == Planet::isCubewano || ptype == Planet::isDwarfPlanet || ptype == Planet::isOCO || ptype == Planet::isPlutino || ptype == Planet::isSDO || ptype == Planet::isSednoid) && planet != core->getCurrentPlanet())
+			if (((ptype == Planet::isAsteroid || ptype == Planet::isCubewano || ptype == Planet::isDwarfPlanet || ptype == Planet::isOCO
+			      || ptype == Planet::isPlutino || ptype == Planet::isSDO || ptype == Planet::isSednoid || ptype==Planet::isInterstellar)
+			      && planet != core->getCurrentPlanet())
 			      && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
@@ -897,7 +898,8 @@ void AstroCalcDialog::currentCelestialPositions()
 		Vec3d pos;
 		for (const auto& planet : allPlanets)
 		{
-			if ((planet->getPlanetType() == Planet::isPlanet && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
+			if ((planet->getPlanetType() == Planet::isPlanet && planet != core->getCurrentPlanet())
+			     && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
 
