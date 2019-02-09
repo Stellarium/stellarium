@@ -1002,9 +1002,9 @@ QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord,
 {
 	double ra, dec;
 	QString raStr, decStr;
+	StelUtils::rectToSphe(&ra, &dec, coord);
 	if (horizon)
 	{
-		StelUtils::rectToSphe(&ra, &dec, coord);
 		double direction = 3.; // N is zero, E is 90 degrees
 		if (southAzimuth)
 			direction = 2.;
@@ -1024,7 +1024,6 @@ QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord,
 	}
 	else
 	{
-		StelUtils::rectToSphe(&ra, &dec, coord);
 		if (decimalDegrees)
 		{
 			raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
