@@ -437,6 +437,8 @@
 	     as long as you follow any licensing requirements mentioned on this page.
 	4.41 Images of M61, M64, M65, M66, M91, M99, M100, NGC613, NGC772, NGC918, NGC1042, NGC1360,
 	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2346, NGC2362, NGC2440, NGC2683, NGC2775, NGC3132,
+	     NGC3242, NGC3750, NGC4170,NGC4216, NGC4361, NGC4395, NGC4414,,NGC4450, NGC4676, NGC4725,
+	     NGC5216, NGC5248, NGC6302, NGC6563, NGC6781, NGC6894, NGC7000, NGC7354, SH2-136, UGC3697,
 	     Cassiopeia A, LBN438, Wild's Triplet
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
