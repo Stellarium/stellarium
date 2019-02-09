@@ -283,16 +283,19 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		float coma = floor(tailFactors[0]*AU/1000.0f)*1000.0f;
 		double tail = tailFactors[1]*AU;
 		double distanceKm = AU * getJ2000EquatorialPos(core).length();
+		// Try to estimate tail length in degrees.
+		// TODO: Take projection effect into account!
+		// The estimates here assume that the tail is seen from the side.
 		QString comaDeg, tailDeg;
 		if (withDecimalDegree)
 		{
-			comaDeg = StelUtils::radToDecDegStr(asin(coma/distanceKm),4,false,true);
-			tailDeg = StelUtils::radToDecDegStr(asin(tail/distanceKm),4,false,true);
+			comaDeg = StelUtils::radToDecDegStr(atan(coma/distanceKm),4,false,true);
+			tailDeg = StelUtils::radToDecDegStr(atan(tail/distanceKm),4,false,true);
 		}
 		else
 		{
-			comaDeg = StelUtils::radToDmsStr(asin(coma/distanceKm));
-			tailDeg = StelUtils::radToDmsStr(asin(tail/distanceKm));
+			comaDeg = StelUtils::radToDmsStr(atan(coma/distanceKm));
+			tailDeg = StelUtils::radToDmsStr(atan(tail/distanceKm));
 		}
 		if (coma>1e6)
 			oss << QString("%1: %2 %3 (%4)").arg(comaEst, QString::number(coma*1e-6, 'G', 3), Mkm, comaDeg) << "<br />";
