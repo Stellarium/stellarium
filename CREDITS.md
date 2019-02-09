@@ -344,12 +344,12 @@
 	4.14 The folder icon derived from the Tango Desktop Project, used under
 	     the terms of the Creative Commons Attribution Share-Alike
 	     license.
-	4.15 Images of NGC281, NGC5139, NGC6543, NGC6960, NGC7317,
+	4.15 Images of NGC281, NGC6543, NGC7317,
 	     NGC7319, NGC7320
 	     from Andrey Kuznetsov, Kepler Observatory
 	     http://kepler-observatorium.ru
 	     License: Creative Commons Attribution 3.0 Unported
-	4.16 Images of NGC891, NGC1333, NGC2903, NGC3185, NGC3187, NGC3189,
+	4.16 Images of NGC891, NGC2903, NGC3185, NGC3187, NGC3189,
 	     NGC3190, NGC3193, NGC3718, NGC3729, NGC4490, NGC5981, NGC5982,
 	     NGC5985
 	     from Oleg Bryzgalov 
@@ -379,8 +379,8 @@
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
-	4.25 Images of M3, M13, M15, M24, M33, M51, M58, M63, M74, M76,
-	     M81, M82, M94, M96, M100, M101, M105, M106, IC405, IC443, NGC246, 
+	4.25 Images of M3, M13, M15, M24, M33, M51, M58, M63, M76,
+	     M81, M82, M94, M96, M101, M105, M106, IC405, IC443, NGC246, 
 	     NGC457, NGC488, NGC1514, NGC1961, NGC2174, NGC2264, NGC2371, 
              NGC2392, NGC2403, NGC2655, NGC2685, NGC2841, NGC3166, NGC3310, 
              NGC3344, NGC3359, NGC3521, NGC3628, NGC3938, NGC4151, NGC4535, 
@@ -402,7 +402,7 @@
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Image of NGC40 from Steven Bellavia
-	4.31 Images of NGC1579, NGC6590, Barnard Loop, IC342 from Sun Shuwei
+	4.31 Images of NGC1579, NGC6590, Barnard Loop, IC342, SH2-297 from Sun Shuwei
 	     License: public domain
 	4.32 Images of M77, NGC3109, NGC3180, NGC4449, NGC6397, NGC7009, Sh2-264, Sh2-308
 	     from Wang Lingyi
@@ -421,7 +421,7 @@
 	     License: Creative Commons Attribution 4.0 International 
 	4.36 Images of M49, NGC147, NGC404, NGC4244 from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
-	4.37 Images of NGC2808, NGC7023 from NASA
+	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
 	     License: public domain
 	4.38 Images of IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
@@ -435,11 +435,11 @@
 	     License: This work is free and may be used by anyone for any purpose.
 	     If you wish to use this content, you do not need to request permission
 	     as long as you follow any licensing requirements mentioned on this page.
-	4.41 Images of M61, M64, M65, M66, M91, M99, NGC613, NGC772, NGC918, NGC1042, NGC1360,
-	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2362, NGC2440, NGC2683, NGC2775, 
-	     NGC3132, NGC3242, NGC3750, NGC4170,NGC4216, NGC4361, NGC4395, NGC4414,,NGC4676, 
-	     NGC5248, NGC6302, NGC6563, NGC6781, NGC6894, NGC7000, NGC7354, SH2-136, UGC3697,
-	     Coma Cluster, Cassiopeia A, LBN438, Wild's Triplet
+	4.41 Images of M61, M64, M65, M66, M91, M99, M100, NGC613, NGC772, NGC918, NGC1042, NGC1360,
+	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2346, NGC2362, NGC2440, NGC2683, NGC2775, NGC3132,
+	     NGC3242, NGC3750, NGC4170,NGC4216, NGC4361, NGC4395, NGC4414,,NGC4450, NGC4676, NGC4725,
+	     NGC5216, NGC5248, NGC6302, NGC6563, NGC6781, NGC6894, NGC7000, NGC7354, SH2-136, UGC3697,
+	     Cassiopeia A, LBN438, Wild's Triplet
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -631,6 +631,26 @@
 	     from Adam Block/ChileScope
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.90 Images of M74, Coma Cluster
+	     from Bart Delsaert
+	     https://delsaert.com/
+	     License: Creative Commons Attribution 3.0 Unported
+	4.91 Images of NGC1333
+	     from AAE-Agrupacio Astronomica d'Eivissa
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.92 Images of NGC5139
+	     from Jose Mtanous
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 3.0 Unported
+	4.93 Images of NGC6960
+	     from Jose Mtanous
+	     https://commons.wikimedia.org/wiki/
+	     License: public domain
+	4.94 Images of NGC6445
+	     from The Pan-STARRS1 Surveys (PS1) and the PS1 public science archive have been made possible through contributions by the Institute for Astronomy, the University of Hawaii, the Pan-STARRS Project Office, the Max-Planck Society and its participating institutes, the Max Planck Institute for Astronomy, Heidelberg and the Max Planck Institute for Extraterrestrial Physics, Garching, The Johns Hopkins University, Durham University, the University of Edinburgh, the Queen's University Belfast, the Harvard-Smithsonian Center for Astrophysics, the Las Cumbres Observatory Global Telescope Network Incorporated, the National Central University of Taiwan, the Space Telescope Science Institute, the National Aeronautics and Space Administration under Grant No. NNX08AR22G issued through the Planetary Science Division of the NASA Science Mission Directorate, the National Science Foundation Grant No. AST-1238877, the University of Maryland, Eotvos Lorand University (ELTE), the Los Alamos National Laboratory, and the Gordon and Betty Moore Foundation.
+	     https://ps1images.stsci.edu/cgi-bin/ps1cutouts
+	     License: public domain
 ```
 
 ## Appendix
