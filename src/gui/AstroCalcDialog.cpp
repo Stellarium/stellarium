@@ -701,6 +701,7 @@ void AstroCalcDialog::currentCelestialPositions()
 {
 	float ra, dec;
 	QString raStr, decStr, extra, angularSize, sTransit, celObjName = "", celObjId = "";
+	QPair<QString, QString> coordinates;
 
 	initListCelestialPositions();
 
@@ -748,39 +749,9 @@ void AstroCalcDialog::currentCelestialPositions()
 			if (obj->objectInDisplayedCatalog() && obj->objectInAllowedSizeRangeLimits() && magOp <= mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
-				{
-					StelUtils::rectToSphe(&ra, &dec, obj->getAltAzPosAuto(core));
-					float direction = 3.; // N is zero, E is 90 degrees
-					if (useSouthAzimuth)
-						direction = 2.;
-					ra = direction * M_PI - ra;
-					if (ra > M_PI * 2)
-						ra -= M_PI * 2;
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToDmsStr(ra, true);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-				{
-					StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToHmsStr(ra);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
 
 				celObjName = obj->getNameI18n();
 				celObjId = obj->getDSODesignation();
@@ -805,7 +776,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				fillCelestialPositionTable(dsoName, raStr, decStr, magOp, angularSize, asToolTip, extra, mu, sTransit, q_(obj->getTypeString()));
+				fillCelestialPositionTable(dsoName, coordinates.first, coordinates.second, magOp, angularSize, asToolTip, extra, mu, sTransit, q_(obj->getTypeString()));
 			}
 		}
 	}
@@ -823,40 +794,11 @@ void AstroCalcDialog::currentCelestialPositions()
 			if ((planet->getPlanetType() != Planet::isUNDEFINED && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
+
 				if (horizon)
-				{
-					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
-					float direction = 3.; // N is zero, E is 90 degrees
-					if (useSouthAzimuth)
-						direction = 2.;
-					ra = direction * M_PI - ra;
-					if (ra > M_PI * 2)
-						ra -= M_PI * 2;
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToDmsStr(ra, true);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-				{
-					StelUtils::rectToSphe(&ra, &dec, pos);
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToHmsStr(ra);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
@@ -870,7 +812,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -888,40 +830,11 @@ void AstroCalcDialog::currentCelestialPositions()
 			if ((planet->getPlanetType() == Planet::isComet && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
+
 				if (horizon)
-				{
-					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
-					float direction = 3.; // N is zero, E is 90 degrees
-					if (useSouthAzimuth)
-						direction = 2.;
-					ra = direction * M_PI - ra;
-					if (ra > M_PI * 2)
-						ra -= M_PI * 2;
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToDmsStr(ra, true);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-				{
-					StelUtils::rectToSphe(&ra, &dec, pos);
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToHmsStr(ra);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
@@ -930,7 +843,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), QChar(0x2014), asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), QChar(0x2014), asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -950,40 +863,11 @@ void AstroCalcDialog::currentCelestialPositions()
 			      && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
+
 				if (horizon)
-				{
-					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
-					float direction = 3.; // N is zero, E is 90 degrees
-					if (useSouthAzimuth)
-						direction = 2.;
-					ra = direction * M_PI - ra;
-					if (ra > M_PI * 2)
-						ra -= M_PI * 2;
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToDmsStr(ra, true);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-				{
-					StelUtils::rectToSphe(&ra, &dec, pos);
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToHmsStr(ra);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
@@ -997,7 +881,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -1016,40 +900,11 @@ void AstroCalcDialog::currentCelestialPositions()
 			if ((planet->getPlanetType() == Planet::isPlanet && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
+
 				if (horizon)
-				{
-					StelUtils::rectToSphe(&ra, &dec, planet->getAltAzPosAuto(core));
-					float direction = 3.; // N is zero, E is 90 degrees
-					if (useSouthAzimuth)
-						direction = 2.;
-					ra = direction * M_PI - ra;
-					if (ra > M_PI * 2)
-						ra -= M_PI * 2;
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToDmsStr(ra, true);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-				{
-					StelUtils::rectToSphe(&ra, &dec, pos);
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToHmsStr(ra);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
 
 				extra = QString::number(pos.length(), 'f', 5); // A.U.
 
@@ -1063,7 +918,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (rts[1]>=0.f)
 					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
 
-				fillCelestialPositionTable(planet->getNameI18n(), raStr, decStr, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
+				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
 			}
 		}
 	}
@@ -1099,39 +954,9 @@ void AstroCalcDialog::currentCelestialPositions()
 			if (obj->getVMagnitudeWithExtinction(core) <= mag && obj->isAboveRealHorizon(core))
 			{
 				if (horizon)
-				{
-					StelUtils::rectToSphe(&ra, &dec, obj->getAltAzPosAuto(core));
-					float direction = 3.; // N is zero, E is 90 degrees
-					if (useSouthAzimuth)
-						direction = 2.;
-					ra = direction * M_PI - ra;
-					if (ra > M_PI * 2)
-						ra -= M_PI * 2;
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToDmsStr(ra, true);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(obj->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
 				else
-				{
-					StelUtils::rectToSphe(&ra, &dec, obj->getJ2000EquatorialPos(core));
-					if (withDecimalDegree)
-					{
-						raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-						decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
-					}
-					else
-					{
-						raStr = StelUtils::radToHmsStr(ra);
-						decStr = StelUtils::radToDmsStr(dec, true);
-					}
-				}
+					coordinates = getStringCoordinates(obj->getJ2000EquatorialPos(core), horizon, useSouthAzimuth, withDecimalDegree);
 
 				if (celTypeId == 170) // double stars
 				{
@@ -1158,7 +983,7 @@ void AstroCalcDialog::currentCelestialPositions()
 				if (commonName.isEmpty())
 					commonName = obj->getID();
 
-				fillCelestialPositionTable(commonName, raStr, decStr, obj->getVMagnitudeWithExtinction(core), QChar(0x2014), "", extra, sToolTip, sTransit, sType);
+				fillCelestialPositionTable(commonName, coordinates.first, coordinates.second, obj->getVMagnitudeWithExtinction(core), QChar(0x2014), "", extra, sToolTip, sTransit, sType);
 			}
 		}
 	}
@@ -1171,6 +996,50 @@ void AstroCalcDialog::currentCelestialPositions()
 
 	// sort-by-name
 	ui->celestialPositionsTreeWidget->sortItems(CColumnName, Qt::AscendingOrder);
+}
+
+QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees)
+{
+	double ra, dec;
+	QString raStr, decStr;
+	if (horizon)
+	{
+		StelUtils::rectToSphe(&ra, &dec, coord);
+		double direction = 3.; // N is zero, E is 90 degrees
+		if (southAzimuth)
+			direction = 2.;
+		ra = direction * M_PI - ra;
+		if (ra > M_PI * 2)
+			ra -= M_PI * 2;
+		if (decimalDegrees)
+		{
+			raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+			decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+		}
+		else
+		{
+			raStr = StelUtils::radToDmsStr(ra, true);
+			decStr = StelUtils::radToDmsStr(dec, true);
+		}
+	}
+	else
+	{
+		StelUtils::rectToSphe(&ra, &dec, coord);
+		if (decimalDegrees)
+		{
+			raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
+			decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+		}
+		else
+		{
+			raStr = StelUtils::radToHmsStr(ra);
+			decStr = StelUtils::radToDmsStr(dec, true);
+		}
+	}
+
+	QPair<QString, QString> r(raStr, decStr);
+
+	return r;
 }
 
 void AstroCalcDialog::saveCelestialPositions()
