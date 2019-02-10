@@ -15,7 +15,6 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-4.8
-            - ca-certificates
           update:
             - true
         coverity_scan:
@@ -88,7 +87,6 @@ matrix:
           packages:
             - g++-7
             - lcov
-            - ca-certificates
           update:
             - true
       env:
@@ -249,7 +247,6 @@ before_install:
     fi
   # ... + Coverage
   - if [[ "$COVERAGE" == true ]]; then
-      export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt;
       pip install --user cpp-coveralls;
       gem install coveralls-lcov;
     fi
@@ -272,7 +269,7 @@ script:
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
-      export REQUESTS_CA_BUNDLE=/etc/ssl/certs/ca-certificates.crt;
+      pip install --upgrade pip
       pip install virtualenv;
       virtualenv ~/env;
       source ~/env/bin/activate;
