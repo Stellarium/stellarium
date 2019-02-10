@@ -238,7 +238,6 @@ before_install:
       unzip -qq qt5.zip -d qt5;
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
-      # Disable python SSL warnings (only needed for trusty)
       export PYTHONWARNINGS="ignore:A true SSLContext object is not available,ignore:An HTTPS request has been made";
     fi
   # Mac OS X
