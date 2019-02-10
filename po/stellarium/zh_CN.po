@@ -8507,12 +8507,12 @@ msgstr "极限星等："
 #: src/ui_viewDialog.h:2490
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:263
 msgid "Relative scale:"
-msgstr "相对比例（不同星等的星点区分度）:"
+msgstr "星点相对大小:"
 
 #: src/ui_viewDialog.h:2491
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:269
 msgid "Absolute scale:"
-msgstr "绝对比例（等比例缩放所有星点）:"
+msgstr "星点绝对大小:"
 
 #: src/ui_viewDialog.h:2492 src/ui_viewDialog.h:2980
 msgid "Sky"
@@ -11309,7 +11309,7 @@ msgstr "\"/像素"
 #: plugins/Oculars/src/Oculars.cpp:1782
 msgctxt "pixel"
 msgid "px"
-msgstr ""
+msgstr "像素"
 
 #: plugins/Oculars/src/Oculars.cpp:1962
 #: plugins/Oculars/src/gui/OcularsGuiPanel.cpp:488
@@ -11844,15 +11844,15 @@ msgstr "自动切换不同装置类型"
 #: plugins/Oculars/src/ui_ocularDialog.h:1296
 msgid ""
 "Enable a square overlay showing the effective size of a number of pixels."
-msgstr ""
+msgstr "显示所选取的方形传感器像素测试框代表的有效像素。"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1298
 msgid "Show sensor crop overlay"
-msgstr ""
+msgstr "显示传感器像素测试框"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1299
 msgid "Overlay size (px)"
-msgstr ""
+msgstr "测试框大小（像素）"
 
 #: plugins/Oculars/src/ui_ocularDialog.h:1300
 msgid "Telrad view"
