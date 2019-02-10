@@ -1,0 +1,43 @@
+path_classifiers:
+  docs:
+    - README.md
+    - COPYING
+    - CONTRIBUTING.md
+    - CREDITS.md
+extraction:
+  cpp:
+    prepare:
+      packages:
+        - gcc-8
+        - g++-8
+        - build-essential
+        - cmake
+        - zlib1g-dev
+        - libgl1-mesa-dev
+        - libssl-dev
+        - git
+        - qt5-default
+        - qtscript5-dev
+        - libqt5svg5-dev
+        - qttools5-dev-tools
+        - qttools5-dev
+        - libqt5opengl5-dev
+        - libqt5serialport5-dev
+        - qtpositioning5-dev
+        - libgps-dev
+        - qtmultimedia5-dev
+        - libqt5multimedia5-plugins
+    after_prepare:
+      - export CC=gcc-8
+      - export CXX=g++-8
+      - export GIT=true
+    configure:
+      command:
+        - git clone --depth=50 --branch=master https://github.com/Stellarium/stellarium.git stellarium
+        - mkdir -p $LGTM_WORKSPACE/build
+        - cd $LGTM_WORKSPACE/build
+        - cmake -DCMAKE_BUILD_TYPE=Debug ../stellarium
+    index:
+      build_command:
+        - cd $LGTM_WORKSPACE/build
+        - make -j5
