@@ -2,8 +2,10 @@
 // Name: Constellations Tour
 // License: Public Domain
 // Author: Alexander Wolf
-// Version: 1.0
+// Version: 1.1
 // Description: A tour of the constellations of the selected sky culture.
+
+include("i18n.inc");
 
 core.clear("starchart");
 GridLinesMgr.setFlagEquatorGrid(false);
@@ -14,7 +16,7 @@ ConstellationMgr.setFlagBoundaries(false);
 ConstellationMgr.setFlagLines(false);
 ConstellationMgr.setFlagLabels(false);
 core.setGuiVisible(false);
-var id = LabelMgr.labelScreen("Press Ctrl+T to un-hide the toolbar", 100,100, false, 20);
+var id = LabelMgr.labelScreen(tr("Press Ctrl+T to un-hide the toolbar"), 100,100, false, 20);
 LabelMgr.setLabelShow(id, true);
 core.wait(4);
 LabelMgr.setLabelShow(id, false);

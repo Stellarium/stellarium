@@ -238,6 +238,8 @@ before_install:
       unzip -qq qt5.zip -d qt5;
       export PATH=`pwd`/qt5/bin:$PATH;
       export QT_PLUGIN_PATH=`pwd`/qt5/plugins;
+      # Disable python SSL warnings (only needed for trusty)
+      export PYTHONWARNINGS="ignore:A true SSLContext object is not available,ignore:An HTTPS request has been made"
     fi
   # Mac OS X
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
@@ -270,11 +272,7 @@ script:
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
-      sudo pip install --upgrade urllib3;
-      pip install virtualenv;
-      virtualenv ~/env;
-      source ~/env/bin/activate;
-      pip install transifex-client;
+      pip install --user urllib3==1.23 transifex-client;
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
