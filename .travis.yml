@@ -269,7 +269,8 @@ script:
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
-      pip install --upgrade pip urllib3;
+      sudo pip install --upgrade pip;
+      sudo pip install --upgrade urllib3;
       pip install virtualenv;
       virtualenv ~/env;
       source ~/env/bin/activate;
