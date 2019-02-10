@@ -9,7 +9,7 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      python: 3.6
+      python: 3.4
       addons:
         apt:
           sources:
@@ -270,12 +270,12 @@ script:
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
-      pip3 install --user --upgrade pip;
-      pip3 install --user --upgrade urllib3;
-      pip3 install virtualenv;
+      pip install --user --upgrade pip;
+      pip install --user --upgrade urllib3;
+      pip install virtualenv;
       virtualenv ~/env;
       source ~/env/bin/activate;
-      pip3 install transifex-client;
+      pip install transifex-client;
       sudo echo $'[https://www.transifex.com]\nhostname = https://www.transifex.com\nusername = '"$TRANSIFEX_USER"$'\npassword = '"$TRANSIFEX_PASSWORD"$'\ntoken = '"$TRANSIFEX_API_TOKEN"$'\n' > ~/.transifexrc;
       tx push -s;
     fi
