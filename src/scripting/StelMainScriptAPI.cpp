@@ -308,13 +308,17 @@ QStringList StelMainScriptAPI::getAllTimezoneNames() const
 
 
 
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite)
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString format)
 {
 	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
+	QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
 	StelMainView::getInstance().setFlagInvertScreenShotColors(invert);
+	if ((format.length()>0) && (format.length()<=4))
+		StelMainView::getInstance().setScreenshotFormat(format);
 	StelMainView::getInstance().setFlagOverwriteScreenShots(overwrite);
 	StelMainView::getInstance().saveScreenShot(prefix, dir, overwrite);
 	StelMainView::getInstance().setFlagInvertScreenShotColors(oldInvertSetting);
+	StelMainView::getInstance().setScreenshotFormat(oldFormat);
 }
 
 void StelMainScriptAPI::setGuiVisible(bool b)

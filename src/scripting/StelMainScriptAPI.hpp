@@ -341,7 +341,8 @@ public slots:
 	//! none is specified, the default screenshot directory will be used.
 	//! @param invert whether colors have to be inverted in the output image
 	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
-	void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false);
+	//! @param format File format. One of png|bmp|jpg|jpeg|tif|tiff|webm|pbm|pgm|ppm|xbm|xpm|ico. Use current format if left empty or invalid.
+	void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false, const QString format="");
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".
