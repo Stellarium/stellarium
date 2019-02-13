@@ -911,10 +911,17 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec) const
 {
 	double deltaJD = jdFromDateString(dt, spec) - getJDay();
 	double timeRate = getTimeRate();
-	if (timeRate == 0.) { qDebug() << "waitFor() called with no time passing - would be infinite. Not waiting!"; return;}
+	if (timeRate == 0.)
+	{
+		qDebug() << "waitFor() called with no time passing - would be infinite. Not waiting!";
+		return;
+	}
 	int interval=1000*deltaJD*86400/timeRate;
-	if (interval<=0){ qDebug() << "waitFor() called, but negative interval. (time exceeded before starting timer). Not waiting!"; return; }
-	//qDebug() << "timeSpeed is" << timeSpeed << " interval:" << interval;
+	if (interval<=0)
+	{
+		qDebug() << "waitFor() called, but negative interval (time exceeded before starting timer). Not waiting!";
+		return;
+	}
 	QEventLoop loop;
 	QTimer::singleShot(interval, &loop, SLOT(quit()));
 	loop.exec();
