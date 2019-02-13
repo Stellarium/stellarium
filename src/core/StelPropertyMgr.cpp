@@ -225,3 +225,13 @@ void StelPropertyDoubleProxy::onPropertyChanged(const QVariant &value)
 {
 	emit propertyChanged(value.toDouble());
 }
+
+StelPropertyStringProxy::StelPropertyStringProxy(StelProperty *prop, QObject *parent)
+	: StelPropertyProxy(prop,parent)
+{
+}
+
+void StelPropertyStringProxy::onPropertyChanged(const QVariant &value)
+{
+	emit propertyChanged(value.toString());
+}

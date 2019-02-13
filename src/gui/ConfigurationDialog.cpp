@@ -61,6 +61,7 @@
 #include <QComboBox>
 #include <QDir>
 #include <QDesktopWidget>
+#include <QImageWriter>
 
 //! Simple helper extension class which can guarantee int inputs in a useful range.
 class MinMaxIntValidator: public QIntValidator
@@ -360,6 +361,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
 
 	// Screenshots
+	populateScreenshotFileformatsCombo();
+	connectStringProperty(ui->screenshotFileFormatComboBox, "MainView.screenShotFormat");
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
@@ -1732,4 +1735,18 @@ void ConfigurationDialog::handleFontBoxWritingSystem(int index)
 	Q_UNUSED(index)
 	QComboBox *sender=dynamic_cast<QComboBox *>(QObject::sender());
 	ui->fontComboBox->setWritingSystem((QFontDatabase::WritingSystem) sender->currentData().toInt());
+}
+
+void ConfigurationDialog::populateScreenshotFileformatsCombo()
+{
+	QComboBox *combo=ui->screenshotFileFormatComboBox;
+	// To avoid platform differences, just ask what's available.
+	// However, wbmp seems broken, disable it and a few unnecessary formats
+	const QList<QByteArray> formats = QImageWriter::supportedImageFormats();
+	for (const auto& format : formats)
+	{
+		if ((format != "icns") && (format != "cur") && (format != "wbmp"))
+			combo->addItem(QString(format));
+	}
+	combo->setCurrentText(StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue("MainView.screenShotFormat").toString()); // maybe not required.
 }

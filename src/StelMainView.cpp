@@ -50,6 +50,7 @@
 #include <QGraphicsEffect>
 #include <QFileInfo>
 #include <QIcon>
+#include <QImageWriter>
 #include <QMoveEvent>
 #include <QPluginLoader>
 #include <QScreen>
@@ -567,6 +568,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  customScreenshotMagnification(1.0f),
 #endif
 	  screenShotPrefix("stellarium-"),
+	  screenShotFormat("png"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
 	  lastEventTimeSec(0.0),
@@ -859,6 +861,7 @@ void StelMainView::init()
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
+	screenShotFormat = conf->value("main/screenshot_format", "png").toString();
 #ifndef USE_OLD_QGLWIDGET
 	flagUseCustomScreenshotSize=conf->value("main/screenshot_custom_size", false).toBool();
 	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toUInt();
@@ -1405,6 +1408,28 @@ void StelMainView::deinitGL()
 	gui = Q_NULLPTR;
 }
 
+void StelMainView::setScreenshotFormat(const QString filetype)
+{
+	const QString candidate=filetype.toLower();
+	const QByteArray candBA=candidate.toUtf8();
+
+	// Make sure format is supported by Qt, but restrict some useless formats.
+	QList<QByteArray> formats = QImageWriter::supportedImageFormats();
+	formats.removeOne("icns");
+	formats.removeOne("wbmp");
+	formats.removeOne("cur");
+	if (formats.contains(candBA))
+	{
+		screenShotFormat=candidate;
+		// apply setting immediately
+		configuration->setValue("main/screenshot_format", candidate);
+		emit screenshotFormatChanged(candidate);
+	}
+	else
+	{
+		qDebug() << "Invalid filetype for screenshot: " << filetype;
+	}
+}
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
 	screenShotPrefix = filePrefix;
@@ -1589,19 +1614,31 @@ void StelMainView::doScreenshot(void)
 	QFileInfo shotPath;
 	if (flagOverwriteScreenshots)
 	{
-		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + ".png");
+		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + "." + screenShotFormat);
 	}
 	else
 	{
 		for (int j=0; j<100000; ++j)
 		{
-			shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png");
+			shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + "." + screenShotFormat);
 			if (!shotPath.exists())
 				break;
 		}
 	}
 	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
-	if (!im.save(shotPath.filePath())) {
+	QImageWriter imageWriter(shotPath.filePath());
+	if (screenShotFormat=="tif")
+		imageWriter.setCompression(1); // use LZW
+	if (screenShotFormat=="jpg")
+	{
+		imageWriter.setQuality(75); // This is actually default
+	}
+	if (screenShotFormat=="jpeg")
+	{
+		imageWriter.setQuality(100);
+	}
+	if (!imageWriter.write(im))
+	{
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }

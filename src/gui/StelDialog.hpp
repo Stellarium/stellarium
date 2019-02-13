@@ -154,6 +154,14 @@ protected:
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash
 	static void connectDoubleProperty(QSlider* slider, const QString& propName, double minValue, double maxValue);
+
+	//! Helper function to connect a QComboBox to an QString StelProperty.
+	//! The property is mapped to the selected string of the combobox.
+	//! Make sure the string is available in the Combobox, else the first element may be chosen.
+	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
+	//! to the required datatype, the application will crash
+	static void connectStringProperty(QComboBox *comboBox, const QString &propName);
+
 	//! Helper function to connect a checkbox to a bool StelProperty
 	//! @warning If the action with \c propName is invalid/unregistered, or cannot be converted
 	//! to the required datatype, the application will crash

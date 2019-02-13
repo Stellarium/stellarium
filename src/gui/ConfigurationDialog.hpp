@@ -162,6 +162,7 @@ private slots:
 	//! feed the combo with useful values. Call in createDialogContent().
 	void populateFontWritingSystemCombo();
 	void handleFontBoxWritingSystem(int index);
+	void populateScreenshotFileformatsCombo();
 
 
 private:
