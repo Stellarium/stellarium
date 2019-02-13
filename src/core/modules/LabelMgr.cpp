@@ -534,7 +534,7 @@ int LabelMgr::labelScreen(const QString& text,
 
 bool LabelMgr::getLabelShow(int id) const
 {
-	if (allLabels.contains(id)) // avoid possible crash
+	if (allLabels.contains(id)) // mistake-proofing!
 		return allLabels[id]->getFlagShow();
 	else
 		return false;
@@ -542,13 +542,13 @@ bool LabelMgr::getLabelShow(int id) const
 	
 void LabelMgr::setLabelShow(int id, bool show)
 {
-	if (allLabels.contains(id))  // avoid possible crash
+	if (allLabels.contains(id))  // mistake-proofing!
 		allLabels[id]->setFlagShow(show);
 }
 
 void LabelMgr::setLabelText(int id, const QString& newText)
 {
-	if (allLabels.contains(id))  // avoid possible crash
+	if (allLabels.contains(id))  // mistake-proofing!
 		allLabels[id]->setText(newText);
 }
 	

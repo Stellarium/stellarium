@@ -5632,7 +5632,7 @@ void AstroCalcDialog::drawDistanceGraph()
 	minYld = minY1a;
 	maxYld = maxY1a;
 
-	if (!aY2.isEmpty()) // Avoid possible crash!
+	if (!aY2.isEmpty()) // mistake-proofing!
 	{
 		y2 = aY2.toVector();
 
@@ -5653,7 +5653,7 @@ void AstroCalcDialog::drawDistanceGraph()
 
 	ui->pcDistanceGraphPlot->graph(0)->setData(x, y1);
 	ui->pcDistanceGraphPlot->graph(0)->setName("[LD]");
-	if (!aY2.isEmpty()) // Avoid possible crash!
+	if (!aY2.isEmpty()) // mistake-proofing!
 	{
 		ui->pcDistanceGraphPlot->graph(1)->setData(x, y2);
 		ui->pcDistanceGraphPlot->graph(1)->setName("[AD]");

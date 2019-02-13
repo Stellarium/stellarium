@@ -131,8 +131,9 @@ gTimeSpan gTime::getTimeToUTC()
 	//Time to utc calculation.
 	time_t when   = time(nullptr);
 	struct tm utc;
+	struct tm lcl;
 	gmtime_r(&when, &utc);
-	struct tm lcl = *localtime(&when);
+	localtime_r(&when, &lcl);
 	gTimeSpan tUTCDiff;
 
 	int delta_h = lcl.tm_hour - utc.tm_hour;
