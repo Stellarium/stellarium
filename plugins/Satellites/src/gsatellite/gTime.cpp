@@ -67,12 +67,12 @@ void gTime::setTime(int year, double day)
 gTime gTime::getCurrentTime()
 {
 	time_t rawtime;
-	struct tm * timeinfo;
+	struct tm timeinfo;
 
 	time(&rawtime);
-	timeinfo = gmtime(&rawtime);
+	gmtime_r(&rawtime, &timeinfo);
 
-	return gTime(*timeinfo);
+	return gTime(timeinfo);
 }
 
 
@@ -130,10 +130,10 @@ gTimeSpan gTime::getTimeToUTC()
 {
 	//Time to utc calculation.
 	time_t when   = time(nullptr);
-	struct tm utc = *gmtime(&when);
+	struct tm utc;
+	gmtime_r(&when, &utc);
 	struct tm lcl = *localtime(&when);
 	gTimeSpan tUTCDiff;
-
 
 	int delta_h = lcl.tm_hour - utc.tm_hour;
 	tUTCDiff = (time_t) delta_h*3600;
@@ -150,13 +150,13 @@ const gTime& gTime::operator=(const gTime& timeSrc)
 
 const gTime& gTime::operator=(time_t t)
 {
-	struct tm *ptm = gmtime(&t);
-	assert(ptm);
+	struct tm ptm;
+	gmtime_r(&t, &ptm);
 
-	int    year = ptm->tm_year + 1900;
+	int    year = ptm.tm_year + 1900;
 
-	double day  = ptm->tm_yday + 1;
-	day += (ptm->tm_hour + (ptm->tm_min + (ptm->tm_sec / 60.0)) / 60.0) / 24.0;
+	double day  = ptm.tm_yday + 1;
+	day += (ptm.tm_hour + (ptm.tm_min + (ptm.tm_sec / 60.0)) / 60.0) / 24.0;
 
 	setTime(year, day);
 
