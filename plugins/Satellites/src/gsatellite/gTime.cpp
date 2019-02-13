@@ -70,7 +70,11 @@ gTime gTime::getCurrentTime()
 	struct tm timeinfo;
 
 	time(&rawtime);
+	#ifdef _MSC_VER
+	gmtime_s(&timeinfo, &rawtime);
+	#else
 	gmtime_r(&rawtime, &timeinfo);
+	#endif
 
 	return gTime(timeinfo);
 }
@@ -132,8 +136,13 @@ gTimeSpan gTime::getTimeToUTC()
 	time_t when   = time(nullptr);
 	struct tm utc;
 	struct tm lcl;
+	#ifdef _MSC_VER
+	gmtime_s(&utc, &when);
+	localtime_s(&lcl, &when);
+	#else
 	gmtime_r(&when, &utc);
 	localtime_r(&when, &lcl);
+	#endif
 	gTimeSpan tUTCDiff;
 
 	int delta_h = lcl.tm_hour - utc.tm_hour;
@@ -152,7 +161,12 @@ const gTime& gTime::operator=(const gTime& timeSrc)
 const gTime& gTime::operator=(time_t t)
 {
 	struct tm ptm;
+
+	#ifdef _MSC_VER
+	gmtime_s(&ptm, &t);
+	#else
 	gmtime_r(&t, &ptm);
+	#endif
 
 	int    year = ptm.tm_year + 1900;
 
