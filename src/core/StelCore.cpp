@@ -2117,13 +2117,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	= 2000;
 			break;
 		case ReingoldDershowitz:
-			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+			// Reingold & Dershowitz (2002, 2007, 2018) algorithm for DeltaT
 			// FIXME: n.dot
 			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByReingoldDershowitz;
 			// GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
-			deltaTstart	= -400; //1620;
-			deltaTfinish	= 2100; //2019;
+			// AW: limits from 4th edition:
+			deltaTstart	= -500; //1620;
+			deltaTfinish	= 2150; //2019;
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
@@ -2319,7 +2320,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits for the recent past.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case ReingoldDershowitz: //
-			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (4th ed. 2018) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MorrisonStephenson2004: // PRIMARY SOURCE
 			description = q_("This important solution was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));

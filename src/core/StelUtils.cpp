@@ -1845,9 +1845,10 @@ double getDeltaTByMeeusSimons(const double jDay)
 	return deltaT;
 }
 
-// Implementation of algorithm by Reingold & Dershowitz (Cal. Calc. 1997, 2001, 2007, Cal. Tab. 2002) for DeltaT computation.
+// Implementation of algorithm by Reingold & Dershowitz (Cal. Calc. 1997, 2001, 2007, 2018, Cal. Tab. 2002) for DeltaT computation.
 // Created as yet another multi-segment polynomial fit through the table in Meeus: Astronomical Algorithms (1991).
 // Note that only the Third edition (2007) adds the 1700-1799 term.
+// Note that only the ultimate edition (2018) adds the -500..1699 and 2006..2150 terms.
 // More efficient reimplementation with stricter adherence to the source.
 double getDeltaTByReingoldDershowitz(const double jDay)
 {
@@ -1855,44 +1856,75 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	// R&D don't use a float-fraction year, but explicitly only the integer year! And R&D use a proleptic Gregorian year before 1582.
 	// We cannot do that, but the difference is negligible.
-	// FIXME: why are displayed values so far off the computed values? It seems currently broken!
 	double deltaT=0.0; // If it returns 0, there is a bug!
 
-	if ((year >= 2019) || (year < 1620))
+	if ((year>= 2051) && (year <= 2150))
 	{
-		double jdYear_0; getJDFromDate(&jdYear_0, year, 1, 1, 0, 0, 0);
-		double jd1810_0; getJDFromDate(&jd1810_0, 1810, 1, 1, 0, 0, 0);
-		double x = (jdYear_0-jd1810_0+0.5);
-		deltaT = x*x/41048480.0 - 15.0;
+		// [2051..2150]
+		double x = (year-1820)/100.;
+		deltaT = (- 20 + 32*x*x + 0.5628*(2150-year))/86400.0;
 	}
-	else if (year >= 1988)
+	else if ((year >= 1987) && (year <= 2050))
 	{
-		deltaT = year-1933.0;
+		int y2000 = year-2000;
+		if ((year>=2006) && (year<=2050))
+		{
+			// [2006..2050]
+			deltaT = ((0.005589*y2000 + 0.32217)*y2000 + 62.92)/86400.;
+		}
+		else
+		{
+			// [1987..2005]
+			deltaT = (((((0.00002373599*y2000 + 0.000651814)*y2000 + 0.0017275)*y2000 - 0.060374)*y2000 + 0.3345)*y2000 + 63.86)/86400.;
+		}
 	}
-	else if (year >= 1800)
+	else if ((year >= 1800) && (year <= 1986))
 	{
 		double jd1900_0; getJDFromDate(&jd1900_0, 1900, 1, 1, 0, 0, 0);
 		double jdYear_5; getJDFromDate(&jdYear_5, year, 7, 1, 0, 0, 0);
 		double c = (jdYear_5-jd1900_0) * (1/36525.0);
-		if (year >= 1900)
+		if ((year >= 1900) && (year <= 1986))
 		{
-			deltaT = (((((((-0.212591*c +0.677066)*c -0.861938)*c +0.553040)*c -0.181133)*c +0.025184)*c +0.000297)*c -0.00002) * 86400.0;
+			// [1900..1986]
+			deltaT = ((((((-0.212591*c + 0.677066)*c - 0.861938)*c + 0.553040)*c - 0.181133)*c + 0.025184)*c + 0.000297)*c - 0.00002;
 		}
-		else //if (year >= 1800)
+		else
 		{
-			deltaT = ((((((((((2.043794*c +11.636204)*c +28.316289)*c +38.291999)*c +31.332267)*c +15.845535)*c +4.867575)*c +0.865736)*c +0.083563)*c +0.003844)*c -0.000009) * 86400.0;
+			// [1800..1899]
+			deltaT = (((((((((2.043794*c + 11.636204)*c + 28.316289)*c + 38.291999)*c + 31.332267)*c + 15.845535)*c + 4.867575)*c + 0.865736)*c + 0.083563)*c + 0.003844)*c - 0.000009;
 		}
 	}
-	else if (year >= 1700)
-	{ // This term was added in the third edition (2007), its omission was a fault of the authors!
-		double yDiff1700 = year-1700.0;
-		deltaT = ((-0.0000266484*yDiff1700 +0.003336121)*yDiff1700 - 0.005092142)*yDiff1700 + 8.118780842;
-	}
-	else if (year >= 1620)
+	else if ((year>=1700) && (year<=1799))
 	{
-		double yDiff1600 = year-1600.0;
-		deltaT = (0.0219167*yDiff1600 -4.0675)*yDiff1600 +196.58333;
+		// [1700..1799]
+		int y1700 = year-1700;
+		deltaT = (((-0.0000266484*y1700 + 0.003336121)*y1700 - 0.005092142)*y1700 + 8.118780842)/86400.;
 	}
+	else if ((year>=1600) && (year<=1699))
+	{
+		// [1600..1699]
+		int y1600 = year-1600;
+		deltaT = (((0.000140272128*y1600 - 0.01532)*y1600 - 0.9808)*y1600 + 120)/86400.;
+	}
+	else if ((year>=500) && (year<=1599))
+	{
+		// [500..1599]
+		double y1000 = (year-1000)/100.;
+		deltaT = ((((((0.0083572073*y1000 - 0.005050998)*y1000 - 0.8503463)*y1000 + 0.319781)*y1000 + 71.23472)*y1000 - 556.01)*y1000 + 1574.2)/86400.;
+	}
+	else if ((year>-500) && (year<500))
+	{
+		// (-500..500)
+		double y0 = year/100.;
+		deltaT = ((((((0.0090316521*y0 + 0.022174192)*y0 - 0.1798452)*y0 - 5.952053)*y0 + 33.78311)*y0 - 1014.41)*y0 + 10583.6)/86400.;
+	}
+	else
+	{
+		// otherwise
+		double x = (year-1820)/100.;
+		deltaT = (-20 + 32*x*x)/86400.;
+	}
+
 	return deltaT;
 }
 

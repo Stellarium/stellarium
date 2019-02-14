@@ -50,7 +50,7 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
 
 ########### Main global variables ###########
-SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+SET(ENABLE_TESTING 1 CACHE BOOL "Define whether the unit tests should be activated.")
 
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
