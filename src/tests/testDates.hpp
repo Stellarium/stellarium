@@ -33,6 +33,7 @@ private slots:
 	void testJulianDays();
 	void testLeapYears();
 	void testNumberOfDaysInMonthInYear();
+	void testFixedFromGregorian();
 	void benchmarkOldGetDateFromJulianDay();
 	void benchmarkGetDateFromJulianDayFloatingPoint();
 	void benchmarkGetDateFromJulianDay();

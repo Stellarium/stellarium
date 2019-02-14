@@ -721,6 +721,11 @@ namespace StelUtils
 	//! @return decimal year
 	double getDecYear(const int year, const int month, const int day);
 
+	//! Calculate fixed days (R.D.) from Gregorian date
+	//! @param year
+	//! @param month
+	//! @param day
+	//! @return days from Rata Die
 	int getFixedFromGregorian(const int year, const int month, const int day);
 
 	//! Comparison two string versions and return a result in range -1,0,1

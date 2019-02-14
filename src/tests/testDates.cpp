@@ -413,27 +413,27 @@ void TestDates::testNumberOfDaysInMonthInYear()
 {
 	QVariantList data;
 
-	data << 2019 << 1	<< 31;
-	data << 2019 << 2	<< 28;
-	data << 2019 << 3	<< 31;
-	data << 2019 << 4	<< 30;
-	data << 2019 << 5	<< 31;
-	data << 2019 << 6	<< 30;
-	data << 2019 << 7	<< 31;
-	data << 2019 << 8	<< 31;
-	data << 2019 << 9	<< 30;
+	data << 2019 << 1		<< 31;
+	data << 2019 << 2		<< 28;
+	data << 2019 << 3		<< 31;
+	data << 2019 << 4		<< 30;
+	data << 2019 << 5		<< 31;
+	data << 2019 << 6		<< 30;
+	data << 2019 << 7		<< 31;
+	data << 2019 << 8		<< 31;
+	data << 2019 << 9		<< 30;
 	data << 2019 << 10	<< 31;
 	data << 2019 << 11	<< 30;
 	data << 2019 << 12	<< 31;
-	data << 2020 << 1	<< 31;
-	data << 2020 << 2	<< 29;
-	data << 2020 << 3	<< 31;
-	data << 2020 << 4	<< 30;
-	data << 2020 << 5	<< 31;
-	data << 2020 << 6	<< 30;
-	data << 2020 << 7	<< 31;
-	data << 2020 << 8	<< 31;
-	data << 2020 << 9	<< 30;
+	data << 2020 << 1		<< 31;
+	data << 2020 << 2		<< 29;
+	data << 2020 << 3		<< 31;
+	data << 2020 << 4		<< 30;
+	data << 2020 << 5		<< 31;
+	data << 2020 << 6		<< 30;
+	data << 2020 << 7		<< 31;
+	data << 2020 << 8		<< 31;
+	data << 2020 << 9		<< 30;
 	data << 2020 << 10	<< 31;
 	data << 2020 << 11	<< 30;
 	data << 2020 << 12	<< 31;
@@ -448,6 +448,35 @@ void TestDates::testNumberOfDaysInMonthInYear()
 		QVERIFY2(days==expected, qPrintable(QString("Month %1 in year %2 has %3 days (expected %4 days)")
 						    .arg(month)
 						    .arg(year)
+						    .arg(days)
+						    .arg(expected)));
+	}
+}
+
+void TestDates::testFixedFromGregorian()
+{
+	QVariantList data;
+	//            year	  month	day	        days
+	data <<       1 <<   1 <<   1 <<           1;
+	data <<       8 <<   8 << 27 <<     2796;
+	data <<   632 <<   6 << 19 << 230638;
+	data << 1792 <<   9 << 22 << 654415;
+	data << 1858 << 11 << 17 << 678576;
+	data << 1970 <<   1 <<   1 << 719163;
+	data << 1945 << 11 << 12 << 710347;
+
+	while (data.count()>=4)
+	{
+		int year	= data.takeFirst().toInt();
+		int month	= data.takeFirst().toInt();
+		int day	= data.takeFirst().toInt();
+		int expected	= data.takeFirst().toInt();
+		int days	= StelUtils::getFixedFromGregorian(year, month, day);
+
+		QVERIFY2(days==expected, qPrintable(QString("Date %1-%2-%3 has %4 days from R.D. (expected %5 days)")
+						    .arg(year)
+						    .arg(month)
+						    .arg(day)
 						    .arg(days)
 						    .arg(expected)));
 	}

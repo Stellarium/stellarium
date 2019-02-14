@@ -2474,7 +2474,9 @@ int getFixedFromGregorian(const int year, const int month, const int day)
 {
 	int y = year - 1;
 	int r = 365*y + std::floor(y/4.) - std::floor(y/100.) + std::floor(y/400.) + std::floor((367 * month - 362)/12.);
-	if (isLeapYear(year))
+	if (month <= 2)
+		r += 0;
+	else if (isLeapYear(year))
 		r -= 1;
 	else
 		r -= 2;
