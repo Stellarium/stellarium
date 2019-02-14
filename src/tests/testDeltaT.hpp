@@ -42,6 +42,7 @@ private slots:
 	void testDeltaTByMeeusSimons();
 	void testDeltaTByKhalidSultanaZaidiWideDates();
 	void testDeltaTByMontenbruckPfleger();
+	void testDeltaTByReingoldDershowitzWideDates();
 };
 
 #endif // _TESTDELTAT_HPP

@@ -720,3 +720,55 @@ void TestDeltaT::testDeltaTByMontenbruckPfleger()
 			 .toUtf8());
 	}
 }
+
+void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
+{
+	// the test data was calculated for polynome from 4th ed. of Calendrical Calculations
+
+	QVariantList data;
+	//      year   frac. of day
+	data << -600 <<  0.216672;
+	data << -500 <<  0.199117;
+	data << -400 <<  0.179756;
+	data <<    0 <<  0.122495;
+	data <<  400 <<  0.077537;
+	data <<  500 <<  0.066089;
+	data << 1000 <<  0.018220;
+	data << 1500 <<  0.002295;
+	data << 1590 <<  0.001448;
+	data << 1600 <<  0.001389;
+	data << 1690 <<  0.000115;
+	data << 1700 <<  0.000094;
+	data << 1790 <<  0.000177;
+	//data << 1800 << 128.824; // ??? seems equation has wrong signs for terms
+	//data << 1850 <<  1.755490;
+	//data << 1890 <<  0.002340;
+	//data << 1900 <<  0.000591;
+	data << 1987 <<  0.000640;
+	data << 2000 <<  0.000739;
+	data << 2005 <<  0.000749;
+	data << 2006 <<  0.000752;
+	data << 2010 <<  0.000772;
+	data << 2050 <<  0.001076;
+	data << 2060 <<  0.002488;
+	data << 2100 <<  0.002998;
+	data << 2150 <<  0.003802;
+	data << 2200 <<  0.005117;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByReingoldDershowitz(JD)/86400.;
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(qAbs(result-expectedResult)<=1e-5, QString("date=%2 year=%3 result=%4 expected=%5")
+			 .arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+			 .arg(year)
+			 .arg(QString::number(result, 'f', 5))
+			 .arg(QString::number(expectedResult, 'f', 5))
+			 .toUtf8());
+	}
+}
