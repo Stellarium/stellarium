@@ -740,6 +740,7 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 	data << 1690 <<  0.000115;
 	data << 1700 <<  0.000094;
 	data << 1790 <<  0.000177;
+	// TODO: Compute and fill the test data for range [1800..1986]
 	//data << 1800 << 128.824; // ??? seems equation has wrong signs for terms
 	//data << 1850 <<  1.755490;
 	//data << 1890 <<  0.002340;

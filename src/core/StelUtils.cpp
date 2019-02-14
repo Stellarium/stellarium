@@ -1882,9 +1882,8 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	{
 		// FIXME: This part should be check and maybe partially rewrited (gregorian-date-difference?)
 		//        because this part gives the strange values of DeltaT
-		double jd1900_0; getJDFromDate(&jd1900_0, 1900, 1, 1, 0, 0, 0);
-		double jdYear_5; getJDFromDate(&jdYear_5, year, 7, 1, 0, 0, 0);
-		double c = (jd1900_0-jdYear_5)/36525.0;
+		double c = (getFixedFromGregorian(1900, 1, 1)-getFixedFromGregorian(year, 7, 1))/36525.;
+
 		if ((year >= 1900) && (year <= 1986))
 		{
 			// [1900..1986]
@@ -2469,6 +2468,19 @@ float *ComputeCosSinRhoZone(const float dRho, const int segments, const float mi
 double getDecYear(const int year, const int month, const int day)
 {
 	return year+((month-1)*30.5+day/31.*30.5)/366;
+}
+
+int getFixedFromGregorian(const int year, const int month, const int day)
+{
+	int y = year - 1;
+	int r = 365*y + std::floor(y/4.) - std::floor(y/100.) + std::floor(y/400.) + std::floor((367 * month - 362)/12.);
+	if (isLeapYear(year))
+		r -= 1;
+	else
+		r -= 2;
+	r += day;
+
+	return r;
 }
 
 int compareVersions(const QString v1, const QString v2)

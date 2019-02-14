@@ -721,6 +721,8 @@ namespace StelUtils
 	//! @return decimal year
 	double getDecYear(const int year, const int month, const int day);
 
+	int getFixedFromGregorian(const int year, const int month, const int day);
+
 	//! Comparison two string versions and return a result in range -1,0,1
 	//! @param v1 string for version 1
 	//! @param v2 string for version 2
