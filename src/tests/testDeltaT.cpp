@@ -773,3 +773,198 @@ void TestDeltaT::testDeltaTByReingoldDershowitzWideDates()
 			 .toUtf8());
 	}
 }
+
+void TestDeltaT::testDeltaTByJPLHorizons()
+{
+	// NOTE: the test data just an calculated!
+	// http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm with -25.7376 L.A.P. - WTF?!?
+	QVariantList data;
+	data <<   500 << 5401.2;
+	data <<   600 << 4614.0;
+	data <<   700 << 3888.6;
+	data <<   800 << 3225.0;
+	data <<   900 << 2623.8;
+	data << 1000 << 1625.4;
+	data << 1100 << 1265.4;
+	data << 1200 <<   950.4;
+	data << 1300 <<   680.4;
+	data << 1400 <<   455.4;
+	data << 1500 <<   275.4;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByJPLHorizons(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByBorkowski()
+{
+	// NOTE: the test data just an calculated!
+	// http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm with -23.8946 L.A.P. - WTF?!?
+	QVariantList data;
+	data <<   500 << 4469.4;
+	data <<   600 << 3717.0;
+	data <<   700 << 3034.8;
+	data <<   800 << 2422.2;
+	data <<   900 << 1879.8;
+	data << 1000 << 1407.0;
+	data << 1100 << 1004.4;
+	data << 1200 <<   672.0;
+	data << 1300 <<   409.8;
+	data << 1400 <<   217.2;
+	data << 1500 <<     94.8;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByBorkowski(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByAstronomicalEphemeris()
+{
+	// NOTE: the test data just an calculated!
+	// http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm with -22.44 L.A.P. - WTF?!?
+	QVariantList data;
+	data <<   500 <<  4882.2;
+	data <<   600 <<  4145.4;
+	data <<   700 <<  3469.2;
+	data <<   800 <<  2852.4;
+	data <<   900 <<  2296.2;
+	data << 1000 <<  1799.4;
+	data << 1100 <<  1362.6;
+	data << 1200 <<    985.8;
+	data << 1300 <<    668.4;
+	data << 1400 <<    411.6;
+	data << 1500 <<    214.2;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByAstronomicalEphemeris(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByIAU()
+{
+	// NOTE: the test data just an calculated!
+	// http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm with -22.44 L.A.P. - WTF?!?
+	QVariantList data;
+	data <<   500 <<  4882.2;
+	data <<   600 <<  4145.4;
+	data <<   700 <<  3469.2;
+	data <<   800 <<  2852.4;
+	data <<   900 <<  2296.2;
+	data << 1000 <<  1799.4;
+	data << 1100 <<  1362.6;
+	data << 1200 <<    985.8;
+	data << 1300 <<    668.4;
+	data << 1400 <<    411.6;
+	data << 1500 <<    214.2;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByIAU(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTByTuckermanGoldstine()
+{
+	// NOTE: the test data just an calculated!
+	// http://www.staff.science.uu.nl/~gent0113/deltat/deltat.htm with 0 L.A.P.
+	QVariantList data;
+	data <<   500 <<  6724.8;
+	data <<   600 <<  5766.6;
+	data <<   700 <<  4882.2;
+	data <<   800 <<  4071.0;
+	data <<   900 <<  3333.0;
+	data << 1000 <<  2669.4;
+	data << 1100 <<  2079.4;
+	data << 1200 <<  1562.4;
+	data << 1300 <<  1119.0;
+	data << 1400 <<    749.4;
+	data << 1500 <<    453.0;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toDouble();
+		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTByTuckermanGoldstine(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}

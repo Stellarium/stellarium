@@ -43,6 +43,11 @@ private slots:
 	void testDeltaTByKhalidSultanaZaidiWideDates();
 	void testDeltaTByMontenbruckPfleger();
 	void testDeltaTByReingoldDershowitzWideDates();
+	void testDeltaTByJPLHorizons();
+	void testDeltaTByBorkowski();
+	void testDeltaTByIAU();
+	void testDeltaTByAstronomicalEphemeris();
+	void testDeltaTByTuckermanGoldstine();
 };
 
 #endif // _TESTDELTAT_HPP
