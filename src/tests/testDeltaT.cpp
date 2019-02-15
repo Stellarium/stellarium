@@ -65,6 +65,7 @@ void TestDeltaT::testDeltaTByEspenakMeeus()
 	data << 1800  << 14    << 1;
 	data << 1850  << 7     << 1;
 	data << 1900  << -3    << 1;
+	data << 1910  << 10.8  << 1; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot1901/SE1910May09T.GIF
 	data << 1925  << 23.6  << 0.5; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot1901/SE1925Jan24T.GIF
 	data << 1945  << 26.8  << 0.5; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot1901/SE1945Jan14A.GIF
 	data << 1950  << 29    << 0.1;
