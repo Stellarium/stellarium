@@ -1068,7 +1068,7 @@ void StelGui::setFlagShowNightmodeButton(bool b)
 				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btNightView-on.png");
 				QPixmap pxmapOff(":/graphicGui/btNightView-off.png");
-				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Night_Mode");
+				buttonNightmode = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionShow_Night_Mode");
 			}
 			getButtonBar()->addButton(buttonNightmode, "060-othersGroup");
 		} else {
@@ -1093,7 +1093,7 @@ void StelGui::setFlagShowFullscreenButton(bool b)
 				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btFullScreen-on.png");
 				QPixmap pxmapOff(":/graphicGui/btFullScreen-off.png");
-				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
+				buttonFullscreen = new StelButton(Q_NULLPTR, pxmapOn, pxmapOff, pxmapGlow32x32, "actionSet_Full_Screen_Global");
 			}
 			getButtonBar()->addButton(buttonFullscreen, "060-othersGroup");
 		} else {
@@ -1117,7 +1117,7 @@ void StelGui::setFlagShowQuitButton(bool b)
 				// Create the fullscreen button
 				QPixmap pxmapGlow32x32(":/graphicGui/glow32x32.png");
 				QPixmap pxmapOn(":/graphicGui/btQuit.png");
-				btShowHiPS = new StelButton(Q_NULLPTR, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
+				buttonQuit = new StelButton(Q_NULLPTR, pxmapOn, pxmapOn, pxmapGlow32x32, "actionQuit_Global");
 			}
 			getButtonBar()->addButton(buttonQuit, "080-quitGroup");
 		} else {

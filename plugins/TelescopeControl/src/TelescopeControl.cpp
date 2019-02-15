@@ -195,10 +195,10 @@ void TelescopeControl::init()
 		if (gui!=Q_NULLPTR)
 		{
 			toolbarButton =	new StelButton(Q_NULLPTR,
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
-										   QPixmap(":/graphicGui/glow32x32.png"),
-										   "actionShow_Slew_Window");
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Slew_Window");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -347,7 +347,7 @@ StelObjectP TelescopeControl::searchByNameI18n(const QString &nameI18n) const
 		if (telescope->getNameI18n() == nameI18n)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 StelObjectP TelescopeControl::searchByName(const QString &name) const
@@ -357,7 +357,7 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 		if (telescope->getEnglishName() == name)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 QString TelescopeControl::getStelObjectType() const
