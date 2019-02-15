@@ -60,8 +60,8 @@ public:
 	//! @returns the existing or new wrapper for the texture with the given GL name. Returns a null pointer if the texture name is invalid.
 	StelTextureSP wrapperForGLTexture(GLuint texId);
 
-	//! Returns the estimated memory usage of all textures currently loaded through StelTexture
-	int getGLMemoryUsage();
+//	//! Returns the estimated memory usage of all textures currently loaded through StelTexture
+//	int getGLMemoryUsage();
 
 private:
 	friend class StelTexture;

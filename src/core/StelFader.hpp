@@ -40,7 +40,7 @@ public:
 	bool operator==(bool s) const {return state==s;}
 	operator bool() const {return state;}
 	virtual void setDuration(int) {;}
-	virtual float getDuration() = 0;
+	virtual float getDuration() const = 0;
 protected:
 	float getTargetValue() const {return state ? 1.f : 0.f;}
 	float getStartValue() const {return state ? 0.f : 1.f;}
@@ -61,7 +61,7 @@ public:
 	float getInterstate() const {return state ? 1.f : 0.f;}
 	// Switchors can be used just as bools
 	StelFader& operator=(bool s) {state=s; return *this;}
-	virtual float getDuration() {return 0.f;}
+	virtual float getDuration() const {return 0.f;}
 };
 
 //! @class LinearFader
@@ -111,7 +111,6 @@ public:
 			state = s;
 			counter = duration - counter;
 		} else {
-
 			if (state == s) return *this;  // no change
 
 			// set up and begin transit
@@ -127,7 +126,7 @@ public:
 			counter = _duration;
 		duration = _duration;
 	}
-	virtual float getDuration() {return duration;}
+	virtual float getDuration() const {return duration;}
 
 private:
 	bool isTransiting() const { return counter < duration; }

@@ -54,7 +54,6 @@
 class gSatTEME
 {
 public:
-
 	// Operation: gSatTEME(const char *pstrName, char *pstrTleLine1, char *pstrTleLine2)
 	//! @brief Default class gSatTEME constructor
 	//! @param[in] 	pstrName Pointer to a null end string with the Sat. Name

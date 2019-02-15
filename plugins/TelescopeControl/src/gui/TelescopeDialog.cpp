@@ -101,9 +101,13 @@ void TelescopeDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->telescopeTreeView << ui->textBrowserHelp << ui->textBrowserAbout;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->telescopeTreeView << ui->textBrowserHelp << ui->textBrowserAbout;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));

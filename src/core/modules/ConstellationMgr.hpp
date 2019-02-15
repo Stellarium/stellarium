@@ -123,14 +123,14 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching constellation object's pointer if exists or Q_NULLPTR
-	//! @param nameI18n The case in-sensistive constellation name
+	//! @return the matching constellation object's pointer if exists or Q_NULLPTR
+	//! @param nameI18n The case in-sensitive constellation name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching constellation if exists or Q_NULLPTR
+	//! @return the matching constellation if exists or Q_NULLPTR
 	//! @param name The case in-sensitive standard program name (three letter abbreviation)
 	virtual StelObjectP searchByName(const QString& name) const;
 
@@ -275,6 +275,9 @@ public slots:
 	//! Select all constellations
 	void selectAllConstellations(void);
 
+	//! Get the list of English names of all constellations for loaded sky culture
+	QStringList getConstellationsEnglishNames();
+
 signals:
 	void artDisplayedChanged(const bool displayed) const;
 	void artFadeDurationChanged(const float duration) const;
@@ -306,6 +309,8 @@ private slots:
 	//! The translation is done using gettext with translated strings defined
 	//! in translations.h
 	void updateI18n();
+
+	void reloadSkyCulture(void);
 
 private:
 	//! Read constellation names from the given file.
@@ -379,6 +384,8 @@ private:
 	std::vector<std::vector<Vec3d> *> allBoundarySegments;
 
 	QString lastLoadedSkyCulture;	// Store the last loaded sky culture directory name
+
+	QStringList constellationsEnglishNames;
 
 	//! this controls how constellations (and also star names) are printed: Abbreviated/as-given/translated
 	ConstellationDisplayStyle constellationDisplayStyle;

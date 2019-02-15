@@ -33,6 +33,7 @@
 #include "StelActionMgr.hpp"
 #include "StelProgressController.hpp"
 #include "StelObserver.hpp"
+#include "SkyGui.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -51,6 +52,7 @@
 #include <QGraphicsProxyWidget>
 #include <QGraphicsLinearLayout>
 #include <QSettings>
+#include <QGuiApplication>
 
 // Inspired by text-use-opengl-buffer branch: work around font problems in GUI buttons.
 // May be useful in other broken OpenGL font situations. RasPi necessity as of 2016-03-26. Mesa 13 (2016-11) has finally fixed this on RasPi(VC4).
@@ -106,7 +108,9 @@ void StelButton::initCtor(const QPixmap& apixOn,
 	timeLine->setCurveShape(QTimeLine::EaseOutCurve);
 	connect(timeLine, SIGNAL(valueChanged(qreal)),
 	        this, SLOT(animValueChanged(qreal)));
-	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));
+	connect(&StelMainView::getInstance(), SIGNAL(updateIconsRequested()), this, SLOT(updateIcon()));  // Not sure if this is ever called?
+	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	connect(gui, SIGNAL(flagUseButtonsBackgroundChanged(bool)), this, SLOT(updateIcon()));
 
 	if (action!=Q_NULLPTR)
 	{
@@ -223,7 +227,7 @@ void StelButton::updateIcon()
 	pix.fill(QColor(0,0,0,0));
 	QPainter painter(&pix);
 	painter.setOpacity(opacity);
-	if (!pixBackground.isNull() && noBckground==false && StelMainView::getInstance().getFlagUseButtonsBackground())
+	if (!pixBackground.isNull() && noBckground==false && StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue("StelGui.flagUseButtonsBackground").toBool())
 		painter.drawPixmap(0, 0, pixBackground);
 
 	painter.drawPixmap(0, 0,
@@ -397,12 +401,9 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	QColor color = QColor::fromRgbF(1,1,1,1);
 	setColor(color);
 
-	// Font size is 12
-	int baseFontSize = StelApp::getInstance().getBaseFontSize()-1;
-	datetime->font().setPixelSize(baseFontSize);
-	location->font().setPixelSize(baseFontSize);
-	fov->font().setPixelSize(baseFontSize);
-	fps->font().setPixelSize(baseFontSize);
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
+	connect(&StelApp::getInstance(), SIGNAL(fontChanged(QFont)), this, SLOT(setFont(QFont)));
 
 	QSettings* confSettings = StelApp::getInstance().getSettings();
 	setFlagShowTime(confSettings->value("gui/flag_show_datetime", true).toBool());
@@ -412,6 +413,35 @@ BottomStelBar::BottomStelBar(QGraphicsItem* parent,
 	setFlagTimeJd(confSettings->value("gui/flag_time_jd", false).toBool());
 	setFlagFovDms(confSettings->value("gui/flag_fov_dms", false).toBool());
 	setFlagShowTz(confSettings->value("gui/flag_show_tz", true).toBool());
+}
+
+//! connect from StelApp to resize fonts on the fly.
+void BottomStelBar::setFontSizeFromApp(int size)
+{
+	// Font size was developed based on base font size 13, i.e. 12
+	int screenFontSize = size-1;
+	QFont font=QGuiApplication::font();
+	font.setPixelSize(screenFontSize);
+	datetime->setFont(font);
+	location->setFont(font);
+	fov->setFont(font);
+	fps->setFont(font);
+	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
+	if (skyGui)
+		skyGui->updateBarsPos();
+}
+
+//! connect from StelApp to resize fonts on the fly.
+void BottomStelBar::setFont(QFont font)
+{
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize()-1);
+	datetime->setFont(font);
+	location->setFont(font);
+	fov->setFont(font);
+	fps->setFont(font);
+	SkyGui* skyGui=dynamic_cast<StelGui*>(StelApp::getInstance().getGui()) ->getSkyGui();
+	if (skyGui)
+		skyGui->updateBarsPos();
 }
 
 BottomStelBar::~BottomStelBar()
@@ -511,7 +541,6 @@ void BottomStelBar::setGroupBackground(const QString& groupName,
                                        const QPixmap& pixMiddle,
                                        const QPixmap& pixSingle)
 {
-
 	if (!buttonGroups.contains(groupName))
 		return;
 
@@ -685,8 +714,12 @@ void BottomStelBar::updateText(bool updatePos)
 	if (timeRate>60.)
 		timeRateInfo = QString("%1: x%2 (%3 %4)").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0), QString::number(timeSpeed, 'f', 2), timeRateMU);
 
-	updatePos = true;
-	datetime->setText(newDateInfo);
+	if (datetime->text()!=newDateInfo)
+	{
+		updatePos = true;
+		datetime->setText(newDateInfo);
+	}
+
 	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 	{
 		if (sigma>0)
@@ -716,18 +749,19 @@ void BottomStelBar::updateText(bool updatePos)
 
 	// build location tooltip
 	QString newLocation = "";
-	const StelLocation* loc = &core->getCurrentLocation();
-	if (getFlagShowLocation() && !loc->name.isEmpty())
+	if (getFlagShowLocation())
 	{
-		//TRANSLATORS: Unit of measure for distance - meter
-		newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
-	}
-	if (getFlagShowLocation() && loc->name.isEmpty())
-	{
-		newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		const StelLocation* loc = &core->getCurrentLocation();
+		if(loc->name.isEmpty())
+			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		else
+		{
+			//TRANSLATORS: Unit of measure for distance - meter
+			newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+		}
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
-	if (location->text()!=newLocation || updatePos)
+	if (location->text()!=newLocation)
 	{
 		updatePos = true;
 		location->setText(newLocation);
@@ -1020,7 +1054,9 @@ void StelProgressBarMgr::oneBarChanged()
 	pb->setFormat(p->getFormat());
 }
 
-CornerButtons::CornerButtons(QGraphicsItem*) : lastOpacity(10)
+CornerButtons::CornerButtons(QGraphicsItem* parent) :
+	QGraphicsItem(parent),
+	lastOpacity(10)
 {
 }
 

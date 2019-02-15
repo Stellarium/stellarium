@@ -29,15 +29,15 @@
 #include "StelPropertyMgr.hpp"
 
 RemoteSyncDialog::RemoteSyncDialog()
-	: rs(Q_NULLPTR)
+	: StelDialog("RemoteSync")
+	, rs(Q_NULLPTR)
 {
 	ui = new Ui_remoteSyncDialog();
-	dialogName="RemoteSync";
 }
 
 RemoteSyncDialog::~RemoteSyncDialog()
 {
-	delete ui;
+	delete ui; ui=Q_NULLPTR;
 }
 
 void RemoteSyncDialog::retranslate()
@@ -55,9 +55,13 @@ void RemoteSyncDialog::createDialogContent()
 	ui->setupUi(dialog);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->aboutTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->aboutTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	ui->pushButtonSelectProperties->setText(QChar(0x2192));
 	ui->pushButtonDeselectProperties->setText(QChar(0x2190));

@@ -29,6 +29,7 @@
 class TuiNodeFloat : public TuiNodeEditable
 {
 	Q_OBJECT
+
 public:
 	//! Create a TuiNodeFloat node.
 	//! @param text the text to be displayed for this node
@@ -60,7 +61,6 @@ private:
 	float increment;
 	bool typing;
 	bool typedDecimal;
-	
 };
 
 #endif /*TUINODEFLOAT_HPP*/

@@ -411,5 +411,4 @@ void Atmosphere::draw(StelCore* core)
 	//sPainter.setColor(0.7, 0.7, 0.7);
 	//sPainter.drawText(83, 120, QString("Atmosphere::getAverageLuminance(): %1" ).arg(getAverageLuminance()));
 	//qDebug() << atmosphere->getAverageLuminance();
-
 }

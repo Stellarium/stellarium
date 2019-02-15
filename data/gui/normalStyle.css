@@ -2,7 +2,7 @@
 
 QLabel {
         color: rgb(3, 3, 3);
-	font-size: 13px;
+	font-size: 100%;
 	background: none;
 }
 
@@ -12,7 +12,7 @@ QLabel:disabled {
 
 QLabel#stelWindowTitle {
 	margin-left: 24px;
-	font-size: 14px;
+	font-size: 108%;
 	color: rgb(194, 194, 195);
 	font: bold;
 	background: none;
@@ -127,14 +127,14 @@ DialogFrame {
 
 QToolTip {
 	color: rgb(4, 5, 9);
-	font-size: 13px;
+	font-size: 100%;
 	padding: 2px;
         background: rgb(143, 143, 143);
 }
 
 *[nightMode="true"] QToolTip {
 	color: rgb(4, 0, 0);
-	font-size: 13px;
+	font-size: 100%;
 	padding: 2px;
 	background: rgb(101, 0, 0);
 }
@@ -146,7 +146,7 @@ QLineEdit {
 	background: rgb(30, 30, 31);
 	selection-background-color: rgb(253, 216, 134);
 	color: rgb(170, 173, 164);
-	font-size: 12px;
+	font-size: 92%;
 }
 
 QLineEdit:disabled {
@@ -164,7 +164,7 @@ QTextEdit {
 	background: rgb(30, 30, 31);
 	selection-background-color: rgb(253, 216, 134);
 	color: rgb(170, 173, 164);
-	font-size: 12px;
+	font-size: 92%;
 }
 
 QTextBrowser {
@@ -200,19 +200,19 @@ QLineEdit#lineEditSearchSkyObject {
 	padding-bottom: 0px;
 	border: 1px solid rgb(0, 0, 0);
 	border-right: none;
-	font-size: 16px;
+	font-size: 123%;
 	color: rgb(255, 255, 255);
 }
 
 QFrame#completionLabel {
-	font-size: 14px;
+	font-size: 108%;
 	padding-left: 20px;
 	padding-right: 15px;
 	border: none;
 }
 
 QFrame#greekLettersFrame {
-    font-size: 18px;
+    font-size: 139%;
     padding: 10px 20px;
     background: transparent;
 }
@@ -226,7 +226,7 @@ QPushButton {
 	border-radius: 4px;
 	padding: 2px 8px;
         color: rgb(31, 31, 31);
-	font-size: 12px;
+	font-size: 92%;
 	background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1, stop: 0 rgb(183, 184, 185), stop: 1 rgb(111, 113, 114));
 }
 
@@ -460,7 +460,7 @@ QTabBar {
 	font-weight: bold;
 	color: rgb(170, 173, 164);
 	background-color: rgb(31, 31, 31);
-	font-size: 14px;
+	font-size: 108%;
 	/* Don't put font-size in QTabBar::tab, as it causes the tab
 	 labels to be cut by the frame. */
 }
@@ -501,7 +501,7 @@ QTabBar QToolButton {
 }
 
 QListView {
-	font-size: 14px;
+	font-size: 108%;
 	color: rgb(170, 173, 164);
 	background: rgb(31, 31, 31);
 	show-decoration-selected: 1;
@@ -532,7 +532,7 @@ QListView::item:hover {
 }*/
 
 QListView#citiesListView {
-	font-size: 12px;
+	font-size: 92%;
 }
 
 QListView#citiesListView::item {
@@ -746,7 +746,7 @@ QProgressBar {
 	background-color: rgba(38, 41, 48, 20%);
 	text-align: center;
 	color: rgb(111, 111, 127);
-	font-size: 12px;
+	font-size: 92%;
 }
 
 QProgressBar::chunk {
@@ -757,13 +757,13 @@ QProgressBar::chunk {
 
 /**** The following are used for Satellites ****/
 QListWidget#satellitesList, QListWidget#sourceList {
-		font-size: 8pt;
+		font-size: 60%;
 }
 
 QTreeView {
         background-color: rgb(76, 77, 80);
         color: rgb(238, 238, 238);
-        font-size: 12px;
+        font-size: 92%;
 }
 
 QTreeView::item:selected#treeView {
@@ -783,7 +783,7 @@ QHeaderView::section {
         background-color: rgb(31, 31, 31);
         font: bold;
         color: rgb(255, 255, 255);
-        font-size: 12px;
+        font-size: 92%;
         padding-left: 4px;
         border: 1px solid rgb(108, 108, 108);
 }

@@ -348,7 +348,6 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 					Star *s = stars;
 					for (unsigned int z=0;z<nr_of_zones;z++)
 					{
-
 						getZones()[z].stars = s;
 						s += getZones()[z].size;
 					}

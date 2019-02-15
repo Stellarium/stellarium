@@ -47,7 +47,6 @@ protected:
         //! Initialize the dialog widgets and connect the signals/slots.
         virtual void createDialogContent();
 	Ui_GreatRedSpotDialogForm *ui;
-
 };
 
 #endif // GREATREDSPOTDIALOG_HPP

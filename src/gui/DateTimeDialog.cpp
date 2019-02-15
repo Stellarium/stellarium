@@ -184,17 +184,19 @@ void DateTimeDialog::hourChanged(int newhour)
 	int delta = newhour - hour;
 	validJd(jd + delta/24.);
 }
+
 void DateTimeDialog::minuteChanged(int newminute)
 {
 	int delta = newminute - minute;
 	validJd(jd + delta/1440.);
-
 }
+
 void DateTimeDialog::secondChanged(int newsecond)
 {
 	int delta = newsecond - second;
 	validJd(jd + delta/86400.);
 }
+
 void DateTimeDialog::jdChanged(double njd)
 {
 	if ( jd != njd)
@@ -202,12 +204,12 @@ void DateTimeDialog::jdChanged(double njd)
 		validJd(njd);
 	}
 }
+
 void DateTimeDialog::mjdChanged(double nmjd)
 {
 	double delta = nmjd - getMjd();
 	validJd(jd + delta);
 }
-
 
 double DateTimeDialog::newJd()
 {

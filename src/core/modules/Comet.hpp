@@ -116,7 +116,7 @@ public:
 private:
 	//! @returns estimates for (Coma diameter [AU], gas tail length [AU]).
 	//! Using the formula from Guide found by the GSoC2012 initiative at http://www.projectpluto.com/update7b.htm#comet_tail_formula
-	Vec2f getComaDiameterAndTailLengthAU();
+	Vec2f getComaDiameterAndTailLengthAU() const;
 	void drawTail(StelCore* core, StelProjector::ModelViewTranformP transfo, bool gas);
 	void drawComa(StelCore* core, StelProjector::ModelViewTranformP transfo);
 

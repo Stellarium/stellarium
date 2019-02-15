@@ -591,7 +591,6 @@ void Satellites::restoreDefaultCatalog()
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
 		lastUpdate = QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate);
-
 	}
 }
 
@@ -1211,10 +1210,11 @@ void Satellites::setUpdateFrequencyHours(int hours)
 
 void Satellites::checkForUpdate(void)
 {
-	if (updatesEnabled && updateState != Updating
-	    && lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()
-	    && downloadMgr->networkAccessible()==QNetworkAccessManager::Accessible)
+	if (updatesEnabled && (updateState != Updating)
+	    && (lastUpdate.addSecs(updateFrequencyHours * 3600) <= QDateTime::currentDateTime()))
+	{
 		updateFromOnlineSources();
+	}
 }
 
 void Satellites::updateFromOnlineSources()
@@ -1374,7 +1374,7 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	if (progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = 0;
+		progressBar = Q_NULLPTR;
 	}
 	
 	// All files have been downloaded, finish the update
@@ -1514,7 +1514,6 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			}
 			if (qsMagList.contains(id))
 				sat->stdMag = qsMagList[id];
-
 		}
 		else
 		{
@@ -1809,7 +1808,6 @@ bool Satellites::checkJsonFileFormat()
 	}
 
 	return true;
-
 }
 
 bool Satellites::isValidRangeDates(const StelCore *core) const
@@ -1977,7 +1975,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		{
 			if ( i.value().nextJD<=predictionJD)
 			{
-
 				i.key()->update(0);
 
 				double v = i.key()->getVMagnitude(pcore);
@@ -2004,7 +2001,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 						predictions.append(flare);
 						flareFound = true;
 						//qDebug() << "Flare:" << flare.datetime << flare.satellite;
-
 					}
 				}
 
@@ -2018,16 +2014,12 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 						 <<  StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
 							 ;
 */
-
 				Vec3d pos = i.key()->getAltAzPosApparent(pcore);
 
 				i.value().v = flareFound ?  17 : v; // block extra report
 				i.value().altitude = pos.latitude();
 				i.value().azimuth = M_PI - pos.longitude();
 				i.value().angleToSun = i.key()->sunReflAngle;
-
-
-
 
 				double t;
 				if (flareFound)
@@ -2060,7 +2052,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 	return predictions;
 }
 #endif
-
 
 void Satellites::translations()
 {

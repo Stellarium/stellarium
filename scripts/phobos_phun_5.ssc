@@ -22,8 +22,7 @@ alt = MData["altitude"];
 
 if (alt <0)
 {
-
-core.setObserverLocation(7.33, -38.34, 17, 1, "", "Deimos");
+    core.setObserverLocation(7.33, -38.34, 17, 1, "", "Deimos");
 }
 
 

@@ -299,7 +299,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcmin"));
 			if (flagUseArcsecSurfaceBrightness)
 				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
-
 		}
 
 		if (getSurfaceBrightness(core)<99)
@@ -428,7 +427,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		if (!getMorphologicalTypeDescription().isEmpty())
 			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
-
 	}
 
 	postProcessInfoString(str, flags);
@@ -799,7 +797,6 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 		}
 		sPainter.setLineSmooth(false);
 	}
-
 }
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
@@ -822,7 +819,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	if (drawHintProportional)
 	{
 		scaledSize = getAngularSize(Q_NULLPTR) *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-
 	}
 	const float finalSize=qMax(size, scaledSize);
 
@@ -928,7 +924,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	}
 	else	// no galaxy
 		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize);
-
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const

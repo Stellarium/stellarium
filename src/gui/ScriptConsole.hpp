@@ -37,6 +37,7 @@ public:
 
 public slots:
 	void retranslate();
+
 private slots:
 	void runScript();
 	void loadScript();
@@ -58,9 +59,8 @@ protected:
 	virtual void createDialogContent();
 
 private:
-	QString getFileMask();
+	static const QString getFileMask();
 	StelScriptSyntaxHighlighter* highlighter;
-
 };
 
 #endif // _SCRIPTCONSOLE_HPP

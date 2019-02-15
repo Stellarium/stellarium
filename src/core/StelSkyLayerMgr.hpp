@@ -182,8 +182,9 @@ private slots:
 	//! @param percentage the percentage of loaded data
 	void percentLoadedChanged(int percentage);
 
-private:
+	void loadCollection();
 
+private:
 	//! Store the informations needed for a graphical element layer.
 	class SkyLayerElem
 	{

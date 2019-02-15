@@ -167,7 +167,6 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 			infoObj.insert("ambientLum", QJsonValue(lmgr->getAtmosphereAverageLuminance()));
 			infoObj.insert("ambientInt", QJsonValue(lmgr->getCurrentLandscape()->getBrightness()));
 			response.writeJSON(QJsonDocument(infoObj));
-
 		}
 	}
 	else if (operation == "listobjecttypes")

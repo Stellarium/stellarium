@@ -56,7 +56,7 @@ StelPluginInfo SolarSystemEditorStelPluginInterface::getPluginInfo() const
 	info.id = "SolarSystemEditor";
 	info.displayedName = N_("Solar System Editor");
 	info.authors = "Bogdan Marinov";
-	info.contact = "https://stellarium.org";
+	info.contact = STELLARIUM_URL;
 	info.description = N_("An interface for adding asteroids and comets to Stellarium. It can download object lists from the Minor Planet Center's website and perform searches in its online database.");
 	info.version = SOLARSYSTEMEDITOR_PLUGIN_VERSION;
 	info.license = SOLARSYSTEMEDITOR_PLUGIN_LICENSE;
@@ -133,7 +133,6 @@ void SolarSystemEditor::init()
 
 	// key bindings and other actions
 	addAction("actionShow_MPC_Import", N_("Solar System Editor"), N_("Import orbital elements in MPC format..."), mainWindow, "newImportMPC()", "Ctrl+Alt+S");
-
 }
 
 double SolarSystemEditor::getCallOrder(StelModuleActionName) const// actionName
@@ -343,7 +342,6 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	//Process the existing and new files:
 	if (QFile::exists(customSolarSystemFilePath))
 	{
-
 		QSettings minorBodies(customSolarSystemFilePath, StelIniFormat);
 
 		// add and overwrite existing data in the user's ssystem_minor.ini by the data in the new file.

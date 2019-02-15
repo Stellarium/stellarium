@@ -11,6 +11,7 @@ ENDIF()
 
 SET(stellarium_lib_SRCS
      core/Dithering.hpp
+     core/SaturationShader.hpp
      core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
@@ -177,6 +178,8 @@ SET(stellarium_lib_SRCS
      core/modules/CustomObject.hpp
      core/modules/CustomObjectMgr.cpp
      core/modules/CustomObjectMgr.hpp
+     core/modules/HighlightMgr.cpp
+     core/modules/HighlightMgr.hpp
      core/modules/GridLinesMgr.cpp
      core/modules/GridLinesMgr.hpp
      core/modules/HipsMgr.hpp
@@ -448,7 +451,7 @@ IF(ENABLE_SPOUT AND SPOUT_LIBRARY_DLL)
      CONFIGURE_FILE(${SPOUT_LIBRARY_DLL} ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 ENDIF()
 
-SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
+SET(STELMAIN_DEPS ${ZLIB_LIBRARIES} qtcompress_stel glues_stel qcustomplot_stel qxlsx_stel ${STELLARIUM_STATIC_PLUGINS_LIBRARIES} ${STELLARIUM_QT_LIBRARIES} ${SPOUT_LIBRARY})
 IF(ENABLE_LIBGPS)
      SET(STELMAIN_DEPS ${STELMAIN_DEPS} ${GPS_LIBRARY})
 ENDIF()
@@ -604,6 +607,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testConversions testConversions)
     SET_TARGET_PROPERTIES(testConversions PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testComputations_SRCS
+        tests/testComputations.hpp
+        tests/testComputations.cpp
+    )
+    ADD_EXECUTABLE(testComputations ${tests_testComputations_SRCS})
+    TARGET_LINK_LIBRARIES(testComputations ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testComputations)
+    ADD_TEST(testComputations testComputations)
+    SET_TARGET_PROPERTIES(testComputations PROPERTIES FOLDER "src/tests")
+
     SET(tests_testExtinction_SRCS
         tests/testExtinction.hpp
         tests/testExtinction.cpp
@@ -643,5 +656,7 @@ IF(ENABLE_TESTING)
     ADD_DEPENDENCIES(buildTests testEphemeris)
     ADD_TEST(testEphemeris testEphemeris)
     SET_TARGET_PROPERTIES(testEphemeris PROPERTIES FOLDER "src/tests")
+    SET_TESTS_PROPERTIES(testEphemeris PROPERTIES
+        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
 
 ENDIF (ENABLE_TESTING)

@@ -165,6 +165,7 @@ Oculars::Oculars()
 	, actionOcularIncrement(Q_NULLPTR)
 	, actionOcularDecrement(Q_NULLPTR)
 	, guiPanel(Q_NULLPTR)
+	, guiPanelFontSize(12)
 	, actualFOV(0.)
 	, initialFOV(0.)
 	, flagInitFOVUsage(false)
@@ -174,9 +175,12 @@ Oculars::Oculars()
 	, flagShowResolutionCriterions(false)
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
+	, flagShowCcdCropOverlay(false)
+	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 {
-	// Font size is 14
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize()+1);
+	// Design font size is 14, based on default app fontsize 13.
+	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSizeFromApp(int)));
 
 	ccds = QList<CCD *>();
 	oculars = QList<Ocular *>();
@@ -277,6 +281,10 @@ void Oculars::deinit()
 	settings->setValue("telescope_count", telescopes.count());
 	settings->setValue("ccd_count", ccds.count());
 	settings->setValue("lens_count", lenses.count());
+	settings->setValue("ocular_index", selectedOcularIndex);
+	settings->setValue("telescope_index", selectedTelescopeIndex);
+	settings->setValue("ccd_index", selectedCCDIndex);
+	settings->setValue("lens_index", selectedLensIndex);
 
 	StelCore *core = StelApp::getInstance().getCore();
 	StelSkyDrawer *skyDrawer = core->getSkyDrawer();
@@ -403,7 +411,6 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 			event->setAccepted(true);
 			return;
 		}
-
 	}
 
 	// In case we show oculars with black circle, ignore mouse presses outside image circle:
@@ -623,7 +630,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedOcularIndex = 0;
+			selectedOcularIndex = qMin(settings->value("ocular_index", 0).toInt(), actualOcularCount-1);
 		}
 
 		int ccdCount = settings->value("ccd_count", 0).toInt();
@@ -645,6 +652,7 @@ void Oculars::init()
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 			ready = false;
 		}
+		selectedCCDIndex = qMin(settings->value("ccd_index", 0).toInt(), actualCcdCount-1);
 
 		int telescopeCount = settings->value("telescope_count", 0).toInt();
 		int actualTelescopeCount = telescopeCount;
@@ -674,7 +682,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedTelescopeIndex = 0;
+			selectedTelescopeIndex = qMin(settings->value("telescope_index", 0).toInt(), actualTelescopeCount-1);
 		}
 
 		int lensCount = settings->value("lens_count", 0).toInt();
@@ -695,6 +703,7 @@ void Oculars::init()
 		{
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 		}
+		selectedLensIndex=qMin(settings->value("lens_index", -1).toInt(), actualLensCount-1); // Lens is not selected by default!
 
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
@@ -703,8 +712,13 @@ void Oculars::init()
 		ocularDialog = new OcularDialog(this, &ccds, &oculars, &telescopes, &lenses);
 		initializeActivationActions();
 		determineMaxEyepieceAngle();
-		
+
+		guiPanelFontSize=settings->value("gui_panel_fontsize", 12).toInt();
 		enableGuiPanel(settings->value("enable_control_panel", true).toBool());
+
+		// This must come ahead of setFlagAutosetMountForCCD (GH #505)
+		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
+		equatorialMountEnabledMain = propMgr->getStelPropertyValue("StelMovementMgr.equatorialMount").toBool();
 
 		// For historical reasons, name of .ini entry and description of checkbox (and therefore flag name) are reversed.
 		setFlagDMSDegrees( ! settings->value("use_decimal_degrees", false).toBool());
@@ -722,9 +736,8 @@ void Oculars::init()
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
-
-		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-		equatorialMountEnabledMain = propMgr->getStelPropertyValue("actionSwitch_Equatorial_Mount").toBool();
+		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
+		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toDouble());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1445,7 +1458,7 @@ void Oculars::toggleCCD(bool show)
 		if (getFlagAutosetMountForCCD())
 		{
 			StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-			propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabledMain);
+			propMgr->setStelPropertyValue("StelMovementMgr.equatorialMount", equatorialMountEnabledMain);
 		}
 
 		if (guiPanel)
@@ -1565,7 +1578,7 @@ bool Oculars::isBinocularDefined()
 
 void Oculars::paintCCDBounds()
 {
-	int fontSize = StelApp::getInstance().getBaseFontSize();
+	int fontSize = StelApp::getInstance().getScreenFontSize();
 	StelCore *core = StelApp::getInstance().getCore();
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
 	Lens *lens = selectedLensIndex >=0  ? lenses[selectedLensIndex] : Q_NULLPTR;
@@ -1602,6 +1615,10 @@ void Oculars::paintCCDBounds()
 			}
 			float width = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 			float height = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
+
+			// Calculate the size of the CCD crop overlay
+			float overlayWidth = width * ccdCropOverlaySize / ccd->resolutionX();
+			float overlayHeight = height * ccdCropOverlaySize / ccd->resolutionY();
 
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
@@ -1647,6 +1664,26 @@ void Oculars::paintCCDBounds()
 				b = transform.map(QPoint(width/2.0, -height/2.0));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 
+				// Tool for showing a resolution box overlay
+				if (flagShowCcdCropOverlay) {
+					// bottom line
+					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// top line
+					a = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// left line
+					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
+					b = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// right line
+					a = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				}
+
 				if(ccd->hasOAG())
 				{
 					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
@@ -1685,6 +1722,7 @@ void Oculars::paintCCDBounds()
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
 				float ratioLimit = 0.25f;
+				float ratioLimitCrop = 0.75f;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
 					// draw cross at center
@@ -1733,11 +1771,21 @@ void Oculars::paintCCDBounds()
 					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
 					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(angle), height/2.0 + 5.f));
 					painter.drawText(a.x(), a.y(), angle, -(ccd->chipRotAngle() + polarAngle));
+
+					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
+					{
+						// show the CCD crop overlay text
+						QString resolutionOverlayText = QString("%1%2 %3 %1%2")
+								.arg(QString::number(ccdCropOverlaySize, 'd', 0))
+								.arg(qc_("px", "pixel"))
+								.arg(QChar(0x00D7));
+						a = transform.map(QPoint(overlayWidth/2.0 - painter.getFontMetrics().width(resolutionOverlayText), -overlayHeight/2.0 - fontSize*1.2f));
+						painter.drawText(a.x(), a.y(), resolutionOverlayText, -(ccd->chipRotAngle() + polarAngle));
+					}
 				}
 			}
 		}
 	}
-
 }
 
 void Oculars::paintCrosshairs()
@@ -1758,15 +1806,14 @@ void Oculars::paintCrosshairs()
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] + length);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0], centerScreen[1] - length);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] + length, centerScreen[1]);
-	painter.drawLine2d(centerScreen[0], centerScreen[1], centerScreen[0] - length, centerScreen[1]);
+	painter.drawLine2d(centerScreen[0], centerScreen[1] - length, centerScreen[0], centerScreen[1] + length);
+	painter.drawLine2d(centerScreen[0] - length, centerScreen[1], centerScreen[0] + length, centerScreen[1]);
 }
 
 void Oculars::paintTelrad()
 {
-	if (!flagShowOculars) {
+	if (!flagShowOculars)
+	{
 		StelCore *core = StelApp::getInstance().getCore();
 		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 		// StelPainter drawing
@@ -1779,7 +1826,6 @@ void Oculars::paintTelrad()
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
-
 	}
 }
 
@@ -2049,7 +2095,6 @@ void Oculars::paintText(const StelCore* core)
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
-	
 }
 
 void Oculars::validateAndLoadIniFile()
@@ -2247,7 +2292,6 @@ void Oculars::toggleLines(bool visible)
 		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", false);
 		propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", false);
 	}
-
 }
 
 void Oculars::zoomOcular()
@@ -2490,7 +2534,7 @@ void Oculars::setFlagAutosetMountForCCD(const bool b)
 	if (!b)
 	{
 		StelPropertyMgr* propMgr=StelApp::getInstance().getStelPropertyManager();
-		propMgr->setStelPropertyValue("actionSwitch_Equatorial_Mount", equatorialMountEnabledMain);
+		propMgr->setStelPropertyValue("StelMovementMgr.equatorialMount", equatorialMountEnabledMain);
 	}
 	emit flagAutosetMountForCCDChanged(b);
 }
@@ -2537,6 +2581,26 @@ void Oculars::setFlagShowResolutionCriterions(const bool b)
 bool Oculars::getFlagShowResolutionCriterions() const
 {
 	return flagShowResolutionCriterions;
+}
+
+void Oculars::setCcdCropOverlaySize(int size) {
+	ccdCropOverlaySize = size;
+	settings->setValue("ccd_crop_overlay_size", size);
+	settings->sync();
+	emit ccdCropOverlaySizeChanged(size);
+}
+
+void Oculars::setFlagShowCcdCropOverlay(const bool b)
+{
+	flagShowCcdCropOverlay = b;
+	settings->setValue("show_ccd_crop_overlay", b);
+	settings->sync();
+	emit flagShowCcdCropOverlayChanged(b);
+}
+
+bool Oculars::getFlagShowCcdCropOverlay(void) const
+{
+	return flagShowCcdCropOverlay;
 }
 
 void Oculars::setArrowButtonScale(const double val)
@@ -2645,4 +2709,23 @@ void Oculars::setFlagShowOcularsButton(bool b)
 	settings->sync();
 
 	emit flagShowOcularsButtonChanged(b);
+}
+
+
+void Oculars::setGuiPanelFontSize(int size)
+{
+	// This forces a redraw of the panel.
+	if (size!=guiPanelFontSize)
+	{
+		bool guiPanelVisible=guiPanel;
+		if (guiPanelVisible)
+			enableGuiPanel(false);
+		guiPanelFontSize=size;
+		if (guiPanelVisible)
+			enableGuiPanel(true);
+
+		settings->setValue("gui_panel_fontsize", size);
+		settings->sync();
+		emit guiPanelFontSizeChanged(size);
+	}
 }

@@ -117,7 +117,6 @@ void get_planet_helio_coordsv(const double jd, double xyz[3], double xyzdot[3], 
 	}
 	xyz[0]   =xyz6[0]; xyz[1]   =xyz6[1]; xyz[2]   =xyz6[2];
 	xyzdot[0]=xyz6[3]; xyzdot[1]=xyz6[4]; xyzdot[2]=xyz6[5];
-
 }
 
 // Osculating positions for time JDE in elements for JDE0, if possible by the theory used (e.g. VSOP87).
