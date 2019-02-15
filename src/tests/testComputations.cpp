@@ -652,3 +652,78 @@ void TestComputations::testVector3Operators()
 						 .arg(smI.toString())));
 	}
 }
+
+void TestComputations::testIntMod()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 0;
+	data << 1 << 2 << 1;
+	data << 1 << 3 << 1;
+	data << 2 << 4 << 2;
+	data << 2 << 5 << 2;
+
+	while (data.count() >= 3)
+	{
+		int a = data.takeFirst().toInt();
+		int b = data.takeFirst().toInt();
+		int eR = data.takeFirst().toInt();
+		int r = StelUtils::imod(a, b);
+
+		QVERIFY2(r==eR, qPrintable(QString("%1 mod %2 = %3 (expected %4)")
+					   .arg(a)
+					   .arg(b)
+					   .arg(r)
+					   .arg(eR)));
+	}
+}
+
+void TestComputations::testFloatMod()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 0;
+	data << 1 << 2 << 1;
+	data << 1 << 3 << 1;
+	data << 2 << 4 << 2;
+	data << 2 << 5 << 2;
+
+	while (data.count() >= 3)
+	{
+		float a = data.takeFirst().toFloat();
+		float b = data.takeFirst().toFloat();
+		float eR = data.takeFirst().toFloat();
+		float r = StelUtils::fmodpos(a, b);
+
+		QVERIFY2(qAbs(r-eR)<=1e-5, qPrintable(QString("%1 mod %2 = %3 (expected %4)")
+					   .arg(QString::number(a, 'f', 2))
+					   .arg(QString::number(b, 'f', 2))
+					   .arg(QString::number(r, 'f', 2))
+					   .arg(QString::number(eR, 'f', 2))));
+	}
+}
+
+void TestComputations::testDoubleMod()
+{
+	QVariantList data;
+
+	data << 1 << 1 << 0;
+	data << 1 << 2 << 1;
+	data << 1 << 3 << 1;
+	data << 2 << 4 << 2;
+	data << 2 << 5 << 2;
+
+	while (data.count() >= 3)
+	{
+		double a = data.takeFirst().toDouble();
+		double b = data.takeFirst().toDouble();
+		double eR = data.takeFirst().toDouble();
+		double r = StelUtils::fmodpos(a, b);
+
+		QVERIFY2(qAbs(r-eR)<=1e-5, qPrintable(QString("%1 mod %2 = %3 (expected %4)")
+					   .arg(QString::number(a, 'f', 2))
+					   .arg(QString::number(b, 'f', 2))
+					   .arg(QString::number(r, 'f', 2))
+					   .arg(QString::number(eR, 'f', 2))));
+	}
+}

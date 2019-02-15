@@ -386,6 +386,8 @@ void TestDates::testLeapYears()
 {
 	QVariantList data;
 
+	data << 1500 << true;
+	data << 1600 << true;
 	data << 2000 << true;
 	data << 2100 << false;
 	data << 2200 << false;

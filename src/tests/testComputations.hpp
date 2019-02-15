@@ -39,6 +39,9 @@ private slots:
 	void testRectToSpheTransformations();
 	void testVector2Operators();
 	void testVector3Operators();
+	void testIntMod();
+	void testFloatMod();
+	void testDoubleMod();
 };
 
 #endif // _TESTCOMPUTATIONS_HPP
