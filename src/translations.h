@@ -448,6 +448,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
 		// TRANSLATORS: Name of the sky culture
+		N_("Armintxe");
+		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
 		// TRANSLATORS: Name of the sky culture
 		N_("Belarusian");
@@ -517,6 +519,8 @@ class Translations
 		
 		// =====================================================================
 		// Landscape names
+		// TRANSLATORS: Name of landscape
+		N_("Armintxe Cave");
 		// TRANSLATORS: Name of landscape
 		N_("Guereins");
 		// TRANSLATORS: Name of landscape
