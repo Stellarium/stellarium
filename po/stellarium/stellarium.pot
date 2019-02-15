@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-13 23:26+0700\n"
+"POT-Creation-Date: 2019-02-15 23:46+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2337,11 +2337,11 @@ msgstr ""
 msgid "Flip scene vertically"
 msgstr ""
 
-#: src/core/StelCore.cpp:2253
+#: src/core/StelCore.cpp:2254
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:2256
+#: src/core/StelCore.cpp:2257
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G. "
@@ -2349,14 +2349,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2259
+#: src/core/StelCore.cpp:2260
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2262
+#: src/core/StelCore.cpp:2263
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2365,14 +2365,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:2266
+#: src/core/StelCore.cpp:2267
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar "
 "Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2270
+#: src/core/StelCore.cpp:2271
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon "
 "and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The same "
@@ -2380,7 +2380,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2274
+#: src/core/StelCore.cpp:2275
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2388,14 +2388,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2277
+#: src/core/StelCore.cpp:2278
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2280
+#: src/core/StelCore.cpp:2281
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2404,14 +2404,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2283
+#: src/core/StelCore.cpp:2284
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:2286
+#: src/core/StelCore.cpp:2287
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2419,25 +2419,25 @@ msgid ""
 "D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2289
+#: src/core/StelCore.cpp:2290
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:2292
+#: src/core/StelCore.cpp:2293
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2295
+#: src/core/StelCore.cpp:2296
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:2298
+#: src/core/StelCore.cpp:2299
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2446,14 +2446,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2301
+#: src/core/StelCore.cpp:2302
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened "
 "version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2304
+#: src/core/StelCore.cpp:2305
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2461,50 +2461,50 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2307
+#: src/core/StelCore.cpp:2308
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2310
+#: src/core/StelCore.cpp:2311
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:2313
+#: src/core/StelCore.cpp:2314
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:2316
+#: src/core/StelCore.cpp:2317
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2319
+#: src/core/StelCore.cpp:2320
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits "
 "for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:2322
+#: src/core/StelCore.cpp:2323
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
-"<em>Calendrical Calculations</em> (3rd ed. 2007) and in their "
+"<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
 "<em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' "
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2325
+#: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson "
@@ -2512,7 +2512,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2328
+#: src/core/StelCore.cpp:2329
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2521,7 +2521,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:2331 src/core/StelCore.cpp:2334
+#: src/core/StelCore.cpp:2332 src/core/StelCore.cpp:2335
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2531,15 +2531,15 @@ msgid ""
 "solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2331
+#: src/core/StelCore.cpp:2332
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:2334
+#: src/core/StelCore.cpp:2335
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:2337
+#: src/core/StelCore.cpp:2338
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2547,7 +2547,7 @@ msgid ""
 "em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2340
+#: src/core/StelCore.cpp:2341
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2555,7 +2555,7 @@ msgid ""
 "Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:2343
+#: src/core/StelCore.cpp:2344
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2563,7 +2563,7 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2346
+#: src/core/StelCore.cpp:2347
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016) "
@@ -2572,7 +2572,7 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2349
+#: src/core/StelCore.cpp:2350
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2580,48 +2580,48 @@ msgid ""
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2352
+#: src/core/StelCore.cpp:2353
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined "
 "by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:2355 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2356 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr ""
 
-#: src/core/StelCore.cpp:2363
+#: src/core/StelCore.cpp:2364
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2406
+#: src/core/StelCore.cpp:2407
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2409
+#: src/core/StelCore.cpp:2410
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2412
+#: src/core/StelCore.cpp:2413
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2419
+#: src/core/StelCore.cpp:2420
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2429
+#: src/core/StelCore.cpp:2430
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2431
+#: src/core/StelCore.cpp:2432
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -2849,6 +2849,10 @@ msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:86
 msgid "Reload the deep-sky objects background images"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:187
+msgid "No description"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:225
@@ -3205,7 +3209,7 @@ msgid "Montenbruck & Pfleger (2000)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1579
-msgid "Reingold & Dershowitz (2002, 2007)"
+msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1580

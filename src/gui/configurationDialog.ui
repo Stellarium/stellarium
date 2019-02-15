@@ -288,7 +288,7 @@
       <item row="1" column="0">
        <widget class="QStackedWidget" name="configurationStackedWidget">
         <property name="currentIndex">
-         <number>4</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="page_Main">
          <layout class="QVBoxLayout" name="verticalLayout_10">
@@ -2109,7 +2109,14 @@
                 </widget>
                </item>
                <item>
-                <widget class="QComboBox" name="screenshotFileFormatComboBox"/>
+                <widget class="QComboBox" name="screenshotFileFormatComboBox">
+                 <property name="editable">
+                  <bool>true</bool>
+                 </property>
+                 <property name="insertPolicy">
+                  <enum>QComboBox::NoInsert</enum>
+                 </property>
+                </widget>
                </item>
                <item>
                 <widget class="QCheckBox" name="invertScreenShotColorsCheckBox">
