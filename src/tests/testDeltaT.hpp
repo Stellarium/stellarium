@@ -48,6 +48,7 @@ private slots:
 	void testDeltaTByIAU();
 	void testDeltaTByAstronomicalEphemeris();
 	void testDeltaTByTuckermanGoldstine();
+	void testDeltaTStandardError();
 };
 
 #endif // _TESTDELTAT_HPP

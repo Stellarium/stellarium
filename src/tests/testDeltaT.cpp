@@ -65,6 +65,8 @@ void TestDeltaT::testDeltaTByEspenakMeeus()
 	data << 1800  << 14    << 1;
 	data << 1850  << 7     << 1;
 	data << 1900  << -3    << 1;
+	data << 1925  << 23.6  << 0.5; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot1901/SE1925Jan24T.GIF
+	data << 1945  << 26.8  << 0.5; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot1901/SE1945Jan14A.GIF
 	data << 1950  << 29    << 0.1;
 	data << 1955  << 31.1  << 0.1;
 	data << 1960  << 33.2  << 0.1;
@@ -77,6 +79,15 @@ void TestDeltaT::testDeltaTByEspenakMeeus()
 	data << 1995  << 60.8  << 0.1;
 	data << 2000  << 63.8  << 0.1;
 	data << 2005  << 64.7  << 0.1;
+	data << 2010  << 66.6  << 1; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2010Jan15A.GIF
+	data << 2015  << 67.6  << 2; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2015Mar20T.GIF
+	data << 2020  << 77.2  << 7; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2020Jun21A.GIF
+	data << 2030  << 87.9  << 12; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2030Jun01A.GIF
+	data << 2050  << 111.6 << 20; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2001/SE2050May20H.GIF
+	data << 2060  << 124.6 << 15; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2060Apr30T.GIF
+	data << 2070  << 138.5 << 15; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2070Apr11T.GIF
+	data << 2090  << 170.3 << 15; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2090Sep23T.GIF
+	data << 2100  << 187.3 << 20; // https://eclipse.gsfc.nasa.gov/SEplot/SEplot2051/SE2100Sep04T.GIF
 
 	while(data.count() >= 3) 
 	{
@@ -956,6 +967,39 @@ void TestDeltaT::testDeltaTByTuckermanGoldstine()
 		double acceptableError = 1.0; // TODO: Increase accuracy to 0.1 seconds
 		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
 		double result = StelUtils::getDeltaTByTuckermanGoldstine(JD);
+		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
+		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
+		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
+							.arg(QString("%1-%2-%3 00:00:00").arg(yout).arg(mout).arg(dout))
+							.arg(year)
+							.arg(result)
+							.arg(expectedResult)
+							.arg(actualError)
+							.arg(acceptableError)
+							.toUtf8());
+	}
+}
+
+void TestDeltaT::testDeltaTStandardError()
+{
+	// the test data was obtained from https://eclipse.gsfc.nasa.gov/SEhelp/uncertainty2004.html
+	QVariantList data;
+	data << -1000 << 636;
+	data <<  -500 << 431;
+	data <<     0 << 265;
+	data <<   500 << 139;
+	data <<  1000 <<  54;
+	data <<  1200 <<  31;
+
+	while(data.count() >= 2)
+	{
+		int year = data.takeFirst().toInt();
+		int yout, mout, dout;
+		double JD;
+		double expectedResult = data.takeFirst().toInt();
+		double acceptableError = 1.0;
+		StelUtils::getJDFromDate(&JD, year, 1, 1, 0, 0, 0);
+		double result = StelUtils::getDeltaTStandardError(JD);
 		double actualError = qAbs(qAbs(expectedResult) - qAbs(result));
 		StelUtils::getDateFromJulianDay(JD, &yout, &mout, &dout);
 		QVERIFY2(actualError <= acceptableError, QString("date=%2 year=%3 result=%4 expected=%5 error=%6 acceptable=%7")
