@@ -422,7 +422,8 @@
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of M49, NGC147, NGC404, NGC4244 from Ole Nielsen
+	4.36 Images of M49, NGC147, NGC404, NGC4228, NGC4244
+	     from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
 	     License: public domain
@@ -540,7 +541,7 @@
 	     from Sunfishtommy
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.66 Images of IC1848, NGC1055, NGC4228
+	4.66 Images of IC1848, NGC1055
 	     from Jeffjnet
 	     http://www.iceinspace.com.au/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
