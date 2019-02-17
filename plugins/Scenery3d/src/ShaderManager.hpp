@@ -195,12 +195,12 @@ private:
 	typedef QMap<QString,FeatureFlags> t_FeatureFlagStrings;
 	static t_FeatureFlagStrings featureFlagsStrings;
 
-	QString getVShaderName(uint flags);
-	QString getGShaderName(uint flags);
-	QString getFShaderName(uint flags);
+	static QString getVShaderName(uint flags);
+	static QString getGShaderName(uint flags);
+	static QString getFShaderName(uint flags);
 	QOpenGLShaderProgram* findOrLoadShader(uint flags);
 	//! A simple shader preprocessor that can replace #defines
-	bool preprocessShader(const QString& fileName, const uint flags, QByteArray& processedSource);
+	static bool preprocessShader(const QString& fileName, const uint flags, QByteArray& processedSource);
 	//compiles and links the shader with this specified source code
 	bool loadShader(QOpenGLShaderProgram& program, const QByteArray& vShader, const QByteArray& gShader, const QByteArray& fShader);
 	void buildUniformCache(QOpenGLShaderProgram& program);

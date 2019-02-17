@@ -74,7 +74,6 @@ void CustomDeltaTEquationDialog::createDialogContent()
 	connect(ui->lineEditCoefficientA, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffA(const QString&)));
 	connect(ui->lineEditCoefficientB, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffB(const QString&)));
 	connect(ui->lineEditCoefficientC, SIGNAL(textEdited(const QString&)), this, SLOT(setCoeffC(const QString&)));
-
 }
 
 void CustomDeltaTEquationDialog::setVisible(bool v)

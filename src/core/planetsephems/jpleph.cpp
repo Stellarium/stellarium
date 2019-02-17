@@ -423,7 +423,6 @@ static void interp(struct interpolation_info *iinfo,
             /* polynomials) are not stored for repeated use,  for example. */
     if(velocity_flag == 3)
     {
-
       double accel_coeffs[MAX_CHEBY];
 
       accel_coeffs[0] = accel_coeffs[1] = 0.;

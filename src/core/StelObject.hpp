@@ -71,8 +71,6 @@ public:
 // TODO GZ
 //		RaDecJ2000Planetocentric  = 0x00020000, //!< The planetocentric equatorial position (J2000 ref) [Mostly to compare with almanacs]
 //		RaDecOfDatePlanetocentric = 0x00040000  //!< The planetocentric equatorial position (of date)
-
-
 	};
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
@@ -247,7 +245,6 @@ public:
 	virtual double getAngularSize(const StelCore* core) const = 0;
 
 protected:
-
 	//! Format the positional info string containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
 	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
 

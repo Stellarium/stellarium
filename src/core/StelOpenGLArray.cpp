@@ -93,7 +93,6 @@ StelOpenGLArray::StelOpenGLArray()
 	  m_types(),
 	  m_strides()
 {
-
 }
 
 StelOpenGLArray::~StelOpenGLArray()

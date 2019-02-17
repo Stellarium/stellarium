@@ -44,9 +44,7 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	parentWidget(parent),
 	borderPath(Q_NULLPTR)
 {
-	setMaximumSize(300, 450);
 	setContentsMargins(0, 0, 0, 0);
-	//TODO: set font?
 
 	//First create the layout and populate it, then set it?
 	mainLayout = new QGraphicsLinearLayout(Qt::Vertical);
@@ -64,7 +62,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 				      ocularsPlugin->actionShowOcular,
 				      true); //No background
 	buttonOcular->setToolTip(ocularsPlugin->actionShowOcular->getText());
-	buttonOcular->setParentItem(buttonBar);
 
 	Q_ASSERT(ocularsPlugin->actionShowCrosshairs);
 	buttonCrosshairs = new StelButton(buttonBar,
@@ -111,16 +108,12 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 
 	//Widgets with control and information fields
 	ocularControls = new QGraphicsWidget(this);
-	ocularControls->setParentItem(this);
 	ocularControls->setVisible(false);
 	lensControls = new QGraphicsWidget(this);
-	lensControls->setParentItem(this);
 	lensControls->setVisible(false);
 	ccdControls = new QGraphicsWidget(this);
-	ccdControls->setParentItem(this);
 	ccdControls->setVisible(false);
 	telescopeControls = new QGraphicsWidget(this);
-	telescopeControls->setParentItem(this);
 	telescopeControls->setVisible(false);
 
 	fieldOcularName = new QGraphicsTextItem(ocularControls);
@@ -145,10 +138,8 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	fieldLensMultipler = new QGraphicsTextItem(lensControls);
 
 	QFont newFont = font();
-	// Font size is 12
-	newFont.setPixelSize(StelApp::getInstance().getBaseFontSize()-1);
+	newFont.setPixelSize(plugin->getGuiPanelFontSize());
 	setControlsFont(newFont);
-	//setControlsColor(QColor::fromRgbF(0.9, 0.91, 0.95, 0.9));
 
 	//Traditional field width from Ocular ;)
 	QFontMetrics fm(fieldOcularName->font());
@@ -382,7 +373,6 @@ OcularsGuiPanel::OcularsGuiPanel(Oculars* plugin,
 	connect(rotateCcdPlus15Button,  SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 	connect(resetCcdRotationButton, SIGNAL(triggered()), this, SLOT(updateCcdControls()));
 
-
 	//Set the layout and update the size
 	qreal width = 2*prevOcularButton->boundingRect().width() + maxWidth;
 	qreal left, right, top, bottom;
@@ -424,6 +414,116 @@ OcularsGuiPanel::~OcularsGuiPanel()
 {
 	if (borderPath)
 		delete borderPath;
+	if (buttonCrosshairs)
+	{
+		delete buttonCrosshairs;
+		buttonCrosshairs = Q_NULLPTR;
+	}
+	if (buttonCcd)
+	{
+		delete buttonCcd;
+		buttonCcd = Q_NULLPTR;
+	}
+	if (buttonTelrad)
+	{
+		delete buttonTelrad;
+		buttonTelrad = Q_NULLPTR;
+	}
+	if (buttonConfiguration)
+	{
+		delete buttonConfiguration;
+		buttonConfiguration = Q_NULLPTR;
+	}
+	if (fieldOcularFl)
+	{
+		delete fieldOcularFl;
+		fieldOcularFl = Q_NULLPTR;
+	}
+	if (fieldOcularAfov)
+	{
+		delete fieldOcularAfov;
+		fieldOcularAfov = Q_NULLPTR;
+	}
+	if (fieldCcdName)
+	{
+		delete fieldCcdName;
+		fieldCcdName = Q_NULLPTR;
+	}
+	if (fieldCcdDimensions)
+	{
+		delete fieldCcdDimensions;
+		fieldCcdDimensions = Q_NULLPTR;
+	}
+	if (fieldCcdHScale)
+	{
+		delete fieldCcdHScale;
+		fieldCcdHScale = Q_NULLPTR;
+	}
+	if (fieldCcdVScale)
+	{
+		delete fieldCcdVScale;
+		fieldCcdVScale = Q_NULLPTR;
+	}
+	if (fieldCcdRotation)
+	{
+		delete fieldCcdRotation;
+		fieldCcdRotation = Q_NULLPTR;
+	}
+	if (fieldTelescopeName)
+	{
+		delete fieldTelescopeName;
+		fieldTelescopeName = Q_NULLPTR;
+	}
+	if (fieldMagnification)
+	{
+		delete fieldMagnification;
+		fieldMagnification = Q_NULLPTR;
+	}
+	if (fieldExitPupil)
+	{
+		delete fieldExitPupil;
+		fieldExitPupil = Q_NULLPTR;
+	}
+	if (fieldFov)
+	{
+		delete fieldFov;
+		fieldFov = Q_NULLPTR;
+	}
+	if (fieldRayleighCriterion)
+	{
+		delete fieldRayleighCriterion;
+		fieldRayleighCriterion = Q_NULLPTR;
+	}
+	if (fieldDawesCriterion)
+	{
+		delete fieldDawesCriterion;
+		fieldDawesCriterion = Q_NULLPTR;
+	}
+	if (fieldAbbeyCriterion)
+	{
+		delete fieldAbbeyCriterion;
+		fieldAbbeyCriterion = Q_NULLPTR;
+	}
+	if (fieldSparrowCriterion)
+	{
+		delete fieldSparrowCriterion;
+		fieldSparrowCriterion = Q_NULLPTR;
+	}
+	if (fieldVisualResolution)
+	{
+		delete fieldVisualResolution;
+		fieldVisualResolution = Q_NULLPTR;
+	}
+	if (fieldLensName)
+	{
+		delete fieldLensName;
+		fieldLensName = Q_NULLPTR;
+	}
+	if (fieldLensMultipler)
+	{
+		delete fieldLensMultipler;
+		fieldLensMultipler = Q_NULLPTR;
+	}
 }
 
 void OcularsGuiPanel::showOcularGui()
@@ -596,7 +696,7 @@ void OcularsGuiPanel::updateLensControls()
 	fieldLensName->setPlainText(fullName);
 	fieldLensMultipler->setPlainText(multiplerString);
 	fieldOcularFl->setToolTip(q_("Focal length of eyepiece"));
-	
+
 	qreal posX = 0.;
 	qreal posY = 0.;
 	qreal widgetWidth = 0.;
@@ -628,7 +728,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	int oindex = ocularsPlugin->selectedOcularIndex;
 	Ocular* ocular = ocularsPlugin->oculars[oindex];
-	if (ocular->isBinoculars())
+	if (ocular->isBinoculars() && ocularsPlugin->flagShowOculars) // Hide the lens info for binoculars in eyepiece mode only
 		setLensControlsVisible(false);
 	else
 		setLensControlsVisible(true);
@@ -850,7 +950,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		magnificationString.append(QString(" (%1D)").arg(QString::number(mag/telescope->diameter(), 'f', 2)));
 		QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
 		fieldMagnification->setPlainText(magnificationLabel);
-		fieldMagnification->setPos(posX, posY);		
+		fieldMagnification->setPos(posX, posY);
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 
@@ -1071,9 +1171,9 @@ void OcularsGuiPanel::updateMainButtonsPositions()
 		width += 2 * prevTelescopeButton->getButtonPixmapWidth();
 		posX = prevTelescopeButton->getButtonPixmapWidth();
 	}
-	if (buttonOcular->parentItem())
+	if ( (buttonOcular->parentItem()) && (buttonOcular->parentItem()->parentItem()) )
 	{
-		qreal parentWidth = buttonOcular->parentItem()->boundingRect().width();
+		qreal parentWidth = buttonOcular->parentItem()->parentItem()->boundingRect().width();
 		int nGaps = n - 1;//n buttons have n-1 gaps
 		spacing = qRound((parentWidth-width)/nGaps);
 	}
@@ -1111,7 +1211,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldSparrowCriterion);
 	Q_ASSERT(fieldVisualResolution);
 	Q_ASSERT(fieldLensName);
-	Q_ASSERT(fieldLensMultipler);	
+	Q_ASSERT(fieldLensMultipler);
 
 	fieldOcularName->setDefaultTextColor(color);
 	fieldOcularFl->setDefaultTextColor(color);

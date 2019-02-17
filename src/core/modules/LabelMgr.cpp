@@ -57,7 +57,7 @@ public:
 	//! Show or hide the label.  It will fade in/out.
 	void setFlagShow(bool b);
 	//! Get value of flag used to turn on and off the label
-	bool getFlagShow(void);
+	bool getFlagShow(void) const;
 	//! Get value of flag used to turn on and off the label
 	void setText(const QString& newText);
 
@@ -195,7 +195,7 @@ void StelLabel::setFlagShow(bool b)
 	labelFader = b;
 }
 
-bool StelLabel::getFlagShow(void)
+bool StelLabel::getFlagShow(void) const
 {
 	return labelFader;
 }
@@ -532,19 +532,24 @@ int LabelMgr::labelScreen(const QString& text,
 	return appendLabel(l, autoDeleteTimeoutMs);
 }
 
-bool LabelMgr::getLabelShow(int id)
+bool LabelMgr::getLabelShow(int id) const
 {
-	return allLabels[id]->getFlagShow();
+	if (allLabels.contains(id)) // mistake-proofing!
+		return allLabels[id]->getFlagShow();
+	else
+		return false;
 }
 	
 void LabelMgr::setLabelShow(int id, bool show)
 {
-	allLabels[id]->setFlagShow(show);
+	if (allLabels.contains(id))  // mistake-proofing!
+		allLabels[id]->setFlagShow(show);
 }
 
 void LabelMgr::setLabelText(int id, const QString& newText)
 {
-	allLabels[id]->setText(newText);
+	if (allLabels.contains(id))  // mistake-proofing!
+		allLabels[id]->setText(newText);
 }
 	
 void LabelMgr::deleteLabel(int id)
@@ -552,7 +557,7 @@ void LabelMgr::deleteLabel(int id)
 	if (id<0 || !allLabels.contains(id))
 		return;
 
-	if (allLabels[id]->timer != NULL)
+	if (allLabels[id]->timer != Q_NULLPTR)
 		allLabels[id]->timer->deleteLater();
 
 	delete allLabels[id];

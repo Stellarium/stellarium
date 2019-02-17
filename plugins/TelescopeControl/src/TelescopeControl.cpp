@@ -79,7 +79,7 @@ StelPluginInfo TelescopeControlStelPluginInterface::getPluginInfo() const
 	info.id = "TelescopeControl";
 	info.displayedName = N_("Telescope Control");
 	info.authors = "Bogdan Marinov, Johannes Gajdosik, Alessandro Siniscalchi";
-	info.contact = "https://stellarium.org";
+	info.contact = STELLARIUM_URL;
 	info.description = N_("This plug-in allows Stellarium to send \"slew\" commands to a telescope on a computerized mount (a \"GoTo telescope\").");
 	info.version = TELESCOPE_CONTROL_PLUGIN_VERSION;
 	info.license = TELESCOPE_CONTROL_PLUGIN_LICENSE;
@@ -110,6 +110,8 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
+	delete slewDialog; slewDialog = Q_NULLPTR;
+	delete telescopeDialog; telescopeDialog = Q_NULLPTR;
 }
 
 
@@ -195,10 +197,10 @@ void TelescopeControl::init()
 		if (gui!=Q_NULLPTR)
 		{
 			toolbarButton =	new StelButton(Q_NULLPTR,
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
-										   QPixmap(":/graphicGui/glow32x32.png"),
-										   "actionShow_Slew_Window");
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Slew_Window");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -347,7 +349,7 @@ StelObjectP TelescopeControl::searchByNameI18n(const QString &nameI18n) const
 		if (telescope->getNameI18n() == nameI18n)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 StelObjectP TelescopeControl::searchByName(const QString &name) const
@@ -357,7 +359,7 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 		if (telescope->getEnglishName() == name)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 QString TelescopeControl::getStelObjectType() const
@@ -892,7 +894,6 @@ void TelescopeControl::loadTelescopes()
 				{
 					if(startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))
 					{
-
 						if(!startServerAtSlot(slot, deviceModelName, portTCP, portSerial))
 						{
 							stopClientAtSlot(slot);

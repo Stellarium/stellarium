@@ -51,7 +51,6 @@ static inline float IndexToBV(unsigned char bV)
 
 
 struct Star1 { // 28 byte
-
 	/*
 	          _______________
 	0    hip |               |
@@ -144,7 +143,6 @@ public:
 static_assert(sizeof(Star1) == 28, "Size of Star1 must be 28 bytes");
 
 struct Star2 {  // 10 byte
-
 	/*
 	          _______________
 	0     x0 |               |
@@ -222,7 +220,6 @@ public:
 static_assert(sizeof(Star2) == 10, "Size of Star2 must be 10 bytes");
 
 struct Star3 {  // 6 byte
-
 	/*
 	          _______________
 	0     x0 |               |

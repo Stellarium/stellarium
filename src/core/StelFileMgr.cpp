@@ -26,6 +26,7 @@
 #include <QString>
 #include <QDebug>
 #include <QStandardPaths>
+#include <QProcessEnvironment>
 
 #include <stdio.h>
 
@@ -75,15 +76,15 @@ void StelFileMgr::init()
 
 	// OK, now we have the userDir set, add it to the search path
 	fileLocations.append(userDir);
-
 	
 	// Determine install data directory location
+	QProcessEnvironment env = QProcessEnvironment::systemEnvironment();
+	QString envRoot = env.value("STELLARIUM_DATA_ROOT", ".");
 
-	// If we are running from the build tree, we use the files from the current directory
-	if (QFileInfo(CHECK_FILE).exists())
+	if (QFileInfo(envRoot + QDir::separator() + QString(CHECK_FILE)).exists())
 	{
-		installDir = ".";
-	}
+		installDir = envRoot;
+	}	
 	else
 	{
 	#if defined(Q_OS_MAC)
@@ -102,7 +103,7 @@ void StelFileMgr::init()
 			ResourcesDir.cd(QString("Resources"));
 		}
 		QFileInfo installLocation(ResourcesDir.absolutePath());
-		QFileInfo checkFile(installLocation.filePath() + QString("/") + QString(CHECK_FILE));
+		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
 	#elif defined(Q_OS_WIN)		
 		QFileInfo installLocation(QCoreApplication::applicationDirPath());
 		QFileInfo checkFile(installLocation.filePath() + QDir::separator() + QString(CHECK_FILE));
@@ -113,7 +114,7 @@ void StelFileMgr::init()
 		QFileInfo checkFile(QFile::decodeName(INSTALL_DATADIR "/" CHECK_FILE));
 	#endif
 
-	#ifndef NDEBUG
+	#ifdef DEBUG
 		if (!checkFile.exists())
 		{	// for DEBUG use sources location 
 			QString debugDataPath = INSTALL_DATADIR_FOR_DEBUG;
@@ -147,10 +148,27 @@ void StelFileMgr::init()
 						 << QDir::toNativeSeparators(relativePath)
 						 << " (we checked for "
 						 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
-				#ifndef UNIT_TEST
-				// NOTE: Hook for buildbots (using within testEphemeris)
-				qFatal("Couldn't find install directory location.");
-				#endif
+
+				qWarning() << "Maybe this is development environment? Let's check source directory path...";
+
+				QString sourceDirPath = STELLARIUM_SOURCE_DIR; // The variable is defined in CMakeLists.txt file
+				checkFile = QFileInfo(sourceDirPath + QDir::separator() + CHECK_FILE);
+				if (checkFile.exists())
+				{
+					installDir = sourceDirPath;
+				}
+				else
+				{
+					qWarning() << "WARNING StelFileMgr::StelFileMgr: could not find install location:"
+							 << QDir::toNativeSeparators(sourceDirPath)
+							 << " (we checked for "
+							 << QDir::toNativeSeparators(checkFile.filePath()) << ").";
+
+					#ifndef UNIT_TEST
+					// NOTE: Hook for buildbots (using within testEphemeris)
+					qFatal("Couldn't find install directory location.");
+					#endif
+				}
 			}
 		}
 	}
@@ -386,7 +404,6 @@ bool StelFileMgr::fileFlagsCheck(const QFileInfo& thePath, const Flags& flags)
 
 QString StelFileMgr::getDesktopDir()
 {
-
 	if (QStandardPaths::standardLocations(QStandardPaths::DesktopLocation).isEmpty())
 		return "";
 

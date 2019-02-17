@@ -107,7 +107,6 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 
 HipsSurvey::~HipsSurvey()
 {
-
 }
 
 bool HipsSurvey::isVisible() const
@@ -132,7 +131,7 @@ void HipsSurvey::setVisible(bool value)
 	if (!value && progressBar)
 	{
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 	emit visibleChanged(value);
 }
@@ -165,7 +164,6 @@ bool HipsSurvey::getAllsky()
 		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
 			updateProgressBar(received, total);
 		});
-
 	}
 	if (networkReply->isFinished())
 	{
@@ -186,7 +184,6 @@ bool HipsSurvey::isLoading(void) const
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
 {
-
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
 	bool outside = (angle == 2.0 * M_PI);
@@ -228,14 +225,13 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	}
 
 	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
-
 }
 
 void HipsSurvey::updateProgressBar(int nb, int total)
 {
 	if (nb == total && progressBar) {
 		StelApp::getInstance().removeProgressBar(progressBar);
-		progressBar = NULL;
+		progressBar = Q_NULLPTR;
 	}
 	if (nb == total) return;
 
@@ -268,7 +264,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		// Use the allsky image until we load the full texture.
 		if (order == orderMin && !allsky.isNull())
 		{
-			int nbw = sqrt(12 * 1 << (2 * order));
+			int nbw = (int)sqrt(12 * (1 << (2 * order)));
 			int x = (pix % nbw) * allsky.width() / nbw;
 			int y = (pix / nbw) * allsky.width() / nbw;
 			int s = allsky.width() / nbw;
@@ -377,8 +373,14 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 
 	if (order < drawOrder)
 	{
-		// XXX: Here we should check that all the childern tiles are loaded, in
-		// that case there is no need to render the parent.
+		// If all the children tiles are loaded, we can skip the parent.
+		int i;
+		for (i = 0; i < 4; i++)
+		{
+			HipsTile* child = getTile(order + 1, pix * 4 + i);
+			if (!child || child->texFader.currentValue() < 1.0) break;
+		}
+		if (i == 4) goto skip_render;
 	}
 
 	// Actually draw the tile, as a single quad.

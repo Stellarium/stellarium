@@ -48,7 +48,6 @@ struct EmptyVisitor
 			       const Vec3f* , const Vec3f* , const Vec3f* ,
 			       unsigned int, unsigned int , unsigned int )
 	{
-
 	}
 };
 

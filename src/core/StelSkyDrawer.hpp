@@ -72,7 +72,6 @@ class StelSkyDrawer : public QObject, protected QOpenGLFunctions
 	Q_PROPERTY(double atmospherePressure READ getAtmospherePressure WRITE setAtmospherePressure NOTIFY atmospherePressureChanged)
 
 public:
-
 	//! Constructor
 	StelSkyDrawer(StelCore* core);
 	//! Destructor

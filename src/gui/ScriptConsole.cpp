@@ -48,6 +48,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 ScriptConsole::~ScriptConsole()
 {
 	delete ui;
+	delete highlighter; highlighter = Q_NULLPTR;
 }
 
 void ScriptConsole::retranslate()
@@ -267,7 +268,7 @@ void ScriptConsole::rowColumnChanged()
 	                                                .arg(ui->scriptEdit->textCursor().columnNumber()));
 }
 
-QString ScriptConsole::getFileMask()
+const QString ScriptConsole::getFileMask()
 {
 	return "(*.ssc *.inc)";
 }

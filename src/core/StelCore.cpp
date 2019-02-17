@@ -611,7 +611,7 @@ void StelCore::setFlagGravityLabels(bool gravity)
 	emit flagGravityLabelsChanged(gravity);
 }
 
-bool StelCore::getFlagGravityLabels()
+bool StelCore::getFlagGravityLabels() const
 {
 	return currentProjectorParams.gravityLabels;
 }
@@ -1011,8 +1011,6 @@ void StelCore::updateTransformMatrices()
 
 //		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 //				Mat4d::translation(-position->getCenterVsop87Pos());
-
-
 	}
 	else
 	{
@@ -1303,7 +1301,6 @@ float StelCore::getUTCOffset(const double JD) const
 
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
-
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;
@@ -1317,7 +1314,15 @@ QString StelCore::getCurrentTimeZone() const
 
 void StelCore::setCurrentTimeZone(const QString& tz)
 {
-	currentTimeZone = tz;
+	if (StelApp::getInstance().getLocationMgr().getAllTimezoneNames().contains(tz))
+	{
+		currentTimeZone = tz;
+		emit(currentTimeZoneChanged(tz));
+	}
+	else
+	{
+		qWarning() << "StelCore: Invalid timezone name:" << tz << " -- not setting timezone.";
+	}
 }
 
 bool StelCore::getUseDST() const
@@ -1416,7 +1421,7 @@ bool StelCore::getIsTimeNow(void) const
 	return previousResult;
 }
 
-QTime StelCore::getInitTodayTime(void)
+QTime StelCore::getInitTodayTime(void) const
 {
 	return initTodayTime;
 }
@@ -1749,7 +1754,7 @@ double StelCore::getLocalSiderealYearLength() const
 	return position->getHomePlanet()->getSiderealPeriod();
 }
 
-QString StelCore::getStartupTimeMode()
+QString StelCore::getStartupTimeMode() const
 {
 	return startupTimeMode;
 }
@@ -2112,13 +2117,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	= 2000;
 			break;
 		case ReingoldDershowitz:
-			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+			// Reingold & Dershowitz (2002, 2007, 2018) algorithm for DeltaT
 			// FIXME: n.dot
 			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByReingoldDershowitz;
 			// GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
-			deltaTstart	= -400; //1620;
-			deltaTfinish	= 2100; //2019;
+			// AW: limits from 4th edition:
+			deltaTstart	= -500; //1620;
+			deltaTfinish	= 2150; //2019;
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
@@ -2314,7 +2320,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits for the recent past.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case ReingoldDershowitz: //
-			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (4th ed. 2018) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MorrisonStephenson2004: // PRIMARY SOURCE
 			description = q_("This important solution was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
@@ -2612,8 +2618,8 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 	int entry=0;
 	while (iau_constlineVec.at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size()){
-
+	while (entry<iau_constlineVec.size())
+	{
 		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
 			entry++;
 		while (iau_constlineVec.at(entry).RAlow >= RA1875)

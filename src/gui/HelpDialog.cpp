@@ -98,9 +98,14 @@ void HelpDialog::createDialogContent()
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->helpBrowser << ui->aboutBrowser << ui->logBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
+
 
 	// Help page
 	updateHelpText();
@@ -186,8 +191,10 @@ void HelpDialog::downloadComplete(QNetworkReply *reply)
 	QString latestVersion = map["name"].toString();
 	latestVersion.replace("v","", Qt::CaseInsensitive);
 
-	int r = StelUtils::compareVersions(latestVersion, StelUtils::getApplicationVersion());
-	if (r==-1)
+	QString appVersion = StelUtils::getApplicationVersion();
+	QStringList c = appVersion.split(".");	
+	int r = StelUtils::compareVersions(latestVersion, appVersion);
+	if (r==-1 || c.count()>3 || c.last().contains("-"))
 		message = q_("Looks like you are using the development version of Stellarium.");
 	else if (r==0)
 		message = q_("This is latest stable version of Stellarium.");
@@ -213,14 +220,14 @@ void HelpDialog::updateLog(int)
 		refreshLog();
 }
 
-void HelpDialog::refreshLog()
+void HelpDialog::refreshLog() const
 {
 	ui->logBrowser->setPlainText(StelLogger::getLog());
 	QScrollBar *sb = ui->logBrowser->verticalScrollBar();
 	sb->setValue(sb->maximum());
 }
 
-void HelpDialog::updateHelpText(void)
+void HelpDialog::updateHelpText(void) const
 {
 	QString htmlText = "<html><head><title>";
 	htmlText += q_("Stellarium Help").toHtmlEscaped();
@@ -321,7 +328,6 @@ void HelpDialog::updateHelpText(void)
 	// WARNING! Section titles are re-used above!
 	htmlText += "<h2 id=\"links\">" + q_("Further Reading").toHtmlEscaped() + "</h2>\n";
 	htmlText += q_("The following links are external web links, and will launch your web browser:\n").toHtmlEscaped();
-	htmlText += "<p><a href=\"http://stellarium.sourceforge.net/wiki/index.php/Category:User%27s_Guide\">" + q_("The Stellarium User Guide").toHtmlEscaped() + "</a>";
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
@@ -330,7 +336,17 @@ void HelpDialog::updateHelpText(void)
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/wiki\">\\1</a>");
+	htmlText += q_("{The Stellarium Wiki} - general information.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/wiki\">\\1</a>");
+	htmlText += "</p>\n";
+
+	htmlText += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	htmlText += q_("{The landscapes} - user-contributed landscapes for Stellarium.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/landscapes.html\">\\1</a>");
+	htmlText += "</p>\n";
+
+	htmlText += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	htmlText += q_("{The scripts} - user-contributed and official scripts for Stellarium.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/scripts.html\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
@@ -343,6 +359,11 @@ void HelpDialog::updateHelpText(void)
 	htmlText += q_("{Google Groups} - discuss Stellarium with other users.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>");
 	htmlText += "</p>\n";
 
+	htmlText += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	htmlText += q_("{Open Collective} - donations to the Stellarium development team.").toHtmlEscaped().replace(a_rx, "<a href=\"https://opencollective.com/stellarium\">\\1</a>");
+	htmlText += "</p>\n";
+
 	htmlText += "</body></html>\n";
 
 	ui->helpBrowser->clear();
@@ -353,7 +374,7 @@ void HelpDialog::updateHelpText(void)
 	ui->helpBrowser->scrollToAnchor("top");
 }
 
-void HelpDialog::updateAboutText(void)
+void HelpDialog::updateAboutText(void) const
 {
 	QStringList contributors;
 	contributors << "Vladislav Bataron" << "Barry Gerdes" << "Peter Walser" << "Michal Sojka"
@@ -375,7 +396,8 @@ void HelpDialog::updateAboutText(void)
 		     << "Annette S. Lee" << "Vancho Stojkoski" << "Robert S. Fuller" << "Giuseppe Putzolu"
 		     << "henrysky" << "Nick Kanel" << "Petr Kubánek" << "Matwey V. Kornilov"
 		     << "Alessandro Siniscalchi" << "Ruslan Kabatsayev" << "Pawel Stolowski"
-		     << "Antoine Jacoutot" << "Sebastian Jennen";
+		     << "Antoine Jacoutot" << "Sebastian Jennen" << "Matt Hughes" << "Sun Shuwei"
+		     << "Alexey Sokolov" << "Paul Krizak" << "ChrUnger" << "Minmin Gong";
 	contributors.sort();
 
 	// populate About tab
@@ -407,7 +429,6 @@ void HelpDialog::updateAboutText(void)
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Georg Zotti")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Alexander Wolf")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Marcos Cardinot")).toHtmlEscaped() + "</li>";
-	newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Continuous Integration: %1").arg(QString("Hans Lambermont")).toHtmlEscaped() + "</li>";	
 	newHtml += "<li>" + q_("Tester: %1").arg(QString("Khalid AlAjaji")).toHtmlEscaped() + "</li></ul>";
 	newHtml += "<h3>" + q_("Former Developers").toHtmlEscaped() + "</h3>";
@@ -417,6 +438,7 @@ void HelpDialog::updateAboutText(void)
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Rob Spearman")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Bogdan Marinov")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Timothy Reaves")).toHtmlEscaped() + "</li>";
+	newHtml += "<li>" + q_("Developer: %1").arg(QString("Florian Schaukowitsch")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Andr%1s Mohari").arg(QChar(0x00E1))).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Mike Storm")).toHtmlEscaped() + "</li>";
 	newHtml += "<li>" + q_("Developer: %1").arg(QString("Ferdinand Majerech")).toHtmlEscaped() + "</li>";

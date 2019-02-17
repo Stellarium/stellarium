@@ -30,6 +30,7 @@
 class TuiNodeDateTime : public TuiNodeEditable
 {
 	Q_OBJECT
+
 public:
 	//! Create a TuiNodeDateTime node.
 	//! @param text the text to be displayed for this node
@@ -53,7 +54,6 @@ private:
 	void incPart(int part, bool add);
 	QList<int> getParts(double jd) const;
 	bool setPart(int part, int val);
-
 };
 
 #endif /*TUINODEDATETIME_HPP*/

@@ -42,6 +42,7 @@ public slots:
 	void retranslate();
 	//! In addition to StelDialog's inherited solution, puts the arrow on the right spot in the map.
 	virtual void handleDialogSizeChanged(QSizeF size);
+
 protected:
 	//! Initialize the dialog widgets and connect the signals/slots
 	virtual void createDialogContent();
@@ -95,6 +96,10 @@ private slots:
 	void reportEdit();
 
 	void saveTimeZone();
+
+	//! Set timezone (to be connected to a signal from StelCore)
+	//! This has to do some GUI element juggling.
+	void setTimezone(QString tz);
 	
 	//! Update the widget to make sure it is synchrone if the location is changed programmatically
 	//! This function should be called repeatidly with e.g. a timer
@@ -169,7 +174,6 @@ private:
 
 	//! Updates the check state and the enabled/disabled status.
 	void updateDefaultLocationControls(bool currentIsDefault);
-
 };
 
 #endif // _LOCATIONDIALOG_HPP

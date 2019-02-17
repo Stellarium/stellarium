@@ -62,9 +62,9 @@ class StelCore : public QObject
 	//! Read-only property returning the localized projection name
 	Q_PROPERTY(QString currentProjectionNameI18n READ getCurrentProjectionNameI18n NOTIFY currentProjectionNameI18nChanged STORED false)
 	Q_PROPERTY(bool flagGravityLabels READ getFlagGravityLabels WRITE setFlagGravityLabels NOTIFY flagGravityLabelsChanged)
+	Q_PROPERTY(QString currentTimeZone READ getCurrentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
 
 public:
-
 	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType
@@ -326,7 +326,7 @@ public:
 
 	//! Return the startup mode, can be "actual" (i.e. take current time from system),
 	//! "today" (take some time e.g. on the evening of today) or "preset" (completely preconfigured).
-	QString getStartupTimeMode();
+	QString getStartupTimeMode() const;
 	void setStartupTimeMode(const QString& s);
 
 	//! Get info about valid range for current algorithm for calculation of Delta-T
@@ -388,7 +388,7 @@ public slots:
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
 	void setFlagGravityLabels(bool gravity);
 	//! return whether dome-aligned labels are in use
-	bool getFlagGravityLabels();
+	bool getFlagGravityLabels() const;
 	//! Set the offset rotation angle in degree to apply to gravity text (only if gravityLabels is set to false).
 	void setDefaultAngleForGravityText(float a);
 	//! Set the horizontal flip status.
@@ -544,7 +544,7 @@ public slots:
 	bool getIsTimeNow() const;
 
 	//! get the initial "today time" from the config file
-	QTime getInitTodayTime(void);
+	QTime getInitTodayTime(void) const;
 	//! set the initial "today time" from the config file
 	void setInitTodayTime(const QTime& time);
 	//! Set the preset sky time from a QDateTime
@@ -728,6 +728,8 @@ signals:
 	void locationChanged(StelLocation);
 	//! This signal is emitted whenever the targetted location changes
 	void targetLocationChanged(StelLocation);
+	//! This signal is emitted when the current timezone name is changed.
+	void currentTimeZoneChanged(QString);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
 	//! This signal is emitted whenever the time is re-synced.

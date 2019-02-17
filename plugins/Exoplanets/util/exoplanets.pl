@@ -3,7 +3,7 @@
 #
 # Tool for generate catalog of exoplanets
 #
-# Copyright (C) 2013, 2014 Alexander Wolf
+# Copyright (C) 2013, 2014, 2017, 2018 Alexander Wolf
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -25,15 +25,13 @@
 # 
 
 use DBI();
-use LWP::UserAgent();
 use Text::CSV;
 
 #
-# Stage 1: connect to 'The Extrasolar Planets Encyclopaedia' at exoplanet.eu, fetch CSV data and store to MySQL
+# Stage 1: fetch CSV data and store to MySQL
 # Stage 2: read MySQL catalog of exoplanets and store it to JSON
 #
 
-$URL	= "http://exoplanet.eu/catalog/csv/";
 $CSV	= "./exoplanets.csv";
 $JSON	= "./exoplanets.json";
 $HCSV	= "./habitable.csv";
@@ -46,22 +44,6 @@ $dbname	= "exoplanets";
 $dbhost	= "localhost";
 $dbuser	= "exoplanet";
 $dbpass	= "exoplanet";
-
-$UA = LWP::UserAgent->new(keep_alive => 1, timeout => 360);
-$UA->agent("Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 2.8; http://stellarium.org/)");
-$request = HTTP::Request->new('GET', $URL);
-$responce = $UA->request($request);
-
-if ($responce->is_success) {
-	open(OUT, ">$CSV");
-	$data = $responce->content;
-	binmode OUT;
-	print OUT $data;
-	close OUT;
-} else {
-	print "Can't connect to URL: $URL\n";
-#	exit;
-}
 
 $dsn = "DBI:mysql:database=$dbname;host=$dbhost";
 
@@ -128,6 +110,7 @@ for ($i=0;$i<scalar(@fdata);$i++) {
 	if ($fdata[$i] eq "inclination") {	$column{'pincl'} = $i;		}
 	if ($fdata[$i] eq "angular_distance") {	$column{'angdist'} = $i;	}
 	if ($fdata[$i] eq "discovered") {	$column{'discovered'} = $i;	}
+	if ($fdata[$i] eq "detection_type") {	$column{'detectiontype'} = $i;	}
 	if ($fdata[$i] eq "star_name") {	$column{'starname'} = $i;	}
 	if ($fdata[$i] eq "ra") {		$column{'sra'} = $i;		}
 	if ($fdata[$i] eq "dec") {		$column{'sdec'} = $i;		}
@@ -171,6 +154,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 	$pincl		= $psdata[$column{'pincl'}];		# planet inclination
 	$angdist	= $psdata[$column{'angdist'}];		# planet angular distance
 	$discovered	= $psdata[$column{'discovered'}];	# planet discovered
+	$detectiontype	= $psdata[$column{'detectiontype'}];	# planet detection type
 	$starname	= $psdata[$column{'starname'}];		# star name
 	$sRA		= $psdata[$column{'sra'}];		# star RA
 	$sDec		= $psdata[$column{'sdec'}];		# star dec
@@ -246,16 +230,18 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 			$starName = @starDATA[1];
 		}
 		
-		$hclass = '';
-		$hptype = '';
-		$mstemp = -1;
-		$eqtemp = -1;
-		$esi    = -1;
+		$hclass       = '';
+		$hptype       = '';
+		$flux         = -1;
+		$mstemp       = -1;
+		$eqtemp       = -1;
+		$esi          = -1;
+		$conservative = 0;
 		
 		$key = $starName." ".$pname;
 		if (exists($hp{$key})) {
 			$status  = $csvdata->parse($hp{$key});
-			($hsn,$hsname,$hpname,$hptype,$eqtemp,$esi) = $csvdata->fields();
+			($hsn,$hsname,$hpname,$hptype,$conservative,$flux,$eqtemp,$esi) = $csvdata->fields();
 		}
 		$pProperName = '';
 		if (exists($pnp{$key})) {
@@ -264,7 +250,7 @@ for ($i=1;$i<scalar(@catalog);$i++) {
 		}
 		
 		# insert planet data
-		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,propername,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hptype,eqtemp,esi) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pProperName, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hptype, $eqtemp, $esi);
+		$sth = $dbh->do(q{INSERT INTO planets (sid,pname,propername,pmass,pradius,pperiod,psemiaxis,pecc,pinc,padistance,discovered,hptype,eqtemp,flux,esi,detection_type,conservative) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}, undef, $starID, $pname, $pProperName, $pmass, $pradius, $pperiod, $paxis, $pecc, $pincl, $angdist, $discovered, $hptype, $eqtemp, $flux, $esi, $detectiontype, $conservative);
 	}
 #	else
 #	{
@@ -336,6 +322,9 @@ while (@stars = $sth->fetchrow_array()) {
 	if ($sname eq "Kapteyn's") {
 		$sname .= " Star"; # cosmetic fix for translation support
 	}
+	if ($sname eq "Barnard's star") {
+		$sname =~ s/star/Star/gi; # cosmetic fix for translation support
+	}
 	
 	$out  = "\t\t\"".$sname."\":\n";
 	$out .= "\t\t{\n";
@@ -364,7 +353,10 @@ while (@stars = $sth->fetchrow_array()) {
 		$discovered	= $planets[11];
 		$hpltype	= $planets[12];
 		$eqktemp	= $planets[13];
-		$esindex	= $planets[14];
+		$fluxdata	= $planets[14];
+		$esindex	= $planets[15];
+		$detectiontype	= $planets[16];
+		$conservative	= $planets[17];
 	
 		$out .= "\t\t\t{\n";
 		if ($pmass ne '') {
@@ -391,14 +383,23 @@ while (@stars = $sth->fetchrow_array()) {
 		if ($discovered ne '') {
 			$out .= "\t\t\t\t\"discovered\": ".$discovered.",\n";
 		}
+		if ($detectiontype ne '') {
+			$out .= "\t\t\t\t\"detectionMethod\": \"".$detectiontype."\",\n";
+		}
 		if ($hpltype ne '') {
 			$out .= "\t\t\t\t\"pclass\": \"".$hpltype."\",\n";
 		}
 		if ($eqktemp > 0) {
 			$out .= "\t\t\t\t\"EqTemp\": ".$eqktemp.",\n";
 		}
+		if ($fluxdata > 0) {
+			$out .= "\t\t\t\t\"flux\": ".$fluxdata.",\n";
+		}
 		if ($esindex > 0) {
 			$out .= "\t\t\t\t\"ESI\": ".$esindex.",\n";
+		}
+		if ($conservative > 0) {
+			$out .= "\t\t\t\t\"conservative\": true,\n";
 		}
 		if ($ppropname ne '') {
 			$out .= "\t\t\t\t\"planetProperName\": \"".$ppropname."\",\n";

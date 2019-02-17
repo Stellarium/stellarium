@@ -49,7 +49,6 @@ protected:
 
 private slots:
 	void saveSettings(void) const;
-
 	void setNDot(const QString& v);
 	void setYear(const QString& v);
 	void setCoeffA(const QString& v);
@@ -65,7 +64,6 @@ private:
 	Vec3f coeff;
 
 	void setDescription(void) const;
-
 };
 
 #endif // CUSTOMDELTATEQUATIONDIALOG_HPP

@@ -33,7 +33,6 @@ InterpolatedPosition::InterpolatedPosition() :
 
 InterpolatedPosition::~InterpolatedPosition()
 {
-
 }
 
 void InterpolatedPosition::reset()

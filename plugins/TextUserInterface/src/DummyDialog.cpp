@@ -41,7 +41,6 @@ class CustomProxy : public QGraphicsProxyWidget
 		}
 
 	protected:
-		
 		virtual bool event(QEvent* event)
 		{
 			if (event->type()==QEvent::WindowDeactivate)

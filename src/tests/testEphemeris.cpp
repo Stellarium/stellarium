@@ -42,12 +42,7 @@ QTEST_GUILESS_MAIN(TestEphemeris)
 
 void TestEphemeris::initTestCase()
 {
-	#ifndef Q_OS_WIN
-	// FIXME: StelFileMgr::init(); is disabled on Windows due it will caused problem "could not find install location"
-	//        on Windows machines without installed Stellarium (e.g. AppVeyor). So, it will be give "false positive
-	//        test pass" at the moment for DE42x ephemeris.
 	StelFileMgr::init();
-	#endif
 
 	de430FilePath = StelFileMgr::findFile("ephem/" + QString(DE430_FILENAME), StelFileMgr::File);
 	de431FilePath = StelFileMgr::findFile("ephem/" + QString(DE431_FILENAME), StelFileMgr::File);	
@@ -1004,7 +999,6 @@ void TestEphemeris::initTestCase()
 	neptune << 2652428.5 <<  1.183461314456774E+01 <<  2.735324675669263E+01 << -8.365215425062809E-01;
 	neptune << 2661559.5 << -1.583326485146195E+01 <<  2.549828522494925E+01 << -1.600501215414427E-01;
 	neptune << 2670690.5 << -3.019399440765067E+01 <<  2.025533659377639E+00 <<  6.548570322183085E-01;
-
 }
 
 void TestEphemeris::testMercuryHeliocentricEphemerisVsop87()
@@ -1104,7 +1098,6 @@ void TestEphemeris::testMarsHeliocentricEphemerisVsop87()
 			 .arg(QString::number(     z, 'f', 15))
 			 .toUtf8());
 	}
-
 }
 
 void TestEphemeris::testJupiterHeliocentricEphemerisVsop87()
