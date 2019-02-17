@@ -48,6 +48,7 @@ ScriptConsole::ScriptConsole(QObject *parent)
 ScriptConsole::~ScriptConsole()
 {
 	delete ui;
+	delete highlighter; highlighter = Q_NULLPTR;
 }
 
 void ScriptConsole::retranslate()

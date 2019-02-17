@@ -414,6 +414,116 @@ OcularsGuiPanel::~OcularsGuiPanel()
 {
 	if (borderPath)
 		delete borderPath;
+	if (buttonCrosshairs)
+	{
+		delete buttonCrosshairs;
+		buttonCrosshairs = Q_NULLPTR;
+	}
+	if (buttonCcd)
+	{
+		delete buttonCcd;
+		buttonCcd = Q_NULLPTR;
+	}
+	if (buttonTelrad)
+	{
+		delete buttonTelrad;
+		buttonTelrad = Q_NULLPTR;
+	}
+	if (buttonConfiguration)
+	{
+		delete buttonConfiguration;
+		buttonConfiguration = Q_NULLPTR;
+	}
+	if (fieldOcularFl)
+	{
+		delete fieldOcularFl;
+		fieldOcularFl = Q_NULLPTR;
+	}
+	if (fieldOcularAfov)
+	{
+		delete fieldOcularAfov;
+		fieldOcularAfov = Q_NULLPTR;
+	}
+	if (fieldCcdName)
+	{
+		delete fieldCcdName;
+		fieldCcdName = Q_NULLPTR;
+	}
+	if (fieldCcdDimensions)
+	{
+		delete fieldCcdDimensions;
+		fieldCcdDimensions = Q_NULLPTR;
+	}
+	if (fieldCcdHScale)
+	{
+		delete fieldCcdHScale;
+		fieldCcdHScale = Q_NULLPTR;
+	}
+	if (fieldCcdVScale)
+	{
+		delete fieldCcdVScale;
+		fieldCcdVScale = Q_NULLPTR;
+	}
+	if (fieldCcdRotation)
+	{
+		delete fieldCcdRotation;
+		fieldCcdRotation = Q_NULLPTR;
+	}
+	if (fieldTelescopeName)
+	{
+		delete fieldTelescopeName;
+		fieldTelescopeName = Q_NULLPTR;
+	}
+	if (fieldMagnification)
+	{
+		delete fieldMagnification;
+		fieldMagnification = Q_NULLPTR;
+	}
+	if (fieldExitPupil)
+	{
+		delete fieldExitPupil;
+		fieldExitPupil = Q_NULLPTR;
+	}
+	if (fieldFov)
+	{
+		delete fieldFov;
+		fieldFov = Q_NULLPTR;
+	}
+	if (fieldRayleighCriterion)
+	{
+		delete fieldRayleighCriterion;
+		fieldRayleighCriterion = Q_NULLPTR;
+	}
+	if (fieldDawesCriterion)
+	{
+		delete fieldDawesCriterion;
+		fieldDawesCriterion = Q_NULLPTR;
+	}
+	if (fieldAbbeyCriterion)
+	{
+		delete fieldAbbeyCriterion;
+		fieldAbbeyCriterion = Q_NULLPTR;
+	}
+	if (fieldSparrowCriterion)
+	{
+		delete fieldSparrowCriterion;
+		fieldSparrowCriterion = Q_NULLPTR;
+	}
+	if (fieldVisualResolution)
+	{
+		delete fieldVisualResolution;
+		fieldVisualResolution = Q_NULLPTR;
+	}
+	if (fieldLensName)
+	{
+		delete fieldLensName;
+		fieldLensName = Q_NULLPTR;
+	}
+	if (fieldLensMultipler)
+	{
+		delete fieldLensMultipler;
+		fieldLensMultipler = Q_NULLPTR;
+	}
 }
 
 void OcularsGuiPanel::showOcularGui()

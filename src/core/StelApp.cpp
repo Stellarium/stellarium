@@ -298,6 +298,7 @@ StelApp::~StelApp()
 	delete moduleMgr; moduleMgr=Q_NULLPTR; // Delete the secondary instance
 	delete actionMgr; actionMgr = Q_NULLPTR;
 	delete propMgr; propMgr = Q_NULLPTR;
+	delete renderBuffer; renderBuffer = Q_NULLPTR;
 
 	Q_ASSERT(singleton);
 	singleton = Q_NULLPTR;

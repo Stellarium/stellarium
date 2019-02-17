@@ -99,6 +99,8 @@ ConfigurationDialog::~ConfigurationDialog()
 	ui = Q_NULLPTR;
 	delete customDeltaTEquationDialog;
 	customDeltaTEquationDialog = Q_NULLPTR;
+	delete currentDownloadFile;
+	currentDownloadFile = Q_NULLPTR;
 }
 
 void ConfigurationDialog::retranslate()

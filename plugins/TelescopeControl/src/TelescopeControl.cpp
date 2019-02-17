@@ -110,6 +110,8 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
+	delete slewDialog; slewDialog = Q_NULLPTR;
+	delete telescopeDialog; telescopeDialog = Q_NULLPTR;
 }
 
 

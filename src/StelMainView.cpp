@@ -708,6 +708,8 @@ StelMainView::~StelMainView()
 	//delete the night view graphic effect here while GL context is still valid
 	rootItem->setGraphicsEffect(Q_NULLPTR);
 	StelApp::deinitStatic();
+	delete guiItem;
+	guiItem=Q_NULLPTR;
 }
 
 QSurfaceFormat StelMainView::getDesiredGLFormat() const
