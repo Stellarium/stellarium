@@ -858,6 +858,10 @@ public slots:
 	//! string contains Unicode characters not representable in the ANSI encoding.
 	static QString getEnv(const QString& var);
 
+	//! return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
+	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
+	static bool isModuleLoaded(const QString moduleID);
+
 signals:
 
 	void requestLoadSkyImage(const QString& id, const QString& filename,
