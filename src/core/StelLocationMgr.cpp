@@ -993,9 +993,10 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 		}
-		catch (std::runtime_error)
+		catch (const std::exception& e)
 		{
-			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Let's use Paris, France as default location...";
+			qDebug() << "Failure getting IP-based location: answer is in not acceptable format! Error: " << e.what()
+					<< "\nLet's use Paris, France as default location...";
 			core->moveObserverTo(getLastResortLocation(), 0.0f, 0.0f); // Answer is not in JSON format! A possible block by DNS server or firewall
 		}
 	}
