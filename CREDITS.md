@@ -324,9 +324,9 @@
 	4.9 Images of Sh2-261
 	    from Yang Kai
 	    License: public domain 
-	4.10 Images of M1, M16, M27, M42, M57, M97, NGC6946 from Stephane
+	4.10 Images of M1, M27, M42, M57, M97, NGC6946 from Stephane
 	     Dumont
-	4.11 Images of M17, M44, NGC856, NGC884 from Maxime Spano
+	4.11 Images of M44, NGC856, NGC884 from Maxime Spano
 	4.12 Constellation art, GUI buttons, logo created by Johan Meuris
 	     (Jomejome) (jomejome at users.sourceforge.net)
 	     http://www.johanmeuris.eu/
@@ -359,29 +359,32 @@
 	     from Harel Boren
 	     http://www.pbase.com/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.18 Images of IC1805, IC1848
-	     from Steve Tuttle
-	     http://www.stuttle1.com/
-	4.19 Images of IC4628, M20, M21, M47, NGC2467, IC2948, NGC3324, NGC3293,
+	4.18 Images of IC1805
+	     from Aldeabaran66
+	     https://commons.wikimedia.org/wiki/
+	     License: Creative Commons Attribution-Share Alike 4.0 International
+	4.19 Images of IC4628, M20, M21, M47, NGC2467, IC2948, NGC3324, 
 	     NGC7590, RCW158
 	     from Trevor Gerdes
 	     http://www.sarcasmogerdes.com/
 	4.20 Images of NGC1532
 		from users of Ice In Space
 		http://www.iceinspace.com.au/
-	4.21 Image of IC5146 from James A Weier
+	4.21 Images of NGC3293
+	     from ESO/G. Beccari
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International
 	4.22 Images of SMC, LMC (Magellanic Clouds) and rho Oph from Albert Van
 	     Donkelaar
-	4.23 Images of NGC1365, NGC4945,
-	     NGC6726, NGC6744, NGC6752, NGC7293, NGC2070
+	4.23 Images of NGC1365, NGC6726, NGC6744, NGC6752, NGC7293, NGC2070
 	     from Philip Montgomery
 	     http://www.kenthurst.bigpondhosting.com/
 	4.24 The Vesta and Ceres map was taken from USGS website
 	     https://astrogeology.usgs.gov/
 	     and colored by RVS. License: public domain.
 	4.25 Images of M3, M13, M15, M24, M33, M51, M58, M63, M76,
-	     M81, M82, M94, M96, M101, M105, M106, IC405, IC443, NGC246, 
-	     NGC457, NGC488, NGC1514, NGC1961, NGC2174, NGC2264, NGC2371, 
+	     M81, M82, M96, M101, M105, M106, IC405, IC443, NGC246, 
+	     NGC457, NGC488, NGC1514, NGC1961, NGC2174, NGC2371, 
              NGC2392, NGC2403, NGC2655, NGC2685, NGC2841, NGC3166, NGC3310, 
              NGC3344, NGC3359, NGC3521, NGC3628, NGC3938, NGC4151, NGC4535, 
              NGC4559, NGC4631, NGC4656, NGC4657, NGC5033, NGC7008, NGC7318, 
@@ -419,14 +422,15 @@
 	4.35 Images of NGC3603 from ESO/La Silla Observatory
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.36 Images of M49, NGC147, NGC404, NGC4244 from Ole Nielsen
+	4.36 Images of M49, NGC147, NGC404, NGC4228, NGC4244
+	     from Ole Nielsen
 	     License: Creative Commons Attribution-Share Alike 2.5 Generic 
 	4.37 Images of NGC2808, NGC7023, Hercules Cluster from NASA
 	     License: public domain
 	4.38 Images of IC1396 from Giuseppe Donatiello
 	     License: Creative Commons CC0 1.0 Universal Public Domain Dedication
 	4.39 Images of M4, M12, M14, M19, M22, M55, M56, M62, M88, M92, M108, 
-	     M109, NGC225, NGC663, NGC1931, NGC6823, NGC7814, Sh2-155 
+	     M109, IC5146, NGC225, NGC663, NGC1931, NGC6823, NGC7814, Sh2-155 
 	     from Hewholooks
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -443,14 +447,15 @@
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC936, NGC1232, NGC1313, NGC1316,
-	     NGC1978, NGC2207, NGC2736, NGC3532, NGC5128, NGC5189, NGC6362, NGC6769, NGC6822, NGC7793
+	4.42 Images of IC1295, NGC134, NGC92, NGC55, NGC300, NGC936, NGC1232, NGC1313, NGC1316, NGC1978, 
+	     NGC2207, NGC2736, NGC3532, NGC4945, NGC5128, NGC5189, NGC6362, NGC6769, NGC6822, NGC7793
 	     from ESO
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
  	4.43 Images of NGC253, NGC2170, NGC5566, the Pleiades from HG731GZ
 	     License: Creative Commons Attribution 3.0 Unported
-	4.44 Images of M8, M104, IC434, IC2944, NGC6726 from Dylan O'Donnell
+	4.44 Images of M8, M17, M94, M104, IC434, IC2944, NGC2264, NGC6726, SMC (Hydrogen Alpha)
+	     from Dylan O'Donnell
 	     http://deography.com/
 	     License: public domain
 	4.45 Images of NGC247
@@ -464,7 +469,7 @@
 	4.46 Images of IC1613 
 	     from Philos2000
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.47 Images of NGC4236, Perseus Cluster
+	4.47 Images of M16, NGC4236, Perseus Cluster
 	     from Sun Gang
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.48 Images of NGC4651, NGC5906
@@ -536,7 +541,7 @@
 	     from Sunfishtommy
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.66 Images of NGC1055, NGC4228
+	4.66 Images of IC1848, NGC1055
 	     from Jeffjnet
 	     http://www.iceinspace.com.au/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
