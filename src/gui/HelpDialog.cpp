@@ -336,7 +336,17 @@ void HelpDialog::updateHelpText(void) const
 
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
-	htmlText += q_("{The Stellarium Wiki} - General information.  You can also find user-contributed landscapes and scripts here.").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/wiki\">\\1</a>");
+	htmlText += q_("{The Stellarium Wiki} - general information. ").toHtmlEscaped().replace(a_rx, "<a href=\"https://github.com/Stellarium/stellarium/wiki\">\\1</a>");
+	htmlText += "</p>\n";
+
+	htmlText += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	htmlText += q_("{The landscapes} - user-contributed landscapes for Stellarium.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/landscapes.html\">\\1</a>");
+	htmlText += "</p>\n";
+
+	htmlText += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	htmlText += q_("{The scripts} - user-contributed and official scripts for Stellarium.").toHtmlEscaped().replace(a_rx, "<a href=\"https://stellarium.org/scripts.html\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "<p>";
@@ -347,6 +357,11 @@ void HelpDialog::updateHelpText(void) const
 	htmlText += "<p>";
 	// TRANSLATORS: The text between braces is the text of an HTML link.
 	htmlText += q_("{Google Groups} - discuss Stellarium with other users.").toHtmlEscaped().replace(a_rx, "<a href=\"https://groups.google.com/forum/#!forum/stellarium\">\\1</a>");
+	htmlText += "</p>\n";
+
+	htmlText += "<p>";
+	// TRANSLATORS: The text between braces is the text of an HTML link.
+	htmlText += q_("{Open Collective} - donate to the Stellarium development team.").toHtmlEscaped().replace(a_rx, "<a href=\"https://opencollective.com/stellarium\">\\1</a>");
 	htmlText += "</p>\n";
 
 	htmlText += "</body></html>\n";
