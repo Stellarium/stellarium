@@ -103,13 +103,14 @@ public:
 	//! Defines the type of graphs
 	//! @enum GraphsTypes
 	enum GraphsTypes {
-		GraphMagnitudeVsTime	= 1,
-		GraphPhaseVsTime		= 2,
-		GraphDistanceVsTime	= 3,
-		GraphElongationVsTime	= 4,
-		GraphAngularSizeVsTime	= 5,
-		GraphPhaseAngleVsTime	= 6,
-		GraphHDistanceVsTime	= 7
+		GraphMagnitudeVsTime		= 1,
+		GraphPhaseVsTime			= 2,
+		GraphDistanceVsTime		= 3,
+		GraphElongationVsTime		= 4,
+		GraphAngularSizeVsTime		= 5,
+		GraphPhaseAngleVsTime		= 6,
+		GraphHDistanceVsTime		= 7,
+		GraphTransitAltitudeVsTime	= 8
 	};
 
 	AstroCalcDialog(QObject* parent);

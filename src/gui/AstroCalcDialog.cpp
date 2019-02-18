@@ -2266,22 +2266,34 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime, distance, angularSize;
+		double startJD, JD, ltime, distance, angularSize, az, alt, altitude;
+		bool sign;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
 		double width = 1.0;
+		double UTCshift = core->getUTCOffset(startJD) / 24.;
 		int dYear = (int)core->getCurrentPlanet()->getSiderealPeriod() + 3;
+		int firstGraph = ui->graphsFirstComboBox->currentData().toInt();
+		int secondGraph = ui->graphsSecondComboBox->currentData().toInt();
 
 		for (int i = -2; i <= dYear; i++)
 		{
 			JD = startJD + i;
+
+			if (firstGraph==GraphTransitAltitudeVsTime || secondGraph==GraphTransitAltitudeVsTime)
+			{
+				core->setJD(JD);
+				Vec3f rts = ssObj->getRTSTime(core);
+				JD += (rts[1]/24. - UTCshift);
+			}
+
 			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
 			aX.append(ltime);
 
 			core->setJD(JD);
 
-			switch (ui->graphsFirstComboBox->currentData().toInt())
+			switch (firstGraph)
 			{
 				case GraphMagnitudeVsTime:
 					aY.append(ssObj->getVMagnitude(core));
@@ -2309,9 +2321,15 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 					distance = ssObj->getHeliocentricEclipticPos().length();
 					aY.append(distance);
 					break;
+				case GraphTransitAltitudeVsTime:
+					StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
+					StelUtils::radToDecDeg(alt, sign, altitude); // convert to degrees
+					if (!sign) altitude *= -1;
+					aY.append(altitude);
+					break;
 			}
 
-			switch (ui->graphsSecondComboBox->currentData().toInt())
+			switch (secondGraph)
 			{
 				case GraphMagnitudeVsTime:
 					bY.append(ssObj->getVMagnitude(core));
@@ -2338,6 +2356,13 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 				case GraphHDistanceVsTime:
 					distance = ssObj->getHeliocentricEclipticPos().length();
 					bY.append(distance);
+					break;
+				case GraphTransitAltitudeVsTime:
+					StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
+					StelUtils::radToDecDeg(alt, sign, altitude); // convert to degrees
+					if (!sign) altitude *= -1;
+					bY.append(altitude);
+					break;
 			}
 
 			core->update(0.0);
@@ -2426,6 +2451,10 @@ void AstroCalcDialog::populateFunctionsList()
 	// TRANSLATORS: The phrase "Heliocentric distance" may be long in some languages and you can short it to use in the drop-down list.
 	cf.first = q_("Heliocentric distance vs. Time");
 	cf.second = GraphHDistanceVsTime;
+	functions.append(cf);
+	// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it to use in the drop-down list.
+	cf.first = q_("Transit altitude vs. Time");
+	cf.second = GraphTransitAltitudeVsTime;
 	functions.append(cf);
 
 	QComboBox* first = ui->graphsFirstComboBox;
@@ -2523,6 +2552,12 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 50.0;
 			break;
+		case GraphTransitAltitudeVsTime:
+			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
+			yAxis1Legend = QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0));
+			if (minY1 < -1000.) minY1 = -90.0;
+			if (maxY1 > 1000.) maxY1 = 90.0;
+			break;
 	}
 
 	switch (ui->graphsSecondComboBox->currentData().toInt())
@@ -2563,6 +2598,12 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 			yAxis2Legend = QString("%1, %2").arg(q_("Heliocentric distance"), distMU);
 			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 50.0;
+			break;
+		case GraphTransitAltitudeVsTime:
+			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
+			yAxis2Legend = QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0));
+			if (minY2 < -1000.) minY2 = -90.0;
+			if (maxY2 > 1000.) maxY2 = 90.0;
 			break;
 	}
 
