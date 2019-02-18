@@ -1286,14 +1286,6 @@
 		"maxBrightness" : 12.5
 	},
 	{
-		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "https://www.spacetelescope.org/images/heic1011c/"},
-		"imageUrl" : "n1761.png",
-		"worldCoords" : [[[75.5935,-67.0372], [72.7208,-67.0361], [72.7865,-65.9176], [75.5339,-65.9184]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2222381739,
-		"maxBrightness" : 13.2
-	},
-	{
 		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "ESO/Digitized Sky Survey 2"},
 		"imageUrl" : "n1788.png",
 		"worldCoords" : [[[77.1097,-3.7675], [76.3433,-3.7675], [76.3433,-3.0025], [77.1097,-3.0025]]],
@@ -1340,22 +1332,6 @@
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]], 
 		"minResolution" : 0.2165786418, 
 		"maxBrightness" : 14.0
-	},
-	{
-		"imageCredits" : {"short" : "ESO/Digitized Sky Survey 2","infoUrl": "https://www.eso.org/public/images/eso1125c/"},
-		"imageUrl" : "n2014.png",
-		"worldCoords" : [[[84.4983,-68.3339], [80.1721,-68.4476], [80.0286,-66.8540], [84.0677,-66.7477]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2222381739,
-		"maxBrightness" : 13.2
-	},
-	{
-		"imageCredits" : {"Short": "Philip Montgomery", "infoUrl": "http://www.kenthurst.bigpondhosting.com/"},
-		"imageUrl" : "n2070-philip.png",
-		"worldCoords" : [[[ 85.3810, -69.3788], [ 83.8620, -69.3850], [ 83.8675, -68.8508], [ 85.3475, -68.8450]]],
-		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 0.2169148018,
-		"maxBrightness" : 13.2
 	},
 	{
 		"imageCredits" : {"short" : "Adam Block/Mount Lemmon SkyCenter/University of Arizona","infoUrl": "http://www.caelumobservatory.com/gallery/n2158.shtml"},
@@ -2951,37 +2927,134 @@
 		"maxBrightness" : 13.8
 	},
 	{
-		"imageCredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
-		"imageUrl" : "lmc_moshdr-4.png",
-		"worldCoords" : [[[90.4375, -72.0950], [80.9480, -72.3300], [80.9250, -69.4220], [89.1900, -69.2253]]],
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_01.png",
+		"worldCoords" : [[[90.3108, -66.5911], [85.4304, -66.8003], [85.084, -64.862], [89.5863,-64.6724]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 2.066023154,
-		"maxBrightness" : 13.9
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
 	},
-	{
-		"imageCredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
-		"imageUrl" : "lmc_moshdr-3.png",
-		"worldCoords" : [[[80.9480, -72.3300], [71.4700, -72.0800], [72.6650, -69.2220], [80.9250, -69.4220]]],
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_02.png",
+		"worldCoords" : [[[85.4304, -66.8003], [80.4658, -66.8653], [80.5133,-64.9226], [85.084, -64.862]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 2.066023154,
-		"maxBrightness" : 13.9
-	},
-	{
-		"imageCredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
-		"imageUrl" : "lmc_moshdr-2.png",
-		"worldCoords" : [[[80.9250, -69.4220], [72.6650, -69.2220], [73.6700, -66.3550], [80.9180, -66.5080]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_03.png",
+		"worldCoords" : [[[80.4658, -66.8653], [75.5179, -66.7781], [75.9444, -64.8535], [80.5133,-64.9226]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 2.066023154,
-		"maxBrightness" : 13.9
-	},
-	{
-		"imageCredits" : {"short" : "Albert Van Donkelaar", "infoUrl": "http://www.iceinspace.com.au/"},
-		"imageUrl" : "lmc_moshdr-1.png",
-		"worldCoords" : [[[89.1900, -69.2253], [80.9250, -69.4220], [80.9180, -66.5080], [88.1917, -66.3333]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_04.png",
+		"worldCoords" : [[[75.5179, -66.7781], [70.6638, -66.5498], [71.4461, -64.6521], [75.9444, -64.8535]]],
 		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
-		"minResolution" : 2.066023154,
-		"maxBrightness" : 13.9
-	},	
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_05.png",
+		"worldCoords" : [[[91.1508,-68.5182], [85.85, -68.755], [85.4304, -66.8003], [90.3108, -66.5911]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_06.png",
+		"worldCoords" : [[[85.85, -68.755], [80.4472,-68.8222], [80.4658, -66.8653], [85.4304, -66.8003]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_07.png",
+		"worldCoords" : [[[80.4472,-68.8222], [75.0327, -68.7305], [75.5179, -66.7781], [80.4658, -66.8653]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_08.png",
+		"worldCoords" : [[[75.0327, -68.7305], [69.77,-68.4657], [70.6638, -66.5498], [75.5179, -66.7781]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_09.png",
+		"worldCoords" : [[[92.147, -70.4457], [86.3406, -70.7114], [85.85, -68.755], [91.1508,-68.5182]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_10.png",
+		"worldCoords" : [[[86.3406, -70.7114], [80.3991, -70.7895], [80.4472,-68.8222], [85.85, -68.755]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_11.png",
+		"worldCoords" : [[[80.3991, -70.7895], [74.4587, -70.676], [75.0327, -68.7305], [80.4472,-68.8222]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_12.png",
+		"worldCoords" : [[[74.4587, -70.676], [68.6989, -70.3779], [69.77,-68.4657], [75.0327, -68.7305]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_13.png",
+		"worldCoords" : [[[93.3387,-72.3583], [86.9204, -72.6585], [86.3406, -70.7114], [92.147, -70.4457]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_14.png",
+		"worldCoords" : [[[86.9204, -72.6585], [80.3394,-72.7545], [80.3991, -70.7895], [86.3406, -70.7114]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_15.png",
+		"worldCoords" : [[[80.3394,-72.7545], [73.7798,-72.6213], [74.4587, -70.676], [80.3991, -70.7895]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
+  {
+		"imageCredits" : {"Short":"ESO/R. Gendler and Sun Shuwei","infoUrl": "http://www.eso.org/public/images/eso1311c/, https://www.eso.org/public/images/eso1021d/"},
+		"imageUrl" : "lmc_16.png",
+		"worldCoords" : [[[73.7798,-72.6213], [67.4307,-72.2808], [68.6989, -70.3779], [74.4587, -70.676]]],
+		"textureCoords" : [[[0,0], [1,0], [1,1], [0,1]]],
+		"minResolution" : 0.266023154,
+		"maxBrightness" :  13.9
+  },
 	{
 		"imageCredits" : {"short" : "Albert Van Donklaar","infoUrl": "http://www.iceinspace.com.au/"},
 		"imageUrl" : "rho-a00.png",

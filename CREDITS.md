@@ -374,9 +374,9 @@
 	     from ESO/G. Beccari
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
-	4.22 Images of SMC, LMC (Magellanic Clouds) and rho Oph from Albert Van
+	4.22 Images of SMC (Magellanic Clouds) and rho Oph from Albert Van
 	     Donkelaar
-	4.23 Images of NGC1365, NGC6726, NGC6744, NGC6752, NGC7293, NGC2070
+	4.23 Images of NGC1365, NGC6726, NGC6744, NGC6752, NGC7293
 	     from Philip Montgomery
 	     http://www.kenthurst.bigpondhosting.com/
 	4.24 The Vesta and Ceres map was taken from USGS website
@@ -413,8 +413,8 @@
 	4.33 Images of IC10, PGC143, PGC6830, PGC29653, UGC5373, UGC12613 from Lowell Observatory
 	     http://www2.lowell.edu/
 	     License: public domain
-	4.34 Images of M59, M60, M89, M90, IC2177, IC2220, IC2631, NGC1433, NGC1761,
-	     NGC1788, NGC1999, NGC2014, NGC2442, NGC2547, NGC6334, NGC6357, PGC10074,
+	4.34 Images of M59, M60, M89, M90, IC2177, IC2220, IC2631, NGC1433,
+	     NGC1788, NGC1999, NGC2442, NGC2547, NGC6334, NGC6357, PGC10074,
 	     RCW32, RCW38, RCW49, Fornax Cluster, Virgo Cluster
 	     from ESO/Digitized Sky Survey 2
 	     http://eso.org/public/
@@ -656,6 +656,10 @@
 	     from The Pan-STARRS1 Surveys (PS1) and the PS1 public science archive have been made possible through contributions by the Institute for Astronomy, the University of Hawaii, the Pan-STARRS Project Office, the Max-Planck Society and its participating institutes, the Max Planck Institute for Astronomy, Heidelberg and the Max Planck Institute for Extraterrestrial Physics, Garching, The Johns Hopkins University, Durham University, the University of Edinburgh, the Queen's University Belfast, the Harvard-Smithsonian Center for Astrophysics, the Las Cumbres Observatory Global Telescope Network Incorporated, the National Central University of Taiwan, the Space Telescope Science Institute, the National Aeronautics and Space Administration under Grant No. NNX08AR22G issued through the Planetary Science Division of the NASA Science Mission Directorate, the National Science Foundation Grant No. AST-1238877, the University of Maryland, Eotvos Lorand University (ELTE), the Los Alamos National Laboratory, and the Gordon and Betty Moore Foundation.
 	     https://ps1images.stsci.edu/cgi-bin/ps1cutouts
 	     License: public domain
+	4.95 Images of LMC (Magellanic Clouds)
+	     from ESO/R. Gendler and Sun Shuwei
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International. This work is a derivative of "Map of the Large Magellanic Cloud" and "The entire Large Magellanic Cloud with annotations" by ESO/R. Gendler, used under Creative Commons Attribution 4.0 International. This work is licensed under Creative Commons Attribution 4.0 International by Sun Shuwei.
 ```
 
 ## Appendix
