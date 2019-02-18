@@ -625,7 +625,7 @@ private slots:
 	//! re-use them later when adding manually satellites, parseTleFile()
 	//! can be modified to read directly form QNetworkReply-s. --BM
 	void saveDownloadedUpdate(QNetworkReply* reply);
-	void updateObserverLocation(StelLocation loc);
+	void updateObserverLocation(const StelLocation &loc);
 };
 
 

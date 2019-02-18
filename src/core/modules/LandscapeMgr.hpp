@@ -519,8 +519,8 @@ private slots:
 	void setAtmosphereBortleLightPollution(const int bIndex);
 
 	//! Reacts to StelCore::locationChanged.
-	void onLocationChanged(StelLocation loc);
-	void onTargetLocationChanged(StelLocation loc);
+	void onLocationChanged(const StelLocation &loc);
+	void onTargetLocationChanged(const StelLocation &loc);
 
 	//! Translate labels to new language settings.
 	void updateI18n();

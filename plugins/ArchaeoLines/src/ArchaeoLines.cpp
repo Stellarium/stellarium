@@ -884,7 +884,7 @@ void ArchaeoLines::setGeographicLocation2Label(QString label)
 	emit geographicLocation2LabelChanged(label);
 }
 
-void ArchaeoLines::updateObserverLocation(StelLocation loc)
+void ArchaeoLines::updateObserverLocation(const StelLocation &loc)
 {
 	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
 	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));

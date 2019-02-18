@@ -1398,8 +1398,9 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	updateSatellites(newData);
 }
 
-void Satellites::updateObserverLocation(StelLocation)
+void Satellites::updateObserverLocation(const StelLocation &loc)
 {
+	Q_UNUSED(loc)
 	recalculateOrbitLines();
 }
 

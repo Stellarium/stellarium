@@ -727,7 +727,7 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	}
 }
 
-void LandscapeMgr::onLocationChanged(StelLocation loc)
+void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 {
 	if(flagLightPollutionFromDatabase)
 	{
@@ -743,7 +743,7 @@ void LandscapeMgr::onLocationChanged(StelLocation loc)
 	}
 }
 
-void LandscapeMgr::onTargetLocationChanged(StelLocation loc)
+void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 {
 	if (loc.planetName != currentPlanetName)
 	{
