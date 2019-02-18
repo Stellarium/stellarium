@@ -17,6 +17,9 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 02110-1301, USA.    */
 
+#ifndef JPLEPH_H
+#define JPLEPH_H
+
 /***************************************************************************
 *******                  JPLEPH.H                                  *********
 ****************************************************************************
@@ -115,3 +118,5 @@ int DLL_FUNC jpl_init_error_code( void);
 #define CENTRAL_PLANET_ID   11  //ID of sun in JPL enumeration
 
 const char * jpl_init_error_message(void);
+
+#endif // JPLEPH_H

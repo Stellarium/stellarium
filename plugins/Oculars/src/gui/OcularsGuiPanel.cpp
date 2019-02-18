@@ -429,7 +429,7 @@ OcularsGuiPanel::~OcularsGuiPanel()
 	delete fieldTelescopeName; fieldTelescopeName = Q_NULLPTR;
 	delete fieldMagnification; fieldMagnification = Q_NULLPTR;
 	delete fieldExitPupil; fieldExitPupil = Q_NULLPTR;
-	delete fieldFov;	fieldFov = Q_NULLPTR;
+	delete fieldFov; fieldFov = Q_NULLPTR;
 	delete fieldRayleighCriterion; fieldRayleighCriterion = Q_NULLPTR;
 	delete fieldDawesCriterion; fieldDawesCriterion = Q_NULLPTR;
 	delete fieldAbbeyCriterion; fieldAbbeyCriterion = Q_NULLPTR;
