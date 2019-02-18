@@ -8,6 +8,7 @@ import re
 import percache
 import os
 from collections import defaultdict
+from __future__ import print_function
 
 def snt_data():
     """

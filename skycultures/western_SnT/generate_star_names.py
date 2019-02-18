@@ -10,6 +10,7 @@ import re
 import percache
 from astroquery.vizier import Vizier
 from collections import defaultdict
+from __future__ import print_function
 
 # livesync=True so that even if we ctrl-c out of
 # the program, any previously cached values will
