@@ -915,27 +915,13 @@ void S3DRenderer::calculateLighting()
 		lightInfo.directionalSource = LightParameters::DS_Sun;
 	}
 	// "else" is required now, else we have lunar shadow with sun above horizon...
+	// and "else" implies sinSunAngle<-0.1 or sun <-6 degrees.
 	else if (sinMoonAngle>0.0f)
 	{
 		float moonBrightness = std::sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1.0f)/2.0f) * LUNAR_BRIGHTNESS_FACTOR;
 		moonBrightness -= (ambientBrightness-0.05f)/2.0f;
 		moonBrightness = qMax(0.0f,moonBrightness);
-		if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-		{
-			//interpolate directional brightness between sun and moon
-			float t = sinSunAngle/-0.1f;
-			directionalBrightness = (1.0f-t) * directionalBrightness + t*moonBrightness;
-			/*
-		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
-		    //but that does not seem to have much of an effect
-		    if(moonBrightness>0)
-		    {
-			    lightPosition = (1.0-t) * sunPosition + (double)t * moonPosition;
-			    lightPosition.normalize();
-		    }
-		    */
-		}
-		else if (moonBrightness >0)
+		if (moonBrightness > 0.0f)
 		{
 			directionalBrightness = moonBrightness;
 			lightPosition = moonPosition;
@@ -950,23 +936,7 @@ void S3DRenderer::calculateLighting()
 		float venusBrightness = std::sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
 		venusBrightness -= (ambientBrightness-0.05)/2.0f;
 		venusBrightness = qMax(0.0f, venusBrightness);
-
-		if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-		{
-			//interpolate directional brightness between sun and venus
-			float t = sinSunAngle/-0.1f;
-			directionalBrightness = (1.0f-t) * directionalBrightness + t*venusBrightness;
-			/*
-		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
-		    //but that does not seem to have much of an effect
-		    if(venusBrightness>0)
-		    {
-			    lightPosition = (1.0-t) * sunPosition + (double)t * venusPosition;
-			    lightPosition.normalize();
-		    }
-		    */
-		}
-		else if (venusBrightness > 0.0f)
+		if (venusBrightness > 0.0f)
 		{
 			directionalBrightness = venusBrightness;
 			lightPosition = venusPosition;
@@ -975,12 +945,6 @@ void S3DRenderer::calculateLighting()
 		} else lightInfo.directionalSource = LightParameters::DS_Venus_Ambient;
 		//Alternately, construct a term around Venus brightness, like
 		// directionalBrightness=(mag/-100)
-	}
-	else if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-	{
-		//let sunlight fall off to zero
-		float t = sinSunAngle/-0.1f;
-		directionalBrightness = (1.0f - t) * directionalBrightness;
 	}
 
 	//convert to float

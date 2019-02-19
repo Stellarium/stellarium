@@ -33,7 +33,7 @@
 
 template<typename T> inline bool isNan(T value)
 {
-	return value != value;
+	return value != value; // lgtm [cpp/comparison-of-identical-expressions]
 }
 
 template<typename T> inline bool isInf(T value)

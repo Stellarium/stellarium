@@ -618,7 +618,7 @@ void MeteorShowersMgr::displayMessage(const QString& message, const QString hexC
 
 void MeteorShowersMgr::locationChanged(const StelLocation &location)
 {
-	m_onEarth = location.planetName == "Earth";
+	m_onEarth = (location.planetName == "Earth");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
