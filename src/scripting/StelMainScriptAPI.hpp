@@ -833,7 +833,7 @@ public slots:
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
-	//! @returns Julian day.
+	//! @return Julian day.
 	static double jdFromDateString(const QString& dt, const QString& spec);
 
 	// Methods wait() and waitFor() were added for documentation.
@@ -862,7 +862,14 @@ public slots:
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
 	static bool isModuleLoaded(const QString& moduleID);
 
-	//! return the name of platform where running Stellarium.
+	//! @return The name of platform where running Stellarium. Keys:
+	//! - FreeBSD
+	//! - OpenBSD
+	//! - NetBSD
+	//! - Linux
+	//! - Windows
+	//! - macOS
+	//! - Unknown
 	QString getPlatformName(void) const;
 
 	//! Get the current status of media playback support.
