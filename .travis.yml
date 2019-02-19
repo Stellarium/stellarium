@@ -269,6 +269,10 @@ before_script:
   - sleep 3 # give xvfb some time to start
   - mkdir build
   - cd build
+  - if [[ "$COVERAGE" == true ]]; then
+      export COVERALLS_SERVICE_NAME=travis-ci;
+      export COVERALLS_REPO_TOKEN=ZfenarpTMDtgnN65m0TiARXS5XD1wqcNq;
+    fi
 
 script:
   - cmake -DENABLE_TESTING=1 ..
