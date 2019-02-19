@@ -89,7 +89,7 @@ void ZodiacalLight::init()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(handleLocationChanged(StelLocation)));
 }
 
-void ZodiacalLight::handleLocationChanged(StelLocation loc)
+void ZodiacalLight::handleLocationChanged(const StelLocation &loc)
 {
 	// This just forces update() to re-compute longitude.
 	Q_UNUSED(loc);

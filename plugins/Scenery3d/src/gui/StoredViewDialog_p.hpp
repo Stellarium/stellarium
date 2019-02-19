@@ -125,7 +125,7 @@ public:
 	}
 
 
-	QModelIndex addUserView(StoredView v)
+	QModelIndex addUserView(StoredView v) // lgtm [cpp/large-parameter] ?
 	{
 		int idx = global.size() + user.size();
 		beginInsertRows(QModelIndex(),idx,idx);

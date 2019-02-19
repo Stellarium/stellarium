@@ -616,7 +616,7 @@ void MeteorShowersMgr::displayMessage(const QString& message, const QString hexC
 	m_messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20 * m_messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
-void MeteorShowersMgr::locationChanged(StelLocation location)
+void MeteorShowersMgr::locationChanged(const StelLocation &location)
 {
 	m_onEarth = location.planetName == "Earth";
 }
