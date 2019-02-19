@@ -275,8 +275,6 @@ script:
   - make -j5
   - ctest --output-on-failure
   - if [[ "$COVERAGE" == true ]]; then
-      export TRAVIS_JOB_ID=${TRAVIS_JOB_ID};
-      export TRAVIS_BRANCH=${TRAVIS_BRANCH};
       make coverage;
     fi
 
