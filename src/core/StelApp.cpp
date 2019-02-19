@@ -118,10 +118,6 @@ Q_IMPORT_PLUGIN(SatellitesStelPluginInterface)
 Q_IMPORT_PLUGIN(TextUserInterfaceStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_LOGBOOK
-Q_IMPORT_PLUGIN(LogBookStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_OCULARS
 Q_IMPORT_PLUGIN(OcularsStelPluginInterface)
 #endif
