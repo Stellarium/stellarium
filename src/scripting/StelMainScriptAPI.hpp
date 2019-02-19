@@ -860,7 +860,14 @@ public slots:
 
 	//! return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
 	//! @param moduleID the QObject name of the module instance, by convention it is equal to the class name.
-	static bool isModuleLoaded(const QString moduleID);
+	static bool isModuleLoaded(const QString& moduleID);
+
+	//! return the name of platform where running Stellarium.
+	QString getPlatformName(void) const;
+
+	//! Get the current status of media playback support.
+	//! @return The current status of media playback support.
+	bool isMediaPlaybackSupported(void) const;
 
 signals:
 

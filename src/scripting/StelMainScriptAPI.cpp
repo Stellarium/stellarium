@@ -1521,10 +1521,42 @@ QString StelMainScriptAPI::getEnv(const QString &var)
 #endif
 }
 
-
 // return whether a particular module has been loaded. Mostly useful to check whether a module available as plugin is active.
-bool StelMainScriptAPI::isModuleLoaded(const QString moduleID)
+bool StelMainScriptAPI::isModuleLoaded(const QString &moduleID)
 {
 	StelModule *module= StelApp::getInstance().getModuleMgr().getModule (moduleID, true);
 	return (bool)module;
+}
+
+// return the name of platform where running Stellarium
+QString StelMainScriptAPI::getPlatformName(void) const
+{
+	// Get info about operating system
+	QString os = StelUtils::getOperatingSystemInfo();
+	if (os.contains("FreeBSD", Qt::CaseInsensitive))
+		os = "FreeBSD";
+	else if (os.contains("NetBSD", Qt::CaseInsensitive))
+		os = "NetBSD";
+	else if (os.contains("OpenBSD", Qt::CaseInsensitive))
+		os = "OpenBSD";
+	else if (os.contains("linux", Qt::CaseInsensitive))
+		os = "Linux";
+	else if (os.contains("windows", Qt::CaseInsensitive) || os.contains("winrt", Qt::CaseInsensitive))
+		os = "Windows";
+	else if (os.contains("osx", Qt::CaseInsensitive) || os.contains("macos", Qt::CaseInsensitive))
+		os = "macOS";
+	else
+		os = "Unknown";
+
+	return os;
+}
+
+// Get the current status of media playback support
+bool StelMainScriptAPI::isMediaPlaybackSupported(void) const
+{
+	#ifdef ENABLE_MEDIA
+	return true;
+	#else
+	return false;
+	#endif
 }
