@@ -284,7 +284,7 @@ after_success:
     fi
   - if [[ "$COVERAGE" == true ]]; then
       lcov --gcov-tool "/usr/bin/gcov-7" --remove coverage.info '*_autogen/*' '*/ui_*.h' '*/qrc_*.cpp' '*/qt5/*' '/usr/*' '*gmock*' --output-file coverage.info;
-      coveralls-lcov coverage.info;
+      COVERALLS_REPO_TOKEN=aeXHzgEWNKXmu1X0eQBph81JSoOHyC3wO coveralls-lcov coverage.info;
     fi
 
 notifications:
