@@ -274,7 +274,11 @@ script:
   - cmake -DENABLE_TESTING=1 ..
   - make -j5
   - ctest --output-on-failure
-  - if [[ "$COVERAGE" == true ]]; then make coverage ; fi
+  - if [[ "$COVERAGE" == true ]]; then
+      export TRAVIS_JOB_ID=${TRAVIS_JOB_ID};
+      export TRAVIS_BRANCH=${TRAVIS_BRANCH};
+      make coverage;
+    fi
 
 after_success:
   - if [[ "$TRANSLATE" == true && "$TRAVIS_BRANCH" == "master" && "$TRAVIS_PULL_REQUEST" == false && "$TRAVIS_REPO_SLUG" == "Stellarium/stellarium" ]]; then
