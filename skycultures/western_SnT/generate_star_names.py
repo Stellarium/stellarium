@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # vim: syntax=python ts=4 sts=4 sw=4 expandtab
 
 # Reads the Sky & Telescope official star names document (.docx)
@@ -10,7 +10,6 @@ import re
 import percache
 from astroquery.vizier import Vizier
 from collections import defaultdict
-from __future__ import print_function
 
 # livesync=True so that even if we ctrl-c out of
 # the program, any previously cached values will

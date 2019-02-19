@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 from astroquery.vizier import Vizier
 from astropy.coordinates import SkyCoord, Angle
@@ -8,7 +8,6 @@ import re
 import percache
 import os
 from collections import defaultdict
-from __future__ import print_function
 
 def snt_data():
     """
