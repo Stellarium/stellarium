@@ -739,7 +739,7 @@ public slots:
 	void exit();
 
 	//! Close Stellarium
-	static void quitStellarium();
+	void quitStellarium();
 
 	//! Return a QStringlist of all available properties. Useful for script development...
 	static QStringList getPropertyList();

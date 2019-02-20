@@ -457,7 +457,8 @@ static void sSphereMapTexCoordFast(float rho_div_fov, const float costheta, cons
 
 void StelPainter::sSphereMap(float radius, int slices, int stacks, float textureFov, int orientInside)
 {
-	float rho,x,y,z;
+	float rho;
+	double x,y,z;
 	int i, j;
 	const float* cos_sin_rho = StelUtils::ComputeCosSinRho(stacks);
 	const float* cos_sin_rho_p;
@@ -1777,7 +1778,7 @@ void StelPainter::drawLine2d(const float x1, const float y1, const float x2, con
 // This used to draw a full sphere. Since 0.13 it's possible to have a spherical zone only.
 void StelPainter::sSphere(const float radius, const float oneMinusOblateness, const int slices, const int stacks, const int orientInside, const bool flipTexture, const float topAngle, const float bottomAngle)
 {
-	GLfloat x, y, z;
+	double x, y, z;
 	GLfloat s=0.f, t=0.f;
 	GLint i, j;
 	GLfloat nsign;
@@ -1861,7 +1862,7 @@ StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOb
                           int orientInside, bool flipTexture, float topAngle, float bottomAngle)
 {
 	StelVertexArray result(StelVertexArray::Triangles);
-	GLfloat x, y, z;
+	double x, y, z;
 	GLfloat s=0.f, t=0.f;
 	GLint i, j;
 	GLfloat nsign;
@@ -1938,7 +1939,7 @@ void StelPainter::sCylinder(float radius, float height, int slices, int orientIn
 	texCoordArray.clear();
 	vertexArray.clear();
 	float s = 0.f;
-	float x, y;
+	double x, y;
 	const float ds = 1.f / slices;
 	const float da = 2.f * M_PI / slices;
 	for (int i = 0; i <= slices; ++i)
