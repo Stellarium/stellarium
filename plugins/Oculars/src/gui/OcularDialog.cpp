@@ -493,6 +493,7 @@ void OcularDialog::initAboutText()
 	html += "<tr><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Rumen G. Bogdanovski &lt;rumen@skyarchive.org&gt;</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr>";
+	html += "<tr><td>Matt Hughes (" + q_("Sensor crop overlay feature") + ")</td></tr>";
 	html += "</table>";
 
 	//Overview

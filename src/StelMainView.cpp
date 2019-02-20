@@ -212,7 +212,8 @@ public:
 
 	virtual ~NightModeGraphicsEffect()
 	{
-		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
+		// NOTE: Why Q_ASSERT is here and why destructor is not marked as 'override'?
+		//Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 		//clean up fbo
 		delete fbo;
 	}
@@ -441,6 +442,7 @@ protected:
 #ifdef Q_OS_WIN
 	bool event(QEvent * e) Q_DECL_OVERRIDE
 	{
+		bool r = false;
 		switch (e->type()){
 			case QEvent::TouchBegin:
 			case QEvent::TouchUpdate:
@@ -452,18 +454,17 @@ protected:
 				if (touchPoints.count() == 1)
 					setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-				return true;
+				r = true;
 				break;
 			}
-
 			case QEvent::Gesture:
-				setAcceptedMouseButtons(0);
-				return gestureEvent(static_cast<QGestureEvent*>(e));
+				setAcceptedMouseButtons(Q_NULLPTR);
+				r = gestureEvent(static_cast<QGestureEvent*>(e));
 				break;
-
 			default:
-				return QGraphicsObject::event(e);
+				r = QGraphicsObject::event(e);
 		}
+		return r;
 	}
 
 private:

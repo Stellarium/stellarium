@@ -39,7 +39,7 @@ void TestStelIniParser::initTestCase()
 		QFAIL(qPrintable("could not set the working directory to: " + workingDir));
 	}
 
-	qDebug() << "working directory: " << QDir::toNativeSeparators(QDir::currentPath());
+	//qDebug() << "working directory: " << QDir::toNativeSeparators(QDir::currentPath());
 
 	tempIniFile = workingDir + "/test.ini";
 	QFile f(tempIniFile);
@@ -72,8 +72,8 @@ void TestStelIniParser::testBase()
 	double someFloatNumber = settings.value("some_float_number", 1.).toDouble();
 
 	// 3: compare settings
-	QCOMPARE(someOption, "value");
-	QCOMPARE(someFlag, true);
-	QCOMPARE(someIntNumber, 10);
-	QCOMPARE(someFloatNumber, 10.);
+	QVERIFY(someOption=="value");
+	QVERIFY(someFlag==true);
+	QVERIFY(someIntNumber==10);
+	QVERIFY(qAbs(someFloatNumber-10.)<=1e-6);
 }

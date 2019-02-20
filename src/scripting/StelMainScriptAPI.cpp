@@ -772,7 +772,8 @@ void StelMainScriptAPI::exit()
 
 void StelMainScriptAPI::quitStellarium()
 {
-	QCoreApplication::exit();
+	emit(requestExit()); // exit from script
+	StelApp::getInstance().quit(); // quit from planetarium
 }
 
 QStringList StelMainScriptAPI::getPropertyList() const
