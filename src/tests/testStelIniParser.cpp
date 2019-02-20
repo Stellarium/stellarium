@@ -56,20 +56,21 @@ void TestStelIniParser::testBase()
 	{
 		QFAIL(qPrintable("could not open test INI file " + tempIniFile));
 	}
-	QSettings settings(tempIniFile, StelIniFormat);
 
-	// 1: fill settings
-	settings.setValue("some_option", "value");
-	settings.setValue("some_flag", true);
-	settings.setValue("some_int_number", 10);
-	settings.setValue("some_float_number", 10.);
-	settings.sync();
+	// 1: write settings
+	QSettings settingsWrite(tempIniFile, StelIniFormat);
+	settingsWrite.setValue("some_option", "value");
+	settingsWrite.setValue("some_flag", true);
+	settingsWrite.setValue("some_int_number", 10);
+	settingsWrite.setValue("some_float_number", 10.);
+	settingsWrite.sync();
 
 	// 2: read settings
-	QString someOption = settings.value("some_option", "oops").toString();
-	bool someFlag = settings.value("some_flag", false).toBool();
-	int someIntNumber = settings.value("some_int_number", 1).toInt();
-	double someFloatNumber = settings.value("some_float_number", 1.).toDouble();
+	QSettings settingsRead(tempIniFile, StelIniFormat);
+	QString someOption = settingsRead.value("some_option", "oops").toString();
+	bool someFlag = settingsRead.value("some_flag", false).toBool();
+	int someIntNumber = settingsRead.value("some_int_number", 1).toInt();
+	double someFloatNumber = settingsRead.value("some_float_number", 1.).toDouble();
 
 	// 3: compare settings
 	QVERIFY(someOption=="value");
