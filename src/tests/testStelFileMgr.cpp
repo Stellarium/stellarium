@@ -285,4 +285,3 @@ void TestStelFileMgr::testListContentsDirAbs()
 	resultSetQueryExpected << "ls1" << "ls3";
 	QVERIFY(resultSetQuery==resultSetQueryExpected);
 }
-

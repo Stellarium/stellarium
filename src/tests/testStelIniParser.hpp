@@ -1,6 +1,6 @@
 /*
  * Stellarium
- * Copyright (C) 2009 Matthew Gates
+ * Copyright (C) 2019 Alexander Wolf
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,45 +17,22 @@
  * Foundation, Inc., 51 Franklin Street, Suite 500, Boston, MA  02110-1335, USA.
  */
 
-#ifndef TESTSTELFILEMGR_HPP
-#define TESTSTELFILEMGR_HPP
+#ifndef TESTSTELINIPARSER_HPP
+#define TESTSTELINIPARSER_HPP
 
 #include <QObject>
-#include <QString>
-#include <QStringList>
 #include <QTest>
-#include <QTemporaryDir>
 
-class StelFileMgr;
-
-class TestStelFileMgr : public QObject
+class TestStelIniParser : public QObject
 {
 Q_OBJECT
 private slots:
 	void initTestCase();
-	void testFindFileVanilla();
-	void testFindFileVanillaAbs();
-	void testFindFileFile();
-	void testFindFileFileAbs();
-	void testFindFileDir();
-	void testFindFileDirAbs();
-	void testFindFileNew();
-	void testFindFileNewAbs();
-	void testListContentsVanilla();
-	void testListContentsVanillaAbs();
-	void testListContentsFile();
-	void testListContentsFileAbs();
-	void testListContentsDir();
-	void testListContentsDirAbs();
+	void testBase();
 
 private:
 	QTemporaryDir tempDir;
-	QString workingDir;
-	QString partialPath1;
-	QString partialPath2;
-	QStringList testDirs;
-	QStringList testFiles;
+	QString tempIniFile;
 };
 
-#endif // _TESTSTELFILEMGR_HPP
-
+#endif // _TESTSTELINIPARSER_HPP

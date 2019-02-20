@@ -577,6 +577,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testStelJsonParser testStelJsonParser)
     SET_TARGET_PROPERTIES(testStelJsonParser PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testStelIniParser_SRCS
+        tests/testStelIniParser.hpp
+        tests/testStelIniParser.cpp
+    )
+    ADD_EXECUTABLE(testStelIniParser ${tests_testStelIniParser_SRCS})
+    TARGET_LINK_LIBRARIES(testStelIniParser ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelIniParser)
+    ADD_TEST(testStelIniParser testStelIniParser)
+    SET_TARGET_PROPERTIES(testStelIniParser PROPERTIES FOLDER "src/tests")
+
     SET(tests_testStelVertexArray_SRCS
         tests/testStelVertexArray.hpp
         tests/testStelVertexArray.cpp
