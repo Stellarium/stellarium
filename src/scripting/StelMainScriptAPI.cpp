@@ -102,7 +102,6 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	connect(this, SIGNAL(requestShowVideo(const QString&, bool)), StelApp::getInstance().getStelVideoMgr(), SLOT(showVideo(const QString&, bool)));
 
 	connect(this, SIGNAL(requestExit()), this->parent(), SLOT(stopScript()));
-	connect(this, SIGNAL(requestSetNightMode(bool)), &StelApp::getInstance(), SLOT(setVisionModeNight(bool)));
 	connect(this, SIGNAL(requestSetProjectionMode(QString)), StelApp::getInstance().getCore(), SLOT(setCurrentProjectionTypeKey(QString)));
 	connect(this, SIGNAL(requestSetSkyCulture(QString)), &StelApp::getInstance().getSkyCultureMgr(), SLOT(setCurrentSkyCultureID(QString)));
 	connect(this, SIGNAL(requestSetDiskViewport(bool)), StelApp::getInstance().getMainScriptAPIProxy(), SLOT(setDiskViewport(bool)));	
@@ -122,7 +121,7 @@ void StelMainScriptAPI::setJDay(double JD)
 
 //! Get the current date in Julian Day
 //! @return the Julian Date (UT)
-double StelMainScriptAPI::getJDay() const
+double StelMainScriptAPI::getJDay()
 {
 	return StelApp::getInstance().getCore()->getJD();
 }
@@ -136,7 +135,7 @@ void StelMainScriptAPI::setMJDay(double MJD)
 
 //! Get the current date in Modified Julian Day
 //! @return the Modified Julian Date
-double StelMainScriptAPI::getMJDay() const
+double StelMainScriptAPI::getMJDay()
 {
 	return StelApp::getInstance().getCore()->getMJDay();
 }
@@ -175,7 +174,7 @@ void StelMainScriptAPI::setDate(const QString& dateStr, const QString& spec, con
 //	}
 }
 
-QString StelMainScriptAPI::getDate(const QString& spec) const
+QString StelMainScriptAPI::getDate(const QString& spec)
 {
 	if (spec=="utc")
 		return StelUtils::julianDayToISO8601String(getJDay());
@@ -183,12 +182,12 @@ QString StelMainScriptAPI::getDate(const QString& spec) const
 		return StelUtils::julianDayToISO8601String(getJDay()+StelApp::getInstance().getCore()->getUTCOffset(getJDay())/24);
 }
 
-QString StelMainScriptAPI::getDeltaT() const
+QString StelMainScriptAPI::getDeltaT()
 {
 	return StelUtils::hoursToHmsStr(StelApp::getInstance().getCore()->getDeltaT()/3600.);
 }
 
-QString StelMainScriptAPI::getDeltaTAlgorithm() const
+QString StelMainScriptAPI::getDeltaTAlgorithm()
 {
 	return StelApp::getInstance().getCore()->getCurrentDeltaTAlgorithmKey();
 }
@@ -208,12 +207,12 @@ void StelMainScriptAPI::setTimeRate(double ts)
 
 //! Get time speed in JDay/sec
 //! @return time speed in JDay/sec
-double StelMainScriptAPI::getTimeRate() const
+double StelMainScriptAPI::getTimeRate()
 {
 	return StelApp::getInstance().getCore()->getTimeRate() / (0.00001157407407407407 * StelApp::getInstance().getScriptMgr().getScriptRate());
 }
 
-bool StelMainScriptAPI::isRealTime() const
+bool StelMainScriptAPI::isRealTime()
 {
 	return StelApp::getInstance().getCore()->getIsTimeNow();
 }
@@ -224,13 +223,9 @@ void StelMainScriptAPI::setRealTime()
 	StelApp::getInstance().getCore()->setTimeNow();
 }
 
-bool StelMainScriptAPI::isPlanetocentricCalculations() const
+bool StelMainScriptAPI::isPlanetocentricCalculations()
 {
-	bool r = true;
-	if (StelApp::getInstance().getCore()->getUseTopocentricCoordinates())
-		r = false;
-
-	return r;
+	return !(StelApp::getInstance().getCore()->getUseTopocentricCoordinates());
 }
 
 void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
@@ -264,12 +259,12 @@ void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
 	core->moveObserverTo(loc, duration);
 }
 
-QString StelMainScriptAPI::getObserverLocation() const
+QString StelMainScriptAPI::getObserverLocation()
 {
 	return StelApp::getInstance().getCore()->getCurrentLocation().getID();
 }
 
-QVariantMap StelMainScriptAPI::getObserverLocationInfo() const
+QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	const PlanetP& planet = core->getCurrentPlanet();
@@ -301,7 +296,7 @@ void StelMainScriptAPI::setTimezone(QString tz)
 	core->setCurrentTimeZone(tz);
 }
 
-QStringList StelMainScriptAPI::getAllTimezoneNames() const
+QStringList StelMainScriptAPI::getAllTimezoneNames()
 {
 	return StelApp::getInstance().getLocationMgr().getAllTimezoneNames();
 }
@@ -331,7 +326,7 @@ void StelMainScriptAPI::setMinFps(float m)
 	StelMainView::getInstance().setMinFps(m);
 }
 
-float StelMainScriptAPI::getMinFps() const
+float StelMainScriptAPI::getMinFps()
 {
 	return StelMainView::getInstance().getMinFps();
 }
@@ -341,12 +336,12 @@ void StelMainScriptAPI::setMaxFps(float m)
 	StelMainView::getInstance().setMaxFps(m);
 }
 
-float StelMainScriptAPI::getMaxFps() const
+float StelMainScriptAPI::getMaxFps()
 {
 	return StelMainView::getInstance().getMaxFps();
 }
 
-QString StelMainScriptAPI::getMountMode() const
+QString StelMainScriptAPI::getMountMode()
 {
 	if (GETSTELMODULE(StelMovementMgr)->getMountMode() == StelMovementMgr::MountEquinoxEquatorial)
 		return "equatorial";
@@ -362,17 +357,17 @@ void StelMainScriptAPI::setMountMode(const QString& mode)
 		GETSTELMODULE(StelMovementMgr)->setMountMode(StelMovementMgr::MountAltAzimuthal);
 }
 
-bool StelMainScriptAPI::getNightMode() const
+bool StelMainScriptAPI::getNightMode()
 {
 	return StelApp::getInstance().getVisionModeNight();
 }
 
 void StelMainScriptAPI::setNightMode(bool b)
 {
-	emit(requestSetNightMode(b));
+	StelApp::getInstance().setVisionModeNight(b);
 }
 
-QString StelMainScriptAPI::getProjectionMode() const
+QString StelMainScriptAPI::getProjectionMode()
 {
 	return StelApp::getInstance().getCore()->getCurrentProjectionTypeKey();
 }
@@ -382,12 +377,12 @@ void StelMainScriptAPI::setProjectionMode(const QString& id)
 	emit(requestSetProjectionMode(id));
 }
 
-QStringList StelMainScriptAPI::getAllSkyCultureIDs() const
+QStringList StelMainScriptAPI::getAllSkyCultureIDs()
 {
 	return StelApp::getInstance().getSkyCultureMgr().getSkyCultureListIDs();
 }
 
-QString StelMainScriptAPI::getSkyCulture() const
+QString StelMainScriptAPI::getSkyCulture()
 {
 	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID();
 }
@@ -398,17 +393,17 @@ void StelMainScriptAPI::setSkyCulture(const QString& id)
 	emit(requestSetSkyCulture(id));
 }
 
-QString StelMainScriptAPI::getSkyCultureName() const
+QString StelMainScriptAPI::getSkyCultureName()
 {
 	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureEnglishName();
 }
 
-QString StelMainScriptAPI::getSkyCultureNameI18n() const
+QString StelMainScriptAPI::getSkyCultureNameI18n()
 {
 	return StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureNameI18();
 }
 
-bool StelMainScriptAPI::getFlagGravityLabels() const
+bool StelMainScriptAPI::getFlagGravityLabels()
 {
 	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getFlagGravityLabels();
 }
@@ -418,7 +413,7 @@ void StelMainScriptAPI::setFlagGravityLabels(bool b)
 	StelApp::getInstance().getCore()->setFlagGravityLabels(b);
 }
 
-bool StelMainScriptAPI::getDiskViewport() const
+bool StelMainScriptAPI::getDiskViewport()
 {
 	return StelApp::getInstance().getCore()->getProjection(StelCore::FrameJ2000)->getMaskType() == StelProjector::MaskDisk;
 }
@@ -646,12 +641,12 @@ void StelMainScriptAPI::dropSound(const QString& id)
 	emit(requestDropSound(id));
 }
 
-qint64 StelMainScriptAPI::getSoundPosition(const QString& id) const
+qint64 StelMainScriptAPI::getSoundPosition(const QString& id)
 {
 	return StelApp::getInstance().getStelAudioMgr()->position(id);
 }
 
-qint64 StelMainScriptAPI::getSoundDuration(const QString& id) const
+qint64 StelMainScriptAPI::getSoundDuration(const QString& id)
 {
 	return StelApp::getInstance().getStelAudioMgr()->duration(id);
 }
@@ -718,27 +713,27 @@ void StelMainScriptAPI::showVideo(const QString& id, bool show)
 	emit(requestShowVideo(id, show));
 }
 
-qint64 StelMainScriptAPI::getVideoDuration(const QString& id) const
+qint64 StelMainScriptAPI::getVideoDuration(const QString& id)
 {
 	return StelApp::getInstance().getStelVideoMgr()->getVideoDuration(id);
 }
 
-qint64 StelMainScriptAPI::getVideoPosition(const QString& id) const
+qint64 StelMainScriptAPI::getVideoPosition(const QString& id)
 {
 	return StelApp::getInstance().getStelVideoMgr()->getVideoPosition(id);
 }
 
-int StelMainScriptAPI::getScreenWidth() const
+int StelMainScriptAPI::getScreenWidth()
 {
 	return StelMainView::getInstance().size().width();
 }
 
-int StelMainScriptAPI::getScreenHeight() const
+int StelMainScriptAPI::getScreenHeight()
 {
 	return StelMainView::getInstance().size().height();
 }
 
-double StelMainScriptAPI::getScriptRate() const
+double StelMainScriptAPI::getScriptRate()
 {
         return StelApp::getInstance().getScriptMgr().getScriptRate();
 }
@@ -776,7 +771,7 @@ void StelMainScriptAPI::quitStellarium()
 	StelApp::getInstance().quit(); // quit from planetarium
 }
 
-QStringList StelMainScriptAPI::getPropertyList() const
+QStringList StelMainScriptAPI::getPropertyList()
 {
 	return StelApp::getInstance().getStelPropertyManager()->getPropertyList();
 }
@@ -787,7 +782,7 @@ void StelMainScriptAPI::debug(const QString& s)
 	StelApp::getInstance().getScriptMgr().debug(s);
 }
 
-void StelMainScriptAPI::output(const QString &s) const
+void StelMainScriptAPI::output(const QString &s)
 {
 	StelApp::getInstance().getScriptMgr().output(s);
 }
@@ -822,7 +817,7 @@ QString StelMainScriptAPI::mapToString(const QVariantMap& map)
 	return res;
 }
 
-void StelMainScriptAPI::resetOutput(void) const
+void StelMainScriptAPI::resetOutput(void)
 {
 	StelApp::getInstance().getScriptMgr().resetOutput();
 }
@@ -906,13 +901,13 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	return StelUtils::getJDFromSystem();
 }
 
-void StelMainScriptAPI::wait(double t) const {
+void StelMainScriptAPI::wait(double t) {
 	QEventLoop loop;
 	QTimer::singleShot(1000*t, &loop, SLOT(quit()));
 	loop.exec();
 }
 
-void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec) const
+void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec)
 {
 	double deltaJD = jdFromDateString(dt, spec) - getJDay();
 	double timeRate = getTimeRate();
@@ -933,7 +928,7 @@ void StelMainScriptAPI::waitFor(const QString& dt, const QString& spec) const
 }
 
 
-void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer) const
+void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	omgr->setFlagSelectedObjectPointer(pointer);
@@ -943,7 +938,7 @@ void StelMainScriptAPI::selectObjectByName(const QString& name, bool pointer) co
 	}
 }
 
-void StelMainScriptAPI::selectConstellationByName(const QString& name) const
+void StelMainScriptAPI::selectConstellationByName(const QString& name)
 {
 	StelObjectP constellation = Q_NULLPTR;
 	if (!name.isEmpty())
@@ -954,13 +949,13 @@ void StelMainScriptAPI::selectConstellationByName(const QString& name) const
 }
 
 //DEPRECATED: Use getObjectInfo()
-QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name) const
+QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
 {
 	qWarning() << "WARNING: script function getObjectPosition() is deprecated and will be removed. Please update script to use getObjectInfo()";
 	return getObjectInfo(name);
 }
 
-QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name) const
+QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
@@ -968,7 +963,7 @@ QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name) const
 	return StelObjectMgr::getObjectInfo(obj);
 }
 
-QVariantMap StelMainScriptAPI::getSelectedObjectInfo() const
+QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 {
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	QVariantMap map;
@@ -1260,7 +1255,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	}
 }
 
-double StelMainScriptAPI::getViewAltitudeAngle() const
+double StelMainScriptAPI::getViewAltitudeAngle()
 {
 	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double alt, azi;
@@ -1268,7 +1263,7 @@ double StelMainScriptAPI::getViewAltitudeAngle() const
 	return alt*180/M_PI; // convert to degrees from radians
 }
 
-double StelMainScriptAPI::getViewAzimuthAngle() const
+double StelMainScriptAPI::getViewAzimuthAngle()
 {
 	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToAltAz(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double alt, azi;
@@ -1279,7 +1274,7 @@ double StelMainScriptAPI::getViewAzimuthAngle() const
 	return std::fmod(((azi*180/M_PI)*-1)+180., 360.);
 }
 
-double StelMainScriptAPI::getViewRaAngle() const
+double StelMainScriptAPI::getViewRaAngle()
 {
 	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double ra, dec;
@@ -1288,7 +1283,7 @@ double StelMainScriptAPI::getViewRaAngle() const
 	return std::fmod((ra*180/M_PI)+360., 360.); // convert to degrees from radians
 }
 
-double StelMainScriptAPI::getViewDecAngle() const
+double StelMainScriptAPI::getViewDecAngle()
 {
 	const Vec3d& current = StelApp::getInstance().getCore()->j2000ToEquinoxEqu(GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000(), StelCore::RefractionOff);
 	double ra, dec;
@@ -1296,7 +1291,7 @@ double StelMainScriptAPI::getViewDecAngle() const
 	return dec*180/M_PI; // convert to degrees from radians
 }
 
-double StelMainScriptAPI::getViewRaJ2000Angle() const
+double StelMainScriptAPI::getViewRaJ2000Angle()
 {
 	Vec3d current = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 	double ra, dec;
@@ -1305,7 +1300,7 @@ double StelMainScriptAPI::getViewRaJ2000Angle() const
 	return std::fmod((ra*180/M_PI)+360., 360.); // convert to degrees from radians
 }
 
-double StelMainScriptAPI::getViewDecJ2000Angle() const
+double StelMainScriptAPI::getViewDecJ2000Angle()
 {
 	Vec3d current = GETSTELMODULE(StelMovementMgr)->getViewDirectionJ2000();
 	double ra, dec;
@@ -1411,7 +1406,7 @@ void StelMainScriptAPI::moveToGalLongLat(const QString& lon, const QString& lat,
 	mvmgr->moveToJ2000(aimJ2000, aimUp, duration);
 }
 
-QString StelMainScriptAPI::getAppLanguage() const
+QString StelMainScriptAPI::getAppLanguage()
 {
 	return StelApp::getInstance().getLocaleMgr().getAppLanguage();
 }
@@ -1421,7 +1416,7 @@ void StelMainScriptAPI::setAppLanguage(QString langCode)
 	StelApp::getInstance().getLocaleMgr().setAppLanguage(langCode);
 }
 
-QString StelMainScriptAPI::getSkyLanguage() const
+QString StelMainScriptAPI::getSkyLanguage()
 {
 	return StelApp::getInstance().getLocaleMgr().getSkyLanguage();
 }
@@ -1431,7 +1426,7 @@ void StelMainScriptAPI::setSkyLanguage(QString langCode)
 	StelApp::getInstance().getLocaleMgr().setSkyLanguage(langCode);
 }
 
-QString StelMainScriptAPI::translate(QString englishText) const
+QString StelMainScriptAPI::translate(QString englishText)
 {
 	return StelApp::getInstance().getLocaleMgr().getScriptsTranslator().qtranslate(englishText);
 }
@@ -1451,7 +1446,7 @@ void StelMainScriptAPI::setMilkyWayIntensity(double i)
 	GETSTELMODULE(MilkyWay)->setIntensity(i);
 }
 
-double StelMainScriptAPI::getMilkyWayIntensity() const
+double StelMainScriptAPI::getMilkyWayIntensity()
 {
 	return GETSTELMODULE(MilkyWay)->getIntensity();
 }
@@ -1466,12 +1461,12 @@ void StelMainScriptAPI::setZodiacalLightIntensity(double i)
 	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
 }
 
-double StelMainScriptAPI::getZodiacalLightIntensity() const
+double StelMainScriptAPI::getZodiacalLightIntensity()
 {
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
 }
 
-int StelMainScriptAPI::getBortleScaleIndex() const
+int StelMainScriptAPI::getBortleScaleIndex()
 {
 	return StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex();
 }
@@ -1486,12 +1481,12 @@ void StelMainScriptAPI::setDSSMode(bool b)
 	GETSTELMODULE(ToastMgr)->setFlagSurveyShow(b);
 }
 
-bool StelMainScriptAPI::isDSSModeEnabled() const
+bool StelMainScriptAPI::isDSSModeEnabled()
 {
 	return GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
 }
 
-QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi) const
+QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
 {
 	Vec3d aim, v;
 	double dAlt = StelUtils::getDecAngle(alt);
@@ -1530,7 +1525,7 @@ bool StelMainScriptAPI::isModuleLoaded(const QString &moduleID)
 }
 
 // return the name of platform where running Stellarium
-QString StelMainScriptAPI::getPlatformName(void) const
+QString StelMainScriptAPI::getPlatformName(void)
 {
 	// Get info about operating system
 	QString os = StelUtils::getOperatingSystemInfo();
@@ -1553,7 +1548,7 @@ QString StelMainScriptAPI::getPlatformName(void) const
 }
 
 // Get the current status of media playback support
-bool StelMainScriptAPI::isMediaPlaybackSupported(void) const
+bool StelMainScriptAPI::isMediaPlaybackSupported(void)
 {
 	#ifdef ENABLE_MEDIA
 	return true;
