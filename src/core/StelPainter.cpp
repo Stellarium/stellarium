@@ -479,6 +479,7 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 	static QVector<float> texCoordArr;
 
 	// draw intermediate stacks as quad strips
+	// LGTM comments: the floats are always <=1. We still prefer float multiplication (with insignificant accuracy loss) for speed.
 	if (!orientInside) // nsign==1
 	{
 		for (i = 0,cos_sin_rho_p=cos_sin_rho,rho=0.f; i < imax; ++i,cos_sin_rho_p+=2,rho+=drho)
@@ -487,14 +488,14 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 			texCoordArr.resize(0);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
-				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
-				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1]; // lgtm [cpp/integer-multiplication-cast-to-long]
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];  // lgtm [cpp/integer-multiplication-cast-to-long]
 				z = cos_sin_rho_p[0];
 				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 
-				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
-				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3]; // lgtm [cpp/integer-multiplication-cast-to-long]
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];  // lgtm [cpp/integer-multiplication-cast-to-long]
 				z = cos_sin_rho_p[2];
 				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
@@ -511,14 +512,14 @@ void StelPainter::sSphereMap(float radius, int slices, int stacks, float texture
 			texCoordArr.resize(0);
 			for (j=0,cos_sin_theta_p=cos_sin_theta;j<=slices;++j,cos_sin_theta_p+=2)
 			{
-				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
-				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[3]; // lgtm [cpp/integer-multiplication-cast-to-long]
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[3];  // lgtm [cpp/integer-multiplication-cast-to-long]
 				z = cos_sin_rho_p[2];
 				sSphereMapTexCoordFast(rho + drho, cos_sin_theta_p[0], -cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
 
-				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
-				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
+				x = -cos_sin_theta_p[1] * cos_sin_rho_p[1]; // lgtm [cpp/integer-multiplication-cast-to-long]
+				y = cos_sin_theta_p[0] * cos_sin_rho_p[1];  // lgtm [cpp/integer-multiplication-cast-to-long]
 				z = cos_sin_rho_p[0];
 				sSphereMapTexCoordFast(rho, cos_sin_theta_p[0], -cos_sin_theta_p[1], texCoordArr);
 				vertexArr << x*radius << y*radius << z*radius;
@@ -1827,19 +1828,20 @@ void StelPainter::sSphere(const float radius, const float oneMinusOblateness, co
 	colorArr.resize(0);
 	indiceArr.resize(0);
 
+	// LGTM comments: the floats are always <=1. We still prefer float multiplication (with insignificant accuracy loss) for speed.
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		s = !flipTexture ? 0.f : 1.f;
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
 		{
-			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
-			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
-			z = nsign * cos_sin_rho_p[0];
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1]; // lgtm [cpp/integer-multiplication-cast-to-long]
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];  // lgtm [cpp/integer-multiplication-cast-to-long]
+			z = nsign * cos_sin_rho_p[0];               // lgtm [cpp/integer-multiplication-cast-to-long]
 			texCoordArr << s << t;
 			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
-			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
-			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
-			z = nsign * cos_sin_rho_p[2];
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3]; // lgtm [cpp/integer-multiplication-cast-to-long]
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];  // lgtm [cpp/integer-multiplication-cast-to-long]
+			z = nsign * cos_sin_rho_p[2];               // lgtm [cpp/integer-multiplication-cast-to-long]
 			texCoordArr << s << t - dt;
 			vertexArr << x * radius << y * radius << z * oneMinusOblateness * radius;
 			s += ds;
@@ -1900,19 +1902,20 @@ StelVertexArray StelPainter::computeSphereNoLight(float radius, float oneMinusOb
 	const GLfloat dt = nsign / stacks; // from inside texture is reversed
 
 	// draw intermediate as quad strips
+	// LGTM comments: the floats are always <=1. We still prefer float multiplication (with insignificant accuracy loss) for speed.
 	for (i = 0,cos_sin_rho_p = cos_sin_rho; i < stacks; ++i,cos_sin_rho_p+=2)
 	{
 		s = !flipTexture ? 0.f : 1.f;
 		for (j = 0,cos_sin_theta_p = cos_sin_theta; j<=slices;++j,cos_sin_theta_p+=2)
 		{
-			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1];
-			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];
-			z = nsign * cos_sin_rho_p[0];
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[1]; // lgtm [cpp/integer-multiplication-cast-to-long]
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[1];  // lgtm [cpp/integer-multiplication-cast-to-long]
+			z = nsign * cos_sin_rho_p[0];               // lgtm [cpp/integer-multiplication-cast-to-long]
 			result.texCoords << Vec2f(s,t);
 			result.vertex << Vec3d(x*radius, y*radius, z*oneMinusOblateness*radius);
-			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3];
-			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];
-			z = nsign * cos_sin_rho_p[2];
+			x = -cos_sin_theta_p[1] * cos_sin_rho_p[3]; // lgtm [cpp/integer-multiplication-cast-to-long]
+			y = cos_sin_theta_p[0] * cos_sin_rho_p[3];  // lgtm [cpp/integer-multiplication-cast-to-long]
+			z = nsign * cos_sin_rho_p[2];               // lgtm [cpp/integer-multiplication-cast-to-long]
 			result.texCoords << Vec2f(s, t-dt);
 			result.vertex << Vec3d(x*radius, y*radius, z*oneMinusOblateness*radius);
 			s += ds;
