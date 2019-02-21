@@ -451,7 +451,7 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	else
 	{
 		const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
-		const float zoomDuration = 0.2f * qAbs(numSteps);
+		const float zoomDuration = 0.2f;
 		zoomTo(getAimFov() * zoomFactor, zoomDuration);
 	}
 	event->accept();
