@@ -135,6 +135,7 @@ QVariant Cell::readValue() const
 
 		qint32 styleNo = d->styleNumber;
 
+		/*
 		if (styleNo == 10)
 		{
 		}
@@ -149,6 +150,7 @@ QVariant Cell::readValue() const
 		if (styleNo == 12) 
 		{
 		}
+		*/
 
 		if (styleNo == 13) // (HH:mm:ss) 
 		{
