@@ -2945,62 +2945,55 @@ void AstroCalcDialog::calculatePhenomena()
 					objects.append(object);
 			}
 			break;
-		case 2: // Asteroids
+		case 2:
+		case 3:
+		case 4:
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 20:
+		{
+			Planet::PlanetType pType = Planet::isUNDEFINED;
+			switch (obj2Type)
+			{
+				case 2: // Asteroids
+					pType = Planet::isAsteroid;
+					break;
+				case 3: // Plutinos
+					pType = Planet::isPlutino;
+					break;
+				case 4: // Comets
+					pType = Planet::isComet;
+					break;
+				case 5: // Dwarf planets
+					pType = Planet::isDwarfPlanet;
+					break;
+				case 6: // Cubewanos
+					pType = Planet::isCubewano;
+					break;
+				case 7: // Scattered disc objects
+					pType = Planet::isSDO;
+					break;
+				case 8: // Oort cloud objects
+					pType = Planet::isOCO;
+					break;
+				case 9: // Sednoids
+					pType = Planet::isSednoid;
+					break;
+				case 20: // Interstellar objects
+					pType = Planet::isInterstellar;
+					break;
+			}
+
 			for (const auto& object : allObjects)
 			{
-				if (object->getPlanetType() == Planet::isAsteroid)
+				if (object->getPlanetType() == pType)
 					objects.append(object);
 			}
 			break;
-		case 3: // Plutinos
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isPlutino)
-					objects.append(object);
-			}
-			break;
-		case 4: // Comets
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isComet)
-					objects.append(object);
-			}
-			break;
-		case 5: // Dwarf planets
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isDwarfPlanet)
-					objects.append(object);
-			}
-			break;
-		case 6: // Cubewanos
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isCubewano)
-					objects.append(object);
-			}
-			break;
-		case 7: // Scattered disc objects
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isSDO)
-					objects.append(object);
-			}
-			break;
-		case 8: // Oort cloud objects
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isOCO)
-					objects.append(object);
-			}
-			break;
-		case 9: // Sednoids
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isSednoid)
-					objects.append(object);
-			}
-			break;
+		}
 		case 10: // Stars
 			for (const auto& object : hipStars)
 			{
@@ -3069,13 +3062,6 @@ void AstroCalcDialog::calculatePhenomena()
 			{
 				if (object->getDSOType() == Nebula::NebEmissionLineStar)
 					dso.append(object);
-			}
-			break;
-		case 20: // Interstellar objects
-			for (const auto& object : allObjects)
-			{
-				if (object->getPlanetType() == Planet::isInterstellar)
-					objects.append(object);
 			}
 			break;
 	}
@@ -4622,7 +4608,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 12:
 				case 13:
 				{
-					Planet::PlanetType pType = Planet::isUNDEFINED;
+					Planet::PlanetType pType = Planet::isInterstellar;
 					switch (categoryId)
 					{
 						case 0: // Planets
