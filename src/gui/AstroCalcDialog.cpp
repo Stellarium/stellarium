@@ -2266,8 +2266,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		double currentJD = core->getJD();
 		int year, month, day;
-		double startJD, JD, ltime, distance, angularSize, az, alt, altitude;
-		bool sign;
+		double startJD, JD, ltime;
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, 0, 0, 0);
 
@@ -4613,11 +4612,52 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					break;
-				case 6: // Asteroids
+				case 0:
+				case 6:
+				case 7:
+				case 8:
+				case 9:
+				case 10:
+				case 11:
+				case 12:
+				case 13:
+				{
+					Planet::PlanetType pType = Planet::isUNDEFINED;
+					switch (categoryId)
+					{
+						case 0: // Planets
+							pType = Planet::isPlanet;
+							break;
+						case 6: // Asteroids
+							pType = Planet::isAsteroid;
+							break;
+						case 7: // Comets
+							pType = Planet::isComet;
+							break;
+						case 8: // Plutinos
+							pType = Planet::isPlutino;
+							break;
+						case 9: // Dwarf planets
+							pType = Planet::isDwarfPlanet;
+							break;
+						case 10: // Cubewanos
+							pType = Planet::isCubewano;
+							break;
+						case 11: // Scattered disc objects
+							pType = Planet::isSDO;
+							break;
+						case 12: // Oort cloud objects
+							pType = Planet::isOCO;
+							break;
+						case 13: // Sednoids
+							pType = Planet::isSednoid;
+							break;
+					}
+
 					for (const auto& object : allObjects)
 					{
 						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isAsteroid && mag <= magLimit && object->isAboveRealHorizon(core))
+						if (object->getPlanetType() == pType && mag <= magLimit && object->isAboveRealHorizon(core))
 						{
 							if (angularSizeLimit)
 							{
@@ -4638,190 +4678,12 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 						}
 					}
+
+					if (categoryId==7)
+						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+
 					break;
-				case 7: // Comets
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isComet && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;
-				case 8: // Plutinos
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isPlutino && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 9: // Dwarf planets
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isDwarfPlanet && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 10: // Cubewanos
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isCubewano && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 11: // Scattered disc objects
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isSDO && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 12: // Oort cloud objects
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isOCO && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 13: // Sednoids
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isSednoid && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
+				}
 				case 14: // Planetary nebulae
 					for (const auto& object : allDSO)
 					{
@@ -5196,33 +5058,7 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 						}
 					}
-					break;
-				default: // Planets
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isPlanet && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
+					break;				
 			}
 		}
 
