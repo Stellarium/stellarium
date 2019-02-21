@@ -2293,77 +2293,8 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 			core->setJD(JD);
 
-			switch (firstGraph)
-			{
-				case GraphMagnitudeVsTime:
-					aY.append(ssObj->getVMagnitude(core));
-					break;
-				case GraphPhaseVsTime:
-					aY.append(ssObj->getPhase(core->getObserverHeliocentricEclipticPos()) * 100.f);
-					break;
-				case GraphDistanceVsTime:
-					distance = ssObj->getJ2000EquatorialPos(core).length();
-					aY.append(distance);
-					break;
-				case GraphElongationVsTime:
-					aY.append(ssObj->getElongation(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI);
-					break;
-				case GraphAngularSizeVsTime:
-					angularSize = ssObj->getAngularSize(core) * 360. / M_PI;
-					if (angularSize < 1.)
-						angularSize *= 60.;
-					aY.append(angularSize);
-					break;
-				case GraphPhaseAngleVsTime:
-					aY.append(ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI);
-					break;
-				case GraphHDistanceVsTime:
-					distance = ssObj->getHeliocentricEclipticPos().length();
-					aY.append(distance);
-					break;
-				case GraphTransitAltitudeVsTime:
-					StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
-					StelUtils::radToDecDeg(alt, sign, altitude); // convert to degrees
-					if (!sign) altitude *= -1;
-					aY.append(altitude);
-					break;
-			}
-
-			switch (secondGraph)
-			{
-				case GraphMagnitudeVsTime:
-					bY.append(ssObj->getVMagnitude(core));
-					break;
-				case GraphPhaseVsTime:
-					bY.append(ssObj->getPhase(core->getObserverHeliocentricEclipticPos()) * 100.f);
-					break;
-				case GraphDistanceVsTime:
-					distance = ssObj->getJ2000EquatorialPos(core).length();
-					bY.append(distance);
-					break;
-				case GraphElongationVsTime:
-					bY.append(ssObj->getElongation(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI);
-					break;
-				case GraphAngularSizeVsTime:
-					angularSize = ssObj->getAngularSize(core) * 360. / M_PI;
-					if (angularSize < 1.)
-						angularSize *= 60.;
-					bY.append(angularSize);
-					break;
-				case GraphPhaseAngleVsTime:
-					bY.append(ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI);
-					break;
-				case GraphHDistanceVsTime:
-					distance = ssObj->getHeliocentricEclipticPos().length();
-					bY.append(distance);
-					break;
-				case GraphTransitAltitudeVsTime:
-					StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
-					StelUtils::radToDecDeg(alt, sign, altitude); // convert to degrees
-					if (!sign) altitude *= -1;
-					bY.append(altitude);
-					break;
-			}
+			aY.append(computeGraphValue(ssObj, firstGraph));
+			bY.append(computeGraphValue(ssObj, secondGraph));
 
 			core->update(0.0);
 		}
@@ -2419,6 +2350,46 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		ui->graphsPlot->replot();
 	}
+}
+
+double AstroCalcDialog::computeGraphValue(const PlanetP &ssObj, const int graphType)
+{
+	double value = 0.;
+	switch (graphType)
+	{
+		case GraphMagnitudeVsTime:
+			value = ssObj->getVMagnitude(core);
+			break;
+		case GraphPhaseVsTime:
+			value = ssObj->getPhase(core->getObserverHeliocentricEclipticPos()) * 100.;
+			break;
+		case GraphDistanceVsTime:
+			value =  ssObj->getJ2000EquatorialPos(core).length();
+			break;
+		case GraphElongationVsTime:
+			value = ssObj->getElongation(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI;
+			break;
+		case GraphAngularSizeVsTime:
+			value = ssObj->getAngularSize(core) * 360. / M_PI;
+			if (value < 1.)
+				value *= 60.;
+			break;
+		case GraphPhaseAngleVsTime:
+			value = ssObj->getPhaseAngle(core->getObserverHeliocentricEclipticPos()) * 180. / M_PI;
+			break;
+		case GraphHDistanceVsTime:
+			value =  ssObj->getHeliocentricEclipticPos().length();
+			break;
+		case GraphTransitAltitudeVsTime:
+			double az, alt;
+			bool sign;
+			StelUtils::rectToSphe(&az, &alt, ssObj->getAltAzPosAuto(core));
+			StelUtils::radToDecDeg(alt, sign, value); // convert to degrees
+			if (!sign)
+				value *= -1;
+			break;
+	}
+	return value;
 }
 
 void AstroCalcDialog::populateFunctionsList()

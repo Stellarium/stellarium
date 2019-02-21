@@ -270,6 +270,8 @@ private:
 	//! Populates the list of groups for WUT tool.
 	void populateWutGroups();
 
+	double computeGraphValue(const PlanetP &ssObj, const int graphType);
+
 	void populateFunctionsList();
 
 	void adjustWUTColumns();
