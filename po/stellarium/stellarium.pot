@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-18 20:16+0700\n"
+"POT-Creation-Date: 2019-02-21 12:42+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,9 +57,9 @@ msgstr ""
 #: src/core/modules/NebulaMgr.cpp:505 src/core/modules/SolarSystem.cpp:237
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:138
-#: src/core/StelApp.cpp:576 src/core/StelCore.cpp:260
+#: src/core/StelApp.cpp:572 src/core/StelCore.cpp:260
 #: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:817
+#: src/StelMainView.cpp:818
 msgid "Display Options"
 msgstr ""
 
@@ -2085,11 +2085,11 @@ msgstr ""
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:576
+#: src/core/StelApp.cpp:572
 msgid "Night mode"
 msgstr ""
 
-#: src/core/StelApp.cpp:609
+#: src/core/StelApp.cpp:605
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 
@@ -2856,7 +2856,7 @@ msgid "No description"
 msgstr ""
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:225
-#: src/StelMainView.cpp:815 src/StelMainView.cpp:816
+#: src/StelMainView.cpp:816 src/StelMainView.cpp:817
 msgid "Miscellaneous"
 msgstr ""
 
@@ -5211,58 +5211,58 @@ msgstr ""
 msgid "Shortcut"
 msgstr ""
 
-#: src/StelMainView.cpp:815
+#: src/StelMainView.cpp:816
 msgid "Save screenshot"
 msgstr ""
 
-#: src/StelMainView.cpp:816
+#: src/StelMainView.cpp:817
 msgid "Reload shaders (for development)"
 msgstr ""
 
-#: src/StelMainView.cpp:817
+#: src/StelMainView.cpp:818
 msgid "Full-screen mode"
 msgstr ""
 
-#: src/StelMainView.cpp:979
+#: src/StelMainView.cpp:980
 msgid ""
 "Insufficient OpenGL version. Please update drivers, graphics hardware, or "
 "use --angle-mode (or --mesa-mode) option."
 msgstr ""
 
-#: src/StelMainView.cpp:982
+#: src/StelMainView.cpp:983
 msgid ""
 "Insufficient OpenGL version. Please update drivers, or graphics hardware."
 msgstr ""
 
-#: src/StelMainView.cpp:1024
+#: src/StelMainView.cpp:1025
 msgid ""
 "Your DirectX/OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1075
+#: src/StelMainView.cpp:1076
 msgid ""
 "Your OpenGL/Mesa subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1135
+#: src/StelMainView.cpp:1136
 msgid ""
 "Your OpenGL subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1176
+#: src/StelMainView.cpp:1177
 msgid ""
 "Your OpenGL ES subsystem has problems. See log for details.\n"
 "Ignore and suppress this notice in the future and try to continue in "
 "degraded mode anyway?"
 msgstr ""
 
-#: src/StelMainView.cpp:1285
+#: src/StelMainView.cpp:1286
 #, qt-format
 msgid "Stellarium %1"
 msgstr ""
@@ -10821,7 +10821,7 @@ msgid ""
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
-#: plugins/Oculars/src/gui/OcularDialog.cpp:553
+#: plugins/Oculars/src/gui/OcularDialog.cpp:554
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:718
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
@@ -10842,7 +10842,7 @@ msgid "Links"
 msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
-#: plugins/Oculars/src/gui/OcularDialog.cpp:554
+#: plugins/Oculars/src/gui/OcularDialog.cpp:555
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
@@ -10866,7 +10866,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
-#: plugins/Oculars/src/gui/OcularDialog.cpp:557
+#: plugins/Oculars/src/gui/OcularDialog.cpp:558
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:722
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
@@ -10888,7 +10888,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:559
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:724
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
@@ -10910,7 +10910,7 @@ msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
-#: plugins/Oculars/src/gui/OcularDialog.cpp:561
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
@@ -11497,11 +11497,15 @@ msgstr ""
 msgid "Barlow lens feature"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:499
+#: plugins/Oculars/src/gui/OcularDialog.cpp:496
+msgid "Sensor crop overlay feature"
+msgstr ""
+
+#: plugins/Oculars/src/gui/OcularDialog.cpp:500
 msgid "Overview"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:501
+#: plugins/Oculars/src/gui/OcularDialog.cpp:502
 msgid ""
 "This plugin is intended to simulate what you would see through an eyepiece.  "
 "This configuration dialog can be used to add, modify, or delete eyepieces "
@@ -11509,42 +11513,42 @@ msgid ""
 "will populate some samples to get your started."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:502
+#: plugins/Oculars/src/gui/OcularDialog.cpp:503
 msgid "You can choose to scale the image you see on the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:503
+#: plugins/Oculars/src/gui/OcularDialog.cpp:504
 msgid ""
 "This is intended to show you a better comparison of what one eyepiece/"
 "telescope combination will be like when compared to another."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:504
+#: plugins/Oculars/src/gui/OcularDialog.cpp:505
 msgid ""
 "The same eyepiece in two different telescopes of differing focal length will "
 "produce two different exit pupils, changing the view somewhat."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:505
+#: plugins/Oculars/src/gui/OcularDialog.cpp:506
 msgid ""
 "The trade-off of this is that, with the image scaled, a large part of the "
 "screen can be wasted."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:506
+#: plugins/Oculars/src/gui/OcularDialog.cpp:507
 msgid ""
 "Therefore I recommend that you leave it off, unless you feel you have a need "
 "of it."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:507
+#: plugins/Oculars/src/gui/OcularDialog.cpp:508
 msgid ""
 "You can toggle a crosshair in the view.  Ideally, I wanted this to be "
 "aligned to North.  I've been unable to do so.  So currently it aligns to the "
 "top of the screen."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:508
+#: plugins/Oculars/src/gui/OcularDialog.cpp:509
 #, qt-format
 msgid ""
 "You can toggle a Telrad finder; this can only be done when you have not "
@@ -11553,38 +11557,38 @@ msgid ""
 "the naked eye through the Telrad (or similar) finder."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:509
+#: plugins/Oculars/src/gui/OcularDialog.cpp:510
 msgid "If you find any issues, please let me know.  Enjoy!"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:512
+#: plugins/Oculars/src/gui/OcularDialog.cpp:513
 msgid "Hot Keys"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:513
+#: plugins/Oculars/src/gui/OcularDialog.cpp:514
 msgid ""
 "The plug-in's key bindings can be edited in the Keyboard shortcuts editor "
 "(F7)."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:527
-#: plugins/Oculars/src/gui/OcularDialog.cpp:532
+#: plugins/Oculars/src/gui/OcularDialog.cpp:528
+#: plugins/Oculars/src/gui/OcularDialog.cpp:533
 msgid "[no key defined]"
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:536
+#: plugins/Oculars/src/gui/OcularDialog.cpp:537
 msgid "Switches on/off the ocular overlay."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:540
+#: plugins/Oculars/src/gui/OcularDialog.cpp:541
 msgid "Opens the pop-up navigation menu."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:544
+#: plugins/Oculars/src/gui/OcularDialog.cpp:545
 msgid "Rotate reticle pattern of the eyepiece clockwise."
 msgstr ""
 
-#: plugins/Oculars/src/gui/OcularDialog.cpp:548
+#: plugins/Oculars/src/gui/OcularDialog.cpp:549
 msgid "Rotate reticle pattern of the eyepiece сounterclockwise."
 msgstr ""
 
@@ -17881,21 +17885,21 @@ msgstr ""
 msgid "Scenery3d shader error, can't draw. Check debug output for details."
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1811
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1775
 msgid ""
 "Your hardware does not support cubemapping, please switch to 'Perspective' "
 "projection!"
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1820
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1784
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:1830
+#: plugins/Scenery3d/src/S3DRenderer.cpp:1794
 msgid "Falling back to '6 Textures' because of ANGLE bug"
 msgstr ""
 
-#: plugins/Scenery3d/src/S3DRenderer.cpp:2355
+#: plugins/Scenery3d/src/S3DRenderer.cpp:2319
 msgid "Shadow mapping can not be used on your hardware, check logs for details"
 msgstr ""
 
