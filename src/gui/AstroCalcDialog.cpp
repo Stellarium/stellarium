@@ -2712,14 +2712,11 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
-
 	if (!selectedObjects.isEmpty())
 	{
 		// X axis - time; Y axis - altitude
 		QList<double> aX, aY;
-
 		StelObjectP selectedObject = selectedObjects[0];
-
 		if (selectedObject->getType() == "Satellite")
 		{
 			ui->monthlyElevationGraph->graph(0)->data()->clear();
@@ -2729,44 +2726,35 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 
 		double currentJD = core->getJD();
 		int hour = ui->monthlyElevationTime->value();
-
-		double az, alt, deg;
+		double az, alt, deg, startJD, JD, ltime;
 		bool sign;
-		int year, month, day;
-		double startJD, JD, ltime;
+		int year, month, day;		
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
 		startJD -= core->getUTCOffset(startJD)/24; // Time zone correction
-
 		int dYear = (int)core->getCurrentPlanet()->getSiderealPeriod() + 3;
-
 		for (int i = -2; i <= dYear; i++)
 		{
 			JD = startJD + i;
 			ltime = (JD - startJD) * StelCore::ONE_OVER_JD_SECOND;
 			aX.append(ltime);
-
 			core->setJD(JD);
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			StelUtils::radToDecDeg(alt, sign, deg);
 			if (!sign) deg *= -1;
 			aY.append(deg);
-
 			core->update(0.0);
 		}
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-
 		double minYa = aY.first();
 		double maxYa = aY.first();
-
 		for (auto temp : aY)
 		{
 			if (maxYa < temp) maxYa = temp;
 			if (minYa > temp) minYa = temp;
 		}
-
 		minYme = minYa - 2.0;
 		maxYme = maxYa + 2.0;
 
@@ -2781,15 +2769,12 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-
 			if (otype == "Star")
 				name = selectedObject->getID();
 		}
-
 		ui->monthlyElevationGraph->graph(0)->setData(x, y);
 		ui->monthlyElevationGraph->graph(0)->setName(name);
 		ui->monthlyElevationGraph->replot();
-
 		ui->monthlyElevationCelestialObjectLabel->setText(name);
 	}
 
@@ -5588,7 +5573,6 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 	{
 		PlanetP moon = solarSystem->getMoon();
 		StelObjectP selectedObject = selectedObjects[0];
-
 		if (selectedObject==moon || selectedObject->getType() == "Satellite")
 		{
 			ui->angularDistancePlot->graph(0)->clearData();
@@ -5601,7 +5585,6 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		double currentJD = core->getJD();
 		double JD, distance, dd;
 		bool sign;
-
 		for (int i = -5; i <= 35; i++)
 		{
 			JD = currentJD + i;
@@ -5614,23 +5597,18 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 			aY.append(dd);
 			core->update(0.0);
 		}
-
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
-
 		double minY = aY.first();
 		double maxY = aY.first();
-
 		for (auto temp : aY)
 		{
 			if (maxY < temp) maxY = temp;
 			if (minY > temp) minY = temp;
 		}
-
 		minYadm = minY - 5.0;
 		maxYadm = maxY + 5.0;
-
 		int limit = ui->angularDistanceLimitSpinBox->value();
 		if (minYadm > limit)
 			minYadm = limit - 5.0;
@@ -5643,7 +5621,6 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 			QString otype = selectedObject->getType();
 			if (otype == "Nebula")
 				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
-
 			if (otype == "Star")
 				name = selectedObject->getID();
 		}
@@ -5662,7 +5639,6 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 		ui->angularDistancePlot->graph(0)->clearData();
 		ui->angularDistancePlot->replot();
 	}
-
 	drawAngularDistanceLimitLine();
 }
 
