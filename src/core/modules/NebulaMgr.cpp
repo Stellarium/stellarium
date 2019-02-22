@@ -1815,16 +1815,6 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	if (objw.left(3) == "NGC")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("NGC%1").arg(n->NGC_nb) == objw || QString("NGC %1").arg(n->NGC_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
 	// Search by common names
 	for (const auto& n : dsoArray)
 	{
@@ -1843,258 +1833,15 @@ StelObjectP NebulaMgr::searchByNameI18n(const QString& nameI18n) const
 		}
 	}
 
-	// Search by IC numbers (possible formats are "IC466" or "IC 466")
-	if (objw.left(2) == "IC")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("IC%1").arg(n->IC_nb) == objw || QString("IC %1").arg(n->IC_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-
-	// Search by Messier numbers (possible formats are "M31" or "M 31")
-	if (objw.left(1) == "M" && objw.left(3) != "MEL")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("M%1").arg(n->M_nb) == objw || QString("M %1").arg(n->M_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Caldwell numbers (possible formats are "C31" or "C 31")
-	if (objw.left(1) == "C" && objw.left(2) != "CR" && objw.left(3) != "CED")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("C%1").arg(n->C_nb) == objw || QString("C %1").arg(n->C_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Barnard numbers (possible formats are "B31" or "B 31")
-	if (objw.left(1) == "B")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("B%1").arg(n->B_nb) == objw || QString("B %1").arg(n->B_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Sharpless numbers (possible formats are "Sh2-31" or "Sh 2-31")
-	if (objw.left(2) == "SH")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("SH2-%1").arg(n->Sh2_nb) == objw || QString("SH 2-%1").arg(n->Sh2_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Van den Bergh numbers (possible formats are "VdB31" or "VdB 31")
-	if (objw.left(3) == "VDB")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("VDB%1").arg(n->VdB_nb) == objw || QString("VDB %1").arg(n->VdB_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by RCW numbers (possible formats are "RCW31" or "RCW 31")
-	if (objw.left(3) == "RCW")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("RCW%1").arg(n->RCW_nb) == objw || QString("RCW %1").arg(n->RCW_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by LDN numbers (possible formats are "LDN31" or "LDN 31")
-	if (objw.left(3) == "LDN")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("LDN%1").arg(n->LDN_nb) == objw || QString("LDN %1").arg(n->LDN_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by LBN numbers (possible formats are "LBN31" or "LBN 31")
-	if (objw.left(3) == "LBN")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("LBN%1").arg(n->LBN_nb) == objw || QString("LBN %1").arg(n->LBN_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Collinder numbers (possible formats are "Cr31" or "Cr 31")
-	if (objw.left(2) == "CR")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("CR%1").arg(n->Cr_nb) == objw || QString("CR %1").arg(n->Cr_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Melotte numbers (possible formats are "Mel31" or "Mel 31")
-	if (objw.left(3) == "MEL")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("MEL%1").arg(n->Mel_nb) == objw || QString("MEL %1").arg(n->Mel_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by PGC numbers (possible formats are "PGC31" or "PGC 31")
-	if (objw.left(3) == "PGC")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("PGC%1").arg(n->PGC_nb) == objw || QString("PGC %1").arg(n->PGC_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by UGC numbers (possible formats are "UGC31" or "UGC 31")
-	if (objw.left(3) == "UGC")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("UGC%1").arg(n->UGC_nb) == objw || QString("UGC %1").arg(n->UGC_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Arp numbers (possible formats are "ARP31" or "ARP 31")
-	if (objw.left(3) == "ARP")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("ARP%1").arg(n->Arp_nb) == objw || QString("ARP %1").arg(n->Arp_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by VV numbers (possible formats are "VV31" or "VV 31")
-	if (objw.left(2) == "VV")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("VV%1").arg(n->VV_nb) == objw || QString("VV %1").arg(n->VV_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by Cederblad numbers (possible formats are "Ced31" or "Ced 31")
-	if (objw.left(3) == "CED")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("CED%1").arg(n->Ced_nb.trimmed().toUpper()) == objw.trimmed() || QString("CED %1").arg(n->Ced_nb.trimmed().toUpper()) == objw.trimmed())
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by PK numbers
-	if (objw.left(2) == "PK")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("PK%1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed() || QString("PK %1").arg(n->PK_nb.trimmed().toUpper()) == objw.trimmed())
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by PN G numbers
-	if (objw.left(2) == "PN")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("PNG%1").arg(n->PNG_nb.trimmed().toUpper()) == objw.trimmed() || QString("PN G%1").arg(n->PNG_nb.trimmed().toUpper()) == objw.trimmed())
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by SNR G numbers
-	if (objw.left(3) == "SNR")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("SNRG%1").arg(n->SNRG_nb.trimmed().toUpper()) == objw.trimmed() || QString("SNR G%1").arg(n->SNRG_nb.trimmed().toUpper()) == objw.trimmed())
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by ACO numbers (possible formats are "ACO31" or "ACO 31")
-	if (objw.left(3) == "ACO")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("ACO%1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed()
-			|| QString("ACO %1").arg(n->ACO_nb.trimmed().toUpper()) == objw.trimmed())
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by ACO numbers (possible formats are "Abell31" or "Abell 31")
-	if (objw.left(5) == "ABELL")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("ABELL%1").arg(n->Abell_nb) == objw || QString("ABELL %1").arg(n->Abell_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by HCG numbers (possible formats are "HCG31" or "HCG 31")
-	if (objw.left(3) == "HCG")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("HCG%1").arg(n->HCG_nb.trimmed().toUpper()) == objw.trimmed() || QString("HCG %1").arg(n->HCG_nb.trimmed().toUpper()) == objw.trimmed())
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	// Search by ESO numbers (possible formats are "ESO53-1" or "ESO 53-1")
-	if (objw.left(3) == "ESO")
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("ESO%1").arg(n->ESO_nb.trimmed().toUpper()) == objw.trimmed() || QString("ESO %1").arg(n->ESO_nb.trimmed().toUpper()) == objw.trimmed())
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
-
-	return StelObjectP();
+	// Search by designation
+	return searchByDesignation(objw);
 }
 
 
-//! Return the matching Nebula object's pointer if exists or Q_NULLPTR
-//! TODO split common parts of this and I18 fn above into a separate fn.
-//! TODO Decide whether empty StelObjectP or Q_NULLPTR is the better return type and select the same for both.
+//! Return the matching Nebula object's pointer if exists or an "empty" StelObjectP
 StelObjectP NebulaMgr::searchByName(const QString& name) const
 {
 	QString objw = name.toUpper();
-
-	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
-	if (objw.startsWith("NGC"))
-	{
-		for (const auto& n : dsoArray)
-		{
-			if (QString("NGC%1").arg(n->NGC_nb) == objw || QString("NGC %1").arg(n->NGC_nb) == objw)
-				return qSharedPointerCast<StelObject>(n);
-		}
-	}
 
 	// Search by common names
 	for (const auto& n : dsoArray)
@@ -2114,6 +1861,26 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 				if (objwcapa.toUpper()==objw)
 					return qSharedPointerCast<StelObject>(n);
 			}
+		}
+	}
+
+	// Search by designation
+	return searchByDesignation(objw);
+}
+
+//! Return the matching Nebula object's pointer if exists or Q_NULLPTR
+//! TODO Decide whether empty StelObjectP or Q_NULLPTR is the better return type and select the same for both.
+StelObjectP NebulaMgr::searchByDesignation(const QString &designation) const
+{
+	QString objw = designation.toUpper();
+
+	// Search by NGC numbers (possible formats are "NGC31" or "NGC 31")
+	if (objw.startsWith("NGC"))
+	{
+		for (const auto& n : dsoArray)
+		{
+			if (QString("NGC%1").arg(n->NGC_nb) == objw || QString("NGC %1").arg(n->NGC_nb) == objw)
+				return qSharedPointerCast<StelObject>(n);
 		}
 	}
 
@@ -2348,7 +2115,7 @@ StelObjectP NebulaMgr::searchByName(const QString& name) const
 		}
 	}
 
-	return Q_NULLPTR;
+	return StelObjectP();
 }
 
 //! Find and return the list of at most maxNbItem objects auto-completing the passed object name

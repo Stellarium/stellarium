@@ -196,7 +196,7 @@ void AstroCalcDialog::createDialogContent()
 	populateFunctionsList();
 	prepareXVsTimeAxesAndGraph();
 	// Monthly Elevation
-	prepareMonthlyEleveationAxesAndGraph();	
+	prepareMonthlyEleveationAxesAndGraph();
 	// WUT
 	initListWUT();
 	populateTimeIntervalsList();
