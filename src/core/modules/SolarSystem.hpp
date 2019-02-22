@@ -967,6 +967,9 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
+	//! Draw a nice markers for ephemeris of objects.
+	void drawEphemerisMarkers(const StelCore* core);
+
 	//! Load planet data from the Solar System configuration files.
 	//! This function attempts to load every possible instance of the
 	//! Solar System configuration files in the file paths, falling back if a
