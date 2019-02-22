@@ -45,7 +45,7 @@ def snt_data():
             }
         else:
             if not line.startswith('#'):
-                print("WARNING: No match: {}".format(line), file=sys.stderr)
+                print("WARNING: No match: {}".format(line), file=sys.stderr) # lgtm [py/syntax-error]
 
 # livesync=True so that even if we ctrl-c out of
 # the program, any previously cached values will

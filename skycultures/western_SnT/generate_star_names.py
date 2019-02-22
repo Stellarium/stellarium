@@ -50,7 +50,7 @@ def get_hip(name):
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("Usage: {} SnT_star_names.docx".format(sys.argv[0]), file=sys.stderr)
+        print("Usage: {} SnT_star_names.docx".format(sys.argv[0]), file=sys.stderr) # lgtm [py/syntax-error]
         sys.exit(1)
 
     doc = docx.Document(sys.argv[1])
