@@ -1766,7 +1766,7 @@ void StelCore::increaseTimeSpeed()
 	if (s>=JD_SECOND) s*=10.;
 	else if (s<-JD_SECOND) s/=10.;
 	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
-	else if (s>=-JD_SECOND && s<0.) s=0.;
+	else if (s>=-JD_SECOND && s<0.) s=0.; // lgtm [cpp/constant-comparison]
 	setTimeRate(s);
 }
 
@@ -1777,7 +1777,7 @@ void StelCore::decreaseTimeSpeed()
 	if (s>JD_SECOND) s/=10.;
 	else if (s<=-JD_SECOND) s*=10.;
 	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-	else if (s>0. && s<=JD_SECOND) s=0.;
+	else if (s>0. && s<=JD_SECOND) s=0.; // lgtm [cpp/constant-comparison]
 	setTimeRate(s);
 }
 
@@ -1787,7 +1787,7 @@ void StelCore::increaseTimeSpeedLess()
 	if (s>=JD_SECOND) s*=2.;
 	else if (s<-JD_SECOND) s/=2.;
 	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
-	else if (s>=-JD_SECOND && s<0.) s=0.;
+	else if (s>=-JD_SECOND && s<0.) s=0.; // lgtm [cpp/constant-comparison]
 	setTimeRate(s);
 }
 
@@ -1797,7 +1797,7 @@ void StelCore::decreaseTimeSpeedLess()
 	if (s>JD_SECOND) s/=2.;
 	else if (s<=-JD_SECOND) s*=2.;
 	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-	else if (s>0. && s<=JD_SECOND) s=0.;
+	else if (s>0. && s<=JD_SECOND) s=0.; // lgtm [cpp/constant-comparison]
 	setTimeRate(s);
 }
 

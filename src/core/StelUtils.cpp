@@ -1867,7 +1867,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	else if ((year >= 1987) && (year <= 2050))
 	{
 		int y2000 = year-2000;
-		if ((year>=2006) && (year<=2050))
+		if ((year>=2006) && (year<=2050)) // lgtm [cpp/constant-comparison]
 		{
 			// [2006..2050]
 			deltaT = ((0.005589*y2000 + 0.32217)*y2000 + 62.92);
@@ -1884,7 +1884,7 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 		//        because this part gives the strange values of DeltaT
 		double c = (getFixedFromGregorian(1900, 1, 1)-getFixedFromGregorian(year, 7, 1))/36525.;
 
-		if ((year >= 1900) && (year <= 1986))
+		if ((year >= 1900) && (year <= 1986)) // lgtm [cpp/constant-comparison]
 		{
 			// [1900..1986]
 			deltaT = ((((((-0.212591*c + 0.677066)*c - 0.861938)*c + 0.553040)*c - 0.181133)*c + 0.025184)*c + 0.000297)*c - 0.00002;
