@@ -344,7 +344,7 @@ bool StelProjector::projectInPlace(Vec3d& vd) const
 	// polygons by culling.
 	vd[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
 	vd[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-	vd[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
+	vd[2] = (v[2] - zNear) * (double) oneOverZNearMinusZFar;
 	return rval;
 }
 

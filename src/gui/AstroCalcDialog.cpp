@@ -1445,7 +1445,7 @@ void AstroCalcDialog::generateEphemeris()
 
 		for (int i = 0; i < elements; i++)
 		{
-			double JD = firstJD + i * currentStep;
+			double JD = firstJD + i * (double) currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 

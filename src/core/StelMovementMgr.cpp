@@ -1434,12 +1434,12 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 		if( zoomMove.startFov > zoomMove.aimFov )
 		{
 			// slow down as we approach final view
-			c = 1 - (1-zoomMove.coef)*(1-zoomMove.coef)*(1-zoomMove.coef);
+			c = 1.0 - (1.0f-zoomMove.coef)*(1.0f-zoomMove.coef)*(1.0f-zoomMove.coef);
 		}
 		else
 		{
 			// speed up as we leave zoom target
-			c = (zoomMove.coef)*(zoomMove.coef)*(zoomMove.coef);
+			c = (double)zoomMove.coef * zoomMove.coef * zoomMove.coef;
 		}
 
 		double newFov=zoomMove.startFov + (zoomMove.aimFov - zoomMove.startFov) * c;

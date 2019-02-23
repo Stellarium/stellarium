@@ -590,7 +590,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			QVector<Vec3d> contour;
 			contour.reserve(texCoords.size());
 			for (const auto& v : texCoords)
-				contour << X * Vec3d(v[0]*texSizeX, v[1]*texSizeY, 0.);
+				contour << X * Vec3d((double)v[0] * texSizeX, (double)v[1] * texSizeY, 0.);
 
 			cons->artPolygon.vertex=contour;
 			cons->artPolygon.texCoords=texCoords;
