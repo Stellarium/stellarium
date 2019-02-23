@@ -1438,31 +1438,37 @@ void StelMainScriptAPI::goHome()
 
 void StelMainScriptAPI::setMilkyWayVisible(bool b)
 {
+	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use MilkyWay.setFlagShow() instead.";
 	GETSTELMODULE(MilkyWay)->setFlagShow(b);
 }
 
 void StelMainScriptAPI::setMilkyWayIntensity(double i)
 {
+	qWarning() << "WARNING: core.setMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.setIntensity() instead.";
 	GETSTELMODULE(MilkyWay)->setIntensity(i);
 }
 
 double StelMainScriptAPI::getMilkyWayIntensity()
 {
+	qWarning() << "WARNING: core.getMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.getIntensity() instead.";
 	return GETSTELMODULE(MilkyWay)->getIntensity();
 }
 
 void StelMainScriptAPI::setZodiacalLightVisible(bool b)
 {
+	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use ZodiacalLight.setFlagShow() instead.";
 	GETSTELMODULE(ZodiacalLight)->setFlagShow(b);
 }
 
 void StelMainScriptAPI::setZodiacalLightIntensity(double i)
 {
+	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use ZodiacalLight.setIntensity() instead.";
 	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
 }
 
 double StelMainScriptAPI::getZodiacalLightIntensity()
 {
+	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use ZodiacalLight.getIntensity() instead.";
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
 }
 
@@ -1478,12 +1484,14 @@ void StelMainScriptAPI::setBortleScaleIndex(int index)
 
 void StelMainScriptAPI::setDSSMode(bool b)
 {
-	GETSTELMODULE(ToastMgr)->setFlagSurveyShow(b);
+	qWarning() << "WARNING: core.setDSSMode() is deprecated and will soon be removed. Use ToastMgr.setFlagShow() instead.";
+	GETSTELMODULE(ToastMgr)->setFlagShow(b);
 }
 
 bool StelMainScriptAPI::isDSSModeEnabled()
 {
-	return GETSTELMODULE(ToastMgr)->getFlagSurveyShow();
+	qWarning() << "WARNING: core.isDSSModeEnabled() is deprecated and will soon be removed. Use ToastMgr.getFlagShow() instead.";
+	return GETSTELMODULE(ToastMgr)->getFlagShow();
 }
 
 QVariantMap StelMainScriptAPI::getScreenXYFromAltAzi(const QString &alt, const QString &azi)
