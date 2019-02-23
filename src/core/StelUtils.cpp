@@ -1867,14 +1867,12 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 	else if ((year >= 1987) && (year <= 2050))
 	{
 		int y2000 = year-2000;
-		if ((year>=2006) && (year<=2050)) // lgtm [cpp/constant-comparison]
+		if (year>=2006) // [2006..2050]
 		{
-			// [2006..2050]
 			deltaT = ((0.005589*y2000 + 0.32217)*y2000 + 62.92);
 		}
-		else
+		else  // [1987..2005]
 		{
-			// [1987..2005]
 			deltaT = (((((0.00002373599*y2000 + 0.000651814)*y2000 + 0.0017275)*y2000 - 0.060374)*y2000 + 0.3345)*y2000 + 63.86);
 		}
 	}
@@ -1884,14 +1882,12 @@ double getDeltaTByReingoldDershowitz(const double jDay)
 		//        because this part gives the strange values of DeltaT
 		double c = (getFixedFromGregorian(1900, 1, 1)-getFixedFromGregorian(year, 7, 1))/36525.;
 
-		if ((year >= 1900) && (year <= 1986)) // lgtm [cpp/constant-comparison]
+		if (year >= 1900) // [1900..1986]
 		{
-			// [1900..1986]
 			deltaT = ((((((-0.212591*c + 0.677066)*c - 0.861938)*c + 0.553040)*c - 0.181133)*c + 0.025184)*c + 0.000297)*c - 0.00002;
 		}
-		else
+		else    // [1800..1899]
 		{
-			// [1800..1899]
 			deltaT = (((((((((2.043794*c + 11.636204)*c + 28.316289)*c + 38.291999)*c + 31.332267)*c + 15.845535)*c + 4.867575)*c + 0.865736)*c + 0.083563)*c + 0.003844)*c - 0.000009;
 		}
 		deltaT *= 86400.; // convert to seconds
