@@ -439,16 +439,6 @@ public slots:
 	//! Set flag for auto-enable atmosphere and landscape for planets with atmospheres in location window
 	void setFlagEnvironmentAutoEnable(bool b);
 
-	//! Get flag for auto-enable of atmospheres for planets.
-	//! @note this function is enabled for backward compatibility
-	//! @deprecated
-	bool getFlagAtmosphereAutoEnable() const { return getFlagEnvironmentAutoEnable(); }
-
-	//! Set flag for auto-enable atmosphere for planets with atmospheres in location window
-	//! @note this function is enabled for backward compatibility
-	//! @deprecated
-	void setFlagAtmosphereAutoEnable(bool b) { setFlagEnvironmentAutoEnable(b); }
-
 	//! Forward opacity query to current landscape.
 	//! @param azalt direction of view line to sample in azaltimuth coordinates.
 	float getLandscapeOpacity(Vec3d azalt) const {return landscape->getOpacity(azalt);}

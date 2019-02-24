@@ -579,14 +579,8 @@ public slots:
 
 	//! Setter for displaying Galactic Equator Line.
 	void setFlagGalacticEquatorLine(const bool displayed);
-	//! @deprecated Setter for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
-	//! @note will be deleted in version 0.14
-	void setFlagGalacticPlaneLine(const bool displayed) { setFlagGalacticEquatorLine(displayed); }
 	//! Accessor for displaying Galactic Equator Line.
 	bool getFlagGalacticEquatorLine(void) const;
-	//! @deprecated Accessor for displaying Galactic "Plane" (i.e., Equator) Line. Left here for compatibility with older scripts.
-	//! @note will be deleted in version 0.14
-	bool getFlagGalacticPlaneLine(void) const { return getFlagGalacticEquatorLine(); }
 	//! Get the current color of the Galactic Equator Line.
 	Vec3f getColorGalacticEquatorLine(void) const;
 	//! Set the color of the Galactic Equator Line.

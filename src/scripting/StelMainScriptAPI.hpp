@@ -155,13 +155,6 @@ public slots:
 	//! Fetch a map with data about an object's position, magnitude and so on
 	//! @param name is the English name of the object for which data will be
 	//! returned.
-	//! @return a map of object data, exactly like getObjectInfo().
-	//! @deprecated Use getObjectInfo()
-	static QVariantMap getObjectPosition(const QString& name);
-
-	//! Fetch a map with data about an object's position, magnitude and so on
-	//! @param name is the English name of the object for which data will be
-	//! returned.
 	//! @return a map of object data.  Keys:
 	//! - above-horizon : true, if celestial body is above horizon
 	//! - altitude : apparent altitude angle in decimal degrees
@@ -416,13 +409,6 @@ public slots:
 	//! @param b if true, sets the spherical mirror distortion effect for viewport on, else sets it off
 	static void setSphericMirror(bool b);
 
-	//! Set viewport offset
-	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
-	//! @param x -0.5...0.5 horizontal offset. This is not available in the GUI, and it is recommended to keep it at 0.
-	//! @param y -0.5...0.5 vertical offset. This is available in the GUI.
-	//! @deprecated Use StelMovementMgr::moveViewport instead
-	static void setViewportOffset(const float x, const float y);
-
 	//! Set a lateral width distortion. Use this e.g. in startup.ssc.
 	//! Implemented for 0.15 for a setup with 5 projectors with edge blending. The 9600x1200 get squeezed somewhat which looks a bit odd. Use this stretch to compensate.
 	//! Experimental! To avoid overuse, there is currently no config.ini setting available.
@@ -527,51 +513,6 @@ public slots:
 	void loadSkyImage(const QString& id, const QString& filename,
 					  const QString& lon, const QString& lat, double angSize, double rotation,
 					  double minRes=2.5, double maxBright=14, bool visible=true, const QString& frame="EqJ2000");
-
-	//! Load an image which will have a sky location given in alt-azimuthal coordinates.
-	//! @param id a string ID to be used when referring to this
-	//! image (e.g. when changing the displayed status or deleting
-	//! it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
-	//! image is searched for using StelFileMgr.
-	//! @param alt0 The altitude angle of the first corner of the image in degrees
-	//! @param azi0 The azimuth angle of the first corner of the image in degrees
-	//! @param alt1 The altitude angle of the second corner of the image in degrees
-	//! @param azi1 The azimuth angle of the second corner of the image in degrees
-	//! @param alt2 The altitude angle of the third corner of the image in degrees
-	//! @param azi2 The azimuth angle of the third corner of the image in degrees
-	//! @param alt3 The altitude angle of the fourth corner of the image in degrees
-	//! @param azi3 The azimuth angle of the fourth corner of the image in degrees
-	//! @param minRes The minimum resolution setting for the image
-	//! @param maxBright The maximum brightness setting for the image
-	//! @param visible The initial visibility of the image
-	//! @deprecated since 2017-02 and no longer available since 2018-10 because of inconsistent name. Use loadSkyImage(,,,, "AzAlt") instead!
-	void loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double azi0, double alt0,
-					  double azi1, double alt1,
-					  double azi2, double alt2,
-					  double azi3, double alt3,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
-
-	//! Convenience function which allows loading of a sky image based on a
-	//! central alt-azimuthal coordinate, angular size and rotation.
-	//! @param id a string ID to be used when referring to this
-	//! image (e.g. when changing the displayed status or deleting it.
-	//! @param filename the file name of the image.  If a relative
-	//! path is specified, "scripts/" will be prefixed before the
-	//! image is searched for using StelFileMgr.
-	//! @param alt The altitude angle of the center of the image in degrees
-	//! @param azi The azimuth angle of the center of the image in degrees
-	//! @param angSize The angular size of the image in arc minutes
-	//! @param rotation The clockwise rotation angle of the image in degrees
-	//! @param minRes The minimum resolution setting for the image
-	//! @param maxBright The maximum brightness setting for the image
-	//! @param visible The initial visibility of the image
-	//! @deprecated since 2017-03 and no longer available since 2018-10. Use loadSkyImage(,,,, "AzAlt") instead!
-	void loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double alt, double azi, double angSize, double rotation,
-					  double minRes=2.5, double maxBright=14, bool visible=true);
 
 	//! Remove a SkyImage.
 	//! @param id the ID of the image to remove.
@@ -892,14 +833,6 @@ signals:
 							 double c5, double c6,
 							 double c7, double c8,
 							 double minRes, double maxBright, bool visible, const StelCore::FrameType frameType);
-	//! @deprecated! USE requestLoadSkyImage() with frameType=AzAlt!
-	//! @todo: Remove with V0.16.0
-	void requestLoadSkyImageAltAz(const QString& id, const QString& filename,
-							 double c1, double c2,
-							 double c3, double c4,
-							 double c5, double c6,
-							 double c7, double c8,
-							 double minRes, double maxBright, bool visible);
 
 	void requestRemoveSkyImage(const QString& id);
 

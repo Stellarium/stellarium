@@ -148,7 +148,7 @@ namespace StelUtils
 	//! Obtains a Vec3f from a string.
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector
-	//! @deprecated Use the >> operator from Vec3f class
+	//! @deprecated Use the >> operator from Vec3f class (Will be removed in version 0.20)
 	Vec3f strToVec3f(const QStringList& s);
 	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
 	Vec3f strToVec3f(const QString& s);

@@ -76,10 +76,6 @@ StelMainScriptAPI::StelMainScriptAPI(QObject *parent) : QObject(parent)
 	{
 		connect(this, SIGNAL(requestLoadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)),
 			smgr, SLOT(         loadSkyImage(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool, StelCore::FrameType)));
-		// The next is deprecated and should be removed in V0.16.
-		connect(this, SIGNAL(requestLoadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)),
-			smgr, SLOT(         loadSkyImageAltAz(const QString&, const QString&, double, double, double, double, double, double, double, double, double, double, bool)));
-
 		connect(this, SIGNAL(requestRemoveSkyImage(const QString&)), smgr, SLOT(removeSkyLayer(const QString&)));
 	}
 
@@ -438,12 +434,6 @@ void StelMainScriptAPI::setDiskViewport(bool b)
 	emit(requestSetDiskViewport(b));
 }
 
-void StelMainScriptAPI::setViewportOffset(const float x, const float y)
-{	
-	StelCore* core = StelApp::getInstance().getCore();
-	core->getMovementMgr()->moveViewport(x,y);
-}
-
 void StelMainScriptAPI::setViewportStretch(const float stretch)
 {
 	StelApp::getInstance().getCore()->setViewportStretch(stretch);
@@ -538,70 +528,6 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 	loadSkyImage(id, filename, StelUtils::getDecAngle(lon)*180./M_PI,
 		     StelUtils::getDecAngle(lat)*180./M_PI, angSize,
 		     rotation, minRes, maxBright, visible, frame);
-}
-
-// DEPRECATED with old name
-void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double azi0, double alt0,
-					  double azi1, double alt1,
-					  double azi2, double alt2,
-					  double azi3, double alt3,
-					  double minRes, double maxBright, bool visible)
-{
-	Q_UNUSED(id) Q_UNUSED(filename)
-	Q_UNUSED(azi0) Q_UNUSED(alt0) Q_UNUSED(azi1) Q_UNUSED(alt1)
-	Q_UNUSED(azi2) Q_UNUSED(alt2) Q_UNUSED(azi3) Q_UNUSED(alt3)
-	Q_UNUSED(minRes) Q_UNUSED(maxBright) Q_UNUSED(visible)
-	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is no longer available! Please use loadSkyImage()";
-	/*
-	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImage()";
-	QString path = "scripts/" + filename;
-	emit(requestLoadSkyImageAltAz(id, path, alt0, azi0, alt1, azi1, alt2, azi2, alt3, azi3, minRes, maxBright, visible));
-	*/
-}
-
-// DEPRECATED with old argument order and name.
-void StelMainScriptAPI::loadSkyImageAltAz(const QString& id, const QString& filename,
-					  double alt, double azi,
-					  double angSize, double rotation,
-					  double minRes, double maxBright, bool visible)
-{
-	Q_UNUSED(id) Q_UNUSED(filename)	Q_UNUSED(alt) Q_UNUSED(azi)
-	Q_UNUSED(angSize) Q_UNUSED(rotation)
-	Q_UNUSED(minRes) Q_UNUSED(maxBright) Q_UNUSED(visible)
-	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is no longer available! Please use loadSkyImage()";
-/*
-	qDebug() << "StelMainScriptAPI::loadSkyImageAltAz() is deprecated and will not be available in version 0.16! Please use loadSkyImage()";
-
-	Vec3f XYZ;
-	static const float RADIUS_NEB = 1.0f;
-
-	StelUtils::spheToRect((180.0-azi)*M_PI/180., alt*M_PI/180., XYZ);
-	XYZ*=RADIUS_NEB;
-	float texSize = RADIUS_NEB * sin(angSize/2.0f/60.0f*M_PI/180.0f);
-	Mat4f matPrecomp = Mat4f::translation(XYZ) *
-			   Mat4f::zrotation((180.-azi)*M_PI/180.) *
-			   Mat4f::yrotation(-alt*M_PI/180.) *
-			   Mat4f::xrotation((rotation+90.)*M_PI/180.);
-
-	Vec3f corners[4];
-	corners[0] = matPrecomp * Vec3f(0.f,-texSize,-texSize);
-	corners[1] = matPrecomp * Vec3f(0.f,-texSize, texSize);
-	corners[2] = matPrecomp * Vec3f(0.f, texSize,-texSize);
-	corners[3] = matPrecomp * Vec3f(0.f, texSize, texSize);
-
-	// convert back to alt/azi (radians)
-	Vec3f cornersAltAz[4];
-	for(int i=0; i<4; i++)
-		StelUtils::rectToSphe(&cornersAltAz[i][0], &cornersAltAz[i][1], corners[i]);
-
-	loadSkyImageAltAz(id, filename,
-			  cornersAltAz[0][0]*180./M_PI, cornersAltAz[0][1]*180./M_PI,
-			  cornersAltAz[1][0]*180./M_PI, cornersAltAz[1][1]*180./M_PI,
-			  cornersAltAz[3][0]*180./M_PI, cornersAltAz[3][1]*180./M_PI,
-			  cornersAltAz[2][0]*180./M_PI, cornersAltAz[2][1]*180./M_PI,
-			  minRes, maxBright, visible);
-*/
 }
 
 void StelMainScriptAPI::removeSkyImage(const QString& id)
@@ -946,13 +872,6 @@ void StelMainScriptAPI::selectConstellationByName(const QString& name)
 
 	if (!constellation.isNull())
 		GETSTELMODULE(StelObjectMgr)->setSelectedObject(constellation);
-}
-
-//DEPRECATED: Use getObjectInfo()
-QVariantMap StelMainScriptAPI::getObjectPosition(const QString& name)
-{
-	qWarning() << "WARNING: script function getObjectPosition() is deprecated and will be removed. Please update script to use getObjectInfo()";
-	return getObjectInfo(name);
 }
 
 QVariantMap StelMainScriptAPI::getObjectInfo(const QString& name)
@@ -1438,37 +1357,43 @@ void StelMainScriptAPI::goHome()
 
 void StelMainScriptAPI::setMilkyWayVisible(bool b)
 {
+	// TODO: This method should be removed in version 0.20
 	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use MilkyWay.setFlagShow() instead.";
 	GETSTELMODULE(MilkyWay)->setFlagShow(b);
 }
 
 void StelMainScriptAPI::setMilkyWayIntensity(double i)
 {
+	// TODO: This method should be removed in version 0.20
 	qWarning() << "WARNING: core.setMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.setIntensity() instead.";
 	GETSTELMODULE(MilkyWay)->setIntensity(i);
 }
 
 double StelMainScriptAPI::getMilkyWayIntensity()
 {
+	// TODO: This method should be removed in version 0.20
 	qWarning() << "WARNING: core.getMilkyWayIntensity() is deprecated and will soon be removed. Use MilkyWay.getIntensity() instead.";
 	return GETSTELMODULE(MilkyWay)->getIntensity();
 }
 
 void StelMainScriptAPI::setZodiacalLightVisible(bool b)
 {
-	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use ZodiacalLight.setFlagShow() instead.";
+	// TODO: This method should be removed in version 0.20
+	qWarning() << "WARNING: core.setZodiacalLightVisible() is deprecated and will soon be removed. Use ZodiacalLight.setFlagShow() instead.";
 	GETSTELMODULE(ZodiacalLight)->setFlagShow(b);
 }
 
 void StelMainScriptAPI::setZodiacalLightIntensity(double i)
 {
-	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use ZodiacalLight.setIntensity() instead.";
+	// TODO: This method should be removed in version 0.20
+	qWarning() << "WARNING: core.setZodiacalLightIntensity() is deprecated and will soon be removed. Use ZodiacalLight.setIntensity() instead.";
 	GETSTELMODULE(ZodiacalLight)->setIntensity(i);
 }
 
 double StelMainScriptAPI::getZodiacalLightIntensity()
 {
-	qWarning() << "WARNING: core.setMilkyWayVisible() is deprecated and will soon be removed. Use ZodiacalLight.getIntensity() instead.";
+	// TODO: This method should be removed in version 0.20
+	qWarning() << "WARNING: core.getZodiacalLightIntensity() is deprecated and will soon be removed. Use ZodiacalLight.getIntensity() instead.";
 	return GETSTELMODULE(ZodiacalLight)->getIntensity();
 }
 
@@ -1484,12 +1409,14 @@ void StelMainScriptAPI::setBortleScaleIndex(int index)
 
 void StelMainScriptAPI::setDSSMode(bool b)
 {
+	// TODO: This method should be removed in version 0.20
 	qWarning() << "WARNING: core.setDSSMode() is deprecated and will soon be removed. Use ToastMgr.setFlagShow() instead.";
 	GETSTELMODULE(ToastMgr)->setFlagShow(b);
 }
 
 bool StelMainScriptAPI::isDSSModeEnabled()
 {
+	// TODO: This method should be removed in version 0.20
 	qWarning() << "WARNING: core.isDSSModeEnabled() is deprecated and will soon be removed. Use ToastMgr.getFlagShow() instead.";
 	return GETSTELMODULE(ToastMgr)->getFlagShow();
 }

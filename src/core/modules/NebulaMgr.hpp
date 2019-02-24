@@ -457,18 +457,6 @@ public slots:
 	//! @param c The color of the nebula symbols
 	//! @code
 	//! // example of usage in scripts
-	//! NebulaMgr.setBrightNebulaColor(Vec3f(0.0,1.0,0.0));
-	//! @endcode
-	//! @deprecated
-	void setBrightNebulaColor(const Vec3f& c);
-	//! Get current value of the nebula circle color.
-	//! @deprecated
-	const Vec3f getBrightNebulaColor(void) const;
-
-	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
-	//! @param c The color of the nebula symbols
-	//! @code
-	//! // example of usage in scripts
 	//! NebulaMgr.setNebulaColor(Vec3f(0.0,1.0,0.0));
 	//! @endcode
 	void setNebulaColor(const Vec3f& c);
