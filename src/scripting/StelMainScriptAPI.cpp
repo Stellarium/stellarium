@@ -904,178 +904,121 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 void StelMainScriptAPI::clear(const QString& state)
 {
-	LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
-	StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
-	ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
-	AsterismMgr* amgr = GETSTELMODULE(AsterismMgr);
-	StarMgr* smgr = GETSTELMODULE(StarMgr);
-	NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
-	GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
-	StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
-	ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
-
-	#ifdef USE_STATIC_PLUGIN_SATELLITES
-	// Hide artificial satellites
-	Satellites* sat = GETSTELMODULE(Satellites);
-	sat->setFlagHints(false);
-	sat->setFlagLabels(false);
-	sat->setOrbitLinesFlag(false);
-	#endif
-
+	int stateInt;
 	if (state.toLower() == "natural")
-	{
-		movmgr->setMountMode(StelMovementMgr::MountAltAzimuthal);
-		skyd->setFlagTwinkle(true);
-		skyd->setFlagLuminanceAdaptation(true);
-		ssmgr->setFlagPlanets(true);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(10);
-		glmgr->setFlagAllGrids(false);
-		glmgr->setFlagAllLines(false);
-		glmgr->setFlagAllPoints(false);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(false);
-		cmgr->setFlagLabels(false);
-		cmgr->setFlagBoundaries(false);
-		cmgr->setFlagArt(false);
-		amgr->setFlagLines(false);
-		amgr->setFlagLabels(false);
-		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(true);
-		lmgr->setFlagAtmosphere(true);
-		lmgr->setFlagFog(true);
-		zl->setFlagShow(true);
-	}
+		stateInt = 1;
 	else if (state.toLower() == "starchart")
-	{
-		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
-		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);		
-		ssmgr->setFlagPlanets(true);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(0);
-		glmgr->setFlagAllGrids(false);
-		glmgr->setFlagAllLines(false);
-		glmgr->setFlagAllPoints(false);
-		glmgr->setFlagEquatorGrid(true);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(true);
-		cmgr->setFlagLabels(true);
-		cmgr->setFlagBoundaries(true);
-		cmgr->setFlagArt(false);
-		amgr->setFlagLines(false);
-		amgr->setFlagLabels(false);
-		smgr->setFlagLabels(true);
-		ssmgr->setFlagLabels(true);
-		nmgr->setFlagHints(true);		
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
-		zl->setFlagShow(false);
-	}	
+		stateInt = 2;
 	else if (state.toLower() == "deepspace")
-	{
-		movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
-		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);
-		ssmgr->setFlagPlanets(false);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(0);
-		glmgr->setFlagAllGrids(false);
-		glmgr->setFlagAllLines(false);
-		glmgr->setFlagAllPoints(false);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(false);
-		cmgr->setFlagLabels(false);
-		cmgr->setFlagBoundaries(false);
-		cmgr->setFlagArt(false);
-		amgr->setFlagLines(false);
-		amgr->setFlagLabels(false);
-		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
-		zl->setFlagShow(false);
-	}
+		stateInt = 3;
 	else if (state.toLower() == "galactic")
-	{
-		movmgr->setMountMode(StelMovementMgr::MountGalactic);
-		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);
-		ssmgr->setFlagPlanets(false);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(0);
-		glmgr->setFlagAllGrids(false);
-		glmgr->setFlagAllLines(false);
-		glmgr->setFlagAllPoints(false);
-		glmgr->setFlagGalacticGrid(true);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(false);
-		cmgr->setFlagLabels(false);
-		cmgr->setFlagBoundaries(false);
-		cmgr->setFlagArt(false);
-		amgr->setFlagLines(false);
-		amgr->setFlagLabels(false);
-		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
-		zl->setFlagShow(false);
-	}
+		stateInt = 4;
 	else if (state.toLower() == "supergalactic")
-	{
-		movmgr->setMountMode(StelMovementMgr::MountSupergalactic);
-		skyd->setFlagTwinkle(false);
-		skyd->setFlagLuminanceAdaptation(false);
-		ssmgr->setFlagPlanets(false);
-		ssmgr->setFlagHints(false);
-		ssmgr->setFlagOrbits(false);
-		ssmgr->setFlagMoonScale(false);
-		ssmgr->setFlagTrails(false);
-		mmgr->setZHR(0);
-		glmgr->setFlagAllGrids(false);
-		glmgr->setFlagAllLines(false);
-		glmgr->setFlagAllPoints(false);
-		glmgr->setFlagSupergalacticGrid(true);
-		lmgr->setFlagCardinalsPoints(false);
-		cmgr->setFlagLines(false);
-		cmgr->setFlagLabels(false);
-		cmgr->setFlagBoundaries(false);
-		cmgr->setFlagArt(false);
-		amgr->setFlagLines(false);
-		amgr->setFlagLabels(false);
-		smgr->setFlagLabels(false);
-		ssmgr->setFlagLabels(false);
-		nmgr->setFlagHints(false);
-		lmgr->setFlagLandscape(false);
-		lmgr->setFlagAtmosphere(false);
-		lmgr->setFlagFog(false);
-		zl->setFlagShow(false);
-	}
-
+		stateInt = 5;
 	else
+		stateInt = 0;
+
+	if (stateInt == 0)
 	{
 		qWarning() << "WARNING clear(" << state << ") - state not known";
+	}
+	else
+	{
+		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+		SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
+		SporadicMeteorMgr* mmgr = GETSTELMODULE(SporadicMeteorMgr);
+		StelSkyDrawer* skyd = StelApp::getInstance().getCore()->getSkyDrawer();
+		ConstellationMgr* cmgr = GETSTELMODULE(ConstellationMgr);
+		AsterismMgr* amgr = GETSTELMODULE(AsterismMgr);
+		StarMgr* smgr = GETSTELMODULE(StarMgr);
+		NebulaMgr* nmgr = GETSTELMODULE(NebulaMgr);
+		GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
+		StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
+		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
+
+		#ifdef USE_STATIC_PLUGIN_SATELLITES
+		// Hide artificial satellites
+		Satellites* sat = GETSTELMODULE(Satellites);
+		sat->setFlagHints(false);
+		sat->setFlagLabels(false);
+		sat->setOrbitLinesFlag(false);
+		#endif
+
+		// identical for all states
+		glmgr->setFlagAllGrids(false);
+		glmgr->setFlagAllLines(false);
+		glmgr->setFlagAllPoints(false);
+		ssmgr->setFlagHints(false);
+		ssmgr->setFlagOrbits(false);
+		ssmgr->setFlagMoonScale(false);
+		ssmgr->setFlagMinorBodyScale(false);
+		ssmgr->setFlagTrails(false);
+		lmgr->setFlagCardinalsPoints(false);
+		amgr->setFlagLines(false);
+		amgr->setFlagLabels(false);
+		amgr->setFlagRayHelpers(false);
+
+		// applicable for most states
+		skyd->setFlagTwinkle(false);
+		skyd->setFlagLuminanceAdaptation(false);
+		ssmgr->setFlagPlanets(false);
+		mmgr->setZHR(0);
+		cmgr->setFlagLines(false);
+		cmgr->setFlagLabels(false);
+		cmgr->setFlagBoundaries(false);
+		cmgr->setFlagArt(false);
+		smgr->setFlagLabels(false);
+		ssmgr->setFlagLabels(false);
+		lmgr->setFlagLandscape(false);
+		lmgr->setFlagAtmosphere(false);
+		lmgr->setFlagFog(false);
+		nmgr->setFlagHints(false);
+		zl->setFlagShow(false);
+
+		switch (stateInt)
+		{
+			case 1: // natural
+			{
+				movmgr->setMountMode(StelMovementMgr::MountAltAzimuthal);
+				skyd->setFlagTwinkle(true);
+				skyd->setFlagLuminanceAdaptation(true);
+				ssmgr->setFlagPlanets(true);
+				mmgr->setZHR(10);
+				lmgr->setFlagLandscape(true);
+				lmgr->setFlagAtmosphere(true);
+				lmgr->setFlagFog(true);
+				zl->setFlagShow(true);
+				break;
+			}
+			case 2: // starchart
+			{
+				movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
+				ssmgr->setFlagPlanets(true);
+				cmgr->setFlagLines(true);
+				cmgr->setFlagLabels(true);
+				cmgr->setFlagBoundaries(true);
+				smgr->setFlagLabels(true);
+				ssmgr->setFlagLabels(true);
+				nmgr->setFlagHints(true);
+				glmgr->setFlagEquatorGrid(true);
+				break;
+			}
+			case 3: // deepspace
+				movmgr->setMountMode(StelMovementMgr::MountEquinoxEquatorial);
+				break;
+			case 4: // galactic
+			{
+				movmgr->setMountMode(StelMovementMgr::MountGalactic);
+				glmgr->setFlagGalacticGrid(true);
+				break;
+			}
+			case 5: // supergalactic
+			{
+				movmgr->setMountMode(StelMovementMgr::MountSupergalactic);
+				glmgr->setFlagSupergalacticGrid(true);
+				break;
+			}
+		}
 	}
 }
 
