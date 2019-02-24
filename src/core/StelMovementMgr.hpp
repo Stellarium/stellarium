@@ -291,10 +291,12 @@ public slots:
 	//! Look immediately towards South Celestial pole.
 	void lookTowardsSCP(void);
 
-	//! start animated move of the viewport offset.
-	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
-	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
-	//! @param duration animation duration, seconds.
+	//! set or start animated move of the viewport offset.
+	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
+	//! Also helpful in stereographic projection to push the horizon down and see more of the sky.
+	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]. Probably not very useful.
+	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]. This is also available in the GUI.
+	//! @param duration animation duration, seconds. Optional.
 	//! @note Only vertical viewport is really meaningful.
 	void moveViewport(float offsetX, float offsetY, const float duration=0.f);
 
