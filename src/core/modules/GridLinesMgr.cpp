@@ -1432,6 +1432,53 @@ bool GridLinesMgr::getFlagGridlines(void) const
 	return gridlinesDisplayed;
 }
 
+//! Setter ("master switch by type") for displaying all grids esp. for scripting
+void GridLinesMgr::setFlagAllGrids(const bool displayed)
+{
+	setFlagEquatorGrid(displayed);
+	setFlagEclipticGrid(displayed);
+	setFlagGalacticGrid(displayed);
+	setFlagAzimuthalGrid(displayed);
+	setFlagEquatorJ2000Grid(displayed);
+	setFlagEclipticJ2000Grid(displayed);
+	setFlagSupergalacticGrid(displayed);
+}
+
+//! Setter ("master switch by type") for displaying all lines esp. for scripting
+void GridLinesMgr::setFlagAllLines(const bool displayed)
+{
+	setFlagColureLines(displayed);
+	setFlagEquatorLine(displayed);
+	setFlagHorizonLine(displayed);
+	setFlagEclipticLine(displayed);
+	setFlagMeridianLine(displayed);
+	setFlagLongitudeLine(displayed);
+	setFlagEquatorJ2000Line(displayed);
+	setFlagEclipticJ2000Line(displayed);
+	setFlagPrecessionCircles(displayed);
+	setFlagPrimeVerticalLine(displayed);
+	setFlagCircumpolarCircles(displayed);
+	setFlagGalacticEquatorLine(displayed);
+	setFlagSupergalacticEquatorLine(displayed);
+}
+
+//! Setter ("master switch by type") for displaying all points esp. for scripting
+void GridLinesMgr::setFlagAllPoints(const bool displayed)
+{
+	setFlagZenithNadir(displayed);
+	setFlagEclipticPoles(displayed);
+	setFlagEquinoxPoints(displayed);
+	setFlagGalacticPoles(displayed);
+	setFlagAntisolarPoint(displayed);
+	setFlagCelestialPoles(displayed);
+	setFlagSolsticePoints(displayed);
+	setFlagEclipticJ2000Poles(displayed);
+	setFlagEquinoxJ2000Points(displayed);
+	setFlagSupergalacticPoles(displayed);
+	setFlagCelestialJ2000Poles(displayed);
+	setFlagSolsticeJ2000Points(displayed);
+}
+
 //! Set flag for displaying Azimuthal Grid
 void GridLinesMgr::setFlagAzimuthalGrid(const bool displayed)
 {

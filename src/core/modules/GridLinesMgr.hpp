@@ -367,6 +367,13 @@ public slots:
 	//! Accessor ("master switch") for displaying any grid/line.
 	bool getFlagGridlines(void) const;
 
+	//! Setter ("master switch by type") for displaying all grids.
+	void setFlagAllGrids(const bool displayed);
+	//! Setter ("master switch by type") for displaying all lines.
+	void setFlagAllLines(const bool displayed);
+	//! Setter ("master switch by type") for displaying all points.
+	void setFlagAllPoints(const bool displayed);
+
 	//! Setter for displaying Azimuthal Grid.
 	void setFlagAzimuthalGrid(const bool displayed);
 	//! Accessor for displaying Azimuthal Grid.
