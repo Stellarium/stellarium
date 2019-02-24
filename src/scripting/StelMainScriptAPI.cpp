@@ -904,7 +904,7 @@ QVariantMap StelMainScriptAPI::getSelectedObjectInfo()
 
 void StelMainScriptAPI::clear(const QString& state)
 {
-	int stateInt;
+	int stateInt = 0;
 	if (state.toLower() == "natural")
 		stateInt = 1;
 	else if (state.toLower() == "starchart")
@@ -915,8 +915,6 @@ void StelMainScriptAPI::clear(const QString& state)
 		stateInt = 4;
 	else if (state.toLower() == "supergalactic")
 		stateInt = 5;
-	else
-		stateInt = 0;
 
 	if (stateInt == 0)
 	{
@@ -941,7 +939,7 @@ void StelMainScriptAPI::clear(const QString& state)
 		Satellites* sat = GETSTELMODULE(Satellites);
 		sat->setFlagHints(false);
 		sat->setFlagLabels(false);
-		sat->setOrbitLinesFlag(false);
+		sat->setFlagOrbitLines(false);
 		#endif
 
 		// identical for all states

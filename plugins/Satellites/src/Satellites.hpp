@@ -163,6 +163,10 @@ class Satellites : public StelObjectModule
 	Q_PROPERTY(bool realisticMode
 		   READ getFlagRealisticMode
 		   WRITE setFlagRelisticMode)
+	Q_PROPERTY(bool flagOrbitLines
+		   READ getFlagOrbitLines
+		   WRITE setFlagOrbitLines
+		   NOTIFY flagOrbitLinesChanged)
 	
 public:
 	//! @enum UpdateState
@@ -370,8 +374,6 @@ public:
 	bool getFlagLabels() const;
 	bool getFlagRealisticMode() const;
 	bool getFlagHideInvisibleSatellites() const;
-	//! Get the current status of the orbit line rendering flag.
-	bool getOrbitLinesFlag() const;
 	bool isAutoAddEnabled() const { return autoAddEnabled; }
 	bool isAutoRemoveEnabled() const { return autoRemoveEnabled; }	
 
@@ -383,6 +385,7 @@ public:
 signals:
 	void hintsVisibleChanged(bool b);
 	void labelsVisibleChanged(bool b);
+	void flagOrbitLinesChanged(bool b);
 
 	//! Emitted when some of the plugin settings have been changed.
 	//! Used to communicate with the configuration window.
@@ -460,7 +463,9 @@ public slots:
 	//! as well, but this can be used to turn on/off all those satellites which elect to
 	//! have orbit lines all in one go.
 	//! @param b - true to turn on orbit lines, false to turn off
-	void setOrbitLinesFlag(bool b);
+	void setFlagOrbitLines(bool b);
+	//! Get the current status of the orbit line rendering flag.
+	bool getFlagOrbitLines() const;
 
 	void recalculateOrbitLines(void);
 

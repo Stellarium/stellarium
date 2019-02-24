@@ -1404,12 +1404,12 @@ void Satellites::updateObserverLocation(const StelLocation &loc)
 	recalculateOrbitLines();
 }
 
-void Satellites::setOrbitLinesFlag(bool b)
+void Satellites::setFlagOrbitLines(bool b)
 {
 	Satellite::orbitLinesFlag = b;
 }
 
-bool Satellites::getOrbitLinesFlag() const
+bool Satellites::getFlagOrbitLines() const
 {
 	return Satellite::orbitLinesFlag;
 }
