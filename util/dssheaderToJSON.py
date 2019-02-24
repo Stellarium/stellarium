@@ -36,12 +36,12 @@ def getIntersectPoly(baseFileName, curLevel, i, j):
             return None
 
         if x <= 0.:
-            assert y > 0
+            # assert y > 0 # (always true, tested above)
             assert y <= 300.
             return [[[0, y], [300, y], [300, 300], [0, 300]]]
         if y >= 300.:
             assert x > 0
-            assert x <= 300.
+            # assert x <= 300. # (always true, tested above)
             return [[[0, 0], [x, 0], [x, 300], [0, 300]]]
         return [[[0, 0], [x, 0], [x, 300], [0, 300]], [[x, y], [300, y], [300, 300], [x, 300]]]
     else:
@@ -58,11 +58,11 @@ def getIntersectPoly(baseFileName, curLevel, i, j):
             return None
 
         if x <= -300.:
-            assert y > 0
+            # assert y > 0 # (always true, tested above)
             assert y <= 300.
             return [[[0, y], [300, y], [300, 300], [0, 300]]]
         if y >= 300.:
-            assert x <= 0
+            # assert x <= 0 # (always true, tested above)
             assert x > -300.
             return [[[-x, 0], [300, 0], [300, 300], [-x, 300]]]
         return [[[-x, 0], [300, 0], [300, 300], [-x, 300]], [[0, y], [-x, y], [-x, 300], [0, 300]]]
