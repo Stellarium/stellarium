@@ -55,3 +55,88 @@ representing planet textures, as opposed to sky surveys.  If the
 \texttt{obs\_frame} property of a survey is set to the name of a planet or
 other solar system body, Stellarium will render it in place of the default
 texture used for the body.
+
+
+\section{Digitized Sky Survey 2 (TOAST Survey)}
+\sectionauthor*{Georg Zotti, Alexander Wolf}
+\label{sec:TOAST}
+
+The older way to provide a tessellated all-sky survey uses the TOAST
+encoding\footnote{Please see
+  \url{http://montage.ipac.caltech.edu/docs/WWT/} for details}.
+Stellarium provides access to the Digitized Sky Survey 2, a
+combination of high-resolution scans of red- and blue-sensitive
+photographic plates taken in 1983--2006 at Palomar Observatory and the
+Anglo-Australian Observatory.\footnote{The original data are available
+  at \url{http://archive.stsci.edu/cgi-bin/dss_form}.}
+
+To enable access to the DSS layer, see
+section~\ref{sec:gui:configuration:extras} and enable the DSS
+button. Then just press that DSS button in the lower button bar, wait
+a moment, zoom in and enjoy!
+
+\subsection{Local Installation}
+
+This display normally requires access to the Internet. However, in
+some situations like frequent and extensive use in fixed observatories,
+or use in the field when Internet connection is not possible, you can
+download all image tiles to your local harddisk for local use. Please be
+considerate, don't waste bandwidth, and do this only if you really need it.
+
+The images are stored in subdirectories that increase in size and
+number of files (see Table~\ref{tab:TOAST:levels}). Zooming in loads
+the next level if available.
+
+For partial downloads, you can limit the maximally used level (e.g. 9
+or 10). The difference from level 10 to 11 is really hardly
+noticeable, yet level 11 contains almost 75\% of all data. On a small
+system like Raspberry Pi 3, you may run into troubles with too little
+texture memory when level is more than 7. You can download the archives at
+\url{https://dss.stellarium.org/offline/}.
+
+Then add a few entries to the \texttt{[astro]} section in
+Stellarium's \file{config.ini}.  On Windows, if you have a harddisk
+\file{T:} with path \file{T:\textbackslash{}StelDSS} that contains the
+unpacked image subdirectories 0, 1, 2, \ldots, 10, the section may look like
+\begin{configfile}
+[astro]
+toast_survey_directory =StelDSS
+toast_survey_host=T:/
+toast_survey_levels=10
+\end{configfile}
+On Linux, with the files stored in \file{/usr/local/share/Stellarium/StelDSS}, the same section could look like
+\begin{configfile}
+[astro]
+toast_survey_directory =/usr/local/share/Stellarium/StelDSS
+toast_survey_host=localhost:
+toast_survey_levels=10
+\end{configfile}
+
+\begin{table}[htbp]
+  \centering
+\begin{tabular}{rrr}
+Level & No of files & Filespace (kB)\\
+0     &          1  &         32\\
+1     &          4  &        124\\
+2     &         16  &        472\\
+3     &         64  &      1.820\\
+4     &        256  &      7.172\\
+5     &      1.024  &     27.920\\
+6     &      4.096  &    109.628\\
+7     &     16.384  &    429.800\\
+8     &     65.536  &  1.661.808\\
+9     &    262.144  &  6.119.092\\
+10    &  1.048.576  & 20.250.216\\
+11    &  4.194.305  & 83.583.724
+\end{tabular}
+\caption{Number of files and storage requirements for local DSS TOAST installation}
+\label{tab:TOAST:levels}
+\end{table}
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "guide"
+%%% End: 
