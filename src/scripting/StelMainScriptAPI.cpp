@@ -921,6 +921,7 @@ void StelMainScriptAPI::clear(const QString& state)
 	Satellites* sat = GETSTELMODULE(Satellites);
 	sat->setFlagHints(false);
 	sat->setFlagLabels(false);
+	sat->setOrbitLinesFlag(false);
 	#endif
 
 	if (state.toLower() == "natural")
