@@ -13,5 +13,6 @@ extraction:
       - "qtmultimedia5-dev"
       - "libqt5multimedia5-plugins"
   python:
-    python_setup:
-      version: 3
+    index:
+      exclude:
+        - "skycultures/"
