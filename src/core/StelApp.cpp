@@ -35,6 +35,7 @@
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
 #include "LabelMgr.hpp"
+#include "MarkerMgr.hpp"
 #include "SolarSystem.hpp"
 #include "NomenclatureMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
@@ -539,6 +540,11 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(skyLabels);
 
 	skyCultureMgr->init();
+
+	// User markers
+	MarkerMgr* skyMarkers = new MarkerMgr();
+	skyMarkers->init();
+	getModuleMgr().registerModule(skyMarkers);
 
 	// Init custom objects
 	CustomObjectMgr* custObj = new CustomObjectMgr();

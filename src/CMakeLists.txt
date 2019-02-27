@@ -186,6 +186,8 @@ SET(stellarium_lib_SRCS
      core/modules/HipsMgr.cpp
      core/modules/LabelMgr.hpp
      core/modules/LabelMgr.cpp
+     core/modules/MarkerMgr.hpp
+     core/modules/MarkerMgr.cpp
      core/modules/Landscape.cpp
      core/modules/Landscape.hpp
      core/modules/LandscapeMgr.cpp
