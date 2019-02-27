@@ -214,7 +214,7 @@ void newtonnu(double ecc, double nu, double& e0, double& m)
 	}
 	else if ( ecc > 1.0 + sv  ) // hyperbolic
 	{
-		if ((ecc > 1.0 ) && (std::fabs(nu)+0.00001 < M_PI-std::acos(1.0 /ecc)))
+		if (std::fabs(nu)+0.00001 < M_PI-std::acos(1.0 /ecc))
 		{
 			sine = ( std::sqrt( ecc*ecc-1.0  ) * std::sin(nu) ) / ( 1.0  + ecc*std::cos(nu) );
 			#ifdef _MSC_BUILD
