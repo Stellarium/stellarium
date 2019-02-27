@@ -33,6 +33,7 @@
 #include "AngleSpinBox.hpp"
 #include "NebulaMgr.hpp"
 #include "StarMgr.hpp"
+#include "LabelMgr.hpp"
 
 #include <QFileDialog>
 #include <QDir>
@@ -46,6 +47,7 @@ BookmarksDialog::BookmarksDialog(QObject *parent)
 	ui = new Ui_bookmarksDialogForm;
 	core = StelApp::getInstance().getCore();
 	objectMgr = GETSTELMODULE(StelObjectMgr);
+	labelMgr = GETSTELMODULE(LabelMgr);
 	bookmarksListModel = new QStandardItemModel(0, ColumnCount);
 	bookmarksJsonPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/bookmarks.json";
 }
@@ -255,6 +257,11 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 {
 	QList<Vec3d> highlights;
 	highlights.clear();
+	highlightLabelIDs.clear();
+	int fontSize = StelApp::getInstance().getScreenFontSize();
+	HighlightMgr* hlMgr = GETSTELMODULE(HighlightMgr);
+	QString color = StelUtils::vec3fToHtmlColor(hlMgr->getColor());
+	float distance = hlMgr->getMarkersSize();
 
 	for (auto bm : bookmarksCollection)
 	{
@@ -281,15 +288,23 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 			highlights.append(pos);
 
 		objectMgr->unSelect();
+		// Add labels for named highlights (name in top right corner)
+		highlightLabelIDs.append(labelMgr->labelObject(name, name, true, fontSize, color, "NE", distance));
 	}
 
-	GETSTELMODULE(HighlightMgr)->fillHighlightList(highlights);
+	hlMgr->fillHighlightList(highlights);
 }
 
 void BookmarksDialog::clearHighlightsButtonPressed()
 {
-	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
 	objectMgr->unSelect();
+	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
+	// Clear labels
+	for (auto l : highlightLabelIDs)
+	{
+		labelMgr->deleteLabel(l);
+	}
+	highlightLabelIDs.clear();
 }
 
 void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)
