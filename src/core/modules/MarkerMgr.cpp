@@ -42,7 +42,7 @@
 class StelMarker
 {
 public:
-	StelMarker(const int& mSize, const Vec3f& mColor);
+	StelMarker(const float& mSize, const Vec3f& mColor);
 	virtual ~StelMarker() {;}
 
 	//! draw the marker on the sky
@@ -59,7 +59,7 @@ public:
 	//! Get value of flag used to turn on and off the marker
 	bool getFlagShow(void) const;
 
-	int markerSize;
+	float markerSize;
 	Vec3f markerColor;
 	LinearFader markerFader;
 	bool autoDelete;
@@ -81,15 +81,16 @@ public:
 		Circle		= 2,
 		Ellipse		= 3,
 		Square		= 4,
-		DottedCircle	= 5
+		DottedCircle	= 5,
+		CrossedCircle	= 6
 	};
 
-	//! Constructor of a SkyMarker which is attached to an existing object
-	//! @param bindObject a pointer to an existing object to which the marker will be attached
+	//! Constructor of a SkyMarker which is "attached" to the equatorial coordinates for epoch J2000.0
+	//! @param pos equatorial position for epoch J2000.0
 	//! @param size the size of the marker
 	//! @param color choose of a color for the marker
 	//! @param style determines type of marker
-	SkyMarker(StelObjectP bindObject, int size, Vec3f color, SkyMarker::MarkerType style=Cross);
+	SkyMarker(Vec3d pos, float size, Vec3f color, SkyMarker::MarkerType style=Cross);
 
 	virtual ~SkyMarker();
 
@@ -102,14 +103,14 @@ public:
 
 private:
 	StelTextureSP markerTexture;
-	StelObjectP markerObject;
+	Vec3d markerPosition;
 	SkyMarker::MarkerType markerType;
 };
 
 /////////////////////
-// StelLabel class //
+// StelMarker class //
 /////////////////////
-StelMarker::StelMarker(const int& mSize, const Vec3f& mColor)
+StelMarker::StelMarker(const float& mSize, const Vec3f& mColor)
 	: markerSize(mSize),
 	  markerColor(mColor),
 	  autoDelete(false),
@@ -146,10 +147,10 @@ bool StelMarker::getFlagShow(void) const
 ////////////////////
 // SkyMarker class //
 ////////////////////
-SkyMarker::SkyMarker(StelObjectP bindObject, int size, Vec3f color, SkyMarker::MarkerType style)
+SkyMarker::SkyMarker(Vec3d pos, float size, Vec3f color, SkyMarker::MarkerType style)
 	: StelMarker(size, color)
 	, markerTexture(Q_NULLPTR)
-	, markerObject(bindObject)
+	, markerPosition(pos)
 	, markerType(style)
 {
 	QString fileName = "cross.png";
@@ -171,6 +172,9 @@ SkyMarker::SkyMarker(StelObjectP bindObject, int size, Vec3f color, SkyMarker::M
 		case DottedCircle:
 			fileName = "neb_ocl_lrg.png";
 			break;
+		case CrossedCircle:
+			fileName = "neb_gcl_lrg.png";
+			break;
 	}
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
 }
@@ -185,9 +189,8 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 	if(markerFader.getInterstate() <= 0.0)
 		return false;
 
-	Vec3d objectPos = markerObject->getJ2000EquatorialPos(core);
 	Vec3d labelXY;
-	sPainter.getProjector()->project(objectPos,labelXY);
+	sPainter.getProjector()->project(markerPosition, labelXY);
 
 	markerTexture->bind();
 
@@ -208,6 +211,8 @@ SkyMarker::MarkerType SkyMarker::stringToMarkerType(const QString &s)
 		return SkyMarker::Square;
 	else if (s.toLower()=="dotted-circle")
 		return SkyMarker::DottedCircle;
+	else if (s.toLower()=="crossed-circle")
+		return SkyMarker::CrossedCircle;
 	else
 		return SkyMarker::Cross;
 }
@@ -237,7 +242,7 @@ void MarkerMgr::draw(StelCore* core)
 	}
 }
 
-void MarkerMgr::messageTimeout2()
+void MarkerMgr::markerDeleteTimeout()
 {
 	QObject* obj = QObject::sender();
 	for (auto* m : allMarkers)
@@ -250,15 +255,15 @@ void MarkerMgr::messageTimeout2()
 	}
 }
 
-void MarkerMgr::messageTimeout1()
+void MarkerMgr::markerVisibleTimeout()
 {
 	QObject* obj = QObject::sender();
 	for (auto* m : allMarkers)
 	{
 		if (m->timer == obj)
 		{
-			disconnect(m->timer, SIGNAL(timeout()), this, SLOT(messageTimeout1()));
-			connect(m->timer, SIGNAL(timeout()), this, SLOT(messageTimeout2()));
+			disconnect(m->timer, SIGNAL(timeout()), this, SLOT(markerVisibleTimeout()));
+			connect(m->timer, SIGNAL(timeout()), this, SLOT(markerDeleteTimeout()));
 			m->setFlagShow(false);
 			m->timer->setInterval(m->markerFader.getDuration()*1000);
 			m->timer->start();
@@ -275,7 +280,7 @@ int MarkerMgr::appendMarker(class StelMarker *m, int autoDeleteTimeoutMs)
 		m->timer = timer;
 		timer->setSingleShot(true);
 		timer->setInterval(autoDeleteTimeoutMs);
-		connect(timer, SIGNAL(timeout()), this, SLOT(messageTimeout1()));
+		connect(timer, SIGNAL(timeout()), this, SLOT(markerVisibleTimeout()));
 		timer->start();
 	}
 
@@ -287,9 +292,9 @@ int MarkerMgr::appendMarker(class StelMarker *m, int autoDeleteTimeoutMs)
 
 int MarkerMgr::markerObject(const QString& objectName,
 			    bool visible,
-			    int size,
 			    const QString& mtype,
 			    const QString& color,
+			    const float size,
 			    bool autoDelete,
 			    int autoDeleteTimeoutMs)
 {
@@ -300,7 +305,36 @@ int MarkerMgr::markerObject(const QString& objectName,
 		return -1;
 	}
 	
-	StelMarker* m = new SkyMarker(obj, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new SkyMarker(obj->getJ2000EquatorialPos(StelApp::getInstance().getCore()), size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	if (m==Q_NULLPTR)
+		return -1;
+
+	if (visible)
+		m->setFlagShow(true);
+
+	m->autoDelete = autoDelete;
+
+	return appendMarker(m, autoDeleteTimeoutMs);
+}
+
+int MarkerMgr::markerEquatorial(const QString& RA,
+				const QString& Dec,
+				bool j2000epoch,
+				bool visible,
+				const QString& mtype,
+				const QString& color,
+				const float size,
+				bool autoDelete,
+				int autoDeleteTimeoutMs)
+{
+	double dRA	= StelUtils::getDecAngle(RA);
+	double dDec	= StelUtils::getDecAngle(Dec);
+	Vec3d pos;
+	StelUtils::spheToRect(dRA, dDec, pos);
+	if (!j2000epoch)
+		pos = StelApp::getInstance().getCore()->equinoxEquToJ2000(pos);
+
+	StelMarker* m = new SkyMarker(pos, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 

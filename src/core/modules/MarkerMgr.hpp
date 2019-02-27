@@ -61,19 +61,56 @@ public slots:
 	//! Create a marker which is attached to a StelObject.
 	//! @param objectName the English name of the object to attach to
 	//! @param visible if true, the marker starts displayed, else it starts hidden
+	//! @param mtype the type of marker. Keys:
+	//! - cross: simple cross
+	//! - circle: simple circle
+	//! - ellipse: simple horizontal ellipse
+	//! - square: simple square
+	//! - dotted-circle: simple circle drawn by dots
+	//! - crossed-circle: simple circle with cross inside the circle
 	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param size the size of marker.
 	//! @param autoDelete the marker will be automatically deleted after it is displayed once
 	//! @param autoDeleteTimeoutMs if not zero, the marker will be automatically deleted after
 	//! autoDeleteTimeoutMs ms
 	//! @return a unique ID which can be used to refer to the marker.
 	//! returns -1 if the marker could not be created (e.g. object not found)
 	int markerObject(const QString& objectName,
-			 bool visible=true,
-			 int size = 5,
+			 bool visible=true,			 
 			 const QString& mtype="cross",
-			 const QString& color="#999999",
+			 const QString& color="#ffff66",
+			 const float size = 6.f,
 			 bool autoDelete = false,
 			 int autoDeleteTimeoutMs = 0);
+
+	//! Create a marker with equatorial coordinates.
+	//! @param RA
+	//! @param Dec
+	//! @param j2000epoch if true, the marker starts displayed in equatorial coordinates for epoch J2000.0
+	//! @param visible if true, the marker starts displayed, else it starts hidden
+	//! @param mtype the type of marker. Keys:
+	//! - cross: simple cross
+	//! - circle: simple circle
+	//! - ellipse: simple horizontal ellipse
+	//! - square: simple square
+	//! - dotted-circle: simple circle drawn by dots
+	//! - crossed-circle: simple circle with cross inside the circle
+	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param size the size of marker.
+	//! @param autoDelete the marker will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the marker will be automatically deleted after
+	//! autoDeleteTimeoutMs ms
+	//! @return a unique ID which can be used to refer to the marker.
+	//! returns -1 if the marker could not be created (e.g. object not found)
+	int markerEquatorial(const QString& RA,
+			     const QString& Dec,
+			     bool j2000epoch=true,
+			     bool visible=true,
+			     const QString& mtype="cross",
+			     const QString& color="#ffff66",
+			     const float size = 6.f,
+			     bool autoDelete = false,
+			     int autoDeleteTimeoutMs = 0);
 
 	//! find out if a marker identified by id is presently shown
 	bool getMarkerShow(int id) const;
@@ -87,8 +124,8 @@ public slots:
 	int deleteAllMarkers(void);
 
 private slots:
-	void messageTimeout1();
-	void messageTimeout2();
+	void markerVisibleTimeout();
+	void markerDeleteTimeout();
 
 private:
 	QMap<int, class StelMarker*> allMarkers;
