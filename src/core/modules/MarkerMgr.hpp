@@ -67,7 +67,12 @@ public slots:
 	//! - ellipse: simple horizontal ellipse
 	//! - square: simple square
 	//! - dotted-circle: simple circle drawn by dots
-	//! - crossed-circle: simple circle with cross inside the circle
+	//! - circled-cross (or circled-plus): simple circle with cross inside the circle
+	//! - dashed-square: simple square, drawing by dashed line
+	//! - squared-dotted-circle (or squared-dcircle): simple circle, drawing by dotted line
+	//! - crossed-circle: the cross under circle
+	//! - target: the target shape
+	//! - gear: the gear shape
 	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
 	//! @param size the size of marker.
 	//! @param autoDelete the marker will be automatically deleted after it is displayed once
@@ -76,7 +81,7 @@ public slots:
 	//! @return a unique ID which can be used to refer to the marker.
 	//! returns -1 if the marker could not be created (e.g. object not found)
 	int markerObject(const QString& objectName,
-			 bool visible=true,			 
+			 bool visible=true,
 			 const QString& mtype="cross",
 			 const QString& color="#ffff66",
 			 const float size = 6.f,
@@ -84,8 +89,8 @@ public slots:
 			 int autoDeleteTimeoutMs = 0);
 
 	//! Create a marker with equatorial coordinates.
-	//! @param RA
-	//! @param Dec
+	//! @param RA right ascension (e.g. 5h10m31s)
+	//! @param Dec declination (e.g. 25d30m30s)
 	//! @param j2000epoch if true, the marker starts displayed in equatorial coordinates for epoch J2000.0
 	//! @param visible if true, the marker starts displayed, else it starts hidden
 	//! @param mtype the type of marker. Keys:
@@ -94,7 +99,12 @@ public slots:
 	//! - ellipse: simple horizontal ellipse
 	//! - square: simple square
 	//! - dotted-circle: simple circle drawn by dots
-	//! - crossed-circle: simple circle with cross inside the circle
+	//! - circled-cross (or circled-plus): simple circle with cross inside the circle
+	//! - dashed-square: simple square, drawing by dashed line
+	//! - squared-dotted-circle (or squared-dcircle): simple circle, drawing by dotted line
+	//! - crossed-circle: the cross under circle
+	//! - target: the target shape
+	//! - gear: the gear shape
 	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
 	//! @param size the size of marker.
 	//! @param autoDelete the marker will be automatically deleted after it is displayed once
@@ -111,6 +121,38 @@ public slots:
 			     const float size = 6.f,
 			     bool autoDelete = false,
 			     int autoDeleteTimeoutMs = 0);
+
+	//! Create a marker with horizontal coordinates.
+	//! @param az azimuth (e.g. 125d30m30s)
+	//! @param alt altitude (e.g. 25d30m30s)
+	//! @param visible if true, the marker starts displayed, else it starts hidden
+	//! @param mtype the type of marker. Keys:
+	//! - cross: simple cross
+	//! - circle: simple circle
+	//! - ellipse: simple horizontal ellipse
+	//! - square: simple square
+	//! - dotted-circle: simple circle drawn by dots
+	//! - circled-cross (or circled-plus): simple circle with cross inside the circle
+	//! - dashed-square: simple square, drawing by dashed line
+	//! - squared-dotted-circle (or squared-dcircle): simple circle, drawing by dotted line
+	//! - crossed-circle: the cross under circle
+	//! - target: the target shape
+	//! - gear: the gear shape
+	//! @param color HTML-like color spec, e.g. "#ffff00" for yellow
+	//! @param size the size of marker.
+	//! @param autoDelete the marker will be automatically deleted after it is displayed once
+	//! @param autoDeleteTimeoutMs if not zero, the marker will be automatically deleted after
+	//! autoDeleteTimeoutMs ms
+	//! @return a unique ID which can be used to refer to the marker.
+	//! returns -1 if the marker could not be created (e.g. object not found)
+	int markerHorizon(const QString& az,
+			  const QString& alt,
+			  bool visible=true,
+			  const QString& mtype="cross",
+			  const QString& color="#ffff66",
+			  const float size = 6.f,
+			  bool autoDelete = false,
+			  int autoDeleteTimeoutMs = 0);
 
 	//! find out if a marker identified by id is presently shown
 	bool getMarkerShow(int id) const;

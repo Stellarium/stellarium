@@ -82,15 +82,20 @@ public:
 		Ellipse		= 3,
 		Square		= 4,
 		DottedCircle	= 5,
-		CrossedCircle	= 6
+		CircledCross	= 6,
+		DashedSquare	= 7,
+		SquaredDCircle	= 8,
+		CrossedCircle	= 9,
+		Target		= 10,
+		Gear		= 11
 	};
 
 	//! Constructor of a SkyMarker which is "attached" to the equatorial coordinates for epoch J2000.0
-	//! @param pos equatorial position for epoch J2000.0
+	//! @param pos the vector to the equatorial coordinates for epoch J2000.0
 	//! @param size the size of the marker
 	//! @param color choose of a color for the marker
 	//! @param style determines type of marker
-	SkyMarker(Vec3d pos, float size, Vec3f color, SkyMarker::MarkerType style=Cross);
+	SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style=Cross);
 
 	virtual ~SkyMarker();
 
@@ -147,14 +152,14 @@ bool StelMarker::getFlagShow(void) const
 ////////////////////
 // SkyMarker class //
 ////////////////////
-SkyMarker::SkyMarker(Vec3d pos, float size, Vec3f color, SkyMarker::MarkerType style)
+SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker::MarkerType style)
 	: StelMarker(size, color)
 	, markerTexture(Q_NULLPTR)
 	, markerPosition(pos)
 	, markerType(style)
 {
 	QString fileName = "cross.png";
-	// NOTE: Use unicode chars for markers instead?
+	// TODO: Use unicode chars for markers or SVG instead?
 	switch (markerType)
 	{
 		case Cross:
@@ -172,8 +177,23 @@ SkyMarker::SkyMarker(Vec3d pos, float size, Vec3f color, SkyMarker::MarkerType s
 		case DottedCircle:
 			fileName = "neb_ocl_lrg.png";
 			break;
-		case CrossedCircle:
+		case CircledCross:
 			fileName = "neb_gcl_lrg.png";
+			break;
+		case DashedSquare:
+			fileName = "neb_drk_lrg.png";
+			break;
+		case SquaredDCircle:
+			fileName = "neb_ocln_lrg.png";
+			break;
+		case CrossedCircle:
+			fileName = "neb_pnb.png";
+			break;
+		case Target:
+			fileName = "pointer2.png";
+			break;
+		case Gear:
+			fileName = "gear.png";
 			break;
 	}
 	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
@@ -186,17 +206,18 @@ SkyMarker::~SkyMarker()
 
 bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 {
-	if(markerFader.getInterstate() <= 0.0)
+	Q_UNUSED(core);
+	if(markerFader.getInterstate() <= 0.f)
 		return false;
 
-	Vec3d labelXY;
-	sPainter.getProjector()->project(markerPosition, labelXY);
+	Vec3d xyPos;
+	sPainter.getProjector()->project(markerPosition, xyPos);
 
 	markerTexture->bind();
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
-	sPainter.drawSprite2dMode(labelXY[0], labelXY[1], markerSize);
+	sPainter.drawSprite2dMode(xyPos[0], xyPos[1], markerSize);
 
 	return true;
 }
@@ -211,8 +232,18 @@ SkyMarker::MarkerType SkyMarker::stringToMarkerType(const QString &s)
 		return SkyMarker::Square;
 	else if (s.toLower()=="dotted-circle")
 		return SkyMarker::DottedCircle;
+	else if (s.toLower()=="circled-cross" || s.toLower()=="circled-plus")
+		return SkyMarker::CircledCross;
+	else if (s.toLower()=="dashed-square")
+		return SkyMarker::DashedSquare;
+	else if (s.toLower()=="squared-dotted-circle" || s.toLower()=="squared-dcircle")
+		return SkyMarker::SquaredDCircle;
 	else if (s.toLower()=="crossed-circle")
-		return SkyMarker::CrossedCircle;
+		return SkyMarker::SquaredDCircle;
+	else if (s.toLower()=="target")
+		return SkyMarker::Target;
+	else if (s.toLower()=="gear")
+		return SkyMarker::Gear;
 	else
 		return SkyMarker::Cross;
 }
@@ -333,6 +364,33 @@ int MarkerMgr::markerEquatorial(const QString& RA,
 	StelUtils::spheToRect(dRA, dDec, pos);
 	if (!j2000epoch)
 		pos = StelApp::getInstance().getCore()->equinoxEquToJ2000(pos);
+
+	StelMarker* m = new SkyMarker(pos, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	if (m==Q_NULLPTR)
+		return -1;
+
+	if (visible)
+		m->setFlagShow(true);
+
+	m->autoDelete = autoDelete;
+
+	return appendMarker(m, autoDeleteTimeoutMs);
+}
+
+int MarkerMgr::markerHorizon(const QString& az,
+			     const QString& alt,
+			     bool visible,
+			     const QString& mtype,
+			     const QString& color,
+			     const float size,
+			     bool autoDelete,
+			     int autoDeleteTimeoutMs)
+{
+	double dAzi	= StelUtils::getDecAngle(az);
+	double dAlt	= StelUtils::getDecAngle(alt);
+	Vec3d pos;
+	StelUtils::spheToRect(M_PI - dAzi, dAlt, pos);
+	pos = StelApp::getInstance().getCore()->altAzToJ2000(pos);
 
 	StelMarker* m = new SkyMarker(pos, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
