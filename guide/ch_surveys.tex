@@ -91,7 +91,14 @@ For partial downloads, you can limit the maximally used level (e.g. 9
 or 10). The difference from level 10 to 11 is really hardly
 noticeable, yet level 11 contains almost 75\% of all data. On a small
 system like Raspberry Pi 3, you may run into troubles with too little
-texture memory when level is more than 7. You can download the archives at
+texture memory when level is more than 7.
+
+Another issue: the level 11 subdirectory holds over 4 million
+files. Windows \program{Explorer} is not optimized to open and display
+this number of files and will take a long time to open. Just unpack
+this archive, but don't access the folder with \program{Explorer}.
+
+If all that does not discourage you, you can download the archives at
 \url{https://dss.stellarium.org/offline/}.
 
 Then add a few entries to the \texttt{[astro]} section in

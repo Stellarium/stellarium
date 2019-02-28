@@ -61,6 +61,11 @@ void StelFileMgr::init()
 	userDir = QDir::homePath() + "/.stellarium";
 #endif
 
+	if (qEnvironmentVariableIsSet("STEL_USERDIR"))
+	{
+		userDir=qEnvironmentVariable("STEL_USERDIR");
+	}
+
 	if (!QFile(userDir).exists())
 	{
 		qWarning() << "User config directory does not exist: " << QDir::toNativeSeparators(userDir);
