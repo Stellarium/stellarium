@@ -27,6 +27,7 @@
 #include <QDebug>
 #include <QStandardPaths>
 #include <QProcessEnvironment>
+#include <QtGlobal>
 
 #include <stdio.h>
 
