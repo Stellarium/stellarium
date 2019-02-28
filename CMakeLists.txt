@@ -130,6 +130,12 @@ SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter")
 IF(NOT "${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
      SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -Wno-unused-result")
      SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -Wno-unused-result")
+ELSE()
+     # Suppress some warning for Intel C/C++ compilers
+     # Diagnostic 1875: offsetof applied to non-POD (Plain Old Data) types is nonstandard
+     # Diagnostic 654: overloaded virtual function
+     SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -diag-disable:remark -wd1875,654")
+     SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -diag-disable:remark -wd1875,654")
 ENDIF()
 
 # Set whether to try using C++11 when compiling. Required for Qt >= 5.7"

@@ -1382,23 +1382,22 @@ void S3DRenderer::drawCoordinatesText()
 	str = QString("Eye:    %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
 	painter.drawText(screen_x, screen_y, str);
 
-	/*// DEBUG AIDS:
-    screen_y -= 15.0f;
-    str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    //*/
+//	DEBUG AIDS:
+//	screen_y -= 15.0f;
+//	str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);
 }
 
 void S3DRenderer::drawDebug()
