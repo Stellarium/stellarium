@@ -4244,8 +4244,8 @@ void AstroCalcDialog::calculateWutObjects()
 
 		const Nebula::TypeGroup& tflags = dsoMgr->getTypeFilters();
 		bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-
 		bool angularSizeLimit = ui->wutAngularSizeLimitCheckBox->isChecked();
+		bool passByType, visible;
 		double angularSizeLimitMin = ui->wutAngularSizeLimitMinSpinBox->valueDegrees();
 		double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
@@ -4345,15 +4345,89 @@ void AstroCalcDialog::calculateWutObjects()
 					}
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					break;
-				case 2: // Bright nebulae
+				case 2: // DSO
+				case 3:
+				case 4:
+				case 5:
+				case 14:
+				case 18:
+				case 19:
+				case 20:
+				case 21:
+				case 22:
+				case 23:
+				{
+					if (categoryId==3)
+						initListWUT(false, false); // special case!
+					if (categoryId==18 || categoryId==19 || categoryId==20)
+						enableVisibilityAngularLimits(false);
+
 					for (const auto& object : allDSO)
 					{
+						passByType = false;
 						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeBrightNebulae)
-						    && (ntype == Nebula::NebN || ntype == Nebula::NebBn || ntype == Nebula::NebEn || ntype == Nebula::NebRn || ntype == Nebula::NebHII || ntype == Nebula::NebISM || ntype == Nebula::NebCn || ntype == Nebula::NebSNR)
-						    && mag <= magLimit
-						    && object->isAboveRealHorizon(core))
+						Nebula::NebulaType ntype = object->getDSOType();						
+						switch (categoryId)
+						{
+							case 2: // Bright nebulae
+								if ((bool)(tflags & Nebula::TypeBrightNebulae) && (ntype == Nebula::NebN || ntype == Nebula::NebBn || ntype == Nebula::NebEn || ntype == Nebula::NebRn || ntype == Nebula::NebHII || ntype == Nebula::NebISM || ntype == Nebula::NebCn || ntype == Nebula::NebSNR) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 3: // Dark nebulae
+								if ((bool)(tflags & Nebula::TypeDarkNebulae) && (ntype == Nebula::NebDn || ntype == Nebula::NebMolCld	 || ntype == Nebula::NebYSO))
+								{
+									passByType = true;
+									mag = object->getVMagnitude(core);
+								}
+								break;
+							case 4: // Galaxies
+								if ((bool)(tflags & Nebula::TypeGalaxies) && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 5: // Star clusters
+								if ((bool)(tflags & Nebula::TypeStarClusters) && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebGc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 14: // Planetary nebulae
+								if ((bool)(tflags & Nebula::TypePlanetaryNebulae) && (ntype == Nebula::NebPn || ntype == Nebula::NebPossPN || ntype == Nebula::NebPPN) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 18: // Symbiotic stars
+								if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebSymbioticStar) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 19: // Emission-line stars
+								if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebEmissionLineStar) && mag <= magLimit)
+									passByType = true;
+								break;
+							case 20: // Supernova candidates
+							{
+								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
+								if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNC) && visible)
+									passByType = true;
+								break;
+							}
+							case 21: // Supernova remnant candidates
+							{
+								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
+								if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNRC) && visible)
+									passByType = true;
+								break;
+							}
+							case 22: // Supernova remnants
+							{
+								visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
+								if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNR) && visible)
+									passByType = true;
+								break;
+							}
+							case 23: // Clusters of galaxies
+								if ((bool)(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl) && mag <= magLimit)
+									passByType = true;
+								break;
+						}
+
+						if (passByType && object->isAboveRealHorizon(core))
 						{
 							QString d = object->getDSODesignation();
 							QString n = object->getNameI18n();
@@ -4385,134 +4459,12 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
+
+						if (categoryId==18 || categoryId==19 || categoryId==23)
+							ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					}
 					break;
-				case 3: // Dark nebulae
-					initListWUT(false, false); // special case!
-					for (const auto& object : allDSO)
-					{
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeDarkNebulae)
-						    && (ntype == Nebula::NebDn || ntype == Nebula::NebMolCld	 || ntype == Nebula::NebYSO)
-						    && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							mag = object->getVMagnitude(core);
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 4: // Galaxies
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeGalaxies)
-						    && (ntype == Nebula::NebGx || ntype == Nebula::NebAGx || ntype == Nebula::NebRGx || ntype == Nebula::NebQSO || ntype == Nebula::NebPossQSO || ntype == Nebula::NebBLL || ntype == Nebula::NebBLA || ntype == Nebula::NebIGx)
-						    && mag <= magLimit
-						    && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 5: // Star clusters
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeStarClusters)
-						    && (ntype == Nebula::NebCl || ntype == Nebula::NebOc || ntype == Nebula::NebGc || ntype == Nebula::NebSA || ntype == Nebula::NebSC || ntype == Nebula::NebCn)
-						    && mag <= magLimit
-						    && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
+				}
 				case 0:
 				case 6:
 				case 7:
@@ -4522,6 +4474,7 @@ void AstroCalcDialog::calculateWutObjects()
 				case 11:
 				case 12:
 				case 13:
+				case 24:
 				{
 					Planet::PlanetType pType = Planet::isInterstellar;
 					switch (categoryId)
@@ -4552,6 +4505,9 @@ void AstroCalcDialog::calculateWutObjects()
 							break;
 						case 13: // Sednoids
 							pType = Planet::isSednoid;
+							break;
+						case 24: // Interstellar objects
+							pType = Planet::isInterstellar;
 							break;
 					}
 
@@ -4585,48 +4541,6 @@ void AstroCalcDialog::calculateWutObjects()
 
 					break;
 				}
-				case 14: // Planetary nebulae
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypePlanetaryNebulae)
-						    && (ntype == Nebula::NebPn || ntype == Nebula::NebPossPN || ntype == Nebula::NebPPN)
-						    && mag <= magLimit
-						    && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
 				case 15: // Bright double stars
 					// Special case for double stars
 					ui->wutAngularSizeLimitCheckBox->setText(q_("Limit angular separation:"));
@@ -4717,248 +4631,6 @@ void AstroCalcDialog::calculateWutObjects()
 						}
 					}
 					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;
-				case 18: // Symbiotic stars
-					enableVisibilityAngularLimits(false);
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebSymbioticStar)
-						    && mag <= magLimit
-						    && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;
-				case 19: // Emission-line stars
-					enableVisibilityAngularLimits(false);
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeOther) && (ntype == Nebula::NebEmissionLineStar)
-						    && (mag <= magLimit)
-						    && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;
-				case 20: // Supernova candidates
-					enableVisibilityAngularLimits(false);
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						bool visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
-						if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNC) && visible && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 21: // Supernova remnant candidates
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						bool visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
-						if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNRC) && visible && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 22: // Supernova remnants
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						bool visible = ((mag <= magLimit) || (object->getVMagnitude(core) > 90.f && magLimit >= 19.f));
-						if ((bool)(tflags & Nebula::TypeSupernovaRemnants) && (ntype == Nebula::NebSNR) && visible && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					break;
-				case 23: // Clusters of galaxies
-					for (const auto& object : allDSO)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						Nebula::NebulaType ntype = object->getDSOType();
-						if ((bool)(tflags & Nebula::TypeGalaxyClusters) && (ntype == Nebula::NebGxCl)
-						    && mag <= magLimit
-						    && object->isAboveRealHorizon(core))
-						{
-							QString d = object->getDSODesignation();
-							QString n = object->getNameI18n();
-
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							if (d.isEmpty() && n.isEmpty())
-								continue;
-
-							designation = QString("%1:%2").arg(d, n);
-							if (!objectsList.contains(designation))
-							{
-								if (d.isEmpty())
-									fillWUTTable(n, n, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else if (n.isEmpty())
-									fillWUTTable(d, d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-								else
-									fillWUTTable(QString("%1 (%2)").arg(d, n), d, mag, object->getRTSTime(core), object->getAngularSize(core), withDecimalDegree);
-
-								objectsList.insert(designation);
-							}
-						}
-					}
-					ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
-					break;
-				case 24: // Interstellar objects
-					for (const auto& object : allObjects)
-					{
-						mag = object->getVMagnitudeWithExtinction(core);
-						if (object->getPlanetType() == Planet::isInterstellar && mag <= magLimit && object->isAboveRealHorizon(core))
-						{
-							if (angularSizeLimit)
-							{
-								bool ok = false;
-								double size = object->getAngularSize(core);
-								if (size<=angularSizeLimitMax && angularSizeLimitMin<=size)
-									ok = true;
-
-								if (!ok)
-									continue;
-							}
-
-							designation = object->getEnglishName();
-							if (!objectsList.contains(designation))
-							{
-								fillWUTTable(object->getNameI18n(), designation, mag, object->getRTSTime(core), 2.0*object->getAngularSize(core), withDecimalDegree);
-								objectsList.insert(designation);
-							}
-						}
-					}
 					break;				
 			}
 		}
