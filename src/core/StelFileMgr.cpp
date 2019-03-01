@@ -62,7 +62,7 @@ void StelFileMgr::init()
 	userDir = QDir::homePath() + "/.stellarium";
 #endif
 
-#if QT_VERSION >= 0x051000
+#if QT_VERSION >= 0x050A00
 	if (qEnvironmentVariableIsSet("STEL_USERDIR"))
 	{
 		userDir=qEnvironmentVariable("STEL_USERDIR");
