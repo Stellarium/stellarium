@@ -778,19 +778,58 @@ void AstroCalcDialog::currentCelestialPositions()
 			}
 		}
 	}
-	else if (celTypeId == 200)
+	else if (celTypeId >= 200 && celTypeId <= 203)
 	{
-		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
 		QString distanceInfo = q_("Planetocentric distance");
-		if (core->getUseTopocentricCoordinates()) distanceInfo = q_("Topocentric distance");
+		if (core->getUseTopocentricCoordinates())
+			distanceInfo = q_("Topocentric distance");
 		QString distanceUM = qc_("AU", "distance, astronomical unit");
 		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
 		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
 		Vec3d pos;
-		for (const auto& planet : allPlanets)
+		bool passByType;
+
+		QList<PlanetP> planets;
+		switch (celTypeId)
 		{
-			if ((planet->getPlanetType() != Planet::isUNDEFINED && planet != core->getCurrentPlanet())
-			     && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
+			case 200:
+			case 203:
+				planets = solarSystem->getAllPlanets();
+				break;
+			case 201:
+			case 202:
+				planets = solarSystem->getAllMinorBodies();
+				break;
+		}
+
+		for (const auto& planet : planets)
+		{
+			passByType = false;
+
+			switch (celTypeId)
+			{
+				case 200:
+					if (planet->getPlanetType() != Planet::isUNDEFINED)
+						passByType = true;
+					break;
+				case 201:
+					if (planet->getPlanetType() == Planet::isComet)
+						passByType = true;
+					break;
+				case 202:
+				{
+					Planet::PlanetType ptype = planet->getPlanetType();
+					if (ptype == Planet::isAsteroid || ptype == Planet::isCubewano || ptype == Planet::isDwarfPlanet || ptype == Planet::isOCO || ptype == Planet::isPlutino || ptype == Planet::isSDO || ptype == Planet::isSednoid || ptype==Planet::isInterstellar)
+						passByType = true;
+					break;
+				}
+				case 203:
+					if (planet->getPlanetType() == Planet::isPlanet)
+						passByType = true;
+					break;
+			}
+
+			if (passByType && planet != core->getCurrentPlanet() && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
 			{
 				pos = planet->getJ2000EquatorialPos(core);
 
@@ -804,115 +843,6 @@ void AstroCalcDialog::currentCelestialPositions()
 				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
 				angularSize = QString::number(planet->getAngularSize(core) * 120.f, 'f', 4);
 				if (angularSize.toFloat() < 1e-4 || planet->getPlanetType() == Planet::isComet)
-					angularSize = QChar(0x2014);
-
-				sTransit = QChar(0x2014);
-				Vec3f rts = planet->getRTSTime(core);
-				if (rts[1]>=0.f)
-					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
-
-				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
-			}
-		}
-	}
-	else if (celTypeId == 201)
-	{
-		QList<PlanetP> allMinorBodies = solarSystem->getAllMinorBodies();
-		QString distanceInfo = q_("Planetocentric distance");
-		if (core->getUseTopocentricCoordinates()) distanceInfo = q_("Topocentric distance");
-		QString distanceUM = qc_("AU", "distance, astronomical unit");
-		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
-		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
-		Vec3d pos;
-		for (const auto& planet : allMinorBodies)
-		{
-			if ((planet->getPlanetType() == Planet::isComet && planet != core->getCurrentPlanet()) && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
-			{
-				pos = planet->getJ2000EquatorialPos(core);
-
-				if (horizon)
-					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
-				else
-					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
-
-				extra = QString::number(pos.length(), 'f', 5); // A.U.
-
-				sTransit = QChar(0x2014);
-				Vec3f rts = planet->getRTSTime(core);
-				if (rts[1]>=0.f)
-					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
-
-				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), QChar(0x2014), asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
-			}
-		}
-	}
-	else if (celTypeId == 202)
-	{
-		QList<PlanetP> allMinorBodies = solarSystem->getAllMinorBodies();
-		QString distanceInfo = q_("Planetocentric distance");
-		if (core->getUseTopocentricCoordinates()) distanceInfo = q_("Topocentric distance");
-		QString distanceUM = qc_("AU", "distance, astronomical unit");
-		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
-		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
-		Vec3d pos;
-		for (const auto& planet : allMinorBodies)
-		{
-			Planet::PlanetType ptype = planet->getPlanetType();
-			if (((ptype == Planet::isAsteroid || ptype == Planet::isCubewano || ptype == Planet::isDwarfPlanet || ptype == Planet::isOCO
-			      || ptype == Planet::isPlutino || ptype == Planet::isSDO || ptype == Planet::isSednoid || ptype==Planet::isInterstellar)
-			      && planet != core->getCurrentPlanet())
-			      && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
-			{
-				pos = planet->getJ2000EquatorialPos(core);
-
-				if (horizon)
-					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
-				else
-					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
-
-				extra = QString::number(pos.length(), 'f', 5); // A.U.
-
-				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
-				angularSize = QString::number(planet->getAngularSize(core) * 120.f, 'f', 4);
-				if (angularSize.toFloat() < 1e-4)
-					angularSize = QChar(0x2014);
-
-				sTransit = QChar(0x2014);
-				Vec3f rts = planet->getRTSTime(core);
-				if (rts[1]>=0.f)
-					sTransit = StelUtils::hoursToHmsStr(rts[1], true);
-
-				fillCelestialPositionTable(planet->getNameI18n(), coordinates.first, coordinates.second, planet->getVMagnitudeWithExtinction(core), angularSize, asToolTip, extra, sToolTip, sTransit, q_(planet->getPlanetTypeString()));
-			}
-		}
-	}
-	else if (celTypeId == 203)
-	{
-		QList<PlanetP> allPlanets = solarSystem->getAllPlanets();
-		QString distanceInfo = q_("Planetocentric distance");
-		if (core->getUseTopocentricCoordinates())
-			distanceInfo = q_("Topocentric distance");
-		QString distanceUM = qc_("AU", "distance, astronomical unit");
-		QString sToolTip = QString("%1, %2").arg(distanceInfo, distanceUM);
-		QString asToolTip = QString("%1, %2").arg(q_("Angular size (with rings, if any)"), q_("arcmin"));
-		Vec3d pos;
-		for (const auto& planet : allPlanets)
-		{
-			if ((planet->getPlanetType() == Planet::isPlanet && planet != core->getCurrentPlanet())
-			     && planet->getVMagnitudeWithExtinction(core) <= mag && planet->isAboveRealHorizon(core))
-			{
-				pos = planet->getJ2000EquatorialPos(core);
-
-				if (horizon)
-					coordinates = getStringCoordinates(planet->getAltAzPosAuto(core), horizon, useSouthAzimuth, withDecimalDegree);
-				else
-					coordinates = getStringCoordinates(pos, horizon, useSouthAzimuth, withDecimalDegree);
-
-				extra = QString::number(pos.length(), 'f', 5); // A.U.
-
-				// Convert to arcseconds the angular size of Solar system object (with rings, if any)
-				angularSize = QString::number(planet->getAngularSize(core) * 120.f, 'f', 4);
-				if (angularSize.toFloat() < 1e-4)
 					angularSize = QChar(0x2014);
 
 				sTransit = QChar(0x2014);
