@@ -33,14 +33,14 @@
 //! @ingroup exoplanets
 typedef struct
 {
-	QString planetName;			//! Exoplanet designation
+	QString planetName;		//! Exoplanet designation
 	QString planetProperName;	//! Exoplanet proper name
 	float mass;				//! Exoplanet mass (Mjup)
 	float radius;				//! Exoplanet radius (Rjup)
 	float period;				//! Exoplanet period (days)
 	float semiAxis;				//! Exoplanet orbit semi-major axis (AU)
 	float eccentricity;			//! Exoplanet orbit eccentricity
-	float inclination;				//! Exoplanet orbit inclination
+	float inclination;			//! Exoplanet orbit inclination
 	float angleDistance;			//! Exoplanet angle distance
 	int discovered;				//! Exoplanet discovered year
 	QString pclass;				//! Exoplanet classification from host star spectral type (F, G, K, M), habitable zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran, jovian, neptunian)
@@ -185,6 +185,7 @@ public:
 
 private:
 	QString getPlanetaryClassI18n(QString ptype) const;
+	QString getPlanetarySystemTable() const;
 
 	bool initialized;
 
