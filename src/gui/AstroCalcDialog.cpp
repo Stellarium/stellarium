@@ -4459,7 +4459,6 @@ void AstroCalcDialog::calculateWutObjects()
 								objectsList.insert(designation);
 							}
 						}
-
 					}
 
 					if (categoryId==18 || categoryId==19 || categoryId==23)
