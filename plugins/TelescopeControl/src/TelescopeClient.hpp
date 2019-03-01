@@ -95,7 +95,7 @@ public:
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
 
-	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const { return nullptr; }
+	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const { Q_UNUSED(telescope) Q_UNUSED(parent) return nullptr; }
 
 protected:
 	TelescopeClient(const QString &name);
@@ -147,6 +147,7 @@ public:
 	}
 	void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject)
 	{
+		Q_UNUSED(selectObject)
 		desired_pos = j2000Pos;
 		desired_pos.normalize();
 	}

@@ -150,6 +150,8 @@ QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGro
 
 void TelescopeClient::move(double angle, double speed)
 {
+	Q_UNUSED(angle)
+	Q_UNUSED(speed)
 	qDebug() << "TelescopeClient::move not implemented";
 }
 

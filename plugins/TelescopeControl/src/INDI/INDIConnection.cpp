@@ -260,6 +260,7 @@ void INDIConnection::removeProperty(INDI::Property *property)
 
 void INDIConnection::newBLOB(IBLOB *bp)
 {
+	Q_UNUSED(bp)
 }
 
 void INDIConnection::newSwitch(ISwitchVectorProperty *svp)
