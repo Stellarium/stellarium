@@ -204,21 +204,18 @@ public slots:
 	//! Toggle the application of user-defined star magnitude limit.
 	//! If enabled, stars fainter than the magnitude set with
 	//! setCustomStarMagnitudeLimit() will not be displayed.
-	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
 	void setFlagStarMagnitudeLimit(bool b) {if(b!=flagStarMagnitudeLimit){ flagStarMagnitudeLimit = b; emit flagStarMagnitudeLimitChanged(b);}}
 	//! @return true if the user-defined star magnitude limit is in force.
 	bool getFlagStarMagnitudeLimit() const {return flagStarMagnitudeLimit;}
 	//! Toggle the application of user-defined deep-sky object magnitude limit.
 	//! If enabled, deep-sky objects fainter than the magnitude set with
 	//! setCustomNebulaMagnitudeLimit() will not be displayed.
-	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM
 	void setFlagNebulaMagnitudeLimit(bool b) {if(b!=flagNebulaMagnitudeLimit){ flagNebulaMagnitudeLimit = b; emit flagNebulaMagnitudeLimitChanged(b);}}
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagNebulaMagnitudeLimit() const {return flagNebulaMagnitudeLimit;}
 	//! Toggle the application of user-defined solar system object magnitude limit.
 	//! If enabled, planets, planetary moons, asteroids (KBO, ...) and comets fainter than the magnitude set with
 	//! setCustomPlanetMagnitudeLimit() will not be displayed.
-	// FIXME: Exposed to scripts - make sure it synchs with the GUI. --BM  --- GZ: this was copy/paste. Track down BM's changes!!!
 	void setFlagPlanetMagnitudeLimit(bool b) {if(b!=flagPlanetMagnitudeLimit){ flagPlanetMagnitudeLimit = b; emit flagPlanetMagnitudeLimitChanged(b);}}
 	//! @return true if the user-defined nebula magnitude limit is in force.
 	bool getFlagPlanetMagnitudeLimit() const {return flagPlanetMagnitudeLimit;}
@@ -409,20 +406,15 @@ private:
 	float limitLuminance;
 
 	//! User-defined magnitude limit for stars.
-	//! Interpreted as a lower limit - stars fainter than this value will not
-	//! be displayed.
+	//! Interpreted as a lower limit - stars fainter than this value will not be displayed.
 	//! Used if flagStarMagnitudeLimit is true.
 	double customStarMagLimit;
 	//! User-defined magnitude limit for deep-sky objects.
-	//! Interpreted as a lower limit - nebulae fainter than this value will not
-	//! be displayed.
+	//! Interpreted as a lower limit - nebulae fainter than this value will not be displayed.
 	//! Used if flagNebulaMagnitudeLimit is true.
-	//! @todo Why the asterisks this is not in NebulaMgr? --BM
-	//  GZ To explain: we have 3 limits for stars, nebulae, planets. It's easier to maintain the pretty similar code in 1 place.
 	double customNebulaMagLimit;
 	//! User-defined magnitude limit for solar system objects.
-	//! Interpreted as a lower limit - planets fainter than this value will not
-	//! be displayed.
+	//! Interpreted as a lower limit - planets fainter than this value will not be displayed.
 	//! Used if flagPlanetMagnitudeLimit is true.
 	double customPlanetMagLimit;
 
