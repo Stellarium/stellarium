@@ -1,0 +1,47 @@
+//
+// Author: Alexander Wolf
+// Version: 2.0
+// License: Public Domain
+// Name: Analemma
+// Description: A demonstration of the analemma - the path of the Sun across the sky during the year.
+//
+
+include("i18n.inc");
+
+core.goHome();
+var JD = core.getJDay();
+label = LabelMgr.labelScreen(tr("Analemma"), 20, 20, false, 30, "#aa0000");
+LabelMgr.setLabelShow(label, true);
+core.wait(1);
+core.clear("natural");
+GridLinesMgr.setFlagAzimuthalGrid(true);
+GridLinesMgr.setFlagMeridianLine(true);
+core.setObserverLocation(0, 40, 1, 1, "", "Earth");
+core.setDate("2012-06-22T12:00:00", "UTC");
+StelMovementMgr.zoomTo(120, 5);
+core.wait(5);
+
+for (i=0; i<53; i++)
+{
+    LabelMgr.setLabelShow(label, false);
+    core.setDate("+1 week");
+    var info = core.getObjectInfo("Sun");
+    var az = info.azimuth;
+    var alt = info.altitude;
+    MarkerMgr.markerHorizon(az, alt, true, "gear", "#ff0000", 5);    
+    label = LabelMgr.labelScreen(tr("Week") + " " + (i+1), 20, 20, false, 30, "#aa0000");
+    LabelMgr.setLabelShow(label, true);
+    core.wait(.25);    
+}
+
+LabelMgr.setLabelShow(label, false);
+label = LabelMgr.labelScreen(tr("Yearly path of Sun"), 20, 20, false, 30, "#aa0000");
+SolarSystem.setFlagPlanets(false);
+core.wait(5);
+SolarSystem.setFlagPlanets(true);
+LabelMgr.setLabelShow(label, false);
+core.clear("natural");
+MarkerMgr.deleteAllMarkers();
+core.setJDay(JD);
+core.goHome();
+

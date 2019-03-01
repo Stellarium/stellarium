@@ -112,6 +112,30 @@ private:
 	SkyMarker::MarkerType markerType;
 };
 
+//! @class HorizonMarker
+//! Used to create user markers which are bound to azimuthal coordinates.
+class HorizonMarker : public StelMarker
+{
+public:
+	//! Constructor of a HorizonMarker which is to be displayed on an alt-azimuthal position.
+	//! @param az  the azimuth, degrees
+	//! @param alt the altitude, degrees
+
+	//! @param color the color for the label
+	HorizonMarker(const float az, const float alt, const float& size, const Vec3f& color, SkyMarker::MarkerType style=SkyMarker::Cross);
+	virtual ~HorizonMarker();
+
+	//! draw the marker on the screen
+	//! @param core the StelCore object
+	//! @param sPainter the StelPainter to use for drawing operations
+	virtual bool draw(StelCore* core, StelPainter& sPainter);
+private:
+	StelTextureSP markerTexture;
+	SkyMarker::MarkerType markerType;
+	Vec3d altaz; // the vector to the coordinates
+};
+
+
 /////////////////////
 // StelMarker class //
 /////////////////////
@@ -246,6 +270,80 @@ SkyMarker::MarkerType SkyMarker::stringToMarkerType(const QString &s)
 		return SkyMarker::Gear;
 	else
 		return SkyMarker::Cross;
+}
+
+///////////////////////
+// HorizonMarker class //
+///////////////////////
+HorizonMarker::HorizonMarker(const float az, const float alt, const float& size, const Vec3f& color, SkyMarker::MarkerType style)
+	: StelMarker(size, color)
+	, markerTexture(Q_NULLPTR)
+	, markerType(style)
+{
+	StelUtils::spheToRect((180.0f-az)*M_PI/180.0, alt*M_PI/180.0, altaz);
+	QString fileName = "cross.png";
+	// TODO: Use unicode chars for markers or SVG instead?
+	switch (markerType)
+	{
+		case SkyMarker::Cross:
+			fileName = "cross.png";
+			break;
+		case SkyMarker::Circle:
+			fileName = "neb_lrg.png";
+			break;
+		case SkyMarker::Ellipse:
+			fileName = "neb_gal_lrg.png";
+			break;
+		case SkyMarker::Square:
+			fileName = "neb_dif_lrg.png";
+			break;
+		case SkyMarker::DottedCircle:
+			fileName = "neb_ocl_lrg.png";
+			break;
+		case SkyMarker::CircledCross:
+			fileName = "neb_gcl_lrg.png";
+			break;
+		case SkyMarker::DashedSquare:
+			fileName = "neb_drk_lrg.png";
+			break;
+		case SkyMarker::SquaredDCircle:
+			fileName = "neb_ocln_lrg.png";
+			break;
+		case SkyMarker::CrossedCircle:
+			fileName = "neb_pnb.png";
+			break;
+		case SkyMarker::Target:
+			fileName = "pointer2.png";
+			break;
+		case SkyMarker::Gear:
+			fileName = "gear.png";
+			break;
+	}
+	markerTexture = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/"+fileName);
+}
+
+HorizonMarker::~HorizonMarker()
+{
+	markerTexture.clear();
+}
+
+bool HorizonMarker::draw(StelCore *core, StelPainter& sPainter)
+{
+	if (markerFader.getInterstate() <= 0.f)
+		return false;
+
+	Vec3d xyPos;
+	StelProjectorP keepProj=sPainter.getProjector(); // we must reset after painting!
+	StelProjectorP altazProjector=core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+
+	sPainter.setProjector(altazProjector);
+	sPainter.getProjector()->project(altaz, xyPos);
+	markerTexture->bind();
+	sPainter.setBlending(true, GL_ONE, GL_ONE);
+	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
+	sPainter.drawSprite2dMode(xyPos[0], xyPos[1], markerSize);
+	sPainter.setProjector(keepProj);
+	return true;
 }
 
 ///////////////////////
@@ -386,13 +484,10 @@ int MarkerMgr::markerHorizon(const QString& az,
 			     bool autoDelete,
 			     int autoDeleteTimeoutMs)
 {
-	double dAzi	= StelUtils::getDecAngle(az);
-	double dAlt	= StelUtils::getDecAngle(alt);
-	Vec3d pos;
-	StelUtils::spheToRect(M_PI - dAzi, dAlt, pos);
-	pos = StelApp::getInstance().getCore()->altAzToJ2000(pos);
+	float dAzi	= StelUtils::getDecAngle(az)*180.f/M_PI;
+	float dAlt	= StelUtils::getDecAngle(alt)*180.f/M_PI;
 
-	StelMarker* m = new SkyMarker(pos, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
+	StelMarker* m = new HorizonMarker(dAzi, dAlt, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)
 		return -1;
 
