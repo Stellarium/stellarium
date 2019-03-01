@@ -185,7 +185,6 @@ public:
 
 private:
 	QString getPlanetaryClassI18n(QString ptype) const;
-	QString getPlanetarySystemTable() const;
 
 	bool initialized;
 
