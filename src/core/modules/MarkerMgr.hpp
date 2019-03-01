@@ -30,10 +30,9 @@ class StelPainter;
 
 //! @class MarkerMgr
 //! Allows for creation of custom markers on objects or coordinates.
-//! Because this class is intended for use in scripting (although
-//! other uses are also fine), all label types and so on are specified 
-//! by QString descriptions.
-//! The labels are painted very late, i.e. also sky object labels will be written over the landscape.
+//! Because this class is intended for use in scripting (although other uses are also fine), all marker
+//! types and so on are specified by QString descriptions.
+//! The markers are painted very late, i.e. also sky object markers will be written over the landscape.
 class MarkerMgr : public StelModule
 {
 	Q_OBJECT

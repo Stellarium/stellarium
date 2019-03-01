@@ -120,8 +120,9 @@ public:
 	//! Constructor of a HorizonMarker which is to be displayed on an alt-azimuthal position.
 	//! @param az  the azimuth, degrees
 	//! @param alt the altitude, degrees
-
+	//! @param size the size of the marker
 	//! @param color the color for the label
+	//! @param style determines type of marker
 	HorizonMarker(const float az, const float alt, const float& size, const Vec3f& color, SkyMarker::MarkerType style=SkyMarker::Cross);
 	virtual ~HorizonMarker();
 
