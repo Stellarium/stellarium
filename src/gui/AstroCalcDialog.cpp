@@ -4460,9 +4460,11 @@ void AstroCalcDialog::calculateWutObjects()
 							}
 						}
 
-						if (categoryId==18 || categoryId==19 || categoryId==23)
-							ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
 					}
+
+					if (categoryId==18 || categoryId==19 || categoryId==23)
+						ui->wutMatchingObjectsTreeWidget->hideColumn(WUTAngularSize); // special case!
+
 					break;
 				}
 				case 0:
