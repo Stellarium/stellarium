@@ -53,7 +53,7 @@ void INDIConnection::setPosition(INDIConnection::Coordinates coords)
 		return;
 	}
 
-	INumberVectorProperty *property = nullptr;
+	INumberVectorProperty *property = Q_NULLPTR;
 	property = mTelescope->getNumber("EQUATORIAL_EOD_COORD");
 	if (!property)
 	{
@@ -90,7 +90,7 @@ void INDIConnection::moveNorth(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_NS");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_NS switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
 		return;
 	}
 
@@ -116,7 +116,7 @@ void INDIConnection::moveEast(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_WE");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_WE switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
 		return;
 	}
 
@@ -142,7 +142,7 @@ void INDIConnection::moveSouth(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_NS");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_NS switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_NS switch...";
 		return;
 	}
 
@@ -168,7 +168,7 @@ void INDIConnection::moveWest(int speed)
 	ISwitchVectorProperty *switchVector = mTelescope->getSwitch("TELESCOPE_MOTION_WE");
 	if (!switchVector)
 	{
-		qDebug() << "Error: unable to find Telescopeor TELESCOPE_MOTION_WE switch...";
+		qDebug() << "Error: unable to find Telescope or TELESCOPE_MOTION_WE switch...";
 		return;
 	}
 
@@ -225,7 +225,7 @@ void INDIConnection::removeDevice(INDI::BaseDevice *dp)
 		mDevices.removeAt(index);
 
 	if (mTelescope == dp)
-		mTelescope = nullptr;
+		mTelescope = Q_NULLPTR;
 
 	emit removeDeviceReceived(name);
 }
@@ -288,14 +288,18 @@ void INDIConnection::newNumber(INumberVectorProperty *nvp)
 
 void INDIConnection::newText(ITextVectorProperty *tvp)
 {
+	Q_UNUSED(tvp)
 }
 
 void INDIConnection::newLight(ILightVectorProperty *lvp)
 {
+	Q_UNUSED(lvp)
 }
 
 void INDIConnection::newMessage(INDI::BaseDevice *dp, int messageID)
 {
+	Q_UNUSED(dp)
+	Q_UNUSED(messageID)
 }
 
 void INDIConnection::serverConnected()

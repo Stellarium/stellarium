@@ -95,7 +95,7 @@ public:
 	virtual bool prepareCommunication() {return false;}
 	virtual void performCommunication() {}
 
-	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = nullptr) const { Q_UNUSED(telescope) Q_UNUSED(parent) return nullptr; }
+	virtual QWidget* createControlWidget(QSharedPointer<TelescopeClient> telescope, QWidget* parent = Q_NULLPTR) const { Q_UNUSED(telescope) Q_UNUSED(parent) return Q_NULLPTR; }
 
 protected:
 	TelescopeClient(const QString &name);

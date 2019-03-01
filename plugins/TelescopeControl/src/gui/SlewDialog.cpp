@@ -219,7 +219,7 @@ void SlewDialog::slew()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = nullptr;
+	StelObjectP selectObject = Q_NULLPTR;
 	telescope->telescopeGoto(targetPosition, selectObject);
 }
 

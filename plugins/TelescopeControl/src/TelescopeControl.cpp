@@ -431,6 +431,8 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
 	}
+#else
+	Q_UNUSED(prj) Q_UNUSED(core) Q_UNUSED(sPainter)
 #endif //COMPATIBILITY_001002
 }
 
@@ -1200,7 +1202,7 @@ bool TelescopeControl::stopAllTelescopes()
 
 bool TelescopeControl::isValidSlotNumber(int slot)
 {
-	return ((slot < MIN_SLOT_NUMBER || slot >  MAX_SLOT_NUMBER) ? false : true);
+	return ((slot >= MIN_SLOT_NUMBER) && (slot <= MAX_SLOT_NUMBER));
 }
 
 bool TelescopeControl::isValidPort(uint port)
@@ -1569,7 +1571,7 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 	return true;
 }
 
-const QString& TelescopeControl::getServerExecutablesDirectoryPath()
+const QString& TelescopeControl::getServerExecutablesDirectoryPath() const
 {
 	return serverExecutablesDirectoryPath;
 }

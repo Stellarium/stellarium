@@ -121,16 +121,14 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	{
 		qDebug() << "TelescopeClient::create(): Unable to create a telescope client.";
 		delete newTelescope;
-		newTelescope = 0;
+		newTelescope = Q_NULLPTR;
 	}
 	return newTelescope;
 }
 
 
-TelescopeClient::TelescopeClient(const QString &name) : name(name)
-{
-	nameI18n = name;
-}
+TelescopeClient::TelescopeClient(const QString &name) : nameI18n(name), name(name)
+{}
 
 QString TelescopeClient::getInfoString(const StelCore* core, const InfoStringGroup& flags) const
 {
