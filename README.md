@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/Stellarium/stellarium.svg?branch=master)](https://travis-ci.org/Stellarium/stellarium)
 [![Build status](https://ci.appveyor.com/api/projects/status/sw8j9l8q95ejkalo?svg=true)](https://ci.appveyor.com/project/alex-w/stellarium)
 [![Coverity Scan](https://img.shields.io/coverity/scan/2098.svg)](https://scan.coverity.com/projects/stellarium-stellarium)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FStellarium%2Fstellarium.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FStellarium%2Fstellarium?ref=badge_shield)
 <br/>[![Coverage Status](https://coveralls.io/repos/github/Stellarium/stellarium/badge.svg)](https://coveralls.io/github/Stellarium/stellarium)
 [![CodeFactor](https://www.codefactor.io/repository/github/stellarium/stellarium/badge)](https://www.codefactor.io/repository/github/stellarium/stellarium)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Stellarium/stellarium.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Stellarium/stellarium/alerts/)
@@ -30,3 +31,7 @@ See the [full credit file](CREDITS.md)
 ## Contributing to Stellarium
 
 See the [contributing guideline](https://github.com/Stellarium/stellarium/blob/master/CONTRIBUTING.md)
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FStellarium%2Fstellarium.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FStellarium%2Fstellarium?ref=badge_large)
