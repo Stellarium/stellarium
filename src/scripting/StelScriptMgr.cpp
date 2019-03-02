@@ -24,6 +24,7 @@
 #include "StelMainScriptAPI.hpp"
 #include "StelModuleMgr.hpp"
 #include "LabelMgr.hpp"
+#include "MarkerMgr.hpp"
 #include "ScreenImageMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelTranslator.hpp"
@@ -430,6 +431,7 @@ void StelScriptMgr::stopScript()
 	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(MarkerMgr)->deleteAllMarkers();
 		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
 		if (agent->getPauseScript()) {
 			agent->setPauseScript(false);
