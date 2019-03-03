@@ -5,23 +5,43 @@
 # 
 # Translators:
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2019
-# Georg Zotti <Georg.Zotti@univie.ac.at>, 2019
 # Latein Lebt, 2019
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2019-03-02 14:04+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Latein Lebt, 2019\n"
+"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2019\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: scripts/analemma.ssc:15
+msgid "Analemma"
+msgstr ""
+
+#: scripts/analemma.ssc:40
+msgid "Week"
+msgstr ""
+
+#: scripts/analemma.ssc:46
+msgid "Near winter solstice"
+msgstr ""
+
+#: scripts/analemma.ssc:50
+msgid "Near summer solstice"
+msgstr ""
+
+#: scripts/analemma.ssc:54
+msgid "Yearly path of the Sun"
+msgstr ""
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
@@ -93,7 +113,7 @@ msgstr "Messiers Nummer Eins"
 
 #: scripts/binocular_highlights.ssc:22
 msgid "Auriga's Messier Clusters"
-msgstr "Aurigas Messier Sternhaufen"
+msgstr "Messier-Sternhaufen im Fuhrmann"
 
 #: scripts/binocular_highlights.ssc:22
 msgid "M36 and M38"
@@ -197,7 +217,7 @@ msgstr "In und um Melotte 111"
 
 #: scripts/binocular_highlights.ssc:41
 msgid "A Trio of Doubles in Bootes"
-msgstr ""
+msgstr "Ein Trio von Doppelsternen im Bärenhüter"
 
 #: scripts/binocular_highlights.ssc:42
 msgid "R Cor Bor's Vanishing Act"
@@ -217,11 +237,11 @@ msgstr "Bienenkorb-Haufen"
 
 #: scripts/binocular_highlights.ssc:45
 msgid "A Visit to NGC 2903"
-msgstr "Ein Besuch zu NGC 2903"
+msgstr "Ein Besuch bei NGC 2903"
 
 #: scripts/binocular_highlights.ssc:46 scripts/binocular_highlights.ssc:47
 msgid "A Pair of Leo Doubles"
-msgstr "Ein Paar Doppelstern im Löwen"
+msgstr "Ein Doppelstern-Paar im Löwen"
 
 #: scripts/binocular_highlights.ssc:46
 msgid "Tau Leonis"
@@ -319,7 +339,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:62
 msgid "Open Cluster M39 in Cygnus"
-msgstr ""
+msgstr "Offener Sternhaufen M39 im Schwan"
 
 #: scripts/binocular_highlights.ssc:63
 msgid "The Road to the Cocoon"
@@ -380,11 +400,11 @@ msgstr "M11 in Scutum"
 
 #: scripts/binocular_highlights.ssc:70
 msgid "Also known as the Wild Duck Cluster"
-msgstr "Auch bekannt unter dem Wildentenhaufen"
+msgstr "Auch bekannt als Wildentenhaufen"
 
 #: scripts/binocular_highlights.ssc:71
 msgid "IC 4756 in Serpens"
-msgstr "IC 4756 im Serpens"
+msgstr "IC 4756 in der Schlange"
 
 #: scripts/binocular_highlights.ssc:72
 msgid "Three Star Clusters in Ophiuchus"
@@ -508,7 +528,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:90
 msgid "Watching Delta Cephei"
-msgstr "Beobachten Delta Cephei"
+msgstr "Beobachtung von Delta Cephei"
 
 #: scripts/binocular_highlights.ssc:90
 msgid "Well-known variable star and striking double also"
@@ -739,7 +759,7 @@ msgstr "5,8 Bogenminuten (ONO)"
 
 #: scripts/double_stars.ssc:40
 msgid "Showcase double!"
-msgstr "Vorzeige-Foppelstern"
+msgstr "Vorzeige-Doppelstern"
 
 #: scripts/double_stars.ssc:41
 msgid "ζ Scorpii"
@@ -827,12 +847,12 @@ msgstr "Schatten von Europa, Ganymed und Callisto"
 
 #: scripts/morsels_1.ssc:60
 msgid "Triple shadow phenomena of the satellites of Jupiter"
-msgstr "Dreifaches Schattenphänomen von Jupiters Satelliten"
+msgstr "Dreifaches Schattenphänomen von Jupitermonden"
 
 #: scripts/morsels_1.ssc:62 scripts/morsels_2.ssc:78 scripts/morsels_3.ssc:52
 #: scripts/morsels_4.ssc:70
 msgid "phenomena in all"
-msgstr "Alle Phänomene"
+msgstr "Phänomene insgesamt"
 
 #: scripts/morsels_1.ssc:77 scripts/morsels_2.ssc:98 scripts/morsels_3.ssc:62
 #: scripts/morsels_4.ssc:81
@@ -949,7 +969,7 @@ msgstr "* Der Katalog enthält 400 Objekte"
 
 #: scripts/h400_tour.ssc:21
 msgid "* All objects are from the NGC"
-msgstr "* Alle Objekte aus dem NGC"
+msgstr "* Alle Objekte sind aus dem NGC"
 
 #: scripts/h400_tour.ssc:22
 msgid "* All visible in mid northern latitudes"
@@ -1064,7 +1084,7 @@ msgstr "S Persei"
 
 #: scripts/largest_known_stars.ssc:33
 msgid "In the Perseus Double Cluster."
-msgstr "Im Perseus Doppelsternhaufen"
+msgstr "Im Perseus-Doppelsternhaufen"
 
 #: scripts/largest_known_stars.ssc:34
 msgid "RW Cygni"
