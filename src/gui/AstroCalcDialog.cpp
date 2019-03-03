@@ -4250,8 +4250,7 @@ void AstroCalcDialog::calculateWutObjects()
 		double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
 		double JD = core->getJD();
-		double wutJD = (int)JD;
-		double az, alt, mag;
+		double wutJD, az, alt, mag;
 		QSet<QString> objectsList;
 		QString designation, starName;
 
