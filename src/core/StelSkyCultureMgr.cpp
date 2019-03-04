@@ -184,7 +184,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
 			break;
 		case StelSkyCulture::TRADITIONAL:
-			color = "#33ff33"; // "green/yellow" area
+			color = "#33ff33"; // "green" area
 			classification = qc_("traditional", "sky culture classification");
 			description = q_("Content represents 'common' knowledge by several members of an ethnic community, and the sky culture has been developed by members of such community.");
 			break;
