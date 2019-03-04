@@ -34,8 +34,12 @@ public:
 	QString englishName;
 	//! Name of the author
 	QString author;
+	//! The license
+	QString license;
 	//! Type of the boundaries (-1=none;0=generic;1=own)
 	int boundariesIdx;
+	//! Classification of sky culture (1=scientific;2=traditional;3=single;4=personal)
+	int classificationIdx;
 };
 
 //! @class StelSkyCultureMgr
@@ -88,11 +92,23 @@ public slots:
 
 	//! Get the type of boundaries of the current sky culture
 	//! Config option: info/boundaries
-	//! Possible values:
-	//! none (-1; using by default)
-	//! generic (0)
-	//! own (1)
+	//! Keys:
+	//! - none (-1; using by default)
+	//! - generic (0)
+	//! - own (1)
 	int getCurrentSkyCultureBoundariesIdx() const;
+
+	//! Get the classification index for the current sky culture
+	//! Config option: info/classification
+	//! Possible values:
+	//! - scientific (1)
+	//! - traditional (2; using by default)
+	//! - personal (3)
+	//! - single (4)
+	int getCurrentSkyCultureClassificationIdx() const;
+
+	//! @return a localized HTML description of the classification for the current sky culture
+	QString getCurrentSkyCultureHtmlClassification() const;
 
 	//! Returns a localized HTML description for the current sky culture.
 	//! @return a HTML description of the current sky culture, suitable for display
