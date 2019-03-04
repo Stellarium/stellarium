@@ -184,14 +184,14 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
 			break;
 		case StelSkyCulture::TRADITIONAL:
-			color = "#ccff33"; // "green/yellow" area
+			color = "#33ff33"; // "green/yellow" area
 			classification = qc_("traditional", "sky culture classification");
 			description = q_("Content represents 'common' knowledge by several members of an ethnic community, and the sky culture has been developed by members of such community.");
 			break;
 		case StelSkyCulture::PERSONAL:
-			color = "#ff6633"; // "red" area
+			color = "#ffff00"; // "yellow" area
 			classification = qc_("personal", "sky culture classification");
-			description = q_("This is a personally developed sky culture which is not funded in published historical or ethnological research. Stellarium may include it when it is 'pretty enough' without really approving its contents.");
+			description = q_("This is a personally developed sky culture which is not founded in published historical or ethnological research. Stellarium may include it when it is 'pretty enough' without really approving its contents.");
 			break;
 		case StelSkyCulture::INCOMPLETE:
 			color = "#ff6633"; // "red" area
@@ -269,7 +269,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 	QString description;
 	if (descPath.isEmpty())
 	{
-		description = q_("No description");
+		description = QString("<h2>%1</2><p>%2</p>").arg(getCurrentSkyCultureNameI18(), q_("No description"));
 	}
 	else
 	{

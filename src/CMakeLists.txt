@@ -671,4 +671,16 @@ IF(ENABLE_TESTING)
     SET_TESTS_PROPERTIES(testEphemeris PROPERTIES
         ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
 
+    SET(tests_testStelSkyCultureMgr_SRCS
+        tests/testStelSkyCultureMgr.hpp
+        tests/testStelSkyCultureMgr.cpp
+    )
+    ADD_EXECUTABLE(testStelSkyCultureMgr ${tests_testStelSkyCultureMgr_SRCS})
+    TARGET_LINK_LIBRARIES(testStelSkyCultureMgr ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelSkyCultureMgr)
+    ADD_TEST(testStelSkyCultureMgr testStelSkyCultureMgr)
+    SET_TARGET_PROPERTIES(testStelSkyCultureMgr PROPERTIES FOLDER "src/tests")
+    SET_TESTS_PROPERTIES(testStelSkyCultureMgr PROPERTIES
+        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
+
 ENDIF (ENABLE_TESTING)
