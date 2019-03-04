@@ -16,8 +16,9 @@ skills in image processing.
 Some features regarding translation and multilinguality have evolved
 over the years, and not all skycultures currently included in
 Stellarium adhere to the standards described in the following
-sections. If you add a new skyculture, please do so for an optimal
-result!
+sections. Skycultures will also see continuous development in the
+coming versions. If you add a new skyculture, please adhere to this
+description for an optimal result!
 
 
 In the Stellarium program folder you can see a folder
@@ -42,6 +43,7 @@ In \file{myculture\textbackslash{}info.ini}, change the entries to
 name=myCulture
 author=me
 boundaries=none
+classification=personal
 \end{configfile}
 
 \noindent (or what seems best for you). The name is used for the list entry in
@@ -50,9 +52,30 @@ the Starlore tab in the View dialog (see \ref{sec:gui:view:starlore}).
 The option ``boundaries'' is optional and may contain the follow values:
 \begin{description}
 \item[none] --- this value is enabled by default and it designates that this culture doesn't have boundaries of constellations.
-\item[generic] --- please use this value for subset of ``western'' cultures to enable using default boundaries.
+\item[generic] --- use this value for subset of ``western'' cultures to enable using default (IAU) boundaries.
 \item[own] --- please use it for culture who has own set of boundaries for constellations.
 \end{description}
+
+The option ``classification'' is also optional. \newFeature{v0.19.0} It allows some form of quality control:
+\begin{description}
+  \item[personal] -- this is a personally developed skyculture which
+    is not funded in published historical or ethnological research. Stellarium
+    may include it when it is ``pretty enough'' without really
+    approving its contents.
+  \item[traditional] -- (default value) content represents ``common'' knowledge by
+    several members of an ethnic community, and the skyculture has
+    been developed by members of such community. Our ``Western''
+    skyculture is a key example: it has evolved for about 2500 years,
+    and modern astronomers use it.
+  \item[ethnographic] -- provided by ethnographic researchers based on
+    interviews of indigenous people.
+  \item[historical] -- based on historical written sources from a
+    (usually short) period of the past.
+  \item[single] -- represents a single source like a historical atlas,
+    or publications of a single author.
+\end{description}
+
+The classification may show overlaps. Currently (V0.19.0) it is not displayed or evaluated, but will be used in future versions. 
 
 \section{Skyculture Description Files}
 \label{sec:skycultures:description}
@@ -169,7 +192,7 @@ list of references (see \ref{sec:skycultures:references}) to the source
 of the information about this name, e.g.:
 \begin{configfile}
 PGC 17223|_("Native name for LMC") 1,2,3
-NGC 292  |_("Native name for SML") 1,3
+NGC 292  |_("Native name for SMC") 1,3
 NGC 292  |_("Small Magellanic Cloud")
 \end{configfile}
 
@@ -233,7 +256,7 @@ where
   all systems. You can distort images to better exploit the pixels,
   the texture will be stretched back. The background of the artwork
   image must be absolutely black.
-\item[x\textit{n}, y\textit{n}, HIP\textit{n}] pixel locations of the
+\item[x\textit{n}, y\textit{n}, HIP\textit{n}] ($n\in[1, 2, 3]$) pixel locations of the
   star in the constellation drawing (find those in any image editor)
   and HIP\textit{n} is the star number in the Hipparcos catalog, which
   you find when you click on the star in Stellarium.
@@ -278,6 +301,8 @@ description of source and optional URL, e.g.:
 9|Kruger 60|https://en.wikipedia.org/wiki/Kruger_60
 \end{configfile}
 
+This file will be used in future versions. It is most important for ``traditional'' skycultures collected from various sources to provide traceable references. 
+
 \section{Asterisms and help rays}
 \label{sec:skycultures:asterisms}
 
@@ -298,8 +323,9 @@ will be used as asterisms labels. In addition, after a hash mark (\texttt{\#}) m
 some reference information should be noted. Collecting sources and giving such references 
 is always a good idea. Some later versions of Stellarium may use this information.
 
-The stick figures of asterisms are similar to constellation figures and coded in \file{asterism\_lines.fab}. Lines
-look like:
+The stick figures of asterisms are coded in \file{asterism\_lines.fab}
+which looks similar to the entries for the constellation
+figures. Lines look like:
 
 \begin{configfile}
 Abbr type pairs pair1_star1 pair1_star2 pair2_star1 pair2_star2 ...
@@ -320,9 +346,11 @@ In this file,
 \section{Publish Your Work}
 \label{sec:skyculture:publish}
 
-If you are willing to let other users enjoy the result of your hard work (and we
-certainly hope you do!), when you are done, please write a note in the
-Forum or at Launchpad.  Please be prepared to put the imagery and text
+If you are willing to let other users enjoy the result of your hard
+work (and we certainly hope you do!), when you are done, please write
+a note in the Forum or at Github. We will decide about acceptability
+and classification, and may ask for better descriptions for the
+benefit of our users.  Please be prepared to put the imagery and text
 under some compatible open-source license (Creative Commons). Else the
 skyculture cannot be hosted by us.
 
