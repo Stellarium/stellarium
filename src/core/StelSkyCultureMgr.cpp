@@ -179,7 +179,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 			description = q_("Provided by historians based on historical written sources from a (usually short) period of the past.");
 			break;
 		case StelSkyCulture::SINGLE:
-			color = "#33ff33"; // "yellow" area
+			color = "#33ff33"; // "green" area
 			classification = qc_("single", "sky culture classification");
 			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
 			break;

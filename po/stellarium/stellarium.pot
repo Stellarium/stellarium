@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-02 14:04+0700\n"
+"POT-Creation-Date: 2019-03-04 22:20+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1147,7 +1147,7 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:232 src/core/modules/MinorPlanet.cpp:255
 #: src/core/modules/MinorPlanet.cpp:323 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:310 src/gui/StelGuiItems.cpp:789
-#: src/gui/AstroCalcDialog.cpp:4824 plugins/Satellites/src/Satellite.cpp:300
+#: src/gui/AstroCalcDialog.cpp:4823 plugins/Satellites/src/Satellite.cpp:300
 #: plugins/Satellites/src/Satellite.cpp:304
 #: plugins/Satellites/src/Satellite.cpp:320
 msgctxt "distance"
@@ -1740,8 +1740,8 @@ msgstr ""
 #: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:507
 #: src/gui/AstroCalcDialog.cpp:786 src/gui/AstroCalcDialog.cpp:1178
 #: src/gui/AstroCalcDialog.cpp:1215 src/gui/AstroCalcDialog.cpp:2398
-#: src/gui/AstroCalcDialog.cpp:4878 src/gui/AstroCalcDialog.cpp:4943
-#: src/gui/AstroCalcDialog.cpp:5102 plugins/Exoplanets/src/Exoplanet.cpp:352
+#: src/gui/AstroCalcDialog.cpp:4877 src/gui/AstroCalcDialog.cpp:4942
+#: src/gui/AstroCalcDialog.cpp:5101 plugins/Exoplanets/src/Exoplanet.cpp:352
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr ""
@@ -1749,7 +1749,7 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:483 src/core/modules/Planet.cpp:501
 #: src/core/modules/MinorPlanet.cpp:244 src/core/modules/MinorPlanet.cpp:262
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4826
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4825
 msgctxt "distance"
 msgid "M km"
 msgstr ""
@@ -1761,7 +1761,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:270
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4896
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4895
 #: plugins/Satellites/src/Satellite.cpp:302
 #: plugins/Satellites/src/Satellite.cpp:327
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1800,7 +1800,7 @@ msgstr ""
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:603 src/core/modules/MinorPlanet.cpp:342
-#: src/core/modules/StarWrapper.cpp:259 src/gui/AstroCalcDialog.cpp:4913
+#: src/core/modules/StarWrapper.cpp:259 src/gui/AstroCalcDialog.cpp:4912
 msgctxt "duration"
 msgid "days"
 msgstr ""
@@ -2847,7 +2847,85 @@ msgstr ""
 msgid "Reload the deep-sky objects background images"
 msgstr ""
 
-#: src/core/StelSkyCultureMgr.cpp:187
+#: src/core/StelSkyCultureMgr.cpp:173
+msgctxt "sky culture classification"
+msgid "ethnographic"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:174
+msgid ""
+"Provided by ethnographic researchers based on interviews of indigenous "
+"people or based on historical written sources from a (usually short) period "
+"of the past."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:178
+msgctxt "sky culture classification"
+msgid "historical"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:179
+msgid ""
+"Provided by historians based on historical written sources from a (usually "
+"short) period of the past."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:183
+msgctxt "sky culture classification"
+msgid "single"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:184
+msgid ""
+"Represents a single source like a historical atlas, or publications of a "
+"single author."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:188
+msgctxt "sky culture classification"
+msgid "traditional"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:189
+msgid ""
+"Content represents 'common' knowledge by several members of an ethnic "
+"community, and the sky culture has been developed by members of such "
+"community."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:193
+msgctxt "sky culture classification"
+msgid "personal"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:194
+msgid ""
+"This is a personally developed sky culture which is not funded in published "
+"historical or ethnological research. Stellarium may include it when it is "
+"'pretty enough' without really approving its contents."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:198
+msgctxt "sky culture classification"
+msgid "incomplete"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:199
+msgid ""
+"The accuracy of the sky culture description cannot be given, although it "
+"looks like it is built on a solid background. More work would be needed."
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:203
+msgctxt "sky culture classification"
+msgid "undefined"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:210
+msgid "Classification"
+msgstr ""
+
+#: src/core/StelSkyCultureMgr.cpp:272
 msgid "No description"
 msgstr ""
 
@@ -4627,13 +4705,13 @@ msgid "star with high proper motion"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:978 src/gui/AstroCalcDialog.cpp:1474
-#: src/gui/AstroCalcDialog.cpp:3072 src/gui/AstroCalcDialog.cpp:4672
+#: src/gui/AstroCalcDialog.cpp:3072 src/gui/AstroCalcDialog.cpp:4671
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:310
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:980 src/gui/AstroCalcDialog.cpp:1476
-#: src/gui/AstroCalcDialog.cpp:3074 src/gui/AstroCalcDialog.cpp:4674
+#: src/gui/AstroCalcDialog.cpp:3074 src/gui/AstroCalcDialog.cpp:4673
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:312
 msgid "CSV (Comma delimited)"
 msgstr ""
@@ -5104,68 +5182,68 @@ msgstr ""
 msgid "Ang. Size"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4258 src/ui_astroCalcDialog.h:1322
+#: src/gui/AstroCalcDialog.cpp:4257 src/ui_astroCalcDialog.h:1322
 msgid "Limit angular size:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4259 src/ui_astroCalcDialog.h:1320
+#: src/gui/AstroCalcDialog.cpp:4258 src/ui_astroCalcDialog.h:1320
 msgid "Set limits for angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4260 src/ui_astroCalcDialog.h:1324
+#: src/gui/AstroCalcDialog.cpp:4259 src/ui_astroCalcDialog.h:1324
 msgid "Minimal angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4261 src/ui_astroCalcDialog.h:1327
+#: src/gui/AstroCalcDialog.cpp:4260 src/ui_astroCalcDialog.h:1327
 msgid "Maximum angular size for visible celestial objects"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4547
+#: src/gui/AstroCalcDialog.cpp:4546
 msgid "Limit angular separation:"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4548
+#: src/gui/AstroCalcDialog.cpp:4547
 msgid "Set limits for angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4549
+#: src/gui/AstroCalcDialog.cpp:4548
 msgid "Minimal angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4550
+#: src/gui/AstroCalcDialog.cpp:4549
 msgid "Maximum angular separation for visible double stars"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4678
+#: src/gui/AstroCalcDialog.cpp:4677
 msgid "Save list of objects as..."
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4734 src/ui_astroCalcDialog.h:1230
+#: src/gui/AstroCalcDialog.cpp:4733 src/ui_astroCalcDialog.h:1230
 msgid "What's Up Tonight"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4890
+#: src/gui/AstroCalcDialog.cpp:4889
 msgid "spin-orbit resonance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4942 src/gui/AstroCalcDialog.cpp:5121
+#: src/gui/AstroCalcDialog.cpp:4941 src/gui/AstroCalcDialog.cpp:5120
 msgid "Days from today"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4943 src/gui/AstroCalcDialog.cpp:5102
+#: src/gui/AstroCalcDialog.cpp:4942 src/gui/AstroCalcDialog.cpp:5101
 msgid "Linear distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:4944 src/gui/AstroCalcDialog.cpp:5105
-#: src/gui/AstroCalcDialog.cpp:5122
+#: src/gui/AstroCalcDialog.cpp:4943 src/gui/AstroCalcDialog.cpp:5104
+#: src/gui/AstroCalcDialog.cpp:5121
 msgid "Angular distance"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5102 src/gui/AstroCalcDialog.cpp:5105
+#: src/gui/AstroCalcDialog.cpp:5101 src/gui/AstroCalcDialog.cpp:5104
 msgid "Day"
 msgstr ""
 
-#: src/gui/AstroCalcDialog.cpp:5163
+#: src/gui/AstroCalcDialog.cpp:5162
 msgid "Change of angular distance between the Moon and selected object"
 msgstr ""
 
