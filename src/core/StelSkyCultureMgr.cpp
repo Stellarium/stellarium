@@ -171,7 +171,7 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 		case StelSkyCulture::ETHNOGRAPHIC:
 			color = "#33ff33"; // "green" area
 			classification = qc_("ethnographic", "sky culture classification");
-			description = q_("Provided by ethnographic researchers based on interviews of indigenous people or based on historical written sources from a (usually short) period of the past.");
+			description = q_("Provided by ethnographic researchers based on interviews of indigenous people.");
 			break;
 		case StelSkyCulture::HISTORICAL:
 			color = "#33ff33"; // "green" area
