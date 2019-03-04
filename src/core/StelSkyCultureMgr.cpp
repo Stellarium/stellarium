@@ -52,29 +52,45 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		dirToNameEnglish[dir].author = pd.value("info/author").toString();
 		// TODO: Define license info (+separate license info for artwork?) and use it in description of skyculture like for plugins and scripts
 		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
-		QString boundaries = pd.value("info/boundaries", "none").toString();
-		int boundariesIdx;
-		if (boundaries.contains("generic", Qt::CaseInsensitive))
-			boundariesIdx = 0;
-		else if (boundaries.contains("own", Qt::CaseInsensitive))
-			boundariesIdx = 1;
+		QString boundariesStr = pd.value("info/boundaries", "none").toString();
+		StelSkyCulture::BOUNDARIES boundaries = StelSkyCulture::NONE;
+		if (boundariesStr.contains("iau", Qt::CaseInsensitive))
+			boundaries = StelSkyCulture::IAU;
+		else if (boundariesStr.contains("generic", Qt::CaseInsensitive))
+		{
+			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
+			boundaries = StelSkyCulture::IAU;
+		}
+		else if (boundariesStr.contains("own", Qt::CaseInsensitive))
+			boundaries = StelSkyCulture::OWN;
 		else
-			boundariesIdx = -1;
-		dirToNameEnglish[dir].boundariesIdx = boundariesIdx;
-		// TODO: Use 'traditional' as default
-		QString classification = pd.value("info/classification", "none").toString();
-		int classificationIdx;
-		if (classification.contains("scientific", Qt::CaseInsensitive))
-			classificationIdx = 1;
-		else if (classification.contains("traditional", Qt::CaseInsensitive))
-			classificationIdx = 2;
-		else if (classification.contains("single", Qt::CaseInsensitive))
-			classificationIdx = 3;
-		else if (classification.contains("personal", Qt::CaseInsensitive))
-			classificationIdx = 4;
-		else
-			classificationIdx = 0;
-		dirToNameEnglish[dir].classificationIdx = classificationIdx;
+		{
+			if (!boundariesStr.contains("none", Qt::CaseInsensitive))
+			{
+				qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
+			}
+			boundaries = StelSkyCulture::NONE;
+		}
+		dirToNameEnglish[dir].boundaries = boundaries;
+		// Use 'traditional' as default
+		QString classificationStr = pd.value("info/classification", "traditional").toString();
+		StelSkyCulture::CLASSIFICATION classification=StelSkyCulture::INCOMPLETE;
+		if (classificationStr.contains("ethnographic", Qt::CaseInsensitive))
+			classification = StelSkyCulture::ETHNOGRAPHIC;
+		else if (classificationStr.contains("traditional", Qt::CaseInsensitive))
+			classification = StelSkyCulture::TRADITIONAL;
+		else if (classificationStr.contains("historical", Qt::CaseInsensitive))
+			classification = StelSkyCulture::HISTORICAL;
+		else if (classificationStr.contains("single", Qt::CaseInsensitive))
+			classification = StelSkyCulture::SINGLE;
+		else if (classificationStr.contains("personal", Qt::CaseInsensitive))
+			classification = StelSkyCulture::PERSONAL;
+		else if (!classificationStr.contains("incomplete", Qt::CaseInsensitive))
+		{
+			qDebug() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
+			classification = StelSkyCulture::INCOMPLETE;
+		}
+		dirToNameEnglish[dir].classification = classification;
 	}	
 }
 
@@ -139,41 +155,51 @@ QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
 
 int StelSkyCultureMgr::getCurrentSkyCultureBoundariesIdx() const
 {
-	return currentSkyCulture.boundariesIdx;
+	return currentSkyCulture.boundaries;
 }
 
 int StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
 {
-	return currentSkyCulture.classificationIdx;
+	return currentSkyCulture.classification;
 }
 
 QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
 {
 	QString classification, description, color;
-	switch (currentSkyCulture.classificationIdx)
+	switch (currentSkyCulture.classification)
 	{
-		case 1: // scientific
+		case StelSkyCulture::ETHNOGRAPHIC:
 			color = "#33ff33"; // "green" area
-			classification = qc_("scientific", "sky culture classification");
+			classification = qc_("ethnographic", "sky culture classification");
 			description = q_("Provided by ethnographic researchers based on interviews of indigenous people or based on historical written sources from a (usually short) period of the past.");
 			break;
-		case 2: // traditional
+		case StelSkyCulture::HISTORICAL:
+			color = "#33ff33"; // "green" area
+			classification = qc_("historical", "sky culture classification");
+			description = q_("Provided by historians based on historical written sources from a (usually short) period of the past.");
+			break;
+		case StelSkyCulture::SINGLE:
+			color = "#33ff33"; // "yellow" area
+			classification = qc_("single", "sky culture classification");
+			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
+			break;
+		case StelSkyCulture::TRADITIONAL:
 			color = "#ccff33"; // "green/yellow" area
 			classification = qc_("traditional", "sky culture classification");
 			description = q_("Content represents 'common' knowledge by several members of an ethnic community, and the sky culture has been developed by members of such community.");
 			break;
-		case 3: // single
-			color = "#ffff33"; // "yellow" area
-			classification = qc_("single", "sky culture classification");
-			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
-			break;
-		case 4: // personal
+		case StelSkyCulture::PERSONAL:
 			color = "#ff6633"; // "red" area
 			classification = qc_("personal", "sky culture classification");
 			description = q_("This is a personally developed sky culture which is not funded in published historical or ethnological research. Stellarium may include it when it is 'pretty enough' without really approving its contents.");
 			break;
+		case StelSkyCulture::INCOMPLETE:
+			color = "#ff6633"; // "red" area
+			classification = qc_("incomplete", "sky culture classification");
+			description = q_("The accuracy of the sky culture description cannot be given, although it looks like it is built on a solid background. More work would be needed.");
+			break;
 		default: // undefined
-			color = "#000000";
+			color = "#ff00cc";
 			classification = qc_("undefined", "sky culture classification");
 			description = QString();
 			break;
