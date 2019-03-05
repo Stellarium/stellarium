@@ -281,28 +281,20 @@ private:
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
 					QString angularSize, QString angularSizeToolTip, QString extraData,
 					QString extraDataToolTip, QString transitTime, QString objectType);
-	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
-				   QString separation, QString elongation, QString angularDistance,
-				   QString elongTooltip="", QString angDistTooltip="");
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
 	//! angular separation ("conjunction" defined as equality of right ascension
-	//! of two body) and current solution is not accurate and slow.
-	QMap<double, double> findClosestApproach(PlanetP& object1, PlanetP& object2, double startJD, double stopJD, double maxSeparation, bool opposition);
-	double findDistance(double JD, PlanetP object1, PlanetP object2, bool opposition);
-	bool findPrecise(QPair<double, double>* out, PlanetP object1, PlanetP object2, double JD, double step, int prevSign, bool opposition);
-	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
-
-	QMap<double, double> findClosestApproach(PlanetP& object1, NebulaP& object2, double startJD, double stopJD, double maxSeparation);
-	double findDistance(double JD, PlanetP object1, NebulaP object2);
-	bool findPrecise(QPair<double, double>* out, PlanetP object1, NebulaP object2, double JD, double step, int prevSign);
-	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
-
+	//! of two body) and current solution is not accurate and slow.	
 	QMap<double, double> findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, bool opposition);
 	double findDistance(double JD, PlanetP object1, StelObjectP object2, bool opposition);
 	bool findPrecise(QPair<double, double>* out, PlanetP object1, StelObjectP object2, double JD, double step, int prevSign, bool opposition);
 	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, bool opposition);
+	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2);
+	void fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition);
+	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
+				   QString separation, QString elongation, QString angularDistance,
+				   QString elongTooltip="", QString angDistTooltip="");
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph;
 	QString delimiter, acEndl;

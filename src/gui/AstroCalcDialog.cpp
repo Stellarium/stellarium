@@ -3020,10 +3020,11 @@ void AstroCalcDialog::calculatePhenomena()
 			for (auto& obj : objects)
 			{
 				// conjunction
-				fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, false), planet, obj, false);
+				StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
+				fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, false), planet, obj, false);
 				// opposition
 				if (opposition)
-					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, true), planet, obj, true);
+					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, true), planet, obj, true);
 			}
 		}
 		else if (obj2Type == 10 || obj2Type == 11 || obj2Type == 12)
@@ -3036,7 +3037,8 @@ void AstroCalcDialog::calculatePhenomena()
 				if (dec <= coordsLimit && dec >= -coordsLimit)
 				{
 					// conjunction
-					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation, false), planet, obj, false);
+					StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
+					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, false), planet, obj, false);
 				}
 			}
 		}
@@ -3050,7 +3052,8 @@ void AstroCalcDialog::calculatePhenomena()
 				if (dec <= coordsLimit && dec >= -coordsLimit)
 				{
 					// conjunction
-					fillPhenomenaTable(findClosestApproach(planet, obj, startJD, stopJD, separation), planet, obj);
+					StelObjectP mObj = qSharedPointerCast<StelObject>(obj);
+					fillPhenomenaTable(findClosestApproach(planet, mObj, startJD, stopJD, separation, false), planet, obj);
 				}
 			}
 		}
@@ -3312,143 +3315,6 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	}
 }
 
-QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, PlanetP& object2, double startJD, double stopJD, double maxSeparation, bool opposition)
-{
-	double dist, prevDist, step, step0;
-	int sgn, prevSgn = 0;
-	QMap<double, double> separations;
-	QPair<double, double> extremum;
-
-	step0 = (stopJD - startJD) / 12.0;
-	if (step0 > 24.8 * 365.25) step0 = 24.8 * 365.25;
-
-	if (object1->getEnglishName() == "Neptune" || object2->getEnglishName() == "Neptune" || object1->getEnglishName() == "Uranus" || object2->getEnglishName() == "Uranus")
-	{
-		if (step0 > 3652.5)
-			step0 = 3652.5;
-	}
-	if (object1->getEnglishName() == "Jupiter" || object2->getEnglishName() == "Jupiter" || object1->getEnglishName() == "Saturn" || object2->getEnglishName() == "Saturn")
-	{
-		if (step0 > 365.25)
-			step0 = 365.;
-	}
-	if (object1->getEnglishName() == "Mars" || object2->getEnglishName() == "Mars")
-	{
-		if (step0 > 10.)
-			step0 = 10.;
-	}
-	if (object1->getEnglishName() == "Venus" || object2->getEnglishName() == "Venus" || object1->getEnglishName() == "Mercury" || object2->getEnglishName() == "Mercury")
-	{
-		if (step0 > 5.)
-			step0 = 5.;
-	}
-	if (object1->getEnglishName() == "Moon" || object2->getEnglishName() == "Moon")
-	{
-		if (step0 > 0.25)
-			step0 = 0.25;
-	}
-
-	step = step0;
-	double jd = startJD;
-	prevDist = findDistance(jd, object1, object2, opposition);
-	jd += step;
-	while (jd <= stopJD)
-	{
-		dist = findDistance(jd, object1, object2, opposition);
-		sgn = StelUtils::sign(dist - prevDist);
-
-		double factor = qAbs((dist - prevDist) / dist);
-		if (factor > 10.)
-			step = step0 * factor / 10.;
-		else
-			step = step0;
-
-		if (sgn != prevSgn && prevSgn == -1)
-		{
-			if (step > step0)
-			{
-				jd -= step;
-				step = step0;
-				sgn = prevSgn;
-				while (jd <= stopJD)
-				{
-					dist = findDistance(jd, object1, object2, opposition);
-					sgn = StelUtils::sign(dist - prevDist);
-					if (sgn != prevSgn)
-						break;
-
-					prevDist = dist;
-					prevSgn = sgn;
-					jd += step;
-				}
-			}
-
-			if (findPrecise(&extremum, object1, object2, jd, step, sgn, opposition))
-			{
-				double sep = extremum.second * 180. / M_PI;
-				if (sep < maxSeparation)
-					separations.insert(extremum.first, extremum.second);
-			}
-		}
-
-		prevDist = dist;
-		prevSgn = sgn;
-		jd += step;
-	}
-
-	return separations;
-}
-
-bool AstroCalcDialog::findPrecise(QPair<double, double>* out, PlanetP object1, PlanetP object2, double JD,
-  double step, int prevSign, bool opposition)
-{
-	int sgn;
-	double dist, prevDist;
-
-	if (out == Q_NULLPTR)
-		return false;
-
-	prevDist = findDistance(JD, object1, object2, opposition);
-	step = -step / 2.;
-	prevSign = -prevSign;
-
-	while (true)
-	{
-		JD += step;
-		dist = findDistance(JD, object1, object2, opposition);
-
-		if (qAbs(step) < 1. / 1440.)
-		{
-			out->first = JD - step / 2.0;
-			out->second = findDistance(JD - step / 2.0, object1, object2, opposition);
-			if (out->second < findDistance(JD - 5.0, object1, object2, opposition))
-				return true;
-			else
-				return false;
-		}
-		sgn = StelUtils::sign(dist - prevDist);
-		if (sgn != prevSign)
-		{
-			step = -step / 2.0;
-			sgn = -sgn;
-		}
-		prevDist = dist;
-		prevSign = sgn;
-	}
-}
-
-double AstroCalcDialog::findDistance(double JD, PlanetP object1, PlanetP object2, bool opposition)
-{
-	core->setJD(JD);
-	core->update(0);
-	Vec3d obj1 = object1->getJ2000EquatorialPos(core);
-	Vec3d obj2 = object2->getJ2000EquatorialPos(core);
-	double angle = obj1.angle(obj2);
-	if (opposition)
-		angle = M_PI - angle;
-	return angle;
-}
-
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const NebulaP object2)
 {
 	QMap<double, double>::ConstIterator it;
@@ -3515,139 +3381,6 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 
 		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), commonName, separationStr, elongStr, angDistStr);
 	}
-}
-
-QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, NebulaP& object2, double startJD, double stopJD, double maxSeparation)
-{
-	double dist, prevDist, step, step0;
-	int sgn, prevSgn = 0;
-	QMap<double, double> separations;
-	QPair<double, double> extremum;
-
-	step0 = (stopJD - startJD) / 8.0;
-	if (step0 > 24.8 * 365.25)
-		step0 = 24.8 * 365.25;
-
-	if (object1->getEnglishName() == "Neptune" || object1->getEnglishName() == "Uranus")
-	{
-		if (step0 > 3652.5)
-			step0 = 3652.5;
-	}
-	if (object1->getEnglishName() == "Jupiter" || object1->getEnglishName() == "Saturn")
-	{
-		if (step0 > 365.25)
-			step0 = 365.;
-	}
-	if (object1->getEnglishName() == "Mars")
-	{
-		if (step0 > 10.)
-			step0 = 10.;
-	}
-	if (object1->getEnglishName() == "Venus" || object1->getEnglishName() == "Mercury")
-	{
-		if (step0 > 5.)
-			step0 = 5.;
-	}
-	if (object1->getEnglishName() == "Moon")
-	{
-		if (step0 > 0.25)
-			step0 = 0.25;
-	}
-
-	step = step0;
-	double jd = startJD;
-	prevDist = findDistance(jd, object1, object2);
-	jd += step;
-	while (jd <= stopJD)
-	{
-		dist = findDistance(jd, object1, object2);
-		sgn = StelUtils::sign(dist - prevDist);
-
-		double factor = qAbs((dist - prevDist) / dist);
-		if (factor > 10.)
-			step = step0 * factor / 10.;
-		else
-			step = step0;
-
-		if (sgn != prevSgn && prevSgn == -1)
-		{
-			if (step > step0)
-			{
-				jd -= step;
-				step = step0;
-				sgn = prevSgn;
-				while (jd <= stopJD)
-				{
-					dist = findDistance(jd, object1, object2);
-					sgn = StelUtils::sign(dist - prevDist);
-					if (sgn != prevSgn)
-						break;
-
-					prevDist = dist;
-					prevSgn = sgn;
-					jd += step;
-				}
-			}
-
-			if (findPrecise(&extremum, object1, object2, jd, step, sgn))
-			{
-				double sep = extremum.second * 180. / M_PI;
-				if (sep < maxSeparation) separations.insert(extremum.first, extremum.second);
-			}
-		}
-
-		prevDist = dist;
-		prevSgn = sgn;
-		jd += step;
-	}
-
-	return separations;
-}
-
-bool AstroCalcDialog::findPrecise(QPair<double, double>* out, PlanetP object1, NebulaP object2, double JD, double step, int prevSign)
-{
-	int sgn;
-	double dist, prevDist;
-
-	if (out == Q_NULLPTR)
-		return false;
-
-	prevDist = findDistance(JD, object1, object2);
-	step = -step / 2.;
-	prevSign = -prevSign;
-
-	while (true)
-	{
-		JD += step;
-		dist = findDistance(JD, object1, object2);
-
-		if (qAbs(step) < 1. / 1440.)
-		{
-			out->first = JD - step / 2.0;
-			out->second = findDistance(JD - step / 2.0, object1, object2);
-			if (out->second < findDistance(JD - 5.0, object1, object2))
-				return true;
-			else
-				return false;
-		}
-		sgn = StelUtils::sign(dist - prevDist);
-		if (sgn != prevSign)
-		{
-			step = -step / 2.0;
-			sgn = -sgn;
-		}
-		prevDist = dist;
-		prevSign = sgn;
-	}
-}
-
-double AstroCalcDialog::findDistance(double JD, PlanetP object1, NebulaP object2)
-{
-	core->setJD(JD);
-	core->update(0);
-	Vec3d obj1 = object1->getJ2000EquatorialPos(core);
-	Vec3d obj2 = object2->getJ2000EquatorialPos(core);	
-	return obj1.angle(obj2);
 }
 
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const StelObjectP object2, bool opposition = false)
