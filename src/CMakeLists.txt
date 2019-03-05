@@ -202,6 +202,7 @@ SET(stellarium_lib_SRCS
      core/modules/MilkyWay.hpp
      core/modules/Nebula.cpp
      core/modules/Nebula.hpp
+     core/modules/NebulaList.hpp
      core/modules/NebulaMgr.cpp
      core/modules/NebulaMgr.hpp
      core/modules/Orbit.cpp
