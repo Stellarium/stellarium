@@ -9,7 +9,6 @@
 <br/>[![Coverage Status](https://coveralls.io/repos/github/Stellarium/stellarium/badge.svg)](https://coveralls.io/github/Stellarium/stellarium)
 [![CodeFactor](https://www.codefactor.io/repository/github/stellarium/stellarium/badge)](https://www.codefactor.io/repository/github/stellarium/stellarium)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Stellarium/stellarium.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Stellarium/stellarium/alerts/)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FStellarium%2Fstellarium.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FStellarium%2Fstellarium?ref=badge_shield)
 
 Stellarium is a free open source planetarium for your computer. It shows a realistic sky
 in 3D, just like what you see with the naked eye, binoculars or a telescope.
