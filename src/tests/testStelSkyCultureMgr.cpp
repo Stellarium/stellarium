@@ -20,14 +20,8 @@
 #include "tests/testStelSkyCultureMgr.hpp"
 
 #include <QObject>
-#include <QFileInfo>
-#include <QFile>
-#include <QDir>
-#include <QString>
-#include <QStringList>
 #include <QDebug>
 #include <QTest>
-#include <QRegExp>
 
 #include "StelSkyCultureMgr.hpp"
 #include "StelFileMgr.hpp"

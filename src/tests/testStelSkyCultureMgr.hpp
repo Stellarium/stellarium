@@ -21,10 +21,7 @@
 #define TESTSTELSKYCULTUREMGR_HPP
 
 #include <QObject>
-#include <QString>
-#include <QStringList>
 #include <QTest>
-#include <QTemporaryDir>
 
 class StelSkyCultureMgr;
 
