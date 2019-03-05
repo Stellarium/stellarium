@@ -134,6 +134,8 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:123"] = "ESO/Uppsala Survey of the ESO(B) Atlas";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
+		objModulesMap["NebulaMgr:152"] = "Jack Bennett's deep sky catalogue";
+		objModulesMap["NebulaMgr:153"] = "James Dunlop's southern deep sky catalogue";
 	}
 	// Interesting stars
 	if (m->objectName()=="StarMgr")

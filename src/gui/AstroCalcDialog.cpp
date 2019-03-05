@@ -631,6 +631,8 @@ void AstroCalcDialog::populateCelestialCategoryList()
 		category->addItem(q_("ESO/Uppsala Survey of the ESO(B) Atlas"), "123");
 	category->addItem(q_("Dwarf galaxies"), "150");
 	category->addItem(q_("Herschel 400 Catalogue"), "151");
+	category->addItem(q_("Jack Bennett's deep sky catalogue"), "152");
+	category->addItem(q_("James Dunlop's southern deep sky catalogue"), "153");
 	category->addItem(q_("Bright double stars"), "170");
 	category->addItem(q_("Bright variable stars"), "171");
 	category->addItem(q_("Bright stars with high proper motion"), "172");

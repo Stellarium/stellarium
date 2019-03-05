@@ -101,6 +101,48 @@ static const unsigned int H400_LIST[] =
 	7479, 7510, 7606, 7662, 7686, 7723, 7727, 7789, 7790, 7814
 };
 
+// Details: http://www.docdb.net/tutorials/bennett_catalogue.php
+// Esp. for southern observers
+static const unsigned int BENNETT_LIST[] =
+{
+	  55,  104,  247,  253,  288,  300,  362,  613, 1068, 1097,
+	1232, 1261, 1291, 1313, 1316, 1350, 1360, 1365, 1380, 1387,
+	1399, 1398, 1404, 1433, 1512, 1535, 1549, 1553, 1566, 1617,
+	1672, 1763, 1783, 1792, 1818, 1808, 1851, 1866, 1904, 2070,
+	2214, 2243, 2298, 2467, 2489, 2506, 2627, 2671, 2808, 2972,
+	2997, 3115, 3132, 3201, 3242, 3621, 3960, 3923, 4372, 4590,
+	4594, 4697, 4699, 4753, 4833, 4945, 4976, 5061, 5068, 5128,
+	5139, 5189, 5236, 5253, 5286, 5617, 5634, 5824, 5897, 5927,
+	5986, 5999, 6005, 6093, 6101, 6121, 6134, 6144, 6139, 6171,
+	6167, 6192, 6218, 6216, 6235, 6254, 6253, 6266, 6273, 6284,
+	6287, 6293, 6304, 6316, 6318, 6333, 6356, 6352, 6362, 6388,
+	6402, 6397, 6440, 6445, 6441, 6496, 6522, 6528, 6544, 6541,
+	6553, 6569, 6584, 6603, 6618, 6624, 6626, 6638, 6637, 6642,
+	6652, 6656, 6681, 6705, 6712, 6715, 6723, 6744, 6752, 6809,
+	6818, 6864, 6981, 7009, 7089, 7099, 7293, 7410, 7793
+};
+
+// Details: http://www.docdb.net/tutorials/dunlop_catalogue.php
+// Esp. for southern observers
+static const unsigned int DUNLOP_LIST[] =
+{
+	7590, 7599,  104,  330,  346,  362, 6101, 1795, 1943, 2019,
+	2058, 2122, 1743, 1910, 1928, 1966, 2070, 2069, 2136, 4833,
+	1755, 1770, 1936, 2159, 2164, 2156, 2214, 1313, 1869, 1955,
+	1974, 2004, 2121, 2035, 6362, 1810, 1818, 2029, 2027, 1831,
+	6744, 2808, 4609, 5281, 5316, 3766, 4103, 4349, 6752, 3114,
+	4755, 5617, 6025, 3372, 4852, 5606, 3532, 6087, 5715, 6005,
+	1261, 5662, 5999, 1515, 3960, 3330, 5749, 5925, 6031, 6067,
+	6208, 6397, 6584, 3228, 5286, 5927, 2972, 6167, 7049, 2547,
+	4945, 6134, 6193, 6352,	6861, 1433, 5460, 1493, 5139, 6204,
+	3201, 6216, 6259, 6388, 1512, 5643, 6541,  625, 1487, 3680,
+	5128, 6192, 1291, 6231,   55, 1851, 4709, 6124, 7410, 6242,
+	6268, 6318, 2477, 6139, 1317, 1316, 1808, 5986, 6281, 6441,
+	1436, 2546, 2818, 6400, 6723, 1380, 2298, 1350, 2090, 1532,
+	6652, 2658, 6416, 6637, 6681, 3621, 6569, 6809, 5253, 6715,
+	2489, 6266, 5236
+};
+
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
 static const QString StellariumDSOCatalogVersion = "3.6";
@@ -2848,6 +2890,19 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 				result << QString("NGC %1").arg(H400_LIST[i]);
 			break;
 		}
+		case 152: // Jack Bennett's deep sky catalogue
+		{
+			for (unsigned int i = 0; i < sizeof(BENNETT_LIST) / sizeof(BENNETT_LIST[0]); i++)
+				result << QString("NGC %1").arg(BENNETT_LIST[i]);
+			result << "Mel 105" << "IC 1459";
+			break;
+		}
+		case 153: // James Dunlop's deep sky catalogue
+		{
+			for (unsigned int i = 0; i < sizeof(DUNLOP_LIST) / sizeof(DUNLOP_LIST[0]); i++)
+				result << QString("NGC %1").arg(DUNLOP_LIST[i]);
+			break;
+		}
 		default:
 		{
 			for (const auto& n : dsoArray)
@@ -3110,6 +3165,34 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 			for (unsigned int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
 			{
 				ds = searchNGC(H400_LIST[i]);
+				if (!ds.isNull())
+					dso.append(ds);
+			}
+			break;
+		}
+		case 152: // Jack Bennett's deep sky catalogue
+		{
+			NebulaP ds;
+			for (unsigned int i = 0; i < sizeof(BENNETT_LIST) / sizeof(BENNETT_LIST[0]); i++)
+			{
+				ds = searchNGC(BENNETT_LIST[i]);
+				if (!ds.isNull())
+					dso.append(ds);
+			}
+			ds = searchMel(105);
+			if (!ds.isNull())
+				dso.append(ds);
+			ds = searchIC(1459);
+			if (!ds.isNull())
+				dso.append(ds);
+			break;
+		}
+		case 153: // James Dunlop's deep sky catalogue
+		{
+			NebulaP ds;
+			for (unsigned int i = 0; i < sizeof(DUNLOP_LIST) / sizeof(DUNLOP_LIST[0]); i++)
+			{
+				ds = searchNGC(DUNLOP_LIST[i]);
 				if (!ds.isNull())
 					dso.append(ds);
 			}

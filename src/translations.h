@@ -427,6 +427,10 @@ class Translations
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Herschel 400 Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Jack Bennett's deep sky catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("James Dunlop's southern deep sky catalogue");
 		
 		// =====================================================================
 		// List of stars types
