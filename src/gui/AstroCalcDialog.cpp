@@ -3178,6 +3178,33 @@ void AstroCalcDialog::savePhenomena()
 	}
 }
 
+void AstroCalcDialog::fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
+					    QString separation, QString elongation, QString angularDistance,
+					    QString elongTooltip, QString angDistTooltip)
+{
+	ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
+	treeItem->setText(PhenomenaType, phenomenType);
+	// local date and time
+	treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
+	treeItem->setData(PhenomenaDate, Qt::UserRole, JD);
+	treeItem->setText(PhenomenaObject1, firstObjectName);
+	treeItem->setText(PhenomenaObject2, secondObjectName);
+	treeItem->setText(PhenomenaSeparation, separation);
+	treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
+	treeItem->setText(PhenomenaElongation, elongation);
+	if (elongTooltip.isEmpty())
+		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
+	else
+		treeItem->setToolTip(PhenomenaElongation, elongTooltip);
+	treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
+	treeItem->setText(PhenomenaAngularDistance, angularDistance);
+	if (angDistTooltip.isEmpty())
+		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
+	else
+		treeItem->setToolTip(PhenomenaAngularDistance, angDistTooltip);
+	treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
+}
+
 void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const PlanetP object1, const PlanetP object2, bool opposition)
 {
 	QMap<double, double>::ConstIterator it;
@@ -3272,29 +3299,16 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			angularDistanceInfo = q_("Angular distance from the Moon for second object");
 		}
 
-		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
-		treeItem->setText(PhenomenaType, phenomenType);
-		// local date and time
-		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
-		treeItem->setData(PhenomenaDate, Qt::UserRole, it.key());
-		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
-		treeItem->setText(PhenomenaObject2, object2->getNameI18n());
-		if (occultation)
-			treeItem->setText(PhenomenaSeparation, dash);
-		else
+		QString separationStr = dash;
+		if (!occultation)
 		{
 			if (withDecimalDegree)
-				treeItem->setText(PhenomenaSeparation, StelUtils::radToDecDegStr(separation, 5, false, true));
+				separationStr = StelUtils::radToDecDegStr(separation, 5, false, true);
 			else
-				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
-		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
-		treeItem->setText(PhenomenaElongation, elongStr);
-		treeItem->setToolTip(PhenomenaElongation, elongationInfo);
-		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
-		treeItem->setText(PhenomenaAngularDistance, angDistStr);
-		treeItem->setToolTip(PhenomenaAngularDistance, angularDistanceInfo);
-		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
+
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), object2->getNameI18n(), separationStr, elongStr, angDistStr, elongationInfo, angularDistanceInfo);
 	}
 }
 
@@ -3486,33 +3500,20 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			}
 		}
 
-		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
-		treeItem->setText(PhenomenaType, phenomenType);
-		// local date and time
-		treeItem->setText(PhenomenaDate,
-		  QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
-		treeItem->setData(PhenomenaDate, Qt::UserRole, it.key());
-		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
-		if (!object2->getNameI18n().isEmpty())
-			treeItem->setText(PhenomenaObject2, object2->getNameI18n());
-		else
-			treeItem->setText(PhenomenaObject2, object2->getDSODesignation());
-		if (occultation)
-			treeItem->setText(PhenomenaSeparation, dash);
-		else
+		QString commonName = object2->getNameI18n();
+		if (commonName.isEmpty())
+			commonName = object2->getDSODesignation();
+
+		QString separationStr = dash;
+		if (!occultation)
 		{
 			if (withDecimalDegree)
-				treeItem->setText(PhenomenaSeparation, StelUtils::radToDecDegStr(separation, 5, false, true));
+				separationStr = StelUtils::radToDecDegStr(separation, 5, false, true);
 			else
-				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
-		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
-		treeItem->setText(PhenomenaElongation, elongStr);
-		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
-		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
-		treeItem->setText(PhenomenaAngularDistance, angDistStr);
-		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
-		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
+
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), commonName, separationStr, elongStr, angDistStr);
 	}
 }
 
@@ -3729,32 +3730,20 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 			}
 		}
 
-		ACPhenTreeWidgetItem* treeItem = new ACPhenTreeWidgetItem(ui->phenomenaTreeWidget);
-		treeItem->setText(PhenomenaType, phenomenType);
-		// local date and time
-		treeItem->setText(PhenomenaDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(it.key()), localeMgr->getPrintableTimeLocal(it.key())));
-		treeItem->setData(PhenomenaDate, Qt::UserRole, it.key());
-		treeItem->setText(PhenomenaObject1, object1->getNameI18n());
 		QString commonName = object2->getNameI18n();
 		if (commonName.isEmpty())
 			commonName = object2->getID();
-		treeItem->setText(PhenomenaObject2, commonName);
-		if (occultation)
-			treeItem->setText(PhenomenaSeparation, dash);
-		else
+
+		QString separationStr = dash;
+		if (!occultation)
 		{
 			if (withDecimalDegree)
-				treeItem->setText(PhenomenaSeparation, StelUtils::radToDecDegStr(separation, 5, false, true));
+				separationStr = StelUtils::radToDecDegStr(separation, 5, false, true);
 			else
-				treeItem->setText(PhenomenaSeparation, StelUtils::radToDmsStr(separation, true));
+				separationStr = StelUtils::radToDmsStr(separation, true);
 		}
-		treeItem->setTextAlignment(PhenomenaSeparation, Qt::AlignRight);
-		treeItem->setText(PhenomenaElongation, elongStr);
-		treeItem->setToolTip(PhenomenaElongation, q_("Angular distance from the Sun"));
-		treeItem->setTextAlignment(PhenomenaElongation, Qt::AlignRight);
-		treeItem->setText(PhenomenaAngularDistance, angDistStr);
-		treeItem->setToolTip(PhenomenaAngularDistance, q_("Angular distance from the Moon"));
-		treeItem->setTextAlignment(PhenomenaAngularDistance, Qt::AlignRight);
+
+		fillPhenomenaTableVis(phenomenType, it.key(), object1->getNameI18n(), commonName, separationStr, elongStr, angDistStr);
 	}
 }
 

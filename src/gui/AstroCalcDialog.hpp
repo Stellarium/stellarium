@@ -279,8 +279,11 @@ private:
 	QPair<QString, QString> getStringCoordinates(const Vec3d coord, const bool horizon, const bool southAzimuth, const bool decimalDegrees);
 	void fillWUTTable(QString objectName, QString designation, double magnitude, Vec3f RTSTime, double angularSize, bool decimalDegrees = false);
 	void fillCelestialPositionTable(QString objectName, QString RA, QString Dec, double magnitude,
-							  QString angularSize, QString angularSizeToolTip, QString extraData,
-							  QString extraDataToolTip, QString transitTime, QString objectType);
+					QString angularSize, QString angularSizeToolTip, QString extraData,
+					QString extraDataToolTip, QString transitTime, QString objectType);
+	void fillPhenomenaTableVis(QString phenomenType, double JD, QString firstObjectName, QString secondObjectName,
+				   QString separation, QString elongation, QString angularDistance,
+				   QString elongTooltip="", QString angDistTooltip="");
 
 	//! Calculation conjunctions and oppositions.
 	//! @note Ported from KStars, should be improved, because this feature calculate
