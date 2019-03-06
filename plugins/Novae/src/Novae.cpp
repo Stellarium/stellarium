@@ -70,7 +70,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Novae";
 	info.displayedName = N_("Bright Novae");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	info.version = NOVAE_PLUGIN_VERSION;
 	info.license = NOVAE_PLUGIN_LICENSE;

@@ -637,7 +637,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.id = "MeteorShowers";
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
-	info.contact = "mcardinot@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_(
 	"<p>"
 		"This plugin enables you to simulate periodic meteor showers and "
