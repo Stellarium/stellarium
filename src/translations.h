@@ -649,6 +649,8 @@ class Translations
 		N_("Planet Objects Tour");
 		// TRANSLATORS: Name of script
 		N_("Analemma");
+		// TRANSLATORS: Name of script
+		N_("Martian analemma");
 		
 		// =====================================================================
 		// Script descriptions
@@ -693,6 +695,7 @@ class Translations
 		N_("This script demonstrates interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.");
 		N_("A tour of the Solar System planets");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Earth.");
+		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Mars.");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)
