@@ -85,8 +85,6 @@ public slots:
 	//! @note starting with version 0.13.2 all relative dates are set without DeltaT correction.
 	//! @note starting with version 0.14.0 the final optional Boolean argument has a different meaning and default!
 	//! @param dateIsTT \a true if the given date is formulated in Dynamical Time, i.e. with DeltaT added.
-	//  GZ JDfix for 0.14: I estimate 99.7% of users will want to set UT-based dates here. We could use an awkward name like dateIsUTbased=true to keep default value true.
-	//void setDate(const QString& dt, const QString& spec="utc", const bool& enableDeltaT=true);
 	static void setDate(const QString& dateStr, const QString& spec="utc", const bool& dateIsDT=false);
 
 	//! get the simulation date and time as a string in ISO format,
@@ -107,12 +105,37 @@ public slots:
 
 	//! set equation of the DeltaT for the simulation date and time
 	//! @param algorithmName is name of equation, e.g. "WithoutCorrection" or "EspenakMeeus"
-	//! @note list of possible names of equation for DeltaT: WithoutCorrection, Schoch, Clemence, IAU,
-	//! AstronomicalEphemeris, TuckermanGoldstine, MullerStephenson, Stephenson1978, SchmadelZech1979,
-	//! MorrisonStephenson1982, StephensonMorrison1984, StephensonHoulden, Espenak, Borkowski,
-	//! SchmadelZech1988, ChaprontTouze, StephensonMorrison1995, Stephenson1997, ChaprontMeeus,
-	//! JPLHorizons, MeeusSimons, MontenbruckPfleger, ReingoldDershowitz, MorrisonStephenson2004,
-	//! EspenakMeeus, Reijs, Banjevic, IslamSadiqQureshi, Henriksson2017, Custom.
+	//! @note list of possible names of equation for DeltaT:
+	//! - WithoutCorrection
+	//! - Schoch
+	//! - Clemence
+	//! - IAU
+	//! - AstronomicalEphemeris
+	//! - TuckermanGoldstine
+	//! - MullerStephenson
+	//! - Stephenson1978
+	//! - SchmadelZech1979
+	//! - MorrisonStephenson1982
+	//! - StephensonMorrison1984
+	//! - StephensonHoulden
+	//! - Espenak
+	//! - Borkowski
+	//! - SchmadelZech1988
+	//! - ChaprontTouze
+	//! - StephensonMorrison1995
+	//! - Stephenson1997
+	//! - ChaprontMeeus
+	//! - JPLHorizons
+	//! - MeeusSimons
+	//! - MontenbruckPfleger
+	//! - ReingoldDershowitz
+	//! - MorrisonStephenson2004
+	//! - EspenakMeeus
+	//! - Reijs
+	//! - Banjevic
+	//! - IslamSadiqQureshi
+	//! - Henriksson2017
+	//! - Custom
 	static void setDeltaTAlgorithm(QString algorithmName);
 
 	//! Set time speed in JDay/sec
@@ -296,7 +319,7 @@ public slots:
 	//! of locations - do a search in the Location window to see what
 	//! where is.  e.g. "York, UnitedKingdom".
 	//! @param duration the number of seconds to take to move location.
-	static void setObserverLocation(const QString id, float duration=1.);
+	static void setObserverLocation(const QString& id, float duration=1.);
 
 	//! Get the ID of the current observer location.
 	static QString getObserverLocation();
@@ -334,7 +357,7 @@ public slots:
 	//! @param invert whether colors have to be inverted in the output image
 	//! @param overwrite true to use exactly the prefix as filename (plus .png), and overwrite any existing file.
 	//! @param format File format. One of png|bmp|jpg|jpeg|tif|tiff|webm|pbm|pgm|ppm|xbm|xpm|ico. Use current format if left empty or invalid.
-	static void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false, const QString format="");
+	static void screenshot(const QString& prefix, bool invert=false, const QString& dir="", const bool overwrite=false, const QString& format="");
 
 	//! Show or hide the GUI (toolbars).  Note this only applies to GUI plugins which
 	//! provide the public slot "setGuiVisible(bool)".

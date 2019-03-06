@@ -250,7 +250,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	core->moveObserverTo(loc, duration, duration);
 }
 
-void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
+void StelMainScriptAPI::setObserverLocation(const QString &id, float duration)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(id);
@@ -303,7 +303,7 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 
 
 
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString format)
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
 	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
