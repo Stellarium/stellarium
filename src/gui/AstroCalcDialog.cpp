@@ -3986,7 +3986,7 @@ void AstroCalcDialog::calculateWutObjects()
 		enableVisibilityAngularLimits(true);
 
 		// Dirty hack to calculate sunrise/sunset
-		// FIXME: This block of code should be replaced in future!
+		// TODO: This block of code should be replaced in future!
 		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 		double sunset = -1, sunrise = -1, midnight = -1, lc = 100.0;
 		bool flag = false;

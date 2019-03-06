@@ -65,7 +65,7 @@ public slots:
 	//! - ISO, e.g. "2008-03-24T13:21:01"
 	//! - "now" (set sim time to real time)
 	//! - relative, e.g. "+ 4 days", "-2 weeks".  can use these
-	//!   units: seconds, minutes, hours, days, weeks, months, years.
+	//!   units: seconds, minutes, hours, days, sols, weeks, months, years.
 	//!   You may also append " sidereal" to use sidereal days and so on.
 	//!   You can also use "now" at the start.  For example:
 	//!   "now + 3 hours sidereal"
@@ -75,7 +75,6 @@ public slots:
 	//! each unit is dependent on the current planet.  By contrast
 	//! when sidereal time is not specified (i.e. solar time is used)
 	//! the value is conventional - i.e. 1 day means 1 Earth Solar day.
-	// TODO: This calls for implementing "sol" days (planets's solar days)!
 	//! @param spec "local" or "utc" - only has an effect when
 	//! the ISO date type is used. Defaults to "utc".
 	//! @param enableDeltaT is \a true or \a false - enable Delta-T correction or not.

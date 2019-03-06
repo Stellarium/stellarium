@@ -179,7 +179,7 @@ signals:
 	void jsonUpdateComplete(void);
 
 public slots:
-	// FIXME: Add functions for scripting support
+	// TODO: Add functions for scripting support
 
 	//! Download JSON from web recources described in the module section of the
 	//! module.ini file and update the local JSON file.
