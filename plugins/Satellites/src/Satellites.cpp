@@ -825,7 +825,10 @@ void Satellites::setDataMap(const QVariantMap& map)
 	defaultHintColorMap << defaultHintColor[0] << defaultHintColor[1] << defaultHintColor[2];
 
 	if (map.contains("hintColor"))
-		defaultHintColor = StelUtils::strToVec3f(map.value("hintColor").toString());
+	{
+		defaultHintColorMap = map.value("hintColor").toList();
+		defaultHintColor.set(defaultHintColorMap.at(0).toFloat(), defaultHintColorMap.at(1).toFloat(), defaultHintColorMap.at(2).toFloat());
+	}
 
 	if (satelliteListModel)
 		satelliteListModel->beginSatellitesChange();
