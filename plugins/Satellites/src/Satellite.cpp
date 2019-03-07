@@ -116,18 +116,18 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 	QVariantList list = map.value("hintColor", QVariantList()).toList();
 	if (list.count() == 3)
 	{
-		hintColor[0] = list.at(0).toDouble();
-		hintColor[1] = list.at(1).toDouble();
-		hintColor[2] = list.at(2).toDouble();
+		hintColor[0] = list.at(0).toFloat();
+		hintColor[1] = list.at(1).toFloat();
+		hintColor[2] = list.at(2).toFloat();
 	}
-	
+
 	// Satellite orbit section color
 	list = map.value("orbitColor", QVariantList()).toList();
 	if (list.count() == 3)
 	{
-		orbitColor[0] = list.at(0).toDouble();
-		orbitColor[1] = list.at(1).toDouble();
-		orbitColor[2] = list.at(2).toDouble();
+		orbitColor[0] = list.at(0).toFloat();
+		orbitColor[1] = list.at(1).toFloat();
+		orbitColor[2] = list.at(2).toFloat();
 	}
 	else
 	{
@@ -179,7 +179,6 @@ Satellite::~Satellite()
 	}
 }
 
-// TODO: REMOVE THIS FUNCTION! It is used for string formatting only.
 double Satellite::roundToDp(float n, int dp)
 {
 	// round n to dp decimal places

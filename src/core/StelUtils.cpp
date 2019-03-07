@@ -1577,30 +1577,8 @@ double getDeltaTByStephensonMorrison1995(const double jDay)
 // Implementation of algorithm by Stephenson & Houlden (1986) for DeltaT computation
 double getDeltaTByStephensonHoulden(const double jDay)
 {
-	// TODO FIXME: GZ 2016-12: WHAT IS THIS?? Stephenson-Houlden 1986 has a different Formula!!
-//	int year, month, day;
-//	double u;
-//	double deltaT = 0.;
-//	getDateFromJulianDay(jDay, &year, &month, &day);
-
-//	double yeardec=getDecYear(year, month, day);
-//	// Limited years!?
-//	year=qBound(-600, year, 1600);
-
-//	if (year <= 948)
-//	{
-//		u = (yeardec-948)/100;
-//		deltaT = (46.5*u -405.0)*u + 1830.0;
-//	}
-//	if (948 < year && year <= 1600)
-//	{
-//		u = (yeardec-1850)/100;
-//		deltaT = 22.5*u*u;
-//	}
-//	return deltaT;
-// This formula found in the cited book, page (ii), formula (1).
+	// This formula found in the cited book, page (ii), formula (1).
 	double T=(jDay-2415020.0)/36525; // centuries from J1900.0
-
 	return (36.79*T+35.06)*T+4.87;
 }
 

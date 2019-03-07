@@ -1474,8 +1474,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Pluto")
 					return -1.01 + d;
 
-				// AW2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
-				//         FIXME: Need experimental data to fitting to real world or the scientific paper with description of model.
+				// AW 2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
+				// TODO: Need experimental data to fitting to real world or the scientific paper with description of model.
 				// GZ 2017-09: Phase coefficients for I and III corrected, based on original publication (Stebbins&Jacobsen 1928) now.
 				if (englishName=="Io")
 					return shadowFactor<1.0 ? 21.0 : (-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
