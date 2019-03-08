@@ -3974,6 +3974,7 @@ void AstroCalcDialog::calculateWutObjects()
 		double angularSizeLimitMax = ui->wutAngularSizeLimitMaxSpinBox->valueDegrees();
 		double magLimit = ui->wutMagnitudeDoubleSpinBox->value();
 		double JD = core->getJD();
+		double UTCOffset = core->getUTCOffset(JD) / 24.;
 		double wutJD, az, alt, mag;
 		QSet<QString> objectsList;
 		QString designation, starName;
@@ -3992,7 +3993,7 @@ void AstroCalcDialog::calculateWutObjects()
 		bool flag = false;
 		for (int i = 0; i < 288; i++) // Check position every 5 minutes...
 		{
-			wutJD = (int)JD + i * 0.0034722;
+			wutJD = (int)JD - UTCOffset + i * 0.0034722;
 			core->setJD(wutJD);
 			core->update(0);
 			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
