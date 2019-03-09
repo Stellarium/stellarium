@@ -27,7 +27,6 @@
 #include "StelLocaleMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "AngleSpinBox.hpp"
-
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
@@ -37,8 +36,14 @@
 #include "../plugins/Satellites/src/Satellites.hpp"
 #endif
 
+#include <QFileDialog>
+#include <QDir>
+#include <QSortFilterProxyModel>
+#include <QStringListModel>
+
 #include "AstroCalcDialog.hpp"
 #include "ui_astroCalcDialog.h"
+
 #include "external/qcustomplot/qcustomplot.h"
 #include "external/qxlsx/xlsxdocument.h"
 #include "external/qxlsx/xlsxchartsheet.h"
@@ -47,11 +52,6 @@
 #include "external/qxlsx/xlsxrichstring.h"
 #include "external/qxlsx/xlsxworkbook.h"
 using namespace QXlsx;
-
-#include <QFileDialog>
-#include <QDir>
-#include <QSortFilterProxyModel>
-#include <QStringListModel>
 
 QVector<Vec3d> AstroCalcDialog::EphemerisListCoords;
 QVector<QString> AstroCalcDialog::EphemerisListDates;
@@ -3986,25 +3986,27 @@ void AstroCalcDialog::calculateWutObjects()
 
 		enableVisibilityAngularLimits(true);
 
-		// Dirty hack to calculate sunrise/sunset
-		// TODO: This block of code should be replaced in future!
+		// Direct calculate sunrise/sunset
 		PlanetP sun = GETSTELMODULE(SolarSystem)->getSun();
 		double sunset = -1, sunrise = -1, midnight = -1, lc = 100.0;
 		bool flag = false;
 		for (int i = 0; i < 288; i++) // Check position every 5 minutes...
 		{
-			wutJD = (int)JD - UTCOffset + i * 0.0034722;
+			wutJD = static_cast<int>(JD) - UTCOffset + i * 0.0034722;
 			core->setJD(wutJD);
 			core->update(0);
 			StelUtils::rectToSphe(&az, &alt, sun->getAltAzPosAuto(core));
 			alt = std::fmod(alt, 2.0 * M_PI) * 180. / M_PI;
-			if (alt >= -7 && alt <= -5 && !flag)
+			if (alt >= -7. && alt <= -5.)
 			{
-				sunset = wutJD;
-				flag = true;
+				if (!flag)
+				{
+					sunset = wutJD;
+					flag = true;
+				}
+				else
+					sunrise = wutJD;
 			}
-			if (alt >= -7 && alt <= -5 && flag)
-				sunrise = wutJD;
 
 			if (alt < lc)
 			{
@@ -4013,6 +4015,11 @@ void AstroCalcDialog::calculateWutObjects()
 			}
 		}
 		core->setJD(JD);
+
+		if (sunset<0.)
+			sunset = midnight - 0.25;
+		if (sunrise<0.)
+			sunrise = midnight + 0.25;
 
 		QList<double> wutJDList;
 		wutJDList.clear();
