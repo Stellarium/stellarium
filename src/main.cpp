@@ -73,6 +73,12 @@
 		__attribute__((dllexport)) int AmdPowerXpressRequestHighPerformance = 0x00000001;
 	#endif
 	}
+#else
+	extern "C"
+	{
+		int NvOptimusEnablement = 1;
+		int AmdPowerXpressRequestHighPerformance = 1;
+	}
 #endif //Q_OS_WIN
 
 //! @class CustomQTranslator
