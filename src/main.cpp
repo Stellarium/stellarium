@@ -60,6 +60,19 @@
 	//we use WIN32_LEAN_AND_MEAN so this needs to be included
 	//to use timeBeginPeriod/timeEndPeriod
 	#include <mmsystem.h>
+
+	// Default to High Performance Mode on machines with hybrid graphics
+	// Details: https://stackoverflow.com/questions/44174859/how-to-give-an-option-to-select-graphics-adapter-in-a-directx-11-application
+	extern "C"
+	{
+	#ifdef _MSC_VER
+		__declspec(dllexport) DWORD NvOptimusEnablement = 0x00000001;
+		__declspec(dllexport) int AmdPowerXpressRequestHighPerformance = 0x00000001;
+	#else
+		__attribute__((dllexport)) DWORD NvOptimusEnablement = 0x00000001;
+		__attribute__((dllexport)) int AmdPowerXpressRequestHighPerformance = 0x00000001;
+	#endif
+	}
 #endif //Q_OS_WIN
 
 //! @class CustomQTranslator
