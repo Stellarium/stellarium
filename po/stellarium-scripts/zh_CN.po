@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-02 14:04+0700\n"
+"POT-Creation-Date: 2019-03-06 20:54+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2019\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -33,19 +33,19 @@ msgstr "周"
 
 #: scripts/analemma.ssc:46
 msgid "Near winter solstice"
-msgstr "接近冬至"
+msgstr "冬至点附近"
 
 #: scripts/analemma.ssc:50
 msgid "Near summer solstice"
-msgstr "接近夏至"
+msgstr "夏至点附近"
 
-#: scripts/analemma.ssc:54
+#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr "每年的太阳路径"
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
-msgstr "Jack Bennett南天深空天体目录"
+msgstr "杰克·贝内特(Jack Bennett)南天深空天体表"
 
 #: scripts/bennett.ssc:48 scripts/best_ngc.ssc:27 scripts/binosky.ssc:20
 msgid "objects in all"
@@ -821,6 +821,14 @@ msgstr "6.3角分（西北西）"
 #: scripts/double_stars.ssc:78
 msgid "Separation:"
 msgstr "角间距:"
+
+#: scripts/martian_analemma.ssc:16
+msgid "Martian analemma"
+msgstr "火星日行迹"
+
+#: scripts/martian_analemma.ssc:41
+msgid "Sol"
+msgstr "火星日"
 
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29

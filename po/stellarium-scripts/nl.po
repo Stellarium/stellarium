@@ -4,17 +4,17 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Harry Mensch <hermmensch@gmail.com>, 2019
 # Patrick Ahles <p.ahles@gmail.com>, 2019
+# Harry Mensch <hermmensch@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-02 14:04+0700\n"
+"POT-Creation-Date: 2019-03-06 20:54+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Patrick Ahles <p.ahles@gmail.com>, 2019\n"
+"Last-Translator: Harry Mensch <hermmensch@gmail.com>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,23 +24,23 @@ msgstr ""
 
 #: scripts/analemma.ssc:15
 msgid "Analemma"
-msgstr ""
+msgstr "Analemma"
 
 #: scripts/analemma.ssc:40
 msgid "Week"
-msgstr ""
+msgstr "Week"
 
 #: scripts/analemma.ssc:46
 msgid "Near winter solstice"
-msgstr ""
+msgstr "Dichtbij de winterzonnewende"
 
 #: scripts/analemma.ssc:50
 msgid "Near summer solstice"
-msgstr ""
+msgstr "Dichtbij de zomerzonnewende"
 
-#: scripts/analemma.ssc:54
+#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
 msgid "Yearly path of the Sun"
-msgstr ""
+msgstr "Jaarlijkse baan van de zon"
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
@@ -282,7 +282,7 @@ msgstr "Oude bolvormige M5"
 
 #: scripts/binocular_highlights.ssc:53
 msgid "Magnificent Omega Centauri"
-msgstr ""
+msgstr "Magnifiek Omega Centauri"
 
 #: scripts/binocular_highlights.ssc:54
 msgid "Chapter 3"
@@ -298,7 +298,7 @@ msgstr "Nu Draconis oplossen"
 
 #: scripts/binocular_highlights.ssc:55
 msgid "Nu Draconis's components are separated by 62\""
-msgstr ""
+msgstr "Nu Draconis componenten worden gescheiden door 62 \""
 
 #: scripts/binocular_highlights.ssc:56
 msgid "The Great Hercules Cluster"
@@ -306,11 +306,11 @@ msgstr "De grote Hercules cluster"
 
 #: scripts/binocular_highlights.ssc:57
 msgid "Double Delight Albireo"
-msgstr ""
+msgstr "Dubbel Delight Albireo"
 
 #: scripts/binocular_highlights.ssc:57
 msgid "Albireo's components are separated by 35\""
-msgstr ""
+msgstr "Albireo componenten worden gescheiden door 62 \""
 
 #: scripts/binocular_highlights.ssc:58
 msgid "A Colorful Cygnus Triple"
@@ -443,7 +443,7 @@ msgstr "Een dubbele voor de vaste hand"
 
 #: scripts/binocular_highlights.ssc:77
 msgid "Nu Scorpii components are separated by 41\""
-msgstr ""
+msgstr "Nu Scorpii componenten worden gescheiden door 41 \""
 
 #: scripts/binocular_highlights.ssc:78
 msgid "Globular Cluster Season"
@@ -455,11 +455,11 @@ msgstr "M4 en M80"
 
 #: scripts/binocular_highlights.ssc:79
 msgid "A Gorgeous Duo"
-msgstr ""
+msgstr "Een prachtig duo"
 
 #: scripts/binocular_highlights.ssc:79
 msgid "M6 and M7"
-msgstr ""
+msgstr "M6 en M7"
 
 #: scripts/binocular_highlights.ssc:80
 msgid "A False Comet"
@@ -471,15 +471,15 @@ msgstr "Cr 316, NGC 6231 en NGC 6242"
 
 #: scripts/binocular_highlights.ssc:81
 msgid "Summer Star Cloud"
-msgstr ""
+msgstr "Zomer Sterrenwolk"
 
 #: scripts/binocular_highlights.ssc:82
 msgid "Milky Way Messiers"
-msgstr ""
+msgstr "Melkweg Messiers"
 
 #: scripts/binocular_highlights.ssc:82
 msgid "M16, M17 and M18"
-msgstr ""
+msgstr "M16, M17 en M18"
 
 #: scripts/binocular_highlights.ssc:83
 msgid "The Lagoon Nebula"
@@ -487,7 +487,7 @@ msgstr "De Lagunenevel"
 
 #: scripts/binocular_highlights.ssc:84
 msgid "M22: A Gem of a Globular"
-msgstr ""
+msgstr "M22: Een juweel of een bolvormige"
 
 #: scripts/binocular_highlights.ssc:84
 msgid "M22 and M28"
@@ -495,7 +495,7 @@ msgstr "M22 en M28"
 
 #: scripts/binocular_highlights.ssc:85
 msgid "A Lonesome Messier"
-msgstr ""
+msgstr "Een eenzame Messier"
 
 #: scripts/binocular_highlights.ssc:86
 msgid "Chapter 4"
@@ -523,7 +523,7 @@ msgstr "Magnifiek Mu Cephei"
 
 #: scripts/binocular_highlights.ssc:89
 msgid "A semiregular variable star"
-msgstr ""
+msgstr "Een semi regulaire variabele ster"
 
 #: scripts/binocular_highlights.ssc:90
 msgid "Watching Delta Cephei"
@@ -567,7 +567,7 @@ msgstr "Oude cluster NGC 752"
 
 #: scripts/binocular_highlights.ssc:98
 msgid "Triangulum's Treasure"
-msgstr ""
+msgstr "Triangulums schat"
 
 #: scripts/binocular_highlights.ssc:99
 msgid "TX Piscium"
@@ -823,6 +823,14 @@ msgstr "6.3 arcminuten (WNW)"
 msgid "Separation:"
 msgstr "Scheiding:"
 
+#: scripts/martian_analemma.ssc:16
+msgid "Martian analemma"
+msgstr ""
+
+#: scripts/martian_analemma.ssc:41
+msgid "Sol"
+msgstr ""
+
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
@@ -942,43 +950,47 @@ msgstr "De volgende 40 dagen..."
 
 #: scripts/h400_tour.ssc:16
 msgid "The Herschel 400 Catalogue"
-msgstr ""
+msgstr "De Herschel 400 catalogus"
 
 #: scripts/h400_tour.ssc:17
 msgid ""
 "The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae"
 " and Clusters"
 msgstr ""
+"De Herschel 400 is een subset van de 'Algemene catalogus van nevels en "
+"clusters' van John Herschel"
 
 #: scripts/h400_tour.ssc:18
 msgid ""
 "published in 1864 of 5,000 objects, and hence also of the New General "
 "Catalogue."
 msgstr ""
+"gepubliceerd in 1864 van 5,000 objecten, en daarom ook van de nieuwe "
+"Algemene catalogus."
 
 #: scripts/h400_tour.ssc:19
 msgid "Vital statistics:"
-msgstr ""
+msgstr "Vitale statistieken:"
 
 #: scripts/h400_tour.ssc:20
 msgid "* The catalogue contains 400 objects"
-msgstr ""
+msgstr "* De catalogus bevat 400 objecten"
 
 #: scripts/h400_tour.ssc:21
 msgid "* All objects are from the NGC"
-msgstr ""
+msgstr "* Alle objecten van het NGC"
 
 #: scripts/h400_tour.ssc:22
 msgid "* All visible in mid northern latitudes"
-msgstr ""
+msgstr "* Allen zichtbaar op de noordelijke breedtegraden"
 
 #: scripts/h400_tour.ssc:23
 msgid "* All visible in 150 mm (6\") or larger telescopes"
-msgstr ""
+msgstr "* Allen zichtbaar door 150 mm (6\") of grotere telescopen"
 
 #: scripts/largest_known_stars.ssc:12
 msgid "PZ Cassiopeiae"
-msgstr ""
+msgstr "PZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:13
 msgid ""
@@ -986,20 +998,25 @@ msgid ""
 "The quoted size is the average size parameter, the true\n"
 "value is from 1,340-1,940."
 msgstr ""
+"PZ Cas is gelokaliseerd in a regio met zware stofbestendigheid.\n"
+"De geciteerde grootte is de gemiddelde parameter grootte, de \n"
+"waarde ligt tussen 1.340-1.940."
 
 #: scripts/largest_known_stars.ssc:14
 msgid "VX Sagittarii"
-msgstr ""
+msgstr "VX Sagittarii"
 
 #: scripts/largest_known_stars.ssc:15
 msgid ""
 "VX Sgr is a pulsating variable with a large visual range\n"
 "and varies significantly in size."
 msgstr ""
+"VX Sgr is a pulserende variabel met een groot zichtbaar range\n"
+"en varieert significant in grootte."
 
 #: scripts/largest_known_stars.ssc:16
 msgid "VV Cephei A"
-msgstr ""
+msgstr "VV Cephei A"
 
 #: scripts/largest_known_stars.ssc:17
 msgid ""
@@ -1007,10 +1024,13 @@ msgid ""
 "losing mass to its B-type companion VV Cephei B for at least\n"
 "part of its orbit."
 msgstr ""
+"VV Cep A is een sterk vervormde ster in een binair systeem,\n"
+"verliest massa aan zijn B-type metgezel VV Cephei B voor \n"
+"tenminste een deel van zijn baan."
 
 #: scripts/largest_known_stars.ssc:18
 msgid "RW Cephei"
-msgstr ""
+msgstr "RW Cephei"
 
 #: scripts/largest_known_stars.ssc:19
 msgid ""
@@ -1018,10 +1038,13 @@ msgid ""
 "of 3) and spectral type (observed from G8 to M), thus\n"
 "probably also in diameter."
 msgstr ""
+"RW Cep is variabel zowel in helderheid (met op zijn minst\n"
+"een factor 3) als in het spectraal type (geobserveerd van G8\n"
+"tot M), dus waarschijnlijk ook in diameter."
 
 #: scripts/largest_known_stars.ssc:20
 msgid "VY Canis Majoris"
-msgstr ""
+msgstr "VY Canis Majoris"
 
 #: scripts/largest_known_stars.ssc:21
 msgid ""
@@ -1029,10 +1052,13 @@ msgid ""
 "contradicted stellar evolutionary theory, improved measurements\n"
 "and estimates have brought it down to size."
 msgstr ""
+"Eens gedacht dat het een rode hypergigantische ster was zo groot dat het\n"
+"contrasteerde met de stellaire evolutie theorie, verbeterde metingen\n"
+"en ramingen hebben de grootte terug gebracht tot bescheidener waarden."
 
 #: scripts/largest_known_stars.ssc:22
 msgid "AH Scorpii"
-msgstr ""
+msgstr "AH Scorpii"
 
 #: scripts/largest_known_stars.ssc:23
 msgid ""
@@ -1040,188 +1066,196 @@ msgid ""
 "and an estimated 20% in total luminosity. The variation in diameter\n"
 "is not clear because the temperature also varies."
 msgstr ""
+"AH Sco is variabel met bijna 3 magnitudes in de zichtbare range,\n"
+"en een geraamd 20% helderheid in totaal. De variatie in diameter\n"
+"is niet duidelijk omdat de temperatuur ook varieert."
 
 #: scripts/largest_known_stars.ssc:24
 msgid "V766 Centauri A"
-msgstr ""
+msgstr "V766 Centauri A"
 
 #: scripts/largest_known_stars.ssc:25
 msgid ""
 "V766 Centauri A is a highly distorted star in a close binary system,\n"
 "losing mass to the secondary."
 msgstr ""
+"V766 Centauri A is een sterk vervormde ster in een gesloten binair systeem,\n"
+"verliest massa aan de secondaire."
 
 #: scripts/largest_known_stars.ssc:26
 msgid "KW Sagittarii"
-msgstr ""
+msgstr "KW Sagittarii"
 
 #: scripts/largest_known_stars.ssc:27
 msgid "BC Cygni"
-msgstr ""
+msgstr "BC Cygni"
 
 #: scripts/largest_known_stars.ssc:28
 msgid "RT Carinae"
-msgstr ""
+msgstr "RT Carinae"
 
 #: scripts/largest_known_stars.ssc:29
 msgid "Betelgeuse"
-msgstr ""
+msgstr "Betelgeuze"
 
 #: scripts/largest_known_stars.ssc:30
 msgid "Ninth brightest star in the night sky."
-msgstr ""
+msgstr "Negende helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:31
 msgid "Mu Cephei (Herschel's \"Garnet Star\")"
-msgstr ""
+msgstr "Mu Cephei (Herschel's \"Garnet Star\")"
 
 #: scripts/largest_known_stars.ssc:32
 msgid "S Persei"
-msgstr ""
+msgstr "S Persei"
 
 #: scripts/largest_known_stars.ssc:33
 msgid "In the Perseus Double Cluster."
-msgstr ""
+msgstr "In de Perseus dubbel cluster."
 
 #: scripts/largest_known_stars.ssc:34
 msgid "RW Cygni"
-msgstr ""
+msgstr "RW Cygni"
 
 #: scripts/largest_known_stars.ssc:35
 msgid "Antares A"
-msgstr ""
+msgstr "Antares A"
 
 #: scripts/largest_known_stars.ssc:36
 msgid "Theta Muscae"
-msgstr ""
+msgstr "Theta Muscae"
 
 #: scripts/largest_known_stars.ssc:37
 msgid "V1749 Cygni"
-msgstr ""
+msgstr "V1749 Cygni"
 
 #: scripts/largest_known_stars.ssc:38
 msgid "TZ Cassiopeiae"
-msgstr ""
+msgstr "TZ Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:39
 msgid "IX Carinae"
-msgstr ""
+msgstr "IX Carinae"
 
 #: scripts/largest_known_stars.ssc:40
 msgid "TV Geminorum"
-msgstr ""
+msgstr "TV Geminorum"
 
 #: scripts/largest_known_stars.ssc:41
 msgid "T Cephei"
-msgstr ""
+msgstr "T Cephei"
 
 #: scripts/largest_known_stars.ssc:42
 msgid "V382 Carinae"
-msgstr ""
+msgstr "V382 Carinae"
 
 #: scripts/largest_known_stars.ssc:43 scripts/largest_known_stars.ssc:45
 msgid "Yellow hypergiant, one of the rarest types of star."
-msgstr ""
+msgstr "Gele hypergigant, een van de zeldzaamste soorten sterren."
 
 #: scripts/largest_known_stars.ssc:44
 msgid "V509 Cassiopeiae"
-msgstr ""
+msgstr "V509 Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:46
 msgid "CE Tauri (\"Ruby Star\")"
-msgstr ""
+msgstr "CE Tauri (\"Ruby Star\")"
 
 #: scripts/largest_known_stars.ssc:47
 msgid ""
 "Can be occulted by the Moon, allowing accurate determination\n"
 "of its apparent diameter."
 msgstr ""
+"Kan door de maan worden verduisterd, waardoor een nauwkeurige\n"
+"bepaling mogelijk is van zijn schijnbare diameter."
 
 #: scripts/largest_known_stars.ssc:48
 msgid "R Leporis (\"Hind's Crimson Star\")"
-msgstr ""
+msgstr "R Leporis (\"Hind's Crimson Star\")"
 
 #: scripts/largest_known_stars.ssc:49
 msgid "One of the largest carbon stars existent in the Milky Way Galaxy."
 msgstr ""
+"Een van de grootste carbon sterren die bestaat in het Melkweg sterenstelsel."
 
 #: scripts/largest_known_stars.ssc:50
 msgid "Alpha Herculis (\"Ras Algethi\")"
-msgstr ""
+msgstr "Alpha Herculis (\"Ras Algethi\")"
 
 #: scripts/largest_known_stars.ssc:51
 msgid "Rho Cassiopeiae"
-msgstr ""
+msgstr "Rho Cassiopeiae"
 
 #: scripts/largest_known_stars.ssc:52
 msgid "A yellow hypergiant, one of the rarest types of a star."
-msgstr ""
+msgstr "Een gele hypergigant, een van de zeldzaamste soorten sterren."
 
 #: scripts/largest_known_stars.ssc:53
 msgid "Mira A (Omicron Ceti)"
-msgstr ""
+msgstr "Mira A (Omicron Ceti)"
 
 #: scripts/largest_known_stars.ssc:54
 msgid "Prototype Mira variable"
-msgstr ""
+msgstr "Prototype Mira variabel"
 
 #: scripts/largest_known_stars.ssc:55
 msgid "R Doradus"
-msgstr ""
+msgstr "R Doradus"
 
 #: scripts/largest_known_stars.ssc:56
 msgid "Star with the second largest apparent size after the Sun."
-msgstr ""
+msgstr "Ster met de tweede grootste schijnbare grootte na de zon."
 
 #: scripts/largest_known_stars.ssc:57
 msgid "La Superba (Y Canum Venaticorum)"
-msgstr ""
+msgstr "La Superba (Y Canum Venaticorum)"
 
 #: scripts/largest_known_stars.ssc:58
 msgid "One of the coolest and reddest known stars."
-msgstr ""
+msgstr "Een van de bekende koelste en roodste sterren."
 
 #: scripts/largest_known_stars.ssc:59
 msgid "Deneb (Alpha Cygni)"
-msgstr ""
+msgstr "Deneb (Alpha Cygni)"
 
 #: scripts/largest_known_stars.ssc:60
 msgid "19th brightest star in the night sky."
-msgstr ""
+msgstr "19de helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:61
 msgid "Rigel A (Beta Orionis A)"
-msgstr ""
+msgstr "Rigel A (Beta Orionis A)"
 
 #: scripts/largest_known_stars.ssc:62
 msgid "Seventh brightest star in the night sky."
-msgstr ""
+msgstr "Zevende helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:63
 msgid "Canopus (Alpha Carinae)"
-msgstr ""
+msgstr "Canopus (Alpha Carinae)"
 
 #: scripts/largest_known_stars.ssc:64
 msgid "Second brightest star in the night sky."
-msgstr ""
+msgstr "Tweede helderste ster aan de nachtelijke hemel."
 
 #: scripts/largest_known_stars.ssc:65
 msgid "Aldebaran (Alpha Tauri)"
-msgstr ""
+msgstr "Aldebaran (Alpha Tauri)"
 
 #: scripts/largest_known_stars.ssc:66
 msgid "VV Cephei B"
-msgstr ""
+msgstr "VV Cephei B"
 
 #: scripts/largest_known_stars.ssc:67
 msgid "The B-type main sequence companion of VV Cephei A."
-msgstr ""
+msgstr "De B-type hoofdreeks companion van VV Cephei A."
 
 #: scripts/largest_known_stars.ssc:92
 msgid "Solar radii"
-msgstr ""
+msgstr "Zonnestralen"
 
 #: scripts/constellations_tour.ssc:19
 #: scripts/western_constellations_tour.ssc:22
 msgid "Press Ctrl+T to un-hide the toolbar"
-msgstr ""
+msgstr "Druk op Ctrl+T om de werkbalk zichtbaar te maken"

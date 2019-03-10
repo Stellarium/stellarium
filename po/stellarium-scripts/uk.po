@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-02 14:04+0700\n"
+"POT-Creation-Date: 2019-03-06 20:54+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>, 2019\n"
 "Language-Team: Ukrainian (https://www.transifex.com/stellarium/teams/80998/uk/)\n"
@@ -37,7 +37,7 @@ msgstr "Під час зимового сонцестояння"
 msgid "Near summer solstice"
 msgstr "Під час літнього сонцестояння"
 
-#: scripts/analemma.ssc:54
+#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr "Річний шлях Сонця"
 
@@ -822,6 +822,14 @@ msgstr "6,3 кутових мінут (З-Пн-З)"
 #: scripts/double_stars.ssc:78
 msgid "Separation:"
 msgstr "Відокремлення:"
+
+#: scripts/martian_analemma.ssc:16
+msgid "Martian analemma"
+msgstr "Марсіанська аналема"
+
+#: scripts/martian_analemma.ssc:41
+msgid "Sol"
+msgstr "Сол"
 
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29

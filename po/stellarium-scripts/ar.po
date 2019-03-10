@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-02 14:04+0700\n"
+"POT-Creation-Date: 2019-03-06 20:54+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: Khalid AlAjaji, 2019\n"
 "Language-Team: Arabic (https://www.transifex.com/stellarium/teams/80998/ar/)\n"
@@ -25,23 +25,23 @@ msgstr ""
 
 #: scripts/analemma.ssc:15
 msgid "Analemma"
-msgstr ""
+msgstr "أناليما"
 
 #: scripts/analemma.ssc:40
 msgid "Week"
-msgstr ""
+msgstr "أسبوع"
 
 #: scripts/analemma.ssc:46
 msgid "Near winter solstice"
-msgstr ""
+msgstr "قرب الانقلاب الشتوي"
 
 #: scripts/analemma.ssc:50
 msgid "Near summer solstice"
-msgstr ""
+msgstr "قرب الانقلاب الصيفي"
 
-#: scripts/analemma.ssc:54
+#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
 msgid "Yearly path of the Sun"
-msgstr ""
+msgstr "مسار الشمس السنوي"
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
@@ -822,6 +822,14 @@ msgstr "6.3 دقيقة قوسية (غرب شمال غرب)"
 #: scripts/double_stars.ssc:78
 msgid "Separation:"
 msgstr "الافتراق:"
+
+#: scripts/martian_analemma.ssc:16
+msgid "Martian analemma"
+msgstr "الأناليميا المريخية"
+
+#: scripts/martian_analemma.ssc:41
+msgid "Sol"
+msgstr "يوم مريخي"
 
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29

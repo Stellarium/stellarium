@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-02 14:04+0700\n"
+"POT-Creation-Date: 2019-03-06 20:54+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: nicolas.martignoni, 2019\n"
 "Language-Team: French (https://www.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -26,23 +26,23 @@ msgstr ""
 
 #: scripts/analemma.ssc:15
 msgid "Analemma"
-msgstr ""
+msgstr "Analemme"
 
 #: scripts/analemma.ssc:40
 msgid "Week"
-msgstr ""
+msgstr "Semaine"
 
 #: scripts/analemma.ssc:46
 msgid "Near winter solstice"
-msgstr ""
+msgstr "Proche du solstice d'hiver"
 
 #: scripts/analemma.ssc:50
 msgid "Near summer solstice"
-msgstr ""
+msgstr "Proche du solstice d'été"
 
-#: scripts/analemma.ssc:54
+#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
 msgid "Yearly path of the Sun"
-msgstr ""
+msgstr "Parcours annuel du Soleil"
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
@@ -828,6 +828,14 @@ msgstr "6.3 minutes d'arc (WNW)"
 msgid "Separation:"
 msgstr "Séparation :"
 
+#: scripts/martian_analemma.ssc:16
+msgid "Martian analemma"
+msgstr ""
+
+#: scripts/martian_analemma.ssc:41
+msgid "Sol"
+msgstr ""
+
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
@@ -1174,7 +1182,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:48
 msgid "R Leporis (\"Hind's Crimson Star\")"
-msgstr "R Leporis (étoile pourpre de Hind)"
+msgstr "R Leporis (étoile cramoisie de Hind)"
 
 #: scripts/largest_known_stars.ssc:49
 msgid "One of the largest carbon stars existent in the Milky Way Galaxy."

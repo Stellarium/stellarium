@@ -3,13 +3,17 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
+# Translators:
+# Maidur, 2019
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-02 14:04+0700\n"
+"POT-Creation-Date: 2019-03-06 20:54+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
+"Last-Translator: Maidur, 2019\n"
 "Language-Team: Estonian (https://www.transifex.com/stellarium/teams/80998/et/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,17 +37,17 @@ msgstr ""
 msgid "Near summer solstice"
 msgstr ""
 
-#: scripts/analemma.ssc:54
+#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr ""
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
-msgstr ""
+msgstr "Jack Bennetti kataloog lõuna-süvataeva objektidest"
 
 #: scripts/bennett.ssc:48 scripts/best_ngc.ssc:27 scripts/binosky.ssc:20
 msgid "objects in all"
-msgstr ""
+msgstr "objekti kokku"
 
 #: scripts/best_ngc.ssc:26
 msgid "Best objects in the New General Catalog"
@@ -91,7 +95,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:18
 msgid "The Pleiades"
-msgstr ""
+msgstr "Plejaadid"
 
 #: scripts/binocular_highlights.ssc:19
 msgid "Corralling the Hyades"
@@ -373,7 +377,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:68
 msgid "A Milky Way Surprise"
-msgstr ""
+msgstr "Linnutee üllatus"
 
 #: scripts/binocular_highlights.ssc:68
 msgid "Brocchi's Cluster (Cr 399) or Coathanger"
@@ -816,6 +820,14 @@ msgstr ""
 msgid "Separation:"
 msgstr ""
 
+#: scripts/martian_analemma.ssc:16
+msgid "Martian analemma"
+msgstr ""
+
+#: scripts/martian_analemma.ssc:41
+msgid "Sol"
+msgstr ""
+
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
@@ -853,11 +865,11 @@ msgstr ""
 #: scripts/morsels_1.ssc:78 scripts/morsels_2.ssc:99 scripts/morsels_3.ssc:63
 #: scripts/morsels_4.ssc:82
 msgid "Date:"
-msgstr ""
+msgstr "Kuupäev:"
 
 #: scripts/morsels_1.ssc:79
 msgid "Time:"
-msgstr ""
+msgstr "Kellaaeg:"
 
 #: scripts/morsels_2.ssc:76
 msgid "Jupiter without Galilean satellites"
@@ -869,39 +881,39 @@ msgstr ""
 
 #: scripts/morsels_3.ssc:50
 msgid "Occultations of bright stars by planets"
-msgstr ""
+msgstr "Eredate tähtede varjutamised planeetide poolt"
 
 #: scripts/morsels_4.ssc:68
 msgid "Mutual occultations of planets"
-msgstr ""
+msgstr "Planeetide vastastikused varjutamised"
 
 #: scripts/supernova.ssc:22
 msgid "Europe, Uraniborg."
-msgstr ""
+msgstr "Euroopa, Uraniborg."
 
 #: scripts/supernova.ssc:30
 msgid "Evening of 20 October 1572"
-msgstr ""
+msgstr "20. oktoobri õhtu, 1572"
 
 #: scripts/supernova.ssc:39
 msgid "Constellation Cassiopeia"
-msgstr ""
+msgstr "Kassiopeia tähtkuju"
 
 #: scripts/supernova.ssc:60
 msgid "5 days later..."
-msgstr ""
+msgstr "5 päeva hiljem..."
 
 #: scripts/supernova.ssc:66
 msgid "Next 3 days..."
-msgstr ""
+msgstr "Järgmised 3 päeva..."
 
 #: scripts/supernova.ssc:72
 msgid "New star! But people have not seen it yet..."
-msgstr ""
+msgstr "Uus täht! Aga inimesed pole veel seda näinud..."
 
 #: scripts/supernova.ssc:77
 msgid "Evening of 31 October 1572"
-msgstr ""
+msgstr "31. oktoobri õhtu, 1572"
 
 #: scripts/supernova.ssc:85
 msgid "Evening of "
@@ -909,15 +921,15 @@ msgstr ""
 
 #: scripts/supernova.ssc:85
 msgid " November 1572"
-msgstr ""
+msgstr " November 1572"
 
 #: scripts/supernova.ssc:92
 msgid "Hooray! First observations in Korea and Europe."
-msgstr ""
+msgstr "Hurraa! Esmavaatlused Koreas ja Euroopas."
 
 #: scripts/supernova.ssc:100
 msgid "First observations in China."
-msgstr ""
+msgstr "Esmavaatlused Hiinas."
 
 #: scripts/supernova.ssc:108
 msgid ""
@@ -926,11 +938,11 @@ msgstr ""
 
 #: scripts/supernova.ssc:117
 msgid "Next 60 days..."
-msgstr ""
+msgstr "Järgmised 60 päeva..."
 
 #: scripts/supernova.ssc:128
 msgid "Next other 40 days..."
-msgstr ""
+msgstr "Teised järgmised 40 päeva..."
 
 #: scripts/h400_tour.ssc:16
 msgid "The Herschel 400 Catalogue"
@@ -954,7 +966,7 @@ msgstr ""
 
 #: scripts/h400_tour.ssc:20
 msgid "* The catalogue contains 400 objects"
-msgstr ""
+msgstr "* Kataloog sisaldab 400 objekti"
 
 #: scripts/h400_tour.ssc:21
 msgid "* All objects are from the NGC"
@@ -1057,11 +1069,11 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:29
 msgid "Betelgeuse"
-msgstr ""
+msgstr "Betelgeuse"
 
 #: scripts/largest_known_stars.ssc:30
 msgid "Ninth brightest star in the night sky."
-msgstr ""
+msgstr "Ereduselt üheksas täht öötaevas."
 
 #: scripts/largest_known_stars.ssc:31
 msgid "Mu Cephei (Herschel's \"Garnet Star\")"
@@ -1113,7 +1125,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:43 scripts/largest_known_stars.ssc:45
 msgid "Yellow hypergiant, one of the rarest types of star."
-msgstr ""
+msgstr "Kollane hüperhiid, üks haruldasemaid tähetüüpe."
 
 #: scripts/largest_known_stars.ssc:44
 msgid "V509 Cassiopeiae"
@@ -1147,7 +1159,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:52
 msgid "A yellow hypergiant, one of the rarest types of a star."
-msgstr ""
+msgstr "Kollane hüperhiid, üks haruldasemaid tähetüüpe."
 
 #: scripts/largest_known_stars.ssc:53
 msgid "Mira A (Omicron Ceti)"
@@ -1179,7 +1191,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:60
 msgid "19th brightest star in the night sky."
-msgstr ""
+msgstr "Ereduselt 19. täht öötaevas."
 
 #: scripts/largest_known_stars.ssc:61
 msgid "Rigel A (Beta Orionis A)"
@@ -1187,7 +1199,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:62
 msgid "Seventh brightest star in the night sky."
-msgstr ""
+msgstr "Ereduselt seitsmes täht öötaevas."
 
 #: scripts/largest_known_stars.ssc:63
 msgid "Canopus (Alpha Carinae)"
@@ -1195,7 +1207,7 @@ msgstr ""
 
 #: scripts/largest_known_stars.ssc:64
 msgid "Second brightest star in the night sky."
-msgstr ""
+msgstr "Ereduselt teine täht öötaevas."
 
 #: scripts/largest_known_stars.ssc:65
 msgid "Aldebaran (Alpha Tauri)"
@@ -1216,4 +1228,4 @@ msgstr ""
 #: scripts/constellations_tour.ssc:19
 #: scripts/western_constellations_tour.ssc:22
 msgid "Press Ctrl+T to un-hide the toolbar"
-msgstr ""
+msgstr "Tööriistariba taasnäitamiseks vajuta Ctrl+T"
