@@ -263,8 +263,8 @@
 
 
 4. Graphics
-	4.1 All graphics are copyrighted by the Stellarium's Team (GPL) except
-	    the ones mentioned below :
+	4.1 All graphics are copyrighted by the Stellarium's Team (GNU GPLv2 or later) 
+	    except the ones mentioned below :
 	4.2 The "earthmap" texture was created by NASA (Reto Stockli, NASA Earth
 	    Observatory) using data from the MODIS instrument aboard the
 	    Terra satellite (Public Domain). See chapter 10.1 for full
@@ -308,6 +308,12 @@
 	     from Cassini data, colored by RVS. Public domain.
 	4.5m All other planet maps from David Seal's site:
 	     http://maps.jpl.nasa.gov/   see license in section 10.2
+	4.5n The normal maps for 2007OR10, Amalthea, Ariel, Callisto, Castalia, Ceres, 
+	     Charon, Deimos, Dione, Enceladus, Epimetheus, Eris, Eros, Gaspra, Haumea, 
+	     Hyperion, Iapetus, Ida, Io, Janus, Mars, Mercury, Mimas, Miranda, Oberon,
+	     Phobos, Prometheus, Proteus, Rhea, Sedna, Tethys, Titania, Toutatis,
+	     Umbriel and Vesta are processed by Oleg Pluton a.k.a Helleformer
+	     License: Creative Commons Attribution 4.0 International
 	4.6 The fullsky milky way panorama is created by Axel Mellinger,
 	    University of Potsdam, Germany. Further information and more
 	    pictures available from
