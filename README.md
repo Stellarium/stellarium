@@ -30,3 +30,5 @@ See the [full credit file](CREDITS.md)
 ## Contributing to Stellarium
 
 See the [contributing guideline](https://github.com/Stellarium/stellarium/blob/master/CONTRIBUTING.md)
+
+## [Our backers & Sponsors](https://github.com/Stellarium/stellarium/blob/master/BACKERS.md)
