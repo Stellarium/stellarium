@@ -31,4 +31,11 @@ See the [full credit file](CREDITS.md)
 
 See the [contributing guideline](https://github.com/Stellarium/stellarium/blob/master/CONTRIBUTING.md)
 
-## [Our backers & Sponsors](https://github.com/Stellarium/stellarium/blob/master/BACKERS.md)
+## Contributors
+
+This project exists thanks to all the people who contribute.
+<a href="https://github.com/Stellarium/stellarium/graphs/contributors"><img src="https://opencollective.com/stellarium/contributors.svg?width=890&button=false" /></a>
+
+## Our backers & sponsors
+
+Thank you to all [our backers and sponsors](https://github.com/Stellarium/stellarium/blob/master/BACKERS.md)! 🙏 Become a [[backer](https://opencollective.com/stellarium#backer)] or [[sponsor](https://opencollective.com/stellarium#sponsor)]
