@@ -1129,15 +1129,26 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 #ifndef DISABLE_SCRIPTING
 void ConfigurationDialog::populateScriptsList(void)
 {
-	int prevSel = ui->scriptListWidget->currentRow();	
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
-	ui->scriptListWidget->clear();	
-	ui->scriptListWidget->addItems(scriptMgr.getScriptList());	
+	QListWidget *scripts = ui->scriptListWidget;
+	scripts->blockSignals(true);
+	int currentRow = scripts->currentRow();
+	QString selectedScriptId = "";
+	if (currentRow>0)
+		selectedScriptId = scripts->currentItem()->data(Qt::DisplayRole).toString();
+
+	scripts->clear();
+	for (const auto& ssc : StelApp::getInstance().getScriptMgr().getScriptList())
+	{
+		QListWidgetItem* item = new QListWidgetItem(ssc);
+		scripts->addItem(item);
+	}
+	scripts->sortItems(Qt::AscendingOrder);
+	scripts->blockSignals(false);
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
-	if (prevSel >= 0 && prevSel < ui->scriptListWidget->count())
-		ui->scriptListWidget->setCurrentRow(prevSel);
+	if (!selectedScriptId.isEmpty())
+		scripts->setCurrentItem(scripts->findItems(selectedScriptId, Qt::MatchExactly).at(0));
 	else
-		ui->scriptListWidget->setCurrentRow(0);
+		scripts->setCurrentRow(0);
 }
 
 void ConfigurationDialog::scriptSelectionChanged(const QString& s)
