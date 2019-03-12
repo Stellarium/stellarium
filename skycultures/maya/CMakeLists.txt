@@ -6,9 +6,8 @@ INSTALL(FILES info.ini DESTINATION share/${PACKAGE}/skycultures/maya )
 
 # install constellations data, artwork and descriptions
 INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/skycultures/maya
-	FILES_MATCHING PATTERN "constellation*" 
+	FILES_MATCHING PATTERN "*.fab" 
 	PATTERN "*.png"
-        PATTERN "*.fab" 
 	PATTERN "description.*.utf8" 
         PATTERN "CMakeFiles" EXCLUDE )
 
