@@ -486,6 +486,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Maori");
 		// TRANSLATORS: Name of the sky culture
+		N_("Maya");
+		// TRANSLATORS: Name of the sky culture
 		N_("Mongolian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Lokono");
