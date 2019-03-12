@@ -22,6 +22,7 @@
 // class used to manage groups of Nebulas
 
 #include "StelApp.hpp"
+#include "NebulaList.hpp"
 #include "NebulaMgr.hpp"
 #include "Nebula.hpp"
 #include "StelTexture.hpp"
@@ -49,57 +50,6 @@
 #include <QStringList>
 #include <QRegExp>
 #include <QDir>
-
-static const unsigned int DWARF_GALAXIES[] =
-{
-	3589, 3792, 6830, 10074, 19441, 28913,
-	29194, 29653, 50779, 54074, 60095, 63287,
-	69519, 88608, 2807155, 3097691
-};
-
-static const unsigned int H400_LIST[] =
-{
-	  40,  129,  136,  157,  185,  205,  225,  246,  247,  253,
-	 278,  288,  381,  404,  436,  457,  488,  524,  559,  584,
-	 596,  598,  613,  615,  637,  650,  654,  659,  663,  720,
-	 752,  772,  779,  869,  884,  891,  908,  936, 1022, 1023,
-	1027, 1052, 1055, 1084, 1245, 1342, 1407, 1444, 1501, 1502,
-	1513, 1528, 1535, 1545, 1647, 1664, 1788, 1817, 1857, 1907,
-	1931, 1961, 1964, 1980, 1999, 2022, 2024, 2126, 2129, 2158,
-	2169, 2185, 2186, 2194, 2204, 2215, 2232, 2244, 2251, 2264,
-	2266, 2281, 2286, 2301, 2304, 2311, 2324, 2335, 2343, 2353,
-	2354, 2355, 2360, 2362, 2371, 2372, 2392, 2395, 2403, 2419,
-	2420, 2421, 2422, 2423, 2438, 2440, 2479, 2482, 2489, 2506,
-	2509, 2527, 2539, 2548, 2567, 2571, 2613, 2627, 2655, 2681,
-	2683, 2742, 2768, 2775, 2782, 2787, 2811, 2841, 2859, 2903,
-	2950, 2964, 2974, 2976, 2985, 3034, 3077, 3079, 3115, 3147,
-	3166, 3169, 3184, 3190, 3193, 3198, 3226, 3227, 3242, 3245,
-	3277, 3294, 3310, 3344, 3377, 3379, 3384, 3395, 3412, 3414,
-	3432, 3486, 3489, 3504, 3521, 3556, 3593, 3607, 3608, 3610,
-	3613, 3619, 3621, 3626, 3628, 3631, 3640, 3655, 3665, 3675,
-	3686, 3726, 3729, 3810, 3813, 3877, 3893, 3898, 3900, 3912,
-	3938, 3941, 3945, 3949, 3953, 3962, 3982, 3992, 3998, 4026,
-	4027, 4030, 4036, 4039, 4041, 4051, 4085, 4088, 4102, 4111,
-	4143, 4147, 4150, 4151, 4179, 4203, 4214, 4216, 4245, 4251,
-	4258, 4261, 4273, 4274, 4278, 4281, 4293, 4303, 4314, 4346,
-	4350, 4361, 4365, 4371, 4394, 4414, 4419, 4429, 4435, 4438,
-	4442, 4448, 4449, 4450, 4459, 4473, 4477, 4478, 4485, 4490,
-	4494, 4526, 4527, 4535, 4536, 4546, 4548, 4550, 4559, 4565,
-	4570, 4594, 4596, 4618, 4631, 4636, 4643, 4654, 4656, 4660,
-	4665, 4666, 4689, 4697, 4698, 4699, 4725, 4753, 4754, 4762,
-	4781, 4800, 4845, 4856, 4866, 4900, 4958, 4995, 5005, 5033,
-	5054, 5195, 5248, 5273, 5322, 5363, 5364, 5466, 5473, 5474,
-	5557, 5566, 5576, 5631, 5634, 5676, 5689, 5694, 5746, 5846,
-	5866, 5897, 5907, 5982, 6118, 6144, 6171, 6207, 6217, 6229,
-	6235, 6284, 6287, 6293, 6304, 6316, 6342, 6355, 6356, 6369,
-	6401, 6426, 6440, 6445, 6451, 6514, 6517, 6520, 6522, 6528,
-	6540, 6543, 6544, 6553, 6568, 6569, 6583, 6624, 6629, 6633,
-	6638, 6642, 6645, 6664, 6712, 6755, 6756, 6781, 6802, 6818,
-	6823, 6826, 6830, 6834, 6866, 6882, 6885, 6905, 6910, 6934,
-	6939, 6940, 6946, 7000, 7006, 7008, 7009, 7044, 7062, 7086,
-	7128, 7142, 7160, 7209, 7217, 7243, 7296, 7331, 7380, 7448,
-	7479, 7510, 7606, 7662, 7686, 7723, 7727, 7789, 7790, 7814
-};
 
 // Define version of valid Stellarium DSO Catalog
 // This number must be incremented each time the content or file format of the stars catalogs change
@@ -2683,169 +2633,116 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			}
 			break;
 		case 100: // Messier Catalogue?
-			for (const auto& n : dsoArray)
-			{
-				if (n->M_nb>0)
-					result << QString("M%1").arg(n->M_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("M%1").arg(n->M_nb);
 			break;
 		case 101: // Caldwell Catalogue?
-			for (const auto& n : dsoArray)
-			{
-				if (n->C_nb>0)
-					result << QString("C%1").arg(n->C_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("C%1").arg(n->C_nb);
 			break;
 		case 102: // Barnard Catalogue?
-			for (const auto& n : dsoArray)
-			{
-				if (n->B_nb>0)
-					result << QString("B %1").arg(n->B_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("B %1").arg(n->B_nb);
 			break;
 		case 103: // Sharpless Catalogue?
-			for (const auto& n : dsoArray)
-			{
-				if (n->Sh2_nb>0)
-					result << QString("SH 2-%1").arg(n->Sh2_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("SH 2-%1").arg(n->Sh2_nb);
 			break;
 		case 104: // Van den Bergh Catalogue
-			for (const auto& n : dsoArray)
-			{
-				if (n->VdB_nb>0)
-					result << QString("VdB %1").arg(n->VdB_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("VdB %1").arg(n->VdB_nb);
 			break;
 		case 105: // RCW Catalogue
-			for (const auto& n : dsoArray)
-			{
-				if (n->RCW_nb>0)
-					result << QString("RCW %1").arg(n->RCW_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("RCW %1").arg(n->RCW_nb);
 			break;
 		case 106: // Collinder Catalogue
-			for (const auto& n : dsoArray)
-			{
-				if (n->Cr_nb>0)
-					result << QString("Cr %1").arg(n->Cr_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("Cr %1").arg(n->Cr_nb);
 			break;
 		case 107: // Melotte Catalogue
-			for (const auto& n : dsoArray)
-			{
-				if (n->Mel_nb>0)
-					result << QString("Mel %1").arg(n->Mel_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("Mel %1").arg(n->Mel_nb);
 			break;
 		case 108: // New General Catalogue
-			for (const auto& n : dsoArray)
-			{
-				if (n->NGC_nb>0)
-					result << QString("NGC %1").arg(n->NGC_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("NGC %1").arg(n->NGC_nb);
 			break;
 		case 109: // Index Catalogue
-			for (const auto& n : dsoArray)
-			{
-				if (n->IC_nb>0)
-					result << QString("IC %1").arg(n->IC_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("IC %1").arg(n->IC_nb);
 			break;
 		case 110: // Lynds' Catalogue of Bright Nebulae
-			for (const auto& n : dsoArray)
-			{
-				if (n->LBN_nb>0)
-					result << QString("LBN %1").arg(n->LBN_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("LBN %1").arg(n->LBN_nb);
 			break;
 		case 111: // Lynds' Catalogue of Dark Nebulae
-			for (const auto& n : dsoArray)
-			{
-				if (n->LDN_nb>0)
-					result << QString("LDN %1").arg(n->LDN_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("LDN %1").arg(n->LDN_nb);
 			break;
 		case 114: // Cederblad Catalog
-			for (const auto& n : dsoArray)
-			{
-				if (!n->Ced_nb.isEmpty())
-					result << QString("Ced %1").arg(n->Ced_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("Ced %1").arg(n->Ced_nb);
 			break;
 		case 115: // Atlas of Peculiar Galaxies (Arp)
-			for (const auto& n : dsoArray)
-			{
-				if (n->Arp_nb>0)
-					result << QString("Arp %1").arg(n->Arp_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("Arp %1").arg(n->Arp_nb);
 			break;
 		case 116: // The Catalogue of Interacting Galaxies by Vorontsov-Velyaminov (VV)
-			for (const auto& n : dsoArray)
-			{
-				if (n->VV_nb>0)
-					result << QString("VV %1").arg(n->VV_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("VV %1").arg(n->VV_nb);
 			break;
 		case 117: // Catalogue of Galactic Planetary Nebulae (PK)
-			for (const auto& n : dsoArray)
-			{
-				if (!n->PK_nb.isEmpty())
-					result << QString("PK %1").arg(n->PK_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("PK %1").arg(n->PK_nb);
 			break;
 		case 118: // Strasbourg-ESO Catalogue of Galactic Planetary Nebulae by Acker et. al. (PN G)
-			for (const auto& n : dsoArray)
-			{
-				if (!n->PNG_nb.isEmpty())
-					result << QString("PN G%1").arg(n->PNG_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("PN G%1").arg(n->PNG_nb);
 			break;
 		case 119: // A catalogue of Galactic supernova remnants by Green (SNR G)
-			for (const auto& n : dsoArray)
-			{
-				if (!n->SNRG_nb.isEmpty())
-					result << QString("SNR G%1").arg(n->SNRG_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("SNR G%1").arg(n->SNRG_nb);
 			break;
 		case 120: // A Catalog of Rich Clusters of Galaxies by Abell et. al. (ACO)
-			for (const auto& n : dsoArray)
-			{
-				if (!n->ACO_nb.isEmpty())
-					result << QString("ACO %1").arg(n->ACO_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("ACO %1").arg(n->ACO_nb);
 			break;
 		case 121: // Hickson Compact Group by Hickson et. al. (HCG)
-			for (const auto& n : dsoArray)
-			{
-				if (!n->HCG_nb.isEmpty())
-					result << QString("HCG %1").arg(n->HCG_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("HCG %1").arg(n->HCG_nb);
 			break;
 		case 122: // Abell Catalog of Planetary Nebulae (Abell)
-			for (const auto& n : dsoArray)
-			{
-				if (n->Abell_nb>0)
-					result << QString("Abell %1").arg(n->Abell_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("Abell %1").arg(n->Abell_nb);
 			break;
 		case 123: // ESO/Uppsala Survey of the ESO(B) Atlas (ESO)
-			for (const auto& n : dsoArray)
-			{
-				if (!n->ESO_nb.isEmpty())
-					result << QString("ESO %1").arg(n->ESO_nb);
-			}
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("ESO %1").arg(n->ESO_nb);
 			break;
-		case 150: // Dwarf galaxies
+		case 150: // Dwarf galaxies [see NebulaList.hpp]
 		{
 			for (unsigned int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
 				result << QString("PGC %1").arg(DWARF_GALAXIES[i]);
 			break;
 		}
-		case 151: // Herschel 400 Catalogue
+		case 151: // Herschel 400 Catalogue [see NebulaList.hpp]
 		{
 			for (unsigned int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
 				result << QString("NGC %1").arg(H400_LIST[i]);
+			break;
+		}
+		case 152: // Jack Bennett's deep sky catalogue [see NebulaList.hpp]
+		{
+			for (unsigned int i = 0; i < sizeof(BENNETT_LIST) / sizeof(BENNETT_LIST[0]); i++)
+				result << QString("NGC %1").arg(BENNETT_LIST[i]);
+			result << "Mel 105" << "IC 1459";
+			break;
+		}
+		case 153: // James Dunlop's deep sky catalogue [see NebulaList.hpp]
+		{
+			for (unsigned int i = 0; i < sizeof(DUNLOP_LIST) / sizeof(DUNLOP_LIST[0]); i++)
+				result << QString("NGC %1").arg(DUNLOP_LIST[i]);
 			break;
 		}
 		default:
@@ -3093,7 +2990,7 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 					dso.append(n);
 			}
 			break;
-		case 150: // Dwarf galaxies
+		case 150: // Dwarf galaxies [see NebulaList.hpp]
 		{
 			NebulaP ds;
 			for (unsigned int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
@@ -3104,12 +3001,40 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 			}
 			break;
 		}
-		case 151: // Herschel 400 Catalogue
+		case 151: // Herschel 400 Catalogue [see NebulaList.hpp]
 		{
 			NebulaP ds;
 			for (unsigned int i = 0; i < sizeof(H400_LIST) / sizeof(H400_LIST[0]); i++)
 			{
 				ds = searchNGC(H400_LIST[i]);
+				if (!ds.isNull())
+					dso.append(ds);
+			}
+			break;
+		}
+		case 152: // Jack Bennett's deep sky catalogue [see NebulaList.hpp]
+		{
+			NebulaP ds;
+			for (unsigned int i = 0; i < sizeof(BENNETT_LIST) / sizeof(BENNETT_LIST[0]); i++)
+			{
+				ds = searchNGC(BENNETT_LIST[i]);
+				if (!ds.isNull())
+					dso.append(ds);
+			}
+			ds = searchMel(105);
+			if (!ds.isNull())
+				dso.append(ds);
+			ds = searchIC(1459);
+			if (!ds.isNull())
+				dso.append(ds);
+			break;
+		}
+		case 153: // James Dunlop's deep sky catalogue [see NebulaList.hpp]
+		{
+			NebulaP ds;
+			for (unsigned int i = 0; i < sizeof(DUNLOP_LIST) / sizeof(DUNLOP_LIST[0]); i++)
+			{
+				ds = searchNGC(DUNLOP_LIST[i]);
 				if (!ds.isNull())
 					dso.append(ds);
 			}

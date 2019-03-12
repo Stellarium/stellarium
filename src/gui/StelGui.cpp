@@ -455,7 +455,7 @@ void StelGui::init(QGraphicsWidget *atopLevelGraphicsWidget)
 	p.setColor(QPalette::Active, QPalette::Button, QColor(255,255,255));
 	QGuiApplication::setPalette(p);
 	
-	// FIXME: Workaround for set UI language when app is started --AW
+	// Set UI language when app is started
 	updateI18n();
 
 	StelApp *app = &StelApp::getInstance();

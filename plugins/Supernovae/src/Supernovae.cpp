@@ -70,7 +70,7 @@ StelPluginInfo SupernovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Supernovae";
 	info.displayedName = N_("Historical Supernovae");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("This plugin allows you to see some bright historical supernovae.");
 	info.version = SUPERNOVAE_PLUGIN_VERSION;
 	info.license = SUPERNOVAE_PLUGIN_LICENSE;

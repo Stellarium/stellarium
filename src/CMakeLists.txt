@@ -202,6 +202,7 @@ SET(stellarium_lib_SRCS
      core/modules/MilkyWay.hpp
      core/modules/Nebula.cpp
      core/modules/Nebula.hpp
+     core/modules/NebulaList.hpp
      core/modules/NebulaMgr.cpp
      core/modules/NebulaMgr.hpp
      core/modules/Orbit.cpp
@@ -669,6 +670,18 @@ IF(ENABLE_TESTING)
     ADD_TEST(testEphemeris testEphemeris)
     SET_TARGET_PROPERTIES(testEphemeris PROPERTIES FOLDER "src/tests")
     SET_TESTS_PROPERTIES(testEphemeris PROPERTIES
+        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
+
+    SET(tests_testStelSkyCultureMgr_SRCS
+        tests/testStelSkyCultureMgr.hpp
+        tests/testStelSkyCultureMgr.cpp
+    )
+    ADD_EXECUTABLE(testStelSkyCultureMgr ${tests_testStelSkyCultureMgr_SRCS})
+    TARGET_LINK_LIBRARIES(testStelSkyCultureMgr ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelSkyCultureMgr)
+    ADD_TEST(testStelSkyCultureMgr testStelSkyCultureMgr)
+    SET_TARGET_PROPERTIES(testStelSkyCultureMgr PROPERTIES FOLDER "src/tests")
+    SET_TESTS_PROPERTIES(testStelSkyCultureMgr PROPERTIES
         ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
 
 ENDIF (ENABLE_TESTING)

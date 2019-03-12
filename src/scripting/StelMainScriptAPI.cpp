@@ -250,7 +250,7 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	core->moveObserverTo(loc, duration, duration);
 }
 
-void StelMainScriptAPI::setObserverLocation(const QString id, float duration)
+void StelMainScriptAPI::setObserverLocation(const QString &id, float duration)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	StelLocation loc = StelApp::getInstance().getLocationMgr().locationForString(id);
@@ -303,7 +303,7 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 
 
 
-void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString format)
+void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
 	bool oldInvertSetting = StelMainView::getInstance().getFlagInvertScreenShotColors();
 	QString oldFormat=StelMainView::getInstance().getScreenshotFormat();
@@ -776,7 +776,7 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 	if (ok)
 		return jd;
 	
-	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
+	QRegExp nowRe("^(now)?(\\s*([+\\-])\\s*(\\d+(\\.\\d+)?)\\s*(second|seconds|minute|minutes|hour|hours|day|days|sol|sols|week|weeks|month|months|year|years))(\\s+(sidereal)?)?");
 	if (nowRe.exactMatch(dt))
 	{
 		double delta;
@@ -806,6 +806,8 @@ double StelMainScriptAPI::jdFromDateString(const QString& dt, const QString& spe
 			unit = dayLength / (24.);
 		else if (unitString == "days" || unitString == "day")
 			unit = dayLength;
+		else if (unitString == "sols" || unitString == "sol")
+			unit = core->getCurrentPlanet()->getMeanSolarDay();
 		else if (unitString == "weeks" || unitString == "week")
 			unit = dayLength * 7.;
 		else if (unitString == "months" || unitString == "month")

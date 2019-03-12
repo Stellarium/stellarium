@@ -974,6 +974,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			else
 				color = StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
 
+			QString normalMapName = "";
+			bool hidden = pd.value(secname+"/hidden", false).toBool();
+			if (!hidden) // no normal maps for invisible objects!
+				normalMapName = englishName.toLower().append("_normals.png");
+
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -981,12 +986,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    pd.value(secname+"/albedo", 0.25f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
+						    pd.value(secname+"/normals_map", normalMapName).toString(),
 						    pd.value(secname+"/model").toString(),
 						    posfunc,
 						    orbitPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", false).toBool(),
+						    hidden,
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -1081,7 +1087,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// phase when normal map key not exists. Example: moon_normals.png
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
 			QString normalMapName = "";
-			if (!pd.value(secname+"/hidden", false).toBool()) // no normal maps for invisible objects!
+			bool hidden = pd.value(secname+"/hidden", false).toBool();
+			if (!hidden) // no normal maps for invisible objects!
 				normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius").toDouble()/AU,
@@ -1096,7 +1103,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       orbitPtr,
 					       osculatingFunc,
 					       closeOrbit,
-					       pd.value(secname+"/hidden", false).toBool(),
+					       hidden,
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));

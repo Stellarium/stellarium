@@ -134,7 +134,7 @@ void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QSignalMapper* mapper = new QSignalMapper(this);
-	for (const auto script : getScriptList())
+	for (const auto& script : getScriptList())
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;

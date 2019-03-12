@@ -427,6 +427,10 @@ class Translations
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Herschel 400 Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Jack Bennett's deep sky catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("James Dunlop's southern deep sky catalogue");
 		
 		// =====================================================================
 		// List of stars types
@@ -447,6 +451,8 @@ class Translations
 		N_("Arabic");
 		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
+		// TRANSLATORS: Name of the sky culture
+		N_("Armintxe");
 		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
 		// TRANSLATORS: Name of the sky culture
@@ -479,6 +485,8 @@ class Translations
 		N_("Macedonian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Maori");
+		// TRANSLATORS: Name of the sky culture
+		N_("Maya");
 		// TRANSLATORS: Name of the sky culture
 		N_("Mongolian");
 		// TRANSLATORS: Name of the sky culture
@@ -517,6 +525,8 @@ class Translations
 		
 		// =====================================================================
 		// Landscape names
+		// TRANSLATORS: Name of landscape
+		N_("Armintxe Cave");
 		// TRANSLATORS: Name of landscape
 		N_("Guereins");
 		// TRANSLATORS: Name of landscape
@@ -641,6 +651,8 @@ class Translations
 		N_("Planet Objects Tour");
 		// TRANSLATORS: Name of script
 		N_("Analemma");
+		// TRANSLATORS: Name of script
+		N_("Martian analemma");
 		
 		// =====================================================================
 		// Script descriptions
@@ -685,6 +697,7 @@ class Translations
 		N_("This script demonstrates interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.");
 		N_("A tour of the Solar System planets");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Earth.");
+		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Mars.");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)

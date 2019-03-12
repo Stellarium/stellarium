@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2019-03-06 20:54+0700\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: Latein Lebt, 2019\n"
 "Language-Team: German (https://www.transifex.com/stellarium/teams/80998/de/)\n"
@@ -22,6 +22,26 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: scripts/analemma.ssc:15
+msgid "Analemma"
+msgstr "Analemma"
+
+#: scripts/analemma.ssc:40
+msgid "Week"
+msgstr "Woche"
+
+#: scripts/analemma.ssc:46
+msgid "Near winter solstice"
+msgstr "Nahe der Wintersonnenwende"
+
+#: scripts/analemma.ssc:50
+msgid "Near summer solstice"
+msgstr "Nahe der Sommersonnenwende"
+
+#: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
+msgid "Yearly path of the Sun"
+msgstr "Jährliche Spur der Sonne"
 
 #: scripts/bennett.ssc:47
 msgid "The Jack Bennett Catalog of Southern Deep-Sky Objects"
@@ -93,7 +113,7 @@ msgstr "Messiers Nummer Eins"
 
 #: scripts/binocular_highlights.ssc:22
 msgid "Auriga's Messier Clusters"
-msgstr "Aurigas Messier Sternhaufen"
+msgstr "Messier-Sternhaufen im Fuhrmann"
 
 #: scripts/binocular_highlights.ssc:22
 msgid "M36 and M38"
@@ -113,7 +133,7 @@ msgstr "Goldene Beteigeuze"
 
 #: scripts/binocular_highlights.ssc:25
 msgid "Orion Extras"
-msgstr ""
+msgstr "Orion Extras"
 
 #: scripts/binocular_highlights.ssc:26
 msgid "Orion's Sword"
@@ -197,7 +217,7 @@ msgstr "In und um Melotte 111"
 
 #: scripts/binocular_highlights.ssc:41
 msgid "A Trio of Doubles in Bootes"
-msgstr ""
+msgstr "Ein Trio von Doppelsternen im Bärenhüter"
 
 #: scripts/binocular_highlights.ssc:42
 msgid "R Cor Bor's Vanishing Act"
@@ -217,11 +237,11 @@ msgstr "Bienenkorb-Haufen"
 
 #: scripts/binocular_highlights.ssc:45
 msgid "A Visit to NGC 2903"
-msgstr "Ein Besuch zu NGC 2903"
+msgstr "Ein Besuch bei NGC 2903"
 
 #: scripts/binocular_highlights.ssc:46 scripts/binocular_highlights.ssc:47
 msgid "A Pair of Leo Doubles"
-msgstr "Ein Paar Doppelstern im Löwen"
+msgstr "Ein Doppelstern-Paar im Löwen"
 
 #: scripts/binocular_highlights.ssc:46
 msgid "Tau Leonis"
@@ -262,7 +282,7 @@ msgstr "Alter Kugelsternhaufen M5"
 
 #: scripts/binocular_highlights.ssc:53
 msgid "Magnificent Omega Centauri"
-msgstr ""
+msgstr "Prachtvoller Omega Centauri"
 
 #: scripts/binocular_highlights.ssc:54
 msgid "Chapter 3"
@@ -319,7 +339,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:62
 msgid "Open Cluster M39 in Cygnus"
-msgstr ""
+msgstr "Offener Sternhaufen M39 im Schwan"
 
 #: scripts/binocular_highlights.ssc:63
 msgid "The Road to the Cocoon"
@@ -331,7 +351,7 @@ msgstr "IC 5146, B168 und M39"
 
 #: scripts/binocular_highlights.ssc:64
 msgid "Summer's Other Triangle"
-msgstr ""
+msgstr "Das andere Sommerdreieck"
 
 #: scripts/binocular_highlights.ssc:64
 msgid "Epsilon, Zeta and Alpha Lyrae"
@@ -339,7 +359,7 @@ msgstr "Epsilon, Zeta und Alpha Lyrae"
 
 #: scripts/binocular_highlights.ssc:65
 msgid "M57 and Expectations"
-msgstr ""
+msgstr "M57 und Erwartungen"
 
 #: scripts/binocular_highlights.ssc:65
 msgid "Difficult deep-sky object for tests your observing skills..."
@@ -380,15 +400,15 @@ msgstr "M11 in Scutum"
 
 #: scripts/binocular_highlights.ssc:70
 msgid "Also known as the Wild Duck Cluster"
-msgstr "Auch bekannt unter dem Wildentenhaufen"
+msgstr "Auch bekannt als Wildentenhaufen"
 
 #: scripts/binocular_highlights.ssc:71
 msgid "IC 4756 in Serpens"
-msgstr "IC 4756 im Serpens"
+msgstr "IC 4756 in der Schlange"
 
 #: scripts/binocular_highlights.ssc:72
 msgid "Three Star Clusters in Ophiuchus"
-msgstr ""
+msgstr "Drei Sternhaufen im Ophiuchus"
 
 #: scripts/binocular_highlights.ssc:73
 msgid "IC 4665 in Ophiuchus"
@@ -408,7 +428,7 @@ msgstr "Rho Ophiuchi"
 
 #: scripts/binocular_highlights.ssc:75
 msgid "Rho itself is a pretty triple star"
-msgstr ""
+msgstr "Rho selbst ist ein schöner Dreifachstern"
 
 #: scripts/binocular_highlights.ssc:76
 msgid "A Solar Twin"
@@ -420,7 +440,7 @@ msgstr "18 Scorpii"
 
 #: scripts/binocular_highlights.ssc:77
 msgid "A Double for Steady Hands"
-msgstr ""
+msgstr "Ein Doppelstern für ruhige Hände"
 
 #: scripts/binocular_highlights.ssc:77
 msgid "Nu Scorpii components are separated by 41\""
@@ -436,7 +456,7 @@ msgstr "M4 und M80"
 
 #: scripts/binocular_highlights.ssc:79
 msgid "A Gorgeous Duo"
-msgstr ""
+msgstr "Ein umwerfendes Duo"
 
 #: scripts/binocular_highlights.ssc:79
 msgid "M6 and M7"
@@ -452,11 +472,11 @@ msgstr "Cr 316, NGC 6231 und NGC 6242"
 
 #: scripts/binocular_highlights.ssc:81
 msgid "Summer Star Cloud"
-msgstr ""
+msgstr "Sommer-Sternenwolke"
 
 #: scripts/binocular_highlights.ssc:82
 msgid "Milky Way Messiers"
-msgstr ""
+msgstr "Milchstraßen-Messiers"
 
 #: scripts/binocular_highlights.ssc:82
 msgid "M16, M17 and M18"
@@ -468,7 +488,7 @@ msgstr "Lagunen-Nebel"
 
 #: scripts/binocular_highlights.ssc:84
 msgid "M22: A Gem of a Globular"
-msgstr ""
+msgstr "M22: Ein Prachtstück von Kugelsternhaufen"
 
 #: scripts/binocular_highlights.ssc:84
 msgid "M22 and M28"
@@ -500,7 +520,7 @@ msgstr "NGC 6939 und NGC 6946"
 
 #: scripts/binocular_highlights.ssc:89
 msgid "Magnificent Mu Cephei"
-msgstr ""
+msgstr "Prachtvoller Mu Cephei"
 
 #: scripts/binocular_highlights.ssc:89
 msgid "A semiregular variable star"
@@ -508,7 +528,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:90
 msgid "Watching Delta Cephei"
-msgstr "Beobachten Delta Cephei"
+msgstr "Beobachtung von Delta Cephei"
 
 #: scripts/binocular_highlights.ssc:90
 msgid "Well-known variable star and striking double also"
@@ -532,7 +552,7 @@ msgstr "Offener Sternhaufen M103"
 
 #: scripts/binocular_highlights.ssc:95
 msgid "Magnificent M31"
-msgstr ""
+msgstr "Prachvolles M31"
 
 #: scripts/binocular_highlights.ssc:96
 msgid "Andromeda's Companions"
@@ -544,11 +564,11 @@ msgstr "M32 und M110"
 
 #: scripts/binocular_highlights.ssc:97
 msgid "Ancient Cluster NGC 752"
-msgstr ""
+msgstr "Antiker Sternhaufen NGC 752"
 
 #: scripts/binocular_highlights.ssc:98
 msgid "Triangulum's Treasure"
-msgstr ""
+msgstr "Die Schatztruhe des Dreiecks"
 
 #: scripts/binocular_highlights.ssc:99
 msgid "TX Piscium"
@@ -560,7 +580,7 @@ msgstr ""
 
 #: scripts/binocular_highlights.ssc:100
 msgid "A Farewell to Summer"
-msgstr ""
+msgstr "Ein Lebewohl an den Sommer"
 
 #: scripts/binocular_highlights.ssc:101
 msgid "Messier 2 Shining Through"
@@ -739,7 +759,7 @@ msgstr "5,8 Bogenminuten (ONO)"
 
 #: scripts/double_stars.ssc:40
 msgid "Showcase double!"
-msgstr "Vorzeige-Foppelstern"
+msgstr "Vorzeige-Doppelstern"
 
 #: scripts/double_stars.ssc:41
 msgid "ζ Scorpii"
@@ -805,6 +825,14 @@ msgstr "6,3 Bogenminuten (WNW)"
 msgid "Separation:"
 msgstr "Winkeldistanz:"
 
+#: scripts/martian_analemma.ssc:16
+msgid "Martian analemma"
+msgstr "Mars-Analemma"
+
+#: scripts/martian_analemma.ssc:41
+msgid "Sol"
+msgstr "Sonne"
+
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
 #: scripts/morsels_1.ssc:30 scripts/morsels_1.ssc:34 scripts/morsels_1.ssc:36
@@ -827,12 +855,12 @@ msgstr "Schatten von Europa, Ganymed und Callisto"
 
 #: scripts/morsels_1.ssc:60
 msgid "Triple shadow phenomena of the satellites of Jupiter"
-msgstr "Dreifaches Schattenphänomen von Jupiters Satelliten"
+msgstr "Dreifaches Schattenphänomen von Jupitermonden"
 
 #: scripts/morsels_1.ssc:62 scripts/morsels_2.ssc:78 scripts/morsels_3.ssc:52
 #: scripts/morsels_4.ssc:70
 msgid "phenomena in all"
-msgstr "Alle Phänomene"
+msgstr "Phänomene insgesamt"
 
 #: scripts/morsels_1.ssc:77 scripts/morsels_2.ssc:98 scripts/morsels_3.ssc:62
 #: scripts/morsels_4.ssc:81
@@ -932,6 +960,8 @@ msgid ""
 "The Herschel 400 is a subset of John Herschel's General Catalogue of Nebulae"
 " and Clusters"
 msgstr ""
+"Der Herschel 400 ist eine Teilmenge des John Herschel's General Catalogue of"
+" Nebulae and Clusters"
 
 #: scripts/h400_tour.ssc:18
 msgid ""
@@ -941,7 +971,7 @@ msgstr ""
 
 #: scripts/h400_tour.ssc:19
 msgid "Vital statistics:"
-msgstr ""
+msgstr "Wesentliche Statistiken:"
 
 #: scripts/h400_tour.ssc:20
 msgid "* The catalogue contains 400 objects"
@@ -949,7 +979,7 @@ msgstr "* Der Katalog enthält 400 Objekte"
 
 #: scripts/h400_tour.ssc:21
 msgid "* All objects are from the NGC"
-msgstr "* Alle Objekte aus dem NGC"
+msgstr "* Alle Objekte sind aus dem NGC"
 
 #: scripts/h400_tour.ssc:22
 msgid "* All visible in mid northern latitudes"
@@ -1064,7 +1094,7 @@ msgstr "S Persei"
 
 #: scripts/largest_known_stars.ssc:33
 msgid "In the Perseus Double Cluster."
-msgstr "Im Perseus Doppelsternhaufen"
+msgstr "Im Perseus-Doppelsternhaufen"
 
 #: scripts/largest_known_stars.ssc:34
 msgid "RW Cygni"

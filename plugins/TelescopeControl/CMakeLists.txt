@@ -16,7 +16,7 @@ ENDIF(APPLE)
 #	CACHE PATH "Should point to the /src/ directory where the stellarium telescope servers source tree is located")
 
 ADD_DEFINITIONS(-DTELESCOPE_CONTROL_PLUGIN_VERSION="${TELESCOPE_CONTROL_VERSION}")
-ADD_DEFINITIONS(-DTELESCOPE_CONTROL_PLUGIN_LICENSE="GNU GPLv2+")
+ADD_DEFINITIONS(-DTELESCOPE_CONTROL_PLUGIN_LICENSE="GNU GPLv2 or later")
 
 #Temporary debugging definitions for the telescope servers code
 ADD_DEFINITIONS(-DDEBUG3 -DDEBUG4 -DDEBUG5)

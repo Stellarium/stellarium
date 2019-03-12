@@ -35,8 +35,7 @@ QTEST_GUILESS_MAIN(TestEphemeris)
 #define CENTRAL_BODY_ID 11  //ID of sun in JPL enumeration
 
 //
-// IMPORTANT NOTE:
-// de430.cpp and de431.cpp files has hooks for unit test!
+// IMPORTANT NOTE: de430.cpp and de431.cpp files has hooks for unit test!
 // Please update them if you changed StelCore::matJ2000ToVsop87 variable
 //
 
