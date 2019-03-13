@@ -95,6 +95,7 @@ void ViewDialog::retranslate()
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
 		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
+		populateHipsGroups();
 		updateHips();
 
 		//Hack to shrink the tabs to optimal size after language change
@@ -111,6 +112,7 @@ void ViewDialog::styleChanged()
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
+		populateHipsGroups();
 	}
 }
 
@@ -437,8 +439,10 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->asterismsFontSizeSpinBox,		"AsterismMgr.fontSize");
 
 	// Hips mgr.
-	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	populateHipsGroups();
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");	
 	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
+	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
 	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
@@ -465,19 +469,10 @@ void ViewDialog::updateHips()
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QMetaObject::invokeMethod(hipsmgr, "loadSources");
 
-	// Update the groups combobox.
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
-	disconnect(typeComboBox, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-	int index = typeComboBox->currentIndex();
-	QVariant selectedType = typeComboBox->itemData(index);
+	QVariant selectedType = typeComboBox->itemData(typeComboBox->currentIndex());
 	if (selectedType.isNull())
 		selectedType = "dss";
-	typeComboBox->clear();
-	typeComboBox->addItem(q_("Deep Sky"), "dss");
-	typeComboBox->addItem(q_("Solar System"), "sol");
-	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
-	typeComboBox->setCurrentIndex(index);
-	connect(typeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 
 	// Update survey list.
 	QListWidget* l = ui->surveysListWidget;
@@ -519,8 +514,9 @@ void ViewDialog::updateHips()
 		disconnect(hips.data(), Q_NULLPTR, this, Q_NULLPTR);
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
-	l->setCurrentItem(currentItem);
 	l->sortItems(Qt::AscendingOrder);
+	l->setCurrentItem(currentItem);
+	l->scrollToItem(currentItem);
 	l->blockSignals(false);
 
 	if (!currentHips)
@@ -546,6 +542,21 @@ void ViewDialog::updateHips()
 		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->surveysTextBrowser->setHtml(html);
 	}
+}
+
+void ViewDialog::populateHipsGroups()
+{
+	// Update the groups combobox.
+	QComboBox* typeComboBox = ui->surveyTypeComboBox;
+	int index = typeComboBox->currentIndex();
+	QVariant selectedType = typeComboBox->itemData(index);
+	if (selectedType.isNull())
+		selectedType = "dss";
+	typeComboBox->clear();
+	typeComboBox->addItem(q_("Deep Sky"), "dss");
+	typeComboBox->addItem(q_("Solar System"), "sol");
+	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
+	typeComboBox->setCurrentIndex(index);
 }
 
 void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
