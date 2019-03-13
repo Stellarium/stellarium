@@ -150,7 +150,7 @@ class DssWcs:
         """Return the RA DEC pair for a given pixel position (even if outside the plate)
         the passed wcs must be the one laying in the preparedPlates directory"""
         arr = [pixelPos[0], pixelPos[1]]
-        if self.inverseGridPixelPos != None:
+        if self.inverseGridPixelPos is not None:
             nearestOffset = scipy.interpolate.griddata(self.inverseGridPixelPos, self.gridOffset, [arr],
                                                        method='nearest')
             arr = [arr[0] - nearestOffset[0][0], arr[1] - nearestOffset[0][1]]
@@ -168,7 +168,7 @@ class DssWcs:
         ret = [(ret[0][0] - 1.5) * 64., (ret[0][1] - 1.5) * 64.]
 
         # Add offset to compensate for linear WCS model errors
-        if self.gridOffset != None:
+        if self.gridOffset is not None:
             nearestOffset = scipy.interpolate.griddata(self.gridPixelPos, self.gridOffset, [ret], method='nearest')
             ret = [ret[0] + nearestOffset[0][0], ret[1] + nearestOffset[0][1]]
 

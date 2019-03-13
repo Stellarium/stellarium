@@ -73,16 +73,16 @@ def createTile(currentLevel, maxLevel, i, j, wcs, im, doImage, tileSize):
 	
 	# Recursively creates the 4 sub-tiles
 	sub = createTile(currentLevel+1, maxLevel, i*2, j*2, wcs, im, doImage, tileSize)
-	if sub!=None:
+	if sub is not None:
 		t.subTiles.append(sub)
 	sub = createTile(currentLevel+1, maxLevel, i*2+1, j*2, wcs, im, doImage, tileSize)
-	if sub!=None:
+	if sub is not None:
 		t.subTiles.append(sub)
 	sub = createTile(currentLevel+1, maxLevel, i*2+1, j*2+1, wcs, im, doImage, tileSize)
-	if sub!=None:
+	if sub is not None:
 		t.subTiles.append(sub)
 	sub = createTile(currentLevel+1, maxLevel, i*2, j*2+1, wcs, im, doImage, tileSize)
-	if sub!=None:
+	if sub is not None:
 		t.subTiles.append(sub)
 	return t
 
@@ -115,7 +115,7 @@ def main():
 	imgFile = sys.argv[1]
 	
 	# We now have valid arguments
-	if options.fitsHeader!=None:
+	if options.fitsHeader is not None:
 		# Try to read the provided FITS header file to extract the WCS
 		wcs = astWCS.WCS(options.fitsHeader)
 	else:

@@ -31,11 +31,11 @@ class StructCredits:
         return
 
     def outJSON(self, f, levTab):
-        if self.short != None:
+        if self.short is not None:
             f.write(levTab + '\t\t"short": "' + self.short + '",\n')
-        if self.full != None:
+        if self.full is not None:
             f.write(levTab + '\t\t"full": "' + self.full + '",\n')
-        if self.infoUrl != None:
+        if self.infoUrl is not None:
             f.write(levTab + '\t\t"infoUrl": "' + self.infoUrl + '",\n')
         f.seek(-2, os.SEEK_CUR)
         f.write('\n')
@@ -76,15 +76,15 @@ class SkyImageTile:
             levTab += '\t'
 
         f.write(levTab + '{\n')
-        if self.imageInfo.short != None or self.imageInfo.full != None or self.imageInfo.infoUrl != None:
+        if self.imageInfo.short is not None or self.imageInfo.full is not None or self.imageInfo.infoUrl is not None:
             f.write(levTab + '\t"imageInfo": {\n')
             self.imageInfo.outJSON(f, levTab)
             f.write(levTab + '\t},\n')
-        if self.imageCredits.short != None or self.imageCredits.full != None or self.imageCredits.infoUrl != None:
+        if self.imageCredits.short is not None or self.imageCredits.full is not None or self.imageCredits.infoUrl is not None:
             f.write(levTab + '\t"imageCredits": {\n')
             self.imageCredits.outJSON(f, levTab)
             f.write(levTab + '\t},\n')
-        if self.serverCredits.short != None or self.serverCredits.full != None or self.serverCredits.infoUrl != None:
+        if self.serverCredits.short is not None or self.serverCredits.full is not None or self.serverCredits.infoUrl is not None:
             f.write(levTab + '\t"serverCredits": {\n')
             self.serverCredits.outJSON(f, levTab)
             f.write(levTab + '\t},\n')

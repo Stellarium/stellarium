@@ -114,16 +114,16 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=Fa
 
     # Recursively creates the 4 sub-tiles
     sub = createTile(currentLevel + 1, maxLevel, i * 2, j * 2, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     sub = createTile(currentLevel + 1, maxLevel, i * 2 + 1, j * 2, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     sub = createTile(currentLevel + 1, maxLevel, i * 2 + 1, j * 2 + 1, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     sub = createTile(currentLevel + 1, maxLevel, i * 2, j * 2 + 1, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     return t
 
@@ -195,7 +195,7 @@ def mainHeader():
             for i in nRange:
                 plateName = prefix + "%.3i" % i
                 ti = createTile(0, 0, 0, 0, outDir, plateName, True)
-                assert ti != None
+                assert ti is not None
                 f.write('\t{\n')
                 f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
                 f.write('\t\t"worldCoords" : ')

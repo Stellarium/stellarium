@@ -93,7 +93,7 @@ def preparePlate(plateName):
             radecCorner = w.wcs_pix2world(arr, 1)
             realPixelPos = [i * 300, j * 300]
             currPixelPos = wcsWithoutCorrection.raDecToPixel([radecCorner[0][0], radecCorner[0][1]])
-            assert currPixelPos != None
+            assert currPixelPos is not None
             allOffsets.append({'pixelPos': currPixelPos,
                                'offset': [realPixelPos[0] - currPixelPos[0], realPixelPos[1] - currPixelPos[1]]})
 
