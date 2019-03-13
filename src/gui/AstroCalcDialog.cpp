@@ -543,99 +543,26 @@ void AstroCalcDialog::populateCelestialCategoryList()
 	category->blockSignals(true);
 	int index = category->currentIndex();
 	QVariant selectedCategoryId = category->itemData(index);
-
-	const Nebula::CatalogGroup& catalogFilters = dsoMgr->getCatalogFilters();
-
 	category->clear();
-	// TODO: Automatic sync list with QMap<QString, QString> StelObjectMgr::objectModulesMap() data
-	category->addItem(q_("Galaxies"), "0");
-	category->addItem(q_("Active galaxies"), "1");
-	category->addItem(q_("Radio galaxies"), "2");
-	category->addItem(q_("Interacting galaxies"), "3");
-	category->addItem(q_("Bright quasars"), "4");
-	category->addItem(q_("Star clusters"), "5");
-	category->addItem(q_("Open star clusters"), "6");
-	category->addItem(q_("Globular star clusters"), "7");
-	category->addItem(q_("Stellar associations"), "8");
-	category->addItem(q_("Star clouds"), "9");
-	category->addItem(q_("Nebulae"), "10");
-	category->addItem(q_("Planetary nebulae"), "11");
-	category->addItem(q_("Dark nebulae"), "12");
-	category->addItem(q_("Reflection nebulae"), "13");
-	category->addItem(q_("Bipolar nebulae"), "14");
-	category->addItem(q_("Emission nebulae"), "15");
-	category->addItem(q_("Clusters associated with nebulosity"), "16");
-	category->addItem(q_("HII regions"), "17");
-	category->addItem(q_("Supernova remnants"), "18");
-	category->addItem(q_("Interstellar matter"), "19");
-	category->addItem(q_("Emission objects"), "20");
-	category->addItem(q_("BL Lac objects"), "21");
-	category->addItem(q_("Blazars"), "22");
-	category->addItem(q_("Molecular Clouds"), "23");
-	category->addItem(q_("Young Stellar Objects"), "24");
-	category->addItem(q_("Possible Quasars"), "25");
-	category->addItem(q_("Possible Planetary Nebulae"), "26");
-	category->addItem(q_("Protoplanetary Nebulae"), "27");
-	category->addItem(q_("Symbiotic stars"), "29");
-	category->addItem(q_("Emission-line stars"), "30");
-	category->addItem(q_("Supernova candidates"), "31");
-	category->addItem(q_("Supernova remnant candidates"), "32");
-	category->addItem(q_("Clusters of galaxies"), "33");
-	if (catalogFilters & Nebula::CatM)
-		category->addItem(q_("Messier Catalogue"), "100");
-	if (catalogFilters & Nebula::CatC)
-		category->addItem(q_("Caldwell Catalogue"), "101");
-	if (catalogFilters & Nebula::CatB)
-		category->addItem(q_("Barnard Catalogue"), "102");
-	if (catalogFilters & Nebula::CatSh2)
-		category->addItem(q_("Sharpless Catalogue"), "103");
-	if (catalogFilters & Nebula::CatVdB)
-		category->addItem(q_("Van den Bergh Catalogue"), "104");
-	if (catalogFilters & Nebula::CatRCW)
-		category->addItem(q_("The Catalogue of Rodgers, Campbell, and Whiteoak"), "105");
-	if (catalogFilters & Nebula::CatCr)
-		category->addItem(q_("Collinder Catalogue"), "106");
-	if (catalogFilters & Nebula::CatMel)
-		category->addItem(q_("Melotte Catalogue"), "107");
-	if (catalogFilters & Nebula::CatNGC)
-		category->addItem(q_("New General Catalogue"), "108");
-	if (catalogFilters & Nebula::CatIC)
-		category->addItem(q_("Index Catalogue"), "109");
-	if (catalogFilters & Nebula::CatLBN)
-		category->addItem(q_("Lynds' Catalogue of Bright Nebulae"), "110");
-	if (catalogFilters & Nebula::CatLDN)
-		category->addItem(q_("Lynds' Catalogue of Dark Nebulae"), "111");
-	if (catalogFilters & Nebula::CatPGC)
-		category->addItem(q_("Principal Galaxy Catalog"), "112");
-	if (catalogFilters & Nebula::CatUGC)
-		category->addItem(q_("The Uppsala General Catalogue of Galaxies"), "113");
-	if (catalogFilters & Nebula::CatCed)
-		category->addItem(q_("Cederblad Catalog"), "114");
-	if (catalogFilters & Nebula::CatArp)
-		category->addItem(q_("The Catalogue of Peculiar Galaxies"), "115");
-	if (catalogFilters & Nebula::CatVV)
-		category->addItem(q_("The Catalogue of Interacting Galaxies"), "116");
-	if (catalogFilters & Nebula::CatPK)
-		category->addItem(q_("The Catalogue of Galactic Planetary Nebulae"), "117");
-	if (catalogFilters & Nebula::CatPNG)
-		category->addItem(q_("The Strasbourg-ESO Catalogue of Galactic Planetary Nebulae"), "118");
-	if (catalogFilters & Nebula::CatSNRG)
-		category->addItem(q_("A catalogue of Galactic supernova remnants"), "119");
-	if (catalogFilters & Nebula::CatACO)
-		category->addItem(q_("A Catalog of Rich Clusters of Galaxies"), "120");
-	if (catalogFilters & Nebula::CatHCG)
-		category->addItem(q_("Hickson Compact Group"), "121");
-	if (catalogFilters & Nebula::CatAbell)
-		category->addItem(q_("Abell Catalog of Planetary Nebulae"), "122");
-	if (catalogFilters & Nebula::CatESO)
-		category->addItem(q_("ESO/Uppsala Survey of the ESO(B) Atlas"), "123");
-	category->addItem(q_("Dwarf galaxies"), "150");
-	category->addItem(q_("Herschel 400 Catalogue"), "151");
-	category->addItem(q_("Jack Bennett's deep sky catalogue"), "152");
-	category->addItem(q_("James Dunlop's southern deep sky catalogue"), "153");
-	category->addItem(q_("Bright double stars"), "170");
-	category->addItem(q_("Bright variable stars"), "171");
-	category->addItem(q_("Bright stars with high proper motion"), "172");
+
+	QMap<QString,QString> map = objectMgr->objectModulesMap();
+	QMapIterator<QString,QString> it(map);
+	QString key;
+	int kn;
+	while(it.hasNext())
+	{
+		it.next();
+		key = it.key();
+		if (key.startsWith("NebulaMgr") && key.contains(":"))
+			category->addItem(q_(it.value()), key.remove("NebulaMgr:"));
+
+		if (key.startsWith("StarMgr") && key.contains(":"))
+		{
+			kn = key.remove("StarMgr:").toInt();
+			if (kn>1 && kn<=4) // Original IDs: 2, 3, 4
+				category->addItem(q_(it.value()), QString::number(kn + 168)); // AstroCalc IDs: 170, 171, 172
+		}
+	}
 	category->addItem(q_("Solar system objects"), "200");
 	category->addItem(q_("Solar system objects: comets"), "201");
 	category->addItem(q_("Solar system objects: minor bodies"), "202");
