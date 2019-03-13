@@ -230,6 +230,8 @@ private:
 	QTimer *currentTimeLine;
 	QHash<QString,int> wutCategories;
 
+	void saveTableAsCSV(const QString& fileName, QTreeWidget* tWidget, QStringList& headers);
+
 	//! Update header names for celestial positions tables
 	void setCelestialPositionsHeaderNames();
 	//! Update header names for ephemeris table

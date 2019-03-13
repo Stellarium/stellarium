@@ -915,51 +915,13 @@ void AstroCalcDialog::saveCelestialPositions()
 							filter,
 							&defaultFilter);
 
-	int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
-	int columns = positionsHeader.size();
-
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-	{
-		QFile celPos(filePath);
-		if (!celPos.open(QFile::WriteOnly | QFile::Truncate))
-		{
-			qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-			return;
-		}
-
-		QTextStream celPosList(&celPos);
-		celPosList.setCodec("UTF-8");
-
-		for (int i = 0; i < columns; i++)
-		{
-			QString h = positionsHeader.at(i).trimmed();
-			if (h.contains(","))
-				celPosList << QString("\"%1\"").arg(h);
-			else
-				celPosList << h;
-
-			if (i < columns - 1)
-				celPosList << delimiter;
-			else
-				celPosList << acEndl;
-		}
-
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				celPosList << ui->celestialPositionsTreeWidget->topLevelItem(i)->text(j);
-				if (j < columns - 1)
-					celPosList << delimiter;
-				else
-					celPosList << acEndl;
-			}
-		}
-
-		celPos.close();
-	}
+		saveTableAsCSV(filePath, ui->celestialPositionsTreeWidget, positionsHeader);
 	else
 	{
+		int count = ui->celestialPositionsTreeWidget->topLevelItemCount();
+		int columns = positionsHeader.size();
+
 		int *width;
 		width = new int[columns];
 		QString sData;
@@ -1411,51 +1373,13 @@ void AstroCalcDialog::saveEphemeris()
 							filter,
 							&defaultFilter);
 
-	int count = ui->ephemerisTreeWidget->topLevelItemCount();
-	int columns = ephemerisHeader.size();
-
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-	{
-		QFile ephem(filePath);
-		if (!ephem.open(QFile::WriteOnly | QFile::Truncate))
-		{
-			qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-			return;
-		}
-
-		QTextStream ephemList(&ephem);
-		ephemList.setCodec("UTF-8");
-
-		for (int i = 0; i < columns; i++)
-		{
-			QString h = ephemerisHeader.at(i).trimmed();
-			if (h.contains(","))
-				ephemList << QString("\"%1\"").arg(h);
-			else
-				ephemList << h;
-
-			if (i < columns - 1)
-				ephemList << delimiter;
-			else
-				ephemList << acEndl;
-		}
-
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				ephemList << ui->ephemerisTreeWidget->topLevelItem(i)->text(j);
-				if (j < columns - 1)
-					ephemList << delimiter;
-				else
-					ephemList << acEndl;
-			}
-		}
-
-		ephem.close();
-	}
+		saveTableAsCSV(filePath, ui->ephemerisTreeWidget, ephemerisHeader);
 	else
 	{
+		int count = ui->ephemerisTreeWidget->topLevelItemCount();
+		int columns = ephemerisHeader.size();
+
 		int *width;
 		width = new int[columns];
 		QString sData;
@@ -3012,51 +2936,13 @@ void AstroCalcDialog::savePhenomena()
 							filter,
 							&defaultFilter);
 
-	int count = ui->phenomenaTreeWidget->topLevelItemCount();
-	int columns = phenomenaHeader.size();
-
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-	{
-		QFile phenomena(filePath);
-		if (!phenomena.open(QFile::WriteOnly | QFile::Truncate))
-		{
-			qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-			return;
-		}
-
-		QTextStream phenomenaList(&phenomena);
-		phenomenaList.setCodec("UTF-8");
-
-		for (int i = 0; i < columns; i++)
-		{
-			QString h = phenomenaHeader.at(i).trimmed();
-			if (h.contains(","))
-				phenomenaList << QString("\"%1\"").arg(h);
-			else
-				phenomenaList << h;
-
-			if (i < columns - 1)
-				phenomenaList << delimiter;
-			else
-				phenomenaList << acEndl;
-		}
-
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				phenomenaList << ui->phenomenaTreeWidget->topLevelItem(i)->text(j);
-				if (j < columns - 1)
-					phenomenaList << delimiter;
-				else
-					phenomenaList << acEndl;
-			}
-		}
-
-		phenomena.close();
-	}
+		saveTableAsCSV(filePath, ui->phenomenaTreeWidget, phenomenaHeader);
 	else
 	{
+		int count = ui->phenomenaTreeWidget->topLevelItemCount();
+		int columns = phenomenaHeader.size();
+
 		int *width;
 		width = new int[columns];
 		QString sData;
@@ -4338,51 +4224,13 @@ void AstroCalcDialog::saveWutObjects()
 							filter,
 							&defaultFilter);
 
-	int count = ui->wutMatchingObjectsTreeWidget->topLevelItemCount();
-	int columns = wutHeader.size();
-
 	if (defaultFilter.contains(".csv", Qt::CaseInsensitive))
-	{
-		QFile wut(filePath);
-		if (!wut.open(QFile::WriteOnly | QFile::Truncate))
-		{
-			qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(filePath);
-			return;
-		}
-
-		QTextStream wutList(&wut);
-		wutList.setCodec("UTF-8");
-
-		for (int i = 0; i < columns; i++)
-		{
-			QString h = wutHeader.at(i).trimmed();
-			if (h.contains(","))
-				wutList << QString("\"%1\"").arg(h);
-			else
-				wutList << h;
-
-			if (i < columns - 1)
-				wutList << delimiter;
-			else
-				wutList << acEndl;
-		}
-
-		for (int i = 0; i < count; i++)
-		{
-			for (int j = 0; j < columns; j++)
-			{
-				wutList << ui->wutMatchingObjectsTreeWidget->topLevelItem(i)->text(j);
-				if (j < columns - 1)
-					wutList << delimiter;
-				else
-					wutList << acEndl;
-			}
-		}
-
-		wut.close();
-	}
+		saveTableAsCSV(filePath, ui->wutMatchingObjectsTreeWidget, wutHeader);
 	else
 	{
+		int count = ui->wutMatchingObjectsTreeWidget->topLevelItemCount();
+		int columns = wutHeader.size();
+
 		int *width;
 		width = new int[columns];
 		QString sData;
@@ -4925,4 +4773,48 @@ void AstroCalcDialog::drawAngularDistanceLimitLine()
 	QVector<double> x = ax.toVector(), y = ay.toVector();
 	ui->angularDistancePlot->graph(1)->setData(x, y);
 	ui->angularDistancePlot->replot();
+}
+
+void AstroCalcDialog::saveTableAsCSV(const QString &fileName, QTreeWidget* tWidget, QStringList &headers)
+{
+	int count = tWidget->topLevelItemCount();
+	int columns = headers.size();
+
+	QFile table(fileName);
+	if (!table.open(QFile::WriteOnly | QFile::Truncate))
+	{
+		qWarning() << "AstroCalc: Unable to open file" << QDir::toNativeSeparators(fileName);
+		return;
+	}
+
+	QTextStream tableData(&table);
+	tableData.setCodec("UTF-8");
+
+	for (int i = 0; i < columns; i++)
+	{
+		QString h = headers.at(i).trimmed();
+		if (h.contains(","))
+			tableData << QString("\"%1\"").arg(h);
+		else
+			tableData << h;
+
+		if (i < columns - 1)
+			tableData << delimiter;
+		else
+			tableData << acEndl;
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			tableData << tWidget->topLevelItem(i)->text(j);
+			if (j < columns - 1)
+				tableData << delimiter;
+			else
+				tableData << acEndl;
+		}
+	}
+
+	table.close();
 }
