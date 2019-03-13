@@ -53,31 +53,31 @@ for langfile in files:
     if msgids:
       msg_id = msgids[0].split('=')[1].strip('\n')
       poentry = polib.POEntry(
-	msgctxt = message_comment,
-	msgid = msg_id.decode('utf-8'),
-	msgstr = msg_str.decode('utf-8'),
-	occurrences=[(langfile,'')]
-	)
+    msgctxt = message_comment,
+    msgid = msg_id.decode('utf-8'),
+    msgstr = msg_str.decode('utf-8'),
+    occurrences=[(langfile,'')]
+    )
       pofilename = podir + '/' + lang_code + '.po'
       if not os.path.isfile(pofilename):
-	# Create PO file
-	po = polib.POFile()
-	po.metadata = {
-	  'Project-Id-Version': 'Stellarium desktop file translation',
-	  'Report-Msgid-Bugs-To': 'stellarium-translation@lists.launchpad.net',
-	  'POT-Creation-Date': pocreationtime,
-	  'PO-Revision-Date': pocreationtime,
-	  'Last-Translator': 'FULL NAME <EMAIL@ADDRESS>',
-	  'Language-Team': lang_code + ' <' + lang_code + '@li.org>',
-	  'MIME-Version': '1.0',
-	  'Content-Type': 'text/plain; charset=UTF-8',
-	  'Content-Transfer-Encoding': '8bit',
-	  }
-	po.save(pofilename)
+    # Create PO file
+    po = polib.POFile()
+    po.metadata = {
+      'Project-Id-Version': 'Stellarium desktop file translation',
+      'Report-Msgid-Bugs-To': 'stellarium-translation@lists.launchpad.net',
+      'POT-Creation-Date': pocreationtime,
+      'PO-Revision-Date': pocreationtime,
+      'Last-Translator': 'FULL NAME <EMAIL@ADDRESS>',
+      'Language-Team': lang_code + ' <' + lang_code + '@li.org>',
+      'MIME-Version': '1.0',
+      'Content-Type': 'text/plain; charset=UTF-8',
+      'Content-Transfer-Encoding': '8bit',
+      }
+    po.save(pofilename)
       po = polib.pofile(pofilename, check_for_duplicates=True)
       if msg_id != '':
-	try:
-	  po.append(poentry)
-	except ValueError:
-	  print 'The entry already exists, skipping it'
+    try:
+      po.append(poentry)
+    except ValueError:
+      print 'The entry already exists, skipping it'
       po.save(pofilename)
