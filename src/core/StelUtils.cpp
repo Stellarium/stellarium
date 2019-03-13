@@ -1062,7 +1062,6 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 		case 11:
 			return 30;
 			break;
-
 		case 2:
 			if ( year > 1582 )
 			{
@@ -1101,7 +1100,6 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 				}
 			}
 			break;
-
 		case 0:
 			return numberOfDaysInMonthInYear(12, year-1);
 			break;

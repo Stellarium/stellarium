@@ -108,26 +108,6 @@ void TestDates::formatting()
 			 qPrintable("german for -5118-03-10 wrong: " + (StelUtils::localeDateString(-5118, 03, 10, 0))));
 
 	QVERIFY2(-18 == (-5118 % 100), qPrintable("modulus arithmetic works diff: " + QString("%1").arg(-5118 % 100)));
-
-	// test arbitrary fmt
-	// This is useless, as StelUtils::localeDateString() formats dates
-	// according to the *system* locale. On systems where it is not English,
-	// this test fails.
-	// See https://bugreports.qt-project.org/browse/QTBUG-27789. --BM
-//	QLocale::setDefault(QLocale::English);
-
-//	QString easyLong("d dd ddd dddd M MM MMM MMMM yy yyyy");
-//	QVERIFY2(QString::compare(QString("9 09 Sun Sunday 3 03 Mar March 08 2008"), StelUtils::localeDateString(2008, 3, 9, 6, easyLong)) == 0,
-//			 qPrintable("formatter1 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, easyLong)));
-//	QString hardLong("dddddddd '''doh' ''yyyyyyy");
-//	QVERIFY2(QString::compare(QString("SundaySunday 'doh '200808y"), StelUtils::localeDateString(2008, 3, 9, 6, hardLong)) == 0,
-//			 qPrintable("formatter2 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, hardLong)));
-
-	// test detection of offset from UTC.
-	// double mar122008 = QDate(2008,3,12).toJulianDay();
-	// qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar122008), -4.f);
-	// double mar012008 = QDate(2008,3,1).toJulianDay();
-	// qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar012008), -5.f);
 }
 
 void TestDates::testRolloverAndValidity()
@@ -397,6 +377,8 @@ void TestDates::testLeapYears()
 	data << 2018 << false;
 	data << 2019 << false;
 	data << 2020 << true;
+	data << 1852 << true;
+	data << 1851 << false;
 
 	while (data.count()>=2)
 	{
@@ -439,6 +421,11 @@ void TestDates::testNumberOfDaysInMonthInYear()
 	data << 2020 << 10	<< 31;
 	data << 2020 << 11	<< 30;
 	data << 2020 << 12	<< 31;
+	data << 2020 << 0		<< 31;
+	data << 2020 << 13	<< 31;
+	data << 1852 << 1		<< 31;
+	data << 1852 << 2		<< 29;
+	data << 1851 << 2		<< 28;
 
 	while (data.count()>=3)
 	{

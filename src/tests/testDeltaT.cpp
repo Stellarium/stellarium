@@ -162,7 +162,6 @@ void TestDeltaT::testDeltaTByChaprontMeeus()
 	data << 1998 <<  63.0;
 	
 	// test data marked as * taken Mathematical Astronomical Morsels III, p. 8. [ISBN 0-943396-81-6]
-	
 
 	// accuracy 0.9 seconds for years range 1800-1997
 	while(data.count() >= 2)
