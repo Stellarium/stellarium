@@ -5,9 +5,9 @@ import errno, glob, polib, re, os, getopt, sys
 from time import strftime
 
 def usage():
-    print '\nUsage: python %s [OPTION]' %os.path.basename(sys.argv[0])
-    print '       extract existing translations from desktop file'
-    print 'Options: -h, --help                              : usage'
+    print('\nUsage: python %s [OPTION]' %os.path.basename(sys.argv[0]))
+    print('       extract existing translations from desktop file')
+    print('Options: -h, --help                              : usage')
     sys.exit(2)
 try:
     opts, args = getopt.getopt(sys.argv[1:], "h:", ["help"])
@@ -79,5 +79,5 @@ for langfile in files:
     try:
       po.append(poentry)
     except ValueError:
-      print 'The entry already exists, skipping it'
+      print('The entry already exists, skipping it')
       po.save(pofilename)

@@ -11,15 +11,15 @@ import subprocess
 def allDSS():
     for i in range(1,895):
         str = "/home/fab1/prog/stellarium/util/dssheaderToJSON.py" + " S %i %i" % (i,i+1)
-        print str
+        print(str)
         try:
             retcode = subprocess.call(str, shell=True)
             if retcode < 0:
-                print >>sys.stderr, "Child was terminated by signal", -retcode
+                print(f"Child was terminated by signal {retcode}", file=sys.stderr)
             else:
-                print >>sys.stderr, "Child returned", retcode
+                print("Child returned {retcode}", file=sys.stderr)
         except OSError, e:
-            print >>sys.stderr, "Execution failed:", e
+            print(f"Execution failed: {e}", file=sys.stderr)
 
 if __name__ == "__main__":
     allDSS()

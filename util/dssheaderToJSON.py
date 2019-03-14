@@ -134,7 +134,7 @@ def generateJpgTiles(inDirectory, outDirectory):
         fullOutDir = outDirectory + "/x%.2d" % (2 ** curLevel)
         if not os.path.exists(fullOutDir):
             os.makedirs(fullOutDir)
-            print "Create directory " + fullOutDir
+            print("Create directory " + fullOutDir)
         for i in range(0, 2 ** curLevel):
             for j in range(0, 2 ** curLevel):
                 baseFileName = "x%.2d_%.2d_%.2d" % (2 ** curLevel, i, j)
@@ -149,7 +149,7 @@ def generateJpgTiles(inDirectory, outDirectory):
 
 def plateRange():
     if len(sys.argv) != 4:
-        print "Usage: " + sys.argv[0] + " prefix startPlate stopPlate "
+        print("Usage: " + sys.argv[0] + " prefix startPlate stopPlate ")
         exit(-1)
     prefix = sys.argv[1]
     outDir = "/tmp/tmpPlate"
@@ -168,13 +168,13 @@ def plateRange():
         masterTile.outputJSON(qCompress=True, maxLevelPerFile=2, outDir=outDir + '/')
 
         command = "cd /tmp && mv tmpPlate " + plateName + " && tar -cf " + plateName + ".tar " + plateName + " && rm -rf " + plateName
-        print command
+        print(command)
         os.system(command)
         command = "cd /tmp && scp " + plateName + ".tar vosw@voint1.hq.eso.org:/work/fabienDSS2/" + plateName + ".tar"
-        print command
+        print(command)
         os.system(command)
         command = "rm /tmp/" + plateName + ".tar"
-        print command
+        print(command)
         os.system(command)
 
 

@@ -52,7 +52,7 @@ for root, dirnames, filenames in os.walk(base):
     for filename in fnmatch.filter(filenames, '*.utf8'):
         files.append(os.path.join(root, filename))
 
-print "Got %d files" % len(files)
+print("Got %d files" % len(files))
 
 # Retreive all the http links.
 for f in files:
@@ -65,7 +65,7 @@ for f in files:
         urls.add(url)
         sources.setdefault(url, set()).add(f)
 
-print "Got %d urls" % len(urls)
+print("Got %d urls" % len(urls))
 print
 
 # Test each link one by one.
@@ -79,10 +79,10 @@ for url in urls:
             continue
     except Exception:
         s = u"err"
-    print url.encode('utf-8')
-    print s
-    print "Found in:"
+    print(url.encode('utf-8'))
+    print(s)
+    print("Found in:")
     for f in sources[url]:
-        print f
+        print(f)
     print
     sys.stdout.flush()

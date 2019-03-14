@@ -110,7 +110,7 @@ def main():
 
     # Need at least an image file as input
     if len(args) < 1:
-        print "Usage: "+os.path.basename(sys.argv[0])+" imageFile [options]"
+        print("Usage: "+os.path.basename(sys.argv[0])+" imageFile [options]")
         exit(0)
     imgFile = sys.argv[1]
 
@@ -121,7 +121,7 @@ def main():
     else:
         # Else try to generate the WCS from the xmp informations contained in the file header
         import libxmp
-        print "Try to import WCS info from the XMP headers in the image"
+        print("Try to import WCS info from the XMP headers in the image")
         libxmp.XMPFiles.initialize()
         xmpfile = libxmp.XMPFiles()
         xmpfile.open_file(imgFile, libxmp.consts.XMP_OPEN_READ)
@@ -174,7 +174,7 @@ def main():
     nbLevels = 0
     while 2**nbLevels*options.tileSize<maxSize:
         nbLevels+=1
-    print "Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels+1, 'levels'
+    print("Will tesselate image (",im.size[0],"x",im.size[1],") in", nbTileX,'x',nbTileY,'tiles on', nbLevels+1, 'levels')
 
     # Create the master level 0 tile, which recursively creates the subtiles
     masterTile = createTile(0, nbLevels, 0, 0, wcs, im, options.makeImageTiles, options.tileSize)

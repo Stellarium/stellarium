@@ -60,7 +60,7 @@ def enhancePlate(plateName, plate, referenceImage):
     This is Fabien's version. It just attempts to scale brightness based on the average
     brightness on a 8x8 map"""
 
-    print "Enhance darker part of the image"
+    print("Enhance darker part of the image")
     plate = plate.point(lambda t: 2. * t - 256. * (t / 256.) ** 1.8)
 
     """
@@ -68,7 +68,7 @@ def enhancePlate(plateName, plate, referenceImage):
     referenceImage.save("tmp/%s-reference.jpg" % plateName, 'JPEG', quality=95)
     return plate
     
-    print "Enhance plate"
+    print("Enhance plate")
     plateMap = plate.resize((8,8) , Image.ANTIALIAS)
     plateMap.save("tmp/%s-full.jpg" % plateName, 'JPEG', quality=95)
     
@@ -84,7 +84,7 @@ def enhancePlate(plateName, plate, referenceImage):
         for j in range(plate.size[1]):
             platePix[i, j] = platePix[i, j]+i*step
     
-    print "Done enhancing plate"
+    print("Done enhancing plate")
     """
     return plate
 
@@ -96,7 +96,7 @@ def enhancePlate2(plateName, plate, referenceImage):
 
     enhanceScaling = 32
 
-    print "Enhance plate"
+    print("Enhance plate")
     plate = plate.resize((256, 256), Image.BICUBIC)
     plate.save("tmp/%s-full.jpg" % plateName, 'JPEG', quality=95)
     # referenceImage = referenceImage.resize(plate.size, Image.BILINEAR)
@@ -110,7 +110,7 @@ def enhancePlate2(plateName, plate, referenceImage):
 
     plate = Image.open("tmp/%s-enhanced.jpg" % plateName)
     plate = plate.resize((plate.size[0] * enhanceScaling, plate.size[0] * enhanceScaling), Image.BILINEAR)
-    print "Done enhancing plate"
+    print("Done enhancing plate")
 
     return plate
 

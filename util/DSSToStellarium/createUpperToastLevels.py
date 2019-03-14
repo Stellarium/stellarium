@@ -23,15 +23,15 @@ outDirectory = 'results'
 level=11
 imSize = 256
 
-print "Generate upper levels tile in " + outDirectory
+print("Generate upper levels tile in " + outDirectory)
 
 if not os.path.exists(outDirectory):
-    print "Output directory %s doesn't exist. It should be there and contain tiles for level %d" % (outDirectory, level)
+    print("Output directory %s doesn't exist. It should be there and contain tiles for level %d" % (outDirectory, level))
     exit(-1)
 
 level=level-1
 while level>=0:
-    print "Start level %s" % level
+    print("Start level %s" % level)
     os.system("mkdir %s/%d" % (outDirectory, level))
     allTiles = []
     for filename in os.listdir("%s/%d" % (outDirectory, level+1)):
@@ -56,7 +56,7 @@ while level>=0:
     for (x, y) in toGenerate:
         i = i+1
         if i % 1000 == 0:
-            print "%d/%d" % (i,len(toGenerate))
+            print("%d/%d" % (i,len(toGenerate)))
         resImg=Image.new("RGB", (imSize, imSize))
         tile = toGenerate[(x, y)]
         if (x*2, y*2) in tile:

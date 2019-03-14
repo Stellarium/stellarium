@@ -47,15 +47,15 @@ def generatePlate(plateName, maxLevel):
     if not os.path.exists("tmp"):
         os.system("mkdir tmp")
 
-    print "-------- " + plateName + " --------"
+    print("-------- " + plateName + " --------")
     if os.path.exists("results/%s.stamp" % (plateName)):
-        print "Plate %s already processed" % (plateName)
+        print("Plate %s already processed" % (plateName))
         return
 
     assert os.path.exists("preparedPlates")
     assert os.path.exists("preparedPlates/%s/%s.jpg" % (plateName, plateName))
     
-    print "Get list of TOAST tiles intersecting the plate"
+    print("Get list of TOAST tiles intersecting the plate")
     
     wcs = dssUtils.DssWcs(plateName)
     
@@ -64,12 +64,12 @@ def generatePlate(plateName, maxLevel):
     points = [[0,0], [19200, 0], [19200, 19200], [0, 19200]]
     plateCornersRaDec = [wcs.pixelToRaDec(p) for p in points]
     cmd = './toastForShape %d "' % (maxLevel) + json.dumps(plateCornersRaDec).replace('"', '\\"') + '"'
-    print cmd
+    print(cmd)
     p = Popen(cmd, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
     jsonTriangles = p.stdout.read()
     triangles = json.loads(jsonTriangles)
 
-    print "Convert the pixel position of the toast tiles into the existing DSS image"
+    print("Convert the pixel position of the toast tiles into the existing DSS image")
     allTrianglesRadecPos = []
     for tri in triangles:
         allTrianglesRadecPos.extend(tri['tile'][1:])
@@ -86,7 +86,7 @@ def generatePlate(plateName, maxLevel):
 
     tiles = tiles.values()
 
-    print "Cut and save the toast tiles (%d tiles at level %s)." % (len(tiles), maxLevel)
+    print("Cut and save the toast tiles (%d tiles at level %s)." % (len(tiles), maxLevel))
 
     # Create the sub directories
 
@@ -94,7 +94,7 @@ def generatePlate(plateName, maxLevel):
     os.system("mkdir tmp/%s/%d" % (plateName, maxLevel))
 
 
-    print "load full plate image"
+    print("load full plate image")
     resImg = Image.open("preparedPlates/%s/%s.jpg" % (plateName, plateName))
     #draw = ImageDraw.Draw(resImg)
     #font = ImageFont.truetype("DejaVuSans.ttf", 600)
@@ -127,7 +127,7 @@ def generatePlate(plateName, maxLevel):
                 return True
         return False
       
-    print "Cut tiles"
+    print("Cut tiles")
     for tile in tiles:
         tt = []
         partial = False
@@ -144,7 +144,7 @@ def generatePlate(plateName, maxLevel):
         xy = tile['XY']
         im.save("tmp/%s/%d/%d_%d%s.jpg" % (plateName, maxLevel, xy[0], xy[1], "-partial" if partial else ""), quality=95)
 
-    print "package and store results"
+    print("package and store results")
     os.system("mv tmp/%s/%d/* results/%d/" % (plateName, maxLevel, maxLevel))
     os.system("rm -rf tmp/%s" % plateName)
     os.system("touch results/%s.stamp" % plateName)

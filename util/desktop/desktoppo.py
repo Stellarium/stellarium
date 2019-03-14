@@ -12,10 +12,10 @@ from time import strftime
 
 
 def usage():
-    print '\nUsage: python %s [OPTION]' % os.path.basename(sys.argv[0])
-    print '       generate pot catalogs and updates po files for desktop resources in the specified directory'
-    print 'Options: -h, --help                              : usage'
-    print '         -d <directory>, --directory <directory> : directory with desktop files'
+    print('\nUsage: python %s [OPTION]' % os.path.basename(sys.argv[0]))
+    print('       generate pot catalogs and updates po files for desktop resources in the specified directory')
+    print('Options: -h, --help                              : usage')
+    print('         -d <directory>, --directory <directory> : directory with desktop files')
     sys.exit(2)
 
 
@@ -90,7 +90,7 @@ for langfile in files:
             try:
                 pot.append(potentry)
             except ValueError:
-                print 'The entry already exists'
+                print('The entry already exists')
 pot.save('../../po/stellarium-desktop/stellarium-desktop.pot')
 
 # Merge translations
