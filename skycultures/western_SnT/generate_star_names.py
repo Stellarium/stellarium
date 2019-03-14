@@ -4,17 +4,20 @@
 # Reads the Sky & Telescope official star names document (.docx)
 # given as the first argument, and returns star_names.fab output
 
-import docx
-import sys
 import re
+import sys
+from collections import defaultdict
+
+import docx
 import percache
 from astroquery.vizier import Vizier
-from collections import defaultdict
 
 # livesync=True so that even if we ctrl-c out of
 # the program, any previously cached values will
 # be present for future invocations
 cache = percache.Cache('.hip_cache_stars', livesync=True)
+
+
 @cache
 def get_hip(name):
     """
@@ -48,9 +51,10 @@ def get_hip(name):
     else:
         return table['HIP'][0]
 
+
 if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("Usage: {} SnT_star_names.docx".format(sys.argv[0]), file=sys.stderr) # lgtm [py/syntax-error]
+        print("Usage: {} SnT_star_names.docx".format(sys.argv[0]), file=sys.stderr)  # lgtm [py/syntax-error]
         sys.exit(1)
 
     doc = docx.Document(sys.argv[1])
@@ -69,13 +73,15 @@ if __name__ == '__main__':
             # There is a list of standard vs non-standard star names in the document
             # that match the regex, so we check for the non-standard names and skip them.
             # The standard names appear later in the document.
-            if m.group(2) in ('Alnair', 'Almaak', 'Alphekka', 'Alnath', 'Etamin', 'Mirphak', 'Phad', 'Rigil Kent', 'Shedir', 'Nonstandard'):
+            if m.group(2) in (
+                    'Alnair', 'Almaak', 'Alphekka', 'Alnath', 'Etamin', 'Mirphak', 'Phad', 'Rigil Kent', 'Shedir',
+                    'Nonstandard'):
                 continue
             # There are two lists of star names, sorted differently.  We just
             # use the first list and skip the second one.
             if m.group(1) in stars:
                 continue
-            stars[m.group(1)] = { }
+            stars[m.group(1)] = {}
             stars[m.group(1)]['bayer'] = m.group(2)
             print("{} -> {} ({})".format(p.text.encode('utf-8'), m.group(1), m.group(2)), file=sys.stderr)
 
@@ -117,10 +123,10 @@ if __name__ == '__main__':
     stars["Arkab"]['hip'] = 95241
 
     # Clean up the data to ensure all stars have HIP designations
-    for name in [ *stars.keys() ]:
+    for name in [*stars.keys()]:
         if 'hip' not in stars[name] or not stars[name]['hip']:
             print('warning: {} has no HIP designation'.format(name), file=sys.stderr)
-            del(stars[name])
+            del (stars[name])
 
     # Print out the star_names.fab formatted data
     for name in sorted(stars, key=lambda k: stars[k]['hip']):

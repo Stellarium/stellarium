@@ -9,9 +9,8 @@ import os
 import sys
 
 import Image
-from astLib import astWCS
-
 import skyTile
+from astLib import astWCS
 
 levels = ["x64", "x32", "x16", "x8", "x4", "x2", "x1"]
 # Define the invalid zones in the plates corners for N and S plates

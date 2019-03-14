@@ -20,11 +20,10 @@ import os
 from multiprocessing import Pool
 
 import Image
+import dssUtils
 import numpy
 from astropy import wcs
 from astropy.io import fits
-
-import dssUtils
 
 # -----------------------------------------------------------
 # Pre-process zipped plates to extract only necessary data
@@ -74,7 +73,7 @@ def preparePlate(plateName):
     os.system("mkdir preparedPlates/%s" % plateName)
     resImg.save("preparedPlates/%s/%s.jpg" % (plateName, plateName))
     os.system("cp %s/x64/%s_00_00_x64.hhh preparedPlates/%s/%s_00_00_x64-FITS-header.hhh" % (
-    plateName, plateName, plateName, plateName))
+        plateName, plateName, plateName, plateName))
 
     wcsWithoutCorrection = dssUtils.DssWcs(plateName)
 

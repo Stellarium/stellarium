@@ -12,8 +12,7 @@
 import os
 import shutil
 import sys
-from subprocess import Popen
-from subprocess import PIPE
+from subprocess import PIPE, Popen
 
 installDirectory = None
 qtFrameworksDirectory = None
@@ -41,6 +40,7 @@ def processResources():
     shutil.copy(os.path.join(sourceDirectory, 'data/PkgInfo'), installDirectory)
     shutil.copy(os.path.join(sourceDirectory, 'data/Info.plist'), installDirectory)
 
+
 def getListOfLinkedQtFrameworksForFile(file):
     '''
     A utility method used to create a list of Qt frameworks linked into the argument.
@@ -54,6 +54,7 @@ def getListOfLinkedQtFrameworksForFile(file):
         if line.find('Qt') != -1:
             frameworks.append(line[:line.find(' ')])
     return frameworks
+
 
 def copyFrameworkToApp(framework):
     '''
@@ -75,19 +76,23 @@ def copyFrameworkToApp(framework):
     if frameworkName != 'Qt':
         target = os.path.join(installDirectory, 'Frameworks', frameworkName)
         if not os.path.exists(target):
-            shutil.copytree(os.path.join(qtFrameworksDirectory, frameworkName), target, symlinks=True, ignore=shutil.ignore_patterns('*debug*', 'Headers', '*.prl'))
+            shutil.copytree(os.path.join(qtFrameworksDirectory, frameworkName), target, symlinks=True,
+                            ignore=shutil.ignore_patterns('*debug*', 'Headers', '*.prl'))
+
 
 def updateName(file):
     '''
     file is expected to be the path as output from tool
     '''
     base = file[file.find(file[file.rfind('/'):]) + 1:]
-    args = ['install_name_tool', '-id', '@executable_path/../Frameworks/' + base, os.path.join(installDirectory, 'Frameworks', base)]
+    args = ['install_name_tool', '-id', '@executable_path/../Frameworks/' + base,
+            os.path.join(installDirectory, 'Frameworks', base)]
     # print(args)
     process = Popen(args, stdout=PIPE, stderr=PIPE)
     output, oerr = process.communicate()
     if process.returncode != 0:
         print('Error updating name.\n%s\n%s' % (output, oerr))
+
 
 def updateLibraryPath(file, where):
     '''
@@ -104,17 +109,18 @@ def updateLibraryPath(file, where):
     else:
         base = file[file.find(file[file.rfind('/'):]) + 1:]
 
-    args = ['install_name_tool', '-change', '', '', os.path.join(installDirectory, where, base )]
+    args = ['install_name_tool', '-change', '', '', os.path.join(installDirectory, where, base)]
     for framework in getListOfLinkedQtFrameworksForFile(file):
         # otool adds self, so ignore it
         if not framework == file:
             args[2] = framework
             args[3] = '@executable_path/../Frameworks' + framework[framework.find(framework[framework.rfind('/'):]):]
-            #print(args)
+            # print(args)
             process = Popen(args, stdout=PIPE, stderr=PIPE)
             output, oerr = process.communicate()
             if process.returncode != 0:
                 print('Error updating name.\n%s\n%s' % (output, oerr))
+
 
 def processFrameworks():
     '''
@@ -127,9 +133,9 @@ def processFrameworks():
     frameworks = getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))
     # QtMultimedia?
     if 'QtMultimedia' in ' '.join(frameworks):
-        frameworks.append(frameworks[-1].replace('QtMultimedia','QtMultimediaWidgets'))
+        frameworks.append(frameworks[-1].replace('QtMultimedia', 'QtMultimediaWidgets'))
         # QtOpenGL is required by QtMultimediaWidgets
-        frameworks.append(frameworks[-1].replace('QtCore','QtOpenGL'))
+        frameworks.append(frameworks[-1].replace('QtCore', 'QtOpenGL'))
     for framework in frameworks:
         copyFrameworkToApp(framework)
         allFramework.append(framework)
@@ -138,10 +144,11 @@ def processFrameworks():
         for dependentFramework in getListOfLinkedQtFrameworksForFile(framework):
             copyFrameworkToApp(dependentFramework)
             allFramework.append(dependentFramework)
-    # for framework in set(allFramework):
+        # for framework in set(allFramework):
         updateName(framework)
         print('Processing %s' % framework)
         updateLibraryPath(framework, 'Frameworks')
+
 
 def copyPluginDirectory(pluginDirectoryName):
     '''
@@ -161,11 +168,12 @@ def copyPluginDirectory(pluginDirectoryName):
     for plugin in os.listdir(toDir):
         updateLibraryPath(plugin, 'plugins/' + pluginDirectoryName)
 
+
 def processPlugins():
     '''
     Copies over and process all Qt plugins.
     '''
-    #Setup the plugin directory
+    # Setup the plugin directory
     pluginsDirectory = os.path.join(installDirectory, 'plugins')
     os.mkdir(pluginsDirectory)
 
@@ -173,24 +181,28 @@ def processPlugins():
     copyPluginDirectory('imageformats')
     copyPluginDirectory('iconengines')
     # check multimedia support
-    if 'QtMultimedia' in ' '.join(getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))):
+    if 'QtMultimedia' in ' '.join(
+            getListOfLinkedQtFrameworksForFile(os.path.join(installDirectory, 'MacOS/stellarium'))):
         copyPluginDirectory('mediaservice')
         copyPluginDirectory('audio')
 
     # copy over the Cocoa platform plugin; we do  single one here, as we do not want every platform
     os.mkdir(os.path.join(pluginsDirectory, 'platforms'))
-    shutil.copy(os.path.join(qtPluginsDirectory, 'platforms', 'libqcocoa.dylib'), os.path.join(pluginsDirectory, 'platforms'))
+    shutil.copy(os.path.join(qtPluginsDirectory, 'platforms', 'libqcocoa.dylib'),
+                os.path.join(pluginsDirectory, 'platforms'))
     for framework in getListOfLinkedQtFrameworksForFile(os.path.join(pluginsDirectory, 'platforms', 'libqcocoa.dylib')):
         copyFrameworkToApp(framework)
         updateLibraryPath(framework, 'Frameworks')
     # Always update paths after copying...
     updateLibraryPath('libqcocoa.dylib', 'plugins/platforms')
 
+
 def processBin():
     '''
     Moves the binary to the correct location
     '''
     os.rename(os.path.join(installDirectory, 'bin'), os.path.join(installDirectory, 'MacOS'))
+
 
 def processDMG():
     '''
@@ -220,19 +232,19 @@ def processDMG():
         print('Error deleting temporary directory.\n%s\n%s' % (output, oerr))
 
 
-
 def main():
     '''
     main expects three arguments:
     '''
     global installDirectory, sourceDirectory, qtFrameworksDirectory, qtPluginsDirectory
     if len(sys.argv) < 4:
-        print("usage: mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
+        print(
+            "usage: mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS}")
         print(sys.argv)
         return
     installDirectory = sys.argv[1]
     sourceDirectory = sys.argv[2]
-    buildType = sys.argv[3] # ignored for now
+    buildType = sys.argv[3]  # ignored for now
     qtFrameworksDirectory = sys.argv[4]
 
     # qtDirectory will actually be an include dir; we need to convert to the directory where
@@ -242,7 +254,7 @@ def main():
         qtFrameworksDirectory = os.path.dirname(qtFrameworksDirectory)
     else:
         print('The QtCore parameter was expected to be a framework.  Found:' + qtFrameworksDirectory)
-    #now, find the plugins directory
+    # now, find the plugins directory
     qtPluginsDirectory = os.path.normpath(qtFrameworksDirectory + '/../plugins')
     if not os.path.exists(qtPluginsDirectory):
         print('Could not find plugins directory.')
