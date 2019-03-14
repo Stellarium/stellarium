@@ -1265,6 +1265,9 @@ void Oculars::displayPopupMenu()
 		}
 	}
 
+#if QT_VERSION >= 0x050700 && defined(Q_OS_WIN)
+	popup->showTearOffMenu(QCursor::pos());
+#endif
 	popup->exec(QCursor::pos());
 	delete popup;
 }
