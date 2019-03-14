@@ -18,7 +18,7 @@ def allDSS():
                 print(f"Child was terminated by signal {retcode}", file=sys.stderr)
             else:
                 print("Child returned {retcode}", file=sys.stderr)
-        except OSError, e:
+        except OSError as e:
             print(f"Execution failed: {e}", file=sys.stderr)
 
 if __name__ == "__main__":

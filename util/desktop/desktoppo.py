@@ -69,7 +69,7 @@ for langfile in files:
     # Create localization directories if needed
     try:
         os.makedirs(podir)
-    except OSError, e:
+    except OSError as e:
         if e.errno != errno.EEXIST:
             raise
     # open desktop file
