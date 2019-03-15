@@ -4,9 +4,11 @@
 # Reads the Sky & Telescope official star names document (.docx)
 # given as the first argument, and returns star_names.fab output
 
+import argparse
 import re
 import sys
 from collections import defaultdict
+from pathlib import Path
 
 import docx
 import percache
@@ -45,7 +47,7 @@ def get_hip(name):
         table = result['I/239/hip_main']
     except TypeError:
         # A TypeError means that the results didn't include anything from
-        # the I/239/hip_main catalog.  The "in" operator doesn't seem to
+        # the I/239/hip_main catalog. The "in" operator doesn't seem to
         # work with Table objects.
         return None
     else:
@@ -53,11 +55,19 @@ def get_hip(name):
 
 
 if __name__ == '__main__':
-    if len(sys.argv) != 2:
-        print("Usage: {} SnT_star_names.docx".format(sys.argv[0]), file=sys.stderr)  # lgtm [py/syntax-error]
+    parser = argparse.ArgumentParser(
+        description='Reads the Sky & Telescope official star names document (.docx) and prints the star_names.fab')
+    parser.add_argument(dest='input', nargs='?', default='SnT_star_names.docx', type=Path, metavar='input',
+                        help='SnT_star_names.docx file (default: %(default)s)')
+
+    args = parser.parse_args()
+
+    doc_file = Path(args.input)
+    if not doc_file.exists():
+        print(f"'{doc_file}' do not exist.")
         sys.exit(1)
 
-    doc = docx.Document(sys.argv[1])
+    doc = docx.Document(doc_file)
 
     # Get the list of stars from the Word document.  The stars
     # are easy to find because they're in their own paragraphs,
@@ -67,30 +77,30 @@ if __name__ == '__main__':
     # in the star name.
     stars = defaultdict(dict)
     star_re = re.compile('^\s*([^,0-9]+)[ 0-9,]*\t(.*)$')
-    for p in doc.paragraphs:
-        m = re.match(star_re, p.text)
-        if m:
+    for par in doc.paragraphs:
+        match = re.match(star_re, par.text)
+        if match:
             # There is a list of standard vs non-standard star names in the document
             # that match the regex, so we check for the non-standard names and skip them.
             # The standard names appear later in the document.
-            if m.group(2) in (
+            if match.group(2) in (
                     'Alnair', 'Almaak', 'Alphekka', 'Alnath', 'Etamin', 'Mirphak', 'Phad', 'Rigil Kent', 'Shedir',
                     'Nonstandard'):
                 continue
             # There are two lists of star names, sorted differently.  We just
             # use the first list and skip the second one.
-            if m.group(1) in stars:
+            if match.group(1) in stars:
                 continue
-            stars[m.group(1)] = {}
-            stars[m.group(1)]['bayer'] = m.group(2)
-            print("{} -> {} ({})".format(p.text.encode('utf-8'), m.group(1), m.group(2)), file=sys.stderr)
+            stars[match.group(1)] = {}
+            stars[match.group(1)]['bayer'] = match.group(2)
+            print(f"{par.text.encode('utf-8')} -> {match.group(1)} ({match.group(2)})", file=sys.stderr)
 
     # Now get the HIP designator for each star
     try:
         for name in sorted(stars):
-            print("{} ({})".format(name, stars[name]['bayer']), file=sys.stderr)
+            print(f"{name} ({stars[name]['bayer']})", file=sys.stderr)
             for n in (stars[name]['bayer'], name,):
-                print(" * {}: ".format(n), end='', file=sys.stderr)
+                print(" * {n}: ", end='', file=sys.stderr)
                 hip = get_hip(n)
                 if hip:
                     stars[name]['hip'] = hip
@@ -125,9 +135,9 @@ if __name__ == '__main__':
     # Clean up the data to ensure all stars have HIP designations
     for name in [*stars.keys()]:
         if 'hip' not in stars[name] or not stars[name]['hip']:
-            print('warning: {} has no HIP designation'.format(name), file=sys.stderr)
+            print(f"warning: {name} has no HIP designation", file=sys.stderr)
             del (stars[name])
 
     # Print out the star_names.fab formatted data
     for name in sorted(stars, key=lambda k: stars[k]['hip']):
-        print('{:>6}|_("{}")'.format(stars[name]['hip'], name))
+        print(f"{stars[name]['hip']:>6}|_(\"{name}\")")

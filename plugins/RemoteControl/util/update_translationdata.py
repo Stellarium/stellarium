@@ -2,30 +2,27 @@
 #
 # Updates the translationdata.js in the data/webroot folder using the current stellarium-remotecontrol.jst file
 
+import argparse
 import re
 import sys
 from pathlib import Path
 
 
 def main():
-    '''
-    main expects 2 arguments: <stellarium-remotecontrol.jst> <translationdata.js>
-    '''
+    parser = argparse.ArgumentParser(
+        description='Updates the translationdata.js in the data/webroot folder using the current'
+                    ' stellarium-remotecontrol.jst file')
+    parser.add_argument(dest='input', type=Path, metavar='input', help='stellarium-remotecontrol.jst')
+    parser.add_argument(dest='output', type=Path, metavar='output', help='translationdata.js file')
 
-    if len(sys.argv) < 3:
-        print("usage: update_translationdata.py <stellarium-remotecontrol.jst> <translationdata.js>")
-        print(sys.argv)
-        return
+    args = parser.parse_args()
 
-    jst_file = Path(sys.argv[1])
-    js_file = Path(sys.argv[2])
+    jst_file = Path(args.input)
+    js_file = Path(args.output)
 
     if not jst_file.exists():
         print(f"'{jst_file}' do not exist.")
-        return
-    if not js_file.exists():
-        print(f"'{js_file}' do not exist.")
-        return
+        sys.exit(1)
 
     msg_pattern = re.compile(r'^msgid "([^"\\]*(?:\\.[^"\\]*)*)"$', re.MULTILINE)
 
