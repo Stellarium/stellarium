@@ -15,7 +15,8 @@ def snt_data():
     Reads data from the STDIN and returns a generator that
     returns a dict with each field parsed out.
     """
-    #                              mag           ra          npd             bayer              sup       weight    cons
+    #      mag           ra          npd             bayer              sup       weight    cons
+    # ([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-ZZa-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})
     data_regex = re.compile(
         r'([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-ZZa-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})')
     for line in sys.stdin:
@@ -47,7 +48,7 @@ def snt_data():
             }
         else:
             if not line.startswith('#'):
-                print("WARNING: No match: {}".format(line), file=sys.stderr)  # lgtm [py/syntax-error]
+                print(f"WARNING: No match: {line}", file=sys.stderr)  # lgtm [py/syntax-error]
 
 
 # livesync=True so that even if we ctrl-c out of
@@ -70,8 +71,8 @@ def get_hip(ra, dec, mag):
     you can delete the .hip_cache file to perform
     fresh lookups.
     """
-    coord = SkyCoord(ra=Angle("{} hours".format(ra)),
-                     dec=Angle("{} degree".format(dec)),
+    coord = SkyCoord(ra=Angle(f"{ra} hours"),
+                     dec=Angle(f"{dec} degree"),
                      obstime="J2000.0")
 
     # Search the Hipparcos catalog, and only return results that include
@@ -79,7 +80,7 @@ def get_hip(ra, dec, mag):
     # top result is almost certainly the star we want.
     v = Vizier(catalog='I/239/hip_main', columns=["HIP", "+Vmag"])
     # Constrain the search to stars within 1 Vmag of our target
-    v.query_constraints(Vmag="{}..{}".format(mag - 0.5, mag + 0.5))
+    v.query_constraints(Vmag=f"{mag - 0.5}..{mag + 0.5}")
 
     # Start with a targeted search, which returns more quickly from the
     # API. If that fails to find a star, query a 3 degree diameter circle
@@ -129,7 +130,7 @@ if __name__ == '__main__':
                 raise ValueError(
                     "Unable to locate HIP for {bayer} {constellation} vertex [ra={ra}, dec={dec}, mag={mag}]".format(
                         **vertex))
-            print("HIP {}".format(current_hip), file=sys.stderr, flush=True)
+            print(f"HIP {current_hip}", file=sys.stderr, flush=True)
 
             # Append a new line tuple to the constellation if we are still
             # on the same line, and the previous vertex is defined.
@@ -150,7 +151,7 @@ if __name__ == '__main__':
     for constellation in sorted(constellationship.keys()):
         # The format of constellationship.fab is:
         # <constellation name> <number of lines> startHIP endHIP startHIP endHIP ...
-        print("{} {} {}".format(constellation, len(constellationship[constellation]),
-                                " ".join(["{} {}".format(i[0], i[1]) for i in constellationship[constellation]])))
+        hips = " ".join(["{} {}".format(i[0], i[1]) for i in constellationship[constellation]])
+        print(f"{constellation} {len(constellationship[constellation])} {hips}")
 
     sys.exit(exitval)
