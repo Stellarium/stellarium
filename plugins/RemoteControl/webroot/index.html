@@ -597,7 +597,10 @@
 			      <td><span class="stelproperty" data-prop="ConstellationMgr.artIntensity" data-numberformat="n2"></span></td>
 				  <td><div id="skyculture_artIntensity" class="slider stelproperty flex-expand" data-prop="ConstellationMgr.artIntensity" data-min="0" data-max="1" data-step="0.05" data-numberformat="n2"></div></td>
 			  </tr>
-			  <tr><td colspan="3"><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" /><?= tr("Show boundaries")?></label></td></tr>
+			  <tr><td><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.boundariesDisplayed" /><?= tr("Show boundaries with thickness")?></label></td>
+          <td><span class="stelproperty" data-prop="ConstellationMgr.constellationBoundariesThickness" data-numberformat="n0"></span></td>
+          <td><div id="skyculture_cstBoundariesThickness" class="slider stelproperty flex-expand" data-prop="ConstellationMgr.constellationBoundariesThickness" data-min="1" data-max="5" data-step="1" data-numberformat="n0"></div></td>
+        </tr>
               <tr><td colspan="3"><label><input type="checkbox" class="stelproperty" name="SolarSystem.flagNativePlanetNames" /><?= tr("Use native names for planets")?></label></td></tr>
               <tr><td colspan="3"><label><input type="checkbox" class="stelproperty" name="ConstellationMgr.isolateSelected" /><?= tr("Constellation selection isolated")?></label></td></tr>
 		  </table>		

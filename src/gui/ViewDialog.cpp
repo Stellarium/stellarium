@@ -416,6 +416,7 @@ void ViewDialog::createDialogContent()
 	connectIntProperty(ui->constellationLineThicknessSpinBox,	"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox,	"actionShow_Constellation_Boundaries");
+	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
 	connectCheckBox(ui->showConstellationArtCheckBox,		"actionShow_Constellation_Art");	
 	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,	"ConstellationMgr.artIntensity");
 

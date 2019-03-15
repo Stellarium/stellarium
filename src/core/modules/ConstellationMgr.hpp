@@ -95,7 +95,10 @@ class ConstellationMgr : public StelObjectModule
 		   READ getConstellationLineThickness
 		   WRITE setConstellationLineThickness
 		   NOTIFY constellationLineThicknessChanged)
-
+	Q_PROPERTY(int constellationBoundariesThickness
+		   READ getConstellationBoundariesThickness
+		   WRITE setConstellationBoundariesThickness
+		   NOTIFY constellationBoundariesThicknessChanged)
 	Q_ENUMS(ConstellationDisplayStyle)
 
 public:
@@ -269,6 +272,12 @@ public slots:
 	//! Get the thickness of lines of the constellations
 	int getConstellationLineThickness() const { return constellationLineThickness; }
 
+	//! Set the thickness of boundaries of the constellations
+	//! @param thickness of line in pixels
+	void setConstellationBoundariesThickness(const int thickness);
+	//! Get the thickness of boundaries of the constellations
+	int getConstellationBoundariesThickness() const { return constellationBoundariesThickness; }
+
 	//! Remove constellations from selected objects
 	void deselectConstellations(void);
 
@@ -292,6 +301,7 @@ signals:
 	void namesDisplayedChanged(const bool displayed) const;
 	void constellationsDisplayStyleChanged(const ConstellationMgr::ConstellationDisplayStyle style) const;
 	void constellationLineThicknessChanged(int thickness) const;
+	void constellationBoundariesThicknessChanged(int thickness) const;
 
 private slots:
 	//! Limit the number of constellations to draw based on selected stars.
@@ -402,6 +412,9 @@ private:
 
 	// Store the thickness of lines of the constellations
 	int constellationLineThickness;
+
+	// Store the thickness of boundaries of the constellations
+	int constellationBoundariesThickness;
 };
 
 #endif // CONSTELLATIONMGR_HPP

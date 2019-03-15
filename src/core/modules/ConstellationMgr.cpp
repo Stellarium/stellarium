@@ -62,7 +62,8 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
 	  namesDisplayed(0),
-	  constellationLineThickness(1)
+	  constellationLineThickness(1),
+	  constellationBoundariesThickness(1)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -97,6 +98,7 @@ void ConstellationMgr::init()
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
 	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1).toInt());
+	setConstellationLineThickness(conf->value("viewing/constellation_boundaries_thickness", 1).toInt());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (starloreDisplayStyle=="translated")
@@ -411,6 +413,18 @@ void ConstellationMgr::setConstellationLineThickness(const int thickness)
 			constellationLineThickness = 1;
 
 		emit constellationLineThicknessChanged(thickness);
+	}
+}
+
+void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
+{
+	if(thickness!=constellationBoundariesThickness)
+	{
+		constellationBoundariesThickness = thickness;
+		if (constellationBoundariesThickness<=0) // The line can not be negative or zero thickness
+			constellationBoundariesThickness = 1;
+
+		emit constellationBoundariesThicknessChanged(thickness);
 	}
 }
 
@@ -1359,10 +1373,16 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	sPainter.setBlending(false);
+	if (constellationBoundariesThickness>1)
+		sPainter.setLineWidth(constellationBoundariesThickness); // set line thickness
+	sPainter.setLineSmooth(true);
 	for (auto* constellation : constellations)
 	{
 		constellation->drawBoundaryOptim(sPainter);
 	}
+	if (constellationBoundariesThickness>1)
+		sPainter.setLineWidth(1); // restore line thickness
+	sPainter.setLineSmooth(false);
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const
