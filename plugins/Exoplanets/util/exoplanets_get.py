@@ -4,7 +4,7 @@ URL = 'http://exoplanet.eu/catalog/csv/'
 CSV = './exoplanets.csv'
 
 req = urllib2.Request(URL)
-req.add_header('User-Agent', 'Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 3.0; http://stellarium.org)')
+req.add_header('User-Agent', 'Mozilla/5.0 (Stellarium Exoplanets Catalog Updater 3.0; https://stellarium.org)')
 req.add_header('Referer', 'http://exoplanet.eu/catalog/#')
 
 try:
