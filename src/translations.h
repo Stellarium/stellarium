@@ -478,6 +478,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Kamilaroi/Euahlayi");
 		// TRANSLATORS: Name of the sky culture
+		N_("Khoikhoi and San");
+		// TRANSLATORS: Name of the sky culture
 		N_("Korean");
 		// TRANSLATORS: Name of the sky culture
 		N_("Dakota/Lakota/Nakota");
@@ -521,6 +523,10 @@ class Translations
 		N_("Western (Sky & Telescope)");
 		// TRANSLATORS: Name of the sky culture
 		N_("Northern Andes");
+		// TRANSLATORS: Name of the sky culture
+		N_("Xhosa");
+		// TRANSLATORS: Name of the sky culture
+		N_("Zulu");
 
 		
 		// =====================================================================
