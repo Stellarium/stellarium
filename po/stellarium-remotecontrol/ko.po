@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2019-03-15 18:51+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: Shin-JaeHeon <shinjaeheon520614@gmail.com>, 2019\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -109,8 +109,8 @@ msgid "Could not retrieve landscape list"
 msgstr "풍경 목록을 불러오는 데 실패하였습니다."
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
-#: index.html:676 tablet7in.html:724 tablet7in.html:784
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:622
+#: index.html:679 tablet7in.html:727 tablet7in.html:787
 msgid "-none-"
 msgstr "-없음-"
 
@@ -390,79 +390,83 @@ msgstr "성군(星群) 보기 (테두리 표시)"
 msgid "Show ray helpers with thickness"
 msgstr "두께로 광선 도우미 표시"
 
-#: index.html:602 tablet7in.html:695
+#: index.html:600 tablet7in.html:693
+msgid "Show boundaries with thickness"
+msgstr ""
+
+#: index.html:605 tablet7in.html:698
 msgid "Constellation selection isolated"
 msgstr "단 하나의 별자리만을 선택"
 
-#: index.html:606 tablet7in.html:699
+#: index.html:609 tablet7in.html:702
 msgid "Current sky culture"
 msgstr "현재 하늘 상태"
 
-#: index.html:619 tablet7in.html:724
+#: index.html:622 tablet7in.html:727
 msgid "Active script:"
 msgstr "활성화된 스크립트:"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:623 tablet7in.html:728
 msgid "Run selected script"
 msgstr "선택한 스크립트 실행"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:623 tablet7in.html:728
 msgid "Stop current script"
 msgstr "현재 스크립트 중지"
 
-#: index.html:625 tablet7in.html:41 tablet7in.html:709
+#: index.html:628 tablet7in.html:41 tablet7in.html:712
 msgid "Actions"
 msgstr "동작"
 
-#: index.html:629 tablet7in.html:713
+#: index.html:632 tablet7in.html:716
 msgid "Run/toggle action"
 msgstr "동작 실행/ 켜고 끄기"
 
-#: index.html:640 tablet7in.html:748
+#: index.html:643 tablet7in.html:751
 msgid "Planet map"
 msgstr "행성지도"
 
-#: index.html:641 tablet7in.html:749
+#: index.html:644 tablet7in.html:752
 msgid "Planet map pointer"
 msgstr "행성 지도 포인터"
 
-#: index.html:645 tablet7in.html:753
+#: index.html:648 tablet7in.html:756
 msgid "Type to search location"
 msgstr "위치 검색을 위해 입력"
 
-#: index.html:674 tablet7in.html:782
+#: index.html:677 tablet7in.html:785
 msgid "Interaction"
 msgstr "상호작용"
 
-#: index.html:675 tablet7in.html:783
+#: index.html:678 tablet7in.html:786
 msgid "Current scene:"
 msgstr "현재 장면:"
 
-#: index.html:678 tablet7in.html:786
+#: index.html:681 tablet7in.html:789
 msgid "View controls"
 msgstr "관점 조절"
 
-#: index.html:684 tablet7in.html:792
+#: index.html:687 tablet7in.html:795
 msgid "Movement controls"
 msgstr "움직임 조절"
 
-#: index.html:696 tablet7in.html:804
+#: index.html:699 tablet7in.html:807
 msgid "Torchlight"
 msgstr "불빛"
 
-#: index.html:703 tablet7in.html:811
+#: index.html:706 tablet7in.html:814
 msgid "Scene selection"
 msgstr "장면 선택"
 
-#: index.html:707 tablet7in.html:815
+#: index.html:710 tablet7in.html:818
 msgid "Load selected scene"
 msgstr "선택한 장면 불러오기"
 
-#: index.html:731 tablet7in.html:840
+#: index.html:734 tablet7in.html:843
 msgid "No response from server"
 msgstr "서버로부터 응답이 없습니다."
 
-#: index.html:732 tablet7in.html:841
+#: index.html:735 tablet7in.html:844
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "서버로부터 %1 간 응답이 없습니다. 아직도 스텔라리움이 작동 중인가요?"
 
@@ -606,18 +610,18 @@ msgstr "물병자리"
 msgid "Pisces"
 msgstr "물고기자리"
 
-#: tablet7in.html:733
+#: tablet7in.html:736
 msgid "Favorites"
 msgstr "즐겨찾기"
 
-#: tablet7in.html:735
+#: tablet7in.html:738
 msgid "Show 1"
 msgstr "보기 1"
 
-#: tablet7in.html:736
+#: tablet7in.html:739
 msgid "Remove Labels and Images"
 msgstr "레이블과 이미지 삭제하기"
 
-#: tablet7in.html:736
+#: tablet7in.html:739
 msgid "Cleanup Screen"
 msgstr "화면 정리"

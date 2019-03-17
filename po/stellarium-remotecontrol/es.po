@@ -5,16 +5,16 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# Víctor <vegadark@protonmail.com>, 2018
+# Víctor <vegadark@protonmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2019-03-15 18:51+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
-"Last-Translator: Víctor <vegadark@protonmail.com>, 2018\n"
+"Last-Translator: Víctor <vegadark@protonmail.com>, 2019\n"
 "Language-Team: Spanish (https://www.transifex.com/stellarium/teams/80998/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -108,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "No se puede recuperar la lista de paisajes"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
-#: index.html:676 tablet7in.html:724 tablet7in.html:784
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:622
+#: index.html:679 tablet7in.html:727 tablet7in.html:787
 msgid "-none-"
 msgstr "-nada-"
 
@@ -393,79 +393,83 @@ msgstr "Mostrar asterismos con grosor"
 msgid "Show ray helpers with thickness"
 msgstr "Mostrar ayudantes de rayos con grosor"
 
-#: index.html:602 tablet7in.html:695
+#: index.html:600 tablet7in.html:693
+msgid "Show boundaries with thickness"
+msgstr "Mostrar límites con grosor"
+
+#: index.html:605 tablet7in.html:698
 msgid "Constellation selection isolated"
 msgstr "Selección de constelación aislada"
 
-#: index.html:606 tablet7in.html:699
+#: index.html:609 tablet7in.html:702
 msgid "Current sky culture"
 msgstr "Cultura estelar actual"
 
-#: index.html:619 tablet7in.html:724
+#: index.html:622 tablet7in.html:727
 msgid "Active script:"
 msgstr "Script activo:"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:623 tablet7in.html:728
 msgid "Run selected script"
 msgstr "Ejecutar el script seleccionado"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:623 tablet7in.html:728
 msgid "Stop current script"
 msgstr "Detener el script actual"
 
-#: index.html:625 tablet7in.html:41 tablet7in.html:709
+#: index.html:628 tablet7in.html:41 tablet7in.html:712
 msgid "Actions"
 msgstr "Acciones"
 
-#: index.html:629 tablet7in.html:713
+#: index.html:632 tablet7in.html:716
 msgid "Run/toggle action"
 msgstr "Ejecutar/Conmutar acción"
 
-#: index.html:640 tablet7in.html:748
+#: index.html:643 tablet7in.html:751
 msgid "Planet map"
 msgstr "Mapa del planeta"
 
-#: index.html:641 tablet7in.html:749
+#: index.html:644 tablet7in.html:752
 msgid "Planet map pointer"
 msgstr "Apuntador del mapa del planeta"
 
-#: index.html:645 tablet7in.html:753
+#: index.html:648 tablet7in.html:756
 msgid "Type to search location"
 msgstr "Escribe para buscar ubicación"
 
-#: index.html:674 tablet7in.html:782
+#: index.html:677 tablet7in.html:785
 msgid "Interaction"
 msgstr "Interacción"
 
-#: index.html:675 tablet7in.html:783
+#: index.html:678 tablet7in.html:786
 msgid "Current scene:"
 msgstr "Escena actual:"
 
-#: index.html:678 tablet7in.html:786
+#: index.html:681 tablet7in.html:789
 msgid "View controls"
 msgstr "Ver controles"
 
-#: index.html:684 tablet7in.html:792
+#: index.html:687 tablet7in.html:795
 msgid "Movement controls"
 msgstr "Controles de movimiento"
 
-#: index.html:696 tablet7in.html:804
+#: index.html:699 tablet7in.html:807
 msgid "Torchlight"
 msgstr "Antorcha"
 
-#: index.html:703 tablet7in.html:811
+#: index.html:706 tablet7in.html:814
 msgid "Scene selection"
 msgstr "Selección de escena"
 
-#: index.html:707 tablet7in.html:815
+#: index.html:710 tablet7in.html:818
 msgid "Load selected scene"
 msgstr "Cargar escena seleccionada"
 
-#: index.html:731 tablet7in.html:840
+#: index.html:734 tablet7in.html:843
 msgid "No response from server"
 msgstr "No hay respuesta del servidor"
 
-#: index.html:732 tablet7in.html:841
+#: index.html:735 tablet7in.html:844
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr ""
 "No hay respuesta desde el servidor durante %1 segundos. ¿Stellarium aún está"
@@ -611,18 +615,18 @@ msgstr "Acuario"
 msgid "Pisces"
 msgstr "Piscis"
 
-#: tablet7in.html:733
+#: tablet7in.html:736
 msgid "Favorites"
 msgstr "Favoritos"
 
-#: tablet7in.html:735
+#: tablet7in.html:738
 msgid "Show 1"
 msgstr "Mostrar 1"
 
-#: tablet7in.html:736
+#: tablet7in.html:739
 msgid "Remove Labels and Images"
 msgstr "Quitar etiquetas e imágenes"
 
-#: tablet7in.html:736
+#: tablet7in.html:739
 msgid "Cleanup Screen"
 msgstr "Limpiar pantalla"

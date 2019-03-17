@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: stellarium-remotecontrol\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-02-21 12:42+0700\n"
+"POT-Creation-Date: 2019-03-15 18:51+0700\n"
 "PO-Revision-Date: 2017-11-29 01:19+0000\n"
 "Last-Translator: Harry Mensch <hermmensch@gmail.com>, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
@@ -108,8 +108,8 @@ msgid "Could not retrieve landscape list"
 msgstr "Kan landschaplijst niet ophalen"
 
 #: plugins/RemoteControl/webroot/js/plugins/scenery3d.js:22
-#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:619
-#: index.html:676 tablet7in.html:724 tablet7in.html:784
+#: plugins/RemoteControl/webroot/js/ui/scripts.js:76 index.html:622
+#: index.html:679 tablet7in.html:727 tablet7in.html:787
 msgid "-none-"
 msgstr "-geen-"
 
@@ -389,79 +389,83 @@ msgstr "Asterismen met dikte weergeven"
 msgid "Show ray helpers with thickness"
 msgstr "Ray helpers met dikte weergeven"
 
-#: index.html:602 tablet7in.html:695
+#: index.html:600 tablet7in.html:693
+msgid "Show boundaries with thickness"
+msgstr ""
+
+#: index.html:605 tablet7in.html:698
 msgid "Constellation selection isolated"
 msgstr "Geïsoleerde sterrenbeeldselectie"
 
-#: index.html:606 tablet7in.html:699
+#: index.html:609 tablet7in.html:702
 msgid "Current sky culture"
 msgstr "Huidig benamingssysteem"
 
-#: index.html:619 tablet7in.html:724
+#: index.html:622 tablet7in.html:727
 msgid "Active script:"
 msgstr "Actief script:"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:623 tablet7in.html:728
 msgid "Run selected script"
 msgstr "Geselecteerd script draaien"
 
-#: index.html:620 tablet7in.html:725
+#: index.html:623 tablet7in.html:728
 msgid "Stop current script"
 msgstr "Geselecteerd script stoppen"
 
-#: index.html:625 tablet7in.html:41 tablet7in.html:709
+#: index.html:628 tablet7in.html:41 tablet7in.html:712
 msgid "Actions"
 msgstr "Activiteiten"
 
-#: index.html:629 tablet7in.html:713
+#: index.html:632 tablet7in.html:716
 msgid "Run/toggle action"
 msgstr "Start/Stop activiteit"
 
-#: index.html:640 tablet7in.html:748
+#: index.html:643 tablet7in.html:751
 msgid "Planet map"
 msgstr "Planeetkaart"
 
-#: index.html:641 tablet7in.html:749
+#: index.html:644 tablet7in.html:752
 msgid "Planet map pointer"
 msgstr "Planeetkaart aanwijzer"
 
-#: index.html:645 tablet7in.html:753
+#: index.html:648 tablet7in.html:756
 msgid "Type to search location"
 msgstr "Zoeklocatie invoeren"
 
-#: index.html:674 tablet7in.html:782
+#: index.html:677 tablet7in.html:785
 msgid "Interaction"
 msgstr "Interactie"
 
-#: index.html:675 tablet7in.html:783
+#: index.html:678 tablet7in.html:786
 msgid "Current scene:"
 msgstr "Huidige scene:"
 
-#: index.html:678 tablet7in.html:786
+#: index.html:681 tablet7in.html:789
 msgid "View controls"
 msgstr "Beeldbedieningen"
 
-#: index.html:684 tablet7in.html:792
+#: index.html:687 tablet7in.html:795
 msgid "Movement controls"
 msgstr "Bewegingsbedieningen"
 
-#: index.html:696 tablet7in.html:804
+#: index.html:699 tablet7in.html:807
 msgid "Torchlight"
 msgstr "Toortslicht"
 
-#: index.html:703 tablet7in.html:811
+#: index.html:706 tablet7in.html:814
 msgid "Scene selection"
 msgstr "Scene selectie"
 
-#: index.html:707 tablet7in.html:815
+#: index.html:710 tablet7in.html:818
 msgid "Load selected scene"
 msgstr "Geselecteerde scene laden"
 
-#: index.html:731 tablet7in.html:840
+#: index.html:734 tablet7in.html:843
 msgid "No response from server"
 msgstr "Server reageert niet"
 
-#: index.html:732 tablet7in.html:841
+#: index.html:735 tablet7in.html:844
 msgid "No response from server for %1 seconds. Is Stellarium still running?"
 msgstr "Al '%1' seconden geen reactie van de server. Draait Stellarium nog?"
 
@@ -605,18 +609,18 @@ msgstr "Waterman"
 msgid "Pisces"
 msgstr "Vissen"
 
-#: tablet7in.html:733
+#: tablet7in.html:736
 msgid "Favorites"
 msgstr "Favorieten"
 
-#: tablet7in.html:735
+#: tablet7in.html:738
 msgid "Show 1"
 msgstr "Toon 1"
 
-#: tablet7in.html:736
+#: tablet7in.html:739
 msgid "Remove Labels and Images"
 msgstr "Labels en afbeeldingen verwijderen"
 
-#: tablet7in.html:736
+#: tablet7in.html:739
 msgid "Cleanup Screen"
 msgstr "Scherm opschonen"
