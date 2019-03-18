@@ -1334,6 +1334,7 @@ void StelCore::setUseDST(const bool b)
 {
 	flagUseDST = b;
 	StelApp::getInstance().getSettings()->setValue("localization/flag_dst", b);
+	emit flagUseDSTChanged(b);
 }
 
 bool StelCore::getUseCustomTimeZone() const
