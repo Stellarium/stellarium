@@ -75,6 +75,7 @@ public:
 	//! which requires some translation effort during the loading process.
 	//  See LP:1662132
 	// GZ renamed to more clearly indicate these are IANA names.
+	// Besides IANA names, other valid names seem to be "LMST", "LTST" and "system_default".
 	QString ianaTimeZone;
 
 	//! Parse a location from a line serialization

@@ -988,6 +988,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";
 
+			// FIXME: Ensure that ipTimeZone is a valid IANA timezone name!
 			core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
 			core->moveObserverTo(loc, 0.0f, 0.0f);
 			QSettings* conf = StelApp::getInstance().getSettings();
@@ -1044,7 +1045,7 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 
 // Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.
 // If timezone name starts with "UTC", always return unchanged.
-// This is required to store timezone names exactly as we know them, and not mix ours and corrent-iana spelling flavour.
+// This is required to store timezone names exactly as we know them, and not mix ours and current-iana spelling flavour.
 // In practice, reverse lookup to locationDBToIANAtranslations
 QString StelLocationMgr::sanitizeTimezoneStringForLocationDB(QString tzString)
 {
@@ -1086,6 +1087,21 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 		if (!ret.contains(tz))
 			ret.append(tz);
 	}
+	// 0.19: So far, this includes the existing names, but QTimeZone also has a few other names.
+	// Accept others after testing against sanitized names, and especially all UT+/- names!
+
+	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
+	for (const auto& tz : tzList)
+	{
+		QString tzcand=sanitizeTimezoneStringForLocationDB(tz); // try to find name as we use it.
+		if (!ret.contains(tzcand))
+		{
+			qDebug() << "Extra insert Qt/IANA TZ entry from QTimeZone::availableTimeZoneIds(): " << tz << "as" << tzcand;
+			ret.append(QString(tzcand));
+		}
+		// Activate this to get a list of known TZ names...
+	}
+
 	// Special cases!
 	ret.append("LMST");
 	ret.append("LTST");
