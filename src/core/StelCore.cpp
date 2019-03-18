@@ -1344,6 +1344,7 @@ bool StelCore::getUseCustomTimeZone() const
 void StelCore::setUseCustomTimeZone(const bool b)
 {
 	flagUseCTZ = b;
+	emit useCustomTimeZoneChanged(b);
 }
 
 double StelCore::getSolutionEquationOfTime(const double JDE) const
