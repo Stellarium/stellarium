@@ -201,7 +201,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
         libindi/libs/indibase/indistandardproperty.cpp
         libindi/libs/indicom.c
         )
-    target_link_libraries(indiclient zlib_stel)
+    target_link_libraries(indiclient ${ZLIB_LIBRARIES}) # Do not use 2 version of zlib! 
     target_include_directories(indiclient INTERFACE libindi)
     target_include_directories(indiclient INTERFACE libindi/libs)
 
