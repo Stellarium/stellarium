@@ -1268,14 +1268,20 @@ float StelCore::getUTCOffset(const double JD) const
 	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
 	if (!universal.isValid())
 	{
-		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
+		qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
+		// FIXME: QDateTime has no year 0, and therefore likely different leap year rules.
+		// Under which circumstances do we get invalid universal?
 		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
 	}
 
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
 	QTimeZone tz(tzName.toUtf8());
+	if (!tz.isValid())
+	{
+		qWarning() << "Invalid timezone: " << tzName;
+	}
 
 	int shiftInSeconds = 0;
 	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz.isValid() && !QString("LMST LTST").contains(tzName)))
@@ -1285,6 +1291,10 @@ float StelCore::getUTCOffset(const double JD) const
 		//times to UTC if their zones have different daylight saving time rules.
 		local.setTimeSpec(Qt::UTC);
 		shiftInSeconds = universal.secsTo(local);
+		if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
+		{
+			qDebug() << "TZ system_default or invalid, At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+		}
 	}
 	else
 	{
@@ -1295,12 +1305,31 @@ float StelCore::getUTCOffset(const double JD) const
 				shiftInSeconds = tz.offsetFromUtc(universal);
 			else
 				shiftInSeconds = tz.standardTimeOffset(universal);
+			if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
+			{
+				// Something very strange has happened. Find out what.
+				// Trigger this with location Stockholm, TZ=Europe/Stockholm, but as custom TZ.
+				// Then try to wheel back some date in January from year 10 to 0. It jumps to 70!
+				qDebug() << "TZ valid, At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+			}
 		}
 		else
+		{
 			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
-
+			if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
+				qDebug() << "LMST: At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+		}
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
+	}
+
+	if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
+	{
+		// Something very strange has happened. Find out what.
+		// Trigger this with location Stockholm, TZ=Europe/Stockholm, but as custom TZ.
+		// Then try to wheel back some date in January from year 10 to 0. It jumps to 70
+		// because shiftInSeconds suddenly has become INT_MIN!
+		qDebug() << "At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;
