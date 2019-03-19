@@ -1096,7 +1096,7 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 		QString tzcand=sanitizeTimezoneStringForLocationDB(tz); // try to find name as we use it.
 		if (!ret.contains(tzcand))
 		{
-			qDebug() << "Extra insert Qt/IANA TZ entry from QTimeZone::availableTimeZoneIds(): " << tz << "as" << tzcand;
+			//qDebug() << "Extra insert Qt/IANA TZ entry from QTimeZone::availableTimeZoneIds(): " << tz << "as" << tzcand;
 			ret.append(QString(tzcand));
 		}
 		// Activate this to get a list of known TZ names...

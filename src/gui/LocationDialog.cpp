@@ -450,7 +450,7 @@ void LocationDialog::populateTimeZonesList()
 	{
 		tzNames.append(tz);
 		// Activate this to get a list of known TZ names...
-		qDebug() << "Qt/IANA TZ entry from QTimeZone::available: " << tz;
+		//qDebug() << "Qt/IANA TZ entry from QTimeZone::available: " << tz;
 	}
 
 	tzNames.sort();
