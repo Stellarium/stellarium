@@ -161,7 +161,7 @@ private slots:
 
 private:
 	QString lastPlanet; // for caching when switching map
-	QString customTimeZone;  // for caching when switching around timezones. Actually, this has never been set before!
+	QString customTimeZone;  // for caching when switching around timezones.
 	QStringListModel* allModel;
 	QStringListModel* pickedModel;
 	QSortFilterProxyModel *proxyModel;

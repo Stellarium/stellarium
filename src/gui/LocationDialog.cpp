@@ -298,10 +298,6 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		qDebug() << "setFieldsFromLocation(): Empty loc.ianaTimeZone!";
 		tz = "system_default";
 	}
-	// customTimezone is never set and therefore always empty.
-	//if (!customTimeZone.isEmpty())
-	//	tz = customTimeZone;
-	// INSTEAD: If custom had been set previously, restore it!
 	if (core->getUseCustomTimeZone())
 		tz=customTimeZone;
 
@@ -452,7 +448,6 @@ void LocationDialog::populateTimeZonesList()
 		// Activate this to get a list of known TZ names...
 		//qDebug() << "Qt/IANA TZ entry from QTimeZone::available: " << tz;
 	}
-
 	tzNames.sort();
 
 	//Save the current selection to be restored later
@@ -489,7 +484,7 @@ StelLocation LocationDialog::locationFromFields() const
 	if (index < 0)
 	{
 		qWarning() << "LocationDialog::locationFromFields(): no valid planet name from combo?";
-		loc.planetName = QString();//As returned by QComboBox::currentText()
+		loc.planetName = QString("Earth"); //As returned by QComboBox::currentText()
 	}
 	else
 		loc.planetName = ui->planetNameComboBox->itemData(index).toString();
@@ -510,15 +505,13 @@ StelLocation LocationDialog::locationFromFields() const
 	if (index < 0)
 	{
 		qWarning() << "LocationDialog::locationFromFields(): no valid timezone name from combo?";
-		loc.ianaTimeZone = QString(); //As returned by QComboBox::currentText()
+		loc.ianaTimeZone = QString("UTC"); //As returned by QComboBox::currentText()
 	}
 	else
 	{
 		QString tz=ui->timeZoneNameComboBox->itemData(index).toString();
 		loc.ianaTimeZone = tz;
 	}
-
-	// FIXME: At this position loc may have empty planet, country or timezone fields. Better use some defaults?
 	return loc;
 }
 
@@ -544,19 +537,12 @@ void LocationDialog::setLocationFromMap(double longitude, double latitude)
 	setFieldsFromLocation(loc);
 	core->moveObserverTo(loc, 0.);
 	// Only for locations on Earth: set zone to LMST.
-	// FIXME: Find a way to lookup (lon,lat)->country->timezone.
-	//if ((loc.planetName=="Earth") && (customTimeZone.isEmpty()))
-	//if ((loc.planetName=="Earth") ) // Note that customTimeZone is always empty.
-	//	ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
+	// TODO: Find a way to lookup (lon,lat)->country->timezone.
 
 	if (core->getUseCustomTimeZone())
-	{
 		ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData(customTimeZone, Qt::UserRole, Qt::MatchCaseSensitive));
-	}
 	else
-	{
 		ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
-	}
 
 	// Filter location list for nearby sites. I assume Earth locations are better known. With only few locations on other planets in the list, 30 degrees seem OK.
 	LocationMap results = StelApp::getInstance().getLocationMgr().pickLocationsNearby(loc.planetName, longitude, latitude, loc.planetName=="Earth" ? 5.0f: 30.0f);
@@ -627,10 +613,9 @@ void LocationDialog::saveTimeZone()
 	QString tz = ui->timeZoneNameComboBox->itemData(ui->timeZoneNameComboBox->currentIndex()).toString();
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setCurrentTimeZone(tz);
-	if (core->getUseCustomTimeZone())  // (ui->useCustomTimeZoneCheckBox->isChecked())
+	if (core->getUseCustomTimeZone())
 	{
 		StelApp::getInstance().getSettings()->setValue("localization/time_zone", tz);
-		// core->setUseCustomTimeZone(true);
 	}
 }
 
@@ -638,11 +623,9 @@ void LocationDialog::setTimezone(QString tz)
 {
 	disconnectEditSignals();
 
-	//ui->useCustomTimeZoneCheckBox->setChecked(true);
 	int idx=ui->timeZoneNameComboBox->findData(tz, Qt::UserRole, Qt::MatchCaseSensitive);
 	if (idx>=0)
 	{
-		//ui->timeZoneNameComboBox->setEnabled(true);
 		ui->timeZoneNameComboBox->setCurrentIndex(idx);
 	}
 	else
@@ -683,7 +666,6 @@ void LocationDialog::reportEdit()
 	}
 	ui->addLocationToListPushButton->setEnabled(isEditingNew && canSave);
 	ui->deleteLocationFromListPushButton->setEnabled(locationMgr.canDeleteUserLocation(loc.getID()));
-	//ui->timeZoneNameComboBox->setEnabled(isEditingNew && canSave);
 }
 
 // Called when the user clicks on the save button
@@ -714,7 +696,6 @@ void LocationDialog::addCurrentLocationToList()
 }
 
 // Called when the user wants to use the current location as default
-// GZ FIXME: This should be an argument-less function. There is no action to "unset" current location as default.
 void LocationDialog::setDefaultLocation(bool state)
 {
 	if (state)
@@ -755,7 +736,6 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 
 	if (useCustomTimeZone)
 	{
-		// ui->useCustomTimeZoneCheckBox->setChecked(true);
 		saveTimeZone();
 	}
 	else
@@ -777,8 +757,6 @@ void LocationDialog::updateTimeZoneControls(bool useCustomTimeZone)
 		StelApp::getInstance().getSettings()->remove("localization/time_zone");
 		core->setUseCustomTimeZone(false);
 	}
-
-	//ui->timeZoneNameComboBox->setEnabled(useCustomTimeZone);
 }
 
 // called when the user clicks on the IP Query button
