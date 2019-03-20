@@ -369,13 +369,12 @@
 	     from Aldeabaran66
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.19 Images of IC4628, M20, M21, M47, NGC2467, IC2948, NGC3324, 
-	     NGC7590, RCW158
+	4.19 Images of IC4628, M20, M21, M47, NGC2467, NGC3324, NGC7590, RCW158
 	     from Trevor Gerdes
 	     http://www.sarcasmogerdes.com/
 	4.20 Images of NGC1532
-		from users of Ice In Space
-		http://www.iceinspace.com.au/
+	     from users of Ice In Space
+	     http://www.iceinspace.com.au/
 	4.21 Images of NGC3293
 	     from ESO/G. Beccari
 	     http://eso.org/public/
