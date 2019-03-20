@@ -1270,7 +1270,7 @@ float StelCore::getUTCOffset(const double JD) const
 	{
 		qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
-		// FIXME: QDateTime has no year 0, and therefore likely different leap year rules.
+		// NOTE: QDateTime has no year 0, and therefore likely different leap year rules.
 		// Under which circumstances do we get invalid universal?
 		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
 	}
@@ -1279,8 +1279,10 @@ float StelCore::getUTCOffset(const double JD) const
 	if (abs(year)<3)
 	{
 		// Mitigate a QTBUG on Windows (GH #594).
-		// This bug causes offset to be MIN_INT.
-		// We assume a constant shift in this remote history. Application of the named time zones is inappropriate in any case.
+		// This bug causes offset to be MIN_INT in January to March, 1AD.
+		// We assume a constant offset in this remote history,
+		// so we construct yet another date to get a valid offset.
+		// Application of the named time zones is inappropriate in any case.
 		universal = QDateTime(QDate(3, month, day), QTime(hour, minute, second), Qt::UTC);
 	}
 #endif
@@ -1314,41 +1316,23 @@ float StelCore::getUTCOffset(const double JD) const
 				shiftInSeconds = tz.offsetFromUtc(universal);
 			else
 				shiftInSeconds = tz.standardTimeOffset(universal);
-			if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
+			if (abs(shiftInSeconds)>500000 || shiftInSeconds==INT_MIN)
 			{
-				// Something very strange has happened. To find out what, disable the Windows-only clause above (GH #594).
+				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
 				// Trigger this with a named custom TZ like Europe/Stockholm.
-				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70!
-				qDebug() << "TZ valid, At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
-				qDebug() << "Universal: " << universal.toString();
-
-				// FOR REFERENCE:
-				QDateTime errorDate(QDate(1,1,10), QTime(1,23,45), Qt::UTC);
-				QTimeZone myTZ(QString("Europe/Vienna").toUtf8());
-				QTimeZone utTZ(QString("UTC+01:00").toUtf8());
-				QTimeZone sysTZ(QTimeZone::systemTimeZoneId());
-				qDebug() << "Offset for Date " << errorDate.toString() << "in timezone " << myTZ << ": " << myTZ.offsetFromUtc(errorDate);
-				qDebug() << "Offset for Date " << errorDate.toString() << "in timezone " << utTZ << ": " << utTZ.offsetFromUtc(errorDate);
-				qDebug() << "Offset for Date " << errorDate.toString() << "in systimezone " << sysTZ << ": " << sysTZ.offsetFromUtc(errorDate);
+				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+				// an offset of INT_MIN
+				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+				qWarning() << "Universal reference date: " << universal.toString();
 			}
 		}
 		else
 		{
 			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
-			if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
-				qDebug() << "LMST: At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
 		}
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
-	}
-
-	if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
-	{
-		// Something very strange has happened. Find out what.
-		// Trigger this with location Stockholm, TZ=Europe/Stockholm, but as custom TZ.
-		// Then try to wheel back some date in January from year 10 to 0. It jumps to 70
-		// because shiftInSeconds suddenly has become INT_MIN!
-		qDebug() << "At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;

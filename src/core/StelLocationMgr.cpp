@@ -397,6 +397,7 @@ StelLocationMgr::StelLocationMgr()
 	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
 	// initialize the static QMap first if necessary.
+	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.count()==0)
 	{
 		// reported in SF forum on 2017-03-27
@@ -477,6 +478,7 @@ StelLocationMgr::StelLocationMgr(const LocationList &locations)
 
 void StelLocationMgr::setLocations(const LocationList &locations)
 {
+	this->locations.clear();
 	for (const auto& loc : locations)
 	{
 		this->locations.insert(loc.getID(), loc);
@@ -988,8 +990,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";
 
-			// FIXME: Ensure that ipTimeZone is a valid IANA timezone name!
-			core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
+			// Ensure that ipTimeZone is a valid IANA timezone name!
+			QTimeZone ipTZ(ipTimeZone.toUtf8());
+			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
 			core->moveObserverTo(loc, 0.0f, 0.0f);
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
@@ -1004,8 +1007,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	else
 	{
 		qDebug() << "Failure getting IP-based location: \n\t" << networkReply->errorString();
-		// If there is a problem, this must not change to some other location!
-		//core->moveObserverTo(lastResortLocation, 0.0f, 0.0f);
+		// If there is a problem, this must not change to some other location! Just ignore.
 	}
 	networkReply->deleteLater();
 }
@@ -1093,13 +1095,12 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
 	for (const auto& tz : tzList)
 	{
-		QString tzcand=sanitizeTimezoneStringForLocationDB(tz); // try to find name as we use it.
+		QString tzcand=sanitizeTimezoneStringFromLocationDB(tz); // try to find name as we use it in the program.
 		if (!ret.contains(tzcand))
 		{
 			//qDebug() << "Extra insert Qt/IANA TZ entry from QTimeZone::availableTimeZoneIds(): " << tz << "as" << tzcand;
 			ret.append(QString(tzcand));
 		}
-		// Activate this to get a list of known TZ names...
 	}
 
 	// Special cases!
