@@ -1278,7 +1278,7 @@ float StelCore::getUTCOffset(const double JD) const
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
 	QTimeZone tz(tzName.toUtf8());
-	if (!tz.isValid())
+	if (!tz.isValid() && !QString("LMST LTST system_default").contains(tzName))
 	{
 		qWarning() << "Invalid timezone: " << tzName;
 	}
