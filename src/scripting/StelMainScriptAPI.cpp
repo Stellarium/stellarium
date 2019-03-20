@@ -290,10 +290,16 @@ QVariantMap StelMainScriptAPI::getObserverLocationInfo()
 	return map;
 }
 
-void StelMainScriptAPI::setTimezone(QString tz)
+void StelMainScriptAPI::setTimezone(QString tz, int markAsCustom)
 {
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setCurrentTimeZone(tz);
+	switch (markAsCustom){
+		case 0: // and
+		case 1:	core->setUseCustomTimeZone((bool) markAsCustom);
+			break;
+		default: break;
+	}
 }
 
 QStringList StelMainScriptAPI::getAllTimezoneNames()
