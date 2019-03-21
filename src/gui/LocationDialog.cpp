@@ -298,6 +298,9 @@ void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 		qDebug() << "setFieldsFromLocation(): Empty loc.ianaTimeZone!";
 		tz = "system_default";
 	}
+	if (loc.planetName!="Earth") // Check for non-terrestial location...
+		tz = "LMST";
+
 	if (core->getUseCustomTimeZone())
 		tz=customTimeZone;
 

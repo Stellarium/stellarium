@@ -535,7 +535,7 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 	QStringList unknownTZlist;
 	for (auto& loc : res)
 	{
-		if ((loc.ianaTimeZone!="LMST") &&  (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
+		if ((loc.ianaTimeZone!="LMST") && (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
 		{
 			// TZ name which is currently unknown to Qt detected. See if we can translate it, if not: complain to qDebug().
 			QString fixTZname=sanitizeTimezoneStringFromLocationDB(loc.ianaTimeZone);
