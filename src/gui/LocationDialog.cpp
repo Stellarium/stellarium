@@ -259,7 +259,6 @@ void LocationDialog::connectEditSignals()
 	connect(ui->cityNameLineEdit, SIGNAL(textEdited(const QString&)), this, SLOT(reportEdit()));
 }
 
-// This seems to wrongly activate custom TZ!
 void LocationDialog::setFieldsFromLocation(const StelLocation& loc)
 {
 	StelCore *core = StelApp::getInstance().getCore();
