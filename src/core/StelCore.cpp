@@ -1268,7 +1268,7 @@ float StelCore::getUTCOffset(const double JD) const
 	QDateTime universal(QDate(year, month, day), QTime(hour, minute, second), Qt::UTC);
 	if (!universal.isValid())
 	{
-		qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
+		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
 		// NOTE: QDateTime has no year 0, and therefore likely different leap year rules.
 		// Under which circumstances do we get invalid universal?
