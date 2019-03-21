@@ -289,11 +289,11 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 
 QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
+	QString timeZone = "";
+	QString timeZoneST = "";
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		QString timeZone = "";
 		QString currTZ = core->getCurrentTimeZone();
-		QString timeZoneST = "";
 
 		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto") || currTZ.contains("LMST"))
 		{
@@ -316,11 +316,21 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 
 		if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
 			timeZone = QString("%1 (%2)").arg(timeZone, timeZoneST);
-
-		return timeZone;
 	}
 	else
-		return QString();
+	{
+		// TODO: Make sure LMST/LTST would make sense on other planet, or inhibit it?
+		float shift = core->getUTCOffset(JD);
+		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
+		if(shift<0.0f)
+			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
+		else
+			timeZone = QString("UTC+%1").arg(tz.toString("hh:mm"));
+
+		//if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
+		//	timeZone = QString("%1 (%2)").arg(timeZone, timeZoneST);
+	}
+	return timeZone;
 }
 
 // Convert the time format enum to its associated string and reverse

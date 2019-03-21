@@ -1335,6 +1335,35 @@ float StelCore::getUTCOffset(const double JD) const
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
 	}
 
+	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
+	if (loc.planetName!="Earth")
+	{
+		if (tz.isValid() && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		{
+			if (getUseDST())
+				shiftInSeconds = tz.offsetFromUtc(universal);
+			else
+				shiftInSeconds = tz.standardTimeOffset(universal);
+			if (shiftInSeconds==INT_MIN) // triggered error
+			{
+				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
+				// Trigger this with a named custom TZ like Europe/Stockholm.
+				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+				// an offset of INT_MIN
+				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+				qWarning() << "Universal reference date: " << universal.toString();
+			}
+		}
+		else
+		{
+			// TODO: This should give "mean solar time" for any planet.
+			// Combine rotation and orbit, or (for moons) rotation and orbit of parent planet.
+			// LTST is even worse, needs equation of time for other planets.
+			shiftInSeconds = 0; // For now, give UT
+		}
+	}
+
 	float shiftInHours = shiftInSeconds / 3600.0f;
 	return shiftInHours;
 }
