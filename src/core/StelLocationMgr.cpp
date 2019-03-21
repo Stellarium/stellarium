@@ -397,6 +397,7 @@ StelLocationMgr::StelLocationMgr()
 	: nmeaHelper(Q_NULLPTR), libGpsHelper(Q_NULLPTR)
 {
 	// initialize the static QMap first if necessary.
+	// The first entry is the DB name, the second is as we display it in the program.
 	if (locationDBToIANAtranslations.count()==0)
 	{
 		// reported in SF forum on 2017-03-27
@@ -477,6 +478,7 @@ StelLocationMgr::StelLocationMgr(const LocationList &locations)
 
 void StelLocationMgr::setLocations(const LocationList &locations)
 {
+	this->locations.clear();
 	for (const auto& loc : locations)
 	{
 		this->locations.insert(loc.getID(), loc);
@@ -533,7 +535,7 @@ LocationMap StelLocationMgr::loadCitiesBin(const QString& fileName)
 	QStringList unknownTZlist;
 	for (auto& loc : res)
 	{
-		if ((loc.ianaTimeZone!="LMST") &&  (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
+		if ((loc.ianaTimeZone!="LMST") && (loc.ianaTimeZone!="LTST") && ( ! availableTimeZoneList.contains(loc.ianaTimeZone.toUtf8())) )
 		{
 			// TZ name which is currently unknown to Qt detected. See if we can translate it, if not: complain to qDebug().
 			QString fixTZname=sanitizeTimezoneStringFromLocationDB(loc.ianaTimeZone);
@@ -988,7 +990,9 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			loc.planetName = "Earth";
 			loc.landscapeKey = "";
 
-			core->setCurrentTimeZone(ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
+			// Ensure that ipTimeZone is a valid IANA timezone name!
+			QTimeZone ipTZ(ipTimeZone.toUtf8());
+			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
 			core->moveObserverTo(loc, 0.0f, 0.0f);
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
@@ -1003,8 +1007,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 	else
 	{
 		qDebug() << "Failure getting IP-based location: \n\t" << networkReply->errorString();
-		// If there is a problem, this must not change to some other location!
-		//core->moveObserverTo(lastResortLocation, 0.0f, 0.0f);
+		// If there is a problem, this must not change to some other location! Just ignore.
 	}
 	networkReply->deleteLater();
 }
@@ -1044,7 +1047,7 @@ LocationMap StelLocationMgr::pickLocationsInCountry(const QString country)
 
 // Check timezone string and return either the same or the corresponding string that we use in the Stellarium location database.
 // If timezone name starts with "UTC", always return unchanged.
-// This is required to store timezone names exactly as we know them, and not mix ours and corrent-iana spelling flavour.
+// This is required to store timezone names exactly as we know them, and not mix ours and current-iana spelling flavour.
 // In practice, reverse lookup to locationDBToIANAtranslations
 QString StelLocationMgr::sanitizeTimezoneStringForLocationDB(QString tzString)
 {
@@ -1086,6 +1089,20 @@ QStringList StelLocationMgr::getAllTimezoneNames() const
 		if (!ret.contains(tz))
 			ret.append(tz);
 	}
+	// 0.19: So far, this includes the existing names, but QTimeZone also has a few other names.
+	// Accept others after testing against sanitized names, and especially all UT+/- names!
+
+	auto tzList = QTimeZone::availableTimeZoneIds(); // System dependent set of IANA timezone names.
+	for (const auto& tz : tzList)
+	{
+		QString tzcand=sanitizeTimezoneStringFromLocationDB(tz); // try to find name as we use it in the program.
+		if (!ret.contains(tzcand))
+		{
+			//qDebug() << "Extra insert Qt/IANA TZ entry from QTimeZone::availableTimeZoneIds(): " << tz << "as" << tzcand;
+			ret.append(QString(tzcand));
+		}
+	}
+
 	// Special cases!
 	ret.append("LMST");
 	ret.append("LTST");

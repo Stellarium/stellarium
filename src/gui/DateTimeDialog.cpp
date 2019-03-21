@@ -101,23 +101,15 @@ void DateTimeDialog::disconnectSpinnerEvents()const
 //! the widgets and signals
 bool DateTimeDialog::valid(int y, int m, int d, int h, int min, int s)
 {
-	int dy, dm, dd, dh, dmin, ds;
-
-	if (!StelUtils::changeDateTimeForRollover(y, m, d, h, min, s, &dy, &dm, &dd, &dh, &dmin, &ds)) {
-		dy = y;
-		dm = m;
-		dd = d;
-		dh = h;
-		dmin = min;
-		ds = s;
+	if (!StelUtils::changeDateTimeForRollover(y, m, d, h, min, s, &year, &month, &day, &hour, &minute, &second)) {
+		year =  y;
+		month = m;
+		day = d;
+		hour =  h;
+		minute = min;
+		second = s;
 	}
 
-	year = dy;
-	month = dm;
-	day = dd;
-	hour = dh;
-	minute = dmin;
-	second = ds;
 	pushToWidgets();
 	core->setJD(newJd());
 	return true;

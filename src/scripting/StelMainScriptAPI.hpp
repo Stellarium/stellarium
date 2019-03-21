@@ -345,7 +345,13 @@ public slots:
 	//! Valid values for tz can be found from the results of getAllTimezoneNames, including:
 	//! "LMST" = Local Mean Solar Time
 	//! "LTST" = Local True Solar Time
-	static void setTimezone(QString tz);
+	//! @param markAsCustom set flag/property StelCore.flagUseCTZ. (since 0.19.0)
+	//! Acceptable values: 0: set off; 1: set on. Other values: don't touch.
+	//! This parameter is mostly to reflect the respective setting in the Location dialog.
+	//!  - If tz is the default timezone for a site, markAsCustom should be 0.
+	//!  - For a definitively custom zone, set 1.
+	//!  - If unsure, set to -1.
+	static void setTimezone(QString tz, int markAsCustom=-1);
 
 	//! Return an array of all timezone names valid for setTimezone(tzName)
 	static QStringList getAllTimezoneNames();

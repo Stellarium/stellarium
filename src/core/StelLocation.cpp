@@ -63,7 +63,7 @@ QString StelLocation::getID() const
 		return name;
 }
 
-// GZ TODO: These operators may require the sanitizing for timezone names!
+// GZ TODO: These operators may require sanitizing for timezone names!
 QDataStream& operator<<(QDataStream& out, const StelLocation& loc)
 {
 	out << loc.name << loc.state << loc.country << loc.role << loc.population << loc.latitude << loc.longitude << loc.altitude << loc.bortleScaleIndex << loc.ianaTimeZone << loc.planetName << loc.landscapeKey << loc.isUserLocation;

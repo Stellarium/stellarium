@@ -63,6 +63,8 @@ class StelCore : public QObject
 	Q_PROPERTY(QString currentProjectionNameI18n READ getCurrentProjectionNameI18n NOTIFY currentProjectionNameI18nChanged STORED false)
 	Q_PROPERTY(bool flagGravityLabels READ getFlagGravityLabels WRITE setFlagGravityLabels NOTIFY flagGravityLabelsChanged)
 	Q_PROPERTY(QString currentTimeZone READ getCurrentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
+	Q_PROPERTY(bool flagUseCTZ READ getUseCustomTimeZone WRITE setUseCustomTimeZone NOTIFY useCustomTimeZoneChanged)
+	Q_PROPERTY(bool flagUseDST READ getUseDST WRITE setUseDST NOTIFY flagUseDSTChanged)
 
 public:
 	//! @enum FrameType
@@ -730,6 +732,10 @@ signals:
 	void targetLocationChanged(const StelLocation&);
 	//! This signal is emitted when the current timezone name is changed.
 	void currentTimeZoneChanged(const QString& tz);
+	//! This signal is emitted when custom timezone use is activated (true) or deactivated (false).
+	void useCustomTimeZoneChanged(const bool b);
+	//! This signal is emitted when daylight saving time is enabled or disabled.
+	void flagUseDSTChanged(const bool b);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
 	//! This signal is emitted whenever the time is re-synced.
