@@ -507,7 +507,7 @@ StelLocation LocationDialog::locationFromFields() const
 	if (index < 0)
 	{
 		qWarning() << "LocationDialog::locationFromFields(): no valid timezone name from combo?";
-		loc.ianaTimeZone = QString("UTC"); //As returned by QComboBox::currentText()
+		loc.ianaTimeZone = QString("UTC"); //Give at least some useful default
 	}
 	else
 	{
@@ -586,8 +586,9 @@ void LocationDialog::moveToAnotherPlanet(const QString&)
 			pickedModel->setStringList(results.keys());
 			proxyModel->setSourceModel(pickedModel);
 			ui->countryNameComboBox->setCurrentIndex(ui->countryNameComboBox->findData("", Qt::UserRole, Qt::MatchCaseSensitive));
+			// For 0.19, time zone should not change. When we can work out LMST for other planets, we can accept LMST.
 			//if (customTimeZone.isEmpty())  // This is always true!
-				ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
+			//	ui->timeZoneNameComboBox->setCurrentIndex(ui->timeZoneNameComboBox->findData("LMST", Qt::UserRole, Qt::MatchCaseSensitive));
 		}
 		proxyModel->sort(0, Qt::AscendingOrder);
 		ui->citySearchLineEdit->clear();
@@ -767,10 +768,9 @@ void LocationDialog::ipQueryLocation(bool state)
 	resetLocationList(); // in case we are on Moon/Mars, we must get list back to show all (earth) locations...
 	StelLocationMgr &locMgr=StelApp::getInstance().getLocationMgr();
 	locMgr.locationFromIP(); // This just triggers asynchronous lookup.
-	// FIXME: These steps assume IP lookup is successful!
+	// NOTE: These steps seem to assume IP lookup is successful!
 	ui->useAsDefaultLocationCheckBox->setChecked(!state);
 	ui->pushButtonReturnToDefault->setEnabled(!state);
-	//ui->useCustomTimeZoneCheckBox->setChecked(!state);
 	updateTimeZoneControls(!state);
 	connectEditSignals();
 	ui->citySearchLineEdit->setFocus();
