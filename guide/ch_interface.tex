@@ -114,7 +114,42 @@ There are a few ways you can set your location:
 ``use as default'' checkbox, disable ``Get location from Network'',
 and close the location window.
 
+\subsection{Time Zones}
+\label{sec:gui:location:timezones}
+Locations in Stellarium's location database include their respective
+time zone.\newFeature{0.15.1/0.19.0} When you click on a location in
+the list, the time should be shown in the respective time zone.  If
+daylight time rules exist and you have selected ``Enable daylight
+saving time'', also this civilisatory development is respected. Most
+users will want this setting active.
 
+When you select ``Use custom time zone'', you can select other time zones.
+Those that start with UTC have no daylight time rules.
+
+Time zones were introduced in the 19th century, originally for
+purposes of railway traffic synchronisation. The first such action was
+taken in 1847, and therefore Stellarium by default will present Local
+Mean Solar Time (LMST) for dates before 1847, and ignore all
+configured time zones unless you deliberately activate ``Use custom
+time zone''. The history of time zones and their rules is very
+complicated, though, and Stellarium should not be expected to find the
+exact date when time zone use was introduced at a certain location or
+country. Just be sure to use LMST when replaying historical
+observations before the 20th century.
+
+For even earlier observations, you can also set Local True Solar Time
+(LTST), which is the time given by sundials. Here, 12 o'clock is the
+time when the sun transits the meridian, strictly, daily. The
+difference between LMST and LTST is called \emph{equation of
+  time}. See section~\ref{sec:plugins:EquationOfTime} for more
+information.
+
+When you click on the map to set your location, Stellarium has
+currently no way to guess the timezone of the coordinate pair. In this
+case, Local Mean Solar Time is presented, which only depends on
+longitude and was the ``normal'' time before the development of time
+zones. Either select a city from the list or manually select a time
+zone.
 
 \section{The Configuration Window}
 \label{sec:gui:configuration}
