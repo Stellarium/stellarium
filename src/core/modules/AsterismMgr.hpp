@@ -192,6 +192,9 @@ public slots:
 	//! Get the thickness of ray helper of the asterisms
 	int getRayHelperThickness() const { return rayHelperThickness; }
 
+	//! @return true if asterism lines is defined
+	bool isLinesDefined() { return hasAsterism; }
+
 signals:
 	void fontSizeChanged(const float newSize) const;
 	void linesColorChanged(const Vec3f & color) const;

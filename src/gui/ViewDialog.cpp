@@ -38,6 +38,7 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
@@ -1067,6 +1068,18 @@ void ViewDialog::updateDefaultSkyCulture()
 	bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	// Check that ray helpers and asterism lines are defined
+	b = GETSTELMODULE(AsterismMgr)->isLinesDefined();
+	ui->showAsterismLinesCheckBox->setEnabled(b);
+	ui->showAsterismLabelsCheckBox->setEnabled(b);
+	ui->asterismLineThicknessSpinBox->setEnabled(b);
+	ui->colorAsterismLines->setEnabled(b);
+	ui->colorAsterismLabels->setEnabled(b);
+	ui->showRayHelpersCheckBox->setEnabled(b);
+	ui->rayHelperThicknessSpinBox->setEnabled(b);
+	ui->colorRayHelpers->setEnabled(b);
+	ui->asterismsFontSizeSpinBox->setEnabled(b);
+	ui->labelAsterismsFontSize->setEnabled(b);
 }
 
 void ViewDialog::updateDefaultLandscape()
