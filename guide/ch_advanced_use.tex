@@ -223,7 +223,7 @@ the Mac, or \program{nano}/\program{vi}/\program{gedit}/\program{emacs}/\program
 %The following sub-sections contain details on how to make commonly used
 %modifications to the configuration file. 
 A complete list of configuration file options and values may be found
-in appendix~\ref{sec:config.ini} Configuration File.
+in appendix~\ref{sec:config.ini}.
 
 
 \section{Getting Extra Data}
@@ -295,7 +295,6 @@ the \emph{installation directory} or the \emph{user directory}
 (see \ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively,
 if you have them already stored elsewhere, you may add the path to
 \file{config.ini} like:
-\newpage
 \begin{configfile}
 [astro]
 de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
@@ -326,12 +325,12 @@ GPS location depends on your operating system.
 
 On Linux, Mac-OS X and other Unixoid platforms, Stellarium preferrably
 should not connect directly to a GPS USB device, serial device,
-bluetooth device, etc., but uses a connection to the \program{gpsd}
+bluetooth device, etc., but use a connection to the \program{gpsd}
 daemon running on a computer in your network which provides GPS
 services concurrently for any interested application. In most cases,
 this will be a \program{gpsd} running on your localhost, receiving
 data from some GPS device plugged in via USB.
-
+%
 Please follow instructions by the \program{gpsd}
 authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
 configure this system daemon.  A few hints:
