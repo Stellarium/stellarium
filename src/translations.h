@@ -525,12 +525,11 @@ class Translations
 		N_("Babylonian (MUL.APIN)");
 		// TRANSLATORS: Name of the sky culture
 		N_("Babylonian (Seleucid)");
-
+		// TRANSLATORS: Name of the sky culture and landscape
+		N_("Armintxe Cave");
 		
 		// =====================================================================
 		// Landscape names
-		// TRANSLATORS: Name of landscape
-		N_("Armintxe Cave");
 		// TRANSLATORS: Name of landscape
 		N_("Guereins");
 		// TRANSLATORS: Name of landscape
