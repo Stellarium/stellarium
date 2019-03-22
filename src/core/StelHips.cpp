@@ -423,6 +423,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 						   bool outside, StelPainter* sPainter,
 						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
+	Q_UNUSED(sPainter)
 	Mat3d mat3;
 	Vec3d pos;
 	Vec2f texPos;

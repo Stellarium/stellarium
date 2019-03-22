@@ -29,6 +29,7 @@ void StelJsonParser::write(const QVariant& v, QIODevice* output, int indentLevel
 
 QByteArray StelJsonParser::write(const QVariant& jsonObject, int indentLevel)
 {
+	Q_UNUSED(indentLevel)
 	QJsonDocument doc = QJsonDocument::fromVariant(jsonObject);
 	return doc.toJson();
 }

@@ -241,6 +241,7 @@ class DummyMessageHandler : public SyncMessageHandler
 public:
 	virtual bool handleMessage(QDataStream &stream, SyncProtocol::tPayloadSize dataSize, SyncRemotePeer &peer)
 	{
+		Q_UNUSED(peer)
 		stream.skipRawData(dataSize);
 		return !stream.status();
 	}

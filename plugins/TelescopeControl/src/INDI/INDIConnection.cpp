@@ -256,6 +256,7 @@ void INDIConnection::newProperty(INDI::Property *property)
 
 void INDIConnection::removeProperty(INDI::Property *property)
 {
+	Q_UNUSED(property)
 }
 
 void INDIConnection::newBLOB(IBLOB *bp)
