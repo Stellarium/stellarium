@@ -885,7 +885,7 @@ void S3DRenderer::calculateLighting()
 		// directly use the same model as LandscapeMgr::update uses for the lightscapeBrightness
 		emissiveFactor = 0.0f;
 		if (sunPosition[2]<-0.14f) emissiveFactor=1.0f;
-		else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14)/(-0.05+0.14);
+		else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14f)/(-0.05f+0.14f);
 	}
 
 	// calculate ambient light
@@ -899,7 +899,7 @@ void S3DRenderer::calculateLighting()
 
 	if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
 	{
-		lightInfo.moonAmbient = sqrtf(sinMoonAngle * ((std::cosf(moonPhaseAngle)+1.0f)*0.5f)) * LUNAR_BRIGHTNESS_FACTOR;
+		lightInfo.moonAmbient = sqrtf(sinMoonAngle * ((cosf(moonPhaseAngle)+1.0f)*0.5f)) * LUNAR_BRIGHTNESS_FACTOR;
 		ambientBrightness += lightInfo.moonAmbient;
 	}
 	else
@@ -908,7 +908,7 @@ void S3DRenderer::calculateLighting()
 	// Now find shadow caster + directional light, if any:
 	if (sinSunAngle>-0.1f)
 	{
-		directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f))*eclipseFactor; // limit to 0.7 in order to keep total below 1.
+		directionalBrightness=qMin(0.7f, sqrtf(sinSunAngle+0.1f))*eclipseFactor; // limit to 0.7 in order to keep total below 1.
 		//redundant
 		//lightPosition = sunPosition;
 		if (shaderParameters.shadows) lightInfo.shadowCaster = LightParameters::SC_Sun;
@@ -918,8 +918,8 @@ void S3DRenderer::calculateLighting()
 	// and "else" implies sinSunAngle<-0.1 or sun <-6 degrees.
 	else if (sinMoonAngle>0.0f)
 	{
-		float moonBrightness = std::sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1.0f)/2.0f) * LUNAR_BRIGHTNESS_FACTOR;
-		moonBrightness -= (ambientBrightness-0.05f)/2.0f;
+		float moonBrightness = sqrtf(sinMoonAngle) * ((cosf(moonPhaseAngle)+1.0f)*0.5f) * LUNAR_BRIGHTNESS_FACTOR;
+		moonBrightness -= (ambientBrightness-0.05f)*0.5f;
 		moonBrightness = qMax(0.0f,moonBrightness);
 		if (moonBrightness > 0.0f)
 		{
@@ -933,7 +933,7 @@ void S3DRenderer::calculateLighting()
 	}
 	else if (sinVenusAngle>0.0f)
 	{
-		float venusBrightness = std::sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
+		float venusBrightness = sqrtf(sinVenusAngle)*((cosf(venusPhaseAngle)+1)*0.5f) * VENUS_BRIGHTNESS_FACTOR;
 		venusBrightness -= (ambientBrightness-0.05)/2.0f;
 		venusBrightness = qMax(0.0f, venusBrightness);
 		if (venusBrightness > 0.0f)
