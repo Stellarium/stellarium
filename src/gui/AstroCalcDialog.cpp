@@ -2308,7 +2308,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 		case GraphTransitAltitudeVsTime:
 			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
 			yAxis1Legend = QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0));
-			if (minY1 < -1000.) minY1 = -90.0;
+			if (minY1 < -1000.) minY1 = 0.0;
 			if (maxY1 > 1000.) maxY1 = 90.0;
 			break;
 	}
@@ -2355,7 +2355,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 		case GraphTransitAltitudeVsTime:
 			// TRANSLATORS: The phrase "Transit altitude" may be long in some languages and you can short it.
 			yAxis2Legend = QString("%1, %2").arg(q_("Transit altitude"), QChar(0x00B0));
-			if (minY2 < -1000.) minY2 = -90.0;
+			if (minY2 < -1000.) minY2 = 0.0;
 			if (maxY2 > 1000.) maxY2 = 90.0;
 			break;
 	}
