@@ -899,7 +899,7 @@ void S3DRenderer::calculateLighting()
 
 	if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
 	{
-		lightInfo.moonAmbient = sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
+		lightInfo.moonAmbient = sqrtf(sinMoonAngle * ((std::cosf(moonPhaseAngle)+1.0f)*0.5f)) * LUNAR_BRIGHTNESS_FACTOR;
 		ambientBrightness += lightInfo.moonAmbient;
 	}
 	else
