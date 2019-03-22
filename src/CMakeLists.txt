@@ -650,6 +650,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testRefraction testRefraction)
     SET_TARGET_PROPERTIES(testRefraction PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testAirmass_SRCS
+        tests/testAirmass.hpp
+        tests/testAirmass.cpp
+    )
+    ADD_EXECUTABLE(testAirmass ${tests_testAirmass_SRCS})
+    TARGET_LINK_LIBRARIES(testAirmass ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testAirmass)
+    ADD_TEST(testAirmass testAirmass)
+    SET_TARGET_PROPERTIES(testAirmass PROPERTIES FOLDER "src/tests")
+
     SET(tests_testPrecession_SRCS
         tests/testPrecession.hpp
         tests/testPrecession.cpp
