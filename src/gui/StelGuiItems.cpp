@@ -34,6 +34,7 @@
 #include "StelProgressController.hpp"
 #include "StelObserver.hpp"
 #include "SkyGui.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -641,9 +642,9 @@ void BottomStelBar::updateButtonsGroups()
 void BottomStelBar::updateText(bool updatePos)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	double jd = core->getJD();
-	double deltaT = core->getDeltaT();
-	double sigma = StelUtils::getDeltaTStandardError(jd);
+	const double jd = core->getJD();
+	const double deltaT = core->getDeltaT();
+	const double sigma = StelUtils::getDeltaTStandardError(jd);
 	QString sigmaInfo = "";
 	QString validRangeMarker = "";
 	core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
@@ -734,7 +735,7 @@ void BottomStelBar::updateText(bool updatePos)
 		// the corrective ndot to be displayed could be set according to the currently used DeltaT algorithm.
 		//float ndot=core->getDeltaTnDot();
 		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
-		float ndot=( (core->de430IsActive() || core->de431IsActive()) ? -25.8f : -23.8946f );
+		float ndot=( (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd)) ? -25.8f : -23.8946f );
 
 		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)).arg(timeRateInfo));
 	}

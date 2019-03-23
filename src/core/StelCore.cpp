@@ -2532,7 +2532,8 @@ double StelCore::getCurrentEpoch() const
 }
 
 // DE430/DE431 handling.
-// FIXME: GZ observes: When DE431 is not available, DE430 installed, but date outside, de430IsActive() should return false because computations go back to VSOP!.
+// NOTE: When DE431 is not available, DE430 installed, but date outside, de430IsActive() may be true but computations still go back to VSOP!
+// To test whether DE43x is really currently in use, test (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd))
 
 bool StelCore::de430IsAvailable()
 {
