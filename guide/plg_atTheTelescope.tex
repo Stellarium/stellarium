@@ -194,7 +194,7 @@ There are six tabs in the configuration dialog: \emph{General}, \emph{Eyepieces}
 \paragraph{General}
 
 The first option allows you to define the general behaviour of the plugin. 
-The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view} and \emph{Sensor view} (see figure \ref{fig:plugins:Oculars:Gui:General}).
+The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view}, \emph{Sensor view} and \emph{Telrad view} (see figure \ref{fig:plugins:Oculars:Gui:General}).
 
 \begin{figure}[ht]\centering
 \includegraphics[width=0.75\textwidth]{oculars_gui_general.png}
@@ -211,6 +211,7 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view} 
          to the initial values at program start at the end of the plugin usage (e.g., when disabling the view through CCD frame).
    \item[Show resolution criteria] compute and show Rayleigh criterion, Dawes', Abbe's and Sparrow's limits for combination of telescope, lens and eyepiece.
          In addition, this option will show visual resolution for selected ``setup''. This option may be very helpful for double star observers.
+   \item[Show oculars button on toolbar] option\newFeature{v0.19.0} allows to toggle visibility the plugin button on main toolbar. 
    \item[Arrow button scale] allows to change the size of the arrow buttons in the ocular GUI panel. 
  \end{description}
 \item[Ocular view] is a group of options that allows to change the plugin's behaviour in visual observation mode.
@@ -229,6 +230,11 @@ The options are grouped by areas of usage: \emph{Interface}, \emph{Ocular view} 
  \begin{description}
    \item[Use degrees and minutes for FOV of CCD] -- for many cases the use of decimal degrees for the value of the field of view is not comfortable, and this option allows to use the more human readable format for FOV.
    \item[Enable automatic switch of mount type] allows to store the CCD frame orientation when the type of telescope mount is changed.
+   \item[Show sensor crop overlay] option\newFeature{v0.19.0} toggle drawing the crop diagram within frame of CCD.
+ \end{description}
+\item[Telrad view] is group\newFeature{v0.19.0} of options allows to change behaviour of the plugin for Telrad mode.
+ \begin{description}
+    \item[Enable scaling FOV for Telrad] option allows you to define whether or not to scale the Telrad circles to half of apparent FOV. When activated, the Telrad circles will fill your screen. 
  \end{description}
 \end{description}
 

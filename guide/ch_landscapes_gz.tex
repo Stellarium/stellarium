@@ -424,7 +424,8 @@ nb_decor_repeat = 1
 decor_alt_angle =  82
 decor_angle_shift = -62
 ; Rotatez deviates from -90 by the Meridian Convergence.
-; The original landscape pano is grid-aligned, not north-aligned!
+; The original landscape pano is grid-aligned, 
+; not north-aligned!
 decor_angle_rotatez =  -90.525837223
 ground_angle_shift = -62
 ground_angle_rotatez =  44.474162777
@@ -458,7 +459,7 @@ Where:
 \item[\var{tex0 ... tex<nbsidetex-1>}] are the side texture file
   names. These should exist in the \file{textures / landscapes /
     landscape} directory in PNG format.
-\item[\var{light0 ... light<nbsidetex-1>}] are optional textures. If
+\item[\var{light0 ... light<nbsidetex-1>}] are optional textures\newFeature{v0.13.1}. If
   they exist, they are used as overlays on top of the respective
   \var{tex<...>} files and represent nocturnal illumination,
   e.g. street lamps, lit windows, red dots on towers, sky glow by city
@@ -466,7 +467,7 @@ Where:
   are rendered exactly over the \var{tex<...>} files even when the PNG
   files have different size. If you need your light pollution higher in
   the sky, you must use a spherical or fisheye
-  landscape.\newFeature{v0.13.1}
+  landscape.
 \item[\var{nbside}] is the number of side textures
 \item[\var{side0 \ldots side<nbside-1>}] are the descriptions of how
   the side textures should be arranged in the program. Each

@@ -24,8 +24,8 @@ boxes which appear when you hover the mouse cursor over a
 button.\footnote{Unfortunately, on Windows~7 and later, with some NVidia
   and AMD GPUs in OpenGL mode, these tooltips often do not work.}
 
-\newFeature{0.15} You can drag the
-windows around, and the position will be used again when you restart
+You can drag the
+windows around\newFeature{v0.15}, and the position will be used again when you restart
 Stellarium. If this would mean the window is off-screen (because you
 start in windowed mode, or with a different screen), the window will
 be moved so that at least a part is visible.
@@ -72,8 +72,7 @@ show accurately what is (or will be/was) in the sky, you must tell it
 where you are. You only need to do this once -- Stellarium can save your
 location so you won't need to set it again until you move.
 
-\newFeature{v0.13.1}
-After installation, Stellarium uses an online service which tries to
+After installation\newFeature{v0.13.1}, Stellarium uses an online service which tries to
 find your approximate location based on the IP address you are
 using. This seems very practical, but if you feel this causes privacy
 issues, you may want to switch this feature off. You should also consider 
@@ -93,7 +92,7 @@ There are a few ways you can set your location:
 \item Enter a new location using the longitude, latitude and other
   data.
 \item Click on \button{Get Location from GPS} if you have a GPS
-  receiver. \newFeature{0.16/0.18.1} You activate a periodic request
+  receiver. \newFeature{v0.16/0.18.1} You activate a periodic request
   for GPS fixes. After a few seconds, the button should change color
   and give a textual feedback. Green indicates a good position, yellow
   indicates a 2D-fix only, which means altitudes are not
@@ -117,7 +116,7 @@ and close the location window.
 \subsection{Time Zones}
 \label{sec:gui:location:timezones}
 Locations in Stellarium's location database include their respective
-time zone.\newFeature{0.15.1/0.19.0} When you click on a location in
+time zone.\newFeature{v0.15.1/0.19.0} When you click on a location in
 the list, the time should be shown in the respective time zone.  If
 daylight time rules exist and you have selected ``Enable daylight
 saving time'', also this civilisatory development is respected. Most
@@ -359,6 +358,7 @@ screenshots sized like Stellarium's window or some other, likely
 larger size. The maximum possible size depends on your
 hardware. $4096\times4096$ should be possible on most PCs, others may
 even create $16384\times16384$ images. The vertical field of view will be the same as in the current view.
+
 You can also set \newFeature{v0.19.0} the file format. The exact selection depends on
 platform and version of the underlying Qt framework. Notable formats are PNG (lossless), JPG (lossy),
 JPEG (higher quality JPG), BMP (Windows Bitmap), WEBP, TIF (LZW compressed), TIFF (uncompressed),
@@ -439,8 +439,8 @@ for changing the general appearance of the main sky view and projections. Some h
   for more information.
 \end{description}
 
-Some
-hightlights of stars field:
+\newpage
+Some hightlights of stars field:
 \begin{description}
 \item[Absolute scale] is the size of stars as rendered by
   Stellarium. If you increase this value, all stars will appear larger
@@ -729,7 +729,7 @@ constellation tours.
 \label{fig:gui:view:surveys}
 \end{figure}
 
-\newFeature{v0.18.0} The Surveys tab (Fig.~\ref{fig:gui:view:surveys}) allows to toggle the
+The Surveys tab\newFeature{v0.18.0} (Fig.~\ref{fig:gui:view:surveys}) allows to toggle the
 visibility of online sky or solar system surveys (see chapter~\ref{ch:surveys}
 for description of the surveys format).  Currently, only HiPS surveys are
 supported.
@@ -954,6 +954,7 @@ You can select from
 \item Angular size vs. Time
 \item Phase angle vs. Time
 \item Heliocentric distance vs. Time\newFeature{v0.18.2}
+\item Transit altitude vs. Time\newFeature{v0.19.0}
 \end{itemize}
 
 This tool may be very helpful for educational and statistics purposes.%
