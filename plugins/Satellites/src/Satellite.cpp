@@ -30,6 +30,7 @@
 #include "VecMath.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
+#include "StelModuleMgr.hpp"
 
 #include <QTextStream>
 #include <QRegExp>
@@ -166,6 +167,12 @@ Satellite::Satellite(const QString& identifier, const QVariantMap& map)
 
 	orbitValid = true;
 	initialized = true;
+	if (name=="ISS" || name=="ISS (ZARYA)")
+		isISS = true;
+	else
+		isISS = false;
+	moon = GETSTELMODULE(SolarSystem)->getMoon();
+	sun = GETSTELMODULE(SolarSystem)->getSun();
 
 	update(0.);
 }
@@ -896,6 +903,8 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 		return;
 
 	XYZ = getJ2000EquatorialPos(core);
+	// NOTE: Should we use the real angular size of ISS here (we do not have linear size of ISS within catalog for calculation the angular size)?
+	int screenSizeISS = (int)((0.0167*M_PI/180.)*painter.getProjector()->getPixelPerRadAtCenter()); // Set screen size of ISS (1 arcmin)
 
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
@@ -924,7 +933,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			if (visibility != gSatWrapper::VISIBLE)
 			{
 				txtMag = mag - 10.f; // Oops... Artificial satellite is invisible, but let's make the label visible
-				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1.f);
+				painter.setColor(invisibleSatelliteColor[0], invisibleSatelliteColor[1], invisibleSatelliteColor[2], 1.f);				
 			}
 			else
 				painter.setColor(color[0], color[1], color[2], 1.f);
@@ -932,6 +941,16 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 			// Draw the label of the satellite when it enabled
 			if (txtMag <= sd->getLimitMagnitude() && showLabels)
 				painter.drawText(XYZ, name, 0, 10, 10, false);
+
+			// Special case: crossing of the ISS of the Moon or the Sun
+			if (isISS && screenSizeISS>0 && (XYZ.angle(moon->getJ2000EquatorialPos(core))*180./M_PI <= moon->getSpheroidAngularSize(core) || XYZ.angle(sun->getJ2000EquatorialPos(core))*180./M_PI <= sun->getSpheroidAngularSize(core)))
+			{
+				Vec3f issColor = Vec3f(0.f,0.f,0.f);
+				painter.setColor(issColor[0], issColor[1], issColor[2], 1.f);
+				painter.setBlending(true, GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+				hintTexture->bind(); // NOTE: Should we use real ISS texture here?
+				painter.drawSprite2dMode(XYZ, qMin(screenSizeISS, 15));
+			}
 		}
 		else
 		{
@@ -948,7 +967,6 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 					painter.drawText(XYZ, name, 0, 10, 10, false);
 
 				painter.setBlending(true, GL_ONE, GL_ONE);
-
 				hintTexture->bind();
 				painter.drawSprite2dMode(XYZ, 11);
 			}
