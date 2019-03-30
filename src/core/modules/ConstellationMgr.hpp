@@ -153,10 +153,10 @@ public:
 	//! Describes how to display constellation labels. The viewDialog GUI has a combobox which corresponds to these values.
 	enum ConstellationDisplayStyle
 	{
-		constellationsAbbreviated = 0,
-		constellationsNative      = 1,
-		constellationsTranslated  = 2,
-		constellationsEnglish     = 3 // Maybe this is not useful?
+		constellationsAbbreviated	= 0,
+		constellationsNative		= 1,
+		constellationsTranslated	= 2,
+		constellationsEnglish		= 3 // Maybe this is not useful?
 	};	
 
 	///////////////////////////////////////////////////////////////////////////
