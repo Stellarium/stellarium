@@ -22,6 +22,7 @@
 
 #include <QObject>
 #include <QTest>
+#include <QTemporaryDir>
 
 class TestStelIniParser : public QObject
 {
