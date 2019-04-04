@@ -493,12 +493,6 @@ ENDIF(MSVC)
 
 INSTALL(TARGETS stellarium DESTINATION bin)
 IF(WIN32)
-#     ADD_CUSTOM_COMMAND(TARGET stellarium
-#          POST_BUILD
-#          COMMAND "${WINDEPLOYQT_COMMAND}" --dir ${CMAKE_INSTALL_PREFIX}/qt5stuff --no-translations --compiler-runtime $<TARGET_FILE:stellarium>
-#          COMMENT "Running windeployqt..."
-#          VERBATIM
-#     )
      INSTALL(CODE
         "
          EXECUTE_PROCESS(
@@ -511,8 +505,25 @@ IF(WIN32)
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
          )
+         MESSAGE(\"Running windeployqt...\")
         "
      )
+     IF(GENERATE_STELMAINLIB)
+          INSTALL(CODE
+             "
+              EXECUTE_PROCESS(
+                  COMMAND \"${WINDEPLOYQT_COMMAND}\"
+                          --dir \"\${CMAKE_INSTALL_PREFIX}/qt5stuff\"
+                          --no-translations
+                          --compiler-runtime
+                          \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
+                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+                  OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
+                  ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
+         )
+        "
+     )
+     ENDIF()
 ENDIF()
 
 SET_TARGET_PROPERTIES(stelMain PROPERTIES FOLDER "src/core")
