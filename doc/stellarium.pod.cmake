@@ -179,7 +179,7 @@ of this page.
 
 =head1 AUTHOR
 
-Fabien Chéreau, Rob Spearman, Johan Meuris, Matthew Gates, 
+Fabien Chereau, Rob Spearman, Johan Meuris, Matthew Gates,
 Johannes Gajdosik, Nigel Kerr, Andras Mohari.
 
 x14817

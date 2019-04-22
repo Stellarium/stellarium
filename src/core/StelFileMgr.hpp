@@ -17,7 +17,7 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-#ifndef _STELFILEMGR_HPP
+#ifndef _STELFILEMGR_HPP_
 #define _STELFILEMGR_HPP_
 
 #define CHECK_FILE "data/ssystem.ini"

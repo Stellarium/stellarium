@@ -6,6 +6,7 @@ SET(CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS true)
 
 IF(COMMAND cmake_policy)
   CMAKE_POLICY(SET CMP0003 NEW)
+  CMAKE_POLICY(SET CMP0050 OLD)
 ENDIF()
 
 ########### Project name ###########
@@ -146,6 +147,7 @@ IF (BUILD_STATIC_PLUGINS)
   IF (USE_PLUGIN_SVMT)
 	SET(QT_USE_QTXML TRUE) # For SVMT we also need QtXml module
 	SET(QT_USE_QTDECLARATIVE TRUE) # For SVMT we also need QML module, this line doesn't seem to work right now
+        SET(QT_USE_QTWEBKIT TRUE)
   ENDIF()
 
   IF (USE_PLUGIN_VIRGO)
