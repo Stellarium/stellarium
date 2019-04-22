@@ -41,11 +41,6 @@ HttpConnectionHandler::~HttpConnectionHandler()
 {
     quit();
     wait();
-    if (socket)
-    {
-	socket->close();
-	delete socket;
-    }
 #ifndef NDEBUG
     qDebug("HttpConnectionHandler (%p): destroyed", this);
 #endif
