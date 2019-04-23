@@ -1834,6 +1834,11 @@ void Oculars::paintTelrad()
 
 void Oculars::paintOcularMask(const StelCore *core)
 {
+	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
+	{
+		paintCrosshairs();
+	}
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
@@ -1861,11 +1866,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 		reticleTexture->getDimensions(textureWidth, textureHeight);
 
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, reticleRotation);
-	}
-
-	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
-	{
-		paintCrosshairs();
 	}
 
 	float alpha = 1.f;
