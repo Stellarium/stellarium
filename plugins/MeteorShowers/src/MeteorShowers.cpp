@@ -187,15 +187,12 @@ StelObjectP MeteorShowers::searchByName(const QString& englishName) const
 
 	for (const auto& ms : m_meteorShowers)
 	{
-		if (ms->enabled())
+		bool sameEngName = ms->getEnglishName().toUpper() == englishName.toUpper();
+		bool desigIsEngName = ms->getDesignation().toUpper() == englishName.toUpper();
+		bool emptyDesig = ms->getDesignation().isEmpty();
+		if (sameEngName || (desigIsEngName && !emptyDesig))
 		{
-			bool sameEngName = ms->getEnglishName().toUpper() == englishName.toUpper();
-			bool desigIsEngName = ms->getDesignation().toUpper() == englishName.toUpper();
-			bool emptyDesig = ms->getDesignation().isEmpty();
-			if (sameEngName || (desigIsEngName && !emptyDesig))
-			{
-				return qSharedPointerCast<StelObject>(ms);
-			}
+			return qSharedPointerCast<StelObject>(ms);
 		}
 	}
 	return Q_NULLPTR;
@@ -220,12 +217,9 @@ StelObjectP MeteorShowers::searchByNameI18n(const QString& nameI18n) const
 
 	for (const auto& ms : m_meteorShowers)
 	{
-		if (ms->enabled())
+		if (ms->getNameI18n().toUpper() == nameI18n.toUpper())
 		{
-			if (ms->getNameI18n().toUpper() == nameI18n.toUpper())
-			{
-				return qSharedPointerCast<StelObject>(ms);
-			}
+			return qSharedPointerCast<StelObject>(ms);
 		}
 	}
 	return Q_NULLPTR;
@@ -242,7 +236,7 @@ QStringList MeteorShowers::listMatchingObjects(const QString& objPrefix, int max
 	for (const auto& ms : m_meteorShowers)
 	{
 		QString name = inEnglish ? ms->getEnglishName() : ms->getNameI18n();
-		if (!ms->enabled() || !matchObjectName(name, objPrefix, useStartOfWords))
+		if (!matchObjectName(name, objPrefix, useStartOfWords))
 		{
 			continue;
 		}
