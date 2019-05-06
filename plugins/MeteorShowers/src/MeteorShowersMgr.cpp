@@ -64,7 +64,6 @@ MeteorShowersMgr::~MeteorShowersMgr()
 {
 	delete m_configDialog;
 	delete m_searchDialog;
-	delete m_networkManager;
 }
 
 void MeteorShowersMgr::init()
