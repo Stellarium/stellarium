@@ -56,10 +56,6 @@
 #include "ZodiacalLight.hpp"
 #include "ToastMgr.hpp"
 
-#ifdef USE_STATIC_PLUGIN_SATELLITES
-#include "../plugins/Satellites/src/Satellites.hpp"
-#endif
-
 #include <QDateTime>
 #include <QDebug>
 #include <QDir>
@@ -941,14 +937,12 @@ void StelMainScriptAPI::clear(const QString& state)
 		GridLinesMgr* glmgr = GETSTELMODULE(GridLinesMgr);
 		StelMovementMgr* movmgr = GETSTELMODULE(StelMovementMgr);
 		ZodiacalLight* zl = GETSTELMODULE(ZodiacalLight);
+		StelPropertyMgr* propMgr = StelApp::getInstance().getStelPropertyManager();
 
-		#ifdef USE_STATIC_PLUGIN_SATELLITES
-		// Hide artificial satellites
-		Satellites* sat = GETSTELMODULE(Satellites);
-		sat->setFlagHints(false);
-		sat->setFlagLabels(false);
-		sat->setFlagOrbitLines(false);
-		#endif
+		// Hide artificial satellites through StelProperties to avoid crash if plugin was did't loaded
+		propMgr->setStelPropertyValue("Satellites.hintsVisible",   false);
+		propMgr->setStelPropertyValue("Satellites.labelsVisible",  false);
+		propMgr->setStelPropertyValue("Satellites.flagOrbitLines", false);
 
 		// identical for all states
 		glmgr->setFlagAllGrids(false);
