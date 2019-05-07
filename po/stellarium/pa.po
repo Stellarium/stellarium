@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-03-21 19:41+0700\n"
+"POT-Creation-Date: 2019-03-26 22:10+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: cardinot <mcardinot@gmail.com>, 2017\n"
 "Language-Team: Panjabi (Punjabi) (https://www.transifex.com/stellarium/teams/80998/pa/)\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: src/core/modules/MinorPlanet.cpp:202 src/core/modules/Comet.cpp:169
 #: src/core/modules/StarWrapper.cpp:54 src/core/modules/StarWrapper.cpp:205
 #: src/core/modules/StarWrapper.cpp:208 src/gui/AstroCalcDialog.cpp:522
-#: src/ui_configurationDialog.h:1598 plugins/Satellites/src/Satellite.cpp:276
+#: src/ui_configurationDialog.h:1598 plugins/Satellites/src/Satellite.cpp:283
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:524
 #: plugins/Supernovae/src/Supernova.cpp:141 plugins/Novae/src/Nova.cpp:146
 #: plugins/Quasars/src/Quasar.cpp:127 plugins/Pulsars/src/Pulsar.cpp:181
@@ -451,7 +451,7 @@ msgid "Author"
 msgstr "ਲੇਖਕ"
 
 #. TRANSLATORS: Unit of measure for distance - meter
-#: src/core/modules/LandscapeMgr.cpp:899 src/gui/StelGuiItems.cpp:760
+#: src/core/modules/LandscapeMgr.cpp:899 src/gui/StelGuiItems.cpp:761
 msgctxt "distance"
 msgid "m"
 msgstr ""
@@ -1164,10 +1164,10 @@ msgstr ""
 #: src/core/modules/Planet.cpp:494 src/core/modules/Planet.cpp:585
 #: src/core/modules/MinorPlanet.cpp:233 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/MinorPlanet.cpp:324 src/core/modules/Comet.cpp:187
-#: src/core/modules/Comet.cpp:310 src/gui/StelGuiItems.cpp:789
-#: src/gui/AstroCalcDialog.cpp:4330 plugins/Satellites/src/Satellite.cpp:299
-#: plugins/Satellites/src/Satellite.cpp:303
-#: plugins/Satellites/src/Satellite.cpp:319
+#: src/core/modules/Comet.cpp:310 src/gui/StelGuiItems.cpp:790
+#: src/gui/AstroCalcDialog.cpp:4330 plugins/Satellites/src/Satellite.cpp:306
+#: plugins/Satellites/src/Satellite.cpp:310
+#: plugins/Satellites/src/Satellite.cpp:326
 msgctxt "distance"
 msgid "km"
 msgstr ""
@@ -1780,8 +1780,8 @@ msgstr ""
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:271
 #: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4402
-#: plugins/Satellites/src/Satellite.cpp:301
-#: plugins/Satellites/src/Satellite.cpp:326
+#: plugins/Satellites/src/Satellite.cpp:308
+#: plugins/Satellites/src/Satellite.cpp:333
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
 msgctxt "speed"
 msgid "km/s"
@@ -1847,7 +1847,7 @@ msgstr ""
 
 #: src/core/modules/Planet.cpp:649 src/core/modules/MinorPlanet.cpp:373
 #: src/core/modules/Comet.cpp:274 src/gui/AstroCalcDialog.cpp:2298
-#: src/gui/AstroCalcDialog.cpp:2345 plugins/Satellites/src/Satellite.cpp:338
+#: src/gui/AstroCalcDialog.cpp:2345 plugins/Satellites/src/Satellite.cpp:345
 msgid "Phase angle"
 msgstr ""
 
@@ -2351,11 +2351,11 @@ msgstr ""
 msgid "Flip scene vertically"
 msgstr ""
 
-#: src/core/StelCore.cpp:2254
+#: src/core/StelCore.cpp:2317
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 
-#: src/core/StelCore.cpp:2257
+#: src/core/StelCore.cpp:2320
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2363,14 +2363,14 @@ msgid ""
 "Ancient Solar Eclipses</em> (%1). See for more info %2here%3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2260
+#: src/core/StelCore.cpp:2323
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
 "<em>On the system of astronomical constants</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2263
+#: src/core/StelCore.cpp:2326
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2379,14 +2379,14 @@ msgid ""
 "PC program SunTracker Pro."
 msgstr ""
 
-#: src/core/StelCore.cpp:2267
+#: src/core/StelCore.cpp:2330
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
 " Eclipses</em> by Mucke & Meeus (1983)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2271
+#: src/core/StelCore.cpp:2334
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2394,7 +2394,7 @@ msgid ""
 "(1973)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2275
+#: src/core/StelCore.cpp:2338
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2402,14 +2402,14 @@ msgid ""
 "observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2278
+#: src/core/StelCore.cpp:2341
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
 "Telescopic Astronomical Observations</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2281
+#: src/core/StelCore.cpp:2344
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2418,14 +2418,14 @@ msgid ""
 "period 1800-1975</em> (%1) as fit through data published by Brouwer (1952)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2284
+#: src/core/StelCore.cpp:2347
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
 "planetarium program RedShift."
 msgstr ""
 
-#: src/core/StelCore.cpp:2287
+#: src/core/StelCore.cpp:2350
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2433,25 +2433,25 @@ msgid ""
 "A.D. 1980</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2290
+#: src/core/StelCore.cpp:2353
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 
-#: src/core/StelCore.cpp:2293
+#: src/core/StelCore.cpp:2356
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
 "Eclipses: 1986-2035</em> (1989)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2296
+#: src/core/StelCore.cpp:2359
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr ""
 
-#: src/core/StelCore.cpp:2299
+#: src/core/StelCore.cpp:2362
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2460,14 +2460,14 @@ msgid ""
 "Morrison (1984)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2302
+#: src/core/StelCore.cpp:2365
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2305
+#: src/core/StelCore.cpp:2368
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2475,42 +2475,42 @@ msgid ""
 "1990</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2308
+#: src/core/StelCore.cpp:2371
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
 "and Earth's Rotation</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2311
+#: src/core/StelCore.cpp:2374
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
 "Touze & Francou (1997) for dates outside 1620..2000."
 msgstr ""
 
-#: src/core/StelCore.cpp:2314
+#: src/core/StelCore.cpp:2377
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr ""
 
-#: src/core/StelCore.cpp:2317
+#: src/core/StelCore.cpp:2380
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
 "<em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2320
+#: src/core/StelCore.cpp:2383
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
 " for the recent past."
 msgstr ""
 
-#: src/core/StelCore.cpp:2323
+#: src/core/StelCore.cpp:2386
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -2518,7 +2518,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2326
+#: src/core/StelCore.cpp:2389
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2526,7 +2526,7 @@ msgid ""
 "calculation of eclipses</em> (%2) with addendum in (%3)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2329
+#: src/core/StelCore.cpp:2392
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2535,7 +2535,7 @@ msgid ""
 "by Stephenson (%2). See for more info %3here%4."
 msgstr ""
 
-#: src/core/StelCore.cpp:2332 src/core/StelCore.cpp:2335
+#: src/core/StelCore.cpp:2395 src/core/StelCore.cpp:2398
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2545,15 +2545,15 @@ msgid ""
 " solar, lunar and planetary ephemeris program SOLEX."
 msgstr ""
 
-#: src/core/StelCore.cpp:2332
+#: src/core/StelCore.cpp:2395
 msgid "Used by default."
 msgstr ""
 
-#: src/core/StelCore.cpp:2335
+#: src/core/StelCore.cpp:2398
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr ""
 
-#: src/core/StelCore.cpp:2338
+#: src/core/StelCore.cpp:2401
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2561,7 +2561,7 @@ msgid ""
 "Babylon</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2341
+#: src/core/StelCore.cpp:2404
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2569,7 +2569,7 @@ msgid ""
 " Approximation of DeltaT</em> (%1) and revisited by Sana Islam in 2013."
 msgstr ""
 
-#: src/core/StelCore.cpp:2344
+#: src/core/StelCore.cpp:2407
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2577,7 +2577,7 @@ msgid ""
 "Approximation of Time Period 1620-2013</em> (%1)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2347
+#: src/core/StelCore.cpp:2410
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2586,7 +2586,7 @@ msgid ""
 "provides values from an approximate parabola."
 msgstr ""
 
-#: src/core/StelCore.cpp:2350
+#: src/core/StelCore.cpp:2413
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2594,48 +2594,48 @@ msgid ""
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2353
+#: src/core/StelCore.cpp:2416
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
 " by the user."
 msgstr ""
 
-#: src/core/StelCore.cpp:2356 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2419 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "ਗਲਤੀ"
 
-#: src/core/StelCore.cpp:2364
+#: src/core/StelCore.cpp:2427
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr ""
 
-#: src/core/StelCore.cpp:2407
+#: src/core/StelCore.cpp:2470
 msgid "with zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2410
+#: src/core/StelCore.cpp:2473
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2413
+#: src/core/StelCore.cpp:2476
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2420
+#: src/core/StelCore.cpp:2483
 msgid "with values for the limit years outside this range"
 msgstr ""
 
-#: src/core/StelCore.cpp:2430
+#: src/core/StelCore.cpp:2493
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr ""
 
-#: src/core/StelCore.cpp:2432
+#: src/core/StelCore.cpp:2495
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
@@ -3321,7 +3321,7 @@ msgid "Custom equation of %1T"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1646 src/gui/ConfigurationDialog.cpp:1681
-#: src/gui/StelGuiItems.cpp:680 src/gui/LocationDialog.cpp:455
+#: src/gui/StelGuiItems.cpp:681 src/gui/LocationDialog.cpp:469
 msgid "System default"
 msgstr "ਸਿਸਟਮ ਮੂਲ"
 
@@ -3725,76 +3725,76 @@ msgstr ""
 msgid "Toggle visibility of GUI"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:337 src/gui/StelGuiItems.cpp:946
+#: src/gui/StelGuiItems.cpp:338 src/gui/StelGuiItems.cpp:947
 msgid "Space"
 msgstr "ਸਪੇਸ"
 
-#: src/gui/StelGuiItems.cpp:682
+#: src/gui/StelGuiItems.cpp:683
 msgid "Time zone"
 msgstr "ਟਾਈਮ ਜ਼ੋਨ"
 
-#: src/gui/StelGuiItems.cpp:685 src/gui/LocationDialog.cpp:453
+#: src/gui/StelGuiItems.cpp:686 src/gui/LocationDialog.cpp:467
 msgid "Local Mean Solar Time"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:688 src/gui/LocationDialog.cpp:454
+#: src/gui/StelGuiItems.cpp:689 src/gui/LocationDialog.cpp:468
 msgid "Local True Solar Time"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: minutes per second
-#: src/gui/StelGuiItems.cpp:691
+#: src/gui/StelGuiItems.cpp:692
 msgctxt "unit of measurement"
 msgid "min/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: hours per second
-#: src/gui/StelGuiItems.cpp:699
+#: src/gui/StelGuiItems.cpp:700
 msgctxt "unit of measurement"
 msgid "hr/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: days per second
-#: src/gui/StelGuiItems.cpp:705
+#: src/gui/StelGuiItems.cpp:706
 msgctxt "unit of measurement"
 msgid "d/s"
 msgstr ""
 
 #. TRANSLATORS: unit of measurement: years per second
-#: src/gui/StelGuiItems.cpp:711
+#: src/gui/StelGuiItems.cpp:712
 msgctxt "unit of measurement"
 msgid "yr/s"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:713 src/gui/StelGuiItems.cpp:715
+#: src/gui/StelGuiItems.cpp:714 src/gui/StelGuiItems.cpp:716
 msgid "Simulation speed"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:789
+#: src/gui/StelGuiItems.cpp:790
 msgid "planetocentric distance"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:791
+#: src/gui/StelGuiItems.cpp:792
 msgid "planetocentric observer"
 msgstr ""
 
 #. TRANSLATORS: Field of view. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:806
+#: src/gui/StelGuiItems.cpp:807
 msgctxt "abbreviation"
 msgid "FOV"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:822
+#: src/gui/StelGuiItems.cpp:823
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:487
 msgid "Field of view"
 msgstr ""
 
 #. TRANSLATORS: Frames per second. Please use abbreviation.
-#: src/gui/StelGuiItems.cpp:841
+#: src/gui/StelGuiItems.cpp:842
 msgctxt "abbreviation"
 msgid "FPS"
 msgstr ""
 
-#: src/gui/StelGuiItems.cpp:849
+#: src/gui/StelGuiItems.cpp:850
 msgid "Frames per second"
 msgstr ""
 
@@ -3986,33 +3986,33 @@ msgstr ""
 msgid "Visual magnitude based on phase angle and albedo."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:207
+#: src/gui/LocationDialog.cpp:209
 msgid "Reset location list to show all known locations"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:208
+#: src/gui/LocationDialog.cpp:210
 msgid ""
 "Toggle fetching GPS location. (Does not change time zone!) When satisfied, "
 "toggle off to let other programs access the GPS device."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:765
+#: src/gui/LocationDialog.cpp:793
 msgid "GPS listening..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:772
+#: src/gui/LocationDialog.cpp:800
 msgid "GPS disconnecting..."
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:784
+#: src/gui/LocationDialog.cpp:812
 msgid "GPS location fix"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:807
+#: src/gui/LocationDialog.cpp:835
 msgid "GPS:FAILED"
 msgstr ""
 
-#: src/gui/LocationDialog.cpp:819 src/ui_locationDialogGui.h:513
+#: src/gui/LocationDialog.cpp:847 src/ui_locationDialogGui.h:513
 msgid "Get location from GPS"
 msgstr ""
 
@@ -4197,7 +4197,7 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:262 src/gui/AstroCalcDialog.cpp:473
 #: src/gui/AstroCalcDialog.cpp:1055 src/gui/AstroCalcDialog.cpp:1960
 #: src/gui/AstroCalcDialog.cpp:2421 src/gui/AstroCalcDialog.cpp:2613
-#: src/gui/AstroCalcDialog.cpp:2615 plugins/Satellites/src/Satellite.cpp:303
+#: src/gui/AstroCalcDialog.cpp:2615 plugins/Satellites/src/Satellite.cpp:310
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
 msgid "Altitude"
 msgstr ""
@@ -6209,383 +6209,383 @@ msgstr ""
 msgid "Babylonian (Seleucid)"
 msgstr ""
 
-#. TRANSLATORS: Name of landscape
-#: src/translations.h:533
+#. TRANSLATORS: Name of the sky culture and landscape
+#: src/translations.h:529
 msgid "Armintxe Cave"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:535
+#: src/translations.h:534
 msgid "Guereins"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:537
+#: src/translations.h:536
 msgid "Trees"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:539 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1551
+#: src/translations.h:538 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1551
 msgid "Moon"
 msgstr "ਚੰਦ"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:541
+#: src/translations.h:540
 msgid "Hurricane"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:543
+#: src/translations.h:542
 msgid "Ocean"
 msgstr "ਸਮੁੰਦਰ"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:545
+#: src/translations.h:544
 msgid "Garching"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:547 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1563
+#: src/translations.h:546 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1563
 msgid "Mars"
 msgstr "ਮੰਗਲ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:549 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1566
+#: src/translations.h:548 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1566
 msgid "Jupiter"
 msgstr "ਬ੍ਰਹਿਸਪਤੀ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:551 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1569
+#: src/translations.h:550 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1569
 msgid "Saturn"
 msgstr "ਸ਼ਨਿੱਚਰ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:553
+#: src/translations.h:552
 msgid "Uranus"
 msgstr "ਯੂਰੇਨਸ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:555
+#: src/translations.h:554
 msgid "Neptune"
 msgstr "ਨੈਪਚੂਨ"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:557
+#: src/translations.h:556
 msgid "Geneva"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:559
+#: src/translations.h:558
 msgid "Grossmugl"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:561
+#: src/translations.h:560
 msgid "Zero Horizon"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:563 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/translations.h:562 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1548
 msgid "Sun"
 msgstr "ਐਤ"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:568
+#: src/translations.h:567
 msgid "Vienna Sterngarten"
 msgstr ""
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:570
+#: src/translations.h:569
 msgid "Testscene"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:575
+#: src/translations.h:574
 msgid "Landscape Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:577
+#: src/translations.h:576
 msgid "Partial Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:579
+#: src/translations.h:578
 msgid "Total Lunar Eclipse"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:581
+#: src/translations.h:580
 msgid "Screensaver"
 msgstr "ਸਕਰੀਨਸੇਵਰ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:583
+#: src/translations.h:582
 msgid "Solar Eclipse 2009"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:585
+#: src/translations.h:584
 msgid "Startup Script"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:587
+#: src/translations.h:586
 msgid "Zodiac"
 msgstr "ਰਾਸ਼ੀ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:589
+#: src/translations.h:588
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:591
+#: src/translations.h:590
 msgid "Double eclipse from Deimos in 2017"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:593
+#: src/translations.h:592
 msgid "Double eclipse from Deimos in 2031"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:595
+#: src/translations.h:594
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:597
+#: src/translations.h:596
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:599
+#: src/translations.h:598
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:601
+#: src/translations.h:600
 msgid "Solar System Screensaver"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:603
+#: src/translations.h:602
 msgid "Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:605
+#: src/translations.h:604
 msgid "Western Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:607
+#: src/translations.h:606
 msgid "Sun from different planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:609
+#: src/translations.h:608
 msgid "Earth best views from other bodies"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:611
+#: src/translations.h:610
 msgid "Transit of Venus"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:613
+#: src/translations.h:612
 msgid "Sky Culture Tour"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:615
+#: src/translations.h:614
 msgid "Earth Events from Mercury"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:617
+#: src/translations.h:616
 msgid "Earth Events from a floating city on Venus"
 msgstr ""
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:619
+#: src/translations.h:618
 msgid "Earth Events from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:621
+#: src/translations.h:620
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:623
+#: src/translations.h:622
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:625
+#: src/translations.h:624
 msgid "Tycho's Supernova"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:627
+#: src/translations.h:626
 msgid "Earth and other Planets from Ceres"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:629
+#: src/translations.h:628
 msgid "Messier Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:631
+#: src/translations.h:630
 msgid "Binocular Highlights"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:633
+#: src/translations.h:632
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:635
+#: src/translations.h:634
 msgid "List of largest known stars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:637
+#: src/translations.h:636
 msgid "Herschel 400 Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:639
+#: src/translations.h:638
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:641
+#: src/translations.h:640
 msgid "The Jack Bennett Catalog"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:643
+#: src/translations.h:642
 msgid "Best objects in the New General Catalog"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:645
+#: src/translations.h:644
 msgid "Jupiter and triple shadow phenomena"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:647
+#: src/translations.h:646
 msgid "Jupiter without Galilean satellites"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:649
+#: src/translations.h:648
 msgid "Skybox Tiles"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:651
+#: src/translations.h:650
 msgid "Occultations of bright stars by planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:653
+#: src/translations.h:652
 msgid "Mutual occultations of planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:655
+#: src/translations.h:654
 msgid "Planet Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:657
+#: src/translations.h:656
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:659
+#: src/translations.h:658
 msgid "Martian analemma"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:665
+#: src/translations.h:664
 msgid "Look around each installed landscape."
 msgstr ""
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:667
+#: src/translations.h:666
 msgid "Look at each installed sky culture."
 msgstr ""
 
-#: src/translations.h:668
+#: src/translations.h:667
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr ""
 
-#: src/translations.h:669
+#: src/translations.h:668
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr ""
 
-#: src/translations.h:670
+#: src/translations.h:669
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 
-#: src/translations.h:671
+#: src/translations.h:670
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr ""
 
-#: src/translations.h:672
+#: src/translations.h:671
 msgid "Script which runs automatically at startup"
 msgstr ""
 
-#: src/translations.h:673
+#: src/translations.h:672
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr ""
 
-#: src/translations.h:674
+#: src/translations.h:673
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr ""
 
-#: src/translations.h:675
+#: src/translations.h:674
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr ""
 
-#: src/translations.h:676
+#: src/translations.h:675
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr ""
 
-#: src/translations.h:677
+#: src/translations.h:676
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 
-#: src/translations.h:678
+#: src/translations.h:677
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
 "place 1/23/2048. In real speed."
 msgstr ""
 
-#: src/translations.h:679
+#: src/translations.h:678
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -6595,45 +6595,45 @@ msgid ""
 "light up later."
 msgstr ""
 
-#: src/translations.h:680
+#: src/translations.h:679
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
 
-#: src/translations.h:681
+#: src/translations.h:680
 msgid "A tour of the western constellations."
 msgstr ""
 
-#: src/translations.h:682
+#: src/translations.h:681
 msgid "A tour of the constellations of the selected sky culture."
 msgstr ""
 
-#: src/translations.h:683
+#: src/translations.h:682
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr ""
 
-#: src/translations.h:684
+#: src/translations.h:683
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 
-#: src/translations.h:685
+#: src/translations.h:684
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 
-#: src/translations.h:686
+#: src/translations.h:685
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr ""
 
-#: src/translations.h:687
+#: src/translations.h:686
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr ""
 
-#: src/translations.h:688
+#: src/translations.h:687
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -6641,66 +6641,66 @@ msgid ""
 "moons, Callisto will be the one."
 msgstr ""
 
-#: src/translations.h:689
+#: src/translations.h:688
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 
-#: src/translations.h:690
+#: src/translations.h:689
 msgid "A tour of Messier Objects"
 msgstr ""
 
-#: src/translations.h:691
+#: src/translations.h:690
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr ""
 
-#: src/translations.h:692
+#: src/translations.h:691
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
 "09/2014. Data taken from his website, http://www.astropix.com/doubles/"
 msgstr ""
 
-#: src/translations.h:693
+#: src/translations.h:692
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 
-#: src/translations.h:694
+#: src/translations.h:693
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr ""
 
-#: src/translations.h:695
+#: src/translations.h:694
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
 "Right Ascension (2000.0)."
 msgstr ""
 
-#: src/translations.h:696
+#: src/translations.h:695
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:697
+#: src/translations.h:696
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:698
+#: src/translations.h:697
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr ""
 
-#: src/translations.h:699
+#: src/translations.h:698
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -6709,231 +6709,231 @@ msgid ""
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
 
-#: src/translations.h:700
+#: src/translations.h:699
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
 
-#: src/translations.h:701
+#: src/translations.h:700
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr ""
 
-#: src/translations.h:702
+#: src/translations.h:701
 msgid "A tour of the Solar System planets"
 msgstr ""
 
-#: src/translations.h:703
+#: src/translations.h:702
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
 msgstr ""
 
-#: src/translations.h:704
+#: src/translations.h:703
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
 msgstr ""
 
-#: src/translations.h:708
+#: src/translations.h:707
 msgid "&Undo"
 msgstr ""
 
-#: src/translations.h:709
+#: src/translations.h:708
 msgid "&Redo"
 msgstr ""
 
-#: src/translations.h:710
+#: src/translations.h:709
 msgid "Cu&t"
 msgstr ""
 
-#: src/translations.h:711
+#: src/translations.h:710
 msgid "&Copy"
 msgstr ""
 
-#: src/translations.h:712
+#: src/translations.h:711
 msgid "&Paste"
 msgstr ""
 
-#: src/translations.h:713 plugins/Oculars/src/ui_ocularDialog.h:1304
+#: src/translations.h:712 plugins/Oculars/src/ui_ocularDialog.h:1304
 #: plugins/Oculars/src/ui_ocularDialog.h:1313
 #: plugins/Oculars/src/ui_ocularDialog.h:1319
 #: plugins/Oculars/src/ui_ocularDialog.h:1340
 msgid "Delete"
 msgstr "ਹਟਾਓ"
 
-#: src/translations.h:714
+#: src/translations.h:713
 msgid "Select All"
 msgstr ""
 
-#: src/translations.h:715
+#: src/translations.h:714
 msgid "Look in:"
 msgstr ""
 
-#: src/translations.h:716
+#: src/translations.h:715
 msgid "Directory:"
 msgstr ""
 
-#: src/translations.h:717
+#: src/translations.h:716
 msgid "Folder"
 msgstr ""
 
-#: src/translations.h:718
+#: src/translations.h:717
 msgid "&Choose"
 msgstr ""
 
-#: src/translations.h:719 src/ui_configurationDialog.h:1692
+#: src/translations.h:718 src/ui_configurationDialog.h:1692
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "ਰੱਦ ਕਰੋ"
 
-#: src/translations.h:720
+#: src/translations.h:719
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:721
+#: src/translations.h:720
 msgid "Files of type:"
 msgstr ""
 
-#: src/translations.h:722
+#: src/translations.h:721
 msgid "Date Modified"
 msgstr ""
 
-#: src/translations.h:723
+#: src/translations.h:722
 msgid "Directories"
 msgstr ""
 
-#: src/translations.h:724
+#: src/translations.h:723
 msgid "Computer"
 msgstr ""
 
-#: src/translations.h:725
+#: src/translations.h:724
 msgid "&Open"
 msgstr ""
 
-#: src/translations.h:726
+#: src/translations.h:725
 msgid "&Save"
 msgstr ""
 
-#: src/translations.h:727
+#: src/translations.h:726
 msgid "File &name:"
 msgstr ""
 
-#: src/translations.h:728
+#: src/translations.h:727
 msgid "Copy &Link Location"
 msgstr ""
 
-#: src/translations.h:729
+#: src/translations.h:728
 msgid "Abort"
 msgstr ""
 
-#: src/translations.h:730
+#: src/translations.h:729
 msgid "Ignore"
 msgstr ""
 
-#: src/translations.h:731
+#: src/translations.h:730
 msgid "&Basic colors"
 msgstr ""
 
-#: src/translations.h:732
+#: src/translations.h:731
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:733
+#: src/translations.h:732
 msgid "&Custom colors"
 msgstr ""
 
-#: src/translations.h:734
+#: src/translations.h:733
 msgid "&Add to Custom Colors"
 msgstr ""
 
-#: src/translations.h:735
+#: src/translations.h:734
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:736
+#: src/translations.h:735
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:737
+#: src/translations.h:736
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:738
+#: src/translations.h:737
 msgid "&Red:"
 msgstr ""
 
-#: src/translations.h:739
+#: src/translations.h:738
 msgid "&Green:"
 msgstr ""
 
-#: src/translations.h:740
+#: src/translations.h:739
 msgid "Bl&ue:"
 msgstr ""
 
-#: src/translations.h:741
+#: src/translations.h:740
 msgid "Select Color"
 msgstr ""
 
-#: src/translations.h:742
+#: src/translations.h:741
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr ""
 
-#: src/translations.h:743
+#: src/translations.h:742
 msgid "Back"
 msgstr ""
 
-#: src/translations.h:744
+#: src/translations.h:743
 msgid "Forward"
 msgstr ""
 
-#: src/translations.h:745
+#: src/translations.h:744
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:746
+#: src/translations.h:745
 msgid "Create New Folder"
 msgstr ""
 
-#: src/translations.h:747
+#: src/translations.h:746
 msgid "List View"
 msgstr ""
 
-#: src/translations.h:748
+#: src/translations.h:747
 msgid "Detail View"
 msgstr ""
 
-#: src/translations.h:749
+#: src/translations.h:748
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:750
+#: src/translations.h:749
 #, qt-format
 msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
 
-#: src/translations.h:751
+#: src/translations.h:750
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:752
+#: src/translations.h:751
 msgid "&No"
 msgstr ""
 
-#: src/translations.h:753
+#: src/translations.h:752
 msgid "&Select All"
 msgstr ""
 
-#: src/translations.h:754
+#: src/translations.h:753
 msgid "&Step up"
 msgstr ""
 
-#: src/translations.h:755
+#: src/translations.h:754
 msgid "Step &down"
 msgstr ""
 
@@ -12219,132 +12219,132 @@ msgstr ""
 msgid "TIANGONG 1"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:269
+#: plugins/Satellites/src/Satellite.cpp:276
 msgid "International Designator"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:276
+#: plugins/Satellites/src/Satellite.cpp:283
 msgid "artificial satellite"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:283
+#: plugins/Satellites/src/Satellite.cpp:290
 msgid "extincted to"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:285
+#: plugins/Satellites/src/Satellite.cpp:292
 msgid "Approx. magnitude"
 msgstr ""
 
 #. TRANSLATORS: Slant range: distance between the satellite and the observer
-#: plugins/Satellites/src/Satellite.cpp:299
+#: plugins/Satellites/src/Satellite.cpp:306
 msgid "Range"
 msgstr ""
 
 #. TRANSLATORS: Rate at which the distance changes
-#: plugins/Satellites/src/Satellite.cpp:301
+#: plugins/Satellites/src/Satellite.cpp:308
 msgid "Range rate"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:305
+#: plugins/Satellites/src/Satellite.cpp:312
 msgid "SubPoint (Lat./Long.)"
 msgstr ""
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:319
+#: plugins/Satellites/src/Satellite.cpp:326
 msgid "TEME coordinates"
 msgstr ""
 
 #. TRANSLATORS: TEME (True Equator, Mean Equinox) is an Earth-centered
 #. inertial coordinate system
-#: plugins/Satellites/src/Satellite.cpp:326
+#: plugins/Satellites/src/Satellite.cpp:333
 msgid "TEME velocity"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:342
+#: plugins/Satellites/src/Satellite.cpp:349
 msgid "Sun reflection angle"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:355
+#: plugins/Satellites/src/Satellite.cpp:362
 msgid "Group"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:357
+#: plugins/Satellites/src/Satellite.cpp:364
 msgid "Groups"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:363
+#: plugins/Satellites/src/Satellite.cpp:370
 msgid "Operational status"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:370
+#: plugins/Satellites/src/Satellite.cpp:377
 msgid "The satellite and the observer are in sunlight."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:373
+#: plugins/Satellites/src/Satellite.cpp:380
 msgid "The satellite is visible."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:376
+#: plugins/Satellites/src/Satellite.cpp:383
 msgid "The satellite is eclipsed."
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:379
+#: plugins/Satellites/src/Satellite.cpp:386
 msgid "The satellite is not visible"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:387
+#: plugins/Satellites/src/Satellite.cpp:394
 msgid "Radio communication"
 msgstr ""
 
 #. TRANSLATORS: Unit of measurement of frequency
-#: plugins/Satellites/src/Satellite.cpp:406 plugins/Pulsars/src/Pulsar.cpp:271
+#: plugins/Satellites/src/Satellite.cpp:413 plugins/Pulsars/src/Pulsar.cpp:271
 msgctxt "frequency"
 msgid "MHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:409
+#: plugins/Satellites/src/Satellite.cpp:416
 msgctxt "frequency"
 msgid "kHz"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:709
-#: plugins/Satellites/src/Satellite.cpp:734
+#: plugins/Satellites/src/Satellite.cpp:716
+#: plugins/Satellites/src/Satellite.cpp:741
 msgctxt "operational status"
 msgid "unknown"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:713
+#: plugins/Satellites/src/Satellite.cpp:720
 msgctxt "operational status"
 msgid "operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:716
+#: plugins/Satellites/src/Satellite.cpp:723
 msgctxt "operational status"
 msgid "nonoperational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:719
+#: plugins/Satellites/src/Satellite.cpp:726
 msgctxt "operational status"
 msgid "partially operational"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:722
+#: plugins/Satellites/src/Satellite.cpp:729
 msgctxt "operational status"
 msgid "standby"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:725
+#: plugins/Satellites/src/Satellite.cpp:732
 msgctxt "operational status"
 msgid "spare"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:728
+#: plugins/Satellites/src/Satellite.cpp:735
 msgctxt "operational status"
 msgid "extended mission"
 msgstr ""
 
-#: plugins/Satellites/src/Satellite.cpp:731
+#: plugins/Satellites/src/Satellite.cpp:738
 msgctxt "operational status"
 msgid "decayed"
 msgstr ""
