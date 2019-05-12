@@ -14,15 +14,13 @@ def main():
     parser = argparse.ArgumentParser(
         description='This Python script reads a satellites.json file in the old format (using names for satellite IDs)'
                     ' and ouputs a file that uses catalog numbers as satellite IDs.')
-    parser.add_argument(dest='input', nargs='?', default='satellites.json', type=Path, metavar='input',
-                        help='satellites.json file (default: %(default)s)')
-    parser.add_argument(dest='output', nargs='?', default='satellites_with_numbers.json', type=Path,
-                        metavar='output', help='satellites_with_numbers.json file (default: %(default)s)')
+    parser.add_argument(dest='input', type=Path, metavar='input', help='satellites.json file (default: %(default)s)')
+    parser.add_argument(dest='output', type=Path, metavar='output',
+                        help='satellites_with_numbers.json file (default: %(default)s)')
 
     args = parser.parse_args()
 
     input_file = Path(args.input)
-    print(input_file.absolute())
     output_file = Path(args.output)
     if not input_file.exists():
         print(f"'{input_file}' do not exist.")
