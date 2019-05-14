@@ -232,10 +232,7 @@ void StelMainScriptAPI::setPlanetocentricCalculations(bool f)
 void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, double altitude, double duration, const QString& name, const QString& planet)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
-	Q_ASSERT(ssmgr);
-
-	StelObjectP ssObj = ssmgr->searchByName(planet);
+	StelObjectP ssObj = GETSTELMODULE(SolarSystem)->searchByName(planet);
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = longitude;
 	loc.latitude = latitude;
@@ -303,8 +300,6 @@ QStringList StelMainScriptAPI::getAllTimezoneNames()
 {
 	return StelApp::getInstance().getLocationMgr().getAllTimezoneNames();
 }
-
-
 
 void StelMainScriptAPI::screenshot(const QString& prefix, bool invert, const QString& dir, const bool overwrite, const QString &format)
 {
@@ -524,7 +519,6 @@ void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
 		     cornersRaDec[2][0]*180./M_PI, cornersRaDec[2][1]*180./M_PI,
 		     minRes, maxBright, visible, frame);
 }
-
 
 // Convenience method:
 void StelMainScriptAPI::loadSkyImage(const QString& id, const QString& filename,
@@ -1080,7 +1074,6 @@ void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, flo
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
-
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aim;
@@ -1131,7 +1124,6 @@ void StelMainScriptAPI::moveToRaDecJ2000(const QString& ra, const QString& dec, 
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
-
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aimJ2000;
@@ -1154,7 +1146,6 @@ void StelMainScriptAPI::moveToGalLongLat(const QString& lon, const QString& lat,
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
 	Q_ASSERT(mvmgr);
-
 	GETSTELMODULE(StelObjectMgr)->unSelect();
 
 	Vec3d aimJ2000;
