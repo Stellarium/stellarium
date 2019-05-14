@@ -235,13 +235,14 @@ void StelMainScriptAPI::setObserverLocation(double longitude, double latitude, d
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
 
+	StelObjectP ssObj = ssmgr->searchByName(planet);
 	StelLocation loc = core->getCurrentLocation();
 	loc.longitude = longitude;
 	loc.latitude = latitude;
 	if (altitude > -1000)
 		loc.altitude = altitude;
-	if (ssmgr->searchByName(planet))
-		loc.planetName = planet;
+	if (!ssObj.isNull())
+		loc.planetName = ssObj->getEnglishName();
 	loc.name = name;
 	core->moveObserverTo(loc, duration, duration);
 }
