@@ -10,7 +10,7 @@ SET(TelescopeControl_GUI_UIS
 
 QT5_WRAP_UI(TelescopeControl_GUI_UIS_H ${TelescopeControl_GUI_UIS})
 
-add_library(TelescopeControl_gui
+add_library(TelescopeControl_gui STATIC
     SlewDialog.hpp
     SlewDialog.cpp
     TelescopeDialog.hpp
