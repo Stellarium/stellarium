@@ -1,7 +1,7 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-add_library(TelescopeControl_NexStar
+add_library(TelescopeControl_NexStar STATIC
     NexStarCommand.hpp
     NexStarCommand.cpp
     NexStarConnection.hpp

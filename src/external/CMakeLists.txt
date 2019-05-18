@@ -190,7 +190,7 @@ IF(USE_PLUGIN_TELESCOPECONTROL)
     include_directories(libindi)
     include_directories(libindi/libs)
     include_directories(libindi/libs/indibase)
-    add_library(indiclient
+    add_library(indiclient STATIC
         libindi/libs/lilxml.c
         libindi/base64.c
         libindi/libs/indibase/basedevice.h

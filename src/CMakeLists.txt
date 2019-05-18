@@ -469,7 +469,7 @@ IF(GENERATE_STELMAINLIB)
      #stelMain should be after the plug-ins, otherwise the build crashes
      TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
 ELSE()
-     ADD_LIBRARY(stelMain ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
+     ADD_LIBRARY(stelMain STATIC ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
      ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
      TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
