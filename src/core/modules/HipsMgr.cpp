@@ -82,8 +82,6 @@ void HipsMgr::loadSources()
 {
 	if (state != Created)
 		return; // Already loaded.
-	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::NotAccessible)
-		return; // Network is not available
 
 	state = Loading;
 	emit stateChanged(state);
@@ -136,14 +134,17 @@ void HipsMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
-	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::NotAccessible)
-		setFlagShow(false);
-	else
-		setFlagShow(conf->value("show", false).toBool());
+	setFlagShow(conf->value("show", false).toBool());
 	int size = conf->beginReadArray("surveys");
-	conf->endArray();
-	bool hasVisibleSurvey = size>0 ? true: false;
+	conf->endArray();	
 	conf->endGroup();
+	bool hasVisibleSurvey = size>0 ? true: false;
+
+	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::NotAccessible)
+	{
+		setFlagShow(false);
+		hasVisibleSurvey = false;
+	}
 
 	addAction("actionShow_Hips_Surveys", N_("Display Options"), N_("Toggle Hierarchical Progressive Surveys (experimental)"), "flagShow", "Ctrl+Alt+D");
 
