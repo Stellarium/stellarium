@@ -39,45 +39,52 @@ HipsMgr::HipsMgr()
 
 HipsMgr::~HipsMgr()
 {
-	//store active HIPS to config.ini
-	QSettings* conf = StelApp::getInstance().getSettings();
-	conf->beginGroup("hips");
-	conf->setValue("show", getFlagShow());
-
-	// remove 0.18.0 scheme
-	conf->remove("visible");
-
-	QStringList surveyUrls;
-	for (auto survey: surveys)
+	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::Accessible)
 	{
-		if (survey->isVisible() && survey->planet.isEmpty())
-			surveyUrls << survey->getUrl();
-	}
+		// Store active HiPS to config.ini if network is available
+		QSettings* conf = StelApp::getInstance().getSettings();
+		conf->beginGroup("hips");
+		conf->setValue("show", getFlagShow());
 
-	int surveyListSize = surveyUrls.count();
-	if (surveyListSize==0)
-	{
-		// remove old urls
-		conf->remove("surveys");
-	}
-	else
-	{
-		conf->beginWriteArray("surveys");
-		for(int i=0;i<surveyListSize;i++)
+		// remove 0.18.0 scheme
+		conf->remove("visible");
+
+		QStringList surveyUrls;
+		for (auto survey: surveys)
 		{
-			conf->setArrayIndex(i);
-			conf->setValue("url", surveyUrls.at(i));
+			if (survey->isVisible() && survey->planet.isEmpty())
+				surveyUrls << survey->getUrl();
 		}
-		conf->endArray();
-	}
 
-	conf->endGroup();
-	conf->sync();
+		int surveyListSize = surveyUrls.count();
+		if (surveyListSize==0)
+		{
+			// remove old urls
+			conf->remove("surveys");
+		}
+		else
+		{
+			conf->beginWriteArray("surveys");
+			for(int i=0;i<surveyListSize;i++)
+			{
+				conf->setArrayIndex(i);
+				conf->setValue("url", surveyUrls.at(i));
+			}
+			conf->endArray();
+		}
+
+		conf->endGroup();
+		conf->sync();
+	}
 }
 
 void HipsMgr::loadSources()
 {
-	if (state != Created) return; // Already loaded.
+	if (state != Created)
+		return; // Already loaded.
+	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::NotAccessible)
+		return; // Network is not available
+
 	state = Loading;
 	emit stateChanged(state);
 	QSettings* conf = StelApp::getInstance().getSettings();
@@ -129,7 +136,10 @@ void HipsMgr::init()
 {
 	QSettings* conf = StelApp::getInstance().getSettings();
 	conf->beginGroup("hips");
-	setFlagShow(conf->value("show", false).toBool());
+	if (StelApp::getInstance().getNetworkAccessManager()->networkAccessible()==QNetworkAccessManager::NotAccessible)
+		setFlagShow(false);
+	else
+		setFlagShow(conf->value("show", false).toBool());
 	int size = conf->beginReadArray("surveys");
 	conf->endArray();
 	bool hasVisibleSurvey = size>0 ? true: false;
