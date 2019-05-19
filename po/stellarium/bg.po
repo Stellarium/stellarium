@@ -8,6 +8,7 @@
 # Alexander Shopov <ash@kambanaria.org>, 2018
 # Vladislav Zorov, 2019
 # Alexander Wolf <alex.v.wolf@gmail.com>, 2019
+# Petko Kirilov <kirilovpetko@gmail.com>, 2019
 # 
 #, fuzzy
 msgid ""
@@ -16,7 +17,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
 "POT-Creation-Date: 2019-03-26 22:10+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Alexander Wolf <alex.v.wolf@gmail.com>, 2019\n"
+"Last-Translator: Petko Kirilov <kirilovpetko@gmail.com>, 2019\n"
 "Language-Team: Bulgarian (https://www.transifex.com/stellarium/teams/80998/bg/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -116,7 +117,7 @@ msgstr "Без избор на съзвездия"
 
 #: src/core/modules/ConstellationMgr.cpp:148
 msgid "Select all constellations"
-msgstr "Избор на всички съзвездия"
+msgstr "Избери всички съзвездия"
 
 #: src/core/modules/ConstellationMgr.cpp:150
 msgid "Reload the sky culture"
@@ -253,7 +254,7 @@ msgstr "SG′"
 #. TRANSLATORS: Antisolar Point
 #: src/core/modules/GridLinesMgr.cpp:982
 msgid "ASP"
-msgstr ""
+msgstr "ПЗТ"
 
 #: src/core/modules/GridLinesMgr.cpp:1259
 msgid "Grids and lines"
@@ -390,7 +391,7 @@ msgstr "Точки на слънцестоене"
 
 #: src/core/modules/GridLinesMgr.cpp:1291 src/ui_viewDialog.h:2900
 msgid "Antisolar point"
-msgstr ""
+msgstr "Противозвездна точка"
 
 #: src/core/modules/LandscapeMgr.cpp:479
 msgid "Atmosphere"
@@ -1212,15 +1213,15 @@ msgstr "Непрозрачност"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "reduced to"
-msgstr ""
+msgstr "намален до"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "by"
-msgstr ""
+msgstr "от"
 
 #: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
 msgid "Airmasses"
-msgstr ""
+msgstr "Въздушни маси"
 
 #: src/core/modules/Nebula.cpp:181 src/core/modules/StarWrapper.cpp:236
 msgid "Photometric system"
@@ -3015,7 +3016,7 @@ msgstr "Изображения на обекти от дълбокото неб�
 
 #: src/core/StelSkyLayerMgr.cpp:86
 msgid "Reload the deep-sky objects background images"
-msgstr ""
+msgstr "Презареди пайзажните картините на небесните обекти"
 
 #: src/core/StelSkyCultureMgr.cpp:173
 msgctxt "sky culture classification"
@@ -3049,11 +3050,13 @@ msgid ""
 "Represents a single source like a historical atlas, or publications of a "
 "single author."
 msgstr ""
+"Предстравлява един източник като исторически атлас или публикация от един "
+"автор."
 
 #: src/core/StelSkyCultureMgr.cpp:188
 msgctxt "sky culture classification"
 msgid "traditional"
-msgstr ""
+msgstr "традиционен"
 
 #: src/core/StelSkyCultureMgr.cpp:189
 msgid ""
@@ -3068,7 +3071,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:193
 msgctxt "sky culture classification"
 msgid "personal"
-msgstr ""
+msgstr "личен"
 
 #: src/core/StelSkyCultureMgr.cpp:194
 msgid ""
@@ -3084,7 +3087,7 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:198
 msgctxt "sky culture classification"
 msgid "incomplete"
-msgstr ""
+msgstr "незавършен"
 
 #: src/core/StelSkyCultureMgr.cpp:199
 msgid ""
@@ -3097,15 +3100,15 @@ msgstr ""
 #: src/core/StelSkyCultureMgr.cpp:203
 msgctxt "sky culture classification"
 msgid "undefined"
-msgstr ""
+msgstr "неопределен"
 
 #: src/core/StelSkyCultureMgr.cpp:210
 msgid "Classification"
-msgstr ""
+msgstr "Класификация "
 
 #: src/core/StelSkyCultureMgr.cpp:272
 msgid "No description"
-msgstr ""
+msgstr "Няма описание"
 
 #: src/core/StelMovementMgr.cpp:189 src/gui/StelGui.cpp:225
 #: src/StelMainView.cpp:816 src/StelMainView.cpp:817
@@ -3473,7 +3476,7 @@ msgstr "Montenbruck и Pfleger (2000)"
 
 #: src/gui/ConfigurationDialog.cpp:1593
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
-msgstr ""
+msgstr "Райнголд и Дершоуиц (2002, 2007, 2018)"
 
 #: src/gui/ConfigurationDialog.cpp:1594
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
