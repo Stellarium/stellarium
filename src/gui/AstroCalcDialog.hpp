@@ -187,6 +187,11 @@ private slots:
 	void saveAltVsTimeMoonFlag(bool state);
 	void saveAltVsTimePositiveFlag(bool state);
 
+	//! Draw diagram 'Azimuth vs. Time'
+	void drawAziVsTimeDiagram();
+	//! Show info from graphs under mouse cursor
+	void mouseOverAziLine(QMouseEvent *event);
+
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
 	void saveGraphsSecondId(int index);
@@ -263,6 +268,7 @@ private:
 	void populateGroupCelestialBodyList();	
 	//! Prepare graph settings
 	void prepareAxesAndGraph();
+	void prepareAziVsTimeAxesAndGraph();
 	void prepareXVsTimeAxesAndGraph();
 	void prepareMonthlyEleveationAxesAndGraph();
 	void prepareDistanceAxesAndGraph();
@@ -298,11 +304,13 @@ private:
 				   QString separation, QString elongation, QString angularDistance,
 				   QString elongTooltip="", QString angDistTooltip="");
 
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph;
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive,
+	       plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime, plotAziVsTimeSun, plotAziVsTimeMoon;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader;
 	static float brightLimit;
-	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2, minYld, maxYld, minYad, maxYad, minYadm, maxYadm;
+	static double minY, maxY, minYme, maxYme, minYsun, maxYsun, minYmoon, maxYmoon, transitX, minY1, maxY1, minY2, maxY2,
+			     minYld, maxYld, minYad, maxYad, minYadm, maxYadm, minYaz, maxYaz;
 	static QString yAxis1Legend, yAxis2Legend;
 
 	//! Make sure that no tabs icons are outside of the viewport.

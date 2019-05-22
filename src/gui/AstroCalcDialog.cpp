@@ -77,6 +77,8 @@ double AstroCalcDialog::minYad = 0.;
 double AstroCalcDialog::maxYad = 180.;
 double AstroCalcDialog::minYadm = 0.;
 double AstroCalcDialog::maxYadm = 180.;
+double AstroCalcDialog::minYaz = 0.;
+double AstroCalcDialog::maxYaz = 360.;
 QString AstroCalcDialog::yAxis1Legend = "";
 QString AstroCalcDialog::yAxis2Legend = "";
 
@@ -93,6 +95,9 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, plotMonthlyElevationPositive(false)
 	, plotDistanceGraph(false)
 	, plotAngularDistanceGraph(false)
+	, plotAziVsTime(false)
+	, plotAziVsTimeSun(false)
+	, plotAziVsTimeMoon(false)
 	, delimiter(", ")
 	, acEndl("\n")
 {
@@ -137,12 +142,14 @@ void AstroCalcDialog::retranslate()
 		populateGroupCelestialBodyList();
 		currentCelestialPositions();
 		prepareAxesAndGraph();
+		prepareAziVsTimeAxesAndGraph();
 		populateFunctionsList();
 		prepareXVsTimeAxesAndGraph();
 		prepareMonthlyEleveationAxesAndGraph();
 		prepareDistanceAxesAndGraph();
 		prepareAngularDistanceAxesAndGraph();
 		drawAltVsTimeDiagram();
+		drawAziVsTimeDiagram();
 		populateTimeIntervalsList();
 		populateWutGroups();
 		// Hack to shrink the tabs to optimal size after language change
@@ -192,6 +199,8 @@ void AstroCalcDialog::createDialogContent()
 	// Altitude vs. Time feature
 	prepareAxesAndGraph();
 	drawCurrentTimeDiagram();
+	// Azimuth vs. Time feature
+	prepareAziVsTimeAxesAndGraph();
 	// Graphs feature
 	populateFunctionsList();
 	prepareXVsTimeAxesAndGraph();
@@ -285,6 +294,11 @@ void AstroCalcDialog::createDialogContent()
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
+
+	connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
+	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAziVsTimeDiagram()));
+	drawAziVsTimeDiagram();
 
 	// Monthly Elevation
 	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
@@ -386,6 +400,7 @@ void AstroCalcDialog::createDialogContent()
 	QString style = "QLabel { color: rgb(238, 238, 238); }";
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
+	ui->aziVsTimeLabel->setStyleSheet(style);
 	ui->monthlyElevationLabel->setStyleSheet(style);	
 	ui->pcDistanceGraphLegend->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);
@@ -443,6 +458,215 @@ void AstroCalcDialog::saveAltVsTimePositiveFlag(bool state)
 
 		drawAltVsTimeDiagram();
 	}
+}
+
+void AstroCalcDialog::prepareAziVsTimeAxesAndGraph()
+{
+	QString xAxisStr = q_("Local Time");
+	QString yAxisStr = QString("%1, %2").arg(q_("Azimuth"), QChar(0x00B0));
+
+	QColor axisColor(Qt::white);
+	QPen axisPen(axisColor, 1);
+
+	ui->aziVsTimePlot->clearGraphs();
+
+	// main data: Azimuth vs. Time graph
+	ui->aziVsTimePlot->addGraph();
+	ui->aziVsTimePlot->setBackground(QBrush(QColor(86, 87, 90)));
+	ui->aziVsTimePlot->graph(0)->setPen(QPen(Qt::red, 1));
+	ui->aziVsTimePlot->graph(0)->setLineStyle(QCPGraph::lsLine);
+	ui->aziVsTimePlot->graph(0)->rescaleAxes(true);
+
+	// additional data: Current Time Diagram
+	ui->aziVsTimePlot->addGraph();
+	ui->aziVsTimePlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->aziVsTimePlot->graph(1)->setLineStyle(QCPGraph::lsLine);
+	ui->aziVsTimePlot->graph(1)->setName("[Now]");
+
+	ui->aziVsTimePlot->xAxis->setLabel(xAxisStr);
+	ui->aziVsTimePlot->yAxis->setLabel(yAxisStr);
+
+	ui->aziVsTimePlot->xAxis->setRange(43200, 129600); // 24 hours since 12h00m (range in seconds)
+	ui->aziVsTimePlot->xAxis->setScaleType(QCPAxis::stLinear);
+	ui->aziVsTimePlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
+	ui->aziVsTimePlot->xAxis->setLabelColor(axisColor);
+	ui->aziVsTimePlot->xAxis->setTickLabelColor(axisColor);
+	ui->aziVsTimePlot->xAxis->setBasePen(axisPen);
+	ui->aziVsTimePlot->xAxis->setTickPen(axisPen);
+	ui->aziVsTimePlot->xAxis->setSubTickPen(axisPen);
+	ui->aziVsTimePlot->xAxis->setDateTimeFormat("H:mm");
+	ui->aziVsTimePlot->xAxis->setDateTimeSpec(Qt::UTC); // Qt::UTC + core->getUTCOffset() give local time
+	ui->aziVsTimePlot->xAxis->setAutoTickStep(false);
+	ui->aziVsTimePlot->xAxis->setTickStep(7200); // step is 2 hours (in seconds)
+	ui->aziVsTimePlot->xAxis->setAutoSubTicks(false);
+	ui->aziVsTimePlot->xAxis->setSubTickCount(7);
+
+	ui->aziVsTimePlot->yAxis->setRange(minYaz, maxYaz);
+	ui->aziVsTimePlot->yAxis->setScaleType(QCPAxis::stLinear);
+	ui->aziVsTimePlot->yAxis->setLabelColor(axisColor);
+	ui->aziVsTimePlot->yAxis->setTickLabelColor(axisColor);
+	ui->aziVsTimePlot->yAxis->setBasePen(axisPen);
+	ui->aziVsTimePlot->yAxis->setTickPen(axisPen);
+	ui->aziVsTimePlot->yAxis->setSubTickPen(axisPen);
+}
+
+void AstroCalcDialog::drawAziVsTimeDiagram()
+{
+	// Avoid crash!
+	if (core->getCurrentPlanet()->getEnglishName().contains("->")) // We are on the spaceship!
+		return;
+
+	// special case - plot the graph when tab is visible
+	if (!plotAziVsTime || !dialog->isVisible())
+		return;
+
+	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
+
+	if (!selectedObjects.isEmpty())
+	{
+		bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+		// X axis - time; Y axis - azimuth
+		QList<double> aX, aY, sX, sY, mX, mY;
+		QVector<double> xs, ys, xm, ym;
+
+		StelObjectP selectedObject = selectedObjects[0];
+		bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
+
+		double currentJD = core->getJD();
+		double noon = (int)currentJD;
+		double az, alt, deg, ltime, JD;
+		bool sign;
+
+		double shift = core->getUTCOffset(currentJD) / 24.0;
+		double xMaxY = -100.f;
+		int step = 180;
+		int limit = 485;
+		bool isSatellite = false;
+		if (selectedObject->getType() == "Satellite") // Reduce accuracy for satellites
+		{
+			limit = 121;
+			step = 720;
+			isSatellite = true;
+		}
+		for (int i = -5; i <= limit; i++) // 24 hours + 15 minutes in both directions
+		{
+			// A new point on the graph every 3 minutes with shift to right 12 hours
+			// to get midnight at the center of diagram (i.e. accuracy is 3 minutes)
+			ltime = i * step + 43200;
+			aX.append(ltime);
+			JD = noon + ltime / 86400 - shift - 0.5;
+			core->setJD(JD);
+			if (isSatellite)
+			{
+#ifdef USE_STATIC_PLUGIN_SATELLITES
+				GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
+#endif
+			}
+			else
+				core->update(0.0);
+
+			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
+			float direction = 3.; // N is zero, E is 90 degrees
+			if (useSouthAzimuth)
+				direction = 2.;
+			az = direction*M_PI - az;
+			if (az > M_PI*2)
+				az -= M_PI*2;
+			StelUtils::radToDecDeg(az, sign, deg);			
+			aY.append(deg);
+			if (deg > xMaxY)
+				xMaxY = deg;
+		}
+
+		core->setJD(currentJD);
+
+		QVector<double> x = aX.toVector(), y = aY.toVector();
+		double minYa = aY.first();
+		double maxYa = aY.first();
+
+		for (auto temp : aY)
+		{
+			if (maxYa < temp) maxYa = temp;
+			if (minYa > temp) minYa = temp;
+		}
+
+		minYaz = minYa - 2.0;
+		maxYaz = maxYa + 2.0;
+
+		prepareAziVsTimeAxesAndGraph();
+		drawCurrentTimeDiagram();
+
+		QString name = selectedObject->getNameI18n();
+		if (name.isEmpty())
+		{
+			QString otype = selectedObject->getType();
+			if (otype == "Nebula")
+				name = GETSTELMODULE(NebulaMgr)->getLatestSelectedDSODesignation();
+
+			if (otype == "Star")
+				name = selectedObject->getID();
+		}
+
+		drawTransitTimeDiagram();
+
+		ui->aziVsTimePlot->graph(0)->setData(x, y);
+		ui->aziVsTimePlot->graph(0)->setName(name);
+		if (plotAziVsTimeSun)
+			ui->aziVsTimePlot->graph(3)->setData(xs, ys);
+		if (plotAziVsTimeMoon && onEarth)
+			ui->aziVsTimePlot->graph(4)->setData(xm, ym);
+
+		ui->aziVsTimePlot->replot();
+	}
+
+	// clean up the data when selection is removed
+	if (!objectMgr->getWasSelected())
+	{
+		ui->aziVsTimePlot->graph(0)->data()->clear(); // main data: Azimuth vs. Time graph		
+		ui->aziVsTimePlot->replot();
+	}
+}
+
+void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
+{
+	double x = ui->aziVsTimePlot->xAxis->pixelToCoord(event->pos().x());
+	double y = ui->aziVsTimePlot->yAxis->pixelToCoord(event->pos().y());
+
+	QCPAbstractPlottable* abstractGraph = ui->aziVsTimePlot->plottableAt(event->pos(), false);
+	QCPGraph* graph = qobject_cast<QCPGraph*>(abstractGraph);
+
+	if (x > ui->aziVsTimePlot->xAxis->range().lower && x < ui->aziVsTimePlot->xAxis->range().upper
+	    && y > ui->aziVsTimePlot->yAxis->range().lower && y < ui->aziVsTimePlot->yAxis->range().upper)
+	{
+		if (graph)
+		{
+			QString info;
+			double JD;
+			if (graph->name() == "[Now]")
+			{
+				JD = core->getJD();
+				info = q_("Now about %1").arg(StelUtils::jdToQDateTime(JD + core->getUTCOffset(JD)/24).toString("H:mm"));
+			}
+			else
+			{
+				JD = x / 86400.0 + (int)core->getJD() - 0.5;
+				QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
+
+				if (StelApp::getInstance().getFlagShowDecimalDegrees())
+					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), QString::number(y, 'f', 2), QChar(0x00B0));
+				else
+					info = QString("%1<br />%2: %3<br />%4: %5").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), StelUtils::decDegToDmsStr(y));
+			}
+
+			QToolTip::hideText();
+			QToolTip::showText(event->globalPos(), info, ui->aziVsTimePlot, ui->aziVsTimePlot->rect());
+		}
+		else
+			QToolTip::hideText();
+	}
+
+	ui->aziVsTimePlot->update();
+	ui->aziVsTimePlot->replot();
 }
 
 void AstroCalcDialog::initListCelestialPositions()
@@ -1920,7 +2144,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 void AstroCalcDialog::drawCurrentTimeDiagram()
 {
 	// special case - plot the graph when tab is visible
-	if (!plotAltVsTime)
+	if (!plotAltVsTime && !plotAziVsTime)
 		return;
 
 	double currentJD = core->getJD();
@@ -1930,11 +2154,19 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	QList<double> ax, ay;
 	ax.append(now);
 	ax.append(now);
-	ay.append(minY);
-	ay.append(maxY);
+	ay.append(-180.);
+	ay.append(360.);
 	QVector<double> x = ax.toVector(), y = ay.toVector();
-	ui->altVsTimePlot->graph(1)->setData(x, y);
-	ui->altVsTimePlot->replot();
+	if (plotAltVsTime)
+	{
+		ui->altVsTimePlot->graph(1)->setData(x, y);
+		ui->altVsTimePlot->replot();
+	}
+	if (plotAziVsTime)
+	{
+		ui->aziVsTimePlot->graph(1)->setData(x, y);
+		ui->aziVsTimePlot->replot();
+	}
 }
 
 // Added vertical line indicating time of transit
@@ -3453,7 +3685,15 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotAltVsTime = false;
 
-		if (idx==1) // Second tab - 'Monthly Elevation' is visible
+		if (idx==1) // Second tab - 'Azi. vs Time' is visible
+		{
+			plotAziVsTime = true;
+			drawAziVsTimeDiagram(); // Is object already selected?
+		}
+		else
+			plotAziVsTime = false;
+
+		if (idx==2) // Third tab - 'Monthly Elevation' is visible
 		{
 			plotMonthlyElevation = true;
 			drawMonthlyElevationGraph(); // Is object already selected?
@@ -3461,7 +3701,7 @@ void AstroCalcDialog::changePage(QListWidgetItem* current, QListWidgetItem* prev
 		else
 			plotMonthlyElevation = false;
 
-		if(idx==3) // Last tab - 'Angular distance' is visible
+		if(idx==4) // Last tab - 'Angular distance' is visible
 		{
 			plotAngularDistanceGraph = true;
 			drawAngularDistanceGraph();
@@ -3503,17 +3743,22 @@ void AstroCalcDialog::changePCTab(int index)
 
 void AstroCalcDialog::changeGraphsTab(int index)
 {
-	if (index==0) // First tab: 'Alt. vs Time'
+	if (index==0) // Altitude vs. Time
 	{
 		plotAltVsTime = true;
 		drawAltVsTimeDiagram(); // Is object already selected?
 	}
-	if (index==1) // Second tab: 'Monthly Elevation'
+	if (index==1) // Azimuth vs. Time
+	{
+		plotAziVsTime = true;
+		drawAziVsTimeDiagram(); // Is object already selected?
+	}
+	if (index==2) // Monthly Elevation
 	{
 		plotMonthlyElevation = true;
 		drawMonthlyElevationGraph(); // Is object already selected?
 	}
-	if (index==3) // Four tab: 'Angular Distance'
+	if (index==4) // Angular Distance
 	{
 		plotAngularDistanceGraph = true;
 		drawAngularDistanceGraph(); // Is object already selected?
