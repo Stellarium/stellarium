@@ -304,8 +304,7 @@ private:
 				   QString separation, QString elongation, QString angularDistance,
 				   QString elongTooltip="", QString angDistTooltip="");
 
-	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive,
-	       plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime, plotAziVsTimeSun, plotAziVsTimeMoon;
+	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader;
 	static float brightLimit;
