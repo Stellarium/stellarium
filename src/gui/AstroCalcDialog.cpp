@@ -527,8 +527,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		QList<double> aX, aY;
 
 		StelObjectP selectedObject = selectedObjects[0];
-		bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
-
 		double currentJD = core->getJD();
 		double noon = (int)currentJD;
 		double az, alt, deg, ltime, JD;
