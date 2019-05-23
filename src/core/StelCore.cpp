@@ -1334,6 +1334,12 @@ float StelCore::getUTCOffset(const double JD) const
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
 	}
+	#ifdef Q_OS_WIN
+	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
+	// TODO: switch to IANA TZ on all operating systems
+	if (tzName=="Europe/Volgograd")
+		shiftInSeconds = 4*3600; // UTC+04:00
+	#endif
 
 	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
 	if (loc.planetName!="Earth")
