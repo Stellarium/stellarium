@@ -524,7 +524,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 	{
 		bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 		// X axis - time; Y axis - azimuth
-		QList<double> aX, aY, sX, sY;
+		QList<double> aX, aY;
 
 		StelObjectP selectedObject = selectedObjects[0];
 		bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
