@@ -609,11 +609,6 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 
 		ui->aziVsTimePlot->graph(0)->setData(x, y);
 		ui->aziVsTimePlot->graph(0)->setName(name);
-		if (plotAziVsTimeSun)
-			ui->aziVsTimePlot->graph(3)->setData(xs, ys);
-		if (plotAziVsTimeMoon && onEarth)
-			ui->aziVsTimePlot->graph(4)->setData(xm, ym);
-
 		ui->aziVsTimePlot->replot();
 	}
 
