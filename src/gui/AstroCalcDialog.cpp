@@ -532,8 +532,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
-		double shift = core->getUTCOffset(currentJD) / 24.0;
-		double xMaxY = -100.f;
+		double shift = core->getUTCOffset(currentJD) / 24.0;		
 		int step = 180;
 		int limit = 485;
 		bool isSatellite = false;
@@ -561,18 +560,15 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 				core->update(0.0);
 
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
-			float direction = 3.; // N is zero, E is 90 degrees
+			double direction = 3.; // N is zero, E is 90 degrees
 			if (useSouthAzimuth)
 				direction = 2.;
 			az = direction*M_PI - az;
 			if (az > M_PI*2)
 				az -= M_PI*2;
 			StelUtils::radToDecDeg(az, sign, deg);			
-			aY.append(deg);
-			if (deg > xMaxY)
-				xMaxY = deg;
-		}
-
+			aY.append(deg);			
+		}		
 		core->setJD(currentJD);
 
 		QVector<double> x = aX.toVector(), y = aY.toVector();
@@ -641,7 +637,6 @@ void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
 			{
 				JD = x / 86400.0 + (int)core->getJD() - 0.5;
 				QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
-
 				if (StelApp::getInstance().getFlagShowDecimalDegrees())
 					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), QString::number(y, 'f', 2), QChar(0x00B0));
 				else
