@@ -149,6 +149,17 @@ bool HipsSurvey::getAllsky()
 {
 	if (!allsky.isNull() || noAllsky) return true;
 	if (properties.isEmpty()) return false;
+
+	// Allsky is deprecated after version 1.4.
+	if (properties.contains("hips_version")) {
+		QStringList version = properties["hips_version"].toString().split(".");
+		if ((version.size() >= 2) && (version[0].toInt() * 100 + version[1].toInt() >= 104)) {
+			qDebug() << "NO ALLSKY";
+			noAllsky = true;
+			return true;
+		}
+	}
+
 	if (!networkReply)
 	{
 		QString ext = getExt(properties["hips_tile_format"].toString());
@@ -167,10 +178,14 @@ bool HipsSurvey::getAllsky()
 	}
 	if (networkReply->isFinished())
 	{
-		qDebug() << "got allsky";
-		QByteArray data = networkReply->readAll();
-		allsky = QImage::fromData(data);
-		delete networkReply;
+		if (networkReply->error() == QNetworkReply::NoError) {
+			qDebug() << "got allsky";
+			QByteArray data = networkReply->readAll();
+			allsky = QImage::fromData(data);
+		} else {
+			noAllsky = true;
+		}
+		networkReply->deleteLater();
 		networkReply = NULL;
 		emit statusChanged();
 	};
