@@ -1001,7 +1001,8 @@ void StelBarsPath::setBackgroundOpacity(double opacity)
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, opacity)));
 }
 
-StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem*)
+StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem* parent):
+	QGraphicsWidget(parent)
 {
 	setLayout(new QGraphicsLinearLayout(Qt::Vertical));
 }
