@@ -154,7 +154,6 @@ bool HipsSurvey::getAllsky()
 	if (properties.contains("hips_version")) {
 		QStringList version = properties["hips_version"].toString().split(".");
 		if ((version.size() >= 2) && (version[0].toInt() * 100 + version[1].toInt() >= 104)) {
-			qDebug() << "NO ALLSKY";
 			noAllsky = true;
 			return true;
 		}
