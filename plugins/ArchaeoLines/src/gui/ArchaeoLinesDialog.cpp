@@ -129,6 +129,7 @@ void ArchaeoLinesDialog::createDialogContent()
 	connectColorButton(ui->customDeclination2ColorToolButton,      "ArchaeoLines.customDeclination2Color",      "ArchaeoLines/color_custom_declination_2");
 
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
+	connect(ui->restoreDefaultsButtonCL, SIGNAL(clicked()), this, SLOT(resetArchaeoLinesSettings()));
 
 	setAboutHtml();
 }
