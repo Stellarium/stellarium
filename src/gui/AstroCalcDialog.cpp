@@ -1084,7 +1084,7 @@ QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord,
 		if (decimalDegrees)
 		{
 			raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-			decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+			decStr = StelUtils::radToDecDegStr(dec, 5);
 		}
 		else
 		{
@@ -1097,7 +1097,7 @@ QPair<QString, QString> AstroCalcDialog::getStringCoordinates(const Vec3d coord,
 		if (decimalDegrees)
 		{
 			raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-			decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+			decStr = StelUtils::radToDecDegStr(dec, 5);
 		}
 		else
 		{
@@ -1492,7 +1492,7 @@ void AstroCalcDialog::generateEphemeris()
 				if (withDecimalDegree)
 				{
 					raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-					decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					decStr = StelUtils::radToDecDegStr(dec, 5);
 				}
 				else
 				{
@@ -1507,7 +1507,7 @@ void AstroCalcDialog::generateEphemeris()
 				if (withDecimalDegree)
 				{
 					raStr = StelUtils::radToDecDegStr(ra, 5, false, true);
-					decStr = StelUtils::radToDecDegStr(dec, 5, false, true);
+					decStr = StelUtils::radToDecDegStr(dec, 5);
 				}
 				else
 				{
