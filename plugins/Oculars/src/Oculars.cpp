@@ -1820,8 +1820,7 @@ void Oculars::paintTelrad()
 		StelCore *core = StelApp::getInstance().getCore();
 		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 		// StelPainter drawing
-		StelPainter painter(projector);
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		StelPainter painter(projector);		
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 				   projector->getViewportPosY()+projector->getViewportHeight()/2);
