@@ -157,8 +157,6 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 		}
 		else
 		{
-			StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-			StelObjectP obj = omgr->searchByName(name);
 			QVariantMap infoMap=StelObjectMgr::getObjectInfo(obj);
 			QJsonObject infoObj=QJsonObject::fromVariantMap(infoMap);
 
