@@ -210,12 +210,14 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 		if (idx==1)
 		{
 			// boundaries = own
-			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_boundaries.dat");
+			if (fic.isEmpty()) // Check old file name (backward compatibility)
+				fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
 		}
 		else
 		{
 			// boundaries = generic
-			fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
+			fic = StelFileMgr::findFile("data/constellation_boundaries.dat");
 		}
 
 		if (fic.isEmpty())
@@ -1295,7 +1297,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	QString consname, record, data = "";
 	i = 0;
 
-	// Added support of comments for constellations_boundaries.dat file
+	// Added support of comments for constellation_boundaries.dat file
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	while (!dataFile.atEnd())
 	{
