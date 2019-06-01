@@ -101,6 +101,7 @@ SolarSystem::~SolarSystem()
 {
 	// release selected:
 	selected.clear();
+	selectedSSO.clear();
 	for (auto* orb : orbits)
 	{
 		delete orb;
@@ -174,6 +175,7 @@ void SolarSystem::init()
 	setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
+	setNumberIsolatedTrails(conf->value("viewing/number_isolated_trails", 1).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
@@ -263,10 +265,16 @@ void SolarSystem::recreateTrails()
 		delete allTrails;
 	allTrails = new TrailGroup(365.f);
 
-	PlanetP p = getSelected();
-	if (p!=Q_NULLPTR && getFlagIsolatedTrails())
+	unsigned long cnt = selectedSSO.size();
+	if (cnt>0 && getFlagIsolatedTrails())
 	{
-		allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
+		unsigned long limit = getNumberIsolatedTrails();
+		if (cnt<limit)
+			limit = cnt;
+		for (unsigned long i=0; i<limit; i++)
+		{
+			allTrails->addObject((QSharedPointer<StelObject>)selectedSSO[cnt - i - 1], &trailColor);
+		}
 	}
 	else
 	{
@@ -1695,9 +1703,12 @@ void SolarSystem::setFlagShowObjSelfShadows(bool b)
 void SolarSystem::setSelected(PlanetP obj)
 {
 	if (obj && obj->getType() == "Planet")
+	{
 		selected = obj;
+		selectedSSO.push_back(obj);
+	}
 	else
-		selected.clear();;
+		selected.clear();
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());
@@ -1924,6 +1935,27 @@ void SolarSystem::setFlagIsolatedTrails(bool b)
 bool SolarSystem::getFlagIsolatedTrails() const
 {
 	return flagIsolatedTrails;
+}
+
+int SolarSystem::getNumberIsolatedTrails() const
+{
+	return numberIsolatedTrails;
+}
+
+void SolarSystem::setNumberIsolatedTrails(int n)
+{
+	// [1..5] - valid range for trails
+	if (n<1)
+		numberIsolatedTrails = 1;
+	else if (n>5)
+		numberIsolatedTrails = 5;
+	else
+		numberIsolatedTrails = n;
+
+	if (getFlagIsolatedTrails())
+		recreateTrails();
+
+	emit numberIsolatedTrailsChanged(numberIsolatedTrails);
 }
 
 void SolarSystem::setFlagIsolatedOrbits(bool b)

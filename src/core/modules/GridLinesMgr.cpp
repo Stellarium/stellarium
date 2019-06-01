@@ -365,7 +365,7 @@ void SkyGrid::draw(const StelCore* core) const
 	if (!fader.getInterstate())
 		return;
 
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport

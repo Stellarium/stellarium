@@ -163,7 +163,7 @@ void RemoteSync::init()
 	qCDebug(remoteSync)<<"Plugin initialized";
 
 	//parse command line args
-	QStringList args = StelApp::getCommandlineArguments();;
+	QStringList args = StelApp::getCommandlineArguments();
 	QString syncMode = argsGetOptionWithArg(args,"","--syncMode","").toString();
 	QString syncHost = argsGetOptionWithArg(args,"","--syncHost","").toString();
 	int syncPort = argsGetOptionWithArg(args,"","--syncPort",0).toInt();

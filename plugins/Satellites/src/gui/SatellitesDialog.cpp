@@ -795,7 +795,7 @@ void SatellitesDialog::saveEditedSource()
 		ui->sourceList->currentItem()->setText(u);
 	else if (ui->sourceList->findItems(u, Qt::MatchExactly).count() <= 0)
 	{
-		QListWidgetItem* i = new QListWidgetItem(u, ui->sourceList);;
+		QListWidgetItem* i = new QListWidgetItem(u, ui->sourceList);
 		i->setData(checkStateRole, Qt::Unchecked);
 		i->setSelected(true);
 	}

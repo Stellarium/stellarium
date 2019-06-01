@@ -1146,7 +1146,29 @@
                   <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
                  </property>
                  <property name="text">
-                  <string>Show trail only for selected planet</string>
+                  <string>Show trails only for N latest selected planets:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QSpinBox" name="planetIsolatedTrailsSpinBox">
+                 <property name="maximumSize">
+                  <size>
+                   <width>50</width>
+                   <height>16777213</height>
+                  </size>
+                 </property>
+                 <property name="alignment">
+                  <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>5</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
                  </property>
                 </widget>
                </item>

@@ -471,7 +471,7 @@ void ArchaeoLines::update(double deltaTime)
 	customDeclination1Line->update(deltaTime);
 	customDeclination2Line->update(deltaTime);
 
-	//withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	//withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 }
 
 

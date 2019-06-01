@@ -282,7 +282,7 @@ StelObjectP StelObjectMgr::searchByID(const QString &type, const QString &id) co
 	auto it = typeToModuleMap.constFind(type);
 	if(it!=typeToModuleMap.constEnd())
 	{
-		return (*it)->searchByID(id);;
+		return (*it)->searchByID(id);
 	}
 	qWarning()<<"StelObject type"<<type<<"unknown";
 	return Q_NULLPTR;

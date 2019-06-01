@@ -96,6 +96,11 @@ class SolarSystem : public StelObjectModule
 		   WRITE setFlagIsolatedTrails
 		   NOTIFY flagIsolatedTrailsChanged
 		   )
+	Q_PROPERTY(int numberIsolatedTrails
+		   READ getNumberIsolatedTrails
+		   WRITE setNumberIsolatedTrails
+		   NOTIFY numberIsolatedTrailsChanged
+		   )
 	Q_PROPERTY(bool flagLightTravelTime
 		   READ getFlagLightTravelTime
 		   WRITE setFlagLightTravelTime
@@ -767,6 +772,11 @@ public slots:
 	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
 	bool getFlagIsolatedTrails(void) const;
 
+	//! Set number of displayed of isolated trails for latest selected objects
+	void setNumberIsolatedTrails(int n);
+	//! Get the number of displayed of isolated trails for latest selected objects
+	int getNumberIsolatedTrails(void) const;
+
 	//! Set flag which enabled the showing of isolated orbits for selected objects only or not
 	void setFlagIsolatedOrbits(bool b);
 	//! Get the current value of the flag which enables showing of isolated orbits for selected objects only or not.
@@ -824,6 +834,7 @@ signals:
 	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
+	void numberIsolatedTrailsChanged(int n);
 	void flagLightTravelTimeChanged(bool b);
 	void flagUseObjModelsChanged(bool b);
 	void flagShowObjSelfShadowsChanged(bool b);
@@ -1004,6 +1015,7 @@ private:
 	PlanetP getSelected(void) const {return selected;}
 	//! The currently selected planet.
 	PlanetP selected;
+	std::vector<PlanetP> selectedSSO; // More than one can be selected at a time
 
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
 	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
@@ -1037,6 +1049,7 @@ private:
 	bool flagNativePlanetNames;                 // show native names for planets?
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
+	int numberIsolatedTrails;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
 	bool ephemerisMarkersDisplayed;

@@ -974,7 +974,7 @@ QString Observability::formatAsDateRange(int startDay, int endDay)
 	if (sMonth == eMonth)
 	{
 		QString formatString = (getDateFormat()) ? "%1 - %2 %3" : "%3 %1 - %2";
-		range = formatString.arg(sDay).arg(eDay).arg(monthNames[sMonth-1]);;
+		range = formatString.arg(sDay).arg(eDay).arg(monthNames[sMonth-1]);
 	}
 	else
 	{
