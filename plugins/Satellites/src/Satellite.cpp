@@ -308,6 +308,9 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		oss << QString("%1: %2 %3").arg(q_("Range rate")).arg(rangeRate, 5, 'f', 3).arg(qc_("km/s", "speed")) << "<br/>";
 		// TRANSLATORS: Satellite altitude
 		oss << QString("%1: %2 %3").arg(q_("Altitude")).arg(height, 5, 'f', 2).arg(qc_("km", "distance")) << "<br/>";
+		double orbitalPeriod = pSatWrapper->getOrbitalPeriod();
+		if (orbitalPeriod>0.0)
+			oss << QString("%1: %2 %3 (%4)").arg(q_("Orbital period")).arg(orbitalPeriod, 5, 'f', 2).arg(qc_("min", "period")).arg(StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true)) << "<br/>";
 		oss << QString("%1: %2%3/%4%5")
 		       .arg(q_("SubPoint (Lat./Long.)"))
 		       .arg(latLongSubPointPosition[0], 5, 'f', 2)

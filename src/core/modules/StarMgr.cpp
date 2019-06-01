@@ -57,7 +57,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 
-#include <errno.h>
+#include <cstdlib>
 
 static QStringList spectral_array;
 static QStringList component_array;

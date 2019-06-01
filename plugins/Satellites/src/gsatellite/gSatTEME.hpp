@@ -43,7 +43,6 @@
 #include "sgp4unit.h"
 #include "sgp4ext.h"
 
-
 //! @class gSatTEME
 //! @brief Sat position and velocity predictions over TEME reference system.
 //! @details
@@ -106,9 +105,6 @@ public:
 		return m_Vel;
 	}
 
-
-
-
 	// Operation:  getSubPoint
 	//! @brief Get the Geographic satellite subpoint Vector calculated by the method compute SubPoint
 	//! @details To implement this operation, next references has been used:
@@ -128,6 +124,16 @@ public:
 		return satrec.error;
 	}
 
+	double getPeriod() const
+	{
+		// Get orbital period from mean motion (rad/min)
+		double mm = satrec.no;
+		if (mm > 0.0)
+			return 2*M_PI/mm;
+
+		return 0.0;
+	}
+
 private:
 	// Operation:  computeSubPoint
 	//! @brief Compute the Geographic satellite subpoint Vector
@@ -141,7 +147,6 @@ private:
 	//!    Longitude: Coord[1]  measured in degrees\n
 	//!	   Altitude:  Coord[2]  measured in Km.\n
 	Vec3d computeSubPoint(gTime ai_time);
-
 
 	// sgp4 proceses variables
 	double tumin, mu, radiusearthkm, xke, j2, j3, j4, j3oj2;

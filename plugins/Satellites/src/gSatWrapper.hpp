@@ -98,7 +98,6 @@ public:
         //! @return void
 	void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate) const; //measured in km and km/s
 
-
         // Operation getVisibilityPredict
         //! @brief This operation predicts the satellite visibility contidions.
         //! This prediction can return 4 different states
@@ -117,8 +116,9 @@ public:
 	Visibility getVisibilityPredict() const;
 
 	double getPhaseAngle() const;
+	//! Get orbital period in minutes
+	double getOrbitalPeriod() const;
 	static gTime getEpoch() { return epoch; }
-
 
 //private:
         // Operation calcObserverECIPosition
