@@ -313,9 +313,11 @@ QString Satellite::getInfoString(const StelCore *core, const InfoStringGroup& fl
 		{
 			// TRANSLATORS: Revolutions per day - measurement of the frequency of a rotation
 			QString rpd = qc_("rpd","frequency");
+			// TRANSLATORS: minutes - orbital period for artificial satellites
+			QString mins = qc_("min", "period");
 			oss << QString("%1: %2 %3 (%4 &mdash; %5 %6)")
 			       .arg(q_("Orbital period")).arg(orbitalPeriod, 5, 'f', 2)
-			       .arg(qc_("min", "period")).arg(StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true))
+			       .arg(mins).arg(StelUtils::hoursToHmsStr(orbitalPeriod/60.0, true))
 			       .arg(1440.0/orbitalPeriod, 9, 'f', 5).arg(rpd) << "<br/>";
 		}
 		oss << QString("%1: %2%3/%4%5")
