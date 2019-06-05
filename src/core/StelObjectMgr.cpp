@@ -28,6 +28,8 @@
 #include "StelMovementMgr.hpp"
 #include "RefractionExtinction.hpp"
 #include "StelSkyDrawer.hpp"
+#include "StelTranslator.hpp"
+#include "StelActionMgr.hpp"
 
 #include <QMouseEvent>
 #include <QString>
@@ -41,6 +43,103 @@ StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixe
 
 StelObjectMgr::~StelObjectMgr()
 {
+}
+
+void StelObjectMgr::init()
+{
+	// Register all the core actions.
+	QString timeGroup = N_("Date and Time");
+	QString movementGroup = N_("Movement and Selection");
+	QString displayGroup = N_("Display Options");
+	StelActionMgr* actionsMgr = StelApp::getInstance().getStelActionManager();
+	actionsMgr->addAction("actionNext_Transit", timeGroup, N_("Next transit of the selected object"), this, "nextTransit()");
+	actionsMgr->addAction("actionNext_Rising", timeGroup, N_("Next rising of the selected object"), this, "nextRising()");
+	actionsMgr->addAction("actionNext_Setting", timeGroup, N_("Next setting of the selected object"), this, "nextSetting()");
+	actionsMgr->addAction("actionPrevious_Transit", timeGroup, N_("Previous transit of the selected object"), this, "previousTransit()");
+	actionsMgr->addAction("actionPrevious_Rising", timeGroup, N_("Previous rising of the selected object"), this, "previousRising()");
+	actionsMgr->addAction("actionPrevious_Setting", timeGroup, N_("Previous setting of the selected object"), this, "previousSetting()");
+}
+
+void StelObjectMgr::nextTransit()
+{
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		core->setJD((int)JD + rts[1]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+	}
+}
+
+void StelObjectMgr::nextRising()
+{
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99.f && rts[0]<100.f)
+			core->setJD((int)JD + rts[0]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+	}
+}
+
+void StelObjectMgr::nextSetting()
+{
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99.f && rts[2]<100.f)
+			core->setJD((int)JD + rts[2]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+	}
+}
+
+void StelObjectMgr::previousTransit()
+{
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(-1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		core->setJD((int)JD + rts[1]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+	}
+}
+
+void StelObjectMgr::previousRising()
+{
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(-1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[0]>-99.f && rts[0]<100.f)
+			core->setJD((int)JD + rts[0]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+	}
+}
+
+void StelObjectMgr::previousSetting()
+{
+	const QList<StelObjectP> selected = GETSTELMODULE(StelObjectMgr)->getSelectedObject();
+	if (!selected.isEmpty() && selected[0]->getType()!="Satellite")
+	{
+		StelCore* core = StelApp::getInstance().getCore();
+		core->addSolarDays(-1.0);
+		double JD = core->getJD();
+		Vec3f rts = selected[0]->getRTSTime(core);
+		if (rts[2]>-99.f && rts[2]<100.f)
+			core->setJD((int)JD + rts[2]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+	}
 }
 
 /*************************************************************************

@@ -43,7 +43,7 @@ public:
 
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
-	virtual void init() {;}
+	virtual void init();
 	virtual void draw(StelCore*) {;}
 	virtual void update(double) {;}
 
@@ -145,6 +145,22 @@ public:
 	//! If obj is valid, add an element ["found", true].
 	//! If obj is Q_NULLPTR, returns a 1-element map [["found", false]]
 	static QVariantMap getObjectInfo(const StelObjectP obj);
+
+public slots:
+	//! Set simulation time to the time of next transit of selected object
+	void nextTransit();
+	//! Set simulation time to the time of previous transit of selected object
+	void previousTransit();
+
+	//! Set simulation time to the time of next rising of selected object (if applicable)
+	void nextRising();
+	//! Set simulation time to the time of previous rising of selected object (if applicable)
+	void previousRising();
+
+	//! Set simulation time to the time of next setting of selected object (if applicable)
+	void nextSetting();
+	//! Set simulation time to the time of previous setting of selected object (if applicable)
+	void previousSetting();
 
 signals:
 	//! Indicate that the selected StelObjects has changed.
