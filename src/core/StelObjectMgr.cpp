@@ -69,7 +69,7 @@ void StelObjectMgr::nextTransit()
 		core->addSolarDays(1.0);
 		double JD = core->getJD();
 		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD((int)JD + rts[1]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+		core->setJD(static_cast<int>(JD) + rts[1]/24. - core->getUTCOffset(JD) / 24. + 0.5);
 	}
 }
 
@@ -83,7 +83,7 @@ void StelObjectMgr::nextRising()
 		double JD = core->getJD();
 		Vec3f rts = selected[0]->getRTSTime(core);
 		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD((int)JD + rts[0]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+			core->setJD(static_cast<int>(JD) + rts[0]/24. - core->getUTCOffset(JD) / 24. + 0.5);
 	}
 }
 
@@ -97,7 +97,7 @@ void StelObjectMgr::nextSetting()
 		double JD = core->getJD();
 		Vec3f rts = selected[0]->getRTSTime(core);
 		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD((int)JD + rts[2]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+			core->setJD(static_cast<int>(JD) + rts[2]/24. - core->getUTCOffset(JD) / 24. + 0.5);
 	}
 }
 
@@ -110,7 +110,7 @@ void StelObjectMgr::previousTransit()
 		core->addSolarDays(-1.0);
 		double JD = core->getJD();
 		Vec3f rts = selected[0]->getRTSTime(core);
-		core->setJD((int)JD + rts[1]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+		core->setJD(static_cast<int>(JD) + rts[1]/24. - core->getUTCOffset(JD) / 24. + 0.5);
 	}
 }
 
@@ -124,7 +124,7 @@ void StelObjectMgr::previousRising()
 		double JD = core->getJD();
 		Vec3f rts = selected[0]->getRTSTime(core);
 		if (rts[0]>-99.f && rts[0]<100.f)
-			core->setJD((int)JD + rts[0]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+			core->setJD(static_cast<int>(JD) + rts[0]/24. - core->getUTCOffset(JD) / 24. + 0.5);
 	}
 }
 
@@ -138,7 +138,7 @@ void StelObjectMgr::previousSetting()
 		double JD = core->getJD();
 		Vec3f rts = selected[0]->getRTSTime(core);
 		if (rts[2]>-99.f && rts[2]<100.f)
-			core->setJD((int)JD + rts[2]/24. - core->getUTCOffset(JD) / 24. + 0.5);
+			core->setJD(static_cast<int>(JD) + rts[2]/24. - core->getUTCOffset(JD) / 24. + 0.5);
 	}
 }
 
