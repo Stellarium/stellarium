@@ -2,41 +2,46 @@
 #
 # Updates the translationdata.js in the data/webroot folder using the current stellarium-remotecontrol.jst file
 
+import argparse
 import re
 import sys
+from pathlib import Path
+
 
 def main():
-	'''
-	main expects 2 arguments:
-	'''
+    parser = argparse.ArgumentParser(
+        description='Updates the translationdata.js in the data/webroot folder using the current'
+                    ' stellarium-remotecontrol.jst file')
+    parser.add_argument(dest='input', type=Path, metavar='input', help='stellarium-remotecontrol.jst')
+    parser.add_argument(dest='output', type=Path, metavar='output', help='translationdata.js file')
 
-	if len(sys.argv) < 3:
-		print("usage: update_translationdata.py <stellarium-remotecontrol.jst> <translationdata.js>")
-		print(sys.argv)
-		return
-	potfile = open(sys.argv[1], 'r')
-	jsfile = open(sys.argv[2], 'w')
-	
-	p = re.compile(r'^msgid "([^"\\]*(?:\\.[^"\\]*)*)"$', re.MULTILINE)
-	
-	jsfile.write(
-	"""
-//This file is generated automatically by the stellarium-remotecontrol-update-translationdata target through update_translationdata.py from stellarium-remotecontrol.jst
+    args = parser.parse_args()
+
+    jst_file = Path(args.input)
+    js_file = Path(args.output)
+
+    if not jst_file.exists():
+        print(f"'{jst_file}' do not exist.")
+        sys.exit(1)
+
+    msg_pattern = re.compile(r'^msgid "([^"\\]*(?:\\.[^"\\]*)*)"$', re.MULTILINE)
+
+    with open(js_file, mode='w', encoding='utf-8') as js_writer:
+        js_writer.write(
+            """//This file is generated automatically by the stellarium-remotecontrol-update-translationdata target through update_translationdata.py from stellarium-remotecontrol.jst
 //It contains all strings that can be translated through the StelTranslator in the JavaScript code by calling Main.tr()
 //When this file is requested through the RemoteControl web server, the strings are translated using the current Stellarium app language
 
 define({
-	""")
-	
-	first = True
-	
-	for i in p.finditer(potfile.read()):
-		if i.group(1):
-			if not first:
-				jsfile.write(',\n\t')
-			jsfile.write('"'+i.group(1).replace('"','\\"')+'" : \'<?= tr("'+i.group(1).replace("'","\\'")+'")?>\'')
-			first = False
-	jsfile.write("\n});")
+""")
+        with open(jst_file, mode='r', encoding='utf-8') as jst_reader:
+            for find in msg_pattern.finditer(jst_reader.read()):
+                if find.group(1):
+                    key = find.group(1).replace('"', '\\"')
+                    value = find.group(1).replace("'", "\\'")
+                    js_writer.write(f'\t"{key}" : \'<?= tr("{value}")?>\',\n')
+        js_writer.write("});")
+
 
 if __name__ == '__main__':
-	main()
+    main()

@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 
-from astroquery.vizier import Vizier
-from astropy.coordinates import SkyCoord, Angle
-from astropy import units as u
-import sys
 import re
-import percache
-import os
+import sys
 from collections import defaultdict
+
+import percache
+from astropy import units as u
+from astropy.coordinates import Angle, SkyCoord
+from astroquery.vizier import Vizier
+
 
 def snt_data():
     """
     Reads data from the STDIN and returns a generator that
     returns a dict with each field parsed out.
     """
-    #                              mag           ra          npd             bayer              sup       weight    cons
-    data_regex = re.compile(r'([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-ZZa-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})')
+    #      mag           ra          npd             bayer              sup       weight    cons
+    # ([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-ZZa-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})
+    data_regex = re.compile(
+        r'([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-ZZa-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})')
     for line in sys.stdin:
         line = line.rstrip('\n\r')
         m = re.match(data_regex, line)
@@ -45,12 +48,15 @@ def snt_data():
             }
         else:
             if not line.startswith('#'):
-                print("WARNING: No match: {}".format(line), file=sys.stderr) # lgtm [py/syntax-error]
+                print(f"WARNING: No match: {line}", file=sys.stderr)  # lgtm [py/syntax-error]
+
 
 # livesync=True so that even if we ctrl-c out of
 # the program, any previously cached values will
 # be present for future invocations
 cache = percache.Cache('.hip_cache', livesync=True)
+
+
 @cache
 def get_hip(ra, dec, mag):
     """
@@ -65,8 +71,8 @@ def get_hip(ra, dec, mag):
     you can delete the .hip_cache file to perform
     fresh lookups.
     """
-    coord = SkyCoord(ra=Angle("{} hours".format(ra)),
-                     dec=Angle("{} degree".format(dec)),
+    coord = SkyCoord(ra=Angle(f"{ra} hours"),
+                     dec=Angle(f"{dec} degree"),
                      obstime="J2000.0")
 
     # Search the Hipparcos catalog, and only return results that include
@@ -74,7 +80,7 @@ def get_hip(ra, dec, mag):
     # top result is almost certainly the star we want.
     v = Vizier(catalog='I/239/hip_main', columns=["HIP", "+Vmag"])
     # Constrain the search to stars within 1 Vmag of our target
-    v.query_constraints(Vmag="{}..{}".format(mag - 0.5, mag + 0.5))
+    v.query_constraints(Vmag=f"{mag - 0.5}..{mag + 0.5}")
 
     # Start with a targeted search, which returns more quickly from the
     # API. If that fails to find a star, query a 3 degree diameter circle
@@ -84,7 +90,7 @@ def get_hip(ra, dec, mag):
     # (example: Alpheratz, which is part of the Pegasus figure, but the
     # star is in Andromeda)
     for radius in (0.05, 1.5):
-        result = v.query_region(coord, radius=radius*u.deg)
+        result = v.query_region(coord, radius=radius * u.deg)
         try:
             table = result['I/239/hip_main']
         except TypeError:
@@ -95,6 +101,7 @@ def get_hip(ra, dec, mag):
         else:
             return table['HIP'][0]
     return None
+
 
 if __name__ == '__main__':
     exitval = 0
@@ -110,7 +117,8 @@ if __name__ == '__main__':
             previous_line = current_line
             current_line = "{weight}{constellation}".format(**vertex)
 
-            print("{bayer} {constellation} [ra={ra}, dec={dec}, mag={mag}]...".format(**vertex), file=sys.stderr, end='', flush=True)
+            print("{bayer} {constellation} [ra={ra}, dec={dec}, mag={mag}]...".format(**vertex), file=sys.stderr,
+                  end='', flush=True)
             previous_hip = current_hip
             # The S&T data is ambiguous for the location of the o2 (31) Cyg vertex,
             # so we skip get_hip and assign it manually.
@@ -119,13 +127,15 @@ if __name__ == '__main__':
             else:
                 current_hip = get_hip(ra=vertex['ra'], dec=vertex['dec'], mag=vertex['mag'])
             if not current_hip:
-                raise ValueError("Unable to locate HIP for {bayer} {constellation} vertex [ra={ra}, dec={dec}, mag={mag}]".format(**vertex))
-            print("HIP {}".format(current_hip), file=sys.stderr, flush=True)
+                raise ValueError(
+                    "Unable to locate HIP for {bayer} {constellation} vertex [ra={ra}, dec={dec}, mag={mag}]".format(
+                        **vertex))
+            print(f"HIP {current_hip}", file=sys.stderr, flush=True)
 
             # Append a new line tuple to the constellation if we are still
             # on the same line, and the previous vertex is defined.
             if previous_line == current_line and previous_hip and current_hip:
-                constellationship[vertex['constellation']].append( (previous_hip, current_hip,) )
+                constellationship[vertex['constellation']].append((previous_hip, current_hip,))
     except KeyboardInterrupt:
         # If the user hits ctrl+c during processing, don't just abort; continue
         # on to output the constellationship data that was already gathered,
@@ -134,13 +144,14 @@ if __name__ == '__main__':
         print("Caught KeyboardInterrupt", file=sys.stderr)
 
     # Special case for Mensa and Microscopium constellations (without lines!)
-    constellationship['Men'].append( (26264, 26264,) )
-    constellationship['Mic'].append( (103882, 103882,) )
+    constellationship['Men'].append((26264, 26264,))
+    constellationship['Mic'].append((103882, 103882,))
 
     print("Generating constellationship data...", file=sys.stderr)
     for constellation in sorted(constellationship.keys()):
         # The format of constellationship.fab is:
         # <constellation name> <number of lines> startHIP endHIP startHIP endHIP ...
-        print("{} {} {}".format(constellation, len(constellationship[constellation]), " ".join([ "{} {}".format(i[0], i[1]) for i in constellationship[constellation] ])))
+        hips = " ".join(["{} {}".format(i[0], i[1]) for i in constellationship[constellation]])
+        print(f"{constellation} {len(constellationship[constellation])} {hips}")
 
     sys.exit(exitval)

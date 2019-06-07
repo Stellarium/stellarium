@@ -9,9 +9,8 @@ import os
 import sys
 
 import Image
-from astLib import astWCS
-
 import skyTile
+from astLib import astWCS
 
 levels = ["x64", "x32", "x16", "x8", "x4", "x2", "x1"]
 # Define the invalid zones in the plates corners for N and S plates
@@ -114,16 +113,16 @@ def createTile(currentLevel, maxLevel, i, j, outDirectory, plateName, special=Fa
 
     # Recursively creates the 4 sub-tiles
     sub = createTile(currentLevel + 1, maxLevel, i * 2, j * 2, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     sub = createTile(currentLevel + 1, maxLevel, i * 2 + 1, j * 2, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     sub = createTile(currentLevel + 1, maxLevel, i * 2 + 1, j * 2 + 1, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     sub = createTile(currentLevel + 1, maxLevel, i * 2, j * 2 + 1, outDirectory, plateName)
-    if sub != None:
+    if sub is not None:
         t.subTiles.append(sub)
     return t
 
@@ -134,7 +133,7 @@ def generateJpgTiles(inDirectory, outDirectory):
         fullOutDir = outDirectory + "/x%.2d" % (2 ** curLevel)
         if not os.path.exists(fullOutDir):
             os.makedirs(fullOutDir)
-            print "Create directory " + fullOutDir
+            print("Create directory " + fullOutDir)
         for i in range(0, 2 ** curLevel):
             for j in range(0, 2 ** curLevel):
                 baseFileName = "x%.2d_%.2d_%.2d" % (2 ** curLevel, i, j)
@@ -149,7 +148,7 @@ def generateJpgTiles(inDirectory, outDirectory):
 
 def plateRange():
     if len(sys.argv) != 4:
-        print "Usage: " + sys.argv[0] + " prefix startPlate stopPlate "
+        print("Usage: " + sys.argv[0] + " prefix startPlate stopPlate ")
         exit(-1)
     prefix = sys.argv[1]
     outDir = "/tmp/tmpPlate"
@@ -168,13 +167,13 @@ def plateRange():
         masterTile.outputJSON(qCompress=True, maxLevelPerFile=2, outDir=outDir + '/')
 
         command = "cd /tmp && mv tmpPlate " + plateName + " && tar -cf " + plateName + ".tar " + plateName + " && rm -rf " + plateName
-        print command
+        print(command)
         os.system(command)
         command = "cd /tmp && scp " + plateName + ".tar vosw@voint1.hq.eso.org:/work/fabienDSS2/" + plateName + ".tar"
-        print command
+        print(command)
         os.system(command)
         command = "rm /tmp/" + plateName + ".tar"
-        print command
+        print(command)
         os.system(command)
 
 
@@ -195,7 +194,7 @@ def mainHeader():
             for i in nRange:
                 plateName = prefix + "%.3i" % i
                 ti = createTile(0, 0, 0, 0, outDir, plateName, True)
-                assert ti != None
+                assert ti is not None
                 f.write('\t{\n')
                 f.write('\t\t"minResolution" : %.8f,\n' % ti.minResolution)
                 f.write('\t\t"worldCoords" : ')

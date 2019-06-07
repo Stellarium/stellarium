@@ -4,22 +4,23 @@
 # Fabien Chereau fchereau@eso.org
 #
 
-import sys
-import os
 import subprocess
+import sys
+
 
 def allDSS():
-	for i in range(1,895):
-		str = "/home/fab1/prog/stellarium/util/dssheaderToJSON.py" + " S %i %i" % (i,i+1)
-		print str
-		try:
-			retcode = subprocess.call(str, shell=True)
-			if retcode < 0:
-				print >>sys.stderr, "Child was terminated by signal", -retcode
-			else:
-				print >>sys.stderr, "Child returned", retcode
-		except OSError, e:
-			print >>sys.stderr, "Execution failed:", e
+    for i in range(1, 895):
+        str = "/home/fab1/prog/stellarium/util/dssheaderToJSON.py" + " S %i %i" % (i, i + 1)
+        print(str)
+        try:
+            retcode = subprocess.call(str, shell=True)
+            if retcode < 0:
+                print(f"Child was terminated by signal {retcode}", file=sys.stderr)
+            else:
+                print("Child returned {retcode}", file=sys.stderr)
+        except OSError as e:
+            print(f"Execution failed: {e}", file=sys.stderr)
+
 
 if __name__ == "__main__":
     allDSS()

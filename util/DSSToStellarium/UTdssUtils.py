@@ -15,13 +15,15 @@
 #
 # Copyright Fabien Chereau <fabien.chereau@gmail.com>
 
-import dssUtils
 import unittest
+
+import dssUtils
+
 
 class TestDssUtils(unittest.TestCase):
 
     def setUp(self):
-      pass
+        pass
 
     def test_pointProjection(self):
         wcs = dssUtils.DssWcs("S032")
@@ -29,6 +31,7 @@ class TestDssUtils(unittest.TestCase):
         raDecPos = wcs.pixelToRaDec(pixPos)
         self.assertAlmostEqual(pixPos[0], wcs.raDecToPixel(raDecPos)[0])
         self.assertAlmostEqual(pixPos[1], wcs.raDecToPixel(raDecPos)[1])
+
 
 if __name__ == '__main__':
     unittest.main()
