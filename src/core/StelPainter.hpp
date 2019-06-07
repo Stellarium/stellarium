@@ -321,7 +321,6 @@ public:
 	DitheringMode getDitheringMode() const { return ditheringMode; }
 
 private:
-
 	friend class StelTextureMgr;
 	friend class StelTexture;
 

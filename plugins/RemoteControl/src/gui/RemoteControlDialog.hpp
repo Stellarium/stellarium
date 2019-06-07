@@ -54,7 +54,6 @@ private slots:
 	void requiresRestart();
 	void restart();
 	void updateIPlabel(bool);
-
 };
 
 

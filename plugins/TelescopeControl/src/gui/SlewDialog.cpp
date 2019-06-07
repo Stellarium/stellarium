@@ -219,7 +219,7 @@ void SlewDialog::slew()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = nullptr;
+	StelObjectP selectObject = Q_NULLPTR;
 	telescope->telescopeGoto(targetPosition, selectObject);
 }
 
@@ -251,7 +251,6 @@ void SlewDialog::getCenterInfo()
 
 void SlewDialog::editStoredPoints()
 {
-
 	storedPointsDialog->setVisible(true);
 	QVariantList qvl;
 	for (int i = 1;i< ui->comboBoxStoredPoints->count(); i++)

@@ -294,7 +294,6 @@ float Nova::getVMagnitude(const StelCore* core) const
 
 		if (deltaJD>t9)
 			vmag = minMagnitude;
-
 	}
 	else
 	{

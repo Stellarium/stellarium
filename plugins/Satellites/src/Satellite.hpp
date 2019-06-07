@@ -32,7 +32,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
 #include "gSatWrapper.hpp"
-
+#include "SolarSystem.hpp"
 
 class StelPainter;
 class StelLocation;
@@ -264,6 +264,10 @@ private:
 	//! See @ref groups.
 	GroupSet groups;
 	QDateTime lastUpdated;
+
+	bool isISS;
+	PlanetP moon;
+	PlanetP sun;
 
 	static StelTextureSP hintTexture;
 	static SphericalCap  viewportHalfspace;

@@ -74,7 +74,6 @@ struct XlsxHyperlinkData
             , const QString &display=QString(), const QString &tip=QString())
         :linkType(linkType), target(target), location(location), display(display), tooltip(tip)
     {
-
     }
 
     LinkType linkType;
@@ -124,7 +123,6 @@ struct XlsxRowInfo
         customHeight(false), height(height), format(format), hidden(hidden), outlineLevel(0)
       , collapsed(false)
     {
-
     }
 
     bool customHeight;
@@ -141,7 +139,6 @@ struct XlsxColumnInfo
         firstColumn(firstColumn), lastColumn(lastColumn), customWidth(false), width(width), format(format), hidden(hidden)
       , outlineLevel(0), collapsed(false)
     {
-
     }
     int firstColumn;
     int lastColumn;
@@ -241,6 +238,7 @@ public:
     bool showWhiteSpace;
 
     QRegularExpression urlPattern;
+
 private:
     static double calculateColWidth(int characters);
 };

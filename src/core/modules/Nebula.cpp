@@ -171,7 +171,7 @@ QString Nebula::getMagnitudeInfoString(const StelCore *core, const InfoStringGro
 		if (nType != NebDn && core->getSkyDrawer()->getFlagHasAtmosphere() && (alt_app>-2.0*M_PI/180.0)) // Don't show extincted magnitude much below horizon where model is meaningless.
 		{
 			const Extinction &extinction=core->getSkyDrawer()->getExtinction();
-			float airmass=extinction.airmass(alt_app, true);
+			float airmass=extinction.airmass(std::cos(M_PI/2.0-alt_app), true);
 
 			emag = QString(" (%1 <b>%2</b> %3 <b>%4</b> %5)").arg(q_("reduced to"), QString::number(getVMagnitudeWithExtinction(core), 'f', decimals), q_("by"), QString::number(airmass, 'f', 2), q_("Airmasses"));
 		}
@@ -299,7 +299,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcmin"));
 			if (flagUseArcsecSurfaceBrightness)
 				mu = QString("%1/%2<sup>2</sup>").arg(qc_("mag", "magnitude"), q_("arcsec"));
-
 		}
 
 		if (getSurfaceBrightness(core)<99)
@@ -428,7 +427,6 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 
 		if (!getMorphologicalTypeDescription().isEmpty())
 			oss << QString("%1: %2.").arg(q_("Morphological description"), getMorphologicalTypeDescription()) << "<br />";
-
 	}
 
 	postProcessInfoString(str, flags);
@@ -563,7 +561,7 @@ Vec3f Nebula::getInfoColor(void) const
 
 double Nebula::getCloseViewFov(const StelCore*) const
 {
-	return majorAxisSize>0 ? majorAxisSize * 4 : 1;
+	return majorAxisSize>0.f ? majorAxisSize * 4. : 1.;
 }
 
 float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
@@ -574,8 +572,8 @@ float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
 	if (bMag < 90.f && mag > 90.f)
 		mag = bMag;
-	if (mag<99.f && majorAxisSize>0 && nType!=NebDn)
-		return mag + 2.5*log10(getSurfaceArea()*sq);
+	if (mag<99.f && majorAxisSize>0.f && nType!=NebDn)
+		return mag + 2.5f*log10(getSurfaceArea()*sq);
 	else
 		return 99.f;
 }
@@ -585,8 +583,8 @@ float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcs
 	float sq = 3600.f; // arcmin^2
 	if (arcsec)
 		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
-	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0 && nType!=NebDn)
-		return getVMagnitudeWithExtinction(core) + 2.5*log10(getSurfaceArea()*sq);
+	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0.f && nType!=NebDn)
+		return getVMagnitudeWithExtinction(core) + 2.5f*log10(getSurfaceArea()*sq);
 	else
 		return 99.f;
 }
@@ -607,7 +605,7 @@ float Nebula::getContrastIndex(const StelCore* core) const
 
 float Nebula::getSurfaceArea(void) const
 {
-	if (majorAxisSize==minorAxisSize || minorAxisSize==0)
+	if (majorAxisSize==minorAxisSize || minorAxisSize==0.f)
 		return M_PI*(majorAxisSize/2.f)*(majorAxisSize/2.f); // S = pi*R^2 = pi*(D/2)^2
 	else
 		return M_PI*(majorAxisSize/2.f)*(minorAxisSize/2.f); // S = pi*a*b
@@ -734,12 +732,12 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 	if (surfaceBrightnessUsage)
 	{
 		lim = getSurfaceBrightness(core) - 3.f;
-		if (lim > 90) lim = mLim + 1.f;
+		if (lim > 90.f) lim = mLim + 1.f;
 	}
 	else
 	{
 		float mag = getVMagnitude(core);
-		if (lim > 90) lim = mLim;
+		if (lim > 90.f) lim = mLim;
 
 		// Dark nebulae. Not sure how to assess visibility from opacity? --GZ
 		if (nType==NebDn)
@@ -748,7 +746,7 @@ float Nebula::getVisibilityLevelByMagnitude(void) const
 			// 9-(opac-5)-2*(angularSize-0.5)
 			// GZ Not good for non-Barnards. weak opacity and large surface are antagonists. (some LDN are huge, but opacity 2 is not much to discern).
 			// The qMin() maximized the visibility gain for large objects.
-			if (majorAxisSize>0 && mag<90)
+			if (majorAxisSize>0.f && mag<90.f)
 				lim = mLim - mag - 2.0f*qMin(majorAxisSize, 1.5f);
 			else if (B_nb>0)
 				lim = 9.0f;
@@ -799,7 +797,6 @@ void Nebula::drawOutlines(StelPainter &sPainter, float maxMagHints) const
 		}
 		sPainter.setLineSmooth(false);
 	}
-
 }
 
 void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
@@ -822,7 +819,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	if (drawHintProportional)
 	{
 		scaledSize = getAngularSize(Q_NULLPTR) *M_PI/180.*sPainter.getProjector()->getPixelPerRadAtCenter();
-
 	}
 	const float finalSize=qMax(size, scaledSize);
 
@@ -908,10 +904,8 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	Vec3f col(color[0]*lum*hintsBrightness, color[1]*lum*hintsBrightness, color[2]*lum*hintsBrightness);
 	if (!objectInDisplayedType())
 		col = Vec3f(0.f,0.f,0.f);
+
 	sPainter.setColor(col[0], col[1], col[2], 1);
-
-
-
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 	// Rotation looks good only for galaxies.
@@ -928,7 +922,6 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 	}
 	else	// no galaxy
 		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize);
-
 }
 
 void Nebula::drawLabel(StelPainter& sPainter, float maxMagLabel) const
@@ -1029,7 +1022,7 @@ void Nebula::readDSO(QDataStream &in)
 		withoutID = true;
 
 	StelUtils::spheToRect(ra,dec,XYZ);
-	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<0.000000001);
+	Q_ASSERT(fabs(XYZ.lengthSquared()-1.)<1e-9);
 	nType = (Nebula::NebulaType)oType;
 	pointRegion = SphericalRegionP(new SphericalPoint(getJ2000EquatorialPos(Q_NULLPTR)));
 }

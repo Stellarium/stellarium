@@ -39,7 +39,6 @@ QT_BEGIN_NAMESPACE_XLSX
 ChartsheetPrivate::ChartsheetPrivate(Chartsheet *p, Chartsheet::CreateFlag flag)
     : AbstractSheetPrivate(p, flag), chart(0)
 {
-
 }
 
 ChartsheetPrivate::~ChartsheetPrivate()

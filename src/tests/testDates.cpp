@@ -108,27 +108,6 @@ void TestDates::formatting()
 			 qPrintable("german for -5118-03-10 wrong: " + (StelUtils::localeDateString(-5118, 03, 10, 0))));
 
 	QVERIFY2(-18 == (-5118 % 100), qPrintable("modulus arithmetic works diff: " + QString("%1").arg(-5118 % 100)));
-
-	// test arbitrary fmt
-	// This is useless, as StelUtils::localeDateString() formats dates
-	// according to the *system* locale. On systems where it is not English,
-	// this test fails.
-	// See https://bugreports.qt-project.org/browse/QTBUG-27789. --BM
-//	QLocale::setDefault(QLocale::English);
-
-//	QString easyLong("d dd ddd dddd M MM MMM MMMM yy yyyy");
-//	QVERIFY2(QString::compare(QString("9 09 Sun Sunday 3 03 Mar March 08 2008"), StelUtils::localeDateString(2008, 3, 9, 6, easyLong)) == 0,
-//			 qPrintable("formatter1 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, easyLong)));
-//	QString hardLong("dddddddd '''doh' ''yyyyyyy");
-//	QVERIFY2(QString::compare(QString("SundaySunday 'doh '200808y"), StelUtils::localeDateString(2008, 3, 9, 6, hardLong)) == 0,
-//			 qPrintable("formatter2 not working: " + StelUtils::localeDateString(2008, 3, 9, 6, hardLong)));
-
-	// test detection of offset from UTC.
-	// double mar122008 = QDate(2008,3,12).toJulianDay();
-	// qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar122008), -4.f);
-	// double mar012008 = QDate(2008,3,1).toJulianDay();
-	// qFuzzyCompare(StelUtils::getGMTShiftFromQT(mar012008), -5.f);
-
 }
 
 void TestDates::testRolloverAndValidity()
@@ -357,7 +336,6 @@ void TestDates::testJulianDaysRange(int jd_a, int jd_b)
 		mm0 = mm;
 		yy0 = yy;
 	}
-
 }
 
 void TestDates::testJulianDays()
@@ -382,6 +360,115 @@ void TestDates::testJulianDays()
 	testJulianDaysRange( -99001000,  -99000000);
 	testJulianDaysRange(-200001000, -200000000);
 	testJulianDaysRange(-400001000, -400000000);	
+}
+
+void TestDates::testLeapYears()
+{
+	QVariantList data;
+
+	data << 1500 << true;
+	data << 1600 << true;
+	data << 2000 << true;
+	data << 2100 << false;
+	data << 2200 << false;
+	data << 2300 << false;
+	data << 2016 << true;
+	data << 2017 << false;
+	data << 2018 << false;
+	data << 2019 << false;
+	data << 2020 << true;
+	data << 1852 << true;
+	data << 1851 << false;
+
+	while (data.count()>=2)
+	{
+		int year	= data.takeFirst().toInt();
+		bool expected	= data.takeFirst().toBool();
+		bool status	= StelUtils::isLeapYear(year);
+
+		QVERIFY2(status==expected, qPrintable(QString("Year %1 is %2 (expected %3)")
+							   .arg(year)
+							   .arg(status ? "leap" : "not leap")
+							   .arg(expected ? "leap" : "not leap")));
+	}
+}
+
+void TestDates::testNumberOfDaysInMonthInYear()
+{
+	QVariantList data;
+
+	data << 2019 << 1		<< 31;
+	data << 2019 << 2		<< 28;
+	data << 2019 << 3		<< 31;
+	data << 2019 << 4		<< 30;
+	data << 2019 << 5		<< 31;
+	data << 2019 << 6		<< 30;
+	data << 2019 << 7		<< 31;
+	data << 2019 << 8		<< 31;
+	data << 2019 << 9		<< 30;
+	data << 2019 << 10	<< 31;
+	data << 2019 << 11	<< 30;
+	data << 2019 << 12	<< 31;
+	data << 2020 << 1		<< 31;
+	data << 2020 << 2		<< 29;
+	data << 2020 << 3		<< 31;
+	data << 2020 << 4		<< 30;
+	data << 2020 << 5		<< 31;
+	data << 2020 << 6		<< 30;
+	data << 2020 << 7		<< 31;
+	data << 2020 << 8		<< 31;
+	data << 2020 << 9		<< 30;
+	data << 2020 << 10	<< 31;
+	data << 2020 << 11	<< 30;
+	data << 2020 << 12	<< 31;
+	data << 2020 << 0		<< 31;
+	data << 2020 << 13	<< 31;
+	data << 1852 << 1		<< 31;
+	data << 1852 << 2		<< 29;
+	data << 1851 << 2		<< 28;
+
+	while (data.count()>=3)
+	{
+		int year	= data.takeFirst().toInt();
+		int month	= data.takeFirst().toInt();
+		int expected	= data.takeFirst().toInt();
+		int days	= StelUtils::numberOfDaysInMonthInYear(month, year);
+
+		QVERIFY2(days==expected, qPrintable(QString("Month %1 in year %2 has %3 days (expected %4 days)")
+						    .arg(month)
+						    .arg(year)
+						    .arg(days)
+						    .arg(expected)));
+	}
+}
+
+void TestDates::testFixedFromGregorian()
+{
+	QVariantList data;
+	//            year	  month	day	        days
+	data <<       1 <<   1 <<   1 <<           1;
+	data <<       8 <<   8 << 27 <<     2796;
+	data <<   632 <<   6 << 19 << 230638;
+	data << 1792 <<   9 << 22 << 654415;
+	data << 1858 << 11 << 17 << 678576;
+	data << 1970 <<   1 <<   1 << 719163;
+	data << 1945 << 11 << 12 << 710347;
+
+	while (data.count()>=4)
+	{
+		int year	= data.takeFirst().toInt();
+		int month	= data.takeFirst().toInt();
+		int day	= data.takeFirst().toInt();
+		int expected	= data.takeFirst().toInt();
+		int days	= StelUtils::getFixedFromGregorian(year, month, day);
+
+		QVERIFY2(days==expected, qPrintable(QString("Date %1-%2-%3 has %4 days from R.D. (expected %5 days)")
+						    .arg(year)
+						    .arg(month)
+						    .arg(day)
+						    .arg(days)
+						    .arg(expected)));
+	}
 }
 
 #define TJ1 (2450000)

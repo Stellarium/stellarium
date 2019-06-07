@@ -113,7 +113,6 @@ void QuasarsDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
-
 }
 
 void QuasarsDialog::setAboutHtml(void)

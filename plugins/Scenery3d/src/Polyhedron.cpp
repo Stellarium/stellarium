@@ -27,12 +27,10 @@
 
 Polyhedron::Polyhedron()
 {
-
 }
 
 Polyhedron::~Polyhedron()
 {
-
 }
 
 void Polyhedron::clear()

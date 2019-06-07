@@ -38,6 +38,7 @@
 #include "SolarSystem.hpp"
 #include "Planet.hpp"
 #include "NebulaMgr.hpp"
+#include "AsterismMgr.hpp"
 #include "StelStyle.hpp"
 #include "StelSkyLayerMgr.hpp"
 #include "StelGuiBase.hpp"
@@ -95,8 +96,8 @@ void ViewDialog::retranslate()
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
 		setBortleScaleToolTip(StelApp::getInstance().getCore()->getSkyDrawer()->getBortleScaleIndex());
+		populateHipsGroups();
 		updateHips();
-
 		//Hack to shrink the tabs to optimal size after language change
 		//by causing the list items to be laid out again.
 		updateTabBarListWidgetWidth();
@@ -111,6 +112,7 @@ void ViewDialog::styleChanged()
 		populateToolTips();
 		populatePlanetMagnitudeAlgorithmsList();
 		populatePlanetMagnitudeAlgorithmDescription();
+		populateHipsGroups();
 	}
 }
 
@@ -127,14 +129,10 @@ void ViewDialog::createDialogContent()
 {
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
-
 	// Set the Sky tab activated by default
 	ui->stackedWidget->setCurrentIndex(0);
 	ui->stackListWidget->setCurrentRow(0);
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(changePage(QListWidgetItem *, QListWidgetItem*)));
-
-	//ui->viewTabWidget->removeTab(4);
-
 	// Kinetic scrolling
 	kineticScrollingList << ui->projectionListWidget << ui->culturesListWidget << ui->skyCultureTextBrowser << ui->landscapesListWidget
 			     << ui->landscapeTextBrowser << ui->surveysListWidget << ui->surveysTextBrowser;
@@ -144,8 +142,6 @@ void ViewDialog::createDialogContent()
 		enableKineticScrolling(gui->getFlagUseKineticScrolling());
 		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
 	}
-
-
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
@@ -155,13 +151,10 @@ void ViewDialog::createDialogContent()
 	// TODOs after properties merge:
 	// New method: populateLightPollution may be useful. Make sure it is.
 	// Jupiter's GRS should become property, and recheck the other "from trunk" entries.
-
-
 	connect(ui->culturesListWidget, SIGNAL(currentTextChanged(const QString&)),&StelApp::getInstance().getSkyCultureMgr(),SLOT(setCurrentSkyCultureNameI18(QString)));
 	connect(&StelApp::getInstance().getSkyCultureMgr(), SIGNAL(currentSkyCultureChanged(QString)), this, SLOT(skyCultureChanged()));
 
 	// Connect and initialize checkboxes and other widgets
-
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	Q_ASSERT(ssmgr);
 	// Stars section
@@ -195,10 +188,8 @@ void ViewDialog::createDialogContent()
 	//setLightPollutionSpinBoxStatus();
 	populateLightPollution();
 	connectBoolProperty(ui->useLightPollutionFromLocationDataCheckBox, "LandscapeMgr.flagUseLightPollutionFromDatabase");
-
 	//connect(lmgr, SIGNAL(lightPollutionUsageChanged(bool)), this, SLOT(setLightPollutionSpinBoxStatus()));
 	connect(lmgr, SIGNAL(flagUseLightPollutionFromDatabaseChanged(bool)), this, SLOT(populateLightPollution()));
-
 	connectIntProperty(ui->lightPollutionSpinBox, "StelSkyDrawer.bortleScaleIndex");
 	connect(drawer, SIGNAL(bortleScaleIndexChanged(int)), this, SLOT(setBortleScaleToolTip(int)));
 
@@ -214,8 +205,7 @@ void ViewDialog::createDialogContent()
 	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetIsolatedOrbitCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->planetOrbitOnlyCheckBox, "SolarSystem.flagPlanetsOrbitsOnly");
 	ui->planetOrbitOnlyCheckBox->setEnabled(ssmgr->getFlagPlanetsOrbitsOnly());
-	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetOrbitOnlyCheckBox, SLOT(setEnabled(bool)));
-	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
+	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetOrbitOnlyCheckBox, SLOT(setEnabled(bool)));	
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");
 	connectBoolProperty(ui->planetUseObjModelsCheckBox, "SolarSystem.flagUseObjModels");
 	connectBoolProperty(ui->planetShowObjSelfShadowsCheckBox, "SolarSystem.flagShowObjSelfShadows");
@@ -236,10 +226,13 @@ void ViewDialog::createDialogContent()
 	connectColorButton(ui->planetLabelColor, "SolarSystem.labelsColor", "color/planet_names_color");
 	connectColorButton(ui->planetTrailsColor, "SolarSystem.trailsColor", "color/object_trails_color");
 	connectBoolProperty(ui->planetTrailsCheckBox, "SolarSystem.trailsDisplayed");
+	connectBoolProperty(ui->planetIsolatedTrailsCheckBox, "SolarSystem.flagIsolatedTrails");
+	connectIntProperty(ui->planetIsolatedTrailsSpinBox, "SolarSystem.numberIsolatedTrails");
 	ui->planetIsolatedTrailsCheckBox->setEnabled(ssmgr->getFlagTrails());
+	ui->planetIsolatedTrailsSpinBox->setEnabled(ssmgr->getFlagTrails());
 	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)),ui->planetIsolatedTrailsCheckBox, SLOT(setEnabled(bool)));
+	connect(ssmgr,SIGNAL(trailsDisplayedChanged(bool)),ui->planetIsolatedTrailsSpinBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->hidePlanetNomenclatureCheckBox, "NomenclatureMgr.localNomenclatureHided");
-
 	StelModule* mnmgr = StelApp::getInstance().getModule("NomenclatureMgr");
 	ui->hidePlanetNomenclatureCheckBox->setEnabled(mnmgr->property("nomenclatureDisplayed").toBool());
 	connect(mnmgr,SIGNAL(nomenclatureDisplayedChanged(bool)),ui->hidePlanetNomenclatureCheckBox, SLOT(setEnabled(bool)));
@@ -280,7 +273,6 @@ void ViewDialog::createDialogContent()
 	connect(nmgr, SIGNAL(typeFiltersChanged(Nebula::TypeGroup)), this, SLOT(updateSelectedTypesCheckBoxes()));
 	connect(ui->buttonGroupDisplayedDSOTypes, SIGNAL(buttonClicked(int)), this, SLOT(setSelectedTypesFromCheckBoxes()));
 	connectGroupBox(ui->groupBoxDSOTypeFilters,"actionSet_Nebula_TypeFilterUsage");
-
 	// DSO Labels section
 	connectGroupBox(ui->groupBoxDSOLabelsAndMarkers, "actionShow_Nebulas");
 	connectDoubleProperty(ui->nebulasLabelsHorizontalSlider, "NebulaMgr.labelsAmount",0.0,10.0);
@@ -295,7 +287,6 @@ void ViewDialog::createDialogContent()
 	connectBoolProperty(ui->nebulaLimitSizeCheckBox, "NebulaMgr.flagUseSizeLimits");
 	connectDoubleProperty(ui->nebulaLimitSizeMinDoubleSpinBox, "NebulaMgr.minSizeLimit");
 	connectDoubleProperty(ui->nebulaLimitSizeMaxDoubleSpinBox, "NebulaMgr.maxSizeLimit");
-
 	connect(ui->pushButtonConfigureDSOColors, SIGNAL(clicked()), this, SLOT(showConfigureDSOColorsDialog()));
 
 	// Landscape section
@@ -312,17 +303,13 @@ void ViewDialog::createDialogContent()
 	connect(lmgr,SIGNAL(flagLandscapeUseMinimalBrightnessChanged(bool)),ui->landscapeBrightnessSpinBox,SLOT(setEnabled(bool)));
 	ui->localLandscapeBrightnessCheckBox->setEnabled(lmgr->property("flagLandscapeUseMinimalBrightness").toBool());
 	ui->landscapeBrightnessSpinBox->setEnabled(lmgr->property("flagLandscapeUseMinimalBrightness").toBool());
-
 	connectDoubleProperty(ui->landscapeBrightnessSpinBox,"LandscapeMgr.defaultMinimalBrightness");
 	connectBoolProperty(ui->localLandscapeBrightnessCheckBox,"LandscapeMgr.flagLandscapeSetsMinimalBrightness");
-
 	connect(ui->landscapesListWidget, SIGNAL(currentItemChanged(QListWidgetItem*,QListWidgetItem*)), this, SLOT(changeLandscape(QListWidgetItem*)));
 	connect(lmgr, SIGNAL(currentLandscapeChanged(QString,QString)), this, SLOT(landscapeChanged(QString,QString)));
-
 	connect(ui->useAsDefaultLandscapeCheckBox, SIGNAL(clicked()), this, SLOT(setCurrentLandscapeAsDefault()));
 	connect(lmgr,SIGNAL(defaultLandscapeChanged(QString)),this,SLOT(updateDefaultLandscape()));
 	updateDefaultLandscape();
-
 	connect(lmgr, SIGNAL(landscapesChanged()), this, SLOT(populateLists()));
 	connect(ui->pushButtonAddRemoveLandscapes, SIGNAL(clicked()), this, SLOT(showAddRemoveLandscapesDialog()));
 
@@ -409,11 +396,11 @@ void ViewDialog::createDialogContent()
 	// allow to display short names and inhibit translation.
 	connectIntProperty(ui->skyCultureNamesStyleComboBox,		"ConstellationMgr.constellationDisplayStyle");
 	connectCheckBox(ui->nativePlanetNamesCheckBox,			"actionShow_Skyculture_NativePlanetNames");
-
 	connectCheckBox(ui->showConstellationLinesCheckBox,		"actionShow_Constellation_Lines");
 	connectIntProperty(ui->constellationLineThicknessSpinBox,	"ConstellationMgr.constellationLineThickness");
 	connectCheckBox(ui->showConstellationLabelsCheckBox,		"actionShow_Constellation_Labels");
 	connectCheckBox(ui->showConstellationBoundariesCheckBox,	"actionShow_Constellation_Boundaries");
+	connectIntProperty(ui->constellationBoundariesThicknessSpinBox,	"ConstellationMgr.constellationBoundariesThickness");
 	connectCheckBox(ui->showConstellationArtCheckBox,		"actionShow_Constellation_Art");	
 	connectDoubleProperty(ui->constellationArtBrightnessSpinBox,	"ConstellationMgr.artIntensity");
 
@@ -423,18 +410,23 @@ void ViewDialog::createDialogContent()
 
 	connectCheckBox(ui->showAsterismLinesCheckBox,		"actionShow_Asterism_Lines");
 	connectIntProperty(ui->asterismLineThicknessSpinBox,	"AsterismMgr.asterismLineThickness");
-	connectCheckBox(ui->showAsterismLabelsCheckBox,	"actionShow_Asterism_Labels");
-
+	connectCheckBox(ui->showAsterismLabelsCheckBox,		"actionShow_Asterism_Labels");
 	connectCheckBox(ui->showRayHelpersCheckBox,		"actionShow_Ray_Helpers");
-	connectIntProperty(ui->rayHelperThicknessSpinBox,		"AsterismMgr.rayHelperThickness");
+	connectIntProperty(ui->rayHelperThicknessSpinBox,	"AsterismMgr.rayHelperThickness");
 
 	connectColorButton(ui->colorAsterismLabels,     "AsterismMgr.namesColor",      "color/asterism_names_color");
 	connectColorButton(ui->colorAsterismLines,      "AsterismMgr.linesColor",      "color/asterism_lines_color");
 	connectColorButton(ui->colorRayHelpers,	        "AsterismMgr.rayHelpersColor", "color/rayhelper_lines_color");
 
+	// Font selection
+	connectIntProperty(ui->constellationsFontSizeSpinBox,	"ConstellationMgr.fontSize");
+	connectIntProperty(ui->asterismsFontSizeSpinBox,		"AsterismMgr.fontSize");
+
 	// Hips mgr.
-	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
+	populateHipsGroups();
+	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");	
 	connect(hipsmgr, SIGNAL(surveysChanged()), this, SLOT(updateHips()));
+	connect(ui->surveyTypeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem *, QListWidgetItem *)), this, SLOT(updateHips()));
 	connect(ui->surveysListWidget, SIGNAL(currentRowChanged(int)), this, SLOT(updateHips()), Qt::QueuedConnection);
 	connect(ui->surveysListWidget, SIGNAL(itemChanged(QListWidgetItem*)), this, SLOT(hipsListItemChanged(QListWidgetItem*)));
@@ -461,19 +453,10 @@ void ViewDialog::updateHips()
 	StelModule *hipsmgr = StelApp::getInstance().getModule("HipsMgr");
 	QMetaObject::invokeMethod(hipsmgr, "loadSources");
 
-	// Update the groups combobox.
 	QComboBox* typeComboBox = ui->surveyTypeComboBox;
-	disconnect(typeComboBox, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
-	int index = typeComboBox->currentIndex();
-	QVariant selectedType = typeComboBox->itemData(index);
+	QVariant selectedType = typeComboBox->itemData(typeComboBox->currentIndex());
 	if (selectedType.isNull())
 		selectedType = "dss";
-	typeComboBox->clear();
-	typeComboBox->addItem(q_("Deep Sky"), "dss");
-	typeComboBox->addItem(q_("Solar System"), "sol");
-	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
-	typeComboBox->setCurrentIndex(index);
-	connect(typeComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateHips()));
 
 	// Update survey list.
 	QListWidget* l = ui->surveysListWidget;
@@ -515,8 +498,9 @@ void ViewDialog::updateHips()
 		disconnect(hips.data(), Q_NULLPTR, this, Q_NULLPTR);
 		connect(hips.data(), SIGNAL(statusChanged()), this, SLOT(updateHips()));
 	}
-	l->setCurrentItem(currentItem);
 	l->sortItems(Qt::AscendingOrder);
+	l->setCurrentItem(currentItem);
+	l->scrollToItem(currentItem);
 	l->blockSignals(false);
 
 	if (!currentHips)
@@ -542,7 +526,21 @@ void ViewDialog::updateHips()
 		ui->surveysTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 		ui->surveysTextBrowser->setHtml(html);
 	}
+}
 
+void ViewDialog::populateHipsGroups()
+{
+	// Update the groups combobox.
+	QComboBox* typeComboBox = ui->surveyTypeComboBox;
+	int index = typeComboBox->currentIndex();
+	QVariant selectedType = typeComboBox->itemData(index);
+	if (selectedType.isNull())
+		selectedType = "dss";
+	typeComboBox->clear();
+	typeComboBox->addItem(q_("Deep Sky"), "dss");
+	typeComboBox->addItem(q_("Solar System"), "sol");
+	index = typeComboBox->findData(selectedType, Qt::UserRole, Qt::MatchCaseSensitive);
+	typeComboBox->setCurrentIndex(index);
 }
 
 void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
@@ -570,25 +568,20 @@ void ViewDialog::hipsListItemChanged(QListWidgetItem* item)
 void ViewDialog::updateTabBarListWidgetWidth()
 {
 	ui->stackListWidget->setWrapping(false);
-
 	// Update list item sizes after translation
 	ui->stackListWidget->adjustSize();
-
 	QAbstractItemModel* model = ui->stackListWidget->model();
 	if (!model)
 	{
 		return;
 	}
-
 	// stackListWidget->font() does not work properly!
 	// It has a incorrect fontSize in the first loading, which produces the bug#995107.
 	QFont font;
 	font.setPixelSize(14);
 	font.setWeight(75);
 	QFontMetrics fontMetrics(font);
-
 	int iconSize = ui->stackListWidget->iconSize().width();
-
 	int width = 0;
 	for (int row = 0; row < model->rowCount(); row++)
 	{
@@ -596,7 +589,6 @@ void ViewDialog::updateTabBarListWidgetWidth()
 		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
 		width += 24; // margin - 12px left and 12px right
 	}
-
 	// Hack to force the window to be resized...
 	ui->stackListWidget->setMinimumWidth(width);
 }
@@ -604,7 +596,6 @@ void ViewDialog::updateTabBarListWidgetWidth()
 void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 {
 	Nebula::CatalogGroup flags(Q_NULLPTR);
-
 	if (ui->checkBoxNGC->isChecked())
 		flags |= Nebula::CatNGC;
 	if (ui->checkBoxIC->isChecked())
@@ -660,7 +651,6 @@ void ViewDialog::setSelectedCatalogsFromCheckBoxes()
 void ViewDialog::setSelectedTypesFromCheckBoxes()
 {
 	Nebula::TypeGroup flags(Q_NULLPTR);
-
 	if (ui->checkBoxGalaxiesType->isChecked())
 		flags |= Nebula::TypeGalaxies;
 	if (ui->checkBoxActiveGalaxiesType->isChecked())
@@ -691,7 +681,6 @@ void ViewDialog::setSelectedTypesFromCheckBoxes()
 void ViewDialog::updateSelectedCatalogsCheckBoxes()
 {
 	const Nebula::CatalogGroup& flags = GETSTELMODULE(NebulaMgr)->getCatalogFilters();
-
 	ui->checkBoxNGC->setChecked(flags & Nebula::CatNGC);
 	ui->checkBoxIC->setChecked(flags & Nebula::CatIC);
 	ui->checkBoxM->setChecked(flags & Nebula::CatM);
@@ -721,7 +710,6 @@ void ViewDialog::updateSelectedCatalogsCheckBoxes()
 void ViewDialog::updateSelectedTypesCheckBoxes()
 {
 	const Nebula::TypeGroup& flags = GETSTELMODULE(NebulaMgr)->getTypeFilters();
-
 	ui->checkBoxGalaxiesType->setChecked(flags & Nebula::TypeGalaxies);
 	ui->checkBoxActiveGalaxiesType->setChecked(flags & Nebula::TypeActiveGalaxies);
 	ui->checkBoxInteractingGalaxiesType->setChecked(flags & Nebula::TypeInteractingGalaxies);
@@ -739,7 +727,6 @@ void ViewDialog::setFlagCustomGrsSettings(bool b)
 {
 	GETSTELMODULE(SolarSystem)->setFlagCustomGrsSettings(b);
 	ui->pushButtonGrsDetails->setEnabled(b);
-
 	if (!b && greatRedSpotDialog!=Q_NULLPTR)
 		greatRedSpotDialog->setVisible(false);
 }
@@ -939,8 +926,7 @@ void ViewDialog::projectionChanged()
 
 void ViewDialog::changeLandscape(QListWidgetItem* item)
 {
-	StelModule* lmgr = StelApp::getInstance().getModule("LandscapeMgr");
-	lmgr->setProperty("currentLandscapeName", item->data(Qt::UserRole).toString());
+	StelApp::getInstance().getModule("LandscapeMgr")->setProperty("currentLandscapeName", item->data(Qt::UserRole).toString());
 }
 
 void ViewDialog::landscapeChanged(QString id, QString name)
@@ -1016,7 +1002,7 @@ void ViewDialog::updateZhrDescription(int zhr)
 		ui->zhrLabel->setText("<small><i>"+q_("Standard Orionids rate")+"</i></small>");
 	else if ((zhr>=90) && (zhr<=110)) // was 100
 		ui->zhrLabel->setText("<small><i>"+q_("Standard Perseids rate")+"</i></small>");
-	else if ((zhr>=108) && (zhr<=132)) // was 120
+	else if ((zhr>=111) && (zhr<=132)) // was 120
 		ui->zhrLabel->setText("<small><i>"+q_("Standard Geminids rate")+"</i></small>");
 	else if ((zhr>=180) && (zhr<=220)) // was 200
 		ui->zhrLabel->setText("<small><i>"+q_("Exceptional Perseid rate")+"</i></small>");
@@ -1052,6 +1038,18 @@ void ViewDialog::updateDefaultSkyCulture()
 	bool b = StelApp::getInstance().getSkyCultureMgr().getCurrentSkyCultureID()==StelApp::getInstance().getSkyCultureMgr().getDefaultSkyCultureID();
 	ui->useAsDefaultSkyCultureCheckBox->setChecked(b);
 	ui->useAsDefaultSkyCultureCheckBox->setEnabled(!b);
+	// Check that ray helpers and asterism lines are defined
+	b = GETSTELMODULE(AsterismMgr)->isLinesDefined();
+	ui->showAsterismLinesCheckBox->setEnabled(b);
+	ui->showAsterismLabelsCheckBox->setEnabled(b);
+	ui->asterismLineThicknessSpinBox->setEnabled(b);
+	ui->colorAsterismLines->setEnabled(b);
+	ui->colorAsterismLabels->setEnabled(b);
+	ui->showRayHelpersCheckBox->setEnabled(b);
+	ui->rayHelperThicknessSpinBox->setEnabled(b);
+	ui->colorRayHelpers->setEnabled(b);
+	ui->asterismsFontSizeSpinBox->setEnabled(b);
+	ui->labelAsterismsFontSize->setEnabled(b);
 }
 
 void ViewDialog::updateDefaultLandscape()
@@ -1073,9 +1071,7 @@ void ViewDialog::changePage(QListWidgetItem *current, QListWidgetItem *previous)
 void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 {
 	Q_ASSERT(ui->planetMagnitudeAlgorithmComboBox);
-
 	QComboBox* algorithms = ui->planetMagnitudeAlgorithmComboBox;
-
 	//Save the current selection to be restored later
 	algorithms->blockSignals(true);
 	int index = algorithms->currentIndex();

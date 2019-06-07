@@ -232,7 +232,6 @@ void S3DRenderer::setupFrameUniforms(QOpenGLShaderProgram *shader)
 		loc = shaderManager.uniformLocation(shader,ShaderMgr::UNIFORM_LIGHT_DIRECTION_VIEW);
 		if(loc>=0)
 			shader->setUniformValue(loc,(normalMatrix * lightInfo.lightDirectionWorld));
-
 	}
 }
 
@@ -886,7 +885,7 @@ void S3DRenderer::calculateLighting()
 		// directly use the same model as LandscapeMgr::update uses for the lightscapeBrightness
 		emissiveFactor = 0.0f;
 		if (sunPosition[2]<-0.14f) emissiveFactor=1.0f;
-		else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14)/(-0.05+0.14);
+		else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14f)/(-0.05f+0.14f);
 	}
 
 	// calculate ambient light
@@ -900,7 +899,7 @@ void S3DRenderer::calculateLighting()
 
 	if ((sinMoonAngle>0.0f) && (sinSunAngle<0.0f))
 	{
-		lightInfo.moonAmbient = sqrt(sinMoonAngle * ((std::cos(moonPhaseAngle)+1)/2)) * LUNAR_BRIGHTNESS_FACTOR;
+		lightInfo.moonAmbient = sqrtf(sinMoonAngle * ((cosf(moonPhaseAngle)+1.0f)*0.5f)) * LUNAR_BRIGHTNESS_FACTOR;
 		ambientBrightness += lightInfo.moonAmbient;
 	}
 	else
@@ -909,34 +908,20 @@ void S3DRenderer::calculateLighting()
 	// Now find shadow caster + directional light, if any:
 	if (sinSunAngle>-0.1f)
 	{
-		directionalBrightness=qMin(0.7f, std::sqrt(sinSunAngle+0.1f))*eclipseFactor; // limit to 0.7 in order to keep total below 1.
+		directionalBrightness=qMin(0.7f, sqrtf(sinSunAngle+0.1f))*eclipseFactor; // limit to 0.7 in order to keep total below 1.
 		//redundant
 		//lightPosition = sunPosition;
 		if (shaderParameters.shadows) lightInfo.shadowCaster = LightParameters::SC_Sun;
 		lightInfo.directionalSource = LightParameters::DS_Sun;
 	}
 	// "else" is required now, else we have lunar shadow with sun above horizon...
+	// and "else" implies sinSunAngle<-0.1 or sun <-6 degrees.
 	else if (sinMoonAngle>0.0f)
 	{
-		float moonBrightness = std::sqrt(sinMoonAngle) * ((std::cos(moonPhaseAngle)+1.0f)/2.0f) * LUNAR_BRIGHTNESS_FACTOR;
-		moonBrightness -= (ambientBrightness-0.05f)/2.0f;
+		float moonBrightness = sqrtf(sinMoonAngle) * ((cosf(moonPhaseAngle)+1.0f)*0.5f) * LUNAR_BRIGHTNESS_FACTOR;
+		moonBrightness -= (ambientBrightness-0.05f)*0.5f;
 		moonBrightness = qMax(0.0f,moonBrightness);
-		if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-		{
-			//interpolate directional brightness between sun and moon
-			float t = sinSunAngle/-0.1f;
-			directionalBrightness = (1.0f-t) * directionalBrightness + t*moonBrightness;
-			/*
-		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
-		    //but that does not seem to have much of an effect
-		    if(moonBrightness>0)
-		    {
-			    lightPosition = (1.0-t) * sunPosition + (double)t * moonPosition;
-			    lightPosition.normalize();
-		    }
-		    */
-		}
-		else if (moonBrightness >0)
+		if (moonBrightness > 0.0f)
 		{
 			directionalBrightness = moonBrightness;
 			lightPosition = moonPosition;
@@ -948,26 +933,10 @@ void S3DRenderer::calculateLighting()
 	}
 	else if (sinVenusAngle>0.0f)
 	{
-		float venusBrightness = std::sqrt(sinVenusAngle)*((std::cos(venusPhaseAngle)+1)/2) * VENUS_BRIGHTNESS_FACTOR;
+		float venusBrightness = sqrtf(sinVenusAngle)*((cosf(venusPhaseAngle)+1)*0.5f) * VENUS_BRIGHTNESS_FACTOR;
 		venusBrightness -= (ambientBrightness-0.05)/2.0f;
 		venusBrightness = qMax(0.0f, venusBrightness);
-
-		if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-		{
-			//interpolate directional brightness between sun and venus
-			float t = sinSunAngle/-0.1f;
-			directionalBrightness = (1.0f-t) * directionalBrightness + t*venusBrightness;
-			/*
-		    //uncomment to also move the light direction linearly to avoid possible jarring transitions
-		    //but that does not seem to have much of an effect
-		    if(venusBrightness>0)
-		    {
-			    lightPosition = (1.0-t) * sunPosition + (double)t * venusPosition;
-			    lightPosition.normalize();
-		    }
-		    */
-		}
-		else if (venusBrightness > 0.0f)
+		if (venusBrightness > 0.0f)
 		{
 			directionalBrightness = venusBrightness;
 			lightPosition = venusPosition;
@@ -976,12 +945,6 @@ void S3DRenderer::calculateLighting()
 		} else lightInfo.directionalSource = LightParameters::DS_Venus_Ambient;
 		//Alternately, construct a term around Venus brightness, like
 		// directionalBrightness=(mag/-100)
-	}
-	else if(sinSunAngle<0.0f && sinSunAngle >-0.1f)
-	{
-		//let sunlight fall off to zero
-		float t = sinSunAngle/-0.1f;
-		directionalBrightness = (1.0f - t) * directionalBrightness;
 	}
 
 	//convert to float
@@ -1373,7 +1336,6 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
     glDepthMask(GL_FALSE);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_CULL_FACE);
-
 }
 
 void S3DRenderer::drawWithCubeMap()
@@ -1420,23 +1382,22 @@ void S3DRenderer::drawCoordinatesText()
 	str = QString("Eye:    %1m").arg(currentScene->getEyeHeight(), 10, 'f', 2);
 	painter.drawText(screen_x, screen_y, str);
 
-	/*// DEBUG AIDS:
-    screen_y -= 15.0f;
-    str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
-    str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
-    painter.drawText(screen_x, screen_y, str);
-    //*/
+//	DEBUG AIDS:
+//	screen_y -= 15.0f;
+//	str = QString("model_X:%1m").arg(model_pos[0], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("model_Y:%1m").arg(model_pos[1], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("model_Z:%1m").arg(model_pos[2], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("abs_X:  %1m").arg(absolutePosition.v[0], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("abs_Y:  %1m").arg(absolutePosition.v[1], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("abs_Z:  %1m").arg(absolutePosition.v[2], 10, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);screen_y -= 15.0f;
+//	str = QString("groundNullHeight: %1m").arg(groundNullHeight, 7, 'f', 2);
+//	painter.drawText(screen_x, screen_y, str);
 }
 
 void S3DRenderer::drawDebug()
@@ -1573,7 +1534,6 @@ void S3DRenderer::drawDebug()
 			painter.drawText(screen_x+165.0f, screen_y-215.0f, QString("Splitweight: %1").arg(info.shadowSplitWeight, 3, 'f', 2));
 			painter.drawText(screen_x+165.0f, screen_y-230.0f, QString("Light near/far: %1/%2").arg(lightOrthoNear, 3, 'f', 2).arg(lightOrthoFar, 3, 'f', 2));
 		}
-
 	}
 
 	screen_y -= 100.f;
@@ -1625,8 +1585,8 @@ void S3DRenderer::determineFeatureSupport()
 	// graphics hardware without FrameBufferObj extension cannot use the cubemap rendering and shadow mapping.
 	// In this case, set cubemapSize to 0 to signal auto-switch to perspective projection.
 	// OpenGL ES2 has framebuffers in the Spec
-	if ( !ctx->functions()->hasOpenGLFeature(QOpenGLFunctions::Framebuffers) ) {
-
+	if ( !ctx->functions()->hasOpenGLFeature(QOpenGLFunctions::Framebuffers) )
+	{
 		//TODO FS: it seems like the current stellarium requires a working framebuffer extension anyway, so skip this check?
 		qCWarning(s3drenderer) << "Your hardware does not support EXT_framebuffer_object.";
 		qCWarning(s3drenderer) << "Shadow mapping disabled, and display limited to perspective projection.";

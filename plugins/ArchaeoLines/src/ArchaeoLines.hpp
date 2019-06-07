@@ -435,7 +435,7 @@ public slots:
 
 private slots:
 	//! a slot connected to core which cares for location changes, updating the geographicLocation lines.
-	void updateObserverLocation(StelLocation loc);
+	void updateObserverLocation(const StelLocation &loc);
 	//! Compute azimuth (from North) towards Target. All angles (args and result) are in degrees.
 	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
 

@@ -130,7 +130,6 @@ void TuiNodeColor::incPart(int part, bool add)
 			value[part] = 0.;
 		else
 			value[part]-=diff;
-
 	}
 }
 

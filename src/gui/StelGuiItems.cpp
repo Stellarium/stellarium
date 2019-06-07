@@ -34,6 +34,7 @@
 #include "StelProgressController.hpp"
 #include "StelObserver.hpp"
 #include "SkyGui.hpp"
+#include "EphemWrapper.hpp"
 
 #include <QPainter>
 #include <QGraphicsScene>
@@ -541,7 +542,6 @@ void BottomStelBar::setGroupBackground(const QString& groupName,
                                        const QPixmap& pixMiddle,
                                        const QPixmap& pixSingle)
 {
-
 	if (!buttonGroups.contains(groupName))
 		return;
 
@@ -642,9 +642,9 @@ void BottomStelBar::updateButtonsGroups()
 void BottomStelBar::updateText(bool updatePos)
 {
 	StelCore* core = StelApp::getInstance().getCore();
-	double jd = core->getJD();
-	double deltaT = core->getDeltaT();
-	double sigma = StelUtils::getDeltaTStandardError(jd);
+	const double jd = core->getJD();
+	const double deltaT = core->getDeltaT();
+	const double sigma = StelUtils::getDeltaTStandardError(jd);
 	QString sigmaInfo = "";
 	QString validRangeMarker = "";
 	core->getCurrentDeltaTAlgorithmValidRangeDescription(jd, &validRangeMarker);
@@ -682,7 +682,7 @@ void BottomStelBar::updateText(bool updatePos)
 
 	QString currTZ = QString("%1: %2").arg(q_("Time zone")).arg(tzName);
 
-	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=StelCore::TZ_ERA_BEGINNING && !core->getUseCustomTimeZone()) || planetName!="Earth")
+	if (tzName.contains("LMST") || tzName.contains("auto") || (planetName=="Earth" && jd<=StelCore::TZ_ERA_BEGINNING && !core->getUseCustomTimeZone()) )
 		currTZ = q_("Local Mean Solar Time");
 
 	if (tzName.contains("LTST"))
@@ -715,8 +715,12 @@ void BottomStelBar::updateText(bool updatePos)
 	if (timeRate>60.)
 		timeRateInfo = QString("%1: x%2 (%3 %4)").arg(q_("Simulation speed"), QString::number(timeRate, 'f', 0), QString::number(timeSpeed, 'f', 2), timeRateMU);
 
-	updatePos = true;
-	datetime->setText(newDateInfo);
+	if (datetime->text()!=newDateInfo)
+	{
+		updatePos = true;
+		datetime->setText(newDateInfo);
+	}
+
 	if (core->getCurrentDeltaTAlgorithm()!=StelCore::WithoutCorrection)
 	{
 		if (sigma>0)
@@ -731,7 +735,7 @@ void BottomStelBar::updateText(bool updatePos)
 		// the corrective ndot to be displayed could be set according to the currently used DeltaT algorithm.
 		//float ndot=core->getDeltaTnDot();
 		// or just to the used ephemeris. This has to be read as "Selected DeltaT formula used, but with the ephemeris's nDot applied it corrects DeltaT to..."
-		float ndot=( (core->de430IsActive() || core->de431IsActive()) ? -25.8f : -23.8946f );
+		float ndot=( (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd)) ? -25.8f : -23.8946f );
 
 		datetime->setToolTip(QString("<p style='white-space:pre'>%1T = %2 [n%8 @ %3\"/cy%4%5]<br>%6<br>%7<br>%9</p>").arg(QChar(0x0394)).arg(deltaTInfo).arg(QString::number(ndot, 'f', 4)).arg(QChar(0x00B2)).arg(sigmaInfo).arg(newDateAppx).arg(currTZ).arg(QChar(0x2032)).arg(timeRateInfo));
 	}
@@ -746,18 +750,19 @@ void BottomStelBar::updateText(bool updatePos)
 
 	// build location tooltip
 	QString newLocation = "";
-	const StelLocation* loc = &core->getCurrentLocation();
-	if (getFlagShowLocation() && !loc->name.isEmpty())
+	if (getFlagShowLocation())
 	{
-		//TRANSLATORS: Unit of measure for distance - meter
-		newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
-	}
-	if (getFlagShowLocation() && loc->name.isEmpty())
-	{
-		newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		const StelLocation* loc = &core->getCurrentLocation();
+		if(loc->name.isEmpty())
+			newLocation = planetNameI18n +", "+StelUtils::decDegToDmsStr(loc->latitude)+", "+StelUtils::decDegToDmsStr(loc->longitude);
+		else
+		{
+			//TRANSLATORS: Unit of measure for distance - meter
+			newLocation = planetNameI18n +", "+loc->name + ", "+ QString("%1 %2").arg(loc->altitude).arg(qc_("m", "distance"));
+		}
 	}
 	// TODO: When topocentric switch is toggled, this must be redrawn!
-	if (location->text()!=newLocation || updatePos)
+	if (location->text()!=newLocation)
 	{
 		updatePos = true;
 		location->setText(newLocation);
@@ -996,7 +1001,8 @@ void StelBarsPath::setBackgroundOpacity(double opacity)
 	setBrush(QBrush(QColor::fromRgbF(0.22, 0.22, 0.23, opacity)));
 }
 
-StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem*)
+StelProgressBarMgr::StelProgressBarMgr(QGraphicsItem* parent):
+	QGraphicsWidget(parent)
 {
 	setLayout(new QGraphicsLinearLayout(Qt::Vertical));
 }

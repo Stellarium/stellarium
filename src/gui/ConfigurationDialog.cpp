@@ -61,6 +61,7 @@
 #include <QComboBox>
 #include <QDir>
 #include <QDesktopWidget>
+#include <QImageWriter>
 
 //! Simple helper extension class which can guarantee int inputs in a useful range.
 class MinMaxIntValidator: public QIntValidator
@@ -98,6 +99,8 @@ ConfigurationDialog::~ConfigurationDialog()
 	ui = Q_NULLPTR;
 	delete customDeltaTEquationDialog;
 	customDeltaTEquationDialog = Q_NULLPTR;
+	delete currentDownloadFile;
+	currentDownloadFile = Q_NULLPTR;
 }
 
 void ConfigurationDialog::retranslate()
@@ -360,6 +363,8 @@ void ConfigurationDialog::createDialogContent()
 	connect(ui->restoreDefaultsButton, SIGNAL(clicked()), this, SLOT(setDefaultViewOptions()));
 
 	// Screenshots
+	populateScreenshotFileformatsCombo();
+	connectStringProperty(ui->screenshotFileFormatComboBox, "MainView.screenShotFormat");
 	ui->screenshotDirEdit->setText(StelFileMgr::getScreenshotDir());
 	connect(ui->screenshotDirEdit, SIGNAL(editingFinished()), this, SLOT(selectScreenshotDir()));
 	connect(ui->screenshotBrowseButton, SIGNAL(clicked()), this, SLOT(browseForScreenshotDir()));
@@ -665,6 +670,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_planets_hints",			propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
 	conf->setValue("astro/flag_planets_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
 	conf->setValue("viewing/flag_isolated_trails",			propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
+	conf->setValue("viewing/number_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.numberIsolatedTrails").toInt());
 	conf->setValue("viewing/flag_isolated_orbits",			propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());
 	conf->setValue("viewing/flag_planets_orbits_only",		propMgr->getStelPropertyValue("SolarSystem.flagPlanetsOrbitsOnly").toBool());
 	conf->setValue("astro/flag_light_travel_time",			propMgr->getStelPropertyValue("SolarSystem.flagLightTravelTime").toBool());
@@ -727,6 +733,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/flag_solstice_points",			propMgr->getStelPropertyValue("GridLinesMgr.solsticePointsDisplayed").toBool());
 	conf->setValue("viewing/flag_antisolar_point",			propMgr->getStelPropertyValue("GridLinesMgr.antisolarPointDisplayed").toBool());
 
+	conf->setValue("viewing/constellation_font_size",		propMgr->getStelPropertyValue("ConstellationMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_constellation_drawing",	propMgr->getStelPropertyValue("ConstellationMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_name",		propMgr->getStelPropertyValue("ConstellationMgr.namesDisplayed").toBool());
 	conf->setValue("viewing/flag_constellation_boundaries",	propMgr->getStelPropertyValue("ConstellationMgr.boundariesDisplayed").toBool());
@@ -738,7 +745,9 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("viewing/constellation_art_intensity",	propMgr->getStelPropertyValue("ConstellationMgr.artIntensity").toFloat());
 	conf->setValue("viewing/constellation_name_style",		ConstellationMgr::getConstellationDisplayStyleString(static_cast<ConstellationMgr::ConstellationDisplayStyle> (propMgr->getStelPropertyValue("ConstellationMgr.constellationDisplayStyle").toInt())  ));
 	conf->setValue("viewing/constellation_line_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationLineThickness").toInt());
+	conf->setValue("viewing/constellation_boundaries_thickness",	propMgr->getStelPropertyValue("ConstellationMgr.constellationBoundariesThickness").toInt());
 
+	conf->setValue("viewing/asterism_font_size",			propMgr->getStelPropertyValue("AsterismMgr.fontSize").toInt());
 	conf->setValue("viewing/flag_asterism_drawing",		propMgr->getStelPropertyValue("AsterismMgr.linesDisplayed").toBool());
 	conf->setValue("viewing/flag_asterism_name",			propMgr->getStelPropertyValue("AsterismMgr.namesDisplayed").toBool());
 	conf->setValue("viewing/asterism_line_thickness",		propMgr->getStelPropertyValue("AsterismMgr.asterismLineThickness").toInt());
@@ -1010,7 +1019,6 @@ void ConfigurationDialog::setDefaultViewOptions()
 	conf->beginGroup("DialogPositions");
 	conf->remove("");
 	conf->endGroup();
-
 }
 
 void ConfigurationDialog::populatePluginsList()
@@ -1123,15 +1131,26 @@ void ConfigurationDialog::loadAtStartupChanged(int state)
 #ifndef DISABLE_SCRIPTING
 void ConfigurationDialog::populateScriptsList(void)
 {
-	int prevSel = ui->scriptListWidget->currentRow();	
-	StelScriptMgr& scriptMgr = StelApp::getInstance().getScriptMgr();	
-	ui->scriptListWidget->clear();	
-	ui->scriptListWidget->addItems(scriptMgr.getScriptList());	
+	QListWidget *scripts = ui->scriptListWidget;
+	scripts->blockSignals(true);
+	int currentRow = scripts->currentRow();
+	QString selectedScriptId = "";
+	if (currentRow>0)
+		selectedScriptId = scripts->currentItem()->data(Qt::DisplayRole).toString();
+
+	scripts->clear();
+	for (const auto& ssc : StelApp::getInstance().getScriptMgr().getScriptList())
+	{
+		QListWidgetItem* item = new QListWidgetItem(ssc);
+		scripts->addItem(item);
+	}
+	scripts->sortItems(Qt::AscendingOrder);
+	scripts->blockSignals(false);
 	// If we had a valid previous selection (i.e. not first time we populate), restore it
-	if (prevSel >= 0 && prevSel < ui->scriptListWidget->count())
-		ui->scriptListWidget->setCurrentRow(prevSel);
+	if (!selectedScriptId.isEmpty())
+		scripts->setCurrentItem(scripts->findItems(selectedScriptId, Qt::MatchExactly).at(0));
 	else
-		ui->scriptListWidget->setCurrentRow(0);
+		scripts->setCurrentRow(0);
 }
 
 void ConfigurationDialog::scriptSelectionChanged(const QString& s)
@@ -1572,7 +1591,7 @@ void ConfigurationDialog::populateDeltaTAlgorithmsList()
 	algorithms->addItem(q_("Reijs (2006)"), "Reijs");
 	algorithms->addItem(q_("Banjevic (2006)"), "Banjevic");
 	algorithms->addItem(q_("Montenbruck & Pfleger (2000)"), "MontenbruckPfleger");
-	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007)"), "ReingoldDershowitz");
+	algorithms->addItem(q_("Reingold & Dershowitz (2002, 2007, 2018)"), "ReingoldDershowitz");
 	algorithms->addItem(q_("Islam, Sadiq & Qureshi (2008, 2013)"), "IslamSadiqQureshi");
 	algorithms->addItem(q_("Khalid, Sultana & Zaidi (2014)"), "KhalidSultanaZaidi");
 	algorithms->addItem(q_("Henriksson (2017)"), "Henriksson2017");
@@ -1731,4 +1750,18 @@ void ConfigurationDialog::handleFontBoxWritingSystem(int index)
 	Q_UNUSED(index)
 	QComboBox *sender=dynamic_cast<QComboBox *>(QObject::sender());
 	ui->fontComboBox->setWritingSystem((QFontDatabase::WritingSystem) sender->currentData().toInt());
+}
+
+void ConfigurationDialog::populateScreenshotFileformatsCombo()
+{
+	QComboBox *combo=ui->screenshotFileFormatComboBox;
+	// To avoid platform differences, just ask what's available.
+	// However, wbmp seems broken, disable it and a few unnecessary formats
+	const QList<QByteArray> formats = QImageWriter::supportedImageFormats();
+	for (const auto& format : formats)
+	{
+		if ((format != "icns") && (format != "cur") && (format != "wbmp"))
+			combo->addItem(QString(format));
+	}
+	combo->setCurrentText(StelApp::getInstance().getStelPropertyManager()->getStelPropertyValue("MainView.screenShotFormat").toString()); // maybe not required.
 }

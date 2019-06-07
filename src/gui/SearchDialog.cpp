@@ -288,7 +288,6 @@ void SearchDialog::populateCoordinateAxis()
 		ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 		ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 		ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
-
 	}
 	else
 	{

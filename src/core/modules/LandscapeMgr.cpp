@@ -170,7 +170,6 @@ void Cardinals::draw(const StelCore* core, double latitude) const
 	pos.set(-1.f, -1.f, 0.f);
 	if (prj->project(pos,xy))
 		sPainter.drawText(xy[0], xy[1], d[7], 0., -bshift, -sshift, false);
-
 }
 
 // Translate cardinal labels with gettext to current sky language and update font for the language
@@ -360,7 +359,6 @@ void LandscapeMgr::update(double deltaTime)
 		sinSunAngle=sin(qMin(M_PI_2, asin(qBound(-1.0, sunPos[2]-landscape->getSinMinAltitudeLimit(), 1.0) ) + (0.25f *M_PI/180.)));
 		if(sinSunAngle > 0.0f)
 			landscapeBrightness +=  (1.0f-landscape->getOpacity(sunPos))*sinSunAngle;
-
 	}
 
 	// GZ: 2013-09-25 Take light pollution into account!
@@ -489,7 +487,6 @@ void LandscapeMgr::init()
 	addAction("actionShow_LightPollutionIncrease", displayGroup, N_("Increase light pollution"), "increaseLightPollution()");
 	addAction("actionShow_LightPollutionReduce", displayGroup, N_("Reduce light pollution"), "reduceLightPollution()");
 	addAction("actionShow_LightPollutionCyclicChange", displayGroup, N_("Cyclic change in light pollution"), "cyclicChangeLightPollution()");
-
 }
 
 bool LandscapeMgr::setCurrentLandscapeID(const QString& id, const double changeLocationDuration)
@@ -730,7 +727,7 @@ void LandscapeMgr::setFlagUseLightPollutionFromDatabase(const bool usage)
 	}
 }
 
-void LandscapeMgr::onLocationChanged(StelLocation loc)
+void LandscapeMgr::onLocationChanged(const StelLocation &loc)
 {
 	if(flagLightPollutionFromDatabase)
 	{
@@ -746,7 +743,7 @@ void LandscapeMgr::onLocationChanged(StelLocation loc)
 	}
 }
 
-void LandscapeMgr::onTargetLocationChanged(StelLocation loc)
+void LandscapeMgr::onTargetLocationChanged(const StelLocation &loc)
 {
 	if (loc.planetName != currentPlanetName)
 	{
@@ -779,8 +776,8 @@ void LandscapeMgr::onTargetLocationChanged(StelLocation loc)
 			if (pl && flagEnvironmentAutoEnabling)
 			{
 				QSettings* conf = StelApp::getInstance().getSettings();
-				setFlagAtmosphere(pl->hasAtmosphere() & conf->value("landscape/flag_atmosphere", true).toBool());
-				setFlagFog(pl->hasAtmosphere() & conf->value("landscape/flag_fog", true).toBool());
+				setFlagAtmosphere(pl->hasAtmosphere() && conf->value("landscape/flag_atmosphere", true).toBool());
+				setFlagFog(pl->hasAtmosphere() && conf->value("landscape/flag_fog", true).toBool());
 				setFlagLandscape(true);
 			}
 		}
@@ -847,7 +844,6 @@ void LandscapeMgr::setFlagEnvironmentAutoEnable(bool b)
 		flagEnvironmentAutoEnabling = b;
 		emit setFlagEnvironmentAutoEnableChanged(b);
 	}
-
 }
 
 bool LandscapeMgr::getFlagEnvironmentAutoEnable() const
@@ -908,11 +904,11 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 				.arg(StelUtils::radToDmsStrAdapt(landscape->getLocation().longitude * M_PI/180.))
 				.arg(landscape->getLocation().altitude).arg(alt);
 
-		QString planetName = landscape->getLocation().planetName;
+		QString planetName = landscape->getLocation().planetName;		
 		if (!planetName.isEmpty())
 		{
 			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-			desc += QString(", %1").arg(trans.qtranslate(planetName));
+			desc += QString(", %1").arg(trans.qtranslate(planetName, "major planet")); // TODO: Enhance the context support
 		}
 		desc += "<br />";
 
@@ -942,7 +938,6 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 		int bortle = landscape->getDefaultBortleIndex();
 		if (bortle>-1)
 			desc += QString("<b>%1</b>: %2 (%3)").arg(q_("Light pollution")).arg(bortle).arg(q_("by Bortle scale"));
-
 	}	
 	return desc;
 }
@@ -950,7 +945,8 @@ QString LandscapeMgr::getCurrentLandscapeHtmlDescription() const
 //! Set flag for displaying Cardinals Points
 void LandscapeMgr::setFlagCardinalsPoints(const bool displayed)
 {
-	if (cardinalsPoints->getFlagShow() != displayed) {
+	if (cardinalsPoints->getFlagShow() != displayed)
+	{
 		cardinalsPoints->setFlagShow(displayed);
 		emit cardinalsPointsDisplayedChanged(displayed);
 	}

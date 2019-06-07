@@ -84,7 +84,7 @@ StelPluginInfo OcularsStelPluginInterface::getPluginInfo() const
 	info.id = "Oculars";
 	info.displayedName = N_("Oculars");
 	info.authors = "Timothy Reaves";
-	info.contact = "treaves@silverfieldstech.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("Shows the sky as if looking through a telescope eyepiece. (Only magnification and field of view are simulated.) It can also show a sensor frame and a Telrad sight.");
 	info.version = OCULARS_PLUGIN_VERSION;
 	info.license = OCULARS_PLUGIN_LICENSE;
@@ -175,6 +175,8 @@ Oculars::Oculars()
 	, flagShowResolutionCriterions(false)
 	, equatorialMountEnabledMain(false)
 	, reticleRotation(0.)
+	, flagShowCcdCropOverlay(false)
+	, ccdCropOverlaySize(DEFAULT_CCD_CROP_OVERLAY_SIZE)
 {
 	// Design font size is 14, based on default app fontsize 13.
 	setFontSizeFromApp(StelApp::getInstance().getScreenFontSize());
@@ -409,7 +411,6 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 			event->setAccepted(true);
 			return;
 		}
-
 	}
 
 	// In case we show oculars with black circle, ignore mouse presses outside image circle:
@@ -681,7 +682,7 @@ void Oculars::init()
 		}
 		else
 		{
-			selectedTelescopeIndex = qMin(settings->value("telescope_index", 0).toInt(), actualTelescopeCount-1);;
+			selectedTelescopeIndex = qMin(settings->value("telescope_index", 0).toInt(), actualTelescopeCount-1);
 		}
 
 		int lensCount = settings->value("lens_count", 0).toInt();
@@ -702,7 +703,7 @@ void Oculars::init()
 		{
 			qWarning() << "The Oculars ini file appears to be corrupt; delete it.";
 		}
-		selectedLensIndex=qMin(settings->value("lens_index", 0).toInt(), actualLensCount-1);;
+		selectedLensIndex=qMin(settings->value("lens_index", -1).toInt(), actualLensCount-1); // Lens is not selected by default!
 
 		pxmapGlow = new QPixmap(":/graphicGui/glow32x32.png");
 		pxmapOnIcon = new QPixmap(":/ocular/bt_ocular_on.png");
@@ -735,7 +736,8 @@ void Oculars::init()
 		absoluteStarScaleOculars=settings->value("stars_scale_absolute", 1.0).toDouble();
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
-
+		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
+		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toDouble());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -1263,6 +1265,9 @@ void Oculars::displayPopupMenu()
 		}
 	}
 
+#if QT_VERSION >= 0x050700 && defined(Q_OS_WIN)
+	popup->showTearOffMenu(QCursor::pos());
+#endif
 	popup->exec(QCursor::pos());
 	delete popup;
 }
@@ -1614,6 +1619,10 @@ void Oculars::paintCCDBounds()
 			float width = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
 			float height = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
 
+			// Calculate the size of the CCD crop overlay
+			float overlayWidth = width * ccdCropOverlaySize / ccd->resolutionX();
+			float overlayHeight = height * ccdCropOverlaySize / ccd->resolutionY();
+
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
 			if (telescope->isEquatorial())
@@ -1658,6 +1667,26 @@ void Oculars::paintCCDBounds()
 				b = transform.map(QPoint(width/2.0, -height/2.0));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 
+				// Tool for showing a resolution box overlay
+				if (flagShowCcdCropOverlay) {
+					// bottom line
+					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// top line
+					a = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// left line
+					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
+					b = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+					// right line
+					a = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
+					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
+				}
+
 				if(ccd->hasOAG())
 				{
 					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
@@ -1696,6 +1725,7 @@ void Oculars::paintCCDBounds()
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
 				float ratioLimit = 0.25f;
+				float ratioLimitCrop = 0.75f;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
 					// draw cross at center
@@ -1744,11 +1774,21 @@ void Oculars::paintCCDBounds()
 					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
 					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(angle), height/2.0 + 5.f));
 					painter.drawText(a.x(), a.y(), angle, -(ccd->chipRotAngle() + polarAngle));
+
+					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
+					{
+						// show the CCD crop overlay text
+						QString resolutionOverlayText = QString("%1%2 %3 %1%2")
+								.arg(QString::number(ccdCropOverlaySize, 'd', 0))
+								.arg(qc_("px", "pixel"))
+								.arg(QChar(0x00D7));
+						a = transform.map(QPoint(overlayWidth/2.0 - painter.getFontMetrics().width(resolutionOverlayText), -overlayHeight/2.0 - fontSize*1.2f));
+						painter.drawText(a.x(), a.y(), resolutionOverlayText, -(ccd->chipRotAngle() + polarAngle));
+					}
 				}
 			}
 		}
 	}
-
 }
 
 void Oculars::paintCrosshairs()
@@ -1775,25 +1815,29 @@ void Oculars::paintCrosshairs()
 
 void Oculars::paintTelrad()
 {
-	if (!flagShowOculars) {
+	if (!flagShowOculars)
+	{
 		StelCore *core = StelApp::getInstance().getCore();
 		const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 		// StelPainter drawing
-		StelPainter painter(projector);
-		StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
+		StelPainter painter(projector);		
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 				   projector->getViewportPosY()+projector->getViewportHeight()/2);
-		float pixelsPerRad = projector->getPixelPerRadAtCenter() * params.devicePixelsPerPixel;
+		float pixelsPerRad = projector->getPixelPerRadAtCenter(); // * params.devicePixelsPerPixel;
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
 		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
-
 	}
 }
 
 void Oculars::paintOcularMask(const StelCore *core)
 {
+	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
+	{
+		paintCrosshairs();
+	}
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameAltAz);
 	StelPainter painter(prj);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
@@ -1821,11 +1865,6 @@ void Oculars::paintOcularMask(const StelCore *core)
 		reticleTexture->getDimensions(textureWidth, textureHeight);
 
 		painter.drawSprite2dMode(centerScreen[0], centerScreen[1], inner / params.devicePixelsPerPixel, reticleRotation);
-	}
-
-	if (oculars[selectedOcularIndex]->hasPermanentCrosshair())
-	{
-		paintCrosshairs();
 	}
 
 	float alpha = 1.f;
@@ -2058,7 +2097,6 @@ void Oculars::paintText(const StelCore* core)
 		yPosition-=lineHeight;
 		painter.drawText(xPosition, yPosition, telescopeNumberLabel);
 	}
-	
 }
 
 void Oculars::validateAndLoadIniFile()
@@ -2090,8 +2128,8 @@ void Oculars::validateAndLoadIniFile()
 	else
 	{
 		qDebug() << "Oculars::validateIniFile ocular.ini exists at: " << QDir::toNativeSeparators(ocularIniPath) << ". Checking version...";
-		QSettings settings(ocularIniPath, QSettings::IniFormat);
-		float ocularsVersion = settings.value("oculars_version", 0.0).toFloat();
+		QSettings mySettings(ocularIniPath, QSettings::IniFormat);
+		const float ocularsVersion = mySettings.value("oculars_version", 0.0).toFloat();
 		qWarning() << "Oculars::validateIniFile found existing ini file version " << ocularsVersion;
 
 		if (ocularsVersion < MIN_OCULARS_INI_VERSION)
@@ -2256,7 +2294,6 @@ void Oculars::toggleLines(bool visible)
 		propMgr->setStelPropertyValue("AsterismMgr.linesDisplayed", false);
 		propMgr->setStelPropertyValue("AsterismMgr.rayHelpersDisplayed", false);
 	}
-
 }
 
 void Oculars::zoomOcular()
@@ -2546,6 +2583,26 @@ void Oculars::setFlagShowResolutionCriterions(const bool b)
 bool Oculars::getFlagShowResolutionCriterions() const
 {
 	return flagShowResolutionCriterions;
+}
+
+void Oculars::setCcdCropOverlaySize(int size) {
+	ccdCropOverlaySize = size;
+	settings->setValue("ccd_crop_overlay_size", size);
+	settings->sync();
+	emit ccdCropOverlaySizeChanged(size);
+}
+
+void Oculars::setFlagShowCcdCropOverlay(const bool b)
+{
+	flagShowCcdCropOverlay = b;
+	settings->setValue("show_ccd_crop_overlay", b);
+	settings->sync();
+	emit flagShowCcdCropOverlayChanged(b);
+}
+
+bool Oculars::getFlagShowCcdCropOverlay(void) const
+{
+	return flagShowCcdCropOverlay;
 }
 
 void Oculars::setArrowButtonScale(const double val)

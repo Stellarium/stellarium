@@ -133,7 +133,6 @@ void SolarSystemEditor::init()
 
 	// key bindings and other actions
 	addAction("actionShow_MPC_Import", N_("Solar System Editor"), N_("Import orbital elements in MPC format..."), mainWindow, "newImportMPC()", "Ctrl+Alt+S");
-
 }
 
 double SolarSystemEditor::getCallOrder(StelModuleActionName) const// actionName
@@ -343,7 +342,6 @@ bool SolarSystemEditor::addFromSolarSystemConfigurationFile(QString filePath)
 	//Process the existing and new files:
 	if (QFile::exists(customSolarSystemFilePath))
 	{
-
 		QSettings minorBodies(customSolarSystemFilePath, StelIniFormat);
 
 		// add and overwrite existing data in the user's ssystem_minor.ini by the data in the new file.
@@ -855,7 +853,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 	//Assume albedo of 0.15 and calculate a radius based on the absolute magnitude
 	//as described here: http://www.physics.sfasu.edu/astro/asteroids/sizemagnitude.html
 	double albedo = 0.15; //Assumed
-	double radius = std::ceil((1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude));
+	double radius = std::ceil(0.5*(1329 / std::sqrt(albedo)) * std::pow(10, -0.2 * absoluteMagnitude)); // Original formula is for diameter!
 	result.insert("albedo", albedo);
 	result.insert("radius", radius);
 	result.insert("type", objectType);

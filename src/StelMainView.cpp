@@ -50,6 +50,7 @@
 #include <QGraphicsEffect>
 #include <QFileInfo>
 #include <QIcon>
+#include <QImageWriter>
 #include <QMoveEvent>
 #include <QPluginLoader>
 #include <QScreen>
@@ -211,7 +212,8 @@ public:
 
 	virtual ~NightModeGraphicsEffect()
 	{
-		Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
+		// NOTE: Why Q_ASSERT is here and why destructor is not marked as 'override'?
+		//Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
 		//clean up fbo
 		delete fbo;
 	}
@@ -295,7 +297,6 @@ public:
 	}
 
 protected:
-
 	void keyPressEvent(QKeyEvent* event) Q_DECL_OVERRIDE
 	{
 		// Try to trigger a global shortcut.
@@ -441,6 +442,7 @@ protected:
 #ifdef Q_OS_WIN
 	bool event(QEvent * e) Q_DECL_OVERRIDE
 	{
+		bool r = false;
 		switch (e->type()){
 			case QEvent::TouchBegin:
 			case QEvent::TouchUpdate:
@@ -452,18 +454,17 @@ protected:
 				if (touchPoints.count() == 1)
 					setAcceptedMouseButtons(Qt::LeftButton | Qt::RightButton | Qt::MiddleButton);
 
-				return true;
+				r = true;
 				break;
 			}
-
 			case QEvent::Gesture:
-				setAcceptedMouseButtons(0);
-				return gestureEvent(static_cast<QGestureEvent*>(e));
+				setAcceptedMouseButtons(Q_NULLPTR);
+				r = gestureEvent(static_cast<QGestureEvent*>(e));
 				break;
-
 			default:
-				return QGraphicsObject::event(e);
+				r = QGraphicsObject::event(e);
 		}
+		return r;
 	}
 
 private:
@@ -509,8 +510,8 @@ private:
 				//note: the old code seems to have ignored double clicks
 				// and handled them the same as normal mouse presses
 				//if we ever want to handle double clicks, switch out these lines
-				//t = QEvent::MouseButtonDblClick;
-				t = QEvent::MouseButtonPress;
+				t = QEvent::MouseButtonDblClick;
+				//t = QEvent::MouseButtonPress;
 				break;
 			default:
 				//warn in release and assert in debug
@@ -568,6 +569,7 @@ StelMainView::StelMainView(QSettings* settings)
 	  customScreenshotMagnification(1.0f),
 #endif
 	  screenShotPrefix("stellarium-"),
+	  screenShotFormat("png"),
 	  screenShotDir(""),
 	  flagCursorTimeout(false),
 	  lastEventTimeSec(0.0),
@@ -707,6 +709,8 @@ StelMainView::~StelMainView()
 	//delete the night view graphic effect here while GL context is still valid
 	rootItem->setGraphicsEffect(Q_NULLPTR);
 	StelApp::deinitStatic();
+	delete guiItem;
+	guiItem=Q_NULLPTR;
 }
 
 QSurfaceFormat StelMainView::getDesiredGLFormat() const
@@ -860,6 +864,7 @@ void StelMainView::init()
 	}
 
 	flagInvertScreenShotColors = conf->value("main/invert_screenshots_colors", false).toBool();
+	screenShotFormat = conf->value("main/screenshot_format", "png").toString();
 #ifndef USE_OLD_QGLWIDGET
 	flagUseCustomScreenshotSize=conf->value("main/screenshot_custom_size", false).toBool();
 	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toUInt();
@@ -1265,10 +1270,7 @@ void StelMainView::dumpOpenGLdiagnostics() const
 	{
 		qDebug() << "dumpOpenGLdiagnostics(): No OpenGL context";
 	}
-
-
 }
-
 
 void StelMainView::deinit()
 {
@@ -1409,6 +1411,28 @@ void StelMainView::deinitGL()
 	gui = Q_NULLPTR;
 }
 
+void StelMainView::setScreenshotFormat(const QString filetype)
+{
+	const QString candidate=filetype.toLower();
+	const QByteArray candBA=candidate.toUtf8();
+
+	// Make sure format is supported by Qt, but restrict some useless formats.
+	QList<QByteArray> formats = QImageWriter::supportedImageFormats();
+	formats.removeOne("icns");
+	formats.removeOne("wbmp");
+	formats.removeOne("cur");
+	if (formats.contains(candBA))
+	{
+		screenShotFormat=candidate;
+		// apply setting immediately
+		configuration->setValue("main/screenshot_format", candidate);
+		emit screenshotFormatChanged(candidate);
+	}
+	else
+	{
+		qDebug() << "Invalid filetype for screenshot: " << filetype;
+	}
+}
 void StelMainView::saveScreenShot(const QString& filePrefix, const QString& saveDir, const bool overwrite)
 {
 	screenShotPrefix = filePrefix;
@@ -1432,6 +1456,8 @@ void StelMainView::doScreenshot(void)
 	float pixelRatio = QOpenGLContext::currentContext()->screen()->devicePixelRatio();
 	int imgWidth =stelScene->width();
 	int imgHeight=stelScene->height();
+	bool nightModeWasEnabled=nightModeEffect->isEnabled();
+	nightModeEffect->setEnabled(false);
 	if (flagUseCustomScreenshotSize)
 	{
 		// Borrowed from Scenery3d renderer: determine maximum framebuffer size as minimum of texture, viewport and renderbuffer size
@@ -1530,12 +1556,23 @@ void StelMainView::doScreenshot(void)
 	// reset viewport and GUI
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(pParams);
 	customScreenshotMagnification=1.0f;
+	nightModeEffect->setEnabled(nightModeWasEnabled);
 	stelScene->setSceneRect(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	rootItem->setSize(QSize(pParams.viewportXywh[2], pParams.viewportXywh[3]));
 	dynamic_cast<StelGui*>(gui)->getSkyGui()->setGeometry(0, 0, pParams.viewportXywh[2], pParams.viewportXywh[3]);
 	dynamic_cast<StelGui*>(gui)->forceRefreshGui();
 #endif
 
+	if (nightModeWasEnabled)
+	{
+		for (int row=0; row<im.height(); ++row)
+			for (int col=0; col<im.width(); ++col)
+			{
+				QRgb rgb=im.pixel(col, row);
+				int gray=qGray(rgb);
+				im.setPixel(col, row, qRgb(gray, 0, 0));
+			}
+	}
 	if (flagInvertScreenShotColors)
 		im.invertPixels();
 
@@ -1580,19 +1617,31 @@ void StelMainView::doScreenshot(void)
 	QFileInfo shotPath;
 	if (flagOverwriteScreenshots)
 	{
-		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + ".png");
+		shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + "." + screenShotFormat);
 	}
 	else
 	{
 		for (int j=0; j<100000; ++j)
 		{
-			shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + ".png");
+			shotPath = QFileInfo(shotDir.filePath() + "/" + screenShotPrefix + QString("%1").arg(j, 3, 10, QLatin1Char('0')) + "." + screenShotFormat);
 			if (!shotPath.exists())
 				break;
 		}
 	}
 	qDebug() << "INFO Saving screenshot in file: " << QDir::toNativeSeparators(shotPath.filePath());
-	if (!im.save(shotPath.filePath())) {
+	QImageWriter imageWriter(shotPath.filePath());
+	if (screenShotFormat=="tif")
+		imageWriter.setCompression(1); // use LZW
+	if (screenShotFormat=="jpg")
+	{
+		imageWriter.setQuality(75); // This is actually default
+	}
+	if (screenShotFormat=="jpeg")
+	{
+		imageWriter.setQuality(100);
+	}
+	if (!imageWriter.write(im))
+	{
 		qWarning() << "WARNING failed to write screenshot to: " << QDir::toNativeSeparators(shotPath.filePath());
 	}
 }

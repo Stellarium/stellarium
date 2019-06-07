@@ -335,22 +335,26 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Used to get a vector of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for nebulae.
 	//! @param limitFov the field of view around the position v in which to search for nebulae.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the nebulae located inside the limitFov circle around position v.
+	//! @return a list containing the nebulae located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching nebula object's pointer if exists or an "empty" StelObjectP.
-	//! @param nameI18n The case in-sensistive nebula name or NGC M catalog name : format can
+	//! @param nameI18n The case in-sensitive nebula name or NGC M catalog name : format can
 	//! be M31, M 31, NGC31, NGC 31
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Return the matching nebula if exists or Q_NULLPTR.
-	//! @param name The case in-sensistive standard program name
+	//! @param name The case in-sensitive standard program name
 	virtual StelObjectP searchByName(const QString& name) const;
+
+	//! Return the matching nebula if exists or Q_NULLPTR.
+	//! @param name The case in-sensitive designation of deep-sky object
+	virtual StelObjectP searchByDesignation(const QString& designation) const;
 
 	virtual StelObjectP searchByID(const QString &id) const { return searchByName(id); }
 
@@ -448,18 +452,6 @@ public slots:
 	void setQuasarColor(const Vec3f& c);
 	//! Get current value of the quasar symbol color.
 	const Vec3f getQuasarColor(void) const;
-
-	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
-	//! @param c The color of the nebula symbols
-	//! @code
-	//! // example of usage in scripts
-	//! NebulaMgr.setBrightNebulaColor(Vec3f(0.0,1.0,0.0));
-	//! @endcode
-	//! @deprecated
-	void setBrightNebulaColor(const Vec3f& c);
-	//! Get current value of the nebula circle color.
-	//! @deprecated
-	const Vec3f getBrightNebulaColor(void) const;
 
 	//! Set the color used to draw the bright nebula symbols (emission nebula boxes, planetary nebulae circles).
 	//! @param c The color of the nebula symbols
@@ -923,8 +915,8 @@ private slots:
 
 	//! Connect from StelApp to reflect font size change.
 	void setFontSizeFromApp(int size){nebulaFont.setPixelSize(size);}
-private:
 
+private:
 	//! Search for a nebula object by name. e.g. M83, NGC 1123, IC 1234.
 	NebulaP search(const QString& name);
 

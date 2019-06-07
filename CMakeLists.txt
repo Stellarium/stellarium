@@ -18,7 +18,7 @@ SET_PROPERTY(GLOBAL PROPERTY USE_FOLDERS ON)
 PROJECT(Stellarium)
 # Use integer versions instead of strings for easier handling if required
 SET(STELLARIUM_MAJOR 0)
-SET(STELLARIUM_MINOR 90)
+SET(STELLARIUM_MINOR 19)
 SET(STELLARIUM_PATCH 0)
 ADD_DEFINITIONS(
      -DSTELLARIUM_MAJOR=${STELLARIUM_MAJOR}
@@ -36,6 +36,7 @@ ADD_DEFINITIONS(-DSTELLARIUM_URL="${STELLARIUM_URL}")
 SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
+ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
 # Write version of Stellarium to Stellarium User Guide
 CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
@@ -49,19 +50,30 @@ SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 MESSAGE(STATUS "Platform: ${CMAKE_SYSTEM}")
 
 ########### Main global variables ###########
+SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+
 IF(NOT CMAKE_BUILD_TYPE)
      SET(CMAKE_BUILD_TYPE Debug CACHE STRING "Choose the type of build, options are: None Debug GProf Valgrind Release RelWithDebInfo MinSizeRel." FORCE)
+ENDIF()
+
+IF(${CMAKE_BUILD_TYPE} MATCHES "Debug")
+     IF(CMAKE_COMPILER_IS_GNUCXX)
+          INCLUDE(CodeCoverage)
+          IF(LCOV_PATH AND ENABLE_TESTING)
+               APPEND_COVERAGE_COMPILER_FLAGS()
+               MESSAGE(STATUS "Found lcov ${LCOV_PATH} (enable coverage support)")
+               SETUP_TARGET_FOR_COVERAGE_LCOV(
+                    NAME coverage 
+                    EXECUTABLE ctest -j ${PROCESSOR_COUNT} 
+                    DEPENDENCIES buildTests
+               )
+          ENDIF()
+     ENDIF()
 ENDIF()
 
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
-ENDIF()
-
-# GZ I had seen that some releases (e.g. 0.13.3 Ubuntu/ARM) were not compiled with NDEBUG defined. Maybe a bug in compilatation setup? 
-# Hint from http://public.kitware.com/Bug/view.php?id=14292. Actually fixed with CMake 2.8.12, but maybe we have other effects?
-IF(NOT CMAKE_BUILD_TYPE STREQUAL "Debug")
-     ADD_DEFINITIONS(-DQT_NO_DEBUG -DNDEBUG)
 ENDIF()
 
 SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
@@ -112,8 +124,19 @@ ADD_DEFINITIONS(-D_USE_MATH_DEFINES)
 
 # flags shared for gcc-like compilers (also MinGW/Clang)
 # Qt 5.7 requires C++11 support
-SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
-SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter -Wno-unused-result")
+SET(STEL_GCC_C_FLAGS "-Wall -Wextra -Wno-unused-parameter")
+SET(STEL_GCC_CXX_FLAGS "-Wall -Wextra -Wno-unused-parameter")
+# Intel C/C++ compilers do not have an option -Wno-unused-results
+IF(NOT "${CMAKE_CXX_COMPILER_ID}" MATCHES "Intel")
+     SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -Wno-unused-result")
+     SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -Wno-unused-result")
+ELSE()
+     # Suppress some warning for Intel C/C++ compilers
+     # Diagnostic 1875: offsetof applied to non-POD (Plain Old Data) types is nonstandard
+     # Diagnostic 654: overloaded virtual function
+     SET(STEL_GCC_C_FLAGS "${STEL_GCC_C_FLAGS} -diag-disable:remark -wd1875,654")
+     SET(STEL_GCC_CXX_FLAGS "${STEL_GCC_CXX_FLAGS} -diag-disable:remark -wd1875,654")
+ENDIF()
 
 # Set whether to try using C++11 when compiling. Required for Qt >= 5.7"
 IF(NOT (CMAKE_VERSION VERSION_LESS 3.1.0))
@@ -291,7 +314,7 @@ ELSE()
      SET(GENERATE_STELMAINLIB 0)
 ENDIF()
 
-SET(ENABLE_TESTING 0 CACHE BOOL "Define whether the unit tests should be activated.")
+
 IF(ENABLE_TESTING)
     ENABLE_TESTING()
     FIND_PACKAGE(Qt5Test REQUIRED)
@@ -325,8 +348,6 @@ ADD_PLUGIN(CompassMarks 1)
 ADD_PLUGIN(Exoplanets 1)
 ADD_PLUGIN(EquationOfTime 1)
 ADD_PLUGIN(FOV 1)
-# TODO: Logbook build is broken for quite some time
-ADD_PLUGIN(LogBook 0)
 ADD_PLUGIN(MeteorShowers 1)
 ADD_PLUGIN(NavStars 1)
 ADD_PLUGIN(Novae 1)
@@ -372,10 +393,6 @@ FIND_PACKAGE(Qt5Widgets REQUIRED)
 FIND_PACKAGE(Qt5PrintSupport REQUIRED)
 IF(USE_PLUGIN_TELESCOPECONTROL OR ENABLE_GPS)
      FIND_PACKAGE(Qt5SerialPort REQUIRED)
-ENDIF()
-IF(USE_PLUGIN_LOGBOOK)
-     SET(QT_USE_QTSQL TRUE) # For LogBook we also need SQL module
-     FIND_PACKAGE(Qt5Sql REQUIRED)
 ENDIF()
 IF(WIN32)
      FIND_PACKAGE(Qt5Svg REQUIRED)
@@ -664,7 +681,7 @@ IF(GENERATE_PACKAGE_TARGET)
      SET(CPACK_STRIP_FILES "bin/stellarium")
      SET(CPACK_PACKAGE_EXECUTABLES "stellarium" "Stellarium")
      SET(CPACK_SOURCE_IGNORE_FILES "/.tx/" "/CVS/" "/.svn/" "/.git/" "/.github/" "/.bzr/" "builds/" "installers/" "util/spout2" "util/DSSToStellarium/toastForShape$" "Stellarium.tag$" "Stellarium.kdevelop.pcs$" "/CMakeLists.txt.user$" "\\\\.bzrignore$" "\\\\.gitignore$" "\\\\.clang-format$" "\\\\.yml$" "~$" "\\\\.swp$" "\\\\.#" "/#")
-     SET(CPACK_RPM_PACKAGE_LICENSE "GPLv2+")
+     SET(CPACK_RPM_PACKAGE_LICENSE "GNU GPLv2 or later")
      SET(CPACK_RPM_PACKAGE_GROUP "Amusements/Graphics")
      SET(CPACK_RPM_PACKAGE_URL "${STELLARIUM_URL}")
      SET(CPACK_DEBIAN_PACKAGE_MAINTAINER "${CPACK_PACKAGE_VENDOR} <stellarium@googlegroups.com>")

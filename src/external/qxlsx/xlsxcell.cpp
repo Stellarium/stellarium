@@ -26,7 +26,6 @@ QT_BEGIN_NAMESPACE_XLSX
 CellPrivate::CellPrivate(Cell *p) :
 	q_ptr(p)
 {
-
 }
 
 CellPrivate::CellPrivate(const CellPrivate * const cp)
@@ -34,7 +33,6 @@ CellPrivate::CellPrivate(const CellPrivate * const cp)
 	, format(cp->format), richString(cp->richString), parent(cp->parent),
 	styleNumber(cp->styleNumber)
 {
-
 }
 
 /*!
@@ -122,7 +120,7 @@ QVariant Cell::readValue() const
 	ret = d->value;
 
 	Format fmt = this->format();
-	int noFormatIndex = fmt.numberFormatIndex(); 
+	//int noFormatIndex = fmt.numberFormatIndex();
 
 	if (isDateTime())
 	{
@@ -137,6 +135,7 @@ QVariant Cell::readValue() const
 
 		qint32 styleNo = d->styleNumber;
 
+		/*
 		if (styleNo == 10)
 		{
 		}
@@ -151,6 +150,7 @@ QVariant Cell::readValue() const
 		if (styleNo == 12) 
 		{
 		}
+		*/
 
 		if (styleNo == 13) // (HH:mm:ss) 
 		{

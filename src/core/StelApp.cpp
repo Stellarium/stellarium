@@ -35,6 +35,7 @@
 #include "MilkyWay.hpp"
 #include "ZodiacalLight.hpp"
 #include "LabelMgr.hpp"
+#include "MarkerMgr.hpp"
 #include "SolarSystem.hpp"
 #include "NomenclatureMgr.hpp"
 #include "SporadicMeteorMgr.hpp"
@@ -116,10 +117,6 @@ Q_IMPORT_PLUGIN(SatellitesStelPluginInterface)
 
 #ifdef USE_STATIC_PLUGIN_TEXTUSERINTERFACE
 Q_IMPORT_PLUGIN(TextUserInterfaceStelPluginInterface)
-#endif
-
-#ifdef USE_STATIC_PLUGIN_LOGBOOK
-Q_IMPORT_PLUGIN(LogBookStelPluginInterface)
 #endif
 
 #ifdef USE_STATIC_PLUGIN_OCULARS
@@ -298,6 +295,7 @@ StelApp::~StelApp()
 	delete moduleMgr; moduleMgr=Q_NULLPTR; // Delete the secondary instance
 	delete actionMgr; actionMgr = Q_NULLPTR;
 	delete propMgr; propMgr = Q_NULLPTR;
+	delete renderBuffer; renderBuffer = Q_NULLPTR;
 
 	Q_ASSERT(singleton);
 	singleton = Q_NULLPTR;
@@ -543,6 +541,11 @@ void StelApp::init(QSettings* conf)
 
 	skyCultureMgr->init();
 
+	// User markers
+	MarkerMgr* skyMarkers = new MarkerMgr();
+	skyMarkers->init();
+	getModuleMgr().registerModule(skyMarkers);
+
 	// Init custom objects
 	CustomObjectMgr* custObj = new CustomObjectMgr();
 	custObj->init();
@@ -611,7 +614,6 @@ void StelApp::init(QSettings* conf)
 				qApp->setProperty("spout", "");
 			}
 		}
-
 	}
 	else
 	{
@@ -751,7 +753,6 @@ void StelApp::draw()
 		spoutSender->captureAndSendFrame(drawFbo);
 #endif
 	applyRenderBuffer(drawFbo);
-
 }
 
 /*************************************************************************

@@ -427,6 +427,10 @@ class Translations
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Herschel 400 Catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Jack Bennett's deep sky catalogue");
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("James Dunlop's southern deep sky catalogue");
 		
 		// =====================================================================
 		// List of stars types
@@ -448,6 +452,8 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Arabic Moon Stations");
 		// TRANSLATORS: Name of the sky culture
+		N_("Armintxe");
+		// TRANSLATORS: Name of the sky culture
 		N_("Aztec");
 		// TRANSLATORS: Name of the sky culture
 		N_("Belarusian");
@@ -457,6 +463,8 @@ class Translations
 		N_("Chinese");
 		// TRANSLATORS: Name of the sky culture
 		N_("Chinese Contemporary");
+		// TRANSLATORS: Name of the sky culture
+		N_("Chinese Medieval");
 		// TRANSLATORS: Name of the sky culture
 		N_("Egyptian");
 		// TRANSLATORS: Name of the sky culture
@@ -477,6 +485,8 @@ class Translations
 		N_("Macedonian");
 		// TRANSLATORS: Name of the sky culture
 		N_("Maori");
+		// TRANSLATORS: Name of the sky culture
+		N_("Maya");
 		// TRANSLATORS: Name of the sky culture
 		N_("Mongolian");
 		// TRANSLATORS: Name of the sky culture
@@ -508,8 +518,15 @@ class Translations
 		// TRANSLATORS: Name of the sky culture
 		N_("Western (O.Hlad)");
 		// TRANSLATORS: Name of the sky culture
+		N_("Western (Sky & Telescope)");
+		// TRANSLATORS: Name of the sky culture
 		N_("Northern Andes");
-
+		// TRANSLATORS: Name of the sky culture
+		N_("Babylonian (MUL.APIN)");
+		// TRANSLATORS: Name of the sky culture
+		N_("Babylonian (Seleucid)");
+		// TRANSLATORS: Name of the sky culture and landscape
+		N_("Armintxe Cave");
 		
 		// =====================================================================
 		// Landscape names
@@ -584,6 +601,8 @@ class Translations
 		// TRANSLATORS: Name of script
 		N_("Constellations Tour");
 		// TRANSLATORS: Name of script
+		N_("Western Constellations Tour");
+		// TRANSLATORS: Name of script
 		N_("Sun from different planets");
 		// TRANSLATORS: Name of script
 		N_("Earth best views from other bodies");
@@ -633,6 +652,10 @@ class Translations
 		N_("Mutual occultations of planets");
 		// TRANSLATORS: Name of script
 		N_("Planet Objects Tour");
+		// TRANSLATORS: Name of script
+		N_("Analemma");
+		// TRANSLATORS: Name of script
+		N_("Martian analemma");
 		
 		// =====================================================================
 		// Script descriptions
@@ -655,6 +678,7 @@ class Translations
 		N_("Phobos races ahead of Mars and transits the sun, passes through it and then retrogrades back towards the sun and just partially transits it again (only seen in the southern hemisphere of Deimos), then Mars totally eclipses the sun while Phobos transits in darkness between Mars and Deimos. When Phobos emerges from Mars it is still eclipsed and dimmed in Mars' shadow, only to light up later.");
 		N_("Screensaver of various happenings in the Solar System. 300 events in all!");
 		N_("A tour of the western constellations.");
+		N_("A tour of the constellations of the selected sky culture.");
 		N_("Look at the Sun from big planets of Solar System and Pluto.");
 		N_("Best views of Earth from other Solar System bodies in the 21st Century.");
 		N_("Transit of Venus as seen from Sydney Australia, 6th June 2012.");
@@ -675,6 +699,8 @@ class Translations
 		N_("This script demonstrates interesting phenomena - occultations bright stars by planets, 2000 to 2040.");
 		N_("This script demonstrates interesting and very rare phenomena - mutual occultations of planets, 0 to 2500.");
 		N_("A tour of the Solar System planets");
+		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Earth.");
+		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Mars.");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)

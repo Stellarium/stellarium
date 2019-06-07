@@ -94,6 +94,7 @@ private slots:
 
 	void updateHips();
 	void hipsListItemChanged(QListWidgetItem* item);
+	void populateHipsGroups();
 
 private:
 	void connectGroupBox(class QGroupBox* groupBox, const QString& actionId);

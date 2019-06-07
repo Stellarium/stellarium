@@ -297,10 +297,10 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 				lon = M_PI-lon;
 
 				if (raAngle<0)
-					raAngle=+2.*M_PI;
+					raAngle+=2.*M_PI;
 
 				if (lon<0)
-					lon=+2.*M_PI;
+					lon+=2.*M_PI;
 
 				if (std::fabs(2.*M_PI-lon)<0.01) // We are at meridian 0
 					lon = 0.;
@@ -365,7 +365,7 @@ void SkyGrid::draw(const StelCore* core) const
 	if (!fader.getInterstate())
 		return;
 
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();;
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	// Look for all meridians and parallels intersecting with the disk bounding the viewport
 	// Check whether the pole are in the viewport
@@ -389,7 +389,7 @@ void SkyGrid::draw(const StelCore* core) const
 	else
 	{
 		const double closestResLon = (frameType==StelCore::FrameAltAz || frameType==StelCore::FrameGalactic || frameType==StelCore::FrameSupergalactic) ? getClosestResolutionDMS(prj->getPixelPerRadAtCenter()*std::cos(lat2)) : getClosestResolutionHMS(prj->getPixelPerRadAtCenter()*std::cos(lat2));
-		gridStepMeridianRad = M_PI/180.* ((northPoleInViewport || southPoleInViewport) ? 15. : closestResLon);
+		gridStepMeridianRad = M_PI/180.* closestResLon;
 	}
 
 	// Get the bounding halfspace
@@ -742,7 +742,6 @@ void SkyLine::draw(StelCore *core) const
 				lat=(obsLatRad>0 ? -1.0 : +1.0) * obsLatRad + (M_PI/2.0);
 			else // southern circle
 				lat=(obsLatRad>0 ? +1.0 : -1.0) * obsLatRad - (M_PI/2.0);
-
 		}
 		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
 		const Vec3d rotCenter(0,0,declinationCap.d);
@@ -842,7 +841,6 @@ void SkyLine::draw(StelCore *core) const
 			return;
 	}
 
-
 	Vec3d middlePoint = p1+p2;
 	middlePoint.normalize();
 	if (!viewPortSphericalCap.contains(middlePoint))
@@ -858,7 +856,6 @@ void SkyLine::draw(StelCore *core) const
 // 	// Johannes: use a big radius as a dirty workaround for the bug that the
 // 	// ecliptic line is not drawn around the observer, but around the sun:
 // 	const Vec3d vv(1000000,0,0);
-
 }
 
 SkyPoint::SkyPoint(SKY_POINT_TYPE _point_type) : point_type(_point_type), color(0.f, 0.f, 1.f)
@@ -1433,6 +1430,53 @@ void GridLinesMgr::setFlagGridlines(const bool displayed)
 bool GridLinesMgr::getFlagGridlines(void) const
 {
 	return gridlinesDisplayed;
+}
+
+//! Setter ("master switch by type") for displaying all grids esp. for scripting
+void GridLinesMgr::setFlagAllGrids(const bool displayed)
+{
+	setFlagEquatorGrid(displayed);
+	setFlagEclipticGrid(displayed);
+	setFlagGalacticGrid(displayed);
+	setFlagAzimuthalGrid(displayed);
+	setFlagEquatorJ2000Grid(displayed);
+	setFlagEclipticJ2000Grid(displayed);
+	setFlagSupergalacticGrid(displayed);
+}
+
+//! Setter ("master switch by type") for displaying all lines esp. for scripting
+void GridLinesMgr::setFlagAllLines(const bool displayed)
+{
+	setFlagColureLines(displayed);
+	setFlagEquatorLine(displayed);
+	setFlagHorizonLine(displayed);
+	setFlagEclipticLine(displayed);
+	setFlagMeridianLine(displayed);
+	setFlagLongitudeLine(displayed);
+	setFlagEquatorJ2000Line(displayed);
+	setFlagEclipticJ2000Line(displayed);
+	setFlagPrecessionCircles(displayed);
+	setFlagPrimeVerticalLine(displayed);
+	setFlagCircumpolarCircles(displayed);
+	setFlagGalacticEquatorLine(displayed);
+	setFlagSupergalacticEquatorLine(displayed);
+}
+
+//! Setter ("master switch by type") for displaying all points esp. for scripting
+void GridLinesMgr::setFlagAllPoints(const bool displayed)
+{
+	setFlagZenithNadir(displayed);
+	setFlagEclipticPoles(displayed);
+	setFlagEquinoxPoints(displayed);
+	setFlagGalacticPoles(displayed);
+	setFlagAntisolarPoint(displayed);
+	setFlagCelestialPoles(displayed);
+	setFlagSolsticePoints(displayed);
+	setFlagEclipticJ2000Poles(displayed);
+	setFlagEquinoxJ2000Points(displayed);
+	setFlagSupergalacticPoles(displayed);
+	setFlagCelestialJ2000Poles(displayed);
+	setFlagSolsticeJ2000Points(displayed);
 }
 
 //! Set flag for displaying Azimuthal Grid

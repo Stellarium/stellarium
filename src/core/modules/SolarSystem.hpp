@@ -5,7 +5,7 @@
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation; either version
+ * as published by the Free Software Foundation; either version 2
  * of the License, or (at your option) any later version.
  *
  * This program is distributed in the hope that it will be useful,
@@ -95,6 +95,11 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagIsolatedTrails
 		   WRITE setFlagIsolatedTrails
 		   NOTIFY flagIsolatedTrailsChanged
+		   )
+	Q_PROPERTY(int numberIsolatedTrails
+		   READ getNumberIsolatedTrails
+		   WRITE setNumberIsolatedTrails
+		   NOTIFY numberIsolatedTrailsChanged
 		   )
 	Q_PROPERTY(bool flagLightTravelTime
 		   READ getFlagLightTravelTime
@@ -331,24 +336,23 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Search for SolarSystem objects in some area around a point.
 	//! @param v A vector representing a point in the sky.
 	//! @param limitFov The radius of the circle around the point v which
 	//! defines the size of the area to search.
 	//! @param core the core object
-	//! @return A STL vector of StelObjectP (pointers) containing all SolarSystem
-	//! objects found in the specified area. This vector is not sorted by distance
-	//! from v.
+	//! @return QList of StelObjectP (pointers) containing all SolarSystem objects
+	//! found in the specified area. This vector is not sorted by distance from v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Search for a SolarSystem object based on the localised name.
-	//! @param nameI18n the case in-sensistive translated planet name.
+	//! @param nameI18n the case in-sensitive translated planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Search for a SolarSystem object based on the English name.
-	//! @param name the case in-sensistive English planet name.
+	//! @param name the case in-sensitive English planet name.
 	//! @return a StelObjectP for the object if found, else Q_NULLPTR.
 	virtual StelObjectP searchByName(const QString& name) const;
 
@@ -700,35 +704,35 @@ public slots:
 	//! Translate names. (public so that SolarSystemEditor can call it).
 	void updateI18n();
 
-	//! Get the V magnitude for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get the V magnitude for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @param withExtinction the flag for use extinction effect for magnitudes (default not use)
 	//! @return a magnitude
 	float getPlanetVMagnitude(QString planetName, bool withExtinction=false) const;
 
-	//! Get type for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get type for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a type of planet (planet, moon, asteroid, comet, plutoid)
 	QString getPlanetType(QString planetName) const;
 
-	//! Get distance to Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get distance to Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a distance (in AU)
 	double getDistanceToPlanet(QString planetName) const;
 
-	//! Get elongation for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get elongation for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a elongation (in radians)
 	double getElongationForPlanet(QString planetName) const;
 
-	//! Get phase angle for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
+	//! Get phase angle for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
 	//! @return a phase angle (in radians)
 	double getPhaseAngleForPlanet(QString planetName) const;
 
-	//! Get phase for Solar system bodies from scripts
-	//! @param planetName the case in-sensistive English planet name.
-	//! @return a phase
+	//! Get phase for Solar system bodies for scripts
+	//! @param planetName the case in-sensitive English planet name.
+	//! @return phase, i.e. illuminated fraction [0..1]
 	float getPhaseForPlanet(QString planetName) const;
 
 	//! Set the algorithm for computation of apparent magnitudes for planets in case observer on the Earth.
@@ -767,6 +771,11 @@ public slots:
 	void setFlagIsolatedTrails(bool b);
 	//! Get the current value of the flag which enables showing of isolated trails for selected objects only or not.
 	bool getFlagIsolatedTrails(void) const;
+
+	//! Set number of displayed of isolated trails for latest selected objects
+	void setNumberIsolatedTrails(int n);
+	//! Get the number of displayed of isolated trails for latest selected objects
+	int getNumberIsolatedTrails(void) const;
 
 	//! Set flag which enabled the showing of isolated orbits for selected objects only or not
 	void setFlagIsolatedOrbits(bool b);
@@ -825,6 +834,7 @@ signals:
 	void flagPlanetsOrbitsOnlyChanged(bool b);
 	void flagIsolatedOrbitsChanged(bool b);
 	void flagIsolatedTrailsChanged(bool b);
+	void numberIsolatedTrailsChanged(int n);
 	void flagLightTravelTimeChanged(bool b);
 	void flagUseObjModelsChanged(bool b);
 	void flagShowObjSelfShadowsChanged(bool b);
@@ -968,6 +978,9 @@ private:
 	//! Draw a nice animated pointer around the object.
 	void drawPointer(const StelCore* core);
 
+	//! Draw a nice markers for ephemeris of objects.
+	void drawEphemerisMarkers(const StelCore* core);
+
 	//! Load planet data from the Solar System configuration files.
 	//! This function attempts to load every possible instance of the
 	//! Solar System configuration files in the file paths, falling back if a
@@ -1002,6 +1015,7 @@ private:
 	PlanetP getSelected(void) const {return selected;}
 	//! The currently selected planet.
 	PlanetP selected;
+	std::vector<PlanetP> selectedSSO; // More than one can be selected at a time
 
 	// Separate Moon and minor body scale values. The latter make sense to zoom up and observe irregularly formed 3D objects like minor moons of the outer planets.
 	// TBD: It may be wise to remove the sphereScale value from the Planet class: that is only used by the Moon.
@@ -1035,6 +1049,7 @@ private:
 	bool flagNativePlanetNames;                 // show native names for planets?
 	bool flagTranslatedNames;                   // show translated names?
 	bool flagIsolatedTrails;
+	int numberIsolatedTrails;
 	bool flagIsolatedOrbits;
 	bool flagPlanetsOrbitsOnly;
 	bool ephemerisMarkersDisplayed;

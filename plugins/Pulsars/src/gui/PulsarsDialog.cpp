@@ -126,7 +126,6 @@ void PulsarsDialog::createDialogContent()
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
 	updateGuiFromSettings();
-
 }
 
 void PulsarsDialog::setAboutHtml(void)

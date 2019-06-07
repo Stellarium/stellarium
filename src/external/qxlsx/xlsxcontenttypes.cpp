@@ -170,7 +170,6 @@ void ContentTypes::saveToXmlFile(QIODevice *device) const
 
     writer.writeEndElement();//Types
     writer.writeEndDocument();
-
 }
 
 bool ContentTypes::loadFromXmlFile(QIODevice *device)

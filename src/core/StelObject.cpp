@@ -329,7 +329,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			{
 				firstCoordinate  = StelUtils::radToHmsStr(ra_sidereal,true);
 				secondCoordinate = StelUtils::radToDmsStr(dec_sidereal,true);
-
 			}
 		}
 		else
@@ -346,7 +345,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			{
 				firstCoordinate  = StelUtils::radToHmsStr(ra_sidereal,true);
 				secondCoordinate = StelUtils::radToDmsStr(dec_sidereal,true);
-
 			}
 		}
 
@@ -359,7 +357,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += QString("<tr><td>%1:</td><td style='text-align:right;'>%2/</td><td style='text-align:right;'>%3</td><td>%4</td></tr>").arg(HADec, firstCoordinate, secondCoordinate, apparent);
 		else
 			res += QString("%1: %2/%3 %4").arg(HADec, firstCoordinate, secondCoordinate, apparent) + "<br>";
-
 	}
 
 	if (flags&AltAzi)

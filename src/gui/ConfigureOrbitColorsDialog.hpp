@@ -43,7 +43,6 @@ protected:
         //! Initialize the dialog widgets and connect the signals/slots.
         virtual void createDialogContent();
 	Ui_ConfigureOrbitColorsDialogForm *ui;
-
 };
 
 #endif // CONFIGUREORBITCOLORSDIALOG_HPP

@@ -371,7 +371,6 @@ void NomenclatureMgr::loadNomenclature()
 				}
 				else
 					faultPlanets << planet;
-
 			}
 		}
 
@@ -382,7 +381,6 @@ void NomenclatureMgr::loadNomenclature()
 		int err = faultPlanets.size();
 		if (err>0)
 			qDebug() << "WARNING - The next planets to assign nomenclature items is not found:" << faultPlanets.join(", ");
-
 	}
 }
 
@@ -427,7 +425,6 @@ void NomenclatureMgr::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)

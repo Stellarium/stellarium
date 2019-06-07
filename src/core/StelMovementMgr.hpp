@@ -33,6 +33,8 @@
 class StelMovementMgr : public StelModule
 {
 	Q_OBJECT
+	Q_ENUMS(MountMode)
+	Q_ENUMS(ZoomingMode)
 	Q_PROPERTY(bool equatorialMount
 		   READ getEquatorialMount
 		   WRITE setEquatorialMount
@@ -45,7 +47,6 @@ class StelMovementMgr : public StelModule
 		   READ getFlagIndicationMountMode
 		   WRITE setFlagIndicationMountMode
 		   NOTIFY flagIndicationMountModeChanged)
-
 	//The targets of viewport offset animation
 	Q_PROPERTY(float viewportHorizontalOffsetTarget
 		   READ getViewportHorizontalOffsetTarget
@@ -55,27 +56,22 @@ class StelMovementMgr : public StelModule
 		   READ getViewportVerticalOffsetTarget
 		   WRITE setViewportVerticalOffsetTarget
 		   NOTIFY viewportVerticalOffsetTargetChanged)
-
 	Q_PROPERTY(bool flagAutoZoomOutResetsDirection
 		   READ getFlagAutoZoomOutResetsDirection
 		   WRITE setFlagAutoZoomOutResetsDirection
 		   NOTIFY flagAutoZoomOutResetsDirectionChanged)
-
 	Q_PROPERTY(bool flagEnableMouseNavigation
 		   READ getFlagEnableMouseNavigation
 		   WRITE setFlagEnableMouseNavigation
 		   NOTIFY flagEnableMouseNavigationChanged)
 public:
-
 	//! Possible mount modes defining the reference frame in which head movements occur.
 	//! MountGalactic and MountSupergalactic is currently only available via scripting API: core.clear("galactic") and core.clear("supergalactic")
 	// TODO: add others: MountEcliptical, MountEq2000, MountEcliptical2000 and implement proper variants.
 	enum MountMode { MountAltAzimuthal, MountEquinoxEquatorial, MountGalactic, MountSupergalactic};
-	Q_ENUM(MountMode)
 
 	//! Named constants for zoom operations.
 	enum ZoomingMode { ZoomOut=-1, ZoomNone=0, ZoomIn=1};
-	Q_ENUM(ZoomingMode)
 
 	StelMovementMgr(StelCore* core);
 	virtual ~StelMovementMgr();
@@ -292,10 +288,12 @@ public slots:
 	//! Look immediately towards South Celestial pole.
 	void lookTowardsSCP(void);
 
-	//! start animated move of the viewport offset.
-	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]
-	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]
-	//! @param duration animation duration, seconds.
+	//! set or start animated move of the viewport offset.
+	//! This can be used e.g. in wide cylindrical panorama screens to push the horizon down and see more of the sky.
+	//! Also helpful in stereographic projection to push the horizon down and see more of the sky.
+	//! @param offsetX new horizontal viewport offset, percent. clamped to [-50...50]. Probably not very useful.
+	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]. This is also available in the GUI.
+	//! @param duration animation duration, seconds. Optional.
 	//! @note Only vertical viewport is really meaningful.
 	void moveViewport(float offsetX, float offsetY, const float duration=0.f);
 
@@ -482,7 +480,6 @@ private:
 	//@{
 	int lastMessageID;
 	//@}
-
 };
 
 #endif // STELMOVEMENTMGR_HPP

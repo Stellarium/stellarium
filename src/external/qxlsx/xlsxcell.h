@@ -30,8 +30,8 @@ class WorksheetPrivate;
 class Cell
 {
 	Q_DECLARE_PRIVATE(Cell)
-public:
 
+public:
 	enum CellType {
 		BooleanType,      //t="b"
 		NumberType,       //t="n" (default)

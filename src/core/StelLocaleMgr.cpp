@@ -36,6 +36,7 @@ QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(Q_NULLPTR)
 	, planetaryFeaturesTranslator(Q_NULLPTR)
+	, scriptsTranslator(Q_NULLPTR)
 	, timeFormat()
 	, dateFormat()	
 {
@@ -66,6 +67,8 @@ StelLocaleMgr::~StelLocaleMgr()
 	skyTranslator = Q_NULLPTR;
 	delete planetaryFeaturesTranslator;
 	planetaryFeaturesTranslator = Q_NULLPTR;
+	delete scriptsTranslator;
+	scriptsTranslator = Q_NULLPTR;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
@@ -134,6 +137,12 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	delete StelTranslator::globalTranslator;
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
 	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
+
+	delete scriptsTranslator;
+	// Update the translator with new locale name
+	scriptsTranslator = new StelTranslator("stellarium-scripts", newAppLanguageName);
+	qDebug() << "Scripts language is " << scriptsTranslator->getTrueLocaleName();
+
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();
 }
@@ -197,6 +206,10 @@ const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
 	return *StelTranslator::globalTranslator;
 }
 
+const StelTranslator& StelLocaleMgr::getScriptsTranslator() const
+{
+	return *scriptsTranslator;
+}
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
@@ -276,11 +289,11 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 
 QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
+	QString timeZone = "";
+	QString timeZoneST = "";
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		QString timeZone = "";
 		QString currTZ = core->getCurrentTimeZone();
-		QString timeZoneST = "";
 
 		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto") || currTZ.contains("LMST"))
 		{
@@ -303,11 +316,21 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 
 		if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
 			timeZone = QString("%1 (%2)").arg(timeZone, timeZoneST);
-
-		return timeZone;
 	}
 	else
-		return QString();
+	{
+		// TODO: Make sure LMST/LTST would make sense on other planet, or inhibit it?
+		float shift = core->getUTCOffset(JD);
+		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
+		if(shift<0.0f)
+			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
+		else
+			timeZone = QString("UTC+%1").arg(tz.toString("hh:mm"));
+
+		//if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
+		//	timeZone = QString("%1 (%2)").arg(timeZone, timeZoneST);
+	}
+	return timeZone;
 }
 
 // Convert the time format enum to its associated string and reverse
@@ -322,11 +345,24 @@ StelLocaleMgr::STimeFormat StelLocaleMgr::stringToSTimeFormat(const QString& tf)
 
 QString StelLocaleMgr::sTimeFormatToString(STimeFormat tf) const
 {
-	if (tf == STimeSystemDefault) return "system_default";
-	if (tf == STime24h) return "24h";
-	if (tf == STime12h) return "12h";
-	qWarning() << "WARNING: unrecognized time_display_format value : " << (int)tf << " system_default used.";
-	return "system_default";
+	QString tfmt;
+	switch (tf)
+	{
+		case STime24h:
+			tfmt = "24h";
+			break;
+		case STime12h:
+			tfmt = "12h";
+			break;
+		case STimeSystemDefault:
+			tfmt = "system_default";
+			break;
+		default:
+			qWarning() << "WARNING: unknown time format, fallback to system default.";
+			tfmt = "system_default";
+			break;
+	}
+	return tfmt;
 }
 
 // Convert the date format enum to its associated string and reverse
@@ -342,12 +378,27 @@ StelLocaleMgr::SDateFormat StelLocaleMgr::stringToSDateFormat(const QString& df)
 
 QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 {
-	if (df == SDateSystemDefault) return "system_default";
-	if (df == SDateMMDDYYYY) return "mmddyyyy";
-	if (df == SDateDDMMYYYY) return "ddmmyyyy";
-	if (df == SDateYYYYMMDD) return "yyyymmdd";
-	qWarning() << "WARNING: unrecognized date_display_format value : " << (int)df << " system_default used.";
-	return "system_default";
+	QString dfmt;
+	switch (df)
+	{
+		case SDateMMDDYYYY:
+			dfmt = "mmddyyyy";
+			break;
+		case SDateDDMMYYYY:
+			dfmt = "ddmmyyyy";
+			break;
+		case SDateYYYYMMDD:
+			dfmt = "yyyymmdd";
+			break;
+		case SDateSystemDefault:
+			dfmt = "system_default";
+			break;
+		default:
+			qWarning() << "WARNING: unknown date format, fallback to system default.";
+			dfmt = "system_default";
+			break;
+	}
+	return dfmt;
 }
 
 QString StelLocaleMgr::getQtDateFormatStr() const

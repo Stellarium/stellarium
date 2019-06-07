@@ -175,7 +175,6 @@ void StelModuleMgr::unloadAllPlugins()
 			continue;
 		unloadModule(d.info.id, true);
 		qDebug() << "Unloaded plugin" << d.info.id;
-	
 	}
 	// Call update now to make sure that all references to the now deleted plugins modules
 	// are removed (fix crashes at application shutdown).

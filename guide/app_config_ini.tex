@@ -63,6 +63,7 @@ flag\_light\_travel\_time          & bool   & true  & Should be \emph{true} to i
                                            but is essential e.g.\ for Jupiter's moons.\\%\midrule
 flag\_object\_trails               & bool   & false & Turns on and off drawing of object trails (which show the movement of the planets over time).\\%\midrule
 flag\_isolated\_trails             & bool   & true  & Turns on and off drawing of isolated trails.\\%\midrule
+number\_isolated\_trails           & int    & 1     & Number of isolated trails for latest selected Solar system bodies [1..5].\\%\midrule
 flag\_isolated\_orbits             & bool   & true  & Turns on and off drawing of isolated orbits.\\\midrule
 %
 flag\_nebula                       & bool   & true  & Set to \emph{false} to hide the nebulae on start-up. \\%\midrule
@@ -98,15 +99,15 @@ grs\_measurements\_url             & string &       & URL of recent measurements
 %
 meteor\_zhr                        & int    & 10    & ZHR for sporadic meteors.\\\midrule
 %
-de430\_path	  					   & string &       & Path to JPL DE430 ephemerides file.\\%\midrule
-flag\_use\_de430				   & bool   & false & Enables/disables usage JPL DE430 ephemerides (if available).\\%\midrule
-de431\_path	  					   & string &       & Path to JPL DE431 ephemerides file.\\%\midrule
-flag\_use\_de431				   & bool   & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\midrule
+de430\_path                        & string &       & Path to JPL DE430 ephemerides file.\\%\midrule
+flag\_use\_de430                   & bool   & false & Enables/disables usage JPL DE430 ephemerides (if available).\\%\midrule
+de431\_path                        & string &       & Path to JPL DE431 ephemerides file.\\%\midrule
+flag\_use\_de431                   & bool   & false & Enables/disables usage JPL DE431 ephemerides (if available).\\\midrule
 %
-flag\_toast\_survey				   & bool   & false & Enables/disables usage Digitized Sky Survey in TOAST format.\\%\midrule
-toast\_survey\_host				   & string &       & Host of Digitized Sky Survey storage data.\\%\midrule
-toast\_survey\_directory		   & string & results & Directory name of Digitized Sky Survey storage data.\\%\midrule
-toast\_survey\_levels			   & int    & 11    & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
+flag\_toast\_survey                & bool   & false & Enables/disables Digitized Sky Survey in TOAST format.\\%\midrule
+toast\_survey\_host                & string &       & Host of Digitized Sky Survey storage data.\\%\midrule
+toast\_survey\_directory           & string & results & Directory name of Digitized Sky Survey storage data.\\%\midrule
+toast\_survey\_levels              & int    & 11    & Count of levels for Digitized Sky Survey storage data.\\\bottomrule
 \end{longtable}
 
 \subsection{\big[astrocalc\big]}
@@ -528,6 +529,7 @@ date\_display\_format & string & date display format: can be \emph{system\_defau
 \emph{ID}                 & \emph{Type} & \emph{Description}\\\midrule
 invert\_screenshots\_colors & bool   & If \emph{true}, Stellarium will saving the screenshorts with inverted colors.\\%\midrule
 screenshot\_dir             & string & Path for saving screenshots\\%\midrule
+screenshot\_format          & string & File format. One of \texttt{png|jpg|jpeg|tif|tiff| webp|pbm|pgm|ppm|xbm|xpm|ico}\\
 screenshot\_custom\_size    & bool   & \emph{true} if you want to specify particular dimensions next:\\
 screenshot\_custom\_width   & int    & custom width of screenshots. Max.\ available size is hardware dependent!\\
 screenshot\_custom\_height  & int    & custom height of screenshots. Max.\ available size is hardware dependent!\\\midrule

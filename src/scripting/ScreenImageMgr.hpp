@@ -109,7 +109,6 @@ private slots:
 
 private:
 	float maxAlpha;
-
 };
 
 //! @class ScreenImageMgr
@@ -123,7 +122,7 @@ class ScreenImageMgr : public StelModule
 	Q_OBJECT
 
 public:
-	//! Construct a LabelMgr object.
+	//! Construct a ScreenImageMgr object.
 	ScreenImageMgr(); 
 	virtual ~ScreenImageMgr();
  

@@ -71,7 +71,7 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	info.id = "Quasars";
 	info.displayedName = N_("Quasars");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("A plugin that shows some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010)");
 	info.version = QUASARS_PLUGIN_VERSION;
 	info.license = QUASARS_PLUGIN_LICENSE;
@@ -237,7 +237,6 @@ void Quasars::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Quasars::drawPointer(StelCore* core, StelPainter& painter)
@@ -379,7 +378,6 @@ void Quasars::restoreDefaultJsonFile(void)
 		// manner
 		conf->remove("Quasars/last_update");
 		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
-
 	}
 }
 
@@ -473,7 +471,6 @@ void Quasars::setQSOMap(const QVariantMap& map)
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)
 			QSO.append(quasar);
-
 	}
 }
 

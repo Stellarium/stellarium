@@ -24,6 +24,7 @@
 #include "StelMainScriptAPI.hpp"
 #include "StelModuleMgr.hpp"
 #include "LabelMgr.hpp"
+#include "MarkerMgr.hpp"
 #include "ScreenImageMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelTranslator.hpp"
@@ -89,7 +90,6 @@ public:
 
 private:
 	bool isPaused;
-
 };
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
@@ -134,7 +134,7 @@ void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QSignalMapper* mapper = new QSignalMapper(this);
-	for (const auto script : getScriptList())
+	for (const auto& script : getScriptList())
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
@@ -159,7 +159,6 @@ void StelScriptMgr::addModules()
 		QScriptValue objectValue = engine->newQObject(m);
 		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
-
 }
 
 QStringList StelScriptMgr::getScriptList() const
@@ -432,6 +431,7 @@ void StelScriptMgr::stopScript()
 	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(MarkerMgr)->deleteAllMarkers();
 		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
 		if (agent->getPauseScript()) {
 			agent->setPauseScript(false);
@@ -464,14 +464,15 @@ void StelScriptMgr::setScriptRate(float r)
 	
 	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(core->getTimeRate());
 	engine->globalObject().setProperty("scriptRateReadOnly", r);
-
 }
 
-void StelScriptMgr::pauseScript() {
+void StelScriptMgr::pauseScript()
+{
 	agent->setPauseScript(true);
 }
 
-void StelScriptMgr::resumeScript() {
+void StelScriptMgr::resumeScript()
+{
 	agent->setPauseScript(false);
 }
 

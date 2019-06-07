@@ -101,6 +101,7 @@ SolarSystem::~SolarSystem()
 {
 	// release selected:
 	selected.clear();
+	selectedSSO.clear();
 	for (auto* orb : orbits)
 	{
 		delete orb;
@@ -174,6 +175,7 @@ void SolarSystem::init()
 	setFlagNativePlanetNames(conf->value("viewing/flag_planets_native_names", true).toBool());
 	// Is enabled the showing of isolated trails for selected objects only?
 	setFlagIsolatedTrails(conf->value("viewing/flag_isolated_trails", true).toBool());
+	setNumberIsolatedTrails(conf->value("viewing/number_isolated_trails", 1).toInt());
 	setFlagIsolatedOrbits(conf->value("viewing/flag_isolated_orbits", true).toBool());
 	setFlagPlanetsOrbitsOnly(conf->value("viewing/flag_planets_orbits_only", false).toBool());
 	setFlagPermanentOrbits(conf->value("astro/flag_permanent_orbits", false).toBool());
@@ -263,10 +265,16 @@ void SolarSystem::recreateTrails()
 		delete allTrails;
 	allTrails = new TrailGroup(365.f);
 
-	PlanetP p = getSelected();
-	if (p!=Q_NULLPTR && getFlagIsolatedTrails())
+	unsigned long cnt = selectedSSO.size();
+	if (cnt>0 && getFlagIsolatedTrails())
 	{
-		allTrails->addObject((QSharedPointer<StelObject>)p, &trailColor);
+		unsigned long limit = getNumberIsolatedTrails();
+		if (cnt<limit)
+			limit = cnt;
+		for (unsigned long i=0; i<limit; i++)
+		{
+			allTrails->addObject((QSharedPointer<StelObject>)selectedSSO[cnt - i - 1], &trailColor);
+		}
 	}
 	else
 	{
@@ -974,6 +982,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			else
 				color = StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString());
 
+			QString normalMapName = "";
+			bool hidden = pd.value(secname+"/hidden", false).toBool();
+			if (!hidden) // no normal maps for invisible objects!
+				normalMapName = englishName.toLower().append("_normals.png");
+
 			p = PlanetP(new MinorPlanet(englishName,
 						    pd.value(secname+"/radius").toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
@@ -981,12 +994,13 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 						    pd.value(secname+"/albedo", 0.25f).toFloat(),
 						    pd.value(secname+"/roughness",0.9f).toFloat(),
 						    pd.value(secname+"/tex_map", "nomap.png").toString(),
+						    pd.value(secname+"/normals_map", normalMapName).toString(),
 						    pd.value(secname+"/model").toString(),
 						    posfunc,
 						    orbitPtr,
 						    osculatingFunc,
 						    closeOrbit,
-						    pd.value(secname+"/hidden", false).toBool(),
+						    hidden,
 						    type));
 
 			QSharedPointer<MinorPlanet> mp =  p.dynamicCast<MinorPlanet>();
@@ -1081,7 +1095,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// phase when normal map key not exists. Example: moon_normals.png
 			// Details: https://bugs.launchpad.net/stellarium/+bug/1335609
 			QString normalMapName = "";
-			if (!pd.value(secname+"/hidden", false).toBool()) // no normal maps for invisible objects!
+			bool hidden = pd.value(secname+"/hidden", false).toBool();
+			if (!hidden) // no normal maps for invisible objects!
 				normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
 					       pd.value(secname+"/radius").toDouble()/AU,
@@ -1096,7 +1111,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       orbitPtr,
 					       osculatingFunc,
 					       closeOrbit,
-					       pd.value(secname+"/hidden", false).toBool(),
+					       hidden,
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
@@ -1304,56 +1319,59 @@ void SolarSystem::draw(StelCore* core)
 
 	// AstroCalcDialog
 	if (getFlagEphemerisMarkers())
+		drawEphemerisMarkers(core);
+}
+
+void SolarSystem::drawEphemerisMarkers(const StelCore *core)
+{
+	StelProjectorP prj;
+	if (getFlagEphemerisHorizontalCoordinates())
+		prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
+	else
+		prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
+	StelPainter sPainter(prj);
+
+	float size, shift;
+	bool showDates = getFlagEphemerisDates();
+	bool showMagnitudes = getFlagEphemerisMagnitudes();
+	QString info = "";
+
+	for (int i =0; i< AstroCalcDialog::EphemerisListCoords.count(); i++)
 	{
-		StelProjectorP prj;
-		if (getFlagEphemerisHorizontalCoordinates())
-			prj = core->getProjection(StelCore::FrameAltAz, StelCore::RefractionOff);
-		else
-			prj = core->getProjection(StelCore::FrameJ2000); // , StelCore::RefractionOff);
-		StelPainter sPainter(prj);
+		// draw EphemerisListJ2000[i];
+		Vec3d win;
 
-		float size, shift;
-		bool showDates = getFlagEphemerisDates();
-		bool showMagnitudes = getFlagEphemerisMagnitudes();
-		QString info = "";
+		// Check visibility of pointer
+		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListCoords[i], win)))
+			continue;
 
-		for (int i =0; i< AstroCalcDialog::EphemerisListCoords.count(); i++)
+		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
-			// draw EphemerisListJ2000[i];
-			Vec3d win;
+			sPainter.setColor(1.0f, 0.7f, 0.0f, 1.0f);
+			size = 6.f;
+		}
+		else
+		{
+			sPainter.setColor(1.0f, 1.0f, 0.0f, 1.0f);
+			size = 4.f;
+		}
 
-			// Check visibility of pointer
-			if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListCoords[i], win)))
-				continue;
+		sPainter.setBlending(true, GL_ONE, GL_ONE);
 
-			if (i == AstroCalcDialog::DisplayedPositionIndex)
-			{
-				sPainter.setColor(1.0f, 0.7f, 0.0f, 1.0f);
-				size = 6.f;
-			}
-			else
-			{
-				sPainter.setColor(1.0f, 1.0f, 0.0f, 1.0f);
-				size = 4.f;
-			}
+		texCircle->bind();
+		sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListCoords[i], size);
 
-			sPainter.setBlending(true, GL_ONE, GL_ONE);
+		if (showDates || showMagnitudes)
+		{
+			shift = 3.f + size/1.6f;
+			if (showDates && showMagnitudes)
+				info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisListDates[i], QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2));
+			if (showDates && !showMagnitudes)
+				info = AstroCalcDialog::EphemerisListDates[i];
+			if (!showDates && showMagnitudes)
+				info = QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2);
 
-			texCircle->bind();
-			sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListCoords[i], size);
-
-			if (showDates || showMagnitudes)
-			{
-				shift = 3.f + size/1.6f;
-				if (showDates && showMagnitudes)
-					info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisListDates[i], QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2));
-				if (showDates && !showMagnitudes)
-					info = AstroCalcDialog::EphemerisListDates[i];
-				if (!showDates && showMagnitudes)
-					info = QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2);
-
-				sPainter.drawText(AstroCalcDialog::EphemerisListCoords[i], info, 0, shift, shift, false);
-			}
+			sPainter.drawText(AstroCalcDialog::EphemerisListCoords[i], info, 0, shift, shift, false);
 		}
 	}
 }
@@ -1685,9 +1703,12 @@ void SolarSystem::setFlagShowObjSelfShadows(bool b)
 void SolarSystem::setSelected(PlanetP obj)
 {
 	if (obj && obj->getType() == "Planet")
+	{
 		selected = obj;
+		selectedSSO.push_back(obj);
+	}
 	else
-		selected.clear();;
+		selected.clear();
 	// Undraw other objects hints, orbit, trails etc..
 	setFlagHints(getFlagHints());
 	setFlagOrbits(getFlagOrbits());
@@ -1914,6 +1935,27 @@ void SolarSystem::setFlagIsolatedTrails(bool b)
 bool SolarSystem::getFlagIsolatedTrails() const
 {
 	return flagIsolatedTrails;
+}
+
+int SolarSystem::getNumberIsolatedTrails() const
+{
+	return numberIsolatedTrails;
+}
+
+void SolarSystem::setNumberIsolatedTrails(int n)
+{
+	// [1..5] - valid range for trails
+	if (n<1)
+		numberIsolatedTrails = 1;
+	else if (n>5)
+		numberIsolatedTrails = 5;
+	else
+		numberIsolatedTrails = n;
+
+	if (getFlagIsolatedTrails())
+		recreateTrails();
+
+	emit numberIsolatedTrailsChanged(numberIsolatedTrails);
 }
 
 void SolarSystem::setFlagIsolatedOrbits(bool b)

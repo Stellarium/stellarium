@@ -45,6 +45,7 @@ public:
 		    float albedo,
 		    float roughness,
 		    const QString& texMapName,
+		    const QString& normalMapName,
 		    const QString& objModelName,
 		    posFuncType _coordFunc,
 		    void* orbitPtr,

@@ -310,7 +310,6 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	if (!spoutName.isEmpty())
 		qApp->setProperty("spoutName", spoutName);
 #endif
-
 }
 
 

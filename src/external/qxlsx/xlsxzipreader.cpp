@@ -41,7 +41,6 @@ ZipReader::ZipReader(QIODevice *device) :
 
 ZipReader::~ZipReader()
 {
-
 }
 
 void ZipReader::init()

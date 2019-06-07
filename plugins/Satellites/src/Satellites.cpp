@@ -70,7 +70,7 @@ StelPluginInfo SatellitesStelPluginInterface::getPluginInfo() const
 	info.id = "Satellites";
 	info.displayedName = N_("Satellites");
 	info.authors = "Matthew Gates, Jose Luis Canales";
-	info.contact = "https://stellarium.org/";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("Prediction of artificial satellite positions in Earth orbit based on NORAD TLE data");
 	info.version = SATELLITES_PLUGIN_VERSION;
 	info.license = SATELLITES_PLUGIN_LICENSE;
@@ -591,7 +591,6 @@ void Satellites::restoreDefaultCatalog()
 		// manner
 		StelApp::getInstance().getSettings()->remove("Satellites/last_update");
 		lastUpdate = QDateTime::fromString("2015-05-01T12:00:00", Qt::ISODate);
-
 	}
 }
 
@@ -828,7 +827,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 	if (map.contains("hintColor"))
 	{
 		defaultHintColorMap = map.value("hintColor").toList();
-		defaultHintColor.set(defaultHintColorMap.at(0).toDouble(), defaultHintColorMap.at(1).toDouble(), defaultHintColorMap.at(2).toDouble());
+		defaultHintColor.set(defaultHintColorMap.at(0).toFloat(), defaultHintColorMap.at(1).toFloat(), defaultHintColorMap.at(2).toFloat());
 	}
 
 	if (satelliteListModel)
@@ -1399,17 +1398,18 @@ void Satellites::saveDownloadedUpdate(QNetworkReply* reply)
 	updateSatellites(newData);
 }
 
-void Satellites::updateObserverLocation(StelLocation)
+void Satellites::updateObserverLocation(const StelLocation &loc)
 {
+	Q_UNUSED(loc)
 	recalculateOrbitLines();
 }
 
-void Satellites::setOrbitLinesFlag(bool b)
+void Satellites::setFlagOrbitLines(bool b)
 {
 	Satellite::orbitLinesFlag = b;
 }
 
-bool Satellites::getOrbitLinesFlag() const
+bool Satellites::getFlagOrbitLines() const
 {
 	return Satellite::orbitLinesFlag;
 }
@@ -1515,7 +1515,6 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 			}
 			if (qsMagList.contains(id))
 				sat->stdMag = qsMagList[id];
-
 		}
 		else
 		{
@@ -1810,7 +1809,6 @@ bool Satellites::checkJsonFileFormat()
 	}
 
 	return true;
-
 }
 
 bool Satellites::isValidRangeDates(const StelCore *core) const
@@ -1978,7 +1976,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 		{
 			if ( i.value().nextJD<=predictionJD)
 			{
-
 				i.key()->update(0);
 
 				double v = i.key()->getVMagnitude(pcore);
@@ -2005,7 +2002,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 						predictions.append(flare);
 						flareFound = true;
 						//qDebug() << "Flare:" << flare.datetime << flare.satellite;
-
 					}
 				}
 
@@ -2019,16 +2015,12 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 						 <<  StelUtils::julianDayToISO8601String(predictionJD+StelApp::getInstance().getCore()->getUTCOffset(predictionJD)/24.f)
 							 ;
 */
-
 				Vec3d pos = i.key()->getAltAzPosApparent(pcore);
 
 				i.value().v = flareFound ?  17 : v; // block extra report
 				i.value().altitude = pos.latitude();
 				i.value().azimuth = M_PI - pos.longitude();
 				i.value().angleToSun = i.key()->sunReflAngle;
-
-
-
 
 				double t;
 				if (flareFound)
@@ -2061,7 +2053,6 @@ IridiumFlaresPredictionList Satellites::getIridiumFlaresPrediction()
 	return predictions;
 }
 #endif
-
 
 void Satellites::translations()
 {

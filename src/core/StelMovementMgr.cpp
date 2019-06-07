@@ -451,7 +451,7 @@ void StelMovementMgr::handleMouseWheel(QWheelEvent* event)
 	else
 	{
 		const float zoomFactor = std::exp(-mouseZoomSpeed * numSteps / 60.f);
-		const float zoomDuration = 0.2f * qAbs(numSteps);
+		const float zoomDuration = 0.2f;
 		zoomTo(getAimFov() * zoomFactor, zoomDuration);
 	}
 	event->accept();
@@ -501,7 +501,17 @@ void StelMovementMgr::handleMouseClicks(QMouseEvent* event)
 			break;
 		}
 		case Qt::LeftButton :
-			if (event->type()==QEvent::MouseButtonPress)
+			if (event->type()==QEvent::MouseButtonDblClick)
+			{
+				if (objectMgr->getWasSelected())
+				{
+					moveToObject(objectMgr->getSelectedObject()[0],autoMoveDuration);
+					setFlagTracking(true);
+				}
+				event->accept();
+				return;
+			}
+			else if (event->type()==QEvent::MouseButtonPress)
 			{
 				if (event->modifiers() & Qt::ControlModifier)
 				{
@@ -1424,12 +1434,12 @@ void StelMovementMgr::updateAutoZoom(double deltaTime)
 		if( zoomMove.startFov > zoomMove.aimFov )
 		{
 			// slow down as we approach final view
-			c = 1 - (1-zoomMove.coef)*(1-zoomMove.coef)*(1-zoomMove.coef);
+			c = 1.0 - (1.0f-zoomMove.coef)*(1.0f-zoomMove.coef)*(1.0f-zoomMove.coef);
 		}
 		else
 		{
 			// speed up as we leave zoom target
-			c = (zoomMove.coef)*(zoomMove.coef)*(zoomMove.coef);
+			c = (double)zoomMove.coef * zoomMove.coef * zoomMove.coef;
 		}
 
 		double newFov=zoomMove.startFov + (zoomMove.aimFov - zoomMove.startFov) * c;

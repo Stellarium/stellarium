@@ -56,6 +56,7 @@ class StelMainView : public QGraphicsView
 	Q_PROPERTY(int  customScreenshotWidth      READ getCustomScreenshotWidth      WRITE setCustomScreenshotWidth      NOTIFY customScreenshotWidthChanged)
 	Q_PROPERTY(int  customScreenshotHeight     READ getCustomScreenshotHeight     WRITE setCustomScreenshotHeight     NOTIFY customScreenshotHeightChanged)
 #endif
+	Q_PROPERTY(QString screenShotFormat        READ getScreenshotFormat           WRITE setScreenshotFormat           NOTIFY screenshotFormatChanged)
 	Q_PROPERTY(bool flagCursorTimeout          READ getFlagCursorTimeout          WRITE setFlagCursorTimeout          NOTIFY flagCursorTimeoutChanged)
 	Q_PROPERTY(double cursorTimeout            READ getCursorTimeout              WRITE setCursorTimeout              NOTIFY cursorTimeoutChanged)
 	Q_PROPERTY(Vec3f skyBackgroundColor        READ getSkyBackgroundColor         WRITE setSkyBackgroundColor         NOTIFY skyBackgroundColorChanged)
@@ -123,7 +124,15 @@ public slots:
 	//! @arg saveDir changes the directory where the screenshot is saved
 	//! If saveDir is "" then StelFileMgr::getScreenshotDir() will be used
 	//! @arg overwrite if true, @arg filePrefix is used as filename, and existing file will be overwritten.
+	//! @note To set file type, use setScreenshotFormat() first.
 	void saveScreenShot(const QString& filePrefix="stellarium-", const QString& saveDir="", const bool overwrite=false);
+	//! @arg filetype is the preferred file type (ending) like "png", "jpg", "bmp" etc.
+	//! The supported filetypes depend on the underlying Qt version.
+	//! The most popular may be PNG, JPG/JPEG, BMP, TIF (LZW compressed), TIFF (uncompressed), WEBP,
+	//! but as of Qt5.12, we also have ICO (for thumbnails), PBM (Portable Bitmap), PGM (Portable Graymap), PPM (Portable Pixmap),
+	//! XBM (X Bitmap) and XPM (X Pixmap).
+	void setScreenshotFormat(const QString filetype);
+	QString getScreenshotFormat() const {return screenShotFormat;}
 
 	//! Get whether colors are inverted when saving screenshot
 	bool getFlagInvertScreenShotColors() const {return flagInvertScreenShotColors;}
@@ -219,6 +228,7 @@ signals:
 	void flagUseCustomScreenshotSizeChanged(bool use);
 	void customScreenshotWidthChanged(int width);
 	void customScreenshotHeightChanged(int height);
+	void screenshotFormatChanged(QString format);
 
 	void skyBackgroundColorChanged(Vec3f color);
 	void flagCursorTimeoutChanged(bool b);
@@ -281,6 +291,7 @@ private:
 	float customScreenshotMagnification;  //! tracks the magnification factor customScreenshotHeight/NormalWindowHeight
 #endif
 	QString screenShotPrefix;
+	QString screenShotFormat; //! file type like "png" or "jpg".
 	QString screenShotDir;
 
 	bool flagCursorTimeout;

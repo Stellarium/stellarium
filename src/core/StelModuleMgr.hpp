@@ -28,7 +28,7 @@
 
 //! @def GETSTELMODULE(m)
 //! Return a pointer on a StelModule from its QMetaObject name @a m
-#define GETSTELMODULE( m ) (( m *)StelApp::getInstance().getModuleMgr().getModule( #m ))
+#define GETSTELMODULE( m ) qobject_cast< m *>(StelApp::getInstance().getModuleMgr().getModule( #m ))
 
 //! @class StelModuleMgr
 //! Manage a collection of StelModules including both core and plugin modules.

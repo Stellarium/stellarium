@@ -45,9 +45,8 @@ signals:
 	void positionChanged(double longitude, double latitude);
 
 protected:
-	virtual void mousePressEvent(QMouseEvent * event) override;
-
-	virtual void resizeEvent(QResizeEvent *event) override;
+	void mousePressEvent(QMouseEvent * event) override;
+	void resizeEvent(QResizeEvent *event) override;
 
 private:
 	//QLabel* cursor;

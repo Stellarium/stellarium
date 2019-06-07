@@ -3,7 +3,7 @@
 # as satellite IDs.
 # --Bogdan Marinov
 
-import json;
+import json
 
 # Open the satellites.json file and read it as a hash
 with open('satellites.json') as old_f:

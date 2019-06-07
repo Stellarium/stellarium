@@ -51,7 +51,6 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 
-
 public slots:
 	void retranslate();	
 
@@ -90,7 +89,6 @@ private slots:
 
 	void checkUpdates(void);
 	void downloadComplete(QNetworkReply * reply);
-
 };
 
 #endif /*_HELPDIALOG_HPP*/

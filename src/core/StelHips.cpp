@@ -107,7 +107,6 @@ HipsSurvey::HipsSurvey(const QString& url_, double releaseDate_):
 
 HipsSurvey::~HipsSurvey()
 {
-
 }
 
 bool HipsSurvey::isVisible() const
@@ -150,6 +149,16 @@ bool HipsSurvey::getAllsky()
 {
 	if (!allsky.isNull() || noAllsky) return true;
 	if (properties.isEmpty()) return false;
+
+	// Allsky is deprecated after version 1.4.
+	if (properties.contains("hips_version")) {
+		QStringList version = properties["hips_version"].toString().split(".");
+		if ((version.size() >= 2) && (version[0].toInt() * 100 + version[1].toInt() >= 104)) {
+			noAllsky = true;
+			return true;
+		}
+	}
+
 	if (!networkReply)
 	{
 		QString ext = getExt(properties["hips_tile_format"].toString());
@@ -165,14 +174,17 @@ bool HipsSurvey::getAllsky()
 		connect(networkReply, &QNetworkReply::downloadProgress, [this](qint64 received, qint64 total) {
 			updateProgressBar(received, total);
 		});
-
 	}
 	if (networkReply->isFinished())
 	{
-		qDebug() << "got allsky";
-		QByteArray data = networkReply->readAll();
-		allsky = QImage::fromData(data);
-		delete networkReply;
+		if (networkReply->error() == QNetworkReply::NoError) {
+			qDebug() << "got allsky";
+			QByteArray data = networkReply->readAll();
+			allsky = QImage::fromData(data);
+		} else {
+			noAllsky = true;
+		}
+		networkReply->deleteLater();
 		networkReply = NULL;
 		emit statusChanged();
 	};
@@ -186,7 +198,6 @@ bool HipsSurvey::isLoading(void) const
 
 void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallback callback)
 {
-
 	// We don't draw anything until we get the properties file and the
 	// allsky texture (if available).
 	bool outside = (angle == 2.0 * M_PI);
@@ -228,7 +239,6 @@ void HipsSurvey::draw(StelPainter* sPainter, double angle, HipsSurvey::DrawCallb
 	}
 
 	updateProgressBar(nbLoadedTiles, nbVisibleTiles);
-
 }
 
 void HipsSurvey::updateProgressBar(int nb, int total)
@@ -268,7 +278,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		// Use the allsky image until we load the full texture.
 		if (order == orderMin && !allsky.isNull())
 		{
-			int nbw = sqrt(12 * 1 << (2 * order));
+			int nbw = (int)sqrt(12 * (1 << (2 * order)));
 			int x = (pix % nbw) * allsky.width() / nbw;
 			int y = (pix / nbw) * allsky.width() / nbw;
 			int s = allsky.width() / nbw;
@@ -377,8 +387,14 @@ void HipsSurvey::drawTile(int order, int pix, int drawOrder, int splitOrder, boo
 
 	if (order < drawOrder)
 	{
-		// XXX: Here we should check that all the childern tiles are loaded, in
-		// that case there is no need to render the parent.
+		// If all the children tiles are loaded, we can skip the parent.
+		int i;
+		for (i = 0; i < 4; i++)
+		{
+			HipsTile* child = getTile(order + 1, pix * 4 + i);
+			if (!child || child->texFader.currentValue() < 1.0) break;
+		}
+		if (i == 4) goto skip_render;
 	}
 
 	// Actually draw the tile, as a single quad.
@@ -421,6 +437,7 @@ int HipsSurvey::fillArrays(int order, int pix, int drawOrder, int splitOrder,
 						   bool outside, StelPainter* sPainter,
 						   QVector<Vec3d>& verts, QVector<Vec2f>& tex, QVector<uint16_t>& indices)
 {
+	Q_UNUSED(sPainter)
 	Mat3d mat3;
 	Vec3d pos;
 	Vec2f texPos;

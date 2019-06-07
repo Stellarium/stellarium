@@ -75,7 +75,8 @@ for url in urls:
         # replace the links with the new url.
         r = requests.head(url, allow_redirects=True)
         s = r.status_code
-        if s == 200: continue
+        if s == 200:
+            continue
     except Exception:
         s = u"err"
     print url.encode('utf-8')

@@ -26,6 +26,7 @@
 #include "StelObserver.hpp"
 #include "StelObjectMgr.hpp"
 #include "StelPropertyMgr.hpp"
+#include "RemoteSync.hpp"
 
 using namespace SyncProtocol;
 
@@ -116,7 +117,7 @@ StelPropertyEventSender::StelPropertyEventSender()
 void StelPropertyEventSender::sendStelPropChange(StelProperty* prop, const QVariant &val)
 {
 	//only send changes that can be applied on clients
-	if(prop->isSynchronizable())
+	if((prop->isSynchronizable()) && !(RemoteSync::isPropertyBlacklisted(prop->getId())))
 	{
 		StelPropertyUpdate msg;
 		msg.propId = prop->getId();
@@ -132,6 +133,8 @@ void StelPropertyEventSender::newClientConnected(SyncRemotePeer &client)
 	for (const auto* prop : propList)
 	{
 		if(!prop->isSynchronizable())
+			continue;
+		if (RemoteSync::isPropertyBlacklisted(prop->getId()))
 			continue;
 
 		StelPropertyUpdate msg;

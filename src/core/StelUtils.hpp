@@ -148,7 +148,7 @@ namespace StelUtils
 	//! Obtains a Vec3f from a string.
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector
-	//! @deprecated Use the >> operator from Vec3f class
+	//! @deprecated Use the >> operator from Vec3f class (Will be removed in version 0.20)
 	Vec3f strToVec3f(const QStringList& s);
 	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
 	Vec3f strToVec3f(const QString& s);
@@ -202,6 +202,12 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
+
+	//! Convert from spherical coordinates to Rectangular direction.
+	//! @param lng double* to store longitude in radian
+	//! @param lat double* to store latitude in radian
+	//! @param v the input 3D vector
+	void rectToSphe(double *lng, double *lat, const Vec3f &v);
 
 	//! Coordinate Transformation from equatorial to ecliptical
 	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
@@ -598,15 +604,18 @@ namespace StelUtils
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Montenbruck & Pfleger (2000) for DeltaT computation,
 	//! a data fit through the table of values found in Meeus, Astronomical algorithms (1991).
-	//! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000)
+	//! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000), p.181-182
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds or 0 if not 1825<=year<2005
 	double getDeltaTByMontenbruckPfleger(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of algorithm by Reingold & Dershowitz (1997, 2001, 2002, 2007) for DeltaT computation.
+	//! Implementation of algorithm by Reingold & Dershowitz (1997, 2001, 2002, 2007, 2018) for DeltaT computation.
 	//! This is again mostly a data fit based on the table in Meeus, Astronomical Algorithms (1991).
-	//! This is the version given in the 3rd edition (2007) which added the fit for 1700..1799 omitted from previous editions.
+	//! This is the version given in the 4rd edition ("the ultimate edition"; 2018) which added the fit
+	//! for -500..1699 and 2006..2150 omitted from previous editions.
+	//! Calendrical Calculations: The Ultimate Edition / Edward M. Reingold, Nachum Dershowitz - 4th Edition,
+	//! Cambridge University Press, 2018. - 660p. ISBN: 9781107057623, DOI: 10.1017/9781107415058
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByReingoldDershowitz(const double jDay);
@@ -711,6 +720,13 @@ namespace StelUtils
 	//! @param day
 	//! @return decimal year
 	double getDecYear(const int year, const int month, const int day);
+
+	//! Calculate fixed days (R.D.) from Gregorian date
+	//! @param year
+	//! @param month
+	//! @param day
+	//! @return days from Rata Die
+	int getFixedFromGregorian(const int year, const int month, const int day);
 
 	//! Comparison two string versions and return a result in range -1,0,1
 	//! @param v1 string for version 1

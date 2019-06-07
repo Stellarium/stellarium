@@ -59,6 +59,12 @@ StelPluginInfo RemoteSyncStelPluginInterface::getPluginInfo() const
 	return info;
 }
 
+
+// A list that holds properties that cannot be sync'ed for technical reasons.
+// Currently only HipsMgr.surveys cannot be synchronized.
+QStringList RemoteSync::propertyBlacklist;
+
+
 RemoteSync::RemoteSync()
 	: clientServerPort(20180)
 	, serverPort(20180)
@@ -75,6 +81,9 @@ RemoteSync::RemoteSync()
 
 	reconnectTimer.setSingleShot(true);
 	connect(&reconnectTimer, SIGNAL(timeout()), this, SLOT(connectToServer()));
+
+	// There are a few unsynchronizable properties. They must be listed here!
+	propertyBlacklist.push_back("HipsMgr.surveys");
 }
 
 RemoteSync::~RemoteSync()
@@ -154,7 +163,7 @@ void RemoteSync::init()
 	qCDebug(remoteSync)<<"Plugin initialized";
 
 	//parse command line args
-	QStringList args = StelApp::getCommandlineArguments();;
+	QStringList args = StelApp::getCommandlineArguments();
 	QString syncMode = argsGetOptionWithArg(args,"","--syncMode","").toString();
 	QString syncHost = argsGetOptionWithArg(args,"","--syncHost","").toString();
 	int syncPort = argsGetOptionWithArg(args,"","--syncPort",0).toInt();
@@ -449,4 +458,9 @@ QDebug operator<<(QDebug deb, RemoteSync::SyncState state)
 	}
 
 	return deb;
+}
+
+bool RemoteSync::isPropertyBlacklisted(const QString &name)
+{
+	return propertyBlacklist.contains(name);
 }

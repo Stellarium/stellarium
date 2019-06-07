@@ -40,7 +40,6 @@ protected:
         //! Initialize the dialog widgets and connect the signals/slots.
         virtual void createDialogContent();
 	Ui_ConfigureDSOColorsDialogForm *ui;
-
 };
 
 #endif // CONFIGUREDSOCOLORSDIALOG_HPP

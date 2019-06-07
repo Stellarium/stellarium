@@ -1,7 +1,7 @@
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_AUTOMOC ON)
 
-add_library(TelescopeControl_common
+add_library(TelescopeControl_common STATIC
     LogFile.hpp
     LogFile.cpp
     Socket.hpp

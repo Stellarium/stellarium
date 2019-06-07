@@ -115,6 +115,17 @@ endings''.\footnote{This is a very confusing default setting and in fact
   home directory.
 \end{description}
 
+\subsection{Customized Location}
+\label{sec:FilesAndDirectories:Custom}
+
+Some users\newFeature{v.0.19.0} may prefer non-standard locations for
+their own data, for example when the Windows \file{C:} drive (which
+usually contains user data), or the Linux \file{/home} partition has
+become too small to hold tens of high-resolution landscapes or
+detailed 3D sceneries. You can move the entire directory elsewhere and
+use an environment variable \texttt{STEL\_USERDIR} that contains the
+pathname.
+
 \section{Directory Structure}
 \label{sec:FilesAndDirectories:DirectoryStructure}
 
@@ -212,7 +223,7 @@ the Mac, or \program{nano}/\program{vi}/\program{gedit}/\program{emacs}/\program
 %The following sub-sections contain details on how to make commonly used
 %modifications to the configuration file. 
 A complete list of configuration file options and values may be found
-in appendix~\ref{sec:config.ini} Configuration File.
+in appendix~\ref{sec:config.ini}.
 
 
 \section{Getting Extra Data}
@@ -284,7 +295,6 @@ the \emph{installation directory} or the \emph{user directory}
 (see \ref{sec:FilesAndDirectories:DirectoryStructure}). Alternatively,
 if you have them already stored elsewhere, you may add the path to
 \file{config.ini} like:
-\newpage
 \begin{configfile}
 [astro]
 de430_path = C:/Astrodata/JPL_DE43x/linux_p1550p2650.430
@@ -315,12 +325,11 @@ GPS location depends on your operating system.
 
 On Linux, Mac-OS X and other Unixoid platforms, Stellarium preferrably
 should not connect directly to a GPS USB device, serial device,
-bluetooth device, etc., but uses a connection to the \program{gpsd}
+bluetooth device, etc., but use a connection to the \program{gpsd}
 daemon running on a computer in your network which provides GPS
 services concurrently for any interested application. In most cases,
 this will be a \program{gpsd} running on your localhost, receiving
 data from some GPS device plugged in via USB.
-
 Please follow instructions by the \program{gpsd}
 authors\footnote{\url{http://catb.org/gpsd/index.html}} to properly
 configure this system daemon.  A few hints:
@@ -465,7 +474,7 @@ For example, using the option \texttt{-c\ my\_config.ini} would resolve to the f
 -\/-sky-date         & date       & The initial date in \texttt{yyyymmdd} format. \\
 -\/-sky-time         & time       & The initial time in \texttt{hh:mm:ss} format. \\\midrule
 -\/-startup-script   & script name & The name of a script to run after the program has started. [\file{startup.ssc}] \\\midrule
--\/-fov              & angle      & The initial field of view in degrees. \\\midrule
+-\/-fov              & angle      & The initial vertical field of view in degrees. \\\midrule
 -\/-projection-type  & ptype      & The initial projection type (e.g. \texttt{perspective}). \\\midrule
 -\/-spout  or -S     & all or sky & Act as Spout sender (See section \ref{sec:CommandLineOptions:Special:Spout}).%
                                     \footnote{On Windows only}\footnote{This function requires running in OpenGL mode.}\\

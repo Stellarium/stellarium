@@ -36,12 +36,10 @@ Q_LOGGING_CATEGORY(stelOBJ,"stel.OBJ")
 StelOBJ::StelOBJ()
 	: m_isLoaded(false)
 {
-
 }
 
 StelOBJ::~StelOBJ()
 {
-
 }
 
 void StelOBJ::clear()

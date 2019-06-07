@@ -52,7 +52,6 @@ class Worksheet : public AbstractSheet
     Q_DECLARE_PRIVATE(Worksheet)
 
 public:
-
     bool write(const CellReference &row_column, const QVariant &value, const Format &format=Format());
     bool write(int row, int column, const QVariant &value, const Format &format=Format());
     QVariant read(const CellReference &row_column) const;
@@ -142,7 +141,6 @@ public:
     QVector<CellLocation> getFullCells(int* maxRow, int* maxCol);
 
 private:
-
     friend class DocumentPrivate;
     friend class Workbook;
     friend class ::WorksheetTest;

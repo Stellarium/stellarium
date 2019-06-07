@@ -135,7 +135,6 @@ signals:
 
 
 private:
-
 	//the http server
 	HttpListener* httpListener;
 	//the main request handler

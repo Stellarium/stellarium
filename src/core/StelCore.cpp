@@ -1011,8 +1011,6 @@ void StelCore::updateTransformMatrices()
 
 //		matHeliocentricEclipticJ2000ToAltAz =  Mat4d::translation(Vec3d(0.,0.,-position->getDistanceFromCenter())) * tmp.transpose() *
 //				Mat4d::translation(-position->getCenterVsop87Pos());
-
-
 	}
 	else
 	{
@@ -1272,12 +1270,29 @@ float StelCore::getUTCOffset(const double JD) const
 	{
 		//qWarning() << "JD " << QString("%1").arg(JD) << " out of bounds of QT help with GMT shift, using current datetime";
 		// Assumes the GMT shift was always the same before year -4710
+		// NOTE: QDateTime has no year 0, and therefore likely different leap year rules.
+		// Under which circumstances do we get invalid universal?
 		universal = QDateTime(QDate(-4710, month, day), QTime(hour, minute, second), Qt::UTC);
 	}
 
+#if defined(Q_OS_WIN)
+	if (abs(year)<3)
+	{
+		// Mitigate a QTBUG on Windows (GH #594).
+		// This bug causes offset to be MIN_INT in January to March, 1AD.
+		// We assume a constant offset in this remote history,
+		// so we construct yet another date to get a valid offset.
+		// Application of the named time zones is inappropriate in any case.
+		universal = QDateTime(QDate(3, month, day), QTime(hour, minute, second), Qt::UTC);
+	}
+#endif
 	StelLocation loc = getCurrentLocation();
 	QString tzName = getCurrentTimeZone();
 	QTimeZone tz(tzName.toUtf8());
+	if (!tz.isValid() && !QString("LMST LTST system_default").contains(tzName))
+	{
+		qWarning() << "Invalid timezone: " << tzName;
+	}
 
 	int shiftInSeconds = 0;
 	if (tzName=="system_default" || (loc.planetName=="Earth" && !tz.isValid() && !QString("LMST LTST").contains(tzName)))
@@ -1287,6 +1302,10 @@ float StelCore::getUTCOffset(const double JD) const
 		//times to UTC if their zones have different daylight saving time rules.
 		local.setTimeSpec(Qt::UTC);
 		shiftInSeconds = universal.secsTo(local);
+		if (abs(shiftInSeconds)>50000 || shiftInSeconds==INT_MIN)
+		{
+			qDebug() << "TZ system_default or invalid, At JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+		}
 	}
 	else
 	{
@@ -1297,13 +1316,58 @@ float StelCore::getUTCOffset(const double JD) const
 				shiftInSeconds = tz.offsetFromUtc(universal);
 			else
 				shiftInSeconds = tz.standardTimeOffset(universal);
+			if (abs(shiftInSeconds)>500000 || shiftInSeconds==INT_MIN)
+			{
+				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
+				// Trigger this with a named custom TZ like Europe/Stockholm.
+				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+				// an offset of INT_MIN
+				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+				qWarning() << "Universal reference date: " << universal.toString();
+			}
 		}
 		else
+		{
 			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
-
+		}
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
+	}
+	#ifdef Q_OS_WIN
+	// A dirty hack for report: https://github.com/Stellarium/stellarium/issues/686
+	// TODO: switch to IANA TZ on all operating systems
+	if (tzName=="Europe/Volgograd")
+		shiftInSeconds = 4*3600; // UTC+04:00
+	#endif
 
+	// Extraterrestrial: Either use the configured Terrestrial timezone, or even a pseudo-LMST based on planet's rotation speed?
+	if (loc.planetName!="Earth")
+	{
+		if (tz.isValid() && (JD>=StelCore::TZ_ERA_BEGINNING || getUseCustomTimeZone()))
+		{
+			if (getUseDST())
+				shiftInSeconds = tz.offsetFromUtc(universal);
+			else
+				shiftInSeconds = tz.standardTimeOffset(universal);
+			if (shiftInSeconds==INT_MIN) // triggered error
+			{
+				// Something very strange has happened. The Windows-only clause above already mitigated GH #594.
+				// Trigger this with a named custom TZ like Europe/Stockholm.
+				// Then try to wheel back some date in January-March from year 10 to 0. Instead of year 1, it jumps to 70,
+				// an offset of INT_MIN
+				qWarning() << "ERROR TRAPPED! --- Please submit a bug report with this logfile attached.";
+				qWarning() << "TZ" << tz << "valid, but at JD" << QString::number(JD, 'g', 11) << ", shift:" << shiftInSeconds;
+				qWarning() << "Universal reference date: " << universal.toString();
+			}
+		}
+		else
+		{
+			// TODO: This should give "mean solar time" for any planet.
+			// Combine rotation and orbit, or (for moons) rotation and orbit of parent planet.
+			// LTST is even worse, needs equation of time for other planets.
+			shiftInSeconds = 0; // For now, give UT
+		}
 	}
 
 	float shiftInHours = shiftInSeconds / 3600.0f;
@@ -1337,6 +1401,7 @@ void StelCore::setUseDST(const bool b)
 {
 	flagUseDST = b;
 	StelApp::getInstance().getSettings()->setValue("localization/flag_dst", b);
+	emit flagUseDSTChanged(b);
 }
 
 bool StelCore::getUseCustomTimeZone() const
@@ -1347,6 +1412,7 @@ bool StelCore::getUseCustomTimeZone() const
 void StelCore::setUseCustomTimeZone(const bool b)
 {
 	flagUseCTZ = b;
+	emit useCustomTimeZoneChanged(b);
 }
 
 double StelCore::getSolutionEquationOfTime(const double JDE) const
@@ -1768,8 +1834,8 @@ void StelCore::increaseTimeSpeed()
 	double s = getTimeRate();
 	if (s>=JD_SECOND) s*=10.;
 	else if (s<-JD_SECOND) s/=10.;
-	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
-	else if (s>=-JD_SECOND && s<0.) s=0.;
+	else if (s>=0.) s=JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -1779,8 +1845,8 @@ void StelCore::decreaseTimeSpeed()
 	double s = getTimeRate();
 	if (s>JD_SECOND) s/=10.;
 	else if (s<=-JD_SECOND) s*=10.;
-	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-	else if (s>0. && s<=JD_SECOND) s=0.;
+	else if (s<=0.) s=-JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -1789,8 +1855,8 @@ void StelCore::increaseTimeSpeedLess()
 	double s = getTimeRate();
 	if (s>=JD_SECOND) s*=2.;
 	else if (s<-JD_SECOND) s/=2.;
-	else if (s>=0. && s<JD_SECOND) s=JD_SECOND;
-	else if (s>=-JD_SECOND && s<0.) s=0.;
+	else if (s>=0.) s=JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -1799,8 +1865,8 @@ void StelCore::decreaseTimeSpeedLess()
 	double s = getTimeRate();
 	if (s>JD_SECOND) s/=2.;
 	else if (s<=-JD_SECOND) s*=2.;
-	else if (s>-JD_SECOND && s<=0.) s=-JD_SECOND;
-	else if (s>0. && s<=JD_SECOND) s=0.;
+	else if (s<=0.) s=-JD_SECOND;
+	else s=0.;
 	setTimeRate(s);
 }
 
@@ -2120,13 +2186,14 @@ void StelCore::setCurrentDeltaTAlgorithm(DeltaTAlgorithm algorithm)
 			deltaTfinish	= 2000;
 			break;
 		case ReingoldDershowitz:
-			// Reingold & Dershowitz (2002, 2007) algorithm for DeltaT
+			// Reingold & Dershowitz (2002, 2007, 2018) algorithm for DeltaT
 			// FIXME: n.dot
 			deltaTnDot = -26.0f; // n.dot = -26.0 "/cy/cy ???
 			deltaTfunc = StelUtils::getDeltaTByReingoldDershowitz;
 			// GZ: while not original work, it's based on Meeus and therefore the full implementation covers likewise approximately:
-			deltaTstart	= -400; //1620;
-			deltaTfinish	= 2100; //2019;
+			// AW: limits from 4th edition:
+			deltaTstart	= -500; //1620;
+			deltaTfinish	= 2150; //2019;
 			break;
 		case MontenbruckPfleger:
 			// Montenbruck & Pfleger (2000) algorithm for DeltaT
@@ -2322,7 +2389,7 @@ QString StelCore::getCurrentDeltaTAlgorithmDescription(void) const
 			description = q_("The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits for the recent past.").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case ReingoldDershowitz: //
-			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (3rd ed. 2007) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
+			description = q_("E. M. Reingold & N. Dershowitz present this polynomial data fit in <em>Calendrical Calculations</em> (4th ed. 2018) and in their <em>Calendrical Tabulations</em> (2002). It is based on Jean Meeus' <em>Astronomical Algorithms</em> (1991).").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
 			break;
 		case MorrisonStephenson2004: // PRIMARY SOURCE
 			description = q_("This important solution was published by L. V. Morrison and F. R. Stephenson in article <em>Historical values of the Earth's clock error %1T and the calculation of eclipses</em> (%2) with addendum in (%3).").arg(QChar(0x0394)).arg("<a href='http://adsabs.harvard.edu/abs/2004JHA....35..327M'>2004</a>").arg("<a href='http://adsabs.harvard.edu/abs/2005JHA....36..339M'>2005</a>").append(getCurrentDeltaTAlgorithmValidRangeDescription(jd, &marker));
@@ -2471,7 +2538,8 @@ double StelCore::getCurrentEpoch() const
 }
 
 // DE430/DE431 handling.
-// FIXME: GZ observes: When DE431 is not available, DE430 installed, but date outside, de430IsActive() should return false because computations go back to VSOP!.
+// NOTE: When DE431 is not available, DE430 installed, but date outside, de430IsActive() may be true but computations still go back to VSOP!
+// To test whether DE43x is really currently in use, test (EphemWrapper::use_de430(jd) || EphemWrapper::use_de431(jd))
 
 bool StelCore::de430IsAvailable()
 {
@@ -2620,8 +2688,8 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 	int entry=0;
 	while (iau_constlineVec.at(entry).decLow > dec1875)
 		entry++;
-	while (entry<iau_constlineVec.size()){
-
+	while (entry<iau_constlineVec.size())
+	{
 		while (iau_constlineVec.at(entry).RAhigh <= RA1875)
 			entry++;
 		while (iau_constlineVec.at(entry).RAlow >= RA1875)

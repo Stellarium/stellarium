@@ -157,8 +157,6 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 		}
 		else
 		{
-			StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
-			StelObjectP obj = omgr->searchByName(name);
 			QVariantMap infoMap=StelObjectMgr::getObjectInfo(obj);
 			QJsonObject infoObj=QJsonObject::fromVariantMap(infoMap);
 
@@ -167,7 +165,6 @@ void ObjectService::get(const QByteArray& operation, const APIParameters &parame
 			infoObj.insert("ambientLum", QJsonValue(lmgr->getAtmosphereAverageLuminance()));
 			infoObj.insert("ambientInt", QJsonValue(lmgr->getCurrentLandscape()->getBrightness()));
 			response.writeJSON(QJsonDocument(infoObj));
-
 		}
 	}
 	else if (operation == "listobjecttypes")

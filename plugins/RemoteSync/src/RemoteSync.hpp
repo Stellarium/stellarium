@@ -93,6 +93,8 @@ public:
 	ClientBehavior getQuitBehavior() const { return quitBehavior; }
 
 	SyncState getState() const { return state; }
+	//! Very few propertries cannot be synchronized for technical reasons.
+	static bool isPropertyBlacklisted(const QString &name);
 
 public slots:
 	void setClientServerHost(const QString& clientServerHost);
@@ -185,6 +187,9 @@ private:
 
 	// GUI
 	RemoteSyncDialog* configDialog;
+	// A stringlist which contains property names which cannot be synchronized.
+	// The list currently is fixed.
+	static QStringList propertyBlacklist;
 };
 
 Q_DECLARE_METATYPE(RemoteSync::SyncState)

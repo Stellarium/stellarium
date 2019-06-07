@@ -283,16 +283,19 @@ QString Comet::getInfoString(const StelCore *core, const InfoStringGroup &flags)
 		float coma = floor(tailFactors[0]*AU/1000.0f)*1000.0f;
 		double tail = tailFactors[1]*AU;
 		double distanceKm = AU * getJ2000EquatorialPos(core).length();
+		// Try to estimate tail length in degrees.
+		// TODO: Take projection effect into account!
+		// The estimates here assume that the tail is seen from the side.
 		QString comaDeg, tailDeg;
 		if (withDecimalDegree)
 		{
-			comaDeg = StelUtils::radToDecDegStr(asin(coma/distanceKm),4,false,true);
-			tailDeg = StelUtils::radToDecDegStr(asin(tail/distanceKm),4,false,true);
+			comaDeg = StelUtils::radToDecDegStr(atan(coma/distanceKm),4,false,true);
+			tailDeg = StelUtils::radToDecDegStr(atan(tail/distanceKm),4,false,true);
 		}
 		else
 		{
-			comaDeg = StelUtils::radToDmsStr(asin(coma/distanceKm));
-			tailDeg = StelUtils::radToDmsStr(asin(tail/distanceKm));
+			comaDeg = StelUtils::radToDmsStr(atan(coma/distanceKm));
+			tailDeg = StelUtils::radToDmsStr(atan(tail/distanceKm));
 		}
 		if (coma>1e6)
 			oss << QString("%1: %2 %3 (%4)").arg(comaEst, QString::number(coma*1e-6, 'G', 3), Mkm, comaDeg) << "<br />";
@@ -661,8 +664,9 @@ void Comet::computeComa(const float diameter)
 // Parabola equation: z=x²/2p.
 // xOffset for the dust tail, this may introduce a bend. Units are x per sqrt(z).
 void Comet::computeParabola(const float parameter, const float radius, const float zshift,
-			    QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr, QVector<unsigned short> &indices, const float xOffset) {
-
+						  QVector<Vec3d>& vertexArr, QVector<float>& texCoordArr,
+						  QVector<unsigned short> &indices, const float xOffset)
+{
 	// keep the array and replace contents. However, using replace() is only slightly faster.
 	if (vertexArr.length() < ((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1)))
 		vertexArr.resize((COMET_TAIL_SLICES*COMET_TAIL_STACKS+1));

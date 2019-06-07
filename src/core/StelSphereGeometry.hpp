@@ -113,7 +113,6 @@ public:
 	static int metaTypeId;
 
 private:
-
 	//! Initialize stuff to allow SphericalRegionP to be used with Qt meta type system.
 	static int initialize();
 };

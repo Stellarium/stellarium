@@ -414,6 +414,29 @@ OcularsGuiPanel::~OcularsGuiPanel()
 {
 	if (borderPath)
 		delete borderPath;
+
+	delete buttonCrosshairs; buttonCrosshairs = Q_NULLPTR;
+	delete buttonCcd; buttonCcd = Q_NULLPTR;
+	delete buttonTelrad;	buttonTelrad = Q_NULLPTR;
+	delete buttonConfiguration; buttonConfiguration = Q_NULLPTR;
+	delete fieldOcularFl; fieldOcularFl = Q_NULLPTR;
+	delete fieldOcularAfov; fieldOcularAfov = Q_NULLPTR;
+	delete fieldCcdName; fieldCcdName = Q_NULLPTR;
+	delete fieldCcdDimensions; fieldCcdDimensions = Q_NULLPTR;
+	delete fieldCcdHScale; fieldCcdHScale = Q_NULLPTR;
+	delete fieldCcdVScale; fieldCcdVScale = Q_NULLPTR;
+	delete fieldCcdRotation; fieldCcdRotation = Q_NULLPTR;
+	delete fieldTelescopeName; fieldTelescopeName = Q_NULLPTR;
+	delete fieldMagnification; fieldMagnification = Q_NULLPTR;
+	delete fieldExitPupil; fieldExitPupil = Q_NULLPTR;
+	delete fieldFov; fieldFov = Q_NULLPTR;
+	delete fieldRayleighCriterion; fieldRayleighCriterion = Q_NULLPTR;
+	delete fieldDawesCriterion; fieldDawesCriterion = Q_NULLPTR;
+	delete fieldAbbeyCriterion; fieldAbbeyCriterion = Q_NULLPTR;
+	delete fieldSparrowCriterion; fieldSparrowCriterion = Q_NULLPTR;
+	delete fieldVisualResolution; fieldVisualResolution = Q_NULLPTR;
+	delete fieldLensName; fieldLensName = Q_NULLPTR;
+	delete fieldLensMultipler; fieldLensMultipler = Q_NULLPTR;
 }
 
 void OcularsGuiPanel::showOcularGui()
@@ -586,7 +609,7 @@ void OcularsGuiPanel::updateLensControls()
 	fieldLensName->setPlainText(fullName);
 	fieldLensMultipler->setPlainText(multiplerString);
 	fieldOcularFl->setToolTip(q_("Focal length of eyepiece"));
-	
+
 	qreal posX = 0.;
 	qreal posY = 0.;
 	qreal widgetWidth = 0.;
@@ -618,7 +641,7 @@ void OcularsGuiPanel::updateLensControls()
 
 	int oindex = ocularsPlugin->selectedOcularIndex;
 	Ocular* ocular = ocularsPlugin->oculars[oindex];
-	if (ocular->isBinoculars())
+	if (ocular->isBinoculars() && ocularsPlugin->flagShowOculars) // Hide the lens info for binoculars in eyepiece mode only
 		setLensControlsVisible(false);
 	else
 		setLensControlsVisible(true);
@@ -840,7 +863,7 @@ void OcularsGuiPanel::updateTelescopeControls()
 		magnificationString.append(QString(" (%1D)").arg(QString::number(mag/telescope->diameter(), 'f', 2)));
 		QString magnificationLabel = QString(q_("Magnification: %1")).arg(magnificationString);
 		fieldMagnification->setPlainText(magnificationLabel);
-		fieldMagnification->setPos(posX, posY);		
+		fieldMagnification->setPos(posX, posY);
 		posY += fieldMagnification->boundingRect().height();
 		widgetHeight += fieldMagnification->boundingRect().height();
 
@@ -1101,7 +1124,7 @@ void OcularsGuiPanel::setControlsColor(const QColor& color)
 	Q_ASSERT(fieldSparrowCriterion);
 	Q_ASSERT(fieldVisualResolution);
 	Q_ASSERT(fieldLensName);
-	Q_ASSERT(fieldLensMultipler);	
+	Q_ASSERT(fieldLensMultipler);
 
 	fieldOcularName->setDefaultTextColor(color);
 	fieldOcularFl->setDefaultTextColor(color);

@@ -74,7 +74,7 @@ StelPluginInfo ExoplanetsStelPluginInterface::getPluginInfo() const
 	info.id = "Exoplanets";
 	info.displayedName = N_("Exoplanets");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("This plugin plots the position of stars with exoplanets. Exoplanets data is derived from the 'Extrasolar Planets Encyclopaedia' at exoplanet.eu");
 	info.version = EXOPLANETS_PLUGIN_VERSION;
 	info.license = EXOPLANETS_PLUGIN_LICENSE;
@@ -230,7 +230,6 @@ void Exoplanets::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
@@ -311,7 +310,6 @@ StelObjectP Exoplanets::searchByName(const QString& englishName) const
 					return qSharedPointerCast<StelObject>(eps);
 			}
 		}
-
 	}
 
 	return Q_NULLPTR;
@@ -595,7 +593,6 @@ void Exoplanets::setEPMap(const QVariantMap& map)
 			EPCountAll += eps->getCountExoplanets();
 			EPCountPH += eps->getCountHabitableExoplanets();
 		}
-
 	}
 }
 
@@ -1002,7 +999,6 @@ void Exoplanets::downloadComplete(QNetworkReply *reply)
 
 		lastUpdate = QDateTime::currentDateTime();
 		conf->setValue("Exoplanets/last_update", lastUpdate.toString(Qt::ISODate));
-
 	}
 	catch (std::runtime_error &e)
 	{

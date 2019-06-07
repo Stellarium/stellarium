@@ -702,7 +702,6 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 					oss << QString("%1: %2").arg(q_("Eclipse magnitude")).arg(QString::number(eclipseMagnitude, 'f', 3)) << "<br />";
 				}
 			}
-
 		}
 	}
 
@@ -735,7 +734,6 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("velocity", getEclipticVelocity().toString());
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
 		map.insert("scale", sphereScale);
-
 	}
 
 	return map;
@@ -928,7 +926,6 @@ void Planet::computePosition(const double dateJDE)
 
 		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
 		{
-
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
 				if(d + delta_points >= ORBIT_SEGMENTS-1 )
@@ -960,7 +957,6 @@ void Planet::computePosition(const double dateJDE)
 		}
 		else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS  && orbitCached)
 		{
-
 			for( int d=ORBIT_SEGMENTS-1; d>=0; d-- )
 			{
 				if(d + delta_points < 0 )
@@ -987,11 +983,9 @@ void Planet::computePosition(const double dateJDE)
 			}
 
 			lastOrbitJDE = new_date;
-
 		}
 		else if( delta_points || !orbitCached)
 		{
-
 			// update all points (less efficient)
 			for( int d=0; d<ORBIT_SEGMENTS; d++ )
 			{
@@ -1018,7 +1012,6 @@ void Planet::computePosition(const double dateJDE)
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 
 		lastJDE = dateJDE;
-
 	}
 	else if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
@@ -1029,7 +1022,6 @@ void Planet::computePosition(const double dateJDE)
 				orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJDE = dateJDE;
 	}
-
 }
 
 // Compute the transformation matrix from the local Planet coordinate system to the parent Planet coordinate system.
@@ -1472,8 +1464,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinx) + 1.25*sinx*sinx; // ExplSup2013: added term as (10.81)
-					return -8.88 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx; // ExplSup2013: added term as (10.81)
+					return -8.88 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -7.19 + d + 0.002*phaseDeg;
@@ -1482,8 +1474,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 				if (englishName=="Pluto")
 					return -1.01 + d;
 
-				// AW2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
-				//         FIXME: Need experimental data to fitting to real world or the scientific paper with description of model.
+				// AW 2017: I've added special case for Jupiter's moons when they are in the shadow of Jupiter.
+				// TODO: Need experimental data to fitting to real world or the scientific paper with description of model.
 				// GZ 2017-09: Phase coefficients for I and III corrected, based on original publication (Stebbins&Jacobsen 1928) now.
 				if (englishName=="Io")
 					return shadowFactor<1.0 ? 21.0 : (-1.68 + d + phaseDeg*(0.046  - 0.0010 *phaseDeg));
@@ -1531,8 +1523,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinx=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinx) + 1.25*sinx*sinx;
-					return -8.88 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinx) + 1.25*sinx*sinx;
+					return -8.88 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -7.19 + d + 0.0028*phaseDeg;
@@ -1572,8 +1564,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-					return -8.68 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.68 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -6.85 + d;
@@ -1609,8 +1601,8 @@ float Planet::getVMagnitude(const StelCore* core) const
 					double lambda=atan2(saturnEarth[1], saturnEarth[0]);
 					double beta=atan2(saturnEarth[2], std::sqrt(saturnEarth[0]*saturnEarth[0]+saturnEarth[1]*saturnEarth[1]));
 					const double sinB=sin(i)*cos(beta)*sin(lambda-Omega)-cos(i)*sin(beta);
-					double rings = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
-					return -8.88 + d + 0.044*phaseDeg + rings;
+					double ringsIllum = -2.6*fabs(sinB) + 1.25*sinB*sinB; // sinx=sinB, saturnicentric latitude of earth. longish, see Meeus.
+					return -8.88 + d + 0.044*phaseDeg + ringsIllum;
 				}
 				if (englishName=="Uranus")
 					return -7.19f + d;

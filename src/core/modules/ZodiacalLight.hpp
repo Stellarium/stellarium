@@ -115,7 +115,7 @@ public slots:
 
 private slots:
 	//! connect to StelCore to force-update ZL.
-	void handleLocationChanged(StelLocation loc);
+	void handleLocationChanged(const StelLocation &loc);
 
 signals:
 	void zodiacalLightDisplayedChanged(const bool displayed);

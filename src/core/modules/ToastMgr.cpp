@@ -55,7 +55,7 @@ void ToastMgr::init()
 	survey->setParent(this);
 
 	// Hide deep-sky survey by default
-	setFlagSurveyShow(conf->value("astro/flag_toast_survey", false).toBool());
+	setFlagShow(conf->value("astro/flag_toast_survey", false).toBool());
 
 	addAction("actionShow_Toast_Survey", N_("Display Options"), N_("Digitized Sky Survey (TOAST)"), "surveyDisplayed");
 }
@@ -68,7 +68,7 @@ void ToastMgr::deinit()
 
 void ToastMgr::draw(StelCore* core)
 {
-	if (!getFlagSurveyShow())
+	if (!getFlagShow())
 		return;
 
 	StelPainter sPainter(core->getProjection(StelCore::FrameJ2000));
@@ -90,7 +90,7 @@ double ToastMgr::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-void ToastMgr::setFlagSurveyShow(const bool displayed)
+void ToastMgr::setFlagShow(const bool displayed)
 {
 	if (*fader != displayed)
 	{
@@ -100,7 +100,19 @@ void ToastMgr::setFlagSurveyShow(const bool displayed)
 	}
 }
 
-bool ToastMgr::getFlagSurveyShow() const
+bool ToastMgr::getFlagShow() const
 {
 	return *fader;
+}
+
+void ToastMgr::setFlagSurveyShow(bool displayed)
+{
+	qWarning() << "WARNING: ToastMgr.setFlagSurveyShow() is deprecated and will soon be removed. Use ToastMgr.setFlagShow() instead.";
+	setFlagShow(displayed);
+}
+
+bool ToastMgr::getFlagSurveyShow(void) const
+{
+	qWarning() << "WARNING: ToastMgr.getFlagSurveyShow() is deprecated and will soon be removed. Use ToastMgr.getFlagShow() instead.";
+	return getFlagShow();
 }

@@ -62,7 +62,8 @@ ConstellationMgr::ConstellationMgr(StarMgr *_hip_stars)
 	  boundariesDisplayed(0),
 	  linesDisplayed(0),
 	  namesDisplayed(0),
-	  constellationLineThickness(1)
+	  constellationLineThickness(1),
+	  constellationBoundariesThickness(1)
 {
 	setObjectName("ConstellationMgr");
 	Q_ASSERT(hipStarMgr);
@@ -87,7 +88,7 @@ void ConstellationMgr::init()
 	Q_ASSERT(conf);
 
 	lastLoadedSkyCulture = "dummy";
-	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 14).toInt());
+	asterFont.setPixelSize(conf->value("viewing/constellation_font_size", 15).toInt());
 	setFlagLines(conf->value("viewing/flag_constellation_drawing").toBool());
 	setFlagLabels(conf->value("viewing/flag_constellation_name").toBool());
 	setFlagBoundaries(conf->value("viewing/flag_constellation_boundaries",false).toBool());	
@@ -97,6 +98,7 @@ void ConstellationMgr::init()
 	setFlagIsolateSelected(conf->value("viewing/flag_constellation_isolate_selected", false).toBool());
 	setFlagConstellationPick(conf->value("viewing/flag_constellation_pick", false).toBool());
 	setConstellationLineThickness(conf->value("viewing/constellation_line_thickness", 1).toInt());
+	setConstellationLineThickness(conf->value("viewing/constellation_boundaries_thickness", 1).toInt());
 
 	QString starloreDisplayStyle=conf->value("viewing/constellation_name_style", "translated").toString();
 	if (starloreDisplayStyle=="translated")
@@ -208,19 +210,20 @@ void ConstellationMgr::updateSkyCulture(const QString& skyCultureDir)
 		if (idx==1)
 		{
 			// boundaries = own
-			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
+			fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellation_boundaries.dat");
+			if (fic.isEmpty()) // Check old file name (backward compatibility)
+				fic = StelFileMgr::findFile("skycultures/" + skyCultureDir + "/constellations_boundaries.dat");
 		}
 		else
 		{
 			// boundaries = generic
-			fic = StelFileMgr::findFile("data/constellations_boundaries.dat");
+			fic = StelFileMgr::findFile("data/constellation_boundaries.dat");
 		}
 
 		if (fic.isEmpty())
 			qWarning() << "ERROR loading constellation boundaries file: " << fic;
 		else
 			loadBoundaries(fic);
-
 	}
 
 	lastLoadedSkyCulture = skyCultureDir;
@@ -313,7 +316,6 @@ void ConstellationMgr::deselectConstellations(void)
 
 		selected.clear();
 	}
-
 }
 
 void ConstellationMgr::selectAllConstellations()
@@ -413,6 +415,18 @@ void ConstellationMgr::setConstellationLineThickness(const int thickness)
 			constellationLineThickness = 1;
 
 		emit constellationLineThicknessChanged(thickness);
+	}
+}
+
+void ConstellationMgr::setConstellationBoundariesThickness(const int thickness)
+{
+	if(thickness!=constellationBoundariesThickness)
+	{
+		constellationBoundariesThickness = thickness;
+		if (constellationBoundariesThickness<=0) // The line can not be negative or zero thickness
+			constellationBoundariesThickness = 1;
+
+		emit constellationBoundariesThicknessChanged(thickness);
 	}
 }
 
@@ -592,7 +606,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 			QVector<Vec3d> contour;
 			contour.reserve(texCoords.size());
 			for (const auto& v : texCoords)
-				contour << X * Vec3d(v[0]*texSizeX, v[1]*texSizeY, 0.);
+				contour << X * Vec3d((double)v[0] * texSizeX, (double)v[1] * texSizeY, 0.);
 
 			cons->artPolygon.vertex=contour;
 			cons->artPolygon.texCoords=texCoords;
@@ -725,6 +739,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 		return;
 	}
 
+	constellationsEnglishNames.clear();
+
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
@@ -781,6 +797,8 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 				// Some skycultures already have empty nativeNames. Fill those.
 				if (aster->nativeName.isEmpty())
 					aster->nativeName=aster->englishName;
+
+				constellationsEnglishNames << aster->englishName;
 			}
 			else
 			{
@@ -790,6 +808,11 @@ void ConstellationMgr::loadNames(const QString& namesFile)
 	}
 	commonNameFile.close();
 	qDebug() << "Loaded" << readOk << "/" << totalRecords << "constellation names";
+}
+
+QStringList ConstellationMgr::getConstellationsEnglishNames()
+{
+	return  constellationsEnglishNames;
 }
 
 void ConstellationMgr::loadSeasonalRules(const QString& rulesFile)
@@ -1205,7 +1228,6 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 {
 	if (c != Q_NULLPTR)
 	{
-
 		for (auto iter = selected.begin(); iter != selected.end();)
 		{
 			if( (*iter)->getEnglishName() == c->getEnglishName() )
@@ -1221,7 +1243,6 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 		// If no longer any selection, restore all flags on all constellations
 		if (selected.empty())
 		{
-
 			// Otherwise apply standard flags to all constellations
 			for (auto* constellation : constellations)
 			{
@@ -1232,11 +1253,9 @@ void ConstellationMgr::unsetSelectedConst(Constellation * c)
 			}
 
 			Constellation::singleSelected = false; // For boundaries
-
 		}
 		else if(isolateSelected)
 		{
-
 			// No longer selected constellation
 			c->setFlagLines(false);
 			c->setFlagLabels(false);
@@ -1278,7 +1297,7 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 	QString consname, record, data = "";
 	i = 0;
 
-	// Added support of comments for constellations_boundaries.dat file
+	// Added support of comments for constellation_boundaries.dat file
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	while (!dataFile.atEnd())
 	{
@@ -1356,10 +1375,16 @@ bool ConstellationMgr::loadBoundaries(const QString& boundaryFile)
 void ConstellationMgr::drawBoundaries(StelPainter& sPainter) const
 {
 	sPainter.setBlending(false);
+	if (constellationBoundariesThickness>1)
+		sPainter.setLineWidth(constellationBoundariesThickness); // set line thickness
+	sPainter.setLineSmooth(true);
 	for (auto* constellation : constellations)
 	{
 		constellation->drawBoundaryOptim(sPainter);
 	}
+	if (constellationBoundariesThickness>1)
+		sPainter.setLineWidth(1); // restore line thickness
+	sPainter.setLineSmooth(false);
 }
 
 StelObjectP ConstellationMgr::searchByNameI18n(const QString& nameI18n) const

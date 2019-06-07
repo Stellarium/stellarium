@@ -208,8 +208,9 @@ double StelObserver::getDistanceFromCenter(void) const
 	const double a=getHomePlanet()->getRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
-	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
-		return a * bByA;
+	// Details: https://github.com/Stellarium/stellarium/issues/391
+	//if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
+	//	return a * bByA;
 
 	const double latRad=currentLocation.latitude*(M_PI/180.0);
 	const double u = atan( bByA * tan(latRad));
@@ -237,8 +238,9 @@ Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
 	const double a=getHomePlanet()->getRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
-	if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
-		return a * bByA;
+	// Details: https://github.com/Stellarium/stellarium/issues/391
+	//if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
+	//	return a * bByA;
 
 	const double latRad=currentLocation.latitude*(M_PI/180.0);
 	const double u = atan( bByA * tan(latRad));

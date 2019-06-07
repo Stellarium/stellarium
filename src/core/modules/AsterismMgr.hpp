@@ -104,11 +104,11 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching asterism object's pointer if exists or Q_NULLPTR
-	//! @param nameI18n The case in-sensistive asterism name
+	//! @param nameI18n The case in-sensitive asterism name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Return the matching asterism if exists or Q_NULLPTR
@@ -191,6 +191,9 @@ public slots:
 	void setRayHelperThickness(const int thickness);
 	//! Get the thickness of ray helper of the asterisms
 	int getRayHelperThickness() const { return rayHelperThickness; }
+
+	//! @return true if asterism lines is defined
+	bool isLinesDefined() { return hasAsterism; }
 
 signals:
 	void fontSizeChanged(const float newSize) const;

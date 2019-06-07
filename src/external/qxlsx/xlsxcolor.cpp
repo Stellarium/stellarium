@@ -30,13 +30,11 @@ XlsxColor::XlsxColor(const QColor &color)
 XlsxColor::XlsxColor(const QString &theme, const QString &tint)
     :val(QStringList()<<theme<<tint)
 {
-
 }
 
 XlsxColor::XlsxColor(int index)
     :val(index)
 {
-
 }
 
 bool XlsxColor::isRgbColor() const

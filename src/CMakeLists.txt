@@ -11,6 +11,7 @@ ENDIF()
 
 SET(stellarium_lib_SRCS
      core/Dithering.hpp
+     core/SaturationShader.hpp
      core/healpix.c
      core/StelAudioMgr.hpp
      core/StelAudioMgr.cpp
@@ -185,6 +186,8 @@ SET(stellarium_lib_SRCS
      core/modules/HipsMgr.cpp
      core/modules/LabelMgr.hpp
      core/modules/LabelMgr.cpp
+     core/modules/MarkerMgr.hpp
+     core/modules/MarkerMgr.cpp
      core/modules/Landscape.cpp
      core/modules/Landscape.hpp
      core/modules/LandscapeMgr.cpp
@@ -199,6 +202,7 @@ SET(stellarium_lib_SRCS
      core/modules/MilkyWay.hpp
      core/modules/Nebula.cpp
      core/modules/Nebula.hpp
+     core/modules/NebulaList.hpp
      core/modules/NebulaMgr.cpp
      core/modules/NebulaMgr.hpp
      core/modules/Orbit.cpp
@@ -465,7 +469,7 @@ IF(GENERATE_STELMAINLIB)
      #stelMain should be after the plug-ins, otherwise the build crashes
      TARGET_LINK_LIBRARIES(stellarium stelMain ${winMMLib})
 ELSE()
-     ADD_LIBRARY(stelMain ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
+     ADD_LIBRARY(stelMain STATIC ${stellarium_lib_SRCS} ${stellarium_RES_CXX})
      TARGET_LINK_LIBRARIES(stelMain ${STELMAIN_DEPS})
      ADD_EXECUTABLE(stellarium WIN32 ${stellarium_exe_SRCS})
      TARGET_LINK_LIBRARIES(stellarium ${winMMLib} ${STELMAIN_DEPS} stelMain)
@@ -489,12 +493,6 @@ ENDIF(MSVC)
 
 INSTALL(TARGETS stellarium DESTINATION bin)
 IF(WIN32)
-#     ADD_CUSTOM_COMMAND(TARGET stellarium
-#          POST_BUILD
-#          COMMAND "${WINDEPLOYQT_COMMAND}" --dir ${CMAKE_INSTALL_PREFIX}/qt5stuff --no-translations --compiler-runtime $<TARGET_FILE:stellarium>
-#          COMMENT "Running windeployqt..."
-#          VERBATIM
-#     )
      INSTALL(CODE
         "
          EXECUTE_PROCESS(
@@ -507,8 +505,25 @@ IF(WIN32)
              OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.log\"
              ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt.err\"
          )
+         MESSAGE(\"Running windeployqt...\")
         "
      )
+     IF(GENERATE_STELMAINLIB)
+          INSTALL(CODE
+             "
+              EXECUTE_PROCESS(
+                  COMMAND \"${WINDEPLOYQT_COMMAND}\"
+                          --dir \"\${CMAKE_INSTALL_PREFIX}/qt5stuff\"
+                          --no-translations
+                          --compiler-runtime
+                          \"\${CMAKE_INSTALL_PREFIX}/lib/libstelMain.dll\"
+                  WORKING_DIRECTORY \"\${CMAKE_INSTALL_PRERIX}/bin\"
+                  OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.log\"
+                  ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/windeployqt-dll.err\"
+         )
+        "
+     )
+     ENDIF()
 ENDIF()
 
 SET_TARGET_PROPERTIES(stelMain PROPERTIES FOLDER "src/core")
@@ -576,6 +591,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testStelJsonParser testStelJsonParser)
     SET_TARGET_PROPERTIES(testStelJsonParser PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testStelIniParser_SRCS
+        tests/testStelIniParser.hpp
+        tests/testStelIniParser.cpp
+    )
+    ADD_EXECUTABLE(testStelIniParser ${tests_testStelIniParser_SRCS})
+    TARGET_LINK_LIBRARIES(testStelIniParser ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelIniParser)
+    ADD_TEST(testStelIniParser testStelIniParser)
+    SET_TARGET_PROPERTIES(testStelIniParser PROPERTIES FOLDER "src/tests")
+
     SET(tests_testStelVertexArray_SRCS
         tests/testStelVertexArray.hpp
         tests/testStelVertexArray.cpp
@@ -606,6 +631,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testConversions testConversions)
     SET_TARGET_PROPERTIES(testConversions PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testComputations_SRCS
+        tests/testComputations.hpp
+        tests/testComputations.cpp
+    )
+    ADD_EXECUTABLE(testComputations ${tests_testComputations_SRCS})
+    TARGET_LINK_LIBRARIES(testComputations ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testComputations)
+    ADD_TEST(testComputations testComputations)
+    SET_TARGET_PROPERTIES(testComputations PROPERTIES FOLDER "src/tests")
+
     SET(tests_testExtinction_SRCS
         tests/testExtinction.hpp
         tests/testExtinction.cpp
@@ -626,6 +661,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testRefraction testRefraction)
     SET_TARGET_PROPERTIES(testRefraction PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testAirmass_SRCS
+        tests/testAirmass.hpp
+        tests/testAirmass.cpp
+    )
+    ADD_EXECUTABLE(testAirmass ${tests_testAirmass_SRCS})
+    TARGET_LINK_LIBRARIES(testAirmass ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testAirmass)
+    ADD_TEST(testAirmass testAirmass)
+    SET_TARGET_PROPERTIES(testAirmass PROPERTIES FOLDER "src/tests")
+
     SET(tests_testPrecession_SRCS
         tests/testPrecession.hpp
         tests/testPrecession.cpp
@@ -645,5 +690,19 @@ IF(ENABLE_TESTING)
     ADD_DEPENDENCIES(buildTests testEphemeris)
     ADD_TEST(testEphemeris testEphemeris)
     SET_TARGET_PROPERTIES(testEphemeris PROPERTIES FOLDER "src/tests")
+    SET_TESTS_PROPERTIES(testEphemeris PROPERTIES
+        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
+
+    SET(tests_testStelSkyCultureMgr_SRCS
+        tests/testStelSkyCultureMgr.hpp
+        tests/testStelSkyCultureMgr.cpp
+    )
+    ADD_EXECUTABLE(testStelSkyCultureMgr ${tests_testStelSkyCultureMgr_SRCS})
+    TARGET_LINK_LIBRARIES(testStelSkyCultureMgr ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelSkyCultureMgr)
+    ADD_TEST(testStelSkyCultureMgr testStelSkyCultureMgr)
+    SET_TARGET_PROPERTIES(testStelSkyCultureMgr PROPERTIES FOLDER "src/tests")
+    SET_TESTS_PROPERTIES(testStelSkyCultureMgr PROPERTIES
+        ENVIRONMENT "STELLARIUM_DATA_ROOT=${PROJECT_SOURCE_DIR}")
 
 ENDIF (ENABLE_TESTING)

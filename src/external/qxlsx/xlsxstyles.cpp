@@ -1044,7 +1044,6 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
         reader.readNextStartElement();
         if (reader.tokenType() == QXmlStreamReader::StartElement) {
             if (reader.name() == QLatin1String("xf")) {
-
                 Format format;
                 QXmlStreamAttributes xfAttrs = reader.attributes();
 
@@ -1160,7 +1159,6 @@ bool Styles::readCellXfs(QXmlStreamReader &reader)
 
                         if (alignAttrs.hasAttribute(QLatin1String("shrinkToFit")))
                             format.setShrinkToFit(true);
-
                     }
                 }
 
@@ -1235,7 +1233,6 @@ bool Styles::readColors(QXmlStreamReader &reader)
             if (reader.name() == QLatin1String("indexedColors")) {
                 readIndexedColors(reader);
             } else if (reader.name() == QLatin1String("mruColors")) {
-
             }
         }
     }
@@ -1275,11 +1272,9 @@ bool Styles::loadFromXmlFile(QIODevice *device)
             } else if (reader.name() == QLatin1String("borders")) {
                 readBorders(reader);
             } else if (reader.name() == QLatin1String("cellStyleXfs")) {
-
             } else if (reader.name() == QLatin1String("cellXfs")) {
                 readCellXfs(reader);
             } else if (reader.name() == QLatin1String("cellStyles")) {
-
             } else if (reader.name() == QLatin1String("dxfs")) {
                 readDxfs(reader);
             } else if (reader.name() == QLatin1String("colors")) {

@@ -64,7 +64,6 @@ MeteorShowersMgr::~MeteorShowersMgr()
 {
 	delete m_configDialog;
 	delete m_searchDialog;
-	delete m_networkManager;
 }
 
 void MeteorShowersMgr::init()
@@ -616,9 +615,9 @@ void MeteorShowersMgr::displayMessage(const QString& message, const QString hexC
 	m_messageIDs << GETSTELMODULE(LabelMgr)->labelScreen(message, 30, 30 + (20 * m_messageIDs.count()), true, 16, hexColor, false, 9000);
 }
 
-void MeteorShowersMgr::locationChanged(StelLocation location)
+void MeteorShowersMgr::locationChanged(const StelLocation &location)
 {
-	m_onEarth = location.planetName == "Earth";
+	m_onEarth = (location.planetName == "Earth");
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -637,7 +636,7 @@ StelPluginInfo MeteorShowersStelPluginInterface::getPluginInfo() const
 	info.id = "MeteorShowers";
 	info.displayedName = N_("Meteor Showers");
 	info.authors = "Marcos Cardinot";
-	info.contact = "mcardinot@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_(
 	"<p>"
 		"This plugin enables you to simulate periodic meteor showers and "

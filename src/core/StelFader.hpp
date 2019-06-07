@@ -111,7 +111,6 @@ public:
 			state = s;
 			counter = duration - counter;
 		} else {
-
 			if (state == s) return *this;  // no change
 
 			// set up and begin transit

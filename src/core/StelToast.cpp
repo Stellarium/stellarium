@@ -159,7 +159,6 @@ void ToastTile::prepareDraw(Vec3f color)
 			Vec3f thisColor=Vec3f(color[0]*extinctionFactor, color[1]*extinctionFactor, color[2]*extinctionFactor);
 			colorArray.append(thisColor);
 		}
-
 	}
 	else
 	{

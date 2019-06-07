@@ -56,7 +56,6 @@ struct XlsxDefineNameData
     XlsxDefineNameData(const QString &name, const QString &formula, const QString &comment, int sheetId=-1)
         :name(name), formula(formula), comment(comment), sheetId(sheetId)
     {
-
     }
     QString name;
     QString formula;
@@ -68,6 +67,7 @@ struct XlsxDefineNameData
 class WorkbookPrivate : public AbstractOOXmlFilePrivate
 {
     Q_DECLARE_PUBLIC(Workbook)
+
 public:
     WorkbookPrivate(Workbook *q, Workbook::CreateFlag flag);
 

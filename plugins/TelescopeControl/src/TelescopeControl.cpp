@@ -110,6 +110,8 @@ TelescopeControl::TelescopeControl()
 
 TelescopeControl::~TelescopeControl()
 {
+	delete slewDialog; slewDialog = Q_NULLPTR;
+	delete telescopeDialog; telescopeDialog = Q_NULLPTR;
 }
 
 
@@ -195,10 +197,10 @@ void TelescopeControl::init()
 		if (gui!=Q_NULLPTR)
 		{
 			toolbarButton =	new StelButton(Q_NULLPTR,
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
-										   QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
-										   QPixmap(":/graphicGui/glow32x32.png"),
-										   "actionShow_Slew_Window");
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_on.png"),
+						       QPixmap(":/telescopeControl/button_Slew_Dialog_off.png"),
+						       QPixmap(":/graphicGui/glow32x32.png"),
+						       "actionShow_Slew_Window");
 			gui->getButtonBar()->addButton(toolbarButton, "065-pluginsGroup");
 		}
 	}
@@ -347,7 +349,7 @@ StelObjectP TelescopeControl::searchByNameI18n(const QString &nameI18n) const
 		if (telescope->getNameI18n() == nameI18n)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 StelObjectP TelescopeControl::searchByName(const QString &name) const
@@ -357,7 +359,7 @@ StelObjectP TelescopeControl::searchByName(const QString &name) const
 		if (telescope->getEnglishName() == name)
 			return qSharedPointerCast<StelObject>(telescope);
 	}
-	return 0;
+	return Q_NULLPTR;
 }
 
 QString TelescopeControl::getStelObjectType() const
@@ -429,6 +431,8 @@ void TelescopeControl::drawPointer(const StelProjectorP& prj, const StelCore* co
 		sPainter.setBlending(true);
 		sPainter.drawSprite2dMode(screenpos[0], screenpos[1], 25., StelApp::getInstance().getTotalRunTime() * 40.);
 	}
+#else
+	Q_UNUSED(prj) Q_UNUSED(core) Q_UNUSED(sPainter)
 #endif //COMPATIBILITY_001002
 }
 
@@ -892,7 +896,6 @@ void TelescopeControl::loadTelescopes()
 				{
 					if(startClientAtSlot(slot, connectionType, name, equinox, hostName, portTCP, delay, internalCircles))
 					{
-
 						if(!startServerAtSlot(slot, deviceModelName, portTCP, portSerial))
 						{
 							stopClientAtSlot(slot);
@@ -1199,7 +1202,7 @@ bool TelescopeControl::stopAllTelescopes()
 
 bool TelescopeControl::isValidSlotNumber(int slot)
 {
-	return ((slot < MIN_SLOT_NUMBER || slot >  MAX_SLOT_NUMBER) ? false : true);
+	return ((slot >= MIN_SLOT_NUMBER) && (slot <= MAX_SLOT_NUMBER));
 }
 
 bool TelescopeControl::isValidPort(uint port)
@@ -1568,7 +1571,7 @@ bool TelescopeControl::restoreDeviceModelsListTo(QString deviceModelsListPath)
 	return true;
 }
 
-const QString& TelescopeControl::getServerExecutablesDirectoryPath()
+const QString& TelescopeControl::getServerExecutablesDirectoryPath() const
 {
 	return serverExecutablesDirectoryPath;
 }

@@ -763,10 +763,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	// Handle the last line between the last and first point
 	previousQuadrant = currentQuadrant;
 	currentQuadrant = getSide(inputContour.first().vertex, onLine);
-	if (currentQuadrant==previousQuadrant)
-	{
-	}
-	else
+	if (currentQuadrant!=previousQuadrant)
 	{
 		// We crossed the line
 		tmpVertex = greatCircleIntersection(previousVertex.vertex, inputContour.first().vertex, plan, ok);

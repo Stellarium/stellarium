@@ -184,7 +184,10 @@ void StelDialog::setVisible(bool v)
 			handleDialogSizeChanged(proxy->size()); // This may trigger internal updates in subclasses. E.g. LocationPanel location arrow.
 
 			// The caching is buggy on all platforms with Qt 4.5.2
+			// Disabled on mac for the moment (https://github.com/Stellarium/stellarium/issues/393)
+			#ifndef Q_OS_MAC
 			proxy->setCacheMode(QGraphicsItem::ItemCoordinateCache);
+			#endif
 
 			proxy->setZValue(100);
 			StelMainView::getInstance().scene()->setActiveWindow(proxy);
@@ -277,6 +280,15 @@ void StelDialog::connectDoubleProperty(QSlider *slider, const QString &propName,
 
 	//The connection is handled by a helper class. It is automatically destroyed when the slider is destroyed.
 	new QSliderStelPropertyConnectionHelper(prop,minValue,maxValue,slider);
+}
+
+void StelDialog::connectStringProperty(QComboBox *comboBox, const QString &propName)
+{
+	StelProperty* prop = StelApp::getInstance().getStelPropertyManager()->getProperty(propName);
+	Q_ASSERT_X(prop,"StelDialog", "StelProperty does not exist");
+
+	//use a proxy for the connection
+	new QComboBoxStelStringPropertyConnectionHelper(prop,comboBox);
 }
 
 void StelDialog::connectBoolProperty(QAbstractButton *checkBox, const QString &propName)
@@ -420,7 +432,26 @@ void QComboBoxStelPropertyConnectionHelper::onPropertyChanged(const QVariant &va
 	combo->setCurrentIndex(value.toInt());
 	combo->blockSignals(b);
 }
+QComboBoxStelStringPropertyConnectionHelper::QComboBoxStelStringPropertyConnectionHelper(StelProperty *prop, QComboBox *combo)
+	:StelPropertyProxy(prop,combo), combo(combo)
+{
+	QVariant val = prop->getValue();
+	bool ok = val.canConvert<QString>();
+	Q_ASSERT_X(ok,"QComboBoxStelStringPropertyConnectionHelper","Can not convert to QString datatype");
+	Q_UNUSED(ok);
+	onPropertyChanged(val);
 
+	//in this direction, we can directly connect because Qt supports QVariant slots with the new syntax
+	connect(combo, static_cast<void (QComboBox::*)(const QString &)>(&QComboBox::activated),prop,&StelProperty::setValue);
+}
+
+void QComboBoxStelStringPropertyConnectionHelper::onPropertyChanged(const QVariant &value)
+{
+	//block signals to prevent sending the valueChanged signal, changing the property again
+	bool b = combo->blockSignals(true);
+	combo->setCurrentText(value.toString());
+	combo->blockSignals(b);
+}
 
 QLineEditStelPropertyConnectionHelper::QLineEditStelPropertyConnectionHelper(StelProperty *prop, QLineEdit *edit)
 	:StelPropertyProxy(prop,edit), edit(edit)

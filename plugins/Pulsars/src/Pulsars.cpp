@@ -70,10 +70,10 @@ StelPluginInfo PulsarsStelPluginInterface::getPluginInfo() const
 	info.id = "Pulsars";
 	info.displayedName = N_("Pulsars");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("This plugin plots the position of various pulsars, with object information about each one.");
 	info.version = PULSARS_PLUGIN_VERSION;
-	info.version = PULSARS_PLUGIN_LICENSE;
+	info.license = PULSARS_PLUGIN_LICENSE;
 	return info;
 }
 
@@ -234,7 +234,6 @@ void Pulsars::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Pulsars::drawPointer(StelCore* core, StelPainter& painter)
@@ -507,7 +506,6 @@ void Pulsars::setPSRMap(const QVariantMap& map)
 		PulsarP pulsar(new Pulsar(psrData));
 		if (pulsar->initialized)
 			psr.append(pulsar);
-
 	}
 }
 

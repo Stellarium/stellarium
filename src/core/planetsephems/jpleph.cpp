@@ -423,7 +423,6 @@ static void interp(struct interpolation_info *iinfo,
             /* polynomials) are not stored for repeated use,  for example. */
     if(velocity_flag == 3)
     {
-
       double accel_coeffs[MAX_CHEBY];
 
       accel_coeffs[0] = accel_coeffs[1] = 0.;
@@ -608,7 +607,7 @@ int DLL_FUNC jpl_state(void *ephem, const double et, const int list[14],
 	{
 		eph->curr_cache_loc = nr;
 		/* Read two blocks ahead to account for header: */
-		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET))
+		if(FSeek(eph->ifile, (nr + 2) * eph->recsize, SEEK_SET)) // lgtm [cpp/integer-multiplication-cast-to-long]
 		{
 			// GZ: Make sure we will try again on next call...
 			eph->curr_cache_loc=0;

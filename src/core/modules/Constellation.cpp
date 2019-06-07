@@ -193,7 +193,6 @@ const Constellation* Constellation::isStarIn(const StelObject* s) const
 {
 	for(unsigned int i=0;i<numberOfSegments*2;++i)
 	{
-
 		// constellation[i]==s test was not working
 		if (constellation[i]->getEnglishName()==s->getEnglishName())
 		{
@@ -262,7 +261,6 @@ bool Constellation::checkVisibility() const
 		// ...oops, it's a "inverted" season rule
 		if (((month>=1) && (month<=endSeason)) || ((month>=beginSeason) && (month<=12)))
 			visible = true;
-
 	}
 	return visible;
 }
