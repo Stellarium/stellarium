@@ -33,6 +33,8 @@ QTEST_GUILESS_MAIN(TestStelProjector)
 
 void TestStelProjector::testStelProjectorPerspective()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorPerspective(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -44,10 +46,36 @@ void TestStelProjector::testStelProjectorPerspective()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("F2V scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorEqualArea()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorEqualArea(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -59,10 +87,36 @@ void TestStelProjector::testStelProjectorEqualArea()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorStereographic()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorStereographic(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -74,10 +128,36 @@ void TestStelProjector::testStelProjectorStereographic()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorFisheye()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorFisheye(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -89,10 +169,36 @@ void TestStelProjector::testStelProjectorFisheye()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorHammer()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorHammer(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -104,10 +210,36 @@ void TestStelProjector::testStelProjectorHammer()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorCylinder()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorCylinder(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -119,10 +251,36 @@ void TestStelProjector::testStelProjectorCylinder()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorMercator()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorMercator(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -134,10 +292,36 @@ void TestStelProjector::testStelProjectorMercator()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorOrthographic()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorOrthographic(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -149,10 +333,36 @@ void TestStelProjector::testStelProjectorOrthographic()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorSinusoidal()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorSinusoidal(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -164,10 +374,36 @@ void TestStelProjector::testStelProjectorSinusoidal()
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
 }
 
 void TestStelProjector::testStelProjectorMiller()
 {
+	Vec3f a;
+	Vec3d b;
 	StelProjector::ModelViewTranformP modelViewTransform;
 	StelProjectorP projection = StelProjectorP(new StelProjectorMiller(modelViewTransform));
 	float maxFov = projection->getMaxFov();
@@ -176,6 +412,70 @@ void TestStelProjector::testStelProjectorMiller()
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
 						.arg(QString::number(maxFov, 'f', 3))
 						.arg(QString::number(expectedFov, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+}
+
+void TestStelProjector::testStelProjector2D()
+{
+	Vec3f a;
+	Vec3d b;
+	StelProjectorP projection = StelProjectorP(new StelProjector2d());
+	float maxFov = projection->getMaxFov();
+	float expectedFov = 360.f;
+	float actualError = qAbs(maxFov - expectedFov);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Max. FOV=%1deg expected FOV=%2deg error=%3 acceptable=%4")
+						.arg(QString::number(maxFov, 'f', 3))
+						.arg(QString::number(expectedFov, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+	a = Vec3f(0.f,0.f,0.f);
+	QVERIFY(projection->forward(a));
+	b = Vec3d(0.,0.,0.);
+	QVERIFY(projection->backward(b));
+
+	float sf = projection->fovToViewScalingFactor(0.f);
+	float expectedSF = 0.f;
+	actualError = qAbs(sf - expectedSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(sf, 'f', 3))
+						.arg(QString::number(expectedSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float vsf = projection->viewScalingFactorToFov(0.f);
+	float expectedVSF = 0.f;
+	actualError = qAbs(vsf - expectedVSF);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(vsf, 'f', 3))
+						.arg(QString::number(expectedVSF, 'f', 3))
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());

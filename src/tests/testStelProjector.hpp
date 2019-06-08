@@ -37,6 +37,7 @@ private slots:
 	void testStelProjectorOrthographic();
 	void testStelProjectorSinusoidal();
 	void testStelProjectorMiller();
+	void testStelProjector2D();
 };
 
 #endif // _TESTSTELPROJECTOR_HPP
