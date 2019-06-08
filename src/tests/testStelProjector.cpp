@@ -65,6 +65,16 @@ void TestStelProjector::testStelProjectorPerspective()
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
 
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
 	a = Vec3f(1.f,1.f,1.f);
@@ -114,6 +124,16 @@ void TestStelProjector::testStelProjectorEqualArea()
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
 
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(projection->forward(a));
 	a = Vec3f(1.f,1.f,1.f);
@@ -124,6 +144,8 @@ void TestStelProjector::testStelProjectorEqualArea()
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
 	b = Vec3d(1.,1.,1.);
+	QVERIFY(projection->backward(b));
+	b = Vec3d(2.,2.,2.);
 	QVERIFY(projection->backward(b));
 	b = Vec3d(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
@@ -159,6 +181,16 @@ void TestStelProjector::testStelProjectorStereographic()
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
 						.arg(QString::number(vsf, 'f', 3))
 						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
@@ -212,11 +244,23 @@ void TestStelProjector::testStelProjectorFisheye()
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
 
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
 	a = Vec3f(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
 	a = Vec3f(-1.f,-1.f,-1.f);
+	QVERIFY(projection->forward(a));
+	a = Vec3f(0.f,0.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
@@ -257,6 +301,16 @@ void TestStelProjector::testStelProjectorHammer()
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
 						.arg(QString::number(vsf, 'f', 3))
 						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
@@ -310,6 +364,16 @@ void TestStelProjector::testStelProjectorCylinder()
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
 
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
 	a = Vec3f(1.f,1.f,1.f);
@@ -355,6 +419,16 @@ void TestStelProjector::testStelProjectorMercator()
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
 						.arg(QString::number(vsf, 'f', 3))
 						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
@@ -408,6 +482,16 @@ void TestStelProjector::testStelProjectorOrthographic()
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
 
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(projection->forward(a));
 	a = Vec3f(1.f,1.f,1.f);
@@ -457,6 +541,16 @@ void TestStelProjector::testStelProjectorSinusoidal()
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());
 
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
 	a = Vec3f(1.f,1.f,1.f);
@@ -502,6 +596,16 @@ void TestStelProjector::testStelProjectorMiller()
 	QVERIFY2(actualError <= ERROR_LIMIT, QString("V2F scaling factor=%1 expected S.F.=%2 error=%3 acceptable=%4")
 						.arg(QString::number(vsf, 'f', 3))
 						.arg(QString::number(expectedVSF, 'f', 3))
+						.arg(QString::number(actualError, 'f', 5))
+						.arg(QString::number(ERROR_LIMIT, 'f', 5))
+						.toUtf8());
+
+	float dz = projection->deltaZoom(0.f);
+	float expectedDZ = 0.f;
+	actualError = qAbs(dz - expectedDZ);
+	QVERIFY2(actualError <= ERROR_LIMIT, QString("Delta zoom=%1 expected D.Z.=%2 error=%3 acceptable=%4")
+						.arg(QString::number(dz, 'f', 3))
+						.arg(QString::number(expectedDZ, 'f', 3))
 						.arg(QString::number(actualError, 'f', 5))
 						.arg(QString::number(ERROR_LIMIT, 'f', 5))
 						.toUtf8());

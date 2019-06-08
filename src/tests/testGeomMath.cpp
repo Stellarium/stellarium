@@ -44,12 +44,20 @@ void TestGeomMath::testAABBox()
 
 		Vec3f min = Vec3f(minf,minf,minf);
 		Vec3f max = Vec3f(maxf,maxf,maxf);
+
 		Vec3f minMinMax = Vec3f(minf,minf,maxf);
 		Vec3f minMaxMin = Vec3f(minf,maxf,minf);
 		Vec3f minMaxMax = Vec3f(minf,maxf,maxf);
 		Vec3f maxMinMin = Vec3f(maxf,minf,minf);
 		Vec3f maxMinMax = Vec3f(maxf,minf,maxf);
 		Vec3f maxMaxMin = Vec3f(maxf,maxf,minf);
+
+		Vec4f mFront = Vec4f(0.0f, -1.0f, 0.0f, -min.v[1]);
+		Vec4f mBack = Vec4f(0.0f, 1.0f, 0.0f, max.v[1]);
+		Vec4f mBottom = Vec4f(0.0f, 0.0f, -1.0f, -min.v[2]);
+		Vec4f mTop = Vec4f(0.0f, 0.0f, 1.0f, max.v[2]);
+		Vec4f mLeft = Vec4f(-1.0f, 0.0f, 0.0f, -min.v[0]);
+		Vec4f mRight = Vec4f(1.0f, 0.0f, 0.0f, max.v[0]);
 
 		AABBox* aabox = new AABBox(min, max);
 
@@ -63,6 +71,12 @@ void TestGeomMath::testAABBox()
 		QVERIFY(aabox->getCorner(AABBox::MaxMinMax)==maxMinMax);
 		QVERIFY(aabox->getCorner(AABBox::MaxMaxMin)==maxMaxMin);
 		QVERIFY(aabox->getCorner(AABBox::MaxMaxMax)==max);
+		QVERIFY(aabox->getPlane(AABBox::Front)==mFront);
+		QVERIFY(aabox->getPlane(AABBox::Back)==mBack);
+		QVERIFY(aabox->getPlane(AABBox::Bottom)==mBottom);
+		QVERIFY(aabox->getPlane(AABBox::Top)==mTop);
+		QVERIFY(aabox->getPlane(AABBox::Left)==mLeft);
+		QVERIFY(aabox->getPlane(AABBox::Right)==mRight);
 		QVERIFY(aabox->positiveVertex(max)==max);
 		QVERIFY(aabox->negativeVertex(max)==min);
 	}
