@@ -29,9 +29,7 @@ class TestGeomMath : public QObject
 	Q_OBJECT
 private slots:
 	void initTestCase();
-	void testAABBoxValid();
-	void testAABBoxVolume();
-	void testAABBoxCorners();
+	void testAABBox();
 
 private:
 	QVariantList data;

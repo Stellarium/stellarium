@@ -38,46 +38,14 @@ void TestGeomMath::initTestCase()
 	data << 0.f << 10.f << 1000.f;
 }
 
-void TestGeomMath::testAABBoxValid()
+void TestGeomMath::testAABBox()
 {
 	while(data.count() >= 3)
 	{
 		float minf = data.takeFirst().toFloat();
 		float maxf = data.takeFirst().toFloat();
 		float res = data.takeFirst().toFloat();
-		Vec3f min = Vec3f(minf,minf,minf);
-		Vec3f max = Vec3f(maxf,maxf,maxf);
-		AABBox* aabox = new AABBox(min, max);
-		QVERIFY(aabox->isValid());
-	}
-}
 
-void TestGeomMath::testAABBoxVolume()
-{
-	while(data.count() >= 3)
-	{
-		float minf = data.takeFirst().toFloat();
-		float maxf = data.takeFirst().toFloat();
-		float res = data.takeFirst().toFloat();
-		Vec3f min = Vec3f(minf,minf,minf);
-		Vec3f max = Vec3f(maxf,maxf,maxf);
-		AABBox* aabox = new AABBox(min, max);
-		float actualError = qAbs(aabox->getVolume() - res);
-		QVERIFY2(actualError <= ERROR_HIGH_LIMIT, QString("error=%1 acceptable=%2")
-							.arg(QString::number(actualError, 'f', 3))
-							.arg(QString::number(ERROR_HIGH_LIMIT, 'f', 3))
-							.toUtf8());
-	}
-}
-
-void TestGeomMath::testAABBoxCorners()
-{
-	while(data.count() >= 3)
-	{
-		float minf = data.takeFirst().toFloat();
-		float maxf = data.takeFirst().toFloat();
-		float res = data.takeFirst().toFloat();
-		Q_UNUSED(res);
 		Vec3f min = Vec3f(minf,minf,minf);
 		Vec3f max = Vec3f(maxf,maxf,maxf);
 		Vec3f minMinMin = Vec3f(minf,minf,minf);
@@ -88,7 +56,11 @@ void TestGeomMath::testAABBoxCorners()
 		Vec3f maxMinMax = Vec3f(maxf,minf,maxf);
 		Vec3f maxMaxMin = Vec3f(maxf,maxf,minf);
 		Vec3f maxMaxMax = Vec3f(maxf,maxf,maxf);
+
 		AABBox* aabox = new AABBox(min, max);
+
+		QVERIFY(aabox->isValid());
+		QVERIFY(aabox->getVolume()==res);
 		QVERIFY(aabox->getCorner(AABBox::MinMinMin)==minMinMin);
 		QVERIFY(aabox->getCorner(AABBox::MinMinMax)==minMinMax);
 		QVERIFY(aabox->getCorner(AABBox::MinMaxMin)==minMaxMin);
@@ -99,4 +71,3 @@ void TestGeomMath::testAABBoxCorners()
 		QVERIFY(aabox->getCorner(AABBox::MaxMaxMax)==maxMaxMax);
 	}
 }
-
