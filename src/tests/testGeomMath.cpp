@@ -63,5 +63,7 @@ void TestGeomMath::testAABBox()
 		QVERIFY(aabox->getCorner(AABBox::MaxMinMax)==maxMinMax);
 		QVERIFY(aabox->getCorner(AABBox::MaxMaxMin)==maxMaxMin);
 		QVERIFY(aabox->getCorner(AABBox::MaxMaxMax)==max);
+		QVERIFY(aabox->positiveVertex(max)==max);
+		QVERIFY(aabox->negativeVertex(max)==min);
 	}
 }
