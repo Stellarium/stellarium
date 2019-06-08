@@ -34,8 +34,7 @@ private slots:
 	void testAABBoxCorners();
 
 private:
-	QVariantList data, dataCorners;
-
+	QVariantList data;
 };
 
 #endif // TESTGEOMMATH_HPP
