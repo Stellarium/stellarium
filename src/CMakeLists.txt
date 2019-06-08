@@ -681,6 +681,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testGeomMath testGeomMath)
     SET_TARGET_PROPERTIES(testGeomMath PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testStelProjector_SRCS
+        tests/testStelProjector.hpp
+        tests/testStelProjector.cpp
+    )
+    ADD_EXECUTABLE(testStelProjector ${tests_testStelProjector_SRCS})
+    TARGET_LINK_LIBRARIES(testStelProjector ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelProjector)
+    ADD_TEST(testStelProjector testStelProjector)
+    SET_TARGET_PROPERTIES(testStelProjector PROPERTIES FOLDER "src/tests")
+
     SET(tests_testPrecession_SRCS
         tests/testPrecession.hpp
         tests/testPrecession.cpp

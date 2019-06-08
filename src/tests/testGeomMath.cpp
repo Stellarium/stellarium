@@ -26,10 +26,6 @@
 
 QTEST_GUILESS_MAIN(TestGeomMath)
 
-#define ERROR_LOW_LIMIT 1e-3
-#define ERROR_MID_LIMIT 1e-4
-#define ERROR_HIGH_LIMIT 1e-5
-
 void TestGeomMath::initTestCase()
 {
 	data << 0.f << 1.f << 1.f;
@@ -48,26 +44,24 @@ void TestGeomMath::testAABBox()
 
 		Vec3f min = Vec3f(minf,minf,minf);
 		Vec3f max = Vec3f(maxf,maxf,maxf);
-		Vec3f minMinMin = Vec3f(minf,minf,minf);
 		Vec3f minMinMax = Vec3f(minf,minf,maxf);
 		Vec3f minMaxMin = Vec3f(minf,maxf,minf);
 		Vec3f minMaxMax = Vec3f(minf,maxf,maxf);
 		Vec3f maxMinMin = Vec3f(maxf,minf,minf);
 		Vec3f maxMinMax = Vec3f(maxf,minf,maxf);
 		Vec3f maxMaxMin = Vec3f(maxf,maxf,minf);
-		Vec3f maxMaxMax = Vec3f(maxf,maxf,maxf);
 
 		AABBox* aabox = new AABBox(min, max);
 
 		QVERIFY(aabox->isValid());
 		QVERIFY(aabox->getVolume()==res);
-		QVERIFY(aabox->getCorner(AABBox::MinMinMin)==minMinMin);
+		QVERIFY(aabox->getCorner(AABBox::MinMinMin)==min);
 		QVERIFY(aabox->getCorner(AABBox::MinMinMax)==minMinMax);
 		QVERIFY(aabox->getCorner(AABBox::MinMaxMin)==minMaxMin);
 		QVERIFY(aabox->getCorner(AABBox::MinMaxMax)==minMaxMax);
 		QVERIFY(aabox->getCorner(AABBox::MaxMinMin)==maxMinMin);
 		QVERIFY(aabox->getCorner(AABBox::MaxMinMax)==maxMinMax);
 		QVERIFY(aabox->getCorner(AABBox::MaxMaxMin)==maxMaxMin);
-		QVERIFY(aabox->getCorner(AABBox::MaxMaxMax)==maxMaxMax);
+		QVERIFY(aabox->getCorner(AABBox::MaxMaxMax)==max);
 	}
 }
