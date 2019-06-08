@@ -110,7 +110,7 @@ StelGeodesicGrid::StelGeodesicGrid(const int lev) : maxLevel(lev<0?0:lev), lastM
 	}
 	else
 	{
-		triangles = 0;
+		triangles = Q_NULLPTR;
 	}
 	cacheSearchResult = new GeodesicSearchResult(*this);
 }

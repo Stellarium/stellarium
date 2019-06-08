@@ -29,7 +29,7 @@
 #include <QProcessEnvironment>
 #include <QtGlobal>
 
-#include <stdio.h>
+#include <cstdio>
 
 #ifdef Q_OS_WIN
 #include <windows.h>

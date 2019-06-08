@@ -671,6 +671,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testAirmass testAirmass)
     SET_TARGET_PROPERTIES(testAirmass PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testGeomMath_SRCS
+        tests/testGeomMath.hpp
+        tests/testGeomMath.cpp
+    )
+    ADD_EXECUTABLE(testGeomMath ${tests_testGeomMath_SRCS})
+    TARGET_LINK_LIBRARIES(testGeomMath ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testGeomMath)
+    ADD_TEST(testGeomMath testGeomMath)
+    SET_TARGET_PROPERTIES(testGeomMath PROPERTIES FOLDER "src/tests")
+
     SET(tests_testPrecession_SRCS
         tests/testPrecession.hpp
         tests/testPrecession.cpp

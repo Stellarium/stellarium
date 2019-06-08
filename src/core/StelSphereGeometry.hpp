@@ -31,7 +31,7 @@
 #include <QVarLengthArray>
 #include <QDataStream>
 
-#include <stdio.h>
+#include <cstdio>
 
 class SphericalRegion;
 class SphericalPolygon;
