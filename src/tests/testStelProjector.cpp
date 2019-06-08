@@ -77,16 +77,16 @@ void TestStelProjector::testStelProjectorPerspective()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }
 
@@ -136,18 +136,18 @@ void TestStelProjector::testStelProjectorEqualArea()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(2.,2.,2.);
+	b.set(2.,2.,2.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }
 
@@ -197,16 +197,16 @@ void TestStelProjector::testStelProjectorStereographic()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }
 
@@ -256,18 +256,18 @@ void TestStelProjector::testStelProjectorFisheye()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(0.f,0.f,-1.f);
+	a.set(0.f,0.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }
 
@@ -317,16 +317,16 @@ void TestStelProjector::testStelProjectorHammer()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }
 
@@ -376,16 +376,16 @@ void TestStelProjector::testStelProjectorCylinder()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }
 
@@ -435,16 +435,16 @@ void TestStelProjector::testStelProjectorMercator()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }
 
@@ -494,16 +494,16 @@ void TestStelProjector::testStelProjectorOrthographic()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(!projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(!projection->backward(b));
 }
 
@@ -553,17 +553,19 @@ void TestStelProjector::testStelProjectorSinusoidal()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
+	b.set(10.,0.,0.);
+	QVERIFY(!projection->backward(b));
 }
 
 void TestStelProjector::testStelProjectorMiller()
@@ -612,15 +614,15 @@ void TestStelProjector::testStelProjectorMiller()
 
 	Vec3f a = Vec3f(0.f,0.f,0.f);
 	QVERIFY(!projection->forward(a));
-	a = Vec3f(1.f,1.f,1.f);
+	a.set(1.f,1.f,1.f);
 	QVERIFY(projection->forward(a));
-	a = Vec3f(-1.f,-1.f,-1.f);
+	a.set(-1.f,-1.f,-1.f);
 	QVERIFY(projection->forward(a));
 
 	Vec3d b = Vec3d(0.,0.,0.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(1.,1.,1.);
+	b.set(1.,1.,1.);
 	QVERIFY(projection->backward(b));
-	b = Vec3d(-1.,-1.,-1.);
+	b.set(-1.,-1.,-1.);
 	QVERIFY(projection->backward(b));
 }

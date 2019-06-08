@@ -45,19 +45,23 @@ void TestGeomMath::testAABBox()
 		Vec3f min = Vec3f(minf,minf,minf);
 		Vec3f max = Vec3f(maxf,maxf,maxf);
 
-		Vec3f minMinMax = Vec3f(minf,minf,maxf);
-		Vec3f minMaxMin = Vec3f(minf,maxf,minf);
-		Vec3f minMaxMax = Vec3f(minf,maxf,maxf);
-		Vec3f maxMinMin = Vec3f(maxf,minf,minf);
-		Vec3f maxMinMax = Vec3f(maxf,minf,maxf);
-		Vec3f maxMaxMin = Vec3f(maxf,maxf,minf);
+		// Check 'set' method
+		Vec3f minMinMax, minMaxMin, minMaxMax, maxMinMin, maxMinMax, maxMaxMin;
+		minMinMax.set(minf,minf,maxf);
+		minMaxMin.set(minf,maxf,minf);
+		minMaxMax.set(minf,maxf,maxf);
+		maxMinMin.set(maxf,minf,minf);
+		maxMinMax.set(maxf,minf,maxf);
+		maxMaxMin.set(maxf,maxf,minf);
 
-		Vec4f mFront = Vec4f(0.0f, -1.0f, 0.0f, -min.v[1]);
-		Vec4f mBack = Vec4f(0.0f, 1.0f, 0.0f, max.v[1]);
-		Vec4f mBottom = Vec4f(0.0f, 0.0f, -1.0f, -min.v[2]);
-		Vec4f mTop = Vec4f(0.0f, 0.0f, 1.0f, max.v[2]);
-		Vec4f mLeft = Vec4f(-1.0f, 0.0f, 0.0f, -min.v[0]);
-		Vec4f mRight = Vec4f(1.0f, 0.0f, 0.0f, max.v[0]);
+		// Check 'set' method
+		Vec4f mFront, mBack, mBottom, mTop, mLeft, mRight;
+		mFront.set(0.0f, -1.0f, 0.0f, -min.v[1]);
+		mBack.set(0.0f, 1.0f, 0.0f, max.v[1]);
+		mBottom.set(0.0f, 0.0f, -1.0f, -min.v[2]);
+		mTop.set(0.0f, 0.0f, 1.0f, max.v[2]);
+		mLeft.set(-1.0f, 0.0f, 0.0f, -min.v[0]);
+		mRight.set(1.0f, 0.0f, 0.0f, max.v[0]);
 
 		AABBox* aabox = new AABBox(min, max);
 

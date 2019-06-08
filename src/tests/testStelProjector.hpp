@@ -26,7 +26,7 @@
 class TestStelProjector : public QObject
 {
 	Q_OBJECT
-private slots:
+private slots:	
 	void testStelProjectorPerspective();
 	void testStelProjectorEqualArea();
 	void testStelProjectorStereographic();
