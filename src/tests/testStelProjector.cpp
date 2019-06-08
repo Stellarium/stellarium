@@ -29,7 +29,7 @@
 
 QTEST_GUILESS_MAIN(TestStelProjector)
 
-#define ERROR_LIMIT 1e-5
+#define ERROR_LIMIT 1e-4
 
 void TestStelProjector::testStelProjectorPerspective()
 {
