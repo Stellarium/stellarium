@@ -18,7 +18,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-01 23:38+0600\n"
+"POT-Creation-Date: 2019-06-06 20:55+0600\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2019\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -70,8 +70,8 @@ msgstr "星群"
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
 #: src/core/StelApp.cpp:578 src/core/StelCore.cpp:260
-#: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:818
+#: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
+#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:818
 msgid "Display Options"
 msgstr "显示选项"
 
@@ -2114,15 +2114,16 @@ msgstr "夜间模式"
 msgid "Cannot create Spout sender. See log for details."
 msgstr "无法创建喷口发送器 。 有关详细信息，请参阅日志。"
 
-#: src/core/StelCore.cpp:258 src/gui/StelGui.cpp:223
-#: src/gui/AstroCalcDialog.cpp:1257 src/gui/AstroCalcDialog.cpp:2850
-#: src/gui/BookmarksDialog.cpp:115 src/ui_dateTimeDialogGui.h:376
-#: src/ui_dateTimeDialogGui.h:379
+#: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
+#: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1257
+#: src/gui/AstroCalcDialog.cpp:2850 src/gui/BookmarksDialog.cpp:115
+#: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "日期及时间"
 
-#: src/core/StelCore.cpp:259 src/core/StelMovementMgr.cpp:188
+#: src/core/StelCore.cpp:259 src/core/StelObjectMgr.cpp:52
+#: src/core/StelMovementMgr.cpp:188
 msgid "Movement and Selection"
 msgstr "移动和选择"
 
@@ -2933,6 +2934,30 @@ msgstr "极区薄暮"
 #: src/core/StelObject.cpp:662
 msgid "IAU Constellation"
 msgstr "IAU星座"
+
+#: src/core/StelObjectMgr.cpp:55
+msgid "Next transit of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:56
+msgid "Next rising of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:57
+msgid "Next setting of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:58
+msgid "Previous transit of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:59
+msgid "Previous rising of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:60
+msgid "Previous setting of the selected object"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -8714,7 +8739,7 @@ msgstr "如果要查看太阳系的所有轨迹，请停用此选项。"
 
 #: src/ui_viewDialog.h:2549
 msgid "Show trails only for N latest selected planets:"
-msgstr ""
+msgstr "仅显示N个最后选定的行星在天球上的运动轨迹"
 
 #: src/ui_viewDialog.h:2551
 msgid ""
@@ -12384,17 +12409,17 @@ msgstr "距离的变化率"
 #: plugins/Satellites/src/Satellite.cpp:315
 msgctxt "frequency"
 msgid "rpd"
-msgstr ""
+msgstr "rpd（次/日）"
 
 #. TRANSLATORS: minutes - orbital period for artificial satellites
 #: plugins/Satellites/src/Satellite.cpp:317
 msgctxt "period"
 msgid "min"
-msgstr ""
+msgstr "分"
 
 #: plugins/Satellites/src/Satellite.cpp:319
 msgid "Orbital period"
-msgstr ""
+msgstr "轨道周期"
 
 #: plugins/Satellites/src/Satellite.cpp:324
 msgid "SubPoint (Lat./Long.)"
@@ -18960,4 +18985,4 @@ msgstr "自定义赤纬线2"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:623
 msgid "Custom Lines"
-msgstr ""
+msgstr "自定义线"

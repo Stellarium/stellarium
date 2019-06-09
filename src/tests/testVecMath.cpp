@@ -88,7 +88,7 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vf.clamp(Vec2f(1.f,1.f),Vec2f(10.f,10.f))==Vec2f(5.f,5.f));
 	QVERIFY(qAbs(vf.dot(Vec2f(5.f,5.f)) - 50.f) <= ERROR_LIMIT);
 	vf.set(2.f,2.f);
-	QVERIFY(qAbs(vf.length() - 2.82843) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.length() - 2.82843f) <= ERROR_LIMIT);
 	QVERIFY(qAbs(vf.lengthSquared() - 8.f) <= ERROR_LIMIT);
 
 	vd.set(0.,0.);
@@ -116,6 +116,6 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vd.clamp(Vec2d(1.,1.),Vec2d(10.,10.))==Vec2d(5.,5.));
 	QVERIFY(qAbs(vd.dot(Vec2d(5.,5.)) - 50.) <= ERROR_LIMIT);
 	vd.set(2.,2.);
-	QVERIFY(qAbs(vd.length() - 2.82843f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.length() - 2.82843) <= ERROR_LIMIT);
 	QVERIFY(qAbs(vd.lengthSquared() - 8.) <= ERROR_LIMIT);
 }

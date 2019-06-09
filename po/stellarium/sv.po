@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-01 23:38+0600\n"
+"POT-Creation-Date: 2019-06-06 20:55+0600\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Karl B <birgerssonkarl@outlook.com>, 2019\n"
 "Language-Team: Swedish (https://www.transifex.com/stellarium/teams/80998/sv/)\n"
@@ -66,8 +66,8 @@ msgstr "asterism"
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
 #: src/core/StelApp.cpp:578 src/core/StelCore.cpp:260
-#: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:818
+#: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
+#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:818
 msgid "Display Options"
 msgstr "Visningsalternativ"
 
@@ -2121,15 +2121,16 @@ msgstr "Nattläge"
 msgid "Cannot create Spout sender. See log for details."
 msgstr "Kan inte skapa Spout sender. För detaljer, se logg."
 
-#: src/core/StelCore.cpp:258 src/gui/StelGui.cpp:223
-#: src/gui/AstroCalcDialog.cpp:1257 src/gui/AstroCalcDialog.cpp:2850
-#: src/gui/BookmarksDialog.cpp:115 src/ui_dateTimeDialogGui.h:376
-#: src/ui_dateTimeDialogGui.h:379
+#: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
+#: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1257
+#: src/gui/AstroCalcDialog.cpp:2850 src/gui/BookmarksDialog.cpp:115
+#: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "Datum och tid"
 
-#: src/core/StelCore.cpp:259 src/core/StelMovementMgr.cpp:188
+#: src/core/StelCore.cpp:259 src/core/StelObjectMgr.cpp:52
+#: src/core/StelMovementMgr.cpp:188
 msgid "Movement and Selection"
 msgstr "Förflyttning och val"
 
@@ -2989,6 +2990,30 @@ msgstr "Polarskymning"
 #: src/core/StelObject.cpp:662
 msgid "IAU Constellation"
 msgstr "IAU-stjärnbild"
+
+#: src/core/StelObjectMgr.cpp:55
+msgid "Next transit of the selected object"
+msgstr "Nästa kulmination för valt objekt"
+
+#: src/core/StelObjectMgr.cpp:56
+msgid "Next rising of the selected object"
+msgstr "Nästa uppgång för valt objekt"
+
+#: src/core/StelObjectMgr.cpp:57
+msgid "Next setting of the selected object"
+msgstr "Nästa nedgång för valt objekt"
+
+#: src/core/StelObjectMgr.cpp:58
+msgid "Previous transit of the selected object"
+msgstr "Föregående kulmination för valt objekt"
+
+#: src/core/StelObjectMgr.cpp:59
+msgid "Previous rising of the selected object"
+msgstr "Föregående uppgång för valt objekt"
+
+#: src/core/StelObjectMgr.cpp:60
+msgid "Previous setting of the selected object"
+msgstr "Föregående nedgång för valt objekt"
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -4547,7 +4572,7 @@ msgstr "Solsystemsobjekt: planeter"
 #: src/gui/AstroCalcDialog.cpp:851
 #, qt-format
 msgid "Positions on %1"
-msgstr "Positioner på %1"
+msgstr "Positioner den %1"
 
 #: src/gui/AstroCalcDialog.cpp:875
 msgid "Average angular size"
@@ -8850,7 +8875,7 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2549
 msgid "Show trails only for N latest selected planets:"
-msgstr ""
+msgstr "Visa spår för de N senaste valda planeterna:"
 
 #: src/ui_viewDialog.h:2551
 msgid ""
