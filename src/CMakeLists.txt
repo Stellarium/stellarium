@@ -681,6 +681,16 @@ IF(ENABLE_TESTING)
     ADD_TEST(testGeomMath testGeomMath)
     SET_TARGET_PROPERTIES(testGeomMath PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testVecMath_SRCS
+        tests/testVecMath.hpp
+        tests/testVecMath.cpp
+    )
+    ADD_EXECUTABLE(testVecMath ${tests_testVecMath_SRCS})
+    TARGET_LINK_LIBRARIES(testVecMath ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testVecMath)
+    ADD_TEST(testVecMath testVecMath)
+    SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
+
     SET(tests_testStelProjector_SRCS
         tests/testStelProjector.hpp
         tests/testStelProjector.cpp
