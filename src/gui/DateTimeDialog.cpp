@@ -149,8 +149,6 @@ void DateTimeDialog::yearChanged(int newyear)
 	if ( year != newyear )
 	{
 		valid( newyear, month, day, hour, minute, second );
-		emit core->dateChanged();
-		emit core->dateChangedByYear();
 	}
 }
 
@@ -159,8 +157,6 @@ void DateTimeDialog::monthChanged(int newmonth)
 	if ( month != newmonth )
 	{
 		valid( year, newmonth, day, hour, minute, second );
-		emit core->dateChanged();
-		emit core->dateChangedForMonth();
 	}
 }
 
@@ -168,7 +164,6 @@ void DateTimeDialog::dayChanged(int newday)
 {
 	int delta = newday - day;
 	validJd(jd + delta);
-	emit core->dateChanged();
 }
 
 void DateTimeDialog::hourChanged(int newhour)
@@ -235,6 +230,8 @@ Prepare date elements from newJd and send to spinner_*
  ************************************************************************/
 void DateTimeDialog::setDateTime(double newJd)
 {
+	int oldyear=year, oldmonth=month, oldday=day;
+
 	if (this->visible()) {
 		// JD and MJD should be at the UTC scale on the window!
 		double newJdC = newJd + core->getUTCOffset(newJd)/24.0; // UTC -> local tz
@@ -243,6 +240,10 @@ void DateTimeDialog::setDateTime(double newJd)
 		jd = newJd;
 
 		pushToWidgets();
+
+		if (oldyear != year || oldmonth != month || oldday != day) emit core->dateChanged();
+		if (oldyear != year) emit core->dateChangedByYear();
+		if (oldmonth != month) emit core->dateChangedForMonth();
 	}
 }
 
