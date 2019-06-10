@@ -124,8 +124,13 @@ public:
 	static QVector<float> EphemerisListMagnitudes;
 	static int DisplayedPositionIndex;
 
+
 public slots:
         void retranslate();
+		
+signals:
+		//! This signal is emitted when the graph day changed.
+		void graphDayChanged();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
@@ -191,6 +196,11 @@ private slots:
 	void drawAziVsTimeDiagram();
 	//! Show info from graphs under mouse cursor
 	void mouseOverAziLine(QMouseEvent *event);
+
+	//! Set time by clicking inside graph areas
+	void AltTimeClick(QMouseEvent* event);
+	void AziTimeClick(QMouseEvent* event);
+
 
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
@@ -317,6 +327,12 @@ private:
 	void updateTabBarListWidgetWidth();
 
 	void enableVisibilityAngularLimits(bool visible);
+
+	//! Set clicked time in AstroCalc AltVSTime/AziVsTime graphs
+	void SetClickedTime(double posx);
+
+	//! Memorize day for detecting rollover to next/prev one
+	int oldGraphJD;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
