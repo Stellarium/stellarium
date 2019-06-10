@@ -53,7 +53,7 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vi==Vec2i(20,10));
 	vi = Vec2i(10,10) / Vec2i(2,5);
 	QVERIFY(vi==Vec2i(5,2));
-	vi.set(5,5);
+	vi = Vec2i(5);
 	QVERIFY(vi.min(Vec2i(3,3))==Vec2i(3,3));
 	QVERIFY(vi.max(Vec2i(3,3))==Vec2i(5,5));
 	QVERIFY(vi.clamp(Vec2i(1,1),Vec2i(10,10))==Vec2i(5,5));
@@ -82,7 +82,7 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vf==Vec2f(20.f,10.f));
 	vf = Vec2f(10.f,10.f) / Vec2f(2.f,5.f);
 	QVERIFY(vf==Vec2f(5.f,2.f));
-	vf.set(5.f,5.f);
+	vf = Vec2f(5.f);
 	QVERIFY(vf.min(Vec2f(3.f,3.f))==Vec2f(3.f,3.f));
 	QVERIFY(vf.max(Vec2f(3.f,3.f))==Vec2f(5.f,5.f));
 	QVERIFY(vf.clamp(Vec2f(1.f,1.f),Vec2f(10.f,10.f))==Vec2f(5.f,5.f));
@@ -110,7 +110,7 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vd==Vec2d(20.,10.));
 	vd = Vec2d(10.,10.) / Vec2d(2.,5.);
 	QVERIFY(vd==Vec2d(5.,2.));
-	vd.set(5.,5.);
+	vd = Vec2d(5.);
 	QVERIFY(vd.min(Vec2d(3.,3.))==Vec2d(3.,3.));
 	QVERIFY(vd.max(Vec2d(3.,3.))==Vec2d(5.,5.));
 	QVERIFY(vd.clamp(Vec2d(1.,1.),Vec2d(10.,10.))==Vec2d(5.,5.));
@@ -150,6 +150,11 @@ void TestVecMath::testVec3Math()
 	QVERIFY(vi.length()==3);
 	QVERIFY(vi.lengthSquared()==12);
 	QVERIFY(vi.toString()==QString("[2, 2, 2]"));
+	vi = Vec3i(1);
+	QVERIFY(vi.toVec3f()==Vec3f(1.f));
+	QVERIFY(vi.toVec3d()==Vec3d(1.));
+	vi = Vec3i(10);
+	QVERIFY(vi/2==Vec3i(5));
 
 	vf.set(0.f,0.f,0.f);
 	QVERIFY(vf==Vec3f(0.f,0.f,0.f));
@@ -174,6 +179,11 @@ void TestVecMath::testVec3Math()
 	vf.set(2.f,2.f,2.f);
 	QVERIFY(qAbs(vf.length() - 3.4641016f) <= ERROR_LIMIT);
 	QVERIFY(qAbs(vf.lengthSquared() - 12.f) <= ERROR_LIMIT);
+	vf = Vec3f(10.f);
+	QVERIFY(vf/2.f==Vec3f(5.f));
+	vf.set(3.f,3.f,3.f);
+	QVERIFY(qAbs(vf.latitude() - 0.6154797f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.longitude() - 0.7853982f) <= ERROR_LIMIT);
 
 	vd.set(0.,0.,0.);
 	QVERIFY(vd==Vec3d(0.,0.,0.));
@@ -198,4 +208,9 @@ void TestVecMath::testVec3Math()
 	vd.set(2.,2.,2.);
 	QVERIFY(qAbs(vd.length() - 3.4641016) <= ERROR_LIMIT);
 	QVERIFY(qAbs(vd.lengthSquared() - 12.) <= ERROR_LIMIT);
+	vd = Vec3d(10.);
+	QVERIFY(vd/2.==Vec3d(5.));
+	vd.set(3.,3.,3.);
+	QVERIFY(qAbs(vd.latitude() - 0.6154797) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.longitude() - 0.7853982) <= ERROR_LIMIT);
 }
