@@ -98,6 +98,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, plotAziVsTime(false)	
 	, delimiter(", ")
 	, acEndl("\n")
+	, oldGraphJD(0)
 {
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
@@ -293,10 +294,16 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
 
+	connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(AltTimeClick(QMouseEvent*)));
+	connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(AziTimeClick(QMouseEvent*)));
+
 	connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAziVsTimeDiagram()));
 	drawAziVsTimeDiagram();
+
+	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAltVsTimeDiagram()));
+	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAziVsTimeDiagram()));
 
 	// Monthly Elevation
 	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
@@ -528,11 +535,12 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 
 		StelObjectP selectedObject = selectedObjects[0];
 		double currentJD = core->getJD();
-		double noon = (int)currentJD;
+		double shift = core->getUTCOffset(currentJD) / 24.0;
+		double noon = (int)(currentJD + shift);
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
-		double shift = core->getUTCOffset(currentJD) / 24.0;		
+		
 		int step = 180;
 		int limit = 485;
 		bool isSatellite = false;
@@ -1943,11 +1951,12 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		bool onEarth = core->getCurrentPlanet()==solarSystem->getEarth();
 
 		double currentJD = core->getJD();
-		double noon = (int)currentJD;
+		double shift = core->getUTCOffset(currentJD) / 24.0;
+		double noon = (int)(currentJD + shift);
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
-		double shift = core->getUTCOffset(currentJD) / 24.0;
+		
 		double xMaxY = -100.f;
 		int step = 180;
 		int limit = 485;
@@ -2133,7 +2142,9 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 		return;
 
 	double currentJD = core->getJD();
-	double now = ((currentJD + 0.5 - (int)currentJD) * 86400.0) + core->getUTCOffset(currentJD) * 3600.0;
+	double UTCOffset = core->getUTCOffset(currentJD);
+	double now = ((currentJD + 0.5 - (int)currentJD) * 86400.0) + UTCOffset * 3600.0;
+
 	if (now > 129600) now -= 86400;
 	if (now < 43200) now += 86400;
 	QList<double> ax, ay;
@@ -2151,6 +2162,15 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	{
 		ui->aziVsTimePlot->graph(1)->setData(x, y);
 		ui->aziVsTimePlot->replot();
+	}
+
+	// detect roll over graph day limits.
+	// if so, update the graph
+	int graphJD = (int)(currentJD + UTCOffset / 24);
+	if (oldGraphJD != graphJD)
+	{
+		oldGraphJD = graphJD;
+		emit graphDayChanged();
 	}
 }
 
@@ -2784,6 +2804,53 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		ui->monthlyElevationGraph->graph(0)->data()->clear();
 		ui->monthlyElevationGraph->replot();
 	}
+}
+
+
+// click inside AltVsTime graph area sets new current time
+void AstroCalcDialog::AltTimeClick(QMouseEvent* event)
+{
+	Qt::MouseButtons buttons = event->buttons();
+	if (!(buttons & Qt::LeftButton)) return;
+
+	double	x = ui->altVsTimePlot->xAxis->pixelToCoord(event->pos().x());
+	double	y = ui->altVsTimePlot->yAxis->pixelToCoord(event->pos().y());
+
+		if (x > ui->altVsTimePlot->xAxis->range().lower && x < ui->altVsTimePlot->xAxis->range().upper
+			&& y > ui->altVsTimePlot->yAxis->range().lower && y < ui->altVsTimePlot->yAxis->range().upper)
+		{
+			SetClickedTime(x);
+		}
+}
+
+
+// click inside AziVsTime graph area sets new current time
+void AstroCalcDialog::AziTimeClick(QMouseEvent* event)
+{
+	Qt::MouseButtons buttons = event->buttons();
+	if (!(buttons & Qt::LeftButton)) return;
+
+	double	x = ui->aziVsTimePlot->xAxis->pixelToCoord(event->pos().x());
+	double	y = ui->aziVsTimePlot->yAxis->pixelToCoord(event->pos().y());
+
+	if (x > ui->aziVsTimePlot->xAxis->range().lower && x < ui->aziVsTimePlot->xAxis->range().upper
+		&& y > ui->aziVsTimePlot->yAxis->range().lower && y < ui->aziVsTimePlot->yAxis->range().upper)
+	{
+		SetClickedTime(x);
+	}
+}
+
+
+void AstroCalcDialog::SetClickedTime(double posx)
+{
+	double JD = core->getJD();
+	double shift = core->getUTCOffset(JD) / 24;
+	int noonJD = (int)(JD + shift);
+	JD = posx / 86400.0 + noonJD - 0.5 - shift;
+
+	core->setRealTimeSpeed();
+	core->setJD(JD);
+	drawCurrentTimeDiagram();
 }
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
