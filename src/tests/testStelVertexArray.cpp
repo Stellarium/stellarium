@@ -101,12 +101,14 @@ void TestStelVertexArray::benchmarkForeachTriangle()
 	}
 	qDebug() << sum.toString();
 
+	/*
 	sum.set(0, 0, 0);
 	QBENCHMARK {
 		VerticesVisitor result = arrayTriangles.foreachTriangle(VerticesVisitor());
 		sum = result.sum;
 	}
 	qDebug() << sum.toString();
+	*/
 }
 
 void TestStelVertexArray::benchmarkForeachTriangleDirect()
