@@ -38,7 +38,9 @@ void TestStelVertexArray::initTestCase()
 		textureCoords.append(t);
 	}
 
-	array = StelVertexArray(vertices, StelVertexArray::TriangleStrip, textureCoords);
+	arrayTriangleStrip = StelVertexArray(vertices, StelVertexArray::TriangleStrip, textureCoords);
+	arrayTriangleFan = StelVertexArray(vertices, StelVertexArray::TriangleFan, textureCoords);
+	arrayTriangles = StelVertexArray(vertices, StelVertexArray::Triangles, textureCoords);
 }
 
 struct EmptyVisitor
@@ -54,7 +56,13 @@ struct EmptyVisitor
 void TestStelVertexArray::benchmarkForeachTriangleNoOp()
 {
 	QBENCHMARK {
-		array.foreachTriangle(EmptyVisitor());
+		arrayTriangleStrip.foreachTriangle(EmptyVisitor());
+	}
+	QBENCHMARK {
+		arrayTriangleFan.foreachTriangle(EmptyVisitor());
+	}
+	QBENCHMARK {
+		arrayTriangles.foreachTriangle(EmptyVisitor());
 	}
 }
 
@@ -78,7 +86,21 @@ void TestStelVertexArray::benchmarkForeachTriangle()
 {
 	Vec3d sum(0, 0, 0);
 	QBENCHMARK {
-		VerticesVisitor result = array.foreachTriangle(VerticesVisitor());
+		VerticesVisitor result = arrayTriangleStrip.foreachTriangle(VerticesVisitor());
+		sum = result.sum;
+	}
+	qDebug() << sum.toString();
+
+	sum.set(0, 0, 0);
+	QBENCHMARK {
+		VerticesVisitor result = arrayTriangleFan.foreachTriangle(VerticesVisitor());
+		sum = result.sum;
+	}
+	qDebug() << sum.toString();
+
+	sum.set(0, 0, 0);
+	QBENCHMARK {
+		VerticesVisitor result = arrayTriangles.foreachTriangle(VerticesVisitor());
 		sum = result.sum;
 	}
 	qDebug() << sum.toString();
@@ -90,15 +112,49 @@ void TestStelVertexArray::benchmarkForeachTriangleDirect()
 	Vec3d sum(0, 0, 0);
 	QBENCHMARK {
 		sum = Vec3d(0, 0, 0);
-		for (int i = 2; i < array.vertex.size(); ++i)
+		for (int i = 2; i < arrayTriangleStrip.vertex.size(); ++i)
 		{
 			if ((i % 2) == 0)
 			{
-				sum += array.vertex.at(i-1) + array.vertex.at(i);
+				sum += arrayTriangleStrip.vertex.at(i-1) + arrayTriangleStrip.vertex.at(i);
 			}
 			else
 			{
-				sum += array.vertex.at(i-2) + array.vertex.at(i);
+				sum += arrayTriangleStrip.vertex.at(i-2) + arrayTriangleStrip.vertex.at(i);
+			}
+		}
+	}
+	qDebug() << sum.toString();
+
+	sum.set(0, 0, 0);
+	QBENCHMARK {
+		sum = Vec3d(0, 0, 0);
+		for (int i = 2; i < arrayTriangleFan.vertex.size(); ++i)
+		{
+			if ((i % 2) == 0)
+			{
+				sum += arrayTriangleFan.vertex.at(i-1) + arrayTriangleFan.vertex.at(i);
+			}
+			else
+			{
+				sum += arrayTriangleFan.vertex.at(i-2) + arrayTriangleFan.vertex.at(i);
+			}
+		}
+	}
+	qDebug() << sum.toString();
+
+	sum.set(0, 0, 0);
+	QBENCHMARK {
+		sum = Vec3d(0, 0, 0);
+		for (int i = 2; i < arrayTriangles.vertex.size(); ++i)
+		{
+			if ((i % 2) == 0)
+			{
+				sum += arrayTriangles.vertex.at(i-1) + arrayTriangles.vertex.at(i);
+			}
+			else
+			{
+				sum += arrayTriangles.vertex.at(i-2) + arrayTriangles.vertex.at(i);
 			}
 		}
 	}
