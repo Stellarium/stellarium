@@ -40,7 +40,6 @@ void TestStelVertexArray::initTestCase()
 
 	arrayTriangleStrip = StelVertexArray(vertices, StelVertexArray::TriangleStrip, textureCoords);
 	arrayTriangleFan = StelVertexArray(vertices, StelVertexArray::TriangleFan, textureCoords);
-	arrayTriangles = StelVertexArray(vertices, StelVertexArray::Triangles, textureCoords);
 }
 
 struct EmptyVisitor
@@ -61,12 +60,6 @@ void TestStelVertexArray::benchmarkForeachTriangleNoOp()
 	QBENCHMARK {
 		arrayTriangleFan.foreachTriangle(EmptyVisitor());
 	}
-	/*
-	 * Caused ASSERT: "vertex.size() % 3 == 0" in file StelVertexArray.hpp:160 on Travis-CI - WHY???
-	QBENCHMARK {
-		arrayTriangles.foreachTriangle(EmptyVisitor());
-	}
-	*/
 }
 
 struct VerticesVisitor
@@ -100,15 +93,6 @@ void TestStelVertexArray::benchmarkForeachTriangle()
 		sum = result.sum;
 	}
 	qDebug() << sum.toString();
-
-	/*
-	sum.set(0, 0, 0);
-	QBENCHMARK {
-		VerticesVisitor result = arrayTriangles.foreachTriangle(VerticesVisitor());
-		sum = result.sum;
-	}
-	qDebug() << sum.toString();
-	*/
 }
 
 void TestStelVertexArray::benchmarkForeachTriangleDirect()
@@ -147,25 +131,6 @@ void TestStelVertexArray::benchmarkForeachTriangleDirect()
 		}
 	}
 	qDebug() << sum.toString();
-
-	/*
-	sum.set(0, 0, 0);
-	QBENCHMARK {
-		sum = Vec3d(0, 0, 0);
-		for (int i = 2; i < arrayTriangles.vertex.size(); ++i)
-		{
-			if ((i % 2) == 0)
-			{
-				sum += arrayTriangles.vertex.at(i-1) + arrayTriangles.vertex.at(i);
-			}
-			else
-			{
-				sum += arrayTriangles.vertex.at(i-2) + arrayTriangles.vertex.at(i);
-			}
-		}
-	}
-	qDebug() << sum.toString();
-	*/
 }
 
 

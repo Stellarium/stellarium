@@ -43,6 +43,10 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vi==Vec2i(3,3));
 	vi*=Vec2i(2,2);
 	QVERIFY(vi==Vec2i(6,6));
+	vi*=2;
+	QVERIFY(vi==Vec2i(12,12));
+	vi/=2;
+	QVERIFY(vi==Vec2i(6,6));
 	vi/=Vec2i(3,3);
 	QVERIFY(vi==Vec2i(2,2));
 	vi = Vec2i(1,1) + Vec2i(9,9);
@@ -213,4 +217,33 @@ void TestVecMath::testVec3Math()
 	vd.set(3.,3.,3.);
 	QVERIFY(qAbs(vd.latitude() - 0.6154797) <= ERROR_LIMIT);
 	QVERIFY(qAbs(vd.longitude() - 0.7853982) <= ERROR_LIMIT);
+}
+
+void TestVecMath::testVec4Math()
+{
+	Vec4i vi;
+
+	vi.set(0,0,0,0);
+	QVERIFY(vi==Vec4i(0,0,0,0));
+	QVERIFY(vi!=Vec4i(0,1,0,0));
+	vi = Vec3i(0,0,0);
+	QVERIFY(vi==Vec4i(0,0,0,1));
+	vi+=Vec4i(2,2,2,1);
+	QVERIFY(vi==Vec4i(2,2,2,2));
+	vi-=Vec4i(1,1,1,1);
+	QVERIFY(vi==Vec4i(1,1,1,1));
+	vi*=6;
+	QVERIFY(vi==Vec4i(6,6,6,6));
+	vi/=3;
+	QVERIFY(vi==Vec4i(2,2,2,2));
+	vi = Vec4i(1,1,1,1) + Vec4i(9,9,9,9);
+	QVERIFY(vi==Vec4i(10,10,10,10));
+	vi = Vec4i(5,5,5,5) - Vec4i(6,6,6,6);
+	QVERIFY(vi==Vec4i(-1,-1,-1,-1));
+	vi.set(5,5,5,5);
+	QVERIFY(vi.dot(Vec4i(5,5,1,1))==60);
+	vi.set(2,2,2,2);
+	QVERIFY(vi.length()==4);
+	QVERIFY(vi.lengthSquared()==16);
+	QVERIFY(vi.toString()==QString("[2, 2, 2, 2]"));
 }

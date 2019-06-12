@@ -34,7 +34,7 @@ private slots:
 	void benchmarkForeachTriangle();
 	void benchmarkForeachTriangleDirect();
 private:
-	StelVertexArray arrayTriangleStrip, arrayTriangleFan, arrayTriangles;
+	StelVertexArray arrayTriangleStrip, arrayTriangleFan;
 };
 
 #endif // _TESTSTELVERTEXARRAY_HPP

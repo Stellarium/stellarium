@@ -30,6 +30,7 @@ class TestVecMath : public QObject
 private slots:	
 	void testVec2Math();
 	void testVec3Math();
+	void testVec4Math();
 };
 
 #endif // TESTVECMATH_HPP
