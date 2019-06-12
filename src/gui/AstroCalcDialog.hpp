@@ -129,8 +129,8 @@ public slots:
         void retranslate();
 		
 signals:
-		//! This signal is emitted when the graph day changed.
-		void graphDayChanged();
+	//! This signal is emitted when the graph day changed.
+	void graphDayChanged();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
@@ -198,9 +198,8 @@ private slots:
 	void mouseOverAziLine(QMouseEvent *event);
 
 	//! Set time by clicking inside graph areas
-	void AltTimeClick(QMouseEvent* event);
-	void AziTimeClick(QMouseEvent* event);
-
+	void altTimeClick(QMouseEvent* event);
+	void aziTimeClick(QMouseEvent* event);
 
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
@@ -287,7 +286,7 @@ private:
 	void populateTimeIntervalsList();
 	//! Populates the list of groups for WUT tool.
 	void populateWutGroups();
-
+	double getEphemerisTimeStep();
 	double computeGraphValue(const PlanetP &ssObj, const int graphType);
 
 	void populateFunctionsList();
@@ -329,7 +328,7 @@ private:
 	void enableVisibilityAngularLimits(bool visible);
 
 	//! Set clicked time in AstroCalc AltVSTime/AziVsTime graphs
-	void SetClickedTime(double posx);
+	void setClickedTime(double posx);
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;
