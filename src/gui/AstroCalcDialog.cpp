@@ -1312,8 +1312,24 @@ void AstroCalcDialog::reGenerateEphemeris()
 		initListEphemeris(); // Just update headers
 }
 
-double AstroCalcDialog::getEphemerisTimeStep()
+void AstroCalcDialog::generateEphemeris()
 {
+	float ra, dec;
+	Vec3d observerHelioPos;
+	QString currentPlanet = ui->celestialBodyComboBox->currentData().toString();
+	QString distanceInfo = q_("Planetocentric distance");
+	if (core->getUseTopocentricCoordinates())
+		distanceInfo = q_("Topocentric distance");
+	QString distanceUM = qc_("AU", "distance, astronomical unit");
+
+	QString elongStr = "", phaseStr = "";
+	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+	initListEphemeris();
+
+	double currentStep;
 	double solarDay = 1.0;
 	double siderealDay = 1.0;
 	double siderealYear = 365.256363004; // days
@@ -1324,7 +1340,6 @@ double AstroCalcDialog::getEphemerisTimeStep()
 		siderealDay = cplanet->getSiderealDay();
 		siderealYear = cplanet->getSiderealPeriod();
 	}
-	double currentStep = solarDay;
 	switch (ui->ephemerisStepComboBox->currentData().toInt())
 	{
 		case 1:
@@ -1436,27 +1451,6 @@ double AstroCalcDialog::getEphemerisTimeStep()
 			currentStep = solarDay;
 			break;
 	}
-	return currentStep;
-}
-
-void AstroCalcDialog::generateEphemeris()
-{
-	float ra, dec;
-	Vec3d observerHelioPos;
-	QString currentPlanet = ui->celestialBodyComboBox->currentData().toString();
-	QString distanceInfo = q_("Planetocentric distance");
-	if (core->getUseTopocentricCoordinates())
-		distanceInfo = q_("Topocentric distance");
-	QString distanceUM = qc_("AU", "distance, astronomical unit");
-
-	QString elongStr = "", phaseStr = "";
-	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
-	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-
-	initListEphemeris();
-
-	double currentStep = getEphemerisTimeStep();
 	PlanetP obj = solarSystem->searchByEnglishName(currentPlanet);
 	if (obj)
 	{

@@ -285,8 +285,7 @@ private:
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();
 	//! Populates the list of groups for WUT tool.
-	void populateWutGroups();
-	double getEphemerisTimeStep();
+	void populateWutGroups();	
 	double computeGraphValue(const PlanetP &ssObj, const int graphType);
 
 	void populateFunctionsList();
