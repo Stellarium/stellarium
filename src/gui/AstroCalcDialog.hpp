@@ -124,7 +124,6 @@ public:
 	static QVector<float> EphemerisListMagnitudes;
 	static int DisplayedPositionIndex;
 
-
 public slots:
         void retranslate();
 		
@@ -201,6 +200,8 @@ private slots:
 	void AltTimeClick(QMouseEvent* event);
 	void AziTimeClick(QMouseEvent* event);
 
+	//! handle events that are otherwise "lost" when dialog not visible
+	void handleVisibleEnabled();
 
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
@@ -333,6 +334,11 @@ private:
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;
+
+	//! Remember to redraw plots when dialog becomes visible
+	bool azivstimePlotNeedsRefresh;
+	bool altvstimePlotNeedsRefresh;
+	bool monthlyelevationPlotNeedsRefresh;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

@@ -99,6 +99,9 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, delimiter(", ")
 	, acEndl("\n")
 	, oldGraphJD(0)
+	, altvstimePlotNeedsRefresh(false)
+	, azivstimePlotNeedsRefresh(false)
+	, monthlyelevationPlotNeedsRefresh(false)
 {
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
@@ -296,6 +299,8 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(AltTimeClick(QMouseEvent*)));
 	connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(AziTimeClick(QMouseEvent*)));
+
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
 
 	connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
@@ -522,8 +527,16 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotAziVsTime || !dialog->isVisible())
+	//..
+	// we got notified about a reason to redraw the plot, but dialog was
+	// not visible. which means we must redraw when becoming visible again!
+	if (!dialog->isVisible() && plotAziVsTime)
+	{
+		azivstimePlotNeedsRefresh = true;
 		return;
+	}
+
+	if (!plotAziVsTime) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -1936,8 +1949,16 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotAltVsTime || !dialog->isVisible())
+	//..
+	// we got notified about a reason to redraw the plot, but dialog was
+	// not visible. which means we must redraw when becoming visible again!
+	if (!dialog->isVisible() && plotAltVsTime)
+	{
+		altvstimePlotNeedsRefresh = true;
 		return;
+	}
+
+	if (!plotAltVsTime) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -2138,8 +2159,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 void AstroCalcDialog::drawCurrentTimeDiagram()
 {
 	// special case - plot the graph when tab is visible
-	if (!plotAltVsTime && !plotAziVsTime)
-		return;
+	// and only if dialog is visible at all
+	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime)) return;
 
 	double currentJD = core->getJD();
 	double UTCOffset = core->getUTCOffset(currentJD);
@@ -2728,8 +2749,16 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotMonthlyElevation || !dialog->isVisible())
+	//..
+	// we got notified about a reason to redraw the plot, but dialog was
+	// not visible. which means we must redraw when becoming visible again!
+	if (!dialog->isVisible() && plotMonthlyElevation)
+	{
+		monthlyelevationPlotNeedsRefresh = true;
 		return;
+	}
+
+	if (!plotMonthlyElevation) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
@@ -2852,6 +2881,27 @@ void AstroCalcDialog::SetClickedTime(double posx)
 	core->setJD(JD);
 	drawCurrentTimeDiagram();
 }
+
+
+// Refresh plots when AstroCalc dialog becomes visible and
+// signals for doing so were cached during invisible dialog.
+void AstroCalcDialog::handleVisibleEnabled()
+{
+	if (dialog->isVisible())
+	{
+		if (azivstimePlotNeedsRefresh) drawAziVsTimeDiagram();
+		if (altvstimePlotNeedsRefresh) drawAltVsTimeDiagram();
+		if (monthlyelevationPlotNeedsRefresh) drawMonthlyElevationGraph();
+
+		// always update "now" line (don't wait for it's timer event)
+		drawCurrentTimeDiagram();
+	}
+
+	azivstimePlotNeedsRefresh = false;
+	altvstimePlotNeedsRefresh = false;
+	monthlyelevationPlotNeedsRefresh = false;
+}
+
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 {
