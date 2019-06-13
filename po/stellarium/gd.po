@@ -5,16 +5,16 @@
 # 
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
-# GunChleoc, 2018
+# GunChleoc, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-01 23:38+0600\n"
+"POT-Creation-Date: 2019-06-06 20:55+0600\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: GunChleoc, 2018\n"
+"Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/stellarium/teams/80998/gd/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -64,8 +64,8 @@ msgstr "astaras"
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
 #: src/core/StelApp.cpp:578 src/core/StelCore.cpp:260
-#: src/core/StelSkyLayerMgr.cpp:85 src/core/StelSkyLayerMgr.cpp:86
-#: src/StelMainView.cpp:818
+#: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
+#: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:818
 msgid "Display Options"
 msgstr "Roghainnean an t-seallaidh"
 
@@ -1835,7 +1835,7 @@ msgstr "Latha reultach"
 
 #: src/core/modules/Planet.cpp:613
 msgid "Mean solar day"
-msgstr "Latha grianail meadhain"
+msgstr "Latha-grèine meadhain"
 
 #: src/core/modules/Planet.cpp:617
 msgid "The period of rotation is chaotic"
@@ -2110,15 +2110,16 @@ msgstr ""
 "Cha deach leinn inneal-cuir Spout a chruthachadh. Faic an loga airson "
 "barrachd fiosrachaidh."
 
-#: src/core/StelCore.cpp:258 src/gui/StelGui.cpp:223
-#: src/gui/AstroCalcDialog.cpp:1257 src/gui/AstroCalcDialog.cpp:2850
-#: src/gui/BookmarksDialog.cpp:115 src/ui_dateTimeDialogGui.h:376
-#: src/ui_dateTimeDialogGui.h:379
+#: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
+#: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1257
+#: src/gui/AstroCalcDialog.cpp:2850 src/gui/BookmarksDialog.cpp:115
+#: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
 msgstr "Ceann-là agus àm"
 
-#: src/core/StelCore.cpp:259 src/core/StelMovementMgr.cpp:188
+#: src/core/StelCore.cpp:259 src/core/StelObjectMgr.cpp:52
+#: src/core/StelMovementMgr.cpp:188
 msgid "Movement and Selection"
 msgstr "Gluasad is taghadh"
 
@@ -2156,35 +2157,35 @@ msgstr "Suidhich an t-àm air an-dràsta"
 
 #: src/core/StelCore.cpp:270
 msgid "Add 1 solar minute"
-msgstr "Cuir mionaid grianail ris"
+msgstr "Cuir mionaid-ghrèine ris"
 
 #: src/core/StelCore.cpp:271
 msgid "Add 1 solar hour"
-msgstr "Cuir uair ghrianail ris"
+msgstr "Cuir uair-ghrèine ris"
 
 #: src/core/StelCore.cpp:272
 msgid "Add 1 solar day"
-msgstr "Cuir latha grianail ris"
+msgstr "Cuir latha-grèine ris"
 
 #: src/core/StelCore.cpp:273
 msgid "Add 7 solar days"
-msgstr "Cuir 7 làithean grianail ris"
+msgstr "Cuir 7 làithean-grèine ris"
 
 #: src/core/StelCore.cpp:274
 msgid "Subtract 1 solar minute"
-msgstr "Thoir mionaid grianail air falbh"
+msgstr "Thoir mionaid-ghrèine air falbh"
 
 #: src/core/StelCore.cpp:275
 msgid "Subtract 1 solar hour"
-msgstr "Thoir uair ghrianail air falbh"
+msgstr "Thoir uair-ghrèine air falbh"
 
 #: src/core/StelCore.cpp:276
 msgid "Subtract 1 solar day"
-msgstr "Thoir latha grianail air falbh"
+msgstr "Thoir latha-grèine air falbh"
 
 #: src/core/StelCore.cpp:277
 msgid "Subtract 7 solar days"
-msgstr "Thoir 7 làithean grianail air falbh"
+msgstr "Thoir 7 làithean-grèine air falbh"
 
 #: src/core/StelCore.cpp:278
 msgid "Add 1 sidereal day"
@@ -2988,6 +2989,30 @@ msgstr "Ciaradh pòlarach"
 #: src/core/StelObject.cpp:662
 msgid "IAU Constellation"
 msgstr "Reul-bhad IAU"
+
+#: src/core/StelObjectMgr.cpp:55
+msgid "Next transit of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:56
+msgid "Next rising of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:57
+msgid "Next setting of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:58
+msgid "Previous transit of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:59
+msgid "Previous rising of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:60
+msgid "Previous setting of the selected object"
+msgstr ""
 
 #: src/core/StelSkyLayerMgr.cpp:85
 msgid "Deep-sky objects background images"
@@ -3894,11 +3919,11 @@ msgstr "Roinn-tìde"
 
 #: src/gui/StelGuiItems.cpp:686 src/gui/LocationDialog.cpp:467
 msgid "Local Mean Solar Time"
-msgstr "Àm grianail meadhain ionadail"
+msgstr "Àm-grèine meadhain ionadail"
 
 #: src/gui/StelGuiItems.cpp:689 src/gui/LocationDialog.cpp:468
 msgid "Local True Solar Time"
-msgstr "Fìor-àm grianail ionadail"
+msgstr "Fìor-àm-grèine ionadail"
 
 #. TRANSLATORS: unit of measurement: minutes per second
 #: src/gui/StelGuiItems.cpp:692
@@ -4037,7 +4062,7 @@ msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
 msgstr ""
-"Cleachd “mapa sgàile” gus sgàilean aig cuspairean an rian-grèine nach eil "
+"Cleachd “mapa sgàile” gus sgàilean aig cuspairean an rian-ghrèine nach eil "
 "os-chearclach a riochdachadh. Dh’fhaoidte gun lùghdaich seo càileachd nan "
 "leth-sgàileanan air cuid a chuspairean."
 
@@ -4537,19 +4562,19 @@ msgstr "soill. uachd."
 
 #: src/gui/AstroCalcDialog.cpp:775 src/ui_viewDialog.h:3008
 msgid "Solar system objects"
-msgstr "Cuspairean an rian-grèine"
+msgstr "Cuspairean an rian-ghrèine"
 
 #: src/gui/AstroCalcDialog.cpp:776
 msgid "Solar system objects: comets"
-msgstr "Cuspairean an rian-grèine: reultan-cearbach"
+msgstr "Cuspairean an rian-ghrèine: reultan-cearbach"
 
 #: src/gui/AstroCalcDialog.cpp:777
 msgid "Solar system objects: minor bodies"
-msgstr "Cuspairean an rian-grèine: cuspairean beaga"
+msgstr "Cuspairean an rian-ghrèine: cuspairean beaga"
 
 #: src/gui/AstroCalcDialog.cpp:778
 msgid "Solar system objects: planets"
-msgstr "Cuspairean an rian-grèine: planaidean"
+msgstr "Cuspairean an rian-ghrèine: planaidean"
 
 #: src/gui/AstroCalcDialog.cpp:851
 #, qt-format
@@ -4642,31 +4667,31 @@ msgstr "12 uair a thìde"
 
 #: src/gui/AstroCalcDialog.cpp:1771
 msgid "1 solar day"
-msgstr "1 latha grianail"
+msgstr "1 latha-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:1772
 msgid "5 solar days"
-msgstr "5 làithean grianail"
+msgstr "5 làithean-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:1773
 msgid "10 solar days"
-msgstr "10 làithean grianail"
+msgstr "10 làithean-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:1774
 msgid "15 solar days"
-msgstr "15 làithean grianail"
+msgstr "15 làithean-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:1775
 msgid "30 solar days"
-msgstr "30 latha grianail"
+msgstr "30 latha-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:1776
 msgid "60 solar days"
-msgstr "60 latha grianail"
+msgstr "60 latha-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:1777
 msgid "100 solar days"
-msgstr "100 latha grianail"
+msgstr "100 latha-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:1778
 msgid "1 sidereal day"
@@ -4986,7 +5011,7 @@ msgstr "Cuspair 2"
 
 #: src/gui/AstroCalcDialog.cpp:2854
 msgid "Solar Elongation"
-msgstr "Sìneadh grianail"
+msgstr "Sìneadh-grèine"
 
 #: src/gui/AstroCalcDialog.cpp:2855
 msgid "Lunar Elongation"
@@ -6567,7 +6592,7 @@ msgstr "3 trasnaidhean is 2 dhubhradh bho Dheimos 2027"
 #. TRANSLATORS: Name of script
 #: src/translations.h:600
 msgid "Solar System Screensaver"
-msgstr "Sàbhalaiche-sgrìn rian-grèine"
+msgstr "Sàbhalaiche-sgrìn rian-ghrèine"
 
 #. TRANSLATORS: Name of script
 #: src/translations.h:602
@@ -6987,7 +7012,7 @@ msgstr ""
 
 #: src/translations.h:701
 msgid "A tour of the Solar System planets"
-msgstr ""
+msgstr "Turas air planaidean an rian-ghrèine."
 
 #: src/translations.h:702
 msgid ""
@@ -8859,7 +8884,7 @@ msgstr "Riochdachadh an àile"
 
 #: src/ui_viewDialog.h:2544
 msgid "Solar System objects"
-msgstr "Cuspairean an rian-grèine"
+msgstr "Cuspairean an rian-ghrèine"
 
 #: src/ui_viewDialog.h:2545
 msgid "Hide nomenclature on the celestial body of observer"
@@ -8871,7 +8896,7 @@ msgid ""
 "bodies."
 msgstr ""
 "Cuir an roghainn seo à comas mur eil thu airson na lorgan fhaicinn airson "
-"gabh ball na rian-grèine."
+"gach ball an rian-ghrèine."
 
 #: src/ui_viewDialog.h:2549
 msgid "Show trails only for N latest selected planets:"
@@ -8967,7 +8992,7 @@ msgstr "Am factar sgèilidh"
 
 #: src/ui_viewDialog.h:2595
 msgid "Limit the magnitude of solar system objects"
-msgstr "Cuingich a’ mheudachd aig cuspairean an rian-grèine"
+msgstr "Cuingich a’ mheudachd aig cuspairean an rian-ghrèine"
 
 #: src/ui_viewDialog.h:2598
 msgid "Use custom settings of GRS:"
@@ -11159,7 +11184,7 @@ msgstr "Dathan fa leth air na reul-chuairtean dha phlanaidean mòra a-mhàin"
 
 #: src/ui_orbitColorsDialog.h:396
 msgid "Colors of orbits of Solar system bodies"
-msgstr "Dathan air reul-chuairtean aig bodhaigean a’ chriosa-ghrèine"
+msgstr "Dathan air reul-chuairtean aig bodhaigean an rian-ghrèine"
 
 #: src/ui_orbitColorsDialog.h:397
 msgid "Orbits of major planets"
@@ -13779,7 +13804,7 @@ msgid ""
 "installed. The powerful light amplified by the telescope WILL cause "
 "irreversible damage to your eyes and/or your equipment."
 msgstr ""
-"Na tomh a’ ghlainne-amhairc agad ris a’ ghrian idir gun chriathrag-grèine "
+"Na tomh a’ ghlainne-amhairc agad ris a’ ghrian idir gun chriathrag-ghrèine "
 "iomchaidh air. ’S ann GU BUAN a mhilleas an solas cumhachdach air a "
 "mheudachadh leis a’ ghlainne-amhairc do shùilean agus/no an uidheamachd "
 "agad."
@@ -14912,7 +14937,7 @@ msgstr "Àirde:"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:161
 msgid "Solar System body"
-msgstr "Bodhaig an rian-grèine"
+msgstr "Bodhaig an rian-ghrèine"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:176
 msgid "Current date/time"
@@ -15094,7 +15119,7 @@ msgstr " [ENTER gus a ghnìomhachadh]"
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:135
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:226
 msgid "Solar System Editor"
-msgstr "Deasaiche an rian-grèine"
+msgstr "Deasaiche an rian-ghrèine"
 
 #: plugins/SolarSystemEditor/src/SolarSystemEditor.cpp:60
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:234
@@ -15175,7 +15200,7 @@ msgstr ""
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:199
 msgid "Save the minor Solar System bodies as..."
-msgstr "Sàbhail bodhaigean beaga an rian-grèine mar…"
+msgstr "Sàbhail bodhaigean beaga an rian-ghrèine mar…"
 
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:206
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:214
@@ -15251,7 +15276,7 @@ msgstr ""
 "Cuir comharra ris na cuspairean a bu toigh leat ion-phortadh. Thèid na "
 "h-ainmean a fhreagras ri cuspairean a chaidh a luchdadh mar-thà a "
 "shealltainn ann an <i>clò Eadailteach</i>. Thèid na h-ainmean a fhreagras ri"
-" cuspairean dìleabach o rèiteachadh tùsail an rian-grèine aig Stellarium a "
+" cuspairean dìleabach o rèiteachadh tùsail an rian-ghrèine aig Stellarium a "
 "shealltainn ann an <i>clò trom</i>.<br/>Thoir an aire gum faod cus "
 "cuspairean maille a chur air Stellarium."
 
@@ -15274,7 +15299,7 @@ msgstr "Cuir cuspairean ris"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:261
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:273
 msgid "Minor Solar System objects"
-msgstr "Seall cuspairean beaga an rian-grèine"
+msgstr "Seall cuspairean beaga an rian-ghrèine"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
 #: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
@@ -15288,8 +15313,9 @@ msgid ""
 " you can delete manually that file from:"
 msgstr ""
 "Deasaichidh am plugan seo faidhle rèiteachaidh gnàthaichte airson bodhaigean"
-" beaga an rian-grèine. Ma thèid rudeigin cearr ’s ma thuislicheas Stellarium"
-" no mura tòisich e, ’s urrainn dhut am faidhle sin a sguabadh às a làimh o:"
+" beaga an rian-ghrèine. Ma thèid rudeigin cearr ’s ma thuislicheas "
+"Stellarium no mura tòisich e, ’s urrainn dhut am faidhle sin a sguabadh às a"
+" làimh o:"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:265
 msgid ""
@@ -15305,7 +15331,7 @@ msgstr "Ath-shuidhich air a’ bhun-roghainn"
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:267
 msgid "Export/replace the Solar System minor objects file"
 msgstr ""
-"Às-phòrtaich/cuir an àite faidhle airson cuspairean beaga an rian-grèine"
+"Às-phòrtaich/cuir an àite faidhle airson cuspairean beaga an rian-ghrèine"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:268
 msgid ""
@@ -15313,21 +15339,22 @@ msgid ""
 "in a convenient location, or replace it with such a copy."
 msgstr ""
 "’S urrainn dhut lethbhreac-glèidhidh a dhèanamh dhen fhaidhle rèiteachaidh "
-"gnàthaichte an rian-grèine ann an ionad goireasach no lethbhreac dhen "
+"gnàthaichte an rian-ghrèine ann an ionad goireasach no lethbhreac dhen "
 "leithid a chur ’na àite."
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:269
 msgid "Export the Solar System minor objects to file..."
-msgstr "Às-phòrtaich cuspairean beaga an rian-grèine gu faidhle…"
+msgstr "Às-phòrtaich cuspairean beaga an rian-ghrèine gu faidhle…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:270
 msgid "Import and replace the Solar System minor objects from file..."
 msgstr ""
-"Ion-phòrtaich is cuir an àite cuspairean beaga an rian-grèine o fhaidhle…"
+"Ion-phòrtaich is cuir an àite cuspairean beaga an rian-ghrèine o fhaidhle…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:271
 msgid "Import and add Solar System minor objects from file..."
-msgstr "Ion-phòrtaich is cuir ris cuspairean beaga an rian-grèine o fhaidhle…"
+msgstr ""
+"Ion-phòrtaich is cuir ris cuspairean beaga an rian-ghrèine o fhaidhle…"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:272
 msgid "Configuration file"
@@ -15335,7 +15362,7 @@ msgstr "Faidhle rèiteachaidh"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:275
 msgid "Add new Minor Solar System objects"
-msgstr "Cuir cuspairean beaga an rian-grèine ùra ris"
+msgstr "Cuir cuspairean beaga an rian-ghrèine ùra ris"
 
 #: plugins/Supernovae/src/Supernovae.cpp:71
 #: plugins/Supernovae/src/Supernovae.cpp:150
@@ -16775,7 +16802,7 @@ msgid ""
 "revolutionibus orbium coelestium</em>."
 msgstr ""
 "’S e reul-eòlaiche Pòlainneach a bh’ ann an Nicolaus Copernicus no Mikołaj "
-"Kopernik (1473-1543) a mhol am mòideal grian-mheadhanach dhen rian-grèine "
+"Kopernik (1473-1543) a mhol am mòideal grian-mheadhanach dhen rian-ghrèine "
 "san leabhar <em>De revolutionibus orbium coelestium</em> aige."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
@@ -17087,7 +17114,7 @@ msgid ""
 "important for the study of the solar system."
 msgstr ""
 "Chaidh <em>Veritas</em> a thairgse o thùs ach seo ainm air astaroid a tha "
-"cudromach ann an sgrùdadh an rian-grèine."
+"cudromach ann an sgrùdadh an rian-ghrèine."
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
@@ -17169,7 +17196,7 @@ msgstr "Làrach-lìn NameExoWorlds"
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Làraichean-lìn proifeiseanta coitcheann a tha buntainneach dha planaidean "
-"taobh a-muigh ar rian-grèine"
+"taobh a-muigh ar rian-ghrèine"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
 msgid "Exoplanets: an interactive version of XKCD 1071"
@@ -17192,7 +17219,7 @@ msgstr "Ainmeachadh nan exo-phlanaidean (IAU)"
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Cuid a reul-eòlaichean is buidhnean a nì sgrùdadh air planaidean taobh "
-"a-muigh ar rian-grèine"
+"a-muigh ar rian-ghrèine"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "update: 16 April 2012"
@@ -17208,7 +17235,7 @@ msgstr "Lorg nam planaidean Sasannach-Astràilianach"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "Geneva Extrasolar Planet Search Programmes"
-msgstr "Prògraman Geneva gus planaidean taobh a-muigh ar rian-grèine a lorg"
+msgstr "Prògraman Geneva gus planaidean taobh a-muigh ar rian-ghrèine a lorg"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
@@ -17228,7 +17255,7 @@ msgstr "Tasglann exo-phlanaidean NASA"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "IAU Commission 53: Extrasolar Planets"
-msgstr "Coimisean 53 an IAU: Planaidean taobh a-muigh ar rian-grèine"
+msgstr "Coimisean 53 an IAU: Planaidean taobh a-muigh ar rian-ghrèine"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "ExoMol"
@@ -17695,10 +17722,10 @@ msgstr ""
 "Seo plugan a nì sgrùdadh air cuin a bhios an tùs a chaidh a thaghadh san "
 "amharc (no meadhan na sgrìn mura deach tùs a thaghadh). Seallaidh am plugan "
 "amannan èirigh, trasnaidh is laighe cho math ri ceann-aimsire a’ bhliadhna "
-"as fhearr (’s e seo an sgaradh ceàrnach as motha on ghrian), rainse nan "
+"as fheàrr (’s e seo an sgaradh ceàrnach as motha on ghrian), rainse nan "
 "ceann-là nuair a bhios an tùs os cionn na fàire rè oidhche duirche agus "
 "cinn-là an èirigh/laighe acronychach is chosmach.<br>Thèid ephemeris aig "
-"cuspairean an rian-grèine agus èifeachdan paraileig a thoirt fa-"
+"cuspairean an rian-ghrèine agus èifeachdan paraileig a thoirt fa-"
 "near.<br><br> Tha an t-ùghdar a’ toirt taing dha dh’Alexander Wolf agus "
 "Georg Zotti airson an comhairle.<br><br>Ivan Marti-Vidal (Onsala Space "
 "Observatory)"
@@ -18021,9 +18048,9 @@ msgid ""
 "always followed. Anyone who makes use of a published table or graph should "
 "first check its sign usage."
 msgstr ""
-"Mìnichidh an co-aontar seo an diofar eadar dà sheòrsa dhe dh’àm grianail. Is"
-" iadsan an t-àm grianail san lèirsinn a thracaicheas gluasad na grèine gu "
-"dìreach agus an t-àm grianail meadhain a thracaicheas grian mas-fhìor "
+"Mìnichidh an co-aontar seo an diofar eadar dà sheòrsa dhe dh’àm-grèine. Is "
+"iadsan an t-àm-grèine san lèirsinn a thracaicheas gluasad na grèine gu "
+"dìreach agus an t-àm-grèine meadhain a thracaicheas grian mas-fhìor "
 "“meadhain” le gach meadhan-latha 24 uair a thìde o chàch a chèile. Chan eil "
 "mìneachadh ris a dh’aontaicheas a h-uile duine ann air soidhne co-aontar an "
 "ama. Seallaidh an dàrna cuid a dh’fhoillseachaidhean soidhne dearbh nuair a "
@@ -18165,7 +18192,7 @@ msgstr "As motha: %1"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:613
 msgid "Solar longitude"
-msgstr "Domhan-fhad grianail"
+msgstr "Domhan-fhad-grèine"
 
 #: plugins/MeteorShowers/src/MeteorShower.cpp:623
 msgid "variable"

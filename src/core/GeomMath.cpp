@@ -56,7 +56,7 @@ void AABBox::reset()
 
 bool AABBox::isValid() const
 {
-	return (	min[0] < max[0]	&&
+	return (	min[0] < max[0] &&
 			min[1] < max[1] &&
 			min[2] < max[2]);
 }

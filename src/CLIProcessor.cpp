@@ -30,7 +30,7 @@
 #include <QStandardPaths>
 #include <QDir>
 
-#include <stdio.h>
+#include <cstdio>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {

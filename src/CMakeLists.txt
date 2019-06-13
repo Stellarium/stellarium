@@ -671,6 +671,36 @@ IF(ENABLE_TESTING)
     ADD_TEST(testAirmass testAirmass)
     SET_TARGET_PROPERTIES(testAirmass PROPERTIES FOLDER "src/tests")
 
+    SET(tests_testGeomMath_SRCS
+        tests/testGeomMath.hpp
+        tests/testGeomMath.cpp
+    )
+    ADD_EXECUTABLE(testGeomMath ${tests_testGeomMath_SRCS})
+    TARGET_LINK_LIBRARIES(testGeomMath ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testGeomMath)
+    ADD_TEST(testGeomMath testGeomMath)
+    SET_TARGET_PROPERTIES(testGeomMath PROPERTIES FOLDER "src/tests")
+
+    SET(tests_testVecMath_SRCS
+        tests/testVecMath.hpp
+        tests/testVecMath.cpp
+    )
+    ADD_EXECUTABLE(testVecMath ${tests_testVecMath_SRCS})
+    TARGET_LINK_LIBRARIES(testVecMath ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testVecMath)
+    ADD_TEST(testVecMath testVecMath)
+    SET_TARGET_PROPERTIES(testVecMath PROPERTIES FOLDER "src/tests")
+
+    SET(tests_testStelProjector_SRCS
+        tests/testStelProjector.hpp
+        tests/testStelProjector.cpp
+    )
+    ADD_EXECUTABLE(testStelProjector ${tests_testStelProjector_SRCS})
+    TARGET_LINK_LIBRARIES(testStelProjector ${TESTS_LIBRARIES})
+    ADD_DEPENDENCIES(buildTests testStelProjector)
+    ADD_TEST(testStelProjector testStelProjector)
+    SET_TARGET_PROPERTIES(testStelProjector PROPERTIES FOLDER "src/tests")
+
     SET(tests_testPrecession_SRCS
         tests/testPrecession.hpp
         tests/testPrecession.cpp

@@ -15,7 +15,7 @@ def snt_data():
     returns a dict with each field parsed out.
     """
     #                              mag           ra          npd             bayer              sup       weight    cons
-    data_regex = re.compile(r'([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-ZZa-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})')
+    data_regex = re.compile(r'([0-9\. -]{5}) ([0-9\. ]{8}) ([0-9\. ]{8}) ([A-Za-z0-9 -]{3})([a-zA-Z0-9 ])([0-9])([a-zA-Z]{3})')
     for line in sys.stdin:
         line = line.rstrip('\n\r')
         m = re.match(data_regex, line)

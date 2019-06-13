@@ -389,12 +389,12 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			if (oDistanceErr>0.f)
 			{
 				dx = QString("%1%2%3").arg(QString::number(oDistance, 'f', 3)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr, 'f', 3));
-				dy = QString("%1%2%3").arg(QString::number(oDistance*dc, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number(oDistanceErr*dc, 'f', ms));
+				dy = QString("%1%2%3").arg(QString::number((double)oDistance*dc, 'f', ms)).arg(QChar(0x00B1)).arg(QString::number((double)oDistanceErr*dc, 'f', ms));
 			}
 			else
 			{
 				dx = QString("%1").arg(QString::number(oDistance, 'f', 3));
-				dy = QString("%1").arg(QString::number(oDistance*dc, 'f', ms));
+				dy = QString("%1").arg(QString::number((double)oDistance*dc, 'f', ms));
 			}
 
 			oss << QString("%1: %2 %3 (%4 %5)").arg(q_("Distance"), dx, dupc, dy, duly) << "<br />";
@@ -573,7 +573,7 @@ float Nebula::getSurfaceBrightness(const StelCore* core, bool arcsec) const
 	if (bMag < 90.f && mag > 90.f)
 		mag = bMag;
 	if (mag<99.f && majorAxisSize>0.f && nType!=NebDn)
-		return mag + 2.5f*log10(getSurfaceArea()*sq);
+		return mag + 2.5f*log10((double)getSurfaceArea()*sq);
 	else
 		return 99.f;
 }
@@ -584,7 +584,7 @@ float Nebula::getSurfaceBrightnessWithExtinction(const StelCore* core, bool arcs
 	if (arcsec)
 		sq = 12.96e6; // 3600.f*3600.f, i.e. arcsec^2
 	if (getVMagnitudeWithExtinction(core)<99.f && majorAxisSize>0.f && nType!=NebDn)
-		return getVMagnitudeWithExtinction(core) + 2.5f*log10(getSurfaceArea()*sq);
+		return getVMagnitudeWithExtinction(core) + 2.5f*log10((double)getSurfaceArea()*sq);
 	else
 		return 99.f;
 }
