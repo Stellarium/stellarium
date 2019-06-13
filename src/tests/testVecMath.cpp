@@ -222,6 +222,8 @@ void TestVecMath::testVec3Math()
 void TestVecMath::testVec4Math()
 {
 	Vec4i vi;
+	Vec4f vf;
+	Vec4d vd;
 
 	vi.set(0,0,0,0);
 	QVERIFY(vi==Vec4i(0,0,0,0));
@@ -246,4 +248,75 @@ void TestVecMath::testVec4Math()
 	QVERIFY(vi.length()==4);
 	QVERIFY(vi.lengthSquared()==16);
 	QVERIFY(vi.toString()==QString("[2, 2, 2, 2]"));
+
+	vf.set(0.f,0.f,0.f,0.f);
+	QVERIFY(vf==Vec4f(0.f,0.f,0.f,0.f));
+	QVERIFY(vf!=Vec4f(0.f,1.f,0.f,0.f));
+	vf = Vec3f(0.f,0.f,0.f);
+	QVERIFY(vf==Vec4f(0.f,0.f,0.f,1.f));
+	vf+=Vec4f(2.f,2.f,2.f,1.f);
+	QVERIFY(vf==Vec4f(2.f,2.f,2.f,2.f));
+	vf-=Vec4f(1.f,1.f,1.f,1.f);
+	QVERIFY(vf==Vec4f(1.f,1.f,1.f,1.f));
+	vf*=6.f;
+	QVERIFY(vf==Vec4f(6.f,6.f,6.f,6.f));
+	vf/=3.f;
+	QVERIFY(vf==Vec4f(2.f,2.f,2.f,2.f));
+	vf = Vec4f(1.f,1.f,1.f,1.f) + Vec4f(9.f,9.f,9.f,9.f);
+	QVERIFY(vf==Vec4f(10.f,10.f,10.f,10.f));
+	vf = Vec4f(5.f,5.f,5.f,5.f) - Vec4f(6.f,6.f,6.f,6.f);
+	QVERIFY(vf==Vec4f(-1.f,-1.f,-1.f,-1.f));
+	vf.set(5.f,5.f,5.f,5.f);
+	QVERIFY(qAbs(vf.dot(Vec4f(5.f,5.f,1.f,1.f))-60.f)<=ERROR_LIMIT);
+	vf.set(2.f,2.f,2.f,2.f);
+	QVERIFY(qAbs(vf.length()-4.f) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vf.lengthSquared()-16.f) <= ERROR_LIMIT);
+
+	vd.set(0.,0.,0.,0.);
+	QVERIFY(vd==Vec4d(0.,0.,0.,0.));
+	QVERIFY(vd!=Vec4d(0.,1.,0.,0.));
+	vd = Vec3d(0.,0.,0.);
+	QVERIFY(vd==Vec4d(0.,0.,0.,1.));
+	vd+=Vec4d(2.,2.,2.,1.);
+	QVERIFY(vd==Vec4d(2.,2.,2.,2.));
+	vd-=Vec4d(1.,1.,1.,1.);
+	QVERIFY(vd==Vec4d(1.,1.,1.,1.));
+	vd*=6.;
+	QVERIFY(vd==Vec4d(6.,6.,6.,6.));
+	vd/=3.;
+	QVERIFY(vd==Vec4d(2.,2.,2.,2.));
+	vd = Vec4d(1.,1.,1.,1.) + Vec4d(9.,9.,9.,9.);
+	QVERIFY(vd==Vec4d(10.,10.,10.,10.));
+	vd = Vec4d(5.,5.,5.,5.) - Vec4d(6.,6.,6.,6.);
+	QVERIFY(vd==Vec4d(-1.,-1.,-1.,-1.));
+	vd.set(5.,5.,5.,5.);
+	QVERIFY(qAbs(vd.dot(Vec4d(5.,5.,1.,1.))-60.)<=ERROR_LIMIT);
+	vd.set(2.,2.,2.,2.);
+	QVERIFY(qAbs(vd.length()-4.) <= ERROR_LIMIT);
+	QVERIFY(qAbs(vd.lengthSquared()-16.) <= ERROR_LIMIT);
+}
+
+
+void TestVecMath::testMatrix3Math()
+{
+	Mat3f mf;
+	Mat3d md;
+
+	mf.set(0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f);
+	QVERIFY(qAbs(mf.trace() - 0.f) <= ERROR_LIMIT);
+	mf = mf + Mat3f(1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f);
+	QVERIFY(qAbs(mf.trace() - 3.f) <= ERROR_LIMIT);
+	mf = mf - Mat3f(2.f,2.f,2.f,2.f,2.f,2.f,2.f,2.f,2.f);
+	QVERIFY(qAbs(mf.trace() + 3.f) <= ERROR_LIMIT);
+	mf = Mat3f(1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f,1.f)*Mat3f(5.f,5.f,5.f,5.f,5.f,5.f,5.f,5.f,5.f);
+	QVERIFY(qAbs(mf.trace() - 45.f) <= ERROR_LIMIT);
+
+	md.set(0.,0.,0.,0.,0.,0.,0.,0.,0.);
+	QVERIFY(qAbs(md.trace() - 0.) <= ERROR_LIMIT);
+	md = md + Mat3d(1.,1.,1.,1.,1.,1.,1.,1.,1.);
+	QVERIFY(qAbs(md.trace() - 3.) <= ERROR_LIMIT);
+	md = md - Mat3d(2.,2.,2.,2.,2.,2.,2.,2.,2.);
+	QVERIFY(qAbs(md.trace() + 3.) <= ERROR_LIMIT);
+	md = Mat3d(1.,1.,1.,1.,1.,1.,1.,1.,1.)*Mat3d(5.,5.,5.,5.,5.,5.,5.,5.,5.);
+	QVERIFY(qAbs(md.trace() - 45.) <= ERROR_LIMIT);
 }
