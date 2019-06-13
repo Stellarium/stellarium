@@ -201,6 +201,8 @@ private slots:
 	void altTimeClick(QMouseEvent* event);
 	void aziTimeClick(QMouseEvent* event);
 
+	void handleVisibleEnabled();
+
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
 	void saveGraphsSecondId(int index);

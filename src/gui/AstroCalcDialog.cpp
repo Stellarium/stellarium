@@ -328,6 +328,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAngularDistanceGraph()));
 	drawAngularDistanceGraph();
 
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
+
 	/*
 	wutModel = new QStringListModel(this);
 	proxyModel = new QSortFilterProxyModel(ui->wutMatchingObjectsListView);
@@ -418,6 +420,15 @@ void AstroCalcDialog::createDialogContent()
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
 	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
+}
+
+// Refresh plots when AstroCalc dialog becomes visible again
+void AstroCalcDialog::handleVisibleEnabled()
+{
+	drawAltVsTimeDiagram();
+	drawAziVsTimeDiagram();
+	drawMonthlyElevationGraph();
+	drawCurrentTimeDiagram();
 }
 
 void AstroCalcDialog::searchWutClear()
