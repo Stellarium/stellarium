@@ -124,12 +124,13 @@ public:
 	static QVector<float> EphemerisListMagnitudes;
 	static int DisplayedPositionIndex;
 
+
 public slots:
         void retranslate();
 		
 signals:
-		//! This signal is emitted when the graph day changed.
-		void graphDayChanged();
+	//! This signal is emitted when the graph day changed.
+	void graphDayChanged();
 
 protected:
         //! Initialize the dialog widgets and connect the signals/slots.
@@ -197,11 +198,8 @@ private slots:
 	void mouseOverAziLine(QMouseEvent *event);
 
 	//! Set time by clicking inside graph areas
-	void AltTimeClick(QMouseEvent* event);
-	void AziTimeClick(QMouseEvent* event);
-
-	//! handle events that are otherwise "lost" when dialog not visible
-	void handleVisibleEnabled();
+	void altTimeClick(QMouseEvent* event);
+	void aziTimeClick(QMouseEvent* event);
 
 	void saveGraphsCelestialBody(int index);
 	void saveGraphsFirstId(int index);
@@ -287,8 +285,7 @@ private:
 	//! Populates the drop-down list of time intervals for WUT tool.
 	void populateTimeIntervalsList();
 	//! Populates the list of groups for WUT tool.
-	void populateWutGroups();
-
+	void populateWutGroups();	
 	double computeGraphValue(const PlanetP &ssObj, const int graphType);
 
 	void populateFunctionsList();
@@ -330,15 +327,10 @@ private:
 	void enableVisibilityAngularLimits(bool visible);
 
 	//! Set clicked time in AstroCalc AltVSTime/AziVsTime graphs
-	void SetClickedTime(double posx);
+	void setClickedTime(double posx);
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;
-
-	//! Remember to redraw plots when dialog becomes visible
-	bool azivstimePlotNeedsRefresh;
-	bool altvstimePlotNeedsRefresh;
-	bool monthlyelevationPlotNeedsRefresh;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

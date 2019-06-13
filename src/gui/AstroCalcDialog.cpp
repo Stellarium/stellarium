@@ -99,9 +99,6 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, delimiter(", ")
 	, acEndl("\n")
 	, oldGraphJD(0)
-	, altvstimePlotNeedsRefresh(false)
-	, azivstimePlotNeedsRefresh(false)
-	, monthlyelevationPlotNeedsRefresh(false)
 {
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
@@ -297,10 +294,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	drawAltVsTimeDiagram();
 
-	connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(AltTimeClick(QMouseEvent*)));
-	connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(AziTimeClick(QMouseEvent*)));
-
-	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
+	connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(altTimeClick(QMouseEvent*)));
+	connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(aziTimeClick(QMouseEvent*)));
 
 	connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
@@ -527,16 +522,8 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	//..
-	// we got notified about a reason to redraw the plot, but dialog was
-	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && plotAziVsTime)
-	{
-		azivstimePlotNeedsRefresh = true;
+	if (!plotAziVsTime || !dialog->isVisible())
 		return;
-	}
-
-	if (!plotAziVsTime) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -1327,7 +1314,7 @@ void AstroCalcDialog::reGenerateEphemeris()
 
 void AstroCalcDialog::generateEphemeris()
 {
-	float currentStep, ra, dec;
+	float ra, dec;
 	Vec3d observerHelioPos;
 	QString currentPlanet = ui->celestialBodyComboBox->currentData().toString();
 	QString distanceInfo = q_("Planetocentric distance");
@@ -1342,6 +1329,7 @@ void AstroCalcDialog::generateEphemeris()
 
 	initListEphemeris();
 
+	double currentStep;
 	double solarDay = 1.0;
 	double siderealDay = 1.0;
 	double siderealYear = 365.256363004; // days
@@ -1352,86 +1340,85 @@ void AstroCalcDialog::generateEphemeris()
 		siderealDay = cplanet->getSiderealDay();
 		siderealYear = cplanet->getSiderealPeriod();
 	}
-
 	switch (ui->ephemerisStepComboBox->currentData().toInt())
 	{
 		case 1:
-			currentStep = 10 * StelCore::JD_MINUTE;
+			currentStep = 10. * StelCore::JD_MINUTE;
 			break;
 		case 2:
-			currentStep = 30 * StelCore::JD_MINUTE;
+			currentStep = 30. * StelCore::JD_MINUTE;
 			break;
 		case 3:
 			currentStep = StelCore::JD_HOUR;
 			break;
 		case 4:
-			currentStep = 6 * StelCore::JD_HOUR;
+			currentStep = 6. * StelCore::JD_HOUR;
 			break;
 		case 5:
-			currentStep = 12 * StelCore::JD_HOUR;
+			currentStep = 12. * StelCore::JD_HOUR;
 			break;
 		case 6:
 			currentStep = solarDay;
 			break;
 		case 7:
-			currentStep = 5 * solarDay;
+			currentStep = 5. * solarDay;
 			break;
 		case 8:
-			currentStep = 10 * solarDay;
+			currentStep = 10. * solarDay;
 			break;
 		case 9:
-			currentStep = 15 * solarDay;
+			currentStep = 15. * solarDay;
 			break;
 		case 10:
-			currentStep = 30 * solarDay;
+			currentStep = 30. * solarDay;
 			break;
 		case 11:
-			currentStep = 60 * solarDay;
+			currentStep = 60. * solarDay;
 			break;
 		case 12:
 			currentStep = StelCore::JD_DAY;
 			break;
 		case 13:
-			currentStep = 5 * StelCore::JD_DAY;
+			currentStep = 5. * StelCore::JD_DAY;
 			break;
 		case 14:
-			currentStep = 10 * StelCore::JD_DAY;
+			currentStep = 10. * StelCore::JD_DAY;
 			break;
 		case 15:
-			currentStep = 15 * StelCore::JD_DAY;
+			currentStep = 15. * StelCore::JD_DAY;
 			break;
 		case 16:
-			currentStep = 30 * StelCore::JD_DAY;
+			currentStep = 30. * StelCore::JD_DAY;
 			break;
 		case 17:
-			currentStep = 60 * StelCore::JD_DAY;
+			currentStep = 60. * StelCore::JD_DAY;
 			break;
 		case 18:
 			currentStep = siderealDay;
 			break;
 		case 19:
-			currentStep = 5 * siderealDay;
+			currentStep = 5. * siderealDay;
 			break;
 		case 20:
-			currentStep = 10 * siderealDay;
+			currentStep = 10. * siderealDay;
 			break;
 		case 21:
-			currentStep = 15 * siderealDay;
+			currentStep = 15. * siderealDay;
 			break;
 		case 22:
-			currentStep = 30 * siderealDay;
+			currentStep = 30. * siderealDay;
 			break;
 		case 23:
-			currentStep = 60 * siderealDay;
+			currentStep = 60. * siderealDay;
 			break;
 		case 24:
-			currentStep = 100 * solarDay;
+			currentStep = 100. * solarDay;
 			break;
 		case 25:
-			currentStep = 100 * siderealDay;
+			currentStep = 100. * siderealDay;
 			break;
 		case 26:
-			currentStep = 100 * StelCore::JD_DAY;
+			currentStep = 100. * StelCore::JD_DAY;
 			break;
 		case 27:
 			currentStep = siderealYear*solarDay;
@@ -1464,7 +1451,6 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = solarDay;
 			break;
 	}
-
 	PlanetP obj = solarSystem->searchByEnglishName(currentPlanet);
 	if (obj)
 	{
@@ -1496,7 +1482,7 @@ void AstroCalcDialog::generateEphemeris()
 
 		for (int i = 0; i < elements; i++)
 		{
-			double JD = firstJD + i * (double) currentStep;
+			double JD = firstJD + i * currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 
@@ -1949,16 +1935,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	//..
-	// we got notified about a reason to redraw the plot, but dialog was
-	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && plotAltVsTime)
-	{
-		altvstimePlotNeedsRefresh = true;
+	if (!plotAltVsTime || !dialog->isVisible())
 		return;
-	}
-
-	if (!plotAltVsTime) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -2159,8 +2137,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 void AstroCalcDialog::drawCurrentTimeDiagram()
 {
 	// special case - plot the graph when tab is visible
-	// and only if dialog is visible at all
-	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime)) return;
+	if (!plotAltVsTime && !plotAziVsTime)
+		return;
 
 	double currentJD = core->getJD();
 	double UTCOffset = core->getUTCOffset(currentJD);
@@ -2749,16 +2727,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		return;
 
 	// special case - plot the graph when tab is visible
-	//..
-	// we got notified about a reason to redraw the plot, but dialog was
-	// not visible. which means we must redraw when becoming visible again!
-	if (!dialog->isVisible() && plotMonthlyElevation)
-	{
-		monthlyelevationPlotNeedsRefresh = true;
+	if (!plotMonthlyElevation || !dialog->isVisible())
 		return;
-	}
-
-	if (!plotMonthlyElevation) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
@@ -2835,9 +2805,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 	}
 }
 
-
 // click inside AltVsTime graph area sets new current time
-void AstroCalcDialog::AltTimeClick(QMouseEvent* event)
+void AstroCalcDialog::altTimeClick(QMouseEvent* event)
 {
 	Qt::MouseButtons buttons = event->buttons();
 	if (!(buttons & Qt::LeftButton)) return;
@@ -2848,13 +2817,12 @@ void AstroCalcDialog::AltTimeClick(QMouseEvent* event)
 		if (x > ui->altVsTimePlot->xAxis->range().lower && x < ui->altVsTimePlot->xAxis->range().upper
 			&& y > ui->altVsTimePlot->yAxis->range().lower && y < ui->altVsTimePlot->yAxis->range().upper)
 		{
-			SetClickedTime(x);
+			setClickedTime(x);
 		}
 }
 
-
 // click inside AziVsTime graph area sets new current time
-void AstroCalcDialog::AziTimeClick(QMouseEvent* event)
+void AstroCalcDialog::aziTimeClick(QMouseEvent* event)
 {
 	Qt::MouseButtons buttons = event->buttons();
 	if (!(buttons & Qt::LeftButton)) return;
@@ -2865,12 +2833,11 @@ void AstroCalcDialog::AziTimeClick(QMouseEvent* event)
 	if (x > ui->aziVsTimePlot->xAxis->range().lower && x < ui->aziVsTimePlot->xAxis->range().upper
 		&& y > ui->aziVsTimePlot->yAxis->range().lower && y < ui->aziVsTimePlot->yAxis->range().upper)
 	{
-		SetClickedTime(x);
+		setClickedTime(x);
 	}
 }
 
-
-void AstroCalcDialog::SetClickedTime(double posx)
+void AstroCalcDialog::setClickedTime(double posx)
 {
 	double JD = core->getJD();
 	double shift = core->getUTCOffset(JD) / 24;
@@ -2881,27 +2848,6 @@ void AstroCalcDialog::SetClickedTime(double posx)
 	core->setJD(JD);
 	drawCurrentTimeDiagram();
 }
-
-
-// Refresh plots when AstroCalc dialog becomes visible and
-// signals for doing so were cached during invisible dialog.
-void AstroCalcDialog::handleVisibleEnabled()
-{
-	if (dialog->isVisible())
-	{
-		if (azivstimePlotNeedsRefresh) drawAziVsTimeDiagram();
-		if (altvstimePlotNeedsRefresh) drawAltVsTimeDiagram();
-		if (monthlyelevationPlotNeedsRefresh) drawMonthlyElevationGraph();
-
-		// always update "now" line (don't wait for it's timer event)
-		drawCurrentTimeDiagram();
-	}
-
-	azivstimePlotNeedsRefresh = false;
-	altvstimePlotNeedsRefresh = false;
-	monthlyelevationPlotNeedsRefresh = false;
-}
-
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 {
