@@ -2794,9 +2794,9 @@ msgid ""
 "equator, ecliptic, hour lines, etc. into straight lines. The mathematical "
 "name for this projection method is <i>gnomonic projection</i>."
 msgstr ""
-"Проекція перспективи зображує великі кола, зокрема екватор, екліптику, лінії"
-" годин тощо, як прямі лінії. Математична назва цього методу проекції "
-"<i>гномонічна проекція</i>."
+"Проєкція перспективи зображує великі кола, зокрема екватор, екліптику, лінії"
+" годин тощо, як прямі лінії. Математична назва цього методу проєктування — "
+"<i>гномонічна проєкція</i>."
 
 #: src/core/StelProjectorClasses.cpp:87
 msgid "Equal Area"
@@ -2807,12 +2807,12 @@ msgid ""
 "The full name of this projection method is <i>Lambert azimuthal equal-area "
 "projection</i>. It preserves the area but not the angle."
 msgstr ""
-"Повна назва цього методу проекції — <i>азимутальна рівновелика проекція "
+"Повна назва цього методу проєкції — <i>азимутальна рівновелика проєкція "
 "Ламберта</i>. Вона зберігає відношення площ, але спотворює кути."
 
 #: src/core/StelProjectorClasses.cpp:145
 msgid "Stereographic"
-msgstr "Стереографічна проекція"
+msgstr "Стереографічна проєкція"
 
 #: src/core/StelProjectorClasses.cpp:150
 msgid ""
@@ -2820,12 +2820,12 @@ msgid ""
 "as the planisphere projection. It preserves the angles at which curves cross"
 " each other but it does not preserve area."
 msgstr ""
-"Стереографічна проекція — проекція відома ще з античних часів як планісферна"
-" проекція. Вона зберігає величини кутів, але спотворює відношення площ."
+"Стереографічна проєкція — проєкція відома ще з античних часів як планісферна"
+" проєкція. Вона зберігає величини кутів, але спотворює відношення площ."
 
 #: src/core/StelProjectorClasses.cpp:200
 msgid "Fish-eye"
-msgstr "Проекція «риб’яче око»"
+msgstr "Проєкція «риб’яче око»"
 
 #: src/core/StelProjectorClasses.cpp:205
 msgid ""
@@ -2834,8 +2834,8 @@ msgid ""
 "centre of the field of view (like the distortions seen with very wide angle "
 "camera lenses)."
 msgstr ""
-"В проекції «риб’яче око», чи іншими словами <i>азимутній рівнопроміжній "
-"проекції</i>, прямі лінії стають кривими на великій кутовій відстані від "
+"В проєкції «риб’яче око», чи іншими словами <i>азимутній рівнопроміжній "
+"проєкції</i>, прямі лінії стають кривими на великій кутовій відстані від "
 "центру поля зору (як спотворення в камері з ширококутовим об’єктивом)."
 
 #: src/core/StelProjectorClasses.cpp:261
@@ -2847,8 +2847,8 @@ msgid ""
 "The Hammer projection is an equal-area map projection, described by Ernst "
 "Hammer in 1892 and directly inspired by the Aitoff projection."
 msgstr ""
-"Проекція Гаммера зберігає площі на карті, її описано Ернстом Гаммером (Ernst"
-" Hammer) у 1892 році. Спосіб проектування було розроблено на основі проекції"
+"Проєкція Гаммера зберігає площі на карті, її описано Ернстом Гаммером (Ernst"
+" Hammer) у 1892 році. Спосіб проєктування було розроблено на основі проєкції"
 " Аїтова."
 
 #: src/core/StelProjectorClasses.cpp:316
@@ -2860,8 +2860,8 @@ msgid ""
 "The full name of this projection mode is <i>cylindrical equidistant "
 "projection</i>. With this projection all parallels are equally spaced."
 msgstr ""
-"Повна назва цієї проекції — <i>циліндрична еквідистантна проекція</i>. В цій"
-" проекції всі паралельні прямі розташовані на однаковій відстані."
+"Повна назва цієї проєкції — <i>циліндрична еквідистантна проєкція</i>. В цій"
+" проєкції всі паралельні прямі розташовані на однаковій відстані."
 
 #: src/core/StelProjectorClasses.cpp:365
 msgid "Mercator"
@@ -2873,20 +2873,20 @@ msgid ""
 "preserves direction and shapes but distorts size, in an increasing degree "
 "away from the equator."
 msgstr ""
-"Проекція Меркатора є однією з найпоширеніших проекцій карти світу. Її "
+"Проєкція Меркатора є однією з найпоширеніших проєкцій карти світу. Її "
 "використання дає змогу зберегти напрямки і форми, але призводить до "
 "наростання похибок у обчисленні відстаней при віддаленні від екватора."
 
 #: src/core/StelProjectorClasses.cpp:418
 msgid "Orthographic"
-msgstr "Ортографічна проекція"
+msgstr "Ортографічна проєкція"
 
 #: src/core/StelProjectorClasses.cpp:423
 msgid ""
 "Orthographic projection is related to perspective projection, but the point "
 "of perspective is set to an infinite distance."
 msgstr ""
-"Ортографічна проекція дуже схожа із проекцією перспективи, але точка "
+"Ортографічна проєкція дуже схожа на проєкцію перспективи, але точка "
 "перспективи розташована на нескінченній відстані."
 
 #: src/core/StelProjectorClasses.cpp:470
@@ -2899,8 +2899,8 @@ msgid ""
 "projection</i>, sometimes called the Sanson-Flamsteed or the Mercator equal-"
 "area projection."
 msgstr ""
-"Синусоїдальна проекція є <i>псевдоциліндричною картографічної проекцією із "
-"збереженням площі</i>, її також іноді називають проекцією Сенсона–Флемстіда "
+"Синусоїдальна проєкція є <i>псевдоциліндричною картографічної проєкцією із "
+"збереженням площі</i>, її також іноді називають проєкцією Сенсона–Флемстіда "
 "або Меркатора із збереженням площі."
 
 #: src/core/StelProjectorClasses.cpp:512
@@ -2913,9 +2913,9 @@ msgid ""
 "proposed by Osborn Maitland Miller (1897-1979) in 1942. The poles are no "
 "longer mapped to infinity."
 msgstr ""
-"Циліндрична проекція Міллера є модифікованим варіантом проекції Меркатора. "
+"Циліндрична проєкція Міллера є модифікованим варіантом проєкції Меркатора. "
 "Її було запропоновано Осборном Мейтлендом Міллером (Osborn Maitland Miller, "
-"1897–1979) у 1942 році. Полюси у цій проекції вже не відображаються на "
+"1897–1979) у 1942 році. Полюси у цій проєкції вже не відображаються на "
 "нескінченність."
 
 #: src/core/StelObject.cpp:254
@@ -3794,7 +3794,7 @@ msgstr "Розробники"
 #: src/gui/HelpDialog.cpp:426
 #, qt-format
 msgid "Project coordinator & lead developer: %1"
-msgstr "Координатор проекту і основний розробник: %1"
+msgstr "Координатор проєкту і основний розробник: %1"
 
 #: src/gui/HelpDialog.cpp:427
 #, qt-format
@@ -3832,7 +3832,7 @@ msgid ""
 "active. Their work has made a big difference to the project:"
 msgstr ""
 "Дехто зробив значний внесок, але тепер не бере участі у розробці програми. "
-"Внесок цих людей значно вплинув на поточний стан проекту."
+"Внесок цих людей значно вплинув на поточний стан проєкту."
 
 #: src/gui/HelpDialog.cpp:436
 #, qt-format
@@ -3863,7 +3863,7 @@ msgid ""
 "Several people have made contributions to the project and their work has "
 "made Stellarium better (sorted alphabetically): %1."
 msgstr ""
-"До розробки проекту долучалися декілька людей, робота яких зробила "
+"До розробки проєкту долучалися декілька людей, робота яких зробила "
 "Stellarium кращим (упорядковано за абеткою): %1."
 
 #: src/gui/StelGui.cpp:224
@@ -8825,7 +8825,7 @@ msgstr "Перегляд"
 
 #: src/ui_viewDialog.h:2501
 msgid "Projection"
-msgstr "Проекція"
+msgstr "Проєкція"
 
 #: src/ui_viewDialog.h:2502
 msgid "Vertical viewport offset"
@@ -10278,7 +10278,7 @@ msgid ""
 "Spheric mirror distortion is used when projecting Stellarium onto a spheric "
 "mirror for low-cost planetarium systems."
 msgstr ""
-"Викривлення сферичного дзеркала використовуються під час створення проекції "
+"Викривлення сферичного дзеркала використовуються під час створення проєкції "
 "Stellarium на сферичне дзеркало для малобюджетних планетаріїв."
 
 #: src/ui_configurationDialog.h:1730
@@ -18799,7 +18799,7 @@ msgid ""
 "This plugin was initially created as a project of the ESA Summer of Code in "
 "Space 2013."
 msgstr ""
-"Початкову версію цього додатка було створено у межах проекту ESA Summer of "
+"Початкову версію цього додатка було створено у межах проєкту ESA Summer of "
 "Code in Space 2013."
 
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:309
@@ -19287,7 +19287,7 @@ msgstr ""
 "годиннику тощо.</p><p>Для руху натискайте комбінації клавіш Ctrl+клавіша зі "
 "стрілкою. Щоб змінити висоти точку огляду, скористайтеся комбінаціями "
 "Ctrl+PgUp/PgDn.</p><p>Розробку цього додатка було частково фінансово "
-"підтримано Австрійським науковим фондом (FWF), проект ASTROSIM (P "
+"підтримано Австрійським науковим фондом (FWF), проєкт ASTROSIM (P "
 "21208-G19). Докладніша інформація: http://astrosim.univie.ac.at/</p>"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:398
@@ -19302,7 +19302,7 @@ msgid ""
 "projection!"
 msgstr ""
 "Для вашого обладнання не передбачено підтримки побудови кубічних карт. Будь "
-"ласка, перемкніться на проекцію «Перспектива»!"
+"ласка, перемкніться на проєкцію «Перспектива»!"
 
 #: plugins/Scenery3d/src/S3DRenderer.cpp:1783
 msgid "Geometry shader is not supported. Falling back to '6 Textures' mode."
@@ -19383,9 +19383,9 @@ msgid ""
 "onto a cube, and this cube is then warped according to the real projection. "
 "The cube is described using an image called &quot;cubemap&quot;."
 msgstr ""
-"Визначає спосіб побудови сцени, якщо у Stellarium використовується проекція,"
+"Визначає спосіб побудови сцени, якщо у Stellarium використовується проєкція,"
 " відмінна від «Перспективна». Сцена завжди обробляється для поверхонь куба, "
-"а потім цей куб викривляється відповідно до справжньої проекції. Цей куб "
+"а потім цей куб викривляється відповідно до справжньої проєкції. Цей куб "
 "описується за допомогою зображення, яке називається «кубічною картою»."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:259
@@ -19394,7 +19394,7 @@ msgid ""
 "the most compatible method, but may be slower than the others."
 msgstr ""
 "<b>6 текстур</b> — використовувати 6 окремих текстур для кожної із бічних "
-"поверхонь куба. Цей метод є найсуміснішим із проекціями, але є повільнішим "
+"поверхонь куба. Цей метод є найсуміснішим із проєкціями, але є повільнішим "
 "за інші."
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:260
@@ -19427,7 +19427,7 @@ msgid ""
 "faster!"
 msgstr ""
 "Якщо вимкнено, затінена поверхня обчислюватиметься на основі перспективної "
-"проекції, що може призвести до пропуску частини тіні, якщо спостерігач "
+"проєкції, що може призвести до пропуску частини тіні, якщо спостерігач "
 "перебуває високо, але працює набагато швидше!"
 
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:265
