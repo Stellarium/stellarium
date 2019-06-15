@@ -28,7 +28,7 @@
 #include <ostream>
 #include <string>
 #include <sstream>
-//#include <sys/time.h>
+#include <sys/time.h>
 
 /**
  * @brief Macro to configure the logger.
