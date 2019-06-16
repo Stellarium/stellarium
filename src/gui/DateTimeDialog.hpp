@@ -86,6 +86,10 @@ private:
 	void pushToWidgets();
 	void setMjd(double mjd) { jd = 2400000.5 + mjd; }
 	double getMjd() const { return jd - 2400000.5 ; }
+
+	int oldyear;
+	int oldmonth;
+	int oldday;
 };
 
 #endif // DATETIMEDIALOG_HPP
