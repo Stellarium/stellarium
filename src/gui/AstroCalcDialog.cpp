@@ -557,6 +557,8 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		int limit = 485;
 
 		bool isSatellite = false;
+
+#ifdef USE_STATIC_PLUGIN_SATELLITES
 		SatelliteP sat;
 		
 		if (selectedObject->getType() == "Satellite") 
@@ -565,6 +567,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			isSatellite = true;
 			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
 		}
+#endif
 
 		for (int i = -5; i <= limit; i++) // 24 hours + 15 minutes in both directions
 		{
@@ -1986,6 +1989,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		int limit = 485;
 		
 		bool isSatellite = false;
+
+#ifdef USE_STATIC_PLUGIN_SATELLITES
 		SatelliteP sat;
 		
 		if (selectedObject->getType() == "Satellite") 
@@ -1994,6 +1999,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			isSatellite = true;
 			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
 		}
+#endif
 
 		for (int i = -5; i <= limit; i++) // 24 hours + 15 minutes in both directions
 		{
