@@ -2904,7 +2904,6 @@ void AstroCalcDialog::setClickedTime(double posx)
 		StelObjectP obj = objectMgr->getSelectedObject()[0];
 		mvMgr->moveToObject(obj, 0.4f);
 	}
-
 }
 
 // When dialog becomes visible: check if there is a

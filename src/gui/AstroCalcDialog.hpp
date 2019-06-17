@@ -337,7 +337,6 @@ private:
 
 	//! Remember to redraw active plot when dialog becomes visible
 	bool graphPlotNeedsRefresh;
-
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug
