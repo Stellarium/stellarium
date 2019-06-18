@@ -39,7 +39,10 @@ DateTimeDialog::DateTimeDialog(QObject* parent) :
 	hour(0),
 	minute(0),
 	second(0),
-	jd(0)
+	jd(0),
+	oldyear(0),
+	oldmonth(0),
+	oldday(0)
 {
 	ui = new Ui_dateTimeDialogForm;
 	updateTimer=new QTimer(this); // parenting will auto-delete timer on destruction!
@@ -207,6 +210,7 @@ double DateTimeDialog::newJd()
 	return cjd;
 }
 
+
 void DateTimeDialog::pushToWidgets()
 {
 	disconnectSpinnerEvents();
@@ -230,8 +234,6 @@ Prepare date elements from newJd and send to spinner_*
  ************************************************************************/
 void DateTimeDialog::setDateTime(double newJd)
 {
-	int oldyear=year, oldmonth=month, oldday=day;
-
 	if (this->visible()) {
 		// JD and MJD should be at the UTC scale on the window!
 		double newJdC = newJd + core->getUTCOffset(newJd)/24.0; // UTC -> local tz
@@ -241,9 +243,16 @@ void DateTimeDialog::setDateTime(double newJd)
 
 		pushToWidgets();
 
-		if (oldyear != year || oldmonth != month || oldday != day) emit core->dateChanged();
-		if (oldyear != year) emit core->dateChangedByYear();
-		if (oldmonth != month) emit core->dateChangedForMonth();
+		if (oldyear != year || oldmonth != month || oldday != day) 
+			emit core->dateChanged();
+		if (oldyear != year) 
+			emit core->dateChangedByYear();
+		if (oldmonth != month) 
+			emit core->dateChangedForMonth();
+
+		oldyear = year;
+		oldmonth = month;
+		oldday = day;
 	}
 }
 

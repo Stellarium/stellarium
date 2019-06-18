@@ -201,6 +201,7 @@ private slots:
 	void altTimeClick(QMouseEvent* event);
 	void aziTimeClick(QMouseEvent* event);
 
+	//! handle events that are otherwise "lost" when dialog not visible
 	void handleVisibleEnabled();
 
 	void saveGraphsCelestialBody(int index);
@@ -333,6 +334,9 @@ private:
 
 	//! Memorize day for detecting rollover to next/prev one
 	int oldGraphJD;
+
+	//! Remember to redraw active plot when dialog becomes visible
+	bool graphPlotNeedsRefresh;
 };
 
 // Reimplements the QTreeWidgetItem class to fix the sorting bug

@@ -99,6 +99,7 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, delimiter(", ")
 	, acEndl("\n")
 	, oldGraphJD(0)
+	, graphPlotNeedsRefresh(false)
 {
 	ui = new Ui_astroCalcDialogForm;
 	core = StelApp::getInstance().getCore();
@@ -291,15 +292,16 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->positiveAltitudeOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimePositiveFlag(bool)));
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
 
 	connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(altTimeClick(QMouseEvent*)));
 	connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(aziTimeClick(QMouseEvent*)));
 
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
+
 	connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
-	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAziVsTimeDiagram()));
 
+	connect(core, SIGNAL(dateChanged()), this, SLOT(drawCurrentTimeDiagram()));
 	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAltVsTimeDiagram()));
 	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAziVsTimeDiagram()));
 
@@ -531,8 +533,16 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotAziVsTime || !dialog->isVisible())
+	//..
+	// we got notified about a reason to redraw the plot, but dialog was
+	// not visible. which means we must redraw when becoming visible again!
+	if (!dialog->isVisible() && plotAziVsTime)
+	{
+		graphPlotNeedsRefresh = true;
 		return;
+	}
+
+	if (!plotAziVsTime) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -549,16 +559,22 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
-		
 		int step = 180;
 		int limit = 485;
+
 		bool isSatellite = false;
-		if (selectedObject->getType() == "Satellite") // Reduce accuracy for satellites
+
+#ifdef USE_STATIC_PLUGIN_SATELLITES
+		SatelliteP sat;
+		
+		if (selectedObject->getType() == "Satellite") 
 		{
-			limit = 121;
-			step = 720;
+			// get reference to satellite
 			isSatellite = true;
+			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
 		}
+#endif
+
 		for (int i = -5; i <= limit; i++) // 24 hours + 15 minutes in both directions
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
@@ -567,10 +583,11 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 			aX.append(ltime);
 			JD = noon + ltime / 86400 - shift - 0.5;
 			core->setJD(JD);
+			
 			if (isSatellite)
 			{
 #ifdef USE_STATIC_PLUGIN_SATELLITES
-				GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
+				sat->update(0.0);
 #endif
 			}
 			else
@@ -1944,8 +1961,16 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotAltVsTime || !dialog->isVisible())
+	//..
+	// we got notified about a reason to redraw the plot, but dialog was
+	// not visible. which means we must redraw when becoming visible again!
+	if (!dialog->isVisible() && plotAltVsTime)
+	{
+		graphPlotNeedsRefresh = true;
 		return;
+	}
+
+	if (!plotAltVsTime) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 
@@ -1968,13 +1993,20 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		double xMaxY = -100.f;
 		int step = 180;
 		int limit = 485;
+		
 		bool isSatellite = false;
-		if (selectedObject->getType() == "Satellite") // Reduce accuracy for satellites
+
+#ifdef USE_STATIC_PLUGIN_SATELLITES
+		SatelliteP sat;
+		
+		if (selectedObject->getType() == "Satellite") 
 		{
-			limit = 121;
-			step = 720;
+			// get reference to satellite
 			isSatellite = true;
+			sat = GETSTELMODULE(Satellites)->getById(selectedObject->getInfoMap(core)["catalog"].toString());
 		}
+#endif
+
 		for (int i = -5; i <= limit; i++) // 24 hours + 15 minutes in both directions
 		{
 			// A new point on the graph every 3 minutes with shift to right 12 hours
@@ -1983,15 +2015,20 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			aX.append(ltime);
 			JD = noon + ltime / 86400 - shift - 0.5;
 			core->setJD(JD);
+			
 			if (isSatellite)
 			{
 #ifdef USE_STATIC_PLUGIN_SATELLITES
-				GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
+				// old method updated ALL sats..
+				//GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
+				
+				// update data for that single satellite only
+				sat->update(0.0);
 #endif
 			}
 			else
 				core->update(0.0);
-
+		
 			StelUtils::rectToSphe(&az, &alt, selectedObject->getAltAzPosAuto(core));
 			StelUtils::radToDecDeg(alt, sign, deg);
 			if (!sign) deg *= -1;
@@ -2146,8 +2183,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 void AstroCalcDialog::drawCurrentTimeDiagram()
 {
 	// special case - plot the graph when tab is visible
-	if (!plotAltVsTime && !plotAziVsTime)
-		return;
+	// and only if dialog is visible at all
+	if (!dialog->isVisible() || (!plotAltVsTime && !plotAziVsTime)) return;
 
 	double currentJD = core->getJD();
 	double UTCOffset = core->getUTCOffset(currentJD);
@@ -2175,9 +2212,10 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 	// detect roll over graph day limits.
 	// if so, update the graph
 	int graphJD = (int)(currentJD + UTCOffset / 24);
-	if (oldGraphJD != graphJD)
+	if (oldGraphJD != graphJD || graphPlotNeedsRefresh)
 	{
 		oldGraphJD = graphJD;
+		graphPlotNeedsRefresh = false;
 		emit graphDayChanged();
 	}
 }
@@ -2736,8 +2774,16 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		return;
 
 	// special case - plot the graph when tab is visible
-	if (!plotMonthlyElevation || !dialog->isVisible())
+	//..
+	// we got notified about a reason to redraw the plot, but dialog was
+	// not visible. which means we must redraw when becoming visible again!
+	if (!dialog->isVisible() && plotMonthlyElevation)
+	{
+		graphPlotNeedsRefresh = true;
 		return;
+	}
+
+	if (!plotMonthlyElevation) return;
 
 	QList<StelObjectP> selectedObjects = objectMgr->getSelectedObject();
 	if (!selectedObjects.isEmpty())
@@ -2846,6 +2892,7 @@ void AstroCalcDialog::aziTimeClick(QMouseEvent* event)
 	}
 }
 
+
 void AstroCalcDialog::setClickedTime(double posx)
 {
 	double JD = core->getJD();
@@ -2856,6 +2903,36 @@ void AstroCalcDialog::setClickedTime(double posx)
 	core->setRealTimeSpeed();
 	core->setJD(JD);
 	drawCurrentTimeDiagram();
+
+	// if object is tracked, we make our own (smoothed) movement
+	if (mvMgr->getFlagTracking())
+	{
+		StelObjectP obj = objectMgr->getSelectedObject()[0];
+		mvMgr->moveToObject(obj, 0.4f);
+	}
+}
+
+// When dialog becomes visible: check if there is a
+// graph plot to refresh
+void AstroCalcDialog::handleVisibleEnabled()
+{
+	if (dialog->isVisible())
+	{
+		// check which graph needs refresh (only one is set, if any)
+		if (graphPlotNeedsRefresh)
+		{
+			if (plotAltVsTime || plotAziVsTime) 
+				drawCurrentTimeDiagram();
+			if (plotMonthlyElevation) 
+				drawMonthlyElevationGraph();
+			if (plotAngularDistanceGraph) 
+				drawAngularDistanceGraph();
+		}
+		else
+			drawCurrentTimeDiagram();
+	}
+
+	graphPlotNeedsRefresh = false;
 }
 
 void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
@@ -3800,6 +3877,12 @@ void AstroCalcDialog::changePCTab(int index)
 
 void AstroCalcDialog::changeGraphsTab(int index)
 {
+	// reset all flags to make sure only one is set
+	plotAltVsTime = false;
+	plotAziVsTime = false;
+	plotMonthlyElevation = false;
+	plotAngularDistanceGraph = false;
+
 	if (index==0) // Altitude vs. Time
 	{
 		plotAltVsTime = true;
@@ -4972,8 +5055,16 @@ void AstroCalcDialog::drawAngularDistanceGraph()
 	ui->angularDistanceLabel->setText(label);
 
 	// special case - plot the graph when tab is visible
-	if (!plotAngularDistanceGraph || !dialog->isVisible())
+	//..
+	// we got notified about a reason to redraw the plot, but dialog was
+	// not visible. which means we must redraw when becoming visible again!
+	if (!dialog->isVisible() && !plotAngularDistanceGraph)
+	{
+		graphPlotNeedsRefresh = true;
 		return;
+	}
+
+	if (!plotAngularDistanceGraph) return;
 
 	// special case - the tool is not applicable on non-Earth locations
 	if (core->getCurrentPlanet()!=solarSystem->getEarth())
