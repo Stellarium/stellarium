@@ -420,17 +420,6 @@ void AstroCalcDialog::createDialogContent()
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
 }
 
-// Refresh plots when AstroCalc dialog becomes visible again
-void AstroCalcDialog::handleVisibleEnabled()
-{
-	drawAltVsTimeDiagram();
-	drawAziVsTimeDiagram();
-	drawMonthlyElevationGraph();
-	drawAngularDistanceGraph();
-
-	drawCurrentTimeDiagram();
-}
-
 void AstroCalcDialog::searchWutClear()
 {
 	ui->wutMatchingObjectsLineEdit->clear();	
@@ -561,12 +550,10 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 
 		int step = 180;
 		int limit = 485;
-
 		bool isSatellite = false;
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
-		SatelliteP sat;
-		
+		SatelliteP sat;		
 		if (selectedObject->getType() == "Satellite") 
 		{
 			// get reference to satellite
@@ -1989,16 +1976,13 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
-		
 		double xMaxY = -100.f;
 		int step = 180;
-		int limit = 485;
-		
+		int limit = 485;		
 		bool isSatellite = false;
 
 #ifdef USE_STATIC_PLUGIN_SATELLITES
-		SatelliteP sat;
-		
+		SatelliteP sat;		
 		if (selectedObject->getType() == "Satellite") 
 		{
 			// get reference to satellite
@@ -2019,9 +2003,6 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			if (isSatellite)
 			{
 #ifdef USE_STATIC_PLUGIN_SATELLITES
-				// old method updated ALL sats..
-				//GETSTELMODULE(Satellites)->update(0.0); // force update to avoid caching! WTF???
-				
 				// update data for that single satellite only
 				sat->update(0.0);
 #endif
