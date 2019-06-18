@@ -292,9 +292,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->positiveAltitudeOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimePositiveFlag(bool)));
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
-	  
-	// connect(core, SIGNAL(dateChanged()), this, SLOT(drawAltVsTimeDiagram()));
-	// drawAltVsTimeDiagram();
 
 	connect(ui->altVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(altTimeClick(QMouseEvent*)));
 	connect(ui->aziVsTimePlot, SIGNAL(mousePress(QMouseEvent*)), this, SLOT(aziTimeClick(QMouseEvent*)));
@@ -303,8 +300,6 @@ void AstroCalcDialog::createDialogContent()
 
 	connect(ui->aziVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverAziLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAziVsTimeDiagram()));
-	//connect(core, SIGNAL(dateChanged()), this, SLOT(drawAziVsTimeDiagram()));
-	//drawAziVsTimeDiagram();
 
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawCurrentTimeDiagram()));
 	connect(this, SIGNAL(graphDayChanged()), this, SLOT(drawAltVsTimeDiagram()));
@@ -320,7 +315,6 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->monthlyElevationPositiveCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMonthlyElevationPositiveFlag(bool)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
 	connect(core, SIGNAL(dateChangedByYear()), this, SLOT(drawMonthlyElevationGraph()));
-	drawMonthlyElevationGraph();
 
 	connect(ui->graphsCelestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsCelestialBody(int)));
 	connect(ui->graphsFirstComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveGraphsFirstId(int)));
@@ -331,7 +325,8 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->angularDistanceLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAngularDistanceLimit(int)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAngularDistanceGraph()));
 	connect(core, SIGNAL(dateChanged()), this, SLOT(drawAngularDistanceGraph()));
-	drawAngularDistanceGraph();
+
+	connect(this, SIGNAL(visibleChanged(bool)), this, SLOT(handleVisibleEnabled()));
 
 	/*
 	wutModel = new QStringListModel(this);
@@ -423,6 +418,17 @@ void AstroCalcDialog::createDialogContent()
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
 	ui->positiveAltitudeOnlyCheckBox->setStyleSheet(style);
 	ui->monthlyElevationPositiveCheckBox->setStyleSheet(style);
+}
+
+// Refresh plots when AstroCalc dialog becomes visible again
+void AstroCalcDialog::handleVisibleEnabled()
+{
+	drawAltVsTimeDiagram();
+	drawAziVsTimeDiagram();
+	drawMonthlyElevationGraph();
+	drawAngularDistanceGraph();
+
+	drawCurrentTimeDiagram();
 }
 
 void AstroCalcDialog::searchWutClear()

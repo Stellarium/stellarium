@@ -74,6 +74,9 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vi==vt);
 	vi.set(10,10);
 	QVERIFY(vi/2==Vec2i(5,5));
+	vi = Vec2i(2);
+	vi.normalize();
+	QVERIFY(vi==Vec2i(0));
 
 	vf.set(0.f,0.f);
 	QVERIFY(vf==Vec2f(0.f,0.f));
@@ -110,6 +113,9 @@ void TestVecMath::testVec2Math()
 	QVERIFY(vf==vtf);
 	vf.set(10.f,10.f);
 	QVERIFY(vf/2.f==Vec2f(5.f,5.f));
+	vf = Vec2f(2.f);
+	vf.normalize();
+	QVERIFY(vf==Vec2f(std::sqrt(2.f)/2.f));
 
 	vd.set(0.,0.);
 	QVERIFY(vd==Vec2d(0.,0.));
@@ -224,6 +230,8 @@ void TestVecMath::testVec3Math()
 	QVERIFY(vf==vtf);
 	vf = *vtf;
 	QVERIFY(vf==vtf);
+	vf = Vec3f(2.f);
+	QVERIFY(vf.fuzzyEquals(Vec3f(2.f), ERROR_LIMIT));
 
 	vd.set(0.,0.,0.);
 	QVERIFY(vd==Vec3d(0.,0.,0.));
@@ -259,6 +267,8 @@ void TestVecMath::testVec3Math()
 	QVERIFY(vd==vtd);
 	vd = *vtd;
 	QVERIFY(vd==vtd);
+	vd = Vec3d(2.);
+	QVERIFY(vd.fuzzyEquals(Vec3d(2.), ERROR_LIMIT));
 }
 
 void TestVecMath::testVec4Math()
@@ -297,7 +307,7 @@ void TestVecMath::testVec4Math()
 	vi = *vt;
 	QVERIFY(vi==vt);
 	vi = Vec4i(Vec3i(10,5,2));
-	QVERIFY(vi==Vec4i(10,5,2,1));
+	QVERIFY(vi==Vec4i(10,5,2,1));	
 
 	vf.set(0.f,0.f,0.f,0.f);
 	QVERIFY(vf==Vec4f(0.f,0.f,0.f,0.f));
