@@ -1198,7 +1198,7 @@
                   <string>Deactivate this option if you want to see orbit for selected planet and its moons.</string>
                  </property>
                  <property name="text">
-                  <string>Show orbit for selected planet</string>
+                  <string>Only orbit for selected object</string>
                  </property>
                 </widget>
                </item>
@@ -1218,7 +1218,7 @@
                   </sizepolicy>
                  </property>
                  <property name="text">
-                  <string>Show planet orbits</string>
+                  <string>Show orbits</string>
                  </property>
                 </widget>
                </item>
@@ -1347,7 +1347,7 @@
                <item>
                 <widget class="QCheckBox" name="planetOrbitOnlyCheckBox">
                  <property name="text">
-                  <string>Show planet orbits only</string>
+                  <string>Only orbits of major planets</string>
                  </property>
                 </widget>
                </item>
