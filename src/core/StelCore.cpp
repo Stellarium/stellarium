@@ -985,9 +985,9 @@ void StelCore::updateTransformMatrices()
 	// Please keep the commented stuff until situation is really solved.
 	if (flagUseTopocentricCoordinates)
 	{
-		Vec3d offset=position->getTopographicOffsetFromCenter(); // [rho cosPhi', rho sinPhi', phi'_rad]
+		const Vec4d offset=position->getTopographicOffsetFromCenter(); // [rho cosPhi', rho sinPhi', phi'_rad, rho]
 		const double sigma=position->getCurrentLocation().latitude*M_PI/180.0 - offset.v[2];
-		const double rho=position->getDistanceFromCenter();
+		const double rho=offset.v[3];
 
 		matAltAzToHeliocentricEclipticJ2000 =  Mat4d::translation(position->getCenterVsop87Pos()) * tmp *
 				Mat4d::translation(Vec3d(rho*sin(sigma), 0., rho*cos(sigma) ));

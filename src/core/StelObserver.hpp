@@ -51,11 +51,15 @@ public:
 	Vec3d getCenterVsop87Pos(void) const;
 	//! Get the distance between observer and home planet center in AU.
 	//! This is distance &rho; from Meeus, Astron. Algorithms, 2nd edition 1998, ch.11, p.81f.
+	//! &rho; is also delivered from getTopographicOffsetFromCenter().v[3];
 	double getDistanceFromCenter(void) const;
 	//! Get the geocentric rectangular coordinates of the observer in AU, plus geocentric latitude &phi;'.
 	//! This is vector &rho; from Meeus, Astron. Algorithms, 2nd edition 1998, ch.11, p.81f.
-	//! The first component is &rho; cos &phi;' [AU], the second component is &rho; sin &phi&' [AU], the third is &phi;' [radians].
-	Vec3d getTopographicOffsetFromCenter(void) const;
+	//! The first component is &rho; cos &phi;' [AU],
+	//! the second component is &rho; sin &phi&' [AU],
+	//! the third is &phi;' [radians]
+	//! the fourth is &rho; [AU]
+	Vec4d getTopographicOffsetFromCenter(void) const;
 
 	//! returns rotation matrix for conversion of alt-azimuthal to equatorial coordinates
 	//! For Earth we need JD(UT), for other planets JDE! To be general, just have both in here!

@@ -202,35 +202,15 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 // Since V0.14, we follow Meeus, Astr. Alg. 2nd ed, Ch.11., but used offset rho in a wrong way. (offset angle phi in distance rho.)
 double StelObserver::getDistanceFromCenter(void) const
 {
-	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
-		return currentLocation.altitude/(1000*AU);
-
-	const double a=getHomePlanet()->getEquatorialRadius();
-	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
-
-	// Details: https://github.com/Stellarium/stellarium/issues/391
-	//if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
-	//	return a * bByA;
-
-	const double latRad=currentLocation.latitude*(M_PI/180.0);
-	const double u = atan( bByA * tan(latRad));
-	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	//Q_ASSERT(fabs(u)<= fabs(latRad));
-	Q_ASSERT(fabs(u)-fabs(latRad) <= 0.000001);
-	const double altFix = currentLocation.altitude/(1000.0*AU*a);
-
-	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
-	//double rhoCosPhiPrime= bByA * cos(u) + altFix*cos(latRad); // WARNING! bByA is not in the book!!! THIS IS A TEST!
-	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
-
-	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
-	return rho*a;
+	Vec4d tmp=getTopographicOffsetFromCenter();
+	return tmp.v[3];
 }
 
 // Used to approximate solution with assuming a spherical planet.
 // Since V0.14, following Meeus, Astr. Alg. 2nd ed, Ch.11.
 // Since V0.16, we can produce the usual offset values plus geocentric latitude phi'.
-Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
+// Since V0.19.1 we give rho*a as fourth return value, simplifying the previous method.
+Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 {
 	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
 		return currentLocation.altitude/(1000*AU);
@@ -239,23 +219,24 @@ Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
 	// Details: https://github.com/Stellarium/stellarium/issues/391
-	//if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues.
-	//	return a * bByA;
+	//if (fabs(currentLocation.latitude)>=89.9) // avoid tan(90) issues?
+	//	return Vec4d(0.0,
+	//                   StelUtils::sign(currentLocation.latitude)*getHomePlanet()->getPolarRadius(),
+	//                   StelUtils::sign(currentLocation.latitude)*M_PI/2.0,
+	//                   getHomePlanet()->getPolarRadius()); // Do we need this?
 
 	const double latRad=currentLocation.latitude*(M_PI/180.0);
 	const double u = atan( bByA * tan(latRad));
-	// qDebug() << "getDistanceFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
-	//Q_ASSERT(fabs(u)<= fabs(latRad));
-	Q_ASSERT(fabs(u)-fabs(latRad) <= 0.000001);
+	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
+	Q_ASSERT(fabs(u)<= fabs(latRad));
 	const double altFix = currentLocation.altitude/(1000.0*AU*a);
 
 	const double rhoSinPhiPrime= bByA * sin(u) + altFix*sin(latRad);
 	const double rhoCosPhiPrime=        cos(u) + altFix*cos(latRad);
 
 	const double rho = sqrt(rhoSinPhiPrime*rhoSinPhiPrime+rhoCosPhiPrime*rhoCosPhiPrime);
-	//return rho*a;
 	double phiPrime=asin(rhoSinPhiPrime/rho);
-	return Vec3d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime);
+	return Vec4d(rhoCosPhiPrime*a, rhoSinPhiPrime*a, phiPrime, rho*a);
 }
 
 // For Earth we require JD, for other planets JDE to describe rotation!
