@@ -4797,8 +4797,8 @@ void AstroCalcDialog::computePlanetaryData()
 
 	ui->labelSynodicPeriodValue->setText(synodicPeriod);
 
-	double fcbs = 2.0 * AU * firstCBId->getRadius();
-	double scbs = 2.0 * AU * secondCBId->getRadius();
+	double fcbs = 2.0 * AU * firstCBId->getEquatorialRadius();
+	double scbs = 2.0 * AU * secondCBId->getEquatorialRadius();
 	double sratio = fcbs/scbs;
 
 	int ss = 2;

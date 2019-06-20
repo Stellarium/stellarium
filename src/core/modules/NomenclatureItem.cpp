@@ -827,7 +827,7 @@ Vec3d NomenclatureItem::getJ2000EquatorialPos(const StelCore* core) const
 	jde = core->getJDE();
 	const Vec3d equPos = planet->getJ2000EquatorialPos(core);
 	// Calculate the radius of the planet. It is necessary to re-scale it
-	const double r = planet->getRadius() * planet->getSphereScale();
+	const double r = planet->getEquatorialRadius() * planet->getSphereScale();
 
 	Vec3d XYZ0;
 //	// For now, assume spherical planets, simply scale by radius.

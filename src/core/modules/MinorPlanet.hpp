@@ -39,7 +39,7 @@ class MinorPlanet : public Planet
 {
 public:
 	MinorPlanet(const QString& englishName,
-		    double radius,
+		    double equatorialRadius,
 		    double oblateness,
 		    Vec3f halocolor,
 		    float albedo,

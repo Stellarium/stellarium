@@ -198,7 +198,7 @@ Planet::Planet(const QString& englishName,
 	  nativeName(""),
 	  texMapName(atexMapName),
 	  normalMapName(anormalMapName),
-	  radius(radius),
+	  equatorialRadius(radius),
 	  oneMinusOblateness(1.0-oblateness),
 	  eclipticPos(0.,0.,0.),
 	  eclipticVelocity(0.,0.,0.),
@@ -523,7 +523,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		}
 		if (qAbs(re.period)>0.f)
 		{
-			double eqRotVel = 2.0*M_PI*(AU*getRadius())/(getSiderealDay()*86400.0);
+			double eqRotVel = 2.0*M_PI*(AU*getEquatorialRadius())/(getSiderealDay()*86400.0);
 			oss << QString("%1: %2 %3").arg(q_("Equatorial rotation velocity")).arg(qAbs(eqRotVel), 0, 'f', 3).arg(kms) << "<br />";
 		}
 	}
@@ -582,7 +582,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 		QString diam = q_("Diameter");
 		if (getPlanetType()==isPlanet)
 			diam = q_("Equatorial diameter");
-		oss << QString("%1: %2 %3").arg(diam, QString::number(AU * getRadius() * 2.0, 'f', 1) , qc_("km", "distance")) << "<br />";
+		oss << QString("%1: %2 %3").arg(diam, QString::number(AU * getEquatorialRadius() * 2.0, 'f', 1) , qc_("km", "distance")) << "<br />";
 	}
 
 	double siderealPeriod = getSiderealPeriod();
@@ -776,7 +776,7 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const StelCore* core) const
 {
-	return std::atan(radius*sphereScale*2.f/getEquinoxEquatorialPos(core).length())*180./M_PI * 4;
+	return std::atan(equatorialRadius*sphereScale*2.f/getEquinoxEquatorialPos(core).length())*180./M_PI * 4;
 }
 
 double Planet::getSatellitesFov(const StelCore* core) const
@@ -855,13 +855,13 @@ bool willCastShadow(const Planet* thisPlanet, const Planet* p)
 	
 	double shadowDistance = ppVector * thisPos;
 	static const double sunRadius = 696000./AU;
-	double d = planetPos.length() / (p->getRadius()/sunRadius+1);
+	double d = planetPos.length() / (p->getEquatorialRadius()/sunRadius+1);
 	double penumbraRadius = (shadowDistance-d)/d*sunRadius;
 	// TODO: Note that Earth's shadow should be enlarged a bit. (6-7% following Danjon?)
 	
 	double penumbraCenterToThisPlanetCenterDistance = (ppVector*shadowDistance-thisPos).length();
 	
-	if (penumbraCenterToThisPlanetCenterDistance<penumbraRadius+thisPlanet->getRadius())
+	if (penumbraCenterToThisPlanetCenterDistance<penumbraRadius+thisPlanet->getEquatorialRadius())
 		return true;
 	return false;
 }
@@ -1378,14 +1378,14 @@ float Planet::getVMagnitude(const StelCore* core) const
 		if (pos_times_parent_pos > parent_Rq)
 		{
 			// The satellite is farther away from the sun than the parent planet.
-			const double sun_radius = parent->parent->radius;
-			const double sun_minus_parent_radius = sun_radius - parent->radius;
+			const double sun_radius = parent->parent->equatorialRadius;
+			const double sun_minus_parent_radius = sun_radius - parent->equatorialRadius;
 			const double quot = pos_times_parent_pos/parent_Rq;
 
 			// Compute d = distance from satellite center to border of inner shadow.
 			// d>0 means inside the shadow cone.
 			double d = sun_radius - sun_minus_parent_radius*quot - std::sqrt((1.-sun_minus_parent_radius/std::sqrt(parent_Rq)) * (planetRq-pos_times_parent_pos*quot));
-			if (d>=radius)
+			if (d>=equatorialRadius)
 			{
 				// The satellite is totally inside the inner shadow.
 				if (englishName=="Moon")
@@ -1398,11 +1398,11 @@ float Planet::getVMagnitude(const StelCore* core) const
 				else
 					shadowFactor = 1e-9;
 			}
-			else if (d>-radius)
+			else if (d>-equatorialRadius)
 			{
 				// The satellite is partly inside the inner shadow,
 				// compute a fantasy value for the magnitude:
-				d /= radius;
+				d /= equatorialRadius;
 				shadowFactor = (0.5 - (std::asin(d)+d*std::sqrt(1.0-d*d))/M_PI);
 			}
 		}
@@ -1623,13 +1623,13 @@ float Planet::getVMagnitude(const StelCore* core) const
 
 	// This formula source is unknown. But this is actually used even for the Moon!
 	const double p = (1.0 - phaseAngle/M_PI) * cos_chi + std::sqrt(1.0 - cos_chi*cos_chi) / M_PI;
-	double F = 2.0 * albedo * radius * radius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
+	double F = 2.0 * albedo * equatorialRadius * equatorialRadius * p / (3.0*observerPlanetRq*planetRq) * shadowFactor;
 	return -26.73 - 2.5 * std::log10(F);
 }
 
 double Planet::getAngularSize(const StelCore* core) const
 {
-	double rad = radius;
+	double rad = equatorialRadius;
 	if (rings)
 		rad = rings->getSize();
 	return std::atan2(rad*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
@@ -1638,7 +1638,7 @@ double Planet::getAngularSize(const StelCore* core) const
 
 double Planet::getSpheroidAngularSize(const StelCore* core) const
 {
-	return std::atan2(radius*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(equatorialRadius*sphereScale,getJ2000EquatorialPos(core).length()) * 180./M_PI;
 }
 
 //the Planet and all the related infos : name, circle etc..
@@ -2224,7 +2224,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		core->getClippingPlanes(&n,&f); // Save clipping planes
 
 		//determine the minimum size of the clip space
-		double r = radius*sphereScale;
+		double r = equatorialRadius*sphereScale;
 		if(rings)
 			r+=rings->getSize();
 
@@ -2495,7 +2495,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 		data.shadowCandidatesData(0, i) = position[0];
 		data.shadowCandidatesData(1, i) = position[1];
 		data.shadowCandidatesData(2, i) = position[2];
-		data.shadowCandidatesData(3, i) = data.shadowCandidates.at(i)->getRadius();
+		data.shadowCandidatesData(3, i) = data.shadowCandidates.at(i)->getEquatorialRadius();
 	}
 
 	Vec3f lightPos3(light.position[0], light.position[1], light.position[2]);
@@ -2521,7 +2521,7 @@ Planet::RenderData Planet::setCommonShaderUniforms(const StelPainter& painter, Q
 	GL(shader->setUniformValue(shaderVars.tex, 0));
 	GL(shader->setUniformValue(shaderVars.shadowCount, data.shadowCandidates.size()));
 	GL(shader->setUniformValue(shaderVars.shadowData, data.shadowCandidatesData));
-	GL(shader->setUniformValue(shaderVars.sunInfo, data.mTarget[12], data.mTarget[13], data.mTarget[14], sun->getRadius()));
+	GL(shader->setUniformValue(shaderVars.sunInfo, data.mTarget[12], data.mTarget[13], data.mTarget[14], sun->getEquatorialRadius()));
 	GL(shader->setUniformValue(shaderVars.skyBrightness, lmgr->getLuminance()));
 
 	if(shaderVars.orenNayarParameters>=0)
@@ -2563,7 +2563,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Generates the vertice
 	Planet3DModel model;
-	sSphere(&model, radius, oneMinusOblateness, nb_facet, nb_facet);
+	sSphere(&model, equatorialRadius, oneMinusOblateness, nb_facet, nb_facet);
 	
 	QVector<float> projectedVertexArr(model.vertexArr.size());
 	for (int i=0;i<model.vertexArr.size()/3;++i)
@@ -2696,7 +2696,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 		shadowCandidatesData(0, 0) = position[0];
 		shadowCandidatesData(1, 0) = position[1];
 		shadowCandidatesData(2, 0) = position[2];
-		shadowCandidatesData(3, 0) = getRadius();
+		shadowCandidatesData(3, 0) = getEquatorialRadius();
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowCount, 1));
 		GL(ringPlanetShaderProgram->setUniformValue(ringPlanetShaderVars.shadowData, shadowCandidatesData));
 		
@@ -2740,7 +2740,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 	// Backup transformation so that we can restore it later.
 	StelProjector::ModelViewTranformP transfo = painter->getProjector()->getModelViewTransform()->clone();
 	Vec4f color = painter->getColor();
-	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(radius * sphereScale));
+	painter->getProjector()->getModelViewTransform()->combine(Mat4d::scaling(equatorialRadius * sphereScale));
 
 	QOpenGLShaderProgram* shader = planetShaderProgram;
 	const PlanetShaderVars* shaderVars = &planetShaderVars;
@@ -2796,7 +2796,7 @@ void Planet::drawSurvey(StelCore* core, StelPainter* painter)
 			v = verts[i];
 			painter->getProjector()->project(v, v);
 			projectedVertsArray[i] = Vec3f(v[0], v[1], v[2]);
-			v = Mat4d::scaling(radius) * verts[i];
+			v = Mat4d::scaling(equatorialRadius) * verts[i];
 			v = Mat4d::scaling(Vec3d(1, 1, oneMinusOblateness)) * v;
 			// Undo the rotation we applied for the survey fix.
 			v = Mat4d::zrotation(M_PI / 2.0) * v;

@@ -2576,7 +2576,7 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 {
 	Vec3d Lp = getLightTimeSunPosition();  //sun->getEclipticPos();
 	Vec3d P3 = core->getObserverHeliocentricEclipticPos();
-	const double RS = sun->getRadius();
+	const double RS = sun->getEquatorialRadius();
 
 	double final_illumination = 1.0;
 
@@ -2589,7 +2589,7 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 		planet->computeModelMatrix(trans);
 
 		const Vec3d C = trans * Vec3d(0., 0., 0.);
-		const double radius = planet->getRadius();
+		const double radius = planet->getEquatorialRadius();
 
 		Vec3d v1 = Lp - P3;
 		Vec3d v2 = C - P3;

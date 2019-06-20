@@ -202,10 +202,10 @@ Vec3d StelObserver::getCenterVsop87Pos(void) const
 // Since V0.14, we follow Meeus, Astr. Alg. 2nd ed, Ch.11., but used offset rho in a wrong way. (offset angle phi in distance rho.)
 double StelObserver::getDistanceFromCenter(void) const
 {
-	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
+	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
 		return currentLocation.altitude/(1000*AU);
 
-	const double a=getHomePlanet()->getRadius();
+	const double a=getHomePlanet()->getEquatorialRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
 	// Details: https://github.com/Stellarium/stellarium/issues/391
@@ -232,10 +232,10 @@ double StelObserver::getDistanceFromCenter(void) const
 // Since V0.16, we can produce the usual offset values plus geocentric latitude phi'.
 Vec3d StelObserver::getTopographicOffsetFromCenter(void) const
 {
-	if (getHomePlanet()->getRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
+	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
 		return currentLocation.altitude/(1000*AU);
 
-	const double a=getHomePlanet()->getRadius();
+	const double a=getHomePlanet()->getEquatorialRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
 
 	// Details: https://github.com/Stellarium/stellarium/issues/391

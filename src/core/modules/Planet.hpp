@@ -139,7 +139,7 @@ public:
 
 
 	Planet(const QString& englishName,
-	       double radius,
+	       double equatorialRadius,
 	       double oblateness,
 	       Vec3f halocolor,
 	       float albedo,
@@ -222,9 +222,12 @@ public:
 	// Methods specific to Planet
 	//! Get the equator radius of the planet in AU.
 	//! @return the equator radius of the planet in astronomical units.
-	double getRadius(void) const {return radius;}
+	double getEquatorialRadius(void) const {return equatorialRadius;}
 	//! Get the value (1-f) for oblateness f.
 	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
+	//! Get the polar radius of the planet in AU.
+	//! @return the polar radius of the planet in astronomical units.
+	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
 	//! Get duration of sidereal day
 	double getSiderealDay(void) const {return re.period;}
 	//! Get duration of sidereal year
@@ -514,7 +517,7 @@ protected:
 	QString normalMapName;           // Texture file path
 	//int flagLighting;              // Set whether light computation has to be proceed. NO LONGER USED (always on!)
 	RotationElements re;             // Rotation param
-	double radius;                   // Planet radius in AU
+	double equatorialRadius;         // Planet's equatorial radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) around the parent body.
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
