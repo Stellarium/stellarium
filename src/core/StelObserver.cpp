@@ -212,8 +212,8 @@ double StelObserver::getDistanceFromCenter(void) const
 // Since V0.19.1 we give rho*a as fourth return value, simplifying the previous method.
 Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 {
-	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
-		return Vec4d(0.,0.,0.,0.);
+	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver have this
+		return Vec4d(0.,0.,currentLocation.latitude*(M_PI/180.0),currentLocation.altitude/(1000.0*AU));
 
 	const double a=getHomePlanet()->getEquatorialRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;

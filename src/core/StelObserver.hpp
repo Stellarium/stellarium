@@ -30,7 +30,6 @@
 
 
 class ArtificialPlanet;
-class StelObserver;
 
 //! @class StelObserver
 //! Should be renamed as PlanetBasedObserver and derive from a more generical StelObserver class
