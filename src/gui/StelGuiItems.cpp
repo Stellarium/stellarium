@@ -671,7 +671,7 @@ void BottomStelBar::updateText(bool updatePos)
 	if (planetName=="SpaceShip") // Avoid crash
 	{
 		const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-		planetNameI18n = trans.qtranslate(planetName);
+		planetNameI18n = trans.qtranslate(planetName, "special celestial body"); // added context
 	}
 	else
 		planetNameI18n = GETSTELMODULE(SolarSystem)->searchByEnglishName(planetName)->getNameI18n();

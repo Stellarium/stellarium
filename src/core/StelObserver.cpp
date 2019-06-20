@@ -213,7 +213,7 @@ double StelObserver::getDistanceFromCenter(void) const
 Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 {
 	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver has this
-		return currentLocation.altitude/(1000*AU);
+		return Vec4d(0.,0.,0.,0.);
 
 	const double a=getHomePlanet()->getEquatorialRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
@@ -300,6 +300,7 @@ bool SpaceShipObserver::update(double deltaTime)
 {
 	if (timeToGo <= 0.) return false; // Already over.
 	timeToGo -= deltaTime;
+	SolarSystem* ss = GETSTELMODULE(SolarSystem);
 
 	// If move is over
 	if (timeToGo <= 0.)
@@ -307,7 +308,6 @@ bool SpaceShipObserver::update(double deltaTime)
 		timeToGo = 0.;
 		currentLocation = moveTargetLocation;
 		LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
-		SolarSystem* ss = GETSTELMODULE(SolarSystem);
 
 		// we have to avoid auto-select landscape in case the selected new landscape is on our target planet (true if landscape sets location). (LP:#1700199)
 		if ( (lmgr->getFlagLandscapeAutoSelection()) && !(lmgr->getFlagLandscapeSetsLocation()) )
@@ -325,19 +325,16 @@ bool SpaceShipObserver::update(double deltaTime)
 	}
 	else
 	{
+		currentLocation.name = ss->searchByEnglishName(moveStartLocation.planetName)->getNameI18n() + " -> " +
+						      ss->searchByEnglishName(moveTargetLocation.planetName)->getNameI18n();
 		if (artificialPlanet)
 		{
 			// Update SpaceShip position
 			static_cast<ArtificialPlanet*>(artificialPlanet.data())->computeAverage(timeToGo/(timeToGo + deltaTime));			
-			currentLocation.planetName = "SpaceShip";
-			const StelTranslator& trans = StelApp::getInstance().getLocaleMgr().getSkyTranslator();
-			currentLocation.name = trans.qtranslate(moveStartLocation.planetName) + " -> " + trans.qtranslate(moveTargetLocation.planetName);
+			currentLocation.planetName = "SpaceShip";			
 		}
 		else
-		{
-			currentLocation.name = moveStartLocation.name + " -> " + moveTargetLocation.name;
 			currentLocation.planetName = moveTargetLocation.planetName;
-		}
 
 		// Move the lon/lat/alt on the planet
 		const double moveToMult = 1.-(timeToGo/transitSeconds);
