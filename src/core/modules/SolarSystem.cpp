@@ -265,7 +265,7 @@ void SolarSystem::recreateTrails()
 		delete allTrails;
 	allTrails = new TrailGroup(365.f);
 
-	unsigned long cnt = selectedSSO.size();
+	unsigned long cnt = (unsigned long) selectedSSO.size();
 	if (cnt>0 && getFlagIsolatedTrails())
 	{
 		unsigned long limit = getNumberIsolatedTrails();
