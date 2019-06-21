@@ -114,6 +114,11 @@ public:
 	//! - dec : declination angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - parallacticAngle : parallactic angle in decimal degrees (for non-star objects only)
+	//! - hourAngle-dd : hour angle in decimal degrees
+	//! - hourAngle-hms : hour angle in HMS format (formatted string)
+	//! - meanSidTm : mean sidereal time, in decimal degrees (on Earth only!)
+	//! - appSidTm : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
@@ -204,6 +209,9 @@ public:
 	//! It is the automatic position, i.e. taking the refraction effect into account if atmosphere is on.
 	//! The frame has its Z axis at the zenith
 	Vec3d getAltAzPosAuto(const StelCore* core) const;
+
+	//! Get parallactic angle, which is the deviation between zenith angle and north angle. [radians]
+	float getParallacticAngle(const StelCore* core) const;
 
 	//! Checking position an object above mathematical horizon for current location.
 	//! @return true if object an above mathematical horizon

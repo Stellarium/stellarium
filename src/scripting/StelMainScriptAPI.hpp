@@ -187,6 +187,11 @@ public slots:
 	//! - dec : declination angle (current date frame) in decimal degrees
 	//! - raJ2000 : right ascension angle (J2000 frame) in decimal degrees
 	//! - decJ2000 : declination angle (J2000 frame) in decimal degrees
+	//! - parallacticAngle : parallactic angle in decimal degrees (for non-star objects only)
+	//! - hourAngle-dd : hour angle in decimal degrees
+	//! - hourAngle-hms : hour angle in HMS format (formatted string)
+	//! - meanSidTm : mean sidereal time, in decimal degrees (on Earth only!)
+	//! - appSidTm : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - glong : galactic longitude in decimal degrees
 	//! - glat : galactic latitude in decimal degrees
 	//! - sglong : supergalactic longitude in decimal degrees
