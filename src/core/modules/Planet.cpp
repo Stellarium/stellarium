@@ -2265,7 +2265,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 				ashenFactor*=ashenFactor*0.15f*atmScaling;
 				light.ambient = Vec4f(ashenFactor,magFactorGreen*ashenFactor,magFactorBlue*ashenFactor);
 			}
-			float fov=core->getProjection(transfo)->getFov();
+			const float fov=core->getProjection(transfo)->getFov();
 			float fovFactor=1.6f;
 			// scale brightness to reduce if fov smaller than 5 degrees. Min brightness (to avoid glare) if fov=2deg.
 			if (fov<5.0f)
@@ -2315,8 +2315,8 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// Do not hide Earth's moon's halo below ~-45degrees when observing from earth.
 		Vec3d obj = getJ2000EquatorialPos(core);
 		Vec3d par = getParent()->getJ2000EquatorialPos(core);
-		double angle = obj.angle(par)*180.f/M_PI;
-		double asize = getParent()->getSpheroidAngularSize(core);
+		const double angle = obj.angle(par)*180.f/M_PI;
+		const double asize = getParent()->getSpheroidAngularSize(core);
 		if (angle<=asize)
 			allowDrawHalo = false;
 	}
@@ -2343,10 +2343,25 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 
 		if ((englishName=="Sun") && (core->getCurrentLocation().planetName == "Earth"))
 		{
-			float eclipseFactor = ssm->getEclipseFactor(core);
+			LandscapeMgr* lmgr = GETSTELMODULE(LandscapeMgr);
+			const float eclipseFactor = ssm->getEclipseFactor(core);
 			// This alpha ensures 0 for complete sun, 1 for eclipse better 1e-10, with a strong increase towards full eclipse. We still need to square it.
-			float alpha=-0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor));
-			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha);
+			// But without atmosphere we should indeed draw a visible corona!
+			const float alpha= ( !lmgr->getFlagAtmosphere() ? 0.7f : -0.1f*qMax(-10.0f, (float) std::log10(eclipseFactor)));
+			StelMovementMgr* mmgr = GETSTELMODULE(StelMovementMgr);
+			float rotationAngle=(mmgr->getEquatorialMount() ? 0.0 : getParallacticAngle(core) * 180.0/M_PI);
+
+			// Add ecliptic/equator angle. Meeus, Astr. Alg. 2nd, p100.
+			const double jde=core->getJDE();
+			const double eclJDE = GETSTELMODULE(SolarSystem)->getEarth()->getRotObliquity(jde);
+			double ra_equ, dec_equ, lambdaJDE, betaJDE;
+			StelUtils::rectToSphe(&ra_equ,&dec_equ,getEquinoxEquatorialPos(core));
+			StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
+			// We can safely assume beta=0 and ignore nutation.
+			const float q0=atan(-cos(lambdaJDE)*tan(eclJDE));
+			rotationAngle -= q0*180.0/M_PI;
+
+			core->getSkyDrawer()->drawSunCorona(&sPainter, Vec3f(tmp[0], tmp[1], tmp[2]), 512.f/192.f*screenSz, haloColorToDraw, alpha*alpha, rotationAngle);
 		}
 	}
 }

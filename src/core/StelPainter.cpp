@@ -1695,12 +1695,12 @@ void StelPainter::drawSprite2dMode(const Vec3d& v, float radius)
 void StelPainter::drawSprite2dMode(float x, float y, float radius, float rotation)
 {
 	static float vertexData[8];
-	static const float texCoordData[] = {0.,0., 1.,0., 0.,1., 1.,1.};
+	static const float texCoordData[] = {0.f,0.f, 1.f,0.f, 0.f,1.f, 1.f,1.f};
 
 	// compute the vertex coordinates applying the translation and the rotation
 	static const float vertexBase[] = {-1., -1., 1., -1., -1., 1., 1., 1.};
-	const float cosr = std::cos(rotation / 180 * M_PI);
-	const float sinr = std::sin(rotation / 180 * M_PI);
+	const float cosr = std::cos(rotation / 180.0 * M_PI);
+	const float sinr = std::sin(rotation / 180.0 * M_PI);
 	
 	// Takes into account device pixel density and global scale ratio, as we are drawing 2D stuff.
 	radius *= prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
