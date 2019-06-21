@@ -89,7 +89,7 @@ public:
 	//! The vector is not initialized!
 	inline Vector2();
 	//! Sets all components of the vector to the same value
-	inline Vector2(T);
+	inline explicit Vector2(T);
 	//! Explicit conversion constructor from an array (copies values)
 	//! @warning Does not check array size, make sure it has at least 2 elements
 	inline explicit Vector2(const T*);
@@ -165,7 +165,7 @@ public:
 	//! The vector is not initialized!
 	inline Vector3();
 	//! Sets all components of the vector to the same value
-	inline Vector3(T);
+	inline explicit Vector3(T);
 	//! Explicit conversion constructor from an array (copies values)
 	//! @warning Does not check array size, make sure it has at least 3 elements
 	inline explicit Vector3(const T*);
@@ -244,6 +244,8 @@ template<class T> class Vector4
 public:
 	//! The vector is not initialized!
 	inline Vector4();
+	//! Sets all components of the vector to the same value
+	inline explicit Vector4(T);
 	//! Explicit conversion constructor from an array
 	//! @warning Does not check array size, make sure it has at least 4 elements
 	inline explicit Vector4(const T*);
@@ -852,6 +854,11 @@ template<class T> T Vector3<T>::longitude() const
 ////////////////////////// Vector4 class methods ///////////////////////////////
 
 template<class T> Vector4<T>::Vector4() {}
+
+template<class T> Vector4<T>::Vector4(T x)
+{
+	v[0]=x; v[1]=x; v[2]=x; v[3]=x;
+}
 
 template<class T> Vector4<T>::Vector4(const T* x)
 {

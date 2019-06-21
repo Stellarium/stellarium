@@ -23,7 +23,7 @@
 
 AABBox::AABBox()
 {
-	*this = AABBox(std::numeric_limits<float>::infinity(),-std::numeric_limits<float>::infinity());
+	*this = AABBox(Vec3f(std::numeric_limits<float>::infinity()),Vec3f(-std::numeric_limits<float>::infinity()));
 }
 
 AABBox::AABBox(const Vec3f& min, const Vec3f& max)
