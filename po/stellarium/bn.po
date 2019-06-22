@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-21 20:55+0600\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: t4saha <t4saha@gmail.com>, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -1190,7 +1190,7 @@ msgid "Nomenclature labels"
 msgstr "নামকরণ"
 
 #: src/core/modules/Nebula.cpp:167 src/core/modules/Nebula.cpp:181
-#: src/core/StelObject.cpp:236 src/gui/AstroCalcDialog.cpp:2536
+#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2536
 #: src/gui/AstroCalcDialog.cpp:2583 plugins/Supernovae/src/Supernova.cpp:125
 msgid "Magnitude"
 msgstr "উজ্জ্বলতা"
@@ -1199,15 +1199,15 @@ msgstr "উজ্জ্বলতা"
 msgid "Opacity"
 msgstr "স্বচ্ছতা"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "reduced to"
 msgstr "হ্রাস পেয়ে"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "by"
 msgstr "কারণ"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "Airmasses"
 msgstr "গুন বায়ুমন্ডলীয় গভীরতা"
 
@@ -2882,109 +2882,113 @@ msgstr ""
 "এটি একটি ১৯৪২ সালে Osborn Maitland Miller (১৮৯৭-১৯৭৯) প্রস্তাবিত সংশোধিত "
 "বানিজ্যিক মানচিত্র পদ্ধতি । এক্ষেত্রে মেরুদ্বয়কে অসীমে নির্দেশিত করা হয় না ।"
 
-#: src/core/StelObject.cpp:254
+#: src/core/StelObject.cpp:271
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "বর্তমান"
 
-#: src/core/StelObject.cpp:259
+#: src/core/StelObject.cpp:276
 msgid "(apparent)"
 msgstr "(আপাত)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:265
+#: src/core/StelObject.cpp:282
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "বিষুবাংশ / বিষুবলম্ব"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:352
+#: src/core/StelObject.cpp:369
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "ঘন্টাকোণ / বিষুবলম্ব"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:401
+#: src/core/StelObject.cpp:418
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "দিগংশ / উন্নতি"
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:427
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "ছায়াপথীয় দ্রাঘিমাংশ / অক্ষাংশ"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:453
+#: src/core/StelObject.cpp:470
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "নক্ষত্রলোকীয় দ্রাঘিমাংশ / অক্ষাংশ"
 
 #. TRANSLATORS: Ecliptic longitude/latitude
-#: src/core/StelObject.cpp:471
+#: src/core/StelObject.cpp:488
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "সৌরপথীয় দ্রাঘিমাংশ / অক্ষাংশ"
 
-#: src/core/StelObject.cpp:536
+#: src/core/StelObject.cpp:553
 msgid "Ecliptic obliquity"
 msgstr "অক্ষের তীর্যকতা"
 
-#: src/core/StelObject.cpp:556
+#: src/core/StelObject.cpp:573
 msgid "Mean Sidereal Time"
 msgstr "গড় নাক্ষত্রিক সময়"
 
-#: src/core/StelObject.cpp:575
+#: src/core/StelObject.cpp:592
 msgid "Apparent Sidereal Time"
 msgstr "আপাত নাক্ষত্রিক সময়"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:589 src/gui/AstroCalcDialog.cpp:750
+#: src/core/StelObject.cpp:606 src/gui/AstroCalcDialog.cpp:750
 #: src/gui/AstroCalcDialog.cpp:4050
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "মাঝ আকাশে"
 
-#: src/core/StelObject.cpp:590 src/gui/AstroCalcDialog.cpp:4049
+#: src/core/StelObject.cpp:607 src/gui/AstroCalcDialog.cpp:4049
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "উদয়"
 
-#: src/core/StelObject.cpp:591 src/gui/AstroCalcDialog.cpp:4051
+#: src/core/StelObject.cpp:608 src/gui/AstroCalcDialog.cpp:4051
 msgctxt "celestial event"
 msgid "Set"
 msgstr "অস্ত"
 
-#: src/core/StelObject.cpp:629
+#: src/core/StelObject.cpp:646
 msgid "Daytime"
 msgstr "দিনের দৈর্ঘ্য"
 
-#: src/core/StelObject.cpp:642
+#: src/core/StelObject.cpp:659
 msgid "Polar night"
 msgstr "মেরু রাত"
 
-#: src/core/StelObject.cpp:644
+#: src/core/StelObject.cpp:661
 msgid "This object never rises"
 msgstr "সর্বদা দিগন্তের নীচে"
 
-#: src/core/StelObject.cpp:649
+#: src/core/StelObject.cpp:666
 msgid "Polar day"
 msgstr "মেরু দিন"
 
-#: src/core/StelObject.cpp:651
+#: src/core/StelObject.cpp:668
 msgid "Circumpolar (never sets)"
 msgstr "সর্বদা দিগন্তের উপরে"
 
-#: src/core/StelObject.cpp:654
+#: src/core/StelObject.cpp:671
 msgid "Polar dawn"
 msgstr "মেরু ভোর"
 
-#: src/core/StelObject.cpp:656
+#: src/core/StelObject.cpp:673
 msgid "Polar dusk"
 msgstr "মেরু উষা বা গোধুলী"
 
-#: src/core/StelObject.cpp:662
+#: src/core/StelObject.cpp:679
+msgid "Parallactic Angle"
+msgstr ""
+
+#: src/core/StelObject.cpp:685
 msgid "IAU Constellation"
 msgstr "আঃজ্যোঃসঃ নক্ষত্রমন্ডল"
 

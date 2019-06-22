@@ -6,15 +6,16 @@
 # Translators:
 # cardinot <mcardinot@gmail.com>, 2017
 # Latein Lebt, 2019
+# Georg Zotti <Georg.Zotti@univie.ac.at>, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-21 20:55+0600\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
-"Last-Translator: Latein Lebt, 2019\n"
+"Last-Translator: Georg Zotti <Georg.Zotti@univie.ac.at>, 2019\n"
 "Language-Team: Latin (https://www.transifex.com/stellarium/teams/80998/la/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -892,7 +893,7 @@ msgstr "depressio circularis."
 #. TRANSLATORS: Description for landform 'dorsum'
 #: src/core/modules/NomenclatureItem.cpp:511
 msgid "Ridge."
-msgstr ""
+msgstr "dorsum"
 
 #. TRANSLATORS: Description for landform 'eruptive center'
 #: src/core/modules/NomenclatureItem.cpp:515
@@ -902,7 +903,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'facula'
 #: src/core/modules/NomenclatureItem.cpp:519
 msgid "Bright spot."
-msgstr ""
+msgstr "facula"
 
 #. TRANSLATORS: Description for landform 'farrum'
 #: src/core/modules/NomenclatureItem.cpp:523
@@ -917,12 +918,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'fluctus'
 #: src/core/modules/NomenclatureItem.cpp:531
 msgid "Flow terrain."
-msgstr ""
+msgstr "fluctus"
 
 #. TRANSLATORS: Description for landform 'flumen'
 #: src/core/modules/NomenclatureItem.cpp:535
 msgid "Channel, that might carry liquid."
-msgstr ""
+msgstr "flumen"
 
 #. TRANSLATORS: Description for landform 'fretum'
 #: src/core/modules/NomenclatureItem.cpp:539
@@ -933,7 +934,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'fossa'
 #: src/core/modules/NomenclatureItem.cpp:543
 msgid "Long, narrow depression."
-msgstr ""
+msgstr "fossa"
 
 #. TRANSLATORS: Description for landform 'insula'
 #: src/core/modules/NomenclatureItem.cpp:547
@@ -945,7 +946,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'labes'
 #: src/core/modules/NomenclatureItem.cpp:551
 msgid "Landslide."
-msgstr ""
+msgstr "labes"
 
 #. TRANSLATORS: Description for landform 'labyrinthus'
 #: src/core/modules/NomenclatureItem.cpp:555
@@ -961,12 +962,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lacus' on Titan
 #: src/core/modules/NomenclatureItem.cpp:565
 msgid "'Lake' or small, dark plain with discrete, sharp boundaries."
-msgstr ""
+msgstr "lacus"
 
 #. TRANSLATORS: Description for landform 'lacus'
 #: src/core/modules/NomenclatureItem.cpp:570
 msgid "'Lake' or small plain."
-msgstr ""
+msgstr "lacus"
 
 #. TRANSLATORS: Description for landform 'large ringed feature'
 #: src/core/modules/NomenclatureItem.cpp:575
@@ -976,22 +977,22 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'lenticula'
 #: src/core/modules/NomenclatureItem.cpp:579
 msgid "Small dark spot."
-msgstr ""
+msgstr "lenticula"
 
 #. TRANSLATORS: Description for landform 'linea'
 #: src/core/modules/NomenclatureItem.cpp:583
 msgid "A dark or bright elongate marking, may be curved or straight."
-msgstr ""
+msgstr "linea"
 
 #. TRANSLATORS: Description for landform 'lingula'
 #: src/core/modules/NomenclatureItem.cpp:587
 msgid "Extension of plateau having rounded lobate or tongue-like boundaries."
-msgstr ""
+msgstr "lingula"
 
 #. TRANSLATORS: Description for landform 'macula'
 #: src/core/modules/NomenclatureItem.cpp:591
 msgid "Dark spot, may be irregular"
-msgstr ""
+msgstr "macula"
 
 #. TRANSLATORS: Description for landform 'mare' on the Moon
 #: src/core/modules/NomenclatureItem.cpp:599
@@ -1027,7 +1028,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'palus'
 #: src/core/modules/NomenclatureItem.cpp:627
 msgid "'Swamp'; small plain."
-msgstr ""
+msgstr "palus"
 
 #. TRANSLATORS: Description for landform 'patera'
 #: src/core/modules/NomenclatureItem.cpp:631
@@ -1069,12 +1070,12 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'rima'
 #: src/core/modules/NomenclatureItem.cpp:659
 msgid "Fissure."
-msgstr ""
+msgstr "rima"
 
 #. TRANSLATORS: Description for landform 'rupes'
 #: src/core/modules/NomenclatureItem.cpp:663
 msgid "Scarp."
-msgstr ""
+msgstr "rupes"
 
 #. TRANSLATORS: Description for landform 'satellite feature'
 #: src/core/modules/NomenclatureItem.cpp:667
@@ -1126,7 +1127,7 @@ msgstr ""
 #. TRANSLATORS: Description for landform 'unda'
 #: src/core/modules/NomenclatureItem.cpp:707
 msgid "Dunes."
-msgstr ""
+msgstr "unda"
 
 #. TRANSLATORS: Description for landform 'vallis'
 #: src/core/modules/NomenclatureItem.cpp:711
@@ -1190,24 +1191,24 @@ msgid "Nomenclature labels"
 msgstr ""
 
 #: src/core/modules/Nebula.cpp:167 src/core/modules/Nebula.cpp:181
-#: src/core/StelObject.cpp:236 src/gui/AstroCalcDialog.cpp:2536
+#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2536
 #: src/gui/AstroCalcDialog.cpp:2583 plugins/Supernovae/src/Supernova.cpp:125
 msgid "Magnitude"
 msgstr "magnitudo"
 
 #: src/core/modules/Nebula.cpp:169
 msgid "Opacity"
-msgstr ""
+msgstr "opacitas"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "reduced to"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "by"
 msgstr ""
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "Airmasses"
 msgstr ""
 
@@ -2753,109 +2754,113 @@ msgid ""
 "longer mapped to infinity."
 msgstr ""
 
-#: src/core/StelObject.cpp:254
+#: src/core/StelObject.cpp:271
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr ""
 
-#: src/core/StelObject.cpp:259
+#: src/core/StelObject.cpp:276
 msgid "(apparent)"
 msgstr ""
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:265
+#: src/core/StelObject.cpp:282
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr ""
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:352
+#: src/core/StelObject.cpp:369
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr ""
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:401
+#: src/core/StelObject.cpp:418
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr ""
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:427
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr ""
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:453
+#: src/core/StelObject.cpp:470
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr ""
 
 #. TRANSLATORS: Ecliptic longitude/latitude
-#: src/core/StelObject.cpp:471
+#: src/core/StelObject.cpp:488
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr ""
 
-#: src/core/StelObject.cpp:536
+#: src/core/StelObject.cpp:553
 msgid "Ecliptic obliquity"
 msgstr ""
 
-#: src/core/StelObject.cpp:556
+#: src/core/StelObject.cpp:573
 msgid "Mean Sidereal Time"
 msgstr ""
 
-#: src/core/StelObject.cpp:575
+#: src/core/StelObject.cpp:592
 msgid "Apparent Sidereal Time"
 msgstr ""
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:589 src/gui/AstroCalcDialog.cpp:750
+#: src/core/StelObject.cpp:606 src/gui/AstroCalcDialog.cpp:750
 #: src/gui/AstroCalcDialog.cpp:4050
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr ""
 
-#: src/core/StelObject.cpp:590 src/gui/AstroCalcDialog.cpp:4049
+#: src/core/StelObject.cpp:607 src/gui/AstroCalcDialog.cpp:4049
 msgctxt "celestial event"
 msgid "Rise"
 msgstr ""
 
-#: src/core/StelObject.cpp:591 src/gui/AstroCalcDialog.cpp:4051
+#: src/core/StelObject.cpp:608 src/gui/AstroCalcDialog.cpp:4051
 msgctxt "celestial event"
 msgid "Set"
 msgstr ""
 
-#: src/core/StelObject.cpp:629
+#: src/core/StelObject.cpp:646
 msgid "Daytime"
 msgstr ""
 
-#: src/core/StelObject.cpp:642
+#: src/core/StelObject.cpp:659
 msgid "Polar night"
 msgstr ""
 
-#: src/core/StelObject.cpp:644
+#: src/core/StelObject.cpp:661
 msgid "This object never rises"
 msgstr ""
 
-#: src/core/StelObject.cpp:649
+#: src/core/StelObject.cpp:666
 msgid "Polar day"
 msgstr ""
 
-#: src/core/StelObject.cpp:651
+#: src/core/StelObject.cpp:668
 msgid "Circumpolar (never sets)"
 msgstr ""
 
-#: src/core/StelObject.cpp:654
+#: src/core/StelObject.cpp:671
 msgid "Polar dawn"
 msgstr ""
 
-#: src/core/StelObject.cpp:656
+#: src/core/StelObject.cpp:673
 msgid "Polar dusk"
 msgstr ""
 
-#: src/core/StelObject.cpp:662
+#: src/core/StelObject.cpp:679
+msgid "Parallactic Angle"
+msgstr ""
+
+#: src/core/StelObject.cpp:685
 msgid "IAU Constellation"
 msgstr ""
 
@@ -3771,25 +3776,25 @@ msgstr ""
 #: src/gui/StelGuiItems.cpp:692
 msgctxt "unit of measurement"
 msgid "min/s"
-msgstr ""
+msgstr "min/s"
 
 #. TRANSLATORS: unit of measurement: hours per second
 #: src/gui/StelGuiItems.cpp:700
 msgctxt "unit of measurement"
 msgid "hr/s"
-msgstr ""
+msgstr "hr/s"
 
 #. TRANSLATORS: unit of measurement: days per second
 #: src/gui/StelGuiItems.cpp:706
 msgctxt "unit of measurement"
 msgid "d/s"
-msgstr ""
+msgstr "d/s"
 
 #. TRANSLATORS: unit of measurement: years per second
 #: src/gui/StelGuiItems.cpp:712
 msgctxt "unit of measurement"
 msgid "yr/s"
-msgstr ""
+msgstr "an/s"
 
 #: src/gui/StelGuiItems.cpp:714 src/gui/StelGuiItems.cpp:716
 msgid "Simulation speed"
@@ -3961,22 +3966,22 @@ msgstr ""
 #: src/gui/ViewDialog.cpp:1081
 msgctxt "magnitude algorithm"
 msgid "G. Mueller (1893)"
-msgstr ""
+msgstr "G. Mueller (1893)"
 
 #: src/gui/ViewDialog.cpp:1082
 msgctxt "magnitude algorithm"
 msgid "Astronomical Almanach (1984)"
-msgstr ""
+msgstr "Astronomical Almanach (1984)"
 
 #: src/gui/ViewDialog.cpp:1083
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (1992)"
-msgstr ""
+msgstr "Explanatory Supplement (1992)"
 
 #: src/gui/ViewDialog.cpp:1084
 msgctxt "magnitude algorithm"
 msgid "Explanatory Supplement (2013)"
-msgstr ""
+msgstr "Explanatory Supplement (2013)"
 
 #: src/gui/ViewDialog.cpp:1085
 msgctxt "magnitude algorithm"
@@ -4171,45 +4176,45 @@ msgstr ""
 #: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
 msgid "Equatorial (J2000.0)"
-msgstr ""
+msgstr "Equatoriale (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:215
 msgctxt "coordinate system"
 msgid "Equatorial"
-msgstr ""
+msgstr "Equatoriale"
 
 #: src/gui/SearchDialog.cpp:216
 msgctxt "coordinate system"
 msgid "Horizontal"
-msgstr ""
+msgstr "Horizontale"
 
 #: src/gui/SearchDialog.cpp:217
 msgctxt "coordinate system"
 msgid "Galactic"
-msgstr ""
+msgstr "Galacticale"
 
 #: src/gui/SearchDialog.cpp:218
 msgctxt "coordinate system"
 msgid "Supergalactic"
-msgstr ""
+msgstr "Supergalacticale"
 
 #: src/gui/SearchDialog.cpp:219
 msgctxt "coordinate system"
 msgid "Ecliptic"
-msgstr ""
+msgstr "Eclipticale"
 
 #: src/gui/SearchDialog.cpp:220
 msgctxt "coordinate system"
 msgid "Ecliptic (J2000.0)"
-msgstr ""
+msgstr "Eclipticale (J2000.0)"
 
 #: src/gui/SearchDialog.cpp:248
 msgid "Right ascension"
-msgstr ""
+msgstr "Recta ascensio"
 
 #: src/gui/SearchDialog.cpp:251
 msgid "Declination"
-msgstr ""
+msgstr "Declinatio"
 
 #. TRANSLATORS: azimuth
 #: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:471
@@ -4217,7 +4222,7 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:701 src/gui/AstroCalcDialog.cpp:1283
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1203
 msgid "Azimuth"
-msgstr ""
+msgstr "Azimut"
 
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
@@ -4227,19 +4232,19 @@ msgstr ""
 #: src/gui/AstroCalcDialog.cpp:2962 plugins/Satellites/src/Satellite.cpp:310
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
 msgid "Altitude"
-msgstr ""
+msgstr "Altitudo"
 
 #: src/gui/SearchDialog.cpp:273
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:604
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:610
 msgid "Longitude"
-msgstr ""
+msgstr "Longitudo"
 
 #: src/gui/SearchDialog.cpp:276
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:605
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:611
 msgid "Latitude"
-msgstr ""
+msgstr "Latitudo"
 
 #: src/gui/SearchDialog.cpp:637
 msgid "Simbad Lookup Error"
@@ -4255,7 +4260,7 @@ msgstr ""
 
 #: src/gui/SearchDialog.cpp:851
 msgid "Harvard University (USA)"
-msgstr ""
+msgstr "Harvard Universitas (USA)"
 
 #: src/gui/SearchDialog.cpp:938
 msgid "Paste and Search"
@@ -4289,7 +4294,7 @@ msgstr ""
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:135
 msgid "year"
-msgstr ""
+msgstr "annus"
 
 #: src/gui/CustomDeltaTEquationDialog.cpp:136
 msgid "Secular acceleration of the Moon"
@@ -4319,23 +4324,23 @@ msgstr "Nomen"
 #. TRANSLATORS: right ascension
 #: src/gui/AstroCalcDialog.cpp:708 src/gui/AstroCalcDialog.cpp:1290
 msgid "RA (J2000)"
-msgstr ""
+msgstr "RA (J2000)"
 
 #. TRANSLATORS: declination
 #: src/gui/AstroCalcDialog.cpp:710 src/gui/AstroCalcDialog.cpp:1292
 msgid "Dec (J2000)"
-msgstr ""
+msgstr "Dec (J2000)"
 
 #. TRANSLATORS: opacity
 #: src/gui/AstroCalcDialog.cpp:715 src/gui/AstroCalcDialog.cpp:4047
 msgid "Opac."
-msgstr ""
+msgstr "Opac."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:720 src/gui/AstroCalcDialog.cpp:1295
 #: src/gui/AstroCalcDialog.cpp:4042
 msgid "Mag."
-msgstr ""
+msgstr "Mag."
 
 #. TRANSLATORS: angular size, arcminutes
 #: src/gui/AstroCalcDialog.cpp:723
@@ -4346,32 +4351,32 @@ msgstr ""
 #. TRANSLATORS: separation
 #: src/gui/AstroCalcDialog.cpp:727 src/gui/AstroCalcDialog.cpp:4055
 msgid "Sep."
-msgstr ""
+msgstr "Sep."
 
 #. TRANSLATORS: period, days
 #: src/gui/AstroCalcDialog.cpp:732
 msgid "Per."
-msgstr ""
+msgstr "Per."
 
 #: src/gui/AstroCalcDialog.cpp:732
 msgctxt "days"
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #. TRANSLATORS: distance, AU
 #: src/gui/AstroCalcDialog.cpp:737 src/gui/AstroCalcDialog.cpp:1299
 msgid "Dist."
-msgstr ""
+msgstr "Dist."
 
 #. TRANSLATORS: proper motion, arcsecond per year
 #: src/gui/AstroCalcDialog.cpp:742
 msgid "P.M."
-msgstr ""
+msgstr "M.P."
 
 #: src/gui/AstroCalcDialog.cpp:742
 msgctxt "arcsecond per year"
 msgid "\"/yr"
-msgstr ""
+msgstr "\"/a"
 
 #. TRANSLATORS: surface brightness
 #: src/gui/AstroCalcDialog.cpp:747
@@ -4453,7 +4458,7 @@ msgstr ""
 #. TRANSLATORS: elongation
 #: src/gui/AstroCalcDialog.cpp:1301
 msgid "Elong."
-msgstr ""
+msgstr "Elong."
 
 #: src/gui/AstroCalcDialog.cpp:1600
 msgid "Save calculated ephemerides as..."
@@ -4461,7 +4466,7 @@ msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1618
 msgid "Ephemerides"
-msgstr ""
+msgstr "Ephemerides"
 
 #: src/gui/AstroCalcDialog.cpp:1786
 msgid "10 minutes"
@@ -6983,12 +6988,12 @@ msgstr "Afgania"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antigua_&_Barbuda
 #: src/translations_countries.h:38
 msgid "Antigua and Barbuda"
-msgstr ""
+msgstr "Antigua et Barbuda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Anguilla
 #: src/translations_countries.h:40
 msgid "Anguilla"
-msgstr ""
+msgstr "Anguilla"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Albania
 #: src/translations_countries.h:42
@@ -7003,152 +7008,152 @@ msgstr "Armenia"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Angola
 #: src/translations_countries.h:46
 msgid "Angola"
-msgstr ""
+msgstr "Angola"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Antarctica
 #: src/translations_countries.h:48
 msgid "Antarctica"
-msgstr ""
+msgstr "Antarctica"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Argentina
 #: src/translations_countries.h:50
 msgid "Argentina"
-msgstr ""
+msgstr "Argentina"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/American_Samoa
 #: src/translations_countries.h:52
 msgid "Samoa (American)"
-msgstr ""
+msgstr "Samoa (American)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Austria
 #: src/translations_countries.h:54
 msgid "Austria"
-msgstr ""
+msgstr "Austria"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Australia
 #: src/translations_countries.h:56
 msgid "Australia"
-msgstr ""
+msgstr "Australia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Aruba
 #: src/translations_countries.h:58
 msgid "Aruba"
-msgstr ""
+msgstr "Aruba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Åland_Islands
 #: src/translations_countries.h:60
 msgid "Åland Islands"
-msgstr ""
+msgstr "Åland Insulae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Azerbaijan
 #: src/translations_countries.h:62
 msgid "Azerbaijan"
-msgstr ""
+msgstr "Aran"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bosnia_&_Herzegovina
 #: src/translations_countries.h:64
 msgid "Bosnia and Herzegovina"
-msgstr ""
+msgstr "Bosnia et Herzegovina"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Barbados
 #: src/translations_countries.h:66
 msgid "Barbados"
-msgstr ""
+msgstr "Barbados"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bangladesh
 #: src/translations_countries.h:68
 msgid "Bangladesh"
-msgstr ""
+msgstr "Bangladesh"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belgium
 #: src/translations_countries.h:70
 msgid "Belgium"
-msgstr ""
+msgstr "Belgium"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Burkina_Faso
 #: src/translations_countries.h:72
 msgid "Burkina Faso"
-msgstr ""
+msgstr "Burkina Faso"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bulgaria
 #: src/translations_countries.h:74
 msgid "Bulgaria"
-msgstr ""
+msgstr "Bulgaria"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bahrain
 #: src/translations_countries.h:76
 msgid "Bahrain"
-msgstr ""
+msgstr "Bahrain"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Burundi
 #: src/translations_countries.h:78
 msgid "Burundi"
-msgstr ""
+msgstr "Burundi"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Benin
 #: src/translations_countries.h:80
 msgid "Benin"
-msgstr ""
+msgstr "Benin"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Barthélemy
 #: src/translations_countries.h:82
 msgid "St Barthelemy"
-msgstr ""
+msgstr "St Barthelemy"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bermuda
 #: src/translations_countries.h:84
 msgid "Bermuda"
-msgstr ""
+msgstr "Bermuda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brunei
 #: src/translations_countries.h:86
 msgid "Brunei"
-msgstr ""
+msgstr "Brunei"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bolivia
 #: src/translations_countries.h:88
 msgid "Bolivia"
-msgstr ""
+msgstr "Bolivia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Caribbean_Netherlands
 #: src/translations_countries.h:90
 msgid "Caribbean NL"
-msgstr ""
+msgstr "Batavia Caribica"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Brazil
 #: src/translations_countries.h:92
 msgid "Brazil"
-msgstr ""
+msgstr "Brasilia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bahamas
 #: src/translations_countries.h:94
 msgid "Bahamas"
-msgstr ""
+msgstr "Bahamas"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bhutan
 #: src/translations_countries.h:96
 msgid "Bhutan"
-msgstr ""
+msgstr "Bhutan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Bouvet_Island
 #: src/translations_countries.h:98
 msgid "Bouvet Island"
-msgstr ""
+msgstr "Bouvet Insula"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Botswana
 #: src/translations_countries.h:100
 msgid "Botswana"
-msgstr ""
+msgstr "Botswana"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belarus
 #: src/translations_countries.h:102
 msgid "Belarus"
-msgstr ""
+msgstr "Belorussia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Belize
 #: src/translations_countries.h:104
 msgid "Belize"
-msgstr ""
+msgstr "Belize"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Canada
 #: src/translations_countries.h:106
@@ -7158,27 +7163,27 @@ msgstr "Canada"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cocos_(Keeling)_Islands
 #: src/translations_countries.h:108
 msgid "Cocos (Keeling) Islands"
-msgstr ""
+msgstr "Cocos (Keeling) Insulae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(DRC)
 #: src/translations_countries.h:110
 msgid "Congo (Dem. Rep.)"
-msgstr ""
+msgstr "Congo (Rep. Dem.)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Central_African_Republic
 #: src/translations_countries.h:112
 msgid "Central African Rep."
-msgstr ""
+msgstr "Rep. Africae Centralis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Congo_(Republic)
 #: src/translations_countries.h:114
 msgid "Congo (Rep.)"
-msgstr ""
+msgstr "Congo (Rep.)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Switzerland
 #: src/translations_countries.h:116
 msgid "Switzerland"
-msgstr ""
+msgstr "Helvetia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ivory_Coast
 #: src/translations_countries.h:118
@@ -7188,62 +7193,62 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cook_Islands
 #: src/translations_countries.h:120
 msgid "Cook Islands"
-msgstr ""
+msgstr "Cook Insulae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chile
 #: src/translations_countries.h:122
 msgid "Chile"
-msgstr ""
+msgstr "Chile"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cameroon
 #: src/translations_countries.h:124
 msgid "Cameroon"
-msgstr ""
+msgstr "Cameroon"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/China
 #: src/translations_countries.h:126
 msgid "China"
-msgstr ""
+msgstr "China"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Colombia
 #: src/translations_countries.h:128
 msgid "Colombia"
-msgstr ""
+msgstr "Columbia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Costa_Rica
 #: src/translations_countries.h:130
 msgid "Costa Rica"
-msgstr ""
+msgstr "Costa Rica"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cuba
 #: src/translations_countries.h:132
 msgid "Cuba"
-msgstr ""
+msgstr "Cuba"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cape_Verde
 #: src/translations_countries.h:134
 msgid "Cape Verde"
-msgstr ""
+msgstr "Insulae Fortunatae (Cabo Verde)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Curaçao
 #: src/translations_countries.h:136
 msgid "Curacao"
-msgstr ""
+msgstr "Curacao"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Christmas_Island
 #: src/translations_countries.h:138
 msgid "Christmas Island"
-msgstr ""
+msgstr "Insula Nativitatis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cyprus
 #: src/translations_countries.h:140
 msgid "Cyprus"
-msgstr ""
+msgstr "Cyprus"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Czech_Republic
 #: src/translations_countries.h:142
 msgid "Czech Republic"
-msgstr ""
+msgstr "Bohemia (Czechia)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Germany
 #: src/translations_countries.h:144
@@ -7253,7 +7258,7 @@ msgstr "Germania"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Djibouti
 #: src/translations_countries.h:146
 msgid "Djibouti"
-msgstr ""
+msgstr "Djibouti"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Denmark
 #: src/translations_countries.h:148
@@ -7263,12 +7268,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Dominica
 #: src/translations_countries.h:150
 msgid "Dominica"
-msgstr ""
+msgstr "Dominica"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Dominican_Republic
 #: src/translations_countries.h:152
 msgid "Dominican Republic"
-msgstr ""
+msgstr "Republica Dominica"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Algeria
 #: src/translations_countries.h:154
@@ -7278,37 +7283,37 @@ msgstr "Algeria"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ecuador
 #: src/translations_countries.h:156
 msgid "Ecuador"
-msgstr ""
+msgstr "Ecuador"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Estonia
 #: src/translations_countries.h:158
 msgid "Estonia"
-msgstr ""
+msgstr "Estonia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Egypt
 #: src/translations_countries.h:160
 msgid "Egypt"
-msgstr ""
+msgstr "Aegyptus"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Western_Sahara
 #: src/translations_countries.h:162
 msgid "Western Sahara"
-msgstr ""
+msgstr "Sahara Occidentalis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Eritrea
 #: src/translations_countries.h:164
 msgid "Eritrea"
-msgstr ""
+msgstr "Eritrea"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Spain
 #: src/translations_countries.h:166
 msgid "Spain"
-msgstr ""
+msgstr "Hispania"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ethiopia
 #: src/translations_countries.h:168
 msgid "Ethiopia"
-msgstr ""
+msgstr "Ethiopia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Finland
 #: src/translations_countries.h:170
@@ -7318,22 +7323,22 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Fiji
 #: src/translations_countries.h:172
 msgid "Fiji"
-msgstr ""
+msgstr "Fiji"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Falkland_Islands
 #: src/translations_countries.h:174
 msgid "Falkland Islands"
-msgstr ""
+msgstr "Falkland Insulae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Micronesia
 #: src/translations_countries.h:176
 msgid "Micronesia"
-msgstr ""
+msgstr "Micronesia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Faroe_Islands
 #: src/translations_countries.h:178
 msgid "Faroe Islands"
-msgstr ""
+msgstr "Faroe Insulae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/France
 #: src/translations_countries.h:180
@@ -7343,42 +7348,42 @@ msgstr "Francia"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gabon
 #: src/translations_countries.h:182
 msgid "Gabon"
-msgstr ""
+msgstr "Gabon"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_Kingdom
 #: src/translations_countries.h:184
 msgid "Britain (UK)"
-msgstr ""
+msgstr "Britannia (Regnum Unificatum)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Grenada
 #: src/translations_countries.h:186
 msgid "Grenada"
-msgstr ""
+msgstr "Grenada"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Georgia
 #: src/translations_countries.h:188
 msgid "Georgia"
-msgstr ""
+msgstr "Georgia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Guiana
 #: src/translations_countries.h:190
 msgid "French Guiana"
-msgstr ""
+msgstr "Guiana Franca"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guernsey
 #: src/translations_countries.h:192
 msgid "Guernsey"
-msgstr ""
+msgstr "Guernsey"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ghana
 #: src/translations_countries.h:194
 msgid "Ghana"
-msgstr ""
+msgstr "Ghana"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gibraltar
 #: src/translations_countries.h:196
 msgid "Gibraltar"
-msgstr ""
+msgstr "Columna Herculis Septemtrionalis (Gibraltar)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Greenland
 #: src/translations_countries.h:198
@@ -7388,43 +7393,43 @@ msgstr "Mundus graminis"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Gambia
 #: src/translations_countries.h:200
 msgid "Gambia"
-msgstr ""
+msgstr "Gambia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea
 #: src/translations_countries.h:202
 msgid "Guinea"
-msgstr ""
+msgstr "Guinea"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guadeloupe
 #: src/translations_countries.h:204
 msgid "Guadeloupe"
-msgstr ""
+msgstr "Guadeloupe"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Equatorial_Guinea
 #: src/translations_countries.h:206
 msgid "Equatorial Guinea"
-msgstr ""
+msgstr "Guinea Aequatorialis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Greece
 #: src/translations_countries.h:208
 msgid "Greece"
-msgstr ""
+msgstr "Graecia"
 
 #. TRANSLATORS:
 #. https://en.wikipedia.org/wiki/South_Georgia_&_South_Sandwich_Islands
 #: src/translations_countries.h:210
 msgid "South Georgia and the South Sandwich Islands"
-msgstr ""
+msgstr "Georgia Meridionalis et Insulae Sandwich Meridionales"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guatemala
 #: src/translations_countries.h:212
 msgid "Guatemala"
-msgstr ""
+msgstr "Guatemala"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guam
 #: src/translations_countries.h:214
 msgid "Guam"
-msgstr ""
+msgstr "Guam"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guinea-Bissau
 #: src/translations_countries.h:216
@@ -7434,7 +7439,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Guyana
 #: src/translations_countries.h:218
 msgid "Guyana"
-msgstr ""
+msgstr "Guyana"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Hong_Kong
 #: src/translations_countries.h:220
@@ -7449,17 +7454,17 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Honduras
 #: src/translations_countries.h:224
 msgid "Honduras"
-msgstr ""
+msgstr "Honduras"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Croatia
 #: src/translations_countries.h:226
 msgid "Croatia"
-msgstr ""
+msgstr "Croatia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Haiti
 #: src/translations_countries.h:228
 msgid "Haiti"
-msgstr ""
+msgstr "Haiti"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Hungary
 #: src/translations_countries.h:230
@@ -7469,7 +7474,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Indonesia
 #: src/translations_countries.h:232
 msgid "Indonesia"
-msgstr ""
+msgstr "Indonesia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ireland
 #: src/translations_countries.h:234
@@ -7484,12 +7489,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Isle_of_Man
 #: src/translations_countries.h:238
 msgid "Isle of Man"
-msgstr ""
+msgstr "Man Insula"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/India
 #: src/translations_countries.h:240
 msgid "India"
-msgstr ""
+msgstr "India"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Indian_Ocean_Territory
 #: src/translations_countries.h:242
@@ -7499,22 +7504,22 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iraq
 #: src/translations_countries.h:244
 msgid "Iraq"
-msgstr ""
+msgstr "Mesopotamia (Iraq)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iran
 #: src/translations_countries.h:246
 msgid "Iran"
-msgstr ""
+msgstr "Persia (Iran)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Iceland
 #: src/translations_countries.h:248
 msgid "Iceland"
-msgstr ""
+msgstr "Thule (Iceland)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Italy
 #: src/translations_countries.h:250
 msgid "Italy"
-msgstr ""
+msgstr "Italia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jersey
 #: src/translations_countries.h:252
@@ -7524,12 +7529,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jamaica
 #: src/translations_countries.h:254
 msgid "Jamaica"
-msgstr ""
+msgstr "Jamaica"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Jordan
 #: src/translations_countries.h:256
 msgid "Jordan"
-msgstr ""
+msgstr "Jordania"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Japan
 #: src/translations_countries.h:258
@@ -7539,7 +7544,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kenya
 #: src/translations_countries.h:260
 msgid "Kenya"
-msgstr ""
+msgstr "Kenia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kyrgyzstan
 #: src/translations_countries.h:262
@@ -7549,12 +7554,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cambodia
 #: src/translations_countries.h:264
 msgid "Cambodia"
-msgstr ""
+msgstr "Cambodia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kiribati
 #: src/translations_countries.h:266
 msgid "Kiribati"
-msgstr ""
+msgstr "Kiribati"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Comoros
 #: src/translations_countries.h:268
@@ -7584,7 +7589,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Cayman_Islands
 #: src/translations_countries.h:278
 msgid "Cayman Islands"
-msgstr ""
+msgstr "Cayman Insulae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Kazakhstan
 #: src/translations_countries.h:280
@@ -7594,7 +7599,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Laos
 #: src/translations_countries.h:282
 msgid "Laos"
-msgstr ""
+msgstr "Laos"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lebanon
 #: src/translations_countries.h:284
@@ -7604,7 +7609,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Lucia
 #: src/translations_countries.h:286
 msgid "St Lucia"
-msgstr ""
+msgstr "Sta. Lucia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Liechtenstein
 #: src/translations_countries.h:288
@@ -7614,22 +7619,22 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sri_Lanka
 #: src/translations_countries.h:290
 msgid "Sri Lanka"
-msgstr ""
+msgstr "Taprobana (Sri Lanka)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Liberia
 #: src/translations_countries.h:292
 msgid "Liberia"
-msgstr ""
+msgstr "Liberia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lesotho
 #: src/translations_countries.h:294
 msgid "Lesotho"
-msgstr ""
+msgstr "Lesotho"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Lithuania
 #: src/translations_countries.h:296
 msgid "Lithuania"
-msgstr ""
+msgstr "Lithuania"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Luxembourg
 #: src/translations_countries.h:298
@@ -7639,12 +7644,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Latvia
 #: src/translations_countries.h:300
 msgid "Latvia"
-msgstr ""
+msgstr "Latvia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Libya
 #: src/translations_countries.h:302
 msgid "Libya"
-msgstr ""
+msgstr "Libya"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Morocco
 #: src/translations_countries.h:304
@@ -7654,12 +7659,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Monaco
 #: src/translations_countries.h:306
 msgid "Monaco"
-msgstr ""
+msgstr "Monaco"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Moldova
 #: src/translations_countries.h:308
 msgid "Moldova"
-msgstr ""
+msgstr "Moldova"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montenegro
 #: src/translations_countries.h:310
@@ -7674,7 +7679,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Madagascar
 #: src/translations_countries.h:314
 msgid "Madagascar"
-msgstr ""
+msgstr "Madagascar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Marshall_Islands
 #: src/translations_countries.h:316
@@ -7684,27 +7689,27 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macedonia
 #: src/translations_countries.h:318
 msgid "Macedonia"
-msgstr ""
+msgstr "Macedonia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mali
 #: src/translations_countries.h:320
 msgid "Mali"
-msgstr ""
+msgstr "Mali"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Myanmar_(Burma)
 #: src/translations_countries.h:322
 msgid "Myanmar (Burma)"
-msgstr ""
+msgstr "Myanmar (Burma)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mongolia
 #: src/translations_countries.h:324
 msgid "Mongolia"
-msgstr ""
+msgstr "Mongolia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Macau
 #: src/translations_countries.h:326
 msgid "Macau"
-msgstr ""
+msgstr "Macau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Northern_Mariana_Islands
 #: src/translations_countries.h:328
@@ -7719,7 +7724,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritania
 #: src/translations_countries.h:332
 msgid "Mauritania"
-msgstr ""
+msgstr "Mauritania"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Montserrat
 #: src/translations_countries.h:334
@@ -7729,12 +7734,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Malta
 #: src/translations_countries.h:336
 msgid "Malta"
-msgstr ""
+msgstr "Malta"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mauritius
 #: src/translations_countries.h:338
 msgid "Mauritius"
-msgstr ""
+msgstr "Mauritius"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Maldives
 #: src/translations_countries.h:340
@@ -7749,12 +7754,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mexico
 #: src/translations_countries.h:344
 msgid "Mexico"
-msgstr ""
+msgstr "Mexico"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Malaysia
 #: src/translations_countries.h:346
 msgid "Malaysia"
-msgstr ""
+msgstr "Malaysia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Mozambique
 #: src/translations_countries.h:348
@@ -7764,32 +7769,32 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Namibia
 #: src/translations_countries.h:350
 msgid "Namibia"
-msgstr ""
+msgstr "Namibia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/New_Caledonia
 #: src/translations_countries.h:352
 msgid "New Caledonia"
-msgstr ""
+msgstr "Caledonia Nova"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Niger
 #: src/translations_countries.h:354
 msgid "Niger"
-msgstr ""
+msgstr "Niger"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Norfolk_Island
 #: src/translations_countries.h:356
 msgid "Norfolk Island"
-msgstr ""
+msgstr "Norfolk Insula"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nigeria
 #: src/translations_countries.h:358
 msgid "Nigeria"
-msgstr ""
+msgstr "Nigeria"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nicaragua
 #: src/translations_countries.h:360
 msgid "Nicaragua"
-msgstr ""
+msgstr "Nicaragua"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Netherlands
 #: src/translations_countries.h:362
@@ -7804,17 +7809,17 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nepal
 #: src/translations_countries.h:366
 msgid "Nepal"
-msgstr ""
+msgstr "Nepal"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Nauru
 #: src/translations_countries.h:368
 msgid "Nauru"
-msgstr ""
+msgstr "Nauru"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Niue
 #: src/translations_countries.h:370
 msgid "Niue"
-msgstr ""
+msgstr "Niue"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/New_Zealand
 #: src/translations_countries.h:372
@@ -7824,12 +7829,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Oman
 #: src/translations_countries.h:374
 msgid "Oman"
-msgstr ""
+msgstr "Oman"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Panama
 #: src/translations_countries.h:376
 msgid "Panama"
-msgstr ""
+msgstr "Panama"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Peru
 #: src/translations_countries.h:378
@@ -7839,7 +7844,7 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Polynesia
 #: src/translations_countries.h:380
 msgid "French Polynesia"
-msgstr ""
+msgstr "Polynesia Franca"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Papua_New_Guinea
 #: src/translations_countries.h:382
@@ -7849,17 +7854,17 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Philippines
 #: src/translations_countries.h:384
 msgid "Philippines"
-msgstr ""
+msgstr "Philippines"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Pakistan
 #: src/translations_countries.h:386
 msgid "Pakistan"
-msgstr ""
+msgstr "Pakistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Poland
 #: src/translations_countries.h:388
 msgid "Poland"
-msgstr ""
+msgstr "Polonia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Pierre_&_Miquelon
 #: src/translations_countries.h:390
@@ -7874,12 +7879,12 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Puerto_Rico
 #: src/translations_countries.h:394
 msgid "Puerto Rico"
-msgstr ""
+msgstr "Portus Ricus"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palestine
 #: src/translations_countries.h:396
 msgid "Palestine"
-msgstr ""
+msgstr "Palaestina"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Portugal
 #: src/translations_countries.h:398
@@ -7889,62 +7894,62 @@ msgstr "Lusitania"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Palau
 #: src/translations_countries.h:400
 msgid "Palau"
-msgstr ""
+msgstr "Palau"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Paraguay
 #: src/translations_countries.h:402
 msgid "Paraguay"
-msgstr ""
+msgstr "Paraguay"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Qatar
 #: src/translations_countries.h:404
 msgid "Qatar"
-msgstr ""
+msgstr "Qatar"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Réunion
 #: src/translations_countries.h:406
 msgid "Réunion"
-msgstr ""
+msgstr "Reunio"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Romania
 #: src/translations_countries.h:408
 msgid "Romania"
-msgstr ""
+msgstr "Romania"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Serbia
 #: src/translations_countries.h:410
 msgid "Serbia"
-msgstr ""
+msgstr "Serbia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Russia
 #: src/translations_countries.h:412
 msgid "Russia"
-msgstr ""
+msgstr "Russia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Rwanda
 #: src/translations_countries.h:414
 msgid "Rwanda"
-msgstr ""
+msgstr "Ruanda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Saudi_Arabia
 #: src/translations_countries.h:416
 msgid "Saudi Arabia"
-msgstr ""
+msgstr "Arabia Felix (Saudi A.)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Solomon_Islands
 #: src/translations_countries.h:418
 msgid "Solomon Islands"
-msgstr ""
+msgstr "Solomon Insulae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Seychelles
 #: src/translations_countries.h:420
 msgid "Seychelles"
-msgstr ""
+msgstr "Seychelles"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sudan
 #: src/translations_countries.h:422
 msgid "Sudan"
-msgstr ""
+msgstr "Nubia (Sudan)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sweden
 #: src/translations_countries.h:424
@@ -7954,17 +7959,17 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Singapore
 #: src/translations_countries.h:426
 msgid "Singapore"
-msgstr ""
+msgstr "Singapura"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Helena
 #: src/translations_countries.h:428
 msgid "St Helena"
-msgstr ""
+msgstr "Sta. Helena"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovenia
 #: src/translations_countries.h:430
 msgid "Slovenia"
-msgstr ""
+msgstr "Slovenia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Svalbard_&_Jan_Mayen
 #: src/translations_countries.h:432
@@ -7974,47 +7979,47 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Slovakia
 #: src/translations_countries.h:434
 msgid "Slovakia"
-msgstr ""
+msgstr "Slovakia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sierra_Leone
 #: src/translations_countries.h:436
 msgid "Sierra Leone"
-msgstr ""
+msgstr "Sierra Leona"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/San_Marino
 #: src/translations_countries.h:438
 msgid "San Marino"
-msgstr ""
+msgstr "Sanctus Marinus"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Senegal
 #: src/translations_countries.h:440
 msgid "Senegal"
-msgstr ""
+msgstr "Senegal"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Somalia
 #: src/translations_countries.h:442
 msgid "Somalia"
-msgstr ""
+msgstr "Somalia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Suriname
 #: src/translations_countries.h:444
 msgid "Suriname"
-msgstr ""
+msgstr "Suriname"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/South_Sudan
 #: src/translations_countries.h:446
 msgid "South Sudan"
-msgstr ""
+msgstr "Nubia Meridionalis (South Sudan)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/São_Tomé_&_Príncipe
 #: src/translations_countries.h:448
 msgid "Sao Tome and Principe"
-msgstr ""
+msgstr "Sao Tome et Principe"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/El_Salvador
 #: src/translations_countries.h:450
 msgid "El Salvador"
-msgstr ""
+msgstr "El Salvador"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Sint_Maarten
 #: src/translations_countries.h:452
@@ -8024,42 +8029,42 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Syria
 #: src/translations_countries.h:454
 msgid "Syria"
-msgstr ""
+msgstr "Syria"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Swaziland
 #: src/translations_countries.h:456
 msgid "Swaziland"
-msgstr ""
+msgstr "Swaziland"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turks_&_Caicos_Islands
 #: src/translations_countries.h:458
 msgid "Turks and Caicos Is"
-msgstr ""
+msgstr "Turks et Caicos Is"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Chad
 #: src/translations_countries.h:460
 msgid "Chad"
-msgstr ""
+msgstr "Chad"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/French_Southern_Territories
 #: src/translations_countries.h:462
 msgid "French Southern and Antarctic Lands"
-msgstr ""
+msgstr "Terrae Francae Meridionales et Antarcticae"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Togo
 #: src/translations_countries.h:464
 msgid "Togo"
-msgstr ""
+msgstr "Togo"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Thailand
 #: src/translations_countries.h:466
 msgid "Thailand"
-msgstr ""
+msgstr "Thailand"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tajikistan
 #: src/translations_countries.h:468
 msgid "Tajikistan"
-msgstr ""
+msgstr "Tajikistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tokelau
 #: src/translations_countries.h:470
@@ -8069,32 +8074,32 @@ msgstr "Tokelauana"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/East_Timor
 #: src/translations_countries.h:472
 msgid "East Timor"
-msgstr ""
+msgstr "Timor Orientalis"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkmenistan
 #: src/translations_countries.h:474
 msgid "Turkmenistan"
-msgstr ""
+msgstr "Turkmenistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tunisia
 #: src/translations_countries.h:476
 msgid "Tunisia"
-msgstr ""
+msgstr "Tunisia"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tonga
 #: src/translations_countries.h:478
 msgid "Tonga"
-msgstr ""
+msgstr "Tonga"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Turkey
 #: src/translations_countries.h:480
 msgid "Turkey"
-msgstr ""
+msgstr "Anatolia (Turkey)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Trinidad_&_Tobago
 #: src/translations_countries.h:482
 msgid "Trinidad and Tobago"
-msgstr ""
+msgstr "Trinidad et Tobago"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tuvalu
 #: src/translations_countries.h:484
@@ -8104,22 +8109,22 @@ msgstr "Tuvaluana"
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Taiwan
 #: src/translations_countries.h:486
 msgid "Taiwan"
-msgstr ""
+msgstr "Taiwan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Tanzania
 #: src/translations_countries.h:488
 msgid "Tanzania"
-msgstr ""
+msgstr "Tanzania"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Ukraine
 #: src/translations_countries.h:490
 msgid "Ukraine"
-msgstr ""
+msgstr "Ukraine"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uganda
 #: src/translations_countries.h:492
 msgid "Uganda"
-msgstr ""
+msgstr "Uganda"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Outlying_Islands
 #: src/translations_countries.h:494
@@ -8129,42 +8134,42 @@ msgstr ""
 #. TRANSLATORS: https://en.wikipedia.org/wiki/United_States
 #: src/translations_countries.h:496
 msgid "United States"
-msgstr ""
+msgstr "Terrae Unificatae Americae (TUA)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uruguay
 #: src/translations_countries.h:498
 msgid "Uruguay"
-msgstr ""
+msgstr "Uruguay"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Uzbekistan
 #: src/translations_countries.h:500
 msgid "Uzbekistan"
-msgstr ""
+msgstr "Uzbekistan"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vatican_City
 #: src/translations_countries.h:502
 msgid "Vatican City"
-msgstr ""
+msgstr "Civitas Vaticana"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/St._Vincent_&_Grenadines
 #: src/translations_countries.h:504
 msgid "St Vincent"
-msgstr ""
+msgstr "St Vincent"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Venezuela
 #: src/translations_countries.h:506
 msgid "Venezuela"
-msgstr ""
+msgstr "Venezuela"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/British_Virgin_Islands
 #: src/translations_countries.h:508
 msgid "Virgin Islands (UK)"
-msgstr ""
+msgstr "Insulae Virginis (RU)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/U.S._Virgin_Islands
 #: src/translations_countries.h:510
 msgid "Virgin Islands (US)"
-msgstr ""
+msgstr "Insulae Virginis (TUA)"
 
 #. TRANSLATORS: https://en.wikipedia.org/wiki/Vietnam
 #: src/translations_countries.h:512

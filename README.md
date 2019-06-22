@@ -17,7 +17,7 @@ in 3D, just like what you see with the naked eye, binoculars or a telescope.
 
 ## Installation Instructions & Quick Start
 
-Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v0.19.0/stellarium_user_guide-0.19.0-1.pdf).
+Please refer to the [User Guide, Getting Started section](https://github.com/Stellarium/stellarium/releases/download/v0.19.1/stellarium_user_guide-0.19.1-1.pdf).
 
 ## Get & build the code
 

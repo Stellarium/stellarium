@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-21 20:55+0600\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: freemanli <freeman.tam@gmail.com>, 2019\n"
 "Language-Team: Chinese (Taiwan) (https://www.transifex.com/stellarium/teams/80998/zh_TW/)\n"
@@ -1191,7 +1191,7 @@ msgid "Nomenclature labels"
 msgstr "命名標籤"
 
 #: src/core/modules/Nebula.cpp:167 src/core/modules/Nebula.cpp:181
-#: src/core/StelObject.cpp:236 src/gui/AstroCalcDialog.cpp:2536
+#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2536
 #: src/gui/AstroCalcDialog.cpp:2583 plugins/Supernovae/src/Supernova.cpp:125
 msgid "Magnitude"
 msgstr "星等"
@@ -1200,15 +1200,15 @@ msgstr "星等"
 msgid "Opacity"
 msgstr "不透明度"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "reduced to"
 msgstr "減少至"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "by"
 msgstr "透過"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "Airmasses"
 msgstr "大氣質量"
 
@@ -2821,109 +2821,113 @@ msgstr ""
 "米勒(Miller)圓柱投影法是一種修正的 Mercator 投影法，在西元1942年時由米勒 (Osborn Maitland Miller) "
 "(1897-1979) 所提出，極點不再投影到無窮遠處。"
 
-#: src/core/StelObject.cpp:254
+#: src/core/StelObject.cpp:271
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "當日"
 
-#: src/core/StelObject.cpp:259
+#: src/core/StelObject.cpp:276
 msgid "(apparent)"
 msgstr "(視)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:265
+#: src/core/StelObject.cpp:282
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "赤經/赤緯"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:352
+#: src/core/StelObject.cpp:369
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "時角/赤緯"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:401
+#: src/core/StelObject.cpp:418
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "方位/高度"
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:427
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "銀經/銀緯"
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:453
+#: src/core/StelObject.cpp:470
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "超銀經/超銀緯"
 
 #. TRANSLATORS: Ecliptic longitude/latitude
-#: src/core/StelObject.cpp:471
+#: src/core/StelObject.cpp:488
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "黃經/黃緯"
 
-#: src/core/StelObject.cpp:536
+#: src/core/StelObject.cpp:553
 msgid "Ecliptic obliquity"
 msgstr "黃赤交角"
 
-#: src/core/StelObject.cpp:556
+#: src/core/StelObject.cpp:573
 msgid "Mean Sidereal Time"
 msgstr "平(均)恆星時"
 
-#: src/core/StelObject.cpp:575
+#: src/core/StelObject.cpp:592
 msgid "Apparent Sidereal Time"
 msgstr "視恆星時"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:589 src/gui/AstroCalcDialog.cpp:750
+#: src/core/StelObject.cpp:606 src/gui/AstroCalcDialog.cpp:750
 #: src/gui/AstroCalcDialog.cpp:4050
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "中天"
 
-#: src/core/StelObject.cpp:590 src/gui/AstroCalcDialog.cpp:4049
+#: src/core/StelObject.cpp:607 src/gui/AstroCalcDialog.cpp:4049
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "出"
 
-#: src/core/StelObject.cpp:591 src/gui/AstroCalcDialog.cpp:4051
+#: src/core/StelObject.cpp:608 src/gui/AstroCalcDialog.cpp:4051
 msgctxt "celestial event"
 msgid "Set"
 msgstr "沒"
 
-#: src/core/StelObject.cpp:629
+#: src/core/StelObject.cpp:646
 msgid "Daytime"
 msgstr "白天"
 
-#: src/core/StelObject.cpp:642
+#: src/core/StelObject.cpp:659
 msgid "Polar night"
 msgstr "極夜"
 
-#: src/core/StelObject.cpp:644
+#: src/core/StelObject.cpp:661
 msgid "This object never rises"
 msgstr "這個天體從未升起"
 
-#: src/core/StelObject.cpp:649
+#: src/core/StelObject.cpp:666
 msgid "Polar day"
 msgstr "極晝"
 
-#: src/core/StelObject.cpp:651
+#: src/core/StelObject.cpp:668
 msgid "Circumpolar (never sets)"
 msgstr "拱極(位於恆顯區)"
 
-#: src/core/StelObject.cpp:654
+#: src/core/StelObject.cpp:671
 msgid "Polar dawn"
 msgstr "極區出"
 
-#: src/core/StelObject.cpp:656
+#: src/core/StelObject.cpp:673
 msgid "Polar dusk"
 msgstr "極區沒"
 
-#: src/core/StelObject.cpp:662
+#: src/core/StelObject.cpp:679
+msgid "Parallactic Angle"
+msgstr "星位角"
+
+#: src/core/StelObject.cpp:685
 msgid "IAU Constellation"
 msgstr "IAU 星座"
 
@@ -8743,11 +8747,11 @@ msgstr "若您想看到選取的行星和其衛星的軌道請解除這個選項
 
 #: src/ui_viewDialog.h:2553
 msgid "Only orbit for selected object"
-msgstr ""
+msgstr "僅顯示選取天體的軌道"
 
 #: src/ui_viewDialog.h:2554
 msgid "Show orbits"
-msgstr ""
+msgstr "顯示軌道"
 
 #: src/ui_viewDialog.h:2556
 msgid "Configure colors of orbit lines"
@@ -8779,7 +8783,7 @@ msgstr "顯示行星軌跡"
 
 #: src/ui_viewDialog.h:2572
 msgid "Only orbits of major planets"
-msgstr ""
+msgstr "僅顯示主要行星的軌道"
 
 #: src/ui_viewDialog.h:2574
 msgid "Color of nomenclature labels"

@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-21 20:55+0600\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: nicolas.martignoni, 2019\n"
 "Language-Team: French (https://www.transifex.com/stellarium/teams/80998/fr/)\n"
@@ -1206,7 +1206,7 @@ msgid "Nomenclature labels"
 msgstr "Noms des nomenclatures"
 
 #: src/core/modules/Nebula.cpp:167 src/core/modules/Nebula.cpp:181
-#: src/core/StelObject.cpp:236 src/gui/AstroCalcDialog.cpp:2536
+#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2536
 #: src/gui/AstroCalcDialog.cpp:2583 plugins/Supernovae/src/Supernova.cpp:125
 msgid "Magnitude"
 msgstr "Magnitude"
@@ -1215,15 +1215,15 @@ msgstr "Magnitude"
 msgid "Opacity"
 msgstr "Opacité"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "reduced to"
 msgstr "réduit à"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "by"
 msgstr "par"
 
-#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:234
+#: src/core/modules/Nebula.cpp:176 src/core/StelObject.cpp:251
 msgid "Airmasses"
 msgstr "Masses d'air"
 
@@ -2906,109 +2906,113 @@ msgstr ""
 " proposée par Osborn Maitland Miller (1897–1979) en 1942. Avec cette "
 "projection, les pôles ne sont pas projetés à l'infini."
 
-#: src/core/StelObject.cpp:254
+#: src/core/StelObject.cpp:271
 msgctxt "coordinates for current epoch"
 msgid "on date"
 msgstr "de la date"
 
-#: src/core/StelObject.cpp:259
+#: src/core/StelObject.cpp:276
 msgid "(apparent)"
 msgstr "(apparent)"
 
 #. TRANSLATORS: Right ascension/Declination
-#: src/core/StelObject.cpp:265
+#: src/core/StelObject.cpp:282
 msgctxt "celestial coordinate system"
 msgid "RA/Dec"
 msgstr "AD/Déc"
 
 #. TRANSLATORS: Hour angle/Declination
-#: src/core/StelObject.cpp:352
+#: src/core/StelObject.cpp:369
 msgctxt "celestial coordinate system"
 msgid "HA/Dec"
 msgstr "AH/Déc"
 
 #. TRANSLATORS: Azimuth/Altitude
-#: src/core/StelObject.cpp:401
+#: src/core/StelObject.cpp:418
 msgctxt "celestial coordinate system"
 msgid "Az./Alt."
 msgstr "Az./Haut."
 
 #. TRANSLATORS: Galactic longitude/latitude
-#: src/core/StelObject.cpp:427
+#: src/core/StelObject.cpp:444
 msgctxt "celestial coordinate system"
 msgid "Gal. long./lat."
 msgstr "Long./lat. gal."
 
 #. TRANSLATORS: Supergalactic longitude/latitude
-#: src/core/StelObject.cpp:453
+#: src/core/StelObject.cpp:470
 msgctxt "celestial coordinate system"
 msgid "Supergal. long./lat."
 msgstr "Long./lat. supergal."
 
 #. TRANSLATORS: Ecliptic longitude/latitude
-#: src/core/StelObject.cpp:471
+#: src/core/StelObject.cpp:488
 msgctxt "celestial coordinate system"
 msgid "Ecl. long./lat."
 msgstr "Long./lat. écl."
 
-#: src/core/StelObject.cpp:536
+#: src/core/StelObject.cpp:553
 msgid "Ecliptic obliquity"
 msgstr "Obliquité de l'écliptique"
 
-#: src/core/StelObject.cpp:556
+#: src/core/StelObject.cpp:573
 msgid "Mean Sidereal Time"
 msgstr "Temps sidéral moyen"
 
-#: src/core/StelObject.cpp:575
+#: src/core/StelObject.cpp:592
 msgid "Apparent Sidereal Time"
 msgstr "Temps sidéral apparent"
 
 #. TRANSLATORS: time of transit
-#: src/core/StelObject.cpp:589 src/gui/AstroCalcDialog.cpp:750
+#: src/core/StelObject.cpp:606 src/gui/AstroCalcDialog.cpp:750
 #: src/gui/AstroCalcDialog.cpp:4050
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr "Transit"
 
-#: src/core/StelObject.cpp:590 src/gui/AstroCalcDialog.cpp:4049
+#: src/core/StelObject.cpp:607 src/gui/AstroCalcDialog.cpp:4049
 msgctxt "celestial event"
 msgid "Rise"
 msgstr "Lever"
 
-#: src/core/StelObject.cpp:591 src/gui/AstroCalcDialog.cpp:4051
+#: src/core/StelObject.cpp:608 src/gui/AstroCalcDialog.cpp:4051
 msgctxt "celestial event"
 msgid "Set"
 msgstr "Coucher"
 
-#: src/core/StelObject.cpp:629
+#: src/core/StelObject.cpp:646
 msgid "Daytime"
 msgstr "Jour"
 
-#: src/core/StelObject.cpp:642
+#: src/core/StelObject.cpp:659
 msgid "Polar night"
 msgstr "Nuit polaire"
 
-#: src/core/StelObject.cpp:644
+#: src/core/StelObject.cpp:661
 msgid "This object never rises"
 msgstr "Cet objet ne se lève jamais"
 
-#: src/core/StelObject.cpp:649
+#: src/core/StelObject.cpp:666
 msgid "Polar day"
 msgstr "Jour polaire"
 
-#: src/core/StelObject.cpp:651
+#: src/core/StelObject.cpp:668
 msgid "Circumpolar (never sets)"
 msgstr "Circumpolaire (ne se couche jamais)"
 
-#: src/core/StelObject.cpp:654
+#: src/core/StelObject.cpp:671
 msgid "Polar dawn"
 msgstr "Aube polaire"
 
-#: src/core/StelObject.cpp:656
+#: src/core/StelObject.cpp:673
 msgid "Polar dusk"
 msgstr "Crépuscule polaire"
 
-#: src/core/StelObject.cpp:662
+#: src/core/StelObject.cpp:679
+msgid "Parallactic Angle"
+msgstr "Angle parallactique"
+
+#: src/core/StelObject.cpp:685
 msgid "IAU Constellation"
 msgstr "Constellation UAI"
 
@@ -8953,11 +8957,11 @@ msgstr ""
 
 #: src/ui_viewDialog.h:2553
 msgid "Only orbit for selected object"
-msgstr ""
+msgstr "Uniquement l'orbite de l'objet sélectionné"
 
 #: src/ui_viewDialog.h:2554
 msgid "Show orbits"
-msgstr ""
+msgstr "Afficher les orbites"
 
 #: src/ui_viewDialog.h:2556
 msgid "Configure colors of orbit lines"
@@ -8989,7 +8993,7 @@ msgstr "Montrer la trajectoire des planètes"
 
 #: src/ui_viewDialog.h:2572
 msgid "Only orbits of major planets"
-msgstr ""
+msgstr "Seulement les orbites des planètes majeures"
 
 #: src/ui_viewDialog.h:2574
 msgid "Color of nomenclature labels"
