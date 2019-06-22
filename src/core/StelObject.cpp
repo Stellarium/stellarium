@@ -563,18 +563,14 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 	if (withTables)
 		 res += "</table>";
 
-	if ((flags&SiderealTime) && (currentPlanet=="Earth"))
+	if ((flags&SiderealTime) && (currentPlanet==QStringLiteral("Earth")))
 	{
-		bool tblEnd = true;
 		const double longitude=core->getCurrentLocation().longitude;
 		double sidereal=(get_mean_sidereal_time(core->getJD(), core->getJDE())  + longitude) / 15.;
 		sidereal=fmod(sidereal, 24.);
 		if (sidereal < 0.) sidereal+=24.;
 		QString STc = q_("Mean Sidereal Time");
 		QString STd = StelUtils::hoursToHmsStr(sidereal);
-
-		if (flags&RTSTime && withTables && getType()!=QStringLiteral("Satellite"))
-			tblEnd = false;
 
 		if (withTables)
 		{
@@ -596,7 +592,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			else
 				res += QString("%1: %2").arg(STc, STd) + "<br>";
 		}
-		if (withTables && tblEnd)
+		if (withTables && !(flags&RTSTime && getType()!=QStringLiteral("Satellite")))
 			res += "</table>";
 	}
 
@@ -612,7 +608,7 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 		if (getEnglishName()=="Sun")
 			isSun = true;
 
-		if (withTables && currentPlanet!="Earth")
+		if (withTables && !(flags&SiderealTime && currentPlanet==QStringLiteral("Earth")))
 			res += "<table style='margin:0em 0em 0em -0.125em;border-spacing:0px;border:0px;'>";
 
 		if (rts[0]>-99.f && rts[0]<100.f)
