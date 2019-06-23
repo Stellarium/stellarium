@@ -669,10 +669,16 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 			res += q_("Polar dusk") + "<br />";
 	}
 
-	if (flags&HourAngle && getType()!=QStringLiteral("Star"))
+	if (flags&Extra && getType()!=QStringLiteral("Star"))
 	{
-		const float par=getParallacticAngle(core) * 180.0/M_PI;
-		res += QString("%1: %2%3").arg(q_("Parallactic Angle")).arg(par, 0, 'f', 2).arg(QChar(0x00B0)) + "<br>";
+		QString pa;
+		const float par = getParallacticAngle(core);
+		if (withDecimalDegree)
+			pa = StelUtils::radToDecDegStr(par);
+		else
+			pa = StelUtils::radToDmsStr(par, true);
+
+		res += QString("%1: %2").arg(q_("Parallactic Angle")).arg(pa) + "<br />";
 	}
 
 	if (flags&IAUConstellation)
