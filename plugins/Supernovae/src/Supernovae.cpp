@@ -731,7 +731,7 @@ QString Supernovae::getSupernovaeList() const
 	QStringList out;
 	int year, month, day;
 	QList<double> vals = snlist.values();
-	qSort(vals);
+	std::sort(vals.begin(), vals.end());
 	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);

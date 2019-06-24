@@ -1239,7 +1239,7 @@ void debugQVariantMap(const QVariant& m, const QString& indent, const QString& k
 	{
 		qDebug() << indent + key + "(map):";
 		QList<QString> keys = m.toMap().keys();
-		qSort(keys);
+		std::sort(keys.begin(), keys.end());
 		for (auto k : keys)
 		{
 			debugQVariantMap(m.toMap()[k], indent + "    ", k);

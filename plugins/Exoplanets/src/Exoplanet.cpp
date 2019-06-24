@@ -612,7 +612,7 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 			discovery.append(p.discovered);
 		}
 	}
-	qSort(discovery.begin(),discovery.end());
+	std::sort(discovery.begin(), discovery.end());
 	if (!discovery.isEmpty()) 
 	{
 		if (discovery.at(0)<=year && discovery.at(0)>0)

@@ -305,7 +305,7 @@ void HelpDialog::updateHelpText(void) const
 			QString key =  action->getShortcut().toString(QKeySequence::NativeText);
 			descriptions.append(KeyDescription(text, key));
 		}
-		qSort(descriptions);
+		std::sort(descriptions.begin(), descriptions.end());
 		htmlText += "<tr></tr><tr><td><b><u>" + q_(group) +
 			    ":</u></b></td></tr>\n";
 		for (const auto& desc : descriptions)

@@ -743,7 +743,7 @@ QString Novae::getNovaeList()
 	QStringList out;
 	int year, month, day;
 	QList<double> vals = novalist.values();
-	qSort(vals);
+	std::sort(vals.begin(), vals.end());
 	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);

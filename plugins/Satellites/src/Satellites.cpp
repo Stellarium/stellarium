@@ -859,7 +859,7 @@ void Satellites::setDataMap(const QVariantMap& map)
 			numReadOk++;
 		}
 	}
-	qSort(satellites);
+	std::sort(satellites.begin(), satellites.end());
 	
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
@@ -1029,7 +1029,7 @@ void Satellites::add(const TleDataList& newSatellites)
 		}
 	}
 	if (numAdded > 0)
-		qSort(satellites);
+		std::sort(satellites.begin(), satellites.end());
 	
 	if (satelliteListModel)
 		satelliteListModel->endSatellitesChange();
@@ -1549,7 +1549,7 @@ void Satellites::updateSatellites(TleDataHash& newTleSets)
 		}
 	}
 	if (addedCount)
-		qSort(satellites);
+		std::sort(satellites.begin(), satellites.end());
 	
 	if (autoRemoveEnabled && !toBeRemoved.isEmpty())
 	{

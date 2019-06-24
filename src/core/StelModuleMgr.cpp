@@ -207,7 +207,7 @@ void StelModuleMgr::generateCallingLists()
 		{
 			mc.value().push_back(m);
 		}
-		qSort(mc.value().begin(), mc.value().end(), StelModuleOrderComparator(mc.key()));
+		std::sort(mc.value().begin(), mc.value().end(), StelModuleOrderComparator(mc.key()));
 	}
 }
 
