@@ -96,6 +96,8 @@ AstroCalcDialog::AstroCalcDialog(QObject* parent)
 	, plotDistanceGraph(false)
 	, plotAngularDistanceGraph(false)
 	, plotAziVsTime(false)	
+	, altVsTimePositiveLimit(0)
+	, monthlyElevationPositiveLimit(0)
 	, delimiter(", ")
 	, acEndl("\n")
 	, oldGraphJD(0)
@@ -287,9 +289,11 @@ void AstroCalcDialog::createDialogContent()
 	ui->sunAltitudeCheckBox->setChecked(plotAltVsTimeSun);
 	ui->moonAltitudeCheckBox->setChecked(plotAltVsTimeMoon);
 	ui->positiveAltitudeOnlyCheckBox->setChecked(plotAltVsTimePositive);
+	ui->positiveAltitudeLimitSpinBox->setValue(conf->value("astrocalc/altvstime_positive_limit", 0).toInt());
 	connect(ui->sunAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeSunFlag(bool)));
 	connect(ui->moonAltitudeCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimeMoonFlag(bool)));
 	connect(ui->positiveAltitudeOnlyCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveAltVsTimePositiveFlag(bool)));
+	connect(ui->positiveAltitudeLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveAltVsTimePositiveLimit(int)));
 	connect(ui->altVsTimePlot, SIGNAL(mouseMove(QMouseEvent*)), this, SLOT(mouseOverLine(QMouseEvent*)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawAltVsTimeDiagram()));
 
@@ -308,11 +312,13 @@ void AstroCalcDialog::createDialogContent()
 	// Monthly Elevation
 	plotMonthlyElevationPositive = conf->value("astrocalc/me_positive_only", false).toBool();
 	ui->monthlyElevationPositiveCheckBox->setChecked(plotMonthlyElevationPositive);
+	ui->monthlyElevationPositiveLimitSpinBox->setValue(conf->value("astrocalc/me_positive_limit", 0).toInt());
 	ui->monthlyElevationTime->setValue(conf->value("astrocalc/me_time", 0).toInt());	
 	syncMonthlyElevationTime();
 	connect(ui->monthlyElevationTime, SIGNAL(sliderReleased()), this, SLOT(updateMonthlyElevationTime()));
 	connect(ui->monthlyElevationTime, SIGNAL(sliderMoved(int)), this, SLOT(syncMonthlyElevationTime()));
 	connect(ui->monthlyElevationPositiveCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveMonthlyElevationPositiveFlag(bool)));
+	connect(ui->monthlyElevationPositiveLimitSpinBox, SIGNAL(valueChanged(int)), this, SLOT(saveMonthlyElevationPositiveLimit(int)));
 	connect(objectMgr, SIGNAL(selectedObjectChanged(StelModule::StelModuleSelectAction)), this, SLOT(drawMonthlyElevationGraph()));
 	connect(core, SIGNAL(dateChangedByYear()), this, SLOT(drawMonthlyElevationGraph()));
 
@@ -461,6 +467,16 @@ void AstroCalcDialog::saveAltVsTimePositiveFlag(bool state)
 		plotAltVsTimePositive = state;
 		conf->setValue("astrocalc/altvstime_positive_only", plotAltVsTimePositive);
 
+		drawAltVsTimeDiagram();
+	}
+}
+
+void AstroCalcDialog::saveAltVsTimePositiveLimit(int limit)
+{
+	if (altVsTimePositiveLimit!=limit)
+	{
+		altVsTimePositiveLimit = limit;
+		conf->setValue("astrocalc/altvstime_positive_limit", altVsTimePositiveLimit);
 		drawAltVsTimeDiagram();
 	}
 }
@@ -2112,8 +2128,8 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 			maxY = (maxY > maxYm + 2.0) ? maxY : maxYm + 2.0;
 		}
 
-		if (plotAltVsTimePositive && minY<0.0)
-			minY = 0.0;
+		if (plotAltVsTimePositive && minY<altVsTimePositiveLimit)
+			minY = altVsTimePositiveLimit;
 
 		prepareAxesAndGraph();
 		drawCurrentTimeDiagram();
@@ -2746,6 +2762,16 @@ void AstroCalcDialog::saveMonthlyElevationPositiveFlag(bool state)
 	}
 }
 
+void AstroCalcDialog::saveMonthlyElevationPositiveLimit(int limit)
+{
+	if (monthlyElevationPositiveLimit!=limit)
+	{
+		monthlyElevationPositiveLimit = limit;
+		conf->setValue("astrocalc/me_positive_limit", monthlyElevationPositiveLimit);
+		drawMonthlyElevationGraph();
+	}
+}
+
 void AstroCalcDialog::drawMonthlyElevationGraph()
 {
 	ui->monthlyElevationCelestialObjectLabel->setText("");
@@ -2813,8 +2839,8 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		minYme = minYa - 2.0;
 		maxYme = maxYa + 2.0;
 
-		if (plotMonthlyElevationPositive && minYme<0.0)
-			minYme = 0.0;
+		if (plotMonthlyElevationPositive && minYme<monthlyElevationPositiveLimit)
+			minYme = monthlyElevationPositiveLimit;
 
 		prepareMonthlyEleveationAxesAndGraph();
 

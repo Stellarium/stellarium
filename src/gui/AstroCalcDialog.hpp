@@ -191,6 +191,7 @@ private slots:
 	void saveAltVsTimeSunFlag(bool state);
 	void saveAltVsTimeMoonFlag(bool state);
 	void saveAltVsTimePositiveFlag(bool state);
+	void saveAltVsTimePositiveLimit(int limit);
 
 	//! Draw diagram 'Azimuth vs. Time'
 	void drawAziVsTimeDiagram();
@@ -213,6 +214,7 @@ private slots:
 	void updateMonthlyElevationTime();
 	void syncMonthlyElevationTime();
 	void saveMonthlyElevationPositiveFlag(bool state);
+	void saveMonthlyElevationPositiveLimit(int limit);
 
 	// WUT
 	void saveWutMagnitudeLimit(double mag);
@@ -316,6 +318,7 @@ private:
 				   QString elongTooltip="", QString angDistTooltip="");
 
 	bool plotAltVsTime, plotAltVsTimeSun, plotAltVsTimeMoon, plotAltVsTimePositive, plotMonthlyElevation, plotMonthlyElevationPositive, plotDistanceGraph, plotAngularDistanceGraph, plotAziVsTime;
+	int altVsTimePositiveLimit, monthlyElevationPositiveLimit;
 	QString delimiter, acEndl;
 	QStringList ephemerisHeader, phenomenaHeader, positionsHeader, wutHeader;
 	static float brightLimit;

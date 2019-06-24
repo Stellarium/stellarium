@@ -855,14 +855,37 @@
                  </widget>
                 </item>
                 <item>
-                 <widget class="QCheckBox" name="positiveAltitudeOnlyCheckBox">
-                  <property name="toolTip">
-                   <string>Draw only the positive part of the graph</string>
-                  </property>
-                  <property name="text">
-                   <string>Above horizon only</string>
-                  </property>
-                 </widget>
+                 <layout class="QHBoxLayout" name="horizontalLayout_20">
+                  <item>
+                   <widget class="QCheckBox" name="positiveAltitudeOnlyCheckBox">
+                    <property name="toolTip">
+                     <string>Draw only the part of the graph, where altitude is greater than in right box.</string>
+                    </property>
+                    <property name="text">
+                     <string>Show since altitude:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="positiveAltitudeLimitSpinBox">
+                    <property name="maximumSize">
+                     <size>
+                      <width>75</width>
+                      <height>16777215</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>Altitude limit in degrees</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="maximum">
+                     <number>85</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                </layout>
               </item>
@@ -984,14 +1007,37 @@
               <item row="3" column="0">
                <layout class="QHBoxLayout" name="horizontalLayout_10">
                 <item>
-                 <widget class="QCheckBox" name="monthlyElevationPositiveCheckBox">
-                  <property name="toolTip">
-                   <string>Draw only the positive part of the graph</string>
-                  </property>
-                  <property name="text">
-                   <string>Above horizon only</string>
-                  </property>
-                 </widget>
+                 <layout class="QHBoxLayout" name="horizontalLayout_21">
+                  <item>
+                   <widget class="QCheckBox" name="monthlyElevationPositiveCheckBox">
+                    <property name="toolTip">
+                     <string>Draw only the part of the graph, where altitude is greater than in right box.</string>
+                    </property>
+                    <property name="text">
+                     <string>Show since altitude:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QSpinBox" name="monthlyElevationPositiveLimitSpinBox">
+                    <property name="maximumSize">
+                     <size>
+                      <width>16777215</width>
+                      <height>75</height>
+                     </size>
+                    </property>
+                    <property name="toolTip">
+                     <string>Altitude limit in degrees</string>
+                    </property>
+                    <property name="alignment">
+                     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                    </property>
+                    <property name="maximum">
+                     <number>85</number>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
                 </item>
                 <item>
                  <widget class="QSlider" name="monthlyElevationTime">
