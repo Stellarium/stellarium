@@ -117,7 +117,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>          
           </inactive>
           <disabled>
            <colorrole role="WindowText">
@@ -137,7 +137,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>           
+           </colorrole>         
           </disabled>
          </palette>
         </property>
@@ -1146,7 +1146,7 @@
                   <string>Deactivate this option if you want to see the trails for all Solar system bodies.</string>
                  </property>
                  <property name="text">
-                  <string>Show trails only for N latest selected planets:</string>
+                  <string>Show trails only for N latest selected objects:</string>
                  </property>
                 </widget>
                </item>
@@ -1320,7 +1320,7 @@
                <item>
                 <widget class="QCheckBox" name="planetTrailsCheckBox">
                  <property name="text">
-                  <string>Show planet trails</string>
+                  <string>Show trails</string>
                  </property>
                 </widget>
                </item>
