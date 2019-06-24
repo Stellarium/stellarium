@@ -1176,7 +1176,7 @@ void SatellitesDialog::updateTLEs(void)
 	}
 	else
 	{
-		QStringList updateFiles = QFileDialog::getOpenFileNames(&StelMainView::getInstance(),
+		QStringList updateFiles = QFileDialog::getOpenFileNames(Q_NULLPTR,
 									q_("Select TLE Update File"),
 									StelFileMgr::getDesktopDir(),
 									"*.*");
