@@ -2396,7 +2396,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		ui->graphsPlot->addGraph(ui->graphsPlot->xAxis, ui->graphsPlot->yAxis);
 		ui->graphsPlot->setBackground(QBrush(QColor(86, 87, 90)));
-		ui->graphsPlot->graph(0)->setPen(QPen(Qt::red, 1));
+		ui->graphsPlot->graph(0)->setPen(QPen(Qt::green, 1));
 		ui->graphsPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
 		ui->graphsPlot->graph(0)->rescaleAxes(true);
 		ui->graphsPlot->graph(0)->setData(x, ya);
@@ -2642,6 +2642,10 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 
 	QColor axisColor(Qt::white);
 	QPen axisPen(axisColor, 1);
+	QColor axisColorL(Qt::green);
+	QPen axisPenL(axisColorL, 1);
+	QColor axisColorR(Qt::yellow);
+	QPen axisPenR(axisColorR, 1);
 
 	ui->graphsPlot->setLocale(QLocale(localeMgr->getAppLanguage()));
 	ui->graphsPlot->xAxis->setLabel(xAxisStr);
@@ -2664,20 +2668,20 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 
 	ui->graphsPlot->yAxis->setRange(minY1, maxY1);
 	ui->graphsPlot->yAxis->setScaleType(QCPAxis::stLinear);
-	ui->graphsPlot->yAxis->setLabelColor(axisColor);
-	ui->graphsPlot->yAxis->setTickLabelColor(axisColor);
-	ui->graphsPlot->yAxis->setBasePen(axisPen);
-	ui->graphsPlot->yAxis->setTickPen(axisPen);
-	ui->graphsPlot->yAxis->setSubTickPen(axisPen);
+	ui->graphsPlot->yAxis->setLabelColor(axisColorL);
+	ui->graphsPlot->yAxis->setTickLabelColor(axisColorL);
+	ui->graphsPlot->yAxis->setBasePen(axisPenL);
+	ui->graphsPlot->yAxis->setTickPen(axisPenL);
+	ui->graphsPlot->yAxis->setSubTickPen(axisPenL);
 	ui->graphsPlot->yAxis->setRangeReversed(direction1);
 
 	ui->graphsPlot->yAxis2->setRange(minY2, maxY2);
 	ui->graphsPlot->yAxis2->setScaleType(QCPAxis::stLinear);
-	ui->graphsPlot->yAxis2->setLabelColor(axisColor);
-	ui->graphsPlot->yAxis2->setTickLabelColor(axisColor);
-	ui->graphsPlot->yAxis2->setBasePen(axisPen);
-	ui->graphsPlot->yAxis2->setTickPen(axisPen);
-	ui->graphsPlot->yAxis2->setSubTickPen(axisPen);
+	ui->graphsPlot->yAxis2->setLabelColor(axisColorR);
+	ui->graphsPlot->yAxis2->setTickLabelColor(axisColorR);
+	ui->graphsPlot->yAxis2->setBasePen(axisPenR);
+	ui->graphsPlot->yAxis2->setTickPen(axisPenR);
+	ui->graphsPlot->yAxis2->setSubTickPen(axisPenR);
 	ui->graphsPlot->yAxis2->setRangeReversed(direction2);
 	ui->graphsPlot->yAxis2->setVisible(true);
 
