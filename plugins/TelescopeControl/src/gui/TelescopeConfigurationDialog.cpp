@@ -252,13 +252,11 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		//TODO: Add debug
 		return;
 	}
-
 	ui->lineEditTelescopeName->setText(name);
 
-	if((connectionType == ConnectionInternal || connectionType == ConnectionLocal) && !deviceModelName.isEmpty())
+	if(connectionType == ConnectionInternal && !deviceModelName.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setChecked(true);
-		
 		ui->lineEditHostName->setText("localhost");//TODO: Remove magic word!
 		
 		//Make the current device model selected in the list
@@ -270,9 +268,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 			return;
 		}
 		else
-		{
 			ui->comboBoxDeviceModel->setCurrentIndex(index);
-		}
+
 		//Initialize the serial port value
 		ui->comboSerialPort->activated(serialPortName);
 		ui->comboSerialPort->setEditText(serialPortName);
@@ -302,9 +299,9 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	else if (connectionType == ConnectionINDI)
 	{
 		ui->radioButtonTelescopeINDI->setChecked(true);
-	ui->INDIProperties->setHost(host);
-	ui->INDIProperties->setPort(portTCP);
-	ui->INDIProperties->setSelectedDevice(deviceModelName);
+		ui->INDIProperties->setHost(host);
+		ui->INDIProperties->setPort(portTCP);
+		ui->INDIProperties->setSelectedDevice(deviceModelName);
 	}
 
 	//Equinox

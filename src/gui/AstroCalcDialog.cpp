@@ -1577,8 +1577,7 @@ void AstroCalcDialog::generateEphemeris()
 
 			ACEphemTreeWidgetItem* treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
-			treeItem->setText(EphemerisDate,
-			  QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
+			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
 			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
 			treeItem->setText(EphemerisRA, raStr);
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
