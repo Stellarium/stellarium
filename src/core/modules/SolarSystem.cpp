@@ -1336,13 +1336,13 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 	bool showMagnitudes = getFlagEphemerisMagnitudes();
 	QString info = "";
 
-	for (int i =0; i< AstroCalcDialog::EphemerisListCoords.count(); i++)
+	for (int i =0; i< AstroCalcDialog::EphemerisList.count(); i++)
 	{
 		// draw EphemerisListJ2000[i];
 		Vec3d win;
 
 		// Check visibility of pointer
-		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisListCoords[i], win)))
+		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
@@ -1359,19 +1359,19 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 		texCircle->bind();
-		sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisListCoords[i], size);
+		sPainter.drawSprite2dMode(AstroCalcDialog::EphemerisList[i].coord, size);
 
 		if (showDates || showMagnitudes)
 		{
 			shift = 3.f + size/1.6f;
 			if (showDates && showMagnitudes)
-				info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisListDates[i], QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2));
+				info = QString("%1 (%2)").arg(AstroCalcDialog::EphemerisList[i].objDate, QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2));
 			if (showDates && !showMagnitudes)
-				info = AstroCalcDialog::EphemerisListDates[i];
+				info = AstroCalcDialog::EphemerisList[i].objDate;
 			if (!showDates && showMagnitudes)
-				info = QString::number(AstroCalcDialog::EphemerisListMagnitudes[i], 'f', 2);
+				info = QString::number(AstroCalcDialog::EphemerisList[i].magnitude, 'f', 2);
 
-			sPainter.drawText(AstroCalcDialog::EphemerisListCoords[i], info, 0, shift, shift, false);
+			sPainter.drawText(AstroCalcDialog::EphemerisList[i].coord, info, 0, shift, shift, false);
 		}
 	}
 }

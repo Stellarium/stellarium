@@ -42,6 +42,15 @@ class QListWidgetItem;
 class QSortFilterProxyModel;
 class QStringListModel;
 
+struct Ephemeris
+{
+	Vec3d coord;
+	Vec3d color;
+	QString objDate;
+	float magnitude;
+};
+Q_DECLARE_METATYPE(Ephemeris)
+
 class AstroCalcDialog : public StelDialog
 {
 	Q_OBJECT
@@ -119,9 +128,7 @@ public:
 	//! Notify that the application style changed
 	void styleChanged();
 
-	static QVector<Vec3d> EphemerisListCoords;
-	static QVector<QString> EphemerisListDates;
-	static QVector<float> EphemerisListMagnitudes;
+	static QVector<Ephemeris> EphemerisList;
 	static int DisplayedPositionIndex;
 
 

@@ -53,9 +53,7 @@
 #include "external/qxlsx/xlsxworkbook.h"
 using namespace QXlsx;
 
-QVector<Vec3d> AstroCalcDialog::EphemerisListCoords;
-QVector<QString> AstroCalcDialog::EphemerisListDates;
-QVector<float> AstroCalcDialog::EphemerisListMagnitudes;
+QVector<Ephemeris> AstroCalcDialog::EphemerisList;
 int AstroCalcDialog::DisplayedPositionIndex = -1;
 float AstroCalcDialog::brightLimit = 10.f;
 double AstroCalcDialog::minY = -90.;
@@ -1335,7 +1333,7 @@ void AstroCalcDialog::initListEphemeris()
 
 void AstroCalcDialog::reGenerateEphemeris()
 {
-	if (EphemerisListCoords.size() > 0)
+	if (EphemerisList.size() > 0)
 		generateEphemeris(); // Update list of ephemeris
 	else
 		initListEphemeris(); // Just update headers
@@ -1495,12 +1493,8 @@ void AstroCalcDialog::generateEphemeris()
 		double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());
 		secondJD = secondJD - core->getUTCOffset(secondJD) / 24;
 		int elements = (int)((secondJD - firstJD) / currentStep);
-		EphemerisListCoords.clear();
-		EphemerisListCoords.reserve(elements);
-		EphemerisListDates.clear();
-		EphemerisListDates.reserve(elements);
-		EphemerisListMagnitudes.clear();
-		EphemerisListMagnitudes.reserve(elements);
+		EphemerisList.clear();
+		EphemerisList.reserve(elements);
 		bool withTime = false;
 		QString dash = QChar(0x2014); // dash
 		if (currentStep < StelCore::JD_DAY)
@@ -1558,12 +1552,14 @@ void AstroCalcDialog::generateEphemeris()
 				}
 			}
 
-			EphemerisListCoords.append(pos);
+			Ephemeris item;
+			item.coord = pos;
 			if (withTime)
-				EphemerisListDates.append(QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
+				item.objDate = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
 			else
-				EphemerisListDates.append(localeMgr->getPrintableDateLocal(JD));
-			EphemerisListMagnitudes.append(obj->getVMagnitudeWithExtinction(core));
+				item.objDate = localeMgr->getPrintableDateLocal(JD);
+			item.magnitude = obj->getVMagnitudeWithExtinction(core);
+			EphemerisList.append(item);
 			StelUtils::rectToSphe(&ra, &dec, pos);
 
 			observerHelioPos = core->getObserverHeliocentricEclipticPos();
@@ -1684,7 +1680,7 @@ void AstroCalcDialog::saveEphemeris()
 
 void AstroCalcDialog::cleanupEphemeris()
 {
-	EphemerisListCoords.clear();
+	EphemerisList.clear();
 	ui->ephemerisTreeWidget->clear();
 }
 
