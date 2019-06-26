@@ -255,7 +255,7 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 
 	ui->lineEditTelescopeName->setText(name);
 
-	if(connectionType == ConnectionInternal && !deviceModelName.isEmpty())
+	if((connectionType == ConnectionInternal || connectionType == ConnectionLocal) && !deviceModelName.isEmpty())
 	{
 		ui->radioButtonTelescopeLocal->setChecked(true);
 		

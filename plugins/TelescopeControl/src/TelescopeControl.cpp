@@ -968,12 +968,17 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("device_model", deviceModelName);
 	}
 
-	if (connectionType == ConnectionRemote)
+	if (connectionType == ConnectionRemote || connectionType == ConnectionLocal)
 	{
 		//TODO: Add more validation!
-		if (host.isEmpty())
-			return false;
-		telescope.insert("host_name", host);
+		if (!host.isEmpty())
+			telescope.insert("host_name", host);
+		if (isValidPort(portTCP))
+			telescope.insert("tcp_port", portTCP);
+		if (deviceModels.contains(deviceModelName))
+			telescope.insert("device_model", deviceModelName);
+		if (!portSerial.isEmpty())
+			telescope.insert("serial_port", portSerial);
 	}
 
 	if(connectionType == ConnectionRTS2)
@@ -984,18 +989,6 @@ bool TelescopeControl::addTelescopeAtSlot(int slot, ConnectionType connectionTyp
 		telescope.insert("username", rts2Username);
 		telescope.insert("password", rts2Password);
 		telescope.insert("refresh", rts2Refresh);
-	}
-
-	if(connectionType == ConnectionLocal)
-	{
-		if (!deviceModels.contains(deviceModelName))
-
-			return false;
-		telescope.insert("device_model", deviceModelName);
-
-		if (portSerial.isEmpty())
-			return false;
-		telescope.insert("serial_port", portSerial);
 	}
 
 	if(connectionType == ConnectionInternal)
