@@ -1476,6 +1476,12 @@ void AstroCalcDialog::generateEphemeris()
 		case 35: // 1 saros (223 synodic months)
 			currentStep = 6585.321314219*solarDay;
 			break;
+		case 36:
+			currentStep = 500. * siderealDay;
+			break;
+		case 37:
+			currentStep = 500. * solarDay;
+			break;
 		default:
 			currentStep = solarDay;
 			break;
@@ -1811,6 +1817,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("30 solar days"), "10");
 	steps->addItem(q_("60 solar days"), "11");
 	steps->addItem(q_("100 solar days"), "24");
+	steps->addItem(q_("500 solar days"), "37");
 	steps->addItem(q_("1 sidereal day"), "18");
 	steps->addItem(q_("5 sidereal days"), "19");
 	steps->addItem(q_("10 sidereal days"), "20");
@@ -1818,6 +1825,7 @@ void AstroCalcDialog::populateEphemerisTimeStepsList()
 	steps->addItem(q_("30 sidereal days"), "22");
 	steps->addItem(q_("60 sidereal days"), "23");
 	steps->addItem(q_("100 sidereal days"), "25");
+	steps->addItem(q_("500 sidereal days"), "36");
 	steps->addItem(q_("1 sidereal year"), "27");
 	steps->addItem(q_("1 Julian day"), "12");
 	steps->addItem(q_("5 Julian days"), "13");
