@@ -1350,8 +1350,7 @@ void AstroCalcDialog::generateEphemeris()
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
 
 	QString elongStr = "", phaseStr = "";
-	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
-	bool visibleOnly = ui->ephemerisShowVisibleOnlyDataCheckBox->isChecked();
+	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();	
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
