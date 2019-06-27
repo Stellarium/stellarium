@@ -545,12 +545,19 @@
              <number>0</number>
             </property>
             <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Show:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
              <widget class="QCheckBox" name="ephemerisShowMarkersCheckBox">
               <property name="toolTip">
                <string>Show markers of positions of the current celestial body on the sky</string>
               </property>
               <property name="text">
-               <string>Show markers</string>
+               <string>markers</string>
               </property>
              </widget>
             </item>
@@ -560,7 +567,7 @@
                <string>Show dates of positions of current celestial body near markers</string>
               </property>
               <property name="text">
-               <string>Show dates</string>
+               <string>dates</string>
               </property>
              </widget>
             </item>
@@ -570,9 +577,22 @@
                <string>Show magnitudes of current celestial body</string>
               </property>
               <property name="text">
-               <string>Show magnitudes</string>
+               <string>magnitudes</string>
               </property>
              </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
             <item>
              <widget class="QCheckBox" name="ephemerisHorizontalCoordinatesCheckBox">

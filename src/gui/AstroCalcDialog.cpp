@@ -1351,6 +1351,7 @@ void AstroCalcDialog::generateEphemeris()
 
 	QString elongStr = "", phaseStr = "";
 	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	bool visibleOnly = ui->ephemerisShowVisibleOnlyDataCheckBox->isChecked();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
@@ -1361,6 +1362,7 @@ void AstroCalcDialog::generateEphemeris()
 	double siderealDay = 1.0;
 	double siderealYear = 365.256363004; // days
 	const PlanetP& cplanet = core->getCurrentPlanet();
+	const PlanetP sun = solarSystem->getSun();
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
 		solarDay = cplanet->getMeanSolarDay();
@@ -1514,7 +1516,6 @@ void AstroCalcDialog::generateEphemeris()
 			double JD = firstJD + i * currentStep;
 			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
-
 			if (horizon)
 			{
 				pos = obj->getAltAzPosAuto(core);
