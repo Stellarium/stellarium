@@ -80,7 +80,7 @@ class LandscapeMgr : public StelModule
 		   READ getFlagLabels
 		   WRITE setFlagLabels
 		   NOTIFY labelsDisplayedChanged)
-	Q_PROPERTY(bool flagUseLightPollutionFromDatabase // was databaseUsage
+	Q_PROPERTY(bool flagUseLightPollutionFromDatabase
 		   READ getFlagUseLightPollutionFromDatabase
 		   WRITE setFlagUseLightPollutionFromDatabase
 		   NOTIFY flagUseLightPollutionFromDatabaseChanged)
@@ -247,7 +247,7 @@ public slots:
 	//! A big landscape may well take 150MB or more.
 	//! On a 32bit system, keep this rather small. On 64bit with 16GB RAM and no other tasks, 4GB is no problem.
 	//! Modern GPUs may have 4 or even 8GB of dedicated texture memory. Most of this may be filled with landscape textures.
-	//! Example: a museum installation with 20 large (16384x2048) old_stype landscapes can require up to 3.5GB. Allow 4GB cache,
+	//! Example: a museum installation with 20 large (16384x2048) old_style landscapes can require up to 3.5GB. Allow 4GB cache,
 	//! and the system will never have to load a landscape during the show when all have been preloaded.
 	void setCacheSize(int mb) { landscapeCache.setMaxCost(mb);}
 	//! Retrieve total size of cache (MB).
