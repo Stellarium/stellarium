@@ -5,16 +5,16 @@
 # 
 # Translators:
 # Patrick Ahles <p.ahles@gmail.com>, 2019
-# Harry Mensch <hermmensch@gmail.com>, 2019
+# Harry Mensch, 2019
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-26 17:35+0600\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
-"Last-Translator: Harry Mensch <hermmensch@gmail.com>, 2019\n"
+"Last-Translator: Harry Mensch, 2019\n"
 "Language-Team: Dutch (https://www.transifex.com/stellarium/teams/80998/nl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -39,6 +39,7 @@ msgid "Near summer solstice"
 msgstr "Dichtbij de zomerzonnewende"
 
 #: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
+#: scripts/saturnian_analemma.ssc:47 scripts/uranian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr "Jaarlijkse baan van de zon"
 
@@ -829,7 +830,7 @@ msgstr "Martiaanse analemma"
 
 #: scripts/martian_analemma.ssc:41
 msgid "Sol"
-msgstr ""
+msgstr "Sol"
 
 #: scripts/morsels_1.ssc:15 scripts/morsels_1.ssc:16 scripts/morsels_1.ssc:18
 #: scripts/morsels_1.ssc:22 scripts/morsels_1.ssc:23 scripts/morsels_1.ssc:29
@@ -1274,7 +1275,7 @@ msgstr "Oppervlakte van Mercurius"
 
 #: scripts/triple_sunrise_and_sunsets.ssc:57
 msgid "Day"
-msgstr ""
+msgstr "Dag"
 
 #: scripts/triple_sunrise_and_sunsets.ssc:92
 msgid "Sunrise #1"
@@ -1307,3 +1308,15 @@ msgstr "Zonsopkomst #3"
 #: scripts/triple_sunrise_and_sunsets.ssc:244
 msgid "Sunset #3"
 msgstr "Zonsondergang #3"
+
+#: scripts/saturnian_analemma.ssc:16
+msgid "Saturnian analemma"
+msgstr ""
+
+#: scripts/saturnian_analemma.ssc:41 scripts/uranian_analemma.ssc:41
+msgid "Solar day"
+msgstr ""
+
+#: scripts/uranian_analemma.ssc:16
+msgid "Uranian analemma"
+msgstr ""

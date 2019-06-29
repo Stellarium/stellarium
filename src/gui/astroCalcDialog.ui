@@ -615,10 +615,10 @@
             <item>
              <widget class="QCheckBox" name="allNakedEyePlanetsCheckBox">
               <property name="toolTip">
-               <string>Compute ephemeris for all naked-eye visible planets (works on Earth only).</string>
+               <string>Compute ephemeris for all planets visible to the unaided eye (works on Earth only)</string>
               </property>
               <property name="text">
-               <string>all naked-eye visible planets</string>
+               <string>all naked-eye planets</string>
               </property>
              </widget>
             </item>
@@ -698,7 +698,7 @@
             <item>
              <widget class="QToolButton" name="jupiterMarkerColor">
               <property name="toolTip">
-               <string>Color of Jupiter' ephemeris marker</string>
+               <string>Color of Jupiter's ephemeris marker</string>
               </property>
               <property name="text">
                <string notr="true"/>
@@ -708,7 +708,7 @@
             <item>
              <widget class="QToolButton" name="saturnMarkerColor">
               <property name="toolTip">
-               <string>Color of Saturn' ephemeris marker</string>
+               <string>Color of Saturn's ephemeris marker</string>
               </property>
               <property name="text">
                <string notr="true"/>

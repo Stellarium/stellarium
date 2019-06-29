@@ -1360,24 +1360,24 @@ void AstroCalcDialog::reGenerateEphemeris()
 void AstroCalcDialog::generateEphemeris()
 {
 	float ra, dec;
-	Vec3d observerHelioPos;
+	Vec3d observerHelioPos, pos;
 	QString currentPlanet = ui->celestialBodyComboBox->currentData().toString();
 	QString distanceInfo = q_("Planetocentric distance");
 	if (core->getUseTopocentricCoordinates())
 		distanceInfo = q_("Topocentric distance");
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
 
-	QString elongStr = "", phaseStr = "";
+	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "";
+	QString dash = QChar(0x2014); // dash
 	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
 	initListEphemeris();
 
+	int idxRow = 0, colorIndex = 0;
 	double currentStep;
-	double solarDay = 1.0;
-	double siderealDay = 1.0;
-	double siderealYear = 365.256363004; // days
+	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
 	const PlanetP& cplanet = core->getCurrentPlanet();
 	const PlanetP sun = solarSystem->getSun();
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
@@ -1513,16 +1513,11 @@ void AstroCalcDialog::generateEphemeris()
 	EphemerisList.clear();
 	bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
 	bool withTime = false;
-	QString dash = QChar(0x2014); // dash
 	if (currentStep < StelCore::JD_DAY)
 		withTime = true;
 
 	QList<PlanetP> celestialObjects;
 	celestialObjects.clear();
-
-	Vec3d pos;
-	QString raStr = "", decStr = "";
-	int idxRow = 0;
 
 	if (allNakedEyePlanets)
 	{
@@ -1538,11 +1533,10 @@ void AstroCalcDialog::generateEphemeris()
 		celestialObjects.append(solarSystem->searchByEnglishName(currentPlanet));
 	}
 
-	for(auto obj: celestialObjects)
+	for (auto obj: celestialObjects)
 	{
-		int colorIndex = 0;
-		QString englishName = obj->getEnglishName();
-		QString nameI18n = obj->getNameI18n();
+		englishName = obj->getEnglishName();
+		nameI18n = obj->getNameI18n();
 
 		if (allNakedEyePlanets&& cplanet==solarSystem->getEarth())
 		{
@@ -1617,10 +1611,9 @@ void AstroCalcDialog::generateEphemeris()
 				item.objDate = localeMgr->getPrintableDateLocal(JD);
 			item.magnitude = obj->getVMagnitudeWithExtinction(core);
 			EphemerisList.append(item);
+
 			StelUtils::rectToSphe(&ra, &dec, pos);
-
 			observerHelioPos = core->getObserverHeliocentricEclipticPos();
-
 			if (phaseStr != dash)
 				phaseStr = QString("%1%").arg(QString::number(obj->getPhase(observerHelioPos) * 100, 'f', 2));
 
@@ -1633,10 +1626,9 @@ void AstroCalcDialog::generateEphemeris()
 			}
 
 			ACEphemTreeWidgetItem* treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
-			// local date and time
 			treeItem->setText(EphemerisCOName, nameI18n);
 			treeItem->setData(EphemerisCOName, Qt::UserRole, englishName);
-			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
+			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD))); // local date and time
 			treeItem->setData(EphemerisDate, Qt::UserRole, JD);
 			treeItem->setText(EphemerisRA, raStr);
 			treeItem->setData(EphemerisRA, Qt::UserRole, idxRow);
@@ -1654,9 +1646,9 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setTextAlignment(EphemerisElongation, Qt::AlignRight);
 
 			idxRow++;
-		}
-		core->setJD(currentJD); // restore time
+		}		
 	}
+	core->setJD(currentJD); // restore time
 
 	// adjust the column width
 	for (int i = 0; i < EphemerisCount; ++i)

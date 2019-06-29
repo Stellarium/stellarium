@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-26 17:35+0600\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2019\n"
 "Language-Team: Chinese (China) (https://www.transifex.com/stellarium/teams/80998/zh_CN/)\n"
@@ -40,6 +40,7 @@ msgid "Near summer solstice"
 msgstr "夏至点附近"
 
 #: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
+#: scripts/saturnian_analemma.ssc:47 scripts/uranian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr "每年的太阳路径"
 
@@ -1294,3 +1295,15 @@ msgstr "日落 #3"
 #: scripts/triple_sunrise_and_sunsets.ssc:244
 msgid "Sunset #3"
 msgstr "日落 #3"
+
+#: scripts/saturnian_analemma.ssc:16
+msgid "Saturnian analemma"
+msgstr "土星日行迹"
+
+#: scripts/saturnian_analemma.ssc:41 scripts/uranian_analemma.ssc:41
+msgid "Solar day"
+msgstr "太阳日"
+
+#: scripts/uranian_analemma.ssc:16
+msgid "Uranian analemma"
+msgstr "天王星日行迹"

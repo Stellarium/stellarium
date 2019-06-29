@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-26 17:35+0600\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: ysjbserver <ysjbserver@naver.com>, 2019\n"
 "Language-Team: Korean (https://www.transifex.com/stellarium/teams/80998/ko/)\n"
@@ -39,6 +39,7 @@ msgid "Near summer solstice"
 msgstr "하지점 근처"
 
 #: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
+#: scripts/saturnian_analemma.ssc:47 scripts/uranian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr "태양의 연간 이동 경로"
 
@@ -1277,4 +1278,16 @@ msgstr ""
 
 #: scripts/triple_sunrise_and_sunsets.ssc:244
 msgid "Sunset #3"
+msgstr ""
+
+#: scripts/saturnian_analemma.ssc:16
+msgid "Saturnian analemma"
+msgstr ""
+
+#: scripts/saturnian_analemma.ssc:41 scripts/uranian_analemma.ssc:41
+msgid "Solar day"
+msgstr ""
+
+#: scripts/uranian_analemma.ssc:16
+msgid "Uranian analemma"
 msgstr ""

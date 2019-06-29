@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-26 17:35+0600\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: t4saha <t4saha@gmail.com>, 2019\n"
 "Language-Team: Bengali (https://www.transifex.com/stellarium/teams/80998/bn/)\n"
@@ -38,6 +38,7 @@ msgid "Near summer solstice"
 msgstr "উত্তরায়ন"
 
 #: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
+#: scripts/saturnian_analemma.ssc:47 scripts/uranian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr "নির্দিষ্ট সময় অনুসারে সূর্যের বার্ষিক অবস্থান"
 
@@ -1306,3 +1307,15 @@ msgstr "৩য় সূর্যোদয়"
 #: scripts/triple_sunrise_and_sunsets.ssc:244
 msgid "Sunset #3"
 msgstr "৩য় সূর্যাস্ত"
+
+#: scripts/saturnian_analemma.ssc:16
+msgid "Saturnian analemma"
+msgstr ""
+
+#: scripts/saturnian_analemma.ssc:41 scripts/uranian_analemma.ssc:41
+msgid "Solar day"
+msgstr ""
+
+#: scripts/uranian_analemma.ssc:16
+msgid "Uranian analemma"
+msgstr ""

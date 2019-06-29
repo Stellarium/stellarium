@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-19 17:37+0600\n"
+"POT-Creation-Date: 2019-06-26 17:35+0600\n"
 "PO-Revision-Date: 2019-01-19 14:25+0000\n"
 "Last-Translator: Ian Sebastian <iansebastian.tan@gmail.com>, 2019\n"
 "Language-Team: Indonesian (https://www.transifex.com/stellarium/teams/80998/id/)\n"
@@ -40,6 +40,7 @@ msgid "Near summer solstice"
 msgstr "Di dekat Titik Balik Utara"
 
 #: scripts/analemma.ssc:54 scripts/martian_analemma.ssc:47
+#: scripts/saturnian_analemma.ssc:47 scripts/uranian_analemma.ssc:47
 msgid "Yearly path of the Sun"
 msgstr "Jalur Tahunan Matahari"
 
@@ -1289,3 +1290,15 @@ msgstr "Matahari Terbit #3"
 #: scripts/triple_sunrise_and_sunsets.ssc:244
 msgid "Sunset #3"
 msgstr "Matahari Terbenam #3"
+
+#: scripts/saturnian_analemma.ssc:16
+msgid "Saturnian analemma"
+msgstr ""
+
+#: scripts/saturnian_analemma.ssc:41 scripts/uranian_analemma.ssc:41
+msgid "Solar day"
+msgstr ""
+
+#: scripts/uranian_analemma.ssc:16
+msgid "Uranian analemma"
+msgstr ""
