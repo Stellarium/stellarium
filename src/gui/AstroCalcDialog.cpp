@@ -214,6 +214,12 @@ void AstroCalcDialog::createDialogContent()
 	prepareDistanceAxesAndGraph();
 	prepareAngularDistanceAxesAndGraph();
 
+	ui->mercuryMarkerColor->setText(QChar(0x263F));
+	ui->venusMarkerColor->setText(QChar(0x2640));
+	ui->marsMarkerColor->setText(QChar(0x2642));
+	ui->jupiterMarkerColor->setText(QChar(0x2643));
+	ui->saturnMarkerColor->setText(QChar(0x2644));
+
 	double JD = core->getJD() + core->getUTCOffset(core->getJD()) / 24;
 	QDateTime currentDT = StelUtils::jdToQDateTime(JD);
 	ui->dateFromDateTimeEdit->setDateTime(currentDT);
@@ -253,7 +259,9 @@ void AstroCalcDialog::createDialogContent()
 	connectBoolProperty(ui->ephemerisShowMagnitudesCheckBox, "SolarSystem.ephemerisMagnitudesDisplayed");
 	connectBoolProperty(ui->ephemerisHorizontalCoordinatesCheckBox, "SolarSystem.ephemerisHorizontalCoordinates");
 	initListEphemeris();
+	initEphemerisFlagNakedEyePlanets();
 	connect(ui->ephemerisHorizontalCoordinatesCheckBox, SIGNAL(toggled(bool)), this, SLOT(reGenerateEphemeris()));
+	connect(ui->allNakedEyePlanetsCheckBox, SIGNAL(toggled(bool)), this, SLOT(saveEphemerisFlagNakedEyePlanets(bool)));
 	connect(ui->ephemerisPushButton, SIGNAL(clicked()), this, SLOT(generateEphemeris()));
 	connect(ui->ephemerisCleanupButton, SIGNAL(clicked()), this, SLOT(cleanupEphemeris()));
 	connect(ui->ephemerisSaveButton, SIGNAL(clicked()), this, SLOT(saveEphemeris()));
@@ -261,6 +269,14 @@ void AstroCalcDialog::createDialogContent()
 	connect(ui->ephemerisTreeWidget, SIGNAL(clicked(QModelIndex)), this, SLOT(onChangedEphemerisPosition(QModelIndex)));
 	connect(ui->ephemerisStepComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisTimeStep(int)));
 	connect(ui->celestialBodyComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(saveEphemerisCelestialBody(int)));
+
+	connectColorButton(ui->genericMarkerColor, "SolarSystem.ephemerisGenericMarkerColor", "color/ephemeris_generic_marker_color");
+	connectColorButton(ui->selectedMarkerColor, "SolarSystem.ephemerisSelectedMarkerColor", "color/ephemeris_selected_marker_color");
+	connectColorButton(ui->mercuryMarkerColor, "SolarSystem.ephemerisMercuryMarkerColor", "color/ephemeris_mercury_marker_color");
+	connectColorButton(ui->venusMarkerColor, "SolarSystem.ephemerisVenusMarkerColor", "color/ephemeris_venus_marker_color");
+	connectColorButton(ui->marsMarkerColor, "SolarSystem.ephemerisMarsMarkerColor", "color/ephemeris_mars_marker_color");
+	connectColorButton(ui->jupiterMarkerColor, "SolarSystem.ephemerisJupiterMarkerColor", "color/ephemeris_jupiter_marker_color");
+	connectColorButton(ui->saturnMarkerColor, "SolarSystem.ephemerisSaturnMarkerColor", "color/ephemeris_saturn_marker_color");
 
 	// Let's use DMS and decimal degrees as acceptable values for "Maximum allowed separation" input box
 	ui->allowedSeparationSpinBox->setDisplayFormat(AngleSpinBox::DMSSymbols);
@@ -398,6 +414,7 @@ void AstroCalcDialog::createDialogContent()
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawMonthlyElevationGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawDistanceGraph()));
 	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(drawAngularDistanceGraph()));
+	connect(core, SIGNAL(locationChanged(StelLocation)), this, SLOT(initEphemerisFlagNakedEyePlanets()));
 
 	connect(ui->stackListWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changePage(QListWidgetItem*, QListWidgetItem*)));
 	connect(ui->tabWidgetGraphs, SIGNAL(currentChanged(int)), this, SLOT(changeGraphsTab(int)));
@@ -416,7 +433,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->graphsCelestialBodyLabel->setStyleSheet(style);
 	ui->graphsSecondLabel->setStyleSheet(style);	
 	ui->angularDistanceNote->setStyleSheet(style);
-	ui->angularDistanceLimitLabel->setStyleSheet(style);
+	ui->angularDistanceLimitLabel->setStyleSheet(style);	
 	style = "QCheckBox { color: rgb(238, 238, 238); }";
 	ui->sunAltitudeCheckBox->setStyleSheet(style);
 	ui->moonAltitudeCheckBox->setStyleSheet(style);
@@ -775,7 +792,7 @@ void AstroCalcDialog::setCelestialPositionsHeaderNames()
 
 void AstroCalcDialog::onChangedEphemerisPosition(const QModelIndex& modelIndex)
 {
-	DisplayedPositionIndex = modelIndex.row();
+	DisplayedPositionIndex = modelIndex.sibling(modelIndex.row(), EphemerisRA).data(Qt::UserRole).toInt();
 }
 
 void AstroCalcDialog::populateCelestialCategoryList()
@@ -1261,8 +1278,9 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
 {
 	// Find the object
-	QString name = ui->celestialBodyComboBox->currentData().toString();
-	double JD = modelIndex.sibling(modelIndex.row(), EphemerisJD).data().toDouble();
+	//QString name = ui->celestialBodyComboBox->currentData().toString();
+	QString name = modelIndex.sibling(modelIndex.row(), EphemerisCOName).data(Qt::UserRole).toString();
+	double JD = modelIndex.sibling(modelIndex.row(), EphemerisDate).data(Qt::UserRole).toDouble();
 
 	if (objectMgr->findAndSelectI18n(name) || objectMgr->findAndSelect(name))
 	{
@@ -1289,8 +1307,8 @@ void AstroCalcDialog::setEphemerisHeaderNames()
 	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 
 	ephemerisHeader.clear();
-	ephemerisHeader << q_("Date and Time");
-	ephemerisHeader << q_("Julian Day");
+	ephemerisHeader << q_("Name");
+	ephemerisHeader << q_("Date and Time");	
 	if (horizon)
 	{
 		// TRANSLATORS: azimuth
@@ -1350,7 +1368,7 @@ void AstroCalcDialog::generateEphemeris()
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
 
 	QString elongStr = "", phaseStr = "";
-	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();	
+	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
 
@@ -1485,30 +1503,68 @@ void AstroCalcDialog::generateEphemeris()
 			currentStep = solarDay;
 			break;
 	}
-	PlanetP obj = solarSystem->searchByEnglishName(currentPlanet);
-	if (obj)
+
+	double currentJD = core->getJD(); // save current JD
+	double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
+	firstJD = firstJD - core->getUTCOffset(firstJD) / 24;
+	double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());
+	secondJD = secondJD - core->getUTCOffset(secondJD) / 24;
+	int elements = (int)((secondJD - firstJD) / currentStep);
+	EphemerisList.clear();
+	bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
+	bool withTime = false;
+	QString dash = QChar(0x2014); // dash
+	if (currentStep < StelCore::JD_DAY)
+		withTime = true;
+
+	QList<PlanetP> celestialObjects;
+	celestialObjects.clear();
+
+	Vec3d pos;
+	QString raStr = "", decStr = "";
+	int idxRow = 0;
+
+	if (allNakedEyePlanets)
 	{
-		double currentJD = core->getJD(); // save current JD
-		double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
-		firstJD = firstJD - core->getUTCOffset(firstJD) / 24;
-		double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());
-		secondJD = secondJD - core->getUTCOffset(secondJD) / 24;
-		int elements = (int)((secondJD - firstJD) / currentStep);
-		EphemerisList.clear();
+		QStringList planets;
+		planets << "Mercury" << "Venus" << "Mars" << "Jupiter" << "Saturn";
+		for (auto planet: planets)
+			celestialObjects.append(solarSystem->searchByEnglishName(planet));
+		EphemerisList.reserve(elements*planets.count());
+	}
+	else
+	{
 		EphemerisList.reserve(elements);
-		bool withTime = false;
-		QString dash = QChar(0x2014); // dash
-		if (currentStep < StelCore::JD_DAY)
-			withTime = true;
+		celestialObjects.append(solarSystem->searchByEnglishName(currentPlanet));
+	}
+
+	for(auto obj: celestialObjects)
+	{
+		int colorIndex = 0;
+		QString englishName = obj->getEnglishName();
+		QString nameI18n = obj->getNameI18n();
+
+		if (allNakedEyePlanets&& cplanet==solarSystem->getEarth())
+		{
+			if (englishName.contains("Mercury", Qt::CaseInsensitive))
+				colorIndex = 1;
+			else if (englishName.contains("Venus", Qt::CaseInsensitive))
+				colorIndex = 2;
+			else if (englishName.contains("Mars", Qt::CaseInsensitive))
+				colorIndex = 3;
+			else if (englishName.contains("Jupiter", Qt::CaseInsensitive))
+				colorIndex = 4;
+			else if (englishName.contains("Saturn", Qt::CaseInsensitive))
+				colorIndex = 5;
+			else
+				colorIndex = 0;
+		}
 
 		if (obj == solarSystem->getSun())
 		{
 			phaseStr = dash;
 			elongStr = dash;
 		}
-
-		Vec3d pos;
-		QString raStr = "", decStr = "";
 
 		for (int i = 0; i < elements; i++)
 		{
@@ -1554,6 +1610,7 @@ void AstroCalcDialog::generateEphemeris()
 
 			Ephemeris item;
 			item.coord = pos;
+			item.colorIndex = colorIndex;
 			if (withTime)
 				item.objDate = QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD));
 			else
@@ -1577,9 +1634,12 @@ void AstroCalcDialog::generateEphemeris()
 
 			ACEphemTreeWidgetItem* treeItem = new ACEphemTreeWidgetItem(ui->ephemerisTreeWidget);
 			// local date and time
+			treeItem->setText(EphemerisCOName, nameI18n);
+			treeItem->setData(EphemerisCOName, Qt::UserRole, englishName);
 			treeItem->setText(EphemerisDate, QString("%1 %2").arg(localeMgr->getPrintableDateLocal(JD), localeMgr->getPrintableTimeLocal(JD)));
-			treeItem->setText(EphemerisJD, QString::number(JD, 'f', 5));
+			treeItem->setData(EphemerisDate, Qt::UserRole, JD);
 			treeItem->setText(EphemerisRA, raStr);
+			treeItem->setData(EphemerisRA, Qt::UserRole, idxRow);
 			treeItem->setTextAlignment(EphemerisRA, Qt::AlignRight);
 			treeItem->setText(EphemerisDec, decStr);
 			treeItem->setTextAlignment(EphemerisDec, Qt::AlignRight);
@@ -1592,6 +1652,8 @@ void AstroCalcDialog::generateEphemeris()
 			treeItem->setToolTip(EphemerisDistance, QString("%1, %2").arg(distanceInfo, distanceUM));
 			treeItem->setText(EphemerisElongation, elongStr);
 			treeItem->setTextAlignment(EphemerisElongation, Qt::AlignRight);
+
+			idxRow++;
 		}
 		core->setJD(currentJD); // restore time
 	}
@@ -1853,6 +1915,30 @@ void AstroCalcDialog::saveEphemerisTimeStep(int index)
 	Q_ASSERT(ui->ephemerisStepComboBox);
 	QComboBox* steps = ui->ephemerisStepComboBox;
 	conf->setValue("astrocalc/ephemeris_time_step", steps->itemData(index).toInt());
+}
+
+void AstroCalcDialog::initEphemerisFlagNakedEyePlanets(void)
+{
+	bool nep = conf->value("astrocalc/ephemeris_nakedeye_planets", "false").toBool();
+	if (core->getCurrentPlanet()==solarSystem->getEarth())
+	{
+		ui->celestialBodyComboBox->setEnabled(!nep);
+		ui->allNakedEyePlanetsCheckBox->setChecked(nep);
+		ui->allNakedEyePlanetsCheckBox->setEnabled(true);
+	}
+	else
+	{
+		ui->celestialBodyComboBox->setEnabled(true);
+		ui->allNakedEyePlanetsCheckBox->setChecked(false);
+		ui->allNakedEyePlanetsCheckBox->setEnabled(false);
+	}
+}
+
+void AstroCalcDialog::saveEphemerisFlagNakedEyePlanets(bool flag)
+{
+	ui->celestialBodyComboBox->setEnabled(!flag);
+	conf->setValue("astrocalc/ephemeris_nakedeye_planets", flag);
+	reGenerateEphemeris();
 }
 
 void AstroCalcDialog::populateMajorPlanetList()

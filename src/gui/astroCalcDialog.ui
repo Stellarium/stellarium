@@ -390,31 +390,7 @@
         </widget>
         <widget class="QWidget" name="stackedWidgetPage2">
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="1" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QLabel" name="dateToLabel">
-              <property name="text">
-               <string>To:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDateTimeEdit" name="dateToDateTimeEdit">
-              <property name="wrapping">
-               <bool>true</bool>
-              </property>
-              <property name="displayFormat">
-               <string notr="true">yyyy.MM.dd hh:mm</string>
-              </property>
-              <property name="calendarPopup">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="6" column="0" colspan="2">
+          <item row="7" column="0" colspan="2">
            <widget class="QTreeWidget" name="ephemerisTreeWidget">
             <property name="editTriggers">
              <set>QAbstractItemView::NoEditTriggers</set>
@@ -439,62 +415,7 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout">
-            <item>
-             <widget class="QLabel" name="celestialBodyName">
-              <property name="text">
-               <string>Celestial body:</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QComboBox" name="celestialBodyComboBox">
-              <property name="editable">
-               <bool>true</bool>
-              </property>
-              <property name="currentText">
-               <string/>
-              </property>
-              <property name="currentIndex">
-               <number>-1</number>
-              </property>
-              <property name="insertPolicy">
-               <enum>QComboBox::NoInsert</enum>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="7" column="0" colspan="2">
-           <layout class="QHBoxLayout" name="horizontalLayout_11">
-            <item>
-             <widget class="QPushButton" name="ephemerisCleanupButton">
-              <property name="text">
-               <string>Cleanup ephemerides</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ephemerisSaveButton">
-              <property name="text">
-               <string>Save ephemeris</string>
-              </property>
-             </widget>
-            </item>
-            <item>
-             <widget class="QPushButton" name="ephemerisPushButton">
-              <property name="toolTip">
-               <string>Calculations require time, please be patient</string>
-              </property>
-              <property name="text">
-               <string>Calculate ephemeris</string>
-              </property>
-             </widget>
-            </item>
-           </layout>
-          </item>
-          <item row="2" column="0" colspan="2">
+          <item row="3" column="0" colspan="2">
            <layout class="QHBoxLayout" name="horizontalLayout_17">
             <property name="topMargin">
              <number>0</number>
@@ -558,46 +479,239 @@
             </item>
            </layout>
           </item>
-          <item row="0" column="1">
-           <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item row="8" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_11">
             <item>
-             <widget class="QLabel" name="ephemerisStepLabel">
+             <widget class="QPushButton" name="ephemerisCleanupButton">
               <property name="text">
-               <string>Time step:</string>
+               <string>Cleanup ephemerides</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QComboBox" name="ephemerisStepComboBox">
+             <widget class="QPushButton" name="ephemerisSaveButton">
+              <property name="text">
+               <string>Save ephemeris</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QPushButton" name="ephemerisPushButton">
+              <property name="toolTip">
+               <string>Calculations require time, please be patient</string>
+              </property>
+              <property name="text">
+               <string>Calculate ephemeris</string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout_25">
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_3">
+              <item>
+               <widget class="QLabel" name="dateFromLabel">
+                <property name="text">
+                 <string>From:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">yyyy.MM.dd hh:mm</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_4">
+              <item>
+               <widget class="QLabel" name="dateToLabel">
+                <property name="text">
+                 <string>To:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QDateTimeEdit" name="dateToDateTimeEdit">
+                <property name="wrapping">
+                 <bool>true</bool>
+                </property>
+                <property name="displayFormat">
+                 <string notr="true">yyyy.MM.dd hh:mm</string>
+                </property>
+                <property name="calendarPopup">
+                 <bool>true</bool>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_2">
+              <item>
+               <widget class="QLabel" name="ephemerisStepLabel">
+                <property name="text">
+                 <string>Time step:</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QComboBox" name="ephemerisStepComboBox">
+                <property name="editable">
+                 <bool>true</bool>
+                </property>
+                <property name="insertPolicy">
+                 <enum>QComboBox::NoInsert</enum>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+           </layout>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <layout class="QHBoxLayout" name="horizontalLayout">
+            <item>
+             <widget class="QLabel" name="celestialBodyName">
+              <property name="text">
+               <string>Celestial body:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QComboBox" name="celestialBodyComboBox">
               <property name="editable">
                <bool>true</bool>
+              </property>
+              <property name="currentText">
+               <string/>
+              </property>
+              <property name="currentIndex">
+               <number>-1</number>
               </property>
               <property name="insertPolicy">
                <enum>QComboBox::NoInsert</enum>
               </property>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item row="1" column="0">
-           <layout class="QHBoxLayout" name="horizontalLayout_3">
             <item>
-             <widget class="QLabel" name="dateFromLabel">
+             <widget class="QLabel" name="labelOr">
               <property name="text">
-               <string>From:</string>
+               <string>or</string>
               </property>
              </widget>
             </item>
             <item>
-             <widget class="QDateTimeEdit" name="dateFromDateTimeEdit">
-              <property name="wrapping">
-               <bool>true</bool>
+             <widget class="QCheckBox" name="allNakedEyePlanetsCheckBox">
+              <property name="toolTip">
+               <string>Compute ephemeris for all naked-eye visible planets (works on Earth only).</string>
               </property>
-              <property name="displayFormat">
-               <string notr="true">yyyy.MM.dd hh:mm</string>
+              <property name="text">
+               <string>all naked-eye visible planets</string>
               </property>
-              <property name="calendarPopup">
-               <bool>true</bool>
+             </widget>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="horizontalLayout_26">
+              <property name="leftMargin">
+               <number>8</number>
+              </property>
+              <property name="rightMargin">
+               <number>8</number>
+              </property>
+              <item>
+               <widget class="QToolButton" name="genericMarkerColor">
+                <property name="toolTip">
+                 <string>Color of generic ephemeris marker</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QToolButton" name="selectedMarkerColor">
+                <property name="toolTip">
+                 <string>Color of selected ephemeris marker</string>
+                </property>
+                <property name="text">
+                 <string notr="true"/>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
+             <widget class="QToolButton" name="mercuryMarkerColor">
+              <property name="toolTip">
+               <string>Color of Mercury's ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="venusMarkerColor">
+              <property name="toolTip">
+               <string>Color of Venus' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="marsMarkerColor">
+              <property name="toolTip">
+               <string>Color of Mars' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="jupiterMarkerColor">
+              <property name="toolTip">
+               <string>Color of Jupiter' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QToolButton" name="saturnMarkerColor">
+              <property name="toolTip">
+               <string>Color of Saturn' ephemeris marker</string>
+              </property>
+              <property name="text">
+               <string notr="true"/>
               </property>
              </widget>
             </item>

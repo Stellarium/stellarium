@@ -84,6 +84,13 @@ SolarSystem::SolarSystem()
 	, ephemerisDatesDisplayed(false)
 	, ephemerisMagnitudesDisplayed(false)
 	, ephemerisHorizontalCoordinates(false)
+	, ephemerisGenericMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
+	, ephemerisSelectedMarkerColor(Vec3f(1.0f, 0.7f, 0.0f))
+	, ephemerisMercuryMarkerColor(Vec3f(1.0f, 1.0f, 0.0f))
+	, ephemerisVenusMarkerColor(Vec3f(1.0f, 1.0f, 1.0f))
+	, ephemerisMarsMarkerColor(Vec3f(1.0f, 0.0f, 0.0f))
+	, ephemerisJupiterMarkerColor(Vec3f(0.3f, 1.0f, 1.0f))
+	, ephemerisSaturnMarkerColor(Vec3f(0.0f, 1.0f, 0.0f))
 	, allTrails(Q_NULLPTR)
 	, conf(StelApp::getInstance().getSettings())
 {
@@ -217,6 +224,14 @@ void SolarSystem::init()
 	setNeptuneOrbitColor(StelUtils::strToVec3f(conf->value("color/neptune_orbit_color", "0.0,0.3,1.0").toString()));
 	setTrailsColor(StelUtils::strToVec3f(conf->value("color/object_trails_color", defaultColor).toString()));
 	setPointerColor(StelUtils::strToVec3f(conf->value("color/planet_pointers_color", "1.0,0.3,0.3").toString()));
+
+	setEphemerisGenericMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_generic_marker_color", "1.0,1.0,0.0").toString()));
+	setEphemerisSelectedMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_selected_marker_color", "1.0,0.7,0.0").toString()));
+	setEphemerisMercuryMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mercury_marker_color", "1.0,1.0,0.0").toString()));
+	setEphemerisVenusMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_venus_marker_color", "1.0,1.0,1.0").toString()));
+	setEphemerisMarsMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_mars_marker_color", "1.0,0.0,0.0").toString()));
+	setEphemerisJupiterMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_jupiter_marker_color", "0.3,1.0,1.0").toString()));
+	setEphemerisSaturnMarkerColor(StelUtils::strToVec3f(conf->value("color/ephemeris_saturn_marker_color", "0.0,1.0,0.0").toString()));
 
 	recreateTrails();
 
@@ -1345,17 +1360,39 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
+		Vec3f colorMarker = getEphemerisGenericMarkerColor();
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
-			sPainter.setColor(1.0f, 0.7f, 0.0f, 1.0f);
+			colorMarker = getEphemerisSelectedMarkerColor();
 			size = 6.f;
 		}
 		else
 		{
-			sPainter.setColor(1.0f, 1.0f, 0.0f, 1.0f);
+			switch (AstroCalcDialog::EphemerisList[i].colorIndex)
+			{
+				case 1:
+					colorMarker = getEphemerisMercuryMarkerColor();
+					break;
+				case 2:
+					colorMarker = getEphemerisVenusMarkerColor();
+					break;
+				case 3:
+					colorMarker = getEphemerisMarsMarkerColor();
+					break;
+				case 4:
+					colorMarker = getEphemerisJupiterMarkerColor();
+					break;
+				case 5:
+					colorMarker = getEphemerisSaturnMarkerColor();
+					break;
+				case 0:
+				default:
+					colorMarker = getEphemerisGenericMarkerColor();
+					break;
+			}
 			size = 4.f;
 		}
-
+		sPainter.setColor(colorMarker[0], colorMarker[1], colorMarker[2], 1.0f);
 		sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 		texCircle->bind();
@@ -1881,6 +1918,104 @@ void SolarSystem::setFlagEphemerisMagnitudes(bool b)
 bool SolarSystem::getFlagEphemerisMagnitudes() const
 {
 	return ephemerisMagnitudesDisplayed;
+}
+
+void SolarSystem::setEphemerisGenericMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisGenericMarkerColor)
+	{
+		ephemerisGenericMarkerColor = color;
+		emit ephemerisGenericMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisGenericMarkerColor() const
+{
+	return ephemerisGenericMarkerColor;
+}
+
+void SolarSystem::setEphemerisSelectedMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisSelectedMarkerColor)
+	{
+		ephemerisSelectedMarkerColor = color;
+		emit ephemerisSelectedMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisSelectedMarkerColor() const
+{
+	return ephemerisSelectedMarkerColor;
+}
+
+void SolarSystem::setEphemerisMercuryMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisMercuryMarkerColor)
+	{
+		ephemerisMercuryMarkerColor = color;
+		emit ephemerisMercuryMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisMercuryMarkerColor() const
+{
+	return ephemerisMercuryMarkerColor;
+}
+
+void SolarSystem::setEphemerisVenusMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisVenusMarkerColor)
+	{
+		ephemerisVenusMarkerColor = color;
+		emit ephemerisVenusMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisVenusMarkerColor() const
+{
+	return ephemerisVenusMarkerColor;
+}
+
+void SolarSystem::setEphemerisMarsMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisMarsMarkerColor)
+	{
+		ephemerisMarsMarkerColor = color;
+		emit ephemerisMarsMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisMarsMarkerColor() const
+{
+	return ephemerisMarsMarkerColor;
+}
+
+void SolarSystem::setEphemerisJupiterMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisJupiterMarkerColor)
+	{
+		ephemerisJupiterMarkerColor = color;
+		emit ephemerisJupiterMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisJupiterMarkerColor() const
+{
+	return ephemerisJupiterMarkerColor;
+}
+
+void SolarSystem::setEphemerisSaturnMarkerColor(const Vec3f& color)
+{
+	if (color!=ephemerisSaturnMarkerColor)
+	{
+		ephemerisSaturnMarkerColor = color;
+		emit ephemerisSaturnMarkerColorChanged(color);
+	}
+}
+
+Vec3f SolarSystem::getEphemerisSaturnMarkerColor() const
+{
+	return ephemerisSaturnMarkerColor;
 }
 
 void SolarSystem::setFlagNativePlanetNames(bool b)

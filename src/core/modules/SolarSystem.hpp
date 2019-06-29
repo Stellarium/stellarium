@@ -160,7 +160,7 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagEphemerisMagnitudes
 		   WRITE setFlagEphemerisMagnitudes
 		   NOTIFY ephemerisMagnitudesChanged
-		   )
+		   )	
 
 	Q_PROPERTY(bool flagCustomGrsSettings
 		   READ getFlagCustomGrsSettings
@@ -293,6 +293,41 @@ class SolarSystem : public StelObjectModule
 		   READ getNeptuneOrbitColor
 		   WRITE setNeptuneOrbitColor
 		   NOTIFY neptuneOrbitColorChanged
+		   )	
+	Q_PROPERTY(Vec3f ephemerisGenericMarkerColor
+		   READ getEphemerisGenericMarkerColor
+		   WRITE setEphemerisGenericMarkerColor
+		   NOTIFY ephemerisGenericMarkerColorChanged
+		   )
+	Q_PROPERTY(Vec3f ephemerisSelectedMarkerColor
+		   READ getEphemerisSelectedMarkerColor
+		   WRITE setEphemerisSelectedMarkerColor
+		   NOTIFY ephemerisSelectedMarkerColorChanged
+		   )
+	Q_PROPERTY(Vec3f ephemerisMercuryMarkerColor
+		   READ getEphemerisMercuryMarkerColor
+		   WRITE setEphemerisMercuryMarkerColor
+		   NOTIFY ephemerisMercuryMarkerColorChanged
+		   )
+	Q_PROPERTY(Vec3f ephemerisVenusMarkerColor
+		   READ getEphemerisVenusMarkerColor
+		   WRITE setEphemerisVenusMarkerColor
+		   NOTIFY ephemerisVenusMarkerColorChanged
+		   )
+	Q_PROPERTY(Vec3f ephemerisMarsMarkerColor
+		   READ getEphemerisMarsMarkerColor
+		   WRITE setEphemerisMarsMarkerColor
+		   NOTIFY ephemerisMarsMarkerColorChanged
+		   )
+	Q_PROPERTY(Vec3f ephemerisJupiterMarkerColor
+		   READ getEphemerisJupiterMarkerColor
+		   WRITE setEphemerisJupiterMarkerColor
+		   NOTIFY ephemerisJupiterMarkerColorChanged
+		   )
+	Q_PROPERTY(Vec3f ephemerisSaturnMarkerColor
+		   READ getEphemerisSaturnMarkerColor
+		   WRITE setEphemerisSaturnMarkerColor
+		   NOTIFY ephemerisSaturnMarkerColorChanged
 		   )
 
 	// Color style
@@ -875,6 +910,13 @@ signals:
 	void saturnOrbitColorChanged(const Vec3f & color) const;
 	void uranusOrbitColorChanged(const Vec3f & color) const;
 	void neptuneOrbitColorChanged(const Vec3f & color) const;
+	void ephemerisGenericMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisSelectedMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisMercuryMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisVenusMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisMarsMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisJupiterMarkerColorChanged(const Vec3f & color) const;
+	void ephemerisSaturnMarkerColorChanged(const Vec3f & color) const;
 
 	void orbitColorStyleChanged(QString style) const;
 	void apparentMagnitudeAlgorithmOnEarthChanged(QString algorithm) const;
@@ -959,6 +1001,27 @@ private slots:
 
 	void setFlagEphemerisMagnitudes(bool b);
 	bool getFlagEphemerisMagnitudes() const;
+
+	void setEphemerisGenericMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisGenericMarkerColor(void) const;
+
+	void setEphemerisSelectedMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisSelectedMarkerColor(void) const;
+
+	void setEphemerisMercuryMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisMercuryMarkerColor(void) const;
+
+	void setEphemerisVenusMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisVenusMarkerColor(void) const;
+
+	void setEphemerisMarsMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisMarsMarkerColor(void) const;
+
+	void setEphemerisJupiterMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisJupiterMarkerColor(void) const;
+
+	void setEphemerisSaturnMarkerColor(const Vec3f& c);
+	Vec3f getEphemerisSaturnMarkerColor(void) const;
 
 	//! Called when a new Hips survey has been loaded by the hips mgr.
 	void onNewSurvey(HipsSurveyP survey);
@@ -1056,6 +1119,13 @@ private:
 	bool ephemerisDatesDisplayed;
 	bool ephemerisMagnitudesDisplayed;
 	bool ephemerisHorizontalCoordinates;
+	Vec3f ephemerisGenericMarkerColor;
+	Vec3f ephemerisSelectedMarkerColor;
+	Vec3f ephemerisMercuryMarkerColor;
+	Vec3f ephemerisVenusMarkerColor;
+	Vec3f ephemerisMarsMarkerColor;
+	Vec3f ephemerisJupiterMarkerColor;
+	Vec3f ephemerisSaturnMarkerColor;
 
 	class TrailGroup* allTrails;
 	QSettings* conf;

@@ -45,7 +45,7 @@ class QStringListModel;
 struct Ephemeris
 {
 	Vec3d coord;
-	Vec3d color;
+	int colorIndex;
 	QString objDate;
 	float magnitude;
 };
@@ -73,8 +73,8 @@ public:
 	//! Defines the number and the order of the columns in the ephemeris table
 	//! @enum EphemerisColumns
 	enum EphemerisColumns {
-		EphemerisDate,		//! date and time of ephemeris
-		EphemerisJD,			//! JD
+		EphemerisCOName,		//! name of celestial object
+		EphemerisDate,		//! date and time of ephemeris		
 		EphemerisRA,			//! right ascension
 		EphemerisDec,			//! declination
 		EphemerisMagnitude,	//! magnitude
@@ -164,6 +164,8 @@ private slots:
 
 	void saveEphemerisCelestialBody(int index);
 	void saveEphemerisTimeStep(int index);
+	void initEphemerisFlagNakedEyePlanets(void);
+	void saveEphemerisFlagNakedEyePlanets(bool flag);
 
 	//! Calculate phenomena for selected celestial body and fill the list.
 	void calculatePhenomena();
@@ -418,7 +420,7 @@ private:
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
-		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisJD || column == AstroCalcDialog::EphemerisDistance)
+		else if (column == AstroCalcDialog::EphemerisMagnitude || column == AstroCalcDialog::EphemerisDistance)
 		{
 			return text(column).toFloat() < other.text(column).toFloat();
 		}
