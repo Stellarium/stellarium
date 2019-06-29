@@ -169,21 +169,6 @@ Observability::~Observability()
 
 void Observability::updateMessageText()
 {
-	// Set names of the months:
-	monthNames.clear();
-	monthNames << qc_("Jan", "short month name")
-	           << qc_("Feb", "short month name")
-	           << qc_("Mar", "short month name")
-	           << qc_("Apr", "short month name")
-	           << qc_("May", "short month name")
-	           << qc_("Jun", "short month name")
-	           << qc_("Jul", "short month name")
-	           << qc_("Aug", "short month name")
-	           << qc_("Sep", "short month name")
-	           << qc_("Oct", "short month name")
-	           << qc_("Nov", "short month name")
-	           << qc_("Dec", "short month name");
-
 	// TRANSLATORS: Short for "hours".
 	msgH		= q_("h");
 	// TRANSLATORS: Short for "minutes".
@@ -947,7 +932,7 @@ QString Observability::formatAsDate(int dayNumber)
 	StelUtils::getDateFromJulianDay(yearJD[dayNumber].first, &year, &month, &day);
 
 	QString formatString = (getDateFormat()) ? "%1 %2" : "%2 %1";
-	QString result = formatString.arg(day).arg(monthNames[month-1]);
+	QString result = formatString.arg(day).arg(StelLocaleMgr::shortMonthName(month));
 	return result;
 }
 
@@ -974,16 +959,16 @@ QString Observability::formatAsDateRange(int startDay, int endDay)
 	if (sMonth == eMonth)
 	{
 		QString formatString = (getDateFormat()) ? "%1 - %2 %3" : "%3 %1 - %2";
-		range = formatString.arg(sDay).arg(eDay).arg(monthNames[sMonth-1]);
+		range = formatString.arg(sDay).arg(eDay).arg(StelLocaleMgr::shortMonthName(sMonth));
 	}
 	else
 	{
 		QString formatString = (getDateFormat()) ? "%1 %2 - %3 %4" 
 		                                         : "%2 %1 - %4 %3";
 		range = formatString.arg(sDay)
-		                    .arg(monthNames[sMonth-1])
+				    .arg(StelLocaleMgr::shortMonthName(sMonth))
 		                    .arg(eDay)
-		                    .arg(monthNames[eMonth-1]);
+				    .arg(StelLocaleMgr::shortMonthName(sMonth));
 	}
 
 	return range;
@@ -1625,17 +1610,17 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 			StelUtils::getDateFromJulianDay(intMoon, &fullYear, &fullMonth, &fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);
 			if (getDateFormat())
-				lineBestNight = msgPrevFullMoon.arg(fullDay).arg(monthNames[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight = msgPrevFullMoon.arg(fullDay).arg(StelLocaleMgr::shortMonthName(fullMonth)).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 			else
-				lineBestNight = msgPrevFullMoon.arg(monthNames[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight = msgPrevFullMoon.arg(StelLocaleMgr::shortMonthName(fullMonth)).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			LocalTMoon = 24.*modf(LocalNext,&intMoon);
 			StelUtils::getDateFromJulianDay(intMoon,&fullYear,&fullMonth,&fullDay);
 			double2hms(toUnsignedRA(LocalTMoon),fullHour,fullMinute,fullSecond);			
 			if (getDateFormat())
-				lineBestNight += msgNextFullMoon.arg(fullDay).arg(monthNames[fullMonth-1]).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight += msgNextFullMoon.arg(fullDay).arg(StelLocaleMgr::shortMonthName(fullMonth)).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 			else
-				lineBestNight += msgNextFullMoon.arg(monthNames[fullMonth-1]).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
+				lineBestNight += msgNextFullMoon.arg(StelLocaleMgr::shortMonthName(fullMonth)).arg(fullDay).arg(fullHour).arg(fullMinute,2,10,QLatin1Char('0'));
 
 			lineObservableRange.clear(); 
 			lineAcroCos.clear();
