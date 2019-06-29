@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-29 23:15+0600\n"
+"POT-Creation-Date: 2019-06-29 23:47+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3123,72 +3123,61 @@ msgid "Sunday"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:516
-#: plugins/Observability/src/Observability.cpp:174
 msgctxt "short month name"
 msgid "Jan"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:519
-#: plugins/Observability/src/Observability.cpp:175
 msgctxt "short month name"
 msgid "Feb"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:522
-#: plugins/Observability/src/Observability.cpp:176
 msgctxt "short month name"
 msgid "Mar"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:525
-#: plugins/Observability/src/Observability.cpp:177
 msgctxt "short month name"
 msgid "Apr"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:528
-#: plugins/Observability/src/Observability.cpp:178
 msgctxt "short month name"
 msgid "May"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:531
-msgctxt "short day name"
+msgctxt "short month name"
 msgid "Jun"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:534
-#: plugins/Observability/src/Observability.cpp:180
 msgctxt "short month name"
 msgid "Jul"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:537
-#: plugins/Observability/src/Observability.cpp:181
 msgctxt "short month name"
 msgid "Aug"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:540
-#: plugins/Observability/src/Observability.cpp:182
 msgctxt "short month name"
 msgid "Sep"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:543
-#: plugins/Observability/src/Observability.cpp:183
 msgctxt "short month name"
 msgid "Oct"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:546
-#: plugins/Observability/src/Observability.cpp:184
 msgctxt "short month name"
 msgid "Nov"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:549
-#: plugins/Observability/src/Observability.cpp:185
 msgctxt "short month name"
 msgid "Dec"
 msgstr ""
@@ -3619,7 +3608,7 @@ msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:1711 src/ui_configurationDialog.h:1565
 #: plugins/Oculars/src/Oculars.cpp:2410
-#: plugins/Observability/src/Observability.cpp:205
+#: plugins/Observability/src/Observability.cpp:190
 msgid "None"
 msgstr ""
 
@@ -16720,150 +16709,145 @@ msgid ""
 "configuration window.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:179
-msgctxt "short month name"
-msgid "Jun"
-msgstr ""
-
 #. TRANSLATORS: Short for "hours".
-#: plugins/Observability/src/Observability.cpp:188
+#: plugins/Observability/src/Observability.cpp:173
 msgid "h"
 msgstr ""
 
 #. TRANSLATORS: Short for "minutes".
-#: plugins/Observability/src/Observability.cpp:190
+#: plugins/Observability/src/Observability.cpp:175
 msgid "m"
 msgstr ""
 
 #. TRANSLATORS: Short for "seconds".
-#: plugins/Observability/src/Observability.cpp:192
+#: plugins/Observability/src/Observability.cpp:177
 msgid "s"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:193
+#: plugins/Observability/src/Observability.cpp:178
 #, qt-format
 msgid "Sets at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:194
+#: plugins/Observability/src/Observability.cpp:179
 #, qt-format
 msgid "Rose at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:195
+#: plugins/Observability/src/Observability.cpp:180
 #, qt-format
 msgid "Set at %1 (%2 ago)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:196
+#: plugins/Observability/src/Observability.cpp:181
 #, qt-format
 msgid "Rises at %1 (in %2)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:197
+#: plugins/Observability/src/Observability.cpp:182
 msgid "Circumpolar."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:198
+#: plugins/Observability/src/Observability.cpp:183
 msgid "No rise."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:199
+#: plugins/Observability/src/Observability.cpp:184
 #, qt-format
 msgid "Culminates at %1 (in %2) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:200
+#: plugins/Observability/src/Observability.cpp:185
 #, qt-format
 msgid "Culminated at %1 (%2 ago) at %3 deg."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:201
+#: plugins/Observability/src/Observability.cpp:186
 msgid "Source is not observable."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:202
+#: plugins/Observability/src/Observability.cpp:187
 msgid "No Acronychal nor Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:203
+#: plugins/Observability/src/Observability.cpp:188
 #, qt-format
 msgid "Greatest elongation: %1 (at %2 deg.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:204
+#: plugins/Observability/src/Observability.cpp:189
 #, qt-format
 msgid "Largest Sun separation: %1 (at %2 deg.)"
 msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:207
+#: plugins/Observability/src/Observability.cpp:192
 #, qt-format
 msgid "Acronycal rise/set: %1/%2. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:208
+#: plugins/Observability/src/Observability.cpp:193
 #, qt-format
 msgid "Heliacal rise/set: %1/%2. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:209
+#: plugins/Observability/src/Observability.cpp:194
 msgid "No Heliacal rise/set. "
 msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:211
+#: plugins/Observability/src/Observability.cpp:196
 msgid "No Acronycal rise/set. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:212
+#: plugins/Observability/src/Observability.cpp:197
 #, qt-format
 msgid "Cosmical rise/set: %1/%2."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:213
+#: plugins/Observability/src/Observability.cpp:198
 msgid "No Cosmical rise/set."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:214
+#: plugins/Observability/src/Observability.cpp:199
 msgid "Observable during the whole year."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:215
+#: plugins/Observability/src/Observability.cpp:200
 msgid "Not observable at dark night."
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:216
+#: plugins/Observability/src/Observability.cpp:201
 #, qt-format
 msgid "Nights above horizon: %1"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:217
+#: plugins/Observability/src/Observability.cpp:202
 msgid "TODAY:"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:218
+#: plugins/Observability/src/Observability.cpp:203
 msgid "THIS YEAR:"
 msgstr ""
 
 #. TRANSLATORS: The space at the end is significant - another sentence may follow.
-#: plugins/Observability/src/Observability.cpp:220
+#: plugins/Observability/src/Observability.cpp:205
 #, qt-format
 msgid "Previous Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:221
+#: plugins/Observability/src/Observability.cpp:206
 #, qt-format
 msgid "Next Full Moon: %1 %2 at %3:%4. "
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:236
-#: plugins/Observability/src/Observability.cpp:237
-#: plugins/Observability/src/Observability.cpp:241
+#: plugins/Observability/src/Observability.cpp:221
+#: plugins/Observability/src/Observability.cpp:222
+#: plugins/Observability/src/Observability.cpp:226
 msgid "Observability"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:242
+#: plugins/Observability/src/Observability.cpp:227
 msgid "Observability configuration window"
 msgstr ""
 

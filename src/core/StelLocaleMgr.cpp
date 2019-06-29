@@ -528,7 +528,7 @@ QString StelLocaleMgr::shortMonthName(int month)
 			r = qc_("May", "short month name");
 			break;
 		case 6:
-			r = qc_("Jun", "short day name");
+			r = qc_("Jun", "short month name");
 			break;
 		case 7:
 			r = qc_("Jul", "short month name");
