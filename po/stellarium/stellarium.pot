@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-06-29 17:46+0600\n"
+"POT-Creation-Date: 2019-06-29 23:15+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -3050,6 +3050,267 @@ msgstr ""
 #: src/core/StelLocaleMgr.cpp:307
 msgctxt "solar time"
 msgid "LTST"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:456
+msgctxt "short day name"
+msgid "Mon"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:459
+msgctxt "short day name"
+msgid "Tue"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:462
+msgctxt "short day name"
+msgid "Wed"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:465
+msgctxt "short day name"
+msgid "Thu"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:468
+msgctxt "short day name"
+msgid "Fri"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:471
+msgctxt "short day name"
+msgid "Sat"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:474
+msgctxt "short day name"
+msgid "Sun"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:486
+msgctxt "long day name"
+msgid "Monday"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:489
+msgctxt "long day name"
+msgid "Tuesday"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:492
+msgctxt "long day name"
+msgid "Wednesday"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:495
+msgctxt "long day name"
+msgid "Thursday"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:498
+msgctxt "long day name"
+msgid "Friday"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:501
+msgctxt "long day name"
+msgid "Saturday"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:504
+msgctxt "long day name"
+msgid "Sunday"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:516
+#: plugins/Observability/src/Observability.cpp:174
+msgctxt "short month name"
+msgid "Jan"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:519
+#: plugins/Observability/src/Observability.cpp:175
+msgctxt "short month name"
+msgid "Feb"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:522
+#: plugins/Observability/src/Observability.cpp:176
+msgctxt "short month name"
+msgid "Mar"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:525
+#: plugins/Observability/src/Observability.cpp:177
+msgctxt "short month name"
+msgid "Apr"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:528
+#: plugins/Observability/src/Observability.cpp:178
+msgctxt "short month name"
+msgid "May"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:531
+msgctxt "short day name"
+msgid "Jun"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:534
+#: plugins/Observability/src/Observability.cpp:180
+msgctxt "short month name"
+msgid "Jul"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:537
+#: plugins/Observability/src/Observability.cpp:181
+msgctxt "short month name"
+msgid "Aug"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:540
+#: plugins/Observability/src/Observability.cpp:182
+msgctxt "short month name"
+msgid "Sep"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:543
+#: plugins/Observability/src/Observability.cpp:183
+msgctxt "short month name"
+msgid "Oct"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:546
+#: plugins/Observability/src/Observability.cpp:184
+msgctxt "short month name"
+msgid "Nov"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:549
+#: plugins/Observability/src/Observability.cpp:185
+msgctxt "short month name"
+msgid "Dec"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:561
+msgctxt "long month name"
+msgid "January"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:564
+msgctxt "long month name"
+msgid "February"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:567
+msgctxt "long month name"
+msgid "March"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:570
+msgctxt "long month name"
+msgid "April"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:573
+msgctxt "long month name"
+msgid "May"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:576
+msgctxt "long month name"
+msgid "June"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:579
+msgctxt "long month name"
+msgid "July"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:582
+msgctxt "long month name"
+msgid "August"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:585
+msgctxt "long month name"
+msgid "September"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:588
+msgctxt "long month name"
+msgid "October"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:591
+msgctxt "long month name"
+msgid "November"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:594
+msgctxt "long month name"
+msgid "December"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:606
+msgctxt "genitive"
+msgid "January"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:609
+msgctxt "genitive"
+msgid "February"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:612
+msgctxt "genitive"
+msgid "March"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:615
+msgctxt "genitive"
+msgid "April"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:618
+msgctxt "genitive"
+msgid "May"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:621
+msgctxt "genitive"
+msgid "June"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:624
+msgctxt "genitive"
+msgid "July"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:627
+msgctxt "genitive"
+msgid "August"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:630
+msgctxt "genitive"
+msgid "September"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:633
+msgctxt "genitive"
+msgid "October"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:636
+msgctxt "genitive"
+msgid "November"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:639
+msgctxt "genitive"
+msgid "December"
 msgstr ""
 
 #: src/gui/ConfigurationDialog.cpp:596
@@ -14627,54 +14888,6 @@ msgstr ""
 msgid "Historical Supernovae configuration window"
 msgstr ""
 
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "January"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "February"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "March"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "April"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "May"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "June"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "July"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "August"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "September"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "October"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "November"
-msgstr ""
-
-#: plugins/Supernovae/src/Supernovae.cpp:730 plugins/Novae/src/Novae.cpp:742
-msgid "December"
-msgstr ""
-
 #: plugins/Supernovae/src/Supernova.cpp:141
 msgid "supernova"
 msgstr ""
@@ -16507,64 +16720,9 @@ msgid ""
 "configuration window.)"
 msgstr ""
 
-#: plugins/Observability/src/Observability.cpp:174
-msgctxt "short month name"
-msgid "Jan"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:175
-msgctxt "short month name"
-msgid "Feb"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:176
-msgctxt "short month name"
-msgid "Mar"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:177
-msgctxt "short month name"
-msgid "Apr"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:178
-msgctxt "short month name"
-msgid "May"
-msgstr ""
-
 #: plugins/Observability/src/Observability.cpp:179
 msgctxt "short month name"
 msgid "Jun"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:180
-msgctxt "short month name"
-msgid "Jul"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:181
-msgctxt "short month name"
-msgid "Aug"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:182
-msgctxt "short month name"
-msgid "Sep"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:183
-msgctxt "short month name"
-msgid "Oct"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:184
-msgctxt "short month name"
-msgid "Nov"
-msgstr ""
-
-#: plugins/Observability/src/Observability.cpp:185
-msgctxt "short month name"
-msgid "Dec"
 msgstr ""
 
 #. TRANSLATORS: Short for "hours".

@@ -23,6 +23,7 @@
 
 #include "StelUtils.hpp"
 #include "VecMath.hpp"
+#include "StelLocaleMgr.hpp"
 #include <QBuffer>
 #include <QString>
 #include <QStringList>
@@ -860,11 +861,11 @@ QString localeDateString(const int year, const int month, const int day, const i
 			}
 			else if (frag == "ddd")
 			{
-				out += QDate::shortDayName(dayOfWeek+1);
+				out += StelLocaleMgr::shortDayName(dayOfWeek+1);
 			}
 			else if (frag == "dddd")
 			{
-				out += QDate::longDayName(dayOfWeek+1);
+				out += StelLocaleMgr::longDayName(dayOfWeek+1);
 			}
 			else if (frag == "M")
 			{
@@ -876,11 +877,11 @@ QString localeDateString(const int year, const int month, const int day, const i
 			}
 			else if (frag == "MMM")
 			{
-				out += QDate::shortMonthName(month);
+				out += StelLocaleMgr::shortMonthName(month);
 			}
 			else if (frag == "MMMM")
 			{
-				out += QDate::longMonthName(month);
+				out += StelLocaleMgr::longMonthName(month);
 			}
 			else if (frag == "y")
 			{

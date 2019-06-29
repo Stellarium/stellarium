@@ -739,7 +739,6 @@ void Novae::displayMessage(const QString& message, const QString hexColor)
 
 QString Novae::getNovaeList()
 {
-	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QStringList out;
 	int year, month, day;
 	QList<double> vals = novalist.values();
@@ -747,7 +746,7 @@ QString Novae::getNovaeList()
 	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
-		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(smonth[month-1]).arg(year);
+		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(StelLocaleMgr::longGenitiveMonthName(month)).arg(year);
 	}
 
 	return out.join(", ");

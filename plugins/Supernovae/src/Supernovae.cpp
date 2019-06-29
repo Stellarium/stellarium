@@ -727,7 +727,6 @@ void Supernovae::displayMessage(const QString& message, const QString hexColor)
 
 QString Supernovae::getSupernovaeList() const
 {
-	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QStringList out;
 	int year, month, day;
 	QList<double> vals = snlist.values();
@@ -735,7 +734,7 @@ QString Supernovae::getSupernovaeList() const
 	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
-		out << QString("%1 (%2 %3)").arg(snlist.key(val)).arg(day).arg(smonth[month-1]);
+		out << QString("%1 (%2 %3)").arg(snlist.key(val)).arg(day).arg(StelLocaleMgr::longGenitiveMonthName(month));
 	}
 
 	return out.join(", ");

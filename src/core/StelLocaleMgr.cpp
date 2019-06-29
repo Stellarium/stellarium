@@ -447,3 +447,198 @@ QStringList StelLocaleMgr::getAllCountryNames()
 	return res;
 }
 
+QString StelLocaleMgr::shortDayName(int weekday)
+{
+	QString r;
+	switch (weekday)
+	{
+		case 1:
+			r = qc_("Mon", "short day name");
+			break;
+		case 2:
+			r = qc_("Tue", "short day name");
+			break;
+		case 3:
+			r = qc_("Wed", "short day name");
+			break;
+		case 4:
+			r = qc_("Thu", "short day name");
+			break;
+		case 5:
+			r = qc_("Fri", "short day name");
+			break;
+		case 6:
+			r = qc_("Sat", "short day name");
+			break;
+		case 7:
+			r = qc_("Sun", "short day name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::longDayName(int weekday)
+{
+	QString r;
+	switch (weekday)
+	{
+		case 1:
+			r = qc_("Monday", "long day name");
+			break;
+		case 2:
+			r = qc_("Tuesday", "long day name");
+			break;
+		case 3:
+			r = qc_("Wednesday", "long day name");
+			break;
+		case 4:
+			r = qc_("Thursday", "long day name");
+			break;
+		case 5:
+			r = qc_("Friday", "long day name");
+			break;
+		case 6:
+			r = qc_("Saturday", "long day name");
+			break;
+		case 7:
+			r = qc_("Sunday", "long day name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::shortMonthName(int month)
+{
+	QString r;
+	switch (month)
+	{
+		case 1:
+			r = qc_("Jan", "short month name");
+			break;
+		case 2:
+			r = qc_("Feb", "short month name");
+			break;
+		case 3:
+			r = qc_("Mar", "short month name");
+			break;
+		case 4:
+			r = qc_("Apr", "short month name");
+			break;
+		case 5:
+			r = qc_("May", "short month name");
+			break;
+		case 6:
+			r = qc_("Jun", "short day name");
+			break;
+		case 7:
+			r = qc_("Jul", "short month name");
+			break;
+		case 8:
+			r = qc_("Aug", "short month name");
+			break;
+		case 9:
+			r = qc_("Sep", "short month name");
+			break;
+		case 10:
+			r = qc_("Oct", "short month name");
+			break;
+		case 11:
+			r = qc_("Nov", "short month name");
+			break;
+		case 12:
+			r = qc_("Dec", "short month name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::longMonthName(int month)
+{
+	QString r;
+	switch (month)
+	{
+		case 1:
+			r = qc_("January", "long month name");
+			break;
+		case 2:
+			r = qc_("February", "long month name");
+			break;
+		case 3:
+			r = qc_("March", "long month name");
+			break;
+		case 4:
+			r = qc_("April", "long month name");
+			break;
+		case 5:
+			r = qc_("May", "long month name");
+			break;
+		case 6:
+			r = qc_("June", "long month name");
+			break;
+		case 7:
+			r = qc_("July", "long month name");
+			break;
+		case 8:
+			r = qc_("August", "long month name");
+			break;
+		case 9:
+			r = qc_("September", "long month name");
+			break;
+		case 10:
+			r = qc_("October", "long month name");
+			break;
+		case 11:
+			r = qc_("November", "long month name");
+			break;
+		case 12:
+			r = qc_("December", "long month name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::longGenitiveMonthName(int month)
+{
+	QString r;
+	switch (month)
+	{
+		case 1:
+			r = qc_("January", "genitive");
+			break;
+		case 2:
+			r = qc_("February", "genitive");
+			break;
+		case 3:
+			r = qc_("March", "genitive");
+			break;
+		case 4:
+			r = qc_("April", "genitive");
+			break;
+		case 5:
+			r = qc_("May", "genitive");
+			break;
+		case 6:
+			r = qc_("June", "genitive");
+			break;
+		case 7:
+			r = qc_("July", "genitive");
+			break;
+		case 8:
+			r = qc_("August", "genitive");
+			break;
+		case 9:
+			r = qc_("September", "genitive");
+			break;
+		case 10:
+			r = qc_("October", "genitive");
+			break;
+		case 11:
+			r = qc_("November", "genitive");
+			break;
+		case 12:
+			r = qc_("December", "genitive");
+			break;
+	}
+	return r;
+}
+

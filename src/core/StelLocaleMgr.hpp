@@ -152,6 +152,21 @@ public:
 
 	//! Return an alphabetically ordered list of all the known country names
 	static QStringList getAllCountryNames();
+
+	//! Returns the short name of the \a weekday
+	static QString shortDayName(int weekday);
+
+	//! Returns the long name of the \a weekday
+	static QString longDayName(int weekday);
+
+	//! Returns the short name of the \a month
+	static QString shortMonthName(int month);
+
+	//! Returns the long name of the \a month
+	static QString longMonthName(int month);
+
+	//! Returns the genitive long name of the \a month
+	static QString longGenitiveMonthName(int month);
 	
 private:
 	// The translator used for astronomical object naming
