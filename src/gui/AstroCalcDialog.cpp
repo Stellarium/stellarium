@@ -1249,7 +1249,6 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 {
 	// Find the object
 	QString nameI18n = modelIndex.sibling(modelIndex.row(), CColumnName).data().toString();
-
 	bool founded = false;
 
 	if (objectMgr->findAndSelectI18n(nameI18n) || objectMgr->findAndSelect(nameI18n))
@@ -1278,7 +1277,6 @@ void AstroCalcDialog::selectCurrentCelestialPosition(const QModelIndex& modelInd
 void AstroCalcDialog::selectCurrentEphemeride(const QModelIndex& modelIndex)
 {
 	// Find the object
-	//QString name = ui->celestialBodyComboBox->currentData().toString();
 	QString name = modelIndex.sibling(modelIndex.row(), EphemerisCOName).data(Qt::UserRole).toString();
 	double JD = modelIndex.sibling(modelIndex.row(), EphemerisDate).data(Qt::UserRole).toDouble();
 
@@ -1357,11 +1355,29 @@ void AstroCalcDialog::reGenerateEphemeris()
 		initListEphemeris(); // Just update headers
 }
 
-double AstroCalcDialog::getEphemerisTimeStep()
+void AstroCalcDialog::generateEphemeris()
 {
+	float ra, dec;
+	Vec3d observerHelioPos, pos;
+	QString currentPlanet = ui->celestialBodyComboBox->currentData(Qt::UserRole).toString();
+	QString distanceInfo = q_("Planetocentric distance");
+	if (core->getUseTopocentricCoordinates())
+		distanceInfo = q_("Topocentric distance");
+	QString distanceUM = qc_("AU", "distance, astronomical unit");
+
+	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "";
+	QString dash = QChar(0x2014); // dash
+	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
+	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
+	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
+
+	initListEphemeris();
+
+	int idxRow = 0, colorIndex = 0;
 	double currentStep;
-	const PlanetP& cplanet = core->getCurrentPlanet();
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
+	const PlanetP& cplanet = core->getCurrentPlanet();
+	const PlanetP sun = solarSystem->getSun();
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
 		solarDay = cplanet->getMeanSolarDay();
@@ -1485,31 +1501,6 @@ double AstroCalcDialog::getEphemerisTimeStep()
 			currentStep = solarDay;
 			break;
 	}
-	return currentStep;
-}
-
-void AstroCalcDialog::generateEphemeris()
-{
-	float ra, dec;
-	Vec3d observerHelioPos, pos;
-	QString currentPlanet = ui->celestialBodyComboBox->currentData().toString();
-	QString distanceInfo = q_("Planetocentric distance");
-	if (core->getUseTopocentricCoordinates())
-		distanceInfo = q_("Topocentric distance");
-	QString distanceUM = qc_("AU", "distance, astronomical unit");
-
-	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "";
-	QString dash = QChar(0x2014); // dash
-	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
-	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
-	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
-
-	initListEphemeris();
-
-	int idxRow = 0, colorIndex = 0;
-	double currentStep = getEphemerisTimeStep();
-	const PlanetP& cplanet = core->getCurrentPlanet();
-	const PlanetP sun = solarSystem->getSun();
 
 	double currentJD = core->getJD(); // save current JD
 	double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
