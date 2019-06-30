@@ -1337,6 +1337,34 @@ void SolarSystem::draw(StelCore* core)
 		drawEphemerisMarkers(core);
 }
 
+Vec3f SolarSystem::getEphemerisMarkerColor(int index) const
+{
+	// Sync index with AstroCalcDialog::generateEphemeris()
+	Vec3f colorMarker = getEphemerisGenericMarkerColor();
+	switch (index)
+	{
+		case 0:
+			colorMarker = getEphemerisGenericMarkerColor();
+			break;
+		case 1:
+			colorMarker = getEphemerisMercuryMarkerColor();
+			break;
+		case 2:
+			colorMarker = getEphemerisVenusMarkerColor();
+			break;
+		case 3:
+			colorMarker = getEphemerisMarsMarkerColor();
+			break;
+		case 4:
+			colorMarker = getEphemerisJupiterMarkerColor();
+			break;
+		case 5:
+			colorMarker = getEphemerisSaturnMarkerColor();
+			break;
+	}
+	return colorMarker;
+}
+
 void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 {
 	StelProjectorP prj;
@@ -1353,9 +1381,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 
 	for (int i =0; i< AstroCalcDialog::EphemerisList.count(); i++)
 	{
-		// draw EphemerisListJ2000[i];
 		Vec3d win;
-
 		// Check visibility of pointer
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
@@ -1368,28 +1394,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		}
 		else
 		{
-			switch (AstroCalcDialog::EphemerisList[i].colorIndex)
-			{
-				case 1:
-					colorMarker = getEphemerisMercuryMarkerColor();
-					break;
-				case 2:
-					colorMarker = getEphemerisVenusMarkerColor();
-					break;
-				case 3:
-					colorMarker = getEphemerisMarsMarkerColor();
-					break;
-				case 4:
-					colorMarker = getEphemerisJupiterMarkerColor();
-					break;
-				case 5:
-					colorMarker = getEphemerisSaturnMarkerColor();
-					break;
-				case 0:
-				default:
-					colorMarker = getEphemerisGenericMarkerColor();
-					break;
-			}
+			colorMarker = getEphemerisMarkerColor(AstroCalcDialog::EphemerisList[i].colorIndex);
 			size = 4.f;
 		}
 		sPainter.setColor(colorMarker[0], colorMarker[1], colorMarker[2], 1.0f);

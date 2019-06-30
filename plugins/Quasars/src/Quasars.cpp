@@ -139,7 +139,6 @@ double Quasars::getCallOrder(StelModuleActionName actionName) const
 	return 0;
 }
 
-
 /*
  Init our module
 */
