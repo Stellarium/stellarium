@@ -285,6 +285,8 @@ private:
 	void populateCelestialBodyList();	
 	//! Populates the drop-down list of time steps.
 	void populateEphemerisTimeStepsList();
+	//! Get time step for ephemeris
+	double getEphemerisTimeStep();
 	//! Populates the drop-down list of major planets.
 	void populateMajorPlanetList();
 	//! Populates the drop-down list of groups of celestial bodies.

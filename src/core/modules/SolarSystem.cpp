@@ -1386,7 +1386,7 @@ void SolarSystem::drawEphemerisMarkers(const StelCore *core)
 		if (!(sPainter.getProjector()->projectCheck(AstroCalcDialog::EphemerisList[i].coord, win)))
 			continue;
 
-		Vec3f colorMarker = getEphemerisGenericMarkerColor();
+		Vec3f colorMarker;
 		if (i == AstroCalcDialog::DisplayedPositionIndex)
 		{
 			colorMarker = getEphemerisSelectedMarkerColor();
