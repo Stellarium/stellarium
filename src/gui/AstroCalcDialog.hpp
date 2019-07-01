@@ -416,7 +416,11 @@ private:
 	{
 		int column = treeWidget()->sortColumn();
 
-		if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
+		if (column == AstroCalcDialog::EphemerisDate)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
+		}
+		else if (column == AstroCalcDialog::EphemerisRA || column == AstroCalcDialog::EphemerisDec)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
 		}
@@ -448,6 +452,10 @@ private:
 		if (column == AstroCalcDialog::PhenomenaSeparation || column == AstroCalcDialog::PhenomenaElongation || column == AstroCalcDialog::PhenomenaAngularDistance)
 		{
 			return StelUtils::getDecAngle(text(column)) < StelUtils::getDecAngle(other.text(column));
+		}
+		else if (column == AstroCalcDialog::PhenomenaDate)
+		{
+			return data(column, Qt::UserRole).toFloat() < other.data(column, Qt::UserRole).toFloat();
 		}
 		else
 		{
