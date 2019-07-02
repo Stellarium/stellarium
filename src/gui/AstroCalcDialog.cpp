@@ -1364,9 +1364,7 @@ void AstroCalcDialog::generateEphemeris()
 	if (core->getUseTopocentricCoordinates())
 		distanceInfo = q_("Topocentric distance");
 	QString distanceUM = qc_("AU", "distance, astronomical unit");
-
-	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "";
-	QString dash = QChar(0x2014); // dash
+	QString englishName, nameI18n, elongStr = "", phaseStr = "", raStr = "", decStr = "", dash = QChar(0x2014);
 	bool horizon = ui->ephemerisHorizontalCoordinatesCheckBox->isChecked();
 	bool useSouthAzimuth = StelApp::getInstance().getFlagSouthAzimuthUsage();
 	bool withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();
@@ -1376,8 +1374,7 @@ void AstroCalcDialog::generateEphemeris()
 	int idxRow = 0, colorIndex = 0;
 	double currentStep;
 	double solarDay = 1.0, siderealDay = 1.0, siderealYear = 365.256363004; // days
-	const PlanetP& cplanet = core->getCurrentPlanet();
-	const PlanetP sun = solarSystem->getSun();
+	const PlanetP& cplanet = core->getCurrentPlanet();	
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
 		solarDay = cplanet->getMeanSolarDay();

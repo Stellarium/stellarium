@@ -40,13 +40,13 @@ public:
 	//! Used to decide how to display the angle.
 	enum DisplayFormat
 	{
-		DMSLetters,             //!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-360..360d]
-		DMSSymbols,             //!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-360..360°]
-		DMSLettersUnsigned,     //!< Degrees, minutes and seconds, e.g. 180d 4m 8s, [0..360d]
+		DMSLetters,			//!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-360..360d]
+		DMSSymbols,			//!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-360..360°]
+		DMSLettersUnsigned,	//!< Degrees, minutes and seconds, e.g. 180d 4m 8s, [0..360d]
 		DMSSymbolsUnsigned,     //!< Degrees, minutes and seconds, e.g. 180° 4' 8", [0..360°]
-		HMSLetters,             //!< Hours, minutes and seconds, e.g. 12h 4m 6s
-		HMSSymbols,             //!< Hours, minutes and seconds, e.g. 12h 4' 6s"
-		DecimalDeg              //!< Decimal degrees, e.g. 180.06888
+		HMSLetters,			//!< Hours, minutes and seconds, e.g. 12h 4m 6s
+		HMSSymbols,			//!< Hours, minutes and seconds, e.g. 12h 4' 6s"
+		DecimalDeg			//!< Decimal degrees, e.g. 180.06888
 	};
 
 	//! @enum PrefixType
@@ -56,7 +56,7 @@ public:
 		Normal,		//!< negative values have '-' prefix
 		NormalPlus,	//!< positive values have '+' prefix, negative values have '-' prefix.
 		Longitude,	//!< positive values have 'E' prefix, negative values have 'W' prefix.
-		Latitude,	//!< positive values have 'N' prefix, negative values have 'S' prefix.
+		Latitude,		//!< positive values have 'N' prefix, negative values have 'S' prefix.
  		Unknown
 	};
 	

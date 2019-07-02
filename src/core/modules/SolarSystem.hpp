@@ -155,12 +155,12 @@ class SolarSystem : public StelObjectModule
 		   READ getFlagEphemerisDates
 		   WRITE setFlagEphemerisDates
 		   NOTIFY ephemerisDatesChanged
-		   )	
+		   )
 	Q_PROPERTY(bool ephemerisMagnitudesDisplayed
 		   READ getFlagEphemerisMagnitudes
 		   WRITE setFlagEphemerisMagnitudes
 		   NOTIFY ephemerisMagnitudesChanged
-		   )	
+		   )
 
 	Q_PROPERTY(bool flagCustomGrsSettings
 		   READ getFlagCustomGrsSettings
