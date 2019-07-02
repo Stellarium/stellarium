@@ -1014,6 +1014,9 @@
                     <property name="alignment">
                      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                     </property>
+                    <property name="minimum">
+                     <number>-85</number>
+                    </property>
                     <property name="maximum">
                      <number>85</number>
                     </property>
@@ -1145,10 +1148,10 @@
                   <item>
                    <widget class="QCheckBox" name="monthlyElevationPositiveCheckBox">
                     <property name="toolTip">
-                     <string>Draw only the part of the graph, where altitude is greater than in right box.</string>
+                     <string>Draw only the part of the graph where altitude is greater than the value given in the right box.</string>
                     </property>
                     <property name="text">
-                     <string>Above a given altitude:</string>
+                     <string>Above altitude:</string>
                     </property>
                    </widget>
                   </item>
