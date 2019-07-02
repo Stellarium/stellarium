@@ -28,7 +28,7 @@ matrix:
           notification_email: stellarium@googlegroups.com
       env:
          - MATRIX_EVAL="CC=gcc-4.8 && CXX=g++-4.8"
-         - TRANSLATE=true
+         - TRANSLATE=false
          - COVERAGE=false
 
     - os: linux
