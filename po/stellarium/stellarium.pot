@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-07-03 12:45+0600\n"
+"POT-Creation-Date: 2019-07-03 16:16+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -10673,13 +10673,14 @@ msgstr ""
 msgid "Also the graph for the Moon"
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1463
+#: src/ui_astroCalcDialog.h:1463 src/ui_astroCalcDialog.h:1474
 msgid ""
-"Draw only the part of the graph, where altitude is greater than in right box."
+"Draw only the part of the graph where altitude is greater than the value "
+"given in the right box."
 msgstr ""
 
-#: src/ui_astroCalcDialog.h:1465
-msgid "Above a given altitude:"
+#: src/ui_astroCalcDialog.h:1465 src/ui_astroCalcDialog.h:1476
+msgid "Above altitude:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1467 src/ui_astroCalcDialog.h:1478
@@ -10702,16 +10703,6 @@ msgstr ""
 msgid ""
 "Please select object to plot its 'Monthly Elevation' graph for the current "
 "year at selected time."
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1474
-msgid ""
-"Draw only the part of the graph where altitude is greater than the value "
-"given in the right box."
-msgstr ""
-
-#: src/ui_astroCalcDialog.h:1476
-msgid "Above altitude:"
 msgstr ""
 
 #: src/ui_astroCalcDialog.h:1481
