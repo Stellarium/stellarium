@@ -427,8 +427,7 @@ void AstroCalcDialog::createDialogContent()
 	ui->celestialPositionsTimeLabel->setStyleSheet(style);
 	ui->altVsTimeLabel->setStyleSheet(style);
 	ui->aziVsTimeLabel->setStyleSheet(style);
-	ui->monthlyElevationLabel->setStyleSheet(style);	
-	ui->pcDistanceGraphLegend->setStyleSheet(style);
+	ui->monthlyElevationLabel->setStyleSheet(style);
 	ui->graphsFirstLabel->setStyleSheet(style);
 	ui->graphsCelestialBodyLabel->setStyleSheet(style);
 	ui->graphsSecondLabel->setStyleSheet(style);	
@@ -4923,6 +4922,10 @@ void AstroCalcDialog::prepareDistanceAxesAndGraph()
 
 	QColor axisColor(Qt::white);
 	QPen axisPen(axisColor, 1);
+	QColor axisColorL(Qt::green);
+	QPen axisPenL(axisColorL, 1);
+	QColor axisColorR(Qt::yellow);
+	QPen axisPenR(axisColorR, 1);
 
 	ui->pcDistanceGraphPlot->xAxis->setLabel(xAxisStr);
 	ui->pcDistanceGraphPlot->yAxis->setLabel(yAxisLegend1);
@@ -4940,31 +4943,31 @@ void AstroCalcDialog::prepareDistanceAxesAndGraph()
 
 	ui->pcDistanceGraphPlot->yAxis->setRange(minYld, maxYld);
 	ui->pcDistanceGraphPlot->yAxis->setScaleType(QCPAxis::stLinear);
-	ui->pcDistanceGraphPlot->yAxis->setLabelColor(axisColor);
-	ui->pcDistanceGraphPlot->yAxis->setTickLabelColor(axisColor);
-	ui->pcDistanceGraphPlot->yAxis->setBasePen(axisPen);
-	ui->pcDistanceGraphPlot->yAxis->setTickPen(axisPen);
-	ui->pcDistanceGraphPlot->yAxis->setSubTickPen(axisPen);
+	ui->pcDistanceGraphPlot->yAxis->setLabelColor(axisColorL);
+	ui->pcDistanceGraphPlot->yAxis->setTickLabelColor(axisColorL);
+	ui->pcDistanceGraphPlot->yAxis->setBasePen(axisPenL);
+	ui->pcDistanceGraphPlot->yAxis->setTickPen(axisPenL);
+	ui->pcDistanceGraphPlot->yAxis->setSubTickPen(axisPenL);
 
 	ui->pcDistanceGraphPlot->yAxis2->setRange(minYad, maxYad);
 	ui->pcDistanceGraphPlot->yAxis2->setScaleType(QCPAxis::stLinear);
-	ui->pcDistanceGraphPlot->yAxis2->setLabelColor(axisColor);
-	ui->pcDistanceGraphPlot->yAxis2->setTickLabelColor(axisColor);
-	ui->pcDistanceGraphPlot->yAxis2->setBasePen(axisPen);
-	ui->pcDistanceGraphPlot->yAxis2->setTickPen(axisPen);
-	ui->pcDistanceGraphPlot->yAxis2->setSubTickPen(axisPen);
+	ui->pcDistanceGraphPlot->yAxis2->setLabelColor(axisColorR);
+	ui->pcDistanceGraphPlot->yAxis2->setTickLabelColor(axisColorR);
+	ui->pcDistanceGraphPlot->yAxis2->setBasePen(axisPenR);
+	ui->pcDistanceGraphPlot->yAxis2->setTickPen(axisPenR);
+	ui->pcDistanceGraphPlot->yAxis2->setSubTickPen(axisPenR);
 	ui->pcDistanceGraphPlot->yAxis2->setVisible(true);
 
 	ui->pcDistanceGraphPlot->clearGraphs();
 	ui->pcDistanceGraphPlot->addGraph(ui->pcDistanceGraphPlot->xAxis, ui->pcDistanceGraphPlot->yAxis);
 	ui->pcDistanceGraphPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->pcDistanceGraphPlot->graph(0)->setPen(QPen(Qt::red, 1));
+	ui->pcDistanceGraphPlot->graph(0)->setPen(axisPenL);
 	ui->pcDistanceGraphPlot->graph(0)->setLineStyle(QCPGraph::lsLine);
 	ui->pcDistanceGraphPlot->graph(0)->rescaleAxes(true);
 
 	ui->pcDistanceGraphPlot->addGraph(ui->pcDistanceGraphPlot->xAxis, ui->pcDistanceGraphPlot->yAxis2);
 	ui->pcDistanceGraphPlot->setBackground(QBrush(QColor(86, 87, 90)));
-	ui->pcDistanceGraphPlot->graph(1)->setPen(QPen(Qt::yellow, 1));
+	ui->pcDistanceGraphPlot->graph(1)->setPen(axisPenR);
 	ui->pcDistanceGraphPlot->graph(1)->setLineStyle(QCPGraph::lsLine);
 	ui->pcDistanceGraphPlot->graph(1)->rescaleAxes(true);
 }
