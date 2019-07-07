@@ -491,7 +491,20 @@ IF(MSVC)
      )
 ENDIF(MSVC)
 
-INSTALL(TARGETS stellarium DESTINATION bin)
+IF(APPLE)
+     INSTALL(TARGETS stellarium DESTINATION MacOS)
+     INSTALL(CODE
+        "
+         EXECUTE_PROCESS(
+             COMMAND \"${MACDEPLOYQT_COMMAND}\"
+                     \"\${CMAKE_INSTALL_PREFIX}/Stellarium.app\"
+         )
+         MESSAGE(\"Running macdeployqt...\")
+        "
+     )
+ELSE()
+     INSTALL(TARGETS stellarium DESTINATION bin)
+ENDIF()
 IF(WIN32)
      INSTALL(CODE
         "

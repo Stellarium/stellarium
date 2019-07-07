@@ -1,6 +1,6 @@
 
 ########### install files ###############
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/scenery3d/Testscene 
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/scenery3d/Testscene
 		  FILES_MATCHING
 		  PATTERN "*.ini"
 		  PATTERN "*.mtl"

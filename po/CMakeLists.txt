@@ -109,7 +109,7 @@ MACRO(GETTEXT_CREATE_TRANSLATIONS _domain _firstLang)
                )
           ENDIF()
 
-          INSTALL(FILES ${_gmoFile} DESTINATION share/${PACKAGE}/translations/${_domain}/)
+          INSTALL(FILES ${_gmoFile} DESTINATION ${SDATALOC}/translations/${_domain}/)
           SET(_gmoFiles ${_gmoFiles} ${_gmoFile})
 
      ENDFOREACH (_lang)

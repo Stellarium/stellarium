@@ -106,6 +106,15 @@ ENDIF()
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
      SET(APPLE 1)
      SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -stdlib=libc++")
+     # share data location:
+     SET(SDATALOC "Resources")
+     # home data location:
+     SET(HDATALOC "$ENV{HOME}/Library/Application\ Support/${PROJECT_NAME}")
+ELSE()     
+     # share data location:
+     SET(SDATALOC "share/${PACKAGE}")
+     # home data location:
+     SET(HDATALOC "$ENV{HOME}/.${PACKAGE}")
 ENDIF()
 
 IF(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_GNUCC)
@@ -323,7 +332,7 @@ ENDIF(ENABLE_TESTING)
 ########### User Guide ###############
 IF(EXISTS "${CMAKE_SOURCE_DIR}/guide/guide.pdf")
      MESSAGE(STATUS "Found Stellarium User Guide")
-     INSTALL(FILES guide/guide.pdf DESTINATION share/${PACKAGE}/guide)
+     INSTALL(FILES guide/guide.pdf DESTINATION ${SDATALOC}/guide)
      SET(ISS_GUIDE "Name: \"{group}\\{cm:UserGuide}\"; Filename: \"{app}\\guide\\guide.pdf\"")
 ELSE()
      SET(ISS_GUIDE "; No link to Stellarium User Guide")
@@ -529,10 +538,9 @@ IF(UNIX AND NOT WIN32)
      IF(APPLE)
           SET(CMAKE_INSTALL_PREFIX "${PROJECT_BINARY_DIR}/Stellarium.app/Contents")
      ELSE()
-          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/share/${PACKAGE}")
-          ADD_DEFINITIONS(-DINSTALL_LOCALEDIR="${CMAKE_INSTALL_PREFIX}/share/locale")
+          ADD_DEFINITIONS(-DINSTALL_DATADIR="${CMAKE_INSTALL_PREFIX}/${SDATALOC}")          
           # Used in generating the documentation (doc/stellarium.pod.cmake):
-          SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/share/${PACKAGE}")
+          SET(INSTALL_DATADIR "${CMAKE_INSTALL_PREFIX}/${SDATALOC}")
      ENDIF()
 ELSE()
      ADD_DEFINITIONS(-DINSTALL_DATADIR=".")
@@ -560,7 +568,6 @@ IF(NOT STELLARIUM_RELEASE_BUILD)
           ADD_DEFINITIONS(-DSTELLARIUM_VERSION="${STELLARIUM_VERSION}")
      ENDIF()
 ENDIF()
-
 
 IF(WIN32)
      #######################################################
@@ -694,6 +701,9 @@ ENDIF()
 
 ########### OS X Bundling ###############
 IF(APPLE)
+     GET_FILENAME_COMPONENT(_qt_bin_dir "${QMAKE_LOCATION}" DIRECTORY)
+     FIND_PROGRAM(MACDEPLOYQT_COMMAND macdeployqt HINTS "${_qt_bin_dir}")
+
      IF(CMAKE_OSX_DEPLOYMENT_TARGET)
           SET(PACKAGE_OSX_TARGET ${CMAKE_OSX_DEPLOYMENT_TARGET})
      ELSE()

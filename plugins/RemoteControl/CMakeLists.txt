@@ -23,17 +23,13 @@ IF(PYTHON_EXECUTABLE)
      SET_TARGET_PROPERTIES(RemoteControl-update-translationdata PROPERTIES FOLDER "plugins/RemoteControl/util")
 endif()
 
-IF(APPLE)
-     SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/Library/Application\ Support/Stellarium)
-ElSE(APPLE)
-     SET(CMAKE_INSTALL_PREFIX $ENV{HOME}/.stellarium)
-ENDIF(APPLE)
+SET(CMAKE_INSTALL_PREFIX $HDATALOC)
 INSTALL(FILES DESTINATION "modules/RemoteControl")
 
 
 ########### install files ###############
 # install webroot
-INSTALL(DIRECTORY ${REMOTECONTROL_WEBROOT_PATH} DESTINATION share/${PACKAGE}/webroot FILES_MATCHING
+INSTALL(DIRECTORY ${REMOTECONTROL_WEBROOT_PATH} DESTINATION ${SDATALOC}/webroot FILES_MATCHING
      PATTERN "*.png" 
      PATTERN "*.gif"
      PATTERN "*.html"

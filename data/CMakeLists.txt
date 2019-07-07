@@ -1,7 +1,7 @@
 
 ########### install files ###############
-INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_cfg.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166.tab countryCodes.dat constellation_boundaries.dat constellations_spans.dat nomenclature.fab DESTINATION share/${PACKAGE}/data)
-INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCHING 
+INSTALL(FILES ssystem_major.ini ssystem_minor.ini ssystem_1000comets.ini base_locations.bin.gz DejaVuSans.ttf default_cfg.ini DejaVuSansMono.ttf iso639-1.utf8 iso3166.tab countryCodes.dat constellation_boundaries.dat constellations_spans.dat nomenclature.fab DESTINATION ${SDATALOC}/data)
+INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
 	PATTERN "planet*" 
 	)
 
@@ -24,7 +24,7 @@ SET_TARGET_PROPERTIES(splash PROPERTIES FOLDER "data")
 
 ########### icon target ###############
 ADD_CUSTOM_TARGET(icon ALL)
-IF(MACOSX)
+IF(APPLE)
 	SET(_iconFile Icon.icns)
 	IF(NOT STELLARIUM_RELEASE_BUILD)
 		GET_FILENAME_COMPONENT(_iconSrcFile IconGray.icns ABSOLUTE)
@@ -48,18 +48,18 @@ ADD_CUSTOM_COMMAND(
 SET_TARGET_PROPERTIES(icon PROPERTIES FOLDER "data")
 
 # install splash and icon
-IF(MACOSX)
-	INSTALL(FILES ${_iconDstFile} DESTINATION share RENAME ${_iconFile})
-	INSTALL(FILES ${_splashDstFile} DESTINATION share/data RENAME ${_splashFile})
+IF(APPLE)
+        INSTALL(FILES ${_iconDstFile} DESTINATION ${SDATALOC} RENAME ${_iconFile})
+        INSTALL(FILES ${_splashDstFile} DESTINATION ${SDATALOC}/data RENAME ${_splashFile})
 	INSTALL(FILES Info.plist PkgInfo DESTINATION .)
 ELSE()
-	INSTALL(FILES ${_iconDstFile} DESTINATION share/${PACKAGE}/data RENAME ${_iconFile})
-	INSTALL(FILES ${_splashDstFile} DESTINATION share/${PACKAGE}/data RENAME ${_splashFile})
+        INSTALL(FILES ${_iconDstFile} DESTINATION ${SDATALOC}/data RENAME ${_iconFile})
+        INSTALL(FILES ${_splashDstFile} DESTINATION ${SDATALOC}/data RENAME ${_splashFile})
 ENDIF()
 
 # install Scenery3d shaders
 IF(USE_PLUGIN_SCENERY3D)
-INSTALL(DIRECTORY shaders/ DESTINATION share/${PACKAGE}/data/shaders FILES_MATCHING 
+INSTALL(DIRECTORY shaders/ DESTINATION ${SDATALOC}/data/shaders FILES_MATCHING
 	PATTERN "s3d_*.vert" 
 	PATTERN "s3d_*.geom" 
 	PATTERN "s3d_*.frag")
