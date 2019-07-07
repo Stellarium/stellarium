@@ -3745,6 +3745,39 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 	}
 }
 
+double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringList objects)
+{
+	double step = (stopJD - startJD) / 8.0;
+	if (step > 24.8 * 365.25)
+		step = 24.8 * 365.25;
+	if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive))
+	{
+		if (step > 1811.25)
+			step = 1811.25;
+	}
+	if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
+	{
+		if (step > 181.125)
+			step = 181.125;
+	}
+	if (objects.contains("Mars",Qt::CaseInsensitive))
+	{
+		if (step > 5.)
+			step = 5.0;
+	}
+	if (objects.contains("Venus",Qt::CaseInsensitive) || objects.contains("Mercury", Qt::CaseInsensitive))
+	{
+		if (step > 2.5)
+			step = 2.5;
+	}
+	if (objects.contains("Moon", Qt::CaseInsensitive) || objects.contains("Sun", Qt::CaseInsensitive))
+	{
+		if (step > 0.25)
+			step = 0.25;
+	}
+	return step;
+}
+
 QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, StelObjectP& object2, double startJD, double stopJD, double maxSeparation, bool opposition)
 {
 	double dist, prevDist, step, step0;
@@ -3752,36 +3785,11 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 	QMap<double, double> separations;
 	QPair<double, double> extremum;
 
-	step0 = (stopJD - startJD) / 8.0;
-	if (step0 > 24.8 * 365.25)
-		step0 = 24.8 * 365.25;
-
-	if (object1->getEnglishName() == "Neptune" || object1->getEnglishName() == "Uranus" || object2->getEnglishName() == "Neptune" || object2->getEnglishName() == "Uranus")
-	{
-		if (step0 > 1811.25)
-			step0 = 1811.25;
-	}
-	if (object1->getEnglishName() == "Jupiter" || object1->getEnglishName() == "Saturn" || object2->getEnglishName() == "Jupiter" || object2->getEnglishName() == "Saturn")
-	{
-		if (step0 > 181.125)
-			step0 = 181.125;
-	}
-	if (object1->getEnglishName() == "Mars" || object2->getEnglishName() == "Mars")
-	{
-		if (step0 > 5.)
-			step0 = 5.0;
-	}
-	if (object1->getEnglishName() == "Venus" || object1->getEnglishName() == "Mercury" || object2->getEnglishName() == "Venus" || object2->getEnglishName() == "Mercury")
-	{
-		if (step0 > 2.5)
-			step0 = 2.5;
-	}
-	if (object1->getEnglishName() == "Moon" || object1->getEnglishName() == "Sun" || object2->getEnglishName() == "Moon" || object2->getEnglishName() == "Sun")
-	{
-		if (step0 > 0.25)
-			step0 = 0.25;
-	}
-
+	QStringList objects;
+	objects.clear();
+	objects.append(object1->getEnglishName());
+	objects.append(object2->getEnglishName());
+	step0 = findInitialStep(startJD, stopJD, objects);
 	step = step0;
 	double jd = startJD;
 	prevDist = findDistance(jd, object1, object2, opposition);
@@ -3829,7 +3837,6 @@ QMap<double, double> AstroCalcDialog::findClosestApproach(PlanetP& object1, Stel
 		prevSgn = sgn;
 		jd += step;
 	}
-
 	return separations;
 }
 
@@ -3874,9 +3881,7 @@ double AstroCalcDialog::findDistance(double JD, PlanetP object1, StelObjectP obj
 {
 	core->setJD(JD);
 	core->update(0);
-	Vec3d obj1 = object1->getJ2000EquatorialPos(core);
-	Vec3d obj2 = object2->getJ2000EquatorialPos(core);
-	double angle = obj1.angle(obj2);
+	double angle = object1->getJ2000EquatorialPos(core).angle(object2->getJ2000EquatorialPos(core));
 	if (opposition)
 		angle = M_PI - angle;
 	return angle;
