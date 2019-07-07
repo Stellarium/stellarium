@@ -3748,33 +3748,22 @@ void AstroCalcDialog::fillPhenomenaTable(const QMap<double, double> list, const 
 double AstroCalcDialog::findInitialStep(double startJD, double stopJD, QStringList objects)
 {
 	double step = (stopJD - startJD) / 8.0;
-	if (step > 24.8 * 365.25)
-		step = 24.8 * 365.25;
+	double limit = 24.8 * 365.25;
+
 	if (objects.contains("Neptune", Qt::CaseInsensitive) || objects.contains("Uranus", Qt::CaseInsensitive))
-	{
-		if (step > 1811.25)
-			step = 1811.25;
-	}
-	if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
-	{
-		if (step > 181.125)
-			step = 181.125;
-	}
-	if (objects.contains("Mars",Qt::CaseInsensitive))
-	{
-		if (step > 5.)
-			step = 5.0;
-	}
-	if (objects.contains("Venus",Qt::CaseInsensitive) || objects.contains("Mercury", Qt::CaseInsensitive))
-	{
-		if (step > 2.5)
-			step = 2.5;
-	}
-	if (objects.contains("Moon", Qt::CaseInsensitive) || objects.contains("Sun", Qt::CaseInsensitive))
-	{
-		if (step > 0.25)
-			step = 0.25;
-	}
+		limit = 1811.25;
+	else if (objects.contains("Jupiter", Qt::CaseInsensitive) || objects.contains("Saturn", Qt::CaseInsensitive))
+		limit = 181.125;
+	else if (objects.contains("Mars",Qt::CaseInsensitive))
+		limit = 5.;
+	else if (objects.contains("Venus",Qt::CaseInsensitive) || objects.contains("Mercury", Qt::CaseInsensitive))
+		limit = 2.5;
+	else if (objects.contains("Moon", Qt::CaseInsensitive) || objects.contains("Sun", Qt::CaseInsensitive))
+		limit = 0.25;
+
+	if (step > limit)
+		step = limit;
+
 	return step;
 }
 
