@@ -1,7 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 
 BIN_FILE=Stellarium.app/Contents/MacOS/stellarium
-for P in `otool -L $BIN_FILE | awk '{print $1}'` 
+for P in $(otool -L $BIN_FILE | awk '{print $1}')
 do 
     if [[ "$P" == *@rpath* ]] 
     then 
