@@ -497,9 +497,20 @@ IF(APPLE)
         "
          EXECUTE_PROCESS(
              COMMAND \"${MACDEPLOYQT_COMMAND}\"
-                     \"\${CMAKE_INSTALL_PREFIX}/Stellarium.app\"
+                     \"\${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app\"
+             WORKING_DIRECTORY \"\${CMAKE_CURRENT_BINARY_DIR}\"
+             OUTPUT_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.log\"
+             ERROR_FILE \"\${CMAKE_CURRENT_BINARY_DIR}/macdeployqt.err\"
          )
          MESSAGE(\"Running macdeployqt...\")
+        "
+     )
+    INSTALL(CODE
+        "
+        EXECUTE_PROCESS(
+             COMMAND \"../../util/macfix.sh\"
+        )
+        MESSAGE(\"Fixing Qt' paths for macOS bundle...\")
         "
      )
 ELSE()

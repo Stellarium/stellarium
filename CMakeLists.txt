@@ -711,16 +711,6 @@ IF(APPLE)
      ENDIF()
      ADD_DEFINITIONS(-DPACKAGE_OSX_TARGET)
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/Info.plist.cmake ${CMAKE_SOURCE_DIR}/data/Info.plist @ONLY)
-
-     # ${Qt5Core_INCLUDE_DIRS} is a list; I'm expecting the first entry to always be QtCore.framework.
-     ADD_CUSTOM_TARGET(
-          mac_app
-          python util/mac_app.py ${CMAKE_INSTALL_PREFIX} ${PROJECT_SOURCE_DIR} ${CMAKE_BUILD_TYPE} ${Qt5Core_INCLUDE_DIRS} 
-          DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/Stellarium.app
-          WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}
-          COMMENT "making the macosx bundle."
-          VERBATIM
-     )
 ENDIF()
 
 ########### Windows packaging ###############

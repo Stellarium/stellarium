@@ -181,7 +181,7 @@ int main(int argc, char **argv)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QDir appDir(appInfo.absolutePath());
 	appDir.cdUp();
-	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("plugins"));
+	QCoreApplication::addLibraryPath(appDir.absoluteFilePath("PlugIns"));
 	#elif defined(Q_OS_WIN)
 	QFileInfo appInfo(QString::fromUtf8(argv[0]));
 	QCoreApplication::addLibraryPath(appInfo.absolutePath());
