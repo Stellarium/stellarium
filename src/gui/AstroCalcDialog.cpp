@@ -229,11 +229,16 @@ void AstroCalcDialog::createDialogContent()
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
-	QDate min = QDate(100, 1, 1);
+	QDate min = QDate(1600, 1, 1);
+	QString validDates = q_("Gregorian dates. Valid range: 1600/1/1 - 9999/12/31");
 	ui->dateFromDateTimeEdit->setMinimumDate(min);
+	ui->dateFromDateTimeEdit->setToolTip(validDates);
 	ui->dateToDateTimeEdit->setMinimumDate(min);
+	ui->dateToDateTimeEdit->setToolTip(validDates);
 	ui->phenomenFromDateEdit->setMinimumDate(min);
-	ui->phenomenToDateEdit->setMinimumDate(min);
+	ui->phenomenFromDateEdit->setToolTip(validDates);
+	ui->phenomenToDateEdit->setMinimumDate(min);	
+	ui->phenomenToDateEdit->setToolTip(validDates);
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	connect(ui->celestialPositionsTreeWidget, SIGNAL(currentItemChanged(QTreeWidgetItem*, QTreeWidgetItem*)), ui->celestialPositionsTreeWidget, SLOT(repaint()));
