@@ -229,8 +229,9 @@ void AstroCalcDialog::createDialogContent()
 	ui->monthlyElevationTimeInfo->setStyleSheet("font-size: 18pt; color: rgb(238, 238, 238);");
 
 	// TODO: Switch a QDateTimeEdit to StelDateTimeEdit widget to apply wide range of dates
+	// NOTE: https://github.com/Stellarium/stellarium/issues/711
 	QDate min = QDate(1600, 1, 1);
-	QString validDates = q_("Gregorian dates. Valid range: 1600/1/1 - 9999/12/31");
+	QString validDates = QString("%1 1600/1/1 - 9999/12/31").arg(q_("Gregorian dates. Valid range:"));
 	ui->dateFromDateTimeEdit->setMinimumDate(min);
 	ui->dateFromDateTimeEdit->setToolTip(validDates);
 	ui->dateToDateTimeEdit->setMinimumDate(min);
