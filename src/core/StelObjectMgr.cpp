@@ -231,6 +231,7 @@ void StelObjectMgr::registerStelObjectMgr(StelObjectModule* m)
 		objModulesMap["NebulaMgr:121"] = "Hickson Compact Group";
 		objModulesMap["NebulaMgr:122"] = "Abell Catalog of Planetary Nebulae";
 		objModulesMap["NebulaMgr:123"] = "ESO/Uppsala Survey of the ESO(B) Atlas";
+		objModulesMap["NebulaMgr:124"] = "Southern Stars embedded in nebulosity";
 		objModulesMap["NebulaMgr:150"] = "Dwarf galaxies";
 		objModulesMap["NebulaMgr:151"] = "Herschel 400 Catalogue";
 		objModulesMap["NebulaMgr:152"] = "Jack Bennett's deep sky catalogue";
