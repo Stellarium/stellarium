@@ -130,8 +130,7 @@ void SatellitesDialog::createDialogContent()
 	// Set symbols on buttons
 	ui->addSatellitesButton->setText(QChar(0x2795)); // Heavy plus symbol
 	ui->removeSatellitesButton->setText(QChar(0x2796)); // Heavy minus symbol
-	ui->satColorPickerButton->setText(QString());
-	ui->satColorPickerButton->setFixedSize(QSize(32, 23));
+	ui->satColorPickerButton->setText(QChar(0x2740)); // Florette symbol
 	ui->saveSatellitesButton->setText(QString());
 	ui->addSourceButton->setText(QChar(0x2795)); // Heavy plus symbol
 	ui->deleteSourceButton->setText(QChar(0x2796)); // Heavy minus symbol
