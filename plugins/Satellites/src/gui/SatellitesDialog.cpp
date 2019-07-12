@@ -185,12 +185,10 @@ void SatellitesDialog::createDialogContent()
 	connect(clearAction, SIGNAL(triggered()), this, SLOT(searchSatellitesClear()));
 
 	QItemSelectionModel* selectionModel = ui->satellitesList->selectionModel();
-	connect(selectionModel,
-		SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
-		this,
-		SLOT(updateSatelliteData()));
+	connect(selectionModel, SIGNAL(selectionChanged(QItemSelection,QItemSelection)),
+		     this, SLOT(updateSatelliteData()));
 	connect(ui->satellitesList, SIGNAL(doubleClicked(QModelIndex)),
-		this, SLOT(trackSatellite(QModelIndex)));
+		     this, SLOT(trackSatellite(QModelIndex)));
 
 	// Two-state input, three-state display
 	connect(ui->displayedCheckbox, SIGNAL(clicked(bool)), ui->displayedCheckbox, SLOT(setChecked(bool)));
@@ -208,7 +206,7 @@ void SatellitesDialog::createDialogContent()
 
 
 	connect(ui->groupsListWidget, SIGNAL(itemChanged(QListWidgetItem*)),
-		this, SLOT(handleGroupChanges(QListWidgetItem*)));
+		     this, SLOT(handleGroupChanges(QListWidgetItem*)));
 
 	connect(ui->groupFilterCombo,       SIGNAL(currentIndexChanged(int)), this, SLOT(filterListByGroup(int)));
 	connect(ui->saveSatellitesButton,   SIGNAL(clicked()),                this, SLOT(saveSatellites()));
