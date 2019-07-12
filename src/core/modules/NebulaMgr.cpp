@@ -2571,6 +2571,10 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 			for (const auto& n : getDeepSkyObjectsByType(objType))
 				result << QString("ESO %1").arg(n->ESO_nb);
 			break;
+		case 124: // Catalogue of Southern Stars embedded in nebulosity (VdBH)
+			for (const auto& n : getDeepSkyObjectsByType(objType))
+				result << QString("VdBH %1").arg(n->VdBH_nb);
+			break;
 		case 150: // Dwarf galaxies [see NebulaList.hpp]
 		{
 			for (unsigned int i = 0; i < sizeof(DWARF_GALAXIES) / sizeof(DWARF_GALAXIES[0]); i++)
@@ -2843,7 +2847,7 @@ QList<NebulaP> NebulaMgr::getDeepSkyObjectsByType(const QString &objType) const
 					dso.append(n);
 			}
 			break;
-		case 124: // Southern Stars embedded in nebulosity (VdBH)
+		case 124: // Catalogue of Southern Stars embedded in nebulosity (VdBH)
 			for (const auto& n : dsoArray)
 			{
 				if (!n->VdBH_nb.isEmpty())
