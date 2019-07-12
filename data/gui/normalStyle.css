@@ -260,18 +260,6 @@ QPushButton:hover#closeStelWindow {
 	background-image: url(:/graphicGui/closeButton-hover.png);
 }
 
-QPushButton#removeSatellitesButton, QPushButton#deleteSourceButton {
-        image: url(:/satellites/bt_delete.png);
-}
-
-QPushButton#addSatellitesButton , QPushButton#addSourceButton {
-        image: url(:/satellites/bt_add.png);
-}
-
-QPushButton#commsButton {
-        image: url(:/satellites/bt_comms_off.png);
-}
-
 QPushButton#saveSatellitesButton {
         image: url(:/graphicGui/filesave.png);
 }

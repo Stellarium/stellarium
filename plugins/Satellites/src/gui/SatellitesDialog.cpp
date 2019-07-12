@@ -127,6 +127,15 @@ void SatellitesDialog::createDialogContent()
 	acEndl="\n";
 #endif
 
+	// Set symbols on buttons
+	ui->addSatellitesButton->setText(QChar(0x2795)); // Heavy plus symbol
+	ui->removeSatellitesButton->setText(QChar(0x2796)); // Heavy minus symbol
+	ui->satColorPickerButton->setText(QString());
+	ui->satColorPickerButton->setFixedSize(QSize(32, 23));
+	ui->saveSatellitesButton->setText(QString());
+	ui->addSourceButton->setText(QChar(0x2795)); // Heavy plus symbol
+	ui->deleteSourceButton->setText(QChar(0x2796)); // Heavy minus symbol
+
 	// Settings tab / updates group
 	// These controls are refreshed by updateSettingsPage(), which in
 	// turn is triggered by setting any of these values. Because
@@ -233,8 +242,6 @@ void SatellitesDialog::createDialogContent()
 	connect(ui->predictIridiumFlaresPushButton, SIGNAL(clicked()), this, SLOT(predictIridiumFlares()));
 	connect(ui->predictedIridiumFlaresSaveButton, SIGNAL(clicked()), this, SLOT(savePredictedIridiumFlares()));
 	connect(ui->iridiumFlaresTreeWidget, SIGNAL(doubleClicked(QModelIndex)), this, SLOT(selectCurrentIridiumFlare(QModelIndex)));
-
-	ui->satColorPickerButton->setFixedSize(QSize(18, 18));
 }
 
 // for now, the color picker changes hintColor AND orbitColor at once
@@ -541,9 +548,6 @@ void SatellitesDialog::updateSatelliteData()
 
 	// bug #1350669 (https://bugs.launchpad.net/stellarium/+bug/1350669)
 	ui->satellitesList->repaint();
-
-	// TODO: Fix the comms button...
-//	ui->commsButton->setEnabled(sat->comms.count()>0);
 
 	// Things that are cumulative in a multi-selection
 	GroupSet globalGroups = GETSTELMODULE(Satellites)->getGroups();
