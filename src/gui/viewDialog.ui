@@ -97,7 +97,7 @@
               <blue>195</blue>
              </color>
             </brush>
-           </colorrole>          
+           </colorrole>           
           </active>
           <inactive>
            <colorrole role="WindowText">
@@ -1963,7 +1963,20 @@
                 <string>Catalogue of Southern Stars embedded in nebulosity (Van den Bergh and Herbst, 1975)</string>
                </property>
                <property name="text">
-                <string>VdBH</string>
+                <string notr="true">VdBH</string>
+               </property>
+               <attribute name="buttonGroup">
+                <string notr="true">buttonGroupDisplayedDSOCatalogs</string>
+               </attribute>
+              </widget>
+             </item>
+             <item row="1" column="8">
+              <widget class="QCheckBox" name="checkBoxDWB">
+               <property name="toolTip">
+                <string>Catalogue and distances of optically visible H II regions (Dickel+, 1969)</string>
+               </property>
+               <property name="text">
+                <string notr="true">DWB</string>
                </property>
                <attribute name="buttonGroup">
                 <string notr="true">buttonGroupDisplayedDSOCatalogs</string>

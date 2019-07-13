@@ -960,6 +960,7 @@ private:
 	NebulaP searchAbell(unsigned int Abell) const;
 	NebulaP searchESO(QString ESO) const;
 	NebulaP searchVdBH(QString VdBH) const;
+	NebulaP searchDWB(unsigned int DWB) const;
 
 	// Load catalog of DSO
 	bool loadDSOCatalog(const QString& filename);

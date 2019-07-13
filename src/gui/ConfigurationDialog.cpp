@@ -809,6 +809,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("flag_show_abell",	(bool) (cflags & Nebula::CatAbell));
 	conf->setValue("flag_show_eso",	(bool) (cflags & Nebula::CatESO));
 	conf->setValue("flag_show_vdbh",	(bool) (cflags & Nebula::CatVdBH));
+	conf->setValue("flag_show_dwb",	(bool) (cflags & Nebula::CatDWB));
 	conf->endGroup();
 
 	const Nebula::TypeGroup& tflags = nmgr->getTypeFilters();

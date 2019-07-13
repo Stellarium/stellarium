@@ -128,6 +128,7 @@ Nebula::Nebula()
 	, Arp_nb(0)
 	, VV_nb(0)	
 	, Abell_nb(0)
+	, DWB_nb(0)
 	, Ced_nb("")
 	, PK_nb("")
 	, PNG_nb("")
@@ -258,6 +259,8 @@ QString Nebula::getInfoString(const StelCore *core, const InfoStringGroup& flags
 			catIds << QString("ESO %1").arg(ESO_nb);
 		if (!VdBH_nb.isEmpty())
 			catIds << QString("VdBH %1").arg(VdBH_nb);
+		if (DWB_nb > 0)
+			catIds << QString("DWB %1").arg(DWB_nb);
 
 		if (!nameI18.isEmpty() && !catIds.isEmpty() && flags&Name)
 			oss << "<br>";
@@ -1007,6 +1010,8 @@ QString Nebula::getDSODesignation() const
 		str = QString("ESO %1").arg(ESO_nb);
 	else if (catalogFilters&CatVdBH && !VdBH_nb.isEmpty())
 		str = QString("VdBH %1").arg(VdBH_nb);
+	else if (catalogFilters&CatDWB && DWB_nb > 0)
+		str = QString("DWB %1").arg(DWB_nb);
 
 	return str;
 }
@@ -1020,9 +1025,9 @@ void Nebula::readDSO(QDataStream &in)
 		>> orientationAngle >> redshift >> redshiftErr >> parallax >> parallaxErr >> oDistance >> oDistanceErr
 		>> NGC_nb >> IC_nb >> M_nb >> C_nb >> B_nb >> Sh2_nb >> VdB_nb >> RCW_nb >> LDN_nb >> LBN_nb >> Cr_nb
 		>> Mel_nb >> PGC_nb >> UGC_nb >> Ced_nb >> Arp_nb >> VV_nb >> PK_nb >> PNG_nb >> SNRG_nb >> ACO_nb
-		>> HCG_nb >> Abell_nb >> ESO_nb >> VdBH_nb;
+		>> HCG_nb >> Abell_nb >> ESO_nb >> VdBH_nb >> DWB_nb;
 
-	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + Abell_nb;
+	int f = NGC_nb + IC_nb + M_nb + C_nb + B_nb + Sh2_nb + VdB_nb + RCW_nb + LDN_nb + LBN_nb + Cr_nb + Mel_nb + PGC_nb + UGC_nb + Arp_nb + VV_nb + Abell_nb + DWB_nb;
 	if (f==0 && Ced_nb.isEmpty() && PK_nb.isEmpty() && PNG_nb.isEmpty() && SNRG_nb.isEmpty() && ACO_nb.isEmpty() && HCG_nb.isEmpty() && ESO_nb.isEmpty() && VdBH_nb.isEmpty())
 		withoutID = true;
 
@@ -1177,6 +1182,8 @@ bool Nebula::objectInDisplayedCatalog() const
 	else if ((catalogFilters&CatESO) && (!ESO_nb.isEmpty()))
 		r = true;
 	else if ((catalogFilters&CatVdBH) && (!VdBH_nb.isEmpty()))
+		r = true;
+	else if ((catalogFilters&CatDWB) && (DWB_nb>0))
 		r = true;
 
 	// Special case: objects without ID from current catalogs

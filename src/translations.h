@@ -425,6 +425,8 @@ class Translations
 		N_("ESO/Uppsala Survey of the ESO(B) Atlas")
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
 		N_("Catalogue of Southern Stars embedded in nebulosity")
+		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
+		N_("Catalogue and distances of optically visible H II regions")
 		// TRANSLATORS: Type of objects (for "Lists" in the search tool)
 		N_("Dwarf galaxies");
 		// TRANSLATORS: Catalogue of objects (for "Lists" in the search tool)
