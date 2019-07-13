@@ -76,71 +76,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QLabel" name="stelWindowTitle">
-        <property name="palette">
-         <palette>
-          <active>
-           <colorrole role="WindowText">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Text">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>           
-          </active>
-          <inactive>
-           <colorrole role="WindowText">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Text">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>           
-          </inactive>
-          <disabled>
-           <colorrole role="WindowText">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>
-           <colorrole role="Text">
-            <brush brushstyle="SolidPattern">
-             <color alpha="255">
-              <red>194</red>
-              <green>194</green>
-              <blue>195</blue>
-             </color>
-            </brush>
-           </colorrole>           
-          </disabled>
-         </palette>
-        </property>
+       <widget class="QLabel" name="stelWindowTitle">        
         <property name="font">
          <font>
           <weight>75</weight>
@@ -1960,7 +1896,7 @@
              <item row="0" column="8">
               <widget class="QCheckBox" name="checkBoxVdBH">
                <property name="toolTip">
-                <string>Catalogue of Southern Stars embedded in nebulosity (Van den Bergh and Herbst, 1975)</string>
+                <string>Catalogue of southern stars embedded in nebulosity (Van den Bergh and Herbst, 1975)</string>
                </property>
                <property name="text">
                 <string notr="true">VdBH</string>

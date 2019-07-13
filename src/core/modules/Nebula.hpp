@@ -70,7 +70,7 @@ public:
 		CatHCG		= 0x00200000, //!< Hickson, Compact Group (Hickson+ 1982) (HCG)
 		CatAbell		= 0x00400000, //!< Abell Catalog of Planetary Nebulae (Abell, 1966) (Abell; PN A66)
 		CatESO		= 0x00800000, //!< ESO/Uppsala Survey of the ESO(B) Atlas (Lauberts, 1982) (ESO)
-		CatVdBH		= 0x01000000, //!< Catalogue of Southern Stars embedded in nebulosity (van den Bergh+, 1975) (VdBH)
+		CatVdBH		= 0x01000000, //!< Catalogue of southern stars embedded in nebulosity (van den Bergh+, 1975) (VdBH)
 		CatDWB		= 0x02000000, //!< Catalogue and distances of optically visible H II regions (Dickel+, 1969) (DWB)
 	};
 	Q_DECLARE_FLAGS(CatalogGroup, CatalogGroupFlags)

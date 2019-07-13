@@ -17,7 +17,7 @@ If you wish to associate an outline with the object, you must add the series of 
 \section{Stellarium DSO Catalog}
 \label{sec:dso:catalog}
 
-Stellarium's DSO Catalog contains over 90000 objects\footnote{An extended edition of this catalog 
+Stellarium's DSO Catalog contains over 94000 objects\footnote{An extended edition of this catalog 
 with over one million objects may be downloaded and installed manually (see section \ref{sec:ExtraData:DSOs}).} 
 (up to $15.5^m$ for galaxies) and is available for end users as collection of files:
 
@@ -71,6 +71,8 @@ follow catalogues:
 \item[\textbf{HCG}]  Atlas of compact groups of galaxies~\citep{1993ApL....29....1H}\newFeature{V0.18.0}
 \item[\textbf{Abell}]  Abell Catalog of Planetary Nebulae~\citep{1966ApJ...144..259A}\newFeature{V0.18.2}
 \item[\textbf{ESO}]  ESO/Uppsala Survey of the ESO(B) Atlas~\citep{1982ESO...C......0L}\newFeature{V0.18.2}
+\item[\textbf{VdBH}]  Catalogue of southern stars embedded in nebulosity~\citep{1975AJ.....80..208V}\newFeature{V0.19.2}
+\item[\textbf{DWB}]  Catalogue and distances of optically visible H II regions~\citep{1969A&A.....1..270D}\newFeature{V0.19.2}
 \end{description}
 
 \noindent Cross-index data for Stellarium's DSO Catalog is partially obtained from 
@@ -78,7 +80,7 @@ follow catalogues:
 SIMBAD\footnote{SIMBAD Astronomical Database --- \url{http://simbad.u-strasbg.fr/simbad/}}~\citep{2000A&AS..143....9W} 
 and NED\footnote{NASA/IPAC Extragalactic Database (NED) --- \url{https://ned.ipac.caltech.edu/}}.
 
-\noindent Distance for some planetary nebulae obtained from \citetp{2008ApJ...689..194S}.
+\noindent Distances for some deep-sky objects obtained from \citetp{2008ApJ...689..194S}, \citetp{2007ApJ...670..363H}, \citetp{1995A&AS..113..325H} and \citetp{1996AJ....112.1487H}.
 
 \subsection{Modifying catalog.dat}
 \label{sec:dso:modifyingCatalog.dat}
@@ -134,6 +136,8 @@ fields with \emph{tab} char as delimiter:
 38 & string  & HCG identificator (Atlas of compact groups of galaxies)\\
 39 & string  & Abell identificator (Abell Catalog of Planetary Nebulae)\\
 40 & string  & ESO identificator (ESO/Uppsala Survey of the ESO(B) Atlas)\\
+41 & string  & VdBH identificator (Catalogue of southern stars embedded in nebulosity)\\
+42 & integer & DWB identificator (Catalogue and distances of optically visible H II regions)\\
 \bottomrule
 \end{longtable}
 
