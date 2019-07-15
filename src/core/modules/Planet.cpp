@@ -653,13 +653,19 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 
 			if (englishName=="Moon" && onEarth)
 			{
+				// NOTE: Should we just remove this piece of code to avoid switch context?
+				// For compute the Moon age we use geocentric coordinates
 				QString moonPhase = "";
-				double eclJDE = earth->getRotObliquity(core->getJDE());
+				StelCore* core1 = StelApp::getInstance().getCore();
+				bool state = core1->getUseTopocentricCoordinates();
+				core1->setUseTopocentricCoordinates(false);
+				double eclJDE = earth->getRotObliquity(core1->getJDE());
 				double ra_equ, dec_equ, lambdaMoon, lambdaSun, beta;
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core1));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaMoon, &beta);
-				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core));
+				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
+				core1->setUseTopocentricCoordinates(state);
 				double deltaLong = lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI;
 				if (deltaLong<0.) deltaLong += 360.;
 				int deltaLongI = static_cast<int>(std::round(deltaLong));
