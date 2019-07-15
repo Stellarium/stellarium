@@ -662,7 +662,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
 				double deltaLong = lambdaMoon*180.f/M_PI - lambdaSun*180.f/M_PI;
 				if (deltaLong<0.) deltaLong += 360.;
-				int deltaLongI = (int)deltaLong;
+				int deltaLongI = static_cast<int>(std::round(deltaLong));
 				if (deltaLongI==45)
 					moonPhase = qc_("Waxing Crescent", "Moon phase");
 				if (deltaLongI==90)
