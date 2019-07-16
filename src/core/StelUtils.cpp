@@ -93,13 +93,12 @@ QString getOperatingSystemInfo()
 
 double hmsToRad(const unsigned int h, const unsigned int m, const double s )
 {
-	//return (double)M_PI/24.*h*2.+(double)M_PI/12.*m/60.+s*M_PI/43200.; // Wrong formula! --AW
-	return (double)h*M_PI/12.+(double)m*M_PI/10800.+(double)s*M_PI/648000.;
+	return hmsToHours(h, m, s)*M_PI/12.;
 }
 
-double hmsToHours(const int h, const int m, const double s)
+double hmsToHours(const unsigned int h, const unsigned int m, const double s)
 {
-	return (double)h+(double)m/60.+(double)s/3600.;
+	return (double)h+(double)m/60.+s/3600.;
 }
 
 double hmsStrToHours(const QString& s)
