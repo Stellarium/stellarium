@@ -1560,7 +1560,7 @@ void AstroCalcDialog::generateEphemeris()
 			elongStr = dash;
 		}
 
-		for (int i = 0; i < elements; i++)
+		for (int i = 0; i <= elements; i++)
 		{
 			double JD = firstJD + i * currentStep;
 			core->setJD(JD);
