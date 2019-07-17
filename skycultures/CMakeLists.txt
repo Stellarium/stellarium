@@ -1,3 +1,4 @@
+ADD_SUBDIRECTORY( anutan )
 ADD_SUBDIRECTORY( arabic )
 ADD_SUBDIRECTORY( arabic_moon_stations )
 # Exclude from standard package
