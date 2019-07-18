@@ -266,13 +266,10 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 // according to the timeFormat variable
 QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 {
-	int hour, minute, second;
+	int hour, minute, second, millsec;
 	double shift = core->getUTCOffset(JD)*0.041666666666;
-
-	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second);
-
-	QTime t(hour, minute, second);
-
+	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second, &millsec);
+	QTime t(hour, minute, second, millsec);
 	switch (timeFormat)
 	{
 		case STimeSystemDefault:

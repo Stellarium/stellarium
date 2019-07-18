@@ -1505,10 +1505,10 @@ void AstroCalcDialog::generateEphemeris()
 	}
 
 	double currentJD = core->getJD(); // save current JD
-	double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());
-	firstJD = firstJD - core->getUTCOffset(firstJD) / 24;
-	double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());
-	secondJD = secondJD - core->getUTCOffset(secondJD) / 24;
+	double firstJD = StelUtils::qDateTimeToJd(ui->dateFromDateTimeEdit->dateTime());	
+	firstJD = firstJD - core->getUTCOffset(firstJD) / 24.;
+	double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());	
+	secondJD = secondJD - core->getUTCOffset(secondJD) / 24.;
 	int elements = (int)((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
 	bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
@@ -1563,7 +1563,7 @@ void AstroCalcDialog::generateEphemeris()
 		for (int i = 0; i <= elements; i++)
 		{
 			double JD = firstJD + i * currentStep;
-			core->setJD(JD);
+			core->setJDE(JD);
 			core->update(0); // force update to get new coordinates
 			if (horizon)
 			{
