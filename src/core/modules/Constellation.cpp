@@ -93,7 +93,7 @@ bool Constellation::read(const QString& record, StarMgr *starMgr)
 		constellation[i]=starMgr->searchHP(HP);
 		if (!constellation[i])
 		{
-			qWarning() << "Error in Constellation " << abbreviation << " asterism : can't find star HP= " << HP;
+			qWarning() << "Error in Constellation " << abbreviation << ": can't find star HIP" << HP;
 			// TODO: why is this delete commented?
 			// delete[] constellation;
 			return false;

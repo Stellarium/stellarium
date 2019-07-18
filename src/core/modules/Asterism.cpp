@@ -107,7 +107,7 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 				istr >> RA >> DE;				
 				StelUtils::spheToRect(RA*M_PI/12., DE*M_PI/180., coords);
 				QList<StelObjectP> stars = starMgr->searchAround(coords, 0.1, core);
-				StelObjectP s = NULL;
+				StelObjectP s = Q_NULLPTR;
 				float d = 10.f;
 				for (const auto& p : stars)
 				{
@@ -119,13 +119,13 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 					}
 				}
 
-				asterism[i] = s;
-
-				if (!asterism[i])
+				if (s.isNull())
 				{
 					qWarning() << "Error in Asterism " << abbreviation << ": can't find star with coordinates" << RA << "/" << DE;
 					return false;
 				}
+				else
+					asterism[i] = s;
 
 				break;
 			}
