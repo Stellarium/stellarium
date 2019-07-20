@@ -88,15 +88,12 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 					// delete[] asterism;
 					return false;
 				}
-
 				asterism[i]=starMgr->searchHP(HP);
-
 				if (!asterism[i])
 				{
 					qWarning() << "Error in Asterism " << abbreviation << ": can't find star HIP" << HP;
 					return false;
 				}
-
 				break;
 			}
 			case 2: // A small asterism with lines by J2000.0 coordinates
@@ -118,15 +115,12 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 						s = p;
 					}
 				}
-
-				if (s.isNull())
+				asterism[i] = s;
+				if (!asterism[i])
 				{
 					qWarning() << "Error in Asterism " << abbreviation << ": can't find star with coordinates" << RA << "/" << DE;
 					return false;
 				}
-				else
-					asterism[i] = s;
-
 				break;
 			}
 		}
@@ -135,10 +129,8 @@ bool Asterism::read(const QString& record, StarMgr *starMgr)
 	if (typeOfAsterism>0)
 	{
 		XYZname.set(0.,0.,0.);
-		for(unsigned int ii=0;ii<numberOfSegments*2;++ii)
-		{
-			XYZname+= asterism[ii]->getJ2000EquatorialPos(StelApp::getInstance().getCore());
-		}
+		for(unsigned int j=0;j<numberOfSegments*2;++j)
+			XYZname+= asterism[j]->getJ2000EquatorialPos(core);
 		XYZname.normalize();
 	}
 	else

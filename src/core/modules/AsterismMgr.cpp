@@ -113,6 +113,11 @@ void AsterismMgr::updateSkyCulture(const QString& skyCultureDir)
 {
 	currentSkyCultureID = skyCultureDir;
 
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Asterism");
+	if (!selectedObject.isEmpty()) // Unselect asterism
+		objMgr->unSelect();
+
 	// Check if the sky culture changed since last load, if not don't load anything
 	if (lastLoadedSkyCulture == skyCultureDir)
 		return;
