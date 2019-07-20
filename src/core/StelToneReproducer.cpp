@@ -137,8 +137,8 @@ void StelToneReproducer::xyYToRGB(float* color) const
 	const float Y = color[2];
 	const float Z = (1.f - color[0] - color[1]) * color[2] / color[1];
 
-	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-	color[0] = 2.04148f  *X - 0.564977f*Y - 0.344713f *Z;
-	color[1] =-0.969258f *X + 1.87599f *Y + 0.0415557f*Z;
-	color[2] = 0.0134455f*X - 0.118373f*Y + 1.01527f  *Z;
+	// Use a XYZ to sRGB matrix which uses a D65 reference white
+	color[0] = 3.2404542f  *X - 1.5371385f*Y - 0.4985314f *Z;
+	color[1] =-0.9692660f *X + 1.8760108f *Y + 0.0415560f*Z;
+	color[2] = 0.0556434f*X - 0.2040259f*Y + 1.0572252f  *Z;
 }
