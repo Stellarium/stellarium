@@ -239,6 +239,8 @@ SET(stellarium_lib_SRCS
      core/modules/ZoneData.hpp
      StelMainView.hpp
      StelMainView.cpp
+     StelSplashScreen.hpp
+     StelSplashScreen.cpp
      StelLogger.hpp
      StelLogger.cpp
      CLIProcessor.hpp

@@ -19,6 +19,7 @@
  */
 
 #include "StelMainView.hpp"
+#include "StelSplashScreen.hpp"
 #include "StelTranslator.hpp"
 #include "StelLogger.hpp"
 #include "StelFileMgr.hpp"
@@ -45,7 +46,6 @@
 #include <QFontDatabase>
 #include <QGuiApplication>
 #include <QSettings>
-#include <QSplashScreen>
 #include <QString>
 #include <QStringList>
 #include <QTextStream>
@@ -128,28 +128,6 @@ void clearCache()
 	cacheMgr->clear(); // Removes all items from the cache.
 }
 
-class SplashScreen : public QSplashScreen
-{
-    bool painted=false;
-    void paintEvent(QPaintEvent* e) override
-    {
-        QSplashScreen::paintEvent(e);
-        painted=true;
-    }
-public:
-    SplashScreen(QPixmap const& pixmap)
-        : QSplashScreen(pixmap)
-    {}
-    void ensureFirstPaint() const
-    {
-        while(!painted)
-        {
-            QThread::usleep(1000);
-            qApp->processEvents();
-        }
-    }
-};
-
 // Main stellarium procedure
 int main(int argc, char **argv)
 {
@@ -209,11 +187,7 @@ int main(int argc, char **argv)
 	// Init the file manager
 	StelFileMgr::init();
 
-	QPixmap pixmap(StelFileMgr::findFile("data/splash.png"));
-	SplashScreen splash(pixmap);
-	splash.show();
-	splash.showMessage(StelUtils::getApplicationVersion() , Qt::AlignLeft, Qt::white);
-	splash.ensureFirstPaint();
+	SplashScreen::present();
 
 	// Log command line arguments.
 	QString argStr;
@@ -409,7 +383,7 @@ int main(int argc, char **argv)
 
 	StelMainView mainWin(confSettings);
 	mainWin.show();
-	splash.finish(&mainWin);
+	SplashScreen::finish(&mainWin);
 	app.exec();
 	mainWin.deinit();
 
