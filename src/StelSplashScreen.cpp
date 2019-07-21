@@ -36,10 +36,10 @@ static QPixmap makePixmap()
 
 void SplashScreen::present()
 {
-	static SplashScreenWidget splash(makePixmap());
-	instance=&splash;
-	splash.show();
-	splash.ensureFirstPaint();
+	Q_ASSERT(!instance);
+	instance=new SplashScreenWidget(makePixmap());
+	instance->show();
+	instance->ensureFirstPaint();
 }
 
 void SplashScreen::showMessage(QString const& message)
@@ -52,6 +52,8 @@ void SplashScreen::finish(QWidget* mainWindow)
 {
 	Q_ASSERT(instance);
 	instance->finish(mainWindow);
+	delete instance;
+	instance=nullptr;
 }
 
 void SplashScreen::clearMessage()
