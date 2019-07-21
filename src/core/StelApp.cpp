@@ -440,7 +440,9 @@ void StelApp::init(QSettings* conf)
 	networkAccessManager->setCache(cache);	
 	connect(networkAccessManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(reportFileDownloadFinished(QNetworkReply*)));
 
-    SplashScreen::clearMessage();
+	// Proxy Initialisation
+	SplashScreen::showMessage(q_("Initializing network proxy..."));
+	setupNetworkProxy();
 
 	//create non-StelModule managers
 	propMgr = new StelPropertyMgr();
@@ -470,24 +472,24 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(hipsMgr);
 
 	// Init the solar system first
-	SplashScreen::showMessage(q_("Initializing Solar System model..."));
+	SplashScreen::showMessage(q_("Initializing Solar System objects..."));
 	SolarSystem* ssystem = new SolarSystem();
 	ssystem->init();
 	getModuleMgr().registerModule(ssystem);
 
 	// Init the nomenclature for Solar system bodies
-	SplashScreen::showMessage(q_("Initializing Solar System nomenclature..."));
+	SplashScreen::showMessage(q_("Initializing planetary nomenclature..."));
 	NomenclatureMgr* nomenclature = new NomenclatureMgr();
 	nomenclature->init();
 	getModuleMgr().registerModule(nomenclature);
 
-	// Load hipparcos stars & names
-	SplashScreen::showMessage(q_("Initializing Hipparcos stars & names..."));
+	// Load stars & their names
+	SplashScreen::showMessage(q_("Initializing stars..."));
 	StarMgr* hip_stars = new StarMgr();
 	hip_stars->init();
 	getModuleMgr().registerModule(hip_stars);
 
-	SplashScreen::showMessage(q_("Initializing Stellarium Core..."));
+	SplashScreen::showMessage(q_("Initializing core..."));
 	core->init();
 
 	// Init nebulas
@@ -575,7 +577,7 @@ void StelApp::init(QSettings* conf)
 	getModuleMgr().registerModule(skyMarkers);
 
 	// Init custom objects
-	SplashScreen::showMessage(q_("Initializing custom objects manager..."));
+	SplashScreen::showMessage(q_("Initializing custom objects..."));
 	CustomObjectMgr* custObj = new CustomObjectMgr();
 	custObj->init();
 	getModuleMgr().registerModule(custObj);
@@ -602,10 +604,7 @@ void StelApp::init(QSettings* conf)
 	// Enable viewport effect at startup if he set
 	setViewportEffect(confSettings->value("video/viewport_effect", "none").toString());
 
-	// Proxy Initialisation
-	SplashScreen::showMessage(q_("Initializing network proxy..."));
-	setupNetworkProxy();
-    SplashScreen::clearMessage();
+	SplashScreen::clearMessage();
 	updateI18n();
 
 	// Init actions.
@@ -669,7 +668,7 @@ void StelApp::initPlugIns()
 	{
 		if (i.loadAtStartup==false)
 			continue;
-		SplashScreen::showMessage(q_("Loading plugin \"%1\"").arg(i.info.displayedName));
+		SplashScreen::showMessage(QString("%1 \"%2\"...").arg(q_("Loading plugin"), q_(i.info.displayedName)));
 		StelModule* m = moduleMgr->loadPlugin(i.info.id);
 		if (m!=Q_NULLPTR)
 		{
@@ -679,7 +678,7 @@ void StelApp::initPlugIns()
 			m->init();
 		}
 	}
-    SplashScreen::clearMessage();
+	SplashScreen::clearMessage();
 }
 
 void StelApp::deinit()
