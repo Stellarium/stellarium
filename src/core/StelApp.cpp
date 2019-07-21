@@ -632,7 +632,7 @@ void StelApp::init(QSettings* conf)
 		}
 		else
 		{
-		SplashScreen::showMessage(q_("Initializing SPOUT sender..."));
+			SplashScreen::showMessage(q_("Initializing SPOUT sender..."));
 			// Create the SpoutSender object.
 			QString spoutName = qApp->property("spoutName").toString();
 			if(spoutName.isEmpty())
@@ -647,7 +647,7 @@ void StelApp::init(QSettings* conf)
 				spoutSender = Q_NULLPTR;
 				qApp->setProperty("spout", "");
 			}
-            SplashScreen::clearMessage();
+			SplashScreen::clearMessage();
 		}
 	}
 	else

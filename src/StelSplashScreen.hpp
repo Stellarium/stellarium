@@ -25,34 +25,35 @@
 
 class SplashScreen
 {
-    class SplashScreenWidget : public QSplashScreen
-    {
-        bool painted=false;
-        void paintEvent(QPaintEvent* e) override
-        {
-            QSplashScreen::paintEvent(e);
-            painted=true;
-        }
-    public:
-        SplashScreenWidget(QPixmap const& pixmap)
-            : QSplashScreen(pixmap)
-        {}
-        void ensureFirstPaint() const
-        {
-            while(!painted)
-            {
-                QThread::msleep(1);
-                qApp->processEvents();
-            }
-        }
-    };
+	class SplashScreenWidget : public QSplashScreen
+	{
+		bool painted=false;
+		void paintEvent(QPaintEvent* e) override
+		{
+			QSplashScreen::paintEvent(e);
+			painted=true;
+		}
+	public:
+		SplashScreenWidget(QPixmap const& pixmap)
+			: QSplashScreen(pixmap)
+		{}
+		void ensureFirstPaint() const
+		{
+			while(!painted)
+			{
+				QThread::msleep(1);
+				qApp->processEvents();
+			}
+		}
+	};
 
-    static SplashScreenWidget* instance;
+	static SplashScreenWidget* instance;
+
 public:
-    static void present();
-    static void finish(QWidget* mainWindow);
-    static void showMessage(QString const& message);
-    static void clearMessage();
+	static void present();
+	static void finish(QWidget* mainWindow);
+	static void showMessage(QString const& message);
+	static void clearMessage();
 };
 
 #endif
