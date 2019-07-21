@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-07-13 16:25+0700\n"
+"POT-Creation-Date: 2019-07-21 14:47+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2019\n"
 "Language-Team: Chinese (https://www.transifex.com/stellarium/teams/80998/zh/)\n"
@@ -33,7 +33,7 @@ msgid "custom marker"
 msgstr "自定义标识"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:87 src/core/modules/Asterism.cpp:219
+#: src/core/modules/CustomObject.cpp:87 src/core/modules/Asterism.cpp:211
 #: src/core/modules/Constellation.cpp:284
 #: src/core/modules/NomenclatureItem.cpp:787 src/core/modules/Nebula.cpp:278
 #: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:426
@@ -53,7 +53,7 @@ msgstr "类型"
 msgid "Marker"
 msgstr "标识"
 
-#: src/core/modules/Asterism.cpp:219
+#: src/core/modules/Asterism.cpp:211
 msgid "asterism"
 msgstr "星群"
 
@@ -65,7 +65,7 @@ msgstr "星群"
 #: src/core/modules/NebulaMgr.cpp:457 src/core/modules/SolarSystem.cpp:254
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:578 src/core/StelCore.cpp:260
+#: src/core/StelApp.cpp:611 src/core/StelCore.cpp:260
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:818
 msgid "Display Options"
@@ -1868,59 +1868,59 @@ msgstr "被照亮"
 msgid "Albedo"
 msgstr "反照率"
 
-#: src/core/modules/Planet.cpp:667
+#: src/core/modules/Planet.cpp:673
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr "娥眉月"
 
-#: src/core/modules/Planet.cpp:669
+#: src/core/modules/Planet.cpp:675
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "上弦月"
 
-#: src/core/modules/Planet.cpp:671
+#: src/core/modules/Planet.cpp:677
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr "盈凸月"
 
-#: src/core/modules/Planet.cpp:673
+#: src/core/modules/Planet.cpp:679
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "满月"
 
-#: src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:681
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr "亏凸月"
 
-#: src/core/modules/Planet.cpp:677
+#: src/core/modules/Planet.cpp:683
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr "下弦月"
 
-#: src/core/modules/Planet.cpp:679
+#: src/core/modules/Planet.cpp:685
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr "残月"
 
-#: src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:687
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "新月"
 
-#: src/core/modules/Planet.cpp:684
+#: src/core/modules/Planet.cpp:690
 msgid "Moon age"
 msgstr "月龄"
 
-#: src/core/modules/Planet.cpp:684
+#: src/core/modules/Planet.cpp:690
 msgid "days old"
 msgstr "日"
 
-#: src/core/modules/Planet.cpp:697
+#: src/core/modules/Planet.cpp:703
 msgid "Eclipse obscuration"
 msgstr "遮蔽率"
 
-#: src/core/modules/Planet.cpp:702
+#: src/core/modules/Planet.cpp:708
 msgid "Eclipse magnitude"
 msgstr "食分"
 
@@ -2102,13 +2102,141 @@ msgstr "数字巡天 (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "分层递进巡天 (实验性的)"
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:421
+msgid "Initializing textures..."
+msgstr ""
+
+#: src/core/StelApp.cpp:425
+msgid "Initializing network access..."
+msgstr ""
+
+#: src/core/StelApp.cpp:430
+msgid "Initializing network disk cache..."
+msgstr ""
+
+#: src/core/StelApp.cpp:444
+msgid "Initializing network proxy..."
+msgstr ""
+
+#: src/core/StelApp.cpp:460
+msgid "Initializing Object Database..."
+msgstr ""
+
+#: src/core/StelApp.cpp:465
+msgid "Initializing locales..."
+msgstr ""
+
+#: src/core/StelApp.cpp:469
+msgid "Initializing HiPS survey..."
+msgstr ""
+
+#: src/core/StelApp.cpp:475
+msgid "Initializing Solar System objects..."
+msgstr ""
+
+#: src/core/StelApp.cpp:481
+msgid "Initializing planetary nomenclature..."
+msgstr ""
+
+#: src/core/StelApp.cpp:487
+msgid "Initializing stars..."
+msgstr ""
+
+#: src/core/StelApp.cpp:492
+msgid "Initializing core..."
+msgstr ""
+
+#: src/core/StelApp.cpp:496
+msgid "Initializing deep-sky objects..."
+msgstr ""
+
+#: src/core/StelApp.cpp:502
+msgid "Initializing Milky Way..."
+msgstr ""
+
+#: src/core/StelApp.cpp:508
+msgid "Initializing zodiacal light..."
+msgstr ""
+
+#: src/core/StelApp.cpp:514
+msgid "Initializing sky image layer..."
+msgstr ""
+
+#: src/core/StelApp.cpp:520
+msgid "Initializing TOAST surveys..."
+msgstr ""
+
+#: src/core/StelApp.cpp:526
+msgid "Initializing audio..."
+msgstr ""
+
+#: src/core/StelApp.cpp:530
+msgid "Initializing video..."
+msgstr ""
+
+#: src/core/StelApp.cpp:536
+msgid "Initializing constellations..."
+msgstr ""
+
+#: src/core/StelApp.cpp:542
+msgid "Initializing asterisms..."
+msgstr ""
+
+#: src/core/StelApp.cpp:548
+msgid "Initializing landscape..."
+msgstr ""
+
+#: src/core/StelApp.cpp:553
+msgid "Initializing grid lines..."
+msgstr ""
+
+#: src/core/StelApp.cpp:559
+msgid "Initializing sporadic meteors..."
+msgstr ""
+
+#: src/core/StelApp.cpp:565
+msgid "Initializing user labels..."
+msgstr ""
+
+#: src/core/StelApp.cpp:570
+msgid "Initializing sky cultures..."
+msgstr ""
+
+#: src/core/StelApp.cpp:574
+msgid "Initializing user markers..."
+msgstr ""
+
+#: src/core/StelApp.cpp:580
+msgid "Initializing custom objects..."
+msgstr ""
+
+#: src/core/StelApp.cpp:586
+msgid "Initializing highlights..."
+msgstr ""
+
+#: src/core/StelApp.cpp:594
+msgid "Initializing scripting..."
+msgstr ""
+
+#: src/core/StelApp.cpp:599
+msgid "Initializing color scheme..."
+msgstr ""
+
+#: src/core/StelApp.cpp:611
 msgid "Night mode"
 msgstr "夜间模式"
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:635
+msgid "Initializing SPOUT sender..."
+msgstr ""
+
+#: src/core/StelApp.cpp:645
 msgid "Cannot create Spout sender. See log for details."
 msgstr "无法创建喷口发件人。 有关详细信息，请参阅日志。"
+
+#: src/core/StelApp.cpp:671
+msgid "Loading plugin"
+msgstr ""
 
 #: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
 #: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1314
@@ -3126,263 +3254,263 @@ msgid "Found"
 msgstr "已找到"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:301
+#: src/core/StelLocaleMgr.cpp:298
 msgctxt "solar time"
 msgid "LMST"
 msgstr "LMST"
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:307
+#: src/core/StelLocaleMgr.cpp:304
 msgctxt "solar time"
 msgid "LTST"
 msgstr "LTST"
 
-#: src/core/StelLocaleMgr.cpp:456
+#: src/core/StelLocaleMgr.cpp:453
 msgctxt "short day name"
 msgid "Mon"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:459
+#: src/core/StelLocaleMgr.cpp:456
 msgctxt "short day name"
 msgid "Tue"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:462
+#: src/core/StelLocaleMgr.cpp:459
 msgctxt "short day name"
 msgid "Wed"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:465
+#: src/core/StelLocaleMgr.cpp:462
 msgctxt "short day name"
 msgid "Thu"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:468
+#: src/core/StelLocaleMgr.cpp:465
 msgctxt "short day name"
 msgid "Fri"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:471
+#: src/core/StelLocaleMgr.cpp:468
 msgctxt "short day name"
 msgid "Sat"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:474
+#: src/core/StelLocaleMgr.cpp:471
 msgctxt "short day name"
 msgid "Sun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:486
+#: src/core/StelLocaleMgr.cpp:483
 msgctxt "long day name"
 msgid "Monday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:489
+#: src/core/StelLocaleMgr.cpp:486
 msgctxt "long day name"
 msgid "Tuesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:492
+#: src/core/StelLocaleMgr.cpp:489
 msgctxt "long day name"
 msgid "Wednesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:495
+#: src/core/StelLocaleMgr.cpp:492
 msgctxt "long day name"
 msgid "Thursday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:498
+#: src/core/StelLocaleMgr.cpp:495
 msgctxt "long day name"
 msgid "Friday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:501
+#: src/core/StelLocaleMgr.cpp:498
 msgctxt "long day name"
 msgid "Saturday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:504
+#: src/core/StelLocaleMgr.cpp:501
 msgctxt "long day name"
 msgid "Sunday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:516
+#: src/core/StelLocaleMgr.cpp:513
 msgctxt "short month name"
 msgid "Jan"
 msgstr "一月"
 
-#: src/core/StelLocaleMgr.cpp:519
+#: src/core/StelLocaleMgr.cpp:516
 msgctxt "short month name"
 msgid "Feb"
 msgstr "二月"
 
-#: src/core/StelLocaleMgr.cpp:522
+#: src/core/StelLocaleMgr.cpp:519
 msgctxt "short month name"
 msgid "Mar"
 msgstr "三月"
 
-#: src/core/StelLocaleMgr.cpp:525
+#: src/core/StelLocaleMgr.cpp:522
 msgctxt "short month name"
 msgid "Apr"
 msgstr "四月"
 
-#: src/core/StelLocaleMgr.cpp:528
+#: src/core/StelLocaleMgr.cpp:525
 msgctxt "short month name"
 msgid "May"
 msgstr "五月"
 
-#: src/core/StelLocaleMgr.cpp:531
+#: src/core/StelLocaleMgr.cpp:528
 msgctxt "short month name"
 msgid "Jun"
 msgstr "六月"
 
-#: src/core/StelLocaleMgr.cpp:534
+#: src/core/StelLocaleMgr.cpp:531
 msgctxt "short month name"
 msgid "Jul"
 msgstr "七月"
 
-#: src/core/StelLocaleMgr.cpp:537
+#: src/core/StelLocaleMgr.cpp:534
 msgctxt "short month name"
 msgid "Aug"
 msgstr "八月"
 
-#: src/core/StelLocaleMgr.cpp:540
+#: src/core/StelLocaleMgr.cpp:537
 msgctxt "short month name"
 msgid "Sep"
 msgstr "九月"
 
-#: src/core/StelLocaleMgr.cpp:543
+#: src/core/StelLocaleMgr.cpp:540
 msgctxt "short month name"
 msgid "Oct"
 msgstr "十月"
 
-#: src/core/StelLocaleMgr.cpp:546
+#: src/core/StelLocaleMgr.cpp:543
 msgctxt "short month name"
 msgid "Nov"
 msgstr "十一月"
 
-#: src/core/StelLocaleMgr.cpp:549
+#: src/core/StelLocaleMgr.cpp:546
 msgctxt "short month name"
 msgid "Dec"
 msgstr "十二月"
 
-#: src/core/StelLocaleMgr.cpp:561
+#: src/core/StelLocaleMgr.cpp:558
 msgctxt "long month name"
 msgid "January"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:561
+msgctxt "long month name"
+msgid "February"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:564
 msgctxt "long month name"
-msgid "February"
+msgid "March"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:567
 msgctxt "long month name"
-msgid "March"
+msgid "April"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:570
 msgctxt "long month name"
-msgid "April"
+msgid "May"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:573
 msgctxt "long month name"
-msgid "May"
+msgid "June"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:576
 msgctxt "long month name"
-msgid "June"
+msgid "July"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:579
 msgctxt "long month name"
-msgid "July"
+msgid "August"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:582
 msgctxt "long month name"
-msgid "August"
+msgid "September"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:585
 msgctxt "long month name"
-msgid "September"
+msgid "October"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:588
 msgctxt "long month name"
-msgid "October"
+msgid "November"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:591
 msgctxt "long month name"
-msgid "November"
-msgstr ""
-
-#: src/core/StelLocaleMgr.cpp:594
-msgctxt "long month name"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:606
+#: src/core/StelLocaleMgr.cpp:603
 msgctxt "genitive"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:609
+#: src/core/StelLocaleMgr.cpp:606
 msgctxt "genitive"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:612
+#: src/core/StelLocaleMgr.cpp:609
 msgctxt "genitive"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:615
+#: src/core/StelLocaleMgr.cpp:612
 msgctxt "genitive"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:618
+#: src/core/StelLocaleMgr.cpp:615
 msgctxt "genitive"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:621
+#: src/core/StelLocaleMgr.cpp:618
 msgctxt "genitive"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:624
+#: src/core/StelLocaleMgr.cpp:621
 msgctxt "genitive"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:627
+#: src/core/StelLocaleMgr.cpp:624
 msgctxt "genitive"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:630
+#: src/core/StelLocaleMgr.cpp:627
 msgctxt "genitive"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:633
+#: src/core/StelLocaleMgr.cpp:630
 msgctxt "genitive"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:636
+#: src/core/StelLocaleMgr.cpp:633
 msgctxt "genitive"
 msgid "November"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:639
+#: src/core/StelLocaleMgr.cpp:636
 msgctxt "genitive"
 msgid "December"
 msgstr ""
@@ -6409,579 +6537,584 @@ msgstr "有趣的变星"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:455
+msgid "Anutan"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:457
 msgid "Arabic"
 msgstr "阿拉伯"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Arabic Moon Stations"
 msgstr "阿拉伯月站系统"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Armintxe"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Aztec"
 msgstr "阿兹特克"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Belarusian"
 msgstr "白俄罗斯"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Boorong"
 msgstr "波荣"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Chinese"
 msgstr "中国"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Chinese Contemporary"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Chinese Medieval"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "Egyptian"
 msgstr "埃及"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Hawaiian Starlines"
 msgstr "夏威夷星空"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Inuit"
 msgstr "因纽特"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Indian Vedic"
 msgstr "印度吠陀"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Japanese Moon Stations"
 msgstr "日本二十八宿"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "Kamilaroi/Euahlayi"
 msgstr "卡米勒罗伊/尤阿拉伊"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Korean"
 msgstr "韩国"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "Dakota/Lakota/Nakota"
 msgstr "达科他/拉科塔/纳科塔"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Macedonian"
 msgstr "马其顿"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Maori"
 msgstr "毛利"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Maya"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Mongolian"
 msgstr "蒙古"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:497
+#: src/translations.h:499
 msgid "Lokono"
 msgstr "阿拉瓦克"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Navajo"
 msgstr "纳瓦霍"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Norse"
 msgstr "挪威"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Ojibwe"
 msgstr "欧及布威族"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:505
+#: src/translations.h:507
 msgid "Romanian"
 msgstr "罗马尼亚"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:507
+#: src/translations.h:509
 msgid "Sami"
 msgstr "萨米"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:509
+#: src/translations.h:511
 msgid "Sardinian"
 msgstr "撒丁"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Siberian"
 msgstr "西伯利亚"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Tukano"
 msgstr "图卡诺"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:515
+#: src/translations.h:517
 msgid "Tupi-Guarani"
 msgstr "图皮-瓜拉尼"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Tongan"
 msgstr "汤加"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Western"
 msgstr "西方"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Western (H.A.Rey)"
 msgstr "西方 (H.A.Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Western (O.Hlad)"
 msgstr "西方(O.Hlad)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Western (Sky & Telescope)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Northern Andes"
 msgstr "北安第斯"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Babylonian (MUL.APIN)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Babylonian (Seleucid)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture and landscape
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Armintxe Cave"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:538
+#: src/translations.h:540
 msgid "Guereins"
 msgstr "古尔瑞恩（Guereins，地名）"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Trees"
 msgstr "树木"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:542 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1551
+#: src/translations.h:544 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1551
 msgid "Moon"
 msgstr "月球"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Hurricane"
 msgstr "飓风"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Ocean"
 msgstr "海洋"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:548
+#: src/translations.h:550
 msgid "Garching"
 msgstr "慕尼黑"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:550 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1563
+#: src/translations.h:552 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1563
 msgid "Mars"
 msgstr "火星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:552 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1566
+#: src/translations.h:554 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1566
 msgid "Jupiter"
 msgstr "木星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:554 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1569
+#: src/translations.h:556 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1569
 msgid "Saturn"
 msgstr "土星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:556
+#: src/translations.h:558
 msgid "Uranus"
 msgstr "天王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:558
+#: src/translations.h:560
 msgid "Neptune"
 msgstr "海王星"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:560
+#: src/translations.h:562
 msgid "Geneva"
 msgstr "日内瓦"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:562
+#: src/translations.h:564
 msgid "Grossmugl"
 msgstr "大穆格尔"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:564
+#: src/translations.h:566
 msgid "Zero Horizon"
 msgstr "零地平线"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:566 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/translations.h:568 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1548
 msgid "Sun"
 msgstr "太阳"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Vienna Sterngarten"
 msgstr "维也纳斯滕加登"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Testscene"
 msgstr "实验场景"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:578
+#: src/translations.h:580
 msgid "Landscape Tour"
 msgstr "游览"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:580
+#: src/translations.h:582
 msgid "Partial Lunar Eclipse"
 msgstr "月偏食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:582
+#: src/translations.h:584
 msgid "Total Lunar Eclipse"
 msgstr "月全食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:584
+#: src/translations.h:586
 msgid "Screensaver"
 msgstr "屏幕保护程序"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:586
+#: src/translations.h:588
 msgid "Solar Eclipse 2009"
 msgstr "2009年日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:588
+#: src/translations.h:590
 msgid "Startup Script"
 msgstr "启动脚本"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:590
+#: src/translations.h:592
 msgid "Zodiac"
 msgstr "黄道"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:592
+#: src/translations.h:594
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "水星上的三次日出与日落"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:594
+#: src/translations.h:596
 msgid "Double eclipse from Deimos in 2017"
 msgstr "2017年从火卫二观测到的双重食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:596
+#: src/translations.h:598
 msgid "Double eclipse from Deimos in 2031"
 msgstr "2031年从火卫二观测到的双重食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:598
+#: src/translations.h:600
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr "奥林匹斯山2021年1月2日的日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:600
+#: src/translations.h:602
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "2048年火卫一掩地球和木星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:602
+#: src/translations.h:604
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "2027年火卫二上看到的三次凌日和两次日食"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:604
+#: src/translations.h:606
 msgid "Solar System Screensaver"
 msgstr "太阳系屏保"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:606
+#: src/translations.h:608
 msgid "Constellations Tour"
 msgstr "星座通览"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:608
+#: src/translations.h:610
 msgid "Western Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:610
+#: src/translations.h:612
 msgid "Sun from different planets"
 msgstr "从不同行星所见的太阳"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:612
+#: src/translations.h:614
 msgid "Earth best views from other bodies"
 msgstr "其他太阳系天体上看到的地球"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:614
+#: src/translations.h:616
 msgid "Transit of Venus"
 msgstr "金星凌日"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:616
+#: src/translations.h:618
 msgid "Sky Culture Tour"
 msgstr "星空文化之旅"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:618
+#: src/translations.h:620
 msgid "Earth Events from Mercury"
 msgstr "水星上看到的地球天象"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:620
+#: src/translations.h:622
 msgid "Earth Events from a floating city on Venus"
 msgstr "在金星上以漂浮城市形式模拟地球事件"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:622
+#: src/translations.h:624
 msgid "Earth Events from Mars"
 msgstr "火星上看到的地球天象"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:624
+#: src/translations.h:626
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "从火星观测地球和其它行星的大距和冲"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:626
+#: src/translations.h:628
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "在木卫四观测地球和火星的大距和凌日"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:628
+#: src/translations.h:630
 msgid "Tycho's Supernova"
 msgstr "SN 1572A"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:630
+#: src/translations.h:632
 msgid "Earth and other Planets from Ceres"
 msgstr "从谷神星观测地球和其它行星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:632
+#: src/translations.h:634
 msgid "Messier Objects Tour"
 msgstr "梅西耶天体之旅"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:634
+#: src/translations.h:636
 msgid "Binocular Highlights"
 msgstr "双筒望远镜精华"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:636
+#: src/translations.h:638
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20个有趣的裸眼双星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:638
+#: src/translations.h:640
 msgid "List of largest known stars"
 msgstr "已知最大恒星列表"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:640
+#: src/translations.h:642
 msgid "Herschel 400 Tour"
 msgstr "Herschel 400 之旅"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:642
+#: src/translations.h:644
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky：双筒望远镜里的深空天体"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:644
+#: src/translations.h:646
 msgid "The Jack Bennett Catalog"
 msgstr "杰克·贝内特目录"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:646
+#: src/translations.h:648
 msgid "Best objects in the New General Catalog"
 msgstr "新通用目录内的最佳天体"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:648
+#: src/translations.h:650
 msgid "Jupiter and triple shadow phenomena"
 msgstr "木星与卫星的三重影子现象"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:650
+#: src/translations.h:652
 msgid "Jupiter without Galilean satellites"
 msgstr "无伽利略卫星的木星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:652
+#: src/translations.h:654
 msgid "Skybox Tiles"
 msgstr "Skybox 贴面"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:654
+#: src/translations.h:656
 msgid "Occultations of bright stars by planets"
 msgstr "行星掩亮星"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:656
+#: src/translations.h:658
 msgid "Mutual occultations of planets"
 msgstr "行星互掩"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:658
+#: src/translations.h:660
 msgid "Planet Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:660
+#: src/translations.h:662
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:662
+#: src/translations.h:664
 msgid "Martian analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:664
+#: src/translations.h:666
 msgid "Saturnian analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:666
+#: src/translations.h:668
 msgid "Uranian analemma"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:672
+#: src/translations.h:674
 msgid "Look around each installed landscape."
 msgstr "搜索已安装地景"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:674
+#: src/translations.h:676
 msgid "Look at each installed sky culture."
 msgstr "逐一浏览已安装的星空文化。"
 
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "月偏食演示脚本"
 
-#: src/translations.h:676
+#: src/translations.h:678
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "月全食演示脚本"
 
-#: src/translations.h:677
+#: src/translations.h:679
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "随机天体演示"
 
-#: src/translations.h:678
+#: src/translations.h:680
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
 msgstr "2009年日全食演示（地点为孟加拉国兰格普，Rangpur）"
 
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "Script which runs automatically at startup"
 msgstr "在启动时自动运行的脚本"
 
-#: src/translations.h:680
+#: src/translations.h:682
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
 "celestial sphere over the course of a year."
 msgstr "黄道星座演示脚本。黄道星座是位于黄道带上，太阳在一年中会经过的一系列星座的统称。"
 
-#: src/translations.h:681
+#: src/translations.h:683
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
 msgstr "由于水星公转轨道与自转周期的巧合，在某些时候和地点，一水星日能出现三次太阳升落。"
 
-#: src/translations.h:682
+#: src/translations.h:684
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
 msgstr "就在火星掩食太阳之前，火卫一从火星后面赶上并先行遮挡太阳。这发生在2017年4月26日，位于天蝎座和人马座之间。"
 
-#: src/translations.h:683
+#: src/translations.h:685
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
 msgstr "就在火星掩食太阳之前，火卫一从火星后面赶上并先行遮挡太阳。这发生在2031年7月23日，位于金牛座和双子座之间。"
 
-#: src/translations.h:684
+#: src/translations.h:686
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr "2021年1月2日，从奥林帕斯山（Olympus Mons）上看到火卫一挡住太阳。"
 
-#: src/translations.h:685
+#: src/translations.h:687
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -6989,7 +7122,7 @@ msgid ""
 msgstr ""
 "从火星上看，火卫一时常遮掩地球或木星（掩星），但在一天之内掩到它们两个的情况就非常罕见了。这里是其中的一次，2048年 1月23日，按真实时间速度播放。"
 
-#: src/translations.h:686
+#: src/translations.h:688
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -7000,45 +7133,45 @@ msgid ""
 msgstr ""
 "火卫一运行在火星之前并穿过太阳表面，然后退行回来并再次部分地穿过太阳表面（仅在火卫二的南半球可见），然后当火卫一穿过火星和火卫二之间是火星会造成全日食。当火卫一穿过火星，到达火星的半影区是天空依旧是灰暗的，还要再过一会才会亮起来。"
 
-#: src/translations.h:687
+#: src/translations.h:689
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr "太阳系中各种事件（总共300种！）的屏幕保护程序，"
 
-#: src/translations.h:688
+#: src/translations.h:690
 msgid "A tour of the western constellations."
 msgstr "西方星座游览"
 
-#: src/translations.h:689
+#: src/translations.h:691
 msgid "A tour of the constellations of the selected sky culture."
 msgstr ""
 
-#: src/translations.h:690
+#: src/translations.h:692
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "从太阳系的各大行星（以及冥王星）观看太阳"
 
-#: src/translations.h:691
+#: src/translations.h:693
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr "21世纪中从其它太阳系天体观看地球的最佳角度"
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "金星凌日，2012年6月6日，澳大利亚悉尼"
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
 msgstr "演示第谷·布拉赫于1572年观测到的超新星爆发。需启用超新星插件。"
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
 msgstr "公元2000-3000年间从火星观测地球和其它行星的大距和冲"
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -7048,24 +7181,24 @@ msgstr ""
 "公元2000-3000年，木卫四上观察地球的大距和凌日。为什么选择木卫四？ 在4个伽利略卫星中，木卫四是唯一在木星辐射带以外的一个。 "
 "因此，如果人类殖民木星的卫星，木卫四将是一个。"
 
-#: src/translations.h:696
+#: src/translations.h:698
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr "2000-2200年谷神星上看地球和其它行星的大距和冲"
 
-#: src/translations.h:697
+#: src/translations.h:699
 msgid "A tour of Messier Objects"
 msgstr "游历梅西耶天体"
 
-#: src/translations.h:698
+#: src/translations.h:700
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
 "Gary Seronik."
 msgstr "用双筒望远镜观测方式来游历有趣天体。脚本数据取自加里施和尼的同名书刊。"
 
-#: src/translations.h:699
+#: src/translations.h:701
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -7074,15 +7207,15 @@ msgstr ""
 "此脚本有助你游历20组有趣的双星。列表由积里洛迪古斯搜集并发布于《天空和望远镜》杂志2014年9月刊，数据取自他的网站 "
 "http://www.astropix.com/doubles"
 
-#: src/translations.h:700
+#: src/translations.h:702
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "这个脚本帮助你游览已知最大的多个恒星。"
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "游历Herschel 400目录里的天体"
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -7090,13 +7223,13 @@ msgid ""
 msgstr ""
 "本·克罗韦尔创立了Binosky，一种双筒望远镜内的深空天体观测列表。在此脚本中，我们提供了其中31个这类天体，按升起顺序排列(2000.0)。"
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr "Jack Bennett南方深空天体目录（共152个天体）"
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -7104,14 +7237,14 @@ msgid ""
 msgstr ""
 "这个目录来自A.J.Crayon和 Steve Coe 的111个对象的列表，被亚利桑那州凤凰城的“仙人掌”天文学俱乐部的成员用来获得NGC最佳成就奖。"
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr "展示罕见事件的中期状态 - 1900年至2100年木星卫星的三重影子现象。所有事件都以动态时间给出。"
 
-#: src/translations.h:706
+#: src/translations.h:708
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -7121,220 +7254,220 @@ msgid ""
 msgstr ""
 "当四颗伽利略卫星同时不可见时，木星看上去似乎并没有卫星，因为卫星正在经过行星正对面（凌），正在行星后面（掩），或者正在行星的影子内（食）。这篇手稿证明了力学时制下1900至2100年内的这些罕见现象。"
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr "此脚本展示了一个有趣的现象-行星掩亮星（2000至2040年的）"
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr "此脚本展示了一个有趣且罕见的现象-行星互掩（0至2500年的）"
 
-#: src/translations.h:709
-msgid "A tour of the Solar System planets"
-msgstr ""
-
-#: src/translations.h:710
-msgid ""
-"A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Earth."
-msgstr ""
-
 #: src/translations.h:711
-msgid ""
-"A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Mars."
+msgid "A tour of the Solar System planets"
 msgstr ""
 
 #: src/translations.h:712
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Saturn."
+"the year on Earth."
 msgstr ""
 
 #: src/translations.h:713
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
+"the year on Mars."
+msgstr ""
+
+#: src/translations.h:714
+msgid ""
+"A demonstration of the analemma - the path of the Sun across the sky during "
+"the year on Saturn."
+msgstr ""
+
+#: src/translations.h:715
+msgid ""
+"A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr ""
 
-#: src/translations.h:717
+#: src/translations.h:719
 msgid "&Undo"
 msgstr "&撤销"
 
-#: src/translations.h:718
+#: src/translations.h:720
 msgid "&Redo"
 msgstr "&重做"
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid "Cu&t"
 msgstr "&剪切"
 
-#: src/translations.h:720
+#: src/translations.h:722
 msgid "&Copy"
 msgstr "&复制"
 
-#: src/translations.h:721
+#: src/translations.h:723
 msgid "&Paste"
 msgstr "&粘贴"
 
-#: src/translations.h:722 plugins/Oculars/src/ui_ocularDialog.h:1304
+#: src/translations.h:724 plugins/Oculars/src/ui_ocularDialog.h:1304
 #: plugins/Oculars/src/ui_ocularDialog.h:1313
 #: plugins/Oculars/src/ui_ocularDialog.h:1319
 #: plugins/Oculars/src/ui_ocularDialog.h:1340
 msgid "Delete"
 msgstr "删除"
 
-#: src/translations.h:723
+#: src/translations.h:725
 msgid "Select All"
 msgstr "全选"
 
-#: src/translations.h:724
+#: src/translations.h:726
 msgid "Look in:"
 msgstr "浏览:"
 
-#: src/translations.h:725
+#: src/translations.h:727
 msgid "Directory:"
 msgstr "目录："
 
-#: src/translations.h:726
+#: src/translations.h:728
 msgid "Folder"
 msgstr "文件夹"
 
-#: src/translations.h:727
+#: src/translations.h:729
 msgid "&Choose"
 msgstr "&选择"
 
-#: src/translations.h:728 src/ui_configurationDialog.h:1692
+#: src/translations.h:730 src/ui_configurationDialog.h:1692
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "取消"
 
-#: src/translations.h:729
+#: src/translations.h:731
 msgid "&Cancel"
 msgstr "取消"
 
-#: src/translations.h:730
+#: src/translations.h:732
 msgid "Files of type:"
 msgstr "文件类型："
 
-#: src/translations.h:731
+#: src/translations.h:733
 msgid "Date Modified"
 msgstr "修改日期"
 
-#: src/translations.h:732
+#: src/translations.h:734
 msgid "Directories"
 msgstr "目录"
 
-#: src/translations.h:733
+#: src/translations.h:735
 msgid "Computer"
 msgstr "计算机"
 
-#: src/translations.h:734
+#: src/translations.h:736
 msgid "&Open"
 msgstr "&打开"
 
-#: src/translations.h:735
+#: src/translations.h:737
 msgid "&Save"
 msgstr "保存(&S)"
 
-#: src/translations.h:736
+#: src/translations.h:738
 msgid "File &name:"
 msgstr "文件 &名:"
 
-#: src/translations.h:737
+#: src/translations.h:739
 msgid "Copy &Link Location"
 msgstr "复制链接位置"
 
-#: src/translations.h:738
+#: src/translations.h:740
 msgid "Abort"
 msgstr "取消"
 
-#: src/translations.h:739
+#: src/translations.h:741
 msgid "Ignore"
 msgstr "忽略"
 
-#: src/translations.h:740
+#: src/translations.h:742
 msgid "&Basic colors"
 msgstr "&简单颜色"
 
-#: src/translations.h:741
+#: src/translations.h:743
 msgid "&Pick Screen Color"
 msgstr "＆选择颜色"
 
-#: src/translations.h:742
+#: src/translations.h:744
 msgid "&Custom colors"
 msgstr "&自定义颜色"
 
-#: src/translations.h:743
+#: src/translations.h:745
 msgid "&Add to Custom Colors"
 msgstr "&添加到自定义颜色"
 
-#: src/translations.h:744
+#: src/translations.h:746
 msgid "Hu&e:"
 msgstr "色&调:"
 
-#: src/translations.h:745
+#: src/translations.h:747
 msgid "&Sat:"
 msgstr "&饱和度:"
 
-#: src/translations.h:746
+#: src/translations.h:748
 msgid "&Val:"
 msgstr "&明度:"
 
-#: src/translations.h:747
+#: src/translations.h:749
 msgid "&Red:"
 msgstr "&红:"
 
-#: src/translations.h:748
+#: src/translations.h:750
 msgid "&Green:"
 msgstr "&绿:"
 
-#: src/translations.h:749
+#: src/translations.h:751
 msgid "Bl&ue:"
 msgstr "蓝&:"
 
-#: src/translations.h:750
+#: src/translations.h:752
 msgid "Select Color"
 msgstr "选择颜色"
 
-#: src/translations.h:751
+#: src/translations.h:753
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "光标在%1, %2 按ESC取消"
 
-#: src/translations.h:752
+#: src/translations.h:754
 msgid "Back"
 msgstr "后退"
 
-#: src/translations.h:753
+#: src/translations.h:755
 msgid "Forward"
 msgstr "前进"
 
-#: src/translations.h:754
+#: src/translations.h:756
 msgid "Parent Directory"
 msgstr "上级目录"
 
-#: src/translations.h:755
+#: src/translations.h:757
 msgid "Create New Folder"
 msgstr "创建新文件夹"
 
-#: src/translations.h:756
+#: src/translations.h:758
 msgid "List View"
 msgstr "列表视图"
 
-#: src/translations.h:757
+#: src/translations.h:759
 msgid "Detail View"
 msgstr "详细视图"
 
-#: src/translations.h:758
+#: src/translations.h:760
 msgid "Recent Places"
 msgstr "最近的位置"
 
-#: src/translations.h:759
+#: src/translations.h:761
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -7343,23 +7476,23 @@ msgstr ""
 "%1 已经存在。\n"
 "想替换它吗?"
 
-#: src/translations.h:760
+#: src/translations.h:762
 msgid "&Yes"
 msgstr "是(&Y)"
 
-#: src/translations.h:761
+#: src/translations.h:763
 msgid "&No"
 msgstr "否(&N)"
 
-#: src/translations.h:762
+#: src/translations.h:764
 msgid "&Select All"
 msgstr "&全选"
 
-#: src/translations.h:763
+#: src/translations.h:765
 msgid "&Step up"
 msgstr "&增加"
 
-#: src/translations.h:764
+#: src/translations.h:766
 msgid "Step &down"
 msgstr "&减少"
 

@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-07-13 16:25+0700\n"
+"POT-Creation-Date: 2019-07-21 14:47+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Đinh Công Thắng <dinhthang1205@gmail.com>, 2018\n"
 "Language-Team: Vietnamese (https://www.transifex.com/stellarium/teams/80998/vi/)\n"
@@ -32,7 +32,7 @@ msgid "custom marker"
 msgstr "đánh dấu tùy chỉnh"
 
 #. TRANSLATORS: type of object
-#: src/core/modules/CustomObject.cpp:87 src/core/modules/Asterism.cpp:219
+#: src/core/modules/CustomObject.cpp:87 src/core/modules/Asterism.cpp:211
 #: src/core/modules/Constellation.cpp:284
 #: src/core/modules/NomenclatureItem.cpp:787 src/core/modules/Nebula.cpp:278
 #: src/core/modules/Nebula.cpp:280 src/core/modules/Planet.cpp:426
@@ -52,7 +52,7 @@ msgstr "Loại"
 msgid "Marker"
 msgstr "Đánh dấu"
 
-#: src/core/modules/Asterism.cpp:219
+#: src/core/modules/Asterism.cpp:211
 msgid "asterism"
 msgstr "nhóm sao"
 
@@ -64,7 +64,7 @@ msgstr "nhóm sao"
 #: src/core/modules/NebulaMgr.cpp:457 src/core/modules/SolarSystem.cpp:254
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:578 src/core/StelCore.cpp:260
+#: src/core/StelApp.cpp:611 src/core/StelCore.cpp:260
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:818
 msgid "Display Options"
@@ -1867,59 +1867,59 @@ msgstr ""
 msgid "Albedo"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:667
+#: src/core/modules/Planet.cpp:673
 msgctxt "Moon phase"
 msgid "Waxing Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:669
+#: src/core/modules/Planet.cpp:675
 msgctxt "Moon phase"
 msgid "First Quarter"
 msgstr "Trăng Thượng huyền"
 
-#: src/core/modules/Planet.cpp:671
+#: src/core/modules/Planet.cpp:677
 msgctxt "Moon phase"
 msgid "Waxing Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:673
+#: src/core/modules/Planet.cpp:679
 msgctxt "Moon phase"
 msgid "Full Moon"
 msgstr "Trăng tròn"
 
-#: src/core/modules/Planet.cpp:675
+#: src/core/modules/Planet.cpp:681
 msgctxt "Moon phase"
 msgid "Waning Gibbous"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:677
+#: src/core/modules/Planet.cpp:683
 msgctxt "Moon phase"
 msgid "Third Quarter"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:679
+#: src/core/modules/Planet.cpp:685
 msgctxt "Moon phase"
 msgid "Waning Crescent"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:681
+#: src/core/modules/Planet.cpp:687
 msgctxt "Moon phase"
 msgid "New Moon"
 msgstr "Trăng mới"
 
-#: src/core/modules/Planet.cpp:684
+#: src/core/modules/Planet.cpp:690
 msgid "Moon age"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:684
+#: src/core/modules/Planet.cpp:690
 msgid "days old"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:697
+#: src/core/modules/Planet.cpp:703
 msgid "Eclipse obscuration"
 msgstr ""
 
-#: src/core/modules/Planet.cpp:702
+#: src/core/modules/Planet.cpp:708
 msgid "Eclipse magnitude"
 msgstr ""
 
@@ -2101,12 +2101,140 @@ msgstr ""
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:578
+#: src/core/StelApp.cpp:421
+msgid "Initializing textures..."
+msgstr ""
+
+#: src/core/StelApp.cpp:425
+msgid "Initializing network access..."
+msgstr ""
+
+#: src/core/StelApp.cpp:430
+msgid "Initializing network disk cache..."
+msgstr ""
+
+#: src/core/StelApp.cpp:444
+msgid "Initializing network proxy..."
+msgstr ""
+
+#: src/core/StelApp.cpp:460
+msgid "Initializing Object Database..."
+msgstr ""
+
+#: src/core/StelApp.cpp:465
+msgid "Initializing locales..."
+msgstr ""
+
+#: src/core/StelApp.cpp:469
+msgid "Initializing HiPS survey..."
+msgstr ""
+
+#: src/core/StelApp.cpp:475
+msgid "Initializing Solar System objects..."
+msgstr ""
+
+#: src/core/StelApp.cpp:481
+msgid "Initializing planetary nomenclature..."
+msgstr ""
+
+#: src/core/StelApp.cpp:487
+msgid "Initializing stars..."
+msgstr ""
+
+#: src/core/StelApp.cpp:492
+msgid "Initializing core..."
+msgstr ""
+
+#: src/core/StelApp.cpp:496
+msgid "Initializing deep-sky objects..."
+msgstr ""
+
+#: src/core/StelApp.cpp:502
+msgid "Initializing Milky Way..."
+msgstr ""
+
+#: src/core/StelApp.cpp:508
+msgid "Initializing zodiacal light..."
+msgstr ""
+
+#: src/core/StelApp.cpp:514
+msgid "Initializing sky image layer..."
+msgstr ""
+
+#: src/core/StelApp.cpp:520
+msgid "Initializing TOAST surveys..."
+msgstr ""
+
+#: src/core/StelApp.cpp:526
+msgid "Initializing audio..."
+msgstr ""
+
+#: src/core/StelApp.cpp:530
+msgid "Initializing video..."
+msgstr ""
+
+#: src/core/StelApp.cpp:536
+msgid "Initializing constellations..."
+msgstr ""
+
+#: src/core/StelApp.cpp:542
+msgid "Initializing asterisms..."
+msgstr ""
+
+#: src/core/StelApp.cpp:548
+msgid "Initializing landscape..."
+msgstr ""
+
+#: src/core/StelApp.cpp:553
+msgid "Initializing grid lines..."
+msgstr ""
+
+#: src/core/StelApp.cpp:559
+msgid "Initializing sporadic meteors..."
+msgstr ""
+
+#: src/core/StelApp.cpp:565
+msgid "Initializing user labels..."
+msgstr ""
+
+#: src/core/StelApp.cpp:570
+msgid "Initializing sky cultures..."
+msgstr ""
+
+#: src/core/StelApp.cpp:574
+msgid "Initializing user markers..."
+msgstr ""
+
+#: src/core/StelApp.cpp:580
+msgid "Initializing custom objects..."
+msgstr ""
+
+#: src/core/StelApp.cpp:586
+msgid "Initializing highlights..."
+msgstr ""
+
+#: src/core/StelApp.cpp:594
+msgid "Initializing scripting..."
+msgstr ""
+
+#: src/core/StelApp.cpp:599
+msgid "Initializing color scheme..."
+msgstr ""
+
+#: src/core/StelApp.cpp:611
 msgid "Night mode"
 msgstr "Chế độ đêm"
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:635
+msgid "Initializing SPOUT sender..."
+msgstr ""
+
+#: src/core/StelApp.cpp:645
 msgid "Cannot create Spout sender. See log for details."
+msgstr ""
+
+#: src/core/StelApp.cpp:671
+msgid "Loading plugin"
 msgstr ""
 
 #: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
@@ -3161,263 +3289,263 @@ msgid "Found"
 msgstr "Được tìm thấy"
 
 #. TRANSLATORS: Local Mean Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:301
+#: src/core/StelLocaleMgr.cpp:298
 msgctxt "solar time"
 msgid "LMST"
 msgstr ""
 
 #. TRANSLATORS: Local True Solar Time. Please use abbreviation.
-#: src/core/StelLocaleMgr.cpp:307
+#: src/core/StelLocaleMgr.cpp:304
 msgctxt "solar time"
 msgid "LTST"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:456
+#: src/core/StelLocaleMgr.cpp:453
 msgctxt "short day name"
 msgid "Mon"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:459
+#: src/core/StelLocaleMgr.cpp:456
 msgctxt "short day name"
 msgid "Tue"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:462
+#: src/core/StelLocaleMgr.cpp:459
 msgctxt "short day name"
 msgid "Wed"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:465
+#: src/core/StelLocaleMgr.cpp:462
 msgctxt "short day name"
 msgid "Thu"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:468
+#: src/core/StelLocaleMgr.cpp:465
 msgctxt "short day name"
 msgid "Fri"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:471
+#: src/core/StelLocaleMgr.cpp:468
 msgctxt "short day name"
 msgid "Sat"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:474
+#: src/core/StelLocaleMgr.cpp:471
 msgctxt "short day name"
 msgid "Sun"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:486
+#: src/core/StelLocaleMgr.cpp:483
 msgctxt "long day name"
 msgid "Monday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:489
+#: src/core/StelLocaleMgr.cpp:486
 msgctxt "long day name"
 msgid "Tuesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:492
+#: src/core/StelLocaleMgr.cpp:489
 msgctxt "long day name"
 msgid "Wednesday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:495
+#: src/core/StelLocaleMgr.cpp:492
 msgctxt "long day name"
 msgid "Thursday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:498
+#: src/core/StelLocaleMgr.cpp:495
 msgctxt "long day name"
 msgid "Friday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:501
+#: src/core/StelLocaleMgr.cpp:498
 msgctxt "long day name"
 msgid "Saturday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:504
+#: src/core/StelLocaleMgr.cpp:501
 msgctxt "long day name"
 msgid "Sunday"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:516
+#: src/core/StelLocaleMgr.cpp:513
 msgctxt "short month name"
 msgid "Jan"
 msgstr "Tháng 1"
 
-#: src/core/StelLocaleMgr.cpp:519
+#: src/core/StelLocaleMgr.cpp:516
 msgctxt "short month name"
 msgid "Feb"
 msgstr "Tháng 2"
 
-#: src/core/StelLocaleMgr.cpp:522
+#: src/core/StelLocaleMgr.cpp:519
 msgctxt "short month name"
 msgid "Mar"
 msgstr "Tháng 3"
 
-#: src/core/StelLocaleMgr.cpp:525
+#: src/core/StelLocaleMgr.cpp:522
 msgctxt "short month name"
 msgid "Apr"
 msgstr "Tháng 4"
 
-#: src/core/StelLocaleMgr.cpp:528
+#: src/core/StelLocaleMgr.cpp:525
 msgctxt "short month name"
 msgid "May"
 msgstr "Tháng 5"
 
-#: src/core/StelLocaleMgr.cpp:531
+#: src/core/StelLocaleMgr.cpp:528
 msgctxt "short month name"
 msgid "Jun"
 msgstr "Tháng 6"
 
-#: src/core/StelLocaleMgr.cpp:534
+#: src/core/StelLocaleMgr.cpp:531
 msgctxt "short month name"
 msgid "Jul"
 msgstr "Tháng 7"
 
-#: src/core/StelLocaleMgr.cpp:537
+#: src/core/StelLocaleMgr.cpp:534
 msgctxt "short month name"
 msgid "Aug"
 msgstr "Tháng 8"
 
-#: src/core/StelLocaleMgr.cpp:540
+#: src/core/StelLocaleMgr.cpp:537
 msgctxt "short month name"
 msgid "Sep"
 msgstr "Tháng 9"
 
-#: src/core/StelLocaleMgr.cpp:543
+#: src/core/StelLocaleMgr.cpp:540
 msgctxt "short month name"
 msgid "Oct"
 msgstr "Tháng 10"
 
-#: src/core/StelLocaleMgr.cpp:546
+#: src/core/StelLocaleMgr.cpp:543
 msgctxt "short month name"
 msgid "Nov"
 msgstr "Tháng 11"
 
-#: src/core/StelLocaleMgr.cpp:549
+#: src/core/StelLocaleMgr.cpp:546
 msgctxt "short month name"
 msgid "Dec"
 msgstr "Tháng 12"
 
-#: src/core/StelLocaleMgr.cpp:561
+#: src/core/StelLocaleMgr.cpp:558
 msgctxt "long month name"
 msgid "January"
+msgstr ""
+
+#: src/core/StelLocaleMgr.cpp:561
+msgctxt "long month name"
+msgid "February"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:564
 msgctxt "long month name"
-msgid "February"
+msgid "March"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:567
 msgctxt "long month name"
-msgid "March"
+msgid "April"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:570
 msgctxt "long month name"
-msgid "April"
+msgid "May"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:573
 msgctxt "long month name"
-msgid "May"
+msgid "June"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:576
 msgctxt "long month name"
-msgid "June"
+msgid "July"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:579
 msgctxt "long month name"
-msgid "July"
+msgid "August"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:582
 msgctxt "long month name"
-msgid "August"
+msgid "September"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:585
 msgctxt "long month name"
-msgid "September"
+msgid "October"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:588
 msgctxt "long month name"
-msgid "October"
+msgid "November"
 msgstr ""
 
 #: src/core/StelLocaleMgr.cpp:591
 msgctxt "long month name"
-msgid "November"
-msgstr ""
-
-#: src/core/StelLocaleMgr.cpp:594
-msgctxt "long month name"
 msgid "December"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:606
+#: src/core/StelLocaleMgr.cpp:603
 msgctxt "genitive"
 msgid "January"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:609
+#: src/core/StelLocaleMgr.cpp:606
 msgctxt "genitive"
 msgid "February"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:612
+#: src/core/StelLocaleMgr.cpp:609
 msgctxt "genitive"
 msgid "March"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:615
+#: src/core/StelLocaleMgr.cpp:612
 msgctxt "genitive"
 msgid "April"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:618
+#: src/core/StelLocaleMgr.cpp:615
 msgctxt "genitive"
 msgid "May"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:621
+#: src/core/StelLocaleMgr.cpp:618
 msgctxt "genitive"
 msgid "June"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:624
+#: src/core/StelLocaleMgr.cpp:621
 msgctxt "genitive"
 msgid "July"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:627
+#: src/core/StelLocaleMgr.cpp:624
 msgctxt "genitive"
 msgid "August"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:630
+#: src/core/StelLocaleMgr.cpp:627
 msgctxt "genitive"
 msgid "September"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:633
+#: src/core/StelLocaleMgr.cpp:630
 msgctxt "genitive"
 msgid "October"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:636
+#: src/core/StelLocaleMgr.cpp:633
 msgctxt "genitive"
 msgid "November"
 msgstr ""
 
-#: src/core/StelLocaleMgr.cpp:639
+#: src/core/StelLocaleMgr.cpp:636
 msgctxt "genitive"
 msgid "December"
 msgstr ""
@@ -6463,408 +6591,413 @@ msgstr "Sao biến quang thú vị"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:455
+msgid "Anutan"
+msgstr ""
+
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:457
 msgid "Arabic"
 msgstr "Ả Rập"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:457
+#: src/translations.h:459
 msgid "Arabic Moon Stations"
 msgstr "Hệ thống chiêm tinh Ả-Râp"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:459
+#: src/translations.h:461
 msgid "Armintxe"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:461
+#: src/translations.h:463
 msgid "Aztec"
 msgstr "Người Aztec"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:463
+#: src/translations.h:465
 msgid "Belarusian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:465
+#: src/translations.h:467
 msgid "Boorong"
 msgstr "Boorong"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:467
+#: src/translations.h:469
 msgid "Chinese"
 msgstr "Trung Quốc"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:469
+#: src/translations.h:471
 msgid "Chinese Contemporary"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:471
+#: src/translations.h:473
 msgid "Chinese Medieval"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:473
+#: src/translations.h:475
 msgid "Egyptian"
 msgstr "Người Ai Cập"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:475
+#: src/translations.h:477
 msgid "Hawaiian Starlines"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:477
+#: src/translations.h:479
 msgid "Inuit"
 msgstr "Ngườ Inuit"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:479
+#: src/translations.h:481
 msgid "Indian Vedic"
 msgstr "Kinh Vệ Đà Ấn Độ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:481
+#: src/translations.h:483
 msgid "Japanese Moon Stations"
 msgstr "Hệ thống chiêm tinh Nhật Bản"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:483
+#: src/translations.h:485
 msgid "Kamilaroi/Euahlayi"
 msgstr "Kamilaroi/Euahlayi"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:485
+#: src/translations.h:487
 msgid "Korean"
 msgstr "Hàn Quốc"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:487
+#: src/translations.h:489
 msgid "Dakota/Lakota/Nakota"
 msgstr "Dakota/Lakota/Nakota"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:489
+#: src/translations.h:491
 msgid "Macedonian"
 msgstr "Macedonian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:491
+#: src/translations.h:493
 msgid "Maori"
 msgstr "Maori"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:493
+#: src/translations.h:495
 msgid "Maya"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:495
+#: src/translations.h:497
 msgid "Mongolian"
 msgstr "Mông Cổ"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:497
+#: src/translations.h:499
 msgid "Lokono"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:499
+#: src/translations.h:501
 msgid "Navajo"
 msgstr "Navajo"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:501
+#: src/translations.h:503
 msgid "Norse"
 msgstr "Na-Uy"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:503
+#: src/translations.h:505
 msgid "Ojibwe"
 msgstr "Ojibwe"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:505
+#: src/translations.h:507
 msgid "Romanian"
 msgstr "Rô-ma-ni"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:507
+#: src/translations.h:509
 msgid "Sami"
 msgstr "Sami"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:509
+#: src/translations.h:511
 msgid "Sardinian"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:511
+#: src/translations.h:513
 msgid "Siberian"
 msgstr "Siberian"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:513
+#: src/translations.h:515
 msgid "Tukano"
 msgstr "Tukano"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:515
+#: src/translations.h:517
 msgid "Tupi-Guarani"
 msgstr "Tupi-Guarani"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:517
+#: src/translations.h:519
 msgid "Tongan"
 msgstr "Tông-ga"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:519
+#: src/translations.h:521
 msgid "Western"
 msgstr "Phương Tây"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:521
+#: src/translations.h:523
 msgid "Western (H.A.Rey)"
 msgstr "Phương tây (H.A.Rey)"
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:523
+#: src/translations.h:525
 msgid "Western (O.Hlad)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:525
+#: src/translations.h:527
 msgid "Western (Sky & Telescope)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:527
+#: src/translations.h:529
 msgid "Northern Andes"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:529
+#: src/translations.h:531
 msgid "Babylonian (MUL.APIN)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture
-#: src/translations.h:531
+#: src/translations.h:533
 msgid "Babylonian (Seleucid)"
 msgstr ""
 
 #. TRANSLATORS: Name of the sky culture and landscape
-#: src/translations.h:533
+#: src/translations.h:535
 msgid "Armintxe Cave"
 msgstr ""
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:538
+#: src/translations.h:540
 msgid "Guereins"
 msgstr "Làng Guereins"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Trees"
 msgstr "Cây"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:542 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1551
+#: src/translations.h:544 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1551
 msgid "Moon"
 msgstr "Mặt trăng"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:544
+#: src/translations.h:546
 msgid "Hurricane"
 msgstr "Bão tố"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Ocean"
 msgstr "Đại dương"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:548
+#: src/translations.h:550
 msgid "Garching"
 msgstr "Garching"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:550 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1563
+#: src/translations.h:552 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1563
 msgid "Mars"
 msgstr "Hỏa tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:552 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1566
+#: src/translations.h:554 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1566
 msgid "Jupiter"
 msgstr "Mộc tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:554 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1569
+#: src/translations.h:556 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1569
 msgid "Saturn"
 msgstr "Thổ tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:556
+#: src/translations.h:558
 msgid "Uranus"
 msgstr "Thiên vương tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:558
+#: src/translations.h:560
 msgid "Neptune"
 msgstr "Hải vương tinh"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:560
+#: src/translations.h:562
 msgid "Geneva"
 msgstr "Geneva"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:562
+#: src/translations.h:564
 msgid "Grossmugl"
 msgstr "Grossmugl"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:564
+#: src/translations.h:566
 msgid "Zero Horizon"
 msgstr "Không có đường chân trời"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:566 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/translations.h:568 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1548
 msgid "Sun"
 msgstr "Mặt trời"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:571
+#: src/translations.h:573
 msgid "Vienna Sterngarten"
 msgstr "Vienna Sterngarten"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Testscene"
 msgstr "Testscene"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:578
+#: src/translations.h:580
 msgid "Landscape Tour"
 msgstr "Vòng quanh khung cảnh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:580
+#: src/translations.h:582
 msgid "Partial Lunar Eclipse"
 msgstr "Nguyệt thực một phần"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:582
+#: src/translations.h:584
 msgid "Total Lunar Eclipse"
 msgstr "Nguyệt thực toàn phần"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:584
+#: src/translations.h:586
 msgid "Screensaver"
 msgstr "Trình bảo vệ màn hình"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:586
+#: src/translations.h:588
 msgid "Solar Eclipse 2009"
 msgstr "Nhật thực 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:588
+#: src/translations.h:590
 msgid "Startup Script"
 msgstr "Lệnh khởi động"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:590
+#: src/translations.h:592
 msgid "Zodiac"
 msgstr "Hoàng đạo"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:592
+#: src/translations.h:594
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "Thủy Tinh ba lần mặt trời mọc và lặn"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:594
+#: src/translations.h:596
 msgid "Double eclipse from Deimos in 2017"
 msgstr "Che khuất đôi từ Deimos vào năm 2017"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:596
+#: src/translations.h:598
 msgid "Double eclipse from Deimos in 2031"
 msgstr "Che khuất đôi từ Deimos vào năm 2031"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:598
+#: src/translations.h:600
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:600
+#: src/translations.h:602
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "Sự che khuất của Trái đất và Mộc tinh năm 2048"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:602
+#: src/translations.h:604
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "3 lần vượt qua và 2 lần che khuất từ Deimos năm 2027"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:604
+#: src/translations.h:606
 msgid "Solar System Screensaver"
 msgstr "Sự kiện hệ mặt trời"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:606
+#: src/translations.h:608
 msgid "Constellations Tour"
 msgstr "Đường đi của chòm sao"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:608
+#: src/translations.h:610
 msgid "Western Constellations Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:610
+#: src/translations.h:612
 msgid "Sun from different planets"
 msgstr "Mặt trời từ những hành tinh khác nhau"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:612
+#: src/translations.h:614
 msgid "Earth best views from other bodies"
 msgstr "Quang cảnh trái đất đẹp nhất từ các vật thể khác"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:614
+#: src/translations.h:616
 msgid "Transit of Venus"
 msgstr "Sự vượt qua của Kim tinh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:616
+#: src/translations.h:618
 msgid "Sky Culture Tour"
 msgstr "Vòng quanh Văn hóa Bầu trời"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:618
+#: src/translations.h:620
 msgid "Earth Events from Mercury"
 msgstr "Sự kiện Trái đất từ Thủy tinh"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:620
+#: src/translations.h:622
 msgid "Earth Events from a floating city on Venus"
 msgstr "Sự kiện Trái đất từ một thành phố nổi trên Kim tinh"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:622
+#: src/translations.h:624
 msgid "Earth Events from Mars"
 msgstr "Sự kiện Trái đất từ Hỏa tinh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:624
+#: src/translations.h:626
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr ""
@@ -6872,136 +7005,136 @@ msgstr ""
 "Hỏa Tinh"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:626
+#: src/translations.h:628
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr ""
 "Ly giác lớn nhất và sự vượt qua của Trái Đất và Hỏa Tinh nhìn từ Callisto"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:628
+#: src/translations.h:630
 msgid "Tycho's Supernova"
 msgstr "Siêu tân tinh của Tycho"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:630
+#: src/translations.h:632
 msgid "Earth and other Planets from Ceres"
 msgstr "Trái Đất và các hành tinh khác nhìn từ Ceres"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:632
+#: src/translations.h:634
 msgid "Messier Objects Tour"
 msgstr "Hành trình các vật thể Messier"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:634
+#: src/translations.h:636
 msgid "Binocular Highlights"
 msgstr "Những điều nổi bật qua đôi mắt"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:636
+#: src/translations.h:638
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 Sao Đôi Mắt thường Vui Vẻ"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:638
+#: src/translations.h:640
 msgid "List of largest known stars"
 msgstr "Danh sách những ngôi sao lớn nhất đã biết"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:640
+#: src/translations.h:642
 msgid "Herschel 400 Tour"
 msgstr "Hành trình Herschel 400"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:642
+#: src/translations.h:644
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "Binosky: Những thiên thể xa cho ống nhòm"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:644
+#: src/translations.h:646
 msgid "The Jack Bennett Catalog"
 msgstr "Danh mục Jack Bennett"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:646
+#: src/translations.h:648
 msgid "Best objects in the New General Catalog"
 msgstr "Những vật thể tốt nhất trong Danh mục Chung Mới"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:648
+#: src/translations.h:650
 msgid "Jupiter and triple shadow phenomena"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:650
+#: src/translations.h:652
 msgid "Jupiter without Galilean satellites"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:652
+#: src/translations.h:654
 msgid "Skybox Tiles"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:654
+#: src/translations.h:656
 msgid "Occultations of bright stars by planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:656
+#: src/translations.h:658
 msgid "Mutual occultations of planets"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:658
+#: src/translations.h:660
 msgid "Planet Objects Tour"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:660
+#: src/translations.h:662
 msgid "Analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:662
+#: src/translations.h:664
 msgid "Martian analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:664
+#: src/translations.h:666
 msgid "Saturnian analemma"
 msgstr ""
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:666
+#: src/translations.h:668
 msgid "Uranian analemma"
 msgstr ""
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:672
+#: src/translations.h:674
 msgid "Look around each installed landscape."
 msgstr "Nhìn xung quanh mỗi phong cảnh được cài đặt"
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:674
+#: src/translations.h:676
 msgid "Look at each installed sky culture."
 msgstr "Nhìn mỗi nền văn hóa bầu trời được cài đặt"
 
-#: src/translations.h:675
+#: src/translations.h:677
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "Bài viết giải thích nguyệt thực một phần"
 
-#: src/translations.h:676
+#: src/translations.h:678
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "Bài viết giải thích nguyệt thực toàn phần"
 
-#: src/translations.h:677
+#: src/translations.h:679
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr ""
 "Một hành trình chậm, vô hạn của bầu trời, nhìn vào những đối tượng ngẫu "
 "nhiên."
 
-#: src/translations.h:678
+#: src/translations.h:680
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -7009,11 +7142,11 @@ msgstr ""
 "Bài viết giải thích nhật thực toàn phần đã diễn ra vào 2009 "
 "(location=Rangpur, Bangladesh)."
 
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "Script which runs automatically at startup"
 msgstr "Script chạy tự động khi khởi động"
 
-#: src/translations.h:680
+#: src/translations.h:682
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -7022,7 +7155,7 @@ msgstr ""
 "Lệnh này hiển thị các chòm sao Hoàng đọa. Nghĩa là các chòm sao nằm trên "
 "đường đi của mặt trời trên bầu trời trong suốt một năm"
 
-#: src/translations.h:681
+#: src/translations.h:683
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -7031,7 +7164,7 @@ msgstr ""
 "những thời điểm nhất định mà mặt trời sẽ mọc và lặn 2 lần khác nhau trong "
 "một ngày Thủy Tinh"
 
-#: src/translations.h:682
+#: src/translations.h:684
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -7040,7 +7173,7 @@ msgstr ""
 " khuất nó trước tiên. Diễn ra giữa chòm Bọ Cạp và Nhân Mã vào ngày "
 "26/4/2017."
 
-#: src/translations.h:683
+#: src/translations.h:685
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -7049,11 +7182,11 @@ msgstr ""
 "khuất nó đầu tiên. Hãy tìm nơi giữa chòm Kim Ngưu và Song Tử vào ngày "
 "23/7/2031."
 
-#: src/translations.h:684
+#: src/translations.h:686
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 
-#: src/translations.h:685
+#: src/translations.h:687
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -7063,7 +7196,7 @@ msgstr ""
 "Nhưng che khuất của cả hai trong cùng một ngày là rất hiếm. Đây là một loại "
 "diễn ra 2048/01/23. Trong tốc độ thực tế."
 
-#: src/translations.h:686
+#: src/translations.h:688
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -7079,35 +7212,35 @@ msgstr ""
 " từ sao Hỏa vẫn đang lu mờ và mờ đi trong cái bóng của sao Hỏa, chỉ sáng lên"
 " sau đó."
 
-#: src/translations.h:687
+#: src/translations.h:689
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr ""
 
-#: src/translations.h:688
+#: src/translations.h:690
 msgid "A tour of the western constellations."
 msgstr "Một hành trình của những chòm sao phía tây."
 
-#: src/translations.h:689
+#: src/translations.h:691
 msgid "A tour of the constellations of the selected sky culture."
 msgstr ""
 
-#: src/translations.h:690
+#: src/translations.h:692
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "Nhìn mặt trời từ những hành tinh lớn của hệ mặt trời và Pluto"
 
-#: src/translations.h:691
+#: src/translations.h:693
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "Hình ảnh tốt nhất của Trái đất từ các thành phần khác của hệ mặt trời trong "
 "thế kỷ 21."
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr "Sự vượt qua của Kim tinh được nhìn từ Sydney Australia ngày 6/6/2012"
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -7115,7 +7248,7 @@ msgstr ""
 "Ánh sáng lóe lên của siêu tân tinh được quan sát bới Tycho Brahe vào năm "
 "1572. Phần bổ trợ Siêu tân tinh đã được bật."
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -7123,7 +7256,7 @@ msgstr ""
 "Ly giác lớn nhất và sự đối lập của Trái Đất và các hành tinh khác nhìn từ "
 "Hỏa Tinh 2000-3000"
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -7135,17 +7268,17 @@ msgstr ""
 " ngoài vành đai bức xạ của Mộc Tinh. Do đó, nếu khi nào mà con người định cư"
 " trên mặt trăng của Mộc Tinh thì Callisto là cái được chọn."
 
-#: src/translations.h:696
+#: src/translations.h:698
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 
-#: src/translations.h:697
+#: src/translations.h:699
 msgid "A tour of Messier Objects"
 msgstr "Một hành trình của các vật thể Messier"
 
-#: src/translations.h:698
+#: src/translations.h:700
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -7154,7 +7287,7 @@ msgstr ""
 "Hành trình quanh đối tượng thú vị, trong đó có thể quan sát bằng ống nhòm. "
 "Các dữ liệu cho kịch bản được lấy từ cuốn sách cùng tên của Gary Seronik."
 
-#: src/translations.h:699
+#: src/translations.h:701
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -7165,17 +7298,17 @@ msgstr ""
 " Telescope 09/2014. Dữ liệu được lấy từ website của ông ấy, "
 "http://www.astropix.com/doubles/"
 
-#: src/translations.h:700
+#: src/translations.h:702
 msgid "This script helps you make an excursion around largest known stars."
 msgstr ""
 "Kịch bản này giúp bạn tạo một hành trình vòng quanh những ngôi sao lớn nhất "
 "đã được biết."
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "Một hành trình xung quanh những vật thể trong danh mục Herschel 400"
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -7185,27 +7318,27 @@ msgstr ""
 "Ống Nhòm. Trong kịch bản chúng tôi cho một danh sách của 31 vật thể này, "
 "được đưa ra theo Xích Kinh (2000.0)"
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
 msgstr ""
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
 "achievement award."
 msgstr ""
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
 "Dynamical Time."
 msgstr ""
 
-#: src/translations.h:706
+#: src/translations.h:708
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -7214,243 +7347,243 @@ msgid ""
 "from 1900 to 2100 in Dynamical Time."
 msgstr ""
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
 msgstr ""
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
 msgstr ""
 
-#: src/translations.h:709
-msgid "A tour of the Solar System planets"
-msgstr ""
-
-#: src/translations.h:710
-msgid ""
-"A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Earth."
-msgstr ""
-
 #: src/translations.h:711
-msgid ""
-"A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Mars."
+msgid "A tour of the Solar System planets"
 msgstr ""
 
 #: src/translations.h:712
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
-"the year on Saturn."
+"the year on Earth."
 msgstr ""
 
 #: src/translations.h:713
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
+"the year on Mars."
+msgstr ""
+
+#: src/translations.h:714
+msgid ""
+"A demonstration of the analemma - the path of the Sun across the sky during "
+"the year on Saturn."
+msgstr ""
+
+#: src/translations.h:715
+msgid ""
+"A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
 msgstr ""
 
-#: src/translations.h:717
+#: src/translations.h:719
 msgid "&Undo"
 msgstr "&Hoàn tác"
 
-#: src/translations.h:718
+#: src/translations.h:720
 msgid "&Redo"
 msgstr "&Làm lại"
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid "Cu&t"
 msgstr "Cắ&t"
 
-#: src/translations.h:720
+#: src/translations.h:722
 msgid "&Copy"
 msgstr "&Sao chép"
 
-#: src/translations.h:721
+#: src/translations.h:723
 msgid "&Paste"
 msgstr "&Dán"
 
-#: src/translations.h:722 plugins/Oculars/src/ui_ocularDialog.h:1304
+#: src/translations.h:724 plugins/Oculars/src/ui_ocularDialog.h:1304
 #: plugins/Oculars/src/ui_ocularDialog.h:1313
 #: plugins/Oculars/src/ui_ocularDialog.h:1319
 #: plugins/Oculars/src/ui_ocularDialog.h:1340
 msgid "Delete"
 msgstr "Xóa"
 
-#: src/translations.h:723
+#: src/translations.h:725
 msgid "Select All"
 msgstr "Chọn tất cả"
 
-#: src/translations.h:724
+#: src/translations.h:726
 msgid "Look in:"
 msgstr "Hãy nhìn vào:"
 
-#: src/translations.h:725
+#: src/translations.h:727
 msgid "Directory:"
 msgstr "Danh mục:"
 
-#: src/translations.h:726
+#: src/translations.h:728
 msgid "Folder"
 msgstr "Thư mục"
 
-#: src/translations.h:727
+#: src/translations.h:729
 msgid "&Choose"
 msgstr "&Chọn"
 
-#: src/translations.h:728 src/ui_configurationDialog.h:1692
+#: src/translations.h:730 src/ui_configurationDialog.h:1692
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "Hủy bỏ"
 
-#: src/translations.h:729
+#: src/translations.h:731
 msgid "&Cancel"
 msgstr ""
 
-#: src/translations.h:730
+#: src/translations.h:732
 msgid "Files of type:"
 msgstr "Loại files:"
 
-#: src/translations.h:731
+#: src/translations.h:733
 msgid "Date Modified"
 msgstr "Ngày sửa đổi"
 
-#: src/translations.h:732
+#: src/translations.h:734
 msgid "Directories"
 msgstr "Danh mục"
 
-#: src/translations.h:733
+#: src/translations.h:735
 msgid "Computer"
 msgstr "Máy tính"
 
-#: src/translations.h:734
+#: src/translations.h:736
 msgid "&Open"
 msgstr "&Mở"
 
-#: src/translations.h:735
+#: src/translations.h:737
 msgid "&Save"
 msgstr ""
 
-#: src/translations.h:736
+#: src/translations.h:738
 msgid "File &name:"
 msgstr "Tên &file"
 
-#: src/translations.h:737
+#: src/translations.h:739
 msgid "Copy &Link Location"
 msgstr "Vị trí sao chép và liên kết"
 
-#: src/translations.h:738
+#: src/translations.h:740
 msgid "Abort"
 msgstr "Hủy bỏ"
 
-#: src/translations.h:739
+#: src/translations.h:741
 msgid "Ignore"
 msgstr "Bỏ qua"
 
-#: src/translations.h:740
+#: src/translations.h:742
 msgid "&Basic colors"
 msgstr "&Màu cơ bản"
 
-#: src/translations.h:741
+#: src/translations.h:743
 msgid "&Pick Screen Color"
 msgstr ""
 
-#: src/translations.h:742
+#: src/translations.h:744
 msgid "&Custom colors"
 msgstr "&Màu tùy chỉnh"
 
-#: src/translations.h:743
+#: src/translations.h:745
 msgid "&Add to Custom Colors"
 msgstr "&Thêm màu tùy chỉnh"
 
-#: src/translations.h:744
+#: src/translations.h:746
 msgid "Hu&e:"
 msgstr ""
 
-#: src/translations.h:745
+#: src/translations.h:747
 msgid "&Sat:"
 msgstr ""
 
-#: src/translations.h:746
+#: src/translations.h:748
 msgid "&Val:"
 msgstr ""
 
-#: src/translations.h:747
+#: src/translations.h:749
 msgid "&Red:"
 msgstr "&Đỏ:"
 
-#: src/translations.h:748
+#: src/translations.h:750
 msgid "&Green:"
 msgstr "&Lục:"
 
-#: src/translations.h:749
+#: src/translations.h:751
 msgid "Bl&ue:"
 msgstr "&Lam:"
 
-#: src/translations.h:750
+#: src/translations.h:752
 msgid "Select Color"
 msgstr "Chọn màu"
 
-#: src/translations.h:751
+#: src/translations.h:753
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "Con trỏ ở %1, %2 Nhấn ESC để xóa"
 
-#: src/translations.h:752
+#: src/translations.h:754
 msgid "Back"
 msgstr ""
 
-#: src/translations.h:753
+#: src/translations.h:755
 msgid "Forward"
 msgstr ""
 
-#: src/translations.h:754
+#: src/translations.h:756
 msgid "Parent Directory"
 msgstr ""
 
-#: src/translations.h:755
+#: src/translations.h:757
 msgid "Create New Folder"
 msgstr ""
 
-#: src/translations.h:756
+#: src/translations.h:758
 msgid "List View"
 msgstr ""
 
-#: src/translations.h:757
+#: src/translations.h:759
 msgid "Detail View"
 msgstr ""
 
-#: src/translations.h:758
+#: src/translations.h:760
 msgid "Recent Places"
 msgstr ""
 
-#: src/translations.h:759
+#: src/translations.h:761
 #, qt-format
 msgid ""
 "%1 already exists.\n"
 "Do you want to replace it?"
 msgstr ""
 
-#: src/translations.h:760
+#: src/translations.h:762
 msgid "&Yes"
 msgstr ""
 
-#: src/translations.h:761
+#: src/translations.h:763
 msgid "&No"
 msgstr ""
 
-#: src/translations.h:762
+#: src/translations.h:764
 msgid "&Select All"
 msgstr ""
 
-#: src/translations.h:763
+#: src/translations.h:765
 msgid "&Step up"
 msgstr ""
 
-#: src/translations.h:764
+#: src/translations.h:766
 msgid "Step &down"
 msgstr ""
 
