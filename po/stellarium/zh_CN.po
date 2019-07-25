@@ -467,7 +467,7 @@ msgstr "米"
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:145
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:485
 msgid "Location"
-msgstr "所在位置"
+msgstr "所在地点"
 
 #. TRANSLATORS: Unit of measure for pressure - hectopascals
 #: src/core/modules/LandscapeMgr.cpp:923
@@ -2108,123 +2108,123 @@ msgstr "分层累进式巡测 (实验性的)"
 
 #: src/core/StelApp.cpp:421
 msgid "Initializing textures..."
-msgstr ""
+msgstr "正在初始化纹理..."
 
 #: src/core/StelApp.cpp:425
 msgid "Initializing network access..."
-msgstr ""
+msgstr "正在初始化网络连接..."
 
 #: src/core/StelApp.cpp:430
 msgid "Initializing network disk cache..."
-msgstr ""
+msgstr "正在初始化网络磁盘缓存..."
 
 #: src/core/StelApp.cpp:444
 msgid "Initializing network proxy..."
-msgstr ""
+msgstr "正在初始化网络代理..."
 
 #: src/core/StelApp.cpp:460
 msgid "Initializing Object Database..."
-msgstr ""
+msgstr "正在初始化天体数据库..."
 
 #: src/core/StelApp.cpp:465
 msgid "Initializing locales..."
-msgstr ""
+msgstr "正在初始化观测者地点..."
 
 #: src/core/StelApp.cpp:469
 msgid "Initializing HiPS survey..."
-msgstr ""
+msgstr "正在初始化分层累进巡测..."
 
 #: src/core/StelApp.cpp:475
 msgid "Initializing Solar System objects..."
-msgstr ""
+msgstr "正在初始化太阳系天体..."
 
 #: src/core/StelApp.cpp:481
 msgid "Initializing planetary nomenclature..."
-msgstr ""
+msgstr "正在初始化行星表面特征命名..."
 
 #: src/core/StelApp.cpp:487
 msgid "Initializing stars..."
-msgstr ""
+msgstr "正在初始化恒星数据..."
 
 #: src/core/StelApp.cpp:492
 msgid "Initializing core..."
-msgstr ""
+msgstr "正在初始化核心程序..."
 
 #: src/core/StelApp.cpp:496
 msgid "Initializing deep-sky objects..."
-msgstr ""
+msgstr "正在初始化深空天体..."
 
 #: src/core/StelApp.cpp:502
 msgid "Initializing Milky Way..."
-msgstr ""
+msgstr "正在初始化银河..."
 
 #: src/core/StelApp.cpp:508
 msgid "Initializing zodiacal light..."
-msgstr ""
+msgstr "正在初始化黄道光..."
 
 #: src/core/StelApp.cpp:514
 msgid "Initializing sky image layer..."
-msgstr ""
+msgstr "正在初始化天空图层..."
 
 #: src/core/StelApp.cpp:520
 msgid "Initializing TOAST surveys..."
-msgstr ""
+msgstr "正在初始化数字化巡天..."
 
 #: src/core/StelApp.cpp:526
 msgid "Initializing audio..."
-msgstr ""
+msgstr "正在初始化音频..."
 
 #: src/core/StelApp.cpp:530
 msgid "Initializing video..."
-msgstr ""
+msgstr "正在初始化视频..."
 
 #: src/core/StelApp.cpp:536
 msgid "Initializing constellations..."
-msgstr ""
+msgstr "正在初始化星座..."
 
 #: src/core/StelApp.cpp:542
 msgid "Initializing asterisms..."
-msgstr ""
+msgstr "正在初始化星群..."
 
 #: src/core/StelApp.cpp:548
 msgid "Initializing landscape..."
-msgstr ""
+msgstr "正在初始化地景..."
 
 #: src/core/StelApp.cpp:553
 msgid "Initializing grid lines..."
-msgstr ""
+msgstr "正在初始化坐标系网格线..."
 
 #: src/core/StelApp.cpp:559
 msgid "Initializing sporadic meteors..."
-msgstr ""
+msgstr "正在初始化流星..."
 
 #: src/core/StelApp.cpp:565
 msgid "Initializing user labels..."
-msgstr ""
+msgstr "正在初始化用户标签..."
 
 #: src/core/StelApp.cpp:570
 msgid "Initializing sky cultures..."
-msgstr ""
+msgstr "正在初始化星空文化..."
 
 #: src/core/StelApp.cpp:574
 msgid "Initializing user markers..."
-msgstr ""
+msgstr "正在初始化用户标识..."
 
 #: src/core/StelApp.cpp:580
 msgid "Initializing custom objects..."
-msgstr ""
+msgstr "初始化自定义天体"
 
 #: src/core/StelApp.cpp:586
 msgid "Initializing highlights..."
-msgstr ""
+msgstr "正在初始化高亮标识..."
 
 #: src/core/StelApp.cpp:594
 msgid "Initializing scripting..."
-msgstr ""
+msgstr "正在初始化脚本..."
 
 #: src/core/StelApp.cpp:599
 msgid "Initializing color scheme..."
-msgstr ""
+msgstr "正在初始化配色方案..."
 
 #: src/core/StelApp.cpp:611
 msgid "Night mode"
@@ -2232,7 +2232,7 @@ msgstr "夜间模式"
 
 #: src/core/StelApp.cpp:635
 msgid "Initializing SPOUT sender..."
-msgstr ""
+msgstr "正在初始化喷口发送器..,"
 
 #: src/core/StelApp.cpp:645
 msgid "Cannot create Spout sender. See log for details."
@@ -2240,7 +2240,7 @@ msgstr "无法创建喷口发送器 。 有关详细信息，请参阅日志。"
 
 #: src/core/StelApp.cpp:671
 msgid "Loading plugin"
-msgstr ""
+msgstr "正在加载插件"
 
 #: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
 #: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1314
@@ -3845,7 +3845,7 @@ msgstr "24小时制"
 #: plugins/Oculars/src/Oculars.cpp:2410
 #: plugins/Observability/src/Observability.cpp:190
 msgid "None"
-msgstr "无"
+msgstr "不显示"
 
 #: src/gui/ConfigurationDialog.cpp:1714
 msgid "5/6/5 bits"
@@ -5528,7 +5528,7 @@ msgstr "原生名称"
 
 #: src/gui/BookmarksDialog.cpp:116
 msgid "Location of observer"
-msgstr "观测者位置"
+msgstr "观测者地点"
 
 #: src/gui/BookmarksDialog.cpp:177
 msgid "Unnamed star"
@@ -6556,7 +6556,7 @@ msgstr "有趣的变星"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:455
 msgid "Anutan"
-msgstr ""
+msgstr "阿努塔"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:457
@@ -8837,7 +8837,7 @@ msgstr "从网络定位"
 
 #: src/ui_locationDialogGui.h:504
 msgid "Use current location as default"
-msgstr "使用当前地点为默认地点"
+msgstr "使用当前地点为默认观测地点"
 
 #: src/ui_locationDialogGui.h:505
 msgid "Elevation:"
@@ -9112,7 +9112,7 @@ msgstr "人眼动态视觉调适"
 msgid ""
 "Use light pollution data from locations database and ignore settings for "
 "light pollution below"
-msgstr "使用位置数据库中的光污染数据，并忽略以下的光污染设置"
+msgstr "使用地点数据库中的光污染数据，并忽略以下的光污染设置"
 
 #: src/ui_viewDialog.h:2528
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:447
@@ -10113,7 +10113,7 @@ msgstr "完整显示"
 
 #: src/ui_configurationDialog.h:1563
 msgid "Display no information"
-msgstr "不要显示信息"
+msgstr "不显示信息"
 
 #: src/ui_configurationDialog.h:1567
 msgid "Display user settings information"
@@ -11191,7 +11191,7 @@ msgstr "导出书签"
 
 #: src/ui_bookmarksDialog.h:218
 msgid "Clear the highlights"
-msgstr "清除标记"
+msgstr "清除高亮标识"
 
 #: src/ui_bookmarksDialog.h:219
 msgid "Highlight bookmarks"
@@ -13473,11 +13473,11 @@ msgstr "轨道"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:824
 msgid "Do not update (or remove on update) the selected satellite(s)"
-msgstr "不要更新（或更新时删除）已选择的卫星"
+msgstr "不更新（或更新时删除）已选择的卫星"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:826
 msgid "Do not update"
-msgstr "不要更新"
+msgstr "不更新"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:827
 #: plugins/Scenery3d/src/ui_storedViewDialog.h:219
@@ -14456,7 +14456,7 @@ msgstr "这是一种先进的数码设置环能将一个普通(如道布森式)�
 msgid ""
 "Just don't forget to set it to Meade compatibility mode and set the baud "
 "rate to 9600B"
-msgstr "请不要忘记将其设置为Mead兼容模式，并将波特率设置为9600B"
+msgstr "请别忘记将其设置为Mead兼容模式，并将波特率设置为9600B"
 
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:496
 msgid ""
@@ -14987,7 +14987,7 @@ msgstr "效果"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:458
 msgid "Setting landscape sets location"
-msgstr "设置地景时转到与之关联的位置"
+msgstr "设置地景时转到与之关联的观测地"
 
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:469
 msgid "Zoom duration:"
@@ -16667,7 +16667,7 @@ msgstr "史墨西奥（Smertrios ）是高卢的战神"
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
-msgstr "Intercrus拉丁文中意味着<em>两腿之间</em>，与大熊座星体位置相关。"
+msgstr "Intercrus拉丁文中意味着<em>两腿之间</em>，与大熊座恒星位置相关。"
 
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
@@ -18587,7 +18587,7 @@ msgstr "切换调试信息"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:331
 msgid "Toggle location text"
-msgstr "切换位置文本"
+msgstr "切换地点文本"
 
 #: plugins/Scenery3d/src/Scenery3d.cpp:332
 msgid "Toggle torchlight"
@@ -19109,11 +19109,11 @@ msgstr "显示月球当前的赤纬线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:321
 msgid "Show Vertical for Geographic Location 1"
-msgstr "显示地理位置1的方位线"
+msgstr "显示地点1的方位线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:322
 msgid "Show Vertical for Geographic Location 2"
-msgstr "显示地理位置2的方位线"
+msgstr "显示地点2的方位线"
 
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:323
 msgid "Show Vertical for Custom Azimuth 1"
@@ -19253,7 +19253,7 @@ msgid ""
 "The directions are computed based on spherical trigonometry on a spherical "
 "Earth."
 msgstr ""
-"某些宗教，尤其是伊斯兰教，坚持朝一个特定地点祈祷。两个位置的方位线可被显示。默认位置是麦加( "
+"某些宗教，尤其是伊斯兰教，坚持朝一个特定地点祈祷。两个地点的方位线可被显示。默认地点是麦加( "
 "Mecca)的天房(Kaaba)和耶路撒冷(Jerusalem)。方向是在球面地球上, 根据球面三角法计算了的。"
 
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:170
@@ -19344,16 +19344,16 @@ msgstr "所选天体的时角线"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:600
 msgid "Geographic Location 1"
-msgstr "地理位置1的方位线"
+msgstr "地点1的方位线"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:602
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:608
 msgid "Enter a label (location name) for this line"
-msgstr "为此线输入标签（位置名称）"
+msgstr "为此线输入标签（地点名称）"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:606
 msgid "Geographic Location 2"
-msgstr "地理位置2的方位线"
+msgstr "地点2的方位线"
 
 #: plugins/ArchaeoLines/src/ui_archaeoLinesDialog.h:612
 msgid "Custom Azimuth 1"

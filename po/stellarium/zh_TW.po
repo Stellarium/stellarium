@@ -2103,123 +2103,123 @@ msgstr "切換階層式累進巡測 (HiPS 實驗性)"
 
 #: src/core/StelApp.cpp:421
 msgid "Initializing textures..."
-msgstr ""
+msgstr "紋理初始化中..."
 
 #: src/core/StelApp.cpp:425
 msgid "Initializing network access..."
-msgstr ""
+msgstr "網路連接初始化中..."
 
 #: src/core/StelApp.cpp:430
 msgid "Initializing network disk cache..."
-msgstr ""
+msgstr "網路硬碟快取初始化中..."
 
 #: src/core/StelApp.cpp:444
 msgid "Initializing network proxy..."
-msgstr ""
+msgstr "網路代理初始化中..."
 
 #: src/core/StelApp.cpp:460
 msgid "Initializing Object Database..."
-msgstr ""
+msgstr "天體資料庫初始化中..."
 
 #: src/core/StelApp.cpp:465
 msgid "Initializing locales..."
-msgstr ""
+msgstr "語言環境初始化中..."
 
 #: src/core/StelApp.cpp:469
 msgid "Initializing HiPS survey..."
-msgstr ""
+msgstr "HiPS 巡測資料初始化中..."
 
 #: src/core/StelApp.cpp:475
 msgid "Initializing Solar System objects..."
-msgstr ""
+msgstr "太陽系天體資料初始化中..."
 
 #: src/core/StelApp.cpp:481
 msgid "Initializing planetary nomenclature..."
-msgstr ""
+msgstr "行星命名資料初始化中..."
 
 #: src/core/StelApp.cpp:487
 msgid "Initializing stars..."
-msgstr ""
+msgstr "恆星資料初始化中..."
 
 #: src/core/StelApp.cpp:492
 msgid "Initializing core..."
-msgstr ""
+msgstr "核心初始化中..."
 
 #: src/core/StelApp.cpp:496
 msgid "Initializing deep-sky objects..."
-msgstr ""
+msgstr "深空天體資料初始化中..."
 
 #: src/core/StelApp.cpp:502
 msgid "Initializing Milky Way..."
-msgstr ""
+msgstr "銀河系資料初始化中..."
 
 #: src/core/StelApp.cpp:508
 msgid "Initializing zodiacal light..."
-msgstr ""
+msgstr "黃道光資料初始化中..."
 
 #: src/core/StelApp.cpp:514
 msgid "Initializing sky image layer..."
-msgstr ""
+msgstr "星空影像層初始化中..."
 
 #: src/core/StelApp.cpp:520
 msgid "Initializing TOAST surveys..."
-msgstr ""
+msgstr "TOAST 巡測資料初始化中..."
 
 #: src/core/StelApp.cpp:526
 msgid "Initializing audio..."
-msgstr ""
+msgstr "音訊初始化中..."
 
 #: src/core/StelApp.cpp:530
 msgid "Initializing video..."
-msgstr ""
+msgstr "畫面初始化中..."
 
 #: src/core/StelApp.cpp:536
 msgid "Initializing constellations..."
-msgstr ""
+msgstr "星座資料初始化中..."
 
 #: src/core/StelApp.cpp:542
 msgid "Initializing asterisms..."
-msgstr ""
+msgstr "星群資料初始化中..."
 
 #: src/core/StelApp.cpp:548
 msgid "Initializing landscape..."
-msgstr ""
+msgstr "地景資料初始化中..."
 
 #: src/core/StelApp.cpp:553
 msgid "Initializing grid lines..."
-msgstr ""
+msgstr "格線資料初始化中..."
 
 #: src/core/StelApp.cpp:559
 msgid "Initializing sporadic meteors..."
-msgstr ""
+msgstr "偶發流星資料初始化中..."
 
 #: src/core/StelApp.cpp:565
 msgid "Initializing user labels..."
-msgstr ""
+msgstr "使用者標籤初始化中..."
 
 #: src/core/StelApp.cpp:570
 msgid "Initializing sky cultures..."
-msgstr ""
+msgstr "星空述語初始化中..."
 
 #: src/core/StelApp.cpp:574
 msgid "Initializing user markers..."
-msgstr ""
+msgstr "使用者標記初始化中..."
 
 #: src/core/StelApp.cpp:580
 msgid "Initializing custom objects..."
-msgstr ""
+msgstr "自訂天體資料初始化中..."
 
 #: src/core/StelApp.cpp:586
 msgid "Initializing highlights..."
-msgstr ""
+msgstr "突顯標注初始化中..."
 
 #: src/core/StelApp.cpp:594
 msgid "Initializing scripting..."
-msgstr ""
+msgstr "腳本資料初始化中..."
 
 #: src/core/StelApp.cpp:599
 msgid "Initializing color scheme..."
-msgstr ""
+msgstr "配色資料初始化中..."
 
 #: src/core/StelApp.cpp:611
 msgid "Night mode"
@@ -2227,15 +2227,15 @@ msgstr "夜視模式"
 
 #: src/core/StelApp.cpp:635
 msgid "Initializing SPOUT sender..."
-msgstr ""
+msgstr "SPOUT 發送器初始化中..."
 
 #: src/core/StelApp.cpp:645
 msgid "Cannot create Spout sender. See log for details."
-msgstr "無法建立Spout發報機，詳見記錄檔。"
+msgstr "無法建立Spout發送器，詳見記錄檔。"
 
 #: src/core/StelApp.cpp:671
 msgid "Loading plugin"
-msgstr ""
+msgstr "載入外掛"
 
 #: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
 #: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1314
@@ -9066,7 +9066,7 @@ msgstr "閃爍:"
 
 #: src/ui_viewDialog.h:2511 src/ui_viewDialog.h:2591 src/ui_viewDialog.h:2698
 msgid "Labels and Markers"
-msgstr "名稱與標記"
+msgstr "標籤與標記"
 
 #: src/ui_viewDialog.h:2512
 msgid "Use additional names of stars"
@@ -11185,11 +11185,11 @@ msgstr "匯出書籤"
 
 #: src/ui_bookmarksDialog.h:218
 msgid "Clear the highlights"
-msgstr "清空標示"
+msgstr "清空突顯標注"
 
 #: src/ui_bookmarksDialog.h:219
 msgid "Highlight bookmarks"
-msgstr "標示書籤"
+msgstr "突顯標注書籤"
 
 #: src/ui_dsoColorsDialog.h:536 src/ui_orbitColorsDialog.h:390
 msgid "Color settings"
