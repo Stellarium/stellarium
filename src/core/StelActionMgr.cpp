@@ -55,16 +55,16 @@ StelAction::StelAction(const QString& actionId,
 	setObjectName(actionId);
 	// Check the global conf for custom shortcuts.
 	QSettings* conf = StelApp::getInstance().getSettings();
-	QString confShortcut = conf->value("shortcuts/" + actionId).toString();
-	if (!confShortcut.isEmpty())
+	QString cfgOpt = "shortcuts/" + actionId;
+	if (conf->contains(cfgOpt)) // Check existence of shortcut to allow removing shortcuts
 	{
-		QStringList shortcuts = confShortcut.split(" ");
+		QStringList shortcuts = conf->value(cfgOpt).toString().split(" ");
 		if (shortcuts.size() > 2)
 			qWarning() << actionId << ": does not support more than two shortcuts per action";
 		setShortcut(shortcuts[0]);
 		if (shortcuts.size() > 1)
 			setAltShortcut(shortcuts[1]);
-	}
+	}	
 #ifndef USE_QUICKVIEW
 	QWidget* mainView = &StelMainView::getInstance();
 	qAction = new QAction(this);
@@ -274,12 +274,14 @@ void StelActionMgr::saveShortcuts()
 	conf->remove("");
 	for (auto* action : findChildren<StelAction*>())
 	{
-		if (	action->keySequence == action->defaultKeySequence &&
-				action->altKeySequence == action->defaultAltKeySequence)
+		if (action->keySequence == action->defaultKeySequence &&
+		    action->altKeySequence == action->defaultAltKeySequence)
 			continue;
 		QString seq = action->keySequence.toString().replace(" ", "");
 		if (action->altKeySequence != action->defaultAltKeySequence)
 			seq += " " + action->altKeySequence.toString().replace(" ", "");
+		if (seq.isEmpty()) // Let's allow remove shortcuts
+			seq = "\"\"";
 		conf->setValue(action->objectName(), seq);
 	}
 	conf->endGroup();
