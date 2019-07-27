@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.0.0)
 MESSAGE(STATUS "Found CMake ${CMAKE_VERSION}")
 
 IF(POLICY CMP0054)
@@ -369,6 +369,8 @@ ADD_PLUGIN(Pulsars 1)
 ADD_PLUGIN(Quasars 1)
 IF(ENABLE_SCRIPTING)
      ADD_PLUGIN(RemoteControl 1)
+ELSE()
+     ADD_PLUGIN(RemoteControl 0)
 ENDIF()
 ADD_PLUGIN(RemoteSync 1)
 ADD_PLUGIN(Satellites 1)
@@ -381,7 +383,6 @@ ADD_PLUGIN(TelescopeControl 1)
 ########## Static plugins need to define includes and libraries
 ########## for the compilation of Stellarium itself
 
-
 # Custom target used to manage dependencies of stellarium -> Static plugins
 # It is important that static plugins are compiled before stellarium main executable is linked
 ADD_CUSTOM_TARGET(AllStaticPlugins ALL)
@@ -391,9 +392,9 @@ SET_TARGET_PROPERTIES(AllStaticPlugins PROPERTIES FOLDER "plugins")
 FIND_PACKAGE(Qt5Core REQUIRED)
 GET_TARGET_PROPERTY(QMAKE_LOCATION Qt5::qmake LOCATION)
 IF(${Qt5Core_VERSION} VERSION_LESS MINIMAL_QT_VERSION)
-     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version \"${Qt5Core_VERSION}\", required is \"${MINIMAL_QT_VERSION}\")")
+     MESSAGE(FATAL_ERROR "Found Qt5: ${QMAKE_LOCATION} (found unsuitable version ${Qt5Core_VERSION}, required is ${MINIMAL_QT_VERSION})")
 ELSE()
-     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version \"${Qt5Core_VERSION}\")")
+     MESSAGE(STATUS "Found Qt5: ${QMAKE_LOCATION} (found suitable version ${Qt5Core_VERSION})")
 ENDIF()
 FIND_PACKAGE(Qt5Concurrent REQUIRED)
 FIND_PACKAGE(Qt5Gui REQUIRED)
@@ -490,12 +491,12 @@ IF(ENABLE_GPS)
           IF(GPS_FOUND)
                IF(${GPS_VERSION_STRING} VERSION_LESS MINIMAL_GPS_API_VERSION)
                     SET(ENABLE_LIBGPS 0)
-                    MESSAGE(STATUS "GPS: found GPS library at ${GPS_LIBRARY} (found unsuitable GPSD API version \"${GPS_VERSION_STRING}\", required is \"${MINIMAL_GPS_API_VERSION}\")")
+                    MESSAGE(STATUS "GPS: found GPS library at ${GPS_LIBRARY} (found unsuitable GPSD API version ${GPS_VERSION_STRING}, required is ${MINIMAL_GPS_API_VERSION})")
                     MESSAGE(STATUS "GPS: GPSD query disabled!")
                ELSE()
                     SET(ENABLE_LIBGPS 1)
                     ADD_DEFINITIONS(-DENABLE_LIBGPS)
-                    MESSAGE(STATUS "GPS: using GPS library at ${GPS_LIBRARY} (found suitable GPSD API version: \"${GPS_VERSION_STRING}\")")
+                    MESSAGE(STATUS "GPS: using GPS library at ${GPS_LIBRARY} (found suitable GPSD API version: ${GPS_VERSION_STRING})")
                ENDIF()
           ELSE(GPS_FOUND)
                SET(ENABLE_LIBGPS 0)
@@ -574,7 +575,7 @@ ENDIF()
 
 IF(WIN32)
      #######################################################
-     ### Generate icon file name                         ###
+     ### Generate icon file name
      #######################################################
 
      IF(STELLARIUM_RELEASE_BUILD)
@@ -584,7 +585,7 @@ IF(WIN32)
      ENDIF()
 
      #######################################################
-     ### Generate a VersionInfo file                     ###
+     ### Generate a VersionInfo file
      #######################################################
 
      IF(STELLARIUM_RELEASE_BUILD)
@@ -596,7 +597,7 @@ IF(WIN32)
      CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/cmake/stellarium.rc.cmake ${CMAKE_CURRENT_BINARY_DIR}/stellarium.rc @ONLY)
 
      #######################################################
-     ### [Optional] Embed icon in the Windows executable ###
+     ### [Optional] Embed icon in the Windows executable
      #######################################################
 
      SET(ENABLE_WINDOWS_EXE_ICON 1 CACHE BOOL "Determine if it should try to embed the Stellarium icon in the Windows .exe file")
@@ -612,7 +613,7 @@ IF(WIN32)
      ENDIF(ENABLE_WINDOWS_EXE_ICON AND NOT RC_COMPILER_PATH)
 
      #######################################################
-     ### Generate an Inno Setup project file             ###
+     ### Generate an Inno Setup project file
      #######################################################
 
      IF("${CMAKE_SIZEOF_VOID_P}" EQUAL "4")
