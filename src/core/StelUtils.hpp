@@ -357,6 +357,7 @@ namespace StelUtils
 
 	//! Get a night mode version of a color.  That is find the brightness of a color and set that in the
 	//! red channel only
+	/* FIXME: abandoned code?
 	inline Vec3f getNightColor(const Vec3f& dayColor)
 	{
 		float max = 0.0;
@@ -366,6 +367,7 @@ namespace StelUtils
 		}
 		return Vec3f(max, 0, 0);
 	}
+	*/
 
 	//! Calculate and return sidereal period in days from semi-major axis (in AU)
 	double calculateSiderealPeriod(const double SemiMajorAxis);
@@ -378,15 +380,6 @@ namespace StelUtils
 
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
-
-	//! Get the number of seconds since program start.
-	//!
-	//! @note This is implemented in platform-specific ways to be as precise 
-	//!       as possible, but there is a fallback for other platforms that 
-	//!       might not be precise at all.
-	//!       This is currently used e.g. to measure FPS, but it should never 
-	//!       be used for critical functionality.
-	long double secondsSinceStart();
 
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction functino, returning 0.
