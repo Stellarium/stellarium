@@ -42,6 +42,8 @@ CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DI
 
 # currently Qt 5.6/5.9 is recommended
 SET(MINIMAL_QT_VERSION "5.4.0")
+# TODO: Check real minimal supported version of GPSD API
+SET(MINIMAL_GPS_API_VERSION "6.0")
 
 # Use customized cmake macros
 SET(CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
@@ -486,12 +488,18 @@ IF(ENABLE_GPS)
      ELSE(WIN32)
           FIND_PACKAGE(GPS QUIET)
           IF(GPS_FOUND)
-               SET(ENABLE_LIBGPS 1)
-               ADD_DEFINITIONS(-DENABLE_LIBGPS)
-               MESSAGE(STATUS "GPS: Using GPS library at ${GPS_LIBRARY} (GPSD API version: ${GPS_VERSION_STRING})")
+               IF(${GPS_VERSION_STRING} VERSION_LESS MINIMAL_GPS_API_VERSION)
+                    SET(ENABLE_LIBGPS 0)
+                    MESSAGE(STATUS "GPS: found GPS library at ${GPS_LIBRARY} (found unsuitable GPSD API version \"${GPS_VERSION_STRING}\", required is \"${MINIMAL_GPS_API_VERSION}\")")
+                    MESSAGE(STATUS "GPS: GPSD query disabled!")
+               ELSE()
+                    SET(ENABLE_LIBGPS 1)
+                    ADD_DEFINITIONS(-DENABLE_LIBGPS)
+                    MESSAGE(STATUS "GPS: using GPS library at ${GPS_LIBRARY} (found suitable GPSD API version: ${GPS_VERSION_STRING})")
+               ENDIF()
           ELSE(GPS_FOUND)
                SET(ENABLE_LIBGPS 0)
-               MESSAGE(STATUS "GPS: Could not find GPS library - GPSD query disabled!")
+               MESSAGE(STATUS "GPS: could not find GPS library - GPSD query disabled!")
           ENDIF(GPS_FOUND)
      ENDIF(WIN32)
 ELSE(ENABLE_GPS)
