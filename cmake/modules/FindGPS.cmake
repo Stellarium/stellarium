@@ -72,13 +72,22 @@ IF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
     SET(GPS_FIND_QUIETLY TRUE)
 ENDIF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
 
-FIND_PATH(GPS_INCLUDE_DIR gps.h /usr/include /usr/include/gps /usr/local/include/gps /opt/local/include /sw/include)
+FIND_PATH(GPS_INCLUDE_DIR gps.h /usr/include /usr/include/gps /usr/local/include/gps /usr/local/include /opt/local/include /sw/include)
 
 FIND_LIBRARY(GPS_LIBRARY NAMES gps PATH /usr/lib /usr/local/lib /opt/local/lib /sw/lib) 
 
 IF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
     SET(GPS_FOUND TRUE)
 ENDIF (GPS_INCLUDE_DIR AND GPS_LIBRARY)
+
+IF(GPS_INCLUDE_DIR)
+    FILE(STRINGS ${GPS_INCLUDE_DIR}/gps.h _version_lines REGEX "GPSD_API_(MAJOR|MINOR)_VERSION")
+    STRING(REGEX MATCH "MAJOR_VERSION[ \t]+([0-9]+)" _version_major ${_version_lines})
+    SET(GPS_VERSION_MAJOR ${CMAKE_MATCH_1})
+    STRING(REGEX MATCH "MINOR_VERSION[ \t]+([0-9]+)" _version_minor ${_version_lines})
+    SET(GPS_VERSION_MINOR ${CMAKE_MATCH_1})
+    SET(GPS_VERSION_STRING "${GPS_VERSION_MAJOR}.${GPS_VERSION_MINOR}")
+ENDIF()
 
 IF (GPS_FOUND)
     IF (NOT GPS_FIND_QUIETLY)
