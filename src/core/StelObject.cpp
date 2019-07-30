@@ -740,6 +740,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	StelUtils::rectToSphe(&ra, &dec, pos);
 	map.insert("ra", ra*180./M_PI);
 	map.insert("dec", dec*180./M_PI);
+	map.insert("iauConstellation", core->getIAUConstellation(pos));
 
 	if (getType()!=QStringLiteral("Star"))
 		map.insert("parallacticAngle", getParallacticAngle(core)*180.0/M_PI);

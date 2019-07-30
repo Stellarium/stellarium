@@ -720,7 +720,7 @@ public slots:
 
 	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
-	//! Data file from ADC catalog VI/42 with her amendment from 1999-12-30.
+	//! Data file from ADC catalog VI/42 with its amendment from 1999-12-30.
 	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
 	QString getIAUConstellation(const Vec3d positionEqJnow) const;
 

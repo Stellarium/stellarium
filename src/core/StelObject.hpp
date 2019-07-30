@@ -117,6 +117,7 @@ public:
 	//! - parallacticAngle : parallactic angle in decimal degrees (for non-star objects only)
 	//! - hourAngle-dd : hour angle in decimal degrees
 	//! - hourAngle-hms : hour angle in HMS format (formatted string)
+	//! - iauConstellation : 3-letter abbreviation of IAU constellation (string)
 	//! - meanSidTm : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - appSidTm : mean sidereal time, in decimal degrees (on Earth only!)
 	//! - glong : galactic longitude in decimal degrees
