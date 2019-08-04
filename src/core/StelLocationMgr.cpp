@@ -167,11 +167,12 @@ void LibGPSLookupHelper::query()
 				// * Remove epe from gps_data_t, it duplicates gps_fix_t eph
 				// * Added sep (estimated spherical error, 3D)
 				// Details: https://github.com/Stellarium/stellarium/issues/733
-				#if GPSD_API_MAJOR_VERSION >= 8
-				qDebug() << "Spherical Position Error (sep):" << newdata->fix.sep;
-				#else
-				qDebug() << "Spherical Position Error (epe):" << newdata->epe;
-				#endif
+				// #if GPSD_API_MAJOR_VERSION >= 8
+				// qDebug() << "Spherical Position Error (sep):" << newdata->fix.sep;
+				// #else
+				// qDebug() << "Spherical Position Error (epe):" << newdata->epe;
+				// #endif
+
 			}
 			loc.longitude=newdata->fix.longitude;
 			loc.latitude=newdata->fix.latitude;
