@@ -1115,8 +1115,7 @@ bool Format::hasProtectionData() const
 	if (!d)
 		return false;
 
-	if (hasProperty(FormatPrivate::P_Protection_Hidden
-			|| FormatPrivate::P_Protection_Locked)) {
+	if (hasProperty(FormatPrivate::P_Protection_Hidden)	|| hasProperty(FormatPrivate::P_Protection_Locked)) {
 		return true;
 	}
 	return false;
