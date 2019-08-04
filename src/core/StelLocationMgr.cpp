@@ -168,7 +168,7 @@ void LibGPSLookupHelper::query()
 				// * Added sep (estimated spherical error, 3D)
 				// Details: https://github.com/Stellarium/stellarium/issues/733
 				#if GPSD_API_MAJOR_VERSION >= 8
-				qDebug() << "Spherical Position Error (sep):" << newdata->sep;
+				qDebug() << "Spherical Position Error (sep):" << newdata->fix.sep;
 				#else
 				qDebug() << "Spherical Position Error (epe):" << newdata->epe;
 				#endif
