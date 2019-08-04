@@ -1079,7 +1079,8 @@ void StelMainScriptAPI::moveToObject(const QString& name, float duration)
 	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
 	StelObjectP obj = omgr->searchByName(name);
 
-	mvmgr->moveToObject(obj, duration);
+	if (!obj.isNull())
+		mvmgr->moveToObject(obj, duration);
 }
 
 void StelMainScriptAPI::moveToSelectedObject(float duration)
@@ -1088,7 +1089,8 @@ void StelMainScriptAPI::moveToSelectedObject(float duration)
 	if (omgr->getSelectedObject().isEmpty())
 		return;
 
-	moveToObject(omgr->getSelectedObject()[0]->getEnglishName(), duration);
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	mvmgr->moveToObject(omgr->getSelectedObject()[0], duration); // Object may be without English name
 }
 
 void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)
