@@ -183,6 +183,11 @@ void ScreenImage::setOpacity(qreal alpha)
 	tex->setOpacity(alpha*maxAlpha);
 }
 
+void ScreenImage::setScale(float scale)
+{
+	tex->setScale(scale);
+}
+
 void ScreenImage::setScale(float scaleX, float scaleY, float duration)
 {
 	scaleTimer->stop();

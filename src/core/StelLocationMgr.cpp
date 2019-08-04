@@ -172,7 +172,6 @@ void LibGPSLookupHelper::query()
 				// #else
 				// qDebug() << "Spherical Position Error (epe):" << newdata->epe;
 				// #endif
-
 			}
 			loc.longitude=newdata->fix.longitude;
 			loc.latitude=newdata->fix.latitude;

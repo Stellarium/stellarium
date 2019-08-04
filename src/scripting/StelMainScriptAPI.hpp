@@ -606,7 +606,6 @@ public slots:
 	//! @return duration[ms] if known, 0 if unknown (e.g. during load/before playing), -1 in case of error.
 	static qint64 getSoundDuration(const QString& id);
 
-
 	//! Load a video from a file.
 	//! @param filename the name of the file to load, relative to the scripts directory.
 	//! @param id the identifier which will be used to refer to the video
@@ -771,36 +770,6 @@ public slots:
 	//! Go to defaults position and direction of view
 	void goHome();
 
-	//! Show or hide the Milky Way.
-	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setFlagShow(b) instead.
-	static void setMilkyWayVisible(bool b);
-
-	//! Set Milky Way intensity.
-	//! @param i value of intensity for the Milky Way
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setIntensity(i) instead.
-	static void setMilkyWayIntensity(double i);
-
-	//! Get Milky Way intensity.
-	//! @return value of Milky Way intensity, e.g. "1.2"
-	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.getIntensity() instead.
-	static double getMilkyWayIntensity();
-
-	//! Show or hide the Zodiacal Light.
-	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setFlagShow(b) instead.
-	static void setZodiacalLightVisible(bool b);
-
-	//! Set Zodiacal Light intensity.
-	//! @param i value of intensity for the Zodiacal Light
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setIntensity(i) instead.
-	static void setZodiacalLightIntensity(double i);
-
-	//! Get Zodiacal Light intensity.
-	//! @return value of Zodiacal Light intensity, e.g. "1.2"
-	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.getIntensity() instead.
-	static double getZodiacalLightIntensity();
-
 	//! Returns the currently set Bortle scale index, which is used to simulate light pollution.
 	//! Wrapper for StelSkyDrawer::getBortleScaleIndex
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
@@ -813,15 +782,6 @@ public slots:
 	//! @see https://en.wikipedia.org/wiki/Bortle_scale
 	//! @param index the new Bortle scale index, must be in range [1,9]
 	static void setBortleScaleIndex(int index);
-
-	//! Show or hide the DSS (photorealistic sky).
-	//! @param b if true, show the DSS, if false, hide the DSS layer.
-	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.setFlagShow(b) instead.
-	static void setDSSMode(bool b);
-	//! Get the current status of DSS mode.
-	//! @return The current status of DSS mode.
-	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.getFlagShow() instead.
-	static bool isDSSModeEnabled();
 
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
@@ -867,6 +827,49 @@ public slots:
 	//! Get the current status of media playback support.
 	//! @return The current status of media playback support.
 	static bool isMediaPlaybackSupported(void);
+
+	//
+	// DEPRECATED METHODS
+	//
+
+	//! Show or hide the Milky Way.
+	//! @param b if true, show the Milky Way, if false, hide the Milky Way.
+	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setFlagShow(b) instead.
+	static void setMilkyWayVisible(bool b);
+
+	//! Set Milky Way intensity.
+	//! @param i value of intensity for the Milky Way
+	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.setIntensity(i) instead.
+	static void setMilkyWayIntensity(double i);
+
+	//! Get Milky Way intensity.
+	//! @return value of Milky Way intensity, e.g. "1.2"
+	//! @deprecated This method will be removed in version 0.20. Use MilkyWay.getIntensity() instead.
+	static double getMilkyWayIntensity();
+
+	//! Show or hide the Zodiacal Light.
+	//! @param b if true, show the Zodiacal Light, if false, hide the Zodiacal Light.
+	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setFlagShow(b) instead.
+	static void setZodiacalLightVisible(bool b);
+
+	//! Set Zodiacal Light intensity.
+	//! @param i value of intensity for the Zodiacal Light
+	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.setIntensity(i) instead.
+	static void setZodiacalLightIntensity(double i);
+
+	//! Get Zodiacal Light intensity.
+	//! @return value of Zodiacal Light intensity, e.g. "1.2"
+	//! @deprecated This method will be removed in version 0.20. Use ZodiacalLight.getIntensity() instead.
+	static double getZodiacalLightIntensity();
+
+	//! Show or hide the DSS (photorealistic sky).
+	//! @param b if true, show the DSS, if false, hide the DSS layer.
+	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.setFlagShow(b) instead.
+	static void setDSSMode(bool b);
+	//! Get the current status of DSS mode.
+	//! @return The current status of DSS mode.
+	//! @deprecated This method will be removed in version 0.20. Use ToastMgr.getFlagShow() instead.
+	static bool isDSSModeEnabled();
 
 signals:
 

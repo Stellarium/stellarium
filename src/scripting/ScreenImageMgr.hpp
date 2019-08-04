@@ -52,7 +52,7 @@ public:
 	//!        Note that this also controls the final resolution of the image! Scale smaller that 1 leads to reduced resolution,
 	//!        larger than 1 of course creates upsampling artifacts. The scaling that happens after loading is a simple stretch of this loaded pixmap.
 	//!        In order to get a small image on screen which you might want to grow later, load with this scale=1 and setScale() later.
-	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.
+	//! @param fadeDuration the time it takes for screen images to fade in/out/change alpha in seconds.	
 	ScreenImage(const QString& filename, float x, float y, bool show=false, float scale=1., float alpha=1., float fadeDuration=1.);
 	virtual ~ScreenImage();
 
@@ -87,6 +87,10 @@ public:
 	virtual void addXY(float x, float y, float duration=0.);
 	virtual int imageHeight(void) const;
 	virtual int imageWidth(void) const;
+
+	//! Set the image scale relative to the size originally loaded.
+	//! @param scale new (target) horizontal and vertical scale factor. Native size=1.
+	virtual void setScale(float scale);
 
 	//! Set the image scale relative to the size originally loaded.
 	//! @param scaleX new (target) horizontal scale factor. Native size=1.
