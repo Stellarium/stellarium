@@ -98,7 +98,7 @@ void ZodiacalLight::handleLocationChanged(const StelLocation &loc)
 
 void ZodiacalLight::update(double deltaTime)
 {
-	fader->update((int)(deltaTime*1000));
+	fader->update(static_cast<int>(deltaTime*1000));
 	if (!fader->getInterstate()  || (getIntensity()<0.01) )
 		return;
 

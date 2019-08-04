@@ -128,8 +128,8 @@ signals:
 	void definingAngleChanged(double angle);
 public slots:
 	void setColor(const Vec3f& c);
-	void update(const double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void setFadeDuration(const float duration) {fader.setDuration((int)(duration*1000.f));}
+	void update(const double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
+	void setFadeDuration(const float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	void setFontSize(const int newSize){font.setPixelSize(newSize);}
 	//! To be connected to StelApp font size. newSize will be enlarged by 1.

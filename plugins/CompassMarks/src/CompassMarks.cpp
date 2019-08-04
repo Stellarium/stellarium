@@ -166,7 +166,7 @@ void CompassMarks::draw(StelCore* core)
 
 void CompassMarks::update(double deltaTime)
 {
-	markFader.update((int)(deltaTime*1000));
+	markFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void CompassMarks::setCompassMarks(bool b)

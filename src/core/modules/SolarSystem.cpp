@@ -1767,7 +1767,7 @@ void SolarSystem::update(double deltaTime)
 
 	for (const auto& p : systemPlanets)
 	{
-		p->update((int)(deltaTime*1000));
+		p->update(static_cast<int>(deltaTime*1000));
 	}
 }
 

@@ -288,14 +288,14 @@ void TelescopeTCP::telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject
 		position = core->j2000ToEquinoxEqu(j2000Pos, StelCore::RefractionOff);
 	}
 
-	if (writeBufferEnd - writeBuffer + 20 < (int)sizeof(writeBuffer))
+	if (writeBufferEnd - writeBuffer + 20 < static_cast<int>(sizeof(writeBuffer)))
 	{
 		const double ra_signed = atan2(position[1], position[0]);
 		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
 		const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
-		unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
-		int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
+		unsigned int ra_int = static_cast<unsigned int>(floor(0.5 + ra*((static_cast<unsigned int>(0x80000000))/M_PI)));
+		int dec_int = static_cast<int>(floor(0.5 + dec*((static_cast<unsigned int>(0x80000000))/M_PI)));
 		// length of packet:
 		*writeBufferEnd++ = 20;
 		*writeBufferEnd++ = 0;
@@ -392,8 +392,8 @@ void TelescopeTCP::performReading(void)
 		// parse the data in the read buffer:
 		while (readBufferEnd - p >= 2)
 		{
-			const int size = (int)(((unsigned char)(p[0])) | (((unsigned int)(unsigned char)(p[1])) << 8));
-			if (size > (int)sizeof(readBuffer) || size < 4)
+			const int size = static_cast<int>(((unsigned char)(p[0])) | (((unsigned int)(unsigned char)(p[1])) << 8));
+			if (size > static_cast<int>(sizeof(readBuffer)) || size < 4)
 			{
 				qDebug() << "TelescopeTCP(" << name << ")::performReading: " << "bad packet size: " << size;
 				hangup();
@@ -404,7 +404,7 @@ void TelescopeTCP::performReading(void)
 				// wait for complete packet
 				break;
 			}
-			const int type = (int)(((unsigned char)(p[2])) | (((unsigned int)(unsigned char)(p[3])) << 8));
+			const int type = static_cast<int>(((unsigned char)(p[2])) | (((unsigned int)(unsigned char)(p[3])) << 8));
 			// dispatch:
 			switch (type)
 			{

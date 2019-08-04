@@ -86,10 +86,10 @@ public:
 	virtual void draw(StelCore* core) = 0;
 	void update(double deltaTime)
 	{
-		landFader.update((int)(deltaTime*1000));
-		fogFader.update((int)(deltaTime*1000));
-		illumFader.update((int)(deltaTime*1000));
-		labelFader.update((int)(deltaTime*1000));
+		landFader.update(static_cast<int>(deltaTime*1000));
+		fogFader.update(static_cast<int>(deltaTime*1000));
+		illumFader.update(static_cast<int>(deltaTime*1000));
+		labelFader.update(static_cast<int>(deltaTime*1000));
 	}
 
 	//! Set the brightness of the landscape plus brightness of optional add-on night lightscape.

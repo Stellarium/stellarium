@@ -805,7 +805,7 @@ void StelVideoMgr::update(double deltaTime)
 			qDebug() << "StelVideoMgr::update() for" << id << ": PlayerState:" << (*voIter)->player->state() << "MediaStatus: " << mediaStatus;
 
 		// fader must be updated here, else the video may not be visible when not yet fully loaded?
-		(*voIter)->fader.update((int)(deltaTime*1000));
+		(*voIter)->fader.update(static_cast<int>(deltaTime*1000));
 
 		// It seems we need a more thorough analysis of MediaStatus!
 		// In all not-ready status we immediately leave further handling, usually in the hope that loading is successful really soon.

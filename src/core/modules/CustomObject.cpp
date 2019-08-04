@@ -114,7 +114,7 @@ double CustomObject::getAngularSize(const StelCore*) const
 
 void CustomObject::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void CustomObject::draw(StelCore* core, StelPainter *painter)

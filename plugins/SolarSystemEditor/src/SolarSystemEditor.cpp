@@ -558,9 +558,9 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 	int year	= mpcParser.cap(4).toInt();
 	int month	= mpcParser.cap(5).toInt();
 	double dayFraction	= mpcParser.cap(6).toDouble(&ok);
-	int day = (int) dayFraction;
+	int day = static_cast<int>(dayFraction);
 	QDate datePerihelionPassage(year, month, day);
-	int fraction = (int) ((dayFraction - day) * 24 * 60 * 60);
+	int fraction = static_cast<int>((dayFraction - day) * 24 * 60 * 60);
 	int seconds = fraction % 60; fraction /= 60;
 	int minutes = fraction % 60; fraction /= 60;
 	int hours = fraction % 24;
@@ -592,7 +592,7 @@ SsoElements SolarSystemEditor::readMpcOneLineCometElements(QString oneLineElemen
 		const double a=perihelionDistance/(1.-eccentricity); // semimajor axis.
 		const double meanMotion=0.01720209895/std::sqrt(a*a*a); // radians/day (0.01720209895 is Gaussian gravitational constant (symbol k))
 		double period=M_PI*2.0 / meanMotion; // period, days
-		result.insert("orbit_good", qMin(1000, (int) floor(0.5*period))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
+		result.insert("orbit_good", qMin(1000, static_cast<int>(floor(0.5*period)))); // validity for elliptical osculating elements, days. Goes from aphel to next aphel or max 1000 days.
 		result.insert("orbit_visualization_period", period); // add period for visualization of orbit
 	}
 	else
@@ -831,7 +831,7 @@ SsoElements SolarSystemEditor::readMpcOneLineMinorPlanetElements(QString oneLine
 		result.insert("orbit_visualization_period", StelUtils::calculateSiderealPeriod(semiMajorAxis));
 
 	// 2:3 resonance to Neptune [https://en.wikipedia.org/wiki/Plutino]
-	if ((int)semiMajorAxis == 39)
+	if (static_cast<int>(semiMajorAxis) == 39)
 		objectType = "plutino";
 
 	// Classical Kuiper belt objects [https://en.wikipedia.org/wiki/Classical_Kuiper_belt_object]

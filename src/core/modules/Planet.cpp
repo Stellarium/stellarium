@@ -920,11 +920,11 @@ void Planet::computePosition(const double dateJDE)
 
 		if( dateJDE > lastOrbitJDE )
 		{
-			delta_points = (int)(0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
+			delta_points = static_cast<int>(0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
 		}
 		else
 		{
-			delta_points = (int)(-0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
+			delta_points = static_cast<int>(-0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
 		}
 		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
 
@@ -2580,7 +2580,7 @@ void Planet::drawSphere(StelPainter* painter, float screenSz, bool drawOnlyRing)
 
 	// Draw the spheroid itself
 	// Adapt the number of facets according with the size of the sphere for optimization
-	int nb_facet = qBound(10, (int)(screenSz * 40.f/50.f), 100);	// 40 facets for 1024 pixels diameter on screen
+	int nb_facet = qBound(10, static_cast<int>(screenSz * 40.f/50.f), 100);	// 40 facets for 1024 pixels diameter on screen
 
 	// Generates the vertice
 	Planet3DModel model;

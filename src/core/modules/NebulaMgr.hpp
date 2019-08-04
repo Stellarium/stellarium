@@ -329,7 +329,7 @@ public:
 	virtual void draw(StelCore* core);
 
 	//! Update state which is time dependent.
-	virtual void update(double deltaTime) {hintsFader.update((int)(deltaTime*1000)); flagShow.update((int)(deltaTime*1000));}
+	virtual void update(double deltaTime) {hintsFader.update(static_cast<int>(deltaTime*1000)); flagShow.update(static_cast<int>(deltaTime*1000));}
 
 	//! Determines the order in which the various modules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
@@ -746,7 +746,7 @@ public slots:
 
 	//! Set how long it takes for nebula hints to fade in and out when turned on and off.
 	//! @param duration given in seconds
-	void setHintsFadeDuration(float duration) {hintsFader.setDuration((int) (duration * 1000.f));}
+	void setHintsFadeDuration(float duration) {hintsFader.setDuration(static_cast<int>(duration * 1000.f));}
 
 	//! Set flag for displaying Nebulae Hints.
 	void setFlagHints(bool b) { if (hintsFader!=b) { hintsFader=b; emit flagHintsDisplayedChanged(b);}}

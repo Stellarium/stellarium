@@ -1720,7 +1720,7 @@ void Satellites::update(double deltaTime)
 	if (core->getCurrentPlanet() != earth || !isValidRangeDates(core))
 		return;
 
-	hintFader.update((int)(deltaTime*1000));
+	hintFader.update(static_cast<int>(deltaTime*1000));
 
 	for (const auto& sat : satellites)
 	{

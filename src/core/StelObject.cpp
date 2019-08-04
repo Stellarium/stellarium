@@ -188,7 +188,7 @@ Vec3f StelObject::computeRTSTime(StelCore *core) const
 		ha -= 24.;
 
 	const double JD = core->getJD();
-	const double ct = (JD - (int)JD)*24.;
+	const double ct = (JD - static_cast<int>(JD))*24.;
 
 	t = ct - ha*coeff; // earth: coeff=(360.985647/360.);
 	if (ha>12. && ha<=24.)

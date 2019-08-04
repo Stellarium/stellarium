@@ -135,7 +135,7 @@ public:
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
-	virtual void update(double deltaTime) {labelsFader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
+	virtual void update(double deltaTime) {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
 
 	//! Used to determine the order in which the various StelModules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;

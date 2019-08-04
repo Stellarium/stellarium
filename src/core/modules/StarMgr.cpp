@@ -1159,7 +1159,7 @@ void StarMgr::draw(StelCore* core)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
 			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
-			int x = (int)((maxMag-mag_min)/k);
+			int x = static_cast<int>((maxMag-mag_min)/k);
 			if (x > 0)
 				maxMagStarName = x;
 		}

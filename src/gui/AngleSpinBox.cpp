@@ -391,8 +391,8 @@ void AngleSpinBox::formatText(void)
 				sign=true;
 			}
 
-			d = (int)angle;
-			m = (int)((angle - d)*60);
+			d = static_cast<int>(angle);
+			m = static_cast<int>((angle - d)*60);
 			s = (angle-d)*3600-60*m;
 
 			// we may have seconds as 60 and one less minute...
@@ -489,7 +489,7 @@ void AngleSpinBox::formatText(void)
 		default:
 		{
 			qWarning() << "AngleSpinBox::formatText - WARNING - unknown format" 
-                       << (int)(angleSpinBoxFormat);
+		       << static_cast<int>(angleSpinBoxFormat);
 			break;
 		}
 	}

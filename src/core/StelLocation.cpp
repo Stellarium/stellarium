@@ -90,7 +90,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	loc.role    = splitline.at(3).at(0).toUpper();
 	if (loc.role.isNull())
 		loc.role = QChar(0x0058); // char 'X'
-	loc.population = (int) (splitline.at(4).toFloat()*1000);
+	loc.population = static_cast<int> (splitline.at(4).toFloat()*1000);
 
 	const QString& latstring = splitline.at(5).trimmed();
 	loc.latitude = latstring.left(latstring.size() - 1).toFloat();
@@ -102,7 +102,7 @@ StelLocation StelLocation::createFromLine(const QString& rawline)
 	if (lngstring.endsWith('W'))
 		loc.longitude=-loc.longitude;
 
-	loc.altitude = (int)splitline.at(7).toFloat();
+	loc.altitude = static_cast<int>(splitline.at(7).toFloat());
 
 	if (splitline.size()>8)
 	{

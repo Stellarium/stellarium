@@ -457,9 +457,9 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	}
 
 	unsigned char starColor[3] = {0, 0, 0};
-	starColor[0] = (unsigned char)std::min((int)(color[0]*tw*255+0.5f), 255);
-	starColor[1] = (unsigned char)std::min((int)(color[1]*tw*255+0.5f), 255);
-	starColor[2] = (unsigned char)std::min((int)(color[2]*tw*255+0.5f), 255);
+	starColor[0] = (unsigned char)std::min(static_cast<int>(color[0]*tw*255+0.5f), 255);
+	starColor[1] = (unsigned char)std::min(static_cast<int>(color[1]*tw*255+0.5f), 255);
+	starColor[2] = (unsigned char)std::min(static_cast<int>(color[2]*tw*255+0.5f), 255);
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);

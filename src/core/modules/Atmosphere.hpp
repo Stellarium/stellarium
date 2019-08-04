@@ -47,12 +47,12 @@ public:
 		float latitude = 45.f, float altitude = 200.f,
 		float temperature = 15.f, float relativeHumidity = 40.f);
 	void draw(StelCore* core);
-	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
+	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
 
 	//! Set fade in/out duration in seconds
-	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	//! Get fade in/out duration in seconds
-	float getFadeDuration() const {return (float)fader.getDuration()/1000.f;}
+	float getFadeDuration() const {return static_cast<float>(fader.getDuration()/1000.f);}
 
 	//! Define whether to display atmosphere
 	void setFlagShow(bool b){fader = b;}

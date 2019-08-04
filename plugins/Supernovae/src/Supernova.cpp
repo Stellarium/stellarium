@@ -249,7 +249,7 @@ double Supernova::getAngularSize(const StelCore*) const
 
 void Supernova::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Supernova::draw(StelCore* core, StelPainter& painter)

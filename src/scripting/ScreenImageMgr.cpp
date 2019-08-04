@@ -104,7 +104,7 @@ void ScreenImage::update(double)
 
 void ScreenImage::setFadeDuration(float duration)
 {
-	fadeTimer->setDuration(qMax(1, (int)(duration*1000)));
+	fadeTimer->setDuration(qMax(1, static_cast<int>(duration*1000)));
 }
 
 void ScreenImage::setFlagShow(bool b)

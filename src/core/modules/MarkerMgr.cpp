@@ -151,7 +151,7 @@ StelMarker::StelMarker(const float& mSize, const Vec3f& mColor)
 
 void StelMarker::update(double deltaTime)
 {
-	markerFader.update((int)(deltaTime*1000));
+	markerFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void StelMarker::setFadeDuration(float duration)

@@ -239,7 +239,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	int year, month, day, dayOfWeek;
 	double shift = core->getUTCOffset(JD)*0.041666666666;
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
-	dayOfWeek = (int)floor(fmod(JD, 7));
+	dayOfWeek = static_cast<int>(floor(fmod(JD, 7)));
 	QString str;
 	switch (dateFormat)
 	{

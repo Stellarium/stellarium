@@ -814,7 +814,7 @@ void Observability::draw(StelCore* core)
 
 // Print all results:
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	int lineSpacing = (int) (params.devicePixelsPerPixel * 1.3 * ( (double) fontSize));  // between lines
+	int lineSpacing = static_cast<int> (params.devicePixelsPerPixel * 1.3 * ( (double) fontSize));  // between lines
 	int groupSpacing = 6*fontSize*params.devicePixelsPerPixel;  // between daily and yearly results
 	int yLine = 8*fontSize*params.devicePixelsPerPixel + 110;
 	int xLine = 80;
@@ -903,9 +903,9 @@ double Observability::HourAngle2(double RA, double ST)
 // Converts a float time/angle span (in hours/degrees) in the (integer) format hh/dd,mm,ss:
 void Observability::double2hms(double hfloat, int &h1, int &h2, int &h3)
 {
-	h1 = (int)hfloat;
-	h2 = (int)((qAbs(hfloat)-qAbs(double(h1)))*60);
-	h3 = (int)(((qAbs(hfloat)-qAbs(double(h1)))*60)-h2)*60;
+	h1 = static_cast<int>(hfloat);
+	h2 = static_cast<int>((qAbs(hfloat)-qAbs(double(h1)))*60);
+	h3 = static_cast<int>(((qAbs(hfloat)-qAbs(double(h1)))*60)-h2)*60;
 } 
 ////////////////////////////////////
 
@@ -1628,7 +1628,7 @@ bool Observability::calculateSolarSystemEvents(StelCore* core, int bodyType)
 	// Now, compute the days of all the Full Moons of the current year, and get the Earth/Moon distance:
 //			double monthFrac, monthTemp, maxMoonDate;
 //			monthFrac = std::modf((nextFullMoon-Jan1stJD)/MoonT,&monthTemp);
-//			int PrevMonths = (int)(monthTemp+0.0*monthFrac); 
+//			int PrevMonths = static_cast<int>(monthTemp+0.0*monthFrac);
 //			double BestDistance = 1.0; // initial dummy value for Sun-Moon distance;
 //			double Distance; // temporal variable to save Earth-Moon distance at each month.
 

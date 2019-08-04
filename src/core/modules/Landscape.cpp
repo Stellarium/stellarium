@@ -778,7 +778,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	if (az_phot<0) az_phot+=1.0f;                                //  0..1 = image-X for a non-repeating pano photo
 	float az_panel =  nbSide*nbDecorRepeat * az_phot; // azimuth in "panel space". Ex for nbS=4, nbDR=3: [0..[12, say 11.4
 	float x_in_panel=fmodf(az_panel, 1.0f);
-	int currentSide = (int) floor(fmodf(az_panel, nbSide));
+	int currentSide = static_cast<int>(floor(fmodf(az_panel, nbSide)));
 	Q_ASSERT(currentSide>=0);
 	Q_ASSERT(currentSide<nbSideTexs);
 	int x= (sides[currentSide].texCoords[0] + x_in_panel*(sides[currentSide].texCoords[2]-sides[currentSide].texCoords[0]))
@@ -1186,7 +1186,7 @@ void LandscapeSpherical::draw(StelCore* core)
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
 				  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
 		mapTexFog->bind();
-		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom)), 1, true, fogTexTop, fogTexBottom);
+		sPainter.sSphere(radius, 1.0, cols, static_cast<int>(ceil(rows*(fogTexTop-fogTexBottom)/(mapTexTop-mapTexBottom))), 1, true, fogTexTop, fogTexBottom);
 	}
 
 	// Self-luminous layer (Light pollution etc). This looks striking!
@@ -1197,7 +1197,7 @@ void LandscapeSpherical::draw(StelCore* core)
 				  lightScapeBrightness*illumFader.getInterstate(),
 				  lightScapeBrightness*illumFader.getInterstate(), landFader.getInterstate());
 		mapTexIllum->bind();
-		sPainter.sSphere(radius, 1.0, cols, (int) ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom)), 1, true, illumTexTop, illumTexBottom);
+		sPainter.sSphere(radius, 1.0, cols, static_cast<int>(ceil(rows*(illumTexTop-illumTexBottom)/(mapTexTop-mapTexBottom))), 1, true, illumTexTop, illumTexBottom);
 	}	
 	//qDebug() << "before drawing line";
 

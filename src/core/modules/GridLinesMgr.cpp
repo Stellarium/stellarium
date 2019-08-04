@@ -51,8 +51,8 @@ public:
 	void setFontSize(int newFontSize);
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
-	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
+	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed(void) const {return fader;}
 private:
@@ -88,8 +88,8 @@ public:
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
-	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
+	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed(void) const {return fader;}
 	void setFontSize(int newSize);
@@ -137,8 +137,8 @@ public:
 	void draw(StelCore* core) const;
 	void setColor(const Vec3f& c) {color = c;}
 	const Vec3f& getColor() const {return color;}
-	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void setFadeDuration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
+	void setFadeDuration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setDisplayed(const bool displayed){fader = displayed;}
 	bool isDisplayed(void) const {return fader;}
 	void setFontSize(int newSize);
@@ -397,8 +397,8 @@ void SkyGrid::draw(const StelCore* core) const
 
 	// Compute the first grid starting point. This point is close to the center of the screen
 	// and lies at the intersection of a meridian and a parallel
-	lon2 = gridStepMeridianRad*((int)(lon2/gridStepMeridianRad+0.5));
-	lat2 = gridStepParallelRad*((int)(lat2/gridStepParallelRad+0.5));
+	lon2 = gridStepMeridianRad*(static_cast<int>(lon2/gridStepMeridianRad+0.5));
+	lat2 = gridStepParallelRad*(static_cast<int>(lat2/gridStepParallelRad+0.5));
 	Vec3d firstPoint;
 	StelUtils::spheToRect(lon2, lat2, firstPoint);
 	firstPoint.normalize();
@@ -425,7 +425,7 @@ void SkyGrid::draw(const StelCore* core) const
 	Mat4d rotLon = Mat4d::zrotation(gridStepMeridianRad);
 	Vec3d fpt = firstPoint;
 	Vec3d p1, p2;
-	int maxNbIter = (int)(M_PI/gridStepMeridianRad);
+	int maxNbIter = static_cast<int>(M_PI/gridStepMeridianRad);
 	int i;
 	for (i=0; i<maxNbIter; ++i)
 	{
@@ -498,7 +498,7 @@ void SkyGrid::draw(const StelCore* core) const
 	SphericalCap parallelSphericalCap(Vec3d(0,0,1), 0);
 	rotLon = Mat4d::rotation(firstPoint^Vec3d(0,0,1), gridStepParallelRad);
 	fpt = firstPoint;
-	maxNbIter = (int)(M_PI/gridStepParallelRad)-1;
+	maxNbIter = static_cast<int>(M_PI/gridStepParallelRad)-1;
 	for (i=0; i<maxNbIter; ++i)
 	{
 		StelUtils::rectToSphe(&lon2, &lat2, fpt);

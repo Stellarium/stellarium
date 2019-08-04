@@ -259,9 +259,9 @@ void TelescopeControl::deinit()
 
 void TelescopeControl::update(double deltaTime)
 {
-	labelFader.update((int)(deltaTime*1000));
-	reticleFader.update((int)(deltaTime*1000));
-	circleFader.update((int)(deltaTime*1000));
+	labelFader.update(static_cast<int>(deltaTime*1000));
+	reticleFader.update(static_cast<int>(deltaTime*1000));
+	circleFader.update(static_cast<int>(deltaTime*1000));
 	// communicate with the telescopes:
 	communicate();
 }

@@ -413,7 +413,7 @@ double Pulsar::getAngularSize(const StelCore*) const
 
 void Pulsar::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Pulsar::draw(StelCore* core, StelPainter *painter)

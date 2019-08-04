@@ -202,7 +202,7 @@ void HipsMgr::update(double deltaTime)
 {
 	for (auto survey: surveys)
 	{
-		survey->fader.update((int)(deltaTime * 1000));
+		survey->fader.update(static_cast<int>(deltaTime * 1000));
 	}
 }
 

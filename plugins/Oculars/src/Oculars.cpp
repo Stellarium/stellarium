@@ -2659,25 +2659,25 @@ QString Oculars::getDimensionsString(double fovX, double fovY) const
 	{
 		if (fovX >= 1.0)
 		{
-			int degrees = (int)fovX;
-			float minutes = (int)((fovX - degrees) * 60);
+			int degrees = static_cast<int>(fovX);
+			float minutes = (fovX - degrees) * 60.f;
 			stringFovX = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
-			float minutes = (fovX * 60);
+			float minutes = fovX * 60.f;
 			stringFovX = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 
 		if (fovY >= 1.0)
 		{
-			int degrees = (int)fovY;
-			float minutes = ((fovY - degrees) * 60);
+			int degrees = static_cast<int>(fovY);
+			float minutes = (fovY - degrees) * 60.f;
 			stringFovY = QString::number(degrees) + QChar(0x00B0) + QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 		else
 		{
-			float minutes = (fovY * 60);
+			float minutes = fovY * 60.f;
 			stringFovY = QString::number(minutes, 'f', 2) + QChar(0x2032);
 		}
 	}

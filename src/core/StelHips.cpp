@@ -63,7 +63,7 @@ QUrl HipsSurvey::getUrlFor(const QString& path) const
 	QString args = "";
 	if (base.scheme().isEmpty()) base.setScheme("file");
 	if (base.scheme() != "file")
-		args += QString("?v=%1").arg((int)releaseDate);
+		args += QString("?v=%1").arg(static_cast<int>(releaseDate));
 	return QString("%1/%2%3").arg(base.url()).arg(path).arg(args);
 }
 
@@ -278,7 +278,7 @@ HipsTile* HipsSurvey::getTile(int order, int pix)
 		// Use the allsky image until we load the full texture.
 		if (order == orderMin && !allsky.isNull())
 		{
-			int nbw = (int)sqrt(12 * (1 << (2 * order)));
+			int nbw = static_cast<int>(sqrt(12 * (1 << (2 * order))));
 			int x = (pix % nbw) * allsky.width() / nbw;
 			int y = (pix / nbw) * allsky.width() / nbw;
 			int s = allsky.width() / nbw;

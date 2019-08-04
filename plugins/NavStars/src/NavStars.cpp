@@ -205,7 +205,7 @@ void NavStars::draw(StelCore* core)
 
 void NavStars::update(double deltaTime)
 {
-	markerFader.update((int)(deltaTime*1000));
+	markerFader.update(static_cast<int>(deltaTime*1000));
 }
 
 

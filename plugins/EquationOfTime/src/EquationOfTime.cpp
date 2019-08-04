@@ -128,10 +128,10 @@ void EquationOfTime::draw(StelCore *core)
 
 	if (getFlagMsFormat())
 	{
-		int seconds = qRound((eqTime - (int)eqTime)*60);
+		int seconds = qRound((eqTime - static_cast<int>(eqTime))*60);
 		QString messageSecondsValue = QString("%1").arg(qAbs(seconds), 2, 10, QLatin1Char('0'));
 
-		timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (eqTime<0? QString(QLatin1Char('-')):QString()), QString::number((int)qAbs(eqTime)), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
+		timeText = QString("%1: %2%3%4%5%6").arg(messageEquation, (eqTime<0? QString(QLatin1Char('-')):QString()), QString::number(static_cast<int>(qAbs(eqTime))), messageEquationMinutes, messageSecondsValue, messageEquationSeconds);
 	}
 	else
 		timeText = QString("%1: %2%3").arg(messageEquation, QString::number(eqTime, 'f', 2), messageEquationMinutes);

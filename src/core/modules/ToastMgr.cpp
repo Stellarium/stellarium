@@ -77,7 +77,7 @@ void ToastMgr::draw(StelCore* core)
 
 void ToastMgr::update(double deltaTime)
 {
-	fader->update((int)(deltaTime*1000));
+	fader->update(static_cast<int>(deltaTime*1000));
 }
 
 /*************************************************************************

@@ -476,7 +476,7 @@ void AsterismMgr::updateI18n()
 // update faders
 void AsterismMgr::update(double deltaTime)
 {
-	const int delta = (int)(deltaTime*1000);
+	const int delta = static_cast<int>(deltaTime*1000);
 	for (auto* asterism : asterisms)
 	{
 		asterism->update(delta);

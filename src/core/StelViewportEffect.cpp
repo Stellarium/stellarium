@@ -119,10 +119,10 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		} else if (texture_triangle_base_length < 2.f) {
 			texture_triangle_base_length = 2.f;
 		}
-		max_x = (int)StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length);
-		step_x = screen_w / (double)(max_x-0.5);
-		max_y = (int)StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*std::sqrt(3.0)));
-		step_y = screen_h/ (double)max_y;
+		max_x = static_cast<int>(StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length));
+		step_x = screen_w / static_cast<double>(max_x-0.5);
+		max_y = static_cast<int>(StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*std::sqrt(3.0))));
+		step_y = screen_h/ static_cast<double>(max_y);
 
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
 		if (gamma < 0.0) {
@@ -262,12 +262,12 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 
 	// find the triangle and interpolate accordingly:
 	float dy = y / step_y;
-	const int j = (int)floorf(dy);
+	const int j = static_cast<int>(floorf(dy));
 	dy -= j;
 	if (j&1)
 	{
 		float dx = x / step_x + 0.5f*(1.f-dy);
-		const int i = (int)floorf(dx);
+		const int i = static_cast<int>(floorf(dx));
 		dx -= i;
 		const Vec2f *const t = texture_point_array + (j*(max_x+1)+i);
 		if (dx + dy <= 1.f)
@@ -294,7 +294,7 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 	else
 	{
 		float dx = x / step_x + 0.5f*dy;
-		const int i = (int)floorf(dx);
+		const int i = static_cast<int>(floorf(dx));
 		dx -= i;
 		const Vec2f *const t = texture_point_array + (j*(max_x+1)+i);
 		if (dx >= dy)

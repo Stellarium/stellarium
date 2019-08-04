@@ -61,7 +61,7 @@ QPixmap getTextPixmap(const QString& str, QFont font)
 {
 	// Render the text str into a QPixmap.
 	QRect strRect = QFontMetrics(font).boundingRect(str);
-	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height();
 
 	QPixmap strPixmap(w, h);

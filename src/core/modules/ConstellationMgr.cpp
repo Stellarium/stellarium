@@ -471,7 +471,7 @@ void ConstellationMgr::loadLinesAndArt(const QString &fileName, const QString &a
 		if(cons->read(record, hipStarMgr))
 		{
 			cons->artOpacity = artIntensity;
-			cons->artFader.setDuration((int) (artFadeDuration * 1000.f));
+			cons->artFader.setDuration(static_cast<int>(artFadeDuration * 1000.f));
 			cons->setFlagArt(artDisplayed);
 			cons->setFlagBoundaries(boundariesDisplayed);
 			cons->setFlagLines(linesDisplayed);
@@ -912,7 +912,7 @@ void ConstellationMgr::update(double deltaTime)
 	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
 	Constellation::artIntensityFovScale = qBound(0.0,(fov - artIntensityMinimumFov) / (artIntensityMaximumFov - artIntensityMinimumFov),1.0);
 
-	const int delta = (int)(deltaTime*1000);
+	const int delta = static_cast<int>(deltaTime*1000);
 	for (auto* constellation : constellations)
 	{
 		constellation->update(delta);
@@ -967,7 +967,7 @@ void ConstellationMgr::setArtFadeDuration(const float duration)
 
 		for (auto* constellation : constellations)
 		{
-			constellation->artFader.setDuration((int)(duration * 1000.f));
+			constellation->artFader.setDuration(static_cast<int>(duration * 1000.f));
 		}
 		emit artFadeDurationChanged(duration);
 	}

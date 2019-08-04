@@ -388,7 +388,7 @@ void MultiLevelJsonBase::updatePercent(int tot, int toBeLoaded)
 		return;
 	}
 
-	int p = (int)(100.f*tot/(tot+toBeLoaded));
+	int p = static_cast<int>(100.f*tot/(tot+toBeLoaded));
 	if (p>100)
 		p=100;
 	if (p<0)

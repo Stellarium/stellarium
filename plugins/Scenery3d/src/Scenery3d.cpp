@@ -214,7 +214,7 @@ void Scenery3d::update(double deltaTime)
 		}
 	}
 
-	messageFader.update((int)(deltaTime*1000));
+	messageFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Scenery3d::draw(StelCore* core)

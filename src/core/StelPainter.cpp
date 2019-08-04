@@ -637,7 +637,7 @@ StringTexture* StelPainter::getTexTexture(const QString& str, int pixelSize) con
 	QFont tmpFont = currentFont;
 	tmpFont.setPixelSize(currentFont.pixelSize()*prj->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio());
 	QRect strRect = QFontMetrics(tmpFont).boundingRect(str);
-	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height();
 
 	QPixmap strImage = QPixmap(StelUtils::getBiggerPowerOfTwo(w), StelUtils::getBiggerPowerOfTwo(h));

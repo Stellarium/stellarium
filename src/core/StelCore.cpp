@@ -389,7 +389,7 @@ StelProjectorP StelCore::getProjection(StelProjector::ModelViewTranformP modelVi
 			prj = StelProjectorP(new StelProjectorMiller(modelViewTransform));
 			break;
 		default:
-			qWarning() << "Unknown projection type: " << (int)(projType) << "using ProjectionStereographic instead";
+			qWarning() << "Unknown projection type: " << static_cast<int>(projType) << "using ProjectionStereographic instead";
 			prj = StelProjectorP(new StelProjectorStereographic(modelViewTransform));
 			Q_ASSERT(0);
 	}
@@ -419,7 +419,7 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 		case FrameSupergalactic:
 			return getProjection(getSupergalacticModelViewTransform(refractionMode));
 		default:
-			qDebug() << "Unknown reference frame type: " << (int)frameType << ".";
+			qDebug() << "Unknown reference frame type: " << static_cast<int>(frameType) << ".";
 	}
 	Q_ASSERT(0);
 	return getProjection2d();

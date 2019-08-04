@@ -177,7 +177,7 @@ StelLabel::StelLabel(const QString& text, const QFont& font, const Vec3f& color)
 
 void StelLabel::update(double deltaTime)
 {
-	labelFader.update((int)(deltaTime*1000));
+	labelFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void StelLabel::setFadeDuration(float duration)

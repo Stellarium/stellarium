@@ -549,7 +549,7 @@ int Lx200CommandGetDec::readAnswerFromBuffer(const char *&buff,
 		dec = -dec;
 	buff = p;
 	server.longFormatUsedReceived(long_format);
-	server.decReceived((int)floor(dec* (4294967296.0/(360*3600.0))));
+	server.decReceived(static_cast<int>(floor(dec* (4294967296.0/(360*3600.0)))));
 	return 1;
 }
 

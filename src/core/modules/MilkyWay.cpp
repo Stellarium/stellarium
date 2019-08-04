@@ -83,7 +83,7 @@ void MilkyWay::init()
 
 void MilkyWay::update(double deltaTime)
 {
-	fader->update((int)(deltaTime*1000));
+	fader->update(static_cast<int>(deltaTime*1000));
 	//calculate FOV fade value, linear fade between intensityMaxFov and intensityMinFov
 	double fov = StelApp::getInstance().getCore()->getMovementMgr()->getCurrentFov();
 	intensityFovScale = qBound(0.0,(fov - intensityMinFov) / (intensityMaxFov - intensityMinFov),1.0);

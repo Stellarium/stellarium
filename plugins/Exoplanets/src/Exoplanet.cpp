@@ -625,7 +625,7 @@ bool Exoplanet::isDiscovered(const StelCore *core)
 
 void Exoplanet::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Exoplanet::draw(StelCore* core, StelPainter *painter)

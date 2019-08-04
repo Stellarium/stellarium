@@ -164,8 +164,8 @@ void AngleMeasure::init()
 
 void AngleMeasure::update(double deltaTime)
 {
-	messageFader.update((int)(deltaTime*1000));
-	lineVisible.update((int)(deltaTime*1000));
+	messageFader.update(static_cast<int>(deltaTime*1000));
+	lineVisible.update(static_cast<int>(deltaTime*1000));
 	static StelCore *core=StelApp::getInstance().getCore();
 
 	withDecimalDegree = StelApp::getInstance().getFlagShowDecimalDegrees();

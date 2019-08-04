@@ -916,7 +916,7 @@ void Satellite::draw(StelCore* core, StelPainter& painter)
 
 	XYZ = getJ2000EquatorialPos(core);
 	// NOTE: Should we use the real angular size of ISS here (we do not have linear size of ISS within catalog for calculation the angular size)?
-	int screenSizeISS = (int)((0.0167*M_PI/180.)*painter.getProjector()->getPixelPerRadAtCenter()); // Set screen size of ISS (1 arcmin)
+	int screenSizeISS = static_cast<int>((0.0167*M_PI/180.)*painter.getProjector()->getPixelPerRadAtCenter()); // Set screen size of ISS (1 arcmin)
 
 	Vec3d win;
 	if (painter.getProjector()->projectCheck(XYZ, win))
@@ -1063,7 +1063,7 @@ void Satellite::computeOrbitPoints()
 	{
 		// compute next orbit point when clock runs forward
 		gTimeSpan diffTime = epoch - lastEpochComp;
-		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
+		diffSlots          = static_cast<int>(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if (diffSlots > 0)
 		{
@@ -1096,7 +1096,7 @@ void Satellite::computeOrbitPoints()
 	{
 		// compute next orbit point when clock runs backward
 		gTimeSpan diffTime = lastEpochComp - epoch;
-		diffSlots          = (int)(diffTime.getDblSeconds()/orbitLineSegmentDuration);
+		diffSlots          = static_cast<int>(diffTime.getDblSeconds()/orbitLineSegmentDuration);
 
 		if (diffSlots > 0)
 		{

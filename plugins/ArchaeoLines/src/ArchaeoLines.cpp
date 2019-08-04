@@ -442,7 +442,7 @@ void ArchaeoLines::update(double deltaTime)
 	}
 
 	// Updates for line brightness
-	lineFader.update((int)(deltaTime*1000));
+	lineFader.update(static_cast<int>(deltaTime*1000));
 	equinoxLine->update(deltaTime);
 	northernSolsticeLine->update(deltaTime);
 	southernSolsticeLine->update(deltaTime);

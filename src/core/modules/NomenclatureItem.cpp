@@ -857,7 +857,7 @@ double NomenclatureItem::getAngularSize(const StelCore* core) const
 
 void NomenclatureItem::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void NomenclatureItem::draw(StelCore* core, StelPainter *painter)

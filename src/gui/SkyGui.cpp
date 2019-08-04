@@ -137,7 +137,7 @@ QPixmap getInfoPixmap(const QStringList& strList, QFont font, QColor color)
 	titleFont.setPixelSize(font.pixelSize()+7);
 
 	QRect strRect = QFontMetrics(titleFont).boundingRect(strList.at(maxLenIdx));
-	int w = strRect.width()+1+(int)(0.02f*strRect.width());
+	int w = strRect.width()+1+static_cast<int>(0.02f*strRect.width());
 	int h = strRect.height()*strList.count()+8;
 
 	QPixmap strPixmap(w, h);
@@ -381,7 +381,7 @@ void SkyGui::updateBarsPos()
 	if (lastButtonbarWidth != buttonBar->boundingRectNoHelpLabel().width())
 	{
 		updatePath = true;
-		lastButtonbarWidth = (int)(buttonBar->boundingRectNoHelpLabel().width());
+		lastButtonbarWidth = static_cast<int>(buttonBar->boundingRectNoHelpLabel().width());
 	}
 
 	if (updatePath)

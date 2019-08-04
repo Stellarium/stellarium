@@ -367,7 +367,7 @@ void NMEALookupHelper::nmeaUpdated(const QGeoPositionInfo &update)
 		loc.longitude=coord.longitude();
 		loc.latitude=coord.latitude();
 		// 2D fix may have only long/lat, invalid altitude.
-		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : (int) floor(coord.altitude()));
+		loc.altitude=( qIsNaN(coord.altitude()) ? 0 : static_cast<int>(floor(coord.altitude())));
 		if (verbose)
 			qDebug() << "Location in progress: Long=" << loc.longitude << " Lat=" << loc.latitude << " Alt" << loc.altitude;
 		loc.bortleScaleIndex=StelLocation::DEFAULT_BORTLE_SCALE_INDEX;

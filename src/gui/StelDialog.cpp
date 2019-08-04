@@ -130,8 +130,8 @@ void StelDialog::setVisible(bool v)
 			QString confNamePt="DialogPositions/" + dialogName;
 			QString storedPosString=conf->value(confNamePt,
 							    QString("%1,%2")
-							    .arg((int)((screenSize.width()  - size.width() )/2))
-							    .arg((int)((screenSize.height() - size.height())/2)))
+							    .arg(static_cast<int>((screenSize.width()  - size.width() )/2))
+							    .arg(static_cast<int>((screenSize.height() - size.height())/2)))
 					.toString();
 			QStringList posList=storedPosString.split(",");
 			if (posList.length()==2)
@@ -141,8 +141,8 @@ void StelDialog::setVisible(bool v)
 			}
 			else	// in case there is an invalid string?
 			{
-				newX=(int)((screenSize.width()  - size.width() )/2);
-				newY=(int)((screenSize.height() - size.height())/2);
+				newX=static_cast<int>((screenSize.width()  - size.width() )/2);
+				newY=static_cast<int>((screenSize.height() - size.height())/2);
 			}
 
 			if (newX>=screenSize.width())
@@ -385,7 +385,7 @@ void StelDialog::handleDialogSizeChanged(QSizeF size)
 {
 	QSettings *conf=StelApp::getInstance().getSettings();
 	Q_ASSERT(conf);
-	conf->setValue("DialogSizes/" + dialogName, QString("%1,%2").arg((int)size.width()).arg((int)size.height()));
+	conf->setValue("DialogSizes/" + dialogName, QString("%1,%2").arg(static_cast<int>(size.width())).arg(static_cast<int>(size.height())));
 }
 
 

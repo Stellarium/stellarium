@@ -59,8 +59,8 @@ public:
 	void setColor(const Vec3f& c) {color = c;}
 	Vec3f get_color() const {return color;}
 	void updateI18n();
-	void update(double deltaTime) {fader.update((int)(deltaTime*1000));}
-	void set_fade_duration(float duration) {fader.setDuration((int)(duration*1000.f));}
+	void update(double deltaTime) {fader.update(static_cast<int>(deltaTime*1000));}
+	void set_fade_duration(float duration) {fader.setDuration(static_cast<int>(duration*1000.f));}
 	void setFlagShow(bool b){fader = b;}
 	bool getFlagShow() const {return fader;}
 private:

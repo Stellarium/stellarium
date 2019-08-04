@@ -580,7 +580,7 @@ void AstroCalcDialog::drawAziVsTimeDiagram()
 		StelObjectP selectedObject = selectedObjects[0];
 		double currentJD = core->getJD();
 		double shift = core->getUTCOffset(currentJD) / 24.0;
-		double noon = (int)(currentJD + shift);
+		double noon = static_cast<int>(currentJD + shift);
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
@@ -692,7 +692,7 @@ void AstroCalcDialog::mouseOverAziLine(QMouseEvent* event)
 			}
 			else
 			{
-				JD = x / 86400.0 + (int)core->getJD() - 0.5;
+				JD = x / 86400.0 + static_cast<int>(core->getJD()) - 0.5;
 				QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
 				if (StelApp::getInstance().getFlagShowDecimalDegrees())
 					info = QString("%1<br />%2: %3<br />%4: %5%6").arg(ui->aziVsTimePlot->graph(0)->name(), q_("Local Time"), LT, q_("Azimuth"), QString::number(y, 'f', 2), QChar(0x00B0));
@@ -1509,7 +1509,7 @@ void AstroCalcDialog::generateEphemeris()
 	firstJD = firstJD - core->getUTCOffset(firstJD) / 24.;
 	double secondJD = StelUtils::qDateTimeToJd(ui->dateToDateTimeEdit->dateTime());	
 	secondJD = secondJD - core->getUTCOffset(secondJD) / 24.;
-	int elements = (int)((secondJD - firstJD) / currentStep);
+	int elements = static_cast<int>((secondJD - firstJD) / currentStep);
 	EphemerisList.clear();
 	bool allNakedEyePlanets = (ui->allNakedEyePlanetsCheckBox->isChecked() && cplanet==solarSystem->getEarth());
 	bool withTime = false;
@@ -2069,7 +2069,7 @@ void AstroCalcDialog::drawAltVsTimeDiagram()
 
 		double currentJD = core->getJD();
 		double shift = core->getUTCOffset(currentJD) / 24.0;
-		double noon = (int)(currentJD + shift);
+		double noon = static_cast<int>(currentJD + shift);
 		double az, alt, deg, ltime, JD;
 		bool sign;
 
@@ -2266,7 +2266,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 
 	double currentJD = core->getJD();
 	double UTCOffset = core->getUTCOffset(currentJD);
-	double now = ((currentJD + 0.5 - (int)currentJD) * 86400.0) + UTCOffset * 3600.0;
+	double now = ((currentJD + 0.5 - static_cast<int>(currentJD)) * 86400.0) + UTCOffset * 3600.0;
 
 	if (now > 129600) now -= 86400;
 	if (now < 43200) now += 86400;
@@ -2289,7 +2289,7 @@ void AstroCalcDialog::drawCurrentTimeDiagram()
 
 	// detect roll over graph day limits.
 	// if so, update the graph
-	int graphJD = (int)(currentJD + UTCOffset / 24);
+	int graphJD = static_cast<int>(currentJD + UTCOffset / 24.);
 	if (oldGraphJD != graphJD || graphPlotNeedsRefresh)
 	{
 		oldGraphJD = graphJD;
@@ -2416,7 +2416,7 @@ void AstroCalcDialog::drawXVsTimeGraphs()
 
 		double width = 1.0;
 		double UTCshift = core->getUTCOffset(startJD) / 24.;
-		int dYear = (int)core->getCurrentPlanet()->getSiderealPeriod() + 3;
+		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 3;
 		int firstGraph = ui->graphsFirstComboBox->currentData().toInt();
 		int secondGraph = ui->graphsSecondComboBox->currentData().toInt();
 
@@ -2733,7 +2733,7 @@ void AstroCalcDialog::prepareXVsTimeAxesAndGraph()
 	ui->graphsPlot->yAxis->setLabel(yAxis1Legend);
 	ui->graphsPlot->yAxis2->setLabel(yAxis2Legend);
 
-	int dYear = ((int)core->getCurrentPlanet()->getSiderealPeriod() + 1) * 86400;
+	int dYear = (static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 1) * 86400;
 	ui->graphsPlot->xAxis->setRange(0, dYear);
 	ui->graphsPlot->xAxis->setScaleType(QCPAxis::stLinear);
 	ui->graphsPlot->xAxis->setTickLabelType(QCPAxis::ltDateTime);
@@ -2792,7 +2792,7 @@ void AstroCalcDialog::prepareMonthlyEleveationAxesAndGraph()
 	ui->monthlyElevationGraph->xAxis->setLabel(xAxisStr);
 	ui->monthlyElevationGraph->yAxis->setLabel(yAxisStr);
 
-	int dYear = ((int)core->getCurrentPlanet()->getSiderealPeriod() + 1) * 86400;
+	int dYear = (static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 1) * 86400;
 	ui->monthlyElevationGraph->xAxis->setRange(0, dYear);
 	ui->monthlyElevationGraph->xAxis->setScaleType(QCPAxis::stLinear);
 	ui->monthlyElevationGraph->xAxis->setTickLabelType(QCPAxis::ltDateTime);
@@ -2898,7 +2898,7 @@ void AstroCalcDialog::drawMonthlyElevationGraph()
 		StelUtils::getDateFromJulianDay(currentJD, &year, &month, &day);
 		StelUtils::getJDFromDate(&startJD, year, 1, 1, hour, 0, 0);
 		startJD -= core->getUTCOffset(startJD)/24; // Time zone correction
-		int dYear = (int)core->getCurrentPlanet()->getSiderealPeriod() + 3;
+		int dYear = static_cast<int>(core->getCurrentPlanet()->getSiderealPeriod()) + 3;
 		for (int i = -2; i <= dYear; i++)
 		{
 			JD = startJD + i;
@@ -2989,7 +2989,7 @@ void AstroCalcDialog::setClickedTime(double posx)
 {
 	double JD = core->getJD();
 	double shift = core->getUTCOffset(JD) / 24;
-	int noonJD = (int)(JD + shift);
+	int noonJD = static_cast<int>(JD + shift);
 	JD = posx / 86400.0 + noonJD - 0.5 - shift;
 
 	core->setRealTimeSpeed();
@@ -3049,7 +3049,7 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 			}
 			else if (graph->name() == "[Transit]")
 			{
-				JD = transitX / 86400.0 + (int)core->getJD() - 0.5;
+				JD = transitX / 86400.0 + static_cast<int>(core->getJD()) - 0.5;
 				info = q_("Passage of meridian at approximately %1").arg(StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm"));
 			}
 			else if (graph->name() == "[Sun]")
@@ -3064,7 +3064,7 @@ void AstroCalcDialog::mouseOverLine(QMouseEvent* event)
 				info = q_("Line of astronomical twilight");
 			else
 			{
-				JD = x / 86400.0 + (int)core->getJD() - 0.5;
+				JD = x / 86400.0 + static_cast<int>(core->getJD()) - 0.5;
 				QString LT = StelUtils::jdToQDateTime(JD - core->getUTCOffset(JD)).toString("H:mm");
 
 				if (StelApp::getInstance().getFlagShowDecimalDegrees())

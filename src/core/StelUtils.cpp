@@ -214,7 +214,7 @@ QString radToHmsStrAdapt(const double angle)
 	QTextStream ts(&buf);
 	StelUtils::radToHms(angle+0.005*M_PI/12/(60*60), h, m, s);
 	ts << h << 'h';
-	if (std::fabs(s*100-(int)s*100)>=1)
+	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
 		ts << m << 'm';
 		ts.setRealNumberNotation(QTextStream::FixedNotation);
@@ -225,9 +225,9 @@ QString radToHmsStrAdapt(const double angle)
 		ts.reset();
 		ts << 's';
 	}
-	else if ((int)s!=0)
+	else if (static_cast<int>(s)!=0)
 	{
-		ts << m << 'm' << (int)s << 's';
+		ts << m << 'm' << static_cast<int>(s) << 's';
 	}
 	else if (m!=0)
 	{
@@ -298,13 +298,13 @@ QString radToDmsStrAdapt(const double angle, const bool useD)
 	QTextStream os(&str);
 
 	os << (sign?'+':'-') << d << degsign;
-	if (std::fabs(s*100-(int)s*100)>=1)
+	if (std::fabs(s*100-static_cast<int>(s)*100)>=1)
 	{
 		os << m << '\'' << fixed << qSetRealNumberPrecision(2) << qSetFieldWidth(5) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
 	}
-	else if ((int)s!=0)
+	else if (static_cast<int>(s)!=0)
 	{
-		os << m << '\'' << (int)s << '\"';
+		os << m << '\'' << static_cast<int>(s) << '\"';
 	}
 	else if (m!=0)
 	{
@@ -769,14 +769,14 @@ void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *s
 {
 	double frac = julianDay - (floor(julianDay));
 	double secs = frac * 24.0 * 60.0 * 60.0 + 0.0001; // add constant to fix floating-point truncation error
-	int s = (int)floor(secs);
+	int s = static_cast<int>(floor(secs));
 
 	*hour = ((s / (60 * 60))+12)%24;
 	*minute = (s/(60))%60;
 	*second = s % 60;
 	if(millis)
 	{
-		*millis = (int)floor((secs - floor(secs)) * 1000.0);
+		*millis = static_cast<int>(floor((secs - floor(secs)) * 1000.0));
 	}
 }
 
@@ -813,7 +813,7 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QString out;
 	int quotestartedat = -1;
 
-	for (int i = 0; i < (int)fmt.length(); i++)
+	for (int i = 0; i < static_cast<int>(fmt.length()); i++)
 	{
 		if (fmt.at(i) == quote)
 		{
@@ -959,8 +959,8 @@ double qTimeToJDFraction(const QTime& time)
 QTime jdFractionToQTime(const double jd)
 {
 	double decHours = std::fmod(jd+0.5, 1.0);
-	int hours = (int)(decHours/0.041666666666666666666);
-	int mins = (int)((decHours-(hours*0.041666666666666666666))/0.00069444444444444444444);
+	int hours = static_cast<int>(decHours/0.041666666666666666666);
+	int mins = static_cast<int>((decHours-(hours*0.041666666666666666666))/0.00069444444444444444444);
 	return QTime::fromString(QString("%1.%2").arg(hours).arg(mins), "h.m");
 }
 
@@ -1133,7 +1133,7 @@ int dayInYear(const int year, const int month, const int day)
 {
 	// set k to 1 (leap) or 2.
 	int k=(isLeapYear(year) ? 1:2);
-	return (int)(275*month/9) - k*(int)((month+9)/12) + day -30;
+	return static_cast<int>(275*month/9) - k*static_cast<int>((month+9)/12) + day -30;
 }
 
 // Return a fractional year like YYYY.ddddd. For negative years, the year number is of course decrease. E.g. -500.5 occurs in -501.
@@ -1320,8 +1320,8 @@ double calculateSiderealPeriod(const double SemiMajorAxis)
 
 QString hoursToHmsStr(const double hours, const bool lowprecision)
 {
-	int h = (int)hours;
-	int m = (int)((qAbs(hours)-qAbs(double(h)))*60);
+	int h = static_cast<int>(hours);
+	int m = static_cast<int>((qAbs(hours)-qAbs(double(h)))*60);
 	if (lowprecision)
 		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
 	else
