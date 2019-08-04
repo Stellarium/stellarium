@@ -122,7 +122,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	
 	setScriptRate(1.0);
 	
-	engine->setProcessEventsInterval(10);
+	engine->setProcessEventsInterval(1); // was 10, let's allow a smoother script execution
 
 	agent = new StelScriptEngineAgent(engine);
 	engine->setAgent(agent);
@@ -468,6 +468,7 @@ void StelScriptMgr::setScriptRate(float r)
 
 void StelScriptMgr::pauseScript()
 {
+	emit(scriptPaused());
 	agent->setPauseScript(true);
 }
 

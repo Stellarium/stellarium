@@ -1070,6 +1070,27 @@ double StelMainScriptAPI::getViewDecJ2000Angle()
 	return dec*180/M_PI; // convert to degrees from radians
 }
 
+void StelMainScriptAPI::moveToObject(const QString& name, float duration)
+{
+	if (name.isEmpty())
+		return;
+
+	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	StelObjectP obj = omgr->searchByName(name);
+
+	mvmgr->moveToObject(obj, duration);
+}
+
+void StelMainScriptAPI::moveToSelectedObject(float duration)
+{
+	StelObjectMgr* omgr = GETSTELMODULE(StelObjectMgr);
+	if (omgr->getSelectedObject().isEmpty())
+		return;
+
+	moveToObject(omgr->getSelectedObject()[0]->getEnglishName(), duration);
+}
+
 void StelMainScriptAPI::moveToAltAzi(const QString& alt, const QString& azi, float duration)
 {
 	StelMovementMgr* mvmgr = GETSTELMODULE(StelMovementMgr);

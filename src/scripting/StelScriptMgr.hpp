@@ -212,6 +212,8 @@ signals:
 	void runningScriptIdChanged(const QString& id);
 	//! Notification when a script starts running
 	void scriptRunning();
+	//! Notification when a script has paused running
+	void scriptPaused();
 	//! Notification when a script has stopped running 
 	void scriptStopped();
 	//! Notification of a script event - warnings, current execution line etc.

@@ -271,6 +271,15 @@ public slots:
 	//! @return the Declination angle in J2000 frame in decimal degrees.
 	static double getViewDecJ2000Angle();
 
+	//! Move the current viewing direction to some object.
+	//! @param name is the English name of the object
+	//! @param duration the duration of the movement in seconds
+	static void moveToObject(const QString& name, float duration=1.);
+
+	//! Move the current viewing direction to selected object.
+	//! @param duration the duration of the movement in seconds
+	static void moveToSelectedObject(float duration=1.);
+
 	//! move the current viewing direction to some specified altitude and azimuth.
 	//! The move will run in AltAz coordinates. This will look different from moveToRaDec() when timelapse is fast.
 	//! angles may be specified in a format recognised by StelUtils::getDecAngle()
