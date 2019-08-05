@@ -131,7 +131,7 @@ void LibGPSLookupHelper::query()
 //				emit queryError("GPSD query: No Fix.");
 //				return;
 //			}
-			if (newdata->online==0) // no device?
+			if (newdata->online==0.0) // no device?
 			{
 				// This can happen when unplugging the GPS while running Stellarium,
 				// or running gpsd with no GPS receiver.
@@ -173,8 +173,8 @@ void LibGPSLookupHelper::query()
 				// qDebug() << "Spherical Position Error (epe):" << newdata->epe;
 				// #endif
 			}
-			loc.longitude=newdata->fix.longitude;
-			loc.latitude=newdata->fix.latitude;
+			loc.longitude = static_cast<float> (newdata->fix.longitude);
+			loc.latitude  = static_cast<float> (newdata->fix.latitude);
 			// Frequently hdop, vdop and satellite counts are NaN. Sometimes they show OK. This is minor issue.
 			if ((verbose) && (fixmode<3))
 			{
@@ -183,7 +183,7 @@ void LibGPSLookupHelper::query()
 			}
 			else
 			{
-				loc.altitude=newdata->fix.altitude;
+				loc.altitude=static_cast<int>(newdata->fix.altitude);
 				if (verbose)
 				{
 					qDebug() << "GPSDfix " << fixmode << ": Location" << QString("lat %1, long %2, alt %3").arg(loc.latitude).arg(loc.longitude).arg(loc.altitude);
@@ -700,9 +700,9 @@ const StelLocation StelLocationMgr::locationFromCLI() const
 	QSettings* conf = StelApp::getInstance().getSettings();
 	bool ok;
 	conf->beginGroup("location_run_once");
-	ret.latitude = parseAngle(StelUtils::radToDmsStr(conf->value("latitude").toFloat(), true), &ok);
+	ret.latitude = parseAngle(StelUtils::radToDmsStr(conf->value("latitude").toDouble(), true), &ok);
 	if (!ok) ret.role = '!';
-	ret.longitude = parseAngle(StelUtils::radToDmsStr(conf->value("longitude").toFloat(), true), &ok);
+	ret.longitude = parseAngle(StelUtils::radToDmsStr(conf->value("longitude").toDouble(), true), &ok);
 	if (!ok) ret.role = '!';
 	ret.altitude = conf->value("altitude", 0).toInt(&ok);
 	ret.planetName = conf->value("home_planet", "Earth").toString();
@@ -927,7 +927,7 @@ void StelLocationMgr::changeLocationFromGPSQuery(const StelLocation &loc)
 {
 	bool verbose=qApp->property("verbose").toBool();
 
-	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0f, 0.0f);
+	StelApp::getInstance().getCore()->moveObserverTo(loc, 0.0, 0.0);
 	if (nmeaHelper)
 	{
 		if (verbose)
@@ -1001,7 +1001,7 @@ void StelLocationMgr::changeLocationFromNetworkLookup()
 			// Ensure that ipTimeZone is a valid IANA timezone name!
 			QTimeZone ipTZ(ipTimeZone.toUtf8());
 			core->setCurrentTimeZone( !ipTZ.isValid() || ipTimeZone.isEmpty() ? "LMST" : ipTimeZone);
-			core->moveObserverTo(loc, 0.0f, 0.0f);
+			core->moveObserverTo(loc, 0.0, 0.0);
 			QSettings* conf = StelApp::getInstance().getSettings();
 			conf->setValue("init_location/last_location", QString("%1, %2").arg(latitude).arg(longitude));
 		}

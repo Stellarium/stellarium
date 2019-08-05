@@ -97,7 +97,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	if (!file->open(QIODevice::ReadOnly))
 	{
 		qWarning() << "Error while loading " << QDir::toNativeSeparators(catalogFilePath) << ": failed to open file.";
-		return 0;
+		return Q_NULLPTR;
 	}
 	dbStr = "Loading " + QDir::toNativeSeparators(catalogFilePath) + ": ";
 	unsigned int magic,major,minor,type,level,mag_min,mag_range,mag_steps;
@@ -112,7 +112,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	{
 		dbStr += "error - file format is bad.";
 		qDebug() << dbStr;
-		return 0;
+		return Q_NULLPTR;
 	}
 	const bool byte_swap = (magic == FILE_MAGIC_OTHER_ENDIAN);
 	if (byte_swap)
@@ -161,7 +161,7 @@ ZoneArray* ZoneArray::create(const QString& catalogFilePath, bool use_mmap)
 	{
 		dbStr += "error - not a catalogue file.";
 		qDebug() << dbStr;
-		return 0;
+		return Q_NULLPTR;
 	}
 	ZoneArray *rval = Q_NULLPTR;
 	dbStr += QString("%1_%2v%3_%4; ").arg(level).arg(type).arg(major).arg(minor);
@@ -226,13 +226,13 @@ ZoneArray::ZoneArray(const QString& fname, QFile* file, int level, int mag_min,
 			  mag_range(mag_range), mag_steps(mag_steps),
 			  star_position_scale(0.0), nr_of_stars(0), zones(Q_NULLPTR), file(file)
 {
-	nr_of_zones = StelGeodesicGrid::nrOfZones(level);	
+	nr_of_zones = static_cast<unsigned int>(StelGeodesicGrid::nrOfZones(level));
 }
 
 bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 {
 	int parts = 256;
-	int part_size = (size + (parts>>1)) / parts;
+	int part_size = static_cast<int>((size + (parts>>1)) / parts);
 	if (part_size < 64*1024)
 	{
 		part_size = 64*1024;
@@ -241,11 +241,11 @@ bool ZoneArray::readFile(QFile& file, void *data, qint64 size)
 	i += 1.f;
 	while (size > 0)
 	{
-		const int to_read = (part_size < size) ? part_size : size;
-		const int read_rc = file.read((char*)data, to_read);
+		const int to_read = (part_size < size) ? part_size : static_cast<int>(size);
+		const int read_rc = static_cast<int>(file.read(static_cast<char*>(data), to_read));
 		if (read_rc != to_read) return false;
 		size -= read_rc;
-		data = ((char*)data) + read_rc;
+		data = (static_cast<char*>(data)) + read_rc;
 		i += 1.f;
 	}
 	return true;
@@ -288,14 +288,14 @@ template<class Star>
 SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mmap,
 					 int level, int mag_min, int mag_range, int mag_steps)
 		: ZoneArray(file->fileName(), file, level, mag_min, mag_range, mag_steps),
-		  stars(0), mmap_start(0)
+		  stars(Q_NULLPTR), mmap_start(Q_NULLPTR)
 {
 	if (nr_of_zones > 0)
 	{
 		zones = new SpecialZoneData<Star>[nr_of_zones];
 
 		unsigned int *zone_size = new unsigned int[nr_of_zones];
-		if ((qint64)(sizeof(unsigned int)*nr_of_zones) != file->read((char*)zone_size, sizeof(unsigned int)*nr_of_zones))
+		if (static_cast<qint64>(sizeof(unsigned int)*nr_of_zones) != file->read(reinterpret_cast<char*>(zone_size), sizeof(unsigned int)*nr_of_zones))
 		{
 			qDebug() << "Error reading zones from catalog:"
 				 << file->fileName();
@@ -310,7 +310,7 @@ SpecialZoneArray<Star>::SpecialZoneArray(QFile* file, bool byte_swap,bool use_mm
 			{
 				const unsigned int tmp_spu_int32 = byte_swap?stel_bswap_32(*tmp):*tmp;
 				nr_of_stars += tmp_spu_int32;
-				getZones()[z].size = tmp_spu_int32;
+				getZones()[z].size = static_cast<int>(tmp_spu_int32);
 			}
 		}
 		// delete zone_size before allocating stars
@@ -416,7 +416,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	StelSkyDrawer* drawer = core->getSkyDrawer();
 	Vec3f vf;
 	static const double d2000 = 2451545.0;
-	const float movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / star_position_scale;
+	const float movementFactor = static_cast<float>((M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25) / static_cast<double>(star_position_scale));
 
 	// GZ, added for extinction
 	const Extinction& extinction=core->getSkyDrawer()->getExtinction();
@@ -428,7 +428,7 @@ void SpecialZoneArray<Star>::draw(StelPainter* sPainter, int index, bool isInsid
 	int cutoffMagStep=limitMagIndex;
 	if (drawer->getFlagStarMagnitudeLimit())
 	{
-		cutoffMagStep = (static_cast<int>(drawer->getCustomStarMagnitudeLimit()*1000.f) - mag_min)*mag_steps/mag_range;
+		cutoffMagStep = (static_cast<int>(drawer->getCustomStarMagnitudeLimit()*1000.0) - mag_min)*mag_steps/mag_range;
 		if (cutoffMagStep>limitMagIndex)
 			cutoffMagStep = limitMagIndex;
 	}
@@ -503,10 +503,10 @@ void SpecialZoneArray<Star>::searchAround(const StelCore* core, int index, const
 	const double movementFactor = (M_PI/180.)*(0.0001/3600.) * ((core->getJDE()-d2000)/365.25)/ star_position_scale;
 	const SpecialZoneData<Star> *const z = getZones()+index;
 	Vec3f tmp;
-	Vec3f vf(v[0], v[1], v[2]);
+	Vec3f vf(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 	for (const Star* s=z->getStars();s<z->getStars()+z->size;++s)
 	{
-		s->getJ2000Pos(z,movementFactor, tmp);
+		s->getJ2000Pos(z,static_cast<float>(movementFactor), tmp);
 		tmp.normalize();
 		if (tmp*vf >= cosLimFov)
 		{

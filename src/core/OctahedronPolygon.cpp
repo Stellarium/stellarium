@@ -318,9 +318,9 @@ struct OctTessTrianglesCallbackData
 	QList<Vec3d> tempVertices;		//! Used to store the temporary combined vertices
 };
 
-void errorCallback(GLenum errno)
+void errorCallback(GLenum errn)
 {
-	qWarning() << "Tesselator error:" << QString::fromLatin1((char*)gluesErrorString(errno));
+	qWarning() << "Tesselator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
 	Q_ASSERT(0);
 }
 
