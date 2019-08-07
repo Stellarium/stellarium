@@ -1563,7 +1563,7 @@ void AstroCalcDialog::generateEphemeris()
 		for (int i = 0; i <= elements; i++)
 		{
 			double JD = firstJD + i * currentStep;
-			core->setJDE(JD);
+			core->setJD(JD);
 			core->update(0); // force update to get new coordinates
 			if (horizon)
 			{
