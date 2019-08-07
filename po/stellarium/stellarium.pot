@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-04 16:41+0700\n"
+"POT-Creation-Date: 2019-08-07 22:22+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -2751,7 +2751,7 @@ msgstr ""
 msgid "Valid range of usage: between years %1 and %2."
 msgstr ""
 
-#: src/core/StelProjector.cpp:131
+#: src/core/StelProjector.cpp:134
 msgid "Maximum FOV: "
 msgstr ""
 
@@ -2985,14 +2985,26 @@ msgid "Next setting of the selected object"
 msgstr ""
 
 #: src/core/StelObjectMgr.cpp:58
-msgid "Previous transit of the selected object"
+msgid "Today's transit of the selected object"
 msgstr ""
 
 #: src/core/StelObjectMgr.cpp:59
-msgid "Previous rising of the selected object"
+msgid "Today's rising of the selected object"
 msgstr ""
 
 #: src/core/StelObjectMgr.cpp:60
+msgid "Today's setting of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:61
+msgid "Previous transit of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:62
+msgid "Previous rising of the selected object"
+msgstr ""
+
+#: src/core/StelObjectMgr.cpp:63
 msgid "Previous setting of the selected object"
 msgstr ""
 
