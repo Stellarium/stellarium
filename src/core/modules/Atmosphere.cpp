@@ -124,20 +124,20 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		delete[] colorGrid;
 		delete [] posGrid;
 		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
-		skyResolutionX = (int)floor(0.5+skyResolutionY*(0.5*std::sqrt(3.0))*prj->getViewportWidth()/prj->getViewportHeight());
+		skyResolutionX = static_cast<int>(floorf(0.5f+skyResolutionY*(0.5f*sqrtf(3.0f))*prj->getViewportWidth()/prj->getViewportHeight()));
 		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
 		colorGrid = new Vec4f[(1+skyResolutionX)*(1+skyResolutionY)];
-		float stepX = (float)prj->getViewportWidth() / (skyResolutionX-0.5);
+		float stepX = (float)prj->getViewportWidth() / (skyResolutionX-0.5f);
 		float stepY = (float)prj->getViewportHeight() / skyResolutionY;
-		float viewport_left = (float)prj->getViewportPosX();
-		float viewport_bottom = (float)prj->getViewportPosY();
+		float viewport_left = prj->getViewportPosX();
+		float viewport_bottom = prj->getViewportPosY();
 		for (int x=0; x<=skyResolutionX; ++x)
 		{
 			for(int y=0; y<=skyResolutionY; ++y)
 			{
 				Vec2f &v(posGrid[y*(1+skyResolutionX)+x]);
 				v[0] = viewport_left + ((x == 0) ? 0.f :
-						(x == skyResolutionX) ? (float)prj->getViewportWidth() : (x-0.5*(y&1))*stepX);
+						(x == skyResolutionX) ? prj->getViewportWidth() : (x-0.5f*(y&1))*stepX);
 				v[1] = viewport_bottom+y*stepY;
 			}
 		}
