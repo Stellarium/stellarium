@@ -1312,7 +1312,7 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
     float fW = fH * aspect;
 
     //apply offset values
-    Vec2f vp = altAzProjector->getViewportCenterOffset();
+    Vector2<qreal> vp = altAzProjector->getViewportCenterOffset();
     float horizOffset = 2.0 * fW * vp[0];
     float vertOffset = - 2.0 * fH * vp[1];
 

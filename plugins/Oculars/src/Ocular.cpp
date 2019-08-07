@@ -22,8 +22,8 @@
 
 Ocular::Ocular()
 	: m_binoculars(false),
-	  m_permanetCrosshair(false),
-	  m_appearentFOV(0.0),
+	  m_permanentCrosshair(false),
+	  m_apparentFOV(0.0),
 	  m_effectiveFocalLength(0.0),
 	  m_fieldStop(0.0)
 {
@@ -31,8 +31,8 @@ Ocular::Ocular()
 
 Ocular::Ocular(const QObject& other)
 	: m_binoculars(other.property("binoculars").toBool()),
-	  m_permanetCrosshair(other.property("permanentCrosshair").toBool()),
-	  m_appearentFOV(other.property("appearentFOV").toDouble()),
+	  m_permanentCrosshair(other.property("permanentCrosshair").toBool()),
+	  m_apparentFOV(other.property("appearentFOV").toDouble()),
 	  m_effectiveFocalLength(other.property("effectiveFocalLength").toDouble()),
 	  m_fieldStop(other.property("fieldStop").toDouble()),
 	  m_name(other.property("name").toString()),
@@ -72,12 +72,12 @@ double Ocular::actualFOV(const Telescope * telescope, const Lens * lens) const
 	const double lens_multipler = (lens != Q_NULLPTR ? lens->getMultipler() : 1.0f);
 	double actualFOV = 0.0;
 	if (m_binoculars) {
-		actualFOV = appearentFOV();
+		actualFOV = apparentFOV();
 	} else if (fieldStop() > 0.0) {
 		actualFOV =  fieldStop() / (telescope->focalLength() * lens_multipler) * 57.3;
 	} else {
 		//actualFOV = apparent / mag
-		actualFOV = appearentFOV() / (telescope->focalLength() * lens_multipler / effectiveFocalLength());
+		actualFOV = apparentFOV() / (telescope->focalLength() * lens_multipler / effectiveFocalLength());
 	}
 	return actualFOV;
 }
@@ -110,14 +110,14 @@ void Ocular::setName(const QString aName)
 	m_name = aName;
 }
 
-double Ocular::appearentFOV(void) const
+double Ocular::apparentFOV(void) const
 {
-	return m_appearentFOV;
+	return m_apparentFOV;
 }
 
 void Ocular::setAppearentFOV(const double fov)
 {
-	m_appearentFOV = fov;
+	m_apparentFOV = fov;
 }
 
 double Ocular::effectiveFocalLength(void) const
@@ -152,12 +152,12 @@ void Ocular::setBinoculars(const bool flag)
 
 bool Ocular::hasPermanentCrosshair(void) const
 {
-	return m_permanetCrosshair;
+	return m_permanentCrosshair;
 }
 
 void Ocular::setPermanentCrosshair(const bool flag)
 {
-	m_permanetCrosshair = flag;
+	m_permanentCrosshair = flag;
 }
 
 QString Ocular::reticlePath(void) const
@@ -189,9 +189,9 @@ Ocular * Ocular::ocularFromSettings(const QSettings *theSettings, const int ocul
 	ocular->setPermanentCrosshair(theSettings->value(prefix + "permanentCrosshair", "false").toBool());
 	ocular->setReticlePath(theSettings->value(prefix + "reticlePath", "").toString());
 
-	if (!(ocular->appearentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
+	if (!(ocular->apparentFOV() > 0.0 && ocular->effectiveFocalLength() > 0.0)) {
 		qWarning() << "WARNING: Invalid data for ocular. Ocular values must be positive. \n"
-		<< "\tafov: " << ocular->appearentFOV() << "\n"
+		<< "\tafov: " << ocular->apparentFOV() << "\n"
 		<< "\tefl: " << ocular->effectiveFocalLength() << "\n"
 		<< "\tThis ocular will be ignored.";
 		delete ocular;
@@ -205,7 +205,7 @@ void Ocular::writeToSettings(QSettings * settings, const int index)
 {
 	QString prefix = "ocular/" + QVariant(index).toString() + "/";
 	settings->setValue(prefix + "name", this->name());
-	settings->setValue(prefix + "afov", this->appearentFOV());
+	settings->setValue(prefix + "afov", this->apparentFOV());
 	settings->setValue(prefix + "efl", this->effectiveFocalLength());
 	settings->setValue(prefix + "fieldStop", this->fieldStop());
 	settings->setValue(prefix + "binoculars", this->isBinoculars());

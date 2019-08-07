@@ -159,7 +159,7 @@ public:
 	void update(double deltaTime);
 
 	//! Handle the resizing of the window
-	void windowHasBeenResized(float x, float y, float width, float height);
+	void windowHasBeenResized(qreal x, qreal y, qreal width, qreal height);
 
 	//! Update core state before drawing modules.
 	void preDraw();

@@ -481,7 +481,7 @@ void StelCore::getClippingPlanes(double* zn, double* zf) const
 }
 
 // Handle the resizing of the window
-void StelCore::windowHasBeenResized(float x, float y, float width, float height)
+void StelCore::windowHasBeenResized(qreal x, qreal y, qreal width, qreal height)
 {
 	// Maximize display when resized since it invalidates previous options anyway
 	currentProjectorParams.viewportXywh.set(x, y, width, height);

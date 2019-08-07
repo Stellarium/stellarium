@@ -60,11 +60,11 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	// initialize viewport parameters and texture size:
 
 	// maximum FOV value of the not yet distorted image
-	double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.f).toFloat();
-	if (distorter_max_fov > 240.f)
-		distorter_max_fov = 240.f;
-	else if (distorter_max_fov < 120.f)
-		distorter_max_fov = 120.f;
+	double distorter_max_fov = conf.value("spheric_mirror/distorter_max_fov",175.).toDouble();
+	if (distorter_max_fov > 240.)
+		distorter_max_fov = 240.;
+	else if (distorter_max_fov < 120.)
+		distorter_max_fov = 120.;
 	if (distorter_max_fov > core->getMovementMgr()->getMaxFov())
 		distorter_max_fov = core->getMovementMgr()->getMaxFov();
 
@@ -76,7 +76,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	newProjectorParams.viewportXywh[2] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[2]idth", originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel).toInt();
 	if (newProjectorParams.viewportXywh[2] <= 0)
 	{
-		newProjectorParams.viewportXywh[2] = originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel;
+		newProjectorParams.viewportXywh[2] = qRound(originalProjectorParams.viewportXywh[2] * params.devicePixelsPerPixel);
 	}
 	else if (newProjectorParams.viewportXywh[2] > screen_w)
 	{
@@ -87,7 +87,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	newProjectorParams.viewportXywh[3] = conf.value("spheric_mirror/newProjectorParams.viewportXywh[3]eight", originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel).toInt();
 	if (newProjectorParams.viewportXywh[3] <= 0)
 	{
-		newProjectorParams.viewportXywh[3] = originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel;
+		newProjectorParams.viewportXywh[3] = qRound(originalProjectorParams.viewportXywh[3] * params.devicePixelsPerPixel);
 	}
 	else if (newProjectorParams.viewportXywh[3] > screen_h)
 	{
@@ -95,11 +95,11 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	}
 
 	// center of the FOV-disk in the not yet distorted image
-	newProjectorParams.viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*newProjectorParams.viewportXywh[2]).toFloat();
-	newProjectorParams.viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*newProjectorParams.viewportXywh[3]).toFloat();
+	newProjectorParams.viewportCenter[0] = conf.value("spheric_mirror/viewportCenterX", 0.5*newProjectorParams.viewportXywh[2]).toDouble();
+	newProjectorParams.viewportCenter[1] = conf.value("spheric_mirror/viewportCenterY", 0.5*newProjectorParams.viewportXywh[3]).toDouble();
 
 	// diameter of the FOV-disk in pixels
-	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toFloat();
+	newProjectorParams.viewportFovDiameter = conf.value("spheric_mirror/viewport_fov_diameter", qMin(newProjectorParams.viewportXywh[2],newProjectorParams.viewportXywh[3])).toDouble();
 
 	viewport_texture_offset[0] = (screen_w-newProjectorParams.viewportXywh[2])>>1;
 	viewport_texture_offset[1] = (screen_h-newProjectorParams.viewportXywh[3])>>1;
@@ -110,7 +110,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 	StelApp::getInstance().getCore()->setCurrentStelProjectorParams(newProjectorParams);
 
 	// init transformation
-	VertexPoint *vertex_point_array = 0;
+	VertexPoint *vertex_point_array = Q_NULLPTR;
 	const QString custom_distortion_file = conf.value("spheric_mirror/custom_distortion_file","").toString();
 	if (custom_distortion_file.isEmpty()) {
 		float texture_triangle_base_length = conf.value("spheric_mirror/texture_triangle_base_length",16.f).toFloat();
@@ -119,9 +119,9 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		} else if (texture_triangle_base_length < 2.f) {
 			texture_triangle_base_length = 2.f;
 		}
-		max_x = static_cast<int>(StelUtils::trunc(0.5 + screen_w/texture_triangle_base_length));
+		max_x = static_cast<int>(StelUtils::trunc(0.5f + static_cast<float>(screen_w)/texture_triangle_base_length));
 		step_x = screen_w / static_cast<double>(max_x-0.5);
-		max_y = static_cast<int>(StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5*std::sqrt(3.0))));
+		max_y = static_cast<int>(StelUtils::trunc(screen_h/(texture_triangle_base_length*0.5f*std::sqrt(3.0f))));
 		step_y = screen_h/ static_cast<double>(max_y);
 
 		double gamma = conf.value("spheric_mirror/projector_gamma",0.45).toDouble();
@@ -147,7 +147,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				rc &= prj->forward(v);
 				const float x = newProjectorParams.viewportCenter[0] + v[0] * view_scaling_factor;
 				const float y = newProjectorParams.viewportCenter[1] + v[1] * view_scaling_factor;
-				vertex_point.h = rc ? (vX^vY).length() : 0.0;
+				vertex_point.h = rc ? static_cast<double>((vX^vY).length()) : 0.0;
 
 				// sharp image up to the border of the fisheye image, at the cost of
 				// accepting clamping artefacts. You can get rid of the clamping
@@ -191,10 +191,10 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 		Q_ASSERT(file.error()!=QFile::NoError);
 		in >> max_x >> max_y;
 		Q_ASSERT(in.status()==QTextStream::Ok && max_x>0 && max_y>0);
-		step_x = screen_w / (double)(max_x-0.5);
-		step_y = screen_h/ (double)max_y;
-		texture_point_array = new Vec2f[(max_x+1)*(max_y+1)];
-		vertex_point_array = new VertexPoint[(max_x+1)*(max_y+1)];
+		step_x = screen_w / (static_cast<double>(max_x)-0.5);
+		step_y = screen_h / static_cast<double>(max_y);
+		texture_point_array = new Vec2f[static_cast<size_t>((max_x+1)*(max_y+1))];
+		vertex_point_array = new VertexPoint[static_cast<size_t>((max_x+1)*(max_y+1))];
 		for (int j=0;j<=max_y;j++)
 		{
 			for (int i=0;i<=max_x;i++)
@@ -202,7 +202,7 @@ StelViewportDistorterFisheyeToSphericMirror::StelViewportDistorterFisheyeToSpher
 				VertexPoint &vertex_point(vertex_point_array[(j*(max_x+1)+i)]);
 				Vec2f &texture_point(texture_point_array[(j*(max_x+1)+i)]);
 				vertex_point.ver_xy[0] = ((i == 0) ? 0.f : (i == max_x) ? screen_w : (i-0.5f*(j&1))*step_x);
-				vertex_point.ver_xy[1] = j*step_y;
+				vertex_point.ver_xy[1] = static_cast<float>(j*step_y);
 				float x,y;
 				in >> x >> y >> vertex_point.color[0] >> vertex_point.color[1] >> vertex_point.color[2];
 				vertex_point.color[3] = 1.0f;
@@ -251,7 +251,7 @@ StelViewportDistorterFisheyeToSphericMirror::~StelViewportDistorterFisheyeToSphe
 }
 
 
-void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) const
+void StelViewportDistorterFisheyeToSphericMirror::distortXY(qreal &x, qreal &y) const
 {
 	float texture_x,texture_y;
 
@@ -261,12 +261,12 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 	y *= originalProjectorParams.devicePixelsPerPixel;
 
 	// find the triangle and interpolate accordingly:
-	float dy = y / step_y;
+	float dy = static_cast<float>(y / step_y);
 	const int j = static_cast<int>(floorf(dy));
 	dy -= j;
 	if (j&1)
 	{
-		float dx = x / step_x + 0.5f*(1.f-dy);
+		float dx = static_cast<float>(x / step_x) + 0.5f*(1.f-dy);
 		const int i = static_cast<int>(floorf(dx));
 		dx -= i;
 		const Vec2f *const t = texture_point_array + (j*(max_x+1)+i);
@@ -293,7 +293,7 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 	}
 	else
 	{
-		float dx = x / step_x + 0.5f*dy;
+		float dx = static_cast<float>(x / step_x) + 0.5f*dy;
 		const int i = static_cast<int>(floorf(dx));
 		dx -= i;
 		const Vec2f *const t = texture_point_array + (j*(max_x+1)+i);
@@ -319,8 +319,8 @@ void StelViewportDistorterFisheyeToSphericMirror::distortXY(float& x, float& y) 
 		}
 	}
 
-	x = screen_w*texture_x - viewport_texture_offset[0] + newProjectorParams.viewportXywh[0];
-	y = screen_h*texture_y - viewport_texture_offset[1] + newProjectorParams.viewportXywh[1];
+	x = static_cast<double>(screen_w*texture_x) - viewport_texture_offset[0] + newProjectorParams.viewportXywh[0];
+	y = static_cast<double>(screen_h*texture_y) - viewport_texture_offset[1] + newProjectorParams.viewportXywh[1];
 }
 
 

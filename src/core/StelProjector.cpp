@@ -124,7 +124,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter * devicePixelsPerPixel;
-	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(static_cast<float>(M_PI)/360.f));
+	pixelPerRad = 0.5f * static_cast<float>(viewportFovDiameter) / fovToViewScalingFactor(params.fov*(static_cast<float>(M_PI)/360.f));
 	widthStretch = params.widthStretch;
 	computeBoundingCap();
 }
@@ -164,12 +164,12 @@ const Vec4i& StelProjector::getViewport() const
 	return viewportXywh;
 }
 
-Vec2f StelProjector::getViewportCenter() const
+Vector2<qreal> StelProjector::getViewportCenter() const
 {
-	return Vec2f(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
+	return Vector2<qreal>(viewportCenter[0]-viewportXywh[0],viewportCenter[1]-viewportXywh[1]);
 }
 
-Vec2f StelProjector::getViewportCenterOffset() const
+Vector2<qreal> StelProjector::getViewportCenterOffset() const
 {
 	return viewportCenterOffset;
 }
@@ -255,7 +255,7 @@ float StelProjector::getPixelPerRadAtCenter() const
 
 //! Get the current FOV diameter in degrees
 float StelProjector::getFov() const {
-	return 360.f/static_cast<float>(M_PI)*viewScalingFactorToFov(0.5f*viewportFovDiameter/pixelPerRad);
+	return 360.f/static_cast<float>(M_PI)*viewScalingFactorToFov(0.5f*static_cast<float>(viewportFovDiameter)/pixelPerRad);
 }
 
 //! Get whether front faces need to be oriented in the clockwise direction
@@ -317,8 +317,8 @@ void StelProjector::project(int n, const Vec3d* in, Vec3f* out)
 		modelViewTransform->forward(v);
 		out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 		forward(*out);
-		out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
-			viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
+		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
+			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
 			((*out)[2] - zNear) * oneOverZNearMinusZFar);
 	}
 }
@@ -330,8 +330,8 @@ void StelProjector::project(int n, const Vec3f* in, Vec3f* out)
 		*out=in[i];
 		modelViewTransform->forward(*out);
 		forward(*out);
-		out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
-			viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
+		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
+			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
 			((*out)[2] - zNear) * oneOverZNearMinusZFar);
 	}
 }
@@ -345,8 +345,8 @@ bool StelProjector::projectInPlace(Vec3d& vd) const
 	// invisible region of the sky (rval=false), we must finish
 	// reprojecting, so that OpenGL can successfully eliminate
 	// polygons by culling.
-	vd[0] = static_cast<double>(viewportCenter[0] + flipHorz * pixelPerRad * v[0]);
-	vd[1] = static_cast<double>(viewportCenter[1] + flipVert * pixelPerRad * v[1]);
+	vd[0] = viewportCenter[0] + static_cast<double>(flipHorz * pixelPerRad * v[0]);
+	vd[1] = viewportCenter[1] + static_cast<double>(flipVert * pixelPerRad * v[1]);
 	vd[2] = static_cast<double>((v[2] - zNear) * oneOverZNearMinusZFar);
 	return rval;
 }
@@ -359,8 +359,8 @@ bool StelProjector::projectInPlace(Vec3f& v) const
 	// invisible region of the sky (rval=false), we must finish
 	// reprojecting, so that OpenGl can successfully eliminate
 	// polygons by culling.
-	v[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-	v[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
+	v[0] = static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * v[0];
+	v[1] = static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * v[1];
 	v[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
 	return rval;
 }
@@ -397,7 +397,7 @@ void StelProjector::computeBoundingCap()
 	bool ok = unProject(static_cast<double>(viewportXywh[0]+0.5f*viewportXywh[2]), static_cast<double>(viewportXywh[1]+0.5f*viewportXywh[3]), boundingCap.n);
 	// The central point should be at a valid position by definition.
 	// When center is offset, this assumption may not hold however.
-	Q_ASSERT(ok || (viewportCenterOffset.lengthSquared()>0.0f) );
+	Q_ASSERT(ok || (viewportCenterOffset.lengthSquared()>0) );
 	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.00000001;
 
 	// Now need to determine the aperture
@@ -449,8 +449,8 @@ void StelProjector::computeBoundingCap()
 *************************************************************************/
 bool StelProjector::unProject(double x, double y, Vec3d &v) const
 {
-	v[0] = static_cast<double>(flipHorz * (static_cast<float>(x) - viewportCenter[0]) / pixelPerRad);
-	v[1] = static_cast<double>(flipVert * (static_cast<float>(y) - viewportCenter[1]) / pixelPerRad);
+	v[0] = static_cast<double>(flipHorz * static_cast<float>(x - viewportCenter[0]) / pixelPerRad);
+	v[1] = static_cast<double>(flipVert * static_cast<float>(y - viewportCenter[1]) / pixelPerRad);
 	v[2] = 0;
 	const bool rval = backward(v);
 	// Even when the reprojected point comes from a region of the screen,

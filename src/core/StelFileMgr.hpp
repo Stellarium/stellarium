@@ -73,14 +73,14 @@ public:
 	//! @param path the name of the file to search for, for example "textures/fog.png".
 	//! @param flags options which constrain the result.
 	//! @return returns a full path of the file if found, else return an empty path.
-	static QString findFile(const QString& path, Flags flags=(Flags)0);
+	static QString findFile(const QString& path, Flags flags=static_cast<Flags>(0));
 
 	//! List all paths within the search paths that match the argument.
 	//! Similar to findFile(), but unlike it this function doesn't stop
 	//! at the first instance. Instead, it returns a list of paths to all
 	//! instances. The list is ordered, starting with the most external path
 	//! (the first one in fileLocations).
-	static QStringList findFileInAllPaths(const QString& path, const Flags& flags=(Flags)0);
+	static QStringList findFileInAllPaths(const QString& path, const Flags& flags=static_cast<Flags>(0));
 
 	//! Set a set of all possible files/directories in any Stellarium search directory
 	//! @param path the path to search inside, e.g. "landscapes"
@@ -89,7 +89,7 @@ public:
 	//! @return returns a QSet of file and/or directory names, which are available
 	//! in any of the search paths + path.  Returns empty set if none were found
 	//! or the path is invalid (not a directory / not existing).
-	static QSet<QString> listContents(const QString& path, const Flags& flags=(Flags)0, bool recursive=false);
+	static QSet<QString> listContents(const QString& path, const Flags& flags=static_cast<Flags>(0), bool recursive=false);
 
 	//! Get a vector of strings which describes the current search paths.
 	//! @return returns a vector of strings representing the current search paths.
@@ -203,7 +203,7 @@ private:
 	//! @param flags a set of StelFileMgr::Flags to test against path
 	//! @return true if path passes all flag tests, else false
 	//! @exception misc
-	static bool fileFlagsCheck(const QFileInfo& thePath, const Flags& flags=(Flags)0);
+	static bool fileFlagsCheck(const QFileInfo& thePath, const Flags& flags=static_cast<Flags>(0));
 
 	static QStringList fileLocations;
 

@@ -123,17 +123,19 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		viewport = prj->getViewport();
 		delete[] colorGrid;
 		delete [] posGrid;
-		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toInt();
-		skyResolutionX = static_cast<int>(floorf(0.5f+skyResolutionY*(0.5f*sqrtf(3.0f))*prj->getViewportWidth()/prj->getViewportHeight()));
-		posGrid = new Vec2f[(1+skyResolutionX)*(1+skyResolutionY)];
-		colorGrid = new Vec4f[(1+skyResolutionX)*(1+skyResolutionY)];
-		float stepX = (float)prj->getViewportWidth() / (skyResolutionX-0.5f);
-		float stepY = (float)prj->getViewportHeight() / skyResolutionY;
-		float viewport_left = prj->getViewportPosX();
-		float viewport_bottom = prj->getViewportPosY();
-		for (int x=0; x<=skyResolutionX; ++x)
+		skyResolutionY = StelApp::getInstance().getSettings()->value("landscape/atmosphereybin", 44).toUInt();
+		skyResolutionX = static_cast<uint>(floorf(0.5f+skyResolutionY*(0.5f*sqrtf(3.0f))*prj->getViewportWidth()/prj->getViewportHeight()));
+		posGrid = new Vec2f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
+		colorGrid = new Vec4f[static_cast<size_t>((1+skyResolutionX)*(1+skyResolutionY))];
+
+		float stepX = static_cast<float>(prj->getViewportWidth() / (skyResolutionX-0.5));
+		float stepY = static_cast<float>(prj->getViewportHeight()) / static_cast<float>(skyResolutionY);
+		float viewport_left = static_cast<float>(prj->getViewportPosX());
+		float viewport_bottom = static_cast<float>(prj->getViewportPosY());
+
+		for (uint x=0; x<=skyResolutionX; ++x)
 		{
-			for(int y=0; y<=skyResolutionY; ++y)
+			for(uint y=0; y<=skyResolutionY; ++y)
 			{
 				Vec2f &v(posGrid[y*(1+skyResolutionX)+x]);
 				v[0] = viewport_left + ((x == 0) ? 0.f :
@@ -147,17 +149,17 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		posGridBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 		posGridBuffer.create();
 		posGridBuffer.bind();
-		posGridBuffer.allocate(posGrid, (1+skyResolutionX)*(1+skyResolutionY)*8);
+		posGridBuffer.allocate(posGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*8);
 		posGridBuffer.release();
 		
 		// Generate the indices used to draw the quads
-		unsigned short* indices = new unsigned short[(skyResolutionX+1)*skyResolutionY*2];
+		unsigned short* indices = new unsigned short[static_cast<size_t>((skyResolutionX+1)*skyResolutionY*2)];
 		int i=0;
-		for (int y2=0; y2<skyResolutionY; ++y2)
+		for (unsigned int y2=0; y2<skyResolutionY; ++y2)
 		{
-			unsigned int g0 = y2*(1+skyResolutionX);
-			unsigned int g1 = (y2+1)*(1+skyResolutionX);
-			for (int x2=0; x2<=skyResolutionX; ++x2)
+			unsigned short g0 = static_cast<unsigned short>(y2*(1+skyResolutionX));
+			unsigned short g1 = static_cast<unsigned short>((y2+1)*(1+skyResolutionX));
+			for (uint x2=0; x2<=skyResolutionX; ++x2)
 			{
 				indices[i++]=g0++;
 				indices[i++]=g1++;
@@ -169,7 +171,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		indicesBuffer.setUsagePattern(QOpenGLBuffer::StaticDraw);
 		indicesBuffer.create();
 		indicesBuffer.bind();
-		indicesBuffer.allocate(indices, (skyResolutionX+1)*skyResolutionY*2*2);
+		indicesBuffer.allocate(indices, static_cast<int>((skyResolutionX+1)*skyResolutionY)*2*2);
 		indicesBuffer.release();
 		delete[] indices;
 		indices=Q_NULLPTR;
@@ -178,7 +180,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		colorGridBuffer.setUsagePattern(QOpenGLBuffer::DynamicDraw);
 		colorGridBuffer.create();
 		colorGridBuffer.bind();
-		colorGridBuffer.allocate(colorGrid, (1+skyResolutionX)*(1+skyResolutionY)*4*4);
+		colorGridBuffer.allocate(colorGrid, static_cast<int>((1+skyResolutionX)*(1+skyResolutionY))*4*4);
 		colorGridBuffer.release();
 	}
 
@@ -189,14 +191,14 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 
 	// Update the eclipse intensity factor to apply on atmosphere model
 	// these are for radii
-	const float sun_angular_size = atan(696000.f/AU/_sunPos.length());
-	const float moon_angular_size = atan(1738.f/AU/moonPos.length());
+	const float sun_angular_size = atanf(static_cast<float>(696000./AU/_sunPos.length()));
+	const float moon_angular_size = atanf(static_cast<float>(1738./AU/moonPos.length()));
 	const float touch_angle = sun_angular_size + moon_angular_size;
 
 	// determine luminance falloff during solar eclipses
 	_sunPos.normalize();
 	moonPos.normalize();
-	float separation_angle = std::acos(_sunPos.dot(moonPos));  // angle between them
+	float separation_angle = std::acos(static_cast<float>(_sunPos.dot(moonPos)));  // angle between them
 	// qDebug("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
 	// bright stars should be visible at total eclipse
 	// TODO: correct for atmospheric diffusion
@@ -234,20 +236,13 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	}
 
 	// Calculate the atmosphere RGB for each point of the grid
-	float sunPos[3];
-	sunPos[0] = _sunPos[0];
-	sunPos[1] = _sunPos[1];
-	sunPos[2] = _sunPos[2];
+	Vec3f sunPosF=_sunPos.toVec3f();
+	Vec3f moonPosF=moonPos.toVec3f();
 
-	float moon_pos[3];
-	moon_pos[0] = moonPos[0];
-	moon_pos[1] = moonPos[1];
-	moon_pos[2] = moonPos[2];
-
-	sky.setParamsv(sunPos, 5.f);
+	sky.setParamsv(sunPosF, 5.f);
 
 	skyb.setLocation(latitude * M_PI/180., altitude, temperature, relativeHumidity);
-	skyb.setSunMoon(moon_pos[2], sunPos[2]);
+	skyb.setSunMoon(moonPosF[2], sunPosF[2]);
 
 	// Calculate the date from the julian day.
 	int year, month, day;
@@ -261,12 +256,13 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	float lumi;
 
 	// Compute the sky color for every point above the ground
-	for (int i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
+	for (uint i=0; i<(1+skyResolutionX)*(1+skyResolutionY); ++i)
 	{
 		const Vec2f &v(posGrid[i]);
 		prj->unProject(v[0],v[1],point);
-
 		Q_ASSERT(fabs(point.lengthSquared()-1.0) < 1e-10);
+
+		Vec3f pointF=point.toVec3f();
 
 		// Use mirroring for sun only
 		if (point[2]<=0)
@@ -275,16 +271,16 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 			// The sky below the ground is the symmetric of the one above :
 			// it looks nice and gives proper values for brightness estimation
 			// Use the Skybright.cpp 's models for brightness which gives better results.
-			lumi = skyb.getLuminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]-
-					moon_pos[2]*point[2], sunPos[0]*point[0]+sunPos[1]*point[1]+
-					sunPos[2]*point[2], point[2]);
+			lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]-
+					moonPosF[2]*pointF[2], sunPosF[0]*pointF[0]+sunPosF[1]*pointF[1]+
+					sunPosF[2]*pointF[2], pointF[2]);
 		}
 		else
 		{
 			// Use the Skybright.cpp 's models for brightness which gives better results.
-			lumi = skyb.getLuminance(moon_pos[0]*point[0]+moon_pos[1]*point[1]+
-					moon_pos[2]*point[2], sunPos[0]*point[0]+sunPos[1]*point[1]+
-					sunPos[2]*point[2], point[2]);
+			lumi = skyb.getLuminance(moonPosF[0]*pointF[0]+moonPosF[1]*pointF[1]+
+					moonPosF[2]*pointF[2], sunPosF[0]*pointF[0]+sunPosF[1]*pointF[1]+
+					sunPosF[2]*pointF[2], pointF[2]);
 		}
 		lumi *= eclipseFactor;
 		// Add star background luminance
@@ -302,7 +298,7 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 		// Now need to compute the xy part of the color component
 		// This is done in the openGL shader
 		// Store the back projected position + luminance in the input color to the shader
-		colorGrid[i].set(point[0], point[1], point[2], lumi);
+		colorGrid[i].set(pointF[0], pointF[1], pointF[2], lumi);
 	}
 	
 	colorGridBuffer.bind();
@@ -394,9 +390,9 @@ void Atmosphere::draw(StelCore* core)
 	// And draw everything at once
 	indicesBuffer.bind();
 	std::size_t shift=0;
-	for (int y=0;y<skyResolutionY;++y)
+	for (uint y=0;y<skyResolutionY;++y)
 	{
-		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, (skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
+		sPainter.glFuncs()->glDrawElements(GL_TRIANGLE_STRIP, static_cast<GLsizei>(skyResolutionX+1)*2, GL_UNSIGNED_SHORT, reinterpret_cast<void*>(shift));
 		shift += (skyResolutionX+1)*2*2;
 	}
 	indicesBuffer.release();

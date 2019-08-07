@@ -160,7 +160,7 @@ public:
 	//! e.g. by the LandscapeMgr. Contrary to that, the purpose of the azimuth rotation
 	//! (landscape/[decor_]angle_rotatez) in landscape.ini is to orient the pano.
 	//! @param d the rotation angle in degrees.
-	void setZRotation(float d) {angleRotateZOffset = d * M_PI/180.0f;}
+	void setZRotation(float d) {angleRotateZOffset = d * static_cast<float>(M_PI)/180.0f;}
 
 	//! Get whether the landscape is currently fully visible (i.e. opaque).
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
@@ -222,8 +222,8 @@ protected:
 	LinearFader fogFader;  //! Used to slowly fade in/out fog painting.
 	LinearFader illumFader;//! Used to slowly fade in/out illumination painting.
 	LinearFader labelFader;//! Used to slowly fade in/out landscape feature labels.
-	int rows; //! horizontal rows.  May be given in landscape.ini:[landscape]tesselate_rows. More indicates higher accuracy, but is slower.
-	int cols; //! vertical columns. May be given in landscape.ini:[landscape]tesselate_cols. More indicates higher accuracy, but is slower.
+	unsigned int rows;     //! horizontal rows.  May be given in landscape.ini:[landscape]tesselate_rows. More indicates higher accuracy, but is slower.
+	unsigned int cols;     //! vertical columns. May be given in landscape.ini:[landscape]tesselate_cols. More indicates higher accuracy, but is slower.
 	float angleRotateZ;    //! [radians] if pano does not have its left border in the east, rotate in azimuth. Configured in landscape.ini[landscape]angle_rotatez (or decor_angle_rotatez for old_style landscapes)
 	float angleRotateZOffset; //! [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
 				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
@@ -267,7 +267,7 @@ protected:
 class LandscapeOldStyle : public Landscape
 {
 public:
-	LandscapeOldStyle(float radius = 2.f);
+	LandscapeOldStyle(float radius = 2.0f);
 	virtual ~LandscapeOldStyle();
 	virtual void load(const QSettings& landscapeIni, const QString& landscapeId);
 	virtual unsigned int getMemorySize() const {return memorySize;}

@@ -790,8 +790,13 @@ namespace StelUtils
 	{
 		return (x < 0 ? std::ceil(x) : std::floor(x));
 	}
+	inline float trunc(float x)
+	{
+		return (x < 0 ? std::ceil(x) : std::floor(x));
+	}
 #else
 	inline double trunc(double x) { return ::trunc(x); }
+	inline float trunc(float x) { return ::trunc(x); }
 #endif
 }
 

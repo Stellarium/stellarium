@@ -401,7 +401,7 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	StelCore *core = StelApp::getInstance().getCore();
 	const StelProjectorP prj = core->getProjection(StelCore::FrameJ2000, StelCore::RefractionAuto);
 	StelProjector::StelProjectorParams params = core->getCurrentStelProjectorParams();
-	float ppx = params.devicePixelsPerPixel;
+	qreal ppx = params.devicePixelsPerPixel;
 	
 	if (guiPanel)
 	{
@@ -417,19 +417,19 @@ void Oculars::handleMouseClicks(class QMouseEvent* event)
 	// https://sourceforge.net/p/stellarium/discussion/278769/thread/57893bb3/?limit=25#75c0
 	if ((flagShowOculars) ) //&& !getFlagUseSemiTransparency()) // Not sure: ignore or allow selection of semi-hidden stars?
 	{
-		float wh = prj->getViewportWidth()/2.; // get half of width of the screen
-		float hh = prj->getViewportHeight()/2.; // get half of height of the screen
+		float wh = prj->getViewportWidth()*0.5f; // get half of width of the screen
+		float hh = prj->getViewportHeight()*0.5f; // get half of height of the screen
 		float mx = event->x()-wh; // point 0 in center of the screen, axis X directed to right
 		float my = event->y()-hh; // point 0 in center of the screen, axis Y directed to bottom
 
 		double inner = 0.5 * params.viewportFovDiameter * ppx;
 		// See if we need to scale the mask
-		if (flagScaleImageCircle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
+		if (flagScaleImageCircle && oculars[selectedOcularIndex]->apparentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
 		{
-			inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
+			inner = oculars[selectedOcularIndex]->apparentFOV() * inner / maxEyepieceAngle;
 		}
 
-		if (mx*mx+my*my>inner*inner) // click outside ocular circle? Gobble event.
+		if (mx*mx+my*my>static_cast<float>(inner*inner)) // click outside ocular circle? Gobble event.
 		{
 			event->setAccepted(true);
 			return;
@@ -737,7 +737,7 @@ void Oculars::init()
 		relativeStarScaleCCD=settings->value("stars_scale_relative_ccd", 1.0).toDouble();
 		absoluteStarScaleCCD=settings->value("stars_scale_absolute_ccd", 1.0).toDouble();
 		setFlagShowCcdCropOverlay(settings->value("show_ccd_crop_overlay", false).toBool());
-		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toDouble());
+		setCcdCropOverlaySize(settings->value("ccd_crop_overlay_size", DEFAULT_CCD_CROP_OVERLAY_SIZE).toInt());
 	}
 	catch (std::runtime_error& e)
 	{
@@ -761,9 +761,9 @@ void Oculars::determineMaxEyepieceAngle()
 	{
 		for (const auto* ocular : oculars)
 		{
-			if (ocular->appearentFOV() > maxEyepieceAngle)
+			if (ocular->apparentFOV() > maxEyepieceAngle)
 			{
-				maxEyepieceAngle = ocular->appearentFOV();
+				maxEyepieceAngle = ocular->apparentFOV();
 			}
 		}
 	}
@@ -1030,10 +1030,10 @@ void Oculars::enableOcular(bool enableOcularMode)
 			QFontMetrics metrics(font);
 			QString labelText = q_("Please select an object before switching to ocular view.");
 			StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-			int xPosition = projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0];
-			xPosition = xPosition - 0.5 * (metrics.width(labelText));
-			int yPosition = projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1];
-			yPosition = yPosition - 0.5 * (metrics.height());
+			int xPosition = qRound(projectorParams.viewportCenter[0] + projectorParams.viewportCenterOffset[0]);
+			xPosition -= 0.5 * (metrics.width(labelText));
+			int yPosition = qRound(projectorParams.viewportCenter[1] + projectorParams.viewportCenterOffset[1]);
+			yPosition -= 0.5 * (metrics.height());
 			const char *tcolor = "#99FF99";
 			usageMessageLabelID = labelManager->labelScreen(labelText, xPosition, yPosition,
 									true, font.pixelSize(), tcolor);
@@ -1616,19 +1616,19 @@ void Oculars::paintCCDBounds()
 			{
 				aspectIndex = 3;
 			}
-			float width = params.viewportXywh[aspectIndex] * ccdXRatio * params.devicePixelsPerPixel;
-			float height = params.viewportXywh[aspectIndex] * ccdYRatio * params.devicePixelsPerPixel;
+			const float width = params.viewportXywh[aspectIndex] * static_cast<float>(ccdXRatio * params.devicePixelsPerPixel);
+			const float height = params.viewportXywh[aspectIndex] * static_cast<float>(ccdYRatio * params.devicePixelsPerPixel);
 
 			// Calculate the size of the CCD crop overlay
-			float overlayWidth = width * ccdCropOverlaySize / ccd->resolutionX();
-			float overlayHeight = height * ccdCropOverlaySize / ccd->resolutionY();
+			const float overlayWidth = width * ccdCropOverlaySize / ccd->resolutionX();
+			const float overlayHeight = height * ccdCropOverlaySize / ccd->resolutionY();
 
 			double polarAngle = 0;
 			// if the telescope is Equatorial derotate the field
 			if (telescope->isEquatorial())
 			{
 				Vec3d CPos;
-				Vec2f cpos = projector->getViewportCenter();
+				Vector2<qreal> cpos = projector->getViewportCenter();
 				projector->unProject(cpos[0], cpos[1], CPos);
 				Vec3d CPrel(CPos);
 				CPrel[2]*=0.2;
@@ -1646,44 +1646,44 @@ void Oculars::paintCCDBounds()
 				polarAngle = 0;
 			}
 
-			if (width > 0.0 && height > 0.0)
+			if (width > 0.0f && height > 0.0f)
 			{
 				QPoint a, b;
 				QTransform transform = QTransform().translate(centerScreen[0], centerScreen[1]).rotate(-(ccd->chipRotAngle() + polarAngle));
 				// bottom line
-				a = transform.map(QPoint(-width/2.0, -height/2.0));
-				b = transform.map(QPoint(width/2.0, -height/2.0));
+				a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(-height*0.5f)));
+				b = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(-height*0.5f)));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 				// top line
-				a = transform.map(QPoint(-width/2.0, height/2.0));
-				b = transform.map(QPoint(width/2.0, height/2.0));
+				a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f)));
+				b = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(height*0.5f)));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 				// left line
-				a = transform.map(QPoint(-width/2.0, -height/2.0));
-				b = transform.map(QPoint(-width/2.0, height/2.0));
+				a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(-height*0.5f)));
+				b = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f)));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 				// right line
-				a = transform.map(QPoint(width/2.0, height/2.0));
-				b = transform.map(QPoint(width/2.0, -height/2.0));
+				a = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(height*0.50f)));
+				b = transform.map(QPoint(static_cast<int>(width*0.5f), static_cast<int>(-height*0.5f)));
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 
 				// Tool for showing a resolution box overlay
 				if (flagShowCcdCropOverlay) {
 					// bottom line
-					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
-					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
+					b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// top line
-					a = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
-					b = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
+					a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
+					b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// left line
-					a = transform.map(QPoint(-overlayWidth/2.0, -overlayHeight/2.0));
-					b = transform.map(QPoint(-overlayWidth/2.0, overlayHeight/2.0));
+					a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
+					b = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// right line
-					a = transform.map(QPoint(overlayWidth/2.0, overlayHeight/2.0));
-					b = transform.map(QPoint(overlayWidth/2.0, -overlayHeight/2.0));
+					a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(overlayHeight*0.5f)));
+					b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 				}
 
@@ -1692,9 +1692,9 @@ void Oculars::paintCCDBounds()
 					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
 					const double OuterOAGRatio = ccd->getOuterOAGRadius(telescope, lens) / screenFOV;
 					const double prismXRatio = ccd->getOAGActualFOVx(telescope, lens) / screenFOV;
-					float in_oag_r = params.viewportXywh[aspectIndex] * InnerOAGRatio * params.devicePixelsPerPixel;
-					float out_oag_r = params.viewportXywh[aspectIndex] * OuterOAGRatio * params.devicePixelsPerPixel;
-					float h_width = params.viewportXywh[aspectIndex] * prismXRatio * params.devicePixelsPerPixel / 2.0;
+					const int in_oag_r = params.viewportXywh[aspectIndex] * qRound(InnerOAGRatio * params.devicePixelsPerPixel);
+					const int out_oag_r = params.viewportXywh[aspectIndex] * qRound(OuterOAGRatio * params.devicePixelsPerPixel);
+					const int h_width = params.viewportXywh[aspectIndex] * qRound(prismXRatio * params.devicePixelsPerPixel * 0.5);
 
 					//painter.setColor(0.60f, 0.20f, 0.20f, .5f);
 					painter.drawCircle(centerScreen[0], centerScreen[1], in_oag_r);
@@ -1724,17 +1724,17 @@ void Oculars::paintCCDBounds()
 				// frame and equatorial coordinates for epoch J2000.0 of that center.
 				// Details: https://bugs.launchpad.net/stellarium/+bug/1404695
 
-				float ratioLimit = 0.25f;
-				float ratioLimitCrop = 0.75f;
+				const double ratioLimit = 0.25;
+				const double ratioLimitCrop = 0.75;
 				if (ccdXRatio>=ratioLimit || ccdYRatio>=ratioLimit)
 				{
 					// draw cross at center
-					float cross = width>height ? height/50.f : width/50.f;
-					a = transform.map(QPoint(0.f, -cross));
-					b = transform.map(QPoint(0.f, cross));
+					int cross = static_cast<int>(width>height ? height/50.f : width/50.f);
+					a = transform.map(QPoint(0, -cross));
+					b = transform.map(QPoint(0, cross));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
-					a = transform.map(QPoint(-cross, 0.f));
-					b = transform.map(QPoint(cross, 0.f));
+					a = transform.map(QPoint(-cross, 0));
+					b = transform.map(QPoint(cross, 0));
 					painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 					// calculate coordinates of the center and show it
 					Vec3d centerPosition;
@@ -1755,11 +1755,11 @@ void Oculars::paintCCDBounds()
 					}
 					// Coordinates of center of visible field of view for CCD (red rectangle)
 					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
-					a = transform.map(QPoint(-width/2.0, height/2.0 + 5.f));
-					painter.drawText(a.x(), a.y(), coords, -(ccd->chipRotAngle() + polarAngle));
+					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f + 5.f)));
+					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Dimensions of visible field of view for CCD (red rectangle)
-					a = transform.map(QPoint(-width/2.0, -height/2.0 - fontSize*1.2f));
-					painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), -(ccd->chipRotAngle() + polarAngle));
+					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(-height*0.5f - fontSize*1.2f)));
+					painter.drawText(a.x(), a.y(), getDimensionsString(fovX, fovY), static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Horizontal and vertical scales of visible field of view for CCD (red rectangle)
 					//TRANSLATORS: Unit of measure for scale - arcseconds per pixel
 					QString unit = q_("\"/px");
@@ -1768,12 +1768,12 @@ void Oculars::paintCCDBounds()
 							.arg(QString::number(fovY*3600*ccd->binningY()/ccd->resolutionY(), 'f', 4))
 							.arg(unit)
 							.arg(QChar(0x00D7));
-					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(scales), -height/2.0 - fontSize*1.2f));
-					painter.drawText(a.x(), a.y(), scales, -(ccd->chipRotAngle() + polarAngle));
+					a = transform.map(QPoint(static_cast<int>(width*0.5f) - painter.getFontMetrics().width(scales), static_cast<int>(-height*0.5f - fontSize*1.2f)));
+					painter.drawText(a.x(), a.y(), scales, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Rotation angle of visible field of view for CCD (red rectangle)
 					QString angle = QString("%1%2").arg(QString::number(ccd->chipRotAngle(), 'f', 1)).arg(QChar(0x00B0));
-					a = transform.map(QPoint(width/2.0 - painter.getFontMetrics().width(angle), height/2.0 + 5.f));
-					painter.drawText(a.x(), a.y(), angle, -(ccd->chipRotAngle() + polarAngle));
+					a = transform.map(QPoint(static_cast<int>(width*0.5f) - painter.getFontMetrics().width(angle), static_cast<int>(height*0.5f + 5.f)));
+					painter.drawText(a.x(), a.y(), angle, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 
 					if(flagShowCcdCropOverlay && (ccdXRatio>=ratioLimitCrop || ccdYRatio>=ratioLimitCrop))
 					{
@@ -1782,8 +1782,8 @@ void Oculars::paintCCDBounds()
 								.arg(QString::number(ccdCropOverlaySize, 'd', 0))
 								.arg(qc_("px", "pixel"))
 								.arg(QChar(0x00D7));
-						a = transform.map(QPoint(overlayWidth/2.0 - painter.getFontMetrics().width(resolutionOverlayText), -overlayHeight/2.0 - fontSize*1.2f));
-						painter.drawText(a.x(), a.y(), resolutionOverlayText, -(ccd->chipRotAngle() + polarAngle));
+						a = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f) - painter.getFontMetrics().width(resolutionOverlayText), static_cast<int>(-overlayHeight*0.5f - fontSize*1.2f)));
+						painter.drawText(a.x(), a.y(), resolutionOverlayText, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					}
 				}
 			}
@@ -1799,13 +1799,13 @@ void Oculars::paintCrosshairs()
 	// Center of screen
 	Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 			   projector->getViewportPosY()+projector->getViewportHeight()/2);
-	float length = 0.5 * params.viewportFovDiameter;
+	float length = 0.5f * static_cast<float>(params.viewportFovDiameter);
 	// See if we need to scale the length
-	if (flagScaleImageCircle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
+	if (flagScaleImageCircle && oculars[selectedOcularIndex]->apparentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
 	{
-		length = oculars[selectedOcularIndex]->appearentFOV() * length / maxEyepieceAngle;
+		length *= static_cast<float>(oculars[selectedOcularIndex]->apparentFOV() / maxEyepieceAngle);
 	}
-	length *= params.devicePixelsPerPixel;
+	length *= static_cast<float>(params.devicePixelsPerPixel);
 	// Draw the lines
 	StelPainter painter(projector);
 	painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
@@ -1824,10 +1824,10 @@ void Oculars::paintTelrad()
 		painter.setColor(0.77f, 0.14f, 0.16f, 1.f);
 		Vec2i centerScreen(projector->getViewportPosX()+projector->getViewportWidth()/2,
 				   projector->getViewportPosY()+projector->getViewportHeight()/2);
-		float pixelsPerRad = projector->getPixelPerRadAtCenter(); // * params.devicePixelsPerPixel;
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (0.5));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (2.0));
-		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5 * pixelsPerRad * (M_PI/180) * (4.0));
+		const float pixelsPerRad = projector->getPixelPerRadAtCenter(); // * params.devicePixelsPerPixel;
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (0.5f));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (2.0f));
+		painter.drawCircle(centerScreen[0], centerScreen[1], 0.5f * pixelsPerRad * static_cast<float>(M_PI/180) * (4.0f));
 	}
 }
 
@@ -1844,9 +1844,9 @@ void Oculars::paintOcularMask(const StelCore *core)
 
 	double inner = 0.5 * params.viewportFovDiameter * params.devicePixelsPerPixel;
 	// See if we need to scale the mask
-	if (flagScaleImageCircle && oculars[selectedOcularIndex]->appearentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
+	if (flagScaleImageCircle && oculars[selectedOcularIndex]->apparentFOV() > 0.0 && !oculars[selectedOcularIndex]->isBinoculars())
 	{
-		inner = oculars[selectedOcularIndex]->appearentFOV() * inner / maxEyepieceAngle;
+		inner = oculars[selectedOcularIndex]->apparentFOV() * inner / maxEyepieceAngle;
 	}
 
 	painter.setBlending(true);
@@ -1883,14 +1883,14 @@ void Oculars::paintOcularMask(const StelCore *core)
 	GLfloat radiusHigh;
 
 	/* Compute length (needed for normal calculations) */
-	deltaRadius=outerRadius-inner;
+	deltaRadius=outerRadius-static_cast<GLfloat>(inner);
 
 	/* Cache is the vertex locations cache */
 	for (int i=0; i<=slices; i++)
 	{
-		GLfloat angle=(M_PI*2.0f)*i/slices;
-		sinCache[i]=(GLfloat)sin(angle);
-		cosCache[i]=(GLfloat)cos(angle);
+		GLfloat angle=static_cast<GLfloat>(M_PI*2.0)*i/slices;
+		sinCache[i]=static_cast<GLfloat>(sinf(angle));
+		cosCache[i]=static_cast<GLfloat>(cosf(angle));
 	}
 
 	sinCache[slices]=sinCache[0];
@@ -1944,11 +1944,11 @@ void Oculars::paintText(const StelCore* core)
 	// Get the X & Y positions, and the line height
 	painter.setFont(font);
 	QString widthString = "MMMMMMMMMMMMMMMMMMM";
-	float insetFromRHS = painter.getFontMetrics().width(widthString);
+	const float insetFromRHS = painter.getFontMetrics().width(widthString);
 	StelProjector::StelProjectorParams projectorParams = core->getCurrentStelProjectorParams();
-	int xPosition = projectorParams.viewportXywh[2] - projectorParams.viewportCenterOffset[0];
+	int xPosition = projectorParams.viewportXywh[2] - qRound(projectorParams.viewportCenterOffset[0]);
 	xPosition -= insetFromRHS;
-	int yPosition = projectorParams.viewportXywh[3] - projectorParams.viewportCenterOffset[1];
+	int yPosition = projectorParams.viewportXywh[3] - qRound(projectorParams.viewportCenterOffset[1]);
 	yPosition -= 40;
 	const int lineHeight = painter.getFontMetrics().height();
 	
@@ -1972,7 +1972,7 @@ void Oculars::paintText(const StelCore* core)
 		// The name of the ocular could be really long.
 		if (name.length() > widthString.length())
 		{
-			xPosition -= (insetFromRHS / 2.0);
+			xPosition -= (insetFromRHS*0.5f);
 		}
 		painter.drawText(xPosition, yPosition, ocularNumberLabel);
 		yPosition-=lineHeight;
@@ -1984,7 +1984,7 @@ void Oculars::paintText(const StelCore* core)
 			painter.drawText(xPosition, yPosition, eFocalLengthLabel);
 			yPosition-=lineHeight;
 			
-			QString ocularFov = QString::number(ocular->appearentFOV(), 'f', 2);
+			QString ocularFov = QString::number(ocular->apparentFOV(), 'f', 2);
 			ocularFov.append(QChar(0x00B0));//Degree sign
 			// TRANSLATORS: aFOV = apparent field of view
 			QString ocularFOVLabel = QString(q_("Ocular aFOV: %1")).arg(ocularFov);
@@ -2103,7 +2103,7 @@ void Oculars::validateAndLoadIniFile()
 {
 	// Insure the module directory exists
 	StelFileMgr::makeSureDirExistsAndIsWritable(StelFileMgr::getUserDir()+"/modules/Oculars");
-	StelFileMgr::Flags flags = (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable);
+	StelFileMgr::Flags flags = static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable);
 	QString ocularIniPath = StelFileMgr::findFile("modules/Oculars/", flags) + "ocular.ini";
 	if (ocularIniPath.isEmpty())
 		return;
@@ -2250,7 +2250,7 @@ void Oculars::zoom(bool zoomedIn)
 			flagMoonScaleMain		= propMgr->getStelPropertyValue("SolarSystem.flagMoonScale").toBool();
 			flagMinorBodiesScaleMain	= propMgr->getStelPropertyValue("SolarSystem.flagMinorBodyScale").toBool();
 
-			milkyWaySaturation	= propMgr->getStelPropertyValue("MilkyWay.saturation").toFloat();
+			milkyWaySaturation	= propMgr->getStelPropertyValue("MilkyWay.saturation").toDouble();
 
 			flipHorzMain = core->getFlipHorz();
 			flipVertMain = core->getFlipVert();
@@ -2372,9 +2372,9 @@ void Oculars::zoomOcular()
 
 	actualFOV = ocular->actualFOV(telescope, lens);
 	// See if the mask was scaled; if so, correct the actualFOV.
-	if (flagScaleImageCircle && ocular->appearentFOV() > 0.0 && !ocular->isBinoculars())
+	if (flagScaleImageCircle && ocular->apparentFOV() > 0.0 && !ocular->isBinoculars())
 	{
-		actualFOV = maxEyepieceAngle * actualFOV / ocular->appearentFOV();
+		actualFOV = maxEyepieceAngle * actualFOV / ocular->apparentFOV();
 	}
 	movementManager->zoomTo(actualFOV, 0.0);
 }

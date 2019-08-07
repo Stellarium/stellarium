@@ -111,7 +111,7 @@ public:
 		setAutoFillBackground(false);
 	}
 
-	~StelGLWidget()
+	~StelGLWidget() Q_DECL_OVERRIDE
 	{
 		qDebug()<<"StelGLWidget destroyed";
 	}
@@ -138,7 +138,7 @@ public:
 		StelOpenGL::mainContext = ctx; //throw an error when StelOpenGL functions are executed in another context
 
 		qDebug()<<"initializeGL";
-		qDebug() << "OpenGL supported version: " << QString((char*)ctx->functions()->glGetString(GL_VERSION));
+		qDebug() << "OpenGL supported version: " << QString(reinterpret_cast<const char*>(ctx->functions()->glGetString(GL_VERSION)));
 		qDebug() << "Current Format: " << this->format();
 
 		if (qApp->property("onetime_compat33")==true)
@@ -200,7 +200,7 @@ public:
 				"{\n"
 				"	mediump vec3 color = texture2D(u_source, v_texCoord).rgb;\n"
 				"	mediump float luminance = max(max(color.r, color.g), color.b);\n"
-				"	gl_FragColor = vec4(luminance, 0.0, 0.0, 1.0);\n"
+				"	gl_FragColor = vec4(luminance, luminance * 0.3, 0.0, 1.0);\n"
 				"}\n";
 		program->addShaderFromSourceCode(QOpenGLShader::Vertex, vertexCode);
 		program->addShaderFromSourceCode(QOpenGLShader::Fragment, fragmentCode);
@@ -210,7 +210,7 @@ public:
 		vars.source = program->uniformLocation("u_source");
 	}
 
-	virtual ~NightModeGraphicsEffect()
+	virtual ~NightModeGraphicsEffect() Q_DECL_OVERRIDE
 	{
 		// NOTE: Why Q_ASSERT is here and why destructor is not marked as 'override'?
 		//Q_ASSERT(parent->glContext() == QOpenGLContext::currentContext());
@@ -417,7 +417,7 @@ protected:
 	{
 		QPointF pos = event->scenePos();
 		pos.setY(rect.height() - 1 - pos.y());
-		QWheelEvent newEvent(QPoint(pos.x(),pos.y()), event->delta(), event->buttons(), event->modifiers(), event->orientation());
+		QWheelEvent newEvent(QPoint(static_cast<int>(pos.x()),static_cast<int>(pos.y())), event->delta(), event->buttons(), event->modifiers(), event->orientation());
 		StelApp::getInstance().handleWheel(&newEvent);
 		event->setAccepted(newEvent.isAccepted());
 		if(newEvent.isAccepted())
@@ -586,7 +586,7 @@ StelMainView::StelMainView(QSettings* settings)
 
 	fpsTimer = new QTimer(this);
 	fpsTimer->setTimerType(Qt::PreciseTimer);
-	fpsTimer->setInterval(1000/minfps);
+	fpsTimer->setInterval(qRound(1000.f/minfps));
 	connect(fpsTimer,SIGNAL(timeout()),this,SLOT(fpsTimerUpdate()));
 
 	cursorTimeoutTimer = new QTimer(this);
@@ -684,7 +684,7 @@ void StelMainView::resizeEvent(QResizeEvent* event)
 		scene()->setSceneRect(QRect(QPoint(0, 0), sz));
 		rootItem->setSize(sz);
 		if(guiItem)
-			guiItem->setGeometry(QRectF(0.0f,0.0f,sz.width(),sz.height()));
+			guiItem->setGeometry(QRectF(0.0,0.0,sz.width(),sz.height()));
 	}
 	QGraphicsView::resizeEvent(event);
 }
@@ -867,11 +867,11 @@ void StelMainView::init()
 	screenShotFormat = conf->value("main/screenshot_format", "png").toString();
 #ifndef USE_OLD_QGLWIDGET
 	flagUseCustomScreenshotSize=conf->value("main/screenshot_custom_size", false).toBool();
-	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toUInt();
-	customScreenshotHeight=conf->value("main/screenshot_custom_height", 768).toUInt();
+	customScreenshotWidth=conf->value("main/screenshot_custom_width", 1024).toInt();
+	customScreenshotHeight=conf->value("main/screenshot_custom_height", 768).toInt();
 #endif
 	setFlagCursorTimeout(conf->value("gui/flag_mouse_cursor_timeout", false).toBool());
-	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toFloat());
+	setCursorTimeout(conf->value("gui/mouse_cursor_timeout", 10.f).toDouble());
 	setMaxFps(conf->value("video/maximum_fps",10000.f).toFloat());
 	setMinFps(conf->value("video/minimum_fps",10000.f).toFloat());
 	setSkyBackgroundColor(StelUtils::strToVec3f(configuration->value("color/sky_background_color", "0,0,0").toString()));
@@ -977,7 +977,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 		else
 			qWarning() << "Oops... Insufficient OpenGL version. Mesa failed! Please send a bug report.";
 
-		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
+		QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, graphics hardware, or use --angle-mode (or --mesa-mode) option."), QMessageBox::Abort, QMessageBox::Abort);
 		#else
 		qWarning() << "Oops... Insufficient OpenGL version. Please update drivers, or graphics hardware.";
 		QMessageBox::critical(0, "Stellarium", q_("Insufficient OpenGL version. Please update drivers, or graphics hardware."), QMessageBox::Abort, QMessageBox::Abort);
@@ -1002,11 +1002,11 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 
 		if (angleVSPSpos >-1)
 		{
-			float vsVersion=angleVsPsRegExp.cap(1).toFloat() + 0.1*angleVsPsRegExp.cap(2).toFloat();
-			float psVersion=angleVsPsRegExp.cap(3).toFloat() + 0.1*angleVsPsRegExp.cap(4).toFloat();
+			float vsVersion=angleVsPsRegExp.cap(1).toFloat() + 0.1f*angleVsPsRegExp.cap(2).toFloat();
+			float psVersion=angleVsPsRegExp.cap(3).toFloat() + 0.1f*angleVsPsRegExp.cap(4).toFloat();
 			qDebug() << "VS Version Number detected: " << vsVersion;
 			qDebug() << "PS Version Number detected: " << psVersion;
-			if ((vsVersion<2.0) || (psVersion<3.0))
+			if ((vsVersion<2.0f) || (psVersion<3.0f))
 			{
 				openGLerror=true;
 				qDebug() << "This is not enough: we need DirectX9 with vs_2_0 and ps_3_0 or later.";
@@ -1022,7 +1022,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 					qDebug() << "You can try to run in an unsupported degraded mode by ignoring the warning and continuing.";
 					qDebug() << "But more than likely problems will persist.";
 					QMessageBox::StandardButton answerButton=
-					QMessageBox::critical(0, "Stellarium", q_("Your DirectX/OpenGL ES subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
+					QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your DirectX/OpenGL ES subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
 							      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 					if (answerButton == QMessageBox::Abort)
 					{
@@ -1073,7 +1073,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 					qDebug() << "You can try to run in an unsupported degraded mode by ignoring the warning and continuing.";
 					qDebug() << "But more than likely problems will persist.";
 					QMessageBox::StandardButton answerButton=
-					QMessageBox::critical(0, "Stellarium", q_("Your OpenGL/Mesa subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
+					QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL/Mesa subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
 							      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 					if (answerButton == QMessageBox::Abort)
 					{
@@ -1133,7 +1133,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 				qDebug() << "You can try to run in an unsupported degraded mode by ignoring the warning and continuing.";
 				qDebug() << "But more than likely problems will persist.";
 				QMessageBox::StandardButton answerButton=
-				QMessageBox::critical(0, "Stellarium", q_("Your OpenGL subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
+				QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
 						      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 				if (answerButton == QMessageBox::Abort)
 				{
@@ -1154,7 +1154,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 	{
 		float glslesVersion=glslesRegExp.cap(1).toFloat();
 		qDebug() << "GLSL ES Version Number detected: " << glslesVersion;
-		if (glslesVersion<1.0) // TBD: is this possible at all?
+		if (glslesVersion<1.0f) // TBD: is this possible at all?
 		{
 			openGLerror=true;
 			qDebug() << "This is not enough: we need GLSL ES 1.00 or later.";
@@ -1174,7 +1174,7 @@ void StelMainView::processOpenGLdiagnosticsAndWarnings(QSettings *conf, QOpenGLC
 				qDebug() << "You can try to run in an unsupported degraded mode by ignoring the warning and continuing.";
 				qDebug() << "But more than likely problems will persist.";
 				QMessageBox::StandardButton answerButton=
-				QMessageBox::critical(0, "Stellarium", q_("Your OpenGL ES subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
+				QMessageBox::critical(Q_NULLPTR, "Stellarium", q_("Your OpenGL ES subsystem has problems. See log for details.\nIgnore and suppress this notice in the future and try to continue in degraded mode anyway?"),
 						      QMessageBox::Ignore|QMessageBox::Abort, QMessageBox::Abort);
 				if (answerButton == QMessageBox::Abort)
 				{
@@ -1258,11 +1258,11 @@ void StelMainView::dumpOpenGLdiagnostics() const
 		qDebug() << "EXT_gpu_shader4" << (extensionSet.contains(("EXT_gpu_shader4")) ? "present, OK." : "MISSING!");
 		
 		QFunctionPointer programParameterPtr =context->getProcAddress("glProgramParameteri");
-		if (programParameterPtr == 0) {
+		if (programParameterPtr == Q_NULLPTR) {
 			qDebug() << "glProgramParameteri cannot be resolved here. BAD!";
 		}
 		programParameterPtr =context->getProcAddress("glProgramParameteriEXT");
-		if (programParameterPtr == 0) {
+		if (programParameterPtr == Q_NULLPTR) {
 			qDebug() << "glProgramParameteriEXT cannot be resolved here. BAD!";
 		}
 	}
@@ -1319,7 +1319,7 @@ void StelMainView::drawEnded()
 {
 	updateQueued = false;
 
-	int requiredFpsInterval = needsMaxFPS()?1000/maxfps:1000/minfps;
+	int requiredFpsInterval = qRound(needsMaxFPS()?1000.f/maxfps:1000.f/minfps);
 
 	if(fpsTimer->interval() != requiredFpsInterval)
 		fpsTimer->setInterval(requiredFpsInterval);
@@ -1378,7 +1378,7 @@ bool StelMainView::needsMaxFPS() const
 	// The current policy is that after an event, the FPS is maximum for 2.5 seconds
 	// after that, it switches back to the default minfps value to save power.
 	// The fps is also kept to max if the timerate is higher than normal speed.
-	const float timeRate = stelApp->getCore()->getTimeRate();
+	const double timeRate = stelApp->getCore()->getTimeRate();
 	return (now - lastEventTimeSec < 2.5) || fabs(timeRate) > StelCore::JD_SECOND;
 }
 

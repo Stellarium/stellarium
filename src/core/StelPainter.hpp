@@ -195,8 +195,9 @@ public:
 	//!        region around the bottom pole, like for a spherical equirectangular horizon panorama (SphericalLandscape class).
 	//!        Example: your light pollution image (pano photo) goes down to just -5 degrees altitude (lowest street lamps below you):
 	//!        bottomAngle = 95 degrees = 95*M_PI/180.0f
-	void sSphere(float radius, float oneMinusOblateness, int slices, int stacks, int orientInside = 0, bool flipTexture = false,
-                 float topAngle=0.0f, float bottomAngle=M_PI);
+	void sSphere(float radius, float oneMinusOblateness, const unsigned int slices, const unsigned int stacks,
+		     int orientInside = 0, bool flipTexture = false,
+		     float topAngle = 0.0f, float bottomAngle = static_cast<float>(M_PI));
 
 	//! Generate a StelVertexArray for a sphere.
 	//! @param radius
@@ -211,7 +212,7 @@ public:
 	//!        region around the bottom pole, like South Galactic Pole.
 	static StelVertexArray computeSphereNoLight(float radius, float oneMinusOblateness, int slices, int stacks,
                             int orientInside = 0, bool flipTexture = false,
-                            float topAngle=0.0f, float bottomAngle=M_PI);
+			    float topAngle=0.0f, float bottomAngle=static_cast<float>(M_PI));
 
 	//! Re-implementation of gluCylinder : glu is overridden for non-standard projection.
 	void sCylinder(float radius, float height, int slices, int orientInside = 0);
@@ -227,7 +228,7 @@ public:
 	static void computeFanDisk(float radius, int innerFanSlices, int level, QVector<double>& vertexArr, QVector<float>& texCoordArr);
 
 	//! Draw a fisheye texture in a sphere.
-	void sSphereMap(float radius, int slices, int stacks, float textureFov = 2.f*M_PI, int orientInside = 0);
+	void sSphereMap(double radius, unsigned int slices, unsigned int stacks, float textureFov = 2.f*static_cast<float>(M_PI), int orientInside = 0);
 
 	//! Set the font to use for subsequent text drawing.
 	void setFont(const QFont& font);

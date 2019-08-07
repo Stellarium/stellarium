@@ -48,7 +48,7 @@ Landscape::Landscape(float _radius)
 	, cols(40)
 	, angleRotateZ(0.)
 	, angleRotateZOffset(0.)
-	, sinMinAltitudeLimit(-0.035) //sin(-2 degrees))
+	, sinMinAltitudeLimit(-0.035f) //sin(-2 degrees))
 	, defaultBortleIndex(-1)
 	, defaultFogSetting(-1)
 	, defaultExtinctionCoefficient(-1.)
@@ -510,7 +510,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 		++level;
 		slices_inside>>=1;
 	}
-	StelPainter::computeFanDisk(radius, slices_inside, level, groundVertexArr, groundTexCoordArr);
+	StelPainter::computeFanDisk(static_cast<float>(radius), slices_inside, level, groundVertexArr, groundTexCoordArr);
 
 
 	// Precompute the vertex arrays for side display. The geometry of the sides is always a cylinder.
@@ -531,8 +531,8 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	{
 		if (tanMode) // cylindrical pano: linear in d_z, simpler.
 		{
-			z0=radius*std::tan(decorAngleShift*M_PI/180.0f);
-			d_z=(radius*std::tan((decorAltAngle+decorAngleShift)*M_PI/180.0f) - z0)/stacks;
+			z0=radius*std::tan(decorAngleShift*static_cast<float>(M_PI)/180.0f);
+			d_z=(radius*std::tan((decorAltAngle+decorAngleShift)*static_cast<float>(M_PI)/180.0f) - z0)/stacks;
 		}
 		else // equirectangular pano: angular z, requires more work in the loop below!
 		{
@@ -542,11 +542,11 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 	}
 	else // buggy code, but legacy.
 	{
-		z0 =(tanMode ? radius * std::tan(decorAngleShift*M_PI/180.f)        : radius * std::sin(decorAngleShift*M_PI/180.f));
-		d_z=(tanMode ? radius * std::tan(decorAltAngle  *M_PI/180.f)/stacks : radius * std::sin(decorAltAngle  *M_PI/180.0)/stacks);
+		z0 =(tanMode ? radius * std::tan(decorAngleShift*static_cast<float>(M_PI)/180.f)        : radius * std::sin(decorAngleShift*static_cast<float>(M_PI)/180.f));
+		d_z=(tanMode ? radius * std::tan(decorAltAngle  *static_cast<float>(M_PI)/180.f)/stacks : radius * std::sin(decorAltAngle  *static_cast<float>(M_PI)/180.0f)/stacks);
 	}
 
-	const float alpha = 2.f*M_PI/(nbDecorRepeat*nbSide*slices_per_side); //delta_azimuth
+	const float alpha = 2.f*static_cast<float>(M_PI)/(nbDecorRepeat*nbSide*slices_per_side); //delta_azimuth
 	const float ca = std::cos(alpha);
 	const float sa = std::sin(alpha);
 	//float y0 = radius*std::cos(angleRotateZ);
@@ -589,7 +589,7 @@ void LandscapeOldStyle::load(const QSettings& landscapeIni, const QString& lands
 					precompSide.arr.texCoords << Vec2f(tx0, ty0) << Vec2f(tx1, ty0);
 					if (calibrated && !tanMode)
 					{
-						float tanZ=radius * std::tan(z*M_PI/180.f);
+						float tanZ=radius * std::tan(z*static_cast<float>(M_PI)/180.f);
 						precompSide.arr.vertex << Vec3d(x0, y0, tanZ) << Vec3d(x1, y1, tanZ);
 					} else
 					{
@@ -649,7 +649,7 @@ void LandscapeOldStyle::draw(StelCore* core)
 	{
 		//qDebug() << "drawing line";
 		StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-		transfo->combine(Mat4d::zrotation(-angleRotateZOffset));
+		transfo->combine(Mat4d::zrotation(static_cast<double>(-angleRotateZOffset)));
 		const StelProjectorP prj = core->getProjection(transfo);
 		painter.setProjector(prj);
 		painter.setBlending(true, GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -672,13 +672,13 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 	if (!(core->getSkyDrawer()->getFlagHasAtmosphere()))
 		return;
 
-	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*M_PI/180.) : radius*std::sin(fogAngleShift*M_PI/180.);
+	const float vpos = (tanMode||calibrated) ? radius*std::tan(fogAngleShift*static_cast<float>(M_PI)/180.f) : radius*std::sin(fogAngleShift*static_cast<float>(M_PI)/180.f);
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
 
 	if (calibrated) // new in V0.13: take proper care of the fog layer. This will work perfectly only for calibrated&&tanMode.
 		transfo->combine(Mat4d::zrotation(-(angleRotateZ+angleRotateZOffset)));
 
-	transfo->combine(Mat4d::translation(Vec3d(0.,0.,vpos)));
+	transfo->combine(Mat4d::translation(Vec3d(0.,0.,static_cast<double>(vpos))));
 	sPainter.setProjector(core->getProjection(transfo));
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setColor(landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness),
@@ -686,8 +686,8 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 			  landFader.getInterstate()*fogFader.getInterstate()*(0.1f+0.1f*landscapeBrightness), landFader.getInterstate());
 	fogTex->bind();
 	const float height = (calibrated?
-				radius*(std::tan((fogAltAngle+fogAngleShift)*M_PI/180.)  - std::tan(fogAngleShift*M_PI/180.))
-				: ((tanMode) ? radius*std::tan(fogAltAngle*M_PI/180.) : radius*std::sin(fogAltAngle*M_PI/180.)));
+				radius*(std::tan((fogAltAngle+fogAngleShift)*static_cast<float>(M_PI)/180.f)  - std::tan(fogAngleShift*static_cast<float>(M_PI)/180.f))
+				: ((tanMode) ? radius*std::tan(fogAltAngle*static_cast<float>(M_PI)/180.f) : radius*std::sin(fogAltAngle*static_cast<float>(M_PI)/180.f)));
 	sPainter.sCylinder(radius, height, 64, 1);
 	sPainter.setBlending(true);
 }
@@ -696,7 +696,7 @@ void LandscapeOldStyle::drawFog(StelCore* core, StelPainter& sPainter) const
 void LandscapeOldStyle::drawDecor(StelCore* core, StelPainter& sPainter, const bool drawLight) const
 {
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(-(angleRotateZ+angleRotateZOffset)));
+	transfo->combine(Mat4d::zrotation(-static_cast<double>(angleRotateZ+angleRotateZOffset)));
 	sPainter.setProjector(core->getProjection(transfo));
 
 	if (!landFader.getInterstate())
@@ -723,7 +723,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 		return;
 	const float vshift = radius * ((tanMode || calibrated) ? std::tan(groundAngleShift) : std::sin(groundAngleShift));
 	StelProjector::ModelViewTranformP transfo = core->getAltAzModelViewTransform(StelCore::RefractionOff);
-	transfo->combine(Mat4d::zrotation(groundAngleRotateZ-angleRotateZOffset) * Mat4d::translation(Vec3d(0,0,vshift)));
+	transfo->combine(Mat4d::zrotation(static_cast<double>(groundAngleRotateZ-angleRotateZOffset)) * Mat4d::translation(Vec3d(0,0,static_cast<double>(vshift))));
 
 	sPainter.setProjector(core->getProjection(transfo));
 	sPainter.setColor(landscapeBrightness, landscapeBrightness, landscapeBrightness, landFader.getInterstate());
@@ -736,7 +736,7 @@ void LandscapeOldStyle::drawGround(StelCore* core, StelPainter& sPainter) const
 	{
 		groundTex->bind();
 	}
-	sPainter.setArrays((Vec3d*)groundVertexArr.constData(), (Vec2f*)groundTexCoordArr.constData());
+	sPainter.setArrays(reinterpret_cast<const Vec3d*>(groundVertexArr.constData()), reinterpret_cast<const Vec2f*>(groundTexCoordArr.constData()));
 	sPainter.drawFromArray(StelPainter::Triangles, groundVertexArr.size()/3);
 }
 
@@ -745,7 +745,7 @@ float LandscapeOldStyle::getOpacity(Vec3d azalt) const
 	if(!validLandscape) return (azalt[2]>0.0 ? 0.0f : 1.0f);
 
 	if (angleRotateZOffset!=0.0f)
-		azalt.transfo4d(Mat4d::zrotation(angleRotateZOffset));
+		azalt.transfo4d(Mat4d::zrotation(static_cast<double>(angleRotateZOffset)));
 
 	// in case we also have a horizon polygon defined, this is trivial and fast.
 	if (horizonPolygon)
