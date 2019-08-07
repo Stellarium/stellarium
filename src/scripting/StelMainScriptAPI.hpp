@@ -334,7 +334,7 @@ public slots:
 	//! of locations - do a search in the Location window to see what
 	//! where is.  e.g. "York, UnitedKingdom".
 	//! @param duration the number of seconds to take to move location.
-	static void setObserverLocation(const QString& id, float duration=1.);
+	static void setObserverLocation(const QString& id, double duration=1.);
 
 	//! Get the ID of the current observer location.
 	static QString getObserverLocation();

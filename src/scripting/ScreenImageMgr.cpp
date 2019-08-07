@@ -42,7 +42,7 @@
 ///////////////////////
 // ScreenImage class //
 ///////////////////////
-ScreenImage::ScreenImage(const QString& filename, float x, float y, bool show, float scale, float alpha, float fadeDuration)
+ScreenImage::ScreenImage(const QString& filename, qreal x, qreal y, bool show, qreal scale, qreal alpha, float fadeDuration)
 	: tex(Q_NULLPTR), maxAlpha(alpha)
 {
 	QPixmap pixmap(filename);
@@ -104,19 +104,19 @@ void ScreenImage::update(double)
 
 void ScreenImage::setFadeDuration(float duration)
 {
-	fadeTimer->setDuration(qMax(1, static_cast<int>(duration*1000)));
+	fadeTimer->setDuration(qMax(1, static_cast<int>(duration*1000.f)));
 }
 
 void ScreenImage::setFlagShow(bool b)
 {
 	if (b)
 	{
-		fadeTimer->setFrameRange(tex->opacity()*fadeTimer->duration(),fadeTimer->duration());
+		fadeTimer->setFrameRange(static_cast<int>(tex->opacity()*fadeTimer->duration()),fadeTimer->duration());
 		fadeTimer->setDirection(QTimeLine::Forward);
 	}
 	else
 	{
-		fadeTimer->setFrameRange(tex->opacity()*fadeTimer->duration(),0);
+		fadeTimer->setFrameRange(static_cast<int>(tex->opacity()*fadeTimer->duration()),0);
 		fadeTimer->setDirection(QTimeLine::Backward);
 	}
 	fadeTimer->start();
@@ -127,7 +127,7 @@ bool ScreenImage::getFlagShow(void) const
 	return (tex->opacity() > 0.);
 }
 
-void ScreenImage::setAlpha(float a)
+void ScreenImage::setAlpha(qreal a)
 {
 	maxAlpha = a;
 	if (getFlagShow())
@@ -137,9 +137,9 @@ void ScreenImage::setAlpha(float a)
 	}
 }
 
-void ScreenImage::setXY(float x, float y, float duration)
+void ScreenImage::setXY(qreal x, qreal y, float duration)
 {
-	if (duration<=0.)
+	if (duration<=0.f)
 	{
 		moveTimer->stop();
 		tex->setPos(x, y);
@@ -147,22 +147,22 @@ void ScreenImage::setXY(float x, float y, float duration)
 	else
 	{
 		moveTimer->stop();
-		moveTimer->setDuration(duration*1000);
+		moveTimer->setDuration(static_cast<int>(duration*1000.f));
 		moveTimer->setFrameRange(0,100);
 		QPointF p(tex->pos());
 		if (p == QPointF(x,y)) return;
-		float sX = p.x();
-		float sY = p.y();
-		float dX = (x-sX) / 200.;
-		float dY = (y-sY) / 200.;
+		qreal sX = p.x();
+		qreal sY = p.y();
+		qreal dX = (x-sX) / 200.;
+		qreal dY = (y-sY) / 200.;
 		for(int i=0; i<200; i++)
-			anim->setPosAt(i/200., QPointF(sX+(dX*i), (sY+(dY*i))));
+			anim->setPosAt(static_cast<qreal>(i/200.f), QPointF(sX+(dX*i), (sY+(dY*i))));
 		anim->setPosAt(1.0, QPointF(x, y));
 		moveTimer->start();
 	}
 }
 
-void ScreenImage::addXY(float x, float y, float duration)
+void ScreenImage::addXY(qreal x, qreal y, float duration)
 {
 	QPointF currentPos = tex->pos();
 	setXY(currentPos.x() + x, currentPos.y() + y, duration);
@@ -183,17 +183,17 @@ void ScreenImage::setOpacity(qreal alpha)
 	tex->setOpacity(alpha*maxAlpha);
 }
 
-void ScreenImage::setScale(float scale)
+void ScreenImage::setScale(qreal scale)
 {
 	tex->setScale(scale);
 }
 
-void ScreenImage::setScale(float scaleX, float scaleY, float duration)
+void ScreenImage::setScale(qreal scaleX, qreal scaleY, float duration)
 {
 	scaleTimer->stop();
 
 	// Set a least a tiny duration to allow running the "animation"
-	scaleTimer->setDuration(qMax(0.001f, duration)*1000);
+	scaleTimer->setDuration(static_cast<int>(qMax(0.001f, duration)*1000));
 	scaleTimer->setFrameRange(0,100);
 
 	tex->setTransformationMode(Qt::SmoothTransformation);
@@ -204,12 +204,12 @@ void ScreenImage::setScale(float scaleX, float scaleY, float duration)
 	scaleTimer->start();
 }
 
-float ScreenImage::imageScaleX() const
+qreal ScreenImage::imageScaleX() const
 {
 	return scaleAnim->horizontalScaleAt(1.);
 }
 
-float ScreenImage::imageScaleY() const
+qreal ScreenImage::imageScaleY() const
 {
 	return scaleAnim->verticalScaleAt(1.);
 }
@@ -238,8 +238,8 @@ void ScreenImageMgr::draw(StelCore* core)
 			m->draw(core);
 }
 
-void ScreenImageMgr::createScreenImage(const QString& id, const QString& filename, float x, float y,
-	float scale, bool visible, float alpha, float fadeDuration)
+void ScreenImageMgr::createScreenImage(const QString& id, const QString& filename, qreal x, qreal y,
+    qreal scale, bool visible, qreal alpha, float fadeDuration)
 {
 	// First check to see if there is already an image loaded with the
 	// specified ID, and drop it if necessary
@@ -316,7 +316,7 @@ int ScreenImageMgr::getImageHeight(const QString& id) const
 	return 0;
 }
 
-float ScreenImageMgr::getImageScaleX(const QString& id) const
+qreal ScreenImageMgr::getImageScaleX(const QString& id) const
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=Q_NULLPTR)
@@ -324,7 +324,7 @@ float ScreenImageMgr::getImageScaleX(const QString& id) const
 	return 0;
 }
 
-float ScreenImageMgr::getImageScaleY(const QString& id) const
+qreal ScreenImageMgr::getImageScaleY(const QString& id) const
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=Q_NULLPTR)
@@ -339,28 +339,28 @@ void ScreenImageMgr::showImage(const QString& id, bool show)
 			allScreenImages[id]->setFlagShow(show);
 }
 
-void ScreenImageMgr::setImageAlpha(const QString& id, float alpha)
+void ScreenImageMgr::setImageAlpha(const QString& id, qreal alpha)
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=Q_NULLPTR)
 			allScreenImages[id]->setAlpha(alpha);
 }
 
-void ScreenImageMgr::setImageXY(const QString& id, float x, float y, float duration)
+void ScreenImageMgr::setImageXY(const QString& id, qreal x, qreal y, float duration)
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=Q_NULLPTR)
 			allScreenImages[id]->setXY(x, y, duration);
 }
 
-void ScreenImageMgr::addImageXY(const QString& id, float x, float y, float duration)
+void ScreenImageMgr::addImageXY(const QString& id, qreal x, qreal y, float duration)
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=Q_NULLPTR)
 			allScreenImages[id]->addXY(x, y, duration);
 }
 
-void ScreenImageMgr::setImageScale(const QString& id, float scaleX, float scaleY, float duration)
+void ScreenImageMgr::setImageScale(const QString& id, qreal scaleX, qreal scaleY, float duration)
 {
 	if (allScreenImages.contains(id))
 		if (allScreenImages[id]!=Q_NULLPTR)

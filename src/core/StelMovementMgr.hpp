@@ -48,11 +48,11 @@ class StelMovementMgr : public StelModule
 		   WRITE setFlagIndicationMountMode
 		   NOTIFY flagIndicationMountModeChanged)
 	//The targets of viewport offset animation
-	Q_PROPERTY(float viewportHorizontalOffsetTarget
+	Q_PROPERTY(double viewportHorizontalOffsetTarget
 		   READ getViewportHorizontalOffsetTarget
 		   WRITE setViewportHorizontalOffsetTarget
 		   NOTIFY viewportHorizontalOffsetTargetChanged)
-	Q_PROPERTY(float viewportVerticalOffsetTarget
+	Q_PROPERTY(double viewportVerticalOffsetTarget
 		   READ getViewportVerticalOffsetTarget
 		   WRITE setViewportVerticalOffsetTarget
 		   NOTIFY viewportVerticalOffsetTargetChanged)
@@ -117,7 +117,7 @@ public:
 
 	//! Get the zoom speed
 	// TODO: what are the units?
-	double getZoomSpeed() const {return keyZoomSpeed;}
+	double getZoomSpeed() const {return static_cast<double>(keyZoomSpeed);}
 
 	//! Return the current up view vector in J2000 coordinates.
 	Vec3d getViewUpVectorJ2000() const;
@@ -295,7 +295,7 @@ public slots:
 	//! @param offsetY new horizontal viewport offset, percent. clamped to [-50...50]. This is also available in the GUI.
 	//! @param duration animation duration, seconds. Optional.
 	//! @note Only vertical viewport is really meaningful.
-	void moveViewport(float offsetX, float offsetY, const float duration=0.f);
+	void moveViewport(double offsetX, double offsetY, const float duration=0.f);
 
 	//! Set current mount type defining the reference frame in which head movements occur.
 	void setMountMode(MountMode m);
@@ -308,12 +308,12 @@ public slots:
 	void setInhibitAllAutomoves(bool inhibit) { flagInhibitAllAutomoves=inhibit;}
 
 	//! Returns the targetted value of the viewport offset
-	Vec2f getViewportOffsetTarget() const { return targetViewportOffset; }
-	float getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
-	float getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
+	Vec2d getViewportOffsetTarget() const { return targetViewportOffset; }
+	double getViewportHorizontalOffsetTarget() const { return targetViewportOffset[0]; }
+	double getViewportVerticalOffsetTarget() const { return targetViewportOffset[1]; }
 
-	void setViewportHorizontalOffsetTarget(float f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
-	void setViewportVerticalOffsetTarget(float f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
+	void setViewportHorizontalOffsetTarget(double f) { moveViewport(f,getViewportVerticalOffsetTarget()); }
+	void setViewportVerticalOffsetTarget(double f) { moveViewport(getViewportHorizontalOffsetTarget(),f); }
 
 signals:
 	//! Emitted when the tracking property changes
@@ -323,8 +323,8 @@ signals:
 
 	void flagAutoZoomOutResetsDirectionChanged(bool b);
 
-	void viewportHorizontalOffsetTargetChanged(float f);
-	void viewportVerticalOffsetTargetChanged(float f);
+	void viewportHorizontalOffsetTargetChanged(double f);
+	void viewportVerticalOffsetTargetChanged(double f);
 	void flagEnableMouseNavigationChanged(bool b);
 
 private slots:
@@ -371,12 +371,12 @@ private:
 
 	bool flagEnableMoveAtScreenEdge; // allow mouse at edge of screen to move view
 	bool flagEnableMouseNavigation;
-	float mouseZoomSpeed;
+	double mouseZoomSpeed;
 
 	bool flagEnableZoomKeys;
 	bool flagEnableMoveKeys;
-	float keyMoveSpeed;              // Speed of keys movement
-	float keyZoomSpeed;              // Speed of keys zoom
+	double keyMoveSpeed;              // Speed of keys movement
+	double keyZoomSpeed;              // Speed of keys zoom
 	bool flagMoveSlow;
 
 	// Speed factor for real life time movements, used for fast forward when playing scripts.
@@ -425,7 +425,7 @@ private:
 	};
 	QList<DragHistoryEntry> timeDragHistory; // list of max 3 entries.
 	void addTimeDragPoint(int x, int y);
-	float beforeTimeDragTimeRate;
+	double beforeTimeDragTimeRate;
 
 	// Time mouse control
 	bool dragTimeMode; // Internal flag, true during mouse time motion. This is set true when mouse is moving with ctrl pressed. Set false when releasing ctrl.
@@ -471,8 +471,8 @@ private:
 	// Viewport shifting. This animates a property belonging to StelCore. But the shift itself is likely best placed here.
 	QTimeLine *viewportOffsetTimeline;
 	// Those two are used during viewport offset animation transitions. Both are set by moveViewport(), and irrelevant after the transition.
-	Vec2f oldViewportOffset;
-	Vec2f targetViewportOffset;
+	Vec2d oldViewportOffset;
+	Vec2d targetViewportOffset;
 
 	bool flagIndicationMountMode; // state of mount mode
 

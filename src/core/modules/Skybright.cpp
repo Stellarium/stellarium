@@ -28,7 +28,7 @@
 Skybright::Skybright() : SN(1.f)
 {
 	setDate(2003, 8, 0.f, 0.f);
-	setLocation(M_PI_4, 1000., 25.f, 40.f);
+	setLocation(static_cast<float>(M_PI_4), 1000., 25.f, 40.f);
 	setSunMoon(0.5, 0.5);
 }
 
@@ -48,7 +48,7 @@ void Skybright::setDate(const int year, const int month, const float moonPhase, 
 
 	// Term for dark sky brightness computation.
 	// GZ: This works for a few 11-year solar cycles around 1992... ... cos((y-1992)/11 * 2pi)
-	bNightTerm = 1.0e-13 + 0.3e-13 * cosf(0.57118f * (year-1992));
+	bNightTerm = 1.0e-13f + 0.3e-13f * cosf(0.57118f * (year-1992));
 }
 
 
@@ -88,7 +88,7 @@ void Skybright::setSunMoon(const float cosDistMoonZenith, const float cosDistSun
 
 	C3 = stelpow10f(-0.4f*K*airMassMoon);	// Term for moon brightness computation
 
-	bTwilightTerm = -6.724f + 22.918312f * (M_PI_2-acosf(cosDistSunZenith));
+	bTwilightTerm = -6.724f + 22.918312f * (static_cast<float>(M_PI_2)-acosf(cosDistSunZenith));
 
 	C4 = stelpow10f(-0.4f*K*airMassSun);	// Term for sky brightness computation
 }

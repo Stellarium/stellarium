@@ -55,25 +55,25 @@
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
 	QScriptValue obj = engine->newObject();
-	obj.setProperty("r", QScriptValue(engine, c[0]));
-	obj.setProperty("g", QScriptValue(engine, c[1]));
-	obj.setProperty("b", QScriptValue(engine, c[2]));
+	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(c[0])));
+	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(c[1])));
+	obj.setProperty("b", QScriptValue(engine, static_cast<qsreal>(c[2])));
 	return obj;
 }
 
 void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
 {
-	c[0] = obj.property("r").toNumber();
-	c[1] = obj.property("g").toNumber();
-	c[2] = obj.property("b").toNumber();
+	c[0] = static_cast<float>(obj.property("r").toNumber());
+	c[1] = static_cast<float>(obj.property("g").toNumber());
+	c[2] = static_cast<float>(obj.property("b").toNumber());
 }
 
 QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 {
 	Vec3f c;
-	c[0] = context->argument(0).toNumber();
-	c[1] = context->argument(1).toNumber();
-	c[2] = context->argument(2).toNumber();
+	c[0] = static_cast<float>(context->argument(0).toNumber());
+	c[1] = static_cast<float>(context->argument(1).toNumber());
+	c[2] = static_cast<float>(context->argument(2).toNumber());
 	return vec3fToScriptValue(engine, c);
 }
 
@@ -444,7 +444,7 @@ void StelScriptMgr::stopScript()
 	scriptEnded();
 }
 
-void StelScriptMgr::setScriptRate(float r)
+void StelScriptMgr::setScriptRate(double r)
 {
 	//qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
 	if (!engine->isEvaluating())
@@ -453,16 +453,16 @@ void StelScriptMgr::setScriptRate(float r)
 		return;
 	}
 	
-	float currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
+	qsreal currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
 	
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
-	float factor = r / currentScriptRate;
+	qsreal factor = r / currentScriptRate;
 	
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setTimeRate(core->getTimeRate() * factor);
 	
-	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(core->getTimeRate());
+	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(static_cast<float>(core->getTimeRate()));
 	engine->globalObject().setProperty("scriptRateReadOnly", r);
 }
 

@@ -156,7 +156,7 @@ void StelMarker::update(double deltaTime)
 
 void StelMarker::setFadeDuration(float duration)
 {
-	markerFader.setDuration(duration);
+	markerFader.setDuration(static_cast<int>(1000.f*duration));
 }
 
 void StelMarker::setColor(const Vec3f& color)
@@ -242,7 +242,7 @@ bool SkyMarker::draw(StelCore* core, StelPainter& sPainter)
 
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
-	sPainter.drawSprite2dMode(xyPos[0], xyPos[1], markerSize);
+	sPainter.drawSprite2dMode(static_cast<float>(xyPos[0]), static_cast<float>(xyPos[1]), markerSize);
 
 	return true;
 }
@@ -281,7 +281,7 @@ HorizonMarker::HorizonMarker(const float az, const float alt, const float& size,
 	, markerTexture(Q_NULLPTR)
 	, markerType(style)
 {
-	StelUtils::spheToRect((180.0f-az)*M_PI/180.0, alt*M_PI/180.0, altaz);
+	StelUtils::spheToRect((180.0-static_cast<double>(az))*M_PI/180.0, static_cast<double>(alt)*M_PI/180.0, altaz);
 	QString fileName = "cross.png";
 	// TODO: Use unicode chars for markers or SVG instead?
 	switch (markerType)
@@ -342,7 +342,7 @@ bool HorizonMarker::draw(StelCore *core, StelPainter& sPainter)
 	markerTexture->bind();
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 	sPainter.setColor(markerColor[0], markerColor[1], markerColor[2], markerFader.getInterstate());
-	sPainter.drawSprite2dMode(xyPos[0], xyPos[1], markerSize);
+	sPainter.drawSprite2dMode(static_cast<float>(xyPos[0]), static_cast<float>(xyPos[1]), markerSize);
 	sPainter.setProjector(keepProj);
 	return true;
 }
@@ -395,7 +395,7 @@ void MarkerMgr::markerVisibleTimeout()
 			disconnect(m->timer, SIGNAL(timeout()), this, SLOT(markerVisibleTimeout()));
 			connect(m->timer, SIGNAL(timeout()), this, SLOT(markerDeleteTimeout()));
 			m->setFlagShow(false);
-			m->timer->setInterval(m->markerFader.getDuration()*1000);
+			m->timer->setInterval(qRound(m->markerFader.getDuration()*1000.f));
 			m->timer->start();
 			return;
 		}
@@ -485,8 +485,8 @@ int MarkerMgr::markerHorizon(const QString& az,
 			     bool autoDelete,
 			     int autoDeleteTimeoutMs)
 {
-	float dAzi	= StelUtils::getDecAngle(az)*180.f/M_PI;
-	float dAlt	= StelUtils::getDecAngle(alt)*180.f/M_PI;
+	float dAzi	= static_cast<float>(StelUtils::getDecAngle(az)*180./M_PI);
+	float dAlt	= static_cast<float>(StelUtils::getDecAngle(alt)*180./M_PI);
 
 	StelMarker* m = new HorizonMarker(dAzi, dAlt, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)

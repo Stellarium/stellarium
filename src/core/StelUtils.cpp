@@ -520,11 +520,11 @@ Vec3f htmlColorToVec3f(const QString& c)
 	{
 		bool ok;
 		int i = re.capturedTexts().at(1).toInt(&ok, 16);
-		v[0] = (float)i / 255.;
+		v[0] = static_cast<float>(i) / 255.f;
 		i = re.capturedTexts().at(2).toInt(&ok, 16);
-		v[1] = (float)i / 255.;
+		v[1] = static_cast<float>(i) / 255.f;
 		i = re.capturedTexts().at(3).toInt(&ok, 16);
-		v[2] = (float)i / 255.;
+		v[2] = static_cast<float>(i) / 255.f;
 	}
 	else
 	{
@@ -543,8 +543,8 @@ void spheToRect(const double lng, const double lat, Vec3d& v)
 
 void spheToRect(const float lng, const float lat, Vec3f& v)
 {	
-	const double dlng = lng, dlat = lat, cosLat = cos(dlat);
-	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
+	const double dlng = static_cast<const double>(lng), dlat = static_cast<const double>(lat), cosLat = cos(dlat);
+	v.set(static_cast<float>(cos(dlng) * cosLat), static_cast<float>(sin(dlng) * cosLat), sinf(lat));
 }
 
 void rectToSphe(double *lng, double *lat, const Vec3d &v)
@@ -557,22 +557,22 @@ void rectToSphe(double *lng, double *lat, const Vec3d &v)
 void rectToSphe(float *lng, float *lat, const Vec3d& v)
 {
 	double r = v.length();
-	*lat = asin(v[2]/r);
-	*lng = atan2(v[1],v[0]);
+	*lat = static_cast<float>(asin(v[2]/r));
+	*lng = static_cast<float>(atan2(v[1],v[0]));
 }
 
 void rectToSphe(float *lng, float *lat, const Vec3f& v)
 {
 	float r = v.length();
-	*lat = asin(v[2]/r);
-	*lng = atan2(v[1],v[0]);
+	*lat = static_cast<float>(asin(v[2]/r));
+	*lng = static_cast<float>(atan2(v[1],v[0]));
 }
 
 void rectToSphe(double *lng, double *lat, const Vec3f& v)
 {
-	double r = v.length();
-	*lat = asin(v[2]/r);
-	*lng = atan2(v[1],v[0]);
+	double r = static_cast<double>(v.length());
+	*lat = asin(static_cast<double>(v[2])/r);
+	*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
 }
 
 void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
@@ -596,8 +596,8 @@ double getDecAngle(const QString& str)
 	if (re1.exactMatch(str))
 	{
 		bool neg = (re1.capturedTexts().at(1) == "-");
-		float d = re1.capturedTexts().at(2).toFloat();
-		float m = re1.capturedTexts().at(4).toFloat();
+		double d = re1.capturedTexts().at(2).toDouble();
+		double m = re1.capturedTexts().at(4).toDouble();
 		double s = re1.capturedTexts().at(5).toDouble();
 		if (re1.capturedTexts().at(3).toUpper() == "H")
 		{
@@ -782,7 +782,7 @@ void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *s
 
 QString julianDayToISO8601String(const double jd, bool addMS)
 {
-	int year, month, day, hour, minute, second,millis;
+	int year, month, day, hour, minute, second,millis=0;
 	getDateFromJulianDay(jd, &year, &month, &day);
 	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : Q_NULLPTR );
 
@@ -813,7 +813,7 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QString out;
 	int quotestartedat = -1;
 
-	for (int i = 0; i < static_cast<int>(fmt.length()); i++)
+	for (int i = 0; i < fmt.length(); i++)
 	{
 		if (fmt.at(i) == quote)
 		{
@@ -948,7 +948,7 @@ double getJDFromSystem()
 
 double getJDFromBesselianEpoch(const float epoch)
 {
-	return 2400000.5 + (15019.81352 + (epoch - 1900.0) * 365.242198781);
+	return 2400000.5 + (15019.81352 + static_cast<double>(epoch - 1900.0f) * 365.242198781);
 }
 
 double qTimeToJDFraction(const QTime& time)
@@ -1993,12 +1993,12 @@ double getDeltaTByKhalidSultanaZaidi(const double jDay)
 	int year, month, day;
 	getDateFromJulianDay(jDay, &year, &month, &day);
 	//double a0, a1, a2, a3, a4;
-	const float k[9] ={     3.670f,    3.120f,    2.495f,     1.925f,     1.525f,    1.220f,     0.880f,     0.455f,      0.115f};
-	const float a0[9]={    76.541f,   10.872f,   13.480f,    12.584f,     6.364f,   -5.058f,    13.392f,    30.782f,     55.281f};
-	const float a1[9]={  -253.532f,  -40.744f,   13.075f,     1.929f,    11.004f,   -1.701f,   128.592f,    34.348f,     91.248f};
-	const float a2[9]={   695.901f,  236.890f,    8.635f,    60.896f,   407.776f,  -46.403f,  -279.165f,    46.452f,     87.202f};
-	const float a3[9]={ -1256.982f, -351.537f,   -3.307f, -1432.216f, -4168.394f, -866.171f, -1282.050f,  1295.550f,  -3092.565f};
-	const float a4[9]={   627.152f,   36.612f, -128.294f,  3129.071f,  7561.686f, 5917.585f,  4039.490f, -3210.913f,   8255.422f};
+	const double k[9] ={     3.670,    3.120,    2.495,     1.925,     1.525,    1.220,     0.880,     0.455,      0.115};
+	const double a0[9]={    76.541,   10.872,   13.480,    12.584,     6.364,   -5.058,    13.392,    30.782,     55.281};
+	const double a1[9]={  -253.532,  -40.744,   13.075,     1.929,    11.004,   -1.701,   128.592,    34.348,     91.248};
+	const double a2[9]={   695.901,  236.890,    8.635,    60.896,   407.776,  -46.403,  -279.165,    46.452,     87.202};
+	const double a3[9]={ -1256.982, -351.537,   -3.307, -1432.216, -4168.394, -866.171, -1282.050,  1295.550,  -3092.565};
+	const double a4[9]={   627.152,   36.612, -128.294,  3129.071,  7561.686, 5917.585,  4039.490, -3210.913,   8255.422};
 	int i;
 	// Limited years! Deliver border values.
 	year=qBound(1620, year, 2013);
@@ -2332,7 +2332,7 @@ double getMoonFluctuation(const double jDay)
 
 	double t = getDecYear(year, month, day);
 	if (t>=1681.0 && t<=1936.5) {
-		index = std::floor((t - 1681.0)*10);
+		index = qRound(std::floor((t - 1681.0)*10));
 		f = MoonFluctuationTable[index]*0.07; // Get interpolated data and convert to seconds of time
 	}
 
@@ -2354,7 +2354,7 @@ float* ComputeCosSinTheta(const int slices)
 	Q_ASSERT(slices<=MAX_SLICES);
 	
 	// Difference angle between the stops. Always use 2*M_PI/slices!
-	const float dTheta = 2.f * M_PI / slices;
+	const float dTheta = 2.f * static_cast<float>(M_PI) / slices;
 	float *cos_sin = cos_sin_theta;
 	float *cos_sin_rev = cos_sin + 2*(slices+1);
 	const float c = std::cos(dTheta);
@@ -2388,11 +2388,11 @@ float* ComputeCosSinRho(const int segments)
 	Q_ASSERT(segments<=MAX_STACKS);
 	
 	// Difference angle between the stops. Always use M_PI/segments!
-	const float dRho = M_PI / segments;
+	const float dRho = static_cast<float>(M_PI) / segments;
 	float *cos_sin = cos_sin_rho;
 	float *cos_sin_rev = cos_sin + 2*(segments+1);
-	const float c = std::cos(dRho);
-	const float s = std::sin(dRho);
+	const float c = cosf(dRho);
+	const float s = sinf(dRho);
 	*cos_sin++ = 1.f;
 	*cos_sin++ = 0.f;
 	*--cos_sin_rev =  cos_sin[-1];
@@ -2424,10 +2424,10 @@ float* ComputeCosSinRho(const int segments)
 float *ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle)
 {
 	float *cos_sin = cos_sin_rho;
-	const float c = cos(dRho);
-	const float s = sin(dRho);
-	*cos_sin++ = cos(minAngle);
-	*cos_sin++ = sin(minAngle);
+	const float c = cosf(dRho);
+	const float s = sinf(dRho);
+	*cos_sin++ = cosf(minAngle);
+	*cos_sin++ = sinf(minAngle);
 	for (int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
 	{   // efficient computation, avoid expensive trig functions by use of the addition theorem.
 		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;

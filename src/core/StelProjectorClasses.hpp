@@ -72,7 +72,7 @@ public:
 		{
 			v = in[i];
 			modelViewTransform->forward(v);
-			out->set(v[0], v[1], v[2]);
+			out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 			StelProjectorStereographic::forward(*out);
 			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
 				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
@@ -123,7 +123,7 @@ public:
 		{
 			v = in[i];
 			modelViewTransform->forward(v);
-			out[i].set(v[0], v[1], v[2]);
+			out[i].set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 			StelProjectorHammer::forward(out[i]);
 			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * out[i][0];
 			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * out[i][1];

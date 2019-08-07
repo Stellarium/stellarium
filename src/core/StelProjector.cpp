@@ -28,7 +28,10 @@
 
 StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& m)
     : transfoMat(m),
-      transfoMatf(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15])
+      transfoMatf(static_cast<float>(m[0]), static_cast<float>(m[1]), static_cast<float>(m[2]), static_cast<float>(m[3]),
+		static_cast<float>(m[4]), static_cast<float>(m[5]), static_cast<float>(m[6]), static_cast<float>(m[7]),
+		static_cast<float>(m[8]), static_cast<float>(m[9]), static_cast<float>(m[10]), static_cast<float>(m[11]),
+		static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]))
 {
 	Q_ASSERT(m[0]==m[0]); // prelude to assert later in Atmosphere rendering... still investigating
 }
@@ -69,10 +72,10 @@ void StelProjector::Mat4dTransform::backward(Vec3f& v) const
 
 void StelProjector::Mat4dTransform::combine(const Mat4d& m)
 {
-	Mat4f mf(m[0],  m[1] ,  m[2],  m[3],
-		 m[4],  m[5],   m[6],  m[7],
-		 m[8],  m[9],   m[10], m[11],
-		 m[12], m[13],  m[14], m[15]);
+	Mat4f mf(static_cast<float>(m[0]),  static_cast<float>(m[1]) ,  static_cast<float>(m[2]),  static_cast<float>(m[3]),
+		static_cast<float>(m[4]),  static_cast<float>(m[5]),   static_cast<float>(m[6]),  static_cast<float>(m[7]),
+		static_cast<float>(m[8]),  static_cast<float>(m[9]),   static_cast<float>(m[10]), static_cast<float>(m[11]),
+		static_cast<float>(m[12]), static_cast<float>(m[13]),  static_cast<float>(m[14]), static_cast<float>(m[15]));
 	transfoMat=transfoMat*m;
 	transfoMatf=transfoMatf*mf;
 }
@@ -105,7 +108,7 @@ StelProjector::StelProjectorMaskType StelProjector::stringToMaskType(const QStri
 void StelProjector::init(const StelProjectorParams& params)
 {
 	devicePixelsPerPixel = params.devicePixelsPerPixel;
-	maskType = (StelProjectorMaskType)params.maskType;
+	maskType = params.maskType;
 	zNear = params.zNear;
 	oneOverZNearMinusZFar = 1.f/(zNear-params.zFar);
 	viewportCenterOffset = params.viewportCenterOffset;
@@ -121,14 +124,14 @@ void StelProjector::init(const StelProjectorParams& params)
 	flipHorz = params.flipHorz ? -1.f : 1.f;
 	flipVert = params.flipVert ? -1.f : 1.f;
 	viewportFovDiameter = params.viewportFovDiameter * devicePixelsPerPixel;
-	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(M_PI/360.f));
+	pixelPerRad = 0.5f * viewportFovDiameter / fovToViewScalingFactor(params.fov*(static_cast<float>(M_PI)/360.f));
 	widthStretch = params.widthStretch;
 	computeBoundingCap();
 }
 
 QString StelProjector::getHtmlSummary() const
 {
-	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(getMaxFov())+QChar(0x00B0);
+	return QString("<h3>%1</h3><p>%2</p><b>%3</b>%4").arg(getNameI18()).arg(getDescriptionI18()).arg(q_("Maximum FOV: ")).arg(static_cast<double>(getMaxFov()))+QChar(0x00B0);
 }
 
 bool StelProjector::intersectViewportDiscontinuity(const Vec3d& p1, const Vec3d& p2) const
@@ -201,15 +204,15 @@ SphericalRegionP StelProjector::getViewportConvexPolygon(float marginX, float ma
 {
 	Vec3d e0, e1, e2, e3;
 	const Vec4i& vp = viewportXywh;
-	bool ok = unProject(vp[0]-marginX,vp[1]-marginY,e0);
-	ok &= unProject(vp[0]+vp[2]+marginX,vp[1]-marginY,e1);
-	ok &= unProject(vp[0]+vp[2]+marginX,vp[1]+vp[3]+marginY,e2);
-	ok &= unProject(vp[0]-marginX,vp[1]+vp[3]+marginY,e3);
+	bool ok = unProject(static_cast<double>(vp[0]-marginX),static_cast<double>(vp[1]-marginY),e0);
+	ok &= unProject(static_cast<double>(vp[0]+vp[2]+marginX),static_cast<double>(vp[1]-marginY),e1);
+	ok &= unProject(static_cast<double>(vp[0]+vp[2]+marginX),static_cast<double>(vp[1]+vp[3]+marginY),e2);
+	ok &= unProject(static_cast<double>(vp[0]-marginX),static_cast<double>(vp[1]+vp[3]+marginY),e3);
 	if (!ok)
 	{
 		// Special case for handling degenerated cases, use full sky.
 		//qDebug() << "!ok";
-		return SphericalRegionP((SphericalRegion*)(new AllSkySphericalRegion()));
+		return SphericalRegionP(reinterpret_cast<SphericalRegion*>(new AllSkySphericalRegion()));
 	}
 	e0.normalize();
 	e1.normalize();
@@ -252,7 +255,7 @@ float StelProjector::getPixelPerRadAtCenter() const
 
 //! Get the current FOV diameter in degrees
 float StelProjector::getFov() const {
-	return 360.f/M_PI*viewScalingFactorToFov(0.5f*viewportFovDiameter/pixelPerRad);
+	return 360.f/static_cast<float>(M_PI)*viewScalingFactorToFov(0.5f*viewportFovDiameter/pixelPerRad);
 }
 
 //! Get whether front faces need to be oriented in the clockwise direction
@@ -312,7 +315,7 @@ void StelProjector::project(int n, const Vec3d* in, Vec3f* out)
 	{
 		v = in[i];
 		modelViewTransform->forward(v);
-		out->set(v[0], v[1], v[2]);
+		out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 		forward(*out);
 		out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
 			viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
@@ -336,15 +339,15 @@ void StelProjector::project(int n, const Vec3f* in, Vec3f* out)
 bool StelProjector::projectInPlace(Vec3d& vd) const
 {
 	modelViewTransform->forward(vd);
-	Vec3f v(vd[0], vd[1], vd[2]);
+	Vec3f v= vd.toVec3f();
 	const bool rval = forward(v);
 	// very important: even when the projected point comes from an
 	// invisible region of the sky (rval=false), we must finish
-	// reprojecting, so that OpenGl can successfully eliminate
+	// reprojecting, so that OpenGL can successfully eliminate
 	// polygons by culling.
-	vd[0] = viewportCenter[0] + flipHorz * pixelPerRad * v[0];
-	vd[1] = viewportCenter[1] + flipVert * pixelPerRad * v[1];
-	vd[2] = (v[2] - zNear) * (double) oneOverZNearMinusZFar;
+	vd[0] = static_cast<double>(viewportCenter[0] + flipHorz * pixelPerRad * v[0]);
+	vd[1] = static_cast<double>(viewportCenter[1] + flipVert * pixelPerRad * v[1]);
+	vd[2] = static_cast<double>((v[2] - zNear) * oneOverZNearMinusZFar);
 	return rval;
 }
 
@@ -391,10 +394,10 @@ bool StelProjector::unProject(const Vec3d& win, Vec3d& v) const
 
 void StelProjector::computeBoundingCap()
 {
-	bool ok = unProject(viewportXywh[0]+0.5f*viewportXywh[2], viewportXywh[1]+0.5f*viewportXywh[3], boundingCap.n);
+	bool ok = unProject(static_cast<double>(viewportXywh[0]+0.5f*viewportXywh[2]), static_cast<double>(viewportXywh[1]+0.5f*viewportXywh[3]), boundingCap.n);
 	// The central point should be at a valid position by definition.
 	// When center is offset, this assumption may not hold however.
-	Q_ASSERT(ok || (viewportCenterOffset.lengthSquared()>0.0) );
+	Q_ASSERT(ok || (viewportCenterOffset.lengthSquared()>0.0f) );
 	const bool needNormalization = fabs(boundingCap.n.lengthSquared()-1.)>0.00000001;
 
 	// Now need to determine the aperture
@@ -446,8 +449,8 @@ void StelProjector::computeBoundingCap()
 *************************************************************************/
 bool StelProjector::unProject(double x, double y, Vec3d &v) const
 {
-	v[0] = flipHorz * (x - viewportCenter[0]) / pixelPerRad;
-	v[1] = flipVert * (y - viewportCenter[1]) / pixelPerRad;
+	v[0] = static_cast<double>(flipHorz * (static_cast<float>(x) - viewportCenter[0]) / pixelPerRad);
+	v[1] = static_cast<double>(flipVert * (static_cast<float>(y) - viewportCenter[1]) / pixelPerRad);
 	v[2] = 0;
 	const bool rval = backward(v);
 	// Even when the reprojected point comes from a region of the screen,

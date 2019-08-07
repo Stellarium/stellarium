@@ -67,7 +67,7 @@ public:
 		const float cosDistSun_q = cosDistSun*cosDistSun;
 
 		Q_ASSERT(p.pos[2] >= 0.f);
-		const float oneOverCosZenithAngle = (p.pos[2]==0.) ? 1e99 : 1.f / p.pos[2];
+		const float oneOverCosZenithAngle = (p.pos[2]==0.f) ? 1e38f : 1.f / p.pos[2];
 		p.color[0] = term_x * (1.f + Ax * std::exp(Bx*oneOverCosZenithAngle))
 				* (1.f + Cx * std::exp(Dx*distSun) + Ex * cosDistSun_q);
 
@@ -78,7 +78,7 @@ public:
 // 				* (1.f + CY * std::exp(DY*distSun) + EY * cosDistSun_q);
 
 
-		if (/*p.color[2] < 0. || */p.color[0] < 0. || p.color[1] < 0.)
+		if (/*p.color[2] < 0. || */p.color[0] < 0.f || p.color[1] < 0.f)
 		{
 			p.color[0] = 0.25;
 			p.color[1] = 0.25;
@@ -145,9 +145,9 @@ inline void Skylight::getZenithColor(float * v) const
 // Compute CIE luminance for zenith in cd/m^2
 inline void Skylight::computeZenithLuminance(void)
 {
-	zenithLuminance = 1000.f * ((4.0453f*T - 4.9710f) * std::tan( (0.4444f - T/120.f) * (M_PI-2.f*thetas) ) -
+	zenithLuminance = 1000.f * ((4.0453f*T - 4.9710f) * std::tanf( (0.4444f - T/120.f) * (static_cast<float>(M_PI)-2.f*thetas) ) -
 		0.2155f*T + 2.4192f);
-	if (zenithLuminance<=0.f) zenithLuminance=0.00000000001;
+	if (zenithLuminance<=0.f) zenithLuminance=0.00000000001f;
 }
 
 // Compute CIE x and y color components
@@ -181,7 +181,7 @@ inline void Skylight::computeLuminanceDistributionCoefs(void)
 	DY = 0.1206f*T - 2.5771f;
 	EY =-0.0670f*T + 0.3703f;
 	// with BY>0 the formulas in getxyYValuev make no sense
-	Q_ASSERT(BY <= 0.0);
+	Q_ASSERT(BY <= 0.0f);
 }
 
 // Compute the color distribution coefficients
@@ -200,8 +200,8 @@ inline void Skylight::computeColorDistributionCoefs(void)
 	Dy =-0.0438f*T - 1.0539f;
 	Ey =-0.0109f*T + 0.0531f;
 	// with Bx,By>0 the formulas in getxyYValuev make no sense
-	Q_ASSERT(Bx <= 0.0);
-	Q_ASSERT(By <= 0.0);
+	Q_ASSERT(Bx <= 0.0f);
+	Q_ASSERT(By <= 0.0f);
 }
 
 

@@ -43,9 +43,9 @@
 MilkyWay::MilkyWay()
 	: color(1.f, 1.f, 1.f)
 	, intensity(1.)
-	, intensityFovScale(1.0f)
-	, intensityMinFov(0.25f) // when zooming in further, MilkyWay is no longer visible.
-	, intensityMaxFov(2.5f) // when zooming out further, MilkyWay is fully visible (when enabled).
+	, intensityFovScale(1.0)
+	, intensityMinFov(0.25) // when zooming in further, MilkyWay is no longer visible.
+	, intensityMaxFov(2.5) // when zooming out further, MilkyWay is fully visible (when enabled).
 	, vertexArray()
 {
 	setObjectName("MilkyWay");
@@ -68,13 +68,13 @@ void MilkyWay::init()
 
 	tex = StelApp::getInstance().getTextureManager().createTexture(StelFileMgr::getInstallationDir()+"/textures/milkyway.png");
 	setFlagShow(conf->value("astro/flag_milky_way").toBool());
-	setIntensity(conf->value("astro/milky_way_intensity",1.f).toFloat());
-	setProperty("saturation", conf->value("astro/milky_way_saturation", 1.f).toFloat());
+	setIntensity(conf->value("astro/milky_way_intensity",1.).toDouble());
+	setSaturation(conf->value("astro/milky_way_saturation", 1.).toDouble());
 
 	// A new texture was provided by Fabien. Better resolution, but in equatorial coordinates. I had to enhance it a bit, and shift it by 90 degrees.
 	vertexArray = new StelVertexArray(StelPainter::computeSphereNoLight(1.f,1.f,45,15,1, true)); // GZ orig: slices=stacks=20.
 	vertexArray->colors.resize(vertexArray->vertex.length());
-	vertexArray->colors.fill(Vec3f(1.0, 0.3, 0.9));
+	vertexArray->colors.fill(Vec3f(1.0f, 0.3f, 0.9f));
 
 	QString displayGroup = N_("Display Options");
 	addAction("actionShow_MilkyWay", displayGroup, N_("Milky Way"), "flagMilkyWayDisplayed", "M");
@@ -141,7 +141,7 @@ void MilkyWay::draw(StelCore* core)
 	float bortleIntensity = 1.f+ (bortle-1)*atmFadeIntensity; // Bortle index moderated by atmosphere fader.
 	//aLum*=(11.0f-bortle)*0.1f;
 
-	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?
+	float lum = drawer->surfaceBrightnessToLuminance(12.f+0.15f*bortleIntensity); // was 11.5; Source? How to calibrate the new texture?
 
 	// Get the luminance scaled between 0 and 1
 	float aLum =eye->adaptLuminanceScaled(lum*fader->getInterstate());
@@ -151,7 +151,7 @@ void MilkyWay::draw(StelCore* core)
 
 
 	// intensity of 1.0 is "proper", but allow boost for dim screens
-	c*=aLum*intensity*intensityFovScale;
+	c*=aLum*static_cast<float>(intensity*intensityFovScale);
 
 
 	// TODO: Find an even better balance with sky brightness, MW should be hard to see during Full Moon and at least somewhat reduced in smaller phases.
@@ -195,7 +195,7 @@ void MilkyWay::draw(StelCore* core)
 	sPainter.setCullFace(true);
 	sPainter.setBlending(true, GL_ONE, GL_ONE); // allow colored sky background
 	tex->bind();
-	sPainter.setSaturation(saturation);
+	sPainter.setSaturation(static_cast<float>(saturation));
 	sPainter.drawStelVertexArray(*vertexArray);
 	sPainter.setCullFace(false);
 }

@@ -1329,7 +1329,7 @@ float StelCore::getUTCOffset(const double JD) const
 		}
 		else
 		{
-			shiftInSeconds = (loc.longitude/15.f)*3600.f; // Local Mean Solar Time
+			shiftInSeconds = qRound((loc.longitude/15.f)*3600.f); // Local Mean Solar Time
 		}
 		if (tzName=="LTST")
 			shiftInSeconds += getSolutionEquationOfTime(JD)*60;
