@@ -151,16 +151,22 @@ public slots:
 	void nextTransit();
 	//! Set simulation time to the time of previous transit of selected object
 	void previousTransit();
+	//! Set simulation time to the time of today's transit of selected object
+	void todayTransit();
 
 	//! Set simulation time to the time of next rising of selected object (if applicable)
 	void nextRising();
 	//! Set simulation time to the time of previous rising of selected object (if applicable)
 	void previousRising();
+	//! Set simulation time to the time of today's rising of selected object (if applicable)
+	void todayRising();
 
 	//! Set simulation time to the time of next setting of selected object (if applicable)
 	void nextSetting();
 	//! Set simulation time to the time of previous setting of selected object (if applicable)
 	void previousSetting();
+	//! Set simulation time to the time of today's setting of selected object (if applicable)
+	void todaySetting();
 
 signals:
 	//! Indicate that the selected StelObjects has changed.

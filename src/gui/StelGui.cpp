@@ -550,7 +550,7 @@ void StelGui::update()
         if (buttonTimeForward->isChecked())
 			buttonTimeForward->setChecked(false);
 	}
-	if (core->getTimeRate() == 0) {
+	if (core->getTimeRate() == 0.) {
 		if (buttonTimeRealTimeSpeed->isChecked() != StelButton::ButtonStateNoChange)
 			buttonTimeRealTimeSpeed->setChecked(StelButton::ButtonStateNoChange);
 	} else if (core->getRealTimeSpeed()) {
