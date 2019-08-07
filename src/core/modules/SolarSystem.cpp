@@ -2743,10 +2743,6 @@ double SolarSystem::getEclipseFactor(const StelCore* core) const
 		const double R = RS / L;
 		const double r = radius / l;
 		const double d = ( v1 - v2 ).length();
-
-		if(planet->englishName == "Moon")
-			v1 = planet->getHeliocentricEclipticPos(); // ??? This assignment is dead code!
-
 		double illumination;
 
 		if(d >= R + r) // distance too far
