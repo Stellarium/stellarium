@@ -543,7 +543,7 @@ void spheToRect(const double lng, const double lat, Vec3d& v)
 
 void spheToRect(const float lng, const float lat, Vec3f& v)
 {	
-	const double dlng = static_cast<const double>(lng), dlat = static_cast<const double>(lat), cosLat = cos(dlat);
+	const double dlng = static_cast<double>(lng), dlat = static_cast<double>(lat), cosLat = cos(dlat);
 	v.set(static_cast<float>(cos(dlng) * cosLat), static_cast<float>(sin(dlng) * cosLat), sinf(lat));
 }
 
@@ -564,8 +564,8 @@ void rectToSphe(float *lng, float *lat, const Vec3d& v)
 void rectToSphe(float *lng, float *lat, const Vec3f& v)
 {
 	float r = v.length();
-	*lat = static_cast<float>(asin(v[2]/r));
-	*lng = static_cast<float>(atan2(v[1],v[0]));
+	*lat = asinf(v[2]/r);
+	*lng = atan2f(v[1],v[0]);
 }
 
 void rectToSphe(double *lng, double *lat, const Vec3f& v)
@@ -706,18 +706,18 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 {
 	/*
 	 * This algorithm is taken from
-	 * "Numerical Recipes in c, 2nd Ed." (1992), pp. 14-15
+	 * "Numerical Recipes in C, 2nd Ed." (1992), pp. 14-15
 	 * and converted to integer math.
 	 * The electronic version of the book is freely available
 	 * at http://www.nr.com/ , under "Obsolete Versions - Older
-	 * book and code versions.
+	 * book and code versions".
 	 */
 
 	static const long JD_GREG_CAL = 2299161;
 	static const int JB_MAX_WITHOUT_OVERFLOW = 107374182;
 	long julian;
 
-	julian = (long)floor(jd + 0.5);
+	julian = static_cast<long>(floor(jd + 0.5));
 
 	long ta, jalpha, tb, tc, td, te;
 
@@ -782,7 +782,7 @@ void getTimeFromJulianDay(const double julianDay, int *hour, int *minute, int *s
 
 QString julianDayToISO8601String(const double jd, bool addMS)
 {
-	int year, month, day, hour, minute, second,millis=0;
+	int year, month, day, hour, minute, second, millis=0;
 	getDateFromJulianDay(jd, &year, &month, &day);
 	getTimeFromJulianDay(jd, &hour, &minute, &second, addMS ? &millis : Q_NULLPTR );
 
@@ -953,7 +953,7 @@ double getJDFromBesselianEpoch(const float epoch)
 
 double qTimeToJDFraction(const QTime& time)
 {
-	return (double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time)-0.5;
+	return static_cast<double>(1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(time))-0.5;
 }
 
 QTime jdFractionToQTime(const double jd)
@@ -965,16 +965,16 @@ QTime jdFractionToQTime(const double jd)
 }
 
 // UTC !
-bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s)
+bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const float s)
 {
 	static const long IGREG2 = 15+31L*(10+12L*1582);
-	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (s / (24.0 * 60.0 * 60.0)) - 0.5;
+	double deltaTime = (h / 24.0) + (min / (24.0*60.0)) + (static_cast<double>(s) / (24.0 * 60.0 * 60.0)) - 0.5;
 	QDate test((y <= 0 ? y-1 : y), m, d);
 	// if QDate will oblige, do so.
 	// added hook for Julian calendar, because he has been removed from Qt5 --AW
 	if ( test.isValid() && y>1582)
 	{
-		double qdjd = (double)test.toJulianDay();
+		double qdjd = static_cast<double>(test.toJulianDay());
 		qdjd += deltaTime;
 		*newjd = qdjd;
 		return true;
@@ -982,7 +982,7 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 	else
 	{
 		/*
-		 * Algorithm taken from "Numerical Recipes in c, 2nd Ed." (1992), pp. 11-12
+		 * Algorithm taken from "Numerical Recipes in C, 2nd Ed." (1992), pp. 11-12
 		 */
 		long ljul;
 		long jy, jm;
@@ -1021,12 +1021,11 @@ bool getJDFromDate(double* newjd, const int y, const int m, const int d, const i
 			}
 			ljul += 2 - lcc + lee;
 		}
-		double jd = (double)ljul;
+		double jd = static_cast<double>(ljul);
 		jd += deltaTime;
 		*newjd = jd;
 		return true;
 	}
-	return false;
 }
 
 double getJDFromDate_alg2(const int y, const int m, const int d, const int h, const int min, const int s)
@@ -1326,7 +1325,7 @@ QString hoursToHmsStr(const double hours, const bool lowprecision)
 		return QString("%1h%2m").arg(h).arg(m, 2, 10, QChar('0'));
 	else
 	{
-		float s = (((qAbs(hours)-qAbs(double(h)))*60)-m)*60;
+		float s = static_cast<float>((((qAbs(hours)-qAbs(double(h)))*60)-m)*60);
 		if (s>59.9f)
 		{
 			m += 1;
@@ -2349,7 +2348,7 @@ static float cos_sin_theta[2*(MAX_SLICES+1)];
 //! Values are stored in the global static array cos_sin_theta.
 //! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
 //! @param slices number of partitions (elsewhere called "segments") for the circle
-float* ComputeCosSinTheta(const int slices)
+float* ComputeCosSinTheta(const unsigned int slices)
 {
 	Q_ASSERT(slices<=MAX_SLICES);
 	
@@ -2383,7 +2382,7 @@ float* ComputeCosSinTheta(const int slices)
 //! Values are stored in the global static array cos_sin_rho.
 //! Used for the sin/cos values along a meridian for a spherical mesh.
 //! @param segments number of partitions (elsewhere called "stacks") for the half-circle
-float* ComputeCosSinRho(const int segments)
+float* ComputeCosSinRho(const unsigned int segments)
 {
 	Q_ASSERT(segments<=MAX_STACKS);
 	
@@ -2421,14 +2420,14 @@ float* ComputeCosSinRho(const int segments)
 //! @param dRho a difference angle between the stops
 //! @param segments number of segments
 //! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
-float *ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle)
+float *ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle)
 {
 	float *cos_sin = cos_sin_rho;
 	const float c = cosf(dRho);
 	const float s = sinf(dRho);
 	*cos_sin++ = cosf(minAngle);
 	*cos_sin++ = sinf(minAngle);
-	for (int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
+	for (unsigned int i=0; i<segments; ++i) // we cannot mirror this, it may be unequal.
 	{   // efficient computation, avoid expensive trig functions by use of the addition theorem.
 		cos_sin[0] = cos_sin[-2]*c - cos_sin[-1]*s;
 		cos_sin[1] = cos_sin[-2]*s + cos_sin[-1]*c;
@@ -2445,7 +2444,7 @@ double getDecYear(const int year, const int month, const int day)
 int getFixedFromGregorian(const int year, const int month, const int day)
 {
 	int y = year - 1;
-	int r = 365*y + std::floor(y/4.) - std::floor(y/100.) + std::floor(y/400.) + std::floor((367 * month - 362)/12.);
+	int r = 365*y + static_cast<int>(std::floor(y/4.) - std::floor(y/100.) + std::floor(y/400.) + std::floor((367 * month - 362)/12.));
 	if (month <= 2)
 		r += 0;
 	else if (isLeapYear(year))
@@ -2546,7 +2545,7 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 		if(maxBytes>=0)
 		{
 			//check if we reach the desired limit with the next read
-			bytesToRead = qMin((qint64)CHUNK,maxBytes-bytesRead);
+			bytesToRead = qMin(static_cast<qint64>(CHUNK),maxBytes-bytesRead);
 		}
 
 		if(bytesToRead==0)
@@ -2563,7 +2562,7 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 
 		bytesRead += read;
 		strm.next_in = reinterpret_cast<Bytef*>(readBuffer.data());
-		strm.avail_in = read;
+		strm.avail_in = static_cast<unsigned int>(read);
 
 		if(read==0)
 			break;
@@ -2585,7 +2584,7 @@ QByteArray uncompress(QIODevice& device, qint64 maxBytes)
 				return QByteArray();
 			}
 
-			out.append(inflateBuffer.constData(), CHUNK - strm.avail_out);
+			out.append(inflateBuffer.constData(), CHUNK - static_cast<int>(strm.avail_out));
 		} while(strm.avail_out == 0); //if zlib has more data for us, repeat
 	} while(ret!=Z_STREAM_END);
 

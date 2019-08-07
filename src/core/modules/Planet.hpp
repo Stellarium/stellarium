@@ -77,7 +77,7 @@ class Ring
 {
 public:
 	Ring(float radiusMin, float radiusMax,const QString &texname);
-	double getSize(void) const {return radiusMax;}
+	double getSize(void) const {return static_cast<double>(radiusMax);}
 	const float radiusMin;
 	const float radiusMax;
 	StelTextureSP tex;
@@ -229,14 +229,14 @@ public:
 	//! @return the polar radius of the planet in astronomical units.
 	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
 	//! Get duration of sidereal day
-	double getSiderealDay(void) const {return re.period;}
+	double getSiderealDay(void) const {return static_cast<double>(re.period);}
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
 	//! Get albedo
-	double getAlbedo(void) const { return albedo; }
+	double getAlbedo(void) const { return static_cast<double>(albedo); }
 
 	const QString& getTextMapName() const {return texMapName;}
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
@@ -270,7 +270,7 @@ public:
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingNode(void) const {return re.ascendingNode;}
+	double getRotAscendingNode(void) const {return static_cast<double>(re.ascendingNode);}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;

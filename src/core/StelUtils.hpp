@@ -322,7 +322,7 @@ namespace StelUtils
 	//! @param min minute
 	//! @param s second
 	//! @result true in all conceivable cases.
-	bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s);
+	bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const float s);
 
 	int numberOfDaysInMonthInYear(const int month, const int year);
 	//! @result true if year is a leap year. Observes 1582 switch from Julian to Gregorian Calendar.
@@ -690,13 +690,13 @@ namespace StelUtils
 	//! Values are stored in the global static array cos_sin_theta.
 	//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
 	//! @param slices number of partitions (elsewhere called "segments") for the circle
-	float *ComputeCosSinTheta(const int slices);
+	float *ComputeCosSinTheta(const unsigned int slices);
 	
 	//! Compute cosines and sines around a half-circle which is split in "segments" parts.
 	//! Values are stored in the global static array cos_sin_rho.
 	//! Used for the sin/cos values along a meridian for a spherical mesh.
 	//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
-	float *ComputeCosSinRho(const int segments);
+	float *ComputeCosSinRho(const unsigned int segments);
 	
 	//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
 	//! Values are stored in the global static array cos_sin_rho.
@@ -705,7 +705,7 @@ namespace StelUtils
 	//! @param dRho a difference angle between the stops
 	//! @param segments number of segments
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
-	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
+	float* ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle);
 
 	//! Compute date in decimal year format
 	//! @param year

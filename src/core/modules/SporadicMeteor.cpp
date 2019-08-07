@@ -22,8 +22,8 @@
 #include "StelUtils.hpp"
 
 const float SporadicMeteor::_RAND_MAX=1.f/static_cast<float>(RAND_MAX);
-const double SporadicMeteor::_RAND_MAX_P1=1./static_cast<double>(RAND_MAX+1.);
-const float SporadicMeteor::_RAND_MAX_P1_f=1.f/static_cast<float>(RAND_MAX+1.f);
+const double SporadicMeteor::_RAND_MAX_P1=1./(static_cast<double>(RAND_MAX)+1.);
+const float SporadicMeteor::_RAND_MAX_P1_f=1.f/(static_cast<float>(RAND_MAX)+1.f);
 
 SporadicMeteor::SporadicMeteor(const StelCore* core, const float& maxVel, const StelTextureSP& bolideTexture)
 	: Meteor(core, bolideTexture)
