@@ -145,7 +145,7 @@ inline void Skylight::getZenithColor(float * v) const
 // Compute CIE luminance for zenith in cd/m^2
 inline void Skylight::computeZenithLuminance(void)
 {
-	zenithLuminance = 1000.f * ((4.0453f*T - 4.9710f) * std::tan( (0.4444f - T/120.f) * (static_cast<float>(M_PI)-2.f*thetas) ) -
+	zenithLuminance = 1000.f * ((4.0453f*T - 4.9710f) * tanf( (0.4444f - T/120.f) * (static_cast<float>(M_PI)-2.f*thetas) ) -
 		0.2155f*T + 2.4192f);
 	if (zenithLuminance<=0.f) zenithLuminance=0.00000000001f;
 }
