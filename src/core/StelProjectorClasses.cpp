@@ -272,7 +272,7 @@ bool StelProjectorHammer::forward(Vec3f &v) const
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float cosDelta = std::sqrt(1.f-v[1]*v[1]/(r*r));
-	float z = std::sqrtf(1.f+cosDelta*std::cosf(alpha/2.f));
+	float z = std::sqrt(1.f+cosDelta*std::cos(alpha/2.f));
 	v[0] = 2.f*static_cast<float>(M_SQRT2)*cosDelta*std::sin(alpha/2.f)/z * widthStretch;
 	v[1] = static_cast<float>(M_SQRT2)*v[1]/r/z;
 	v[2] = r;
