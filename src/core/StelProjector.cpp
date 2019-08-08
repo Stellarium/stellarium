@@ -28,10 +28,10 @@
 
 StelProjector::Mat4dTransform::Mat4dTransform(const Mat4d& m)
     : transfoMat(m),
-      transfoMatf(static_cast<float>(m[0]), static_cast<float>(m[1]), static_cast<float>(m[2]), static_cast<float>(m[3]),
-		static_cast<float>(m[4]), static_cast<float>(m[5]), static_cast<float>(m[6]), static_cast<float>(m[7]),
-		static_cast<float>(m[8]), static_cast<float>(m[9]), static_cast<float>(m[10]), static_cast<float>(m[11]),
-		static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]))
+      transfoMatf(static_cast<float>(m[0]),  static_cast<float>(m[1]),  static_cast<float>(m[2]),  static_cast<float>(m[3]),
+		  static_cast<float>(m[4]),  static_cast<float>(m[5]),  static_cast<float>(m[6]),  static_cast<float>(m[7]),
+		  static_cast<float>(m[8]),  static_cast<float>(m[9]),  static_cast<float>(m[10]), static_cast<float>(m[11]),
+		  static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]))
 {
 	Q_ASSERT(m[0]==m[0]); // prelude to assert later in Atmosphere rendering... still investigating
 }
@@ -110,7 +110,7 @@ void StelProjector::init(const StelProjectorParams& params)
 	devicePixelsPerPixel = params.devicePixelsPerPixel;
 	maskType = params.maskType;
 	zNear = params.zNear;
-	oneOverZNearMinusZFar = 1.f/(zNear-params.zFar);
+	oneOverZNearMinusZFar = 1./(zNear-params.zFar);
 	viewportCenterOffset = params.viewportCenterOffset;
 	viewportXywh = params.viewportXywh;
 	viewportXywh[0] *= devicePixelsPerPixel;
@@ -319,7 +319,7 @@ void StelProjector::project(int n, const Vec3d* in, Vec3f* out)
 		forward(*out);
 		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
 			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-			((*out)[2] - zNear) * oneOverZNearMinusZFar);
+			static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
 	}
 }
 
@@ -332,7 +332,7 @@ void StelProjector::project(int n, const Vec3f* in, Vec3f* out)
 		forward(*out);
 		out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
 			static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
-			((*out)[2] - zNear) * oneOverZNearMinusZFar);
+			static_cast<float>((static_cast<double>((*out)[2]) - zNear) * oneOverZNearMinusZFar));
 	}
 }
 
@@ -347,7 +347,7 @@ bool StelProjector::projectInPlace(Vec3d& vd) const
 	// polygons by culling.
 	vd[0] = viewportCenter[0] + static_cast<double>(flipHorz * pixelPerRad * v[0]);
 	vd[1] = viewportCenter[1] + static_cast<double>(flipVert * pixelPerRad * v[1]);
-	vd[2] = static_cast<double>((v[2] - zNear) * oneOverZNearMinusZFar);
+	vd[2] = (static_cast<double>(v[2]) - zNear) * oneOverZNearMinusZFar;
 	return rval;
 }
 
@@ -361,7 +361,7 @@ bool StelProjector::projectInPlace(Vec3f& v) const
 	// polygons by culling.
 	v[0] = static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * v[0];
 	v[1] = static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * v[1];
-	v[2] = (v[2] - zNear) * oneOverZNearMinusZFar;
+	v[2] = static_cast<float>((static_cast<double>(v[2]) - zNear) * oneOverZNearMinusZFar);
 	return rval;
 }
 

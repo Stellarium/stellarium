@@ -72,7 +72,7 @@ public:
 	};
 
 	StelMainView(QSettings* settings);
-	virtual ~StelMainView();
+	virtual ~StelMainView() Q_DECL_OVERRIDE;
 
 	//! Start the main initialization of Stellarium
 	void init();
@@ -168,7 +168,7 @@ public slots:
 	//! Get the mouse cursor timeout in seconds
 	double getCursorTimeout() const {return cursorTimeoutTimer->interval() / 1000.0;}
 	//! Set the mouse cursor timeout in seconds
-	void setCursorTimeout(double t) {cursorTimeoutTimer->setInterval(t * 1000); emit cursorTimeoutChanged(t);}
+	void setCursorTimeout(double t) {cursorTimeoutTimer->setInterval(static_cast<int>(t * 1000)); emit cursorTimeoutChanged(t);}
 
 	//! Set the minimum frames per second. Usually this minimum will be switched to after there are no
 	//! user events for some seconds to save power. However, if can be useful to set this to a high

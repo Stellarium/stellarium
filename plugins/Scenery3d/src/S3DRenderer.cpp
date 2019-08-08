@@ -70,7 +70,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
       sun(Q_NULLPTR), moon(Q_NULLPTR), venus(Q_NULLPTR),
       currentScene(Q_NULLPTR),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
-      defaultFBO(-1),
+      defaultFBO(-1u),
       torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
@@ -180,7 +180,7 @@ void S3DRenderer::setupPassUniforms(QOpenGLShaderProgram *shader)
 			splitData.v[i] = 0.5f*(-zVal * projectionMatrix.constData()[10] + projectionMatrix.constData()[14])/zVal + 0.5f;
 
 			//Bind current depth map texture
-			glActiveTexture(GL_TEXTURE4+i);
+			glActiveTexture(GL_TEXTURE4+static_cast<uint>(i));
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
 
 			SET_UNIFORM(shader,static_cast<ShaderMgr::UNIFORM>(ShaderMgr::UNIFORM_TEX_SHADOW0+i), 4+i);
@@ -273,7 +273,7 @@ void S3DRenderer::setupMaterialUniforms(QOpenGLShaderProgram* shader, const S3DS
 }
 
 //depth sort helper
-Vec3f zSortValue;
+static Vec3f zSortValue;
 bool zSortFunction(const StelOBJ::MaterialGroup* const & mLeft, const StelOBJ::MaterialGroup* const & mRight)
 {
 	//we can avoid taking the sqrt here
@@ -341,7 +341,7 @@ bool S3DRenderer::drawArrays(bool shading, bool blendAlphaAdditive)
 			else
 			{
 				//objects start casting shadows with at least 0.2 opacity
-				if(pMaterial->d * pMaterial->vis_fadeValue < 0.2)
+				if(pMaterial->d * pMaterial->vis_fadeValue < 0.2f)
 					continue;
 			}
 
@@ -788,7 +788,7 @@ bool S3DRenderer::renderShadowMaps()
 
 
 	//Unbind
-	glBindFramebuffer(GL_FRAMEBUFFER, defaultFBO);
+	glBindFramebuffer(GL_FRAMEBUFFER, static_cast<GLuint>(defaultFBO));
 
 	//reset viewport (see StelPainter::setProjector)
 	const Vec4i& vp = altAzProjector->getViewport();
@@ -812,8 +812,8 @@ bool S3DRenderer::renderShadowMaps()
 void S3DRenderer::calculateLighting()
 {
 	//calculate which light source we need + intensity
-	float ambientBrightness, directionalBrightness,emissiveFactor;
-	float eclipseFactor=GETSTELMODULE(SolarSystem)->getEclipseFactor(StelApp::getInstance().getCore());
+	float ambientBrightness=0.0f, directionalBrightness=0.0f, emissiveFactor;
+	float eclipseFactor=static_cast<float>(GETSTELMODULE(SolarSystem)->getEclipseFactor(StelApp::getInstance().getCore()));
 
 	Vec3d sunPosition = sun->getAltAzPosAuto(core);
 	sunPosition.normalize();
@@ -838,9 +838,9 @@ void S3DRenderer::calculateLighting()
 	//float sinSunAngleRad = sin(qMin(M_PI_2, asin(sunPosition[2])+8.*M_PI/180.));
 	//float sinMoonAngleRad = moonPosition[2];
 
-	float sinSunAngle  = sunPosition[2];
-	float sinMoonAngle = moonPosition[2];
-	float sinVenusAngle = venusPosition[2];
+	float sinSunAngle  =  static_cast<float>(sunPosition[2]);
+	float sinMoonAngle =  static_cast<float>(moonPosition[2]);
+	float sinVenusAngle = static_cast<float>(venusPosition[2]);
 
 	//set the minimum ambient brightness
 	//this uses the LandscapeMgr values
@@ -851,15 +851,10 @@ void S3DRenderer::calculateLighting()
 		if (landscapeMgr->getFlagLandscapeSetsMinimalBrightness() && l && l->getLandscapeMinimalBrightness()>=0)
 			ambientBrightness = l->getLandscapeMinimalBrightness();
 		else
-			ambientBrightness = landscapeMgr->getDefaultMinimalBrightness();
-	}
-	else
-	{
-		ambientBrightness = 0.0f;
+			ambientBrightness = static_cast<float>(landscapeMgr->getDefaultMinimalBrightness());
 	}
 
 	lightInfo.shadowCaster = LightParameters::SC_None;
-	directionalBrightness=0.0f;
 	lightInfo.backgroundAmbient = ambientBrightness;
 
 	//assume light=sun for a start.
@@ -884,8 +879,8 @@ void S3DRenderer::calculateLighting()
 		// I don't know if this can ever happen, but in this case,
 		// directly use the same model as LandscapeMgr::update uses for the lightscapeBrightness
 		emissiveFactor = 0.0f;
-		if (sunPosition[2]<-0.14f) emissiveFactor=1.0f;
-		else if (sunPosition[2]<-0.05f) emissiveFactor = 1.0f-(sunPosition[2]+0.14f)/(-0.05f+0.14f);
+		if (sunPosition[2]<-0.14) emissiveFactor=1.0f;
+		else if (sunPosition[2]<-0.05) emissiveFactor = 1.0f-static_cast<float>(sunPosition[2]+0.14)/(-0.05f+0.14f);
 	}
 
 	// calculate ambient light
@@ -934,7 +929,7 @@ void S3DRenderer::calculateLighting()
 	else if (sinVenusAngle>0.0f)
 	{
 		float venusBrightness = sqrtf(sinVenusAngle)*((cosf(venusPhaseAngle)+1)*0.5f) * VENUS_BRIGHTNESS_FACTOR;
-		venusBrightness -= (ambientBrightness-0.05)/2.0f;
+		venusBrightness -= (ambientBrightness-0.05f)/2.0f;
 		venusBrightness = qMax(0.0f, venusBrightness);
 		if (venusBrightness > 0.0f)
 		{
@@ -948,8 +943,8 @@ void S3DRenderer::calculateLighting()
 	}
 
 	//convert to float
-	lightInfo.lightDirectionV3f = Vec3f(lightPosition.v[0],lightPosition[1],lightPosition.v[2]);
-	lightInfo.lightDirectionWorld = QVector3D(lightPosition.v[0],lightPosition[1],lightPosition.v[2]);
+	lightInfo.lightDirectionV3f = lightPosition.toVec3f(); // lightPosition.v[0],lightPosition[1],lightPosition.v[2]);
+	lightInfo.lightDirectionWorld = QVector3D(static_cast<float>(lightPosition.v[0]),static_cast<float>(lightPosition[1]),static_cast<float>(lightPosition.v[2]));
 
 	lightInfo.landscapeOpacity = 0.0f;
 
@@ -1001,7 +996,7 @@ void S3DRenderer::calcCubeMVP(const Vec3d translation)
 	for(int i = 0;i<6;++i)
 	{
 		tmp = cubeRotation[i];
-		tmp.translate(translation.v[0], translation.v[1], translation.v[2]);
+		tmp.translate(static_cast<float>(translation.v[0]), static_cast<float>(translation.v[1]), static_cast<float>(translation.v[2]));
 		cubeMVP[i] = projectionMatrix * tmp;
 	}
 }
@@ -1015,7 +1010,7 @@ void S3DRenderer::renderIntoCubemapGeometryShader()
 	// we just set the position because that currently is all that is needeed for correct lighting
 	modelViewMatrix.setToIdentity();
 	Vec3d negEyePos = -currentScene->getEyePosition();
-	modelViewMatrix.translate(negEyePos.v[0], negEyePos.v[1], negEyePos.v[2]);
+	modelViewMatrix.translate(static_cast<float>(negEyePos.v[0]), static_cast<float>(negEyePos.v[1]), static_cast<float>(negEyePos.v[2]));
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//render all 6 faces at once
@@ -1035,7 +1030,9 @@ void S3DRenderer::renderShadowMapsForFace(int face)
 	//this is NOT fixed by choosing a different up vector here as could be expected
 	//the problem seems to occur during final rendering because shadowmap textures look alright and the scaling values seem valid
 	//for now, fix this by adding a tiny value to X in these cases
-	adjustShadowFrustum(currentScene->getEyePosition(),Vec3d(face>3?viewDir[0]+0.000001:viewDir[0],viewDir[1],viewDir[2]),Vec3d(0,0,1),90.0f,1.0f);
+	adjustShadowFrustum(currentScene->getEyePosition(),
+			    Vec3d(static_cast<double>(face>3?viewDir[0]+0.000001f:viewDir[0]),static_cast<double>(viewDir[1]),static_cast<double>(viewDir[2])),
+			Vec3d(0,0,1),90.0f,1.0f);
 	//render shadowmap
 	if(!renderShadowMaps())
 		return;
@@ -1052,7 +1049,7 @@ void S3DRenderer::renderIntoCubemapSixPasses()
 	//store current projection (= 90° cube projection)
 	QMatrix4x4 squareProjection = projectionMatrix;
 
-	const Vec3d& eyePos = currentScene->getEyePosition();
+	const Vec3f& eyePos = currentScene->getEyePosition().toVec3f();
 
 	if(needsMovementUpdate && updateOnlyDominantOnMoving)
 	{
@@ -1134,7 +1131,7 @@ void S3DRenderer::generateCubeMap()
 		{
 			//in this mode, shadow frusta are calculated the same as in perspective mode
 			float fov = altAzProjector->getFov();
-			float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
+			float aspect = static_cast<float>(altAzProjector->getViewportWidth()) / static_cast<float>(altAzProjector->getViewportHeight());
 
 			adjustShadowFrustum(currentScene->getEyePosition(),currentScene->getViewDirection(),Vec3d(0.,0.,1.),fov,aspect);
 			if(!renderShadowMaps())
@@ -1216,13 +1213,13 @@ void S3DRenderer::drawFromCubeMap()
 	if(cubemappingMode>=S3DEnum::CM_CUBEMAP)
 		cubeShader->setAttributeBuffer(StelOpenGLArray::ATTLOC_TEXCOORD,GL_FLOAT,0,3);
 	else // 2D tex coords are stored in the same buffer, but with an offset
-		cubeShader->setAttributeBuffer(StelOpenGLArray::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * sizeof(Vec3f),2);
+		cubeShader->setAttributeBuffer(StelOpenGLArray::ATTLOC_TEXCOORD,GL_FLOAT,cubeVertices.size() * static_cast<int>(sizeof(Vec3f)),2);
 	cubeShader->enableAttributeArray(StelOpenGLArray::ATTLOC_TEXCOORD);
 	cubeVertexBuffer.release();
 
 	//upload transformed vertex data
 	transformedCubeVertexBuffer.bind();
-	transformedCubeVertexBuffer.allocate(transformedCubeVertices.constData(), transformedCubeVertices.size() * sizeof(Vec3f));
+	transformedCubeVertexBuffer.allocate(transformedCubeVertices.constData(), transformedCubeVertices.size() * static_cast<int>(sizeof(Vec3f)));
 	cubeShader->setAttributeBuffer(StelOpenGLArray::ATTLOC_VERTEX, GL_FLOAT, 0,3);
 	cubeShader->enableAttributeArray(StelOpenGLArray::ATTLOC_VERTEX);
 	transformedCubeVertexBuffer.release();
@@ -1254,7 +1251,7 @@ void S3DRenderer::drawFromCubeMap()
 		for(int i =0;i<6;++i)
 		{
 			glBindTexture(GL_TEXTURE_2D, cubeMapTex[i]);
-			glDrawElements(GL_TRIANGLES,faceIndexCount, GL_UNSIGNED_SHORT, (const GLvoid*)(i * faceIndexCount * sizeof(short)));
+			glDrawElements(GL_TRIANGLES,faceIndexCount, GL_UNSIGNED_SHORT, reinterpret_cast<const GLvoid*>(static_cast<size_t>(i * faceIndexCount) * sizeof(short)));
 		}
 	}
 	cubeIndexBuffer.release();
@@ -1273,7 +1270,7 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
 {
     //calculate standard perspective projection matrix, use QMatrix4x4 for that
     float fov = altAzProjector->getFov();
-    float aspect = (float)altAzProjector->getViewportWidth() / (float)altAzProjector->getViewportHeight();
+    float aspect = static_cast<float>(altAzProjector->getViewportWidth()) / static_cast<float>(altAzProjector->getViewportHeight());
 
     //calc modelview transform
     QMatrix4x4 mvMatrix = altAzProjector->getModelViewTransform()->getApproximateLinearTransfo().convertToQMatrix();
@@ -1299,7 +1296,7 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
 		    return; //shadow map rendering failed, do an early abort
     }
 
-    mvMatrix.translate(-eyePos.v[0],-eyePos.v[1],-eyePos.v[2]);
+    mvMatrix.translate(static_cast<float>(-eyePos.v[0]),static_cast<float>(-eyePos.v[1]),static_cast<float>(-eyePos.v[2]));
 
     //set final rendering matrices
     modelViewMatrix = mvMatrix;
@@ -1308,13 +1305,13 @@ void S3DRenderer::drawDirect() // for Perspective Projection only!
     //without viewport offset, you could simply call this:
     //projectionMatrix.perspective(fov,aspect,currentScene.camNearZ,currentScene.camFarZ);
     //these 2 lines replicate gluPerspective with glFrustum
-    float fH = std::tan( fov / 360.0f * M_PI ) * info.camNearZ;
+    float fH = std::tan( fov / 360.0f * M_PIf ) * info.camNearZ;
     float fW = fH * aspect;
 
     //apply offset values
     Vector2<qreal> vp = altAzProjector->getViewportCenterOffset();
-    float horizOffset = 2.0 * fW * vp[0];
-    float vertOffset = - 2.0 * fH * vp[1];
+    float horizOffset = 2.0f * fW * static_cast<float>(vp[0]);
+    float vertOffset = - 2.0f * fH * static_cast<float>(vp[1]);
 
     //final projection matrix
     projectionMatrix.frustum(-fW + horizOffset, fW + horizOffset,
@@ -1357,7 +1354,7 @@ void S3DRenderer::drawCoordinatesText()
 	// Attempt at better font scaling for Macs and HiDPI.
 	int fontSize=debugTextFont.pixelSize();
 
-	float devicePixelscaling = altAzProjector->getDevicePixelsPerPixel()*StelApp::getInstance().getGlobalScalingRatio();
+	float devicePixelscaling = static_cast<float>(altAzProjector->getDevicePixelsPerPixel())*StelApp::getInstance().getGlobalScalingRatio();
 	float screen_x = altAzProjector->getViewportWidth()  - 240.0f*devicePixelscaling;
 	float screen_y = altAzProjector->getViewportHeight() -  60.0f*devicePixelscaling;
 	QString str;
@@ -1458,35 +1455,24 @@ void S3DRenderer::drawDebug()
 
 	StelPainter painter(altAzProjector);
 
-	QString lightMessage;
-	QString lightMessage2;
-	QString lightMessage3;
-	QString directionalSourceString;
+	const QStringList shadowCasterNames = {"None", "Sun", "Moon", "Venus"};
+	QString shadowCasterName="Error!!!";
+	Q_ASSERT(lightInfo.shadowCaster<=LightParameters::SC_Venus);
+	shadowCasterName = shadowCasterNames.at(lightInfo.shadowCaster);
 
-	QString shadowCasterName;
-	switch (lightInfo.shadowCaster) {
-		case LightParameters::SC_None:  shadowCasterName="None";  break;
-		case LightParameters::SC_Sun:   shadowCasterName="Sun";   break;
-		case LightParameters::SC_Moon:  shadowCasterName="Moon";  break;
-		case LightParameters::SC_Venus: shadowCasterName="Venus"; break;
-		default: shadowCasterName="Error!!!";
-	}
+	const QStringList directionalSourceStrings = { "(Sun, below horiz.)", "Sun", "Moon", "Venus", "(Venus, flooded by ambient)"};
+	QString directionalSourceString="Error!!!";
+	Q_ASSERT(lightInfo.directionalSource<=LightParameters::DS_Venus_Ambient);
+	directionalSourceString = directionalSourceStrings.at(lightInfo.directionalSource);
 
-	switch(lightInfo.directionalSource){
-		case LightParameters::DS_Sun_Horiz:		directionalSourceString="(Sun, below horiz.)"; break;
-		case LightParameters::DS_Sun:			directionalSourceString="Sun"; break;
-		case LightParameters::DS_Moon:			directionalSourceString="Moon"; break;
-		case LightParameters::DS_Venus:			directionalSourceString="Venus"; break;
-		case LightParameters::DS_Venus_Ambient:		directionalSourceString="(Venus, flooded by ambient)"; break;
-		default: directionalSourceString="Error!!!";
-	}
-
-	lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
+	const QString lightMessage=QString("Ambient: %1 Directional: %2. Shadows cast by: %3 from %4/%5/%6")
 			.arg(lightInfo.ambient[0], 6, 'f', 4).arg(lightInfo.directional[0], 6, 'f', 4)
 			.arg(shadowCasterName).arg(lightInfo.lightDirectionV3f.v[0], 6, 'f', 4)
 			.arg(lightInfo.lightDirectionV3f.v[1], 6, 'f', 4).arg(lightInfo.lightDirectionV3f.v[2], 6, 'f', 4);
-	lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3").arg(lightInfo.sunAmbient, 6, 'f', 4).arg(lightInfo.moonAmbient, 6, 'f', 4).arg(lightInfo.backgroundAmbient, 6, 'f', 4);
-	lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4").arg(lightInfo.directional[0], 6, 'f', 4).arg(directionalSourceString).arg(lightInfo.emissive[0]).arg(lightInfo.landscapeOpacity);
+	const QString lightMessage2=QString("Contributions: Ambient     Sun: %1, Moon: %2, Background+^L: %3")
+			.arg(lightInfo.sunAmbient, 6, 'f', 4).arg(lightInfo.moonAmbient, 6, 'f', 4).arg(lightInfo.backgroundAmbient, 6, 'f', 4);
+	const QString lightMessage3=QString("               Directional %1 by: %2, emissive factor: %3, landscape opacity: %4")
+			.arg(lightInfo.directional[0], 6, 'f', 4).arg(directionalSourceString).arg(lightInfo.emissive[0]).arg(lightInfo.landscapeOpacity);
 
 
 	painter.setFont(debugTextFont);
@@ -1524,7 +1510,7 @@ void S3DRenderer::drawDebug()
 				glBindTexture(GL_TEXTURE_2D, shadowMapsArray[i]);
 				painter.drawSprite2dMode(screen_x, screen_y, debugTextureSize);
 
-				int tmp = screen_y - debugTextureSize-30;
+				const int tmp = qRound(screen_y - debugTextureSize)-30;
 				painter.drawText(screen_x-125, tmp, QString("cam n/f: %1/%2").arg(frustumArray[i].zNear, 7, 'f', 2).arg(frustumArray[i].zFar, 7, 'f', 2));
 				painter.drawText(screen_x-125, tmp-15.0f, QString("uv scale: %1/%2").arg(shadowFrustumSize[i].x(), 7, 'f', 2).arg(shadowFrustumSize[i].y(),7,'f',2));
 				painter.drawText(screen_x-125, tmp-30.0f, QString("ortho n/f: %1/%2").arg(shadowFrustumSize[i].z(), 7, 'f', 2).arg(shadowFrustumSize[i].w(),7,'f',2));
@@ -1799,12 +1785,12 @@ bool S3DRenderer::initCubemapping()
 #ifndef QT_OPENGL_ES_2
 	//if we are on an ES context, it may not be possible to specify texture bitdepth
 	bool isEs = QOpenGLContext::currentContext()->isOpenGLES();
-	GLenum colorFormat = isEs ? GL_RGBA : GL_RGBA8;
-	GLenum depthFormat = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT24;
+	GLint colorFormat = isEs ? GL_RGBA : GL_RGBA8;
+	GLint depthFormat = isEs ? GL_DEPTH_COMPONENT : GL_DEPTH_COMPONENT24;
 	GLenum rbDepth = isEs ? GL_DEPTH_COMPONENT16 : GL_DEPTH_COMPONENT24;
 #else
-	GLenum colorFormat = GL_RGBA;
-	GLenum depthFormat = GL_DEPTH_COMPONENT;
+	GLint colorFormat = GL_RGBA;
+	GLint depthFormat = GL_DEPTH_COMPONENT;
 	GLenum rbDepth = GL_DEPTH_COMPONENT16;
 #endif
 
@@ -1826,7 +1812,7 @@ bool S3DRenderer::initCubemapping()
 		GET_GLERROR()
 
 		//create faces
-		for (int i=0;i<6;++i)
+		for (uint i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,colorFormat,
 				     cubemapSize,cubemapSize,0,GL_RGBA,GL_UNSIGNED_BYTE,Q_NULLPTR);
@@ -1874,7 +1860,7 @@ bool S3DRenderer::initCubemapping()
 		GET_GLERROR()
 
 		//create faces
-		for (int i=0;i<6;++i)
+		for (uint i=0;i<6;++i)
 		{
 			glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X+i,0,depthFormat,
 				     cubemapSize,cubemapSize,0,GL_DEPTH_COMPONENT,GL_UNSIGNED_BYTE,Q_NULLPTR);
@@ -1949,7 +1935,7 @@ bool S3DRenderer::initCubemapping()
 
 		GET_GLERROR()
 
-		for(int i=0;i<6;++i)
+		for(uint i=0;i<6;++i)
 		{
 			glBindFramebuffer(GL_FRAMEBUFFER, cubeSideFBO[i]);
 
@@ -2036,8 +2022,8 @@ bool S3DRenderer::initCubemapping()
 	//create a 20x20 cube subdivision to give a good approximation of non-linear projections
 	const int sub = 20;
 	const int vtxCount = (sub+1) * (sub+1);
-	const double d_sub_v = 2.0 / sub;
-	const double d_sub_tex = 1.0 / sub;
+	const float d_sub_v = 2.0f / sub;
+	const float d_sub_tex = 1.0f / sub;
 
 	//create the front cubemap face vertices
 	QVector<Vec3f> cubePlaneFront;
@@ -2053,8 +2039,8 @@ bool S3DRenderer::initCubemapping()
 	//first, create the actual vertex positions, (20+1)^2 vertices
 	for (int y = 0; y <= sub; y++) {
 		for (int x = 0; x <= sub; x++) {
-			float xp = -1.0 + x * d_sub_v;
-			float yp = -1.0 + y * d_sub_v;
+			float xp = -1.0f + x * d_sub_v;
+			float yp = -1.0f + y * d_sub_v;
 
 			float tx = x * d_sub_tex;
 			float ty = y * d_sub_tex;
@@ -2062,7 +2048,7 @@ bool S3DRenderer::initCubemapping()
 			cubePlaneFront<< Vec3f(xp, 1.0f, yp);
 			cubePlaneFrontTex<<Vec2f(tx,ty);
 
-			vertexIdx[y][x] = y*(sub+1)+x;
+			vertexIdx[y][x] = static_cast<unsigned short>(y*(sub+1)+x);
 		}
 	}
 
@@ -2125,24 +2111,24 @@ bool S3DRenderer::initCubemapping()
 #define PLANE(_PLANEID_, _MAT_) for(int i=_PLANEID_ * vtxCount;i < (_PLANEID_ + 1)*vtxCount;i++){ _MAT_.transfo(cubeVertices[i]); }\
 	for(int i =_PLANEID_ * idxCount; i < (_PLANEID_+1)*idxCount;++i) { cubeIndices[i] = cubeIndices[i] + _PLANEID_ * vtxCount; }
 
-	PLANE(0, Mat4f::zrotation(-M_PI_2)); //S
-	PLANE(1, Mat4f::zrotation(M_PI_2));  //N
+	PLANE(0, Mat4f::zrotation(-M_PI_2f)); //S
+	PLANE(1, Mat4f::zrotation(M_PI_2f));  //N
 	PLANE(2, Mat4f::identity());  //E
-	PLANE(3, Mat4f::zrotation(M_PI)); //W
-	PLANE(4, Mat4f::xrotation(M_PI_2)); //U
-	PLANE(5, Mat4f::xrotation(-M_PI_2)); //D
+	PLANE(3, Mat4f::zrotation(M_PIf)); //W
+	PLANE(4, Mat4f::xrotation(M_PI_2f)); //U
+	PLANE(5, Mat4f::xrotation(-M_PI_2f)); //D
 #undef PLANE
 
 	//upload original cube vertices + indices to GL
 	cubeVertexBuffer.bind();
 	//store original vertex pos (=3D vertex coords) + 2D tex coords in same buffer
-	cubeVertexBuffer.allocate(cubeVertices.size() * (sizeof(Vec3f) + sizeof(Vec2f)) );
-	cubeVertexBuffer.write(0, cubeVertices.constData(), cubeVertices.size() * sizeof(Vec3f));
-	cubeVertexBuffer.write(cubeVertices.size() * sizeof(Vec3f), cubeTexcoords.constData(), cubeTexcoords.size() * sizeof(Vec2f));
+	cubeVertexBuffer.allocate(cubeVertices.size() * static_cast<int>((sizeof(Vec3f) + sizeof(Vec2f))) );
+	cubeVertexBuffer.write(0, cubeVertices.constData(), cubeVertices.size() * static_cast<int>(sizeof(Vec3f)));
+	cubeVertexBuffer.write(cubeVertices.size() * static_cast<int>(sizeof(Vec3f)), cubeTexcoords.constData(), cubeTexcoords.size() * static_cast<int>(sizeof(Vec2f)));
 	cubeVertexBuffer.release();
 
 	cubeIndexBuffer.bind();
-	cubeIndexBuffer.allocate(cubeIndices.constData(),cubeIndices.size() * sizeof(unsigned short));
+	cubeIndexBuffer.allocate(cubeIndices.constData(),cubeIndices.size() * static_cast<int>(sizeof(unsigned short)));
 	cubeIndexBuffer.release();
 
 	//reset cubemap timer to make sure it is rerendered immediately after re-init
@@ -2223,7 +2209,7 @@ bool S3DRenderer::initShadowmapping()
 			glBindFramebuffer(GL_FRAMEBUFFER, shadowFBOs.at(i));
 
 			//Activate the texture unit - we want sahdows + textures so this is crucial with the current Stellarium pipeline - we start at unit 4
-			glActiveTexture(GL_TEXTURE4+i);
+			glActiveTexture(GL_TEXTURE4+static_cast<uint>(i));
 
 			//Bind the depth map and setup parameters
 			glBindTexture(GL_TEXTURE_2D, shadowMapsArray.at(i));
@@ -2240,7 +2226,7 @@ bool S3DRenderer::initShadowmapping()
 			bool pcssEnabled = shaderParameters.pcss && (shaderParameters.shadowFilterQuality == S3DEnum::SFQ_LOW || shaderParameters.shadowFilterQuality == S3DEnum::SFQ_HIGH);
 
 			//for OpenGL ES2, type has to be UNSIGNED_SHORT or UNSIGNED_INT for depth textures, desktop does probably not care
-			glTexImage2D(GL_TEXTURE_2D, 0, (pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, Q_NULLPTR);
+			glTexImage2D(GL_TEXTURE_2D, 0, static_cast<GLint>(pcssEnabled ? depthPcss : depthNormal), shadowmapSize, shadowmapSize, 0, GL_DEPTH_COMPONENT, GL_UNSIGNED_SHORT, Q_NULLPTR);
 
 			//we use hardware-accelerated depth compare mode, unless pcss is used
 			shaderParameters.hwShadowSamplers = false;

@@ -28,7 +28,7 @@
 Skybright::Skybright() : SN(1.f)
 {
 	setDate(2003, 8, 0.f, 0.f);
-	setLocation(static_cast<float>(M_PI_4), 1000., 25.f, 40.f);
+	setLocation(M_PI_4f, 1000., 25.f, 40.f);
 	setSunMoon(0.5, 0.5);
 }
 
@@ -59,7 +59,7 @@ void Skybright::setLocation(const float latitude, const float altitude, const fl
 	// extinction Coefficient for V band
 	// GZ TODO: re-create UBVRI for colored extinction, and get RGB extinction factors from SkyBright!
 	float KR = 0.1066f * expf(-altitude/8200.f); // Rayleigh
-	float KA = 0.1f * expf(-altitude/1500.f) * powf(1.f - 0.32f/logf(relativeHumidity/100.f) ,1.33f) *
+	float KA = 0.1f * expf(-altitude/1500.f) * powf(1.f - 0.32f/logf(relativeHumidity/100.f), 1.33f) *
 		(1.f + 0.33f * sign_latitude * sinf(RA)); // Aerosol
 	float KO = 0.031f * expf(-altitude/8200.f) * ( 3.f + 0.4f * (latitude * cosf(RA) - cosf(3.f*latitude)) )/3.f; // Ozone
 	float KW = 0.031f * 0.94f * (relativeHumidity/100.f) * expf(temperature/15.f) * expf(-altitude/8200.f); // Water
@@ -88,7 +88,7 @@ void Skybright::setSunMoon(const float cosDistMoonZenith, const float cosDistSun
 
 	C3 = stelpow10f(-0.4f*K*airMassMoon);	// Term for moon brightness computation
 
-	bTwilightTerm = -6.724f + 22.918312f * (static_cast<float>(M_PI_2)-acosf(cosDistSunZenith));
+	bTwilightTerm = -6.724f + 22.918312f * (M_PI_2f-acosf(cosDistSunZenith));
 
 	C4 = stelpow10f(-0.4f*K*airMassSun);	// Term for sky brightness computation
 }
@@ -146,7 +146,7 @@ float Skybright::getLuminance( float cosDistMoon,
 		b_total += (0.4f + 0.6f / sqrtf(0.04f + 0.96f * cosDistZenith*cosDistZenith)) * bNightTerm * bKX;
 	}
 	
-	return (b_total<0.f) ? 0.f : b_total * (900900.9f * static_cast<float>(M_PI) * 1e-4f * 3239389.f*2.f *1.5f);
+	return (b_total<0.f) ? 0.f : b_total * (900900.9f * M_PIf * 1e-4f * 3239389.f*2.f *1.5f);
 	//5;	// In cd/m^2 : the 32393895 is empirical term because the
 	// lambert -> cd/m^2 formula seems to be wrong...
 }

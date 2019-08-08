@@ -379,7 +379,7 @@ void ArchaeoLines::update(double deltaTime)
 	// compute parallax correction with Meeus 40.6. First, find H from h=0, then add corrections.
 
 	static const double b_over_a=0.99664719;
-	const double latRad=loc.latitude*M_PI/180.0;
+	const double latRad=static_cast<double>(loc.latitude)*M_PI_180;
 	const double u=std::atan(b_over_a*std::tan(latRad));
 	const double rhoSinPhiP=b_over_a*std::sin(u)+loc.altitude/6378140.0*std::sin(latRad);
 	const double rhoCosPhiP=         std::cos(u)+loc.altitude/6378140.0*std::cos(latRad);
@@ -424,8 +424,8 @@ void ArchaeoLines::update(double deltaTime)
 	southernMajorStandstillLine6->setDefiningAngle(lunarDEtopo[6] *180.0/M_PI);
 	southernMajorStandstillLine7->setDefiningAngle(lunarDEtopo[7] *180.0/M_PI);
 
-	zenithPassageLine->setDefiningAngle(loc.latitude);
-	nadirPassageLine->setDefiningAngle(-loc.latitude);
+	zenithPassageLine->setDefiningAngle(static_cast<double>(loc.latitude));
+	nadirPassageLine->setDefiningAngle(static_cast<double>(-loc.latitude));
 
 	// Selected object?
 	if (objMgr->getWasSelected())
@@ -562,8 +562,8 @@ void ArchaeoLines::loadSettings()
 	setGeographicLocation2Longitude(conf->value("ArchaeoLines/geographic_location_2_longitude",  35.235774).toDouble());
 	setGeographicLocation2Latitude( conf->value("ArchaeoLines/geographic_location_2_latitude",   31.778087).toDouble());
 	StelLocation loc=core->getCurrentLocation();
-	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation1Longitude, geographicLocation1Latitude));
-	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(loc.longitude, loc.latitude, geographicLocation2Longitude, geographicLocation2Latitude));
+	geographicLocation1Line->setDefiningAngle(getAzimuthForLocation(static_cast<double>(loc.longitude), static_cast<double>(loc.latitude), geographicLocation1Longitude, geographicLocation1Latitude));
+	geographicLocation2Line->setDefiningAngle(getAzimuthForLocation(static_cast<double>(loc.longitude), static_cast<double>(loc.latitude), geographicLocation2Longitude, geographicLocation2Latitude));
 	geographicLocation1Line->setLabel(conf->value("ArchaeoLines/geographic_location_1_label", "Mecca (Qibla)").toString());
 	geographicLocation2Line->setLabel(conf->value("ArchaeoLines/geographic_location_2_label", "Jerusalem").toString());
 
@@ -1306,68 +1306,48 @@ double ArchaeoLines::getLineAngle(ArchaeoLine::Line whichLine) const
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
 			return equinoxLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::Solstices:
 			return northernSolsticeLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::Crossquarters:
 			return northernCrossquarterLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::MajorStandstill:
 			return northernMajorStandstillLine0->getDefiningAngle();
-			break;
 		case ArchaeoLine::MinorStandstill:
 			return northernMinorStandstillLine2->getDefiningAngle();
-			break;
 		case ArchaeoLine::ZenithPassage:
 			return zenithPassageLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::NadirPassage:
 			return nadirPassageLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::SelectedObject:
 			return selectedObjectLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::SelectedObjectAzimuth:
 			return selectedObjectAzimuthLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::SelectedObjectHourAngle:
 			return selectedObjectHourAngleLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::CurrentSun:
 			return currentSunLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::CurrentMoon:
 			return currentMoonLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::CurrentPlanetNone:
 			return 0.0;
-			break;
 		case ArchaeoLine::CurrentPlanetMercury:
 		case ArchaeoLine::CurrentPlanetVenus:
 		case ArchaeoLine::CurrentPlanetMars:
 		case ArchaeoLine::CurrentPlanetJupiter:
 		case ArchaeoLine::CurrentPlanetSaturn:
 			return currentPlanetLine->getDefiningAngle();
-			break;
 		case ArchaeoLine::GeographicLocation1:
 			return geographicLocation1Line->getDefiningAngle();
-			break;
 		case ArchaeoLine::GeographicLocation2:
 			return geographicLocation2Line->getDefiningAngle();
-			break;
 		case ArchaeoLine::CustomAzimuth1:
 			return customAzimuth1Line->getDefiningAngle();
-			break;
 		case ArchaeoLine::CustomAzimuth2:
 			return customAzimuth2Line->getDefiningAngle();
-			break;
 		case ArchaeoLine::CustomDeclination1:
 			return customDeclination1Line->getDefiningAngle();
-			break;
 		case ArchaeoLine::CustomDeclination2:
 			return customDeclination2Line->getDefiningAngle();
-			break;
 		default:
 			Q_ASSERT(0);
 	}
@@ -1379,40 +1359,28 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 	switch (whichLine){
 		case ArchaeoLine::Equinox:
 			return equinoxLine->getLabel();
-			break;
 		case ArchaeoLine::Solstices:
 			return northernSolsticeLine->getLabel();
-			break;
 		case ArchaeoLine::Crossquarters:
 			return northernCrossquarterLine->getLabel();
-			break;
 		case ArchaeoLine::MajorStandstill:
 			return northernMajorStandstillLine0->getLabel();
-			break;
 		case ArchaeoLine::MinorStandstill:
 			return northernMinorStandstillLine2->getLabel();
-			break;
 		case ArchaeoLine::ZenithPassage:
 			return zenithPassageLine->getLabel();
-			break;
 		case ArchaeoLine::NadirPassage:
 			return nadirPassageLine->getLabel();
-			break;
 		case ArchaeoLine::SelectedObject:
 			return selectedObjectLine->getLabel();
-			break;
 		case ArchaeoLine::SelectedObjectAzimuth:
 			return selectedObjectAzimuthLine->getLabel();
-			break;
 		case ArchaeoLine::SelectedObjectHourAngle:
 			return selectedObjectHourAngleLine->getLabel();
-			break;
 		case ArchaeoLine::CurrentSun:
 			return currentSunLine->getLabel();
-			break;
 		case ArchaeoLine::CurrentMoon:
 			return currentMoonLine->getLabel();
-			break;
 		case ArchaeoLine::CurrentPlanetNone:
 		case ArchaeoLine::CurrentPlanetMercury:
 		case ArchaeoLine::CurrentPlanetVenus:
@@ -1420,25 +1388,18 @@ QString ArchaeoLines::getLineLabel(ArchaeoLine::Line whichLine) const
 		case ArchaeoLine::CurrentPlanetJupiter:
 		case ArchaeoLine::CurrentPlanetSaturn:
 			return currentPlanetLine->getLabel();
-			break;
 		case ArchaeoLine::GeographicLocation1:
 			return geographicLocation1Line->getLabel();
-			break;
 		case ArchaeoLine::GeographicLocation2:
 			return geographicLocation2Line->getLabel();
-			break;
 		case ArchaeoLine::CustomAzimuth1:
 			return customAzimuth1Line->getLabel();
-			break;
 		case ArchaeoLine::CustomAzimuth2:
 			return customAzimuth2Line->getLabel();
-			break;
 		case ArchaeoLine::CustomDeclination1:
 			return customDeclination1Line->getLabel();
-			break;
 		case ArchaeoLine::CustomDeclination2:
 			return customDeclination2Line->getLabel();
-			break;
 		default:
 			Q_ASSERT(0);
 			return "ArchaeoLines::getLineLabel(): Error!";
@@ -1454,7 +1415,10 @@ double ArchaeoLines::getAzimuthForLocation(double longObs, double latObs, double
 
 	return (180.0/M_PI) * atan2(sin(longTarget-longObs), cos(latObs)*tan(latTarget)-sin(latObs)*cos(longTarget-longObs));
 }
-
+double ArchaeoLines::getAzimuthForLocation(float longObs, float latObs, double longTarget, double latTarget)
+{
+	return getAzimuthForLocation(static_cast<double>(longObs), static_cast<double>(latObs), longTarget, latTarget);
+}
 
 // callback stuff shamelessly taken from GridLinesMgr. Changes: Text MUST be filled, can also be empty for no label!
 struct ALViewportEdgeIntersectCallbackData
@@ -1483,15 +1447,15 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 	if (text.isEmpty())
 		return;
 
-	double angleDeg = std::atan2(-direc[1], -direc[0])*180./M_PI;
+	float angleDeg = static_cast<float>(std::atan2(-direc[1], -direc[0])*180./M_PI);
 	float xshift=6.f;
-	if (angleDeg>90. || angleDeg<-90.)
+	if (angleDeg>90.f || angleDeg<-90.f)
 	{
-		angleDeg+=180.;
-		xshift=-d->sPainter->getFontMetrics().width(text)-6.f;
+		angleDeg+=180.f;
+		xshift=-d->sPainter->getFontMetrics().boundingRect(text).width()-6.f;
 	}
 
-	d->sPainter->drawText(screenPos[0], screenPos[1], text, angleDeg, xshift, 3);
+	d->sPainter->drawText(static_cast<float>(screenPos[0]), static_cast<float>(screenPos[1]), text, angleDeg, xshift, 3);
 	//d->sPainter->setColor(tmpColor[0], tmpColor[1], tmpColor[2], tmpColor[3]); // RESTORE
 	d->sPainter->setBlending(true);
 }

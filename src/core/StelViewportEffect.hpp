@@ -63,7 +63,7 @@ private:
 
 	Vec2f *texture_point_array;
 	int max_x,max_y;
-	qreal step_x,step_y;
+	float step_x,step_y;
 
 	QVector<Vec2f> displayVertexList;
 	QVector<Vec4f> displayColorList;

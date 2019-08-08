@@ -35,6 +35,36 @@
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
 
+// Add a few frequently used extra math-type literals
+#ifndef M_PI_180
+	#define M_PI_180    (M_PI/180.)
+#endif
+#ifndef M_180_PI
+	#define M_180_PI    (180./M_PI)
+#endif
+// Add some math literals in float version to avoid many static_casts
+#ifndef M_PIf
+	#define M_PIf       3.14159265358979323846f   // pi
+#endif
+#ifndef M_PI_2f
+	#define M_PI_2f     1.57079632679489661923f   // pi/2
+#endif
+#ifndef M_PI_4f
+	#define M_PI_4f     0.785398163397448309616f  // pi/4
+#endif
+#ifndef M_1_PIf
+	#define M_1_PIf     0.318309886183790671538f  // 1/pi
+#endif
+#ifndef M_2_PIf
+	#define M_2_PIf     0.636619772367581343076f  // 2/pi
+#endif
+#ifndef M_PI_180f
+	#define M_PI_180f   (M_PIf/180.f)
+#endif
+#ifndef M_180_PIf
+	#define M_180_PIf   (180.f/M_PIf)
+#endif
+
 #define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
 //! @namespace StelUtils contains general purpose utility functions.

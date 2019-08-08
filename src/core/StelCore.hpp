@@ -574,7 +574,7 @@ public slots:
 	//! Add n sidereal years to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located. Sidereal year
 	//! connected to orbital period of planets.
-	void addSiderealYears(float n=100.f);
+	void addSiderealYears(double n=100.);
 
 	//! Subtract one [Earth, solar] minute to the current simulation time.
 	void subtractMinute();
@@ -598,7 +598,7 @@ public slots:
 	//! Subtract n sidereal years to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located. Sidereal year
 	//! connected to orbital period of planets.
-	void subtractSiderealYears(float n=100.f);
+	void subtractSiderealYears(double n=100.);
 
 	//! Add one synodic month to the simulation time.
 	void addSynodicMonth();
@@ -616,14 +616,14 @@ public slots:
 	//! Add one anomalistic year to the simulation time.
 	void addAnomalisticYear();
 	//! Add n anomalistic years to the simulation time.
-	void addAnomalisticYears(float n=100.f);
+	void addAnomalisticYears(double n=100.);
 
 	//! Add one mean tropical month to the simulation time.
 	void addMeanTropicalMonth();
 	//! Add one mean tropical year to the simulation time.
 	void addMeanTropicalYear();
 	//! Add n mean tropical years to the simulation time.
-	void addMeanTropicalYears(float n=100.f);
+	void addMeanTropicalYears(double n=100.);
 	//! Add one tropical year to the simulation time.
 	void addTropicalYear();
 
@@ -633,7 +633,7 @@ public slots:
 	//! Add one Julian year to the simulation time.
 	void addJulianYear();
 	//! Add n Julian years to the simulation time.
-	void addJulianYears(float n=100.f);
+	void addJulianYears(double n=100.);
 
 	//! Add one Gaussian year to the simulation time. The Gaussian Year is 365.2568983 days, and is C.F.Gauss's value for the Sidereal Year.
 	//! Note that 1 GaussY=2 &pi;/k where k is the Gaussian gravitational constant. A massless body orbits one solar mass in 1AU distance in a Gaussian Year.
@@ -655,14 +655,14 @@ public slots:
 	//! Subtract one anomalistic year to the simulation time.
 	void subtractAnomalisticYear();
 	//! Subtract n anomalistic years to the simulation time.
-	void subtractAnomalisticYears(float n=100.f);
+	void subtractAnomalisticYears(double n=100.);
 
 	//! Subtract one mean tropical month to the simulation time.
 	void subtractMeanTropicalMonth();
 	//! Subtract one mean tropical year to the simulation time.
 	void subtractMeanTropicalYear();
 	//! Subtract n mean tropical years to the simulation time.
-	void subtractMeanTropicalYears(float n=100.f);
+	void subtractMeanTropicalYears(double n=100.);
 	//! Subtract one tropical year to the simulation time.
 	void subtractTropicalYear();
 
@@ -672,7 +672,7 @@ public slots:
 	//! Subtract one Julian year to the simulation time.
 	void subtractJulianYear();
 	//! Subtract n Julian years to the simulation time.
-	void subtractJulianYears(float n=100.f);
+	void subtractJulianYears(double n=100.);
 
 	//! Subtract one Gaussian year to the simulation time.
 	void subtractGaussianYear();
@@ -691,22 +691,22 @@ public slots:
 
 	//! Set central year for custom equation for calculation of DeltaT
 	//! @param y the year, e.g. 1820
-	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
+	void setDeltaTCustomYear(double y) { deltaTCustomYear=y; }
 	//! Set n-dot for custom equation for calculation of DeltaT
 	//! @param v the n-dot value, e.g. -26.0
-	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
+	void setDeltaTCustomNDot(double v) { deltaTCustomNDot=v; }
 	//! Set coefficients for custom equation for calculation of DeltaT
 	//! @param c the coefficients, e.g. -20,0,32
-	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
+	void setDeltaTCustomEquationCoefficients(Vec3d c) { deltaTCustomEquationCoeff=c; }
 
 	//! Get central year for custom equation for calculation of DeltaT
-	float getDeltaTCustomYear() const { return deltaTCustomYear; }
+	double getDeltaTCustomYear() const { return deltaTCustomYear; }
 	//! Get n-dot for custom equation for calculation of DeltaT
-	float getDeltaTCustomNDot() const { return deltaTCustomNDot; }
+	double getDeltaTCustomNDot() const { return deltaTCustomNDot; }
 	//! Get n-dot for current DeltaT algorithm
-	float getDeltaTnDot() const { return deltaTnDot; }
+	double getDeltaTnDot() const { return deltaTnDot; }
 	//! Get coefficients for custom equation for calculation of DeltaT
-	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
+	Vec3d getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
 	//! initialize ephemerides calculation functions
 	void initEphemeridesFunctions();
@@ -832,10 +832,10 @@ private:
 	bool flagUseCTZ; // custom time zone
 
 	// Variables for equations of DeltaT
-	Vec3f deltaTCustomEquationCoeff;
-	float deltaTCustomNDot;
-	float deltaTCustomYear;
-	float deltaTnDot; // The currently applied nDot correction. (different per algorithm, and displayed in status line.)
+	Vec3d deltaTCustomEquationCoeff;
+	double deltaTCustomNDot;
+	double deltaTCustomYear;
+	double deltaTnDot; // The currently applied nDot correction. (different per algorithm, and displayed in status line.)
 	bool  deltaTdontUseMoon; // true if the currenctly selected algorithm does not do a lunar correction (?????)
 	double (*deltaTfunc)(const double JD); // This is a function pointer which must be set to a function which computes DeltaT(JD).
 	int deltaTstart;   // begin year of validity range for the selected DeltaT algorithm. (SET INT_MIN to mark infinite)

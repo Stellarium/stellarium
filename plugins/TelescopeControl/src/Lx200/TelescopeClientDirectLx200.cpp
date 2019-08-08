@@ -203,7 +203,7 @@ void TelescopeClientDirectLx200::decReceived(unsigned int dec_int)
 	*log_file << Now() << "TelescopeClientDirectLx200::decReceived: " << dec_int << endl;
 #endif
 	const int lx200_status = 0;
-	sendPosition(last_ra, dec_int, lx200_status);
+	sendPosition(last_ra, static_cast<int>(dec_int), lx200_status);
 	queue_get_position = true;
 }
 
@@ -234,9 +234,9 @@ bool TelescopeClientDirectLx200::isInitialized(void) const
 void TelescopeClientDirectLx200::sendPosition(unsigned int ra_int, int dec_int, int status)
 {
 	//Server time is "now", because this class is the server
-	const qint64 server_micros = (qint64) getNow();
-	const double ra  =  ra_int * (M_PI/(unsigned int)0x80000000);
-	const double dec = dec_int * (M_PI/(unsigned int)0x80000000);
+	const qint64 server_micros = static_cast<qint64>(getNow());
+	const double ra  =  ra_int * (M_PI/0x80000000u);
+	const double dec = dec_int * (M_PI/0x80000000u);
 	const double cdec = cos(dec);
 	Vec3d position(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 	Vec3d j2000Position = position;

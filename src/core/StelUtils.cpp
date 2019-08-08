@@ -98,7 +98,7 @@ double hmsToRad(const unsigned int h, const unsigned int m, const double s )
 
 double hmsToHours(const unsigned int h, const unsigned int m, const double s)
 {
-	return (double)h+(double)m/60.+s/3600.;
+	return static_cast<double>(h)+static_cast<double>(m)/60.+s/3600.;
 }
 
 double hmsStrToHours(const QString& s)
@@ -107,8 +107,8 @@ double hmsStrToHours(const QString& s)
 	if (!reg.exactMatch(s))
 		return 0.;
 	QStringList list = reg.capturedTexts();
-	int hrs = list[1].toInt();
-	int min = list[2].toInt();
+	uint hrs = list[1].toUInt();
+	uint min = list[2].toUInt();
 	int sec = list[3].toInt();
 
 	return hmsToHours(hrs, min, sec);
@@ -116,7 +116,7 @@ double hmsStrToHours(const QString& s)
 
 double dmsToRad(const int d, const unsigned int m, const double s)
 {
-	double rad = (double)M_PI/180.*qAbs(d)+(double)M_PI/10800.*m+s*M_PI/648000.;
+	double rad = M_PI_180*qAbs(d)+M_PI/10800.*m+s*M_PI/648000.;
 	if (d<0)
 		rad *= -1;
 	return rad;
@@ -132,8 +132,8 @@ void radToHms(double angle, unsigned int& h, unsigned int& m, double& s)
 
 	angle *= 12./M_PI;
 
-	h = (unsigned int)angle;
-	m = (unsigned int)((angle-h)*60);
+	h = static_cast<unsigned int>(angle);
+	m = static_cast<unsigned int>((angle-h)*60);
 	s = (angle-h)*3600.-60.*m;	
 }
 
@@ -151,8 +151,8 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 	}
 	angle *= 180./M_PI;
 
-	d = (unsigned int)angle;
-	m = (unsigned int)((angle - d)*60);
+	d = static_cast<unsigned int>(angle);
+	m = static_cast<unsigned int>((angle - d)*60);
 	s = (angle-d)*3600-60*m;
 	// workaround for rounding numbers	
 	if (s>59.9)
@@ -394,8 +394,8 @@ void decDegToDms(double angle, bool &sign, unsigned int &d, unsigned int &m, dou
 		angle *= -1;
 	}
 
-	d = (unsigned int)angle;
-	m = (unsigned int)((angle-d)*60);
+	d = static_cast<unsigned int>(angle);
+	m = static_cast<unsigned int>((angle-d)*60);
 	s = (angle-d)*3600.-60.*m;
 
 	if (s>59.9)
@@ -429,7 +429,7 @@ double dmsStrToRad(const QString& s)
 	QStringList list = reg.capturedTexts();
 	bool sign = (list[1] == "-");
 	int deg = list[2].toInt();
-	int min = list[3].toInt();
+	uint min = list[3].toUInt();
 	int sec = list[4].toInt();
 
 	double rad = dmsToRad(qAbs(deg), min, sec);
@@ -622,12 +622,12 @@ double getDecAngle(const QString& str)
 	}
 	else if (re3.exactMatch(str))
 	{
-		float deg = re3.capturedTexts()[1].toFloat();
-		float min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toFloat();
-		float sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toFloat();
-		float r = qAbs(deg) + min / 60 + sec / 3600;
-		if (deg<0.f)
-			r *= -1.f;
+		double deg = re3.capturedTexts()[1].toDouble();
+		double min = re3.capturedTexts()[2].isEmpty()? 0 : re3.capturedTexts()[2].toDouble();
+		double sec = re3.capturedTexts()[3].isEmpty()? 0 : re3.capturedTexts()[3].toDouble();
+		double r = qAbs(deg) + min / 60 + sec / 3600;
+		if (deg<0.)
+			r *= -1.;
 		return (r * 2 * M_PI / 360.);
 	}
 
@@ -690,7 +690,7 @@ float fmodpos(const float a, const float b)
 *************************************************************************/
 double qDateTimeToJd(const QDateTime& dateTime)
 {
-	return (double)(dateTime.date().toJulianDay())+(double)1./(24*60*60*1000)*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
+	return dateTime.date().toJulianDay()+static_cast<double>(1./(24*60*60*1000))*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
 }
 
 QDateTime jdToQDateTime(const double& jd)
@@ -742,7 +742,7 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 	else
 	{
-		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
+		tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305);
 	}
 	td = 365 * tc + tc/4;
 	te = ((tb - td) * 10000)/306001;
@@ -1054,13 +1054,11 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 		case 10:
 		case 12:
 			return 31;
-			break;
 		case 4:
 		case 6:
 		case 9:
 		case 11:
 			return 30;
-			break;
 		case 2:
 			if ( year > 1582 )
 			{
@@ -1098,13 +1096,10 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 					return 28;
 				}
 			}
-			break;
 		case 0:
 			return numberOfDaysInMonthInYear(12, year-1);
-			break;
 		case 13:
 			return numberOfDaysInMonthInYear(1, year+1);
-			break;
 		default:
 			break;
 	}

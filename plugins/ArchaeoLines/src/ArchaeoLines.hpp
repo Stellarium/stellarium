@@ -438,6 +438,7 @@ private slots:
 	void updateObserverLocation(const StelLocation &loc);
 	//! Compute azimuth (from North) towards Target. All angles (args and result) are in degrees.
 	static double getAzimuthForLocation(double longObs, double latObs, double longTarget, double latTarget);
+	static double getAzimuthForLocation(float longObs, float latObs, double longTarget, double latTarget);
 
 private:
 	QFont font;

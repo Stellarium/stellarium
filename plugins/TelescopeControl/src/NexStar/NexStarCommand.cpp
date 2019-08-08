@@ -37,7 +37,7 @@ NexStarCommand::NexStarCommand(Server &server) : server(*static_cast<TelescopeCl
 NexStarCommandGotoPosition::NexStarCommandGotoPosition(Server &server, unsigned int ra_int, int dec_int) : NexStarCommand(server)
 {
 	dec = dec_int;
-	ra = ra_int;
+	ra = static_cast<int>(ra_int);
 }
 
 #define NIBTOASCII(x) (((x)<10)?('0'+(x)):('A'+(x)-10))
@@ -181,8 +181,8 @@ int NexStarCommandGetRaDec::readAnswerFromBuffer(const char *&buff, const char *
 	#endif
 	buff = p;
 
-	server.raReceived(ra);
-	server.decReceived(dec);
+	server.raReceived(static_cast<unsigned int>(ra));
+	server.decReceived(static_cast<unsigned int>(dec));
 	return 1;
 }
 

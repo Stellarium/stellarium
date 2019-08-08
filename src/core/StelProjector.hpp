@@ -99,8 +99,8 @@ public:
 			, gravityLabels(false)
 			, defaultAngleForGravityText(0.f)
 			, maskType(MaskNone)
-			, zNear(0.f)
-			, zFar(0.f)
+			, zNear(0.)
+			, zFar(0.)
 			, viewportCenter(128, 128)
 			, viewportCenterOffset(0, 0)
 			, viewportFovDiameter(0)
@@ -114,7 +114,7 @@ public:
 		bool gravityLabels;              //! the flag to use gravity labels or not
 		float defaultAngleForGravityText;//! a rotation angle to apply to gravity text (only if gravityLabels is set to false)
 		StelProjectorMaskType maskType;  //! The current projector mask
-		float zNear, zFar;               //! Near and far clipping planes
+		double zNear, zFar;              //! Near and far clipping planes
 		Vector2<qreal> viewportCenter;   //! Viewport center in screen pixel
 		Vector2<qreal> viewportCenterOffset;//! Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.
 						 //! Currently only Y shift is fully implemented, X shift likely not too meaningful.
@@ -293,8 +293,8 @@ protected:
 		  flipVert(0.f),
 		  pixelPerRad(0.f),
 		  maskType(MaskNone),
-		  zNear(0.f),
-		  oneOverZNearMinusZFar(0.f),
+		  zNear(0),
+		  oneOverZNearMinusZFar(0),
 		  viewportFovDiameter(0),
 		  gravityLabels(true),
 		  defaultAngleForGravityText(0.f),
@@ -319,7 +319,7 @@ protected:
 	float flipHorz,flipVert;            // Whether to flip in horizontal or vertical directions
 	float pixelPerRad;                  // pixel per rad at the center of the viewport disk
 	StelProjectorMaskType maskType;     // The current projector mask
-	float zNear, oneOverZNearMinusZFar; // Near and far clipping planes
+	double zNear, oneOverZNearMinusZFar;// Near and far clipping planes
 	Vec4i viewportXywh;                 // Viewport parameters
 	Vector2<qreal> viewportCenter;               // Viewport center in screen pixel
 	Vector2<qreal> viewportCenterOffset;         // Viewport center's offset in fractions of screen width/height. Usable e.g. in cylindrical projection to move horizon down.

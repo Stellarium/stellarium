@@ -827,7 +827,7 @@ void StelApp::handleClick(QMouseEvent* inputEvent)
 	if (viewportEffect)
 		viewportEffect->distortXY(x, y);
 
-	QMouseEvent event(inputEvent->type(), QPoint(x*devicePixelsPerPixel, y*devicePixelsPerPixel), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
+	QMouseEvent event(inputEvent->type(), QPoint(qRound(x*devicePixelsPerPixel), qRound(y*devicePixelsPerPixel)), inputEvent->button(), inputEvent->buttons(), inputEvent->modifiers());
 	event.setAccepted(false);
 	
 	// Send the event to every StelModule
@@ -861,8 +861,8 @@ void StelApp::handleWheel(QWheelEvent* event)
 	wheelEventTimer->start();
 
 	// Create a new event with the accumulated delta
-	QWheelEvent deltaEvent(QPoint(event->pos().x()*devicePixelsPerPixel, event->pos().y()*devicePixelsPerPixel),
-	                       QPoint(event->globalPos().x()*devicePixelsPerPixel, event->globalPos().y()*devicePixelsPerPixel),
+	QWheelEvent deltaEvent(QPoint(qRound(event->pos().x()*devicePixelsPerPixel), qRound(event->pos().y()*devicePixelsPerPixel)),
+			       QPoint(qRound(event->globalPos().x()*devicePixelsPerPixel), qRound(event->globalPos().y()*devicePixelsPerPixel)),
 	                       wheelEventDelta[deltaIndex], event->buttons(), event->modifiers(), event->orientation());
 	deltaEvent.setAccepted(false);
 	// Reset the collected values
@@ -886,7 +886,7 @@ bool StelApp::handleMove(qreal x, qreal y, Qt::MouseButtons b)
 	// Send the event to every StelModule
 	for (auto* i : moduleMgr->getCallOrders(StelModule::ActionHandleMouseMoves))
 	{
-		if (i->handleMouseMoves(x*devicePixelsPerPixel, y*devicePixelsPerPixel, b))
+		if (i->handleMouseMoves(qRound(x*devicePixelsPerPixel), qRound(y*devicePixelsPerPixel), b))
 			return true;
 	}
 	return false;
