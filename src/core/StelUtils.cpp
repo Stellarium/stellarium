@@ -547,6 +547,19 @@ void spheToRect(const float lng, const float lat, Vec3f& v)
 	v.set(static_cast<float>(cos(dlng) * cosLat), static_cast<float>(sin(dlng) * cosLat), sinf(lat));
 }
 
+void spheToRect(const double lng, const double lat, Vec3f& v)
+{
+	const float cosLat = cos(static_cast<float>(lat));
+	v.set(cos(static_cast<float>(lng)) * cosLat, sin(static_cast<float>(lng)) * cosLat, sin(static_cast<float>(lat)));
+}
+
+void spheToRect(const float lng, const float lat, Vec3d& v)
+{
+	const double dlng = static_cast<double>(lng), dlat = static_cast<double>(lat), cosLat = cos(dlat);
+	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
+}
+
+
 void rectToSphe(double *lng, double *lat, const Vec3d &v)
 {
 	double r = v.length();

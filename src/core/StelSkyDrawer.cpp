@@ -61,8 +61,8 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	flagStarMagnitudeLimit(false),
 	flagNebulaMagnitudeLimit(false),
 	flagPlanetMagnitudeLimit(false),
-	starRelativeScale(1.f),
-	starAbsoluteScaleF(1.f),
+	starRelativeScale(1.),
+	starAbsoluteScaleF(1.),
 	starLinearScale(19.569f),
 	limitMagnitude(-100.f),
 	limitLuminance(0.f),
@@ -86,7 +86,7 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	initColorTableFromConfigFile(conf);
 
 	setFlagHasAtmosphere(conf->value("landscape/flag_atmosphere", true).toBool());
-	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toFloat());
+	setTwinkleAmount(conf->value("stars/star_twinkle_amount",0.3).toDouble());
 	setFlagTwinkle(conf->value("stars/flag_star_twinkle",true).toBool());
 	setFlagForcedTwinkle(conf->value("stars/flag_forced_twinkle",false).toBool());
 	setFlagDrawBigStarHalo(conf->value("stars/flag_star_halo",true).toBool());
@@ -95,11 +95,11 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	setFlagLuminanceAdaptation(conf->value("viewing/use_luminance_adaptation",true).toBool());
 	setDaylightLabelThreshold(conf->value("viewing/sky_brightness_label_threshold", 250.0).toDouble());
 	setFlagStarMagnitudeLimit((conf->value("astro/flag_star_magnitude_limit", false).toBool()));
-	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toFloat());
+	setCustomStarMagnitudeLimit(conf->value("astro/star_magnitude_limit", 6.5).toDouble());
 	setFlagPlanetMagnitudeLimit((conf->value("astro/flag_planet_magnitude_limit", false).toBool()));
-	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toFloat());
+	setCustomPlanetMagnitudeLimit(conf->value("astro/planet_magnitude_limit", 6.5).toDouble());
 	setFlagNebulaMagnitudeLimit((conf->value("astro/flag_nebula_magnitude_limit", false).toBool()));
-	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toFloat());
+	setCustomNebulaMagnitudeLimit(conf->value("astro/nebula_magnitude_limit", 8.5).toDouble());
 
 	bool ok=true;
 
@@ -107,11 +107,11 @@ StelSkyDrawer::StelSkyDrawer(StelCore* acore) :
 	if (!ok)
 		setBortleScaleIndex(3);
 
-	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toFloat(&ok));
+	setRelativeStarScale(conf->value("stars/relative_scale",1.0).toDouble(&ok));
 	if (!ok)
 		setRelativeStarScale(1.0);
 
-	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toFloat(&ok));
+	setAbsoluteStarScale(conf->value("stars/absolute_scale",1.0).toDouble(&ok));
 	if (!ok)
 		setAbsoluteStarScale(1.0);
 
@@ -214,7 +214,7 @@ void StelSkyDrawer::init()
 
 void StelSkyDrawer::update(double)
 {
-	float fov = core->getMovementMgr()->getCurrentFov();
+	float fov = static_cast<float>(core->getMovementMgr()->getCurrentFov());
 	if (fov > maxAdaptFov)
 	{
 		fov = maxAdaptFov;
@@ -246,7 +246,7 @@ void StelSkyDrawer::update(double)
 	lnfovFactor = std::log(1.f/50.f*2025000.f* 60.f*60.f / (fov*fov) / (EYE_RESOLUTION*EYE_RESOLUTION)/powFactor/1.4f);
 
 	// Precompute
-	starLinearScale = std::pow(35.f*2.0f*starAbsoluteScaleF, 1.40f/2.f*starRelativeScale);
+	starLinearScale = static_cast<float>(std::pow(35.*2.0*starAbsoluteScaleF, 1.40*0.5*starRelativeScale));
 
 	// update limit mag
 	limitMagnitude = computeLimitMagnitude();
@@ -269,13 +269,13 @@ float StelSkyDrawer::computeLimitMagnitude() const
 		if (rcmag.radius<=0.f)
 		{
 			float tmp = lim;
-			lim=(a+lim)*0.5;
+			lim=(a+lim)*0.5f;
 			b=tmp;
 		}
 		else
 		{
 			float tmp = lim;
-			lim=(b+lim)*0.5;
+			lim=(b+lim)*0.5f;
 			a=tmp;
 		}
 		++safety;
@@ -296,19 +296,19 @@ float StelSkyDrawer::computeLimitLuminance() const
 	float lim=40.f;
 	int safety=0;
 	float adaptL;
-	while (std::fabs(lim-a)>0.05)
+	while (std::fabs(lim-a)>0.05f)
 	{
 		adaptL = eye->adaptLuminanceScaled(lim);
 		if (adaptL<=0.05f) // Object considered not visible if its adapted scaled luminance<0.05
 		{
 			float tmp = lim;
-			lim=(b+lim)*0.5;
+			lim=(b+lim)*0.5f;
 			a=tmp;
 		}
 		else
 		{
 			float tmp = lim;
-			lim=(a+lim)*0.5;
+			lim=(a+lim)*0.5f;
 			b=tmp;
 		}
 		++safety;
@@ -347,7 +347,7 @@ float StelSkyDrawer::luminanceToSurfacebrightness(float lum)
 // Compute RMag and CMag from magnitude for a point source.
 bool StelSkyDrawer::computeRCMag(float mag, RCMag* rcMag) const
 {
-	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), starRelativeScale*1.40f/2.f);
+	rcMag->radius = eye->adaptLuminanceScaledLn(pointSourceMagToLnLuminance(mag), static_cast<float>(starRelativeScale)*1.40f*0.5f);
 	rcMag->radius *=starLinearScale;
 #ifndef USE_OLD_QGLWIDGET
 	rcMag->radius *=StelMainView::getInstance().getCustomScreenshotMagnification();
@@ -408,15 +408,15 @@ void StelSkyDrawer::postDrawPointSource(StelPainter* sPainter)
 	const QMatrix4x4 qMat(m[0], m[4], m[8], m[12], m[1], m[5], m[9], m[13], m[2], m[6], m[10], m[14], m[3], m[7], m[11], m[15]);
 	
 	starShaderProgram->bind();
-	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, (GLfloat*)vertexArray, 2, sizeof(StarVertex));
+	starShaderProgram->setAttributeArray(starShaderVars.pos, GL_FLOAT, reinterpret_cast<GLfloat*>(vertexArray), 2, sizeof(StarVertex));
 	starShaderProgram->enableAttributeArray(starShaderVars.pos);
-	starShaderProgram->setAttributeArray(starShaderVars.color, GL_UNSIGNED_BYTE, (GLubyte*)&(vertexArray[0].color), 3, sizeof(StarVertex));
+	starShaderProgram->setAttributeArray(starShaderVars.color, GL_UNSIGNED_BYTE, reinterpret_cast<GLubyte*>(&(vertexArray[0].color)), 3, sizeof(StarVertex));
 	starShaderProgram->enableAttributeArray(starShaderVars.color);
 	starShaderProgram->setUniformValue(starShaderVars.projectionMatrix, qMat);
-	starShaderProgram->setAttributeArray(starShaderVars.texCoord, GL_UNSIGNED_BYTE, (GLubyte*)textureCoordArray, 2, 0);
+	starShaderProgram->setAttributeArray(starShaderVars.texCoord, GL_UNSIGNED_BYTE, static_cast<GLubyte*>(textureCoordArray), 2, 0);
 	starShaderProgram->enableAttributeArray(starShaderVars.texCoord);
 	
-	glDrawArrays(GL_TRIANGLES, 0, nbPointSources*6);
+	glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(nbPointSources)*6);
 	
 	starShaderProgram->disableAttributeArray(starShaderVars.pos);
 	starShaderProgram->disableAttributeArray(starShaderVars.color);
@@ -440,12 +440,12 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 
 	const float radius = rcMag.radius;
 	// Random coef for star twinkling. twinkleFactor can introduce height-dependent twinkling.
-	const float tw = (flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle)) ? (1.f-twinkleFactor*twinkleAmount*qrand()/RAND_MAX)*rcMag.luminance : rcMag.luminance;
+	const float tw = ((flagStarTwinkle && (flagHasAtmosphere || flagForcedTwinkle))) ? (1.f-twinkleFactor*static_cast<float>(twinkleAmount)*(static_cast<float>(qrand())/static_cast<float>(RAND_MAX)))*rcMag.luminance : rcMag.luminance;
 
 	// If the rmag is big, draw a big halo
 	if (flagDrawBigStarHalo && radius>MAX_LINEAR_RADIUS+5.f)
 	{
-		float cmag = qMin(rcMag.luminance,(float)(radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
+		float cmag = qMin(rcMag.luminance, (radius-(MAX_LINEAR_RADIUS+5.f))/30.f);
 		float rmag = 150.f;
 		if (cmag>1.f)
 			cmag = 1.f;
@@ -457,9 +457,9 @@ bool StelSkyDrawer::drawPointSource(StelPainter* sPainter, const Vec3f& v, const
 	}
 
 	unsigned char starColor[3] = {0, 0, 0};
-	starColor[0] = (unsigned char)std::min(static_cast<int>(color[0]*tw*255+0.5f), 255);
-	starColor[1] = (unsigned char)std::min(static_cast<int>(color[1]*tw*255+0.5f), 255);
-	starColor[2] = (unsigned char)std::min(static_cast<int>(color[2]*tw*255+0.5f), 255);
+	starColor[0] = static_cast<unsigned char>(std::min(static_cast<int>(color[0]*tw*255+0.5f), 255));
+	starColor[1] = static_cast<unsigned char>(std::min(static_cast<int>(color[1]*tw*255+0.5f), 255));
+	starColor[2] = static_cast<unsigned char>(std::min(static_cast<int>(color[2]*tw*255+0.5f), 255));
 	
 	// Store the drawing instructions in the vertex arrays
 	StarVertex* vx = &(vertexArray[nbPointSources*6]);
@@ -500,7 +500,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 {
 	const float pixPerRad = painter->getProjector()->getPixelPerRadAtCenter();
 	// Assume a disk shape
-	float pixRadius = std::sqrt(illuminatedArea/(60.*60.)*M_PI/180.*M_PI/180.*(pixPerRad*pixPerRad))/M_PI;
+	float pixRadius = std::sqrt(illuminatedArea/(60.f*60.f)*M_PI_180f*M_PI_180f*(pixPerRad*pixPerRad))/M_PIf;
 
 	bool noStarHalo = false;
 
@@ -513,7 +513,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 
 		float rmag = big3dModelHaloRadius*(mag+15.f)/-11.f;
 		float cmag = 1.f;
-		if (rmag<pixRadius*3.f+100.)
+		if (rmag<pixRadius*3.f+100.f)
 			cmag = qMax(0.f, 1.f-(pixRadius*3.f+100-rmag)/100);
 		Vec3f win;
 		painter->getProjector()->project(v, win);
@@ -540,7 +540,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	float tStop = 6.f;
 	bool truncated=false;
 
-	float maxHaloRadius = qMax(tStart*3., pixRadius*3.);
+	float maxHaloRadius = qMax(tStart*3.f, pixRadius*3.f);
 	if (rcm.radius>maxHaloRadius)
 	{
 		truncated = true;
@@ -562,7 +562,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 		float wl = findWorldLumForMag(mag, rcm.radius);
 		if (wl>0)
 		{
-			const float f = core->getMovementMgr()->getCurrentFov();
+			const float f = static_cast<float>(core->getMovementMgr()->getCurrentFov());
 			// Report to the SkyDrawer that a very bright object (most notably Sun, Moon, bright planet)
 			// is in view. LP:1138533 correctly wants no such effect if object is hidden by landscape horizon.
 			LandscapeMgr* lmgr=GETSTELMODULE(LandscapeMgr);
@@ -570,7 +570,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 			Landscape *landscape=lmgr->getCurrentLandscape();
 			Q_ASSERT(landscape);
 			// Preliminary: create new Vec3d here. Later: consider replacing to vec3d in the arguments!
-			Vec3d vec(v[0], v[1], v[2]);
+			Vec3d vec=v.toVec3d();
 			float opacity=(landscape->getFlagShow() ? landscape->getOpacity(core->j2000ToAltAz(vec, StelCore::RefractionAuto)) : 0.0f);
 			reportLuminanceInFov(qMin(700.f, qMin(wl/50, (60.f*60.f)/(f*f)*6.f))*(1.0f-opacity));
 		}
@@ -597,7 +597,7 @@ float StelSkyDrawer::findWorldLumForMag(float mag, float targetRadius)
 	rcmag.radius=-99;
 	float curLum = 500.f;
 	int safety=0;
-	while (std::fabs(rcmag.radius-targetRadius)>0.1)
+	while (std::fabs(rcmag.radius-targetRadius)>0.1f)
 	{
 		eye->setWorldAdaptationLuminance(curLum);
 		computeRCMag(mag, &rcmag);
@@ -692,169 +692,146 @@ void StelSkyDrawer::setBortleScaleIndex(int bIndex)
 
 float StelSkyDrawer::getNELMFromBortleScale() const
 {
-	float nelm = 0.f;
-	switch (getBortleScaleIndex()) {
-		case 1:
-			nelm = 7.8f; // Class 1 = NELM 7.6-8.0; average NELM is 7.8
-			break;
-		case 2:
-			nelm = 7.3f; // Class 2 = NELM 7.1-7.5; average NELM is 7.3
-			break;
-		case 3:
-			nelm = 6.8f; // Class 3 = NELM 6.6-7.0; average NELM is 6.8
-			break;
-		case 4:
-			nelm = 6.3f; // Class 4 = NELM 6.1-6.5; average NELM is 6.3
-			break;
-		case 5:
-			nelm = 5.8f; // Class 5 = NELM 5.6-6.0; average NELM is 5.8
-			break;
-		case 6:
-			nelm = 5.3f; // Class 6 = NELM 5.1-5.5; average NELM is 5.3
-			break;
-		case 7:
-			nelm = 4.8f; // Class 7 = NELM 4.6-5.0; average NELM is 4.8
-			break;
-		case 8:
-			nelm = 4.3f; // Class 8 = NELM 4.1-4.5; average NELM is 4.3
-			break;
-		case 9:
-			nelm = 4.0f; // Class 8 = NELM 4.0
-			break;
-	}
-	return nelm;
+	return getNELMFromBortleScale(getBortleScaleIndex());
+}
+
+float StelSkyDrawer::getNELMFromBortleScale(int idx)
+{
+	const float nelms[9] = {7.8f, 7.3f, 6.8f, 6.3f, 5.8f, 5.3f, 4.8f, 4.3f, 4.0f};
+	idx = qBound(1, idx, 9);
+	return nelms[idx-1];
 }
 
 // New colors
 Vec3f StelSkyDrawer::colorTable[128] = {
-	Vec3f(0.602745,0.713725,1.000000),
-	Vec3f(0.604902,0.715294,1.000000),
-	Vec3f(0.607059,0.716863,1.000000),
-	Vec3f(0.609215,0.718431,1.000000),
-	Vec3f(0.611372,0.720000,1.000000),
-	Vec3f(0.613529,0.721569,1.000000),
-	Vec3f(0.635490,0.737255,1.000000),
-	Vec3f(0.651059,0.749673,1.000000),
-	Vec3f(0.666627,0.762092,1.000000),
-	Vec3f(0.682196,0.774510,1.000000),
-	Vec3f(0.697764,0.786929,1.000000),
-	Vec3f(0.713333,0.799347,1.000000),
-	Vec3f(0.730306,0.811242,1.000000),
-	Vec3f(0.747278,0.823138,1.000000),
-	Vec3f(0.764251,0.835033,1.000000),
-	Vec3f(0.781223,0.846929,1.000000),
-	Vec3f(0.798196,0.858824,1.000000),
-	Vec3f(0.812282,0.868236,1.000000),
-	Vec3f(0.826368,0.877647,1.000000),
-	Vec3f(0.840455,0.887059,1.000000),
-	Vec3f(0.854541,0.896470,1.000000),
-	Vec3f(0.868627,0.905882,1.000000),
-	Vec3f(0.884627,0.916862,1.000000),
-	Vec3f(0.900627,0.927843,1.000000),
-	Vec3f(0.916627,0.938823,1.000000),
-	Vec3f(0.932627,0.949804,1.000000),
-	Vec3f(0.948627,0.960784,1.000000),
-	Vec3f(0.964444,0.972549,1.000000),
-	Vec3f(0.980261,0.984313,1.000000),
-	Vec3f(0.996078,0.996078,1.000000),
-	Vec3f(1.000000,1.000000,1.000000),
-	Vec3f(1.000000,0.999643,0.999287),
-	Vec3f(1.000000,0.999287,0.998574),
-	Vec3f(1.000000,0.998930,0.997861),
-	Vec3f(1.000000,0.998574,0.997148),
-	Vec3f(1.000000,0.998217,0.996435),
-	Vec3f(1.000000,0.997861,0.995722),
-	Vec3f(1.000000,0.997504,0.995009),
-	Vec3f(1.000000,0.997148,0.994296),
-	Vec3f(1.000000,0.996791,0.993583),
-	Vec3f(1.000000,0.996435,0.992870),
-	Vec3f(1.000000,0.996078,0.992157),
-	Vec3f(1.000000,0.991140,0.981554),
-	Vec3f(1.000000,0.986201,0.970951),
-	Vec3f(1.000000,0.981263,0.960349),
-	Vec3f(1.000000,0.976325,0.949746),
-	Vec3f(1.000000,0.971387,0.939143),
-	Vec3f(1.000000,0.966448,0.928540),
-	Vec3f(1.000000,0.961510,0.917938),
-	Vec3f(1.000000,0.956572,0.907335),
-	Vec3f(1.000000,0.951634,0.896732),
-	Vec3f(1.000000,0.946695,0.886129),
-	Vec3f(1.000000,0.941757,0.875526),
-	Vec3f(1.000000,0.936819,0.864924),
-	Vec3f(1.000000,0.931881,0.854321),
-	Vec3f(1.000000,0.926942,0.843718),
-	Vec3f(1.000000,0.922004,0.833115),
-	Vec3f(1.000000,0.917066,0.822513),
-	Vec3f(1.000000,0.912128,0.811910),
-	Vec3f(1.000000,0.907189,0.801307),
-	Vec3f(1.000000,0.902251,0.790704),
-	Vec3f(1.000000,0.897313,0.780101),
-	Vec3f(1.000000,0.892375,0.769499),
-	Vec3f(1.000000,0.887436,0.758896),
-	Vec3f(1.000000,0.882498,0.748293),
-	Vec3f(1.000000,0.877560,0.737690),
-	Vec3f(1.000000,0.872622,0.727088),
-	Vec3f(1.000000,0.867683,0.716485),
-	Vec3f(1.000000,0.862745,0.705882),
-	Vec3f(1.000000,0.858617,0.695975),
-	Vec3f(1.000000,0.854490,0.686068),
-	Vec3f(1.000000,0.850362,0.676161),
-	Vec3f(1.000000,0.846234,0.666254),
-	Vec3f(1.000000,0.842107,0.656346),
-	Vec3f(1.000000,0.837979,0.646439),
-	Vec3f(1.000000,0.833851,0.636532),
-	Vec3f(1.000000,0.829724,0.626625),
-	Vec3f(1.000000,0.825596,0.616718),
-	Vec3f(1.000000,0.821468,0.606811),
-	Vec3f(1.000000,0.817340,0.596904),
-	Vec3f(1.000000,0.813213,0.586997),
-	Vec3f(1.000000,0.809085,0.577090),
-	Vec3f(1.000000,0.804957,0.567183),
-	Vec3f(1.000000,0.800830,0.557275),
-	Vec3f(1.000000,0.796702,0.547368),
-	Vec3f(1.000000,0.792574,0.537461),
-	Vec3f(1.000000,0.788447,0.527554),
-	Vec3f(1.000000,0.784319,0.517647),
-	Vec3f(1.000000,0.784025,0.520882),
-	Vec3f(1.000000,0.783731,0.524118),
-	Vec3f(1.000000,0.783436,0.527353),
-	Vec3f(1.000000,0.783142,0.530588),
-	Vec3f(1.000000,0.782848,0.533824),
-	Vec3f(1.000000,0.782554,0.537059),
-	Vec3f(1.000000,0.782259,0.540294),
-	Vec3f(1.000000,0.781965,0.543529),
-	Vec3f(1.000000,0.781671,0.546765),
-	Vec3f(1.000000,0.781377,0.550000),
-	Vec3f(1.000000,0.781082,0.553235),
-	Vec3f(1.000000,0.780788,0.556471),
-	Vec3f(1.000000,0.780494,0.559706),
-	Vec3f(1.000000,0.780200,0.562941),
-	Vec3f(1.000000,0.779905,0.566177),
-	Vec3f(1.000000,0.779611,0.569412),
-	Vec3f(1.000000,0.779317,0.572647),
-	Vec3f(1.000000,0.779023,0.575882),
-	Vec3f(1.000000,0.778728,0.579118),
-	Vec3f(1.000000,0.778434,0.582353),
-	Vec3f(1.000000,0.778140,0.585588),
-	Vec3f(1.000000,0.777846,0.588824),
-	Vec3f(1.000000,0.777551,0.592059),
-	Vec3f(1.000000,0.777257,0.595294),
-	Vec3f(1.000000,0.776963,0.598530),
-	Vec3f(1.000000,0.776669,0.601765),
-	Vec3f(1.000000,0.776374,0.605000),
-	Vec3f(1.000000,0.776080,0.608235),
-	Vec3f(1.000000,0.775786,0.611471),
-	Vec3f(1.000000,0.775492,0.614706),
-	Vec3f(1.000000,0.775197,0.617941),
-	Vec3f(1.000000,0.774903,0.621177),
-	Vec3f(1.000000,0.774609,0.624412),
-	Vec3f(1.000000,0.774315,0.627647),
-	Vec3f(1.000000,0.774020,0.630883),
-	Vec3f(1.000000,0.773726,0.634118),
-	Vec3f(1.000000,0.773432,0.637353),
-	Vec3f(1.000000,0.773138,0.640588),
-	Vec3f(1.000000,0.772843,0.643824),
-	Vec3f(1.000000,0.772549,0.647059),
+	Vec3f(0.602745f,0.713725f,1.000000f),
+	Vec3f(0.604902f,0.715294f,1.000000f),
+	Vec3f(0.607059f,0.716863f,1.000000f),
+	Vec3f(0.609215f,0.718431f,1.000000f),
+	Vec3f(0.611372f,0.720000f,1.000000f),
+	Vec3f(0.613529f,0.721569f,1.000000f),
+	Vec3f(0.635490f,0.737255f,1.000000f),
+	Vec3f(0.651059f,0.749673f,1.000000f),
+	Vec3f(0.666627f,0.762092f,1.000000f),
+	Vec3f(0.682196f,0.774510f,1.000000f),
+	Vec3f(0.697764f,0.786929f,1.000000f),
+	Vec3f(0.713333f,0.799347f,1.000000f),
+	Vec3f(0.730306f,0.811242f,1.000000f),
+	Vec3f(0.747278f,0.823138f,1.000000f),
+	Vec3f(0.764251f,0.835033f,1.000000f),
+	Vec3f(0.781223f,0.846929f,1.000000f),
+	Vec3f(0.798196f,0.858824f,1.000000f),
+	Vec3f(0.812282f,0.868236f,1.000000f),
+	Vec3f(0.826368f,0.877647f,1.000000f),
+	Vec3f(0.840455f,0.887059f,1.000000f),
+	Vec3f(0.854541f,0.896470f,1.000000f),
+	Vec3f(0.868627f,0.905882f,1.000000f),
+	Vec3f(0.884627f,0.916862f,1.000000f),
+	Vec3f(0.900627f,0.927843f,1.000000f),
+	Vec3f(0.916627f,0.938823f,1.000000f),
+	Vec3f(0.932627f,0.949804f,1.000000f),
+	Vec3f(0.948627f,0.960784f,1.000000f),
+	Vec3f(0.964444f,0.972549f,1.000000f),
+	Vec3f(0.980261f,0.984313f,1.000000f),
+	Vec3f(0.996078f,0.996078f,1.000000f),
+	Vec3f(1.000000f,1.000000f,1.000000f),
+	Vec3f(1.000000f,0.999643f,0.999287f),
+	Vec3f(1.000000f,0.999287f,0.998574f),
+	Vec3f(1.000000f,0.998930f,0.997861f),
+	Vec3f(1.000000f,0.998574f,0.997148f),
+	Vec3f(1.000000f,0.998217f,0.996435f),
+	Vec3f(1.000000f,0.997861f,0.995722f),
+	Vec3f(1.000000f,0.997504f,0.995009f),
+	Vec3f(1.000000f,0.997148f,0.994296f),
+	Vec3f(1.000000f,0.996791f,0.993583f),
+	Vec3f(1.000000f,0.996435f,0.992870f),
+	Vec3f(1.000000f,0.996078f,0.992157f),
+	Vec3f(1.000000f,0.991140f,0.981554f),
+	Vec3f(1.000000f,0.986201f,0.970951f),
+	Vec3f(1.000000f,0.981263f,0.960349f),
+	Vec3f(1.000000f,0.976325f,0.949746f),
+	Vec3f(1.000000f,0.971387f,0.939143f),
+	Vec3f(1.000000f,0.966448f,0.928540f),
+	Vec3f(1.000000f,0.961510f,0.917938f),
+	Vec3f(1.000000f,0.956572f,0.907335f),
+	Vec3f(1.000000f,0.951634f,0.896732f),
+	Vec3f(1.000000f,0.946695f,0.886129f),
+	Vec3f(1.000000f,0.941757f,0.875526f),
+	Vec3f(1.000000f,0.936819f,0.864924f),
+	Vec3f(1.000000f,0.931881f,0.854321f),
+	Vec3f(1.000000f,0.926942f,0.843718f),
+	Vec3f(1.000000f,0.922004f,0.833115f),
+	Vec3f(1.000000f,0.917066f,0.822513f),
+	Vec3f(1.000000f,0.912128f,0.811910f),
+	Vec3f(1.000000f,0.907189f,0.801307f),
+	Vec3f(1.000000f,0.902251f,0.790704f),
+	Vec3f(1.000000f,0.897313f,0.780101f),
+	Vec3f(1.000000f,0.892375f,0.769499f),
+	Vec3f(1.000000f,0.887436f,0.758896f),
+	Vec3f(1.000000f,0.882498f,0.748293f),
+	Vec3f(1.000000f,0.877560f,0.737690f),
+	Vec3f(1.000000f,0.872622f,0.727088f),
+	Vec3f(1.000000f,0.867683f,0.716485f),
+	Vec3f(1.000000f,0.862745f,0.705882f),
+	Vec3f(1.000000f,0.858617f,0.695975f),
+	Vec3f(1.000000f,0.854490f,0.686068f),
+	Vec3f(1.000000f,0.850362f,0.676161f),
+	Vec3f(1.000000f,0.846234f,0.666254f),
+	Vec3f(1.000000f,0.842107f,0.656346f),
+	Vec3f(1.000000f,0.837979f,0.646439f),
+	Vec3f(1.000000f,0.833851f,0.636532f),
+	Vec3f(1.000000f,0.829724f,0.626625f),
+	Vec3f(1.000000f,0.825596f,0.616718f),
+	Vec3f(1.000000f,0.821468f,0.606811f),
+	Vec3f(1.000000f,0.817340f,0.596904f),
+	Vec3f(1.000000f,0.813213f,0.586997f),
+	Vec3f(1.000000f,0.809085f,0.577090f),
+	Vec3f(1.000000f,0.804957f,0.567183f),
+	Vec3f(1.000000f,0.800830f,0.557275f),
+	Vec3f(1.000000f,0.796702f,0.547368f),
+	Vec3f(1.000000f,0.792574f,0.537461f),
+	Vec3f(1.000000f,0.788447f,0.527554f),
+	Vec3f(1.000000f,0.784319f,0.517647f),
+	Vec3f(1.000000f,0.784025f,0.520882f),
+	Vec3f(1.000000f,0.783731f,0.524118f),
+	Vec3f(1.000000f,0.783436f,0.527353f),
+	Vec3f(1.000000f,0.783142f,0.530588f),
+	Vec3f(1.000000f,0.782848f,0.533824f),
+	Vec3f(1.000000f,0.782554f,0.537059f),
+	Vec3f(1.000000f,0.782259f,0.540294f),
+	Vec3f(1.000000f,0.781965f,0.543529f),
+	Vec3f(1.000000f,0.781671f,0.546765f),
+	Vec3f(1.000000f,0.781377f,0.550000f),
+	Vec3f(1.000000f,0.781082f,0.553235f),
+	Vec3f(1.000000f,0.780788f,0.556471f),
+	Vec3f(1.000000f,0.780494f,0.559706f),
+	Vec3f(1.000000f,0.780200f,0.562941f),
+	Vec3f(1.000000f,0.779905f,0.566177f),
+	Vec3f(1.000000f,0.779611f,0.569412f),
+	Vec3f(1.000000f,0.779317f,0.572647f),
+	Vec3f(1.000000f,0.779023f,0.575882f),
+	Vec3f(1.000000f,0.778728f,0.579118f),
+	Vec3f(1.000000f,0.778434f,0.582353f),
+	Vec3f(1.000000f,0.778140f,0.585588f),
+	Vec3f(1.000000f,0.777846f,0.588824f),
+	Vec3f(1.000000f,0.777551f,0.592059f),
+	Vec3f(1.000000f,0.777257f,0.595294f),
+	Vec3f(1.000000f,0.776963f,0.598530f),
+	Vec3f(1.000000f,0.776669f,0.601765f),
+	Vec3f(1.000000f,0.776374f,0.605000f),
+	Vec3f(1.000000f,0.776080f,0.608235f),
+	Vec3f(1.000000f,0.775786f,0.611471f),
+	Vec3f(1.000000f,0.775492f,0.614706f),
+	Vec3f(1.000000f,0.775197f,0.617941f),
+	Vec3f(1.000000f,0.774903f,0.621177f),
+	Vec3f(1.000000f,0.774609f,0.624412f),
+	Vec3f(1.000000f,0.774315f,0.627647f),
+	Vec3f(1.000000f,0.774020f,0.630883f),
+	Vec3f(1.000000f,0.773726f,0.634118f),
+	Vec3f(1.000000f,0.773432f,0.637353f),
+	Vec3f(1.000000f,0.773138f,0.640588f),
+	Vec3f(1.000000f,0.772843f,0.643824f),
+	Vec3f(1.000000f,0.772549f,0.647059f),
 };
 
 static float Gamma(float gamma, float x)
@@ -871,7 +848,7 @@ static Vec3f Gamma(float gamma,const Vec3f &x)
 void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 {
 	std::map<float,Vec3f> color_map;
-	for (float bV=-0.5f;bV<=4.0f;bV+=0.01)
+	for (float bV=-0.5f;bV<=4.0f;bV+=0.01f)
 	{
 		char entry[256];
 		sprintf(entry,"bv_color_%+5.2f",bV);
@@ -889,7 +866,7 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 
 	if (color_map.size() > 1)
 	{
-		for (int i=0;i<128;i++)
+		for (unsigned char i=0;i<128;i++)
 		{
 			const float bV = StelSkyDrawer::indexToBV(i);
 			auto greater = color_map.upper_bound(bV);
@@ -922,5 +899,5 @@ void StelSkyDrawer::initColorTableFromConfigFile(QSettings* conf)
 
 double StelSkyDrawer::getWorldAdaptationLuminance() const
 {
-	return eye->getWorldAdaptationLuminance();
+	return static_cast<double>(eye->getWorldAdaptationLuminance());
 }

@@ -464,7 +464,7 @@ SphericalCap StelCore::getVisibleSkyArea() const
 	// Limit star drawing to above landscape's minimal altitude (was const=-0.035, Bug lp:1469407)
 	if (landscapeMgr->getIsLandscapeFullyVisible())
 	{
-		return SphericalCap(up, static_cast<double>(landscapeMgr->getLandscapeSinMinAltitudeLimit()));
+		return SphericalCap(up, landscapeMgr->getLandscapeSinMinAltitudeLimit());
 	}
 	return SphericalCap(up, -1.);
 }
@@ -1370,8 +1370,7 @@ float StelCore::getUTCOffset(const double JD) const
 		}
 	}
 
-	float shiftInHours = shiftInSeconds / 3600.0f;
-	return shiftInHours;
+	return shiftInSeconds / 3600.0f;
 }
 
 QString StelCore::getCurrentTimeZone() const

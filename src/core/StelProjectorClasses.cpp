@@ -36,13 +36,13 @@ bool StelProjectorPerspective::forward(Vec3f &v) const
 {
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	if (v[2] < 0) {
-		v[0] *= (-widthStretch/v[2]);
+		v[0] *= (-static_cast<float>(widthStretch)/v[2]);
 		v[1] /= (-v[2]);
 		v[2] = r;
 		return true;
 	}
 	if (v[2] > 0) {
-		v[0] *= widthStretch/v[2];
+		v[0] *= static_cast<float>(widthStretch)/v[2];
 		v[1] /= v[2];
 		v[2] = -std::numeric_limits<float>::max();
 		return false;
@@ -96,7 +96,7 @@ bool StelProjectorEqualArea::forward(Vec3f &v) const
 {
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const float f = std::sqrt(2.f/(r*(r-v[2])));
-	v[0] *= f*widthStretch;
+	v[0] *= f*static_cast<float>(widthStretch);
 	v[1] *= f;
 	v[2] = r;
 	return true;
@@ -161,7 +161,7 @@ bool StelProjectorStereographic::forward(Vec3f &v) const
 		return false;
 	}
 	const float f = 1.f / h;
-	v[0] *= f*widthStretch;
+	v[0] *= f*static_cast<float>(widthStretch);
 	v[1] *= f;
 	v[2] = r;
 	return true;
@@ -211,7 +211,7 @@ bool StelProjectorFisheye::forward(Vec3f &v) const
 	if (rq1 > 0.f) {
 		const float h = std::sqrt(rq1);
 		const float f = std::atan2(h,-v[2]) / h;
-		v[0] *= f*widthStretch;
+		v[0] *= f*static_cast<float>(widthStretch);
 		v[1] *= f;
 		v[2] = std::sqrt(rq1 + v[2]*v[2]);
 		return true;
@@ -327,7 +327,7 @@ bool StelProjectorCylinder::forward(Vec3f &v) const
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float delta = std::asin(v[1]/r);
-	v[0] = alpha*widthStretch;
+	v[0] = alpha*static_cast<float>(widthStretch);
 	v[1] = delta;
 	v[2] = r;
 	return rval;
@@ -375,7 +375,7 @@ bool StelProjectorMercator::forward(Vec3f &v) const
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float sin_delta = v[1]/r;
-	v[0] = std::atan2(v[0],-v[2]) *widthStretch;
+	v[0] = std::atan2(v[0],-v[2]) *static_cast<float>(widthStretch);
 	v[1] = 0.5f*std::log((1.f+sin_delta)/(1.f-sin_delta));
 	v[2] = r;
 	return rval;
@@ -427,7 +427,7 @@ bool StelProjectorOrthographic::forward(Vec3f &v) const
 {
 	const float r = std::sqrt(v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
 	const float h = 1.f/r;
-	v[0] *= h *widthStretch;
+	v[0] *= h *static_cast<float>(widthStretch);
 	v[1] *= h;
 	const bool rval = (v[2] <= 0.f);
 	v[2] = r;
@@ -481,7 +481,7 @@ bool StelProjectorSinusoidal::forward(Vec3f &v) const
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float alpha = std::atan2(v[0],-v[2]);
 	const float delta = std::asin(v[1]/r);	
-	v[0] = alpha*std::cos(delta) *widthStretch;
+	v[0] = alpha*std::cos(delta) *static_cast<float>(widthStretch);
 	v[1] = delta;
 	v[2] = r;
 	return rval;
@@ -523,7 +523,7 @@ bool StelProjectorMiller::forward(Vec3f &v) const
 	const bool rval = (-r < v[1] && v[1] < r);
 	const float sin_delta = v[1]/r;
 	const float delta=asin(sin_delta);
-	v[0] = std::atan2(v[0],-v[2]) * widthStretch;
+	v[0] = std::atan2(v[0],-v[2]) * static_cast<float>(widthStretch);
 	v[1] = 1.25f*asinh(tan(0.8f*delta));
 	v[2] = r;
 	return rval;

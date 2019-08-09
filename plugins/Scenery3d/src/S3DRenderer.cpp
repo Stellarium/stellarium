@@ -70,7 +70,7 @@ S3DRenderer::S3DRenderer(QObject *parent)
       sun(Q_NULLPTR), moon(Q_NULLPTR), venus(Q_NULLPTR),
       currentScene(Q_NULLPTR),
       supportsGSCubemapping(false), supportsShadows(false), supportsShadowFiltering(false), isANGLE(false), maximumFramebufferSize(0),
-      defaultFBO(-1u),
+      defaultFBO(0),
       torchBrightness(0.5f), torchRange(5.0f), textEnabled(false), debugEnabled(false), fixShadowData(false),
       simpleShadows(false), fullCubemapShadows(false), cubemappingMode(S3DEnum::CM_TEXTURES), //set it to 6 textures as a safe default (Cubemap should work on ANGLE, but does not...)
       reinitCubemapping(true), reinitShadowmapping(true),
@@ -849,7 +849,7 @@ void S3DRenderer::calculateLighting()
 	{
 		// Setting from landscape.ini has priority if enabled
 		if (landscapeMgr->getFlagLandscapeSetsMinimalBrightness() && l && l->getLandscapeMinimalBrightness()>=0)
-			ambientBrightness = l->getLandscapeMinimalBrightness();
+			ambientBrightness = static_cast<float>(l->getLandscapeMinimalBrightness());
 		else
 			ambientBrightness = static_cast<float>(landscapeMgr->getDefaultMinimalBrightness());
 	}
@@ -866,12 +866,12 @@ void S3DRenderer::calculateLighting()
 	{
 		if(requiresCubemap && lazyDrawing)
 		{
-			emissiveFactor = l->getTargetLightscapeBrightness();
+			emissiveFactor = static_cast<float>(l->getTargetLightscapeBrightness());
 		}
 		else
 		{
 			//use an interpolated value for smooth fade in/out
-			emissiveFactor = l->getEffectiveLightscapeBrightness();
+			emissiveFactor = static_cast<float>(l->getEffectiveLightscapeBrightness());
 		}
 	}
 	else

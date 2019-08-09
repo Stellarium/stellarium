@@ -230,7 +230,7 @@ public slots:
 
 	//! Get the current landscape or lightscape brightness (0..1)
 	//! @param light true to retrieve the light layer brightness value.
-	float getCurrentLandscapeBrightness(const bool light=false) const {return (light? landscape->getLightscapeBrightness() : landscape->getBrightness());}
+	float getCurrentLandscapeBrightness(const bool light=false) const {return static_cast<float>(light? landscape->getLightscapeBrightness() : landscape->getBrightness());}
 
 	//! Preload a landscape into cache.
 	//! @param id the ID of a landscape
@@ -281,7 +281,7 @@ public slots:
 	//! Get whether the landscape is currently visible. If true, objects below landscape's limiting altitude limit can be omitted.
 	bool getIsLandscapeFullyVisible() const;
 	//! Get the sine of current landscape's minimal altitude. Useful to construct bounding caps.
-	float getLandscapeSinMinAltitudeLimit() const;
+	double getLandscapeSinMinAltitudeLimit() const;
 	
 	//! Get flag for displaying Fog.
 	bool getFlagFog() const;
@@ -312,7 +312,7 @@ public slots:
 	//! Return the minimal brightness value of the landscape
 	double getDefaultMinimalBrightness() const {return defaultMinimalBrightness;}
 	//! Set the minimal brightness value of the landscape.
-	void setDefaultMinimalBrightness(const double b) {if(b!=defaultMinimalBrightness){ defaultMinimalBrightness=b; emit defaultMinimalBrightnessChanged(b);}}
+	void setDefaultMinimalBrightness(const double b) {if(fabs(b-defaultMinimalBrightness)>0.0){ defaultMinimalBrightness=b; emit defaultMinimalBrightnessChanged(b);}}
 	//! Sets the value of the flag usage light pollution (and bortle index) from locations database.
 	void setFlagUseLightPollutionFromDatabase(const bool usage);
 	//! Return the value of flag usage light pollution (and bortle index) from locations database.
@@ -443,13 +443,13 @@ public slots:
 	//! @param azalt direction of view line to sample in azaltimuth coordinates.
 	float getLandscapeOpacity(Vec3d azalt) const {return landscape->getOpacity(azalt);}
 	// This variant is required for scripting!
-	float getLandscapeOpacity(Vec3f azalt) const {return landscape->getOpacity(Vec3d(azalt[0], azalt[1], azalt[2]));}
+	float getLandscapeOpacity(Vec3f azalt) const {return landscape->getOpacity(azalt.toVec3d());}
 	//! Forward opacity query to current landscape.
 	//! @param azimuth in degrees
 	//! @param altitude in degrees
 	float getLandscapeOpacity(float azimuth, float altitude) const {
 		Vec3d azalt;
-		StelUtils::spheToRect((180.0f-azimuth)*M_PI/180.0, altitude*M_PI/180.0, azalt);
+		StelUtils::spheToRect((180.0f-azimuth)*M_PI_180f, altitude*M_PI_180f, azalt);
 		return landscape->getOpacity(azalt);
 	}
 

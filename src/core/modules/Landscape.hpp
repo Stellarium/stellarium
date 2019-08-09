@@ -94,35 +94,35 @@ public:
 
 	//! Set the brightness of the landscape plus brightness of optional add-on night lightscape.
 	//! This is called in each draw().
-	void setBrightness(const float b, const float pollutionBrightness=0.0f) {landscapeBrightness = b; lightScapeBrightness=pollutionBrightness; }
+	void setBrightness(const double b, const double pollutionBrightness=0.0) {landscapeBrightness = static_cast<float>(b); lightScapeBrightness=static_cast<float>(pollutionBrightness); }
 
 	//! Returns the current brightness level
-	float getBrightness() const { return landscapeBrightness; }
+	double getBrightness() const { return static_cast<double>(landscapeBrightness); }
 	//! Returns the lightscape brightness
-	float getLightscapeBrightness() const { return lightScapeBrightness; }
+	double getLightscapeBrightness() const { return static_cast<double>(lightScapeBrightness); }
 	//! Returns the lightscape brighness modulated with the fader's target state (i.e. binary on/off)
-	float getTargetLightscapeBrightness() const { return lightScapeBrightness * illumFader; }
+	double getTargetLightscapeBrightness() const { return static_cast<double>(lightScapeBrightness * illumFader); }
 	//! Gets the currently effective lightscape brightness (modulated by the fader)
-	float getEffectiveLightscapeBrightness() const { return lightScapeBrightness * illumFader.getInterstate(); }
+	double getEffectiveLightscapeBrightness() const { return static_cast<double>(lightScapeBrightness * illumFader.getInterstate()); }
 
 	//! Set whether landscape is displayed (does not concern fog)
 	void setFlagShow(const bool b) {landFader=b;}
 	//! Get whether landscape is displayed (does not concern fog)
-	bool getFlagShow() const {return (bool)landFader;}
+	bool getFlagShow() const {return static_cast<bool>(landFader);}
 	//! Returns the currently effective land fade value
 	float getEffectiveLandFadeValue() const { return landFader.getInterstate(); }
 	//! Set whether fog is displayed
 	void setFlagShowFog(const bool b) {fogFader=b;}
 	//! Get whether fog is displayed
-	bool getFlagShowFog() const {return (bool)fogFader;}
+	bool getFlagShowFog() const {return static_cast<bool>(fogFader);}
 	//! Set whether illumination is displayed
 	void setFlagShowIllumination(const bool b) {illumFader=b;}
 	//! Get whether illumination is displayed
-	bool getFlagShowIllumination() const {return (bool)illumFader;}
+	bool getFlagShowIllumination() const {return static_cast<bool>(illumFader);}
 	//! Set whether labels are displayed
 	void setFlagShowLabels(const bool b) {labelFader=b;}
 	//! Get whether labels are displayed
-	bool getFlagShowLabels() const {return (bool)labelFader;}
+	bool getFlagShowLabels() const {return static_cast<bool>(labelFader);}
 	//! change font and fontsize for landscape labels
 	void setLabelFontSize(const int size){fontSize=size;}
 
@@ -144,15 +144,15 @@ public:
 	//! Return default fog setting (0/1) or -1 (no change)
 	int getDefaultFogSetting() const {return defaultFogSetting;}
 	//! Return default atmosperic extinction [mag/airmass], or -1 (no change)
-	float getDefaultAtmosphericExtinction() const {return defaultExtinctionCoefficient;}
+	double getDefaultAtmosphericExtinction() const {return defaultExtinctionCoefficient;}
 	//! Return configured atmospheric temperature [degrees Celsius], for refraction computation, or -1000 for "unknown/no change".
-	float getDefaultAtmosphericTemperature() const {return defaultTemperature;}
+	double getDefaultAtmosphericTemperature() const {return defaultTemperature;}
 	//! Return configured atmospheric pressure [mbar], for refraction computation.
 	//! returns -1 to signal "standard conditions" [compute from altitude], or -2 for "unknown/invalid/no change"
-	float getDefaultAtmosphericPressure() const {return defaultPressure;}
+	double getDefaultAtmosphericPressure() const {return defaultPressure;}
 	//! Return minimal brightness for landscape
 	//! returns -1 to signal "standard conditions" (use default value from config.ini)
-	float getLandscapeMinimalBrightness() const {return minBrightness;}
+	double getLandscapeMinimalBrightness() const {return static_cast<double>(minBrightness);}
 
 	//! Set an additional z-axis (azimuth) rotation after landscape has been loaded.
 	//! This is intended for special uses such as when the landscape consists of
@@ -165,7 +165,7 @@ public:
 	//! Get whether the landscape is currently fully visible (i.e. opaque).
 	bool getIsFullyVisible() const {return landFader.getInterstate() >= 0.999f;}
 	//! Get the sine of the limiting altitude (can be used to short-cut drawing below horizon, like star fields). There is no set here, value is only from landscape.ini
-	float getSinMinAltitudeLimit() const {return sinMinAltitudeLimit;}
+	double getSinMinAltitudeLimit() const {return sinMinAltitudeLimit;}
 
 	//! Find opacity in a certain direction. (New in V0.13 series)
 	//! can be used to find sunrise or visibility questions on the real-world landscape horizon.
@@ -208,7 +208,7 @@ protected:
 	//! @param landscapeId The landscape ID (directory name) to which the texture belongs
 	//! @exception misc possibility of throwing "file not found" exceptions
 	static const QString getTexturePath(const QString& basename, const QString& landscapeId);
-	float radius;
+	double radius;
 	QString name;          //! Read from landscape.ini:[landscape]name
 	QString author;        //! Read from landscape.ini:[landscape]author
 	QString description;   //! Read from landscape.ini:[landscape]description
@@ -228,14 +228,14 @@ protected:
 	float angleRotateZOffset; //! [radians] This is a rotation changeable at runtime via setZRotation (called by LandscapeMgr::setZRotation).
 				  //! Not in landscape.ini: Used in special cases where the horizon may rotate, e.g. on a ship.
 
-	float sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
+	double sinMinAltitudeLimit; //! Minimal altitude of landscape cover. Can be used to construct bounding caps, so that e.g. no stars are drawn below this altitude. Default -0.035, i.e. sin(-2 degrees).
 
 	StelLocation location; //! OPTIONAL. If present, can be used to set location.
 	int defaultBortleIndex; //! May be given in landscape.ini:[location]light_pollution. Default: -1 (no change).
 	int defaultFogSetting;  //! May be given in landscape.ini:[location]display_fog: -1(no change), 0(off), 1(on). Default: -1.
-	float defaultExtinctionCoefficient; //! May be given in landscape.ini:[location]atmospheric_extinction_coefficient. Default -1 (no change).
-	float defaultTemperature; //! [Celsius] May be given in landscape.ini:[location]atmospheric_temperature. default: -1000.0 (no change)
-	float defaultPressure;    //! [mbar]    May be given in landscape.ini:[location]atmospheric_pressure. Default -1.0 (compute from [location]/altitude), use -2 to indicate "no change".
+	double defaultExtinctionCoefficient; //! May be given in landscape.ini:[location]atmospheric_extinction_coefficient. Default -1 (no change).
+	double defaultTemperature; //! [Celsius] May be given in landscape.ini:[location]atmospheric_temperature. default: -1000.0 (no change)
+	double defaultPressure;    //! [mbar]    May be given in landscape.ini:[location]atmospheric_pressure. Default -1.0 (compute from [location]/altitude), use -2 to indicate "no change".
 
 	// Optional elements which, if present, describe a horizon polygon. They can be used to render a line or a filled region, esp. in LandscapePolygonal
 	SphericalRegionP horizonPolygon;   //! Optional element describing the horizon line.
@@ -302,7 +302,7 @@ private:
 	float decorAltAngle; // vertical extent of the side panels
 	float decorAngleShift;
 	float groundAngleShift; //! [radians]: altitude of the bottom plane. Usually negative and equal to decorAngleShift
-	float groundAngleRotateZ; //! [radians]: rotation to bring top of texture away from due east.
+	double groundAngleRotateZ; //! [radians]: rotation to bring top of texture away from due east.
 	int drawGroundFirst;
 	bool tanMode;		// Whether the angles should be converted using tan instead of sin, i.e., for a cylindrical pano
 	bool calibrated;	// if true, the documented altitudes are indeed correct (the original code is buggy!)

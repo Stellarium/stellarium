@@ -184,7 +184,7 @@ void SearchDialog::styleChanged()
 void SearchDialog::setCurrentCoordinateSystemKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
-	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
+	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
 	if (coordSystem<0)
 	{
 		qWarning() << "[Search Tool] Unknown coordinate system: " << key << "setting \"equatorialJ2000\" instead";
@@ -616,7 +616,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		// objects with short names should be searched first
 		// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
 		stringLengthCompare comparator;
-		qSort(matches.begin(), matches.end(), comparator);
+		std::sort(matches.begin(), matches.end(), comparator);
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();
