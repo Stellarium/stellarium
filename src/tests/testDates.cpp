@@ -282,7 +282,7 @@ void TestDates::testJulianDaysRange(int jd_a, int jd_b)
 		StelUtils::getDateFromJulianDay(jd, &yy, &mm, &dd);
 		StelUtils::getJDFromDate(&djd, yy, mm, dd, 12, 0, 0);
 
-		QVERIFY2(static_cast<long>(djd) == jd,
+		QVERIFY2((long)djd == jd,
 		         qPrintable("wrong jd from day " + QString("%1/%2/%3").arg(yy).arg(mm).arg(dd) +
 		                    ": expected " + QString("%1").arg(jd) + ", found " + QString("%1").arg((long)djd)
 		         )
