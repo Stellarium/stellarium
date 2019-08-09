@@ -176,7 +176,7 @@ public:
 	//! Sends a message to this peer
 	void writeMessage(const SyncProtocol::SyncMessage& msg);
 	//! Writes this data packet to the socket without processing
-	void writeData(const QByteArray& data, int size=-1);
+	void writeData(const QByteArray& data, qint64 size=-1);
 	//! Can be used to write an error message to the peer and drop the connection
 	void writeError(const QString& err);
 

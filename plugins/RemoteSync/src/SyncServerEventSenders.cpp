@@ -190,7 +190,7 @@ SyncProtocol::Fov FovEventSender::constructMessage()
 void FovEventSender::update()
 {
 	double curFov = mvMgr->getCurrentFov();
-	if(curFov!=lastFov)
+	if(curFov-lastFov != 0.0)
 	{
 		lastFov = curFov;
 		broadcastMessage(constructMessage());

@@ -60,7 +60,7 @@ SyncServer::~SyncServer()
 	qCDebug(syncServer)<<"Destroyed";
 }
 
-bool SyncServer::start(int port)
+bool SyncServer::start(quint16 port)
 {
 	if(qserver->isListening())
 		stop();
