@@ -190,9 +190,9 @@ Vec3f AsterismMgr::getLabelsColor() const
 
 void AsterismMgr::setFontSize(const float newFontSize)
 {
-	if (asterFont.pixelSize() != newFontSize)
+	if ((static_cast<float>(asterFont.pixelSize()) - newFontSize) != 0.0f)
 	{
-		asterFont.setPixelSize(newFontSize);
+		asterFont.setPixelSize(static_cast<int>(newFontSize));
 		emit fontSizeChanged(newFontSize);
 	}
 }
