@@ -195,27 +195,27 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 		switch (coordMode)
 		{
 			case azDeg_altDeg:
-				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI/180.f;
-				alt=list.at(1).toFloat()*M_PI/180.f;
+				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI_180f;
+				alt=list.at(1).toFloat()*M_PI_180f;
 				break;
 			case azDeg_zdDeg:
-				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI/180.f;
-				alt=(90.0f-list.at(1).toFloat())*M_PI/180.f;
+				az=(180.0f - polyAngleRotateZ - list.at(0).toFloat())*M_PI_180f;
+				alt=(90.0f-list.at(1).toFloat())*M_PI_180f;
 				break;
 			case azRad_altRad:
-				az=(M_PI - polyAngleRotateZ*M_PI/180.f - list.at(0).toFloat());
+				az=(M_PI - polyAngleRotateZ*M_PI_180f - list.at(0).toFloat());
 				alt=list.at(1).toFloat();
 				break;
 			case azRad_zdRad:
-				az=(M_PI - polyAngleRotateZ*M_PI/180.f - list.at(0).toFloat());
-				alt=M_PI/2.f-list.at(1).toFloat();
+				az=(M_PI - polyAngleRotateZ*M_PI_180f - list.at(0).toFloat());
+				alt=M_PI_2f-list.at(1).toFloat();
 				break;
 			case azGrad_altGrad:
-				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI/180.f;
+				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI_180f;
 				alt=list.at(1).toFloat()*M_PI/200.f;
 				break;
 			case azGrad_zdGrad:
-				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI/180.f;
+				az=(200.0f  - list.at(0).toFloat())*M_PI/200.f    - polyAngleRotateZ*M_PI_180f;
 				alt=(100.0f-list.at(1).toFloat())*M_PI/200.f;
 				break;
 			default: qWarning() << "invalid coordMode while reading horizon line.";
@@ -1026,9 +1026,9 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 	// QImage has pixel 0/0 in top left corner.
 	// The texture is taken from the center circle in the square texture.
 	// It is possible that sample position is outside. in this case, assume full opacity and exit early.
-	if (M_PI/2-alt_rad > texFov/2.0f ) return 1.0f; // outside fov, in the clamped texture zone: always opaque.
+	if (M_PI_2f-alt_rad > texFov/2.0f ) return 1.0f; // outside fov, in the clamped texture zone: always opaque.
 
-	float radius=(M_PI/2-alt_rad)*2.0f/texFov; // radius in units of mapImage.height/2
+	float radius=(M_PI_2f-alt_rad)*2.0f/texFov; // radius in units of mapImage.height/2
 
 	az = (M_PI-az) - angleRotateZ; // 0..+2pi -angleRotateZ, real azimuth. NESW
 	//  The texture map has south on top, east at right (if anglerotateZ=0)

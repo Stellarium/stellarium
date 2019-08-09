@@ -700,7 +700,7 @@ void SkyLine::updateLabel()
 
 void SkyLine::draw(StelCore *core) const
 {
-	if (!fader.getInterstate())
+	if (fader.getInterstate() <= 0.f)
 		return;
 
 	StelProjectorP prj = core->getProjection(frameType, frameType!=StelCore::FrameAltAz ? StelCore::RefractionAuto : StelCore::RefractionOff);
@@ -730,18 +730,18 @@ void SkyLine::draw(StelCore *core) const
 		double lat;
 		if (line_type==PRECESSIONCIRCLE_N || line_type==PRECESSIONCIRCLE_S)
 		{
-			lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI/2.0-getPrecessionAngleVondrakCurrentEpsilonA());
+			lat=(line_type==PRECESSIONCIRCLE_S ? -1.0 : 1.0) * (M_PI_2-getPrecessionAngleVondrakCurrentEpsilonA());
 		}
 		else // circumpolar:
 		{
-			const double obsLatRad=core->getCurrentLocation().latitude * (M_PI/180.);
+			const double obsLatRad=core->getCurrentLocation().latitude * (M_PI_180);
 			if (obsLatRad == 0.)
 				return;
 
 			if (line_type==CIRCUMPOLARCIRCLE_N)
-				lat=(obsLatRad>0 ? -1.0 : +1.0) * obsLatRad + (M_PI/2.0);
+				lat=(obsLatRad>0 ? -1.0 : +1.0) * obsLatRad + (M_PI_2);
 			else // southern circle
-				lat=(obsLatRad>0 ? +1.0 : -1.0) * obsLatRad - (M_PI/2.0);
+				lat=(obsLatRad>0 ? +1.0 : -1.0) * obsLatRad - (M_PI_2);
 		}
 		SphericalCap declinationCap(Vec3d(0,0,1), std::sin(lat));
 		const Vec3d rotCenter(0,0,declinationCap.d);
@@ -757,8 +757,8 @@ void SkyLine::draw(StelCore *core) const
 				Vec3d pt2;
 				Vec3d pt3;
 				const double lon1=0.0;
-				const double lon2=120.0*M_PI/180.0;
-				const double lon3=240.0*M_PI/180.0;
+				const double lon2=120.0*M_PI_180;
+				const double lon3=240.0*M_PI_180;
 				StelUtils::spheToRect(lon1, lat, pt1); pt1.normalize();
 				StelUtils::spheToRect(lon2, lat, pt2); pt2.normalize();
 				StelUtils::spheToRect(lon3, lat, pt3); pt3.normalize();
@@ -815,7 +815,7 @@ void SkyLine::draw(StelCore *core) const
 		StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaJDE, &betaJDE);
 		if (lambdaJDE<0) lambdaJDE+=2.0*M_PI;
 
-		StelUtils::spheToRect(lambdaJDE + M_PI/2., 0., coord);
+		StelUtils::spheToRect(lambdaJDE + M_PI_2, 0., coord);
 		meridianSphericalCap.n.set(coord[0],coord[1],coord[2]);
 		fpt.set(0,0,1);
 	}
@@ -827,7 +827,7 @@ void SkyLine::draw(StelCore *core) const
 			|| (viewPortSphericalCap.d<-meridianSphericalCap.d && viewPortSphericalCap.contains(-meridianSphericalCap.n)))
 		{
 			// The meridian is fully included in the viewport, draw it in 3 sub-arcs to avoid length > 180.
-			const Mat4d& rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI/180.);
+			const Mat4d& rotLon120 = Mat4d::rotation(meridianSphericalCap.n, 120.*M_PI_180);
 			Vec3d rotFpt=fpt;
 			rotFpt.transfo4d(rotLon120);
 			Vec3d rotFpt2=rotFpt;

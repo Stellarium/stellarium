@@ -480,7 +480,7 @@ void SearchDialog::manualPositionChanged()
 		case equatorialJ2000:
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
-			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				// Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
@@ -494,7 +494,7 @@ void SearchDialog::manualPositionChanged()
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->equinoxEquToJ2000(pos, StelCore::RefractionOff);
 
-			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
@@ -511,7 +511,7 @@ void SearchDialog::manualPositionChanged()
 			StelUtils::spheToRect(cx, spinLat, pos);
 			pos = core->altAzToJ2000(pos);
 
-			if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(cx), -sin(cx), 0.) * (spinLat>0. ? 1. : -1. ));
@@ -523,7 +523,7 @@ void SearchDialog::manualPositionChanged()
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->galacticToJ2000(pos);
-			if ( (mountMode==StelMovementMgr::MountGalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountGalactic) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
@@ -535,7 +535,7 @@ void SearchDialog::manualPositionChanged()
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->supergalacticToJ2000(pos);
-			if ( (mountMode==StelMovementMgr::MountSupergalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountSupergalactic) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));

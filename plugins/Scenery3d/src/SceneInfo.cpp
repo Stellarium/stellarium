@@ -195,7 +195,7 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 				// Formula from: http://en.wikipedia.org/wiki/Transverse_Mercator_projection, Convergence
 				//rot_z=std::atan(std::tan((lng-gridCentralMeridian)*M_PI/180.)*std::sin(lat*M_PI/180.));
 				// or from http://de.wikipedia.org/wiki/Meridiankonvergenz
-				rot_z=(info.location->longitude - gridCentralMeridian)*M_PI/180.*std::sin(info.location->latitude*M_PI/180.);
+				rot_z=(info.location->longitude - gridCentralMeridian)*M_PI_180*std::sin(info.location->latitude*M_PI_180);
 
 				qCDebug(sceneInfo) << "With Longitude " << info.location->longitude
 					 << ", Latitude " << info.location->latitude << " and CM="
@@ -214,14 +214,14 @@ bool SceneInfo::loadByID(const QString &id,SceneInfo& info)
 	}
 	else
 	{
-		rot_z = convAngle.toDouble() * M_PI / 180.0;
+		rot_z = convAngle.toDouble() * M_PI_180;
 	}
 	// We must apply also a 90 degree rotation, plus convergence(rot_z)
 
 	// Meridian Convergence is negative in north-west quadrant.
 	// positive MC means True north is "left" of grid north, and model must be rotated clockwise. E.g. Sterngarten (east of UTM CM +15deg) has +0.93, we must rotate clockwise!
 	// A zRotate rotates counterclockwise, so we must reverse rot_z.
-	info.zRotateMatrix = Mat4d::zrotation(M_PI/2.0 - rot_z);
+	info.zRotateMatrix = Mat4d::zrotation(M_PI_2 - rot_z);
 
 	// At last, find start points.
 	if(ini.contains("start_E") && ini.contains("start_N"))
