@@ -1039,8 +1039,8 @@ float LandscapeFisheye::getOpacity(Vec3d azalt) const
 
 	az = (M_PIf-az) - static_cast<float>(angleRotateZ); // 0..+2pi -angleRotateZ, real azimuth. NESW
 	//  The texture map has south on top, east at right (if anglerotateZ=0)
-	int x= mapImage->height()/2*qRound(1 + radius*std::sin(az));
-	int y= mapImage->height()/2*qRound(1 + radius*std::cos(az));
+	int x= static_cast<int>(mapImage->height()/2*(1 + radius*std::sin(az)));
+	int y= static_cast<int>(mapImage->height()/2*(1 + radius*std::cos(az)));
 
 	QRgb pixVal=mapImage->pixel(x, y);
 /*
@@ -1261,7 +1261,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	Q_ASSERT(y_img_1<=1.f);
 	Q_ASSERT(y_img_1>=0.f);
 
-	int y=qRound(1.0f-y_img_1)*mapImage->height();           // pixel Y from top.
+	int y=static_cast<int>((1.0f-y_img_1)*mapImage->height());           // pixel Y from top.
 
 	az = (M_PIf-az) / M_PIf;                            //  0..2 = N.E.S.W.N
 
@@ -1270,7 +1270,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	az_phot=fmodf(az_phot, 2.0f);
 	if (az_phot<0) az_phot+=2.0f;                                //  0..2 = image-X
 
-	int x=qRound(az_phot/2.0f) * mapImage->width(); // pixel X from left.
+	int x=static_cast<float>((az_phot*0.5f) * mapImage->width()); // pixel X from left.
 
 	QRgb pixVal=mapImage->pixel(x, y);
 /*
