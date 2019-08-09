@@ -87,7 +87,7 @@ QString SubContour::toJSON() const
 	{
 		//res += QString("[") + v.vertex.toString() + "],";
 		StelUtils::rectToSphe(&ra, &dec, v.vertex);
-		res += QString("[") + QString::number(ra*180./M_PI, 'g', 12) + "," + QString::number(dec*180./M_PI, 'g', 12) + "," + (v.edgeFlag ? QString("true"): QString("false")) + "],";
+		res += QString("[") + QString::number(ra*M_180_PI, 'g', 12) + "," + QString::number(dec*M_180_PI, 'g', 12) + "," + (v.edgeFlag ? QString("true"): QString("false")) + "],";
 	}
 	res[res.size()-1]=']';
 	return res;

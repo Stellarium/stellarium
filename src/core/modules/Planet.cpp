@@ -666,7 +666,7 @@ QString Planet::getInfoString(const StelCore* core, const InfoStringGroup& flags
 				StelUtils::rectToSphe(&ra_equ,&dec_equ, ssystem->getSun()->getEquinoxEquatorialPos(core1));
 				StelUtils::equToEcl(ra_equ, dec_equ, eclJDE, &lambdaSun, &beta);
 				core1->setUseTopocentricCoordinates(state);
-				double deltaLong = lambdaMoon*180./M_PI - lambdaSun*180./M_PI;
+				double deltaLong = lambdaMoon*M_180_PI - lambdaSun*M_180_PI;
 				if (deltaLong<0.) deltaLong += 360.;
 				int deltaLongI = static_cast<int>(std::round(deltaLong));
 				if (deltaLongI==45)
@@ -782,16 +782,16 @@ Vec3f Planet::getInfoColor(void) const
 
 double Planet::getCloseViewFov(const StelCore* core) const
 {
-	return std::atan(equatorialRadius*static_cast<double>(sphereScale)*2./getEquinoxEquatorialPos(core).length())*180./M_PI * 4.;
+	return std::atan(equatorialRadius*static_cast<double>(sphereScale)*2./getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
 }
 
 double Planet::getSatellitesFov(const StelCore* core) const
 {
 	// TODO: calculate from satellite orbits rather than hard code
-	if (englishName=="Jupiter") return std::atan(0.005 /getEquinoxEquatorialPos(core).length())*180./M_PI * 4.;
-	if (englishName=="Saturn")  return std::atan(0.005 /getEquinoxEquatorialPos(core).length())*180./M_PI * 4.;
-	if (englishName=="Mars")    return std::atan(0.0001/getEquinoxEquatorialPos(core).length())*180./M_PI * 4.;
-	if (englishName=="Uranus")  return std::atan(0.002 /getEquinoxEquatorialPos(core).length())*180./M_PI * 4.;
+	if (englishName=="Jupiter") return std::atan(0.005 /getEquinoxEquatorialPos(core).length())*M_180_PI* 4.;
+	if (englishName=="Saturn")  return std::atan(0.005 /getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
+	if (englishName=="Mars")    return std::atan(0.0001/getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
+	if (englishName=="Uranus")  return std::atan(0.002 /getEquinoxEquatorialPos(core).length())*M_180_PI * 4.;
 	return -1.;
 }
 
@@ -1417,7 +1417,7 @@ float Planet::getVMagnitude(const StelCore* core) const
 	// Use empirical formulae for main planets when seen from earth
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		const double phaseDeg=phaseAngle*180./M_PI;
+		const double phaseDeg=phaseAngle*M_180_PI;
 		const double d = 5. * log10(std::sqrt(observerPlanetRq*planetRq));
 
 		// GZ: I prefer the values given by Meeus, Astronomical Algorithms (1992).
@@ -1638,13 +1638,13 @@ double Planet::getAngularSize(const StelCore* core) const
 	double rad = equatorialRadius;
 	if (rings)
 		rad = rings->getSize();
-	return std::atan2(rad*static_cast<double>(sphereScale),getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(rad*static_cast<double>(sphereScale),getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 
 double Planet::getSpheroidAngularSize(const StelCore* core) const
 {
-	return std::atan2(equatorialRadius*static_cast<double>(sphereScale),getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(equatorialRadius*static_cast<double>(sphereScale),getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 //the Planet and all the related infos : name, circle etc..
@@ -2321,7 +2321,7 @@ void Planet::draw3dModel(StelCore* core, StelProjector::ModelViewTranformP trans
 		// Do not hide Earth's moon's halo below ~-45degrees when observing from earth.
 		Vec3d obj = getJ2000EquatorialPos(core);
 		Vec3d par = getParent()->getJ2000EquatorialPos(core);
-		const double angle = obj.angle(par)*180./M_PI;
+		const double angle = obj.angle(par)*M_180_PI;
 		const double asize = getParent()->getSpheroidAngularSize(core);
 		if (angle<=asize)
 			allowDrawHalo = false;

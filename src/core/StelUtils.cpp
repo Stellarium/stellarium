@@ -149,7 +149,7 @@ void radToDms(double angle, bool& sign, unsigned int& d, unsigned int& m, double
 		angle *= -1;
 		sign = false;
 	}
-	angle *= 180./M_PI;
+	angle *= M_180_PI;
 
 	d = static_cast<unsigned int>(angle);
 	m = static_cast<unsigned int>((angle - d)*60);
@@ -176,7 +176,7 @@ void radToDecDeg(double rad, bool &sign, double &deg)
 		rad *= -1;
 		sign = false;
 	}
-	deg = rad*180./M_PI;
+	deg = rad*M_180_PI;
 }
 
 QString radToDecDegStr(const double angle, const int precision, const bool useD, const bool useC)

@@ -178,7 +178,7 @@ static const double STEP_SIZES_HMS[] = {0.05, 0.2, 1.5, 7.5, 15., 15.*5., 15.*10
 static double getClosestResolutionDMS(double pixelPerRad)
 {
 	double minResolution = 80.;
-	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
+	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<12;++i)
 		if (STEP_SIZES_DMS[i]>minSizeArcsec)
 		{
@@ -191,7 +191,7 @@ static double getClosestResolutionDMS(double pixelPerRad)
 static double getClosestResolutionHMS(double pixelPerRad)
 {
 	double minResolution = 80.;
-	double minSizeArcsec = minResolution/pixelPerRad*180./M_PI*3600;
+	double minSizeArcsec = minResolution/pixelPerRad*M_180_PI*3600;
 	for (unsigned int i=0;i<11;++i)
 		if (STEP_SIZES_HMS[i]>minSizeArcsec)
 		{
@@ -345,7 +345,7 @@ void viewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& directio
 	else
 		text = d->text;
 
-	double angleDeg = std::atan2(-direc[1], -direc[0])*180./M_PI;
+	double angleDeg = std::atan2(-direc[1], -direc[0])*M_180_PI;
 	float xshift=6.f;
 	if (angleDeg>90. || angleDeg<-90.)
 	{

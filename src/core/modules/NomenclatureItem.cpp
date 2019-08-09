@@ -852,7 +852,7 @@ float NomenclatureItem::getVMagnitude(const StelCore* core) const
 
 double NomenclatureItem::getAngularSize(const StelCore* core) const
 {
-	return std::atan2(static_cast<double>(size*planet->getSphereScale())/AU, getJ2000EquatorialPos(core).length()) * 180./M_PI;
+	return std::atan2(static_cast<double>(size*planet->getSphereScale())/AU, getJ2000EquatorialPos(core).length()) * M_180_PI;
 }
 
 void NomenclatureItem::update(double deltaTime)

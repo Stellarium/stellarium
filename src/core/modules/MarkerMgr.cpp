@@ -485,8 +485,8 @@ int MarkerMgr::markerHorizon(const QString& az,
 			     bool autoDelete,
 			     int autoDeleteTimeoutMs)
 {
-	float dAzi	= static_cast<float>(StelUtils::getDecAngle(az)*180./M_PI);
-	float dAlt	= static_cast<float>(StelUtils::getDecAngle(alt)*180./M_PI);
+	float dAzi	= static_cast<float>(StelUtils::getDecAngle(az)*M_180_PI);
+	float dAlt	= static_cast<float>(StelUtils::getDecAngle(alt)*M_180_PI);
 
 	StelMarker* m = new HorizonMarker(dAzi, dAlt, size, StelUtils::htmlColorToVec3f(color), SkyMarker::stringToMarkerType(mtype));
 	if (m==Q_NULLPTR)

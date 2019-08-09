@@ -1430,14 +1430,14 @@ double StelCore::getSolutionEquationOfTime(const double JDE) const
 	StelUtils::rectToSphe(&ra, &dec, pos);
 
 	// covert radians to degrees and reduce the angle
-	double alpha = std::fmod(ra*180./M_PI, 360.);
+	double alpha = std::fmod(ra*M_180_PI, 360.);
 	// force it to be the positive remainder, so that 0 <= angle < 360
 	alpha = std::fmod(alpha + 360., 360.);
 
 	double deltaPsi, deltaEps;
 	getNutationAngles(JDE, &deltaPsi, &deltaEps); // these are radians!
 	//double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + get_nutation_longitude(JDE)*cos(get_mean_ecliptical_obliquity(JDE)));
-	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*180./M_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
+	double equation = 4*(sunMeanLongitude - 0.0057183 - alpha + deltaPsi*M_180_PI*cos(getPrecessionAngleVondrakEpsilon(JDE)));
 	// The equation of time is always smaller 20 minutes in absolute value
 	if (qAbs(equation)>20)
 	{
@@ -2619,7 +2619,7 @@ QString StelCore::getIAUConstellation(const Vec3d positionEqJnow) const
 	StelUtils::rectToSphe(&RA1875, &dec1875, pos1875);
 	RA1875 *= 12./M_PI; // hours
 	if (RA1875 <0.) RA1875+=24.;
-	dec1875 *= 180./M_PI; // degrees
+	dec1875 *= M_180_PI; // degrees
 	Q_ASSERT(RA1875>=0.0);
 	Q_ASSERT(RA1875<=24.0);
 	Q_ASSERT(dec1875<=90.0);

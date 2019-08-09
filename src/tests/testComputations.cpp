@@ -315,14 +315,14 @@ void TestComputations::testRectToSpheTransformations()
 		StelUtils::rectToSphe(&longituded, &latituded, rVec3d);
 		StelUtils::rectToSphe(&longitudes, &latitudes, rVec3f);
 
-		longitude		*= 180.f/M_PI;
-		longitudef		*= 180.f/M_PI;
-		longituded	*= 180./M_PI;
-		longitudes	*= 180./M_PI;
-		latitude		*= 180.f/M_PI;
-		latitudef		*= 180.f/M_PI;
-		latituded		*= 180./M_PI;
-		latitudes		*= 180./M_PI;
+		longitude		*= M_180_PIf;
+		longitudef		*= M_180_PIf;
+		longituded	*= M_180_PI;
+		longitudes	*= M_180_PI;
+		latitude		*= M_180_PIf;
+		latitudef		*= M_180_PIf;
+		latituded		*= M_180_PI;
+		latitudes		*= M_180_PI;
 
 		QVERIFY2(qAbs(longitude-longitudeE)<=ERROR_HIGH_LIMIT && qAbs(latitude-latitudeE)<=ERROR_HIGH_LIMIT,
 				qPrintable(QString("Vec3 %1 = Long/Lat: %2/%3 (expected %4/%5)")

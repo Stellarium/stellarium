@@ -924,7 +924,7 @@ void Nebula::drawHints(StelPainter& sPainter, float maxMagHints) const
 		Vec3d XYrel;
 		sPainter.getProjector()->project(XYZrel, XYrel);
 		float screenAngle = atan2(XYrel[1]-XY[1], XYrel[0]-XY[0]);
-		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize, screenAngle*180./M_PI + orientationAngle);
+		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize, screenAngle*M_180_PI + orientationAngle);
 	}
 	else	// no galaxy
 		sPainter.drawSprite2dMode(XY[0], XY[1], finalSize);

@@ -738,12 +738,12 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// ra/dec
 	pos = getEquinoxEquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("ra", ra*180./M_PI);
-	map.insert("dec", dec*180./M_PI);
+	map.insert("ra", ra*M_180_PI);
+	map.insert("dec", dec*M_180_PI);
 	map.insert("iauConstellation", core->getIAUConstellation(pos));
 
 	if (getType()!=QStringLiteral("Star"))
-		map.insert("parallacticAngle", getParallacticAngle(core)*180.0/M_PI);
+		map.insert("parallacticAngle", getParallacticAngle(core)*M_180_PI);
 
 	// Sidereal Time and hour angle
 	if (core->getCurrentLocation().planetName=="Earth")
@@ -759,7 +759,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		if (sidereal < 0.) sidereal+=24.;
 		map.insert("appSidTm", StelUtils::hoursToHmsStr(sidereal));
 
-		double ha = sidereal * 15.0 - ra * 180.0/M_PI;
+		double ha = sidereal * 15.0 - ra * M_180_PI;
 		ha=fmod(ha, 360.0);
 		if (ha < 0.) ha+=360.0;
 		map.insert("hourAngle-dd", ha);
@@ -769,8 +769,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	// ra/dec in J2000
 	pos = getJ2000EquatorialPos(core);
 	StelUtils::rectToSphe(&ra, &dec, pos);
-	map.insert("raJ2000", ra*180./M_PI);
-	map.insert("decJ2000", dec*180./M_PI);
+	map.insert("raJ2000", ra*M_180_PI);
+	map.insert("decJ2000", dec*M_180_PI);
 
 	// apparent altitude/azimuth
 	pos = getAltAzPosApparent(core);
@@ -782,11 +782,11 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
-	map.insert("altitude", alt*180./M_PI);
-	map.insert("azimuth", az*180./M_PI);
+	map.insert("altitude", alt*M_180_PI);
+	map.insert("azimuth", az*M_180_PI);
 
 	const Extinction &extinction=core->getSkyDrawer()->getExtinction();
-	map.insert("airmass", extinction.airmass(cos(M_PI/2.0-alt), true));
+	map.insert("airmass", extinction.airmass(cos(M_PI_2-alt), true));
 
 	// geometric altitude/azimuth
 	pos = getAltAzPosGeometric(core);
@@ -795,20 +795,20 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	if (az > M_PI*2)
 		az -= M_PI*2;
 
-	map.insert("altitude-geometric", alt*180./M_PI);
-	map.insert("azimuth-geometric", az*180./M_PI);
+	map.insert("altitude-geometric", alt*M_180_PI);
+	map.insert("azimuth-geometric", az*M_180_PI);
 
 	// galactic long/lat
 	pos = getGalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("glong", glong*180./M_PI);
-	map.insert("glat", glat*180./M_PI);
+	map.insert("glong", glong*M_180_PI);
+	map.insert("glat", glat*M_180_PI);
 
 	// supergalactic long/lat
 	pos = getSupergalacticPos(core);
 	StelUtils::rectToSphe(&glong, &glat, pos);
-	map.insert("sglong", glong*180./M_PI);
-	map.insert("sglat", glat*180./M_PI);
+	map.insert("sglong", glong*M_180_PI);
+	map.insert("sglat", glat*M_180_PI);
 
 	SolarSystem* ssmgr = GETSTELMODULE(SolarSystem);
 	double ra_equ, dec_equ, lambda, beta;
@@ -820,8 +820,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	StelUtils::rectToSphe(&ra_equ,&dec_equ, getJ2000EquatorialPos(core));
 	StelUtils::equToEcl(ra_equ, dec_equ, eclJ2000, &lambda, &beta);
 	if (lambda<0) lambda+=2.0*M_PI;
-	map.insert("elongJ2000", lambda*180./M_PI);
-	map.insert("elatJ2000", beta*180./M_PI);
+	map.insert("elongJ2000", lambda*M_180_PI);
+	map.insert("elatJ2000", beta*M_180_PI);
 
 	if (QString("Earth Sun").contains(core->getCurrentLocation().planetName))
 	{
@@ -829,8 +829,8 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 		StelUtils::rectToSphe(&ra_equ,&dec_equ, getEquinoxEquatorialPos(core));
 		StelUtils::equToEcl(ra_equ, dec_equ, ecl, &lambda, &beta);
 		if (lambda<0) lambda+=2.0*M_PI;
-		map.insert("elong", lambda*180./M_PI);
-		map.insert("elat", beta*180./M_PI);
+		map.insert("elong", lambda*M_180_PI);
+		map.insert("elat", beta*M_180_PI);
 	}
 
 	// magnitude
@@ -838,7 +838,7 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	map.insert("vmage", getVMagnitudeWithExtinction(core));
 
 	// angular size
-	double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+	double angularSize = 2.*getAngularSize(core)*M_PI_180;
 	bool sign;
 	double deg;
 	StelUtils::radToDecDeg(angularSize, sign, deg);

@@ -1447,7 +1447,7 @@ void alViewportEdgeIntersectCallback(const Vec3d& screenPos, const Vec3d& direct
 	if (text.isEmpty())
 		return;
 
-	float angleDeg = static_cast<float>(std::atan2(-direc[1], -direc[0])*180./M_PI);
+	float angleDeg = static_cast<float>(std::atan2(-direc[1], -direc[0])*M_180_PI);
 	float xshift=6.f;
 	if (angleDeg>90.f || angleDeg<-90.f)
 	{
