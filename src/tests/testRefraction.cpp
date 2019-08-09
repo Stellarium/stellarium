@@ -233,7 +233,7 @@ void TestRefraction::testComplexRefraction()
 		Vec3f vF;
 		float lngF, latSF, latBF;
 		float hF = height * M_PI_180f;
-		StelUtils::spheToRect(0.0, hF, vF);
+		StelUtils::spheToRect(0.f, hF, vF);
 		refCls.forward(vF);
 		StelUtils::rectToSphe(&lngF, &latSF, vF);
 		StelUtils::spheToRect(0.f, hF, vF);
