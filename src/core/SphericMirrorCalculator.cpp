@@ -21,6 +21,7 @@
 #include "SphericMirrorCalculator.hpp"
 #include <QSettings>
 #include <QDebug>
+#include "StelUtils.hpp"
 
 SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf)
 {
@@ -29,22 +30,22 @@ SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf)
 				conf.value("spheric_mirror/mirror_position_y",2.0).toFloat(),
 				conf.value("spheric_mirror/mirror_position_z",0.0).toFloat());
 	const float mirror_radius(conf.value("spheric_mirror/mirror_radius",0.25).toFloat());
-	DomeCenter = mirror_position * (-1.0/mirror_radius);
+	DomeCenter = mirror_position * (-1.0f/mirror_radius);
 	const float dome_radius(conf.value("spheric_mirror/dome_radius",2.5).toFloat());
 	DomeRadius = dome_radius / mirror_radius;
 	const Vec3f projector_position(
 				conf.value("spheric_mirror/projector_position_x",0.0).toFloat(),
 				conf.value("spheric_mirror/projector_position_y",1.0).toFloat(),
 				conf.value("spheric_mirror/projector_position_z",-0.2).toFloat());
-	P = (projector_position - mirror_position) * (1.0/mirror_radius);
+	P = (projector_position - mirror_position) * (1.0f/mirror_radius);
 	PP = P.lengthSquared();
 	lP = std::sqrt(PP);
-	p = P * (1.0/lP);
-	float image_distance_div_height = conf.value("spheric_mirror/image_distance_div_height",-1e100).toFloat();
-	if (image_distance_div_height <= -1e100)
+	p = P * (1.0f/lP);
+	float image_distance_div_height = conf.value("spheric_mirror/image_distance_div_height",-1e38f).toFloat();
+	if (image_distance_div_height <= -1e38f)
 	{
 		const float scaling_factor = conf.value("spheric_mirror/scaling_factor", 0.8).toFloat();
-		image_distance_div_height = std::sqrt(PP-1.0) * scaling_factor;
+		image_distance_div_height = std::sqrt(PP-1.0f) * scaling_factor;
 		qDebug() << "INFO: spheric_mirror:scaling_factor is deprecated and may be removed in future versions.";
 		qDebug() << "      In order to keep your setup unchanged, please use spheric_mirror:image_distance_div_height = "
 				<< image_distance_div_height << " instead";
@@ -52,10 +53,10 @@ SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf)
 	horzZoomFactor = conf.value("spheric_mirror/flip_horz",true).toBool() ? (-image_distance_div_height) : image_distance_div_height;
 	vertZoomFactor = conf.value("spheric_mirror/flip_vert",false).toBool() ? (-image_distance_div_height) : image_distance_div_height;
 
-	const float alpha = conf.value("spheric_mirror/projector_alpha",0.0).toFloat() * (M_PI/180);
-	const float phi = conf.value("spheric_mirror/projector_phi",0.0).toFloat() * (M_PI/180);
-	float delta = conf.value("spheric_mirror/projector_delta",-1e100).toFloat();
-	if (delta <= -1e100)
+	const float alpha = conf.value("spheric_mirror/projector_alpha",0.0f).toFloat() * (M_PI_180f);
+	const float phi = conf.value("spheric_mirror/projector_phi",0.0f).toFloat() * (M_PI_180f);
+	float delta = conf.value("spheric_mirror/projector_delta",-1e38f).toFloat();
+	if (delta <= -1e38f)
 	{
 		float x,y;
 		// before calling transform() horzZoomFactor,vertZoomFactor,
@@ -66,10 +67,10 @@ SphericMirrorCalculator::SphericMirrorCalculator(const QSettings& conf)
 		delta = -atan(y/image_distance_div_height) + atan(zenith_y/image_distance_div_height);
 		qDebug() << "INFO: spheric_mirror:zenith_y is deprecated and may be removed in future versions.";
 		qDebug() << "      In order to keep your setup unchanged, please use spheric_mirror:projector_delta = "
-				<< (delta*(180.0/M_PI)) << " instead";
+				<< (delta*M_180_PIf) << " instead";
 	}
 	else
-		delta *= (M_PI/180);
+		delta *= M_PI_180f;
 
 	initRotMatrix(alpha,delta,phi);
 }
@@ -129,7 +130,7 @@ bool SphericMirrorCalculator::transform(const Vec3f &v, float &xb,float &yb) con
 	const Vec3f S = DomeCenter + (v * (DomeRadius/v.length()));
 	const Vec3f SmP = S - P;
 	const float P_SmP = P.dot(SmP);
-	const bool rval = ( (PP-1.0)*SmP.dot(SmP) > P_SmP*P_SmP );
+	const bool rval = ( (PP-1.0f)*SmP.dot(SmP) > P_SmP*P_SmP );
 
 	const float lS = S.length();
 	const Vec3f s(S/lS);
@@ -140,14 +141,14 @@ bool SphericMirrorCalculator::transform(const Vec3f &v, float &xb,float &yb) con
 	// but I keep this number of iterations for exact zenith_y compatibility:
 	for (int i=0;i<10;i++)
 	{
-		const float t = 0.5 * (t_min+t_max);
-		Q = p*t + s*(1.0-t);
+		const float t = 0.5f * (t_min+t_max);
+		Q = p*t + s*(1.0f-t);
 		Q.normalize();
 		Vec3f Qp = P-Q;
 		Qp.normalize();
 		Vec3f Qs = S-Q;
 		Qs.normalize();
-		if ( (Qp-Qs).dot(Q) > 0.0 )
+		if ( (Qp-Qs).dot(Q) > 0.0f )
 			t_max = t;
 		else
 			t_min = t;
@@ -172,7 +173,7 @@ bool SphericMirrorCalculator::retransform(float x,float y, Vec3f &v) const
 	v[2] = alphaDeltaPhi[6]*x + alphaDeltaPhi[7] + alphaDeltaPhi[8]*y;
 	const float vv = v.dot(v);
 	const float Pv = P.dot(v);
-	const float discr = Pv*Pv-(P.dot(P)-1.0)*vv;
+	const float discr = Pv*Pv-(P.dot(P)-1.0f)*vv;
 	if (discr < 0)
 		return false;
 
@@ -183,16 +184,16 @@ bool SphericMirrorCalculator::retransform(float x,float y, Vec3f &v) const
 	f += std::sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
 	const Vec3f S = Q + w*(f/vv);
 	v = S - DomeCenter;
-	v *= (1.0/DomeRadius);
+	v *= (1.0f/DomeRadius);
 	return true;
 }
 
 bool SphericMirrorCalculator::retransform(float x,float y, Vec3f &v, Vec3f &vX,Vec3f &vY) const
 {
 	x /= horzZoomFactor;
-	const float dx = 1.0/horzZoomFactor;
+	const float dx = 1.0f/horzZoomFactor;
 	y /= vertZoomFactor;
-	const float dy = 1.0/vertZoomFactor;
+	const float dy = 1.0f/vertZoomFactor;
 
 	v[0] = alphaDeltaPhi[0]*x + alphaDeltaPhi[1] + alphaDeltaPhi[2]*y;
 	v[1] = alphaDeltaPhi[3]*x + alphaDeltaPhi[4] + alphaDeltaPhi[5]*y;
@@ -207,23 +208,23 @@ bool SphericMirrorCalculator::retransform(float x,float y, Vec3f &v, Vec3f &vX,V
 	vY[2] = alphaDeltaPhi[8]*dy;
 
 	const float vv = v.dot(v);
-	const float vvX = 2.0*v.dot(vX);
-	const float vvY = 2.0*v.dot(vY);
+	const float vvX = 2.0f*v.dot(vX);
+	const float vvY = 2.0f*v.dot(vY);
 
 	const float Pv = P.dot(v);
 	const float PvX = P.dot(vX);
 	const float PvY = P.dot(vY);
 
-	const float discr = Pv*Pv-(P.dot(P)-1.0)*vv;
-	const float discr_x = 2.0*Pv*PvX-(P.dot(P)-1.0)*vvX;
-	const float discr_y = 2.0*Pv*PvY-(P.dot(P)-1.0)*vvY;
+	const float discr = Pv*Pv-(P.dot(P)-1.0f)*vv;
+	const float discr_x = 2.0f*Pv*PvX-(P.dot(P)-1.0f)*vvX;
+	const float discr_y = 2.0f*Pv*PvY-(P.dot(P)-1.0f)*vvY;
 
 	if (discr < 0)
 		return false;
 
 	const Vec3f Q = P + v*((-Pv-std::sqrt(discr))/vv);
-	const Vec3f Q_x = vX*((-Pv-std::sqrt(discr))/vv) + v*( (vv*(-PvX-0.5*discr_x/std::sqrt(discr)) - vvX*(-Pv-std::sqrt(discr))) /(vv*vv));
-	const Vec3f Q_y = vY*((-Pv-std::sqrt(discr))/vv) + v*( (vv*(-PvY-0.5*discr_y/std::sqrt(discr)) - vvY*(-Pv-std::sqrt(discr))) /(vv*vv));
+	const Vec3f Q_x = vX*((-Pv-std::sqrt(discr))/vv) + v*( (vv*(-PvX-0.5f*discr_x/std::sqrt(discr)) - vvX*(-Pv-std::sqrt(discr))) /(vv*vv));
+	const Vec3f Q_y = vY*((-Pv-std::sqrt(discr))/vv) + v*( (vv*(-PvY-0.5f*discr_y/std::sqrt(discr)) - vvY*(-Pv-std::sqrt(discr))) /(vv*vv));
 
 	const Vec3f w = v - Q*(2*v.dot(Q));
 	const Vec3f w_x = vX - Q_x*(2*v.dot(Q)) - Q*(2*(vX.dot(Q)+v.dot(Q_x)));
@@ -237,21 +238,20 @@ bool SphericMirrorCalculator::retransform(float x,float y, Vec3f &v, Vec3f &vX,V
 	float f_x = -Q_x.dot(w)-MQ.dot(w_x);
 	float f_y = -Q_y.dot(w)-MQ.dot(w_y);
 
-	float f1 = f + std::sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
-	float f1_x = f_x + 0.5*(2*f*f_x - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vvX - 2*MQ.dot(Q_x)*vv )	/ std::sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
-	float f1_y = f_y + 0.5*(2*f*f_y - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vvY - 2*MQ.dot(Q_y)*vv )	/ std::sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
+	float f1   = f + std::sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
+	float f1_x = f_x + 0.5f*(2*f*f_x - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vvX - 2.f*MQ.dot(Q_x)*vv )	/ std::sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
+	float f1_y = f_y + 0.5f*(2*f*f_y - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vvY - 2.f*MQ.dot(Q_y)*vv )	/ std::sqrt(f*f - (MQ.dot(MQ)-DomeRadius*DomeRadius)*vv);
 
 	const Vec3f S = Q + w*(f1/vv);
 	const Vec3f S_x = Q_x + w*((vv*f1_x-vvX*f1)/(vv*vv)) + w_x*(f1/vv);
 	const Vec3f S_y = Q_y + w*((vv*f1_y-vvY*f1)/(vv*vv)) + w_y*(f1/vv);
 
-	v = S - DomeCenter;
+	v  = S - DomeCenter;
 	vX = S_x;
 	vY = S_y;
 
-	v *= (1.0/DomeRadius);
-	vX *= (1.0/DomeRadius);
-	vY *= (1.0/DomeRadius);
+	v  *= (1.0f/DomeRadius);
+	vX *= (1.0f/DomeRadius);
+	vY *= (1.0f/DomeRadius);
 	return true;
 }
-

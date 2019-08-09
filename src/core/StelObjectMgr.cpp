@@ -36,7 +36,7 @@
 #include <QDebug>
 #include <QStringList>
 
-StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.f), distanceWeight(1.f)
+StelObjectMgr::StelObjectMgr() : objectPointerVisibility(true), searchRadiusPixel(25.), distanceWeight(1.f)
 {
 	setObjectName("StelObjectMgr");
 }
