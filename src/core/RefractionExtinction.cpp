@@ -23,6 +23,7 @@
 #include "StelApp.hpp"
 #include "StelUtils.hpp"
 #include "RefractionExtinction.hpp"
+#include "StelUtils.hpp"
 
 Extinction::Extinction() : ext_coeff(50), undergroundExtinctionMode(UndergroundExtinctionMirror)
 {
@@ -85,22 +86,28 @@ void Refraction::setPreTransfoMat(const Mat4d& m)
 {
 	preTransfoMat=m;
 	invertPreTransfoMat=m.inverse();
-	preTransfoMatf.set(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
-	invertPreTransfoMatf.set(invertPreTransfoMat[0], invertPreTransfoMat[1], invertPreTransfoMat[2], invertPreTransfoMat[3],
-				 invertPreTransfoMat[4], invertPreTransfoMat[5], invertPreTransfoMat[6], invertPreTransfoMat[7],
-				 invertPreTransfoMat[8], invertPreTransfoMat[9], invertPreTransfoMat[10], invertPreTransfoMat[11],
-				 invertPreTransfoMat[12], invertPreTransfoMat[13], invertPreTransfoMat[14], invertPreTransfoMat[15]);
+	preTransfoMatf.set(static_cast<float>(m[0]),  static_cast<float>(m[1]),  static_cast<float>(m[2]),  static_cast<float>(m[3]),
+			   static_cast<float>(m[4]),  static_cast<float>(m[5]),  static_cast<float>(m[6]),  static_cast<float>(m[7]),
+			   static_cast<float>(m[8]),  static_cast<float>(m[9]),  static_cast<float>(m[10]), static_cast<float>(m[11]),
+			   static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]));
+	invertPreTransfoMatf.set(static_cast<float>(invertPreTransfoMat[0]),  static_cast<float>(invertPreTransfoMat[1]),  static_cast<float>(invertPreTransfoMat[2]),  static_cast<float>(invertPreTransfoMat[3]),
+				 static_cast<float>(invertPreTransfoMat[4]),  static_cast<float>(invertPreTransfoMat[5]),  static_cast<float>(invertPreTransfoMat[6]),  static_cast<float>(invertPreTransfoMat[7]),
+				 static_cast<float>(invertPreTransfoMat[8]),  static_cast<float>(invertPreTransfoMat[9]),  static_cast<float>(invertPreTransfoMat[10]), static_cast<float>(invertPreTransfoMat[11]),
+				 static_cast<float>(invertPreTransfoMat[12]), static_cast<float>(invertPreTransfoMat[13]), static_cast<float>(invertPreTransfoMat[14]), static_cast<float>(invertPreTransfoMat[15]));
 }
 
 void Refraction::setPostTransfoMat(const Mat4d& m)
 {
 	postTransfoMat=m;
 	invertPostTransfoMat=m.inverse();
-	postTransfoMatf.set(m[0], m[1], m[2], m[3], m[4], m[5], m[6], m[7], m[8], m[9], m[10], m[11], m[12], m[13], m[14], m[15]);
-	invertPostTransfoMatf.set(invertPostTransfoMat[0], invertPostTransfoMat[1], invertPostTransfoMat[2], invertPostTransfoMat[3],
-				  invertPostTransfoMat[4], invertPostTransfoMat[5], invertPostTransfoMat[6], invertPostTransfoMat[7],
-				  invertPostTransfoMat[8], invertPostTransfoMat[9], invertPostTransfoMat[10], invertPostTransfoMat[11],
-				  invertPostTransfoMat[12], invertPostTransfoMat[13], invertPostTransfoMat[14], invertPostTransfoMat[15]);
+	postTransfoMatf.set(static_cast<float>(m[0]),  static_cast<float>(m[1]),  static_cast<float>(m[2]),  static_cast<float>(m[3]),
+			    static_cast<float>(m[4]),  static_cast<float>(m[5]),  static_cast<float>(m[6]),  static_cast<float>(m[7]),
+			    static_cast<float>(m[8]),  static_cast<float>(m[9]),  static_cast<float>(m[10]), static_cast<float>(m[11]),
+			    static_cast<float>(m[12]), static_cast<float>(m[13]), static_cast<float>(m[14]), static_cast<float>(m[15]));
+	invertPostTransfoMatf.set(static_cast<float>(invertPostTransfoMat[0]),  static_cast<float>(invertPostTransfoMat[1]),  static_cast<float>(invertPostTransfoMat[2]),  static_cast<float>(invertPostTransfoMat[3]),
+				  static_cast<float>(invertPostTransfoMat[4]),  static_cast<float>(invertPostTransfoMat[5]),  static_cast<float>(invertPostTransfoMat[6]),  static_cast<float>(invertPostTransfoMat[7]),
+				  static_cast<float>(invertPostTransfoMat[8]),  static_cast<float>(invertPostTransfoMat[9]),  static_cast<float>(invertPostTransfoMat[10]), static_cast<float>(invertPostTransfoMat[11]),
+				  static_cast<float>(invertPostTransfoMat[12]), static_cast<float>(invertPostTransfoMat[13]), static_cast<float>(invertPostTransfoMat[14]), static_cast<float>(invertPostTransfoMat[15]));
 }
 
 void Refraction::updatePrecomputed()
@@ -122,7 +129,7 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 	const double sinGeo = altAzPos[2]/length;
 	Q_ASSERT(fabs(sinGeo)<=1.0);
 	double geom_alt_rad = std::asin(sinGeo);
-	float geom_alt_deg = M_180_PI*geom_alt_rad;
+	float geom_alt_deg = M_180_PIf*static_cast<float>(geom_alt_rad);
 	if (geom_alt_deg > MIN_GEO_ALTITUDE_DEG)
 	{
 		// refraction from Saemundsson, S&T1986 p70 / in Meeus, Astr.Alg.
@@ -134,14 +141,14 @@ void Refraction::innerRefractionForward(Vec3d& altAzPos) const
 	else if(geom_alt_deg>MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG)
 	{
 		// Avoids the jump below -5 by interpolating linearly between MIN_GEO_ALTITUDE_DEG and bottom of transition zone
-		float r_m5=press_temp_corr * ( 1.02f / std::tan((MIN_GEO_ALTITUDE_DEG+10.3f/(MIN_GEO_ALTITUDE_DEG+5.11f))*M_PI/180.f) + 0.0019279f);
+		float r_m5=press_temp_corr * ( 1.02f / std::tan((MIN_GEO_ALTITUDE_DEG+10.3f/(MIN_GEO_ALTITUDE_DEG+5.11f))*M_PI_180f) + 0.0019279f);
 		geom_alt_deg += r_m5*(geom_alt_deg-(MIN_GEO_ALTITUDE_DEG-TRANSITION_WIDTH_GEO_DEG))/TRANSITION_WIDTH_GEO_DEG;
 	}
 	else return;
 	// At this point we have corrected geometric altitude. Note that if we just change altAzPos[2], we would change vector length, so this would change our angles.
 	// We have to shorten X,Y components of the vector as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
 
-	const double refr_alt_rad=geom_alt_deg*M_PI/180.;
+	const double refr_alt_rad=static_cast<double>(geom_alt_deg)*M_PI_180;
 	const double sinRef=std::sin(refr_alt_rad);
 
 	const double shortenxy=((fabs(sinGeo)>=1.0) ? 1.0 :
@@ -165,7 +172,7 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 	Q_ASSERT(length>0.0);
 	const double sinObs = altAzPos[2]/length;
 	Q_ASSERT(fabs(sinObs)<=1.0);
-	float obs_alt_deg=M_180_PI*std::asin(sinObs);
+	float obs_alt_deg=static_cast<float>(M_180_PI*std::asin(sinObs));
 	if (obs_alt_deg > 0.22879f)
 	{
 		// refraction from Bennett, in Meeus, Astr.Alg.
@@ -191,7 +198,7 @@ void Refraction::innerRefractionBackward(Vec3d& altAzPos) const
 	// At this point we have corrected observed altitude. Note that if we just change altAzPos[2], we would change vector length, so this would change our angles.
 	// We have to make X,Y components of the vector a bit longer as well by the change in cosines of altitude, or (sqrt(1-sin(alt))
 
-	const double geo_alt_rad=obs_alt_deg*M_PI/180.;
+	const double geo_alt_rad=static_cast<double>(obs_alt_deg)*M_PI_180;
 	const double sinGeo=std::sin(geo_alt_rad);
 	const double longerxy=((fabs(sinObs)>=1.0) ? 1.0 :
 			std::sqrt((1.-sinGeo*sinGeo)/(1.-sinObs*sinObs)));
@@ -219,19 +226,19 @@ void Refraction::backward(Vec3d& altAzPos) const
 
 void Refraction::forward(Vec3f& altAzPos) const
 {
-	Vec3d vf(altAzPos[0], altAzPos[1], altAzPos[2]);
+	Vec3d vf=altAzPos.toVec3d();
 	vf.transfo4d(preTransfoMat);
 	innerRefractionForward(vf);
 	vf.transfo4d(postTransfoMat);
-	altAzPos.set(vf[0], vf[1], vf[2]);
+	altAzPos.set(static_cast<float>(vf[0]), static_cast<float>(vf[1]), static_cast<float>(vf[2]));
 }
 
 void Refraction::backward(Vec3f& altAzPos) const
 {
 	altAzPos.transfo4d(invertPostTransfoMatf);
-	Vec3d vf(altAzPos[0], altAzPos[1], altAzPos[2]);
+	Vec3d vf=altAzPos.toVec3d();
 	innerRefractionBackward(vf);
-	altAzPos.set(vf[0], vf[1], vf[2]);
+	altAzPos.set(static_cast<float>(vf[0]), static_cast<float>(vf[1]), static_cast<float>(vf[2]));
 	altAzPos.transfo4d(invertPreTransfoMatf);
 }
 

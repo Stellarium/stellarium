@@ -75,12 +75,12 @@ public:
 	Q_DECLARE_FLAGS(InfoStringGroup, InfoStringGroupFlags)
 
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags AllInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
+	static const InfoStringGroupFlags AllInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000|RaDecOfDate|AltAzi|
 									   Distance|Size|Velocity|Extra|HourAngle|AbsoluteMagnitude|
 									   GalacticCoord|SupergalacticCoord|ObjectType|EclipticCoordJ2000|
 									   EclipticCoordOfDate|IAUConstellation|SiderealTime|RTSTime);
 	//! A pre-defined set of specifiers for the getInfoString flags argument to getInfoString
-	static const InfoStringGroupFlags ShortInfo = (InfoStringGroupFlags)(Name|CatalogNumber|Magnitude|RaDecJ2000);
+	static const InfoStringGroupFlags ShortInfo = static_cast<InfoStringGroupFlags>(Name|CatalogNumber|Magnitude|RaDecJ2000);
 
 	virtual ~StelObject() {}
 

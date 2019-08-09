@@ -84,7 +84,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names.
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object names by order of relevance, or an empty list if nothing match
-	QStringList listMatchingObjects(const QString& objPrefix, unsigned int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
+	QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
 
 	QStringList listAllModuleObjects(const QString& moduleId, bool inEnglish) const;
 	QMap<QString, QString> objectModulesMap() const;
@@ -135,7 +135,7 @@ public:
 	StelObjectP searchByID(const QString& type, const QString& id) const;
 
 	//! Set the radius in pixel in which objects will be searched when clicking on a point in sky.
-	void setObjectSearchRadius(float radius) {searchRadiusPixel=radius;}
+	void setObjectSearchRadius(double radius) {searchRadiusPixel=radius;}
 
 	//! Set the weight of the distance factor when choosing the best object to select.
 	//! Default to 1.
@@ -175,7 +175,7 @@ signals:
 
 private:
 	// The list of StelObjectModule that are referenced in Stellarium
-	QList<StelObjectModule*> objectsModule;
+	QList<StelObjectModule*> objectsModules;
 	QMap<QString, StelObjectModule*> typeToModuleMap;
 	QMap<QString, QString> objModulesMap;
 
@@ -191,7 +191,7 @@ private:
 	StelObjectP cleverFind(const StelCore* core, int x, int y) const;
 
 	// Radius in pixel in which objects will be searched when clicking on a point in sky.
-	float searchRadiusPixel;
+	double searchRadiusPixel;
 
 	// Weight of the distance factor when choosing the best object to select.
 	float distanceWeight;
