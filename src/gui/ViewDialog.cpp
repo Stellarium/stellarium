@@ -585,7 +585,7 @@ void ViewDialog::updateTabBarListWidgetWidth()
 	int width = 0;
 	for (int row = 0; row < model->rowCount(); row++)
 	{
-		int textWidth = fontMetrics.width(ui->stackListWidget->item(row)->text());
+		int textWidth = fontMetrics.boundingRect(ui->stackListWidget->item(row)->text()).width();
 		width += iconSize > textWidth ? iconSize : textWidth; // use the wider one
 		width += 24; // margin - 12px left and 12px right
 	}
@@ -759,12 +759,12 @@ void ViewDialog::populateLightPollution()
 	ui->lightPollutionSpinBox->setValue(bIdx);
 	setBortleScaleToolTip(bIdx);
 }
-// The version from socis only enables the spinbox without setting its value. TODO: Decide which is better?
-void ViewDialog::setLightPollutionSpinBoxStatus()
-{
-	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
-	ui->lightPollutionSpinBox->setEnabled(!lmgr->property("flagUseLightPollutionFromDatabase").toBool());
-}
+//// The version from socis only enables the spinbox without setting its value. TODO: Decide which is better?
+//void ViewDialog::setLightPollutionSpinBoxStatus()
+//{
+//	StelModule *lmgr = StelApp::getInstance().getModule("LandscapeMgr");
+//	ui->lightPollutionSpinBox->setEnabled(!lmgr->property("flagUseLightPollutionFromDatabase").toBool());
+//}
 
 void ViewDialog::setBortleScaleToolTip(int Bindex)
 {
@@ -885,6 +885,11 @@ void ViewDialog::populateLists()
 		}
 	}
 	l->blockSignals(false);	
+	QStringList searchPaths;
+	searchPaths << StelFileMgr::findFile("landscapes/" + lmgr->property("currentLandscapeID").toString());
+
+	ui->landscapeTextBrowser->setSearchPaths(searchPaths);
+
 	ui->landscapeTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 	ui->landscapeTextBrowser->setHtml(lmgr->property("currentLandscapeHtmlDescription").toString());
 	updateDefaultLandscape();
@@ -1098,7 +1103,7 @@ void ViewDialog::populatePlanetMagnitudeAlgorithmsList()
 
 void ViewDialog::setPlanetMagnitudeAlgorithm(int algorithmID)
 {
-	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = (Planet::ApparentMagnitudeAlgorithm) ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt();
+	Planet::ApparentMagnitudeAlgorithm currentAlgorithm = static_cast<Planet::ApparentMagnitudeAlgorithm>(ui->planetMagnitudeAlgorithmComboBox->itemData(algorithmID).toInt());
 	Planet::setApparentMagnitudeAlgorithm(currentAlgorithm);
 	populatePlanetMagnitudeAlgorithmDescription();
 }
