@@ -283,7 +283,7 @@ void MeteorShowersMgr::repaint()
 
 void MeteorShowersMgr::checkForUpdates()
 {
-	if (m_enableAutoUpdates && m_lastUpdate.addSecs(m_updateFrequencyHours * 3600.) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
+	if (m_enableAutoUpdates && m_lastUpdate.addSecs(static_cast<qint64>(m_updateFrequencyHours * 3600)) <= QDateTime::currentDateTime() && m_networkManager->networkAccessible()==QNetworkAccessManager::Accessible)
 	{
 		updateCatalog();
 	}
@@ -341,11 +341,11 @@ void MeteorShowersMgr::updateDownloadProgress(qint64 bytesReceived, qint64 bytes
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	m_progressBar->setValue(currentValue);
@@ -597,7 +597,7 @@ void MeteorShowersMgr::setLastUpdate(const QDateTime &datetime)
 
 void MeteorShowersMgr::setStatusOfLastUpdate(const int &downloadStatus)
 {
-	m_statusOfLastUpdate = (DownloadStatus) downloadStatus;
+	m_statusOfLastUpdate = static_cast<DownloadStatus>(downloadStatus);
 	if (m_statusOfLastUpdate != UPDATING)
 	{
 		m_conf->setValue(MS_CONFIG_PREFIX + "/last_update_status", downloadStatus);

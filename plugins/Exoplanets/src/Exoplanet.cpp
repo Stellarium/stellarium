@@ -72,8 +72,8 @@ Exoplanet::Exoplanet(const QVariantMap& map)
 		
 	designation  = map.value("designation").toString();
 	starProperName = map.value("starProperName").toString();
-	RA = StelUtils::getDecAngle(map.value("RA").toString());
-	DE = StelUtils::getDecAngle(map.value("DE").toString());
+	RA = static_cast<float>(StelUtils::getDecAngle(map.value("RA").toString()));
+	DE = static_cast<float>(StelUtils::getDecAngle(map.value("DE").toString()));
 	distance = map.value("distance").toFloat();
 	stype = map.value("stype").toString();
 	smass = map.value("smass").toFloat();

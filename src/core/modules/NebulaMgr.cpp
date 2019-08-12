@@ -466,7 +466,7 @@ struct DrawNebulaFuncObject
 		, core(aCore)
 		, checkMaxMagHints(acheckMaxMagHints)
 	{
-		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*180.f/M_PI;
+		angularSizeLimit = 5.f/sPainter->getProjector()->getPixelPerRadAtCenter()*M_180_PIf;
 	}
 	void operator()(StelRegionObject* obj)
 	{
@@ -480,7 +480,7 @@ struct DrawNebulaFuncObject
 
 		StelSkyDrawer *drawer = core->getSkyDrawer();
 		// filter out DSOs which are too dim to be seen (e.g. for bino observers)		
-		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > drawer->getCustomNebulaMagnitudeLimit()))
+		if ((drawer->getFlagNebulaMagnitudeLimit()) && (mag > static_cast<float>(drawer->getCustomNebulaMagnitudeLimit())))
 			return;
 
 		if (!n->objectInDisplayedCatalog())
@@ -595,7 +595,7 @@ bool NebulaMgr::getFlagUseTypeFilters(void) const
 
 void NebulaMgr::setLabelsAmount(double a)
 {
-	if(a!=labelsAmount)
+	if((a-labelsAmount) != 0.)
 	{
 		labelsAmount=a;
 		emit labelsAmountChanged(a);
@@ -609,7 +609,7 @@ double NebulaMgr::getLabelsAmount(void) const
 
 void NebulaMgr::setHintsAmount(double f)
 {
-	if(hintsAmount!=f)
+	if((hintsAmount-f) != 0.)
 	{
 		hintsAmount = f;
 		emit hintsAmountChanged(f);
@@ -623,7 +623,7 @@ double NebulaMgr::getHintsAmount(void) const
 
 void NebulaMgr::setMinSizeLimit(double s)
 {
-	if(Nebula::minSizeLimit!=s)
+	if((Nebula::minSizeLimit-s) != 0.)
 	{
 		Nebula::minSizeLimit = s;
 		emit minSizeLimitChanged(s);
@@ -637,7 +637,7 @@ double NebulaMgr::getMinSizeLimit() const
 
 void NebulaMgr::setMaxSizeLimit(double s)
 {
-	if(Nebula::maxSizeLimit!=s)
+	if((Nebula::maxSizeLimit-s) != 0.)
 	{
 		Nebula::maxSizeLimit = s;
 		emit maxSizeLimitChanged(s);
@@ -651,7 +651,7 @@ double NebulaMgr::getMaxSizeLimit() const
 
 float NebulaMgr::computeMaxMagHint(const StelSkyDrawer* skyDrawer) const
 {
-	return skyDrawer->getLimitMagnitude()*1.2f-2.f+(hintsAmount *1.2f)-2.f;
+	return skyDrawer->getLimitMagnitude()*1.2f-2.f+static_cast<float>(hintsAmount *1.)-2.f;
 }
 
 // Draw all the Nebulae
@@ -667,12 +667,12 @@ void NebulaMgr::draw(StelCore* core)
 	sPainter.setBlending(true, GL_ONE, GL_ONE);
 
 	// Use a 4 degree margin (esp. for wide outlines)
-	const double margin = 4.*M_PI/180.*prj->getPixelPerRadAtCenter();
+	const float margin = 4.f*M_PI_180f*prj->getPixelPerRadAtCenter();
 	const SphericalRegionP& p = prj->getViewportConvexPolygon(margin, margin);
 
 	// Print all the nebulae of all the selected zones
 	float maxMagHints  = computeMaxMagHint(skyDrawer);
-	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+(labelsAmount*1.2f)-2.f;
+	float maxMagLabels = skyDrawer->getLimitMagnitude()-2.f+static_cast<float>(labelsAmount*1.2)-2.f;
 	sPainter.setFont(nebulaFont);
 	DrawNebulaFuncObject func(maxMagHints, maxMagLabels, &sPainter, core, hintsFader.getInterstate()<=0.f);
 	nebGrid.processIntersectingPointInRegions(p.data(), func);
@@ -700,17 +700,17 @@ void NebulaMgr::drawPointer(const StelCore* core, StelPainter& sPainter)
 		sPainter.setBlending(true);
 
 		// Size on screen
-		float size = obj->getAngularSize(core)*M_PI/180.*prj->getPixelPerRadAtCenter();
+		float size = static_cast<float>(obj->getAngularSize(core))*M_PI_180f*prj->getPixelPerRadAtCenter();
 		if (size>120.f) // avoid oversized marker
 			size = 120.f;
 
 		if (Nebula::drawHintProportional)
 			size*=1.2f;
-		size+=20.f + 10.f*std::sin(3.f * StelApp::getInstance().getAnimationTime());
-		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]-size/2, 10, 90);
-		sPainter.drawSprite2dMode(pos[0]-size/2, pos[1]+size/2, 10, 0);
-		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]+size/2, 10, -90);
-		sPainter.drawSprite2dMode(pos[0]+size/2, pos[1]-size/2, 10, -180);
+		size+=20.f + 10.f*std::sin(3.f * static_cast<float>(StelApp::getInstance().getAnimationTime()));
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-size*0.5f, static_cast<float>(pos[1])-size*0.5f, 10, 90);
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])-size*0.5f, static_cast<float>(pos[1])+size*0.5f, 10, 0);
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+size*0.5f, static_cast<float>(pos[1])+size*0.5f, 10, -90);
+		sPainter.drawSprite2dMode(static_cast<float>(pos[0])+size*0.5f, static_cast<float>(pos[1])-size*0.5f, 10, -180);
 	}
 }
 
@@ -821,7 +821,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 	Vec3d pos = apos;
 	pos.normalize();
 	NebulaP plusProche;
-	float anglePlusProche=0.0f;
+	double anglePlusProche=0.0;
 	for (const auto& n : dsoArray)
 	{
 		if (n->XYZ*pos>anglePlusProche)
@@ -830,7 +830,7 @@ NebulaP NebulaMgr::search(const Vec3d& apos)
 			plusProche=n;
 		}
 	}
-	if (anglePlusProche>0.999f)
+	if (anglePlusProche>0.999)
 	{
 		return plusProche;
 	}
@@ -1122,7 +1122,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 	float	raRad, decRad, bMag, vMag, majorAxisSize, minorAxisSize, dist, distErr, z, zErr, plx, plxErr;
 	QString oType, mType, Ced, PK, PNG, SNRG, ACO, HCG, ESO, VdBH, ra, dec;
 
-	unsigned int nType;
+	//unsigned int nType;
+	Nebula::NebulaType nType;
 
 	int currentLineNumber = 0;	// what input line we are on
 	int currentRecordNumber = 0;	// what record number we are on
@@ -1195,8 +1196,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			if (decimal)
 			{
 				// Convert from deg to rad
-				raRad	= ra.toFloat()*M_PI/180.;
-				decRad	= dec.toFloat()*M_PI/180.;
+				raRad	= ra.toFloat() *M_PI_180f;
+				decRad	= dec.toFloat()*M_PI_180f;
 			}
 			else
 			{
@@ -1216,8 +1217,8 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				decRad	= qAbs(decLst.at(0).toFloat()) + decLst.at(1).toFloat()/60.f + decLst.at(2).toFloat()/3600.f;
 				if (dec.startsWith("-")) decRad *= -1.f;
 
-				raRad  *= M_PI/12.;	// Convert from hours to rad
-				decRad *= M_PI/180.;    // Convert from deg to rad
+				raRad  *= M_PIf/12.f;	// Convert from hours to rad
+				decRad *= M_PIf/180.f;    // Convert from deg to rad
 			}
 
 			majorAxisSize /= 60.f;	// Convert from arcmin to degrees
@@ -1242,106 +1243,106 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 			{
 				case 0:
 				case 1:
-					nType = (unsigned int)Nebula::NebGx;
+					nType = Nebula::NebGx;
 					break;
 				case 2:
-					nType = (unsigned int)Nebula::NebGc;
+					nType = Nebula::NebGc;
 					break;
 				case 3:
 				case 39:
-					nType = (unsigned int)Nebula::NebOc;
+					nType = Nebula::NebOc;
 					break;
 				case 4:
-					nType = (unsigned int)Nebula::NebN;
+					nType = Nebula::NebN;
 					break;
 				case 5:
 				case 68:
-					nType = (unsigned int)Nebula::NebPn;
+					nType = Nebula::NebPn;
 					break;
 				case 6:
 				case 34:
 				case 76:
-					nType = (unsigned int)Nebula::NebDn;
+					nType = Nebula::NebDn;
 					break;
 				case 7:
 				case 9:
-					nType = (unsigned int)Nebula::NebRn;
+					nType = Nebula::NebRn;
 					break;
 				case 8:
-					nType = (unsigned int)Nebula::NebCn;
+					nType = Nebula::NebCn;
 					break;
 				case 10:
 				case 23:
-					nType = (unsigned int)Nebula::NebHII;
+					nType = Nebula::NebHII;
 					break;
 				case 11:
 				case 48:
 				case 78:
-					nType = (unsigned int)Nebula::NebSNR;
+					nType = Nebula::NebSNR;
 					break;
 				case 12:
-					nType = (unsigned int)Nebula::NebBn;
+					nType = Nebula::NebBn;
 					break;
 				case 13:
-					nType = (unsigned int)Nebula::NebEn;
+					nType = Nebula::NebEn;
 					break;
 				case 14:
 				case 40:
-					nType = (unsigned int)Nebula::NebSA;
+					nType = Nebula::NebSA;
 					break;
 				case 15:
-					nType = (unsigned int)Nebula::NebSC;
+					nType = Nebula::NebSC;
 					break;
 				case 16:
-					nType = (unsigned int)Nebula::NebCl;
+					nType = Nebula::NebCl;
 					break;
 				case 17:
 				case 38:
 				case 41:
 				case 42:
-					nType = (unsigned int)Nebula::NebIGx;
+					nType = Nebula::NebIGx;
 					break;
 				case 18:
-					nType = (unsigned int)Nebula::NebRGx;
+					nType = Nebula::NebRGx;
 					break;
 				case 19:
 				case 25: // LINER-type active galaxies
-					nType = (unsigned int)Nebula::NebAGx;
+					nType = Nebula::NebAGx;
 					break;
 				case 20:
-					nType = (unsigned int)Nebula::NebQSO;
+					nType = Nebula::NebQSO;
 					break;
 				case 21:
 				case 24:
 				case 47:
 				case 79:
 				case 82:
-					nType = (unsigned int)Nebula::NebISM;
+					nType = Nebula::NebISM;
 					break;
 				case 22:
-					nType = (unsigned int)Nebula::NebEMO;
+					nType = Nebula::NebEMO;
 					break;
 				case 26:
-					nType = (unsigned int)Nebula::NebBLL;
+					nType = Nebula::NebBLL;
 					break;
 				case 27:
-					nType = (unsigned int)Nebula::NebBLA;
+					nType = Nebula::NebBLA;
 					break;
 				case 28:
 				case 33:
 				case 67:
-					nType = (unsigned int)Nebula::NebMolCld;
+					nType = Nebula::NebMolCld;
 					break;
 				case 29:
 				case 46:
 				case 49:
-					nType = (unsigned int)Nebula::NebYSO;
+					nType = Nebula::NebYSO;
 					break;
 				case 30:
-					nType = (unsigned int)Nebula::NebPossQSO;
+					nType = Nebula::NebPossQSO;
 					break;
 				case 31:
-					nType = (unsigned int)Nebula::NebPossPN;
+					nType = Nebula::NebPossPN;
 					break;
 				case 32:
 				case 35:
@@ -1368,34 +1369,34 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 				case 73:
 				case 77:
 				case 80:
-					nType = (unsigned int)Nebula::NebStar;
+					nType = Nebula::NebStar;
 					break;
 				case 37:
 				case 44:
 				case 81:
-					nType = (unsigned int)Nebula::NebPPN;
+					nType = Nebula::NebPPN;
 					break;
 				case 43:
-					nType = (unsigned int)Nebula::NebSymbioticStar;
+					nType = Nebula::NebSymbioticStar;
 					break;
 				case 51:
 				case 57:
-					nType = (unsigned int)Nebula::NebEmissionLineStar;
+					nType = Nebula::NebEmissionLineStar;
 					break;
 				case 74:
-					nType = (unsigned int)Nebula::NebSNC;
+					nType = Nebula::NebSNC;
 					break;
 				case 75:
-					nType = (unsigned int)Nebula::NebSNRC;
+					nType = Nebula::NebSNRC;
 					break;
 				case 69:
 				case 83:
 				case 84:
-					nType = (unsigned int)Nebula::NebGxCl;
+					nType = Nebula::NebGxCl;
 					break;
 				default:
 				{
-					nType = (unsigned int)Nebula::NebUnknown;
+					nType = Nebula::NebUnknown;
 					qDebug() << "Record with ID" << id <<"has unknown type of object:" << oType;
 					break;
 				}
@@ -1403,7 +1404,7 @@ void NebulaMgr::convertDSOCatalog(const QString &in, const QString &out, bool de
 
 			++readOk;
 
-			dsoOutStream << id << raRad << decRad << bMag << vMag << nType << mType << majorAxisSize << minorAxisSize
+			dsoOutStream << id << raRad << decRad << bMag << vMag << static_cast<unsigned int>(nType) << mType << majorAxisSize << minorAxisSize
 				     << orientationAngle << z << zErr << plx << plxErr << dist  << distErr << NGC << IC << M << C
 				     << B << Sh2 << VdB << RCW  << LDN << LBN << Cr << Mel << PGC << UGC << Ced << Arp << VV << PK
 				     << PNG << SNRG << ACO << HCG << Abell << ESO << VdBH << DWB;
@@ -1482,7 +1483,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 	int totalRecords=0;
 	int lineNumber=0;
 	int readOk=0;
-	int nb;
+	unsigned int nb;
 	NebulaP e;
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
 	QRegExp transRx("_[(]\"(.*)\"[)](\\s*#.*)?"); // optional comments after name.
@@ -1502,7 +1503,7 @@ bool NebulaMgr::loadDSONames(const QString &filename)
 		// bytes 21-80, proper name of the object (translatable)
 		name = record.mid(21).trimmed(); // Let gets the name with trimmed whitespaces
 
-		nb = cdes.toInt();
+		nb = cdes.toUInt();
 
 		QStringList catalogs;
 		catalogs << "IC" << "M" << "C" << "CR" << "MEL" << "B" << "SH2" << "VDB" << "RCW" << "LDN" << "LBN"
@@ -2499,7 +2500,7 @@ QStringList NebulaMgr::listAllObjectsByType(const QString &objType, bool inEngli
 		case 0: // Bright galaxies?
 			for (const auto& n : dsoArray)
 			{
-				if (n->nType==type && qMin(n->vMag, n->bMag)<=10.)
+				if (n->nType==type && qMin(n->vMag, n->bMag)<=10.f)
 				{
 					if (!n->getEnglishName().isEmpty())
 					{

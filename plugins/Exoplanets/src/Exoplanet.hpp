@@ -138,46 +138,32 @@ public:
 		{
 			case 1:
 				return semiAxisList;
-				break;
 			case 2:
 				return massList;
-				break;
 			case 3:
 				return radiusList;
-				break;
 			case 4:
 				return periodList;
-				break;
 			case 5:
 				return angleDistanceList;
-				break;
 			case 6:
 				return effectiveTempHostStarList;
-				break;
 			case 7:
 				return yearDiscoveryList;
-				break;
 			case 8:
 				return metallicityHostStarList;
-				break;
 			case 9:
 				return vMagHostStarList;
-				break;
 			case 10:
 				return raHostStarList;
-				break;
 			case 11:
 				return decHostStarList;
-				break;
 			case 12:
 				return distanceHostStarList;
-				break;
 			case 13:
 				return massHostStarList;
-				break;
 			case 14:
 				return radiusHostStarList;
-				break;
 			default:
 				return eccentricityList;
 		}

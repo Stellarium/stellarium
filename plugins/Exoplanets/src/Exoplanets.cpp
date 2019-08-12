@@ -161,7 +161,7 @@ void Exoplanets::init()
 		// populate settings from main config file.
 		loadConfiguration();
 
-		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
+		jsonCatalogPath = StelFileMgr::findFile("modules/Exoplanets", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/exoplanets.json";
 		if (jsonCatalogPath.isEmpty())
 			return;
 
@@ -249,7 +249,7 @@ void Exoplanets::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime())*40.f);
 	}
 }
 
@@ -732,7 +732,7 @@ void Exoplanets::saveConfiguration(void)
 int Exoplanets::getSecondsToUpdate(void)
 {
 	QDateTime nextUpdate = lastUpdate.addSecs(updateFrequencyHours * 3600);
-	return QDateTime::currentDateTime().secsTo(nextUpdate);
+	return static_cast<int>(QDateTime::currentDateTime().secsTo(nextUpdate));
 }
 
 void Exoplanets::checkForUpdate(void)
@@ -867,7 +867,7 @@ void Exoplanets::setFlagShowExoplanets(bool b)
 void Exoplanets::setCurrentTemperatureScaleKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("TemperatureScale"));
-	TemperatureScale ts = (TemperatureScale)en.keyToValue(key.toLatin1().data());
+	TemperatureScale ts = static_cast<TemperatureScale>(en.keyToValue(key.toLatin1().data()));
 	if (ts<0)
 	{
 		qWarning() << "Unknown temperature scale:" << key << "setting \"Celsius\" instead";
@@ -933,11 +933,11 @@ void Exoplanets::updateDownloadProgress(qint64 bytesReceived, qint64 bytesTotal)
 		//Round to the greatest possible derived unit
 		while (bytesTotal > 1024)
 		{
-			bytesReceived = std::floor(bytesReceived / 1024.);
-			bytesTotal    = std::floor(bytesTotal / 1024.);
+			bytesReceived = static_cast<qint64>(std::floor(bytesReceived / 1024.));
+			bytesTotal    = static_cast<qint64>(std::floor(bytesTotal / 1024.));
 		}
-		currentValue = bytesReceived;
-		endValue = bytesTotal;
+		currentValue = static_cast<int>(bytesReceived);
+		endValue = static_cast<int>(bytesTotal);
 	}
 
 	progressBar->setValue(currentValue);
