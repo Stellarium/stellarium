@@ -1382,7 +1382,10 @@ void AstroCalcDialog::generateEphemeris()
 	const PlanetP& cplanet = core->getCurrentPlanet();	
 	if (!cplanet->getEnglishName().contains("observer", Qt::CaseInsensitive))
 	{
-		solarDay = cplanet->getMeanSolarDay();
+		if (cplanet==solarSystem->getEarth())
+			solarDay = 1.0; // Special case: OK, it's Earth, let's use standard duration of the solar day
+		else
+			solarDay = cplanet->getMeanSolarDay();
 		siderealDay = cplanet->getSiderealDay();
 		siderealYear = cplanet->getSiderealPeriod();
 	}

@@ -324,37 +324,7 @@ QString radToDmsStr(const double angle, const bool decimal, const bool useD)
 	if (decimal)
 		precission = 1;
 
-	return StelUtils::radToDmsPStr(angle, precission, useD);
-	/*
-	QChar degsign('d');
-	if (!useD)
-	{
-		degsign = 0x00B0;
-	}
-	bool sign;
-	unsigned int d,m;
-	double s;
-	StelUtils::radToDms(angle+0.005*M_PI/180/(60*60)*(angle<0?-1.:1.), sign, d, m, s);
-	QString str;
-	QTextStream os(&str);
-	os << (sign?'+':'-') << d << degsign;
-
-	os << qSetFieldWidth(2) << qSetPadChar('0') << m << qSetFieldWidth(0) << '\'';
-	int width;
-	if (decimal)
-	{
-		os << qSetRealNumberPrecision(1);
-		width = 4;
-	}
-	else
-	{
-		os << qSetRealNumberPrecision(0);
-		width = 2;
-	}
-	os << fixed << qSetFieldWidth(width) << qSetPadChar('0') << s << qSetFieldWidth(0) << '\"';
-
-	return str;
-	*/
+	return StelUtils::radToDmsPStr(angle, precission, useD);	
 }
 
 /*************************************************************************
