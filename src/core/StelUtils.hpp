@@ -29,7 +29,9 @@
 
 // astronomical unit (km)
 #define AU 149597870.691
+#define AUf 149597870.691f
 #define AU_KM (1.0/149597870.691)
+#define AU_KMf (1.0f/149597870.691f)
 // Parsec (km)
 #define PARSEC 30.857e12
 // speed of light (km/sec)

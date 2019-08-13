@@ -164,13 +164,13 @@ void SolarSystem::init()
 
 	setSelected("");	// Fix a bug on macosX! Thanks Fumio!
 	setFlagMoonScale(conf->value("viewing/flag_moon_scaled", conf->value("viewing/flag_init_moon_scaled", "false").toBool()).toBool());  // name change
-	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toFloat());
+	setMinorBodyScale(conf->value("viewing/minorbodies_scale", 10.0).toDouble());
 	setFlagMinorBodyScale(conf->value("viewing/flag_minorbodies_scaled", false).toBool());
-	setMoonScale(conf->value("viewing/moon_scale", 4.0).toFloat());
+	setMoonScale(conf->value("viewing/moon_scale", 4.0).toDouble());
 	setFlagPlanets(conf->value("astro/flag_planets").toBool());
 	setFlagHints(conf->value("astro/flag_planets_hints").toBool());
 	setFlagLabels(conf->value("astro/flag_planets_labels", true).toBool());
-	setLabelsAmount(conf->value("astro/labels_amount", 3.).toFloat());
+	setLabelsAmount(conf->value("astro/labels_amount", 3.).toDouble());
 	setFlagOrbits(conf->value("astro/flag_planets_orbits").toBool());
 	setFlagLightTravelTime(conf->value("astro/flag_light_travel_time", true).toBool());
 	setFlagUseObjModels(conf->value("astro/flag_use_obj_models", false).toBool());
@@ -662,7 +662,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			// GZ TODO: It seems ell_orbit is only used for planet moons. Just assert eccentricity<1 and remove a few extra calculations?
 			// Read the orbital elements
 			const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble();
-			const double eccentricity = pd.value(secname+"/orbit_Eccentricity").toDouble();
+			const double eccentricity = pd.value(secname+"/orbit_Eccentricity", 0.0).toDouble();
 			if (eccentricity >= 1.0) closeOrbit = false;
 			double pericenterDistance = pd.value(secname+"/orbit_PericenterDistance",-1e100).toDouble();
 			double semi_major_axis;
@@ -700,12 +700,12 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			} else {
 				period = 2.0*M_PI/meanMotion;
 			}
-			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
-			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
+			const double inclination = pd.value(secname+"/orbit_Inclination", 0.0).toDouble()*(M_PI/180.0);
+			const double ascending_node = pd.value(secname+"/orbit_AscendingNode", 0.0).toDouble()*(M_PI/180.0);
 			double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter",-1e100).toDouble();
 			double long_of_pericenter;
 			if (arg_of_pericenter <= -1e100) {
-				long_of_pericenter = pd.value(secname+"/orbit_LongOfPericenter").toDouble()*(M_PI/180.0);
+				long_of_pericenter = pd.value(secname+"/orbit_LongOfPericenter", 0.0).toDouble()*(M_PI/180.0);
 				arg_of_pericenter = long_of_pericenter - ascending_node;
 			} else {
 				arg_of_pericenter *= (M_PI/180.0);
@@ -1003,7 +1003,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				normalMapName = englishName.toLower().append("_normals.png");
 
 			p = PlanetP(new MinorPlanet(englishName,
-						    pd.value(secname+"/radius").toDouble()/AU,
+						    pd.value(secname+"/radius", 1.0).toDouble()/AU,
 						    pd.value(secname+"/oblateness", 0.0).toDouble(),
 						    color, // halo color
 						    pd.value(secname+"/albedo", 0.25f).toFloat(),
@@ -1035,8 +1035,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			//H-G magnitude system
-			double magnitude = pd.value(secname+"/absolute_magnitude", -99).toDouble();
-			double slope = pd.value(secname+"/slope_parameter", 0.15).toDouble();
+			const float magnitude = pd.value(secname+"/absolute_magnitude", -99).toFloat();
+			const float slope = pd.value(secname+"/slope_parameter", 0.15).toFloat();
 			if (magnitude > -99)
 			{
 				if (slope >= 0 && slope <= 1)
@@ -1045,7 +1045,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 				else
 				{
-					mp->setAbsoluteMagnitudeAndSlope(magnitude, 0.15);
+					mp->setAbsoluteMagnitudeAndSlope(magnitude, 0.15f);
 				}
 			}
 
@@ -1059,7 +1059,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		{
 			minorBodies << englishName;
 			p = PlanetP(new Comet(englishName,
-					      pd.value(secname+"/radius").toDouble()/AU,
+					      pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					      pd.value(secname+"/oblateness", 0.0).toDouble(),
 					      StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					      pd.value(secname+"/albedo", 0.25f).toFloat(),
@@ -1082,8 +1082,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			QSharedPointer<Comet> mp =  p.dynamicCast<Comet>();
 
 			//g,k magnitude system
-			double magnitude = pd.value(secname+"/absolute_magnitude", -99).toDouble();
-			double slope = pd.value(secname+"/slope_parameter", 4.0).toDouble();
+			const float magnitude = pd.value(secname+"/absolute_magnitude", -99).toFloat();
+			const float slope = pd.value(secname+"/slope_parameter", 4.0f).toFloat();
 			if (magnitude > -99)
 			{
 				if (slope >= 0 && slope <= 20)
@@ -1092,7 +1092,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 				else
 				{
-					mp->setAbsoluteMagnitudeAndSlope(magnitude, 4.0);
+					mp->setAbsoluteMagnitudeAndSlope(magnitude, 4.0f);
 				}
 			}
 
@@ -1114,7 +1114,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			if (!hidden) // no normal maps for invisible objects!
 				normalMapName = englishName.toLower().append("_normals.png");
 			p = PlanetP(new Planet(englishName,
-					       pd.value(secname+"/radius").toDouble()/AU,
+					       pd.value(secname+"/radius", 1.0).toDouble()/AU,
 					       pd.value(secname+"/oblateness", 0.0).toDouble(),
 					       StelUtils::strToVec3f(pd.value(secname+"/color", "1.0,1.0,1.0").toString()), // halo color
 					       pd.value(secname+"/albedo", 0.25f).toFloat(),
@@ -1130,7 +1130,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 					       pd.value(secname+"/atmosphere", false).toBool(),
 					       pd.value(secname+"/halo", true).toBool(),          // GZ new default. Avoids clutter in ssystem.ini.
 					       type));
-			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toDouble();
+			p->absoluteMagnitude = pd.value(secname+"/absolute_magnitude", -99.).toFloat();
 
 			// Moon designation (planet index + IAU moon number)
 			QString moonDesignation = pd.value(secname+"/iau_moon_number", "").toString();
@@ -1150,8 +1150,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 		if (secname=="sun") sun = p;
 		if (secname=="moon") moon = p;
 
-		double rotObliquity = pd.value(secname+"/rot_obliquity",0.).toDouble()*(M_PI/180.0);
-		double rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toDouble()*(M_PI/180.0);
+		float rotObliquity = pd.value(secname+"/rot_obliquity",0.).toFloat()*(M_PI_180f);
+		float rotAscNode = pd.value(secname+"/rot_equator_ascending_node",0.).toFloat()*(M_PI_180f);
 
 		// Use more common planet North pole data if available
 		// NB: N pole as defined by IAU (NOT right hand rotation rule)
@@ -1166,11 +1166,11 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 			Vec3d vsop87Pole(StelCore::matJ2000ToVsop87.multiplyWithoutTranslation(J2000NPole));
 
-			double ra, de;
+			float ra, de;
 			StelUtils::rectToSphe(&ra, &de, vsop87Pole);
 
-			rotObliquity = (M_PI_2 - de);
-			rotAscNode = (ra + M_PI_2);
+			rotObliquity = (M_PI_2f - de);
+			rotAscNode = (ra + M_PI_2f);
 
 			// qDebug() << "\tCalculated rotational obliquity: " << rotObliquity*180./M_PI << endl;
 			// qDebug() << "\tCalculated rotational ascending node: " << rotAscNode*180./M_PI << endl;
@@ -1178,18 +1178,18 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 
 		// rot_periode given in hours, or orbit_Period given in days, orbit_visualization_period in days. The latter should have a meaningful default.
 		p->setRotationElements(
-			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toDouble()/24.,
-			pd.value(secname+"/rot_rotation_offset",0.).toDouble(),
+			pd.value(secname+"/rot_periode", pd.value(secname+"/orbit_Period", 1.).toDouble()*24.).toFloat()/24.f,
+			pd.value(secname+"/rot_rotation_offset",0.).toFloat(),
 			pd.value(secname+"/rot_epoch", J2000).toDouble(),
 			rotObliquity,
 			rotAscNode,
-			pd.value(secname+"/rot_precession_rate",0.).toDouble()*M_PI/(180*36525),
+			pd.value(secname+"/rot_precession_rate",0.).toFloat()*M_PIf/(180*36525),
 			pd.value(secname+"/orbit_visualization_period", fabs(pd.value(secname+"/orbit_Period", 1.).toDouble())).toDouble()); // this is given in days...
 
 
 		if (pd.value(secname+"/rings", 0).toBool()) {
-			const double rMin = pd.value(secname+"/ring_inner_size").toDouble()/AU;
-			const double rMax = pd.value(secname+"/ring_outer_size").toDouble()/AU;
+			const float rMin = pd.value(secname+"/ring_inner_size").toFloat()/AUf;
+			const float rMax = pd.value(secname+"/ring_outer_size").toFloat()/AUf;
 			Ring *r = new Ring(rMin,rMax,pd.value(secname+"/tex_ring").toString());
 			p->setRings(r);
 		}
@@ -1486,9 +1486,7 @@ double SolarSystem::getDistanceToPlanet(QString planetName) const
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
-	double r = 0.f;
-	r = p->getDistance();
-	return r;
+	return p->getDistance();
 }
 
 double SolarSystem::getElongationForPlanet(QString planetName) const
@@ -1496,9 +1494,7 @@ double SolarSystem::getElongationForPlanet(QString planetName) const
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
-	double r = 0.f;
-	r = p->getElongation(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
-	return r;
+	return p->getElongation(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 }
 
 double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
@@ -1506,9 +1502,7 @@ double SolarSystem::getPhaseAngleForPlanet(QString planetName) const
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
-	double r = 0.f;
-	r = p->getPhaseAngle(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
-	return r;
+	return p->getPhaseAngle(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 }
 
 float SolarSystem::getPhaseForPlanet(QString planetName) const
@@ -1516,9 +1510,7 @@ float SolarSystem::getPhaseForPlanet(QString planetName) const
 	PlanetP p = searchByEnglishName(planetName);
 	if (p.isNull()) // Possible was asked the common name of minor planet?
 		p = searchMinorPlanetByEnglishName(planetName);
-	float r = 0.f;
-	r = p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
-	return r;
+	return p->getPhase(StelApp::getInstance().getCore()->getObserverHeliocentricEclipticPos());
 }
 
 QStringList SolarSystem::getObjectsList(QString objType) const
