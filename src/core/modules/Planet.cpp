@@ -724,9 +724,9 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 	{
 		const Vec3d& observerHelioPos = core->getObserverHeliocentricEclipticPos();
 		map.insert("distance", getJ2000EquatorialPos(core).length());
-		double phase=getPhase(observerHelioPos);
+		float phase=getPhase(observerHelioPos);
 		map.insert("phase", phase);
-		map.insert("illumination", 100.*phase);
+		map.insert("illumination", 100.f*phase);
 		double phaseAngle = getPhaseAngle(observerHelioPos);
 		map.insert("phase-angle", phaseAngle);
 		map.insert("phase-angle-dms", StelUtils::radToDmsStr(phaseAngle));
