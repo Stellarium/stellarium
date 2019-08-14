@@ -1247,7 +1247,7 @@ void GridLinesMgr::init()
 	setFlagSolsticeJ2000Points(conf->value("viewing/flag_solstice_J2000_points").toBool());
 	setFlagSolsticePoints(conf->value("viewing/flag_solstice_points").toBool());
 	setFlagAntisolarPoint(conf->value("viewing/flag_antisolar_point").toBool());
-	setFlagApexPoints(conf->value("viewing/flag_vector_point", true).toBool());
+	setFlagApexPoints(conf->value("viewing/flag_apex_points").toBool());
 
 	// Load colors from config file
 	QString defaultColor = conf->value("color/default_color").toString();
