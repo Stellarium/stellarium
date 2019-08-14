@@ -27,8 +27,8 @@ function saveState(stateName)
 	savedStates[stateName]["SolarSystemFlagLightTravelTime"] = SolarSystem.getFlagLightTravelTime();
 	savedStates[stateName]["SolarSystemFlagMoonScale"] = SolarSystem.getFlagMoonScale();
 	savedStates[stateName]["SolarSystemMoonScale"] = SolarSystem.getMoonScale();
-	savedStates[stateName]["MeteorMgrZHR"] = MeteorMgr.getZHR();
-	savedStates[stateName]["MeteorMgrFlagShow"] = MeteorMgr.getFlagShow();
+	savedStates[stateName]["MeteorMgrZHR"] = SporadicMeteorMgr.getZHR();
+	savedStates[stateName]["MeteorMgrFlagShow"] = SporadicMeteorMgr.getFlagShow();
 	savedStates[stateName]["GridLinesMgrFlagAzimuthalGrid"] = GridLinesMgr.getFlagAzimuthalGrid();
 	savedStates[stateName]["GridLinesMgrFlagEquatorGrid"] = GridLinesMgr.getFlagEquatorGrid();
 	savedStates[stateName]["GridLinesMgrFlagEquatorLine"] = GridLinesMgr.getFlagEquatorLine();
@@ -129,8 +129,8 @@ function restoreState(stateName, options)
 	SolarSystem.setFlagLightTravelTime(savedStates[stateName]["SolarSystemFlagLightTravelTime"]);
 	SolarSystem.setFlagMoonScale(savedStates[stateName]["SolarSystemFlagMoonScale"]);
 	SolarSystem.setMoonScale(savedStates[stateName]["SolarSystemMoonScale"]);
-	MeteorMgr.setZHR(savedStates[stateName]["MeteorMgrZHR"]);
-	MeteorMgr.setFlagShow(savedStates[stateName]["MeteorMgrFlagShow"]);
+	SporadicMeteorMgr.setZHR(savedStates[stateName]["MeteorMgrZHR"]);
+	SporadicMeteorMgr.setFlagShow(savedStates[stateName]["MeteorMgrFlagShow"]);
 	GridLinesMgr.setFlagAzimuthalGrid(savedStates[stateName]["GridLinesMgrFlagAzimuthalGrid"]);
 	GridLinesMgr.setFlagEquatorGrid(savedStates[stateName]["GridLinesMgrFlagEquatorGrid"]);
 	GridLinesMgr.setFlagEquatorLine(savedStates[stateName]["GridLinesMgrFlagEquatorLine"]);
