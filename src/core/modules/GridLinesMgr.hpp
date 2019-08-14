@@ -331,6 +331,15 @@ class GridLinesMgr : public StelModule
 		   WRITE setColorAntisolarPoint
 		   NOTIFY antisolarPointColorChanged)
 
+	Q_PROPERTY(bool apexPointsDisplayed
+		   READ getFlagApexPoints
+		   WRITE setFlagApexPoints
+		   NOTIFY apexPointsDisplayedChanged)
+	Q_PROPERTY(Vec3f apexPointsColor
+		   READ getColorApexPoints
+		   WRITE setColorApexPoints
+		   NOTIFY apexPointsColorChanged)
+
 public:
 	GridLinesMgr();
 	virtual ~GridLinesMgr();
@@ -822,6 +831,19 @@ public slots:
 	//! @endcode
 	void setColorAntisolarPoint(const Vec3f& newColor);
 
+	//! Setter for displaying the Apex and Antapex points, i.e. where the observer planet is heading to or coming from, respectively
+	void setFlagApexPoints(const bool displayed);
+	//! Accessor for displaying Apex/Antapex points.
+	bool getFlagApexPoints(void) const;
+	//! Get the current color of the Apex/Antapex points.
+	Vec3f getColorApexPoints(void) const;
+	//! Set the color of the Apex/Antapex points.
+	//! @param newColor The color of Apex/Antapex points.
+	//! @code
+	//! // example of usage in scripts
+	//! GridLinesMgr.setColorApexPoints(Vec3f(1.0,0.0,0.0));
+	//! @endcode
+	void setColorApexPoints(const Vec3f& newColor);
 signals:
 	void gridlinesDisplayedChanged(const bool) const;
 	void azimuthalGridDisplayedChanged(const bool) const;
@@ -888,11 +910,13 @@ signals:
 	void solsticePointsColorChanged(const Vec3f & newColor) const;
 	void antisolarPointDisplayedChanged(const bool displayed) const;
 	void antisolarPointColorChanged(const Vec3f & newColor) const;
+	void apexPointsDisplayedChanged(const bool displayed) const;
+	void apexPointsColorChanged(const Vec3f & newColor) const;
 
 private slots:
 	//! Re-translate the labels of the great circles.
-	//! Contains only calls to SkyLine::updateLabel().
-	void updateLineLabels();
+	//! Contains only calls to SkyLine::updateLabel() and SkyPoint::updateLabel().
+	void updateLabels();
 	//! Connect the earth shared pointer.
 	//! Must be connected to SolarSystem::solarSystemDataReloaded()
 	void connectEarthFromSolarSystem();
@@ -902,14 +926,14 @@ private slots:
 
 private:
 	QSharedPointer<Planet> earth;           // shortcut Earth pointer. Must be reconnected whenever solar system has been reloaded.
-	bool gridlinesDisplayed;			// master switch to switch off all grids/lines. (useful for oculars plugin)
-	SkyGrid * equGrid;				// Equatorial grid
+	bool gridlinesDisplayed;		// master switch to switch off all grids/lines. (useful for oculars plugin)
+	SkyGrid * equGrid;			// Equatorial grid
 	SkyGrid * equJ2000Grid;			// Equatorial J2000 grid
 	SkyGrid * galacticGrid;			// Galactic grid
 	SkyGrid * supergalacticGrid;		// Supergalactic grid
-	SkyGrid * eclGrid;				// Ecliptic of Date grid
+	SkyGrid * eclGrid;			// Ecliptic of Date grid
 	SkyGrid * eclJ2000Grid;			// Ecliptic J2000 grid
-	SkyGrid * aziGrid;				// Azimuthal grid
+	SkyGrid * aziGrid;			// Azimuthal grid
 	SkyLine * equatorLine;			// Celestial Equator line
 	SkyLine * equatorJ2000Line;		// Celestial Equator line of J2000
 	SkyLine * eclipticLine;			// Ecliptic line
@@ -917,7 +941,7 @@ private:
 	SkyLine * precessionCircleN;		// Northern precession circle
 	SkyLine * precessionCircleS;		// Southern precession circle
 	SkyLine * meridianLine;			// Meridian line
-	SkyLine * longitudeLine;			// Opposition/conjunction longitude line
+	SkyLine * longitudeLine;		// Opposition/conjunction longitude line
 	SkyLine * horizonLine;			// Horizon line
 	SkyLine * galacticEquatorLine;		// line depicting the Galactic equator as defined by the IAU definition of Galactic coordinates (System II, 1958)
 	SkyLine * supergalacticEquatorLine;	// line depicting the Supergalactic equator
@@ -927,17 +951,18 @@ private:
 	SkyLine * circumpolarCircleN;		// Northern circumpolar circle
 	SkyLine * circumpolarCircleS;		// Southern circumpolar circle
 	SkyPoint * celestialJ2000Poles;		// Celestial poles of J2000
-	SkyPoint * celestialPoles;			// Celestial poles
+	SkyPoint * celestialPoles;		// Celestial poles
 	SkyPoint * zenithNadir;			// Zenith and nadir
 	SkyPoint * eclipticJ2000Poles;		// Ecliptic poles of J2000
-	SkyPoint * eclipticPoles;			// Ecliptic poles
-	SkyPoint * galacticPoles;			// Galactic poles
+	SkyPoint * eclipticPoles;		// Ecliptic poles
+	SkyPoint * galacticPoles;		// Galactic poles
 	SkyPoint * supergalacticPoles;		// Supergalactic poles
-	SkyPoint * equinoxJ2000Points;	// Equinox points of J2000
-	SkyPoint * equinoxPoints;			// Equinox points
+	SkyPoint * equinoxJ2000Points;		// Equinox points of J2000
+	SkyPoint * equinoxPoints;		// Equinox points
 	SkyPoint * solsticeJ2000Points;		// Solstice points of J2000
-	SkyPoint * solsticePoints;			// Solstice points
-	SkyPoint * antisolarPoint;			// Solstice points
+	SkyPoint * solsticePoints;		// Solstice points
+	SkyPoint * antisolarPoint;		// Solstice points
+	SkyPoint * apexPoints;			// Apex and Antapex points, i.e. the point where the observer planet is moving to or receding from
 };
 
 #endif // GRIDLINESMGR_HPP
