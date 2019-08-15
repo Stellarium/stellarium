@@ -1524,6 +1524,11 @@ QStringList SolarSystem::getObjectsList(QString objType) const
 		// Remove special objects
 		r.removeOne("Solar System Observer");
 		r.removeOne("Earth Observer");
+		r.removeOne("Mars Observer");
+		r.removeOne("Jupiter Observer");
+		r.removeOne("Saturn Observer");
+		r.removeOne("Uranus Observer");
+		r.removeOne("Neptune Observer");
 	}
 	else
 		r = listAllObjectsByType(objType, true);
