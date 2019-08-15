@@ -287,7 +287,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionAdd_Anomalistic_Year", timeGroup, N_("Add 1 anomalistic year"), this, "addAnomalisticYear()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Century", timeGroup, N_("Add 100 anomalistic years"), this, "addAnomalisticYears()");
 	actionsMgr->addAction("actionAdd_Mean_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addMeanTropicalMonth()");
-	actionsMgr->addAction("actionAdd_Mean_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addMeanTropicalYears()");
+	actionsMgr->addAction("actionAdd_Mean_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addMeanTropicalYear()");
 	actionsMgr->addAction("actionAdd_Mean_Tropical_Century", timeGroup, N_("Add 100 mean tropical years"), this, "addMeanTropicalYears()");
 	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 tropical year"), this, "addTropicalYear()");
 	actionsMgr->addAction("actionAdd_Julian_Year", timeGroup, N_("Add 1 Julian year"), this, "addJulianYear()");
