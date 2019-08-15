@@ -26,7 +26,7 @@
 //     * add ecliptic j2000 grid state
 // 2014-09-10   Georg Zotti (gzotti)
 //    * Update Galactic Plane to Galactic Equator
-// 2014-09-10   Brian W. Mulligan (astrobit)
+// 2019-08-14   Brian W. Mulligan (astrobit)
 //    * Fix to work under stellarium 0.19
 //    * Add change log, version, and author list to header
 
