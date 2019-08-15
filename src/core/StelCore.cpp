@@ -287,7 +287,7 @@ void StelCore::init()
 	actionsMgr->addAction("actionAdd_Anomalistic_Year", timeGroup, N_("Add 1 anomalistic year"), this, "addAnomalisticYear()");
 	actionsMgr->addAction("actionAdd_Anomalistic_Century", timeGroup, N_("Add 100 anomalistic years"), this, "addAnomalisticYears()");
 	actionsMgr->addAction("actionAdd_Mean_Tropical_Month", timeGroup, N_("Add 1 mean tropical month"), this, "addMeanTropicalMonth()");
-	actionsMgr->addAction("actionAdd_Mean_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addMeanTropicalYear()");
+	actionsMgr->addAction("actionAdd_Mean_Tropical_Year", timeGroup, N_("Add 1 mean tropical year"), this, "addMeanTropicalYears()");
 	actionsMgr->addAction("actionAdd_Mean_Tropical_Century", timeGroup, N_("Add 100 mean tropical years"), this, "addMeanTropicalYears()");
 	actionsMgr->addAction("actionAdd_Tropical_Year", timeGroup, N_("Add 1 tropical year"), this, "addTropicalYear()");
 	actionsMgr->addAction("actionAdd_Julian_Year", timeGroup, N_("Add 1 Julian year"), this, "addJulianYear()");
@@ -1608,20 +1608,22 @@ void StelCore::addDraconicYear()
 
 void StelCore::addMeanTropicalYear()
 {
-	addSolarDays(365.242190419);
+	addMeanTropicalYears(1.0);
 }
 
 void StelCore::addTropicalYear()
 {
 	// Source: J. Meeus. More Mathematical Astronomy Morsels. 2002, p. 358.
+	// Meeus, J. & Savoie, D. The history of the tropical year. Journal of the British Astronomical Association, vol.102, no.1, p.40-42
+	// http://articles.adsabs.harvard.edu//full/1992JBAA..102...40M
 	const double T = (getJD()-2451545.0)/365250.0;
 	addSolarDays(365.242189623 - T*(0.000061522 - T*(0.0000000609 + T*0.00000026525)));
 }
 
 void StelCore::addMeanTropicalYears(double n)
-{
-	// FIXME: compare constant with addMeanTropicalYear. Choose one!
-	addSolarDays(365.2421897*n);
+{	
+	// Source: https://en.wikipedia.org/wiki/Tropical_year#Mean_tropical_year_current_value
+	addSolarDays(365.2421897*n); // The mean tropical year on January 1, 2000
 }
 
 void StelCore::addJulianYear()
@@ -1745,13 +1747,12 @@ void StelCore::subtractTropicalYear()
 
 void StelCore::subtractMeanTropicalYear()
 {
-	// FIXME: compare constant with that in subtractMeanTropicalYears(n). Choose one!
-	addSolarDays(-365.242190419);
+	addMeanTropicalYears(-1.0);
 }
 
 void StelCore::subtractMeanTropicalYears(double n)
 {
-	addSolarDays(-365.2421897*n);
+	addMeanTropicalYears(-1.0*n);
 }
 
 void StelCore::subtractJulianYear()
