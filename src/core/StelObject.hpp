@@ -253,6 +253,13 @@ public:
 	//! @return radius in degree. This value is the apparent angular size of the object, and is independent of the current FOV.
 	virtual double getAngularSize(const StelCore* core) const = 0;
 
+public slots:
+	//! Allow additions to the Info String. Can be used by plugins to show extra info for the selected object, or for debugging.
+	//! Hard-set this string to str
+	virtual void setExtraInfoString(const QString &str);
+	//! Add str to the extra string. This should be preferrable over hard setting.
+	virtual void addToExtraInfoString(const QString &str);
+
 protected:
 	//! Format the positional info string containing J2000/of date/altaz/hour angle positions and constellation, sidereal time, etc. for the object
 	QString getCommonInfoString(const StelCore *core, const InfoStringGroup& flags) const;
@@ -271,6 +278,10 @@ private:
 	//! @return Vec3f - time of rise, transit and set; decimal hours
 	//! @note The value -1.f is used as undefined value
 	Vec3f computeRTSTime(StelCore* core) const;
+
+	//! Location for additional object info that can be set for special purposes (at least for debugging, but maybe others), even via scripting.
+	//! TODO: Maybe convert this to a Map or Hash, and let modules/plugins set or reset strings with their IDs, to avoid conflicts.
+	QString extraInfoString;
 
 	static int stelObjectPMetaTypeID;
 };

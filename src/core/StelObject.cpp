@@ -693,6 +693,9 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
+
+	str.append(extraInfoString);
+
 	// hack for avoiding an empty line before table
 	str.replace(QRegExp("<br(\\s*/)?><table"), "<table");
 	// chomp trailing line breaks
@@ -865,4 +868,13 @@ QVariantMap StelObject::getInfoMap(const StelCore *core) const
 	map.insert("set-dhr", rts[2]);
 
 	return map;
+}
+
+void StelObject::setExtraInfoString(const QString &str)
+{
+	extraInfoString=str;
+}
+void StelObject::addToExtraInfoString(const QString &str)
+{
+	extraInfoString.append(str);
 }

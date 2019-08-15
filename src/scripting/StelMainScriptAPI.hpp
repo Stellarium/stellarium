@@ -231,6 +231,12 @@ public slots:
 	//! @return a map of object data.  See description for getObjectInfo(const QString& name);
 	static QVariantMap getSelectedObjectInfo();
 
+	//! Add some arbitrary string to the object information of the currently selected object.
+	//! if @arg replace==true, replace this extra string, if false, add to it.
+	//! Note that while most objects keep this information after unselection and reselection,
+	//! stars will start with no extra information when they become selected again.
+	static void addToSelectedObjectInfoString(const QString &str, bool replace=false);
+
 	//! Clear the display options, setting a "standard" view.
 	//! Preset states:
 	//! - natural : azimuthal mount, atmosphere, landscape,
