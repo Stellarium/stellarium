@@ -915,7 +915,6 @@ void StelMainScriptAPI::addToSelectedObjectInfoString(const QString &str, bool r
 		obj->setExtraInfoString(str);
 	else
 		obj->addToExtraInfoString(str);
-
 }
 
 

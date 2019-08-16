@@ -693,7 +693,6 @@ QString StelObject::getCommonInfoString(const StelCore *core, const InfoStringGr
 // Apply post processing on the info string
 void StelObject::postProcessInfoString(QString& str, const InfoStringGroup& flags) const
 {
-
 	str.append(extraInfoString);
 
 	// hack for avoiding an empty line before table
