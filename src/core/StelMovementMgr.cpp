@@ -201,6 +201,25 @@ void StelMovementMgr::init()
 	// Additional hooks
 	addAction("actionLook_Towards_NCP", movementGroup, N_("Look towards North Celestial pole"), "lookTowardsNCP()", "Alt+Shift+N");
 	addAction("actionLook_Towards_SCP", movementGroup, N_("Look towards South Celestial pole"), "lookTowardsSCP()", "Alt+Shift+S");
+	// Field of view
+	// The feature was moved from FOV plugin
+	// TODO: Switch to use C++/Qt lambda's
+	QString fovGroup = N_("Field of View");
+	QString fovText = q_("Set FOV to");
+	addAction("actionSet_FOV_180deg",	 fovGroup, QString("%1 %2%3").arg(fovText, "180", QChar(0x00B0)), "setFOV180Deg()", "Ctrl+Alt+1");
+	addAction("actionSet_FOV_90deg",   fovGroup, QString("%1 %2%3").arg(fovText, "90", QChar(0x00B0)),   "setFOV90Deg()",   "Ctrl+Alt+2");
+	addAction("actionSet_FOV_60deg",   fovGroup, QString("%1 %2%3").arg(fovText, "60", QChar(0x00B0)),   "setFOV60Deg()",   "Ctrl+Alt+3");
+	addAction("actionSet_FOV_45deg",   fovGroup, QString("%1 %2%3").arg(fovText, "45", QChar(0x00B0)),   "setFOV45Deg()",   "Ctrl+Alt+4");
+	addAction("actionSet_FOV_20deg",   fovGroup, QString("%1 %2%3").arg(fovText, "20", QChar(0x00B0)),   "setFOV20Deg()",   "Ctrl+Alt+5");
+	addAction("actionSet_FOV_10deg",   fovGroup, QString("%1 %2%3").arg(fovText, "10", QChar(0x00B0)),   "setFOV10Deg()",   "Ctrl+Alt+6");
+	addAction("actionSet_FOV_5deg",     fovGroup, QString("%1 %2%3").arg(fovText, "5", QChar(0x00B0)),     "setFOV5Deg()",     "Ctrl+Alt+7");
+	addAction("actionSet_FOV_2deg",     fovGroup, QString("%1 %2%3").arg(fovText, "2", QChar(0x00B0)),     "setFOV2Deg()",     "Ctrl+Alt+8");
+	addAction("actionSet_FOV_1deg",     fovGroup, QString("%1 %2%3").arg(fovText, "1", QChar(0x00B0)),     "setFOV1Deg()",     "Ctrl+Alt+9");
+	addAction("actionSet_FOV_0_5deg", fovGroup, QString("%1 %2%3").arg(fovText, "0.5", QChar(0x00B0)),  "setFOV05Deg()",   "Ctrl+Alt+0");
+	// Remove all FOV settings
+	conf->beginGroup("FOV");
+	conf->remove("");
+	conf->endGroup();
 
 	viewportOffsetTimeline=new QTimeLine(1000, this);
 	viewportOffsetTimeline->setFrameRange(0, 100);
@@ -855,6 +874,56 @@ void StelMovementMgr::lookTowardsNCP(void)
 void StelMovementMgr::lookTowardsSCP(void)
 {
 	setViewDirectionJ2000(core->equinoxEquToJ2000(Vec3d(0,0,-1), StelCore::RefractionOff));
+}
+
+void StelMovementMgr::setFOV180Deg()
+{
+	zoomTo(180., 1.f);
+}
+
+void StelMovementMgr::setFOV90Deg()
+{
+	zoomTo(90., 1.f);
+}
+
+void StelMovementMgr::setFOV60Deg()
+{
+	zoomTo(60., 1.f);
+}
+
+void StelMovementMgr::setFOV45Deg()
+{
+	zoomTo(45., 1.f);
+}
+
+void StelMovementMgr::setFOV20Deg()
+{
+	zoomTo(20., 1.f);
+}
+
+void StelMovementMgr::setFOV10Deg()
+{
+	zoomTo(10., 1.f);
+}
+
+void StelMovementMgr::setFOV5Deg()
+{
+	zoomTo(5., 1.f);
+}
+
+void StelMovementMgr::setFOV2Deg()
+{
+	zoomTo(2., 1.f);
+}
+
+void StelMovementMgr::setFOV1Deg()
+{
+	zoomTo(1., 1.f);
+}
+
+void StelMovementMgr::setFOV05Deg()
+{
+	zoomTo(0.5, 1.f);
 }
 
 // Increment/decrement smoothly the vision field and position

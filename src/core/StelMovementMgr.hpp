@@ -334,6 +334,17 @@ private slots:
 	//! Connected to the viewportOffsetTimeLine, does the actual viewport shift.
 	void handleViewportOffsetMovement(qreal value);
 
+	void setFOV180Deg();
+	void setFOV90Deg();
+	void setFOV60Deg();
+	void setFOV45Deg();
+	void setFOV20Deg();
+	void setFOV10Deg();
+	void setFOV5Deg();
+	void setFOV2Deg();
+	void setFOV1Deg();
+	void setFOV05Deg();
+
 public:
 	Vec3d j2000ToMountFrame(const Vec3d& v) const;
 	Vec3d mountFrameToJ2000(const Vec3d& v) const;

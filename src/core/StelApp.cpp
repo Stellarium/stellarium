@@ -164,10 +164,6 @@ Q_IMPORT_PLUGIN(ExoplanetsStelPluginInterface)
 Q_IMPORT_PLUGIN(EquationOfTimeStelPluginInterface)
 #endif
 
-#ifdef USE_STATIC_PLUGIN_FOV
-Q_IMPORT_PLUGIN(FOVStelPluginInterface)
-#endif
-
 #ifdef USE_STATIC_PLUGIN_POINTERCOORDINATES
 Q_IMPORT_PLUGIN(PointerCoordinatesStelPluginInterface)
 #endif
