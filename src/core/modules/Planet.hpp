@@ -38,7 +38,8 @@ typedef void (*posFuncType)(double, double*, double*, void*);
 
 // GZ2016: new axis functions for external computation of axis orientations for selected objects.
 // The last variable is a pointer to the Planet object.
-typedef void (*axisFuncType)(double, double*, void*);
+// FIXME: Do we need this now in 2020?
+//typedef void (*axisFuncType)(double, double*, void*);
 
 typedef void (OsculatingFunctType)(double jde0,double jde,double xyz[3], double xyzdot[3]);
 
@@ -355,7 +356,7 @@ public:
 				 const double _w0,  const double _w1,
 				 //float _precessionRate,
 				 const double _siderealPeriod);
-	double getRotAscendingNode(void) const {return static_cast<double>(re.ascendingNode);}
+	double getRotAscendingNode(void) const {return re.ascendingNode; }
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// For Earth, this is the angle between axis and normal to current ecliptic of date, i.e. the ecliptic obliquity of date JDE.
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!

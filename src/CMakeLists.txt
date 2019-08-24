@@ -155,7 +155,6 @@ SET(stellarium_lib_SRCS
      core/planetsephems/jpleph.cpp
      core/planetsephems/EphemWrapper.cpp
      core/planetsephems/EphemWrapper.hpp
-
      core/planetsephems/tass17.c
      core/planetsephems/tass17.h
      core/planetsephems/vsop87.c
@@ -164,7 +163,8 @@ SET(stellarium_lib_SRCS
      core/planetsephems/de430.hpp
      core/planetsephems/de431.cpp
      core/planetsephems/de431.hpp
-
+     core/planetsephems/moonphys.c
+     core/planetsephems/moonphys.h
      core/modules/Atmosphere.cpp
      core/modules/Atmosphere.hpp
      core/modules/Asterism.cpp
