@@ -224,7 +224,7 @@ void ScriptConsole::appendOutputLine(const QString& s)
 
 void ScriptConsole::includeBrowse()
 {
-	ui->includeEdit->setText(QFileDialog::getExistingDirectory(&StelMainView::getInstance(), 
+	ui->includeEdit->setText(QFileDialog::getExistingDirectory(Q_NULLPTR,
 								   q_("Select Script Include Directory"),
 	                                                           StelFileMgr::getInstallationDir() + "/scripts"));
 }
