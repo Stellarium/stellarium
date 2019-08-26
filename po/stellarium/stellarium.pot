@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-17 22:56+0700\n"
+"POT-Creation-Date: 2019-08-26 11:49+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4544,19 +4544,19 @@ msgstr ""
 msgid "starchart"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:106
+#: src/gui/ScriptConsole.cpp:129
 msgid "Load Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:108 src/gui/ScriptConsole.cpp:128
+#: src/gui/ScriptConsole.cpp:131 src/gui/ScriptConsole.cpp:151
 msgid "Script Files"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:126
+#: src/gui/ScriptConsole.cpp:149
 msgid "Save Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:228
+#: src/gui/ScriptConsole.cpp:252
 msgid "Select Script Include Directory"
 msgstr ""
 
@@ -8620,7 +8620,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:380
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:399
 msgid "Log"
 msgstr ""
 
@@ -10621,55 +10621,69 @@ msgstr ""
 msgid "Get the recent GRS measurement"
 msgstr ""
 
-#: src/ui_scriptConsole.h:351
+#: src/ui_scriptConsole.h:370
 msgid "Script console"
 msgstr ""
 
-#: src/ui_scriptConsole.h:354
+#: src/ui_scriptConsole.h:373
 msgid "load script from file"
 msgstr ""
 
-#: src/ui_scriptConsole.h:358
+#: src/ui_scriptConsole.h:377
 msgid "save script to file"
 msgstr ""
 
-#: src/ui_scriptConsole.h:362
+#: src/ui_scriptConsole.h:381
 msgid "clear"
 msgstr ""
 
-#: src/ui_scriptConsole.h:366
+#: src/ui_scriptConsole.h:385
 msgid "pre-process script using SSC preprocessor"
 msgstr ""
 
-#: src/ui_scriptConsole.h:369
+#: src/ui_scriptConsole.h:388
 msgid "quickly load and run a utility script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:372
+#: src/ui_scriptConsole.h:391
 msgid "run script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:376
+#: src/ui_scriptConsole.h:395
 msgid "stop script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:379
+#: src/ui_scriptConsole.h:398
 msgid "Script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:400
 msgid "Output"
 msgstr ""
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:401
+msgid "Load scripts from the User Directory by default"
+msgstr ""
+
+#: src/ui_scriptConsole.h:402 plugins/Satellites/src/ui_satellitesDialog.h:796
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:310
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:351
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+msgid "Settings"
+msgstr ""
+
+#: src/ui_scriptConsole.h:404
 msgid "Cursor position"
 msgstr ""
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:406
 msgid "Include dir:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:407
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "..."
 msgstr ""
@@ -13236,16 +13250,6 @@ msgstr ""
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:559
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
-msgstr ""
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:796
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:310
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:351
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
-msgid "Settings"
 msgstr ""
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:799

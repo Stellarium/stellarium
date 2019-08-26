@@ -98,13 +98,36 @@ void ScriptConsole::createDialogContent()
 	connect(&StelApp::getInstance().getScriptMgr(), SIGNAL(scriptOutput(const QString&)), this, SLOT(appendOutputLine(const QString&)));
 	ui->tabs->setCurrentIndex(0);
 	ui->scriptEdit->setFocus();
+
+	useUserDir = StelApp::getInstance().getSettings()->value("gui/flag_scripts_user_dir", false).toBool();
+	ui->useUserDirCheckBox->setChecked(useUserDir);
+	connect(ui->useUserDirCheckBox, SIGNAL(toggled(bool)), this, SLOT(setFlagUserDir(bool)));
+}
+
+void ScriptConsole::setFlagUserDir(bool b)
+{
+	if (b!=useUserDir)
+	{
+		useUserDir = b;
+		StelApp::getInstance().getSettings()->setValue("gui/flag_scripts_user_dir", b);
+	}
 }
 
 void ScriptConsole::loadScript()
 {
+	QString openDir;
+	if (getFlagUserDir())
+	{
+		openDir = StelFileMgr::findFile("scripts", StelFileMgr::Flags(StelFileMgr::Writable|StelFileMgr::Directory));
+		if (openDir.isEmpty())
+			openDir = StelFileMgr::getUserDir();
+	}
+	else
+		openDir = StelFileMgr::getInstallationDir() + "/scripts";
+
 	QString fileName = QFileDialog::getOpenFileName(Q_NULLPTR,
 							q_("Load Script"),
-	                                                StelFileMgr::getInstallationDir() + "/scripts", 
+							openDir,
 							q_("Script Files") + " " + getFileMask());
 	QFile file(fileName);
 	if (file.open(QIODevice::ReadOnly))

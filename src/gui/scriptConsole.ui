@@ -458,6 +458,33 @@
           </item>
          </layout>
         </widget>
+        <widget class="QWidget" name="settingsTab">
+         <attribute name="title">
+          <string>Settings</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QCheckBox" name="useUserDirCheckBox">
+            <property name="text">
+             <string>Load scripts from the User Directory by default</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </widget>
        </widget>
       </item>
       <item>
