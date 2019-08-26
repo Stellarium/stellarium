@@ -130,6 +130,7 @@ void ScriptConsole::saveScript()
 	if (file.open(QIODevice::WriteOnly))
 	{
 		QTextStream out(&file);
+		out.setCodec("UTF-8");
 		out << ui->scriptEdit->toPlainText();
 		file.close();
 	}
