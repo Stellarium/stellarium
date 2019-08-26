@@ -22,6 +22,7 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "ui_ObservabilityDialog.h"
 #include "ObservabilityDialog.hpp"
 #include "Observability.hpp"
@@ -118,6 +119,7 @@ void ObservabilityDialog::createDialogContent()
 	        this, SLOT(updateControls()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()),
 	        plugin, SLOT(saveConfiguration()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), plugin, SLOT(saveConfiguration()));
 
 	// About tab
 	setAboutHtml();

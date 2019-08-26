@@ -764,6 +764,8 @@ signals:
 	void currentProjectionNameI18nChanged(const QString& newValue);
 	//! Emitted when gravity label use is changed
 	void flagGravityLabelsChanged(bool gravity);
+	//! Emitted when button "Save settings" is pushed
+	void configurationDataSaved();
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device

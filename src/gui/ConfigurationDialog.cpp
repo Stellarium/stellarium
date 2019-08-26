@@ -978,6 +978,8 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("main/restore_defaults", false);
 
 	updateConfigLabels();
+
+	emit core->configurationDataSaved();
 }
 
 void ConfigurationDialog::updateConfigLabels()
