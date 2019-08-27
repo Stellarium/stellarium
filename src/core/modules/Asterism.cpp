@@ -170,7 +170,7 @@ void Asterism::drawOptim(StelPainter& sPainter, const StelCore* core, const Sphe
 
 void Asterism::drawName(StelPainter& sPainter) const
 {
-	if ((nameFader.getInterstate() != 0.0f) || !flagAsterism)
+	if ((nameFader.getInterstate()==0.0f) || !flagAsterism)
 		return;
 
 	if (typeOfAsterism==2 && sPainter.getProjector()->getFov()>60.f)
