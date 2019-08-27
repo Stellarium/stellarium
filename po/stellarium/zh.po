@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-15 12:35+0700\n"
+"POT-Creation-Date: 2019-08-26 23:22+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: 殳玮 孙 <itun@qq.com>, 2019\n"
 "Language-Team: Chinese (https://www.transifex.com/stellarium/teams/80998/zh/)\n"
@@ -65,7 +65,7 @@ msgstr "星群"
 #: src/core/modules/NebulaMgr.cpp:457 src/core/modules/SolarSystem.cpp:254
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:611 src/core/StelCore.cpp:260
+#: src/core/StelApp.cpp:607 src/core/StelCore.cpp:260
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:818
 msgid "Display Options"
@@ -451,17 +451,16 @@ msgstr "光污染周期性变化"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:490
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
-#: plugins/Novae/src/gui/NovaeDialog.cpp:122
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:137
-#: plugins/FOV/src/gui/FOVWindow.cpp:87
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
+#: plugins/Novae/src/gui/NovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
 msgid "Author"
@@ -2116,139 +2115,139 @@ msgstr "数字巡天 (TOAST)"
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr "分层递进巡天 (实验性的)"
 
-#: src/core/StelApp.cpp:421
+#: src/core/StelApp.cpp:417
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:425
+#: src/core/StelApp.cpp:421
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:430
+#: src/core/StelApp.cpp:426
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:444
+#: src/core/StelApp.cpp:440
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:460
+#: src/core/StelApp.cpp:456
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:465
+#: src/core/StelApp.cpp:461
 msgid "Initializing locales..."
 msgstr ""
 
-#: src/core/StelApp.cpp:469
+#: src/core/StelApp.cpp:465
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:475
+#: src/core/StelApp.cpp:471
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:481
+#: src/core/StelApp.cpp:477
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:487
+#: src/core/StelApp.cpp:483
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:492
+#: src/core/StelApp.cpp:488
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:496
+#: src/core/StelApp.cpp:492
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:502
+#: src/core/StelApp.cpp:498
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:508
+#: src/core/StelApp.cpp:504
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:514
+#: src/core/StelApp.cpp:510
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:520
+#: src/core/StelApp.cpp:516
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:526
+#: src/core/StelApp.cpp:522
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:530
+#: src/core/StelApp.cpp:526
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:536
+#: src/core/StelApp.cpp:532
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:542
+#: src/core/StelApp.cpp:538
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:548
+#: src/core/StelApp.cpp:544
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:553
+#: src/core/StelApp.cpp:549
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:559
+#: src/core/StelApp.cpp:555
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:565
+#: src/core/StelApp.cpp:561
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:570
+#: src/core/StelApp.cpp:566
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:574
+#: src/core/StelApp.cpp:570
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:580
+#: src/core/StelApp.cpp:576
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:586
+#: src/core/StelApp.cpp:582
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:594
+#: src/core/StelApp.cpp:590
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:599
+#: src/core/StelApp.cpp:595
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:607
 msgid "Night mode"
 msgstr "夜间模式"
 
-#: src/core/StelApp.cpp:635
+#: src/core/StelApp.cpp:631
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:645
+#: src/core/StelApp.cpp:641
 msgid "Cannot create Spout sender. See log for details."
 msgstr "无法创建喷口发件人。 有关详细信息，请参阅日志。"
 
-#: src/core/StelApp.cpp:671
+#: src/core/StelApp.cpp:667
 msgid "Loading plugin"
 msgstr ""
 
@@ -2497,11 +2496,11 @@ msgstr "水平翻转"
 msgid "Flip scene vertically"
 msgstr "垂直翻转"
 
-#: src/core/StelCore.cpp:2309
+#: src/core/StelCore.cpp:2310
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr "目前禁止修正。如果您不了解您正在做什么，请不要使用此功能！"
 
-#: src/core/StelCore.cpp:2312
+#: src/core/StelCore.cpp:2313
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2512,7 +2511,7 @@ msgstr ""
 "在他的文章《古代的日食证明了爱因斯坦的相对论》[<em>Einstein's Theory of Relativity Confirmed by "
 "Ancient Solar Eclipses</em>]（%1）。要了解更多信息，请点击%2这里%3。"
 
-#: src/core/StelCore.cpp:2315
+#: src/core/StelCore.cpp:2316
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2521,7 +2520,7 @@ msgstr ""
 "这个经验公式由 G. M. Clemence 在文章《关于天文常数系统》[<em>On the system of astronomical "
 "constants</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:2318
+#: src/core/StelCore.cpp:2319
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2533,7 +2532,7 @@ msgstr ""
 "在他的《用于计算器的天文学公式》[<em>Astronomical Formulae for Calculators</em>] 中使用。计算机程序 "
 "SunTracker Pro 也使用了这一公式。"
 
-#: src/core/StelCore.cpp:2322
+#: src/core/StelCore.cpp:2323
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -2543,7 +2542,7 @@ msgstr ""
 "Ephemeris</em>]和《日食的法规》[<em>Canon of Solar Eclipses</em>]中使用的 IAU (1952) "
 "公式稍加修改之后的版本。"
 
-#: src/core/StelCore.cpp:2326
+#: src/core/StelCore.cpp:2327
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2552,7 +2551,7 @@ msgid ""
 msgstr ""
 "塔克曼[Tuckerman]的表格（1962年，1964年）以5天和10天的间隔列出了太阳、月球和行星从公元前601年到公元1649年的位置。戈德斯坦[Goldstine]的表格（1973年）也含蓄地采用了相同的关系。"
 
-#: src/core/StelCore.cpp:2330
+#: src/core/StelCore.cpp:2331
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2563,7 +2562,7 @@ msgstr ""
 "accelerations of the earth and moon from early astronomical "
 "observations</em>] （%1）中公布。"
 
-#: src/core/StelCore.cpp:2333
+#: src/core/StelCore.cpp:2334
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2572,7 +2571,7 @@ msgstr ""
 "此公式由 F. R. Stephenson 在文章《望远镜前的天文学观测》[<em>Pre-Telescopic Astronomical "
 "Observations</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:2336
+#: src/core/StelCore.cpp:2337
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2585,7 +2584,7 @@ msgstr ""
 " the correction delta T E.T.-U.T. in the period 1800-1975</em>]（%1）中公布。它与 "
 "Brouwer 于1952年公布的数据相吻合。"
 
-#: src/core/StelCore.cpp:2339
+#: src/core/StelCore.cpp:2340
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2594,7 +2593,7 @@ msgstr ""
 "此算法于1986年被 P. Bretagnon 和 L. Simon 在《从 -4000 到 +2800 的行星程序和表格》[<em>Planetary"
 " Programs and Tables from -4000 to +2800</em> ]中，以及计算机程序 RedShift 中被采用。"
 
-#: src/core/StelCore.cpp:2342
+#: src/core/StelCore.cpp:2343
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2604,11 +2603,11 @@ msgstr ""
 "这一公式由 F. R. Stephenson 和 L. V. Morrison 在题为《地球自转的长周期变化 - 700 B.C. 到 A.D. "
 "1980》(%1)的论文中发表。"
 
-#: src/core/StelCore.cpp:2345
+#: src/core/StelCore.cpp:2346
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr "天文馆程序 Guide 7 中使用了此算法。"
 
-#: src/core/StelCore.cpp:2348
+#: src/core/StelCore.cpp:2349
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2618,14 +2617,14 @@ msgstr ""
 "Eclipses: 1986-2035</em> ]（1987年）以及《五十年的日食法规：1986-2035》[<em>Fifty Year Canon"
 " of Solar Eclipses: 1986-2035</em> ]（1989年） 中给出。"
 
-#: src/core/StelCore.cpp:2351
+#: src/core/StelCore.cpp:2352
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
 "solar eclipse records dating between 2137 BCE and 1715 CE."
 msgstr "这一公式由 K.M. Borkowski (%1) 在分析了 2137 BCE 到 1715 CE 之间的31次日食数据过后得出。"
 
-#: src/core/StelCore.cpp:2354
+#: src/core/StelCore.cpp:2355
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2637,7 +2636,7 @@ msgstr ""
 "from U.T. to E.T. for the Period 1800-1988</em> (%1) 中发布，方程用 Stephenson & "
 "Morrison (1984) 给出的数据拟合而成。"
 
-#: src/core/StelCore.cpp:2357
+#: src/core/StelCore.cpp:2358
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2646,7 +2645,7 @@ msgstr ""
 "该公式是M. Chapront-Touze＆J. Chapront在ELP 2000-85月球理论的缩略版<em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000 </em>(1991)中采用的。"
 
-#: src/core/StelCore.cpp:2360
+#: src/core/StelCore.cpp:2361
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2656,7 +2655,7 @@ msgstr ""
 "这方程由 F. R. Stephenson 及 L. V. Morrison 在论文 <em>Long-Term Fluctuations in the"
 " Earth's Rotation: 700 BC to AD 1990</em> (%1) 中发表。"
 
-#: src/core/StelCore.cpp:2363
+#: src/core/StelCore.cpp:2364
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2665,7 +2664,7 @@ msgstr ""
 "F. R. Stephenson 在他的书 <em>Historical Eclipses and Earth's Rotation</em> (%1)"
 " 中发表了这个公式。"
 
-#: src/core/StelCore.cpp:2366
+#: src/core/StelCore.cpp:2367
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2675,14 +2674,14 @@ msgstr ""
 "1620..2000, 并包括一个 Chapront的变种, Chapront-Touze & Francou (1997)用于 "
 "1620..2000以外的日期"
 
-#: src/core/StelCore.cpp:2369
+#: src/core/StelCore.cpp:2370
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
 "use this formula in their interactive website %1JPL Horizons%2."
 msgstr "NASA喷气动力实验室太阳系动力研究组在他们的交互式网站 %1 JPL 地平线上使用了该公式 %2"
 
-#: src/core/StelCore.cpp:2372
+#: src/core/StelCore.cpp:2373
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2691,7 +2690,7 @@ msgstr ""
 "此多项式由 J. Meeus 和 L. Simons 在文章《公元1620年-2000年ΔT 的多项式近似》[<em>Polynomial "
 "approximations to Delta T, 1620-2000 AD</em>]（%1）中公布。"
 
-#: src/core/StelCore.cpp:2375
+#: src/core/StelCore.cpp:2376
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -2700,7 +2699,7 @@ msgstr ""
 "O。Montenbruck＆T. Pfleger的<em>Astronomy on the Personal "
 "Computer</em>（2000）的第四版在最近提供了简单的三阶多项式数据拟合。"
 
-#: src/core/StelCore.cpp:2378
+#: src/core/StelCore.cpp:2379
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -2708,7 +2707,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2381
+#: src/core/StelCore.cpp:2382
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2718,7 +2717,7 @@ msgstr ""
 "这个重要的解决方案由L.V.Morrison和F.R.Stephenson在<em>Historical values of the Earth's "
 "clock error %1T and the calculation of eclipses</em> (%2)  (%3)中发表。"
 
-#: src/core/StelCore.cpp:2384
+#: src/core/StelCore.cpp:2385
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2729,7 +2728,7 @@ msgstr ""
 "一日的长度(LOD；由Stephenson & Morrison (%2)决定)，Victor Reijs通过使用单纯形优化的余弦平方函数推导一个 a "
 "%1T方程式。这是基于一个由Stephenson描述的可能周期 (%2)。更多内容看%3here%4。"
 
-#: src/core/StelCore.cpp:2387 src/core/StelCore.cpp:2390
+#: src/core/StelCore.cpp:2388 src/core/StelCore.cpp:2391
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2743,15 +2742,15 @@ msgstr ""
 "及他们的<em>《五千年日食宝典：公元前1900年到公元3000年》</em>(2006)。此方程式亦用在太阳，月球及行星星历软件SOLEX。 "
 "在公元前1900年到公元3000年之间有效。"
 
-#: src/core/StelCore.cpp:2387
+#: src/core/StelCore.cpp:2388
 msgid "Used by default."
 msgstr "默认使用。"
 
-#: src/core/StelCore.cpp:2390
+#: src/core/StelCore.cpp:2391
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "在没有附加的LUN加速的情况下的PATCHED VERSION。"
 
-#: src/core/StelCore.cpp:2393
+#: src/core/StelCore.cpp:2394
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2761,7 +2760,7 @@ msgstr ""
 "这一公式由F. R. Stephenson和L. V. Morrison 在题为<em>《Ancient eclipses and dating the"
 " fall of Babylon》(1984)的论文中发表</em> (%1)。"
 
-#: src/core/StelCore.cpp:2396
+#: src/core/StelCore.cpp:2397
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2772,7 +2771,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1)中，并且由Sana Islam "
 "在2013年评审。"
 
-#: src/core/StelCore.cpp:2399
+#: src/core/StelCore.cpp:2400
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2782,7 +2781,7 @@ msgstr ""
 "这多项式逼近的0.6秒精度由M·哈立德、玛丽雅姆苏塔纳和法希姆扎伊迪发表在<em>Delta T: Polynomial Approximation "
 "of Time Period 1620-2013</em> (%1)。"
 
-#: src/core/StelCore.cpp:2402
+#: src/core/StelCore.cpp:2403
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2794,7 +2793,7 @@ msgstr ""
 "of the Earth’s rotation: 720 BC to AD 2015 </ em> (%1)中。 "
 "在范围之外（建模具有样条拟合），它提供近似抛物线的值。"
 
-#: src/core/StelCore.cpp:2405
+#: src/core/StelCore.cpp:2406
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2804,48 +2803,48 @@ msgstr ""
 "G.Henriksson 给出的基于C.Schoch公式（1931）的解出版在<em>The Acceleration of the Moon and "
 "the Universe - the Mass of the Graviton</em>一文中。"
 
-#: src/core/StelCore.cpp:2408
+#: src/core/StelCore.cpp:2409
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
 " by the user."
 msgstr "这是一个用于计算 %1T 的二次方程，系数由用户定义。"
 
-#: src/core/StelCore.cpp:2411 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2412 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "错误"
 
-#: src/core/StelCore.cpp:2419
+#: src/core/StelCore.cpp:2420
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
 "requires an adaptation, see Guide for details."
 msgstr "解决方案的值得 %1 为%2 (月球的长期加速度)需要适应，详见指南。"
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2463
 msgid "with zero values outside this range"
 msgstr "此范围之外的值为零"
 
-#: src/core/StelCore.cpp:2465
+#: src/core/StelCore.cpp:2466
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr "精确度一般在一秒内，超出该范围的数据无价值"
 
-#: src/core/StelCore.cpp:2468
+#: src/core/StelCore.cpp:2469
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
 msgstr "平均误差小于1秒，最大误差1.9s，以及超出年数限制的值"
 
-#: src/core/StelCore.cpp:2475
+#: src/core/StelCore.cpp:2476
 msgid "with values for the limit years outside this range"
 msgstr "超出限制年数范围的值"
 
-#: src/core/StelCore.cpp:2485
+#: src/core/StelCore.cpp:2486
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "在 %1 年和 %2，%3 年之间有效"
 
-#: src/core/StelCore.cpp:2487
+#: src/core/StelCore.cpp:2488
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "在 %1 年和 %2 年之间有效"
@@ -3249,12 +3248,20 @@ msgstr "朝向北天极"
 msgid "Look towards South Celestial pole"
 msgstr "朝向南天极"
 
-#: src/core/StelMovementMgr.cpp:217
+#: src/core/StelMovementMgr.cpp:207
+msgid "Field of View"
+msgstr "视场"
+
+#: src/core/StelMovementMgr.cpp:208
+msgid "Set FOV to"
+msgstr "将FOV设置为"
+
+#: src/core/StelMovementMgr.cpp:236
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "赤道仪"
 
-#: src/core/StelMovementMgr.cpp:219
+#: src/core/StelMovementMgr.cpp:238
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "经纬仪"
@@ -3545,88 +3552,86 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "选择储存截图资料夹"
 
-#: src/gui/ConfigurationDialog.cpp:985
+#: src/gui/ConfigurationDialog.cpp:987
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "启动时的视野大小: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:993
+#: src/gui/ConfigurationDialog.cpp:995
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "启动时的地平坐标方位角/地平高度: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1052
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
+#: src/gui/ConfigurationDialog.cpp:1054
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 msgid "Authors"
 msgstr "作者"
 
-#: src/gui/ConfigurationDialog.cpp:1053
+#: src/gui/ConfigurationDialog.cpp:1055
 msgid "Contact"
 msgstr "联系信息"
 
-#: src/gui/ConfigurationDialog.cpp:1055 src/scripting/StelScriptMgr.cpp:242
+#: src/gui/ConfigurationDialog.cpp:1057 src/scripting/StelScriptMgr.cpp:242
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:488
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:110
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
-#: plugins/FOV/src/gui/FOVWindow.cpp:85
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
+#: plugins/Novae/src/gui/NovaeDialog.cpp:122
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:137
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:144
 msgid "Version"
 msgstr "版本"
 
-#: src/gui/ConfigurationDialog.cpp:1056 src/scripting/StelScriptMgr.cpp:237
+#: src/gui/ConfigurationDialog.cpp:1058 src/scripting/StelScriptMgr.cpp:237
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
-#: plugins/Novae/src/gui/NovaeDialog.cpp:121
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
-#: plugins/FOV/src/gui/FOVWindow.cpp:86
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
+#: plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:113
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:145
 msgid "License"
 msgstr "授权条款"
 
-#: src/gui/ConfigurationDialog.cpp:1060
+#: src/gui/ConfigurationDialog.cpp:1062
 msgctxt "license"
 msgid "unknown"
 msgstr "未知"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Running script: "
 msgstr "执行指令： "
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Running script: [none]"
 msgstr "执行指令：[空白]"
 
-#: src/gui/ConfigurationDialog.cpp:1240
+#: src/gui/ConfigurationDialog.cpp:1242
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3634,16 +3639,16 @@ msgstr ""
 "新的天体目录经已下载完毕！\n"
 "请重新启动 Stellarium 以使用新的目录。"
 
-#: src/gui/ConfigurationDialog.cpp:1244
+#: src/gui/ConfigurationDialog.cpp:1246
 msgid "All available star catalogs have been installed."
 msgstr "所有可用的星体资料均已安装。"
 
-#: src/gui/ConfigurationDialog.cpp:1249
+#: src/gui/ConfigurationDialog.cpp:1251
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "获取第%1组天体目录（共%2组）"
 
-#: src/gui/ConfigurationDialog.cpp:1256
+#: src/gui/ConfigurationDialog.cpp:1258
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3652,7 +3657,7 @@ msgstr ""
 "正在下载 %1……\n"
 "（您可以关闭此窗口）"
 
-#: src/gui/ConfigurationDialog.cpp:1263
+#: src/gui/ConfigurationDialog.cpp:1265
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3663,7 +3668,7 @@ msgstr ""
 "天体数量: %2 百万\n"
 "星等范围: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1309 src/gui/ConfigurationDialog.cpp:1346
+#: src/gui/ConfigurationDialog.cpp:1311 src/gui/ConfigurationDialog.cpp:1348
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3672,11 +3677,11 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1401
 msgid "Verifying file integrity..."
 msgstr "正在校验文件..."
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1405
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3685,196 +3690,196 @@ msgstr ""
 "在下载 %1 时发生了错误：\n"
 "文件被损坏。"
 
-#: src/gui/ConfigurationDialog.cpp:1452 src/gui/ConfigurationDialog.cpp:1461
+#: src/gui/ConfigurationDialog.cpp:1454 src/gui/ConfigurationDialog.cpp:1463
 msgid "Available"
 msgstr "连接可用"
 
-#: src/gui/ConfigurationDialog.cpp:1454 src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1456 src/gui/ConfigurationDialog.cpp:1465
 msgid "Not Available"
 msgstr "连接不可用"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1532
+#: src/gui/ConfigurationDialog.cpp:1534
 msgid "Algorithm of"
 msgstr "ΔT的算法"
 
-#: src/gui/ConfigurationDialog.cpp:1545
+#: src/gui/ConfigurationDialog.cpp:1547
 msgid "Without correction"
 msgstr "未校正"
 
-#: src/gui/ConfigurationDialog.cpp:1546
+#: src/gui/ConfigurationDialog.cpp:1548
 msgid "Schoch (1931)"
 msgstr "Schoch（1931年）"
 
-#: src/gui/ConfigurationDialog.cpp:1547
+#: src/gui/ConfigurationDialog.cpp:1549
 msgid "Clemence (1948)"
 msgstr "克莱曼斯"
 
-#: src/gui/ConfigurationDialog.cpp:1548
+#: src/gui/ConfigurationDialog.cpp:1550
 msgid "IAU (1952)"
 msgstr "IAU （1952年）"
 
-#: src/gui/ConfigurationDialog.cpp:1549
+#: src/gui/ConfigurationDialog.cpp:1551
 msgid "Astronomical Ephemeris (1960)"
 msgstr "星历表（1960年）"
 
-#: src/gui/ConfigurationDialog.cpp:1550
+#: src/gui/ConfigurationDialog.cpp:1552
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "塔克曼（1962, 1964）和哥斯廷（1973）"
 
-#: src/gui/ConfigurationDialog.cpp:1551
+#: src/gui/ConfigurationDialog.cpp:1553
 msgid "Muller & Stephenson (1975)"
 msgstr "穆勒和斯蒂芬森（1975）"
 
-#: src/gui/ConfigurationDialog.cpp:1552
+#: src/gui/ConfigurationDialog.cpp:1554
 msgid "Stephenson (1978)"
 msgstr "斯蒂芬森（1978）"
 
-#: src/gui/ConfigurationDialog.cpp:1553
+#: src/gui/ConfigurationDialog.cpp:1555
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel和 Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1554
+#: src/gui/ConfigurationDialog.cpp:1556
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel 和 Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1555
+#: src/gui/ConfigurationDialog.cpp:1557
 msgid "Morrison & Stephenson (1982)"
 msgstr "莫里森和斯蒂芬森（1982）"
 
-#: src/gui/ConfigurationDialog.cpp:1556
+#: src/gui/ConfigurationDialog.cpp:1558
 msgid "Stephenson & Morrison (1984)"
 msgstr "斯蒂芬森和莫里森（1984）"
 
-#: src/gui/ConfigurationDialog.cpp:1557
+#: src/gui/ConfigurationDialog.cpp:1559
 msgid "Stephenson & Houlden (1986)"
 msgstr "斯蒂芬森和胡尔登（1986）"
 
-#: src/gui/ConfigurationDialog.cpp:1558
+#: src/gui/ConfigurationDialog.cpp:1560
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1559
+#: src/gui/ConfigurationDialog.cpp:1561
 msgid "Borkowski (1988)"
 msgstr "博尔科夫斯基（1988）"
 
-#: src/gui/ConfigurationDialog.cpp:1560
+#: src/gui/ConfigurationDialog.cpp:1562
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze 和 Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1561
+#: src/gui/ConfigurationDialog.cpp:1563
 msgid "Stephenson & Morrison (1995)"
 msgstr "斯蒂芬森和莫里森（1995）"
 
-#: src/gui/ConfigurationDialog.cpp:1562
+#: src/gui/ConfigurationDialog.cpp:1564
 msgid "Stephenson (1997)"
 msgstr "斯蒂芬森（1997）"
 
-#: src/gui/ConfigurationDialog.cpp:1564
+#: src/gui/ConfigurationDialog.cpp:1566
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (以及 Chapront, Chapront-Touze 和 Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1565
+#: src/gui/ConfigurationDialog.cpp:1567
 msgid "JPL Horizons"
 msgstr "JPL 新视野"
 
-#: src/gui/ConfigurationDialog.cpp:1566
+#: src/gui/ConfigurationDialog.cpp:1568
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus 和 Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1567
+#: src/gui/ConfigurationDialog.cpp:1569
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "莫里森和斯蒂芬森（2004, 2005）"
 
-#: src/gui/ConfigurationDialog.cpp:1568
+#: src/gui/ConfigurationDialog.cpp:1570
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison & Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1570
+#: src/gui/ConfigurationDialog.cpp:1572
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak 和 Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1573
+#: src/gui/ConfigurationDialog.cpp:1575
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak 和 Meeus (2006)不提供额外的月球加速"
 
-#: src/gui/ConfigurationDialog.cpp:1575
+#: src/gui/ConfigurationDialog.cpp:1577
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1576
+#: src/gui/ConfigurationDialog.cpp:1578
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1577
+#: src/gui/ConfigurationDialog.cpp:1579
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck 和 Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1578
+#: src/gui/ConfigurationDialog.cpp:1580
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1579
+#: src/gui/ConfigurationDialog.cpp:1581
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq和 Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1580
+#: src/gui/ConfigurationDialog.cpp:1582
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana 和 Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1581
+#: src/gui/ConfigurationDialog.cpp:1583
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1582
+#: src/gui/ConfigurationDialog.cpp:1584
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "%1T 的自定义公式"
 
-#: src/gui/ConfigurationDialog.cpp:1631 src/gui/ConfigurationDialog.cpp:1666
+#: src/gui/ConfigurationDialog.cpp:1633 src/gui/ConfigurationDialog.cpp:1668
 #: src/gui/StelGuiItems.cpp:681 src/gui/LocationDialog.cpp:469
 msgid "System default"
 msgstr "系统默认"
 
-#: src/gui/ConfigurationDialog.cpp:1632
+#: src/gui/ConfigurationDialog.cpp:1634
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "年-月-日（ISO 8601）"
 
-#: src/gui/ConfigurationDialog.cpp:1633
+#: src/gui/ConfigurationDialog.cpp:1635
 msgid "dd-mm-yyyy"
 msgstr "日-月-年"
 
-#: src/gui/ConfigurationDialog.cpp:1634
+#: src/gui/ConfigurationDialog.cpp:1636
 msgid "mm-dd-yyyy"
 msgstr "月-日-年"
 
-#: src/gui/ConfigurationDialog.cpp:1667
+#: src/gui/ConfigurationDialog.cpp:1669
 msgid "12-hour format"
 msgstr "12小时制"
 
-#: src/gui/ConfigurationDialog.cpp:1668
+#: src/gui/ConfigurationDialog.cpp:1670
 msgid "24-hour format"
 msgstr "24小时制"
 
-#: src/gui/ConfigurationDialog.cpp:1695 src/ui_configurationDialog.h:1565
+#: src/gui/ConfigurationDialog.cpp:1697 src/ui_configurationDialog.h:1565
 #: plugins/Oculars/src/Oculars.cpp:2410
 #: plugins/Observability/src/Observability.cpp:190
 msgid "None"
 msgstr "无"
 
-#: src/gui/ConfigurationDialog.cpp:1696
+#: src/gui/ConfigurationDialog.cpp:1698
 msgid "5/6/5 bits"
 msgstr "5/6/5 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1697
+#: src/gui/ConfigurationDialog.cpp:1699
 msgid "6/6/6 bits"
 msgstr "6/6/6 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1698
+#: src/gui/ConfigurationDialog.cpp:1700
 msgid "8/8/8 bits"
 msgstr "8/8/8 bits"
 
-#: src/gui/ConfigurationDialog.cpp:1699
+#: src/gui/ConfigurationDialog.cpp:1701
 msgid "10/10/10 bits"
 msgstr "10/10/10 bits"
 
@@ -4131,13 +4136,13 @@ msgstr "OSX开发: %1"
 #: src/gui/HelpDialog.cpp:448
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:491
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:655
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:116
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:223
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
 msgid "Contributors"
 msgstr "贡献者"
 
@@ -4638,19 +4643,19 @@ msgstr "自然的"
 msgid "starchart"
 msgstr "星图"
 
-#: src/gui/ScriptConsole.cpp:106
+#: src/gui/ScriptConsole.cpp:129
 msgid "Load Script"
 msgstr "加载脚本"
 
-#: src/gui/ScriptConsole.cpp:108 src/gui/ScriptConsole.cpp:128
+#: src/gui/ScriptConsole.cpp:131 src/gui/ScriptConsole.cpp:151
 msgid "Script Files"
 msgstr "脚本文件"
 
-#: src/gui/ScriptConsole.cpp:126
+#: src/gui/ScriptConsole.cpp:149
 msgid "Save Script"
 msgstr "保存脚本"
 
-#: src/gui/ScriptConsole.cpp:228
+#: src/gui/ScriptConsole.cpp:252
 msgid "Select Script Include Directory"
 msgstr "选择脚本包含目录"
 
@@ -4701,7 +4706,7 @@ msgstr "赤纬"
 #: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:507
 #: src/gui/AstroCalcDialog.cpp:698 src/gui/AstroCalcDialog.cpp:700
 #: src/gui/AstroCalcDialog.cpp:737 src/gui/AstroCalcDialog.cpp:1318
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1205
 msgid "Azimuth"
 msgstr "方位角"
 
@@ -4711,7 +4716,7 @@ msgstr "方位角"
 #: src/gui/AstroCalcDialog.cpp:1320 src/gui/AstroCalcDialog.cpp:2324
 #: src/gui/AstroCalcDialog.cpp:2789 src/gui/AstroCalcDialog.cpp:3074
 #: src/gui/AstroCalcDialog.cpp:3076 plugins/Satellites/src/Satellite.cpp:310
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1203
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
 msgid "Altitude"
 msgstr "地平高度"
 
@@ -4911,13 +4916,13 @@ msgstr "高自行星"
 
 #: src/gui/AstroCalcDialog.cpp:1173 src/gui/AstroCalcDialog.cpp:1668
 #: src/gui/AstroCalcDialog.cpp:3389 src/gui/AstroCalcDialog.cpp:4690
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:1670
 #: src/gui/AstroCalcDialog.cpp:3391 src/gui/AstroCalcDialog.cpp:4692
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "CSV (Comma delimited)"
 msgstr "CSV (逗号分隔)"
 
@@ -5281,12 +5286,12 @@ msgstr ""
 
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:2830
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:186
-#: plugins/Novae/src/gui/NovaeDialog.cpp:182
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:180
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:743
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
+#: plugins/Novae/src/gui/NovaeDialog.cpp:184
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:182
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:346
 msgctxt "time"
 msgid "h"
 msgstr "时"
@@ -8785,7 +8790,7 @@ msgstr "帮助"
 msgid "About"
 msgstr "关于"
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:380
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:399
 msgid "Log"
 msgstr "记录"
 
@@ -9998,7 +10003,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "图形界面附加设置"
 
 #: src/ui_configurationDialog.h:1506
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1201
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "时间"
@@ -10080,7 +10085,6 @@ msgstr "保存更改并在下次启动 Stellarium 时恢复"
 
 #: src/ui_configurationDialog.h:1541
 #: plugins/NavStars/src/ui_navStarsWindow.h:220
-#: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
@@ -10092,7 +10096,6 @@ msgstr "恢复 Stellarium 的原有设置"
 
 #: src/ui_configurationDialog.h:1545
 #: plugins/NavStars/src/ui_navStarsWindow.h:219
-#: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
@@ -10223,7 +10226,7 @@ msgid "Constellation"
 msgstr "星座"
 
 #: src/ui_configurationDialog.h:1613
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Hour angle/Declination"
 msgstr "时角/赤纬"
 
@@ -10792,55 +10795,69 @@ msgstr "日期和时间(UTC):"
 msgid "Get the recent GRS measurement"
 msgstr "最近的大红斑观测"
 
-#: src/ui_scriptConsole.h:351
+#: src/ui_scriptConsole.h:370
 msgid "Script console"
 msgstr "脚本控制台"
 
-#: src/ui_scriptConsole.h:354
+#: src/ui_scriptConsole.h:373
 msgid "load script from file"
 msgstr "从文件载入脚本"
 
-#: src/ui_scriptConsole.h:358
+#: src/ui_scriptConsole.h:377
 msgid "save script to file"
 msgstr "保存脚本至文件"
 
-#: src/ui_scriptConsole.h:362
+#: src/ui_scriptConsole.h:381
 msgid "clear"
 msgstr "清除"
 
-#: src/ui_scriptConsole.h:366
+#: src/ui_scriptConsole.h:385
 msgid "pre-process script using SSC preprocessor"
 msgstr "使用 SSC 处理器预处理脚本"
 
-#: src/ui_scriptConsole.h:369
+#: src/ui_scriptConsole.h:388
 msgid "quickly load and run a utility script"
 msgstr "快速加载并运行实用脚本"
 
-#: src/ui_scriptConsole.h:372
+#: src/ui_scriptConsole.h:391
 msgid "run script"
 msgstr "运行脚本"
 
-#: src/ui_scriptConsole.h:376
+#: src/ui_scriptConsole.h:395
 msgid "stop script"
 msgstr "停止脚本"
 
-#: src/ui_scriptConsole.h:379
+#: src/ui_scriptConsole.h:398
 msgid "Script"
 msgstr "脚本"
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:400
 msgid "Output"
 msgstr "输出"
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:401
+msgid "Load scripts from the User Directory by default"
+msgstr ""
+
+#: src/ui_scriptConsole.h:402 plugins/Satellites/src/ui_satellitesDialog.h:796
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:310
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:351
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+msgid "Settings"
+msgstr "设置"
+
+#: src/ui_scriptConsole.h:404
 msgid "Cursor position"
 msgstr "光标位置"
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:406
 msgid "Include dir:"
 msgstr "包含目录："
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:407
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "..."
 msgstr "..."
@@ -11662,41 +11679,39 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
 #: plugins/Oculars/src/gui/OcularDialog.cpp:554
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:693
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
-#: plugins/Novae/src/gui/NovaeDialog.cpp:138
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
-#: plugins/FOV/src/gui/FOVWindow.cpp:92
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:94
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
+#: plugins/Novae/src/gui/NovaeDialog.cpp:140
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:96
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:172
 msgid "Links"
 msgstr "链接"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Oculars/src/gui/OcularDialog.cpp:555
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
-#: plugins/Novae/src/gui/NovaeDialog.cpp:139
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
-#: plugins/FOV/src/gui/FOVWindow.cpp:93
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:104
+#: plugins/Novae/src/gui/NovaeDialog.cpp:141
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:139
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:173
 #, qt-format
 msgid ""
@@ -11707,31 +11722,9 @@ msgstr "通过Github网站提供支持。 发帖时务必在标题中加入“�
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 #: plugins/Oculars/src/gui/OcularDialog.cpp:558
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:697
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
-#: plugins/Novae/src/gui/NovaeDialog.cpp:142
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:140
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:167
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:213
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
-#: plugins/FOV/src/gui/FOVWindow.cpp:96
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:176
-msgid "If you have a question, you can {get an answer here}."
-msgstr "如果你有问题，你可以 {在这里提出}。"
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:560
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:699
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
@@ -11740,20 +11733,19 @@ msgstr "如果你有问题，你可以 {在这里提出}。"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:142
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
-#: plugins/FOV/src/gui/FOVWindow.cpp:98
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:100
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:178
-msgid "Bug reports and feature requests can be made {here}."
-msgstr "在{这里}提出功能请求和bug报告。"
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:176
+msgid "If you have a question, you can {get an answer here}."
+msgstr "如果你有问题，你可以 {在这里提出}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:701
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:700
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:150
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:109
 #: plugins/Novae/src/gui/NovaeDialog.cpp:146
@@ -11762,10 +11754,30 @@ msgstr "在{这里}提出功能请求和bug报告。"
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:144
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:217
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
-#: plugins/FOV/src/gui/FOVWindow.cpp:100
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:102
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:144
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:178
+msgid "Bug reports and feature requests can be made {here}."
+msgstr "在{这里}提出功能请求和bug报告。"
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:111
+#: plugins/Novae/src/gui/NovaeDialog.cpp:148
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:173
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:146
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:104
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:146
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:180
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -11847,7 +11859,6 @@ msgstr "恢复默认设置"
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:581
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
-#: plugins/FOV/src/ui_fovWindow.h:373
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
@@ -13035,47 +13046,47 @@ msgctxt "operational status"
 msgid "decayed"
 msgstr "损坏"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Save predicted Iridium flares as..."
 msgstr "保存铱耀斑预测到..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:367
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:366
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "Predicted Iridium flares"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
 msgid "Stellarium Satellites Plugin"
 msgstr "Stellarium 人造卫星插件"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:657
 #: plugins/Satellites/src/ui_satellitesDialog.h:848
 msgid "Iridium flares"
 msgstr "铱星闪光"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:660
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:661
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
 msgstr "此卫星插件可以预测地球轨道上的人造卫星的位置。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:662
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
 msgid "Notes for users"
 msgstr "用户提示"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr "仅当观测者位于地球时，卫星与轨道才会显示。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
 "weirdness when looking at dates outside this range."
 msgstr "预测的位置仅在较短时间内较为准确（距目前几天、几周或是一个月的时间内）。当您超出了这个时间段，预测的结果可能会有较大的误差。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:666
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -13084,7 +13095,7 @@ msgstr "轨道资料很容易过时（在数周甚至几天后）。如果您需
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:667
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -13092,25 +13103,25 @@ msgid ""
 "found in the user data directory, under \"modules/Satellites/\"."
 msgstr "在“%2”选项卡中点击“%1”按钮会重置 %3 文件。旧的文件会被备份为 %4，您可以在用户数据目录中找到它。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:673
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:674
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
 msgstr "此卫星插件目前仍在开发阶段，一些功能可能不甚完全，甚至是存在 Bug。"
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
 msgid "TLE data updates"
 msgstr "两行式轨道数据(TLE)更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
 " than 72 hours old. "
 msgstr "此卫星插件能够自动从网络下载两行式轨道数据(TLE)，默认的更新频率为72小时，超过此时间的旧数据将被更新。 "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -13118,33 +13129,33 @@ msgid ""
 "(see %1 for an example)."
 msgstr "如果您禁用网络更新，则可以从您的本地文件中获取更新。此文件必须使用与 Celestrak 更新相同的格式（示例参见 %1）。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:681
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
 msgstr "<b>注意：</b>如果在更新数据中的卫星名称中出现了方括号，则其内容会被移除。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:683
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
 msgid "Adding new satellites"
 msgstr "添加新卫星"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:685
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr "确保要添加的人造卫星包含在人造卫星配置对话框的“源”选项卡中列出的其中一个URL中。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:685
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:686
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr "转到“卫星”选项卡，然后单击“+”按钮。 选择您要添加的卫星，然后选择“添加”按钮。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:687
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "Technical notes"
 msgstr "技术说明"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input. "
@@ -13152,7 +13163,7 @@ msgstr ""
 "此插件使用简化常规/深空扰动的近似解析解模型(SGP4/SDP4)来计算卫星的位置，并使用北美防空联合司令部的两行式轨道数据(NORAD "
 "TLE)作为输入。 "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:690
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -13162,147 +13173,147 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:691
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:692
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "您可以参阅%1此文档%2来获取详情。"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
-#: plugins/Novae/src/gui/NovaeDialog.cpp:161
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:159
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:186
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:720
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
+#: plugins/Novae/src/gui/NovaeDialog.cpp:163
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
 msgid "Next update"
 msgstr "下次更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:724
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
-#: plugins/Novae/src/gui/NovaeDialog.cpp:167
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
+#: plugins/Novae/src/gui/NovaeDialog.cpp:169
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
 msgid "Internet updates disabled"
 msgstr "Internet 更新已禁用"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
-#: plugins/Novae/src/gui/NovaeDialog.cpp:169
-#: plugins/Novae/src/gui/NovaeDialog.cpp:215
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:237
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:194
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:275
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:406
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:221
+#: plugins/Novae/src/gui/NovaeDialog.cpp:171
+#: plugins/Novae/src/gui/NovaeDialog.cpp:217
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid "Updating now..."
 msgstr "正在更新……"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:731
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
-#: plugins/Novae/src/gui/NovaeDialog.cpp:171
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:732
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:177
+#: plugins/Novae/src/gui/NovaeDialog.cpp:173
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:335
 msgid "< 1 minute"
 msgstr "< 1分钟 "
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:736
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
-#: plugins/Novae/src/gui/NovaeDialog.cpp:176
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:174
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:201
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:338
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:737
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:182
+#: plugins/Novae/src/gui/NovaeDialog.cpp:178
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:176
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:340
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:220
 msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:222
-#: plugins/Novae/src/gui/NovaeDialog.cpp:218
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:240
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:278
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:409
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:754
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:224
+#: plugins/Novae/src/gui/NovaeDialog.cpp:220
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:242
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
 msgid "Update error"
 msgstr "更新错误"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:766
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:767
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr "更新了%1/%2个卫星；增加了%3；删除了%4"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:768
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:769
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "更新了%1/%2个卫星；增加了%3；%4丢失"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "[new source]"
 msgstr "[新源]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:882
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:883
 #: plugins/Satellites/src/ui_satellitesDialog.h:765
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:208
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:210
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:204
+#: plugins/Novae/src/gui/NovaeDialog.cpp:206
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:202
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:295
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:229
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:331
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "立即更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:210
-#: plugins/Novae/src/gui/NovaeDialog.cpp:206
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:885
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:212
+#: plugins/Novae/src/gui/NovaeDialog.cpp:208
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:206
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:400
 msgid "Update from files"
 msgstr "从文件更新"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:927
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 msgid "[orbit calculation error]"
 msgstr "[轨道计算错误]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:929
 msgid "[all newly added]"
 msgstr "[均为最新添加]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:929
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:930
 msgid "[all not displayed]"
 msgstr "[未显示的卫星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:930
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:931
 msgid "[all displayed]"
 msgstr "[显示的卫星]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:931
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:932
 msgid "[all]"
 msgstr "[所有卫星]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
 msgid "New group..."
 msgstr "创建新组..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1181
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1182
 msgid "Select TLE Update File"
 msgstr "选择两行式轨道数据(TLE)更新文件"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1203
 msgid "Brightness"
 msgstr "亮度"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1205
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
 msgid "Satellite"
 msgstr "卫星"
 
@@ -13436,16 +13447,6 @@ msgstr "隐藏不可见的人造卫星"
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
 msgstr "存为默认设置"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:796
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:310
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:351
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
-msgid "Settings"
-msgstr "设置"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:799
 msgid "Double-click a satellite to start tracking it."
@@ -15246,7 +15247,7 @@ msgid "Minor Solar System objects"
 msgstr "太阳系小天体"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 msgid "Note"
 msgstr "说明"
 
@@ -15321,31 +15322,31 @@ msgstr "超新星类型"
 msgid "Maximum brightness"
 msgstr "最大亮度"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Historical Supernovae Plug-in"
 msgstr "历史超新星插件"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr "本插件可以使您看到一些历史上的亮超新星： "
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr "此清单共包含%1颗恒星。"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr "那些超新星在最亮时能达到 %1。"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
+#: plugins/Novae/src/gui/NovaeDialog.cpp:134
 msgid "Light curves"
 msgstr "光变曲线"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -15355,39 +15356,39 @@ msgid ""
 msgstr ""
 "此插件使用了一个简单的模型来为不同的超新星实现光变曲线。用于此插件计算的类型Ⅰ与类型Ⅱ的超新星的典型光变曲线可以在%1此处%2看到（以天计）。"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 msgid "Acknowledgments"
 msgstr "致谢"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr "我们特别感谢以下所有人的贡献和宝贵意见："
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 msgid "Sergei Blinnikov"
 msgstr "谢尔盖·比列尼科夫(Sergei Blinnikov)"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr "理论和实验物理研究所"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 msgid "in Russia"
 msgstr "（俄罗斯）"
 
 #. TRANSLATORS: days.
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
-#: plugins/Novae/src/gui/NovaeDialog.cpp:188
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:186
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:213
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
+#: plugins/Novae/src/gui/NovaeDialog.cpp:190
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:215
 msgctxt "time"
 msgid "d"
 msgstr "日"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:229
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:231
 msgid "Historical supernovae is updated"
 msgstr "历史超新星已更新"
 
@@ -15434,7 +15435,7 @@ msgid "Navigational Stars"
 msgstr "导航星"
 
 #: plugins/NavStars/src/NavStars.cpp:55
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:100
 msgid "This plugin marks navigational stars from a selected set."
 msgstr "此插件标记来自所选设置的导航用恒星。"
 
@@ -15470,22 +15471,22 @@ msgid ""
 "Russian title is <em>%1</em>)."
 msgstr "在俄罗斯航海天文历中列出的160颗恒星（原始俄文标题 <em>%1</em>）"
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:92
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "Navigational Stars Plug-in"
 msgstr "导航星插件"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:152
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
 msgid "Anglo-American"
 msgstr "英美"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:156
 msgid "French"
 msgstr "法国"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:156
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:158
 msgid "Russian"
 msgstr "俄国"
 
@@ -15523,7 +15524,7 @@ msgstr "启动时显示"
 msgid "Bright Novae"
 msgstr "明亮新星"
 
-#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:125
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr "一个显示一些银河系内的明亮新星的插件"
 
@@ -15535,45 +15536,45 @@ msgstr "明亮新星"
 msgid "nova"
 msgstr "新星"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid "Bright Novae Plug-in"
 msgstr "明亮新星插件"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
 msgstr "您可以使用搜索工具通过新星的名称或者通用名来找到新星（比如'Nova Cygni 1975' 或者 'V1500 Cyg'）"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid "This plugin allows you to see recent bright novae: "
 msgstr "这个插件允许你看到最近的明亮的新星： "
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:133
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr "所有这些新星的亮度峰值时亮于 %1"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:135
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
 msgstr "这个插件使用一个非常简单的模型来计算新星的光曲线。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:134
+#: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
 "value, where %1 is 2, 3, 6 and 9."
 msgstr "此模型是根据亮度衰弱需要时间，由最高亮度开始至 %1，而 %1是2、3、6及9。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:135
+#: plugins/Novae/src/gui/NovaeDialog.cpp:137
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
 msgstr "如果新星没有光度的衰减值，那么这个插件将使用典型值。"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:225
+#: plugins/Novae/src/gui/NovaeDialog.cpp:227
 msgid "Novae is updated"
 msgstr "新星数据已更新"
 
@@ -15616,11 +15617,11 @@ msgstr "5GHz (6cm) 附近的射电通量密度"
 msgid "Radio flux density around 1.4GHz (21cm)"
 msgstr "1.4GHz (21cm) 附近的射电通量密度"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Quasars Plug-in"
 msgstr "类星体插件"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:131
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
@@ -15629,16 +15630,16 @@ msgstr ""
 "类型体插件提供部分亮度大于18星等的类星体,星表来自'Quasars and Active Galactic Nuclei' (13th Ed.) "
 "(Veron+ 2010)"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 msgid "Veron+ 2010"
 msgstr "Veron+ 2010"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr "当前目录包含 %1个类星体的信息。"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:247
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:249
 msgid "Quasars is updated"
 msgstr "类星体已更新"
 
@@ -15680,7 +15681,7 @@ msgid "Pulsars"
 msgstr "脉冲星"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -15798,7 +15799,7 @@ msgid "mJy"
 msgstr "毫扬斯基"
 
 #: plugins/Pulsars/src/Pulsar.cpp:285
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 msgid "Notes"
 msgstr "备注"
@@ -15834,11 +15835,11 @@ msgid ""
 "radio emission"
 msgstr "有热X射线脉冲发射的孤立中子星，但是没有可检测的无线电发射"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "Pulsars Plug-in"
 msgstr "脉冲星插件"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N.,"
@@ -15848,40 +15849,40 @@ msgstr ""
 "脉冲星的数据来自澳大利亚国立天文台[ATNF]的脉冲星目录（Manchester, R. N., Hobbs, G. B., Teoh, A. & "
 "Hobbs, M., Astron. J., 129, 1993-2006 (2005) (%1astro-ph/0412641%2)）。"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "当前目录包含 %1 个脉冲星的信息。"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "脉冲星的标识符有“PSR”前缀"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 msgid "Acknowledgment"
 msgstr "鸣谢"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 msgid "Vladimir Samodourov"
 msgstr "弗拉基米尔·萨莫杜罗夫(Vladimir Samodourov)"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "Pushchino 射电天文台"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
 msgid "Maciej Serylak"
 msgstr "马切伊·萨拉莱(Maciej Serylak)"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 msgid "Nancay Radioastronomical Observatory"
 msgstr "楠赛射电天文台"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "in France"
 msgstr "（法国）"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:285
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:287
 msgid "Pulsars is updated"
 msgstr "脉冲星已更新"
 
@@ -15941,44 +15942,44 @@ msgstr "使用Web服务器接口提供远程控制功能。 有关详细说明�
 msgid "Remote control"
 msgstr "远程控制"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
 msgid "Remote Control Plug-in"
 msgstr "远程控制插件"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:117
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:119
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
 msgstr "远程控制插件提供了一个Web界面，允许使用连接的Web浏览器进行状态更改和触发脚本。"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr "也可以通过命令行发送指令，如……"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:131
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr "这允许触发博物馆等的自动显示设置。"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr "插件开发于ESA SoCiS 2015。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr "这个插件使用来自 Stefan Frings的 {QtWebApp HTTP server}。"
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 msgid "Further information can be found in the {developer documentation}."
 msgstr "进一步的信息请{查阅开发文档}。"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:183
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:185
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr "正在监听 %1, IP: "
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:188
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:190
 msgid "Not active."
 msgstr "不活跃。"
 
@@ -16042,98 +16043,98 @@ msgid ""
 "a network. See manual for detailed description."
 msgstr "为在网络中运行的多个Stellarium实例提供状态同步。 详细说明请参见手册。"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:117
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:119
 #, qt-format
 msgid "ERROR: %1"
 msgstr "错误: %1"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:134
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:136
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Start server"
 msgstr "启动服务器"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:139
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:141
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Connect to server"
 msgstr "连接到服务器"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:142
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:144
 msgid "Not running"
 msgstr "未运行"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:147
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:149
 msgid "Stop server"
 msgstr "断开服务器"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:152
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:154
 #, qt-format
 msgid "Running as server on port %1"
 msgstr "在 %1端口上作为服务器运行"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:171
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:168
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
 msgid "Cancel connecting"
 msgstr "取消连接"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr "连接到%1: %2..."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr "重试连接到%1: %2..."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:180
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnecting..."
 msgstr "正在断开..."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:183
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:185
 msgid "Disconnect from server"
 msgstr "断开服务器"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:184
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr "连接到%1: %2"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid "Remote Sync Plug-in"
 msgstr "远程同步插件"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
 msgstr "远程同步插件为在网络中运行的多个Stellarium实例提供状态同步。"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
 msgstr "这可以用于使用多个物理PC创建多屏幕设置。"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
 msgstr "部分同步允许平行的设置示例、 概述和细节视图。"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 msgid "See manual for detailed description."
 msgstr "详细说明请参见手册。"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr "这个插件是在ESA 的合作伙伴 2015和2016年开发的。"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:245
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server Name"
 msgstr "服务器名称"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:253
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:255
 msgid "Server not active."
 msgstr "服务器未激活"
 
@@ -16398,7 +16399,7 @@ msgstr "平衡温度"
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:362
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Flux"
 msgstr "辐射通量"
 
@@ -16411,18 +16412,18 @@ msgstr "地球相似指数"
 msgid "Equilibrium temperature on Earth"
 msgstr "地球的平衡温度"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid "Exoplanets Plug-in"
 msgstr "系外行星插件"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
 "derived from \"%1The Extrasolar Planets Encyclopaedia%2\""
 msgstr "此插件可以显示含有系外行星的恒星的位置。系外行星数据来自“%1系外行星百科%2”。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -16430,7 +16431,7 @@ msgid ""
 "Laboratory%3."
 msgstr "潜在的适居系外行星列表及其相关数据取自”%1适居系外行星目录%3\" b位于 %2行星适居性研究室%3。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -16438,27 +16439,27 @@ msgid ""
 "exoplanets)."
 msgstr "当前目录中包含关于 %1个行星系统的信息，其中共有 %2 个系外行星(包括%3潜在适居行星)。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Potential habitable exoplanets"
 msgstr "潜在适居系外行星"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
 msgstr "本插件可显示潜在适居系外行星(橙色标识)以及有关这些行星的一些信息。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Extra info for the optimistic samples of potentially habitable planets mark "
 "by italic text."
 msgstr "对潜在适居行星的低可能性样本采用斜体标注。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "Planetary Class"
 msgstr "行星分类"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
@@ -16467,11 +16468,11 @@ msgstr ""
 "行星级别源自主星光谱型分类(F、G、K、M)或适居区域(热、暖、冷)或尺寸((迷你地球型, 次地球型, 地球型, 超级地球型,木星型, "
 "海王星型)(地球对应 G-暖-地球型)。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Equilibrium Temperature"
 msgstr "平衡温度"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -16480,7 +16481,7 @@ msgid ""
 msgstr ""
 "行星平衡温度是一个理论温度(℃)，简单地将行星作为黑体(假设以0.3为反射率)被其母星加热。如地球的行星平衡温度是18.15℃(255K)。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
 "Actual surface temperatures are expected to be larger than the equilibrium "
 "temperature depending on the atmosphere of the planets, which are currently "
@@ -16488,102 +16489,102 @@ msgid ""
 msgstr ""
 "实际表面温度预计将比平衡温度高，程度取决于行星大气状况，但这目前是未知的。 (例如, 地球平均全球表面温度大约是 288 K 或15°C)。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
 msgstr "行星的平均辐射通量 ，用地球的辐射通量表示 (地球 = 1.0 S<sub>E</sub>)。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid "Earth Similarity Index (ESI)"
 msgstr "地球相似指数(ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
 "surface temperature."
 msgstr "类地指数的值由0到1，1代表最相似地球，类地指数的值由该行星的半径，质量密度，逃逸速度和表面温度所计算出"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid "Proper names"
 msgstr "官方命名"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
 msgstr "2015年12月，国际天文协会(IAU)在一次公开投票后官方认定某些系外行星的名字。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
 msgstr "拉丁文 <em>Veritas</em>，真理。表示 <em>真理所在</em>。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
 msgstr "来自拉丁文<em>Spes</em>，希望，表示<em>希望所在</em>。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Musica is Latin for <em>music</em>."
 msgstr "Musica就是拉丁文<em>音乐</em>。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
 "attention by the playing of his kithara."
 msgstr "Arion是古希腊的天赋式诗人和音乐家。根据传说，他在大海里通过玩竖琴吸引海豚注意力而被挽救了。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr "Fafnir是北欧神话里的小矮人变成了一条龙。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
 msgstr "Orbitar是一个新造的词用于NASA的航天发射和轨道运行。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr "Chalawan是泰国民间神话里的鳄鱼王。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "Taphao Thong是泰国民间故事Chalawan两姐妹中的一个。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
 msgstr "Taphao Kae是泰国民间故事Chalawan两姐妹中的一个。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
 msgstr "Helvetios是瑞士的<em>凯尔特人</em>，指在远古时期居住在瑞士的些凯尔特部落。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
 msgstr "Dimidium就是拉丁文<em>半</em>，指该行星的质量至少是木星的一半。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
 "revolutionibus orbium coelestium</em>."
 msgstr "波兰天文学家尼古拉哥白尼(1473-1543)在他的书 <em>《天体运行论》</em>中提出了太阳系的日心模型。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -16594,7 +16595,7 @@ msgstr ""
 "伽利略（Galileo Galilei，1564-1642）是意大利天文学家，物理学家通常称为观测天文学之父<em>和现代物理之父<em> </ "
 "em>。 使用望远镜，他发现了木星的四个最大的卫星，并报告了第一次用望远镜观察了金星，以及其他发现。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -16604,73 +16605,73 @@ msgstr ""
 "Tycho Brahe（1546-1601）是一位丹麦天文学家和贵族，他记录了对恒星和行星的准确天文观测。 "
 "这些观察对于开普勒总结出行星运动的三定律是至关重要的。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
 " in 1608."
 msgstr "德国与荷兰磨镜工兼眼镜制造商汉斯利柏黑(1570-1619)在1608年发明折射望远镜。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
 "the invention of the telescope."
 msgstr "荷兰眼镜制造商撒迦利亚扬森(1580s-1630s)发明了显微镜，甚至认为他发明了望远镜。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
 "the Moon through telescopic observations."
 msgstr "英国天文学家、数学家、人种学者和翻译家托马斯哈里奥特(1560-1621)通过望远镜观测结果描绘了月球的第一张图纸。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
 " the god Izanagi."
 msgstr "<em>Amateru</em>是日本人对神社供奉的天照大神的通用称谓，神道教的太阳神，从Izanagi神的左眼生出来。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
 "until murdered by a Christian mob in 415."
 msgstr "希帕蒂娅是古希腊著名的天文学家、数学家和哲学家。她在5世纪初是亚历山大新柏拉图学院院长直到415年被基督教暴徒杀害。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
 msgstr "Ran是北欧女海神，搅动波浪并用自己的网捕捉水手。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
 "Universe; together they had nine daughters."
 msgstr "AEgir是Ran的丈夫，修炼成人形的海洋之神。AEgir和Ran都代表约顿巨人统治着宇宙外围；他们拥有九个女儿。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
 msgstr "联合国教科文组织世界遗产帕尔米拉古城的古代闪族名称和现代阿拉伯名字命名。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr "大衮（Dagon）是闪米特人的一个神，往往表现为半人半鱼。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "托纳季乌（Tonatiuh）是阿兹特克的太阳神。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "麦丝莉（Meztli）是阿兹特克的月亮女神。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
@@ -16678,51 +16679,51 @@ msgid ""
 msgstr ""
 "奥马（Ogma）是掌管口才与写作的神，并在爱尔兰和苏格兰的些路迪神话中具有巨大力量，可能与高卢罗马大力神<em>Ogmios</em>相关。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Smertrios was a Gallic deity of war."
 msgstr "史墨西奥（Smertrios ）是高卢的战神"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
 msgstr "Intercrus拉丁文中意味着<em>两腿之间</em>，与大熊座星体位置相关。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr "希腊神话中阿卡斯（Arkas）是卡利斯托（Callisto，大熊座）的儿子。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr "塞万提斯·萨维德拉(1547-1616)是西班牙著名的作家，是<em>《堂吉诃德》</em>的作者。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "塞万提斯作品<em>《堂吉诃德》</em>里的虚拟角色。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
 msgstr "来自塞万提斯作品<em>《堂吉诃德》</em>里边称为唐吉坷德(或叫吉坷德)的虚拟角色和爱好。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "塞万提斯作品 <em>堂吉诃德</em>里边虚拟角色唐吉坷德的马。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
 msgstr "在塞万提斯作品 <em>《堂吉诃德》</em>里边虚拟角色堂吉诃德的卫士。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -16730,29 +16731,29 @@ msgid ""
 msgstr ""
 "忒斯提娅斯，取自丽塔及她姐姐阿尔泰娅的父名，她们是忒斯提奥斯的女儿。丽达是希腊王后，是玻里得（北河三）和他的双胞胎兄弟卡斯特耳（北河二）的母亲，也是海伦和克吕泰墨斯特拉的母亲。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
 msgstr "巫妖（Lich）是一个虚构的不死生物，用魔法控制其他不死生物。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "尸鬼（Draugr）是北欧神话中的不死生物。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
 msgstr "是一个创造物理干扰超自然生物的名字，来自德国的 <em>吵闹鬼</em>。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
 msgstr "一个希腊神话中的噩梦神、尼克斯的儿子，夜间的原始神。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -16760,7 +16761,7 @@ msgid ""
 "continents (Europe and Africa) after the 8th century."
 msgstr "Titawin (中文得土安，缔头万)在摩洛哥北部的城市，是联合国教科文组织的世界遗产。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -16770,7 +16771,7 @@ msgstr ""
 "是Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi Ibn-al-"
 "Saffa的名，他在11世纪安达卢西亚(现属西班牙)的科尔多瓦教算术、几何和天文学，并写了一篇关于使用星盘的影响深远的论文。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
@@ -16779,7 +16780,7 @@ msgstr ""
 "是Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri ( 或者<em>Ibn al-"
 "Samh</em>)的名字，他是11世纪科尔多瓦(在安达卢西亚，现属西班牙)艾梅支蒂学校著名的天文学家和数学家。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -16788,7 +16789,7 @@ msgstr ""
 "是MAbu al-Qasim al-Qurtubi al-"
 "Majriti名字，他是10世纪和11世纪初安达卢西亚(现属西班牙)的著名数学家、天文学家、学者和教育家。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -16797,32 +16798,32 @@ msgid ""
 msgstr ""
 "是拉丁文 <em>liberty（自由）</em>。自由涉及社会和政治上的自由，并提醒世人如今世界上也有人被剥夺了自由。天鹰座的鹰是自由的象征"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
 "(represented by the constellation Aquila)."
 msgstr "是拉丁文<em>fortitude（坚韧）</em>。坚韧是逆境中的情感和精神力量的体现，鹰(天鹰座那只)就是一个象征。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
 msgstr "这些命名都是根据原来的建议修改，并与IAU规则一致。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
 msgstr "按原来的命名<em>Veritas</em>，对太阳系小行星的研究很重要。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
 msgstr "按原来的命名“Amaterasu”已经被用于一个小行星。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -16831,18 +16832,18 @@ msgid ""
 msgstr ""
 "注意挪威音译<em>AEgir</em>和<em>Aegir（土卫三十六）</em>之间的文字差异。同样拼法的<em>Aegir</em>已经被用于土卫三十六"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr "<em>Ogmios</em> 已用于一个小行星的名字。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
 "also attributed to an asteroid."
 msgstr "原来的命名<em>Leda</em>已经分配到一颗小行星和木星的一颗卫星木卫十三。名字<em>Althaea</em>也被一颗小行星用了。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -16852,192 +16853,192 @@ msgstr ""
 "原来的拼法<em>Lippershey</em>在2016年1月15日更改为 <em>Lipperhey</em>。常见的拼法 "
 "<em>Lippershey</em>(with an <em>s</em>) 源于1831年的一次印刷错误，本来应该避免。"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Additional info"
 msgstr "附加信息"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Circumstellar habitable zone"
 msgstr "环绕恒星的适居带"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Planetary equilibrium temperature"
 msgstr "行星平衡温度"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Planetary habitability"
 msgstr "行星适居性"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "Earth Similarity Index"
 msgstr "类地指数"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr "系外行星系统命名竞赛最终结果公众投票发布"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "NameExoWorlds website"
 msgstr "命名系外行星(国际天文联会)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr "全面专业的关于太阳系外行星的网站"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "系外行星插件：XKCD 1071的互动版本"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK（用开普勒望远镜寻找系外卫星）"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr "双星和聚星系统中的地外行星（理查德·施瓦兹）"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Naming exoplanets (IAU)"
 msgstr "命名的系外行星（IAU）"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr "一些天文学家和团体活跃于系外行星的研究"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "update: 16 April 2012"
 msgstr "更新：2012年4月16日"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "The Exoplanet Data Explorer"
 msgstr "系外行星数据库"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "The Anglo-Australian Planet Search"
 msgstr "英澳行星搜索"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "日内瓦太阳系外行星寻找计划"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN(光学长基线干涉新闻"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "NASA系外行星系统命名竞赛网站"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "Pulsar planets"
 msgstr "脉冲星行星"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "The NASA Exoplanet Archive"
 msgstr "NASA 系外行星档案"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "国际天文联会委员会53：太阳系外行星"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "ExoMol"
 msgstr "分子谱线列表数据库"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "The Habitable Zone Gallery"
 msgstr "适居带画廊"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest  - 第二地球寻找计划"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid "Open Exoplanet Catalogue"
 msgstr "系外行星列表目录"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
 msgid "The Habitable Exoplanets Catalog"
 msgstr "适居系外行星列表"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:416
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:418
 msgid "Exoplanets is updated"
 msgstr "系外行星已更新"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:554
 msgid "Orbital Eccentricity"
 msgstr "轨道离心率"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:553
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
 msgid "Orbit Semi-Major Axis, AU"
 msgstr "轨道半长轴,天文单位"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:554
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
 msgid "Planetary Mass, Mjup"
 msgstr "行星质量,M木星"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
 msgid "Planetary Radius, Rjup"
 msgstr "行星半径,R木星"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
 msgid "Orbital Period, days"
 msgstr "轨道周期,天"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
 msgid "Angular Distance, arcsec"
 msgstr "角距离，角度"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:560
 msgid "Effective temperature of host star, K"
 msgstr "主星的有效温度，K"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
 msgid "Year of Discovery"
 msgstr "发现年份"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:560
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
 msgid "Metallicity of host star"
 msgstr "主星的金属量"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
 msgid "V magnitude of host star, mag"
 msgstr "主星的V星等，mag"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
 msgid "RA (J2000) of star, deg"
 msgstr "恒星的赤经 (J2000) , deg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:565
 msgid "Dec (J2000) of star, deg"
 msgstr "恒星的赤纬 (J2000) , deg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:566
 msgid "Distance to star, pc"
 msgstr "恒星距离, pc"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:565
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:567
 msgid "Mass of host star, Msol"
 msgstr "主星的质量，Msol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:566
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:568
 msgid "Radius of host star, Rsol"
 msgstr "主星的半径Rsol"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:600
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:602
 msgctxt "temperature scale"
 msgid "Kelvin"
 msgstr "开尔文"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:602
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 msgctxt "temperature scale"
 msgid "Celsius"
 msgstr "摄氏"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:606
 msgctxt "temperature scale"
 msgid "Fahrenheit"
 msgstr "华氏"
@@ -17318,11 +17319,11 @@ msgstr "可观测性"
 msgid "Observability configuration window"
 msgstr "可观测性设置窗口"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid "Observability Plug-in"
 msgstr "可观测性分析插件"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen"
 " center, if no source is selected). The plugin can show rise, transit, and "
@@ -17336,15 +17337,15 @@ msgstr ""
 "本插件分析选中天体的可观测性（未选中任何天体时则分析屏幕中心天区）。插件可以显示天体升、中天、落时间和一年中的最佳观测时间。（也就是天体对太阳的角距离最大的时间），天体夜晚在地平线以上的日期范围，以及日没升/日出落（冲日）和偕日升/偕日落（合日）日期。<br>太阳系天体的运行和恒星视差也被考虑在内。<br><br>作者感谢"
 " Alexander Wolf 和 Georg Zotti 所提出的建议。<br><br>Ivan Marti-Vidal（昂萨拉天文台）"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Explanation of some parameters"
 msgstr "显示项说明"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Sun altitude at twilight:"
 msgstr "晨昏蒙影时太阳高度："
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -17353,21 +17354,21 @@ msgid ""
 msgstr ""
 "当太阳低于这个高度时，可以认为所有天体都是可见的。天文晨昏蒙影的太阳高度大约为-12度到-18度，这个数据只被用于估计可进行观测的时间（见下文）。"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Horizon altitude:"
 msgstr "地平高度限制："
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
 msgstr "最小可观测高度（考虑到地面遮挡和望远镜限制等）。"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid "Today ephemeris:"
 msgstr "今日星历表"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -17375,11 +17376,11 @@ msgid ""
 "time)."
 msgstr "顾名思义，这个程序会显示天体的升落、中天时间。这些星历的具体时间会被用两种形式给出：时间差（根据目前时间）和实际时间（地方时）。"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
 msgstr "冲日升/落 或宇宙升/落或偕日升/落："
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid ""
 "The days of Cosmical rise/set of an object are estimated as the days when "
 "the object rises (or sets) together with the rise/set of the Sun. The exact "
@@ -17401,11 +17402,11 @@ msgid ""
 msgstr ""
 "一个天体对象的宇宙升/落的日子用于估算该天体对象随太阳升/落的日子。这些星历表的具体日期取决于观察者的位置。相反，冲日升(或落)是指该星体的升/落发生在在日落/出的时候(即与太阳相反)。一方面，很明显宇宙落和宇宙升之间的日子几乎观察不到(或无法完整观测)该现象。另一方面，在接近冲日落与冲日升的日子，天体对象的高度很高而太阳却远在地平线以下(故此可以很方便观测该对象)。偕日升的日期是指一年里该星体变得可见的首个日子。它发生于天文夜结束时该星体接近东方地平线的时候(即天文曙暮光)。在接下来的夜晚，该星体将长期可见，直到其偕日落(即一年里该星体仍可见的最后一晚)。在偕日落，该星体随天文夜的来临而落下。"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid "Largest Sun separation:"
 msgstr "与太阳最大角距："
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object"
 " are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -17418,11 +17419,11 @@ msgid ""
 msgstr ""
 "当太阳与天体之间的的角距离达到最大值时。在大多数情况下，这是指该天体和太阳的赤经恰好相差180度，亦即太阳处在该天体的对面。当天体位于它与太阳最大角距离的位置时（不论该天体是行星还是恒星），它大约在午夜上中天，处于天空中最黑暗的区域。因此，这是观测某个天体的“最佳”时间。"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
 msgid "Nights with source above horizon:"
 msgstr "高于地平线的夜晚："
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program"
@@ -17443,22 +17444,22 @@ msgid ""
 msgstr ""
 "此插件计算天体在夜晚至少有一刻处于地平线上的时间范围。对于“夜晚”，插件将其定义为太阳地平高度低于晨昏蒙影的高度（用户可设置，见上文）。当天体（或系外行星）被选定时，程序给出的本年可观测时间范围有两种形式：从一个日期到另一个日期的时间范围（如1月20日至9月15日），或是两段时间（从1月1日到某个日期，再从另一个日期到12月31日）。在第一种情况下，第一个日期（本例中为1月20日）会接近该天体的偕日落（合日）。在第二种情况中（比如从1月1日到5月20日，再从9月21日到12月31日），第一个日期（本例中为5月20日）会接近该天体的偕日升（合日）。用于计算恒星和行星偕日升/偕日落（合日）的更加精确的算法（不依赖于用户设定的晨昏蒙影太阳高度角）会在插件的未来版本中实现。"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 msgid "Full Moon:"
 msgstr "满月"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
 msgstr "当月球被选定时，这个程序可以准切地计算出月球冲日的日期。"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:203
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:205
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
 msgstr "晨昏蒙影时太阳高度：%1 度"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:209
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:211
 #, qt-format
 msgid "Horizon altitude: %1 deg."
 msgstr "地平高度: %1 度"
@@ -17519,37 +17520,6 @@ msgstr "在地平线上的夜晚"
 msgid "Dates of previous and next Full Moon"
 msgstr "前后两次满月时间"
 
-#: plugins/FOV/src/FOV.cpp:42 plugins/FOV/src/FOV.cpp:82
-#: plugins/FOV/src/ui_fovWindow.h:351 plugins/FOV/src/ui_fovWindow.h:353
-#: plugins/FOV/src/ui_fovWindow.h:372
-msgid "Field of View"
-msgstr "视场"
-
-#: plugins/FOV/src/FOV.cpp:45 plugins/FOV/src/gui/FOVWindow.cpp:90
-msgid ""
-"This plugin allows stepwise zooming via keyboard shortcuts like in the "
-"<em>Cartes du Ciel</em> planetarium program."
-msgstr "这个插件允许通过键盘快捷键进行阶段性变焦像星像软件《Cartes du Ciel》一样。"
-
-#: plugins/FOV/src/FOV.cpp:87
-msgid "Set FOV to"
-msgstr "将FOV设置为"
-
-#: plugins/FOV/src/gui/FOVWindow.cpp:84
-msgid "Field of View plug-in"
-msgstr "视场插件"
-
-#: plugins/FOV/src/ui_fovWindow.h:355
-msgid ""
-"By default Stellarium uses smooth zooming via mouse wheel or keyboard "
-"shortcuts. Some users want stepwise zooming to fixed values for field of "
-"view like in Cartes du Ciel planetarium, and this plugin provides this "
-"feature. You can edit values and use the keyboard for quick-setting of FOV. "
-"All values in degrees."
-msgstr ""
-"默认情况下，Stellarium使用通过鼠标滚轮或键盘快捷方式平滑缩放。 有些用户希望如在Cartes du "
-"Ciel天文馆逐步缩放到固定视场，这个插件提供这一功能。 您可以编对应FOV辑值或使用键盘快速设置。 所有值的单位为度。"
-
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:218
@@ -17560,7 +17530,7 @@ msgid "Equation of Time"
 msgstr "均时差"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:94
 msgid "This plugin shows the solution of the equation of time."
 msgstr "这插件用来显示均时差的值"
 
@@ -17574,7 +17544,7 @@ msgctxt "time"
 msgid "s"
 msgstr "s"
 
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
 msgid "Equation of Time plug-in"
 msgstr "均时差插件"
 
@@ -18489,63 +18459,63 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "时角/赤纬"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
 msgid "Pointer Coordinates plug-in"
 msgstr "鼠标坐标插件"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:135
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "在屏幕上显示鼠标光标的坐标"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:181
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "The top center of the screen"
 msgstr "视窗顶部中心"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "In center of the top right half of the screen"
 msgstr "在屏幕右上方一半的中心"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:185
 msgid "The right bottom corner of the screen"
 msgstr "屏幕右下角"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:186
 msgid "Near mouse cursor"
 msgstr "靠近鼠标光标"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:185
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:187
 msgid "Custom position"
 msgstr "自定义位置"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "赤经/赤纬（J2000.0）"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
 msgid "Right ascension/Declination"
 msgstr "赤经/赤纬"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Ecliptic Longitude/Latitude"
 msgstr "黄经/黄纬"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "黄经/黄纬（J2000.0）"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
 msgid "Altitude/Azimuth"
 msgstr "地平高度/方位角"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:214
 msgid "Galactic Longitude/Latitude"
 msgstr "银经/银纬"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:215
 msgid "Supergalactic Longitude/Latitude"
 msgstr "超级经度/纬度"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:243
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:245
 msgid "Coordinates of custom position:"
 msgstr "自定义位置坐标"
 

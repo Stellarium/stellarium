@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-15 12:35+0700\n"
+"POT-Creation-Date: 2019-08-26 23:22+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: GunChleoc, 2019\n"
 "Language-Team: Gaelic, Scottish (https://www.transifex.com/stellarium/teams/80998/gd/)\n"
@@ -63,7 +63,7 @@ msgstr "astaras"
 #: src/core/modules/NebulaMgr.cpp:457 src/core/modules/SolarSystem.cpp:254
 #: src/core/modules/MilkyWay.cpp:79 src/core/modules/ZodiacalLight.cpp:85
 #: src/core/modules/ToastMgr.cpp:60 src/core/modules/HipsMgr.cpp:149
-#: src/core/StelApp.cpp:611 src/core/StelCore.cpp:260
+#: src/core/StelApp.cpp:607 src/core/StelCore.cpp:260
 #: src/core/StelObjectMgr.cpp:53 src/core/StelSkyLayerMgr.cpp:85
 #: src/core/StelSkyLayerMgr.cpp:86 src/StelMainView.cpp:818
 msgid "Display Options"
@@ -449,17 +449,16 @@ msgstr "Atharrachadh cearcallach an truaillidh solais"
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:94
 #: plugins/Oculars/src/gui/OcularDialog.cpp:490
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:229
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
-#: plugins/Novae/src/gui/NovaeDialog.cpp:122
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:137
-#: plugins/FOV/src/gui/FOVWindow.cpp:87
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:126
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:97
+#: plugins/Novae/src/gui/NovaeDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:129
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:142
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:91
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:219
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:131
 #: plugins/Scenery3d/src/gui/Scenery3dDialog.cpp:447
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:146
 msgid "Author"
@@ -2114,141 +2113,141 @@ msgstr ""
 msgid "Toggle Hierarchical Progressive Surveys (experimental)"
 msgstr ""
 
-#: src/core/StelApp.cpp:421
+#: src/core/StelApp.cpp:417
 msgid "Initializing textures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:425
+#: src/core/StelApp.cpp:421
 msgid "Initializing network access..."
 msgstr ""
 
-#: src/core/StelApp.cpp:430
+#: src/core/StelApp.cpp:426
 msgid "Initializing network disk cache..."
 msgstr ""
 
-#: src/core/StelApp.cpp:444
+#: src/core/StelApp.cpp:440
 msgid "Initializing network proxy..."
 msgstr ""
 
-#: src/core/StelApp.cpp:460
+#: src/core/StelApp.cpp:456
 msgid "Initializing Object Database..."
 msgstr ""
 
-#: src/core/StelApp.cpp:465
+#: src/core/StelApp.cpp:461
 msgid "Initializing locales..."
 msgstr ""
 
-#: src/core/StelApp.cpp:469
+#: src/core/StelApp.cpp:465
 msgid "Initializing HiPS survey..."
 msgstr ""
 
-#: src/core/StelApp.cpp:475
+#: src/core/StelApp.cpp:471
 msgid "Initializing Solar System objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:481
+#: src/core/StelApp.cpp:477
 msgid "Initializing planetary nomenclature..."
 msgstr ""
 
-#: src/core/StelApp.cpp:487
+#: src/core/StelApp.cpp:483
 msgid "Initializing stars..."
 msgstr ""
 
-#: src/core/StelApp.cpp:492
+#: src/core/StelApp.cpp:488
 msgid "Initializing core..."
 msgstr ""
 
-#: src/core/StelApp.cpp:496
+#: src/core/StelApp.cpp:492
 msgid "Initializing deep-sky objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:502
+#: src/core/StelApp.cpp:498
 msgid "Initializing Milky Way..."
 msgstr ""
 
-#: src/core/StelApp.cpp:508
+#: src/core/StelApp.cpp:504
 msgid "Initializing zodiacal light..."
 msgstr ""
 
-#: src/core/StelApp.cpp:514
+#: src/core/StelApp.cpp:510
 msgid "Initializing sky image layer..."
 msgstr ""
 
-#: src/core/StelApp.cpp:520
+#: src/core/StelApp.cpp:516
 msgid "Initializing TOAST surveys..."
 msgstr ""
 
-#: src/core/StelApp.cpp:526
+#: src/core/StelApp.cpp:522
 msgid "Initializing audio..."
 msgstr ""
 
-#: src/core/StelApp.cpp:530
+#: src/core/StelApp.cpp:526
 msgid "Initializing video..."
 msgstr ""
 
-#: src/core/StelApp.cpp:536
+#: src/core/StelApp.cpp:532
 msgid "Initializing constellations..."
 msgstr ""
 
-#: src/core/StelApp.cpp:542
+#: src/core/StelApp.cpp:538
 msgid "Initializing asterisms..."
 msgstr ""
 
-#: src/core/StelApp.cpp:548
+#: src/core/StelApp.cpp:544
 msgid "Initializing landscape..."
 msgstr ""
 
-#: src/core/StelApp.cpp:553
+#: src/core/StelApp.cpp:549
 msgid "Initializing grid lines..."
 msgstr ""
 
-#: src/core/StelApp.cpp:559
+#: src/core/StelApp.cpp:555
 msgid "Initializing sporadic meteors..."
 msgstr ""
 
-#: src/core/StelApp.cpp:565
+#: src/core/StelApp.cpp:561
 msgid "Initializing user labels..."
 msgstr ""
 
-#: src/core/StelApp.cpp:570
+#: src/core/StelApp.cpp:566
 msgid "Initializing sky cultures..."
 msgstr ""
 
-#: src/core/StelApp.cpp:574
+#: src/core/StelApp.cpp:570
 msgid "Initializing user markers..."
 msgstr ""
 
-#: src/core/StelApp.cpp:580
+#: src/core/StelApp.cpp:576
 msgid "Initializing custom objects..."
 msgstr ""
 
-#: src/core/StelApp.cpp:586
+#: src/core/StelApp.cpp:582
 msgid "Initializing highlights..."
 msgstr ""
 
-#: src/core/StelApp.cpp:594
+#: src/core/StelApp.cpp:590
 msgid "Initializing scripting..."
 msgstr ""
 
-#: src/core/StelApp.cpp:599
+#: src/core/StelApp.cpp:595
 msgid "Initializing color scheme..."
 msgstr ""
 
-#: src/core/StelApp.cpp:611
+#: src/core/StelApp.cpp:607
 msgid "Night mode"
 msgstr "Modh oidhche"
 
-#: src/core/StelApp.cpp:635
+#: src/core/StelApp.cpp:631
 msgid "Initializing SPOUT sender..."
 msgstr ""
 
-#: src/core/StelApp.cpp:645
+#: src/core/StelApp.cpp:641
 msgid "Cannot create Spout sender. See log for details."
 msgstr ""
 "Cha deach leinn inneal-cuir Spout a chruthachadh. Faic an loga airson "
 "barrachd fiosrachaidh."
 
-#: src/core/StelApp.cpp:671
+#: src/core/StelApp.cpp:667
 msgid "Loading plugin"
 msgstr ""
 
@@ -2497,13 +2496,13 @@ msgstr "Flip an sealladh gu còmhnard"
 msgid "Flip scene vertically"
 msgstr "Flip an sealladh gu h-inghearach"
 
-#: src/core/StelCore.cpp:2309
+#: src/core/StelCore.cpp:2310
 msgid "Correction is disabled. Use only if you know what you are doing!"
 msgstr ""
 "Chaidh ceartachadh a chur à comas. Nach cleachd e ach ma tha thu eòlach air "
 "na nì thu!"
 
-#: src/core/StelCore.cpp:2312
+#: src/core/StelCore.cpp:2313
 #, qt-format
 msgid ""
 "This historical formula was obtained by C. Schoch in 1931 and was used by G."
@@ -2515,7 +2514,7 @@ msgstr ""
 "Relativity Confirmed by Ancient Solar Eclipses</em> (%1). Faigh barrachd "
 "fiosrachaidh %2an-seo%3."
 
-#: src/core/StelCore.cpp:2315
+#: src/core/StelCore.cpp:2316
 #, qt-format
 msgid ""
 "This empirical equation was published by G. M. Clemence in the article "
@@ -2524,7 +2523,7 @@ msgstr ""
 "Chaidh an co-aontar deuchainneach seo fhoillseachadh le G. M. Clemence san "
 "aiste <em>On the system of astronomical constants</em> (%1)."
 
-#: src/core/StelCore.cpp:2318
+#: src/core/StelCore.cpp:2319
 #, qt-format
 msgid ""
 "This formula is based on a study of post-1650 observations of the Sun, the "
@@ -2537,7 +2536,7 @@ msgstr ""
 "Jean Meeus sna h-<em>Astronomical Formulae for Calculators</em> aige. "
 "Chleachd am prògram PC SunTracker Pro i cuideachd."
 
-#: src/core/StelCore.cpp:2322
+#: src/core/StelCore.cpp:2323
 msgid ""
 "This is a slightly modified version of the IAU (1952) formula which was "
 "adopted in the <em>Astronomical Ephemeris</em> and in the <em>Canon of Solar"
@@ -2547,7 +2546,7 @@ msgstr ""
 "<em>Astronomical Ephemeris</em> agus <em>Canon of Solar Eclipses</em> le "
 "Mucke ⁊ Meeus (1983) ris."
 
-#: src/core/StelCore.cpp:2326
+#: src/core/StelCore.cpp:2327
 msgid ""
 "The tables of Tuckerman (1962, 1964) list the positions of the Sun, the Moon"
 " and the planets at 5- and 10-day intervals from 601 BCE to 1649 CE. The "
@@ -2559,7 +2558,7 @@ msgstr ""
 "Chaidh an aon dàimh fhilleadh a-steach ann an clàran sisige aig Goldstine "
 "(1973)."
 
-#: src/core/StelCore.cpp:2330
+#: src/core/StelCore.cpp:2331
 #, qt-format
 msgid ""
 "This equation was published by P. M. Muller and F. R. Stephenson in the "
@@ -2570,7 +2569,7 @@ msgstr ""
 " san aiste <em>The accelerations of the earth and moon from early "
 "astronomical observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2333
+#: src/core/StelCore.cpp:2334
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson in the article <em>Pre-"
@@ -2579,7 +2578,7 @@ msgstr ""
 "Chaidh an co-aontar seo fhoillseachadh le  F. R. Stephenson san aiste <em"
 ">Pre-Telescopic Astronomical Observations</em> (%1)."
 
-#: src/core/StelCore.cpp:2336
+#: src/core/StelCore.cpp:2337
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation (outdated and superseded by Schmadel & "
@@ -2593,7 +2592,7 @@ msgstr ""
 "E.T.-U.T. in the period 1800-1975</em> (%1) mar a cho-fhreagair dàta a "
 "chaidh fhoillseachadh le Brouwer (1952) dha."
 
-#: src/core/StelCore.cpp:2339
+#: src/core/StelCore.cpp:2340
 msgid ""
 "This algorithm was adopted in P. Bretagnon & L. Simon's <em>Planetary "
 "Programs and Tables from -4000 to +2800</em> (1986) and in the PC "
@@ -2603,7 +2602,7 @@ msgstr ""
 " from -4000 to +2800</em> (1986) le P. Bretagnon ⁊ L. Simon agus sa phrògram"
 " amharc-lainn phlanaidean RedShift air a’ PC."
 
-#: src/core/StelCore.cpp:2342
+#: src/core/StelCore.cpp:2343
 #, qt-format
 msgid ""
 "This formula was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2614,13 +2613,13 @@ msgstr ""
 "Morrison san aiste <em>Long-term changes in the rotation of the earth - 700 "
 "B.C. to A.D. 1980</em> (%1)."
 
-#: src/core/StelCore.cpp:2345
+#: src/core/StelCore.cpp:2346
 msgid "This algorithm is used in the PC planetarium program Guide 7."
 msgstr ""
 "Tha an algairim seo ’ga chleachdadh sa phrògram amharc-lainn phlanaidean "
 "Guide 7 air PC."
 
-#: src/core/StelCore.cpp:2348
+#: src/core/StelCore.cpp:2349
 msgid ""
 "This algorithm was given by F. Espenak in his <em>Fifty Year Canon of Solar "
 "Eclipses: 1986-2035</em> (1987) and in his <em>Fifty Year Canon of Lunar "
@@ -2630,7 +2629,7 @@ msgstr ""
 "Canon of Solar Eclipses: 1986-2035</em> (1987) agus sa <em>Fifty Year Canon "
 "of Lunar Eclipses: 1986-2035</em> (1989) aige."
 
-#: src/core/StelCore.cpp:2351
+#: src/core/StelCore.cpp:2352
 #, qt-format
 msgid ""
 "This formula was obtained by K.M. Borkowski (%1) from an analysis of 31 "
@@ -2639,7 +2638,7 @@ msgstr ""
 "Thionnsgnaich K.M. Borkowski (%1) an fhoirmle seo o sgrùdadh air 31 clàr air"
 " dubhraidhean na grèine eadar 2137 BCE agus 1715 CE."
 
-#: src/core/StelCore.cpp:2354
+#: src/core/StelCore.cpp:2355
 #, qt-format
 msgid ""
 "This 12th-order polynomial equation was published by L. D. Schmadel and G. "
@@ -2652,7 +2651,7 @@ msgstr ""
 "E.T. for the Period 1800-1988</em> (%1) mar a cho-fhreagair na luachan dàta "
 "a chaidh a thoirt seachad le Stephenson ⁊ Morrison (1984) ris."
 
-#: src/core/StelCore.cpp:2357
+#: src/core/StelCore.cpp:2358
 msgid ""
 "This formula was adopted by M. Chapront-Touze & J. Chapront in the shortened"
 " version of the ELP 2000-85 lunar theory in their <em>Lunar Tables and "
@@ -2662,7 +2661,7 @@ msgstr ""
 "thionndadh dhe theòirig na gealaich ELP 2000-85 sna <em>Lunar Tables and "
 "Programs from 4000 B.C. to A.D. 8000</em> (1991) aca."
 
-#: src/core/StelCore.cpp:2360
+#: src/core/StelCore.cpp:2361
 #, qt-format
 msgid ""
 "This equation was published by F. R. Stephenson and L. V. Morrison in the "
@@ -2673,7 +2672,7 @@ msgstr ""
 "Morrison san aiste <em>Long-Term Fluctuations in the Earth’s Rotation: 700 "
 "BC to AD 1990</em> (%1)."
 
-#: src/core/StelCore.cpp:2363
+#: src/core/StelCore.cpp:2364
 #, qt-format
 msgid ""
 "F. R. Stephenson published this formula in his book <em>Historical Eclipses "
@@ -2682,7 +2681,7 @@ msgstr ""
 "Dh’fhoillsich F. R. Stephenson an fhoirmle seo san leabhar <em>Historical "
 "Eclipses and Earth’s Rotation</em> aige (%1)."
 
-#: src/core/StelCore.cpp:2366
+#: src/core/StelCore.cpp:2367
 msgid ""
 "From J. Meeus, <em>Astronomical Algorithms</em> (2nd ed., 1998), and widely "
 "used. Table for 1620..2000, and includes a variant of Chapront, Chapront-"
@@ -2693,7 +2692,7 @@ msgstr ""
 "eug-samhail dhe Chapront, Chapront-Touze ⁊ Francou (1997) airson cinn-là "
 "taobh a-muigh 1620..2000."
 
-#: src/core/StelCore.cpp:2369
+#: src/core/StelCore.cpp:2370
 #, qt-format
 msgid ""
 "The JPL Solar System Dynamics Group of the NASA Jet Propulsion Laboratory "
@@ -2703,7 +2702,7 @@ msgstr ""
 "Laboratory an fhoirmle seo air an làrach-lìn eadar-ghnìomhach %1JPL "
 "Horizons%2 aca."
 
-#: src/core/StelCore.cpp:2372
+#: src/core/StelCore.cpp:2373
 #, qt-format
 msgid ""
 "This polynome was published by J. Meeus and L. Simons in article "
@@ -2712,7 +2711,7 @@ msgstr ""
 "Chaidh an t-ioma-nòmach seo fhoillseachadh le J. Meeus agus L. Simons san "
 "aiste <em>Polynomial approximations to Delta T, 1620-2000 AD</em> (%1)."
 
-#: src/core/StelCore.cpp:2375
+#: src/core/StelCore.cpp:2376
 msgid ""
 "The fourth edition of O. Montenbruck & T. Pfleger's <em>Astronomy on the "
 "Personal Computer</em> (2000) provides simple 3rd-order polynomial data fits"
@@ -2723,7 +2722,7 @@ msgstr ""
 "dàta simplidh le ioma-nòmach dhen 3s òrdugh airson na h-ùine bige a "
 "dh’fhalbh."
 
-#: src/core/StelCore.cpp:2378
+#: src/core/StelCore.cpp:2379
 msgid ""
 "E. M. Reingold & N. Dershowitz present this polynomial data fit in "
 "<em>Calendrical Calculations</em> (4th ed. 2018) and in their "
@@ -2731,7 +2730,7 @@ msgid ""
 "<em>Astronomical Algorithms</em> (1991)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2381
+#: src/core/StelCore.cpp:2382
 #, qt-format
 msgid ""
 "This important solution was published by L. V. Morrison and F. R. Stephenson"
@@ -2742,7 +2741,7 @@ msgstr ""
 "R. Stephenson san aiste <em>Historical values of the Earth’s clock error %1T"
 " and the calculation of eclipses</em> (%2) le addendum ann an (%3)."
 
-#: src/core/StelCore.cpp:2384
+#: src/core/StelCore.cpp:2385
 #, qt-format
 msgid ""
 "From the Length of Day (LOD; as determined by Stephenson & Morrison (%2)), "
@@ -2756,7 +2755,7 @@ msgstr ""
 "cunbhalach ma dh’fhaoidte mar a mhìnich Stephenson (%2). Tadhail %3an-seo%4 "
 "airson barrachd fiosrachaidh."
 
-#: src/core/StelCore.cpp:2387 src/core/StelCore.cpp:2390
+#: src/core/StelCore.cpp:2388 src/core/StelCore.cpp:2391
 #, qt-format
 msgid ""
 "This solution by F. Espenak and J. Meeus, based on Morrison & Stephenson "
@@ -2772,15 +2771,15 @@ msgstr ""
 "-1900 to +3000</em> (2006) aca. Tha an fhoirmle seo ’ga cleachdadh sa "
 "phrògram ephemeris na grèine, na gealaich ’s nam planaidean SOLEX."
 
-#: src/core/StelCore.cpp:2387
+#: src/core/StelCore.cpp:2388
 msgid "Used by default."
 msgstr "’Ga chleachdadh a ghnàth."
 
-#: src/core/StelCore.cpp:2390
+#: src/core/StelCore.cpp:2391
 msgid "PATCHED VERSION WITHOUT ADDITIONAL LUNAR ACCELERATION."
 msgstr "TIONNDADH LE PATCH GUN LUATHACHADH A BHARRACHD NA GEALAICH."
 
-#: src/core/StelCore.cpp:2393
+#: src/core/StelCore.cpp:2394
 #, qt-format
 msgid ""
 "This solution by B. Banjevic, based on Stephenson & Morrison (1984), was "
@@ -2791,7 +2790,7 @@ msgstr ""
 "Morrison (1984) fhoillseachadh san aiste <em>Ancient eclipses and dating the"
 " fall of Babylon</em> (%1)."
 
-#: src/core/StelCore.cpp:2396
+#: src/core/StelCore.cpp:2397
 #, qt-format
 msgid ""
 "This solution by S. Islam, M. Sadiq and M. S. Qureshi, based on Meeus & "
@@ -2803,7 +2802,7 @@ msgstr ""
 "Minimization of Polynomial Approximation of DeltaT</em> (%1) agus ath-"
 "sgrùdadh le Sana Islam ann an 2013."
 
-#: src/core/StelCore.cpp:2399
+#: src/core/StelCore.cpp:2400
 #, qt-format
 msgid ""
 "This polynomial approximation with 0.6 seconds of accuracy by M. Khalid, "
@@ -2814,7 +2813,7 @@ msgstr ""
 "Zaidi aig a bheil pongalachd dhe 0.6 diog fhoillseachadh ann an <em>Delta T:"
 " Polynomial Approximation of Time Period 1620-2013</em> (%1)."
 
-#: src/core/StelCore.cpp:2402
+#: src/core/StelCore.cpp:2403
 #, qt-format
 msgid ""
 "This solution by F. R. Stephenson, L. V. Morrison and C. Y. Hohenkerk (2016)"
@@ -2828,7 +2827,7 @@ msgstr ""
 "(air a dealbhadh le freagradh splìona), bheir e luachan o pharabola "
 "faigseach dhuinn."
 
-#: src/core/StelCore.cpp:2405
+#: src/core/StelCore.cpp:2406
 #, qt-format
 msgid ""
 "This solution by G. Henriksson was published in the article <em>The "
@@ -2836,7 +2835,7 @@ msgid ""
 "(%1) and based on C. Schoch's formula (1931)."
 msgstr ""
 
-#: src/core/StelCore.cpp:2408
+#: src/core/StelCore.cpp:2409
 #, qt-format
 msgid ""
 "This is a quadratic formula for calculation of %1T with coefficients defined"
@@ -2845,11 +2844,11 @@ msgstr ""
 "Seo foirmle cheàrnanach gus %1T àireamhachadh le co-èifeachdan a mhìnich an "
 "cleachdaiche."
 
-#: src/core/StelCore.cpp:2411 src/core/SimbadSearcher.cpp:156
+#: src/core/StelCore.cpp:2412 src/core/SimbadSearcher.cpp:156
 msgid "Error"
 msgstr "Mearachd"
 
-#: src/core/StelCore.cpp:2419
+#: src/core/StelCore.cpp:2420
 #, qt-format
 msgid ""
 "The solution's value of %1 for %2 (secular acceleration of the Moon) "
@@ -2858,17 +2857,17 @@ msgstr ""
 "Tha luach %1 airson %2 an fhuasglaidh (luathachadh-linne na gealaich) "
 "feumach air freagarrachadh, faic an treòir airson barrachd fiosrachaidh."
 
-#: src/core/StelCore.cpp:2462
+#: src/core/StelCore.cpp:2463
 msgid "with zero values outside this range"
 msgstr "le luachan neoni taobh a-muigh na rainse seo"
 
-#: src/core/StelCore.cpp:2465
+#: src/core/StelCore.cpp:2466
 msgid "with a typical 1-second accuracy and zero values outside this range"
 msgstr ""
 "le pongalachd coltach dhe 1 diog agus luachan neoni taobh a-muigh na rainse "
 "seo"
 
-#: src/core/StelCore.cpp:2468
+#: src/core/StelCore.cpp:2469
 msgid ""
 "with a mean error of less than one second, max. error 1.9s, and values for "
 "the limit years outside this range"
@@ -2876,16 +2875,16 @@ msgstr ""
 "le meadhan mearachd dhe nas lugha na diog, mearachd as motha 1.9d agus "
 "luachan air bliadhnaichean crìche taobh a-muigh na rainse seo"
 
-#: src/core/StelCore.cpp:2475
+#: src/core/StelCore.cpp:2476
 msgid "with values for the limit years outside this range"
 msgstr "le luachan air bliadhnaichean crìche taobh a-muigh na rainse seo"
 
-#: src/core/StelCore.cpp:2485
+#: src/core/StelCore.cpp:2486
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2, %3."
 msgstr "Rainse dhligheach a’ chleachdaidh: eadar am bliadhna %1 agus %2, %3."
 
-#: src/core/StelCore.cpp:2487
+#: src/core/StelCore.cpp:2488
 #, qt-format
 msgid "Valid range of usage: between years %1 and %2."
 msgstr "Rainse dhligheach a’ chleachdaidh: eadar am bliadhna %1 agus %2."
@@ -3314,12 +3313,20 @@ msgstr "Seall an coinneamh a’ phòla a tuath speuraich"
 msgid "Look towards South Celestial pole"
 msgstr "Seall an coinneamh a’ phòla a deas speuraich"
 
-#: src/core/StelMovementMgr.cpp:217
+#: src/core/StelMovementMgr.cpp:207
+msgid "Field of View"
+msgstr "Raon-seallaidh"
+
+#: src/core/StelMovementMgr.cpp:208
+msgid "Set FOV to"
+msgstr "Suidhich an raon-seallaidh air"
+
+#: src/core/StelMovementMgr.cpp:236
 msgctxt "mount mode"
 msgid "Equatorial mount"
 msgstr "Sorchan meadhan-chriosach"
 
-#: src/core/StelMovementMgr.cpp:219
+#: src/core/StelMovementMgr.cpp:238
 msgctxt "mount mode"
 msgid "Alt-azimuth mount"
 msgstr "Sorchan àirde-azimuth"
@@ -3610,88 +3617,86 @@ msgstr ""
 msgid "Select screenshot directory"
 msgstr "Tagh pasgan a’ ghlacaidh-sgrìn"
 
-#: src/gui/ConfigurationDialog.cpp:985
+#: src/gui/ConfigurationDialog.cpp:987
 #, qt-format
 msgid "Startup FOV: %1%2"
 msgstr "Raon-seallaidh tòiseachaidh: %1%2"
 
-#: src/gui/ConfigurationDialog.cpp:993
+#: src/gui/ConfigurationDialog.cpp:995
 #, qt-format
 msgid "Startup direction of view Az/Alt: %1/%2"
 msgstr "Comhair tòiseachaidh an t-seallaidh Az/Àirde: %1/%2"
 
-#: src/gui/ConfigurationDialog.cpp:1052
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
+#: src/gui/ConfigurationDialog.cpp:1054
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:654
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:263
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
 msgid "Authors"
 msgstr "Ùghdaran"
 
-#: src/gui/ConfigurationDialog.cpp:1053
+#: src/gui/ConfigurationDialog.cpp:1055
 msgid "Contact"
 msgstr "Fios"
 
-#: src/gui/ConfigurationDialog.cpp:1055 src/scripting/StelScriptMgr.cpp:242
+#: src/gui/ConfigurationDialog.cpp:1057 src/scripting/StelScriptMgr.cpp:242
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:92
 #: plugins/Oculars/src/gui/OcularDialog.cpp:488
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:261
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:227
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:122
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:93
-#: plugins/Novae/src/gui/NovaeDialog.cpp:120
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:125
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:138
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:110
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:164
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:135
-#: plugins/FOV/src/gui/FOVWindow.cpp:85
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:87
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:124
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:95
+#: plugins/Novae/src/gui/NovaeDialog.cpp:122
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:127
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:140
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:112
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:166
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:137
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:89
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:211
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:127
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:129
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:144
 msgid "Version"
 msgstr "Tionndadh"
 
-#: src/gui/ConfigurationDialog.cpp:1056 src/scripting/StelScriptMgr.cpp:237
+#: src/gui/ConfigurationDialog.cpp:1058 src/scripting/StelScriptMgr.cpp:237
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:93
 #: plugins/Oculars/src/gui/OcularDialog.cpp:489
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:652
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:653
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:262
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:228
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
-#: plugins/Novae/src/gui/NovaeDialog.cpp:121
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
-#: plugins/FOV/src/gui/FOVWindow.cpp:86
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:125
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:96
+#: plugins/Novae/src/gui/NovaeDialog.cpp:123
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:128
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:141
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:113
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:167
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:138
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:90
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:215
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:145
 msgid "License"
 msgstr "Ceadachas"
 
-#: src/gui/ConfigurationDialog.cpp:1060
+#: src/gui/ConfigurationDialog.cpp:1062
 msgctxt "license"
 msgid "unknown"
 msgstr "chan eil fios"
 
-#: src/gui/ConfigurationDialog.cpp:1168
+#: src/gui/ConfigurationDialog.cpp:1170
 msgid "Running script: "
 msgstr "A’ ruith sgriobt: "
 
-#: src/gui/ConfigurationDialog.cpp:1175
+#: src/gui/ConfigurationDialog.cpp:1177
 msgid "Running script: [none]"
 msgstr "A’ ruith sgriobt: [gun ghin]"
 
-#: src/gui/ConfigurationDialog.cpp:1240
+#: src/gui/ConfigurationDialog.cpp:1242
 msgid ""
 "Finished downloading new star catalogs!\n"
 "Restart Stellarium to display them."
@@ -3699,16 +3704,16 @@ msgstr ""
 "Tha an luchdadh a-nuas aig catalogan nan reultan ùra dèanta!\n"
 "Ath-thòisich Stellarium gus an sealltainn."
 
-#: src/gui/ConfigurationDialog.cpp:1244
+#: src/gui/ConfigurationDialog.cpp:1246
 msgid "All available star catalogs have been installed."
 msgstr "Chaidh a h-uile catalog nan reul a tha ri làimh a stàladh."
 
-#: src/gui/ConfigurationDialog.cpp:1249
+#: src/gui/ConfigurationDialog.cpp:1251
 #, qt-format
 msgid "Get catalog %1 of %2"
 msgstr "Faigh catalog %1 à %2"
 
-#: src/gui/ConfigurationDialog.cpp:1256
+#: src/gui/ConfigurationDialog.cpp:1258
 #, qt-format
 msgid ""
 "Downloading %1...\n"
@@ -3717,7 +3722,7 @@ msgstr ""
 "A’ luchdadh a-nuas %1...\n"
 "(’S urrainn dhut an uinneag seo a dhùnadh.)"
 
-#: src/gui/ConfigurationDialog.cpp:1263
+#: src/gui/ConfigurationDialog.cpp:1265
 #, qt-format
 msgid ""
 "Download size: %1MB\n"
@@ -3728,7 +3733,7 @@ msgstr ""
 "àireamh dhe reultan: %2 millean\n"
 "Rainse a’ mheudachd: %3 - %4"
 
-#: src/gui/ConfigurationDialog.cpp:1309 src/gui/ConfigurationDialog.cpp:1346
+#: src/gui/ConfigurationDialog.cpp:1311 src/gui/ConfigurationDialog.cpp:1348
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3737,11 +3742,11 @@ msgstr ""
 "Mearachd le luchdadh a-nuas %1:\n"
 "%2"
 
-#: src/gui/ConfigurationDialog.cpp:1399
+#: src/gui/ConfigurationDialog.cpp:1401
 msgid "Verifying file integrity..."
 msgstr "A’ dearbhadh nam faidhlichean ..."
 
-#: src/gui/ConfigurationDialog.cpp:1403
+#: src/gui/ConfigurationDialog.cpp:1405
 #, qt-format
 msgid ""
 "Error downloading %1:\n"
@@ -3750,196 +3755,196 @@ msgstr ""
 "Mearachd le luchdadh a-nuas %1:\n"
 "Tha am faidhle coirbte."
 
-#: src/gui/ConfigurationDialog.cpp:1452 src/gui/ConfigurationDialog.cpp:1461
+#: src/gui/ConfigurationDialog.cpp:1454 src/gui/ConfigurationDialog.cpp:1463
 msgid "Available"
 msgstr "Ri fhaighinn"
 
-#: src/gui/ConfigurationDialog.cpp:1454 src/gui/ConfigurationDialog.cpp:1463
+#: src/gui/ConfigurationDialog.cpp:1456 src/gui/ConfigurationDialog.cpp:1465
 msgid "Not Available"
 msgstr "Chan eil e ri fhaighinn"
 
 #. TRANSLATORS: Full phrase is "Algorithm of DeltaT"
-#: src/gui/ConfigurationDialog.cpp:1532
+#: src/gui/ConfigurationDialog.cpp:1534
 msgid "Algorithm of"
 msgstr "An t-algairim airson"
 
-#: src/gui/ConfigurationDialog.cpp:1545
+#: src/gui/ConfigurationDialog.cpp:1547
 msgid "Without correction"
 msgstr "Gun cheartachadh"
 
-#: src/gui/ConfigurationDialog.cpp:1546
+#: src/gui/ConfigurationDialog.cpp:1548
 msgid "Schoch (1931)"
 msgstr "Schoch (1931)"
 
-#: src/gui/ConfigurationDialog.cpp:1547
+#: src/gui/ConfigurationDialog.cpp:1549
 msgid "Clemence (1948)"
 msgstr "Clemence (1948)"
 
-#: src/gui/ConfigurationDialog.cpp:1548
+#: src/gui/ConfigurationDialog.cpp:1550
 msgid "IAU (1952)"
 msgstr "IAU (1952)"
 
-#: src/gui/ConfigurationDialog.cpp:1549
+#: src/gui/ConfigurationDialog.cpp:1551
 msgid "Astronomical Ephemeris (1960)"
 msgstr "Astronomical Ephemeris (1960)"
 
-#: src/gui/ConfigurationDialog.cpp:1550
+#: src/gui/ConfigurationDialog.cpp:1552
 msgid "Tuckerman (1962, 1964) & Goldstine (1973)"
 msgstr "Tuckerman (1962, 1964) ⁊ Goldstine (1973)"
 
-#: src/gui/ConfigurationDialog.cpp:1551
+#: src/gui/ConfigurationDialog.cpp:1553
 msgid "Muller & Stephenson (1975)"
 msgstr "Muller ⁊ Stephenson (1975)"
 
-#: src/gui/ConfigurationDialog.cpp:1552
+#: src/gui/ConfigurationDialog.cpp:1554
 msgid "Stephenson (1978)"
 msgstr "Stephenson (1978)"
 
-#: src/gui/ConfigurationDialog.cpp:1553
+#: src/gui/ConfigurationDialog.cpp:1555
 msgid "Schmadel & Zech (1979)"
 msgstr "Schmadel ⁊ Zech (1979)"
 
-#: src/gui/ConfigurationDialog.cpp:1554
+#: src/gui/ConfigurationDialog.cpp:1556
 msgid "Schmadel & Zech (1988)"
 msgstr "Schmadel ⁊ Zech (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1555
+#: src/gui/ConfigurationDialog.cpp:1557
 msgid "Morrison & Stephenson (1982)"
 msgstr "Morrison ⁊ Stephenson (1982)"
 
-#: src/gui/ConfigurationDialog.cpp:1556
+#: src/gui/ConfigurationDialog.cpp:1558
 msgid "Stephenson & Morrison (1984)"
 msgstr "Stephenson ⁊ Morrison (1984)"
 
-#: src/gui/ConfigurationDialog.cpp:1557
+#: src/gui/ConfigurationDialog.cpp:1559
 msgid "Stephenson & Houlden (1986)"
 msgstr "Stephenson ⁊ Houlden (1986)"
 
-#: src/gui/ConfigurationDialog.cpp:1558
+#: src/gui/ConfigurationDialog.cpp:1560
 msgid "Espenak (1987, 1989)"
 msgstr "Espenak (1987, 1989)"
 
-#: src/gui/ConfigurationDialog.cpp:1559
+#: src/gui/ConfigurationDialog.cpp:1561
 msgid "Borkowski (1988)"
 msgstr "Borkowski (1988)"
 
-#: src/gui/ConfigurationDialog.cpp:1560
+#: src/gui/ConfigurationDialog.cpp:1562
 msgid "Chapront-Touze & Chapront (1991)"
 msgstr "Chapront-Touze ⁊ Chapront (1991)"
 
-#: src/gui/ConfigurationDialog.cpp:1561
+#: src/gui/ConfigurationDialog.cpp:1563
 msgid "Stephenson & Morrison (1995)"
 msgstr "Stephenson ⁊ Morrison (1995)"
 
-#: src/gui/ConfigurationDialog.cpp:1562
+#: src/gui/ConfigurationDialog.cpp:1564
 msgid "Stephenson (1997)"
 msgstr "Stephenson (1997)"
 
-#: src/gui/ConfigurationDialog.cpp:1564
+#: src/gui/ConfigurationDialog.cpp:1566
 msgid "Meeus (1998) (with Chapront, Chapront-Touze & Francou (1997))"
 msgstr "Meeus (1998) (còmhla ri Chapront, Chapront-Touze ⁊ Francou (1997))"
 
-#: src/gui/ConfigurationDialog.cpp:1565
+#: src/gui/ConfigurationDialog.cpp:1567
 msgid "JPL Horizons"
 msgstr "JPL Horizons"
 
-#: src/gui/ConfigurationDialog.cpp:1566
+#: src/gui/ConfigurationDialog.cpp:1568
 msgid "Meeus & Simons (2000)"
 msgstr "Meeus ⁊ Simons (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1567
+#: src/gui/ConfigurationDialog.cpp:1569
 msgid "Morrison & Stephenson (2004, 2005)"
 msgstr "Morrison ⁊ Stephenson (2004, 2005)"
 
-#: src/gui/ConfigurationDialog.cpp:1568
+#: src/gui/ConfigurationDialog.cpp:1570
 msgid "Stephenson, Morrison & Hohenkerk (2016)"
 msgstr "Stephenson, Morrison ⁊ Hohenkerk (2016)"
 
-#: src/gui/ConfigurationDialog.cpp:1570
+#: src/gui/ConfigurationDialog.cpp:1572
 msgid "Espenak & Meeus (2006)"
 msgstr "Espenak ⁊ Meeus (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1573
+#: src/gui/ConfigurationDialog.cpp:1575
 msgid "Espenak & Meeus (2006) no extra moon acceleration"
 msgstr "Espenak ⁊ Meeus (2006) gun luathachadh a bharrachd air a’ ghealach"
 
-#: src/gui/ConfigurationDialog.cpp:1575
+#: src/gui/ConfigurationDialog.cpp:1577
 msgid "Reijs (2006)"
 msgstr "Reijs (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1576
+#: src/gui/ConfigurationDialog.cpp:1578
 msgid "Banjevic (2006)"
 msgstr "Banjevic (2006)"
 
-#: src/gui/ConfigurationDialog.cpp:1577
+#: src/gui/ConfigurationDialog.cpp:1579
 msgid "Montenbruck & Pfleger (2000)"
 msgstr "Montenbruck ⁊ Pfleger (2000)"
 
-#: src/gui/ConfigurationDialog.cpp:1578
+#: src/gui/ConfigurationDialog.cpp:1580
 msgid "Reingold & Dershowitz (2002, 2007, 2018)"
 msgstr ""
 
-#: src/gui/ConfigurationDialog.cpp:1579
+#: src/gui/ConfigurationDialog.cpp:1581
 msgid "Islam, Sadiq & Qureshi (2008, 2013)"
 msgstr "Islam, Sadiq ⁊ Qureshi (2008, 2013)"
 
-#: src/gui/ConfigurationDialog.cpp:1580
+#: src/gui/ConfigurationDialog.cpp:1582
 msgid "Khalid, Sultana & Zaidi (2014)"
 msgstr "Khalid, Sultana ⁊ Zaidi (2014)"
 
-#: src/gui/ConfigurationDialog.cpp:1581
+#: src/gui/ConfigurationDialog.cpp:1583
 msgid "Henriksson (2017)"
 msgstr "Henriksson (2017)"
 
-#: src/gui/ConfigurationDialog.cpp:1582
+#: src/gui/ConfigurationDialog.cpp:1584
 #, qt-format
 msgid "Custom equation of %1T"
 msgstr "Co-aontar gnàthaichte airson %1T"
 
-#: src/gui/ConfigurationDialog.cpp:1631 src/gui/ConfigurationDialog.cpp:1666
+#: src/gui/ConfigurationDialog.cpp:1633 src/gui/ConfigurationDialog.cpp:1668
 #: src/gui/StelGuiItems.cpp:681 src/gui/LocationDialog.cpp:469
 msgid "System default"
 msgstr "Roghainn bhunaiteach an t-siostaim"
 
-#: src/gui/ConfigurationDialog.cpp:1632
+#: src/gui/ConfigurationDialog.cpp:1634
 msgid "yyyy-mm-dd (ISO 8601)"
 msgstr "bbbb-mm-ll (ISO 8601)"
 
-#: src/gui/ConfigurationDialog.cpp:1633
+#: src/gui/ConfigurationDialog.cpp:1635
 msgid "dd-mm-yyyy"
 msgstr "ll-mm-bbbb"
 
-#: src/gui/ConfigurationDialog.cpp:1634
+#: src/gui/ConfigurationDialog.cpp:1636
 msgid "mm-dd-yyyy"
 msgstr "mm-ll-bbbb"
 
-#: src/gui/ConfigurationDialog.cpp:1667
+#: src/gui/ConfigurationDialog.cpp:1669
 msgid "12-hour format"
 msgstr "Fòrmat 12 uair a thìde"
 
-#: src/gui/ConfigurationDialog.cpp:1668
+#: src/gui/ConfigurationDialog.cpp:1670
 msgid "24-hour format"
 msgstr "Fòrmat 24 uair a thìde"
 
-#: src/gui/ConfigurationDialog.cpp:1695 src/ui_configurationDialog.h:1565
+#: src/gui/ConfigurationDialog.cpp:1697 src/ui_configurationDialog.h:1565
 #: plugins/Oculars/src/Oculars.cpp:2410
 #: plugins/Observability/src/Observability.cpp:190
 msgid "None"
 msgstr "Gun ghin"
 
-#: src/gui/ConfigurationDialog.cpp:1696
+#: src/gui/ConfigurationDialog.cpp:1698
 msgid "5/6/5 bits"
 msgstr "5/6/5 biodan"
 
-#: src/gui/ConfigurationDialog.cpp:1697
+#: src/gui/ConfigurationDialog.cpp:1699
 msgid "6/6/6 bits"
 msgstr "6/6/6 biodan"
 
-#: src/gui/ConfigurationDialog.cpp:1698
+#: src/gui/ConfigurationDialog.cpp:1700
 msgid "8/8/8 bits"
 msgstr "8/8/8 biodan"
 
-#: src/gui/ConfigurationDialog.cpp:1699
+#: src/gui/ConfigurationDialog.cpp:1701
 msgid "10/10/10 bits"
 msgstr "10/10/10 biodan"
 
@@ -4209,13 +4214,13 @@ msgstr "Leasaichear OSX: %1"
 #: src/gui/HelpDialog.cpp:448
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:95
 #: plugins/Oculars/src/gui/OcularDialog.cpp:491
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:655
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:266
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:230
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:114
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:200
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:116
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:202
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:223
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:130
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:132
 msgid "Contributors"
 msgstr "Co-thabhartaichean"
 
@@ -4742,19 +4747,19 @@ msgstr "nàdarra"
 msgid "starchart"
 msgstr "cairt-rèile"
 
-#: src/gui/ScriptConsole.cpp:106
+#: src/gui/ScriptConsole.cpp:129
 msgid "Load Script"
 msgstr "Luchdaich sgriobt"
 
-#: src/gui/ScriptConsole.cpp:108 src/gui/ScriptConsole.cpp:128
+#: src/gui/ScriptConsole.cpp:131 src/gui/ScriptConsole.cpp:151
 msgid "Script Files"
 msgstr "Faidhlichean sgriobt"
 
-#: src/gui/ScriptConsole.cpp:126
+#: src/gui/ScriptConsole.cpp:149
 msgid "Save Script"
 msgstr "Sàbhail an sgriobt"
 
-#: src/gui/ScriptConsole.cpp:228
+#: src/gui/ScriptConsole.cpp:252
 msgid "Select Script Include Directory"
 msgstr ""
 
@@ -4805,7 +4810,7 @@ msgstr "Dì-chlaonadh"
 #: src/gui/SearchDialog.cpp:259 src/gui/AstroCalcDialog.cpp:507
 #: src/gui/AstroCalcDialog.cpp:698 src/gui/AstroCalcDialog.cpp:700
 #: src/gui/AstroCalcDialog.cpp:737 src/gui/AstroCalcDialog.cpp:1318
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1205
 msgid "Azimuth"
 msgstr "Azimuth"
 
@@ -4815,7 +4820,7 @@ msgstr "Azimuth"
 #: src/gui/AstroCalcDialog.cpp:1320 src/gui/AstroCalcDialog.cpp:2324
 #: src/gui/AstroCalcDialog.cpp:2789 src/gui/AstroCalcDialog.cpp:3074
 #: src/gui/AstroCalcDialog.cpp:3076 plugins/Satellites/src/Satellite.cpp:310
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1203
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
 msgid "Altitude"
 msgstr "Àirde"
 
@@ -5015,13 +5020,13 @@ msgstr "reul le fèin-ghluasad mòr"
 
 #: src/gui/AstroCalcDialog.cpp:1173 src/gui/AstroCalcDialog.cpp:1668
 #: src/gui/AstroCalcDialog.cpp:3389 src/gui/AstroCalcDialog.cpp:4690
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:314
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr ""
 
 #: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:1670
 #: src/gui/AstroCalcDialog.cpp:3391 src/gui/AstroCalcDialog.cpp:4692
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:316
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "CSV (Comma delimited)"
 msgstr "CSV (sgaradh le cromagan)"
 
@@ -5385,12 +5390,12 @@ msgstr ""
 
 #. TRANSLATORS: hours.
 #: src/gui/AstroCalcDialog.cpp:2830
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:742
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:186
-#: plugins/Novae/src/gui/NovaeDialog.cpp:182
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:180
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:207
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:344
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:743
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
+#: plugins/Novae/src/gui/NovaeDialog.cpp:184
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:182
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:346
 msgctxt "time"
 msgid "h"
 msgstr "u"
@@ -8951,7 +8956,7 @@ msgstr "Cobhair"
 msgid "About"
 msgstr "Mu dhèidhinn"
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:380
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:399
 msgid "Log"
 msgstr "Loga"
 
@@ -10224,7 +10229,7 @@ msgid "Additional settings for Graphical User Interface"
 msgstr "Barrachd roghainnean airson na h-eadar-aghaidh ghrafaigich"
 
 #: src/ui_configurationDialog.h:1506
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1201
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:484
 msgid "Time"
 msgstr "Àm"
@@ -10317,7 +10322,6 @@ msgstr ""
 
 #: src/ui_configurationDialog.h:1541
 #: plugins/NavStars/src/ui_navStarsWindow.h:220
-#: plugins/FOV/src/ui_fovWindow.h:354
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:244
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:316
 msgid "Save settings"
@@ -10329,7 +10333,6 @@ msgstr "Aisig na roghainnean bunaiteach a tha aig Stellarium bho thùs"
 
 #: src/ui_configurationDialog.h:1545
 #: plugins/NavStars/src/ui_navStarsWindow.h:219
-#: plugins/FOV/src/ui_fovWindow.h:371
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:245
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:317
 msgid "Restore defaults"
@@ -10466,7 +10469,7 @@ msgid "Constellation"
 msgstr "Reul-bhad"
 
 #: src/ui_configurationDialog.h:1613
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
 msgid "Hour angle/Declination"
 msgstr "Ceàrn uarach/Dì-chlaonadh"
 
@@ -11069,55 +11072,69 @@ msgstr "Ceann-là ’s àm (UTC):"
 msgid "Get the recent GRS measurement"
 msgstr "Faigh tomhas o chionn goirid air an Spoit Mhòir Dheirg"
 
-#: src/ui_scriptConsole.h:351
+#: src/ui_scriptConsole.h:370
 msgid "Script console"
 msgstr "Consoil sgriobt"
 
-#: src/ui_scriptConsole.h:354
+#: src/ui_scriptConsole.h:373
 msgid "load script from file"
 msgstr "luchdaich sgriobt o fhaidhle"
 
-#: src/ui_scriptConsole.h:358
+#: src/ui_scriptConsole.h:377
 msgid "save script to file"
 msgstr "sàbhail sgriobt gu faidhle"
 
-#: src/ui_scriptConsole.h:362
+#: src/ui_scriptConsole.h:381
 msgid "clear"
 msgstr "falamhaich"
 
-#: src/ui_scriptConsole.h:366
+#: src/ui_scriptConsole.h:385
 msgid "pre-process script using SSC preprocessor"
 msgstr "ro-phròiseasaich an sgriobt le ro-phròiseasar SSC"
 
-#: src/ui_scriptConsole.h:369
+#: src/ui_scriptConsole.h:388
 msgid "quickly load and run a utility script"
 msgstr "grad-luchdaich ’s ruith sgriobt goireis"
 
-#: src/ui_scriptConsole.h:372
+#: src/ui_scriptConsole.h:391
 msgid "run script"
 msgstr "ruith sgriobt"
 
-#: src/ui_scriptConsole.h:376
+#: src/ui_scriptConsole.h:395
 msgid "stop script"
 msgstr "cuir crìoch air an sgriobt"
 
-#: src/ui_scriptConsole.h:379
+#: src/ui_scriptConsole.h:398
 msgid "Script"
 msgstr "Sgriobt"
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:400
 msgid "Output"
 msgstr "Às-chur"
 
-#: src/ui_scriptConsole.h:383
+#: src/ui_scriptConsole.h:401
+msgid "Load scripts from the User Directory by default"
+msgstr ""
+
+#: src/ui_scriptConsole.h:402 plugins/Satellites/src/ui_satellitesDialog.h:796
+#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
+#: plugins/Novae/src/ui_novaeDialog.h:243
+#: plugins/Quasars/src/ui_quasarsDialog.h:310
+#: plugins/Pulsars/src/ui_pulsarsDialog.h:351
+#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
+#: plugins/Observability/src/ui_ObservabilityDialog.h:359
+msgid "Settings"
+msgstr "Roghainnean"
+
+#: src/ui_scriptConsole.h:404
 msgid "Cursor position"
 msgstr "Ionad a’ chùrsair"
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:406
 msgid "Include dir:"
 msgstr "Gabh a-steach am pasgan:"
 
-#: src/ui_scriptConsole.h:386
+#: src/ui_scriptConsole.h:407
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "..."
 msgstr "..."
@@ -11953,41 +11970,39 @@ msgstr ""
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:104
 #: plugins/Oculars/src/gui/OcularDialog.cpp:554
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:693
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:279
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:236
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:101
-#: plugins/Novae/src/gui/NovaeDialog.cpp:138
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:136
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:172
-#: plugins/FOV/src/gui/FOVWindow.cpp:92
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:94
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:144
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:103
+#: plugins/Novae/src/gui/NovaeDialog.cpp:140
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:165
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:211
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:174
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:96
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:317
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:136
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:138
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:172
 msgid "Links"
 msgstr "Ceanglaichean"
 
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:105
 #: plugins/Oculars/src/gui/OcularDialog.cpp:555
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:694
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:695
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:280
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:237
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:102
-#: plugins/Novae/src/gui/NovaeDialog.cpp:139
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:137
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:210
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
-#: plugins/FOV/src/gui/FOVWindow.cpp:93
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:95
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:137
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:145
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:104
+#: plugins/Novae/src/gui/NovaeDialog.cpp:141
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:139
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:166
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:139
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:175
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:97
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:139
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:173
 #, qt-format
 msgid ""
@@ -12000,31 +12015,9 @@ msgstr ""
 #. TRANSLATORS: The text between braces is the text of an HTML link.
 #: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:108
 #: plugins/Oculars/src/gui/OcularDialog.cpp:558
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:697
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:698
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:283
 #: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:240
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:146
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:105
-#: plugins/Novae/src/gui/NovaeDialog.cpp:142
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:140
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:167
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:140
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:213
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:176
-#: plugins/FOV/src/gui/FOVWindow.cpp:96
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:98
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:140
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:176
-msgid "If you have a question, you can {get an answer here}."
-msgstr ""
-
-#. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
-#: plugins/Oculars/src/gui/OcularDialog.cpp:560
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:699
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:148
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:107
 #: plugins/Novae/src/gui/NovaeDialog.cpp:144
@@ -12033,20 +12026,19 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:142
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:215
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:178
-#: plugins/FOV/src/gui/FOVWindow.cpp:98
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:100
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:321
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:142
-#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:178
-msgid "Bug reports and feature requests can be made {here}."
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:176
+msgid "If you have a question, you can {get an answer here}."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
-#: plugins/Oculars/src/gui/OcularDialog.cpp:562
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:701
-#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
-#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:110
+#: plugins/Oculars/src/gui/OcularDialog.cpp:560
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:700
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:285
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:242
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:150
 #: plugins/NavStars/src/gui/NavStarsWindow.cpp:109
 #: plugins/Novae/src/gui/NovaeDialog.cpp:146
@@ -12055,10 +12047,30 @@ msgstr ""
 #: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:144
 #: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:217
 #: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:180
-#: plugins/FOV/src/gui/FOVWindow.cpp:100
 #: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:102
-#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:323
 #: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:144
+#: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:178
+msgid "Bug reports and feature requests can be made {here}."
+msgstr ""
+
+#. TRANSLATORS: The text between braces is the text of an HTML link.
+#: plugins/AngleMeasure/src/gui/AngleMeasureDialog.cpp:112
+#: plugins/Oculars/src/gui/OcularDialog.cpp:562
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:702
+#: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:287
+#: plugins/SolarSystemEditor/src/gui/SolarSystemManagerWindow.cpp:244
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:152
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:111
+#: plugins/Novae/src/gui/NovaeDialog.cpp:148
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:146
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:173
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:146
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:182
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:104
+#: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:325
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:146
 #: plugins/ArchaeoLines/src/gui/ArchaeoLinesDialog.cpp:180
 msgid ""
 "If you want to read full information about this plugin and its history, you "
@@ -12140,7 +12152,6 @@ msgstr "Aisig na bun-roghainnean"
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:500
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:581
 #: plugins/Observability/src/ui_ObservabilityDialog.h:360
-#: plugins/FOV/src/ui_fovWindow.h:373
 #: plugins/EquationOfTime/src/ui_equationOfTimeWindow.h:247
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:462
 #: plugins/PointerCoordinates/src/ui_pointerCoordinatesWindow.h:319
@@ -13376,25 +13387,25 @@ msgctxt "operational status"
 msgid "decayed"
 msgstr "crìonta"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:320
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:321
 msgid "Save predicted Iridium flares as..."
 msgstr "Sàbhail na lasanan iridium mar…"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:365
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:367
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:366
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:368
 msgid "Predicted Iridium flares"
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:650
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:651
 msgid "Stellarium Satellites Plugin"
 msgstr "Plugan nan saideal Stellarium"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:656
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:657
 #: plugins/Satellites/src/ui_satellitesDialog.h:848
 msgid "Iridium flares"
 msgstr "Lasanan iridium"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:660
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:661
 msgid ""
 "The Satellites plugin predicts the positions of artificial satellites in "
 "Earth orbit."
@@ -13402,18 +13413,18 @@ msgstr ""
 "Ro-innsidh plugan nan saideal ionadan nan saidealan fuadain a tha a’ "
 "cuairteachadh na Talmhainn."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:662
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
 msgid "Notes for users"
 msgstr "Nòtaichean dhan luchd-cleachdaidh"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:663
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
 msgid ""
 "Satellites and their orbits are only shown when the observer is on Earth."
 msgstr ""
 "Cha dèid na saidealan ’s na reul-chuairtean aca a shealltainn ach nuair a "
 "bhios an neach-amhairc air an Talamh."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:664
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
 msgid ""
 "Predicted positions are only good for a fairly short time (on the order of "
 "days, weeks or perhaps a month into the past and future). Expect high "
@@ -13423,7 +13434,7 @@ msgstr ""
 "sheachdainean no ’s dòcha mìosa). Bi an dùil air tachartasan neònach ma "
 "choimheadas tu air cinn-là taobh a-muigh na rainse seo."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:665
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:666
 msgid ""
 "Orbital elements go out of date pretty quickly (over mere weeks, sometimes "
 "days).  To get useful data out, you need to update the TLE data regularly."
@@ -13435,7 +13446,7 @@ msgstr ""
 #. TRANSLATORS: The translated names of the button and the tab are filled in
 #. automatically. You can check the original names in Stellarium. File names
 #. are not translated.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:667
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:668
 #, qt-format
 msgid ""
 "Clicking the \"%1\" button in the \"%2\" tab of this dialog will revert to "
@@ -13446,7 +13457,7 @@ msgstr ""
 "dhan fhaidhle tùsail %3.  Thèid an seann-fhaidhle a ghlèidheadh mar %4. "
 "Lorgaidh tu seo sa phasgan user data, fo “modules/Satellites/”."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:673
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:674
 msgid ""
 "The Satellites plugin is still under development.  Some features are "
 "incomplete, missing or buggy."
@@ -13455,11 +13466,11 @@ msgstr ""
 "coileanta agus dh’fhaoidte gu bheil cuidh dhiubh a dhìth no làn bugaichean."
 
 #. TRANSLATORS: Title of a section in the About tab of the Satellites window
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:677
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
 msgid "TLE data updates"
 msgstr "Ùrachadh air dàta TLE"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:678
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
 msgid ""
 "The Satellites plugin can automatically download TLE data from Internet "
 "sources, and by default the plugin will do this if the existing data is more"
@@ -13469,7 +13480,7 @@ msgstr ""
 "eadar-lìn gu fèin-obrachail agus nì am plugan sin a ghnàth ma bhios an dàta "
 "nas sine na 72 uair a thìde. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:679
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
 #, qt-format
 msgid ""
 "If you disable Internet updates, you may update from a file on your "
@@ -13481,7 +13492,7 @@ msgstr ""
 "bhith san aon fhòrmat ’s a tha ùrachaidhean Celestrak (faic %1 airson ball-"
 "eisimpleir)."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:680
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:681
 msgid ""
 "<b>Note:</b> if the name of a satellite in update data has anything in "
 "square brackets at the end, it will be removed before the data is used."
@@ -13490,27 +13501,27 @@ msgstr ""
 "am broinn dàta an ùrachaidh, thèid a thoirt air falbh mus dèid an dàta a "
 "chleachdadh."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:683
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
 msgid "Adding new satellites"
 msgstr "A’ cur saidealan ùra ris"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:684
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:685
 msgid ""
 "Make sure the satellite(s) you wish to add are included in one of the URLs "
 "listed in the Sources tab of the satellites configuration dialog."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:685
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:686
 msgid ""
 "Go to the Satellites tab, and click the '+' button.  Select the satellite(s)"
 " you wish to add and select the 'add' button."
 msgstr ""
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:687
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
 msgid "Technical notes"
 msgstr "Nòtaichean teicnigeach"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:688
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
 msgid ""
 "Positions are calculated using the SGP4 & SDP4 methods, using NORAD TLE data"
 " as the input. "
@@ -13518,7 +13529,7 @@ msgstr ""
 "Thèid na h-ionadan àireamhachadh leis na dòighean SGP4 ⁊ SDP4, a’ cleachdadh"
 " dàta NORAD TLE ’na ion-chur. "
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:689
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:690
 msgid ""
 "The orbital calculation code is written by Jose Luis Canales according to "
 "the revised Spacetrack Report #3 (including Spacetrack Report #6). "
@@ -13529,149 +13540,149 @@ msgstr ""
 
 #. TRANSLATORS: The numbers contain the opening and closing tag of an HTML
 #. link
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:691
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:692
 #, qt-format
 msgid "See %1this document%2 for details."
 msgstr "Faic %1an sgrìobhainn seo%2 airson barrachd fiosrachaidh."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:719
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:165
-#: plugins/Novae/src/gui/NovaeDialog.cpp:161
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:159
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:186
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:323
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:720
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:167
+#: plugins/Novae/src/gui/NovaeDialog.cpp:163
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:188
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:325
 msgid "Next update"
 msgstr "An ath-ùrachadh"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:724
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:171
-#: plugins/Novae/src/gui/NovaeDialog.cpp:167
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:165
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:192
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:329
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:725
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
+#: plugins/Novae/src/gui/NovaeDialog.cpp:169
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:194
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
 msgid "Internet updates disabled"
 msgstr "Chaidh ùrachaidhean eadar-lìn a chur à comas"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:726
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:750
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:173
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:219
-#: plugins/Novae/src/gui/NovaeDialog.cpp:169
-#: plugins/Novae/src/gui/NovaeDialog.cpp:215
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:167
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:237
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:194
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:275
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:331
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:406
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:727
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:751
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:221
+#: plugins/Novae/src/gui/NovaeDialog.cpp:171
+#: plugins/Novae/src/gui/NovaeDialog.cpp:217
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:239
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:277
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:408
 msgid "Updating now..."
 msgstr "Ga ùrachadh an-dràsta ..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:731
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:175
-#: plugins/Novae/src/gui/NovaeDialog.cpp:171
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:169
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:196
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:333
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:732
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:177
+#: plugins/Novae/src/gui/NovaeDialog.cpp:173
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:171
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:198
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:335
 msgid "< 1 minute"
 msgstr "< mionaid"
 
 #. TRANSLATORS: minutes.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:736
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:180
-#: plugins/Novae/src/gui/NovaeDialog.cpp:176
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:174
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:201
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:338
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:737
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:182
+#: plugins/Novae/src/gui/NovaeDialog.cpp:178
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:176
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:340
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:220
 msgctxt "time"
 msgid "m"
 msgstr "m"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:753
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:222
-#: plugins/Novae/src/gui/NovaeDialog.cpp:218
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:240
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:278
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:409
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:754
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:224
+#: plugins/Novae/src/gui/NovaeDialog.cpp:220
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:242
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:280
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:411
 msgid "Update error"
 msgstr "Mearachd leis an ùrachadh"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:766
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:767
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 removed"
 msgstr ""
 "Chaidh %1/%2 saideal(an) ùrachadh; %3 air a chur ris; %4 air a thoirt air "
 "falbh"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:768
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:769
 #, qt-format
 msgid "Updated %1/%2 satellite(s); %3 added; %4 missing"
 msgstr "Chaidh %1/%2 saideal(an) ùrachadh; %3 air a chur ris; %4 a dhìth"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:830
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:831
 msgid "[new source]"
 msgstr "[tùs ùr]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:882
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:883
 #: plugins/Satellites/src/ui_satellitesDialog.h:765
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:208
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:210
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:237
-#: plugins/Novae/src/gui/NovaeDialog.cpp:204
+#: plugins/Novae/src/gui/NovaeDialog.cpp:206
 #: plugins/Novae/src/ui_novaeDialog.h:240
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:202
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
 #: plugins/Quasars/src/ui_quasarsDialog.h:295
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:229
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
 #: plugins/Pulsars/src/ui_pulsarsDialog.h:331
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:396
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
 #: plugins/Exoplanets/src/ui_exoplanetsDialog.h:532
 #: plugins/MeteorShowers/src/ui_MSConfigDialog.h:460
 msgid "Update now"
 msgstr "Ùraich an-dràsta"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:884
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:210
-#: plugins/Novae/src/gui/NovaeDialog.cpp:206
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:204
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:231
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:398
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:885
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:212
+#: plugins/Novae/src/gui/NovaeDialog.cpp:208
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:206
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:400
 msgid "Update from files"
 msgstr "Ùraich o fhaidhlichean"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:927
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
 msgid "[orbit calculation error]"
 msgstr "[mearachd le àireamhachadh nan reul-chuairtean]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:928
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:929
 msgid "[all newly added]"
 msgstr "[tha na h-uile dìreach air an cur ris]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:929
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:930
 msgid "[all not displayed]"
 msgstr "[chan eil na h-uile ’gan sealltainn]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:930
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:931
 msgid "[all displayed]"
 msgstr "[tha na h-uile ’gan sealltainn]"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:931
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:932
 msgid "[all]"
 msgstr "[na h-uile]"
 
 #. TRANSLATORS: Displayed in the satellite group selection box.
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:975
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:976
 msgid "New group..."
 msgstr "Buidheann ùr..."
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1181
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1182
 msgid "Select TLE Update File"
 msgstr "Tagh faidhle TLE airson an ùrachaidh"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1202
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1203
 msgid "Brightness"
 msgstr "Soilleireachd"
 
-#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1205
+#: plugins/Satellites/src/gui/SatellitesDialog.cpp:1206
 msgid "Satellite"
 msgstr "Saideal"
 
@@ -13812,16 +13823,6 @@ msgstr "Falaich na saidealan fuadain nach fhaicear"
 #: plugins/Observability/src/ui_ObservabilityDialog.h:358
 msgid "Save settings as default"
 msgstr "Sàbhail seo mar na bun-roghainnean"
-
-#: plugins/Satellites/src/ui_satellitesDialog.h:796
-#: plugins/Supernovae/src/ui_supernovaeDialog.h:240
-#: plugins/Novae/src/ui_novaeDialog.h:243
-#: plugins/Quasars/src/ui_quasarsDialog.h:310
-#: plugins/Pulsars/src/ui_pulsarsDialog.h:351
-#: plugins/Exoplanets/src/ui_exoplanetsDialog.h:560
-#: plugins/Observability/src/ui_ObservabilityDialog.h:359
-msgid "Settings"
-msgstr "Roghainnean"
 
 #: plugins/Satellites/src/ui_satellitesDialog.h:799
 msgid "Double-click a satellite to start tracking it."
@@ -15839,7 +15840,7 @@ msgid "Minor Solar System objects"
 msgstr "Seall cuspairean beaga an rian-ghrèine"
 
 #: plugins/SolarSystemEditor/src/ui_solarSystemManagerWindow.h:263
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
 msgid "Note"
 msgstr "An aire"
 
@@ -15928,34 +15929,34 @@ msgstr "Seòrsa a’ mòr-nòbha"
 msgid "Maximum brightness"
 msgstr "An t-soillearachd as motha"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:121
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:123
 msgid "Historical Supernovae Plug-in"
 msgstr "Plugan nam mòr-nòbhathan eachdraidheil"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:127
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
 msgid "This plugin allows you to see some bright historical supernovae: "
 msgstr ""
 "Leigidh am plugan seo leat cuid a mhòr-nòbhathan eachdraidheil soilleir "
 "fhaicinn: "
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:129
-#: plugins/Novae/src/gui/NovaeDialog.cpp:130
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:132
 #, qt-format
 msgid "This list altogether contains %1 stars."
 msgstr "Tha %1 reul air an liosta seo uile gu lèir."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:130
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
 #, qt-format
 msgid "All those supernovae are brighter %1 at peak of brightness."
 msgstr ""
 "Tha mullach soilleireachd nam mòr-nòbhathan seo uile nas soilleire na %1."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:132
-#: plugins/Novae/src/gui/NovaeDialog.cpp:132
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:134
+#: plugins/Novae/src/gui/NovaeDialog.cpp:134
 msgid "Light curves"
 msgstr "Lùban solais"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:133
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
 #, qt-format
 msgid ""
 "This plugin implements a simple model of light curves for different "
@@ -15968,40 +15969,40 @@ msgstr ""
 "nòbhathan dhen t-seòrsa I is II %1an-seo%2 (sgèile ceart ann an làithean) "
 "agus tha am modail seo ’ga cleachdadh airson a’ phlugain seo."
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:135
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:137
 msgid "Acknowledgments"
 msgstr "Taing"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:136
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
 msgid ""
 "We thank the following people for their contribution and valuable comments:"
 msgstr ""
 "gun robh math aig na daoine airson an co-thabhartas is beachdan luachmhor:"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:138
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
 msgid "Sergei Blinnikov"
 msgstr "Sergei Blinnikov"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:140
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:142
 msgid "Institute for Theoretical and Experimental Physics"
 msgstr "Institute for Theoretical and Experimental Physics"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:141
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:157
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:143
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
 msgid "in Russia"
 msgstr "san Ruis"
 
 #. TRANSLATORS: days.
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:192
-#: plugins/Novae/src/gui/NovaeDialog.cpp:188
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:186
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:213
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:194
+#: plugins/Novae/src/gui/NovaeDialog.cpp:190
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:188
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:215
 msgctxt "time"
 msgid "d"
 msgstr "l"
 
-#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:229
+#: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:231
 msgid "Historical supernovae is updated"
 msgstr "Chaidh na mòr-nòbhathan eachdraidheil ùrachadh"
 
@@ -16048,7 +16049,7 @@ msgid "Navigational Stars"
 msgstr "Reultan-iùil"
 
 #: plugins/NavStars/src/NavStars.cpp:55
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:98
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:100
 msgid "This plugin marks navigational stars from a selected set."
 msgstr ""
 "Cuiridh am plugan seo comharra ri reultan-iùil o thaghadh dhe reultan."
@@ -16092,22 +16093,22 @@ msgstr ""
 "Seo an 160 reul air liosta an Almanaic Sheòladairich Ruisich (Is <em>%1</em>"
 " an t-ainm tùsail a th’ air san Ruisis)."
 
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:92
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:94
 msgid "Navigational Stars Plug-in"
 msgstr "Plugan airson reultan-iùil"
 
 #. TRANSLATORS: Part of full phrase: Anglo-American set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:152
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
 msgid "Anglo-American"
 msgstr "Sasannach-Ameireaganach"
 
 #. TRANSLATORS: Part of full phrase: French set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:154
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:156
 msgid "French"
 msgstr "Frangach"
 
 #. TRANSLATORS: Part of full phrase: Russian set of navigational stars
-#: plugins/NavStars/src/gui/NavStarsWindow.cpp:156
+#: plugins/NavStars/src/gui/NavStarsWindow.cpp:158
 msgid "Russian"
 msgstr "Ruiseach"
 
@@ -16145,7 +16146,7 @@ msgstr "Cuir an sealladh an comas leis an tòiseachadh"
 msgid "Bright Novae"
 msgstr "Nòbhathan soilleir"
 
-#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:125
+#: plugins/Novae/src/Novae.cpp:74 plugins/Novae/src/gui/NovaeDialog.cpp:127
 msgid "A plugin that shows some bright novae in the Milky Way galaxy."
 msgstr ""
 "Plugan a sheallas cuid a nòbhathan soilleir ann an Slighe Chlann Uisnich."
@@ -16158,11 +16159,11 @@ msgstr "Uinneag rèiteachaidh nan nòbhathan soilleir"
 msgid "nova"
 msgstr "nòbha"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:119
+#: plugins/Novae/src/gui/NovaeDialog.cpp:121
 msgid "Bright Novae Plug-in"
 msgstr "Plugan nan nòbhathan soilleir"
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:126
+#: plugins/Novae/src/gui/NovaeDialog.cpp:128
 msgid ""
 "You can find novae via search tool by entering designation of nova or its "
 "common name (e.g. 'Nova Cygni 1975' or 'V1500 Cyg')."
@@ -16171,18 +16172,18 @@ msgstr ""
 "ainmeachadh no ainm coitcheann an nòbha (m.e. “Nova Cygni 1975” no “V1500 "
 "Cyg”)."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:128
+#: plugins/Novae/src/gui/NovaeDialog.cpp:130
 msgid "This plugin allows you to see recent bright novae: "
 msgstr ""
 "Leigidh am plugan seo leat nòbhathan soilleir a thachair o chionn goirid a "
 "shealltainn: "
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:131
+#: plugins/Novae/src/gui/NovaeDialog.cpp:133
 #, qt-format
 msgid "All those novae are brighter than %1 at peak of brightness."
 msgstr "Tha mullach soilleireachd nan nòbhathan seo uile nas soilleire na %1."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:133
+#: plugins/Novae/src/gui/NovaeDialog.cpp:135
 msgid ""
 "This plugin uses a very simple model for calculation of light curves for "
 "novae stars."
@@ -16190,7 +16191,7 @@ msgstr ""
 "Cleachdaidh am plugan seo modail glè shimplidh gus lùban solais nan reultan "
 "nòbha àireamhachadh."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:134
+#: plugins/Novae/src/gui/NovaeDialog.cpp:136
 #, qt-format
 msgid ""
 "This model is based on time for decay by %1 magnitudes from the maximum "
@@ -16199,7 +16200,7 @@ msgstr ""
 "Tha am modail seo stèidhichte air an t-ùine a bheir crìonadh nam meudachdan "
 "dhe %1 on luach as motha far a bheil %1 co-ionnann ri 2, 3, 6 agus 9."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:135
+#: plugins/Novae/src/gui/NovaeDialog.cpp:137
 msgid ""
 "If a nova has no values for decay of magnitude then this plugin will use "
 "generalized values for it."
@@ -16207,7 +16208,7 @@ msgstr ""
 "Mur eil luachan airson crìonadh nam meudachdan aig an nòbha, cleachdaidh am "
 "plugan seo luachan coitcheann dha."
 
-#: plugins/Novae/src/gui/NovaeDialog.cpp:225
+#: plugins/Novae/src/gui/NovaeDialog.cpp:227
 msgid "Novae is updated"
 msgstr "Chaidh na nòbhathan ùrachadh"
 
@@ -16248,27 +16249,27 @@ msgstr ""
 msgid "Radio flux density around 1.4GHz (21cm)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:124
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:126
 msgid "Quasars Plug-in"
 msgstr "Plugan nan cuasaran"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:131
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
 msgid ""
 "The Quasars plugin provides visualization of some quasars brighter than "
 "visual magnitude 18. The catalogue of quasars was compiled from \"Quasars "
 "and Active Galactic Nuclei\" (13th Ed.)"
 msgstr ""
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:133
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
 msgid "Veron+ 2010"
 msgstr "Veron+ 2010"
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:135
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:137
 #, qt-format
 msgid "The current catalog contains info about %1 quasars."
 msgstr "Tha fiosrachadh air %1 cuasar sa chatalog làithreach."
 
-#: plugins/Quasars/src/gui/QuasarsDialog.cpp:247
+#: plugins/Quasars/src/gui/QuasarsDialog.cpp:249
 msgid "Quasars is updated"
 msgstr "Chaidh na cuasaran ùrachadh"
 
@@ -16310,7 +16311,7 @@ msgid "Pulsars"
 msgstr "Pulsaran"
 
 #: plugins/Pulsars/src/Pulsars.cpp:74
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:143
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:145
 msgid ""
 "This plugin plots the position of various pulsars, with object information "
 "about each one."
@@ -16430,7 +16431,7 @@ msgid "mJy"
 msgstr "mJy"
 
 #: plugins/Pulsars/src/Pulsar.cpp:285
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
 #: plugins/MeteorShowers/src/gui/MSConfigDialog.cpp:307
 msgid "Notes"
 msgstr "Nòtaichean"
@@ -16473,11 +16474,11 @@ msgstr ""
 "reul neodroin iomallach le eimisean frith-bhualaidh teasa ach cha "
 "mhothaicheadh dha dh’eimisean rèidio"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:137
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:139
 msgid "Pulsars Plug-in"
 msgstr "Plugan nam pulsaran"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:144
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:146
 #, qt-format
 msgid ""
 "Pulsar data is derived from 'The ATNF Pulsar Catalogue'  (Manchester, R. N.,"
@@ -16488,40 +16489,40 @@ msgstr ""
 "(Manchester, R. N., Hobbs, G. B., Teoh, A. ⁊ Hobbs, M., Astron. J., 129, "
 "1993-2006 (2005) (%1astro-ph/0412641%2))."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:147
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:149
 #, qt-format
 msgid "Current catalog contains info about %1 pulsars."
 msgstr "Tha fiosrachadh air %1 pulsar sa chatalog làithreach."
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:150
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:152
 msgid "pulsar identifiers have the prefix 'PSR'"
 msgstr "Tha ro-leasachan “PSR” air aithnichearan nam pulsaran"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:151
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:153
 msgid "Acknowledgment"
 msgstr "Taing"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:154
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
 msgid "Vladimir Samodourov"
 msgstr "Vladimir Samodourov"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:156
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:158
 msgid "Pushchino Radio Astronomy Observatory"
 msgstr "Pushchino Radio Astronomy Observatory"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:159
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
 msgid "Maciej Serylak"
 msgstr "Maciej Serylak"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:161
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:163
 msgid "Nancay Radioastronomical Observatory"
 msgstr "Nancay Radioastronomical Observatory"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:162
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:164
 msgid "in France"
 msgstr "san Fhraing"
 
-#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:285
+#: plugins/Pulsars/src/gui/PulsarsDialog.cpp:287
 msgid "Pulsars is updated"
 msgstr "Chaidh na pulsaran ùrachadh"
 
@@ -16583,11 +16584,11 @@ msgstr ""
 msgid "Remote control"
 msgstr "Uidheam-smachd cèin"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:109
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:111
 msgid "Remote Control Plug-in"
 msgstr "Plugan nan uidheam-smachd cèin"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:117
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:119
 msgid ""
 "The Remote Control plugin provides a web interface to allow state changes "
 "and triggering scripts using a connected webbrowser."
@@ -16596,36 +16597,36 @@ msgstr ""
 "atharraich thu an staid agus an cuid thu sgriobtaichean gu dol slighe "
 "brabhsair-lìn cheangailte."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:123
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:125
 msgid "It is also possible to send commands via command line, e.g.."
 msgstr "’S urrainn dhut àitheantan a chur on loidhne-àithne cuideachd, can"
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:129
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:131
 msgid "This allows triggering automatic show setups for museums etc."
 msgstr ""
 "’S urrainn dhut taisbeanaidhean taigh-tasgaidh a shuidheachadh leis agus "
 "msaa."
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:130
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
 msgid "This plugin was developed during ESA SoCiS 2015."
 msgstr "Chaidh am plugan seo a leasachadh rè ESA SoCiS 2015."
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:132
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:134
 msgid "This plugin uses the {QtWebApp HTTP server} by Stefan Frings."
 msgstr ""
 
 #. TRANSLATORS: The text between braces is the text of an HTML link.
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:136
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:138
 msgid "Further information can be found in the {developer documentation}."
 msgstr ""
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:183
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:185
 #, qt-format
 msgid "Listening on %1, IP: "
 msgstr "Ag èisteachd ri %1, IP: "
 
-#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:188
+#: plugins/RemoteControl/src/gui/RemoteControlDialog.cpp:190
 msgid "Not active."
 msgstr "Chan eil e gnìomhach."
 
@@ -16695,68 +16696,68 @@ msgstr ""
 " bhios a’ ruith air lìonra. Faic an leabhar-mìneachaidh airson barrachd "
 "fiosrachaidh."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:117
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:119
 #, qt-format
 msgid "ERROR: %1"
 msgstr "MEARACHD: %1"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:134
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:136
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:465
 msgid "Start server"
 msgstr "Tòisich am frithealaiche"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:139
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:141
 #: plugins/RemoteSync/src/ui_remoteSyncDialog.h:468
 msgid "Connect to server"
 msgstr "Ceangail ri frithealaiche"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:142
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:144
 msgid "Not running"
 msgstr "Chan eil e ’ga ruith"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:147
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:149
 msgid "Stop server"
 msgstr "Cuir stad air an fhrihealaiche"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:152
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:154
 #, qt-format
 msgid "Running as server on port %1"
 msgstr "’Ga ruith mar fhrithealaiche air port %1"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:166
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:171
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:168
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:173
 msgid "Cancel connecting"
 msgstr "Sguir dhen cheangal"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:167
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:169
 #, qt-format
 msgid "Connecting to %1: %2..."
 msgstr "A’ ceangail ri %1: %2…"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:172
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:174
 #, qt-format
 msgid "Retrying connection to %1: %2..."
 msgstr "A’ feuchainn ri ceangal ri %1 a-rithist: %2…"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:178
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:179
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:180
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:181
 msgid "Disconnecting..."
 msgstr "’Ga dhì-cheangal…"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:183
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:185
 msgid "Disconnect from server"
 msgstr "Dì-cheangail on fhrithealaiche"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:184
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:186
 #, qt-format
 msgid "Connected to %1: %2"
 msgstr "Ceangailte ri %1: %2"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:195
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:197
 msgid "Remote Sync Plug-in"
 msgstr "Plugan an t-sioncronachaidh chèin"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:203
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
 msgid ""
 "The Remote Sync plugin provides state synchronization for multiple "
 "Stellarium instances running in a network."
@@ -16764,7 +16765,7 @@ msgstr ""
 "Bheir plugan an t-sioncronachaidh dhut sioncronachadh nan staidean eadar "
 "iomadh ionstans dhe Stellarium a bhios a’ ruith air lìonra."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:204
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
 msgid ""
 "This can be used, for example, to create multi-screen setups using multiple "
 "physical PCs."
@@ -16772,7 +16773,7 @@ msgstr ""
 "’S urrainn dhut a chleachdadh gus Stellarium a shealltainn air iomadh sgrìn "
 "le iomadh PC fiosaigeach, mar eisimpleir."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:205
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
 msgid ""
 "Partial synchronization allows parallel setups of e.g. overview and detail "
 "views."
@@ -16780,19 +16781,19 @@ msgstr ""
 "Leigidh sioncronachadh pàirteach leat foir-sheallaidhean is seallaidhean "
 "mionaideach fa leth a shealltainn aig an aon àm, mar eisimpleir."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:206
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:208
 msgid "See manual for detailed description."
 msgstr "Faid an leabhar-mìneachaidh airson barrachd fiosrachaidh."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:207
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:209
 msgid "This plugin was developed during ESA SoCiS 2015&amp;2016."
 msgstr "Chaidh am plugan seo a leasachadh rè ESA SoCiS 2015⁊2016."
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:245
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:247
 msgid "Server Name"
 msgstr "Ainm an fhrithealaiche"
 
-#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:253
+#: plugins/RemoteSync/src/gui/RemoteSyncDialog.cpp:255
 msgid "Server not active."
 msgstr "Chan eil am frithealaiche gnìomhach."
 
@@ -17063,7 +17064,7 @@ msgstr "Teòthachd co-chothr."
 
 #. TRANSLATORS: Average stellar flux of the planet
 #: plugins/Exoplanets/src/Exoplanet.cpp:362
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:211
 msgid "Flux"
 msgstr "Sruth"
 
@@ -17076,11 +17077,11 @@ msgstr "ESI"
 msgid "Equilibrium temperature on Earth"
 msgstr "Teothachd cho-chothromach air an talamh"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:163
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:165
 msgid "Exoplanets Plug-in"
 msgstr "Plugan nan exo-phlanaidean"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:168
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:170
 #, qt-format
 msgid ""
 "This plugin plots the position of stars with exoplanets. Exoplanets data is "
@@ -17089,7 +17090,7 @@ msgstr ""
 "Tarraingidh am plugan seo ionad nan reultan aig a bheil exo-phlanaid. Tha "
 "dàta nan exo-phlanaid ’ga thogail o “%1Extrasolar Planets Encyclopaedia%2”"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:169
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
 #, qt-format
 msgid ""
 "The list of potential habitable exoplanets and data about them were taken "
@@ -17100,7 +17101,7 @@ msgstr ""
 "mun dèidhinn a thogail o “%1The Habitable Exoplanets Catalog%3” le "
 "%2Planetary Habitability Laboratory%3."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:171
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:173
 #, qt-format
 msgid ""
 "The current catalog contains info about %1 planetary systems, which "
@@ -17110,11 +17111,11 @@ msgstr ""
 "Tha mu %1 siostam phlanaidean sa chatalog làithreach le %2 exo-planaid uile "
 "gu lèir aca (a’ gabhail a-steach %3 exo-phlanaid le coltas aitreabhach)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:197
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
 msgid "Potential habitable exoplanets"
 msgstr "Exo-phlanaidean le coltas aitreabhach"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:199
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:201
 msgid ""
 "This plugin can display potential habitable exoplanets (orange marker) and "
 "some information about those planets."
@@ -17122,17 +17123,17 @@ msgstr ""
 "Seallaidh am plugan seo exo-phlanaidean le coltas aitreabhach (comharra "
 "orainds) agus beagan fiosrachaidh mu na planaidean ud."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:200
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
 msgid ""
 "Extra info for the optimistic samples of potentially habitable planets mark "
 "by italic text."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:202
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:204
 msgid "Planetary Class"
 msgstr "Clas planaideach"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:203
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
 msgid ""
 "Planet classification from host star spectral type (F, G, K, M), habitable "
 "zone (hot, warm, cold) and size (miniterran, subterran, terran, superterran,"
@@ -17143,11 +17144,11 @@ msgstr ""
 "thalamhach, talamhach, os-thalamhach, blioghach, neaptunach) (An Talamh = "
 "G-blàth Talamhach)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:205
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
 msgid "Equilibrium Temperature"
 msgstr "Teòthachd cho-chothromach"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:206
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:208
 msgid ""
 "The planetary equilibrium temperature is a theoretical temperature in (°C) "
 "that the planet would be at when considered simply as if it were a black "
@@ -17161,24 +17162,24 @@ msgstr ""
 "eisimpleir, ’s e -18.15°C (255 K) a th’ ann an teòthachd cho-chothromach na "
 "Talmhainn."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:207
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:209
 msgid ""
 "Actual surface temperatures are expected to be larger than the equilibrium "
 "temperature depending on the atmosphere of the planets, which are currently "
 "unknown (e.g. Earth mean global surface temperature is about 288 K or 15°C)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:210
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
 msgid ""
 "Average stellar flux of the planet in Earth fluxes (Earth = 1.0 "
 "S<sub>E</sub>)."
 msgstr ""
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:212
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
 msgid "Earth Similarity Index (ESI)"
 msgstr "Inneacs na coltachd Talmhainn (ESI)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:213
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
 msgid ""
 "Similarity to Earth on a scale from 0 to 1, with 1 being the most Earth-"
 "like. ESI depends on the planet's radius, density, escape velocity, and "
@@ -17188,11 +17189,11 @@ msgstr ""
 "as coltaiche ris an Talamh. Tha ESI a-rèir rèideas, dùmhlachd, luaths "
 "teichidh, agus teothachd uachdair na planaide."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:214
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
 msgid "Proper names"
 msgstr "Ainmean sònrachaidh"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:215
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
 msgid ""
 "In December 2015, the International Astronomical Union (IAU) has officially "
 "approved names for several exoplanets after a public vote."
@@ -17200,7 +17201,7 @@ msgstr ""
 "Dh’aontaich International Astronomical Union (IAU) ri aimnean oifigeil air "
 "cuid a dh’exo-planaidean às dèidh bhòtaidh phoblaich san Dùmhlachd 2015."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:216
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
 msgid ""
 "From the latin <em>Veritas</em>, truth. The ablative form means <em>where "
 "there is truth</em>."
@@ -17208,7 +17209,7 @@ msgstr ""
 "On fhacal Laideann <em>Veritas</em> air a bheil an ciall “fìrinn”. Is ciall "
 "dhan chruth ablatach <em>far a bheil fìrinn ann</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:217
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
 msgid ""
 "From the latin <em>Spes</em>, hope. The ablative form means <em>where there "
 "is hope</em>."
@@ -17216,11 +17217,11 @@ msgstr ""
 "On fhacal Laideann <em>Spes</em> air a bheil an ciall “dòchas”. Is ciall "
 "dhan chruth ablatach <em>far a bheil dòchas ann</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:218
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
 msgid "Musica is Latin for <em>music</em>."
 msgstr "’S e am facal Laidinn air <em>ceòl</em> a th’ ann am Musica."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:219
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
 msgid ""
 "Arion was a genius of poetry and music in ancient Greece. According to "
 "legend, his life was saved at sea by dolphins after attracting their "
@@ -17230,13 +17231,13 @@ msgstr ""
 "Grèige àrsaidh. A-rèir an t-seanchais, chaidh a bheatha a shàbhaladh air a’ "
 "mhuir le leumadairean nuair a ghlac e an aire le seinn air a’ kithara aige."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:220
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
 msgid "Fafnir was a Norse mythological dwarf who turned into a dragon."
 msgstr ""
 "’S e troich sheann-sgeulach Lochlannach a’ bhann am Fafnir a chaidh ’na "
 "dhràgon."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:221
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
 msgid ""
 "Orbitar is a contrived word paying homage to the space launch and orbital "
 "operations of NASA."
@@ -17244,13 +17245,13 @@ msgstr ""
 "’S e facal ùr a th’ an an Orbitar a bheir urram dhan t-siubhal-fhànais is "
 "obair timcheall air an Talamh le NASA."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:222
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
 msgid "Chalawan is a mythological crocodile king from a Thai folktale."
 msgstr ""
 "’S e rìgh crogaill miotasach o bheul-aithris nan Tàidh a th’ ann an "
 "Chalawan."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:223
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
 msgid ""
 "Taphao Thong is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
@@ -17258,7 +17259,7 @@ msgstr ""
 "’S e tè dhe dà pheathar a tha co-cheangailte ri sgeulachd Chalawan nan Tàidh"
 " a th’ ann an Taphao Thong."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:224
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
 msgid ""
 "Taphao Kae is one of two sisters associated with the Thai folk tale of "
 "Chalawan."
@@ -17266,7 +17267,7 @@ msgstr ""
 "’S e tè dhe dà pheathar a tha co-cheangailte ri sgeulachd Chalawan nan Tàidh"
 " a th’ ann an Taphao Kae."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:225
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
 msgid ""
 "Helvetios is Celtic for <em>the Helvetian</em> and refers to the Celtic "
 "tribe that lived in Switzerland during antiquity."
@@ -17275,7 +17276,7 @@ msgstr ""
 "a bheir iomradh dha chinneadh Ceilteach a bhiodh a’ fuireach far a bheil an "
 "t-Eilbheis san latha an-diugh  ri linn àrsaidh."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:226
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
 msgid ""
 "Dimidium is Latin for <em>half</em>, referring to the planet's mass of at "
 "least half the mass of Jupiter."
@@ -17284,7 +17285,7 @@ msgstr ""
 "iomradh air tomad na planaide a tha co-dhiù leth-thomad dhe thomad a’ "
 "Bhliogh."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:227
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
 msgid ""
 "Nicolaus Copernicus or Mikolaj Kopernik (1473-1543) was a Polish astronomer "
 "who proposed the heliocentric model of the solar system in his book <em>De "
@@ -17294,7 +17295,7 @@ msgstr ""
 "Kopernik (1473-1543) a mhol am mòideal grian-mheadhanach dhen rian-ghrèine "
 "san leabhar <em>De revolutionibus orbium coelestium</em> aige."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:228
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
 msgid ""
 "Galileo Galilei (1564-1642) was an Italian astronomer and physicist often "
 "called the <em>father of observational astronomy</em> and the <em>father of "
@@ -17308,7 +17309,7 @@ msgstr ""
 "na ceithir saidealan as motha aig a’ Bhliogh a lorg e le glainne-amhairc, a’"
 " chiad amharc air solas na Rìbhinne le glainne-amhairc agus a bharrachd."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:229
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
 msgid ""
 "Tycho Brahe (1546-1601) was a Danish astronomer and nobleman who recorded "
 "accurate astronomical observations of the stars and planets. These "
@@ -17320,7 +17321,7 @@ msgstr ""
 "planaidean. Bha na h-amhairc sin fìor-chudromach dha mhìneachadh nan trì "
 "laghan air gluasad nam planaidean a rinn Kepler."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:230
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
 msgid ""
 "Hans Lipperhey (1570-1619) was a German-Dutch lens grinder and spectacle "
 "maker who is often attributed with the invention of the refracting telescope"
@@ -17330,7 +17331,7 @@ msgstr ""
 " a bh’ ann an Hans Lipperhey (1570-1619) agus tha mòran dhen bheachd gum b’ "
 "esan a thionnsgnaich a’ ghlainne-amhairc ath-raonaidh ann an 1608."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:231
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
 msgid ""
 "Jacharias Janssen (1580s-1630s) was a Dutch spectacle maker who is often "
 "attributed with invention of the microscope, and more controversially with "
@@ -17341,7 +17342,7 @@ msgstr ""
 " agus cuid dhen bheachd gun do thionnsgnaich e a’ ghlainne-amhairc "
 "cuideachd."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:232
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
 msgid ""
 "Thomas Harriot (ca. 1560-1621) was an English astronomer, mathematician, "
 "ethnographer, and translator, who is attributed with the first drawing of "
@@ -17352,7 +17353,7 @@ msgstr ""
 "bheachd gum b’ easan a’ chiad fhear a tharraing a’ ghealaich le taic "
 "glainne-amhairc."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:233
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
 msgid ""
 "<em>Amateru</em> is a common Japanese appellation for shrines when they "
 "enshrine Amaterasu, the Shinto goddess of the Sun, born from the left eye of"
@@ -17362,7 +17363,7 @@ msgstr ""
 "chisteachan gu tric ma tha iad a’ glèidheadh Amaterasu, seo ban-dia Shinto "
 "na grèine a rugadh o shùil chlì an dè Izanagi."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:234
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
 msgid ""
 "Hypatia was a famous Greek astronomer, mathematician, and philosopher. She "
 "was head of the Neo-Platonic school at Alexandria in the early 5th century, "
@@ -17372,7 +17373,7 @@ msgstr ""
 " ann an Hypatia. Bha i ’na cheannard aig sgoil nua-Phlàtonach Alexandria aig"
 " toiseach an 5mh linn gus an deach a murt le gràisg Crìostaidh ann an 415."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:235
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
 msgid ""
 "Ran is the Norse goddess of the sea, who stirs up the waves and captures "
 "sailors with her net."
@@ -17380,7 +17381,7 @@ msgstr ""
 "’S e ban-dia mara Lochlannach a th’ ann an Ran a charaicheas na tonnan ’s a "
 "ghlacas seòladairean leis na lìontan aice."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:236
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
 msgid ""
 "AEgir is Ran's husband, the personified god of the ocean. <em>AEgir</em> and"
 " <em>Ran</em> both represent the <em>Jotuns</em> who reign in the outer "
@@ -17390,7 +17391,7 @@ msgstr ""
 "<em>Ægir</em> agus <em>Ran</em> na <em>Jotun</em> a riaghlaicheas an domhan "
 "a-muigh; bha naoinear nigheanan aca."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:237
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
 msgid ""
 "Ancient Semitic name and modern Arabic name for the city of Palmyra, a "
 "UNESCO World Heritage Site."
@@ -17398,21 +17399,21 @@ msgstr ""
 "Seann-ainm Seimiteach is ainm ùr Arabach aig baile Palmyra a tha ’na Làrach "
 "Dualchas na Cruinne UNESCO."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:238
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
 msgid "Dagon was a Semitic deity, often represented as half-man, half-fish."
 msgstr ""
 "’S e dia Seimiteach a bh’ ann an Dagon a chaidh a riochdachadh mar leth-"
 "dhuine is leth-iasg gu tric."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:239
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
 msgid "Tonatiuh was the Aztec god of the Sun."
 msgstr "’S e dia na grèine aig na h-Azteceach a bh’ ann an Tonatiuh."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:240
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
 msgid "Meztli was the Aztec goddess of the Moon."
 msgstr "’S e dia na gealaich aig na h-Azteceach a bh’ ann an Meztli."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:241
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
 msgid ""
 "Ogma was a deity of eloquence, writing, and great physical strength in the "
 "Celtic mythologies of Ireland and Scotland, and may be related to the Gallo-"
@@ -17422,11 +17423,11 @@ msgstr ""
 " an Ogma ann am faoin-sgeulachdan Ceilteach Èireann is na h-Alba agus "
 "dh’fhaoidte gu bheil e càirdeach ris an dia Gall-Ròmanach <em>Ogmios</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:242
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
 msgid "Smertrios was a Gallic deity of war."
 msgstr "’S e dia cogaidh aig muinntir na Gaille a bh’ ann an Smertrios."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:243
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
 msgid ""
 "Intercrus means <em>between the legs</em> in Latin style, referring to the "
 "star's position in the constellation Ursa Major."
@@ -17434,13 +17435,13 @@ msgstr ""
 "Is <em>eadar na casan</em> ciall dha Intercrus ann an stoidhle Laideann a "
 "bheir iomradh air ionad na rèile ann an reul-bhad a’ Chrainn-arain."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:244
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
 msgid "Arkas was the son of Callisto (Ursa Major) in Greek mythology."
 msgstr ""
 "’S e mac Callisto (a’ Chrann-arain) a bh’ ann an Arkas sna faoin-sgeulachdan"
 " Greugach."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:245
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
 msgid ""
 "Miguel de Cervantes Saavedra (1547-1616) was a famous Spanish writer and "
 "author of <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -17449,7 +17450,7 @@ msgstr ""
 "Saavedra (1547-1616) agus is esan an t-ùghdar aig <em>El Ingenioso Hidalgo "
 "Don Quixote de la Mancha</em>."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:246
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
 msgid ""
 "Lead fictional character from Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -17457,7 +17458,7 @@ msgstr ""
 "Prìomh-phearsa faoinsgeulach ann an <em>El Ingenioso Hidalgo Don Quixote de "
 "la Mancha</em> le Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:247
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
 msgid ""
 "Fictional character and love interest of Don Quijote (or Quixote) in "
 "Cervantes's <em>El Ingenioso Hidalgo Don Quixote de la Mancha</em>."
@@ -17465,7 +17466,7 @@ msgstr ""
 "Pearsa faoinsgeulach agus gaol aig Don Quijote (no Quixote) oirre ann an "
 "<em>El Ingenioso Hidalgo Don Quixote de la Mancha</em> Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:248
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
 msgid ""
 "Fictional horse of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -17473,7 +17474,7 @@ msgstr ""
 "Each faoinsgeulach Don Quijote ann an <em>El Ingenioso Hidalgo Don Quixote "
 "de la Mancha</em> le Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:249
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
 msgid ""
 "Fictional squire of Don Quijote in Cervantes's <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em>."
@@ -17481,7 +17482,7 @@ msgstr ""
 "Sguibhir faoinsgeulach Don Quijote ann an <em>El Ingenioso Hidalgo Don "
 "Quixote de la Mancha</em> le Cervantes."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:250
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
 msgid ""
 "Thestias is the patronym of Leda and her sister Althaea, the daughters of "
 "Thestius. Leda was a Greek queen, mother of Pollux and of his twin Castor, "
@@ -17491,7 +17492,7 @@ msgstr ""
 "e bànrigh Ghreugach a bh’ ann an Leda, màthair an leth-aoin Pollux is "
 "Castor, Helen agus Clytemnestra."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:251
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
 msgid ""
 "Lich is a fictional undead creature known for controlling other undead "
 "creatures with magic."
@@ -17499,11 +17500,11 @@ msgstr ""
 "’S e Lich am facal Beurla a tha air closach faoinsgeulach a chuireas "
 "closaich eile fo smachd le draoidheachd."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:252
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
 msgid "Draugr refers to undead creatures in Norse mythology."
 msgstr "Bhei Draugr iomradh air closaich ann am miotasan Lochlannach."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:253
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
 msgid ""
 "Poltergeist is a name for supernatural beings that create physical "
 "disturbances, from German for <em>noisy ghost</em>."
@@ -17512,7 +17513,7 @@ msgstr ""
 "chruthaicheas buaireadh fiosaigeach agus is <em>taibhse ràpalach</em> as "
 "ciall dha."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:254
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
 msgid ""
 "Phobetor is a Greek mythological deity of nightmares, the son of Nyx, the "
 "primordial deity of night."
@@ -17520,7 +17521,7 @@ msgstr ""
 "’S e dia nan trom-laighe sna miotasan Greugach a th’ ann an Phobetor mac "
 "Nyx, dia prìomh-òrdail na h-oidhche."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:255
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
 msgid ""
 "Titawin (also known as Medina of Tetouan) is a settlement in northern "
 "Morocco and UNESCO World Heritage Site. Historically it was an important "
@@ -17532,7 +17533,7 @@ msgstr ""
 " e ionad conaltraidh dà shìobhaltasan (Spàinnteach is Arabach) o shean agus "
 "dà mhor-thìr (An Roinn-Eòrpa is Afraga) a bhiodh ann às dèidh an 8mh linn."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:256
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
 msgid ""
 "Saffar is named for Abu al-Qasim Ahmed Ibn-Abd Allah Ibn-Omar al Ghafiqi "
 "Ibn-al-Saffar, who taught arithmetic, geometry, and astronomy in 11th "
@@ -17544,7 +17545,7 @@ msgstr ""
 "reul-eòlas san 11mh linn ann an Cordova san Andalus (san Spàinnt an latha "
 "an-diugh) agus sgrìobh e tràchdas buadhmhor air cleachdadh na slaite-rèile."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:257
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
 msgid ""
 "Samh is named for Abu al-Qasim 'Asbagh ibn Muhammad ibn al-Samh al-Mahri (or"
 " <em>Ibn al-Samh</em>), a noted 11th century astronomer and mathematician in"
@@ -17555,7 +17556,7 @@ msgstr ""
 "cliùiteach an 11mh linn aig sgoil al Majriti ann an Cordova san Andalus (san"
 " Spàinnt an latha an-diugh)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:258
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
 msgid ""
 "Majriti is named for Abu al-Qasim al-Qurtubi al-Majriti, a notable "
 "mathematician, astronomer, scholar, and teacher in 10th century and early "
@@ -17565,7 +17566,7 @@ msgstr ""
 "matamataigear, reul-eòlaiche, sgoilear is ollamh cudromach san 10mh linn "
 "agus aig toiseach ann 11mh linn san Andalus (san Spàinnt an latha an-diugh)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:259
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:261
 msgid ""
 "Libertas is Latin for <em>liberty</em>. Liberty refers to social and "
 "political freedoms, and a reminder that there are people deprived of liberty"
@@ -17578,7 +17579,7 @@ msgstr ""
 "Tha reul-bhad Aquila a’ riochdachadh iolaire a tha ’na shamhla dha shaorsa "
 "gu tric."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:260
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
 msgid ""
 "Fortitudo is Latin for <em>fortitude</em>. Fortitude means emotional and "
 "mental strength in the face of adversity, as embodied by the eagle "
@@ -17589,7 +17590,7 @@ msgstr ""
 "cruaidh-chàis mar a nochdas an t-iolaire (’ga riochdachadh le reul-bhad "
 "Aquila)."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:262
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
 msgid ""
 "These names are modified based on the original proposals, to be consistent "
 "with the IAU rules."
@@ -17597,7 +17598,7 @@ msgstr ""
 "Chaidh na h-ainmean seo atharrachadh, stèidhichte air na tairgsean tùsail "
 "gus gèilleadh ri riaghailtean IAU."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:263
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
 msgid ""
 "The original name proposed, <em>Veritas</em>, is that of an asteroid "
 "important for the study of the solar system."
@@ -17605,7 +17606,7 @@ msgstr ""
 "Chaidh <em>Veritas</em> a thairgse o thùs ach seo ainm air astaroid a tha "
 "cudromach ann an sgrùdadh an rian-ghrèine."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:264
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
 msgid ""
 "The name originally proposed, <em>Amaterasu</em>, is already used for an "
 "asteroid."
@@ -17613,7 +17614,7 @@ msgstr ""
 "Tha an t-ainm <em>Amaterasu</em> a chaidh a thairgse o thùs ’ga chleachdadh "
 "airson astaroid mar-thà."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:265
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
 msgid ""
 "Note the typographical difference between <em>AEgir</em> and <em>Aegir</em>,"
 " the Norwegian transliteration. The same name, with the spelling "
@@ -17625,11 +17626,11 @@ msgstr ""
 "leis an litreachadh <em>Aegir</em> a chur air fear dhe shaidealan Satairn a "
 "chaidh a lorg ann an 2004."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:266
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
 msgid "<em>Ogmios</em> is a name already attributed to an asteroid."
 msgstr "Chaidh <em>Ogmios</em> a chur air astaroid mar-thà."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:267
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
 msgid ""
 "The original proposed name <em>Leda</em> is already attributed to an "
 "asteroid and to one of Jupiter's satellites. The name <em>Althaea</em> is "
@@ -17639,7 +17640,7 @@ msgstr ""
 "agus air saideal Satairn mar-thà. Chaidh an t-ainm <em>Althaea</em> a chur "
 "air astaroid cuideachd."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:268
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
 msgid ""
 "The original spelling of <em>Lippershey</em> was corrected to "
 "<em>Lipperhey</em> on 15.01.2016. The commonly seen spelling "
@@ -17651,199 +17652,199 @@ msgstr ""
 "(le <em>s</em> ris) gu tric ri linn mearachd sgrìobhaidh a chaidh a dhèanamh"
 " ann an 1831 agus bu chòir a sheachnadh."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:269
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
 msgid "Additional info"
 msgstr "Barrachd fiosrachaidh"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:270
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
 msgid "Circumstellar habitable zone"
 msgstr "Roinn aitreabhach cuairt-reultail"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:271
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
 msgid "Planetary equilibrium temperature"
 msgstr "Teòthachd cho-chothromach na planaid"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:272
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
 msgid "Planetary habitability"
 msgstr "Comas-àiteachaidh na planaide"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:273
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
 msgid "Earth Similarity Index"
 msgstr "Inneacs na coltachd Talmhainn"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:274
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:276
 msgid "Final Results of NameExoWorlds Public Vote Released"
 msgstr ""
 "Na toraidhean deireannach aig bhòtadh poblach NameExoWorlds a chaidh "
 "fhoillseachadh"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:275
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:277
 msgid "NameExoWorlds website"
 msgstr "Làrach-lìn NameExoWorlds"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:290
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
 msgid "General professional Web sites relevant to extrasolar planets"
 msgstr ""
 "Làraichean-lìn proifeiseanta coitcheann a tha buntainneach dha planaidean "
 "taobh a-muigh ar rian-ghrèine"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:291
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
 msgid "Exoplanets: an interactive version of XKCD 1071"
 msgstr "Exo-phlanaidean: tionndadh eadar-ghnìomhach de XKCD 1071"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:292
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
 msgid "HEK (The Hunt for Exomoons with Kepler)"
 msgstr "HEK (Sealg exo-ghealaichean le Kepler)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:293
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
 msgid "Exoplanets in binaries and multiple systems (Richard Schwarz)"
 msgstr ""
 "Exo-phlanaidean ann an siostaman bìnearaidh is iomadach (Richard Schwarz)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:294
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
 msgid "Naming exoplanets (IAU)"
 msgstr "Ainmeachadh nan exo-phlanaidean (IAU)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "Some Astronomers and Groups active in extrasolar planets studies"
 msgstr ""
 "Cuid a reul-eòlaichean is buidhnean a nì sgrùdadh air planaidean taobh "
 "a-muigh ar rian-ghrèine"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:295
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
 msgid "update: 16 April 2012"
 msgstr "ùrachadh: 16 dhen Ghiblean 2012"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:296
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
 msgid "The Exoplanet Data Explorer"
 msgstr "Taisgealaiche dàta nan exo-phlanaidean"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:297
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
 msgid "The Anglo-Australian Planet Search"
 msgstr "Lorg nam planaidean Sasannach-Astràilianach"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:298
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
 msgid "Geneva Extrasolar Planet Search Programmes"
 msgstr "Prògraman Geneva gus planaidean taobh a-muigh ar rian-ghrèine a lorg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:299
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
 msgid "OLBIN (Optical Long-Baseline Interferometry News)"
 msgstr "OLBIN (Optical Long-Baseline Interferometry News)"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:300
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
 msgid "NASA's Exoplanet Exploration Program"
 msgstr "Prògram rùrachadh nan exo-phlanaidean aig NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:301
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
 msgid "Pulsar planets"
 msgstr "Planaidean pulsair"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:302
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
 msgid "The NASA Exoplanet Archive"
 msgstr "Tasglann exo-phlanaidean NASA"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:303
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
 msgid "IAU Commission 53: Extrasolar Planets"
 msgstr "Coimisean 53 an IAU: Planaidean taobh a-muigh ar rian-ghrèine"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:304
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
 msgid "ExoMol"
 msgstr "ExoMol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:305
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
 msgid "The Habitable Zone Gallery"
 msgstr "Gailearaidh nan roinnean aitreabhach"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:306
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
 msgid "PlanetQuest - The Search for Another Earth"
 msgstr "PlanetQuest - A’ lorg airson talamh eile"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:307
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:309
 msgid "Open Exoplanet Catalogue"
 msgstr "Fosgail catalog nan exo-phlanaidean"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:308
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:310
 msgid "The Habitable Exoplanets Catalog"
 msgstr "Catalog nan exo-planaidean le coltas aitreabhach"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:416
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:418
 msgid "Exoplanets is updated"
 msgstr "Chaidh na h-exo-phlanaidean ùrachadh"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:552
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:554
 msgid "Orbital Eccentricity"
 msgstr "Neo-mheadhanachd na reul-cuairte"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:553
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
 msgid "Orbit Semi-Major Axis, AU"
 msgstr "Leth-mhòr-aiseal na reul-cuairte, AU"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:554
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
 msgid "Planetary Mass, Mjup"
 msgstr "Tomad na planaide, Mjup"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:555
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
 msgid "Planetary Radius, Rjup"
 msgstr "Rèideas na planaide, Mjup"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:556
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
 msgid "Orbital Period, days"
 msgstr "ùine na reul-cuairte, là"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:557
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
 msgid "Angular Distance, arcsec"
 msgstr "Astar ceàrnach, àrc-dhiog."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:558
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:560
 msgid "Effective temperature of host star, K"
 msgstr "Teothachd èifeachdach na rèile òstair, K"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:559
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
 msgid "Year of Discovery"
 msgstr "Am bliadhna a chaidh a lorg"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:560
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
 msgid "Metallicity of host star"
 msgstr "Meatailteachd na rèile òstair"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:561
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
 msgid "V magnitude of host star, mag"
 msgstr "Meudachd V na rèile òstair, meud."
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:562
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
 msgid "RA (J2000) of star, deg"
 msgstr "Dd (J2000) na rèile, ceum"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:563
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:565
 msgid "Dec (J2000) of star, deg"
 msgstr "Dì-chl (J2000) na rèile, ceum"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:564
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:566
 msgid "Distance to star, pc"
 msgstr "Astar dhan reul, pc"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:565
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:567
 msgid "Mass of host star, Msol"
 msgstr "Tomad na rèile òstair, Msol"
 
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:566
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:568
 msgid "Radius of host star, Rsol"
 msgstr "Rèideas na rèile òstair, Rsol"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:600
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:602
 msgctxt "temperature scale"
 msgid "Kelvin"
 msgstr "Kelvin"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:602
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
 msgctxt "temperature scale"
 msgid "Celsius"
 msgstr "Celsius"
 
 #. TRANSLATORS: Name of temperature scale
-#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:604
+#: plugins/Exoplanets/src/gui/ExoplanetsDialog.cpp:606
 msgctxt "temperature scale"
 msgid "Fahrenheit"
 msgstr "Fahrenheit"
@@ -18133,11 +18134,11 @@ msgstr "Cuspairean san amharc"
 msgid "Observability configuration window"
 msgstr "Uinneag rèiteachaidh nan cuspairean san amharc"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:134
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:136
 msgid "Observability Plug-in"
 msgstr "Plugan airson cuspairean san amharc"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:139
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
 msgid ""
 "Plugin that analyzes the observability of the selected source (or the screen"
 " center, if no source is selected). The plugin can show rise, transit, and "
@@ -18159,15 +18160,15 @@ msgstr ""
 "Georg Zotti airson an comhairle.<br><br>Ivan Marti-Vidal (Onsala Space "
 "Observatory)"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:141
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:143
 msgid "Explanation of some parameters"
 msgstr "Mìneachadh air cuid a pharamadairean"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid "Sun altitude at twilight:"
 msgstr "Àirde na grèine rè a’ ghlòmaidh:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:142
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
 msgid ""
 "Any celestial object will be considered visible when the Sun is below this "
 "altitude. The altitude at astronomical twilight ranges usually between -12 "
@@ -18180,11 +18181,11 @@ msgstr ""
 " a thaobh tuairmse air rainse nan ceann-aimsire nuair a bhios e san amharc "
 "(faic gu h-ìosal)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid "Horizon altitude:"
 msgstr "Àirde na fàire:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:144
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
 msgid ""
 "Minimum observable altitude (due to mountains, buildings, or just a limited "
 "telescope mount)."
@@ -18192,11 +18193,11 @@ msgstr ""
 "An àirde as ìsle a ghabhas amharc (ri linn bheanntan, thogalaichean no "
 "sorchan glainne-amhairc cuingichte)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid "Today ephemeris:"
 msgstr "Ephemeris an-diugh:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:146
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
 msgid ""
 "Self-explanatory. The program will show the rise, set, and culmination "
 "(transit) times. The exact times for these ephemeris are given in two ways: "
@@ -18208,11 +18209,11 @@ msgstr ""
 "a thoirt seachad air dà dhòigh: ’nam faidean (an t-“àm làithreach”) agus "
 "uairean air an uaireadair (san àm ionadail)."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid "Acronychal/Cosmical/Heliacal rise/set:"
 msgstr "Èirig/laighe acronychach/chosmach/ghrèineach:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:147
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
 msgid ""
 "The days of Cosmical rise/set of an object are estimated as the days when "
 "the object rises (or sets) together with the rise/set of the Sun. The exact "
@@ -18251,11 +18252,11 @@ msgstr ""
 "bhliadhna a chithear an reul). Aig àm na laighe grèinich, laighidh an reul "
 "mu thoiseach na h-oidhche reul-eòlaich."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid "Largest Sun separation:"
 msgstr "Sgaradh as motha on ghrian:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:148
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
 msgid ""
 "Happens when the angular separation between the Sun and the celestial object"
 " are maximum. In most cases, this is equivalent to say that the Equatorial "
@@ -18275,11 +18276,11 @@ msgstr ""
 "duirche an speura aig an dì-chlaonadh ud. Mar sin, seo an oidhche “as "
 "fhearr” gus coimhead air cuspair sònraichte."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
 msgid "Nights with source above horizon:"
 msgstr "Oidhcheannan leis an tùs os cionn na fàire:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:149
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:151
 msgid ""
 "The program computes the range of dates when the celestial object is above "
 "the horizon at least during one moment of the night. By 'night', the program"
@@ -18320,11 +18321,11 @@ msgstr ""
 "tuairmse air èirigh/laighe ghrèineach nan reul ’s nam planaidean a "
 "chruthachadh airson a’ phlugain seo san àm ri teachd."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 msgid "Full Moon:"
 msgstr "Làn-ghealach:"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:150
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:152
 msgid ""
 "When the Moon is selected, the program can compute the exact closest dates "
 "of the Moon's opposition to the Sun."
@@ -18333,12 +18334,12 @@ msgstr ""
 " fhaisge àireamhachadh nuair a bhios a’ ghealach ’s a’ ghrian ann an "
 "comhaireachd."
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:203
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:205
 #, qt-format
 msgid "Sun altitude at twilight: %1 deg."
 msgstr "Àirde na grèine air a’ ghlòmadh: %1 ceum"
 
-#: plugins/Observability/src/gui/ObservabilityDialog.cpp:209
+#: plugins/Observability/src/gui/ObservabilityDialog.cpp:211
 #, qt-format
 msgid "Horizon altitude: %1 deg."
 msgstr "Àirde na fàire: %1 ceum"
@@ -18399,44 +18400,6 @@ msgstr "Oidhcheannan leis an tùs os cionn na fàire"
 msgid "Dates of previous and next Full Moon"
 msgstr "Cinn-là na làn-ghealaich roimpe ’s an ath-thè"
 
-#: plugins/FOV/src/FOV.cpp:42 plugins/FOV/src/FOV.cpp:82
-#: plugins/FOV/src/ui_fovWindow.h:351 plugins/FOV/src/ui_fovWindow.h:353
-#: plugins/FOV/src/ui_fovWindow.h:372
-msgid "Field of View"
-msgstr "Raon-seallaidh"
-
-#: plugins/FOV/src/FOV.cpp:45 plugins/FOV/src/gui/FOVWindow.cpp:90
-msgid ""
-"This plugin allows stepwise zooming via keyboard shortcuts like in the "
-"<em>Cartes du Ciel</em> planetarium program."
-msgstr ""
-"Leigidh am plugan seo leat sùmadh ceum air cheum le ath-goiridean a’ mheur-"
-"chlàir coltach ris a’ phrògram amharc-lann phlanaidean <em>Cartes du "
-"Ciel</em>."
-
-#: plugins/FOV/src/FOV.cpp:87
-msgid "Set FOV to"
-msgstr "Suidhich an raon-seallaidh air"
-
-#: plugins/FOV/src/gui/FOVWindow.cpp:84
-msgid "Field of View plug-in"
-msgstr "Plugan an raoin-sheallaidh"
-
-#: plugins/FOV/src/ui_fovWindow.h:355
-msgid ""
-"By default Stellarium uses smooth zooming via mouse wheel or keyboard "
-"shortcuts. Some users want stepwise zooming to fixed values for field of "
-"view like in Cartes du Ciel planetarium, and this plugin provides this "
-"feature. You can edit values and use the keyboard for quick-setting of FOV. "
-"All values in degrees."
-msgstr ""
-"Cleachdaidh Stellarium sùmadh rèidh a ghnàth le cuibhle na luchaige no ath-"
-"ghoiridean a’ mheur-chlàir. B’ fhearr le cuid dhen luchd-cleachdaidh sùmadh "
-"ceum air cheum gu luachan socraichte an raoin-sheallaidh mar ann an amharc-"
-"lann phlanaidean Cartes du Ciel agus seo na bheir am plugan seo dhut. ’S "
-"urrainn dhut na luchan a dheasachadh agus am meur-chlàr a chleachdadh gus an"
-" raon-seallaidh a shuidheachadh gu luath. Tha a h-uile luach ’na cheum."
-
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:53
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:95
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:218
@@ -18447,7 +18410,7 @@ msgid "Equation of Time"
 msgstr "Co-aontar an ama"
 
 #: plugins/EquationOfTime/src/EquationOfTime.cpp:56
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:92
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:94
 msgid "This plugin shows the solution of the equation of time."
 msgstr "Seallaidh am plugan seo am fuasgladh air co-aontar an ama."
 
@@ -18461,7 +18424,7 @@ msgctxt "time"
 msgid "s"
 msgstr "d"
 
-#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:86
+#: plugins/EquationOfTime/src/gui/EquationOfTimeWindow.cpp:88
 msgid "Equation of Time plug-in"
 msgstr "Plugan airson co-aontar an ama"
 
@@ -19429,63 +19392,63 @@ msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "Cu/Dì-chl"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:126
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:128
 msgid "Pointer Coordinates plug-in"
 msgstr "Plugan airson co-chomharran an tomhaire"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:133
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:135
 msgid "Show coordinates of the mouse cursor on the screen."
 msgstr "Seall co-chomharran aig cùrsair na luchaige air an sgrìn."
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:181
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
 msgid "The top center of the screen"
 msgstr "Meadhan barr na sgrìn"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:182
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
 msgid "In center of the top right half of the screen"
 msgstr "Ann am meadhan dhen dàrna leth aig barr gu deas na sgrìn"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:183
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:185
 msgid "The right bottom corner of the screen"
 msgstr "Oisean taobh deas aig bonn na sgrìn"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:184
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:186
 msgid "Near mouse cursor"
 msgstr "Faisg air cùrsair na luchaige"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:185
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:187
 msgid "Custom position"
 msgstr "Ionad gnàthaichte"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:206
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:208
 msgid "Right ascension/Declination (J2000.0)"
 msgstr "Dìreadh deas/Dì-chlaonadh (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:207
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
 msgid "Right ascension/Declination"
 msgstr "Dìreadh deas/Dì-chlaonadh"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:209
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
 msgid "Ecliptic Longitude/Latitude"
 msgstr "Domhan-fhad/domhan-leud èiclipteach"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:210
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
 msgid "Ecliptic Longitude/Latitude (J2000.0)"
 msgstr "Domhan-fhad/domhan-leud èiclipteach (J2000.0)"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:211
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
 msgid "Altitude/Azimuth"
 msgstr "Àirde/Azimuth"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:212
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:214
 msgid "Galactic Longitude/Latitude"
 msgstr "Domhan-fhad/domhan-leud reul-chriosach"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:213
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:215
 msgid "Supergalactic Longitude/Latitude"
 msgstr "Domhan-fhad/domhan-leud os-reul-chriosach"
 
-#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:243
+#: plugins/PointerCoordinates/src/gui/PointerCoordinatesWindow.cpp:245
 msgid "Coordinates of custom position:"
 msgstr "Co-chomharran an ionaid ghnàthaichte:"
 

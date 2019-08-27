@@ -910,7 +910,7 @@ void Planet::computePosition(const double dateJDE)
 	if (parent)
 		parent->computePositionWithoutOrbits(dateJDE);
 
-	if (orbitFader.getInterstate()>0.000001f && deltaOrbitJDE > 0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
+	if (orbitFader.getInterstate()>0.000001f && deltaOrbitJDE > 0.0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
 	{
 		StelCore *core=StelApp::getInstance().getCore();
 
