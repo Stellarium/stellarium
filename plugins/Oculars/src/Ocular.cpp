@@ -32,7 +32,7 @@ Ocular::Ocular()
 Ocular::Ocular(const QObject& other)
 	: m_binoculars(other.property("binoculars").toBool()),
 	  m_permanentCrosshair(other.property("permanentCrosshair").toBool()),
-	  m_apparentFOV(other.property("appearentFOV").toDouble()),
+	  m_apparentFOV(other.property("apparentFOV").toDouble()),
 	  m_effectiveFocalLength(other.property("effectiveFocalLength").toDouble()),
 	  m_fieldStop(other.property("fieldStop").toDouble()),
 	  m_name(other.property("name").toString()),
@@ -50,7 +50,7 @@ QMap<int, QString> Ocular::propertyMap(void)
 	if(mapping.isEmpty()) {
 		mapping = QMap<int, QString>();
 		mapping[0] = "name";
-		mapping[1] = "appearentFOV";
+		mapping[1] = "apparentFOV";
 		mapping[2] = "effectiveFocalLength";
 		mapping[3] = "fieldStop";
 		mapping[4] = "binoculars";
@@ -115,7 +115,7 @@ double Ocular::apparentFOV(void) const
 	return m_apparentFOV;
 }
 
-void Ocular::setAppearentFOV(const double fov)
+void Ocular::setApparentFOV(const double fov)
 {
 	m_apparentFOV = fov;
 }
@@ -182,7 +182,7 @@ Ocular * Ocular::ocularFromSettings(const QSettings *theSettings, const int ocul
 	QString prefix = "ocular/" + QVariant(ocularIndex).toString() + "/";
 
 	ocular->setName(theSettings->value(prefix + "name", "").toString());
-	ocular->setAppearentFOV(theSettings->value(prefix + "afov", 0.0).toDouble());
+	ocular->setApparentFOV(theSettings->value(prefix + "afov", 0.0).toDouble());
 	ocular->setEffectiveFocalLength(theSettings->value(prefix + "efl", 0.0).toDouble());
 	ocular->setFieldStop(theSettings->value(prefix + "fieldStop", 0.0).toDouble());
 	ocular->setBinoculars(theSettings->value(prefix + "binoculars", "false").toBool());
@@ -217,7 +217,7 @@ Ocular * Ocular::ocularModel(void)
 {
 	Ocular* model = new Ocular();
 	model->setName("My Ocular");
-	model->setAppearentFOV(68);
+	model->setApparentFOV(68);
 	model->setEffectiveFocalLength(32);
 	model->setFieldStop(0);
 	model->setBinoculars(false);
