@@ -41,6 +41,7 @@
 ScriptConsole::ScriptConsole(QObject *parent)
 	: StelDialog("ScriptConsole", parent)
 	, highlighter(Q_NULLPTR)
+	, useUserDir(false)
 {
 	ui = new Ui_scriptConsoleForm;
 }
