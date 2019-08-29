@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-28 15:35+0700\n"
+"POT-Creation-Date: 2019-08-29 10:39+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4520,44 +4520,56 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:77
+#: src/gui/ScriptConsole.cpp:83
 msgid "quickrun..."
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:78
+#: src/gui/ScriptConsole.cpp:84
 msgid "selected text"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:79
+#: src/gui/ScriptConsole.cpp:85
 msgid "clear text"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:80
+#: src/gui/ScriptConsole.cpp:86
 msgid "clear images"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:81
+#: src/gui/ScriptConsole.cpp:87
 msgid "natural"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:82
+#: src/gui/ScriptConsole.cpp:88
 msgid "starchart"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:129
+#: src/gui/ScriptConsole.cpp:135
 msgid "Load Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:131 src/gui/ScriptConsole.cpp:151
+#: src/gui/ScriptConsole.cpp:137 src/gui/ScriptConsole.cpp:157
 msgid "Script Files"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:149
+#: src/gui/ScriptConsole.cpp:155
 msgid "Save Script"
 msgstr ""
 
 #: src/gui/ScriptConsole.cpp:252
 msgid "Select Script Include Directory"
+msgstr ""
+
+#. TRANSLATORS: The first letter of word "Row"
+#: src/gui/ScriptConsole.cpp:292
+msgctxt "text cursor"
+msgid "R"
+msgstr ""
+
+#. TRANSLATORS: The first letter of word "Column"
+#: src/gui/ScriptConsole.cpp:294
+msgctxt "text cursor"
+msgid "C"
 msgstr ""
 
 #: src/gui/SearchDialog.cpp:214
@@ -8620,7 +8632,7 @@ msgstr ""
 msgid "About"
 msgstr ""
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:399
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:395
 msgid "Log"
 msgstr ""
 
@@ -10621,51 +10633,51 @@ msgstr ""
 msgid "Get the recent GRS measurement"
 msgstr ""
 
-#: src/ui_scriptConsole.h:370
+#: src/ui_scriptConsole.h:366
 msgid "Script console"
 msgstr ""
 
-#: src/ui_scriptConsole.h:373
+#: src/ui_scriptConsole.h:369
 msgid "load script from file"
 msgstr ""
 
-#: src/ui_scriptConsole.h:377
+#: src/ui_scriptConsole.h:373
 msgid "save script to file"
 msgstr ""
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:377
 msgid "clear"
 msgstr ""
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:381
 msgid "pre-process script using SSC preprocessor"
 msgstr ""
 
-#: src/ui_scriptConsole.h:388
+#: src/ui_scriptConsole.h:384
 msgid "quickly load and run a utility script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:391
+#: src/ui_scriptConsole.h:387
 msgid "run script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:395
+#: src/ui_scriptConsole.h:391
 msgid "stop script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:398
+#: src/ui_scriptConsole.h:394
 msgid "Script"
 msgstr ""
 
-#: src/ui_scriptConsole.h:400
+#: src/ui_scriptConsole.h:396
 msgid "Output"
 msgstr ""
 
-#: src/ui_scriptConsole.h:401
+#: src/ui_scriptConsole.h:397
 msgid "Load scripts from the User Directory by default"
 msgstr ""
 
-#: src/ui_scriptConsole.h:402 plugins/Satellites/src/ui_satellitesDialog.h:796
+#: src/ui_scriptConsole.h:398 plugins/Satellites/src/ui_satellitesDialog.h:796
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
@@ -10675,15 +10687,15 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/ui_scriptConsole.h:404
+#: src/ui_scriptConsole.h:400
 msgid "Cursor position"
 msgstr ""
 
-#: src/ui_scriptConsole.h:406
+#: src/ui_scriptConsole.h:402
 msgid "Include dir:"
 msgstr ""
 
-#: src/ui_scriptConsole.h:407
+#: src/ui_scriptConsole.h:403
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "..."
 msgstr ""
@@ -18118,42 +18130,42 @@ msgstr ""
 msgid "Show coordinates of the mouse pointer"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:140
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:141
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:156
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:157
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:195
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:211
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:212
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:230
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:231
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:249
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:250
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr ""
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:267
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:268
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr ""

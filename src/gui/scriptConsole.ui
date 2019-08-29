@@ -10,9 +10,6 @@
     <height>394</height>
    </rect>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
     <number>0</number>
@@ -351,11 +348,6 @@
       </item>
       <item>
        <widget class="QTabWidget" name="tabs">
-        <property name="styleSheet">
-         <string notr="true">QTabBar::tab {
-	min-height: 28px;
-}</string>
-        </property>
         <property name="tabPosition">
          <enum>QTabWidget::North</enum>
         </property>

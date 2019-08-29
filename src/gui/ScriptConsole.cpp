@@ -72,6 +72,11 @@ void ScriptConsole::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
+	#if (QT_VERSION >= QT_VERSION_CHECK(5, 13, 0))
+	// FIXME: Hack for background color issue in Qt 5.13
+	ui->scriptEdit->setStyleSheet("background: rgb(30, 30, 31);");
+	#endif
+
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
 
@@ -228,9 +233,6 @@ void ScriptConsole::appendLogLine(const QString& s)
 {
 	QString html = ui->logBrowser->toHtml();
 	html.replace(QRegExp("^\\s+"), "");
-	// if (html!="")
-	// 	html += "<br />";
-
 	html += s;
 	ui->logBrowser->setHtml(html);
 }
@@ -239,9 +241,6 @@ void ScriptConsole::appendOutputLine(const QString& s)
 {
 	QString html = ui->outputBrowser->toHtml();
 	html.replace(QRegExp("^\\s+"), "");
-	// if (html!="")
-	// 	html += "<br />";
-
 	html += s;
 	ui->outputBrowser->setHtml(html);
 }
@@ -289,8 +288,15 @@ void ScriptConsole::quickRun(int idx)
 
 void ScriptConsole::rowColumnChanged()
 {
-	ui->rowColumnLabel->setText(QString("R:%1 C:%2").arg(ui->scriptEdit->textCursor().blockNumber())
-	                                                .arg(ui->scriptEdit->textCursor().columnNumber()));
+	// TRANSLATORS: The first letter of word "Row"
+	QString row = qc_("R", "text cursor");
+	// TRANSLATORS: The first letter of word "Column"
+	QString column = qc_("C", "text cursor");
+	ui->rowColumnLabel->setText(QString("%1:%2 %3:%4")
+				    .arg(row)
+				    .arg(ui->scriptEdit->textCursor().blockNumber())
+				    .arg(column)
+				    .arg(ui->scriptEdit->textCursor().columnNumber()));
 }
 
 const QString ScriptConsole::getFileMask()
