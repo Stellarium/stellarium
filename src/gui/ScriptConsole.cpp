@@ -72,11 +72,6 @@ void ScriptConsole::createDialogContent()
 	ui->setupUi(dialog);
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
 
-	#if (QT_VERSION >= QT_VERSION_CHECK(5, 13, 0))
-	// FIXME: Hack for background color issue in Qt 5.13
-	ui->scriptEdit->setStyleSheet("background: rgb(30, 30, 31);");
-	#endif
-
 	highlighter = new StelScriptSyntaxHighlighter(ui->scriptEdit->document());
 	ui->includeEdit->setText(StelFileMgr::getInstallationDir() + "/scripts");
 
