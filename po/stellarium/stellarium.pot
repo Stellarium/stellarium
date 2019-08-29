@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-29 10:39+0700\n"
+"POT-Creation-Date: 2019-08-29 11:07+0700\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -4520,39 +4520,39 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:83
+#: src/gui/ScriptConsole.cpp:78
 msgid "quickrun..."
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:84
+#: src/gui/ScriptConsole.cpp:79
 msgid "selected text"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:85
+#: src/gui/ScriptConsole.cpp:80
 msgid "clear text"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:86
+#: src/gui/ScriptConsole.cpp:81
 msgid "clear images"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:87
+#: src/gui/ScriptConsole.cpp:82
 msgid "natural"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:88
+#: src/gui/ScriptConsole.cpp:83
 msgid "starchart"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:135
+#: src/gui/ScriptConsole.cpp:129
+msgid "Stellarium Script Files"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:133
 msgid "Load Script"
 msgstr ""
 
-#: src/gui/ScriptConsole.cpp:137 src/gui/ScriptConsole.cpp:157
-msgid "Script Files"
-msgstr ""
-
-#: src/gui/ScriptConsole.cpp:155
+#: src/gui/ScriptConsole.cpp:154
 msgid "Save Script"
 msgstr ""
 
@@ -4570,6 +4570,14 @@ msgstr ""
 #: src/gui/ScriptConsole.cpp:294
 msgctxt "text cursor"
 msgid "C"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:304
+msgid "Stellarium Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:306
+msgid "Include File"
 msgstr ""
 
 #: src/gui/SearchDialog.cpp:214

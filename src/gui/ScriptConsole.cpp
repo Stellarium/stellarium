@@ -126,10 +126,13 @@ void ScriptConsole::loadScript()
 	else
 		openDir = StelFileMgr::getInstallationDir() + "/scripts";
 
+	QString filter = q_("Stellarium Script Files");
+	filter.append(" (*.ssc *.inc);;");
+	filter.append(getFileMask());
 	QString fileName = QFileDialog::getOpenFileName(Q_NULLPTR,
 							q_("Load Script"),
 							openDir,
-							q_("Script Files") + " " + getFileMask());
+							filter);
 	QFile file(fileName);
 	if (file.open(QIODevice::ReadOnly))
 	{
@@ -146,10 +149,12 @@ void ScriptConsole::saveScript()
 	if (saveDir.isEmpty())
 		saveDir = StelFileMgr::getUserDir();
 
+	QString defaultFilter("(*.ssc)");
 	QString fileName = QFileDialog::getSaveFileName(Q_NULLPTR,
 							q_("Save Script"),
-	                                                saveDir,
-							q_("Script Files") + " " + getFileMask());
+							saveDir + "/myscript.ssc",
+							getFileMask(),
+							&defaultFilter);
 	QFile file(fileName);
 	if (file.open(QIODevice::WriteOnly))
 	{
@@ -296,5 +301,9 @@ void ScriptConsole::rowColumnChanged()
 
 const QString ScriptConsole::getFileMask()
 {
-	return "(*.ssc *.inc)";
+	QString filter = q_("Stellarium Script");
+	filter.append(" (*.ssc);;");
+	filter.append(q_("Include File"));
+	filter.append(" (*.inc)");
+	return  filter;
 }
