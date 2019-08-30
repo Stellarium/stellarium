@@ -200,7 +200,8 @@ void Atmosphere::computeColor(double JD, Vec3d _sunPos, Vec3d moonPos, float moo
 	Vec3f sunPosF=_sunPos.toVec3f();
 	Vec3f moonPosF=moonPos.toVec3f();
 
-	float separation_angle = std::acos(sunPosF.dot(moonPosF));  // angle between them
+	// NB: conversion to float here will be caused screen flashing during solar eclipse! -- AW
+	float separation_angle = std::acos(_sunPos.dot(moonPos));  // angle between them
 	// qDebug("touch at %f\tnow at %f (%f)\n", touch_angle, separation_angle, separation_angle/touch_angle);
 	// bright stars should be visible at total eclipse
 	// TODO: correct for atmospheric diffusion
