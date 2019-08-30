@@ -341,8 +341,9 @@ int main(int argc, char **argv)
 	// Override config file values from CLI.
 	CLIProcessor::parseCLIArgsPostConfig(argList, confSettings);
 
-	// Support hi-dpi pixmaps
+	// Support high DPI pixmaps and fonts
 	app.setAttribute(Qt::AA_UseHighDpiPixmaps, true);	
+	app.setAttribute(Qt::AA_EnableHighDpiScaling, true);
 
 	// Add the DejaVu font that we use everywhere in the program
 	const QString& fName = StelFileMgr::findFile("data/DejaVuSans.ttf");
