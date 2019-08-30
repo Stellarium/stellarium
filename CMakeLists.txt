@@ -37,8 +37,6 @@ SET(PACKAGE_VERSION "${VERSION}")
 ADD_DEFINITIONS(-DPACKAGE_VERSION="${PACKAGE_VERSION}")
 ADD_DEFINITIONS(-DCOPYRIGHT_YEARS="${COPYRIGHT_YEARS}")
 ADD_DEFINITIONS(-DSTELLARIUM_SOURCE_DIR="${PROJECT_SOURCE_DIR}")
-# Write version of Stellarium to Stellarium User Guide
-CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
 # currently Qt 5.6/5.9 is recommended
 SET(MINIMAL_QT_VERSION "5.4.0")
@@ -76,7 +74,13 @@ ENDIF()
 SET(STELLARIUM_RELEASE_BUILD 0 CACHE BOOL "Set 1 to build as an official release (0 for development snapshots).")
 IF(STELLARIUM_RELEASE_BUILD)
      ADD_DEFINITIONS(-DSTELLARIUM_RELEASE_BUILD)
+     SET(SERIES "${STELLARIUM_MAJOR}.${STELLARIUM_MINOR}")
+ELSE()
+     SET(SERIES "head")
 ENDIF()
+
+# Write version and series of Stellarium to Stellarium User Guide
+CONFIGURE_FILE(${PROJECT_SOURCE_DIR}/cmake/version.tex.cmake ${PROJECT_SOURCE_DIR}/guide/version.tex @ONLY NEWLINE_STYLE LF)
 
 SET(OPENGL_DEBUG_LOGGING 0 CACHE BOOL "Enable to log OpenGL information using the GL_KHR_debug extension/QOpenGLLogger")
 IF(OPENGL_DEBUG_LOGGING)
