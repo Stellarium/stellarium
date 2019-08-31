@@ -734,9 +734,7 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		double elongation = getElongation(observerHelioPos);
 		map.insert("elongation", elongation);
 		map.insert("elongation-dms", StelUtils::radToDmsStr(elongation));
-		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));
-		map.insert("type", getPlanetTypeString()); // replace existing "type=Planet" by something more detailed.
-		// TBD: Is there ANY reason to keep "type"="Planet" and add a "ptype"=getPlanetTypeString() field?
+		map.insert("elongation-deg", StelUtils::radToDecDegStr(elongation));		
 		map.insert("velocity", getEclipticVelocity().toString());
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
 		map.insert("scale", sphereScale);
@@ -764,6 +762,8 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 			map.insert("eclipse-magnitude", 0.0);
 		}
 	}
+	map.insert("type", getPlanetTypeString()); // replace existing "type=Planet" by something more detailed.
+	// TBD: Is there ANY reason to keep "type"="Planet" and add a "ptype"=getPlanetTypeString() field?
 
 	return map;
 }
