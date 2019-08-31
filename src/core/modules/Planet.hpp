@@ -189,6 +189,11 @@ public:
 	//! - elongation-dms (formatted string)
 	//! - elongation-deg (formatted string)
 	//! - type (object type description)
+	//! - velocity (formatted string)
+	//! - heliocentric-velocity (formatted string)
+	//! - scale
+	//! - eclipse-obscuration (for Sun only)
+	//! - eclipse-magnitude (for Sun only)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;

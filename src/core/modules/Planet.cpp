@@ -741,6 +741,29 @@ QVariantMap Planet::getInfoMap(const StelCore *core) const
 		map.insert("heliocentric-velocity", getHeliocentricEclipticVelocity().toString());
 		map.insert("scale", sphereScale);
 	}
+	else
+	{
+		SolarSystem* ssystem = GETSTELMODULE(SolarSystem);
+		const double eclipseObscuration = 100.*(1.-ssystem->getEclipseFactor(core));
+		if (eclipseObscuration>1.e-7)
+		{
+			map.insert("eclipse-obscuration", eclipseObscuration);
+			if (core->getCurrentPlanet()==ssystem->getEarth())
+			{
+				double angularSize = 2.*getAngularSize(core)*M_PI/180.;
+				PlanetP moon = ssystem->getMoon();
+				const double eclipseMagnitude = (0.5*angularSize + (moon->getAngularSize(core)*M_PI/180.)/moon->getInfoMap(core)["scale"].toDouble() - getJ2000EquatorialPos(core).angle(moon->getJ2000EquatorialPos(core)))/angularSize;
+				map.insert("eclipse-magnitude", eclipseMagnitude);
+			}
+			else
+				map.insert("eclipse-magnitude", 0.0);
+		}
+		else
+		{
+			map.insert("eclipse-obscuration", 0.0);
+			map.insert("eclipse-magnitude", 0.0);
+		}
+	}
 
 	return map;
 }
