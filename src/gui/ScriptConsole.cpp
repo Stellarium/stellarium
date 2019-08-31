@@ -199,7 +199,7 @@ void ScriptConsole::preprocessScript()
 void ScriptConsole::runScript()
 {
 	ui->tabs->setCurrentIndex(1);
-	ui->logBrowser->setHtml("");
+	ui->logBrowser->clear();
 
 	appendLogLine(QString("Starting script at %1").arg(QDateTime::currentDateTime().toString()));
 	if (!StelApp::getInstance().getScriptMgr().runScriptDirect(ui->scriptEdit->toPlainText(), ui->includeEdit->text()))
@@ -239,10 +239,17 @@ void ScriptConsole::appendLogLine(const QString& s)
 
 void ScriptConsole::appendOutputLine(const QString& s)
 {
-	QString html = ui->outputBrowser->toHtml();
-	html.replace(QRegExp("^\\s+"), "");
-	html += s;
-	ui->outputBrowser->setHtml(html);
+	if (s.isEmpty())
+	{
+		ui->outputBrowser->clear();
+	}
+	else
+	{
+		QString html = ui->outputBrowser->toHtml();
+		html.replace(QRegExp("^\\s+"), "");
+		html += s;
+		ui->outputBrowser->setHtml(html);
+	}
 }
 
 
