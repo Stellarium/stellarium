@@ -81,6 +81,7 @@ Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: remov
 Name: "{group}\{cm:ProgramOnTheWeb,Stellarium}"; Filename: "{app}\stellarium.url"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\{cm:DevelopersDocsOnTheWeb}"; Filename: "{app}\stellarium-devdocs.url"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium"; Filename: "{app}\stellarium.exe"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
+Name: "{group}\Stellarium {cm:AltGrMode}"; Filename: "{app}\stellarium.exe"; Parameters: "-platform windows:altgr"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 ; Name: "{group}\Stellarium {cm:FallbackMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--safe-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 Name: "{group}\Stellarium {cm:DebugMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--dump-opengl-details"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"
 ; Name: "{group}\Stellarium {cm:AngleMode}"; Filename: "{app}\stellarium.exe"; Parameters: "--angle-mode"; WorkingDir: "{app}"; IconFilename: "{app}\data\stellarium.ico"

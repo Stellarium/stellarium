@@ -33,5 +33,6 @@ AngleWarpMode=(ANGLE WARP mode)
 MesaMode=(MESA mode)
 DebugMode=(with OpenGL diagnostics)
 SpoutMode=(with Spout sender)
+AltGrMode=(Use keyboard with AltGr)
 RedistRun=Installing Microsoft's C/C++ runtime...
 DeleteUserData=ATTENTION: Do you want to delete user data (Stellarium settings, landscapes, 3D sceneries and other Stellarium data files)? Say NO to keep these files for later re-use.
