@@ -215,7 +215,7 @@ SkyMarker::SkyMarker(Vec3d pos, const float& size, const Vec3f& color, SkyMarker
 			fileName = "neb_pnb.png";
 			break;
 		case Target:
-			fileName = "pointer2.png";
+			fileName = "pointeur2.png";
 			break;
 		case Gear:
 			fileName = "gear.png";
@@ -264,7 +264,7 @@ SkyMarker::MarkerType SkyMarker::stringToMarkerType(const QString &s)
 	else if (s.toLower()=="squared-dotted-circle" || s.toLower()=="squared-dcircle")
 		return SkyMarker::SquaredDCircle;
 	else if (s.toLower()=="crossed-circle")
-		return SkyMarker::SquaredDCircle;
+		return SkyMarker::CrossedCircle;
 	else if (s.toLower()=="target")
 		return SkyMarker::Target;
 	else if (s.toLower()=="gear")
