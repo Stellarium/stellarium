@@ -4,6 +4,10 @@ env:
 
 language: cpp
 
+git:
+  depth: 1
+  quiet: true
+
 matrix:
   include:
     - os: linux
