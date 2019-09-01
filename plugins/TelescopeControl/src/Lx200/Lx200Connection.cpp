@@ -71,7 +71,7 @@ void Lx200Connection::sendGoto(unsigned int ra_int, int dec_int)
 {
 	if (goto_commands_queued <= 1)
 	{
-		int dec = (int)floor(0.5 + dec_int * (360*3600/4294967296.0));
+		int dec = static_cast<int>(floor(0.5 + dec_int * (360*3600/4294967296.0)));
 		if (dec < -90*3600)
 		{
 			dec = -180*3600 - dec;
@@ -82,7 +82,7 @@ void Lx200Connection::sendGoto(unsigned int ra_int, int dec_int)
 			dec = 180*3600 - dec;
 			ra_int += 0x80000000;
 		}
-		int ra = (int)floor(0.5 + ra_int * (86400.0/4294967296.0));
+		int ra = static_cast<int>(floor(0.5 + ra_int * (86400.0/4294967296.0)));
 		if (ra >= 86400)
 			ra -= 86400;
 		sendCommand(new Lx200CommandStopSlew(server));

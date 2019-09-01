@@ -2,20 +2,21 @@
 // Name: Constellations Tour
 // License: Public Domain
 // Author: Alexander Wolf
-// Shortcut: Ctrl+D,1
-// Version: 1.0
-// Description:  A tour of the western constellations.
+// Version: 1.1
+// Description: A tour of the constellations of the selected sky culture.
 
-include("common_objects.inc");
+include("i18n.inc");
 
 core.clear("starchart");
 GridLinesMgr.setFlagEquatorGrid(false);
+NebulaMgr.setFlagHints(false);
+var constellations = ConstellationMgr.getConstellationsEnglishNames();
 ConstellationMgr.setFlagArt(false);
 ConstellationMgr.setFlagBoundaries(false);
 ConstellationMgr.setFlagLines(false);
 ConstellationMgr.setFlagLabels(false);
 core.setGuiVisible(false);
-var id = LabelMgr.labelScreen("Press Ctrl+T to un-hide the toolbar", 100,100, false, 20);
+var id = LabelMgr.labelScreen(tr("Press Ctrl+T to un-hide the toolbar"), 100,100, false, 20);
 LabelMgr.setLabelShow(id, true);
 core.wait(4);
 LabelMgr.setLabelShow(id, false);
@@ -28,7 +29,7 @@ ConstellationMgr.setFlagIsolateSelected(true);
 for (i=0; i<constellations.length; i++)
 {
 	objName = constellations[i];
-	core.selectObjectByName(objName, true);
+	core.selectConstellationByName(objName);
 	StelMovementMgr.autoZoomIn(6);
 	core.wait(1);
 	StelMovementMgr.zoomTo(40,8);
@@ -38,3 +39,5 @@ for (i=0; i<constellations.length; i++)
 	ConstellationMgr.setFlagArt(false);
 }
 
+core.setGuiVisible(true);
+core.clear("natural");

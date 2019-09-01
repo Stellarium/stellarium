@@ -27,11 +27,13 @@
 #include "StelLocation.hpp"
 #include "StelLocationMgr.hpp"
 #include "CustomObjectMgr.hpp"
+#include "HighlightMgr.hpp"
 #include "StelFileMgr.hpp"
 #include "StelJsonParser.hpp"
 #include "AngleSpinBox.hpp"
 #include "NebulaMgr.hpp"
 #include "StarMgr.hpp"
+#include "LabelMgr.hpp"
 
 #include <QFileDialog>
 #include <QDir>
@@ -45,6 +47,7 @@ BookmarksDialog::BookmarksDialog(QObject *parent)
 	ui = new Ui_bookmarksDialogForm;
 	core = StelApp::getInstance().getCore();
 	objectMgr = GETSTELMODULE(StelObjectMgr);
+	labelMgr = GETSTELMODULE(LabelMgr);
 	bookmarksListModel = new QStandardItemModel(0, ColumnCount);
 	bookmarksJsonPath = StelFileMgr::findFile("data", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/bookmarks.json";
 }
@@ -237,7 +240,7 @@ void BookmarksDialog::removeBookmarkButtonPressed()
 
 void BookmarksDialog::clearBookmarksButtonPressed()
 {
-	GETSTELMODULE(CustomObjectMgr)->cleanHighlightList();
+	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
 	bookmarksListModel->clear();
 	bookmarksCollection.clear();
 	setBookmarksHeaderNames();
@@ -254,6 +257,11 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 {
 	QList<Vec3d> highlights;
 	highlights.clear();
+	highlightLabelIDs.clear();
+	int fontSize = StelApp::getInstance().getScreenFontSize();
+	HighlightMgr* hlMgr = GETSTELMODULE(HighlightMgr);
+	QString color = StelUtils::vec3fToHtmlColor(hlMgr->getColor());
+	float distance = hlMgr->getMarkersSize();
 
 	for (auto bm : bookmarksCollection)
 	{
@@ -278,14 +286,25 @@ void BookmarksDialog::highlightBookrmarksButtonPressed()
 
 		if (status)
 			highlights.append(pos);
+
+		objectMgr->unSelect();
+		// Add labels for named highlights (name in top right corner)
+		highlightLabelIDs.append(labelMgr->labelObject(name, name, true, fontSize, color, "NE", distance));
 	}
 
-	GETSTELMODULE(CustomObjectMgr)->fillHighlightList(highlights);
+	hlMgr->fillHighlightList(highlights);
 }
 
 void BookmarksDialog::clearHighlightsButtonPressed()
 {
-	GETSTELMODULE(CustomObjectMgr)->cleanHighlightList();
+	objectMgr->unSelect();
+	GETSTELMODULE(HighlightMgr)->cleanHighlightList();
+	// Clear labels
+	for (auto l : highlightLabelIDs)
+	{
+		labelMgr->deleteLabel(l);
+	}
+	highlightLabelIDs.clear();
 }
 
 void BookmarksDialog::selectCurrentBookmark(const QModelIndex &modelIdx)
@@ -427,14 +446,12 @@ void BookmarksDialog::loadBookmarks()
 				addModelRow(i, bookmarkKey, bm.name, bm.nameI18n, JDs, Location);
 				i++;
 			}
-
 		}
 		catch (std::runtime_error &e)
 		{
 			qDebug() << "[Bookmarks] File format is wrong! Error: " << e.what();
 			return;
 		}
-
 	}
 }
 
@@ -456,14 +473,17 @@ void BookmarksDialog::exportBookmarks()
 	QString originalBookmarksFile = bookmarksJsonPath;
 
 	QString filter = "JSON (*.json)";
-	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR, q_("Export bookmarks as..."), QDir::homePath() + "/bookmarks.json", filter);
+	bookmarksJsonPath = QFileDialog::getSaveFileName(Q_NULLPTR,
+							 q_("Export bookmarks as..."),
+							 QDir::homePath() + "/bookmarks.json",
+							 filter);
 
 	saveBookmarks();
 
 	bookmarksJsonPath = originalBookmarksFile;
 }
 
-void BookmarksDialog::saveBookmarks()
+void BookmarksDialog::saveBookmarks() const
 {
 	if (bookmarksJsonPath.isEmpty())
 	{
@@ -512,6 +532,5 @@ void BookmarksDialog::saveBookmarks()
 	StelJsonParser::write(bmList, &jsonFile);
 	jsonFile.flush();
 	jsonFile.close();
-
 }
 

@@ -2,10 +2,10 @@
 ########### install files ###############
 
 # install landscape.ini
-INSTALL (FILES landscape.ini DESTINATION share/${PACKAGE}/landscapes/garching )
+INSTALL (FILES landscape.ini DESTINATION ${SDATALOC}/landscapes/garching )
 
 # install textures and descriptions
-INSTALL (DIRECTORY ./ DESTINATION share/${PACKAGE}/landscapes/garching 
+INSTALL (DIRECTORY ./ DESTINATION ${SDATALOC}/landscapes/garching
 	FILES_MATCHING PATTERN "*.png" 
 	PATTERN "description.*.utf8" 
 	PATTERN "CMakeFiles" EXCLUDE )

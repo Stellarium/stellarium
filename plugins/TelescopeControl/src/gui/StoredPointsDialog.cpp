@@ -172,7 +172,7 @@ void StoredPointsDialog::getCenterInfo()
 	StelCore *core = StelApp::getInstance().getCore();
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	Vec3d centerPosition;
-	Vec2f center = projector->getViewportCenter();
+	Vector2<qreal> center = projector->getViewportCenter();
 	projector->unProject(center[0], center[1], centerPosition);
 	double dec_j2000 = 0;
 	double ra_j2000 = 0;

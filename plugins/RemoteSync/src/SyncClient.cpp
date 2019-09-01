@@ -97,7 +97,7 @@ void SyncClient::connectToServer(const QString &host, const int port)
 	isConnecting = true;
 	qCDebug(syncClient)<<"Connecting to"<<(host + ":" + QString::number(port))<<", with options"<<options;
 	timeoutTimerId = startTimer(2000,Qt::VeryCoarseTimer); //the connection is checked all 5 seconds
-	sock->connectToHost(host,port);
+	sock->connectToHost(host,static_cast<quint16>(port));
 }
 
 void SyncClient::disconnectFromServer()

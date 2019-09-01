@@ -24,7 +24,7 @@
 StelModule::StelModule()
 {
 	//set the default object name to the class name
-	setObjectName(metaObject()->className());
+	setObjectName(metaObject()->className()); // lgtm [cpp/virtual-call-in-constructor]
 }
 
 /*************************************************************************

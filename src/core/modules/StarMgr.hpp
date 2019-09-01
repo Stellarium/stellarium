@@ -67,7 +67,6 @@ typedef struct
 	unsigned int sao;
 	unsigned int hd;
 	unsigned int hr;
-
 } crossid;
 
 typedef QMap<StelObjectP, float> StelACStarData;
@@ -136,25 +135,26 @@ public:
 
 	//! Update any time-dependent features.
 	//! Includes fading in and out stars and labels when they are turned on and off.
-	virtual void update(double deltaTime) {labelsFader.update((int)(deltaTime*1000)); starsFader.update((int)(deltaTime*1000));}
+	virtual void update(double deltaTime) {labelsFader.update(static_cast<int>(deltaTime*1000)); starsFader.update(static_cast<int>(deltaTime*1000));}
 
 	//! Used to determine the order in which the various StelModules are drawn.
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Return a list containing the stars located inside the limFov circle around position v
 	virtual QList<StelObjectP > searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
 	//! Return the matching Stars object's pointer if exists or Q_NULLPTR
-	//! @param nameI18n The case in-sensistive star common name or HP
+	//! @param nameI18n The case in-sensitive localized star common name or HIP/HP, SAO, HD, HR, GCVS or WDS number
 	//! catalog name (format can be HP1234 or HP 1234 or HIP 1234) or sci name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
 	//! Return the matching star if exists or Q_NULLPTR
-	//! @param name The case in-sensistive standard program planet name
+	//! @param name The case in-sensitive english star name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	//! Same as searchByName(id);
 	virtual StelObjectP searchByID(const QString &id) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object English name.
@@ -201,7 +201,7 @@ public slots:
 	double getLabelsAmount(void) const {return labelsAmount;}
 
 	//! Define font size to use for star names display.
-	void setFontSize(float newFontSize);
+	void setFontSize(int newFontSize);
 
 	//! Show scientific or catalog names on stars without common names.
 	static void setFlagSciNames(bool f) {flagSciNames = f;}

@@ -72,11 +72,11 @@ public:
 		{
 			v = in[i];
 			modelViewTransform->forward(v);
-			out->set(v[0], v[1], v[2]);
+			out->set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 			StelProjectorStereographic::forward(*out);
-			out->set(viewportCenter[0] + flipHorz * pixelPerRad * (*out)[0],
-				viewportCenter[1] + flipVert * pixelPerRad * (*out)[1],
-				((*out)[2] - zNear) * oneOverZNearMinusZFar);
+			out->set(static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * (*out)[0],
+				static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * (*out)[1],
+				((*out)[2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar));
 		}
 	}
 
@@ -123,11 +123,11 @@ public:
 		{
 			v = in[i];
 			modelViewTransform->forward(v);
-			out[i].set(v[0], v[1], v[2]);
+			out[i].set(static_cast<float>(v[0]), static_cast<float>(v[1]), static_cast<float>(v[2]));
 			StelProjectorHammer::forward(out[i]);
-			out[i][0] = viewportCenter[0] + flipHorz * pixelPerRad * out[i][0];
-			out[i][1] = viewportCenter[1] + flipVert * pixelPerRad * out[i][1];
-			out[i][2] = (out[i][2] - zNear) * oneOverZNearMinusZFar;
+			out[i][0] = static_cast<float>(viewportCenter[0]) + flipHorz * pixelPerRad * out[i][0];
+			out[i][1] = static_cast<float>(viewportCenter[1]) + flipVert * pixelPerRad * out[i][1];
+			out[i][2] = (out[i][2] - static_cast<float>(zNear)) * static_cast<float>(oneOverZNearMinusZFar);
 		}
 	}
 	bool forward(Vec3f &v) const;
@@ -172,7 +172,7 @@ protected:
 		static const SphericalCap cap2(-1,0,0);
 		static const SphericalCap cap3(0,0,-1);
 		SphericalCap cap(capN, capD);
-		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap2);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
 	}
 };
 
@@ -200,7 +200,7 @@ protected:
 		static const SphericalCap cap2(-1,0,0);
 		static const SphericalCap cap3(0,0,-1);
 		SphericalCap cap(capN, capD);
-		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap2);
+		return cap.intersects(cap1) && cap.intersects(cap2) && cap.intersects(cap3);
 	}
 };
 

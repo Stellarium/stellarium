@@ -29,11 +29,43 @@
 
 // astronomical unit (km)
 #define AU 149597870.691
+#define AUf 149597870.691f
 #define AU_KM (1.0/149597870.691)
+#define AU_KMf (1.0f/149597870.691f)
 // Parsec (km)
 #define PARSEC 30.857e12
 // speed of light (km/sec)
 #define SPEED_OF_LIGHT 299792.458
+
+// Add a few frequently used extra math-type literals
+#ifndef M_PI_180
+	#define M_PI_180    (M_PI/180.)
+#endif
+#ifndef M_180_PI
+	#define M_180_PI    (180./M_PI)
+#endif
+// Add some math literals in float version to avoid many static_casts
+#ifndef M_PIf
+	#define M_PIf       3.14159265358979323846f   // pi
+#endif
+#ifndef M_PI_2f
+	#define M_PI_2f     1.57079632679489661923f   // pi/2
+#endif
+#ifndef M_PI_4f
+	#define M_PI_4f     0.785398163397448309616f  // pi/4
+#endif
+#ifndef M_1_PIf
+	#define M_1_PIf     0.318309886183790671538f  // 1/pi
+#endif
+#ifndef M_2_PIf
+	#define M_2_PIf     0.636619772367581343076f  // 2/pi
+#endif
+#ifndef M_PI_180f
+	#define M_PI_180f   (M_PIf/180.f)
+#endif
+#ifndef M_180_PIf
+	#define M_180_PIf   (180.f/M_PIf)
+#endif
 
 #define stelpow10f(x) std::exp((x) * 2.3025850930f)
 
@@ -148,7 +180,7 @@ namespace StelUtils
 	//! Obtains a Vec3f from a string.
 	//! @param s the string describing the Vector with the form "x,y,z"
 	//! @return The corresponding vector
-	//! @deprecated Use the >> operator from Vec3f class
+	//! @deprecated Use the >> operator from Vec3f class (Will be removed in version 0.20)
 	Vec3f strToVec3f(const QStringList& s);
 	//! Reads a Vec3f from a string, separated by commas. Example: 1.0,2.0,3.0
 	Vec3f strToVec3f(const QString& s);
@@ -186,6 +218,18 @@ namespace StelUtils
 	void spheToRect(const float lng, const float lat, Vec3f& v);
 
 	//! Convert from spherical coordinates to Rectangular direction.
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	//! @param v the resulting 3D unit vector
+	void spheToRect(const double lng, const double lat, Vec3f& v);
+
+	//! Convert from spherical coordinates to Rectangular direction.
+	//! @param lng longitude in radian
+	//! @param lat latitude in radian
+	//! @param v the resulting 3D unit vector
+	void spheToRect(const float lng, const float lat, Vec3d& v);
+
+	//! Convert from spherical coordinates to Rectangular direction.
 	//! @param lng double* to store longitude in radian
 	//! @param lat double* to store latitude in radian
 	//! @param v the input 3D vector
@@ -202,6 +246,12 @@ namespace StelUtils
 	//! @param lat float* to store latitude in radian
 	//! @param v the input 3D vector
 	void rectToSphe(float *lng, float *lat, const Vec3f& v);
+
+	//! Convert from spherical coordinates to Rectangular direction.
+	//! @param lng double* to store longitude in radian
+	//! @param lat double* to store latitude in radian
+	//! @param v the input 3D vector
+	void rectToSphe(double *lng, double *lat, const Vec3f &v);
 
 	//! Coordinate Transformation from equatorial to ecliptical
 	void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad);
@@ -316,7 +366,7 @@ namespace StelUtils
 	//! @param min minute
 	//! @param s second
 	//! @result true in all conceivable cases.
-	bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const int s);
+	bool getJDFromDate(double* newjd, const int y, const int m, const int d, const int h, const int min, const float s);
 
 	int numberOfDaysInMonthInYear(const int month, const int year);
 	//! @result true if year is a leap year. Observes 1582 switch from Julian to Gregorian Calendar.
@@ -351,6 +401,7 @@ namespace StelUtils
 
 	//! Get a night mode version of a color.  That is find the brightness of a color and set that in the
 	//! red channel only
+	/* FIXME: abandoned code?
 	inline Vec3f getNightColor(const Vec3f& dayColor)
 	{
 		float max = 0.0;
@@ -360,6 +411,7 @@ namespace StelUtils
 		}
 		return Vec3f(max, 0, 0);
 	}
+	*/
 
 	//! Calculate and return sidereal period in days from semi-major axis (in AU)
 	double calculateSiderealPeriod(const double SemiMajorAxis);
@@ -368,19 +420,10 @@ namespace StelUtils
 	QString hoursToHmsStr(const double hours, const bool lowprecision = false);
 
 	//! Convert hours, minutes, seconds to decimal hours
-	double hmsToHours(const int h, const int m, const double s);
+	double hmsToHours(const unsigned int h, const unsigned int m, const double s);
 
 	//! Convert a hms formatted string to decimal hours
 	double hmsStrToHours(const QString& s);
-
-	//! Get the number of seconds since program start.
-	//!
-	//! @note This is implemented in platform-specific ways to be as precise 
-	//!       as possible, but there is a fallback for other platforms that 
-	//!       might not be precise at all.
-	//!       This is currently used e.g. to measure FPS, but it should never 
-	//!       be used for critical functionality.
-	long double secondsSinceStart();
 
 	//! Get Delta-T estimation for a given date.
 	//! This is just an "empty" correction functino, returning 0.
@@ -598,15 +641,18 @@ namespace StelUtils
 	//! Get Delta-T estimation for a given date.
 	//! Implementation of algorithm by Montenbruck & Pfleger (2000) for DeltaT computation,
 	//! a data fit through the table of values found in Meeus, Astronomical algorithms (1991).
-	//! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000)
+	//! Book "Astronomy on the Personal Computer" by O. Montenbruck & T. Pfleger (4th ed., 2000), p.181-182
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds or 0 if not 1825<=year<2005
 	double getDeltaTByMontenbruckPfleger(const double jDay);
 
 	//! Get Delta-T estimation for a given date.
-	//! Implementation of algorithm by Reingold & Dershowitz (1997, 2001, 2002, 2007) for DeltaT computation.
+	//! Implementation of algorithm by Reingold & Dershowitz (1997, 2001, 2002, 2007, 2018) for DeltaT computation.
 	//! This is again mostly a data fit based on the table in Meeus, Astronomical Algorithms (1991).
-	//! This is the version given in the 3rd edition (2007) which added the fit for 1700..1799 omitted from previous editions.
+	//! This is the version given in the 4rd edition ("the ultimate edition"; 2018) which added the fit
+	//! for -500..1699 and 2006..2150 omitted from previous editions.
+	//! Calendrical Calculations: The Ultimate Edition / Edward M. Reingold, Nachum Dershowitz - 4th Edition,
+	//! Cambridge University Press, 2018. - 660p. ISBN: 9781107057623, DOI: 10.1017/9781107415058
 	//! @param jDay the date and time expressed as a Julian day
 	//! @return Delta-T in seconds
 	double getDeltaTByReingoldDershowitz(const double jDay);
@@ -688,13 +734,13 @@ namespace StelUtils
 	//! Values are stored in the global static array cos_sin_theta.
 	//! Used for the sin/cos values along a latitude circle, equator, etc. for a spherical mesh.
 	//! @param slices number of partitions (elsewhere called "segments") for the circle
-	float *ComputeCosSinTheta(const int slices);
+	float *ComputeCosSinTheta(const unsigned int slices);
 	
 	//! Compute cosines and sines around a half-circle which is split in "segments" parts.
 	//! Values are stored in the global static array cos_sin_rho.
 	//! Used for the sin/cos values along a meridian for a spherical mesh.
 	//! @param segments number of partitions (elsewhere called "stacks") for the half-circle
-	float *ComputeCosSinRho(const int segments);
+	float *ComputeCosSinRho(const unsigned int segments);
 	
 	//! Compute cosines and sines around part of a circle (from top to bottom) which is split in "segments" parts.
 	//! Values are stored in the global static array cos_sin_rho.
@@ -703,7 +749,7 @@ namespace StelUtils
 	//! @param dRho a difference angle between the stops
 	//! @param segments number of segments
 	//! @param minAngle start angle inside the half-circle. maxAngle=minAngle+segments*phi
-	float* ComputeCosSinRhoZone(const float dRho, const int segments, const float minAngle);
+	float* ComputeCosSinRhoZone(const float dRho, const unsigned int segments, const float minAngle);
 
 	//! Compute date in decimal year format
 	//! @param year
@@ -711,6 +757,13 @@ namespace StelUtils
 	//! @param day
 	//! @return decimal year
 	double getDecYear(const int year, const int month, const int day);
+
+	//! Calculate fixed days (R.D.) from Gregorian date
+	//! @param year
+	//! @param month
+	//! @param day
+	//! @return days from Rata Die
+	int getFixedFromGregorian(const int year, const int month, const int day);
 
 	//! Comparison two string versions and return a result in range -1,0,1
 	//! @param v1 string for version 1
@@ -781,8 +834,13 @@ namespace StelUtils
 	{
 		return (x < 0 ? std::ceil(x) : std::floor(x));
 	}
+	inline float trunc(float x)
+	{
+		return (x < 0 ? std::ceil(x) : std::floor(x));
+	}
 #else
 	inline double trunc(double x) { return ::trunc(x); }
+	inline float trunc(float x) { return ::trunc(x); }
 #endif
 }
 

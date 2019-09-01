@@ -32,7 +32,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelSphereGeometry.hpp"
 #include "gSatWrapper.hpp"
-
+#include "SolarSystem.hpp"
 
 class StelPainter;
 class StelLocation;
@@ -265,6 +265,10 @@ private:
 	GroupSet groups;
 	QDateTime lastUpdated;
 
+	bool isISS;
+	PlanetP moon;
+	PlanetP sun;
+
 	static StelTextureSP hintTexture;
 	static SphericalCap  viewportHalfspace;
 	static float hintBrightness;
@@ -300,7 +304,6 @@ private:
 	//static double timeShift; // for Iridium satellites UNUSED
 
 	//Satellite Orbit Draw
-	QFont     font;
 	Vec3f    orbitColor;
 	double    lastEpochCompForOrbit; //measured in Julian Days
 	double    epochTime;  //measured in Julian Days

@@ -159,6 +159,12 @@ private slots:
 	void de430ButtonClicked();
 	void de431ButtonClicked();
 
+	//! feed the combo with useful values. Call in createDialogContent().
+	void populateFontWritingSystemCombo();
+	void handleFontBoxWritingSystem(int index);
+	void populateScreenshotFileformatsCombo();
+
+
 private:
 	StelGui* gui;
 

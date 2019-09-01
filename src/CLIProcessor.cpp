@@ -30,7 +30,7 @@
 #include <QStandardPaths>
 #include <QDir>
 
-#include <stdio.h>
+#include <cstdio>
 
 void CLIProcessor::parseCLIArgsPreConfig(const QStringList& argList)
 {
@@ -310,7 +310,6 @@ void CLIProcessor::parseCLIArgsPostConfig(const QStringList& argList, QSettings*
 	if (!spoutName.isEmpty())
 		qApp->setProperty("spoutName", spoutName);
 #endif
-
 }
 
 

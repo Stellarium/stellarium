@@ -50,23 +50,53 @@ StelSkyCultureMgr::StelSkyCultureMgr()
 		QSettings pd(pdFile, StelIniFormat);
 		dirToNameEnglish[dir].englishName = pd.value("info/name").toString();
 		dirToNameEnglish[dir].author = pd.value("info/author").toString();
-		QString boundaries = pd.value("info/boundaries", "none").toString();
-		int boundariesIdx = -1;
-		if (boundaries.contains("generic", Qt::CaseInsensitive))
-			boundariesIdx = 0;
-		else if (boundaries.contains("own", Qt::CaseInsensitive))
-			boundariesIdx = 1;
+		// TODO: Define license info (+separate license info for artwork?) and use it in description of skyculture like for plugins and scripts
+		dirToNameEnglish[dir].license = pd.value("info/license", "").toString();
+		QString boundariesStr = pd.value("info/boundaries", "none").toString();
+		StelSkyCulture::BOUNDARIES boundaries = StelSkyCulture::NONE;
+		if (boundariesStr.contains("iau", Qt::CaseInsensitive))
+			boundaries = StelSkyCulture::IAU;
+		else if (boundariesStr.contains("generic", Qt::CaseInsensitive))
+		{
+			qDebug() << "Skyculture " << dir << "'s boundaries is given with deprecated 'generic'. Please edit info.ini and change to 'iau'";
+			boundaries = StelSkyCulture::IAU;
+		}
+		else if (boundariesStr.contains("own", Qt::CaseInsensitive))
+			boundaries = StelSkyCulture::OWN;
 		else
-			boundariesIdx = -1;
-		dirToNameEnglish[dir].boundariesIdx = boundariesIdx;
+		{
+			if (!boundariesStr.contains("none", Qt::CaseInsensitive))
+			{
+				qDebug() << "Skyculture " << dir << "'s boundaries value unknown:" << boundariesStr;
+			}
+			boundaries = StelSkyCulture::NONE;
+		}
+		dirToNameEnglish[dir].boundaries = boundaries;
+		// Use 'traditional' as default
+		QString classificationStr = pd.value("info/classification", "traditional").toString();
+		StelSkyCulture::CLASSIFICATION classification=StelSkyCulture::INCOMPLETE;
+		if (classificationStr.contains("ethnographic", Qt::CaseInsensitive))
+			classification = StelSkyCulture::ETHNOGRAPHIC;
+		else if (classificationStr.contains("traditional", Qt::CaseInsensitive))
+			classification = StelSkyCulture::TRADITIONAL;
+		else if (classificationStr.contains("historical", Qt::CaseInsensitive))
+			classification = StelSkyCulture::HISTORICAL;
+		else if (classificationStr.contains("single", Qt::CaseInsensitive))
+			classification = StelSkyCulture::SINGLE;
+		else if (classificationStr.contains("personal", Qt::CaseInsensitive))
+			classification = StelSkyCulture::PERSONAL;
+		else if (!classificationStr.contains("incomplete", Qt::CaseInsensitive))
+		{
+			qDebug() << "Skyculture " << dir << "has UNKNOWN classification: " << classificationStr;
+			classification = StelSkyCulture::INCOMPLETE;
+		}
+		dirToNameEnglish[dir].classification = classification;
 	}	
 }
-
 
 StelSkyCultureMgr::~StelSkyCultureMgr()
 {
 }
-
 
 //! Init itself from a config file.
 void StelSkyCultureMgr::init()
@@ -125,7 +155,61 @@ QString StelSkyCultureMgr::getCurrentSkyCultureEnglishName() const
 
 int StelSkyCultureMgr::getCurrentSkyCultureBoundariesIdx() const
 {
-	return currentSkyCulture.boundariesIdx;
+	return currentSkyCulture.boundaries;
+}
+
+int StelSkyCultureMgr::getCurrentSkyCultureClassificationIdx() const
+{
+	return currentSkyCulture.classification;
+}
+
+QString StelSkyCultureMgr::getCurrentSkyCultureHtmlClassification() const
+{
+	QString classification, description, color;
+	switch (currentSkyCulture.classification)
+	{
+		case StelSkyCulture::ETHNOGRAPHIC:
+			color = "#33ff33"; // "green" area
+			classification = qc_("ethnographic", "sky culture classification");
+			description = q_("Provided by ethnographic researchers based on interviews of indigenous people.");
+			break;
+		case StelSkyCulture::HISTORICAL:
+			color = "#33ff33"; // "green" area
+			classification = qc_("historical", "sky culture classification");
+			description = q_("Provided by historians based on historical written sources from a (usually short) period of the past.");
+			break;
+		case StelSkyCulture::SINGLE:
+			color = "#33ff33"; // "green" area
+			classification = qc_("single", "sky culture classification");
+			description = q_("Represents a single source like a historical atlas, or publications of a single author.");
+			break;
+		case StelSkyCulture::TRADITIONAL:
+			color = "#33ff33"; // "green" area
+			classification = qc_("traditional", "sky culture classification");
+			description = q_("Content represents 'common' knowledge by several members of an ethnic community, and the sky culture has been developed by members of such community.");
+			break;
+		case StelSkyCulture::PERSONAL:
+			color = "#ffff00"; // "yellow" area
+			classification = qc_("personal", "sky culture classification");
+			description = q_("This is a personally developed sky culture which is not founded in published historical or ethnological research. Stellarium may include it when it is 'pretty enough' without really approving its contents.");
+			break;
+		case StelSkyCulture::INCOMPLETE:
+			color = "#ff6633"; // "red" area
+			classification = qc_("incomplete", "sky culture classification");
+			description = q_("The accuracy of the sky culture description cannot be given, although it looks like it is built on a solid background. More work would be needed.");
+			break;
+		default: // undefined
+			color = "#ff00cc";
+			classification = qc_("undefined", "sky culture classification");
+			description = QString();
+			break;
+	}
+
+	QString html = QString();
+	if (!description.isEmpty()) // additional info for sky culture (metainfo): let's use italic
+		html = QString("<dl><dt><span style='color:%4;'>%5</span> <strong>%1: %2</strong></dt><dd><em>%3</em></dd></dl>").arg(q_("Classification"), classification, description, color, QChar(0x25CF));
+
+	return html;
 }
 
 bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
@@ -134,7 +218,7 @@ bool StelSkyCultureMgr::setCurrentSkyCultureNameI18(const QString& cultureName)
 }
 
 //! returns newline delimited list of human readable culture names in english
-QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
+QString StelSkyCultureMgr::getSkyCultureListEnglish(void) const
 {
 	QString cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
@@ -147,7 +231,7 @@ QString StelSkyCultureMgr::getSkyCultureListEnglish(void)
 }
 
 //! returns newline delimited list of human readable culture names translated to current locale
-QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
+QStringList StelSkyCultureMgr::getSkyCultureListI18(void) const
 {
 	QStringList cultures;
 	QMapIterator<QString, StelSkyCulture> i(dirToNameEnglish);
@@ -161,7 +245,7 @@ QStringList StelSkyCultureMgr::getSkyCultureListI18(void)
 	return cultures;
 }
 
-QStringList StelSkyCultureMgr::getSkyCultureListIDs(void)
+QStringList StelSkyCultureMgr::getSkyCultureListIDs(void) const
 {
 	return dirToNameEnglish.keys();
 }
@@ -182,24 +266,27 @@ QString StelSkyCultureMgr::getCurrentSkyCultureHtmlDescription() const
 			qWarning() << "WARNING: can't find description for skyculture" << skyCultureId;
 	}
 
+	QString description;
 	if (descPath.isEmpty())
 	{
-		return q_("No description");
+		description = QString("<h2>%1</2><p>%2</p>").arg(getCurrentSkyCultureNameI18(), q_("No description"));
 	}
 	else
 	{
 		QFile f(descPath);
-		QString htmlFile;
 		if(f.open(QIODevice::ReadOnly))
 		{
-			htmlFile = QString::fromUtf8(f.readAll());
+			description = QString::fromUtf8(f.readAll());
 			f.close();
 		}
-		return htmlFile;
 	}
+
+	description.append(getCurrentSkyCultureHtmlClassification());
+
+	return description;
 }
 
-QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory)
+QString StelSkyCultureMgr::directoryToSkyCultureEnglish(const QString& directory) const
 {
 	return dirToNameEnglish[directory].englishName;
 }

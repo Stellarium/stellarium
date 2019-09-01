@@ -1,7 +1,7 @@
 
 ########### install files ###############
 
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/stars/default
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/stars/default
         FILES_MATCHING PATTERN "*.json"
         PATTERN "*.dat"
         PATTERN "*.fab"

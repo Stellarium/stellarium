@@ -52,7 +52,7 @@ public:
 	Q_DECLARE_FLAGS(SyncOptions, SyncOption)
 
 	SyncClient(SyncOptions options, const QStringList& excludeProperties, QObject* parent = Q_NULLPTR);
-	virtual ~SyncClient();
+	virtual ~SyncClient() Q_DECL_OVERRIDE;
 
 	QString errorString() const { return errorStr; }
 

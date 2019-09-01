@@ -33,11 +33,11 @@
 class CubemapModeListModel : public QAbstractListModel
 {
 	Q_OBJECT
+
 private:
 	Scenery3d* mgr;
+
 public:
-
-
 	CubemapModeListModel(QObject* parent = Q_NULLPTR) : QAbstractListModel(parent)
 	{
 		mgr = GETSTELMODULE(Scenery3d);

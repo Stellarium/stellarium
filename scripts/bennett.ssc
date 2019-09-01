@@ -2,9 +2,11 @@
 // Name: The Jack Bennett Catalog
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.1
+// Version: 1.2
 // Description: The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). The Bennett catalog was contributed by Auke Slotegraaf.
 //
+
+include("i18n.inc");
 
 // List of Bennett's objects
 var objlist = [["NGC 55", "Ben 1"], ["NGC 104", "Ben 2"], ["NGC 247", "Ben 3"], ["NGC 253", "Ben 4"], ["NGC 288", "Ben 5"], 
@@ -42,8 +44,8 @@ var objlist = [["NGC 55", "Ben 1"], ["NGC 104", "Ben 2"], ["NGC 247", "Ben 3"], 
 
 core.clear("deepspace");
 NebulaMgr.setFlagHints(true);
-var id = LabelMgr.labelScreen("The Jack Bennett Catalog of Southern Deep-Sky Objects", 20, 20, false, 24, "#00AAFF");
-var cnt = LabelMgr.labelScreen(objlist.length + " objects in all", 20, 50, false, 20, "#00AAFF");
+var id = LabelMgr.labelScreen(tr("The Jack Bennett Catalog of Southern Deep-Sky Objects"), 20, 20, false, 24, "#00AAFF");
+var cnt = LabelMgr.labelScreen(objlist.length + " " + tr("objects in all"), 20, 50, false, 20, "#00AAFF");
 LabelMgr.setLabelShow(id, true);
 LabelMgr.setLabelShow(cnt, true);
 core.wait(5);

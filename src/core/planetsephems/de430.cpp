@@ -90,27 +90,21 @@ bool GetDe430Coor(const double jde, const int planet_id, double * xyz, const int
 		case JPL_EPH_OUTSIDE_RANGE:
 			qDebug() << "GetDe430Coor: JPL_EPH_OUTSIDE_RANGE at jde" << jde << "for planet" << planet_id;
 			return false;
-			break;
 		case JPL_EPH_READ_ERROR:
 			qDebug() << "GetDe430Coor: JPL_EPH_READ_ERROR at jde" << jde << "for planet" << planet_id;
 			return false;
-			break;
 		case JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS:
 			qDebug() << "GetDe430Coor: JPL_EPH_QUANTITY_NOT_IN_EPHEMERIS at jde" << jde << "for planet" << planet_id;
 			return false;
-			break;
 		case JPL_EPH_INVALID_INDEX:
 			qDebug() << "GetDe430Coor: JPL_EPH_INVALID_INDEX at jde" << jde << "for planet" << planet_id;
 			return false;
-			break;
 		case JPL_EPH_FSEEK_ERROR:
 			qDebug() << "GetDe430Coor: JPL_EPH_FSEEK_ERROR at jde" << jde << "for planet" << planet_id;
 			return false;
-			break;
 		default: // Should never happen...
 			qDebug() << "GetDe430Coor: unknown error" << jplresult << "at jde" << jde << "for planet" << planet_id;
 			return false;
-			break;
 	}
 
 	// Why do we duplicate this?

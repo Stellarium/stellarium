@@ -77,7 +77,7 @@ class Ring
 {
 public:
 	Ring(float radiusMin, float radiusMax,const QString &texname);
-	double getSize(void) const {return radiusMax;}
+	double getSize(void) const {return static_cast<double>(radiusMax);}
 	const float radiusMin;
 	const float radiusMax;
 	StelTextureSP tex;
@@ -97,7 +97,7 @@ public:
 	// GZ: Until 0.13 QStrings were used for types.
 	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
 	// GZ: If other types are introduced, add here and the string in init().
-	// GZ TODO for 0.16: Preferably convert this into a bitfield and allow several bits set:
+	// GZ TODO for 0.19: Preferably convert this into a bitfield and allow several bits set:
 	// Cubewanos, SDO, OCO, Sednoids are Asteroids, Pluto is a Plutino and DwarfPlanet, Ceres is Asteroid and DwarfPlanet etc.!
 	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
@@ -116,6 +116,7 @@ public:
 		isSDO,          // ssystem.ini: type="scattered disc object"
 		isOCO,          // ssystem.ini: type="oco"
 		isSednoid,      // ssystem.ini: type="sednoid"
+		isInterstellar, // ssystem.ini: type="interstellar object"
 		isUNDEFINED     // ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
 
@@ -138,7 +139,7 @@ public:
 
 
 	Planet(const QString& englishName,
-	       double radius,
+	       double equatorialRadius,
 	       double oblateness,
 	       Vec3f halocolor,
 	       float albedo,
@@ -188,6 +189,11 @@ public:
 	//! - elongation-dms (formatted string)
 	//! - elongation-deg (formatted string)
 	//! - type (object type description)
+	//! - velocity (formatted string)
+	//! - heliocentric-velocity (formatted string)
+	//! - scale
+	//! - eclipse-obscuration (for Sun only)
+	//! - eclipse-magnitude (for Sun only)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;
@@ -221,18 +227,21 @@ public:
 	// Methods specific to Planet
 	//! Get the equator radius of the planet in AU.
 	//! @return the equator radius of the planet in astronomical units.
-	double getRadius(void) const {return radius;}
+	double getEquatorialRadius(void) const {return equatorialRadius;}
 	//! Get the value (1-f) for oblateness f.
 	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
+	//! Get the polar radius of the planet in AU.
+	//! @return the polar radius of the planet in astronomical units.
+	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
 	//! Get duration of sidereal day
-	double getSiderealDay(void) const {return re.period;}
+	double getSiderealDay(void) const {return static_cast<double>(re.period);}
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
 	//! Get albedo
-	double getAlbedo(void) const { return albedo; }
+	double getAlbedo(void) const { return static_cast<double>(albedo); }
 
 	const QString& getTextMapName() const {return texMapName;}
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
@@ -266,7 +275,7 @@ public:
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingNode(void) const {return re.ascendingNode;}
+	double getRotAscendingNode(void) const {return static_cast<double>(re.ascendingNode);}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
@@ -400,6 +409,10 @@ public:
 	static void setSednoidOrbitColor(const Vec3f& oc) { orbitSednoidsColor = oc;}
 	static const Vec3f& getSednoidOrbitColor() {return orbitSednoidsColor;}
 
+	static Vec3f orbitInterstellarColor;
+	static void setInterstellarOrbitColor(const Vec3f& oc) { orbitInterstellarColor = oc;}
+	static const Vec3f& getInterstellarOrbitColor() {return orbitInterstellarColor;}
+
 	static Vec3f orbitMercuryColor;
 	static void setMercuryOrbitColor(const Vec3f& oc) { orbitMercuryColor = oc;}
 	static const Vec3f& getMercuryOrbitColor() {return orbitMercuryColor;}
@@ -509,7 +522,7 @@ protected:
 	QString normalMapName;           // Texture file path
 	//int flagLighting;              // Set whether light computation has to be proceed. NO LONGER USED (always on!)
 	RotationElements re;             // Rotation param
-	double radius;                   // Planet radius in AU
+	double equatorialRadius;         // Planet's equatorial radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) around the parent body.
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()

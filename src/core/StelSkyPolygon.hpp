@@ -69,8 +69,6 @@ protected:
 	//! Direction of the vertices of the convex hull in ICRS frame
 	QList<SphericalConvexPolygon> skyConvexPolygons;
 
-protected:
-
 	//! Load the polygon from a valid QVariantMap
 	virtual void loadFromQVariantMap(const QVariantMap& map);
 

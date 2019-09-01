@@ -24,6 +24,7 @@
 #include "StelMainScriptAPI.hpp"
 #include "StelModuleMgr.hpp"
 #include "LabelMgr.hpp"
+#include "MarkerMgr.hpp"
 #include "ScreenImageMgr.hpp"
 #include "StelActionMgr.hpp"
 #include "StelTranslator.hpp"
@@ -54,25 +55,25 @@
 QScriptValue vec3fToScriptValue(QScriptEngine *engine, const Vec3f& c)
 {
 	QScriptValue obj = engine->newObject();
-	obj.setProperty("r", QScriptValue(engine, c[0]));
-	obj.setProperty("g", QScriptValue(engine, c[1]));
-	obj.setProperty("b", QScriptValue(engine, c[2]));
+	obj.setProperty("r", QScriptValue(engine, static_cast<qsreal>(c[0])));
+	obj.setProperty("g", QScriptValue(engine, static_cast<qsreal>(c[1])));
+	obj.setProperty("b", QScriptValue(engine, static_cast<qsreal>(c[2])));
 	return obj;
 }
 
 void vec3fFromScriptValue(const QScriptValue& obj, Vec3f& c)
 {
-	c[0] = obj.property("r").toNumber();
-	c[1] = obj.property("g").toNumber();
-	c[2] = obj.property("b").toNumber();
+	c[0] = static_cast<float>(obj.property("r").toNumber());
+	c[1] = static_cast<float>(obj.property("g").toNumber());
+	c[2] = static_cast<float>(obj.property("b").toNumber());
 }
 
 QScriptValue createVec3f(QScriptContext* context, QScriptEngine *engine)
 {
 	Vec3f c;
-	c[0] = context->argument(0).toNumber();
-	c[1] = context->argument(1).toNumber();
-	c[2] = context->argument(2).toNumber();
+	c[0] = static_cast<float>(context->argument(0).toNumber());
+	c[1] = static_cast<float>(context->argument(1).toNumber());
+	c[2] = static_cast<float>(context->argument(2).toNumber());
 	return vec3fToScriptValue(engine, c);
 }
 
@@ -89,7 +90,6 @@ public:
 
 private:
 	bool isPaused;
-
 };
 
 StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
@@ -122,7 +122,7 @@ StelScriptMgr::StelScriptMgr(QObject *parent): QObject(parent)
 	
 	setScriptRate(1.0);
 	
-	engine->setProcessEventsInterval(10);
+	engine->setProcessEventsInterval(1); // was 10, let's allow a smoother script execution
 
 	agent = new StelScriptEngineAgent(engine);
 	engine->setAgent(agent);
@@ -134,7 +134,7 @@ void StelScriptMgr::initActions()
 {
 	StelActionMgr* actionMgr = StelApp::getInstance().getStelActionManager();
 	QSignalMapper* mapper = new QSignalMapper(this);
-	for (const auto script : getScriptList())
+	for (const auto& script : getScriptList())
 	{
 		QString shortcut = getShortcut(script);
 		QString actionId = "actionScript/" + script;
@@ -159,10 +159,9 @@ void StelScriptMgr::addModules()
 		QScriptValue objectValue = engine->newQObject(m);
 		engine->globalObject().setProperty(m->objectName(), objectValue);
 	}
-
 }
 
-QStringList StelScriptMgr::getScriptList()
+QStringList StelScriptMgr::getScriptList() const
 {
 	QStringList scriptFiles;
 
@@ -176,12 +175,12 @@ QStringList StelScriptMgr::getScriptList()
 	return scriptFiles;
 }
 
-bool StelScriptMgr::scriptIsRunning()
+bool StelScriptMgr::scriptIsRunning() const
 {
 	return engine->isEvaluating();
 }
 
-QString StelScriptMgr::runningScriptId()
+QString StelScriptMgr::runningScriptId() const
 {
 	return scriptFileName;
 }
@@ -432,6 +431,7 @@ void StelScriptMgr::stopScript()
 	if (engine->isEvaluating())
 	{
 		GETSTELMODULE(LabelMgr)->deleteAllLabels();
+		GETSTELMODULE(MarkerMgr)->deleteAllMarkers();
 		GETSTELMODULE(ScreenImageMgr)->deleteAllImages();
 		if (agent->getPauseScript()) {
 			agent->setPauseScript(false);
@@ -444,7 +444,7 @@ void StelScriptMgr::stopScript()
 	scriptEnded();
 }
 
-void StelScriptMgr::setScriptRate(float r)
+void StelScriptMgr::setScriptRate(double r)
 {
 	//qDebug() << "StelScriptMgr::setScriptRate(" << r << ")";
 	if (!engine->isEvaluating())
@@ -453,29 +453,31 @@ void StelScriptMgr::setScriptRate(float r)
 		return;
 	}
 	
-	float currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
+	qsreal currentScriptRate = engine->globalObject().property("scriptRateReadOnly").toNumber();
 	
 	// pre-calculate the new time rate in an effort to prevent there being much latency
 	// between setting the script rate and the time rate.
-	float factor = r / currentScriptRate;
+	qsreal factor = r / currentScriptRate;
 	
 	StelCore* core = StelApp::getInstance().getCore();
 	core->setTimeRate(core->getTimeRate() * factor);
 	
-	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(core->getTimeRate());
+	GETSTELMODULE(StelMovementMgr)->setMovementSpeedFactor(static_cast<float>(core->getTimeRate()));
 	engine->globalObject().setProperty("scriptRateReadOnly", r);
-
 }
 
-void StelScriptMgr::pauseScript() {
+void StelScriptMgr::pauseScript()
+{
+	emit(scriptPaused());
 	agent->setPauseScript(true);
 }
 
-void StelScriptMgr::resumeScript() {
+void StelScriptMgr::resumeScript()
+{
 	agent->setPauseScript(false);
 }
 
-double StelScriptMgr::getScriptRate()
+double StelScriptMgr::getScriptRate() const
 {
 	return engine->globalObject().property("scriptRateReadOnly").toNumber();
 }

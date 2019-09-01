@@ -30,7 +30,7 @@ ShortcutLineEdit::ShortcutLineEdit(QWidget *parent) :
 	clear();
 }
 
-QKeySequence ShortcutLineEdit::getKeySequence()
+QKeySequence ShortcutLineEdit::getKeySequence() const
 {
 	return QKeySequence(keys.value(0, 0), keys.value(1, 0),
 	                    keys.value(2, 0), keys.value(3, 0));

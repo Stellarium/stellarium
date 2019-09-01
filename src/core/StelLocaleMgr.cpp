@@ -36,6 +36,7 @@ QMap<QString, QString> StelLocaleMgr::countryCodeToStringMap;
 StelLocaleMgr::StelLocaleMgr()
 	: skyTranslator(Q_NULLPTR)
 	, planetaryFeaturesTranslator(Q_NULLPTR)
+	, scriptsTranslator(Q_NULLPTR)
 	, timeFormat()
 	, dateFormat()	
 {
@@ -66,6 +67,8 @@ StelLocaleMgr::~StelLocaleMgr()
 	skyTranslator = Q_NULLPTR;
 	delete planetaryFeaturesTranslator;
 	planetaryFeaturesTranslator = Q_NULLPTR;
+	delete scriptsTranslator;
+	scriptsTranslator = Q_NULLPTR;
 }
 
 // Mehtod which generates and save the map between 2 letters country code and english country names
@@ -134,6 +137,12 @@ void StelLocaleMgr::setAppLanguage(const QString& newAppLanguageName, bool refre
 	delete StelTranslator::globalTranslator;
 	StelTranslator::globalTranslator = new StelTranslator("stellarium", newAppLanguageName);
 	qDebug() << "Application language is " << StelTranslator::globalTranslator->getTrueLocaleName();
+
+	delete scriptsTranslator;
+	// Update the translator with new locale name
+	scriptsTranslator = new StelTranslator("stellarium-scripts", newAppLanguageName);
+	qDebug() << "Scripts language is " << scriptsTranslator->getTrueLocaleName();
+
 	if (refreshAll)
 		StelApp::getInstance().updateI18n();
 }
@@ -197,6 +206,10 @@ const StelTranslator &StelLocaleMgr::getAppStelTranslator() const
 	return *StelTranslator::globalTranslator;
 }
 
+const StelTranslator& StelLocaleMgr::getScriptsTranslator() const
+{
+	return *scriptsTranslator;
+}
 
 // Return the time in ISO 8601 format that is : %Y-%m-%d %H:%M:%S
 QString StelLocaleMgr::getISO8601TimeLocal(double JD) const
@@ -226,7 +239,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 	int year, month, day, dayOfWeek;
 	double shift = core->getUTCOffset(JD)*0.041666666666;
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
-	dayOfWeek = (int)floor(fmod(JD, 7));
+	dayOfWeek = static_cast<int>(floor(fmod(JD, 7)));
 	QString str;
 	switch (dateFormat)
 	{
@@ -253,13 +266,10 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 // according to the timeFormat variable
 QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 {
-	int hour, minute, second;
+	int hour, minute, second, millsec;
 	double shift = core->getUTCOffset(JD)*0.041666666666;
-
-	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second);
-
-	QTime t(hour, minute, second);
-
+	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second, &millsec);
+	QTime t(hour, minute, second, millsec);
 	switch (timeFormat)
 	{
 		case STimeSystemDefault:
@@ -276,11 +286,11 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 
 QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 {
+	QString timeZone = "";
+	QString timeZoneST = "";
 	if (core->getCurrentLocation().planetName=="Earth")
 	{
-		QString timeZone = "";
 		QString currTZ = core->getCurrentTimeZone();
-		QString timeZoneST = "";
 
 		if (JD<=StelCore::TZ_ERA_BEGINNING || currTZ.contains("auto") || currTZ.contains("LMST"))
 		{
@@ -303,11 +313,21 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 
 		if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
 			timeZone = QString("%1 (%2)").arg(timeZone, timeZoneST);
-
-		return timeZone;
 	}
 	else
-		return QString();
+	{
+		// TODO: Make sure LMST/LTST would make sense on other planet, or inhibit it?
+		float shift = core->getUTCOffset(JD);
+		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
+		if(shift<0.0f)
+			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
+		else
+			timeZone = QString("UTC+%1").arg(tz.toString("hh:mm"));
+
+		//if (!timeZoneST.isEmpty() && !core->getUseCustomTimeZone())
+		//	timeZone = QString("%1 (%2)").arg(timeZone, timeZoneST);
+	}
+	return timeZone;
 }
 
 // Convert the time format enum to its associated string and reverse
@@ -322,11 +342,24 @@ StelLocaleMgr::STimeFormat StelLocaleMgr::stringToSTimeFormat(const QString& tf)
 
 QString StelLocaleMgr::sTimeFormatToString(STimeFormat tf) const
 {
-	if (tf == STimeSystemDefault) return "system_default";
-	if (tf == STime24h) return "24h";
-	if (tf == STime12h) return "12h";
-	qWarning() << "WARNING: unrecognized time_display_format value : " << (int)tf << " system_default used.";
-	return "system_default";
+	QString tfmt;
+	switch (tf)
+	{
+		case STime24h:
+			tfmt = "24h";
+			break;
+		case STime12h:
+			tfmt = "12h";
+			break;
+		case STimeSystemDefault:
+			tfmt = "system_default";
+			break;
+		default:
+			qWarning() << "WARNING: unknown time format, fallback to system default.";
+			tfmt = "system_default";
+			break;
+	}
+	return tfmt;
 }
 
 // Convert the date format enum to its associated string and reverse
@@ -342,12 +375,27 @@ StelLocaleMgr::SDateFormat StelLocaleMgr::stringToSDateFormat(const QString& df)
 
 QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 {
-	if (df == SDateSystemDefault) return "system_default";
-	if (df == SDateMMDDYYYY) return "mmddyyyy";
-	if (df == SDateDDMMYYYY) return "ddmmyyyy";
-	if (df == SDateYYYYMMDD) return "yyyymmdd";
-	qWarning() << "WARNING: unrecognized date_display_format value : " << (int)df << " system_default used.";
-	return "system_default";
+	QString dfmt;
+	switch (df)
+	{
+		case SDateMMDDYYYY:
+			dfmt = "mmddyyyy";
+			break;
+		case SDateDDMMYYYY:
+			dfmt = "ddmmyyyy";
+			break;
+		case SDateYYYYMMDD:
+			dfmt = "yyyymmdd";
+			break;
+		case SDateSystemDefault:
+			dfmt = "system_default";
+			break;
+		default:
+			qWarning() << "WARNING: unknown date format, fallback to system default.";
+			dfmt = "system_default";
+			break;
+	}
+	return dfmt;
 }
 
 QString StelLocaleMgr::getQtDateFormatStr() const
@@ -394,5 +442,200 @@ QStringList StelLocaleMgr::getAllCountryNames()
 		res.append(i.value());
 	res.sort();
 	return res;
+}
+
+QString StelLocaleMgr::shortDayName(int weekday)
+{
+	QString r;
+	switch (weekday)
+	{
+		case 1:
+			r = qc_("Mon", "short day name");
+			break;
+		case 2:
+			r = qc_("Tue", "short day name");
+			break;
+		case 3:
+			r = qc_("Wed", "short day name");
+			break;
+		case 4:
+			r = qc_("Thu", "short day name");
+			break;
+		case 5:
+			r = qc_("Fri", "short day name");
+			break;
+		case 6:
+			r = qc_("Sat", "short day name");
+			break;
+		case 7:
+			r = qc_("Sun", "short day name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::longDayName(int weekday)
+{
+	QString r;
+	switch (weekday)
+	{
+		case 1:
+			r = qc_("Monday", "long day name");
+			break;
+		case 2:
+			r = qc_("Tuesday", "long day name");
+			break;
+		case 3:
+			r = qc_("Wednesday", "long day name");
+			break;
+		case 4:
+			r = qc_("Thursday", "long day name");
+			break;
+		case 5:
+			r = qc_("Friday", "long day name");
+			break;
+		case 6:
+			r = qc_("Saturday", "long day name");
+			break;
+		case 7:
+			r = qc_("Sunday", "long day name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::shortMonthName(int month)
+{
+	QString r;
+	switch (month)
+	{
+		case 1:
+			r = qc_("Jan", "short month name");
+			break;
+		case 2:
+			r = qc_("Feb", "short month name");
+			break;
+		case 3:
+			r = qc_("Mar", "short month name");
+			break;
+		case 4:
+			r = qc_("Apr", "short month name");
+			break;
+		case 5:
+			r = qc_("May", "short month name");
+			break;
+		case 6:
+			r = qc_("Jun", "short month name");
+			break;
+		case 7:
+			r = qc_("Jul", "short month name");
+			break;
+		case 8:
+			r = qc_("Aug", "short month name");
+			break;
+		case 9:
+			r = qc_("Sep", "short month name");
+			break;
+		case 10:
+			r = qc_("Oct", "short month name");
+			break;
+		case 11:
+			r = qc_("Nov", "short month name");
+			break;
+		case 12:
+			r = qc_("Dec", "short month name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::longMonthName(int month)
+{
+	QString r;
+	switch (month)
+	{
+		case 1:
+			r = qc_("January", "long month name");
+			break;
+		case 2:
+			r = qc_("February", "long month name");
+			break;
+		case 3:
+			r = qc_("March", "long month name");
+			break;
+		case 4:
+			r = qc_("April", "long month name");
+			break;
+		case 5:
+			r = qc_("May", "long month name");
+			break;
+		case 6:
+			r = qc_("June", "long month name");
+			break;
+		case 7:
+			r = qc_("July", "long month name");
+			break;
+		case 8:
+			r = qc_("August", "long month name");
+			break;
+		case 9:
+			r = qc_("September", "long month name");
+			break;
+		case 10:
+			r = qc_("October", "long month name");
+			break;
+		case 11:
+			r = qc_("November", "long month name");
+			break;
+		case 12:
+			r = qc_("December", "long month name");
+			break;
+	}
+	return r;
+}
+
+QString StelLocaleMgr::longGenitiveMonthName(int month)
+{
+	QString r;
+	switch (month)
+	{
+		case 1:
+			r = qc_("January", "genitive");
+			break;
+		case 2:
+			r = qc_("February", "genitive");
+			break;
+		case 3:
+			r = qc_("March", "genitive");
+			break;
+		case 4:
+			r = qc_("April", "genitive");
+			break;
+		case 5:
+			r = qc_("May", "genitive");
+			break;
+		case 6:
+			r = qc_("June", "genitive");
+			break;
+		case 7:
+			r = qc_("July", "genitive");
+			break;
+		case 8:
+			r = qc_("August", "genitive");
+			break;
+		case 9:
+			r = qc_("September", "genitive");
+			break;
+		case 10:
+			r = qc_("October", "genitive");
+			break;
+		case 11:
+			r = qc_("November", "genitive");
+			break;
+		case 12:
+			r = qc_("December", "genitive");
+			break;
+	}
+	return r;
 }
 

@@ -87,7 +87,7 @@ QString SubContour::toJSON() const
 	{
 		//res += QString("[") + v.vertex.toString() + "],";
 		StelUtils::rectToSphe(&ra, &dec, v.vertex);
-		res += QString("[") + QString::number(ra*180./M_PI, 'g', 12) + "," + QString::number(dec*180./M_PI, 'g', 12) + "," + (v.edgeFlag ? QString("true"): QString("false")) + "],";
+		res += QString("[") + QString::number(ra*M_180_PI, 'g', 12) + "," + QString::number(dec*M_180_PI, 'g', 12) + "," + (v.edgeFlag ? QString("true"): QString("false")) + "],";
 	}
 	res[res.size()-1]=']';
 	return res;
@@ -318,9 +318,9 @@ struct OctTessTrianglesCallbackData
 	QList<Vec3d> tempVertices;		//! Used to store the temporary combined vertices
 };
 
-void errorCallback(GLenum errno)
+void errorCallback(GLenum errn)
 {
-	qWarning() << "Tesselator error:" << QString::fromLatin1((char*)gluesErrorString(errno));
+	qWarning() << "Tesselator error:" << QString::fromLatin1(reinterpret_cast<const char*>(gluesErrorString(errn)));
 	Q_ASSERT(0);
 }
 
@@ -763,10 +763,7 @@ void OctahedronPolygon::splitContourByPlan(int onLine, const SubContour& inputCo
 	// Handle the last line between the last and first point
 	previousQuadrant = currentQuadrant;
 	currentQuadrant = getSide(inputContour.first().vertex, onLine);
-	if (currentQuadrant==previousQuadrant)
-	{
-	}
-	else
+	if (currentQuadrant!=previousQuadrant)
 	{
 		// We crossed the line
 		tmpVertex = greatCircleIntersection(previousVertex.vertex, inputContour.first().vertex, plan, ok);

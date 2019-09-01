@@ -23,7 +23,6 @@ using namespace SyncProtocol;
 
 ErrorMessage::ErrorMessage()
 {
-
 }
 
 ErrorMessage::ErrorMessage(const QString &msg)
@@ -40,7 +39,7 @@ bool ErrorMessage::deserialize(QDataStream &stream, tPayloadSize dataSize)
 {
 	Q_UNUSED(dataSize);
 	message = readString(stream);
-	return !stream.status();;
+	return !stream.status();
 }
 
 ServerChallenge::ServerChallenge()
@@ -85,14 +84,13 @@ bool ServerChallenge::deserialize(QDataStream &stream, tPayloadSize dataSize)
 
 	stream>>clientId;
 
-	return !stream.status();;
+	return !stream.status();
 }
 
 ClientChallengeResponse::ClientChallengeResponse()
 	: remoteSyncVersion((REMOTESYNC_MAJOR<<16) | (REMOTESYNC_MINOR<<8) | REMOTESYNC_PATCH),
 	  stellariumVersion((STELLARIUM_MAJOR<<16) | (STELLARIUM_MINOR<<8) | STELLARIUM_PATCH)
 {
-
 }
 
 void ClientChallengeResponse::serialize(QDataStream &stream) const
@@ -112,7 +110,7 @@ bool ClientChallengeResponse::deserialize(QDataStream &stream, tPayloadSize data
 	stream>>stellariumVersion;
 	stream>>clientId;
 
-	return !stream.status();;
+	return !stream.status();
 }
 
 void Time::serialize(QDataStream &stream) const
@@ -131,13 +129,12 @@ bool Time::deserialize(QDataStream &stream, tPayloadSize dataSize)
 	stream>>jDay;
 	stream>>timeRate;
 
-	return !stream.status();;
+	return !stream.status();
 }
 
 Location::Location()
 	: totalDuration(0.0),timeToGo(0.0)
 {
-
 }
 
 void Location::serialize(QDataStream &stream) const

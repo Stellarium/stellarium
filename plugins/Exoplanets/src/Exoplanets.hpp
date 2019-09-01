@@ -76,6 +76,16 @@ class Exoplanets : public StelObjectModule
 		   WRITE setFlagShowExoplanets
 		   NOTIFY flagExoplanetsVisibilityChanged
 		   )
+	Q_PROPERTY(Vec3f markerColor
+		   READ getMarkerColor
+		   WRITE setMarkerColor
+		   NOTIFY markerColorChanged
+		   )
+	Q_PROPERTY(Vec3f habitableColor
+		   READ getHabitableColor
+		   WRITE setHabitableColor
+		   NOTIFY habitableColorChanged
+		   )
 public:	
 	//! @enum UpdateState
 	//! Used for keeping for track of the download/update status
@@ -108,22 +118,24 @@ public:
 	virtual double getCallOrder(StelModuleActionName actionName) const;
 
 	///////////////////////////////////////////////////////////////////////////
-	// Methods defined in StelObjectManager class
+	// Methods defined in StelObjectModule class
 	//! Used to get a list of objects which are near to some position.
 	//! @param v a vector representing the position in th sky around which to search for exoplanets.
 	//! @param limitFov the field of view around the position v in which to search for exoplanets.
 	//! @param core the StelCore to use for computations.
-	//! @return an list containing the exoplanets located inside the limitFov circle around position v.
+	//! @return a list containing the exoplanets located inside the limitFov circle around position v.
 	virtual QList<StelObjectP> searchAround(const Vec3d& v, double limitFov, const StelCore* core) const;
 
-	//! Return the matching satellite object's pointer if exists or Q_NULLPTR.
-	//! @param nameI18n The case in-sensistive satellite name
+	//! Return the matching exoplanet system object's pointer if exists or Q_NULLPTR.
+	//! @param nameI18n The case in-sensitive localized exoplanet system name
 	virtual StelObjectP searchByNameI18n(const QString& nameI18n) const;
 
-	//! Return the matching satellite if exists or Q_NULLPTR.
-	//! @param name The case in-sensistive standard program name
+	//! Return the matching exoplanet system if exists or Q_NULLPTR.
+	//! @param name The case in-sensitive english exoplanet system name
 	virtual StelObjectP searchByName(const QString& name) const;
 
+	//! Return the matching exoplanet system if exists or Q_NULLPTR.
+	//! @param id The exoplanet system id
 	virtual StelObjectP searchByID(const QString &id) const;
 
 	//! Find and return the list of at most maxNbItem objects auto-completing the passed object name.
@@ -131,7 +143,7 @@ public:
 	//! @param maxNbItem the maximum number of returned object names
 	//! @param useStartOfWords the autofill mode for returned objects names
 	//! @return a list of matching object name by order of relevance, or an empty list if nothing match
-	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=true) const;
+	virtual QStringList listMatchingObjects(const QString& objPrefix, int maxNbItem=5, bool useStartOfWords=false, bool inEnglish=false) const;
 
 	virtual QStringList listAllObjects(bool inEnglish) const;
 
@@ -139,7 +151,7 @@ public:
 	virtual QString getStelObjectType() const { return Exoplanet::EXOPLANET_TYPE; }
 
 	//! get a exoplanet object by identifier
-	ExoplanetP getByID(const QString& id);
+	ExoplanetP getByID(const QString& id) const;
 
 	//! Implement this to tell the main Stellarium GUI that there is a GUI element to configure this
 	//! plugin.
@@ -239,6 +251,8 @@ signals:
 	void jsonUpdateComplete(void);
 
 	void flagExoplanetsVisibilityChanged(bool b);
+	void markerColorChanged(Vec3f);
+	void habitableColorChanged(Vec3f);
 
 public slots:
 	//! Download JSON from web recources described in the module section of the
@@ -261,7 +275,7 @@ public slots:
 
 	//! Define whether the button toggling exoplanets should be visible
 	void setFlagShowExoplanetsButton(bool b);
-	bool getFlagShowExoplanetsButton(void) { return flagShowExoplanetsButton; }
+	bool getFlagShowExoplanetsButton(void) const { return flagShowExoplanetsButton; }
 
 	//! Get status to display of distribution of exoplanetary systems
 	//! @return true if distribution of exoplanetary systems is enabled
@@ -287,7 +301,7 @@ public slots:
 	//! Get color for markers of exoplanetary systems
 	//! @param h set false if you want get color of markers of potentially habitable exoplanets
 	//! @return color
-	Vec3f getMarkerColor(bool habitable) const;
+	Vec3f getMarkerColor() const;
 	//! Set color for markers of exoplanetary systems
 	//! @param c color
 	//! @param h set true if you want set color for potentially habitable exoplanets
@@ -295,7 +309,20 @@ public slots:
 	//! // example of usage in scripts
 	//! Exoplanets.setMarkerColor(Vec3f(1.0,0.0,0.0), true);
 	//! @endcode
-	void setMarkerColor(const Vec3f& c, bool h);
+	void setMarkerColor(const Vec3f& c);
+
+	//! Get color for markers of habitable exoplanetary systems
+	//! @param h set false if you want get color of markers of potentially habitable exoplanets
+	//! @return color
+	Vec3f getHabitableColor() const;
+	//! Set color for markers of exoplanetary systems
+	//! @param c color
+	//! @param h set true if you want set color for potentially habitable exoplanets
+	//! @code
+	//! // example of usage in scripts
+	//! Exoplanets.setHabitableColor(Vec3f(1.0,0.0,0.0), true);
+	//! @endcode
+	void setHabitableColor(const Vec3f& c);
 
 	//! Get count of planetary systems from catalog
 	//! @return count of planetary systems
@@ -321,7 +348,7 @@ public slots:
 	//! Set the temperature scale
 	void setCurrentTemperatureScale(TemperatureScale tscale)
 	{
-		Exoplanet::temperatureScaleID = (int)tscale;
+		Exoplanet::temperatureScaleID = static_cast<int>(tscale);
 	}
 	//! Get the current temperature scale
 	TemperatureScale getCurrentTemperatureScale() const
@@ -333,6 +360,8 @@ public slots:
 	//! Set the temperature scale from its key
 	void setCurrentTemperatureScaleKey(QString key);
 
+	//! Connect this to StelApp font size.
+	void setFontSize(int s){font.setPixelSize(s);}
 private:
 	// Font used for displaying our text
 	QFont font;

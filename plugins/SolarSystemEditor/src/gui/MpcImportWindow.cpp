@@ -329,9 +329,11 @@ void MpcImportWindow::pasteClipboardURL()
 
 void MpcImportWindow::selectFile()
 {
-	QStringList directories = QStandardPaths::standardLocations(QStandardPaths::DesktopLocation) +
-							  QStandardPaths::standardLocations(QStandardPaths::HomeLocation) << "/";
-	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a text file"), directories[0]);
+	QString filter = q_("Plain Text File");
+	filter.append(" (*.txt);;");
+	filter.append(q_("All Files"));
+	filter.append(" (*.*)");
+	QString filePath = QFileDialog::getOpenFileName(Q_NULLPTR, q_("Select a file"), QDir::homePath(), filter);
 	ui->lineEditFilePath->setText(filePath);
 }
 

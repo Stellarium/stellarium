@@ -1,0 +1,46 @@
+//
+// Name: Western Constellations Tour
+// License: Public Domain
+// Author: Alexander Wolf
+// Shortcut: Ctrl+D,1
+// Version: 1.3
+// Description: A tour of the western constellations.
+
+include("common_objects.inc");
+include("i18n.inc");
+
+core.clear("starchart");
+var skyculture = core.getSkyCulture();
+core.setSkyCulture("western");
+GridLinesMgr.setFlagEquatorGrid(false);
+NebulaMgr.setFlagHints(false);
+ConstellationMgr.setFlagArt(false);
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(false);
+ConstellationMgr.setFlagLabels(false);
+core.setGuiVisible(false);
+var id = LabelMgr.labelScreen(tr("Press Ctrl+T to un-hide the toolbar"), 100,100, false, 20);
+LabelMgr.setLabelShow(id, true);
+core.wait(4);
+LabelMgr.setLabelShow(id, false);
+LabelMgr.deleteLabel(id);
+ConstellationMgr.setFlagBoundaries(true);
+ConstellationMgr.setFlagLines(true);
+ConstellationMgr.setFlagLabels(true);
+ConstellationMgr.setFlagIsolateSelected(true);
+
+for (i=0; i<constellations.length; i++)
+{
+	objName = constellations[i];
+	core.selectConstellationByName(objName);
+	StelMovementMgr.autoZoomIn(6);
+	core.wait(1);
+	StelMovementMgr.zoomTo(40,8);
+	core.wait(1);
+	ConstellationMgr.setFlagArt(true);
+	core.wait(10);
+	ConstellationMgr.setFlagArt(false);
+}
+core.setSkyCulture(skyculture);
+core.setGuiVisible(true);
+core.clear("natural");

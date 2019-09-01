@@ -22,6 +22,7 @@
 #include <QFileDialog>
 
 #include "StelApp.hpp"
+#include "StelCore.hpp"
 #include "ui_ObservabilityDialog.h"
 #include "ObservabilityDialog.hpp"
 #include "Observability.hpp"
@@ -65,9 +66,13 @@ void ObservabilityDialog::createDialogContent()
 	Observability* plugin = GETSTELMODULE(Observability);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->aboutTextBrowser;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->aboutTextBrowser;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	// Settings:
 	
@@ -114,10 +119,10 @@ void ObservabilityDialog::createDialogContent()
 	        this, SLOT(updateControls()));
 	connect(ui->saveSettingsButton, SIGNAL(clicked()),
 	        plugin, SLOT(saveConfiguration()));
+	connect(StelApp::getInstance().getCore(), SIGNAL(configurationDataSaved()), plugin, SLOT(saveConfiguration()));
 
 	// About tab
 	setAboutHtml();
-	StelGui* gui = dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
 	if(gui!=Q_NULLPTR)
 		ui->aboutTextBrowser->document()->setDefaultStyleSheet(QString(gui->getStelStyle().htmlStyleSheet));
 
@@ -164,9 +169,9 @@ void ObservabilityDialog::updateControls()
 //	ui->SuperMoon->setChecked(GETSTELMODULE(Observability)->getShowFlags(7));
 
 	Vec3f fontColor = plugin->getFontColor();
-	int red = (int)(100.*fontColor[0]);
-	int green = (int)(100.*fontColor[1]);
-	int blue = (int)(100.*fontColor[2]);
+	int red = static_cast<int>(100.*fontColor[0]);
+	int green = static_cast<int>(100.*fontColor[1]);
+	int blue = static_cast<int>(100.*fontColor[2]);
 	ui->redSlider->setValue(red);
 	ui->greenSlider->setValue(green);
 	ui->blueSlider->setValue(blue);

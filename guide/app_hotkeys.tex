@@ -36,11 +36,13 @@ Right click                      & Clear selection \\
 \key{O} 			& Planet orbits \\
 \key{Shift+T}		& Planet trails \\
 \key{\ctrl+Shift+P} & Planet selection marker \\
+\key{Alt+N}			& Nomenclature labels \\
 \key{S} 			& Stars \\
 \key{Alt+S}			& Stars labels \\
 \key{D}				& Deep-sky objects (symbols)\\
 \key{I}				& Deep-sky objects background images \\
-\key{\ctrl+Alt+D}   & Digitized Sky Survey (experimental) \\
+\key{\ctrl+I}		& Reload the deep-sky objects background images \\
+\key{\ctrl+Alt+D}   & Toggle Hierarchical Progressive Surveys (experimental) \\
 \key{M} 			& Milky Way \\
 \key{\ctrl+Shift+Z}	& Zodiacal Light \\
 \key{G} 			& Ground \\
@@ -64,6 +66,12 @@ Right click                      & Clear selection \\
 \key{\ctrl+Alt+Shift+V}	& Select single constellation \\
 \key{Tab}	        & Remove selection of constellations \\
 \key{\ctrl+Shift+N}	& Native planet names (from starlore) \\
+\key{Alt+V}			& Asterism labels \\
+\key{Alt+A}			& Asterism lines \\
+\key{Alt+R}			& Ray helpers \\
+\key{\ctrl+Alt+I}	& Reload the sky culture \\
+\key{W}				& Remove selection of constellations \\
+\key{Alt+W}			& Select all constellations \\
 %
 \key{F11} 			& Full-screen mode \\
 \key{\ctrl+N} 		& Night mode \\
@@ -78,12 +86,13 @@ Right click                      & Clear selection \\
 \begin{center}
 \begin{tabular}{rl}
 \toprule
-\emph{Shortcut key} & \emph{Description}\\\midrule
-\key{\ctrl+C}	 	& Copy selected object information to clipboard \\
-\key{\ctrl+Q}	 	& Quit \\
-\key{\ctrl+S}	 	& Save screenshot \\
-\key{\ctrl+M}	 	& Switch between equatorial and azimuthal mount \\
-\key{\ctrl+T}	 	& Toggle visibility of GUI \\
+\emph{Shortcut key} 	& \emph{Description}\\\midrule
+\key{\ctrl+C}	 		& Copy selected object information to clipboard \\
+\key{\ctrl+Q}	 		& Quit \\
+\key{\ctrl+S}	 		& Save screenshot \\
+\key{\ctrl+M}	 		& Switch between equatorial and azimuthal mount \\
+\key{\ctrl+T}	 		& Toggle visibility of GUI \\
+\key{\ctrl+R}, \key{P}	& Reload shaders (for development) \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -103,6 +112,8 @@ Right click                      & Clear selection \\
 \key{Shift+S}			& Look towards South \\
 \key{Shift+W}			& Look towards West \\
 \key{Shift+Z}			& Look towards Zenith \\
+\key{Alt+Shift+N}		& Look towards North Celestial pole \\
+\key{Alt+Shift+S}		& Look towards South Celestial pole \\
 \key{T}					& Track object \\
 \key{/}					& Zoom in on selected object \\
 \key{\textbackslash{}}	& Zoom out \\
@@ -133,9 +144,10 @@ Right click                      & Clear selection \\
 \key{Shift+L}			& Increase time speed (a little) \\
 \key{7}					& Set time rate to zero \\
 \key{8}					& Set time to now \\
-\key{\ctrl+D}, \key{P}		& Pause script execution \\
-\key{\ctrl+D}, \key{R}		& Resume script execution \\
-\key{\ctrl+D}, \key{S}		& Stop script execution \\
+\key{0}					& Set reverse time direction \\
+\key{\ctrl+D}, \key{P}	& Pause script execution \\
+\key{\ctrl+D}, \key{R}	& Resume script execution \\
+\key{\ctrl+D}, \key{S}	& Stop script execution \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -147,10 +159,15 @@ Right click                      & Clear selection \\
 \begin{tabular}{rl} 
 \toprule
 \emph{Shortcut key}		& \emph{Description}\\\midrule
-\key{\ctrl+D}, \key{0}		& Run script ``Solar System Screensaver'' \\
-\key{\ctrl+D}, \key{1}		& Run script ``Constellations Tour'' \\
-\key{\ctrl+D}, \key{2}		& Run script ``Sky Culture Tour'' \\
-\key{\ctrl+D}, \key{3}		& Run script ``Screensaver'' \\
+\key{\ctrl+D}, \key{0}	& Run script ``Solar System Screensaver'' \\
+\key{\ctrl+D}, \key{1}	& Run script ``Western Constellations Tour'' \\
+\key{\ctrl+D}, \key{2}	& Run script ``Sky Culture Tour'' \\
+\key{\ctrl+D}, \key{3}	& Run script ``Screensaver'' \\
+\key{\ctrl+D}, \key{B}	& Run script ``Skybox Tiles'' \\
+\key{\ctrl+D}, \key{M}, \key{1} & Run script ``Jupiter and triple shadow phenomena'' \\
+\key{\ctrl+D}, \key{M}, \key{2} & Run script ``Jupiter without Galilean satellites'' \\
+\key{\ctrl+D}, \key{M}, \key{3} & Run script ``Occultations of bright stars by planets'' \\
+\key{\ctrl+D}, \key{M}, \key{4} & Run script ``Mutual occultations of planets'' \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -168,7 +185,7 @@ Right click                      & Clear selection \\
 \key{F5}			& Toggle Date/time window \\
 \key{F6}			& Toggle Location window \\
 \key{F7}			& Toggle Shortcuts window \\
-\key{F10}			& Toggle AstroCalc window\\
+\key{F10}			& Toggle Astronomical calculations window \\
 \key{F12}			& Toggle Script Console window \\
 \key{Alt+B}			& Toggle Bookmarks window \\
 \bottomrule
@@ -197,17 +214,6 @@ Right click                      & Clear selection \\
 \emph{Shortcut key}	& \emph{Description}\\\midrule
 \key{\ctrl+U}		& Toggle archaeolines \\
 \key{\ctrl+Shift+U}	& Toggle archaeolines dialog\\
-\bottomrule
-\end{tabular}
-\end{center}
-
-\subsection{Compass Marks}
-\label{ch:Hotkeys:Plugins:CompassMarks}
-\begin{center}
-\begin{tabular}{rl} 
-\toprule
-\emph{Shortcut key}	& \emph{Description}\\\midrule
-\key{\ctrl+Alt+C}	& Toggle compass marks \\
 \bottomrule
 \end{tabular}
 \end{center}
@@ -376,6 +382,17 @@ Right click                      & Clear selection \\
 \key{Alt+9}         & Move telescope \#9 to the point currently in the center of the screen \\
 \bottomrule
 \end{longtable}
+
+\subsection{Text User Interface (TUI)}
+\label{ch:Hotkeys:Plugins:TUI}
+\begin{center}
+\begin{tabular}{rl} 
+\toprule
+\emph{Shortcut key}	& \emph{Description}\\\midrule
+\key{Alt+T}		& Activate TUI \\
+\bottomrule
+\end{tabular}
+\end{center}
 
 
 %%% Local Variables: 

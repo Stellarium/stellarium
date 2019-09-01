@@ -101,7 +101,6 @@ private:
 
 	template<bool T, bool I, bool C, class Func>
 	inline Func specForeachTriangle(Func func) const;
-
 };
 
 // Serialization routines
