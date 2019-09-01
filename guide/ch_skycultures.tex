@@ -112,6 +112,10 @@ translation. The writing \texttt{\_("name")} allows automatic
 translation of the English strings to other languages. These strings
 will be used as constellation labels.
 
+You can \newFeature{0.19.2} add a reference comment after each
+3-column entry. Just add a whitespace, and then a comma-separated list
+of numerical references to the books listed in \file{reference.fab}.
+
 The first column (abbreviation) in the Western sky culture provides
 the canonical 3-letter abbreviation for constellations as used by the
 International Astronomical Union. Such abbreviations may not be
@@ -313,15 +317,19 @@ constellations into one big figure --- e.g. ``Big Dipper'' as part of Ursa Major
 Those features are called ``asterisms''. 
 
 Other simple figures might be used as navigation helpers --- the help rays. 
-As example to help in orientation in sky the additional lines between constellations 
+As example to help in orientation in the sky the additional lines between constellations 
 Ursa Major, Ursa Minor and Cassiopeia might be useful. The asterisms and help rays are listed in
 \file{asterism\_names.eng.fab}. This file consists of 2 simple columns:
 Abbreviation (or just a serial number) and English
 name of asterism. The writing \texttt{\_("name")} allows automatic
 translation of the English strings to other languages. These strings
 will be used as asterisms labels. In addition, after a hash mark (\texttt{\#}) marking a comment sign, 
-some reference information should be noted. Collecting sources and giving such references 
-is always a good idea. Some later versions of Stellarium may use this information.
+some reference information can be added in comment lines, like ``List found at \ldots''.
+Also, you can \newFeature{0.19.2} again add a reference comment after each
+2-column entry. Just add a whitespace, and then a comma-separated list
+of numerical references to the books listed in \file{reference.fab}.
+Collecting sources and giving such references 
+is always a good idea. Some later versions of Stellarium may use and display this information.
 
 The stick figures of asterisms are coded in \file{asterism\_lines.fab}
 which looks similar to the entries for the constellation
@@ -351,10 +359,11 @@ If you are willing to let other users enjoy the result of your hard
 work (and we certainly hope you do!), when you are done, please write
 a note in the Forum or at Github. We will decide about acceptability
 and classification, and may ask for better descriptions for the
-benefit of our users.  Please be prepared to put the imagery and text
+benefit of our users.
+
+Please be prepared to put the imagery and text
 under some compatible open-source license (Creative Commons). Else the
 skyculture cannot be hosted by us.
-
 While we cannot be held responsible for legal problems, it seems that
 CC BY 4.0
 International\footnote{\url{https://creativecommons.org/licenses/by/4.0/}}
