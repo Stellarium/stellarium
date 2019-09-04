@@ -407,7 +407,7 @@
 	4.30 Image of NGC40 from Steven Bellavia
 	4.31 Images of NGC1579, NGC6590, Barnard Loop, IC342, SH2-297 from Sun Shuwei
 	     License: public domain
-	4.32 Images of M77, NGC3109, NGC3180, NGC4449, NGC6397, NGC7009, Sh2-264, Sh2-308
+	4.32 Images of M77, NGC3109, NGC3180, NGC4449, NGC5474, NGC6397, NGC7009, Sh2-264, Sh2-308, LDN1622
 	     from Wang Lingyi
 	     License: public domain
 	4.33 Images of IC10, PGC143, PGC6830, PGC29653, UGC5373, UGC12613 from Lowell Observatory
@@ -442,8 +442,8 @@
 	4.41 Images of M61, M64, M65, M66, M91, M99, M100, NGC613, NGC772, NGC918, NGC1042, NGC1360,
 	     NGC1501, NGC1535, NGC1555, NGC2158, NGC2346, NGC2362, NGC2440, NGC2683, NGC2775, NGC3132,
 	     NGC3242, NGC3750, NGC4170,NGC4216, NGC4361, NGC4395, NGC4414,,NGC4450, NGC4676, NGC4725,
-	     NGC5216, NGC5248, NGC6302, NGC6563, NGC6781, NGC6894, NGC7000, NGC7354, SH2-136, UGC3697,
-	     Cassiopeia A, LBN438, Wild's Triplet
+	     NGC5216, NGC5248, NGC6302, NGC6522, NGC6563, NGC6781, NGC6894, NGC7000, NGC7354, SH2-136,
+	     UGC3697, Cassiopeia A, LBN438, Wild's Triplet
 	     from Adam Block/Mount Lemmon SkyCenter/University of Arizona
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
@@ -636,7 +636,7 @@
 	     from Adam Block/ChileScope
 	     http://www.caelumobservatory.com/
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.90 Images of M74, Coma Cluster
+	4.90 Images of M74, Coma Cluster, Leo Cluster, barnard150, LDN673
 	     from Bart Delsaert
 	     https://delsaert.com/
 	     License: Creative Commons Attribution 3.0 Unported
