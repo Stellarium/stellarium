@@ -534,7 +534,7 @@ class Translations
 		// TRANSLATORS: Name of the sky culture and landscape
 		N_("Armintxe Cave");
 		// TRANSLATORS: Name of the sky culture
-		N_("Vanuatu");
+		N_("Vanuatu (Netwar)");
 		
 		// =====================================================================
 		// Landscape names
