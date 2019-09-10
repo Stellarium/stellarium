@@ -94,8 +94,9 @@ void Landscape::loadCommon(const QSettings& landscapeIni, const QString& landsca
 			location.planetName = landscapeIni.value("location/planet").toString();
 		else
 			location.planetName = "Earth";
+		// Tolerate decimal values in .ini file, but round to nearest integer
 		if (landscapeIni.contains("location/altitude"))
-			location.altitude = landscapeIni.value("location/altitude").toInt();
+			location.altitude = static_cast<int>(round(landscapeIni.value("location/altitude").toDouble()));
 		if (landscapeIni.contains("location/latitude"))
 			location.latitude = static_cast<float>(StelUtils::getDecAngle(landscapeIni.value("location/latitude").toString())*M_180_PI);
 		if (landscapeIni.contains("location/longitude"))
@@ -222,9 +223,15 @@ void Landscape::createPolygonalHorizon(const QString& lineFileName, const float 
 
 		StelUtils::spheToRect(az, alt, point);
 		if (polygonInverted)
-			horiPoints.prepend(point);
+		{
+			if (horiPoints.at(0) != point)
+				horiPoints.prepend(point);
+		}
 		else
-			horiPoints.append(point);
+		{
+			if (horiPoints.last() != point)
+				horiPoints.append(point);
+		}
 	}
 	file.close();
 	//horiPoints.append(horiPoints.at(0)); // close loop? Apparently not necessary.
@@ -1270,7 +1277,7 @@ float LandscapeSpherical::getOpacity(Vec3d azalt) const
 	az_phot=fmodf(az_phot, 2.0f);
 	if (az_phot<0) az_phot+=2.0f;                                //  0..2 = image-X
 
-	int x=static_cast<float>((az_phot*0.5f) * mapImage->width()); // pixel X from left.
+	int x=static_cast<int>((az_phot*0.5f) * mapImage->width()); // pixel X from left.
 
 	QRgb pixVal=mapImage->pixel(x, y);
 /*
