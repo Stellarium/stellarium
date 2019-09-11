@@ -192,6 +192,16 @@ void StelPainter::setColor(float r, float g, float b, float a)
 	currentColor.set(r,g,b,a);
 }
 
+void StelPainter::setColor(Vec3f rgb, float a)
+{
+	currentColor.set(rgb[0],rgb[1],rgb[2],a);
+}
+
+void StelPainter::setColor(Vec4f rgba)
+{
+	currentColor=rgba;
+}
+
 Vec4f StelPainter::getColor() const
 {
 	return currentColor;
