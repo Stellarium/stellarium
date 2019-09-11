@@ -445,7 +445,6 @@ public:
 	static void setNeptuneOrbitColor(const Vec3f& oc) { orbitNeptuneColor = oc;}
 	static const Vec3f& getNeptuneOrbitColor() {return orbitNeptuneColor;}
 
-	static bool permanentDrawingOrbits;
 	static PlanetOrbitColorStyle orbitColorStyle;
 
 	//! Return the list of planets which project some shadow on this planet
@@ -585,6 +584,8 @@ protected:
 	static StelTextureSP hintCircleTex;
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
+	//! If true, planet orbits will be drawn even if planet is off screen.
+	static bool permanentDrawingOrbits;
 
 	static bool flagCustomGrsSettings;	// Is enabled usage of custom settings for calculation of position of Great Red Spot?
 	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot

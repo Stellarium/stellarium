@@ -1159,6 +1159,16 @@
                 </widget>
                </item>
                <item>
+                <widget class="QCheckBox" name="planetOrbitPermanentCheckBox">
+                 <property name="toolTip">
+                  <string>Show orbit even if planet is off screen</string>
+                 </property>
+                 <property name="text">
+                  <string>permanently</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
                 <spacer name="horizontalSpacer_4">
                  <property name="orientation">
                   <enum>Qt::Horizontal</enum>

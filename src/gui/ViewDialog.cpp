@@ -204,6 +204,7 @@ void ViewDialog::createDialogContent()
 	ui->planetIsolatedOrbitCheckBox->setEnabled(ssmgr->getFlagOrbits());
 	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetIsolatedOrbitCheckBox, SLOT(setEnabled(bool)));
 	connectBoolProperty(ui->planetOrbitOnlyCheckBox, "SolarSystem.flagPlanetsOrbitsOnly");
+	connectBoolProperty(ui->planetOrbitPermanentCheckBox, "SolarSystem.flagPermanentOrbits");
 	ui->planetOrbitOnlyCheckBox->setEnabled(ssmgr->getFlagPlanetsOrbitsOnly());
 	connect(ssmgr,SIGNAL(flagOrbitsChanged(bool)),ui->planetOrbitOnlyCheckBox, SLOT(setEnabled(bool)));	
 	connectBoolProperty(ui->planetLightSpeedCheckBox, "SolarSystem.flagLightTravelTime");

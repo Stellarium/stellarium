@@ -669,6 +669,7 @@ void ConfigurationDialog::saveAllSettings()
 	conf->setValue("astro/flag_planets",			propMgr->getStelPropertyValue("SolarSystem.planetsDisplayed").toBool());
 	conf->setValue("astro/flag_planets_hints",		propMgr->getStelPropertyValue("SolarSystem.flagHints").toBool());
 	conf->setValue("astro/flag_planets_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagOrbits").toBool());
+	conf->setValue("astro/flag_permanent_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagPermanentOrbits").toBool());
 	conf->setValue("viewing/flag_isolated_trails",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedTrails").toBool());
 	conf->setValue("viewing/number_isolated_trails",	propMgr->getStelPropertyValue("SolarSystem.numberIsolatedTrails").toInt());
 	conf->setValue("viewing/flag_isolated_orbits",		propMgr->getStelPropertyValue("SolarSystem.flagIsolatedOrbits").toBool());

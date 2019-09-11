@@ -2626,7 +2626,13 @@ QString SolarSystem::getApparentMagnitudeAlgorithmOnEarth() const
 
 void SolarSystem::setFlagPermanentOrbits(bool b)
 {
-	Planet::permanentDrawingOrbits=b;	
+	Planet::permanentDrawingOrbits=b;
+	emit flagPermanentOrbitsChanged(b);
+}
+
+bool SolarSystem::getFlagPermanentOrbits() const
+{
+	return Planet::permanentDrawingOrbits;
 }
 
 void SolarSystem::setFlagCustomGrsSettings(bool b)
