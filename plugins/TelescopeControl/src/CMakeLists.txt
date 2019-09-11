@@ -6,6 +6,7 @@ add_subdirectory(Lx200)
 add_subdirectory(NexStar)
 add_subdirectory(Rts2)
 add_subdirectory(INDI)
+add_subdirectory(ASCOM)
 
 SET(TelescopeControl_RES ../resources/TelescopeControl.qrc)
 QT5_ADD_RESOURCES(TelescopeControl_RES_CXX ${TelescopeControl_RES})
@@ -25,6 +26,7 @@ TARGET_LINK_LIBRARIES(TelescopeControl-static
     TelescopeControl_gui
     TelescopeControl_Lx200
     TelescopeControl_INDI
+    TelescopeControl_ASCOM
     TelescopeControl_NexStar
     TelescopeControl_Rts2
     TelescopeControl_common

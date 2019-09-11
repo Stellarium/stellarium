@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>535</width>
-    <height>459</height>
+    <height>489</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -22,7 +22,7 @@
   <property name="minimumSize">
    <size>
     <width>400</width>
-    <height>450</height>
+    <height>480</height>
    </size>
   </property>
   <layout class="QVBoxLayout" name="_2">
@@ -240,6 +240,13 @@
          <string notr="true">INDI</string>
         </property>
        </widget>
+      </item>
+      <item>
+        <widget class="QRadioButton" name="radioButtonTelescopeASCOM">
+          <property name="text">
+            <string notr="true">ASCOM</string>
+          </property>
+        </widget>
       </item>
       <item>
        <widget class="QRadioButton" name="radioButtonTelescopeVirtual">
@@ -470,6 +477,9 @@
        <item>
         <widget class="TelescopeClientINDIWidget" name="INDIProperties" native="true"/>
        </item>
+        <item>
+          <widget class="TelescopeClientASCOMWidget" name="ASCOMProperties" native="true"/>
+        </item>
        <item>
         <widget class="QGroupBox" name="groupBoxDeviceSettings">
          <property name="title">
@@ -944,6 +954,12 @@
    <class>TelescopeClientINDIWidget</class>
    <extends>QWidget</extends>
    <header>TelescopeClientINDIWidget.hpp</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TelescopeClientASCOMWidget</class>
+   <extends>QWidget</extends>
+   <header>TelescopeClientASCOMWidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

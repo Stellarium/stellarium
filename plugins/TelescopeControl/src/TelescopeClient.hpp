@@ -79,7 +79,9 @@ public:
 	virtual double getAngularSize(const StelCore*) const {Q_ASSERT(0); return 0;}	// TODO
 		
 	// Methods specific to telescope
-	virtual void telescopeGoto(const Vec3d &j2000Pos, StelObjectP selectObject) = 0;
+	virtual void telescopeGoto(const Vec3d& j2000Pos, StelObjectP selectObject) = 0;
+	virtual void telescopeSync(const Vec3d& j2000Pos, StelObjectP selectObject) {};
+	virtual void telescopeAbortSlew() {};
 
 	//!
 	//! \brief move

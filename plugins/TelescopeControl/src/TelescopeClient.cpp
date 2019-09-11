@@ -28,6 +28,7 @@
 #include "Lx200/TelescopeClientDirectLx200.hpp"
 #include "NexStar/TelescopeClientDirectNexStar.hpp"
 #include "INDI/TelescopeClientINDI.hpp"
+#include "ASCOM/TelescopeClientASCOM.hpp"
 #include "StelUtils.hpp"
 #include "StelTranslator.hpp"
 #include "StelCore.hpp"
@@ -111,6 +112,10 @@ TelescopeClient *TelescopeClient::create(const QString &url)
 	else if (type == "INDI")
 	{
 		newTelescope = new TelescopeClientINDI(name, params);
+	}
+	else if (type == "ASCOM")
+	{
+		newTelescope = new TelescopeClientASCOM(name, params, eq);
 	}
 	else
 	{

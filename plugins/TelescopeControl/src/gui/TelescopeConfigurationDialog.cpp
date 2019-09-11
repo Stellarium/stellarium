@@ -138,6 +138,7 @@ void TelescopeConfigurationDialog::createDialogContent()
 	connect(ui->radioButtonTelescopeVirtual, SIGNAL(toggled(bool)), this, SLOT(toggleTypeVirtual(bool)));
 	connect(ui->radioButtonTelescopeRTS2, SIGNAL(toggled(bool)), this, SLOT(toggleTypeRTS2(bool)));
 	connect(ui->radioButtonTelescopeINDI, SIGNAL(toggled(bool)), this, SLOT(toggleTypeINDI(bool)));
+	connect(ui->radioButtonTelescopeASCOM, SIGNAL(toggled(bool)), this, SLOT(toggleTypeASCOM(bool)));
 	
 	connect(ui->pushButtonSave, SIGNAL(clicked()), this, SLOT(buttonSavePressed()));
 	connect(ui->pushButtonDiscard, SIGNAL(clicked()), this, SLOT(buttonDiscardPressed()));
@@ -166,6 +167,7 @@ void TelescopeConfigurationDialog::initConfigurationDialog()
 	ui->groupBoxDeviceSettings->hide();
 	ui->groupBoxRTS2Settings->hide();
 	ui->INDIProperties->hide();
+	ui->ASCOMProperties->hide();
 
 	//Reusing code used in both methods that call this one
 	deviceModelNames = telescopeManager->getDeviceModels().keys();
@@ -247,7 +249,8 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 	QString rts2Username;
 	QString rts2Password;
 	int rts2Refresh;
-	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password, rts2Refresh))
+	QString ascomDeviceId;
+	if(!telescopeManager->getTelescopeAtSlot(slot, connectionType, name, equinox, host, portTCP, delay, connectAtStartup, circles, deviceModelName, serialPortName, rts2Url, rts2Username, rts2Password, rts2Refresh, ascomDeviceId))
 	{
 		//TODO: Add debug
 		return;
@@ -302,6 +305,11 @@ void TelescopeConfigurationDialog::initExistingTelescopeConfiguration(int slot)
 		ui->INDIProperties->setHost(host);
 		ui->INDIProperties->setPort(portTCP);
 		ui->INDIProperties->setSelectedDevice(deviceModelName);
+	}
+	else if (connectionType == ConnectionASCOM)
+	{
+		ui->radioButtonTelescopeASCOM->setChecked(true);
+		ui->ASCOMProperties->setSelectedDevice(ascomDeviceId);
 	}
 
 	//Equinox
@@ -400,6 +408,11 @@ void TelescopeConfigurationDialog::toggleTypeINDI(bool enabled)
     ui->INDIProperties->setVisible(enabled);
 }
 
+void TelescopeConfigurationDialog::toggleTypeASCOM(bool enabled)
+{
+    ui->ASCOMProperties->setVisible(enabled);
+}
+
 void TelescopeConfigurationDialog::buttonSavePressed()
 {
 	//Main telescope properties
@@ -474,6 +487,11 @@ void TelescopeConfigurationDialog::buttonSavePressed()
 	{
 		type = ConnectionINDI;
         telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, ui->INDIProperties->host(), ui->INDIProperties->port(), delay, connectAtStartup, circles, ui->INDIProperties->selectedDevice());
+	}
+	else if (ui->radioButtonTelescopeASCOM->isChecked())
+	{
+		type = ConnectionASCOM;
+		telescopeManager->addTelescopeAtSlot(configuredSlot, type, name, equinox, host, portTCP, delay, connectAtStartup, circles, QString(), QString(), QString(), QString(), QString(), -1, ui->ASCOMProperties->selectedDevice());
 	}
 	
 	emit changesSaved(name, type);

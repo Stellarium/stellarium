@@ -28,6 +28,7 @@ target_link_libraries(TelescopeControl_gui
     Qt5::Gui
     TelescopeControl_common
     TelescopeControl_INDI
+    TelescopeControl_ASCOM
     )
 
 SET_TARGET_PROPERTIES(TelescopeControl_gui PROPERTIES FOLDER "plugins/TelescopeControl")

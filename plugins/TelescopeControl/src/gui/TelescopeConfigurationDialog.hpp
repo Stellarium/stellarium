@@ -66,6 +66,7 @@ private slots:
 	void toggleTypeVirtual(bool);
 	void toggleTypeRTS2(bool);
 	void toggleTypeINDI(bool enabled);
+	void toggleTypeASCOM(bool enabled);
 	
 	void deviceModelSelected(const QString&);
 
