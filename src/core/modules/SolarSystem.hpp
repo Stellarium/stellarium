@@ -752,7 +752,7 @@ public slots:
 
 	//! Get type for Solar system bodies for scripts
 	//! @param planetName the case in-sensitive English planet name.
-	//! @return a type of planet (planet, moon, asteroid, comet, plutoid)
+	//! @return a type of planet (star, planet, moon, observer, artificial, asteroid, plutino, comet, dwarf planet, cubewano, scattered disc object, Oort cloud object, sednoid, interstellar object)
 	QString getPlanetType(QString planetName) const;
 
 	//! Get distance to Solar system bodies for scripts
