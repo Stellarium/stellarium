@@ -1302,7 +1302,7 @@ void SolarSystem::draw(StelCore* core)
 		return;
 
 	// Compute each Planet distance to the observer
-	Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
+	const Vec3d obsHelioPos = core->getObserverHeliocentricEclipticPos();
 
 	for (const auto& p : systemPlanets)
 	{
@@ -1320,8 +1320,9 @@ void SolarSystem::draw(StelCore* core)
 	}
 
 	// Make some voodoo to determine when labels should be displayed
-	float maxMagLabel = (core->getSkyDrawer()->getLimitMagnitude()<5.f ? core->getSkyDrawer()->getLimitMagnitude() :
-			5.f+(core->getSkyDrawer()->getLimitMagnitude()-5.f)*1.2f) +(labelsAmount-3.f)*1.2f;
+	const float sdLimitMag=static_cast<float>(core->getSkyDrawer()->getLimitMagnitude());
+	const float maxMagLabel = (sdLimitMag<5.f ? sdLimitMag :
+			5.f+(sdLimitMag-5.f)*1.2f) +(static_cast<float>(labelsAmount)-3.f)*1.2f;
 
 	// Draw the elements
 	for (const auto& p : systemPlanets)

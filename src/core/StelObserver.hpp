@@ -91,7 +91,7 @@ class SpaceShipObserver : public StelObserver
 {
 	Q_OBJECT
 public:
-	SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double transitSeconds=1.f, double timeToGo=-1.0);
+	SpaceShipObserver(const StelLocation& startLoc, const StelLocation& target, double transitSeconds=1., double timeToGo=-1.0);
 	~SpaceShipObserver();
 
 	//! Update StelObserver info if needed. Default implementation does nothing.

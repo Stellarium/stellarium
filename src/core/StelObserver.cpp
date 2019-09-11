@@ -40,7 +40,7 @@ public:
 	ArtificialPlanet(const PlanetP& orig);
 	void setDest(const PlanetP& dest);
 	void computeAverage(double f1);
-	virtual void computePosition(const double dateJDE);
+	virtual void computePosition(const double dateJDE) Q_DECL_OVERRIDE;
 private:
 	void setRot(const Vec3d &r);
 	static Vec3d getRot(const Planet* p);
@@ -79,7 +79,7 @@ void ArtificialPlanet::setDest(const PlanetP& dest)
 	const RotationElements &r(dest->getRotationElements());
 	lastJDE = StelApp::getInstance().getCore()->getJDE();
 
-	re.offset = r.offset + fmod(re.offset - r.offset + 360.0*( (lastJDE-re.epoch)/re.period - (lastJDE-r.epoch)/r.period), 360.0);
+	re.offset = r.offset + fmod(re.offset - r.offset + 360.0f*( static_cast<float>(lastJDE-re.epoch)/re.period - static_cast<float>(lastJDE-r.epoch)/r.period), 360.0f);
 
 	re.epoch = r.epoch;
 	re.period = r.period;
@@ -166,7 +166,7 @@ void ArtificialPlanet::computeAverage(double f1)
 	setRot(a1*f1 + a2*f2);
 
 	// rotation offset
-	re.offset = f1*re.offset + f2*dest->getRotationElements().offset;
+	re.offset = static_cast<float>(f1*static_cast<double>(re.offset) + f2*static_cast<double>(dest->getRotationElements().offset));
 }
 
 
@@ -213,7 +213,7 @@ double StelObserver::getDistanceFromCenter(void) const
 Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 {
 	if (getHomePlanet()->getEquatorialRadius()==0.0) // the transitional ArtificialPlanet or SpaceShipObserver have this
-		return Vec4d(0.,0.,currentLocation.latitude*(M_PI/180.0),currentLocation.altitude/(1000.0*AU));
+		return Vec4d(0.,0.,static_cast<double>(currentLocation.latitude)*(M_PI/180.0),currentLocation.altitude/(1000.0*AU));
 
 	const double a=getHomePlanet()->getEquatorialRadius();
 	const double bByA = getHomePlanet()->getOneMinusOblateness(); // b/a;
@@ -225,7 +225,7 @@ Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 	//                   StelUtils::sign(currentLocation.latitude)*M_PI/2.0,
 	//                   getHomePlanet()->getPolarRadius()); // Do we need this?
 
-	const double latRad=currentLocation.latitude*(M_PI/180.0);
+	const double latRad=static_cast<double>(currentLocation.latitude)*(M_PI_180);
 	const double u = atan( bByA * tan(latRad));
 	//qDebug() << "getTopographicOffsetFromCenter: a=" << a*AU << "b/a=" << bByA << "b=" << bByA*a *AU  << "latRad=" << latRad << "u=" << u;
 	Q_ASSERT(fabs(u)<= fabs(latRad));
@@ -242,16 +242,11 @@ Vec4d StelObserver::getTopographicOffsetFromCenter(void) const
 // For Earth we require JD, for other planets JDE to describe rotation!
 Mat4d StelObserver::getRotAltAzToEquatorial(double JD, double JDE) const
 {
-	double lat = currentLocation.latitude;
+	double lat = qBound(-90.0, static_cast<double>(currentLocation.latitude), 90.0);
 	// TODO: Figure out how to keep continuity in sky as we reach poles
 	// otherwise sky jumps in rotation when reach poles in equatorial mode
 	// This is a kludge
-	// GZ: Actually, why would that be? Lat should be clamped elsewhere. Added tests to track down problems in other locations.
-	Q_ASSERT(lat <=  90.0);
-	Q_ASSERT(lat >= -90.0);
-	if( lat > 90.0 )  lat = 90.0;
-	if( lat < -90.0 ) lat = -90.0;
-	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+currentLocation.longitude)*M_PI/180.)
+	return Mat4d::zrotation((getHomePlanet()->getSiderealTime(JD, JDE)+static_cast<double>(currentLocation.longitude))*M_PI/180.)
 		* Mat4d::yrotation((90.-lat)*M_PI/180.);
 }
 
@@ -337,7 +332,7 @@ bool SpaceShipObserver::update(double deltaTime)
 			currentLocation.planetName = moveTargetLocation.planetName;
 
 		// Move the lon/lat/alt on the planet
-		const double moveToMult = 1.-(timeToGo/transitSeconds);
+		const float moveToMult = 1.f-static_cast<float>(timeToGo/transitSeconds);
 		currentLocation.latitude = moveStartLocation.latitude - moveToMult*(moveStartLocation.latitude-moveTargetLocation.latitude);
 		currentLocation.longitude = moveStartLocation.longitude - moveToMult*(moveStartLocation.longitude-moveTargetLocation.longitude);
 		currentLocation.altitude = int(moveStartLocation.altitude - moveToMult*(moveStartLocation.altitude-moveTargetLocation.altitude));		
