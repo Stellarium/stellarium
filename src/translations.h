@@ -533,6 +533,8 @@ class Translations
 		N_("Babylonian (Seleucid)");
 		// TRANSLATORS: Name of the sky culture and landscape
 		N_("Armintxe Cave");
+		// TRANSLATORS: Name of the sky culture
+		N_("Vanuatu (Netwar)");
 		
 		// =====================================================================
 		// Landscape names
