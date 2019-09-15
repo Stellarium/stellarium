@@ -3334,6 +3334,9 @@ void Planet::drawOrbit(const StelCore* core)
 	if (!static_cast<bool>(re.siderealPeriod))
 		return;
 
+	if (parent)
+		parent->computePositionWithoutOrbits(lastJDE);
+
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
 
 	StelPainter sPainter(prj);

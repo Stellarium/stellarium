@@ -722,8 +722,8 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 
 			// when the parent is the sun use ecliptic rather than sun equator:
-			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
-			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()      : 0.0;
+			const double parentRotObliquity  = parent->getParent() ? parent->getRotObliquity(J2000) : 0.0;
+			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode()  : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
 			if (parent->getParent()) {
 				const double c_obl = cos(parentRotObliquity);
@@ -812,7 +812,7 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 			}
 			double time_at_pericenter = pd.value(secname+"/orbit_TimeAtPericenter",-1e100).toDouble();
 			if (time_at_pericenter <= -1e100) {
-				const double epoch = pd.value(secname+"/orbit_Epoch",-1e100).toDouble();
+				const double epoch = pd.value(secname+"/orbit_Epoch",J2000).toDouble(); // prev. default -1e100
 				double mean_anomaly = pd.value(secname+"/orbit_MeanAnomaly",-1e100).toDouble();
 				if (epoch <= -1e100 || mean_anomaly <= -1e100) {
 					qWarning() << "ERROR: " << englishName
@@ -826,9 +826,9 @@ bool SolarSystem::loadPlanets(const QString& filePath)
 				}
 			}
 			const double orbitGoodDays=pd.value(secname+"/orbit_good", 1000).toDouble();
-			const double inclination = pd.value(secname+"/orbit_Inclination").toDouble()*(M_PI/180.0);
-			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter").toDouble()*(M_PI/180.0);
-			const double ascending_node = pd.value(secname+"/orbit_AscendingNode").toDouble()*(M_PI/180.0);
+			const double inclination = pd.value(secname+"/orbit_Inclination", 0.0).toDouble()*(M_PI/180.0);
+			const double arg_of_pericenter = pd.value(secname+"/orbit_ArgOfPericenter", 0.0).toDouble()*(M_PI/180.0);
+			const double ascending_node = pd.value(secname+"/orbit_AscendingNode", 0.0).toDouble()*(M_PI/180.0);
 			const double parentRotObliquity = parent->getParent() ? parent->getRotObliquity(2451545.0) : 0.0;
 			const double parent_rot_asc_node = parent->getParent() ? parent->getRotAscendingNode() : 0.0;
 			double parent_rot_j2000_longitude = 0.0;
