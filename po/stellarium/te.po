@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: stellarium@googlegroups.com\n"
-"POT-Creation-Date: 2019-08-26 23:22+0700\n"
+"POT-Creation-Date: 2019-09-14 11:36+0700\n"
 "PO-Revision-Date: 2017-11-29 00:51+0000\n"
 "Last-Translator: Sirish Kumar Tummala <sirishtummala@gmail.com>, 2019\n"
 "Language-Team: Telugu (https://www.transifex.com/stellarium/teams/80998/te/)\n"
@@ -1192,7 +1192,7 @@ msgstr "వ్యాసం"
 #: src/core/modules/MinorPlanet.cpp:233 src/core/modules/MinorPlanet.cpp:256
 #: src/core/modules/MinorPlanet.cpp:324 src/core/modules/Comet.cpp:187
 #: src/core/modules/Comet.cpp:310 src/gui/StelGuiItems.cpp:790
-#: src/gui/AstroCalcDialog.cpp:4804 plugins/Satellites/src/Satellite.cpp:306
+#: src/gui/AstroCalcDialog.cpp:4808 plugins/Satellites/src/Satellite.cpp:306
 #: plugins/Satellites/src/Satellite.cpp:310
 #: plugins/Satellites/src/Satellite.cpp:338
 msgctxt "distance"
@@ -1216,8 +1216,8 @@ msgid "Nomenclature labels"
 msgstr "పరిభాష పేర్లు"
 
 #: src/core/modules/Nebula.cpp:169 src/core/modules/Nebula.cpp:183
-#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2636
-#: src/gui/AstroCalcDialog.cpp:2683 plugins/Supernovae/src/Supernova.cpp:125
+#: src/core/StelObject.cpp:253 src/gui/AstroCalcDialog.cpp:2640
+#: src/gui/AstroCalcDialog.cpp:2687 plugins/Supernovae/src/Supernova.cpp:125
 msgid "Magnitude"
 msgstr "పరిమాణం"
 
@@ -1296,7 +1296,7 @@ msgstr "ly"
 #: src/core/modules/Nebula.cpp:371 src/core/modules/Nebula.cpp:406
 #: src/core/modules/Planet.cpp:504 src/core/modules/MinorPlanet.cpp:265
 #: src/core/modules/Comet.cpp:225 src/core/modules/StarWrapper.cpp:247
-#: src/gui/AstroCalcDialog.cpp:2647 src/gui/AstroCalcDialog.cpp:2694
+#: src/gui/AstroCalcDialog.cpp:2651 src/gui/AstroCalcDialog.cpp:2698
 #: src/ui_configurationDialog.h:1604 plugins/Supernovae/src/Supernova.cpp:161
 #: plugins/Novae/src/Nova.cpp:166 plugins/Exoplanets/src/Exoplanet.cpp:323
 msgid "Distance"
@@ -1788,9 +1788,9 @@ msgstr "జ్యోతిశ్చక్ర సంబంధ"
 #: src/core/modules/Planet.cpp:467 src/core/modules/MinorPlanet.cpp:231
 #: src/core/modules/Comet.cpp:196 src/gui/AstroCalcDialog.cpp:773
 #: src/gui/AstroCalcDialog.cpp:981 src/gui/AstroCalcDialog.cpp:1334
-#: src/gui/AstroCalcDialog.cpp:1371 src/gui/AstroCalcDialog.cpp:2615
-#: src/gui/AstroCalcDialog.cpp:4858 src/gui/AstroCalcDialog.cpp:4923
-#: src/gui/AstroCalcDialog.cpp:5086 plugins/Exoplanets/src/Exoplanet.cpp:352
+#: src/gui/AstroCalcDialog.cpp:1371 src/gui/AstroCalcDialog.cpp:2619
+#: src/gui/AstroCalcDialog.cpp:4862 src/gui/AstroCalcDialog.cpp:4927
+#: src/gui/AstroCalcDialog.cpp:5090 plugins/Exoplanets/src/Exoplanet.cpp:352
 msgctxt "distance, astronomical unit"
 msgid "AU"
 msgstr "AU"
@@ -1798,7 +1798,7 @@ msgstr "AU"
 #. TRANSLATORS: Unit of measure for distance - milliones kilometers
 #: src/core/modules/Planet.cpp:483 src/core/modules/Planet.cpp:501
 #: src/core/modules/MinorPlanet.cpp:245 src/core/modules/MinorPlanet.cpp:263
-#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4806
+#: src/core/modules/Comet.cpp:189 src/gui/AstroCalcDialog.cpp:4810
 msgctxt "distance"
 msgid "M km"
 msgstr "M km"
@@ -1810,7 +1810,7 @@ msgstr "సూర్యుడి నుండి దూరం"
 
 #. TRANSLATORS: Unit of measure for speed - kilometers per second
 #: src/core/modules/Planet.cpp:510 src/core/modules/MinorPlanet.cpp:271
-#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4876
+#: src/core/modules/Comet.cpp:231 src/gui/AstroCalcDialog.cpp:4880
 #: plugins/Satellites/src/Satellite.cpp:308
 #: plugins/Satellites/src/Satellite.cpp:345
 #: plugins/MeteorShowers/src/MeteorShower.cpp:580
@@ -1849,7 +1849,7 @@ msgstr "భూమధ్యరేఖ వద్ద వ్యాసం"
 
 #. TRANSLATORS: Unit of measure for period - days
 #: src/core/modules/Planet.cpp:603 src/core/modules/MinorPlanet.cpp:343
-#: src/core/modules/StarWrapper.cpp:259 src/gui/AstroCalcDialog.cpp:4893
+#: src/core/modules/StarWrapper.cpp:259 src/gui/AstroCalcDialog.cpp:4897
 msgctxt "duration"
 msgid "days"
 msgstr "రోజులు"
@@ -1877,14 +1877,14 @@ msgid "Synodic period"
 msgstr "సైనోడిక్ పీరియడ్"
 
 #: src/core/modules/Planet.cpp:649 src/core/modules/MinorPlanet.cpp:373
-#: src/core/modules/Comet.cpp:274 src/gui/AstroCalcDialog.cpp:2662
-#: src/gui/AstroCalcDialog.cpp:2709 plugins/Satellites/src/Satellite.cpp:357
+#: src/core/modules/Comet.cpp:274 src/gui/AstroCalcDialog.cpp:2666
+#: src/gui/AstroCalcDialog.cpp:2713 plugins/Satellites/src/Satellite.cpp:357
 msgid "Phase angle"
 msgstr "ఫేస్ కోణం"
 
 #: src/core/modules/Planet.cpp:650 src/core/modules/MinorPlanet.cpp:374
-#: src/core/modules/Comet.cpp:275 src/gui/AstroCalcDialog.cpp:2652
-#: src/gui/AstroCalcDialog.cpp:2699
+#: src/core/modules/Comet.cpp:275 src/gui/AstroCalcDialog.cpp:2656
+#: src/gui/AstroCalcDialog.cpp:2703
 msgid "Elongation"
 msgstr "సాగతీత"
 
@@ -1990,8 +1990,8 @@ msgid "Core diameter"
 msgstr "కోర్ వ్యాసం"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/core/modules/SolarSystem.cpp:255 src/gui/AstroCalcDialog.cpp:1993
-#: src/gui/AstroCalcDialog.cpp:4073 src/translations.h:82
+#: src/core/modules/SolarSystem.cpp:255 src/gui/AstroCalcDialog.cpp:1997
+#: src/gui/AstroCalcDialog.cpp:4077 src/translations.h:82
 msgid "Planets"
 msgstr "గ్రహాలు"
 
@@ -2093,7 +2093,7 @@ msgid "Position angle"
 msgstr "స్థాన కోణం"
 
 #: src/core/modules/StarWrapper.cpp:289 src/core/modules/StarWrapper.cpp:291
-#: src/gui/AstroCalcDialog.cpp:3097
+#: src/gui/AstroCalcDialog.cpp:3101
 msgid "Separation"
 msgstr "విడిపోత"
 
@@ -2268,7 +2268,7 @@ msgstr "ప్లగిన్‌ను లోడు చేస్తున్న�
 
 #: src/core/StelCore.cpp:258 src/core/StelObjectMgr.cpp:51
 #: src/gui/StelGui.cpp:223 src/gui/AstroCalcDialog.cpp:1314
-#: src/gui/AstroCalcDialog.cpp:3094 src/gui/BookmarksDialog.cpp:115
+#: src/gui/AstroCalcDialog.cpp:3098 src/gui/BookmarksDialog.cpp:119
 #: src/ui_dateTimeDialogGui.h:376 src/ui_dateTimeDialogGui.h:379
 #: plugins/TextUserInterface/src/TextUserInterface.cpp:173
 msgid "Date and Time"
@@ -3008,17 +3008,17 @@ msgstr ""
 
 #. TRANSLATORS: time of transit
 #: src/core/StelObject.cpp:602 src/gui/AstroCalcDialog.cpp:786
-#: src/gui/AstroCalcDialog.cpp:4158
+#: src/gui/AstroCalcDialog.cpp:4162
 msgctxt "celestial event; passage across a meridian"
 msgid "Transit"
 msgstr ""
 
-#: src/core/StelObject.cpp:603 src/gui/AstroCalcDialog.cpp:4157
+#: src/core/StelObject.cpp:603 src/gui/AstroCalcDialog.cpp:4161
 msgctxt "celestial event"
 msgid "Rise"
 msgstr ""
 
-#: src/core/StelObject.cpp:604 src/gui/AstroCalcDialog.cpp:4159
+#: src/core/StelObject.cpp:604 src/gui/AstroCalcDialog.cpp:4163
 msgctxt "celestial event"
 msgid "Set"
 msgstr ""
@@ -4627,45 +4627,65 @@ msgstr ""
 msgid "You can remove it manually by deleting the following directory: %1"
 msgstr "కింది డైరెక్టరీని తొలగిస్తే, దాన్ని మానవికంగా తీసెయ్యవచ్చు: %1"
 
-#: src/gui/ScriptConsole.cpp:77
+#: src/gui/ScriptConsole.cpp:78
 msgid "quickrun..."
 msgstr "త్వరగా నడుపు..."
 
-#: src/gui/ScriptConsole.cpp:78
+#: src/gui/ScriptConsole.cpp:79
 msgid "selected text"
 msgstr "ఎంచుకున్న పాఠ్యం"
 
-#: src/gui/ScriptConsole.cpp:79
+#: src/gui/ScriptConsole.cpp:80
 msgid "clear text"
 msgstr "పాఠ్యాన్ని తొలగించు"
 
-#: src/gui/ScriptConsole.cpp:80
+#: src/gui/ScriptConsole.cpp:81
 msgid "clear images"
 msgstr "బొమ్మలను తొలగించు"
 
-#: src/gui/ScriptConsole.cpp:81
+#: src/gui/ScriptConsole.cpp:82
 msgid "natural"
 msgstr "సహజంగా"
 
-#: src/gui/ScriptConsole.cpp:82
+#: src/gui/ScriptConsole.cpp:83
 msgid "starchart"
 msgstr "స్టార్‌చార్ట్"
 
 #: src/gui/ScriptConsole.cpp:129
+msgid "Stellarium Script Files"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:133
 msgid "Load Script"
 msgstr "స్క్రిప్టును లోడు చెయ్యి"
 
-#: src/gui/ScriptConsole.cpp:131 src/gui/ScriptConsole.cpp:151
-msgid "Script Files"
-msgstr "స్క్రిప్టు ఫైళ్ళు"
-
-#: src/gui/ScriptConsole.cpp:149
+#: src/gui/ScriptConsole.cpp:154
 msgid "Save Script"
 msgstr "స్క్రిప్టును భద్రపరచు"
 
-#: src/gui/ScriptConsole.cpp:252
+#: src/gui/ScriptConsole.cpp:259
 msgid "Select Script Include Directory"
 msgstr "స్క్రిప్టు ఇన్‌క్ల్డ్ డైరెక్టరీని ఎంచుకోండి"
+
+#. TRANSLATORS: The first letter of word "Row"
+#: src/gui/ScriptConsole.cpp:299
+msgctxt "text cursor"
+msgid "R"
+msgstr ""
+
+#. TRANSLATORS: The first letter of word "Column"
+#: src/gui/ScriptConsole.cpp:301
+msgctxt "text cursor"
+msgid "C"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:311
+msgid "Stellarium Script"
+msgstr ""
+
+#: src/gui/ScriptConsole.cpp:313
+msgid "Include File"
+msgstr ""
 
 #: src/gui/SearchDialog.cpp:214
 msgctxt "coordinate system"
@@ -4721,9 +4741,9 @@ msgstr "అజిముత్"
 #. TRANSLATORS: altitude
 #. TRANSLATORS: Satellite altitude
 #: src/gui/SearchDialog.cpp:262 src/gui/AstroCalcDialog.cpp:739
-#: src/gui/AstroCalcDialog.cpp:1320 src/gui/AstroCalcDialog.cpp:2324
-#: src/gui/AstroCalcDialog.cpp:2789 src/gui/AstroCalcDialog.cpp:3074
-#: src/gui/AstroCalcDialog.cpp:3076 plugins/Satellites/src/Satellite.cpp:310
+#: src/gui/AstroCalcDialog.cpp:1320 src/gui/AstroCalcDialog.cpp:2328
+#: src/gui/AstroCalcDialog.cpp:2793 src/gui/AstroCalcDialog.cpp:3078
+#: src/gui/AstroCalcDialog.cpp:3080 plugins/Satellites/src/Satellite.cpp:310
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:1204
 msgid "Altitude"
 msgstr "ఆల్టిట్యూడ్"
@@ -4799,19 +4819,19 @@ msgid "Gregorian dates. Valid range:"
 msgstr "గ్రెగోరియన్ తేదీలు. సరైన అవధి:"
 
 #: src/gui/AstroCalcDialog.cpp:506 src/gui/AstroCalcDialog.cpp:698
-#: src/gui/AstroCalcDialog.cpp:700 src/gui/AstroCalcDialog.cpp:2323
-#: src/gui/AstroCalcDialog.cpp:3074 src/gui/AstroCalcDialog.cpp:3076
+#: src/gui/AstroCalcDialog.cpp:700 src/gui/AstroCalcDialog.cpp:2327
+#: src/gui/AstroCalcDialog.cpp:3078 src/gui/AstroCalcDialog.cpp:3080
 msgid "Local Time"
 msgstr "స్థానిక సమయం"
 
-#: src/gui/AstroCalcDialog.cpp:691 src/gui/AstroCalcDialog.cpp:3051
+#: src/gui/AstroCalcDialog.cpp:691 src/gui/AstroCalcDialog.cpp:3055
 #, qt-format
 msgid "Now about %1"
 msgstr "ప్రస్తుతం సుమారుగా %1"
 
 #. TRANSLATORS: name of object
 #: src/gui/AstroCalcDialog.cpp:733 src/gui/AstroCalcDialog.cpp:1313
-#: src/gui/AstroCalcDialog.cpp:4146 src/ui_configurationDialog.h:1591
+#: src/gui/AstroCalcDialog.cpp:4150 src/ui_configurationDialog.h:1591
 #: plugins/TelescopeControl/src/gui/TelescopeDialog.cpp:525
 #: plugins/TelescopeControl/src/gui/StoredPointsDialog.cpp:95
 #: plugins/Exoplanets/src/Exoplanet.cpp:348
@@ -4830,13 +4850,13 @@ msgid "Dec (J2000)"
 msgstr "Dec (J2000)"
 
 #. TRANSLATORS: opacity
-#: src/gui/AstroCalcDialog.cpp:751 src/gui/AstroCalcDialog.cpp:4155
+#: src/gui/AstroCalcDialog.cpp:751 src/gui/AstroCalcDialog.cpp:4159
 msgid "Opac."
 msgstr "Opac."
 
 #. TRANSLATORS: magnitude
 #: src/gui/AstroCalcDialog.cpp:756 src/gui/AstroCalcDialog.cpp:1330
-#: src/gui/AstroCalcDialog.cpp:4150
+#: src/gui/AstroCalcDialog.cpp:4154
 msgid "Mag."
 msgstr "Mag."
 
@@ -4847,7 +4867,7 @@ msgstr "A.S."
 
 #. TRANSLATORS: separation, arcseconds
 #. TRANSLATORS: separation
-#: src/gui/AstroCalcDialog.cpp:763 src/gui/AstroCalcDialog.cpp:4163
+#: src/gui/AstroCalcDialog.cpp:763 src/gui/AstroCalcDialog.cpp:4167
 msgid "Sep."
 msgstr "Sep."
 
@@ -4922,14 +4942,14 @@ msgstr "కోణీయ పరిమాణం"
 msgid "star with high proper motion"
 msgstr "అధిక ప్రాపర్ చలనం గల నక్షత్రం"
 
-#: src/gui/AstroCalcDialog.cpp:1173 src/gui/AstroCalcDialog.cpp:1668
-#: src/gui/AstroCalcDialog.cpp:3389 src/gui/AstroCalcDialog.cpp:4690
+#: src/gui/AstroCalcDialog.cpp:1173 src/gui/AstroCalcDialog.cpp:1671
+#: src/gui/AstroCalcDialog.cpp:3393 src/gui/AstroCalcDialog.cpp:4694
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:315
 msgid "Microsoft Excel Open XML Spreadsheet"
 msgstr "Microsoft Excel Open XML Spreadsheet"
 
-#: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:1670
-#: src/gui/AstroCalcDialog.cpp:3391 src/gui/AstroCalcDialog.cpp:4692
+#: src/gui/AstroCalcDialog.cpp:1175 src/gui/AstroCalcDialog.cpp:1673
+#: src/gui/AstroCalcDialog.cpp:3395 src/gui/AstroCalcDialog.cpp:4696
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:317
 msgid "CSV (Comma delimited)"
 msgstr "CSV (Comma delimited)"
@@ -4943,8 +4963,8 @@ msgid "Celestial positions of objects"
 msgstr "వస్తువుల ఖగోళ స్థానాలు"
 
 #. TRANSLATORS: phase
-#: src/gui/AstroCalcDialog.cpp:1332 src/gui/AstroCalcDialog.cpp:2642
-#: src/gui/AstroCalcDialog.cpp:2689
+#: src/gui/AstroCalcDialog.cpp:1332 src/gui/AstroCalcDialog.cpp:2646
+#: src/gui/AstroCalcDialog.cpp:2693
 msgid "Phase"
 msgstr "దశ"
 
@@ -4953,347 +4973,351 @@ msgstr "దశ"
 msgid "Elong."
 msgstr "Elong."
 
-#: src/gui/AstroCalcDialog.cpp:1674
+#: src/gui/AstroCalcDialog.cpp:1677
 msgid "Save calculated ephemerides as..."
 msgstr "లెక్కించిన ఎఫెమెరిడెస్ లను ఇలా భద్రపరచు..."
 
-#: src/gui/AstroCalcDialog.cpp:1692
+#: src/gui/AstroCalcDialog.cpp:1695
 msgid "Ephemerides"
 msgstr "ఎఫిమెరిడెస్"
 
-#: src/gui/AstroCalcDialog.cpp:1860
+#: src/gui/AstroCalcDialog.cpp:1863
+msgid "1 minute"
+msgstr ""
+
+#: src/gui/AstroCalcDialog.cpp:1864
 msgid "10 minutes"
 msgstr "10 నిముషాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1861
+#: src/gui/AstroCalcDialog.cpp:1865
 msgid "30 minutes"
 msgstr "30 నిముషాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1862
+#: src/gui/AstroCalcDialog.cpp:1866
 msgid "1 hour"
 msgstr "1 గంట"
 
-#: src/gui/AstroCalcDialog.cpp:1863
+#: src/gui/AstroCalcDialog.cpp:1867
 msgid "6 hours"
 msgstr "6 గంటలు"
 
-#: src/gui/AstroCalcDialog.cpp:1864
+#: src/gui/AstroCalcDialog.cpp:1868
 msgid "12 hours"
 msgstr "12 గంటలు"
 
-#: src/gui/AstroCalcDialog.cpp:1865
+#: src/gui/AstroCalcDialog.cpp:1869
 msgid "1 solar day"
 msgstr "1 సౌర దినం"
 
-#: src/gui/AstroCalcDialog.cpp:1866
+#: src/gui/AstroCalcDialog.cpp:1870
 msgid "5 solar days"
 msgstr "5 సౌర దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1867
+#: src/gui/AstroCalcDialog.cpp:1871
 msgid "10 solar days"
 msgstr "10 సౌర దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1868
+#: src/gui/AstroCalcDialog.cpp:1872
 msgid "15 solar days"
 msgstr "15 సౌర దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1869
+#: src/gui/AstroCalcDialog.cpp:1873
 msgid "30 solar days"
 msgstr "30 సౌర దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1870
+#: src/gui/AstroCalcDialog.cpp:1874
 msgid "60 solar days"
 msgstr "60 సౌర దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1871
+#: src/gui/AstroCalcDialog.cpp:1875
 msgid "100 solar days"
 msgstr "100 సౌర దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1872
+#: src/gui/AstroCalcDialog.cpp:1876
 msgid "500 solar days"
 msgstr "500 సౌర దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1873
+#: src/gui/AstroCalcDialog.cpp:1877
 msgid "1 sidereal day"
 msgstr "1 సైడీరియల్ దినం"
 
-#: src/gui/AstroCalcDialog.cpp:1874
+#: src/gui/AstroCalcDialog.cpp:1878
 msgid "5 sidereal days"
 msgstr "5 సైడీరియల్ దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1875
+#: src/gui/AstroCalcDialog.cpp:1879
 msgid "10 sidereal days"
 msgstr "10 సైడీరియల్ దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1876
+#: src/gui/AstroCalcDialog.cpp:1880
 msgid "15 sidereal days"
 msgstr "15 సైడీరియల్ దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1877
+#: src/gui/AstroCalcDialog.cpp:1881
 msgid "30 sidereal days"
 msgstr "30 సైడీరియల్ దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1878
+#: src/gui/AstroCalcDialog.cpp:1882
 msgid "60 sidereal days"
 msgstr "60 సైడీరియల్ దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1879
+#: src/gui/AstroCalcDialog.cpp:1883
 msgid "100 sidereal days"
 msgstr "100 సైడీరియల్ దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1880
+#: src/gui/AstroCalcDialog.cpp:1884
 msgid "500 sidereal days"
 msgstr "500 సైడీరియల్ దినాలు"
 
-#: src/gui/AstroCalcDialog.cpp:1881
+#: src/gui/AstroCalcDialog.cpp:1885
 msgid "1 sidereal year"
 msgstr "1 సైడీరియల్ సంవత్సరం"
 
-#: src/gui/AstroCalcDialog.cpp:1882
+#: src/gui/AstroCalcDialog.cpp:1886
 msgid "1 Julian day"
 msgstr "1 జూలియన్ రోజు"
 
-#: src/gui/AstroCalcDialog.cpp:1883
+#: src/gui/AstroCalcDialog.cpp:1887
 msgid "5 Julian days"
 msgstr "5 జూలియన్ రోజులు"
 
-#: src/gui/AstroCalcDialog.cpp:1884
+#: src/gui/AstroCalcDialog.cpp:1888
 msgid "10 Julian days"
 msgstr "10 జూలియన్ రోజులు"
 
-#: src/gui/AstroCalcDialog.cpp:1885
+#: src/gui/AstroCalcDialog.cpp:1889
 msgid "15 Julian days"
 msgstr "15 జూలియన్ రోజులు"
 
-#: src/gui/AstroCalcDialog.cpp:1886
+#: src/gui/AstroCalcDialog.cpp:1890
 msgid "30 Julian days"
 msgstr "30 జూలియన్ రోజులు"
 
-#: src/gui/AstroCalcDialog.cpp:1887
+#: src/gui/AstroCalcDialog.cpp:1891
 msgid "60 Julian days"
 msgstr "60 జూలియన్ రోజులు"
 
-#: src/gui/AstroCalcDialog.cpp:1888
+#: src/gui/AstroCalcDialog.cpp:1892
 msgid "100 Julian days"
 msgstr "100 జూలియన్ రోజులు"
 
-#: src/gui/AstroCalcDialog.cpp:1889
+#: src/gui/AstroCalcDialog.cpp:1893
 msgid "1 Julian year"
 msgstr "1 జూలియన్ సంవత్సరం"
 
-#: src/gui/AstroCalcDialog.cpp:1890
+#: src/gui/AstroCalcDialog.cpp:1894
 msgid "1 Gaussian year"
 msgstr "1 ఘౌస్సీన్ సంవత్సరం"
 
-#: src/gui/AstroCalcDialog.cpp:1891
+#: src/gui/AstroCalcDialog.cpp:1895
 msgid "1 synodic month"
 msgstr "1 చాంద్ర నెల"
 
-#: src/gui/AstroCalcDialog.cpp:1892
+#: src/gui/AstroCalcDialog.cpp:1896
 msgid "1 draconic month"
 msgstr "1 డ్రకోనిక్ నెల"
 
-#: src/gui/AstroCalcDialog.cpp:1893
+#: src/gui/AstroCalcDialog.cpp:1897
 msgid "1 mean tropical month"
 msgstr "1 మీన్ ట్రాపికల్ నెల"
 
-#: src/gui/AstroCalcDialog.cpp:1894
+#: src/gui/AstroCalcDialog.cpp:1898
 msgid "1 anomalistic month"
 msgstr "1 అనామలిస్టిక్ నెల"
 
-#: src/gui/AstroCalcDialog.cpp:1895
+#: src/gui/AstroCalcDialog.cpp:1899
 msgid "1 anomalistic year"
 msgstr "1 అనామలిస్టిక్ సంవత్సరం"
 
-#: src/gui/AstroCalcDialog.cpp:1896
+#: src/gui/AstroCalcDialog.cpp:1900
 msgid "1 saros"
 msgstr "1 సారోస్"
 
-#: src/gui/AstroCalcDialog.cpp:1991
+#: src/gui/AstroCalcDialog.cpp:1995
 msgid "Latest selected object"
 msgstr "ఇటీవల ఎంచుకున్న వస్తువు"
 
-#: src/gui/AstroCalcDialog.cpp:1992
+#: src/gui/AstroCalcDialog.cpp:1996
 msgid "Solar system"
 msgstr "సౌర కుటుంబం"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1994 src/gui/AstroCalcDialog.cpp:4079
+#: src/gui/AstroCalcDialog.cpp:1998 src/gui/AstroCalcDialog.cpp:4083
 #: src/translations.h:86
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:516
 msgid "Asteroids"
 msgstr "ఏస్టెరాయిడ్లు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1995 src/gui/AstroCalcDialog.cpp:4081
+#: src/gui/AstroCalcDialog.cpp:1999 src/gui/AstroCalcDialog.cpp:4085
 #: src/translations.h:90
 msgid "Plutinos"
 msgstr "ప్లూటినోస్"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1996 src/gui/AstroCalcDialog.cpp:4080
+#: src/gui/AstroCalcDialog.cpp:2000 src/gui/AstroCalcDialog.cpp:4084
 #: src/translations.h:84
 #: plugins/SolarSystemEditor/src/ui_mpcImportWindow.h:517
 msgid "Comets"
 msgstr "తోకచుక్కలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1997 src/gui/AstroCalcDialog.cpp:4082
+#: src/gui/AstroCalcDialog.cpp:2001 src/gui/AstroCalcDialog.cpp:4086
 #: src/translations.h:92
 msgid "Dwarf planets"
 msgstr "మరుగుజ్జు గ్రహాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1998 src/gui/AstroCalcDialog.cpp:4083
+#: src/gui/AstroCalcDialog.cpp:2002 src/gui/AstroCalcDialog.cpp:4087
 #: src/translations.h:94
 msgid "Cubewanos"
 msgstr "క్యూబ్‌వానోస్"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:1999 src/gui/AstroCalcDialog.cpp:4084
+#: src/gui/AstroCalcDialog.cpp:2003 src/gui/AstroCalcDialog.cpp:4088
 #: src/translations.h:96
 msgid "Scattered disc objects"
 msgstr "చెదిరిన చక్రంలోని వస్తువులు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2000 src/gui/AstroCalcDialog.cpp:4085
+#: src/gui/AstroCalcDialog.cpp:2004 src/gui/AstroCalcDialog.cpp:4089
 #: src/translations.h:98
 msgid "Oort cloud objects"
 msgstr "ఊర్ట్ మేఘం లోని వస్తువులు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2001 src/gui/AstroCalcDialog.cpp:4086
+#: src/gui/AstroCalcDialog.cpp:2005 src/gui/AstroCalcDialog.cpp:4090
 #: src/translations.h:100
 msgid "Sednoids"
 msgstr "సెడ్‌నాయిడ్లు"
 
-#: src/gui/AstroCalcDialog.cpp:2002
+#: src/gui/AstroCalcDialog.cpp:2006
 #, qt-format
 msgid "Bright stars (<%1 mag)"
 msgstr "ప్రకాశవంతమైన నక్షత్రాలు (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:2003
+#: src/gui/AstroCalcDialog.cpp:2007
 #, qt-format
 msgid "Bright double stars (<%1 mag)"
 msgstr "ప్రకాశవంతమైన జమిలి నక్షత్రాలు (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:2004
+#: src/gui/AstroCalcDialog.cpp:2008
 #, qt-format
 msgid "Bright variable stars (<%1 mag)"
 msgstr "ప్రకాశవంతమైన వేరియబుల్ నక్షత్రాలు (<%1 mag)"
 
-#: src/gui/AstroCalcDialog.cpp:2005
+#: src/gui/AstroCalcDialog.cpp:2009
 #, qt-format
 msgid "Bright star clusters (<%1 mag)"
 msgstr "ప్రకాసవంతమైన నక్షత్ర సమూహాలు (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2006 src/gui/AstroCalcDialog.cpp:4087
+#: src/gui/AstroCalcDialog.cpp:2010 src/gui/AstroCalcDialog.cpp:4091
 #: src/translations.h:325 src/ui_viewDialog.h:2702
 #: src/ui_dsoColorsDialog.h:553
 msgid "Planetary nebulae"
 msgstr "గ్రహ నెబ్యులాలు"
 
-#: src/gui/AstroCalcDialog.cpp:2007
+#: src/gui/AstroCalcDialog.cpp:2011
 #, qt-format
 msgid "Bright nebulae (<%1 mag)"
 msgstr "ప్రకాసవంతమైన నెబ్యులాలు (<%1 mag)"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2008 src/gui/AstroCalcDialog.cpp:4076
+#: src/gui/AstroCalcDialog.cpp:2012 src/gui/AstroCalcDialog.cpp:4080
 #: src/translations.h:327 src/ui_viewDialog.h:2704
 #: src/ui_dsoColorsDialog.h:585
 msgid "Dark nebulae"
 msgstr "అంధకార నెబ్యులాలు"
 
-#: src/gui/AstroCalcDialog.cpp:2009
+#: src/gui/AstroCalcDialog.cpp:2013
 #, qt-format
 msgid "Bright galaxies (<%1 mag)"
 msgstr "ఒరకాశవంతమైన నక్షత్ర మండలాలు (<%1 mag)"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2010 src/gui/AstroCalcDialog.cpp:4091
+#: src/gui/AstroCalcDialog.cpp:2014 src/gui/AstroCalcDialog.cpp:4095
 #: src/translations.h:377 src/ui_dsoColorsDialog.h:587
 msgid "Symbiotic stars"
 msgstr "సింబియాటిక్ నక్షత్రాలు"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2011 src/gui/AstroCalcDialog.cpp:4092
+#: src/gui/AstroCalcDialog.cpp:2015 src/gui/AstroCalcDialog.cpp:4096
 #: src/translations.h:379 src/ui_dsoColorsDialog.h:539
 msgid "Emission-line stars"
 msgstr "ఉద్గార-రేఖల నక్షత్రాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:2012 src/gui/AstroCalcDialog.cpp:4097
+#: src/gui/AstroCalcDialog.cpp:2016 src/gui/AstroCalcDialog.cpp:4101
 #: src/translations.h:102
 msgid "Interstellar objects"
 msgstr "నక్షత్రాంతర వస్తువులు"
 
-#: src/gui/AstroCalcDialog.cpp:2550
+#: src/gui/AstroCalcDialog.cpp:2554
 msgid "Magnitude vs. Time"
 msgstr "పరిమాణం vs కాలం"
 
-#: src/gui/AstroCalcDialog.cpp:2553
+#: src/gui/AstroCalcDialog.cpp:2557
 msgid "Phase vs. Time"
 msgstr "ఫేస్ vs కాలం"
 
-#: src/gui/AstroCalcDialog.cpp:2556
+#: src/gui/AstroCalcDialog.cpp:2560
 msgid "Distance vs. Time"
 msgstr "దూరం vs కాలం"
 
-#: src/gui/AstroCalcDialog.cpp:2559
+#: src/gui/AstroCalcDialog.cpp:2563
 msgid "Elongation vs. Time"
 msgstr "ఇలాంగేషన్ va కాలం"
 
-#: src/gui/AstroCalcDialog.cpp:2562
+#: src/gui/AstroCalcDialog.cpp:2566
 msgid "Angular size vs. Time"
 msgstr "కోణీయ పరిమాణం vs కాలం"
 
-#: src/gui/AstroCalcDialog.cpp:2565
+#: src/gui/AstroCalcDialog.cpp:2569
 msgid "Phase angle vs. Time"
 msgstr "ఫేస్ కోణం vs కాలం"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:2569
+#: src/gui/AstroCalcDialog.cpp:2573
 msgid "Heliocentric distance vs. Time"
 msgstr "సౌర కేంద్రీయ దూరం vs కాలం"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it to use in the drop-down list.
-#: src/gui/AstroCalcDialog.cpp:2573
+#: src/gui/AstroCalcDialog.cpp:2577
 msgid "Transit altitude vs. Time"
 msgstr "ట్రాన్సిట్ ఆల్టిట్యూడ్ vs కాలం"
 
-#: src/gui/AstroCalcDialog.cpp:2614 src/gui/AstroCalcDialog.cpp:2788
+#: src/gui/AstroCalcDialog.cpp:2618 src/gui/AstroCalcDialog.cpp:2792
 msgid "Date"
 msgstr "తేదీ"
 
 #. TRANSLATORS: Megameter (SI symbol: Mm; Megameter is a unit of length in the
 #. metric system,
 #. equal to one million metres)
-#: src/gui/AstroCalcDialog.cpp:2625
+#: src/gui/AstroCalcDialog.cpp:2629
 msgid "Mm"
 msgstr "Mm"
 
-#: src/gui/AstroCalcDialog.cpp:2657 src/gui/AstroCalcDialog.cpp:2704
+#: src/gui/AstroCalcDialog.cpp:2661 src/gui/AstroCalcDialog.cpp:2708
 msgid "Angular size"
 msgstr "కోణీయ పరిమాణం"
 
 #. TRANSLATORS: The phrase "Heliocentric distance" may be long in some
 #. languages and you can short it.
-#: src/gui/AstroCalcDialog.cpp:2668 src/gui/AstroCalcDialog.cpp:2715
+#: src/gui/AstroCalcDialog.cpp:2672 src/gui/AstroCalcDialog.cpp:2719
 msgid "Heliocentric distance"
 msgstr "సౌర కేంద్రీయ దూరం"
 
 #. TRANSLATORS: The phrase "Transit altitude" may be long in some languages
 #. and you can short it.
-#: src/gui/AstroCalcDialog.cpp:2674 src/gui/AstroCalcDialog.cpp:2721
+#: src/gui/AstroCalcDialog.cpp:2678 src/gui/AstroCalcDialog.cpp:2725
 msgid "Transit altitude"
 msgstr "ట్రాన్సిట్ ఆల్టిట్యూడ్"
 
 #. TRANSLATORS: hours.
-#: src/gui/AstroCalcDialog.cpp:2830
+#: src/gui/AstroCalcDialog.cpp:2834
 #: plugins/Satellites/src/gui/SatellitesDialog.cpp:743
 #: plugins/Supernovae/src/gui/SupernovaeDialog.cpp:188
 #: plugins/Novae/src/gui/NovaeDialog.cpp:184
@@ -5304,262 +5328,262 @@ msgctxt "time"
 msgid "h"
 msgstr "h"
 
-#: src/gui/AstroCalcDialog.cpp:3056
+#: src/gui/AstroCalcDialog.cpp:3060
 #, qt-format
 msgid "Passage of meridian at approximately %1"
 msgstr "%1 వద్ద మధ్యాహ్న రేఖను దాటటం"
 
-#: src/gui/AstroCalcDialog.cpp:3063
+#: src/gui/AstroCalcDialog.cpp:3067
 msgid "Line of civil twilight"
 msgstr "పౌర మునిమాపు రేఖ"
 
-#: src/gui/AstroCalcDialog.cpp:3065
+#: src/gui/AstroCalcDialog.cpp:3069
 msgid "Line of nautical twilight"
 msgstr "నాటికల్ మునిమాపు రేఖ"
 
-#: src/gui/AstroCalcDialog.cpp:3067
+#: src/gui/AstroCalcDialog.cpp:3071
 msgid "Line of astronomical twilight"
 msgstr "ఖగోళశాస్త్ర మునిమాపు రేఖ"
 
-#: src/gui/AstroCalcDialog.cpp:3093
+#: src/gui/AstroCalcDialog.cpp:3097
 msgid "Phenomenon"
 msgstr "దృగ్విషయం"
 
-#: src/gui/AstroCalcDialog.cpp:3095
+#: src/gui/AstroCalcDialog.cpp:3099
 msgid "Object 1"
 msgstr "వస్తువు 1"
 
-#: src/gui/AstroCalcDialog.cpp:3096
+#: src/gui/AstroCalcDialog.cpp:3100
 msgid "Object 2"
 msgstr "వస్తువు 2"
 
-#: src/gui/AstroCalcDialog.cpp:3098
+#: src/gui/AstroCalcDialog.cpp:3102
 msgid "Solar Elongation"
 msgstr "సౌర ఇలాంగేషన్"
 
-#: src/gui/AstroCalcDialog.cpp:3099
+#: src/gui/AstroCalcDialog.cpp:3103
 msgid "Lunar Elongation"
 msgstr "చంద్ర ఇలాంగేషన్"
 
-#: src/gui/AstroCalcDialog.cpp:3395
+#: src/gui/AstroCalcDialog.cpp:3399
 msgid "Save calculated phenomena as..."
 msgstr "లెక్కించిన దృగ్విషయాలను ఇలా భద్రపరచు..."
 
-#: src/gui/AstroCalcDialog.cpp:3413 src/gui/AstroCalcDialog.cpp:3415
+#: src/gui/AstroCalcDialog.cpp:3417 src/gui/AstroCalcDialog.cpp:3419
 #: src/ui_astroCalcDialog.h:1360
 msgid "Phenomena"
 msgstr "దృగ్విషయాలు"
 
-#: src/gui/AstroCalcDialog.cpp:3473 src/gui/AstroCalcDialog.cpp:3571
+#: src/gui/AstroCalcDialog.cpp:3477 src/gui/AstroCalcDialog.cpp:3575
 msgid "Angular distance from the Sun"
 msgstr "సూర్యుడి నుండి కోణీయ దూరం"
 
-#: src/gui/AstroCalcDialog.cpp:3479 src/gui/AstroCalcDialog.cpp:3572
+#: src/gui/AstroCalcDialog.cpp:3483 src/gui/AstroCalcDialog.cpp:3576
 msgid "Angular distance from the Moon"
 msgstr "చంద్రుడి నుండి కోణీయ దూరం"
 
-#: src/gui/AstroCalcDialog.cpp:3499 src/gui/AstroCalcDialog.cpp:3606
-#: src/gui/AstroCalcDialog.cpp:3674
+#: src/gui/AstroCalcDialog.cpp:3503 src/gui/AstroCalcDialog.cpp:3610
+#: src/gui/AstroCalcDialog.cpp:3678
 msgid "Conjunction"
 msgstr "కంజంక్షన్"
 
-#: src/gui/AstroCalcDialog.cpp:3506 src/gui/AstroCalcDialog.cpp:3681
+#: src/gui/AstroCalcDialog.cpp:3510 src/gui/AstroCalcDialog.cpp:3685
 msgid "Opposition"
 msgstr "అపోజిషన్"
 
-#: src/gui/AstroCalcDialog.cpp:3509 src/gui/AstroCalcDialog.cpp:3527
-#: src/gui/AstroCalcDialog.cpp:3533 src/gui/AstroCalcDialog.cpp:3684
-#: src/gui/AstroCalcDialog.cpp:3702 src/gui/AstroCalcDialog.cpp:3708
+#: src/gui/AstroCalcDialog.cpp:3513 src/gui/AstroCalcDialog.cpp:3531
+#: src/gui/AstroCalcDialog.cpp:3537 src/gui/AstroCalcDialog.cpp:3688
+#: src/gui/AstroCalcDialog.cpp:3706 src/gui/AstroCalcDialog.cpp:3712
 msgid "Eclipse"
 msgstr "గ్రహణం"
 
-#: src/gui/AstroCalcDialog.cpp:3520 src/gui/AstroCalcDialog.cpp:3695
+#: src/gui/AstroCalcDialog.cpp:3524 src/gui/AstroCalcDialog.cpp:3699
 msgctxt "passage of the celestial body"
 msgid "Transit"
 msgstr "ట్రాన్సిట్"
 
-#: src/gui/AstroCalcDialog.cpp:3523 src/gui/AstroCalcDialog.cpp:3611
-#: src/gui/AstroCalcDialog.cpp:3698
+#: src/gui/AstroCalcDialog.cpp:3527 src/gui/AstroCalcDialog.cpp:3615
+#: src/gui/AstroCalcDialog.cpp:3702
 msgid "Occultation"
 msgstr "అక్కల్టేషన్"
 
-#: src/gui/AstroCalcDialog.cpp:3575
+#: src/gui/AstroCalcDialog.cpp:3579
 msgid "Angular distance from the Sun for second object"
 msgstr "రెండవ వస్తువుకు సూర్యుడి నుండి కోణీయ దూరం"
 
-#: src/gui/AstroCalcDialog.cpp:3576
+#: src/gui/AstroCalcDialog.cpp:3580
 msgid "Angular distance from the Moon for second object"
 msgstr "రెండవ వస్తువుకు చంద్రుడి నుండి కోణీయ దూరం"
 
-#: src/gui/AstroCalcDialog.cpp:4052
+#: src/gui/AstroCalcDialog.cpp:4056
 msgctxt "Celestial object is observed..."
 msgid "In the Evening"
 msgstr "సాయంకాలాన"
 
-#: src/gui/AstroCalcDialog.cpp:4053
+#: src/gui/AstroCalcDialog.cpp:4057
 msgctxt "Celestial object is observed..."
 msgid "In the Morning"
 msgstr "ఉదయాన"
 
-#: src/gui/AstroCalcDialog.cpp:4054
+#: src/gui/AstroCalcDialog.cpp:4058
 msgctxt "Celestial object is observed..."
 msgid "Around Midnight"
 msgstr "సుమారుగా అర్థరాత్రి"
 
-#: src/gui/AstroCalcDialog.cpp:4055
+#: src/gui/AstroCalcDialog.cpp:4059
 msgctxt "Celestial object is observed..."
 msgid "In Any Time of the Night"
 msgstr "రాత్రి ఏ సమయంలోనైనా"
 
-#: src/gui/AstroCalcDialog.cpp:4074
+#: src/gui/AstroCalcDialog.cpp:4078
 msgid "Bright stars"
 msgstr "ప్రకాశవంతమైన నక్షత్రాలు"
 
-#: src/gui/AstroCalcDialog.cpp:4075 src/ui_viewDialog.h:2703
+#: src/gui/AstroCalcDialog.cpp:4079 src/ui_viewDialog.h:2703
 msgid "Bright nebulae"
 msgstr "ప్రకాశవంతమైన నెబ్యులాలు"
 
-#: src/gui/AstroCalcDialog.cpp:4077 src/ui_viewDialog.h:2707
+#: src/gui/AstroCalcDialog.cpp:4081 src/ui_viewDialog.h:2707
 #: src/ui_dsoColorsDialog.h:554
 msgid "Galaxies"
 msgstr "నక్ష్త్ర మండలాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4078 src/translations.h:343
+#: src/gui/AstroCalcDialog.cpp:4082 src/translations.h:343
 #: src/ui_viewDialog.h:2710 src/ui_dsoColorsDialog.h:588
 msgid "Star clusters"
 msgstr "నక్షత్ర సమూహాలు"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4088 src/translations.h:446
+#: src/gui/AstroCalcDialog.cpp:4092 src/translations.h:446
 msgid "Bright double stars"
 msgstr "ప్రకాశవంతమైన జమిలి నక్షత్రాలు"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4089 src/translations.h:448
+#: src/gui/AstroCalcDialog.cpp:4093 src/translations.h:448
 msgid "Bright variable stars"
 msgstr "ప్రకాశవంతమైన వేరియబుల్ నక్షత్రాలు"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4090 src/translations.h:450
+#: src/gui/AstroCalcDialog.cpp:4094 src/translations.h:450
 msgid "Bright stars with high proper motion"
 msgstr "అధిక ప్రాపర్ చలనం గల ప్రకాశవంతమైన నక్షత్రాలు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4093 src/translations.h:355
+#: src/gui/AstroCalcDialog.cpp:4097 src/translations.h:355
 #: src/ui_dsoColorsDialog.h:556
 msgid "Supernova candidates"
 msgstr "సూపర్‌నోవా అపేక్షితులు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4094 src/translations.h:357
+#: src/gui/AstroCalcDialog.cpp:4098 src/translations.h:357
 #: src/ui_dsoColorsDialog.h:557
 msgid "Supernova remnant candidates"
 msgstr "సూపర్‌నోవా అవశేష అపేక్షితులు"
 
 #. TRANSLATORS: Type of objects (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4095 src/translations.h:353
+#: src/gui/AstroCalcDialog.cpp:4099 src/translations.h:353
 #: src/ui_viewDialog.h:2709 src/ui_dsoColorsDialog.h:540
 msgid "Supernova remnants"
 msgstr "సూపర్‌నోవా అవశేషాలు"
 
 #. TRANSLATORS: Type of stars (for "Lists" in the search tool)
-#: src/gui/AstroCalcDialog.cpp:4096 src/translations.h:381
+#: src/gui/AstroCalcDialog.cpp:4100 src/translations.h:381
 #: src/ui_viewDialog.h:2706 src/ui_dsoColorsDialog.h:558
 msgid "Clusters of galaxies"
 msgstr "నక్షత్ర మండలాల సమూహాలు"
 
 #. TRANSLATORS: angular size
-#: src/gui/AstroCalcDialog.cpp:4168
+#: src/gui/AstroCalcDialog.cpp:4172
 msgid "Ang. Size"
 msgstr "కోణీ. పరిమాణం"
 
-#: src/gui/AstroCalcDialog.cpp:4269 src/ui_astroCalcDialog.h:1494
+#: src/gui/AstroCalcDialog.cpp:4273 src/ui_astroCalcDialog.h:1494
 msgid "Limit angular size:"
 msgstr "కోణీయ పరిమాణాన్ని పరిమితించు:"
 
-#: src/gui/AstroCalcDialog.cpp:4270 src/ui_astroCalcDialog.h:1492
+#: src/gui/AstroCalcDialog.cpp:4274 src/ui_astroCalcDialog.h:1492
 msgid "Set limits for angular size for visible celestial objects"
 msgstr "కనిపించే ఖగోళ వస్తువుల కోణీయ పరిమాణానికి పరిమితిని విధించు"
 
-#: src/gui/AstroCalcDialog.cpp:4271 src/ui_astroCalcDialog.h:1496
+#: src/gui/AstroCalcDialog.cpp:4275 src/ui_astroCalcDialog.h:1496
 msgid "Minimal angular size for visible celestial objects"
 msgstr "కనిపించే ఖగోళ వస్తువుల కనిష్ఠ కోణీయ పరిమాణం"
 
-#: src/gui/AstroCalcDialog.cpp:4272 src/ui_astroCalcDialog.h:1499
+#: src/gui/AstroCalcDialog.cpp:4276 src/ui_astroCalcDialog.h:1499
 msgid "Maximum angular size for visible celestial objects"
 msgstr "కనిపించే ఖగోళ వస్తువుల గరిష్ఠ కోణీయ పరిమాణం"
 
-#: src/gui/AstroCalcDialog.cpp:4565
+#: src/gui/AstroCalcDialog.cpp:4569
 msgid "Limit angular separation:"
 msgstr "కోణీయ విభజన పరిమితి:"
 
-#: src/gui/AstroCalcDialog.cpp:4566
+#: src/gui/AstroCalcDialog.cpp:4570
 msgid "Set limits for angular separation for visible double stars"
 msgstr "కనిపించే జమిలి నక్షత్రాల కోణీయ విభాజనకు పరిమితిని విధించు"
 
-#: src/gui/AstroCalcDialog.cpp:4567
+#: src/gui/AstroCalcDialog.cpp:4571
 msgid "Minimal angular separation for visible double stars"
 msgstr "కనిపించే జమిలి నక్షత్రాల కనిష్ఠ కోణీయ విభాజన"
 
-#: src/gui/AstroCalcDialog.cpp:4568
+#: src/gui/AstroCalcDialog.cpp:4572
 msgid "Maximum angular separation for visible double stars"
 msgstr "కనిపించే జమిలి నక్షత్రాల గరిష్ఠ కోణీయ విభాజన"
 
-#: src/gui/AstroCalcDialog.cpp:4696
+#: src/gui/AstroCalcDialog.cpp:4700
 msgid "Save list of objects as..."
 msgstr "వస్తువుల జాబితాను ఇలా భద్రపరచు..."
 
-#: src/gui/AstroCalcDialog.cpp:4714 src/ui_astroCalcDialog.h:1366
+#: src/gui/AstroCalcDialog.cpp:4718 src/ui_astroCalcDialog.h:1366
 msgid "What's Up Tonight"
 msgstr "ఇవ్వాళ రాత్రికి ఏం చేస్తారు"
 
-#: src/gui/AstroCalcDialog.cpp:4870
+#: src/gui/AstroCalcDialog.cpp:4874
 msgid "spin-orbit resonance"
 msgstr "భ్రమణ-కక్ష్యల అనుకంపన"
 
-#: src/gui/AstroCalcDialog.cpp:4922 src/gui/AstroCalcDialog.cpp:5105
+#: src/gui/AstroCalcDialog.cpp:4926 src/gui/AstroCalcDialog.cpp:5109
 msgid "Days from today"
 msgstr "ఇవ్వాళ్టి నుండి రోజులు"
 
-#: src/gui/AstroCalcDialog.cpp:4923 src/gui/AstroCalcDialog.cpp:5086
+#: src/gui/AstroCalcDialog.cpp:4927 src/gui/AstroCalcDialog.cpp:5090
 msgid "Linear distance"
 msgstr "రేఖా దూరం"
 
-#: src/gui/AstroCalcDialog.cpp:4924 src/gui/AstroCalcDialog.cpp:5089
-#: src/gui/AstroCalcDialog.cpp:5106
+#: src/gui/AstroCalcDialog.cpp:4928 src/gui/AstroCalcDialog.cpp:5093
+#: src/gui/AstroCalcDialog.cpp:5110
 msgid "Angular distance"
 msgstr "కోణీయ దూరం"
 
-#: src/gui/AstroCalcDialog.cpp:5086 src/gui/AstroCalcDialog.cpp:5089
+#: src/gui/AstroCalcDialog.cpp:5090 src/gui/AstroCalcDialog.cpp:5093
 msgid "Day"
 msgstr "రోజు"
 
-#: src/gui/AstroCalcDialog.cpp:5147
+#: src/gui/AstroCalcDialog.cpp:5151
 msgid "Change of angular distance between the Moon and selected object"
 msgstr "చంద్రుడికి ఎంచుకున్న వస్తువుకూ మధ్య కోణీయ దూరంలో మార్పు"
 
-#: src/gui/BookmarksDialog.cpp:113 src/ui_searchDialogGui.h:697
+#: src/gui/BookmarksDialog.cpp:117 src/ui_searchDialogGui.h:697
 msgid "Object"
 msgstr "వస్తువు"
 
-#: src/gui/BookmarksDialog.cpp:114
+#: src/gui/BookmarksDialog.cpp:118
 msgid "Localized name"
 msgstr "స్థానికీకరించిన పేరు"
 
-#: src/gui/BookmarksDialog.cpp:116
+#: src/gui/BookmarksDialog.cpp:120
 msgid "Location of observer"
 msgstr "పరిశీలకుని స్థానం"
 
-#: src/gui/BookmarksDialog.cpp:177
+#: src/gui/BookmarksDialog.cpp:181
 msgid "Unnamed star"
 msgstr "పేరు పెట్టని నక్షత్రం"
 
-#: src/gui/BookmarksDialog.cpp:463 src/ui_bookmarksDialog.h:216
+#: src/gui/BookmarksDialog.cpp:467 src/ui_bookmarksDialog.h:216
 msgid "Import bookmarks"
 msgstr "బుక్‌మార్కుల దిగుమతి"
 
-#: src/gui/BookmarksDialog.cpp:477
+#: src/gui/BookmarksDialog.cpp:481
 msgid "Export bookmarks as..."
 msgstr "బుక్‌మార్కులను ఇలా ఎగుమతి చెయ్యి.."
 
@@ -6786,342 +6810,347 @@ msgstr "బాబిలోనియన్ (సెల్యూసిడ్)"
 msgid "Armintxe Cave"
 msgstr "ఆర్మింట్చె గుహ"
 
+#. TRANSLATORS: Name of the sky culture
+#: src/translations.h:537
+msgid "Vanuatu (Netwar)"
+msgstr ""
+
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:540
+#: src/translations.h:542
 msgid "Guereins"
 msgstr "గెరీన్స్"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:542
+#: src/translations.h:544
 msgid "Trees"
 msgstr "చెట్లు"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:544 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1515
+#: src/translations.h:546 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1515
 msgid "Moon"
 msgstr "చంద్రుడు"
 
 #. TRANSLATORS: Landscape name: Hurricane Ridge
-#: src/translations.h:546
+#: src/translations.h:548
 msgid "Hurricane"
 msgstr "హరికేన్"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:548
+#: src/translations.h:550
 msgid "Ocean"
 msgstr "మహాసముద్రం"
 
 #. TRANSLATORS: Landscape name: Garching bei Munchen
-#: src/translations.h:550
+#: src/translations.h:552
 msgid "Garching"
 msgstr "గార్చింగ్"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:552 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1527
+#: src/translations.h:554 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1527
 msgid "Mars"
 msgstr "అంగారకుడు"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:554 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1530
+#: src/translations.h:556 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1530
 msgid "Jupiter"
 msgstr "బృహస్పతి"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:556 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1533
+#: src/translations.h:558 plugins/ArchaeoLines/src/ArchaeoLines.cpp:1533
 msgid "Saturn"
 msgstr "శని"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:558
+#: src/translations.h:560
 msgid "Uranus"
 msgstr "యురేనస్"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:560
+#: src/translations.h:562
 msgid "Neptune"
 msgstr "నెప్ట్యూన్"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:562
+#: src/translations.h:564
 msgid "Geneva"
 msgstr "జెనీవా"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:564
+#: src/translations.h:566
 msgid "Grossmugl"
 msgstr "గ్రాస్ముగి"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:566
+#: src/translations.h:568
 msgid "Zero Horizon"
 msgstr "జీరో దిగంతం"
 
 #. TRANSLATORS: Name of landscape
-#: src/translations.h:568 plugins/Exoplanets/src/Exoplanet.cpp:334
+#: src/translations.h:570 plugins/Exoplanets/src/Exoplanet.cpp:334
 #: plugins/Exoplanets/src/Exoplanet.cpp:338
 #: plugins/ArchaeoLines/src/ArchaeoLines.cpp:1512
 msgid "Sun"
 msgstr "సూర్యుడు"
 
 #. TRANSLATORS: Name of 3D scene ("Sterngarten" is proper name)
-#: src/translations.h:573
+#: src/translations.h:575
 msgid "Vienna Sterngarten"
 msgstr "వియెన్నా స్టెర్న్‌గార్టెన్"
 
 #. TRANSLATORS: Name of 3D scene
-#: src/translations.h:575
+#: src/translations.h:577
 msgid "Testscene"
 msgstr "టెస్ట్‌సీన్"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:580
+#: src/translations.h:582
 msgid "Landscape Tour"
 msgstr "ల్యాండ్‌స్కేప్ పర్యటన"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:582
+#: src/translations.h:584
 msgid "Partial Lunar Eclipse"
 msgstr "పాక్షిక చంద్ర గ్రహణం"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:584
+#: src/translations.h:586
 msgid "Total Lunar Eclipse"
 msgstr "సంపూర్ణ చంద్ర గ్రహణం"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:586
+#: src/translations.h:588
 msgid "Screensaver"
 msgstr "స్క్రీన్‌సేవర్"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:588
+#: src/translations.h:590
 msgid "Solar Eclipse 2009"
 msgstr "సూర్య గ్రహణం 2009"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:590
+#: src/translations.h:592
 msgid "Startup Script"
 msgstr "స్టార్టప్ స్క్రిప్టు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:592
+#: src/translations.h:594
 msgid "Zodiac"
 msgstr "రాశిచక్రం"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:594
+#: src/translations.h:596
 msgid "Mercury Triple Sunrise and Sunset"
 msgstr "బుధుడిపై ముమ్మారు సూర్యోదయ సూర్యాస్తమయాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:596
+#: src/translations.h:598
 msgid "Double eclipse from Deimos in 2017"
 msgstr "2017 లో డేమోస్ నుండి రెండు గ్రహణాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:598
+#: src/translations.h:600
 msgid "Double eclipse from Deimos in 2031"
 msgstr "2031 లో డేమోస్ నుండి రెండు గ్రహణాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:600
+#: src/translations.h:602
 msgid "Eclipse from Olympus Mons Jan 2, 2021"
 msgstr "2021 జనవరి 2 న ఒలింపస్ మోన్స్ నుండి గ్రహణం"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:602
+#: src/translations.h:604
 msgid "Occultation of Earth and Jupiter 2048"
 msgstr "2048 భూమి బృహస్పతిల అక్కల్టేషన్"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:604
+#: src/translations.h:606
 msgid "3 Transits and 2 Eclipses from Deimos 2027"
 msgstr "2027 లో డేమోస్ నుండి 3 ట్రాన్సిట్లు, 2 గ్రహణాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:606
+#: src/translations.h:608
 msgid "Solar System Screensaver"
 msgstr "సౌర కుటుంబం స్క్రీన్‌సేవర్"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:608
+#: src/translations.h:610
 msgid "Constellations Tour"
 msgstr "రాశుల పర్యటన"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:610
+#: src/translations.h:612
 msgid "Western Constellations Tour"
 msgstr "వెస్టర్న్ రాశుల పర్యటన"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:612
+#: src/translations.h:614
 msgid "Sun from different planets"
 msgstr "వివిధ గ్రహాల నుండి సూర్యుడు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:614
+#: src/translations.h:616
 msgid "Earth best views from other bodies"
 msgstr "ఇతర వస్తువుల నుండి చక్కటి భూమి దృశ్యాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:616
+#: src/translations.h:618
 msgid "Transit of Venus"
 msgstr "వీనస్ ట్రాన్‌సిట్"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:618
+#: src/translations.h:620
 msgid "Sky Culture Tour"
 msgstr "ఖగోళ సంస్కృతి పర్యటన"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:620
+#: src/translations.h:622
 msgid "Earth Events from Mercury"
 msgstr "బుధుడి నుజండి భూమి పైని ఘటనలు"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:622
+#: src/translations.h:624
 msgid "Earth Events from a floating city on Venus"
 msgstr "శుక్రుడిపై ఒక తేలే నగరం నుండి భూమి పైని ఘటనలు"
 
 #. TRANSLATORS: Name and description of script
-#: src/translations.h:624
+#: src/translations.h:626
 msgid "Earth Events from Mars"
 msgstr "అంగారకుడి నుండి భూమి పైని ఘటనలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:626
+#: src/translations.h:628
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars"
 msgstr "అంగారకుడి నుండి భూమి, ఇతర గ్రహాల అతిపెద్ద ఇలాంగేషన్లు, అపోజిషన్లు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:628
+#: src/translations.h:630
 msgid "Earth and Mars Greatest Elongations and Transits from Callisto"
 msgstr "కాలిస్టో నుండి భూమి, అంగారకుల అతిపెద్ద ఇలాంగేషన్లు, ట్రాన్సిట్లు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:630
+#: src/translations.h:632
 msgid "Tycho's Supernova"
 msgstr "టైకో సూపర్‌నోవా"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:632
+#: src/translations.h:634
 msgid "Earth and other Planets from Ceres"
 msgstr "సెరెస్ నుండి భూమి, ఇతర గ్రహాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:634
+#: src/translations.h:636
 msgid "Messier Objects Tour"
 msgstr "మెస్సియర్ వస్తువుల పర్యటన"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:636
+#: src/translations.h:638
 msgid "Binocular Highlights"
 msgstr "బైనాక్యులర్ హైలైట్లు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:638
+#: src/translations.h:640
 msgid "20 Fun Naked-Eye Double Stars"
 msgstr "20 చూపుకు అందే జమిలి నక్షత్రాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:640
+#: src/translations.h:642
 msgid "List of largest known stars"
 msgstr "అతిపెద్ద నక్షత్రాల జాబితా"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:642
+#: src/translations.h:644
 msgid "Herschel 400 Tour"
 msgstr "హెర్షెల్ 400 పర్యటన"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:644
+#: src/translations.h:646
 msgid "Binosky: Deep Sky Objects for Binoculars"
 msgstr "బైనోస్కై: బైనాక్యులర్లతో సుదూర అంతరిక్ష వస్తువులు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:646
+#: src/translations.h:648
 msgid "The Jack Bennett Catalog"
 msgstr "జాక్ బెన్నెట్ క్యాటలాగు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:648
+#: src/translations.h:650
 msgid "Best objects in the New General Catalog"
 msgstr "కొత్త సామాన్య క్యాటలాగులో అత్యుత్తమ వస్తువులు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:650
+#: src/translations.h:652
 msgid "Jupiter and triple shadow phenomena"
 msgstr "బృహస్పతి, మూడు నీడల దృగ్విషయాలు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:652
+#: src/translations.h:654
 msgid "Jupiter without Galilean satellites"
 msgstr "బృహస్పతి, గలీలియన్ ఉపగ్రహాలు లేకుండా"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:654
+#: src/translations.h:656
 msgid "Skybox Tiles"
 msgstr "స్కైబాక్స్ టైల్స్"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:656
+#: src/translations.h:658
 msgid "Occultations of bright stars by planets"
 msgstr "గ్రహాల చేత ప్రకాశవంతమైన నక్షత్రాల అక్కల్టేషన్లు"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:658
+#: src/translations.h:660
 msgid "Mutual occultations of planets"
 msgstr "గ్రహాల పరస్పర అక్కల్టేషను"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:660
+#: src/translations.h:662
 msgid "Planet Objects Tour"
 msgstr "గ్రహ వస్తువుల పర్యటన"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:662
+#: src/translations.h:664
 msgid "Analemma"
 msgstr "అనలెమ్మా"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:664
+#: src/translations.h:666
 msgid "Martian analemma"
 msgstr "అంగారక అనలెమ్మా"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:666
+#: src/translations.h:668
 msgid "Saturnian analemma"
 msgstr "శని అనలెమ్మా"
 
 #. TRANSLATORS: Name of script
-#: src/translations.h:668
+#: src/translations.h:670
 msgid "Uranian analemma"
 msgstr "యురేనస్ అనలెమ్మా"
 
 #. TRANSLATORS: Description of the landscape tour script.
-#: src/translations.h:674
+#: src/translations.h:676
 msgid "Look around each installed landscape."
 msgstr "స్థాపించిన ప్రతి ల్యాండ్‌స్కేపును చూడండి."
 
 #. TRANSLATORS: Description of the sky culture tour script.
-#: src/translations.h:676
+#: src/translations.h:678
 msgid "Look at each installed sky culture."
 msgstr "స్థాపించిన ప్రతి ఖగోళ సంస్కృతినీ చూడండి."
 
-#: src/translations.h:677
+#: src/translations.h:679
 msgid "Script to demonstrate a partial lunar eclipse."
 msgstr "పాక్షిక చంద్ర గ్రహణాన్ని ప్రదర్శించే స్క్రిప్టు"
 
-#: src/translations.h:678
+#: src/translations.h:680
 msgid "Script to demonstrate a total lunar eclipse."
 msgstr "సంపూర్ణ చంద్ర గ్రహణాన్ని ప్రదర్శించే స్క్రిప్టు"
 
-#: src/translations.h:679
+#: src/translations.h:681
 msgid "A slow, infinite tour of the sky, looking at random objects."
 msgstr "యాదృచ్ఛిక వస్తువులను చూసుకుంటూ నిదానంగా, అనంతంగా సాగే అంతరిక్ష యాత్ర"
 
-#: src/translations.h:680
+#: src/translations.h:682
 msgid ""
 "Script to demonstrate a total solar eclipse which has happened in 2009 "
 "(location=Rangpur, Bangladesh)."
@@ -7129,11 +7158,11 @@ msgstr ""
 "2009 లో ఏర్పడిన సంపూర్ణ సూర్య గ్రహణం ప్రదర్శించే స్క్రిప్టు "
 "(స్థానం=రంగ్‌పూర్, బంగ్లాదేశ్)"
 
-#: src/translations.h:681
+#: src/translations.h:683
 msgid "Script which runs automatically at startup"
 msgstr "స్టార్టప్‌లో ఆటోమాటిగ్గా నడిచే స్క్రిప్టు"
 
-#: src/translations.h:682
+#: src/translations.h:684
 msgid ""
 "This script displays the constellations of the Zodiac. That means the "
 "constellations which lie along the line which the Sun traces across the "
@@ -7143,7 +7172,7 @@ msgstr ""
 "సంవతస్రంలో సూర్యుడు ప్రయాణించే (ప్రయాణిస్తున్నట్లు కనిపించే) మార్గం వెంట "
 "ఉండే రాశులన్నమాట."
 
-#: src/translations.h:683
+#: src/translations.h:685
 msgid ""
 "Due to the quirks in Mercury's orbit and rotation at certain spots the sun "
 "will rise & set 3 different times in one Mercury day."
@@ -7152,7 +7181,7 @@ msgstr ""
 "కారణంగా ఒక బుధుడి ఒక్క రోజులో మూడేసి సార్లు సూర్యోదయ, సూర్యాస్తమయాలు "
 "ఏర్పడతాయి."
 
-#: src/translations.h:684
+#: src/translations.h:686
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Scorpio and Sagittarius on April 26, 2017."
@@ -7161,7 +7190,7 @@ msgstr ""
 "బయటికొచ్చి ముందుగా కమ్మేసింది. 2017 ఏప్రిల్ 26 న స్కార్పియో, సాజిట్టేరియస్ ల"
 " మధ్య ఇది జరిగింది."
 
-#: src/translations.h:685
+#: src/translations.h:687
 msgid ""
 "Just before Mars eclipses the sun, Phobos pops out from behind and eclipses "
 "it first. Takes place between Taurus and Gemini on July 23, 2031."
@@ -7170,13 +7199,13 @@ msgstr ""
 "బయటికొచ్చి ముందుగా కమ్మేస్తుంది. 2031 జూలై 23 న టారస్, జెమిని ల మధ్య ఇది "
 "జరుగుతుంది."
 
-#: src/translations.h:686
+#: src/translations.h:688
 msgid "Phobos eclipsing the Sun as seen from Olympus Mons on Jan 2, 2021."
 msgstr ""
 "2021 జనవరి 2 న ఫోబోస్ సూర్యుని గ్రహణం పట్టడం. ఒలింపస్ మోన్స్ నుండి చూసిన "
 "దృశ్యం."
 
-#: src/translations.h:687
+#: src/translations.h:689
 msgid ""
 "Phobos occultations of Earth are common, as are occultations of Jupiter. But"
 " occultations of both on the same day are very rare. Here's one that takes "
@@ -7186,7 +7215,7 @@ msgstr ""
 "రెండూ ఒకే రోజున జరగడం మాత్రం అరుదు. 2048 జనవరి 23 న అలాంటిది జరగబోతోంది. "
 "వాస్తవ వేగంలో చూడండి."
 
-#: src/translations.h:688
+#: src/translations.h:690
 msgid ""
 "Phobos races ahead of Mars and transits the sun, passes through it and then "
 "retrogrades back towards the sun and just partially transits it again (only "
@@ -7203,35 +7232,35 @@ msgstr ""
 " నుండి బయటికి వచ్చినపుడు, అది ఇంకా అంగారకుడి నీడలోనే ఉంటుంది. కొద్దిసేపటి "
 "తరువాతనే దానిపై వెలుగు ప్రసరిస్తుంది."
 
-#: src/translations.h:689
+#: src/translations.h:691
 msgid ""
 "Screensaver of various happenings in the Solar System. 300 events in all!"
 msgstr "సౌర కుటుంబం లోని ఘటనల స్క్రీన్‌సేవర్. మొత్తం 300 ఘటనలు!"
 
-#: src/translations.h:690
+#: src/translations.h:692
 msgid "A tour of the western constellations."
 msgstr "పశ్చిమాన రాశుల సందర్శన."
 
-#: src/translations.h:691
+#: src/translations.h:693
 msgid "A tour of the constellations of the selected sky culture."
 msgstr "ఎంచుకున్న ఖగోళ సంస్కృతిలో రాశుల సందర్శన."
 
-#: src/translations.h:692
+#: src/translations.h:694
 msgid "Look at the Sun from big planets of Solar System and Pluto."
 msgstr "సౌర కుటుంబం లోని పెద్ద గ్రహాల నుండి, ప్లూటో నుండీ సూర్యుని చూడండి."
 
-#: src/translations.h:693
+#: src/translations.h:695
 msgid ""
 "Best views of Earth from other Solar System bodies in the 21st Century."
 msgstr ""
 "21 వ శతాబ్దంలో సౌర కుటుంబం లోని వస్తువుల నుండి అత్యుత్తమ భూమి దృశ్యాలు"
 
-#: src/translations.h:694
+#: src/translations.h:696
 msgid "Transit of Venus as seen from Sydney Australia, 6th June 2012."
 msgstr ""
 "2012 జూన్ 6 న ఆస్ట్రేలియా లోని సిడ్నీ నుండి శుక్రుడి ట్రాన్సిట్ దృశ్యం"
 
-#: src/translations.h:695
+#: src/translations.h:697
 msgid ""
 "Flash of the supernova observed by Tycho Brahe in 1572. The Supernovae "
 "plugin has to be enabled."
@@ -7239,7 +7268,7 @@ msgstr ""
 "1572 లో టైకో బ్రాహె చూసిన సూపర్‌నోవా వెలుగు. సూపర్‌నోవా ప్లగిన్ చేతనమై "
 "ఉండాలి."
 
-#: src/translations.h:696
+#: src/translations.h:698
 msgid ""
 "Earth and other planet's Greatest Elongations and Oppositions from Mars "
 "2000-3000"
@@ -7247,7 +7276,7 @@ msgstr ""
 "2000-3000 మధ్య అంగారకుడి నుండి భూమి, ఇతర గ్రహాల అతి గొప్ప ఇలాంగేషన్లు, "
 "అపోజిషన్లూ"
 
-#: src/translations.h:697
+#: src/translations.h:699
 msgid ""
 "Earth Greatest Elongations and Transits from Callisto 2000-3000. Why "
 "Callisto? Well of the 4 Galilean Moons, Callisto is the only one outside of "
@@ -7259,18 +7288,18 @@ msgstr ""
 "బృహస్పతి రేడియేషన్ బెల్టుకు బయట ఉంది. అంచేత, మానవులు ఏనాటికైనా ఏదైనా "
 "బృహస్పతి చంద్రుడిపై నివాసం ఏర్పాటు చేసుకోవాలంటే అది కాలిస్టోయే అవుతుంది."
 
-#: src/translations.h:698
+#: src/translations.h:700
 msgid ""
 "Earth the other visible Planet's Greatest Elongations and Oppositions from "
 "Ceres 2000-2200"
 msgstr ""
 "సెరెస్ 2000-2200 నుండి భూమి, ఇతర గ్రహాల అతి గొప్ప ఇలాంగేషన్లు, అపోజిషన్లు"
 
-#: src/translations.h:699
+#: src/translations.h:701
 msgid "A tour of Messier Objects"
 msgstr "మెస్సియర్ వస్తువుల యాత్ర"
 
-#: src/translations.h:700
+#: src/translations.h:702
 msgid ""
 "Tours around interesting objects, which accessible to observation with "
 "binoculars. The data for the script are taken from the eponymous book by "
@@ -7279,7 +7308,7 @@ msgstr ""
 "బైనాక్యులర్లతో చూడగలిగే వస్తువుల సందర్శన. ఈ స్క్రిప్టుకు అవసరమైన డేటాను గారీ"
 " సెరోనిక్ తన పేరుతోటే రాసిన పుస్తకం నుండి తీసుకున్నారు."
 
-#: src/translations.h:701
+#: src/translations.h:703
 msgid ""
 "This script helps you make an excursion around 20 fun double stars. The list"
 " has been collected by Jerry Lodriguss and published in Sky & Telescope "
@@ -7289,15 +7318,15 @@ msgstr ""
 "జెర్రీ లోడ్రిగస్ సేకరించి, 09/2014 లో స్కై & టెలిస్కోప్ లో ప్రచురించారు. "
 "డేటాను http://www.astropix.com/doubles/ వెబ్‌సైటు నుండి సేకరించారు."
 
-#: src/translations.h:702
+#: src/translations.h:704
 msgid "This script helps you make an excursion around largest known stars."
 msgstr "ఈ స్క్రిప్టు ద్వారా మీరు అత్యంత పెద్ద నక్షత్రాలను సందర్శిస్తారు."
 
-#: src/translations.h:703
+#: src/translations.h:705
 msgid "A tour around objects from the Herschel 400 Catalogue"
 msgstr "హెర్షెల్ 400 క్యాటలాగు లోని వస్తువుల యాత్ర"
 
-#: src/translations.h:704
+#: src/translations.h:706
 msgid ""
 "Ben Crowell has created Binosky, an observing list of Deep Sky Objects for "
 "Binoculars. In the script we give a list of these 31 objects, ordered by "
@@ -7307,7 +7336,7 @@ msgstr ""
 "వస్తువుల జాబితా ఇది. ఇందులో 31 వస్తువులు రైట్ అసెన్షన్ వారీగా పేర్చి "
 "ఉన్నాయి."
 
-#: src/translations.h:705
+#: src/translations.h:707
 msgid ""
 "The Jack Bennett Catalog of Southern Deep-Sky Objects (152 objects in all). "
 "The Bennett catalog was contributed by Auke Slotegraaf."
@@ -7315,7 +7344,7 @@ msgstr ""
 "జాక్ బెన్నెట్ సుదూర దక్షిణాకాశపు వస్తువుల క్యాటలాగు (మొత్తం 152 వస్తువులు). "
 "బెన్నెట్ క్యాటలాగును రూపొందించడంలో ఆకే స్లోటెగ్రాఫ్ దోహదపడ్డాడు."
 
-#: src/translations.h:706
+#: src/translations.h:708
 msgid ""
 "This list of 111 objects by A.J. Crayon and Steve Coe is used by members of "
 "the Saguaro Astronomy Club of Phoenix, AZ, for the Best of the NGC "
@@ -7325,7 +7354,7 @@ msgstr ""
 "ఫీనిక్స్, అరిజోనా లోని సౌవారో ఆస్ట్రానమీ క్లబ్ సభ్యులు బెస్త్ ఆఫ్ ది NGC "
 "అచీవ్‌మెంట్ పురస్కారాన్ని సాధించారు."
 
-#: src/translations.h:707
+#: src/translations.h:709
 msgid ""
 "Demonstration of the mid-time of rare events - triple shadow phenomena of "
 "the satellites of Jupiter from 1900 to 2100. All events are given in "
@@ -7334,7 +7363,7 @@ msgstr ""
 "అరుదైన ఘటనల -  1900 నుండి 2100 వరకు బృహస్పతి ఉపగ్రహాల మూడు నీడల దృగ్విషయం - "
 "మధ్య కాలపు ప్రదర్శన. ఘటనలన్నిటినీ గతిశీల కాలంలో చూపించారు."
 
-#: src/translations.h:708
+#: src/translations.h:710
 msgid ""
 "The planet Jupiter sometimes appears to be without moons, when the four "
 "Galilean satellites are simultaneously invisible because they are passing "
@@ -7347,7 +7376,7 @@ msgstr ""
 "గానీ అలా కనబడకుండా పోతాయి. 1900-2100 మధ్య అలాంటి అరుదైన ఘటనలను ఈ స్క్రిప్టు "
 "చూపిస్తుంది."
 
-#: src/translations.h:709
+#: src/translations.h:711
 msgid ""
 "This script demonstrates interesting phenomena - occultations bright stars "
 "by planets, 2000 to 2040."
@@ -7355,7 +7384,7 @@ msgstr ""
 "2000-2040 మధ్య గ్రహాలు ప్రకాశవంతమైన నక్షత్రాలను అక్కల్టేషను చేసిన ఆసక్తికర "
 "దృగ్విషయాలను ఈ స్క్రిప్టు చూపిస్తుంది."
 
-#: src/translations.h:710
+#: src/translations.h:712
 msgid ""
 "This script demonstrates interesting and very rare phenomena - mutual "
 "occultations of planets, 0 to 2500."
@@ -7363,11 +7392,11 @@ msgstr ""
 "0-2500 మధ్య కాలంలో గ్రహాలు పరస్పర అక్కల్టేషను చేసుకున్న అరుదైన దృగ్విషయాలను "
 "ఈ స్క్రిప్టు చూపిస్తుంది."
 
-#: src/translations.h:711
+#: src/translations.h:713
 msgid "A tour of the Solar System planets"
 msgstr "సౌర కుటుంబ గ్రహాల సందర్శన"
 
-#: src/translations.h:712
+#: src/translations.h:714
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Earth."
@@ -7375,7 +7404,7 @@ msgstr ""
 "అనలెమ్మా ప్రదర్శన - భూమిపై ఒక సంవత్సర కాలంలో సూర్యుడు ఆకాశంలో ప్రయాణించే "
 "మార్గం."
 
-#: src/translations.h:713
+#: src/translations.h:715
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Mars."
@@ -7383,7 +7412,7 @@ msgstr ""
 "అనలెమ్మా ప్రదర్శన - అంగారకుడిపై ఒక సంవత్సర కాలంలో సూర్యుడు ఆకాశంలో "
 "ప్రయాణించే మార్గం."
 
-#: src/translations.h:714
+#: src/translations.h:716
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Saturn."
@@ -7391,7 +7420,7 @@ msgstr ""
 "అనలెమ్మా ప్రదర్శన - శనిపై ఒక సంవత్సర కాలంలో సూర్యుడు ఆకాశంలో ప్రయాణించే "
 "మార్గం."
 
-#: src/translations.h:715
+#: src/translations.h:717
 msgid ""
 "A demonstration of the analemma - the path of the Sun across the sky during "
 "the year on Uranus."
@@ -7399,180 +7428,180 @@ msgstr ""
 "అనలెమ్మా ప్రదర్శన - యురేనస్‌పై ఒక సంవత్సర కాలంలో సూర్యుడు ఆకాశంలో ప్రయాణించే"
 " మార్గం."
 
-#: src/translations.h:719
+#: src/translations.h:721
 msgid "&Undo"
 msgstr "&Undo"
 
-#: src/translations.h:720
+#: src/translations.h:722
 msgid "&Redo"
 msgstr "&Redo"
 
-#: src/translations.h:721
+#: src/translations.h:723
 msgid "Cu&t"
 msgstr "Cut"
 
-#: src/translations.h:722
+#: src/translations.h:724
 msgid "&Copy"
 msgstr "&Copy"
 
-#: src/translations.h:723
+#: src/translations.h:725
 msgid "&Paste"
 msgstr "&Paste"
 
-#: src/translations.h:724 plugins/Oculars/src/ui_ocularDialog.h:1304
+#: src/translations.h:726 plugins/Oculars/src/ui_ocularDialog.h:1304
 #: plugins/Oculars/src/ui_ocularDialog.h:1313
 #: plugins/Oculars/src/ui_ocularDialog.h:1319
 #: plugins/Oculars/src/ui_ocularDialog.h:1340
 msgid "Delete"
 msgstr "తొలగించు"
 
-#: src/translations.h:725
+#: src/translations.h:727
 msgid "Select All"
 msgstr "అన్నిటినీ ఎంచుకో "
 
-#: src/translations.h:726
+#: src/translations.h:728
 msgid "Look in:"
 msgstr "Look in:"
 
-#: src/translations.h:727
+#: src/translations.h:729
 msgid "Directory:"
 msgstr "Directory:"
 
-#: src/translations.h:728
+#: src/translations.h:730
 msgid "Folder"
 msgstr "Folder"
 
-#: src/translations.h:729
+#: src/translations.h:731
 msgid "&Choose"
 msgstr "&Choose"
 
-#: src/translations.h:730 src/ui_configurationDialog.h:1692
+#: src/translations.h:732 src/ui_configurationDialog.h:1692
 #: plugins/TelescopeControl/src/gui/ui_telescopeConfigurationDialog.h:633
 msgid "Cancel"
 msgstr "రద్దు చెయ్యి "
 
-#: src/translations.h:731
+#: src/translations.h:733
 msgid "&Cancel"
 msgstr "&Cancel"
 
-#: src/translations.h:732
+#: src/translations.h:734
 msgid "Files of type:"
 msgstr "ఈ రకపు ఫైళ్ళు:"
 
-#: src/translations.h:733
+#: src/translations.h:735
 msgid "Date Modified"
 msgstr "మార్చిన తేదీ"
 
-#: src/translations.h:734
+#: src/translations.h:736
 msgid "Directories"
 msgstr "డైరెక్టరీలు"
 
-#: src/translations.h:735
+#: src/translations.h:737
 msgid "Computer"
 msgstr "కంప్యూటరు"
 
-#: src/translations.h:736
+#: src/translations.h:738
 msgid "&Open"
 msgstr "&Open"
 
-#: src/translations.h:737
+#: src/translations.h:739
 msgid "&Save"
 msgstr "&Save"
 
-#: src/translations.h:738
+#: src/translations.h:740
 msgid "File &name:"
 msgstr "File &name:"
 
-#: src/translations.h:739
+#: src/translations.h:741
 msgid "Copy &Link Location"
 msgstr "Copy &Link Location"
 
-#: src/translations.h:740
+#: src/translations.h:742
 msgid "Abort"
 msgstr "Abort"
 
-#: src/translations.h:741
+#: src/translations.h:743
 msgid "Ignore"
 msgstr "Ignore"
 
-#: src/translations.h:742
+#: src/translations.h:744
 msgid "&Basic colors"
 msgstr "&Basic colors"
 
-#: src/translations.h:743
+#: src/translations.h:745
 msgid "&Pick Screen Color"
 msgstr "&Pick Screen Color"
 
-#: src/translations.h:744
+#: src/translations.h:746
 msgid "&Custom colors"
 msgstr "&Custom colors"
 
-#: src/translations.h:745
+#: src/translations.h:747
 msgid "&Add to Custom Colors"
 msgstr "&Add to Custom Colors"
 
-#: src/translations.h:746
+#: src/translations.h:748
 msgid "Hu&e:"
 msgstr "Hue:"
 
-#: src/translations.h:747
+#: src/translations.h:749
 msgid "&Sat:"
 msgstr "&Sat:"
 
-#: src/translations.h:748
+#: src/translations.h:750
 msgid "&Val:"
 msgstr "&Val:"
 
-#: src/translations.h:749
+#: src/translations.h:751
 msgid "&Red:"
 msgstr "&Red:"
 
-#: src/translations.h:750
+#: src/translations.h:752
 msgid "&Green:"
 msgstr "&Green:"
 
-#: src/translations.h:751
+#: src/translations.h:753
 msgid "Bl&ue:"
 msgstr "Blue:"
 
-#: src/translations.h:752
+#: src/translations.h:754
 msgid "Select Color"
 msgstr "రంగును ఎంచుకో"
 
-#: src/translations.h:753
+#: src/translations.h:755
 #, qt-format
 msgid "Cursor at %1, %2 Press ESC to cancel"
 msgstr "కర్సరు %1, %2 వద్ద, రద్దు చేసేందుకు ESC నొక్కండి"
 
-#: src/translations.h:754
+#: src/translations.h:756
 msgid "Back"
 msgstr "వెనక్కి"
 
-#: src/translations.h:755
+#: src/translations.h:757
 msgid "Forward"
 msgstr "ముందుకు"
 
-#: src/translations.h:756
+#: src/translations.h:758
 msgid "Parent Directory"
 msgstr "మాతృ డైరెక్టరీ"
 
-#: src/translations.h:757
+#: src/translations.h:759
 msgid "Create New Folder"
 msgstr "కొత్త ఫోల్డరు సృష్టించు"
 
-#: src/translations.h:758
+#: src/translations.h:760
 msgid "List View"
 msgstr "లిస్ట్ వ్యూ"
 
-#: src/translations.h:759
+#: src/translations.h:761
 msgid "Detail View"
 msgstr "వివరమైన వ్యూ"
 
-#: src/translations.h:760
+#: src/translations.h:762
 msgid "Recent Places"
 msgstr "ఇటీవలి స్థలాలు"
 
-#: src/translations.h:761
+#: src/translations.h:763
 #, qt-format
 msgid ""
 "%1 already exists.\n"
@@ -7581,23 +7610,23 @@ msgstr ""
 "%1 ఈసరికే ఉంది.\n"
 "దాని స్థానంలో కొత్తది పెడతారా?"
 
-#: src/translations.h:762
+#: src/translations.h:764
 msgid "&Yes"
 msgstr "&Yes"
 
-#: src/translations.h:763
+#: src/translations.h:765
 msgid "&No"
 msgstr "&No"
 
-#: src/translations.h:764
+#: src/translations.h:766
 msgid "&Select All"
 msgstr "&Select All"
 
-#: src/translations.h:765
+#: src/translations.h:767
 msgid "&Step up"
 msgstr "&Step up"
 
-#: src/translations.h:766
+#: src/translations.h:768
 msgid "Step &down"
 msgstr "Step &down"
 
@@ -8864,7 +8893,7 @@ msgstr "సహాయం"
 msgid "About"
 msgstr "గురించి"
 
-#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:399
+#: src/ui_helpDialogGui.h:248 src/ui_scriptConsole.h:395
 msgid "Log"
 msgstr "లాగ్"
 
@@ -10932,51 +10961,51 @@ msgstr "తేదీ, సమయం (UTC):"
 msgid "Get the recent GRS measurement"
 msgstr "ఇటీవలి GRS కొలతను తెచ్చుకో"
 
-#: src/ui_scriptConsole.h:370
+#: src/ui_scriptConsole.h:366
 msgid "Script console"
 msgstr "స్క్రిప్టు కన్సోల్"
 
-#: src/ui_scriptConsole.h:373
+#: src/ui_scriptConsole.h:369
 msgid "load script from file"
 msgstr "స్క్రిప్టును ఫైలు నుండి లోడు చెయ్యి"
 
-#: src/ui_scriptConsole.h:377
+#: src/ui_scriptConsole.h:373
 msgid "save script to file"
 msgstr "స్క్రిప్టును ఫైలులో భద్రపరచు"
 
-#: src/ui_scriptConsole.h:381
+#: src/ui_scriptConsole.h:377
 msgid "clear"
 msgstr "తుడిచివేయి"
 
-#: src/ui_scriptConsole.h:385
+#: src/ui_scriptConsole.h:381
 msgid "pre-process script using SSC preprocessor"
 msgstr "SSC ప్రాసెసరు వాడి స్క్రిప్టును ప్రీప్రాసెస్ చెయ్యి"
 
-#: src/ui_scriptConsole.h:388
+#: src/ui_scriptConsole.h:384
 msgid "quickly load and run a utility script"
 msgstr "యుటిలిటీ స్క్రిప్టును త్వరగా లోడు చేసి, నడుపు"
 
-#: src/ui_scriptConsole.h:391
+#: src/ui_scriptConsole.h:387
 msgid "run script"
 msgstr "స్క్రిప్టును నడుపు"
 
-#: src/ui_scriptConsole.h:395
+#: src/ui_scriptConsole.h:391
 msgid "stop script"
 msgstr "స్క్రిప్టును ఆపు"
 
-#: src/ui_scriptConsole.h:398
+#: src/ui_scriptConsole.h:394
 msgid "Script"
 msgstr "స్క్రిప్టు"
 
-#: src/ui_scriptConsole.h:400
+#: src/ui_scriptConsole.h:396
 msgid "Output"
 msgstr "ఔట్‌పుట్"
 
-#: src/ui_scriptConsole.h:401
+#: src/ui_scriptConsole.h:397
 msgid "Load scripts from the User Directory by default"
 msgstr ""
 
-#: src/ui_scriptConsole.h:402 plugins/Satellites/src/ui_satellitesDialog.h:796
+#: src/ui_scriptConsole.h:398 plugins/Satellites/src/ui_satellitesDialog.h:796
 #: plugins/Supernovae/src/ui_supernovaeDialog.h:240
 #: plugins/Novae/src/ui_novaeDialog.h:243
 #: plugins/Quasars/src/ui_quasarsDialog.h:310
@@ -10986,15 +11015,15 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/ui_scriptConsole.h:404
+#: src/ui_scriptConsole.h:400
 msgid "Cursor position"
 msgstr "కర్సర్ స్థానం"
 
-#: src/ui_scriptConsole.h:406
+#: src/ui_scriptConsole.h:402
 msgid "Include dir:"
 msgstr "ఈ డైర్‌ను ఇంక్లూడ్ చెయ్యి:"
 
-#: src/ui_scriptConsole.h:407
+#: src/ui_scriptConsole.h:403
 #: plugins/TelescopeControl/src/gui/ui_slewDialog.h:335
 msgid "..."
 msgstr "..."
@@ -18579,42 +18608,42 @@ msgstr "ఈ ప్లగిన్ మౌస్ పాయింటరు కో�
 msgid "Show coordinates of the mouse pointer"
 msgstr "మౌస్ పాయింటరు కోఆర్డినేట్లను చూపించు"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:140
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:141
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec (J2000.0)"
 msgstr "RA/Dec (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:156
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:157
 msgctxt "abbreviated in the plugin"
 msgid "RA/Dec"
 msgstr "RA/Dec"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:179
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:180
 msgctxt "abbreviated in the plugin"
 msgid "Az/Alt"
 msgstr "Az/Alt"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:195
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:196
 msgctxt "abbreviated in the plugin"
 msgid "Gal. Long/Lat"
 msgstr "Gal. Long/Lat"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:211
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:212
 msgctxt "abbreviated in the plugin"
 msgid "Supergal. Long/Lat"
 msgstr "Supergal. Long/Lat"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:230
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:231
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat"
 msgstr "Ecl. Long/Lat"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:249
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:250
 msgctxt "abbreviated in the plugin"
 msgid "Ecl. Long/Lat (J2000.0)"
 msgstr "Ecl. Long/Lat (J2000.0)"
 
-#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:267
+#: plugins/PointerCoordinates/src/PointerCoordinates.cpp:268
 msgctxt "abbreviated in the plugin"
 msgid "HA/Dec"
 msgstr "HA/Dec"
