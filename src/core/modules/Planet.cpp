@@ -928,128 +928,31 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE)
 {
-	// Make sure the parent position is computed for the dateJDE, otherwise
-	// getHeliocentricPos() would return incorrect values.
-	if (parent)
-		parent->computePositionWithoutOrbits(dateJDE);
+	if (fabs(lastJDE-dateJDE)>deltaJDE)
+	{
+		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
+		lastJDE = dateJDE;
+	}
 
 	if (orbitFader.getInterstate()>0.000001f && deltaOrbitJDE > 0.0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
 	{
 		StelCore *core=StelApp::getInstance().getCore();
 
 		double calc_date;
-		// int delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
-		int delta_points;
 
-		if( dateJDE > lastOrbitJDE )
+		for(int d = 0; d < ORBIT_SEGMENTS; d++)
 		{
-			delta_points = static_cast<int>(0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
-		}
-		else
-		{
-			delta_points = static_cast<int>(-0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
-		}
-		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
-
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJDE, delta_points);
-
-		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
-		{
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
+			calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+			orbit[d] = getHeliocentricEclipticPos(calc_date);
+			if (parent)
 			{
-				if(d + delta_points >= ORBIT_SEGMENTS-1 )
-				{
-					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-
-					// date increments between points will not be completely constant though
-					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-					if (osculatingFunc)
-					{
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
-					}
-					else
-					{
-						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
-					}
-					orbitP[d] = eclipticPos;
-					orbit[d] = getHeliocentricEclipticPos();
-				}
-				else
-				{
-					orbitP[d] = orbitP[d+delta_points];
-					orbit[d] = getHeliocentricPos(orbitP[d]);
-				}
+				orbit[d] += parent->getHeliocentricEclipticPos(dateJDE) -
+							parent->getHeliocentricEclipticPos(calc_date);
 			}
-
-			lastOrbitJDE = new_date;
-		}
-		else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS  && orbitCached)
-		{
-			for( int d=ORBIT_SEGMENTS-1; d>=0; d-- )
-			{
-				if(d + delta_points < 0 )
-				{
-					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-
-					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-					if (osculatingFunc) {
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
-					}
-					else
-					{
-						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
-					}
-					orbitP[d] = eclipticPos;
-					orbit[d] = getHeliocentricEclipticPos();
-				}
-				else
-				{
-					orbitP[d] = orbitP[d+delta_points];
-					orbit[d] = getHeliocentricPos(orbitP[d]);
-				}
-			}
-
-			lastOrbitJDE = new_date;
-		}
-		else if( delta_points || !orbitCached)
-		{
-			// update all points (less efficient)
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			{
-				calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-				computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-				if (osculatingFunc)
-				{
-					(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
-				}
-				else
-				{
-					coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
-				}
-				orbitP[d] = eclipticPos;
-				orbit[d] = getHeliocentricEclipticPos();
-			}
-
-			lastOrbitJDE = dateJDE;
-			if (!osculatingFunc) orbitCached = 1;
 		}
 
-
-		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-
-		lastJDE = dateJDE;
-	}
-	else if (fabs(lastJDE-dateJDE)>deltaJDE)
-	{
-		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-		if (orbitFader.getInterstate()>0.000001f)
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-				orbit[d]=getHeliocentricPos(orbitP[d]);
-		lastJDE = dateJDE;
+		lastOrbitJDE = dateJDE;
+		if (!osculatingFunc) orbitCached = 1;
 	}
 }
 

@@ -359,7 +359,6 @@ public:
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];  // store heliocentric coordinates for drawing the orbit
-	Vec3d orbitP[ORBIT_SEGMENTS+1]; // store local coordinate for orbit
 	double lastOrbitJDE;
 	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;
