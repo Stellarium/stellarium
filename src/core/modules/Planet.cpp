@@ -937,10 +937,7 @@ void Planet::computePosition(const double dateJDE)
 
 	if (orbitFader.getInterstate()>0.000001f && deltaOrbitJDE > 0.0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
 	{
-		StelCore *core=StelApp::getInstance().getCore();
-
 		double calc_date;
-
 		for(int d = 0; d < ORBIT_SEGMENTS; d++)
 		{
 			calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
