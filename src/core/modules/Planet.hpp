@@ -28,6 +28,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
+#include <QCache>
 #include <QString>
 
 // The callback type for the external position computation function
@@ -693,6 +694,9 @@ private:
 						  const QByteArray& fSrc,
 						  const QByteArray& prefix=QByteArray(),
 						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
+
+	// Cache of positions in the parent ecliptic coordinates in AU.
+	mutable QCache<double, Vec3d> positionsCache;
 };
 
 #endif // PLANET_HPP

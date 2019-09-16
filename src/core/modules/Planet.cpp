@@ -226,7 +226,8 @@ Planet::Planet(const QString& englishName,
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
 	  gl(Q_NULLPTR),
-	  iauMoonNumber("")
+	  iauMoonNumber(""),
+	  positionsCache(ORBIT_SEGMENTS)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
@@ -943,6 +944,13 @@ void Planet::computePosition(const double dateJDE)
 		for(int d = 0; d < ORBIT_SEGMENTS; d++)
 		{
 			calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+
+			// Round to a number of deltaOrbitJDE to improve caching.
+			if (d != ORBIT_SEGMENTS / 2)
+			{
+				calc_date = nearbyint(calc_date / deltaOrbitJDE) * deltaOrbitJDE;
+			}
+
 			orbit[d] = getHeliocentricEclipticPos(calc_date);
 			if (parent)
 			{
@@ -1122,12 +1130,20 @@ double Planet::getMeanSolarDay() const
 // Get the Planet position in the parent Planet ecliptic coordinate in AU
 Vec3d Planet::getEclipticPos(double dateJDE) const
 {
+	// Use current position if the time match.
 	if (dateJDE == lastJDE)
 		return eclipticPos;
 
-	Vec3d pos, velocity;
-	coordFunc(dateJDE, pos, velocity, orbitPtr);
-	return pos;
+	// Otherwise try to use a cached position.
+	Vec3d *pos = positionsCache[dateJDE];
+	if (!pos)
+	{
+		pos = new Vec3d;
+		Vec3d velocity;
+		coordFunc(dateJDE, *pos, velocity, orbitPtr);
+		positionsCache.insert(dateJDE, pos);
+	}
+	return *pos;
 }
 
 // Return heliocentric coordinate of p
