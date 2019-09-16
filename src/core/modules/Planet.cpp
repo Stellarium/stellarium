@@ -1217,9 +1217,14 @@ double Planet::getMeanSolarDay() const
 }
 
 // Get the Planet position in the parent Planet ecliptic coordinate in AU
-Vec3d Planet::getEclipticPos() const
+Vec3d Planet::getEclipticPos(double dateJDE) const
 {
-	return eclipticPos;
+	if (dateJDE == lastJDE)
+		return eclipticPos;
+
+	Vec3d pos, velocity;
+	coordFunc(dateJDE, pos, velocity, orbitPtr);
+	return pos;
 }
 
 // Return heliocentric coordinate of p
@@ -1234,6 +1239,21 @@ Vec3d Planet::getHeliocentricPos(Vec3d p) const
 		while (pp->parent.data())
 		{
 			pos += pp->eclipticPos;
+			pp = pp->parent.data();
+		}
+	}
+	return pos;
+}
+
+Vec3d Planet::getHeliocentricEclipticPos(double dateJDE) const
+{
+	Vec3d pos = getEclipticPos(dateJDE);
+	const Planet* pp = parent.data();
+	if (pp)
+	{
+		while (pp->parent.data())
+		{
+			pos += pp->getEclipticPos(dateJDE);
 			pp = pp->parent.data();
 		}
 	}

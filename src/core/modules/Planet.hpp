@@ -300,13 +300,16 @@ public:
 	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
-	Vec3d getEclipticPos() const;
+	Vec3d getEclipticPos(double dateJDE) const;
+	Vec3d getEclipticPos() const {return getEclipticPos(lastJDE);}
 
 	//! Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
+	Vec3d getHeliocentricEclipticPos(double dateJDE) const;
 
 	//! Return the heliocentric transformation for local coordinate
 	Vec3d getHeliocentricPos(Vec3d) const;
+
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	//! Get the planet velocity around the parent planet in ecliptical coordinates in AU/d
