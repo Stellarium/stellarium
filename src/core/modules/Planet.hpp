@@ -360,10 +360,8 @@ public:
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];  // store heliocentric coordinates for drawing the orbit
-	double lastOrbitJDE;
 	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;
-	bool orbitCached;               // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                // whether to connect the beginning of the orbit line to
 					// the end: good for elliptical orbits, bad for parabolic
 					// and hyperbolic orbits
@@ -487,6 +485,9 @@ protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	void computeModelMatrix(Mat4d &result) const;
+
+	//! Update the orbit position values.
+	void computeOrbit();
 
 	Vec3f getCurrentOrbitColor() const;
 	

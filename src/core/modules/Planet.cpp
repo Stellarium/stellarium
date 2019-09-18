@@ -188,10 +188,8 @@ Planet::Planet(const QString& englishName,
 	       const QString& pTypeStr)
 	: flagNativeName(true),
 	  flagTranslatedName(true),
-	  lastOrbitJDE(0.0),
 	  deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
-	  orbitCached(false),
 	  closeOrbit(acloseOrbit),
 	  englishName(englishName),
 	  nameI18(englishName),
@@ -933,31 +931,6 @@ void Planet::computePosition(const double dateJDE)
 	{
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
 		lastJDE = dateJDE;
-	}
-
-	if (orbitFader.getInterstate()>0.000001f && deltaOrbitJDE > 0.0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
-	{
-		double calc_date;
-		for(int d = 0; d < ORBIT_SEGMENTS; d++)
-		{
-			calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-
-			// Round to a number of deltaOrbitJDE to improve caching.
-			if (d != ORBIT_SEGMENTS / 2)
-			{
-				calc_date = nearbyint(calc_date / deltaOrbitJDE) * deltaOrbitJDE;
-			}
-
-			orbit[d] = getHeliocentricEclipticPos(calc_date);
-			if (parent)
-			{
-				orbit[d] += parent->getHeliocentricEclipticPos(dateJDE) -
-							parent->getHeliocentricEclipticPos(calc_date);
-			}
-		}
-
-		lastOrbitJDE = dateJDE;
-		if (!osculatingFunc) orbitCached = 1;
 	}
 }
 
@@ -3262,6 +3235,29 @@ Vec3f Planet::getCurrentOrbitColor() const
 	return orbColor;
 }
 
+void Planet::computeOrbit()
+{
+	double dateJDE = lastJDE;
+	double calc_date;
+	for(int d = 0; d < ORBIT_SEGMENTS; d++)
+	{
+		calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+
+		// Round to a number of deltaOrbitJDE to improve caching.
+		if (d != ORBIT_SEGMENTS / 2)
+		{
+			calc_date = nearbyint(calc_date / deltaOrbitJDE) * deltaOrbitJDE;
+		}
+
+		orbit[d] = getHeliocentricEclipticPos(calc_date);
+		if (parent)
+		{
+			orbit[d] += parent->getHeliocentricEclipticPos(dateJDE) -
+				parent->getHeliocentricEclipticPos(calc_date);
+		}
+	}
+}
+
 // draw orbital path of Planet
 void Planet::drawOrbit(const StelCore* core)
 {
@@ -3270,8 +3266,8 @@ void Planet::drawOrbit(const StelCore* core)
 	if (!static_cast<bool>(re.siderealPeriod))
 		return;
 
-	if (parent)
-		parent->computePositionWithoutOrbits(lastJDE);
+	// Update the orbit positions to the current planet date.
+	computeOrbit();
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
 
