@@ -845,17 +845,6 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - core->getObserverHeliocentricEclipticPos());
 }
 
-// Compute the position in the parent Planet coordinate system
-// Actually call the provided function to compute the ecliptical position
-void Planet::computePositionWithoutOrbits(const double dateJDE)
-{
-	if (fabs(lastJDE-dateJDE)>deltaJDE)
-	{
-		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-		lastJDE = dateJDE;
-	}
-}
-
 // return value in radians!
 // For Earth, this is epsilon_A, the angle between earth's rotational axis and mean ecliptic of date.
 // Details: e.g. Hilton etal, Report on Precession and the Ecliptic, Cel.Mech.Dyn.Astr.94:351-67 (2006), Fig1.
