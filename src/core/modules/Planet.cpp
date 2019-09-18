@@ -227,7 +227,7 @@ Planet::Planet(const QString& englishName,
 	  halo(hasHalo),
 	  gl(Q_NULLPTR),
 	  iauMoonNumber(""),
-	  positionsCache(ORBIT_SEGMENTS)
+	  positionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
