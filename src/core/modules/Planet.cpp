@@ -3228,7 +3228,9 @@ void Planet::computeOrbit()
 {
 	double dateJDE = lastJDE;
 	double calc_date;
-	Vec3d parentPos = parent->getHeliocentricEclipticPos(dateJDE);
+	Vec3d parentPos;
+	if (parent)
+		parentPos = parent->getHeliocentricEclipticPos(dateJDE);
 
 	for(int d = 0; d < ORBIT_SEGMENTS; d++)
 	{
