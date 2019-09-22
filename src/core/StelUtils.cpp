@@ -725,8 +725,9 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 	else
 	{
-		tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); //- WTF???
-		//tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
+		// FIXME: Modifying this cast to modern style breaks a test.
+		//tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); //- WTF???
+		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
 	}
 	td = 365 * tc + tc/4;
 	te = ((tb - td) * 10000)/306001;
