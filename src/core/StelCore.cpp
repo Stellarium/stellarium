@@ -1254,7 +1254,7 @@ void StelCore::moveObserverTo(const StelLocation& target, double duration, doubl
 	emit locationChanged(getCurrentLocation());
 }
 
-float StelCore::getUTCOffset(const double JD) const
+double StelCore::getUTCOffset(const double JD) const
 {
 	int year, month, day, hour, minute, second;
 	StelUtils::getDateFromJulianDay(JD, &year, &month, &day);
@@ -1370,7 +1370,7 @@ float StelCore::getUTCOffset(const double JD) const
 		}
 	}
 
-	return shiftInSeconds / 3600.0f;
+	return shiftInSeconds / 3600.0;
 }
 
 QString StelCore::getCurrentTimeZone() const

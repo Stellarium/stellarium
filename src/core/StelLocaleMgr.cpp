@@ -237,7 +237,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 {
 	int year, month, day, dayOfWeek;
-	double shift = core->getUTCOffset(JD)*0.041666666666;
+	const double shift = core->getUTCOffset(JD)*0.041666666666;
 	StelUtils::getDateFromJulianDay(JD+shift, &year, &month, &day);
 	dayOfWeek = static_cast<int>(floor(fmod(JD, 7)));
 	QString str;
@@ -251,6 +251,15 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 			break;
 		case SDateYYYYMMDD:
 			str = QString("%1-%2-%3").arg(year,4,10).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
+			break;
+		case SDateWWMMDDYYYY:
+			str = QString("%1, %2-%3-%4").arg(shortDayName(dayOfWeek)).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0')).arg(year,4,10);
+			break;
+		case SDateWWDDMMYYYY:
+			str = QString("%1, %2-%3-%4").arg(shortDayName(dayOfWeek)).arg(day,2,10,QLatin1Char('0')).arg(month,2,10,QLatin1Char('0')).arg(year,4,10);
+			break;
+		case SDateWWYYYYMMDD:
+			str = QString("%1, %2-%3-%4").arg(shortDayName(dayOfWeek)).arg(year,4,10).arg(month,2,10,QLatin1Char('0')).arg(day,2,10,QLatin1Char('0'));
 			break;
 		case SDateSystemDefault:
 			str = StelUtils::localeDateString(year, month, day, dayOfWeek);
@@ -267,7 +276,7 @@ QString StelLocaleMgr::getPrintableDateLocal(double JD) const
 QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 {
 	int hour, minute, second, millsec;
-	double shift = core->getUTCOffset(JD)*0.041666666666;
+	const double shift = core->getUTCOffset(JD)*0.041666666666;
 	StelUtils::getTimeFromJulianDay(JD+shift, &hour, &minute, &second, &millsec);
 	QTime t(hour, minute, second, millsec);
 	switch (timeFormat)
@@ -280,7 +289,7 @@ QString StelLocaleMgr::getPrintableTimeLocal(double JD) const
 			return t.toString("hh:mm:ss AP");
 		default:
 			qWarning() << "WARNING: unknown time format, fallback to system default";
-			return t.toString(Qt::LocaleDate);
+			return t.toString(Qt::DefaultLocaleShortDate);
 	}
 }
 
@@ -304,9 +313,9 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 			timeZoneST = qc_("LTST", "solar time");
 		}
 
-		float shift = core->getUTCOffset(JD);		
-		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
-		if(shift<0.0f)
+		const double shift = core->getUTCOffset(JD);
+		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(shift)));
+		if(shift<0.0)
 			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
 		else
 			timeZone = QString("UTC+%1").arg(tz.toString("hh:mm"));
@@ -317,9 +326,9 @@ QString StelLocaleMgr::getPrintableTimeZoneLocal(double JD) const
 	else
 	{
 		// TODO: Make sure LMST/LTST would make sense on other planet, or inhibit it?
-		float shift = core->getUTCOffset(JD);
-		QTime tz = QTime(0, 0, 0).addSecs(3600*qAbs(shift));
-		if(shift<0.0f)
+		const double shift = core->getUTCOffset(JD);
+		QTime tz = QTime(0, 0, 0).addSecs(static_cast<int>(3600*qAbs(shift)));
+		if(shift<0.0)
 			timeZone = QString("UTC-%1").arg(tz.toString("hh:mm"));
 		else
 			timeZone = QString("UTC+%1").arg(tz.toString("hh:mm"));
@@ -369,6 +378,9 @@ StelLocaleMgr::SDateFormat StelLocaleMgr::stringToSDateFormat(const QString& df)
 	if (df == "mmddyyyy") return SDateMMDDYYYY;
 	if (df == "ddmmyyyy") return SDateDDMMYYYY;
 	if (df == "yyyymmdd") return SDateYYYYMMDD;  // iso8601
+	if (df == "wwmmddyyyy") return SDateWWMMDDYYYY;
+	if (df == "wwddmmyyyy") return SDateWWDDMMYYYY;
+	if (df == "wwyyyymmdd") return SDateWWYYYYMMDD;
 	qWarning() << "WARNING: unrecognized date_display_format : " << df << " system_default used.";
 	return SDateSystemDefault;
 }
@@ -386,6 +398,15 @@ QString StelLocaleMgr::sDateFormatToString(SDateFormat df) const
 			break;
 		case SDateYYYYMMDD:
 			dfmt = "yyyymmdd";
+			break;
+		case SDateWWMMDDYYYY:
+			dfmt = "wwmmddyyyy";
+			break;
+		case SDateWWDDMMYYYY:
+			dfmt = "wwddmmyyyy";
+			break;
+		case SDateWWYYYYMMDD:
+			dfmt = "wwyyyymmdd";
 			break;
 		case SDateSystemDefault:
 			dfmt = "system_default";
@@ -412,6 +433,16 @@ QString StelLocaleMgr::getQtDateFormatStr() const
 		case SDateSystemDefault:
 			dfmt = "yyyy.MM.dd";
 			break;
+		case SDateWWDDMMYYYY:
+			dfmt = "ddd, dd.MM.yyyy";
+			break;
+		case SDateWWMMDDYYYY:
+			dfmt = "ddd, MM.dd.yyyy";
+			break;
+		case SDateWWYYYYMMDD:
+			dfmt = "ddd, yyyy.MM.dd";
+			break;
+
 		default:
 			qWarning() << "WARNING: unknown date format, fallback to system default";
 			dfmt = "yyyy.MM.dd";

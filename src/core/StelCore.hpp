@@ -291,7 +291,7 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 	//! Get the UTC offset on the current location (in hours)
-	float getUTCOffset(const double JD) const;
+	double getUTCOffset(const double JD) const;
 
 	QString getCurrentTimeZone() const;
 	void setCurrentTimeZone(const QString& tz);

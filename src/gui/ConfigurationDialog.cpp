@@ -1629,13 +1629,14 @@ void ConfigurationDialog::populateDateFormatsList()
 	int index = dfmts->currentIndex();
 	QVariant selectedDateFormat = dfmts->itemData(index);
 	dfmts->clear();
-	//For each format, display the localized name and store the key as user
-	//data. Unfortunately, there's no other way to do this than with a cycle.
+	//For each format, display the localized name and store the key as user data.
 	dfmts->addItem(q_("System default"), "system_default");
 	dfmts->addItem(q_("yyyy-mm-dd (ISO 8601)"), "yyyymmdd");
 	dfmts->addItem(q_("dd-mm-yyyy"), "ddmmyyyy");
 	dfmts->addItem(q_("mm-dd-yyyy"), "mmddyyyy");
-
+	dfmts->addItem(q_("ww, yyyy-mm-dd"), "wwyyyymmdd");
+	dfmts->addItem(q_("ww, dd-mm-yyyy"), "wwddmmyyyy");
+	dfmts->addItem(q_("ww, mm-dd-yyyy"), "wwmmddyyyy");
 	//Restore the selection
 	index = dfmts->findData(selectedDateFormat, Qt::UserRole, Qt::MatchCaseSensitive);
 	dfmts->setCurrentIndex(index);

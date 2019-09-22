@@ -725,8 +725,8 @@ void getDateFromJulianDay(const double jd, int *yy, int *mm, int *dd)
 	}
 	else
 	{
-		// tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); - WTF???
-		tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
+		tc = static_cast<long>((static_cast<unsigned long long>(tb*20) - 2442) / 7305); //- WTF???
+		//tc = (long)(((unsigned long long)tb*20 - 2442) / 7305);
 	}
 	td = 365 * tc + tc/4;
 	te = ((tb - td) * 10000)/306001;
@@ -911,9 +911,9 @@ QString localeDateString(const int year, const int month, const int day, const i
 	QDate test(year, month, day);
 
 	// try to avoid QDate's non-astronomical time here, don't do BCE or year 0.
-	if (year > 0 && test.isValid() && !test.toString(Qt::LocaleDate).isEmpty())
+	if (year > 0 && test.isValid() && !test.toString(Qt::DefaultLocaleShortDate).isEmpty())
 	{
-		return test.toString(Qt::LocaleDate);
+		return test.toString(Qt::DefaultLocaleShortDate);
 	}
 	else
 	{
