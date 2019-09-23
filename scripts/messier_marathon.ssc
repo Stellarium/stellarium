@@ -1,0 +1,181 @@
+//
+// Name: Messier Marathon
+// Author: ultrapre@github.com
+// Version: 1.0
+// License: Public Domain
+// Description: Messier Marathon on March 20, 2020. The data for the script are taken from GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm
+
+// Made on Stellarium 0.19.1
+
+include("common_objects.inc");
+core.clear("natural");
+
+LandscapeMgr.setCurrentLandscapeName("Guereins",1);
+
+LandscapeMgr.setFlagCardinalsPoints(true);
+
+var TitleNow = "Messier Marathon";
+
+if(core.getAppLanguage()=="zh_CN"||core.getAppLanguage()=="zh"){
+	TitleNow = "梅西耶天体马拉松";
+}
+
+var MyLocation = core.getObserverLocationInfo();
+
+if((MyLocation.latitude < 15) || (MyLocation.latitude > 50)){
+	LabelMgr.labelScreen("Your latitude May not fitable, now turn to North..." ,60,624,true,30,"#ff0000");
+	core.wait(3);
+	core.setObserverLocation(114, 25, 0, 1, "", "Earth");
+	LabelMgr.deleteAllLabels();
+}
+
+core.setTimezone("LMST");
+
+LandscapeMgr.setFlagCardinalsPoints(true);
+
+LabelMgr.labelScreen(TitleNow,200,200,true,30,"#ff0000");
+core.wait(3);
+LabelMgr.deleteAllLabels();
+
+
+
+LabelMgr.deleteAllLabels();
+MarkerMgr.deleteAllMarkers();
+core.setDiskViewport(false);
+ConstellationMgr.setFlagIsolateSelected(true);
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(true);
+StelMovementMgr.setEquatorialMount(false);
+LandscapeMgr.setFlagLandscape(true);
+LandscapeMgr.setFlagAtmosphere(true);
+
+
+var objNameSum = ["M45","M74","M77","M31","M32","M110","M33","M76","M52","M103","M34","M79","M42","M43","M78","M1","M41","M93","M47","M46","M50","M48","M35","M37","M36","M38","M95","M96","M105","M65","M66","M101","M63","M51","M94","M102","M3","M64","M53","M59","M60","M87","M89","M90","M58","M84","M86","M88","M91","M98","M99","M100","M85","M49","M61","M104","M68","M44","M83","M67","M5","M13","M92","M57","M56","M29","M39","M27","M71","M107","M12","M10","M14","M9","M4","M80","M19","M62","M11","M26","M16","M17","M18","M24","M81","M82","M23","M21","M20","M8","M25","M28","M22","M69","M70","M54","M55","M75","M6","M7","M15","M2","M72","M73","M97","M108","M40","M106","M109","M30"];
+
+
+var NowTime = ["2020-03-20T19:30:00","2020-03-20T19:40:00","2020-03-20T19:45:00","2020-03-20T19:47:00","2020-03-20T19:47:00","2020-03-20T19:47:00","2020-03-20T19:48:00","2020-03-20T20:15:00","2020-03-20T21:05:00","2020-03-20T21:10:00","2020-03-20T21:17:00","2020-03-20T21:20:00","2020-03-20T21:22:00","2020-03-20T21:22:00","2020-03-20T21:26:00","2020-03-20T21:30:00","2020-03-20T21:30:00","2020-03-20T21:30:00","2020-03-20T21:33:00","2020-03-20T21:33:00","2020-03-20T21:33:00","2020-03-20T21:41:00","2020-03-20T22:36:00","2020-03-20T22:36:00","2020-03-20T22:36:00","2020-03-20T22:36:00","2020-03-20T22:44:00","2020-03-20T22:44:00","2020-03-20T22:44:00","2020-03-20T22:48:00","2020-03-20T22:48:00","2020-03-20T22:56:00","2020-03-20T23:00:00","2020-03-20T23:00:00","2020-03-20T23:04:00","2020-03-20T23:09:00","2020-03-20T23:10:00","2020-03-20T23:15:00","2020-03-20T23:18:00","2020-03-20T23:44:00","2020-03-20T23:44:00","2020-03-20T23:49:00","2020-03-20T23:49:00","2020-03-20T23:49:00","2020-03-20T23:49:00","2020-03-20T23:52:00","2020-03-20T23:52:00","2020-03-20T23:54:00","2020-03-20T23:54:00","2020-03-21T0:00:00","2020-03-21T0:00:00","2020-03-21T0:00:00","2020-03-21T0:00:00","2020-03-21T0:05:00","2020-03-21T0:05:00","2020-03-21T0:08:00","2020-03-21T0:08:00","2020-03-21T0:08:00","2020-03-21T2:49:00","2020-03-21T2:54:00","2020-03-21T3:02:00","2020-03-21T3:02:00","2020-03-21T3:03:00","2020-03-21T3:05:00","2020-03-21T3:05:00","2020-03-21T3:08:00","2020-03-21T3:08:00","2020-03-21T3:12:00","2020-03-21T3:12:00","2020-03-21T3:16:00","2020-03-21T3:16:00","2020-03-21T3:16:00","2020-03-21T3:16:00","2020-03-21T3:16:00","2020-03-21T3:20:00","2020-03-21T3:20:00","2020-03-21T3:20:00","2020-03-21T3:20:00","2020-03-21T3:26:00","2020-03-21T3:26:00","2020-03-21T3:29:00","2020-03-21T3:29:00","2020-03-21T3:29:00","2020-03-21T3:29:00","2020-03-21T3:31:00","2020-03-21T3:31:00","2020-03-21T5:06:00","2020-03-21T5:06:00","2020-03-21T5:06:00","2020-03-21T5:06:00","2020-03-21T5:12:00","2020-03-21T5:12:00","2020-03-21T5:12:00","2020-03-21T5:12:00","2020-03-21T5:12:00","2020-03-21T5:12:00","2020-03-21T5:12:00","2020-03-21T5:12:00","2020-03-21T5:22:00","2020-03-21T5:22:00","2020-03-21T5:27:00","2020-03-21T5:27:00","2020-03-21T5:27:00","2020-03-21T5:27:00","2020-03-21T5:31:00","2020-03-21T5:31:00","2020-03-21T5:34:00","2020-03-21T5:36:00","2020-03-21T5:39:00","2020-03-21T5:39:00"];
+
+
+var PasteTextzh_CN = ["难度=0", "很弥散，很暗，难度极大", "比74容易多了，小", "肉眼可见，没难度", "比110难确认，小", "在31西边，容易发觉", "弥散，极大，较亮", "小，易定位，没有想象的恐怖", "难定位，易发觉确认", "小，易定位，别和NGC663搞混了", "大，疏散，容易", "易看出模糊，不难找，旁有小星相伴", "肉眼可见，比31好看", "与42很近，不太容易看出云雾状", "小，暗，周围没什么星星", "容易定位，透明度好的话还是容易发现的", "肉眼可见，较易", "易定位确认", "大，疏散", "大，疏散", "亮，易确认，不好定位", "大，较难定位，易和NGC2506混淆", "易，较疏散", "易，模糊", "易，疏散", "易，大，疏散", "与96、105非常近", "易定位确认，可协助确认95、105", "暗", "挨的很近，有些像81、82的样子", "附近有3628，别以为自己发现了新彗星", "像变暗的M33，对天空条件要求高", "难定位，附近有4颗星排成倒7形状", "易，可看到伴星系", "易确认", "不易定位，小，稍暗", "不易定位，亮", "不易定位，附近无亮星", "易定位", "在60旁边，还是容易确认的", "算是较容易的一个了", "和85一样算是亮的了，容易确认", "暗，使劲看", "比89容易看出来，也容易定位", "易定位，眼一瞪就出来了", "84、86附近有个NGC4438，别搞错了", "和84在一块儿，更靠近4438", "就在90上面，和90差不多", "使劲看", "室女座星系团这堆东西没有容易的", "99比98容易确认多了", "先确定100再找98、99", "虽位置远些，但很亮，算是容易找的了", "小，不易定位，有点难度", "不易定位，易确认", "易定位确认，小", "易确认，附近有一5等星", "肉眼可见，大，亮", "在星系里算是亮且大的了，不难找", "亮，易确认", "只要位置对，一下就确认了", "这么出名的东西，不用我介绍，像扁担星", "从天龙座找过来可能更容易定位", "小，20倍以上还是容易发觉的", "比57要难许多，不易定位，很小", "易，小，看上去像7、8颗星组成的星团", "比想象的大，很疏散，不易定位", "先找到71，再找27较容易定位", "容易定位，在50双筒中都很容易确认", "易定位确认", "亮，像M13一样，好找", "和12在一起找，比12还亮", "难定位，易确认", "小，不易确认", "亮，大，别忘了看看附近的NGC6144", "在低倍下不易确认，高与20倍就很容易了", "顺着M4与心宿二的联线找下去，易确认", "从19往下找，比19暗，但也易确认", "易定位，亮，和M13差不多", "通过11定位26，易确认", "易", "易", "易", "", "定位难，亮，易确认", "和81在一起，相互垂直", "大，稍模糊", "和20在一起", "不难看出弥漫星云", "肉眼可见，极易", "大，易", "易定位确认，亮", "M13第二", "", "", "", "", "", "太大，太疏散反而不易确认", "比M6还大", "易定位确认", "", "", "", "比想象的亮，60双筒都能看到", "比97暗，长条状，得使劲看", "20倍以上的镜子很容易确认", "难定位，亮，易确认", "在晨光中只有看起来太费劲了，暗", ""];
+
+var PasteTextEn = ["Difficulty is 0", "Very diffuse, very dark, very difficult", "More easy than 74, small", "Visible to the naked eye, no difficulty", "More difficult than 110 to verify, small", "In the west of 31, it is easy to detect", "Diffuse, great, brighter", "Small, easy to locate, not as horror as imagined", "Difficult to locate, easy to detect and verify", "Small, easy to locate, don't confuse with NGC663", "Large, scattered, easy", "Fuzzy, easy to find, accompanied by a small star", "Visible to the naked eye, better than 31", "Very close to 42, not easy to see the fuzzy", "Small, dark, few stars around", "Easy to locate, easy to detect in a good transparency.", "Visible to the naked eye, easier", "Easy to locate and verify", "Large, scattered", "Large, scattered", "Bright, easy to verify, difficult to locate", "Large, difficult to locate, easy to confuse with NGC2506", "Easy, more scattered", "Easy, fuzzy", "Easy, scattered", "Easy, large, scattered", "Very close to 96,105", "Easy to locate and verify, assist to verify 95, 105", "Dark", "Very close, it’s like 81, 82.", "There is 3628 nearby, don't think you have found a new comet", "Like the darkened M33, require a high sky conditions", "Difficult to locate, 4 stars of the inverted 7 shape beside", "Easy, you can see the companion galaxy", "Easy to verify", "Not easy to locate, small, slightly dark", "Not easy to locate, bright", "Not easy to locate, no bright stars nearby", "Easy to locate", "Beside 60, it is easy to verify", "It’s an easier one.", "As bright as 85, easy to verify", "Dark, hard to look", "Easy to detect than 89, easy to locate", "Easy to locate, detect once", "There is an NGC4438 near 84 and 86, don't make a mistake.", "84 are together, closer to 4438", "Just above 90, almost like 90", "Look hard", "This bunch of things in the Virgo Cluster is not easy.", "99 is easier to verify than 98.", "First find 100 and then find 98, 99", "Far away, but very bright, easy to find.", "Small, not easy to locate, a little difficult", "Not easy to locate, easy to verify", "Easy to locate and verify, small", "Easy to verify, a star 5 magnitude nearby", "Visible to the naked eye, big, bright", "Bright and big in the galaxies,  not hard to find", "Bright, easy to verify", "Easy to verify in a right location.", "Famous, like the shouler pole star.", "It may be easier to locate from the Dragon.", "Small, 20 times or more is still easy to detect", "More difficult than 57, not easy to locate, very small", "Easy, small, looks like a cluster of stars 7, 8 magnitude", "Larger than imagined, very scattered, not easy to locate", "Find 71 first, then find 27, and will be easier to locate", "Easy to locate, easy to verify in 50 binos", "Easy to locate and verify", "Bright, like M13, easy to find", "Detect it with 12, brighter than 12", "Difficult to locate, easy to verify", "Small, not easy to verify", "Bright, big, don't forget to detect NGC6144 nearby", "Not easy to verify at low power, easy at high power.", "Follow the line of M4 and Antares, easy to verify", "Looking down from 19, darker than 19, but easy to verify", "Easy to locate, bright, and almost like M13", "Easy to locate 26 by 11", "Easy", "Easy", "Easy", "", "Difficult to locate, bright, easy to verify", "Beside 81, Vertical to each other", "Large, a little fuzzy", "Beside 20", "It’s not hard to see the diffuse nebula", "Visible to the naked eye, extremely easy", "Big, easy", "Easy to locate and verify, bright", "M13 second", "", "", "", "", "", "Too big, scattered, not easy to verify", "Bigger than M6", "Easy to locate and verify", "", "", "", "Brighter than imagined, can be detected with 60 binos", "Darker than 97, long strips, look hard", "Easy to verify with more than 20 times binos", "Difficult to locate, bright, easy to verify", "In the morning light, it looks too hard, dark", ""];
+
+var showtime = ["19:30","19:40","19:45","19:47","19:47","19:47","19:48","20:15","21:05","21:10","21:17","21:20","21:22","21:22","21:26","21:30","21:30","21:30","21:33","21:33","21:33","21:41","22:36","22:36","22:36","22:36","22:44","22:44","22:44","22:48","22:48","22:56","23:00","23:00","23:04","23:09","23:10","23:15","23:18","23:44","23:44","23:49","23:49","23:49","23:49","23:52","23:52","23:54","23:54","0:00","0:00","0:00","0:00","0:05","0:05","0:08","0:08","0:08","2:49","2:54","3:02","3:02","3:03","3:05","3:05","3:08","3:08","3:12","3:12","3:16","3:16","3:16","3:16","3:16","3:20","3:20","3:20","3:20","3:26","3:26","3:29","3:29","3:29","3:29","3:31","3:31","5:06","5:06","5:06","5:06","5:12","5:12","5:12","5:12","5:12","5:12","5:12","5:12","5:22","5:22","5:27","5:27","5:27","5:27","5:31","5:31","5:34","5:36","5:39","5:39"];
+
+var PasteText = PasteTextEn;
+
+if(core.getAppLanguage() == "zh_CN" || core.getAppLanguage() == "zh" ){
+	PasteText = PasteTextzh_CN;
+}
+
+StelMovementMgr.zoomTo(80,3);
+core.wait(3);
+
+
+for (i=0; i<110; i++){
+	
+	var Mylatitude = MyLocation.latitude;
+	
+	if(i==1){
+		LandscapeMgr.setCurrentLandscapeName("Zero Horizon",1);
+		core.wait(1);
+	}
+	if(i==11){
+		LandscapeMgr.setCurrentLandscapeName("Guereins",1);
+		core.wait(1);
+	}
+	if(i==109){
+		LandscapeMgr.setCurrentLandscapeName("Guereins",1);
+		core.wait(1);
+	}
+
+var Continus1 = ((i>39 && i<=53)||(i>3 && i<=5)||(i>12 && i<=13)||(i>84 && i<=85)||(i>104 && i<=105)||(i>29 && i<=30)||(i>26 && i<=28)||(i>87 && i<=88));
+
+var Continus2 = ((i>=39 && i<53)||(i>=3 && i<5)||(i>=12 && i<13)||(i>=84 && i<85)||(i>=104 && i<105)||(i>=29 && i<30)||(i>=26 && i<28)||(i>=87 && i<88));
+
+
+core.setDate(NowTime[i], "local");
+objName = objNameSum[i];
+
+if(Mylatitude < 30){
+	if(objName == "M74"){
+		core.setDate("- 30 minutes", "local");
+	}
+	
+	if(objName == "M31" || objName == "M32" || objName == "M110"){
+		core.setDate("- 30 minutes", "local");
+	}
+	
+	if(objName == "M103"){
+		core.setDate("- 1 hours", "local");
+	}
+	
+	if(objName == "M52"){
+		core.setDate("- 2 hours", "local");
+	}
+	
+	if(objName == "M33"){
+		core.setDate("- 30 minutes", "local");
+	}
+	
+	if(objName == "M34"){
+		core.setDate("- 30 minutes", "local");
+	}
+	
+	if(objName == "M67"){
+		core.setDate("- 30 minutes", "local");
+	}
+}
+
+if(Mylatitude > 40){
+	if(objName == "M79"){
+		core.setDate("- 50 minutes", "local");
+	}
+}
+
+if(Mylatitude >= 15){
+	
+	if(i >= 86 && i <= 97){
+		core.setDate("- 20 minutes", "local");
+	}
+	if(i == 96 && Mylatitude >= 48){
+		core.setDate("+ 5 minutes", "local");
+	}
+	if(i >= 98 && i <= 108){
+		core.setDate("- 30 minutes", "local");
+	}
+	
+	if(objName == "M30"){
+		if(Mylatitude >= 30){
+			core.setDate("2020-04-25T03:53:00", "local");
+		}
+		if(Mylatitude < 30){
+			core.setDate("2020-03-21T05:08:00", "local");
+		}
+	}
+}
+
+core.selectObjectByName(objName, true);
+StelMovementMgr.setFlagTracking(true);
+
+var nowlabel = LabelMgr.labelScreen(core.getDate("local").substring(11,16)+"\t\t"+objName+": "+PasteText[i] ,60,624,true,30,"#ff0000");
+core.wait(4);
+
+if(Continus1 == true);
+else{
+	StelMovementMgr.zoomTo(3.2,3);
+	core.wait(3);
+}
+
+LabelMgr.deleteLabel(nowlabel);
+core.setDiskViewport(true);
+core.wait(4);
+core.setDiskViewport(false);
+LabelMgr.labelObject(objName, objName, true, 14, "#ff0000", "E", -1.0, "TextOnly", false, 0);
+
+if(Continus2 == true);
+else{
+	StelMovementMgr.zoomTo(80,2);
+	core.wait(2);
+}
+}
