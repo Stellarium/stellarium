@@ -922,6 +922,19 @@ QString localeDateString(const int year, const int month, const int day, const i
 	}
 }
 
+int getDayOfWeek(int year, int month, int day)
+{
+	// 1 - monday, 0 - sunday
+	if (month < 3)
+	{
+		--year;
+		month += 10;
+	}
+	else
+		month -= 2;
+	return (day + 31 * month / 12 + year + year / 4 - year / 100 + year / 400) % 7;
+}
+
 
 //! use QDateTime to get a Julian Date from the system's current time.
 //! this is an acceptable use of QDateTime because the system's current

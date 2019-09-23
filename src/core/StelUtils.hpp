@@ -328,6 +328,10 @@ namespace StelUtils
 	//! @return QString representing the formatted date
 	QString localeDateString(const int year, const int month, const int day, const int dayOfWeek);
 
+	//! Return a day number of week for date
+	//! @return number of day: 0 - sunday, 1 - monday,..
+	int getDayOfWeek(int year, int month, int day);
+
 	//! Get the current Julian Date from system time.
 	//! @return the current Julian Date
 	double getJDFromSystem();
