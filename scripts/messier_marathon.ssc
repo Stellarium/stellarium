@@ -72,7 +72,7 @@ StelMovementMgr.zoomTo(80,3);
 core.wait(3);
 
 
-for (i=48; i<110; i++){
+for (i=0; i<110; i++){
 	
 	var Mylatitude = MyLocation.latitude;
 	
