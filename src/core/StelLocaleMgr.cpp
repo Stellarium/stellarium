@@ -38,7 +38,7 @@ StelLocaleMgr::StelLocaleMgr()
 	, planetaryFeaturesTranslator(Q_NULLPTR)
 	, scriptsTranslator(Q_NULLPTR)
 	, timeFormat()
-	, dateFormat()	
+	, dateFormat()
 {
 	core = StelApp::getInstance().getCore();
 
@@ -227,7 +227,7 @@ double StelLocaleMgr::getJdFromISO8601TimeLocal(const QString& t, bool* ok) cons
 		qWarning() << "StelLocaleMgr::getJdFromISO8601TimeLocal: invalid ISO8601 date. Returning JD=0";
 		return 0.0;
 	}
-	
+
 	jd -= core->getUTCOffset(jd)*0.041666666666;
 	return jd;
 }
