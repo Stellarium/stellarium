@@ -28,6 +28,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
+#include <QCache>
 #include <QString>
 
 // The callback type for the external position computation function
@@ -283,7 +284,6 @@ public:
 
 
 	//! Compute the position in the parent Planet coordinate system
-	void computePositionWithoutOrbits(const double dateJDE);
 	virtual void computePosition(const double dateJDE);
 
 	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
@@ -300,13 +300,16 @@ public:
 	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
-	Vec3d getEclipticPos() const;
+	Vec3d getEclipticPos(double dateJDE) const;
+	Vec3d getEclipticPos() const {return getEclipticPos(lastJDE);}
 
 	//! Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
+	Vec3d getHeliocentricEclipticPos(double dateJDE) const;
 
 	//! Return the heliocentric transformation for local coordinate
 	Vec3d getHeliocentricPos(Vec3d) const;
+
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	//! Get the planet velocity around the parent planet in ecliptical coordinates in AU/d
@@ -356,11 +359,8 @@ public:
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];  // store heliocentric coordinates for drawing the orbit
-	Vec3d orbitP[ORBIT_SEGMENTS+1]; // store local coordinate for orbit
-	double lastOrbitJDE;
 	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;
-	bool orbitCached;               // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                // whether to connect the beginning of the orbit line to
 					// the end: good for elliptical orbits, bad for parabolic
 					// and hyperbolic orbits
@@ -484,6 +484,9 @@ protected:
 	static StelTextureSP texEarthShadow;     // for lunar eclipses
 
 	void computeModelMatrix(Mat4d &result) const;
+
+	//! Update the orbit position values.
+	void computeOrbit();
 
 	Vec3f getCurrentOrbitColor() const;
 	
@@ -691,6 +694,9 @@ private:
 						  const QByteArray& fSrc,
 						  const QByteArray& prefix=QByteArray(),
 						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
+
+	// Cache of positions in the parent ecliptic coordinates in AU.
+	mutable QCache<double, Vec3d> positionsCache;
 };
 
 #endif // PLANET_HPP

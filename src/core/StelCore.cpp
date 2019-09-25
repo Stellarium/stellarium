@@ -425,36 +425,6 @@ StelProjectorP StelCore::getProjection(FrameType frameType, RefractionMode refra
 	return getProjection2d();
 }
 
-StelToneReproducer* StelCore::getToneReproducer()
-{
-	return toneReproducer;
-}
-
-const StelToneReproducer* StelCore::getToneReproducer() const
-{
-	return toneReproducer;
-}
-
-StelSkyDrawer* StelCore::getSkyDrawer()
-{
-	return skyDrawer;
-}
-
-const StelSkyDrawer* StelCore::getSkyDrawer() const
-{
-	return skyDrawer;
-}
-
-StelMovementMgr* StelCore::getMovementMgr()
-{
-	return movementMgr;
-}
-
-const StelMovementMgr* StelCore::getMovementMgr() const
-{
-	return movementMgr;
-}
-
 SphericalCap StelCore::getVisibleSkyArea() const
 {
 	const LandscapeMgr* landscapeMgr = GETSTELMODULE(LandscapeMgr);
@@ -467,17 +437,6 @@ SphericalCap StelCore::getVisibleSkyArea() const
 		return SphericalCap(up, landscapeMgr->getLandscapeSinMinAltitudeLimit());
 	}
 	return SphericalCap(up, -1.);
-}
-
-void StelCore::setClippingPlanes(double znear, double zfar)
-{
-	currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;
-}
-
-void StelCore::getClippingPlanes(double* zn, double* zf) const
-{
-	*zn = currentProjectorParams.zNear;
-	*zf = currentProjectorParams.zFar;
 }
 
 // Handle the resizing of the window

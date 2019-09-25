@@ -668,6 +668,8 @@ class Translations
 		N_("Saturnian analemma");
 		// TRANSLATORS: Name of script
 		N_("Uranian analemma");
+		// TRANSLATORS: Name of script
+		N_("Messier Marathon");
 		
 		// =====================================================================
 		// Script descriptions
@@ -715,6 +717,7 @@ class Translations
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Mars.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Saturn.");
 		N_("A demonstration of the analemma - the path of the Sun across the sky during the year on Uranus.");
+		N_("Messier Marathon on March 20, 2020. The data for the script are taken from GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm");
 		
 		// =====================================================================
 		// List of GUI elements (Qt's dialogs)

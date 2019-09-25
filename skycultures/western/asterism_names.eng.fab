@@ -5,6 +5,8 @@ STr	_("Summer Triangle","asterism")
 GSP	_("Great Square of Pegasus","asterism")
 WTr	_("Winter Triangle","asterism")
 WHx	_("Winter Hexagon (Winter Circle)","asterism")
+HeG _("Heavenly G","asterism") 30,32
+SoP	_("Segment of Perseus","asterism") 30
 # Form-forming asterisms
 NCr	_("Northern Cross","asterism")
 WAs	_("W","asterism")
@@ -14,18 +16,21 @@ Kit	_("Kite","asterism")
 Sal	_("Sail","asterism")
 CoH	_("Coathanger", "asterism")
 MCs	_("Mini-Cassiopeia","asterism")
-JbC	_("Job's Coffin","asterism")
-VTa	_("V of Taurus","asterism")
+JbC	_("Job's Coffin","asterism") 30,32
+VTa	_("V of Taurus","asterism") 34,35
+TrM	_("Triangulum Minus","asterism") 31,33
 TrP	_("Ptolemy's Triangle","asterism") 24
+Bie	_("Bier","asterism") 30
+GoP	_("Guardians of the Pole (Guards)","asterism")	30,32
 # Associative and sectional asterisms
 BDr	_("Big Dipper (Plough)","asterism")
 LDr	_("Little Dipper","asterism")
 SSR	_("Seven Stars Row","asterism")
 Ptr	_("The Pointers","asterism")
-HDr	_("Dragon Head","asterism")
+HDr	_("Dragon Head (Lozenge)","asterism")
 HMG	_("Head of Medusa Gorgon","asterism")
-Goa	_("Goatlings","asterism")
-Urn	_("The Y in Aquarius (The Urn)","asterism")
+Goa	_("Goatlings (Kids)","asterism")
+Urn	_("The Y in Aquarius (The Urn or Water Jar)","asterism")
 OrB	_("Orion's Belt","asterism")
 OrS	_("Orion's Sword","asterism")
 OSh	_("Orion's Shield","asterism")
@@ -34,6 +39,7 @@ HWl	_("Head of Whale","asterism")
 HSr	_("Head of Serpent","asterism")
 HHy	_("Head of Hydra","asterism")
 Tea	_("Teapot","asterism")
+Mlk	_("Milk Dipper","asterism")	30,32
 Ter	_("Terebellum","asterism")
 ECr	_("Egyptian Cross","asterism")
 FCr	_("False Cross","asterism")
@@ -44,16 +50,16 @@ TAK	_("The Arc of the King","asterism") 25
 HCn	_("Head of Centaurus","asterism") 27
 # TRANSLATORS: Sudor Ophiuchi = Sweat of Ophiuchus
 SOp	_("Sudor Ophiuchi","asterism") 28
-VMr	_("Venus' Mirror","asterism") 29
+VMr	_("Venus' Mirror","asterism") 29,30,32
 OBf	_("The Butterfly of Orion","asterism") 29
 FHA	_("The Fish Hook","asterism") 29
-BPN	_("The Bull of Poniatowski","asterism") 29
+BPN	_("The Bull of Poniatowski","asterism") 29,30
 TrB	_("The Trapezoid","asterism") 29
 TPT	_("The Three Patriarchs","asterism") 29
-NFy	_("The Northern Fly","asterism") 29
+NFy	_("The Northern Fly","asterism") 29,30,32
 # Binocular asterisms
 BA1	_("Davis' Dog","asterism")
-BA2	_("Honores Friderici","asterism")
+BA2	_("Honores Friderici (Frederick's Glory)","asterism")
 EnP	_("Engagement ring of Polaris","asterism")
 ChG	_("Christmas Goose","asterism") 26
 Arr	_("The Arrow","asterism") 26
