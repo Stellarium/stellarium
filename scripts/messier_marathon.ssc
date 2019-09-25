@@ -85,7 +85,7 @@ var PasteText = [tr("Difficulty is 0"),
 		 tr("Very diffuse, very dark, very difficult"), 
 		 tr("Easier than M74, small"), 
 		 tr("Visible to the naked eye, no difficulty"), 
-		 tr("More difficult than 110 to verify, small"), 
+		 tr("More difficult than M110 to verify, small"), 
 		 tr("In the west of M31, it is easy to detect"), 
 		 tr("Diffuse, great, brighter"), 
 		 tr("Small, easy to locate, not as horror as imagined"), 
@@ -286,7 +286,7 @@ for (i=0; i<110; i++)
 	} else {
 		LabelMgr.deleteLabel(nowlabel);
 		var VisibleNot = tr("cannot be seen now");
-		nowlabel = LabelMgr.labelScreen(core.getDate("local").substring(11,16)+"\t\t"+objName+": "+VisibleNot ,60,624,true,30,"#ff0000");
+		nowlabel = LabelMgr.labelScreen(core.getDate("local").substring(11,16)+"\t"+objName+": "+VisibleNot ,60,624,true,30,"#ff0000");
 		core.wait(2);
 	}
 
