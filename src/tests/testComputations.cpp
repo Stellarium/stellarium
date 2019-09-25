@@ -57,18 +57,21 @@ void TestComputations::testSiderealPeriodComputations()
 }
 
 
-void TestComputations::testJDFormBesselianEpoch()
+void TestComputations::testJDFromBesselianEpoch()
 {
 	QVariantList data;
 
 	// According to Observational Astrophysics by Pierre Lena, Francois Lebrun, Francois Mignard (ISBN 3662036851, 9783662036853)
 	data << 1900.0		<< 2415020.3135;
 	data << 1950.0		<< 2433282.4235;
-	data << 1995.00048	<< 2449718.5;
-	// FIXME: WTF???
-	//data << 2000.0		<< 2451544.4334;
-	//data << 1950.000210	<< 2433282.5;
-	//data << 2000.001278	<< 2451545.0;
+	//data << 1995.00048	<< 2449718.5; // GZ: Where did you get this "expected" result?
+	// FIXME: WTF??? --- GZ: Can you please write the problem (what was your expectation and why) and not just WTF?
+	data << 1995.0004862412	<< 2449718.5; // GZ: These 2 tuples are from manual calculation with our formulae.
+	data << 1995.0		<< 2449718.3224;
+	// The next 3 were reactivated after converting the argument to double. B2000 had a typo.
+	data << 2000.0		<< 2451544.5334;
+	data << 1950.000210	<< 2433282.5;
+	data << 2000.001278	<< 2451545.0;
 
 	while (data.count() >= 2)
 	{
@@ -248,7 +251,8 @@ void TestComputations::testEclToEquTransformations()
 
 void TestComputations::testSpheToRectTransformations()
 {
-	float longitude, latitude;
+	double longitude, latitude;
+	float longitudeF, latitudeF;
 	Vec3f eVec3f, rVec3f;
 	Vec3d eVec3d, rVec3d;
 
@@ -264,12 +268,14 @@ void TestComputations::testSpheToRectTransformations()
 
 	while (data.count() >= 3)
 	{
-		longitude	= data.takeFirst().toFloat();
-		latitude	= data.takeFirst().toFloat();
+		longitude	= data.takeFirst().toDouble();
+		latitude	= data.takeFirst().toDouble();
+		longitudeF=float(longitude);
+		latitudeF=float(latitude);
 		eVec3f	= StelUtils::strToVec3f(data.takeFirst().toString());
 		eVec3d	= eVec3f.toVec3d();
 
-		StelUtils::spheToRect(longitude*M_PI/180.f, latitude*M_PI/180.f, rVec3f);
+		StelUtils::spheToRect(longitudeF*M_PI_180f, latitudeF*M_PI_180f, rVec3f);
 		StelUtils::spheToRect(longitude*M_PI/180., latitude*M_PI/180., rVec3d);
 
 		QVERIFY2(qAbs(rVec3f[0]-eVec3f[0])<=ERROR_HIGH_LIMIT && qAbs(rVec3f[1]-eVec3f[1])<=ERROR_HIGH_LIMIT && qAbs(rVec3f[2]-eVec3f[2])<=ERROR_HIGH_LIMIT,

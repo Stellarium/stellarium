@@ -136,7 +136,7 @@ StelCore::StelCore()
 
 	// Initialize matJ2000ToJ1875 matrix
 	double eps1875, chi1875, omega1875, psi1875;
-	double jdB1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
+	const double jdB1875 = StelUtils::getJDFromBesselianEpoch(1875.0);
 	getPrecessionAnglesVondrak(jdB1875, &eps1875, &chi1875, &omega1875, &psi1875);
 	matJ2000ToJ1875 = Mat4d::xrotation(84381.406*1./3600.*M_PI/180.) * Mat4d::zrotation(-psi1875) * Mat4d::xrotation(-omega1875) * Mat4d::zrotation(chi1875);
 	matJ2000ToJ1875 = matJ2000ToJ1875.transpose();

@@ -29,7 +29,7 @@ class TestComputations : public QObject
 
 private slots:
 	void testSiderealPeriodComputations();
-	void testJDFormBesselianEpoch();
+	void testJDFromBesselianEpoch();
 	void testIsPowerOfTwo();
 	void testDayInYear();
 	void testYearFraction();
