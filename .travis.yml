@@ -240,6 +240,13 @@ matrix:
         - TRANSLATE=false
         - COVERAGE=false
 
+    - os: osx
+      osx_image: xcode11.1
+      env:
+        - MATRIX_EVAL="CC=clang && CXX=clang++"
+        - TRANSLATE=false
+        - COVERAGE=false
+
 before_install:
   - eval "${MATRIX_EVAL}"
   # Linux
