@@ -180,27 +180,32 @@ public:
 	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
 
 	//! Get the current tone reproducer used in the core.
-	StelToneReproducer* getToneReproducer();
+	StelToneReproducer* getToneReproducer(){return toneReproducer;}
 	//! Get the current tone reproducer used in the core.
-	const StelToneReproducer* getToneReproducer() const;
+	const StelToneReproducer* getToneReproducer() const{return toneReproducer;}
 
 	//! Get the current StelSkyDrawer used in the core.
-	StelSkyDrawer* getSkyDrawer();
+	StelSkyDrawer* getSkyDrawer(){return skyDrawer;}
 	//! Get the current StelSkyDrawer used in the core.
-	const StelSkyDrawer* getSkyDrawer() const;
+	const StelSkyDrawer* getSkyDrawer() const{return skyDrawer;}
 
 	//! Get an instance of StelGeodesicGrid which is garanteed to allow for at least maxLevel levels
 	const StelGeodesicGrid* getGeodesicGrid(int maxLevel) const;
 
 	//! Get the instance of movement manager.
-	StelMovementMgr* getMovementMgr();
+	StelMovementMgr* getMovementMgr(){return movementMgr;}
 	//! Get the const instance of movement manager.
-	const StelMovementMgr* getMovementMgr() const;
+	const StelMovementMgr* getMovementMgr() const{return movementMgr;}
 
 	//! Set the near and far clipping planes.
-	void setClippingPlanes(double znear, double zfar);
+	void setClippingPlanes(double znear, double zfar){
+		currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;
+	}
 	//! Get the near and far clipping planes.
-	void getClippingPlanes(double* zn, double* zf) const;
+	void getClippingPlanes(double* zn, double* zf) const{
+		*zn = currentProjectorParams.zNear;
+		*zf = currentProjectorParams.zFar;
+	}
 
 	//! Get the translated projection name from its TypeKey for the current locale.
 	QString projectionTypeKeyToNameI18n(const QString& key) const;
