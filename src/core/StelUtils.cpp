@@ -91,16 +91,6 @@ QString getOperatingSystemInfo()
 	return OS;
 }
 
-double hmsToRad(const unsigned int h, const unsigned int m, const double s )
-{
-	return hmsToHours(h, m, s)*M_PI/12.;
-}
-
-double hmsToHours(const unsigned int h, const unsigned int m, const double s)
-{
-	return static_cast<double>(h)+static_cast<double>(m)/60.+s/3600.;
-}
-
 double hmsStrToHours(const QString& s)
 {
 	QRegExp reg("(\\d+)h(\\d+)m(\\d+)s");
@@ -112,14 +102,6 @@ double hmsStrToHours(const QString& s)
 	int sec = list[3].toInt();
 
 	return hmsToHours(hrs, min, sec);
-}
-
-double dmsToRad(const int d, const unsigned int m, const double s)
-{
-	double rad = M_PI_180*qAbs(d)+M_PI/10800.*m+s*M_PI/648000.;
-	if (d<0)
-		rad *= -1;
-	return rad;
 }
 
 /*************************************************************************
@@ -505,71 +487,6 @@ Vec3f htmlColorToVec3f(const QString& c)
 	return v;
 }
 
-void spheToRect(const double lng, const double lat, Vec3d& v)
-{
-	const double cosLat = cos(lat);
-	v.set(cos(lng) * cosLat, sin(lng) * cosLat, sin(lat));
-}
-
-void spheToRect(const float lng, const float lat, Vec3f& v)
-{	
-	const double dlng = static_cast<double>(lng), dlat = static_cast<double>(lat), cosLat = cos(dlat);
-	v.set(static_cast<float>(cos(dlng) * cosLat), static_cast<float>(sin(dlng) * cosLat), sinf(lat));
-}
-
-void spheToRect(const double lng, const double lat, Vec3f& v)
-{
-	const float cosLat = cos(static_cast<float>(lat));
-	v.set(cos(static_cast<float>(lng)) * cosLat, sin(static_cast<float>(lng)) * cosLat, sin(static_cast<float>(lat)));
-}
-
-void spheToRect(const float lng, const float lat, Vec3d& v)
-{
-	const double dlng = static_cast<double>(lng), dlat = static_cast<double>(lat), cosLat = cos(dlat);
-	v.set(cos(dlng) * cosLat, sin(dlng) * cosLat, sin(dlat));
-}
-
-
-void rectToSphe(double *lng, double *lat, const Vec3d &v)
-{
-	double r = v.length();
-	*lat = asin(v[2]/r);
-	*lng = atan2(v[1],v[0]);
-}
-
-void rectToSphe(float *lng, float *lat, const Vec3d& v)
-{
-	double r = v.length();
-	*lat = static_cast<float>(asin(v[2]/r));
-	*lng = static_cast<float>(atan2(v[1],v[0]));
-}
-
-void rectToSphe(float *lng, float *lat, const Vec3f& v)
-{
-	float r = v.length();
-	*lat = asinf(v[2]/r);
-	*lng = atan2f(v[1],v[0]);
-}
-
-void rectToSphe(double *lng, double *lat, const Vec3f& v)
-{
-	double r = static_cast<double>(v.length());
-	*lat = asin(static_cast<double>(v[2])/r);
-	*lng = atan2(static_cast<double>(v[1]),static_cast<double>(v[0]));
-}
-
-void equToEcl(const double raRad, const double decRad, const double eclRad, double *lambdaRad, double *betaRad)
-{
-	*lambdaRad=std::atan2(std::sin(raRad)*std::cos(eclRad)+std::tan(decRad)*std::sin(eclRad), std::cos(raRad));
-	*betaRad=std::asin(std::sin(decRad)*std::cos(eclRad)-std::cos(decRad)*std::sin(eclRad)*std::sin(raRad));
-}
-
-void eclToEqu(const double lambdaRad, const double betaRad, const double eclRad, double *raRad, double *decRad)
-{
-	*raRad = std::atan2(std::sin(lambdaRad)*std::cos(eclRad)-std::tan(betaRad)*std::sin(eclRad), std::cos(lambdaRad));
-	*decRad = std::asin(std::sin(betaRad)*std::cos(eclRad)+std::cos(betaRad)*std::sin(eclRad)*std::sin(lambdaRad));
-}
-
 double getDecAngle(const QString& str)
 {
 	QRegExp re1("^\\s*([\\+\\-])?\\s*(\\d+)\\s*([hHDd\xBA])\\s*(\\d+)\\s*['Mm]\\s*(\\d+(\\.\\d+)?)\\s*[\"Ss]\\s*([NSEWnsew])?\\s*$"); // DMS/HMS
@@ -618,12 +535,6 @@ double getDecAngle(const QString& str)
 	return -0.0;
 }
 
-// Check if a number is a power of 2
-bool isPowerOfTwo(const int value)
-{
-	return (value & -value) == value;
-}
-
 // Return the first power of two bigger than the given value
 int getBiggerPowerOfTwo(int value)
 {
@@ -633,48 +544,9 @@ int getBiggerPowerOfTwo(int value)
 	return p;
 }
 
-// Return the inverse sinus hyperbolic of z
-double asinh(const double z)
-{
-	double returned;
-	if(z>0)
-	   returned = std::log(z + std::sqrt(z*z+1));
-	else
-	   returned = -std::log(-z + std::sqrt(z*z+1));
-
-	return returned;
-}
-
-// Simple integer modulo where the result is always positive.
-int imod(const int a, const int b)
-{
-	int ret = a % b;
-	if(ret < 0)
-		ret+=b;
-	return ret;
-}
-double fmodpos(const double a, const double b)
-{
-	double ret = fmod(a, b);
-	if(ret < 0)
-		ret+=b;
-	return ret;
-}
-float fmodpos(const float a, const float b)
-{
-	float ret = fmodf(a, b);
-	if(ret < 0)
-		ret+=b;
-	return ret;
-}
-
 /*************************************************************************
  Convert a QT QDateTime class to julian day
 *************************************************************************/
-double qDateTimeToJd(const QDateTime& dateTime)
-{
-	return dateTime.date().toJulianDay()+static_cast<double>(1./(24*60*60*1000))*QTime(0, 0, 0, 0).msecsTo(dateTime.time())-0.5;
-}
 
 QDateTime jdToQDateTime(const double& jd)
 {
@@ -924,17 +796,10 @@ QString localeDateString(const int year, const int month, const int day, const i
 
 int getDayOfWeek(int year, int month, int day)
 {
-	// 1 - monday, 0 - sunday
-	if (month < 3)
-	{
-		--year;
-		month += 10;
-	}
-	else
-		month -= 2;
-	return (day + 31 * month / 12 + year + year / 4 - year / 100 + year / 400) % 7;
+	double JD;
+	getJDFromDate(&JD, year, month, day, 0, 0, 0);
+	return getDayOfWeek(JD);
 }
-
 
 //! use QDateTime to get a Julian Date from the system's current time.
 //! this is an acceptable use of QDateTime because the system's current
@@ -1064,14 +929,7 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 				{
 					if ( year % 100 == 0 )
 					{
-						if ( year % 400 == 0 )
-						{
-							return 29;
-						}
-						else
-						{
-							return 28;
-						}
+						return ( year % 400 == 0 ? 29 : 28 );
 					}
 					else
 					{
@@ -1085,14 +943,7 @@ int numberOfDaysInMonthInYear(const int month, const int year)
 			}
 			else
 			{
-				if ( year % 4 == 0 )
-				{
-					return 29;
-				}
-				else
-				{
-					return 28;
-				}
+				return ( year % 4 == 0 ? 29 : 28 );
 			}
 		case 0:
 			return numberOfDaysInMonthInYear(12, year-1);
@@ -1123,7 +974,6 @@ bool isLeapYear(const int year)
 // Meeus, AA 2nd, 1998, ch.7 p.65
 int dayInYear(const int year, const int month, const int day)
 {
-	// set k to 1 (leap) or 2.
 	int k=(isLeapYear(year) ? 1:2);
 	return static_cast<int>(275*month/9) - k*static_cast<int>((month+9)/12) + day -30;
 }
