@@ -1229,7 +1229,7 @@ void SolarSystem::computePositions(double dateJDE, PlanetP observerPlanet)
 	{
 		for (const auto& p : systemPlanets)
 		{
-			p->computePositionWithoutOrbits(dateJDE);
+			p->computePosition(dateJDE);
 		}
 		// BEGIN HACK: 0.16.0post for solar aberration/light time correction
 		// This fixes eclipse bug LP:#1275092) and outer planet rendering bug (LP:#1699648) introduced by the first fix in 0.16.0.

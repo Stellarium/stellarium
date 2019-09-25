@@ -188,10 +188,8 @@ Planet::Planet(const QString& englishName,
 	       const QString& pTypeStr)
 	: flagNativeName(true),
 	  flagTranslatedName(true),
-	  lastOrbitJDE(0.0),
 	  deltaJDE(StelCore::JD_SECOND),
 	  deltaOrbitJDE(0.0),
-	  orbitCached(false),
 	  closeOrbit(acloseOrbit),
 	  englishName(englishName),
 	  nameI18(englishName),
@@ -226,7 +224,8 @@ Planet::Planet(const QString& englishName,
 	  atmosphere(hasAtmosphere),
 	  halo(hasHalo),
 	  gl(Q_NULLPTR),
-	  iauMoonNumber("")
+	  iauMoonNumber(""),
+	  positionsCache(ORBIT_SEGMENTS * 2)
 {
 	// Initialize pType with the key found in pTypeMap, or mark planet type as undefined.
 	// The latter condition should obviously never happen.
@@ -846,17 +845,6 @@ Vec3d Planet::getJ2000EquatorialPos(const StelCore *core) const
 		return StelCore::matVsop87ToJ2000.multiplyWithoutTranslation(getHeliocentricEclipticPos() - core->getObserverHeliocentricEclipticPos());
 }
 
-// Compute the position in the parent Planet coordinate system
-// Actually call the provided function to compute the ecliptical position
-void Planet::computePositionWithoutOrbits(const double dateJDE)
-{
-	if (fabs(lastJDE-dateJDE)>deltaJDE)
-	{
-		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-		lastJDE = dateJDE;
-	}
-}
-
 // return value in radians!
 // For Earth, this is epsilon_A, the angle between earth's rotational axis and mean ecliptic of date.
 // Details: e.g. Hilton etal, Report on Precession and the Ecliptic, Cel.Mech.Dyn.Astr.94:351-67 (2006), Fig1.
@@ -928,127 +916,9 @@ QVector<const Planet*> Planet::getCandidatesForShadow() const
 
 void Planet::computePosition(const double dateJDE)
 {
-	// Make sure the parent position is computed for the dateJDE, otherwise
-	// getHeliocentricPos() would return incorrect values.
-	if (parent)
-		parent->computePositionWithoutOrbits(dateJDE);
-
-	if (orbitFader.getInterstate()>0.000001f && deltaOrbitJDE > 0.0 && (fabs(lastOrbitJDE-dateJDE)>deltaOrbitJDE || !orbitCached))
+	if (fabs(lastJDE-dateJDE)>deltaJDE)
 	{
-		StelCore *core=StelApp::getInstance().getCore();
-
-		double calc_date;
-		// int delta_points = (int)(0.5 + (date - lastOrbitJD)/date_increment);
-		int delta_points;
-
-		if( dateJDE > lastOrbitJDE )
-		{
-			delta_points = static_cast<int>(0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
-		}
-		else
-		{
-			delta_points = static_cast<int>(-0.5 + (dateJDE - lastOrbitJDE)/deltaOrbitJDE);
-		}
-		double new_date = lastOrbitJDE + delta_points*deltaOrbitJDE;
-
-		// qDebug( "Updating orbit coordinates for %s (delta %f) (%d points)\n", getEnglishName().toUtf8().data(), deltaOrbitJDE, delta_points);
-
-		if( delta_points > 0 && delta_points < ORBIT_SEGMENTS && orbitCached)
-		{
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			{
-				if(d + delta_points >= ORBIT_SEGMENTS-1 )
-				{
-					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-
-					// date increments between points will not be completely constant though
-					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-					if (osculatingFunc)
-					{
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
-					}
-					else
-					{
-						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
-					}
-					orbitP[d] = eclipticPos;
-					orbit[d] = getHeliocentricEclipticPos();
-				}
-				else
-				{
-					orbitP[d] = orbitP[d+delta_points];
-					orbit[d] = getHeliocentricPos(orbitP[d]);
-				}
-			}
-
-			lastOrbitJDE = new_date;
-		}
-		else if( delta_points < 0 && abs(delta_points) < ORBIT_SEGMENTS  && orbitCached)
-		{
-			for( int d=ORBIT_SEGMENTS-1; d>=0; d-- )
-			{
-				if(d + delta_points < 0 )
-				{
-					// calculate new points
-					calc_date = new_date + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-
-					computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-					if (osculatingFunc) {
-						(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
-					}
-					else
-					{
-						coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
-					}
-					orbitP[d] = eclipticPos;
-					orbit[d] = getHeliocentricEclipticPos();
-				}
-				else
-				{
-					orbitP[d] = orbitP[d+delta_points];
-					orbit[d] = getHeliocentricPos(orbitP[d]);
-				}
-			}
-
-			lastOrbitJDE = new_date;
-		}
-		else if( delta_points || !orbitCached)
-		{
-			// update all points (less efficient)
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-			{
-				calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
-				computeTransMatrix(calc_date-core->computeDeltaT(calc_date)/86400.0, calc_date);
-				if (osculatingFunc)
-				{
-					(*osculatingFunc)(dateJDE,calc_date,eclipticPos, eclipticVelocity);
-				}
-				else
-				{
-					coordFunc(calc_date, eclipticPos, eclipticVelocity, orbitPtr);
-				}
-				orbitP[d] = eclipticPos;
-				orbit[d] = getHeliocentricEclipticPos();
-			}
-
-			lastOrbitJDE = dateJDE;
-			if (!osculatingFunc) orbitCached = 1;
-		}
-
-
-		// calculate actual Planet position
 		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-
-		lastJDE = dateJDE;
-	}
-	else if (fabs(lastJDE-dateJDE)>deltaJDE)
-	{
-		// calculate actual Planet position
-		coordFunc(dateJDE, eclipticPos, eclipticVelocity, orbitPtr);
-		if (orbitFader.getInterstate()>0.000001f)
-			for( int d=0; d<ORBIT_SEGMENTS; d++ )
-				orbit[d]=getHeliocentricPos(orbitP[d]);
 		lastJDE = dateJDE;
 	}
 }
@@ -1217,9 +1087,22 @@ double Planet::getMeanSolarDay() const
 }
 
 // Get the Planet position in the parent Planet ecliptic coordinate in AU
-Vec3d Planet::getEclipticPos() const
+Vec3d Planet::getEclipticPos(double dateJDE) const
 {
-	return eclipticPos;
+	// Use current position if the time match.
+	if (dateJDE == lastJDE)
+		return eclipticPos;
+
+	// Otherwise try to use a cached position.
+	Vec3d *pos = positionsCache[dateJDE];
+	if (!pos)
+	{
+		pos = new Vec3d;
+		Vec3d velocity;
+		coordFunc(dateJDE, *pos, velocity, orbitPtr);
+		positionsCache.insert(dateJDE, pos);
+	}
+	return *pos;
 }
 
 // Return heliocentric coordinate of p
@@ -1234,6 +1117,21 @@ Vec3d Planet::getHeliocentricPos(Vec3d p) const
 		while (pp->parent.data())
 		{
 			pos += pp->eclipticPos;
+			pp = pp->parent.data();
+		}
+	}
+	return pos;
+}
+
+Vec3d Planet::getHeliocentricEclipticPos(double dateJDE) const
+{
+	Vec3d pos = getEclipticPos(dateJDE);
+	const Planet* pp = parent.data();
+	if (pp)
+	{
+		while (pp->parent.data())
+		{
+			pos += pp->getEclipticPos(dateJDE);
 			pp = pp->parent.data();
 		}
 	}
@@ -3326,6 +3224,26 @@ Vec3f Planet::getCurrentOrbitColor() const
 	return orbColor;
 }
 
+void Planet::computeOrbit()
+{
+	double dateJDE = lastJDE;
+	double calc_date;
+	Vec3d parentPos;
+	if (parent)
+		parentPos = parent->getHeliocentricEclipticPos(dateJDE);
+
+	for(int d = 0; d < ORBIT_SEGMENTS; d++)
+	{
+		calc_date = dateJDE + (d-ORBIT_SEGMENTS/2)*deltaOrbitJDE;
+		// Round to a number of deltaOrbitJDE to improve caching.
+		if (d != ORBIT_SEGMENTS / 2)
+		{
+			calc_date = nearbyint(calc_date / deltaOrbitJDE) * deltaOrbitJDE;
+		}
+		orbit[d] = getEclipticPos(calc_date) + parentPos;
+	}
+}
+
 // draw orbital path of Planet
 void Planet::drawOrbit(const StelCore* core)
 {
@@ -3334,8 +3252,8 @@ void Planet::drawOrbit(const StelCore* core)
 	if (!static_cast<bool>(re.siderealPeriod))
 		return;
 
-	if (parent)
-		parent->computePositionWithoutOrbits(lastJDE);
+	// Update the orbit positions to the current planet date.
+	computeOrbit();
 
 	const StelProjectorP prj = core->getProjection(StelCore::FrameHeliocentricEclipticJ2000);
 
