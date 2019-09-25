@@ -74,50 +74,50 @@ objName = objNameSum[i];
 
 if(Mylatitude < 30){
 	if(objName == "M74"){
-		core.setDate("- 30 minutes", "local");
+		core.setDate("-30 minutes", "local");
 	}
 	
 	if(objName == "M31" || objName == "M32" || objName == "M110"){
-		core.setDate("- 30 minutes", "local");
+		core.setDate("-30 minutes", "local");
 	}
 	
 	if(objName == "M103"){
-		core.setDate("- 1 hours", "local");
+		core.setDate("-1 hours", "local");
 	}
 	
 	if(objName == "M52"){
-		core.setDate("- 2 hours", "local");
+		core.setDate("-2 hours", "local");
 	}
 	
 	if(objName == "M33"){
-		core.setDate("- 30 minutes", "local");
+		core.setDate("-30 minutes", "local");
 	}
 	
 	if(objName == "M34"){
-		core.setDate("- 30 minutes", "local");
+		core.setDate("-30 minutes", "local");
 	}
 	
 	if(objName == "M67"){
-		core.setDate("- 30 minutes", "local");
+		core.setDate("-30 minutes", "local");
 	}
 }
 
 if(Mylatitude > 40){
 	if(objName == "M79"){
-		core.setDate("- 50 minutes", "local");
+		core.setDate("-50 minutes", "local");
 	}
 }
 
 if(Mylatitude >= 15){
 	
 	if(i >= 86 && i <= 97){
-		core.setDate("- 20 minutes", "local");
+		core.setDate("-20 minutes", "local");
 	}
 	if(i == 96 && Mylatitude >= 48){
-		core.setDate("+ 5 minutes", "local");
+		core.setDate("+5 minutes", "local");
 	}
 	if(i >= 98 && i <= 108){
-		core.setDate("- 30 minutes", "local");
+		core.setDate("-30 minutes", "local");
 	}
 	
 	if(objName == "M30"){
