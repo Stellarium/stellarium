@@ -161,8 +161,27 @@ original field of view (how ``zoomed in'' the view is), and direction of
 view.
 %% TODO Is this still original behaviour? On German Kbd, this does not work anyways, backslash is a AltGr-combination.
 
-It's also possible to move around using the mouse. If you left-click and
-drag somewhere on the sky, you can pull the view around.
+If you prefer stepwise zooming to fixed values for field of view,
+table~\ref{tab:FOVkeys} lists the keys to reach a certain field of
+view.
+
+\begin{table}[tb]
+\centering
+\begin{tabular}{lr||lr}\toprule
+\emph{Hotkey} & \emph{Field of view}&\emph{Hotkey} & \emph{Field of view}\\\midrule
+  \key{\ctrl+\Alt+1}&180  &  \key{\ctrl+\Alt+6}& 10  \\
+  \key{\ctrl+\Alt+2}& 90  &  \key{\ctrl+\Alt+7}&  5  \\
+  \key{\ctrl+\Alt+3}& 60  &  \key{\ctrl+\Alt+8}&  2  \\
+  \key{\ctrl+\Alt+4}& 45  &  \key{\ctrl+\Alt+9}&  1  \\
+  \key{\ctrl+\Alt+5}& 20  &  \key{\ctrl+\Alt+0}& 0.5 \\\bottomrule
+\end{tabular}
+\caption{Hotkeys to set fixed vertical fields of view}
+\label{tab:FOVkeys}
+\end{table}
+
+
+Most users prefer to move around using the mouse. If you left-click
+and drag somewhere on the sky, you can pull the view around.
 
 Another method of moving is to select some object in the sky (left-click
 on the object), and press the \key{Space} key to centre the view on that
@@ -182,6 +201,11 @@ sub-system, the initial auto-zoom in will zoom right in on the selected
 object (the exact field of view depending on the size/type of the
 selected object), and the initial auto-zoom out will return to the
 initial FOV and direction of view.
+
+If you have a touch screen, you can even use one finger directly to
+drag the sky around and select objects, and two fingers to zoom. The
+support for touch screens is incomplete though, and more advanced use
+of the program requires the classical operation with keyboard and mouse.
 
 \section{The Main Tool Bar}
 \label{sec:tour:toolbar}
