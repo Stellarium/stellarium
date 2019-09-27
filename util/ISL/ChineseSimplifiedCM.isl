@@ -33,5 +33,6 @@ AngleWarpMode=(ANGLE WARP 模式)
 MesaMode=(MESA 模式)
 DebugMode=(含 OpenGL 诊断)
 SpoutMode=(含 Spout sender)
+AltGrMode=(使用 AltGr 键)
 RedistRun=安装 Microsoft's C/C++ runtime...
 DeleteUserData=注意：您是确实想要删除用户数据(Stellarium的配置，地景，3D景观和其他Stellarium数据文件 )吗？按“否”会保留这些文件供以后再次使用。
