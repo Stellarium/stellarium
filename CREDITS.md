@@ -660,10 +660,6 @@
 	     from ESO/R. Gendler and Sun Shuwei
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International. This work is a derivative of "Map of the Large Magellanic Cloud" and "The entire Large Magellanic Cloud with annotations" by ESO/R. Gendler, used under Creative Commons Attribution 4.0 International. This work is licensed under Creative Commons Attribution 4.0 International by Sun Shuwei.
-	4.96 Images of Frosty Leo
-	     from Judy Schmidt
-	     https://commons.wikimedia.org/wiki/
-	     License:  Creative Commons Attribution 2.0 Generic
 ```
 
 ## Appendix
