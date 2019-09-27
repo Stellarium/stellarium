@@ -1288,6 +1288,24 @@ void StelMainScriptAPI::setBortleScaleIndex(int index)
 	StelApp::getInstance().getCore()->getSkyDrawer()->setBortleScaleIndex(index);
 }
 
+double StelMainScriptAPI::refraction(double altitude, bool apparent)
+{
+	Vec3d pos(1., 0., 0.);
+	// rotate to set altitude.
+	pos=Mat4d::yrotation(-altitude*M_PI_180)*pos;
+
+	const Refraction refraction=StelApp::getInstance().getCore()->getSkyDrawer()->getRefraction();
+	if (apparent)
+	{
+		refraction.backward(pos);
+	}
+	else
+	{
+		refraction.forward(pos);
+	}
+	return asin(pos[2])*M_180_PI;
+}
+
 void StelMainScriptAPI::setDSSMode(bool b)
 {
 	// TODO: This method should be removed in version 0.20

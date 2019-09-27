@@ -789,6 +789,11 @@ public slots:
 	//! @param index the new Bortle scale index, must be in range [1,9]
 	static void setBortleScaleIndex(int index);
 
+	//! Apply refraction with current atmospheric parameters to altitude.
+	//! @param altitude: degrees
+	//! @param apparent: true to remove refraction from an apparent (observed) altitude
+	static double refraction(double altitude, bool apparent=false);
+
 	//! For use in setDate and waitFor
 	//! For parameter descriptions see setDate().
 	//! @return Julian day.
