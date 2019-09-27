@@ -40,7 +40,6 @@
 //! @ingroup satellites
 class gSatWrapper
 {
-
 public:
 	enum Visibility
 	{
@@ -99,7 +98,6 @@ public:
         //! @return void
 	void  getSlantRange(double &ao_slantRange, double &ao_slantRangeRate) const; //measured in km and km/s
 
-
         // Operation getVisibilityPredict
         //! @brief This operation predicts the satellite visibility contidions.
         //! This prediction can return 4 different states
@@ -115,11 +113,12 @@ public:
         //! @par References
         //!   Fundamentals of Astrodynamis and Applications (Third Edition) pg 898
         //!   David A. Vallado
-	Visibility getVisibilityPredict();
+	Visibility getVisibilityPredict() const;
 
 	double getPhaseAngle() const;
-	gTime	getEpoch() const { return epoch; }
-
+	//! Get orbital period in minutes
+	double getOrbitalPeriod() const;
+	static gTime getEpoch() { return epoch; }
 
 //private:
         // Operation calcObserverECIPosition
@@ -136,7 +135,6 @@ public:
         //! @param[out] ao_vel Observer ECI velocity vector measured in Km/s
 	static void calcObserverECIPosition(Vec3d& ao_position, Vec3d& ao_vel) ;
 
-
 private:
 	//! do the actual work to compute a cached value.
 	static void updateSunECIPos();
@@ -150,7 +148,6 @@ private:
 	static Vec3d observerECIPos;
 	static Vec3d observerECIVel;
 	static gTime lastCalcObserverECIPosition;
-
 };
 
 #endif

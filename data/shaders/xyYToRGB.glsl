@@ -114,9 +114,9 @@ void main()
 		color[2] = pow(abs(color[2]*pi*0.0001), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 
 		// Convert from xyY to XZY
-		// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
+                // Use a XYZ to sRGB matrix which uses a D65 reference white
 		mediump vec3 tmp = vec3(color[0] * color[2] / color[1], color[2], (1. - color[0] - color[1]) * color[2] / color[1]);
-		resultSkyColor = vec3(2.04148*tmp.x-0.564977*tmp.y-0.344713*tmp.z, -0.969258*tmp.x+1.87599*tmp.y+0.0415557*tmp.z, 0.0134455*tmp.x-0.118373*tmp.y+1.01527*tmp.z);
+                resultSkyColor = vec3(3.2404542*tmp.x-1.5371385*tmp.y-0.4985314*tmp.z, -0.9692660*tmp.x+1.8760108*tmp.y+0.0415560*tmp.z, 0.0556434*tmp.x-0.2040259*tmp.y+1.0572252*tmp.z);
 		resultSkyColor*=brightnessScale;
 	}
 }

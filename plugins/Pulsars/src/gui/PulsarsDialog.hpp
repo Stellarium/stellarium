@@ -62,17 +62,12 @@ private slots:
 	void updateJSON(void);
 	void setFilterValue(double v);
 
-	void askPulsarsMarkerColor();
-	void askPulsarGlitchesMarkerColor();
-
 private:
 	Ui_pulsarsDialog* ui;
 	Pulsars* psr;
 	void setAboutHtml(void);
 	void updateGuiFromSettings(void);
-	void colorButton(QToolButton *toolButton, Vec3f vColor);
 	QTimer* updateTimer;
-
 };
 
 #endif // PULSARSDIALOG_HPP

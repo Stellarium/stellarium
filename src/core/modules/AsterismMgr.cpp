@@ -113,6 +113,11 @@ void AsterismMgr::updateSkyCulture(const QString& skyCultureDir)
 {
 	currentSkyCultureID = skyCultureDir;
 
+	StelObjectMgr* objMgr = GETSTELMODULE(StelObjectMgr);
+	const QList<StelObjectP> selectedObject = objMgr->getSelectedObject("Asterism");
+	if (!selectedObject.isEmpty()) // Unselect asterism
+		objMgr->unSelect();
+
 	// Check if the sky culture changed since last load, if not don't load anything
 	if (lastLoadedSkyCulture == skyCultureDir)
 		return;
@@ -185,9 +190,9 @@ Vec3f AsterismMgr::getLabelsColor() const
 
 void AsterismMgr::setFontSize(const float newFontSize)
 {
-	if (asterFont.pixelSize() != newFontSize)
+	if ((static_cast<float>(asterFont.pixelSize()) - newFontSize) != 0.0f)
 	{
-		asterFont.setPixelSize(newFontSize);
+		asterFont.setPixelSize(static_cast<int>(newFontSize));
 		emit fontSizeChanged(newFontSize);
 	}
 }
@@ -403,7 +408,7 @@ void AsterismMgr::loadNames(const QString& namesFile)
 	// Now parse the file
 	// lines to ignore which start with a # or are empty
 	QRegExp commentRx("^(\\s*#.*|\\s*)$");
-	QRegExp recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\n");
+	QRegExp recRx("^\\s*(\\w+)\\s+_[(]\"(.*)\"[)]\\s*([\\,\\d\\s]*)\\n");
 	QRegExp ctxRx("(.*)\",\\s*\"(.*)");
 
 	// Some more variables to use in the parsing
@@ -471,7 +476,7 @@ void AsterismMgr::updateI18n()
 // update faders
 void AsterismMgr::update(double deltaTime)
 {
-	const int delta = (int)(deltaTime*1000);
+	const int delta = static_cast<int>(deltaTime*1000);
 	for (auto* asterism : asterisms)
 	{
 		asterism->update(delta);

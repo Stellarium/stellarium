@@ -33,6 +33,7 @@ AngleWarpMode=(режим ANGLE WARP)
 MesaMode=(режим MESA)
 DebugMode=(с диагностикой OpenGL)
 SpoutMode=(с отправителем Spout)
+AltGrMode=(Использовать клавиатуру с AltGr)
 RedistRun=Установка библиотеки времени выполнения Microsoft C/C++...
 UserGuide=Руководство пользователя
 DevelopersDocsOnTheWeb=Документация разработчика в Интернете

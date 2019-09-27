@@ -115,8 +115,8 @@ void TelescopeClientDirectNexStar::telescopeGoto(const Vec3d &j2000Pos, StelObje
 		//Workaround for the discrepancy in precision between Windows/Linux/PPC Macs and Intel Macs:
 		const double ra = (ra_signed >= 0) ? ra_signed : (ra_signed + 2.0 * M_PI);
 		const double dec = atan2(position[2], std::sqrt(position[0]*position[0]+position[1]*position[1]));
-		unsigned int ra_int = (unsigned int)floor(0.5 + ra*(((unsigned int)0x80000000)/M_PI));
-		int dec_int = (int)floor(0.5 + dec*(((unsigned int)0x80000000)/M_PI));
+		unsigned int ra_int = static_cast<unsigned int>(floor(0.5 + ra*(static_cast<unsigned int>(0x80000000)/M_PI)));
+		int dec_int = static_cast<int>(floor(0.5 + dec*(static_cast<unsigned int>(0x80000000)/M_PI)));
 
 		gotoReceived(ra_int, dec_int);
 	}
@@ -179,7 +179,7 @@ void TelescopeClientDirectNexStar::decReceived(unsigned int dec_int)
 	*log_file << Now() << "TelescopeClientDirectNexStar::decReceived: " << dec_int << endl;
 #endif
 	const int nexstar_status = 0;
-	sendPosition(last_ra, dec_int, nexstar_status);
+	sendPosition(last_ra, static_cast<int>(dec_int), nexstar_status);
 	queue_get_position = true;
 }
 
@@ -209,9 +209,9 @@ bool TelescopeClientDirectNexStar::isInitialized(void) const
 void TelescopeClientDirectNexStar::sendPosition(unsigned int ra_int, int dec_int, int status)
 {
 	//Server time is "now", because this class is the server
-	const qint64 server_micros = (qint64) GetNow();
-	const double ra  =  ra_int * (M_PI/(unsigned int)0x80000000);
-	const double dec = dec_int * (M_PI/(unsigned int)0x80000000);
+	const qint64 server_micros = static_cast<qint64>(GetNow());
+	const double ra  =  ra_int * (M_PI/0x80000000u);
+	const double dec = dec_int * (M_PI/0x80000000u);
 	const double cdec = cos(dec);
 	Vec3d position(cos(ra)*cdec, sin(ra)*cdec, sin(dec));
 	Vec3d j2000Position = position;

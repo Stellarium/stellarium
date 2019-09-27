@@ -85,6 +85,18 @@ signals:
 	void propertyChanged(double value);
 };
 
+//! A StelPropertyProxy for QString-based properties
+class StelPropertyStringProxy : public StelPropertyProxy
+{
+	Q_OBJECT
+public:
+	StelPropertyStringProxy(StelProperty* prop,QObject* parent);
+protected slots:
+	void onPropertyChanged(const QVariant &value) Q_DECL_OVERRIDE;
+signals:
+	//! Emitted when the property value changes
+	void propertyChanged(QString value);
+};
 
 //! Wrapper around a Q_PROPERTY (see the [Qt property system](https://doc.qt.io/qt-5/properties.html) for more information) of a specific object, which provides access to the property through a unique ID.
 //! A StelProperty basically is a tuple of `<QObject* target, QMetaProperty prop>` identified by a unique string ID

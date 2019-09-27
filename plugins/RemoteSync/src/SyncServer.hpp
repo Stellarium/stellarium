@@ -39,7 +39,7 @@ class SyncServer : public QObject
 
 public:
 	SyncServer(QObject* parent = Q_NULLPTR);
-	virtual ~SyncServer();
+	virtual ~SyncServer() Q_DECL_OVERRIDE;
 
 	//! This should be called in the StelModule::update function
 	void update();
@@ -49,7 +49,7 @@ public:
 public slots:
 	//! Starts the SyncServer on the specified port. If the server is already running, stops it first.
 	//! Returns true if successful (false usually means port was in use, use getErrorString)
-	bool start(int port);
+	bool start(quint16 port);
 	//! Disconnects all clients, and stops listening
 	void stop();
 	//! Returns a string of the last server error.

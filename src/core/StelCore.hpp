@@ -62,9 +62,11 @@ class StelCore : public QObject
 	//! Read-only property returning the localized projection name
 	Q_PROPERTY(QString currentProjectionNameI18n READ getCurrentProjectionNameI18n NOTIFY currentProjectionNameI18nChanged STORED false)
 	Q_PROPERTY(bool flagGravityLabels READ getFlagGravityLabels WRITE setFlagGravityLabels NOTIFY flagGravityLabelsChanged)
+	Q_PROPERTY(QString currentTimeZone READ getCurrentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
+	Q_PROPERTY(bool flagUseCTZ READ getUseCustomTimeZone WRITE setUseCustomTimeZone NOTIFY useCustomTimeZoneChanged)
+	Q_PROPERTY(bool flagUseDST READ getUseDST WRITE setUseDST NOTIFY flagUseDSTChanged)
 
 public:
-
 	//! @enum FrameType
 	//! Supported reference frame types
 	enum FrameType
@@ -157,7 +159,7 @@ public:
 	void update(double deltaTime);
 
 	//! Handle the resizing of the window
-	void windowHasBeenResized(float x, float y, float width, float height);
+	void windowHasBeenResized(qreal x, qreal y, qreal width, qreal height);
 
 	//! Update core state before drawing modules.
 	void preDraw();
@@ -178,27 +180,32 @@ public:
 	StelProjectorP getProjection(StelProjector::ModelViewTranformP modelViewTransform, ProjectionType projType=(ProjectionType)1000) const;
 
 	//! Get the current tone reproducer used in the core.
-	StelToneReproducer* getToneReproducer();
+	StelToneReproducer* getToneReproducer(){return toneReproducer;}
 	//! Get the current tone reproducer used in the core.
-	const StelToneReproducer* getToneReproducer() const;
+	const StelToneReproducer* getToneReproducer() const{return toneReproducer;}
 
 	//! Get the current StelSkyDrawer used in the core.
-	StelSkyDrawer* getSkyDrawer();
+	StelSkyDrawer* getSkyDrawer(){return skyDrawer;}
 	//! Get the current StelSkyDrawer used in the core.
-	const StelSkyDrawer* getSkyDrawer() const;
+	const StelSkyDrawer* getSkyDrawer() const{return skyDrawer;}
 
 	//! Get an instance of StelGeodesicGrid which is garanteed to allow for at least maxLevel levels
 	const StelGeodesicGrid* getGeodesicGrid(int maxLevel) const;
 
 	//! Get the instance of movement manager.
-	StelMovementMgr* getMovementMgr();
+	StelMovementMgr* getMovementMgr(){return movementMgr;}
 	//! Get the const instance of movement manager.
-	const StelMovementMgr* getMovementMgr() const;
+	const StelMovementMgr* getMovementMgr() const{return movementMgr;}
 
 	//! Set the near and far clipping planes.
-	void setClippingPlanes(double znear, double zfar);
+	void setClippingPlanes(double znear, double zfar){
+		currentProjectorParams.zNear=znear;currentProjectorParams.zFar=zfar;
+	}
 	//! Get the near and far clipping planes.
-	void getClippingPlanes(double* zn, double* zf) const;
+	void getClippingPlanes(double* zn, double* zf) const{
+		*zn = currentProjectorParams.zNear;
+		*zf = currentProjectorParams.zFar;
+	}
 
 	//! Get the translated projection name from its TypeKey for the current locale.
 	QString projectionTypeKeyToNameI18n(const QString& key) const;
@@ -289,7 +296,7 @@ public:
 	//! Get the informations on the current location
 	const StelLocation& getCurrentLocation() const;
 	//! Get the UTC offset on the current location (in hours)
-	float getUTCOffset(const double JD) const;
+	double getUTCOffset(const double JD) const;
 
 	QString getCurrentTimeZone() const;
 	void setCurrentTimeZone(const QString& tz);
@@ -326,7 +333,7 @@ public:
 
 	//! Return the startup mode, can be "actual" (i.e. take current time from system),
 	//! "today" (take some time e.g. on the evening of today) or "preset" (completely preconfigured).
-	QString getStartupTimeMode();
+	QString getStartupTimeMode() const;
 	void setStartupTimeMode(const QString& s);
 
 	//! Get info about valid range for current algorithm for calculation of Delta-T
@@ -388,7 +395,7 @@ public slots:
 	//! they are aligned with the bottom of a 2d screen, or a 3d dome.
 	void setFlagGravityLabels(bool gravity);
 	//! return whether dome-aligned labels are in use
-	bool getFlagGravityLabels();
+	bool getFlagGravityLabels() const;
 	//! Set the offset rotation angle in degree to apply to gravity text (only if gravityLabels is set to false).
 	void setDefaultAngleForGravityText(float a);
 	//! Set the horizontal flip status.
@@ -544,7 +551,7 @@ public slots:
 	bool getIsTimeNow() const;
 
 	//! get the initial "today time" from the config file
-	QTime getInitTodayTime(void);
+	QTime getInitTodayTime(void) const;
 	//! set the initial "today time" from the config file
 	void setInitTodayTime(const QTime& time);
 	//! Set the preset sky time from a QDateTime
@@ -572,7 +579,7 @@ public slots:
 	//! Add n sidereal years to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located. Sidereal year
 	//! connected to orbital period of planets.
-	void addSiderealYears(float n=100.f);
+	void addSiderealYears(double n=100.);
 
 	//! Subtract one [Earth, solar] minute to the current simulation time.
 	void subtractMinute();
@@ -596,7 +603,7 @@ public slots:
 	//! Subtract n sidereal years to the simulation time. The length of time depends
 	//! on the current planetary body on which the observer is located. Sidereal year
 	//! connected to orbital period of planets.
-	void subtractSiderealYears(float n=100.f);
+	void subtractSiderealYears(double n=100.);
 
 	//! Add one synodic month to the simulation time.
 	void addSynodicMonth();
@@ -614,14 +621,14 @@ public slots:
 	//! Add one anomalistic year to the simulation time.
 	void addAnomalisticYear();
 	//! Add n anomalistic years to the simulation time.
-	void addAnomalisticYears(float n=100.f);
+	void addAnomalisticYears(double n=100.);
 
 	//! Add one mean tropical month to the simulation time.
 	void addMeanTropicalMonth();
 	//! Add one mean tropical year to the simulation time.
 	void addMeanTropicalYear();
 	//! Add n mean tropical years to the simulation time.
-	void addMeanTropicalYears(float n=100.f);
+	void addMeanTropicalYears(double n=100.);
 	//! Add one tropical year to the simulation time.
 	void addTropicalYear();
 
@@ -631,7 +638,7 @@ public slots:
 	//! Add one Julian year to the simulation time.
 	void addJulianYear();
 	//! Add n Julian years to the simulation time.
-	void addJulianYears(float n=100.f);
+	void addJulianYears(double n=100.);
 
 	//! Add one Gaussian year to the simulation time. The Gaussian Year is 365.2568983 days, and is C.F.Gauss's value for the Sidereal Year.
 	//! Note that 1 GaussY=2 &pi;/k where k is the Gaussian gravitational constant. A massless body orbits one solar mass in 1AU distance in a Gaussian Year.
@@ -653,14 +660,14 @@ public slots:
 	//! Subtract one anomalistic year to the simulation time.
 	void subtractAnomalisticYear();
 	//! Subtract n anomalistic years to the simulation time.
-	void subtractAnomalisticYears(float n=100.f);
+	void subtractAnomalisticYears(double n=100.);
 
 	//! Subtract one mean tropical month to the simulation time.
 	void subtractMeanTropicalMonth();
 	//! Subtract one mean tropical year to the simulation time.
 	void subtractMeanTropicalYear();
 	//! Subtract n mean tropical years to the simulation time.
-	void subtractMeanTropicalYears(float n=100.f);
+	void subtractMeanTropicalYears(double n=100.);
 	//! Subtract one tropical year to the simulation time.
 	void subtractTropicalYear();
 
@@ -670,7 +677,7 @@ public slots:
 	//! Subtract one Julian year to the simulation time.
 	void subtractJulianYear();
 	//! Subtract n Julian years to the simulation time.
-	void subtractJulianYears(float n=100.f);
+	void subtractJulianYears(double n=100.);
 
 	//! Subtract one Gaussian year to the simulation time.
 	void subtractGaussianYear();
@@ -689,22 +696,22 @@ public slots:
 
 	//! Set central year for custom equation for calculation of DeltaT
 	//! @param y the year, e.g. 1820
-	void setDeltaTCustomYear(float y) { deltaTCustomYear=y; }
+	void setDeltaTCustomYear(double y) { deltaTCustomYear=y; }
 	//! Set n-dot for custom equation for calculation of DeltaT
 	//! @param v the n-dot value, e.g. -26.0
-	void setDeltaTCustomNDot(float v) { deltaTCustomNDot=v; }
+	void setDeltaTCustomNDot(double v) { deltaTCustomNDot=v; }
 	//! Set coefficients for custom equation for calculation of DeltaT
 	//! @param c the coefficients, e.g. -20,0,32
-	void setDeltaTCustomEquationCoefficients(Vec3f c) { deltaTCustomEquationCoeff=c; }
+	void setDeltaTCustomEquationCoefficients(Vec3d c) { deltaTCustomEquationCoeff=c; }
 
 	//! Get central year for custom equation for calculation of DeltaT
-	float getDeltaTCustomYear() const { return deltaTCustomYear; }
+	double getDeltaTCustomYear() const { return deltaTCustomYear; }
 	//! Get n-dot for custom equation for calculation of DeltaT
-	float getDeltaTCustomNDot() const { return deltaTCustomNDot; }
+	double getDeltaTCustomNDot() const { return deltaTCustomNDot; }
 	//! Get n-dot for current DeltaT algorithm
-	float getDeltaTnDot() const { return deltaTnDot; }
+	double getDeltaTnDot() const { return deltaTnDot; }
 	//! Get coefficients for custom equation for calculation of DeltaT
-	Vec3f getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
+	Vec3d getDeltaTCustomEquationCoefficients() const { return deltaTCustomEquationCoeff; }
 
 	//! initialize ephemerides calculation functions
 	void initEphemeridesFunctions();
@@ -718,16 +725,22 @@ public slots:
 
 	//! Return 3-letter abbreviation of IAU constellation name for position in equatorial coordinates on the current epoch.
 	//! Follows 1987PASP...99..695R: Nancy Roman: Identification of a Constellation from a Position
-	//! Data file from ADC catalog VI/42 with her amendment from 1999-12-30.
+	//! Data file from ADC catalog VI/42 with its amendment from 1999-12-30.
 	//! @param positionEqJnow position vector in rectangular equatorial coordinates of current epoch&equinox.
 	QString getIAUConstellation(const Vec3d positionEqJnow) const;
 
 
 signals:
 	//! This signal is emitted when the observer location has changed.
-	void locationChanged(StelLocation);
+	void locationChanged(const StelLocation&);
 	//! This signal is emitted whenever the targetted location changes
-	void targetLocationChanged(StelLocation);
+	void targetLocationChanged(const StelLocation&);
+	//! This signal is emitted when the current timezone name is changed.
+	void currentTimeZoneChanged(const QString& tz);
+	//! This signal is emitted when custom timezone use is activated (true) or deactivated (false).
+	void useCustomTimeZoneChanged(const bool b);
+	//! This signal is emitted when daylight saving time is enabled or disabled.
+	void flagUseDSTChanged(const bool b);
 	//! This signal is emitted when the time rate has changed
 	void timeRateChanged(double rate);
 	//! This signal is emitted whenever the time is re-synced.
@@ -756,6 +769,8 @@ signals:
 	void currentProjectionNameI18nChanged(const QString& newValue);
 	//! Emitted when gravity label use is changed
 	void flagGravityLabelsChanged(bool gravity);
+	//! Emitted when button "Save settings" is pushed
+	void configurationDataSaved();
 
 private:
 	StelToneReproducer* toneReproducer;		// Tones conversion between stellarium world and display device
@@ -824,10 +839,10 @@ private:
 	bool flagUseCTZ; // custom time zone
 
 	// Variables for equations of DeltaT
-	Vec3f deltaTCustomEquationCoeff;
-	float deltaTCustomNDot;
-	float deltaTCustomYear;
-	float deltaTnDot; // The currently applied nDot correction. (different per algorithm, and displayed in status line.)
+	Vec3d deltaTCustomEquationCoeff;
+	double deltaTCustomNDot;
+	double deltaTCustomYear;
+	double deltaTnDot; // The currently applied nDot correction. (different per algorithm, and displayed in status line.)
 	bool  deltaTdontUseMoon; // true if the currenctly selected algorithm does not do a lunar correction (?????)
 	double (*deltaTfunc)(const double JD); // This is a function pointer which must be set to a function which computes DeltaT(JD).
 	int deltaTstart;   // begin year of validity range for the selected DeltaT algorithm. (SET INT_MIN to mark infinite)

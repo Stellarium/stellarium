@@ -68,7 +68,7 @@ void StelToneReproducer::setDisplayAdaptationLuminance(float _Lda)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-    term2 = (float) (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
+	term2 =(stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
@@ -87,7 +87,7 @@ void StelToneReproducer::setWorldAdaptationLuminance(float _Lwa)
 
 	// Update terms
 	alphaWaOverAlphaDa = alphaWa/alphaDa;
-    term2 = (float) (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PI*0.0001f));
+	term2 = (stelpow10f((betaWa-betaDa)/alphaDa) / (M_PIf*0.0001f));
 	lnTerm2 = std::log(term2);
 	term2TimesOneOverMaxdLpOneOverGamma = std::pow(term2*oneOverMaxdL, oneOverGamma);
 }
@@ -106,15 +106,15 @@ void StelToneReproducer::xyYToRGB(float* color) const
 	if (color[2] <= 0.01f)
 	{
 		// special case for s = 0 (x=0.25, y=0.25)
-		color[2] *= 0.5121445;
-		color[2] = std::pow((float)(color[2]*M_PI*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+		color[2] *= 0.5121445f;
+		color[2] = std::pow((color[2]*M_PIf*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 		color[0] = 0.787077f*color[2];
 		color[1] = 0.9898434f*color[2];
-		color[2] *= 1.9256125;
+		color[2] *= 1.9256125f;
 		return;
 	}
 	
-	if (color[2]<3.9810717055349722)
+	if (color[2]<3.9810717055349722f)
 	{
 		// Compute s, ratio between scotopic and photopic vision
 		const float op = (std::log10(color[2]) + 2.f)/2.6f;
@@ -130,15 +130,15 @@ void StelToneReproducer::xyYToRGB(float* color) const
 
 	// 2. Adapt the luminance value and scale it to fit in the RGB range [2]
 	// color[2] = std::pow(adaptLuminanceScaled(color[2]), oneOverGamma);
-	color[2] = std::pow((float)(color[2]*M_PI*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
+	color[2] = std::pow((color[2]*M_PIf*0.0001f), alphaWaOverAlphaDa*oneOverGamma)* term2TimesOneOverMaxdLpOneOverGamma;
 	
 	// Convert from xyY to XZY
 	const float X = color[0] * color[2] / color[1];
 	const float Y = color[2];
 	const float Z = (1.f - color[0] - color[1]) * color[2] / color[1];
 
-	// Use a XYZ to Adobe RGB (1998) matrix which uses a D65 reference white
-	color[0] = 2.04148f  *X - 0.564977f*Y - 0.344713f *Z;
-	color[1] =-0.969258f *X + 1.87599f *Y + 0.0415557f*Z;
-	color[2] = 0.0134455f*X - 0.118373f*Y + 1.01527f  *Z;
+	// Use a XYZ to sRGB matrix which uses a D65 reference white
+	color[0] = 3.2404542f  *X - 1.5371385f*Y - 0.4985314f *Z;
+	color[1] =-0.9692660f *X + 1.8760108f *Y + 0.0415560f*Z;
+	color[2] = 0.0556434f*X - 0.2040259f*Y + 1.0572252f  *Z;
 }

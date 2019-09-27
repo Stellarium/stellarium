@@ -31,7 +31,7 @@
 #include <QVarLengthArray>
 #include <QDataStream>
 
-#include <stdio.h>
+#include <cstdio>
 
 class SphericalRegion;
 class SphericalPolygon;
@@ -113,7 +113,6 @@ public:
 	static int metaTypeId;
 
 private:
-
 	//! Initialize stuff to allow SphericalRegionP to be used with Qt meta type system.
 	static int initialize();
 };

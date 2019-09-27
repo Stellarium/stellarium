@@ -28,6 +28,7 @@
 #include "StelTextureTypes.hpp"
 #include "StelProjectorType.hpp"
 
+#include <QCache>
 #include <QString>
 
 // The callback type for the external position computation function
@@ -77,7 +78,7 @@ class Ring
 {
 public:
 	Ring(float radiusMin, float radiusMax,const QString &texname);
-	double getSize(void) const {return radiusMax;}
+	double getSize(void) const {return static_cast<double>(radiusMax);}
 	const float radiusMin;
 	const float radiusMax;
 	StelTextureSP tex;
@@ -97,7 +98,7 @@ public:
 	// GZ: Until 0.13 QStrings were used for types.
 	// GZ: Enums are slightly faster than string comparisons in time-critical comparisons.
 	// GZ: If other types are introduced, add here and the string in init().
-	// GZ TODO for 0.16: Preferably convert this into a bitfield and allow several bits set:
+	// GZ TODO for 0.19: Preferably convert this into a bitfield and allow several bits set:
 	// Cubewanos, SDO, OCO, Sednoids are Asteroids, Pluto is a Plutino and DwarfPlanet, Ceres is Asteroid and DwarfPlanet etc.!
 	// Maybe even add queries like Planet::isAsteroid() { return (planetType & Planet::isAsteroid);}
 	enum PlanetType
@@ -116,6 +117,7 @@ public:
 		isSDO,          // ssystem.ini: type="scattered disc object"
 		isOCO,          // ssystem.ini: type="oco"
 		isSednoid,      // ssystem.ini: type="sednoid"
+		isInterstellar, // ssystem.ini: type="interstellar object"
 		isUNDEFINED     // ssystem.ini: type=<anything else>. THIS IS ONLY IN CASE OF ERROR!
 	};
 
@@ -138,7 +140,7 @@ public:
 
 
 	Planet(const QString& englishName,
-	       double radius,
+	       double equatorialRadius,
 	       double oblateness,
 	       Vec3f halocolor,
 	       float albedo,
@@ -188,6 +190,11 @@ public:
 	//! - elongation-dms (formatted string)
 	//! - elongation-deg (formatted string)
 	//! - type (object type description)
+	//! - velocity (formatted string)
+	//! - heliocentric-velocity (formatted string)
+	//! - scale
+	//! - eclipse-obscuration (for Sun only)
+	//! - eclipse-magnitude (for Sun only)
 	virtual QVariantMap getInfoMap(const StelCore *core) const;
 	virtual double getCloseViewFov(const StelCore* core) const;
 	virtual double getSatellitesFov(const StelCore* core) const;
@@ -221,18 +228,21 @@ public:
 	// Methods specific to Planet
 	//! Get the equator radius of the planet in AU.
 	//! @return the equator radius of the planet in astronomical units.
-	double getRadius(void) const {return radius;}
+	double getEquatorialRadius(void) const {return equatorialRadius;}
 	//! Get the value (1-f) for oblateness f.
 	double getOneMinusOblateness(void) const {return oneMinusOblateness;}
+	//! Get the polar radius of the planet in AU.
+	//! @return the polar radius of the planet in astronomical units.
+	double getPolarRadius(void) const {return equatorialRadius*oneMinusOblateness;}
 	//! Get duration of sidereal day
-	double getSiderealDay(void) const {return re.period;}
+	double getSiderealDay(void) const {return static_cast<double>(re.period);}
 	//! Get duration of sidereal year
 	// must be virtual for Comets.
 	virtual double getSiderealPeriod(void) const { return re.siderealPeriod; }
 	//! Get duration of mean solar day
 	double getMeanSolarDay(void) const;
 	//! Get albedo
-	double getAlbedo(void) const { return albedo; }
+	double getAlbedo(void) const { return static_cast<double>(albedo); }
 
 	const QString& getTextMapName() const {return texMapName;}
 	const QString getPlanetTypeString() const {return pTypeMap.value(pType);}
@@ -266,7 +276,7 @@ public:
 	void setRotationElements(float _period, float _offset, double _epoch,
 				 float _obliquity, float _ascendingNode,
 				 float _precessionRate, double _siderealPeriod);
-	double getRotAscendingNode(void) const {return re.ascendingNode;}
+	double getRotAscendingNode(void) const {return static_cast<double>(re.ascendingNode);}
 	// return angle between axis and normal of ecliptic plane (or, for a moon, equatorial/reference plane defined by parent).
 	// TODO: decide if this is always angle between axis and J2000 ecliptic, or should be axis//current ecliptic!
 	double getRotObliquity(double JDE) const;
@@ -274,7 +284,6 @@ public:
 
 
 	//! Compute the position in the parent Planet coordinate system
-	void computePositionWithoutOrbits(const double dateJDE);
 	virtual void computePosition(const double dateJDE);
 
 	//! Compute the transformation matrix from the local Planet coordinate to the parent Planet coordinate.
@@ -291,13 +300,16 @@ public:
 	float getPhase(const Vec3d& obsPos) const;
 
 	//! Get the Planet position in the parent Planet ecliptic coordinate in AU
-	Vec3d getEclipticPos() const;
+	Vec3d getEclipticPos(double dateJDE) const;
+	Vec3d getEclipticPos() const {return getEclipticPos(lastJDE);}
 
 	//! Return the heliocentric ecliptical position
 	Vec3d getHeliocentricEclipticPos() const {return getHeliocentricPos(eclipticPos);}
+	Vec3d getHeliocentricEclipticPos(double dateJDE) const;
 
 	//! Return the heliocentric transformation for local coordinate
 	Vec3d getHeliocentricPos(Vec3d) const;
+
 	void setHeliocentricEclipticPos(const Vec3d &pos);
 
 	//! Get the planet velocity around the parent planet in ecliptical coordinates in AU/d
@@ -347,11 +359,8 @@ public:
 	// draw orbital path of Planet
 	void drawOrbit(const StelCore*);
 	Vec3d orbit[ORBIT_SEGMENTS+1];  // store heliocentric coordinates for drawing the orbit
-	Vec3d orbitP[ORBIT_SEGMENTS+1]; // store local coordinate for orbit
-	double lastOrbitJDE;
 	double deltaJDE;                // time difference between positional updates.
 	double deltaOrbitJDE;
-	bool orbitCached;               // whether orbit calculations are cached for drawing orbit yet
 	bool closeOrbit;                // whether to connect the beginning of the orbit line to
 					// the end: good for elliptical orbits, bad for parabolic
 					// and hyperbolic orbits
@@ -400,6 +409,10 @@ public:
 	static void setSednoidOrbitColor(const Vec3f& oc) { orbitSednoidsColor = oc;}
 	static const Vec3f& getSednoidOrbitColor() {return orbitSednoidsColor;}
 
+	static Vec3f orbitInterstellarColor;
+	static void setInterstellarOrbitColor(const Vec3f& oc) { orbitInterstellarColor = oc;}
+	static const Vec3f& getInterstellarOrbitColor() {return orbitInterstellarColor;}
+
 	static Vec3f orbitMercuryColor;
 	static void setMercuryOrbitColor(const Vec3f& oc) { orbitMercuryColor = oc;}
 	static const Vec3f& getMercuryOrbitColor() {return orbitMercuryColor;}
@@ -432,7 +445,6 @@ public:
 	static void setNeptuneOrbitColor(const Vec3f& oc) { orbitNeptuneColor = oc;}
 	static const Vec3f& getNeptuneOrbitColor() {return orbitNeptuneColor;}
 
-	static bool permanentDrawingOrbits;
 	static PlanetOrbitColorStyle orbitColorStyle;
 
 	//! Return the list of planets which project some shadow on this planet
@@ -473,6 +485,9 @@ protected:
 
 	void computeModelMatrix(Mat4d &result) const;
 
+	//! Update the orbit position values.
+	void computeOrbit();
+
 	Vec3f getCurrentOrbitColor() const;
 	
 	// Return the information string "ready to print" :)
@@ -509,7 +524,7 @@ protected:
 	QString normalMapName;           // Texture file path
 	//int flagLighting;              // Set whether light computation has to be proceed. NO LONGER USED (always on!)
 	RotationElements re;             // Rotation param
-	double radius;                   // Planet radius in AU
+	double equatorialRadius;         // Planet's equatorial radius in AU
 	double oneMinusOblateness;       // (polar radius)/(equatorial radius)
 	Vec3d eclipticPos;               // Position in AU in the rectangular ecliptic coordinate system (J2000) around the parent body.
 					 // To get heliocentric coordinates, use getHeliocentricEclipticPos()
@@ -572,6 +587,8 @@ protected:
 	static StelTextureSP hintCircleTex;
 	static QMap<PlanetType, QString> pTypeMap; // Maps fast type to english name.
 	static QMap<ApparentMagnitudeAlgorithm, QString> vMagAlgorithmMap;
+	//! If true, planet orbits will be drawn even if planet is off screen.
+	static bool permanentDrawingOrbits;
 
 	static bool flagCustomGrsSettings;	// Is enabled usage of custom settings for calculation of position of Great Red Spot?
 	static double customGrsJD;		// Initial JD for calculation of position of Great Red Spot
@@ -677,6 +694,9 @@ private:
 						  const QByteArray& fSrc,
 						  const QByteArray& prefix=QByteArray(),
 						  const QMap<QByteArray,int>& fixedAttributeLocations=QMap<QByteArray,int>());
+
+	// Cache of positions in the parent ecliptic coordinates in AU.
+	mutable QCache<double, Vec3d> positionsCache;
 };
 
 #endif // PLANET_HPP

@@ -2,7 +2,7 @@
 ########### install files ###############
 
 # install models
-INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/models 
+INSTALL(DIRECTORY ./ DESTINATION ${SDATALOC}/models
 	FILES_MATCHING 
 	PATTERN "*.mtl"
 	PATTERN "*.png"
@@ -10,7 +10,7 @@ INSTALL(DIRECTORY ./ DESTINATION share/${PACKAGE}/models
 	PATTERN "*.gz"
 	PATTERN "CMakeFiles" EXCLUDE )
 
-INSTALL(DIRECTORY blender/ DESTINATION share/${PACKAGE}/models/blender 
+INSTALL(DIRECTORY blender/ DESTINATION ${SDATALOC}/models/blender
 	FILES_MATCHING 
 	PATTERN "*.blend"
 	PATTERN "CMakeFiles" EXCLUDE )

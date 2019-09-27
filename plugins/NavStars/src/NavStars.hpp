@@ -98,6 +98,8 @@ public:
 
 	void populateNavigationalStarsSet(void);
 
+	QList<int> getStarsNumbers(void) { return starNumbers; }
+
 public slots:
 	//! Set flag of displaying markers of the navigational stars
 	//! Emits navStarsMarksChanged() if the value changes.

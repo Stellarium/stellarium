@@ -76,7 +76,6 @@ public:
 			  Ka(-1.0f,-1.0f,-1.0f),Kd(-1.0f,-1.0f,-1.0f),Ks(-1.0f,-1.0f,-1.0f),Ke(-1.0f,-1.0f,-1.0f),
 			  Ns(8.0f), d(-1.0f)
 		{
-
 		}
 
 		//! Name of the material as defined in the .mtl, default empty
@@ -121,6 +120,7 @@ public:
 		//! Does not check if the texture map files exist.
 		//! @return empty vector on error
 		static QVector<Material> loadFromFile(const QString& filename);
+
 	protected:
 		//! Parses a bool from a parameter list (like included in the ::additionalParams)
 		//! using the same logic StelOBJ uses internally
@@ -197,6 +197,7 @@ public:
 
 		//! The list of material groups in this object
 		MaterialGroupList groups;
+
 	private:
 		void postprocess(const StelOBJ& obj, Vec3d& centroid);
 		friend class StelOBJ;
@@ -221,7 +222,7 @@ public:
 
 	//! Returns the number of faces. We only use triangle faces, so this is
 	//! always the index count divided by 3.
-	inline unsigned int getFaceCount() const { return m_indices.size() / 3; }
+	inline unsigned int getFaceCount() const { return static_cast<unsigned int>(m_indices.size()) / 3; }
 
 	//! Returns an vertex list, suitable for loading into OpenGL arrays
 	inline const VertexList& getVertexList() const { return m_vertices; }

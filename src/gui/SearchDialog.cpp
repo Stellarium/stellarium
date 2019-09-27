@@ -80,7 +80,7 @@ void CompletionLabel::clearValues()
 	updateText();
 }
 
-QString CompletionLabel::getSelected()
+QString CompletionLabel::getSelected() const
 {
 	if (values.isEmpty())
 		return QString();
@@ -184,7 +184,7 @@ void SearchDialog::styleChanged()
 void SearchDialog::setCurrentCoordinateSystemKey(QString key)
 {
 	const QMetaEnum& en = metaObject()->enumerator(metaObject()->indexOfEnumerator("CoordinateSystem"));
-	CoordinateSystem coordSystem = (CoordinateSystem)en.keyToValue(key.toLatin1().data());
+	CoordinateSystem coordSystem = static_cast<CoordinateSystem>(en.keyToValue(key.toLatin1().data()));
 	if (coordSystem<0)
 	{
 		qWarning() << "[Search Tool] Unknown coordinate system: " << key << "setting \"equatorialJ2000\" instead";
@@ -288,7 +288,6 @@ void SearchDialog::populateCoordinateAxis()
 		ui->AxisXSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 		ui->AxisYSpinBox->setDisplayFormat(AngleSpinBox::DecimalDeg);
 		ui->AxisXSpinBox->setPrefixType(AngleSpinBox::NormalPlus);
-
 	}
 	else
 	{
@@ -326,9 +325,13 @@ void SearchDialog::createDialogContent()
 	ui->lineEditSearchSkyObject->installEventFilter(this);	
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->objectsListView;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->objectsListView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	populateCoordinateSystemsList();
 	populateCoordinateAxis();
@@ -477,7 +480,7 @@ void SearchDialog::manualPositionChanged()
 		case equatorialJ2000:
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
-			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				// Strictly mount should be in a new J2000 mode, but this here also stabilizes searching J2000 coordinates.
@@ -491,7 +494,7 @@ void SearchDialog::manualPositionChanged()
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->equinoxEquToJ2000(pos, StelCore::RefractionOff);
 
-			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountEquinoxEquatorial) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
@@ -508,7 +511,7 @@ void SearchDialog::manualPositionChanged()
 			StelUtils::spheToRect(cx, spinLat, pos);
 			pos = core->altAzToJ2000(pos);
 
-			if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountAltAzimuthal) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(cx), -sin(cx), 0.) * (spinLat>0. ? 1. : -1. ));
@@ -520,7 +523,7 @@ void SearchDialog::manualPositionChanged()
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->galacticToJ2000(pos);
-			if ( (mountMode==StelMovementMgr::MountGalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountGalactic) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
@@ -532,7 +535,7 @@ void SearchDialog::manualPositionChanged()
 		{
 			StelUtils::spheToRect(spinLong, spinLat, pos);
 			pos = core->supergalacticToJ2000(pos);
-			if ( (mountMode==StelMovementMgr::MountSupergalactic) && (fabs(spinLat)> (0.9*M_PI/2.0)) )
+			if ( (mountMode==StelMovementMgr::MountSupergalactic) && (fabs(spinLat)> (0.9*M_PI_2)) )
 			{
 				// make up vector more stable.
 				mvmgr->setViewUpVector(Vec3d(-cos(spinLong), -sin(spinLong), 0.) * (spinLat>0. ? 1. : -1. ));
@@ -613,7 +616,7 @@ void SearchDialog::onSearchTextChanged(const QString& text)
 		// objects with short names should be searched first
 		// examples: Moon, Hydra (moon); Jupiter, Ghost of Jupiter
 		stringLengthCompare comparator;
-		qSort(matches.begin(), matches.end(), comparator);
+		std::sort(matches.begin(), matches.end(), comparator);
 
 		ui->completionLabel->setValues(matches);
 		ui->completionLabel->selectFirst();

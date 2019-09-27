@@ -105,11 +105,13 @@ flag_show_size                      = false
 [gui]
 flag_show_flip_buttons              = false
 flag_show_nebulae_background_button = false
-base_font_size                      = 13
+screen_font_size                    = 13
+gui_font_size                       = 13
 #Name of custom font file for some languages, like Thai.
 #This file should be stored into data/ folder.
 #base_font_file                      = DejaVuSans.ttf
 #base_font_name                      = DejaVu Sans
+flag_font_selection                 = false
 mouse_cursor_timeout                = 10
 flag_mouse_cursor_timeout           = false
 selected_object_info                = all
@@ -165,7 +167,9 @@ zenith_nadir_color                  = 0.2,0.6,0.2
 cardinal_color                      = 0.8,0.2,0.1
 # A mix of equatorial (blueish) and ecliptical (reddish)...
 colures_color                       = 0.5,0.0,0.5
-oc_longitude_color                  = 0.2,0.4,0.4
+oc_longitude_color                  = 0.6,0.2,0.4
+antisolar_point_color               = 0.9,0.3,0.5
+apex_points_color                   = 0.8,0.2,0.3
 
 # Constellations
 const_lines_color                   = 0.2,0.2,0.6

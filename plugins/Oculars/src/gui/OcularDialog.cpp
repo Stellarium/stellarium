@@ -278,15 +278,21 @@ void OcularDialog::createDialogContent()
 	ui->lensListView->setModel(lensTableModel);
 
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->textBrowser << ui->telescopeListView << ui->ccdListView << ui->ocularListView << ui->lensListView;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
+
 	
 	//Now the rest of the actions.
 	connect(ui->closeStelWindow, SIGNAL(clicked()), this, SLOT(close()));
 	connect(ui->TitleBar, SIGNAL(movedTo(QPoint)), this, SLOT(handleMovedTo(QPoint)));
 
 	connectBoolProperty(ui->checkBoxControlPanel,          "Oculars.flagGuiPanelEnabled");
+	connectIntProperty(ui->guiFontSizeSpinBox,             "Oculars.guiPanelFontSize");
 	connectBoolProperty(ui->checkBoxInitialFOV,            "Oculars.flagInitFOVUsage");
 	connectBoolProperty(ui->checkBoxInitialDirection,      "Oculars.flagInitDirectionUsage");
 	connectBoolProperty(ui->checkBoxResolutionCriterion,   "Oculars.flagShowResolutionCriterions");
@@ -300,6 +306,8 @@ void OcularDialog::createDialogContent()
 	connectBoolProperty(ui->checkBoxTelradFOVScaling,      "Oculars.flagScalingFOVForTelrad");
 	connectBoolProperty(ui->checkBoxToolbarButton,         "Oculars.flagShowOcularsButton");
 	connectDoubleProperty(ui->arrowButtonScaleDoubleSpinBox, "Oculars.arrowButtonScale");
+	connectBoolProperty(ui->checkBoxShowCcdCropOverlay,    "Oculars.flagShowCcdCropOverlay");
+	connectIntProperty(ui->guiCcdCropOverlaySizeSpinBox,   "Oculars.ccdCropOverlaySize");
 
 	// The add & delete buttons
 	connect(ui->addCCD,          SIGNAL(clicked()), this, SLOT(insertNewCCD()));
@@ -354,20 +362,20 @@ void OcularDialog::createDialogContent()
 	ui->ccdListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->ccdListView->setCurrentIndex(ccdTableModel->index(0, 1));
 
-	connect(ui->ccdChipY,    SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->ccdChipX,    SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->ccdPixelY,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->ccdPixelX,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->ccdResX,     SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
-	connect(ui->ccdResY,     SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
-	connect(ui->ccdRotAngle, SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->ccdBinningX, SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
-	connect(ui->ccdBinningY, SIGNAL(valueChanged(int)),    ccdMapper, SLOT(submit()));
-	connect(ui->OAG_checkBox,SIGNAL(stateChanged(int)),    ccdMapper, SLOT(submit()));
-	connect(ui->OAGPrismH,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->OAGPrismW,   SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->OAGDist,     SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
-	connect(ui->OAGPrismPA,  SIGNAL(valueChanged(double)), ccdMapper, SLOT(submit()));
+	connect(ui->ccdChipY,    SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdChipX,    SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdPixelY,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdPixelX,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdResX,     SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdResY,     SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdRotAngle, SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdBinningX, SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->ccdBinningY, SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->OAG_checkBox,SIGNAL(stateChanged(int)), ccdMapper, SLOT(submit()));
+	connect(ui->OAGPrismH,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->OAGPrismW,   SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->OAGDist,     SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
+	connect(ui->OAGPrismPA,  SIGNAL(editingFinished()), ccdMapper, SLOT(submit()));
 
 	// The ocular mapper
 	ocularMapper = new QDataWidgetMapper();
@@ -386,11 +394,11 @@ void OcularDialog::createDialogContent()
 	ui->ocularListView->setCurrentIndex(ocularTableModel->index(0, 1));
 
 	// We need particular refresh methods to see immediate feedback.
-	connect(ui->ocularAFov,                 SIGNAL(valueChanged(double)), this, SLOT(updateOcular()));
-	connect(ui->ocularFL,                   SIGNAL(valueChanged(double)), this, SLOT(updateOcular()));
-	connect(ui->ocularFieldStop,            SIGNAL(valueChanged(double)), this, SLOT(updateOcular()));
-	connect(ui->binocularsCheckBox,         SIGNAL(stateChanged(int)),    this, SLOT(updateOcular()));
-	connect(ui->permanentCrosshairCheckBox, SIGNAL(stateChanged(int)),    this, SLOT(updateOcular()));
+	connect(ui->ocularAFov,                 SIGNAL(editingFinished()), this, SLOT(updateOcular()));
+	connect(ui->ocularFL,                   SIGNAL(editingFinished()), this, SLOT(updateOcular()));
+	connect(ui->ocularFieldStop,            SIGNAL(editingFinished()), this, SLOT(updateOcular()));
+	connect(ui->binocularsCheckBox,         SIGNAL(stateChanged(int)), this, SLOT(updateOcular()));
+	connect(ui->permanentCrosshairCheckBox, SIGNAL(stateChanged(int)), this, SLOT(updateOcular()));
 
 	// The lens mapper
 	lensMapper = new QDataWidgetMapper();
@@ -404,7 +412,7 @@ void OcularDialog::createDialogContent()
 	ui->lensListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->lensListView->setCurrentIndex(lensTableModel->index(0, 1));
 
-	connect(ui->lensMultiplier, SIGNAL(valueChanged(double)), this, SLOT(updateLens()));
+	connect(ui->lensMultiplier, SIGNAL(editingFinished()), this, SLOT(updateLens()));
 
 	// The telescope mapper
 	telescopeMapper = new QDataWidgetMapper();
@@ -422,11 +430,11 @@ void OcularDialog::createDialogContent()
 	ui->telescopeListView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->telescopeListView->setCurrentIndex(telescopeTableModel->index(0, 1));
 
-	connect(ui->telescopeDiameter, SIGNAL(valueChanged(double)), this, SLOT(updateTelescope()));
-	connect(ui->telescopeFL,       SIGNAL(valueChanged(double)), this, SLOT(updateTelescope()));
-	connect(ui->telescopeHFlip,    SIGNAL(stateChanged(int)),    this, SLOT(updateTelescope()));
-	connect(ui->telescopeVFlip,    SIGNAL(stateChanged(int)),    this, SLOT(updateTelescope()));
-	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)),    this, SLOT(updateTelescope()));
+	connect(ui->telescopeDiameter, SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
+	connect(ui->telescopeFL,       SIGNAL(editingFinished()), this, SLOT(updateTelescope()));
+	connect(ui->telescopeHFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
+	connect(ui->telescopeVFlip,    SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
+	connect(ui->telescopeEQ,       SIGNAL(stateChanged(int)), this, SLOT(updateTelescope()));
 
 	connect(ui->binocularsCheckBox, SIGNAL(toggled(bool)), this, SLOT(setLabelsDescriptionText(bool)));
 }
@@ -485,6 +493,7 @@ void OcularDialog::initAboutText()
 	html += "<tr><td>Alexander Wolf</td></tr>";
 	html += "<tr><td>Rumen G. Bogdanovski &lt;rumen@skyarchive.org&gt;</td></tr>";
 	html += "<tr><td>Georg Zotti</td></tr>";
+	html += "<tr><td>Matt Hughes (" + q_("Sensor crop overlay feature") + ")</td></tr>";
 	html += "</table>";
 
 	//Overview

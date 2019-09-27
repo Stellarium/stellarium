@@ -1,0 +1,315 @@
+//
+// Name: Messier Marathon
+// Author: ultrapre@github.com
+// Version: 1.0
+// License: Public Domain
+// Description: Messier Marathon on March 20, 2020. The data for the script are taken from GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm
+
+// Made on Stellarium 0.19.1
+
+include("i18n.inc");
+include("common_objects.inc");
+core.clear("natural");
+
+LandscapeMgr.setCurrentLandscapeName("Guereins",1);
+LandscapeMgr.setFlagCardinalsPoints(true);
+
+var TitleNow = tr("Messier Marathon");
+var MyLocation = core.getObserverLocationInfo();
+
+core.setTimezone("LMST");
+
+LandscapeMgr.setFlagCardinalsPoints(true);
+
+LabelMgr.labelScreen(TitleNow,200,200,true,30,"#ff0000");
+core.wait(3);
+LabelMgr.deleteAllLabels();
+MarkerMgr.deleteAllMarkers();
+core.setDiskViewport(false);
+ConstellationMgr.setFlagIsolateSelected(true);
+ConstellationMgr.setFlagBoundaries(false);
+ConstellationMgr.setFlagLines(true);
+StelMovementMgr.setEquatorialMount(false);
+LandscapeMgr.setFlagLandscape(true);
+LandscapeMgr.setFlagAtmosphere(true);
+
+var objNameSum = ["M45","M74","M77","M31","M32","M110","M33","M76","M52","M103",
+		  "M34","M79","M42","M43","M78","M1","M41","M93","M47","M46",
+		  "M50","M48","M35","M37","M36","M38","M95","M96","M105","M65",
+		  "M66","M101","M63","M51","M94","M102","M3","M64","M53","M59",
+		  "M60","M87","M89","M90","M58","M84","M86","M88","M91","M98",
+		  "M99","M100","M85","M49","M61","M104","M68","M44","M83","M67",
+		  "M5","M13","M92","M57","M56","M29","M39","M27","M71","M107",
+		  "M12","M10","M14","M9","M4","M80","M19","M62","M11","M26",
+		  "M16","M17","M18","M24","M81","M82","M23","M21","M20","M8",
+		  "M25","M28","M22","M69","M70","M54","M55","M75","M6","M7",
+		  "M15","M2","M72","M73","M97","M108","M40","M106","M109","M30"];
+var NowTime =  ["2020-03-20T19:30:00","2020-03-20T19:40:00","2020-03-20T19:45:00",
+		"2020-03-20T19:47:00","2020-03-20T19:47:00","2020-03-20T19:47:00",
+		"2020-03-20T19:48:00","2020-03-20T20:15:00","2020-03-20T21:05:00",
+		"2020-03-20T21:10:00","2020-03-20T21:17:00","2020-03-20T21:20:00",
+		"2020-03-20T21:22:00","2020-03-20T21:22:00","2020-03-20T21:26:00",
+		"2020-03-20T21:30:00","2020-03-20T21:30:00","2020-03-20T21:30:00",
+		"2020-03-20T21:33:00","2020-03-20T21:33:00","2020-03-20T21:33:00",
+		"2020-03-20T21:41:00","2020-03-20T22:36:00","2020-03-20T22:36:00",
+		"2020-03-20T22:36:00","2020-03-20T22:36:00","2020-03-20T22:44:00",
+		"2020-03-20T22:44:00","2020-03-20T22:44:00","2020-03-20T22:48:00",
+		"2020-03-20T22:48:00","2020-03-20T22:56:00","2020-03-20T23:00:00",
+		"2020-03-20T23:00:00","2020-03-20T23:04:00","2020-03-20T23:09:00",
+		"2020-03-20T23:10:00","2020-03-20T23:15:00","2020-03-20T23:18:00",
+		"2020-03-20T23:44:00","2020-03-20T23:44:00","2020-03-20T23:49:00",
+		"2020-03-20T23:49:00","2020-03-20T23:49:00","2020-03-20T23:49:00",
+		"2020-03-20T23:52:00","2020-03-20T23:52:00","2020-03-20T23:54:00",
+		"2020-03-20T23:54:00","2020-03-21T00:00:00","2020-03-21T00:00:00",
+		"2020-03-21T00:00:00","2020-03-21T00:00:00","2020-03-21T00:05:00",
+		"2020-03-21T00:05:00","2020-03-21T00:08:00","2020-03-21T00:08:00",
+		"2020-03-21T00:08:00","2020-03-21T02:49:00","2020-03-21T02:54:00",
+		"2020-03-21T03:02:00","2020-03-21T03:02:00","2020-03-21T03:03:00",
+		"2020-03-21T03:05:00","2020-03-21T03:05:00","2020-03-21T03:08:00",
+		"2020-03-21T03:08:00","2020-03-21T03:12:00","2020-03-21T03:12:00",
+		"2020-03-21T03:16:00","2020-03-21T03:16:00","2020-03-21T03:16:00",
+		"2020-03-21T03:16:00","2020-03-21T03:16:00","2020-03-21T03:20:00",
+		"2020-03-21T03:20:00","2020-03-21T03:20:00","2020-03-21T03:20:00",
+		"2020-03-21T03:26:00","2020-03-21T03:26:00","2020-03-21T03:29:00",
+		"2020-03-21T03:29:00","2020-03-21T03:29:00","2020-03-21T03:29:00",
+		"2020-03-21T03:31:00","2020-03-21T03:31:00","2020-03-21T05:06:00",
+		"2020-03-21T05:06:00","2020-03-21T05:06:00","2020-03-21T05:06:00",
+		"2020-03-21T05:12:00","2020-03-21T05:12:00","2020-03-21T05:12:00",
+		"2020-03-21T05:12:00","2020-03-21T05:12:00","2020-03-21T05:12:00",
+		"2020-03-21T05:12:00","2020-03-21T05:12:00","2020-03-21T05:22:00",
+		"2020-03-21T05:22:00","2020-03-21T05:27:00","2020-03-21T05:27:00",
+		"2020-03-21T05:27:00","2020-03-21T05:27:00","2020-03-21T05:31:00",
+		"2020-03-21T05:31:00","2020-03-21T05:34:00","2020-03-21T05:36:00",
+		"2020-03-21T05:39:00","2020-03-21T05:39:00"];
+var PasteText = [tr("Difficulty is 0"), 
+		 tr("Very diffuse, very dark, very difficult"), 
+		 tr("Easier than M74, small"), 
+		 tr("Visible to the naked eye, no difficulty"), 
+		 tr("More difficult than M110 to verify, small"), 
+		 tr("In the west of M31, it is easy to detect"), 
+		 tr("Diffuse, great, brighter"), 
+		 tr("Small, easy to locate, not as horror as imagined"), 
+		 tr("Difficult to locate, easy to detect and verify"), 
+		 tr("Small, easy to locate, don't confuse with NGC663"), 
+		 tr("Large, scattered, easy"), 
+		 tr("Fuzzy, easy to find, accompanied by a small star"), 
+		 tr("Visible to the naked eye, better than M31"), 
+		 tr("Very close to M42, not easy to see the fuzzy"), 
+		 tr("Small, dark, few stars around"), 
+		 tr("Easy to locate, easy to detect in a good transparency."), 
+		 tr("Visible to the naked eye, easier"), 
+		 tr("Easy to locate and verify"), 
+		 tr("Large, scattered"), 
+		 tr("Large, scattered"), 
+		 tr("Bright, easy to verify, difficult to locate"), 
+		 tr("Large, difficult to locate, easy to confuse with NGC2506"), 
+		 tr("Easy, more scattered"), 
+		 tr("Easy, fuzzy"), 
+		 tr("Easy, scattered"), 
+		 tr("Easy, large, scattered"), 
+		 tr("Very close to M96 and M105"), 
+		 tr("Easy to locate and verify, assist to verify M95 and M105"), 
+		 tr("Dark"), 
+		 tr("Very close, it’s like M81 and M82"), 
+		 tr("There is NGC3628 nearby, don't think you have found a new comet"), 
+		 tr("Like the darkened M33, require a high sky conditions"), 
+		 tr("Difficult to locate, 4 stars of the inverted 7 shape beside"), 
+		 tr("Easy, you can see the companion galaxy"), 
+		 tr("Easy to verify"), 
+		 tr("Not easy to locate, small, slightly dark"), 
+		 tr("Not easy to locate, bright"), 
+		 tr("Not easy to locate, no bright stars nearby"), 
+		 tr("Easy to locate"), 
+		 tr("Beside M60, it is easy to verify"), 
+		 tr("It’s an easier one"), 
+		 tr("As bright as M85, easy to verify"), 
+		 tr("Dark, hard to look"), 
+		 tr("Easy to detect than M89, easy to locate"), 
+		 tr("Easy to locate, detect once"), 
+		 tr("There is an NGC4438 near M84 and M86, don't make a mistake"), 
+		 tr("M84 are together, closer to NGC4438"), 
+		 tr("Just above M90, almost like M90"), 
+		 tr("Look hard"), 
+		 tr("This bunch of things in the Virgo Cluster is not easy"), 
+		 tr("M99 is easier to verify than M98"), 
+		 tr("First find M100 and then find M98 and M99"), 
+		 tr("Far away, but very bright, easy to find"), 
+		 tr("Small, not easy to locate, a little difficult"), 
+		 tr("Not easy to locate, easy to verify"), 
+		 tr("Easy to locate and verify, small"), 
+		 tr("Easy to verify, a star 5 magnitude nearby"), 
+		 tr("Visible to the naked eye, big, bright"), 
+		 tr("Bright and big in the galaxies, not hard to find"), 
+		 tr("Bright, easy to verify"), 
+		 tr("Easy to verify in a right location"), 
+		 tr("Famous, like the shoulder pole star"), 
+		 tr("It may be easier to locate from the Dragon"), 
+		 tr("Small, 20 times or more is still easy to detect"), 
+		 tr("More difficult than M57, not easy to locate, very small"), 
+		 tr("Easy, small, looks like a cluster of stars 7-8 magnitude"), 
+		 tr("Larger than imagined, very scattered, not easy to locate"), 
+		 tr("Find M71 first, then find M27, and will be easier to locate"), 
+		 tr("Easy to locate, easy to verify in 50 binos"), 
+		 tr("Easy to locate and verify"), 
+		 tr("Bright, like M13, easy to find"), 
+		 tr("Detect it with M12, brighter than M12"), 
+		 tr("Difficult to locate, easy to verify"), 
+		 tr("Small, not easy to verify"), 
+		 tr("Bright, big, don't forget to detect NGC6144 nearby"), 
+		 tr("Not easy to verify at low power, easy at high power"), 
+		 tr("Follow the line of M4 and Antares, easy to verify"), 
+		 tr("Looking down from M19, darker than M19, but easy to verify"), 
+		 tr("Easy to locate, bright, and almost like M13"), 
+		 tr("Easy to locate M26 by M11"), 
+		 tr("Easy"), tr("Easy"), tr("Easy"), "", 
+		 tr("Difficult to locate, bright, easy to verify"), 
+		 tr("Beside M81, vertical to each other"), 
+		 tr("Large, a little fuzzy"), tr("Beside M20"), 
+		 tr("It’s not hard to see the diffuse nebula"), 
+		 tr("Visible to the naked eye, extremely easy"), 
+		 tr("Big, easy"), tr("Easy to locate and verify, bright"), 
+		 tr("M13 second"), "", "", "", "", "", 
+		 tr("Too big, scattered, not easy to verify"), 
+		 tr("Bigger than M6"), 
+		 tr("Easy to locate and verify"), "", "", "", 
+		 tr("Brighter than imagined, can be detected with 60 binos"), 
+		 tr("Darker than M97, long strips, look hard"), 
+		 tr("Easy to verify with more than 20 times binos"), 
+		 tr("Difficult to locate, bright, easy to verify"), 
+		 tr("In the morning light, it looks too hard, dark"), ""];
+var showtime = ["19:30","19:40","19:45","19:47","19:47","19:47","19:48",
+		"20:15","21:05","21:10","21:17","21:20","21:22","21:22",
+		"21:26","21:30","21:30","21:30","21:33","21:33","21:33",
+		"21:41","22:36","22:36","22:36","22:36","22:44","22:44",
+		"22:44","22:48","22:48","22:56","23:00","23:00","23:04",
+		"23:09","23:10","23:15","23:18","23:44","23:44","23:49",
+		"23:49","23:49","23:49","23:52","23:52","23:54","23:54",
+		"0:00","0:00","0:00","0:00","0:05","0:05","0:08","0:08",
+		"0:08","2:49","2:54","3:02","3:02","3:03","3:05","3:05",
+		"3:08","3:08","3:12","3:12","3:16","3:16","3:16","3:16",
+		"3:16","3:20","3:20","3:20","3:20","3:26","3:26","3:29",
+		"3:29","3:29","3:29","3:31","3:31","5:06","5:06","5:06",
+		"5:06","5:12","5:12","5:12","5:12","5:12","5:12","5:12",
+		"5:12","5:22","5:22","5:27","5:27","5:27","5:27","5:31",
+		"5:31","5:34","5:36","5:39","5:39"];
+
+StelMovementMgr.zoomTo(80,3);
+core.wait(3);
+
+for (i=0; i<110; i++) 
+{
+	var Mylatitude = MyLocation.latitude;
+	var Continus1 = ((i>39 && i<=53)||(i>3 && i<=5)||(i>12 && i<=13)||(i>84 && i<=85)||(i>104 && i<=105)||(i>29 && i<=30)||(i>26 && i<=28)||(i>87 && i<=88));
+	var Continus2 = ((i>=39 && i<53)||(i>=3 && i<5)||(i>=12 && i<13)||(i>=84 && i<85)||(i>=104 && i<105)||(i>=29 && i<30)||(i>=26 && i<28)||(i>=87 && i<88));
+
+	core.setDate(NowTime[i], "local");
+	objName = objNameSum[i];
+
+	if(Mylatitude < 30) 
+	{
+		if(objName == "M74") {
+			core.setDate("-30 minutes", "local");
+		}
+	
+		if(objName == "M31" || objName == "M32" || objName == "M110") {
+			core.setDate("-30 minutes", "local");
+		}
+	
+		if(objName == "M103") {
+			core.setDate("-1 hours", "local");
+		}
+	
+		if(objName == "M52") {
+			core.setDate("-2 hours", "local");
+		}      
+	
+		if(objName == "M33") {
+			core.setDate("-30 minutes", "local");
+		}
+	
+		if(objName == "M34") {
+			core.setDate("-30 minutes", "local");
+		}
+
+		if(objName == "M67") {
+			core.setDate("-30 minutes", "local");
+		}
+	}
+
+	if(Mylatitude > 40)
+	{
+		if(objName == "M79") {
+			core.setDate("-50 minutes", "local");
+		}
+	}
+
+	if(Mylatitude >= 15)
+	{
+		if(i >= 86 && i <= 97) {
+			core.setDate("-20 minutes", "local");
+		}
+		if(i == 96 && Mylatitude >= 48) {
+			core.setDate("+5 minutes", "local");
+		}
+		if(i >= 98 && i <= 108) {
+			core.setDate("-30 minutes", "local");
+		}
+	
+		if(objName == "M30") {
+			core.setDate("2020-03-21T05:08:00", "local");
+		}
+	}
+
+	core.selectObjectByName(objName, true);
+	StelMovementMgr.setFlagTracking(true);
+
+	var nowlabel = LabelMgr.labelScreen(core.getDate("local").substring(11,16)+"\t"+objName+": "+PasteText[i] ,60,624,true,30,"#ff0000");
+	core.wait(4);
+
+	if(Continus1 == true);
+	else if(core.getViewAltitudeAngle()>0)
+	{
+		if(core.getViewAltitudeAngle()<15) 
+		{
+			if(LandscapeMgr.getCurrentLandscapeName()!="Zero Horizon") {
+				LandscapeMgr.setCurrentLandscapeName("Zero Horizon",0.5);
+				core.wait(0.5);
+			}
+		} else {
+			if(LandscapeMgr.getCurrentLandscapeName()!="Guereins") {
+				LandscapeMgr.setCurrentLandscapeName("Guereins",0.5);
+				core.wait(0.5);
+			}
+		}
+		StelMovementMgr.zoomTo(3.2,3);
+		core.wait(3);
+	} else {
+		LabelMgr.deleteLabel(nowlabel);
+		var VisibleNot = tr("cannot be seen now");
+		nowlabel = LabelMgr.labelScreen(core.getDate("local").substring(11,16)+"\t"+objName+": "+VisibleNot ,60,624,true,30,"#ff0000");
+		core.wait(2);
+	}
+
+	LabelMgr.deleteLabel(nowlabel);
+
+	if(core.getViewAltitudeAngle()>0)
+	{
+		core.setDiskViewport(true);
+		core.wait(4);
+		core.setDiskViewport(false);
+	}
+
+	LabelMgr.labelObject(objName, objName, true, 14, "#ff0000", "E", -1.0, "TextOnly", false, 0);
+
+	if(Continus2 == true);
+	else if(core.getViewAltitudeAngle()>0) {
+		StelMovementMgr.zoomTo(80,2);
+		core.wait(2);
+	}
+}
+
+if(LandscapeMgr.getCurrentLandscapeName()!="Guereins")
+{
+	LandscapeMgr.setCurrentLandscapeName("Guereins",0.5);
+	core.wait(0.5);
+}

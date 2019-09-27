@@ -70,7 +70,7 @@ StelPluginInfo NovaeStelPluginInterface::getPluginInfo() const
 	info.id = "Novae";
 	info.displayedName = N_("Bright Novae");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("A plugin that shows some bright novae in the Milky Way galaxy.");
 	info.version = NOVAE_PLUGIN_VERSION;
 	info.license = NOVAE_PLUGIN_LICENSE;
@@ -94,7 +94,8 @@ Novae::Novae()
 	setObjectName("Novae");
 	configDialog = new NovaeDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -455,7 +456,6 @@ void Novae::setNovaeMap(const QVariantMap& map)
 		NovaP n(new Nova(novaeData));
 		if (n->initialized)
 			nova.append(n);
-
 	}
 }
 
@@ -593,12 +593,8 @@ void Novae::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Novae] Updating novae catalog...";
 	startDownload(updateUrl);
-
 }
 
 void Novae::deleteDownloadProgressBar()
@@ -716,6 +712,9 @@ void Novae::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Novae::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Novae/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -740,15 +739,14 @@ void Novae::displayMessage(const QString& message, const QString hexColor)
 
 QString Novae::getNovaeList()
 {
-	QString smonth[] = {q_("January"), q_("February"), q_("March"), q_("April"), q_("May"), q_("June"), q_("July"), q_("August"), q_("September"), q_("October"), q_("November"), q_("December")};
 	QStringList out;
 	int year, month, day;
 	QList<double> vals = novalist.values();
-	qSort(vals);
+	std::sort(vals.begin(), vals.end());
 	for (auto val : vals)
 	{
 		StelUtils::getDateFromJulianDay(val, &year, &month, &day);
-		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(smonth[month-1]).arg(year);
+		out << QString("%1 (%2 %3 %4)").arg(novalist.key(val)).arg(day).arg(StelLocaleMgr::longGenitiveMonthName(month)).arg(year);
 	}
 
 	return out.join(", ");

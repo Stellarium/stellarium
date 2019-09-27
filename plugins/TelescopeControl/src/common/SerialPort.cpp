@@ -172,7 +172,7 @@ int SerialPort::readNonblocking(char *buf, int count)
 {
 	DWORD rval;
 	if (ReadFile(handle, buf, count, &rval, 0))
-		return (int)rval;
+		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;
 	return -1;
@@ -182,7 +182,7 @@ int SerialPort::writeNonblocking(const char *buf, int count)
 {
 	DWORD rval;
 	if (WriteFile(handle, buf, count, &rval, 0))
-		return (int)rval;
+		return static_cast<int>(rval);
 	if (GetLastError() == ERROR_IO_PENDING)
 		return 0;
 	return -1;

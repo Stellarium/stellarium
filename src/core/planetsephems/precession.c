@@ -412,7 +412,7 @@ void getNutationAngles(const double JDE, double *deltaPsi, double *deltaEpsilon)
 		// F5 : Omega = mean longitude of the ascending node of the lunar orbit
 		double Omega  = (450160.398036 - 6962890.5431*t);//*arcSec2Rad;
 
-		double deltaEps=0.0, deltaPsi=0.0;
+		double deltaEps=0.0, deltaPsi=0.0; // lgtm [cpp/declaration-hides-parameter]
 		int i;
 		for (i=0; i<78; ++i)
 		{

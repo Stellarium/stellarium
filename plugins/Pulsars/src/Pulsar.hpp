@@ -163,7 +163,6 @@ private:
 	//! Get type of pulsar
 	//! @param pcode - code of pulsar type
 	QString getPulsarTypeInfoString(QString pcode) const;
-
 };
 
 #endif // PULSAR_HPP

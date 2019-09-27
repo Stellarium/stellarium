@@ -219,7 +219,7 @@ void SlewDialog::slew()
 	if (!telescope)
 		return;
 
-	StelObjectP selectObject = nullptr;
+	StelObjectP selectObject = Q_NULLPTR;
 	telescope->telescopeGoto(targetPosition, selectObject);
 }
 
@@ -240,7 +240,7 @@ void SlewDialog::getCenterInfo()
 	StelCore *core = StelApp::getInstance().getCore();
 	const StelProjectorP projector = core->getProjection(StelCore::FrameEquinoxEqu);
 	Vec3d centerPosition;
-	Vec2f center = projector->getViewportCenter();
+	Vector2<qreal> center = projector->getViewportCenter();
 	projector->unProject(center[0], center[1], centerPosition);
 	double dec_j2000 = 0;
 	double ra_j2000 = 0;
@@ -251,7 +251,6 @@ void SlewDialog::getCenterInfo()
 
 void SlewDialog::editStoredPoints()
 {
-
 	storedPointsDialog->setVisible(true);
 	QVariantList qvl;
 	for (int i = 1;i< ui->comboBoxStoredPoints->count(); i++)
@@ -326,7 +325,7 @@ void SlewDialog::onCurrentTelescopeChanged()
 {
 	// remove previous controlWidget
 	QLayoutItem* child;
-	while ((child = ui->controlWidgetLayout->takeAt(0)) != 0)
+	while ((child = ui->controlWidgetLayout->takeAt(0)) != Q_NULLPTR)
 	{
 		delete child->widget();
 		delete child;
@@ -346,7 +345,7 @@ void SlewDialog::onCurrentTelescopeChanged()
 void SlewDialog::savePointsToFile()
 {
 	//Open/create the JSON file
-	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
+	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
 	if (pointsJsonPath.isEmpty())
 	{
 		qWarning() << "SlewDialog: Error saving points";
@@ -385,7 +384,7 @@ void SlewDialog::savePointsToFile()
 void SlewDialog::loadPointsFromFile()
 {
 	QVariantMap result;
-	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", (StelFileMgr::Flags)(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
+	QString pointsJsonPath = StelFileMgr::findFile("modules/TelescopeControl", static_cast<StelFileMgr::Flags>(StelFileMgr::Directory|StelFileMgr::Writable)) + "/points.json";
 
 	if (pointsJsonPath.isEmpty())
 	{

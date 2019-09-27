@@ -2,46 +2,69 @@
 // Name: List of largest known stars
 // Author: Alexander Wolf
 // License: Public Domain
-// Version: 1.0
+// Version: 1.1
 // Description: This script helps you make an excursion around largest known stars.
 //
 
+include("i18n.inc");
+
 // HIP, FOV, Name, Solar radii, Note
-var largeststar = [[117078,  1.0, "PZ Cassiopeiae", 1565, "PZ Cas is located in a region with heavy dust extinction. The quoted", "size is the average size parameter, the true value is from 1,340-1,940."],
-		  [  88838,  1.0, "VX Sagittarii", 1520, "VX Sgr is a pulsating variable with a large visual range and varies", "significantly in size."],
-		  [ 108317,  5.0, "VV Cephei A", 1475, "VV Cep A is a highly distorted star in a binary system, losing mass to its", "B-type companion VV Cephei B for at least part of its orbit."],
-		  [ 110504,  1.0, "RW Cephei", 1435, "RW Cep is variable both in brightness (by at least a factor of 3) and spectral type", "(observed from G8 to M), thus probably also in diameter."],
-		  [  35793,  0.2, "VY Canis Majoris", 1420, "Once thought to be a red hypergiant star so large that it contradicted stellar evolutionary theory,", "improved measurements and estimates have brought it down to size."],
-		  [  84071,  0.4, "AH Scorpii", 1411, "AH Sco is variable by nearly 3 magnitudes in the visual range, and an estimated 20% in total luminosity.", "The variation in diameter is not clear because the temperature also varies."],
-		  [  67261,  0.2, "V766 Centauri A", 1316, "V766 Centauri A is a highly distorted star in a close binary system,", "losing mass to the secondary."],
-		  [  87433,  0.5, "KW Sagittarii", 1235, "", ""],
-		  [ 100404,  0.8, "BC Cygni", 1140, "", ""],
-		  [  52562,  0.2, "RT Carinae", 1090, "", ""],
-		  [  27989, 10.0, "Betelgeuse", 1075, "Ninth brightest star in the night sky.", ""],
-		  [ 107259,  5.0, "Mu Cephei (Herschel's \"Garnet Star\")", 1035, "", ""],
-		  [  11093,  2.0, "S Persei", 1005, "In the Perseus Double Cluster.", ""],
-		  [ 101023,  0.7, "RW Cygni", 980, "", ""],
-		  [  80763,  5.0, "Antares A", 883, "", ""],
-		  [  64094,  1.5, "Theta Muscae", 878, "", ""],
-		  [ 104029,  1.0, "V1749 Cygni", 830, "", ""],
-		  [ 117763,  0.3, "TZ Cassiopeiae", 800, "", ""],
-		  [  52991,  0.4, "IX Carinae", 790, "", ""],
-		  [  29416,  1.3, "TV Geminorum", 770, "", ""],
-		  [ 104451,  1.3, "T Cephei", 742, "", ""],
-		  [  54283,  0.5, "V382 Carinae", 700, "Yellow hypergiant, one of the rarest types of star.", ""],
-		  [ 113561,  0.5, "V509 Cassiopeiae", 650, "Yellow hypergiant, one of the rarest types of star.", ""],
-		  [  25945,  0.5, "CE Tauri (\"Ruby Star\")", 608, "Can be occulted by the Moon, allowing accurate determination of its apparent diameter.", ""],
-		  [  23203,  1.0, "R Leporis (\"Hind's Crimson Star\")", 500, "One of the largest carbon stars existent in the Milky Way Galaxy.", ""],
-		  [  84345,  5.0, "Alpha Herculis (\"Ras Algethi\")", 460, "", ""],
-		  [ 117863,  1.8, "Rho Cassiopeiae", 450, "A yellow hypergiant, one of the rarest types of a star.", ""],
-		  [  10826,  0.5, "Mira A (Omicron Ceti)", 400, "Prototype Mira variable", ""],
-		  [  21479,  1.5, "R Doradus", 370, "Star with the second largest apparent size after the Sun.", ""],
-		  [  62223,  1.0, "La Superba (Y Canum Venaticorum)", 215, "One of the coolest and reddest known stars.", ""],
-		  [ 102098,  5.0, "Deneb (Alpha Cygni)", 203, "19th brightest star in the night sky.", ""],
-		  [  24436, 20.0, "Rigel A (Beta Orionis A)", 78, "Seventh brightest star in the night sky.", ""],
-		  [  30438, 20.0, "Canopus (Alpha Carinae)", 65, "Second brightest star in the night sky.", ""],
-		  [  21421, 20.0, "Aldebaran (Alpha Tauri)", 44.2, "", ""],
-		  [  108317, 0.5, "VV Cephei B", 10, "The B-type main sequence companion of VV Cephei A.", ""]
+var largeststar = [[117078,  1.0, tr("PZ Cassiopeiae"), 1565, 
+		  tr("PZ Cas is located in a region with heavy dust extinction.\nThe quoted size is the average size parameter, the true\nvalue is from 1,340-1,940.")],
+		  [  88838,  1.0, tr("VX Sagittarii"), 1520,
+		  tr("VX Sgr is a pulsating variable with a large visual range\nand varies significantly in size.")],
+		  [ 108317,  5.0, tr("VV Cephei A"), 1475, 
+		  tr("VV Cep A is a highly distorted star in a binary system,\nlosing mass to its B-type companion VV Cephei B for at least\npart of its orbit.")],
+		  [ 110504,  1.0, tr("RW Cephei"), 1435, 
+		  tr("RW Cep is variable both in brightness (by at least a factor\nof 3) and spectral type (observed from G8 to M), thus\nprobably also in diameter.")],
+		  [  35793,  0.2, tr("VY Canis Majoris"), 1420, 
+		  tr("Once thought to be a red hypergiant star so large that it\ncontradicted stellar evolutionary theory, improved measurements\nand estimates have brought it down to size.")],
+		  [  84071,  0.4, tr("AH Scorpii"), 1411, 
+		  tr("AH Sco is variable by nearly 3 magnitudes in the visual range,\nand an estimated 20% in total luminosity. The variation in diameter\nis not clear because the temperature also varies.")],
+		  [  67261,  0.2, tr("V766 Centauri A"), 1316, 
+		  tr("V766 Centauri A is a highly distorted star in a close binary system,\nlosing mass to the secondary.")],
+		  [  87433,  0.5, tr("KW Sagittarii"), 1235, ""],
+		  [ 100404,  0.8, tr("BC Cygni"), 1140, ""],
+		  [  52562,  0.2, tr("RT Carinae"), 1090, ""],
+		  [  27989, 10.0, tr("Betelgeuse"), 1075, 
+		  tr("Ninth brightest star in the night sky.")],
+		  [ 107259,  5.0, tr("Mu Cephei (Herschel's \"Garnet Star\")"), 1035, ""],
+		  [  11093,  2.0, tr("S Persei"), 1005, 
+		  tr("In the Perseus Double Cluster.")],
+		  [ 101023,  0.7, tr("RW Cygni"), 980, ""],
+		  [  80763,  5.0, tr("Antares A"), 883, ""],
+		  [  64094,  1.5, tr("Theta Muscae"), 878, ""],
+		  [ 104029,  1.0, tr("V1749 Cygni"), 830, ""],
+		  [ 117763,  0.3, tr("TZ Cassiopeiae"), 800, ""],
+		  [  52991,  0.4, tr("IX Carinae"), 790, ""],
+		  [  29416,  1.3, tr("TV Geminorum"), 770, ""],
+		  [ 104451,  1.3, tr("T Cephei"), 742, ""],
+		  [  54283,  0.5, tr("V382 Carinae"), 700, 
+		  tr("Yellow hypergiant, one of the rarest types of star.")],
+		  [ 113561,  0.5, tr("V509 Cassiopeiae"),650, 
+		  tr("Yellow hypergiant, one of the rarest types of star.")],
+		  [  25945,  0.5, tr("CE Tauri (\"Ruby Star\")"), 608, 
+		  tr("Can be occulted by the Moon, allowing accurate determination\nof its apparent diameter.")],
+		  [  23203,  1.0, tr("R Leporis (\"Hind's Crimson Star\")"), 500, 
+		  tr("One of the largest carbon stars existent in the Milky Way Galaxy.")],
+		  [  84345,  5.0, tr("Alpha Herculis (\"Ras Algethi\")"), 460, ""],
+		  [ 117863,  1.8, tr("Rho Cassiopeiae"), 450, 
+		  tr("A yellow hypergiant, one of the rarest types of a star.")],
+		  [  10826,  0.5, tr("Mira A (Omicron Ceti)"), 400, 
+		  tr("Prototype Mira variable")],
+		  [  21479,  1.5, tr("R Doradus"), 370, 
+		  tr("Star with the second largest apparent size after the Sun.")],
+		  [  62223,  1.0, tr("La Superba (Y Canum Venaticorum)"), 215, 
+		  tr("One of the coolest and reddest known stars.")],
+		  [ 102098,  5.0, tr("Deneb (Alpha Cygni)"), 203, 
+		  tr("19th brightest star in the night sky.")],
+		  [  24436, 20.0, tr("Rigel A (Beta Orionis A)"), 78, 
+		  tr("Seventh brightest star in the night sky.")],
+		  [  30438, 20.0, tr("Canopus (Alpha Carinae)"), 65, 
+		  tr("Second brightest star in the night sky.")],
+		  [  21421, 20.0, tr("Aldebaran (Alpha Tauri)"), 44.2, ""],
+		  [  108317, 0.5, tr("VV Cephei B"), 10, 
+		  tr("The B-type main sequence companion of VV Cephei A.")]
 		 ];
 
 var color="#00AAFF";
@@ -56,6 +79,9 @@ ConstellationMgr.setFlagLines(false);
 ConstellationMgr.setFlagLabels(false);
 core.wait(3);
 
+var vshift = 30;
+var vstart = 90;
+
 for (i=0; i<largeststar.length; i++)
 {
 	core.selectObjectByName("HIP" + largeststar[i][0], false);
@@ -63,21 +89,30 @@ for (i=0; i<largeststar.length; i++)
 	StelMovementMgr.zoomTo(largeststar[i][1], 3);
 
 	var lsname  = LabelMgr.labelScreen("#" + (i+1) + " - " + largeststar[i][2], 20, 20, false, 30, color);
-	var lsinfo  = LabelMgr.labelScreen(largeststar[i][3] + " Solar radii", 20, 60, false, 20, color);
-	var lsnote1 = LabelMgr.labelScreen(largeststar[i][4], 20, 90, false, 20, color);
-	var lsnote2 = LabelMgr.labelScreen(largeststar[i][5], 20, 120, false, 20, color);
+	var lsinfo  = LabelMgr.labelScreen(largeststar[i][3] + " " + tr("Solar radii"), 20, 60, false, 20, color);
+	var notes = largeststar[i][4].split("\n");
+	var lsnotes = [];
+	var cnt = notes.length;
+	for (j=0; j<cnt; j++)
+	{
+		lsnotes[j] = LabelMgr.labelScreen(notes[j], 20, vstart + (vshift*j), false, 20, color);
+	}
 
 	LabelMgr.setLabelShow(lsname, true);
 	LabelMgr.setLabelShow(lsinfo, true);
-	LabelMgr.setLabelShow(lsnote1, true);
-	LabelMgr.setLabelShow(lsnote2, true);
+	for (j=0; j<cnt; j++)
+	{
+		LabelMgr.setLabelShow(lsnotes[j], true);
+	}
 
 	core.wait(5);
 
 	LabelMgr.setLabelShow(lsname, false);
 	LabelMgr.setLabelShow(lsinfo, false);
-	LabelMgr.setLabelShow(lsnote1, false);
-	LabelMgr.setLabelShow(lsnote2, false);
+	for (j=0; j<cnt; j++)
+	{
+		LabelMgr.setLabelShow(lsnotes[j], false);
+	}
 	
 	core.wait(1);
 }

@@ -101,9 +101,13 @@ void TelescopeDialog::createDialogContent()
 	ui->setupUi(dialog);
 	
 	// Kinetic scrolling
-	QList<QWidget *> addscroll;
-	addscroll << ui->telescopeTreeView << ui->textBrowserHelp << ui->textBrowserAbout;
-	installKineticScrolling(addscroll);
+	kineticScrollingList << ui->telescopeTreeView << ui->textBrowserHelp << ui->textBrowserAbout;
+	StelGui* gui= dynamic_cast<StelGui*>(StelApp::getInstance().getGui());
+	if (gui)
+	{
+		enableKineticScrolling(gui->getFlagUseKineticScrolling());
+		connect(gui, SIGNAL(flagUseKineticScrollingChanged(bool)), this, SLOT(enableKineticScrolling(bool)));
+	}
 
 	//Inherited connect
 	connect(&StelApp::getInstance(), SIGNAL(languageChanged()), this, SLOT(retranslate()));
@@ -1041,7 +1045,7 @@ void TelescopeDialog::checkBoxUseExecutablesToggled(bool useExecutables)
 
 void TelescopeDialog::buttonBrowseServerDirectoryPressed()
 {
-        QString newPath = QFileDialog::getExistingDirectory (0, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
+	QString newPath = QFileDialog::getExistingDirectory (Q_NULLPTR, QString(q_("Select a directory")), telescopeManager->getServerExecutablesDirectoryPath());
 	//TODO: Validation? Directory exists and contains servers?
 	if(!newPath.isEmpty())
 	{

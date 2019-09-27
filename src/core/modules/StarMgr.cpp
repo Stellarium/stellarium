@@ -57,7 +57,7 @@
 #include <QDir>
 #include <QCryptographicHash>
 
-#include <errno.h>
+#include <cstdlib>
 
 static QStringList spectral_array;
 static QStringList component_array;
@@ -425,7 +425,8 @@ void StarMgr::init()
 	populateStarsDesignations();
 	populateHipparcosLists();
 
-	starFont.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 
 	setFlagStars(conf->value("astro/flag_stars", true).toBool());
 	setFlagLabels(conf->value("astro/flag_star_name",true).toBool());
@@ -1158,7 +1159,7 @@ void StarMgr::draw(StelCore* core)
 		{
 			// Adapt magnitude limit of the stars labels according to FOV and labelsAmount
 			float maxMag = (skyDrawer->getLimitMagnitude()-6.5)*0.7+(labelsAmount*1.2f)-2.f;
-			int x = (int)((maxMag-mag_min)/k);
+			int x = static_cast<int>((maxMag-mag_min)/k);
 			if (x > 0)
 				maxMagStarName = x;
 		}
@@ -1305,14 +1306,14 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 {
 	QString objw = nameI18n.toUpper();
 
-	// Search by HP number if it's an HP formated number
+	// Search by HP number if it's an HP formatted number
 	QRegExp rx("^\\s*(HIP|HP)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx.exactMatch(objw))
 	{
 		return searchHP(rx.capturedTexts().at(2).toInt());
 	}
 
-	// Search by SAO number if it's an SAO formated number
+	// Search by SAO number if it's an SAO formatted number
 	QRegExp rx2("^\\s*(SAO)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx2.exactMatch(objw))
 	{
@@ -1321,7 +1322,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 			return searchHP(sao.value());
 	}
 
-	// Search by HD number if it's an HD formated number
+	// Search by HD number if it's an HD formatted number
 	QRegExp rx3("^\\s*(HD)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx3.exactMatch(objw))
 	{
@@ -1330,7 +1331,7 @@ StelObjectP StarMgr::searchByNameI18n(const QString& nameI18n) const
 			return searchHP(hd.value());
 	}
 
-	// Search by HR number if it's an HR formated number
+	// Search by HR number if it's an HR formatted number
 	QRegExp rx4("^\\s*(HR)\\s*(\\d+)\\s*$", Qt::CaseInsensitive);
 	if (rx4.exactMatch(objw))
 	{
@@ -1517,7 +1518,6 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 			else
 				break;
 		}
-
 	}
 	else
 	{
@@ -1704,7 +1704,7 @@ QStringList StarMgr::listMatchingObjects(const QString& objPrefix, int maxNbItem
 
 
 //! Define font file name and size to use for star names display
-void StarMgr::setFontSize(float newFontSize)
+void StarMgr::setFontSize(int newFontSize)
 {
 	starFont.setPixelSize(newFontSize);
 }

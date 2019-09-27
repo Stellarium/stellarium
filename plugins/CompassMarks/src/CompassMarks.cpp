@@ -51,7 +51,7 @@ StelPluginInfo CompassMarksStelPluginInterface::getPluginInfo() const
 	info.id = "CompassMarks";
 	info.displayedName = N_("Compass Marks");
 	info.authors = "Matthew Gates";
-	info.contact = "http://porpoisehead.net/";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("Displays compass bearing marks along the horizon");
 	info.version = COMPASSMARKS_PLUGIN_VERSION;
 	info.license = COMPASSMARKS_PLUGIN_LICENSE;
@@ -114,8 +114,6 @@ void CompassMarks::init()
 	{
 		qWarning() << "WARNING: unable create toolbar button for CompassMarks plugin: " << e.what();
 	}
-
-
 }
 
 //! Draw any parts on the screen which are for our module
@@ -168,7 +166,7 @@ void CompassMarks::draw(StelCore* core)
 
 void CompassMarks::update(double deltaTime)
 {
-	markFader.update((int)(deltaTime*1000));
+	markFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void CompassMarks::setCompassMarks(bool b)

@@ -1,0 +1,17 @@
+extraction:
+  cpp:
+    prepare:
+      packages:
+      - "libqt5serialport5-dev"
+      - "qtscript5-dev"
+      - "libqt5svg5-dev"
+      - "qttools5-dev-tools"
+      - "qttools5-dev"
+      - "libqt5opengl5-dev"
+      - "qtpositioning5-dev"
+      - "libgps-dev"
+      - "qtmultimedia5-dev"
+      - "libqt5multimedia5-plugins"
+  python:
+    python_setup:
+      version: 3
