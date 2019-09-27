@@ -321,7 +321,7 @@
 	    right to modify and redistribute) "as long as it is credited."
 	4.8 M31 pictures come from LEE ang HG731GZ
 	    License: Creative Commons Attribution 3.0 Unported
-	4.9 Images of Sh2-261
+	4.9 Images of NGC6544, NGC6553, Sh2-261
 	    from Yang Kai
 	    License: public domain 
 	4.10 Images of M1, M27, M42, M57, M97, NGC6946 from Stephane
@@ -564,7 +564,7 @@
 	     from ESO, F. Ferraro (University of Bologna)
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.72 Images of NGC6914
+	4.72 Images of NGC6914, SH2-80, SH2-106
 	     from Cristina Cellini
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution 4.0 International
@@ -660,6 +660,10 @@
 	     from ESO/R. Gendler and Sun Shuwei
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International. This work is a derivative of "Map of the Large Magellanic Cloud" and "The entire Large Magellanic Cloud with annotations" by ESO/R. Gendler, used under Creative Commons Attribution 4.0 International. This work is licensed under Creative Commons Attribution 4.0 International by Sun Shuwei.
+	4.96 Images of Frosty Leo
+	     from Judy Schmidt
+	     https://commons.wikimedia.org/wiki/
+	     License:  Creative Commons Attribution 2.0 Generic
 ```
 
 ## Appendix
