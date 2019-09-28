@@ -1754,7 +1754,10 @@ void Oculars::paintCCDBounds()
 						cyt = StelUtils::radToDmsStr(cy, true);
 					}
 					// Coordinates of center of visible field of view for CCD (red rectangle)
-					QString coords = QString("%1: %2/%3").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin")).arg(cxt).arg(cyt);
+					QString coords = QString("%1:").arg(qc_("RA/Dec (J2000.0) of cross", "abbreviated in the plugin"));
+					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f + 5.f + fontSize*1.2f)));
+					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
+					coords = QString("%1/%2").arg(cxt.simplified()).arg(cyt);
 					a = transform.map(QPoint(static_cast<int>(-width*0.5f), static_cast<int>(height*0.5f + 5.f)));
 					painter.drawText(a.x(), a.y(), coords, static_cast<float>(-(ccd->chipRotAngle() + polarAngle)));
 					// Dimensions of visible field of view for CCD (red rectangle)
