@@ -71,11 +71,16 @@ Type: files; Name: "{userappdata}\Stellarium\log.txt"
 Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
 Type: files; Name: "{userappdata}\Stellarium\data\ssystem_minor.ini"; Tasks: removesolar
 Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
-Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: removelandscapes
 Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: removecache
 ;Type: files; Name: "{userappdata}\Stellarium\data\shortcuts.json"; Tasks: removeshortcuts
 
 [UninstallDelete]
+Type: files; Name: "{userappdata}\Stellarium\log.txt"
+Type: files; Name: "{userappdata}\Stellarium\config.ini"; Tasks: removeconfig
+Type: files; Name: "{userappdata}\Stellarium\data\ssystem_minor.ini"; Tasks: removesolar
+Type: filesandordirs; Name: "{userappdata}\Stellarium\modules"; Tasks: removeplugins
+Type: filesandordirs; Name: "{userappdata}\Stellarium\landscapes"; Tasks: removelandscapes
+Type: filesandordirs; Name: "{localappdata}\stellarium\stellarium"; Tasks: removecache
 
 [Icons]
 Name: "{group}\{cm:ProgramOnTheWeb,Stellarium}"; Filename: "{app}\stellarium.url"; IconFilename: "{app}\data\stellarium.ico"
