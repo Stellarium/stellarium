@@ -4412,7 +4412,7 @@ msgstr "对于某些选定的类行星天体（小卫星，小行星，彗星）
 msgid ""
 "Use a &quot;shadow map&quot; to simulate self-shadows of non-convex solar "
 "system objects. May reduce shadow penumbra quality on some objects."
-msgstr "使用“阴影地图” 模拟非凸太阳系天体的自身阴影。这可能 会降低一些天体上的半影质量。"
+msgstr "使用“阴影贴图” 模拟非凸太阳系天体的自身阴影。这可能会降低一些天体上的半影质量。"
 
 #: src/gui/ViewDialog.cpp:839
 msgid "Abbreviated"
@@ -6637,7 +6637,7 @@ msgstr "阿拉伯月站"
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:461
 msgid "Armintxe"
-msgstr "阿米特"
+msgstr "阿明特"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:463
@@ -6822,7 +6822,7 @@ msgstr "巴比伦 (塞琉古)"
 #. TRANSLATORS: Name of the sky culture and landscape
 #: src/translations.h:535
 msgid "Armintxe Cave"
-msgstr "阿米特洞穴"
+msgstr "阿明特洞穴"
 
 #. TRANSLATORS: Name of the sky culture
 #: src/translations.h:537
@@ -7145,7 +7145,7 @@ msgstr "天王星日行迹"
 #. TRANSLATORS: Name of script
 #: src/translations.h:672
 msgid "Messier Marathon"
-msgstr "梅西耶马拉松"
+msgstr "梅西叶马拉松"
 
 #. TRANSLATORS: Description of the landscape tour script.
 #: src/translations.h:678
@@ -7393,7 +7393,7 @@ msgid ""
 "Messier Marathon on March 20, 2020. The data for the script are taken from "
 "GaoXing's observation log: http://www.xjltp.com/2_huodong/2_030301.htm"
 msgstr ""
-"2020年3月20日的梅西椰马拉松。脚本的数据取自高星的观测记录：http://www.xjltp.com/2_huodong/2_030301.htm"
+"2020年3月20日的梅西叶马拉松。脚本的数据取自高兴的观测记录：http://www.xjltp.com/2_huodong/2_030301.htm"
 
 #: src/translations.h:724
 msgid "&Undo"
@@ -9274,11 +9274,11 @@ msgstr "显示轨道"
 
 #: src/ui_viewDialog.h:2581
 msgid "Show orbit even if planet is off screen"
-msgstr "即使行星在屏幕外也显示轨道"
+msgstr "即使天体在屏幕外也显示轨道"
 
 #: src/ui_viewDialog.h:2583
 msgid "permanently"
-msgstr "永久"
+msgstr "即使天体在屏幕外"
 
 #: src/ui_viewDialog.h:2585
 msgid "Configure colors of orbit lines"
