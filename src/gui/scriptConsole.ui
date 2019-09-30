@@ -10,9 +10,6 @@
     <height>394</height>
    </rect>
   </property>
-  <property name="styleSheet">
-   <string notr="true"/>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_2">
    <property name="spacing">
     <number>0</number>
@@ -351,11 +348,6 @@
       </item>
       <item>
        <widget class="QTabWidget" name="tabs">
-        <property name="styleSheet">
-         <string notr="true">QTabBar::tab {
-	min-height: 28px;
-}</string>
-        </property>
         <property name="tabPosition">
          <enum>QTabWidget::North</enum>
         </property>
@@ -455,6 +447,33 @@
              </font>
             </property>
            </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="settingsTab">
+         <attribute name="title">
+          <string>Settings</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QCheckBox" name="useUserDirCheckBox">
+            <property name="text">
+             <string>Load scripts from the User Directory by default</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="verticalSpacer">
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>20</width>
+              <height>40</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

@@ -227,7 +227,6 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 
 		//stelproperty direct value change
 		$("button.stelproperty, input[type='button'].stelproperty").click(function() {
-			var self = $(this);
 			var prop = this.name;
 			var val = this.value;
 
@@ -248,7 +247,7 @@ define(["jquery", "settings", "globalize", "api/remotecontrol", "api/actions",
 				);
 				console.dir(this);
 				alert(
-					'Error: no value defined for an "stelproperty" button,, see log for details'
+					'Error: no value defined for an "stelproperty" button, see log for details'
 				);
 				return;
 			}

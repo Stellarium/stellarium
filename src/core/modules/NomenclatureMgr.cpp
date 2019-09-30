@@ -33,12 +33,14 @@
 #include <QSettings>
 #include <QFile>
 #include <QDir>
+#include <QBuffer>
 
 NomenclatureMgr::NomenclatureMgr()
 {
 	setObjectName("NomenclatureMgr");
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	font.setPixelSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 	ssystem = GETSTELMODULE(SolarSystem);
 }
 
@@ -115,16 +117,27 @@ void NomenclatureMgr::loadNomenclature()
 	       << "RE"	<< "RT"	<< "RI"	<< "RU"	<< "SF"	<< "SC"	<< "SE"	<< "SI"	<< "SU"	<< "TA"
 	       << "TE"	<< "TH"	<< "UN"	<< "VA"	<< "VS"	<< "VI";
 
-	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.fab");
+	QString surfNamesFile = StelFileMgr::findFile("data/nomenclature.dat"); // compressed version of file nomenclature.fab
 	if (!surfNamesFile.isEmpty()) // OK, the file is exist!
 	{
 		// Open file
 		QFile planetSurfNamesFile(surfNamesFile);
-		if (!planetSurfNamesFile.open(QIODevice::ReadOnly | QIODevice::Text))
+		if (!planetSurfNamesFile.open(QIODevice::ReadOnly))
 		{
 			qDebug() << "Cannot open file" << QDir::toNativeSeparators(surfNamesFile);
 			return;
 		}
+		QByteArray data = StelUtils::uncompress(planetSurfNamesFile);
+		planetSurfNamesFile.close();
+		//check if decompressing was successful
+		if(data.isEmpty())
+		{
+			qDebug() << "Could not decompress file" << QDir::toNativeSeparators(surfNamesFile);
+			return;
+		}
+		//create and open a QBuffer for reading
+		QBuffer buf(&data);
+		buf.open(QIODevice::ReadOnly);
 
 		// keep track of how many records we processed.
 		int totalRecords=0;
@@ -137,10 +150,11 @@ void NomenclatureMgr::loadNomenclature()
 		QString name, ntypecode, planet = "", planetName = "", context = "";
 		NomenclatureItem::NomenclatureItemType ntype;
 		float latitude, longitude, size;
+		QStringList faultPlanets;
 
-		while (!planetSurfNamesFile.atEnd())
+		while (!buf.atEnd())
 		{
-			record = QString::fromUtf8(planetSurfNamesFile.readLine());
+			record = QString::fromUtf8(buf.readLine());
 			lineNumber++;
 
 			// Skip comments
@@ -153,7 +167,7 @@ void NomenclatureMgr::loadNomenclature()
 			else
 			{
 				// Read the planet name
-				planet		= recRx.capturedTexts().at(1).trimmed();
+				planet	= recRx.capturedTexts().at(1).trimmed();
 				// Read the ID of feature
 				featureId	= recRx.capturedTexts().at(2).toInt();
 				// Read the name of feature and context
@@ -359,7 +373,6 @@ void NomenclatureMgr::loadNomenclature()
 					planetName = planet;					
 				}
 
-
 				if (!p.isNull())
 				{
 					NomenclatureItemP nom = NomenclatureItemP(new NomenclatureItem(p, featureId, name, context, ntype, latitude, longitude, size));
@@ -367,13 +380,19 @@ void NomenclatureMgr::loadNomenclature()
 						nomenclatureItems.insert(p, nom);
 
 					readOk++;
-				}				
+				}
+				else
+					faultPlanets << planet;
 			}
 		}
 
-		planetSurfNamesFile.close();
+		buf.close();
 		qDebug() << "Loaded" << readOk << "/" << totalRecords << "items of planetary surface nomenclature";
 
+		faultPlanets.removeDuplicates();
+		int err = faultPlanets.size();
+		if (err>0)
+			qDebug() << "WARNING - The next planets to assign nomenclature items is not found:" << faultPlanets.join(", ");
 	}
 }
 
@@ -395,16 +414,16 @@ void NomenclatureMgr::draw(StelCore* core)
 		// Early exit if the planet is not visible or too small to render the
 		// labels.
 		const Vec3d equPos = p->getJ2000EquatorialPos(core);
-		const double r = p->getRadius() * p->getSphereScale();
+		const double r = p->getEquatorialRadius() * static_cast<double>(p->getSphereScale());
 		double angularSize = atan2(r, equPos.length());
-		double screenSize = angularSize * painter.getProjector()->getPixelPerRadAtCenter();
+		double screenSize = angularSize * static_cast<double>(painter.getProjector()->getPixelPerRadAtCenter());
 		if (screenSize < 50)
 			continue;
 		Vec3d n = equPos; n.normalize();
 		SphericalCap boundingCap(n, cos(angularSize));
 		if (!viewportRegion.intersects(boundingCap))
 			continue;
-		if (p->getVMagnitude(core) >= 20.)
+		if (p->getVMagnitude(core) >= 20.f)
 			continue;
 
 		// Render all the items of this planet.
@@ -418,7 +437,6 @@ void NomenclatureMgr::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
@@ -438,7 +456,7 @@ void NomenclatureMgr::drawPointer(StelCore* core, StelPainter& painter)
 		painter.setColor(c[0],c[1],c[2]);
 		texPointer->bind();
 		painter.setBlending(true);
-		painter.drawSprite2dMode(screenpos[0], screenpos[1], 13.f, StelApp::getInstance().getTotalRunTime()*40.);
+		painter.drawSprite2dMode(static_cast<float>(screenpos[0]), static_cast<float>(screenpos[1]), 13.f, static_cast<float>(StelApp::getInstance().getTotalRunTime()*40.));
 	}
 }
 

@@ -39,12 +39,13 @@ class MinorPlanet : public Planet
 {
 public:
 	MinorPlanet(const QString& englishName,
-		    double radius,
+		    double equatorialRadius,
 		    double oblateness,
 		    Vec3f halocolor,
 		    float albedo,
 		    float roughness,
 		    const QString& texMapName,
+		    const QString& normalMapName,
 		    const QString& objModelName,
 		    posFuncType _coordFunc,
 		    void* orbitPtr,

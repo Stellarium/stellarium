@@ -39,7 +39,6 @@ gTimeSpan::gTimeSpan(double timeSpanSrc)  //timeSpanScr meassured in days and da
 
 gTimeSpan::gTimeSpan(long lDays, int nHours, int nMins, double nSecs)
 {
-
 	m_timeSpan= (lDays     * KSEC_PER_DAY)
 	            + (nHours * KSEC_PER_HR)
 	            + (nMins  * KSEC_PER_MIN)
@@ -48,10 +47,7 @@ gTimeSpan::gTimeSpan(long lDays, int nHours, int nMins, double nSecs)
 
 gTimeSpan::gTimeSpan(const gTimeSpan& timeSpanSrc):m_timeSpan(timeSpanSrc.m_timeSpan)
 {
-
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////
 //## Operation: operator=
@@ -64,7 +60,6 @@ const gTimeSpan& gTimeSpan::operator=(const gTimeSpan& timeSpanSrc)
 	return (*this);
 }
 
-
 ////////////////////////////////////////////////////////////////////////////
 //## Operation: getDays()
 //	This method returns the integer days number stored in the gTimeSpan object.
@@ -75,18 +70,15 @@ long  gTimeSpan::getDays() const
 	return (long)(m_timeSpan / KSEC_PER_DAY);
 }
 
-
 ////////////////////////////////////////////////////////////////////////////
 //## Operation: getHours()
 //	This method returns the integer hours number stored in the gTimeSpan object.
 //	This is a value between 0 and 23 hours
 
-
 int gTimeSpan::getHours() const
 {
-
 	double AuxValue = m_timeSpan - (getDays() * KSEC_PER_DAY);
-	return (int)(AuxValue / KSEC_PER_HR);
+	return static_cast<int>(AuxValue / KSEC_PER_HR);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -98,7 +90,7 @@ int gTimeSpan::getMinutes() const
 {
 	double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
 	                  - (getHours() * KSEC_PER_HR);
-	return (int)(AuxValue / KSEC_PER_MIN);
+	return static_cast<int>(AuxValue / KSEC_PER_MIN);
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -111,10 +103,8 @@ int gTimeSpan::getSeconds() const
 	double AuxValue = m_timeSpan - (getDays()  * KSEC_PER_DAY)
 	                  - (getHours() * KSEC_PER_HR)
 	                  - (getMinutes() * KSEC_PER_MIN);
-	return (int)AuxValue;
+	return static_cast<int>(AuxValue);
 }
-
-
 
 ////////////////////////////////////////////////////////////////////////////
 //## Operation: getDblSeconds()
@@ -136,48 +126,41 @@ double gTimeSpan::getDblDays() const
 	return m_timeSpan/KSEC_PER_DAY;
 }
 
-
-
 // time math Operations
 ////////////////////////////////////////////////////////////////////////////
 //## Operation: operator
 //	Operators overload.
 
-
-
-
-
 gTimeSpan gTimeSpan::operator-(gTimeSpan ai_timeSpan) const
 {
 	return (gTimeSpan(m_timeSpan - ai_timeSpan.getDblSeconds()));
-
 }
+
 gTimeSpan gTimeSpan::operator+(gTimeSpan ai_timeSpan) const
 {
 	return (gTimeSpan(m_timeSpan + ai_timeSpan.getDblSeconds()));
-
 }
+
 const gTimeSpan& gTimeSpan::operator+=(gTimeSpan ai_timeSpan)
 {
 	m_timeSpan += ai_timeSpan.getDblSeconds();
 	return (*this);
-
 }
+
 const gTimeSpan& gTimeSpan::operator-=(gTimeSpan ai_timeSpan)
 {
 	m_timeSpan -= ai_timeSpan.getDblSeconds();
 	return (*this);
-
 }
+
 bool gTimeSpan::operator==(gTimeSpan ai_timeSpan) const
 {
-
 	if(m_timeSpan == ai_timeSpan.getDblSeconds())
 		return true;
 
 	return false;
-
 }
+
 bool gTimeSpan::operator!=(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan != ai_timeSpan.getDblSeconds())
@@ -185,6 +168,7 @@ bool gTimeSpan::operator!=(gTimeSpan ai_timeSpan) const
 
 	return false;
 }
+
 bool gTimeSpan::operator<(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan < ai_timeSpan.getDblSeconds())
@@ -192,6 +176,7 @@ bool gTimeSpan::operator<(gTimeSpan ai_timeSpan) const
 
 	return false;
 }
+
 bool gTimeSpan::operator>(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan > ai_timeSpan.getDblSeconds())
@@ -199,6 +184,7 @@ bool gTimeSpan::operator>(gTimeSpan ai_timeSpan) const
 
 	return false;
 }
+
 bool gTimeSpan::operator<=(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan <= ai_timeSpan.getDblSeconds())
@@ -206,6 +192,7 @@ bool gTimeSpan::operator<=(gTimeSpan ai_timeSpan) const
 
 	return false;
 }
+
 bool gTimeSpan::operator>=(gTimeSpan ai_timeSpan) const
 {
 	if(m_timeSpan >= ai_timeSpan.getDblSeconds())

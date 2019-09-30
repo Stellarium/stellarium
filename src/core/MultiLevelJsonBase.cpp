@@ -35,7 +35,7 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 #include <stdexcept>
-#include <stdio.h>
+#include <cstdio>
 
 // #include <QNetworkDiskCache>
 
@@ -82,7 +82,7 @@ void JsonLoadThread::run()
 		buf.open(QIODevice::ReadOnly);
 		tile->temporaryResultMap = MultiLevelJsonBase::loadFromJSON(buf, qZcompressed, gzCompressed);
 	}
-	catch (std::runtime_error e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING : Can't parse loaded JSON description: " << e.what();
 		tile->errorOccured = true;
@@ -140,7 +140,7 @@ void MultiLevelJsonBase::initFromUrl(const QString& url)
 			{
 				loadFromQVariantMap(loadFromJSON(f, compressed, gzCompressed));
 			}
-			catch (std::runtime_error e)
+			catch (std::runtime_error& e)
 			{
 				qWarning() << "WARNING : Can't parse JSON description: " << QDir::toNativeSeparators(fileName) << ": " << e.what();
 				errorOccured = true;
@@ -194,7 +194,7 @@ void MultiLevelJsonBase::initFromQVariantMap(const QVariantMap& map)
 	{
 		loadFromQVariantMap(map);
 	}
-	catch (std::runtime_error e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: invalid variant map: " << e.what();
 		errorOccured = true;
@@ -337,7 +337,7 @@ void MultiLevelJsonBase::jsonLoadFinished()
 	{
 		loadFromQVariantMap(temporaryResultMap);
 	}
-	catch (std::runtime_error e)
+	catch (std::runtime_error& e)
 	{
 		qWarning() << "WARNING: invalid variant map: " << e.what();
 		errorOccured = true;
@@ -388,7 +388,7 @@ void MultiLevelJsonBase::updatePercent(int tot, int toBeLoaded)
 		return;
 	}
 
-	int p = (int)(100.f*tot/(tot+toBeLoaded));
+	int p = static_cast<int>(100.f*tot/(tot+toBeLoaded));
 	if (p>100)
 		p=100;
 	if (p<0)

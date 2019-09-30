@@ -40,13 +40,13 @@ public:
 	//! Used to decide how to display the angle.
 	enum DisplayFormat
 	{
-		DMSLetters,             //!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-360..360d]
-		DMSSymbols,             //!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-360..360°]
-		DMSLettersUnsigned,     //!< Degrees, minutes and seconds, e.g. 180d 4m 8s, [0..360d]
+		DMSLetters,			//!< Degrees, minutes and seconds, e.g. 180d 4m 8s, with negative values, [-360..360d]
+		DMSSymbols,			//!< Degrees, minutes and seconds, e.g. 180° 4' 8", with negative values, [-360..360°]
+		DMSLettersUnsigned,	//!< Degrees, minutes and seconds, e.g. 180d 4m 8s, [0..360d]
 		DMSSymbolsUnsigned,     //!< Degrees, minutes and seconds, e.g. 180° 4' 8", [0..360°]
-		HMSLetters,             //!< Hours, minutes and seconds, e.g. 12h 4m 6s
-		HMSSymbols,             //!< Hours, minutes and seconds, e.g. 12h 4' 6s"
-		DecimalDeg              //!< Decimal degrees, e.g. 180.06888
+		HMSLetters,			//!< Hours, minutes and seconds, e.g. 12h 4m 6s
+		HMSSymbols,			//!< Hours, minutes and seconds, e.g. 12h 4' 6s"
+		DecimalDeg			//!< Decimal degrees, e.g. 180.06888
 	};
 
 	//! @enum PrefixType
@@ -56,7 +56,7 @@ public:
 		Normal,		//!< negative values have '-' prefix
 		NormalPlus,	//!< positive values have '+' prefix, negative values have '-' prefix.
 		Longitude,	//!< positive values have 'E' prefix, negative values have 'W' prefix.
-		Latitude,	//!< positive values have 'N' prefix, negative values have 'S' prefix.
+		Latitude,		//!< positive values have 'N' prefix, negative values have 'S' prefix.
  		Unknown
 	};
 	
@@ -69,10 +69,10 @@ public:
 
 	//! Get the angle held in the AngleSpinBox
 	//! @return the angle in radians
-	double valueRadians();
+	double valueRadians() const;
 	//! Get the angle held in the AngleSpinBox
 	//! @return the angle in degrees
-	double valueDegrees();
+	double valueDegrees() const;
 
 	//! Set the number of decimal places to express float values to (e.g. seconds in DMSLetters format).
 	//! @param places the number of decimal places to use.
@@ -80,7 +80,7 @@ public:
 
 	//! Get the number of decimal places to express float values to (e.g. seconds in DMSLetters format).
 	//! @return the number of decimal places used.
-	int decimals() { return decimalPlaces; }
+	int decimals() const { return decimalPlaces; }
 
 	//! Set the display format.
 	//! @param format the new format to use.
@@ -88,7 +88,7 @@ public:
 
 	//! Get the current display format.
 	//! @return the current DisplayFormat.
-	DisplayFormat displayFormat() { return angleSpinBoxFormat; }
+	DisplayFormat displayFormat() const { return angleSpinBoxFormat; }
 
 	//! Set the prefix type.
 	//! @param prefix the new prefix type to use.
@@ -96,7 +96,7 @@ public:
 
 	//! Get the current display format.
 	//! @return the current DisplayFormat.
-	PrefixType prefixType() { return currentPrefixType; }
+	PrefixType prefixType() const { return currentPrefixType; }
 
 	//! Set the minimum value.
 	//! @param min the new minimum value
@@ -105,7 +105,7 @@ public:
 	//! Get the minimum value.
 	//! @return the current minimum value
 	//! @param isDegrees true if the minimum value is required in degrees, else min is returned as radians.
-	double getMinimum(const bool isDegrees) { return minRad * (isDegrees ? 180.0/M_PI : 1.0); }
+	double getMinimum(const bool isDegrees) const { return minRad * (isDegrees ? 180.0/M_PI : 1.0); }
 
 	//! Set the maximum value.
 	//! @param max the new maximum value
@@ -114,7 +114,7 @@ public:
 	//! Get the maximum value.
 	//! @return the current maximum value
 	//! @param isDegrees true if the maximum value is required in degrees, else max is returned as radians.
-	double getMaximum(const bool isDegrees) { return maxRad * (isDegrees ? 180.0/M_PI : 1.0); }
+	double getMaximum(const bool isDegrees) const { return maxRad * (isDegrees ? 180.0/M_PI : 1.0); }
 
 	
 public slots:

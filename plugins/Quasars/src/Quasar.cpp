@@ -206,7 +206,7 @@ float Quasar::getSelectPriority(const StelCore* core) const
 
 void Quasar::update(double deltaTime)
 {
-	labelsFader.update((int)(deltaTime*1000));
+	labelsFader.update(static_cast<int>(deltaTime*1000));
 }
 
 void Quasar::draw(StelCore* core, StelPainter& painter)

@@ -108,7 +108,6 @@ class AutoLocale
     locale_char_t *m_orig;
 
 public:
-
     AutoLocale(int category, const locale_char_t *locale)
         : m_category(category)
     {

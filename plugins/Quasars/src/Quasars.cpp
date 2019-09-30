@@ -71,7 +71,7 @@ StelPluginInfo QuasarsStelPluginInterface::getPluginInfo() const
 	info.id = "Quasars";
 	info.displayedName = N_("Quasars");
 	info.authors = "Alexander Wolf";
-	info.contact = "alex.v.wolf@gmail.com";
+	info.contact = "https://github.com/Stellarium/stellarium";
 	info.description = N_("A plugin that shows some quasars brighter than visual magnitude 18. The catalogue of quasars was compiled from 'Quasars and Active Galactic Nuclei' (13th Ed.) (Veron+ 2010)");
 	info.version = QUASARS_PLUGIN_VERSION;
 	info.license = QUASARS_PLUGIN_LICENSE;
@@ -103,7 +103,8 @@ Quasars::Quasars()
 	setObjectName("Quasars");
 	configDialog = new QuasarsDialog();
 	conf = StelApp::getInstance().getSettings();
-	font.setPixelSize(StelApp::getInstance().getBaseFontSize());
+	setFontSize(StelApp::getInstance().getScreenFontSize());
+	connect(&StelApp::getInstance(), SIGNAL(screenFontSizeChanged(int)), this, SLOT(setFontSize(int)));
 }
 
 /*
@@ -137,7 +138,6 @@ double Quasars::getCallOrder(StelModuleActionName actionName) const
 		return StelApp::getInstance().getModuleMgr().getModule("ConstellationMgr")->getCallOrder(actionName)+10.;
 	return 0;
 }
-
 
 /*
  Init our module
@@ -236,7 +236,6 @@ void Quasars::draw(StelCore* core)
 
 	if (GETSTELMODULE(StelObjectMgr)->getFlagSelectedObjectPointer())
 		drawPointer(core, painter);
-
 }
 
 void Quasars::drawPointer(StelCore* core, StelPainter& painter)
@@ -378,7 +377,6 @@ void Quasars::restoreDefaultJsonFile(void)
 		// manner
 		conf->remove("Quasars/last_update");
 		lastUpdate = QDateTime::fromString("2012-05-24T12:00:00", Qt::ISODate);
-
 	}
 }
 
@@ -472,7 +470,6 @@ void Quasars::setQSOMap(const QVariantMap& map)
 		QuasarP quasar(new Quasar(qsoData));
 		if (quasar->initialized)
 			QSO.append(quasar);
-
 	}
 }
 
@@ -624,9 +621,6 @@ void Quasars::updateJSON(void)
 		return;
 	}
 
-	lastUpdate = QDateTime::currentDateTime();
-	conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
-
 	qDebug() << "[Quasars] Updating quasars catalog...";
 	startDownload(updateUrl);
 }
@@ -746,6 +740,9 @@ void Quasars::downloadComplete(QNetworkReply *reply)
 		}
 
 		updateState = Quasars::CompleteUpdates;
+
+		lastUpdate = QDateTime::currentDateTime();
+		conf->setValue("Quasars/last_update", lastUpdate.toString(Qt::ISODate));
 	}
 	catch (std::runtime_error &e)
 	{
@@ -826,6 +823,7 @@ Vec3f Quasars::getMarkerColor()
 void Quasars::setMarkerColor(const Vec3f &c)
 {
 	Quasar::markerColor = c;
+	emit quasarsColorChanged(c);
 }
 
 void Quasars::reloadCatalog(void)

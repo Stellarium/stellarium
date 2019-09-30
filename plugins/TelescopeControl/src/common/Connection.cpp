@@ -43,7 +43,7 @@ struct PrintRaDec
 static QTextStream &operator<<(QTextStream &o, const PrintRaDec &x)
 {
 	unsigned int h = x.ra_int;
-	int d = (int)floor(0.5+x.dec_int*(360*3600*1000/4294967296.0));
+	int d = static_cast<int>(floor(0.5+x.dec_int*(360*3600*1000/4294967296.0)));
 	char dec_sign;
 	if (d >= 0)
 	{
@@ -102,8 +102,8 @@ void Connection::prepareSelectFds(fd_set &read_fds,
 {
 	if (!IS_INVALID_SOCKET(fd))
 	{
-		if (fd_max < (int)fd)
-			fd_max = (int)fd;
+		if (fd_max < static_cast<int>(fd))
+			fd_max = static_cast<int>(fd);
 		if (write_buff_end > write_buff)
 			FD_SET(fd, &write_fds);
 		FD_SET(fd, &read_fds);
@@ -232,9 +232,9 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 {
 	while (read_buff_end - p >= 2)
 	{
-		const int size = (int)( ((unsigned char)(p[0])) |
+		const int size = static_cast<int>( ((unsigned char)(p[0])) |
 		                        (((unsigned int)(unsigned char)(p[1])) << 8) );
-		if (size > (int)sizeof(read_buff) || size < 4)
+		if (size > static_cast<int>(sizeof(read_buff)) || size < 4)
 		{
 			*log_file << Now() << "Connection::dataReceived: "
 		                              "bad packet size: " << size << endl;
@@ -246,7 +246,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 			// wait for complete packet
 			break;
 		}
-		const int type = (int)( ((unsigned char)(p[2])) |
+		const int type = static_cast<int>( ((unsigned char)(p[2])) |
 		                        (((unsigned int)(unsigned char)(p[3])) << 8) );
 		// dispatch:
 		switch (type)
@@ -277,7 +277,7 @@ void Connection::dataReceived(const char *&p, const char *read_buff_end)
 				                 (((unsigned int)(unsigned char)(p[14])) << 16) |
 				                 (((unsigned int)(unsigned char)(p[15])) << 24);
 				const int dec_int =
-				          (int)(  ((unsigned int)(unsigned char)(p[16])) |
+					  static_cast<int>(  ((unsigned int)(unsigned char)(p[16])) |
 				                 (((unsigned int)(unsigned char)(p[17])) <<  8) |
 				                 (((unsigned int)(unsigned char)(p[18])) << 16) |
 				                 (((unsigned int)(unsigned char)(p[19])) << 24) );
@@ -314,7 +314,7 @@ void Connection::sendPosition(unsigned int ra_int, int dec_int, int status)
 		                   << PrintRaDec(ra_int, dec_int)
 		                   << endl;
 	#endif
-	if (write_buff_end - write_buff + 24 < (int)sizeof(write_buff))
+	if (write_buff_end - write_buff + 24 < static_cast<int>(sizeof(write_buff)))
 	{
 		// length of packet:
 		*write_buff_end++ = 24;

@@ -2220,7 +2220,6 @@ void Telescope::setPECState(TelescopePECState state)
 
     if (currentPECState != lastPECState)
     {
-
         PECStateS[PEC_OFF].s = (state == PEC_ON) ? ISS_OFF : ISS_ON;
         PECStateS[PEC_ON].s  = (state == PEC_ON) ? ISS_ON  : ISS_OFF;
         PECStateSP.s         = IPS_OK;

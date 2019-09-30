@@ -27,7 +27,8 @@
 
 class TestDeltaT : public QObject
 {
-Q_OBJECT
+	Q_OBJECT
+
 private slots:
 	void initTestCase();
 	void testDeltaTByEspenakMeeus();
@@ -35,7 +36,19 @@ private slots:
 	void testDeltaTByChaprontMeeusWideDates();
 	void testDeltaTByMorrisonStephenson1982WideDates();
 	void testDeltaTByStephensonMorrison1984WideDates();
-
+	void testDeltaTByStephensonMorrison1995WideDates();
+	void testDeltaTByStephensonMorrison2004WideDates();
+	void testDeltaTByStephenson1997WideDates();
+	void testDeltaTByMeeusSimons();
+	void testDeltaTByKhalidSultanaZaidiWideDates();
+	void testDeltaTByMontenbruckPfleger();
+	void testDeltaTByReingoldDershowitzWideDates();
+	void testDeltaTByJPLHorizons();
+	void testDeltaTByBorkowski();
+	void testDeltaTByIAU();
+	void testDeltaTByAstronomicalEphemeris();
+	void testDeltaTByTuckermanGoldstine();
+	void testDeltaTStandardError();
 };
 
 #endif // _TESTDELTAT_HPP

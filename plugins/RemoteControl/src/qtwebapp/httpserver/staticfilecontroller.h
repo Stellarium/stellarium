@@ -69,8 +69,8 @@ struct StaticFileControllerSettings
 class DECLSPEC StaticFileController : public HttpRequestHandler  {
     Q_OBJECT
     Q_DISABLE_COPY(StaticFileController)
-public:
 
+public:
     /** Constructor */
     StaticFileController(const StaticFileControllerSettings& settings, QObject* parent = Q_NULLPTR);
 
@@ -81,8 +81,8 @@ public:
 
     /** Returns the content type of this file. This is currently only determined by file name. */
     static QByteArray getContentType(QString fileName, QString encoding);
-private:
 
+private:
     /** Encoding of text files */
     QString encoding;
 

@@ -72,7 +72,7 @@ public:
 	};
 
 	RemoteSync();
-	virtual ~RemoteSync();
+	virtual ~RemoteSync() Q_DECL_OVERRIDE;
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Methods defined in the StelModule class
@@ -85,14 +85,16 @@ public:
 	///////////////////////////////////////////////////////////////////////////
 
 	QString getClientServerHost() const { return clientServerHost; }
-	int getClientServerPort() const { return clientServerPort; }
-	int getServerPort() const { return serverPort; }
+	quint16 getClientServerPort() const { return clientServerPort; }
+	quint16 getServerPort() const { return serverPort; }
 	SyncClient::SyncOptions getClientSyncOptions() const { return syncOptions; }
 	QStringList getStelPropFilter() const { return stelPropFilter; }
 	ClientBehavior getConnectionLostBehavior() const { return connectionLostBehavior; }
 	ClientBehavior getQuitBehavior() const { return quitBehavior; }
 
 	SyncState getState() const { return state; }
+	//! Very few propertries cannot be synchronized for technical reasons.
+	static bool isPropertyBlacklisted(const QString &name);
 
 public slots:
 	void setClientServerHost(const QString& clientServerHost);
@@ -164,9 +166,9 @@ private:
 	//The host string/IP addr to connect to
 	QString clientServerHost;
 	//The host port to connect to
-	int clientServerPort;
+	quint16 clientServerPort;
 	//the port used in server mode
-	int serverPort;
+	quint16 serverPort;
 	SyncClient::SyncOptions syncOptions;
 	QStringList stelPropFilter;
 	ClientBehavior connectionLostBehavior;
@@ -185,6 +187,9 @@ private:
 
 	// GUI
 	RemoteSyncDialog* configDialog;
+	// A stringlist which contains property names which cannot be synchronized.
+	// The list currently is fixed.
+	static QStringList propertyBlacklist;
 };
 
 Q_DECLARE_METATYPE(RemoteSync::SyncState)

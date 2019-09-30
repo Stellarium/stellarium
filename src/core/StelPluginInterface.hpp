@@ -40,7 +40,7 @@ struct StelPluginInfo
 	QString description;	
 	//! The version of the plugin, e.g. "1.0.0"
 	QString version;
-	//! The license of the plugin, e.g. "GPLv2+"
+	//! The license of the plugin, e.g. "GPLv2 or later"
 	QString license;
 	//! Logo or preview image to display in the information dialog or an invalid image if not applicable.
 	//! The image size should be x by x pixels.
