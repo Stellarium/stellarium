@@ -508,7 +508,7 @@
 	     from Fryns Fryns
 	     https://commons.wikimedia.org/wiki/
 	     License:  public domain
-	4.57 Images of NGC1269
+	4.57 Images of NGC1269, NGC3195
 	     from Zhu Ying
 	     License:  Creative Commons Attribution 3.0 Unported
 	4.58 Images of IC2118, NGC1097, NGC1499
