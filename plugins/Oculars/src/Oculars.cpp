@@ -1668,7 +1668,8 @@ void Oculars::paintCCDBounds()
 				painter.drawLine2d(a.x(), a.y(), b.x(), b.y());
 
 				// Tool for showing a resolution box overlay
-				if (flagShowCcdCropOverlay) {
+				if (flagShowCcdCropOverlay)
+				{
 					// bottom line
 					a = transform.map(QPoint(static_cast<int>(-overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
 					b = transform.map(QPoint(static_cast<int>(overlayWidth*0.5f), static_cast<int>(-overlayHeight*0.5f)));
@@ -1692,11 +1693,10 @@ void Oculars::paintCCDBounds()
 					const double InnerOAGRatio = ccd->getInnerOAGRadius(telescope, lens) / screenFOV;
 					const double OuterOAGRatio = ccd->getOuterOAGRadius(telescope, lens) / screenFOV;
 					const double prismXRatio = ccd->getOAGActualFOVx(telescope, lens) / screenFOV;
-					const int in_oag_r = params.viewportXywh[aspectIndex] * qRound(InnerOAGRatio * params.devicePixelsPerPixel);
-					const int out_oag_r = params.viewportXywh[aspectIndex] * qRound(OuterOAGRatio * params.devicePixelsPerPixel);
-					const int h_width = params.viewportXywh[aspectIndex] * qRound(prismXRatio * params.devicePixelsPerPixel * 0.5);
+					const int in_oag_r = qRound(params.viewportXywh[aspectIndex] * InnerOAGRatio * params.devicePixelsPerPixel);
+					const int out_oag_r = qRound(params.viewportXywh[aspectIndex] * OuterOAGRatio * params.devicePixelsPerPixel);
+					const int h_width = qRound(params.viewportXywh[aspectIndex] * prismXRatio * params.devicePixelsPerPixel * 0.5);
 
-					//painter.setColor(0.60f, 0.20f, 0.20f, .5f);
 					painter.drawCircle(centerScreen[0], centerScreen[1], in_oag_r);
 					painter.drawCircle(centerScreen[0], centerScreen[1], out_oag_r);
 
