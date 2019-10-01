@@ -536,7 +536,7 @@ void StelSkyDrawer::postDrawSky3dModel(StelPainter* painter, const Vec3f& v, flo
 	// so that the radius of the halo is small enough to be not visible (so that we see the disk)
 
 	// TODO: Change drawing halo to more realistic view of stars and planets
-	float tStart = 3.f; // Was 2.f: planet's halo is too dim
+	float tStart = 6.f; // Was 3.f: planet's halo is too dim. Trying with 6.f to see if it's better.
 	float tStop = 6.f;
 	bool truncated=false;
 
