@@ -363,7 +363,7 @@
 	     from Aldeabaran66
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution-Share Alike 4.0 International
-	4.19 Images of IC4628, M20, M21, M47, NGC2467, NGC3324, NGC7590, RCW158
+	4.19 Images of IC4628, M20, M21, M47, NGC3324, NGC7590, RCW158
 	     from Trevor Gerdes
 	     http://www.sarcasmogerdes.com/
 	4.20 Images of NGC1532
@@ -373,7 +373,7 @@
 	     from ESO/G. Beccari
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International
-	4.22 Images of SMC (Magellanic Clouds) and rho Oph from Albert Van
+	4.22 Images of SMC (Magellanic Clouds) from Albert Van
 	     Donkelaar
 	4.23 Images of NGC1365, NGC6726, NGC6744, NGC6752, NGC7293
 	     from Philip Montgomery
@@ -405,7 +405,7 @@
 	     Collaboration
 	     License: public domain; http://hubblesite.org/copyright/
 	4.30 Image of NGC40 from Steven Bellavia
-	4.31 Images of NGC1579, NGC6590, Barnard Loop, IC342, SH2-297 from Sun Shuwei
+	4.31 Images of NGC1579, NGC2467, NGC6590, Barnard Loop, IC342, SH2-297 from Sun Shuwei
 	     License: public domain
 	4.32 Images of M77, NGC3109, NGC3180, NGC4449, NGC5474, NGC6397, NGC7009, Sh2-264, Sh2-308, LDN1622
 	     from Wang Lingyi
@@ -469,7 +469,7 @@
 	4.46 Images of IC1613 
 	     from Philos2000
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
-	4.47 Images of M16, NGC4236, Perseus Cluster
+	4.47 Images of M16, IC4592, IC4601, NGC4236, NGC6914, Perseus Cluster
 	     from Sun Gang
 	     License: Creative Commons Attribution-Share Alike 3.0 Unported
 	4.48 Images of NGC4651, NGC5906
@@ -508,7 +508,7 @@
 	     from Fryns Fryns
 	     https://commons.wikimedia.org/wiki/
 	     License:  public domain
-	4.57 Images of NGC1269
+	4.57 Images of NGC1269, NGC3195
 	     from Zhu Ying
 	     License:  Creative Commons Attribution 3.0 Unported
 	4.58 Images of IC2118, NGC1097, NGC1499
@@ -564,7 +564,7 @@
 	     from ESO, F. Ferraro (University of Bologna)
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International 
-	4.72 Images of NGC6914, SH2-80, SH2-106
+	4.72 Images of SH2-80, SH2-106
 	     from Cristina Cellini
 	     https://commons.wikimedia.org/wiki/
 	     License: Creative Commons Attribution 4.0 International
@@ -660,6 +660,10 @@
 	     from ESO/R. Gendler and Sun Shuwei
 	     http://eso.org/public/
 	     License: Creative Commons Attribution 4.0 International. This work is a derivative of "Map of the Large Magellanic Cloud" and "The entire Large Magellanic Cloud with annotations" by ESO/R. Gendler, used under Creative Commons Attribution 4.0 International. This work is licensed under Creative Commons Attribution 4.0 International by Sun Shuwei.
+	4.96 Images of rho Oph
+	     from ESO/S. Guisard
+	     http://eso.org/public/
+	     License: Creative Commons Attribution 4.0 International 
 ```
 
 ## Appendix
