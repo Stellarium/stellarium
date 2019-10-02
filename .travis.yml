@@ -199,13 +199,6 @@ matrix:
         - COVERAGE=false
 
     - os: osx
-      osx_image: xcode8.3
-      env:
-        - MATRIX_EVAL="CC=clang && CXX=clang++"
-        - TRANSLATE=false
-        - COVERAGE=false
-
-    - os: osx
       osx_image: xcode9.2
       env:
         - MATRIX_EVAL="CC=clang && CXX=clang++"
